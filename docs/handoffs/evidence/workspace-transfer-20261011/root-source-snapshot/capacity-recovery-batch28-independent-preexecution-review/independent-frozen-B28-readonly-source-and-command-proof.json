@@ -1,0 +1,25 @@
+{
+  "archive_remove_native_tests_execution": false,
+  "fresh_capacity_observation_only": {
+    "/dev/shm": 3942715392,
+    "/tmp": 1170247680,
+    "/workspace": 1220632576
+  },
+  "frozen_file_refs": 53,
+  "immediate_root_full_protected_and_selected_guards_required": true,
+  "module_assembly_exact": "original prefix +declared caps module +original loop/tail; only DEST/STAGE/NAMES changed",
+  "original_nonconfiguration_AST_nodes_exact": 16,
+  "prepared_inputs_verified": 30,
+  "root_driver_binding_keys": [
+    "archiver",
+    "guard",
+    "config"
+  ],
+  "schema": 1,
+  "selected_allowlist_exact": 34,
+  "selected_children_recorded": 33013,
+  "source": "396925cb3d6527af1768b7f5333f9653c005fc55",
+  "source_Git_FS_body_mode_OID_verified": 1426,
+  "status": "PASS_FROZEN_B28_READ_ONLY_AST_AND_BINDINGS",
+  "tree": "84f850f0d4e08b21afcd8220413ce94322370acf"
+}

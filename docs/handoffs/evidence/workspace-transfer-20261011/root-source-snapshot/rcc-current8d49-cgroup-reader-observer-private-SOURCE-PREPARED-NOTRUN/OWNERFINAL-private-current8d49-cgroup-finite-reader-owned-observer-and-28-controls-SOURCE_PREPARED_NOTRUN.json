@@ -1,0 +1,161 @@
+{
+  "actual_cgroup_reads_writes": "NOT_RUN",
+  "actual_tests": "NOT_RUN",
+  "all_local_preparation_bindings": [
+    {
+      "bytes": 4053,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/bounded-private-source-integration-and-future-pure-command-contract-NOTRUN.json",
+      "sha256": "9c5181a6a032ce053e540c779732ca6ee1f961be0ffd7f2076617db08177b099"
+    },
+    {
+      "bytes": 1225,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/canonical-self-cgroup-identity-and-bounded-observer-proposed.md",
+      "sha256": "d6c06054276f3cf45054eecf523d7c618dc8498e0334cc9d55257fc449510380"
+    },
+    {
+      "bytes": 14600,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/cgroup_memory_reader_observer_v1_NOTRUN.py",
+      "sha256": "24e38634118730ba9d222179518d13818c094c5a6ccfd368afd56521e964d014"
+    },
+    {
+      "bytes": 10667,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/freeze_private_memory_source_packet_NOTRUN.py",
+      "sha256": "c678044b20fa43c31f4cca5dad4a9d9030dcb5b2bf3cfb192d435ba57cbaab2e"
+    },
+    {
+      "bytes": 10865,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/freeze_private_memory_source_packet_join_scope_v2_NOTRUN.py",
+      "sha256": "1fb648e9cb1f17a40c47e4b0c8aed828c4e5a6c6a7d1bf7bf8fc86e9c48b27e9"
+    },
+    {
+      "bytes": 5321,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/immutable-static-reader-observer-source-control-and-parent-binding-proof-NOTRUN.json",
+      "sha256": "c459f8294a62955c97df805ee03371afbebd954cd37c45a2982d96d69a40ed7b"
+    },
+    {
+      "bytes": 364,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/original-static-join-name-inspector-FAIL-NOTRUN.json",
+      "sha256": "213ba2a20d652fab92050f5adc9c6ac2fd6467bc344febdb7e0f2445fb501334"
+    },
+    {
+      "bytes": 14377,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/test_cgroup_memory_reader_observer_v1_NOTRUN.py",
+      "sha256": "449298ef47661a81bd46ea2c31ecd6644d559844084dc121e70d0da5870ee35d"
+    }
+  ],
+  "all_old_input_bindings": [
+    {
+      "bytes": 3330,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/proposed_cgroup_memory_state_v1_NOTRUN.py",
+      "sha256": "d2b3e6684898ab1b64f84ac7712a1f2f355d7ea5d680eb6ded0699cc090f5260"
+    },
+    {
+      "bytes": 2985,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/test_proposed_cgroup_memory_state_NOTRUN.py",
+      "sha256": "3b3a417379f608b6a5917c7720c6e846352f88d30fda1273c301a7c5ced1a4cb"
+    },
+    {
+      "bytes": 900,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/canonical-shared-cgroup-headroom-vs-filesystem-capacity-proposed.md",
+      "sha256": "8c28fc2596c6fdfc607dd35a17b3462ad217ba97670b61222393dc504861d896"
+    },
+    {
+      "bytes": 27889,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/actual_transport_v8.py",
+      "sha256": "33dda17140ef749e22f086cc91b92ed8c3230fddfde8a4a369769e2183f695a1"
+    },
+    {
+      "bytes": 12959,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/runner_contracts_v3.py",
+      "sha256": "cbae3bb074d3995153ea5e6b694e7f9e61c047c6aa511b682959a63fedf7b726"
+    },
+    {
+      "bytes": 765564,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+      "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25"
+    },
+    {
+      "bytes": 742,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-memory17-managed700-once2-reviewed-original-outer/OWNERFINAL-root-one-original-reviewed-managed700-once2-memory17-outer.json",
+      "sha256": "421227a4e2eb8e8393426ecec757e3041f54112838d24abe7bddc5835e569bc8"
+    },
+    {
+      "bytes": 3719,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-memory17-pure-controls-20261011-2/junit.xml",
+      "sha256": "c198d5a004538f99f4cdf71f0769ad744891cc5cd864cddbe4ce7e92b1e5d76f"
+    }
+  ],
+  "all_product_source_modes": "UNCHANGED",
+  "capture": "2026-10-11T21:29:38.225729+00:00",
+  "documentation": {
+    "additional_exact_delta": {
+      "bytes": 1225,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/canonical-self-cgroup-identity-and-bounded-observer-proposed.md",
+      "sha256": "d6c06054276f3cf45054eecf523d7c618dc8498e0334cc9d55257fc449510380"
+    },
+    "evidence": "New source pins before/after cgroup identities, exact finite parsers/counters and owned authorization helper calls; immutable old sampler/owner/policy bytes; synthetic controls are prepared, not passed",
+    "existing_8c28_exact_reuse": {
+      "bytes": 900,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/canonical-shared-cgroup-headroom-vs-filesystem-capacity-proposed.md",
+      "sha256": "8c28fc2596c6fdfc607dd35a17b3462ad217ba97670b61222393dc504861d896"
+    },
+    "remaining_uncertainty": "28 methods unexecuted; real cgroup identity and latency/headroom unmeasured; native source/profile integration not adopted; kernel read stalls and sampled peaks not universal",
+    "upstream_disposition": "none"
+  },
+  "future_command_and_integration_contract": {
+    "bytes": 4053,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/bounded-private-source-integration-and-future-pure-command-contract-NOTRUN.json",
+    "sha256": "9c5181a6a032ce053e540c779732ca6ee1f961be0ffd7f2076617db08177b099"
+  },
+  "headroom_calibration": "NOT_QUALIFIED",
+  "native_config_or_policy_adoption": "NONE",
+  "native_processes_signals": "NOT_RUN",
+  "new_module": {
+    "bytes": 14600,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/cgroup_memory_reader_observer_v1_NOTRUN.py",
+    "sha256": "24e38634118730ba9d222179518d13818c094c5a6ccfd368afd56521e964d014"
+  },
+  "old_policy_and_17_tests": "BYTE_UNCHANGED",
+  "prepared_controls": {
+    "bytes": 14377,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/test_cgroup_memory_reader_observer_v1_NOTRUN.py",
+    "sha256": "449298ef47661a81bd46ea2c31ecd6644d559844084dc121e70d0da5870ee35d"
+  },
+  "prepared_named_methods": 28,
+  "preserved_other_scopes": "Disk/helper cleanup/source/default binary pins/profile rules unchanged; no child OOM/reaping/cgroup kernelquota claim",
+  "proposed_headroom_bytes": 3113851289,
+  "required_next_gates": "independent SOURCE/control review, ROOT distinct concrete pure execution release, actual controls + independent outcome, then separate reviewed profile/config/resources before first released5 native attempt",
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_clean": true,
+  "source_leaves": 1440,
+  "static_proof": {
+    "bytes": 5321,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/immutable-static-reader-observer-source-control-and-parent-binding-proof-NOTRUN.json",
+    "sha256": "c459f8294a62955c97df805ee03371afbebd954cd37c45a2982d96d69a40ed7b"
+  },
+  "status": "PREPARED_PRIVATE_CGROUP_READER_OBSERVER_SOURCE_ONLY_NOT_EXECUTED",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+}

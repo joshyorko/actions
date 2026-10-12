@@ -1,0 +1,88 @@
+{
+  "schema": 1,
+  "status": "NAMED_OUTER_ENCLOSURE_CLARIFICATION_ONLY_NOT_AUTHORIZATION_NOTRUN",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "original_owner_binding": {
+    "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/OWNERFINAL-corrected-nine-once2-baseline-config-contract-launcher-PREEXEC-NOTRUN.json",
+    "bytes": 11099,
+    "sha256": "39d3ba4d62cd54807ded6228cdbff891ec9493e17419b04335957451c85937a4",
+    "mode": "0o400"
+  },
+  "original_launcher_binding": {
+    "bytes": 9329,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/run_corrected_nine_once2_baseline.py",
+    "sha256": "0faa08c751e98b834ed1525daf5efd2bc64820fbd7b08f698fe66ffefe3bdcc2"
+  },
+  "original_config_binding": {
+    "bytes": 5694,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/frozen-corrected-nine-once2-baseline-execution-config-NOTRUN.json",
+    "sha256": "d8dd253da2711437e1c94db0950d1352afbc963963d6ae1ec3c14d43eacd336a"
+  },
+  "original_contract_binding": {
+    "bytes": 8708,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/frozen-corrected-nine-once2-baseline-only-command-contract-NOTRUN.json",
+    "sha256": "8f9f2aa0cb570170cd381c07ad5f849700449f3f35d3983d11dbe9a6f6d74da0"
+  },
+  "original_release_contract_binding": {
+    "bytes": 4036,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/frozen-once2-compatible-independent-review-and-ROOT-release-contract-NOTRUN.json",
+    "sha256": "5f81e7df6bf7404e7fd81825f715c246d76ec02fa03a2ae3cad97c9fa3e2f821"
+  },
+  "original_HOLD_binding": {
+    "path": "/workspace/engineering/pr308-corrected-nine-once2-independent-PREEXEC-review/OWNERFINAL-independent-corrected-nine-once2-static-PREEXEC-HOLD-parent-envelope.json",
+    "bytes": 10328,
+    "sha256": "17956e0d0f086096742596decaf9527d81e8af340d414ba25e985975a60051eb",
+    "mode": "0o400"
+  },
+  "original_outer_seconds": 450,
+  "supersession": "ONLY outer timeout argv token450s\u21921200s. All original bytes including informational configouter450 remain frozen; this named clarification governs actual root enclosingdeadline. Original450HOLD not retroactively admitted.",
+  "exact_ROOT_outer_argv_after_activation": [
+    "env",
+    "-u",
+    "PYTHONOPTIMIZE",
+    "-u",
+    "PYTEST_ADDOPTS",
+    "-u",
+    "RCC_RELOAD_PRIVATE_MUTANT",
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "1200s",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/run_corrected_nine_once2_baseline.py",
+    "--release",
+    "ROOT_DISTINCT_RELEASE_PATH",
+    "--release-sha256",
+    "ROOT_DISTINCT_RELEASE_SHA256"
+  ],
+  "only_allowed_placeholder_substitution": [
+    "ROOT_DISTINCT_RELEASE_PATH",
+    "ROOT_DISTINCT_RELEASE_SHA256"
+  ],
+  "parent_executor_timeout_seconds": 1230,
+  "outer_kill_after_seconds": 10,
+  "bounds": {
+    "before_python_fallback_seconds": 135,
+    "own_origin_python_fallback_seconds_each": 135,
+    "own_origin_count": 5,
+    "baseline_python_fallback_seconds": 135,
+    "post_python_fallback_seconds": 135,
+    "required_phase_count": 8,
+    "all_python_fallback_maximum_seconds": 1080,
+    "original_GNU_success_bounds_sum_including10grace_seconds": 515,
+    "explicit_margin_capture_junit_release_startup_seconds": 120,
+    "adopted_outer_seconds": 1200,
+    "outer_termination_grace_seconds": 10,
+    "parent_executor_margin_after_outer_total_seconds": 20
+  },
+  "unchanged_child_commands": "Readonly120TERM+10 each; origin15TERM+10 each; baseline120TERM+10, subprocessparent135 each, exact9names/ALLABSENTbasetemp/logger/JUnit; no mutation/native/versioncall",
+  "ROOT_release": "strict original11keys/mode600uid/self/config/contract/realcompatible reviewer binding; clarification is SHA-bound by that reviewer, not extra release key/operator selector",
+  "no_grant": "This file grants no execution. Root must separately create exact once release after compatible independentGO and serialization. No mutants/native/loops.",
+  "documentation_improvement": "Exact proposed multi-stage envelope paragraph in retained independent17956HOLD and accepted5584copy/lock oracle reused; no product docs/source edits",
+  "upstream_disposition": "none"
+}

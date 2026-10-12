@@ -1,0 +1,17 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@
+ The staged consumer fixture retains its worker's exact env-exec lease receipt
+ and actual typed retirement/cleanup snapshots in private evidence. Missing
+ snapshots stay null; testcase success does not prove lease release or reaping.
++A successful action return and disposal of its persistent worker are separate
++observations. Preserve the lease's original status, exit code and reason when
++the fixture intentionally disposes that worker; do not label it a natural
++worker exit. The source-pinned legacy RCC3 nonreuse test expects `failed`,
++exit code `-1` and reason `child exited non-zero` after an action returns zero.
++That exact version-specific retirement shape is not permission to admit other
++failed receipts. Require the verified artifact/lease and both actual typed
++cleanup snapshots to satisfy their measured wrapper, captured-descendant,
++snapshot and error predicates. These snapshots do not expose independent
++worker reader observations; keep that qualification unavailable rather than
++substituting the outer supervisor's independently measured cleanup.

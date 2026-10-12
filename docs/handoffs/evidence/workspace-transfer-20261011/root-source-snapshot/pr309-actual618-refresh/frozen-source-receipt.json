@@ -1,0 +1,394 @@
+{
+  "schema": "actions-pr309-ordinary-actual618-frozen-source/v1",
+  "status": "FROZEN_CURRENT_SOURCE_FULL_READY_INDEPENDENT_REVIEW_NO_PUSH",
+  "branch": "test/auth-route-census-20261010",
+  "head": "83123ff42c21587e3eb944e20af89f1a9e9ff0ea",
+  "tree": "1181b35b11e4904405ca1a9a3a398e6c1c3abfd0",
+  "ordered_parents": [
+    "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+    "6181b044c75de35386f1ae30e71725398b6a7feb"
+  ],
+  "source_subject": "Exact committed ordinary513+independently acceptedactual618 union; all fresh gates same subject; no source change during light/full",
+  "all1421_typed_parent_union_before_after_Git_working_bytes_modes_executable_bits_exact": true,
+  "complete_union_proof": {
+    "path": "/workspace/engineering/pr309-actual618-refresh/ordinary-union-and-original-auth-retention-proof.json",
+    "bytes": 463108,
+    "sha256": "9f14becc2315af766f0f6652486e51dca743e6ada027322427781fb8f4dbf97f"
+  },
+  "original_auth_preservation": "Original608line fixture and entire census Gitmode/body exact9475; all39 originalsource/mutation refs rehashed post-full; original3REDs/209source parity historical and not replayed",
+  "current_producer": {
+    "old": 268,
+    "current": 274,
+    "matching": 261,
+    "changed": [
+      "action_server/src/actions/server/_actions_run.py",
+      "action_server/src/actions/server/_api_analytics.py",
+      "action_server/src/actions/server/_api_run.py",
+      "action_server/src/actions/server/_models.py",
+      "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "action_server/src/actions/server/_runs_state_cache.py",
+      "action_server/src/actions/server/migrations/__init__.py"
+    ],
+    "added": [
+      "action_server/src/actions/server/migrations/migration_add_run_outputs.py",
+      "action_server/src/actions/server/run_outputs/__init__.py",
+      "action_server/src/actions/server/run_outputs/filesystem.py",
+      "action_server/src/actions/server/run_outputs/models.py",
+      "action_server/src/actions/server/run_outputs/service.py",
+      "action_server/src/actions/server/run_outputs/types.py"
+    ],
+    "current_all_entries_exact_actual618": true
+  },
+  "five_selected_tests_separate": {
+    "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py": [
+      "100644",
+      "blob",
+      "12ec0f644d96a45824ac110b7f1dafebb4c42ce6"
+    ],
+    "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py": [
+      "100644",
+      "blob",
+      "0e1ab11bdd4b52e2d35d06b42dd17996dd082022"
+    ],
+    "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py": [
+      "100644",
+      "blob",
+      "534e51afbc75b4d3ce473dee37d7ac00d52dbc92"
+    ],
+    "action_server/tests/action_server_tests/test_cli_multi_package_sync.py": [
+      "100644",
+      "blob",
+      "b0919a8b7508954976a8fab631a5fff219c2aeb8"
+    ],
+    "action_server/tests/action_server_tests/test_cli_successful_generation_drain.py": [
+      "100644",
+      "blob",
+      "7a5a378bf1f8151118034d18b5dfb269f2b24e90"
+    ]
+  },
+  "old_native_current_qualification": "UNQUALIFIED; full274producer differs original268 at7changed6added,261match; no exclusions or newactual claim",
+  "nine_Rcc_sample_current_target_exact": {
+    "path": "/workspace/engineering/pr309-actual618-refresh/accepted-nine-RCC-sample-preserved.json",
+    "bytes": 3070,
+    "sha256": "d8ffce5f6ea168e635e5e4dc466a857c9f5ef29621b2b8579d6a0f28b97c8f00"
+  },
+  "gates": {
+    "Doctor": "PASS",
+    "Bootstrap_reuse": "30 exact prepared inputs, five concrete own prefixes/moduleorigins; no installer",
+    "Toolkit": 96,
+    "auth_request_cases": {
+      "passed": 73,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "broader_scoped": {
+      "passed": 225,
+      "skipped": 1,
+      "deselected": 4,
+      "warnings": 4,
+      "skip_scope": "Existing actual opt-in and realRCC/integration selection, no waived tests"
+    },
+    "configured_lint": "Ruff/format/Isort PASS",
+    "Mypy": 349,
+    "gen8_roundtrip": "PASS",
+    "workflow_plus_dependabot": 26,
+    "all_YAML_parsed_identical": 30,
+    "full_source": {
+      "passed": 1295,
+      "skipped": 13,
+      "warnings": 15,
+      "seconds": 149.79,
+      "workers": 2,
+      "one_authorized_attempt": true,
+      "outer_bound": "600s TERM +10s KILL",
+      "gateway": "CanonicalRCC18.19.3 -> own Runtime Poetry -> invoke test-not-integration"
+    }
+  },
+  "light_checkpoint": {
+    "path": "/workspace/engineering/pr309-actual618-refresh/light-ready-pre-full-checkpoint.json",
+    "bytes": 57466,
+    "sha256": "05163a48493afbc6e6fc61cea8a63ba61d0963b5d9c6672aa168d37cbe85a9d8"
+  },
+  "prefull": {
+    "path": "/workspace/engineering/pr309-actual618-refresh/root-released-final-pre-full-checkpoint.json",
+    "bytes": 364,
+    "sha256": "e5f28cbebe7fabcb0d71489b8bf85bf82d24f5ae540a3e57bef632a9ef5d74b7"
+  },
+  "source_before_after": {
+    "path": "/workspace/engineering/pr309-actual618-refresh/committed-union-pre-full.json",
+    "bytes": 291642,
+    "sha256": "88b5761500ef70fc59a45af91834baf3e45d69feaa9ec9e4720571c4e0587e8e"
+  },
+  "postfull": {
+    "clean": true,
+    "source_prepost_hashes": 1421,
+    "filesystem_executable_bits_exact_Git_modes": true,
+    "capacity_bytes": 1993850880
+  },
+  "retained_owned_public_artifacts": {
+    "before_native": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/retained-native-helper-browser-and-V5-proof.json",
+      "bytes": 4720,
+      "sha256": "1f4c267ee2659c7bc21bd3290c5f1bf7f35f4ec345ac6afb3939b54a5d18687c"
+    },
+    "after_native": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/retained-native-helper-browser-and-V5-proof-after.json",
+      "bytes": 4720,
+      "sha256": "1f4c267ee2659c7bc21bd3290c5f1bf7f35f4ec345ac6afb3939b54a5d18687c"
+    },
+    "before_rawV5": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/raw18-frozen50-Node-frontend-retained-before.json",
+      "bytes": 12822,
+      "sha256": "281b25a2e052e88f8a2a90d37b2a3ee2619762d4bbb7d1df79b3ae88b8fafc85"
+    },
+    "after_rawV5": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/raw18-frozen50-Node-frontend-retained-after.json",
+      "bytes": 12822,
+      "sha256": "281b25a2e052e88f8a2a90d37b2a3ee2619762d4bbb7d1df79b3ae88b8fafc85"
+    },
+    "scope": "Read-only original1192inventory/assets/native/helperedc7/0444snapshots/browser/V5raw18/frozen50/Node/frontend unchanged; V5 remains original3ec actual/92498native. Newsource actual NOTRUN, no current274native equivalence."
+  },
+  "prior_current776_fullCI_history": {
+    "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/frozen-final-complete-current-scoped-CI-review.json",
+    "sha256": "884ced9adbfddf9e682f24386ce982286295fe9107fc9ca5c2b4a581ed6b7ffc",
+    "current618_CI": "NOT_RUN; no20checkcarry"
+  },
+  "prior_sourceGO": {
+    "path": "/workspace/engineering/pr309-actual776-independent-review/independent-frozen-current776-source-review.json",
+    "bytes": 6270,
+    "sha256": "a769ac74ebd6c215f89d0fa181e8038f895d666f2e95863033626733a5c76462"
+  },
+  "accepted_actual_target_GO": {
+    "path": "/workspace/engineering/pr299-actual-integration-independent-review/independent-actual299-integration-readback.json",
+    "bytes": 6973,
+    "sha256": "06a652e23b77573ab5cfe9a8837b46de42909efd50908dcea031d7311a27c9ba"
+  },
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md and docs/skills/provenance-observability.md, exact both-parent accepted imports in ordinary merge",
+    "Exact_delta": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/exact-both-parent-canonical-import.patch",
+      "bytes": 13633,
+      "sha256": "42306d1bb5bc706d2103f0a3da2d21f71ca01409466ee3b5db4492a35755bb2f"
+    },
+    "Durable_learning_captured": "Preserve request authorization versus route registration/native/browser/Workspace proof; import accepted sharedRun Actor/attempt/output binding, scoped-row filtering/history/abort cleanup and provenance limits, retaining original real-handler/Database.connect denial observation and previous RCC source/control/actual distinctions.",
+    "Evidence": "All1421 complete typed parent leaves; both parent added guide lines retained; original608auth/census exact9475 and39 old mutationrefs immutable; current73 JUnitPASS,225scope,Toolkit96,lint/type349/gen8/all30. Complete274producer inventory delta independently recorded.; final one current full 1295PASS/13SKIP/15warnings/149.79s and all1421 postconditions exact.",
+    "Stale_or_ambiguous_guidance_removed": "Earlier auth branch lacked accepted sharedRun/Actor/output visibility and recovery limits; merged guide preserves generic APIKey vsWorkspace distinction and avoids conflating same73 tests with complete152 or packaged native qualification.",
+    "Remaining_uncertainty": "Fresh exactunion hostedCI required; oldnative92498 lacks seven changes/six additions; whole152/196/Workspace/backend/native/provider/private/ChatGPT/publication/release remain HOLD; sourcePASS does not supply universal process-reaping or native proof.",
+    "Disposition": "No cosmetic child; same ordinary merge imports accepted durable knowledge backed by current source controls."
+  },
+  "remaining_HOLDs": [
+    "Fresh exact currentunion hostedCI needed after reviewed normalexistingbranch push",
+    "Full152/196/WorkspaceActor/backend/native/provider/private/ChatGPT/publication/release",
+    "SourcePASS does not prove universal process reaping/natural exit or native execution"
+  ],
+  "not_run": [
+    "Newinstaller/nativebuild/native/provider/browser/PG/consumer actual",
+    "Manual workflow retry/artifactdownload",
+    "Newmutation replay/sourcefeature/source assertion or deadline change",
+    "Push/integration/release"
+  ],
+  "evidence_files": {
+    "Bootstrap-reuse.log": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/Bootstrap-reuse.log",
+      "bytes": 6701,
+      "sha256": "04e77231f55f5f4c07017aec7149b5c6035452b8ee01c4737621cb6d8709b671"
+    },
+    "Doctor.log": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/Doctor.log",
+      "bytes": 13487,
+      "sha256": "16dbaa7cd91aca31ca679ae705f233c5ff02c25a628ff5f592faa671946c471d"
+    },
+    "PR309.preflight.private.json": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/PR309.preflight.private.json",
+      "bytes": 22216,
+      "sha256": "eff8438660769acf22bb19f661755ec375ecb0aa506c56bf0d399b900700e42a"
+    },
+    "Toolkit.log": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/Toolkit.log",
+      "bytes": 14346,
+      "sha256": "d68297dac36e3ba61867760ed2b766895945e338f836a37608e5a222f0e57d93"
+    },
+    "accepted-nine-RCC-sample-preserved.json": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/accepted-nine-RCC-sample-preserved.json",
+      "bytes": 3070,
+      "sha256": "d8ffce5f6ea168e635e5e4dc466a857c9f5ef29621b2b8579d6a0f28b97c8f00"
+    },
+    "auth73-junit.xml": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/auth73-junit.xml",
+      "bytes": 12074,
+      "sha256": "b00132a0526ba9b642e538e29f3a2987623452c36d576520cacf770bbfc165c5"
+    },
+    "auth73-scoped-static.log": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/auth73-scoped-static.log",
+      "bytes": 18259,
+      "sha256": "87230c318f8d39f625c3bed5d2ab2df490c21748445c757bde0aea3829121fb8"
+    },
+    "committed-union-pre-full.json": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/committed-union-pre-full.json",
+      "bytes": 291642,
+      "sha256": "88b5761500ef70fc59a45af91834baf3e45d69feaa9ec9e4720571c4e0587e8e"
+    },
+    "exact-both-parent-canonical-import.patch": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/exact-both-parent-canonical-import.patch",
+      "bytes": 13633,
+      "sha256": "42306d1bb5bc706d2103f0a3da2d21f71ca01409466ee3b5db4492a35755bb2f"
+    },
+    "freeze-final-source.py": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/freeze-final-source.py",
+      "bytes": 6691,
+      "sha256": "a111e297ec03806832cd2f89976776695d0057c007e2dcdbc4c6763d7d2d6c54"
+    },
+    "full-configured-source.log": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/full-configured-source.log",
+      "bytes": 333499,
+      "sha256": "1b9f9835df5d9b404e03fa3858a2adcd0d069175095029ea7140559116345f32"
+    },
+    "generator-roundtrip.json": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/generator-roundtrip.json",
+      "bytes": 10286,
+      "sha256": "d03086cf1c1c65efb2ec389ee3153695c6d8902c2c972e4838fc4ad8ce6d834b"
+    },
+    "generator-roundtrip.log": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/generator-roundtrip.log",
+      "bytes": 4563,
+      "sha256": "7bcd09afcd05199330f37e3d5d27325136a234a619435074bd9b0f56ae57beea"
+    },
+    "generator-roundtrip.py": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/generator-roundtrip.py",
+      "bytes": 1800,
+      "sha256": "80b2dada519853edd51786283e132d9d588bc844243f74772031bded09a7073f"
+    },
+    "light-ready-pre-full-checkpoint.json": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/light-ready-pre-full-checkpoint.json",
+      "bytes": 57466,
+      "sha256": "05163a48493afbc6e6fc61cea8a63ba61d0963b5d9c6672aa168d37cbe85a9d8"
+    },
+    "named_head.preflight.private.json": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/named_head.preflight.private.json",
+      "bytes": 425,
+      "sha256": "a748484dc2205d7431e57f87254fd08abe342e62f23e2f866e8fa9a94bfe19f7"
+    },
+    "named_target.preflight.private.json": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/named_target.preflight.private.json",
+      "bytes": 448,
+      "sha256": "316aab6b935e68ab876f9943e173a74dcbe9484c1be5465b143a32c9c780d5c0"
+    },
+    "ordinary-union-and-original-auth-retention-proof.json": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/ordinary-union-and-original-auth-retention-proof.json",
+      "bytes": 463108,
+      "sha256": "9f14becc2315af766f0f6652486e51dca743e6ada027322427781fb8f4dbf97f"
+    },
+    "origin-action_server.json": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/origin-action_server.json",
+      "bytes": 283,
+      "sha256": "79e6270f15de602f3dc47fc659fd3afa8c0412209c942ca9e1651d68e8a5111c"
+    },
+    "origin-actions-http-helper.json": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/origin-actions-http-helper.json",
+      "bytes": 264,
+      "sha256": "42d405752de4066499a04dbd445a6d2997e56dc94f2736967486a2fa0f052324"
+    },
+    "origin-actions.json": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/origin-actions.json",
+      "bytes": 218,
+      "sha256": "aa2cad33b31aa6e3a05a703e364551e1bdf6599b7b1df3442cd33002088b0ac9"
+    },
+    "origin-devutils.json": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/origin-devutils.json",
+      "bytes": 240,
+      "sha256": "827c685ce00d691d43b0a04092394afab0e329a765e195dd3b287e054411ea44"
+    },
+    "origin-work-items.json": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/origin-work-items.json",
+      "bytes": 249,
+      "sha256": "171af259a5a3f7858400f42fd7abfaff4debbe5906c4bd1439c932a2bac9f6a6"
+    },
+    "own-Bootstrap-reuse-inputs-and-origins.json": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/own-Bootstrap-reuse-inputs-and-origins.json",
+      "bytes": 6399,
+      "sha256": "08b968b7c7df3a9fa8dcf8ee24f182def53d4b2546a45af41df9dc69ecf7d2df"
+    },
+    "raw18-frozen50-Node-frontend-retained-after.json": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/raw18-frozen50-Node-frontend-retained-after.json",
+      "bytes": 12822,
+      "sha256": "281b25a2e052e88f8a2a90d37b2a3ee2619762d4bbb7d1df79b3ae88b8fafc85"
+    },
+    "raw18-frozen50-Node-frontend-retained-before.json": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/raw18-frozen50-Node-frontend-retained-before.json",
+      "bytes": 12822,
+      "sha256": "281b25a2e052e88f8a2a90d37b2a3ee2619762d4bbb7d1df79b3ae88b8fafc85"
+    },
+    "readonly-preflight-before-root-actualGO.json": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/readonly-preflight-before-root-actualGO.json",
+      "bytes": 804,
+      "sha256": "fe12998d3043aaeaba8d391ed68f416aaadee25a2492af31b8110fcba58cbaf1"
+    },
+    "readonly-source-ready-plan.json": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/readonly-source-ready-plan.json",
+      "bytes": 4009,
+      "sha256": "05219d2c9bbee8bf64d8c69c459a7b4f776633d7830037661675ef08d2f332cd"
+    },
+    "readonly-target-producer-and-route-preflight.json": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/readonly-target-producer-and-route-preflight.json",
+      "bytes": 1513,
+      "sha256": "8fd65e4dfc93de5fe0f9364f17d0e30f739309e8c848b34cecb9cd007f601bb2"
+    },
+    "retained-native-helper-browser-and-V5-proof-after.json": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/retained-native-helper-browser-and-V5-proof-after.json",
+      "bytes": 4720,
+      "sha256": "1f4c267ee2659c7bc21bd3290c5f1bf7f35f4ec345ac6afb3939b54a5d18687c"
+    },
+    "retained-native-helper-browser-and-V5-proof.json": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/retained-native-helper-browser-and-V5-proof.json",
+      "bytes": 4720,
+      "sha256": "1f4c267ee2659c7bc21bd3290c5f1bf7f35f4ec345ac6afb3939b54a5d18687c"
+    },
+    "root-released-final-pre-full-checkpoint.json": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/root-released-final-pre-full-checkpoint.json",
+      "bytes": 364,
+      "sha256": "e5f28cbebe7fabcb0d71489b8bf85bf82d24f5ae540a3e57bef632a9ef5d74b7"
+    },
+    "run-auth-and-static.py": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/run-auth-and-static.py",
+      "bytes": 972,
+      "sha256": "e4d0b85e5a932425d3b2bb99f11953b9ee34b86fd7c171d3656b3ac60ed0b61c"
+    },
+    "run-full-source.py": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/run-full-source.py",
+      "bytes": 85,
+      "sha256": "5c2a1fd7500b33eecef9b9efdf6d234cfccd80c77230cf0344878d94f34a8763"
+    },
+    "verify-own-prepared-bootstrap.py": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/verify-own-prepared-bootstrap.py",
+      "bytes": 2632,
+      "sha256": "ae9816e5de734a06fd1c2ef12c0d8267f7d5273944ad09e4338791704a6f893a"
+    },
+    "verify-retained-actual-inputs-after.py": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/verify-retained-actual-inputs-after.py",
+      "bytes": 3588,
+      "sha256": "5619afceae8b294d941bd6effc6b87a82128eb86d9f65897eb7f8cfc7cdfc0e9"
+    },
+    "verify-retained-actual-inputs-before.py": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/verify-retained-actual-inputs-before.py",
+      "bytes": 3582,
+      "sha256": "dee7dfc2dacdd896260e0ecdd7cb28139573e87f9fe7985d22a6935d7cf91b19"
+    },
+    "verify-retained-raw-and-driver-after.py": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/verify-retained-raw-and-driver-after.py",
+      "bytes": 2523,
+      "sha256": "30ccd3edc3efac1bad5e2a85a6d383e6ec9d430c2ebcaaa43fa2abc019aa192b"
+    },
+    "verify-retained-raw-and-driver.py": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/verify-retained-raw-and-driver.py",
+      "bytes": 2524,
+      "sha256": "9c294abbd9e57d5ba4b2d1cbf6fdd0a9fe88351a99b9623a06a226f3b927c7ac"
+    },
+    "verify-union-before-commit.py": {
+      "path": "/workspace/engineering/pr309-actual618-refresh/verify-union-before-commit.py",
+      "bytes": 4424,
+      "sha256": "6a37d8f2f5d8f9ec6d14fcac3d185b80d169d7112e1999af06b1d437ff69b542"
+    }
+  },
+  "upstream_disposition": "none"
+}

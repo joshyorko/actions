@@ -1,0 +1,356 @@
+{
+  "schema": "actions-pr312-ordinary-actual300-current-e3c-configured-full-NOEXECUTION/v2",
+  "status": "PREPARATION_ONLY_INDEPENDENT_PREEXECUTION_GO_AND_DISTINCT_ROOT_ONE_RELEASE_REQUIRED",
+  "head": "ec70a2928461941c129b1c05332dc441070e0184",
+  "tree": "47a1e4fceb22fd15eaee1ca380ad6c005abfdde6",
+  "ordered_parents": [
+    "77ed3de24f33412dff30e4e3c18841c4c09933ac",
+    "e3c29cde8878307912e55ed09b6436c0f91d06d5"
+  ],
+  "actual_target": "e3c29cde8878307912e55ed09b6436c0f91d06d5",
+  "current_LIGHT": {
+    "path": "/workspace/engineering/pr312-actual300-refresh/OWNERFINAL-pr312-actual300-refresh-SOURCE-LIGHT-v2.json",
+    "bytes": 32020,
+    "sha256": "a55e76b7bc19419e77e505e962a14381e53d7c8a66ad37c270d35986d93f7765",
+    "mode": "0o444"
+  },
+  "old77_fullproposal": {
+    "path": "/workspace/engineering/pr312-shutdown-response-order-configured-full-proposal/OWNERFINAL-pr312-current77-managed-activation-configured-full-proposal-v3.json",
+    "bytes": 19846,
+    "sha256": "473900aaa9beed01b22cb65bb7c0ba992918ba584c912bc08599e339946315a4",
+    "mode": "0o600"
+  },
+  "old77_full_status": "NOT_RUN; current-source replacement proposal, not an old77 full repeat/retry",
+  "command": {
+    "cwd": "/workspace/engineering/runtime-checkout-eol",
+    "argv": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "900s",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/pr312-actual300-refresh-configured-full-proposal-v2/root-distinct-one-full-primary-and-postguard-envelope-v2-final.py",
+      "--execute-root-authorized"
+    ],
+    "inner_argv": [
+      "bash",
+      "--noprofile",
+      "--norc",
+      "-c",
+      "set -euo pipefail\nsource \"$1\"\n\"$2\" \"$3\" \"$4\"\nshift 4\nexec \"$@\"\n",
+      "pr312-current-e3c-managed-configured-full",
+      "/workspace/actions-cloud/activate.sh",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/pr312-actual300-refresh-configured-full-proposal-v2/managed_activation_preflight_v2.py",
+      "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/before-full-source-activation-capacity.json",
+      "env",
+      "PYTEST_XDIST_AUTO_NUM_WORKERS=2",
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "600s",
+      "/workspace/actions-cloud/bin/rcc",
+      "task",
+      "script",
+      "-r",
+      "developer/toolkit.yaml",
+      "--",
+      "python",
+      "-c",
+      "import hashlib,os,subprocess\nfrom pathlib import Path\nimport toolkit\nroot=toolkit.REPOSITORY_ROOT\nassert root==Path('/workspace/engineering/runtime-checkout-eol')\nassert subprocess.check_output([\"git\",\"rev-parse\",\"HEAD\"],cwd=root).decode().strip()=='ec70a2928461941c129b1c05332dc441070e0184'\nassert subprocess.check_output([\"git\",\"rev-parse\",\"HEAD^{tree}\"],cwd=root).decode().strip()=='47a1e4fceb22fd15eaee1ca380ad6c005abfdde6'\nassert subprocess.check_output([\"git\",\"status\",\"--porcelain\"],cwd=root)==b\"\"\nassert os.environ[\"PYTEST_XDIST_AUTO_NUM_WORKERS\"]==\"2\"\nfor name,h in {'action_server/build.py': '75c249c111bbf3d81f027a252e7dba54771037f02b402832c0554e119cb4eb12', 'action_server/poetry.lock': '5d6acb65ba220211d1da020c78c51a5ea89465f2bbedc99aaf72319b862914e5', 'action_server/pyproject.toml': 'be4011d3915e8838249546c70ae30420dadfb0d08c19b59970d8980332c7573f', 'action_server/tasks.py': 'b35d3722b1f9ed51e57ce4dcd3f7fdc81b7df238cbcdef0eaf44d47d08555791', 'action_server/tests/action_server_tests/test_create_conda_from_package_yaml/create_wheel/pyproject.toml': '4d581bfc7b6d64979c3aef6411198548a17713e0c8439c07d0cbb1a91fae3851', 'actions-http-helper/poetry.lock': '8e717ea54b91b17e638bb633026372fd415487a5e817768b450c0e473cd84d13', 'actions-http-helper/pyproject.toml': '1888af6e0e2ce2280080920338245122563f69ce677796a5dbddc4c6bb07d28d', 'actions-http-helper/tasks.py': '31523822c03af429ad7d7fab8df66a45f87b4f58876f8928df9f7c79f375992a', 'actions/poetry.lock': 'b90ab7b6e3dd3a68a3d23bfee456adf6d22446f845e1bd5e2a334ec573035f15', 'actions/pyproject.toml': '9de923a2bf29d73d486ebf67982e177c0ab41d8a35266f7dd1f2d75b1ec43ec3', 'actions/tasks.py': '33a572fcadc6848ebab78f01fcae880a40bd51011cb80a69149467a897807cc9', 'actions/tests/actions_core_tests/test_core_log_integration/pyproject.toml': 'f2119f900206f7a6bcbedd34b7cfb1c83bd996db13fdf81710fa509ed3cc72cf', 'build_common/poetry.lock': '5dfaebdb2e73b95e022e9064f4258fefb66a4a0a2a6c3d8829cd9d2838e07160', 'common/poetry.lock': '55fb76128d984be26ba5af1dc791a7b010298f70908d969b80fd7f268e84019e', 'developer/setup.yaml': '8674d6b55439fae5ac284fa92d7db8016e3589fafbf2d34e066e29345efa016a', 'developer/setup_windows_amd64.yaml': '86a36910ad271616626e019e02e6c7b21fdb32eaa1e1717c2a654673504a8001', 'developer/toolkit.py': 'e1a3f96b57c31be2a0db5cdd3d63ce9ac243a9e8e29dff5ce6e07fd897fb605f', 'developer/toolkit.yaml': '0ed7beaa93dd0ba763d1618382a3de8ce307cc5cf613759d06081d735fcd7e68', 'devutils/bin/develop.bat': 'daff2011d235a81f7d1556bf30bf62016aecb2498084e67bfccad8531642c589', 'devutils/bin/develop.sh': '484c7164f54e383b038dcb25ff39979458b6f6a3f10f20c81f50001c3c2d16c2', 'devutils/poetry.lock': '22bf11dae2a1ed46de5024da774dde4fe778c206d720929fba9244819f3b0b6e', 'devutils/pyproject.toml': '7ffef37af3dc666ae72f1075ac1e06d8c61405225d678b326d767fe1952825e1', 'devutils/src/devutils/invoke_utils.py': '7892303d075b2755b490b507c444d9aebc2f0d3089c8812df40d7f0c0fc195b5', 'devutils/src/devutils/rcc.py': 'c897a607292025e3ae05a79fb002302f4ac7d5eed6033b8101dd9d5e550cc97c', 'mcp/poetry.lock': '9b84391e939e90e56422e1b9373862fbc1827b667ebba87126a6330a74069543', 'tasks.py': 'b9d8fc44392003c3eac7503c2c8cff237f8896c95d5eccb97f6e75cf55eb4b1c', 'templates/advanced/pyproject.toml': 'ef1312a9eaf6323b143d9339defb3158ea19b67b22a7cce0ecf766ba6ed5223d', 'work-items/poetry.lock': 'dcb776a04f9fb30fb93c6667cc42fe9733208e07ec23e7d54dff39650ae11bf4', 'work-items/pyproject.toml': 'a09a91d33e5f91cdec649a96d72b91e4fc1e4ecf97d3654e9b243f0ac8ecc10e', 'work-items/tasks.py': 'e74ad7f083159457c53da828ca69b2ea6ae1a2cde465e6d2b8019bda079f1642'}.items():assert hashlib.sha256((root/name).read_bytes()).hexdigest()==h\nfor package,module,prefix in [('actions', 'actions', '/workspace/engineering/runtime-checkout-eol/actions/.venv'), ('actions-http-helper', 'actions_http', '/workspace/engineering/runtime-checkout-eol/actions-http-helper/.venv'), ('devutils', 'devutils.invoke_utils', '/workspace/engineering/runtime-checkout-eol/devutils/.venv'), ('work-items', 'actions.work_items', '/workspace/engineering/runtime-checkout-eol/work-items/.venv'), ('action_server', 'actions.server._rcc_runtime_adapter', '/workspace/engineering/runtime-checkout-eol/action_server/.venv')]:\n code=\"import importlib,sys;from pathlib import Path;m=importlib.import_module(\"+repr(module)+\");assert Path(sys.prefix).resolve()==Path(\"+repr(prefix)+\");assert Path(m.__file__).resolve().is_relative_to(Path(\"+repr(str(root/package/\"src\"))+\").resolve())\"\n toolkit.poetry(package,\"run\",\"python\",\"-c\",code)\nos.environ[\"PYTEST_XDIST_AUTO_NUM_WORKERS\"]=\"2\"\nprint(\"CURRENT_E3C_OWN30_FIVE_ORIGINS_PASS_BEFORE_CONFIGURED_FULL\",flush=True)\ntoolkit.poetry(\"action_server\",\"run\",\"invoke\",\"test-not-integration\")\n"
+    ],
+    "exact_body": {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-proposal-v2/planned_current_e3c_toolkit_configured_full_body.py",
+      "bytes": 4706,
+      "sha256": "6477de1a41acd3672ff40ee8a2dea6ac7541d29e8054ad65e823e4fa8d268742",
+      "mode": "0o444"
+    },
+    "preflight": {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-proposal-v2/managed_activation_preflight_v2.py",
+      "bytes": 379,
+      "sha256": "aa7ce1aa18318be58010cdf5f7bd2bec4c448a74fda56e6fd66f7c86acd4b87d",
+      "mode": "0o444"
+    },
+    "post_argv": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "120s",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/pr312-actual300-refresh-configured-full-proposal-v2/post_full_readonly_guards_v2.py",
+      "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/post-full-source-and-references.json"
+    ],
+    "child_TERM_seconds": 600,
+    "KILL_grace_seconds": 10,
+    "enforced_parent_TERM_seconds": 640,
+    "postguard_TERM_seconds": 120,
+    "attempts": 1,
+    "pytest_workers": 2,
+    "scope": "Unchanged configured Runtime invoke test-not-integration (-n auto) inherits explicit outer PYTEST_XDIST_AUTO_NUM_WORKERS=2; current e3c union only; no opt-in native/provider/backend tests",
+    "primary_argv": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "640s",
+      "bash",
+      "--noprofile",
+      "--norc",
+      "-c",
+      "set -euo pipefail\nsource \"$1\"\n\"$2\" \"$3\" \"$4\"\nshift 4\nexec \"$@\"\n",
+      "pr312-current-e3c-managed-configured-full",
+      "/workspace/actions-cloud/activate.sh",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/pr312-actual300-refresh-configured-full-proposal-v2/managed_activation_preflight_v2.py",
+      "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/before-full-source-activation-capacity.json",
+      "env",
+      "PYTEST_XDIST_AUTO_NUM_WORKERS=2",
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "600s",
+      "/workspace/actions-cloud/bin/rcc",
+      "task",
+      "script",
+      "-r",
+      "developer/toolkit.yaml",
+      "--",
+      "python",
+      "-c",
+      "import hashlib,os,subprocess\nfrom pathlib import Path\nimport toolkit\nroot=toolkit.REPOSITORY_ROOT\nassert root==Path('/workspace/engineering/runtime-checkout-eol')\nassert subprocess.check_output([\"git\",\"rev-parse\",\"HEAD\"],cwd=root).decode().strip()=='ec70a2928461941c129b1c05332dc441070e0184'\nassert subprocess.check_output([\"git\",\"rev-parse\",\"HEAD^{tree}\"],cwd=root).decode().strip()=='47a1e4fceb22fd15eaee1ca380ad6c005abfdde6'\nassert subprocess.check_output([\"git\",\"status\",\"--porcelain\"],cwd=root)==b\"\"\nassert os.environ[\"PYTEST_XDIST_AUTO_NUM_WORKERS\"]==\"2\"\nfor name,h in {'action_server/build.py': '75c249c111bbf3d81f027a252e7dba54771037f02b402832c0554e119cb4eb12', 'action_server/poetry.lock': '5d6acb65ba220211d1da020c78c51a5ea89465f2bbedc99aaf72319b862914e5', 'action_server/pyproject.toml': 'be4011d3915e8838249546c70ae30420dadfb0d08c19b59970d8980332c7573f', 'action_server/tasks.py': 'b35d3722b1f9ed51e57ce4dcd3f7fdc81b7df238cbcdef0eaf44d47d08555791', 'action_server/tests/action_server_tests/test_create_conda_from_package_yaml/create_wheel/pyproject.toml': '4d581bfc7b6d64979c3aef6411198548a17713e0c8439c07d0cbb1a91fae3851', 'actions-http-helper/poetry.lock': '8e717ea54b91b17e638bb633026372fd415487a5e817768b450c0e473cd84d13', 'actions-http-helper/pyproject.toml': '1888af6e0e2ce2280080920338245122563f69ce677796a5dbddc4c6bb07d28d', 'actions-http-helper/tasks.py': '31523822c03af429ad7d7fab8df66a45f87b4f58876f8928df9f7c79f375992a', 'actions/poetry.lock': 'b90ab7b6e3dd3a68a3d23bfee456adf6d22446f845e1bd5e2a334ec573035f15', 'actions/pyproject.toml': '9de923a2bf29d73d486ebf67982e177c0ab41d8a35266f7dd1f2d75b1ec43ec3', 'actions/tasks.py': '33a572fcadc6848ebab78f01fcae880a40bd51011cb80a69149467a897807cc9', 'actions/tests/actions_core_tests/test_core_log_integration/pyproject.toml': 'f2119f900206f7a6bcbedd34b7cfb1c83bd996db13fdf81710fa509ed3cc72cf', 'build_common/poetry.lock': '5dfaebdb2e73b95e022e9064f4258fefb66a4a0a2a6c3d8829cd9d2838e07160', 'common/poetry.lock': '55fb76128d984be26ba5af1dc791a7b010298f70908d969b80fd7f268e84019e', 'developer/setup.yaml': '8674d6b55439fae5ac284fa92d7db8016e3589fafbf2d34e066e29345efa016a', 'developer/setup_windows_amd64.yaml': '86a36910ad271616626e019e02e6c7b21fdb32eaa1e1717c2a654673504a8001', 'developer/toolkit.py': 'e1a3f96b57c31be2a0db5cdd3d63ce9ac243a9e8e29dff5ce6e07fd897fb605f', 'developer/toolkit.yaml': '0ed7beaa93dd0ba763d1618382a3de8ce307cc5cf613759d06081d735fcd7e68', 'devutils/bin/develop.bat': 'daff2011d235a81f7d1556bf30bf62016aecb2498084e67bfccad8531642c589', 'devutils/bin/develop.sh': '484c7164f54e383b038dcb25ff39979458b6f6a3f10f20c81f50001c3c2d16c2', 'devutils/poetry.lock': '22bf11dae2a1ed46de5024da774dde4fe778c206d720929fba9244819f3b0b6e', 'devutils/pyproject.toml': '7ffef37af3dc666ae72f1075ac1e06d8c61405225d678b326d767fe1952825e1', 'devutils/src/devutils/invoke_utils.py': '7892303d075b2755b490b507c444d9aebc2f0d3089c8812df40d7f0c0fc195b5', 'devutils/src/devutils/rcc.py': 'c897a607292025e3ae05a79fb002302f4ac7d5eed6033b8101dd9d5e550cc97c', 'mcp/poetry.lock': '9b84391e939e90e56422e1b9373862fbc1827b667ebba87126a6330a74069543', 'tasks.py': 'b9d8fc44392003c3eac7503c2c8cff237f8896c95d5eccb97f6e75cf55eb4b1c', 'templates/advanced/pyproject.toml': 'ef1312a9eaf6323b143d9339defb3158ea19b67b22a7cce0ecf766ba6ed5223d', 'work-items/poetry.lock': 'dcb776a04f9fb30fb93c6667cc42fe9733208e07ec23e7d54dff39650ae11bf4', 'work-items/pyproject.toml': 'a09a91d33e5f91cdec649a96d72b91e4fc1e4ecf97d3654e9b243f0ac8ecc10e', 'work-items/tasks.py': 'e74ad7f083159457c53da828ca69b2ea6ae1a2cde465e6d2b8019bda079f1642'}.items():assert hashlib.sha256((root/name).read_bytes()).hexdigest()==h\nfor package,module,prefix in [('actions', 'actions', '/workspace/engineering/runtime-checkout-eol/actions/.venv'), ('actions-http-helper', 'actions_http', '/workspace/engineering/runtime-checkout-eol/actions-http-helper/.venv'), ('devutils', 'devutils.invoke_utils', '/workspace/engineering/runtime-checkout-eol/devutils/.venv'), ('work-items', 'actions.work_items', '/workspace/engineering/runtime-checkout-eol/work-items/.venv'), ('action_server', 'actions.server._rcc_runtime_adapter', '/workspace/engineering/runtime-checkout-eol/action_server/.venv')]:\n code=\"import importlib,sys;from pathlib import Path;m=importlib.import_module(\"+repr(module)+\");assert Path(sys.prefix).resolve()==Path(\"+repr(prefix)+\");assert Path(m.__file__).resolve().is_relative_to(Path(\"+repr(str(root/package/\"src\"))+\").resolve())\"\n toolkit.poetry(package,\"run\",\"python\",\"-c\",code)\nos.environ[\"PYTEST_XDIST_AUTO_NUM_WORKERS\"]=\"2\"\nprint(\"CURRENT_E3C_OWN30_FIVE_ORIGINS_PASS_BEFORE_CONFIGURED_FULL\",flush=True)\ntoolkit.poetry(\"action_server\",\"run\",\"invoke\",\"test-not-integration\")\n"
+    ],
+    "enforced_complete_envelope_TERM_seconds": 900
+  },
+  "activation": {
+    "path": "/workspace/actions-cloud/activate.sh",
+    "bytes": 987,
+    "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a",
+    "mode": "0o600"
+  },
+  "allowlisted_activation_exports": {
+    "ACTIONS_CLOUD_ROOT": "/workspace/actions-cloud",
+    "ROBOCORP_HOME": "/workspace/actions-cloud/robocorp",
+    "XDG_CACHE_HOME": "/workspace/actions-cloud/cache",
+    "XDG_CONFIG_HOME": "/workspace/actions-cloud/config",
+    "POETRY_CACHE_DIR": "/workspace/actions-cloud/cache/pypoetry",
+    "POETRY_CONFIG_DIR": "/workspace/actions-cloud/config/pypoetry",
+    "UV_CACHE_DIR": "/workspace/actions-cloud/cache/uv",
+    "npm_config_cache": "/workspace/actions-cloud/cache/npm",
+    "GOCACHE": "/workspace/actions-cloud/cache/go-build",
+    "GOPATH": "/workspace/actions-cloud/cache/go",
+    "PLAYWRIGHT_BROWSERS_PATH": "/workspace/actions-cloud/cache/playwright",
+    "PYTEST_XDIST_AUTO_NUM_WORKERS": "2",
+    "POETRY_NO_INTERACTION": "1",
+    "BUILDX_CONFIG": "/workspace/actions-cloud/cache/buildx",
+    "ACTIONS_HOME": "/workspace/actions-cloud/actions-home",
+    "ROBOTS_HOME": "/workspace/actions-cloud/robots-home",
+    "GOMAXPROCS": "2",
+    "ACTIONS_RUNTIME_TEST_PYTHON": "/workspace/actions/action_server/.venv/bin/python"
+  },
+  "activation_export_count_including_PATH": 19,
+  "PATH_condition": "First entry /workspace/actions-cloud/bin immediately after original activation; toolkit bin is gateway managed, no default RCC home",
+  "fresh_immediate_installed_source_bindings": [
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol/action_server/.venv/lib/python3.12/site-packages/xdist/plugin.py",
+      "bytes": 13921,
+      "sha256": "62df71dfe342969ab667cb3a4f2280a93be9c11bc9a4c2d9ead271c979d2afd8",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol/action_server/tasks.py",
+      "bytes": 27099,
+      "sha256": "b35d3722b1f9ed51e57ce4dcd3f7fdc81b7df238cbcdef0eaf44d47d08555791",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol/developer/toolkit.py",
+      "bytes": 8893,
+      "sha256": "e1a3f96b57c31be2a0db5cdd3d63ce9ac243a9e8e29dff5ce6e07fd897fb605f",
+      "mode": "0o755"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol/devutils/src/devutils/invoke_utils.py",
+      "bytes": 25741,
+      "sha256": "7892303d075b2755b490b507c444d9aebc2f0d3089c8812df40d7f0c0fc195b5",
+      "mode": "0o600"
+    }
+  ],
+  "worker_bound_source_evidence": "Installed own xdist.plugin pytest_xdist_auto_num_workers reads PYTEST_XDIST_AUTO_NUM_WORKERS and returns int(env_var); own Runtime configured task retains -n auto and existing toolkit.poetry process inherits os.environ. Actual two-worker readback still required after future execution.",
+  "bindings": [
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-proposal-v2/current_e3c_readonly_guards_v2.py",
+      "bytes": 7347,
+      "sha256": "ba47920125f2ca646c290b1501beb32275888d3e4ea55355ec9f37a62d995439",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-proposal-v2/exact-proof-counts-and-complete-envelope-canonical-proposed.patch",
+      "bytes": 689,
+      "sha256": "e3fdb2a2d54f1a8bf8c89378dc131cdf2323416aa59cc72d7011edcc49c1ca73",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-proposal-v2/managed_activation_preflight_v2.py",
+      "bytes": 379,
+      "sha256": "aa7ce1aa18318be58010cdf5f7bd2bec4c448a74fda56e6fd66f7c86acd4b87d",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-proposal-v2/named-v2-derived-counts-and-original-binding-inspection.json",
+      "bytes": 1365,
+      "sha256": "e031ff5aa9f61b4b9a9caa5261880a434d686e4547515991636c082dd128e688",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-proposal-v2/planned_current_e3c_toolkit_configured_full_body.py",
+      "bytes": 4706,
+      "sha256": "6477de1a41acd3672ff40ee8a2dea6ac7541d29e8054ad65e823e4fa8d268742",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-proposal-v2/post_full_readonly_guards_v2.py",
+      "bytes": 374,
+      "sha256": "4757d9cc66c2eb9c2e2c1a268e3fcb1fdbca1d8dd9219ca09aad0df959c30bca",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-proposal-v2/root-distinct-one-full-primary-and-postguard-envelope-v2.py",
+      "bytes": 3674,
+      "sha256": "761b097ce7eff44157181ee6768e1a28e33b75f705beae6b59e3a4c85c256109",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-proposal-v2/root-distinct-one-full-primary-and-postguard-envelope-v2-final.py",
+      "bytes": 3680,
+      "sha256": "3df3795d8b53d799a7cc5a635b5753f3bc6d2cea7ad999ee1aaa6a97913fff02",
+      "mode": "0o444"
+    }
+  ],
+  "execution_prerequisites": {
+    "ROOT_distinct_release": "NOT_GRANTED",
+    "independent_SOURCE_LIGHT_and_preexecution_review": "REQUIRED",
+    "ROOT_serialized_heavy_slot": "No concurrent RCC actual/provider/native/full/consumer/installer; root must set PR312_CURRENT_E3C_SERIALIZED_HEAVY_SLOT=root-one-pr312-current-e3c-only",
+    "workspace_available_bytes_minimum": 1200000000,
+    "fresh_source_and_refs": "All1426 Git/FS body+exec,212 original refs+all current LIGHT files,30 inputs/five concrete own prefixes, activation/RCC pins, original1192/helpers0444/browserNode/frontend/raw18/frozen50 immediately before and after",
+    "expected_owned_execution_directory": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2",
+    "current_execution": "NOT_RUN; syntax and metadata/hash preparation only",
+    "root_authorization_file_contract": {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/root-one-distinct-source-full-authorization.json",
+      "required_mode": "0o600",
+      "required_values": {
+        "head": "ec70a2928461941c129b1c05332dc441070e0184",
+        "tree": "47a1e4fceb22fd15eaee1ca380ad6c005abfdde6",
+        "attempts": 1,
+        "approved_proposal_sha256": "SHA256 of this exact named proposal, written by root after independent GO and distinct ONE release"
+      },
+      "parent_directory_mode": "0o700"
+    }
+  },
+  "owner_parent_envelope": "Root creates new0700 directory and exclusive authorization0600 matching current head/tree/proposal SHA/attempts1. Exact argv enforces900TERM+10 across preflight/640TERM+10 primary/600TERM+10 child/post120TERM+10. Exclusive primary log0600; preserve primary returncode/output hash before separate postguard on every returned gate outcome. Primary or post failure, including terminal-record failure, yields overallFAIL without overwrite/retry. External envelope expiry leaves incomplete observations UNKNOWN; root retains primary log and timeout status.",
+  "source_scope": {
+    "original_leaves": 1424,
+    "target_leaves": 1423,
+    "current_leaves": 1426,
+    "parent_bytes_and_modes_exact_leaves": 1424,
+    "no_deletions": true,
+    "automatic_novel_bodies": [
+      "action_server/src/actions/server/_server.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "whole_incoming_server_AST_exact_after_original_two_shutdown_changes_normalized": true,
+    "all_original_shutdown_10tests_exact": true,
+    "both_parent_accepted_guides_exact_block_import_proof": {
+      "path": "/workspace/engineering/pr312-actual300-refresh/canonical-both-parent-import-proof.json",
+      "bytes": 1652,
+      "sha256": "7728488244b116ff71dd2d709b251fb2f80f8900c90210b98b83d6c6e2b17619",
+      "mode": "0o444"
+    },
+    "current_EOLog_selection_scope": {
+      "current_Python_source": 202,
+      "packaged_text": 5,
+      "frontend_HTML": 1,
+      "current_selected_total": 208,
+      "old_selected_total_historical": 207,
+      "old_unchanged_input_bodies": 206,
+      "changed_from_parent": [
+        "action_server/src/actions/server/_server.py"
+      ],
+      "added_from_incoming_target": [
+        "action_server/src/actions/server/run_outputs/transport.py"
+      ],
+      "all_selected_rules_current_byte_controls": "Measured GREEN10 current test nodes; both real Git checkout settings plus seven rule-removal poisons unchanged and run against current208 inputs",
+      "six_non_guide_original_EOLog_control_paths_body_modes_exact": [
+        ".gitattributes",
+        ".github/workflows/_gen_workflows.py",
+        ".github/workflows/actions_runtime_tests.yml",
+        ".github/workflows/actions_runtime_pypi_release.yml",
+        "devutils/tests/test_runtime_checkout_bytes.py",
+        "devutils/tests/test_runtime_checkout_workflows.py"
+      ],
+      "guide": "Exact original accepted blocks retained, not whole parent guide byte equality"
+    }
+  },
+  "original_current_parent_preservation": "Original77 LIGHT/ind/Windows770 failure retained. Incoming actuale3c transport source,auth and both accepted guide blocks incorporated. Old fullproposal4739NOTRUN retained. Old native92498 and V5original3ec observations historical, not current native or cleanup acceptance.",
+  "remaining_HOLDs": [
+    "Fresh current source full and exact-union hostedCI",
+    "Fresh Windows client response/natural exit acceptance; old770 ReadError10053 remains original failed observation",
+    "Current native build unqualified; production server change not old92498 equivalence",
+    "Private01f/frozen-v6 unavailable; metadata/full134/provider/backend/publication/OAuth/release gates held"
+  ],
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "exact_delta": {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-proposal-v2/exact-proof-counts-and-complete-envelope-canonical-proposed.patch",
+      "bytes": 689,
+      "sha256": "e3fdb2a2d54f1a8bf8c89378dc131cdf2323416aa59cc72d7011edcc49c1ca73",
+      "mode": "0o444"
+    },
+    "durable_learning_captured": "Derive and assert receipt counts from validated lists; preserve mislabeled originals and named correction. Enforce complete envelope and record primary result before independent postchecks.",
+    "evidence": [
+      {
+        "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-proposal/OWNERFINAL-pr312-actual300-current-e3c-configured-full-NOEXECUTION-proposal.json",
+        "bytes": 23031,
+        "sha256": "7346ca19364e142aa7fde8033f644be2a4121f3ba36e1bd088e257c9f7f37148",
+        "mode": "0o444"
+      },
+      {
+        "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-proposal-v2/named-v2-derived-counts-and-original-binding-inspection.json",
+        "bytes": 1365,
+        "sha256": "e031ff5aa9f61b4b9a9caa5261880a434d686e4547515991636c082dd128e688",
+        "mode": "0o444"
+      }
+    ],
+    "stale_or_ambiguous_guidance_removed": "Current1424/141 labels are stale for validated1426/212;600 child timeout alone does not bound full preflight+postcheck envelope.",
+    "remaining_uncertainty": "No current FULL executed; actual worker census, platform client completion/native/release acceptance remain required."
+  },
+  "Upstream_disposition": "none",
+  "named_successor": {
+    "original7346": {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-proposal/OWNERFINAL-pr312-actual300-current-e3c-configured-full-NOEXECUTION-proposal.json",
+      "bytes": 23031,
+      "sha256": "7346ca19364e142aa7fde8033f644be2a4121f3ba36e1bd088e257c9f7f37148",
+      "mode": "0o444"
+    },
+    "original_disposition": "Independent HOLD before current FULL launch; original proposal and all bound files unchanged",
+    "minimal_correction": "Proof-derived1426 source and212 historical refs with explicit assertions/output fields. Complete enforced900TERM+10 envelope surrounds unchanged640TERM+10 primary including preflight,600TERM+10 configured child and120TERM+10 postguards; record primary before separate postguard on every returned gate outcome.",
+    "source_and_configured_gate_changes": "None; same cleanec70/tree47a, body/worker2/managed activation/pins/qualified prepost invariants unchanged",
+    "inspection": {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-proposal-v2/named-v2-derived-counts-and-original-binding-inspection.json",
+      "bytes": 1365,
+      "sha256": "e031ff5aa9f61b4b9a9caa5261880a434d686e4547515991636c082dd128e688",
+      "mode": "0o444"
+    },
+    "preannouncement_prototype_preserved": {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-proposal-v2/OWNERFINAL-pr312-actual300-current-e3c-configured-full-NOEXECUTION-proposal-v2.json",
+      "bytes": 27187,
+      "sha256": "6e7a442f848122c3daa2d36b7a080b0cbb4d48e59a9e484f76ffd0ea941bbc70",
+      "mode": "0o444"
+    },
+    "prototype_disposition": "Never announced/executed; final metadata makes duplicate inner_argv current and binds final envelope filename. Actual authoritative primary_argv and all guards/body/bounds unchanged."
+  },
+  "source_LIGHT_independent_GO": {
+    "path": "/workspace/engineering/pr312-actual300-independent-LIGHT-review/OWNERFINAL-independent-pr312-current-ec70-SOURCE-LIGHT-review.json",
+    "bytes": 5446,
+    "sha256": "2a5f94a163f43bdc6e8fe968d44274d60469bb3224f33e02fd09cf3b30e11692",
+    "mode": "0o444"
+  }
+}

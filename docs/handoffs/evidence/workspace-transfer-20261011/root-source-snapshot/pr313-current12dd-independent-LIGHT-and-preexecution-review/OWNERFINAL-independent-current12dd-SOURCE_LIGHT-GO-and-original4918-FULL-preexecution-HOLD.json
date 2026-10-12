@@ -1,0 +1,146 @@
+{
+  "schema": "independent-current-pr313-source-light-and-preexecution-review/v1",
+  "decision": "GO_CURRENT12DD_SOURCE_LIGHT_ONLY",
+  "configured_SOURCEFULL_preexecution_decision": "HOLD_MISSING_EXACT_ENFORCED_ROOT_PARENT_AND_ALWAYS_POST_ORCHESTRATION",
+  "owner_source_LIGHT": {
+    "path": "/workspace/engineering/pr313-actual300-refresh/OWNERFINAL-pr313-current-actual300-ordinary-refresh-SOURCE_LIGHT.json",
+    "bytes": 14737,
+    "sha256": "0171ef23a625807d6f09dabcc25b9695ee622ca570f8b8800a75433c7a1bcbbb"
+  },
+  "owner_preexecution": {
+    "path": "/workspace/engineering/pr313-actual300-refresh/OWNERFINAL-pr313-current12dd-managed-configured-full-PREEXECUTION-proposal.json",
+    "bytes": 8972,
+    "sha256": "49181f170c7818f442976147a32b2a9738a484642aa9143c31ac7f962a55b88d"
+  },
+  "source": {
+    "head": "12dd3ec5c4d2a582b192ba11c5f13736757aba16",
+    "tree": "d3428cf69580a4ee252b5ad4f251588b837937d0",
+    "ordered_parents": [
+      "499a83d802ca9a0e2ebe3d77071af10625879297",
+      "e3c29cde8878307912e55ed09b6436c0f91d06d5"
+    ],
+    "cwd": "/workspace/engineering/captured-child-cleanup",
+    "clean": true,
+    "complete_typed_Git_FS_body_exec_exact": 1424,
+    "original_parent_count": 1422,
+    "target_count": 1423,
+    "no_deleted_paths": true,
+    "all_non_guide_entries_match_one_parent": true,
+    "delta_against_target": [
+      "action_server/src/actions/server/_common/process.py",
+      "action_server/tests/action_server_tests/common_tests/test_captured_process_tree_deadline.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "two_non_doc_delta_blobs_modes_exact_original499": true
+  },
+  "independent_observations": {
+    "all34_SOURCE_LIGHT_refs_size_SHA_exact": true,
+    "all7_preexecution_refs_size_SHA_exact": true,
+    "all119_historical_refs_preserved": true,
+    "historical_tracked_guide_old499_Git_blob_and_snapshot_exact_not_current_FS": true,
+    "source_before_after_all1424_rows_exact_current_Git_FS": true,
+    "own_prepared_input_bodies_exact": 30,
+    "fresh_current_own_origin_records": 5,
+    "own5_prefix_config_launcher_rebindings_modes_bodyhash_exact": true,
+    "Doctor_exit0": true,
+    "Toolkit96_retained_log_and_exit0": true,
+    "focused_JUnit_unique_complete_cells": 104,
+    "focused_passed": 103,
+    "focused_existing_skipped": 1,
+    "focused_failures": 0,
+    "focused_errors": 0,
+    "full_configured_static_exit0_type_files": 352,
+    "eight_generated_outputs_and_all30_tracked_GitHub_YAML_current_SHA_exact": true,
+    "future_attempt_directory_absent": true,
+    "source_and_preexecution_scripts_AST_syntax_review_only": true,
+    "reviewer_tests_imports_helper_preflight_gateway_downloads_source_index_mutations": false
+  },
+  "producer_boundary": {
+    "current_producer_paths": 275,
+    "original_native_producer_paths": 268,
+    "old_equal": 259,
+    "old_changed": 9,
+    "new_added": 7,
+    "five_selected_test_inputs_separate": true,
+    "qualification": "OLD_NATIVE_UNQUALIFIED_FOR_CURRENT_SOURCE_NO_EXCLUSIONS",
+    "original_native1192_helpers_browser_unchanged_data_only_retention": "Historical retained data, not current native execution or cleanup acceptance"
+  },
+  "historical_failure_and_scope": {
+    "old499_SOURCEFULL1305PASS13SKIP": "Historical source only, not current12dd qualification",
+    "old499_CI_checks": 19,
+    "old499_CI_SUCCESS": 18,
+    "old499_CI_FAILURE": 1,
+    "old_windows_job": 114480645718,
+    "old_run": 38143045413,
+    "API_synthetic": "e159d9755a4dfc97341e880ae539837f44485c2e",
+    "API_tree": "e13ba51b094e429b7c06d6dabbbcc348cc66e86c",
+    "API_parents": [
+      "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+      "499a83d802ca9a0e2ebe3d77071af10625879297"
+    ],
+    "original_logged_checkout": "UNKNOWN_LOG_NOT_ACQUIRED",
+    "failure_phase_cause": "UNKNOWN_NO_INFERENCE",
+    "original_pre_API_zero_byte_failure_preserved": true,
+    "original_historical_guide_physical_inspector_failure_preserved": true,
+    "one_original_connector_log_proposal": "Concrete acquisition proposal only; requires distinct root authorization. No acquisition/retry by reviewer."
+  },
+  "preexecution_payload_review": {
+    "managed_activation19_cached_preflight": "Source-bound exports/PATH, own prefix/environment/source checks before unchanged gateway",
+    "worker_environment": 2,
+    "unchanged_Runtime_command": "toolkit.poetry(action_server, run, invoke, test-not-integration)",
+    "RCC_managed_primary_0700_and_ignored_fixture_0711": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "source_and_owner_SHA_guards_before_gateway": true,
+    "separate_post_guard_payload": "Exact current1424/119/source/native/prepared invariants, post capacity threshold not asserted",
+    "root_auth_payload_guards": "Exact head/tree/source_LIGHT/fullproposal/attempt1/slot clearance+hash-bound independent review. GO prefix is scope-sensitive; root must bind a FULL-preexecution GO, not this LIGHT-only GO.",
+    "announced_command": "Bare bash argv; child600TERM+10 enforced.640 primary/60post and whole900 require a named exact root orchestration/adoption.",
+    "future_owned_dir": "/workspace/engineering/pr313-current12dd-configured-full-once-owned",
+    "current_FULL_NOT_RUN": true
+  },
+  "blocking_preexecution_finding": {
+    "finding": "Announced4918 command starts bash directly; no640 wrapper or60 post wrapper or900 whole parent is executable in that command, and no bound parent ensures primary terminal is retained before post on returned failures.",
+    "source_or_GATE_predicate_defect": false,
+    "minimum_successor_or_root_adoption": "Provide/freeze one exact parent argv/code: outer900TERM+10 around exactly one primary640TERM+10 of announced barebash argv and always separate post60TERM+10. Root private exclusive stdio/auth/terminal, preserve original primary status/output before post, return failure if either fails; external expiry/I_O incompleteness remains UNKNOWN. Review exact parent before release. No product/source/test changes needed.",
+    "required_pre_release_capacity_bytes": 1200000000,
+    "distinct_ONE_root_release_and_exclusive_heavy_slot_required": true,
+    "no_execution_authorized_by_this_receipt": true
+  },
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "Exact_reused_patches": [
+      {
+        "path": "/workspace/engineering/pr313-actual300-refresh/canonical-original-cleanup-lesson-retained.patch",
+        "bytes": 1445,
+        "sha256": "0bd405f1149f1acbd5a146833fefd5aa78bdf755b3d7237895ff72f5e9fdc277"
+      },
+      {
+        "path": "/workspace/engineering/pr313-actual300-refresh/canonical-target-prepared-RCC-lesson-imported.patch",
+        "bytes": 1202,
+        "sha256": "b78f7d2291673b4647dc11e455b952ee661b0f8796b11d4a9bc5aceafa88c8fa"
+      }
+    ],
+    "Original_cleanup_added_lines": 12,
+    "Imported_prepared_RCC_added_lines": 8,
+    "Durable_learning": "Exclusive Popen ownership/deadline and distinct live/zombie/error states; concrete own prepared prefixes do not provide ignored pinned RCC fixture bytes. Historical guide bindings use authenticated old Git blobs, not current merged FS.",
+    "Evidence": [
+      {
+        "path": "/workspace/engineering/pr313-actual300-refresh/OWNERFINAL-pr313-current-actual300-ordinary-refresh-SOURCE_LIGHT.json",
+        "bytes": 14737,
+        "sha256": "0171ef23a625807d6f09dabcc25b9695ee622ca570f8b8800a75433c7a1bcbbb"
+      },
+      {
+        "path": "/workspace/engineering/pr313-actual300-refresh/after-light-complete-current-source-and-retained-bindings-v2.json",
+        "bytes": 425534,
+        "sha256": "a52d4eed9e0ad854dba63ae94c3f6b51f247be3dcceaaa0daf9c7ee105082f04"
+      },
+      {
+        "path": "/workspace/engineering/pr313-actual300-refresh/original499-tracked-guide-exact-Git-snapshot.md",
+        "bytes": 250724,
+        "sha256": "126a062f4b84491d0e027d8f100544a6f6782607b83151ae408e531ba05a330e"
+      }
+    ],
+    "Stale_guidance_removed": "Old499 full/CI are historical; automatic union preserves both parent lessons without cosmetic child. Child deadline cannot be claimed as complete parent bound.",
+    "Remaining_uncertainty": "Current FULL/hosted/Windows failure actual checkout and phase; native/provider/browser/platform/private/release acceptance remain unqualified.",
+    "Disposition": "Verified exact meaningful canonical parent lessons accepted/reused; no reviewer source changes."
+  },
+  "Upstream_disposition": "none"
+}

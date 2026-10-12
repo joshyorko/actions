@@ -1,0 +1,233 @@
+{
+  "actual_original_outcome_bindings": [
+    {
+      "bytes": 467,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-B28-one-exact-TMP-relocation-outer-owned/one-original-relocation-operation-original-terminal.json",
+      "sha256": "0cd057982e00bf0c0f6ef10dce2dac7b908cd5db9d097b533783e01d7d5e28b6"
+    },
+    {
+      "bytes": 130,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-B28-one-exact-TMP-relocation-outer-owned/original-root-outer-terminal.json",
+      "sha256": "694aa0aa2a979ed824214b87dd3fc0d7b96d03eb05c525d59b33c4d1ad4b0ec9"
+    },
+    {
+      "bytes": 315,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-B28-one-exact-TMP-relocation-outer-owned/root-independent-all-outcome-data-post-original-terminal.json",
+      "sha256": "cdce10e1d9f7b89af68b87a83e79a07e1a277284916b6ae623505bad5c90562a"
+    },
+    {
+      "bytes": 544,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-B28-one-exact-TMP-relocation-outer-owned/root-independent-all-outcome-data-post.stdout.private.log",
+      "sha256": "916356d9abc4eecbe36508e05aaf172c838d2ba641f6b26c24e7811c529c63b8"
+    },
+    {
+      "bytes": 398,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-B28-one-exact-TMP-relocation-owned/protected-before.json",
+      "sha256": "9de74829321bd3dac2c44cadab785a8fcb5f1958f1c7f1971982d00eb63a7ed0"
+    },
+    {
+      "bytes": 398,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-B28-one-exact-TMP-relocation-owned/protected-after.json",
+      "sha256": "9de74829321bd3dac2c44cadab785a8fcb5f1958f1c7f1971982d00eb63a7ed0"
+    }
+  ],
+  "actual_owner_binding": {
+    "bytes": 738,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-B28-one-exact-TMP-relocation-outer-owned/OWNERFINAL-root-one-original-exact-TMP-relocation.json",
+    "sha256": "bc6fa7297f84d3696b34f46d9abad750fb0649cdd83d21c29098ad8f2a960de3"
+  },
+  "actual_terminal_binding": {
+    "bytes": 130,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-B28-one-exact-TMP-relocation-owned/original-one-relocation-terminal.json",
+    "sha256": "83c176e87e07586a355e8269b224d38be88fccf0794ba2ab19707bcd54b3156d"
+  },
+  "both_postguards": "Driver protected before/after and root independent data post protected results match; no failure-upgrade and universal_quiescenceUNKNOWN.",
+  "capacity_scope": "Captured amounts only; future full/native requires its own fresh floors and distinct authorization.",
+  "consumed_root_release_binding": {
+    "bytes": 2291,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-B28-one-exact-TMP-relocation-owned/consumed-root-release.json",
+    "sha256": "6a32ab76045b9233e6c45628f65cc38ef1288c67a085897b72bb5eb412f3ee0c"
+  },
+  "count_only_successor_binding": {
+    "bytes": 16422,
+    "mode": "0o444",
+    "path": "/workspace/engineering/capacity-recovery-B28-one-exact-TMP-relocation-source/OWNERFINAL-one-exact-TMP-archive-relocation-PREEXECUTION-metadata-successor.json",
+    "sha256": "9d2006f15e769d70d25420b4e9ae6fd55a1f845029b6d8e813b3c4517e1ab19b"
+  },
+  "decision": "GO_ONE_EXACT_B28_TMP_ARCHIVE_RELOCATION_ACTUAL_STORAGE_PRESERVATION",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; existing exact completed-scratch7d070 and reviewed archive-alias9dd800 paragraphs reused unchanged.",
+    "Durable_learning_captured": "Preserve original immutable artifact identity and index with an explicitly reviewed alias; verify all original bytes and internal hardlinks before physical path removal; archival/relocation never upgrades a failed execution.",
+    "Evidence": [
+      {
+        "bytes": 1593,
+        "mode": "0o400",
+        "path": "/workspace/engineering/capacity-recovery-B28-one-exact-TMP-relocation-independent-review/independent-actual-exact-relocation-stream-and-protected-input-proof.json",
+        "sha256": "576f7d952e42bbf0287d4c4fe0fc96976c3688336ca165a205a1d3e0a6d82613"
+      },
+      {
+        "bytes": 1466,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-B28-one-exact-TMP-relocation-owned/exact-original-path-to-new-physical-archive.json",
+        "sha256": "ce1450945a28a00611dff941ddcb0c414f281b7f32bbe004eb200435baa04f7f"
+      },
+      {
+        "bytes": 632,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-B28-one-exact-TMP-relocation-owned/verified-copy-before-source-unlink.json",
+        "sha256": "b14ff3b511d3f21c0fbbb6b027ba1b9a4f760ada2638c1fe846bf82286645544"
+      }
+    ],
+    "Exact_delta": [
+      {
+        "bytes": 1068,
+        "mode": "0o600",
+        "path": "/workspace/engineering/capacity-recovery-independent-review/canonical-completed-scratch-preservation-proposed.patch",
+        "sha256": "7d07065b5bb7742698919997c8c6621cc20d00494741eb5365251ffb09f2d208"
+      },
+      {
+        "bytes": 846,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/canonical-exact-historical-receipt-archive-alias-proposed.patch",
+        "sha256": "9dd8008b4194f7cd9848796c7c7b5639862271e73ee222da46d5a59ef501d8ad"
+      }
+    ],
+    "Remaining_uncertainty": "Future fresh capacity, engineering qualification and universal process cleanup require separate evidence; existing exact paragraphs suffice, no cosmetic duplicate.",
+    "Stale_or_ambiguous_guidance_removed": "The original physical pathname is absent after successful relocation but original artifact identity remains unchanged; old indices and failing receipts are preserved, not rewritten."
+  },
+  "failure_protocol_limits_retained": {
+    "after_successful_unlink": "Source physical pathname may remain absent even if fsync/postguard/receipt later fails. Keep fsynced verified copy and mapping, classify FAIL/HOLD, no rollback or old-path recreation.",
+    "before_unlink": "Original physical archive retained; partial destination/private evidence retained on failure, no cleanup/retry.",
+    "pre_try_or_forced_outer_kill": "Driver postguard/terminal may be unavailable; root separate attempt and missing-evidence HOLD required."
+  },
+  "independent_stream_and_protected_input_proof": {
+    "bytes": 1593,
+    "mode": "0o400",
+    "path": "/workspace/engineering/capacity-recovery-B28-one-exact-TMP-relocation-independent-review/independent-actual-exact-relocation-stream-and-protected-input-proof.json",
+    "sha256": "576f7d952e42bbf0287d4c4fe0fc96976c3688336ca165a205a1d3e0a6d82613"
+  },
+  "mapping_binding": {
+    "bytes": 1466,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-B28-one-exact-TMP-relocation-owned/exact-original-path-to-new-physical-archive.json",
+    "sha256": "ce1450945a28a00611dff941ddcb0c414f281b7f32bbe004eb200435baa04f7f"
+  },
+  "new_destination_binding": {
+    "all_new_physical_metadata": "EXACT_MAPPING; new inode/device/allocated correctly distinct from original",
+    "bytes": 248921681,
+    "gid": 1000,
+    "mode": "0o600",
+    "parent_mode": "0o700",
+    "path": "/workspace/engineering/retained-capacity-archives-B28-relocation/dd09121ba364f685.tar.gz",
+    "sha256": "28e391747a904f4162e01a0b95ea67ea43bc4db8159f21345af65889ab4680b5",
+    "uid": 1000
+  },
+  "one_attempt_admission": {
+    "automatic_retry": "NONE_RECORDED",
+    "exact_root_release": "PASS_ORIGINAL998ffe_PREEXEC29d2_ACTUALa26ca4_SCRIPTd6d6",
+    "operation_argv": "EXACT_REVIEWED600_TERM10",
+    "operation_parent_timeout_seconds": 640,
+    "operation_returncode": 0,
+    "outer_kill_after_seconds": 10,
+    "outer_returncode": 0,
+    "outer_timeout_seconds": 900,
+    "root_post_parent_timeout_seconds": 135,
+    "root_post_returncode": 0,
+    "root_post_timeout_seconds": 120
+  },
+  "original_archive_preservation": {
+    "all_new_physical_fields": "EXACT_MAPPING",
+    "bytes": 248921681,
+    "internal_hardlink_headers": 3,
+    "members": 14805,
+    "original_SHA_body_modeUIDGID_mtime_nlink": "EXACT",
+    "root_headers": 1,
+    "sha256": "28e391747a904f4162e01a0b95ea67ea43bc4db8159f21345af65889ab4680b5",
+    "types": {
+      "directory": 2825,
+      "fifo": 7,
+      "file": 11570,
+      "symlink": 403
+    },
+    "whole_gzip_CRC_ISIZE": true
+  },
+  "original_index": "Exact SHA797646 and all original captured physical metadata unchanged; no alias/index rewrite.",
+  "original_old_path": "ABSENT_AFTER_EXACT_UNLINK; original captured binding retained in mapping and untouched original index.",
+  "original_proposal_binding": {
+    "bytes": 14860,
+    "mode": "0o444",
+    "path": "/workspace/engineering/capacity-recovery-B28-one-exact-TMP-relocation-source/OWNERFINAL-one-exact-TMP-archive-relocation-PREEXECUTION.json",
+    "sha256": "998ffe3c30136221e8629b5534d38b0f00b573b0efaa0731edd078bcf0134d11"
+  },
+  "preexecution_independent_binding": {
+    "bytes": 13728,
+    "mode": "0o400",
+    "path": "/workspace/engineering/capacity-recovery-B28-one-exact-TMP-relocation-independent-review/OWNERFINAL-independent-one-exact-TMP-archive-relocation-PREEXECUTION-review.json",
+    "sha256": "29d2a990b25df39923f85db5b7c0daa1a0bedae57978107c9afff9b6c76c7798"
+  },
+  "protected_inputs": {
+    "exact_new_physical_alias_rows": 1,
+    "failed2_history": "Existing hash-bound originals rehashed in immutable/qualified rows; failures unchanged",
+    "failed563": "EXISTENCE_ONLY unchanged; not compressed/mutated or requalified",
+    "historical_failed1_member": "OriginalFAIL/member modeUIDGID/digest verified in retained archive",
+    "historical_source_Git_fixture": 1,
+    "immutable_complete_index_rows_measured": 27,
+    "immutable_files": 137,
+    "immutable_tar_gz_rows_measured": 62,
+    "native_members_complete_inventory": 1192,
+    "prepared_inputs": 30,
+    "qualified_originals": 237,
+    "source_body_Git_FS_mode_rows": 1426
+  },
+  "remaining_uncertainty": [
+    "Global/unreadable process quiescence and original cleanup remain UNKNOWN; no signals/waits/reaps performed.",
+    "Original TAR timestamp precision, ACL/xattrs/rootmetadata and historical scope remain unrecorded; exact compressed bytes preserved, no precision upgrade.",
+    "Storage preservation does not qualify prior failed RCC controls, newer versions5/7276, private/native/provider/consumer/platform/release gates or production source."
+  ],
+  "reviewer_operations": "Read-only original receipts/release/code AST, compressed whole-SHA/member stream/fullgzip, exact data/source Git metadata. Owned independent script/receipts only; no copy/unlink/download/extraction/native/import/gate/source/index/ref mutation.",
+  "root_capacity_at_capture": {
+    "/dev/shm": 3901190144,
+    "/tmp": 1419046912,
+    "/workspace": 1382936576
+  },
+  "root_post_code_binding": {
+    "bytes": 1957,
+    "mode": "0o444",
+    "path": "/workspace/engineering/root-B28-one-exact-TMP-relocation-postguard.py",
+    "sha256": "58880e80665e6546ef9c99961491d1059261a77c0811b96269802a64b9d841ba"
+  },
+  "root_release_adoption": "Exact parsed body equality; differing serialized original/consumed bytes retained, not described as byte-identical.",
+  "root_release_binding": {
+    "bytes": 2291,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-B28-one-exact-TMP-relocation-release.json",
+    "sha256": "44d9360badd9847559bb12970b78b74272735c2897d7be061d16837ddca72bcd"
+  },
+  "schema": "INDEPENDENT_ACTUAL_ONE_EXACT_TMP_ARCHIVE_RELOCATION_STORAGE_PRESERVATION",
+  "scope": "One named compressed archive physical relocation only, unchanged original identity and index; no engineering gate or execution qualification.",
+  "source_clean_final_bracket": "VERIFIED",
+  "source_head": "396925cb3d6527af1768b7f5333f9653c005fc55",
+  "source_tree": "84f850f0d4e08b21afcd8220413ce94322370acf",
+  "unchanged_script_binding": {
+    "bytes": 14264,
+    "mode": "0o444",
+    "path": "/workspace/engineering/capacity-recovery-B28-one-exact-TMP-relocation-source/relocate_one.py",
+    "sha256": "d6d6aedf6c4760eb0afaa40978627137ea15fc63f87cd365aa53ddf283983c8f"
+  },
+  "upstream_disposition": "none",
+  "verified_copy_before_unlink_binding": {
+    "bytes": 632,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-B28-one-exact-TMP-relocation-owned/verified-copy-before-source-unlink.json",
+    "sha256": "b14ff3b511d3f21c0fbbb6b027ba1b9a4f760ada2638c1fe846bf82286645544"
+  }
+}

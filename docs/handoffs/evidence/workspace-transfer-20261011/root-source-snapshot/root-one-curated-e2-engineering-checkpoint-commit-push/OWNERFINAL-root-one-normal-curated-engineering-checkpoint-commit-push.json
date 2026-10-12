@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "status": "ROOT_CURATED_CHECKPOINT_ACTION_OR_READBACK_HOLD",
+  "previous_HEAD": "62f4e180f6c894777ebc8ed3a729e88d2f6531d6",
+  "commit": null,
+  "tree": null,
+  "sole_parent": "62f4e180f6c894777ebc8ed3a729e88d2f6531d6",
+  "branch": "handoff/actions-swarm-mk3-wave8-20261010",
+  "allowed_documentation_paths": 96,
+  "copied_safe_bodies": 84,
+  "copied_safe_bytes": 683868,
+  "unmodified_original_tracked_bodies": 3471,
+  "precommit_owner": {
+    "path": "/workspace/engineering/checkpoint-curated-successor-source-20261011/OWNERFINAL-curated-existing-checkpoint-current-e2-documentation-PRECOMMIT-review-v4.json",
+    "bytes": 11184,
+    "sha256": "7b121f00070a4a46380354b9045f98d901d3f01993fc03201f7ed6c87db70206",
+    "mode": "0o400"
+  },
+  "independent_GO": {
+    "path": "/workspace/engineering/checkpoint-curated-successor-independent-review/OWNERFINAL-independent-curated-current-e2-documentation-PRECOMMIT-V4-GO.json",
+    "bytes": 6983,
+    "sha256": "d71837646ea63148b465f9993018f141b7a50f3f4cf834d6997b3b910611e95f",
+    "mode": "0o600"
+  },
+  "clean_worktree": false,
+  "error": {
+    "class": "AssertionError",
+    "message": "git_diff_failed",
+    "phase": "before-commit"
+  },
+  "no_force_rebase_replacement_branch_product_release_native_qualification_or_graph_completion": true,
+  "recorded_utc": "2026-10-11T17:17:49.316268+00:00"
+}

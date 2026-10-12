@@ -1,0 +1,29 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -3000,8 +3000,12 @@
+ browser gate unaccepted even when the command returned zero and persisted tool
+ Runs succeeded. Search retained command, worker and supervisor evidence for an
+ authoritative copy; a last-run marker cannot reconstruct the missing report.
+-Any later reporter-channel parser must bind the locked schema and measured
+-launch path; a DEBUG path does not establish live PID identity.
++The qualified external reader can admit worker stderr from the validated named
++case's `result.stderr`, as well as outer stderr. Decode only the locked reporter's
++recognized text or base64 chunks after the exact-case/result gate succeeds;
++unknown fields, another case or the wrong measured launch path remain failures.
++Parser qualification does not recover missing earlier bytes or establish actual
++browser acceptance. A DEBUG path does not establish live PID identity.
+ 
+ After a target advances, a PR payload can retain its old base SHA and synthetic
+ merge commit. Authenticate their ordered parents and complete tree against the
+@@ -3022,3 +3026,11 @@
+ reported by pinned Poetry. Filename selection alone does not admit the archive.
+ Keep member identity separate from the whole-wheel digest, which binds bytes but
+ does not prove installation or a provider-backed run.
++
++The private Run output resolver locks its Workspace, checks the actor's grant
++and acquires the provider reader within one transaction, then yields the reader
++after the transaction exits. Revocation denies future acquisitions; reads on an
++already authorized reader do not recheck the grant. The existing denial test
++uses a failing provider-open sentinel for a denied principal, wrong Workspace
++and revoked grant. This proves denial before reader acquisition, not active-stream
++revocation, public authenticated transport or HTTP Range/HEAD acceptance.

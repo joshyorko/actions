@@ -1,0 +1,259 @@
+{
+  "activation": {
+    "ACTIONS_CLOUD_ROOT": "/workspace/actions-cloud",
+    "ACTIONS_HOME": "/workspace/actions-cloud/actions-home",
+    "ACTIONS_RUNTIME_TEST_PYTHON": "/workspace/actions/action_server/.venv/bin/python",
+    "BUILDX_CONFIG": "/workspace/actions-cloud/cache/buildx",
+    "GOCACHE": "/workspace/actions-cloud/cache/go-build",
+    "GOMAXPROCS": "2",
+    "GOPATH": "/workspace/actions-cloud/cache/go",
+    "PLAYWRIGHT_BROWSERS_PATH": "/workspace/actions-cloud/cache/playwright",
+    "POETRY_CACHE_DIR": "/workspace/actions-cloud/cache/pypoetry",
+    "POETRY_CONFIG_DIR": "/workspace/actions-cloud/config/pypoetry",
+    "POETRY_NO_INTERACTION": "1",
+    "PYTEST_XDIST_AUTO_NUM_WORKERS": "2",
+    "ROBOCORP_HOME": "/workspace/actions-cloud/robocorp",
+    "ROBOTS_HOME": "/workspace/actions-cloud/robots-home",
+    "UV_CACHE_DIR": "/workspace/actions-cloud/cache/uv",
+    "XDG_CACHE_HOME": "/workspace/actions-cloud/cache",
+    "XDG_CONFIG_HOME": "/workspace/actions-cloud/config",
+    "npm_config_cache": "/workspace/actions-cloud/cache/npm"
+  },
+  "basetemp": "/workspace/engineering/root-one-memory17-pure-controls-20261011-2/basetemp",
+  "envelope": {
+    "after_seconds": 120,
+    "all_kill_grace_seconds": 10,
+    "before_seconds": 120,
+    "primary_seconds": 120,
+    "root_parent_seconds": 420
+  },
+  "expected_test_census": {
+    "errors": 0,
+    "failed": 0,
+    "passed": 17,
+    "skipped": 0,
+    "unique_cases": 17
+  },
+  "forbidden_operator_exports": [
+    "ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY",
+    "ACTIONS_REAL_RCC_ARTIFACT_TEST",
+    "ACTIONS_RUNTIME_RCC_PROVIDER",
+    "ACTIONS_RUNTIME_RCC_BINARY",
+    "ACTIONS_RUNTIME_RCC_TEST_PACKAGE_CACHE_CONFIG",
+    "PYTHONOPTIMIZE"
+  ],
+  "frozen_bindings": [
+    {
+      "bytes": 7361,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/root_release_one_memory17_pure_controls_NOTRUN.py",
+      "sha256": "68d230410d0ff42f3c65dea09c0cd5e5b191a24e70ad3871efbb5dd2bf8201b0"
+    },
+    {
+      "bytes": 2985,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/test_proposed_cgroup_memory_state_NOTRUN.py",
+      "sha256": "3b3a417379f608b6a5917c7720c6e846352f88d30fda1273c301a7c5ced1a4cb"
+    },
+    {
+      "bytes": 3330,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/proposed_cgroup_memory_state_v1_NOTRUN.py",
+      "sha256": "d2b3e6684898ab1b64f84ac7712a1f2f355d7ea5d680eb6ded0699cc090f5260"
+    },
+    {
+      "bytes": 765564,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+      "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25"
+    },
+    {
+      "bytes": 12996,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/frozen-current8d49-source-LIGHT-inputs-v3.json",
+      "sha256": "81f52920b50e67619b3bb418a7c1034a2106ec52f4badd71b9d85e29b7376820"
+    },
+    {
+      "bytes": 987,
+      "mode": "0o600",
+      "path": "/workspace/actions-cloud/activate.sh",
+      "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+    },
+    {
+      "bytes": 444,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/initial-metadata-construction-PATH-variable-expression-FAIL.json",
+      "sha256": "8f796eb0414c996936abf5bacd6da17778e9fb4f371089aed76a81fc71c1ad5d"
+    },
+    {
+      "bytes": 4690,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/readonly_current_input_guard_v9.py",
+      "sha256": "480be06317562b7e3a5c98a5d794bb5d2a33e7fa6186fe707823ecb1cc583626"
+    },
+    {
+      "bytes": 1575,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/v9_entry_bootstrap.py",
+      "sha256": "d3957c2e216731abf596897fbf0838809129a571743510692f2509228e2c7288"
+    },
+    {
+      "bytes": 6603,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-next-native-memory-plan-independent-review/OWNERFINAL-independent-memory17-prepared-source-and-executable-HOLD-v2.json",
+      "sha256": "d7068aab83b03c9495e5bd80a93ca750b7d66df818fee93869b5b52b3fd66ece"
+    },
+    {
+      "bytes": 5944,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-control3-V9-original-publish-failure-diagnosis-owned/OWNERFINAL-original-current8d49-control3-V9-publication-failure-and-secondary-dependency-only.json",
+      "sha256": "feef7c4b07db2d3a778622dc1acf3eec00a8225c42b38aa00721926fb273410b"
+    },
+    {
+      "bytes": 6858,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-control3-V9-independent-actual-review/OWNERFINAL-independent-original-current8d49-control3-V9-native-FAIL-STOP-review.json",
+      "sha256": "cb88815f6d1816ff7f8b5302420d69bd7cacb0d052fe2ba3c957ddad5e596168"
+    },
+    {
+      "bytes": 900,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/canonical-shared-cgroup-headroom-vs-filesystem-capacity-proposed.md",
+      "sha256": "8c28fc2596c6fdfc607dd35a17b3462ad217ba97670b61222393dc504861d896"
+    },
+    {
+      "bytes": 8538,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-managed-primary700-once2-preexecution-NOTRUN/root_release_one_memory17_managed_primary700_once2_NOTRUN.py",
+      "sha256": "a91ec3fbe4aef23f49b6178459b87d1b5e72d18f69214a8c2f129af5eeeb486b"
+    },
+    {
+      "bytes": 7739,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/FROZEN-memory17-pure-control-config-NOTRUN-v2.json",
+      "sha256": "e90827940b61e3ddb906ff0576a2ea37cd6ee7297986cc78c62844f5a888b402"
+    },
+    {
+      "bytes": 8242,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/OWNERFINAL-memory17-concrete-pure-control-launcher-config-and-root-once-preexecution-NOTRUN-v2.json",
+      "sha256": "56d2b731ffcd6bcb3ebf5d752086e6bc30249f423279964d64271f8c8deb676f"
+    },
+    {
+      "bytes": 4021,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-concrete-independent-preexecution-review/OWNERFINAL-independent-memory17-concrete-config-launcher-and-ROOT-preflight-PREEXEC-review.json",
+      "sha256": "710c0ae33ff6c523ca5aae04f674f1e3a9d8df97883bc22549d7d53aab9deaa8"
+    },
+    {
+      "bytes": 5250,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-original-mode-admission-failure-independent-review/OWNERFINAL-independent-original-memory17-managed-mode-admission-FAIL-and-source-preservation.json",
+      "sha256": "12177ef012b94dab8e9e658d488db0bb147d37b2d3bc26454147aabaff2541d7"
+    },
+    {
+      "bytes": 727,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-memory17-reviewed-original-outer/OWNERFINAL-root-one-original-reviewed-memory17-outer.json",
+      "sha256": "277e37a3be16f8bd6c5bd8945c656bec37284ae7e2cda396b20a3142c809c650"
+    },
+    {
+      "bytes": 836,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-memory17-pure-controls-release.json",
+      "sha256": "5afbfc6f31f6b063e7cd201a79ee2fe88834c16e3333abbefbbcd58f08ac8375"
+    },
+    {
+      "bytes": 1069,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-original-mode-admission-failure-independent-review/canonical-measured-per-path-binary-mode-before-delegation-proposed.patch",
+      "sha256": "15ca1e894890c2d2bd383139088cf3946a3e4c89e30e2a82cd3e96b4b48e5e1b"
+    }
+  ],
+  "junit": "/workspace/engineering/root-one-memory17-pure-controls-20261011-2/junit.xml",
+  "launcher": {
+    "bytes": 8538,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-memory17-managed-primary700-once2-preexecution-NOTRUN/root_release_one_memory17_managed_primary700_once2_NOTRUN.py",
+    "sha256": "a91ec3fbe4aef23f49b6178459b87d1b5e72d18f69214a8c2f129af5eeeb486b"
+  },
+  "logger": "/workspace/engineering/root-one-memory17-pure-controls-20261011-2/logger",
+  "managed_pin_rule": "Exact regularnonsymlinkPRIMARYpath0700UIDGID1000size22282402SHA7e588 before actualguard/tests; no mode repair/chmod.",
+  "managed_rcc": {
+    "bytes": 22282402,
+    "gid": 1000,
+    "mode": 448,
+    "path": "/workspace/actions-cloud/bin/rcc",
+    "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "uid": 1000
+  },
+  "native_memory_policy": "NOT_ADOPTED; test-only proposed thresholds remain uncalibrated",
+  "original_concrete_PREEXEC": {
+    "bytes": 4021,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-memory17-concrete-independent-preexecution-review/OWNERFINAL-independent-memory17-concrete-config-launcher-and-ROOT-preflight-PREEXEC-review.json",
+    "sha256": "710c0ae33ff6c523ca5aae04f674f1e3a9d8df97883bc22549d7d53aab9deaa8"
+  },
+  "original_concrete_config": {
+    "bytes": 7739,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/FROZEN-memory17-pure-control-config-NOTRUN-v2.json",
+    "sha256": "e90827940b61e3ddb906ff0576a2ea37cd6ee7297986cc78c62844f5a888b402"
+  },
+  "original_consumed_release": {
+    "bytes": 836,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-one-memory17-pure-controls-release.json",
+    "sha256": "5afbfc6f31f6b063e7cd201a79ee2fe88834c16e3333abbefbbcd58f08ac8375"
+  },
+  "original_failed_mode_admission": {
+    "bytes": 5250,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-memory17-original-mode-admission-failure-independent-review/OWNERFINAL-independent-original-memory17-managed-mode-admission-FAIL-and-source-preservation.json",
+    "sha256": "12177ef012b94dab8e9e658d488db0bb147d37b2d3bc26454147aabaff2541d7"
+  },
+  "original_root_failed_owner": {
+    "bytes": 727,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-memory17-reviewed-original-outer/OWNERFINAL-root-one-original-reviewed-memory17-outer.json",
+    "sha256": "277e37a3be16f8bd6c5bd8945c656bec37284ae7e2cda396b20a3142c809c650"
+  },
+  "originals": "No helper/test/source/sampler modifications; old V9 evidence bound through existing readonly guard config",
+  "path_prefix2": [
+    "/workspace/actions-cloud/bin",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin"
+  ],
+  "physical_operator_admission": "New launcher checks exact fresh config/release paths regular nonsymlink400/600/currentUIDGID1000 before JSON; launcher400sameowner. ROOT also repeats external preflight.",
+  "pytest_argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "120s",
+    "/workspace/engineering/pr308/action_server/.venv/bin/python",
+    "-m",
+    "pytest",
+    "-n0",
+    "-vv",
+    "-rA",
+    "--basetemp",
+    "/workspace/engineering/root-one-memory17-pure-controls-20261011-2/basetemp",
+    "--robocorp-log-output",
+    "/workspace/engineering/root-one-memory17-pure-controls-20261011-2/logger",
+    "-o",
+    "tmp_path_retention_policy=all",
+    "--junitxml",
+    "/workspace/engineering/root-one-memory17-pure-controls-20261011-2/junit.xml",
+    "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/test_proposed_cgroup_memory_state_NOTRUN.py"
+  ],
+  "root_release_path": "/workspace/engineering/root-one-memory17-pure-controls-managed700-once2-release.json",
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_guard_config": {
+    "bytes": 765564,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+    "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25"
+  },
+  "status": "MEMORY17_MANAGED_PRIMARY700_ONCE2_PREEXEC_PREPARED_NOTRUN",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+}

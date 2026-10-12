@@ -1,0 +1,11 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@
++Before running synthetic storage controls, choose a new, explicit owned
++`--basetemp` and verify that it is absent. Pytest may delete a supplied existing
++base directory, and its default numbered-root retention may reclaim older roots
++that another task has only inventoried. An inventory does not reserve its bytes.
++Serialize against retention-triggering tests until evidence roots are preserved;
++if a root vanishes, retain the failed admission and report its bodies unavailable
++without reconstructing them or attributing a particular cleanup invocation from
++directory numbers alone.

@@ -1,0 +1,388 @@
+{
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md, owning source/typecheck section",
+    "Durable learning captured": "For a namespace package declared with `from = \"src\"`, align a separately authorized Mypy probe's explicit package base with that physical source root. `--explicit-package-bases` reads MYPYPATH, configured mypy_path and cwd; a src directory argument alone does not declare src as the base. Scope the exact source-root path to the one invocation, preserve the original target files and flags, and retain editable-origin evidence. Do not add __init__.py, exclude files or weaken checks to hide duplicate module names. Devutils has no generic toolkit typecheck gate; this extra TOKENLIGHT probe does not create one. Record inherited path variables as unknown when the original run did not capture them.",
+    "Evidence": [
+      {
+        "bytes": 3319,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/configured-static/stdout.bin",
+        "sha256": "cdcc973d60dff364344e901e2a054c23f2c5bde0a3d4fa7400adb38fdf00a94b"
+      },
+      {
+        "bytes": 9362,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/devutils/.venv/lib/python3.12/site-packages/mypy/find_sources.py",
+        "sha256": "2ed1cae2224a974e5a5cede885e6f645ed8590aa3215f78eebc06317053e8d3b"
+      },
+      {
+        "bytes": 37888,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/devutils/.venv/lib/python3.12/site-packages/mypy/modulefinder.py",
+        "sha256": "0fe7a2a7a485fc3354a602fbb1f061f6efa6da7ef7f3f11aa865215418f82508"
+      },
+      {
+        "bytes": 42,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/devutils/.venv/lib/python3.12/site-packages/actions_local_devutils.pth",
+        "sha256": "78585e1eaaac65a2b434566fa74e33420ca7e7f0298de634bc32a37ac7e63ed8"
+      },
+      {
+        "bytes": 8893,
+        "mode": "0o755",
+        "path": "/workspace/engineering/pr307/developer/toolkit.py",
+        "sha256": "e1a3f96b57c31be2a0db5cdd3d63ce9ac243a9e8e29dff5ce6e07fd897fb605f"
+      }
+    ],
+    "Exact proposed delta": {
+      "bytes": 699,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current9760-once4-ACTUALFAIL-independent-review/canonical-namespace-source-base-and-separate-Mypy-probe-proposed.txt",
+      "sha256": "a335d05a25da80c3ff3553be26c24a282c6b90fe1298cb45ffd4b5135feab98a"
+    },
+    "Remaining uncertainty": "No corrected Mypy execution/module-map control performed here; additional real type errors may follow. Actual inherited MYPYPATH and terminal reader/descendant cleanup remain unknown; FULL/native/content/CI/releases HOLD.",
+    "Stale or ambiguous guidance removed": "A src argument with explicit-package-bases is not sufficient namespace base declaration. Editable import origins and target discovery must agree. Generic Devutils toolkit release has no typecheck gate; extra TOKENLIGHT typing is separate."
+  },
+  "Upstream disposition": "none",
+  "decision": "HOLD_SOURCE_PUSH_CURRENT_TOKENLIGHT_FULL_NATIVE_CONTENT",
+  "later_phases": {
+    "controlled_Invoke": "NOT_RUN",
+    "whole_affected_FULL": "MANDATORY_NOT_RUN",
+    "workflow_generation": "NOT_RUN"
+  },
+  "minimal_private_successor_proposal": {
+    "alternative": "Frozen isolated private Mypy config with only explicit absolute source-root mypy_path, same src/flags and captured config binding; do not change public Devutils pyproject just for this probe.",
+    "exact_code_template": "toolkit.run([\"poetry\", \"run\", \"mypy\", \"--follow-imports=silent\", \"--namespace-packages\", \"--explicit-package-bases\", \"src\"], toolkit.REPOSITORY_ROOT / \"devutils\", env_overrides={\"MYPYPATH\": str(toolkit.REPOSITORY_ROOT / \"devutils\" / \"src\")})",
+    "generic_toolkit_typecheck": "UNCHANGED; Devutils is explicitly skipped by declared generic toolkit typecheck",
+    "no_waivers": "No added __init__.py, excludes, ignore-errors, no-silent skipping, file removal, dependency change, or type-check scope reduction. Original once4 stays FAIL; no automatic retry.",
+    "preferred_change": "Only replace private extra Devutils Mypy helper invocation with the existing toolkit.run equivalent, exact scoped env_overrides MYPYPATH=/workspace/engineering/pr307/devutils/src. Keep owning cwd, own Poetry/venv, original src target and all three flags. Do not export globally or persist environment repair.",
+    "required_control_scope": "Before any new gateway, static exact invocation/config address/target scope proof plus finite owning module-map baseline for this source root and rejected wrong base; any new meaningful type errors remain FAIL. Separately freeze once5 SOURCE-preserving PREEXEC/current30/selfconfig/ROOT release closure. ROOT owns all checks/execution.",
+    "source_application_change": "NONE; preserve current9760"
+  },
+  "module_base_source_attribution": {
+    "Devutils_tool_mypy_table": "ABSENT",
+    "actual_inherited_MYPYPATH": "UNREPORTED/UNKNOWN; activation snapshot has no such field, no claim of original unset environment",
+    "cause_scope": "Observed duplicate module identity and source-supported explicit-base mismatch, not a product semantic failure or upstream defect",
+    "declared_src_namespace": "packages include devutils/from src; no src or package __init__.py",
+    "editable_pth_source_root": "/workspace/engineering/pr307/devutils/src",
+    "installed_Mypy_explicit_bases": "MYPYPATH + options.mypy_path + cwd",
+    "namespace_crawl": "Stops at an explicit base; with src base module name becomes devutils._system_mutex_in_tests, matching fixtures absolute import. Without src base cwd can name it src.devutils._system_mutex_in_tests."
+  },
+  "operations": "Read-only exact original bytes, stdlib XML/TOML parsing, installed-source reading and no-optional-locks Git body/hash comparisons. No tests/imports/typecheck/runtime/environment repair/source mutation/download/push/merge.",
+  "original_ROOT_owner": {
+    "bytes": 1172,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-pr307-current9760-reviewed-token-light-once4-outer/OWNERFINAL-root-one-original-reviewed-current9760-token-light-once4-outer.json",
+    "sha256": "567e8d1c94685bb569993713f9c59cb741866ee2c205aa9885cecd3957c50eb4"
+  },
+  "original_actual_evidence_bindings": [
+    {
+      "bytes": 1172,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-pr307-current9760-reviewed-token-light-once4-outer/OWNERFINAL-root-one-original-reviewed-current9760-token-light-once4-outer.json",
+      "sha256": "567e8d1c94685bb569993713f9c59cb741866ee2c205aa9885cecd3957c50eb4"
+    },
+    {
+      "bytes": 678,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once4-PREEXECUTION-NOTRUN/root-one-TOKEN-LIGHT-once4-release.json",
+      "sha256": "f25a808041054c92fe6c91876eccc7071c467a6399b3d8440c0558de91ad2f38"
+    },
+    {
+      "bytes": 9384,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current9760-owning-settings-independent-SOURCE-and-once4-review/OWNERFINAL-independent-current9760-owning-settings-TOKEN-LIGHT-once4-PREEXECUTION-GO.json",
+      "sha256": "7cb84f5edff1e0aa4fb99c9e065283dafae83f9965e6a30aac57b559265348ea"
+    },
+    {
+      "bytes": 279,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/original-terminal.json",
+      "sha256": "00d10dd81a6d383ef325ecd3c3541d53eae519e93a7ac29135e37f9e13860853"
+    },
+    {
+      "bytes": 30055,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/toolkit/junit.xml",
+      "sha256": "fb6417a38ee73ac88b0c95e97c4cf816f851540b9c1b6c1038d2d4e8cb28844f"
+    },
+    {
+      "bytes": 1460,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/toolkit/stdout.bin",
+      "sha256": "9e437570b717c3fe7abeab4cf3b1bed4d850c97748bcde07f98aee04238a41f8"
+    },
+    {
+      "bytes": 13152,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/toolkit/stderr.bin",
+      "sha256": "f137589336f77a632d314345cc0efb03a6a810f240ade06af20de1fd0b9eccab"
+    },
+    {
+      "bytes": 442,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/toolkit/terminal.json",
+      "sha256": "ea9d4bfbc6b79cac15c6beb3a077258e9349147dcc6f5cc27123086be6af60e3"
+    },
+    {
+      "bytes": 4496,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/token-RED-parent2314/junit.xml",
+      "sha256": "a714577bab8c61ed3fc5327115631d624c2a964301b0a32491d9b8682a3b0b66"
+    },
+    {
+      "bytes": 5433,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/token-RED-parent2314/stdout.bin",
+      "sha256": "7f015fb5c5cbf35625a2d5452685b78962738d91a0f9a71c1e3096092c0529b1"
+    },
+    {
+      "bytes": 4849,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/token-RED-parent2314/stderr.bin",
+      "sha256": "18a112898e12f8ee6a2e096c4d56cecd6e13474b149299462f7a65560c927a98"
+    },
+    {
+      "bytes": 678,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/token-RED-parent2314/terminal.json",
+      "sha256": "3c64ee9613e3e73f39faa4a24c534b2cb8ec952e797e3f42b576852c814d151a"
+    },
+    {
+      "bytes": 16357,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/token-release-line-GREEN/junit.xml",
+      "sha256": "f369809e6db5824dea4d14b6a8ae2de76a8ef9bf448ee097d23ec84d2dc42b16"
+    },
+    {
+      "bytes": 13993,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/token-release-line-GREEN/stdout.bin",
+      "sha256": "c683633e66068356ffc28e7612a9c91c5f235540249b27723b4d40718066d5eb"
+    },
+    {
+      "bytes": 3524,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/token-release-line-GREEN/stderr.bin",
+      "sha256": "c480eb30256947868ae1da207b8922352a3f3e9ad2e561129b978b648a369905"
+    },
+    {
+      "bytes": 650,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/token-release-line-GREEN/terminal.json",
+      "sha256": "149b6e2e073c79c74f31d9686acd546fe354d8361b03db2c620ef01fd8e42856"
+    },
+    {
+      "bytes": 6813,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/guard-focus/junit.xml",
+      "sha256": "6aa92d2569224092aaecf48a38b6adda27632f549356f9f8f504ab8c9e4c1c3a"
+    },
+    {
+      "bytes": 6272,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/guard-focus/stdout.bin",
+      "sha256": "7c447099918df7bac747e9222fd0fb8f9c4742e38815e4876e88e7ac22029319"
+    },
+    {
+      "bytes": 3523,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/guard-focus/stderr.bin",
+      "sha256": "2fb6894cf3ae2bdbde553ab1d8b28967ae07b73d3ed7b62a97e0b21b7f61a7ac"
+    },
+    {
+      "bytes": 620,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/guard-focus/terminal.json",
+      "sha256": "910f1ce4fd3de139257e30f5e9b76d92f447c1e01e0626f0b3fcd51e131bd908"
+    },
+    {
+      "bytes": 1416,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/configured-static/terminal.json",
+      "sha256": "bcbd52e81264070d027edc943c32a3118ce2380920ab7999779afac7c9148073"
+    },
+    {
+      "bytes": 3319,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/configured-static/stdout.bin",
+      "sha256": "cdcc973d60dff364344e901e2a054c23f2c5bde0a3d4fa7400adb38fdf00a94b"
+    },
+    {
+      "bytes": 5439,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/configured-static/stderr.bin",
+      "sha256": "4d51a389182950122cf62a3d61999ff034717889eb43ee9cff6e28392723cda4"
+    }
+  ],
+  "original_completed_case_censuses": {
+    "guard-focus": {
+      "errors": 0,
+      "failures": 0,
+      "gateway_returncode": 0,
+      "passed": 41,
+      "skips": 0,
+      "unique_cases": 41
+    },
+    "token-RED-parent2314": {
+      "errors": 0,
+      "failures": 2,
+      "gateway_returncode": 10,
+      "passed": 0,
+      "skips": 0,
+      "unique_cases": 2
+    },
+    "token-release-line-GREEN": {
+      "errors": 0,
+      "failures": 0,
+      "gateway_returncode": 0,
+      "passed": 99,
+      "skips": 0,
+      "unique_cases": 99
+    },
+    "toolkit": {
+      "errors": 0,
+      "failures": 0,
+      "gateway_returncode": 0,
+      "passed": 179,
+      "skips": 0,
+      "unique_cases": 179
+    }
+  },
+  "original_outer_elapsed_seconds": 102.25121292599943,
+  "original_outer_returncode": 1,
+  "preservation": {
+    "ROOT_external_before_alwayspost_count": 184,
+    "clean_current_source_typed_Git_FS_body_exec_modes": 1442,
+    "current30_inputs_exact": 30,
+    "current_consumed_bindings_exact": 176,
+    "guard_bindings": [
+      {
+        "bytes": 230,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/before-guard.json",
+        "sha256": "d1d03e20ee9665326dc1e70d6fb713373ec38f07af7b47011faa03e31d00f09e"
+      },
+      {
+        "bytes": 230,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/always-post-guard.json",
+        "sha256": "d1d03e20ee9665326dc1e70d6fb713373ec38f07af7b47011faa03e31d00f09e"
+      },
+      {
+        "bytes": 903,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-pr307-current9760-reviewed-token-light-once4-outer/external-before-envelope.json",
+        "sha256": "ac6d8ecd92c4dd4632b60d87d6dad7d685c276404cca3db5af02c4a35146e6bf"
+      },
+      {
+        "bytes": 903,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-pr307-current9760-reviewed-token-light-once4-outer/external-always-post-envelope.json",
+        "sha256": "ac6d8ecd92c4dd4632b60d87d6dad7d685c276404cca3db5af02c4a35146e6bf"
+      }
+    ],
+    "own_five_config_identities_exact": 5,
+    "retained_original_evidence_exact": 157
+  },
+  "primary_failure": {
+    "Mypy_version_installed_and_locked": "1.9.0",
+    "checked_inner_returncode": 2,
+    "final_cleanup_readers_descendants": "UNKNOWN",
+    "fixed_error": "Source file found twice under different module names: \"src.devutils._system_mutex_in_tests\" and \"devutils._system_mutex_in_tests\"",
+    "gateway_returncode": 10,
+    "original_Devutils_checked_source_count": "UNREPORTED; fatal module discovery blocker, no completed typecheck acceptance",
+    "original_cwd": "/workspace/engineering/pr307/devutils",
+    "original_exact_command": [
+      "poetry",
+      "run",
+      "mypy",
+      "--follow-imports=silent",
+      "--namespace-packages",
+      "--explicit-package-bases",
+      "src"
+    ],
+    "original_source_error_diagnostic_count": 1,
+    "phase": "configured-static",
+    "reported_file": "src/devutils/_system_mutex_in_tests.py"
+  },
+  "prior_static_normal_completions": {
+    "Devutils_Isort_whole_src_tests": "PASS",
+    "Devutils_Ruff_check": "PASS",
+    "Devutils_Ruff_format20": "PASS",
+    "OAuth_helper_Ruff2_and_Mypy1": "PASS",
+    "Runtime_Ruff_format317_and_Mypy354": "PASS"
+  },
+  "schema": 1,
+  "source": "9760d5ec44876558c4941c4c3190abc8d92d14a1",
+  "source_supported_attribution_bindings": [
+    {
+      "bytes": 1898,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/devutils/.venv/lib/python3.12/site-packages/mypy-1.9.0.dist-info/METADATA",
+      "sha256": "2842400ab2d66cc18e6838edc4ea958845f9b8db5fa958ffd043a2c26f20f1ca"
+    },
+    {
+      "bytes": 9362,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/devutils/.venv/lib/python3.12/site-packages/mypy/find_sources.py",
+      "sha256": "2ed1cae2224a974e5a5cede885e6f645ed8590aa3215f78eebc06317053e8d3b"
+    },
+    {
+      "bytes": 37888,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/devutils/.venv/lib/python3.12/site-packages/mypy/modulefinder.py",
+      "sha256": "0fe7a2a7a485fc3354a602fbb1f061f6efa6da7ef7f3f11aa865215418f82508"
+    },
+    {
+      "bytes": 144784,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/devutils/.venv/lib/python3.12/site-packages/mypy/build.py",
+      "sha256": "716d0b7257012547f1172c78fa9109d68c9e4f1cf56abc44471136d898cc16ff"
+    },
+    {
+      "bytes": 42,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/devutils/.venv/lib/python3.12/site-packages/actions_local_devutils.pth",
+      "sha256": "78585e1eaaac65a2b434566fa74e33420ca7e7f0298de634bc32a37ac7e63ed8"
+    },
+    {
+      "bytes": 1092,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/devutils/pyproject.toml",
+      "sha256": "0fcd651ad99a6214718e69c734fcf58445de8d5e4d85117c6413d7c890306bff"
+    },
+    {
+      "bytes": 91377,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/devutils/poetry.lock",
+      "sha256": "22bf11dae2a1ed46de5024da774dde4fe778c206d720929fba9244819f3b0b6e"
+    },
+    {
+      "bytes": 18271,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/devutils/src/devutils/fixtures.py",
+      "sha256": "8faf839aeb78b5a9d4f6943c0f552552ca3e6ca926ba298535e883016840bc7e"
+    },
+    {
+      "bytes": 13324,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/devutils/src/devutils/_system_mutex_in_tests.py",
+      "sha256": "bbd6fc16f455d74a6ad9e7b5cef8ac6b4405931675c387241acb4305af6d15f4"
+    },
+    {
+      "bytes": 8893,
+      "mode": "0o755",
+      "path": "/workspace/engineering/pr307/developer/toolkit.py",
+      "sha256": "e1a3f96b57c31be2a0db5cdd3d63ce9ac243a9e8e29dff5ce6e07fd897fb605f"
+    },
+    {
+      "bytes": 25741,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/devutils/src/devutils/invoke_utils.py",
+      "sha256": "7892303d075b2755b490b507c444d9aebc2f0d3089c8812df40d7f0c0fc195b5"
+    }
+  ],
+  "status": "INDEPENDENT_ORIGINAL_CURRENT9760_ONCE4_ACTUALFAIL_CONFIRMED",
+  "tree": "0d33ebaac258e069ef7045a29b4a3904740f6307"
+}

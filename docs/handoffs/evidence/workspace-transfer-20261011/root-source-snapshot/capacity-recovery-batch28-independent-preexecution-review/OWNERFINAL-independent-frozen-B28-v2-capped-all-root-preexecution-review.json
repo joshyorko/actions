@@ -1,0 +1,166 @@
+{
+  "correctness_findings_closed": {
+    "caps_and_primary": "Aggregate actual gzip writes including footer bounded48MiB; full/private-index aggregate16MiB; partial evidence retained on refusal. Original primary add/write error preserved if close also fails, secondary type recorded. Missing stage rejects uncapped fallback.",
+    "directory_durability": "Each staged archive file fsynced; STAGE and parent fsynced before full index written/fsynced/readback and DEST fsynced; negative stage fsync control prevents index/removal.",
+    "hardlink_partition": "Strict streaming verifier authenticates regular-file identity groups; links may only target an earlier verified member with same original dev/inode; second regular body for same inode rejects split; different-inode link rejects merge. Original body/SHA/type/modeUIDGID/namespace/unique membership/PAX decimal ns and gzip CRC/EOF checks retained. Genuine synthetic split+merge poisons now reject.",
+    "index_cap": "All-roots full compressed index and maximum complete all-False compact progress serialization admitted together under16MiB before old removal loop. False is longer than True; complete list bounds every prefix/outcome representation. Per-write checks stay fail-closed."
+  },
+  "decision": "GO_B28_V2_BOUNDED_PREEXECUTION",
+  "documentation_improvement": {
+    "accepted_exact_delta": {
+      "bytes": 1383,
+      "mode": "0o444",
+      "path": "/workspace/engineering/capacity-recovery-batch28-archiver-source/canonical-capped-all-roots-prestage-and-topology-anchored-v2.patch",
+      "sha256": "e151ed08f1fb0e9f9168634beef80a88fd23e5636d9fc7c2feef12d72e4ad546"
+    },
+    "accepted_existing_reuse": [
+      "7d070 completed scratch scope/metadata limits",
+      "9dd800 exact archived original failure alias status remains failed"
+    ],
+    "added_lines": 14,
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "durable_learning": "All-roots bounded staging/full durable index/max-progress budget before deletion; gzip close counts; exact hardlink partition and nanosecond PAX verification; preserve primary exception.",
+    "evidence": "Original B19 genuine failures; corrected exact16-node module proof; reviewer-gap3methods/4fail to28-method GREEN; source-selected5 internal link groups; independent frozen53 bindings and read-only1426 Git/FS verification.",
+    "remaining_uncertainty": "Actual compression/recovery not run; origins/universal quiescence remain unknown; neither capacity preservation nor new e2 target qualifies native/runtime/release gates.",
+    "root_application_pending": true,
+    "stale_or_ambiguous_removed": "Per-root caps and resolved hardlink bytes alone do not establish all-root overflow preservation or link topology."
+  },
+  "independent_proof": {
+    "bytes": 861,
+    "mode": "0o400",
+    "path": "/workspace/engineering/capacity-recovery-batch28-independent-preexecution-review/independent-frozen-B28-readonly-source-and-command-proof.json",
+    "sha256": "897a32ff779897120efe73041f8f42cc7223a09dc73d08ade746372f3bb63ad8"
+  },
+  "inspector": {
+    "bytes": 5216,
+    "mode": "0o400",
+    "path": "/workspace/engineering/capacity-recovery-batch28-independent-preexecution-review/verify_frozen_B28_readonly_v2.py",
+    "sha256": "e20942a5be7dea706dbd3ac99a54239525a6fdd42dbb30ce0e948384796c9cda"
+  },
+  "limits": [
+    "PREEXECUTION only; archive/copy/remove/native/test execution NOT_RUN by reviewer. No actual recovery bytes or capacity delta claimed.",
+    "Selected origins and inaccessible/other-UID handle scope UNKNOWN; no universal quiescence or complete historical ownership claim. Accessible handle checks are scoped observations immediately before removal.",
+    "Unrecorded metadata/ACL/xattr/atime/physical root inode restoration not claimed. External hardlinks refused; selected recorded5 internal groups preserved.",
+    "Compression UNKNOWN until real bounded writes. Cap refusal retains every original plus partial evidence; later non-cap failures may leave some verified originals removed with all-root prestaged archives/full index retained. No retries/partial deletion authorized.",
+    "Source396 is storage preservation subject; new actuale2 target/current sourceFULL/compatibility/release qualification are separate. Original source and native/cleanup failures remain failed. No optional relocation authorized by this GO."
+  ],
+  "preliminary_findings": {
+    "bytes": 1626,
+    "mode": "0o400",
+    "path": "/workspace/engineering/capacity-recovery-batch28-independent-preexecution-review/preliminary-source-readonly-boundary-findings.json",
+    "sha256": "2048f3c4475fd2a38918c43187e4fe2731b94ad513f649d8612df9510f01828d"
+  },
+  "proposal_binding": {
+    "bytes": 22424,
+    "mode": "0o444",
+    "path": "/workspace/engineering/capacity-recovery-batch28-archiver-source/OWNERFINAL-exact-B28-v2-capped-prestage-PREEXECUTION.json",
+    "sha256": "6c16653fd56fbd5cb5684163135b79b74730ac6c860b35acc9664d2295103e56"
+  },
+  "reviewer_preserved_failure": {
+    "bytes": 365,
+    "mode": "0o400",
+    "path": "/workspace/engineering/capacity-recovery-batch28-independent-preexecution-review/original-reviewer-driver-count-assertion-failure.json",
+    "sha256": "40396337eb78363e0c9a66f77a9044ec55f62f33293c635ee6a2665d69a7cffe"
+  },
+  "root_execution_contract": {
+    "all_original_immediate_guard_required": "Before any archival, protected137 immutable rows including61 prior archives/27 indices +exact failed1 whole archive mapping/member +failed2 eight files +source1426/native1192/prepared30 +237 historical235physical1Git1alias; selected34 complete body/type/modeUIDGID/nsmtime/link/devino/nlink and completedTrue; failed563 existence-only. Always protected post on returned outcomes; no guaranteed post after outer kill.",
+    "archiver_binding": {
+      "bytes": 19029,
+      "mode": "0o444",
+      "path": "/workspace/engineering/capacity-recovery-batch28-archiver-source/archive_exact_selected34_once.py",
+      "sha256": "9b47cb3d561ce16c1939ec4f1e70a49a6965f1b1f0dc3f72ede74c05d580aa1b"
+    },
+    "budgets": {
+      "child_KILL_after_seconds": 10,
+      "driver_child_timeout_seconds": 615,
+      "outer_KILL_after_seconds": 10,
+      "outer_TERM_seconds": 900,
+      "source_child_TERM_seconds": 600
+    },
+    "child_argv": [
+      "/usr/bin/timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "600s",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/capacity-recovery-batch28-archiver-source/archive_exact_selected34_once.py"
+    ],
+    "distinct_release_required": true,
+    "driver_binding": {
+      "bytes": 8443,
+      "mode": "0o444",
+      "path": "/workspace/engineering/capacity-recovery-batch28-archiver-source/launch_once.py",
+      "sha256": "1e4382ca12ab998c009fb0ac4e8d80788f3f43332b218ed30e461d5727a6e47e"
+    },
+    "environment": "Explicit env -u PYTHONOPTIMIZE, same reviewed cached Python; child PYTHONDONTWRITEBYTECODE=1. No RCC/Poetry/product/native.",
+    "fresh_before_release_required": {
+      "DEST_STAGE_OWNED_absent": true,
+      "shm_bytes": 3932579431,
+      "tmp_bytes": 184549376,
+      "workspace_bytes": 16777216
+    },
+    "fresh_review_observation_not_reservation": {
+      "/dev/shm": 3942715392,
+      "/tmp": 1170247680,
+      "/workspace": 1220632576
+    },
+    "no_retry": true,
+    "one_attempt": true,
+    "parent_argv": [
+      "/usr/bin/timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "900s",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/capacity-recovery-batch28-archiver-source/launch_once.py",
+      "--root-execute-reviewed-one-b28-v2",
+      "/workspace/engineering/root-B28-v2-one-reviewed-release.json"
+    ],
+    "review_fields_required": [
+      "decision",
+      "proposal_binding"
+    ],
+    "root_release_mode": "0600 regular nonsymlink",
+    "root_release_path": "/workspace/engineering/root-B28-v2-one-reviewed-release.json",
+    "root_release_schema": "ROOT_ONE_EXACT_B28_V2_STORAGE_RELEASE"
+  },
+  "schema": 1,
+  "source": "396925cb3d6527af1768b7f5333f9653c005fc55",
+  "source_scope": "396925cb3d6527af1768b7f5333f9653c005fc55_STORAGE_DATA_PRESERVATION_NOT_NATIVE_OR_NEW_INTEGRATION_QUALIFICATION",
+  "status": "INDEPENDENT_SOURCE_PREEXECUTION_GO_ACTUAL_STORAGE_NOT_RUN",
+  "tree": "84f850f0d4e08b21afcd8220413ce94322370acf",
+  "upstream_disposition": "none; no external report or mutation",
+  "verified": {
+    "complete_module_assembly_order_exact": "original prefix +declared caps +unchanged original loop/tail; only destination/stage/names configs change",
+    "complete_original16_nonconfiguration_AST_exact": true,
+    "driver_declared_bindings": [
+      "archiver",
+      "guard",
+      "config"
+    ],
+    "exact_frozen_rows": 53,
+    "original_genuine_failures_preserved": [
+      "B19 original3FAIL early-removal/mtime/no-fsync; prior2FAIL1fixtureERROR separate",
+      "primary-close1FAIL original primary replaced by close",
+      "independent gap3methods/4FAIL hardlink split+merge/progress prebudget/stage fsync",
+      "prior release-control expected-row alias FAIL; corrected wire-copy only"
+    ],
+    "prepared_inputs_verified": 30,
+    "pure_controls": {
+      "effective_cases_including_subtests": 48,
+      "execution_by_reviewer": false,
+      "framework": "stdlib unittest",
+      "fresh_owned_fixture_root": "/tmp/actions-B28-pure-controls-owned-20261011-8",
+      "no_numbered_pytest_cleanup": true,
+      "passing_methods": 28,
+      "skips": 0
+    },
+    "recorded_child_members": 33013,
+    "recorded_exact_selected_names": 34,
+    "recorded_external_hardlink_rows": 0,
+    "recorded_internal_hardlink_groups": 5,
+    "recorded_rows_with_roots": 33047,
+    "source_Git_FS_body_mode_OID_verified": 1426,
+    "source_and_driver_regular_nonsymlink_hash_modes_exact": true
+  }
+}

@@ -1,0 +1,235 @@
+{
+  "bindings": [
+    {
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current-e4ff-cache-mode-private-v8-proposal/proposed_test_source_staging_rcc_consumer_v2.py",
+      "sha256": "a30f9e585b8dc422dcf853ac27a2da2c11f84065e58ba501b0a4c32d4f472728",
+      "size_bytes": 52201
+    },
+    {
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current-e4ff-cache-mode-private-v8-proposal/test_private_mode_source_v8.py",
+      "sha256": "38ec43ebb41120f1f11beddb92a63ff2d76dae4d1e7067481015bfaaf2069a9c",
+      "size_bytes": 18233
+    },
+    {
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current-e4ff-cache-mode-private-v8-proposal/owned_cache_policy_v2.py",
+      "sha256": "55f08bbaa38d2f2f6149e3e6d83897791a620bee84fb5d88a517a8c39d6d60b6",
+      "size_bytes": 6228
+    },
+    {
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current-e4ff-cache-mode-private-v8-proposal/fixture_records_v3.py",
+      "sha256": "7a63ee62184ea268dead0c98460c6943ebc297816e9a4df180b10ed5e04b9064",
+      "size_bytes": 11489
+    },
+    {
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current-e4ff-cache-mode-private-v8-proposal/prepare_exact_private_and_fixture_proposal.py",
+      "sha256": "d8415a8cd699a98707085a2ef22a5c8c93f89ecfc13aaf9aaf406f6537db1a32",
+      "size_bytes": 6378
+    },
+    {
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current-e4ff-cache-mode-private-v8-proposal/original-test-control-factory-umask-sensitive-v1.py",
+      "sha256": "4fbdabc2129fbf71332cc4953f50d523b65ef98e8047f15e97006fddd6056110",
+      "size_bytes": 10192
+    },
+    {
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current-e4ff-cache-mode-private-v8-proposal/original-V7-e4-private-public-mode-source-RED.private.log",
+      "sha256": "d6425723e81d4fa88eb2a358761619654c20eb7057be1b4640be1f9688ea7759",
+      "size_bytes": 9801
+    },
+    {
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current-e4ff-cache-mode-private-v8-proposal/named-proposed-V8-mode-source-GREEN.private.log",
+      "sha256": "6f9dbf42bd5915674e58bd277dede40045711ac2c88de34ec5e6cbeb55303930",
+      "size_bytes": 2186
+    },
+    {
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current-e4ff-cache-mode-private-v8-proposal/corrected-V7-e4-mode-source-RED.private.log",
+      "sha256": "44cee3aef2e215299df7dc4c4c4d38a020b7f2efc0f02342513a0304355a0e7b",
+      "size_bytes": 10139
+    },
+    {
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current-e4ff-cache-mode-private-v8-proposal/corrected-proposed-V8-mode-source-GREEN.private.log",
+      "sha256": "67b5736371334c208c122b4ae54adbb348ec3b2e4d000165237e5fefa4e90d3f",
+      "size_bytes": 1479
+    },
+    {
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current-e4ff-cache-mode-private-v8-proposal/expanded-V8-public-permanent-private-mode-source-GREEN.private.log",
+      "sha256": "1f355cc7d6a7864396535f02f86d8944eea9cc484a3e2f665262d0e1d2a10f0e",
+      "size_bytes": 6541
+    },
+    {
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current-e4ff-cache-mode-private-v8-proposal/final-V8-public-private-mode-source-GREEN.private.log",
+      "sha256": "6f65d642c95a48e61b78a2b2fae8c0f711dc22a02821f341777f0dde9b0ff41e",
+      "size_bytes": 7811
+    },
+    {
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current-e4ff-cache-mode-private-v8-proposal/public-fixture-only-static-check.log",
+      "sha256": "fd2299c9f1c6dc869070883e281051bfe93aacf66c1a3b0069f45b4aa410ca50",
+      "size_bytes": 25
+    },
+    {
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current-e4ff-cache-mode-private-v8-proposal/PUBLIC-e4ff-native-managed-home-mode-fixture-and-guide-proposed.patch",
+      "sha256": "35771648e1271447675b2f62edbe2fa6062a17c1efb2c4940039a5997543c05c",
+      "size_bytes": 5940
+    },
+    {
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current-e4ff-cache-mode-private-v8-proposal/PUBLIC-exact-e4ff-fixture-guide-AST-preservation-proof.json",
+      "sha256": "cc66ef405c00eba3d0e77ee078d5dcfc1bba93f9d772119eaa0f63b55b74bfaf",
+      "size_bytes": 2729
+    },
+    {
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current-e4ff-cache-mode-private-v8-proposal/canonical-native-managed-home-mode-boundary-exact-proposed.patch",
+      "sha256": "aca0df8b09ce81287bd24dcf5e7f64650e9b5a8a99917c2d56172050f3d8eae0",
+      "size_bytes": 1171
+    },
+    {
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current-e4ff-control3-mode-source-diagnosis-owned/OWNERFINAL-independent-source-supported-current-control3-home-mode-diagnosis-and-minimal-proposal.json",
+      "sha256": "7f568821f3c1aa7ebd3bbf0c23fde2a18ce1307f31148bbd1091ea04e400266d",
+      "size_bytes": 8740
+    },
+    {
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current-e4ff-control3-mode-source-diagnosis-owned/exact-source-snapshot-bindings.json",
+      "sha256": "1320cd225052ea7437978b02f8d3cea5a762ba32aa56fcd8b6d4095868937f17",
+      "size_bytes": 3017
+    },
+    {
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current-e4ff-control3-mode-source-diagnosis-owned/independent-readonly-source-mode-proof.json",
+      "sha256": "cf4c815e4b6abbbdd74c60277ad9d1a87885c1e5072bcecd1cb5f8d1bffed776",
+      "size_bytes": 933
+    },
+    {
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current-e4ff-control3-mode-source-diagnosis-owned/canonical-native-managed-home-mode-boundary-proposed.md",
+      "sha256": "6cda8295363ecc44d0df0af2b67f0a2d47935aea979f3cbdc8424e32c4a9b2c4",
+      "size_bytes": 672
+    },
+    {
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current-e4ff-control3-actual-independent-review/OWNERFINAL-independent-original-current-e4ff-control3-cache-mode-actual-failure-review.json",
+      "sha256": "61506cf064896dc750ccf47450d440170861cef4cf9a5c68060ac3ea3bedf5b1",
+      "size_bytes": 7588
+    },
+    {
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/owned_cache_policy_v1.py",
+      "sha256": "3cc13e17b4cebe5cbe0ba2d40cd27a8fcbada212f4ae2f8914efe66cf6c5bcf9",
+      "size_bytes": 5813
+    },
+    {
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/fixture_records_v2.py",
+      "sha256": "ec6281e47ab7c2896cea27fbecb1f54c2106d65aa965db06b17999b2e21fd916",
+      "size_bytes": 11504
+    },
+    {
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/runner_contracts_v3.py",
+      "sha256": "cbae3bb074d3995153ea5e6b694e7f9e61c047c6aa511b682959a63fedf7b726",
+      "size_bytes": 12959
+    },
+    {
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/test_fixture_records_v2.py",
+      "sha256": "4e661b92656643d6b1fe9e317c5e2784baafe0833a25cddc5575714e45f92aff",
+      "size_bytes": 13834
+    },
+    {
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/frozen-b614-literal-fixture-expected-inventory.json",
+      "sha256": "49b8190d76430d9c64738cd0dccd023a3113327036f31c2c5cf230260d7986cc",
+      "size_bytes": 907
+    }
+  ],
+  "documentation_improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md, exact nine-line insertion after existing owned-cache admission paragraph; proposal only.",
+    "Durable learning captured": "Native-managed client-home permissions differ from strict supervisor root/cache/marker; accept only reviewed700/750 sameUID/GID without repair and keep binary/source/actual scopes separate.",
+    "Evidence": "Original failed currentcontrol3 receipt, immutable4148 source diagnosis, genuinepublic0750RED and valid-baselineGREEN.",
+    "Remaining uncertainty": "Modified native build source equivalence and actual nextsource functional qualification remainUNKNOWN/HOLD.",
+    "Stale or ambiguous guidance removed": "Clarifies generic modes admission must not impose supervisor0700 on native-managed home, nor loosen root/cache/marker."
+  },
+  "evidence": {
+    "corrected_RED": {
+      "cases": 7,
+      "errors": 5,
+      "failures": 2,
+      "private_sameGID_and_sourcecontext": "Other RED rows concern private prototypes; sourcecontext was unreached in original native failure.",
+      "public0750_positive": "Original whole helper rejects actual measured0750 before mount; original setup uses explicit measured chmod to eliminate umask masking."
+    },
+    "final_GREEN": {
+      "cases": 68,
+      "errors": 0,
+      "failures": 0,
+      "feature_and_source_guards": "Conditional private currentdescriptor feature/approval/source poisons stillreject; no source-policy waiver.",
+      "public_guards": "Cold/warm positive700/750, valid-baseline wrongUID/GID/othermodes and11 root/cache/marker/link/source/binary/label/schema/hash/target poisons reject beforemount.",
+      "scope": "Pure data and tiny /tmp FS controls only. Executes entire extracted public helper AST and all13 proposed permanent test bodies. Sole root-parent location seam maps synthetic /tmp parent to /dev/shm; not native root/location or product execution qualification.",
+      "skips": 0
+    },
+    "original_actual": "Both control3 cases failed PACKAGE_CACHE_CLIENT_MODE_OWNER before artifact/action/lease. Home0750 sameUID/GID; original root/cache/marker retained.",
+    "source_supported_diagnosis": "RCC4148 package initialization recursively applies0750 before version probe. Pinned executable reports modified=true; compiled/source equivalenceUNKNOWN.",
+    "static": "Public proposal RuffF and format check exit0; no configured source-wide gateway claimed."
+  },
+  "mutations": {
+    "Git_or_refs": false,
+    "checkout": false,
+    "native_or_gateway": false,
+    "private_transport_or_config_adoption": false
+  },
+  "patch": {
+    "mode": "0o444",
+    "path": "/workspace/engineering/rcc-current-e4ff-cache-mode-private-v8-proposal/PUBLIC-e4ff-native-managed-home-mode-fixture-and-guide-proposed.patch",
+    "sha256": "35771648e1271447675b2f62edbe2fa6062a17c1efb2c4940039a5997543c05c",
+    "size_bytes": 5940
+  },
+  "preserved_diagnostics": [
+    "Initial0750 factory affected by umask077, initialRED/GREEN and factory kept; corrected measured-mode fixture used for genuineRED.",
+    "Combined prototype RuffF diagnostic inherited fixture_records_v2 unusedjson in proposedv3; public-only check passed. Private static correction deferred; public patch unaffected."
+  ],
+  "remaining_steps": [
+    "Independent public patch review.",
+    "Root applies accepted fixture+guide patch on same existingPR308 ordinary authenticated currenttarget refresh.",
+    "New current SOURCE light/full and independent review bind exact source count/head/tree.",
+    "PrivateV8 future named successor binds that accepted source and fixes conditional lease context; originalV7/config/failure bytes unchanged.",
+    "Fresh exact config review/root distinctactualcontrol3 authorization before any5/7276; no blind retry."
+  ],
+  "remaining_uncertainty": [
+    "No native execution of proposed predicates; real symlink/cache peak support prospective.",
+    "Original actual failed before publication/action/lease; private stale-source context never reached.",
+    "Released5/candidate7276 actual compatibility NOTRUN; full134/private01f/frozen-v6/OAuth/release HOLD."
+  ],
+  "schema_version": 1,
+  "scope": {
+    "legacy_permanent_controls": 34,
+    "marker": "Unchanged strict0600",
+    "one_helper_predicate_only": "Native-managed actions-home accepts exactly0700/0750 with current UID and primary GID. No chmod repair. All original AST nodes exact after predicate normalization; three new permanent test functions/13 cases.",
+    "production_harness_adapter_buildpins_default3_generator_workflows": "Unchanged",
+    "public_changed_paths": [
+      "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "state_root_and_package_cache": "Unchanged strict0700"
+  },
+  "source": {
+    "clean": true,
+    "head": "e4ff080375a8422bb656e52d218f198521dda078",
+    "tree": "973ff38f49a17a896e4d90f829a72e2ea0ea15e8"
+  },
+  "status": "OWNERFINAL_PUBLIC_FIXTURE_AND_GUIDE_MODE_PATCH_READY_FOR_INDEPENDENT_REVIEW_ONLY",
+  "upstream_disposition": "none"
+}

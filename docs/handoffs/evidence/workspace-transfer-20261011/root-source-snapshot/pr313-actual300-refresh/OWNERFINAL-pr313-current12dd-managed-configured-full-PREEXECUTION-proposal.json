@@ -1,0 +1,158 @@
+{
+  "schema": "pr313-current12dd-managed-configured-full-preexecution-v1",
+  "status": "PREPARATION_ONLY_NOT_EXECUTED_INDEPENDENT_REVIEW_AND_ROOT_DISTINCT_RELEASE_REQUIRED",
+  "head": "12dd3ec5c4d2a582b192ba11c5f13736757aba16",
+  "tree": "d3428cf69580a4ee252b5ad4f251588b837937d0",
+  "ordered_parents": [
+    "499a83d802ca9a0e2ebe3d77071af10625879297",
+    "e3c29cde8878307912e55ed09b6436c0f91d06d5"
+  ],
+  "source_LIGHT": {
+    "path": "/workspace/engineering/pr313-actual300-refresh/OWNERFINAL-pr313-current-actual300-ordinary-refresh-SOURCE_LIGHT.json",
+    "bytes": 14737,
+    "sha256": "0171ef23a625807d6f09dabcc25b9695ee622ca570f8b8800a75433c7a1bcbbb"
+  },
+  "current_source_complete": 1424,
+  "original_bindings": 119,
+  "command": {
+    "cwd": "/workspace/engineering/captured-child-cleanup",
+    "argv": [
+      "bash",
+      "--noprofile",
+      "--norc",
+      "-c",
+      "set -euo pipefail\nsource \"$1\"\n\"$2\" \"$3\" \"$4\"\nshift 4\nexec \"$@\"\n",
+      "pr313-current12dd-managed-full",
+      "/workspace/actions-cloud/activate.sh",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/pr313-actual300-refresh/planned_current12dd_managed_preflight.py",
+      "/workspace/engineering/pr313-current12dd-configured-full-once-owned/before-full-complete-source-and-activation.json",
+      "env",
+      "PYTEST_XDIST_AUTO_NUM_WORKERS=2",
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "600s",
+      "/workspace/actions-cloud/bin/rcc",
+      "task",
+      "script",
+      "-r",
+      "developer/toolkit.yaml",
+      "--",
+      "python",
+      "-c",
+      "\"\"\"Future configured source full body; preparation only, not executed.\"\"\"\nimport hashlib\nimport json\nimport os\nimport sys\nfrom pathlib import Path\nimport toolkit\n\nROOT=Path('/workspace/engineering/captured-child-cleanup')\nassert toolkit.REPOSITORY_ROOT==ROOT\nsys.path.insert(0,'/workspace/engineering/pr313-actual300-refresh')\nfrom verify_current_source_v2 import check,bind\n\nOWNER=Path('/workspace/engineering/pr313-actual300-refresh/OWNERFINAL-pr313-current-actual300-ordinary-refresh-SOURCE_LIGHT.json')\nassert bind(OWNER)['sha256']=='0171ef23a625807d6f09dabcc25b9695ee622ca570f8b8800a75433c7a1bcbbb'\nfor row in json.loads(OWNER.read_bytes())['bindings']:assert bind(row['path'])==row\ncheck()\nassert os.environ['PYTEST_XDIST_AUTO_NUM_WORKERS']=='2'\nassert os.environ.get('ACTIONS_REAL_RCC_ARTIFACT_TEST')!='1'\ntoolkit.poetry('action_server','run','invoke','test-not-integration')\n"
+    ],
+    "attempts": 1,
+    "deadline_TERM_seconds": 600,
+    "KILL_grace_seconds": 10,
+    "parent_timeout_seconds": 640,
+    "post_guard_timeout_seconds": 60,
+    "post_argv": [
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/pr313-actual300-refresh/planned_current12dd_postfull.py",
+      "/workspace/engineering/pr313-current12dd-configured-full-once-owned/after-full-complete-source-and-retained-bindings.json"
+    ],
+    "authorization": "/workspace/engineering/pr313-current12dd-configured-full-once-owned/root-one-current12dd-full-authorization.json",
+    "log": "/workspace/engineering/pr313-current12dd-configured-full-once-owned/one-current12dd-configured-source-full.private.log",
+    "terminal": "/workspace/engineering/pr313-current12dd-configured-full-once-owned/one-current12dd-configured-source-full-terminal.json",
+    "scope": "Unchanged configured Runtime invoke test-not-integration; explicit xdist2 precedes invocation, no opt-in native cases"
+  },
+  "activation": {
+    "same19_allowlisted_exports_as_old499": true,
+    "activation": {
+      "path": "/workspace/actions-cloud/activate.sh",
+      "bytes": 987,
+      "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+    },
+    "PATH": "Existing primary managed tool first; cached own preflight validates selected Python/prefix/origins before full; no installer/copy/rebinding"
+  },
+  "root_required_clearance": {
+    "root_source_LIGHT_independent_review": "REQUIRED",
+    "root_independent_preexecution_review": "REQUIRED_HASH_BOUND_FROZEN_RECEIPT",
+    "PR313_CURRENT12DD_SERIALIZED_HEAVY_SLOT": "root-pr313-current12dd-one-configured-full",
+    "PR313_CURRENT12DD_DISTINCT_ROOT_RELEASE_PATH": "FRESH_ROOT_AUTHORIZATION_UNCREATED",
+    "PR313_CURRENT12DD_DISTINCT_ROOT_RELEASE_SHA256": "MUST_MATCH_EXACT_AUTHORIZATION_BYTES",
+    "root_authorization_fields": [
+      "head",
+      "tree",
+      "source_LIGHT",
+      "full_proposal",
+      "attempts=1",
+      "serialized_heavy_slot_clearance=true",
+      "independent_preexecution_review path/bytes/sha256/decision GO"
+    ],
+    "fresh_workspace_bytes_minimum": 1200000000,
+    "no_other_full_Rcc_actual_install_or_browser": true
+  },
+  "preservation": {
+    "pre_post_exact_source_body_modes": 1424,
+    "all_original119_physical_refs_except_historical_guide_exactGit_snapshot": true,
+    "old499_source_full_1305_13_and_independent403a": "HISTORICAL_ONLY_NO_CURRENT_GATE_CARRY",
+    "own30_prepared_inputs_and_five_concrete_module_origins": true,
+    "native1192_private_helpers0444_browser_Node_frontend_raw_originals": "RETAINED_NO_REQUALIFICATION",
+    "ignored_owned_RCC_fixture_0711_and_primary_0700": "EXACT_7e588_SHA",
+    "source308_b614_and_private_persistent_patch": "UNTOUCHED"
+  },
+  "recording_contract": "Root creates ONE fresh0700 attempt; logs/auth/terminal0600; terminal+log hash even failure before post guards; parent exception kept distinct, no inferred process cleanup; no retry or overwrite of original499 evidence",
+  "original_failed_windows_log": "Separate proposed acquisition only job114480645718/run38143045413; actual checkout/failure phase UNMEASURED, no duplicate shutdown fix",
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "exact_old_cleanup_delta": {
+      "path": "/workspace/engineering/pr313-actual300-refresh/canonical-original-cleanup-lesson-retained.patch",
+      "bytes": 1445,
+      "sha256": "0bd405f1149f1acbd5a146833fefd5aa78bdf755b3d7237895ff72f5e9fdc277"
+    },
+    "exact_imported_target_delta": {
+      "path": "/workspace/engineering/pr313-actual300-refresh/canonical-target-prepared-RCC-lesson-imported.patch",
+      "bytes": 1202,
+      "sha256": "b78f7d2291673b4647dc11e455b952ee661b0f8796b11d4a9bc5aceafa88c8fa"
+    },
+    "durable_learning": "Preserve same deadline/exclusive Popen ownership and distinct live/zombie/error states; own prepared prefixes/origins do not supply ignored pinned RCC fixture bytes",
+    "evidence": "Original captured child RED/GREEN controls plus exact accepted source implementation; target owned ignored RCC preparation lesson and two-parent Git union",
+    "stale_ambiguity_removed": "Current typed union does not inherit old499 full/CI admission; historical source-path bindings resolve immutable Git blobs rather than assert old current FS",
+    "remaining_uncertainty": "Current full and fresh hosted CI; actual cleanup/runtime/native/provider/browser/platform and original Windows failure diagnosis remain unqualified; no duplicate PR312 shutdown change"
+  },
+  "upstream_disposition": "none",
+  "executed": false,
+  "pip_install_or_environment_copy": false,
+  "bindings": [
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/OWNERFINAL-pr313-current-actual300-ordinary-refresh-SOURCE_LIGHT.json",
+      "bytes": 14737,
+      "sha256": "0171ef23a625807d6f09dabcc25b9695ee622ca570f8b8800a75433c7a1bcbbb"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/planned_current12dd_toolkit_configured_full_body.py",
+      "bytes": 883,
+      "sha256": "9b28ecac31d434b46fb224328a51908dba71764deb62980c374a6067fbe96685"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/planned_current12dd_managed_preflight.py",
+      "bytes": 3844,
+      "sha256": "fbc542c7201274e5b8b6da19b3d484e8960ddf9929d7f823f503a58b9967d71c"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/planned_current12dd_postfull.py",
+      "bytes": 704,
+      "sha256": "1c3cb0e4b7a285144f81d3c5999ff6beae27fcea974a1c2c5ab54483a6059012"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/verify_current_source_v2.py",
+      "bytes": 7847,
+      "sha256": "c45ed4472f1c3939ccc9187d8701f8f71f9095127ef318ae79181ca9a79a8a0b"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/OWNERFINAL-cleanup499-managed-activation-configured-full-proposal-v2.json",
+      "bytes": 22911,
+      "sha256": "e853c20af0045a217a4c979a973df807ae259c6a85e472fb20273a41dba882ac"
+    },
+    {
+      "path": "/workspace/actions-cloud/activate.sh",
+      "bytes": 987,
+      "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+    }
+  ],
+  "binding_count": 7,
+  "created_at": "2026-10-11T14:14:07.305361+00:00"
+}

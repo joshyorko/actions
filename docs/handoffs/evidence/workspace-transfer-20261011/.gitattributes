@@ -1,0 +1,3 @@
+# Immutable preservation copies: retain original bytes, including fixture line endings.
+* -text
+**/* -text

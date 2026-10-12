@@ -1,0 +1,61 @@
+{
+  "argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "900s",
+    "bash",
+    "-c",
+    "source /workspace/actions-cloud/activate.sh && exec \"$@\"",
+    "current8d49-managed-once",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/managed_one_version_entry_v8.py",
+    "--config",
+    "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/FROZEN-current8d49-control3-qualified-V8-config-v2.json",
+    "--config-sha256",
+    "a209cc117db4d17a7383ba519abdff064211960aa0b8a88ddf32569fef322f9f",
+    "--release",
+    "/workspace/engineering/root-rcc-current8d49-control3-V8-one-release.json",
+    "--release-sha256",
+    "20000301eb20be5d2768fce04535298f8a5e1fbba271829be67d8ba1510d78d6",
+    "--label",
+    "control3",
+    "--log-root",
+    "/workspace/engineering/root-rcc-owned-cache-one-current8d49-control3-v8-1"
+  ],
+  "available_bytes_after": {
+    "/dev/shm": 3901190144,
+    "/tmp": 450822144,
+    "/workspace": 1341067264
+  },
+  "capture": "2026-10-11T19:54:46.855032+00:00",
+  "config_sha256": "a209cc117db4d17a7383ba519abdff064211960aa0b8a88ddf32569fef322f9f",
+  "elapsed_seconds": 52.88459704800334,
+  "fresh_capacity_before": {
+    "/dev/shm": 3901190144,
+    "/workspace": 1322704896
+  },
+  "launcher_terminal": {
+    "body": {
+      "post_returncode": 0,
+      "preflight_returncode": 0,
+      "primary_returncode": 10
+    },
+    "bytes": 84,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-rcc-owned-cache-one-current8d49-control3-v8-1/launcher-terminal.json",
+    "sha256": "8ed0692250a3ad1480f4e3e15c519be76ef8586593579e025c8dc58ff6b29ea6"
+  },
+  "newer5_7276": "NOT_RUN",
+  "no_retry": true,
+  "original_native_result": {
+    "path": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-owned-pkgs-3/OWNERFINAL-one-version-actual-result.json",
+    "status": "ABSENT_UNKNOWN"
+  },
+  "outer_returncode": 1,
+  "production_pin": "18.19.3_UNCHANGED",
+  "release_sha256": "20000301eb20be5d2768fce04535298f8a5e1fbba271829be67d8ba1510d78d6",
+  "scope": "ONE_ORIGINAL_CURRENT8D49_CONTROL3_V8_NATIVE_ATTEMPT_ONLY",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+}

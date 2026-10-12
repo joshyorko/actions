@@ -1,0 +1,22 @@
+{
+  "capture": "2026-10-11T21:17:39.454464+00:00",
+  "elapsed_seconds": 92.68482983099238,
+  "native": "NOT_RUN",
+  "no_retry": true,
+  "one_attempt": true,
+  "outer_returncode": 0,
+  "release": {
+    "bytes": 2425,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-one-completed-FULL-single-copy-storage-release-v2.json",
+    "sha256": "17ce8c02afd21e702895f43a56c8395954f29edf654c6bf62f7dec63d4044ccf"
+  },
+  "review": {
+    "bytes": 9240,
+    "mode": "0o400",
+    "path": "/workspace/engineering/completed-current8d49-FULL-single-copy-fallback-independent-PREEXECUTION-review/OWNERFINAL-independent-exact-one-completed-FULL-single-copy256-PREEXECUTION-conditional-GO.json",
+    "sha256": "03b3ab4d157291580a2509bc9a1d79a9340b8b49ad249c86bbc64da4bb4b8c09"
+  },
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+}

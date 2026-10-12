@@ -1,0 +1,204 @@
+{
+  "archive_execute_remove": "NOT_RUN",
+  "capacity": {
+    "captured_bytes": {
+      "/dev/shm": 3942715392,
+      "/tmp": 1174843392,
+      "/workspace": 1261195264
+    },
+    "complete_private_index_reserve_bytes": 16777216,
+    "compressed_success": "UNKNOWN_NOT_PREDICTED",
+    "existing_TMP_prestage_cap_plus128MiB_reserve_bytes": 184549376,
+    "existing_shm_native_floor_bytes": 3865470567,
+    "fresh_SHM_required_before_any_root_release_bytes": 3932579431,
+    "no_source_or_actual_release": "All later1288490189 workspace/1200000000 tmp/nativeSHM floors separately rechecked.",
+    "strict_aggregate_gzip_limit_bytes": 50331648,
+    "workspace_reclaimed_bytes": "Observed unique allocated blocks, not guaranteed returned free space; postmeasurement required."
+  },
+  "current_original_retention": {
+    "SOURCE396_head": "396925cb3d6527af1768b7f5333f9653c005fc55",
+    "SOURCE396_tree": "84f850f0d4e08b21afcd8220413ce94322370acf",
+    "all61archives27indices_before_after_wholeSHA_size_mode_UIDGID": "PASS",
+    "complete_source_body_and_exec_modes": 1426,
+    "failed2_owner_original_eight_before_after": "PASS_d4eb_FAIL_UNCHANGED",
+    "failed563": "EXISTENCE_ONLY_EXCLUDED",
+    "limits": "No SOURCEFULL/native/current binary/failure upgrade or full failed2 cache tree body reread claimed.",
+    "old_failed1_archive_ca557_wholeSHA_complete_index_removal_and_terminal": "PASS_retention_only",
+    "old_selected8dc_member_body_modeUIDGID": "PASS_FAIL_UNCHANGED",
+    "original_native_full_pathset_body_type_mode_links": 1192,
+    "own_current_SOURCE_LIGHT33_inputs_before_after_SHA_mode": "PASS",
+    "prepared30": 30
+  },
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md: exact accepted7d070 principle verified and reused, no cosmetic duplicate/source mutation",
+    "Durable_learning": "Lossless capacity preservation is separate from origin, universal quiescence and cold/native qualification. Aggregate cap refusal must preserve originals and all partial proof.",
+    "Evidence": "Exact11 root body/metadata snapshots;61archives27indices;396source1426/prepared30/native1192; eight originalfailed2 and exact failed1 archive alias; finite accessible handles UNKNOWN elsewhere.",
+    "Exact_delta_or_verified_reuse": {
+      "bytes": 1068,
+      "mode": "0o600",
+      "path": "/workspace/engineering/capacity-recovery-independent-review/canonical-completed-scratch-preservation-proposed.patch",
+      "sha256": "7d07065b5bb7742698919997c8c6621cc20d00494741eb5365251ffb09f2d208"
+    },
+    "Remaining_uncertainty": "Compression/new archiver review and rootrelease pending, actual reclaimed bytes not measured; inaccessible references unknown.",
+    "Stale_guidance_removed": "No compression prediction or source-origin/native pass inferred from completed markers; no unsupported single archive relocation."
+  },
+  "future_archiver_SOURCE_contract": {
+    "NOT_AUTHORED_OR_TESTED": true,
+    "algorithm_parent": {
+      "bytes": 5244,
+      "mode": "0o600",
+      "path": "/tmp/actions-capacity-recovery-batch19.py",
+      "sha256": "48fd7e4c79e55b80ceda0b63c1d1da87feeb368cefee265d5c12bad6ad940840"
+    },
+    "both_paths_currently_absent": true,
+    "bounds": "Distinct ROOT outer900TERM+10 with operation600TERM+10; no source/native timeout changes; exclusive capacity slot and source hash authority.",
+    "cap_control_plan_NOT_RUN": [
+      "Below/equal/above cap direct write with sentinel byte count",
+      "Footer overflow preserves original exception and original namespace; partial archive retained",
+      "Aggregate second archive overflow cannot remove any original root",
+      "Actual stdlib gzip round-trip stays within aggregate count and verifies CRC/ISIZE/EOF",
+      "Original16ASTs match excluding only3 configuration literals"
+    ],
+    "future_DEST": "/dev/shm/actions-completed-scratch-recovery-batch28-v2",
+    "future_STAGE": "/tmp/actions-completed-scratch-recovery-batch28-v2-stage",
+    "necessary_minimal_cap_addition": "A shared bounded stream counts actual gzip bytes across every exact selected archive, rejects each write before crossing aggregate50331648 including final footer. Pre-stage and fully verify ALL34 original archives before any B19 copied archive/original-removal loop. Any cap/error during pre-stage leaves every original and every partial archive/index/error receipt intact. Preserve exact original accepted inventory/SHA/verify/finite-readable-handle functions and full repeated originals. No asynchronous observer-only ceiling admitted.",
+    "original16_nonconfiguration_AST_digest": "0cb555695b805ebf45e97dd7efaf2e3358130c52a8bc62e756ed8e99a7f59d13",
+    "reason": "Root assigned both source slots elsewhere; preparation remains data-only until distinct source-slot release. No mutable draft adopted.",
+    "required_original_AST_preservation": "All16 original nonconfiguration AST nodes remain exact if prepended capped pre-stage logic is used; only DEST/STAGE/NAMES literal substitutions in original module. Independent future source review must recompute this, no code claim from this proposal.",
+    "verification_and_removal": "Verify every body/type/modeUIDGID/symlink and resolved internal hardlink against exact original inventory, full gzipEOF/CRC/ISIZE and unique safe TAR paths. Recheck exact marker/root/current source/failed originals/prior archives/current native/accessible handles; inaccessible remainsUNKNOWN. Persist complete0600 private index before only selected root removal. No stage or unrelated archive cleanup on failure. Existing16-node B19 mechanism is a parent, not approval of a missing new script."
+  },
+  "future_root_release_prerequisites": [
+    "Root releases source slot for named minimal capped archiver and meaningful pure controls, then independent immutable script+proposal GO",
+    "Fresh SHM capacity at least3932579431 and TMP at least184549376 bytes, unused paths, no parallel same-volume mutations/full/native/installer",
+    "Exact selected root identities/complete snapshots/completed markers and immutable source/current33/failed8/native1192/prior61archives27indices before and after every outcome",
+    "Distinct ROOT ONE authorization binds exact archiver hash/argv/source guards; no automatic retry, no native/cold qualification from recovery",
+    "Post-workspace actual free measurement gates separate optional relocation/sourceFULL/artifact proposals"
+  ],
+  "immutable_bindings": [
+    {
+      "bytes": 155540,
+      "gid": 1000,
+      "mode": 384,
+      "path": "/workspace/engineering/capacity-recovery-batch28-proposal-v2/private-complete-completed-candidate-census-and-exact-selection.json",
+      "sha256": "e5158dec830b3bc92b20fb3abac9d0ae6b6eaeaedf6476b3390339e8b5bb5b54",
+      "uid": 1000
+    },
+    {
+      "bytes": 9295552,
+      "gid": 1000,
+      "mode": 384,
+      "path": "/workspace/engineering/capacity-recovery-batch28-proposal-v2/private-two-complete-selected-body-metadata-inventories.json",
+      "sha256": "ad640c46591e0a0b0e796fc80e7359d2f9e556dc7f46649fd2348e80a102fb03",
+      "uid": 1000
+    },
+    {
+      "bytes": 21594,
+      "gid": 1000,
+      "mode": 384,
+      "path": "/workspace/engineering/capacity-recovery-batch28-proposal-v2/private-all61-original-archives27-indices-current-source-native-failed2-retention.json",
+      "sha256": "58918ef7a46cdc079ad0955cfb8e089afc187e5bb7ba037084e331113da027e8",
+      "uid": 1000
+    },
+    {
+      "bytes": 10082,
+      "mode": "0o600",
+      "path": "/workspace/engineering/capacity-recovery-batch28-proposal-v2/prepare_readonly_metadata_v2.py",
+      "sha256": "60b8fade4522119f075da6f81db75e82f1784137db6205040a971c683344fee0"
+    },
+    {
+      "bytes": 10320,
+      "mode": "0o600",
+      "path": "/workspace/engineering/capacity-recovery-batch28-proposal-v2/private-current396-all33-LIGHT-and-failed2-eight-retention.json",
+      "sha256": "672578d5782254c0f00de6c9e1aace311ce4454764fe1dbcdc9360ce3817e30a"
+    },
+    {
+      "bytes": 4158,
+      "mode": "0o600",
+      "path": "/workspace/engineering/capacity-recovery-batch28-proposal/private-original-failed2-eight-and-failed1-whole-archive-alias-retention.json",
+      "sha256": "5a90de5e53773c5042f18e2dd8fb901d2f9dab48670cc373c0b925d85cf8554e"
+    }
+  ],
+  "optional_relocation": "Separately named proposal below; NOT_RUN, not part of B28 authorization, v1 no-fitting<=48MiB single still historicalHOLD unchanged.",
+  "previous_owner_final": {
+    "bytes": 7357,
+    "mode": "0o444",
+    "path": "/workspace/engineering/capacity-recovery-batch28-proposal/OWNERFINAL-B28-exact-eleven-completed-256MiB-storage-preservation-PROPOSAL-v1.json",
+    "sha256": "1dbf040c43e5c7ab2452d62582143c9c632c5d3746736045ea4228e2ab96a7af"
+  },
+  "schema": "B28v2-400MiB-readonly-completed-RCC-storage-preservation-metadata-proposal",
+  "selected_names_exact_allowlist": [
+    "0306d8914a1521f6",
+    "0c33b061b4f990d1",
+    "13c287212d10d39b",
+    "1c196e3763dc9a9a",
+    "1e6f54b3ff30e5b8",
+    "295031a0d954961c",
+    "3259483e809016df",
+    "398354d6cb0a8209",
+    "4f8a6f358944ba2a",
+    "5ac8f8262fa030df",
+    "6177972915b6759a",
+    "6529ebfde1b700f4",
+    "70f9e1671477d8ac",
+    "795aa252847190f3",
+    "7fdd2a2e126d337b",
+    "804f7be9260b8715",
+    "821e35805c5c4333",
+    "836f968a441aa17e",
+    "87222da03d379928",
+    "8b7cdb0804bef247",
+    "8bbbb490987515a0",
+    "8c89e4b9eb18a9bb",
+    "8d629caa4fd75d75",
+    "96d3d0908d287e8a",
+    "9e402953ae659f67",
+    "9e5c2f4beb04c533",
+    "a1ec55f8f3f0d817",
+    "a6304496b02fc10b",
+    "a7a47190a74dd5ab",
+    "aa04aa60cd2d7572",
+    "ae79e1a55fbca94e",
+    "b4e310295f590693",
+    "c16dea5a3fd7b0c3",
+    "e072c7f39ffed955"
+  ],
+  "selection": {
+    "512MiB_recovery": "IMPOSSIBLE_FROM_OBSERVED_ELIGIBLE_TOTAL",
+    "budget": 50000,
+    "eligible_allocated_total": 490184704,
+    "eligible_completed_roots": 398,
+    "fewest_selected_roots": 34,
+    "global_least_adequate_sum_proven": true,
+    "logical_regular_body_bytes": 298611318,
+    "max_allocated_with33_roots": 418770944,
+    "members_excluding34_roots": 33013,
+    "proof": "33 largest below target proves minimum34. Bounded deterministic one-root swaps reached target exactly, proving minimum adequate sum directly; not an exhaustive combination claim.",
+    "replacement_examinations": 24752,
+    "requested_target": 419430400,
+    "selected_allocated_bytes": 419430400
+  },
+  "stable_original_root_and_member_metadata": {
+    "all_markers_True": true,
+    "complete_body_mode_UID_GID_type_mtime_ns_symlink_internal_hardlink_dev_inode_nlink_before_after_equal": true,
+    "external_hardlink_groups": 0,
+    "finite_cwd_FD_observations": [
+      {
+        "accessible_links": 35,
+        "inaccessible": 298,
+        "matches": [],
+        "universal_quiescence": "UNKNOWN"
+      },
+      {
+        "accessible_links": 42,
+        "inaccessible": 298,
+        "matches": [],
+        "universal_quiescence": "UNKNOWN"
+      }
+    ],
+    "no_universal_quiescence": true,
+    "source_origin": "UNREPORTED_UNKNOWN",
+    "unsupported_types": 0
+  },
+  "status": "GO_READONLY_METADATA_PROPOSAL_ONLY_ARCHIVER_SOURCE_AND_PURE_CONTROLS_HELD_PENDING_SOURCE_SLOT_INDEPENDENT_REVIEW_AND_ROOT_ONE_RELEASE",
+  "upstream_disposition": "none"
+}

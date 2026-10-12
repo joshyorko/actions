@@ -1,0 +1,137 @@
+{
+  "schema": 1,
+  "status": "HOLD_ORIGINAL_CURRENT8D49_CONTROL3_V9_PUBLISH_FAILED_NO_RETRY",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "label": "control3",
+  "root": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-owned-pkgs-4",
+  "original_attempt": {
+    "outer": 1,
+    "preflight": 0,
+    "primary": 10,
+    "post": 0,
+    "elapsed_seconds_root": 125.233365857
+  },
+  "primary": {
+    "phase": "env-publish",
+    "original_recorded_returncode": 1,
+    "category": "MICROMAMBA_SIGNAL_KILLED",
+    "stderr_signal_killed_occurrences": 6,
+    "raw_tuple_source": "original pytest-logging/output.robolog M memo line336 decoded JSON string then ast.literal_eval exact (int,str,str)",
+    "stdout_bytes": 0,
+    "stderr_bytes": 7437,
+    "CA_scope": "informational system certificate selection; no observed curl60/77 or trust/file failure",
+    "kill_origin": "UNKNOWN"
+  },
+  "secondary": {
+    "phase": "staged fixture before acquire/Action/lease",
+    "category": "PACKAGE_CACHE_PUBLICATION_PATH",
+    "dependency": "publication.json absent after first case publication failure"
+  },
+  "cases": [
+    {
+      "name": "test_published_artifact_details_preserves_one_rcc_identity_pair",
+      "failure": true,
+      "error": false,
+      "skipped": false
+    },
+    {
+      "name": "test_staged_package_executes_in_managed_rcc_runtime",
+      "failure": true,
+      "error": false,
+      "skipped": false
+    }
+  ],
+  "records_absent": {
+    "publication.json": true,
+    "staged.json": true
+  },
+  "scope_limits": [
+    "sampler threshold false does not identify or exclude external/kernel/cgroup kill",
+    "cleanup result is separate from functionality failure",
+    "internal raw source flags/readers unavailable remain UNKNOWN",
+    "no new native execution, retry, fixture edit, root reuse, certificate override, TLS disable, or released5/candidate admission"
+  ],
+  "bindings": [
+    {
+      "path": "/workspace/engineering/rcc-current8d49-control3-V9-original-publish-failure-diagnosis-owned/derived-original-RCC-publish.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-control3-V9-original-publish-failure-diagnosis-owned/derived-original-RCC-publish.stderr",
+      "bytes": 7437,
+      "sha256": "024381831b5e6931fa6a3d1e95c916ddaeb2eefb9cd4fb672f71b7c7afcb83d8",
+      "mode": "0o600"
+    },
+    {
+      "path": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-owned-pkgs-4/pytest-logging/output.robolog",
+      "bytes": 111960,
+      "sha256": "e75d7102414eef4d8106891ab7335b8c62ade9842cf79bb6afdc7ae8d3d04c34",
+      "mode": "0o600"
+    },
+    {
+      "path": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-owned-pkgs-4/original-command.stdout",
+      "bytes": 15505,
+      "sha256": "a963873ba8deb7f569a0d7459bf14059637f6d549840f41e4a82ea3ef154e466",
+      "mode": "0o600"
+    },
+    {
+      "path": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-owned-pkgs-4/original-command.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-owned-pkgs-4/junit.xml",
+      "bytes": 14584,
+      "sha256": "6df4bc99cc6c8c51514e754e6553d087c7041fcdcbceba85ec157cb12de04a42",
+      "mode": "0o600"
+    },
+    {
+      "path": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-owned-pkgs-4/OWNERFINAL-one-version-actual-result.json",
+      "bytes": 2837,
+      "sha256": "a6811f4a7a33ff6c25e85cc213d7c4c77a7effc7516f6049b6286933f6cec56d",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-rcc-owned-cache-one-current8d49-control3-v9-1/launcher-terminal.json",
+      "bytes": 84,
+      "sha256": "8ed0692250a3ad1480f4e3e15c519be76ef8586593579e025c8dc58ff6b29ea6",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-current8d49-control3-V9-original-outer-owned/OWNERFINAL-root-one-original-current8d49-control3-V9-outer-terminal.json",
+      "bytes": 5649,
+      "sha256": "895f8bc537523ebc1ee3f4feb685a9ebe5835a529aeb87ab95c67e2b31457b68",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+      "bytes": 765564,
+      "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-rcc-current8d49-control3-V9-one-release.json",
+      "bytes": 1075,
+      "sha256": "a131e30087742764ba6dbdbc2634749924133431de3310b2065ced446b97bf3b",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-control3-V9-original-publish-failure-diagnosis-owned/canonical-original-subprocess-diagnostic-vs-wrapper-tail-proposed.md",
+      "bytes": 741,
+      "sha256": "f4482e6221dee321b9a023660005e46f3cb406fedbedc745a0ea9cd95d055a50",
+      "mode": "0o400"
+    }
+  ],
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/ops/community-ci-playbook.md (proposed fixed diagnostic classification paragraph)",
+    "Durable_learning_captured": "recover original delegated return tuple; separate dependency failure and informational logs from kill cause",
+    "Evidence": "original recorded tuple rc1; two Micromamba signal-killed diagnostics; JUnit publication+dependency failures",
+    "Stale_or_ambiguous_guidance_removed": "adapter tail or certificate mentions alone cannot classify TLS/root cause",
+    "Remaining_uncertainty": "source of signal and compatibility result remain unknown"
+  },
+  "upstream_disposition": "none; no RCC upstream defect established"
+}

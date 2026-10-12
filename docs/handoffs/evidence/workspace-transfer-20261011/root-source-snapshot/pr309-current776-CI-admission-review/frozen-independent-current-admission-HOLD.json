@@ -1,0 +1,239 @@
+{
+  "schema": "independent-complete-current-admission-frozen-v1",
+  "verdict": "HOLD",
+  "PR": 309,
+  "source_and_synthetic": {
+    "head": {
+      "sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+      "tree": "3c2c8ad1c9a067ec774eafd6f5d254cb8703213b",
+      "ordered_parents": [
+        "9475a30fbe8645fd0c6b9c2746182f7a78631059",
+        "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0"
+      ]
+    },
+    "merge": {
+      "sha": "99e8c64a0398669fd65f216656427179fe90228a",
+      "tree": "3c2c8ad1c9a067ec774eafd6f5d254cb8703213b",
+      "ordered_parents": [
+        "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+        "5130638dc68161c3cfc1a437bacf0467d7cecb42"
+      ]
+    }
+  },
+  "observed_utc_interval": [
+    "2026-10-11T08:20:47.626595+00:00",
+    "2026-10-11T08:20:59.055087+00:00"
+  ],
+  "named_refs_bracketed_stable": true,
+  "PR_draft": true,
+  "exact_declared_PR_job_instances": 19,
+  "auxiliary_push_Copilot_instances": 1,
+  "check_counts": {
+    "QUEUED": 3,
+    "SUCCESS": 12,
+    "IN_PROGRESS": 5
+  },
+  "head_check_count": 20,
+  "head_run_count": 7,
+  "head_commit_status_count": 0,
+  "synthetic_direct_checks_runs_statuses": {
+    "checks": 0,
+    "runs": 0,
+    "statuses": 0
+  },
+  "pending_check_job_ids": [
+    {
+      "id": 114425288893,
+      "name": "publish (3.12)",
+      "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+      "app": "github-actions",
+      "status": "QUEUED",
+      "conclusion": null
+    },
+    {
+      "id": 114423099026,
+      "name": "Build Action Server binary without credentials (windows-2022)",
+      "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+      "app": "github-actions",
+      "status": "IN_PROGRESS",
+      "conclusion": null
+    },
+    {
+      "id": 114423099011,
+      "name": "build (ubuntu-py3.12-devmode)",
+      "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+      "app": "github-actions",
+      "status": "IN_PROGRESS",
+      "conclusion": null
+    },
+    {
+      "id": 114423098973,
+      "name": "build (windows-py3.12-devmode)",
+      "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+      "app": "github-actions",
+      "status": "IN_PROGRESS",
+      "conclusion": null
+    },
+    {
+      "id": 114423098861,
+      "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+      "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+      "app": "github-actions",
+      "status": "QUEUED",
+      "conclusion": null
+    },
+    {
+      "id": 114423098852,
+      "name": "build (macos-py3.12-devmode)",
+      "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+      "app": "github-actions",
+      "status": "QUEUED",
+      "conclusion": null
+    },
+    {
+      "id": 114423098850,
+      "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+      "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+      "app": "github-actions",
+      "status": "IN_PROGRESS",
+      "conclusion": null
+    },
+    {
+      "id": 114423098797,
+      "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+      "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+      "app": "github-actions",
+      "status": "IN_PROGRESS",
+      "conclusion": null
+    }
+  ],
+  "pending_runs": [
+    {
+      "id": 38123557753,
+      "path": ".github/workflows/actions_runtime_tests.yml",
+      "status": "QUEUED"
+    },
+    {
+      "id": 38123557759,
+      "path": ".github/workflows/developer_toolkit.yml",
+      "status": "QUEUED"
+    },
+    {
+      "id": 38123557761,
+      "path": ".github/workflows/frontend-build-unauthenticated.yml",
+      "status": "IN_PROGRESS"
+    },
+    {
+      "id": 38123557755,
+      "path": ".github/workflows/actions_runtime_pypi_release.yml",
+      "status": "QUEUED"
+    }
+  ],
+  "reviews_and_threads": {
+    "count": 0,
+    "states": {},
+    "current_head_reviews": 0,
+    "review_comments": 0,
+    "issue_comments": 2,
+    "reviewDecision": null,
+    "threads": 0,
+    "unresolved_threads": 0,
+    "nested_comment_pagination_complete": true,
+    "GraphQL_connections_exhausted": true
+  },
+  "issue_closure": {
+    "count": 0,
+    "complete": true,
+    "issues": [],
+    "no_issue_mutation": true,
+    "whole_issue_closure_admission": "HOLD"
+  },
+  "normal_API_policy_enforcement": {
+    "traditional_branch_protection": "UNKNOWN_HTTP403",
+    "visible_rulesets": 0,
+    "normal_API_enforcement_required": true,
+    "no_bypass_permission": true
+  },
+  "actual_checkout": "UNKNOWN_WITHOUT_ORIGINAL_OWNED_LOGS",
+  "intended_synthetic_parents_tree": "VERIFIED_REST_AND_GRAPHQL_METADATA_ONLY",
+  "HOLDs": [
+    "Pending named checks/runs",
+    "Draft PR",
+    "Actual per-job checkout UNKNOWN: no owned original terminal logs acquired",
+    "Branch protection UNKNOWN403; empty visible rulesets not bypass",
+    "Full issue/backend/native/private/release gates not admitted"
+  ],
+  "complete_metadata_receipt": {
+    "path": "/workspace/engineering/pr309-current776-CI-admission-review/independent-complete-current-CI-admission-HOLD.json",
+    "bytes": 36186,
+    "sha256": "bc1a1e04a9f821a2a73d5b16fa4dd1297b5d43b4f7ad1c4c7667062988a65b3b"
+  },
+  "exact_declared_workflow_inventory": {
+    "path": "/workspace/engineering/pr309-current776-CI-admission-review/exact-source-workflow-declaration.json",
+    "bytes": 57680,
+    "sha256": "2057934caf2edba190231b8562a4cdb4810a151106af98f165412d59d4cfa2da"
+  },
+  "unique_job_matrix_suite_proof": {
+    "path": "/workspace/engineering/pr309-current776-CI-admission-review/exact-job-name-matrix-suite-bijection.json",
+    "bytes": 15557,
+    "sha256": "59f6e915394e0c1f9fb692ee616c3e5157193a03cf708aa6bf0ec274bed02041"
+  },
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; no source edit, explicit reuse of accepted exact proposed deltas",
+    "Exact_delta": "Existing normalization/late-needs/policy/ref/checkout lessons retained verbatim; no cosmetic successor",
+    "Reused_exact_artifacts": [
+      {
+        "path": "/workspace/engineering/current299308-ci-independent-review/canonical-workflow-trigger-key-normalization-proposed.patch",
+        "bytes": 737,
+        "sha256": "c5e4a8f166a4e3c96bad2f0a93de3cc2b76eb5003d3cbaeaa07dc400ceda384c"
+      },
+      {
+        "path": "/workspace/engineering/pr302-full26-current-hosted-admission/exact-dependent-job-registration-canonical-proposal.patch",
+        "bytes": 912,
+        "sha256": "d7a0a7b9452553bb609084acdf71bb7ace68f152b5bdd419a8817e151ddeb93b"
+      },
+      {
+        "path": "/workspace/engineering/pr221-current776-preflight/canonical-policy-and-snapshot-proposed.patch",
+        "bytes": 897,
+        "sha256": "9744b01f0f2f888de5f88f129b857df33938cb1adf182ec32b30ed08b2f14fe8"
+      },
+      {
+        "path": "/workspace/engineering/pr299-current776-CI-admission-review/canonical-existing-job-trigger-policy-lessons.md",
+        "bytes": 2764,
+        "sha256": "4054b1d8bc396bd9a4c1054393cfe8cb3566638213ef9e04b34fc7ea1d42a7a4"
+      }
+    ],
+    "Durable_learning": "Preserve YAML on key, expand exact matrix/event/path set, include needs-created publisher, distinguish auxiliary push Copilot, inaccessible protection UNKNOWN and synthetic metadata versus actual checkout.",
+    "Evidence": {
+      "yaml11_boolean_on_controls": 17,
+      "declared_PR_jobs": 19,
+      "registered_late_publisher": [
+        114425288893
+      ],
+      "policy_HTTP": 403,
+      "stable_named_refs": true
+    },
+    "Stale_guidance_removed": "No existing source removed; reuse explicitly rejects early job totals, empty-status/ruleset absence inference and metadata-only checkout proof.",
+    "Remaining_uncertainty": "States span one finite non-atomic snapshot and can change after capture; original checkout logs unavailable; branch protection unavailable; no full issue/release qualification."
+  },
+  "source_push_review_binding": [
+    {
+      "path": "/workspace/engineering/pr309-current776-verified-push.json",
+      "bytes": 944,
+      "sha256": "293e4c18f4872ab246fee9d098d323974b860684ce2a6e8208465201c0c9fa78"
+    },
+    {
+      "path": "/workspace/engineering/pr309-actual776-refresh/immutable-current776-refresh-source-checkpoint.json",
+      "bytes": 13033,
+      "sha256": "437aafe5f58d667b11d1456fd5860bfd80a4c429515fa47c815dcdfbaeb0b159"
+    },
+    {
+      "path": "/workspace/engineering/pr309-actual776-independent-review/independent-frozen-current776-source-review.json",
+      "bytes": 6270,
+      "sha256": "a769ac74ebd6c215f89d0fa181e8038f895d666f2e95863033626733a5c76462"
+    }
+  ],
+  "no_old_tuple_CI_carried": true,
+  "one_snapshot_no_poll_retry_logs_download_artifact_source_or_issue_mutation": true,
+  "upstream_disposition": "none"
+}

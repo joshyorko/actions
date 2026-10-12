@@ -1,0 +1,127 @@
+--- /workspace/engineering/pr221-current776-linux-consumer-preflight/installed-consumer-runner-v2.py
++++ /workspace/engineering/pr221-current618-linux-consumer-preflight/installed-consumer-runner-v3.py
+@@ -14,7 +14,7 @@
+ import zipfile
+ from pathlib import Path
+ 
+-BASE = Path("/workspace/engineering/pr221-current776-linux-consumer-preflight")
++BASE = Path("/workspace/engineering/pr221-current618-linux-consumer-preflight")
+ CHECKOUT = Path("/workspace/engineering/pr282")
+ GUARD_CHECKOUT = Path("/workspace/engineering/pr311")
+ CHECKOUT_ROOTS = tuple(
+@@ -37,36 +37,38 @@
+         "/workspace/engineering/rcc-public",
+     ]
+ )
+-ATTEMPT = BASE / "installed-linux-current776-f82ee06c-1"
++ATTEMPT = Path(
++    "/workspace/engineering/pr221-current618-linux-consumer-preflight/installed-linux-current618-90a785d8-1"
++)
+ WHEEL = Path(
+-    "/workspace/engineering/pr221-current302-linux-wheel-owned/actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
++    "/workspace/engineering/pr221-current618-wheel-integrity-owned/actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+ )
+-WHEEL_SHA = "f82ee06c09e07bd224e797e11b7e58138920c0c8df49ef814ac50b0087d81c6c"
+-WHEEL_PYTHON_COUNT = 196
++WHEEL_SHA = "90a785d81ca1158ab58a3feb0eabc1b3b3dabb6e395f2f503337c2cf53e986d6"
++WHEEL_PYTHON_COUNT = 202
+ ARCHIVE = Path(
+-    "/workspace/engineering/pr221-current302-linux-wheel-owned/original-Linux-wheels-11693813383.zip"
++    "/workspace/engineering/pr221-current618-wheel-integrity-owned/original-11697353355.zip"
+ )
+ PRODUCER = {
+-    "run_id": 38118859475,
++    "run_id": 38126987514,
+     "attempt": 1,
+-    "artifact_id": 11693813383,
+-    "artifact_zip_bytes": 28271148,
+-    "artifact_zip_sha256": "32485758f22e51b529d3ea657c4f4c0033233f6c84ec7d3d605c4493c11d82c6",
+-    "api_head": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+-    "checkout": "f5dd0e18d9cda660c2eaa6bbc33a11180ddd7158",
+-    "tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
++    "artifact_id": 11697353355,
++    "artifact_zip_bytes": 28299039,
++    "artifact_zip_sha256": "fc4018e6e7ed4a0e47c4f5888d36d55655216ca22ebd965f29ce9f1130938f8c",
++    "api_head": "6181b044c75de35386f1ae30e71725398b6a7feb",
++    "checkout": "e7666eacf2687f65050b97a88e791f8d0ce4cd20",
++    "tree": "99ac5309add45af65049546dd3a99f357884cf3b",
+     "parents": [
+-        "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+-        "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
++        "a70993fafc99a9f94041485542d5a720797ca394",
++        "6181b044c75de35386f1ae30e71725398b6a7feb",
+     ],
+-    "source_candidate": "d642a3ac24f8da85101538bdfdf59b509fd74bfb",
+-    "source_tree": "fdf2823ebcdbd938b9047fd452c9fb13eb4be4e4",
++    "source_candidate": "6181b044c75de35386f1ae30e71725398b6a7feb",
++    "source_tree": "99ac5309add45af65049546dd3a99f357884cf3b",
+     "event": "pull_request",
+     "publication": False,
+-    "actual_integration_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+-    "actual_integration_tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
++    "actual_integration_sha": "6181b044c75de35386f1ae30e71725398b6a7feb",
++    "actual_integration_tree": "99ac5309add45af65049546dd3a99f357884cf3b",
+     "build_is_actual_integration_job": False,
+-    "scope": "two originalLinuxwheels only; consumer selects cp312; seven-artifact gate HOLD",
++    "scope": "Original currentLinux pair only; selectedcp312consumer; fullseven/mac/windows/aggregate/tag/publication HOLD",
+ }
+ SOURCES = {
+     "floor": (
+@@ -99,27 +101,27 @@
+     ),
+     "artifact_review": (
+         Path(
+-            "/workspace/engineering/pr221-current302-linux-wheel-owned/safe-prospective-runtime103-qualification-review.json"
+-        ),
+-        "5ae089d08c7bb6b231d9c6adfa313d2f6961aa5ae03116829ad1b25588719578",
++            "/workspace/engineering/pr221-current618-wheel-integrity-owned/OWNERFINAL-current618-partial-distribution-integrity-v2.json"
++        ),
++        "9b406fdf505871e6790d7a4233d0b8c075ae6f170f2c5b7a954bbca0f0d46236",
+     ),
+     "inspection": (
+         Path(
+-            "/workspace/engineering/pr221-current302-linux-wheel-owned/safe-current-linux-wheel-inspection.json"
+-        ),
+-        "535b308837dab9737412243646dc085a560202dbd58b9e9315dd1cac54808c82",
++            "/workspace/engineering/pr221-current618-wheel-integrity-owned/safe-data-only-integrity-inspection.json"
++        ),
++        "ec30816fa8826fb6f93ee088cea3e290a146d7d367a4b74205be4ba441f367a8",
+     ),
+     "input_manifest": (
+         Path(
+-            "/workspace/engineering/pr221-current776-linux-consumer-preflight/input-and-source-admission.json"
+-        ),
+-        "ff5560c8233985e2755e1e9288f780018f625a7ec4184f3eac98e4a14d50e594",
++            "/workspace/engineering/pr221-current618-linux-consumer-preflight/input-and-source-admission.json"
++        ),
++        "50f33fec6151d479de967159c4b04de83cccd9ff220936fbc63e0b8e2e17ca42",
+     ),
+     "input_gate": (
+         Path(
+-            "/workspace/engineering/pr221-current776-linux-consumer-preflight/current-input-admission-v2.py"
+-        ),
+-        "3be2b971a43de3848c5a1aec59eecbeb6ac9dd796a81a6f2e489eab782492d1a",
++            "/workspace/engineering/pr221-current618-linux-consumer-preflight/current-input-admission-v3.py"
++        ),
++        "7474e6fae0e8d8d8211bfc9376697dcd14546b9c1a4ea5925c4042786720ea25",
+     ),
+ }
+ 
+@@ -270,7 +272,7 @@
+         "cli_version": version.stdout.strip(),
+         "limits": [
+             "Linux cp312 only",
+-            "original f5dd PR producer; tree equals actual776; selected209 tracked payloads only",
++            "original e766 PR producer; tree equals actual618; selected215 tracked payloads only",
+             "two Linux wheels available; full seven-artifact/tag/publication gate HOLD",
+             "generated OAuth required inputs measured EMPTY; authority/content HOLD even if imports pass",
+             "no tag provenance, upload, publication or Runtime service/browser proof",
+@@ -335,7 +337,7 @@
+     (ATTEMPT / "input-admission.json").write_text(
+         json.dumps(input_admission, indent=2, sort_keys=True) + "\n"
+     )
+-    temporary = Path(tempfile.mkdtemp(prefix="rt103-current776-", dir="/tmp"))
++    temporary = Path(tempfile.mkdtemp(prefix="rt103-current618-", dir="/tmp"))
+     temporary.chmod(0o700)
+     environment = load("floor").isolated_environment()
+     for name in list(environment):

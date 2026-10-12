@@ -1,0 +1,748 @@
+{
+  "artifact_id": 11699491969,
+  "cases": [
+    {
+      "identity_source_proofs": [
+        {
+          "Git_blob_sha256": "74a0646de66d3bfb5a30339080a37c5dc0f79b2e0ab46b7c16a6c19717e6d41b",
+          "exact_CRLF_representation_match": true,
+          "reported_windows_CRLF": {
+            "sha256": "36ea643613cd17028160f79e3646f4e48d4b271c94bfaf5ac488bcca60d347da",
+            "size": 17638
+          },
+          "source_path": "action_server/src/actions/server/_rcc.py"
+        },
+        {
+          "Git_blob_sha256": "847cf543ded2a745416e193355c810c12daccf9e81ecc344465f328af1937aa7",
+          "exact_CRLF_representation_match": true,
+          "reported_windows_CRLF": {
+            "sha256": "94c1ebe15ee8e2971da5056858b2c9726e4297a99f3b80cfae17f5b74d2a8721",
+            "size": 14638
+          },
+          "source_path": "action_server/src/actions/server/_robo_utils/process.py"
+        },
+        {
+          "Git_blob_sha256": "74fc0360481981311def7dad28ae716d4d001157059eae02df15a52b615ee5af",
+          "exact_CRLF_representation_match": true,
+          "reported_windows_CRLF": {
+            "sha256": "d07e6877c858d8ea51f3b8e4730dbb2014a7ef8b67038971474aa61b65cfb420",
+            "size": 26204
+          },
+          "source_path": "action_server/src/actions/server/_selftest.py"
+        },
+        {
+          "Git_blob_sha256": "2db8403ad100977951a4a07a0585668db493147d7be316e8d60641b7a416a854",
+          "exact_CRLF_representation_match": true,
+          "reported_windows_CRLF": {
+            "sha256": "7e75dc6b39c6bcd99c24ddd122b180b787780cfe15d97e6f7089518af0272ebd",
+            "size": 13575
+          },
+          "source_path": "action_server/tests/action_server_tests/fixtures.py"
+        },
+        {
+          "Git_blob_sha256": "943d3882e753f5d6ce31330b3783248c050c2c7eb8cf6ab1bedada020799d76c",
+          "exact_CRLF_representation_match": true,
+          "reported_windows_CRLF": {
+            "sha256": "6dfcdf9338978146dc016c181a7c03bdb90207357b15dca6da1e2212f10e3c73",
+            "size": 13345
+          },
+          "source_path": "action_server/tests/action_server_tests/native_startup_diagnostics.py"
+        },
+        {
+          "Git_blob_sha256": "1fa3944b8984314f7a00aeaf59b0927c5dd2b8995ff52536cd20e8d002feb0a3",
+          "exact_CRLF_representation_match": true,
+          "reported_windows_CRLF": {
+            "sha256": "a1bc4c378c3afce4c89f54ed1b27784db86ce98b27c03dbc8a0e72049a2eccdd",
+            "size": 15492
+          },
+          "source_path": "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py"
+        },
+        {
+          "Git_blob_sha256": "f02184650c57217f4784e3916d75c9d74085f3cf23685a84264bdf1571d86f34",
+          "exact_CRLF_representation_match": true,
+          "reported_windows_CRLF": {
+            "sha256": "9414dbfd31a49619005dc5417e36e421d60406fd9a3385ab9b6968760eba902f",
+            "size": 14354
+          },
+          "source_path": "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py"
+        }
+      ],
+      "nodeid": "tests/action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[resource]",
+      "original_final_host_observation": {
+        "after_start_returned": {
+          "host_readers_alive": [
+            true,
+            true
+          ],
+          "observation": "host_only",
+          "returncode": null
+        },
+        "exception": null,
+        "native_executable": {
+          "sha256": "6bf4d23df68b4ef87b7c2e2e8ddfb80fffc1c914a357f29953c2bb11f58963d0",
+          "size": 57752576
+        },
+        "outcome": "ready",
+        "sampler_alive": false,
+        "sampler_cancelled": true
+      },
+      "reported_rcc_config_measured_not_independently_generated_source_qualified": {
+        "sha256": "0ffa15d733a2d1d5a144e2fabbf21e6d4800d06c8ca56fd15f04673caa0e3c36",
+        "size": 61
+      },
+      "same_identity_interval_deltas": [
+        {
+          "CPU_seconds_delta": 0.0,
+          "operation80": "unavailable",
+          "operation88": "unavailable",
+          "pid": 5156,
+          "read_bytes_delta": 0,
+          "same_PID_creation_parent_tuple": true,
+          "write_bytes_delta": 0
+        },
+        {
+          "CPU_seconds_delta": 0.0,
+          "operation80": "unavailable",
+          "operation88": "unavailable",
+          "pid": 6744,
+          "read_bytes_delta": 7942,
+          "same_PID_creation_parent_tuple": true,
+          "write_bytes_delta": 33139
+        }
+      ],
+      "snapshots80_88": [
+        {
+          "elapsed_seconds": 80.047,
+          "snapshot": {
+            "captured_stderr": {
+              "characters": 4312,
+              "last_rcc_command": {
+                "bundled": true,
+                "config_argument_present": true,
+                "controller": "action-server",
+                "json": true,
+                "no_pyc_management": true,
+                "no_retry_build": true,
+                "operation": "holotree variables",
+                "package_argument_present": true,
+                "robocorp": true,
+                "space": "460c42919b8a21c5",
+                "unrecognized_arguments": 0
+              }
+            },
+            "captured_stdout_characters": 0,
+            "descendant_limit_reached": false,
+            "host_readers": [
+              {
+                "alive": true,
+                "ident": 6492
+              },
+              {
+                "alive": true,
+                "ident": 1812
+              }
+            ],
+            "pipes_closed": {
+              "stderr": false,
+              "stdout": false
+            },
+            "processes": [
+              {
+                "command": {
+                  "operation": "unavailable"
+                },
+                "cpu_seconds": 0.015625,
+                "created": 1791713159.957963,
+                "handles": 106,
+                "io_bytes": {
+                  "read": 64,
+                  "write": 0
+                },
+                "parent_pid": 1372,
+                "pid": 5156,
+                "status": "running"
+              },
+              {
+                "command": {
+                  "operation": "unavailable"
+                },
+                "cpu_seconds": 0.3125,
+                "created": 1791713159.9650161,
+                "handles": 217,
+                "io_bytes": {
+                  "read": 6152736,
+                  "write": 334483
+                },
+                "parent_pid": 5156,
+                "pid": 6744,
+                "status": "running"
+              },
+              {
+                "command": {
+                  "bundled": true,
+                  "config_argument_present": true,
+                  "controller": "action-server",
+                  "json": true,
+                  "no_pyc_management": true,
+                  "no_retry_build": true,
+                  "operation": "holotree variables",
+                  "package_argument_present": true,
+                  "robocorp": true,
+                  "space": "460c42919b8a21c5",
+                  "unrecognized_arguments": 0
+                },
+                "cpu_seconds": 21.46875,
+                "created": 1791713160.453689,
+                "effective_home_matches_launch": true,
+                "env_info_cache_exists": false,
+                "handles": 177,
+                "io_bytes": {
+                  "read": 659347233,
+                  "write": 155008781
+                },
+                "parent_pid": 6744,
+                "pid": 7760,
+                "rcc_executable": {
+                  "sha256": "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4",
+                  "size": 19985408
+                },
+                "staged_package": {
+                  "sha256": "fca4e1c7996139099f6fcc58a058b1df672cdaf7a3870bcd456a747455fa145e",
+                  "size": 204
+                },
+                "status": "running"
+              }
+            ],
+            "rcc_internal_readers": "unavailable_from_host",
+            "wrapper_pid": 5156,
+            "wrapper_returncode": null
+          }
+        },
+        {
+          "elapsed_seconds": 88.016,
+          "snapshot": {
+            "captured_stderr": {
+              "characters": 22868,
+              "last_rcc_command": null
+            },
+            "captured_stdout_characters": 0,
+            "descendant_limit_reached": false,
+            "host_readers": [
+              {
+                "alive": true,
+                "ident": 6492
+              },
+              {
+                "alive": true,
+                "ident": 1812
+              }
+            ],
+            "pipes_closed": {
+              "stderr": false,
+              "stdout": false
+            },
+            "processes": [
+              {
+                "command": {
+                  "operation": "unavailable"
+                },
+                "cpu_seconds": 0.015625,
+                "created": 1791713159.957963,
+                "handles": 106,
+                "io_bytes": {
+                  "read": 64,
+                  "write": 0
+                },
+                "parent_pid": 1372,
+                "pid": 5156,
+                "status": "running"
+              },
+              {
+                "command": {
+                  "operation": "unavailable"
+                },
+                "cpu_seconds": 0.3125,
+                "created": 1791713159.9650161,
+                "handles": 213,
+                "io_bytes": {
+                  "read": 6160678,
+                  "write": 367622
+                },
+                "parent_pid": 5156,
+                "pid": 6744,
+                "status": "running"
+              },
+              {
+                "command": {
+                  "operation": "unavailable"
+                },
+                "cpu_seconds": 0.609375,
+                "created": 1791713247.1817553,
+                "handles": 100,
+                "io_bytes": {
+                  "read": 2768415,
+                  "write": 2892126
+                },
+                "parent_pid": 6744,
+                "pid": 6952,
+                "status": "running"
+              }
+            ],
+            "rcc_internal_readers": "unavailable_from_host",
+            "wrapper_pid": 5156,
+            "wrapper_returncode": null
+          }
+        }
+      ]
+    },
+    {
+      "identity_source_proofs": [
+        {
+          "Git_blob_sha256": "74a0646de66d3bfb5a30339080a37c5dc0f79b2e0ab46b7c16a6c19717e6d41b",
+          "exact_CRLF_representation_match": true,
+          "reported_windows_CRLF": {
+            "sha256": "36ea643613cd17028160f79e3646f4e48d4b271c94bfaf5ac488bcca60d347da",
+            "size": 17638
+          },
+          "source_path": "action_server/src/actions/server/_rcc.py"
+        },
+        {
+          "Git_blob_sha256": "847cf543ded2a745416e193355c810c12daccf9e81ecc344465f328af1937aa7",
+          "exact_CRLF_representation_match": true,
+          "reported_windows_CRLF": {
+            "sha256": "94c1ebe15ee8e2971da5056858b2c9726e4297a99f3b80cfae17f5b74d2a8721",
+            "size": 14638
+          },
+          "source_path": "action_server/src/actions/server/_robo_utils/process.py"
+        },
+        {
+          "Git_blob_sha256": "74fc0360481981311def7dad28ae716d4d001157059eae02df15a52b615ee5af",
+          "exact_CRLF_representation_match": true,
+          "reported_windows_CRLF": {
+            "sha256": "d07e6877c858d8ea51f3b8e4730dbb2014a7ef8b67038971474aa61b65cfb420",
+            "size": 26204
+          },
+          "source_path": "action_server/src/actions/server/_selftest.py"
+        },
+        {
+          "Git_blob_sha256": "2db8403ad100977951a4a07a0585668db493147d7be316e8d60641b7a416a854",
+          "exact_CRLF_representation_match": true,
+          "reported_windows_CRLF": {
+            "sha256": "7e75dc6b39c6bcd99c24ddd122b180b787780cfe15d97e6f7089518af0272ebd",
+            "size": 13575
+          },
+          "source_path": "action_server/tests/action_server_tests/fixtures.py"
+        },
+        {
+          "Git_blob_sha256": "943d3882e753f5d6ce31330b3783248c050c2c7eb8cf6ab1bedada020799d76c",
+          "exact_CRLF_representation_match": true,
+          "reported_windows_CRLF": {
+            "sha256": "6dfcdf9338978146dc016c181a7c03bdb90207357b15dca6da1e2212f10e3c73",
+            "size": 13345
+          },
+          "source_path": "action_server/tests/action_server_tests/native_startup_diagnostics.py"
+        },
+        {
+          "Git_blob_sha256": "1fa3944b8984314f7a00aeaf59b0927c5dd2b8995ff52536cd20e8d002feb0a3",
+          "exact_CRLF_representation_match": true,
+          "reported_windows_CRLF": {
+            "sha256": "a1bc4c378c3afce4c89f54ed1b27784db86ce98b27c03dbc8a0e72049a2eccdd",
+            "size": 15492
+          },
+          "source_path": "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py"
+        },
+        {
+          "Git_blob_sha256": "f02184650c57217f4784e3916d75c9d74085f3cf23685a84264bdf1571d86f34",
+          "exact_CRLF_representation_match": true,
+          "reported_windows_CRLF": {
+            "sha256": "9414dbfd31a49619005dc5417e36e421d60406fd9a3385ab9b6968760eba902f",
+            "size": 14354
+          },
+          "source_path": "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py"
+        }
+      ],
+      "nodeid": "tests/action_server_tests/test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers",
+      "original_final_host_observation": {
+        "after_start_returned": {
+          "host_readers_alive": [
+            false,
+            false
+          ],
+          "observation": "host_only",
+          "returncode": 15
+        },
+        "exception": "TimeoutError",
+        "native_executable": {
+          "sha256": "6bf4d23df68b4ef87b7c2e2e8ddfb80fffc1c914a357f29953c2bb11f58963d0",
+          "size": 57752576
+        },
+        "outcome": "failed",
+        "sampler_alive": false,
+        "sampler_cancelled": true
+      },
+      "reported_rcc_config_measured_not_independently_generated_source_qualified": {
+        "sha256": "0ffa15d733a2d1d5a144e2fabbf21e6d4800d06c8ca56fd15f04673caa0e3c36",
+        "size": 61
+      },
+      "same_identity_interval_deltas": [
+        {
+          "CPU_seconds_delta": 0.0,
+          "operation80": "unavailable",
+          "operation88": "unavailable",
+          "pid": 5876,
+          "read_bytes_delta": 0,
+          "same_PID_creation_parent_tuple": true,
+          "write_bytes_delta": 0
+        },
+        {
+          "CPU_seconds_delta": 0.0,
+          "operation80": "unavailable",
+          "operation88": "unavailable",
+          "pid": 4608,
+          "read_bytes_delta": 0,
+          "same_PID_creation_parent_tuple": true,
+          "write_bytes_delta": 0
+        },
+        {
+          "CPU_seconds_delta": 4.71875,
+          "operation80": "holotree variables",
+          "operation88": "holotree variables",
+          "pid": 2516,
+          "read_bytes_delta": 26735013,
+          "same_PID_creation_parent_tuple": true,
+          "write_bytes_delta": 70315694
+        }
+      ],
+      "snapshots80_88": [
+        {
+          "elapsed_seconds": 80.047,
+          "snapshot": {
+            "captured_stderr": {
+              "characters": 4308,
+              "last_rcc_command": {
+                "bundled": true,
+                "config_argument_present": true,
+                "controller": "action-server",
+                "json": true,
+                "no_pyc_management": true,
+                "no_retry_build": true,
+                "operation": "holotree variables",
+                "package_argument_present": true,
+                "robocorp": true,
+                "space": "460c42919b8a21c5",
+                "unrecognized_arguments": 0
+              }
+            },
+            "captured_stdout_characters": 0,
+            "descendant_limit_reached": false,
+            "host_readers": [
+              {
+                "alive": true,
+                "ident": 7432
+              },
+              {
+                "alive": true,
+                "ident": 5328
+              }
+            ],
+            "pipes_closed": {
+              "stderr": false,
+              "stdout": false
+            },
+            "processes": [
+              {
+                "command": {
+                  "operation": "unavailable"
+                },
+                "cpu_seconds": 0.015625,
+                "created": 1791713068.3481593,
+                "handles": 106,
+                "io_bytes": {
+                  "read": 64,
+                  "write": 0
+                },
+                "parent_pid": 1372,
+                "pid": 5876,
+                "status": "running"
+              },
+              {
+                "command": {
+                  "operation": "unavailable"
+                },
+                "cpu_seconds": 0.3125,
+                "created": 1791713068.354836,
+                "handles": 217,
+                "io_bytes": {
+                  "read": 6150856,
+                  "write": 334008
+                },
+                "parent_pid": 5876,
+                "pid": 4608,
+                "status": "running"
+              },
+              {
+                "command": {
+                  "bundled": true,
+                  "config_argument_present": true,
+                  "controller": "action-server",
+                  "json": true,
+                  "no_pyc_management": true,
+                  "no_retry_build": true,
+                  "operation": "holotree variables",
+                  "package_argument_present": true,
+                  "robocorp": true,
+                  "space": "460c42919b8a21c5",
+                  "unrecognized_arguments": 0
+                },
+                "cpu_seconds": 17.515625,
+                "created": 1791713068.7573414,
+                "effective_home_matches_launch": true,
+                "env_info_cache_exists": false,
+                "handles": 176,
+                "io_bytes": {
+                  "read": 670181779,
+                  "write": 178952796
+                },
+                "parent_pid": 4608,
+                "pid": 2516,
+                "rcc_executable": {
+                  "sha256": "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4",
+                  "size": 19985408
+                },
+                "staged_package": {
+                  "sha256": "6e96c2ce5b512d3bb11800e6686391ca52ceb406df981b650b226e843fe77de6",
+                  "size": 206
+                },
+                "status": "running"
+              }
+            ],
+            "rcc_internal_readers": "unavailable_from_host",
+            "wrapper_pid": 5876,
+            "wrapper_returncode": null
+          }
+        },
+        {
+          "elapsed_seconds": 88.031,
+          "snapshot": {
+            "captured_stderr": {
+              "characters": 4308,
+              "last_rcc_command": {
+                "bundled": true,
+                "config_argument_present": true,
+                "controller": "action-server",
+                "json": true,
+                "no_pyc_management": true,
+                "no_retry_build": true,
+                "operation": "holotree variables",
+                "package_argument_present": true,
+                "robocorp": true,
+                "space": "460c42919b8a21c5",
+                "unrecognized_arguments": 0
+              }
+            },
+            "captured_stdout_characters": 0,
+            "descendant_limit_reached": false,
+            "host_readers": [
+              {
+                "alive": true,
+                "ident": 7432
+              },
+              {
+                "alive": true,
+                "ident": 5328
+              }
+            ],
+            "pipes_closed": {
+              "stderr": false,
+              "stdout": false
+            },
+            "processes": [
+              {
+                "command": {
+                  "operation": "unavailable"
+                },
+                "cpu_seconds": 0.015625,
+                "created": 1791713068.3481593,
+                "handles": 106,
+                "io_bytes": {
+                  "read": 64,
+                  "write": 0
+                },
+                "parent_pid": 1372,
+                "pid": 5876,
+                "status": "running"
+              },
+              {
+                "command": {
+                  "operation": "unavailable"
+                },
+                "cpu_seconds": 0.3125,
+                "created": 1791713068.354836,
+                "handles": 217,
+                "io_bytes": {
+                  "read": 6150856,
+                  "write": 334008
+                },
+                "parent_pid": 5876,
+                "pid": 4608,
+                "status": "running"
+              },
+              {
+                "command": {
+                  "bundled": true,
+                  "config_argument_present": true,
+                  "controller": "action-server",
+                  "json": true,
+                  "no_pyc_management": true,
+                  "no_retry_build": true,
+                  "operation": "holotree variables",
+                  "package_argument_present": true,
+                  "robocorp": true,
+                  "space": "460c42919b8a21c5",
+                  "unrecognized_arguments": 0
+                },
+                "cpu_seconds": 22.234375,
+                "created": 1791713068.7573414,
+                "effective_home_matches_launch": true,
+                "env_info_cache_exists": false,
+                "handles": 176,
+                "io_bytes": {
+                  "read": 696916792,
+                  "write": 249268490
+                },
+                "parent_pid": 4608,
+                "pid": 2516,
+                "rcc_executable": {
+                  "sha256": "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4",
+                  "size": 19985408
+                },
+                "staged_package": {
+                  "sha256": "6e96c2ce5b512d3bb11800e6686391ca52ceb406df981b650b226e843fe77de6",
+                  "size": 206
+                },
+                "status": "running"
+              }
+            ],
+            "rcc_internal_readers": "unavailable_from_host",
+            "wrapper_pid": 5876,
+            "wrapper_returncode": null
+          }
+        }
+      ]
+    }
+  ],
+  "classification": {
+    "active_same_identity_failed_RCC80_to88": {
+      "CPU_seconds": 4.71875,
+      "read_bytes": 26735013,
+      "write_bytes": 70315694
+    },
+    "actual_cleanup_owned_snapshot_reap_live_zombie_error_predicates": "UNKNOWN_NOT_REPORTED",
+    "env_info_cache_absence_not_cache_defect": true,
+    "failed_case_observation": "same RCC holotree variables process activeCPU/IO; capturedstdout0 and capturedstderr4308 unchanged; missinginternal marks/forwarding not identified",
+    "failed_final_host_fields": {
+      "host_readers_alive": [
+        false,
+        false
+      ],
+      "returncode": 15,
+      "sampler_alive": false,
+      "sampler_cancelled": true
+    },
+    "native_binary_measured_report_identity_not_wholewheel_or_newnativequalification": true,
+    "no_incomplete_note_not_cleanup_PASS": true,
+    "process_identity_tuple_comparison_not_universal_live_handle_revalidation_or_all_descendant_census": true,
+    "root_cause": "UNKNOWN",
+    "sampler_cancelled_is_cancel_requested_not_process_cleanup": true,
+    "source_fix_or_timeout_change_justified": false,
+    "successful_case_observation": "RCC observed80, absent from88 bounded forest with new child; stderr4312\u219222868; final ready; disappearance not independentlyprovedreaping",
+    "two_observer_nodes": "one FIRSTstartup90 TimeoutError and one successful catalog readiness; observer is not entire150 casecensus",
+    "whole_integration": {
+      "FAIL": 1,
+      "PASS": 130,
+      "SKIP": 19
+    }
+  },
+  "documentation_improvement": {
+    "evidence": "same PID/creation/parent at80and88 adds4.71875CPU seconds and measured diskbytes while later hostrc15/readersfalse doesnot expose actual ownership cleanup",
+    "exact_delta": "none; verified existing accepted terminal-census/activeCPU-I/O/missingmarks/host-cleanup paragraph already encodes this learning",
+    "remaining_uncertainty": "internalvariables phase/ready emission/pipearrival/forwarding/actualcleanup unavailable; sourcecausation not established",
+    "stale_ambiguity": "separate current150casecensus from two-node observer and host observation from descendant cleanup",
+    "verified_existing_text": "Active RCC CPU/I/O does not establish a preparation cause;"
+  },
+  "exact8_original_members": [
+    {
+      "bytes": 1913,
+      "path": "/workspace/engineering/pr300-current618-original-startup-artifact-owned/34ec97696df8d90c-2.json",
+      "sha256": "4ba44af101c2d3cd7c61dbb2e58d9d60e914db6b042a88a0060cd57da02acf6b"
+    },
+    {
+      "bytes": 1578,
+      "path": "/workspace/engineering/pr300-current618-original-startup-artifact-owned/34ec97696df8d90c-1.json",
+      "sha256": "f5a1330c4b4077dac03dc807eb337b889210a5ada8e40095e82e231e1e6a346e"
+    },
+    {
+      "bytes": 1063,
+      "path": "/workspace/engineering/pr300-current618-original-startup-artifact-owned/34ec97696df8d90c-3.json",
+      "sha256": "00de2b47cc546f83f9d3be0467a2cf896dd837b78963083e36368c8c60dd0f93"
+    },
+    {
+      "bytes": 319,
+      "path": "/workspace/engineering/pr300-current618-original-startup-artifact-owned/34ec97696df8d90c-4.json",
+      "sha256": "2dde9352400eca6dec6010cba9663bcd2995780adc10a6a3df41dd56db72cce3"
+    },
+    {
+      "bytes": 1559,
+      "path": "/workspace/engineering/pr300-current618-original-startup-artifact-owned/7d0f2e912f58600f-1.json",
+      "sha256": "422c2af1bef42c35ce34269548a7c4d3dc4e054a8f345665b571d319080a6874"
+    },
+    {
+      "bytes": 1915,
+      "path": "/workspace/engineering/pr300-current618-original-startup-artifact-owned/7d0f2e912f58600f-2.json",
+      "sha256": "3af3d96df2ef8d88c609111cedccbeabb9200ce22503d8c5c24413782171f76a"
+    },
+    {
+      "bytes": 330,
+      "path": "/workspace/engineering/pr300-current618-original-startup-artifact-owned/7d0f2e912f58600f-4.json",
+      "sha256": "3510089eb76e3f73bf7cb83a86ffa170f51d8e91d35ecafdcdd6d554f4ee567e"
+    },
+    {
+      "bytes": 1915,
+      "path": "/workspace/engineering/pr300-current618-original-startup-artifact-owned/7d0f2e912f58600f-3.json",
+      "sha256": "870e471d4f44ed95f3934e68fd9c7c7c78ed24bc3f31137086cc2141205379b7"
+    }
+  ],
+  "frozen_at_UTC": "2026-10-11T11:26:06.266091+00:00",
+  "immutable_constructor": {
+    "bytes": 9377,
+    "path": "/workspace/engineering/pr300-current618-original-startup-artifact-owned/freeze-original-allowlisted-observer-evidence.py",
+    "sha256": "dd8156db7876ed365f64edf985d047a3751785894e13c2ea0e0096324b4b52d5"
+  },
+  "job": 114440174596,
+  "no_source_tests_rerun_native_browser_provider_installer_publication_merge_mutation": true,
+  "one_connector_acquisition_no_retry": true,
+  "original_ZIP": {
+    "bytes": 5776,
+    "path": "/workspace/attachments/3d364fa6-2b44-4fb0-a31e-7a4c2e20e07e/pr300-original-current-Windows-startup-diagnostics-11699491969.zip",
+    "sha256": "fdf2ec1a863ef47c98ec26b1ff7d5a0c4a9be1598e1be7a29a1cbb1f863696a8"
+  },
+  "original_actual_checkout": "2076246f60afc4c8fb069b4206699e57e006890b",
+  "original_connector_result_private0600_not_Git": {
+    "bytes": 2042,
+    "path": "/workspace/engineering/pr300-current618-original-startup-artifact-owned/original-connector-result.private.json",
+    "sha256": "e746b7c5cd19cc1b336999896ef64e126d9f8674267e5f18ea5ed6f8d7f8aa88"
+  },
+  "original_log_diagnosis_unchanged": {
+    "bytes": 91422,
+    "path": "/workspace/engineering/pr300-current618-original-Windows-owned/OWNERFINAL-original-current300-Windows-bounded-first-startup-diagnosis.json",
+    "sha256": "56098cf774c36b7049e1cb288a2d427deee3df4996ac2cfbe2f7bde483f7401e"
+  },
+  "run": 38129325703,
+  "safe_allowlist_no_unknown_fields_no_rawenv_URLs_provider_payloads": true,
+  "schema": "original-current300-allowlisted-observer-evidence-v1",
+  "source_head": "7840057a8b055576d11d339d8c0fbb738927a491",
+  "source_tree": "10e09d88027ca4fea512ff06c57efaab95755ffb",
+  "status": "GO_AUTHENTICATED_BOUNDED_EVIDENCE_ADMISSION__PR300_MERGE_HOLD",
+  "target": "6181b044c75de35386f1ae30e71725398b6a7feb",
+  "upstream_disposition": "none"
+}

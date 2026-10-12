@@ -1,0 +1,282 @@
+{
+  "byte_exact_copy_verification": "PASS_ALL_SELECTED",
+  "capture": "2026-10-12T00:34:53.342812+00:00",
+  "count": 24,
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "evidence": "Original305 SOURCE HOLD33eb; retained60acf helper645 deadline; PR313 independent2cb findings and corrected e3d079 SOURCE-only review. No implemented/native adoption claim.",
+    "exact_deltas": [
+      "primary640-unexecuted-HOLD/canonical-primary-only-deadline-external-authority-and-owned-cleanup-proposed.txt",
+      "pr313-exact-CONFIG-buffer-SOURCE/canonical-verified-authority-buffer-and-consumed-CONFIG-proposed.txt"
+    ],
+    "remaining_uncertainty": "Workspace retirement stops prepared controls/parent/native/OAuth work; none of these pending gates may be inferred passed."
+  },
+  "files": [
+    {
+      "bytes": 50238,
+      "copied_mode": "0o400",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/FROZEN-305-primary640-inputs-NOTRUN.json",
+      "relative_name": "primary640-unexecuted-HOLD/FROZEN-305-primary640-inputs-NOTRUN.json",
+      "scope": "AUTHORED_PRIVATE_SOURCE_OR_REFERENCE_CONFIG_OR_SAFE_OWNER_ONLY_NOT_EXECUTION_ADOPTION",
+      "sha256": "93ceb104e8a93fbdd872d1fa42523fe6ba3456ba6936d67be6b626fc3fb3876e"
+    },
+    {
+      "bytes": 62198,
+      "copied_mode": "0o400",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/FROZEN-313-primary640-inputs-NOTRUN.json",
+      "relative_name": "primary640-unexecuted-HOLD/FROZEN-313-primary640-inputs-NOTRUN.json",
+      "scope": "AUTHORED_PRIVATE_SOURCE_OR_REFERENCE_CONFIG_OR_SAFE_OWNER_ONLY_NOT_EXECUTION_ADOPTION",
+      "sha256": "756757a5c35b180f065bf91c67f41a9582ba9e8699d333f11ea14508eb0ad8cc"
+    },
+    {
+      "bytes": 9455,
+      "copied_mode": "0o400",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/OWNERFINAL-interrupted-primary640-source-preparation-checkpoint-NOTRUN-HOLD.json",
+      "relative_name": "primary640-unexecuted-HOLD/OWNERFINAL-interrupted-primary640-source-preparation-checkpoint-NOTRUN-HOLD.json",
+      "scope": "AUTHORED_PRIVATE_SOURCE_OR_REFERENCE_CONFIG_OR_SAFE_OWNER_ONLY_NOT_EXECUTION_ADOPTION",
+      "sha256": "f7ce8eb2514871d90c684ad05b2987e790a088be10e56e2c23281773b1809903"
+    },
+    {
+      "bytes": 517,
+      "copied_mode": "0o400",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/canonical-primary-only-deadline-external-authority-and-owned-cleanup-proposed.txt",
+      "relative_name": "primary640-unexecuted-HOLD/canonical-primary-only-deadline-external-authority-and-owned-cleanup-proposed.txt",
+      "scope": "AUTHORED_PRIVATE_SOURCE_OR_REFERENCE_CONFIG_OR_SAFE_OWNER_ONLY_NOT_EXECUTION_ADOPTION",
+      "sha256": "e5305ce13a50adb9b95181f896be45c9b9cd68704a4edb1352d76057901446a7"
+    },
+    {
+      "bytes": 10076,
+      "copied_mode": "0o444",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/construct_source_only_primary640_profiles.py",
+      "relative_name": "primary640-unexecuted-HOLD/construct_source_only_primary640_profiles.py",
+      "scope": "AUTHORED_PRIVATE_SOURCE_OR_REFERENCE_CONFIG_OR_SAFE_OWNER_ONLY_NOT_EXECUTION_ADOPTION",
+      "sha256": "c467b4a629d88bc770fa48e2e609d24f63abe4f6d996c8d2810244f3fef37351"
+    },
+    {
+      "bytes": 6744,
+      "copied_mode": "0o444",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/current_305_primary_only_phase_child_NOTRUN.py",
+      "relative_name": "primary640-unexecuted-HOLD/current_305_primary_only_phase_child_NOTRUN.py",
+      "scope": "AUTHORED_PRIVATE_SOURCE_OR_REFERENCE_CONFIG_OR_SAFE_OWNER_ONLY_NOT_EXECUTION_ADOPTION",
+      "sha256": "1138f7722843382200689047c16215f3c1cb21e17c1d91d099359facbae62358"
+    },
+    {
+      "bytes": 4329,
+      "copied_mode": "0o444",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/current_305_read_only_source_guard_NOTRUN.py",
+      "relative_name": "primary640-unexecuted-HOLD/current_305_read_only_source_guard_NOTRUN.py",
+      "scope": "AUTHORED_PRIVATE_SOURCE_OR_REFERENCE_CONFIG_OR_SAFE_OWNER_ONLY_NOT_EXECUTION_ADOPTION",
+      "sha256": "564a6716401b88c8c98398ebb979d7ae1699b319af8c8844116fa9a42f603fde"
+    },
+    {
+      "bytes": 6729,
+      "copied_mode": "0o444",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/current_313_primary_only_phase_child_NOTRUN.py",
+      "relative_name": "primary640-unexecuted-HOLD/current_313_primary_only_phase_child_NOTRUN.py",
+      "scope": "AUTHORED_PRIVATE_SOURCE_OR_REFERENCE_CONFIG_OR_SAFE_OWNER_ONLY_NOT_EXECUTION_ADOPTION",
+      "sha256": "c51cabace4ceebc4e3733f8d7bb1aa4276355dd9b45ee7fd726ac1d8dda6eb4c"
+    },
+    {
+      "bytes": 4595,
+      "copied_mode": "0o444",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/current_313_read_only_source_guard_NOTRUN.py",
+      "relative_name": "primary640-unexecuted-HOLD/current_313_read_only_source_guard_NOTRUN.py",
+      "scope": "AUTHORED_PRIVATE_SOURCE_OR_REFERENCE_CONFIG_OR_SAFE_OWNER_ONLY_NOT_EXECUTION_ADOPTION",
+      "sha256": "9c57d50066d1bdbf1d0b1c68d8b8b7cae8b87c6944b9ece0baf0981920193d8f"
+    },
+    {
+      "bytes": 5682,
+      "copied_mode": "0o400",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/exact-source-profile-and-original-phase-preservation-proof-NOTRUN.json",
+      "relative_name": "primary640-unexecuted-HOLD/exact-source-profile-and-original-phase-preservation-proof-NOTRUN.json",
+      "scope": "AUTHORED_PRIVATE_SOURCE_OR_REFERENCE_CONFIG_OR_SAFE_OWNER_ONLY_NOT_EXECUTION_ADOPTION",
+      "sha256": "6ba67e1ff2570fc2c6e218ad76afec8f5152f1da27b69f9ec95dce8c3507c210"
+    },
+    {
+      "bytes": 4963,
+      "copied_mode": "0o444",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/original_supervisor_observation_entry_NOTRUN.py",
+      "relative_name": "primary640-unexecuted-HOLD/original_supervisor_observation_entry_NOTRUN.py",
+      "scope": "AUTHORED_PRIVATE_SOURCE_OR_REFERENCE_CONFIG_OR_SAFE_OWNER_ONLY_NOT_EXECUTION_ADOPTION",
+      "sha256": "3e7d0b5caea59fa317dfee1eeecdd224ce7b932db7b07dcc539d58d259f7e1a4"
+    },
+    {
+      "bytes": 11922,
+      "copied_mode": "0o444",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/owned_primary_boundary_NOTRUN.py",
+      "relative_name": "primary640-unexecuted-HOLD/owned_primary_boundary_NOTRUN.py",
+      "scope": "AUTHORED_PRIVATE_SOURCE_OR_REFERENCE_CONFIG_OR_SAFE_OWNER_ONLY_NOT_EXECUTION_ADOPTION",
+      "sha256": "7d0b24e76d4e632719450ffea641ce858cc891edabddcbbed9c1c4bcfa5942bc"
+    },
+    {
+      "bytes": 11507,
+      "copied_mode": "0o444",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/source_light_external_parent_NOTRUN.py",
+      "relative_name": "primary640-unexecuted-HOLD/source_light_external_parent_NOTRUN.py",
+      "scope": "AUTHORED_PRIVATE_SOURCE_OR_REFERENCE_CONFIG_OR_SAFE_OWNER_ONLY_NOT_EXECUTION_ADOPTION",
+      "sha256": "61486e29a9ec9d61c12d718557e34fc110bbf592e148bd7601309f5929ac27f3"
+    },
+    {
+      "bytes": 1300,
+      "copied_mode": "0o400",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/static-unexecuted-draft-census-and-gating-findings-HOLD.json",
+      "relative_name": "primary640-unexecuted-HOLD/static-unexecuted-draft-census-and-gating-findings-HOLD.json",
+      "scope": "AUTHORED_PRIVATE_SOURCE_OR_REFERENCE_CONFIG_OR_SAFE_OWNER_ONLY_NOT_EXECUTION_ADOPTION",
+      "sha256": "a0df3d897e35d2a7571efaf7b3737310895ed47640f4ee38dce911df39a84f78"
+    },
+    {
+      "bytes": 58670,
+      "copied_mode": "0o400",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/FROZEN-current2d86-private-cached-bounded-LIGHT-inputs-NOTRUN.json",
+      "relative_name": "pr313-exact-CONFIG-buffer-SOURCE/FROZEN-current2d86-private-cached-bounded-LIGHT-inputs-NOTRUN.json",
+      "scope": "AUTHORED_PRIVATE_SOURCE_OR_REFERENCE_CONFIG_OR_SAFE_OWNER_ONLY_NOT_EXECUTION_ADOPTION",
+      "sha256": "2d1c4f81d6015080be4e3480914b3759e44d391b9687de45653e7c5ae895d1c2"
+    },
+    {
+      "bytes": 7221,
+      "copied_mode": "0o400",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/OWNERFINAL-current2d86-private-CONFIG-captured-buffer-minimal-SOURCE-successor-NOTRUN.json",
+      "relative_name": "pr313-exact-CONFIG-buffer-SOURCE/OWNERFINAL-current2d86-private-CONFIG-captured-buffer-minimal-SOURCE-successor-NOTRUN.json",
+      "scope": "AUTHORED_PRIVATE_SOURCE_OR_REFERENCE_CONFIG_OR_SAFE_OWNER_ONLY_NOT_EXECUTION_ADOPTION",
+      "sha256": "bc1382cdcb88faddf36e56c6d6823efe77252e065167383ce5843a96bb94f494"
+    },
+    {
+      "bytes": 322,
+      "copied_mode": "0o400",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/canonical-verified-authority-buffer-and-consumed-CONFIG-proposed.txt",
+      "relative_name": "pr313-exact-CONFIG-buffer-SOURCE/canonical-verified-authority-buffer-and-consumed-CONFIG-proposed.txt",
+      "scope": "AUTHORED_PRIVATE_SOURCE_OR_REFERENCE_CONFIG_OR_SAFE_OWNER_ONLY_NOT_EXECUTION_ADOPTION",
+      "sha256": "574c551c8e3adb86ce44bcd6305a7836040f1da3a8f6bf5c06fa6ad8e83697b8"
+    },
+    {
+      "bytes": 11322,
+      "copied_mode": "0o600",
+      "original_mode": "0o600",
+      "original_path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/construct_exact_CONFIG_and_verified_buffer_source_successor.py",
+      "relative_name": "pr313-exact-CONFIG-buffer-SOURCE/construct_exact_CONFIG_and_verified_buffer_source_successor.py",
+      "scope": "AUTHORED_PRIVATE_SOURCE_OR_REFERENCE_CONFIG_OR_SAFE_OWNER_ONLY_NOT_EXECUTION_ADOPTION",
+      "sha256": "32fbbf2462c9fbc81a7d9c913bd3ed7629f9cdda6de54879c1ecc0dd87427af0"
+    },
+    {
+      "bytes": 5971,
+      "copied_mode": "0o444",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/current_2d86_readonly_source_and_full_authority_guard_NOTRUN.py",
+      "relative_name": "pr313-exact-CONFIG-buffer-SOURCE/current_2d86_readonly_source_and_full_authority_guard_NOTRUN.py",
+      "scope": "AUTHORED_PRIVATE_SOURCE_OR_REFERENCE_CONFIG_OR_SAFE_OWNER_ONLY_NOT_EXECUTION_ADOPTION",
+      "sha256": "c639494b57f8406fc699e880c8e2605acb0f622dce4c33d94655550a709bb68a"
+    },
+    {
+      "bytes": 3919,
+      "copied_mode": "0o400",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/exact-consumed-CONFIG-and-captured-buffer-parser-identity-source-proof-NOTRUN.json",
+      "relative_name": "pr313-exact-CONFIG-buffer-SOURCE/exact-consumed-CONFIG-and-captured-buffer-parser-identity-source-proof-NOTRUN.json",
+      "scope": "AUTHORED_PRIVATE_SOURCE_OR_REFERENCE_CONFIG_OR_SAFE_OWNER_ONLY_NOT_EXECUTION_ADOPTION",
+      "sha256": "0905ab419dab7fa5e2091087ccb1906d830ac3ea5324df820f43ba3345fee670"
+    },
+    {
+      "bytes": 10636,
+      "copied_mode": "0o444",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/launch_current2d86_private_cached_bounded_LIGHT_once_NOTRUN.py",
+      "relative_name": "pr313-exact-CONFIG-buffer-SOURCE/launch_current2d86_private_cached_bounded_LIGHT_once_NOTRUN.py",
+      "scope": "AUTHORED_PRIVATE_SOURCE_OR_REFERENCE_CONFIG_OR_SAFE_OWNER_ONLY_NOT_EXECUTION_ADOPTION",
+      "sha256": "daa8a0cf96b3f110c71a908767d58c7aea87649568a89a888f2c6cd8bc870070"
+    },
+    {
+      "bytes": 1045,
+      "copied_mode": "0o400",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/required-buffer-identity-and-nested-address-controls-plan-NOTRUN.json",
+      "relative_name": "pr313-exact-CONFIG-buffer-SOURCE/required-buffer-identity-and-nested-address-controls-plan-NOTRUN.json",
+      "scope": "AUTHORED_PRIVATE_SOURCE_OR_REFERENCE_CONFIG_OR_SAFE_OWNER_ONLY_NOT_EXECUTION_ADOPTION",
+      "sha256": "95ca293edfa3d3acc92444f6b2b0cad8f7af7deff13cf2c5925f8ef2c61c07ff"
+    },
+    {
+      "bytes": 3769,
+      "copied_mode": "0o400",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/required-external-all-outcome-parent-and-strict-ROOT-adoption-contract-NOTRUN.json",
+      "relative_name": "pr313-exact-CONFIG-buffer-SOURCE/required-external-all-outcome-parent-and-strict-ROOT-adoption-contract-NOTRUN.json",
+      "scope": "AUTHORED_PRIVATE_SOURCE_OR_REFERENCE_CONFIG_OR_SAFE_OWNER_ONLY_NOT_EXECUTION_ADOPTION",
+      "sha256": "3537d886fd806d435db8f3899c2d6b572b5b882925dc2737acec1b12958670a7"
+    },
+    {
+      "bytes": 7169,
+      "copied_mode": "0o400",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/pr313-current2d86-config-buffer-independent-SOURCE-review/OWNERFINAL-independent-current2d86-minimal-CONFIG-captured-buffer-SOURCE-GO-PREEXEC-HOLD.json",
+      "relative_name": "pr313-exact-CONFIG-buffer-SOURCE-review/OWNERFINAL-independent-current2d86-minimal-CONFIG-captured-buffer-SOURCE-GO-PREEXEC-HOLD.json",
+      "scope": "AUTHORED_PRIVATE_SOURCE_OR_REFERENCE_CONFIG_OR_SAFE_OWNER_ONLY_NOT_EXECUTION_ADOPTION",
+      "sha256": "e3d0798b53f547cea0be6421aad955a85edc8dabd9829c96279ae04ac3bfbffb"
+    }
+  ],
+  "limitations": [
+    "Primary640 draft HOLD: cached Process.is_running can misclassify PID reuse; named correction not authored. No baseline-first control code or execution; deadline geometry and final cleanup source not independently accepted.",
+    "SOURCE profiles still require exact independent review, implemented/passing controls and ROOT distinct release. No Toolkit import, gate, native, cgroup or signal execution occurred in this work.",
+    "PR313 minimal CONFIG/buffer correction has independent SOURCE GO only; external parent/control/capacity/PREEXEC HOLD remains.",
+    "All SOURCE configs bind external historical inputs; these copied sources are not a standalone executable or execution grant. Native binary/helper1192, earlier237/118/83 inventories, package environments and original logs remain local-only or already separate ROOT handoff evidence.",
+    "Native Action/pool/TCP/provider reader and lease gates remain unqualified; outer regular-file/ECHILD facts cannot upgrade them.",
+    "OAuth audit/implementation NOT_STARTED. Existing clean3079760 was preserved without mutation; current directive requires future repository-owned config contract audit before implementation."
+  ],
+  "local_only_not_exported": [
+    "Full native1192 fixture/assets and package environments",
+    "Original raw execution logs/JUnit/robolog and private full inventory/alias archives",
+    "Original60acf retained native helper and original canvasV5runner dependencies; source references retained only",
+    "Any ROOT execution grant, captured child environment, signed URL/MCP wire download data",
+    "Old private305/313 preparation reference datasets outside these authored packets"
+  ],
+  "private_material_scan": "No credential/signed-URL/raw-environment/grant/log/binary/index fields in selected copies; managed expected activation path constants retained in SOURCE configs, not a captured live environment",
+  "schema": 1,
+  "shared_checkpoint_commit": "ROOT_ONLY_WORKER_DID_NOT_STAGE_COMMIT_PUSH",
+  "source_heads": [
+    {
+      "PR": "305",
+      "clean": true,
+      "head": "f75dcae52fcd78c5c382d3903b012e5b049ca48b",
+      "push": "ROOT_OWNS_NO_WORKER_PUSH",
+      "root": "/workspace/engineering/pr305",
+      "tree": "851834ae6cc87f42abfcf3c963542191e2815599",
+      "worker_B_product_delta": "NONE"
+    },
+    {
+      "PR": "313",
+      "clean": true,
+      "head": "2d86c5cf92d3acb274a8ceb5d57bfb8b12c779b6",
+      "push": "ROOT_OWNS_NO_WORKER_PUSH",
+      "root": "/workspace/engineering/captured-child-cleanup",
+      "tree": "653a9e73e4d27641ec86de94b90f35d41e0f24f8",
+      "worker_B_product_delta": "NONE"
+    },
+    {
+      "PR": "307",
+      "clean": true,
+      "head": "9760d5ec44876558c4941c4c3190abc8d92d14a1",
+      "push": "ROOT_OWNS_NO_WORKER_PUSH",
+      "root": "/workspace/engineering/pr307",
+      "tree": "0d33ebaac258e069ef7045a29b4a3904740f6307",
+      "worker_B_product_delta": "NONE"
+    }
+  ],
+  "status": "EMERGENCY_STOPPED_SAFE_SOURCE_EXPORT_ONLY",
+  "total_bytes": 300299,
+  "upstream_disposition": "none"
+}

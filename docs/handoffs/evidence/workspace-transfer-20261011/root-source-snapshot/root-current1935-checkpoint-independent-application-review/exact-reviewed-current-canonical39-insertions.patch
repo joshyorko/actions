@@ -1,0 +1,47 @@
+diff --git a/docs/skills/repository-operations.md b/docs/skills/repository-operations.md
+index 5e800842..8ed3245c 100644
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -3542,3 +3542,42 @@ Compare PAX modification times as exact decimal nanoseconds, not rounded floats.
+ Preserve a primary archive-write exception when close/footer or postguards also
+ fail, recording the secondary failure separately. These guards preserve storage
+ bytes and metadata; they do not establish source origin or universal quiescence.
++
++Keep historical fixture bindings keyed by path and content hash. When a live
++fixture changes, verify the old row against its original qualified config and
++immutable Git/snapshot bytes; bind the current live fixture separately.
++
++On Windows, `str(Path("/service-free/rcc"))` renders native separators even when
++a fixture starts from a POSIX-looking literal. Compare captured subprocess and
++injected-runner arguments with the same Path contract; keep version, argument
++order and timeout assertions intact. A Linux-only runtime fixture skip does not
++exclude its helper from Windows type checks. Admit callable UID/GID features
++before using POSIX ownership, read the real values once, and fail closed when
++those features are unavailable; never synthesize Windows ownership values.
++
++A managed Python executable does not establish executable search identity for
++Poetry. For a prepared Toolkit metadata guard, keep the primary pinned RCC bin
++first and its verified cached Toolkit bin second on PATH before delegation;
++check that Poetry resolves from that cached prefix. A distinct read-only probe
++can diagnose this environment without identifying an earlier discarded cause.
++Persist subprocess stdout, stderr and terminal classification before asserting
++return-code admission, on success, nonzero return, timeout and spawn failure.
++Represent unavailable streams explicitly; preserve a primary exception when
++retention also fails, and fail closed if a successful result cannot be retained.
++Use separate owned before/after captures and refuse a reused capture path.
++
++Data-only inspectors that use assertions must reject optimized Python before
++reading admission inputs; syntax compilation does not prove those checks ran.
++Require the root release to be a regular, nonsymlink, mode-0600 file before
++parsing its typed authorization. Admit all ZIP headers before reading
++payloads so a later oversized or special member cannot bypass the initial
++resource boundary. Exercise the real frozen functions against independent
++restored baselines and poisons. Structural success retains separate source,
++generated-content and consumer authority holds.
++
++Bind each Runtime distribution to its producer’s literal original checkout SHA,
++then authenticate that commit’s tree and ordered parents from retained Git API
++or Git-object evidence. A workflow’s source/head label can name the integration
++commit while the job checks out a synthetic merge; qualify each platform from
++its own original log. Producer SUCCESS and wheel-version output establish build
++identity only; inspect content and installed consumers separately.

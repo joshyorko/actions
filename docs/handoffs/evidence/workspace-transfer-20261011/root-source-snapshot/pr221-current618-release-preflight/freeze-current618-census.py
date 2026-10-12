@@ -1,0 +1,67 @@
+from pathlib import Path
+import collections,fnmatch,hashlib,itertools,json,subprocess,yaml
+D=Path('/workspace/engineering/pr221-current618-release-preflight');R=Path('/workspace/actions');H='6181b044c75de35386f1ae30e71725398b6a7feb';B='a70993fafc99a9f94041485542d5a720797ca394';T='99ac5309add45af65049546dd3a99f357884cf3b'
+def bind(p):
+ p=Path(p);b=p.read_bytes();return {'path':str(p),'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest()}
+def load(k):return json.loads((D/(k+'.raw.private.json')).read_text())
+def rows(k,f=None):
+ pages=load(k);a=[v for p in pages for v in (p[f] if f else p)]
+ if f:assert len(a)==pages[0]['total_count']
+ return a
+def git(*args):return subprocess.check_output(['git','-C',str(R),*args])
+pr=load('before-pr');after=load('after-pr');assert pr['head']['sha']==after['head']['sha']==H and pr['base']['sha']==after['base']['sha']==B
+for phase in ['before','after']:assert load(phase+'-named-head')['object']['sha']==H and load(phase+'-named-base')['object']['sha']==B
+m=load('merge-commit');assert m['sha']==pr['merge_commit_sha']==after['merge_commit_sha']=='e7666eacf2687f65050b97a88e791f8d0ce4cd20' and [p['sha'] for p in m['parents']]==[B,H] and m['commit']['tree']['sha']==T;assert git('rev-parse',H+'^{tree}').decode().strip()==T
+checks=rows('head-check-runs','check_runs');runs=rows('head-runs','workflow_runs');assert all(c['head_sha']==H for c in checks) and all(r['head_sha']==H for r in runs)
+paths=[f['filename'] for f in rows('changed-files')];assert len(paths)==pr['changed_files'];pushparent=git('show','-s','--format=%P',H).decode().split()[0];pushpaths=git('diff','--name-only',pushparent,H).decode().splitlines()
+def mat(m):
+ if not m:return [{}]
+ axes={k:v for k,v in m.items() if k not in ('include','exclude')}
+ if not axes:return [dict(v) for v in m.get('include',[])] or [{}]
+ out=[dict(zip(axes,vals)) for vals in itertools.product(*axes.values())]
+ out=[r for r in out if not any(all(r.get(k)==v for k,v in ex.items()) for ex in m.get('exclude',[]))]
+ for inc in m.get('include',[]):
+  compat=[r for r in out if all(k not in axes or r[k]==v for k,v in inc.items())]
+  if compat:
+   for r in compat:r.update(inc)
+  else:out.append(dict(inc))
+ return out
+def match(spec,branch,files):
+ if spec is None or isinstance(spec,str):return True
+ if 'tags' in spec and 'branches' not in spec:return False
+ if 'branches' in spec and not any(fnmatch.fnmatchcase(branch,p) for p in spec['branches']):return False
+ if 'paths' in spec and not any(fnmatch.fnmatchcase(f,p) for f in files for p in spec['paths']):return False
+ if 'paths-ignore' in spec and files and all(any(fnmatch.fnmatchcase(f,p) for p in spec['paths-ignore']) for f in files):return False
+ return True
+census=[];alljobs=[];declared=[];sourcewf={}
+for entry in git('ls-tree','-r',H,'.github/workflows').decode().splitlines():
+ p=entry.split('\t')[1]
+ if not p.endswith(('.yml','.yaml')):continue
+ b=git('show',H+':'+p);sourcewf[p]=b;w=yaml.safe_load(b);events=w.get('on',w.get(True,{}))
+ for event,branch,fs in [('pull_request',pr['base']['ref'],paths),('push',pr['head']['ref'],pushpaths)]:
+  if event not in events or not match(events[event],branch,fs):continue
+  js=[{'id':n,'name':v.get('name',n),'if':v.get('if'),'needs':v.get('needs',[]),'matrix_rows':mat(v.get('strategy',{}).get('matrix'))} for n,v in w['jobs'].items()];expected=sum(len(x['matrix_rows']) for x in js);found=[r for r in runs if r['path']==p and r['event']==event];assert len(found)<=1
+  observed=[] if not found else rows('run-'+str(found[0]['id'])+'-jobs','jobs');assert len(observed)<=expected;alljobs.extend(observed);run=found[0] if found else None
+  census.append({'path':p,'workflow':w['name'],'source_sha256':hashlib.sha256(b).hexdigest(),'event':event,'matched_branch':branch,'declared_event_filter':events[event],'declared_jobs':js,'expected_job_count':expected,'observed_job_count':len(observed),'not_materialized_count':expected-len(observed),'run_id':run['id'] if run else None,'run_status':run['status'] if run else 'NOT_MATERIALIZED','run_conclusion':run['conclusion'] if run else None,'observed_jobs':[{'id':j['id'],'name':j['name'],'status':j['status'],'conclusion':j['conclusion'],'failed_steps':[s['name'] for s in j['steps'] if s['conclusion']=='failure']} for j in observed],'auxiliaryCopilot':p.endswith('copilot-setup-steps.yml')})
+assert len(census)==13 and len(runs)==13 and all(c['event']=='pull_request' for c in census);expected=sum(c['expected_job_count'] for c in census);assert expected==34
+assert len(checks)==len(alljobs)==33 and {j['id'] for j in alljobs}=={c['id'] for c in checks}
+pending=[{'id':c['id'],'name':c['name'],'status':c['status']} for c in checks if c['status']!='completed'];fail=[{'id':c['id'],'name':c['name'],'conclusion':c['conclusion']} for c in checks if c['status']=='completed' and c['conclusion'] not in ('success','skipped','neutral')]
+py=next(c for c in census if c['path'].endswith('actions_runtime_pypi_release.yml'));assert py['expected_job_count']==5 and py['observed_job_count']==4 and py['not_materialized_count']==1 and not any(j['name'].startswith('publish') for j in py['observed_jobs']);publisher=next(j for j in py['declared_jobs'] if j['id']=='publish');assert publisher['needs']==['build-sdist','build-wheels'];w=yaml.safe_load(sourcewf[py['path']]);assert w['on']['push']=={'tags':['actions-runtime-*']};guards=[{'name':s.get('name'),'if':s['if']} for s in w['jobs']['publish']['steps'] if s.get('if') and "github.event_name == 'push'" in s['if']];assert guards
+skips=[c for c in checks if c['conclusion']=='skipped'];assert len(skips)==1;wi=next(c for c in census if c['path'].endswith('work_items_release.yml'));assert any(j['id']==skips[0]['id'] for j in wi['observed_jobs']);skipcondition=next(j for j in wi['declared_jobs'] if j['id']=='publish')['if'];assert 'refs/tags/' in skipcondition
+assert not rows('head-statuses') and not rows('merge-statuses') and not rows('merge-check-runs','check_runs') and not rows('merge-runs','workflow_runs') and not rows('reviews') and not rows('review-comments')
+cs={};g=None
+for k,f in [('closures-page-1','closingIssuesReferences'),('threads-page-1','reviewThreads')]:
+ g=load(k)['data']['repository']['pullRequest'];assert g['headRefOid']==H and g['baseRefOid']==B and g['potentialMergeCommit']['oid']==m['sha'] and g['potentialMergeCommit']['tree']['oid']==T;assert [p['oid'] for p in g['potentialMergeCommit']['parents']['nodes']]==[B,H] and not g['potentialMergeCommit']['parents']['pageInfo']['hasNextPage'];assert not g[f]['nodes'] and not g[f]['pageInfo']['hasNextPage'];cs[f]={'count':0,'complete_pages':1,'hasNextPage':False}
+assert not load('branch-rules') and not rows('rulesets') and '403' in (D/'base-protection.stderr.private').read_text()
+mergeind=Path('/workspace/engineering/pr299-actual-integration-independent-review/independent-actual299-integration-readback.json');assert bind(mergeind)['sha256']=='06a652e23b77573ab5cfe9a8837b46de42909efd50908dcea031d7311a27c9ba'
+consumer=Path('/workspace/engineering/pr221-current776-linux-consumer-independent-review/independent-one-actual-current-linux-consumer-review.json');assert bind(consumer)['sha256']=='f230cbdc1a7e4b9b5bb2f9323d7aa1e645c89778d0db9a554c32cf6bcae69967'
+oldCI=Path('/workspace/engineering/pr221-current776-terminal-CI-reconciliation/frozen-terminal-CI-successor.json');assert bind(oldCI)['sha256']=='956a52b10ad6efc12dffa34bb80f630372d38374401e001ee6f766cd7f2f3318'
+props=[Path('/workspace/engineering/pr221-current776-preflight/canonical-policy-and-snapshot-proposed.patch'),Path('/workspace/engineering/pr221-current776-linux-consumer-preflight/canonical-partial-platform-consumer-scope-proposed.patch')];guide=Path('/workspace/engineering/campaign-checkpoint/docs/skills/repository-operations.md');doc=[]
+for p,h in zip(props,['9744b01f0f2f888de5f88f129b857df33938cb1adf182ec32b30ed08b2f14fe8','bf95da899763f97c016f76fa4a0cf8878ebba8326d57c11ab1a520b1df597c81']):
+ assert bind(p)['sha256']==h;addition=''.join(l[1:] for l in p.read_text().splitlines(keepends=True) if l.startswith('+') and not l.startswith('+++'));assert addition in guide.read_text();doc.append({'exact_accepted_patch':bind(p),'owning_canonical_file':str(guide),'verified_existing_exact_added_text':addition,'text_sha256':hashlib.sha256(addition.encode()).hexdigest(),'current618_source_guide_contains_text':addition in git('show',H+':docs/skills/repository-operations.md').decode(),'scope':'Existing accepted lesson in canonical checkpoint, not claim new618sourceguide child'} )
+(D/'safe-verified-canonical-9744-bf95-reuse.json').write_text(json.dumps(doc,indent=2)+'\n');(D/'safe-declared-current-source-job-census.json').write_text(json.dumps(census,indent=2)+'\n')
+r={'schema':'actions-pr221-current618-release-preflight-readonly/v1','verdict':'HOLD_CURRENT_SOURCE_CI_PENDING_LATE_PUBLISHER_NOT_MATERIALIZED_POLICY_AND_RELEASE_QUALIFICATION','PR':221,'head':H,'head_tree':T,'base':B,'synthetic':{'sha':m['sha'],'ordered_parents':[B,H],'tree':T},'named_refs_before_after_stable':True,'REST_GraphQL_agree_current_named_head':True,'captured_source_CI':{'expected_PR_workflows_includingCopilot':13,'expected_PR_jobs_includingCopilot':34,'expected_product_workflows':12,'expected_product_jobs':33,'additional_push_workflows_matched_current_push':0,'captured_runs':len(runs),'captured_check_job_bijection':len(checks),'check_outcomes':dict(collections.Counter(c['conclusion'] or c['status'] for c in checks)),'job_outcomes':dict(collections.Counter(c['conclusion'] or c['status'] for c in alljobs)),'failures':fail,'pending':pending,'unmaterialized_declared_jobs':1,'late_Runtime_publisher':{'run':py['run_id'],'job':'publish','needs':publisher['needs'],'status':'NOT_MATERIALIZED_AT_SNAPSHOT','source_expected_jobs':5,'observed_jobs':4,'tag_trigger':w['on']['push'],'publication_steps':guards,'scope':'CurrentPRproducer not complete; eventual publisher-job success still does not establish registrypublication.'},'expected_WorkItems_tag_skip':{'id':skips[0]['id'],'condition':skipcondition},'old776_35job_snapshot_not_carried':bind(oldCI)},'connections':cs,'reviews':0,'review_comments':0,'statuses_head_merge':0,'merge_checks_runs':0,'policy':{'draft':pr['draft'],'REST_mergeable':pr['mergeable'],'REST_mergeable_state':pr['mergeable_state'],'GraphQL_mergeStateStatus':g['mergeStateStatus'],'reviewDecision':g['reviewDecision'],'traditional_protection':'UNKNOWN_HTTP403; not bypass permission','visible_branch_rules_count':0,'visible_ruleset_count':0},'actual299_integration_independent':bind(mergeind),'historical_original776_oneLinux_consumer_independent':bind(consumer),'consumer_scope':'f230 consumer and wheelf82e bind original producer776 only; actual618shared-run-output/source changes are not carried into that installed result. No consumer/artifact acquisition here.','retained_release_HOLD':['Empty generatedOAuth provenance/contentauthority and approved source/build wheel pair remain explicit','Current618wheel/platform/frozen/native/complete seven consumer matrix needs exactfreshqualification','Historical776Linux oneconsumer cannot qualify actual618source','Publicregistry/checksums/Cask/currentcoldinstall/upgrade/tag/publication unresolved separately','PrivateRCC/backend/transport/ChatGPT and retained graph release contracts remainHOLD'],'source_graph_disposition':'Continuousengineering preflight only; no massissue census, closure, merge or release authority. Retained program graph and original issue acceptance scopes unchanged.','snapshot_limits':'One bounded bracketed acquisition; separately timed run/check/job responses not atomic. Metadata head/synthetic does not establish runner checkout without original logs. No pendingpoll/retry.','Documentation_improvement':{'Canonical_file_changed_or_proposed':'docs/skills/repository-operations.md; exact accepted9744 andbf95 lessons verified in owning canonical checkpoint','Exact_accepted_deltas':doc,'Durable_learning':'Live namedref/fullpagedlatejob binding cannot carry predecessor CI, and scoped Linux installedconsumer cannot satisfy seven-platform release or new source qualification.','Evidence':['Current618/a709stable namedrefs+authenticatedsyntheticparents/tree/complete0closures','Expected34jobs vs33materialized with Runtimepublisher needs chain retained','Current403 with visibleemptyrulesets; previous776956a historical','Originalf230consumer/source776 binding and new618actualmerge06a652 remain separate'],'Stale_or_ambiguous_guidance_removed':'Already accepted9744 eliminates ruleset/policy and snapshot carry ambiguity;bf95 eliminates partialplatform/currentproducer/actualmerge reinterpretation. No duplicate cosmetics or source edits.','Remaining_uncertainty':'Eight source jobs pending andlatepublisher not materialized, policy403/draft/currentfull7wheel/native/private/release remainHOLD.'},'Upstream_disposition':'none','mutations_downloads_actual_runs_reruns':False,'flows':census}
+r['evidence']=[bind(p) for p in sorted(D.iterdir()) if p.is_file() and p.name not in ('frozen-current618-release-preflight.json','freeze-current618-census.log')]+[bind(p) for p in props]+[bind(mergeind),bind(consumer),bind(oldCI)]
+for p in D.iterdir():
+ if p.is_file():p.chmod(0o600)
+q=D/'frozen-current618-release-preflight.json';q.write_text(json.dumps(r,indent=2)+'\n');q.chmod(0o600);print(json.dumps({'receipt':bind(q),'captured_checks':33,'expected_jobs':34,'pending':len(pending),'unmaterialized':1,'verdict':r['verdict']}))

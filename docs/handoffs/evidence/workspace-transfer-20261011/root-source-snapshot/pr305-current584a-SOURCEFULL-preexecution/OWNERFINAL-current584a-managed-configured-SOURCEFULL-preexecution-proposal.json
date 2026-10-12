@@ -1,0 +1,176 @@
+{
+  "configured_full_argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "600s",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/pr305-current584a-SOURCEFULL-preexecution/current_source_full_body.py"
+  ],
+  "current_SOURCEFULL": "NOT_RUN",
+  "current_capacity_observation": {
+    "minimum_workspace_before_full_bytes": 1288490188,
+    "status": "FRESH_CAPACITY_AND_ROOT_SERIALIZATION_REQUIRED",
+    "workspace_bytes": 1126330368
+  },
+  "documentation_improvement": {
+    "canonical_guide_delta": {
+      "bytes": 5462,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/exact-imported-e3-canonical-guide-delta.patch",
+      "sha256": "0cf87ed34224683d86326baaf62802c41cc545252ecc5683faf8b7dc9b9b0c02"
+    },
+    "durable_learning": "Actual configured transport controls and own ignored RCC fixture identity are distinct from prepared-env reuse and prior native/browser proofs.",
+    "evidence": "Current265source source1424, own30/fiveprefixes, ignoredRCCmode0711 exact, allaccepted guide blocks verified; managed activation19/pre-post source byteguards actual parent bounded in this packet.",
+    "remaining_uncertainty": "CurrentFULL/preexecutionindreview/rootrelease/freshcapacity and independent completecurrent source acceptance remain held",
+    "stale_ambiguity_removed": "Do not carry old40ad preexecution/3ec actual into584a; planned command metadata is not SOURCEFULL execution."
+  },
+  "execution_bounds": {
+    "always_post": "finally attempts post guard even on caught preflight/primary failure; OS hard kill cannot guarantee Python finally and remains HOLD",
+    "always_post_guard_timeout_seconds": 60,
+    "max_normal_parent_envelope_seconds": 760,
+    "outer_GNU_timeout_seconds": 900,
+    "outer_KILL_grace_seconds": 10,
+    "parent_configured_subprocess_timeout_seconds": 640,
+    "pre_guard_timeout_seconds": 60,
+    "source_GNU_timeout_seconds": 600,
+    "source_KILL_grace_seconds": 10
+  },
+  "frozen_input_bindings": [
+    {
+      "bytes": 4930,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current584a-SOURCEFULL-preexecution/frozen-current-source-full-inputs.json",
+      "sha256": "03457a5b71f7fa52d5e7982029702afaafccee9a5a0cda2d6edebf713cf96496"
+    },
+    {
+      "bytes": 14931,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/OWNERFINAL-current584a-ordinary-e3-source-LIGHT-full-and-actual-HOLD.json",
+      "sha256": "5835c7c1b57493d784ea39cf0c037253460b04b3b3c9c4fa48fb1db1a887c387"
+    },
+    {
+      "bytes": 6836,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current584a-SOURCEFULL-preexecution/freeze_preexecution_proposal.py",
+      "sha256": "ed1926e5ee4e9f6079f5ad2db3e13a0607e15b9a4e251370a5479fe4625ffbc8"
+    },
+    {
+      "bytes": 1142,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current584a-SOURCEFULL-preexecution/current_source_full_body.py",
+      "sha256": "1ab596f3b5424793af3c2d07777efa806a4735186d9af65c43dbde80f94bd984"
+    },
+    {
+      "bytes": 3324,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current584a-SOURCEFULL-preexecution/current_source_prepost_guard.py",
+      "sha256": "5268aeb3ab425794a991d22cd2b6894f84cd43174076f70064c3671fc553a08a"
+    },
+    {
+      "bytes": 3651,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current584a-SOURCEFULL-preexecution/launch_current_source_full_once.py",
+      "sha256": "69b4f9b920c324626edcd9980e51a9a4a2cc7e7a3a6d8fd82afe04d7e8683ae8"
+    },
+    {
+      "bytes": 752,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305/actions/.venv/pyvenv.cfg",
+      "sha256": "2a3891386c700dece6c21b8ba80ea8d7fc514d8eade9a10374cab43dc0bd693f"
+    },
+    {
+      "bytes": 771,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305/actions-http-helper/.venv/pyvenv.cfg",
+      "sha256": "743f2feb6a1fac576fc6313ebf0bbdf5484378bdf21433fe2cc134a8775d563f"
+    },
+    {
+      "bytes": 763,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305/devutils/.venv/pyvenv.cfg",
+      "sha256": "868a9122466b928c47f90be30f1a01e28f73d5b5c586b95d57e177c97aa72a6c"
+    },
+    {
+      "bytes": 761,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305/work-items/.venv/pyvenv.cfg",
+      "sha256": "7894fbdd57bbb2c2cfca8a74fab61f425333b36c66b95ebabc200aeb7c678fb6"
+    },
+    {
+      "bytes": 761,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305/action_server/.venv/pyvenv.cfg",
+      "sha256": "eb5e96f842624fb2dd3c1a37c755f65dbcfc4eadb4697693b5e1213a91696a8a"
+    },
+    {
+      "bytes": 22282402,
+      "mode": "0o700",
+      "path": "/workspace/actions-cloud/bin/rcc",
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+    },
+    {
+      "bytes": 22282402,
+      "mode": "0o711",
+      "path": "/workspace/engineering/pr305/action_server/src/actions/server/bin/rcc-18.19.3",
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+    },
+    {
+      "bytes": 987,
+      "mode": "0o600",
+      "path": "/workspace/actions-cloud/activate.sh",
+      "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+    }
+  ],
+  "historical_preexecution": "40ad86c4/2529 proposal and original3ec/92498 V5 actual remain separate historical identities, not current full proof",
+  "native_browser_provider_install_or_release": "NOT_RUN_NOT_AUTHORIZED",
+  "one_attempt": {
+    "must_be_absent": true,
+    "no_automatic_retry": true,
+    "original_log": "private binary stdout/stderr with primary return/error separate from postcondition return/error",
+    "owned_output_directory": "/workspace/engineering/pr305-current584a-SOURCEFULL-preexecution/one-configured-full-once-owned"
+  },
+  "outer_cwd": "/workspace/engineering/pr305",
+  "outer_managed_command": [
+    "source /workspace/actions-cloud/activate.sh",
+    "unset PYTHONOPTIMIZE",
+    "PATH primary/bin then exact cached toolkit/bin preserved",
+    "timeout --signal=TERM --kill-after=10s 900s /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python /workspace/engineering/pr305-current584a-SOURCEFULL-preexecution/launch_current_source_full_once.py --execute-root-authorized <new-root-release-path> <release-sha256>"
+  ],
+  "root_release_exact_required_schema": {
+    "independent_source_and_preexecution_review_GO": true,
+    "proposal_sha256": "THIS_OWNER_SHA256_IN_DISTINCT_ROOT_RELEASE",
+    "schema": 1,
+    "serialized_no_other_heavy_or_installer": true,
+    "source": "584a7ed0cb7112fe6691103931c007b5cc0be5f3",
+    "status": "ROOT_RELEASE_ONE_SERIALIZED_CONFIGURED_SOURCE_FULL",
+    "tree": "5b4bd2f10c35d0bc7b9d85037f211fa55c47a282"
+  },
+  "schema": 1,
+  "source": "584a7ed0cb7112fe6691103931c007b5cc0be5f3",
+  "source_LIGHT": {
+    "bytes": 14931,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/OWNERFINAL-current584a-ordinary-e3-source-LIGHT-full-and-actual-HOLD.json",
+    "sha256": "5835c7c1b57493d784ea39cf0c037253460b04b3b3c9c4fa48fb1db1a887c387"
+  },
+  "source_guard_private_data_alias": "NOT_NEEDED: current305 LIGHT references original native files/oldV5 receipts retained at their paths, not removed failedRCC3 expanded root",
+  "status": "OWNERFINAL_CURRENT584a_SOURCEFULL_PREEXECUTION_READY_FOR_INDEPENDENT_REVIEW_NOT_RUN",
+  "strict_guards": {
+    "activation_exports": 18,
+    "actual_operator_exports": "forbidden allfive including cache and no optimize export",
+    "helpers0444": "through originalLIGHT bindings",
+    "native_original_inventory": 1192,
+    "optimize": "fail before assert-dependent guard; clear PYTHONOPTIMIZE explicitly",
+    "own_concrete_origins": 5,
+    "own_ignored_RCC_fixture": "7e588/0711",
+    "own_prepared_inputs": 30,
+    "primary_PATH": 19,
+    "primary_RCC3": "7e588/0700",
+    "source_body_and_modes": 1424,
+    "whole_native_member_set": true,
+    "workers": "PYTEST_XDIST_AUTO_NUM_WORKERS2 before configured invoke test-not-integration -n auto"
+  },
+  "tree": "5b4bd2f10c35d0bc7b9d85037f211fa55c47a282",
+  "upstream_disposition": "none"
+}

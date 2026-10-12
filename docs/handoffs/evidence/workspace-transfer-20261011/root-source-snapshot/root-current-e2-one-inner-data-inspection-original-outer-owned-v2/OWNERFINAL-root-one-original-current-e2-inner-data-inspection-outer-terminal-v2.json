@@ -1,0 +1,35 @@
+{
+  "scope": "ONE_REVIEWED_CURRENT_E2_EXISTING_ORIGINAL_INNER_DATA_INSPECTION_ONLY",
+  "proposal": {
+    "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/OWNERFINAL-current-e2-inner-data-executor-v2-after-real-controls-PREEXECUTION-six-guards-successor.json",
+    "bytes": 19182,
+    "sha256": "01742c179494b23868a1204a82ece62cacf213de0ba928692df780bf147fde5c",
+    "mode": "0o400"
+  },
+  "review": {
+    "path": "/workspace/engineering/pr221-current-e2-inner-v2-executor-independent-PREEXECUTION-review/OWNERFINAL-independent-current-e2-inner-executor-v2-PREEXECUTION-review.json",
+    "bytes": 9100,
+    "sha256": "2a39cd0acc247db96ffcd1f798e829d1360eb11e7133ebdd63750507cbee6b4f",
+    "mode": "0o400"
+  },
+  "one_attempt": true,
+  "no_retry": true,
+  "source_native_consumer_publication": "NO_EXECUTION_OR_PROMOTION",
+  "returncode": 0,
+  "elapsed_seconds": 5.197922432998894,
+  "capture": "2026-10-11T19:21:19.352992+00:00",
+  "outputs": [
+    {
+      "path": "/workspace/engineering/root-current-e2-one-inner-data-inspection-original-outer-owned-v2/original-parent.stdout.private.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-current-e2-one-inner-data-inspection-original-outer-owned-v2/original-parent.stderr.private.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    }
+  ]
+}

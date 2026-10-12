@@ -1,0 +1,232 @@
+--- accepted-original/installed-consumer-runner.py
++++ current776-private/installed-consumer-runner-v2.py
+@@ -14,57 +14,112 @@
+ import zipfile
+ from pathlib import Path
+ 
+-BASE = Path("/workspace/actions-cloud/receipts/runtime-103-preflight")
++BASE = Path("/workspace/engineering/pr221-current776-linux-consumer-preflight")
+ CHECKOUT = Path("/workspace/engineering/pr282")
+ GUARD_CHECKOUT = Path("/workspace/engineering/pr311")
+-ATTEMPT = BASE / "installed-linux-12340bb17-1"
+-WHEEL = (
+-    BASE
+-    / "linux-cp312-input/actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
++CHECKOUT_ROOTS = tuple(
++    Path(value)
++    for value in [
++        "/workspace/actions",
++        "/workspace/engineering",
++        "/workspace/engineering/campaign-checkpoint",
++        "/workspace/engineering/pr282",
++        "/workspace/engineering/pr290",
++        "/workspace/engineering/pr299",
++        "/workspace/engineering/pr302",
++        "/workspace/engineering/pr305",
++        "/workspace/engineering/pr306",
++        "/workspace/engineering/pr307",
++        "/workspace/engineering/pr308",
++        "/workspace/engineering/pr309",
++        "/workspace/engineering/pr310",
++        "/workspace/engineering/pr311",
++        "/workspace/engineering/rcc-public",
++    ]
+ )
+-WHEEL_SHA = "0f366268f7590e2c0002b8f7e67325810d0d5374775c657b19195c80da48eaaa"
++ATTEMPT = BASE / "installed-linux-current776-f82ee06c-1"
++WHEEL = Path(
++    "/workspace/engineering/pr221-current302-linux-wheel-owned/actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
++)
++WHEEL_SHA = "f82ee06c09e07bd224e797e11b7e58138920c0c8df49ef814ac50b0087d81c6c"
++WHEEL_PYTHON_COUNT = 196
++ARCHIVE = Path(
++    "/workspace/engineering/pr221-current302-linux-wheel-owned/original-Linux-wheels-11693813383.zip"
++)
+ PRODUCER = {
+-    "run_id": 38105853105,
++    "run_id": 38118859475,
+     "attempt": 1,
+-    "artifact_id": 11690296318,
+-    "artifact_zip_bytes": 78863429,
+-    "artifact_zip_sha256": "809a7272c9d64bea1a2b456d42c93a22d199f588bfe27f26e982b31a6b1522a3",
+-    "api_head": "ba85aac7324ea4463bfba8c5f8586e27706dc2fe",
+-    "checkout": "12340bb17c0707ed8c7e0ecdf6659826b4549b75",
+-    "tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f",
++    "artifact_id": 11693813383,
++    "artifact_zip_bytes": 28271148,
++    "artifact_zip_sha256": "32485758f22e51b529d3ea657c4f4c0033233f6c84ec7d3d605c4493c11d82c6",
++    "api_head": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
++    "checkout": "f5dd0e18d9cda660c2eaa6bbc33a11180ddd7158",
++    "tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
+     "parents": [
+-        "a70993fafc99a9f94041485542d5a720797ca394",
+-        "ba85aac7324ea4463bfba8c5f8586e27706dc2fe",
++        "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
++        "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+     ],
++    "source_candidate": "d642a3ac24f8da85101538bdfdf59b509fd74bfb",
++    "source_tree": "fdf2823ebcdbd938b9047fd452c9fb13eb4be4e4",
+     "event": "pull_request",
+     "publication": False,
++    "actual_integration_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
++    "actual_integration_tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
++    "build_is_actual_integration_job": False,
++    "scope": "two originalLinuxwheels only; consumer selects cp312; seven-artifact gate HOLD",
+ }
+ SOURCES = {
+-    "artifact_review": (
+-        Path(
+-            "/workspace/engineering/pr221-next-gate-review/bounded-release-gaps-and-next-gate.json"
+-        ),
+-        "110e5d03388a4d8117be8cd12b4910322e6f71cf2ea1dc197b89fd6873c29bf5",
+-    ),
+     "floor": (
+-        CHECKOUT / "action_server/scripts/verify_published_runtime_floor.py",
++        Path(
++            "/workspace/engineering/pr282/action_server/scripts/verify_published_runtime_floor.py"
++        ),
+         "f1ad142a6cd83ca1a71ed0a6183d558a6d72f00f073b492ce0d18e563a067193",
+     ),
+     "publisher": (
+-        CHECKOUT / "action_server/scripts/publish_verified_runtime.py",
++        Path(
++            "/workspace/engineering/pr282/action_server/scripts/publish_verified_runtime.py"
++        ),
+         "236ed21dcb50b3c3934f5e15b29e61d6a7b712ed65e7dcf7cd72785d4f8fa26c",
+     ),
+     "guard": (
+-        GUARD_CHECKOUT / "action_server/tests/contract_tests/test_active_contracts.py",
++        Path(
++            "/workspace/engineering/pr311/action_server/tests/contract_tests/test_active_contracts.py"
++        ),
+         "b76ec605e343e8bec7dea6e230dad3f516eabc4fd90a2769638b0d9111a6ade0",
+     ),
+     "process": (
+-        CHECKOUT / "action_server/src/actions/server/_common/process.py",
++        Path(
++            "/workspace/engineering/pr282/action_server/src/actions/server/_common/process.py"
++        ),
+         "f432e65a488bf06862e548dc45342d3c1fb5ea7fcc26f6371d98aae124ffc082",
+     ),
+     "rcc": (
+         Path("/workspace/actions-cloud/bin/rcc"),
+         "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
++    ),
++    "artifact_review": (
++        Path(
++            "/workspace/engineering/pr221-current302-linux-wheel-owned/safe-prospective-runtime103-qualification-review.json"
++        ),
++        "5ae089d08c7bb6b231d9c6adfa313d2f6961aa5ae03116829ad1b25588719578",
++    ),
++    "inspection": (
++        Path(
++            "/workspace/engineering/pr221-current302-linux-wheel-owned/safe-current-linux-wheel-inspection.json"
++        ),
++        "535b308837dab9737412243646dc085a560202dbd58b9e9315dd1cac54808c82",
++    ),
++    "input_manifest": (
++        Path(
++            "/workspace/engineering/pr221-current776-linux-consumer-preflight/input-and-source-admission.json"
++        ),
++        "ff5560c8233985e2755e1e9288f780018f625a7ec4184f3eac98e4a14d50e594",
++    ),
++    "input_gate": (
++        Path(
++            "/workspace/engineering/pr221-current776-linux-consumer-preflight/current-input-admission-v2.py"
++        ),
++        "3be2b971a43de3848c5a1aec59eecbeb6ac9dd796a81a6f2e489eab782492d1a",
+     ),
+ }
+ 
+@@ -87,6 +142,12 @@
+     sys.modules[spec.name] = module
+     spec.loader.exec_module(module)
+     return module
++
++
++def admit_current_inputs() -> dict:
++    assert_source_bytes()
++    manifest = json.loads(SOURCES["input_manifest"][0].read_text())
++    return load("input_gate").admit(ARCHIVE, WHEEL, manifest, CHECKOUT)
+ 
+ 
+ def bind_inventory(wheel: Path, inventory: dict, prefix: Path, guard) -> list:
+@@ -107,7 +168,7 @@
+             Path(path).resolve().is_relative_to(prefix.resolve())
+         ), "module origin outside clean environment"
+     floor = load("floor")
+-    for checkout in (CHECKOUT, GUARD_CHECKOUT, Path("/workspace/actions")):
++    for checkout in CHECKOUT_ROOTS:
+         floor.assert_no_checkout_imports(
+             checkout, inventory["sys_path"], inventory["modules"]
+         )
+@@ -115,7 +176,7 @@
+     bound = guard._assert_installed_runtime_wheel_has_no_private_core_imports(
+         wheel, members, prefix=prefix, checkout=CHECKOUT
+     )
+-    for checkout in (CHECKOUT, GUARD_CHECKOUT, Path("/workspace/actions")):
++    for checkout in CHECKOUT_ROOTS:
+         for _, path, _ in bound:
+             assert not path.is_relative_to(
+                 checkout.resolve()
+@@ -145,6 +206,7 @@
+ 
+ def worker(temporary: Path) -> None:
+     assert_source_bytes()
++    input_admission = admit_current_inputs()
+     floor, guard = load("floor"), load("guard")
+     environment = floor.isolated_environment()
+     python = temporary / "venv/bin/python"
+@@ -175,7 +237,7 @@
+     members = bind_inventory(WHEEL, inventory, temporary / "venv", guard)
+     with zipfile.ZipFile(WHEEL) as archive:
+         expected_count = sum(name.endswith(".py") for name in archive.namelist())
+-    assert expected_count == 196 and len(members) == expected_count
++    assert expected_count == WHEEL_PYTHON_COUNT and len(members) == expected_count
+     public = floor.verify_public_package_report(report)
+     version = subprocess.run(
+         [str(python), "-m", "actions.server", "version"],
+@@ -195,6 +257,7 @@
+         "case_count": 1,
+         "skips": 0,
+         "producer": PRODUCER,
++        "input_admission": input_admission,
+         "runtime_wheel": {
+             "path": str(WHEEL),
+             "sha256": WHEEL_SHA,
+@@ -207,7 +270,9 @@
+         "cli_version": version.stdout.strip(),
+         "limits": [
+             "Linux cp312 only",
+-            "retained PR producer only; no later source qualification",
++            "original f5dd PR producer; tree equals actual776; selected209 tracked payloads only",
++            "two Linux wheels available; full seven-artifact/tag/publication gate HOLD",
++            "generated OAuth required inputs measured EMPTY; authority/content HOLD even if imports pass",
+             "no tag provenance, upload, publication or Runtime service/browser proof",
+             "Core1.0.2 public floor; historical Core1.0.3/193-member proof remains separate",
+         ],
+@@ -257,18 +322,20 @@
+     assert sys.platform == "linux" and sys.version_info[:2] == (3, 12)
+     assert_source_bytes()
+     assert digest(WHEEL) == WHEEL_SHA
+-    archive = BASE / "actions-runtime-dist-11690296318.zip"
++    archive = ARCHIVE
+     assert archive.stat().st_size == PRODUCER["artifact_zip_bytes"]
+     assert digest(archive) == PRODUCER["artifact_zip_sha256"]
+-    publisher = load("publisher")
+-    publisher.verify_artifacts(BASE / "dist-38105853105-1")
++    input_admission = admit_current_inputs()
+     assert load("floor").select_runtime_wheel(WHEEL.parent) == WHEEL
+     from actions.server._common import process as process_helpers
+ 
+     assert Path(process_helpers.__file__).resolve() == SOURCES["process"][0].resolve()
+     assert not ATTEMPT.exists(), "never overwrite an earlier acceptance attempt"
+     ATTEMPT.mkdir(mode=0o700)
+-    temporary = Path(tempfile.mkdtemp(prefix="rt103-", dir="/tmp"))
++    (ATTEMPT / "input-admission.json").write_text(
++        json.dumps(input_admission, indent=2, sort_keys=True) + "\n"
++    )
++    temporary = Path(tempfile.mkdtemp(prefix="rt103-current776-", dir="/tmp"))
+     temporary.chmod(0o700)
+     environment = load("floor").isolated_environment()
+     for name in list(environment):

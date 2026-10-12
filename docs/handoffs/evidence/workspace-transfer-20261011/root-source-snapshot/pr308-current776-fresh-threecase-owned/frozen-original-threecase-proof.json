@@ -1,0 +1,436 @@
+{
+  "status": "ORIGINAL_THREECASE_PROOF_VERIFIED_PENDING_INDEPENDENT_READ_FULL_CI_HOLD",
+  "PR": 308,
+  "source_S": {
+    "commit": "7eb5bce946750555ab009f77592862920a901506",
+    "tree": "3ff76037779763d0461ff3a755b900c9ed83dcf8"
+  },
+  "control_C": {
+    "commit": "b673ddd761ba4ccd68e9baa8faaa9ab666df794e",
+    "tree": "56d108fcdb5d43f7f27a8f2554fec51b702519f4",
+    "sole_parent": "7eb5bce946750555ab009f77592862920a901506"
+  },
+  "target": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+  "run": 38124233445,
+  "job": 114425127596,
+  "artifact": 11697165172,
+  "acquisition": {
+    "original_MCP_calls_once_each": true,
+    "previous_owned_search_no_original_found": true,
+    "ZIP_reference_transfer_continuation": "Returned reusable file reference transferred once; no second GitHub artifact/log request",
+    "ZIP": {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-artifact-11697165172.zip",
+      "bytes": 7582,
+      "sha256": "5bebad77cc556a5bf5cef84feae8d76d3a7d5c5aecfc63378691cc79dec3719d"
+    },
+    "decoded_original_job_log": {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-job-114425127596.private.log",
+      "bytes": 887255,
+      "sha256": "d36e0a7695b52fa2113a6d3a43c6554b1c5f032c0f777410bfadd2972b135c1b"
+    },
+    "raw_log_decode": "Connector decoded Unicode string persisted UTF-8, not original remote ZIP-of-joblogs byte claim",
+    "error_outputs_private": true,
+    "inspector_output_incident": "One intermediate receipt inspection forwarded temporary runner paths and loopback provider URI; no signed URL/credentials forwarded. Later inspection fixed allowlist only."
+  },
+  "archive_members": [
+    {
+      "member": "rcc-provider-rollback-evidence/acceptance-summary.json",
+      "bytes": 3067,
+      "sha256": "0cae877e37e4ad4721045e8095cd3f40bb361006048e38ea2cfbea8de2c05fde",
+      "zip_recorded_mode": "0o100644",
+      "zip_CRC32": "a6876ee7",
+      "compression": 8,
+      "retained_private_mode": "0600",
+      "original_bytes_equal": true
+    },
+    {
+      "member": "rcc-provider-rollback-evidence/acceptance-summary.log",
+      "bytes": 686,
+      "sha256": "d4cc8ec93cf0227ae2206808180e53b29271b45c8658151106c01d416a0455fd",
+      "zip_recorded_mode": "0o100644",
+      "zip_CRC32": "67c6a44e",
+      "compression": 8,
+      "retained_private_mode": "0600",
+      "original_bytes_equal": true
+    },
+    {
+      "member": "rcc-provider-rollback-evidence/lifecycle-receipt.json",
+      "bytes": 7881,
+      "sha256": "a18529d3dc94cfc150352d6dedc674883814245eca5573205a2ce92427875b8c",
+      "zip_recorded_mode": "0o100644",
+      "zip_CRC32": "5e61026a",
+      "compression": 8,
+      "retained_private_mode": "0600",
+      "original_bytes_equal": true
+    },
+    {
+      "member": "rcc-provider-rollback-evidence/lifecycle-summary.json",
+      "bytes": 1221,
+      "sha256": "56ad7a1548939ae3e143be6a83a846de330eb6bce4317d0cfc0e4a5190e22817",
+      "zip_recorded_mode": "0o100644",
+      "zip_CRC32": "7ed745da",
+      "compression": 8,
+      "retained_private_mode": "0600",
+      "original_bytes_equal": true
+    },
+    {
+      "member": "rcc-provider-rollback-evidence/published-details-receipt.json",
+      "bytes": 1483,
+      "sha256": "0d8f704b99becdc0baad46006c276e4406b862bbf96408011ad587da68179129",
+      "zip_recorded_mode": "0o100644",
+      "zip_CRC32": "cb9e0e68",
+      "compression": 8,
+      "retained_private_mode": "0600",
+      "original_bytes_equal": true
+    },
+    {
+      "member": "rcc-provider-rollback-evidence/staged-consumer-receipt.json",
+      "bytes": 2393,
+      "sha256": "42fb4f5876557bcffc597738bb642df22c69d91349c54d5d3c53fce97033abde",
+      "zip_recorded_mode": "0o100644",
+      "zip_CRC32": "c09b0399",
+      "compression": 8,
+      "retained_private_mode": "0600",
+      "original_bytes_equal": true
+    },
+    {
+      "member": "rcc-provider-rollback-junit.xml",
+      "bytes": 752,
+      "sha256": "99bd574e75a7d2313d50fb20749632ada952bb132f9c3a4f16642ac6ea4a9787",
+      "zip_recorded_mode": "0o100644",
+      "zip_CRC32": "0c094bd0",
+      "compression": 8,
+      "retained_private_mode": "0600",
+      "original_bytes_equal": true
+    }
+  ],
+  "total_expanded_bytes": 17483,
+  "original_members_exact_retained": true,
+  "original_recorded_mode_vs_private_storage": "Archive members recorded100644; private retained bytes600 and parent700 intentionally. No remote ACL/xattr preservation claim.",
+  "actual_checkout_evidence": {
+    "control_git_log_command_line": 123,
+    "control_SHA_output_line": 124,
+    "candidate_git_log_command_line": 223,
+    "candidate_SHA_output_line": 224,
+    "control_tree": "56d108fcdb5d43f7f27a8f2554fec51b702519f4",
+    "candidate_tree": "3ff76037779763d0461ff3a755b900c9ed83dcf8",
+    "trees_bound_original_receipts_and_immutable_Git_objects": true,
+    "not_synthetic_merge_reassignment": true
+  },
+  "strict_summary": {
+    "schema_version": 1,
+    "admission": {
+      "issues": [],
+      "passed": true
+    },
+    "source_files": [
+      {
+        "name": "action_package_handler",
+        "path": "action_server/src/actions/server/_action_package_handler.py",
+        "git_mode": "100644",
+        "git_blob": "a306eb11038f8cd4114415fb978321eb2ac51a0f",
+        "bytes": 24361,
+        "sha256": "a623ec0d2a7862bc5f27599fda853cb039ce68459b18c95e01c7a53adcdedb64"
+      },
+      {
+        "name": "actions_import",
+        "path": "action_server/src/actions/server/_actions_import.py",
+        "git_mode": "100644",
+        "git_blob": "50f72e8c95dcc4455a8225eb19c8d3309faada58",
+        "bytes": 28217,
+        "sha256": "57ad235e30fdd84c763f84efd7ccdd8514d620d5b5cfff05ac1051f60ceefad3"
+      },
+      {
+        "name": "runtime_adapter",
+        "path": "action_server/src/actions/server/_rcc_runtime_adapter.py",
+        "git_mode": "100644",
+        "git_blob": "09234363409bf979016a970c34b8b38ff642fb1f",
+        "bytes": 27382,
+        "sha256": "64f70563e9aaf2fa1a3a12006ae26e513b51be3bf465dac3d2b3bba76c1c669a"
+      },
+      {
+        "name": "rollback_test",
+        "path": "action_server/tests/action_server_tests/test_current_candidate_import_rollback.py",
+        "git_mode": "100644",
+        "git_blob": "13c760dd2adbd38bfeec039eba73376bbf32745c",
+        "bytes": 23456,
+        "sha256": "60d81fabaa2ba0446ff888109e050c883ee944553794636fd527a6fe27d4691b"
+      },
+      {
+        "name": "staged_consumer_test",
+        "path": "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+        "git_mode": "100644",
+        "git_blob": "6bb84ba5d78aeb200be4fae46155fc082bb8eb31",
+        "bytes": 19214,
+        "sha256": "0edc5d092dba9415f552ee1f666edac8f3ce9e833bea1ef73f8370ed2d446e6a"
+      },
+      {
+        "name": "source_staging",
+        "path": "action_server/src/actions/server/deployments/source_staging.py",
+        "git_mode": "100644",
+        "git_blob": "b475fd6688b7afc6606cde2cba9a1294d771a64c",
+        "bytes": 25641,
+        "sha256": "fda3f2c045414a9cae21cc0765a3eb7c72db2ddd2f5d74e567a04a0513baf620"
+      },
+      {
+        "name": "source_read",
+        "path": "action_server/src/actions/server/deployments/source_read.py",
+        "git_mode": "100644",
+        "git_blob": "7ec910a2ef7aecd2be73c6a7b786d42ea78c81af",
+        "bytes": 11051,
+        "sha256": "4ae8cbe57aa5c924585f4257a1be1700aa49baa63d6150efba20935045f7a8a5"
+      },
+      {
+        "name": "source_manifest",
+        "path": "action_server/src/actions/server/deployments/source_manifest.py",
+        "git_mode": "100644",
+        "git_blob": "5c02ece585884a656175d586e6b3d5a64f0c065e",
+        "bytes": 8281,
+        "sha256": "4fb8d376d1b4aa06d301dedaeee67a2916561c7d10b8f1dadd657870b37b2b43"
+      },
+      {
+        "name": "acceptance_helper",
+        "path": "action_server/scripts/verify_dakota_rcc_acceptance.py",
+        "git_mode": "100644",
+        "git_blob": "b2b8a58b2114b5a3e8fddbf90c7ad6314c6c1d05",
+        "bytes": 80376,
+        "sha256": "e4a311dd9e6dd6fa98b0257f37716b7e326eeac7f2beb8d9324802e40878fba3"
+      }
+    ],
+    "runtime_source_module_origins_hashes_verified": true,
+    "JUnit": {
+      "tests": 3,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "cases": [
+      {
+        "module": "test_current_candidate_import_rollback",
+        "case": "test_current_candidate_failed_reload_keeps_last_good_action_usable"
+      },
+      {
+        "module": "test_source_staging_rcc_consumer",
+        "case": "test_staged_package_executes_in_managed_rcc_runtime"
+      },
+      {
+        "module": "test_source_staging_rcc_consumer",
+        "case": "test_published_artifact_details_preserves_one_rcc_identity_pair"
+      }
+    ],
+    "all_original_summary_bytes_regenerated_equal": true,
+    "lifecycle_summary_original_bytes_regenerated_equal": true,
+    "offline_validator_replay": {
+      "exit_code": 0,
+      "unchanged_strict_predicate_AST": true,
+      "source_step_sha256": "90e8023a40e5846dcf8985d8fbde1f816e5addc8f78feb175613d9924ee0c717",
+      "recorded_observation_adapters": [
+        "git_value from immutable source/control and original checkout log",
+        "file_sha256 nine immutable Git bodies and original summary RCC observations",
+        "two RCC --version observations from original summary; no RCC execution",
+        "os.environ fixed recorded scope only"
+      ],
+      "limits": "Replay checks raw predicates and summary derivation against recorded hosted observations. It is not a fresh RCC binary execution or an independent current host measurement."
+    }
+  },
+  "publication_details": {
+    "invocation_count": 1,
+    "one_invocation_scope": "Publication-details case only; lifecycle and staged-consumer use separate providers/environments",
+    "RCC": {
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+      "version": "v18.19.3"
+    },
+    "specification_digest": "sha256:5e7dcfdb9f4ca5cc19ca6b2e93cad75a3fd60f598d4a71fd10451bffc1ddc56f",
+    "artifact_digest": "sha256:128a21ba2f2655b08ba36d060de099bfd80b50e8a73ad77fb742da0838d179d3",
+    "raw_payload_sha256": "5275941be63a8f3f81e1c667a9a008311c809378c2b03a852879ee986e7c8d04",
+    "raw_keys": [
+      "artifactDigest",
+      "legacyBlueprintKey",
+      "objectCount",
+      "reusedBytes",
+      "specificationDigest",
+      "uploadedBytes"
+    ],
+    "raw_object_count": 4960,
+    "raw_uploaded_bytes": 76127475,
+    "raw_reused_bytes": 0,
+    "raw_identity_pair_and_aliases_exact": true,
+    "pure_return_API": "publish_artifact_details returns parse_published_artifact_details(_publish_artifact_payload(...)); one captured runner invocation binds the unmodified JSON pair. No second publication/query reconstructed.",
+    "published_args_and_loopback_provider_strict_validation": true
+  },
+  "staged_consumer": {
+    "status": "PASS",
+    "Core_version": "1.0.2",
+    "original_authored_sample_bytes_inventory_modes_equal": true,
+    "sample_entry_count": 2,
+    "managed_worker_prefix_and_core_origin": true,
+    "typed_return_fields_exact": true,
+    "sample_only": "Published Core1.0.2 sample action/manifest, not wholeCore3/Runtime wheel or content-authority proof"
+  },
+  "lifecycle": {
+    "status": "PASS",
+    "provider_operations_before_failure_after_failure_after_recovery_equal": true,
+    "provider_operation_count": 2,
+    "run_results": {
+      "first_run": {
+        "status": 2,
+        "expected_result_equal": true
+      },
+      "second_run": {
+        "status": 2,
+        "expected_result_equal": true
+      },
+      "recovered_run": {
+        "status": 2,
+        "expected_result_equal": true
+      }
+    },
+    "shutdown_HTTP_status": 200,
+    "natural_return_code_before_separate_cleanup": 1,
+    "post_cleanup_return_code": 1,
+    "post_cleanup_return_code_is_natural_evidence": false,
+    "forced_stop_used": false,
+    "captured_descendants_before_stop": 0,
+    "same_captured_survivors_after_stop": 0,
+    "cleanup_scope": "Original source records HTTP shutdown and natural poll return before separate cleanup; captured tree empty proves no captured survivors, not complete universal descendant reaping."
+  },
+  "scope_limits": [
+    "Original successful threecase scopes only; full fresh CI snapshot has7pending of26",
+    "PolicyHTTP403UNKNOWN remainsHOLD, not bypass",
+    "NOT_RUN public negativeCLI2510 is not positiveparentguard qualification",
+    "No private134135/provider metadata/native/currentcoldinstall/fullwheel/publication/release acceptance",
+    "Nine source sample is not complete native producer qualification; accepted302adapter differs old92498",
+    "Old302d642/a346/54a receipts remain separate despite sampledcode equality"
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_proposed": "docs/skills/repository-operations.md",
+    "Exact_proposal": {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-independent-control-review/canonical-three-reviewed-control-branches-proposed.patch",
+      "bytes": 1016,
+      "sha256": "cd97355e9506350c286532607b87c5ce4ff492073a78fb72336517fe8164b5cd"
+    },
+    "Durable_learning": "Three reviewed control push branches are permitted with unchanged path filter; source S/control C/fresh raw proof and fullCI tested merge remain separate. OriginalZIP/raw-vs-summary/nineGitbody sample and Core1.0.2/capturedcleanup limits verified.",
+    "Evidence": [
+      "current immutable control workflow threebranch list and successful currentpushrun",
+      "seven original members and unchanged validator offline raw-predicate replay",
+      "nine sourceGitmode/body hashes; original C/S checkout output",
+      "original lifecycle/rawpublication/staged inventory and exactJUnit"
+    ],
+    "Stale_or_ambiguous_guidance_removed": "Existing cd973 exact patch replaces stale two-branch permission list with three; no fabricated current execution or broad cleanup/Core3 claim added.",
+    "Remaining_uncertainty": "FullCI/policy/private/currentnegativeCLI/native/wholewheel gates remainHOLD; offline RCC observations bound original summary, not new binary measurement."
+  },
+  "Upstream_disposition": "none",
+  "source_mutations_actual_runs_retries": false,
+  "evidence": [
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/artifact-returned-reference.private.json",
+      "bytes": 1853,
+      "sha256": "fb12c423ed688e73596b7b429e932a7a538038bbc0ec4e4025ea06373600c69c"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/immutable-C-validator.private.txt",
+      "bytes": 27087,
+      "sha256": "90e8023a40e5846dcf8985d8fbde1f816e5addc8f78feb175613d9924ee0c717"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/acceptance-summary.json",
+      "bytes": 3067,
+      "sha256": "0cae877e37e4ad4721045e8095cd3f40bb361006048e38ea2cfbea8de2c05fde"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/acceptance-summary.log",
+      "bytes": 686,
+      "sha256": "d4cc8ec93cf0227ae2206808180e53b29271b45c8658151106c01d416a0455fd"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/lifecycle-receipt.json",
+      "bytes": 7881,
+      "sha256": "a18529d3dc94cfc150352d6dedc674883814245eca5573205a2ce92427875b8c"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/lifecycle-summary.json",
+      "bytes": 1221,
+      "sha256": "56ad7a1548939ae3e143be6a83a846de330eb6bce4317d0cfc0e4a5190e22817"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/published-details-receipt.json",
+      "bytes": 1483,
+      "sha256": "0d8f704b99becdc0baad46006c276e4406b862bbf96408011ad587da68179129"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/staged-consumer-receipt.json",
+      "bytes": 2393,
+      "sha256": "42fb4f5876557bcffc597738bb642df22c69d91349c54d5d3c53fce97033abde"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/validator-output.private.log",
+      "bytes": 686,
+      "sha256": "d4cc8ec93cf0227ae2206808180e53b29271b45c8658151106c01d416a0455fd"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-acquisition-and-member-inventory.json",
+      "bytes": 3017,
+      "sha256": "3780215b4c811eb85a7419ddb5454bf7df89081a150a7583a6466ad947d81065"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-artifact-11697165172.zip",
+      "bytes": 7582,
+      "sha256": "5bebad77cc556a5bf5cef84feae8d76d3a7d5c5aecfc63378691cc79dec3719d"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-job-114425127596.private.log",
+      "bytes": 887255,
+      "sha256": "d36e0a7695b52fa2113a6d3a43c6554b1c5f032c0f777410bfadd2972b135c1b"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-evidence/acceptance-summary.json",
+      "bytes": 3067,
+      "sha256": "0cae877e37e4ad4721045e8095cd3f40bb361006048e38ea2cfbea8de2c05fde"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-evidence/acceptance-summary.log",
+      "bytes": 686,
+      "sha256": "d4cc8ec93cf0227ae2206808180e53b29271b45c8658151106c01d416a0455fd"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-evidence/lifecycle-receipt.json",
+      "bytes": 7881,
+      "sha256": "a18529d3dc94cfc150352d6dedc674883814245eca5573205a2ce92427875b8c"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-evidence/lifecycle-summary.json",
+      "bytes": 1221,
+      "sha256": "56ad7a1548939ae3e143be6a83a846de330eb6bce4317d0cfc0e4a5190e22817"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-evidence/published-details-receipt.json",
+      "bytes": 1483,
+      "sha256": "0d8f704b99becdc0baad46006c276e4406b862bbf96408011ad587da68179129"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-evidence/staged-consumer-receipt.json",
+      "bytes": 2393,
+      "sha256": "42fb4f5876557bcffc597738bb642df22c69d91349c54d5d3c53fce97033abde"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-junit.xml",
+      "bytes": 752,
+      "sha256": "99bd574e75a7d2313d50fb20749632ada952bb132f9c3a4f16642ac6ea4a9787"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/verify-original-proof.py",
+      "bytes": 17698,
+      "sha256": "bd594d9d026881b6ef2a157da601c752c264c3e4ea8b5804156559f1b233e777"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-CI-and-threecase-metadata/frozen-metadata-census.json",
+      "bytes": 40949,
+      "sha256": "044b08670dea70fc9dbd1576a4ebab20dd1510aaee7e52dfc72318866c2c2dc3"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-independent-control-review/canonical-three-reviewed-control-branches-proposed.patch",
+      "bytes": 1016,
+      "sha256": "cd97355e9506350c286532607b87c5ce4ff492073a78fb72336517fe8164b5cd"
+    }
+  ]
+}

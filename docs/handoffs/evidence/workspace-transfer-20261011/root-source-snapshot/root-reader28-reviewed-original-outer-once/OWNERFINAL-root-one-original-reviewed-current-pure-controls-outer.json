@@ -1,0 +1,22 @@
+{
+  "capture": "2026-10-11T21:42:33.239244+00:00",
+  "elapsed_seconds": 30.25687233399367,
+  "job": "reader28",
+  "native": "NOT_RUN",
+  "outer_returncode": 0,
+  "release": {
+    "bytes": 2305,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-one-cgroup-reader-observer28-pure-release.json",
+    "sha256": "56029c8c5d0bfb370b4c21052e4dbc5c01b6d55ebd467a0c1b8c359d9b7d4e7a"
+  },
+  "review": {
+    "bytes": 10715,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-reader28-concrete-independent-PREEXEC-review/OWNERFINAL-independent-current8d49-reader-observer28-concrete-PREEXECUTION-GO.json",
+    "sha256": "58ba73b20f8d1e2132b3cfbb8eb7e4df66b493f10020b7359b507630bd698fee"
+  },
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_adoption": "NONE",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+}

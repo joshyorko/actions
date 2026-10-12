@@ -1,0 +1,124 @@
+{
+  "actual_scope": "NOT_RUN; no fresh counts/pass/green/style/runtime/static/gen/Invoke/native/OAuth claims",
+  "attempt_root": {
+    "absent": true,
+    "mode": "0o700",
+    "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned"
+  },
+  "bounds": {
+    "individual_PHASE_TERM_kill_grace": 10,
+    "individual_budgets": [
+      120,
+      120,
+      180,
+      180,
+      180,
+      180,
+      180,
+      120,
+      210
+    ],
+    "note": "Seven originalphase classes plus two newtoken phases; all run_phase calls limited by remaining780 and ownedgroup fallback5+5. Rootouter includesactivation/pre/post. FULL remains separate600+10/900 and NOTRUN.",
+    "outer": 900,
+    "outer_TERM_kill_grace": 10,
+    "phase_count": 9,
+    "primary_phase_budget": 780
+  },
+  "config": {
+    "bytes": 16905,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/immutable-one-TOKEN-LIGHT-once2-inputs.json",
+    "sha256": "29368814c182f30732ab041ca580162c92071e4bb076eb164c9820ced3acc158"
+  },
+  "config_bindings": 39,
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md scoped gateway-versus-child status lesson proposed only",
+    "Durable_learning": "Observed RCC task gateway10 and checked pytest1 must be retained separately and coupled to exact named semantic assertions",
+    "Evidence": "Original XML2F0E0S and toolkit CalledProcessError exit1, original phase10/expected1, exact inverse AST closure",
+    "Remaining_uncertainty": "Once2 NOT_RUN and later LIGHT/FULL/authority/native remain HOLD",
+    "Stale_guidance_removed": "Private outer1 assumption only; no universal RCC mapping claimed",
+    "exact_delta": {
+      "bytes": 394,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/proposed-canonical-gateway-versus-child-status-lesson.txt",
+      "sha256": "7e9713048af1c6736dadd6f45f71a99281199bc0a233e477dd26e8c5190498c2"
+    }
+  },
+  "exact_root_adoption_argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "900s",
+    "bash",
+    "-c",
+    "source /workspace/actions-cloud/activate.sh && exec /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python /workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/launch_one_owned_token_light_once2.py \"$@\"",
+    "pr307-token-light",
+    "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/root-one-TOKEN-LIGHT-once2-release.json",
+    "ROOT_AUTH_SHA256_FROM_ANNOUNCED_TYPED_RELEASE",
+    "OWNER_ANNOUNCED_INDEPENDENT_REVIEW_PATH",
+    "OWNER_ANNOUNCED_INDEPENDENT_REVIEW_SHA256"
+  ],
+  "history_preserved": "Old originalc97 outer1/inner2 intended failures/postPASS retained; no relabel/retry/namespace overwrite; original7487/2314/prototypes and all27refs preserved plus12 new predecessor/failure bindings",
+  "launcher": {
+    "bytes": 16047,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/launch_one_owned_token_light_once2.py",
+    "sha256": "a747b3fd108d6e8f4545fa2489876997decb04202752f8bf310732303988597e"
+  },
+  "mandatory_FULL": "CurrentaffectedDevutils complete suite andRuntime test-not-integration mandatory; NOTRUN. Proposedpackagefull separateROOTrelease requiresTMP1.2B/workspace1.28849B; no waiver fromLIGHTGO ornormalprogresspush.",
+  "metadata_correction": "Only inherited preservation count all27\u2192all39; executable/config/AST/proof unchanged, original7035 owner retained.",
+  "metadata_predecessor": {
+    "bytes": 7035,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/OWNERFINAL-currentc97e-once2-minimal-gateway-boundary-TOKEN-LIGHT-PREEXECUTION-NOTRUN.json",
+    "sha256": "ec20cf8bad022555e91326aa5f8e11dd313782480dc33f03d69d5072dce3c1b9"
+  },
+  "original_failed_owner": {
+    "bytes": 4029,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-currentc97e-original-TOKEN-LIGHT-ACTUALFAIL-independent-diagnosis/OWNERFINAL-independent-original-currentc97e-TOKEN-LIGHT-ACTUALFAIL-and-minimum-boundary-proposal.json",
+    "sha256": "1075f04e6a27e2209d1fe2cb630747faab8fff00644fb5481d26cd99ea6f1130"
+  },
+  "original_preexec_owner": {
+    "bytes": 8675,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-currentc97e-concrete-TOKEN-LIGHT-PREEXECUTION/OWNERFINAL-currentc97e-retargeted-concrete-TOKEN-LIGHT-PREEXECUTION-final-NOTRUN.json",
+    "sha256": "b117d56bd984c4420ad3b15a860c09547326ebcc7498e78248e7796de27a6daf"
+  },
+  "parent": "7487d94bf1a0453119928fe2d73d1413a252a312",
+  "preservation": {
+    "before_always_post": "Complete1442GitFSexec/30inputs/fiveconfigs/15historicalrefs/all39cfgbindings/configself/launcherrootauthhash, sourceclean; own308Githead8d49/treea806/clean only; originalignored307outputs exact",
+    "failure_behavior": "Privatephase stdout/stderrfsynced andoriginalterminalwritten beforeexitassert; originalprimarypreserved with postguardfailure separate; nopoll/rerun/namespaceoverwrite",
+    "scope_limit": "No independentwholeprivate9namespace/native1192 inventory asserted bythis307launcher; no source308/binary/helpermutation/nativeclaim"
+  },
+  "retarget_only_scope": {
+    "all_other_launcher_AST": "EXACT after declared inverse",
+    "gateway_command": "UNCHANGED; existing canonical RCC task script still owns ownDevutils checked pytest",
+    "semantic_delta": "Deliberate RED outer10 only + exact original-style inner exit1 trace + unchanged two intended assertion cases; no general RCC error normalization",
+    "source_delta": "NONE; c97 whole Git/FS and tests unchanged"
+  },
+  "root_release_contract": {
+    "config_sha256": "29368814c182f30732ab041ca580162c92071e4bb076eb164c9820ced3acc158",
+    "decision": "RELEASE_ONE_CURRENTC97E_TOKEN_LIGHT_ONCE2_ONLY",
+    "file": "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/root-one-TOKEN-LIGHT-once2-release.json",
+    "independent_review": "Exact owner-announced path/hash pair in typed release and argv",
+    "launcher_sha256": "a747b3fd108d6e8f4545fa2489876997decb04202752f8bf310732303988597e",
+    "regular_nonsymlink": "0600 own UID/GID/hashbound; one separate new release; old original consumed attempt remains FAIL",
+    "review_decision_required": "GO_CURRENTC97E_TOKEN_LIGHT_ONCE2_GATEWAY_PREEXECUTION",
+    "root_before_invocation": "Fresh workspace>=536870912; serialized no other heavy/native/storage/install; new attempt/outer stdio absent; unset inherited PYTHONOPTIMIZE/PYTEST_ADDOPTS; exact18activationexports+PATH cached primary; root private outer captured on every outcome",
+    "schema": 1,
+    "source": "c97edfd10edb5b1c63f8a6371bfd2905996a2da2",
+    "tree": "f8d3477451fa601643ef6c06f6b1e616e2407643"
+  },
+  "schema": 1,
+  "source": "c97edfd10edb5b1c63f8a6371bfd2905996a2da2",
+  "static_proof": {
+    "bytes": 2650,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/private-exact-once2-AST-config-and-original-trace-retarget-proof.json",
+    "sha256": "d50dded2582591b8db757c4d1887a1c53e3fa64ec46363754a388e09a77802df"
+  },
+  "status": "CONCRETE_ONCE2_SOURCE_PREPARATION_NOTRUN_REQUIRES_INDEPENDENT_GO_AND_DISTINCT_ROOT_RELEASE",
+  "tree": "f8d3477451fa601643ef6c06f6b1e616e2407643",
+  "upstream_disposition": "none"
+}

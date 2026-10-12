@@ -1,0 +1,116 @@
+{
+  "schema": "actions-independent-issue152-request-enforcement-frozen-source-review/v1",
+  "verdict": "GO_IMMUTABLE_SOURCE_CHECKPOINT_ONLY; HOLD_CURRENT776_UNION_CI_NATIVE_WORKSPACE_FULLISSUE_RELEASE_ACCEPTANCE",
+  "head": "9475a30fbe8645fd0c6b9c2746182f7a78631059",
+  "tree": "ddb2bb30a5f7ba381867020821054e510960b917",
+  "sole_parent": [
+    "ec73bb6372c1f613a3e130f0ce92f649d9d40a97"
+  ],
+  "existing_branch": "test/auth-route-census-20261010",
+  "clean": true,
+  "tested_source_base": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+  "current_actual_target": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+  "frozen_checkpoint": {
+    "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/immutable-request-enforcement-source-checkpoint.json",
+    "bytes": 16702,
+    "sha256": "130bb73051b73d060c84ea55a47a36cad7fb99d1aa3bfd60de6ac79669fddf82"
+  },
+  "independent_frozen_byte_and_log_proof": {
+    "path": "/workspace/engineering/pr309-issue152-independent-review/independent-frozen-source-proof.json",
+    "bytes": 10849,
+    "sha256": "963649fc01bb2072c7602a0633ac8d8d621674b8a85813fd5cec848eb3cf4347"
+  },
+  "scope_preservation": {
+    "parent1410_1409modeblobpairs_exact": true,
+    "added_only_test_auth_route_enforcement_changed_only_guide": true,
+    "all209production_auth_database_handlers_originalcensus_workflows_generator_manifests_locks_preserved": true,
+    "test_sha256": "dd7d3093f62fdd966e4cc07ad44d9043b3d8839bfb45f535843d94b893a277b8",
+    "guide_sha256": "228d249cb2940b891061bc51d3c84148ea42ac2baae2da1733eb638f02902893",
+    "all39_original_current_evidence_bindings_exact": true
+  },
+  "meaningful_semantic_review": {
+    "54credential_cells": "18same realassembled handlers each with valid/missing/wrongkey;18valid requireHTTP200 and actualowned secret/SQL schedule/workitem/attachment changes or exact seeded Run/artifact/log/read/catalog evidence. No422/404/503 positive substitute.",
+    "denied_requests": "36 credential denials +6dispatchdenials compare postseed complete logicalSQL schemas/rows/counters/runs, regular-file content hashes/dirs/bindings/attachments and exact in-memory syntheticsecrets;403 andempty boundarycalls.",
+    "database_read_boundary": "Database.connect wrapped in addition defining get_db attribute, covering importcachedalias reads; snapshots close readonlysqlite connections, filebacked DB resolves independent TestClient threadconnections.",
+    "dispatch_boundary": "Request.body/form, WorkItemsadapter, artifact read/metadata/root methods androbotdiscovery observed. Native pool/runcreation/artifactcreation/import/RCC/download/provider sentinels only during deniedrequests, not mocks substituting validhandler successes.",
+    "websocket6": "Real assembled native ASGIscope messages with two routes\u00d73credentials;valid accept/actualecho/disconnect, denied exactclose1008 no reason;bounded3s group and actualsession/room/callback maps empty aftercall. NoTCP/Uvicorn/browser/nativebinary proof.",
+    "private_mount3": "Two-segment bindingmanifest/unrelated/missingpath controls validkey\u2192404,no private bytes andunchangedstate. Realone-segment publicUI fallback not misclassified asfiledelivery.",
+    "public2_local2": "Publicconfig/UI withkey retained,auth_enabled true; no-keylocal runsummary/workitemcreate actualpositivehandlers. No Workspaceprincipal inference.",
+    "total_new_cases": 73,
+    "owned_mutation_negative_controls": "3separatelyowned in-memory auth/sessionbypasses demonstrably return200 with secretswrite, SQL+directoryworkitemwrite, exactprivatePAYLOADleak; eachoriginaldenialtest FAILS on status/state/leak.209production bytes/currenttest unchanged and original auth method identities restored by asserted context. No source bypass committed.",
+    "fixture_lifecycle": "before_start captures configuredapp andFalse returns beforepool/Uvicorn; guards refuse accidental native startup. create_db/load_db scope remains alive; main/threadDatabase.connect close contexts and client.close finally, SQLite snapshot closing explicit. MonkeyPatch restoresglobalsettings/runstate/adapter/secrets/mode/scheduler/socket/Path.home/env, isolated ownedhome/robots/tmpdata; cached app/key cleared atsetup/finally. Anyio streams/tasks bounded, no fixture nativeprocesses."
+  },
+  "verified_recorded_gates": {
+    "Doctor": "PASS",
+    "Bootstrap": "EXACT_OWN_PREPARED_REUSE_24_DECLARED_INPUTS_AND_FIVE_PACKAGE_ORIGINS_NO_REINSTALL",
+    "ToolkitTest": {
+      "passed": 69
+    },
+    "valid_real_handler_initial_baseline": {
+      "passed": 18
+    },
+    "new_request_cells": {
+      "matrix_rows": 18,
+      "matrix_credential_cells": 54,
+      "bounded_extras": 19,
+      "total": 73,
+      "all_73_current_full_verbose_cases_passed": true
+    },
+    "current_scoped": {
+      "passed": 148,
+      "skipped": 1,
+      "deselected": 1
+    },
+    "configured_lint": "PASS_303_FILES",
+    "configured_typecheck": "PASS_339_FILES",
+    "configured_markdownlint": "UNAVAILABLE_NOT_INSTALLED",
+    "regeneration": {
+      "generated_outputs_unchanged": 8,
+      "all_yaml_yml_parsed_unchanged": 30
+    },
+    "full": {
+      "passed": 1229,
+      "skipped": 13,
+      "warnings": 15,
+      "elapsed_seconds": 140.2,
+      "workers": 2,
+      "outer_timeout_seconds": 600,
+      "kill_grace_seconds": 10
+    },
+    "git_diff_check": "PASS"
+  },
+  "original_full_log": {
+    "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/current-full-configured-source.log",
+    "bytes": 316475,
+    "sha256": "5f321606bd1b3161da2fbfa96ab7ea895148538fc62d1f71ca313e8961c08fbd"
+  },
+  "full_gate_boundary": "1229PASS13existingSKIP15warnings140.20s/2workers RCCexit0, all73newindividual verbosecasesPASS; scoped148PASS1existingSKIP1nativeDESELECT/static303/Mypy339/8generator30trackedYAML. Recordedhashes inspected; no independent gate/test/native rerun. Markdownlint unavailable explicitly retained.",
+  "preserved_initial_negative_preparation": {
+    "initial_matrix": "1FAIL62PASS initial boundedstop, websocket sourceexact1008close withoutreason; fixed assertion only authorized, original source/log/receipt retained.",
+    "corrected_close_matrix": "1FAIL67PASS initial boundedstop, one-segmentartifactfallback routespublicUIbeforemount; corrected two-segment private controls authorized, originalsource/log/receipt retained.",
+    "static": "Dynamic Path subclass initialMypy failure retained; realPath.home monkeypatch current339PASS, no casts/typeignore/widenedskip added to hide failure.",
+    "database-bound_controls": "Finalsource reruns73/scoped/full and3genuine mutations againstfilebacked context; initial scaffold failures notrelabelled auth product regressions."
+  },
+  "hold": [
+    "Ordinarysamebranch union againstactual776 withnewadapter/control inputs andfreshcomplete exacthead/syntheticCI before any currentmergeadmission",
+    "Whole152/196 andWorkspaceprincipal/ownership contracts",
+    "Validrobotimport/dynamicaction/nativeRCC execution orexternalprovider/metadata/backend/browser/network",
+    "Privatefullacceptance andqualifiedproductionartifact/release/publication",
+    "Existing skips andsource-only fixture coverage beyond73namedcells"
+  ],
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "Exact_delta": {
+      "path": "/workspace/engineering/pr309-issue152-independent-review/canonical-reviewed-source-request-enforcement-delta.patch",
+      "bytes": 2792,
+      "sha256": "e9d6414ca38eb3a9e16eade73449c36857298f5f6ab18e3de0be14416dbe94cf"
+    },
+    "Disposition": "ACCEPT exact31line new source guide patch e9d641; identical currentGitparent\u21929475diff and frozen228dguidehash. No extra cosmetic paragraph proposed.",
+    "Durable_learning_captured": "Capture realassembled app before native startup; filebackedSQLite alive through threadconnections; postseed comprehensive logicalstate + Database.connect observers forcachedget_db aliases; nativeRCCcall absence does not establish zero predispatchsideeffects; same validrealrequest controls; two-segment protectedmount versuspublicUIfallback; source-defined ASGIclose1008/noreason; genericserverkey notWorkspaceprincipal.",
+    "Evidence": "Pinned unchanged start_server callback beforepool, Database.connect closingthreadlocalfileconnections,create_db/load_db globalcontext, originalmount/auth/backend routing plus73PASS/18realhandlerpositives/3realwrite-leak mutationFAILs and1410sourcepreservation.",
+    "Stale_or_ambiguous_guidance_removed": "In-memory registration fixture versusseparate workerDB, definingmodule spy versuscachedalias, zeroRCC versuszero ownedstatechanges, publicone-segment versusprotectedmount, invented emptyreason versusmissing reason, serverkey versusWorkspaceownership.",
+    "Remaining_uncertainty": "Unlistedroutes and validnativeimport/actionexecution,Workspaceprincipal binding/privatebackends/browser/TCP/platformnative/metadata/fullissue/release unknown. Current776union/sourceCI must refresh; originalec73green historical.",
+    "Upstream_disposition": "none"
+  },
+  "reviewer_actions": "Read-only source/AST/Git/hash/logcase/JSON inspection and external named receipts/proofs. No source/index mutation,gateway/tests/replay/native/browser/provider/installer/push/merge/cleanup/private-source reconstruction."
+}

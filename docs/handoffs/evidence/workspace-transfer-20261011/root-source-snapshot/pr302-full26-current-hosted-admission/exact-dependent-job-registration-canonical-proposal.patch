@@ -1,0 +1,15 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -3401,7 +3401,11 @@
+ 
+ Reconcile the complete exact-head check-run inventory, commit statuses and
+ workflow-run inventory before merge admission. Page each endpoint until
+-exhausted and count checks, jobs and runs separately. A successful workflow can
++exhausted and count checks, jobs and runs separately. Dependent jobs may appear
++only after their prerequisites finish. An exhausted earlier page covers currently
++registered jobs, not completion of the declared workflow; reconcile again after
++the producer matrix finishes and retain a queued publisher as pending. A
++successful workflow can
+ contain skipped jobs; inspect each skip's event condition and retain it as
+ skipped. Empty commit statuses do not imply absent Actions checks. After a
+ prerequisite merge, compare the dependent's new prospective tree with its

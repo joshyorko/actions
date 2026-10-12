@@ -1,0 +1,620 @@
+{
+  "allocated_unique_bytes": {
+    "once4-toolkit-basetemp": 76021760,
+    "once5-toolkit-basetemp": 76013568,
+    "once6-toolkit-basetemp": 76021760
+  },
+  "allocation_reserve": 8388608,
+  "cached_python": {
+    "bytes": 31903952,
+    "mode": "0o775",
+    "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12",
+    "sha256": "ba35c76091c86640cd6bbccc8c216e5b2fc52b20c26de803edef79165022037f"
+  },
+  "combined_index_cap": 16777216,
+  "completion": {
+    "once4-toolkit-basetemp": {
+      "Toolkit_cases": 179,
+      "Toolkit_fail_error_skip": 0,
+      "Toolkit_passed": 179,
+      "Toolkit_terminal": {
+        "bytes": 442,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/toolkit/terminal.json",
+        "sha256": "ea9d4bfbc6b79cac15c6beb3a077258e9349147dcc6f5cc27123086be6af60e3"
+      },
+      "original_Toolkit_JUnit": {
+        "bytes": 30055,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/toolkit/junit.xml",
+        "sha256": "fb6417a38ee73ac88b0c95e97c4cf816f851540b9c1b6c1038d2d4e8cb28844f"
+      },
+      "original_whole_status_retained": "FAILED",
+      "original_whole_terminal": {
+        "bytes": 279,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/original-terminal.json",
+        "sha256": "00d10dd81a6d383ef325ecd3c3541d53eae519e93a7ac29135e37f9e13860853"
+      },
+      "retained_outside_bindings": [
+        {
+          "bytes": 442,
+          "mode": "0o600",
+          "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/toolkit/terminal.json",
+          "sha256": "ea9d4bfbc6b79cac15c6beb3a077258e9349147dcc6f5cc27123086be6af60e3"
+        },
+        {
+          "bytes": 30055,
+          "mode": "0o600",
+          "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/toolkit/junit.xml",
+          "sha256": "fb6417a38ee73ac88b0c95e97c4cf816f851540b9c1b6c1038d2d4e8cb28844f"
+        },
+        {
+          "bytes": 279,
+          "mode": "0o600",
+          "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/original-terminal.json",
+          "sha256": "00d10dd81a6d383ef325ecd3c3541d53eae519e93a7ac29135e37f9e13860853"
+        },
+        {
+          "bytes": 1460,
+          "mode": "0o600",
+          "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/toolkit/stdout.bin",
+          "sha256": "9e437570b717c3fe7abeab4cf3b1bed4d850c97748bcde07f98aee04238a41f8"
+        },
+        {
+          "bytes": 13152,
+          "mode": "0o600",
+          "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/toolkit/stderr.bin",
+          "sha256": "f137589336f77a632d314345cc0efb03a6a810f240ade06af20de1fd0b9eccab"
+        }
+      ],
+      "root_name": "once4-toolkit-basetemp",
+      "source": "9760d5ec44876558c4941c4c3190abc8d92d14a1",
+      "tree": "0d33ebaac258e069ef7045a29b4a3904740f6307"
+    },
+    "once5-toolkit-basetemp": {
+      "Toolkit_cases": 179,
+      "Toolkit_fail_error_skip": 0,
+      "Toolkit_passed": 179,
+      "Toolkit_terminal": {
+        "bytes": 441,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/toolkit/terminal.json",
+        "sha256": "9f41c9b97498fcf8d5f69d96c3577a82ebce72e1257c8141a00dd9598aa7e371"
+      },
+      "original_Toolkit_JUnit": {
+        "bytes": 30055,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/toolkit/junit.xml",
+        "sha256": "cce67a87225a40d8a60397806744fe3c97600f449344a26d388a23ea236ed991"
+      },
+      "original_whole_status_retained": "FAILED",
+      "original_whole_terminal": {
+        "bytes": 279,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/original-terminal.json",
+        "sha256": "00d10dd81a6d383ef325ecd3c3541d53eae519e93a7ac29135e37f9e13860853"
+      },
+      "retained_outside_bindings": [
+        {
+          "bytes": 441,
+          "mode": "0o600",
+          "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/toolkit/terminal.json",
+          "sha256": "9f41c9b97498fcf8d5f69d96c3577a82ebce72e1257c8141a00dd9598aa7e371"
+        },
+        {
+          "bytes": 30055,
+          "mode": "0o600",
+          "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/toolkit/junit.xml",
+          "sha256": "cce67a87225a40d8a60397806744fe3c97600f449344a26d388a23ea236ed991"
+        },
+        {
+          "bytes": 279,
+          "mode": "0o600",
+          "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/original-terminal.json",
+          "sha256": "00d10dd81a6d383ef325ecd3c3541d53eae519e93a7ac29135e37f9e13860853"
+        },
+        {
+          "bytes": 1460,
+          "mode": "0o600",
+          "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/toolkit/stdout.bin",
+          "sha256": "28dff6f198a4d9f57d0842d2129f0dd491ff0ef0a2030cc32cf4a30f4ed425f4"
+        },
+        {
+          "bytes": 13154,
+          "mode": "0o600",
+          "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/toolkit/stderr.bin",
+          "sha256": "1c677225f390a931b444e496a673de134eaf8f55614a2730eafc4e56b3388d6a"
+        }
+      ],
+      "root_name": "once5-toolkit-basetemp",
+      "source": "9760d5ec44876558c4941c4c3190abc8d92d14a1",
+      "tree": "0d33ebaac258e069ef7045a29b4a3904740f6307"
+    },
+    "once6-toolkit-basetemp": {
+      "Toolkit_cases": 179,
+      "Toolkit_fail_error_skip": 0,
+      "Toolkit_passed": 179,
+      "Toolkit_terminal": {
+        "bytes": 442,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-token-light-once6-owned/toolkit/terminal.json",
+        "sha256": "b562018130e187e013b057a132c20726113476a58d434d5992e9e8326145ca42"
+      },
+      "original_Toolkit_JUnit": {
+        "bytes": 30055,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-token-light-once6-owned/toolkit/junit.xml",
+        "sha256": "1a4d0468370767b3ea1e5c24cc680d0f1aa06afac9ddd59f7878e3ccb57abed1"
+      },
+      "original_whole_status_retained": "PASSED_CURRENT9760_TOKEN_LIGHT_ONCE6_ONLY",
+      "original_whole_terminal": {
+        "bytes": 298,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-token-light-once6-owned/original-terminal.json",
+        "sha256": "0ad0f501cdbb71e4dfb89beba62d583516e77781279b7a1610625779e4357249"
+      },
+      "retained_outside_bindings": [
+        {
+          "bytes": 442,
+          "mode": "0o600",
+          "path": "/workspace/engineering/pr307-current9760-token-light-once6-owned/toolkit/terminal.json",
+          "sha256": "b562018130e187e013b057a132c20726113476a58d434d5992e9e8326145ca42"
+        },
+        {
+          "bytes": 30055,
+          "mode": "0o600",
+          "path": "/workspace/engineering/pr307-current9760-token-light-once6-owned/toolkit/junit.xml",
+          "sha256": "1a4d0468370767b3ea1e5c24cc680d0f1aa06afac9ddd59f7878e3ccb57abed1"
+        },
+        {
+          "bytes": 298,
+          "mode": "0o600",
+          "path": "/workspace/engineering/pr307-current9760-token-light-once6-owned/original-terminal.json",
+          "sha256": "0ad0f501cdbb71e4dfb89beba62d583516e77781279b7a1610625779e4357249"
+        },
+        {
+          "bytes": 1460,
+          "mode": "0o600",
+          "path": "/workspace/engineering/pr307-current9760-token-light-once6-owned/toolkit/stdout.bin",
+          "sha256": "476e739d1d646f808395218bd1ae61575a11fec7a58f745aa676a5993b6c1ebc"
+        },
+        {
+          "bytes": 13153,
+          "mode": "0o600",
+          "path": "/workspace/engineering/pr307-current9760-token-light-once6-owned/toolkit/stderr.bin",
+          "sha256": "a37370d93fcfef43d427b36cf8757021ce543d454e49f9f5b5a327c9ac0f8111"
+        }
+      ],
+      "root_name": "once6-toolkit-basetemp",
+      "source": "9760d5ec44876558c4941c4c3190abc8d92d14a1",
+      "tree": "0d33ebaac258e069ef7045a29b4a3904740f6307"
+    }
+  },
+  "compressed_cap": 268435456,
+  "destination": "/workspace/engineering/pr307-completed-three-Toolkit-basetemps-preserved-once",
+  "entry_workspace_min_bytes": 427819008,
+  "guard_helper_binding": {
+    "bytes": 11962,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/root_once_first_five_current9760_SOURCE_PREPARED_v2.py",
+    "sha256": "ffee97622f83627e77a27ec407ec4e242768060fb016a5b54a813c88a8015b03"
+  },
+  "guard_import_closure": {
+    "actual_transport_v8": {
+      "bytes": 27889,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/actual_transport_v8.py",
+      "sha256": "33dda17140ef749e22f086cc91b92ed8c3230fddfde8a4a369769e2183f695a1"
+    },
+    "fixture_records_v8": {
+      "bytes": 11489,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/fixture_records_v8.py",
+      "sha256": "7a63ee62184ea268dead0c98460c6943ebc297816e9a4df180b10ed5e04b9064"
+    },
+    "historical_binding_current8d49_v8": {
+      "bytes": 6327,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/historical_binding_current8d49_v8.py",
+      "sha256": "6f64d55837cc4ff14ee4eec013314ba512c09ecdc56f79192c1360ef46473b30"
+    },
+    "historical_binding_v1": {
+      "bytes": 1072,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/historical_binding_v1.py",
+      "sha256": "10eac48f020d4c1030bb0be26b3b283d896712b7e7b5095e08045b8192808215"
+    },
+    "historical_failed_receipt_archive_v1": {
+      "bytes": 2645,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/historical_failed_receipt_archive_v1.py",
+      "sha256": "a69291189f47812c41ce43d9d68a81a839780ce28a0a9dfc00c487c9acb26d69"
+    },
+    "owned_cache_policy_v8": {
+      "bytes": 6228,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/owned_cache_policy_v8.py",
+      "sha256": "4ccac4e3bd2c1e91352ef4e647968b4ca61f8691e1fc0f41e72a128a2942c205"
+    },
+    "owned_monitor_v1": {
+      "bytes": 4632,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/owned_monitor_v1.py",
+      "sha256": "834a7fe402e34b170f414df5dfe79762c0b49ed311a6222ba2f7bca5d87020a5"
+    },
+    "readonly_current_input_guard_v9": {
+      "bytes": 4690,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/readonly_current_input_guard_v9.py",
+      "sha256": "480be06317562b7e3a5c98a5d794bb5d2a33e7fa6186fe707823ecb1cc583626"
+    },
+    "runner_contracts_v3": {
+      "bytes": 12959,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/runner_contracts_v3.py",
+      "sha256": "cbae3bb074d3995153ea5e6b694e7f9e61c047c6aa511b682959a63fedf7b726"
+    },
+    "v9_entry_bootstrap": {
+      "bytes": 1575,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/v9_entry_bootstrap.py",
+      "sha256": "d3957c2e216731abf596897fbf0838809129a571743510692f2509228e2c7288"
+    }
+  },
+  "managed_activation_expected": {
+    "ACTIONS_CLOUD_ROOT": "/workspace/actions-cloud",
+    "ACTIONS_HOME": "/workspace/actions-cloud/actions-home",
+    "ACTIONS_RUNTIME_TEST_PYTHON": "/workspace/actions/action_server/.venv/bin/python",
+    "BUILDX_CONFIG": "/workspace/actions-cloud/cache/buildx",
+    "GOCACHE": "/workspace/actions-cloud/cache/go-build",
+    "GOMAXPROCS": "2",
+    "GOPATH": "/workspace/actions-cloud/cache/go",
+    "PLAYWRIGHT_BROWSERS_PATH": "/workspace/actions-cloud/cache/playwright",
+    "POETRY_CACHE_DIR": "/workspace/actions-cloud/cache/pypoetry",
+    "POETRY_CONFIG_DIR": "/workspace/actions-cloud/config/pypoetry",
+    "POETRY_NO_INTERACTION": "1",
+    "PYTEST_XDIST_AUTO_NUM_WORKERS": "2",
+    "ROBOCORP_HOME": "/workspace/actions-cloud/robocorp",
+    "ROBOTS_HOME": "/workspace/actions-cloud/robots-home",
+    "UV_CACHE_DIR": "/workspace/actions-cloud/cache/uv",
+    "XDG_CACHE_HOME": "/workspace/actions-cloud/cache",
+    "XDG_CONFIG_HOME": "/workspace/actions-cloud/config",
+    "npm_config_cache": "/workspace/actions-cloud/cache/npm"
+  },
+  "original_sys_scope": "No native execution, gate conversion, source/current-version qualification or irreversible byte disposal. Failed whole gates and raw originals stay outside selected subtrees.",
+  "outer_owned_root": "/workspace/engineering/root-pr307-completed-three-Toolkit-basetemps-once-owned",
+  "process_scope": {
+    "accessible_matches": [],
+    "checked_channels": 1308,
+    "historical_environment_observation_unknown944": "Retained historical scope, not substituted for this fresh count.",
+    "universal_quiescence": "UNKNOWN",
+    "unknown_or_racing_channels": 951
+  },
+  "prospective_gain_not_guaranteed": "Refuse after fully verified staging if measured free plus originally counted allocated recovery cannot meet unchanged first-five storage threshold; no original expanded removal before this check.",
+  "protected_bindings": [
+    {
+      "bytes": 765564,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+      "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25"
+    },
+    {
+      "bytes": 63289,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/frozen_current9760_five_environment_actual_controller_inputs_SOURCE_PREPARED.json",
+      "sha256": "714f2489aa66b7dd83a95d43b1693cd3f981c344bba5e92da639dddb229df3a3"
+    },
+    {
+      "bytes": 67675,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/frozen_current9760_storage_controller_V8_qualified_source_and_actual_tokens_SOURCE_PREPARED.json",
+      "sha256": "6f1dee55ea49ac1ef91528b89619a0a9d3d6419014cdcfa93d3523fe15c3009b"
+    },
+    {
+      "bytes": 108389,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/frozen_controller_boundary30_actual_functions_typed600_PURE_inputs_NOTRUN_v2_cache_origin_pin.json",
+      "sha256": "c95d4746dfacde271565b81ff14e4c31ab2b8ce3d6efe68e5626c5fdb7cb40f8"
+    },
+    {
+      "bytes": 81038,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once6-active-output-address-PREEXECUTION-NOTRUN/immutable-one-TOKEN-LIGHT-once6-inputs.json",
+      "sha256": "584230eec4851befdf8a131d35496e61fe20185f599e788822d4ad717dca1227"
+    },
+    {
+      "bytes": 67720,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-namespace-base-PREEXECUTION-NOTRUN/immutable-one-TOKEN-LIGHT-once5-inputs.json",
+      "sha256": "15a0b35a676fe4ee29781546fe0a7a8a362b19adaac11ffba0a4dfe9220d3f6c"
+    },
+    {
+      "bytes": 54782,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once4-PREEXECUTION-NOTRUN/immutable-one-TOKEN-LIGHT-once4-inputs.json",
+      "sha256": "f70311b03b99687071ecebdf7eb99498c89cf3d1117618ecf1318f6dee191437"
+    },
+    {
+      "bytes": 29551,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current9760-once6-independent-ACTUAL-review/OWNERFINAL-independent-original-current9760-once6-SOURCE-TOKEN-LIGHT-ACTUAL-GO.json",
+      "sha256": "ac3ec82ebdc0dd585db13c6dcfec5e25a673de77efba0efdc37b61b1ff39a298"
+    },
+    {
+      "bytes": 1466,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-B28-one-exact-TMP-relocation-owned/exact-original-path-to-new-physical-archive.json",
+      "sha256": "ce1450945a28a00611dff941ddcb0c414f281b7f32bbe004eb200435baa04f7f"
+    },
+    {
+      "bytes": 1864,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-failed-control3-one-byte-preservation-v4/root-exact-historical-failed-member-archive-mapping.json",
+      "sha256": "cc73027ce86ea0965f3bdd88ed3398c322dcf012b337a4ca161966f19ffee6c7"
+    },
+    {
+      "bytes": 6665360,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/once4-toolkit-basetemp-private-exact-full-body-and-two-metadata-snapshots.json",
+      "sha256": "22353d16f2bd9b99c279e6a86054f219510a9acdbae7aa37738cfb151c27682b"
+    },
+    {
+      "bytes": 6660440,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/once5-toolkit-basetemp-private-exact-full-body-and-two-metadata-snapshots.json",
+      "sha256": "fa57e928ba53eb234b1bdacc6a09b97f9b029683ad2899482927a14cc38f2aad"
+    },
+    {
+      "bytes": 6665360,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/once6-toolkit-basetemp-private-exact-full-body-and-two-metadata-snapshots.json",
+      "sha256": "f8d32dd94830c9b378d428cc769fee5969453d3838ca4533aa906b5c67289a0c"
+    },
+    {
+      "bytes": 442,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/toolkit/terminal.json",
+      "sha256": "ea9d4bfbc6b79cac15c6beb3a077258e9349147dcc6f5cc27123086be6af60e3"
+    },
+    {
+      "bytes": 30055,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/toolkit/junit.xml",
+      "sha256": "fb6417a38ee73ac88b0c95e97c4cf816f851540b9c1b6c1038d2d4e8cb28844f"
+    },
+    {
+      "bytes": 279,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/original-terminal.json",
+      "sha256": "00d10dd81a6d383ef325ecd3c3541d53eae519e93a7ac29135e37f9e13860853"
+    },
+    {
+      "bytes": 1460,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/toolkit/stdout.bin",
+      "sha256": "9e437570b717c3fe7abeab4cf3b1bed4d850c97748bcde07f98aee04238a41f8"
+    },
+    {
+      "bytes": 13152,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once4-owned/toolkit/stderr.bin",
+      "sha256": "f137589336f77a632d314345cc0efb03a6a810f240ade06af20de1fd0b9eccab"
+    },
+    {
+      "bytes": 441,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/toolkit/terminal.json",
+      "sha256": "9f41c9b97498fcf8d5f69d96c3577a82ebce72e1257c8141a00dd9598aa7e371"
+    },
+    {
+      "bytes": 30055,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/toolkit/junit.xml",
+      "sha256": "cce67a87225a40d8a60397806744fe3c97600f449344a26d388a23ea236ed991"
+    },
+    {
+      "bytes": 279,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/original-terminal.json",
+      "sha256": "00d10dd81a6d383ef325ecd3c3541d53eae519e93a7ac29135e37f9e13860853"
+    },
+    {
+      "bytes": 1460,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/toolkit/stdout.bin",
+      "sha256": "28dff6f198a4d9f57d0842d2129f0dd491ff0ef0a2030cc32cf4a30f4ed425f4"
+    },
+    {
+      "bytes": 13154,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/toolkit/stderr.bin",
+      "sha256": "1c677225f390a931b444e496a673de134eaf8f55614a2730eafc4e56b3388d6a"
+    },
+    {
+      "bytes": 442,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once6-owned/toolkit/terminal.json",
+      "sha256": "b562018130e187e013b057a132c20726113476a58d434d5992e9e8326145ca42"
+    },
+    {
+      "bytes": 30055,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once6-owned/toolkit/junit.xml",
+      "sha256": "1a4d0468370767b3ea1e5c24cc680d0f1aa06afac9ddd59f7878e3ccb57abed1"
+    },
+    {
+      "bytes": 298,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once6-owned/original-terminal.json",
+      "sha256": "0ad0f501cdbb71e4dfb89beba62d583516e77781279b7a1610625779e4357249"
+    },
+    {
+      "bytes": 1460,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once6-owned/toolkit/stdout.bin",
+      "sha256": "476e739d1d646f808395218bd1ae61575a11fec7a58f745aa676a5993b6c1ebc"
+    },
+    {
+      "bytes": 13153,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once6-owned/toolkit/stderr.bin",
+      "sha256": "a37370d93fcfef43d427b36cf8757021ce543d454e49f9f5b5a327c9ac0f8111"
+    },
+    {
+      "bytes": 27889,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/actual_transport_v8.py",
+      "sha256": "33dda17140ef749e22f086cc91b92ed8c3230fddfde8a4a369769e2183f695a1"
+    },
+    {
+      "bytes": 11489,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/fixture_records_v8.py",
+      "sha256": "7a63ee62184ea268dead0c98460c6943ebc297816e9a4df180b10ed5e04b9064"
+    },
+    {
+      "bytes": 6327,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/historical_binding_current8d49_v8.py",
+      "sha256": "6f64d55837cc4ff14ee4eec013314ba512c09ecdc56f79192c1360ef46473b30"
+    },
+    {
+      "bytes": 1072,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/historical_binding_v1.py",
+      "sha256": "10eac48f020d4c1030bb0be26b3b283d896712b7e7b5095e08045b8192808215"
+    },
+    {
+      "bytes": 2645,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/historical_failed_receipt_archive_v1.py",
+      "sha256": "a69291189f47812c41ce43d9d68a81a839780ce28a0a9dfc00c487c9acb26d69"
+    },
+    {
+      "bytes": 6228,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/owned_cache_policy_v8.py",
+      "sha256": "4ccac4e3bd2c1e91352ef4e647968b4ca61f8691e1fc0f41e72a128a2942c205"
+    },
+    {
+      "bytes": 4632,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/owned_monitor_v1.py",
+      "sha256": "834a7fe402e34b170f414df5dfe79762c0b49ed311a6222ba2f7bca5d87020a5"
+    },
+    {
+      "bytes": 4690,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/readonly_current_input_guard_v9.py",
+      "sha256": "480be06317562b7e3a5c98a5d794bb5d2a33e7fa6186fe707823ecb1cc583626"
+    },
+    {
+      "bytes": 12959,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/runner_contracts_v3.py",
+      "sha256": "cbae3bb074d3995153ea5e6b694e7f9e61c047c6aa511b682959a63fedf7b726"
+    },
+    {
+      "bytes": 1575,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/v9_entry_bootstrap.py",
+      "sha256": "d3957c2e216731abf596897fbf0838809129a571743510692f2509228e2c7288"
+    },
+    {
+      "bytes": 37609,
+      "mode": "0o444",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_first_five_accepted_obsolete_environments_SOURCE_PREPARED_v4.py",
+      "sha256": "63476ecaa50ba863afed8602dcad82c22c9349df022d0e9f0dde8d81d60e0bb7"
+    },
+    {
+      "bytes": 21276,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/archive_exact_one_completed_FULL_single_copy_once.py",
+      "sha256": "e717faae8a9e5f7a1ccea85c17df928a728216e43bf77256c487e685d9971771"
+    },
+    {
+      "bytes": 7430,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/collect_selected_toolkit_readonly_inventory.py",
+      "sha256": "7e4bf9b16ce4d46c24f2aae56e0a6becd0ab23c28c6c9274029fa7d4bc618518"
+    },
+    {
+      "bytes": 6920,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/private-original-three-Toolkit-completion-full-inventory-and-observed-process-proof.json",
+      "sha256": "5252b25bb563a88be1a0e2bf060b17635edf67709b6ba36cbee7d2bf2383e38d"
+    },
+    {
+      "bytes": 3289,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/private-current-protected-packet-physical-prefix-and-typed-alias-overlap-proof.json",
+      "sha256": "e04c7b9b64686ddd1718ce10d0607316bacd3b586ecf6ac2d2c07a47c020ecf9"
+    },
+    {
+      "bytes": 47036,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v8_current9760_measured_managed_Git_PURE18_inputs_NOTRUN_v4_originalFAIL_and_historical_system_scope.json",
+      "sha256": "0d4423f45acce573da98b262613971e497a91a9415d61f59142182678897365b"
+    },
+    {
+      "bytes": 987,
+      "mode": "0o600",
+      "path": "/workspace/actions-cloud/activate.sh",
+      "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+    },
+    {
+      "bytes": 1491,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/exclusive_single_copy_archive_promotion.py",
+      "sha256": "63c8d00d5830672ad4e03d5e5dd811d4735f32bd7ca865ff4c6f63d3c2587a09"
+    },
+    {
+      "bytes": 11962,
+      "mode": "0o444",
+      "path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/root_once_first_five_current9760_SOURCE_PREPARED_v2.py",
+      "sha256": "ffee97622f83627e77a27ec407ec4e242768060fb016a5b54a813c88a8015b03"
+    }
+  ],
+  "required_PATH_first_two": [
+    "/workspace/actions-cloud/bin",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin"
+  ],
+  "required_workspace_postremoval_floor": 746586112,
+  "retention": "All original selected bytes remain on cap/verification/index/promotion/prospective refusal; failed archives/indices retained without retry or recompression.",
+  "roots": {
+    "once4-toolkit-basetemp": "/workspace/engineering/pr307-current9760-token-light-once4-owned/toolkit/basetemp",
+    "once5-toolkit-basetemp": "/workspace/engineering/pr307-current9760-token-light-once5-owned/toolkit/basetemp",
+    "once6-toolkit-basetemp": "/workspace/engineering/pr307-current9760-token-light-once6-owned/toolkit/basetemp"
+  },
+  "schema": "THREE_COMPLETED_ORIGINAL_PR307_TOOLKIT_BASETEMP_PRESERVATION_ONLY_V1",
+  "selected_inventory_bindings": {
+    "once4-toolkit-basetemp": {
+      "bytes": 6665360,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/once4-toolkit-basetemp-private-exact-full-body-and-two-metadata-snapshots.json",
+      "sha256": "22353d16f2bd9b99c279e6a86054f219510a9acdbae7aa37738cfb151c27682b"
+    },
+    "once5-toolkit-basetemp": {
+      "bytes": 6660440,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/once5-toolkit-basetemp-private-exact-full-body-and-two-metadata-snapshots.json",
+      "sha256": "fa57e928ba53eb234b1bdacc6a09b97f9b029683ad2899482927a14cc38f2aad"
+    },
+    "once6-toolkit-basetemp": {
+      "bytes": 6665360,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/once6-toolkit-basetemp-private-exact-full-body-and-two-metadata-snapshots.json",
+      "sha256": "f8d32dd94830c9b378d428cc769fee5969453d3838ca4533aa906b5c67289a0c"
+    }
+  },
+  "stage": "/workspace/engineering/pr307-completed-three-Toolkit-basetemps-stage-once",
+  "stop_reserve": 134217728,
+  "subject_type": "COMPLETED_ORIGINAL_TOOLKIT_BASETEMP_SUBPHASE_ONLY",
+  "typed_guard_config_binding": {
+    "bytes": 765564,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+    "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25"
+  }
+}

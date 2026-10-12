@@ -1,0 +1,58 @@
+{
+  "decision": "HOLD_CURRENT2314_LIGHT_PREEXECUTION_SELF_BINDINGS_MISSING_FROM_ALWAYS_POST",
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "durable_learning": "Entry-only selfbinding is distinct from all-input before/finally preservation",
+    "evidence": "f650 launcher guard AST and initial config/root-authorized selfSHA entry checks",
+    "exact_delta": "For a reviewed once-only launcher, include its immutable configuration and root-authorized launcher byte hash in the same before/finally guard as external inputs. Entry-only selfbinding does not establish that those inputs stayed unchanged during execution; preserve an original HOLD and use a named successor without replaying gates.\n",
+    "proposal_binding": {
+      "bytes": 335,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current2314-concrete-LIGHT-independent-review/proposed-canonical-launcher-selfbinding-before-finally.txt",
+      "sha256": "b4306277510fd7b182b9a00e1ef91f91803e4637411c205edff30a413375311a"
+    },
+    "remaining_uncertainty": "Named successor not yet announced; no execution or preservation outcome measured",
+    "stale_or_ambiguous_guidance_removed": "Initial binding must not be described as always-post coverage"
+  },
+  "execution_authorized": false,
+  "limits": [
+    "All LIGHT gates NOT_RUN",
+    "No actual OAuth acquisition/content authority/native/full/fresh CI/release acceptance",
+    "Five actual import origins remain proposed checks; current independent verification is existing metadata only",
+    "Outer hard kill can prevent finally and remains incomplete HOLD",
+    "No complete process cleanup or reader-join claim from timeout wrapper fallback"
+  ],
+  "owner": {
+    "bytes": 6432,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-currente2-concrete-LIGHT-PREEXECUTION/OWNERFINAL-current2314-concrete-LIGHT-PREEXECUTION.json",
+    "sha256": "6d1ad9685a70707b18b059be186a383eb49893fd35824e6cbaee729f855ba9eb"
+  },
+  "read_only": true,
+  "required_named_successor_delta": [
+    "guard config file bytes/mode/hash before and finally",
+    "guard root-authorized launcher self bytes/mode/hash before and finally",
+    "preserve original owner/config/launcher/stage code and HOLD; no gate replay or command/output/budget changes"
+  ],
+  "schema": "INDEPENDENT_CURRENT2314_CONCRETE_LIGHT_PREEXECUTION_ORIGINAL_REVIEW",
+  "source": "2314aea95795fbc1372a6f7b0b7b298b7cf124c3",
+  "static_source_proof": {
+    "bytes": 9669,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current2314-concrete-LIGHT-independent-review/independent-original-concrete-LIGHT-static-source-proof.json",
+    "sha256": "978fa3328763363b1d79d7ef8d12688b7132e47c9c17c55e1e91365912101875"
+  },
+  "static_verified_scope": [
+    "1442 complete tracked filesystem bodies and executable modes",
+    "30 prepared input bytes and five existing environment configurations",
+    "15 old evidence refs and fixed ignored outputs unchanged",
+    "managed 18 exports and PATH prefix required before commands",
+    "Toolkit uses cached pytest without Runtime plugin flags; distinct absent ALL basetemp/JUnit/private stdio",
+    "Runtime 41-control focus uses absolute plugin logging",
+    "unchanged task/helper staged under own root, existing own venv/Poetry, controlled gh only; paired success then second exit17 preserves prior module",
+    "per-phase timeout with primary sequence780 and outer900TERM10; failures sealed before assertions",
+    "always-finally external/source postguard with primary error retained separately"
+  ],
+  "tree": "2987ed3a23e560fb40e13aadbcd6bd613ead3f25",
+  "upstream_disposition": "none"
+}

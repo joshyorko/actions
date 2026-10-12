@@ -1,0 +1,1692 @@
+{
+  "schema": "actions-independent-one-current-exact-source-CI-metadata/v2",
+  "PR": 312,
+  "verdict": "GO_CURRENT312_EXACT_SOURCE_SCOPED_NORMAL_READY_AND_EXPECTED_HEAD_MERGE_PREREQUISITES",
+  "source_head": "ec70a2928461941c129b1c05332dc441070e0184",
+  "actual_base": "e3c29cde8878307912e55ed09b6436c0f91d06d5",
+  "source_tree": "47a1e4fceb22fd15eaee1ca380ad6c005abfdde6",
+  "before_after_named_refs_PR_stable": true,
+  "API_prospective_synthetic": {
+    "sha": "4c6cc8d53b409bebf1fc0e820eccb73130351008",
+    "ordered_parents": [
+      "e3c29cde8878307912e55ed09b6436c0f91d06d5",
+      "ec70a2928461941c129b1c05332dc441070e0184"
+    ],
+    "tree": "47a1e4fceb22fd15eaee1ca380ad6c005abfdde6",
+    "complete_source_tree_equal": true,
+    "actual_logged_checkout": "4c6cc8d53b409bebf1fc0e820eccb73130351008"
+  },
+  "source_typed_union": {
+    "head": "ec70a2928461941c129b1c05332dc441070e0184",
+    "tree": "47a1e4fceb22fd15eaee1ca380ad6c005abfdde6",
+    "current_typed_entries": 1426,
+    "ordered_source_parents": [
+      "77ed3de24f33412dff30e4e3c18841c4c09933ac",
+      "e3c29cde8878307912e55ed09b6436c0f91d06d5"
+    ],
+    "parent_typed_entries": [
+      1424,
+      1423
+    ],
+    "no_deleted_parent_leaves": true,
+    "novel_body_mode_paths": [
+      "action_server/src/actions/server/_server.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "typed_index_sha256": "7b474770cea6861788caaa4fe5eec459cb8fb3fd10c9d6dcce8a0137d606e7ff",
+    "source_vs_base_changed_body_mode_paths": [
+      ".gitattributes",
+      ".github/workflows/_gen_workflows.py",
+      ".github/workflows/actions_runtime_pypi_release.yml",
+      ".github/workflows/actions_runtime_tests.yml",
+      "action_server/src/actions/server/_server.py",
+      "action_server/tests/action_server_tests/test_shutdown_response_order.py",
+      "devutils/tests/test_runtime_checkout_bytes.py",
+      "devutils/tests/test_runtime_checkout_workflows.py",
+      "docs/skills/repository-operations.md"
+    ]
+  },
+  "source_typed_union_private_proof": {
+    "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/private-complete-source-parent-typed-body-mode-union.json",
+    "bytes": 227862,
+    "sha256": "a43d52adaf4fd3d7fa757270ba8fe8d4c138b65ba7e92d719840a84b1cbbbdfd"
+  },
+  "current_declared_CI": {
+    "source_workflow_paths": 25,
+    "eligible_PR_flows": 7,
+    "declared_matrix_jobs": 23,
+    "observed_allpaged_head_checks": 23,
+    "observed_allpaged_runs": 7,
+    "observed_allpaged_jobs": 23,
+    "complete_all_declared_materialized": true,
+    "check_job_IDs_equal": true,
+    "check_counts": [
+      {
+        "status": "completed",
+        "conclusion": "success",
+        "count": 23
+      }
+    ],
+    "job_counts": [
+      {
+        "status": "completed",
+        "conclusion": "success",
+        "count": 23
+      }
+    ],
+    "non_atomic_status_observation_equal": true,
+    "PR_changed_paths_count": 9,
+    "PR_changed_paths": [
+      ".gitattributes",
+      ".github/workflows/_gen_workflows.py",
+      ".github/workflows/actions_runtime_pypi_release.yml",
+      ".github/workflows/actions_runtime_tests.yml",
+      "action_server/src/actions/server/_server.py",
+      "action_server/tests/action_server_tests/test_shutdown_response_order.py",
+      "devutils/tests/test_runtime_checkout_bytes.py",
+      "devutils/tests/test_runtime_checkout_workflows.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "normalpush_before": "77ed3de24f33412dff30e4e3c18841c4c09933ac",
+    "normalpush_after": "ec70a2928461941c129b1c05332dc441070e0184",
+    "normalpush_changed_paths": [
+      "action_server/src/actions/server/_server.py",
+      "action_server/src/actions/server/run_outputs/transport.py",
+      "action_server/tests/action_server_tests/run_outputs/test_transport.py",
+      "docs/skills/provenance-observability.md",
+      "docs/skills/repository-operations.md"
+    ],
+    "eligible_push_workflow_paths": [],
+    "auxiliary_push_runs_observed": 0,
+    "late_Runtime_publisher": {
+      "run": 38148186340,
+      "job": 114497359251,
+      "status": "completed",
+      "conclusion": "success",
+      "needs": [
+        "build-sdist",
+        "build-wheels"
+      ],
+      "scope": "PR collector/validation; publishing steps push-tag guarded",
+      "publication_step_guards": [
+        {
+          "name": "Verify merged tag provenance and version",
+          "if": "github.event_name == 'push'"
+        },
+        {
+          "name": "Check Runtime publish credential",
+          "if": "github.event_name == 'push'"
+        },
+        {
+          "name": "Publish verified artifacts",
+          "if": "github.event_name == 'push' && steps.runtime-token.outputs.enabled == 'true'"
+        }
+      ]
+    },
+    "flows": [
+      {
+        "path": ".github/workflows/actions_core_tests.yml",
+        "source_sha256": "d9e1c8884b4321024b2f785e6b01af655e1da0be4a1f45572f51a7ef1d64b296",
+        "name": "Actions Core Tests",
+        "event": "pull_request",
+        "PR_branch_path_filter": {
+          "branches": [
+            "community",
+            "integration/**"
+          ],
+          "paths": [
+            "actions/**",
+            ".github/workflows/actions_core_tests.yml",
+            "devutils/**",
+            "actions-http-helper/**",
+            ".github/workflows/_gen_workflows.py"
+          ]
+        },
+        "declared_jobs": [
+          {
+            "id": "build",
+            "name": "build",
+            "if": null,
+            "needs": [],
+            "matrix_rows": [
+              {
+                "name": "ubuntu-py3.10-devmode",
+                "python": "3.10",
+                "os": "ubuntu-22.04"
+              },
+              {
+                "name": "windows-py3.10-devmode",
+                "python": "3.10",
+                "os": "windows-2022"
+              },
+              {
+                "name": "macos-py3.10-devmode",
+                "os": "macos-15",
+                "python": "3.10"
+              }
+            ]
+          },
+          {
+            "id": "candidate-wheel",
+            "name": "candidate-wheel",
+            "if": null,
+            "needs": [],
+            "matrix_rows": [
+              {}
+            ]
+          }
+        ],
+        "run": 38148186348,
+        "attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "id": 114495852261,
+            "name": "build (ubuntu-py3.10-devmode)",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:43:17Z",
+            "completed_at": "2026-10-11T14:44:33Z",
+            "failed_steps": []
+          },
+          {
+            "id": 114495852375,
+            "name": "build (windows-py3.10-devmode)",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:41:13Z",
+            "completed_at": "2026-10-11T14:44:11Z",
+            "failed_steps": []
+          },
+          {
+            "id": 114495852389,
+            "name": "candidate-wheel",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:43:51Z",
+            "completed_at": "2026-10-11T14:44:32Z",
+            "failed_steps": []
+          },
+          {
+            "id": 114495852418,
+            "name": "build (macos-py3.10-devmode)",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:44:50Z",
+            "completed_at": "2026-10-11T14:45:58Z",
+            "failed_steps": []
+          }
+        ]
+      },
+      {
+        "path": ".github/workflows/actions_runtime_pypi_release.yml",
+        "source_sha256": "72998a0e12719bbd49d7695696ee4bd3542e6eb4c43f5ac93aa071e917ec8b29",
+        "name": "Actions Runtime PYPI Release",
+        "event": "pull_request",
+        "PR_branch_path_filter": {
+          "branches": [
+            "community",
+            "integration/**"
+          ],
+          "paths": [
+            ".gitattributes",
+            ".github/workflows/_gen_workflows.py",
+            ".github/workflows/actions_runtime_pypi_release.yml",
+            ".github/workflows/actions_runtime_binary_release.yml",
+            ".github/workflows/actions_runtime_manylinux_release.yml",
+            "devutils/tests/test_actions_runtime_release_line.py",
+            "devutils/tests/test_runtime_release_workflows.py",
+            "docs/skills/repository-operations.md",
+            "action_server/scripts/publish_verified_runtime.py",
+            "action_server/scripts/verify_published_runtime_floor.py"
+          ]
+        },
+        "declared_jobs": [
+          {
+            "id": "build-sdist",
+            "name": "build-sdist",
+            "if": null,
+            "needs": [],
+            "matrix_rows": [
+              {
+                "name": "ubuntu-py3.12",
+                "python": "3.12",
+                "os": "ubuntu-22.04"
+              }
+            ]
+          },
+          {
+            "id": "build-wheels",
+            "name": "build-wheels",
+            "if": null,
+            "needs": [],
+            "matrix_rows": [
+              {
+                "os": "ubuntu-22.04",
+                "python": "3.12",
+                "name": "ubuntu"
+              },
+              {
+                "os": "windows-2022",
+                "python": "3.12",
+                "name": "windows"
+              },
+              {
+                "os": "macos-15",
+                "python": "3.12",
+                "name": "macos"
+              }
+            ]
+          },
+          {
+            "id": "publish",
+            "name": "publish",
+            "if": null,
+            "needs": [
+              "build-sdist",
+              "build-wheels"
+            ],
+            "matrix_rows": [
+              {
+                "python": "3.12"
+              }
+            ]
+          }
+        ],
+        "run": 38148186340,
+        "attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "id": 114495852168,
+            "name": "build-sdist (ubuntu-py3.12)",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:44:12Z",
+            "completed_at": "2026-10-11T14:45:01Z",
+            "failed_steps": []
+          },
+          {
+            "id": 114495852348,
+            "name": "build-wheels (ubuntu-22.04)",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:41:12Z",
+            "completed_at": "2026-10-11T14:43:43Z",
+            "failed_steps": []
+          },
+          {
+            "id": 114495852428,
+            "name": "build-wheels (windows-2022)",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:41:12Z",
+            "completed_at": "2026-10-11T14:45:40Z",
+            "failed_steps": []
+          },
+          {
+            "id": 114495852464,
+            "name": "build-wheels (macos-15)",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:46:27Z",
+            "completed_at": "2026-10-11T14:48:42Z",
+            "failed_steps": []
+          },
+          {
+            "id": 114497359251,
+            "name": "publish (3.12)",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:50:42Z",
+            "completed_at": "2026-10-11T14:51:04Z",
+            "failed_steps": []
+          }
+        ]
+      },
+      {
+        "path": ".github/workflows/actions_runtime_tests.yml",
+        "source_sha256": "84981311da9a21c549d5213cfaf0778162224851f8a4d639b3151a059be33872",
+        "name": "Action Server Tests",
+        "event": "pull_request",
+        "PR_branch_path_filter": {
+          "branches": [
+            "master",
+            "community",
+            "integration/**"
+          ],
+          "paths": [
+            "action_server/**",
+            ".github/workflows/actions_runtime_tests.yml",
+            "devutils/**",
+            "actions/**",
+            "actions-http-helper/**",
+            "work-items/**",
+            ".gitattributes"
+          ]
+        },
+        "declared_jobs": [
+          {
+            "id": "build",
+            "name": "build",
+            "if": null,
+            "needs": [],
+            "matrix_rows": [
+              {
+                "name": "ubuntu-py3.12-devmode",
+                "python": "3.12",
+                "os": "ubuntu-22.04"
+              },
+              {
+                "name": "windows-py3.12-devmode",
+                "python": "3.12",
+                "os": "windows-2022"
+              },
+              {
+                "name": "macos-py3.12-devmode",
+                "os": "macos-15",
+                "python": "3.12"
+              }
+            ]
+          }
+        ],
+        "run": 38148186353,
+        "attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "id": 114495852017,
+            "name": "build (ubuntu-py3.12-devmode)",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:41:12Z",
+            "completed_at": "2026-10-11T14:56:49Z",
+            "failed_steps": []
+          },
+          {
+            "id": 114495852274,
+            "name": "build (windows-py3.12-devmode)",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:41:13Z",
+            "completed_at": "2026-10-11T15:14:28Z",
+            "failed_steps": []
+          },
+          {
+            "id": 114495852284,
+            "name": "build (macos-py3.12-devmode)",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:41:18Z",
+            "completed_at": "2026-10-11T15:00:14Z",
+            "failed_steps": []
+          }
+        ]
+      },
+      {
+        "path": ".github/workflows/ai-audit.yml",
+        "source_sha256": "2334d210444efcc82389a3f535032794aec91142e7f44eaf5b97bcb9816f5d0e",
+        "name": "AI audit evidence",
+        "event": "pull_request",
+        "PR_branch_path_filter": null,
+        "declared_jobs": [
+          {
+            "id": "audit",
+            "name": "audit",
+            "if": null,
+            "needs": [],
+            "matrix_rows": [
+              {}
+            ]
+          }
+        ],
+        "run": 38148186318,
+        "attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "id": 114495852087,
+            "name": "audit",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:41:12Z",
+            "completed_at": "2026-10-11T14:41:20Z",
+            "failed_steps": []
+          }
+        ]
+      },
+      {
+        "path": ".github/workflows/coverage-gate.yml",
+        "source_sha256": "e355c4769bae5e548dc7aa8c7393bdc496ebfcbdd24c1c3918d90bc7e1ef76cf",
+        "name": "Measured Python coverage gate",
+        "event": "pull_request",
+        "PR_branch_path_filter": {
+          "branches": [
+            "community",
+            "integration/community-release-20261008"
+          ]
+        },
+        "declared_jobs": [
+          {
+            "id": "coverage",
+            "name": "coverage",
+            "if": null,
+            "needs": [],
+            "matrix_rows": [
+              {}
+            ]
+          }
+        ],
+        "run": 38148186383,
+        "attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "id": 114495852320,
+            "name": "coverage",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:41:12Z",
+            "completed_at": "2026-10-11T14:52:12Z",
+            "failed_steps": []
+          }
+        ]
+      },
+      {
+        "path": ".github/workflows/developer_toolkit.yml",
+        "source_sha256": "60ca471cb9bdff0059b1a9b1fcdf9256b666fb2fb1d533b93307d2841facc0a8",
+        "name": "RCC developer toolkit",
+        "event": "pull_request",
+        "PR_branch_path_filter": null,
+        "declared_jobs": [
+          {
+            "id": "toolkit",
+            "name": "toolkit",
+            "if": null,
+            "needs": [],
+            "matrix_rows": [
+              {
+                "lane": "primary",
+                "rcc_version": "18.19.3",
+                "os": "ubuntu-22.04",
+                "asset": "rcc-linux64",
+                "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+              },
+              {
+                "lane": "primary",
+                "rcc_version": "18.19.3",
+                "os": "macos-15",
+                "asset": "rcc-macosarm64",
+                "sha256": "778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266"
+              },
+              {
+                "lane": "primary",
+                "rcc_version": "18.19.3",
+                "os": "windows-2022",
+                "asset": "rcc-windows64.exe",
+                "sha256": "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4"
+              },
+              {
+                "lane": "n-1",
+                "rcc_version": "18.18.1",
+                "os": "ubuntu-22.04",
+                "asset": "rcc-linux64",
+                "sha256": "ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf02f2c9bb4b4ef0bfcf"
+              },
+              {
+                "lane": "n-1",
+                "rcc_version": "18.18.1",
+                "os": "macos-15",
+                "asset": "rcc-macosarm64",
+                "sha256": "57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984d2d6a8190024798d"
+              },
+              {
+                "lane": "n-1",
+                "rcc_version": "18.18.1",
+                "os": "windows-2022",
+                "asset": "rcc-windows64.exe",
+                "sha256": "705e2a4ec70a8bc3881f042a2eae222ed07e39a8360735307ee937d74d2a0f5b"
+              }
+            ]
+          }
+        ],
+        "run": 38148186386,
+        "attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "id": 114495852433,
+            "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:41:12Z",
+            "completed_at": "2026-10-11T14:44:44Z",
+            "failed_steps": []
+          },
+          {
+            "id": 114495852603,
+            "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:41:13Z",
+            "completed_at": "2026-10-11T14:44:57Z",
+            "failed_steps": []
+          },
+          {
+            "id": 114495852611,
+            "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:41:17Z",
+            "completed_at": "2026-10-11T14:43:49Z",
+            "failed_steps": []
+          },
+          {
+            "id": 114495852614,
+            "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:45:48Z",
+            "completed_at": "2026-10-11T14:49:17Z",
+            "failed_steps": []
+          },
+          {
+            "id": 114495852639,
+            "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:43:45Z",
+            "completed_at": "2026-10-11T14:53:31Z",
+            "failed_steps": []
+          },
+          {
+            "id": 114495852652,
+            "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:41:13Z",
+            "completed_at": "2026-10-11T14:50:47Z",
+            "failed_steps": []
+          }
+        ]
+      },
+      {
+        "path": ".github/workflows/frontend-build-unauthenticated.yml",
+        "source_sha256": "2d2a21af458ccfdb771f65707d7ab60fb1f5dfa24019c94ded4a02ed46f8d36d",
+        "name": "Action Server Build (Unauthenticated)",
+        "event": "pull_request",
+        "PR_branch_path_filter": {
+          "paths": [
+            "action_server/**",
+            "work-items/**",
+            ".github/workflows/frontend-build-unauthenticated.yml"
+          ]
+        },
+        "declared_jobs": [
+          {
+            "id": "build-external",
+            "name": "Build Action Server binary without credentials",
+            "if": null,
+            "needs": [],
+            "matrix_rows": [
+              {
+                "os": "ubuntu-22.04",
+                "python": "3.12"
+              },
+              {
+                "os": "windows-2022",
+                "python": "3.12"
+              },
+              {
+                "os": "macos-15",
+                "python": "3.12"
+              }
+            ]
+          }
+        ],
+        "run": 38148186357,
+        "attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "id": 114495852245,
+            "name": "Build Action Server binary without credentials (macos-15)",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:41:17Z",
+            "completed_at": "2026-10-11T14:47:31Z",
+            "failed_steps": []
+          },
+          {
+            "id": 114495852364,
+            "name": "Build Action Server binary without credentials (windows-2022)",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:41:13Z",
+            "completed_at": "2026-10-11T14:50:40Z",
+            "failed_steps": []
+          },
+          {
+            "id": 114495852479,
+            "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:41:21Z",
+            "completed_at": "2026-10-11T14:46:19Z",
+            "failed_steps": []
+          }
+        ]
+      }
+    ],
+    "pending_jobs": [],
+    "failure_jobs": []
+  },
+  "reviews": 0,
+  "review_comments": 0,
+  "connections": {
+    "closingIssuesReferences": {
+      "count": 0,
+      "complete": true,
+      "pages": 1,
+      "unresolved": null
+    },
+    "reviewThreads": {
+      "count": 0,
+      "complete": true,
+      "pages": 1,
+      "unresolved": 0
+    }
+  },
+  "draft": true,
+  "REST_mergeable": true,
+  "REST_mergeable_state": "clean",
+  "GraphQL_mergeStateStatus": "CLEAN",
+  "policy": {
+    "traditional_protection": "UNKNOWN_HTTP403_NO_BYPASS_AUTHORITY",
+    "visible_branch_rules": 0,
+    "visible_rulesets": 0,
+    "branch_protected": false,
+    "branch_endpoint_protection": {
+      "enabled": false,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    }
+  },
+  "accepted_source_and_original_snapshots_retained": [
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/OWNERFINAL-root-current312-ec70-configured-SOURCEFULL.json",
+      "bytes": 5785,
+      "sha256": "32288acae49cf7f89c8f7c67bad292d062bcf9a56bb9032175216d0c00bcb0d1"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-SOURCEFULL-independent-actual-review/OWNERFINAL-independent-currentec70-configured-SOURCEFULL-review.json",
+      "bytes": 12574,
+      "sha256": "f375b3daed2a3523c4dc55d87632655f2e90918dc8d1deb4af6493f9bd073448"
+    },
+    {
+      "path": "/workspace/engineering/root-pr312-currentec70-one-normal-push/safe-result-named-metadata-successor-no-repush.json",
+      "bytes": 2567,
+      "sha256": "6b04b9402563510ac7baf49b4e6a11250a25679caa53c20cd03f4747189b69d2"
+    }
+  ],
+  "215_distribution_tracked_source_only": null,
+  "one_conditional_current_Windows_original_log_acquisition_proposal": {
+    "status": "SATISFIED_ONE_ROOT_ORIGINAL_ACQUISITION_NO_REVIEWER_FETCH",
+    "job": 114495852274,
+    "run": 38148186353,
+    "original": {
+      "path": "/workspace/engineering/pr312-originalec70-one-Windows-log-acquisition/original-decoded-Windows-job.private.log",
+      "bytes": 641347,
+      "sha256": "d21026f97f62d402ab9d33b2aaf76baa62f0703a1c3e89e96c886ce1ff6921d1"
+    }
+  },
+  "remaining_HOLD": [
+    "Whole runtime, private/native/browser/provider/release qualification remains separate",
+    "Draft and inaccessible traditional protection remain independent normal-policy gates",
+    "No admission of private/native/current generated wheel/consumer/full release; source-full1335/13 does not substitute current hosted proof"
+  ],
+  "metadata_limits": "ONE complete allpaged final metadata bracket plus read-only review of ONE ROOT-owned original Windows log. No polling/repeat download/rerun. Non-atomic responses had stable refs and equal all23 terminalSUCCESS counts.",
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md exact existing592949/9744/bf95/50ad/b774 lessons verified integrated; no cosmetic duplicate",
+    "Exact_verified_delta_reuse": [
+      {
+        "path": "/workspace/engineering/pr300-current618-CI-admission-review/canonical-event-specific-push-paths-proposed.patch",
+        "bytes": 909,
+        "sha256": "592949e0da5d48236262b87f3d6568dbde0d78fc7cc92835a7e8a512c48f73aa"
+      },
+      {
+        "path": "/workspace/engineering/pr221-current776-preflight/canonical-policy-and-snapshot-proposed.patch",
+        "bytes": 897,
+        "sha256": "9744b01f0f2f888de5f88f129b857df33938cb1adf182ec32b30ed08b2f14fe8"
+      },
+      {
+        "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/canonical-partial-platform-consumer-scope-proposed.patch",
+        "bytes": 1158,
+        "sha256": "bf95da899763f97c016f76fa4a0cf8878ebba8326d57c11ab1a520b1df597c81"
+      },
+      {
+        "path": "/workspace/engineering/pr306-current618-fada-original-Windows-failure-owned/canonical-original-runner-checkout-vs-current-merge-ref-proposed.patch",
+        "bytes": 486,
+        "sha256": "50ad18bce0a30cbfb1cb346d1768729b67ea20125796a6558bb57e1594ef2aec"
+      },
+      {
+        "path": "/workspace/engineering/pr300-pr309-current618-bounded-successor-CI-review/canonical-verbose-pytest-terminal-census-proposed.patch",
+        "bytes": 836,
+        "sha256": "b774083c0e21e360209d962aa95054bbb8fee4cacc5fa7dff1c0c89b2b5dad53"
+      }
+    ],
+    "Durable_learning_captured": "Qualify the original executed checkout separately from prospective merge metadata; derive current event/matrix inventory and late publisher; retain whole parameterized terminal node IDs and all observed skip formats; source/job success cannot certify absent process/reader or other-platform qualification.",
+    "Evidence": "Current exact-source7flow23job YAML and complete final allpaged metadata; original logged4c6/order[e3,ec70]/tree47a and all1426 current bodies/modes; complete1348 source and150 integration terminal nodes, source Linux-only marker",
+    "Stale_or_ambiguous_guidance_removed": "Old770 flow counts and old readiness failures remain history, not current gate results. Explicit Windows transport skips preserve Linux-only acceptance rather than expanding proof. One original clipped skip progress format is reconciled with original terminal19SKIP.",
+    "Remaining_uncertainty": [
+      "Whole runtime, private/native/browser/provider/release qualification remains separate",
+      "Draft and inaccessible traditional protection remain independent normal-policy gates",
+      "No admission of private/native/current generated wheel/consumer/full release; source-full1335/13 does not substitute current hosted proof"
+    ]
+  },
+  "Upstream_disposition": "none",
+  "no_tests_source_mutation_native_provider_download_push_ready_merge_or_repeatpoll": true,
+  "retained_initial_metadata_freeze_FAILURE": {
+    "script": {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/freeze-two-bounded-metadata-reviews.py",
+      "bytes": 17784,
+      "sha256": "45dabf1fa4cd867f689f5d8b81bbc643e304138a62d838a43d5d781302a275ef"
+    },
+    "failure_log": {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/freeze-private.log",
+      "bytes": 449,
+      "sha256": "715178d203ea91e1e78649f70fc591bab7f9187ac756dfb36635bc7a8e9ec9d5"
+    },
+    "scope": "Initial constructor incorrectly assumed docs-only parent-combined leaves. Exact current source also combines _server.py, already bound by accepted source/full currentec70 tree47a. No OWNERFINAL emitted, no API repeat or source modification."
+  },
+  "retained_original312_pending_census": {
+    "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/OWNERFINAL-independent-current312-one-complete-CI-metadata-review.json",
+    "bytes": 45854,
+    "sha256": "320de6666104eb006d6f171eceea97648ef79128492a20d733864dd5dbd812f3"
+  },
+  "retained_root_intermediate_partial22success1pending_snapshot_directory": "/workspace/engineering/root-pr312-currentec70-second-bounded-CI-readback",
+  "original_log_acquisition_by_ROOT_once_reviewed_without_second_fetch": true,
+  "pending_Windows_step_metadata": [
+    {
+      "name": "Set up job",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-11T14:41:13Z",
+      "completed_at": "2026-10-11T14:41:16Z"
+    },
+    {
+      "name": "Checkout repository and submodules",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-11T14:41:16Z",
+      "completed_at": "2026-10-11T14:41:21Z"
+    },
+    {
+      "name": "Install the latest version of uv",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-11T14:41:21Z",
+      "completed_at": "2026-10-11T14:41:24Z"
+    },
+    {
+      "name": "Install Python 3.12",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-11T14:41:24Z",
+      "completed_at": "2026-10-11T14:41:27Z"
+    },
+    {
+      "name": "Install devutils requirements",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-11T14:41:27Z",
+      "completed_at": "2026-10-11T14:41:47Z"
+    },
+    {
+      "name": "Install project (not dev)",
+      "status": "completed",
+      "conclusion": "skipped",
+      "started_at": "2026-10-11T14:41:47Z",
+      "completed_at": "2026-10-11T14:41:47Z"
+    },
+    {
+      "name": "Install project (dev)",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-11T14:41:47Z",
+      "completed_at": "2026-10-11T14:42:26Z"
+    },
+    {
+      "name": "Setup go",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-11T14:42:26Z",
+      "completed_at": "2026-10-11T14:42:41Z"
+    },
+    {
+      "name": "Setup node",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-11T14:42:41Z",
+      "completed_at": "2026-10-11T14:42:47Z"
+    },
+    {
+      "name": "Build frontend",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-11T14:42:47Z",
+      "completed_at": "2026-10-11T14:43:11Z"
+    },
+    {
+      "name": "Build OAuth2 config",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-11T14:43:11Z",
+      "completed_at": "2026-10-11T14:43:15Z"
+    },
+    {
+      "name": "Test Go wrapper child lifecycle",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-11T14:43:15Z",
+      "completed_at": "2026-10-11T14:43:22Z"
+    },
+    {
+      "name": "Build binary",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-11T14:43:22Z",
+      "completed_at": "2026-10-11T14:44:23Z"
+    },
+    {
+      "name": "Upload artifact: action_server/dist/final/",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-11T14:44:23Z",
+      "completed_at": "2026-10-11T14:44:26Z"
+    },
+    {
+      "name": "Test (not integration)",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-11T14:44:26Z",
+      "completed_at": "2026-10-11T14:49:53Z"
+    },
+    {
+      "name": "Install Playwright Chromium for Runtime browser acceptance",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-11T14:49:53Z",
+      "completed_at": "2026-10-11T14:50:04Z"
+    },
+    {
+      "name": "Test (integration)",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-11T14:50:04Z",
+      "completed_at": "2026-10-11T15:13:50Z"
+    },
+    {
+      "name": "Retain Windows native startup diagnostics",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-11T15:13:50Z",
+      "completed_at": "2026-10-11T15:13:51Z"
+    },
+    {
+      "name": "`inv lint`, potentially fixed with `inv pretty`",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-11T15:13:51Z",
+      "completed_at": "2026-10-11T15:14:00Z"
+    },
+    {
+      "name": "`inv typecheck`",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-11T15:14:00Z",
+      "completed_at": "2026-10-11T15:14:17Z"
+    },
+    {
+      "name": "`inv docs` with checking on files changed",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-11T15:14:17Z",
+      "completed_at": "2026-10-11T15:14:18Z"
+    },
+    {
+      "name": "Post Setup node",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-11T15:14:18Z",
+      "completed_at": "2026-10-11T15:14:18Z"
+    },
+    {
+      "name": "Post Setup go",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-11T15:14:18Z",
+      "completed_at": "2026-10-11T15:14:23Z"
+    },
+    {
+      "name": "Post Install the latest version of uv",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-11T15:14:23Z",
+      "completed_at": "2026-10-11T15:14:24Z"
+    },
+    {
+      "name": "Post Checkout repository and submodules",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-11T15:14:24Z",
+      "completed_at": "2026-10-11T15:14:25Z"
+    },
+    {
+      "name": "Complete job",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-11T15:14:25Z",
+      "completed_at": "2026-10-11T15:14:25Z"
+    }
+  ],
+  "normal_ready_integration_proposal": {
+    "status": "GO_ROOT_NORMAL_READY_FRESH_READBACK_AND_EXPECTED_HEAD_MERGE_ONLY_IF_EXACT_TUPLE_UNCHANGED",
+    "expected_source_head": "ec70a2928461941c129b1c05332dc441070e0184",
+    "actual_base": "e3c29cde8878307912e55ed09b6436c0f91d06d5",
+    "current_API_prospective": "4c6cc8d53b409bebf1fc0e820eccb73130351008",
+    "expected_complete_tree": "47a1e4fceb22fd15eaee1ca380ad6c005abfdde6",
+    "gates": [
+      "Current Windows job114495852274/run38148186353 is terminalSUCCESS and independently qualified; no retry or old770/e159 carry",
+      "The ONE ROOT-owned original current Windows log is qualified separately; authenticate originalcheckout4c6 ordered[e3,ec70] complete1426 tree47a and allunique nodes",
+      "Fresh complete23 declared statuses/reviews/threads/closures/draft and named head/base bracket; normal ROOT ready readback only after qualified CI/source",
+      "Normal expected-head API merge enforces available current policy; protection403 remains UNKNOWN, no bypass",
+      "Actual resulting integration parents/tree independently read back; private/consumer/native/whole release remain separate HOLD"
+    ],
+    "method": "ROOT normal API ready then fresh exact head/base/checks/reviews readback, expected-head merge with merge_method=merge; no override",
+    "expected_head": "ec70a2928461941c129b1c05332dc441070e0184",
+    "expected_base": "e3c29cde8878307912e55ed09b6436c0f91d06d5",
+    "expected_actual_ordered_parents": [
+      "e3c29cde8878307912e55ed09b6436c0f91d06d5",
+      "ec70a2928461941c129b1c05332dc441070e0184"
+    ],
+    "expected_actual_tree": "47a1e4fceb22fd15eaee1ca380ad6c005abfdde6",
+    "stop_if_any_named_ref_changes": true,
+    "root_actual_readback_required": true,
+    "scope": "Narrow source PR312 integration only; no issue closure/full consumer/native/private/release acceptance"
+  },
+  "review_script": {
+    "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/freeze-current312-terminal-original-Windows-scoped-admission-review-v2.py",
+    "bytes": 20321,
+    "sha256": "6b75a14d1db58cccb3fd336aecd9bf6d4da5b184d0b9b416c5ed0b6eea53418c"
+  },
+  "original_current_Windows_qualification": {
+    "original_one_ROOT_acquisition": [
+      {
+        "path": "/workspace/engineering/pr312-originalec70-one-Windows-log-acquisition/original-MCP-response.private.json",
+        "bytes": 662809,
+        "sha256": "c11b51f7b14893dc493a8291bcf3629219650efd5e36896a44020bf000feec22"
+      },
+      {
+        "path": "/workspace/engineering/pr312-originalec70-one-Windows-log-acquisition/original-decoded-Windows-job.private.log",
+        "bytes": 641347,
+        "sha256": "d21026f97f62d402ab9d33b2aaf76baa62f0703a1c3e89e96c886ce1ff6921d1"
+      },
+      {
+        "path": "/workspace/engineering/pr312-originalec70-one-Windows-log-acquisition/root-one-original-Windows-job-log-authorization.json",
+        "bytes": 549,
+        "sha256": "5192bfc6d24dbe159e7086be3563cc95a236183279e8768ec5d9ddc7f0854f30"
+      },
+      {
+        "path": "/workspace/engineering/pr312-originalec70-one-Windows-log-acquisition/safe-original-acquisition-receipt.json",
+        "bytes": 733,
+        "sha256": "cf891db89415ab0f67e16f98f12046939ac59f4803a1d942ba25ea5eed14e78d"
+      }
+    ],
+    "run": 38148186353,
+    "job": 114495852274,
+    "job_completed_at": "2026-10-11T15:14:28Z",
+    "source_head": "ec70a2928461941c129b1c05332dc441070e0184",
+    "original_logged_checkout": "4c6cc8d53b409bebf1fc0e820eccb73130351008",
+    "logged_identity_line": 113,
+    "preceding_authenticated_command": "git log -1 --format=%H",
+    "ordered_runner_parents": [
+      "e3c29cde8878307912e55ed09b6436c0f91d06d5",
+      "ec70a2928461941c129b1c05332dc441070e0184"
+    ],
+    "runner_tree": "47a1e4fceb22fd15eaee1ca380ad6c005abfdde6",
+    "all1426_typed_tree_entries_equal_source": true,
+    "current_FS_all1426_tracked_bodies_and_exec_modes_match_source": true,
+    "source_pytest": {
+      "unique_complete_nodes": 1348,
+      "PASS": 1176,
+      "SKIP": 172,
+      "FAIL": 0,
+      "ERROR": 0,
+      "warnings": 15,
+      "seconds": 322.8,
+      "observed_workers": [
+        "gw0",
+        "gw1"
+      ],
+      "deselected": "UNREPORTED"
+    },
+    "integration_pytest": {
+      "unique_complete_nodes": 150,
+      "PASS": 131,
+      "SKIP": 19,
+      "FAIL": 0,
+      "ERROR": 0,
+      "deselected": 1351,
+      "seconds": 1420.53,
+      "warnings": "UNREPORTED"
+    },
+    "shutdown_source_tests": {
+      "PASS": 10,
+      "SKIP": 0,
+      "nodes": [
+        {
+          "node": "action_server_tests\\test_shutdown_response_order.py::test_shutdown_interrupt_follows_completed_final_body[]",
+          "outcome": "PASSED",
+          "worker": "gw0",
+          "line": 3475
+        },
+        {
+          "node": "action_server_tests\\test_shutdown_response_order.py::test_shutdown_interrupt_follows_completed_final_body[timeout=5]",
+          "outcome": "PASSED",
+          "worker": "gw0",
+          "line": 3477
+        },
+        {
+          "node": "action_server_tests\\test_shutdown_response_order.py::test_shutdown_interrupt_follows_completed_final_body[timeout=-1]",
+          "outcome": "PASSED",
+          "worker": "gw0",
+          "line": 3481
+        },
+        {
+          "node": "action_server_tests\\test_shutdown_response_order.py::test_failed_shutdown_send_does_not_interrupt[start]",
+          "outcome": "PASSED",
+          "worker": "gw0",
+          "line": 3483
+        },
+        {
+          "node": "action_server_tests\\test_shutdown_response_order.py::test_failed_shutdown_send_does_not_interrupt[body]",
+          "outcome": "PASSED",
+          "worker": "gw0",
+          "line": 3485
+        },
+        {
+          "node": "action_server_tests\\test_shutdown_response_order.py::test_denied_shutdown_does_not_interrupt[None]",
+          "outcome": "PASSED",
+          "worker": "gw0",
+          "line": 3487
+        },
+        {
+          "node": "action_server_tests\\test_shutdown_response_order.py::test_denied_shutdown_does_not_interrupt[owned-wrong-key]",
+          "outcome": "PASSED",
+          "worker": "gw0",
+          "line": 3489
+        },
+        {
+          "node": "action_server_tests\\test_shutdown_response_order.py::test_rejected_shutdown_request_does_not_interrupt[GET--405]",
+          "outcome": "PASSED",
+          "worker": "gw0",
+          "line": 3491
+        },
+        {
+          "node": "action_server_tests\\test_shutdown_response_order.py::test_rejected_shutdown_request_does_not_interrupt[HEAD--405]",
+          "outcome": "PASSED",
+          "worker": "gw0",
+          "line": 3493
+        },
+        {
+          "node": "action_server_tests\\test_shutdown_response_order.py::test_rejected_shutdown_request_does_not_interrupt[POST-timeout=invalid-422]",
+          "outcome": "PASSED",
+          "worker": "gw0",
+          "line": 3495
+        }
+      ]
+    },
+    "transport_source_tests": {
+      "SKIP": 30,
+      "PASS": 0,
+      "authority": "Current exact source module pytestmark explicitly skips outside Linux; Windows auth/transport execution unmeasured",
+      "source_module_sha256": "712e55b646160311ad00170ac39f574aa7fdce2a2597d82ead49b38966d4a554"
+    },
+    "selected_current_readiness_semantic_integration_results": [
+      {
+        "node": "action_server_tests\\test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers",
+        "outcome": "PASSED",
+        "line": 4562
+      },
+      {
+        "node": "action_server_tests\\test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[resource]",
+        "outcome": "PASSED",
+        "line": 4563
+      },
+      {
+        "node": "action_server_tests\\test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[template]",
+        "outcome": "PASSED",
+        "line": 4564
+      },
+      {
+        "node": "action_server_tests\\test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[prompt]",
+        "outcome": "PASSED",
+        "line": 4565
+      }
+    ],
+    "complete_private_node_census": {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/private-complete-original-Windows-node-census-v2.json",
+      "bytes": 314739,
+      "sha256": "bb472807abea0836eecb7c895987411f173f5e489168f66ac0da06531fe1d889"
+    },
+    "original_harness_process_cleanup": "UNKNOWN_NOT_CERTIFIED_FROM_JOB_SUCCESS_OR_TEST_COUNTS",
+    "original_internal_readers": "UNKNOWN",
+    "original770_and_old313_readiness_failure_cause": "Historical unchanged; current PASS establishes selected current case assertions, not a measured explanation of historical readiness cause",
+    "rehash_nested_source_and_acquisition_refs_count": 29,
+    "nested_ref_hash_proof": [
+      {
+        "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/before-full-source-activation-capacity.json",
+        "bytes": 526,
+        "sha256": "b76fdbb8d793197a9facd584fa7294f533196e11c4a1caa084aa550600614b78"
+      },
+      {
+        "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/post-full-source-and-references.json",
+        "bytes": 234,
+        "sha256": "00e2093fd33db212350adadabf650505c987f3773ad028ceae5f4ac24de4eb7f"
+      },
+      {
+        "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-proposal-v2/OWNERFINAL-pr312-actual300-current-e3c-configured-full-NOEXECUTION-proposal-v2-final.json",
+        "bytes": 28071,
+        "sha256": "e890f8e2c91c75ab046bdc493cf191931082f100b82b508b6b6bd1be967ab6d0"
+      },
+      {
+        "path": "/workspace/engineering/pr312-actual300-independent-FULL-preexecution-review-v2/OWNERFINAL-independent-current312-ec70-configured-SOURCEFULL-v2-preexecution-review.json",
+        "bytes": 15637,
+        "sha256": "2d298ee4aabec0654e3c2c0ae1f9a1574ebc0fdec58ef6d54d80fa60c079c68f"
+      },
+      {
+        "path": "/workspace/engineering/pr312-actual300-independent-LIGHT-review/OWNERFINAL-independent-pr312-current-ec70-SOURCE-LIGHT-review.json",
+        "bytes": 5446,
+        "sha256": "2a5f94a163f43bdc6e8fe968d44274d60469bb3224f33e02fd09cf3b30e11692"
+      },
+      {
+        "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/original-configured-full.private.log",
+        "bytes": 346188,
+        "sha256": "2e2da108608f75625f88a7328ed7be1cfa166b85f76203697f48dbfab6588762"
+      },
+      {
+        "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/original-postguard.private.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/original-root900.stderr.private.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/original-root900.stdout.private.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/postguard-terminal-separate.json",
+        "bytes": 341,
+        "sha256": "18cba2f4b471bf72e377f8b0247016ed3645c50eb9f4de6e4ad2c69885f649b8"
+      },
+      {
+        "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/primary-terminal-before-postguards.json",
+        "bytes": 352,
+        "sha256": "1e0b56ea46fff11f309feb3ec9ec0d355567a3a54e077a850d012c0fdebd74fd"
+      },
+      {
+        "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/root-exact-complete-configured-full-node-census.private.json",
+        "bytes": 259884,
+        "sha256": "6ba77d6a5111ea178cd3631c6243eeaaff7cfb2b9125c880e8e4b26ea8f834a9"
+      },
+      {
+        "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/root-one-distinct-source-full-authorization.json",
+        "bytes": 762,
+        "sha256": "468bde137cf3573c91c23688cff8a5e38603b3c1fb3a9989c94b719af30d4b63"
+      },
+      {
+        "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/root-one-outer900-command-adoption.json",
+        "bytes": 1080,
+        "sha256": "e3d145f79cf5835ff74ba7207a28e734315e1f9ef9eb5ea95b838a08fc1838d2"
+      },
+      {
+        "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/root900-original-process-terminal.json",
+        "bytes": 212,
+        "sha256": "b5cc8aa640ba1b596a2100a7221e0d966199b105cb56ebb56c99cca290dc9550"
+      },
+      {
+        "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/terminal-primary-and-postguard-distinct.json",
+        "bytes": 914,
+        "sha256": "bf65d64945dc0c55142f36a7a6ae477edb58d64d09714c1426ba7c6f7f464e18"
+      },
+      {
+        "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/OWNERFINAL-root-current312-ec70-configured-SOURCEFULL.json",
+        "bytes": 5785,
+        "sha256": "32288acae49cf7f89c8f7c67bad292d062bcf9a56bb9032175216d0c00bcb0d1"
+      },
+      {
+        "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/root-nonempty-current-full-transport-and-shutdown-node-supplement.json",
+        "bytes": 539,
+        "sha256": "e3eaf8379a59d50e8845712828650c9f73c272cb25d6a728fcba060a8a37b39e"
+      },
+      {
+        "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-proposal-v2/exact-proof-counts-and-complete-envelope-canonical-proposed.patch",
+        "bytes": 689,
+        "sha256": "e3fdb2a2d54f1a8bf8c89378dc131cdf2323416aa59cc72d7011edcc49c1ca73"
+      },
+      {
+        "path": "/workspace/engineering/root-pr312-currentec70-one-normal-push/original-normal-push-success-API-stale-assertion-FAIL.json",
+        "bytes": 572,
+        "sha256": "4e52611b6e496dee0bd2b0795cd7bd3caf13b93f3225a40a09f8b9fc6fdedc00"
+      },
+      {
+        "path": "/workspace/engineering/root-pr312-currentec70-one-normal-push/after-push-pr.private.json",
+        "bytes": 18854,
+        "sha256": "e2e1b8877ac24ab87ec0cc3215fc78ea68bcea6a0cbf0fd93bac537cf8ba1999"
+      },
+      {
+        "path": "/workspace/engineering/root-pr312-currentec70-one-normal-push/before-push-pr.private.json",
+        "bytes": 18853,
+        "sha256": "00b3765157a0e6be9f20c8fe2b9accc7683a1affa5bab2ef12c002452401b765"
+      },
+      {
+        "path": "/workspace/engineering/root-pr312-currentec70-one-normal-push/named-successor-one-current-PR-readback.private.json",
+        "bytes": 18854,
+        "sha256": "33506d16e7a49be7580cd0b9a45d80f8e0caf250c481893d828bf4b576fa12b8"
+      },
+      {
+        "path": "/workspace/engineering/root-pr312-currentec70-one-normal-push/original-push-terminal.json",
+        "bytes": 22,
+        "sha256": "1e3f6691f455051e8adb15d961e4bf3c7a17e83dd88b2afdd13315cc288250bb"
+      },
+      {
+        "path": "/workspace/engineering/root-pr312-currentec70-one-normal-push/original-push.stderr.private.log",
+        "bytes": 361,
+        "sha256": "5dac34fbe9a791f955db00f192730c28d9ea82a85b2f7c8083d8342178d008c2"
+      },
+      {
+        "path": "/workspace/engineering/root-pr312-currentec70-one-normal-push/original-push.stdout.private.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "/workspace/engineering/root-pr312-currentec70-one-normal-push/root-one-normal-existing-branch-push-authorization.json",
+        "bytes": 628,
+        "sha256": "7dea27957cc6f5fc1489feebe3b96a3958912c52c34574c2e951f0eed67d4f2e"
+      },
+      {
+        "path": "/workspace/engineering/pr312-originalec70-one-Windows-log-acquisition/original-MCP-response.private.json",
+        "bytes": 662809,
+        "sha256": "c11b51f7b14893dc493a8291bcf3629219650efd5e36896a44020bf000feec22"
+      },
+      {
+        "path": "/workspace/engineering/pr312-originalec70-one-Windows-log-acquisition/original-decoded-Windows-job.private.log",
+        "bytes": 641347,
+        "sha256": "d21026f97f62d402ab9d33b2aaf76baa62f0703a1c3e89e96c886ce1ff6921d1"
+      }
+    ]
+  },
+  "retained_prior22success1pending_census": {
+    "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-01/OWNERFINAL-independent-current312-one-complete-CI-metadata-review.json",
+    "bytes": 52486,
+    "sha256": "1367b32ee2b8e0722627565ca613699657c24986395c0738a22d1888ff4829be"
+  },
+  "original_log_qualification_script": {
+    "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/qualify-original-current-Windows-readonly-v2.py",
+    "bytes": 9440,
+    "sha256": "104935db64e79a65495037496328dea060db4b1e3a4454fc18bf10288da9d03d"
+  },
+  "retained_initial_original_checkout_local_object_inspector_FAILURE": {
+    "fixed_reason": "ORIGINAL_SYNTHETIC_GIT_OBJECT_NOT_PRESENT_LOCALLY",
+    "original_constructor": {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/qualify-original-current-Windows-readonly.py",
+      "bytes": 8844,
+      "sha256": "6497f2656bfef79e28aa67ae14b4d949d61ed984385f3ffa2c5e588f300c96a7"
+    },
+    "no_acceptance_emitted": true,
+    "corrected_authority": "Original logged SHA matches retained authenticated API Git-commit exact parents and full tree identity; local source typed tree1426 has that same full tree SHA; no fetch or source mutation"
+  },
+  "private_API_original_bindings": [
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/acquire-once-readonly.py",
+      "bytes": 5871,
+      "sha256": "71f3e63a0fd7b7fa4c6ec664183c295b0a606db5cf8fcd934048cac48c681dff"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/acquisition-summary.json",
+      "bytes": 350,
+      "sha256": "f3ff513acdea904795912199aabca1728a4797c0c5a892ff96f22284eec01eaa"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/after-named-base.raw.private.json",
+      "bytes": 460,
+      "sha256": "d55b9a95c3727a798027c81bb7bb6648a2e3268f1261d8480a3708c415674a07"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/after-named-base.request.json",
+      "bytes": 294,
+      "sha256": "1e6f7db776a1d9adb1fdc0d207c9cd0c86323d402ea36ca1a2c89824d397d170"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/after-named-head.raw.private.json",
+      "bytes": 443,
+      "sha256": "ed2fc0119ec590562e5e85772a7a1e7d0937ddb02f7da9f285aa465b624c014f"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/after-named-head.request.json",
+      "bytes": 289,
+      "sha256": "0e6a98f9eeed8c2cc56d341a9ab91b54d35f06285effc414854cd11563706d16"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/after-pr.raw.private.json",
+      "bytes": 19528,
+      "sha256": "c1eb475303f39dac151a221d3b7d3442ad9faf51daf9d6c929dc27ce0fcb9121"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/after-pr.request.json",
+      "bytes": 253,
+      "sha256": "7276167434344e7d49d7da530e730c9fc1a02791bf25cf79b4d5257d93e2bb2e"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/base-branch.raw.private.json",
+      "bytes": 5584,
+      "sha256": "f9b974b88e9a8e41a449f2e047c97fa277544da64c32f822f0a680f4392ed6a5"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/base-branch.request.json",
+      "bytes": 292,
+      "sha256": "ee169ce6e9422bf09c96f2b0649b402d09276dfaafdd309bf17d2621e6338e83"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/base-protection.request.json",
+      "bytes": 302,
+      "sha256": "1f73da9b36dd49e32258c79366f10e9e1c094e4ca6da49d87f253b8dca26923e"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/before-named-base.raw.private.json",
+      "bytes": 460,
+      "sha256": "d55b9a95c3727a798027c81bb7bb6648a2e3268f1261d8480a3708c415674a07"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/before-named-base.request.json",
+      "bytes": 294,
+      "sha256": "89a37a39e534e1967de844ff71ac56f8ed5634eb43432fa738600b00bde4da6c"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/before-named-head.raw.private.json",
+      "bytes": 443,
+      "sha256": "ed2fc0119ec590562e5e85772a7a1e7d0937ddb02f7da9f285aa465b624c014f"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/before-named-head.request.json",
+      "bytes": 289,
+      "sha256": "0bb49b64f4bcec76735c33f2c82e17448c59c4cce68f1fa95c03c795040b97ba"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/before-pr.raw.private.json",
+      "bytes": 19528,
+      "sha256": "c1eb475303f39dac151a221d3b7d3442ad9faf51daf9d6c929dc27ce0fcb9121"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/before-pr.request.json",
+      "bytes": 253,
+      "sha256": "a6b26411119363a1cd44773e026a622db5ede8354cc44c2f43997f6e27e68c5e"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/branch-rules.raw.private.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/branch-rules.request.json",
+      "bytes": 294,
+      "sha256": "d1cd66c373db6c78dbb238fcfec1953ad6c979928f09e0e0da88a6e773299ba4"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/changed-files.raw.private.json",
+      "bytes": 30310,
+      "sha256": "0d21f090ac359431ed490f63ac44a9a395b59220b12122ff52c62d954b3d5245"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/changed-files.request.json",
+      "bytes": 271,
+      "sha256": "80eea46039aac3b4c1822e5f6d45336aee34340ee8364a86f51fa92f2d04c7cb"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/closures-page-1.raw.private.json",
+      "bytes": 752,
+      "sha256": "d78a56e1bc81bc71fbb974561361892d09e6a5debfcf8367ce0b573cd4bdbed4"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/closures-page-1.request.json",
+      "bytes": 148,
+      "sha256": "86d039d2a1fafef55327c52de9826e8dd4977b8190ff7f15afe2683bd984e5cb"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/head-check-runs.raw.private.json",
+      "bytes": 87600,
+      "sha256": "2d8406ab11d5c589ab8029f627239bc42d15fd8e2f6b6e02c5eb988be1866ab0"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/head-check-runs.request.json",
+      "bytes": 326,
+      "sha256": "26fd7be0f357af57fba0b0093c3111b73523a65d6fc47f9f30aef30b8fe72622"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/head-check-suites.raw.private.json",
+      "bytes": 78504,
+      "sha256": "9a3e208730b652082930c22d8144e686734e347cfaaadfe11b2d18dcd122528b"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/head-check-suites.request.json",
+      "bytes": 317,
+      "sha256": "3e05225bc28e3a522a6ff834ce4ca7b3d229e391e9c5ad882380539aa23966c3"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/head-commit.raw.private.json",
+      "bytes": 45766,
+      "sha256": "3fc5d654d6983bc7781fe77f1c07dd4f77c69509eed772339bc7f1863b77e2cf"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/head-commit.request.json",
+      "bytes": 292,
+      "sha256": "adc125a345ec5ff3fd0f119098175001dce3cb0d6ce9a426a671f257209292ff"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/head-runs.raw.private.json",
+      "bytes": 91749,
+      "sha256": "26697cc1a1a608c8e952e5653c4c046849216240b002ff5c2d1d208baf129391"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/head-runs.request.json",
+      "bytes": 318,
+      "sha256": "dd61e257d588e88263f87018774ae913530077c76b40935b6f0d0a9f60f605b2"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/head-statuses.raw.private.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/head-statuses.request.json",
+      "bytes": 309,
+      "sha256": "d79b0bc958a142da1d3cb296b1c465f418315ed3f074e48c6e0f0b4480d59cc5"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/merge-check-runs.raw.private.json",
+      "bytes": 38,
+      "sha256": "3b29ca22d800ee4f4f72aa18efc5af2f17c8f788db9d63ab463b365d2c0920a2"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/merge-check-runs.request.json",
+      "bytes": 323,
+      "sha256": "d2de60fbd578880a690ff4cfe6b88ccc20111f5ebc3d976702c6d39364962a57"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/merge-check-suites.raw.private.json",
+      "bytes": 40,
+      "sha256": "4e929adbdc69abcb55cbd6c541fa88397ad113392ae033696f5e1ab55b596d50"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/merge-check-suites.request.json",
+      "bytes": 314,
+      "sha256": "d829c5ea4da63bac8c892dfc310c89a7d3c8f2161038307aaca996ddc8bf04fd"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/merge-commit.raw.private.json",
+      "bytes": 35311,
+      "sha256": "d4e2dde481789a591ae152babb4181b636cc58f6b8e377d8c6ee8aecb0972d34"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/merge-commit.request.json",
+      "bytes": 292,
+      "sha256": "2f2c8a0870ee7826d20364d85f6323409b4ccd0cdb761f5f3f2e33f4b4676d3d"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/merge-runs.raw.private.json",
+      "bytes": 41,
+      "sha256": "725143e0e46d6aefd0d32064f5407f39c7c2149674a6fb60e3f3376c71e7b5ad"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/merge-runs.request.json",
+      "bytes": 315,
+      "sha256": "ce5301884b47a8e65b5884807f2b9887e66ccf971e44fa594a8e9fcd4d0ba5b2"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/merge-statuses.raw.private.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/merge-statuses.request.json",
+      "bytes": 309,
+      "sha256": "e7fcc4ea3236ebec4ae60d1f5fe26117b93642108d7b109976b65ee0497de8b5"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/review-comments.raw.private.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/review-comments.request.json",
+      "bytes": 270,
+      "sha256": "04570c72bef92f3cab0c50b7194c45ba25a5e323f0727e9e4ae8bd991275a0e0"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/reviews.raw.private.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/reviews.request.json",
+      "bytes": 269,
+      "sha256": "fbd63e547707f6558f5a7a542be79df791d15be4f731d4f600c4bf0b3ad8b15e"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/rulesets.raw.private.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/rulesets.request.json",
+      "bytes": 282,
+      "sha256": "7777922a3a96f94386ba9626c6a872c69b0d3814138db49d452dd1dc09aaaac5"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/run-38148186318-jobs.raw.private.json",
+      "bytes": 2035,
+      "sha256": "bfc97e12a515f439287a5f6f860ef2147756339cb256a04ca25bc3ab067e1eb8"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/run-38148186318-jobs.request.json",
+      "bytes": 295,
+      "sha256": "a34e000149b203defb2547a5d6f35566a0dcb9989cc83a747936c572474b79d1"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/run-38148186340-jobs.raw.private.json",
+      "bytes": 24618,
+      "sha256": "e235155cc1999f1ec6db8420130409cb8c8513de349e7577247bee4fadde1580"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/run-38148186340-jobs.request.json",
+      "bytes": 296,
+      "sha256": "0b1a609d705a4cdf0b5a58b8f2e88321842ebf2dcb67a2be6ec93f54eb7e5268"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/run-38148186348-jobs.raw.private.json",
+      "bytes": 15155,
+      "sha256": "9f21ed9f13aeafcb666e50e81e92aae83c7d6569662df6e318c70f0fcb8711c2"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/run-38148186348-jobs.request.json",
+      "bytes": 296,
+      "sha256": "eb17f12ab0e885ab2010bd62adec421f6dbd1c63845d19281b42629385c41366"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/run-38148186353-jobs.raw.private.json",
+      "bytes": 16940,
+      "sha256": "4b2caf96b7e37b47f9bbd26409861c745739888dfdb472f98aa7844552ee8788"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/run-38148186353-jobs.request.json",
+      "bytes": 296,
+      "sha256": "83f651278a5a123504bf7286543d70b118d700a9e013dd965e2c5814ddf0c446"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/run-38148186357-jobs.raw.private.json",
+      "bytes": 24115,
+      "sha256": "7fc7ccba4b0d1338bfb1aa2484e9c759998183935bacc98527f842739f00d65f"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/run-38148186357-jobs.request.json",
+      "bytes": 296,
+      "sha256": "54fd95b47cb3a39ade29fd2014f621ecf24802b2883f144533c5e978836f9a91"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/run-38148186383-jobs.raw.private.json",
+      "bytes": 3313,
+      "sha256": "1f3289ef6b82048e6ad81202b4ce847c6612851973ea675ba70ba04572122984"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/run-38148186383-jobs.request.json",
+      "bytes": 295,
+      "sha256": "bdc4341b1f162b94e162bac62fab1f61114c981ec1cdb7462d86d369a52bd8b8"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/run-38148186386-jobs.raw.private.json",
+      "bytes": 21214,
+      "sha256": "9cea6d988aa0d5e0f6401053610003b9b2105c0991141f658ed0ddf287743265"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/run-38148186386-jobs.request.json",
+      "bytes": 296,
+      "sha256": "a32a5b416e8a6bf0d4e5f3954c0dbae6947695e4686da05e2f8f1cc1ffe202e0"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/threads-page-1.raw.private.json",
+      "bytes": 742,
+      "sha256": "f556f23777412c026f6eef052846fca354a64644dc25b87cb2fc60dd591d00f4"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/threads-page-1.request.json",
+      "bytes": 148,
+      "sha256": "a58d9d911fff95eed6de62bf9cf0d3703705395da63e565f08a39fd2fa743138"
+    }
+  ]
+}

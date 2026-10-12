@@ -1,0 +1,21 @@
+{
+  "FULL": "NOT_RUN",
+  "PR": 307,
+  "branch": "fix/runtime-release-changelog-selection-20261010",
+  "draft": false,
+  "force_admin_rebase": false,
+  "hosted_CI": "FRESH_PENDING",
+  "independent_ACTUAL": {
+    "bytes": 29551,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current9760-once6-independent-ACTUAL-review/OWNERFINAL-independent-original-current9760-once6-SOURCE-TOKEN-LIGHT-ACTUAL-GO.json",
+    "sha256": "ac3ec82ebdc0dd585db13c6dcfec5e25a673de77efba0efdc37b61b1ff39a298"
+  },
+  "native_OAuth_content_publication_MERGE_release": "HOLD",
+  "new_remote": "9760d5ec44876558c4941c4c3190abc8d92d14a1",
+  "old_remote": "2314aea95795fbc1372a6f7b0b7b298b7cf124c3",
+  "schema": 1,
+  "state": "OPEN",
+  "status": "NORMAL_EXISTING_BRANCH_ACCEPTED_SOURCE_PUSH_VERIFIED",
+  "tree": "0d33ebaac258e069ef7045a29b4a3904740f6307"
+}

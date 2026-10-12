@@ -1,0 +1,63 @@
+{
+  "admission": "Only one serialized concrete pure17 process with verified ROOTphysicalpreflight+distinct600release+allinternalguards. Terminal0 still requires original JUnit exactly17uniquePASS/0F/0E/0SKIP and sourceafterguard; not nativeexecution authorization.",
+  "capture": "2026-10-11T21:02:49.193100+00:00",
+  "config_binding": {
+    "bytes": 7739,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/FROZEN-memory17-pure-control-config-NOTRUN-v2.json",
+    "sha256": "e90827940b61e3ddb906ff0576a2ea37cd6ee7297986cc78c62844f5a888b402"
+  },
+  "config_sha256": "e90827940b61e3ddb906ff0576a2ea37cd6ee7297986cc78c62844f5a888b402",
+  "decision": "GO_CONCRETE_MEMORY17_PURE_CONTROLS_ONLY_WITH_MANDATORY_DISTINCT_ROOT_EXTERNAL_PHYSICAL_PREFLIGHT",
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "disposition": "REUSE_EXISTING900B8c28fc_MEMORY_VS_MOUNT_SCOPE_LESSON_NO_COSMETIC_CHILD",
+    "durable_learning": "Filesystem capacity does not establish sharedcgroupmemoryheadroom; fresh identity/counters and pressure interval differ from specificchildOOM attribution. Purecontrolsuccess wouldnotcalibrate nativeworkload.",
+    "evidence": "Exactproposedpurememorysnapshot/state and17sourcepredicates; originalV9privatefailure ownerfeef and indcb888; concretependingJUnitlauncher.",
+    "exact_reused_delta": {
+      "bytes": 900,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/canonical-shared-cgroup-headroom-vs-filesystem-capacity-proposed.md",
+      "sha256": "8c28fc2596c6fdfc607dd35a17b3462ad217ba97670b61222393dc504861d896"
+    },
+    "remaining_uncertainty": "PurecontrolsNOTRUN and native memoryprofile NOTADOPTED.",
+    "stale_or_ambiguous_guidance_removed": "No mountfreedata implies memoryqualification; purecontrols/source-onlyprep notnativeadmission."
+  },
+  "execution": "NOT_RUN",
+  "launcher_binding": {
+    "bytes": 7361,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/root_release_one_memory17_pure_controls_NOTRUN.py",
+    "sha256": "68d230410d0ff42f3c65dea09c0cd5e5b191a24e70ad3871efbb5dd2bf8201b0"
+  },
+  "launcher_sha256": "68d230410d0ff42f3c65dea09c0cd5e5b191a24e70ad3871efbb5dd2bf8201b0",
+  "mandatory_ROOT_external_preflight": {
+    "bytes": 4598,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-memory17-concrete-independent-preexecution-review/mandatory-ROOT-outer-physical-release-config-path-preflight-contract-NOTRUN.json",
+    "sha256": "9ccccfba1aafb8f09489c642347fc01a3701839ce4bac6d8bd7f871b43877740"
+  },
+  "owner_binding": {
+    "bytes": 8242,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/OWNERFINAL-memory17-concrete-pure-control-launcher-config-and-root-once-preexecution-NOTRUN-v2.json",
+    "sha256": "56d2b731ffcd6bcb3ebf5d752086e6bc30249f423279964d64271f8c8deb676f"
+  },
+  "proof_binding": {
+    "bytes": 4756,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-memory17-concrete-independent-preexecution-review/independent-memory17-concrete-static-source-launcher-and-scope-proof.json",
+    "sha256": "f9b2d121ec664bf9daf07c22ed41d611ccd840145fc97782709614f169070f22"
+  },
+  "remaining_uncertainty": [
+    "No current17 control has run; names are statically derived and need actual JUnitconfirmation.",
+    "Memoryreader/finitecounter sampler integration, ownedonlystop behavior and coldsolverheadroom calibration remainunqualified.",
+    "OriginalV9 killedMicromamba publicationFAIL and stagedmissingdependency remainFAIL; event increase does not identify killingcomponent."
+  ],
+  "root_release": "NOT_CREATED",
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "status": "INDEPENDENT_MEMORY17_PURE_PREEXECUTION_GO",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,12 @@
+--- a/.gitattributes
++++ b/.gitattributes
+@@ -30,0 +31,9 @@
++
++# Preserve exact Runtime distribution source and HTML scaffold checkout bytes.
++action_server/src/**/*.py text eol=lf
++action_server/frontend/apps/runtime/index.html text eol=lf
++action_server/src/actions/server/README.md text eol=lf
++action_server/src/actions/server/bin/.gitignore text eol=lf
++action_server/src/actions/server/index.html text eol=lf
++action_server/src/actions/server/templates/action-templates.yaml text eol=lf
++action_server/src/actions/server/vendored_deps/README.md text eol=lf

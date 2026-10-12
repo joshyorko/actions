@@ -1,0 +1,7 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@
++A server access-log status200 does not prove that the client received the
++response. Classify shutdown failures at the exact client send/read boundary
++and keep successful response delivery, natural exit and cleanup predicates
++separate. Passing checkout-byte tests do not establish a shutdown cause.

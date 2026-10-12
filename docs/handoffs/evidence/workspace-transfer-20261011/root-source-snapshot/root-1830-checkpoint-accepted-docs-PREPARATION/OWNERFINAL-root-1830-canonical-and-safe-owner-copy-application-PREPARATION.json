@@ -1,0 +1,194 @@
+{
+  "capture": "2026-10-11T18:59:22.257907+00:00",
+  "status": "APPLIED_REVIEWED_CANONICAL_DELTAS_AND_FROZEN_TIME_BOUND_HANDOFF_UNCOMMITTED",
+  "base": "8f753f1703e13236fbd3cd608afa203cb6205b35",
+  "allowed_existing_changes": [
+    "docs/skills/repository-operations.md"
+  ],
+  "new_paths": 27,
+  "old_guidance_deleted_lines": 0,
+  "new_canonical_lines": 40,
+  "canonical_dispositions": {
+    "e151_storage": "ADOPTED",
+    "62d4_include_matrix": "ADOPTED",
+    "b795_original_OSError_outer": "ADOPTED_WITH_CORRECT_OBSERVED_OSError_PHASE",
+    "66a3_logging": "ADOPTED",
+    "76beb_parentpost_environment": "NAMED_CONTEXT_ONLY_ADOPTED_AFTER_ORIGINAL_PATCH_CONTEXT_REJECTION",
+    "be72_union_lesson": "REUSED_EXISTING_CONTEXT",
+    "ff128_test_isolation": "REUSED_EXISTING_CONTEXT"
+  },
+  "historical1830_snapshot": "UNCHANGED_BYTES",
+  "latest_readback": "ADDITIVE_1853_SOURCEFULL_GO_NORMAL_DRAFT_PUSH_PRIVATE_GO_INNER_PREP_STORAGE_PREP",
+  "source_native_release_qualification": "NOT_CHANGED",
+  "raw_logs_privateURLs_recopied": false,
+  "files": [
+    {
+      "path": "docs/skills/repository-operations.md",
+      "bytes": 245946,
+      "sha256": "53aa3ac04d7a3f42262b2c198474dd3ac9d573ff428676e9bb55ac5f94c9f65d",
+      "mode": "0o600"
+    },
+    {
+      "path": "docs/handoffs/actions-swarm-mk3-20261011-1830Z-engineering-successor.md",
+      "bytes": 5967,
+      "sha256": "b0421941cddc98f12ce66491c58db659ae9d1bf92b70af6e6bf161a28ec9e0cc",
+      "mode": "0o600"
+    },
+    {
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/01-OWNERFINAL-current8d49-configured-SOURCE_LIGHT-PASS.json",
+      "bytes": 7674,
+      "sha256": "d7f23a52d044195187992aeac80e692429e1a1a4af16ee9b37f1971cfbdc4104",
+      "mode": "0o600"
+    },
+    {
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/02-OWNERFINAL-independent-current8d49-configured-SOURCE_LIGHT-review.json",
+      "bytes": 3596,
+      "sha256": "b0d1c4ee4cee11fc3c2ffd9f6fece609869fa4b447d43bfb8c91ca4a2bf6222b",
+      "mode": "0o600"
+    },
+    {
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/03-OWNERFINAL-original-current8d49-launcher-FULL-census-PASS-root-review-PENDING.json",
+      "bytes": 2051,
+      "sha256": "6dea0f9dc667c7dd74b093efea3b302156c80da8be33b0fa718fe906defe9fcf",
+      "mode": "0o600"
+    },
+    {
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/04-OWNERFINAL-root-original-current8d49-one-FULL.json",
+      "bytes": 837,
+      "sha256": "83781777ef048357ea892ce56d42ab3906b92f49f663169dda2130ddcc1094ac",
+      "mode": "0o600"
+    },
+    {
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/05-OWNERFINAL-named-readonly-full-post-env-supplement.json",
+      "bytes": 1994,
+      "sha256": "1bdd39ecaae8d8ae95ed28c3441de52c4b8f95117fdc71842085fd1374c8e235",
+      "mode": "0o600"
+    },
+    {
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/06-OWNERFINAL-current8d49-private-V8-four-module-NOTEXECUTABLE-content-preparation.json",
+      "bytes": 6445,
+      "sha256": "a334cb363d8d4003e9ddd6dc375096e05758560c4b487b0077389e54d058e704",
+      "mode": "0o600"
+    },
+    {
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/07-OWNERFINAL-current8d49-private-V8-count-alias-baseline-first-testcase-plan-NOTRUN.json",
+      "bytes": 5064,
+      "sha256": "0312800a81387367d98a794956ef38014ad6d439977697a4b7a6a68bf498d539",
+      "mode": "0o600"
+    },
+    {
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/08-OWNERFINAL-root-original-one-current-e2-aggregate-transfer-failure-and-exact-retained-ZIP.json",
+      "bytes": 2912,
+      "sha256": "6bf0790738248804416229c4540130103758f820aa63f953e0ac97b6c0f65230",
+      "mode": "0o600"
+    },
+    {
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/09-OWNERFINAL-one-existing-original-outer-inspection-result.json",
+      "bytes": 631,
+      "sha256": "51d8db07c502594f6144384fea4c7d9193c3957b4698f226bbc3262db405e2ec",
+      "mode": "0o600"
+    },
+    {
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/10-OWNERFINAL-independent-current-e2-original-outer-inspection-ACTUAL-data-integrity-review-v2.json",
+      "bytes": 8172,
+      "sha256": "22eed535e92d5a9f4b50b0e5f15aa8df477f4b2eab314c77a141044332b7079d",
+      "mode": "0o600"
+    },
+    {
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/11-OWNERFINAL-current-f75d-e2-ordinary-union-and-isolated-LIGHT-FULL-PREPARATION.json",
+      "bytes": 12615,
+      "sha256": "8145a781cf63789807a51375c5eaf1bbc6c9f1984d1dc438b02801fd3a8651af",
+      "mode": "0o600"
+    },
+    {
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/12-OWNERFINAL-current2d86-e2-ordinary-union-and-isolated-LIGHT-FULL-PREPARATION.json",
+      "bytes": 13446,
+      "sha256": "11aaf1b32edefd7373a652d5bc2e8cd1a42193b9a4fa4f28358fd61005fa0381",
+      "mode": "0o600"
+    },
+    {
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/13-OWNERFINAL-private-current8d49-persistent-two-path-recontext-SOURCE_ONLY-and-generated-output-HOLD-v2.json",
+      "bytes": 18311,
+      "sha256": "bd7cdb55f6a3450ec989975561df8dc4c877b4ba308a100e3115033a12c8fd9b",
+      "mode": "0o600"
+    },
+    {
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/14-OWNERFINAL-original-selected-output-changed-no-operation-disposition.json",
+      "bytes": 2801,
+      "sha256": "98892130efe992608a262c01130dbae95d5d39778388e7e1b2914b1afa4dbea6",
+      "mode": "0o600"
+    },
+    {
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/15-OWNERFINAL-independent-stale-original-current8d49-selected-output-PREEXECUTION-HOLD.json",
+      "bytes": 6487,
+      "sha256": "e5735ef36fb4bf3dda061d8dd962bf7c7e4f21b3590f381e27e0d9b46ab39b10",
+      "mode": "0o600"
+    },
+    {
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/16-OWNERFINAL-current8d49-full-and-e2-outer-existing-body-preservation.json",
+      "bytes": 889,
+      "sha256": "89a8e397bb858b3d97fda3b733dcb1d4af5a1b3c1e31e3af542024dd6a6d924b",
+      "mode": "0o600"
+    },
+    {
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/18-proposed-canonical-matrix-event-count-lesson.txt",
+      "bytes": 273,
+      "sha256": "62d4d0f56d363e66d062eebe0696dc421f4503a8ac2d3917fe5cbbaa3c4db5e5",
+      "mode": "0o600"
+    },
+    {
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/190-OWNERFINAL-independent-current8d49-original-configured-SOURCEFULL-and-retained-ROOTpost-supplement-review.json",
+      "bytes": 10038,
+      "sha256": "073e235afffab50dee204bcaae236e77ceb8e23644db15a90a0e56d48dc8dca9",
+      "mode": "0o600"
+    },
+    {
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/191-OWNERFINAL-root-one-original-normal-draft-source-push-and-named-readback.json",
+      "bytes": 912,
+      "sha256": "644120b5c5a5ce0ef4d0508d89db14bf89ad721d1f76e5aee26fad2107f557a5",
+      "mode": "0o600"
+    },
+    {
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/192-OWNERFINAL-independent-private-current8d49-persistent-recontext-SOURCE_ONLY-and-logging-HOLD.json",
+      "bytes": 10406,
+      "sha256": "87ce7c08689988b43a9f563b2a5a26611397e0547694b67f2c9f01d7306cc1af",
+      "mode": "0o600"
+    },
+    {
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/193-OWNERFINAL-current-e2-private-inner-data-executor-PREEXECUTION.json",
+      "bytes": 13205,
+      "sha256": "015937fe81a04fcdeeb64769061ade8a88108007b3d82f95d96bb1cb39a0326b",
+      "mode": "0o600"
+    },
+    {
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/194-OWNERFINAL-independent-named-current8d49-V8-fixture-logger-temporal-SOURCE_ONLY-review.json",
+      "bytes": 5345,
+      "sha256": "2fd27844ac38b179b45abb0ce1a9603f49ce513ad6e0453878c06a7770c62d11",
+      "mode": "0o600"
+    },
+    {
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/195-OWNERFINAL-two-completed8d49-roots-capped-storage-PREEXECUTION.json",
+      "bytes": 12160,
+      "sha256": "f11305932016f7571186f883c0a93fe5feca6e698d1b5e67b216d1ccc331503b",
+      "mode": "0o600"
+    },
+    {
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/20-proposed-generated-logging-output-isolation-lesson.md",
+      "bytes": 536,
+      "sha256": "66a3fa55bc0c4a32053ccfb3c457e4e37442f70ecbcd3ca263a026db836de054",
+      "mode": "0o600"
+    },
+    {
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/checkpoint-reference-manifest.json",
+      "bytes": 9466,
+      "sha256": "74bbd8ddde4edba0ac01ff5188d6eecf730f0f79d267b308af51a6c476997150",
+      "mode": "0o600"
+    },
+    {
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/named-current-readback-after-1830Z.json",
+      "bytes": 3572,
+      "sha256": "9938dd53fec4fa4045d1b42c50fe89b7583799913185d8f90a13abff74d4ebe0",
+      "mode": "0o600"
+    }
+  ]
+}

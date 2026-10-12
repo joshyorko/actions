@@ -1,0 +1,78 @@
+{
+  "status": "GO_FROZEN_CURRENT_HARNESS_BOUNDED_NATIVE_ACCEPTANCE",
+  "wrapper_status": "NOT_RUN_WAITING_ROOT_SERIAL_APPROVAL",
+  "harness_sha": "f506a04e240feba048bf10e32bccebf591674f9e",
+  "harness_tree": "782ff78fa4bfc751b6d02004f665da84fc79c81b",
+  "artifact_original_source_sha": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+  "artifact_tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f",
+  "artifact_build_run": "38098225250",
+  "artifact_source_relabelled": false,
+  "runner_sha256": "cbbb61581274a6caa830c8c400386735e738d28f3ea0700577a0926293693368",
+  "exact_command_receipt": "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen-launcher-receipt.json",
+  "junit": "1 PASS, zero failures/errors/skips",
+  "browser_stages": "normal,authorization-denied,storage-error allPASS",
+  "cleanup": {
+    "wrapper_started": true,
+    "wrapper_reaped": true,
+    "live_descendant_count": 0,
+    "zombie_descendant_count": 0,
+    "descendant_snapshot_complete": true,
+    "control_error_count": 0,
+    "snapshot_failure_type": null,
+    "stop_failure_type": null
+  },
+  "supervisor_cleanup_disposition": "reaped_exited_descendants",
+  "supervisor_reaped_descendants": 6,
+  "post_runtime_tree_diff": {
+    "added_count": 0,
+    "removed_count": 0,
+    "changed_count": 0,
+    "report_path": "native-ui-receipt-frozen-post-runtime-tree-diff.json"
+  },
+  "browser_observation": {
+    "paths": [
+      "/workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell"
+    ],
+    "launched_pids": [
+      19207
+    ],
+    "executable_file_sha256": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f",
+    "trace_sha256": "149ec58332072c263a29b80a67ab2f1f49d35ef5afc80272652db7b89e100bb9",
+    "measurement": "actual pw:browser launch command and PID, executable file bytes measured before/after; no live /proc identity sample"
+  },
+  "browser_proc_sample": "Observed launchPID19207 exited before later /proc sample; no live sample identity claimed",
+  "temp_cleanup": "REMOVED_AFTER_SUPERVISOR_COMPLETED",
+  "limits": [
+    "Go-wrapper not run",
+    "Windows/macOS not run",
+    "missing_runtime_support/generic_http_500 NOT_RUN",
+    "no original clean-build attestation or independent bundled/Core wheel origin added",
+    "final DEBUG_FILE launch trace covers last attempted browser stage; source selectors for all3 unchanged",
+    "no private metadata or supervisor implementation execution"
+  ],
+  "documentation_improvement": {
+    "Canonical file changed or proposed": "docs/skills/work-items.md; exact canonical-guide-proposed-delta-frozen-pass.md",
+    "Durable learning captured": "Current harness replay preserves original artifact source; frozen/wrapper gates and Runtime/supervisor cleanup counts remain distinct; browser actual selector evidence has explicit process-sampling limits.",
+    "Evidence": "Current f506/build92498 frozen actual1PASS and three browser stages PASS; observed cleanup0live/0zombie/errors with wrapperreap; zero package-tree diff; pinned headless launchtrace plus exited-before-proc-sample record",
+    "Stale or ambiguous guidance removed": "Proposes scoping old refreshed-integration NOT_RUN statement to remaining wrapper/native-platform criteria; avoid treating replay qualification as both native passes.",
+    "Remaining uncertainty": "Wrapper actual gate, other native platforms and missing/generic error fixtures, original clean build/dependency provenance"
+  },
+  "upstream_disposition": "none",
+  "evidence": {
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen/native-ui-receipt-pretest-tree-inventory.json": "08d8c246e5fd7fcf982f7f1aedd446f1563648e66f0b75f8a9ca0d15fd584659",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen/test-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen/pw-browser-launch.log": "149ec58332072c263a29b80a67ab2f1f49d35ef5afc80272652db7b89e100bb9",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen/test-stdout.log": "8f505596918d9290d9f262ae60affab1ca3de489974add5686f8a73ec057e8ca",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen/native-ui-receipt-frozen-post-runtime-tree-inventory.json": "3528676ec30753c5487f27a019a264d7d672b63e5dbac5bfa2dd32fcc58398d6",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen/actual-browser-proc-sample.json": "e66544a18291c36b099da8ec98a305427666e7f1ee3047ffd65ed1da252df426",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen/native-ui-receipt-frozen-post-runtime-tree-diff.json": "6e18014feed9e00853147b2cb547f3b35bdfa3ff552fdbc26267df76fe6b9cd5",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen/native-ui-receipt.json": "32df0a8501d08318b2106fd27d385e8d1c06c464057538f4e1db9b7c9a32f643",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen/readback-summary.json": "5c61b444845d02e2b476909c71173610b32ff8f513785ace323d4c51469b6ef0",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen/runner-envelope.json": "0bb5435725cc16e8ebed76b0c2a23586b7aea129f6825583754361f19a815485",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen/native-ui-receipt-frozen-copy-pretest-tree-inventory.json": "640964ce3f2faef0626b8e968f6915e0d6bfa1486fc0f4f8885e1f2ba16b0415",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen/junit.xml": "caca3f3dc05f32800b4bb919eb3f63349d8f976f0d149a7c3847141aa3071c31",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen-launcher-receipt.json": "b79988a4b8d1701812fbea5b6e3c458df2a969b71d5007927c4b1802d0f7e716",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen-outer.log": "18a18c8ebe455a059249713f6c590e444351f8fa8c741ae3ea90e248961aac92",
+    "/workspace/engineering/pr310-runner-qualification-owned/canonical-guide-proposed-delta-frozen-pass.md": "d67971b5a2ee1afaae4ee7fd5d1ceb7c2c84ad7ed90bdced6dc0379f6f023fc8"
+  }
+}

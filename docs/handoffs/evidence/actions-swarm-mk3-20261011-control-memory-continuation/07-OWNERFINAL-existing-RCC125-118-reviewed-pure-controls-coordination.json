@@ -1,0 +1,39 @@
+{
+  "comments": {
+    "118": {
+      "comment": "https://github.com/joshyorko/rcc/issues/118#issuecomment-6109416839",
+      "entire_old_body_preserved": true,
+      "new_body_sha256": "bf6fe4c06598322ee9611c06508540c72de9b5c736ed96a75ff7ef7c09d403bb",
+      "old_body_sha256": "c90e820b647a29098435478a96c6ac53985aa8f7f383f6a41f132d4b11edd58a"
+    },
+    "125": {
+      "comment": "https://github.com/joshyorko/rcc/issues/125#issuecomment-6109416621",
+      "entire_old_body_preserved": true,
+      "new_body_sha256": "bf6fe4c06598322ee9611c06508540c72de9b5c736ed96a75ff7ef7c09d403bb",
+      "old_body_sha256": "c90e820b647a29098435478a96c6ac53985aa8f7f383f6a41f132d4b11edd58a"
+    }
+  },
+  "documentation_disposition": "Reviewed emitter/copy-lock/cgroup identity-headroom lessons prepared in existing canonical checkpoint; no duplicate lesson",
+  "first_supported_newer": "NONE_YET",
+  "native_release": "HOLD",
+  "newer_execution": "NEVER_EXECUTED",
+  "production_pin": "18.19.3_UNCHANGED",
+  "reviews": [
+    [
+      "/workspace/engineering/rcc-memory17-managed700-once2-independent-ACTUAL-review/OWNERFINAL-independent-original-managed700-fresh-once2-memory17-ACTUAL-pure-controls-GO.json",
+      "8c294e6731287ab8aa263a520be910915170cd0abafee4ceb79898852357d14e"
+    ],
+    [
+      "/workspace/engineering/rcc-current8d49-reader28-independent-ACTUAL-review/OWNERFINAL-independent-original-current8d49-reader-observer28-ACTUAL-synthetic-controls-GO.json",
+      "fcb6ab0604199980fa92ed237eaf837d9e31c84d7fef79c201f957cf945da19f"
+    ],
+    [
+      "/workspace/engineering/pr308-known-nine18-once2-independent-ACTUAL-review/OWNERFINAL-independent-original-known-nine18-once2-source-only-ACTUAL-GO.json",
+      "60c3d5b8ec68e2b746f0be3ff6aa75e3c7401ed1bbee816e6b601c3738868c6f"
+    ]
+  ],
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "status": "EXISTING_RCC125_118_NORMAL_COMMENT_UPDATES_VERIFIED",
+  "upstream_disposition": "Existing RCC125/118 comments updated under explicit user coordination authorization"
+}

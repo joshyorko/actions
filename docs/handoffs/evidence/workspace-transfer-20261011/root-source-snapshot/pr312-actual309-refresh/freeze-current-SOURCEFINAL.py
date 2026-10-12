@@ -1,0 +1,31 @@
+import hashlib,json,os,re,subprocess
+from pathlib import Path
+r=Path('/workspace/engineering/runtime-checkout-eol');o=Path('/workspace/engineering/pr312-actual309-refresh')
+def sha(p):
+ h=hashlib.sha256()
+ with Path(p).open('rb') as f:
+  for b in iter(lambda:f.read(1048576),b''):h.update(b)
+ return h.hexdigest()
+def bind(p):p=Path(p);return {'path':str(p),'bytes':p.stat().st_size,'sha256':sha(p)}
+def check(x):assert bind(x['path'])==x
+light=json.loads((o/'OWNERFINAL-pr312-actual309-refresh-LIGHT.json').read_text());terminal=json.loads((o/'current-full-terminal.json').read_text());assert terminal['returncode']==0 and terminal['actual_full_attempt_count']==1 and terminal['retry'] is False;check(terminal['log']);t=Path(terminal['log']['path']).read_text(errors='replace');t=re.sub(r'\x1b\[[0-?]*[ -/]*[@-~]','',t)
+summaries=re.findall(r'(?m)^=*[ \t]*([0-9]+) passed(?:, ([0-9]+) skipped)?(?:, ([0-9]+) warnings)? in ([0-9.]+)s(?: \([0-9:]+\))?(?:[ \t]*=*)?$',t);assert len(summaries)==2,summaries
+dev,runtime=summaries;assert int(dev[0])==162 and not dev[1];assert int(runtime[0])==1295 and int(runtime[1])==13 and int(runtime[2])==15;assert 'created: 2/2 workers' in t and '2 workers [1308 items]' in t
+post=json.loads((o/'current-full-postcondition-summary.json').read_text());assert post['status'].startswith('PASS') and post['source_head']==light['head'] and post['source_tree']==light['tree']
+assert subprocess.check_output(['git','status','--porcelain'],cwd=r)==b''
+for x in light['immutable_evidence_bindings']:check(x)
+check(light['prior_SOURCEFINAL']);old=json.loads(Path(light['prior_SOURCEFINAL']['path']).read_text())
+for x in old['immutable_evidence_bindings']:check(x)
+root_auth=json.loads((o/'root-one-current-a0d-explicit-two-worker-full-authorization.json').read_text())
+for k in ['owner','independent_LIGHT_review','capacity_independent_review']:check(root_auth[k])
+assert terminal['argv']==light['next_full']['argv']==root_auth['next_full']['argv'];assert (Path(terminal['log']['path']).stat().st_mode&0o777)==0o600
+files=sorted(p for p in o.iterdir() if p.is_file());refs=[bind(p) for p in files]
+result={'schema':'pr312-current-a0d-SOURCEFINAL/v1','status':'OWNER_CURRENT312_SOURCEFINAL_ONE_FULL_PASS_INDEPENDENT_REVIEW_REQUIRED','source_head':light['head'],'source_tree':light['tree'],'ordered_parents':light['ordered_parents'],'branch':light['branch'],'clean':True,'complete_tracked_typed_leaf_count':1423,'all1423_Git_FS_body_and_execbit_prepost_exact':True,'all_parent_leaves_retained_no_novel_nondoc_body_mode':True,'original_source_seven_delta_paths_and207checkout_inputs_exact':True,'adopted_auth2_source_test_blobs_exact':True,'both_parent_canonical_source16_lines_and_complete_target_guide_imports_exact':True,'light_outcomes':light['light_gate_outcomes'],'actual_current_full':{'attempts':1,'returncode':0,'elapsed_seconds':terminal['elapsed_seconds'],'devutils':{'PASS':int(dev[0]),'SKIP':0,'actual_workers':2,'seconds':float(dev[3])},'configured_Runtime_invoke_test_not_integration':{'PASS':int(runtime[0]),'SKIP':int(runtime[1]),'warnings':int(runtime[2]),'actual_workers':2,'collected_items':1308,'seconds':float(runtime[3]),'skipped_tests_unverified':True},'full_argv':terminal['argv'],'explicit_worker_environment':terminal['explicit_worker_environment'],'launcher':light['next_full']['launcher'],'raw_log':terminal['log'],'raw_log_mode':'0600','retry':False,'configured_gate_API_or_source_changes':False},'postconditions':post,'original_SOURCEFINAL62_and_current_LIGHT_refs_unchanged':True,'native_helpers0444_browser_Node_frontend_raw18_frozen50_scope':'Hash/inventory retention only; V5 actual source3ec and1192 oldnative92498 identity stay historical; actual native/browser/consumer NOT_RUN on770','preserved_metadata_inspector_failures':['Original LIGHT freezer compared authoritative Runtime task hash against wrong devutils/invoke_utils path; named reader corrected to action_server/tasks.py, no source/gate rerun','Immediate full preflight compared reported sys.prefix to package instead of own package/.venv; original assertion/reader/log retained, named metadata successor and resolved equality PASS before first actual full launch; root explicitly confirmed dc19 remained unconsumed'],'source_writer_lease':'Released before full; verification-only; no tracked application/source changes after770 merge','root_ONE_full_authorization':bind(o/'root-one-current-a0d-explicit-two-worker-full-authorization.json'),'independent_LIGHT_and_worker_bound_proposal_review':root_auth['independent_LIGHT_review'],'independent_batch17_capacity_review':root_auth['capacity_independent_review'],'historical_full_not_relabelled':'Original92e/618 devutils162+Runtime1219 and hosted CI remain historical; current770/a0d full162+1295 is separate','fresh_workspace_free_bytes':os.statvfs(r).f_bavail*os.statvfs(r).f_frsize,'remaining_HOLDs':['Independent current SOURCEFINAL review and root-only normal existing312 push','Fresh complete current770/a0d hosted CI/build/distribution byte qualification','Historical Windows effective checkout config/compiler cause and embeddedHTML semantic equivalence UNKNOWN','Currentnative/private01f/provider/OAuth authority/cold-consumer/full7/ChatGPT/fullissue/release/tag/publication remain unqualified'],'Documentation improvement':light['Documentation improvement'],'Upstream disposition':'none','original_SOURCEFINAL':light['prior_SOURCEFINAL'],'current_LIGHT':bind(o/'OWNERFINAL-pr312-actual309-refresh-LIGHT.json'),'immutable_current_evidence_bindings':refs}
+result['Documentation improvement']['Remaining uncertainty']='Fresh current hosted/Windows generated distribution bytes/native/private/OAuth/provider/release remain separate gates; current configured full is PASS with13 skips unverified'
+result['Documentation improvement']['Evidence']+='; current one configured full actualworker2+2/devutils162/Runtime1295+13skip and full1423/ref/artifact prepost exact'
+dest=o/'OWNERFINAL-pr312-current-a0d-SOURCEFINAL.json'
+with dest.open('x') as f:f.write(json.dumps(result,indent=2)+'\n')
+for p in files:
+ if p.suffix=='.log':p.chmod(0o600)
+ else:p.chmod(0o444)
+dest.chmod(0o444);print(json.dumps({'OWNERFINAL':bind(dest),'head':light['head'],'tree':light['tree'],'clean':True,'free_bytes':result['fresh_workspace_free_bytes']}),flush=True)

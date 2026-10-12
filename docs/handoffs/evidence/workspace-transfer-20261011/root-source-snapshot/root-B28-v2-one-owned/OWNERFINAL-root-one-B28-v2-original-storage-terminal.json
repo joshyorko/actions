@@ -1,0 +1,92 @@
+{
+  "schema": 1,
+  "status": "ROOT_ONE_B28_V2_STORAGE_PRESERVATION_RETURNED_PASS_POST_PASS",
+  "source": "396925cb3d6527af1768b7f5333f9653c005fc55",
+  "terminal": {
+    "path": "/workspace/engineering/root-B28-v2-one-owned/original-one-attempt-terminal.json",
+    "bytes": 630,
+    "sha256": "68cad40c8bab78543724b5eb703ea5fcecc454515e47dd448cea1537fc940342",
+    "mode": "0o600"
+  },
+  "outer": {
+    "path": "/workspace/engineering/root-B28-v2-one-owned/original-root-outer-terminal.json",
+    "bytes": 115,
+    "sha256": "ee0feb28c39937fdd4c2c828e6fe049625380316dd1ac9c84cc5b9bb1a8bd0e0",
+    "mode": "0o600"
+  },
+  "evidence_bindings": [
+    {
+      "path": "/workspace/engineering/root-B28-v2-one-owned/protected-inputs-before.json",
+      "bytes": 398,
+      "sha256": "9de74829321bd3dac2c44cadab785a8fcb5f1958f1c7f1971982d00eb63a7ed0",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-B28-v2-one-owned/selected-complete-originals-before.json",
+      "bytes": 72,
+      "sha256": "4e57f2a96be8c94f54dd2aaccb691b1f1deda0076609d2d071d1cfeca3b9e0f2",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-B28-v2-one-owned/original-root-outer-terminal.json",
+      "bytes": 115,
+      "sha256": "ee0feb28c39937fdd4c2c828e6fe049625380316dd1ac9c84cc5b9bb1a8bd0e0",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-B28-v2-one-owned/original-archiver.stdout.private.log",
+      "bytes": 4778,
+      "sha256": "404dcdf96f22e0f718516ae7e00178c8558ef508012aecfbb3db36a33b231b39",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-B28-v2-one-owned/protected-inputs-after.json",
+      "bytes": 398,
+      "sha256": "9de74829321bd3dac2c44cadab785a8fcb5f1958f1c7f1971982d00eb63a7ed0",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-B28-v2-one-owned/original-one-attempt-terminal.json",
+      "bytes": 630,
+      "sha256": "68cad40c8bab78543724b5eb703ea5fcecc454515e47dd448cea1537fc940342",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-B28-v2-one-owned/consumed-exact-release.json",
+      "bytes": 1745,
+      "sha256": "4cb345b52ae979d065fd31058615f3a642aae6284e610a47f60d9b1b4255264e",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-B28-v2-one-owned/original-archiver.stderr.private.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-B28-v2-one-owned/immediate-fresh-capacity-and-sourcebindings.json",
+      "bytes": 942,
+      "sha256": "adcc32a99f9d861855e512733f979b63cd87a490fb0a162a2f612d1348cae1f9",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-B28-v2-one-owned/original-archiver-terminal.json",
+      "bytes": 310,
+      "sha256": "78ba98253331d0347c7bcdf905eb7f1e591c00831bf2f91ca76ae46e25e7b977",
+      "mode": "0o600"
+    }
+  ],
+  "capacity": {
+    "/workspace": 1639915520,
+    "/tmp": 1170182144,
+    "/dev/shm": 3901190144
+  },
+  "originals_selected": 34,
+  "members": 33013,
+  "allocated_bytes_selected": 419430400,
+  "native_source_newer_Rcc_qualification": "NONE",
+  "independent_actual_acceptance": "PENDING",
+  "no_retry": true,
+  "upstream_disposition": "none",
+  "recorded_utc": "2026-10-11T17:39:39.400651+00:00"
+}

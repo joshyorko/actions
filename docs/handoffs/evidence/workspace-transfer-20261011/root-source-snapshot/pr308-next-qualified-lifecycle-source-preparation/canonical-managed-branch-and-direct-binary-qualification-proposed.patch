@@ -1,0 +1,16 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -2280,6 +2280,13 @@
+ The staged consumer fixture retains its worker's exact env-exec lease receipt
+ and actual typed retirement/cleanup snapshots in private evidence. Missing
+ snapshots stay null; testcase success does not prove lease release or reaping.
++RCC qualification must identify the fixture's managed branch as well as the
++selected executable. Existing watched-reload and generation-drain fixtures
++create managed package manifests only for their frozen-parent mode; their
++source-mode results do not qualify RCC workers. Legacy RCC3 trace wrappers
++are different bytes from approved direct binaries and cannot satisfy their
++hash admission. Preserve legacy cases and qualify explicit managed-source
++variants with raw descriptor, worker and lease identities.
+ 
+ Managed spec-v2 Action packages use the provisional RCC runtime adapter only
+ when `ACTIONS_RUNTIME_RCC_PROVIDER` or `ACTIONS_REAL_RCC_ARTIFACT_TEST`

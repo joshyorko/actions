@@ -1,0 +1,118 @@
+{
+  "schema": 1,
+  "status": "NOT_RUN_DISTINCT_ROOT_SERVICEFREE_RELEASE_REQUIRED",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "test_source_binding": {
+    "bytes": 14786,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/test_current_managed_reload_sqlite_pool_barriers.py",
+    "sha256": "c148bd528f8306e638054df91dfbf915022eaf30d3e123ff845adbeae6b209eb"
+  },
+  "baseline_argv_after_exact_managed_activation": [
+    "env",
+    "-u",
+    "PYTHONOPTIMIZE",
+    "-u",
+    "PYTEST_ADDOPTS",
+    "-u",
+    "RCC_RELOAD_PRIVATE_MUTANT",
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "120s",
+    "/workspace/engineering/pr308/action_server/.venv/bin/python",
+    "-m",
+    "pytest",
+    "--noconftest",
+    "-n0",
+    "-q",
+    "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/test_current_managed_reload_sqlite_pool_barriers.py",
+    "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-1/baseline/basetemp",
+    "-o",
+    "tmp_path_retention_policy=all",
+    "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-1/baseline/pytest-logging",
+    "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-1/baseline/original-junit.xml",
+    "--tb=short"
+  ],
+  "managed_activation": "Same frozen18exports plus PATH primary/workspace/actions-cloud/bin then verified cached Toolkit c2fd1aa bin; real pinnedRCC/Poetry search identity and ownRuntime prefix/origin validated first. No installer/RCC gateway/native in the test invocation.",
+  "guards": "Before and always-post exact current1440 Git/FS/body/executable/HEADtree, old237 immutable path+SHA/historicalalias refs/native1192/prepared30+own5/temporalshared2. New generated outputs isolated; all originals preserved.",
+  "root_namespace": "Exclusive0700 ownedroot must be ABSENT; each separate phase has new absolute ABSENT basetemp+logger/XML and0600 raw stdout/stderr/terminal/JUnit retained before admission assertions. RetentionALL. Reject inheritedADDOPTS/optimization/unknownmutant before admission.",
+  "sequence": "Unmodified nine-baseline first allPASS0F0E0SKIP. Then only exact matching allowlisted mutant+selected test per separate once phase. RED requires the selected ordering/lastgood assertion fails with0ERROR after one-seam gate; hitsassertion/collection/import failures are not intendedRED. Restore/no-mutant ownGREEN phase and complete original source+always-post guards. Stop unexpected failure; no automatic retries or unknown mutant fallbacks.",
+  "case_map": [
+    {
+      "expected_RED": "EXACT_ONE_SELECTED_TEST_MUST_FAIL_ITS_ORDERING_OR_LAST_GOOD_ASSERTION",
+      "mutant": "prepare_under_writer",
+      "mutation": "one declared AST statement/seam in actual current function, monkeypatch restored",
+      "native": "NOT_RUN",
+      "original_current_source_baseline": "MUST_PASS_FIRST",
+      "test": "test_candidate_preparation_precedes_real_sqlite_writer"
+    },
+    {
+      "expected_RED": "EXACT_ONE_SELECTED_TEST_MUST_FAIL_ITS_ORDERING_OR_LAST_GOOD_ASSERTION",
+      "mutant": "publish_before_commit",
+      "mutation": "one declared AST statement/seam in actual current function, monkeypatch restored",
+      "native": "NOT_RUN",
+      "original_current_source_baseline": "MUST_PASS_FIRST",
+      "test": "test_publication_follows_actual_sqlite_commit"
+    },
+    {
+      "expected_RED": "EXACT_ONE_SELECTED_TEST_MUST_FAIL_ITS_ORDERING_OR_LAST_GOOD_ASSERTION",
+      "mutant": "publish_staged_routes",
+      "mutation": "one declared AST statement/seam in actual current function, monkeypatch restored",
+      "native": "NOT_RUN",
+      "original_current_source_baseline": "MUST_PASS_FIRST",
+      "test": "test_staged_pool_keeps_original_routes_until_commit"
+    },
+    {
+      "expected_RED": "EXACT_ONE_SELECTED_TEST_MUST_FAIL_ITS_ORDERING_OR_LAST_GOOD_ASSERTION",
+      "mutant": "omit_idle_restore",
+      "mutation": "one declared AST statement/seam in actual current function, monkeypatch restored",
+      "native": "NOT_RUN",
+      "original_current_source_baseline": "MUST_PASS_FIRST",
+      "test": "test_failed_warmup_restores_original_idle_and_catalog"
+    },
+    {
+      "expected_RED": "EXACT_ONE_SELECTED_TEST_MUST_FAIL_ITS_ORDERING_OR_LAST_GOOD_ASSERTION",
+      "mutant": "omit_restore_token",
+      "mutation": "one declared AST statement/seam in actual current function, monkeypatch restored",
+      "native": "NOT_RUN",
+      "original_current_source_baseline": "MUST_PASS_FIRST",
+      "test": "test_actual_commit_failure_restores_original_generation_token"
+    },
+    {
+      "expected_RED": "EXACT_ONE_SELECTED_TEST_MUST_FAIL_ITS_ORDERING_OR_LAST_GOOD_ASSERTION",
+      "mutant": "keep_old_reusable",
+      "mutation": "one declared AST statement/seam in actual current function, monkeypatch restored",
+      "native": "NOT_RUN",
+      "original_current_source_baseline": "MUST_PASS_FIRST",
+      "test": "test_running_old_handle_drains_only_after_new_publication"
+    },
+    {
+      "expected_RED": "EXACT_ONE_SELECTED_TEST_MUST_FAIL_ITS_ORDERING_OR_LAST_GOOD_ASSERTION",
+      "mutant": "early_generation",
+      "mutation": "one declared AST statement/seam in actual current function, monkeypatch restored",
+      "native": "NOT_RUN",
+      "original_current_source_baseline": "MUST_PASS_FIRST",
+      "test": "test_candidate_warmup_precedes_generation_switch"
+    },
+    {
+      "expected_RED": "EXACT_ONE_SELECTED_TEST_MUST_FAIL_ITS_ORDERING_OR_LAST_GOOD_ASSERTION",
+      "mutant": "omit_candidate_cleanup",
+      "mutation": "one declared AST statement/seam in actual current function, monkeypatch restored",
+      "native": "NOT_RUN",
+      "original_current_source_baseline": "MUST_PASS_FIRST",
+      "test": "test_rejected_candidate_cleanup_preserves_last_good"
+    },
+    {
+      "expected_RED": "EXACT_ONE_SELECTED_TEST_MUST_FAIL_ITS_ORDERING_OR_LAST_GOOD_ASSERTION",
+      "mutant": "omit_repaired_publish",
+      "mutation": "one declared AST statement/seam in actual current function, monkeypatch restored",
+      "native": "NOT_RUN",
+      "original_current_source_baseline": "MUST_PASS_FIRST",
+      "test": "test_repaired_candidate_publishes_without_admitting_failed_generation"
+    }
+  ],
+  "limits": "Root serialization AFTER active native/gateway terminal;120TERM+10 each explicitly admitted selected phase; root separately adopts this hash-bound contract. No sourceFULL/native/provider/browser or TMPfloor invented.",
+  "scope": "Service-free actual SQLite/import/routes/pool on_reload algorithms only; synthetic worker/thread handles, no real Runtime Action/lease/reaping/provider recovery or source application."
+}

@@ -1,0 +1,140 @@
+{
+  "status": "PRIVATE_CURRENT8D49_V8_FOUR_MODULE_CONTENT_ONLY_NOT_EXECUTABLE_CONFIG",
+  "source": {
+    "commit": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+    "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+    "complete_typed_source": 1440
+  },
+  "modules": [
+    {
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-content-preparation/actual_transport_v8.py",
+      "bytes": 26218,
+      "sha256": "7b7948fd86b260cd338aa077a4c9d7acf62ef6fcc22a38d115bd02ba40a63604",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-content-preparation/owned_cache_policy_v8.py",
+      "bytes": 6228,
+      "sha256": "4ccac4e3bd2c1e91352ef4e647968b4ca61f8691e1fc0f41e72a128a2942c205",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-content-preparation/fixture_records_v8.py",
+      "bytes": 11489,
+      "sha256": "7a63ee62184ea268dead0c98460c6943ebc297816e9a4df180b10ed5e04b9064",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-content-preparation/historical_binding_current8d49_v8.py",
+      "bytes": 3115,
+      "sha256": "b83a8d625ec08d8dbae9862a9ab34f3a4b5856594fba10dd3468b58b2cca8165",
+      "mode": "0o444"
+    }
+  ],
+  "original_source_only_owner": {
+    "path": "/workspace/engineering/rcc-current396925-private-V8-source-only/OWNERFINAL-private-current396925-V8-minimal-mode-and-source-context-SOURCE_ONLY-v2.json",
+    "bytes": 16930,
+    "sha256": "db4d3729943cd7c71ada8e1b0430bf61886a5ad8522ff076a8cf525e63e9dd06",
+    "mode": "0o400"
+  },
+  "original_source_only_independent": {
+    "path": "/workspace/engineering/rcc-current396925-private-V8-independent-source-review/OWNERFINAL-independent-private-current396925-V8-source-only-review.json",
+    "bytes": 6813,
+    "sha256": "8ac3aed11e1efe07c6859bcf29171c38925b6d8657a8fc2ff17b02db4d78eb2c",
+    "mode": "0o400"
+  },
+  "current_LIGHT": {
+    "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/OWNERFINAL-current8d49-configured-SOURCE_LIGHT-PASS.json",
+    "bytes": 7674,
+    "sha256": "d7f23a52d044195187992aeac80e692429e1a1a4af16ee9b37f1971cfbdc4104",
+    "mode": "0o400"
+  },
+  "current_FULL_PREP_only": {
+    "path": "/workspace/engineering/pr308-current8d49-SOURCEFULL-preexecution/OWNERFINAL-current8d49-configured-SOURCEFULL-preexecution-proposal.json",
+    "bytes": 6854,
+    "sha256": "7f83f654d3a69adfbd654a958d8486cc5fc2e7f1bed89e5a89d17227ef9839fd",
+    "mode": "0o400"
+  },
+  "current_SOURCEFULL": {
+    "status": "NOT_RUN",
+    "owner": null,
+    "independent": null
+  },
+  "actual_config": "NOT_CONSTRUCTED",
+  "source_inventory": {
+    "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/private-current8d49-source-body-mode-inventory-v3.json",
+    "bytes": 378602,
+    "sha256": "9843e9035fd7bfdf9577b9ba08f108365fbbc336ca00337f99328599b6204677",
+    "mode": "0o400"
+  },
+  "source_guard_change": "Complete 1440 Git path/mode/object and Gitbody SHA256 plus FSbody/modes; current sourcehead/tree exact; prior sourcecount1423 not reused.",
+  "old_AST_preservation": {
+    "changed_transport_functions": [
+      "read_bound",
+      "main"
+    ],
+    "all_other_functions_classes": [
+      "selected_binary",
+      "content_sha",
+      "private_write",
+      "FiniteSampler",
+      "original_helper_facts",
+      "make_safe_result",
+      "require_transport_binding",
+      "execute_one",
+      "_require_original_release",
+      "require_release",
+      "owned_bytes",
+      "load_helper"
+    ],
+    "budgets_sampler_original_helper_calls": "UNCHANGED",
+    "cache_policy": "ONLY control3 freshROOTS suffix-3; accepted700/750 sameUID/GID/nochmod retained",
+    "fixture_records": "EXACT_ACCEPTED_V8_RAW_AND_TYPED_ADMISSION_BYTES_NO_NEW_WAIVER"
+  },
+  "source_independent_review": "Current LIGHTindb0d1 received; exact binding filled by qualified constructor only after FULL",
+  "qualified_current_fields": "Remain null/NOTRUN; no SOURCE_ONLY172 or old current396/e4 FULL reused as actualqualification",
+  "historical": {
+    "rows": 237,
+    "native": 1192,
+    "prepared": 30,
+    "own_origins": 5,
+    "8dc_alias": "Original exactFAIL archive resolver unchanged",
+    "dd091_alias": "Exact ce145 mapping/old index stream hashes; only authorizedphysicalarchive route; noomit/recreate",
+    "old_failures": "UNCHANGED"
+  },
+  "native_once_contract": {
+    "first_control3_root": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-owned-pkgs-3",
+    "must_be_absent": true,
+    "version_order": [
+      "control3",
+      "released5",
+      "candidate7276"
+    ],
+    "same_source_predecessor_PASS": "REQUIRED_FOR_EACH_NEXT_VERSION",
+    "qualified_current_FULL_and_independent": "REQUIRED",
+    "distinct_config_independent_and_ROOT_one_release": "REQUIRED",
+    "automatic_loop_retry": "FORBIDDEN",
+    "budgets": [
+      600,
+      10,
+      645,
+      660,
+      10
+    ],
+    "outer_whole": 900,
+    "pre_post_each": 120,
+    "dev_shm_floor": 3865470567,
+    "operational_stop_GiB": "2.35",
+    "internal_readers": "NULL_UNKNOWN_HOLD"
+  },
+  "tests": "NOT_RUN_current_content_changes; accepted172prototype controls remain historicalsourceonly; new alias/count controls required before executable config review",
+  "native": "NOT_RUN",
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md integrated startup four-line probe boundary; existing Runtime configured formatter paragraph verified reuse; accepted explicit basetemp/ALL and disjoint generator union patches retained for root integration",
+    "durable_learning_captured": "Default approved compatibility routes now preserve10s probe instead of general900s command runner; configured formatter gate is independent; each pytest needs initially absent isolated basetemp+ALL.",
+    "evidence": "Current7 permanent startup controls included in275-case scoped XML, configured Ruff317 and actualsourcebeforeafter; old095 formatFAIL immutable.",
+    "stale_or_ambiguous_guidance_removed": "Default compatibility location/version routes no longer silently use900s probe; Black-only evidence is not configured Ruff acceptance.",
+    "remaining_uncertainty": "CurrentSOURCEFULL and fresh3/5/7276 realfunctionality remain unqualified; private01f/frozen-v6 missing."
+  },
+  "upstream_disposition": "none; RCC125/118 draft only unsent"
+}

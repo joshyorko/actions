@@ -1,0 +1,58 @@
+{
+  "all8_roundtrip": true,
+  "all_unrelated_ast_sections_unchanged": true,
+  "changed_generator_ast_sections_from_f506": [
+    "ActionServerFrozenCatalogRollback"
+  ],
+  "generated_targets": [
+    {
+      "path": "actions_runtime_tests.yml",
+      "roundtrip": true,
+      "sha256": "9e6a7753bea73c5bd8f56caf9516fffc61768d0c719e445a1dc8808be5d65ab4",
+      "unchanged_from_f506": true
+    },
+    {
+      "path": "actions_runtime_rcc_provider_rollback.yml",
+      "roundtrip": true,
+      "sha256": "066adce2531a5223720661afce2f6485d7493243c10156eb1d84e624e252ac92",
+      "unchanged_from_f506": true
+    },
+    {
+      "path": "actions_runtime_frozen_catalog_rollback.yml",
+      "roundtrip": true,
+      "sha256": "aabf25267c48b9d361f4d575a332a9f7bdddc4c5d1f3ce4ff5ac151c98d36140",
+      "unchanged_from_f506": false
+    },
+    {
+      "path": "actions_core_tests.yml",
+      "roundtrip": true,
+      "sha256": "d9e1c8884b4321024b2f785e6b01af655e1da0be4a1f45572f51a7ef1d64b296",
+      "unchanged_from_f506": true
+    },
+    {
+      "path": "http_helper_tests.yml",
+      "roundtrip": true,
+      "sha256": "32496dddc278173c3d51387d7e3221d5a8b61d62ecb55b0c7538145f692f81d8",
+      "unchanged_from_f506": true
+    },
+    {
+      "path": "actions_runtime_pypi_release.yml",
+      "roundtrip": true,
+      "sha256": "c22ee0ead9d01ef08169c3d9e329c9c17b9bcdb29a9fce969f16846f88d0347f",
+      "unchanged_from_f506": true
+    },
+    {
+      "path": "actions_runtime_binary_release.yml",
+      "roundtrip": true,
+      "sha256": "bc9d5abf00cae45a622f03bbef0adf089c8e08fd6ac2d6d1d70cbc5ad4a0dd64",
+      "unchanged_from_f506": true
+    },
+    {
+      "path": "actions_runtime_recovery.yml",
+      "roundtrip": true,
+      "sha256": "d45d82ae617e8af5e6ac06bf80afac45f814ccc4f8cbe2203ed49891b0a7843f",
+      "unchanged_from_f506": true
+    }
+  ],
+  "unrelated7_outputs_unchanged": true
+}

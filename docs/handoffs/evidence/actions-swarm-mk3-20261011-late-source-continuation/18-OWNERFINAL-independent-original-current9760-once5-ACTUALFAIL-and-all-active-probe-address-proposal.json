@@ -1,0 +1,371 @@
+{
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md, executable selected-address closure section",
+    "Durable learning captured": "Validate output addresses selected by every executable config field, not only the launcher's CONFIG filename and attempt root. A cloned generator/origin probe may retain a prior attempt's output literals even when all current source and immutable input hashes match. Bind output bases to the fresh current phase directories; keep historical read-only input addresses unchanged. Inspect nested Python code strings as well as outer code. Retain a failure that occurs before generator execution as an executor address failure, not a generated-workflow mismatch. Before claiming historical outputs were preserved, require a recorded body baseline; successful guards protect only the rows they actually checked.",
+    "Evidence": [
+      {
+        "bytes": 1915,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/generated-eight-and-Github30/terminal.json",
+        "sha256": "fba198feb4d347ee9fc9efff7536ac5222fb288630582b1ff1a50969d4dcb0ac"
+      },
+      {
+        "bytes": 5694,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/generated-eight-and-Github30/stderr.bin",
+        "sha256": "b5dd47a040cd844bcbd86ad626f76239b86542e662622dc0a2a7670702e6d445"
+      },
+      {
+        "bytes": 67720,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr307-current9760-token-light-once5-namespace-base-PREEXECUTION-NOTRUN/immutable-one-TOKEN-LIGHT-once5-inputs.json",
+        "sha256": "15a0b35a676fe4ee29781546fe0a7a8a362b19adaac11ffba0a4dfe9220d3f6c"
+      },
+      {
+        "bytes": 16159,
+        "mode": "0o444",
+        "path": "/workspace/engineering/pr307-current9760-token-light-once5-namespace-base-PREEXECUTION-NOTRUN/launch_one_owned_token_light_once5_command_local_namespace_base.py",
+        "sha256": "fb82ab296ae98cb555f4b4ba9523107ad04771cecfde05f1bb14a70667f85f77"
+      }
+    ],
+    "Exact proposed delta": {
+      "bytes": 707,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current9760-once5-ACTUALFAIL-independent-review/canonical-executable-probe-output-address-and-historical-guard-scope-proposed.txt",
+      "sha256": "af6262d886c776df70b8252bd51d0bc9d04d8129dbd9cd75c2ba2a0855bc9b7b"
+    },
+    "Remaining uncertainty": "No corrected generator or Invoke execution; old six origin-report original body baseline not established here, final cleanup unknown, FULL/native/OAuth/release remain HOLD.",
+    "Stale or ambiguous guidance removed": "Outer CONFIG/self/source hash closure is insufficient for embedded executable output addresses. Historical inputs and active old output literals must be classified separately; ROOT guard success is scoped to actual rows."
+  },
+  "ROOT_owner_binding": {
+    "bytes": 1192,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-pr307-current9760-reviewed-token-light-once5-outer/OWNERFINAL-root-one-original-reviewed-current9760-token-light-once5-outer.json",
+    "sha256": "61c8df297f7034b925a491164bd4d60c030362456b73a7fa9cc0340594bc214e"
+  },
+  "Upstream disposition": "none",
+  "additional_consumed_output_address_audit": {
+    "controlled_Invoke": "Consumes current ATTEMPT/controlled-invoke argv; fixed /pr307-guard-owned/outer_invoke_no_yaml.py is read-only helper input. No stale output root found there by source inspection.",
+    "generator_probe_code": "Three stale executable addresses for generated directory/eight result/YAML30 result under prior once2 phase",
+    "historical_origin_guard_scope": [
+      "terminal.json",
+      "stdout.bin",
+      "stderr.bin"
+    ],
+    "origin_probe_code": "One active stale base writes five package reports and all-five.json under prior once2/own-five-origins; original current phase did execute normally",
+    "review_gap": "Previous PREEXEC inverse-launcher proof preserved embedded config probes and failed to validate all active output addresses; explicitly retained as later discovered admission gap. Source application and original failures remain untouched.",
+    "six_current_old_namespace_report_bindings": [
+      {
+        "bytes": 218,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/own-five-origins/actions.json",
+        "sha256": "42336ec5c1b63031e148d08aa1a467f3439508a32f66bff66531c01b0cd7210d"
+      },
+      {
+        "bytes": 264,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/own-five-origins/actions-http-helper.json",
+        "sha256": "6b5286734cd83969928fb3eb7fec3fcfd7c3e0ff92d5d8c87df3b6a1467eec42"
+      },
+      {
+        "bytes": 240,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/own-five-origins/devutils.json",
+        "sha256": "92cdd449b4fa1e3f5350e11c6aa8499acae8984af6107cf23049ae29e3faa746"
+      },
+      {
+        "bytes": 249,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/own-five-origins/work-items.json",
+        "sha256": "067864f011c9ba76ddcbe875e908248fd84497acb4ec9a79333f284a5eb93dd1"
+      },
+      {
+        "bytes": 250,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/own-five-origins/action_server.json",
+        "sha256": "53a48aef7b0ba0d6ab4025edadec995fd7a89ad9599eb590944e5dc5264c4d0d"
+      },
+      {
+        "bytes": 1344,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/own-five-origins/all-five.json",
+        "sha256": "a11e6e4173bd0f361f8818f09e4e17cba06fd81b3b6ee58de204f137562ef755"
+      }
+    ],
+    "six_original_report_body_preservation": "UNKNOWN unless a retained pre-once5 exact body/hash baseline is supplied; current hashes alone do not prove original baseline. No corruption claim."
+  },
+  "configured_static_original": "PASS gateway0; Runtime typing354/helper1/Devutils7, Devutils Ruff/format20/Isort all pass. No further Mypy errors observed.",
+  "decision": "HOLD_CURRENT_TOKENLIGHT_SOURCE_PUSH_FULL_NATIVE_CONTENT",
+  "minimal_named_private_once6_proposal": {
+    "application_source_delta": "NONE, source9760 remains unchanged",
+    "config_delta": "Retarget generator_probe_code three active output literals AND origin_probe_code one active report base to distinct current once6 phase dirs. Historical source/input/binding addresses remain immutable. Retarget the wrapper/config/self/release/attempt literals consistently.",
+    "next_execution": "Separate frozen owner/independent PREEXEC/current closure then distinct ROOT once6 release; no automatic retry. Any generation mismatch/type/Invoke failure remains FAIL.",
+    "no_acceptance_upgrade": "No sourceFULL/native/OAuth content/currentCI/release or public generator change admitted",
+    "physical_readiness": "run_phase must create current phase parent before probe executes; fresh generated child ABSENT, current own-five report outputs ABSENT. Statically extract all executable and nested-code output addresses and verify exact current namespace/parent creation proof before ROOT release.",
+    "scope_proof": "After declared four code-output literal changes and fresh addresses, inverse whole executable code and launcher text/AST equal accepted once5; same commands/flags, MYPYPATH correction, budgets, predicates, source/current30/ownfive and old raw originals. No mkdir/backfill under old once2."
+  },
+  "operations": "Read-only original stdlib AST/XML/body/hash/source inspection, no tests/imports/generator/typecheck/helper execution/source/environment repair/backfill/download/push/merge.",
+  "original_completed_censuses": {
+    "guard-focus": {
+      "errors": 0,
+      "failures": 0,
+      "gateway_returncode": 0,
+      "passed": 41,
+      "skips": 0,
+      "unique_cases": 41
+    },
+    "token-RED-parent2314": {
+      "errors": 0,
+      "failures": 2,
+      "gateway_returncode": 10,
+      "passed": 0,
+      "skips": 0,
+      "unique_cases": 2
+    },
+    "token-release-line-GREEN": {
+      "errors": 0,
+      "failures": 0,
+      "gateway_returncode": 0,
+      "passed": 99,
+      "skips": 0,
+      "unique_cases": 99
+    },
+    "toolkit": {
+      "errors": 0,
+      "failures": 0,
+      "gateway_returncode": 0,
+      "passed": 179,
+      "skips": 0,
+      "unique_cases": 179
+    }
+  },
+  "original_evidence_bindings": [
+    {
+      "bytes": 1192,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-pr307-current9760-reviewed-token-light-once5-outer/OWNERFINAL-root-one-original-reviewed-current9760-token-light-once5-outer.json",
+      "sha256": "61c8df297f7034b925a491164bd4d60c030362456b73a7fa9cc0340594bc214e"
+    },
+    {
+      "bytes": 279,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/original-terminal.json",
+      "sha256": "00d10dd81a6d383ef325ecd3c3541d53eae519e93a7ac29135e37f9e13860853"
+    },
+    {
+      "bytes": 682,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-namespace-base-PREEXECUTION-NOTRUN/root-one-TOKEN-LIGHT-once5-release.json",
+      "sha256": "caaeff571e25db5174bd431e5844c16dcf5a9494869e6e7c36df1e7801c9c1a7"
+    },
+    {
+      "bytes": 10857,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current9760-private-once5-independent-SOURCE-PREEXEC-review/OWNERFINAL-independent-current9760-private-once5-single-Mypy-base-SOURCE-and-PREEXECUTION-GO.json",
+      "sha256": "9fb52068671f163f66861472484875bb991f42fb57faff6833b94606fbdaf6d7"
+    },
+    {
+      "bytes": 30055,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/toolkit/junit.xml",
+      "sha256": "cce67a87225a40d8a60397806744fe3c97600f449344a26d388a23ea236ed991"
+    },
+    {
+      "bytes": 441,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/toolkit/terminal.json",
+      "sha256": "9f41c9b97498fcf8d5f69d96c3577a82ebce72e1257c8141a00dd9598aa7e371"
+    },
+    {
+      "bytes": 1460,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/toolkit/stdout.bin",
+      "sha256": "28dff6f198a4d9f57d0842d2129f0dd491ff0ef0a2030cc32cf4a30f4ed425f4"
+    },
+    {
+      "bytes": 13154,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/toolkit/stderr.bin",
+      "sha256": "1c677225f390a931b444e496a673de134eaf8f55614a2730eafc4e56b3388d6a"
+    },
+    {
+      "bytes": 4496,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/token-RED-parent2314/junit.xml",
+      "sha256": "71fe66aeffeb36a3d2671be4eb1cafd9fe044a672942d29aa398acdbc5908a7e"
+    },
+    {
+      "bytes": 679,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/token-RED-parent2314/terminal.json",
+      "sha256": "3ac03208b1e0925b2225831c9eebf00f444961300fcf8cf1819e34f2a097e742"
+    },
+    {
+      "bytes": 5433,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/token-RED-parent2314/stdout.bin",
+      "sha256": "d7fbb298d0cf4caefb2b6692ac9cfb5035b217c56ae785dffdb97897c695a413"
+    },
+    {
+      "bytes": 4849,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/token-RED-parent2314/stderr.bin",
+      "sha256": "7f469def80f1c147f63d9671e661ad58fabb643f87e0f3292114e3d75f5e4a12"
+    },
+    {
+      "bytes": 16357,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/token-release-line-GREEN/junit.xml",
+      "sha256": "4295575d000256c4442113694275d24c0f31efb7ff319eea9423c67de26fbfb6"
+    },
+    {
+      "bytes": 650,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/token-release-line-GREEN/terminal.json",
+      "sha256": "b5f6fd04c5cd1d4c2a896e728765c1a1efd35e9a6d4cc54c0c2b13970db46211"
+    },
+    {
+      "bytes": 13993,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/token-release-line-GREEN/stdout.bin",
+      "sha256": "d6c4b5d9e6daddfd95e2dbc62a89259c7c30e52c5da77d76173f8daa4589cd03"
+    },
+    {
+      "bytes": 3524,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/token-release-line-GREEN/stderr.bin",
+      "sha256": "f240fd9062096fd1d55d6e29b38002fd5cb5881ac7ed122f6f4df760ec5a8022"
+    },
+    {
+      "bytes": 6813,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/guard-focus/junit.xml",
+      "sha256": "0cd2263588dc17fb6d04057a9f01c53aeb5d56be47e1a0bf2cb6b15f3f3ff0f4"
+    },
+    {
+      "bytes": 620,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/guard-focus/terminal.json",
+      "sha256": "889f9eb4ebd4a24854ca1450b85f64484b2fa0d14913f9ac99b466a9001d4871"
+    },
+    {
+      "bytes": 6272,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/guard-focus/stdout.bin",
+      "sha256": "4d34b89e0a3c365a2069d3a4b9a7e0ef723c68c5f14029ce89bd9a7bb75ac1a7"
+    },
+    {
+      "bytes": 3522,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/guard-focus/stderr.bin",
+      "sha256": "9880d519639eb350ede64ab84d18c17b4f37d793cb2d157c36448aa97a9889d3"
+    },
+    {
+      "bytes": 1528,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/configured-static/terminal.json",
+      "sha256": "eebaa740cfed9846b507fd7ad150e59ffbb9630f28a4015731e5e3043334db9c"
+    },
+    {
+      "bytes": 3125,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/configured-static/stdout.bin",
+      "sha256": "979d29317295b07928ac45d7951dd69293bd2e80bf7a780cbd58f263d98e0b4a"
+    },
+    {
+      "bytes": 3524,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/configured-static/stderr.bin",
+      "sha256": "16b722e4a2761801264fe2cbdf04418c441faad9bce8141d7015823a337bf260"
+    },
+    {
+      "bytes": 1915,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/generated-eight-and-Github30/terminal.json",
+      "sha256": "fba198feb4d347ee9fc9efff7536ac5222fb288630582b1ff1a50969d4dcb0ac"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/generated-eight-and-Github30/stdout.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 5694,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/generated-eight-and-Github30/stderr.bin",
+      "sha256": "b5dd47a040cd844bcbd86ad626f76239b86542e662622dc0a2a7670702e6d445"
+    },
+    {
+      "bytes": 1567,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/own-five-origins/terminal.json",
+      "sha256": "0a8278d8834fee62bf9b6e86c82106ca0205ba515d9078df46c5b6841487566d"
+    },
+    {
+      "bytes": 3192,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/own-five-origins/stdout.bin",
+      "sha256": "18a3491fc5e3200275e08fd82edc0ed984aac30bbf35a5f83b7ef7e2bb237ad8"
+    },
+    {
+      "bytes": 3523,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/own-five-origins/stderr.bin",
+      "sha256": "a7c2e1595ff245e6dc9e9f75a2d15dd85b356be5cb092d19e88a8b3c806b8aae"
+    }
+  ],
+  "outer_elapsed_seconds": 110.62015221000183,
+  "outer_returncode": 1,
+  "primary_failure": {
+    "actual_command_equals_consumed_config_generator_code": true,
+    "before_generator_execution": true,
+    "checked_inner_returncode": "No separate checked subprocess exit status in exception; direct RCC Python script exception",
+    "controlled_Invoke": "NOT_RUN",
+    "final_reader_descendant_cleanup": "UNKNOWN",
+    "gateway_returncode": 10,
+    "generated_eight_or_YAML30_acceptance": "NOT_RUN; no original current result inventories",
+    "inner_exception": "FileNotFoundError errno2 from pathlib.mkdir",
+    "missing_output": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/generated-eight-and-Github30/generated",
+    "original_stdout_bytes": 0,
+    "phase": "generated-eight-and-Github30"
+  },
+  "schema": 1,
+  "source": "9760d5ec44876558c4941c4c3190abc8d92d14a1",
+  "source_preservation": {
+    "ROOT_external_before_alwayspost_exact_row_count": 233,
+    "clean_current_Git_FS_body_exec_modes": 1442,
+    "current30_inputs": 30,
+    "current_consumed_bindings": 225,
+    "guard_bindings": [
+      {
+        "bytes": 230,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/before-guard.json",
+        "sha256": "7e1a9621c8d2d68b43e0c8a6d622f84d84e6e6079b725d31844da8f4b11b8052"
+      },
+      {
+        "bytes": 230,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-token-light-once5-owned/always-post-guard.json",
+        "sha256": "7e1a9621c8d2d68b43e0c8a6d622f84d84e6e6079b725d31844da8f4b11b8052"
+      },
+      {
+        "bytes": 923,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-pr307-current9760-reviewed-token-light-once5-outer/external-before-envelope.json",
+        "sha256": "cc5d3a63936b723af1cbdf7c0d349a06a490583231cddb2879c030c091dbcd15"
+      },
+      {
+        "bytes": 923,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-pr307-current9760-reviewed-token-light-once5-outer/external-always-post-envelope.json",
+        "sha256": "cc5d3a63936b723af1cbdf7c0d349a06a490583231cddb2879c030c091dbcd15"
+      }
+    ],
+    "own_five_configs": 5,
+    "retained_originals": 212
+  },
+  "status": "INDEPENDENT_ORIGINAL_CURRENT9760_ONCE5_ACTUALFAIL_OUTPUT_ADDRESS_CONFIRMED",
+  "tree": "0d33ebaac258e069ef7045a29b4a3904740f6307"
+}

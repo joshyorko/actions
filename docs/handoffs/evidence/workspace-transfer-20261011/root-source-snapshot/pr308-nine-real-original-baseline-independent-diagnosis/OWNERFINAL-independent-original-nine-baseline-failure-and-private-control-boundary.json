@@ -1,0 +1,372 @@
+{
+  "actual_guard_facts": {
+    "always_post_returncode": 0,
+    "before_returncode": 0,
+    "guard_preservation_scope": "INHERITED_EXACT_CURRENT1440_237_ALIASES_NATIVE1192_PREPARED30_OWN5_TEMPORAL2_ASSERTIONS_PASSED; no independent replay",
+    "own_origin_returncodes": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "source_clean_exact_HEAD_tree": true
+  },
+  "capture": "2026-10-11T20:39:45.252888+00:00",
+  "current_code_bindings": [
+    {
+      "bytes": 35232,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_server.py",
+      "sha256": "0954b062ba7931609dddfd8b1f068dbac83967691e1194b6ac250a51befa20ff"
+    },
+    {
+      "bytes": 58538,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_actions_process_pool.py",
+      "sha256": "3552bf39d0dc93f94ed3a4ab056de870ae460ed709f36d3d3a37dc043c349da8"
+    },
+    {
+      "bytes": 27408,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/mcp/setup_mcp_server_v2.py",
+      "sha256": "953c99a1c67cb8cc508bd0079fb0869161b5f9192a724964562e90f34254701b"
+    },
+    {
+      "bytes": 28217,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_actions_import.py",
+      "sha256": "57ad235e30fdd84c763f84efd7ccdd8514d620d5b5cfff05ac1051f60ceefad3"
+    },
+    {
+      "bytes": 43896,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_database.py",
+      "sha256": "5d3776fb85a36604b5c9dbc2c2169ee2770734330fea90ceda507515e4fc4638"
+    }
+  ],
+  "decision": "HOLD_ORIGINAL_NINE_BASELINE_FAILED_PRIVATE_HARNESS_CORRECTION_REQUIRED",
+  "diagnosis": {
+    "case_7": "Original logger enters warmup then private check and stops without ET. Static exact callback accesses lock-taking generation while on_reload holds the same nonreentrant threading.Lock. This private seam reenters the lock; no native/product deadlock claim.",
+    "cases_4_5": "Both original failure tracebacks identify only assert_last_good line159 outer catalog object-is predicate. Product rollback copies helper private values, including _catalog; copied wrapper is supported by implementation. Earlier logical DB/action/pool/token/router predicates in assert_last_good completed before this assertion. Full catalog integrity has not yet passed a corrected oracle.",
+    "cleanup": "Process/reader/reaping details NOT_RECORDED; source after-guard success is not universal process cleanup evidence",
+    "product_bug": "NOT_ESTABLISHED"
+  },
+  "original_child_binding": {
+    "bytes": 1557,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-1/OWNERFINAL-root-one-original-nine-real-source-baseline.json",
+    "sha256": "ccb0d3e1151a2b0cb4359c3ec3b6374c3684779e7724d96bd6ab735894dcea57"
+  },
+  "original_outer_binding": {
+    "bytes": 566,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-current8d49-nine-real-baseline-original-outer-once/OWNERFINAL-root-one-original-nine-real-baseline-outer.json",
+    "sha256": "1a5b2421f524a53c182b2e9f3fd9a7caeac1501930a09d49d45ab37cf1b88c8d"
+  },
+  "original_prepared_bindings": [
+    {
+      "bytes": 28217,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_actions_import.py",
+      "sha256": "57ad235e30fdd84c763f84efd7ccdd8514d620d5b5cfff05ac1051f60ceefad3"
+    },
+    {
+      "bytes": 58538,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_actions_process_pool.py",
+      "sha256": "3552bf39d0dc93f94ed3a4ab056de870ae460ed709f36d3d3a37dc043c349da8"
+    },
+    {
+      "bytes": 36123,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "sha256": "c1884571a572277beef50e359f8b5e71abf593e1ebdee4bea2e47290c8da81f2"
+    },
+    {
+      "bytes": 35232,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_server.py",
+      "sha256": "0954b062ba7931609dddfd8b1f068dbac83967691e1194b6ac250a51befa20ff"
+    },
+    {
+      "bytes": 10038,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-independent-SOURCEFULL-actual-review/OWNERFINAL-independent-current8d49-original-configured-SOURCEFULL-and-retained-ROOTpost-supplement-review.json",
+      "sha256": "073e235afffab50dee204bcaae236e77ceb8e23644db15a90a0e56d48dc8dca9"
+    },
+    {
+      "bytes": 1021,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/canonical-current-source-reload-drain-transaction-scope-proposed.patch",
+      "sha256": "8354390b30343aa9a57a976aa5244e75068f8c59fc604f074af9e18110743856"
+    },
+    {
+      "bytes": 2698,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/current8d49-original-reload-pool-import-adapter-function-AST-equality-proof.json",
+      "sha256": "ab3c574e6685d227f197017eea5e4bcbfe446fda1e9e87c43e22539de9fdcc80"
+    },
+    {
+      "bytes": 4493,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/nine-real-SQLite-pool-barrier-baseline-and-private-mutant-RED-plan-NOTRUN.json",
+      "sha256": "1c33ec727106e5a3b686571011ab05dbc7259f70bacca773acdf627dd67e0a33"
+    },
+    {
+      "bytes": 1966,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/current8d49-reload-drain-recontext-implementation-and-admission.md",
+      "sha256": "8fd57f9442106b711dc724ee46201cd0b515ce2a8126825d619220a0f263e426"
+    },
+    {
+      "bytes": 24118,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-persistent-two-path-private-recontext/frozen-current8d49-two-path-persistent-fixture-source.patch",
+      "sha256": "ec23125cfcf2ca2af3e1c7e08871bb1f198e0df1db04e9be62d61b89b755b158"
+    },
+    {
+      "bytes": 17155,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-managed-reload-drain-source-packet/OWNERFINAL-current-b614-managed-reload-and-generation-drain-three-path-source-packet.json",
+      "sha256": "5978b9cf33e096f43aaa5d0a0f6b319a68c715ca4085edc5f8ccd71eaa38c1e9"
+    },
+    {
+      "bytes": 10406,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-persistent-recontext-independent-review/OWNERFINAL-independent-private-current8d49-persistent-recontext-SOURCE_ONLY-and-logging-HOLD.json",
+      "sha256": "87ce7c08689988b43a9f563b2a5a26611397e0547694b67f2c9f01d7306cc1af"
+    },
+    {
+      "bytes": 14786,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/test_current_managed_reload_sqlite_pool_barriers.py",
+      "sha256": "c148bd528f8306e638054df91dfbf915022eaf30d3e123ff845adbeae6b209eb"
+    },
+    {
+      "bytes": 99477,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/prospective-current-test_rcc_runtime_adapter-with-nine-servicefree-controls.py",
+      "sha256": "5a87636917a2d555c2e0aa5757336ef0db4c047e2f4777d63442a05c240700f5"
+    }
+  ],
+  "original_result": {
+    "baseline_accepted": false,
+    "baseline_elapsed_seconds": 120.03566774099454,
+    "baseline_returncode": 124,
+    "mutants": "NOT_RUN",
+    "native": "NOT_RUN",
+    "original_junit": "ABSENT",
+    "original_stdout_bytes": 6,
+    "outer_elapsed_seconds": 151.18462107800588,
+    "outer_returncode": 1,
+    "suite_final_counts": "UNAVAILABLE"
+  },
+  "partial_robolog_observations": {
+    "completed_task_records": 6,
+    "completed_task_statuses": [
+      "PASS",
+      "PASS",
+      "PASS",
+      "FAIL",
+      "FAIL",
+      "PASS"
+    ],
+    "last_two": "NO_START_RECORD_OBSERVED",
+    "not_a_final_suite_census": true,
+    "started_tests": 7,
+    "unfinished_seventh": "test_candidate_warmup_precedes_generation_switch"
+  },
+  "private_original_bindings": [
+    {
+      "bytes": 1557,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-1/OWNERFINAL-root-one-original-nine-real-source-baseline.json",
+      "sha256": "ccb0d3e1151a2b0cb4359c3ec3b6374c3684779e7724d96bd6ab735894dcea57"
+    },
+    {
+      "bytes": 566,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-current8d49-nine-real-baseline-original-outer-once/OWNERFINAL-root-one-original-nine-real-baseline-outer.json",
+      "sha256": "1a5b2421f524a53c182b2e9f3fd9a7caeac1501930a09d49d45ab37cf1b88c8d"
+    },
+    {
+      "bytes": 475876,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-1/baseline/pytest-logging/output.robolog",
+      "sha256": "72dab28c27b44d9e1f6d7f996c5543393339d527b38d29eb3f11624612b5dc63"
+    },
+    {
+      "bytes": 6730,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/OWNERFINAL-current8d49-managed-reload-drain-private-source-and-nine-real-controls-PREPARED-NOTRUN.json",
+      "sha256": "faf0d846ba7e1f240dccb1b6e77ccbba23e36379010bf9ab8abf6c4e6221211f"
+    },
+    {
+      "bytes": 6371,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-current8d49-nine-real-baseline-once.py",
+      "sha256": "5ffbdebb3cbd7301e3a1d46255fc42d6fbff63bc03c922ec4b21ba9cb426ad5a"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-1/baseline/always-post.stderr.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 69,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-1/baseline/always-post.stdout.private",
+      "sha256": "0c1f9f5f73680a42a7de5d496fe9ee95e084773e8a37d6d04f37d540575b21bb"
+    },
+    {
+      "bytes": 63,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-1/baseline/always-post.terminal.json",
+      "sha256": "460845fa402d141922ea7f79f40b9c2ebd92a5954e20e26d663d76b2e07ab9d7"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-1/baseline/before.stderr.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 69,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-1/baseline/before.stdout.private",
+      "sha256": "0c1f9f5f73680a42a7de5d496fe9ee95e084773e8a37d6d04f37d540575b21bb"
+    },
+    {
+      "bytes": 63,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-1/baseline/before.terminal.json",
+      "sha256": "cb601862a2f1b3dc100b0d9773aac8a7a31b2e05d656602df12643866c85154c"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-1/baseline/original-nine-baseline.stderr.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 6,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-1/baseline/original-nine-baseline.stdout.private",
+      "sha256": "33c6310e98d4d4a0d50be43d76e4586c8bd6468a3c5730f31d83d692b5fc84c1"
+    },
+    {
+      "bytes": 65,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-1/baseline/original-nine-baseline.terminal.json",
+      "sha256": "f0504e9ce374d63c16414a5449ac6cbab8ea9dabdd3ab46c368b29b586e59f0a"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-1/baseline/own-origin-0.stderr.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-1/baseline/own-origin-0.stdout.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 64,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-1/baseline/own-origin-0.terminal.json",
+      "sha256": "7d7b1c70129a4ba13541d5b33f21600aa7a2cd7db62aea33f5daaa5ba9ed1c7e"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-1/baseline/own-origin-1.stderr.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-1/baseline/own-origin-1.stdout.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 64,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-1/baseline/own-origin-1.terminal.json",
+      "sha256": "3440fa1b6e68a16e7df26f13f39afa5227aa59ad8680e5a9a0fb54a4f4e37838"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-1/baseline/own-origin-2.stderr.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-1/baseline/own-origin-2.stdout.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 64,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-1/baseline/own-origin-2.terminal.json",
+      "sha256": "2a998856114c4a8162f1e81c5ee4bb21bf694696915e2831fc0591975085369f"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-1/baseline/own-origin-3.stderr.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-1/baseline/own-origin-3.stdout.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 64,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-1/baseline/own-origin-3.terminal.json",
+      "sha256": "820471cf000f0db0233b9fc780790b11a31d35b395f011ef58ac8770d918c625"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-1/baseline/own-origin-4.stderr.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-1/baseline/own-origin-4.stdout.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 63,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-1/baseline/own-origin-4.terminal.json",
+      "sha256": "c356f341b6e76c24a8b66490e94141468e86dfea9e0cba2c4a07bcfb0f000eb4"
+    }
+  ],
+  "remaining_uncertainty": [
+    "Corrected baseline and all nine mutants have not run; no acceptance of remaining two cases.",
+    "Last-good nested catalog identity/content requires corrected immutable snapshot control.",
+    "No full integration/native Action/lease/provider proof."
+  ],
+  "safe_trace": {
+    "bytes": 3956,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-nine-real-original-baseline-independent-diagnosis/safe-original-partial-robolog-events.json",
+    "sha256": "26f9ee3213d7b8b6feacc4f4db63a8ff2c53e31875802c6042de3292a280c6cf"
+  },
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_leaves": 1440,
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none"
+}

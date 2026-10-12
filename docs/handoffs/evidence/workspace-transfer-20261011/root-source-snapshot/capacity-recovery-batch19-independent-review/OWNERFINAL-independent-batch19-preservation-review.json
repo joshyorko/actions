@@ -1,0 +1,86 @@
+{
+  "schema": "actions-batch19-independent-preservation-review-v1",
+  "verdict": "GO_SCOPED_RECORDED_ARCHIVE_AND_RETAINED_PRIOR_PRESERVATION_ONLY",
+  "safe_owner": {
+    "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch19.json",
+    "bytes": 1868,
+    "sha256": "6b7998bff1c7c0b2ccada06452c6e7eabae4c20c47b5027331f0b16fbda3377a"
+  },
+  "private_index": {
+    "path": "/dev/shm/actions-completed-scratch-recovery-batch19/private-complete-inventory-and-recovery.json",
+    "bytes": 6599002,
+    "sha256": "51b1311294acdc7dc5d39a1048ee062ab3a881b0757901d2d439d43f50338084"
+  },
+  "actual_algorithm": {
+    "path": "/tmp/actions-capacity-recovery-batch19.py",
+    "bytes": 5244,
+    "sha256": "48fd7e4c79e55b80ceda0b63c1d1da87feeb368cefee265d5c12bad6ad940840"
+  },
+  "algorithm_parent": {
+    "path": "/tmp/actions-capacity-recovery-batch18.py",
+    "sha256": "523906d7aa0ca83f891f7b4f02da4478a5d3e07afa28aa1b038b8e994c468f7f"
+  },
+  "archive": {
+    "path": "/dev/shm/actions-completed-scratch-recovery-batch19/c3b676a701cf3ae2.tar.gz",
+    "bytes": 250545607,
+    "sha256": "f143418555c7ba7c3b9cc657916f59af1fcfc0d855720c908acac4e20759d099"
+  },
+  "counts": {
+    "new_archives": 1,
+    "new_members": 16121,
+    "new_kind_counts": {
+      "file": 12204,
+      "directory": 3427,
+      "symlink": 482,
+      "fifo": 8,
+      "hardlink_headers": 4
+    },
+    "new_logical_file_bytes": 636844131,
+    "prior_archives_hash_size_mode_exact": 39,
+    "prior_indices_hash_size_exact": 18,
+    "cumulative_archives": 40,
+    "cumulative_indices": 19
+  },
+  "verified": {
+    "all_recorded_payload_SHA_size_mode_UID_GID_symlink_and_resolved_hardlink_content": true,
+    "gzip_EOF_CRC_ISIZE": true,
+    "completion_marker_True": true,
+    "private_index0600_parent0700_archive0600": true,
+    "expanded_named_namespace_absent": true,
+    "all16_nonconfig_AST_same_parent_only_DEST_STAGE_NAMES": true,
+    "archive_verification_then_reinventory_then_handle_guard_then_removal_order": true,
+    "original_V5runner09cdc_and_actual16_preexecution153_bindings": true,
+    "failed563d_existence_only": true,
+    "whole_relocated_defaultcache416_current_normalized_bytes_mode_uid_gid_mtime_symlinks_hardlink_partition": true,
+    "source3001423_fs_mode_refs110_inputs30_five_configs_and_helpers0444": true
+  },
+  "limits": [
+    "No extraction/copy/removal/gateway/source edits/native/actual/test/retry performed",
+    "Historical expanded source/pre-removal handle census cannot be replayed; accessiblecwdFD observations exclude permission/transient/maps/externalusers limitations",
+    "No rootmetadata/mtime nanosecond/ACL/xattr/inode equivalence claim for TAR",
+    "No original full-log namespace provenance link supplied; UNREPORTED/no gate upgrade",
+    "Failed563d existence only; no unbaselined contents/current mutable writer inputs qualification",
+    "Capacity observation is no new gate authority; root fresh checks/serialization/distinctrelease required"
+  ],
+  "current_free_bytes_observation": 1252564992,
+  "elapsed_seconds": 13.699,
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md existing exact7d070 paragraph",
+    "Exact_delta_or_reuse": {
+      "path": "/workspace/engineering/capacity-recovery-independent-review/canonical-completed-scratch-preservation-proposed.patch",
+      "bytes": 1068,
+      "sha256": "7d07065b5bb7742698919997c8c6621cc20d00494741eb5365251ffb09f2d208"
+    },
+    "Disposition": "Verified existing accepted paragraph verbatim; no redundant capacity diary delta needed",
+    "Durable_learning_captured": "Preserve complete recorded scratch byte/metadata evidence before exact completed namespace removal, while separating observed handle and gate authority limits.",
+    "Evidence": "16121 streamed members+CRC/EOF; prior39archives18indices; wholecache416 bytes; current3001423/110refs/30inputs; ASTsame16nodes",
+    "Stale_or_ambiguous_guidance_removed": "No preservation result recast as native gate, historical process census or missing full-log provenance qualification.",
+    "Remaining_uncertainty": "Historical handles and TAR unrecorded metadata/provenance remain unqualified; separate futuregate authority required"
+  },
+  "Upstream_disposition": "none",
+  "constructor": {
+    "path": "/workspace/engineering/capacity-recovery-batch19-independent-review/verify-readonly.py",
+    "bytes": 13302,
+    "sha256": "7aa51887bf246aa15ac236681adb7cfd96abf00772339977860e647de23911d5"
+  }
+}

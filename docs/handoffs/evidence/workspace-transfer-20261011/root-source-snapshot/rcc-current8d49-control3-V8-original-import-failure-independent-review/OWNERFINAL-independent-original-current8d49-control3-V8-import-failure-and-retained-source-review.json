@@ -1,0 +1,187 @@
+{
+  "schema": 1,
+  "decision": "HOLD_ORIGINAL_CURRENT8D49_CONTROL3_V8_MODULE_IMPORT_FAILURE_NO_NATIVE_QUALIFICATION",
+  "status": "INDEPENDENT_AUTHENTIC_ORIGINAL_FAILED_ATTEMPT_BOUNDARY_VERIFIED",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "observed_original": {
+    "outer_returncode": 1,
+    "elapsed_seconds": 52.88459704800334,
+    "launcher_preflight_returncode": 0,
+    "launcher_primary_returncode": 10,
+    "launcher_post_returncode": 0,
+    "primary_exception_category": "ModuleNotFoundError",
+    "missing_module": "runner_contracts_v3",
+    "secondary_gateway_exception": "subprocess.CalledProcessError",
+    "failure_frames": [
+      {
+        "module": "actual_transport_v8.py",
+        "line": 19,
+        "scope": "<module>"
+      },
+      {
+        "module": "owned_cache_policy_v8.py",
+        "line": 12,
+        "scope": "<module>"
+      }
+    ],
+    "package_own_origin_calls_completed_before_final_child": 5,
+    "qualified_native_main_entered": false,
+    "owned_native_root_current_absent": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-owned-pkgs-3",
+    "selectors_Action_lease_cache_JUnit": "NOT_REACHED; no outcome counts fabricated",
+    "RCC_outer_gateway_bootstrap": "Observed developer gateway bootstrap only; not control3 native fixture qualification",
+    "newer5_7276": "NOT_RUN",
+    "original_failure_rewritten_or_retried": false
+  },
+  "exact_original_raw_owner_and_logs_bindings": [
+    {
+      "path": "/workspace/engineering/root-current8d49-control3-V8-original-outer-owned/OWNERFINAL-root-one-original-current8d49-control3-V8-outer-terminal.json",
+      "bytes": 2309,
+      "sha256": "ddc3f1b1fc0adba210ee984f8aa65d8901c879956f9326e5163fbfc4106e5deb",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/root-current8d49-control3-V8-original-outer-owned/original-parent.stderr.private.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-current8d49-control3-V8-original-outer-owned/original-parent.stdout.private.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-rcc-owned-cache-one-current8d49-control3-v8-1/launcher-terminal.json",
+      "bytes": 84,
+      "sha256": "8ed0692250a3ad1480f4e3e15c519be76ef8586593579e025c8dc58ff6b29ea6",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-rcc-owned-cache-one-current8d49-control3-v8-1/post.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-rcc-owned-cache-one-current8d49-control3-v8-1/post.stdout",
+      "bytes": 69,
+      "sha256": "0c1f9f5f73680a42a7de5d496fe9ee95e084773e8a37d6d04f37d540575b21bb",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-rcc-owned-cache-one-current8d49-control3-v8-1/preflight.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-rcc-owned-cache-one-current8d49-control3-v8-1/preflight.stdout",
+      "bytes": 69,
+      "sha256": "0c1f9f5f73680a42a7de5d496fe9ee95e084773e8a37d6d04f37d540575b21bb",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-rcc-owned-cache-one-current8d49-control3-v8-1/primary-returncode.json",
+      "bytes": 19,
+      "sha256": "62685fdf06e3035754d480b16440cfd927a047fd264c641018c08a788b3618e6",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-rcc-owned-cache-one-current8d49-control3-v8-1/primary.stderr",
+      "bytes": 6297,
+      "sha256": "4425305a8ed63b6fd7dba468b74184e1e55bd2eaeac7a9ce19f9103eaa8bda5a",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-rcc-owned-cache-one-current8d49-control3-v8-1/primary.stdout",
+      "bytes": 2612,
+      "sha256": "5d75ba0cc975cdfcbb53895739c2d60dbb0fadbfbdd7ff4ccafe1bd0a1ea0caf",
+      "mode": "0o600"
+    }
+  ],
+  "exact_config_binding": {
+    "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/FROZEN-current8d49-control3-qualified-V8-config-v2.json",
+    "bytes": 760693,
+    "sha256": "a209cc117db4d17a7383ba519abdff064211960aa0b8a88ddf32569fef322f9f",
+    "mode": "0o600"
+  },
+  "exact_root_release_binding": {
+    "path": "/workspace/engineering/root-rcc-current8d49-control3-V8-one-release.json",
+    "bytes": 1081,
+    "sha256": "20000301eb20be5d2768fce04535298f8a5e1fbba271829be67d8ba1510d78d6",
+    "mode": "0o600"
+  },
+  "exact_gateway_binding": {
+    "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/gateway_entry_v8.py",
+    "bytes": 2988,
+    "sha256": "ad14539953b2b4b5039d729507d3117e021b1cf00aa767df7a049997c00784b8",
+    "mode": "0o444"
+  },
+  "verified_relevant_module_bindings": [
+    {
+      "bytes": 4632,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/owned_monitor_v1.py",
+      "sha256": "834a7fe402e34b170f414df5dfe79762c0b49ed311a6222ba2f7bca5d87020a5"
+    },
+    {
+      "bytes": 12959,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/runner_contracts_v3.py",
+      "sha256": "cbae3bb074d3995153ea5e6b694e7f9e61c047c6aa511b682959a63fedf7b726"
+    },
+    {
+      "bytes": 12959,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/runner_contracts_v3.py",
+      "sha256": "cbae3bb074d3995153ea5e6b694e7f9e61c047c6aa511b682959a63fedf7b726"
+    },
+    {
+      "bytes": 4632,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/owned_monitor_v1.py",
+      "sha256": "834a7fe402e34b170f414df5dfe79762c0b49ed311a6222ba2f7bca5d87020a5"
+    },
+    {
+      "bytes": 6228,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/owned_cache_policy_v8.py",
+      "sha256": "4ccac4e3bd2c1e91352ef4e647968b4ca61f8691e1fc0f41e72a128a2942c205"
+    },
+    {
+      "bytes": 27889,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/actual_transport_v8.py",
+      "sha256": "33dda17140ef749e22f086cc91b92ed8c3230fddfde8a4a369769e2183f695a1"
+    }
+  ],
+  "source_preservation": {
+    "current1440_complete_GitFS_bodies_and_executable_modes_verified": true,
+    "clean_HEAD_tree_exact": true,
+    "original_pre_and_always_post_guard_stdout": "PASS_CURRENT_8D49_1440_PREPARED30_OWN5_AND_HISTORICAL1192_HASH_GUARD",
+    "historical1192_prepared30_old237_aliases": "Original authenticated pre/post guards returned0; this independent review freshly hashes relevant module/config/release and current1440 only, not another full large archive/native1192 scan.",
+    "sourceFULL073e": "Remains separately accepted source-only; unsuccessful native transport does not relabel it"
+  },
+  "cause_boundary": {
+    "confirmed": "Parent gateway inserts sibling+shared helper search roots, then invokes direct package Python with runner filename; child imports sibling cache policy, whose shared contracts import is missing before main. Direct child does not receive gateway sys.path mutation.",
+    "minimal_next_scope": "Separate reviewed child entry establishes only the same hash-admitted two search roots before importing unchanged transport main; new config/release/absent once-root required. No original module/config/release overwritten.",
+    "unobserved": "No native artifact selectors, publication/staged cases, realAction/lease/cache/cleanup sampler invoked; no native functional/regression or cleanup assertion inferred."
+  },
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "exact_proposed_delta": {
+      "path": "/workspace/engineering/rcc-current8d49-control3-V8-original-import-failure-independent-review/canonical-private-child-interpreter-module-search-boundary-proposed.txt",
+      "bytes": 470,
+      "sha256": "451e3640ea4b2e32d7afa8fbbc1a09cc0efaef7e8c72346a367d2cb8cc3a22f0",
+      "mode": "0o400"
+    },
+    "durable_learning": "Package child Python must receive independently admitted module search roots; gateway sys.path does not cross the process boundary. Import failure before main gives no native fixture/caching/Action acceptance.",
+    "evidence": "Original import traceback frames19/12, gateway two-dir prefix and final direct-script delegation; retained shared contracts/monitor exact hashes and absent sibling contracts; original pre0/primary10/post0.",
+    "stale_or_ambiguous_guidance_removed": "Gateway imports passing do not prove direct package runner dependency resolution; transport failure cannot be called native functional failure or pass.",
+    "remaining_uncertainty": "Next entry/config not reviewed or executed here; original failed result/state remain absent and original controls unmodified. Native default3 and newer5/7276 qualification HOLD."
+  },
+  "upstream_disposition": "none; local private orchestration boundary, no RCC upstream defect established",
+  "review_execution": "READ_ONLY_HASH_JSON_AST_LOCAL_GIT_PARSE_ONLY_NO_PRODUCT_IMPORT_TEST_GATE_NATIVE_REACQUISITION_SOURCE_MUTATION"
+}

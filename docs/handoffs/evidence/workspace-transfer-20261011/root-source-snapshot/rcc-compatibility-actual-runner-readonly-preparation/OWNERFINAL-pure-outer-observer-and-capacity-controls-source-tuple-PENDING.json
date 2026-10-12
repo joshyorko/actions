@@ -1,0 +1,64 @@
+{
+  "decision": "PURE_OUTER_POPEN_OBSERVER_AND_CAPACITY_STATE_CONTROLS_PASS_ACTUAL_INTEGRATION_PENDING",
+  "source_fixture_final": "NOT_ANNOUNCED",
+  "controls": {
+    "count": 14,
+    "passed": 14,
+    "skipped": 0,
+    "returncode": 0,
+    "scope": "Fake subprocess namespace/wrapper/OS observations/signal recorder only. No child/native/psutilRuntime/network/process signals or gateway."
+  },
+  "checked_behaviors": [
+    "Observer preserves exact original args/kwargs/object identity; unknownsecondwrapper rejected before launch",
+    "Signal only unique stable direct pytestchild, never supervisor/reap/wait",
+    "Operationalthreshold/workspacefloor cause one recorded signal; PIDreuse/absentduplicate/error produce no unowned signal",
+    "Threshold remains primary, signal error secondary",
+    "Finalcancelrequested+alive measured separately; zeroobservations/booleans failclosed",
+    "Sampled maxima/interveningovershoot unknown/kernelquota false"
+  ],
+  "existing_pinned_helper": {
+    "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/verify_dakota_rcc_acceptance.py",
+    "bytes": 74274,
+    "sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659"
+  },
+  "future_runtime_integration_HOLD": [
+    "Concrete psutil adapter for exact frozen helper subprocess observer",
+    "Finite0.2sec thread/cancellation boundedjoin and observedcurrentprefix owned state accounting",
+    "Finalsourcefixture raw receipt-to-view mapper and exact actual tuple",
+    "Independent review and distinct root actualversion releases"
+  ],
+  "prior_parser_controls": {
+    "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/OWNERFINAL-service-free-runner-parser-controls-source-tuple-PENDING.json",
+    "bytes": 11024,
+    "sha256": "d37747e9aedb6e8fb4cb7cafd6b48f24a3151b56c72c34771ec4a1c8939cbcab"
+  },
+  "bindings": [
+    {
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/owned_monitor_v1.py",
+      "bytes": 4632,
+      "sha256": "834a7fe402e34b170f414df5dfe79762c0b49ed311a6222ba2f7bca5d87020a5"
+    },
+    {
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/test_owned_monitor_v1.py",
+      "bytes": 5231,
+      "sha256": "16463bedd1aa02852ea66c5c4b992734fb4326e6d470681d394c7763e0434ce4"
+    },
+    {
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/owned-monitor-v1-pure-controls.private.log",
+      "bytes": 1971,
+      "sha256": "9ca87f213d6d31212e00e65d928412c77e613dba0b14f017689296dddb73dd3e"
+    },
+    {
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/owned-monitor-managed-preflight.private.log",
+      "bytes": 69,
+      "sha256": "9e7476b86b94c13ab1e9762548883c60e950ede7c9c4a74e9281613e05d88f48"
+    },
+    {
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/runner_contracts_v3.py",
+      "bytes": 12959,
+      "sha256": "cbae3bb074d3995153ea5e6b694e7f9e61c047c6aa511b682959a63fedf7b726"
+    }
+  ],
+  "Documentation_improvement": "Reuse exact source-backed sampler/exclusive-owner proposed patch in parser owner; no additional guide edit or cosmetic paragraph.",
+  "Upstream_disposition": "none"
+}

@@ -1,0 +1,168 @@
+{
+  "ROOT_exact_argv_template": [
+    "env",
+    "-u",
+    "PYTHONOPTIMIZE",
+    "-u",
+    "PYTEST_ADDOPTS",
+    "-u",
+    "RCC_RELOAD_PRIVATE_MUTANT",
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "600s",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/run_root_reader28_pure_once_NOTRUN.py",
+    "--phase",
+    "launch",
+    "--config",
+    "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/FROZEN-reader28-concrete-source-control-config-NOTRUN.json",
+    "--config-sha256",
+    "4cd8f74435137100296e44aedfb54defd86a1bf70f1c42060242bd9820c65463",
+    "--release",
+    "/workspace/engineering/root-one-cgroup-reader-observer28-pure-release.json",
+    "--release-sha256",
+    "ROOT_REAL_DISTINCT_RELEASE_SHA256"
+  ],
+  "ROOT_parent_seconds": 630,
+  "ROOT_release_required_template": {
+    "config_binding": {
+      "bytes": 19650,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/FROZEN-reader28-concrete-source-control-config-NOTRUN.json",
+      "sha256": "4cd8f74435137100296e44aedfb54defd86a1bf70f1c42060242bd9820c65463"
+    },
+    "executor_binding": {
+      "bytes": 3379,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/execute_frozen_reader28_unittest_census_NOTRUN.py",
+      "sha256": "8b58d50947023e6fa1a66e0bff627741bcf696bbaa075c7d6bdebfee021b645c"
+    },
+    "independent_preexecution_review": null,
+    "launcher_binding": {
+      "bytes": 11048,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/run_root_reader28_pure_once_NOTRUN.py",
+      "sha256": "eb3a26634d2695488c64597aa13451098aea7445e3fc955886e29760b7cc4a08"
+    },
+    "root": "/workspace/engineering/root-one-current8d49-cgroup-reader-observer28-pure-controls-1",
+    "schema": 1,
+    "serialized_no_other_heavy_or_storage_mutations": true,
+    "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+    "source_independent_review": {
+      "bytes": 10394,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-independent-SOURCE-review/OWNERFINAL-independent-private-cgroup-reader-observer-SOURCE-and-prepared28-controls-GO.json",
+      "sha256": "dc37624bc1e47ad007320fb39a80e722128cd1d8acfcb99dc614add1552b0caa"
+    },
+    "source_owner_binding": {
+      "bytes": 8304,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/OWNERFINAL-private-current8d49-cgroup-finite-reader-owned-observer-and-28-controls-SOURCE_PREPARED_NOTRUN.json",
+      "sha256": "1cb62155075c07714bc8eb17dec5ad082bc4663e3d7269797f184fde9ec02a29"
+    },
+    "status": "ROOT_DISTINCT_ONE_READER_OBSERVER28_PURE_CONTROLS",
+    "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+  },
+  "actual_tests_imports_cgroup_reads_signals_native": "NOT_RUN_BY_REVIEWER",
+  "adoption_scope": "ROOT fills exact independent_preexecution_review binding with this real sealed receipt; creates one fresh regular nonsymlink0600 strict release and replaces ONLY ROOT_REAL_DISTINCT_RELEASE_SHA256 in frozen argv. Source exact activate.sh plus cachedToolkit PATH insertion required; no chmod/installer/RCC execution. Root alone authorizes execution.",
+  "bounds": {
+    "alwayspost": 120,
+    "alwayspost_kill": 10,
+    "alwayspost_parent": 135,
+    "before": 120,
+    "before_kill": 10,
+    "before_parent": 135,
+    "fallback_sum": 405,
+    "margin": 195,
+    "primary": 120,
+    "primary_kill": 10,
+    "primary_parent": 135,
+    "root_kill": 10,
+    "root_outer": 600,
+    "root_parent": 630
+  },
+  "config_binding": {
+    "bytes": 19650,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/FROZEN-reader28-concrete-source-control-config-NOTRUN.json",
+    "sha256": "4cd8f74435137100296e44aedfb54defd86a1bf70f1c42060242bd9820c65463"
+  },
+  "config_sha256": "4cd8f74435137100296e44aedfb54defd86a1bf70f1c42060242bd9820c65463",
+  "contract_binding": {
+    "bytes": 6974,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/ROOT-distinct-release-and-concrete-command-contract-reader28-NOTRUN.json",
+    "sha256": "be54a08d4e36d10e12d66cd6bb87885452757d46e8f3209f1958ba1fbe71ae49"
+  },
+  "decision": "GO_ONE_CURRENT8D49_READER_OBSERVER28_CONCRETE_PURE_PREEXECUTION_ONLY",
+  "documentation_improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md; exact verified d6c06054276f3cf45054eecf523d7c618dc8498e0334cc9d55257fc449510380 and8c28fc2596c6fdfc607dd35a17b3462ad217ba97670b61222393dc504861d896 lesson reuse; no cosmetic addition.",
+    "Durable learning captured": "Pin cgroup identity and bound read work; final snapshot requires actual sampler join. Pure counter controls and actual unittest census remain separate from real backend/native/headroom qualification.",
+    "Evidence": "Frozen source1cb621/source24e386/test449298 and independent prepared dc376; complete concrete admission/census source/44 exact references. No actual test results claimed.",
+    "Remaining uncertainty": "Actual28 outcomes, full FD-walk controls, real headroom calibration/latency/native wiring and helper cleanup unqualified.",
+    "Stale or ambiguous guidance removed": "Collected/actual28 method census distinguished from prepared source/static proof and subtest count; complete backend gap retained explicitly."
+  },
+  "execution_requirements": [
+    "ROOT serialization clear; no overlapping native/heavy/storage mutations; same managed18+PATH2/own cached parent and own Runtime interpreter.",
+    "Fresh owned root/release/output paths ABSENT and exact frozen bindings/physical pin admitted before launch.",
+    "Three distinct before/primary/alwayspost phases120TERM10 and135parent: fallback total405 within600TERM10/630parent. Preserve all-outcome ROOT original terminal and post/source-binding readback.",
+    "After actual run, independent original machine census/raw terminal/source/input guard review required. No source proof or PREEXEC decision substitutes for actual28 result."
+  ],
+  "executor_binding": {
+    "bytes": 3379,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/execute_frozen_reader28_unittest_census_NOTRUN.py",
+    "sha256": "8b58d50947023e6fa1a66e0bff627741bcf696bbaa075c7d6bdebfee021b645c"
+  },
+  "executor_sha256": "8b58d50947023e6fa1a66e0bff627741bcf696bbaa075c7d6bdebfee021b645c",
+  "launcher_binding": {
+    "bytes": 11048,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/run_root_reader28_pure_once_NOTRUN.py",
+    "sha256": "eb3a26634d2695488c64597aa13451098aea7445e3fc955886e29760b7cc4a08"
+  },
+  "launcher_sha256": "eb3a26634d2695488c64597aa13451098aea7445e3fc955886e29760b7cc4a08",
+  "limits": [
+    "Full descriptor-relative read_cgroup_bundle walk remains untested separate backend-control gate; reader tests inject bundles, individual low-level reads are mocked.",
+    "Proposed memory headroom/reserve thresholds uncalibrated/unadopted; no RSS/cgroup-native observation/signal/kill/cleanup/reaping qualification.",
+    "Original17, managed-mode PREMAINFAIL and nativeV8/V9 failures unchanged. Retained3\u21925\u21927276 profile stops at original3FAIL; no automatic next version or native/profile/release promotion.",
+    "Parent timeout or killed/unavailable finally yields FAIL/HOLD; bounded pure commands do not establish universal descendant cleanup or guaranteed syscall cancellation."
+  ],
+  "proposal_binding": {
+    "bytes": 17025,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/OWNERFINAL-current8d49-reader-observer28-concrete-bounded-ROOT-PREEXEC-NOTRUN.json",
+    "sha256": "d580081bcb72d8aef2732b740655e9d7b11659e5b812da0fd2d24485b2fec851"
+  },
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_owner_binding": {
+    "bytes": 8304,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/OWNERFINAL-private-current8d49-cgroup-finite-reader-owned-observer-and-28-controls-SOURCE_PREPARED_NOTRUN.json",
+    "sha256": "1cb62155075c07714bc8eb17dec5ad082bc4663e3d7269797f184fde9ec02a29"
+  },
+  "source_review_binding": {
+    "bytes": 10394,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-independent-SOURCE-review/OWNERFINAL-independent-private-cgroup-reader-observer-SOURCE-and-prepared28-controls-GO.json",
+    "sha256": "dc37624bc1e47ad007320fb39a80e722128cd1d8acfcb99dc614add1552b0caa"
+  },
+  "status": "INDEPENDENT_READER_OBSERVER28_CONCRETE_PREEXECUTION_GO",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none",
+  "verified_static_admission": {
+    "all_config_frozen_bindings_exact": 38,
+    "expected28names_independently_derived_from_frozen_AST_sorted_unittest_class_method_order_exact": true,
+    "local_binding_rows_exact": 6,
+    "original_binding_rows_exact": 38,
+    "owned_capture": "Unique0700 root and phase dirs; exclusive0600 stdout/stderr with fsync before result assertions; consumed release and actual census durable; primary and post failures retained separately.",
+    "physical_files": "Frozen0400 regular nonsymlink config/launcher/executor, ROOTrelease0600 UIDGID1000 and independent hashed row; managedRCC700 exact UIDGID,sizeSHA verified without executing RCC.",
+    "release_and_owned_output_root_absent": true,
+    "self_config_release_review_control_before_after_checks": "Every guard/primary admission validates fixed paths/schema/source/tree/configSHA/launcherSHA/executorSHA/source review; same admission repeats finally and executor after controls; frozen helper bindings rechecked.",
+    "source1440_and_original_native1192_prepared30_five_origins_guard": "Original exact readonly V9 guard reused; actual before and alwayspost required; no guard replay by reviewer.",
+    "source_module_tests_policy_owner_helpers_unchanged": true,
+    "unittest_actual_census": "Real collected28 unique IDs checked before run; TextTestResult captures actual success IDs; no expectedFailure/unexpectedSuccess masks; actual counts+failure/error/skip IDs sealed before caller assertions; caller demands exact28PASS0FAIL0ERROR0SKIP. Subtests not relabeled as cases. No fabricated JUnit."
+  }
+}

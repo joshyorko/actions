@@ -1,0 +1,42 @@
+{
+  "verdict": "GO_BOUNDED_CURRENT74_CONFIGURED_FULL_PROPOSAL_STATIC_WORKER_BINDING_ONLY",
+  "source_LIGHT_review": {
+    "path": "/workspace/engineering/pr300-current74-independent-light-review/OWNERFINAL-independent-current74-A300-LIGHT-source-and-full-proposal-review.json",
+    "bytes": 5826,
+    "sha256": "5d0d6b36b745029a12947b80d9ddafc1edcf30e490e8d745718290f982e0433b"
+  },
+  "exact_command_contract": {
+    "path": "/workspace/engineering/pr300-current74-independent-light-review/proposed-current74-configured-full-command-contract.json",
+    "bytes": 1830,
+    "sha256": "2881ff048c9b97c1c97bf2455c943b1a1cfb0b9fff82a392ac0312ad37ead0a8"
+  },
+  "current_own_Runtime_xdist_plugin": {
+    "path": "/workspace/engineering/pr300/action_server/.venv/lib/python3.12/site-packages/xdist/plugin.py",
+    "bytes": 13921,
+    "sha256": "62df71dfe342969ab667cb3a4f2280a93be9c11bc9a4c2d9ead271c979d2afd8"
+  },
+  "auto_worker_function_AST_sha256": "b61539b40e0914425f64ac6a99779b4276d570517444e2b659d72f780138b9ea",
+  "explicit_env2_return_precedes_CPU_fallback": true,
+  "reviewed_source_propagation_refs": [
+    {
+      "path": "/workspace/engineering/pr300/developer/toolkit.py",
+      "bytes": 8893,
+      "sha256": "e1a3f96b57c31be2a0db5cdd3d63ce9ac243a9e8e29dff5ce6e07fd897fb605f"
+    },
+    {
+      "path": "/workspace/engineering/pr300/action_server/tasks.py",
+      "bytes": 27099,
+      "sha256": "b35d3722b1f9ed51e57ce4dcd3f7fdc81b7df238cbcdef0eaf44d47d08555791"
+    },
+    {
+      "path": "/workspace/engineering/pr300/action_server/src/actions/server/_build_common/process_call.py",
+      "bytes": 1148,
+      "sha256": "ed0416866bb085da8f92759d4463963ab3d346c455a1b756e3f041b0945547df"
+    }
+  ],
+  "toolkit_environment_preservation_and_Runtime_envNone_inheritance": "Exact previously reviewed installed/source bytes; copies package environment, PYTEST setting retained, configurednauto child inherits",
+  "root_release_condition": "Root may release the exact structured current74 command contract after fresh refs/prepared environment/capacity>=1.2GB/serialization bracket. A different materialized launcher needs an exact new binding; old784 launcher cannot be reused unchanged.",
+  "tests_or_configured_gate_executed": false,
+  "documentation": "Accepteda113 worker-bound lesson reused; exactA3008895 eight-line canonical source delta accepted in boundLIGHTreview",
+  "Upstream_disposition": "none"
+}

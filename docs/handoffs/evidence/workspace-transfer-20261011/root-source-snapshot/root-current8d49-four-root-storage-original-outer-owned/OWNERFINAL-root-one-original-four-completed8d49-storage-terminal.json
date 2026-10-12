@@ -1,0 +1,28 @@
+{
+  "operation": "ONE_EXACT_FOUR_COMPLETED_ROOTS_STORAGE_ONLY",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "selected_roots": 4,
+  "no_retry": true,
+  "native": "NOT_RUN",
+  "outer_returncode": 1,
+  "elapsed_seconds": 24.642070874993806,
+  "available_bytes_after": {
+    "/workspace": 1149816832,
+    "/tmp": 600203264,
+    "/dev/shm": 3901190144
+  },
+  "driver_terminal": "/workspace/engineering/root-completed8d49-four-root-storage-one-owned-v2/original-one-attempt-terminal.json",
+  "driver_terminal_sha256": "890441b9b0a55e0c961e530a6beb958151255866fc8677f1ba825994d89b85c1",
+  "driver_terminal_body": {
+    "archiver": "NOT_RUN",
+    "native_execution": "NOT_RUN",
+    "no_retry": true,
+    "one_attempt": true,
+    "primary_exception_type": "AssertionError",
+    "protected_post": "FAIL",
+    "secondary_exception_type": "AssertionError",
+    "source_scope": "8d49d0865ad5ad27b2d4e325ec135212080625e8_STORAGE_DATA_ONLY_NO_SOURCE_NATIVE_QUALIFICATION",
+    "status": "FAIL"
+  },
+  "capture": "2026-10-11T19:06:50.601793+00:00"
+}

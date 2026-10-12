@@ -1,0 +1,203 @@
+{
+  "AST": {
+    "18_exact_unique_expected_ids": [
+      "__main__.EnvironmentAdmissionControls.test_00_valid_exact_accepted_environment_baseline",
+      "__main__.EnvironmentAdmissionControls.test_aggregate_caps_cannot_be_widened",
+      "__main__.EnvironmentAdmissionControls.test_alias_baseline_and_individual_mapping_poisons",
+      "__main__.EnvironmentAdmissionControls.test_current_config_dependency_overlap_baseline_and_selected_prefix",
+      "__main__.EnvironmentAdmissionControls.test_exact_scope_and_restore_path_required",
+      "__main__.EnvironmentAdmissionControls.test_layout_baseline_parent_mount_and_floor_poisons",
+      "__main__.EnvironmentAdmissionControls.test_no_automatic_inactive_owner_approval",
+      "__main__.EnvironmentAdmissionControls.test_observed_use_and_unknown_missing_fields_fail_closed",
+      "__main__.EnvironmentAdmissionControls.test_private_root_release_baseline_mode_and_symlink",
+      "__main__.EnvironmentAdmissionControls.test_real_accepted_source_baseline_and_wrong_identity",
+      "__main__.EnvironmentAdmissionControls.test_real_pax_body_mode_nsmtime_symlink_archive_baseline_and_poison",
+      "__main__.EnvironmentAdmissionControls.test_regular_binding_baseline_body_mode_and_symlink",
+      "__main__.EnvironmentAdmissionControls.test_restore_dependency_existing_then_missing_path",
+      "__main__.EnvironmentAdmissionControls.test_snapshot_metadata_body_and_external_hardlink_boundaries",
+      "__main__.EnvironmentAdmissionControls.test_stream_cap_boundary_retains_partial_without_touching_original",
+      "__main__.EnvironmentAdmissionControls.test_subject_type_refuses_completed_pytest_reuse",
+      "__main__.EnvironmentAdmissionControls.test_unapproved_root_or_source_refused",
+      "__main__.EnvironmentAdmissionControls.test_unknown_scope_is_not_quiescence"
+    ],
+    "entire18_method_AST_exact_to_v6": true,
+    "true_runtime_machine_census_required_not_AST_pass_claim": true,
+    "whole_controls_inverse_exact_only_FIXTURE_literal": true,
+    "whole_launcher_inverse_exact_only_two_ROOT_review_decision_literals": true
+  },
+  "ROOT_external_parent_mandatory_preconditions": {
+    "bare240_timeout_template_not_complete_external_parent_adoption": true,
+    "before_and_alwayspost_on_every_outcome_including_child_hardkill": true,
+    "child_finally_is_not_external_alwayspost_after_hardkill": true,
+    "exact_parent_adoption_body_SHA_and_argv_must_be_ROOT_announced_before_release": true,
+    "independent30_before_plus_full240_main_plus30_post_does_not_fit240": true,
+    "no_budget_enlargement_authorized_by_this_review": true,
+    "retain_original_parent_terminal_and_raw_captures_before_assert_on_all_outcomes": true,
+    "review_release_parent_self_launcher_config_all98_refs_current_four_source_HEAD_tree_clean_before_and_alwayspost": true,
+    "same_managed18_and_ordered_PATH19_cached_interpreter_activation": true,
+    "source1440_native1192_and_selected_input_checks_remain_strict": true,
+    "whole240_requires_shared_primary_deadline_reserved_post_and_capture_or_separately_reviewed_named_outer_envelope": true
+  },
+  "bindings": {
+    "all98_body_size_mode_type_hash_checked": true,
+    "bound_stdlib_origins": 5,
+    "current30_file_rows_in_current_cfg": true,
+    "managed_activation_field_count": 18,
+    "native_original_body_type_mode_link_rows_checked": 1192,
+    "new37_checked": true,
+    "ordered_PATH_binding_count": 2,
+    "original61_exact_rows_retained": true,
+    "source_body_mode_rows_checked": 1440,
+    "source_native_failures": 0
+  },
+  "budget": {
+    "alwayspost_guard_cooperative_budget_seconds": 30,
+    "before_child_post_fallback_sum_seconds": 200,
+    "before_guard_cooperative_budget_seconds": 30,
+    "capture_and_activation_reserve_inside_outer_seconds": 40,
+    "inner_TERM_KILL_grace_seconds": 10,
+    "inner_TERM_seconds": 120,
+    "limits": "ROOT outer bounds complete admitted attempt. Cooperative per-read guards do not promise a kernel filesystem read cannot stall; external hard kill can prevent Python finally. ROOT outer must retain terminal even then. No native/RCC deadline changes.",
+    "outer_TERM_KILL_grace_seconds": 10,
+    "subprocess_parent_fallback_seconds": 140,
+    "whole_ROOT_outer_seconds": 240
+  },
+  "config_binding": {
+    "bytes": 37537,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v7_current9760_managed_PURE18_inputs_NOTRUN.json",
+    "sha256": "ca8279f3bdcc04c85f9d5c100ab010fc11bd9822c13633c68cdfe6eb1c3e69af"
+  },
+  "control_source_binding": {
+    "bytes": 17030,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/test_first_five_v7_current9760_managed_PURE18_SOURCE_PREPARED.py",
+    "sha256": "f8eef7c17be77199baa38c549b678d6ddda3c0650318cb604a6fd3b2de79ac2e"
+  },
+  "current307": {
+    "head": "9760d5ec44876558c4941c4c3190abc8d92d14a1",
+    "source_gate_outcomes_not_inferred": true,
+    "tracked_clean_observed": true,
+    "tree": "0d33ebaac258e069ef7045a29b4a3904740f6307"
+  },
+  "current_active_source_readback": [
+    {
+      "head": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+      "path": "/workspace/engineering/pr308",
+      "read_only_current_head_tree_match": true,
+      "tracked_clean": true,
+      "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+    },
+    {
+      "head": "9760d5ec44876558c4941c4c3190abc8d92d14a1",
+      "path": "/workspace/engineering/pr307",
+      "read_only_current_head_tree_match": true,
+      "tracked_clean": true,
+      "tree": "0d33ebaac258e069ef7045a29b4a3904740f6307"
+    },
+    {
+      "head": "f75dcae52fcd78c5c382d3903b012e5b049ca48b",
+      "path": "/workspace/engineering/pr305",
+      "read_only_current_head_tree_match": true,
+      "tracked_clean": true,
+      "tree": "851834ae6cc87f42abfcf3c963542191e2815599"
+    },
+    {
+      "head": "2d86c5cf92d3acb274a8ceb5d57bfb8b12c779b6",
+      "path": "/workspace/engineering/captured-child-cleanup",
+      "read_only_current_head_tree_match": true,
+      "tracked_clean": true,
+      "tree": "653a9e73e4d27641ec86de94b90f35d41e0f24f8"
+    }
+  ],
+  "decision": "GO_FIRST_FIVE_V7_CURRENT9760_MANAGED_PURE18_PREEXECUTION",
+  "documentation": {
+    "delta": "No canonical file mutation. Reuse accepted real frozen-row schema, exact selected-address, current-source retarget, machine census and parent hardkill/postguard lessons.",
+    "evidence": [
+      {
+        "bytes": 28246,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/SOURCE-PREPARED-v7-clean9760-literal-retarget-and-preserved18-AST-proof.json",
+        "sha256": "4cf0a1b4e8acc75012b33588fb32bb8bff1e6d4bc4f25eb73c4e45d208cf201d"
+      },
+      {
+        "bytes": 7292,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr307-current9760-token-light-once4-PREEXECUTION-NOTRUN/OWNERFINAL-current9760-owning-Isort-settings-SOURCE-and-fresh-once4-PREEXEC-NOTRUN.json",
+        "sha256": "7616d9820f33e3b920262ab501229e4695527820b2dd2fcdd53bdf9858b19e8e"
+      },
+      {
+        "bytes": 6261,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v6-current00b1-independent-PURE18-PREEXEC-review/OWNERFINAL-independent-first-five-v6-managed-machine18-SOURCE-GO-current-state-PREEXEC-HOLD.json",
+        "sha256": "4e4782340b2a066096cd46186647f707c385f884c25da77b51df9ccbfb1ef593"
+      }
+    ],
+    "stale_ambiguity_removed": "Current clean9760/0d33 and its30 inputs are distinct from dirty historical00b1/v6.",
+    "uncertainty": "Runtime controls and external parent adoption NOT_RUN/NOT_CREATED; parent finally alone cannot prove hardkill postguard.",
+    "upstream_disposition": "none"
+  },
+  "exact_child_argv_template": [
+    "/usr/bin/timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "240s",
+    "bash",
+    "-c",
+    "source /workspace/actions-cloud/activate.sh && export PATH=\"/workspace/actions-cloud/bin:/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\" && export PYTHONDONTWRITEBYTECODE=1 && exec /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12 /workspace/engineering/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v7_current9760_managed_PURE18_ROOT_ONLY_SOURCE_PREPARED.py --root-execute-reviewed-pure-controls \"$1\" --root-release-sha256 \"$2\"",
+    "first-five-current9760-pure18",
+    "ROOT_OWNER_ANNOUNCED_RELEASE_FILE_NOT_CREATED",
+    "ROOT_OWNER_ANNOUNCED_RELEASE_SHA256_NOT_CREATED"
+  ],
+  "holds": [
+    "PURE18 NOT_RUN: no pass counters inferred",
+    "actual environment preservation requires separate inactive owner approval, complete protected manifest/aliases and bounded controller",
+    "no current source/full/native/profile/provider/consumer/graph/publication admission",
+    "if any guarded current source changes before/alwayspost, fail closed and require named retarget; no dirty-state waiver"
+  ],
+  "launcher_binding": {
+    "bytes": 12477,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v7_current9760_managed_PURE18_ROOT_ONLY_SOURCE_PREPARED.py",
+    "sha256": "00e4d952c0b79c4ebe95879f9a19cfa6ac15805c0f4bd1906d871048cd3b3e94"
+  },
+  "owner_binding": {
+    "bytes": 6756,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/OWNERFINAL-first-five-v7-clean9760-minimum-managed-PURE18-SOURCE-and-PREEXECUTION-NOTRUN.json",
+    "sha256": "f7c7893409d99d4ebb1c209f4cabd7c3b4e2180d870fb1015292f809e46ec0e9"
+  },
+  "prior_v6_dirty_HOLD_retained": {
+    "bytes": 6261,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v6-current00b1-independent-PURE18-PREEXEC-review/OWNERFINAL-independent-first-five-v6-managed-machine18-SOURCE-GO-current-state-PREEXEC-HOLD.json",
+    "sha256": "4e4782340b2a066096cd46186647f707c385f884c25da77b51df9ccbfb1ef593"
+  },
+  "required_ROOT_decision": "RELEASE_ONE_FIRST_FIVE_V7_CURRENT9760_MANAGED_PURE18_ONLY",
+  "required_ROOT_release": {
+    "decision": "RELEASE_ONE_FIRST_FIVE_V7_CURRENT9760_MANAGED_PURE18_ONLY",
+    "distinct_owner_announced_0600_regular_uid_gid_own_file_under_0700_resolving_owned_parent": true,
+    "exact_launcher_config_and_this_independent_review_bindings": true,
+    "no_execution_authority_from_this_review": true,
+    "root_release_SHA_passed_by_argument": true
+  },
+  "reviewer_execution": "READ_ONLY_JSON_AST_GIT_AND_ORIGINAL_FILE_HASHES_ONLY_NO_IMPORTS_TESTS_GUARD_NATIVE_OR_OPERATION",
+  "schema": 1,
+  "scope": "READ_ONLY_SOURCE_AND_PURE18_CHILD_PREEXECUTION_ONLY_NOT_EXECUTED",
+  "selected_addresses": {
+    "all_output_roots_absent_observed": true,
+    "census_path": "/workspace/engineering/first-five-v7-current9760-managed-PURE18-once-owned/original-18-complete-machine-census.json",
+    "controls": "/workspace/engineering/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/test_first_five_v7_current9760_managed_PURE18_SOURCE_PREPARED.py",
+    "driver": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_first_five_accepted_obsolete_environments_SOURCE_PREPARED_v4.py",
+    "fixture_root": "/tmp/first-five-v7-current9760-mode-closure-PURE18-fixtures-once-owned",
+    "frozen_v5_environment_policy_input": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/frozen_first_five_environment_preservation_inputs_SOURCE_PREPARED_v5_measured_modes.json",
+    "owned_root": "/workspace/engineering/first-five-v7-current9760-managed-PURE18-once-owned"
+  },
+  "source_proof_binding": {
+    "bytes": 28246,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/SOURCE-PREPARED-v7-clean9760-literal-retarget-and-preserved18-AST-proof.json",
+    "sha256": "4cf0a1b4e8acc75012b33588fb32bb8bff1e6d4bc4f25eb73c4e45d208cf201d"
+  },
+  "status": "GO_EXACT_SOURCE_AND_CHILD_PREEXECUTION_WITH_DISTINCT_ROOT_EXTERNAL_PARENT_ADOPTION_REQUIRED"
+}

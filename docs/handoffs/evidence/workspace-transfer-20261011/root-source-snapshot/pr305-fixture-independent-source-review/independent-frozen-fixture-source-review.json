@@ -1,0 +1,126 @@
+{
+  "verdict": "GO_SOURCE_NORMAL_PUSH_ONLY",
+  "head": "1e9c462fc16534f1a6153ef666ae60a9ac9560d6",
+  "tree": "4d72bd113397900be41b720282736f6ab4999fb2",
+  "ordered_parents": [
+    "3ec9d0acbe30ad94d02e4c24fef2587127964495"
+  ],
+  "branch": "test/canvas-runtime-cache-isolation-20261010",
+  "checkpoint": {
+    "path": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/frozen-test-fixture-source-checkpoint.json",
+    "sha256": "b5be5088acf921984bac61ac6a39a4be3e1a0152d7168566b08509a07e8a76a0",
+    "bytes": 9810
+  },
+  "review_script": {
+    "path": "/workspace/engineering/pr305-fixture-independent-source-review/review_fixture.py",
+    "sha256": "b5dcba4d7069ae6cbca5fade3d72b6458ed9ed4a804214776e59ae7594c3fa14",
+    "bytes": 12380
+  },
+  "scope": [
+    "action_server/tests/action_server_tests/mcp/test_canvas_runtime_admission.py",
+    "action_server/tests/action_server_tests/test_browser_origin_acceptance.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "preservation": {
+    "all_other_Git_body_mode_type_leaves_identical": 1407,
+    "authoring_installed_raw_probe_constants_public_candidate_arguments_byte_identical": true,
+    "synthetic_module_AST_only_Gitblob_read_plus15controls": true,
+    "browser_module_AST_only_PID_boundary_and_readiness_controls": true,
+    "forcedhang15_livepoll10_future25_total30_postcleanup3_budgets_and_live_assertions_unchanged": true,
+    "all268_plus5_producer_body_modes_working_bytes_exact92498": true,
+    "native_original1192_original_inventory_exact": true,
+    "frozen_helpers_browser_unchanged": true,
+    "all8generated_outputs_unmodified": true,
+    "Bootstrap19inputs5existing_environments_verified_no_install": true
+  },
+  "meaningful_evidence": {
+    "CRLF": "15original exact real-fixture RED; current15controls include3valid baselines+12member/version/ownership/prefix rejections; external15GREEN and source scope46GREEN",
+    "PID": "3original empty/incomplete/partial-publication RED; current3external GREEN plus11invalid-pending/new standaloneNode actualpublication control; Node PID only, nobrowser launched",
+    "retained_initial_errors": "ENOSPC/import/formatter diagnostic errors retained separately; only corrected command controls qualify",
+    "configured_current_gates": {
+      "Doctor": "passed prefixture current original source",
+      "Bootstrap": "REUSE_VERIFIED_19inputs_5envs_no_install",
+      "ToolkitTest": {
+        "passed": 69
+      },
+      "scoped_source": {
+        "passed": 46,
+        "integration_deselected": 2
+      },
+      "portable_original_RED_CONTROLLERS_GREEN": {
+        "passed": 18
+      },
+      "full_configured_invoke_test_not_integration": {
+        "passed": 1197,
+        "skipped": 12,
+        "warnings": 15,
+        "seconds": 135.09,
+        "workers": 2
+      },
+      "configured_invoke_lint": "PASS_Ruff302_format_Isort",
+      "configured_invoke_typecheck": {
+        "passed_source_files": 338
+      },
+      "regeneration": "eight workflow outputs and dependabot unchanged",
+      "git_diff_check": "PASS",
+      "markdown_lint": "not installed; configured task disclosed skip"
+    },
+    "frozen_evidence_refs_verified": 18
+  },
+  "historical_actual": {
+    "source": "3ec9d0acbe30ad94d02e4c24fef2587127964495",
+    "tree": "8ed17c0c2ed48a3ad4fe89994bab572d028e59ca",
+    "checkpoint_sha256": "28b2af71d1ac7b5dd0bbd7bf7518845a2c3d208c6700fd102914cffaf449dca3",
+    "independent_actual_review_sha256": "1848613d69513e20039cee94efe960a3609fff451a582c7a33552c8fa4df1108",
+    "scope_preserved_not_relabelled": true,
+    "new_actual_rerun": false
+  },
+  "no_actual_packagegate_browser_provider_install_retry_or_source_mutation_by_reviewer": true,
+  "remaining_HOLD": [
+    "Fresh exact1e9c hostedWindows/Mac CI required; old b915 failure not cleared by localsource controls",
+    "Real forcedhang browser cleanup and actualcombined successor execution NOT RUN",
+    "V5 actualGO remains3ec historical; no successor relabeling",
+    "WholeCorewheel/coldregistry/realartifact/ChatGPT/OAuth/private134/release notqualified"
+  ],
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md integrated41line delta",
+    "Durable learning captured": "Authenticate committed bytes only for synthetic registry samples; retain strict raw installed-member checks. Publish complete exclusive same-dir JSONNodePID before live-descendant polling; preserve deadlines and distinguish handoff from Chromium identity/cleanup. Retain completedraw before assertions; validate locked exact-case stderr launch channel.",
+    "Evidence": [
+      {
+        "path": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/canonical-fixture-and-output-preservation.patch",
+        "sha256": "58c62090aa0f290f75f96aa17e6926aa5430ce6230378375fd2b731df89b0793",
+        "bytes": 3937
+      },
+      {
+        "path": "/workspace/actions-cloud/receipts/pr305-runner/canonical-runner-v5-proposed.patch",
+        "sha256": "e84eb7659efef7f349231b1b8b5a80ef5c0d8a2f20e9dc2e1a9d59eea8c3e0b0",
+        "bytes": 2010
+      },
+      {
+        "path": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/portable-CRLF-RED-corrected.log",
+        "sha256": "186c5f9953cc5f36e6e891dd27bd6a3885134d8db57f08ed1bd5bab658530096",
+        "bytes": 63306
+      },
+      {
+        "path": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/atomic-PID-handoff-RED-after-recovery.log",
+        "sha256": "25a7829c5fd9f6b63ae2a90f95fdc39462211746e3ce899009b8005dc9dfa75c",
+        "bytes": 17829
+      },
+      {
+        "path": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/portable-actual-boundaries-GREEN-regeneration.log",
+        "sha256": "55c681e2c409ef6769cda2353e4150f1623fb21efa58f9ff98a9ea27ad0bbf79",
+        "bytes": 9150
+      }
+    ],
+    "Stale or ambiguous guidance removed": "Synthetic checkout bytes are registry authority; file existence means completePID publication; outerstderr is onlyDEBUG channel; fallback may erase completedoutput; sourcefix clears actualfailedcleanup",
+    "Remaining uncertainty": "Newhead hosted/forcedhang/actual gates remain pending; originalV5 narrow scope unchanged",
+    "Proposal disposition": "e84/ce3 output+locked reporter paragraphs integrated verbatim;72ce PID proposal adapted to verified atomicNode publication and unchanged livegate; original V4 unknownreport remainsunknown"
+  },
+  "Upstream disposition": "none",
+  "read_only_review_execution": {
+    "path": "/workspace/engineering/pr305-fixture-independent-source-review/review.log",
+    "sha256": "d113e0c8d9196cd8d0e0b5688e9453fd8c56dda5c65795219824b26f544bb1a7",
+    "exit_code": 0,
+    "initial_reviewer_assertion": "Expected Ruff success wording was absent in configured task; retained attempt1, corrected to exact302 formatted +RCCSUCCESS log evidence. No package gate rerun."
+  }
+}

@@ -1,0 +1,237 @@
+{
+  "bindings": [
+    {
+      "bytes": 808,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/GREEN-junit.xml",
+      "sha256": "a22a90539a54776d6a9d0b868f1a803b3f3e890022ab41049122fc930f71ea9c"
+    },
+    {
+      "bytes": 2638,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/GREEN-original.private.log",
+      "sha256": "d9cd50bd67ebe75a3293ce8cb5668060fc2db77e822ce5eeabcfa43750782e42"
+    },
+    {
+      "bytes": 3669,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/GREEN-v2-junit.xml",
+      "sha256": "70ef253607d83b0ef64823322e42d8f916a41b61faaa48d80881492fdf015ae7"
+    },
+    {
+      "bytes": 1708,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/GREEN-v2-original.private.log",
+      "sha256": "3fd97fa487688c0d805de309c7e1bfdfd60e4328c319cf7208a97ca716cf5e5c"
+    },
+    {
+      "bytes": 1726,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/GREEN-v3-final-original.private.log",
+      "sha256": "98e9875846bf7375a5d21c94020c060f2f87e23de51f05ea50000dce5a182b94"
+    },
+    {
+      "bytes": 3669,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/GREEN-v3-junit.xml",
+      "sha256": "383cd40edf4bd6bc1e402311340514b474e343fe188fb83da28e8bea31eb5c1a"
+    },
+    {
+      "bytes": 8138,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/RED-junit.xml",
+      "sha256": "17b9f3f2e655ff90d62ea61a9d67608ea8ae89875c917cabb4cc4662a2a6f33d"
+    },
+    {
+      "bytes": 7877,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/RED-original.private.log",
+      "sha256": "d1b1912ac9b56df8826a412ec3db45062138835d877690b4df18c1e23534ebe3"
+    },
+    {
+      "bytes": 5261,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/adapter-and-seven-regressions.patch",
+      "sha256": "6f56ab01f4f773d1888b3386bb227d07d1bc8206b8444dc0013ea5fdc6bdd421"
+    },
+    {
+      "bytes": 950,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/canonical-isolated-version-probe-timeout-roles-proposed.patch",
+      "sha256": "87fb5128523f350011e7940a03802b9d3f2de0548f7a1c1b101d16a0b6031e1d"
+    },
+    {
+      "bytes": 6211,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/combined-adapter-tests-canonical-three-path.patch",
+      "sha256": "805bed37940e4e5ade0e7e02da332192551b3f2bba1536022b901b1a4e24de42"
+    },
+    {
+      "bytes": 2370,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/exact-isolated-probe-AST-and-prospective-three-path-application-proof.json",
+      "sha256": "8d02fa60c8c5692de4fe7119d7046a76d26ef7fbcad5f4b3ab03cb6ec151d3ff"
+    },
+    {
+      "bytes": 26,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/final-private-format.log",
+      "sha256": "3bc53bf3e981a98a34a852e175bf9b77af841edea74fca595d9aedcbaf9a4938"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/final-private-ruff-F.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 8576,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/freeze_probe_patch_and_proposal.py",
+      "sha256": "b2e5da6a573b952a065ee0c84f2da89bd2b86d6f6178147261bc85a7e867b751"
+    },
+    {
+      "bytes": 317,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/initial-static-format-FAIL.json",
+      "sha256": "81160024548afe3e036de182ae37a8a883596e06c669e18b07614aa22c4832a3"
+    },
+    {
+      "bytes": 4162,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/original-preformat-seven-regressions.py",
+      "sha256": "c9e3ac352677880c2718740aa26c9805c2783f3fc5fac2f5d561c867e2975aa6"
+    },
+    {
+      "bytes": 36059,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/original_rcc_runtime_adapter.py",
+      "sha256": "259f7d7265cddc3a6f664676fbd13b478d4534a7f6c8a6b1670a8d19393cf3fb"
+    },
+    {
+      "bytes": 708,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/preparation-and-initial-GREEN-collection-failures.json",
+      "sha256": "a1394dd791093d8259301a26a9ca35104810ede61c21477df601053380a6ce0d"
+    },
+    {
+      "bytes": 5932,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/prepare_probe_patch.py",
+      "sha256": "970c1376848a51adf39c5b977a36645a5f20087a212b17fca393f5bfad45d398"
+    },
+    {
+      "bytes": 19,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/private-format-correction.log",
+      "sha256": "413a709001976657cb743636fd34e48fc41d8d302d665460d3f874b3313da127"
+    },
+    {
+      "bytes": 188450,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/private-prospective-merged-tree.index",
+      "sha256": "242a109bbe5836e4b714b963f3be144ec15b8df77d97329b04a414b14e70fdd7"
+    },
+    {
+      "bytes": 36123,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/proposed_rcc_runtime_adapter.py",
+      "sha256": "c1884571a572277beef50e359f8b5e71abf593e1ebdee4bea2e47290c8da81f2"
+    },
+    {
+      "bytes": 84690,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/proposed_test_rcc_runtime_adapter.py",
+      "sha256": "5bb47d91c308ae3e35e20b01fabc7a97e2c6bd09bcce21cb02760e996b5c8287"
+    },
+    {
+      "bytes": 2684,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/run_private_probe_controls_once.py",
+      "sha256": "59c2547f8ca825b92b340fc48c0197cec84fd59aa7d56ec9e513a356d85e66b5"
+    },
+    {
+      "bytes": 2702,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/run_private_probe_controls_once_v2.py",
+      "sha256": "2ce76939232a8e1b9d1c9e61478f2a4897ee96ae096651eef074d904ee23b866"
+    },
+    {
+      "bytes": 2702,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/run_private_probe_controls_once_v3.py",
+      "sha256": "1f7a1f441c861d8a37178d58e50efe3340a52649dc488db1b06f9f0bc5d2c687"
+    },
+    {
+      "bytes": 4202,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/test_isolated_default_version_probe_regressions.py",
+      "sha256": "eea28414e0855fea24f4ce2acd8cf22831b8fd2eccbc5a8154b59d2747551b91"
+    }
+  ],
+  "commit_order": "Root ordinary396+actuale2 merge AFTER B28 and relocationactual+ind; verifytree9294; applyreviewedthree-path patch andcommit same308branch child; deriveactualcommit+tree thennewSOURCE_LIGHT/FULL",
+  "current_source_tree": "84f850f0d4e08b21afcd8220413ce94322370acf",
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "durable_learning": "Bound version admission at actual subprocess boundary through default startup/location wrapper, notjustdirect helper.",
+    "evidence": "RED4default route observations900; GREENfour10s+legacy900+injectedrunner+fixedtimeoutprivacy andnineunchangedexistingnegativecontrols;wholeASTscope proof.",
+    "exact_delta": "Replace boundedprobe sentence with fourlines: isolatedten-secondprobe sharedbydefaultwrappers; general900-secondbudget separate; injectedrunner testseam notnativeproof.",
+    "remaining_uncertainty": "Realcompatibility/native3/5/7276 functionality NOTRUN; sourcecurrentFULL/config/rootreleasepending.",
+    "stale_ambiguity_removed": "A ten-second directhelper doesnotbound a wrapper thatforwards the900-second generalrunner."
+  },
+  "future_exact_patch_tree": "edf088b1a8acd9709b37dee2532d77c8b2246a50",
+  "future_ordinary_merge_tree": "929410b09fff3521c554cf935411c71f9e2e6b95",
+  "no_source_qualification_carry": true,
+  "original_source": "396925cb3d6527af1768b7f5333f9653c005fc55",
+  "results": {
+    "RED": {
+      "default_routes": 4,
+      "failed": 4,
+      "observed_timeout": 900
+    },
+    "STATIC": "Ownenv Fcheck+Ruffformat diagnosticsPASS; configuredsourcewidechecksNOTRUN",
+    "all_original_test_AST_prefix_exact": true,
+    "basetemp": "All three actual purepytestcalls use separate absentchildren inuniqueparents outside numberedsharedparent;ALL;rejectinheritedADDOPTS; no scratch cleanup",
+    "changed_paths": [
+      "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "construction_failures_preserved": [
+      "Prelaunch missing cwd command never ran",
+      "InitialGREEN4 conftest mixed-path collection error no selected bodies",
+      "Staticformat newtest longlineFAIL; AST-equal format correction; finalGREENonformattedbytes"
+    ],
+    "current_source_FS1426_exact_clean_after": true,
+    "final_GREEN": {
+      "deselected": 99,
+      "errors": 0,
+      "failed": 0,
+      "passed": 16,
+      "scope": "pure syscall spies on mocked approvedtuple/hash, no native binary/functionality qualification",
+      "skipped": 0
+    },
+    "git_objects_only": "Private index and tree objects; no refs/FETCH_HEAD/checkout writes",
+    "new_cases": 7,
+    "new_permanent_test_functions": [
+      "test_isolated_default_version_routes_use_ten_second_probe",
+      "test_legacy_default_version_route_keeps_general_command_budget",
+      "test_isolated_explicit_injected_version_runner_is_preserved",
+      "test_isolated_default_version_timeout_uses_fixed_error"
+    ],
+    "original_verify_signature_and_legacy_branch_AST_exact": true,
+    "other1437_body_mode_exact": true,
+    "proposed_module_sha256": "c1884571a572277beef50e359f8b5e71abf593e1ebdee4bea2e47290c8da81f2",
+    "prospective_leaves": 1440,
+    "prospective_ordinary_tree": "929410b09fff3521c554cf935411c71f9e2e6b95",
+    "prospective_tree_after_exact_three_path_patch": "edf088b1a8acd9709b37dee2532d77c8b2246a50",
+    "reused_existing_negative_cases": 9,
+    "root_branch_head_and_FS_mutations": "NONE",
+    "source_configuration_injected_seams": "No adapter/harness/operator/native/defaultpins changes outside single isolatedbranch dispatch",
+    "source_original": "396925cb3d6527af1768b7f5333f9653c005fc55",
+    "status": "PURE_PRIVATE_PATCH_AND_PROSPECTIVE_APPLY_PROOF_PASS",
+    "whole_module_outside_isolated_branch_AST_exact": true
+  },
+  "status": "PRIVATE_SEVEN_REGRESSION_SOURCE_PATCH_PURE_GO_ROOT_APPLICATION_PENDING",
+  "upstream_disposition": "none; downstream Actions dispatchdefect; no RCC125/118workercomment"
+}

@@ -1,0 +1,124 @@
+{
+  "ROOTrelease": "NOT_CREATED",
+  "capacity_floor": "NONE_FOR_THIS_SERVICEFREE_REPLAY; ROOT_SERIALIZATION_REQUIRED",
+  "capture": "2026-10-11T20:56:16.236661+00:00",
+  "child_baseline_seconds": 120,
+  "child_kill_after_seconds": 10,
+  "contract": {
+    "bytes": 8708,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/frozen-corrected-nine-once2-baseline-only-command-contract-NOTRUN.json",
+    "sha256": "8f9f2aa0cb570170cd381c07ad5f849700449f3f35d3983d11dbe9a6f6d74da0"
+  },
+  "final_source_owner": {
+    "bytes": 11323,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/OWNERFINAL-final-private-corrected-nine-source-constructor-and-original-failure-preservation-NOTRUN.json",
+    "sha256": "8641582defe1dc2aa9cf114928c0778d8faf91841b0a274f8cc3dad0b0d87500"
+  },
+  "mutants": "NOT_RUN",
+  "native_MAIN": "NOT_RUN",
+  "native_readonly_config": {
+    "bytes": 765564,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+    "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25"
+  },
+  "native_readonly_original_release": {
+    "bytes": 1075,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-rcc-current8d49-control3-V9-one-release.json",
+    "sha256": "a131e30087742764ba6dbdbc2634749924133431de3310b2065ced446b97bf3b"
+  },
+  "origin_timeout_seconds": 15,
+  "original_contract": {
+    "bytes": 6839,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-current8d49-nine-real-reload-drain-independent-preexecution-review/frozen-nine-real-source-control-baseline-first-ROOT-command-contract-NOTRUN.json",
+    "sha256": "5f1874357496fe9c890c1acfec43fa114d51c658bd23ea23578fc3c910c1f287"
+  },
+  "original_failed_baseline": {
+    "bytes": 16829,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-nine-real-original-baseline-independent-diagnosis/OWNERFINAL-independent-original-nine-baseline-failure-and-private-control-boundary.json",
+    "sha256": "6288fb4a6d296770a1c930ae73b0854e103378417f250a00a553c7c1bf3a25e2"
+  },
+  "original_launcher": {
+    "bytes": 6371,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-current8d49-nine-real-baseline-once.py",
+    "sha256": "5ffbdebb3cbd7301e3a1d46255fc42d6fbff63bc03c922ec4b21ba9cb426ad5a"
+  },
+  "outer_kill_after_seconds": 10,
+  "outer_seconds": 450,
+  "owned_root": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2",
+  "private_source_owner": {
+    "bytes": 12096,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/OWNERFINAL-private-corrected-nine-catalog-identity-and-held-lock-source-successor-NOTRUN.json",
+    "sha256": "7f5bf5a7c300ab98d6d4521d750470aafab2151cc522700ec687cfdc0234275d"
+  },
+  "readonly_guard": {
+    "bytes": 4690,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/readonly_current_input_guard_v9.py",
+    "sha256": "480be06317562b7e3a5c98a5d794bb5d2a33e7fa6186fe707823ecb1cc583626"
+  },
+  "readonly_guard_argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "120s",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/readonly_current_input_guard_v9.py",
+    "--config",
+    "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+    "--config-sha256",
+    "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25",
+    "--release",
+    "/workspace/engineering/root-rcc-current8d49-control3-V9-one-release.json",
+    "--release-sha256",
+    "a131e30087742764ba6dbdbc2634749924133431de3310b2065ced446b97bf3b",
+    "--label",
+    "control3"
+  ],
+  "required_ROOT_release_fields": [
+    "schema",
+    "scope",
+    "source",
+    "tree",
+    "launcher_binding",
+    "config_binding",
+    "contract_binding",
+    "independent_preexecution_binding",
+    "baseline_only",
+    "native",
+    "mutants"
+  ],
+  "required_ROOT_release_scope": "ROOT_DISTINCT_ONE_CORRECTED_NINE_ONCE2_BASELINE_ONLY",
+  "required_preexecution_decision": "GO_CORRECTED_NINE_ONCE2_BASELINE_PREEXECUTION",
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_config": {
+    "bytes": 12996,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/frozen-current8d49-source-LIGHT-inputs-v3.json",
+    "sha256": "81f52920b50e67619b3bb418a7c1034a2106ec52f4badd71b9d85e29b7376820"
+  },
+  "source_independent": {
+    "bytes": 4667,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-private-corrected-nine-source-independent-review/OWNERFINAL-independent-private-corrected-nine-catalog-lock-SOURCE_ONLY-review.json",
+    "sha256": "aa3f927ef250c86d8b76e02e21f6382f2a894c22b0bba7f285b08c5f60f13da4"
+  },
+  "source_leaves": 1440,
+  "status": "PREPARATION_NOT_RUN_REQUIRES_DISTINCT_REAL_INDEPENDENT_PREEXEC_REVIEW_AND_ROOT_RELEASE",
+  "subprocess_parent_seconds": 135,
+  "test_source": {
+    "bytes": 16429,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py",
+    "sha256": "a577d21615877bc19a88ca141e5c8ac7c9779120abf7f86b7a6ec6d2367d5da2"
+  },
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+}

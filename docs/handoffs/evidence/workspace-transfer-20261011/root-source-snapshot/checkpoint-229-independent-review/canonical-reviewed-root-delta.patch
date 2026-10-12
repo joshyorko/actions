@@ -1,0 +1,61 @@
+diff --git a/docs/skills/repository-operations.md b/docs/skills/repository-operations.md
+index 541ff6c6..997da7e9 100644
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -2969,3 +2969,56 @@ within the recorded owner's scope. Forced cleanup is not natural Runtime exit.
+ Count the combined gate's tool Runs by its declared action names; a resource read
+ can create an additional persisted Run. Partial Python calls and sampled public
+ Core members do not establish later browser calls or the five-tool-Run gate.
++
++Before pushing an existing PR, query its actual `headRefName` and compare it with
++the local branch, independently accepted HEAD and existing remote reference.
++Stop on a mismatch. Push only that verified reference and read back the PR head;
++a successful Git push alone can create an unintended branch without updating the
++PR. Never derive the branch name from its title or description. If correcting a
++new reference created by the current task, preserve the accepted commit on the
++proper branch first, verify that the accidental reference has no other work or
++PR, then remove only that owned reference with an exact-head guard.
++
++Hash receipts as exact file bytes and test Git ancestry with full source commit
++IDs. A receipt SHA-256 is not a commit ID. A synthetic producer can have the
++accepted source tree without being an ancestor of a later branch; compare its
++production inputs separately and preserve both identities.
++
++Bind Playwright dependency measurements to the frontend's executed
++`node_modules` path. Require it to resolve to the measured prepared tree before
++discovery or execution; an absent or different ignored link is a readiness
++failure. The locked driver's list-only report contains unexecuted entries with
++empty results and skipped counters. Admit discovery by the intended spec and
++entry count with no global errors, while retaining the executed-case requirement
++of one pass, zero skips/retries and the declared five tool Runs. Discovery and
++cleanup consume the existing outer deadline.
++
++Preserve a returned CompletedProcess's stdout, stderr and return code before
++post-command assertions. An assertion with no stream attributes must not replace
++those bytes with an empty exception fallback. Retain the primary assertion and
++cleanup results separately. Missing report or launch evidence keeps the combined
++browser gate unaccepted even when the command returned zero and persisted tool
++Runs succeeded. Search retained command, worker and supervisor evidence for an
++authoritative copy; a last-run marker cannot reconstruct the missing report.
++Any later reporter-channel parser must bind the locked schema and measured
++launch path; a DEBUG path does not establish live PID identity.
++
++After a target advances, a PR payload can retain its old base SHA and synthetic
++merge commit. Authenticate their ordered parents and complete tree against the
++live named target. Derive expected jobs from the prospective diff and the
++combined workflows' branch/path filters: imported generator bytes identical to
++the target do not trigger Core CI, while the operational guide triggers Runtime
++package-artifact CI. Include late dependency-created publisher jobs; classify
++Copilot setup separately. A clean prospective union is preparation until its
++actual source/control tuple is frozen, independently reviewed and tested.
++
++Review a route census as a Counter of route class, normalized `path_format` and
++complete sorted method set. A URL set loses duplicate registrations and method
++or class changes. The stopped-startup census verifies registration and
++classification; credential enforcement still requires its actual request matrix.
++
++Candidate wheel identity requires exactly one UTF-8 `.dist-info/METADATA` member
++whose `Name` and `Version` match the expected distribution and checked-out version
++reported by pinned Poetry. Filename selection alone does not admit the archive.
++Keep member identity separate from the whole-wheel digest, which binds bytes but
++does not prove installation or a provider-backed run.

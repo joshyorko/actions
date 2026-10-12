@@ -1,0 +1,191 @@
+{
+  "schema": 1,
+  "status": "OWNERFINAL_DOCS_PREPARATION_READY_ROOT_REVIEW_NO_COMMIT_NO_PUSH",
+  "checkpoint_branch": "handoff/actions-swarm-mk3-wave8-20261010",
+  "existing_checkpoint_HEAD": "62f4e180f6c894777ebc8ed3a729e88d2f6531d6",
+  "existing_checkpoint_tree": "a7cb47cef9eae2ce3b219bb807b535582c67804e",
+  "current_product_target": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "current_product_tree": "afe2679cc93bf27fa5021c7698ee7ad3ee21a1b9",
+  "current_product_ordered_parents": [
+    "a54c982462d1e7ad011d8152bfc299d997503fb3",
+    "1299cc4bb6586f467d36ca124faaaaa77362695f"
+  ],
+  "initial_dirty_work_preserved": true,
+  "unchanged_existing_tracked_count": 3471,
+  "tracked_authorized_doc_paths": [
+    "docs/program/engineering-handoff.md",
+    "docs/skills/provenance-observability.md",
+    "docs/skills/repository-operations.md"
+  ],
+  "safe_exact_copied_body_count": 80,
+  "safe_exact_copied_body_bytes": 663108,
+  "new_document_file_count": 87,
+  "current_manifest": {
+    "path": "/workspace/engineering/campaign-checkpoint/docs/program/evidence/wave11/current-engineering-successor-20261011/curated-safe-manifest-v5.json",
+    "bytes": 57397,
+    "sha256": "4819322b74fbaef0e6541b5abae59817acd234039b2b93fb30fed0ceb31b75d1",
+    "mode": "0o600"
+  },
+  "old_manifest_versions": "ALL_RETAINED_NOT_RELABELLED",
+  "old_collector0319": {
+    "path": "/workspace/engineering/checkpoint-current-engineering-after299-0938.py",
+    "bytes": 17097,
+    "sha256": "0319f50eaa81800c7edf3bc75b80182bbfc5721ba0ef86d45c199e3bc0a6d4d1",
+    "mode": "0o600"
+  },
+  "original1180_graph": "ALL_NONOWNED_TRACKED_BODY_MODE_EXACT_NO_COLLECTOR_OR_GRAPH_REGENERATION",
+  "current_operator": {
+    "path": "/workspace/engineering/campaign-checkpoint/docs/program/evidence/wave11/current-engineering-successor-20261011/OPERATOR.md",
+    "bytes": 15973,
+    "sha256": "f3930e4139759fc5bab168fdd5d1e406e64b1e44f8cdd82769ec473dc6a22841",
+    "mode": "0o644"
+  },
+  "current_handoff": {
+    "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/actions-swarm-mk3-20261011-current-engineering-successor.md",
+    "bytes": 3288,
+    "sha256": "aeaebeaf6313185ece5e57ef78e053243f27529327be2e20538708832eb32220",
+    "mode": "0o644"
+  },
+  "new_file_inventory": {
+    "path": "/workspace/engineering/checkpoint-curated-successor-source-20261011/private-exact-new-document-file-inventory-v1.json",
+    "bytes": 29561,
+    "sha256": "65ac726015a2eb6a6bbdf620fe8c09142aab1ce2942af019b441aa29c1a563c8",
+    "mode": "0o600"
+  },
+  "tracked_diff": {
+    "path": "/workspace/engineering/checkpoint-curated-successor-source-20261011/review-current-tracked-docs-relative-62f4-exact.patch",
+    "bytes": 18899,
+    "sha256": "d5b13799e00fe68b48405d9598f2d9e4a862d4fd74321ea3ab48c4a47b1617cc",
+    "mode": "0o600"
+  },
+  "canonical_documentation_improvement": [
+    {
+      "canonical_file": "/workspace/engineering/campaign-checkpoint/docs/skills/repository-operations.md",
+      "original_dirty": {
+        "path": "/workspace/engineering/checkpoint-curated-successor-source-20261011/original-dirty-repository-operations.md",
+        "bytes": 233987,
+        "sha256": "f0d27fec2a4de184dc128c50a619ae1e521cadbfd1e9c59b9afe28764cf6ace5",
+        "mode": "0o600"
+      },
+      "current": {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/skills/repository-operations.md",
+        "bytes": 241757,
+        "sha256": "c83e3cc7a1ec35de079c0a03fda4d41f85728b5c7bf6805fdaed9327e1bd837d",
+        "mode": "0o600"
+      },
+      "exact_additions_patch": {
+        "path": "/workspace/engineering/checkpoint-curated-successor-source-20261011/exact-additions-preserving-original-dirty-repository-operations.md.patch",
+        "bytes": 8877,
+        "sha256": "ab871a30e64ad01b233e7abff7f3d4fceb26b71e2f41143dd1a9dc9a15227855",
+        "mode": "0o600"
+      },
+      "inserted_lines": 113,
+      "removed_original_lines": 0
+    },
+    {
+      "canonical_file": "/workspace/engineering/campaign-checkpoint/docs/skills/provenance-observability.md",
+      "original_dirty": {
+        "path": "/workspace/engineering/checkpoint-curated-successor-source-20261011/original-dirty-provenance-observability.md",
+        "bytes": 7942,
+        "sha256": "467433a1420681798dfce4fa307d250022eebb7006db43925698c6cfc516215a",
+        "mode": "0o600"
+      },
+      "current": {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/skills/provenance-observability.md",
+        "bytes": 13557,
+        "sha256": "02b54b9428bf26a7819e555defc43f9aff115cb2884c2bce794339315bc90854",
+        "mode": "0o600"
+      },
+      "exact_additions_patch": {
+        "path": "/workspace/engineering/checkpoint-curated-successor-source-20261011/exact-additions-preserving-original-dirty-provenance-observability.md.patch",
+        "bytes": 6055,
+        "sha256": "1b452eb19bbf6d7568256e3d0cbefe78b441ce8eeaffa7667ae817797152055c",
+        "mode": "0o600"
+      },
+      "inserted_lines": 82,
+      "removed_original_lines": 0
+    }
+  ],
+  "documentation_learning": [
+    "Preserve provenance denial boundary and shutdown ownership ordering from actuala54 source without deleting original dirty guide lines.",
+    "Once-owned per-version package cache and exact native-home mode; percase holotree/artifact/provider separation remains.",
+    "Bind execution configuration consumed-path closure and immutable archived evidence aliases without restoring removed roots or treating content hashes as Git commits.",
+    "Unique absent per-invocation pytest basetemp/policy all; existing targets are removed and policy none increases deletion; unobserved retention process attribution UNKNOWN.",
+    "Curated safe-body copying never recursively follows private payload references; source, CI, preparation and actual acceptance remain distinct."
+  ],
+  "stale_or_ambiguous_guidance_removed": "Only newly inserted eight-line pytest paragraph refined to accepted eleven-line successor; original patch retained. Earlier313 draft misreading corrected to12dd FULL NOT_RUN. Older manifests and all initial dirty lines remain exact. Duplicate imported canonical material recorded and not repeated.",
+  "remaining_uncertainty": [
+    "RCC396 LIGHT qualified at historicala54; FULL NOT_RUN; samebranch actuale2 refresh and new bound gates needed.",
+    "V8 source-only frozen RED3/GREEN172 independent review pending; no actual config admission; RCC5/7276 supported newer NONE.",
+    "PR3055306 V4 static review historical; FULL NOT_RUN; actuale2 refresh and named pytest-isolation successor needed.",
+    "PR31312dd FULL NOT_RUN; old499 full PASS historical only; samebranch refresh needed.",
+    "Pytest38 original expanded bytes UNAVAILABLE, archiver never executed, responsible retention invocation UNKNOWN.",
+    "B28 preservation and relocation PREPARATION only; archiver NOT_AUTHORED and no actual archive.",
+    "PR221 a54 aggregate acquisition PREPARATION only; metadata-only connector successor has no executor/acquisition; actuale2 qualification needs fresh source/provenance/consumer gates.",
+    "Private01f/full134135/fullplatform/native/ChatGPT/Homebrew/publication/release remain HOLD."
+  ],
+  "original_failed_metadata_constructors": "RETAINED_PRIVATE_NO_FAILED_OUTPUT_RELABELLED; V4 verifier hit unchanged historical unavailable link, V5/V6/V7 distinguish preexisting links from authored links.",
+  "verification": {
+    "JSON_parse": "PASS",
+    "authored_existing_local_links": 134,
+    "preexisting_missing_links": [
+      {
+        "path": "docs/program/engineering-handoff.md",
+        "target": "../../../evidence/pr269-workitems-artifact-retrieval.json",
+        "scope": "EXISTED_IN_ORIGINAL_SNAPSHOT_NOT_CHANGED"
+      }
+    ],
+    "all_copied_SHA_and_mode": "PASS",
+    "all_nonowned_tracked_body_Git_mode": "PASS",
+    "all_initial_dirty_lines_preserved_in_order": "PASS",
+    "signedURL_or_credential_payload_scan": "PASS",
+    "referenced_raw_payload_copy": "NOT_RUN",
+    "diff_whitespace": "PASS"
+  },
+  "bindings": [
+    {
+      "path": "/workspace/engineering/checkpoint-curated-successor-source-20261011/safe-current-curated-docs-verification-v7.json",
+      "bytes": 3725,
+      "sha256": "8556cfabd95cdfe9538ee333d563694a80acebd126a7704f7621ad86b8304096",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/checkpoint-curated-successor-source-20261011/private-complete-existing-tracked-body-mode-proof-v7.json",
+      "bytes": 1034904,
+      "sha256": "ebe3f7185827cdd01c82adb24080a567110da4203565292930143325ee4cb7b9",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/checkpoint-curated-successor-source-20261011/exact-canonical-reconciliation-dispositions-v3.json",
+      "bytes": 3859,
+      "sha256": "8facd38e2bad6387e9b266817db0c4192fbdea0276aa1ccf4d1218244c2f91b7",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/checkpoint-curated-successor-source-20261011/canonical-retention-v3-disposition.json",
+      "bytes": 654,
+      "sha256": "0563ec5401a8a109db67d82c8f9aa260cdaf3980ade4f0db3b6df3108d504d12",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/checkpoint-curated-successor-source-20261011/private-safe-payload-field-inspection.json",
+      "bytes": 13767,
+      "sha256": "5c02ed96aab919138528cf803680540c702d6d78db7cb2a8cca93c6491842e4d",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/checkpoint-curated-successor-source-20261011/v4-historical-link-scope-failure.json",
+      "bytes": 354,
+      "sha256": "05c39fdb2ad349e8b88166f3905f5540d4e3b1bcef3ad4c921da6c911c03e0ce",
+      "mode": "0o600"
+    }
+  ],
+  "operations": {
+    "source_changes": "NONE_PRODUCT",
+    "product_tests_gateway_native_installs_archive_remove": "NOT_RUN",
+    "upstream_posts": "NONE_NEW_EXISTING_AUTHORIZED_RCC125118_COORDINATION_RETAINED",
+    "commit": "NOT_RUN_AWAIT_ROOT_REVIEW",
+    "push": "NOT_RUN",
+    "merge_publication_issueclosure": "NOT_RUN"
+  }
+}

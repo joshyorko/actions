@@ -1,0 +1,110 @@
+{
+  "argv_adoption_after_activation": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "900s",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/pr307-currente2-concrete-LIGHT-PREEXECUTION-v2/launch_one_owned_light.py",
+    "/workspace/engineering/pr307-currente2-concrete-LIGHT-PREEXECUTION/root-one-LIGHT-release.json",
+    "ROOT_OWNER_RELEASE_SHA",
+    "IMMUTABLE_INDEPENDENT_REVIEW_PATH",
+    "IMMUTABLE_INDEPENDENT_REVIEW_SHA"
+  ],
+  "authorization": "Only ROOT distinct exact one release, filling release SHA and this immutable review path/hash into bound argv; this review executes nothing",
+  "bounds": {
+    "Invoke_YAML_probe": 30,
+    "Invoke_each": 90,
+    "fallback_owned_wrapper_waits": 5,
+    "full_NOTRUN": true,
+    "per_phase_budgets_seconds": {
+      "Doctor": 120,
+      "Toolkit": 180,
+      "controlled": 210,
+      "focus": 180,
+      "generator": 120,
+      "origins": 120,
+      "static": 180
+    },
+    "primary_sequence_budget_seconds": 780,
+    "root_outer_seconds": 900,
+    "rootkill_grace_seconds": 10
+  },
+  "config": {
+    "bytes": 8165,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-currente2-concrete-LIGHT-PREEXECUTION-v2/immutable-one-LIGHT-inputs.json",
+    "sha256": "3b4e42668cb99bc38969c6f979ece431abdd123db4217baf282c3cbb581369ce"
+  },
+  "controlled_staged_Invoke": {
+    "bytes": 6408,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr307-currente2-concrete-LIGHT-PREEXECUTION/controlled_invoke_owned_stage.py",
+    "sha256": "998b74ededfcafca9fd287c172313d5ebdf88f149141471fff5a3dd027bbbf51"
+  },
+  "decision": "GO_CURRENT2314_LIGHT_PREEXECUTION",
+  "delta_proof": {
+    "bytes": 5460,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current2314-concrete-LIGHT-independent-review/independent-named-v2-concrete-LIGHT-delta-proof.json",
+    "sha256": "bed0694a0b31549adb4e47edc244524adfdeea2519ec2004136847149bdb937c"
+  },
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "durable_learning": "Entry-only selfbinding must be distinguished from all-input before/finally preservation; named v2 now implements the latter for config and launcher",
+    "evidence": "Original f650 guard lacks self/config checks, named5cfd prefix guard adds exact checks while all other functions and commands are AST-identical",
+    "exact_delta": "For a reviewed once-only launcher, include its immutable configuration and root-authorized launcher byte hash in the same before/finally guard as external inputs. Entry-only selfbinding does not establish that those inputs stayed unchanged during execution; preserve an original HOLD and use a named successor without replaying gates.\n",
+    "remaining_uncertainty": "Execution, post preservation outcome, origin probes, source-authority and FULL/freshCI remain unobserved",
+    "stale_or_ambiguous_guidance_removed": "Initial binding is not mislabeled as always-post coverage"
+  },
+  "fresh_conditions": [
+    "Currentsourceclean2314/tree2987 andallfrozenbindings",
+    "FreshuniqueABSENTattemptroot; workspace>=536870912; rootserialization/no otherheavy",
+    "Managedactivation18values+PATHprefix verified; cachedprefix exact; ownRuntime testPython explicit perphase",
+    "Independent concretePREEXECGO+distinct rootrelease; no automaticretry"
+  ],
+  "launcher": {
+    "bytes": 12568,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr307-currente2-concrete-LIGHT-PREEXECUTION-v2/launch_one_owned_light.py",
+    "sha256": "5cfd5809778212415a41349e02c081312011cf4c1f641150d233abde4099f088"
+  },
+  "limits": [
+    "Current LIGHT outcomes and five actual import origin probes NOT_RUN",
+    "No FULL/native/real OAuth acquisition/installed consumer/release acceptance",
+    "Outer SIGKILL may prevent finally: such outcome remains incomplete HOLD",
+    "Fallback owned process-group wait is bounded and does not establish complete descendant or reader cleanup",
+    "Current2314/e2 source-only subject must be rebracketed before root launch; no refreshed target/CI carry"
+  ],
+  "original_HOLD": {
+    "bytes": 3699,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current2314-concrete-LIGHT-independent-review/OWNERFINAL-independent-current2314-original-concrete-LIGHT-PREEXECUTION-HOLD.json",
+    "sha256": "dae98f18b25c57226293253132572bd5c56f2c6e30d877a281dc5973bf8e8f95"
+  },
+  "proposal_binding": {
+    "bytes": 7174,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-currente2-concrete-LIGHT-PREEXECUTION-v2/OWNERFINAL-current2314-concrete-LIGHT-PREEXECUTION-v2.json",
+    "sha256": "f5242f221043785c61916793ffec05c4d3dee9820642c9de210ef435298d3e4d"
+  },
+  "read_only": true,
+  "root_release_schema": {
+    "config_sha256": "3b4e42668cb99bc38969c6f979ece431abdd123db4217baf282c3cbb581369ce",
+    "decision": "RELEASE_ONE_CURRENT2314_LIGHT_ONLY",
+    "file": "exclusive regular nonsymlink0600 ownUID/GID; existing declared root release path remainsnotcreated",
+    "independent_review": {
+      "path": "EXACT_OWNERANNOUNCED_PATH",
+      "sha256": "EXACT_OWNERANNOUNCED_HASH"
+    },
+    "launcher_sha256": "5cfd5809778212415a41349e02c081312011cf4c1f641150d233abde4099f088",
+    "source": "2314aea95795fbc1372a6f7b0b7b298b7cf124c3",
+    "tree": "2987ed3a23e560fb40e13aadbcd6bd613ead3f25"
+  },
+  "schema": 1,
+  "source": "2314aea95795fbc1372a6f7b0b7b298b7cf124c3",
+  "status": "INDEPENDENT_CONCRETE_LIGHT_V2_PREEXECUTION_GO_ONLY",
+  "tree": "2987ed3a23e560fb40e13aadbcd6bd613ead3f25",
+  "upstream_disposition": "none",
+  "verified": "Full original source1442/prepared30/five metadata/15old refs/ignored output preservation and technical interface facts retained from original review; named v2 closes config/self before/finally gap; source clean at original current inspection"
+}

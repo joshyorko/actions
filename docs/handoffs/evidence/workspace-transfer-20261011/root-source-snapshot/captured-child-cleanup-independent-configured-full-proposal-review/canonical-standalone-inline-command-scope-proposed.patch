@@ -1,0 +1,7 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@
++Treat each standalone `python -c` body as its own module scope. Bind names
++used by preflight and origin checks inside that body; names imported by an
++earlier shell preflight are unavailable to the later interpreter. Preserve a
++refused proposal and freeze a named correction before granting execution.

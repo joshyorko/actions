@@ -1,0 +1,49 @@
+--- /workspace/engineering/rcc-defaultbackend35-typed-oracle-once2-PREEXEC-NOTRUN/run_root_defaultbackend35_typed_oracle_once2_NOTRUN.py
++++ /workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/run_root_defaultbackend35_once2_exact_census_NOTRUN.py
+@@ -12,9 +12,9 @@
+ import xml.etree.ElementTree as ET
+ 
+ sys.dont_write_bytecode = True
+-BASE = Path('/workspace/engineering/rcc-defaultbackend35-typed-oracle-once2-PREEXEC-NOTRUN')
+-CONFIG = BASE / 'FROZEN-defaultbackend35-typed-oracle-once2-config-NOTRUN.json'
+-RELEASE = Path('/workspace/engineering/root-one-defaultbackend35-typed-oracle-once2-pure-controls-release.json')
++BASE = Path('/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN')
++CONFIG = BASE / 'FROZEN-defaultbackend35-once2-exact-census-config-NOTRUN.json'
++RELEASE = Path('/workspace/engineering/root-one-defaultbackend35-once2-exact-census-release.json')
+ CACHED = '/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python'
+ 
+ 
+@@ -75,7 +75,7 @@
+         read_bound(row)
+     for row in (cfg['launcher'],):
+         physical(row['path'],0o400); read_bound(row)
+-    expected={'schema':1,'status':'ROOT_DISTINCT_ONE_DEFAULT_DESCRIPTOR35_TYPED_ORACLE_ONCE2_PURE_CONTROLS',
++    expected={'schema':1,'status':'ROOT_DISTINCT_ONE_DEFAULT_DESCRIPTOR35_ONCE2_EXACT_CENSUS_PURE_CONTROLS',
+               'source':cfg['source'],'tree':cfg['tree'],'config_binding':cfg_binding,
+               'launcher_binding':cfg['launcher'],
+               'source_owner_binding':cfg['source_owner'],'source_independent_review':cfg['source_independent_review'],
+@@ -87,7 +87,7 @@
+     for key,value in cfg['required_source_review_fields'].items():
+         need(value is not None and type(source_review.get(key)) is type(value) and source_review[key]==value,'DEFAULTBACKEND35_INDEPENDENT_SOURCE_SCOPE')
+     review=json.loads(read_bound(release['independent_preexecution_review']))
+-    for key,value in {'schema':1,'status':'INDEPENDENT_DEFAULTBACKEND35_TYPED_ORACLE_ONCE2_SOURCE_PREEXECUTION_GO',
++    for key,value in {'schema':1,'status':'INDEPENDENT_DEFAULTBACKEND35_ONCE2_EXACT_CENSUS_SOURCE_PREEXECUTION_GO',
+                       'source':cfg['source'],'tree':cfg['tree'],'config_sha256':a.config_sha256,
+                       'launcher_sha256':cfg['launcher']['sha256'],'controls_sha256':cfg['controls']['sha256'],'control_successor_proof_sha256':cfg['control_successor_proof']['sha256']}.items():
+         need(type(review.get(key)) is type(value) and review[key]==value,'DEFAULTBACKEND35_INDEPENDENT_PREEXECUTION_SCOPE')
+@@ -127,12 +127,13 @@
+     need(all(suite.get(k)==v for k,v in {'tests':'35','failures':'0','errors':'0','skipped':'0'}.items()),'DEFAULTBACKEND35_JUNIT_COUNTS')
+     cases=list(suite.findall('testcase')); names=[c.get('name') for c in cases]
+     need(len(cases)==len(set(names))==35 and sorted(names)==sorted(cfg['expected_case_names']),'DEFAULTBACKEND35_EXACT_PARAMETER_CASES')
+-    need(all(not c.findall('failure') and not c.findall('error') and not c.findall('skipped') and c.get('classname')==Path(cfg['controls']['path']).stem for c in cases),'DEFAULTBACKEND35_JUNIT_NO_NONPASS_OR_FOREIGN_CLASS')
++    need(all(not c.findall('failure') and not c.findall('error') and not c.findall('skipped') and c.get('classname')==cfg['expected_junit_classname'] for c in cases),'DEFAULTBACKEND35_JUNIT_NO_NONPASS_OR_FOREIGN_CLASS')
+     stdout=(root/'primary'/'original.stdout.private').read_text(encoding='utf-8',errors='strict')
++    need(re.findall(r'^rootdir: ([^\r\n]+)$',stdout,re.M)==[cfg['pytest_rootdir']],'DEFAULTBACKEND35_EXACT_OBSERVED_ROOTDIR')
+     nodes=[]
+     for match in re.finditer(r'^(.+?)::(test_\S+) PASSED(?:\s+.*)?$',stdout,re.M):
+         path,name=match.groups()
+-        need((root/path).resolve()==Path(cfg['controls']['path']).resolve(),'DEFAULTBACKEND35_ACTUAL_NODE_PATH')
++        need(path==cfg['expected_stdout_node_path'] and (root/path).resolve()==Path(cfg['controls']['path']).resolve(),'DEFAULTBACKEND35_ACTUAL_NODE_PATH')
+         nodes.append(name)
+     need(len(nodes)==len(set(nodes))==35 and sorted(nodes)==sorted(cfg['expected_case_names']),'DEFAULTBACKEND35_TRUE_STDOUT_NODE_CENSUS')
+     return {'schema':1,'status':'PASS_35_FAKE_BACKEND_CASES_ONLY','counts':{'passed':35,'failed':0,'errors':0,'skipped':0,'unique_cases':35},'expected_names':cfg['expected_case_names'],'junit_names':names,'stdout_names':nodes,'junit_binding':binding(junit)}

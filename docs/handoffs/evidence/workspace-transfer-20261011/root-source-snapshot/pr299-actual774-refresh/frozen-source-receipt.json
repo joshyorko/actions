@@ -1,0 +1,487 @@
+{
+  "schema": "actions-pr299-actual774-source-refresh/v1",
+  "status": "FROZEN_SOURCE_FOR_INDEPENDENT_REVIEW_NO_PUSH",
+  "branch": "feat/shared-run-output-20261010",
+  "head": "5db93e2251cf039ef81780730098da1b255d8d2e",
+  "tree": "bf3e9dffb8e4d07cf1a06ba376c4e3a64e9bfdf0",
+  "parent": "11c9ab3aa3b5b953486794878408bbd7a7e5ca78",
+  "ordinary_merge": {
+    "head": "11c9ab3aa3b5b953486794878408bbd7a7e5ca78",
+    "tree": "758f098dd846437b0d69d246d112fbdb89caf363",
+    "ordered_parents": [
+      "2ad0fd6a899d26aa92d719390f639a76b89fb6f3",
+      "774438b130afb2ead9bbc1c1b76cb6f91e72150a"
+    ]
+  },
+  "source_proof": {
+    "path": "/workspace/engineering/pr299-actual774-refresh/source-union-proof.json",
+    "bytes": 90664,
+    "sha256": "c94972c2c44db77ecc6ac3ddb0c6beb5c528f6ad9cd08039fd33a9b3804ced9b"
+  },
+  "source_inspector": {
+    "path": "/workspace/engineering/pr299-actual774-refresh/verify_source.py",
+    "bytes": 5205,
+    "sha256": "cd215fe6faafc31b3e6adb047bc14f39ecdf3c0e80e5a4d228ea1cca9c0e2d99"
+  },
+  "all_old_target_leaves_retained": true,
+  "original23_source_test_modes_blobs_exact9cb_and80ba": {
+    "action_server/src/actions/server/_actions_run.py": [
+      "100644",
+      "blob",
+      "24fc844ad99c658d70f6f5069f0df250bb72ad87"
+    ],
+    "action_server/src/actions/server/_api_analytics.py": [
+      "100644",
+      "blob",
+      "8b3177b995500ec111fbc79b8e7c8589319b1cd2"
+    ],
+    "action_server/src/actions/server/_api_run.py": [
+      "100644",
+      "blob",
+      "9f0bab96b6e65c0bd455cc4c8aaa8cc554a22c24"
+    ],
+    "action_server/src/actions/server/_models.py": [
+      "100644",
+      "blob",
+      "405304f2e593fdfe949b431851eb0dae39c6ab96"
+    ],
+    "action_server/src/actions/server/_runs_state_cache.py": [
+      "100644",
+      "blob",
+      "3774e9a0e77d43e63a18733a4ff5652454ef06ce"
+    ],
+    "action_server/src/actions/server/migrations/__init__.py": [
+      "100644",
+      "blob",
+      "7889794dd3db1019bf4cdc179fa892c05943dc79"
+    ],
+    "action_server/src/actions/server/migrations/migration_add_run_outputs.py": [
+      "100644",
+      "blob",
+      "3629ef55d42815acc7c1701bdd5b6949d3394ec6"
+    ],
+    "action_server/src/actions/server/run_outputs/__init__.py": [
+      "100644",
+      "blob",
+      "6787c69b364901f1a1eed93e553ae8cfe4d194ef"
+    ],
+    "action_server/src/actions/server/run_outputs/filesystem.py": [
+      "100644",
+      "blob",
+      "89170173dd0f1771e1a9923bb8532f2b28448dd1"
+    ],
+    "action_server/src/actions/server/run_outputs/models.py": [
+      "100644",
+      "blob",
+      "ae75ceee659776fd51e1dda36528a22640afba19"
+    ],
+    "action_server/src/actions/server/run_outputs/service.py": [
+      "100644",
+      "blob",
+      "55f5c09aeb0a3e9199b56916bb7fee41708b35c6"
+    ],
+    "action_server/src/actions/server/run_outputs/types.py": [
+      "100644",
+      "blob",
+      "cac30880373c26f648bb1c835fb74449f567cb22"
+    ],
+    "action_server/tests/action_server_tests/mcp/test_alias_history.py": [
+      "100644",
+      "blob",
+      "2ff3159d6dd04e583a903fb5b913a7491a3ce9c8"
+    ],
+    "action_server/tests/action_server_tests/mcp/test_resource_history.py": [
+      "100644",
+      "blob",
+      "ef1f0d0c14afd7895c268e817699113f7325679f"
+    ],
+    "action_server/tests/action_server_tests/run_outputs/test_concurrency.py": [
+      "100644",
+      "blob",
+      "6aff0138011bc1e5bce88e70ba542044601292ff"
+    ],
+    "action_server/tests/action_server_tests/run_outputs/test_filesystem.py": [
+      "100644",
+      "blob",
+      "b10f3ede197762836b043df60101a95f02bbd62d"
+    ],
+    "action_server/tests/action_server_tests/run_outputs/test_migration.py": [
+      "100644",
+      "blob",
+      "91d10765b9d3441c76817735790c9a318eb94e3c"
+    ],
+    "action_server/tests/action_server_tests/run_outputs/test_service.py": [
+      "100644",
+      "blob",
+      "4fcd73a8764c52f2681ba909541d578ddd2457cf"
+    ],
+    "action_server/tests/action_server_tests/test_artifact_storage.py": [
+      "100644",
+      "blob",
+      "3dc769d5b5372af72e8991140135cd652cea0bdf"
+    ],
+    "action_server/tests/action_server_tests/test_database.py": [
+      "100644",
+      "blob",
+      "fbca68efd3222f2b40ed6db6799ef4edad513796"
+    ],
+    "action_server/tests/action_server_tests/test_database/test_database_schema_evolution.txt": [
+      "100644",
+      "blob",
+      "41ad231369f0d38413ca0749ea865bfca9a23d7d"
+    ],
+    "action_server/tests/action_server_tests/test_database_shared.py": [
+      "100644",
+      "blob",
+      "6836bef3d56d454ec0d2a90b5bd530a3ad51a5b3"
+    ],
+    "action_server/tests/action_server_tests/test_server_websockets.py": [
+      "100644",
+      "blob",
+      "c4f6fc5a04d380a6bb7ac3b0874dfd0286dd77e4"
+    ]
+  },
+  "producer_comparison": {
+    "current_count": 274,
+    "current274_exact_original299": true,
+    "historical_count": 268,
+    "historical262_match": true,
+    "historical6changed": {
+      "action_server/src/actions/server/_actions_run.py": {
+        "historical": [
+          "100644",
+          "blob",
+          "3637cfcd94e5d91f0bf5b9b2fc4b3e94d4562826"
+        ],
+        "current": [
+          "100644",
+          "blob",
+          "24fc844ad99c658d70f6f5069f0df250bb72ad87"
+        ]
+      },
+      "action_server/src/actions/server/_api_analytics.py": {
+        "historical": [
+          "100644",
+          "blob",
+          "7f82f03353940b457fb5057e22e02a5c6f962197"
+        ],
+        "current": [
+          "100644",
+          "blob",
+          "8b3177b995500ec111fbc79b8e7c8589319b1cd2"
+        ]
+      },
+      "action_server/src/actions/server/_api_run.py": {
+        "historical": [
+          "100644",
+          "blob",
+          "424094841a29bd11d6bc7fb0f3b9e528573353d9"
+        ],
+        "current": [
+          "100644",
+          "blob",
+          "9f0bab96b6e65c0bd455cc4c8aaa8cc554a22c24"
+        ]
+      },
+      "action_server/src/actions/server/_models.py": {
+        "historical": [
+          "100644",
+          "blob",
+          "e2cd220d7c948d87bf961a253c28b3ee54e8dcbb"
+        ],
+        "current": [
+          "100644",
+          "blob",
+          "405304f2e593fdfe949b431851eb0dae39c6ab96"
+        ]
+      },
+      "action_server/src/actions/server/_runs_state_cache.py": {
+        "historical": [
+          "100644",
+          "blob",
+          "6428a201a110b8d1073fc3b5265d9282723de944"
+        ],
+        "current": [
+          "100644",
+          "blob",
+          "3774e9a0e77d43e63a18733a4ff5652454ef06ce"
+        ]
+      },
+      "action_server/src/actions/server/migrations/__init__.py": {
+        "historical": [
+          "100644",
+          "blob",
+          "cb68bcb4a2e41ecefcb5a409ce5c26065a505d05"
+        ],
+        "current": [
+          "100644",
+          "blob",
+          "7889794dd3db1019bf4cdc179fa892c05943dc79"
+        ]
+      }
+    },
+    "historical6added": {
+      "action_server/src/actions/server/migrations/migration_add_run_outputs.py": [
+        "100644",
+        "blob",
+        "3629ef55d42815acc7c1701bdd5b6949d3394ec6"
+      ],
+      "action_server/src/actions/server/run_outputs/__init__.py": [
+        "100644",
+        "blob",
+        "6787c69b364901f1a1eed93e553ae8cfe4d194ef"
+      ],
+      "action_server/src/actions/server/run_outputs/filesystem.py": [
+        "100644",
+        "blob",
+        "89170173dd0f1771e1a9923bb8532f2b28448dd1"
+      ],
+      "action_server/src/actions/server/run_outputs/models.py": [
+        "100644",
+        "blob",
+        "ae75ceee659776fd51e1dda36528a22640afba19"
+      ],
+      "action_server/src/actions/server/run_outputs/service.py": [
+        "100644",
+        "blob",
+        "55f5c09aeb0a3e9199b56916bb7fee41708b35c6"
+      ],
+      "action_server/src/actions/server/run_outputs/types.py": [
+        "100644",
+        "blob",
+        "cac30880373c26f648bb1c835fb74449f567cb22"
+      ]
+    },
+    "5_selected_tests_exact_old_target92498": true,
+    "old92498qualification": "HOLD; changed plus added leaves are not excluded; no current native build or execution"
+  },
+  "whole_github_exact_target": true,
+  "only_followup": "Canonical concrete-module source origin clarification; no production/service/test/workflow mutation",
+  "gates": {
+    "Doctor": "PASS",
+    "Bootstrap": "REUSED exact24 inputs plus five own prepared package environments; no installer",
+    "Toolkit": 69,
+    "scoped_shared_run_output": {
+      "pass": 189,
+      "integration_deselect": 12,
+      "skip": 1
+    },
+    "full_configured_Runtime_source": {
+      "pass": 1203,
+      "skip": 13,
+      "workers": 2
+    },
+    "full_configured_lint": "Ruff check/format/Isort PASS",
+    "typecheck_files": 347,
+    "all_workflow_and_dependabot_roundtrip": "PASS"
+  },
+  "bootstrap_reuse": {
+    "path": "/workspace/engineering/pr299-actual774-refresh/bootstrap-reuse.json",
+    "bytes": 2734,
+    "sha256": "e4bd2d1144a002eeebbf5fdad0c72166a0fa2d41d1adeec41319a24351647ee4"
+  },
+  "original_bootstrap": {
+    "path": "/workspace/engineering/pr299-refresh-owned/bootstrap.log",
+    "bytes": 14145,
+    "sha256": "8bdeac2f153ad303d8c3b68743517072374630ef3af2b488fb52824a006fab69"
+  },
+  "old_receipts_own_original_identities": [
+    {
+      "path": "/workspace/engineering/pr299-refresh-owned/successor-receipt.json",
+      "bytes": 22519,
+      "sha256": "0982b641af073a82c4105aa02538f7e21b219faf35e89d3f2818b9c96c5f5d52"
+    },
+    {
+      "path": "/workspace/engineering/pr299-independent-current-review/independent-current-source-review.json",
+      "bytes": 15206,
+      "sha256": "8604a06969f760f9343e427f564c5e4527337cfa3aa39c37fa3698dcb9a78929"
+    },
+    {
+      "path": "/workspace/engineering/pr299-windows-independent-diagnosis.json",
+      "bytes": 7249,
+      "sha256": "4eef69f680caf8891a6c2749b345f753cf5b9d71bc3f4e8e4b3301e9bff406b8"
+    },
+    {
+      "path": "/workspace/engineering/pr311-original-windows-independent-review/original-hosted-diagnostic-review.json",
+      "bytes": 18731,
+      "sha256": "81b819b9eb7a4d25bb46e0517b27bc303f78b80c32c7df89a6da4198967afe95"
+    },
+    {
+      "path": "/workspace/engineering/campaign-checkpoint/docs/program/evidence/wave8-convergence-20261010/results-receipts/pr299_owner.json",
+      "bytes": 6578,
+      "sha256": "74f5ed37fabfcdcf84696d53ee50311d468930d7ae705e9a8dedb674cf276034"
+    },
+    {
+      "path": "/workspace/engineering/campaign-checkpoint/docs/program/evidence/wave8-convergence-20261010/results-receipts/pr299_review.json",
+      "bytes": 5835,
+      "sha256": "4eff29d4e2c34c0bb05cca496772be3a858a1e02a0d62acb93032a3e42fccf6f"
+    }
+  ],
+  "gate_logs": {
+    "diff-check": {
+      "path": "/workspace/engineering/pr299-actual774-refresh/diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "doctor": {
+      "path": "/workspace/engineering/pr299-actual774-refresh/doctor.log",
+      "bytes": 13486,
+      "sha256": "23ad4f25ff3a10f5bb9315ff3d7736054b1562ade006f02c84738208897afe7b"
+    },
+    "full-source": {
+      "path": "/workspace/engineering/pr299-actual774-refresh/full-source.log",
+      "bytes": 309557,
+      "sha256": "189f59b2f3e6b1abf592ea5e405ceefec24214527a69317c2a0a48c17ca0e26d"
+    },
+    "generator-roundtrip": {
+      "path": "/workspace/engineering/pr299-actual774-refresh/generator-roundtrip.log",
+      "bytes": 4564,
+      "sha256": "5008e2e75e6ea4280cec545a459b11b7c1da84a521ded7ec62e0003fcdf68545"
+    },
+    "own-env-origins-v2": {
+      "path": "/workspace/engineering/pr299-actual774-refresh/own-env-origins-v2.log",
+      "bytes": 6684,
+      "sha256": "311f930868a61d0a9d292d74faed204bd879b301b9014560bd7e244adfee1809"
+    },
+    "own-env-origins": {
+      "path": "/workspace/engineering/pr299-actual774-refresh/own-env-origins.log",
+      "bytes": 7823,
+      "sha256": "3f2206056b57e5bf86fc174c16eb27f54edd6cb4cd12d60a3229ab67ab743c8a"
+    },
+    "scoped": {
+      "path": "/workspace/engineering/pr299-actual774-refresh/scoped.log",
+      "bytes": 4562,
+      "sha256": "40d87247862e835205fc438c63437e5d46338cd6a5718855d42895e30906d143"
+    },
+    "source-union-proof-final": {
+      "path": "/workspace/engineering/pr299-actual774-refresh/source-union-proof-final.log",
+      "bytes": 64,
+      "sha256": "aa9494812772b91c6a5314cf87a7a85dfd41167107d5b5d09914fbfb0bc47173"
+    },
+    "source-union-proof": {
+      "path": "/workspace/engineering/pr299-actual774-refresh/source-union-proof.log",
+      "bytes": 64,
+      "sha256": "aa9494812772b91c6a5314cf87a7a85dfd41167107d5b5d09914fbfb0bc47173"
+    },
+    "static": {
+      "path": "/workspace/engineering/pr299-actual774-refresh/static.log",
+      "bytes": 5696,
+      "sha256": "a6671df1481f8f0dd178f3ff80947ac7af84c55234d5cea3ec5f9e84ba9ac66d"
+    },
+    "toolkit": {
+      "path": "/workspace/engineering/pr299-actual774-refresh/toolkit.log",
+      "bytes": 14346,
+      "sha256": "4b57bce228043b69c87addafb409ee4b3bf30ece00f33f0614b5b20d5cb0d562"
+    }
+  },
+  "generator_roundtrip": {
+    "path": "/workspace/engineering/pr299-actual774-refresh/generator-roundtrip.json",
+    "bytes": 10286,
+    "sha256": "20c8c062289bda9e34694e390c191f8d5da3114cc29e7acdcd7c2140fe6be44e"
+  },
+  "documentation_improvement": {
+    "Canonical_file_changed": "docs/skills/repository-operations.md",
+    "Exact_delta": {
+      "path": "/workspace/engineering/pr299-actual774-refresh/canonical-own-origin-delta.patch",
+      "bytes": 1687,
+      "sha256": "8e755ffc198658d3d2311776ee2ae58cb238b7c28b83be2f133d8c35c5ace8d2"
+    },
+    "Durable_learning": "Prepared own-environment validation binds sys.prefix and concrete file-backed module origins inside each package Poetry process. Namespace package devutils has no __file__; devutils.invoke_utils supplies an actual source identity.",
+    "Evidence": "Original namespace probe fails with TypeError on devutils.__file__=None; named successor verifies own source and prefix for all five packages, including devutils.invoke_utils. Scoped189/full configured source/static gates and complete original23 blob retention.",
+    "Stale_or_ambiguous_guidance_removed": "Unqualified imported modules __file__ origin guidance does not account for namespace packages or outer-toolkit interpreters.",
+    "Remaining_uncertainty": "Current hosted/native/backend/transport acceptance and fullprivate134 remain open; historical native262/6+6 mismatch, Windows FIRSTreadiness cause and cleanup dimensions unknown; PR300 waits actual299 admission"
+  },
+  "cached_GitHub_control": {
+    "receipt": {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/pr299-current-prospective-control.json",
+      "bytes": 2648,
+      "sha256": "9772d5bd3aa7b18c02e551f847250f992d004ee2728f95f652d117074607af20"
+    },
+    "scope": "Cached GitHub controls test the oldfbde/80ba tuple, not the actual1c75/a5b389 union. No earlier CI carried forward."
+  },
+  "historical_failure_scope": {
+    "299_original": "9cb resourceFIRSTstartup90s timeout, variables89.28/16marks89.259;20s cleanup incomplete dimensionUNKNOWN",
+    "311_original": "1151 sixFIRSTtimeouts;two samplednodes80/88CPU_IO,templateunsampled,rawprogressabsent; no causeinference",
+    "preservation": "Originalbytehash/source identities retained; actual1c75 import does not retrospectively fixcause or requalify older execution"
+  },
+  "not_run": [
+    "Actual RCC/provider/native/browser/PostgreSQL gate",
+    "Fresh hosted CI",
+    "Public authenticated transport or fullprivate134",
+    "PR300 retarget/refresh before actual299 admission"
+  ],
+  "tool_identity": {
+    "rcc_path": "/workspace/actions-cloud/bin/rcc",
+    "rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "rcc_version": "v18.19.3 from Doctor log"
+  },
+  "upstream_disposition": "none",
+  "source_gate_subject": {
+    "head": "11c9ab3aa3b5b953486794878408bbd7a7e5ca78",
+    "tree": "758f098dd846437b0d69d246d112fbdb89caf363",
+    "final_child_scope": "Documentation only; all production/test/configured gate source bytes unchanged; no full-suite repeat after doc clarification"
+  },
+  "additional_proofs": {
+    "own-env-origin-proof.json": {
+      "path": "/workspace/engineering/pr299-actual774-refresh/own-env-origin-proof.json",
+      "bytes": 2450,
+      "sha256": "e6060274e56f2a9af3d51b5cb509c4c21b35a32b39bed4a133f485acff9541f0"
+    },
+    "verify_own_envs.py": {
+      "path": "/workspace/engineering/pr299-actual774-refresh/verify_own_envs.py",
+      "bytes": 616,
+      "sha256": "5d2692be5ca6e55567c2c40b8d9bb0f81defd52c31fa21f30b98f6f8b5c3b555"
+    },
+    "verify_own_envs_v2.py": {
+      "path": "/workspace/engineering/pr299-actual774-refresh/verify_own_envs_v2.py",
+      "bytes": 629,
+      "sha256": "c8ab68d536ffb17c7e5c23618ce777783180d2a180391e3d234358e1108f1bcf"
+    },
+    "during-full-capacity.json": {
+      "path": "/workspace/engineering/pr299-actual774-refresh/during-full-capacity.json",
+      "bytes": 293,
+      "sha256": "7cabafb89bf415dfb1ec59bbda136b77d01a2bd505077790d006fdf5df2af47f"
+    },
+    "generator_roundtrip.py": {
+      "path": "/workspace/engineering/pr299-actual774-refresh/generator_roundtrip.py",
+      "bytes": 1800,
+      "sha256": "0763d8cc1e9fb0b5d072a8f009e9c8f280b0f72da60ade2b3843d5530dccffae"
+    },
+    "run_scoped.py": {
+      "path": "/workspace/engineering/pr299-actual774-refresh/run_scoped.py",
+      "bytes": 668,
+      "sha256": "943046190856d4d148c2723eec8660defb64a343c47fc869b74201e55aea3645"
+    },
+    "canonical-imported-delta.patch": {
+      "path": "/workspace/engineering/pr299-actual774-refresh/canonical-imported-delta.patch",
+      "bytes": 13215,
+      "sha256": "28b32169a5e33ee6b048c39c3bb6b1466cbd7159ee8ab34b5466a63fdf6c679e"
+    },
+    "doc-child-preservation.json": {
+      "path": "/workspace/engineering/pr299-actual774-refresh/doc-child-preservation.json",
+      "bytes": 566,
+      "sha256": "f435d84b05be1fdf610c3b326420881db4f14aba96a12d8b9e9c08a792453c3f"
+    }
+  },
+  "earlier_frozen_checkpoint": {
+    "path": "/workspace/engineering/pr299-actual311-refresh/frozen-source-receipt.json",
+    "bytes": 15059,
+    "sha256": "9fd78d3a30c666e6da12e9aef3bc870c8cb654d3f43d1d1d02d92db405729829"
+  },
+  "earlier_independent_review": {
+    "path": "/workspace/engineering/pr299-actual311-independent-review/independent-frozen-source-review.json",
+    "bytes": 10865,
+    "sha256": "0f304bfebd49208c7bd5fce0244b9951a5d0d68dac2af449435873462adff97a"
+  },
+  "proof_failure_and_sequencing": {
+    "original_probe": "devutils namespace __file__ None; fixed only proof scaffold to concrete invoke_utils module",
+    "successor": "Named v2 probe passes five own package origin/prefix checks",
+    "full_gate_start": "Shell continued after failed probe assertion; no before-full JSON emitted. Runtime own prefix/source already verified and prepared24/five environment configurations retained; immediate capacity 2328481792 bytes, during-full bound receipt retained. Fullsource separately authorized; no installer or broad repeat."
+  },
+  "generator_scope": {
+    "generated_workflows": 8,
+    "workflow_plus_dependabot": 26,
+    "all_tracked_yaml": 30,
+    "additional_four": "Parsed and byte preserved, not claimed generated"
+  }
+}

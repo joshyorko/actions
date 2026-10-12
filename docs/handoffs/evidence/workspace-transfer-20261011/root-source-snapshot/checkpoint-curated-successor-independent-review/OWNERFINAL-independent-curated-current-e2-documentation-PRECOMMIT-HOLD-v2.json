@@ -1,0 +1,112 @@
+{
+  "HEAD": "62f4e180f6c894777ebc8ed3a729e88d2f6531d6",
+  "HEAD_tree": "a7cb47cef9eae2ce3b219bb807b535582c67804e",
+  "allowed_paths": {
+    "all_modified_and_new": 93,
+    "new_files": 90,
+    "tracked_modified": [
+      "docs/program/engineering-handoff.md",
+      "docs/skills/provenance-observability.md",
+      "docs/skills/repository-operations.md"
+    ]
+  },
+  "binding_count": 193,
+  "branch": "handoff/actions-swarm-mk3-wave8-20261010",
+  "canonical_exact_delta": [
+    {
+      "current_sha256": "4b2681a1d2320cb807a86da800a1b89d813b8ca2a53c745568849f4914203f8a",
+      "exact_additions_patch_sha256": "f13b761285e351dcce85ee7b5376ca4d6d47c899e7a734c24a110794b6f1c507",
+      "file": "docs/skills/repository-operations.md",
+      "inserted_lines": 124,
+      "removed_original_lines": 0
+    },
+    {
+      "current_sha256": "02b54b9428bf26a7819e555defc43f9aff115cb2884c2bce794339315bc90854",
+      "exact_additions_patch_sha256": "1b452eb19bbf6d7568256e3d0cbefe78b441ce8eeaffa7667ae817797152055c",
+      "file": "docs/skills/provenance-observability.md",
+      "inserted_lines": 82,
+      "removed_original_lines": 0
+    }
+  ],
+  "complete_preservation": {
+    "new_manifest_and_inventory": "ALL_SHA_SIZE_MODE_AND_EXCLUSIVE_PATH_SET_VERIFIED",
+    "original1180_manifests_graph_handoffs": "All existing nonowned tracked rows exact; no collector rerun or graph regeneration",
+    "original_dirty_guides": "ALL_LINES_PRESERVED_IN_ORDER_ADDITION_ONLY",
+    "safe_exact_original_bytes": 676197,
+    "safe_exact_original_copies": 82,
+    "unchanged_HEAD_mode_blob_FS": 3471
+  },
+  "documentation_improvement": {
+    "Canonical file changed or proposed": "Existing repository-operations.md and provenance-observability.md additions accepted within this packet, with exact patch hashes above",
+    "Durable learning captured": "Credential/Workspace denial-before-provider and shutdown wait ordering; isolated owned-cache modes; consumed-path dependency closure; private archive alias scope; unique absent pytest basetemp/policy all; source/full/actual release separation; consumer receipt and authentic commit parent separation",
+    "Evidence": "All 82 original bodies rehashed; accepted source-backed proposals/context dispositions retained; 1502-byte a164 canonical proposal and 4c1f actual e2 readback copied exact",
+    "Remaining uncertainty": "No new product/source/full/native/consumer/CI/release admission; original pytest38 responsible process unknown; unavailable private01f/frozenv6 and full issue graph remain HOLD",
+    "Stale or ambiguous guidance removed": "Newly inserted pytest retention paragraph refined to accepted successor; original dirty lines not removed; old313 full pass and old-target commands explicitly historical; stale blocked-publication sentence absent, consumer/parent lesson added in appropriate context"
+  },
+  "engineering_subject": {
+    "B28": "PREPARATION_ONLY_NO_ARCHIVER_OR_ARCHIVE_OR_RELOCATION",
+    "PR221": "Old a54 aggregate preparation not acquisition; actual e2 artifact and consumer qualification remain pending",
+    "PR282": "Actual e2 and independent4c1f retained; original f930/source1299/receiptparents[] remain separate",
+    "RCC_newer": "5/7276 NOT_RUN/default3 and toolkit pins unchanged; V8 independent source/config admission pending",
+    "actual_product_target": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+    "actual_product_tree": "afe2679cc93bf27fa5021c7698ee7ad3ee21a1b9",
+    "current308396_3055306_31312dd": "Historical-subject LIGHT/preexecution only; FULL NOT_RUN; ordinary e2 refresh/new current gates required",
+    "ordered_parents": [
+      "a54c982462d1e7ad011d8152bfc299d997503fb3",
+      "1299cc4bb6586f467d36ca124faaaaa77362695f"
+    ]
+  },
+  "index": {
+    "bytes": 551827,
+    "sha256": "659aa4b3cc798052ba8bd351b68d55e940c63040f5a5d667dcb753899fccae6e",
+    "staged_changes": 0
+  },
+  "owner_packet": {
+    "bytes": 10602,
+    "path": "/workspace/engineering/checkpoint-curated-successor-source-20261011/OWNERFINAL-curated-existing-checkpoint-current-e2-documentation-PRECOMMIT-review-v2.json",
+    "sha256": "dfbce09183900e236f5011c109ed8c2ef8acd6df60897718f86a7cde074da506"
+  },
+  "privacy": {
+    "URL_secret_pattern_scan": "No signed URLs/credential payloads in copied bodies",
+    "copied_classes": "69JSON summaries/binding metadata, 12patches and one safeMD original; no recursive payload copying",
+    "raw_config_API_log_native_cache_archive_member_payloads": "Not included; configurations and raw files are referenced by bounded paths/hashes only",
+    "structure_inspection": "Payload-like body fields are hash/size/path/mode bindings; member fields are numeric counts, not raw private inventories"
+  },
+  "proposed_root_action_scope": "HOLD normal documentation commit until exact named minimal operator budget-role correction is reviewed. No product/native execution authorized.",
+  "recorded_utc": "2026-10-11T17:09:45.855961+00:00",
+  "required_exact_correction": {
+    "disposition": "Root/owner named minimal successor required; preserve V2/operator hashes and all copied original bodies. No commit before independent correction verification.",
+    "file": "docs/program/evidence/wave11/current-engineering-successor-20261011/OPERATOR.md",
+    "new": "Owned helper timeout600s with bounded cleanup; Python envelope645s, transport660s/+10s, whole parent900s/+10s and",
+    "old": "Worker600s/+10s, helper645s, transport660s/+10s, whole parent900s/+10s and",
+    "source_proof": {
+      "AST_run_owned_process_controls": [
+        {
+          "line": 163,
+          "timeout_seconds": [
+            600
+          ]
+        }
+      ],
+      "bytes": 24963,
+      "path": "/workspace/engineering/rcc-current396925-private-V8-source-only/actual_transport_v8.py",
+      "sha256": "18166354d9e9d9a94266bc800673c07871a6bbbc649d7ac53fc8609f069ea1b9"
+    }
+  },
+  "reviewer_constructor_history": {
+    "authoritative_script": "/workspace/engineering/checkpoint-curated-successor-source-20261011/independent_verify_precommit_readonly_v2.py",
+    "failure": "Read-only inspector literal line-wrap substring mismatch after byte/mode checks, no product/gate failure. Original script preserved; named v2 normalized whitespace verifies exact actual paragraph.",
+    "original_script": "/workspace/engineering/checkpoint-curated-successor-source-20261011/independent_verify_precommit_readonly.py"
+  },
+  "reviewer_operations": "Owned read-only review outputs only; no source/index/branch mutation, collector, gateway, tests, download, archive, remove, publish, commit or push",
+  "schema": 1,
+  "status": "HOLD_PRECOMMIT_NATIVE_BUDGET_ROLE_LABEL_CORRECTION_REQUIRED_BYTE_SCOPE_AUDIT_PASS",
+  "superseded_unannounced_review_candidate": {
+    "bytes": 5402,
+    "disposition": "Byte/scope audit valid; precommit GO replaced by HOLD after root identified operator budget role ambiguity before final announcement.",
+    "path": "/workspace/engineering/checkpoint-curated-successor-independent-review/OWNERFINAL-independent-curated-current-e2-documentation-PRECOMMIT-review.json",
+    "sha256": "d8c60acdbd7a3b487858b0438c2c7abf7bf1a38f06841f88513c10967a392cfd"
+  },
+  "upstream_disposition": "none; prior authorized RCC125/118 coordination preserved, no new posts",
+  "working_docs_fingerprint_sha256": "97cec10bd46a166305a830c00a66f8a26af546d19e182a772bc75d4ade3c0e48"
+}

@@ -1,0 +1,19 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -3106,6 +3106,16 @@
+ duplicate or stale final records fail admission. A cancellation request alone
+ does not establish termination.
+ 
++A transport exception must not erase facts measured before the failure. Retain
++available original helper returncode, cleanup disposition and reap count beside
++its primary failure; a capacity stop stays primary when cleanup also fails.
++Record previously observed supervisor and pytest PID/create-time pairs on failed
++outcomes too, with null for identities never observed. A bounded sampled tree
++is not a final survivor census, and absent reader facts remain unknown. Keep
++raw exception text and traceback in separate private evidence; safe summaries
++carry fixed class/category fields. A named transport successor needs a new
++hash-bound configuration; predecessor release bytes cannot admit its execution.
++
+ Keep Runtime wrapper, snapshot and descendant-reap flags and reader, error, live
+ and zombie observations intact. Later outer subreaping cannot turn a false Runtime
+ predicate into a pass. Record an accepted browser helper's narrower

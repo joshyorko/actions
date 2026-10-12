@@ -1,0 +1,203 @@
+{
+  "LIGHT_phases": [
+    {
+      "argv": [
+        "rcc",
+        "run",
+        "-r",
+        "developer/toolkit.yaml",
+        "--dev",
+        "-t",
+        "Doctor"
+      ],
+      "budget": 120,
+      "name": "doctor"
+    },
+    {
+      "argv": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "-c",
+        "import importlib,json,sys\nfrom pathlib import Path\nimport toolkit\nroot=toolkit.REPOSITORY_ROOT;out=Path('/workspace/engineering/pr307-current7487-new-token-source-gates-once-owned/own-five-origins')\nrecords=[]\nfor package,module in [('actions','actions'),('actions-http-helper','actions_http'),('devutils','devutils.invoke_utils'),('work-items','actions.work_items'),('action_server','actions.server')]:\n prefix=root/package/'.venv';dest=out/(package+'.json')\n code='import importlib,json,sys; from pathlib import Path; m=importlib.import_module('+repr(module)+'); prefix=Path('+repr(str(prefix))+'); source=Path(m.__file__).resolve(); assert Path(sys.prefix).resolve()==prefix.resolve(); assert source.is_relative_to(Path('+repr(str(root/package/'src'))+').resolve()); Path('+repr(str(dest))+').write_text(json.dumps({\"module\":'+repr(module)+',\"origin\":str(source),\"prefix\":sys.prefix,\"python\":sys.executable}))'\n toolkit.poetry(package,'run','python','-c',code);records.append(json.loads(dest.read_text()))\nassert len(records)==5\n(out/'all-five.json').write_text(json.dumps(records,indent=2)+'\\n')\n"
+      ],
+      "budget": 120,
+      "name": "own-five-origins"
+    },
+    {
+      "argv": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "-c",
+        "import toolkit; toolkit.poetry(\"devutils\",\"run\",\"python\",\"-m\",\"pytest\",\"tests/test_runtime_release_workflows.py\",\"-k\",\"test_generated_pypi_oauth_credentials_are_scoped_to_exact_event\",\"-n\",\"0\",\"-vv\")"
+      ],
+      "budget": 180,
+      "env_delta": {
+        "RUNTIME_RELEASE_TEST_BASELINE": "2314aea95795fbc1372a6f7b0b7b298b7cf124c3"
+      },
+      "expected": "rc1/exacttwoFAILED/noerror/noskip from oldgenerated2314 canary missingenv",
+      "name": "token-RED-parent2314"
+    },
+    {
+      "argv": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "-c",
+        "import toolkit; toolkit.poetry(\"devutils\",\"run\",\"python\",\"-m\",\"pytest\",\"tests/test_runtime_release_workflows.py\",\"tests/test_actions_runtime_release_line.py\",\"-n\",\"0\",\"-vv\")"
+      ],
+      "budget": 180,
+      "env_remove": [
+        "RUNTIME_RELEASE_TEST_BASELINE"
+      ],
+      "expected": "rc0 allselected namedcases no newskip/error",
+      "name": "token-and-release-line-GREEN"
+    },
+    {
+      "argv": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "-c",
+        "import toolkit; toolkit.poetry(\"action_server\",\"run\",\"python\",\"-m\",\"pytest\",\"tests/build_system_tests/test_oauth2_config_build.py\",\"-n\",\"0\",\"-vv\")"
+      ],
+      "budget": 180,
+      "name": "unchanged-oauth-helper-GREEN"
+    },
+    {
+      "argv": [
+        "rcc",
+        "run",
+        "-r",
+        "developer/toolkit.yaml",
+        "--dev",
+        "-t",
+        "ToolkitTest"
+      ],
+      "budget": 180,
+      "name": "toolkit"
+    },
+    {
+      "argv": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "-c",
+        "import toolkit; toolkit.poetry(\"action_server\",\"run\",\"invoke\",\"lint\"); toolkit.poetry(\"action_server\",\"run\",\"invoke\",\"typecheck\"); toolkit.poetry(\"devutils\",\"run\",\"ruff\",\"check\",\"src\",\"tests\"); toolkit.poetry(\"devutils\",\"run\",\"ruff\",\"format\",\"--check\",\"--config\",\"ruff.toml\",\"src\",\"tests\"); toolkit.poetry(\"devutils\",\"run\",\"isort\",\"--check\",\"src\",\"tests\"); toolkit.poetry(\"devutils\",\"run\",\"mypy\",\"--follow-imports=silent\",\"--namespace-packages\",\"--explicit-package-bases\",\"src\")"
+      ],
+      "budget": 180,
+      "name": "configured-static"
+    },
+    {
+      "argv": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "-c",
+        "import hashlib,json,sys,types\nfrom pathlib import Path\nimport toolkit\nroot=toolkit.REPOSITORY_ROOT;p=root/'.github/workflows/_gen_workflows.py';raw=p.read_bytes()\nowned=Path('/workspace/engineering/pr307-current7487-new-token-source-gates-once-owned/generated-eight-and-Github30/generated');assert not owned.exists();owned.mkdir(mode=0o700)\nmod=types.ModuleType('current307_reviewed_generator');mod.__file__=str(p);sys.modules[mod.__name__]=mod\nexec(compile(raw,str(p),'exec'),mod.__dict__);mod.CURDIR=owned;records=[]\nfor target in mod.TARGETS:\n target.generate();generated=(owned/target.target).read_bytes();tracked=(p.parent/target.target).read_bytes();assert generated==tracked;records.append({'path':target.target,'bytes':len(generated),'sha256':hashlib.sha256(generated).hexdigest()})\nassert len(records)==8\nPath('/workspace/engineering/pr307-current7487-new-token-source-gates-once-owned/generated-eight-and-Github30/eight-outputs.json').write_text(json.dumps(records,indent=2))\ncode='import json,yaml;from pathlib import Path;root=Path('+repr(str(root))+');rows=sorted(set(root.glob(\".github/**/*.yaml\"))|set(root.glob(\".github/**/*.yml\")));assert len(rows)==30;[yaml.safe_load(p.read_bytes()) for p in rows];Path(\"/workspace/engineering/pr307-current7487-new-token-source-gates-once-owned/generated-eight-and-Github30/thirty-YAML.json\").write_text(json.dumps([str(p.relative_to(root)) for p in rows]))'\ntoolkit.poetry('action_server','run','python','-c',code)\n"
+      ],
+      "budget": 120,
+      "name": "generated-eight-and-Github30"
+    }
+  ],
+  "bounds": {
+    "FULL_each_child": 600,
+    "FULL_each_parent": 900,
+    "FULL_workers": 2,
+    "LIGHT_phase_TERM_kill_grace": 10,
+    "LIGHT_proposed_parent": 1200,
+    "no_retry": "Anyunexpectedfailure persistsoriginals+stops dependentphases; meaningfulparentRED rc1 is intentional separatelyadmitted"
+  },
+  "cwd": "/workspace/engineering/pr307",
+  "logging": {
+    "Runtime_plugin": "Explicitabsolute --robocorp-log-output=/workspace/engineering/pr307-current7487-new-token-source-gates-once-owned/<phase>/robot-output for helper and Runtimefull; Runtime0.0.5distinfo present, actualfreshmodule/prefixstillmustbeadmitted",
+    "Toolkit_and_devutils": "PreparedcachedToolkit and owndevutils have no logpytestdistinfo; actualfreshmetadata mustconfirmabsence, omitunsupportedRuntimeCLI. Privateabsstdio+JUnit+ALLbasename only, no Runtimepluginloggingclaim",
+    "all_pytest_phases": "EachdistinctABSENTabsolute /workspace/engineering/pr307-current7487-new-token-source-gates-once-owned/<phase>/basetemp plus -o tmp_path_retention_policy=all -o tmp_path_retention_count=999999; distinctabsolute JUnit; privateabsolute stdout/stderr; never numberedshared/tmpcleanup",
+    "env": "No GitHubtokens, candidatebinaryselector, releasecredential values admitted toservice-free sourcegate; tokenwiring evaluated only as literalworkflowexpressions"
+  },
+  "meaningful_regression": "Newtwojob test asserts exactevent if/name/run/contentsread/noPRtarget, exactbuilt-inPRcredential and unchangedtagPAT, no packagingtokeninheritance, fullactualgenerator dictionary equals maintainedworkflow. Parent2314YAML selectedthrough existing RUNTIME_RELEASE_TEST_BASELINE yields twoexpectedassertionfailures; no behavior/runtime monkeypatch, no credentials or externalrepo calls.",
+  "one_attempt_root_ABSENT": "/workspace/engineering/pr307-current7487-new-token-source-gates-once-owned",
+  "open_HOLD": "Contentrepo404/approvedrevision/providerpolicy, allactualOAuth/native/private/release gates; no claim token fixes originalcause",
+  "parent": "2314aea95795fbc1372a6f7b0b7b298b7cf124c3",
+  "prepared_reuse": {
+    "bytes": 13754,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-PR-only-OAuth-token-source-PREPARATION/private-current-prepared30-five-configs-historical15-and-ignored-output-proof.json",
+    "sha256": "a79cd6d179ecad3f4ce110d7235d50f0df0b6add74c1a699265e92c2095af18f"
+  },
+  "prerequisites": [
+    "ROOT serializationrelease after otherone-shot/native/storage outcomes; no gates while pending",
+    "Independent exactimmutable once-launcher/config/allbindings review required BEFORE anytests; this plan is not executableGO",
+    "Source1442/currentproof/config+launchersource+allprepared30/fiveconfigs/historical15/currentRCC8d49 protectedpacket before and alwayspost; stdoutstderrsealed and terminalwrittenBEFORE exitassertions on everyoutcome",
+    "Activation /workspace/actions-cloud/activate.sh +exact19values and managedPATHfirstcomponent +cachedouterprefix2; inheritedPYTHONOPTIMIZE/PYTEST_ADDOPTS refused; unoptimizedPythonrequired",
+    "NoBootstrapinstall if all30 inputbytes/fiveconfig/sourceorigin probes unchanged; ownDoctor and actualfreshfiveorigins remainrequired",
+    "Freshworkspace\u22651288490189 and TMP\u22651200000000 before FULL; fullsuite mandatoryandseparaterelease; no native/download/install/configsourcefetch"
+  ],
+  "required_FULL_phases_NOTRUN": [
+    {
+      "argv": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "-c",
+        "import toolkit; toolkit.poetry(\"devutils\",\"run\",\"python\",\"-m\",\"pytest\",\"tests\",\"-n\",\"2\",\"-vv\")"
+      ],
+      "budget": 600,
+      "name": "devutils-full"
+    },
+    {
+      "argv": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "-c",
+        "import toolkit; toolkit.poetry(\"action_server\",\"run\",\"invoke\",\"test-not-integration\")"
+      ],
+      "budget": 600,
+      "name": "Runtime-full"
+    }
+  ],
+  "schema": 1,
+  "source": "7487d94bf1a0453119928fe2d73d1413a252a312",
+  "source_preservation_proof": {
+    "bytes": 357745,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-PR-only-OAuth-token-source-PREPARATION/private-complete-4-path-source-and-AST-preservation-proof.json",
+    "sha256": "2818535ba4fd11a7e2e8dfa4392200d02534c2b308400102471f33fe55e199d3"
+  },
+  "status": "PREPARATION_ONLY_NOTRUN_NO_EXECUTABLE_OR_ROOT_RELEASE_YET",
+  "tree": "4ae715a497f1f6c643efe2a301a111320b3c18e4"
+}

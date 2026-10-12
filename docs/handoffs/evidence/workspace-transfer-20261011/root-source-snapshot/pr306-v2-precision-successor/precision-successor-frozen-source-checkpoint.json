@@ -1,0 +1,240 @@
+{
+  "status": "FROZEN_SOURCE_AWAITING_INDEPENDENT_SUCCESSOR_REVIEW_NO_PUSH_OR_ACTUAL_GO",
+  "branch": "fix/database-savepoint-admission-20261010",
+  "head": "1a3ab0b580710f776fd2075d39e04720c71541ff",
+  "tree": "f2bc958f11a15d1f01b5d0d82dd1f3f51bf590fc",
+  "ordered_parents": [
+    "cf6352e253c70095c8e09904e730fc18a42f9a65"
+  ],
+  "working_tree_clean": true,
+  "ordinary_merge_and_all_history_preserved": true,
+  "original_held_subject": {
+    "path": "/workspace/engineering/pr306-windows-v2-source/implementation-V2-frozen-source-checkpoint.json",
+    "bytes": 20285,
+    "sha256": "f542bc04747ea8fd8741c309f26de523ee347c8aee82320931f44accf9681be0"
+  },
+  "original_independent_HOLD": {
+    "path": "/workspace/engineering/pr306-V2-independent-source-review/independent-original-cf6352-source-review-HOLD.json",
+    "bytes": 17006,
+    "sha256": "24a0d2c1bf0e0cfa18a141dbbfb0952e0fdf297ff7b93be25c58ea681a08cba7"
+  },
+  "unchanged_original_evidence_files": 36,
+  "source_after_full_equals_before": {
+    "action_server/tests/action_server_tests/native_startup_diagnostics.py": "b365e561c79240146ed5ac8fb07735d095cab11a25dba038bd43cbf3d80bbee4",
+    "action_server/tests/action_server_tests/test_native_startup_diagnostics.py": "d26fdec852b8a70f98237226dac6bcf47a5a4e3fc1e4cb21ddd5e3c868f7d0c5",
+    "docs/skills/repository-operations.md": "4c7d77b0b19c7677b1113bc2d84fcb267c13cbcab3fae8f9a00e23cdf90363ad"
+  },
+  "scope_proof": {
+    "parent_immutable_cf6352": "cf6352e253c70095c8e09904e730fc18a42f9a65",
+    "only_three_owned_paths": [
+      "action_server/tests/action_server_tests/native_startup_diagnostics.py",
+      "action_server/tests/action_server_tests/test_native_startup_diagnostics.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "all_other_leaf_bodies_modes_exact": 1406,
+    "whole_observer_module_except_DeliveredObservations_AST_exact_parent": true,
+    "unchanged_class_loss_privacy_cleanup_methods": [
+      "_record",
+      "_count",
+      "cleanup_returned",
+      "cleanup_raised",
+      "start_finished"
+    ],
+    "allowed_precision_methods_changed": [
+      "__init__",
+      "_offset",
+      "line",
+      "process_start_returned",
+      "summary",
+      "_instant"
+    ],
+    "original58controls_and_helper_function_ASTs_exact": true,
+    "new_boundary_test_functions": [
+      "test_ready_lower_bound_uses_exact_instants_not_rounded_display",
+      "test_reported_rounding_counterexample_stays_postbound",
+      "test_unknown_start_return_clock_keeps_deadline_classification_unknown"
+    ],
+    "private_raw_clock_fields_not_serialized": "match_instants/start_return_instant used only comparator; displayed offsets round3decimals; progress schema unchanged",
+    "all90_20_80_88_50ms_budgets_kwargs_callback_hook_Process_class_restoration_original_tuple_exception_unchanged": true,
+    "all_production_DBguard_test_database_267otherproducer5selectors_native_helper_workflow_manifest_lockfile_bytes_unchanged": true,
+    "canonical_delta": "5added precisionlines; all originalcf paragraphs retained except explicit tightened lowerbound sentence; no diary",
+    "native_actual_execution": "NONE"
+  },
+  "validation": {
+    "precision_RED_on_original_cf6352": "9 failed, 5 passed, 58 deselected; exact post/equal boundary false positives reproduced",
+    "current_observer_controls": "72 passed; original58 plus14 fractional/equal/post/unknown cases",
+    "Doctor": "PASS",
+    "Bootstrap": "REUSE ONLY: 30 actual unique gateway/build/manifest/lock inputs and five own package origins/prefixes verified; no install",
+    "ToolkitTest": "69 passed; developer Ruff PASS",
+    "scoped_source": "94 passed",
+    "complete_DB_source": "61 passed; 12 PostgreSQL skips retained, no actual PostgreSQL run",
+    "configured_static": "301 files formatted/Isort/Ruff PASS; Mypy337 PASS; optional Markdown lint unavailable",
+    "generation": "8 generated workflows plus dependabot roundtrip unchanged;29 yml files scope, separately complete34GitHub leaves/30 yaml+yml bytes/modes unchanged",
+    "full_configured_source": {
+      "passed": 1216,
+      "skipped": 13,
+      "warnings": 15,
+      "seconds": 127.85,
+      "workers": 2,
+      "RCC": "SUCCESS",
+      "outer_seconds": 600,
+      "kill_grace_seconds": 10
+    }
+  },
+  "native_92498": "UNQUALIFIED for retained DBguard input delta; no build/rerun/artifact relabel; all267 other producer and five selected inputs unchanged from original proof",
+  "actual_native_provider_browser_or_PostgreSQL_execution": "NONE",
+  "Documentation_improvement": {
+    "Canonical_file_changed": "docs/skills/repository-operations.md",
+    "Durable_learning": "Classify delivered readiness using private unrounded monotonic instants; round only display. Strict equality is not before a conservative lower bound; pre-bound delivery alone does not prove actual readiness completion.",
+    "Evidence": [
+      "independent24a0 precision finding",
+      "9 failing original-boundary controls",
+      "72 passing current controls",
+      "exact-precision-canonical-delta.patch"
+    ],
+    "Independent_proposal_disposition": "Adapted e2f885f8 proposal with strict equality and conservative-bound scope; original36-line V2 lesson retained",
+    "Stale_guidance_removed": "Removed ambiguity allowing displayed rounded offsets to classify deadlines; no original operational lesson removed",
+    "Remaining_uncertainty": "No new native Windows execution; readiness Future, native log emission and RCC internal forwarding remain unavailable; positive lower-bound comparison is narrower than actual deadline success"
+  },
+  "Upstream_disposition": "none; no established RCC upstream defect and no mutation target authorized",
+  "remaining_HOLDs": [
+    "independent successor review and root normal push",
+    "fresh exact-head hosted CI",
+    "actual Windows V2 observations not yet executed",
+    "original broader DB/private/native/release gates unchanged"
+  ],
+  "before_full_available_bytes": 2236444672,
+  "current_available_bytes": 1601806336,
+  "evidence_files": [
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/after-full-scope-verification.log",
+      "bytes": 1641,
+      "sha256": "7a42ba395edb1bf5d9abc0298ef42e5064a4dd2c971d51c2765a3e8abf7a6dca"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/after-full-source-byte-preservation.json",
+      "bytes": 617,
+      "sha256": "e98eb4be8950d22fed5f6e7488b1167bd83adcb39ed625ed0bb7e8f3ce12f438"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/before-full-source-checkpoint.json",
+      "bytes": 622,
+      "sha256": "0b4e733307ad537a42e255d33e2779b9e8236396bf02915c795580108f631af3"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/current-Doctor.log",
+      "bytes": 13487,
+      "sha256": "3256fb4e7eabf1e44149252d312b0b3fc0563d4311c71cb8f258b1d49726b3e8"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/current-ToolkitTest.log",
+      "bytes": 14344,
+      "sha256": "b970a8992c61e99322da323896129cb209a9c3cf189e970562ebb92f358cb1f4"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/current-full-configured-source.log",
+      "bytes": 315717,
+      "sha256": "731c4d04c2c4e9a79a10981fc86f73624dfdf718a6ddd5bfad89cd9fe692e314"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/current-generator-and-complete-DB.log",
+      "bytes": 5039,
+      "sha256": "4607406f9b95981d5c80eaf694801aae4cb19c3aac5f6daff1d7baa0a974c61b"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/current-generator-roundtrip.json",
+      "bytes": 3579,
+      "sha256": "638d6f90802b75904d150086a24a0b842ae501f6a86f85567b872ab7875b4fdc"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/current-own-Bootstrap-reuse.log",
+      "bytes": 6726,
+      "sha256": "937dbab61b4554ce57e597c5390b537c1677da291a2c83c648cde777b06e74fd"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/current-scoped-configured-static.log",
+      "bytes": 6262,
+      "sha256": "ac772577b8c189a2ca3e7e1e09bf58879a0a70564d6f4440e7440c860f4089b4"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/exact-precision-canonical-delta.patch",
+      "bytes": 1263,
+      "sha256": "70cc7d514c45172e07fcee0f9ca683a2fe90e59de77d6ec5e5bd6af982d36c78"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/final-committed-scope-verification.log",
+      "bytes": 1641,
+      "sha256": "7a42ba395edb1bf5d9abc0298ef42e5064a4dd2c971d51c2765a3e8abf7a6dca"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/fractional-boundary-and-original-controls-GREEN.log",
+      "bytes": 4265,
+      "sha256": "7d1ecbcce4f1e5c03e4d4dc0319813664843adf834a0399d9e3c96651ecff5c5"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/fractional-boundary-preimplementation-RED.log",
+      "bytes": 16531,
+      "sha256": "6a79566b34483b80c0b602434ef739caa393308132ab50ffdba44f5343e8b961"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/freeze-precision-successor.py",
+      "bytes": 6057,
+      "sha256": "0e7c0bbb31fbadd2fbabba138f291b0f64737e4d0847231421a00d24da184a1d"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/github-complete-both-extensions-successor-recheck.json",
+      "bytes": 7827,
+      "sha256": "c3173bac4bf9ea73deb2f286c491bed70d12e8d17db904937cc11651f65849a1"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/origin-action_server.json",
+      "bytes": 283,
+      "sha256": "821d911ab56b7ee0b89eb31ddf3ce4457169d21821e28d90c6a3c2a1ec78e7ac"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/origin-actions-http-helper.json",
+      "bytes": 264,
+      "sha256": "a1fbe59ca022e1eb12b153ce3c4cb4367199285759a85d72fbe994b9a0d63ff4"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/origin-actions.json",
+      "bytes": 218,
+      "sha256": "0b5cefe74a2b488991409a0a99431fbcbe1a11a00afe22be8f44a36b556f7b85"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/origin-devutils.json",
+      "bytes": 240,
+      "sha256": "5acbf91f56445f2efa0bd2afc45d44737f3a1e17661591e9f8f81fafea6eebee"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/origin-work-items.json",
+      "bytes": 249,
+      "sha256": "ddde67b3d3048dd076042103f7a437dae472fc833529de709d1fab413207f01d"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/own-Bootstrap-reuse-inputs-and-origins.json",
+      "bytes": 6419,
+      "sha256": "7e2701d78d4ff244beb186121404980d9e63b4b35256b676570846393997ec24"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/precision-successor-scope-proof.json",
+      "bytes": 1641,
+      "sha256": "7a42ba395edb1bf5d9abc0298ef42e5064a4dd2c971d51c2765a3e8abf7a6dca"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/verify-generator-roundtrip-successor.py",
+      "bytes": 1055,
+      "sha256": "cd6a3ee2af97570223d2aba8fda1b7c72339b4a23bdf99006687a020aece3aa4"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/verify-own-prepared-env-successor.py",
+      "bytes": 2689,
+      "sha256": "61e89cc464980bda1693893516c38a24510e07785893f8afed630a68aa2d4781"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/verify-precision-successor-scope.py",
+      "bytes": 3914,
+      "sha256": "a0100139f3ffc3ea73da3ec9b67ad86bdba6e571094500f784d3d55622a86082"
+    }
+  ]
+}

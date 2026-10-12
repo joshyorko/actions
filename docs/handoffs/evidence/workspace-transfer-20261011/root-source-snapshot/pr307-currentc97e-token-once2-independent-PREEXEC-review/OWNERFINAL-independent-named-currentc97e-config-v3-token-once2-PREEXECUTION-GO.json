@@ -1,0 +1,129 @@
+{
+  "ROOT_exact_argv_template": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "900s",
+    "bash",
+    "-c",
+    "source /workspace/actions-cloud/activate.sh && exec /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python /workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/launch_one_owned_token_light_once2_selected_config_v3.py \"$@\"",
+    "pr307-token-light",
+    "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/root-one-TOKEN-LIGHT-once2-release.json",
+    "ROOT_AUTH_SHA256_FROM_ANNOUNCED_TYPED_RELEASE",
+    "OWNER_ANNOUNCED_INDEPENDENT_REVIEW_PATH",
+    "OWNER_ANNOUNCED_INDEPENDENT_REVIEW_SHA256"
+  ],
+  "ROOT_release_and_parent_adoption_requirements": [
+    "Root must validate exact allowed release keys/types/schema1/template/source/tree/new979 launcherSHA/config293 SHA/real independent path-hash pair and corresponding proposal binding. Child only checks its required fields; parent provides strict full-envelope admission. Fresh0600 regular nonsymlink currentUIDGID and complete release bodySHA; no consumed once1/staticHOLD reuse.",
+    "Before invocation and always-post on every returned/failed/timeout outcome, ROOT independently rehashes release/this V3 owner/config/newlauncher/actual independentreview and all original predecessor bindings. Record original primary and secondary failures separately. Child initially reads ROOT/review; its finally proves self/config39/source but not live ROOT/review hashes.",
+    "Capture and fsync fresh private original ROOTouter stdout/stderr/terminal before asserting result, with separate retained before/post data-only envelope readbacks. Outer hard termination or missing post evidence is UNKNOWN/HOLD, never universal forced-cleanup success.",
+    "Fresh workspace>=536870912, exclusive once2 output700 and release/outerstdio absent; no concurrent heavy/native/storage/install; reject inherited PYTHONOPTIMIZE/PYTEST_ADDOPTS and source exact managed activation18/PATH primary. No filemode repair/newenv/toolchain install.",
+    "Nine unchanged phases:120/120/180/180/180/180/180/120/210 use remaining780 allocation and own fresh wrappergroup5+5 fallback, enclosing ROOT900TERM10. The780 allocation is not a universal wall-time/cleanup guarantee; enclosing ROOTpost must be retained and independently reviewed before actual acceptance.",
+    "ROOT replaces only authSHA/independentreview path+SHA placeholders in exact frozen argv and uses named979 script. After actual once2, separate original raw phase/JUnit/scoped semantic/guard review required."
+  ],
+  "ROOT_release_path": "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/root-one-TOKEN-LIGHT-once2-release.json",
+  "ROOT_release_required_template": {
+    "config_sha256": "29368814c182f30732ab041ca580162c92071e4bb076eb164c9820ced3acc158",
+    "decision": "RELEASE_ONE_CURRENTC97E_TOKEN_LIGHT_ONCE2_ONLY",
+    "independent_review": {
+      "path": "ROOT fills exact path of THIS sealed independent GO",
+      "sha256": "ROOT fills exact measured SHA256 of THIS sealed independent GO"
+    },
+    "launcher_sha256": "979792c8f087ae36635dcf37f1620c3036e1204cc2c4c145b3e5fd775245a0f0",
+    "schema": 1,
+    "source": "c97edfd10edb5b1c63f8a6371bfd2905996a2da2",
+    "tree": "f8d3477451fa601643ef6c06f6b1e616e2407643"
+  },
+  "acceptance_limits": [
+    "Original1FAIL1075, old7b377/a747 and c214 STATIC_HOLD remain immutable; corrected path does not relabel any historical outcome.",
+    "CurrentLIGHT scope only; no Devutils/Runtime complete FULL, actual OAuth/config content authority, native/browser/provider/package/release or merge qualification.",
+    "No1192whole-native/no-private-nine fixture claims from307 HEAD-only protection; own5actualorigins remain proposed gate and need actual phase evidence.",
+    "Sourceprogress draft push remains a separate root action after accepted actualLIGHT, not final integration/full/CI waiver."
+  ],
+  "actual_execution": "NOT_RUN; reviewer imports/tests/gateway/native/source writes NONE",
+  "bounds": {
+    "individual_PHASE_TERM_kill_grace": 10,
+    "individual_budgets": [
+      120,
+      120,
+      180,
+      180,
+      180,
+      180,
+      180,
+      120,
+      210
+    ],
+    "note": "Seven originalphase classes plus two newtoken phases; all run_phase calls limited by remaining780 and ownedgroup fallback5+5. Rootouter includesactivation/pre/post. FULL remains separate600+10/900 and NOTRUN.",
+    "outer": 900,
+    "outer_TERM_kill_grace": 10,
+    "phase_count": 9,
+    "primary_phase_budget": 780
+  },
+  "config_binding": {
+    "bytes": 16905,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/immutable-one-TOKEN-LIGHT-once2-inputs.json",
+    "sha256": "29368814c182f30732ab041ca580162c92071e4bb076eb164c9820ced3acc158"
+  },
+  "config_sha256": "29368814c182f30732ab041ca580162c92071e4bb076eb164c9820ced3acc158",
+  "decision": "GO_CURRENTC97E_TOKEN_LIGHT_ONCE2_GATEWAY_PREEXECUTION",
+  "documentation_improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md; reuse accepted exact config-address closure05674bd0fb939b5df3b1dfb04af1529f57d27648bdaff97099453e7ddb3cff91/ROOT contextual selected-address adaptation and exact scoped gateway-versus-child7e9713048af1c6736dadd6f45f71a99281199bc0a233e477dd26e8c5190498c2 awaitingROOT integration. No cosmetic duplicate.",
+    "Durable learning captured": "Validate executable-selected path/body/mode independently of listed metadata/inverseAST; preserve original absent-pathHOLD and use namedcorrectedlauncher. Observed gateway status and exact checked child semantic failure remain distinct.",
+    "Evidence": "Originalc214 absentpath finding, exactone-literal text/ASTdiff, actualselectedconfig293 body/mode, all39bindings and1442typed current source; old1075 outcome retained.",
+    "Remaining uncertainty": "Actual once2 nine-phase results/ROOTpost, mandatoryFULL/currentCI/authority/native remain pending/HOLD; source-read-only approval only.",
+    "Stale or ambiguous guidance removed": "Original code-selected wrongbasename notbackfilled. Child before/finally self/config proofs distinguished from externalROOT release/review all-outcome closure and universal cleanup."
+  },
+  "gateway_semantic_boundary": "Only deliberate immutable2314 RED admits observed task gateway10; mandatory preserved checked-inner CalledProcessError exit1 trace+Toolkit path before unchanged2exact named JUnitfailures0errors0skips and canary/token semantic assertion. Later GREEN/source/static/gen/controlledInvoke phases remain unchanged and must actually pass; no general gateway error normalization.",
+  "launcher_binding": {
+    "bytes": 16053,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/launch_one_owned_token_light_once2_selected_config_v3.py",
+    "sha256": "979792c8f087ae36635dcf37f1620c3036e1204cc2c4c145b3e5fd775245a0f0"
+  },
+  "launcher_sha256": "979792c8f087ae36635dcf37f1620c3036e1204cc2c4c145b3e5fd775245a0f0",
+  "original_STATIC_HOLD_binding": {
+    "bytes": 6828,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-currentc97e-token-once2-independent-PREEXEC-review/OWNERFINAL-independent-original-currentc97e-once2-TOKEN-LIGHT-PREEXECUTION-config-path-HOLD.json",
+    "sha256": "c21497db6231b87893ee17fded09b551f0680d5ca8df64680ab4c7c0681c56b2"
+  },
+  "original_actual_FAIL_binding": {
+    "bytes": 4029,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-currentc97e-original-TOKEN-LIGHT-ACTUALFAIL-independent-diagnosis/OWNERFINAL-independent-original-currentc97e-TOKEN-LIGHT-ACTUALFAIL-and-minimum-boundary-proposal.json",
+    "sha256": "1075f04e6a27e2209d1fe2cb630747faab8fff00644fb5481d26cd99ea6f1130"
+  },
+  "proposal_binding": {
+    "bytes": 9405,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/OWNERFINAL-currentc97e-once2-selected-CONFIG-basename-v3-TOKEN-LIGHT-PREEXECUTION-NOTRUN.json",
+    "sha256": "314aa47a592a41e11b995469af21feadb33a151be2c1e3d9a8ff6579dcab7717"
+  },
+  "schema": 1,
+  "source": "c97edfd10edb5b1c63f8a6371bfd2905996a2da2",
+  "static_selected_address_proof": {
+    "bytes": 2197,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/private-exact-once2-selected-CONFIG-basename-v3-closure-proof.json",
+    "sha256": "ebb8c55e125dd02e317f278fd00cefc077798419a4b3875f17878f87609329d4"
+  },
+  "status": "INDEPENDENT_CURRENTC97E_NAMED_CONFIG_V3_TOKEN_LIGHT_ONCE2_PREEXECUTION_GO",
+  "tree": "f8d3477451fa601643ef6c06f6b1e616e2407643",
+  "upstream_disposition": "none",
+  "verified_delta": {
+    "all1442_current_FSbody_Git_execmodes_exact_clean_HEADtree": true,
+    "all39_configuration_refs_and7owner_rows_exact": true,
+    "five_environment_config_bindings_exact": true,
+    "historical15_receipt_bindings_exact": true,
+    "inverse_whole_AST_exact": true,
+    "old_a747_to_new979_complete_text_exact_except_one_CONFIG_basename": true,
+    "old_wrong_selected_CONFIG_path_absent_notbackfilled": true,
+    "original_ignored307_generated_outputs_exact": true,
+    "prepared30_current_bytes_exact": true,
+    "protected3088d49_namedHEADtree_clean_only": "Confirmed; no whole native1192/private-nine fixture inventory inferred by this307 launcher.",
+    "same_unconsumed_once2_attempt_and_release_ABSENT": true,
+    "selected_CONFIG_literal_derives_actual_announced_file16905_293688_0400": true
+  }
+}

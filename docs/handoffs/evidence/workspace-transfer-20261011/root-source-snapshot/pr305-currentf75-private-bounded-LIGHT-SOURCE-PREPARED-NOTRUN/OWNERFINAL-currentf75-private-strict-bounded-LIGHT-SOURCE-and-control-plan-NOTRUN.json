@@ -1,0 +1,133 @@
+{
+  "FULL_native_browser_provider_release": "NOT_RUN_HOLD",
+  "ROOT_contract": {
+    "bytes": 3443,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr305-currentf75-private-bounded-LIGHT-SOURCE-PREPARED-NOTRUN/strict-currentf75-private-bounded-LIGHT-ROOT-release-contract-NOTRUN.json",
+    "sha256": "281fe0601a167accbae27399f5d2a665f8a8f1dc2b06beff935c050c38eb45a6"
+  },
+  "app_source_ref_config_env_delta": "NONE",
+  "capture": "2026-10-11T23:30:30.796772+00:00",
+  "config": {
+    "bytes": 43620,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr305-currentf75-private-bounded-LIGHT-SOURCE-PREPARED-NOTRUN/FROZEN-currentf75-private-bounded-LIGHT-inputs-NOTRUN.json",
+    "sha256": "d5cb3cd637e254df63e024503d8cef52f8dc223ddb74a777631592d13a5899a8"
+  },
+  "current_LIGHT": "NOT_RUN",
+  "documentation": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "evidence": "Original4d7b LIGHT guard/budget/output gaps fromaf0d; reusedacceptedphasecapturer, newpreimport typedrelease+boundedbeforealwayspost; originalinputs exact/read-only sourceproof; allactualoutputs remainNOTRUN",
+    "exact_delta": {
+      "bytes": 850,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr305-currentf75-private-bounded-LIGHT-SOURCE-PREPARED-NOTRUN/canonical-LIGHT-release-admission-before-import-and-owned-results-proposed.txt",
+      "sha256": "582b6f9ef83040b3ce58388c7af8ee475ca055b57d67a1690c64ce574b989d1e"
+    },
+    "remaining_uncertainty": "New source/control/PREEXEC review and actualguard/origins/sourcecensus/floor/cleanupobservations/FULL/CI/native/release pending. No tests or productimports executed.",
+    "stale_ambiguity": "Preparedcurrent1441/current30/oldprefixmetadata notactualcurrentLIGHT; historical275P1S/native1192 do not qualifyfreshsource/provider/browser; phaseclosureandpostscopehonest",
+    "upstream_disposition": "none"
+  },
+  "fresh_capacity": {
+    "required_floor": 1288490189,
+    "status": "OBSERVATION_ONLY_ROOT_FRESH_CHECK_REQUIRED",
+    "workspace": 636502016
+  },
+  "guard": {
+    "bytes": 3760,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr305-currentf75-private-bounded-LIGHT-SOURCE-PREPARED-NOTRUN/current_f75_readonly_input_guard_NOTRUN.py",
+    "sha256": "6b47724ebb0be4b86f2e8ebf4026a32c20e39e8f1320bf9d6a64692a2f44d693"
+  },
+  "immutable_input_rows": 110,
+  "launcher": {
+    "bytes": 9839,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr305-currentf75-private-bounded-LIGHT-SOURCE-PREPARED-NOTRUN/launch_current_f75_private_bounded_LIGHT_once_NOTRUN.py",
+    "sha256": "35a4dce8f0b5a4bf8351a25a3ef70cc26a2421298651232dc20b50c5392cbeab"
+  },
+  "meaningful_controls_plan": {
+    "bytes": 1344,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr305-currentf75-private-bounded-LIGHT-SOURCE-PREPARED-NOTRUN/meaningful-private-admission-and-output-negative-control-plan-NOTRUN.json",
+    "sha256": "6efbed86bb17f91906011d6837ad3f12a7e52617905939ce1a9be52364866098"
+  },
+  "original_owner": {
+    "bytes": 12615,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr305-actual-e2-refresh/OWNERFINAL-current-f75d-e2-ordinary-union-and-isolated-LIGHT-FULL-PREPARATION.json",
+    "sha256": "8145a781cf63789807a51375c5eaf1bbc6c9f1984d1dc438b02801fd3a8651af"
+  },
+  "original_readonly_HOLD": {
+    "bytes": 7192,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr305-currentf75-readonly-LIGHT-readiness-review/OWNERFINAL-readonly-currentf75-source-LIGHT-readiness-HOLD-and-minimal-successor-plan.json",
+    "sha256": "af0dbcde1da8545eab52d4a4dc8162e3fcbc3241aba73f9ad9336b028df28650"
+  },
+  "outputs": "ABSENT uniquephase origin/rawstdio/JUnit/Robot/generated only; no writingoldpreparationoroldattempt",
+  "packet_bindings": [
+    {
+      "bytes": 43620,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr305-currentf75-private-bounded-LIGHT-SOURCE-PREPARED-NOTRUN/FROZEN-currentf75-private-bounded-LIGHT-inputs-NOTRUN.json",
+      "sha256": "d5cb3cd637e254df63e024503d8cef52f8dc223ddb74a777631592d13a5899a8"
+    },
+    {
+      "bytes": 850,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr305-currentf75-private-bounded-LIGHT-SOURCE-PREPARED-NOTRUN/canonical-LIGHT-release-admission-before-import-and-owned-results-proposed.txt",
+      "sha256": "582b6f9ef83040b3ce58388c7af8ee475ca055b57d67a1690c64ce574b989d1e"
+    },
+    {
+      "bytes": 22163,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-currentf75-private-bounded-LIGHT-SOURCE-PREPARED-NOTRUN/construct_bounded_private_light_source_packet.py",
+      "sha256": "736e679374e7da39158436dd6ed9c875e1df57c655fa7162e9191e11b20afe6e"
+    },
+    {
+      "bytes": 3760,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr305-currentf75-private-bounded-LIGHT-SOURCE-PREPARED-NOTRUN/current_f75_readonly_input_guard_NOTRUN.py",
+      "sha256": "6b47724ebb0be4b86f2e8ebf4026a32c20e39e8f1320bf9d6a64692a2f44d693"
+    },
+    {
+      "bytes": 9839,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr305-currentf75-private-bounded-LIGHT-SOURCE-PREPARED-NOTRUN/launch_current_f75_private_bounded_LIGHT_once_NOTRUN.py",
+      "sha256": "35a4dce8f0b5a4bf8351a25a3ef70cc26a2421298651232dc20b50c5392cbeab"
+    },
+    {
+      "bytes": 1344,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr305-currentf75-private-bounded-LIGHT-SOURCE-PREPARED-NOTRUN/meaningful-private-admission-and-output-negative-control-plan-NOTRUN.json",
+      "sha256": "6efbed86bb17f91906011d6837ad3f12a7e52617905939ce1a9be52364866098"
+    },
+    {
+      "bytes": 1712,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr305-currentf75-private-bounded-LIGHT-SOURCE-PREPARED-NOTRUN/reused-nine-functions-AST-profile-scope-and-old-command-preservation-proof-NOTRUN.json",
+      "sha256": "32a79c9c2094de144d252d6c2d5acc998b926cff803afedb63b6f173edbe0264"
+    },
+    {
+      "bytes": 3443,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr305-currentf75-private-bounded-LIGHT-SOURCE-PREPARED-NOTRUN/strict-currentf75-private-bounded-LIGHT-ROOT-release-contract-NOTRUN.json",
+      "sha256": "281fe0601a167accbae27399f5d2a665f8a8f1dc2b06beff935c050c38eb45a6"
+    }
+  ],
+  "required_next": "Independent SOURCEreview; meaningfulpureadmissioncontrols +concretePREEXEC review asROOTassigns; distinctROOTsingleexecutiononlyafterfreshcapacity+serializedslot. No selfadmission from preparation.",
+  "same_existing_branch": "test/canvas-runtime-cache-isolation-20261010 unchanged",
+  "schema": 1,
+  "scope_reuse_proof": {
+    "bytes": 1712,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr305-currentf75-private-bounded-LIGHT-SOURCE-PREPARED-NOTRUN/reused-nine-functions-AST-profile-scope-and-old-command-preservation-proof-NOTRUN.json",
+    "sha256": "32a79c9c2094de144d252d6c2d5acc998b926cff803afedb63b6f173edbe0264"
+  },
+  "source": "f75dcae52fcd78c5c382d3903b012e5b049ca48b",
+  "source_clean": true,
+  "source_count": 1441,
+  "status": "OWNER_FINAL_PRIVATE_CURRENTF75_BOUNDED_LIGHT_SOURCE_PREPARED_NOTEXECUTED",
+  "strict_release_admission": "Physical600/nonsymlink/UIDGID/hash typedROOT +real SOURCE/PREEXEC review/config/self identity before guardedproductimports",
+  "tree": "851834ae6cc87f42abfcf3c963542191e2815599"
+}

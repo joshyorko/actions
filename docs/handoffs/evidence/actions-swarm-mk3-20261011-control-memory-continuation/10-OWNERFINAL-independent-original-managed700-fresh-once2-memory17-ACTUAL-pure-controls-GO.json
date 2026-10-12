@@ -1,0 +1,211 @@
+{
+  "JUnit_binding": {
+    "bytes": 3719,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-one-memory17-pure-controls-20261011-2/junit.xml",
+    "sha256": "c198d5a004538f99f4cdf71f0769ad744891cc5cd864cddbe4ce7e92b1e5d76f"
+  },
+  "actual_original": {
+    "ERROR": 0,
+    "FAIL": 0,
+    "JUnit_suite_time_seconds": 0.244,
+    "PASS": 17,
+    "SKIP": 0,
+    "before_returncode": 0,
+    "case_names": [
+      "rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN.test_proposed_cgroup_memory_state_NOTRUN::test_valid_baseline_and_same_counters",
+      "rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN.test_proposed_cgroup_memory_state_NOTRUN::test_malformed_before_rejected_after_valid_baseline[max-max-MEMORY_FINITE_COUNTER]",
+      "rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN.test_proposed_cgroup_memory_state_NOTRUN::test_malformed_before_rejected_after_valid_baseline[max-True-MEMORY_FINITE_COUNTER]",
+      "rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN.test_proposed_cgroup_memory_state_NOTRUN::test_malformed_before_rejected_after_valid_baseline[current-False-MEMORY_FINITE_COUNTER]",
+      "rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN.test_proposed_cgroup_memory_state_NOTRUN::test_malformed_before_rejected_after_valid_baseline[identity-bad3-MEMORY_IDENTITY]",
+      "rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN.test_proposed_cgroup_memory_state_NOTRUN::test_existing_high_oom_counts_do_not_attribute_current_attempt",
+      "rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN.test_proposed_cgroup_memory_state_NOTRUN::test_admission_fresh_headroom_is_separate_from_mount_space",
+      "rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN.test_proposed_cgroup_memory_state_NOTRUN::test_new_oom_event_latches_failure[events-oom]",
+      "rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN.test_proposed_cgroup_memory_state_NOTRUN::test_new_oom_event_latches_failure[events-oom_kill]",
+      "rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN.test_proposed_cgroup_memory_state_NOTRUN::test_new_oom_event_latches_failure[events_local-oom_kill]",
+      "rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN.test_proposed_cgroup_memory_state_NOTRUN::test_new_oom_event_latches_failure[events_local-oom_group_kill]",
+      "rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN.test_proposed_cgroup_memory_state_NOTRUN::test_reserve_equal_or_below_latches[0]",
+      "rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN.test_proposed_cgroup_memory_state_NOTRUN::test_reserve_equal_or_below_latches[-1]",
+      "rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN.test_proposed_cgroup_memory_state_NOTRUN::test_identity_reset_or_unknown_rejects_after_valid_baseline[identity]",
+      "rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN.test_proposed_cgroup_memory_state_NOTRUN::test_identity_reset_or_unknown_rejects_after_valid_baseline[max]",
+      "rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN.test_proposed_cgroup_memory_state_NOTRUN::test_identity_reset_or_unknown_rejects_after_valid_baseline[decrease]",
+      "rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN.test_proposed_cgroup_memory_state_NOTRUN::test_identity_reset_or_unknown_rejects_after_valid_baseline[unknown]"
+    ],
+    "no_control_rerun_by_reviewer": true,
+    "outer_elapsed_seconds": 30.874573089997284,
+    "outer_returncode": 0,
+    "post_returncode": 0,
+    "primary_returncode": 0,
+    "unique_cases": 17
+  },
+  "actual_terminal_binding": {
+    "bytes": 206,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-one-memory17-pure-controls-20261011-2/original-terminal.json",
+    "sha256": "99afc2e63237927bc46c2daeb4366601cc454ac60ecc4040f9731c9241f3d553"
+  },
+  "decision": "GO_ACTUAL_MEMORY17_PURE_CONTROLS_ONLY_NO_NATIVE_POLICY_ADOPTION",
+  "documentation_improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md; reuse exact accepted measured per-owning-path mode patch15ca1e894890c2d2bd383139088cf3946a3e4c89e30e2a82cd3e96b4b48e5e1b and existing shared-cgroup headroom versus filesystem proposal. No cosmetic duplicate.",
+    "Durable learning captured": "Binary SHA equivalence does not imply owning-path permission equality; fresh once2 release corrects managed700 admission while retaining prior consumed failure. Pure memory-state controls prove defined counter/identity behavior, not sampled capacity or specific child OOM attribution.",
+    "Evidence": "Exact21bindings/managedprimary metadata, original17unique JUnit/before-primary-post000; proposed helper and17case source reviewed read-only.",
+    "Remaining uncertainty": "Physical calibration, native sampler integration, final process/reader cleanup and all native/private/full-release qualification remain HOLD.",
+    "Stale or ambiguous guidance removed": "Process-PASS pending census resolved only in new receipt after original JUnit verification; original terminal remains unchanged. Old wrong-mode failure and disk/native receipts retain original scope."
+  },
+  "independent_verification": {
+    "all_config_frozen_bindings_current_exact": 21,
+    "config_launcher_contract_owner_proof_rows_exact": 5,
+    "current_source1440_prepared30_own5_and_V9_original_guard_success": true,
+    "fresh_distinct_ROOT_release_0600_UIDGID1000_exact_typed_self_config_source_review": true,
+    "original_before_post_sourceguard_output_fixed_success_literal": true,
+    "original_before_post_stderr_empty": true,
+    "primary_RCC_current_size_SHA_UIDGID_mode700_exact": true,
+    "same_current_source_body_and_execmode_snapshot": "Independent complete1440 verification immediately preceding memory17 read; original before/post source guard witnesses exact current identity. No source policy adoption."
+  },
+  "original_failure_bindings": [
+    {
+      "bytes": 727,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-memory17-reviewed-original-outer/OWNERFINAL-root-one-original-reviewed-memory17-outer.json",
+      "sha256": "277e37a3be16f8bd6c5bd8945c656bec37284ae7e2cda396b20a3142c809c650"
+    },
+    {
+      "bytes": 836,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-memory17-pure-controls-release.json",
+      "sha256": "5afbfc6f31f6b063e7cd201a79ee2fe88834c16e3333abbefbbcd58f08ac8375"
+    },
+    {
+      "bytes": 5250,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-original-mode-admission-failure-independent-review/OWNERFINAL-independent-original-memory17-managed-mode-admission-FAIL-and-source-preservation.json",
+      "sha256": "12177ef012b94dab8e9e658d488db0bb147d37b2d3bc26454147aabaff2541d7"
+    }
+  ],
+  "review_construction_history": "First metadata query assumed fixed55-byte guard stdout was JSON and raised JSONDecodeError. Corrected by checking exact launcher print literal and captured zero terminal. No test/guard/import replay or accepted result from failed query.",
+  "root_owner_binding": {
+    "bytes": 742,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-memory17-managed700-once2-reviewed-original-outer/OWNERFINAL-root-one-original-reviewed-managed700-once2-memory17-outer.json",
+    "sha256": "421227a4e2eb8e8393426ecec757e3041f54112838d24abe7bddc5835e569bc8"
+  },
+  "safe_evidence_bindings": [
+    {
+      "bytes": 742,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-memory17-managed700-once2-reviewed-original-outer/OWNERFINAL-root-one-original-reviewed-managed700-once2-memory17-outer.json",
+      "sha256": "421227a4e2eb8e8393426ecec757e3041f54112838d24abe7bddc5835e569bc8"
+    },
+    {
+      "bytes": 835,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-memory17-pure-controls-managed700-once2-release.json",
+      "sha256": "d57c4d3348faed0da9b8e278a1da6878085b0466925c9760b2861ef271b6b9ff"
+    },
+    {
+      "bytes": 7336,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-managed-primary700-once2-independent-PREEXEC-review/OWNERFINAL-independent-memory17-managed-primary700-fresh-once2-PREEXECUTION-GO.json",
+      "sha256": "2e50ca5e09c385a2d3c300b578d44b944d3cb8361e62b8c6c2a45b8ceaa3db85"
+    },
+    {
+      "bytes": 12144,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-managed-primary700-once2-preexecution-NOTRUN/FROZEN-memory17-managed-primary700-once2-pure-config-NOTRUN.json",
+      "sha256": "5802926af2eb9a0bc469f273aab0277a70ec1500b5e80372493b5ce0c09798ac"
+    },
+    {
+      "bytes": 8538,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-managed-primary700-once2-preexecution-NOTRUN/root_release_one_memory17_managed_primary700_once2_NOTRUN.py",
+      "sha256": "a91ec3fbe4aef23f49b6178459b87d1b5e72d18f69214a8c2f129af5eeeb486b"
+    },
+    {
+      "bytes": 206,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-memory17-pure-controls-20261011-2/original-terminal.json",
+      "sha256": "99afc2e63237927bc46c2daeb4366601cc454ac60ecc4040f9731c9241f3d553"
+    },
+    {
+      "bytes": 3719,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-memory17-pure-controls-20261011-2/junit.xml",
+      "sha256": "c198d5a004538f99f4cdf71f0769ad744891cc5cd864cddbe4ce7e92b1e5d76f"
+    },
+    {
+      "bytes": 55,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-memory17-pure-controls-20261011-2/before.stdout",
+      "sha256": "9ede2e73a2fb3ca4fabcd2b6c06347cf4cb66fdcd54a8b1d180e762f2f9b529f"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-memory17-pure-controls-20261011-2/before.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 8337,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-memory17-pure-controls-20261011-2/primary.stdout",
+      "sha256": "66be5e4c6467478bc4d68e835af56f36152bf405ee945bf039cc31d2e9767ec2"
+    },
+    {
+      "bytes": 58727,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-memory17-pure-controls-20261011-2/primary.stderr",
+      "sha256": "e8c674f11924c2f209ec04ecc2d4b71c30486017a641493f7030813c83629d65"
+    },
+    {
+      "bytes": 55,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-memory17-pure-controls-20261011-2/post.stdout",
+      "sha256": "9ede2e73a2fb3ca4fabcd2b6c06347cf4cb66fdcd54a8b1d180e762f2f9b529f"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-memory17-pure-controls-20261011-2/post.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 18,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-memory17-pure-controls-20261011-2/primary-returncode.json",
+      "sha256": "df4d721d233a2334088d2d2e0110346ae9e509ff46bf0b379fbcfa85c715af4d"
+    },
+    {
+      "bytes": 2985,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/test_proposed_cgroup_memory_state_NOTRUN.py",
+      "sha256": "3b3a417379f608b6a5917c7720c6e846352f88d30fda1273c301a7c5ced1a4cb"
+    },
+    {
+      "bytes": 3330,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/proposed_cgroup_memory_state_v1_NOTRUN.py",
+      "sha256": "d2b3e6684898ab1b64f84ac7712a1f2f355d7ea5d680eb6ded0699cc090f5260"
+    }
+  ],
+  "schema": "INDEPENDENT_ORIGINAL_MANAGED_PRIMARY700_FRESH_ONCE2_MEMORY17_ACTUAL_REVIEW",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "status": "PASS_ORIGINAL17_UNIQUE_JUNIT_AND_BEFORE_PRIMARY_POST_ZERO",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "unqualified_scope": [
+    "Pure proposed in-memory state controls only; no real cgroup sampler or signal/kill path executed.",
+    "Proposed3113851289 initial headroom and536870912 reserve uncalibrated and NOT_ADOPTED; no RSS peak/capacity guarantee.",
+    "No attribution of nativeV9 unknown publication kill; originalcb888 FAIL retained.",
+    "Managed700 source-fixture711 paths admitted independently; original277e/12177 wrong-mode PREMAINFAIL retained, consumed namespace not reused.",
+    "No original native3 publication/action/lease/reload/recovery/newer5/7276/private/release qualification."
+  ],
+  "upstream_disposition": "none",
+  "verified_control_scope": [
+    "Valid baseline and unchanged counters",
+    "Malformed finite max/current/identity rejected after valid baseline",
+    "Historical nonzero OOM counters do not attribute a new attempt",
+    "Fresh cgroup headroom admission separate from mount space",
+    "New global/local OOM-counter increase latches failure",
+    "Reserve equal/below latches failure",
+    "Changed identity/max, counter reset and unknown observation fail closed"
+  ]
+}

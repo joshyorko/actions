@@ -1,0 +1,15 @@
+{
+  "delta": "Only required status literal matches exact7735 independent receipt; namespace/release stillABSENT before single execution.",
+  "named_successor": {
+    "bytes": 5074,
+    "path": "/workspace/engineering/root-reviewed-controller30-once2-original-master-v2.py",
+    "sha256": "190530c81b3da373958f771c6e7855ff39a866557628344a12c4c1af60fdae14"
+  },
+  "original_script": {
+    "bytes": 5059,
+    "path": "/workspace/engineering/root-reviewed-controller30-once2-original-master.py",
+    "sha256": "038ef06cba101566b44bb26dbba0c16d71cc1440cc41db2972ce1e27bffeb712"
+  },
+  "schema": 1,
+  "status": "ROOT_MASTER_PREEXEC_STATUS_LITERAL_FAILURE_ONLY_NO_RELEASE_NO_CONTROL_EXECUTION"
+}

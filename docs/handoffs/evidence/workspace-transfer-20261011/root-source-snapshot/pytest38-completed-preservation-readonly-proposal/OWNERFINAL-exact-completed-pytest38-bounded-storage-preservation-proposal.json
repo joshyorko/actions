@@ -1,0 +1,254 @@
+{
+  "schema": 1,
+  "owner_announced_at_UTC": "2026-10-11T16:14:22.599353+00:00",
+  "status": "CONDITIONAL_STORAGE_ONLY_READONLY_PROPOSAL_ROOT_AND_INDEPENDENT_SCRIPT_REVIEW_REQUIRED_NOT_RUN",
+  "exact_completed_root": "/tmp/pytest-of-agent/pytest-38",
+  "private_proof": {
+    "path": "/workspace/engineering/pytest38-completed-preservation-readonly-proposal/private-readonly-source-correlation-isolation-and-accessible-reference-proof.json",
+    "bytes": 307046,
+    "sha256": "e940773cf4551b403749de1a676134e0fdbe22b27faca4e5e74024e2e6085483",
+    "mode": "0o600"
+  },
+  "private_complete_inventory": {
+    "path": "/workspace/engineering/pytest38-completed-preservation-readonly-proposal/private-complete-two-stable-pytest38-body-metadata-inventory.json",
+    "bytes": 5178078,
+    "sha256": "921cddf1d3d18a753311e80ffec100c6d173986e5e5b9f5111c9fcdf5f20bcda",
+    "mode": "0o600"
+  },
+  "readonly_inspector": {
+    "path": "/workspace/engineering/pytest38-completed-preservation-readonly-proposal/inspect_exact_pytest38_readonly.py",
+    "bytes": 10600,
+    "sha256": "4112d7a601d160128cb9669f33481dbcfff97ad3753264a432db4a5be9fe4577",
+    "mode": "0o600"
+  },
+  "root_recorded_identity": {
+    "allocated_bytes": 0,
+    "device": 33,
+    "gid": 1000,
+    "inode": 186655,
+    "mode": 448,
+    "mtime_ns": 1791734096926096600,
+    "nlink": 4,
+    "uid": 1000
+  },
+  "owner_sourceFULL": {
+    "path": "/workspace/engineering/root-pr282-current1299-one-configured-sourcefull/OWNERFINAL-root-current1299-configured-SOURCEFULL-PASS.json",
+    "bytes": 3467,
+    "sha256": "e82889eb300600a4d2e6c6367881b4e9b22445b4285b268b935b746956b8b662",
+    "mode": "0o600"
+  },
+  "bound_original_sourcefull_records": [
+    {
+      "path": "/workspace/engineering/root-pr282-current1299-one-configured-sourcefull/original-complete-configured-full-node-census.private.json",
+      "bytes": 251046,
+      "sha256": "b8551a2e158157d6e51d1d29a297c47cc5000265a08aec8c74eedbeb9d56f4f9",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-current1299-SOURCEFULL-preexecution-v2/one-configured-full-once-owned/original-configured-source-full.private.log",
+      "bytes": 347809,
+      "sha256": "81b9772fe8397f1d2cadab35e56dd4a25c91733267185e679761b02562d3c0b7",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-current1299-SOURCEFULL-preexecution-v2/one-configured-full-once-owned/original-terminal.json",
+      "bytes": 869,
+      "sha256": "64531f55986c8de124d432b5a3056293e6d0bf16f22294beb031d8dac8769ff7",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-pr282-current1299-one-configured-sourcefull/OWNERFINAL-root-one-current1299-sourcefull-outer-terminal.json",
+      "bytes": 294,
+      "sha256": "6fb1b1eabcaf5fd2d0d059773dbd85c4c1dcee2bfc5bd31d28807f4fa55d3c10",
+      "mode": "0o600"
+    }
+  ],
+  "ownership_and_completion": {
+    "actual_owner_UID_GID": [
+      1000,
+      1000
+    ],
+    "real_root_mode": "0o700",
+    "root_and_worker_lock_absent": true,
+    "sourceFULL_current1299_terminal": "1349PASS12SKIP/rootouter0; original all1361 gw0/gw1 nodes retained outside candidate",
+    "attribution": "CORRELATION_ONLY_EXACT_LAUNCH_ORIGIN_UNKNOWN",
+    "safe_correlation": "All1157 immediate worker entry mtimes inside root282 release\u2192terminal window;1142 match bounded real Pytest node normalization;15 custom entries are source-derived outside-/outside-stage-/moved-/temp_dir fixture paths, not new source assertions",
+    "custom_path_source_facts": [
+      {
+        "source": "1299cc4bb6586f467d36ca124faaaaa77362695f",
+        "path": "action_server/tests/contract_tests/test_source_read.py",
+        "bytes": 19071,
+        "source_SHA256": "6f0963abeffe9de2b2c8346051032054db34ba77159a971998b575e78709c4c0",
+        "actual_AST_facts": [
+          {
+            "line": 88,
+            "literal_prefixes": [
+              "outside-"
+            ]
+          },
+          {
+            "line": 222,
+            "literal_prefixes": [
+              "moved-"
+            ]
+          }
+        ]
+      },
+      {
+        "source": "1299cc4bb6586f467d36ca124faaaaa77362695f",
+        "path": "action_server/tests/contract_tests/test_source_staging.py",
+        "bytes": 21565,
+        "source_SHA256": "33ef5802910a3e45ee6e7401d533d55c1b929047663b6b107fb58916e301e84a",
+        "actual_AST_facts": [
+          {
+            "line": 237,
+            "literal_prefixes": [
+              "outside-stage-"
+            ]
+          }
+        ]
+      },
+      {
+        "source": "1299cc4bb6586f467d36ca124faaaaa77362695f",
+        "path": "action_server/tests/action_server_tests/fixtures.py",
+        "bytes": 13151,
+        "source_SHA256": "2db8403ad100977951a4a07a0585668db493147d7be316e8d60641b7a416a854",
+        "actual_AST_facts": [
+          {
+            "line": 185,
+            "mktemp_literal": "temp_dir"
+          }
+        ]
+      }
+    ],
+    "no_usable_RCC_recycle_marker_assumed": true,
+    "root_storage_owner_disposition": "Root explicitly accepts concrete completed UID1000/root0700, two stable inventories/own terminal/correlations for STORAGE preservation only while origin remainsUNKNOWN. No artifact/native/source qualification."
+  },
+  "members": {
+    "total": 15683,
+    "counts": {
+      "directory": 3424,
+      "file": 11756,
+      "symlink": 495,
+      "fifo": 8
+    },
+    "regular_file_body_bytes": 634018590,
+    "unique_allocated_bytes": 663588864,
+    "naive_per_path_allocated_bytes_including_hardlink_duplicates": 663605248,
+    "internal_hardlink_groups": 4,
+    "external_hardlinks": 0,
+    "all_first_second_root_and_member_body_type_mode_UID_GID_mtime_ns_device_inode_nlink_targets": "EXACT_EQUAL",
+    "symlink_policy": "Root is real/nofollow; archive records symlink text without following outside or internal targets. No unrelated namespace enters inventory through a link.",
+    "FIFO_policy": "Record FIFO type/metadata, never open its payload."
+  },
+  "accessible_reference_observations": {
+    "before": {
+      "accessible": {
+        "cwd": 4,
+        "fd_dirs": 4,
+        "fd_links": 27
+      },
+      "inaccessible_UNKNOWN": {
+        "cwd": 2,
+        "fd_dirs": 2
+      },
+      "process_churn_disappeared": 292,
+      "matches": [],
+      "universal_quiescence": "UNKNOWN_NOT_CLAIMED"
+    },
+    "after": {
+      "accessible": {
+        "cwd": 4,
+        "fd_dirs": 4,
+        "fd_links": 27
+      },
+      "inaccessible_UNKNOWN": {
+        "cwd": 2,
+        "fd_dirs": 2
+      },
+      "process_churn_disappeared": 292,
+      "matches": [],
+      "universal_quiescence": "UNKNOWN_NOT_CLAIMED"
+    },
+    "scope": "0 readablecwd/FD matches,2 cwd/fd namespaces inaccessibleUNKNOWN; no universal quiescence",
+    "frozen_pointer_scope": {
+      "scanned_receipts": 241,
+      "skipped_larger_than2MiB": [],
+      "matched_bound_path_pointers": [],
+      "unscanned_and_all_other_global_aliases": "UNKNOWN_NO_UNIVERSAL_REFERENCE_CENSUS"
+    },
+    "retained_sourcefull_receipts_and_all_original_artifact_refs": "All known currentOWNERFROZEN pointer packets checked:241/0 candidatepath bindings. Raw/census/terminal are outside candidate. Do not remove any receipt/artifact pointer; unknown global/unbound aliases remainUNKNOWN. Archive/member mapping must exist before any discovered original reference becomes historical.",
+    "prior_siblings": "Names retained unchanged in private proof, no other /tmp namespace scanned for body, archived or removed."
+  },
+  "storage_resource_contract": {
+    "existing_volume": "/tmp only, no new filesystem/infrastructure",
+    "fresh_measured_tmp_available_bytes": 485412864,
+    "compressed_archive_CEILING_bytes": 335544320,
+    "reserved_free_bytes": 134217728,
+    "required_fresh_prelaunch_total_bytes": 469762048,
+    "compressed_success": "UNKNOWN_NOT_PROMISED; enforce bound BEFORE every underlying compressed write, including gzip footer; stop on overflow, preserve partial output+original root and report FAIL/HOLD",
+    "uncompressed_input": "634018590 regular body bytes plus TAR metadata; no inferred guaranteed compression ratio",
+    "large_inventory_duplication": "One compact5178078B private full inventory retained plus exact canonical second snapshot SHA/equality; full second hash scan executed, no duplicate body inventory file.",
+    "future_existing_private_destination": "/tmp/actions-completed-pytest38-preservation-one-owned",
+    "destination_and_stage_must_be_absent": true,
+    "parent_mode": "0o700",
+    "archive_and_logs_index_terminal_modes": "0o600",
+    "sourcebudget": "No simultaneous volume-mutating archive/heavy source gate/install/native; root serializes after B27 terminal and rechecks capacity immediately. Small private metadata stays outside Git."
+  },
+  "bounded_future_execution_plan": {
+    "source_script_status": "NOT_AUTHORED_OR_EXECUTED; root prepares smallest named new-root archiver using exact bound B19 data primitives plus declared root/ceiling/PAX guards, then independent source review and distinct root ONE release. This proposal does not admit arbitrary scripts.",
+    "accepted_B19_script": {
+      "path": "/tmp/actions-capacity-recovery-batch19.py",
+      "bytes": 5244,
+      "sha256": "48fd7e4c79e55b80ceda0b63c1d1da87feeb368cefee265d5c12bad6ad940840",
+      "mode": "0o600"
+    },
+    "unchanged_primitives_to_reuse": [
+      "sha",
+      "inventory",
+      "verify",
+      "reject_live_handles"
+    ],
+    "necessary_named_new_root_changes": [
+      "FixedSOURCE=/tmp/pytest-of-agent/pytest-38, fixed unusedexisting/tmp DEST/STAGE; no broad glob selector.",
+      "Replace RCC-specific recycle marker admission with explicit storage-only root-authorized completed Pytest evidence/identity+absence of rootworker .lock; retain exact source-originUNKNOWN.",
+      "Make compress writer fail before beyond335544320 bytes; keep134217728-byte reserve; any exception retains both original and partialarchive/receipts.",
+      "Create exact nanosecond PAX mtime decimal from saved integer for root and every member; verify via Decimal\u00d71e9 integer exact, not float rounding.",
+      "Reject duplicate/escaping TAR names, require exact root+15683 original pathset and body/type/modeUIDGID/links/hardlinks/nsmtime; require full gzip CRC/ISIZE/EOF.",
+      "Rehash/reinventory original root and all recorded members, recheck accessible handles with inaccessibleUNKNOWN, locks, rootdev/inode/modeUIDGID and exact completed authorization immediately before expanded removal.",
+      "Save complete0600 private index root/member snapshots+verifiedarchiveSHA/modes+mapping and terminal checks BEFORE sole guarded shutil.rmtree(SOURCE). No partial or failed admission reaches removal.",
+      "Never remove partialarchive/index/evidence, other Pytest siblings, caches/source/privatefailed563d/consumer/native/artifact roots."
+    ],
+    "future_bounds": "GNUtimeout900TERM+10 outer, subprocess600TERM+10 archival/verification/recording operation. Stop on deadline/overflow/membership/metadata/handle/pointer uncertainty without removal; source/native/pin/sysctl/quota/timeouts unchanged.",
+    "authorization": "Exact named script/proposal/independent GO hash plus concrete original root identity/inventory/completion and freshcapacity/exclusiveslot bound in root once0600 release. Root alone executes ONE.",
+    "postconditions": "Exact root expandedabsence only after verified index, archive/input evidence refs retained, original1426source282/body/helpers/native receipt guards checked by their archive-aware validators; no rawprivate payload printed or source acceptance relabel."
+  },
+  "limits": [
+    "Only storage preservation proposed; no archive/create/remove/restore/extract/data/native/helper/gateway/install/browser/provider actions executed here.",
+    "Exact run/source launch ownership staysCORRELATION_ONLY/UNKNOWN, not inferred from tests passing or path naming.",
+    "Accessible /proc coverage is finite;2 unreadable namespaces remainUNKNOWN and no historical/all-process census is claimed.",
+    "No inode/ACL/xattr identity recreation or source semantic artifact qualification claim. PAX ns timestamps are proposed and must actually be verified, not already observed.",
+    "Compression achieved size/capacity recovery UNKNOWN until distinct authorized attempt; overflow leaves original untouched.",
+    "Current221 acquisition9d89 remains prepared only; no artifact download automatically follows preservation."
+  ],
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md: exact accepted7d070 principle reused plus8 new substantive lines in bounded Pytest-specific proposal; no source/doc mutation.",
+    "accepted_principle": {
+      "path": "/workspace/engineering/capacity-recovery-independent-review/canonical-completed-scratch-preservation-proposed.patch",
+      "bytes": 1068,
+      "sha256": "7d07065b5bb7742698919997c8c6621cc20d00494741eb5365251ffb09f2d208",
+      "mode": "0o600"
+    },
+    "exact_new_delta": {
+      "path": "/workspace/engineering/pytest38-completed-preservation-readonly-proposal/canonical-pytest-root-origin-and-bounded-preservation-proposed.patch",
+      "bytes": 877,
+      "sha256": "a76b4b560637a4352cde90839931a69c8a47fb912ff3ad01efdf25bb825fe5a8",
+      "mode": "0o600"
+    },
+    "Durable_learning": "A new Pytest root needs its own completion/ownership/reference scope rather than borrowing RCC recycle evidence; bind exact ns metadata and bounded compressed writes before index-first lossless removal.",
+    "Evidence": "Own0700UID1000 root/two equal full inventories/four internal hardlinks/fifo/link fields, frozen282 terminal1361 nodes and source4 custompath patterns, two accessibleFDsnapshots with2UNKNOWN,241 frozen pointer checks; actual archive isNOT_RUN.",
+    "Stale_guidance_removed": "No correlation\u21d2exactorigin or absent lock\u21d2universal quiescence; no unbounded compression or metadatafloat rounding claim.",
+    "Remaining_uncertainty": "Exact sourceorigin/unreadable processes/globalunboundrefs/achievedcompression remainUNKNOWN; concrete newarchiver must be independently reviewed and verified before root acts."
+  },
+  "upstream_disposition": "none"
+}

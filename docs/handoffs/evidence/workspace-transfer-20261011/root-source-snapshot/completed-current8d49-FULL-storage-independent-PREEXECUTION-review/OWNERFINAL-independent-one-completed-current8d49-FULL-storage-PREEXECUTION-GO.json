@@ -1,0 +1,110 @@
+{
+  "additional_actual_control_binding": {
+    "bytes": 1763,
+    "mode": "0o400",
+    "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/OWNERFINAL-named-additional-actual-oversized-progress-payload-control.json",
+    "sha256": "d32e06b06e813df8b362f2b582fe110412a5187ee3a896029713cf1b0510bc44"
+  },
+  "decision": "GO_EXACT_ONE_COMPLETED_CURRENT8D49_FULL_SCRATCH_CAPPED_STORAGE_PREEXECUTION_V1",
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "durable_learning_captured": "The actual receipt constructor must dispatch to capped/fsynced progress writer; derive full-index address from executable and test payload plus combined-index overflow",
+    "evidence": "15 core AST definitions unchanged, current actual _IndexBudgetPath constructor, retained 4+1 existing-writer controls, executable _FULL_INDEX constant",
+    "exact_delta_binding": {
+      "bytes": 471,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/proposed-canonical-progress-writer-actual-dispatch-lesson.patch",
+      "sha256": "ae846c78a9441c2cba4ee650fe5ae3a86fae4b387e85b0022d9dd4de4ecd272b"
+    },
+    "remaining_uncertainty": "Actual archive/capacity/source postguards not yet measured; partial storage gain cannot admit FULL/native/release",
+    "stale_or_ambiguous_guidance_removed": "Defined but unused capped writer is not evidence of bounded progress writes; earlier actual under-cap result remains historical rather than retroactively improved"
+  },
+  "fresh_conditions": [
+    "TMP free at least419430400 before actual",
+    "workspace free at least16777216 for private captures",
+    "managed18+PATH0 primary RCC/PATH1 cached Toolkit/Poetry identity, no PYTHONOPTIMIZE or PYTEST_ADDOPTS",
+    "exclusive future paths absent and serialized stable selected root/source",
+    "before and always-finally protected source/current1440/237/native1192/prepared30/five origins and aliases; root retain all outcome captures",
+    "ROOT distinct one exact release, no retry or automatic native execution"
+  ],
+  "limits": [
+    "Only storage data preservation and partial TMP gain: no sole FULL1.2GB floor unblock promise",
+    "No native qualification or cleanup success from completed source FULL",
+    "No archive/compression/cap/recovery result until independent original ACTUAL review",
+    "Original failed V9 publication/cleanup scopes and all earlier failures unchanged",
+    "Unreadable handles/universal quiescence UNKNOWN; no privileged census invented",
+    "Outer hard kill may prevent postguard; incomplete evidence remains HOLD"
+  ],
+  "operation_argv": [
+    "/usr/bin/timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "900s",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/launch_once.py",
+    "--root-execute-reviewed-completed-current8d49-FULL-scratch",
+    "/workspace/engineering/root-completed-current8d49-FULL-scratch-storage-reviewed-release-v1.json"
+  ],
+  "proposal_binding": {
+    "bytes": 10618,
+    "mode": "0o400",
+    "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/OWNERFINAL-one-completed-current8d49-FULL-scratch-capped-storage-PREEXECUTION-v1.json",
+    "sha256": "4e339c963a7205f4b566b930f65663d365f894ca5c690895e18d4f55cfa0e124"
+  },
+  "reviewer_read_only": true,
+  "root_release_required": {
+    "archiver_binding": {
+      "bytes": 20624,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/archive_exact_one_completed_FULL_scratch_once.py",
+      "sha256": "cbef9302218b8a3ba94fd86d33ef718905365340790254db84d4cdf8d6894477"
+    },
+    "child_argv": [
+      "/usr/bin/timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "600s",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/archive_exact_one_completed_FULL_scratch_once.py"
+    ],
+    "driver_binding": {
+      "bytes": 9730,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/launch_once.py",
+      "sha256": "c00c5b9b038f542d25544fe3e06ba278e8f8fc53e1343299a684944337e058e2"
+    },
+    "independent_review_binding": "EXACT_THIS_OWNERFINAL_PATH_BYTES_SHA_MODE",
+    "no_retry": true,
+    "one_attempt": true,
+    "parent_envelope": {
+      "TERM_kill_after_seconds": 10,
+      "timeout_seconds": 900
+    },
+    "proposal_binding": {
+      "bytes": 10618,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/OWNERFINAL-one-completed-current8d49-FULL-scratch-capped-storage-PREEXECUTION-v1.json",
+      "sha256": "4e339c963a7205f4b566b930f65663d365f894ca5c690895e18d4f55cfa0e124"
+    },
+    "schema": "ROOT_ONE_EXACT_COMPLETED_CURRENT8D49_FULL_SCRATCH_STORAGE_RELEASE_V1",
+    "serialized_no_other_source_native_or_selected_root_mutations": true,
+    "source_scope": "8d49d0865ad5ad27b2d4e325ec135212080625e8_STORAGE_DATA_ONLY_NO_SOURCE_NATIVE_QUALIFICATION"
+  },
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "static_data_proof": {
+    "bytes": 17154,
+    "mode": "0o400",
+    "path": "/workspace/engineering/completed-current8d49-FULL-storage-independent-PREEXECUTION-review/independent-completed-FULL-storage-static-data-proof.json",
+    "sha256": "436492adef047e73750cfc4c9a7e40c7eea434b18e7e1a5487aef9b6e0424dcd"
+  },
+  "status": "INDEPENDENT_COMPLETED_FULL_STORAGE_PREEXECUTION_GO_ONLY",
+  "supplemental_owner_binding": {
+    "bytes": 5715,
+    "mode": "0o400",
+    "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/OWNERFINAL-one-completed-FULL-storage-PREEXECUTION-with-actual-progress-closure-v2.json",
+    "sha256": "11b6ea14076ddb3875a22d5c22ef5b5ae668f0dbcf863a0d85cfd63edc28293d"
+  },
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none"
+}

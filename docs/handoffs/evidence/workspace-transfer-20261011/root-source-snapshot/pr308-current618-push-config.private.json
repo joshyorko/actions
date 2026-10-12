@@ -1,0 +1,37 @@
+{
+  "pr": 308,
+  "worktree": "/workspace/engineering/pr308",
+  "branch": "fix/rcc-candidate-wheel-identities-20261010",
+  "base_branch": "integration/community-release-20261008",
+  "target": "6181b044c75de35386f1ae30e71725398b6a7feb",
+  "head": "d5a3d2f53737f4f5380b6ecb7fb93d1a651f005d",
+  "tree": "fa3f7728d315c9a192f88e17acf15f164d4eee13",
+  "ordered_parents": [
+    "c10380a4d2ebc6f0aca63eb85c8f84a337da4962"
+  ],
+  "existing_remote_before": "b673ddd761ba4ccd68e9baa8faaa9ab666df794e",
+  "output": "/workspace/engineering/pr308-current618-verified-source-control-push.json",
+  "bindings": [
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/SOURCE-frozen-owner-final-checkpoint.json",
+      "bytes": 110017,
+      "sha256": "de231c011ee899c8e3ce6c6de4f2448136350758231f3f873f760d30600f4678"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-independent-source-review/independent-frozen-current-SOURCE-review.json",
+      "bytes": 11766,
+      "sha256": "9480a381d5be565b70c34c7b1672cecbb651159dad4595021e74fa5ff9836f25"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-control-refresh/CONTROL-frozen-owner-final-checkpoint.json",
+      "bytes": 141218,
+      "sha256": "c646a010c8b4108f19a6897761a6cd6469f59d8ff90b7e2ecd700eadac37832c"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-independent-control-review/OWNERFINAL-independent-current308-CONTROL-review.json",
+      "bytes": 3989,
+      "sha256": "5ce5b68a571928501f315f5789395cb312c875a896b9954e2d4c8bfae0b07cac"
+    }
+  ],
+  "source_gates": "SOURCE1240PASS13SKIP; separateCONTROL55GREEN/Toolkit96/static/gen8/YAML30; 3pinpaths1416others exact; fresh hosted actual+fullCI required"
+}

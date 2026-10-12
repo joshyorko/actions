@@ -1,0 +1,136 @@
+{
+  "PR_capture": "2026-10-11T22:46:01.411422+00:00",
+  "PRs": [
+    {
+      "base": "a70993fafc99a9f94041485542d5a720797ca394",
+      "counts": {
+        "SKIPPED": 1,
+        "SUCCESS": 34
+      },
+      "draft": true,
+      "head": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+      "merge": "CLEAN",
+      "pr": 221,
+      "state": "OPEN"
+    },
+    {
+      "base": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+      "counts": {
+        "CANCELLED": 2,
+        "FAILURE": 8,
+        "SKIPPED": 1,
+        "SUCCESS": 13
+      },
+      "draft": false,
+      "head": "2314aea95795fbc1372a6f7b0b7b298b7cf124c3",
+      "merge": "UNSTABLE",
+      "pr": 307,
+      "state": "OPEN"
+    },
+    {
+      "base": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+      "counts": {
+        "FAILURE": 1,
+        "SUCCESS": 25
+      },
+      "draft": true,
+      "head": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+      "merge": "UNSTABLE",
+      "pr": 308,
+      "state": "OPEN"
+    },
+    {
+      "base": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+      "counts": {
+        "SUCCESS": 19
+      },
+      "draft": true,
+      "head": "519a0beb7451cb6e4410f0bee18c826fc493086e",
+      "merge": "DIRTY",
+      "pr": 305,
+      "state": "OPEN"
+    },
+    {
+      "base": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+      "counts": {
+        "FAILURE": 1,
+        "SUCCESS": 18
+      },
+      "draft": true,
+      "head": "499a83d802ca9a0e2ebe3d77071af10625879297",
+      "merge": "UNSTABLE",
+      "pr": 313,
+      "state": "OPEN"
+    }
+  ],
+  "ROOT_issue_closures": [],
+  "capture": "2026-10-11T22:49:53.401763+00:00",
+  "closed": [
+    210
+  ],
+  "native_newer": "NOT_RUN",
+  "original_audit_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+  "release": "HOLD",
+  "retained_contract_ids": [
+    71,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    90,
+    91,
+    92,
+    93,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    125,
+    126,
+    127,
+    129,
+    130,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    138,
+    139,
+    140,
+    141,
+    142,
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    151,
+    152,
+    153,
+    155,
+    162,
+    194,
+    195,
+    196,
+    208,
+    209,
+    210,
+    211,
+    212,
+    214
+  ],
+  "schema": 1,
+  "scope": "exact remote heads/check context snapshot; run and checkout acceptance separate",
+  "states": {
+    "CLOSED": 1,
+    "OPEN": 53
+  }
+}

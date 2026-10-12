@@ -1,0 +1,86 @@
+{
+  "bounds": {
+    "inner_entry_ceiling": 5000,
+    "inner_expanded_bytes_ceiling": 134217728,
+    "inner_single_bytes_ceiling": 67108864,
+    "internal_alarm_seconds": 110,
+    "kill_grace_seconds": 10,
+    "memory_bytes": 805306368,
+    "original_compressed_bytes_ceiling": 100663296,
+    "output_bytes_ceiling": 8388608,
+    "whole_command_seconds": 120
+  },
+  "decision": "HOLD_CURRENT_E2_INNER_EXECUTABLE_PREEXECUTION_SOURCE_REVIEW_ONLY",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; propose precise insertion adjacent to wheel integrity guidance.",
+    "Durable_learning_captured": "Partial AST reuse cannot validate new archive type/cap/RECORD guards; execution-entry checks are part of the admission boundary.",
+    "Evidence": "Seven functions independently AST-equal, three changed; all17 owner bindings match; concrete main-entry omissions above. Existing guide separates outer CRC/manifest from inner RECORD/generated authority.",
+    "Exact_delta": "When an archive inspector reuses only part of an accepted implementation, qualify every changed admission function with an independently valid baseline and individually restored boundary poisons before inspecting release artifacts. Call the frozen implementation rather than a copied policy; reject optimized assertion execution and require a typed regular, nonsymlink ROOT release before consuming it. Syntax and unchanged-function AST equality are source evidence, not executable admission.",
+    "Remaining_uncertainty": "Controls and named entry-guard successor require root authorization and independent review.",
+    "Stale_or_ambiguous_guidance_removed": "No executable GO inferred from seven unchanged functions or outer integrity PASS."
+  },
+  "exact_argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "120s",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/pr221-current-e2-inner-data-executor-PREPARATION/inspect_current_e2_inner_once.py",
+    "--execute-root-reviewed-one-inner-inspection"
+  ],
+  "executor_binding": {
+    "bytes": 22017,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-PREPARATION/inspect_current_e2_inner_once.py",
+    "sha256": "fa6497dd1ad051eba7ae96f7b8856481b255ed8e8599822ecb92640599c7bfed"
+  },
+  "findings": [
+    {
+      "code": "OPTIMIZED_ASSERT_ADMISSION",
+      "evidence": "main assert-based guards lack explicit sys.flags.optimize rejection; Python optimization removes assertions.",
+      "needed": "Reject optimized interpreter before reading inspection data; preserve original packet."
+    },
+    {
+      "code": "UNTYPED_ROOT_RELEASE",
+      "evidence": "main reads RELEASE bytes without lstat regular/nonsymlink/0600 admission.",
+      "needed": "Require exact typed regular nonsymlink0600 ROOT release before consumption."
+    }
+  ],
+  "manifest_binding": {
+    "bytes": 77662,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-PREPARATION/frozen-executor-inputs.json",
+    "sha256": "8ef779016b34de088817e93f5086187116b727b6a6d29438b8211ea866c06a59"
+  },
+  "original_transfer_failure": "Retained unchanged; separate outer integrity PASS does not prove inner integrity.",
+  "proof_binding": {
+    "bytes": 831,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-independent-review/independent-frozen-source-and-admission-proof.json",
+    "sha256": "80c8280e207de1145418c6cce8445fc2215e77f4f8e6a38143a8446c601d84b2"
+  },
+  "proposal_binding": {
+    "bytes": 13205,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-PREPARATION/OWNERFINAL-current-e2-private-inner-data-executor-PREEXECUTION.json",
+    "sha256": "015937fe81a04fcdeeb64769061ade8a88108007b3d82f95d96bb1cb39a0326b"
+  },
+  "required_controls": [
+    "Valid minimal complete wheel and sdist baseline derived from current217 tracked source rows and explicit generated whitelist; exact metadata/tags/scripts/RECORD before each poison.",
+    "Frozen real zip_payload: duplicate/case/path/encryption/special/directory-body types; entry/single/aggregate limits; read-spies reject before offending payload access.",
+    "Frozen real inspect_wheel: independent restored baseline for RECORD missing/extra/duplicate/malformed/hash/size/self-unhashed mutations.",
+    "Frozen real inspect_sdist and source whitelist: missing tracked source, extra generated member, RCC platform identity, archive root/link/special/case/caps and truncated/corrupt gzip.",
+    "Immutable inner-reference member/size/digest, output cap, optimized interpreter and regular nonsymlink0600 typed ROOT release admission.",
+    "Source body/mode mismatch recorded independently and never promoted to source/content qualification; no CRLF normalization waiver."
+  ],
+  "schema": "INDEPENDENT_CURRENT_E2_INNER_SOURCE_PREEXECUTION_REVIEW",
+  "scope": "Frozen source and bindings review only; no boundary controls, archive inspection, imports, installs or execution",
+  "source": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "tree": "afe2679cc93bf27fa5021c7698ee7ad3ee21a1b9",
+  "unknowns": [
+    "Changed functions have AST/syntax evidence only; controls NOT_RUN.",
+    "Current inner member counts/RECORD/generated OAuth/frontend content UNOBSERVED.",
+    "Other-platform builder identities, content authority, installed consumer, native/private/full release remain HOLD."
+  ],
+  "upstream_disposition": "none; private local executor proposal only, no external report or confirmed upstream defect"
+}

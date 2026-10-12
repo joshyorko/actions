@@ -1,0 +1,235 @@
+{
+  "schema": "actions-pr312-current77-managed-configured-full-NOEXECUTION/v1",
+  "status": "PREPARATION_ONLY_DISTINCT_ROOT_RELEASE_AND_INDEPENDENT_PREEXECUTION_REVIEW_REQUIRED",
+  "head": "77ed3de24f33412dff30e4e3c18841c4c09933ac",
+  "tree": "943c9b88d5d508a4c59b0461b6220ec86e1a7d62",
+  "sole_parent": "77065131a0aee63d2b1f8621476374bdde3c7b65",
+  "target": "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+  "current_LIGHT": {
+    "path": "/workspace/engineering/pr312-shutdown-response-order-source/OWNERFINAL-pr312-shutdown-response-order-LIGHT-source-checkpoint.json",
+    "bytes": 29872,
+    "sha256": "7812bf4345169e1d52bd0debadb4f5d7c641b44ba079bae139ac125af2bd1f44",
+    "mode": "0o600"
+  },
+  "command": {
+    "cwd": "/workspace/engineering/runtime-checkout-eol",
+    "argv": [
+      "bash",
+      "--noprofile",
+      "--norc",
+      "-c",
+      "set -euo pipefail\nsource \"$1\"\n\"$2\" \"$3\" \"$4\"\nshift 4\nexec \"$@\"\n",
+      "pr312-current77-managed-configured-full",
+      "/workspace/actions-cloud/activate.sh",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/pr312-shutdown-response-order-configured-full-proposal/managed_activation_preflight.py",
+      "/workspace/engineering/pr312-shutdown-response-order-configured-full-once-owned/before-full-source-activation-capacity.json",
+      "env",
+      "PYTEST_XDIST_AUTO_NUM_WORKERS=2",
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "600s",
+      "/workspace/actions-cloud/bin/rcc",
+      "task",
+      "script",
+      "-r",
+      "developer/toolkit.yaml",
+      "--",
+      "python",
+      "-c",
+      "import hashlib,os,subprocess\nfrom pathlib import Path\nimport toolkit\nroot=toolkit.REPOSITORY_ROOT\nassert root==Path('/workspace/engineering/runtime-checkout-eol')\nassert subprocess.check_output([\"git\",\"rev-parse\",\"HEAD\"],cwd=root).decode().strip()=='77ed3de24f33412dff30e4e3c18841c4c09933ac'\nassert subprocess.check_output([\"git\",\"rev-parse\",\"HEAD^{tree}\"],cwd=root).decode().strip()=='943c9b88d5d508a4c59b0461b6220ec86e1a7d62'\nassert subprocess.check_output([\"git\",\"status\",\"--porcelain\"],cwd=root)==b\"\"\nassert os.environ[\"PYTEST_XDIST_AUTO_NUM_WORKERS\"]==\"2\"\nfor name,h in {'action_server/build.py': '75c249c111bbf3d81f027a252e7dba54771037f02b402832c0554e119cb4eb12', 'action_server/poetry.lock': '5d6acb65ba220211d1da020c78c51a5ea89465f2bbedc99aaf72319b862914e5', 'action_server/pyproject.toml': 'be4011d3915e8838249546c70ae30420dadfb0d08c19b59970d8980332c7573f', 'action_server/tasks.py': 'b35d3722b1f9ed51e57ce4dcd3f7fdc81b7df238cbcdef0eaf44d47d08555791', 'action_server/tests/action_server_tests/test_create_conda_from_package_yaml/create_wheel/pyproject.toml': '4d581bfc7b6d64979c3aef6411198548a17713e0c8439c07d0cbb1a91fae3851', 'actions-http-helper/poetry.lock': '8e717ea54b91b17e638bb633026372fd415487a5e817768b450c0e473cd84d13', 'actions-http-helper/pyproject.toml': '1888af6e0e2ce2280080920338245122563f69ce677796a5dbddc4c6bb07d28d', 'actions-http-helper/tasks.py': '31523822c03af429ad7d7fab8df66a45f87b4f58876f8928df9f7c79f375992a', 'actions/poetry.lock': 'b90ab7b6e3dd3a68a3d23bfee456adf6d22446f845e1bd5e2a334ec573035f15', 'actions/pyproject.toml': '9de923a2bf29d73d486ebf67982e177c0ab41d8a35266f7dd1f2d75b1ec43ec3', 'actions/tasks.py': '33a572fcadc6848ebab78f01fcae880a40bd51011cb80a69149467a897807cc9', 'actions/tests/actions_core_tests/test_core_log_integration/pyproject.toml': 'f2119f900206f7a6bcbedd34b7cfb1c83bd996db13fdf81710fa509ed3cc72cf', 'build_common/poetry.lock': '5dfaebdb2e73b95e022e9064f4258fefb66a4a0a2a6c3d8829cd9d2838e07160', 'common/poetry.lock': '55fb76128d984be26ba5af1dc791a7b010298f70908d969b80fd7f268e84019e', 'developer/setup.yaml': '8674d6b55439fae5ac284fa92d7db8016e3589fafbf2d34e066e29345efa016a', 'developer/setup_windows_amd64.yaml': '86a36910ad271616626e019e02e6c7b21fdb32eaa1e1717c2a654673504a8001', 'developer/toolkit.py': 'e1a3f96b57c31be2a0db5cdd3d63ce9ac243a9e8e29dff5ce6e07fd897fb605f', 'developer/toolkit.yaml': '0ed7beaa93dd0ba763d1618382a3de8ce307cc5cf613759d06081d735fcd7e68', 'devutils/bin/develop.bat': 'daff2011d235a81f7d1556bf30bf62016aecb2498084e67bfccad8531642c589', 'devutils/bin/develop.sh': '484c7164f54e383b038dcb25ff39979458b6f6a3f10f20c81f50001c3c2d16c2', 'devutils/poetry.lock': '22bf11dae2a1ed46de5024da774dde4fe778c206d720929fba9244819f3b0b6e', 'devutils/pyproject.toml': '7ffef37af3dc666ae72f1075ac1e06d8c61405225d678b326d767fe1952825e1', 'devutils/src/devutils/invoke_utils.py': '7892303d075b2755b490b507c444d9aebc2f0d3089c8812df40d7f0c0fc195b5', 'devutils/src/devutils/rcc.py': 'c897a607292025e3ae05a79fb002302f4ac7d5eed6033b8101dd9d5e550cc97c', 'mcp/poetry.lock': '9b84391e939e90e56422e1b9373862fbc1827b667ebba87126a6330a74069543', 'tasks.py': 'b9d8fc44392003c3eac7503c2c8cff237f8896c95d5eccb97f6e75cf55eb4b1c', 'templates/advanced/pyproject.toml': 'ef1312a9eaf6323b143d9339defb3158ea19b67b22a7cce0ecf766ba6ed5223d', 'work-items/poetry.lock': 'dcb776a04f9fb30fb93c6667cc42fe9733208e07ec23e7d54dff39650ae11bf4', 'work-items/pyproject.toml': 'a09a91d33e5f91cdec649a96d72b91e4fc1e4ecf97d3654e9b243f0ac8ecc10e', 'work-items/tasks.py': 'e74ad7f083159457c53da828ca69b2ea6ae1a2cde465e6d2b8019bda079f1642'}.items():assert hashlib.sha256((root/name).read_bytes()).hexdigest()==h\nfor package,module,prefix in [('actions', 'actions', '/workspace/engineering/runtime-checkout-eol/actions/.venv'), ('actions-http-helper', 'actions_http', '/workspace/engineering/runtime-checkout-eol/actions-http-helper/.venv'), ('devutils', 'devutils.invoke_utils', '/workspace/engineering/runtime-checkout-eol/devutils/.venv'), ('work-items', 'actions.work_items', '/workspace/engineering/runtime-checkout-eol/work-items/.venv'), ('action_server', 'actions.server._rcc_runtime_adapter', '/workspace/engineering/runtime-checkout-eol/action_server/.venv')]:\n code=\"import importlib,sys;from pathlib import Path;m=importlib.import_module(\"+repr(module)+\");assert Path(sys.prefix).resolve()==Path(\"+repr(prefix)+\");assert Path(m.__file__).resolve().is_relative_to(Path(\"+repr(str(root/package/\"src\"))+\").resolve())\"\n toolkit.poetry(package,\"run\",\"python\",\"-c\",code)\nos.environ[\"PYTEST_XDIST_AUTO_NUM_WORKERS\"]=\"2\"\nprint(\"CURRENT77_OWN30_FIVE_ORIGINS_PASS_BEFORE_CONFIGURED_FULL\",flush=True)\ntoolkit.poetry(\"action_server\",\"run\",\"invoke\",\"test-not-integration\")\n"
+    ],
+    "exact_body": {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-configured-full-proposal/planned_current77_toolkit_configured_full_body.py",
+      "bytes": 4704,
+      "sha256": "06526b2079ac7610d4672485ad4433fe40da7b3a4c07c5648e22c8ac7b121309",
+      "mode": "0o600"
+    },
+    "preflight": {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-configured-full-proposal/managed_activation_preflight.py",
+      "bytes": 372,
+      "sha256": "7e7bd040ea2f63515d636e609daedead44d343ae261b20122aa73fdd2de0261c",
+      "mode": "0o600"
+    },
+    "post_argv": [
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/pr312-shutdown-response-order-configured-full-proposal/post_full_readonly_guards.py",
+      "/workspace/engineering/pr312-shutdown-response-order-configured-full-once-owned/post-full-source-and-references.json"
+    ],
+    "TERM_seconds": 600,
+    "KILL_grace_seconds": 10,
+    "root_parent_subprocess_bound_seconds": 640,
+    "attempts": 1,
+    "pytest_workers": 2,
+    "scope": "Unchanged configured Runtime invoke test-not-integration; current77 response-order source gate only; no native opt-in."
+  },
+  "activation": {
+    "path": "/workspace/actions-cloud/activate.sh",
+    "bytes": 987,
+    "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+  },
+  "allowlisted_activation_exports": {
+    "ACTIONS_CLOUD_ROOT": "/workspace/actions-cloud",
+    "ROBOCORP_HOME": "/workspace/actions-cloud/robocorp",
+    "XDG_CACHE_HOME": "/workspace/actions-cloud/cache",
+    "XDG_CONFIG_HOME": "/workspace/actions-cloud/config",
+    "POETRY_CACHE_DIR": "/workspace/actions-cloud/cache/pypoetry",
+    "POETRY_CONFIG_DIR": "/workspace/actions-cloud/config/pypoetry",
+    "UV_CACHE_DIR": "/workspace/actions-cloud/cache/uv",
+    "npm_config_cache": "/workspace/actions-cloud/cache/npm",
+    "GOCACHE": "/workspace/actions-cloud/cache/go-build",
+    "GOPATH": "/workspace/actions-cloud/cache/go",
+    "PLAYWRIGHT_BROWSERS_PATH": "/workspace/actions-cloud/cache/playwright",
+    "PYTEST_XDIST_AUTO_NUM_WORKERS": "2",
+    "POETRY_NO_INTERACTION": "1",
+    "BUILDX_CONFIG": "/workspace/actions-cloud/cache/buildx",
+    "ACTIONS_HOME": "/workspace/actions-cloud/actions-home",
+    "ROBOTS_HOME": "/workspace/actions-cloud/robots-home",
+    "GOMAXPROCS": "2",
+    "ACTIONS_RUNTIME_TEST_PYTHON": "/workspace/actions/action_server/.venv/bin/python"
+  },
+  "activation_export_count_including_PATH": 19,
+  "PATH_condition": "First entry /workspace/actions-cloud/bin; inherited remainder unchanged; original activation byteexact. Cached LIGHT added holotreebin, but full gateway manages toolkitbin itself.",
+  "execution_prerequisites": {
+    "ROOT_distinct_release": "NOT_GRANTED_BY_THIS_PROPOSAL",
+    "independent_LIGHT_and_preexecution_review": "REQUIRED",
+    "ROOT_serialized_full_slot": "No concurrent RCC sourcefull/native/provider/browser/installer/consumer; root sets exact PR312_CURRENT77_SERIALIZED_HEAVY_SLOT and separately authorizes ONE",
+    "fresh_workspace_available_bytes_minimum": 1200000000,
+    "no_current_execution": "True; no original venv/temp/gateway/pytest executed for this proposal"
+  },
+  "owner_parent_envelope": "Create new execution0700 dir; exclusive root authorization0600 before exact argv; binary0600 log exclusive; record real returncode/elapsed/log hash in separate0600 terminal even on failure before readonly postguards. Parent bound640; preserve timeout/failure no retries. Source/ref failure stays failed even with pytestPASS.",
+  "preservation": {
+    "all1424current_Git_FS_exec": "Immediate before and after",
+    "all141original_bound_refs_and_allLIGHT_private_refs": "Rehash immediate before/after; no overwrite or original main execution",
+    "own30inputs_and_fiveconcreteprefix_origins": "Before configured invoke via exact package toolkit",
+    "RCC": "Primary0700 exact7e588 and ignoredfixture0711 recorded",
+    "old770_sourcefull": "Historical1295/13 Runtime plus162Devutils original owner/log retained; cannot qualify current77 new10cases",
+    "currentWindowsfailure": "Original71bb/source770 ReadError10053 after serveraccess200 remainsFAIL; new ASGI ordering sourcecontrols do not establish successful clientresponse/naturalexit/platformcause",
+    "no_native_current_admission": "_server.py newproduction change makes historical build unqualified; private/backend/Runtime release gates retained"
+  },
+  "bindings": [
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/OWNERFINAL-pr312-shutdown-response-order-LIGHT-source-checkpoint.json",
+      "bytes": 29872,
+      "sha256": "7812bf4345169e1d52bd0debadb4f5d7c641b44ba079bae139ac125af2bd1f44",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/OWNERFINAL-pr312-current-a0d-SOURCEFINAL.json",
+      "bytes": 21917,
+      "sha256": "d922c435dd20c585f134bbc9bae76ede367ff2bd40f901c5952fd65ffc64c82b",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/pr312-current-a0d-independent-sourcefinal-review/OWNERFINAL-independent-pr312-current-a0d-SOURCEFINAL-review.json",
+      "bytes": 4699,
+      "sha256": "9a3bb5b6aa00b01085f22861bfe2605ca2d968019c4920b49ed88d9b88c4237a",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-current-a0d-independent-Windows-diagnosis/OWNERFINAL-independent-original-PR312-Windows-shutdown-phase-diagnosis.json",
+      "bytes": 7420,
+      "sha256": "1f3dbc0fb03f7c51fdb83db2d0b424601ea36b148c3a2ceec49b915d89ae5f3a",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-current-a0d-original-Windows-owned/root-one-original-decoded-log-acquisition.json",
+      "bytes": 1215,
+      "sha256": "5f55a64439aedb2251a9b20da127415149762dfdabca776e591bc9406575cdc7",
+      "mode": "0o644"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/OWNERFINAL-cleanup499-managed-activation-configured-full-proposal-v2.json",
+      "bytes": 22911,
+      "sha256": "e853c20af0045a217a4c979a973df807ae259c6a85e472fb20273a41dba882ac",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-configured-full-proposal/current77_readonly_guards.py",
+      "bytes": 3550,
+      "sha256": "923da4cba8b796c004d29510668d6fcea1e11af85ca2dec46453c9c21d85910a",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-configured-full-proposal/managed_activation_preflight.py",
+      "bytes": 372,
+      "sha256": "7e7bd040ea2f63515d636e609daedead44d343ae261b20122aa73fdd2de0261c",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-configured-full-proposal/post_full_readonly_guards.py",
+      "bytes": 365,
+      "sha256": "d37dc01a01c43df8a72f90d8067dab4361b8e97ecd8f06d77f57d07d00ff401f",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-configured-full-proposal/planned_current77_toolkit_configured_full_body.py",
+      "bytes": 4704,
+      "sha256": "06526b2079ac7610d4672485ad4433fe40da7b3a4c07c5648e22c8ac7b121309",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/actions-cloud/activate.sh",
+      "bytes": 987,
+      "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "bytes": 31903952,
+      "sha256": "ba35c76091c86640cd6bbccc8c216e5b2fc52b20c26de803edef79165022037f",
+      "mode": "0o775"
+    },
+    {
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/poetry",
+      "bytes": 371,
+      "sha256": "f989714d24f334397e5960032f3fb3dd7ebcebf5d600e0d520aa7c780c8b124c",
+      "mode": "0o711"
+    },
+    {
+      "path": "/workspace/actions-cloud/bin/rcc",
+      "bytes": 22282402,
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+      "mode": "0o700"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol/action_server/src/actions/server/bin/rcc-18.19.3",
+      "bytes": 22282402,
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+      "mode": "0o711"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/exact-canonical-response-order-and-client-completion.patch",
+      "bytes": 2030,
+      "sha256": "79130164c7fc47a42066a121dbee82ca8e07bdeee08a9c09cd44542ab6b110e2",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/own-Bootstrap-reuse-inputs-and-origins.json",
+      "bytes": 6642,
+      "sha256": "b887988b906cc73f0f30e237b70432f01b44c187312d8416d09b2990a90bc39e",
+      "mode": "0o600"
+    }
+  ],
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "exact_delta": {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/exact-canonical-response-order-and-client-completion.patch",
+      "bytes": 2030,
+      "sha256": "79130164c7fc47a42066a121dbee82ca8e07bdeee08a9c09cd44542ab6b110e2",
+      "mode": "0o600"
+    },
+    "learning": "Replace stale synchronous shutdown-call description with response BackgroundTasks after completed ASGI finalbody; explain denied/failedsend no interrupt, access200 is not clientdelivery, keep naturalexit/cleanup distinct.",
+    "evidence": "Genuine5FAIL5PASS RED, 10GREEN, final86 real assembled/auth tests; original owned Windows ReadError10053 after access200.",
+    "stale_removed": "Synchronous endpoint-call wording now qualified by exact response-send ordering.",
+    "uncertainty": "Windows TCP client delivery and expected naturalrc1 remain fresh platform acceptance, no EOLcausal claim/no universal cleanup."
+  },
+  "Upstream_disposition": "none",
+  "constructor": {
+    "path": "/workspace/engineering/pr312-shutdown-response-order-configured-full-proposal/construct-full-proposal-noexecution.py",
+    "bytes": 10757,
+    "sha256": "f3a8981735560d0c88a164b479d13f23e4f9b28ea9606ca2b17589fdf21e2485",
+    "mode": "0o600"
+  }
+}

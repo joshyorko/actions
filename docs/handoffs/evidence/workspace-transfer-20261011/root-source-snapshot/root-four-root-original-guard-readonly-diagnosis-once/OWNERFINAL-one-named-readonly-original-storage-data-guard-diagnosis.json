@@ -1,0 +1,37 @@
+{
+  "scope": "ONE_NAMED_READONLY_METADATA_GUARD_DIAGNOSIS_NO_ARCHIVE_SOURCE_GATE_NATIVE_INSTALL_NETWORK",
+  "original_nested_guard_stdout_stderr": "UNAVAILABLE_HERE_ORIGINAL_CAPTURE_DISCARDED",
+  "argv": [
+    "/usr/bin/timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "60s",
+    "/bin/bash",
+    "--noprofile",
+    "--norc",
+    "-c",
+    "set -euo pipefail; source \"$1\"; unset PYTHONOPTIMIZE; export PYTHONDONTWRITEBYTECODE=1; exec \"$2\" \"$3\" \"$4\" after",
+    "root-readonly-data-guard",
+    "/workspace/actions-cloud/activate.sh",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/completed8d49-two-root-storage-PREPARATION/current8d49_data_guard_reused.py",
+    "/workspace/engineering/completed8d49-two-root-storage-PREPARATION/private-current8d49-data-only-source-guard-inputs.json"
+  ],
+  "returncode": 1,
+  "elapsed_seconds": 12.354515929997433,
+  "capture": "2026-10-11T19:09:10.934108+00:00",
+  "outputs": [
+    {
+      "path": "/workspace/engineering/root-four-root-original-guard-readonly-diagnosis-once/original-readonly-probe.stderr.private.log",
+      "bytes": 1169,
+      "sha256": "a68a43ec718eb01fbe1fd357ab7bbf168e16209699937b4ae2ffd22cdf881e1a",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-four-root-original-guard-readonly-diagnosis-once/original-readonly-probe.stdout.private.log",
+      "bytes": 353,
+      "sha256": "7f70290b13fb4be0b801ef97b59057dd5ddff5d8a4a065507be57d106521ea49",
+      "mode": "0o600"
+    }
+  ]
+}

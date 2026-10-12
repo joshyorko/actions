@@ -1,0 +1,19 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -3367,3 +3367,16 @@
+ retain their hashes and scoped verification receipts. State unrecorded metadata
+ and historical observation limits. Recovered capacity does not turn an ENOSPC
+ gate green; rerun its required checks with new logs.
++
++A failed isolated task directory needs its own explicit byte-preservation
++scope; never apply a completed-recycle marker to it or relabel its failure.
++Require complete before/after body, mode, UID/GID, mtime and inode snapshots,
++zero external hardlinks, and lossless archive/member verification before
++removing only the expressly named expanded copy. Retain original private path
++references and a restoration recipe. For Linux handle observations, a stable
++`Z` task has released its own file and filesystem references before becoming
++a zombie; that does not prove reaping. Inspect sibling tasks too, since a zombie
++thread-group leader can coexist with live threads. Any unknown identity or
++unreadable live same-UID handle keeps removal on hold. Record other-UID visibility
++separately as unknown and retain the original cleanup failure; fresh byte
++preservation and sampled handle observations do not establish universal cleanup.

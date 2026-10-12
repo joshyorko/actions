@@ -1,0 +1,114 @@
+{
+  "blocking_execution_gaps": [
+    {
+      "evidence": {
+        "bytes": 8437,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr305-actual-e2-refresh/run_current_f75d_isolated_SOURCE_LIGHT_once.py",
+        "sha256": "4d7b4316449c796bb7458541b772893e0d1445ded62bb822dc27f630af275673"
+      },
+      "id": "L1",
+      "reason": "LIGHT has no try/finally always-post or explicit finite subprocess/total bounds. Doctor, five origins and Toolkit/scoped/static calls can fail before final validation; source/data acceptance must retain any actual postguard status separately."
+    },
+    {
+      "evidence": {
+        "bytes": 8437,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr305-actual-e2-refresh/run_current_f75d_isolated_SOURCE_LIGHT_once.py",
+        "sha256": "4d7b4316449c796bb7458541b772893e0d1445ded62bb822dc27f630af275673"
+      },
+      "id": "L2",
+      "reason": "Product toolkit imported before strict physical release and complete input admission. Existing release checks only read_bytes hash/JSON equality; it does not enforce regular nonsymlink0600 UIDGID or a compatible independent review binding. External ROOT admission may enforce these but is not yet concretely bound."
+    },
+    {
+      "evidence": {
+        "bytes": 29236,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr305-actual-e2-refresh/CONDITIONAL-current-f75d-isolated-managed-source-inputs.json",
+        "sha256": "8452f7184fb1cd6f63d4349195c2cde4b9cac8f1d2d21b9ee1fe42d218ef5bc2"
+      },
+      "id": "L3",
+      "reason": "Conditional config implementation_bindings empty; source inventory/native config/prepared reuse script-selected paths are not admitted by the LIGHT body as a complete hash-bound dependency closure. Owner declarations are valid but the executing body never validates the owner or every selected input."
+    },
+    {
+      "evidence": {
+        "bytes": 8437,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr305-actual-e2-refresh/run_current_f75d_isolated_SOURCE_LIGHT_once.py",
+        "sha256": "4d7b4316449c796bb7458541b772893e0d1445ded62bb822dc27f630af275673"
+      },
+      "id": "L4",
+      "reason": "Three basetemps are unique absent with ALL and inherited ADDOPTS rejection, but pytest logging output is not absolute/isolated. Origin/JUnit/generator results write into original preparation directory, outside once-owned perphase outputs. Source/material inputs must be frozen separately from mutable actual outputs."
+    },
+    {
+      "id": "L5",
+      "observation_bytes": 835211264,
+      "reason": "Fresh workspace capacity is below configured1288490189 source-floor; fresh resource/serialization release remains mandatory. No infrastructure/storage action authorized by this review."
+    }
+  ],
+  "branch": "test/canvas-runtime-cache-isolation-20261010",
+  "capture": "2026-10-11T22:58:19.933776+00:00",
+  "config": {
+    "bytes": 29236,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr305-actual-e2-refresh/CONDITIONAL-current-f75d-isolated-managed-source-inputs.json",
+    "sha256": "8452f7184fb1cd6f63d4349195c2cde4b9cac8f1d2d21b9ee1fe42d218ef5bc2"
+  },
+  "current_light_full": "NOT_RUN; historical5306 LIGHT275PASS1SKIP source-specific/FULL_NOTRUN preserved",
+  "decision": "HOLD_CURRENT_F75_LIGHT_EXECUTION_CONCRETE_PRIVATE_ADMISSION_SUCCESSOR_REQUIRED",
+  "documentation_improvement": {
+    "accepted_existing_delta_reused": {
+      "bytes": 954,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution-executable-v4/canonical-config-consumed-path-dependency-closure-proposed.patch",
+      "sha256": "c39564ff812d16f319723951057a1317f145ddcf6872fba95f0a59b07d7d9772"
+    },
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "evidence": "Current8452 conditional selected inventory/config and4d7b LIGHT source: noalwaysfinally/bounds, preadmissionimport, emptyimplementationclosure, noabsolute logger; freshspace floor failure. Current1441/30/83/7/fiveCLI bodies independently read verified.",
+    "exact_delta": {
+      "bytes": 829,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr305-currentf75-readonly-LIGHT-readiness-review/canonical-current-LIGHT-admission-parity-and-owned-output-proposed.txt",
+      "sha256": "bd57a0b4c22b1dec079e0b04adbcd96b7724f69f134b9eda37e104089165884a"
+    },
+    "remaining_uncertainty": "New private admission implementation/indPREEXEC/ROOT release/freshspace+origins/actual LIGHT/current FULL/currentCI/native/provider/browser/release unknown or NOTRUN. No source fix justified by this read-only preparation.",
+    "stale_ambiguity": "Source/preparation/prefix existence not actual current LIGHT or native acceptance; FULL selfpin/null notexecutable; remote source/current source labels remain distinct. Existing closure proposal absent from current PR305 owning guide, so no claim of source-guide integration.",
+    "upstream_disposition": "none"
+  },
+  "five_selectors": "EXACT current/original Git mode+blob; separate from276 production",
+  "live_admission": {
+    "bytes": 986,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr305-currentf75-readonly-LIGHT-readiness-review/authenticated-one-live-ref-and-policy-readiness.json",
+    "sha256": "814f848662f0fe1e5f7993c2ca6ad588e053faec6c63ac985618cc5cca48d277"
+  },
+  "live_scope": "Remote519a draft versus localf75/current namede2; RESTpull.base_sha618 is retained as returned, never substituted for namedtargete2. rules0/reviews0/threads0; branch protection403 limitation; no CI or merge admission",
+  "native1192_scope": "1192 recorded paths present only; no new whole-native source/artifact qualification or retrospective actual result",
+  "next_engineering_assignment": {
+    "bytes": 4531,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr305-currentf75-readonly-LIGHT-readiness-review/minimal-currentf75-isolated-LIGHT-successor-next-writer-assignment-NOTRUN.json",
+    "sha256": "a70229cde415f218fc2d7f95af4e02362c68aca7938f811560bd06ce68552f08"
+  },
+  "operations": "Read-only Git/AST/stdlib hashes and bounded metadata connector calls. Wrote owned review/proposal only; no tests/product imports/versions/native/gate/APIlogs/download/source/env/ref/index/push/merge",
+  "ordered_parents": [
+    "5306eeb26595da4ce571b99812eb50f047cfc903",
+    "e2c81adce7858d5a952991ba9a8b7f72e902038a"
+  ],
+  "original14_owner_bindings": "ALL_REHASHED_EXACT",
+  "owner": {
+    "bytes": 12615,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr305-actual-e2-refresh/OWNERFINAL-current-f75d-e2-ordinary-union-and-isolated-LIGHT-FULL-PREPARATION.json",
+    "sha256": "8145a781cf63789807a51375c5eaf1bbc6c9f1984d1dc438b02801fd3a8651af"
+  },
+  "prepared30": "EXACT_CURRENT_AND_PRIOR_BOOTSTRAP_REUSE_TABLE",
+  "prepared7_and_retained83": "ALL_PHYSICAL_BODY_SIZE_MODE_EXACT",
+  "schema": 1,
+  "source": "f75dcae52fcd78c5c382d3903b012e5b049ca48b",
+  "source1441_Git_FS_modes": "ALL_REHASHED_EXACT",
+  "source_clean": true,
+  "source_leaf_count": 1441,
+  "status": "INDEPENDENT_CURRENT_F75_SOURCE_LIGHT_READINESS_HOLD_NO_EXECUTION",
+  "tree": "851834ae6cc87f42abfcf3c963542191e2815599"
+}

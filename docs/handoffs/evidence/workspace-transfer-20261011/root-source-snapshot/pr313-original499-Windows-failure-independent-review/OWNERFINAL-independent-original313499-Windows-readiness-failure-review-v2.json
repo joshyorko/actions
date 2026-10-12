@@ -1,0 +1,125 @@
+{
+  "schema": "actions-independent-original313-Windows-diagnosis/v1",
+  "verdict": "HOLD_ORIGINAL499_WINDOWS_FIRST_INITIAL_NATIVE_READINESS_FAILURE_CAUSE_AND_CLEANUP_UNKNOWN_NO_RETRY",
+  "source": "499a83d802ca9a0e2ebe3d77071af10625879297",
+  "source_tree": "e13ba51b094e429b7c06d6dabbbcc348cc66e86c",
+  "original_job": 114480645718,
+  "original_run": 38143045413,
+  "logged_executed_checkout": "e159d9755a4dfc97341e880ae539837f44485c2e",
+  "logged_checkout_line": 113,
+  "owned_API_ordered_parents": [
+    "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+    "499a83d802ca9a0e2ebe3d77071af10625879297"
+  ],
+  "complete_typed_tree_equals_source499": true,
+  "complete_typed_entries": 1422,
+  "current_actual_target_scope": "Original a0d/499/e159 tuple only; newer e3/e4ff/current31312dd and312ec70 remain separate",
+  "source_nonintegration": {
+    "passed": 1176,
+    "skipped": 142,
+    "warnings": 14,
+    "seconds": 415.25,
+    "deselected": null,
+    "deselected_disposition": "UNREPORTED; no invented0"
+  },
+  "integration": {
+    "failed": 1,
+    "passed": 130,
+    "skipped": 19,
+    "deselected": 1321,
+    "seconds": 1607.41,
+    "only_failed_node": "action_server_tests\\test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers"
+  },
+  "primary_failure": {
+    "exception": "TimeoutError",
+    "phase": "FIRST_INITIAL_NATIVE_ACTIONSERVER_READY_ADDRESS_WAIT",
+    "readiness_budget90_source_and_active_observer_callchain_authenticated": true,
+    "condition": "Expected ready address Future unresolved at readiness deadline",
+    "trace_line_210_initial_start_before_first_catalog_or_action_assertions": true,
+    "no_lastgood_reload_recovery_restart_semantic_admission": true,
+    "original_failure_cause": "UNKNOWN",
+    "no_RCC_cache_pipe_hang_or_current312_cause_inference": true
+  },
+  "cleanup_and_reader_scope": {
+    "startup_cleanup_reserved_source_budget_seconds": 20,
+    "incomplete_or_raised_notes_observed": 0,
+    "original_captured_child_reader_snapshot": "UNKNOWN_NOT_RETAINED_IN_OWNED_LOG",
+    "native_parent_or_RCC_child_actual_digest": "UNKNOWN_FROM_THIS_LOG_ONLY",
+    "no_absence_of_note_or_later_host_census_used_as_strict_cleanup_PASS": true
+  },
+  "source_permanent_cleanup_functionality": "Source suite passes are retained, not cause attribution for native90 readiness failure; no execution here",
+  "original_acquisition_bindings": [
+    {
+      "path": "/workspace/engineering/pr313-original499-one-Windows-log-acquisition/safe-original-acquisition-receipt.json",
+      "bytes": 731,
+      "sha256": "0fb1076fc02e468698f9788986024d913467e0a6cbfb201fcf8439a24a856c31"
+    },
+    {
+      "path": "/workspace/engineering/pr313-original499-one-Windows-log-acquisition/original-MCP-response.private.json",
+      "bytes": 690231,
+      "sha256": "b6c8e73fb4f146c9c8058f91f721110cb7599f1b9072ac75246912ad7dd18e69"
+    },
+    {
+      "path": "/workspace/engineering/pr313-original499-one-Windows-log-acquisition/original-decoded-Windows-job.private.log",
+      "bytes": 667425,
+      "sha256": "02cb23197db48406c1f37b952ffb617808501a8b542d38222b5a35a5f7c8bee2"
+    },
+    {
+      "path": "/workspace/engineering/pr313-original499-one-Windows-log-acquisition/root-one-original-Windows-job-log-authorization.json",
+      "bytes": 377,
+      "sha256": "cbf6b97c90a66e6309df8b77b68e43222eeb559a24f89dc7334fc18981b9a205"
+    }
+  ],
+  "independent_private_proof": {
+    "path": "/workspace/engineering/pr313-original499-Windows-failure-independent-review/private-original-log-checkout-census-and-source-control-proof.json",
+    "bytes": 280088,
+    "sha256": "fde12bc37260f3431e3bafbf771fd1384767560c061eb7c8d6fc8a71a9a9679f"
+  },
+  "remaining_HOLD": [
+    "No new log/artifact/retry/native/source acceptance or current312 causal transfer",
+    "Separate original80/88 and poststartup diagnostic artifact bodies would be needed to measure RCC phase/live identity/readers; metadata/log exception alone does not prove cause or cleanup",
+    "Current source/hosted CI and normal policy separately required before root integration"
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md exact accepted checkoutidentity/source-vs-actual rule reused; no cosmetic diary",
+    "Durable_learning_captured": "Authenticate executed checkout from original log then bind its separately owned Git parents/tree; classify initial readiness failure before handler/reload semantics and keep missing reader/child snapshots UNKNOWN.",
+    "Evidence": [
+      {
+        "path": "/workspace/engineering/pr313-original499-one-Windows-log-acquisition/original-decoded-Windows-job.private.log",
+        "bytes": 667425,
+        "sha256": "02cb23197db48406c1f37b952ffb617808501a8b542d38222b5a35a5f7c8bee2"
+      },
+      {
+        "path": "/workspace/engineering/pr313-actual300-refresh/original-API-synthetic-commit-metadata.private.json",
+        "bytes": 17518,
+        "sha256": "984c026d7f5f3e751d1fc0aa29e356f8802001be85b36aab1f49031cd7816beb"
+      },
+      {
+        "path": "/workspace/engineering/pr313-original499-Windows-failure-independent-review/private-original-log-checkout-census-and-source-control-proof.json",
+        "bytes": 280088,
+        "sha256": "fde12bc37260f3431e3bafbf771fd1384767560c061eb7c8d6fc8a71a9a9679f"
+      }
+    ],
+    "Stale_or_ambiguous_guidance_removed": "Original499/e159 failure is not current31312dd or312ec70 evidence; absence of startupcleanup notes cannot certify captured-tree/reader cleanup.",
+    "Remaining_uncertainty": "Underlying readiness cause and original child/reader/cleanup snapshots unknown; no artifact acquired.",
+    "Exact_verified_delta_reuse": {
+      "path": "/workspace/engineering/pr306-current618-fada-original-Windows-failure-owned/canonical-original-runner-checkout-vs-current-merge-ref-proposed.patch",
+      "bytes": 486,
+      "sha256": "50ad18bce0a30cbfb1cb346d1768729b67ea20125796a6558bb57e1594ef2aec"
+    },
+    "Verified_canonical_added_text": "A current PR merge ref can differ from the synthetic checkout recorded by an\nearlier job. Bind a failure to the checkout in its original job log, then verify\nthat immutable commit's ordered parents and complete tree. Keep a later merge\nref as a separate metadata observation even when those parents and trees match;\nmatching content does not change the checkout identity of the executed job.\n",
+    "canonical_added_text_exact_imported": true
+  },
+  "Upstream_disposition": "none",
+  "reviewer_no_log_reacquisition_source_mutation_tests_gateway_native_download_push_merge_or_retry": true,
+  "review_script": {
+    "path": "/workspace/engineering/pr313-original499-Windows-failure-independent-review/freeze-original-only-diagnosis.py",
+    "bytes": 8582,
+    "sha256": "01ae1feb6556366f202ca1c014211ea7c47b4b941465c9a9157cfc61fc2bdb15"
+  },
+  "retained_unannounced_predecessor": {
+    "path": "/workspace/engineering/pr313-original499-Windows-failure-independent-review/OWNERFINAL-independent-original313499-Windows-readiness-failure-review.json",
+    "bytes": 6074,
+    "sha256": "5563a59239e5e0ab1b22d19cd5cea262cd22475204323a23ea0e5148242b489a"
+  }
+}

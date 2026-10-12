@@ -1,0 +1,118 @@
+{
+  "schema": 1,
+  "status": "PREPARED_NOTRUN_NEW_MEMORY_PROFILE_REQUIRES_REVIEW_AND_ROOT_RELEASE",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "original_failure": "Micromamba signal-killed; kill origin UNKNOWN; no TLS fix",
+  "observed_post_only": {
+    "memory_max": 17179869184,
+    "memory_current": 16236040192,
+    "headroom_bytes": 943828992,
+    "shmem": 15195049984,
+    "global_oom": 6,
+    "global_oom_kill": 3,
+    "local_oom_kill": 0,
+    "original_before_counters": "UNAVAILABLE_NO_SPECIFIC_KILL_ATTRIBUTION"
+  },
+  "proposed_new_policy_not_accepted": {
+    "initial_headroom_bytes": 3113851289,
+    "derivation": "proposed existing2.4GiB owned-state envelope plus additional0.5GiB shared-memory reserve; not measured process RSS or proof cold solver fits",
+    "stop_headroom_bytes": 536870912,
+    "cadence_max_seconds": 0.2,
+    "lifetime_max_seconds": 640,
+    "join_max_seconds": 3,
+    "finite_memory_max_required": true,
+    "before_after_identity": "/proc/self/cgroup parsed exact route plus resolved cgroup directory device/inode; bind actual memory.max/current/events/events.local paths and separate before/after timestamps",
+    "sampling": "fresh minimum headroom/counter deltas; no universal peak or attributable OOM claim",
+    "stop": "latch on reserve exhaustion, new global/local oom/oom_kill/oom_group_kill, identity/max change, decreasing counter/schema or read failure; existing original primary and cleanup separate",
+    "signal": "delegate exact existing select_owned_pytest/capture/PID-create-time/argv/cwd/parent checks and authorize_signal; signal only owned pytest child; never supervisor/foreign process/no independent wait/reap",
+    "no_owner": "retain fixed UNAVAILABLE_NO_UNOWNED_SIGNAL; primary failure remains; outer owned helper performs bounded cleanup",
+    "wire_scope": "capture current/max/counters only; no cgroup other-process or environment dump"
+  },
+  "storage_scope": "compressed completed-state lossless preservation may reduce shared shmem but must remeasure fresh cgroup; mount floor alone cannot admit",
+  "version_rule": {
+    "proposal": ".first_real_qualification_wave_proposal.versions_in_order and .counts: stop remaining wave on first failed version",
+    "code": "runner_contracts_v3.py:197-205 next_version exact priorPASS2/0skip/error; actual_transport_v8.py:262 invokes before execution",
+    "scope": "mandatory for retained qualification profile, not a universal product integration or independent diagnostic-binary rule",
+    "alternative": "separate root-reviewed diagnostic5 could be authorized without predecessorPASS; original contracts unchanged and no qualification/release claim",
+    "old7f07_constructor": "FROZEN_UNRESOLVED_NOTRUN_UNCHANGED"
+  },
+  "controls": "17 baseline-first pure controls prepared; AST parsed only, not imported/executed; next source review must add integrated authorized-signal/foreignPID/currentctime/probeerror/final-join controls before any actual transport adoption",
+  "product_changes": "NONE; original transport/sampler/contracts/source/default pins untouched",
+  "bindings": [
+    {
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/proposed_cgroup_memory_state_v1_NOTRUN.py",
+      "bytes": 3330,
+      "sha256": "d2b3e6684898ab1b64f84ac7712a1f2f355d7ea5d680eb6ded0699cc090f5260",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/test_proposed_cgroup_memory_state_NOTRUN.py",
+      "bytes": 2985,
+      "sha256": "3b3a417379f608b6a5917c7720c6e846352f88d30fda1273c301a7c5ced1a4cb",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/root-current8d49-V9-kill-cgroup-readonly-current-20261011.json",
+      "bytes": 478,
+      "sha256": "180d5b5c8ee993b4a2480cc616913fcc1922c1e3d3df6f697140aea67ae3e618",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-control3-V9-original-publish-failure-diagnosis-owned/OWNERFINAL-original-current8d49-control3-V9-publication-failure-and-secondary-dependency-only.json",
+      "bytes": 5944,
+      "sha256": "feef7c4b07db2d3a778622dc1acf3eec00a8225c42b38aa00721926fb273410b",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-control3-V9-independent-actual-review/OWNERFINAL-independent-original-current8d49-control3-V9-native-FAIL-STOP-review.json",
+      "bytes": 6858,
+      "sha256": "cb88815f6d1816ff7f8b5302420d69bd7cacb0d052fe2ba3c957ddad5e596168",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/OWNERFINAL-RCC-current-a0d-existing-PR308-compatibility-source-and-qualification-proposal-v2.json",
+      "bytes": 38725,
+      "sha256": "89b5ae9f6f41f0649d575510922ec947161fcf63f737f40a4a118985fde4b0c5",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/runner_contracts_v3.py",
+      "bytes": 12959,
+      "sha256": "cbae3bb074d3995153ea5e6b694e7f9e61c047c6aa511b682959a63fedf7b726",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/actual_transport_v8.py",
+      "bytes": 27889,
+      "sha256": "33dda17140ef749e22f086cc91b92ed8c3230fddfde8a4a369769e2183f695a1",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/owned_monitor_v1.py",
+      "bytes": 4632,
+      "sha256": "834a7fe402e34b170f414df5dfe79762c0b49ed311a6222ba2f7bca5d87020a5",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-V9-next-version-code-PREPARED-NOTRUN/OWNERFINAL-current8d49-V9-released5-candidate7276-constructor-code-PREPARED-NOTRUN.json",
+      "bytes": 5593,
+      "sha256": "7f07054ac5aea81ea2f88a76b75ffee41c22ce05487909b131d77aaa225b53c9",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/canonical-shared-cgroup-headroom-vs-filesystem-capacity-proposed.md",
+      "bytes": 900,
+      "sha256": "8c28fc2596c6fdfc607dd35a17b3462ad217ba97670b61222393dc504861d896",
+      "mode": "0o400"
+    }
+  ],
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; exact proposed shared-cgroup/headroom+profile-bound sequence paragraph",
+    "Durable_learning_captured": "mount capacity and disk sampling cannot certify shared tmpfs/cgroup memory; exact retained predecessor rule scope",
+    "Evidence": "post-only root snapshot+original signal-killed record+immutable profile counts/next_version call",
+    "Stale_or_ambiguous_guidance_removed": "disk thresholdfalse cannot exclude memorypressure; retained qualification sequence is not generic independent diagnostic prohibition",
+    "Remaining_uncertainty": "original kill source; fresh post-preservation headroom; whether proposed conservative envelope permits cold solver; new sampler integration NOTRUN"
+  },
+  "upstream_disposition": "none"
+}

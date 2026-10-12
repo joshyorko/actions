@@ -1,0 +1,135 @@
+{
+  "backend_full_descriptor_walk": "NOT_TESTED_SEPARATE_CONTROLS_REQUIRED",
+  "counts": {
+    "errors": 0,
+    "failed": 0,
+    "passed": 28,
+    "ran": 28,
+    "skipped": 0
+  },
+  "elapsed_seconds": 30.16729694699461,
+  "failure": null,
+  "memory_sampler_native_adoption": "NONE",
+  "native": "NOT_RUN",
+  "original_census_binding": {
+    "bytes": 6499,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-one-current8d49-cgroup-reader-observer28-pure-controls-1/primary/original-unittest-node-census.json",
+    "sha256": "ead532aad218dff004f3026efd68697cf3e069302692f826fdb46b9693a4fb6a"
+  },
+  "outcomes": {
+    "always-post": {
+      "argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "120s",
+        "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+        "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/run_root_reader28_pure_once_NOTRUN.py",
+        "--phase",
+        "guard",
+        "--config",
+        "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/FROZEN-reader28-concrete-source-control-config-NOTRUN.json",
+        "--config-sha256",
+        "4cd8f74435137100296e44aedfb54defd86a1bf70f1c42060242bd9820c65463",
+        "--release",
+        "/workspace/engineering/root-one-cgroup-reader-observer28-pure-release.json",
+        "--release-sha256",
+        "56029c8c5d0bfb370b4c21052e4dbc5c01b6d55ebd467a0c1b8c359d9b7d4e7a"
+      ],
+      "parent_seconds": 135,
+      "returncode": 0,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-cgroup-reader-observer28-pure-controls-1/always-post/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 53,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-cgroup-reader-observer28-pure-controls-1/always-post/original.stdout.private",
+        "sha256": "b3b95de65a991e6bcc7bcb40ff26f53c4a250bcf7afd25070314de74fdb1d59a"
+      }
+    },
+    "before": {
+      "argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "120s",
+        "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+        "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/run_root_reader28_pure_once_NOTRUN.py",
+        "--phase",
+        "guard",
+        "--config",
+        "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/FROZEN-reader28-concrete-source-control-config-NOTRUN.json",
+        "--config-sha256",
+        "4cd8f74435137100296e44aedfb54defd86a1bf70f1c42060242bd9820c65463",
+        "--release",
+        "/workspace/engineering/root-one-cgroup-reader-observer28-pure-release.json",
+        "--release-sha256",
+        "56029c8c5d0bfb370b4c21052e4dbc5c01b6d55ebd467a0c1b8c359d9b7d4e7a"
+      ],
+      "parent_seconds": 135,
+      "returncode": 0,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-cgroup-reader-observer28-pure-controls-1/before/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 53,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-cgroup-reader-observer28-pure-controls-1/before/original.stdout.private",
+        "sha256": "b3b95de65a991e6bcc7bcb40ff26f53c4a250bcf7afd25070314de74fdb1d59a"
+      }
+    },
+    "primary": {
+      "argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "120s",
+        "/workspace/engineering/pr308/action_server/.venv/bin/python",
+        "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/execute_frozen_reader28_unittest_census_NOTRUN.py",
+        "--phase",
+        "primary",
+        "--config",
+        "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/FROZEN-reader28-concrete-source-control-config-NOTRUN.json",
+        "--config-sha256",
+        "4cd8f74435137100296e44aedfb54defd86a1bf70f1c42060242bd9820c65463",
+        "--release",
+        "/workspace/engineering/root-one-cgroup-reader-observer28-pure-release.json",
+        "--release-sha256",
+        "56029c8c5d0bfb370b4c21052e4dbc5c01b6d55ebd467a0c1b8c359d9b7d4e7a"
+      ],
+      "parent_seconds": 135,
+      "returncode": 0,
+      "stderr_binding": {
+        "bytes": 4381,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-cgroup-reader-observer28-pure-controls-1/primary/original.stderr.private",
+        "sha256": "43a7265ff01a5312cfd7cf0435c9fcbf347d67118cebbf0e1604c6aa7b952cc6"
+      },
+      "stdout_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-cgroup-reader-observer28-pure-controls-1/primary/original.stdout.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "release_binding": {
+    "bytes": 2305,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-one-cgroup-reader-observer28-pure-release.json",
+    "sha256": "56029c8c5d0bfb370b4c21052e4dbc5c01b6d55ebd467a0c1b8c359d9b7d4e7a"
+  },
+  "schema": 1,
+  "scope": "synthetic reader/observer28 only, no cgroup observations/signals/threshold calibration/profile adoption",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "status": "PASS_28_PURE_CONTROLS_PENDING_INDEPENDENT_ORIGINAL_CENSUS",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+}

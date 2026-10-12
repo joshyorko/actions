@@ -1,0 +1,25 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -2278,6 +2278,22 @@
+ suite's tested merge identity separate from both source and control, even when
+ its tree equals the control tree. Checks attached to an older control, and raw
+ receipts naming its older candidate, do not qualify a later target union.
++
++Keep wheel archive integrity separate from generated-content acceptance. Check
++central-directory names, duplicates and containment before reading members;
++count directory entries separately from the regular files covered by `RECORD`.
++Require each regular member's recorded digest and size to match its bytes,
++with only `RECORD` itself intentionally unhashed. A self-consistent wheel can
++still contain an empty generated OAuth configuration. Inspect that module
++without execution, reporting fixed required field names, byte counts and
++digests rather than configuration values or URLs. Matching `METADATA`, filename
++and `RECORD` do not authenticate the generator's source pair or qualify its
++content; missing or empty required payloads remain unresolved without an
++approved input/content contract. Preserve the build's candidate, control and
++synthetic identities: a prospective PR wheel is not a wheel of the current
++integration head before that source union is actually admitted. Archive review
++does not establish registry publication, installed-consumer behavior or native
++acceptance.
+ 
+ The public Linux three-case receipt establishes scoped rollback,
+ publication-details and staged-consumer acceptance only. It does not complete

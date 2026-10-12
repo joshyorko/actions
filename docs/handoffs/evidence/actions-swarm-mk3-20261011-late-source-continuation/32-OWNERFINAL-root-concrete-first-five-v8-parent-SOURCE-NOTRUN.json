@@ -1,0 +1,28 @@
+{
+  "actual_storage": "NOT_RUN",
+  "canonical_disposition": "Reuse existing reviewed concrete parent/captured-buffer/managed-tool lessons; no new guide mutation.",
+  "child_independent": {
+    "bytes": 10868,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v8-current9760-independent-SOURCE-child-PREEXEC-review/OWNERFINAL-independent-first-five-v8-measured-managed-Git-SOURCE-child-PREEXEC-GO-ROOT-parent-HOLD.json",
+    "sha256": "d5beacad97a0041aa4e61dfb338220f027cad239d56daf8f39ac9e5ed4374ce9"
+  },
+  "delta": "Exactly two REVIEW path/hash literals; whole inverse text and AST exact. Original parent budgets320TERM10/capture350, verified buffers and alwayspost unchanged.",
+  "execution": "NOT_RUN",
+  "native": "NOT_RUN",
+  "parent": {
+    "bytes": 6866,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-reviewed-first-five-v8-PURE18-external-parent.py",
+    "sha256": "764028fe6aad30ba9ece309f24a8465755fe5abe042bb0efb6054c7a877a639a"
+  },
+  "release": "ABSENT",
+  "schema": 1,
+  "status": "ROOT_CONCRETE_V8_PARENT_SOURCE_PREPARED_NOT_EXECUTED",
+  "template": {
+    "bytes": 6718,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/ROOT-external-first-five-v8-measured-Git-parent-TEMPLATE-NOTEXECUTION.py",
+    "sha256": "b9024b2043c9857e75e13f255dabc24ebc3547293d0bf2f41a3a8a0151b433db"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "all_other_function_ASTs": "EXACT_INCLUDING_GUARD_RUN_BOUNDS_CAPTURE_JUNIT_PENDING",
+  "changed_functions_only": [
+    "parse_arguments",
+    "activation"
+  ],
+  "config_delta_only": [
+    "Namedconfig/launcherhash/currentownpaths",
+    "Freshonce2 basetemp/logger/JUnit/rootrelease paths",
+    "Exactmeasuredmanagedmetadata",
+    "Add immutableoriginalfailure/preservation/canonical bindings",
+    "Internalphysicalconfig/releaseadmission text"
+  ],
+  "constants_changed_only": [
+    "BASE preparation location",
+    "ROOT output once-1 ->once-2"
+  ],
+  "default_budget": {
+    "before": 120,
+    "kill_grace": 10,
+    "post": 120,
+    "primary": 120,
+    "root": 420
+  },
+  "fixture_binary_unchanged": "Original711file/nochmod; samebytesdifferentpathmodes recordedinoriginalactual12177",
+  "managed_primary_measured": {
+    "bytes": 22282402,
+    "gid": 1000,
+    "mode": "0o700",
+    "path": "/workspace/actions-cloud/bin/rcc",
+    "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "type": "REGULAR_NONSYMLINK",
+    "uid": 1000
+  },
+  "memory_policy_adoption": "NONE",
+  "native": "NOT_RUN",
+  "new_config": {
+    "bytes": 12144,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-memory17-managed-primary700-once2-preexecution-NOTRUN/FROZEN-memory17-managed-primary700-once2-pure-config-NOTRUN.json",
+    "sha256": "5802926af2eb9a0bc469f273aab0277a70ec1500b5e80372493b5ce0c09798ac"
+  },
+  "new_launcher": {
+    "bytes": 8538,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-memory17-managed-primary700-once2-preexecution-NOTRUN/root_release_one_memory17_managed_primary700_once2_NOTRUN.py",
+    "sha256": "a91ec3fbe4aef23f49b6178459b87d1b5e72d18f69214a8c2f129af5eeeb486b"
+  },
+  "no_existing_originals_modified": true,
+  "original_config": {
+    "bytes": 7739,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/FROZEN-memory17-pure-control-config-NOTRUN-v2.json",
+    "sha256": "e90827940b61e3ddb906ff0576a2ea37cd6ee7297986cc78c62844f5a888b402"
+  },
+  "original_launcher": {
+    "bytes": 7361,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/root_release_one_memory17_pure_controls_NOTRUN.py",
+    "sha256": "68d230410d0ff42f3c65dea09c0cd5e5b191a24e70ad3871efbb5dd2bf8201b0"
+  },
+  "schema": 1,
+  "status": "STATIC_PARSED_NOT_EXECUTED",
+  "tests_and_policy": {
+    "policy_source": {
+      "bytes": 3330,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/proposed_cgroup_memory_state_v1_NOTRUN.py",
+      "sha256": "d2b3e6684898ab1b64f84ac7712a1f2f355d7ea5d680eb6ded0699cc090f5260"
+    },
+    "state": "BYTE_EXACT_ORIGINAL_NOT_RUN",
+    "test_source": {
+      "bytes": 2985,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/test_proposed_cgroup_memory_state_NOTRUN.py",
+      "sha256": "3b3a417379f608b6a5917c7720c6e846352f88d30fda1273c301a7c5ced1a4cb"
+    }
+  }
+}

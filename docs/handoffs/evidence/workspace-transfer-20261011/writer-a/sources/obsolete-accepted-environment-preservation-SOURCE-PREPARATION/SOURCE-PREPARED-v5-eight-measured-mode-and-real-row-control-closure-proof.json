@@ -1,0 +1,118 @@
+{
+  "AST_PARSE_ONLY_no_driver_import_or_control_execution": true,
+  "config_inverse_removing_only_eight_modes_exact": true,
+  "controls_methods_unchanged_18": 18,
+  "current_eight_configuration_files_body_size_hash_unchanged": true,
+  "driver_UNCHANGED": {
+    "bytes": 37609,
+    "mode": "0o444",
+    "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_first_five_accepted_obsolete_environments_SOURCE_PREPARED_v4.py",
+    "sha256": "63476ecaa50ba863afed8602dcad82c22c9349df022d0e9f0dde8d81d60e0bb7"
+  },
+  "exact_eight_owning_mode_observations": [
+    {
+      "bytes": 765564,
+      "gid": 1000,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+      "regular_nonsymlink": true,
+      "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25",
+      "uid": 1000
+    },
+    {
+      "bytes": 8165,
+      "gid": 1000,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-currente2-concrete-LIGHT-PREEXECUTION-v2/immutable-one-LIGHT-inputs.json",
+      "regular_nonsymlink": true,
+      "sha256": "3b4e42668cb99bc38969c6f979ece431abdd123db4217baf282c3cbb581369ce",
+      "uid": 1000
+    },
+    {
+      "bytes": 13606,
+      "gid": 1000,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-SOURCEFULL-preexecution/frozen-current8d49-source-FULL-inputs.json",
+      "regular_nonsymlink": true,
+      "sha256": "68cee8aeab8855f3f175c8a1a6f9e83ad66b9d2267eabfdb9969f7d55207e1c0",
+      "uid": 1000
+    },
+    {
+      "bytes": 378602,
+      "gid": 1000,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/private-current8d49-source-body-mode-inventory-v3.json",
+      "regular_nonsymlink": true,
+      "sha256": "9843e9035fd7bfdf9577b9ba08f108365fbbc336ca00337f99328599b6204677",
+      "uid": 1000
+    },
+    {
+      "bytes": 797131,
+      "gid": 1000,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-current-e4ff-qualified-config-successor/FROZEN-current-e4ff-control3-owned-cache-SOURCE-QUALIFIED-v4.json",
+      "regular_nonsymlink": true,
+      "sha256": "1411879501e1ef2bd5aec7fbf9627457aa840badc8e86be980c25b207ee9d5dc",
+      "uid": 1000
+    },
+    {
+      "bytes": 634107,
+      "gid": 1000,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/FROZEN-control3-current-b614-actual-config-v2.json",
+      "regular_nonsymlink": true,
+      "sha256": "8c5da5be25ebfcf86f286ee9f93ddad328c68b3243b0935ec5937c93376bb948",
+      "uid": 1000
+    },
+    {
+      "bytes": 13345,
+      "gid": 1000,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-currentc97e-concrete-TOKEN-LIGHT-PREEXECUTION/immutable-one-TOKEN-LIGHT-inputs.json",
+      "regular_nonsymlink": true,
+      "sha256": "c5378aa9dfceeb454255c1724f18ef505e09fe0d5fdc679a87b4db45fb92bb79",
+      "uid": 1000
+    },
+    {
+      "bytes": 67022,
+      "gid": 1000,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/FROZEN-known-nine-18-semantic-15s-config-v2-NOTRUN.json",
+      "regular_nonsymlink": true,
+      "sha256": "b9010e2996df0285971f2c7ce31c4da04a6e7672505aa4240cb2b049aaae823d",
+      "uid": 1000
+    }
+  ],
+  "new_config": {
+    "bytes": 17723,
+    "mode": "0o400",
+    "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/frozen_first_five_environment_preservation_inputs_SOURCE_PREPARED_v5_measured_modes.json",
+    "sha256": "333dd9b66eacc212c90b3a75c44e9902a9c0bdc56d73d88ba5a0e41e46e0696a"
+  },
+  "new_controls": {
+    "bytes": 12822,
+    "mode": "0o444",
+    "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/test_first_five_environment_preservation_admission_SOURCE_PREPARED_v5_measured_modes.py",
+    "sha256": "38825c7bc1bedaa549ed6eb9a96b33b2ce244ce35d84b28b6eb22da557fec720"
+  },
+  "old_config": {
+    "bytes": 17539,
+    "mode": "0o400",
+    "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/frozen_first_five_environment_preservation_inputs_SOURCE_PREPARED_v4.json",
+    "sha256": "d6d933f64940c6ed3b0849a6bcd10e07f6c2c834f968c6f1b354462625e4c028"
+  },
+  "old_controls": {
+    "bytes": 12323,
+    "mode": "0o444",
+    "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/test_first_five_environment_preservation_admission_SOURCE_PREPARED_v4.py",
+    "sha256": "bf271888be3d40f6be8b11c2e71de7232c0bce50ee30fcc96b1083f89498bf75"
+  },
+  "original_v4_HOLD": {
+    "bytes": 9323,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-obsolete-environment-independent-SOURCE-review/OWNERFINAL-independent-first-five-obsolete-environment-SOURCE-eight-mode-closure-HOLD.json",
+    "sha256": "8e6c8a3bc8635178683aadb5ac015928cc847c89723f25f00975778e64e261b6"
+  },
+  "schema": 1,
+  "test_inverse_reversing_only_path_literals_and_existing_method_addition_exact": true
+}

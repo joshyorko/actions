@@ -1,0 +1,73 @@
+{
+  "schema": 1,
+  "status": "ROOT_CURRENT_E4FF_CONFIGURED_SOURCEFULL_PASS_NATIVE_NOT_RUN",
+  "source": "e4ff080375a8422bb656e52d218f198521dda078",
+  "tree": "973ff38f49a17a896e4d90f829a72e2ea0ea15e8",
+  "source_count": 1423,
+  "full": {
+    "passed": 1427,
+    "skipped": 13,
+    "failed": 0,
+    "error": 0,
+    "complete_unique_nodes": 1440,
+    "workers": [
+      "gw0",
+      "gw1"
+    ],
+    "seconds": 103.73,
+    "warnings": 15
+  },
+  "native_execution": "NOT_RUN",
+  "first_supported_newer_RCC": "NONE_YET",
+  "currente4ff_LIGHT": {
+    "path": "/workspace/engineering/pr308-cache-current-e3c-source/OWNERFINAL-current-e4ff-reviewed-cache-application-and-e3c-ordinary-source-LIGHT.json",
+    "bytes": 13921,
+    "sha256": "e18d871d9daf93e21e0b34610af31e9d4198bc4a1c93431d8799464954d37c6c"
+  },
+  "independent_LIGHT": {
+    "path": "/workspace/engineering/pr308-currente4ff-independent-SOURCE-LIGHT-review/OWNERFINAL-independent-current-e4ff-owned-cache-ordinary-source-LIGHT-review.json",
+    "bytes": 7021,
+    "sha256": "66a2819f6231928140574e590d3a68146d29c1f965609caa14dd65f705b8a33d"
+  },
+  "preexecution": {
+    "path": "/workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/OWNERFINAL-current-e4ff-managed-configured-SOURCEFULL-preexecution-proposal-v2.json",
+    "bytes": 14742,
+    "sha256": "776095153a1aa0120cf51644ae453296e124bf2d78ad15ba213263cf2c54a0eb"
+  },
+  "independent_preexecution": {
+    "path": "/workspace/engineering/pr308-cache-current-e3c-independent-SOURCEFULL-preexecution-review/OWNERFINAL-independent-named-V2-current-e4ff-SOURCEFULL-preexecution-review.json",
+    "bytes": 11224,
+    "sha256": "5a1c97b37f8e0aca5ac60c3c4aee430a8c033b5e3dc3b168320ced58a89c8849"
+  },
+  "original_terminal": {
+    "path": "/workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/one-configured-full-once-owned-v2/original-terminal.json",
+    "bytes": 875,
+    "sha256": "f09aed605126ad256909c73430d570a4d0428e9de742466e0d758343fa846edf"
+  },
+  "original_log": {
+    "path": "/workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/one-configured-full-once-owned-v2/original-configured-source-full.private.log",
+    "bytes": 373549,
+    "sha256": "5e066ec72c95ba489be3b27e911a7ef6ec1c7fa23209a64ee0576e002a50facc"
+  },
+  "original_root_outer_terminal": {
+    "path": "/workspace/engineering/root-pr308-currente4ff-one-sourcefull-v2/OWNERFINAL-root-one-currente4ff-sourcefull-outer-terminal.json",
+    "bytes": 1167,
+    "sha256": "7474b00dbd8df3ee31ecec3466d0810cd5e25168e1c2f54c9b15c6f1a49031e3"
+  },
+  "complete_private_node_census": {
+    "path": "/workspace/engineering/root-pr308-currente4ff-one-sourcefull-v2/root-complete-configured-full-node-census-v2.private.json",
+    "bytes": 267354,
+    "sha256": "d1b25559debfd08324940a92f46a1ceac60d6a40cacd05ee8f16004955940a53"
+  },
+  "original_metadata_parser_FAIL": {
+    "path": "/workspace/engineering/root-pr308-currente4ff-one-sourcefull-v2/original-root-census-token-parser-FAIL.json",
+    "bytes": 333,
+    "sha256": "06451b0eb30de7ae17993fa97137860d073f0539a7ce3f1e2ea88c8c621fb325"
+  },
+  "metadata_successor": "Complete line preserves spaces in node parameter ids; no tests rerun, same original log",
+  "original_failed_control3": "FAIL_HOLD_UNCHANGED_EXACT_ARCHIVE_ca5579",
+  "prodpins": "18.19.3_UNCHANGED",
+  "workspace_available_bytes": 1301331968,
+  "devshm_available_bytes": 3942780928,
+  "scope": "SOURCE_ONLY_no release5/candidate7276 execution or lease/persistent/reload/drain/provider qualification; distinctACTUALconfig+indreview+ROOTadoption next"
+}

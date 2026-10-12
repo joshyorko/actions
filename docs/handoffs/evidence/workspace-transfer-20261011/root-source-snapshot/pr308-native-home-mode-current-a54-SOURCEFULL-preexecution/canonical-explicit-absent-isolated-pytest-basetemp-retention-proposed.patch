@@ -1,0 +1,16 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -2284,6 +2284,13 @@
+ ## Verification Receipts
+ 
+ Final reports list exact commands and outcomes, external/service tests skipped, environments not exercised, documentation improvements, and remaining uncertainty. “Tests pass” without fresh output is not evidence.
++
++Use a unique owned parent and an absent explicit `--basetemp` child for each
++pytest invocation. Explicit basetemp removes an existing target before tests;
++reject that state instead of deleting retained evidence. Keep retention policy
++`all`: `none` sets the numbered-directory keep count to zero. Give Toolkit and
++Runtime separate paths, reject inherited `PYTEST_ADDOPTS`, and retain scratch
++until its owner authorizes verified preservation.
+ 
+ ## RCC Environment Artifact execution
+ 

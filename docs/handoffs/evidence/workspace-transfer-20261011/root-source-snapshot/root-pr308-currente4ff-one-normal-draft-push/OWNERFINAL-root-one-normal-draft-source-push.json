@@ -1,0 +1,16 @@
+{
+  "current_target_integration": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+  "draft": true,
+  "head": "e4ff080375a8422bb656e52d218f198521dda078",
+  "newer_native": "NOT_RUN",
+  "normal_push_attempts": 1,
+  "observed_remote_head": "d5a3d2f53737f4f5380b6ecb7fb93d1a651f005d",
+  "original_remote_head": "d5a3d2f53737f4f5380b6ecb7fb93d1a651f005d",
+  "production_pin": "18.19.3",
+  "push_returncode": 0,
+  "schema": 1,
+  "scope": "DRAFT_SOURCE_PRESERVATION_ONLY_NOT_NATIVE_QUALIFICATION_OR_INTEGRATION",
+  "source_basis": "e3c29cde8878307912e55ed09b6436c0f91d06d5",
+  "source_clean": true,
+  "tree": "973ff38f49a17a896e4d90f829a72e2ea0ea15e8"
+}

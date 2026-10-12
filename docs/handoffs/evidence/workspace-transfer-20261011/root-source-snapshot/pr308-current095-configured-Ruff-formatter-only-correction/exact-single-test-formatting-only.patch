@@ -1,0 +1,10 @@
+--- a/action_server/tests/action_server_tests/test_rcc_runtime_adapter.py
++++ b/action_server/tests/action_server_tests/test_rcc_runtime_adapter.py
+@@ -2447,7 +2447,6 @@
+     assert events == ["hash"]
+ 
+ 
+-
+ @pytest.mark.parametrize(
+     "selector", ["released-18.19.5-linux-amd64", "candidate-727-18.19.6-linux-amd64"]
+ )

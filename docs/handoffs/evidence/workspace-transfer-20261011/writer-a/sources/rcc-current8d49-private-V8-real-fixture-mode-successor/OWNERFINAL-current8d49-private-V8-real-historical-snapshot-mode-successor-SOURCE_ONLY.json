@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "status": "PRIVATE_V8_REAL_HISTORICAL_SNAPSHOT_MODE_SUCCESSOR_SOURCE_ONLY_PASS",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "modules": [
+    {
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/actual_transport_v8.py",
+      "bytes": 27889,
+      "sha256": "33dda17140ef749e22f086cc91b92ed8c3230fddfde8a4a369769e2183f695a1",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/owned_cache_policy_v8.py",
+      "bytes": 6228,
+      "sha256": "4ccac4e3bd2c1e91352ef4e647968b4ca61f8691e1fc0f41e72a128a2942c205",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/fixture_records_v8.py",
+      "bytes": 11489,
+      "sha256": "7a63ee62184ea268dead0c98460c6943ebc297816e9a4df180b10ed5e04b9064",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/historical_binding_current8d49_v8.py",
+      "bytes": 6327,
+      "sha256": "6f64d55837cc4ff14ee4eec013314ba512c09ecdc56f79192c1360ef46473b30",
+      "mode": "0o444"
+    }
+  ],
+  "snapshot": {
+    "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/historical-e4ff-staged-fixture-exact-Git-blob.snapshot.py",
+    "bytes": 48314,
+    "sha256": "af2f79ccd395c088076381f6681860cf8160f8fd0d9169e122634fe684c37c35",
+    "mode": "0o444"
+  },
+  "prior_frozen_HOLD": {
+    "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/OWNERFINAL-current8d49-private-V8-historical-fixture-owned-logger-temporal-SOURCE_ONLY.json",
+    "bytes": 8424,
+    "sha256": "5c990848ab9470781e9a566d7890a452bff387e0942d76d3074afca088d1527c",
+    "mode": "0o400"
+  },
+  "delta": "Only snapshot expected mode0400\u21920444; samebytes in named relative snapshot. All three othermodules byteexact prior51controls",
+  "real_admission": {
+    "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/real-readonly-historical-fixture-snapshot-and-current-live-admission-PASS.json",
+    "bytes": 1672,
+    "sha256": "b3b076c9d3ed176bb4c893af68d3f70ac6025a85cab25e7820791ba76b5f5186",
+    "mode": "0o400"
+  },
+  "preparation_failure": {
+    "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/initial-real-readonly-snapshot-missing-before-admission-FAIL.json",
+    "bytes": 215,
+    "sha256": "bc6ce58f5b37243baf08406f794d3ef8d0ecf1d216779b2b3a8942cdda84b374",
+    "mode": "0o600"
+  },
+  "controls": "Prior51 controls unchanged semantics; actual oldrow+snapshot+e4Git+currentlive readonly admission nowPASS. No pytest/native rerun.",
+  "documentation": "Retained exact9line historicalfixture/logger canonicalproposal; clarify immutable snapshot recorded mode must match measured owner mode as independentreview found.",
+  "native": "NOT_RUN",
+  "config": "NOT_CONSTRUCTED",
+  "upstream_disposition": "none"
+}

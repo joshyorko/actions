@@ -1,0 +1,17 @@
+{
+  "status": "ONE_NORMAL_EXISTING_CHECKPOINT_BRANCH_PUSH_VERIFIED",
+  "capture": "2026-10-11T20:04:55.757470+00:00",
+  "head": "843cb16dc071fc764f11f1e0b3b07432dcd04a7d",
+  "tree": "1f90a0ef0a6c7fe408380720ebdb2ef45806c255",
+  "parent": "d55ed399a5b6ba67e88002dd6d490ac9366c2130",
+  "branch": "handoff/actions-swarm-mk3-wave8-20261010",
+  "review_sha256": "df006f52fdea8c9f074eb1e94f5ffbd9e974d408492f48ca7be44353d55f13c7",
+  "index_method_supplement_sha256": "fc28b544ec4d34830c4776cdc59e815f323357c4264de05e25e7ee5e492e73f4",
+  "paths": 43,
+  "source_runtime": "8d49_UNCHANGED",
+  "native": "V8_ORIGINAL_IMPORT_FAIL_RETAINED_V9_SOURCE_ONLY_NO_FUNCTIONAL_QUALIFICATION",
+  "first_supported_newer": "NONE_YET",
+  "production_pin": "18.19.3_UNCHANGED",
+  "Runtime_release": "HOLD",
+  "one_push_returncode": 0
+}

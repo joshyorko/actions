@@ -1,0 +1,187 @@
+{
+  "B25": "Deferred; failed preservation first because its fresh2GB shm guard has priority",
+  "Documentation_improvement": {
+    "additional_exact_proposed_delta": [
+      "When authorized engineering advances a checkout referenced by a failed receipt,",
+      "retain the historical source as a complete typed Git-body snapshot and bind the",
+      "new current checkout separately to its complete Git and filesystem body/mode",
+      "proof. Never rewrite the original receipt or treat source progress as native",
+      "acceptance. Assertion-based private guards require Python optimization disabled."
+    ],
+    "canonical_file": "docs/skills/repository-operations.md",
+    "disposition": "Accept original13-line failed-owned-directory and task-state proposal as a prospective operational policy, not actual archive completion. Root owns canonical integration.",
+    "durable_learning": "Failed directories require explicit complete byte preservation rather than completed-recycle markers; a stableZ task does not prove reaping or sibling quiescence; unknown other-UID visibility is explicit.",
+    "evidence": "Exact archive/task AST and retained censuses; immutable Linux exit order; staleV3 guard and independently verified historical1421/current1423 V4 source proofs.",
+    "exact_accepted_proposal": {
+      "bytes": 1264,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-control3-failed-owned-preservation-proposal/canonical-failed-owned-byte-preservation-and-task-state-proposed.patch",
+      "sha256": "f8bea590361ca6d9cc1a0dd391a968ee294cd8f15a2782f8247ccd7bb369eb62"
+    },
+    "remaining_uncertainty": "No actual archive/removal yet; other-UID visibility/maps/future-write fence/universal quiescence/deployed kernel source equivalence/ACL/xattr/inode restoration and original cleanup outcome remain unqualified.",
+    "stale_or_ambiguous_guidance_removed": "Completed-recycle status and process-leader-only or zombie-as-reaped interpretations cannot justify failed-root removal; original current-FS guard cannot be carried across source progress."
+  },
+  "Upstream_disposition": "none",
+  "bindings": [
+    {
+      "bytes": 12944,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-control3-failed-owned-preservation-proposal/OWNERFINAL-third-policy-exact-failed-control3-byte-preservation-PROPOSAL.json",
+      "sha256": "ab2e9f147ba9096d31259cbad6aec2d2d0c372542857b9938882c5f2bc4112ca"
+    },
+    {
+      "bytes": 18709,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-control3-failed-owned-preservation-proposal/preserve_failed_control3_once_v3.py",
+      "sha256": "589ed17fed7be500c028cf7eef027ece4e19ab6574a9008f009fa329677c5b7e"
+    },
+    {
+      "bytes": 63424,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-control3-failed-owned-preservation-proposal/frozen-preservation-inputs-v3.json",
+      "sha256": "cfb97eaadadd7368043033f7aa4749655609fc7b41ff5c577bbe86d82d361bff"
+    },
+    {
+      "bytes": 16292691,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-control3-failed-owned-preservation-proposal/private-complete-failed-root-stable-body-mode-inode-inventory-v3.json",
+      "sha256": "199fc891c3410a3f1f20bcc075bd9cd1b7f9fc9f80183710fe40f72232020a52"
+    },
+    {
+      "bytes": 165252,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-control3-failed-owned-preservation-proposal/private-complete-task-aware-census-before-after-v3.json",
+      "sha256": "f52fefb27c38c235bda3a4d6af62783152ee027663e9ef5f3403f902c0b73fc2"
+    },
+    {
+      "bytes": 3054,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-control3-failed-owned-preservation-proposal/OWNERFINAL-named-source-progress-failed-control3-byte-preservation-v4-NOT_RUN.json",
+      "sha256": "eb85909a6880b0f228c0f67c6a2772c9bc4de79e4ed31b9ca812d7d4fe15020b"
+    },
+    {
+      "bytes": 18125,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-control3-failed-owned-preservation-proposal/preserve_failed_control3_once_v4.py",
+      "sha256": "ba6393154ff6104718a101d133c768e40100f4b4d589a636ff3dc92c2450e6bb"
+    },
+    {
+      "bytes": 76679,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-control3-failed-owned-preservation-proposal/frozen-preservation-inputs-v4.json",
+      "sha256": "ebcc9dc65a768eadcfdd624d9cdf2fd94a5804c4964a88cb72897026d971f383"
+    },
+    {
+      "bytes": 3060,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-control3-failed-owned-preservation-proposal/source_progress_guard_v4.py",
+      "sha256": "660aa4fbecb78fb4fe394f507b75bdedee9f5492233b30c15baedbae7111e728"
+    },
+    {
+      "bytes": 419966,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-control3-failed-owned-preservation-proposal/current-e4ff-source-progress-complete-body-mode-proof-v4.json",
+      "sha256": "4cf89b355842fbc1f00eec11054a95010e0a6d6c8c0acca11d4da1c379b1edc5"
+    },
+    {
+      "bytes": 1264,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-control3-failed-owned-preservation-proposal/canonical-failed-owned-byte-preservation-and-task-state-proposed.patch",
+      "sha256": "f8bea590361ca6d9cc1a0dd391a968ee294cd8f15a2782f8247ccd7bb369eb62"
+    }
+  ],
+  "captured_UTC": "2026-10-11T14:58:07.126901+00:00",
+  "no_execution": {
+    "archive": false,
+    "native": false,
+    "preservation_script_or_helper_import": false,
+    "removal": false,
+    "signals_wait_reap": false,
+    "tests": false
+  },
+  "original_failure": "FAIL_HOLD_UNCHANGED; capacity primary and cleanupFAIL remain independent; no zombie reaping/reader joins/final census inferred",
+  "original_v3_status": "HOLD_CURRENT_SOURCE_GUARD_STALE_AFTER_AUTHORIZED_PROGRESS",
+  "privacy_boundary": {
+    "inspection_error": "An initial structure print mistakenly emitted private inventory paths into truncated tool output; no file bodies, credentials or archive content emitted. Not reproduced or included in this safe receipt.",
+    "private_inventory_or_archive_Git_copy": false
+  },
+  "reviewer": "acceptance_review",
+  "root_release_required": {
+    "assertions": "Clear PYTHONOPTIMIZE; use ordinary Python without -O/-OO, because new helper uses assertions",
+    "execution_argv": [
+      "env",
+      "-u",
+      "PYTHONOPTIMIZE",
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "600s",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/rcc-control3-failed-owned-preservation-proposal/preserve_failed_control3_once_v4.py",
+      "--inputs-sha256",
+      "ebcc9dc65a768eadcfdd624d9cdf2fd94a5804c4964a88cb72897026d971f383",
+      "--release",
+      "DISTINCT_ROOT_0600_RELEASE_REQUIRED",
+      "--release-sha256",
+      "ROOT_ANNOUNCED_SHA_REQUIRED",
+      "--mode",
+      "ARCHIVE_VERIFY_REMOVE"
+    ],
+    "fresh_capacity": "Recheck >=2,000,000,000B in /dev/shm immediately; script enforces it again, 1GB archive maximum and 256MiB write reserve",
+    "release_file": "Distinct regular nonsymlink0600 file with root-announced SHA and executing-account ownership; verify before launch; script checks exact release JSON/hash but does not independently check file permissions",
+    "schema_exact": {
+      "destination": "/dev/shm/actions-failed-control3-original-preservation-20261011-1",
+      "inputs_sha256": "ebcc9dc65a768eadcfdd624d9cdf2fd94a5804c4964a88cb72897026d971f383",
+      "mode": "ARCHIVE_VERIFY_REMOVE",
+      "original_status": "FAIL_HOLD_UNCHANGED",
+      "root": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-1",
+      "schema": 1,
+      "script_sha256": "ba6393154ff6104718a101d133c768e40100f4b4d589a636ff3dc92c2450e6bb",
+      "serialized_failed_root_and_devshm": true,
+      "status": "ROOT_RELEASE_ONE_FAILED_OWNED_BYTE_PRESERVATION"
+    },
+    "serialization": "Root must prevent failed-root and /dev/shm concurrent mutation across release, archive verification and removal; no B25 before this attempt",
+    "terminal": "Root records original exit/timeout/private log; no automatic retries; independent actual archive/member/readback review required afterward"
+  },
+  "schema": 1,
+  "static_algorithm_review": {
+    "archive": "Exclusive0600 file, bounded1GB gzip/PAX; exact member set,type,content,mode,UIDGID,nanosecond mtime; internal hardlinks resolve original content and target; exact symlink text; separate gzip EOF/CRC read",
+    "failure": "Partial archive and original directory remain on earlier failure; a removal/postcapacity failure retains archive and index and requires original failure/hold; no automatic replay or cleanup upgrade",
+    "pre_removal": "Complete original inventory, exact archive verification, repeated full source inventory and accessible-task census, bound inputs guards, durable complete private index and restore recipe precede exact named-root removal",
+    "removal": "Only fixed selected root after root inode/metadata equality; no other namespace, cache, source, helper or archive removal",
+    "task_guard": "Every enumerated live same-UID task inspected; identity/state/UID bracket and sibling set recheck; unknown same-UID live access refuses; stableZ interpretation bound immutable Linuxv6.18.44 source with deployed binary equivalence UNKNOWN"
+  },
+  "status": "GO_V4_BOUNDED_PREEXECUTION_ONLY_WITH_DISTINCT_ROOT_RELEASE",
+  "v4_source_guard_scope": "Historical b614 immutable Git1421 plus current e4ff complete Git+FS1423; ancestor and clean tuple; source progress never qualifies native acceptance",
+  "verification": {
+    "all281_bound_inputs_bytes_SHA_mode": true,
+    "all_retained_census_universal_quiescence": "UNKNOWN",
+    "archive_inventory_task_scan_removal_release_budget_AST_exact_V3": true,
+    "current_clean_and_historical_ancestor": true,
+    "current_complete_Git_and_FS_leaf_count": 1423,
+    "current_head": "e4ff080375a8422bb656e52d218f198521dda078",
+    "current_tree": "973ff38f49a17a896e4d90f829a72e2ea0ea15e8",
+    "external_hardlinks": 0,
+    "failed_root_current_complete_member_set_body_mode_uid_gid_mtime_dev_inode_nlink_verified": 49132,
+    "fresh_devshm_available_readonly_bytes": 2095063040,
+    "historical_complete_Git_leaf_count": 1421,
+    "internal_hardlink_aliases": 0,
+    "logical_regular_bytes": 2773356242,
+    "nonprogress_input_fields_exact": true,
+    "original277_input_prefix_exact": true,
+    "retained_census_first_tasks": 334,
+    "retained_census_second_tasks": 336,
+    "retained_each_other_UID_unknown_errors": 44,
+    "retained_first_second_owned_handles": 0,
+    "retained_first_second_task_before_after_identities_equal": true,
+    "types": {
+      "directory": 16700,
+      "file": 28961,
+      "symlink": 3471
+    },
+    "uid_gid": [
+      1000,
+      1000
+    ]
+  }
+}

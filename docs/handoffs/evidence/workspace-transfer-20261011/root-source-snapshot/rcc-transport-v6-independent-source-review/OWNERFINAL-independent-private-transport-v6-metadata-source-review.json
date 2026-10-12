@@ -1,0 +1,282 @@
+{
+  "documentation_improvement": {
+    "accepted_exact_patch": {
+      "bytes": 1173,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-transport-failure-metadata-v6-private-source/canonical-retain-original-transport-failure-and-observed-ownership-proposed.patch",
+      "sha256": "d006eb6c46d36a1b5f28e368661fdf8eac0e10d7f319b97d061d3ecd002f55a9"
+    },
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "durable_learning": "Keep original helper facts and previously observed ownership on failure; never substitute sampled captures for final survivors/readers; pin each transport successor separately.",
+    "evidence": "Independent whole AST comparison, exact pinned helper exception fields,9+5+36 source controls and recorded8FAIL1PASS to50PASS.",
+    "remaining_uncertainty": "v6 actual persistence/readback and separately reviewed source/config/command successor remain unqualified.",
+    "stale_or_ambiguous_guidance_removed": "Failure classification cannot erase ownership observations or imply absent reader/final-census proof."
+  },
+  "limits": [
+    "No tests, helper, gateway, native binaries or actual process executed by reviewer.",
+    "Preserved sampled maximum64 last observed entries are not a final descendant census.",
+    "Unobserved supervisor/command identities remain null; helper final-census and reader facts remain null/UNKNOWN.",
+    "Original helper attrs retained independently; capacity remains primary and cleanup FAIL remains separate.",
+    "Raw exception text/traceback remain private; retention failure adds only secondary class.",
+    "Named v6 requires exact content-bound successor config before state/process startup; old8c5 release does not qualify v6.",
+    "No approval for new source/config/command retarget or actual run."
+  ],
+  "new_transport": {
+    "bytes": 23981,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/actual_transport_v6.py",
+    "sha256": "931b77f3dfc67643dee279f0a5538432d52f3fefaa0ddfe2e0f32e755d189d01"
+  },
+  "owner": {
+    "bytes": 16754,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-compatibility-transport-failure-metadata-v6-private-source/OWNERFINAL-private-transport-v6-original-exception-and-observed-ownership-source.json",
+    "sha256": "aa052e89bf03bbfcd2009a5d962cad40086474d89d76956f2f206ea648e8a54d"
+  },
+  "references": [
+    {
+      "bytes": 72931,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-transport-failure-metadata-v6-private-source/before-v6-complete263-and-original-failure-bindings.json",
+      "sha256": "d03ed6f30fc81a86c67ce923bb2ce599831f943f20eef9f68075d0583877801f"
+    },
+    {
+      "bytes": 1173,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-transport-failure-metadata-v6-private-source/canonical-retain-original-transport-failure-and-observed-ownership-proposed.patch",
+      "sha256": "d006eb6c46d36a1b5f28e368661fdf8eac0e10d7f319b97d061d3ecd002f55a9"
+    },
+    {
+      "bytes": 94,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-transport-failure-metadata-v6-private-source/final-v6-integrated-50-servicefree-controls-terminal.json",
+      "sha256": "b89b0b0746891815cc47a474387f74cce0078e5cfe85a1fa6f42c1f84726134e"
+    },
+    {
+      "bytes": 149,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-transport-failure-metadata-v6-private-source/final-v6-integrated-50-servicefree-controls.private.log",
+      "sha256": "5af15b90db66075cfba4e234fce02c6e462c5496e18dda06ac82b1d107bda868"
+    },
+    {
+      "bytes": 19,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-transport-failure-metadata-v6-private-source/final-v6-scoped-syntax-undefined-name-check.private.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "bytes": 8847,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-transport-failure-metadata-v6-private-source/freeze_OWNERFINAL_v6.py",
+      "sha256": "643193cca7ee6848355beb0e5cc1b4454af73946abf6830b5740992a5b0ece7b"
+    },
+    {
+      "bytes": 8998,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-transport-failure-metadata-v6-private-source/frozen-original-v5-to-private-v6-metadata-only.patch",
+      "sha256": "03faf0cc27d1e88f3a45a26019b5fe0a566196a6e5fdd53d3e25c932d3438dec"
+    },
+    {
+      "bytes": 1336,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-transport-failure-metadata-v6-private-source/immutable-before-v6-implementation-exception-path-RED.json",
+      "sha256": "b4a3b9992accfa3ce87d7cc4d34f19997d81b0c88d08850da48741d2e6204d69"
+    },
+    {
+      "bytes": 1892,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-transport-failure-metadata-v6-private-source/immutable-postcontrols-original263-and-v6-structural-scope-proof.json",
+      "sha256": "f4442558bcc5ba1078a5ef920305e5bd1783d1c6fc51a192e4bb3b78259a90a0"
+    },
+    {
+      "bytes": 20308,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-transport-failure-metadata-v6-private-source/original-actual_transport_v5.py",
+      "sha256": "e9db56723b5257a113e6f81ff6d56ab5567e615d508be48361d8d5bb95587283"
+    },
+    {
+      "bytes": 661,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-transport-failure-metadata-v6-private-source/original-scope-inspector-historical-config-path-failure.json",
+      "sha256": "e731a4245c82e9436b1dc7d5af0b10565a949181dc451d43121d03bea741a0d4"
+    },
+    {
+      "bytes": 11293,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-transport-failure-metadata-v6-private-source/original-test_actual_transport_v5.py",
+      "sha256": "7a4cf3d986a73185cd4f80560de953d1af70394779b2dbb367245e2375f3cc8e"
+    },
+    {
+      "bytes": 83,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-transport-failure-metadata-v6-private-source/original-v5-exception-path-RED-terminal.json",
+      "sha256": "ff6526a2b5011d84b362d5b061356df67ece5619a3e2797ae1761dcbae431ad8"
+    },
+    {
+      "bytes": 7035,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-transport-failure-metadata-v6-private-source/original-v5-exception-path-RED.private.log",
+      "sha256": "3bb672a16b2d6533dcabffa247453d37c226e0207d80b88fc434dfe2bdf3bcd9"
+    },
+    {
+      "bytes": 1038,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-transport-failure-metadata-v6-private-source/post-final50-original-byte-binding-readback-and-documentation-disposition.json",
+      "sha256": "aa9fd42b51de7a1650ade6605522b7d1c0be67f1830af1f80a1e05e11e672e80"
+    },
+    {
+      "bytes": 7488,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-transport-failure-metadata-v6-private-source/prove_v6_scope.py",
+      "sha256": "d5f4aebb205c3e9e07ecf3ae54fb30329f73ef6028e5fb2eda10e663f3e79126"
+    },
+    {
+      "bytes": 7488,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-transport-failure-metadata-v6-private-source/prove_v6_scope_v2.py",
+      "sha256": "45f80e1c55d92c9e22279e888d76a7441262957ddb7beefbf404b1f6f39d8370"
+    },
+    {
+      "bytes": 103,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-transport-failure-metadata-v6-private-source/transport-v6-additional-controls-successor-v2.private.log",
+      "sha256": "1f11b6e880045ee35de832b81b45d06257342e13b5c79bbf0034379d4ca220b9"
+    },
+    {
+      "bytes": 101,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-transport-failure-metadata-v6-private-source/transport-v6-additional-controls.private.log",
+      "sha256": "5279d1fc9a1ced44f9c96da1414ef59e4676f963fbad52e7a1a2903538819b0d"
+    },
+    {
+      "bytes": 135,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-transport-failure-metadata-v6-private-source/transport-v6-all-inherited-controls.private.log",
+      "sha256": "8ffea22cbeab5c0aa7377c03bd8a632a71e07bbef552687cb4cfa6b2bb0efc7a"
+    },
+    {
+      "bytes": 61,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-transport-failure-metadata-v6-private-source/transport-v6-exception-path-GREEN-terminal.json",
+      "sha256": "196ee83e56144c2b6259229c5045c03051a459b95b74f4f487c86d78d7bcd20e"
+    },
+    {
+      "bytes": 107,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-transport-failure-metadata-v6-private-source/transport-v6-exception-path-GREEN.private.log",
+      "sha256": "d9d734ee1c2de67b748aeef1c4126433aa438ad8375ca953916f12b1df11414d"
+    },
+    {
+      "bytes": 23981,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/actual_transport_v6.py",
+      "sha256": "931b77f3dfc67643dee279f0a5538432d52f3fefaa0ddfe2e0f32e755d189d01"
+    },
+    {
+      "bytes": 8218,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/test_actual_transport_failure_metadata_v6.py",
+      "sha256": "2f7302bec55c7435194b274b7035f5465f32337f6201d1e474f033bb0258c9d7"
+    },
+    {
+      "bytes": 5905,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/test_actual_transport_failure_metadata_v6_additional.py",
+      "sha256": "49ba7905f75ae51bfc4553858c28aca18fd54151a485228640d987ee50b14d1e"
+    },
+    {
+      "bytes": 11293,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/test_actual_transport_v6_inherited_controls.py",
+      "sha256": "f58e6d58403fbb5bec14c62a72c5fa1e734331310d0b025dd64acb9e20babea5"
+    },
+    {
+      "bytes": 20308,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/actual_transport_v5.py",
+      "sha256": "e9db56723b5257a113e6f81ff6d56ab5567e615d508be48361d8d5bb95587283"
+    },
+    {
+      "bytes": 11504,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/fixture_records_v2.py",
+      "sha256": "ec6281e47ab7c2896cea27fbecb1f54c2106d65aa965db06b17999b2e21fd916"
+    },
+    {
+      "bytes": 4632,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/owned_monitor_v1.py",
+      "sha256": "834a7fe402e34b170f414df5dfe79762c0b49ed311a6222ba2f7bca5d87020a5"
+    },
+    {
+      "bytes": 12959,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/runner_contracts_v3.py",
+      "sha256": "cbae3bb074d3995153ea5e6b694e7f9e61c047c6aa511b682959a63fedf7b726"
+    },
+    {
+      "bytes": 634107,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/FROZEN-control3-current-b614-actual-config-v2.json",
+      "sha256": "8c5da5be25ebfcf86f286ee9f93ddad328c68b3243b0935ec5937c93376bb948"
+    },
+    {
+      "bytes": 82646,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/OWNERFINAL-current-b614-runnable-three-version-RCC-compatibility-proposal-v2.json",
+      "sha256": "50bb3864ab95e6cfca705a8a0f6112e87b3fc56b0e513c19e12d856c3ea3a095"
+    },
+    {
+      "bytes": 987,
+      "mode": "0o600",
+      "path": "/workspace/actions-cloud/activate.sh",
+      "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+    },
+    {
+      "bytes": 74274,
+      "mode": "0o444",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/verify_dakota_rcc_acceptance.py",
+      "sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659"
+    },
+    {
+      "bytes": 72931,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-transport-failure-metadata-v6-private-source/before-v6-complete263-and-original-failure-bindings.json",
+      "sha256": "d03ed6f30fc81a86c67ce923bb2ce599831f943f20eef9f68075d0583877801f"
+    }
+  ],
+  "review_findings": [],
+  "source": {
+    "commit": "b614864ba9da55c13662894b6ef3c8515d9fdb25",
+    "control": "c10380a4d2ebc6f0aca63eb85c8f84a337da4962",
+    "control_tree": "21676c626a933c2d55761ec85ecf26fe0eef26bb",
+    "tree": "6fa4f5c1e9837a0d893868255575b355b3977fae"
+  },
+  "status": "GO_PRIVATE_TRANSPORT_METADATA_SOURCE_ONLY",
+  "upstream_disposition": "none",
+  "verification": {
+    "control_groups": {
+      "test_actual_transport_failure_metadata_v6.py": 9,
+      "test_actual_transport_failure_metadata_v6_additional.py": 5,
+      "test_actual_transport_v6_inherited_controls.py": 36
+    },
+    "final_recorded_GREEN": {
+      "errors": 0,
+      "pass": 50,
+      "skip": 0
+    },
+    "inherited_36_test_AST_exact_after_import_only_rebinding": true,
+    "native_original_members": 1192,
+    "original_RED": {
+      "errors": 0,
+      "fail": 8,
+      "pass": 1
+    },
+    "original_failed_state_bindings": 12,
+    "original_retained_bindings": 263,
+    "owner_bindings": 34,
+    "prepared_inputs": 30,
+    "source_body_modes": 1421,
+    "whole_v5_AST_equality_after_exact_metadata_and_self_binding_projection": true
+  }
+}

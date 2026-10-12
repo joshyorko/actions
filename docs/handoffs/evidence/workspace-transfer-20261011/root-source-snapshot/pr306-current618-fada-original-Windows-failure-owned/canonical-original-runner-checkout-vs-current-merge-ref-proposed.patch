@@ -1,0 +1,8 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@
++A current PR merge ref can differ from the synthetic checkout recorded by an
++earlier job. Bind a failure to the checkout in its original job log, then verify
++that immutable commit's ordered parents and complete tree. Keep a later merge
++ref as a separate metadata observation even when those parents and trees match;
++matching content does not change the checkout identity of the executed job.

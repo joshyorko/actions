@@ -1,0 +1,256 @@
+{
+  "schema": "capacity-batch27-owner-preexecution-proposal-v1",
+  "decision": "PREPARATION_ONLY_INDEPENDENT_REVIEW_AND_ROOT_ONE_RELEASE_REQUIRED",
+  "NOT_RUN": true,
+  "script": {
+    "path": "/tmp/actions-capacity-recovery-batch27.py",
+    "bytes": 5280,
+    "sha256": "c689243b76041110c0fc84196db800d6d0754d671f5c3416daeee10a9bd0da97",
+    "mode": "0o600"
+  },
+  "algorithm_parent": {
+    "path": "/tmp/actions-capacity-recovery-batch19.py",
+    "bytes": 5244,
+    "sha256": "48fd7e4c79e55b80ceda0b63c1d1da87feeb368cefee265d5c12bad6ad940840",
+    "mode": "0o600"
+  },
+  "accepted_B26_identical_algorithm": {
+    "path": "/tmp/actions-capacity-recovery-batch26.py",
+    "bytes": 5360,
+    "sha256": "ff041f263cfb10821a794e37facdf3d6f50dd8ad0e48289b26754812204419e0",
+    "mode": "0o600"
+  },
+  "metadata_selection_proof": {
+    "path": "/workspace/engineering/capacity-recovery-batch27-proposal/private-selected-smallest-adequate-completed-metadata.json",
+    "bytes": 1758,
+    "sha256": "07455ef7b908d218f458eb58a8b6d7cff8991fc295a43d140cd19cd40989bef9",
+    "mode": "0o600"
+  },
+  "all16_nonconfiguration_AST_exact_parent": true,
+  "only_configuration_changes": [
+    "DEST",
+    "STAGE",
+    "NAMES"
+  ],
+  "names_exact_allowlist": [
+    "5ed3ed80e6c9b441",
+    "650664b6f7439ed5",
+    "74b0070197a19db9"
+  ],
+  "max8_scope_honored_selected_count": 3,
+  "selected_minimum_namespace_count_then_least_adequate_allocated_total_at_least80MB": true,
+  "candidate_metadata": [
+    {
+      "name": "5ed3ed80e6c9b441",
+      "allocated_unique_blocks_bytes": 30404608,
+      "regular_logical_bytes": 3438002,
+      "member_kinds": {
+        "directory": 2852,
+        "file": 4351,
+        "symlink": 8
+      },
+      "marker_true": true,
+      "tar_overhead_upper_bytes": 31770507
+    },
+    {
+      "name": "650664b6f7439ed5",
+      "allocated_unique_blocks_bytes": 30384128,
+      "regular_logical_bytes": 3438007,
+      "member_kinds": {
+        "directory": 2847,
+        "file": 4351,
+        "symlink": 8
+      },
+      "marker_true": true,
+      "tar_overhead_upper_bytes": 31748638
+    },
+    {
+      "name": "74b0070197a19db9",
+      "allocated_unique_blocks_bytes": 19251200,
+      "regular_logical_bytes": 16688245,
+      "member_kinds": {
+        "directory": 363,
+        "file": 410,
+        "symlink": 5
+      },
+      "marker_true": true,
+      "tar_overhead_upper_bytes": 3376979
+    }
+  ],
+  "selection_policy": "Fewest completed namespaces able to provide >=80MB observed allocated blocks, then least adequate allocated total, then conservative existing/tmp capacity and namespace tie-break; all eligible three-root combinations enumerated. Not a compression prediction or guaranteed reclaimed-byte amount.",
+  "no_two_candidates_reach80MB_observation": 60821504,
+  "total_allocated_unique_blocks_observation": 80039936,
+  "total_regular_logical_bytes": 23564254,
+  "complete_members_before_after": 15195,
+  "all_complete_candidate_snapshots_equal": true,
+  "markers_True_before_after": true,
+  "accessible_cwd_FD_path_matches_before_after": [
+    0,
+    0
+  ],
+  "accessible_scan_permission_transient_visibility": "UNKNOWN_NO_UNIVERSAL_QUIESCENCE",
+  "destination_existing_tmp_volume": "/tmp/actions-completed-scratch-recovery-batch27",
+  "unused_distinct_STAGE": "/tmp/actions-completed-scratch-recovery-batch27-stage",
+  "DEST_STAGE_currently_absent": true,
+  "existing_tmp_available_observation": 494702592,
+  "workspace_available_observation": 1238999040,
+  "existing_shm_available_observation": 3942715392,
+  "conservative_capacity_prerequisite": {
+    "tar_estimated_upper_bytes": 90460378,
+    "gzip_capacity_allowance_bytes": 181969332,
+    "reserve_bytes": 134217728,
+    "fresh_required_tmp_available_bytes": 316187060,
+    "formula": "2*(regular logical bodies +4096/member +3*relative UTF8 bytes +3*symlink target UTF8 bytes +4096/root)+1MiB; capacity allowance only, not expected compression or runtime byte cap. Original exact profile unchanged.",
+    "fresh_caller_check_required_immediately_before_ROOT_release": true
+  },
+  "source_origin": "UNREPORTED_ALL_SELECTED_NAMES_NO_MTIME_OR_COMPLETION_ATTRIBUTION",
+  "all_prior58_archives26indices_including_completed_B26_seven_preserved_current_SHA_size_mode": true,
+  "failed563_original_exists_and_excluded": true,
+  "failed_control3_separate_original_root_archive_preservation_mapping": {
+    "path": "/workspace/engineering/root-failed-control3-one-byte-preservation-v4/root-exact-historical-failed-member-archive-mapping.json",
+    "bytes": 1864,
+    "sha256": "cc73027ce86ea0965f3bdd88ed3398c322dcf012b337a4ca161966f19ffee6c7",
+    "mode": "0o600"
+  },
+  "failed_control3_original_FAIL_HOLD_UNCHANGED_not_success_marker": "Retained distinct failed archive, no requalification or failed namespace selection",
+  "current_source_owner_context": {
+    "head": "e4ff080375a8422bb656e52d218f198521dda078",
+    "tree": "973ff38f49a17a896e4d90f829a72e2ea0ea15e8",
+    "count": 1423,
+    "historical_b614_head": "b614864ba9da55c13662894b6ef3c8515d9fdb25",
+    "historical_b614_tree": "6fa4f5c1e9837a0d893868255575b355b3977fae",
+    "scope": "Byte/mode/source ownership guards only, current source LIGHT/FULL/ACTUAL acceptance remains separate"
+  },
+  "private_proof_bindings": [
+    {
+      "path": "/workspace/engineering/capacity-recovery-batch27-proposal/private-complete-completed-candidate-metadata-census.json",
+      "bytes": 113556,
+      "sha256": "0db3eec5f3a0e02a2e7de94f74e59c38c3aa4e303e2a493162ebcf3d15aa6279",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/capacity-recovery-batch27-proposal/private-selected-smallest-adequate-completed-metadata.json",
+      "bytes": 1758,
+      "sha256": "07455ef7b908d218f458eb58a8b6d7cff8991fc295a43d140cd19cd40989bef9",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/capacity-recovery-batch27-proposal/private-complete-all-three-body-mode-mtime-UIDGID-type-link-inventories-before-after.json",
+      "bytes": 9620617,
+      "sha256": "b0e6c44fefe8384bca18495465f854e3a6c253b424ac4f3dde8438c3425d776a",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/capacity-recovery-batch27-proposal/private-accessible-process-cwd-FD-before-after.json",
+      "bytes": 428,
+      "sha256": "cb42d36581ce5b91bc5d1cf8ffd4826e15c10379450a33caeca93a1deae680af",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/capacity-recovery-batch27-proposal/private-all58-original-archives26-indices-current-SHA-mode-retention.json",
+      "bytes": 22882,
+      "sha256": "b07d2ffef92f45233dada4aa25fb1c089d422bcb78792c7aecc76babc83038f5",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/capacity-recovery-batch27-proposal/private-current-e4ff-historical-b614-original-failed-archive-native-guard-readback.json",
+      "bytes": 1148,
+      "sha256": "e28f1475ca96190287d8c902d4e9e1c629ddb5ae69fe649f340be1173072dfc8",
+      "mode": "0o600"
+    }
+  ],
+  "metadata_prepare_constructor": {
+    "path": "/workspace/engineering/capacity-recovery-batch27-proposal/prepare-candidate-metadata.py",
+    "bytes": 2313,
+    "sha256": "17ee691404eae377d30df81bcb2ed363625de7f32e775945247f8ee84af838a3",
+    "mode": "0o600"
+  },
+  "metadata_selection_constructor": {
+    "path": "/workspace/engineering/capacity-recovery-batch27-proposal/select-smallest-adequate-private.py",
+    "bytes": 2553,
+    "sha256": "dc95c1434946c3d73198c16119d87c12eafdf79b34afd3dfddb3931ab1261bb7",
+    "mode": "0o600"
+  },
+  "root_proposed_exact_argv": [
+    "env",
+    "-u",
+    "PYTHONOPTIMIZE",
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "600s",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/tmp/actions-capacity-recovery-batch27.py"
+  ],
+  "root_release_prerequisites": [
+    "Independent immutable exact script/proposal review followed by distinct ROOT ONE adoption/release",
+    "Fresh existing/tmp free space meets exact conservative bound+reserve; ROOT B26 already terminal and no concurrent same namespaces/source/cache/native writes or heavy gateway",
+    "ROOT all source/native/helper/original failed archive and prior58 retention guards before and after every outcome",
+    "Each exact namespace markerTrue and no observed accessible handles before complete inventory, verified0600gzip/private index and full repeated inventory/handle check before exact expanded removal",
+    "No previouslyfailed563/cache/source/native/receipt or other namespace touched; only three NAMES after complete preserved recorded evidence",
+    "Fresh workspace postmeasurement governs source-full1200000000B or cold1288490189B floors, and shm3865470567B floor; no promise, no actual/gate release from capacity estimate"
+  ],
+  "limitations": [
+    "No ACL/xattr/original inode/rootmetadata/precise TAR-ns-time or retrospective process visibility claims",
+    "Source origin UNREPORTED; real source/full/hosted/native/release tuple acceptance not inferred",
+    "Proposal writes only metadata/script, no archives/removal executed by preparer",
+    "Root original failed-control3 preservation terminal0 is byte preservation only, original actual/cleanup FAIL and unknown internal readers remain unchanged"
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md exact imported7d070 paragraph verified and reused unchanged",
+    "Exact_delta_or_verified_reuse": {
+      "path": "/workspace/engineering/capacity-recovery-independent-review/canonical-completed-scratch-preservation-proposed.patch",
+      "bytes": 1068,
+      "sha256": "7d07065b5bb7742698919997c8c6621cc20d00494741eb5365251ffb09f2d208",
+      "mode": "0o600"
+    },
+    "Durable_learning_captured": "Only exact explicitly completed namespaces may be removed after complete recorded stream/body/mode/UIDGID/link verification and repeated inventory/accessible handles; destination/capacity estimates do not grant a cold-gate or source-origin qualification.",
+    "Evidence": [
+      {
+        "path": "/tmp/actions-capacity-recovery-batch19.py",
+        "bytes": 5244,
+        "sha256": "48fd7e4c79e55b80ceda0b63c1d1da87feeb368cefee265d5c12bad6ad940840",
+        "mode": "0o600"
+      },
+      {
+        "path": "/tmp/actions-capacity-recovery-batch27.py",
+        "bytes": 5280,
+        "sha256": "c689243b76041110c0fc84196db800d6d0754d671f5c3416daeee10a9bd0da97",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/capacity-recovery-batch27-proposal/private-complete-all-three-body-mode-mtime-UIDGID-type-link-inventories-before-after.json",
+        "bytes": 9620617,
+        "sha256": "b0e6c44fefe8384bca18495465f854e3a6c253b424ac4f3dde8438c3425d776a",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/capacity-recovery-batch27-proposal/private-accessible-process-cwd-FD-before-after.json",
+        "bytes": 428,
+        "sha256": "cb42d36581ce5b91bc5d1cf8ffd4826e15c10379450a33caeca93a1deae680af",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/capacity-recovery-batch27-proposal/private-all58-original-archives26-indices-current-SHA-mode-retention.json",
+        "bytes": 22882,
+        "sha256": "b07d2ffef92f45233dada4aa25fb1c089d422bcb78792c7aecc76babc83038f5",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/capacity-recovery-batch27-proposal/private-current-e4ff-historical-b614-original-failed-archive-native-guard-readback.json",
+        "bytes": 1148,
+        "sha256": "e28f1475ca96190287d8c902d4e9e1c629ddb5ae69fe649f340be1173072dfc8",
+        "mode": "0o600"
+      }
+    ],
+    "Stale_or_ambiguous_guidance_removed": "No universal quiescence or mtime origin inference; no oldb614 physical identity assumed for currente4ff; failure archive success never relabels failed actual. Existing precise guide already covers completed algorithm; no cosmetic duplicate.",
+    "Remaining_uncertainty": "Independent review and ROOT release not yet granted; archive/removal NOT_RUN; recovered free bytes unknown and separate actual/cold qualification remains held."
+  },
+  "Upstream_disposition": "none",
+  "constructor": {
+    "path": "/workspace/engineering/capacity-recovery-batch27-proposal/finalize-readonly-proposal.py",
+    "bytes": 14530,
+    "sha256": "9a4919b9af9a0a960bcc944303f61f44059217452bda718fd0b163f5435b14af",
+    "mode": "0o600"
+  }
+}

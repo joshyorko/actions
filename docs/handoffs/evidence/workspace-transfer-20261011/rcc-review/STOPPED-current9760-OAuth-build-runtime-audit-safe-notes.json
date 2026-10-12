@@ -1,0 +1,80 @@
+{
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "disposition": "Proposed only; no guide edit after emergency stop.",
+    "evidence": "Exact inspected9760 sources above; existing307 builder guards; old75757 artifact content proof.",
+    "exact_delta": "OAuth build inputs, hosted client registrations, operator custom-provider credentials, API-key authorization and MCP authentication are separate contracts. Removing a vendor fetch requires repository-owned, validated, secret-free input provenance; an empty hosted catalog must explicitly mean no hosted registrations, not fabricated OAuth support. Regenerated shipping artifacts need fresh source/content/installed/native checks."
+  },
+  "inspected_sources": [
+    {
+      "bytes": 26152,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/action_server/tasks.py",
+      "sha256": "3fa7419c346fe9494bdbe89a7f245cf72287832bef36ee73ea4bd0039ef477d6"
+    },
+    {
+      "bytes": 4591,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/action_server/scripts/build_oauth2_config.py",
+      "sha256": "f6dbc67610fefd7ec69e8972b5385506e71559ca2ff96cf41749ea07733ff4a8"
+    },
+    {
+      "bytes": 2593,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/action_server/src/actions/server/_oauth2.py",
+      "sha256": "e3445314af0a991ed5fda825432bf2bc3926b94ea7504348bda5ebdcb11641ab"
+    },
+    {
+      "bytes": 10760,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/action_server/src/actions/server/_common/oauth2_settings.py",
+      "sha256": "dee9791b8156083ca6ad589a6cc6233d10c54df93815a4882641ff0ca256227b"
+    },
+    {
+      "bytes": 24070,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/action_server/src/actions/server/_api_oauth2.py",
+      "sha256": "406801434c900a4f92898b9287ec9e66581f1c4ca504e0e939482646e05fbceb"
+    },
+    {
+      "bytes": 35232,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/action_server/src/actions/server/_server.py",
+      "sha256": "0954b062ba7931609dddfd8b1f068dbac83967691e1194b6ac250a51befa20ff"
+    }
+  ],
+  "minimum_focused_repair_proposal_NOT_IMPLEMENTED": {
+    "existing_config_preservation": "Default user-config creation currently writes generated template only when path absent; private permissions/exclusive creation/symlink/race handling require audit before claiming security validation.",
+    "honest_default": "A nonblank YAML document with oauth2Config.providers:{} can express no hosted app registrations and allow explicit operator custom configs; do not call it hosted OAuth support or fabricate client IDs/secrets. Ship provider endpoint defaults only as public metadata and clearly document absent owned registrations.",
+    "operator_credentials": "Custom client registration and redirect ownership belong to operator; secrets/tokens must not enter Git/generated public bundles. No fake credentials in shipping configuration.",
+    "remove_external_vendor_input_dependency": "Reuse existing307 builder/atomic publication, replacing its two _acquire sources with repository-owned explicitly reviewed public catalog and user-template inputs. No network dependency or secret client data at build.",
+    "schema_provenance": "Bind exact tracked input paths/bodySHA/source revision; strictUTF8/mapping/types/modes plus deliberate empty-catalog state. Consider duplicate YAML keys/nonblank IDs/unknown types and credential material refusal; these checks remain design questions, not tested claims."
+  },
+  "remaining_uncertainty": "Audit interrupted before tests/spec packaging/MCP exact routes and repository-owned source design validation. No implementation, fake registration, installed/native compatibility, live provider or release claim.",
+  "required_followup_NOTRUN": [
+    "Confirm _common/vendored oauth2_settings synchronization/authoritative runtime imports and exact schema before writer changes.",
+    "Inspect existing MCP setup/pinned authSDK and browser-session tests; do not blend API-key/MCP auth into provider OAuth.",
+    "Validate repository-owned input/template schema, secret-free content/provenance, duplicate/malformed/UTF8/type rejection and old destination preservation using existing307 real builder tests.",
+    "Installed wheel clean-home CLI oauth2 actions-config/user-config-path must return exact owned nonblank config/template, preserve existing user settings and prove private creation; real custom provider PKCE/token callback with owned synthetic issuer is separate from vendor/live registration.",
+    "Native installed packaging must include same generated inputs/bodyhash as source and wheel; producer platforms/RECORD/manifest/source tuples remain gated. No old empty distributions may be relabeled repaired.",
+    "Resolve current211/221 distribution handoff with ROOT metadata; no completed currente2 installed/native or live OAuth authority was established here."
+  ],
+  "schema": 1,
+  "source": {
+    "head": "9760d5ec44876558c4941c4c3190abc8d92d14a1",
+    "repository": "/workspace/engineering/pr307",
+    "tree": "0d33ebaac258e069ef7045a29b4a3904740f6307"
+  },
+  "status": "STOPPED_EMERGENCY_PRESERVATION_INCOMPLETE_READONLY_AUDIT",
+  "stop": "ROOT workspace retirement instruction; no further investigation, imports/tests/build/source edits/network/acquisition.",
+  "upstream_disposition": "none",
+  "verified_facts": {
+    "API_key": "Configured API-key middleware protects /api and /oauth2 except explicit public login/callback/config/webhook routes; bearer/browser-session gate is distinct from outbound provider OAuth.",
+    "MCP": "Inspected server invokes action_routes.setup_mcp_server(api_key). Exact MCP auth implementation/pinnedSDK route protocol not yet audited; do not claim outbound OAuth catalog repairs MCP credentials/auth.",
+    "OAuth_callback": "Existing OAuth2Session uses baseURL/actions/oauth2 redirect; stored state is retrieved/drop=True; token request uses resolved provider clientSecret/include_client_id and PKCE verifier when applicable.",
+    "artifact_content": "Existing historical618 data-only owner75757 reports generated OAuth entries EMPTY across six wheels/sdist. Currente2 distribution compatibility was not completed in this audit; source/producer/content/registration are separate authority claims.",
+    "build": "Current task uses package Poetry Python and env replacement; script still acquires two Sema4AI/oauth-public-configs files through gh API with check=True,30s limit, strictUTF8/nonblank/YAML mapping/oauth2Config.providers checks. Both validate before atomic destination replacement. This existing307 implementation must be reused, not duplicated.",
+    "custom_provider": "mode custom resolves operator settings from --oauth2-settings YAML; provider defaults carry public endpoint metadata; runtime requires clientId key and authorization/token endpoints. Optional clientSecret absence selects PKCE S256. Current key-only clientId check does not establish nonblank or real registration.",
+    "hosted_apps": "mode actions resolves from generated FILE_CONTENTS.actions_config; unknown catalog provider raises. These client registrations cannot be invented from endpoint defaults or empty artifacts."
+  }
+}

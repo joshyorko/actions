@@ -1,0 +1,13 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -3047,6 +3047,10 @@
+ check suite; a PR job named publish can validate artifacts while registry upload
+ stays push-only. Check draft state, reviews and threads separately. An inaccessible
+ protection endpoint is an unverified policy surface, not a bypass permission.
++An empty visible ruleset list does not resolve an inaccessible traditional
++branch-protection endpoint. Bracket a paginated census with live named-ref
++readbacks. If the target advances during collection, retain the old tuple and
++query the new head separately; do not transfer its predecessor's passing CI.
+ After an actual dependency merge, refresh the existing source branch normally,
+ preserve history and receipts, inspect the complete union and regenerate all
+ canonical workflows before fresh configured and hosted gates. Engineering

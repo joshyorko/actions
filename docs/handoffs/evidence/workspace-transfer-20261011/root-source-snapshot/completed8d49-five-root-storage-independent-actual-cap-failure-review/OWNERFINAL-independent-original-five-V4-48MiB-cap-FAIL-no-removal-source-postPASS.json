@@ -1,0 +1,221 @@
+{
+  "actual_archive_cap": 50331648,
+  "actual_elapsed_seconds": 36.01844337199873,
+  "actual_outer_returncode": 1,
+  "actual_primary": "CalledProcessError_from_archiver_nonzero",
+  "all_selected_originals_remain": true,
+  "archiver_failure_class": "RuntimeError_AGGREGATE_COMPRESSED_CAP_EXCEEDED",
+  "cap_guard_disposition": "GENUINE_RED_FINITE_ACTUAL_WRITES_LIMIT_ENFORCED",
+  "complete_full_progress_alias_indices": "NOT_WRITTEN",
+  "current_capacity": {
+    "/dev/shm": 3901190144,
+    "/tmp": 549752832,
+    "/workspace": 1030459392
+  },
+  "decision": "FAIL_CAPPED_ARCHIVE_BEFORE_ANY_REMOVAL_SOURCE_POSTPASS_NATIVE_HOLD",
+  "destination_archives": 0,
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "durable_learning_captured": "Reuse finite allroot write ceiling/footer/fsync-before-removal and capture-before-assertion lessons; this real overflow failed before any original removal",
+    "evidence": "Exact original V4 cap50331648; five partial files below cap; all9035 original snapshots still match; both metadata guards0",
+    "remaining_uncertainty": "New96MiB finite storage budget and fresh addresses require separate review/root release; compression success still prospective",
+    "stale_or_ambiguous_guidance_removed": "Projected compression was not measured success; cap failure is not an archive qualification or native result"
+  },
+  "metadata_guard_actual_before_and_alwayspost": "PASS_0_COMPLETE_CAPTURE_RETAINED",
+  "native_execution": "NOT_RUN",
+  "original_driver_child_returncode": 1,
+  "partial_archive_integrity": "NOT_QUALIFIED_NO_COMPLETE_ARCHIVE_ORIGINAL_REPLACEMENT_CLAIM",
+  "references": [
+    {
+      "bytes": 1356,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-current8d49-five-root-storage-original-outer-owned/OWNERFINAL-root-one-original-five-completed8d49-storage-terminal.json",
+      "sha256": "3c49e7c9004d62143c9621ebdebe65aa1fd0cc54cb8e28c6ad4f3d13c9a4fa0d"
+    },
+    {
+      "bytes": 648,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v4/original-one-attempt-terminal.json",
+      "sha256": "b9d17f18dd03b913bd75e40a1325999b73d106f420e0ca2ddc4853387cca39cc"
+    },
+    {
+      "bytes": 22172,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/OWNERFINAL-five-completed8d49-roots-capped-storage-PREEXECUTION-v4.json",
+      "sha256": "a1333777200edeaf0320f437c946e9df15e2e6ce6a3c61a976838d7b9b088b2e"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v4/after/stderr.private.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2258,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v4/after/stdout.private.log",
+      "sha256": "d026598b36d64dc594eeb934062b08705d3dfa44dfdd0b0691ed2d2456bb7933"
+    },
+    {
+      "bytes": 466,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v4/after/terminal.json",
+      "sha256": "15493397948b05bdeaf3763d439cf124e2ce5432ee69273f037b85c34b81594a"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v4/before/stderr.private.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2258,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v4/before/stdout.private.log",
+      "sha256": "3acb1077988e2e549627e975944fdc12d0c05bda01e331c9b7438c5d1be2fb25"
+    },
+    {
+      "bytes": 467,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v4/before/terminal.json",
+      "sha256": "591c80a261225d6216c30679f9a2343c8e42521f5797be66c0a786fe90a4f669"
+    },
+    {
+      "bytes": 2065,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v4/consumed-exact-release.json",
+      "sha256": "13514cedd3e44870f961582fa2efce8abe2a4b41df155c97d2933c16f3998b48"
+    },
+    {
+      "bytes": 1803,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v4/immediate-fresh-capacity-and-sourcebindings.json",
+      "sha256": "303eaf15f1dcf680dce179868e22ee1faa56e1a01847f7bd75be5d636c543d07"
+    },
+    {
+      "bytes": 325,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v4/original-archiver-terminal.json",
+      "sha256": "9101e2ea7d786684da341757754229db344069480f6126e0c8c0df749427847d"
+    },
+    {
+      "bytes": 2572,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v4/original-archiver.stderr.private.log",
+      "sha256": "9d87b93adae5ffeb6a51363ea22e7042495a1bc5cceacafa6c1f4ce34087d9db"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v4/original-archiver.stdout.private.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 648,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v4/original-one-attempt-terminal.json",
+      "sha256": "b9d17f18dd03b913bd75e40a1325999b73d106f420e0ca2ddc4853387cca39cc"
+    },
+    {
+      "bytes": 562,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v4/original-primary-traceback.private.log",
+      "sha256": "ac84c9630d5698e70292f3c1af0459f3f078c9c7cfdce692e2d87990c09f94c6"
+    },
+    {
+      "bytes": 380,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v4/protected-inputs-after.json",
+      "sha256": "b13c277cad9aa1ccad018b77d4479c9772cd3f1c35605e1fbec3e1e40bb5553f"
+    },
+    {
+      "bytes": 380,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v4/protected-inputs-before.json",
+      "sha256": "83aa8e09d3472148f7ab04edece3c67d4f9d9a155113d6ecc586a5171d045eee"
+    },
+    {
+      "bytes": 107,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v4/selected-complete-originals-before.json",
+      "sha256": "3b22f1ca74ed51ac68581e70585e19c980cf3cdd549fb2e7a54e5654d8f386a1"
+    },
+    {
+      "bytes": 4261080,
+      "mode": "0o600",
+      "path": "/tmp/actions-completed8d49-five-root-preservation-stage-v4/Runtime50-robot-output.tar.gz",
+      "sha256": "b1a9a736d83ad1f7b393b453c529c94d938a40e7a3b9cc50ddd9e87877d5d465"
+    },
+    {
+      "bytes": 19578024,
+      "mode": "0o600",
+      "path": "/tmp/actions-completed8d49-five-root-preservation-stage-v4/ToolkitTest.tar.gz",
+      "sha256": "9cc8ba996cf8154b58aa4a6764a81c0bdbbb1de408b662a0a9dd1e71d092aefa"
+    },
+    {
+      "bytes": 8831777,
+      "mode": "0o600",
+      "path": "/tmp/actions-completed8d49-five-root-preservation-stage-v4/fixture42-GREEN-log.tar.gz",
+      "sha256": "559ebb5229be6ba6c6353c8f42b76a0b3eef8e13ec56c0dfef694f0fce8f7be7"
+    },
+    {
+      "bytes": 8864573,
+      "mode": "0o600",
+      "path": "/tmp/actions-completed8d49-five-root-preservation-stage-v4/fixture51-TEMPORAL-log.tar.gz",
+      "sha256": "bb0f2af484a68cde48bf2bc2ca5c46d296a84426cead281859cd662e380bba62"
+    },
+    {
+      "bytes": 8796121,
+      "mode": "0o600",
+      "path": "/tmp/actions-completed8d49-five-root-preservation-stage-v4/original27-log.tar.gz",
+      "sha256": "ac820e5b845b59cf72a9c817b6c9b2a3b43b13b46cc6d8eaa37cc19e3ab4ce95"
+    },
+    {
+      "bytes": 5520,
+      "mode": "0o600",
+      "path": "/tmp/audit-original-five-v4-cap-failure-readonly.py",
+      "sha256": "52df25f682fd34c975d497010ee2cb7bdda2b9a54ba45eb7af47a1f0ed89cc7a"
+    }
+  ],
+  "removed_roots": 0,
+  "retained_partial_stage_bytes": 50331575,
+  "retained_partial_stage_files": [
+    {
+      "bytes": 4261080,
+      "mode": "0o600",
+      "path": "/tmp/actions-completed8d49-five-root-preservation-stage-v4/Runtime50-robot-output.tar.gz",
+      "sha256": "b1a9a736d83ad1f7b393b453c529c94d938a40e7a3b9cc50ddd9e87877d5d465"
+    },
+    {
+      "bytes": 19578024,
+      "mode": "0o600",
+      "path": "/tmp/actions-completed8d49-five-root-preservation-stage-v4/ToolkitTest.tar.gz",
+      "sha256": "9cc8ba996cf8154b58aa4a6764a81c0bdbbb1de408b662a0a9dd1e71d092aefa"
+    },
+    {
+      "bytes": 8831777,
+      "mode": "0o600",
+      "path": "/tmp/actions-completed8d49-five-root-preservation-stage-v4/fixture42-GREEN-log.tar.gz",
+      "sha256": "559ebb5229be6ba6c6353c8f42b76a0b3eef8e13ec56c0dfef694f0fce8f7be7"
+    },
+    {
+      "bytes": 8864573,
+      "mode": "0o600",
+      "path": "/tmp/actions-completed8d49-five-root-preservation-stage-v4/fixture51-TEMPORAL-log.tar.gz",
+      "sha256": "bb0f2af484a68cde48bf2bc2ca5c46d296a84426cead281859cd662e380bba62"
+    },
+    {
+      "bytes": 8796121,
+      "mode": "0o600",
+      "path": "/tmp/actions-completed8d49-five-root-preservation-stage-v4/original27-log.tar.gz",
+      "sha256": "ac820e5b845b59cf72a9c817b6c9b2a3b43b13b46cc6d8eaa37cc19e3ab4ce95"
+    }
+  ],
+  "schema": "INDEPENDENT_ORIGINAL_FIVE_V4_ACTUAL_CAP_FAILURE",
+  "source_head": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_native_acceptance": "UNCHANGED",
+  "source_tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "unchanged_selected_member_count": 9035,
+  "unchanged_selected_root_snapshots": 5,
+  "upstream_disposition": "none"
+}

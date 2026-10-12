@@ -1,0 +1,185 @@
+{
+  "ROOT_schema_adoption_source_owner_binding": {
+    "bytes": 1763,
+    "mode": "0o400",
+    "path": "/workspace/engineering/OWNERFINAL-root-controller30-once2-current-review-schema-adoption-SOURCE-NOTRUN.json",
+    "sha256": "ce2ca277444c0bd2cfb585ed3a697c4baa21c4b0a13fe0267336b457207a8f2a"
+  },
+  "SOURCE_PREEXEC_review_binding": {
+    "bytes": 11755,
+    "mode": "0o400",
+    "path": "/workspace/engineering/controller30-two-fresh-negative-once2-independent-PREEXEC-review/OWNERFINAL-independent-controller30-two-fresh-negative-once2-SOURCE-PURE-PREEXEC-GO.json",
+    "sha256": "7735a0492f37aecde086f4d1d85a11b9046b42cb3c583e601b2c1524b3474a2c"
+  },
+  "actual_binding": {
+    "bytes": 9278,
+    "mode": "0o600",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-once2-owned/original-controller-boundary-machine-census.json",
+    "sha256": "665f1d92e7ecb8b746983362729f11649d36d4d1ebd813c94af924d1b8cf2aba"
+  },
+  "actual_result": {
+    "child_before_post": "PASS_BOUND_SOURCE_ONLY_161_ROWS_EACH",
+    "child_returncode": 0,
+    "error_count": 0,
+    "exactunique30IDs_expected_selected_census_stdio_match": true,
+    "external_before_post": "PASS_175_AUTHORITY_ROWS_DERIVED_NOT_GUESSED",
+    "failure_count": 0,
+    "five_original_stdlib_origins_before_after_same_expected_paths_SHA": true,
+    "master_elapsed_seconds": 0.5776203699933831,
+    "master_returncode": 0,
+    "original_rawstatus": "PASS_CONTROLLER_BOUNDARY_PURE_ONLY",
+    "rawcensus_status_unmodified": true,
+    "skip_count": 0,
+    "tests_run": 30
+  },
+  "adapter_binding": {
+    "bytes": 4079,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/pure18_receipt_adapter_v8_SOURCE_PREPARED_v2_actual_receipt_schema.py",
+    "sha256": "8dbc69c8dd1d366d1e1dea97cb809613ff990e27ee9faacb3a9dfccb56a6c1b2"
+  },
+  "config_binding": {
+    "bytes": 113923,
+    "mode": "0o400",
+    "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/FROZEN-controller-boundary30-two-fresh-negative-fixtures-once2-inputs-NOTRUN.json",
+    "sha256": "9fd1bbc6f4b8cb64695457977071b510192e1c8cbd6b3727a39b931cb710d887"
+  },
+  "controller_binding": {
+    "bytes": 12753,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/root_once_first_five_current9760_SOURCE_PREPARED_v3_strict_V8_adapter.py",
+    "sha256": "985f497f83b4acecdf9ede7220da3237599ca210016da7443351c00787721ef6"
+  },
+  "controls_binding": {
+    "bytes": 21990,
+    "mode": "0o444",
+    "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/test_controller_boundaries_two_fresh_negative_fixtures_SOURCE_PREPARED_once2.py",
+    "sha256": "411341f94a58fb0bb37d957ce4922e320a894a5dbe6832f5d890bcdd8aa30229"
+  },
+  "decision": "GO_CONTROLLER_BOUNDARY_ACTUAL_PURE30_ONLY",
+  "documentation": {
+    "delta": "No canonical file edit. Reuse fresh immutable fixture poisons, exact semantic guard rather than permission oracle, original machine census and source-vs-actual scope lessons.",
+    "evidence": [
+      {
+        "bytes": 2331,
+        "mode": "0o400",
+        "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/exact-two-negative-fixture-only-source-delta.patch",
+        "sha256": "e082753c78af7be37f35f933949907dba60399e673f91952e059ac00e6d3f38d"
+      },
+      {
+        "bytes": 3795,
+        "mode": "0o400",
+        "path": "/workspace/engineering/controller30-original-ACTUALFAIL-independent-diagnosis/OWNERFINAL-independent-original-controller30-ACTUALFAIL-and-minimal-two-negative-fixture-proposal.json",
+        "sha256": "2a7e61f236db15ada4d3ddda355d8a3d0730ec58e1f0f3d1d9963c4ee97d12f8"
+      },
+      {
+        "bytes": 9278,
+        "mode": "0o600",
+        "path": "/workspace/engineering/first-five-controller-boundary-PURE-once2-owned/original-controller-boundary-machine-census.json",
+        "sha256": "665f1d92e7ecb8b746983362729f11649d36d4d1ebd813c94af924d1b8cf2aba"
+      },
+      {
+        "bytes": 958,
+        "mode": "0o600",
+        "path": "/workspace/engineering/first-five-controller-boundary-PURE-once2-owned/original-controller-boundary-parent-terminal.json",
+        "sha256": "b24120ad2a34b60c51f1e048e7bad3cde547dfafd71451822b22d613cceb9e37"
+      },
+      {
+        "bytes": 1550,
+        "mode": "0o400",
+        "path": "/workspace/engineering/root-controller30-reviewed-once2-execution/OWNERFINAL-root-original-controller30-pure-execution.json",
+        "sha256": "44e94497c62794dc48ca3fdeaf9dfafa341820ce486b346fda30fc75bc9fa310"
+      }
+    ],
+    "stale_ambiguity_removed": "Original28P2ERROR remainsFAIL; newonce2 is exact30P0FES without generic normalization. Purepasses are distinct from genuine native/fullcleanup or realstorage admission.",
+    "uncertainty": "Only controlled purefunctions/testfixtures; no realalias-parser invocation, native/provider/worker/reader cleanup or archive operation.",
+    "upstream_disposition": "none"
+  },
+  "enclosure_and_scope": {
+    "ROOT600TERM10_capture630_actual0_before_alwayspost_self_release_review_cfg_closure": true,
+    "actual_environment_preservation_NOTRUN": true,
+    "inner180TERM10_200fallback60guards_unchanged": true,
+    "logged175_selfrow_rehashed_in_master_source_and_originalbothenvelopes": true,
+    "native_NOTRUN": true,
+    "no_real_full_aliasparser_process_tree_readers_lease_cleanup_qualification": true,
+    "typedadapter_control_pass_does_not_replace_inactive_owner_approval_or_realstorage_preexec": true
+  },
+  "launcher_binding": {
+    "bytes": 7355,
+    "mode": "0o444",
+    "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/launch_controller_boundary_PURE_ROOT_ONLY_SOURCE_PREPARED_once2.py",
+    "sha256": "4eef6de54c7c91678987b9b9c6127f4a57645ea68f094e458009e5e110ca7266"
+  },
+  "original_census_binding": {
+    "bytes": 9278,
+    "mode": "0o600",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-once2-owned/original-controller-boundary-machine-census.json",
+    "sha256": "665f1d92e7ecb8b746983362729f11649d36d4d1ebd813c94af924d1b8cf2aba"
+  },
+  "original_child_terminal_binding": {
+    "bytes": 672,
+    "mode": "0o600",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-once2-owned/original-pure-terminal.json",
+    "sha256": "8b68709c037bdf7b5d6552a00651d3cc610477078f44b1a559fe5bab2806c785"
+  },
+  "original_master_binding": {
+    "bytes": 1550,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-controller30-reviewed-once2-execution/OWNERFINAL-root-original-controller30-pure-execution.json",
+    "sha256": "44e94497c62794dc48ca3fdeaf9dfafa341820ce486b346fda30fc75bc9fa310"
+  },
+  "original_master_source_binding": {
+    "bytes": 4844,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-reviewed-controller30-once2-original-master-v3-exact-contract.py",
+    "sha256": "9bdecf4e8cbbb9a9691d97481c9bbe9783179e63694e0da2ab205f10c444cce8"
+  },
+  "original_parent_terminal_binding": {
+    "bytes": 958,
+    "mode": "0o600",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-once2-owned/original-controller-boundary-parent-terminal.json",
+    "sha256": "b24120ad2a34b60c51f1e048e7bad3cde547dfafd71451822b22d613cceb9e37"
+  },
+  "original_release_binding": {
+    "bytes": 1220,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-controller30-reviewed-once2-execution/root-one-controller30-pure-once2-release.json",
+    "sha256": "c9fe1f0dd80ef8acfc4ab814abb6a93f612a207654509e0cfe4a91e4d0c46500"
+  },
+  "originals_immutable": {
+    "controller985f_adapter8dbc_launcher4eef_unchanged": true,
+    "masterV1_status_and_V2_absentkey_failures_before_anyrelease_or_control_retained_as_preexecution_history": true,
+    "no_ROOTsource_or_rawstatus_relabel": true,
+    "old142_pluscurrent161_bodies_bound": true,
+    "original28P2ERROR_FAIL": {
+      "bytes": 3795,
+      "mode": "0o400",
+      "path": "/workspace/engineering/controller30-original-ACTUALFAIL-independent-diagnosis/OWNERFINAL-independent-original-controller30-ACTUALFAIL-and-minimal-two-negative-fixture-proposal.json",
+      "sha256": "2a7e61f236db15ada4d3ddda355d8a3d0730ec58e1f0f3d1d9963c4ee97d12f8"
+    }
+  },
+  "prepared_source_owner": {
+    "bytes": 7758,
+    "mode": "0o400",
+    "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/OWNERFINAL-controller30-two-negative-fresh400-fixtures-once2-SOURCE-and-PURE-PREEXEC-NOTRUN.json",
+    "sha256": "e42de70a0c99a20d7783352c00df7c4ea32055dbc60a303becacd799c554fc0f"
+  },
+  "proof_binding": {
+    "bytes": 14603,
+    "mode": "0o400",
+    "path": "/workspace/engineering/controller30-two-fresh-negative-once2-independent-ACTUAL-review/private-original-controller30-census-two-mutants-and175authority-proof.json",
+    "sha256": "13179e512830cc373d6ab07f36f5b5eba435a687ee793b779714f2d97903807c"
+  },
+  "reviewer_constructor_observation": "Initial private receipt constructor had a SyntaxError before any execution/file creation; corrected named receipt construction changes no input/actual/test/source.",
+  "reviewer_execution": "Offline original captures/data source inspection and hashes only; no imports/tests/guards/adapter/storage/native/source changes.",
+  "schema": 1,
+  "scope": "PURE_SYNTHETIC_CONTROLLED_ADMISSION_FUNCTIONS_NOT_REAL_ENVIRONMENT_PRESERVATION_NATIVE_OR_FULL_ALIASPARSER",
+  "status": "GO_ORIGINAL_ONCE2_30_CONTROLLED_CONTROLLER_AND_ADAPTER_BOUNDARIES_ONLY",
+  "two_meaningful_negative_evidence": {
+    "both_original_runtime_tests_PASS_noPermissionError_or_genericerror_normalized": true,
+    "positive_admission_precedes_each_negative_in_verified411341_source": true,
+    "same_width23byte_bodypoison_mode400_newpath_oldexpectedSHA_and_originalbaseline_preserved": true,
+    "typed_mutant_onlyraw_status_SPOOFED_vs_original_PASS_PURE_CONTROLS_ONLY": true,
+    "typedowner_mode400_freshbodycorrectSHA_binding_reaches_exact_anchored_semantic_marker": true
+  }
+}

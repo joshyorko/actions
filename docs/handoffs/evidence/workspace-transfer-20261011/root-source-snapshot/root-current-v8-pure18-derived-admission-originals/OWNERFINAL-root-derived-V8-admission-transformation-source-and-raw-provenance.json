@@ -1,0 +1,49 @@
+{
+  "actual_binding": {
+    "bytes": 11842,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-current-v8-pure18-derived-admission-originals/OWNERFINAL-root-current-v8-PURE18-derived-admission-not-native-or-storage.json",
+    "sha256": "bc2d5ad9e53da28b41cc1ea05501239557444d7386423b8dc9d11468b0731e76"
+  },
+  "actual_preservation": "NOT_RUN",
+  "adapter_binding": {
+    "bytes": 4079,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/pure18_receipt_adapter_v8_SOURCE_PREPARED_v2_actual_receipt_schema.py",
+    "sha256": "8dbc69c8dd1d366d1e1dea97cb809613ff990e27ee9faacb3a9dfccb56a6c1b2"
+  },
+  "controller30_ACTUAL": {
+    "bytes": 10102,
+    "mode": "0o400",
+    "path": "/workspace/engineering/controller30-two-fresh-negative-once2-independent-ACTUAL-review/OWNERFINAL-independent-original-controller30-once2-ACTUAL-PURE30-GO.json",
+    "sha256": "7c3ef38e1d924bae7e0905370c9a619d1d86ab0537260995bdb69ff530e48657"
+  },
+  "native_or_storage_qualification": false,
+  "operation_release": "ABSENT",
+  "original_actual_independent_binding": {
+    "bytes": 10515,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v8-original-PURE18-independent-ACTUAL-review/OWNERFINAL-independent-original-first-five-v8-managed-Git-ACTUAL-PURE18-GO.json",
+    "sha256": "dd9fa8279c9503488acf753f6c4520ba201cd92a8f30168346ff9b32c4c3529d"
+  },
+  "original_census_binding": {
+    "bytes": 8089,
+    "mode": "0o600",
+    "path": "/workspace/engineering/first-five-v8-current9760-managed-Git-PURE18-once-owned/original-18-complete-machine-census.json",
+    "sha256": "28ba47b66bb90ebf73f8e4834b42005e417dfe73f9471538397d02c962518ba0"
+  },
+  "prepared_source_owner": {
+    "bytes": 9322,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/OWNERFINAL-first-five-v8-current9760-measured-managed-Git-SOURCE-PREEXECUTION-final-history-scope-NOTRUN.json",
+    "sha256": "485dc5ee1c67cb79b16fb9ea140626958b02ec77c91699ce62d307b7cefc4475"
+  },
+  "schema": 1,
+  "source_config_binding": {
+    "bytes": 47036,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v8_current9760_measured_managed_Git_PURE18_inputs_NOTRUN_v4_originalFAIL_and_historical_system_scope.json",
+    "sha256": "0d4423f45acce573da98b262613971e497a91a9415d61f59142182678897365b"
+  },
+  "status": "ROOT_DERIVED_V8_PURE18_ADMISSION_PENDING_INDEPENDENT_REVIEW"
+}

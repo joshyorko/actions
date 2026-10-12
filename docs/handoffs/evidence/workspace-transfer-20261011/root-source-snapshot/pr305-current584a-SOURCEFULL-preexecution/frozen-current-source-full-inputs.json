@@ -1,0 +1,129 @@
+{
+  "cached_toolkit_prefix": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534",
+  "capacity_floor_bytes": 1288490188,
+  "concrete_origin_packages": [
+    [
+      "actions",
+      "actions"
+    ],
+    [
+      "actions-http-helper",
+      "actions_http"
+    ],
+    [
+      "devutils",
+      "devutils.invoke_utils"
+    ],
+    [
+      "work-items",
+      "actions.work_items"
+    ],
+    [
+      "action_server",
+      "actions.server._rcc_runtime_adapter"
+    ]
+  ],
+  "expected_activation_exports": {
+    "ACTIONS_CLOUD_ROOT": "/workspace/actions-cloud",
+    "ACTIONS_HOME": "/workspace/actions-cloud/actions-home",
+    "ACTIONS_RUNTIME_TEST_PYTHON": "/workspace/actions/action_server/.venv/bin/python",
+    "BUILDX_CONFIG": "/workspace/actions-cloud/cache/buildx",
+    "GOCACHE": "/workspace/actions-cloud/cache/go-build",
+    "GOMAXPROCS": "2",
+    "GOPATH": "/workspace/actions-cloud/cache/go",
+    "PLAYWRIGHT_BROWSERS_PATH": "/workspace/actions-cloud/cache/playwright",
+    "POETRY_CACHE_DIR": "/workspace/actions-cloud/cache/pypoetry",
+    "POETRY_CONFIG_DIR": "/workspace/actions-cloud/config/pypoetry",
+    "POETRY_NO_INTERACTION": "1",
+    "PYTEST_XDIST_AUTO_NUM_WORKERS": "2",
+    "ROBOCORP_HOME": "/workspace/actions-cloud/robocorp",
+    "ROBOTS_HOME": "/workspace/actions-cloud/robots-home",
+    "UV_CACHE_DIR": "/workspace/actions-cloud/cache/uv",
+    "XDG_CACHE_HOME": "/workspace/actions-cloud/cache",
+    "XDG_CONFIG_HOME": "/workspace/actions-cloud/config",
+    "npm_config_cache": "/workspace/actions-cloud/cache/npm"
+  },
+  "forbidden_actual_operator_exports": [
+    "ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY",
+    "ACTIONS_REAL_RCC_ARTIFACT_TEST",
+    "ACTIONS_RUNTIME_RCC_PROVIDER",
+    "ACTIONS_RUNTIME_RCC_BINARY",
+    "ACTIONS_RUNTIME_RCC_TEST_PACKAGE_CACHE_CONFIG",
+    "PYTHONOPTIMIZE"
+  ],
+  "head": "584a7ed0cb7112fe6691103931c007b5cc0be5f3",
+  "implementation_bindings": [
+    {
+      "bytes": 1142,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current584a-SOURCEFULL-preexecution/current_source_full_body.py",
+      "sha256": "1ab596f3b5424793af3c2d07777efa806a4735186d9af65c43dbde80f94bd984"
+    },
+    {
+      "bytes": 3324,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current584a-SOURCEFULL-preexecution/current_source_prepost_guard.py",
+      "sha256": "5268aeb3ab425794a991d22cd2b6894f84cd43174076f70064c3671fc553a08a"
+    },
+    {
+      "bytes": 3651,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current584a-SOURCEFULL-preexecution/launch_current_source_full_once.py",
+      "sha256": "69b4f9b920c324626edcd9980e51a9a4a2cc7e7a3a6d8fd82afe04d7e8683ae8"
+    }
+  ],
+  "original_native_config": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/FROZEN-control3-current-b614-actual-config-v2.json",
+  "prepared_environment_and_RCC_bindings": [
+    {
+      "bytes": 752,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305/actions/.venv/pyvenv.cfg",
+      "sha256": "2a3891386c700dece6c21b8ba80ea8d7fc514d8eade9a10374cab43dc0bd693f"
+    },
+    {
+      "bytes": 771,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305/actions-http-helper/.venv/pyvenv.cfg",
+      "sha256": "743f2feb6a1fac576fc6313ebf0bbdf5484378bdf21433fe2cc134a8775d563f"
+    },
+    {
+      "bytes": 763,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305/devutils/.venv/pyvenv.cfg",
+      "sha256": "868a9122466b928c47f90be30f1a01e28f73d5b5c586b95d57e177c97aa72a6c"
+    },
+    {
+      "bytes": 761,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305/work-items/.venv/pyvenv.cfg",
+      "sha256": "7894fbdd57bbb2c2cfca8a74fab61f425333b36c66b95ebabc200aeb7c678fb6"
+    },
+    {
+      "bytes": 761,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305/action_server/.venv/pyvenv.cfg",
+      "sha256": "eb5e96f842624fb2dd3c1a37c755f65dbcfc4eadb4697693b5e1213a91696a8a"
+    },
+    {
+      "bytes": 22282402,
+      "mode": "0o700",
+      "path": "/workspace/actions-cloud/bin/rcc",
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+    },
+    {
+      "bytes": 22282402,
+      "mode": "0o711",
+      "path": "/workspace/engineering/pr305/action_server/src/actions/server/bin/rcc-18.19.3",
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+    }
+  ],
+  "source_LIGHT": {
+    "bytes": 14931,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/OWNERFINAL-current584a-ordinary-e3-source-LIGHT-full-and-actual-HOLD.json",
+    "sha256": "5835c7c1b57493d784ea39cf0c037253460b04b3b3c9c4fa48fb1db1a887c387"
+  },
+  "source_inventory": "/workspace/engineering/pr305-current-e3c-source-LIGHT/private-current-584a-complete-source-body-mode-inventory.json",
+  "source_root": "/workspace/engineering/pr305",
+  "tree": "5b4bd2f10c35d0bc7b9d85037f211fa55c47a282"
+}

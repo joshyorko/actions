@@ -1,0 +1,77 @@
+{
+  "ROOT_authority": "Root explicitly approved exact formatter-only child and ONE fresh sourceLIGHT; not095retry. Root18:11 steer LIGHT unique workspace-owned ABSENT basetemps to preserve tmp floor; ALL/noinheritedADDOPTS.",
+  "body": "Before120TERM10;LIGHT480TERM10;alwayspost120TERM10;no installs/newRCC/native",
+  "frozen_input_bindings": [
+    {
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/frozen-current8d49-source-LIGHT-inputs-v3.json",
+      "bytes": 12996,
+      "sha256": "81f52920b50e67619b3bb418a7c1034a2106ec52f4badd71b9d85e29b7376820",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/private-current8d49-source-body-mode-inventory-v3.json",
+      "bytes": 378602,
+      "sha256": "9843e9035fd7bfdf9577b9ba08f108365fbbc336ca00337f99328599b6204677",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/current8d49_readonly_source_and_storage_guard_v3.py",
+      "bytes": 7234,
+      "sha256": "2012ddc87e897c14171d18dae2fa56c49458d0b14831eeb745c4ff08f9fa65ae",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/current8d49_cached_source_LIGHT_body_v3.py",
+      "bytes": 2846,
+      "sha256": "6deb5e5a38495f0d83e5dc020c4cb0c722292cc4aec898f66830fd6904590884",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/launch_current8d49_source_gate_once_v3.py",
+      "bytes": 4780,
+      "sha256": "c49bf4bc67271a09c07a5aefd313ab390cb69dbad56534b0fd55d514ee00c5b9",
+      "mode": "0o444"
+    },
+    {
+      "bytes": 885,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-pr308-e2-and-startup-probe-adoption/OWNERFINAL-root-ordinary-e2-and-startup-probe-source-adoption.json",
+      "sha256": "edf047d2aeaa3b74b42cfaa3879146dfee4ee740bb9797f0f6d47c821bd39107"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current095-configured-Ruff-formatter-only-correction/root-approved-formatter-only-normal-child-source-adoption.json",
+      "bytes": 745,
+      "sha256": "edf034c9a880e625353a25d24d97400c24c04b2ffd40d8942bbb001d37c17f92",
+      "mode": "0o400"
+    }
+  ],
+  "full": "NOT_AUTHORIZED",
+  "original_preflight_failure": {
+    "bytes": 712,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/original-LIGHT-launcher-pre-gate-TypeError-disposition.json",
+    "sha256": "1174b8d0e679194baf3b42ff06f4fc4f831f83c1d5dc570424e00f7b97bce9c9"
+  },
+  "outer_argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "900s",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/launch_current8d49_source_gate_once_v3.py",
+    "LIGHT",
+    "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/root-inline-one-current8d49-LIGHT-authorization-v3.json",
+    "<ACTUAL_SHA256_BELOW>"
+  ],
+  "pytest": "Separate ABSENT children; fresh once workspace-owned0700parent outside numbered sharedparent; ALL; noinheritedADDOPTS; normalconftest",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "status": "CURRENT8D49_SOURCE_LIGHT_FRESH_SUBJECT_ROOT_ONE_INLINE_AUTHORIZED",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none",
+  "original_SOURCE_LIGHT_FAIL": {
+    "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/OWNERFINAL-current095-original-SOURCE_LIGHT-formatter-FAIL.json",
+    "bytes": 3791,
+    "sha256": "41fe5885ee867622ea9f822711ab018f54f707a318fa0e561f539bfbb3cff5a3",
+    "mode": "0o400"
+  }
+}

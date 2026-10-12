@@ -1,0 +1,231 @@
+{
+  "ROOTrelease": "NONE",
+  "capture": "2026-10-11T20:42:12.113374+00:00",
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "durable_learning": "Copy-aware catalog identity/content oracle and lock-aware warmup control; immutable snapshot prevents alias masking; old timeout not upgraded.",
+    "evidence": "Original catalog identity traceback in two cases; original seventh warmup callback entry without return; exact server copy(value) and threading.Lock/on_reload/generation source.",
+    "exact_delta": {
+      "bytes": 1219,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/canonical-reload-control-copy-and-lock-boundaries-proposed.patch",
+      "sha256": "5584b00182d7504808065195f3373f80eb450fa5370811d434d66ad0c5b9a7d5"
+    },
+    "remaining_uncertainty": "Corrected baseline, snapshot sensitivity controls and all nine mutant assertions have not executed; real native reload/drain/provider remains unqualified.",
+    "stale_or_ambiguous_guidance_removed": "No previous specific oracle/lock boundary existed; no product rollback defect inferred from private control failure."
+  },
+  "exact_scope": {
+    "all_original_owner_rows_exact": 14,
+    "catalog_contract": "Outer object identity exempt; exact field keys, nested mutable objects/containers/callables/scalar identities and frozen values unchanged. Snapshot consists only of tuples/scalars/type references with no mutable payload alias. Unsupported leaf fails closed.",
+    "changed_original_definitions_only": [
+      "catalog_case",
+      "assert_last_good",
+      "test_candidate_warmup_precedes_generation_switch"
+    ],
+    "current_adapter_original_prefix": {
+      "bytes": 84689,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
+      "sha256": "1f1156908b523012c40fe95a2063764dbb11696a927e0330dc8d8b28c5de6ee7"
+    },
+    "lock_contract": "Original locked() nonblocking witness; _generation read under held lock; public property read only after return.",
+    "native": "NOT_RUN",
+    "one_added_snapshot_helper": "_catalog_identity_snapshot",
+    "original_byte_prefix_bytes": 84689,
+    "original_named_cases_exact_order": [
+      "test_candidate_preparation_precedes_real_sqlite_writer",
+      "test_publication_follows_actual_sqlite_commit",
+      "test_staged_pool_keeps_original_routes_until_commit",
+      "test_failed_warmup_restores_original_idle_and_catalog",
+      "test_actual_commit_failure_restores_original_generation_token",
+      "test_running_old_handle_drains_only_after_new_publication",
+      "test_candidate_warmup_precedes_generation_switch",
+      "test_rejected_candidate_cleanup_preserves_last_good",
+      "test_repaired_candidate_publishes_without_admitting_failed_generation"
+    ],
+    "original_private_source": {
+      "bytes": 14786,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/test_current_managed_reload_sqlite_pool_barriers.py",
+      "sha256": "c148bd528f8306e638054df91dfbf915022eaf30d3e123ff845adbeae6b209eb"
+    },
+    "original_prospective_append": {
+      "bytes": 99477,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/prospective-current-test_rcc_runtime_adapter-with-nine-servicefree-controls.py",
+      "sha256": "5a87636917a2d555c2e0aa5757336ef0db4c047e2f4777d63442a05c240700f5"
+    },
+    "original_whole_AST_prefix_statements": 82,
+    "other_original_definition_ASTs": "EXACT",
+    "product_source_changes": "NONE",
+    "prospective_successor": {
+      "bytes": 101120,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/prospective-current-test_rcc_runtime_adapter-with-corrected-nine-controls-v2.py",
+      "sha256": "0bca477b22c114a6fbbc904a19e6645794949f4eec6e181e5cb9e34510c864d9"
+    },
+    "schema": 1,
+    "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+    "standalone_successor": {
+      "bytes": 16429,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py",
+      "sha256": "a577d21615877bc19a88ca141e5c8ac7c9779120abf7f86b7a6ec6d2367d5da2"
+    },
+    "tests": "NOT_RUN",
+    "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+    "unchanged_original_append_separator_bytes": 2
+  },
+  "mutants": "NOT_RUN",
+  "native": "NOT_RUN",
+  "new_bindings": [
+    {
+      "bytes": 16429,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py",
+      "sha256": "a577d21615877bc19a88ca141e5c8ac7c9779120abf7f86b7a6ec6d2367d5da2"
+    },
+    {
+      "bytes": 101120,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/prospective-current-test_rcc_runtime_adapter-with-corrected-nine-controls-v2.py",
+      "sha256": "0bca477b22c114a6fbbc904a19e6645794949f4eec6e181e5cb9e34510c864d9"
+    },
+    {
+      "bytes": 3226,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/private-original-nine-to-catalog-lock-successor-v2.patch",
+      "sha256": "a239969785e7b640e8948f355cbffbdb5a555dcde73ec764e68031248bea0506"
+    },
+    {
+      "bytes": 16944,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/prospective-current-adapter-corrected-nine-append-only-v2.patch",
+      "sha256": "8a942ac5ecd5f9560ca54319d0a20ef1f5badeea9aa15bb92a436c3e3cb7c66f"
+    },
+    {
+      "bytes": 2032,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/corrected-nine-baseline-first-and-identity-sensitivity-plan-NOTRUN.json",
+      "sha256": "a9fe540805e18719d5c30f919c47b62b214f2ef53855d01f2f35779863169913"
+    },
+    {
+      "bytes": 3253,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/private-corrected-source-structural-scope-proof-NOTRUN.json",
+      "sha256": "f5de5b831fe037f1204bca3d78e337bd1cb9541857e2dbe6918e50c333df57fa"
+    },
+    {
+      "bytes": 1219,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/canonical-reload-control-copy-and-lock-boundaries-proposed.patch",
+      "sha256": "5584b00182d7504808065195f3373f80eb450fa5370811d434d66ad0c5b9a7d5"
+    }
+  ],
+  "original_actual_failure": {
+    "bytes": 16829,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-nine-real-original-baseline-independent-diagnosis/OWNERFINAL-independent-original-nine-baseline-failure-and-private-control-boundary.json",
+    "sha256": "6288fb4a6d296770a1c930ae73b0854e103378417f250a00a553c7c1bf3a25e2"
+  },
+  "original_bound_rows": [
+    {
+      "bytes": 28217,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_actions_import.py",
+      "sha256": "57ad235e30fdd84c763f84efd7ccdd8514d620d5b5cfff05ac1051f60ceefad3"
+    },
+    {
+      "bytes": 58538,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_actions_process_pool.py",
+      "sha256": "3552bf39d0dc93f94ed3a4ab056de870ae460ed709f36d3d3a37dc043c349da8"
+    },
+    {
+      "bytes": 36123,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "sha256": "c1884571a572277beef50e359f8b5e71abf593e1ebdee4bea2e47290c8da81f2"
+    },
+    {
+      "bytes": 35232,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_server.py",
+      "sha256": "0954b062ba7931609dddfd8b1f068dbac83967691e1194b6ac250a51befa20ff"
+    },
+    {
+      "bytes": 10038,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-independent-SOURCEFULL-actual-review/OWNERFINAL-independent-current8d49-original-configured-SOURCEFULL-and-retained-ROOTpost-supplement-review.json",
+      "sha256": "073e235afffab50dee204bcaae236e77ceb8e23644db15a90a0e56d48dc8dca9"
+    },
+    {
+      "bytes": 1021,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/canonical-current-source-reload-drain-transaction-scope-proposed.patch",
+      "sha256": "8354390b30343aa9a57a976aa5244e75068f8c59fc604f074af9e18110743856"
+    },
+    {
+      "bytes": 2698,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/current8d49-original-reload-pool-import-adapter-function-AST-equality-proof.json",
+      "sha256": "ab3c574e6685d227f197017eea5e4bcbfe446fda1e9e87c43e22539de9fdcc80"
+    },
+    {
+      "bytes": 4493,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/nine-real-SQLite-pool-barrier-baseline-and-private-mutant-RED-plan-NOTRUN.json",
+      "sha256": "1c33ec727106e5a3b686571011ab05dbc7259f70bacca773acdf627dd67e0a33"
+    },
+    {
+      "bytes": 1966,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/current8d49-reload-drain-recontext-implementation-and-admission.md",
+      "sha256": "8fd57f9442106b711dc724ee46201cd0b515ce2a8126825d619220a0f263e426"
+    },
+    {
+      "bytes": 24118,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-persistent-two-path-private-recontext/frozen-current8d49-two-path-persistent-fixture-source.patch",
+      "sha256": "ec23125cfcf2ca2af3e1c7e08871bb1f198e0df1db04e9be62d61b89b755b158"
+    },
+    {
+      "bytes": 17155,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-managed-reload-drain-source-packet/OWNERFINAL-current-b614-managed-reload-and-generation-drain-three-path-source-packet.json",
+      "sha256": "5978b9cf33e096f43aaa5d0a0f6b319a68c715ca4085edc5f8ccd71eaa38c1e9"
+    },
+    {
+      "bytes": 10406,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-persistent-recontext-independent-review/OWNERFINAL-independent-private-current8d49-persistent-recontext-SOURCE_ONLY-and-logging-HOLD.json",
+      "sha256": "87ce7c08689988b43a9f563b2a5a26611397e0547694b67f2c9f01d7306cc1af"
+    },
+    {
+      "bytes": 14786,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/test_current_managed_reload_sqlite_pool_barriers.py",
+      "sha256": "c148bd528f8306e638054df91dfbf915022eaf30d3e123ff845adbeae6b209eb"
+    },
+    {
+      "bytes": 99477,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/prospective-current-test_rcc_runtime_adapter-with-nine-servicefree-controls.py",
+      "sha256": "5a87636917a2d555c2e0aa5757336ef0db4c047e2f4777d63442a05c240700f5"
+    }
+  ],
+  "original_prepared_owner": {
+    "bytes": 6730,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/OWNERFINAL-current8d49-managed-reload-drain-private-source-and-nine-real-controls-PREPARED-NOTRUN.json",
+    "sha256": "faf0d846ba7e1f240dccb1b6e77ccbba23e36379010bf9ab8abf6c4e6221211f"
+  },
+  "product_adoption": "NONE",
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_leaves": 1440,
+  "status": "PRIVATE_CORRECTED_NINE_SOURCE_PREPARED_NOT_RUN_PENDING_INDEPENDENT_GO_AND_ROOT_RELEASE",
+  "tests": "NOT_RUN",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none"
+}

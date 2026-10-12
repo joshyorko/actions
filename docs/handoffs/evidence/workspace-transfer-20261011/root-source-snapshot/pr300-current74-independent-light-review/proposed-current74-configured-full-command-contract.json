@@ -1,0 +1,38 @@
+{
+  "status": "PROPOSED_CURRENT74_COMMAND_CONTRACT__ROOT_BIND_AND_RELEASE_REQUIRED",
+  "subject": {
+    "head": "74beef4d220c3a1e8f983cecd42b9bb84ac75e79",
+    "tree": "2238ed312babba9fd5ad89a3a1cc581ca6ad2dcf",
+    "target": "a0d258a16095b95b1bf9000cb1201cddfaff4779"
+  },
+  "cwd": "/workspace/engineering/pr300",
+  "argv": [
+    "env",
+    "PYTEST_XDIST_AUTO_NUM_WORKERS=2",
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "600s",
+    "/workspace/actions-cloud/bin/rcc",
+    "task",
+    "script",
+    "-r",
+    "developer/toolkit.yaml",
+    "--",
+    "python",
+    "-c",
+    "import os,subprocess\nfrom pathlib import Path\nimport toolkit\nroot=toolkit.REPOSITORY_ROOT\nassert root==Path(\"/workspace/engineering/pr300\")\nassert subprocess.check_output([\"git\",\"rev-parse\",\"HEAD\"],cwd=root).decode().strip()==\"74beef4d220c3a1e8f983cecd42b9bb84ac75e79\"\nassert subprocess.check_output([\"git\",\"rev-parse\",\"HEAD^{tree}\"],cwd=root).decode().strip()==\"2238ed312babba9fd5ad89a3a1cc581ca6ad2dcf\"\nassert subprocess.check_output([\"git\",\"status\",\"--porcelain\"],cwd=root)==b\"\"\nos.environ[\"PYTEST_XDIST_AUTO_NUM_WORKERS\"]=\"2\"\ntoolkit.poetry(\"action_server\",\"run\",\"invoke\",\"test-not-integration\")\n"
+  ],
+  "python_code_sha256": "c7d87f5194138a8a7d7792660f57c6594e1956cb8e453a2d03d8b55ec80d393d",
+  "configured_command_unchanged": [
+    "action_server",
+    "run",
+    "invoke",
+    "test-not-integration"
+  ],
+  "worker_limit": 2,
+  "capacity_floor_bytes": 1200000000,
+  "execution_not_performed": true,
+  "historical_784_launcher_reuse": "PROHIBITED_UNCHANGED_HEAD_GUARD",
+  "preexecution_requirement": "Root binds this exact command or equivalent owner-frozen current74 launcher, rechecks prepared environment/current refs/free capacity and serialization before distinct release."
+}

@@ -1,0 +1,80 @@
+{
+  "authoring_constructor": {
+    "bytes": 6807,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution/construct_subject_metadata_successors_v2.py",
+    "sha256": "3928a345163fee93512f380b3e17a35715abb29ee3b8aa21d5fb2cef6c570661"
+  },
+  "documentation_improvement": {
+    "both_parent_block_evidence": {
+      "bytes": 3503,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/verified-both-parent-canonical-guide-block-preservation.json",
+      "sha256": "9b2882183e6bf0c0c88c99ca5a0c225a6540e0ba9d068d1809d8e59a9f3d4855"
+    },
+    "canonical_files_reused": [
+      "docs/skills/repository-operations.md",
+      "docs/skills/provenance-observability.md"
+    ],
+    "durable_learning": "Bind current source/control and receipt identities separately; retain original hash-bound metadata and use named successors for corrected subjects without relabeling execution history.",
+    "exact_accepted_parent_delta": {
+      "bytes": 3547,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/exact-imported-a54-canonical-guide-delta.patch",
+      "sha256": "c6126de39cc685aba4aa7b1de3b9244d06922077576daebb91599af2d001454f"
+    },
+    "remaining_uncertainty": "SourceFULL is still NOT_RUN, requires independent review, distinct root adoption/release, serialized slot and fresh capacity. No current native/browser/private/release authority.",
+    "stale_ambiguity_removed": "Copied CURRENT1299 and PR282c35 historical labels replaced by exact PR3055306/a54 and original584/2cd287/88f103 identities only in named successors."
+  },
+  "exact_historical_PR305584_bindings": [
+    {
+      "bytes": 14931,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/OWNERFINAL-current584a-ordinary-e3-source-LIGHT-full-and-actual-HOLD.json",
+      "sha256": "5835c7c1b57493d784ea39cf0c037253460b04b3b3c9c4fa48fb1db1a887c387"
+    },
+    {
+      "bytes": 8226,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current584a-SOURCEFULL-preexecution/OWNERFINAL-current584a-managed-configured-SOURCEFULL-preexecution-proposal.json",
+      "sha256": "2cd287244d83b2388449794bb4ea8205ca95329c8908af8ed288c91207097718"
+    },
+    {
+      "bytes": 21234,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr305-current584a-independent-LIGHT-preexecution-review/OWNERFINAL-independent-current584a-SOURCE-LIGHT-and-managed-full-preexecution-review.json",
+      "sha256": "88f10353640947345b210faea05a9574da130dfbb74c0ee542ddb5a76286e25f"
+    }
+  ],
+  "named_correct_current_LIGHT": {
+    "bytes": 18366,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/OWNERFINAL-current5306-ordinary-a54-source-LIGHT-subject-metadata-v2.json",
+    "sha256": "896ffb6299cf9e7fca9adacc187115d43057be559226b8cfcd4b99411f9324ee"
+  },
+  "named_correct_current_full": {
+    "bytes": 11869,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution/OWNERFINAL-current5306-managed-configured-SOURCEFULL-preexecution-subject-metadata-v2.json",
+    "sha256": "0993125d3ea8c732a7f851e5d3c20df5f71aa1e318bc887c449c1bfd1f9ee623"
+  },
+  "schema": 1,
+  "source_gate_execution": "NOT_RUN",
+  "status": "OWNERFINAL_METADATA_ONLY_SUBJECT_CORRECTION_COMPLETE_NO_EXECUTION",
+  "total_new_successor_JSON_bytes": 30235,
+  "unchanged_all14_full_input_bindings": 14,
+  "unchanged_all38_LIGHT_bindings": 38,
+  "unchanged_original_LIGHT": {
+    "bytes": 17431,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/OWNERFINAL-current5306-ordinary-a54-source-LIGHT-full-and-actual-HOLD.json",
+    "sha256": "2c277550c5475cb6c9698dfbe092dd373a5398b553769f68a230451c96c1ca14"
+  },
+  "unchanged_original_full": {
+    "bytes": 8597,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution/OWNERFINAL-current5306-managed-configured-SOURCEFULL-preexecution-proposal.json",
+    "sha256": "fbdaba2989e187ad11547f56ff0107092a479d4592aaa48b9170cc7a2339e553"
+  },
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,28 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -3280,6 +3280,25 @@
+ 
+ ### Live pull-request base identity
+ 
++After a target advances, a PR payload can retain both its old base SHA and an
++old synthetic merge commit. Authenticate that commit's ordered parents and
++tree, then compute the complete ordinary union against the live named target;
++a green old-head rollup does not validate the new union. A clean prospective
++merge is source availability only until it is committed, independently reviewed
++and tested on its exact source/control tuple.
++
++Derive expected pull-request jobs from the prospective diff against the live
++target and the combined workflow's branch/path filters. An imported generator
++change identical to the target is absent from that PR diff; do not demand an
++untriggered Core job or omit a triggered artifact job. The owning operational
++guide itself triggers Runtime package-artifact PR CI. Reconcile each selected
++workflow's complete matrix, including a publisher job created only after its
++build dependencies finish; treat Copilot setup as a separate control-plane job.
++Native input parity and five unchanged acceptance tests remain scoped source
++evidence, not new execution. Changes or new production modules invalidate old
++artifact qualification even when selected tests still match. Refresh a stacked
++consumer only after its actual dependency merge is accepted and read back.
++
+ Reconcile the complete exact-head check-run inventory, commit statuses and
+ workflow-run inventory before merge admission. Page each endpoint until
+ exhausted and count checks, jobs and runs separately. A successful workflow can

@@ -1,0 +1,20 @@
+{
+  "single_authorized_full": true,
+  "exit_code": 0,
+  "passed": 1242,
+  "skipped": 13,
+  "warnings": 15,
+  "duration_seconds": 143.87,
+  "workers": 2,
+  "RCC_gateway_SUCCESS": true,
+  "source_head": "7840057a8b055576d11d339d8c0fbb738927a491",
+  "source_tree": "10e09d88027ca4fea512ff06c57efaab95755ffb",
+  "original_private_log": {
+    "path": "/workspace/engineering/pr300-actual299-refresh/full-configured-runtime-source.log",
+    "bytes": 319769,
+    "sha256": "b3db4a1fe6edbd3ee1d1734272bbd5aa7637a2537db2dabe3f47183ba90f0569",
+    "mode": "0o600"
+  },
+  "no_native_or_manual_actual_gate_claim": true,
+  "scope": "Configured invoke test-not-integration; original skipped and excluded opt-ins remain unqualified."
+}

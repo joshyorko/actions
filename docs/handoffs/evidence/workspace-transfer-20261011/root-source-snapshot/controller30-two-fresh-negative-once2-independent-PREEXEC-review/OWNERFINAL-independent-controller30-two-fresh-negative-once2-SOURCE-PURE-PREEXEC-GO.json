@@ -1,0 +1,185 @@
+{
+  "ROOT_contract_binding": {
+    "bytes": 5055,
+    "mode": "0o400",
+    "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/strict600-controller30-fresh-once2-ROOT-release-and-concrete-command-NOTRUN.json",
+    "sha256": "fcc9df73175a497e7219ca6bf8a6bd8059768b622ed58629f7c5576754fb27f2"
+  },
+  "ROOT_parent_adoption_mandatory": {
+    "ROOTself_and_enclosingargv_review_bindings_checked_beforealwayspost": true,
+    "ROOTwhole600_enclosure_and_captures_budgeted_no_hidden_unbounded_launch": "60cooperativebefore+200childfallback+60cooperativepost=320 leaves280 declared outer reserve; any additional externalguard/capture envelopes must fit independently boundROOT600 budget. No inner180TERM10/200 change.",
+    "after_actual_require_true30runtimeuniqueIDs_allPASSED_0F0E0SKIP_own5origins_not_ASTcount": true,
+    "before_and_alwayspost_rehash_realrelease_thisreview_launcher_config161_alloriginalauthority_rows_on_alloutcomes": true,
+    "freshoutcomes_rawstdout_stderr_childterminal_machinecensus_fsynced_before_admission": true,
+    "hardkill_of_child_cannot_guarantee_childfinally_parentretains_originalouterterminal": true,
+    "never_admitPermissionError_or_genericnonzero_as_intendedsemanticpoison": true,
+    "reject_inheritedADDOPTS_OPT_HOME_PATH_operator_overrides_before_managed18_PATH19_activation": true,
+    "serialize_no_otherheavy_storage_native_or_source_mutation": true
+  },
+  "actual_scope": "NOTRUN_ONCE2_NO_COUNTS_PROMOTED_OR_OLD28P2ERROR_NORMALIZED",
+  "adapter_binding": {
+    "bytes": 4079,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/pure18_receipt_adapter_v8_SOURCE_PREPARED_v2_actual_receipt_schema.py",
+    "sha256": "8dbc69c8dd1d366d1e1dea97cb809613ff990e27ee9faacb3a9dfccb56a6c1b2"
+  },
+  "budgets": {
+    "ROOT_KILL": 10,
+    "ROOT_outer_reserve": 280,
+    "before_guard_cooperative": 60,
+    "child_KILL": 10,
+    "child_TERM": 180,
+    "child_fallback": 200,
+    "no_real_archive_or_native_budget_change": true,
+    "post_guard_cooperative": 60,
+    "strict_ROOT_TERM": 600
+  },
+  "config_binding": {
+    "bytes": 113923,
+    "mode": "0o400",
+    "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/FROZEN-controller-boundary30-two-fresh-negative-fixtures-once2-inputs-NOTRUN.json",
+    "sha256": "9fd1bbc6f4b8cb64695457977071b510192e1c8cbd6b3727a39b931cb710d887"
+  },
+  "controller_binding": {
+    "bytes": 12753,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/root_once_first_five_current9760_SOURCE_PREPARED_v3_strict_V8_adapter.py",
+    "sha256": "985f497f83b4acecdf9ede7220da3237599ca210016da7443351c00787721ef6"
+  },
+  "controls_binding": {
+    "bytes": 21990,
+    "mode": "0o444",
+    "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/test_controller_boundaries_two_fresh_negative_fixtures_SOURCE_PREPARED_once2.py",
+    "sha256": "411341f94a58fb0bb37d957ce4922e320a894a5dbe6832f5d890bcdd8aa30229"
+  },
+  "decision": "GO_CONTROLLER_BOUNDARY_PURE_PREEXECUTION_ONLY",
+  "documentation": {
+    "delta": "No canonical file mutation. Reuse frozen fixture preservation, original rawfailure retention, selectedaddress/source-schema and exact semantic-negative boundary lessons. Fresh400poisons target body/typedowner guards while leaving immutable originals intact.",
+    "evidence": [
+      {
+        "bytes": 3795,
+        "mode": "0o400",
+        "path": "/workspace/engineering/controller30-original-ACTUALFAIL-independent-diagnosis/OWNERFINAL-independent-original-controller30-ACTUALFAIL-and-minimal-two-negative-fixture-proposal.json",
+        "sha256": "2a7e61f236db15ada4d3ddda355d8a3d0730ec58e1f0f3d1d9963c4ee97d12f8"
+      },
+      {
+        "bytes": 2331,
+        "mode": "0o400",
+        "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/exact-two-negative-fixture-only-source-delta.patch",
+        "sha256": "e082753c78af7be37f35f933949907dba60399e673f91952e059ac00e6d3f38d"
+      },
+      {
+        "bytes": 2997,
+        "mode": "0o400",
+        "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/exact-two-negative-method-AST-all-other28-and-original-controller-adapter-profile-proof-NOTRUN.json",
+        "sha256": "b3b6198ef3775dfa4942f38ad40b78be80abbf3435401056b45d8d23078fc3ed"
+      }
+    ],
+    "stale_ambiguity_removed": "Original28P2ERROR remains failure. Freshonce2 is a new source-bound prospective gate, not repaired historicaloutput.",
+    "uncertainty": "Controls and launcher not executed by reviewer; futureROOT30pass and externalparent original captures required.",
+    "upstream_disposition": "none"
+  },
+  "exact_ROOT_argv_TEMPLATE": [
+    "/usr/bin/timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "600s",
+    "bash",
+    "-c",
+    "source /workspace/actions-cloud/activate.sh && export PATH=\"/workspace/actions-cloud/bin:/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\" && export PYTHONDONTWRITEBYTECODE=1 && exec /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12 -B -u /workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/launch_controller_boundary_PURE_ROOT_ONLY_SOURCE_PREPARED_once2.py --root-release \"$1\" --root-release-sha256 \"$2\"",
+    "controller-boundary-pure30-once2",
+    "/workspace/engineering/root-controller30-reviewed-once2-execution/root-one-controller30-pure-once2-release.json",
+    "ROOT_RELEASE_SHA256_FROM_REAL_ROOT_GRANT"
+  ],
+  "launcher_binding": {
+    "bytes": 7355,
+    "mode": "0o444",
+    "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/launch_controller_boundary_PURE_ROOT_ONLY_SOURCE_PREPARED_once2.py",
+    "sha256": "4eef6de54c7c91678987b9b9c6127f4a57645ea68f094e458009e5e110ca7266"
+  },
+  "meaningful_two_negative_delta": {
+    "fixtures_only": "Synthetic400files, mockcontrolledGittransport, no actualenvapproval, archivalmain or native invocation",
+    "original_fixture_file_helper_actualmode_argument": true,
+    "test_storage_changed_protected_body": "Positive fixture_admission/admitted first; freshprotected-body-poison.json mode400 retains original bytes width/oldexpectedSHA/mode and only changes physical path. Content synthetic\u2192poisoned! samewidth proves bodydigest guard without permission or length oracle. Sealed oldbody notrewritten.",
+    "test_storage_typed_PASS_owner_cannot_self_certify": "Positive admission first; freshtyped-derived-owner-poison.json mode400 correct newbody binding/hash preserves onlyraw_status=SPOOFED poison, refreshed syntheticROOTrelease; exact anchored TYPED_PURE18_OWNER_NOT_DERIVED_FROM_ORIGINALS AssertionError required, not generic error admission."
+  },
+  "original_ACTUALFAIL_preserved": {
+    "bytes": 3795,
+    "mode": "0o400",
+    "path": "/workspace/engineering/controller30-original-ACTUALFAIL-independent-diagnosis/OWNERFINAL-independent-original-controller30-ACTUALFAIL-and-minimal-two-negative-fixture-proposal.json",
+    "sha256": "2a7e61f236db15ada4d3ddda355d8a3d0730ec58e1f0f3d1d9963c4ee97d12f8"
+  },
+  "original_owner": {
+    "bytes": 8399,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/OWNERFINAL-controller-V8-original-actual-adapter-and-30-boundary-SOURCE-PURE-PREEXEC-final-NOTRUN-v2.json",
+    "sha256": "06b8f1d6bf52a6a13ecce62820cc2e5b6ae2bd961027268cdc51fa3dec3adeb2"
+  },
+  "owner_binding": {
+    "bytes": 7758,
+    "mode": "0o400",
+    "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/OWNERFINAL-controller30-two-negative-fresh400-fixtures-once2-SOURCE-and-PURE-PREEXEC-NOTRUN.json",
+    "sha256": "e42de70a0c99a20d7783352c00df7c4ea32055dbc60a303becacd799c554fc0f"
+  },
+  "required_ROOT_release": {
+    "bind_exact_this_new400review_cfg9fd_launcher4eef_and_owner_source_rows": true,
+    "decision": "RELEASE_ONE_CONTROLLER_BOUNDARY_PURE_QUALIFICATION_ONLY",
+    "no_old_consumedrelease_replay": true,
+    "path": "/workspace/engineering/root-controller30-reviewed-once2-execution/root-one-controller30-pure-once2-release.json",
+    "regular_nosymlink600_UIDGID1000_resolving700_ownedparent": true,
+    "shape": {
+      "config_binding": {
+        "bytes": 113923,
+        "mode": "0o400",
+        "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/FROZEN-controller-boundary30-two-fresh-negative-fixtures-once2-inputs-NOTRUN.json",
+        "sha256": "9fd1bbc6f4b8cb64695457977071b510192e1c8cbd6b3727a39b931cb710d887"
+      },
+      "decision": "RELEASE_ONE_CONTROLLER_BOUNDARY_PURE_QUALIFICATION_ONLY",
+      "independent_review_binding": "REAL_NEW_REVIEW_ROW_NOTCREATED",
+      "launcher_binding": {
+        "bytes": 7355,
+        "mode": "0o444",
+        "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/launch_controller_boundary_PURE_ROOT_ONLY_SOURCE_PREPARED_once2.py",
+        "sha256": "4eef6de54c7c91678987b9b9c6127f4a57645ea68f094e458009e5e110ca7266"
+      },
+      "real_environment_archive_copy_remove_or_native_authorized": false,
+      "term_kill_grace_seconds": 10,
+      "whole_ROOT_seconds": 600
+    },
+    "whole_ROOT_seconds600_int_TERM_KILL10_int_realarchive_copymove_native_authorizedFalse": true
+  },
+  "reviewer_execution": "Read-only hashes/JSON/AST/source only; no imports/tests/guard/adapter/archival/native/source edits.",
+  "reviewer_metadata_observation": "Initial read used predecessorconfig_binding key; predecessor actuallycontrol_config_binding. KeyError was reader-only and corrected; no source or gate executed.",
+  "schema": 1,
+  "scope_limits": [
+    "Pure controller and typedadapter boundaries only",
+    "161filebindingguard is metadata/originalbody closure, not fresh native functional/fullcleanup qualification",
+    "No real obsoleteenvironment archive/remove or approval authorization by this review",
+    "No actualaliasparser/native/generation/provider/calibration/profile/release or issuegraph scope upgrade"
+  ],
+  "source_delta_binding": {
+    "bytes": 2331,
+    "mode": "0o400",
+    "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/exact-two-negative-fixture-only-source-delta.patch",
+    "sha256": "e082753c78af7be37f35f933949907dba60399e673f91952e059ac00e6d3f38d"
+  },
+  "source_proof_binding": {
+    "bytes": 2997,
+    "mode": "0o400",
+    "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/exact-two-negative-method-AST-all-other28-and-original-controller-adapter-profile-proof-NOTRUN.json",
+    "sha256": "b3b6198ef3775dfa4942f38ad40b78be80abbf3435401056b45d8d23078fc3ed"
+  },
+  "static_verified": {
+    "161guarded_frozen_rows_fullbody_sha_size_mode_UIDGID1000_checked": true,
+    "30exact_unique_expected_IDs_not_a_futurepass_claim": true,
+    "controller985f_and_adapter8dbc_byteexact_unchanged": true,
+    "copied_launcher4eef_wholebytes_exact_not_retargeted_code": true,
+    "launcher_selected_cfg_and_controls_use_grant_exact_boundrows_not_old_basename": true,
+    "newowned_root_fixture_and_ROOTreleaseABSENT": true,
+    "old142rows_prefix_exact_retained": true,
+    "original_raw18_dd9_source485_approval4d227_remain_hashbound": true,
+    "other28methods_whole_AST_exact": true,
+    "wholemodule_AST_exact_after_only2_existing_testmethods_normalized": true
+  },
+  "status": "GO_EXACT_TWO_FRESH_NEGATIVE_FIXTURES_SOURCE_AND_ONCE2_PURE_PREEXECUTION_NOTRUN"
+}

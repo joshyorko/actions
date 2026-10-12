@@ -1,0 +1,71 @@
+{
+  "actual_preservation": "NOT_RUN",
+  "capture": "2026-10-11T23:07:18.898590+00:00",
+  "elapsed_seconds": 0.655965212994488,
+  "external_alwayspost": {
+    "argv": [
+      "/usr/bin/timeout",
+      "--signal=TERM",
+      "--kill-after=5s",
+      "20s",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "-B",
+      "/workspace/engineering/root-reviewed-first-five-v7-PURE18-external-parent-v2.py",
+      "--guard",
+      "fd1dcc5eb35dd5617cba90f508afc8e63b6e6ccc50e465782afe5a66b043c81c"
+    ],
+    "elapsed_seconds": 0.2653914749971591,
+    "parent_seconds": 30,
+    "returncode": 1
+  },
+  "external_before": {
+    "argv": [
+      "/usr/bin/timeout",
+      "--signal=TERM",
+      "--kill-after=5s",
+      "20s",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "-B",
+      "/workspace/engineering/root-reviewed-first-five-v7-PURE18-external-parent-v2.py",
+      "--guard",
+      "fd1dcc5eb35dd5617cba90f508afc8e63b6e6ccc50e465782afe5a66b043c81c"
+    ],
+    "elapsed_seconds": 0.31565337600477505,
+    "parent_seconds": 30,
+    "returncode": 1
+  },
+  "external_before_envelope": {
+    "bytes": 884,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-first-five-v7-current9760-reviewed-PURE18-outer/external-before-envelope.json",
+    "sha256": "2f93f186b2e2a7f453e03338cef78f6e3e42d62589b63e7f99e58939c6b5744d"
+  },
+  "external_post_envelope": {
+    "bytes": 884,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-first-five-v7-current9760-reviewed-PURE18-outer/external-alwayspost-envelope.json",
+    "sha256": "2f93f186b2e2a7f453e03338cef78f6e3e42d62589b63e7f99e58939c6b5744d"
+  },
+  "native": "NOT_RUN",
+  "parent": {
+    "bytes": 6833,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-reviewed-first-five-v7-PURE18-external-parent-v2.py",
+    "sha256": "700bb81131a62c48787c517d61d0e833c843c935f88ad26ea952bf05c86e8551"
+  },
+  "primary_exception_class": "AssertionError",
+  "release": {
+    "bytes": 1485,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-first-five-v7-current9760-reviewed-PURE18-outer/root-one-pure18-release.json",
+    "sha256": "fd1dcc5eb35dd5617cba90f508afc8e63b6e6ccc50e465782afe5a66b043c81c"
+  },
+  "review": {
+    "bytes": 15828,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v7-current9760-independent-PURE18-PREEXEC-review/OWNERFINAL-independent-first-five-v7-clean9760-managed-machine18-SOURCE-PREEXEC-GO-ROOT-envelope-v2.json",
+    "sha256": "2dd770932fd2823a3cf4880e2fd0e12992de266e5bbdaddf23096b442aba5899"
+  },
+  "scope": "PURE18 only",
+  "status": "FAIL_OR_HOLD_NO_RETRY"
+}

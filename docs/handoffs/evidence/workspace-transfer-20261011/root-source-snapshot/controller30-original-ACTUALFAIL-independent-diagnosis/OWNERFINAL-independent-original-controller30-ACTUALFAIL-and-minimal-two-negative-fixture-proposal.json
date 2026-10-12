@@ -1,0 +1,67 @@
+{
+  "cause": "Both negative fixture construction steps tried to overwrite original private0400specimens before assertion admission; this is a control-fixture setup defect, not a controller/adapter/product defect.",
+  "decision": "HOLD_CONTROLLER30_ORIGINAL_28PASS_2SETUPERRORS_NO_RETRY",
+  "documentation_improvement": {
+    "evidence": [
+      {
+        "bytes": 5518,
+        "mode": "0o400",
+        "path": "/workspace/engineering/controller30-original-ACTUALFAIL-independent-diagnosis/private-original-controller30-census-setup-errors-and-preservation-proof.json",
+        "sha256": "00edcfa028e308663c72b4ac561c5f295e66151510b96078960458ed98b9b8bc"
+      },
+      {
+        "bytes": 9246,
+        "mode": "0o600",
+        "path": "/workspace/engineering/first-five-controller-boundary-PURE-once-owned/original-controller-boundary-machine-census.json",
+        "sha256": "5b75c4d41df7b763b473fd75021f99c9a2411b2f9b0a9d250e76d54255882a5b"
+      }
+    ],
+    "exact_addition": "Build negative fixtures as fresh immutable specimens, then retain the positive specimen unchanged. For a body-integrity poison, preserve the positive expected hash while pointing it at a distinct same-length mutant; for a self-certified receipt poison, bind the mutant bytes correctly so the semantic admission predicate is reached. A PermissionError while preparing a poison is a setup error, not evidence that the intended guard rejected it.",
+    "remaining_uncertainty": "Proposed corrected negatives have not run; no actual archive-parser or storage qualification.",
+    "target": "docs/skills/repository-operations.md, existing boundary-control guidance"
+  },
+  "limits": "No original consumed namespace/root/release reuse, no chmod/exception normalization, no adaptation/archive/native operation, no alias-parser qualification. New controls and fresh strict ROOT release require separate review and authorization.",
+  "original_census_binding": {
+    "bytes": 9246,
+    "mode": "0o600",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-once-owned/original-controller-boundary-machine-census.json",
+    "sha256": "5b75c4d41df7b763b473fd75021f99c9a2411b2f9b0a9d250e76d54255882a5b"
+  },
+  "original_root_binding": {
+    "bytes": 1522,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-controller30-reviewed-original-execution/OWNERFINAL-root-original-controller30-pure-execution.json",
+    "sha256": "61e5690c2c3c88768ab62161d104362a96de50fe9f79a878935471ffe4120902"
+  },
+  "outcome": {
+    "ERROR": 2,
+    "FAIL": 0,
+    "PASS": 28,
+    "SKIP": 0,
+    "alwayspost": "PASS142",
+    "before": "PASS142",
+    "elapsed_seconds": 0.5754742860008264,
+    "external_post": "PASS152",
+    "five_origin_before_after": "EXACT",
+    "intended_negative_assertions_for_two_errors": "NOT_REACHED",
+    "original_child_returncode": 1,
+    "root_returncode": 1,
+    "source_case_count": 30
+  },
+  "proof_binding": {
+    "bytes": 5518,
+    "mode": "0o400",
+    "path": "/workspace/engineering/controller30-original-ACTUALFAIL-independent-diagnosis/private-original-controller30-census-setup-errors-and-preservation-proof.json",
+    "sha256": "00edcfa028e308663c72b4ac561c5f295e66151510b96078960458ed98b9b8bc"
+  },
+  "proposal_binding": {
+    "bytes": 3738,
+    "mode": "0o400",
+    "path": "/workspace/engineering/controller30-original-ACTUALFAIL-independent-diagnosis/minimal-two-negative-fixture-only-proposal-NOTRUN.json",
+    "sha256": "09638c058ca1e4327bd9204970ed754e20b58e48e79079afbe3687b3ca5c8c1b"
+  },
+  "review_correction": "Prior independent static SOURCE/PREEXEC GO overlooked fixture mutability; preserve it as historical preexecution scope, not ACTUAL pass.",
+  "schema": 1,
+  "status": "INDEPENDENT_ORIGINAL_CONTROLLER30_ACTUAL_FAIL_STOP",
+  "upstream_disposition": "none"
+}

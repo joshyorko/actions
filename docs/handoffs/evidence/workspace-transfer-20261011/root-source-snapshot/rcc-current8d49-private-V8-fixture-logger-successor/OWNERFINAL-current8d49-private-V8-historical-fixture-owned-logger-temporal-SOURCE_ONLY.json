@@ -1,0 +1,182 @@
+{
+  "actual_config": "NOT_CONSTRUCTED",
+  "constraints": "No budget/helper/sampler/strict cleanup/default3 changes. Same source1440 current plus old237 references independently keyed path+SHA; original ROOTpost FAIL distinct from inner FULL PASS/supplement.",
+  "construction_permission_failure": {
+    "bytes": 226,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/temporal-control-launch-preparation-PermissionError-preserved.json",
+    "sha256": "096cf73ef7a21bcf030c867d0cd835f5ffa19c863410f85d3e2ece1b188670de"
+  },
+  "control_bindings": [
+    {
+      "bytes": 1090,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/pure-fixture-logger-RED-owned-once/original-RED-terminal.json",
+      "sha256": "dd5435c27ac0453715e0857282385f86ebb4f8890d68cd8cf8d371867f9340dd"
+    },
+    {
+      "bytes": 7874,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/pure-fixture-logger-RED-owned-once/original-RED.private.log",
+      "sha256": "2e2fd484e57c57b346f2dbdce8787674e536c91380eb463c99599f6566f19cca"
+    },
+    {
+      "bytes": 6813,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/pure-fixture-logger-RED-owned-once/original-RED-junit.xml",
+      "sha256": "ef8c10702f7c49e811f0f4db95f2d1da0e14390ef0edcbb0fee14b3cea775f60"
+    },
+    {
+      "bytes": 1160,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/pure-fixture-logger-GREEN-owned-once/original-GREEN-terminal.json",
+      "sha256": "5aa2c8b7fc0ca2c825b53c83add802048fa6a07dd022895892ebff659c2c9e3a"
+    },
+    {
+      "bytes": 1272,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/pure-fixture-logger-GREEN-owned-once/original-GREEN.private.log",
+      "sha256": "9cc67d5e5c0d746085d8cee338fdd5086724405d1fdd522c38a32aa06d9862ad"
+    },
+    {
+      "bytes": 8014,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/pure-fixture-logger-GREEN-owned-once/original-GREEN-junit.xml",
+      "sha256": "fab7f5f19c80f8ee40a189f5547e09dd0ffac678c2df8f863fa886e9fbfc8535"
+    },
+    {
+      "bytes": 1198,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/pure-fixture-logger-GREEN-TEMPORAL-owned-once/original-GREEN-TEMPORAL-terminal.json",
+      "sha256": "afeaf7d2d55bb7e026474a3539647675c895596d6b474e358d76754ea3fc0106"
+    },
+    {
+      "bytes": 1299,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/pure-fixture-logger-GREEN-TEMPORAL-owned-once/original-GREEN-TEMPORAL.private.log",
+      "sha256": "37f3b517d128c7d89a99ca39d32559c68ec019e546a96d86219aa931fca4d2fa"
+    },
+    {
+      "bytes": 9670,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/pure-fixture-logger-GREEN-TEMPORAL-owned-once/original-GREEN-TEMPORAL-junit.xml",
+      "sha256": "f367f7ce3a907e7eb3d730747dae511078b3474e2b4bd2f694a698ce4582c0c6"
+    }
+  ],
+  "controls": {
+    "GREEN": {
+      "errors": 0,
+      "failures": 0,
+      "skips": 0,
+      "tests": 42
+    },
+    "GREEN-TEMPORAL": {
+      "errors": 0,
+      "failures": 0,
+      "skips": 0,
+      "tests": 51
+    },
+    "RED": {
+      "errors": 0,
+      "failures": 2,
+      "skips": 0,
+      "tests": 2
+    }
+  },
+  "current_source_FULL_independent": {
+    "bytes": 10038,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-current8d49-independent-SOURCEFULL-actual-review/OWNERFINAL-independent-current8d49-original-configured-SOURCEFULL-and-retained-ROOTpost-supplement-review.json",
+    "sha256": "073e235afffab50dee204bcaae236e77ceb8e23644db15a90a0e56d48dc8dca9"
+  },
+  "documentation": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "durable_learning": "Historical source/body identity must not be replaced by current live path; basetemp does not isolate plugin logging.",
+    "evidence": "RED2\u2192GREEN42 plus temporal final51PASS; installed log_pytest defaults ./output;9 temporal poisons reject before action.",
+    "exact_patch": {
+      "bytes": 772,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/canonical-private-actual-fixture-history-and-pytest-logger-proposed.patch",
+      "sha256": "d21d043bb7cfcdfa32a7e9edb5239c71a649918ed800202f378449bd0e159877"
+    },
+    "remaining_uncertainty": "Actual native lease/cleanup compatibility, released5 and7276 functionality NOTRUN; currentconfig/rootrelease pending",
+    "stale_ambiguity_removed": "Basetemp-only logging isolation and one-binding-per-path assumption."
+  },
+  "historical_fixture_provenance": {
+    "bytes": 822,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/historical-fixture-exact-Git-snapshot-provenance.json",
+    "sha256": "3f1ed0bc4ec9487508529f01e5991fe280097f78fba3d748652b0624f3f422fd"
+  },
+  "historical_fixture_snapshot": {
+    "bytes": 48314,
+    "mode": "0o444",
+    "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/historical-e4ff-staged-fixture-exact-Git-blob.snapshot.py",
+    "sha256": "af2f79ccd395c088076381f6681860cf8160f8fd0d9169e122634fe684c37c35"
+  },
+  "modules": [
+    {
+      "bytes": 27889,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/actual_transport_v8.py",
+      "sha256": "33dda17140ef749e22f086cc91b92ed8c3230fddfde8a4a369769e2183f695a1"
+    },
+    {
+      "bytes": 6228,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/owned_cache_policy_v8.py",
+      "sha256": "4ccac4e3bd2c1e91352ef4e647968b4ca61f8691e1fc0f41e72a128a2942c205"
+    },
+    {
+      "bytes": 11489,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/fixture_records_v8.py",
+      "sha256": "7a63ee62184ea268dead0c98460c6943ebc297816e9a4df180b10ed5e04b9064"
+    },
+    {
+      "bytes": 6327,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/historical_binding_current8d49_v8.py",
+      "sha256": "f95b2238a8f4981d79184d0c9d67cf6757526efc3a6d784d0e4840ae6101da44"
+    }
+  ],
+  "native": "NOT_RUN",
+  "prior_a334": {
+    "bytes": 6445,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-private-V8-content-preparation/OWNERFINAL-current8d49-private-V8-four-module-NOTEXECUTABLE-content-preparation.json",
+    "sha256": "a334cb363d8d4003e9ddd6dc375096e05758560c4b487b0077389e54d058e704"
+  },
+  "proof": {
+    "bytes": 461,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/private-four-module-exact-AST-and-test-delta-proof.json",
+    "sha256": "19210b02e519f681459445e816bac61d40d812d640710f438515323188e5f4fc"
+  },
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_count": 1440,
+  "status": "PRIVATE_V8_SOURCE_ONLY_CONTROLS_PASS_ACTUAL_CONFIG_NOT_CONSTRUCTED",
+  "temporal_shared_outputs": {
+    "bytes": 635,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/private-current-shared-generated-output-temporal-body-nsmetadata-bindings.json",
+    "sha256": "70d4e75425d300dd49c512c6abf908d243557e29f5470b4974585f599d81fc35"
+  },
+  "tests": [
+    {
+      "bytes": 12226,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/test_current_count_alias_servicefree_v8.py",
+      "sha256": "897e167e1c1635fc66d567617e851ff218ceb28288bd65f5926eab05e83173ef"
+    },
+    {
+      "bytes": 10590,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/test_historical_fixture_and_logger_servicefree_v8.py",
+      "sha256": "fa9025163c1e2d4a6b506062e2a4b8fae936acc70db802abc7fb96b2df89d44c"
+    }
+  ],
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none"
+}

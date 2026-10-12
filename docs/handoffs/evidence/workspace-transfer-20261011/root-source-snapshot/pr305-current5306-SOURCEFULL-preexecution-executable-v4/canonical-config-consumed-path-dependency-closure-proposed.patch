@@ -1,0 +1,16 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -667,6 +667,13 @@
+ preflights as separate checked calls or stop the command sequence on failure.
+ Preserve failed probes and named successors, and distinguish observations made
+ after a gate starts from evidence checked before that gate.
++
++Before adopting a frozen command packet, verify every file path consumed by its
++constructor, launcher, guards and body, including paths stored only in its
++configuration. Hashing the listed bindings does not prove that a separately
++named source inventory exists or belongs to the intended commit and tree.
++Preserve a rejected packet and use a named successor with a checked dependency
++closure; do not backfill a copied filename or relabel the earlier packet.
+ 
+ Verified reuse of package environments does not populate a new checkout's
+ ignored Runtime RCC fixture asset. Before tests, bind `get_default_rcc_location()`

@@ -1,0 +1,118 @@
+{
+  "concrete_source_issues": [],
+  "coverage_limits_and_required_next_gates": [
+    "Controls NOT_RUN; syntax/AST/frozen references are not passing tests.",
+    "Default read_cgroup_bundle complete descriptor-relative backend walk is not exercised by these28 methods (bundle is injected; _file/_read_fd tested individually with mocked OS). Keep real-backend/profile/native adoption HOLD until separate service-free mocked-FD walk baseline, nofollow/identity rejection, and descriptor-close/read-error controls are executed and independently reviewed. Do not alter this frozen tuple or add controls to its claimed28 census.",
+    "For the existing28-only gate: separate concrete launcher/config/release must bind this SOURCE receipt and exact module/test/policy/owner helper bytes; unoptimized own cached Python stdlib unittest only, no real cgroup/default backend/native-main/OS signal; unique private0700 root with stdout/stderr/terminal fsynced before assertions; exact28 unique named outcomes, zero failure/error/skip; actual before+alwayspost current1440/originals/prepared30/five own origins/managed18+PATH2; bounded120TERM10 inner and finite full parent; ROOT serialized distinct release.",
+    "After actual28 outcome independently accepted, native integration needs distinct frozen profile/config resources/source/ownership/final join evidence. Original control3 V9 FAILURE means retained3\u21925\u21927276 sequence cannot advance automatically. A separately authorized approved-binary diagnostic must be explicitly different and cannot fabricate predecessor PASS or promote native/release functionality.",
+    "Proposed3113851289 headroom/536870912 reserve remains uncalibrated, no RSS guarantee or attribution of original unknown killed publication."
+  ],
+  "decision": "GO_PRIVATE_CGROUP_READER_OBSERVER_SOURCE_PREPARED_AND_28_CONTROL_PLAN_ONLY",
+  "documentation_improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md; accept exact proposed d6c06054276f3cf45054eecf523d7c618dc8498e0334cc9d55257fc449510380 context after accepted8c28 lesson; no duplicate prose.",
+    "Durable learning captured": "Pinned self cgroup membership/mount/device/inode and finite safe file reads; existing single finite sampler, actual join-gated final read and exact owned PID/create-time stop; counter pressure is shared interval rather than child kill proof.",
+    "Evidence": [
+      {
+        "bytes": 14600,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/cgroup_memory_reader_observer_v1_NOTRUN.py",
+        "sha256": "24e38634118730ba9d222179518d13818c094c5a6ccfd368afd56521e964d014"
+      },
+      {
+        "bytes": 14377,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/test_cgroup_memory_reader_observer_v1_NOTRUN.py",
+        "sha256": "449298ef47661a81bd46ea2c31ecd6644d559844084dc121e70d0da5870ee35d"
+      },
+      {
+        "bytes": 1225,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/canonical-self-cgroup-identity-and-bounded-observer-proposed.md",
+        "sha256": "d6c06054276f3cf45054eecf523d7c618dc8498e0334cc9d55257fc449510380"
+      },
+      {
+        "bytes": 900,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/canonical-shared-cgroup-headroom-vs-filesystem-capacity-proposed.md",
+        "sha256": "8c28fc2596c6fdfc607dd35a17b3462ad217ba97670b61222393dc504861d896"
+      }
+    ],
+    "Remaining uncertainty": "28 tests unexecuted; real backend FD walk unexercised; self identity/latency/headroom/native wiring and reader cleanup unqualified. Existing functional version sequence remains STOP after original3 FAIL.",
+    "Stale or ambiguous guidance removed": "Bounded byte/call/deadline checks distinguished from kernel syscall cancellation; disk-only and pure-control receipts distinguished from memory-qualified native acceptance. Proposal wording is normative future contract, not implemented native integration."
+  },
+  "future_contract_binding": {
+    "bytes": 4053,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/bounded-private-source-integration-and-future-pure-command-contract-NOTRUN.json",
+    "sha256": "9c5181a6a032ce053e540c779732ca6ee1f961be0ffd7f2076617db08177b099"
+  },
+  "prepared_control_method_names": [
+    "ReaderControls::test_baseline_finite_current_max_and_both_event_tables",
+    "ReaderControls::test_nonfinite_and_invalid_memory_max_fail_closed",
+    "ReaderControls::test_invalid_current_fail_closed",
+    "ReaderControls::test_global_and_local_schema_errors_fail_closed",
+    "ReaderControls::test_counter_byte_cap",
+    "ReaderControls::test_self_membership_before_after_changes_rejected",
+    "ReaderControls::test_membership_root_v1_traversal_and_depth_rejected",
+    "ReaderControls::test_mount_schema_type_identity_and_duplicate_rejected",
+    "ReaderControls::test_directory_identity_changes_rejected",
+    "ReaderControls::test_bundle_schema_and_numeric_bool_identity_rejected",
+    "ReaderControls::test_reader_exception_latches_fixed_category_not_private_text",
+    "ReaderControls::test_late_read_rejected",
+    "ReaderControls::test_read_fd_byte_and_call_caps",
+    "ReaderControls::test_file_nofollow_nonblocking_and_final_descriptor_close",
+    "ObserverControls::test_baseline_shared_prior_nonzero_counts_are_not_new_pressure",
+    "ObserverControls::test_initial_headroom_unchanged_proposed_threshold",
+    "ObserverControls::test_global_or_local_oom_interval_increase_stops_exact_owned_child",
+    "ObserverControls::test_reserve_stop_once_while_fixed_cgroup_schema_remains",
+    "ObserverControls::test_foreign_parent_foreign_argv_or_cwd_never_signalled",
+    "ObserverControls::test_reused_pid_create_time_refused_before_signal",
+    "ObserverControls::test_live_zombie_duplicate_or_missing_owner_cannot_signal",
+    "ObserverControls::test_counter_reset_max_identity_and_event_schema_latch_failure",
+    "ObserverControls::test_read_error_no_private_text_and_no_foreign_signal",
+    "ObserverControls::test_signal_error_preserves_primary_and_does_not_retry",
+    "ObserverControls::test_sampler_alive_or_unknown_is_fail_without_final_read",
+    "ObserverControls::test_no_loop_observation_cannot_become_pass_from_final_only",
+    "ObserverControls::test_invalid_final_read_and_counter_reset_remain_failure",
+    "ObserverControls::test_sampled_peak_and_reader_reap_facts_not_fabricated"
+  ],
+  "proposal_binding": {
+    "bytes": 8304,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/OWNERFINAL-private-current8d49-cgroup-finite-reader-owned-observer-and-28-controls-SOURCE_PREPARED_NOTRUN.json",
+    "sha256": "1cb62155075c07714bc8eb17dec5ad082bc4663e3d7269797f184fde9ec02a29"
+  },
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_binding": {
+    "bytes": 14600,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/cgroup_memory_reader_observer_v1_NOTRUN.py",
+    "sha256": "24e38634118730ba9d222179518d13818c094c5a6ccfd368afd56521e964d014"
+  },
+  "source_leaves": 1440,
+  "source_review": {
+    "controls_boundary_sensitivity": "28 named unittest methods with valid baseline before poisons: finite/max/current/events/path/mount/directory/schema/bytecap/deadline/descriptor flags; prior counters, pressure/one stop, foreign/ambiguous/zombie/reused PID, signal failure, reset/unknown, join/final/no sample and honest scope. Synthetic callbacks only append records, no OS signals. Subtests are not additional claimed JUnit cases.",
+    "counters": "Unsigned finite max/current; duplicate/missing/invalid counters rejected; immutable prior policy rejects counter reset/identity/max/schema changes and latches pressure. Preexisting counters do not imply current pressure; deltas are shared interval only.",
+    "finite_fixed_reads": "Fixed proc membership/mountinfo131072-byte caps; fixed four memory files4096-byte caps; bounded read-call loops; before/after0.2-second deadline checks. Fixed descriptor-relative child walk with directory/nofollow and regular/nonblocking/nofollow counter files; finally closes tracked descriptors. Kernel syscall stalls are not bounded by post-read clocks.",
+    "lifetime_join": "Source integration remains proposed within single existing FiniteSampler cadence<=0.2/lifetime<=640/join<=3. after_join only performs final read when cancellation_requested is literally True and sampler_alive literally False; unknown/live/no samples/inspection failure remains FAIL. No helper reader/reap facts fabricated.",
+    "ownership_and_signal": "No thread/Popen/wait/os.kill implemented here. Reuses unchanged exact capture schema,parentPID,argvSHA,cwd/live/zombie selector and PID/create-time authorization; one recorded callback attempt, no retry after callback failure; native callback must perform its unchanged final identity recheck.",
+    "pinned_identity": "Strict supplied self-membership path and root mount cgroup2/root slash/device/inode; before+after membership/mount and directory identities exact; unsupported/moved/schema/malformed/nonfinite/unavailable reads fail closed. Real pinned identity remains unmeasured."
+  },
+  "status": "INDEPENDENT_PRIVATE_CGROUP_READER_OBSERVER_SOURCE_PREPARED_GO_NOT_EXECUTED",
+  "tests_binding": {
+    "bytes": 14377,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/test_cgroup_memory_reader_observer_v1_NOTRUN.py",
+    "sha256": "449298ef47661a81bd46ea2c31ecd6644d559844084dc121e70d0da5870ee35d"
+  },
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none",
+  "verified_references": {
+    "actual_tests_imports_cgroup_reads_threads_native_signals": "NOT_RUN_BY_REVIEWER",
+    "all_local_preparation_bindings_exact": 8,
+    "all_old_bindings_exact": 8,
+    "old_FiniteSampler_and_select_owned_pytest_authorize_signal_bytes_unchanged": true,
+    "old_MemoryState_and17control_bytes_unchanged": true
+  }
+}

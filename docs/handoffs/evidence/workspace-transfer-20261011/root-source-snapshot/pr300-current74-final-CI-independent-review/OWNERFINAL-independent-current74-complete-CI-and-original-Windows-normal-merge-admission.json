@@ -1,0 +1,166 @@
+{
+  "schema": "independent-final-current74-normal-merge-admission-v1",
+  "decision": "GO_NORMAL_DRAFT_READY_AND_EXPECTED_HEAD_MERGE_ONLY_FRESH_NAMED_REF_AND_API_POLICY_ENFORCEMENT_REQUIRED",
+  "head": "74beef4d220c3a1e8f983cecd42b9bb84ac75e79",
+  "source_tree": "2238ed312babba9fd5ad89a3a1cc581ca6ad2dcf",
+  "base": "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+  "synthetic_actual_checkout": "5f49309086ed88c29ddb754a9dcf4e7394ea5321",
+  "ordered_synthetic_parents": [
+    "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+    "74beef4d220c3a1e8f983cecd42b9bb84ac75e79"
+  ],
+  "synthetic_tree_equals_accepted_source": true,
+  "local_synthetic_object": "UNAVAILABLE; independently authenticated original API tree/parents plus original checkout log used; no local fetch or ancestry fabrication",
+  "source_preservation": {
+    "complete_typed_Git_FS_entries": 1423,
+    "clean": true,
+    "original_SOURCEFULL_refs_rehashed": 129,
+    "local_source_FULL": {
+      "pass": 1325,
+      "skip": 13,
+      "failed": 0,
+      "errors": 0,
+      "unique_nodes": 1338,
+      "actual_pytest_workers": [
+        "gw0",
+        "gw1"
+      ],
+      "created": "2/2",
+      "warnings": 15,
+      "pytest_seconds": 150.09,
+      "outer_seconds": 157.6333483720009,
+      "configured_transport_module_nodes": 30,
+      "transport_all_pass": true,
+      "RCC_solver_worker_lines": "Distinct producer scope; never evidence of pytest worker count"
+    },
+    "original784_Windows_failure_retained_unchanged": true,
+    "root_current74_gateway_failure_retained_unchanged": true
+  },
+  "current_CI": {
+    "exact_PR_flows": 6,
+    "declared_matrix_jobs": 19,
+    "terminal_success_runs": 6,
+    "terminal_success_jobs": 19,
+    "terminal_success_check_runs": 19,
+    "late_publisher_job": 114477246440,
+    "pending_failed_skipped_jobs": 0,
+    "expected_aux_push_flows": 0,
+    "reviews": 0,
+    "threads": 0,
+    "unresolved_threads": 0,
+    "combined_commit_status": "pending with ZERO separate status contexts; does not downgrade19 successful Actions checks",
+    "rulesets_response": [],
+    "branch_protection": "403 UNKNOWN; normal API enforcement only, no bypass"
+  },
+  "original_current_Windows": {
+    "owner": {
+      "path": "/workspace/engineering/pr300-current74-connector-original-Windows-owned/root-one-original-connector-decoded-log-acquisition.json",
+      "bytes": 1160,
+      "sha256": "8c7e330d03b02f8f58a5d20444e1aa96e55faad672439a0b5be80cb2b718ca58"
+    },
+    "decoded_log": {
+      "path": "/workspace/engineering/pr300-current74-connector-original-Windows-owned/original-decoded-Windows-job.log",
+      "bytes": 637941,
+      "sha256": "8d77b6fe6b23323f07efe87528a142bd03510c9c92a1d95a49e25484d8eeef87"
+    },
+    "complete_response_UTF8_equals_decoded_bytes": true,
+    "source_suite": {
+      "unique_complete_nodes": 1338,
+      "pass": 1166,
+      "skip": 172,
+      "fail": 0,
+      "error": 0,
+      "warnings": 14,
+      "workers": [
+        "gw0",
+        "gw1"
+      ],
+      "pytest_seconds": 363.17,
+      "new_transport_30_Linux_only_skips": 30,
+      "new_transport_Windows_passes": 0
+    },
+    "integration_suite": {
+      "unique_complete_nodes": 150,
+      "pass": 131,
+      "skip": 19,
+      "fail": 0,
+      "error": 0,
+      "deselected": 1341,
+      "pytest_seconds": 1643.51,
+      "original_interleaved_skip_suffix_observed": 1
+    },
+    "transport_wire_bytes": "UNKNOWN, connector decoded original only",
+    "failed_direct_GH_original_preserved": [
+      {
+        "path": "/workspace/engineering/pr300-current74-original-Windows-owned/root-one-original-Windows-log-acquisition-authorization.json",
+        "bytes": 718,
+        "sha256": "545f39a36efabda12a5ba93c442f36c17437e4c2cd240b9de3eec26bac9c18d1"
+      },
+      {
+        "path": "/workspace/engineering/pr300-current74-original-Windows-owned/original-direct-gh-storage-redirect-FAIL.json",
+        "bytes": 823,
+        "sha256": "bf2846f051c65cf3037e480fb37d02966e87a672f5a601a6c0d8fc9192acd948"
+      }
+    ],
+    "acquisitions": "One failed direct transport, then one separately authorized connector retrieval; one complete original decoded log; no rerun or artifact acquisition"
+  },
+  "normal_merge_conditions": [
+    "Root changes draft to ready through normal API and retains authenticated readback",
+    "Immediate expected head74 and live named targeta0d bracket before ordinary merge; if target/source changes, re-review exact union",
+    "Normal API expected-head merge only; reject policy denial, no force or protection bypass",
+    "Independently verify actual resulting ordered parents/tree after merge; metadata admission is not actual integration"
+  ],
+  "remaining_HOLD": [
+    "Whole issue86/83/Workspace active revocation/HEAD/Range/provider/private/native/release qualification remain separately scoped",
+    "No old native92498/current275 producer equivalence",
+    "No new RCC5/7276 functional qualification or relabel of frozenb614/a0d acceptance",
+    "Windows skips including all30 new Linux transport cases remain unverified on that platform"
+  ],
+  "proof": {
+    "path": "/workspace/engineering/pr300-current74-final-CI-independent-review/complete-original-current74-Windows-source-integration-and-API-readback.private.json",
+    "bytes": 791594,
+    "sha256": "e25f6edef18460eee91027fa022686b3d4ae4b520125f9f6e3e2fc5585df5afb"
+  },
+  "bindings": [
+    {
+      "path": "/workspace/engineering/pr300-current74-connector-original-Windows-owned/root-one-original-connector-decoded-log-acquisition.json",
+      "bytes": 1160,
+      "sha256": "8c7e330d03b02f8f58a5d20444e1aa96e55faad672439a0b5be80cb2b718ca58"
+    },
+    {
+      "path": "/workspace/engineering/pr300-current74-final-current-CI-root/root-once-additional-check-status-policy-and-synthetic-commit-bindings.json",
+      "bytes": 3085,
+      "sha256": "20bb0c63f21fa110df0043efd2a7a7c1839280a85d196527dd94befb62141771"
+    },
+    {
+      "path": "/workspace/engineering/pr300-current74-final-CI-independent-review/OWNERFINAL-current74-metadata-and-one-original-Windows-acquisition-review.json",
+      "bytes": 3142,
+      "sha256": "c92e32c9bc845993ffdc2e0be7da48afad57df8f8b0d3a3ad1d7532cca73a64e"
+    },
+    {
+      "path": "/workspace/engineering/pr300-current74-final-CI-independent-review/OWNERFINAL-current74-one-connector-decoded-original-fallback-review.json",
+      "bytes": 2368,
+      "sha256": "b2a1a3bf9f1a2dd855560fde56ef81838d467819d0847041e0bc13e91e7c2709"
+    },
+    {
+      "path": "/workspace/engineering/pr300-current74-final-CI-independent-review/independent-all19-source-matrix-job-and-OS-readback.json",
+      "bytes": 2167,
+      "sha256": "05fb400ffc83829da872152568ab9f566d4b9e6916bdcbd39d7d1560d481a575"
+    }
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md accepted checkpoint exact event/filter/late-publisher/checkout/policy/decoded-log lessons reused; no source or cosmetic child",
+    "Durable_learning_captured": "Actual event deltas determine job scope; complete dependency-created publisher and check-runs are reconciled separately from empty statuses. Original checkout binds platform-specific tests and skips to the synthetic tree; one decoded transport successor does not upgrade raw-wire provenance.",
+    "Evidence": {
+      "canonical_reused_excerpt_SHA256": "8bef407c5b59345f3939472f76894b89de4aaaf343c0487559c3c3b35b440365",
+      "declared_matching_PR_jobs": 19,
+      "original_checkout": "5f49309086ed88c29ddb754a9dcf4e7394ea5321",
+      "actual_Windows_transport_skips": 30,
+      "policy403_original_bound": true
+    },
+    "Stale_or_ambiguous_guidance_removed": "Old784 WindowsFAIL remains original history; Linux30PASS cannot become Windows30PASS. Failed direct log retrieval remains failure and cannot count as retained original bytes.",
+    "Remaining_uncertainty": "Protection detail inaccessible; normal API must enforce. Current metadata draftTrue requires ready transition/readback; actual postmerge identity not yet observed. Skipped/private/native/release gates remain distinct."
+  },
+  "Upstream_disposition": "none",
+  "reviewer_execution_scope": "Read-only original Git/FS/hash/API JSON/log census; no source/ref/index mutation, test/launcher/native invocation, acquisition or network polling"
+}

@@ -1,0 +1,76 @@
+{
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; exact source-owned response-order delta independently accepted",
+    "Durable_learning_captured": "Schedule interruption after completed final ASGI send; denied/failed sends do not interrupt; separate server access200, client delivery, natural return and cleanup",
+    "Evidence": "Original meaningful5FAIL5PASS RED\u219210GREEN andfinal86assembled/authPASS; installed Starlette response order; exact minimal serverAST change",
+    "Exact_delta": {
+      "bytes": 2030,
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/exact-canonical-response-order-and-client-completion.patch",
+      "sha256": "79130164c7fc47a42066a121dbee82ca8e07bdeee08a9c09cd44542ab6b110e2"
+    },
+    "Remaining_uncertainty": "Fresh Windows TCP client/naturalexit acceptance and full source still needed; no universal cleanup or release qualification",
+    "Stale_or_ambiguous_guidance_removed": "Replaces synchronous shutdown-call description; access200 and checkout-byte passes do not establish network delivery or Windows shutdown cause"
+  },
+  "Upstream_disposition": "none",
+  "configured_light": "Toolkit96/oldEOL10/RuntimeRuff314Isort/type350 andgen8/all30 as original owner outcomes; reviewer parsed/read original evidence without reruns",
+  "independent_proof": {
+    "bytes": 2493,
+    "path": "/workspace/engineering/pr312-shutdown-response-order-independent-LIGHT-review/independent-frozen-source-LIGHT-proof.json",
+    "sha256": "b8201409bfd0f6c5cf1c65b94f34cdd577629572fc3a769d33d34a75e12fa3ee"
+  },
+  "independent_readonly_verifier": {
+    "bytes": 8405,
+    "path": "/workspace/engineering/pr312-shutdown-response-order-independent-LIGHT-review/verify-readonly-frozen-source.py",
+    "sha256": "affeb8029f6d5b0c4dc9b3c7090e3db3686c3f593bd32fddca6ef7192f7911f6"
+  },
+  "measured_controls": {
+    "final-scoped-junit.xml": {
+      "ERROR": 0,
+      "FAIL": 0,
+      "PASS": 86,
+      "SKIP": 0,
+      "cases": 86
+    },
+    "ordering-GREEN-junit.xml": {
+      "ERROR": 0,
+      "FAIL": 0,
+      "PASS": 10,
+      "SKIP": 0,
+      "cases": 10
+    },
+    "ordering-RED-junit.xml": {
+      "ERROR": 0,
+      "FAIL": 5,
+      "PASS": 5,
+      "SKIP": 0,
+      "cases": 10
+    }
+  },
+  "no_blocking_findings": true,
+  "private_log": {
+    "bytes": 303,
+    "path": "/workspace/engineering/pr312-shutdown-response-order-independent-LIGHT-review/private-review.log",
+    "sha256": "a714ea58965c93c0b7bdf1af04d1736d4515f5f935aba3573a244b89a6cafde6"
+  },
+  "remaining_HOLD": [
+    "Configured full source gate and separate root capacity/serialization release",
+    "Fresh original Windows client successful200 response followed by expected naturalrc1; ASGI send does not guarantee TCP receipt",
+    "Native oldartifact equivalence unqualified after server production change",
+    "No fullrelease/OAuthauthority/private134/99/provider/backend/ChatGPT acceptance"
+  ],
+  "scope": "Only FastAPI BackgroundTasks injection + scheduling existing interrupt_main; server normalized wholeAST matches770; original1421other leaves/141refs/current41 exact; new10cases exercise real assembled route/auth/ASGI suspended and failed sends",
+  "source": {
+    "actual_target": "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+    "branch": "fix/runtime-checkout-eol-20261011",
+    "clean": true,
+    "head": "77ed3de24f33412dff30e4e3c18841c4c09933ac",
+    "sole_parent": "77065131a0aee63d2b1f8621476374bdde3c7b65",
+    "tree": "943c9b88d5d508a4c59b0461b6220ec86e1a7d62"
+  },
+  "source_owner": {
+    "bytes": 29872,
+    "path": "/workspace/engineering/pr312-shutdown-response-order-source/OWNERFINAL-pr312-shutdown-response-order-LIGHT-source-checkpoint.json",
+    "sha256": "7812bf4345169e1d52bd0debadb4f5d7c641b44ba079bae139ac125af2bd1f44"
+  },
+  "status": "GO_SCOPED_PR312_SOURCE_LIGHT_ONLY_FOR_SEPARATE_FULL_REVIEW"
+}

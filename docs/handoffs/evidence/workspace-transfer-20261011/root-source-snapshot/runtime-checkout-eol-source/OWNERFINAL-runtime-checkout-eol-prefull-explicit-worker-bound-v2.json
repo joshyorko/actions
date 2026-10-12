@@ -1,0 +1,133 @@
+{
+  "schema": "runtime-checkout-eol-prefull-explicit-worker-bound-v2",
+  "status": "OWNERFINAL_REVIEW_READY_NOT_EXECUTED_ROOT_RELEASE_REQUIRED",
+  "source_head": "92e6deda5c252a503510c4b6261a86cb51f73cb6",
+  "source_tree": "8c7362e63c85a930ca2fe962ede9bc3ebb6ffe68",
+  "source_branch": "fix/runtime-checkout-eol-20261011",
+  "source_clean": true,
+  "original_LIGHT_and_all41_bindings_retained_exact": true,
+  "old_LIGHT_worker_count_claim_disposition": "Corrected prospectively: old standalone full launcher lacked explicit Runtime -n auto environment pin. Its devutils -n2 alone did not establish two Runtime workers. No old execution or retroactive bound claimed.",
+  "change_scope": "Named private launcher+metadata only: import os and set PYTEST_XDIST_AUTO_NUM_WORKERS=2 before both unchanged sequential commands. No Git/source/configured gate change.",
+  "explicit_environment": {
+    "PYTEST_XDIST_AUTO_NUM_WORKERS": "2"
+  },
+  "outer_full_argv": [
+    "env",
+    "PYTEST_XDIST_AUTO_NUM_WORKERS=2",
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "600s",
+    "/workspace/actions-cloud/bin/rcc",
+    "task",
+    "script",
+    "-r",
+    "developer/toolkit.yaml",
+    "--",
+    "python",
+    "/workspace/engineering/runtime-checkout-eol-source/full-source-gates-explicit-worker-bound-v2.py"
+  ],
+  "cwd": "/workspace/engineering/runtime-checkout-eol",
+  "shared_log_path": "/workspace/engineering/runtime-checkout-eol-source/full-source-gates.log",
+  "outer_timeout_seconds": 600,
+  "TERM_then_KILL_grace_seconds": 10,
+  "sequential_package_commands": [
+    {
+      "package": "devutils",
+      "argv": [
+        "poetry",
+        "run",
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests",
+        "-n",
+        "2"
+      ]
+    },
+    {
+      "package": "action_server",
+      "argv": [
+        "poetry",
+        "run",
+        "invoke",
+        "test-not-integration"
+      ],
+      "configured_pytest_workers": "-n auto with reviewed inherited environment2"
+    }
+  ],
+  "installed_own_xdist_and_toolkit_proof": {
+    "path": "/workspace/engineering/runtime-checkout-eol-source/explicit-worker-bound-v2-readonly-source-proof.json",
+    "bytes": 2274,
+    "sha256": "9eaff21f64a68eac4837e73d2682396a15476c881d559082ac7fb7cb53de9d20"
+  },
+  "new_launcher": {
+    "path": "/workspace/engineering/runtime-checkout-eol-source/full-source-gates-explicit-worker-bound-v2.py",
+    "bytes": 376,
+    "sha256": "876adde7c0f82ee428413afc48a6b8d7851937c55f8140facb3f76335b70501d"
+  },
+  "installed_selector_results": [
+    2,
+    2
+  ],
+  "configured_source_or_test_reruns": 0,
+  "original_complete_source_scope_and_LIGHT_gates_reused_unchanged": "OWNERFINAL-runtime-checkout-eol-LIGHT.json",
+  "full_execution": "NOT_RUN",
+  "root_preconditions": [
+    "Independent immutable explicit-worker-bound proposal GO",
+    "Distinct root ONE full execution release after serialized consumer terminal",
+    "Fresh workspace>=1200000000B and full1421 source/41 oldrefs/prepared30/five prefixes/RCC rehash",
+    "Exactly one outer600TERM+10KILL; no retry/native/provider/browser/service/build execution"
+  ],
+  "fresh_workspace_free_bytes": 1509527552,
+  "fresh_tmp_free_bytes": 1019146240,
+  "source_scope_and_release_limits": [
+    "No full source qualification or independent SOURCE GO yet",
+    "No fresh hosted Runtime builder/test checkout or Windows distribution proof",
+    "Original effective checkout configuration and frontend input/compiler causation UNKNOWN",
+    "Generated embedded HTML CR semantics UNKNOWN; no normalization/content waiver",
+    "Private/OAuth/provider/native/cold registry/full seven installed consumers/release/tag/publication HOLD",
+    "No push/new PR or actual execution by this worker"
+  ],
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "/workspace/engineering/runtime-checkout-eol-independent-light-review/canonical-bounded-configured-xdist-worker-proposed.patch",
+    "Durable learning captured": "Runtime configured invoke task uses -n auto; bound xdist environment must be explicit before both sequential commands, independently of devutils -n2",
+    "Evidence": "Exact installed plugin source/selector result2 for both owned environments, toolkit environment preservation, unchanged task and process env inheritance, initial39ecc HOLD",
+    "Stale or ambiguous guidance removed": "Corrects the initial unproved Runtime worker_count2 assertion without rewriting its immutable LIGHT receipt",
+    "Remaining uncertainty": "Full configured suites remain unexecuted; hosted Windows/generated contents and full release remain unqualified"
+  },
+  "Upstream disposition": "none",
+  "frozen_references": [
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/OWNERFINAL-runtime-checkout-eol-LIGHT.json",
+      "bytes": 15090,
+      "sha256": "a6f2da2485741c6e98af49cd1e987ec640486cb4188629ddfa5c322f1ba1a1d7"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/full-source-gates-root-release-required.py",
+      "bytes": 229,
+      "sha256": "70c834e35917b2eb86d3ae4fa72188730a458537fd0771cce126e36c46ae1820"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-independent-light-review/OWNERFINAL-independent-initial-EOL-LIGHT-prefull-HOLD.json",
+      "bytes": 5015,
+      "sha256": "39eccfb501e9a12c76dc536494c7c9fdccf791db49567c77bf6cef8dd2c56cce"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-independent-light-review/canonical-bounded-configured-xdist-worker-proposed.patch",
+      "bytes": 823,
+      "sha256": "a113e8c4001305664c781dccc7c5d62a5f0de929df0dc9e09b9c2f41f0d87434"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/full-source-gates-explicit-worker-bound-v2.py",
+      "bytes": 376,
+      "sha256": "876adde7c0f82ee428413afc48a6b8d7851937c55f8140facb3f76335b70501d"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/explicit-worker-bound-v2-readonly-source-proof.json",
+      "bytes": 2274,
+      "sha256": "9eaff21f64a68eac4837e73d2682396a15476c881d559082ac7fb7cb53de9d20"
+    }
+  ]
+}

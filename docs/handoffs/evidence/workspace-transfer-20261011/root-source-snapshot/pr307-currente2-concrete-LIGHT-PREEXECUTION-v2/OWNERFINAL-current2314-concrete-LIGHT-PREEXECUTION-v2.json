@@ -1,0 +1,123 @@
+{
+  "activation": {
+    "bytes": 987,
+    "mode": "0o600",
+    "path": "/workspace/actions-cloud/activate.sh",
+    "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+  },
+  "argv_adoption_after_activation": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "900s",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/pr307-currente2-concrete-LIGHT-PREEXECUTION-v2/launch_one_owned_light.py",
+    "/workspace/engineering/pr307-currente2-concrete-LIGHT-PREEXECUTION/root-one-LIGHT-release.json",
+    "ROOT_OWNER_RELEASE_SHA",
+    "IMMUTABLE_INDEPENDENT_REVIEW_PATH",
+    "IMMUTABLE_INDEPENDENT_REVIEW_SHA"
+  ],
+  "argv_remaining_bound_fields": "Root release SHA and owner-announced independent path/SHA are not yet available; root must replace precisely before execution",
+  "bounds": {
+    "Invoke_YAML_probe": 30,
+    "Invoke_each": 90,
+    "fallback_owned_wrapper_waits": 5,
+    "full_NOTRUN": true,
+    "per_phase_budgets_seconds": {
+      "Doctor": 120,
+      "Toolkit": 180,
+      "controlled": 210,
+      "focus": 180,
+      "generator": 120,
+      "origins": 120,
+      "static": 180
+    },
+    "primary_sequence_budget_seconds": 780,
+    "root_outer_seconds": 900,
+    "rootkill_grace_seconds": 10
+  },
+  "config": {
+    "bytes": 8165,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-currente2-concrete-LIGHT-PREEXECUTION-v2/immutable-one-LIGHT-inputs.json",
+    "sha256": "3b4e42668cb99bc38969c6f979ece431abdd123db4217baf282c3cbb581369ce"
+  },
+  "constructor": "Metadata-only named successor from reviewed preparation; no code/gate execution",
+  "controlled_Invoke_scope": "unchanged actual task/helper/pyproject/lock staged underuniqueowned root; existingownRuntime .venv symlink anddevutils link; realInvokeProgram/YAML-blocking outer; owned fakegh only; successpair +secondexit17/preserveprior/notprivatecause; no productconfigoutput writes; stagedsyntheticreleasecontentUNQUALIFIED",
+  "controlled_staged_Invoke": {
+    "bytes": 6408,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr307-currente2-concrete-LIGHT-PREEXECUTION/controlled_invoke_owned_stage.py",
+    "sha256": "998b74ededfcafca9fd287c172313d5ebdf88f149141471fff5a3dd027bbbf51"
+  },
+  "cwd": "/workspace/engineering/pr307",
+  "delta_vs_original": "Onlyguard config/self/env before+alwayspost and preservedinitialbinding checks; runtimephase/argv/assertions/control/source2314 unchanged",
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "delta": "Retain exact original307 guard/gateway/sourceauthority lesson already imported; proposal documents interface-specific logging without adding unsupported env behavior",
+    "evidence": "source1442proof/actual canonicalToolkit definition/cachedplugin metadata/owned unchangedInvoke sources",
+    "remaining_uncertainty": "AllcurrentLIGHTgatesNOTRUN; actualfiveorigin,41controls/static/gen,stagePoetry boundary need reviewedoneexecution; FULLtmpfloor/OAuthauthority/freshCI/native remain HOLD",
+    "stale_ambiguity_removed": "Plan-only07e2 remainsnonexecutable; initial6d concreteconfig/self ownSHA wasinitialonly; v2 explicitlybindsbothphases. Toolkit unsupportedloggerCLI omitted byrootdisposition."
+  },
+  "fresh_conditions": [
+    "Currentsourceclean2314/tree2987 andallfrozenbindings",
+    "FreshuniqueABSENTattemptroot; workspace>=536870912; rootserialization/no otherheavy",
+    "Managedactivation18values+PATHprefix verified; cachedprefix exact; ownRuntime testPython explicit perphase",
+    "Independent concretePREEXECGO+distinct rootrelease; no automaticretry"
+  ],
+  "guards": {
+    "activation": "18literalmanagedvalues+PATHfirstcomponent/sys.prefix/sys.optimize checkedbefore/alwaysfinalguard",
+    "before_and_always_finally": "full1442FS/body/exec,30inputs/fiveconfigs/alloldrefs/configdeclaredbindings+fixedignoredgeneratedoutputidentities. Primary exception retained on postguard failure; separate original terminal",
+    "config_own_SHA": "initial and eachbefore/alwaysfinalguard withregular0400",
+    "old_owned_refs": 15,
+    "own_five_configs": 5,
+    "prepared30": 30,
+    "preserved_initial_tuple": "original6d1ad/f650/c975 exactnowalsoexternalbindingsbefore/alwaysfinalguard",
+    "root_authorized_launcher_selfSHA": "rootauthoritativeSHA captured once atauth admission, checkedagainbefore/alwaysfinalguard withregular0444",
+    "root_hard_kill": "Postguard cannot be guaranteed after outerSIGKILL; such outcome remains incomplete/HOLD",
+    "source_typed_rows": 1442
+  },
+  "launcher": {
+    "bytes": 12568,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr307-currente2-concrete-LIGHT-PREEXECUTION-v2/launch_one_owned_light.py",
+    "sha256": "5cfd5809778212415a41349e02c081312011cf4c1f641150d233abde4099f088"
+  },
+  "logging_interfaces": {
+    "Runtime_guard_focus": "separate absentALL basetemp/JUnit+absolute --robocorp-log-output. No other package pytest invoked",
+    "ToolkitTest": "actual unchanged developer/toolkit.py toolkit_test -> cached outer python -m pytest developer/tests. Cache haspytest8.3.4; no *log*pytest* namespace/dist-info files. Distinct absentALL basetemp/JUnit+absolute private stdout/stderr; no Runtime loggerCLI/pluginclaim",
+    "configuredstatic_generator_origin_Invoke": "no pytest invocation; each absolute private stdio/outputroot",
+    "pytest_global_inheritance": "Reject inheritedPYTEST_ADDOPTS/PYTHONOPTIMIZE atlauncherentry; inject separate own options only perpytestphase"
+  },
+  "preserved_initial_owner": {
+    "bytes": 6432,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-currente2-concrete-LIGHT-PREEXECUTION/OWNERFINAL-current2314-concrete-LIGHT-PREEXECUTION.json",
+    "sha256": "6d1ad9685a70707b18b059be186a383eb49893fd35824e6cbaee729f855ba9eb"
+  },
+  "required_decision": "GO_CURRENT2314_LIGHT_PREEXECUTION",
+  "root_release_schema": {
+    "config_sha256": "3b4e42668cb99bc38969c6f979ece431abdd123db4217baf282c3cbb581369ce",
+    "decision": "RELEASE_ONE_CURRENT2314_LIGHT_ONLY",
+    "file": "exclusive regular nonsymlink0600 ownUID/GID; existing declared root release path remainsnotcreated",
+    "independent_review": {
+      "path": "EXACT_OWNERANNOUNCED_PATH",
+      "sha256": "EXACT_OWNERANNOUNCED_HASH"
+    },
+    "launcher_sha256": "5cfd5809778212415a41349e02c081312011cf4c1f641150d233abde4099f088",
+    "source": "2314aea95795fbc1372a6f7b0b7b298b7cf124c3",
+    "tree": "2987ed3a23e560fb40e13aadbcd6bd613ead3f25"
+  },
+  "schema": "OWNERFINAL_CURRENT2314_CONCRETE_LIGHT_PREEXECUTION",
+  "source": "2314aea95795fbc1372a6f7b0b7b298b7cf124c3",
+  "source_union_owner": {
+    "bytes": 2306,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-actuale2-refresh-PREPARATION/OWNERFINAL-pr307-currente2-ordinary-source-union-checkpoint-v2.json",
+    "sha256": "1b7d1972291f963eab3fc02fd729be5b65c47acdf0b07615642f85a109eaabdd"
+  },
+  "status": "FROZEN_NOEXECUTION_REQUIRES_INDEPENDENT_GO_AND_ROOT_DISTINCT_RELEASE",
+  "tests_installs_gateway_native_network_execution": false,
+  "tree": "2987ed3a23e560fb40e13aadbcd6bd613ead3f25",
+  "upstream_disposition": "none"
+}

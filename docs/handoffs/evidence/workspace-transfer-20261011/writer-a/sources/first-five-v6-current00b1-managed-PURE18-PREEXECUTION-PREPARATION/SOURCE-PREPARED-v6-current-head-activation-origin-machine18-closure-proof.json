@@ -1,0 +1,117 @@
+{
+  "before_post_source_native_counts": [
+    1440,
+    1192
+  ],
+  "case_identity_source": "Actual unittest.loader suite and TextTestResult outcome hooks, each test.id(); parent requires original machine JSON complete18allPASS/no skip; source AST is selection contract only NOT actual result.",
+  "complete_expected_case_ids": [
+    "__main__.EnvironmentAdmissionControls.test_00_valid_exact_accepted_environment_baseline",
+    "__main__.EnvironmentAdmissionControls.test_subject_type_refuses_completed_pytest_reuse",
+    "__main__.EnvironmentAdmissionControls.test_unapproved_root_or_source_refused",
+    "__main__.EnvironmentAdmissionControls.test_no_automatic_inactive_owner_approval",
+    "__main__.EnvironmentAdmissionControls.test_unknown_scope_is_not_quiescence",
+    "__main__.EnvironmentAdmissionControls.test_exact_scope_and_restore_path_required",
+    "__main__.EnvironmentAdmissionControls.test_aggregate_caps_cannot_be_widened",
+    "__main__.EnvironmentAdmissionControls.test_layout_baseline_parent_mount_and_floor_poisons",
+    "__main__.EnvironmentAdmissionControls.test_observed_use_and_unknown_missing_fields_fail_closed",
+    "__main__.EnvironmentAdmissionControls.test_regular_binding_baseline_body_mode_and_symlink",
+    "__main__.EnvironmentAdmissionControls.test_private_root_release_baseline_mode_and_symlink",
+    "__main__.EnvironmentAdmissionControls.test_stream_cap_boundary_retains_partial_without_touching_original",
+    "__main__.EnvironmentAdmissionControls.test_snapshot_metadata_body_and_external_hardlink_boundaries",
+    "__main__.EnvironmentAdmissionControls.test_alias_baseline_and_individual_mapping_poisons",
+    "__main__.EnvironmentAdmissionControls.test_real_accepted_source_baseline_and_wrong_identity",
+    "__main__.EnvironmentAdmissionControls.test_current_config_dependency_overlap_baseline_and_selected_prefix",
+    "__main__.EnvironmentAdmissionControls.test_restore_dependency_existing_then_missing_path",
+    "__main__.EnvironmentAdmissionControls.test_real_pax_body_mode_nsmtime_symlink_archive_baseline_and_poison"
+  ],
+  "config": {
+    "bytes": 26745,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v6_current00b1_managed_PURE18_inputs_NOTRUN_v2.json",
+    "sha256": "c5f5d069575cf51b1a18d0f455da069c46d94771445ab23d86262ed5151e493a"
+  },
+  "control": {
+    "bytes": 16823,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/test_first_five_v6_current00b1_managed_PURE18_SOURCE_PREPARED_v2.py",
+    "sha256": "edeaa6ab02bd6f384d34549166fdbcd84413f7539d22aaddfeacc96be4b71c98"
+  },
+  "current_active_source_binding": {
+    "head": "00b1bb9974b73f2da65e49c9048774c84df286ba",
+    "path": "/workspace/engineering/pr307",
+    "tracked_clean": true,
+    "tree": "2663e86b2344f9e056c3259653cb905a6d195599"
+  },
+  "historical_active_sources_retained": [
+    {
+      "head": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+      "path": "/workspace/engineering/pr308",
+      "tracked_clean": true,
+      "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+    },
+    {
+      "head": "c97edfd10edb5b1c63f8a6371bfd2905996a2da2",
+      "path": "/workspace/engineering/pr307",
+      "tracked_clean": true,
+      "tree": "f8d3477451fa601643ef6c06f6b1e616e2407643"
+    },
+    {
+      "head": "f75dcae52fcd78c5c382d3903b012e5b049ca48b",
+      "path": "/workspace/engineering/pr305",
+      "tracked_clean": true,
+      "tree": "851834ae6cc87f42abfcf3c963542191e2815599"
+    },
+    {
+      "head": "2d86c5cf92d3acb274a8ceb5d57bfb8b12c779b6",
+      "path": "/workspace/engineering/captured-child-cleanup",
+      "tracked_clean": true,
+      "tree": "653a9e73e4d27641ec86de94b90f35d41e0f24f8"
+    }
+  ],
+  "launcher": {
+    "bytes": 11885,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v6_current00b1_managed_PURE18_ROOT_ONLY_SOURCE_PREPARED.py",
+    "sha256": "ff05328438955423ab2fa591dae3318f7d005b8ed2c461c16696d8eacbf85720"
+  },
+  "managed_environment_fields": 18,
+  "ordered_PATH_first_two": [
+    "/workspace/actions-cloud/bin",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin"
+  ],
+  "packet_guard_rows": 58,
+  "source_case_class_AST_exact_vs_v5": true,
+  "source_parse_only_no_imports_execution": true,
+  "stdlib_origin_files_bound": {
+    "json": {
+      "bytes": 14020,
+      "mode": "0o664",
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/json/__init__.py",
+      "sha256": "d5d41e2c29049515d295d81a6d40b4890fbec8d8482cfb401630f8ef2f77e4d5"
+    },
+    "os": {
+      "bytes": 40821,
+      "mode": "0o664",
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/os.py",
+      "sha256": "54c43a1fc69c979c70d8f7d097174cee163bfe59937723ee353043dd4a0211e1"
+    },
+    "pathlib": {
+      "bytes": 51052,
+      "mode": "0o664",
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/pathlib.py",
+      "sha256": "10ba48ae8063cfe7589436041d0d4628c05f427c7709cf8e75e486f8930cc32c"
+    },
+    "subprocess": {
+      "bytes": 88747,
+      "mode": "0o664",
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py",
+      "sha256": "85d29b2bf0249f5436838298c9a60ee93508b1102e9ac43b001f8a7e7ae8f375"
+    },
+    "unittest": {
+      "bytes": 3487,
+      "mode": "0o664",
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/unittest/__init__.py",
+      "sha256": "32ed48385c0377bc2900a76e9a6acc3705aeef402c72de8554b3c637420506f0"
+    }
+  }
+}

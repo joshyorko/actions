@@ -3581,3 +3581,109 @@ or Git-object evidence. A workflow’s source/head label can name the integratio
 commit while the job checks out a synthetic merge; qualify each platform from
 its own original log. Producer SUCCESS and wheel-version output establish build
 identity only; inspect content and installed consumers separately.
+
+A parent's sys.path additions do not propagate into a separately invoked package
+Python. Exercise the final package-Python entry with import-only controls before
+native acceptance; keep bootstrap paths fixed and source-bound. An import failure
+before transport main supplies no RCC functionality, artifact or lease verdict.
+Use a fresh once-owned entry even when the failed predecessor never created its root.
+
+Permission modes belong to their measured owning paths, even when binary digests
+match. Admit each regular, nonsymlink path with its own owner, group, size, digest
+and mode; do not borrow an ignored fixture's mode or chmod the managed binary to
+satisfy a mistaken guard. Admission failure before output-root creation still
+consumes its one release. Preserve the failure and use a fresh namespace for a correction.
+
+Retain the original delegated subprocess return tuple when the adapter exposes
+only a stderr tail. A staged case blocked on missing publication is a dependency
+failure. Certificate information alone does not establish TLS failure; a signal-killed
+Micromamba diagnostic does not identify the sender. Classify original JUnit failures,
+sampler observations and typed cleanup separately. CLEAN_NO_DESCENDANTS supplies no
+reader joins or complete child census when those fields are null; an absent sampled
+threshold stop does not exclude an intervening peak. Missing publication remains unqualified.
+
+Filesystem free space and a disk sampler do not measure shared cgroup memory
+headroom. TMP and SHM may consume the same memory limit. Bind fresh cgroup identity,
+finite memory.max/current and global/local event counters before a memory-qualified
+profile. Increased shared counters indicate pressure during the observed interval,
+not a specific child's OOM kill. Original disk-only receipts keep their scope.
+The retained 3→5→7276 profile stops after its first failed version. A separate approved
+binary diagnostic needs its own explicit profile and supplies no predecessor PASS.
+
+A memory observer pins self membership, the cgroup-v2 mount and the selected
+directory's device/inode before bounded descriptor-relative nofollow reads. Reject
+changed identity, malformed schema, reset counters and unavailable reads. Bounded
+bytes, calls and deadline checks do not prove a kernel read cannot stall. Reuse the
+existing finite sampler and require an observed join before the final snapshot;
+live, unjoined or unknown final observers fail admission. Stops reuse exact owned
+PID/create-time selection and existing signal authorization. Sampled peaks and
+shared counters do not identify a child's kill. Proposed headroom remains uncalibrated
+until separately admitted observations; injected-bundle controls do not qualify the
+default descriptor walk or real native integration.
+
+Exercise the captured default descriptor backend against an owned fake proc/mount/
+cgroup tree with real open/dup/fstat/read/close observations and reject paths outside
+that tree. Require a finite baseline before each poison and verify closure by
+descriptor generation because numeric FDs can be reused. Retain the intended
+failing syscall, path and errno so unrelated setup failures cannot satisfy a generic
+unavailable category. Prepared cases, actual fake-backend results, real cgroup
+latency and native headroom qualification remain separate; capped reads do not
+guarantee cancellation of a stalled kernel call.
+
+Reload rollback controls snapshot immutable field keys, nested object identities
+and value contents before the call. Restoration may replace the outer catalog while
+retaining its fields; a mutable oracle alias cannot detect changes. A warmup seam
+under the pool's nonreentrant lock observes the held lock and private generation
+token without calling the lock-taking public getter. Retain the public assertion
+after return. A timed-out baseline with missing JUnit remains failed after correction.
+Known mutation cases require the intended assertion from original failure evidence,
+then a fresh unmutated pass; they do not establish every snapshot sensitivity.
+The installed pytest JUnit emitter may omit a failure type attribute. Admit that
+observed envelope only with the original named-case AssertionError trace at the
+frozen path, function, line and assertion; reject other explicit exception types.
+Generic return code 1 is insufficient. Preserve a protocol-admission failure and
+use a named successor rather than relabeling the original attempt.
+
+An enclosing deadline must cover the admitted before/origin/test/post fallback
+intervals, including termination grace and capture work. Individual child deadlines
+do not prove that always-post can finish. Preserve an undersized original proposal
+and bind a named corrected enclosure before release. Require an actual named
+baseline before mutation sensitivity or native lifecycle claims.
+
+Verify that the actual progress constructor uses the capped, fsynced writer.
+Bind full-index and alias addresses to executable archiver constants; internally
+consistent plans can still name the wrong index. Exercise combined index overflow
+before any removal. Keep earlier results under their measured original limits.
+Likewise resolve a launcher's actual selected config path and verify its bound bytes
+before release; a manifest of an unused file supplies no admission.
+Budget all simultaneous compressed copies. Same-filesystem exclusive hardlink
+promotion avoids a second copy only after complete verification and durable indices;
+fsync the destination and directory before unlinking the staged name. Preserve both
+names on earlier failure. A typed failed-partial alias preserves bytes and metadata,
+not gzip completion; validate its whole plan before mutation and retain the original failure.
+
+Count allocated recovery bytes once per device/inode. Calculate expanded recovery,
+archives and indices on their actual mounts, then compare the bound with each next
+gate's floor. An ignored environment in a completed checkout is a distinct subject
+from completed pytest scratch. Bind accepted checkout, exact prefix, dependencies
+and observed overlap; preserve interpreter symlinks and editable-source dependencies
+for restoration at the original path. Disk recovery and tmpfs/cgroup memory recovery
+are separate. Environment removal needs its own bounded preservation plan.
+
+For a deliberate RED behind a task gateway, retain the child's semantic result
+and the gateway's exit status separately. Require the exact named assertion
+failures and original checked-child exit trace before admitting an observed
+gateway failure status; do not normalize all gateway errors. Preserve a failed
+predecessor and qualify a named successor under the same source and bounds.
+
+Distinguish a stop callback's actual invocation from its preauthorization record
+and from a successful signal. Coalescing must retain the first authorized attempt;
+exercise unattempted records and raised callbacks before accepting duplicate suppression.
+
+When owning Ruff format and Isort disagree on import layout, preserve both measured outputs and the discovered settings before changing configuration. Resolve the owning package's settings explicitly: here width 88 and vertical parenthesized imports with trailing commas satisfy both unchanged tools without importing another package's profile or changing dependencies, locks or gates. Preserve imported module/name/alias/relative-level multisets per AST block and every non-import body; a targeted file that converges to its original bytes is preserved, not a required novel delta. Qualify the same owning src/tests scope with both checks before a fresh source-bound TOKENLIGHT attempt. These explicitly authorized compatibility checks do not widen the developer-toolkit release-authoritative Devutils task. Earlier completed phase counts remain source-specific; later phases and full suites remain unqualified after a partial failure.
+
+For a namespace package declared with `from = "src"`, align a separately authorized Mypy probe's explicit package base with that physical source root. `--explicit-package-bases` reads MYPYPATH, configured mypy_path and cwd; a src directory argument alone does not declare src as the base. Scope the exact source-root path to the one invocation, preserve the original target files and flags, and retain editable-origin evidence. Do not add __init__.py, exclude files or weaken checks to hide duplicate module names. Devutils has no generic toolkit typecheck gate; this extra TOKENLIGHT probe does not create one. Record inherited path variables as unknown when the original run did not capture them.
+
+Validate output addresses selected by every executable config field, not only the launcher's CONFIG filename and attempt root. A cloned generator/origin probe may retain a prior attempt's output literals even when all current source and immutable input hashes match. Bind output bases to the fresh current phase directories; keep historical read-only input addresses unchanged. Inspect nested Python code strings as well as outer code. Retain a failure that occurs before generator execution as an executor address failure, not a generated-workflow mismatch. Before claiming historical outputs were preserved, require a recorded body baseline; successful guards protect only the rows they actually checked.
+
+At the selected process-launch boundary, derive the command timeout and parent fallback from the same fresh remaining-deadline measurement. A later positive-only check does not preserve a grace reserve computed before output setup. Refuse a new stage when the final remainder cannot cover its reserved kill and fallback handling.

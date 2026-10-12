@@ -1,0 +1,143 @@
+{
+  "ROOT_envelope_reused_seconds": [
+    320,
+    350
+  ],
+  "ROOT_review_file_HASH_absent": true,
+  "ROOT_template": {
+    "bytes": 6718,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/ROOT-external-first-five-v8-measured-Git-parent-TEMPLATE-NOTEXECUTION.py",
+    "sha256": "b9024b2043c9857e75e13f255dabc24ebc3547293d0bf2f41a3a8a0151b433db"
+  },
+  "actual18_methods_run": 0,
+  "binding_count": 119,
+  "child_envelope_unchanged_seconds": [
+    240,
+    120,
+    10,
+    140,
+    30,
+    30
+  ],
+  "final_cfg_binding": {
+    "bytes": 46277,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v8_current9760_measured_managed_Git_PURE18_inputs_NOTRUN_v3_originalFAIL_bound.json",
+    "sha256": "8cb014e904b4fd754a5858c2e0349a881dbe0bcb975f5b67e0aae215b747b388"
+  },
+  "minimum_child_source_proof": {
+    "bytes": 2226,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/SOURCE-PREPARED-v8-four-field-Git-row-separate-owner-and-original-system-binding-proof-v2.json",
+    "sha256": "7d55034d7d85906446e372214de9eb2608e11e4f5388e9673d8bb23a2153e404"
+  },
+  "original98_rows_prefix_exact": true,
+  "original_ROOT_parent_exact": {
+    "bytes": 6833,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-reviewed-first-five-v7-PURE18-external-parent-v2.py",
+    "sha256": "700bb81131a62c48787c517d61d0e833c843c935f88ad26ea952bf05c86e8551"
+  },
+  "original_failure_bound_rows": [
+    {
+      "bytes": 1307,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-PURE18-v7-exact-reviewed-argv-original-execution/OWNERFINAL-root-original-exact-reviewed-PURE18-v7-execution.json",
+      "sha256": "d0088d399f58c9173ba0b8f71cb00aa2d5f1da638d6c2c88debf9473eb09f4af"
+    },
+    {
+      "bytes": 6833,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-reviewed-first-five-v7-PURE18-external-parent-v2.py",
+      "sha256": "700bb81131a62c48787c517d61d0e833c843c935f88ad26ea952bf05c86e8551"
+    },
+    {
+      "bytes": 4829,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v7-concrete-ROOT-parent-independent-SOURCE-PREEXEC-review/OWNERFINAL-independent-first-five-v7-named-v2-concrete-ROOT-parent-SOURCE-PREEXEC-GO.json",
+      "sha256": "cf97efe69e087d5030deebbd680dbc320ec6d4a16c46ef62888ea403a01c665d"
+    },
+    {
+      "bytes": 2672,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-first-five-v7-current9760-reviewed-PURE18-outer/OWNERFINAL-root-original-first-five-v7-PURE18-outer.json",
+      "sha256": "82743cdaacde40e78283cb38381f36c3b0a35b7227431a41b918aa69cedfded8"
+    },
+    {
+      "bytes": 884,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-first-five-v7-current9760-reviewed-PURE18-outer/external-before-envelope.json",
+      "sha256": "2f93f186b2e2a7f453e03338cef78f6e3e42d62589b63e7f99e58939c6b5744d"
+    },
+    {
+      "bytes": 884,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-first-five-v7-current9760-reviewed-PURE18-outer/external-alwayspost-envelope.json",
+      "sha256": "2f93f186b2e2a7f453e03338cef78f6e3e42d62589b63e7f99e58939c6b5744d"
+    },
+    {
+      "bytes": 1485,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-first-five-v7-current9760-reviewed-PURE18-outer/root-one-pure18-release.json",
+      "sha256": "fd1dcc5eb35dd5617cba90f508afc8e63b6e6ccc50e465782afe5a66b043c81c"
+    },
+    {
+      "bytes": 15828,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v7-current9760-independent-PURE18-PREEXEC-review/OWNERFINAL-independent-first-five-v7-clean9760-managed-machine18-SOURCE-PREEXEC-GO-ROOT-envelope-v2.json",
+      "sha256": "2dd770932fd2823a3cf4880e2fd0e12992de266e5bbdaddf23096b442aba5899"
+    },
+    {
+      "bytes": 4750,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v7-original-PURE18-ACTUALFAIL-independent-review/OWNERFINAL-independent-original-PURE18-v7v2-managed-Git-ACTUALFAIL.json",
+      "sha256": "ebdfa0ae82cda27d515192d26098c12c3a689f19212cee9f58920a3304ae570c"
+    },
+    {
+      "bytes": 10162,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v7-original-PURE18-ACTUALFAIL-independent-review/private-original-PURE18-v7-guard-failure-and-managed-Git-data-proof.json",
+      "sha256": "6087388793d9c2073126bbb4705bcae5d0db40ae7b983a167966fb43d7ebef74"
+    },
+    {
+      "bytes": 1941,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v7-original-PURE18-ACTUALFAIL-independent-review/minimum-named-v8-managed-selected-Git-binding-and-fresh-namespace-PROPOSAL-NOTAPPLIED.json",
+      "sha256": "bc58275cc8c3858ababb32d650367cb715fcda38e13813d672f4231bca128994"
+    },
+    {
+      "bytes": 3899192,
+      "mode": "0o775",
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/git",
+      "sha256": "cd36778ef52d80fce1e3944b7f334460bec0921597dcf20d3d50d87d7560a588"
+    },
+    {
+      "bytes": 4082768,
+      "mode": "0o755",
+      "path": "/usr/bin/git",
+      "sha256": "356db14e102d68a1a37d8a1ac577dfd678d45d46e92f468bef8b7154e7bfdc60"
+    }
+  ],
+  "original_failure_status_preserved": true,
+  "original_independent_actual_FAIL": {
+    "bytes": 4750,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v7-original-PURE18-ACTUALFAIL-independent-review/OWNERFINAL-independent-original-PURE18-v7v2-managed-Git-ACTUALFAIL.json",
+    "sha256": "ebdfa0ae82cda27d515192d26098c12c3a689f19212cee9f58920a3304ae570c"
+  },
+  "original_root_inner": {
+    "bytes": 2672,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-first-five-v7-current9760-reviewed-PURE18-outer/OWNERFINAL-root-original-first-five-v7-PURE18-outer.json",
+    "sha256": "82743cdaacde40e78283cb38381f36c3b0a35b7227431a41b918aa69cedfded8"
+  },
+  "original_root_master": {
+    "bytes": 1307,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-PURE18-v7-exact-reviewed-argv-original-execution/OWNERFINAL-root-original-exact-reviewed-PURE18-v7-execution.json",
+    "sha256": "d0088d399f58c9173ba0b8f71cb00aa2d5f1da638d6c2c88debf9473eb09f4af"
+  },
+  "root_template_whole_inverse_AST_literal_paths_decision_labels_and_row_count_only": true,
+  "tests_imports_executions": "NOT_RUN"
+}

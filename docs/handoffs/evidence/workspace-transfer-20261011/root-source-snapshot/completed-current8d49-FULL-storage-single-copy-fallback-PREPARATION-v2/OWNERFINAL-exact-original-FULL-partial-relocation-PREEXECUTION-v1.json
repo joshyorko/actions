@@ -1,0 +1,264 @@
+{
+  "OWNED_once_path": "/workspace/engineering/root-one-original-FULL-partial-relocation-owned-v1",
+  "ROOT_release_path": "/workspace/engineering/root-one-original-FULL-partial-relocation-release-v1.json",
+  "actual_child_argv": [
+    "/usr/bin/timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "600s",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/relocate_original_partial_child_once.py",
+    "--one-consumed-root-partial-relocation",
+    "e2ca10cd9b5604940edf35ed1d41003a2a146f439dddc1734c7babe5a4112742"
+  ],
+  "actual_full_index": null,
+  "actual_storage_execution": "NOT_RUN",
+  "all_future_paths_absent": true,
+  "all_original_stage_VERIFY_fullindex_FSYNC_before_ANY_expanded_remove": true,
+  "allowed_noncore_changes": [
+    "Exact failed partial bytes/metadata copy to unique existing SHM and typed durable alias before old partial name unlink"
+  ],
+  "before_and_alwayspost": "exact current1440GitFS/original237/native1192/prepared30/five origins/existing9fixedaliases plus failed partial physical-or-exact-physical-alias",
+  "budget": {
+    "KILL_after_seconds": 10,
+    "Python_child_envelope_seconds": 615,
+    "ROOT_outer_KILL_after_seconds": 10,
+    "ROOT_outer_TERM_seconds": 900,
+    "SHM_before_relocation_floor": 285196165,
+    "TERM_child_seconds": 600,
+    "TMP_before_single_copy_floor": 150994944,
+    "TMP_removal_reserve": 134217728,
+    "combined_full_progress_alias_indices_bytes": 16777216,
+    "metadata_guard_seconds": 60,
+    "no_native_mount_floor_waiver": "DATA_ONLY_NO_NATIVE_EXECUTION",
+    "single_copy_archive_actual_bytes_including_close_footer": null
+  },
+  "capacity_snapshot": {
+    "/dev/shm": 3236864000,
+    "/tmp": 316485632,
+    "/workspace": 1220444160
+  },
+  "controls": {
+    "FAIL": 0,
+    "PASS": 21,
+    "SKIP": 0,
+    "actual_GREEN": {
+      "bytes": 4091,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/actual-relocation-and-single-copy-boundary-GREEN-controls.json",
+      "sha256": "36bf6cbf4f664db45551b90c52b3e9be8f64863bb79da8c5877315131de0e422"
+    },
+    "original_plan_schema_RED": {
+      "bytes": 769,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/original-malformed-schema-RED-proof.json",
+      "sha256": "ec923ca1a653872d9ec19e3ab326e5ec59fca7da62179c0f9e09296afb87ecfd"
+    },
+    "real_selected_paths_touched": false
+  },
+  "decision": "NO_OPERATION_BY_OWNER",
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "durable_learning_captured": "All retained compressed copies belong in the finite budget; exclusive verified single-copy promotion is distinct from copying; failed partial relocation retains exact original provenance without completion upgrade; fixed plan must validate before mutation",
+    "evidence": [
+      {
+        "bytes": 921,
+        "mode": "0o400",
+        "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/static-corrected-single-copy-core-address-budget-proof.json",
+        "sha256": "fe89aead3c670305de8aa7861bc875cad4201bc5e4de8f94bf0e047998b5c4bd"
+      },
+      {
+        "bytes": 4091,
+        "mode": "0o400",
+        "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/actual-relocation-and-single-copy-boundary-GREEN-controls.json",
+        "sha256": "36bf6cbf4f664db45551b90c52b3e9be8f64863bb79da8c5877315131de0e422"
+      },
+      {
+        "bytes": 3628,
+        "mode": "0o400",
+        "path": "/workspace/engineering/completed-current8d49-FULL-storage-original-FAIL-independent-review/OWNERFINAL-independent-original-completed-FULL-storage-FAIL-preservation-review.json",
+        "sha256": "593e48629a6cdf99c1ff9844e0231753629c650c923e8030aa875828ccd61936"
+      }
+    ],
+    "exact_proposed_delta": {
+      "bytes": 645,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/proposed-canonical-single-copy-promotion-and-failed-partial-alias-lesson.patch",
+      "sha256": "677897a486955f7ca9b6e6a626c10d5472314f574fcf9bd595029e7d31db6058"
+    },
+    "remaining_uncertainty": "Original256MiB compression outcome prospective, actual preservation/relocation NOT_RUN; no universal quiescence, no full TMP-floor or native acceptance claim",
+    "stale_or_ambiguous_guidance_removed": "Two-copy budget is not applicable to an independently reviewed single-copy seam; complete gzip verification must never be implied by preserving an incomplete file; invalid plans must not fail only after source unlink"
+  },
+  "driver_binding": {
+    "bytes": 10167,
+    "mode": "0o444",
+    "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/launch_original_partial_relocation_once.py",
+    "sha256": "5f080cb382133b986bbbde1118d311c24579d57b697fabf67876f46ce2f43fbc"
+  },
+  "fresh_capacity_and_ROOT_serialization_required": true,
+  "independent_review_required_decision": "GO_EXACT_ORIGINAL_FAILED_FULL_PARTIAL_RELOCATION_PREEXECUTION_V1",
+  "managed_activation": "existing activate.sh18exports+PATH19, primary RCC PATH0/cached Toolkit bin PATH1, unset PYTHONOPTIMIZE/PYTEST_ADDOPTS, PYTHONDONTWRITEBYTECODE1",
+  "native_supported_newer_release_registry_qualification": "UNCHANGED_HOLD_NO_EXECUTION",
+  "original_failed_128MiB_attempt": {
+    "bytes": 3628,
+    "mode": "0o400",
+    "path": "/workspace/engineering/completed-current8d49-FULL-storage-original-FAIL-independent-review/OWNERFINAL-independent-original-completed-FULL-storage-FAIL-preservation-review.json",
+    "sha256": "593e48629a6cdf99c1ff9844e0231753629c650c923e8030aa875828ccd61936"
+  },
+  "original_failed_partial_gzip_completion": "UNKNOWN_NOT_CLAIMED",
+  "original_partial_metadata": {
+    "bytes": 134201221,
+    "gid": 1000,
+    "kind": "file",
+    "mode": "0o600",
+    "mtime_ns": 1791751045104218583,
+    "nlink": 1,
+    "path": "/tmp/actions-completed-current8d49-FULL-scratch-preservation-stage-v1/completed-FULL-once-1.tar.gz",
+    "sha256": "016597e8bc6083589de4630232147e6f13e2169cee519c86693b6dba47ac189a",
+    "uid": 1000
+  },
+  "original_selected_FULL_members": 15831,
+  "phase": "relocation",
+  "prior_plan_implementation_failures": "Retained original constructor static-comparison assertion and mistaken expected-JSONDecodeError control; neither an archive or product defect; original malformed schema actual RED retained before named plan-validation GREEN",
+  "private_references": [
+    {
+      "bytes": 21276,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/archive_exact_one_completed_FULL_single_copy_once.py",
+      "sha256": "e717faae8a9e5f7a1ccea85c17df928a728216e43bf77256c487e685d9971771"
+    },
+    {
+      "bytes": 4367,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/exact_failed_partial_relocation.py",
+      "sha256": "8cf07e76694beae33d5fd772aadda889a9703abdcae0c43fc585dd17d950580c"
+    },
+    {
+      "bytes": 6232,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/exact_failed_partial_relocation_v2.py",
+      "sha256": "9058cfc3e86ebbc7f8e765d8853a4883f27cebc068f4b08d25e7104c8be3a2bc"
+    },
+    {
+      "bytes": 1491,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/exclusive_single_copy_archive_promotion.py",
+      "sha256": "63c8d00d5830672ad4e03d5e5dd811d4735f32bd7ca865ff4c6f63d3c2587a09"
+    },
+    {
+      "bytes": 7448,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/guard_readonly.py",
+      "sha256": "583e4aff39009b0dce28e25687fe20a270d97540407a778d88f878f97ef628ce"
+    },
+    {
+      "bytes": 10167,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/launch_original_partial_relocation_once.py",
+      "sha256": "5f080cb382133b986bbbde1118d311c24579d57b697fabf67876f46ce2f43fbc"
+    },
+    {
+      "bytes": 10383,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/launch_single_copy_FULL_storage_once.py",
+      "sha256": "a8a693f5fc4dadf09433e46ea54b65d67048c14f3203c9166223fa71566b24ae"
+    },
+    {
+      "bytes": 2294,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/relocate_original_partial_child_once.py",
+      "sha256": "5d1eee5deb1bc48832299569a8963bb15ec968651dda77292b171e56d4529080"
+    },
+    {
+      "bytes": 4091,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/actual-relocation-and-single-copy-boundary-GREEN-controls.json",
+      "sha256": "36bf6cbf4f664db45551b90c52b3e9be8f64863bb79da8c5877315131de0e422"
+    },
+    {
+      "bytes": 769,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/original-malformed-schema-RED-proof.json",
+      "sha256": "ec923ca1a653872d9ec19e3ab326e5ec59fca7da62179c0f9e09296afb87ecfd"
+    },
+    {
+      "bytes": 1408,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/private-exact-original-partial-relocation-plan.json",
+      "sha256": "e2ca10cd9b5604940edf35ed1d41003a2a146f439dddc1734c7babe5a4112742"
+    },
+    {
+      "bytes": 3388,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/private-fixed-preparation-address-and-binding-plan-v2.json",
+      "sha256": "82128bf891a6cfd6cb32ac8fcd2e663e52a6f1d781d95c0960d4a75cdffb04e2"
+    },
+    {
+      "bytes": 921,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/static-corrected-single-copy-core-address-budget-proof.json",
+      "sha256": "fe89aead3c670305de8aa7861bc875cad4201bc5e4de8f94bf0e047998b5c4bd"
+    },
+    {
+      "bytes": 3974,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/static-two-root-release-launcher-address-closure.json",
+      "sha256": "c6a5ee58b0c91fe7e40eb79209d863889eb9f3f5270d7b4d2dfec8df447e7567"
+    },
+    {
+      "bytes": 645,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/proposed-canonical-single-copy-promotion-and-failed-partial-alias-lesson.patch",
+      "sha256": "677897a486955f7ca9b6e6a626c10d5472314f574fcf9bd595029e7d31db6058"
+    },
+    {
+      "bytes": 14236,
+      "mode": "0o600",
+      "path": "/tmp/construct-FULL-storage-single-copy-fallback-private-v2.py",
+      "sha256": "a02585a181e2a18a40ed1fea0889c55b1eef0dd29c0afb8b729e76562c2459cc"
+    },
+    {
+      "bytes": 6812,
+      "mode": "0o600",
+      "path": "/tmp/finish-FULL-storage-single-copy-fallback-private-v2.py",
+      "sha256": "ebb1057bff7575f085a43511ab63173b1782f77fea0f1ba5bc594ed27db73d21"
+    },
+    {
+      "bytes": 13501,
+      "mode": "0o600",
+      "path": "/tmp/build-FULL-storage-two-root-release-launchers-v2.py",
+      "sha256": "266a7a1d35bb267d553be60ab4f38357821784c342984dd54016614f9e53c0c4"
+    },
+    {
+      "bytes": 2027,
+      "mode": "0o600",
+      "path": "/tmp/control-FULL-storage-original-relocation-mapping-RED-once.py",
+      "sha256": "cd98e4b6f822e6bc8b3d92a5024ee7c0302912590f07e5bd1fb128b907f10a40"
+    },
+    {
+      "bytes": 2244,
+      "mode": "0o600",
+      "path": "/tmp/control-FULL-storage-original-schema-RED-once.py",
+      "sha256": "b2bd7ad3e29eb45cf235ad0b0df43866838dd36a4e6de1ca57547c2557e613bf"
+    },
+    {
+      "bytes": 6224,
+      "mode": "0o600",
+      "path": "/tmp/control-FULL-storage-single-copy-and-relocation-GREEN-once.py",
+      "sha256": "6611c9fd1e55c6df91fad7348948294b3efc37bded098532cb993058f05c8730"
+    }
+  ],
+  "release_schema": "ROOT_ONE_EXACT_FAILED_FULL_PARTIAL_RELOCATION_RELEASE_V1",
+  "required_previous_relocation_actual": null,
+  "schema": "EXACT_ORIGINAL_FAILED_FULL_PARTIAL_RELOCATION_PREEXECUTION_V1",
+  "shared_cgroup_RAM_snapshot": {
+    "memory.current": "17138216960",
+    "memory.max": "17179869184"
+  },
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_FULL_TMP1200000000_floor_restored_claim": false,
+  "source_FULL_qualification": "UNCHANGED_ORIGINAL1470PASS13SKIP_NO_RERUN",
+  "status": "PREEXECUTION_PENDING_INDEPENDENT_GO_ROOT_DISTINCT_RELEASE",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none"
+}

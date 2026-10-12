@@ -1,0 +1,60 @@
+{
+  "schema": "actions-pr308-independent-control-normal-push-review/v1",
+  "decision": "GO_NORMAL_EXISTING_BRANCH_CONTROL_SOURCE_PUSH_ONLY",
+  "C": "b673ddd761ba4ccd68e9baa8faaa9ab666df794e",
+  "C_tree": "56d108fcdb5d43f7f27a8f2554fec51b702519f4",
+  "sole_parent_SOURCE_S": "7eb5bce946750555ab009f77592862920a901506",
+  "SOURCE_S_tree": "3ff76037779763d0461ff3a755b900c9ed83dcf8",
+  "branch": "fix/rcc-candidate-wheel-identities-20261010",
+  "checkpoint": {
+    "path": "/workspace/engineering/pr308-accepted-public-guard-control/CONTROL-frozen-checkpoint.json",
+    "bytes": 9522,
+    "sha256": "4771821583f54164018854bee073ba8318d3164ea4e152324525913f6af734c6"
+  },
+  "proof": {
+    "path": "/workspace/engineering/pr308-accepted-public-guard-independent-control-review/independent-exact-C-control-proof.json",
+    "bytes": 13040,
+    "sha256": "d618c380a628c4f17947c94136205c53700f0b5937fece6bdf4034724af5cdd3"
+  },
+  "reviewer_script": {
+    "path": "/workspace/engineering/pr308-accepted-public-guard-independent-control-review/verify_control.py",
+    "bytes": 8297,
+    "sha256": "dccbd169cad1dee9e0bc495d100534e807b923579bbc274d4f6b3899193b8bf5"
+  },
+  "verified_control_scope": {
+    "complete_tree": "1409currentGit/working/precommit hashes and executablebits exact;1406other mode/body pairs exact source S;only3declared controlpaths changed;no additions/deletions",
+    "generator_AST": "Entire generator normalizes to S with only sourceSHA/sourceTree constants and exact existing308branchoptin addition; source pin is7eb immutable parent, not selfC",
+    "developer_test_AST": "Entire test normalizes to S with two expected candidate constants and three-branch contract; all other tests/assertions unchanged",
+    "workflow_raw_bytes": "Exact S after threeSHA/twoTree substitutions and one branchline; all source admission predicates/rawuploads/threecases/Core1.0.2/profiles/permissions/pathfilters/events/deadlines/retries/skips unchanged; all other workflows exact S",
+    "source_boundaries": "Nine source sample mode/hash exact immutable7eb candidate; complete268production+5selected tests exact S/current776; old92498 Runtimeadapter delta UNQUALIFIED; nine-sample does notreplace completeproducer qualification",
+    "gates": "Original pinRED1FAIL4PASS and branchRED1FAIL4PASS verified; GREEN55/Toolkit96; changedRuffcheck/format/Isort/compile/gen8+dependabot/30trackedYAML anddiffcheck records accepted",
+    "source_full_reuse": "Original S1190PASS13SKIP/Mypy337 remain source S results, not a C full-suite run; complete package/noncontrol source leaves unchanged. All16currentC and31sourceS immutable external refs exact; source pre-full working paths resolve historical S, not falsely require currentC equal changed pins.",
+    "source_guard": "Original accepted19service-free guard controls and negativeactualcandidate/2465watchdog/2510test+10cleanup source intact; no CLI parentdeadline actualcoverage or positiveofflinecandidate acceptance claim"
+  },
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md",
+    "Exact accepted SOURCE delta": {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/exact-implemented-canonical-delta.patch",
+      "bytes": 4385,
+      "sha256": "2bd81847fda0b761e42b24c704dbe9eccda907c21f40cc3b4e5d88bf704e12f6"
+    },
+    "Exact external CONTROL branch-list correction": {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-independent-control-review/canonical-three-reviewed-control-branches-proposed.patch",
+      "bytes": 1016,
+      "sha256": "cd97355e9506350c286532607b87c5ce4ff492073a78fb72336517fe8164b5cd"
+    },
+    "Disposition": "SOURCE2bd guard/source-first guidance accepted and byteexact in C; external three-branch correction PROPOSED for root next canonicalbatch, leaving frozenS/C immutable. Root explicitly acknowledged correction and nextbatch retention while current516index frozen.",
+    "Durable learning captured": "Keep immutable SOURCE first and separate CONTROL pins/branch admission; branch allowlist docs must enumerate exactly the reviewed generator/generatedworkflow contract. Actual3case evidence remains separate from sourceguard/candidateCLIdeadline/private/native gates.",
+    "Evidence": "Whole AST/rawworkflow normalization, source parent GitSHA/tree7eb/3ff, onlythreecontrolpath Gitdiff, pin+branchRED/GREEN55/Toolkit96, exactSOURCE2bd andcurrent three explicit branches.",
+    "Stale or ambiguous guidance removed": "Inherited guide still lists only two allowed branches; proposed exact three-line correction includes authorized existing308branch while preserving original opt-ins/pathfilter. No cosmetic child or fabricated source execution.",
+    "Remaining uncertainty": "FreshcurrentC/currentS full expected hostedCI, testedmerge identity and actualthreecase receipts pending. Independentbranchpermissionsunchanged rule remains subject to explicit reviewedexisting-branch authorization; no arbitrary branch admitted."
+  },
+  "remaining_HOLDs": [
+    "Fresh exactC/S hosted fullcheck/job inventory and three-case actual admission required; no old302/4ca/currentS sourcefull receipt as C actual proof.",
+    "ActualnegativecandidateCLI2510 invocation NOTRUN/NOTAUTHORIZED; positivecandidate/private01f/frozen-v6/full134 remain HOLD.",
+    "Oldnative92498 changedadapter unqualified; platform/providercoldregistry/OAuthcontent/Runtimepublication remain HOLD.",
+    "Integration requires actualcurrenttarget/head CI, reviews/threads/status/policy and root final readback; this GO is source push only."
+  ],
+  "authorization_boundary": "Root owns guarded normal push to authenticated existing PR branch. Reviewer performed only immutablebyte/Git/AST/rawrecord inspection and externalreceipt/proposal creation; no repository edits, gateway/tests/actualrun/download/push/merge.",
+  "Upstream disposition": "none"
+}

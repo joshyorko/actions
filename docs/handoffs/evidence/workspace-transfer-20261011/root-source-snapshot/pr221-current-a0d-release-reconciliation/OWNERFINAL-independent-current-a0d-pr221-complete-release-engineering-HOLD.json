@@ -1,0 +1,758 @@
+{
+  "schema": "actions-independent-current-a0d-pr221-release-reconciliation/v1",
+  "verdict": "HOLD_CURRENT_CI_AND_RELEASE_ACCEPTANCE",
+  "head": "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+  "head_tree": "1181b35b11e4904405ca1a9a3a398e6c1c3abfd0",
+  "actual_head_ordered_parents": [
+    "6181b044c75de35386f1ae30e71725398b6a7feb",
+    "83123ff42c21587e3eb944e20af89f1a9e9ff0ea"
+  ],
+  "base": "a70993fafc99a9f94041485542d5a720797ca394",
+  "API_prospective_synthetic": {
+    "sha": "a4fe6d46fe2ecf4515668958d8b2613282bba827",
+    "ordered_parents": [
+      "a70993fafc99a9f94041485542d5a720797ca394",
+      "a0d258a16095b95b1bf9000cb1201cddfaff4779"
+    ],
+    "tree": "1181b35b11e4904405ca1a9a3a398e6c1c3abfd0",
+    "scope": "API prospective identity only; original current executed runner checkout UNKNOWN because no current logs acquired"
+  },
+  "named_refs_PR_and_graphQL_bracket_stable": true,
+  "CI": {
+    "declared_PR_flows": 13,
+    "declared_PR_jobs": 34,
+    "observed_runs": 13,
+    "all_expected_jobs_materialized": true,
+    "all_check_job_IDs_equal": true,
+    "checks": 34,
+    "success": 32,
+    "expected_WorkItems_tag_skip": 1,
+    "pending": 1,
+    "failure": 0,
+    "pending_subject": {
+      "run": 38135819854,
+      "job": 114459340780,
+      "name": "build (windows-py3.12-devmode)",
+      "status": "in_progress",
+      "conclusion": null
+    },
+    "expected_skip": {
+      "job": 114459535744,
+      "condition": "startsWith(github.ref, 'refs/tags/actions-work-items-')"
+    },
+    "late_Runtime_collector": {
+      "run": 38135819971,
+      "job": 114460804626,
+      "conclusion": "success",
+      "needs": [
+        "build-sdist",
+        "build-wheels"
+      ],
+      "scope": "PR validation/collection only; registry upload guards push-only"
+    },
+    "complete_source_matrix": {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/safe-current-a0d-declared-workflow-job-and-artifact-metadata-census.json",
+      "bytes": 37885,
+      "sha256": "473f949633aaa3f9bd2d434ac0b932286b4f37b1abe1bc64c8de295bfaac3bcc"
+    },
+    "snapshot_scope": "Separate response timestamps, stable ref bracket, no atomic job snapshot or repeat poll"
+  },
+  "connections": {
+    "closingIssuesReferences": {
+      "count": 0,
+      "complete": true
+    },
+    "reviewThreads": {
+      "count": 0,
+      "complete": true
+    }
+  },
+  "review_count": 0,
+  "review_comment_count": 0,
+  "draft": true,
+  "REST_mergeable": true,
+  "REST_mergeable_state": "unstable",
+  "GraphQL_mergeStateStatus": "UNSTABLE",
+  "policy": {
+    "traditional_protection": "UNKNOWN_HTTP403; no bypass authority",
+    "visible_branch_rules": 0,
+    "visible_rulesets": 0,
+    "branch_endpoint_protected": false,
+    "branch_endpoint_protection": {
+      "enabled": false,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "scope": "Visible non-enforcement does not resolve inaccessible traditional endpoint or draft/release gates"
+  },
+  "current_215_tracked_distribution_input_preservation": {
+    "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/safe-current-a0d-215-tracked-Runtime-input-body-and-mode-comparison.json",
+    "bytes": 64910,
+    "sha256": "53064c6bdad174cbbf463264a3ee2d2ad9f558c6c641d522105e60d6996537a6"
+  },
+  "historical_receipts_separate": [
+    {
+      "path": "/workspace/engineering/pr221-current618-terminal-CI-and-artifact-metadata-successor/OWNERFINAL-current618-terminal-CI-artifact-metadata.json",
+      "bytes": 86678,
+      "sha256": "1cfbc1df13a1df43558271df7ed413e40c45a474644e25a912504a61fcca665e",
+      "scope": "Historical accepted618 source/artifact/consumer only; no current-a0d CI/wheel/consumer carry"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-complete-distribution-integrity-owned/OWNERFINAL-current618-complete-original-distribution-integrity.json",
+      "bytes": 24118,
+      "sha256": "75757b7de4162b6e8afd739fd983b99325cd18ea2a368a279d4f233197c4314a",
+      "scope": "Historical accepted618 source/artifact/consumer only; no current-a0d CI/wheel/consumer carry"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-complete-distribution-independent-review/OWNERFINAL-independent-current618-seven-distribution-integrity-review-final.json",
+      "bytes": 5300,
+      "sha256": "38ec59efeccbdb9b17bd308bc3aee1143b0d50f6c9678b35cfb7152262cf412e",
+      "scope": "Historical accepted618 source/artifact/consumer only; no current-a0d CI/wheel/consumer carry"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/OWNERFINAL-current618-one-installed-Linux-consumer-checkpoint.json",
+      "bytes": 12657,
+      "sha256": "cc0832511827bc73431f2adbe0dbb92ec01b52b03afa4164cea67d0ae4aaf246",
+      "scope": "Historical accepted618 source/artifact/consumer only; no current-a0d CI/wheel/consumer carry"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-linux-consumer-independent-preexecution-review/OWNERFINAL-independent-current618-one-installed-Linux-consumer-review.json",
+      "bytes": 10429,
+      "sha256": "07a2e926bd7923826521d34c0070fd2fe4c2e2484e151144c7c4b7c989900b52",
+      "scope": "Historical accepted618 source/artifact/consumer only; no current-a0d CI/wheel/consumer carry"
+    }
+  ],
+  "root_partial_snapshot_preserved": {
+    "path": "/workspace/engineering/pr221-current-a0d-root-check-and-closure-metadata-1157.json",
+    "bytes": 13435,
+    "sha256": "01ec7be23109ab27f9ce88aa22a91ffd37510389e2662e47849e71ea37d61292"
+  },
+  "current_artifact_qualification": "METADATA ONLY. No original current wheel/ZIP body download, CRC/RECORD/generated-content measurement, consumer or native admission. Artifact name/API digest not proof of executed checkout.",
+  "remaining_HOLD": [
+    "One Runtime Windows integration/test job still IN_PROGRESS; no terminal failure census inferred",
+    "Draft #221 and inaccessible traditional-protection policy remain independent",
+    "Historical accepted618 full7 integrity and Linux cp312 actual stay separate from currenta0d producer",
+    "Required generated OAuth content historically EMPTY in all six wheels and sdist; current untracked contents UNKNOWN/no approved authority, no empty-or-nonempty carry",
+    "Private code01f and frozen-v6 remain UNRECOVERED",
+    "PR312 source770 is not integrated intoa0d; old Windows raw CRLF/generated static differences remain unwaived; compiler/checkout semantic cause UNKNOWN",
+    "Current all7 distributions/installed cross-platform/native/publication/tag/upgrade/Cask/consumer/provider/private/full graph/release not accepted"
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; accepted exact existing imported deltas verified in owning canonical checkpoint",
+    "Exact_delta_disposition": [
+      {
+        "patch": {
+          "path": "/workspace/engineering/pr300-current618-CI-admission-review/canonical-event-specific-push-paths-proposed.patch",
+          "bytes": 909,
+          "sha256": "592949e0da5d48236262b87f3d6568dbde0d78fc7cc92835a7e8a512c48f73aa"
+        },
+        "exact_integrated_delta": "Evaluate workflow path filters against the event's own changed-file set: a PR\nuses its base/head comparison, while a named branch push uses the authenticated\nbefore/after update. A merged target can trigger a push-only Copilot path filter\neven when that workflow is excluded from the PR set. Tag-only push filters do\nnot admit a branch update; keep these namespaces and auxiliary jobs separate.\n\n",
+        "source_scope": "Accepted existing owning canonical checkpoint delta; no cosmetic or current engineering-source child"
+      },
+      {
+        "patch": {
+          "path": "/workspace/engineering/pr221-current776-preflight/canonical-policy-and-snapshot-proposed.patch",
+          "bytes": 897,
+          "sha256": "9744b01f0f2f888de5f88f129b857df33938cb1adf182ec32b30ed08b2f14fe8"
+        },
+        "exact_integrated_delta": "An empty visible ruleset list does not resolve an inaccessible traditional\nbranch-protection endpoint. Bracket a paginated census with live named-ref\nreadbacks. If the target advances during collection, retain the old tuple and\nquery the new head separately; do not transfer its predecessor's passing CI.\n",
+        "source_scope": "Accepted existing owning canonical checkpoint delta; no cosmetic or current engineering-source child"
+      },
+      {
+        "patch": {
+          "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/canonical-partial-platform-consumer-scope-proposed.patch",
+          "bytes": 1158,
+          "sha256": "bf95da899763f97c016f76fa4a0cf8878ebba8326d57c11ab1a520b1df597c81"
+        },
+        "exact_integrated_delta": "\nA platform artifact containing only Linux wheels does not satisfy the\nseven-artifact release inventory. A selected cp312 consumer has a distinct\nnonpublishing scope; retain its original ZIP, wheel, `METADATA`, `RECORD` and\nbuild identities while cross-platform inventory, tag and upload gates remain\npending. After integration, compare the actual merge tree and selected tracked\npayload bytes with the build's synthetic tree. Tree equality does not turn that\nearlier synthetic checkout into an actual integration build. Derive the Python\nmember count from the new wheel bytes even when it equals an earlier count,\nand retain generated-input authority and content holds separately.\n",
+        "source_scope": "Accepted existing owning canonical checkpoint delta; no cosmetic or current engineering-source child"
+      },
+      {
+        "patch": {
+          "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/canonical-generated-static-and-complete-checkout-scope-proposed-v2.patch",
+          "bytes": 1212,
+          "sha256": "1306a314811448c8090b4aa2e77340e676bbba397ceb6c7ee0477b908cb9b2bf"
+        },
+        "exact_integrated_delta": "When qualifying generated Runtime frontend content, decode `_static_contents.py`\nas data and bind each asset's bytes to its builder checkout. The encoder reads\n`dist/index.html` as bytes and writes their representation; setting the generated\nmodule's newline to LF does not normalize the embedded asset. Keep outer module\nCRLF differences, decoded asset CR differences and semantic equivalence separate.\nA carriage-return-removal comparison is diagnostic evidence, not a source or\ncontent waiver. If the original frontend input and effective checkout newline\nsetting were not retained, keep checkout-versus-compiler causation unknown.\n\nInclude tracked non-Python package text in checkout-byte qualification. A\nPython-only rule leaves packaged README, HTML, YAML and other text differences\nunresolved; keep binary archives and intentional platform-specific line-ending\nfixtures outside any proposed text rule. A checkout-byte fix must also appear\nin affected builder and test workflow path filters. A passing census that\nexcluded those workflows does not qualify its distribution bytes.\n\n",
+        "source_scope": "Accepted existing owning canonical checkpoint delta; no cosmetic or current engineering-source child"
+      }
+    ],
+    "Durable_learning_captured": "Derive jobs from own event paths/matrices/needs, retain current original checkout versus API synthetic distinction, compare all tracked non-Python and Python inputs, separate source preservation from generated-content and platform-consumer qualification.",
+    "Evidence": [
+      {
+        "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/safe-current-a0d-declared-workflow-job-and-artifact-metadata-census.json",
+        "bytes": 37885,
+        "sha256": "473f949633aaa3f9bd2d434ac0b932286b4f37b1abe1bc64c8de295bfaac3bcc"
+      },
+      {
+        "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/safe-current-a0d-215-tracked-Runtime-input-body-and-mode-comparison.json",
+        "bytes": 64910,
+        "sha256": "53064c6bdad174cbbf463264a3ee2d2ad9f558c6c641d522105e60d6996537a6"
+      },
+      {
+        "path": "/workspace/engineering/pr221-current-a0d-root-check-and-closure-metadata-1157.json",
+        "bytes": 13435,
+        "sha256": "01ec7be23109ab27f9ce88aa22a91ffd37510389e2662e47849e71ea37d61292"
+      },
+      {
+        "path": "/workspace/engineering/pr221-current618-terminal-CI-and-artifact-metadata-successor/OWNERFINAL-current618-terminal-CI-artifact-metadata.json",
+        "bytes": 86678,
+        "sha256": "1cfbc1df13a1df43558271df7ed413e40c45a474644e25a912504a61fcca665e",
+        "scope": "Historical accepted618 source/artifact/consumer only; no current-a0d CI/wheel/consumer carry"
+      },
+      {
+        "path": "/workspace/engineering/pr221-current618-complete-distribution-integrity-owned/OWNERFINAL-current618-complete-original-distribution-integrity.json",
+        "bytes": 24118,
+        "sha256": "75757b7de4162b6e8afd739fd983b99325cd18ea2a368a279d4f233197c4314a",
+        "scope": "Historical accepted618 source/artifact/consumer only; no current-a0d CI/wheel/consumer carry"
+      },
+      {
+        "path": "/workspace/engineering/pr221-current618-complete-distribution-independent-review/OWNERFINAL-independent-current618-seven-distribution-integrity-review-final.json",
+        "bytes": 5300,
+        "sha256": "38ec59efeccbdb9b17bd308bc3aee1143b0d50f6c9678b35cfb7152262cf412e",
+        "scope": "Historical accepted618 source/artifact/consumer only; no current-a0d CI/wheel/consumer carry"
+      },
+      {
+        "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/OWNERFINAL-current618-one-installed-Linux-consumer-checkpoint.json",
+        "bytes": 12657,
+        "sha256": "cc0832511827bc73431f2adbe0dbb92ec01b52b03afa4164cea67d0ae4aaf246",
+        "scope": "Historical accepted618 source/artifact/consumer only; no current-a0d CI/wheel/consumer carry"
+      },
+      {
+        "path": "/workspace/engineering/pr221-current618-linux-consumer-independent-preexecution-review/OWNERFINAL-independent-current618-one-installed-Linux-consumer-review.json",
+        "bytes": 10429,
+        "sha256": "07a2e926bd7923826521d34c0070fd2fe4c2e2484e151144c7c4b7c989900b52",
+        "scope": "Historical accepted618 source/artifact/consumer only; no current-a0d CI/wheel/consumer carry"
+      }
+    ],
+    "Stale_or_ambiguous_guidance_removed": "Existing accepted exact deltas remove PR/push path conflation, visible-ruleset/protection conflation, synthetic/actual build relabeling and source-only/complete-platform qualification ambiguity; no cosmetic duplicate",
+    "Remaining_uncertainty": "Pending Windows, original current executed checkout, current artifact bytes/generated content, policy/private/full release gates remain unresolved"
+  },
+  "Upstream_disposition": "none",
+  "no_tests_gateway_runtime_provider_native_source_mutation_download_or_repeat_poll": true,
+  "acquisition_bindings": [
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/acquire-once-readonly.py",
+      "bytes": 5913,
+      "sha256": "7ef5cb4a54c0347553ec75685cd6a727605879a7e911a1933026a065ac91272b"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/acquisition-summary.json",
+      "bytes": 351,
+      "sha256": "67176a13268f653ca007c028e5a51a526f5038444c1a66e5496db8904c518cdc"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/after-named-base.raw.private.json",
+      "bytes": 361,
+      "sha256": "5813d89de5eccdb57f0d5d449d62387e0070db17f340b821e12fd6089bde776d"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/after-named-base.request.json",
+      "bytes": 265,
+      "sha256": "10350d550bb5afa278e4b3b032f1b51c2ac81dacfd100b54af5f78d499128205"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/after-named-head.raw.private.json",
+      "bytes": 460,
+      "sha256": "77957de3f5a323e7c809f16350fc2a57e6dd6c3d9692b450b545c318f06e17c6"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/after-named-head.request.json",
+      "bytes": 294,
+      "sha256": "9ce30e4dfb4abd1fc98f79eacb25ec0e0e61a72cf96b583f67f9e42e74cf5828"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/after-pr.raw.private.json",
+      "bytes": 31280,
+      "sha256": "3d66935fd03aefed9717333f76d2163ee04801c8fb7186e27db0c3e8f28324e6"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/after-pr.request.json",
+      "bytes": 253,
+      "sha256": "a864c5c93cce3bd2eac582d46b38d424851485dbaf448906cdd9472d22e0c185"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/base-branch.raw.private.json",
+      "bytes": 5468,
+      "sha256": "12362080920032cc21b68cdae30a032f807bedfd34550c42a2ba41a6775ae23f"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/base-branch.request.json",
+      "bytes": 261,
+      "sha256": "683ef9754fe2516e93166e27f9f1b062698a97e0b818b0869f37b69820da8fc3"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/base-protection.request.json",
+      "bytes": 271,
+      "sha256": "8c6bf256517c28c936d73305dd7ddf1f1d7d367b615cb335400512d2d2ceda83"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/before-named-base.raw.private.json",
+      "bytes": 361,
+      "sha256": "5813d89de5eccdb57f0d5d449d62387e0070db17f340b821e12fd6089bde776d"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/before-named-base.request.json",
+      "bytes": 265,
+      "sha256": "09b5d1fd40ea1fcacb2dc2500a915805937b83f59eac30264e225718665c1910"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/before-named-head.raw.private.json",
+      "bytes": 460,
+      "sha256": "77957de3f5a323e7c809f16350fc2a57e6dd6c3d9692b450b545c318f06e17c6"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/before-named-head.request.json",
+      "bytes": 294,
+      "sha256": "9571c8237b937113e387b589b42215b3458321a4864337df9cedea7ae92302ad"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/before-pr.raw.private.json",
+      "bytes": 31280,
+      "sha256": "3d66935fd03aefed9717333f76d2163ee04801c8fb7186e27db0c3e8f28324e6"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/before-pr.request.json",
+      "bytes": 253,
+      "sha256": "557568c039cdb1eb7744d15a609833d29e1a142e8ad8131e57f1b9715c44bcc5"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/branch-rules.raw.private.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/branch-rules.request.json",
+      "bytes": 263,
+      "sha256": "f3032afe2e536c5c9de6d1732fd0fd3d22e0ba6b2d6e6e587b5a142c231545fa"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/changed-files.raw.private.json",
+      "bytes": 3720167,
+      "sha256": "84a52f288b03e99c4990f2c5c28b58ff8189547a0c68b3a2a04f4074d68642e1"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/changed-files.request.json",
+      "bytes": 273,
+      "sha256": "02d0890afd848c120c281e51561252eb6953268929c5175c609049021143a029"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/closures-page-1.raw.private.json",
+      "bytes": 731,
+      "sha256": "d05c84c99b40fab5293e5ac24d7e98144b0de09d86c694c61637975c0cff460a"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/closures-page-1.request.json",
+      "bytes": 148,
+      "sha256": "d9cf13ef739b9e53892f19004d63329edf0eb7b3d2f72116aa55ebc2903726a9"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/freeze-independent-readonly-review.py",
+      "bytes": 16826,
+      "sha256": "19cd50016d80a67ad946a723583181a5e03e782450d1811ede2ba293b2c0ff65"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/head-check-runs.raw.private.json",
+      "bytes": 128101,
+      "sha256": "9140bcc64df55226cd920536bdb37febd2f6696fb634fe56ab4eb55cf8d16d6c"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/head-check-runs.request.json",
+      "bytes": 327,
+      "sha256": "edb8fc7127612210655edf51e399011e33c2a449b5e1874cd360e9086f019810"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/head-check-suites.raw.private.json",
+      "bytes": 129142,
+      "sha256": "dbdd90965bd8a6a15f5071a49a191d7c4e2c2cbf1cce49c35ad794cf944e36bc"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/head-check-suites.request.json",
+      "bytes": 318,
+      "sha256": "50755877b1edb4df447594c15b6363df69437cef4505729a643b1893e21f8691"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/head-commit.raw.private.json",
+      "bytes": 48741,
+      "sha256": "a9cb920a3519e19551cc2dedc46d43c4f69bf40db01f4e88e74f0f2cefa57b0b"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/head-commit.request.json",
+      "bytes": 292,
+      "sha256": "7b15c6024dfad744b1ba820c2ffd42fd951eeceac61f2b07ed882bf39539c0fe"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/head-runs.raw.private.json",
+      "bytes": 171349,
+      "sha256": "8760fc4ace667f44837ab2a2e9504513a9282ba922bca2997d12d82509cd4766"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/head-runs.request.json",
+      "bytes": 319,
+      "sha256": "5cf281561be51a1242d00361ce3d12b715813999cde58a6b8f3a5d01d0fbfbf9"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/head-statuses.raw.private.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/head-statuses.request.json",
+      "bytes": 309,
+      "sha256": "b0f990f017f3ec6e4814c06d26ca4ebbf68aebe166e44064b4e8b018da381e34"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/merge-check-runs.raw.private.json",
+      "bytes": 38,
+      "sha256": "3b29ca22d800ee4f4f72aa18efc5af2f17c8f788db9d63ab463b365d2c0920a2"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/merge-check-runs.request.json",
+      "bytes": 323,
+      "sha256": "ec7ecd5f7bc79316f99cb0dad4f4e104a6c94e672e5baebc36c5da9c9b1ad412"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/merge-check-suites.raw.private.json",
+      "bytes": 40,
+      "sha256": "4e929adbdc69abcb55cbd6c541fa88397ad113392ae033696f5e1ab55b596d50"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/merge-check-suites.request.json",
+      "bytes": 314,
+      "sha256": "5d3d684c368646e53b8289835b86ca19a9b91b90dc62c99a160f5a99a83674df"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/merge-commit.raw.private.json",
+      "bytes": 1086085,
+      "sha256": "135fc1dcac7aa498a0d2c587c4468f724faa0869dd519a8e6741f5c2687bdea0"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/merge-commit.request.json",
+      "bytes": 294,
+      "sha256": "385a5e8852c24ed561ae24967dd3d46debd43154327cb09696f371bb2b59cfbd"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/merge-runs.raw.private.json",
+      "bytes": 41,
+      "sha256": "725143e0e46d6aefd0d32064f5407f39c7c2149674a6fb60e3f3376c71e7b5ad"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/merge-runs.request.json",
+      "bytes": 315,
+      "sha256": "633499c6e454c1aa7ef7373141e16d7fb413ae18b56060fa0b77bd07c0f7d04e"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/merge-statuses.raw.private.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/merge-statuses.request.json",
+      "bytes": 309,
+      "sha256": "8d78e699113c7e912803a135e39a2f68caa8aa1413b5d7e86b806cfcf0bd8731"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/review-comments.raw.private.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/review-comments.request.json",
+      "bytes": 270,
+      "sha256": "0a99d15e62cf0470721b9a9cf4199c3d6bb74e64824783a503be3cf8fc5a06fa"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/reviews.raw.private.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/reviews.request.json",
+      "bytes": 269,
+      "sha256": "79669365b83dc5754aef4654a1311f3f9d9b9e488f0cf03e549e94183db66408"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/rulesets.raw.private.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/rulesets.request.json",
+      "bytes": 282,
+      "sha256": "6d4f728f2943bc99dc17e8654adda567349fb07e3362b24a3dc4d091b8950272"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819846-artifacts.raw.private.json",
+      "bytes": 37,
+      "sha256": "9a2b6454089d7653c175f80fb32dedb139dbcf18f37bac3aacba717b446c9a24"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819846-artifacts.request.json",
+      "bytes": 287,
+      "sha256": "cec9ea3183b94ee028a9cf5100a90518caaa6642b7534c6aa9c91939832ee090"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819846-jobs.raw.private.json",
+      "bytes": 10508,
+      "sha256": "95ab67bb3f30f421c9ec413755bbf7437f35bbb53becc26b9c5b488209eb9b97"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819846-jobs.request.json",
+      "bytes": 295,
+      "sha256": "40489796226a8bcb14109168125f81dae4e20dca0e0e2e73a341caa7e6726a2a"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819854-artifacts.raw.private.json",
+      "bytes": 2299,
+      "sha256": "be1116de8e97d3143a9cdde4369b80109f09bdb6fe53fdcf6cac86542fb72094"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819854-artifacts.request.json",
+      "bytes": 289,
+      "sha256": "13464e64f7f6646647f5ce2dc10dcaec5892b67b6193ad243bf7527103325cae"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819854-jobs.raw.private.json",
+      "bytes": 16403,
+      "sha256": "d1ea86b9a7f79844550c5732ad5deb119276e144488ed8abc6eaf45fe1fab2fc"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819854-jobs.request.json",
+      "bytes": 296,
+      "sha256": "9eb3fc27fe60e5c9c31e559ada8f6769fc8094e1dac5314dc84c438e5b6a7341"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819865-artifacts.raw.private.json",
+      "bytes": 786,
+      "sha256": "f15e561d40cd1d6c5389fe9d909a8350fc52d5da25967e2ac7992f138cb67f0a"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819865-artifacts.request.json",
+      "bytes": 288,
+      "sha256": "0c8c2117b346ea9578f1abae8afca15d0d69d722747934c4556e4bb51b3f4e89"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819865-jobs.raw.private.json",
+      "bytes": 4659,
+      "sha256": "c309ee26c1827247cac742729626616c8357587799d2cd29b6c46cb556112087"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819865-jobs.request.json",
+      "bytes": 295,
+      "sha256": "96295c5041d5eaab23cc9bff33a87daeeb5dd7b59c99897961f9f2b7f63885cd"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819890-artifacts.raw.private.json",
+      "bytes": 777,
+      "sha256": "a682d679c5c8f422f0f75ead1aa87d7b434f93ea778e4126f7304d06d6fbffdc"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819890-artifacts.request.json",
+      "bytes": 288,
+      "sha256": "5aeb2e5e398ef83c5d378e3be48f77280fe98cc47c95f332187903553d7f82ac"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819890-jobs.raw.private.json",
+      "bytes": 2040,
+      "sha256": "8ada1101c99bd9a6b770dcbd15f0cc36c1f8ef4d317629b5bc9a724b101075c8"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819890-jobs.request.json",
+      "bytes": 295,
+      "sha256": "f7179ca3a68dddeb7b52b62c275dfecac383b9ea700e477635b34fbb53044632"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819892-artifacts.raw.private.json",
+      "bytes": 787,
+      "sha256": "fdab0414da6993f5d07f65f413b432c1adfcd058f2e83c735cfa33b5833e2536"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819892-artifacts.request.json",
+      "bytes": 288,
+      "sha256": "8e8e92808bc1c11f830b16279ded617db5f6a369681a94f121ea685b81694eb7"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819892-jobs.raw.private.json",
+      "bytes": 3318,
+      "sha256": "1d53861398333f47f49dc9d09928ef190eb8a85f96e351e3f11957aec359f8a9"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819892-jobs.request.json",
+      "bytes": 295,
+      "sha256": "de35cb3a50f1a6fc39ef3f028c3ed192d7f0ddb16ca578e9d3ba6cf5a42413a3"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819895-artifacts.raw.private.json",
+      "bytes": 9425,
+      "sha256": "2719360ab788fa10fd2d20ceaa9e7a738472fe58b644756cb693cfa59e9dad46"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819895-artifacts.request.json",
+      "bytes": 289,
+      "sha256": "ffd04ee2a6b22551d03a41ea37eecd68b01d911be3fdbc643f962581f80da661"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819895-jobs.raw.private.json",
+      "bytes": 24130,
+      "sha256": "f0471a397ae22a58dba5f8b1a9210c9e186873e6a62f0ab82a293d5c0066cc7c"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819895-jobs.request.json",
+      "bytes": 296,
+      "sha256": "b20d70c9ba0db3f316385b8eea6659d116fa7d18dda517f087e13bf31040954f"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819906-artifacts.raw.private.json",
+      "bytes": 37,
+      "sha256": "9a2b6454089d7653c175f80fb32dedb139dbcf18f37bac3aacba717b446c9a24"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819906-artifacts.request.json",
+      "bytes": 287,
+      "sha256": "383209cdebbd5e16f9dc3ad5a4e8bfe27545ff04b629587ad35cca96898518c6"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819906-jobs.raw.private.json",
+      "bytes": 2970,
+      "sha256": "67cb695298ad38d6356c183989bc8828495e405b568551e491b0db322cdfb583"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819906-jobs.request.json",
+      "bytes": 295,
+      "sha256": "9887787b379f2528b00bf330f36eb3300e30fa3a2844f560e237ff2754ad82ad"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819907-artifacts.raw.private.json",
+      "bytes": 37,
+      "sha256": "9a2b6454089d7653c175f80fb32dedb139dbcf18f37bac3aacba717b446c9a24"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819907-artifacts.request.json",
+      "bytes": 287,
+      "sha256": "dd687842e6fc99d2d1927e2355bb5d3628dbfc046dcf9e6c9e4ca6cd73cb54ce"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819907-jobs.raw.private.json",
+      "bytes": 2841,
+      "sha256": "8dfc5a5aa0615683d1972716de3858c60efdc8eee3899f99a0294ef885288a0a"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819907-jobs.request.json",
+      "bytes": 295,
+      "sha256": "9d46c217c067e4a82d13a93f807aba88b4ac60ba94f28dd6ffae4c5bb5ae971a"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819943-artifacts.raw.private.json",
+      "bytes": 37,
+      "sha256": "9a2b6454089d7653c175f80fb32dedb139dbcf18f37bac3aacba717b446c9a24"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819943-artifacts.request.json",
+      "bytes": 287,
+      "sha256": "abed92d34ab77c2e27ea984762359aad1205ae3194200f7f1d34d40293752b90"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819943-jobs.raw.private.json",
+      "bytes": 2565,
+      "sha256": "0397a95eb6d1bf086169bfc7299808b7e2948f58b2a9599c173f0e59ef651b55"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819943-jobs.request.json",
+      "bytes": 295,
+      "sha256": "cd6167cac824b3c2fff76eafcfdd20593183324712e02b2398718931f2706ef3"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819944-artifacts.raw.private.json",
+      "bytes": 37,
+      "sha256": "9a2b6454089d7653c175f80fb32dedb139dbcf18f37bac3aacba717b446c9a24"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819944-artifacts.request.json",
+      "bytes": 287,
+      "sha256": "f1ae92c55e5facada5719c37323e3b9fb0932d0b872a3608845f940e6fd6fd84"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819944-jobs.raw.private.json",
+      "bytes": 21244,
+      "sha256": "34290be5d6f8201f9b6749db71fb8c652032b0ccb2727aea9cc52f7f815b2c1f"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819944-jobs.request.json",
+      "bytes": 296,
+      "sha256": "878ed3c654636e114f7b5ddc2668fa9c621fe98a45987e5270ae7f6c71fae1dc"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819956-artifacts.raw.private.json",
+      "bytes": 2432,
+      "sha256": "16464d71ecd97f80afa5ac86aa916329e3a5e0a68294eed088ce5a4b26dbb5ca"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819956-artifacts.request.json",
+      "bytes": 289,
+      "sha256": "a6f1e4165be1328215a99078c46d8d7d5a56dd13467b9ae9fac8feaf1ccbe814"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819956-jobs.raw.private.json",
+      "bytes": 11475,
+      "sha256": "a8ea907a347ce5989a59526cf9025f97a6af20888575fc8b30b67899cca50ed6"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819956-jobs.request.json",
+      "bytes": 296,
+      "sha256": "47641268cb794a39af54e80fec325c501ebb6eb76a21a3ef24c2cf6af17d5a7b"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819971-artifacts.raw.private.json",
+      "bytes": 3760,
+      "sha256": "fa840438c1dd51bfc6977f4681a8f25d336c7be9c64340be839343ac03f693e0"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819971-artifacts.request.json",
+      "bytes": 289,
+      "sha256": "0f0423b248755a12d5004cb85e3b2058a8161925c79b8bd75642bfa3c5d720f4"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819971-jobs.raw.private.json",
+      "bytes": 24643,
+      "sha256": "04d7e281ff6bcba1230c3683ad3204d9ea48bd7d9168620798785b9101a9ff95"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135819971-jobs.request.json",
+      "bytes": 296,
+      "sha256": "815240830958c9be53b991818e97201f275f7c239dfd6874b4e7a67c06316511"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135820027-artifacts.raw.private.json",
+      "bytes": 790,
+      "sha256": "db77f450ca08881ae616f6aa36d3e538a3e4145974104624fe297376f8a02096"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135820027-artifacts.request.json",
+      "bytes": 288,
+      "sha256": "1ae0db99cba04c0bdf0e18a4d69c8ac80fbe962ca9c004d1d917b391d33d1e3b"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135820027-jobs.raw.private.json",
+      "bytes": 15175,
+      "sha256": "35fd7ff58242deb794bc6e097ac8fb1bf5bf3634380c815e9a994e3cf33a22f0"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/run-38135820027-jobs.request.json",
+      "bytes": 296,
+      "sha256": "670d5ab9b82ed7a553678c1486c818eaef2cbfaf93bf2cbcd0aa433ba1b45723"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/threads-page-1.raw.private.json",
+      "bytes": 721,
+      "sha256": "6bda892a3a6663be1ddfa8652ffa6beabe5fcaaacc02e47f3e0cddb4b9da7213"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-a0d-release-reconciliation/threads-page-1.request.json",
+      "bytes": 148,
+      "sha256": "96d4e84fa6ba5c21f0bdf1fda416a11edfe186f161b606c3791a7b7eb411a144"
+    }
+  ]
+}

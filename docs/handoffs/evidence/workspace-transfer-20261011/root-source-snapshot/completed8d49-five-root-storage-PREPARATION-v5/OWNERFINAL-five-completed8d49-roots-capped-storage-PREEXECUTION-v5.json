@@ -1,0 +1,298 @@
+{
+  "ROOT_serialization": "No other source/native/tests or selected-root mutations during one newly released attempt",
+  "alias_index_address_control": {
+    "V5_exact_actual_AST_vs_plan_GREEN": 2,
+    "earlier_OVERFLOW_never_reached_original_index_or_alias_creation": true,
+    "original_V4_actual_AST_vs_plan_RED": 1
+  },
+  "all_original_snapshots_nine_rows_inventory18": "REUSED_EXACT_UNCHANGED",
+  "archive_function_class_AST": "All unchanged after only two necessary bound alias-plan literals; cap/addresses are declared top-level constants",
+  "completion_cases": [
+    179,
+    27,
+    42,
+    51,
+    50
+  ],
+  "compression": "PROSPECTIVE_NO96MiB_SUCCESS_CLAIM",
+  "critical3203_active_a209_and_source_body_mode_native1192_prepared30": "REUSED_UNCHANGED_NO_OVERLAP",
+  "current_capacity": {
+    "/dev/shm": 3901190144,
+    "/tmp": 549724160,
+    "/workspace": 1028313088
+  },
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "durable_learning_captured": "Reuse finite aggregate actual-write caps and durable allroot/alias rules; new budget remains bounded and separately reviewed; alias index filenames must derive from actual source binding",
+    "evidence": "Original actual48MiB capFAIL/no removal; retained snapshots9035; exact V4 index-address RED1 and V5 GREEN2; whole archive method normalized AST proof",
+    "remaining_uncertainty": "96MiB compression and capacity gain remain prospective; operation requires fresh ROOT grant and independent review; no native/source/release qualification",
+    "stale_or_ambiguous_guidance_removed": "48MiB was a per-attempt budget, not a canonical fixed limit or successful compression claim; old failed result cannot be reused as success; fictional index filename cannot substitute for actual _FULL_INDEX"
+  },
+  "exact_child_argv": [
+    "/usr/bin/timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "600s",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v5/archive_exact_five_completed_roots_once.py"
+  ],
+  "exact_outer_argv": [
+    "/usr/bin/timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "900s",
+    "/bin/bash",
+    "--noprofile",
+    "--norc",
+    "-c",
+    "set -euo pipefail; source \"$1\"; unset PYTHONOPTIMIZE PYTEST_ADDOPTS; export PYTHONDONTWRITEBYTECODE=1; export PATH=\"/workspace/actions-cloud/bin:/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\"; exec \"$2\" \"$3\" --root-execute-reviewed-five-completed8d49-roots \"$4\"",
+    "root-one-five-root-storage-v5",
+    "/workspace/actions-cloud/activate.sh",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v5/launch_once.py",
+    "/workspace/engineering/root-completed8d49-five-root-storage-reviewed-release-v5.json"
+  ],
+  "existing_meaningful_controls_reused": {
+    "alias_resolver": 16,
+    "capture": 14,
+    "durable_allstage_alias_maxprogress_index_and_fsync": 6,
+    "original48MiB_actual_cap_RED": true
+  },
+  "five_selected_roots": {
+    "Runtime50-robot-output": "/workspace/engineering/root-current-e2-inner-service-free-controls-v2-once-owned/robot-output",
+    "ToolkitTest": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/source-LIGHT-v3-basetemp-once/ToolkitTest",
+    "fixture42-GREEN-log": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/pure-fixture-logger-GREEN-owned-once/robocorp-log",
+    "fixture51-TEMPORAL-log": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/pure-fixture-logger-GREEN-TEMPORAL-owned-once/robocorp-log",
+    "original27-log": "/workspace/engineering/rcc-current8d49-private-V8-content-preparation/pure-count-alias-GREEN-owned-once/robocorp-log"
+  },
+  "fresh_NEW_ROOT_once_paths_absent": true,
+  "metadata_environment_capture": "Verified cached Toolkit PATH1 /primary RCC PATH0; actual original metadata readonly probe0 retained; perphase raw capture before assertion unchanged",
+  "native": "NOT_RUN",
+  "native_workspace_floor": 1288490189,
+  "new_finite_storage_budget": {
+    "before_TMP_floor": 352321536,
+    "before_removal_TMP_reserve_unchanged": 134217728,
+    "formula": "2*96MiB+16MiBindex+128MiBreserve",
+    "fresh_TMP_floor_recheck_required": true,
+    "full_progress_fixed_alias_index_cap_unchanged": 16777216,
+    "new_archive_cap_including_every_actual_write_and_gzip_close_footer": 100663296,
+    "old_archive_cap": 50331648
+  },
+  "nine_fixed_original_row_aliases": {
+    "allstage_full_index_and_alias_map_durable_before_any_removal": true,
+    "combined_maximum_progress_fullindex_alias_size_before_any_removal": true,
+    "exact_plan": {
+      "bytes": 6966,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v5/private-fixed-nine-original-row-future-archive-member-plan.json",
+      "sha256": "ce099428e2647c6793d3f1d2bc541d5b864c58ebffe40371007cc7d7ac3236e8"
+    },
+    "old18_file_inventory_unchanged": true,
+    "original_paths_never_restored_or_invented": true,
+    "whole_archive_SHA_CRC_EOF_ISIZE_exact_safe_members_body_mode_UIDGID_PAXmtime_before_alwayspost": true
+  },
+  "nineteen_original_core_body_topology_PAX_cap_footer_index_allstage_fsync_before_removal": "UNCHANGED_FROM_REVIEWED_V4_NORMALIZED_PROOF",
+  "operation": "NOT_RUN",
+  "original48MiB_outcome": "FAIL_GENUINE_CAP_RED_BEFORE_ANY_REMOVAL_UNCHANGED_NOT_RELABELED",
+  "original_V4_partial_staged_files": "ALL_FIVE_RETAINED_UNTOUCHED_NO_DELETE_RETRY",
+  "other_floors_unchanged": {
+    "shm_native_not_allocated_or_waived": 3865470567,
+    "workspace_data_only": 16777216
+  },
+  "predecessor_V4_original_actual_failure_review": {
+    "bytes": 9838,
+    "mode": "0o400",
+    "path": "/workspace/engineering/completed8d49-five-root-storage-independent-actual-cap-failure-review/OWNERFINAL-independent-original-five-V4-48MiB-cap-FAIL-no-removal-source-postPASS.json",
+    "sha256": "ade5ffc1fa3dfd0add1302eb40fdac45309d82273610007dfb26bf1cea5e6e39"
+  },
+  "predecessor_V4_original_owner": {
+    "bytes": 22172,
+    "mode": "0o400",
+    "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/OWNERFINAL-five-completed8d49-roots-capped-storage-PREEXECUTION-v4.json",
+    "sha256": "a1333777200edeaf0320f437c946e9df15e2e6ce6a3c61a976838d7b9b088b2e"
+  },
+  "private_references": [
+    {
+      "bytes": 1338,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v5/ROOT-exact-five-root-V5-release-template-NOTAUTHORIZATION.json",
+      "sha256": "43e423d65317e56d79accfcc872c6562bfdf2325c5fb6e53a44c6ba491a263a7"
+    },
+    {
+      "bytes": 25087,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v5/archive_exact_five_completed_roots_once.py",
+      "sha256": "d4eba36f117f53dca6f52cd7a4337ac4e1bc160ab336a0dafa3f2a532d0153a0"
+    },
+    {
+      "bytes": 702,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v5/current-index-address-GREEN-terminal.json",
+      "sha256": "4f483db842ca80519135af96490d76e611e0c40bdc43ad1c92006e0a8d5cb638"
+    },
+    {
+      "bytes": 390,
+      "mode": "0o600",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v5/current-index-address-GREEN.private.log",
+      "sha256": "a7149b3051eb2801c25901a89eaac2bd74e66f61f774e04208d3cd87843f998c"
+    },
+    {
+      "bytes": 7938,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v5/guard_readonly.py",
+      "sha256": "4606f78d4b16c642c3af2b91e6f28f8183d60fb7a1261b5f267ed120f1fab432"
+    },
+    {
+      "bytes": 9513,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v5/launch_once.py",
+      "sha256": "d43e94b259f6d2bb984e6996206d553bdf5cf76bed4cfe06a061638d731f53fd"
+    },
+    {
+      "bytes": 725,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v5/original-index-address-RED-terminal.json",
+      "sha256": "79041bf725df3cce899a8c77f3e9f702d484512c9390ba2dd2d27db8b187d9fd"
+    },
+    {
+      "bytes": 1421,
+      "mode": "0o600",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v5/original-index-address-RED.private.log",
+      "sha256": "1b98d42755a33f719038f30f2c4c05614cba13365de0ad871ff820b678e36309"
+    },
+    {
+      "bytes": 2567,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v5/private-V5-budget-path-and-normalized-AST-delta-proof.json",
+      "sha256": "ec7613df546bd5a63afc39cb785987b0fe072ebb226f774262479191746803ec"
+    },
+    {
+      "bytes": 6966,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v5/private-fixed-nine-original-row-future-archive-member-plan.json",
+      "sha256": "ce099428e2647c6793d3f1d2bc541d5b864c58ebffe40371007cc7d7ac3236e8"
+    },
+    {
+      "bytes": 2953,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v5/private-fresh-V5-binding-source-path-capacity-and-selected-snapshot-proof.json",
+      "sha256": "61211a0aa8769b0010974758c067b14db8571eebf3e58447fdcea093966ce48a"
+    },
+    {
+      "bytes": 1968,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v5/test_actual_declared_index_address.py",
+      "sha256": "596e59c83c9def0bf848e5b343c537720b8edfb401027094429115ceb478b3b7"
+    },
+    {
+      "bytes": 25087,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v5/archive_exact_five_completed_roots_once.py",
+      "sha256": "d4eba36f117f53dca6f52cd7a4337ac4e1bc160ab336a0dafa3f2a532d0153a0"
+    },
+    {
+      "bytes": 7938,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v5/guard_readonly.py",
+      "sha256": "4606f78d4b16c642c3af2b91e6f28f8183d60fb7a1261b5f267ed120f1fab432"
+    },
+    {
+      "bytes": 17633,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/private-five-root-input-supplement.json",
+      "sha256": "bd7d77caad57d46aca726ec025927a4e336c22ecdaa87169894c491cd4e05ac6"
+    },
+    {
+      "bytes": 3010,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v3/guard_capture.py",
+      "sha256": "7ce1b282a002fbf03371ba0b1c5ba1684253ee68ffcf234f16e58e7902860c2a"
+    },
+    {
+      "bytes": 4922,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/exact_original_row_archive_aliases.py",
+      "sha256": "fdbe4493f59c0256c4ca63f0da390c71d2a1d6c98dfc9f8d4cc0b5187561712e"
+    },
+    {
+      "bytes": 6966,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v5/private-fixed-nine-original-row-future-archive-member-plan.json",
+      "sha256": "ce099428e2647c6793d3f1d2bc541d5b864c58ebffe40371007cc7d7ac3236e8"
+    },
+    {
+      "bytes": 22172,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/OWNERFINAL-five-completed8d49-roots-capped-storage-PREEXECUTION-v4.json",
+      "sha256": "a1333777200edeaf0320f437c946e9df15e2e6ce6a3c61a976838d7b9b088b2e"
+    },
+    {
+      "bytes": 9838,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-independent-actual-cap-failure-review/OWNERFINAL-independent-original-five-V4-48MiB-cap-FAIL-no-removal-source-postPASS.json",
+      "sha256": "ade5ffc1fa3dfd0add1302eb40fdac45309d82273610007dfb26bf1cea5e6e39"
+    },
+    {
+      "bytes": 2953,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v5/private-fresh-V5-binding-source-path-capacity-and-selected-snapshot-proof.json",
+      "sha256": "61211a0aa8769b0010974758c067b14db8571eebf3e58447fdcea093966ce48a"
+    },
+    {
+      "bytes": 760693,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/FROZEN-current8d49-control3-qualified-V8-config-v2.json",
+      "sha256": "a209cc117db4d17a7383ba519abdff064211960aa0b8a88ddf32569fef322f9f"
+    },
+    {
+      "bytes": 2349,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/private-final-five-root-completion-active-config-row-closure-and-capacity-proof.json",
+      "sha256": "0c97e1a9683fd15d5a0d9b111e7ff54334f8d5f6c226077df6f7650fc22e03e5"
+    },
+    {
+      "bytes": 4908,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v3/OWNERFINAL-one-corrected-managed-Poetry-durable-capture-readonly-guard-PASS.json",
+      "sha256": "6b2d8b7b0eea9badffb7024e2fd1f7345c42643f388178dd536f942aed4257d7"
+    },
+    {
+      "bytes": 5374,
+      "mode": "0o600",
+      "path": "/tmp/build-five-root-storage-v5-private-once.py",
+      "sha256": "b977afabd93a84dc746431336bb7a6cfd1de1b59184e141b41f2d3f9d9ba7d55"
+    },
+    {
+      "bytes": 11116,
+      "mode": "0o600",
+      "path": "/tmp/freeze-five-root-storage-v5-owner.py",
+      "sha256": "d031d1f92ca52646b70088caef16d151ad87b9a852ab4500a1646911953ce97d"
+    }
+  ],
+  "prospective_margin_not_guaranteed": 34767667,
+  "prospective_workspace_after_gain": 1323257856,
+  "required_review_decision": "GO_EXACT_FIVE_COMPLETED8D49_ROOTS_CAPPED_STORAGE_PREEXECUTION_V5",
+  "root_release_template": {
+    "bytes": 1338,
+    "mode": "0o400",
+    "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v5/ROOT-exact-five-root-V5-release-template-NOTAUTHORIZATION.json",
+    "sha256": "43e423d65317e56d79accfcc872c6562bfdf2325c5fb6e53a44c6ba491a263a7"
+  },
+  "schema": "EXACT_FIVE_COMPLETED8D49_OWNED_ROOTS_CAPPED_STORAGE_PREEXECUTION_V5",
+  "selected_allocated_bytes": 294944768,
+  "selected_member_count": 9035,
+  "source_delta": "Finite96MiB cap and computed TMP floor; fresh paths/config binding; exact alias plan path matches actual unchanged _FULL_INDEX basename",
+  "source_head": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_native_acceptance": "UNCHANGED",
+  "source_tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "status": "NEW_FINITE_BUDGET_READY_FOR_INDEPENDENT_REVIEW_ROOT_RELEASE_REQUIRED",
+  "time_bounds_unchanged": {
+    "Python_child_timeout": 615,
+    "ROOT_outer_KILL_after": 10,
+    "ROOT_outer_TERM": 900,
+    "archiver_KILL_after": 10,
+    "archiver_TERM": 600,
+    "guard": 60
+  },
+  "upstream_disposition": "none"
+}

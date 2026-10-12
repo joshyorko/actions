@@ -1,0 +1,155 @@
+{
+  "PR": 300,
+  "PR_draft": true,
+  "actual_checkout": "UNKNOWN_NO_ORIGINAL_OWNED_LOGS_ACQUIRED",
+  "auxiliary_actual_PUSH_Copilot_jobs": 1,
+  "complete_paged_metadata_receipt": {
+    "bytes": 50540,
+    "path": "/workspace/engineering/pr300-current618-CI-admission-review/independent-complete-current618-CI-admission-HOLD.json",
+    "sha256": "4a10c94180daacd9cb45e740bbfc1098870bde3e21a6136ebcc01a778321d760"
+  },
+  "declaration": {
+    "bytes": 62885,
+    "path": "/workspace/engineering/pr300-current618-CI-admission-review/exact784-event-specific-workflow-declaration-v3.json",
+    "sha256": "e9b7c60cbb49c658c0f7451524fad382eb2535894cc2e00ffb4a1251ec311200"
+  },
+  "declared_PR_flows": 6,
+  "declared_PR_jobs": 19,
+  "declared_not_registered": [
+    {
+      "display_label": "publish (3.12)",
+      "disposition": "DECLARED_NOT_REGISTERED_NEEDS_PENDING",
+      "if": null,
+      "job_key": "publish",
+      "matrix": {
+        "python": "3.12"
+      },
+      "needs": [
+        "build-sdist",
+        "build-wheels"
+      ],
+      "registered_job_id": null,
+      "run_id": 38129325678,
+      "workflow_path": ".github/workflows/actions_runtime_pypi_release.yml"
+    }
+  ],
+  "documentation_improvement": {
+    "Added_lines": 6,
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "Durable_learning": "Derive PR and namedpush event-specific changed paths and tag/branch filters separately;target union can trigger auxiliaryCopilot for PUSH while its PR filter excludes currentfivepaths. Count observed auxiliarypush separately and retainunregistered needs-dependent publisher.",
+    "Evidence": "Current784 PR5 and authenticatedpush3cad\u219278448paths withdeveloper/test updates;sourceCopilotdeveloper/** filter;originalrun38129324525 push/currentjob114440170754SUCCESS;6PRflows19declared18materialized andunregisteredpublish needs producers.",
+    "Exact_proposed_delta": {
+      "bytes": 909,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/canonical-event-specific-push-paths-proposed.patch",
+      "sha256": "592949e0da5d48236262b87f3d6568dbde0d78fc7cc92835a7e8a512c48f73aa"
+    },
+    "Existing_lessons_reused": "Literalon normalization;exactmatrices;late needsjobs;policy403UNKNOWN;synthetic metadata vs actualcheckout;source versus complete native producer identity.",
+    "Remaining_uncertainty": "Non-atomic metadata snapshot can advance aftercapture;latepublisher unregistered,actualcheckoutandprotectionunavailable;allretained acceptanceholds.",
+    "Stale_guidance_removed": "No source removed;namedv3 corrects preserved earlierpreparatory trigger interpretations,no CIstatussample repeated or priorhead carried."
+  },
+  "expected_event_specific_jobs_including_auxiliary": 20,
+  "materialized_PR_jobs": 18,
+  "named_refs_bracketed_stable": true,
+  "no_poll_retry_logs_artifact_actual_mutation_or_CI_waiver": true,
+  "normal_API_policy": {
+    "branch_protection": "UNKNOWN_HTTP403",
+    "normal_API_policy_enforcement_required": true,
+    "visible_rulesets": 0
+  },
+  "owner_final_announced_subject": {
+    "head": {
+      "ordered_parents": [
+        "d4443c49973ddd629838c682111474991e3ea0c2"
+      ],
+      "sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+      "tree": "10e09d88027ca4fea512ff06c57efaab95755ffb"
+    },
+    "merge": {
+      "ordered_parents": [
+        "6181b044c75de35386f1ae30e71725398b6a7feb",
+        "7840057a8b055576d11d339d8c0fbb738927a491"
+      ],
+      "sha": "2076246f60afc4c8fb069b4206699e57e006890b",
+      "tree": "10e09d88027ca4fea512ff06c57efaab95755ffb"
+    }
+  },
+  "pending_registered_job_check_ids": [
+    114440174637,
+    114440174633,
+    114440174613,
+    114440174601,
+    114440174598,
+    114440174596,
+    114440174594,
+    114440174563,
+    114440174555,
+    114440174511,
+    114440174454,
+    114440174452,
+    114440174436,
+    114440174430,
+    114440174314,
+    114440174242,
+    114440174222
+  ],
+  "prepared_corrections_preserved": {
+    "final_v3_e9b7_declares_event_specificPR5_push48": true,
+    "no_original_or_later_execution_relabel": true,
+    "original3584_tag_push_assumption_retained": true,
+    "v2_891015_PRpath_used_for_push_assumption_retained": true
+  },
+  "registered_head_check_counts": {
+    "IN_PROGRESS": 10,
+    "QUEUED": 7,
+    "SUCCESS": 2
+  },
+  "registered_head_checks": 19,
+  "remaining_HOLD": [
+    "17 registered pending checks plus declared unregistered Runtimepublisher",
+    "Draft currentPR",
+    "Actual runner checkout UNKNOWN without owned originals",
+    "Protection403 UNKNOWN and normalpolicy enforcement required",
+    "Private/native/provider/backend/active revocation/HEAD/Range/full-issue/platform/release/publication remain unqualified"
+  ],
+  "reviews_threads_closure": {
+    "closing_issues": 0,
+    "connections_complete": true,
+    "reviews": 0,
+    "unresolved_threads": 0
+  },
+  "schema": "actions.frozen-independent-pr300-current618-admission/v1",
+  "snapshot_interval": [
+    "2026-10-11T09:45:28.221891+00:00",
+    "2026-10-11T09:45:33.383613+00:00"
+  ],
+  "source_native_scope": "275 producer260match8changed7added versus historical268;five selected tests separate;old92498UNQUALIFIED",
+  "source_push_frozen_bindings": [
+    {
+      "bytes": 795,
+      "path": "/workspace/engineering/pr300-current618-authenticated-push-successor.json",
+      "sha256": "3aeecbf344ccc4277debf6774866f51dbd45536a2b02dc8f627079a60b00ce61"
+    },
+    {
+      "bytes": 1936,
+      "path": "/workspace/engineering/pr300-current618-verified-source-push.json",
+      "sha256": "b843f206ba96b3782faf617ffbff29021dc18f1c7e1513bf16e3c396e60df488"
+    },
+    {
+      "bytes": 10058,
+      "path": "/workspace/engineering/pr300-actual299-independent-source-review/independent-frozen-actual299-source-review.json",
+      "sha256": "8bd3f1d1cc71d437bb591abe2b550a8d554f7c761f9c54ae40880c3cfa30deee"
+    },
+    {
+      "bytes": 72050,
+      "path": "/workspace/engineering/pr300-actual299-refresh/immutable-actual299-source-checkpoint.json",
+      "sha256": "b16ef794377b8a51a66444efa697401bc41793842ac6b7bf2986085501e967ee"
+    }
+  ],
+  "synthetic_direct_checks_runs_statuses": {
+    "checks": 0,
+    "runs": 0,
+    "statuses": 0
+  },
+  "upstream_disposition": "none",
+  "verdict": "HOLD"
+}

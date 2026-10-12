@@ -1,0 +1,7 @@
+version: 0.1
+spec-version: v2
+dependencies:
+  conda-forge:
+    - python=3.12.15
+  pypi:
+    - actions-core=1.0.2

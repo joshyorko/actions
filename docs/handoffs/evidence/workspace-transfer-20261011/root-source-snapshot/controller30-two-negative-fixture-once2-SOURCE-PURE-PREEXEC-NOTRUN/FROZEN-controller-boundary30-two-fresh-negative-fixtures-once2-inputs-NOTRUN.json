@@ -1,0 +1,2262 @@
+{
+  "Root_storage_operation_grant": "ABSENT",
+  "adapter_binding": {
+    "bytes": 4079,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/pure18_receipt_adapter_v8_SOURCE_PREPARED_v2_actual_receipt_schema.py",
+    "sha256": "8dbc69c8dd1d366d1e1dea97cb809613ff990e27ee9faacb3a9dfccb56a6c1b2"
+  },
+  "bindings": [
+    {
+      "bytes": 39793,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/OWNERFINAL-five-accepted-obsolete-checkout-environments-readonly-capacity-plan.json",
+      "sha256": "0c082b23462a3ea588cca2e98ac48934e5ae6a5b14cdc0083e55b3ccadffd2de"
+    },
+    {
+      "bytes": 17539,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/frozen_first_five_environment_preservation_inputs_SOURCE_PREPARED_v4.json",
+      "sha256": "d6d933f64940c6ed3b0849a6bcd10e07f6c2c834f968c6f1b354462625e4c028"
+    },
+    {
+      "bytes": 12323,
+      "mode": "0o444",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/test_first_five_environment_preservation_admission_SOURCE_PREPARED_v4.py",
+      "sha256": "bf271888be3d40f6be8b11c2e71de7232c0bce50ee30fcc96b1083f89498bf75"
+    },
+    {
+      "bytes": 576,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/accepted-canonical-environment-and-memory-scope-lesson-reused.txt",
+      "sha256": "1152b61293a6f44d0ba61b59c24630f30bb948efbde926f2e014cb1876e7561a"
+    },
+    {
+      "bytes": 37609,
+      "mode": "0o444",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_first_five_accepted_obsolete_environments_SOURCE_PREPARED_v4.py",
+      "sha256": "63476ecaa50ba863afed8602dcad82c22c9349df022d0e9f0dde8d81d60e0bb7"
+    },
+    {
+      "bytes": 2387091,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr290-action_server-private-full-body-metadata-inventory.json",
+      "sha256": "f5127b2ae573d031cb1a074bfbc82cfa66c4b53b343bec491a0121bd3cadd376"
+    },
+    {
+      "bytes": 1702413,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr290-actions-private-full-body-metadata-inventory.json",
+      "sha256": "1966729dbff3e5168dbb253d3dbb1f4a09812d511df5ff2e5b5b12c10e5db88d"
+    },
+    {
+      "bytes": 1122969,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr290-actions-http-helper-private-full-body-metadata-inventory.json",
+      "sha256": "f6452bc22d99d0018a548d464aff323a3c081c146fe7a3e0fadc5d3cab90ef0a"
+    },
+    {
+      "bytes": 988304,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr290-devutils-private-full-body-metadata-inventory.json",
+      "sha256": "fa044e527def8d6ffbe10586091f588642f7a5300ef07a48dcc5d4b75a1bc63e"
+    },
+    {
+      "bytes": 992323,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr290-work-items-private-full-body-metadata-inventory.json",
+      "sha256": "8f1fe000ea1f97b1720dd04b583de7ec0c804f1ee4fb3970b29754afc51cf190"
+    },
+    {
+      "bytes": 2382175,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr309-action_server-private-full-body-metadata-inventory.json",
+      "sha256": "8c520af93c01f9ec0fb822991b30b74c5e107834012acd74dc564ca3fa09c450"
+    },
+    {
+      "bytes": 1696007,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr309-actions-private-full-body-metadata-inventory.json",
+      "sha256": "e912eb54df5ed2f638a0f6eff6c960de7dca23da57bcb246490f0d34a2a81345"
+    },
+    {
+      "bytes": 1119318,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr309-actions-http-helper-private-full-body-metadata-inventory.json",
+      "sha256": "7155d4f13ea55fa2e6a9b8d507457325390f5f421104cf74f5fcd80d239cf156"
+    },
+    {
+      "bytes": 988304,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr309-devutils-private-full-body-metadata-inventory.json",
+      "sha256": "b08f527e8f771191a51432815c070ca08c4f1c8a23debb637c571b84bbdff096"
+    },
+    {
+      "bytes": 988579,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr309-work-items-private-full-body-metadata-inventory.json",
+      "sha256": "0f376a0b790d22b67f82b5fc1a1f1e42bb424408dc9ec5e71130bd76f234149c"
+    },
+    {
+      "bytes": 2381381,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr310-action_server-private-full-body-metadata-inventory.json",
+      "sha256": "182be779e12399e24c83ccc06f06b7f6c2b2862ba945530ac82946d36889773d"
+    },
+    {
+      "bytes": 1696664,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr310-actions-private-full-body-metadata-inventory.json",
+      "sha256": "0c5c7d3649b71df30f79c73a43f6451710e64509acfd8a98ca51952362ed4b79"
+    },
+    {
+      "bytes": 1118722,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr310-actions-http-helper-private-full-body-metadata-inventory.json",
+      "sha256": "0dd40831d5da10ed4238ac67eb858edcdcf7a59edce8078749b9b51e28edcb4a"
+    },
+    {
+      "bytes": 985102,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr310-devutils-private-full-body-metadata-inventory.json",
+      "sha256": "0ea8b5c7d7befb4fa2f09cc672cece61a0ab243847e299ab3818cf911da69e4f"
+    },
+    {
+      "bytes": 988579,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr310-work-items-private-full-body-metadata-inventory.json",
+      "sha256": "3495915b217285dda14d2157db259e609e131764ce03fe0827615ba00dadde04"
+    },
+    {
+      "bytes": 2381065,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr311-action_server-private-full-body-metadata-inventory.json",
+      "sha256": "ab50df3cc7fc0e4b0e4d14a1230cdd7a14d1efbdee98365ed6acff02e46cffb2"
+    },
+    {
+      "bytes": 1696007,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr311-actions-private-full-body-metadata-inventory.json",
+      "sha256": "434f8a074f341569c453e5a1b37f65890adebc5fe1322d15183e19273addbc02"
+    },
+    {
+      "bytes": 1118722,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr311-actions-http-helper-private-full-body-metadata-inventory.json",
+      "sha256": "c030ffcf70898c1e940ff39ab99af33f28a7d06c1ee7de5df46a432b9a134c45"
+    },
+    {
+      "bytes": 984562,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr311-devutils-private-full-body-metadata-inventory.json",
+      "sha256": "2abaa2fff5b501fa98f513ecdc091a6714df75da11d4d084d6b947ccedff80b9"
+    },
+    {
+      "bytes": 988579,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr311-work-items-private-full-body-metadata-inventory.json",
+      "sha256": "931e7dbeeae79b0dc39941658c8ac947973ace66b13c31560c1a1998cdcf644a"
+    },
+    {
+      "bytes": 2700102,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/runtime-checkout-eol-action_server-private-full-body-metadata-inventory.json",
+      "sha256": "ff3be86460a2ebb88b694e4995bc44e1fc3236c0994c875ae77dbfa51061a195"
+    },
+    {
+      "bytes": 1704618,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/runtime-checkout-eol-actions-private-full-body-metadata-inventory.json",
+      "sha256": "4fb031f0ecfb62f5b766d9819c70b27af8aeff1823099ede628d18b6b6f4a640"
+    },
+    {
+      "bytes": 1122813,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/runtime-checkout-eol-actions-http-helper-private-full-body-metadata-inventory.json",
+      "sha256": "6f3b6da2bb6d34c3a4dd655da605a3c389e032c03348cd983fcc24e030448d64"
+    },
+    {
+      "bytes": 1055896,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/runtime-checkout-eol-devutils-private-full-body-metadata-inventory.json",
+      "sha256": "ff5ed9d275a9d454081d0b75faf726fcb3f172d2bda074eee30668f366e89e88"
+    },
+    {
+      "bytes": 1004052,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/runtime-checkout-eol-work-items-private-full-body-metadata-inventory.json",
+      "sha256": "37e163ca3614303636f81e9dfdc94a1a1b1596b0b7c75f2dfdedeeb066f3433a"
+    },
+    {
+      "bytes": 33635,
+      "mode": "0o444",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_accepted_obsolete_environments_source_prepared.py",
+      "sha256": "3dfbbd245f8dcb0c0c33e855b5a3b4b3a87a4fe334367da0dada6491da9fc1e8"
+    },
+    {
+      "bytes": 34532,
+      "mode": "0o444",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_accepted_obsolete_environments_source_prepared_v2.py",
+      "sha256": "98f977690dd7ef6d68da5f0c1ee4582100b054f836767a287b9995a7443bdcfb"
+    },
+    {
+      "bytes": 36982,
+      "mode": "0o444",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_accepted_obsolete_environments_source_prepared_v3.py",
+      "sha256": "262196054902818db5cea7265961a3520cf23b30080b646460c1dd496ba84022"
+    },
+    {
+      "bytes": 15410,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/frozen_environment_preservation_inputs_SOURCE_PREPARED.json",
+      "sha256": "dbda584b735e728c2e200cbe89cac7f77c34414ded0f2d62b9a5a83bce05c04d"
+    },
+    {
+      "bytes": 9191,
+      "mode": "0o444",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/test_environment_preservation_admission_SOURCE_PREPARED.py",
+      "sha256": "f229e39308a411bb0631b281eebab5774317923675308775b6b352922856ed2a"
+    },
+    {
+      "bytes": 2314,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/SOURCE-PREPARED-v3-control-callable-and-exact-reuse-proof.json",
+      "sha256": "98af13078f17e6ab0e6efc785ce6728cc150f6eebed9501e3ae857a60c1b61e0"
+    },
+    {
+      "bytes": 5015,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/SOURCE-PREPARED-v4-first-five-exact-reuse-and-control-plan-proof.json",
+      "sha256": "57b75d2310a6125381be8262b88b60aada0c26f0b52a2bba32755c41ffd00c09"
+    },
+    {
+      "bytes": 24590,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/OWNERFINAL-first-five-obsolete-environment-preservation-SOURCE-and-CONTROL-PREPARATION-NOTRUN-v4.json",
+      "sha256": "0eb5a69a100bf1ecb5cad0900b587dfcbe6384ecf7363f0c1369c4894d8d9591"
+    },
+    {
+      "bytes": 5193,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/SOURCE-PREPARED-v5-eight-measured-mode-and-real-row-control-closure-proof.json",
+      "sha256": "bd46230dce337addadf86ac542360c50982ad59a620f359be3b2532b41c80a23"
+    },
+    {
+      "bytes": 9323,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-obsolete-environment-independent-SOURCE-review/OWNERFINAL-independent-first-five-obsolete-environment-SOURCE-eight-mode-closure-HOLD.json",
+      "sha256": "8e6c8a3bc8635178683aadb5ac015928cc847c89723f25f00975778e64e261b6"
+    },
+    {
+      "bytes": 17723,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/frozen_first_five_environment_preservation_inputs_SOURCE_PREPARED_v5_measured_modes.json",
+      "sha256": "333dd9b66eacc212c90b3a75c44e9902a9c0bdc56d73d88ba5a0e41e46e0696a"
+    },
+    {
+      "bytes": 12822,
+      "mode": "0o444",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/test_first_five_environment_preservation_admission_SOURCE_PREPARED_v5_measured_modes.py",
+      "sha256": "38825c7bc1bedaa549ed6eb9a96b33b2ce244ce35d84b28b6eb22da557fec720"
+    },
+    {
+      "bytes": 765564,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+      "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25"
+    },
+    {
+      "bytes": 8165,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-currente2-concrete-LIGHT-PREEXECUTION-v2/immutable-one-LIGHT-inputs.json",
+      "sha256": "3b4e42668cb99bc38969c6f979ece431abdd123db4217baf282c3cbb581369ce"
+    },
+    {
+      "bytes": 13606,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-SOURCEFULL-preexecution/frozen-current8d49-source-FULL-inputs.json",
+      "sha256": "68cee8aeab8855f3f175c8a1a6f9e83ad66b9d2267eabfdb9969f7d55207e1c0"
+    },
+    {
+      "bytes": 378602,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/private-current8d49-source-body-mode-inventory-v3.json",
+      "sha256": "9843e9035fd7bfdf9577b9ba08f108365fbbc336ca00337f99328599b6204677"
+    },
+    {
+      "bytes": 797131,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-current-e4ff-qualified-config-successor/FROZEN-current-e4ff-control3-owned-cache-SOURCE-QUALIFIED-v4.json",
+      "sha256": "1411879501e1ef2bd5aec7fbf9627457aa840badc8e86be980c25b207ee9d5dc"
+    },
+    {
+      "bytes": 634107,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/FROZEN-control3-current-b614-actual-config-v2.json",
+      "sha256": "8c5da5be25ebfcf86f286ee9f93ddad328c68b3243b0935ec5937c93376bb948"
+    },
+    {
+      "bytes": 13345,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-currentc97e-concrete-TOKEN-LIGHT-PREEXECUTION/immutable-one-TOKEN-LIGHT-inputs.json",
+      "sha256": "c5378aa9dfceeb454255c1724f18ef505e09fe0d5fdc679a87b4db45fb92bb79"
+    },
+    {
+      "bytes": 67022,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/FROZEN-known-nine-18-semantic-15s-config-v2-NOTRUN.json",
+      "sha256": "b9010e2996df0285971f2c7ce31c4da04a6e7672505aa4240cb2b049aaae823d"
+    },
+    {
+      "bytes": 11174,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/OWNERFINAL-first-five-v5-eight-measured-mode-SOURCE-control-and-concrete-PURE-PREPARATION-NOTRUN.json",
+      "sha256": "8d1b3029bb5b3fd1f3a4791f677aa1ed5b1f40b2ca103e1fb00399d0ba013110"
+    },
+    {
+      "bytes": 18408,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/frozen_first_five_v5_PURE_control_inputs_NOTRUN.json",
+      "sha256": "b0d14d73ad682f22fb7c11ec4247d02d540ffaf4c90280d34a6c62ea6ee36b86"
+    },
+    {
+      "bytes": 7561,
+      "mode": "0o444",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/launch_first_five_v5_mode_closure_PURE_controls_SOURCE_PREPARED.py",
+      "sha256": "6eeb6e3b07439a5148f5227015bbabac52a512feb5e9b3562f04eaeb42fa10d1"
+    },
+    {
+      "bytes": 4932,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-obsolete-environment-v5-independent-SOURCE-review/OWNERFINAL-independent-first-five-v5-measured-mode-SOURCE-GO-PURE-storage-HOLD.json",
+      "sha256": "2ae29f8f7bc6e939027886b62660ecb1e1c1476592a2e09a9ed1708c554c039b"
+    },
+    {
+      "bytes": 16282,
+      "mode": "0o444",
+      "path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/test_first_five_v6_current00b1_managed_PURE18_SOURCE_PREPARED.py",
+      "sha256": "068ae3e16c5f1df52216c99c426301f2b5aed1f8333e55cf769dd3cd86cd89bc"
+    },
+    {
+      "bytes": 25795,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v6_current00b1_managed_PURE18_inputs_NOTRUN.json",
+      "sha256": "c46932c68629f3e899d1ba4f7086be2185ed967795c2a66a2b6263e72da7669f"
+    },
+    {
+      "bytes": 16823,
+      "mode": "0o444",
+      "path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/test_first_five_v6_current00b1_managed_PURE18_SOURCE_PREPARED_v2.py",
+      "sha256": "edeaa6ab02bd6f384d34549166fdbcd84413f7539d22aaddfeacc96be4b71c98"
+    },
+    {
+      "bytes": 26745,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v6_current00b1_managed_PURE18_inputs_NOTRUN_v2.json",
+      "sha256": "c5f5d069575cf51b1a18d0f455da069c46d94771445ab23d86262ed5151e493a"
+    },
+    {
+      "bytes": 17030,
+      "mode": "0o444",
+      "path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/test_first_five_v6_current00b1_managed_PURE18_SOURCE_PREPARED_v3.py",
+      "sha256": "825bdd3b2c4bbded5a4615116ab680daff0b1e89373bb4ecf338f2df44c5725d"
+    },
+    {
+      "bytes": 27692,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v6_current00b1_managed_PURE18_inputs_NOTRUN_v3.json",
+      "sha256": "7da9e11d97f0a40bcc111caae69bd14ecec56e5dfb8fb2218601689b07c216ad"
+    },
+    {
+      "bytes": 12477,
+      "mode": "0o444",
+      "path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v6_current00b1_managed_PURE18_ROOT_ONLY_SOURCE_PREPARED_v2.py",
+      "sha256": "a07caffda9baab8a6755667569c8ed332aa8372eac12ed40b0d401af828d9d0c"
+    },
+    {
+      "bytes": 7292,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once4-PREEXECUTION-NOTRUN/OWNERFINAL-current9760-owning-Isort-settings-SOURCE-and-fresh-once4-PREEXEC-NOTRUN.json",
+      "sha256": "7616d9820f33e3b920262ab501229e4695527820b2dd2fcdd53bdf9858b19e8e"
+    },
+    {
+      "bytes": 365333,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once4-PREEXECUTION-NOTRUN/current9760-owning-settings-1442-prepared30-current-ownfive-and-original-once3-proof.json",
+      "sha256": "5b333fe196e9055341ee859775f81581f53daf2dcbadd8ec125bb27c407deb13"
+    },
+    {
+      "bytes": 6261,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v6-current00b1-independent-PURE18-PREEXEC-review/OWNERFINAL-independent-first-five-v6-managed-machine18-SOURCE-GO-current-state-PREEXEC-HOLD.json",
+      "sha256": "4e4782340b2a066096cd46186647f707c385f884c25da77b51df9ccbfb1ef593"
+    },
+    {
+      "bytes": 17030,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/test_first_five_v7_current9760_managed_PURE18_SOURCE_PREPARED.py",
+      "sha256": "f8eef7c17be77199baa38c549b678d6ddda3c0650318cb604a6fd3b2de79ac2e"
+    },
+    {
+      "bytes": 5470,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/action_server/build.py",
+      "sha256": "75c249c111bbf3d81f027a252e7dba54771037f02b402832c0554e119cb4eb12"
+    },
+    {
+      "bytes": 391219,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/action_server/poetry.lock",
+      "sha256": "5d6acb65ba220211d1da020c78c51a5ea89465f2bbedc99aaf72319b862914e5"
+    },
+    {
+      "bytes": 4020,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/action_server/pyproject.toml",
+      "sha256": "be4011d3915e8838249546c70ae30420dadfb0d08c19b59970d8980332c7573f"
+    },
+    {
+      "bytes": 26152,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/action_server/tasks.py",
+      "sha256": "3fa7419c346fe9494bdbe89a7f245cf72287832bef36ee73ea4bd0039ef477d6"
+    },
+    {
+      "bytes": 219,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/action_server/tests/action_server_tests/test_create_conda_from_package_yaml/create_wheel/pyproject.toml",
+      "sha256": "4d581bfc7b6d64979c3aef6411198548a17713e0c8439c07d0cbb1a91fae3851"
+    },
+    {
+      "bytes": 115756,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/actions-http-helper/poetry.lock",
+      "sha256": "8e717ea54b91b17e638bb633026372fd415487a5e817768b450c0e473cd84d13"
+    },
+    {
+      "bytes": 881,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/actions-http-helper/pyproject.toml",
+      "sha256": "1888af6e0e2ce2280080920338245122563f69ce677796a5dbddc4c6bb07d28d"
+    },
+    {
+      "bytes": 423,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/actions-http-helper/tasks.py",
+      "sha256": "31523822c03af429ad7d7fab8df66a45f87b4f58876f8928df9f7c79f375992a"
+    },
+    {
+      "bytes": 179235,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/actions/poetry.lock",
+      "sha256": "b90ab7b6e3dd3a68a3d23bfee456adf6d22446f845e1bd5e2a334ec573035f15"
+    },
+    {
+      "bytes": 1219,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/actions/pyproject.toml",
+      "sha256": "9de923a2bf29d73d486ebf67982e177c0ab41d8a35266f7dd1f2d75b1ec43ec3"
+    },
+    {
+      "bytes": 418,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/actions/tasks.py",
+      "sha256": "33a572fcadc6848ebab78f01fcae880a40bd51011cb80a69149467a897807cc9"
+    },
+    {
+      "bytes": 1865,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/actions/tests/actions_core_tests/test_core_log_integration/pyproject.toml",
+      "sha256": "f2119f900206f7a6bcbedd34b7cfb1c83bd996db13fdf81710fa509ed3cc72cf"
+    },
+    {
+      "bytes": 56386,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/build_common/poetry.lock",
+      "sha256": "5dfaebdb2e73b95e022e9064f4258fefb66a4a0a2a6c3d8829cd9d2838e07160"
+    },
+    {
+      "bytes": 88066,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/common/poetry.lock",
+      "sha256": "55fb76128d984be26ba5af1dc791a7b010298f70908d969b80fd7f268e84019e"
+    },
+    {
+      "bytes": 331,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/developer/setup.yaml",
+      "sha256": "8674d6b55439fae5ac284fa92d7db8016e3589fafbf2d34e066e29345efa016a"
+    },
+    {
+      "bytes": 355,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/developer/setup_windows_amd64.yaml",
+      "sha256": "86a36910ad271616626e019e02e6c7b21fdb32eaa1e1717c2a654673504a8001"
+    },
+    {
+      "bytes": 8893,
+      "mode": "0o755",
+      "path": "/workspace/engineering/pr307/developer/toolkit.py",
+      "sha256": "e1a3f96b57c31be2a0db5cdd3d63ce9ac243a9e8e29dff5ce6e07fd897fb605f"
+    },
+    {
+      "bytes": 945,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/developer/toolkit.yaml",
+      "sha256": "0ed7beaa93dd0ba763d1618382a3de8ce307cc5cf613759d06081d735fcd7e68"
+    },
+    {
+      "bytes": 1512,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/devutils/bin/develop.bat",
+      "sha256": "daff2011d235a81f7d1556bf30bf62016aecb2498084e67bfccad8531642c589"
+    },
+    {
+      "bytes": 2992,
+      "mode": "0o700",
+      "path": "/workspace/engineering/pr307/devutils/bin/develop.sh",
+      "sha256": "484c7164f54e383b038dcb25ff39979458b6f6a3f10f20c81f50001c3c2d16c2"
+    },
+    {
+      "bytes": 91377,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/devutils/poetry.lock",
+      "sha256": "22bf11dae2a1ed46de5024da774dde4fe778c206d720929fba9244819f3b0b6e"
+    },
+    {
+      "bytes": 1092,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/devutils/pyproject.toml",
+      "sha256": "0fcd651ad99a6214718e69c734fcf58445de8d5e4d85117c6413d7c890306bff"
+    },
+    {
+      "bytes": 25741,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/devutils/src/devutils/invoke_utils.py",
+      "sha256": "7892303d075b2755b490b507c444d9aebc2f0d3089c8812df40d7f0c0fc195b5"
+    },
+    {
+      "bytes": 14308,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/devutils/src/devutils/rcc.py",
+      "sha256": "c897a607292025e3ae05a79fb002302f4ac7d5eed6033b8101dd9d5e550cc97c"
+    },
+    {
+      "bytes": 133625,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/mcp/poetry.lock",
+      "sha256": "9b84391e939e90e56422e1b9373862fbc1827b667ebba87126a6330a74069543"
+    },
+    {
+      "bytes": 3547,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/tasks.py",
+      "sha256": "b9d8fc44392003c3eac7503c2c8cff237f8896c95d5eccb97f6e75cf55eb4b1c"
+    },
+    {
+      "bytes": 132,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/templates/advanced/pyproject.toml",
+      "sha256": "ef1312a9eaf6323b143d9339defb3158ea19b67b22a7cce0ecf766ba6ed5223d"
+    },
+    {
+      "bytes": 121960,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/work-items/poetry.lock",
+      "sha256": "dcb776a04f9fb30fb93c6667cc42fe9733208e07ec23e7d54dff39650ae11bf4"
+    },
+    {
+      "bytes": 2336,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/work-items/pyproject.toml",
+      "sha256": "a09a91d33e5f91cdec649a96d72b91e4fc1e4ecf97d3654e9b243f0ac8ecc10e"
+    },
+    {
+      "bytes": 450,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/work-items/tasks.py",
+      "sha256": "e74ad7f083159457c53da828ca69b2ea6ae1a2cde465e6d2b8019bda079f1642"
+    },
+    {
+      "bytes": 37537,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v7_current9760_managed_PURE18_inputs_NOTRUN.json",
+      "sha256": "ca8279f3bdcc04c85f9d5c100ab010fc11bd9822c13633c68cdfe6eb1c3e69af"
+    },
+    {
+      "bytes": 12477,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v7_current9760_managed_PURE18_ROOT_ONLY_SOURCE_PREPARED.py",
+      "sha256": "00e4d952c0b79c4ebe95879f9a19cfa6ac15805c0f4bd1906d871048cd3b3e94"
+    },
+    {
+      "bytes": 6756,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/OWNERFINAL-first-five-v7-clean9760-minimum-managed-PURE18-SOURCE-and-PREEXECUTION-NOTRUN.json",
+      "sha256": "f7c7893409d99d4ebb1c209f4cabd7c3b4e2180d870fb1015292f809e46ec0e9"
+    },
+    {
+      "bytes": 15828,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v7-current9760-independent-PURE18-PREEXEC-review/OWNERFINAL-independent-first-five-v7-clean9760-managed-machine18-SOURCE-PREEXEC-GO-ROOT-envelope-v2.json",
+      "sha256": "2dd770932fd2823a3cf4880e2fd0e12992de266e5bbdaddf23096b442aba5899"
+    },
+    {
+      "bytes": 17042,
+      "mode": "0o444",
+      "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/test_first_five_v8_current9760_measured_managed_Git_PURE18_SOURCE_PREPARED.py",
+      "sha256": "0ee011db2e7edec7564ef05fc3ed610bb6f15483f52bd9ececb593c44aa5f096"
+    },
+    {
+      "bytes": 3899192,
+      "mode": "0o775",
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/git",
+      "sha256": "cd36778ef52d80fce1e3944b7f334460bec0921597dcf20d3d50d87d7560a588"
+    },
+    {
+      "bytes": 40148,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v8_current9760_measured_managed_Git_PURE18_inputs_NOTRUN.json",
+      "sha256": "5a5dbe3453a8ea23ddba10c054dddfda54e2a390972f052eb961ab012315fe36"
+    },
+    {
+      "bytes": 12654,
+      "mode": "0o444",
+      "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v8_current9760_measured_managed_Git_PURE18_ROOT_ONLY_SOURCE_PREPARED.py",
+      "sha256": "0ea7d1bf6953b3626f4b8d33b151ab488e030ac35bf999a9a8dd6d49a698ec72"
+    },
+    {
+      "bytes": 1307,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-PURE18-v7-exact-reviewed-argv-original-execution/OWNERFINAL-root-original-exact-reviewed-PURE18-v7-execution.json",
+      "sha256": "d0088d399f58c9173ba0b8f71cb00aa2d5f1da638d6c2c88debf9473eb09f4af"
+    },
+    {
+      "bytes": 6833,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-reviewed-first-five-v7-PURE18-external-parent-v2.py",
+      "sha256": "700bb81131a62c48787c517d61d0e833c843c935f88ad26ea952bf05c86e8551"
+    },
+    {
+      "bytes": 4829,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v7-concrete-ROOT-parent-independent-SOURCE-PREEXEC-review/OWNERFINAL-independent-first-five-v7-named-v2-concrete-ROOT-parent-SOURCE-PREEXEC-GO.json",
+      "sha256": "cf97efe69e087d5030deebbd680dbc320ec6d4a16c46ef62888ea403a01c665d"
+    },
+    {
+      "bytes": 2672,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-first-five-v7-current9760-reviewed-PURE18-outer/OWNERFINAL-root-original-first-five-v7-PURE18-outer.json",
+      "sha256": "82743cdaacde40e78283cb38381f36c3b0a35b7227431a41b918aa69cedfded8"
+    },
+    {
+      "bytes": 884,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-first-five-v7-current9760-reviewed-PURE18-outer/external-before-envelope.json",
+      "sha256": "2f93f186b2e2a7f453e03338cef78f6e3e42d62589b63e7f99e58939c6b5744d"
+    },
+    {
+      "bytes": 884,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-first-five-v7-current9760-reviewed-PURE18-outer/external-alwayspost-envelope.json",
+      "sha256": "2f93f186b2e2a7f453e03338cef78f6e3e42d62589b63e7f99e58939c6b5744d"
+    },
+    {
+      "bytes": 1485,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-first-five-v7-current9760-reviewed-PURE18-outer/root-one-pure18-release.json",
+      "sha256": "fd1dcc5eb35dd5617cba90f508afc8e63b6e6ccc50e465782afe5a66b043c81c"
+    },
+    {
+      "bytes": 4750,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v7-original-PURE18-ACTUALFAIL-independent-review/OWNERFINAL-independent-original-PURE18-v7v2-managed-Git-ACTUALFAIL.json",
+      "sha256": "ebdfa0ae82cda27d515192d26098c12c3a689f19212cee9f58920a3304ae570c"
+    },
+    {
+      "bytes": 10162,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v7-original-PURE18-ACTUALFAIL-independent-review/private-original-PURE18-v7-guard-failure-and-managed-Git-data-proof.json",
+      "sha256": "6087388793d9c2073126bbb4705bcae5d0db40ae7b983a167966fb43d7ebef74"
+    },
+    {
+      "bytes": 1941,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v7-original-PURE18-ACTUALFAIL-independent-review/minimum-named-v8-managed-selected-Git-binding-and-fresh-namespace-PROPOSAL-NOTAPPLIED.json",
+      "sha256": "bc58275cc8c3858ababb32d650367cb715fcda38e13813d672f4231bca128994"
+    },
+    {
+      "bytes": 41854,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v8_current9760_measured_managed_Git_PURE18_inputs_NOTRUN_v2.json",
+      "sha256": "6d7203286f9aa70a19eea0c4624741ad9ea2da0b7ceb04a5e81d7fb568ff41d5"
+    },
+    {
+      "bytes": 46277,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v8_current9760_measured_managed_Git_PURE18_inputs_NOTRUN_v3_originalFAIL_bound.json",
+      "sha256": "8cb014e904b4fd754a5858c2e0349a881dbe0bcb975f5b67e0aae215b747b388"
+    },
+    {
+      "bytes": 12753,
+      "mode": "0o444",
+      "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/root_once_first_five_current9760_SOURCE_PREPARED_v3_strict_V8_adapter.py",
+      "sha256": "985f497f83b4acecdf9ede7220da3237599ca210016da7443351c00787721ef6"
+    },
+    {
+      "bytes": 4079,
+      "mode": "0o444",
+      "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/pure18_receipt_adapter_v8_SOURCE_PREPARED_v2_actual_receipt_schema.py",
+      "sha256": "8dbc69c8dd1d366d1e1dea97cb809613ff990e27ee9faacb3a9dfccb56a6c1b2"
+    },
+    {
+      "bytes": 21556,
+      "mode": "0o444",
+      "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/test_controller_boundaries_SOURCE_PREPARED_v4_baseline_first_machine_census.py",
+      "sha256": "993ee6a89bb79b0836f614790a4c10a297881d0c64d9a2fc56de50aa1f53e036"
+    },
+    {
+      "bytes": 6736,
+      "mode": "0o444",
+      "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/launch_controller_boundary_PURE_ROOT_ONLY_SOURCE_PREPARED.py",
+      "sha256": "0df74c34a87d51a4d5759f30941389a6bf7cf2732191f310e3be66ea7f0258f4"
+    },
+    {
+      "bytes": 8035,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/OWNERFINAL-current9760-first-five-concrete-preservation-SOURCE-v2-explicit-approval-PREEXEC-HOLD.json",
+      "sha256": "8c147b17f85ba4081e5b4493c3e92442fc39078c182bcb44629a101921db1099"
+    },
+    {
+      "bytes": 63289,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/frozen_current9760_five_environment_actual_controller_inputs_SOURCE_PREPARED.json",
+      "sha256": "714f2489aa66b7dd83a95d43b1693cd3f981c344bba5e92da639dddb229df3a3"
+    },
+    {
+      "bytes": 67675,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/frozen_current9760_storage_controller_V8_qualified_source_and_actual_tokens_SOURCE_PREPARED.json",
+      "sha256": "6f1dee55ea49ac1ef91528b89619a0a9d3d6419014cdcfa93d3523fe15c3009b"
+    },
+    {
+      "bytes": 4748,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/ROOT_storage_release_V8_source_actual_adapter_TEMPLATE_ONLY_NOAUTHORIZATION.json",
+      "sha256": "45962dd3d9df7911f930512b7bb997adb3589148636564b1f0cc662619267805"
+    },
+    {
+      "bytes": 10515,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v8-original-PURE18-independent-ACTUAL-review/OWNERFINAL-independent-original-first-five-v8-managed-Git-ACTUAL-PURE18-GO.json",
+      "sha256": "dd9fa8279c9503488acf753f6c4520ba201cd92a8f30168346ff9b32c4c3529d"
+    },
+    {
+      "bytes": 8089,
+      "mode": "0o600",
+      "path": "/workspace/engineering/first-five-v8-current9760-managed-Git-PURE18-once-owned/original-18-complete-machine-census.json",
+      "sha256": "28ba47b66bb90ebf73f8e4834b42005e417dfe73f9471538397d02c962518ba0"
+    },
+    {
+      "bytes": 2149,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-five-accepted-inactive-environment-owner-approval-20261011/ROOT-inactive-owner-approval-selected-five-only.json",
+      "sha256": "4d227967057c718d93314f8fb9fbdd74ee5a168ab08e71a8cba6a2519b1d28d4"
+    },
+    {
+      "bytes": 9322,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/OWNERFINAL-first-five-v8-current9760-measured-managed-Git-SOURCE-PREEXECUTION-final-history-scope-NOTRUN.json",
+      "sha256": "485dc5ee1c67cb79b16fb9ea140626958b02ec77c91699ce62d307b7cefc4475"
+    },
+    {
+      "bytes": 47036,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v8_current9760_measured_managed_Git_PURE18_inputs_NOTRUN_v4_originalFAIL_and_historical_system_scope.json",
+      "sha256": "0d4423f45acce573da98b262613971e497a91a9415d61f59142182678897365b"
+    },
+    {
+      "bytes": 5072,
+      "mode": "0o600",
+      "path": "/workspace/engineering/first-five-v8-current9760-managed-Git-PURE18-once-owned/original-parent-terminal.json",
+      "sha256": "45d63719dc431e82a542a0844c122136607443034cf32018a682e20a48a56506"
+    },
+    {
+      "bytes": 3755,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-first-five-v8-current9760-measured-Git-reviewed-PURE18-outer/OWNERFINAL-root-original-first-five-v8-PURE18-outer.json",
+      "sha256": "701370f89ec6d0f412b0614968d35ffb3948d35c39d6361c79d78cd97102215c"
+    },
+    {
+      "bytes": 1550,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-PURE18-v8-exact-reviewed-argv-original-execution/OWNERFINAL-root-original-exact-reviewed-PURE18-v8-execution.json",
+      "sha256": "a41b87d2ff8257fd1242d886da43a8987e893ca33d17efc66d24f9f2df75e7b7"
+    },
+    {
+      "bytes": 12668,
+      "mode": "0o444",
+      "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v8_current9760_measured_managed_Git_PURE18_ROOT_ONLY_SOURCE_PREPARED_v2.py",
+      "sha256": "70b9123cd487a9b80fd7dfe62c06ba114ea0d5e46b7f2138c4fcccc55e50305c"
+    },
+    {
+      "bytes": 9382,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v8-concrete-ROOT-parent-independent-PREEXEC-review/OWNERFINAL-independent-exact-first-five-v8-concrete-ROOT-parent-PREEXEC-GO.json",
+      "sha256": "b425a501456ef50c789d36d5446346e5bb2920c374a427ba1d663e550317878d"
+    },
+    {
+      "bytes": 10868,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v8-current9760-independent-SOURCE-child-PREEXEC-review/OWNERFINAL-independent-first-five-v8-measured-managed-Git-SOURCE-child-PREEXEC-GO-ROOT-parent-HOLD.json",
+      "sha256": "d5beacad97a0041aa4e61dfb338220f027cad239d56daf8f39ac9e5ed4374ce9"
+    },
+    {
+      "bytes": 2794,
+      "mode": "0o600",
+      "path": "/workspace/engineering/first-five-v8-current9760-managed-Git-PURE18-once-owned/original-child-terminal.json",
+      "sha256": "e338cd267068b96b16bc8f5455a7a04ba6c5fa2b549277a8b3b3bffb6d2b5e30"
+    },
+    {
+      "bytes": 4648,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-reviewed-PURE18-v8-original-master.py",
+      "sha256": "93a7bf95aa3ecbb2b0b06db51da6d48aff2705974ed5e343f0211445cdf89440"
+    },
+    {
+      "bytes": 6866,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-reviewed-first-five-v8-PURE18-external-parent.py",
+      "sha256": "764028fe6aad30ba9ece309f24a8465755fe5abe042bb0efb6054c7a877a639a"
+    },
+    {
+      "bytes": 1599,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-first-five-v8-current9760-measured-Git-reviewed-PURE18-outer/root-one-pure18-release.json",
+      "sha256": "d46722768330d54815e1485d5ce288bdb20f3beb957a1e35bd5f2ff5e85df6b1"
+    },
+    {
+      "bytes": 14459,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v8-original-PURE18-independent-ACTUAL-review/private-original-v8-complete18-census-stdio-guards-and-capture-bindings-proof.json",
+      "sha256": "d0fdc44392450e04d6079f318ec89d088250c2f5f742df242b8ec45e084eabee"
+    },
+    {
+      "bytes": 7355,
+      "mode": "0o444",
+      "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/launch_controller_boundary_PURE_ROOT_ONLY_SOURCE_PREPARED_v2_cache_and_origin_pin.py",
+      "sha256": "4eef6de54c7c91678987b9b9c6127f4a57645ea68f094e458009e5e110ca7266"
+    },
+    {
+      "bytes": 107385,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/frozen_controller_boundary30_actual_functions_typed600_PURE_inputs_NOTRUN.json",
+      "sha256": "72aaf93fb373f40cf7315c4e225b6b6cb61e7e9a876fb956075a92cebf9f1db7"
+    },
+    {
+      "bytes": 7424,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/OWNERFINAL-controller-V8-original-actual-adapter-and-30-boundary-SOURCE-PURE-PREEXEC-preparation-NOTRUN.json",
+      "sha256": "dbdf8422eb1107185d5c02fe5f6c1bbbba60d552138b879094ff01097b1701de"
+    },
+    {
+      "bytes": 8399,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/OWNERFINAL-controller-V8-original-actual-adapter-and-30-boundary-SOURCE-PURE-PREEXEC-final-NOTRUN-v2.json",
+      "sha256": "06b8f1d6bf52a6a13ecce62820cc2e5b6ae2bd961027268cdc51fa3dec3adeb2"
+    },
+    {
+      "bytes": 108389,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/frozen_controller_boundary30_actual_functions_typed600_PURE_inputs_NOTRUN_v2_cache_origin_pin.json",
+      "sha256": "c95d4746dfacde271565b81ff14e4c31ab2b8ce3d6efe68e5626c5fdb7cb40f8"
+    },
+    {
+      "bytes": 5217,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/SOURCE-ONLY-30-boundaries-original-18-actual-adapter-and-preservation-literal-proof.json",
+      "sha256": "6af8254fe2f1a5907559939a09e5de643e7c39679f54fa8e6a2a3188d6a2a863"
+    },
+    {
+      "bytes": 3795,
+      "mode": "0o400",
+      "path": "/workspace/engineering/controller30-original-ACTUALFAIL-independent-diagnosis/OWNERFINAL-independent-original-controller30-ACTUALFAIL-and-minimal-two-negative-fixture-proposal.json",
+      "sha256": "2a7e61f236db15ada4d3ddda355d8a3d0730ec58e1f0f3d1d9963c4ee97d12f8"
+    },
+    {
+      "bytes": 5518,
+      "mode": "0o400",
+      "path": "/workspace/engineering/controller30-original-ACTUALFAIL-independent-diagnosis/private-original-controller30-census-setup-errors-and-preservation-proof.json",
+      "sha256": "00edcfa028e308663c72b4ac561c5f295e66151510b96078960458ed98b9b8bc"
+    },
+    {
+      "bytes": 3738,
+      "mode": "0o400",
+      "path": "/workspace/engineering/controller30-original-ACTUALFAIL-independent-diagnosis/minimal-two-negative-fixture-only-proposal-NOTRUN.json",
+      "sha256": "09638c058ca1e4327bd9204970ed754e20b58e48e79079afbe3687b3ca5c8c1b"
+    },
+    {
+      "bytes": 1522,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-controller30-reviewed-original-execution/OWNERFINAL-root-original-controller30-pure-execution.json",
+      "sha256": "61e5690c2c3c88768ab62161d104362a96de50fe9f79a878935471ffe4120902"
+    },
+    {
+      "bytes": 9246,
+      "mode": "0o600",
+      "path": "/workspace/engineering/first-five-controller-boundary-PURE-once-owned/original-controller-boundary-machine-census.json",
+      "sha256": "5b75c4d41df7b763b473fd75021f99c9a2411b2f9b0a9d250e76d54255882a5b"
+    },
+    {
+      "bytes": 1216,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-controller30-reviewed-original-execution/root-one-controller30-pure-release.json",
+      "sha256": "466c0e280ae37e2a50a6010159833040e348dfc5392f6d20d5a26704e164824d"
+    },
+    {
+      "bytes": 7975,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-controller30-independent-SOURCE-PURE-PREEXEC-review/OWNERFINAL-independent-controller30-boundary-SOURCE-and-PURE-PREEXEC-GO.json",
+      "sha256": "a3bb88a14ed2f3e286cf7582e131f64bbf92d9c72fae5b83cb3decf941bc4c16"
+    },
+    {
+      "bytes": 858,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-controller30-reviewed-original-execution/external-always-post-envelope.json",
+      "sha256": "5b9f53772cb295efb9d82979468e013f1640d29871ee448e2bdfd008820b4e10"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-controller30-reviewed-original-execution/original.stdout.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 583,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-controller30-reviewed-original-execution/original.stderr.private",
+      "sha256": "63547f6299e7e87a4e5198cde39d25550dda35abc9ce87d7abdfa1b4246ea43b"
+    },
+    {
+      "bytes": 964,
+      "mode": "0o600",
+      "path": "/workspace/engineering/first-five-controller-boundary-PURE-once-owned/original-controller-boundary-parent-terminal.json",
+      "sha256": "0e0210796afea5397e1b591a59b2562abed7e97fff187e849abe82ae9049d1ce"
+    },
+    {
+      "bytes": 664,
+      "mode": "0o600",
+      "path": "/workspace/engineering/first-five-controller-boundary-PURE-once-owned/original-pure-terminal.json",
+      "sha256": "4cd5b57ceed4a8535a1703c94c98f3391dcdb5786e4769f2ff4148f47b92f173"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/first-five-controller-boundary-PURE-once-owned/original-pure.stdout.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 7178,
+      "mode": "0o600",
+      "path": "/workspace/engineering/first-five-controller-boundary-PURE-once-owned/original-pure.stderr.private",
+      "sha256": "7d2dd656c66905ddd85b67df6c8a62846e4103dec7c5c6e1a3bfaf434e64cdf7"
+    },
+    {
+      "bytes": 21990,
+      "mode": "0o444",
+      "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/test_controller_boundaries_two_fresh_negative_fixtures_SOURCE_PREPARED_once2.py",
+      "sha256": "411341f94a58fb0bb37d957ce4922e320a894a5dbe6832f5d890bcdd8aa30229"
+    },
+    {
+      "bytes": 7355,
+      "mode": "0o444",
+      "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/launch_controller_boundary_PURE_ROOT_ONLY_SOURCE_PREPARED_once2.py",
+      "sha256": "4eef6de54c7c91678987b9b9c6127f4a57645ea68f094e458009e5e110ca7266"
+    }
+  ],
+  "cached_python": {
+    "bytes": 31903952,
+    "mode": "0o775",
+    "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12",
+    "sha256": "ba35c76091c86640cd6bbccc8c216e5b2fc52b20c26de803edef79165022037f"
+  },
+  "controller_binding": {
+    "bytes": 12753,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/root_once_first_five_current9760_SOURCE_PREPARED_v3_strict_V8_adapter.py",
+    "sha256": "985f497f83b4acecdf9ede7220da3237599ca210016da7443351c00787721ef6"
+  },
+  "controls": {
+    "bytes": 21990,
+    "mode": "0o444",
+    "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/test_controller_boundaries_two_fresh_negative_fixtures_SOURCE_PREPARED_once2.py",
+    "sha256": "411341f94a58fb0bb37d957ce4922e320a894a5dbe6832f5d890bcdd8aa30229"
+  },
+  "expected_nodeids": [
+    "__main__.ControllerBoundaryControls.test_00_valid_adapter_preserves_original_raw_status",
+    "__main__.ControllerBoundaryControls.test_adapter_v7_label_rejected",
+    "__main__.ControllerBoundaryControls.test_adapter_count_boolean_not_integer",
+    "__main__.ControllerBoundaryControls.test_adapter_missing_or_duplicate_selected_case",
+    "__main__.ControllerBoundaryControls.test_adapter_failed_real_result_not_hidden_by_zero_counters",
+    "__main__.ControllerBoundaryControls.test_adapter_nonzero_skip",
+    "__main__.ControllerBoundaryControls.test_adapter_wrong_source_owner",
+    "__main__.ControllerBoundaryControls.test_adapter_wrong_owned_census_path",
+    "__main__.ControllerBoundaryControls.test_adapter_before_or_post_not_qualified",
+    "__main__.ControllerBoundaryControls.test_adapter_wrong_driver_or_origin",
+    "__main__.ControllerBoundaryControls.test_adapter_origin_changed_between_phases",
+    "__main__.ControllerBoundaryControls.test_adapter_unknown_native_flag",
+    "__main__.ControllerBoundaryControls.test_10_valid_synthetic_admission_actual_boundary",
+    "__main__.ControllerBoundaryControls.test_strict_storage_child600_no_widen",
+    "__main__.ControllerBoundaryControls.test_storage_missing_inactive_approval",
+    "__main__.ControllerBoundaryControls.test_storage_wrong_approval_scope",
+    "__main__.ControllerBoundaryControls.test_storage_requires_unknown_is_not_quiescence",
+    "__main__.ControllerBoundaryControls.test_storage_dirty_protected_checkout",
+    "__main__.ControllerBoundaryControls.test_storage_wrong_current_tree",
+    "__main__.ControllerBoundaryControls.test_storage_changed_protected_body",
+    "__main__.ControllerBoundaryControls.test_storage_prepared_manifest_binding_mismatch",
+    "__main__.ControllerBoundaryControls.test_storage_typed_PASS_owner_cannot_self_certify",
+    "__main__.ControllerBoundaryControls.test_private_binding_regular_mode_and_symlink",
+    "__main__.ControllerBoundaryControls.test_layout_stopreserve_not_RCC_native_floor",
+    "__main__.ControllerBoundaryControls.test_verified_module_wrong_hash_before_execution",
+    "__main__.ControllerBoundaryControls.test_delegated_alias_refusal_remains_failure",
+    "__main__.ControllerBoundaryControls.test_nonzero_completed_output_retained_before_assertions",
+    "__main__.ControllerBoundaryControls.test_timeout_and_capture_failure_preserve_primary",
+    "__main__.ControllerBoundaryControls.test_strict600_typed_pure_ROOT_grant",
+    "__main__.ControllerBoundaryControls.test_pure_ROOT_grant_never_allows_real_storage"
+  ],
+  "fixture_root": "/workspace/engineering/first-five-controller-boundary-PURE-once2-owned/ALL-retained-synthetic-fixtures",
+  "managed_activation_expected": {
+    "ACTIONS_CLOUD_ROOT": "/workspace/actions-cloud",
+    "ACTIONS_HOME": "/workspace/actions-cloud/actions-home",
+    "ACTIONS_RUNTIME_TEST_PYTHON": "/workspace/actions/action_server/.venv/bin/python",
+    "BUILDX_CONFIG": "/workspace/actions-cloud/cache/buildx",
+    "GOCACHE": "/workspace/actions-cloud/cache/go-build",
+    "GOMAXPROCS": "2",
+    "GOPATH": "/workspace/actions-cloud/cache/go",
+    "PLAYWRIGHT_BROWSERS_PATH": "/workspace/actions-cloud/cache/playwright",
+    "POETRY_CACHE_DIR": "/workspace/actions-cloud/cache/pypoetry",
+    "POETRY_CONFIG_DIR": "/workspace/actions-cloud/config/pypoetry",
+    "POETRY_NO_INTERACTION": "1",
+    "PYTEST_XDIST_AUTO_NUM_WORKERS": "2",
+    "ROBOCORP_HOME": "/workspace/actions-cloud/robocorp",
+    "ROBOTS_HOME": "/workspace/actions-cloud/robots-home",
+    "UV_CACHE_DIR": "/workspace/actions-cloud/cache/uv",
+    "XDG_CACHE_HOME": "/workspace/actions-cloud/cache",
+    "XDG_CONFIG_HOME": "/workspace/actions-cloud/config",
+    "npm_config_cache": "/workspace/actions-cloud/cache/npm"
+  },
+  "original_driver_binding": {
+    "bytes": 37609,
+    "mode": "0o444",
+    "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_first_five_accepted_obsolete_environments_SOURCE_PREPARED_v4.py",
+    "sha256": "63476ecaa50ba863afed8602dcad82c22c9349df022d0e9f0dde8d81d60e0bb7"
+  },
+  "owned_root": "/workspace/engineering/first-five-controller-boundary-PURE-once2-owned",
+  "pure18_prepared_owner_binding": {
+    "bytes": 9322,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/OWNERFINAL-first-five-v8-current9760-measured-managed-Git-SOURCE-PREEXECUTION-final-history-scope-NOTRUN.json",
+    "sha256": "485dc5ee1c67cb79b16fb9ea140626958b02ec77c91699ce62d307b7cefc4475"
+  },
+  "pure18_source_config_data": {
+    "activation_binding": {
+      "bytes": 987,
+      "mode": "0o600",
+      "path": "/workspace/actions-cloud/activate.sh",
+      "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+    },
+    "active_source_bindings": [
+      {
+        "head": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+        "path": "/workspace/engineering/pr308",
+        "tracked_clean": true,
+        "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+      },
+      {
+        "head": "9760d5ec44876558c4941c4c3190abc8d92d14a1",
+        "path": "/workspace/engineering/pr307",
+        "tracked_clean": true,
+        "tree": "0d33ebaac258e069ef7045a29b4a3904740f6307"
+      },
+      {
+        "head": "f75dcae52fcd78c5c382d3903b012e5b049ca48b",
+        "path": "/workspace/engineering/pr305",
+        "tracked_clean": true,
+        "tree": "851834ae6cc87f42abfcf3c963542191e2815599"
+      },
+      {
+        "head": "2d86c5cf92d3acb274a8ceb5d57bfb8b12c779b6",
+        "path": "/workspace/engineering/captured-child-cleanup",
+        "tracked_clean": true,
+        "tree": "653a9e73e4d27641ec86de94b90f35d41e0f24f8"
+      }
+    ],
+    "bindings": [
+      {
+        "bytes": 39793,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/OWNERFINAL-five-accepted-obsolete-checkout-environments-readonly-capacity-plan.json",
+        "sha256": "0c082b23462a3ea588cca2e98ac48934e5ae6a5b14cdc0083e55b3ccadffd2de"
+      },
+      {
+        "bytes": 17539,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/frozen_first_five_environment_preservation_inputs_SOURCE_PREPARED_v4.json",
+        "sha256": "d6d933f64940c6ed3b0849a6bcd10e07f6c2c834f968c6f1b354462625e4c028"
+      },
+      {
+        "bytes": 12323,
+        "mode": "0o444",
+        "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/test_first_five_environment_preservation_admission_SOURCE_PREPARED_v4.py",
+        "sha256": "bf271888be3d40f6be8b11c2e71de7232c0bce50ee30fcc96b1083f89498bf75"
+      },
+      {
+        "bytes": 576,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/accepted-canonical-environment-and-memory-scope-lesson-reused.txt",
+        "sha256": "1152b61293a6f44d0ba61b59c24630f30bb948efbde926f2e014cb1876e7561a"
+      },
+      {
+        "bytes": 37609,
+        "mode": "0o444",
+        "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_first_five_accepted_obsolete_environments_SOURCE_PREPARED_v4.py",
+        "sha256": "63476ecaa50ba863afed8602dcad82c22c9349df022d0e9f0dde8d81d60e0bb7"
+      },
+      {
+        "bytes": 2387091,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr290-action_server-private-full-body-metadata-inventory.json",
+        "sha256": "f5127b2ae573d031cb1a074bfbc82cfa66c4b53b343bec491a0121bd3cadd376"
+      },
+      {
+        "bytes": 1702413,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr290-actions-private-full-body-metadata-inventory.json",
+        "sha256": "1966729dbff3e5168dbb253d3dbb1f4a09812d511df5ff2e5b5b12c10e5db88d"
+      },
+      {
+        "bytes": 1122969,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr290-actions-http-helper-private-full-body-metadata-inventory.json",
+        "sha256": "f6452bc22d99d0018a548d464aff323a3c081c146fe7a3e0fadc5d3cab90ef0a"
+      },
+      {
+        "bytes": 988304,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr290-devutils-private-full-body-metadata-inventory.json",
+        "sha256": "fa044e527def8d6ffbe10586091f588642f7a5300ef07a48dcc5d4b75a1bc63e"
+      },
+      {
+        "bytes": 992323,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr290-work-items-private-full-body-metadata-inventory.json",
+        "sha256": "8f1fe000ea1f97b1720dd04b583de7ec0c804f1ee4fb3970b29754afc51cf190"
+      },
+      {
+        "bytes": 2382175,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr309-action_server-private-full-body-metadata-inventory.json",
+        "sha256": "8c520af93c01f9ec0fb822991b30b74c5e107834012acd74dc564ca3fa09c450"
+      },
+      {
+        "bytes": 1696007,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr309-actions-private-full-body-metadata-inventory.json",
+        "sha256": "e912eb54df5ed2f638a0f6eff6c960de7dca23da57bcb246490f0d34a2a81345"
+      },
+      {
+        "bytes": 1119318,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr309-actions-http-helper-private-full-body-metadata-inventory.json",
+        "sha256": "7155d4f13ea55fa2e6a9b8d507457325390f5f421104cf74f5fcd80d239cf156"
+      },
+      {
+        "bytes": 988304,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr309-devutils-private-full-body-metadata-inventory.json",
+        "sha256": "b08f527e8f771191a51432815c070ca08c4f1c8a23debb637c571b84bbdff096"
+      },
+      {
+        "bytes": 988579,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr309-work-items-private-full-body-metadata-inventory.json",
+        "sha256": "0f376a0b790d22b67f82b5fc1a1f1e42bb424408dc9ec5e71130bd76f234149c"
+      },
+      {
+        "bytes": 2381381,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr310-action_server-private-full-body-metadata-inventory.json",
+        "sha256": "182be779e12399e24c83ccc06f06b7f6c2b2862ba945530ac82946d36889773d"
+      },
+      {
+        "bytes": 1696664,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr310-actions-private-full-body-metadata-inventory.json",
+        "sha256": "0c5c7d3649b71df30f79c73a43f6451710e64509acfd8a98ca51952362ed4b79"
+      },
+      {
+        "bytes": 1118722,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr310-actions-http-helper-private-full-body-metadata-inventory.json",
+        "sha256": "0dd40831d5da10ed4238ac67eb858edcdcf7a59edce8078749b9b51e28edcb4a"
+      },
+      {
+        "bytes": 985102,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr310-devutils-private-full-body-metadata-inventory.json",
+        "sha256": "0ea8b5c7d7befb4fa2f09cc672cece61a0ab243847e299ab3818cf911da69e4f"
+      },
+      {
+        "bytes": 988579,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr310-work-items-private-full-body-metadata-inventory.json",
+        "sha256": "3495915b217285dda14d2157db259e609e131764ce03fe0827615ba00dadde04"
+      },
+      {
+        "bytes": 2381065,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr311-action_server-private-full-body-metadata-inventory.json",
+        "sha256": "ab50df3cc7fc0e4b0e4d14a1230cdd7a14d1efbdee98365ed6acff02e46cffb2"
+      },
+      {
+        "bytes": 1696007,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr311-actions-private-full-body-metadata-inventory.json",
+        "sha256": "434f8a074f341569c453e5a1b37f65890adebc5fe1322d15183e19273addbc02"
+      },
+      {
+        "bytes": 1118722,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr311-actions-http-helper-private-full-body-metadata-inventory.json",
+        "sha256": "c030ffcf70898c1e940ff39ab99af33f28a7d06c1ee7de5df46a432b9a134c45"
+      },
+      {
+        "bytes": 984562,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr311-devutils-private-full-body-metadata-inventory.json",
+        "sha256": "2abaa2fff5b501fa98f513ecdc091a6714df75da11d4d084d6b947ccedff80b9"
+      },
+      {
+        "bytes": 988579,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr311-work-items-private-full-body-metadata-inventory.json",
+        "sha256": "931e7dbeeae79b0dc39941658c8ac947973ace66b13c31560c1a1998cdcf644a"
+      },
+      {
+        "bytes": 2700102,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/runtime-checkout-eol-action_server-private-full-body-metadata-inventory.json",
+        "sha256": "ff3be86460a2ebb88b694e4995bc44e1fc3236c0994c875ae77dbfa51061a195"
+      },
+      {
+        "bytes": 1704618,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/runtime-checkout-eol-actions-private-full-body-metadata-inventory.json",
+        "sha256": "4fb031f0ecfb62f5b766d9819c70b27af8aeff1823099ede628d18b6b6f4a640"
+      },
+      {
+        "bytes": 1122813,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/runtime-checkout-eol-actions-http-helper-private-full-body-metadata-inventory.json",
+        "sha256": "6f3b6da2bb6d34c3a4dd655da605a3c389e032c03348cd983fcc24e030448d64"
+      },
+      {
+        "bytes": 1055896,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/runtime-checkout-eol-devutils-private-full-body-metadata-inventory.json",
+        "sha256": "ff5ed9d275a9d454081d0b75faf726fcb3f172d2bda074eee30668f366e89e88"
+      },
+      {
+        "bytes": 1004052,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/runtime-checkout-eol-work-items-private-full-body-metadata-inventory.json",
+        "sha256": "37e163ca3614303636f81e9dfdc94a1a1b1596b0b7c75f2dfdedeeb066f3433a"
+      },
+      {
+        "bytes": 33635,
+        "mode": "0o444",
+        "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_accepted_obsolete_environments_source_prepared.py",
+        "sha256": "3dfbbd245f8dcb0c0c33e855b5a3b4b3a87a4fe334367da0dada6491da9fc1e8"
+      },
+      {
+        "bytes": 34532,
+        "mode": "0o444",
+        "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_accepted_obsolete_environments_source_prepared_v2.py",
+        "sha256": "98f977690dd7ef6d68da5f0c1ee4582100b054f836767a287b9995a7443bdcfb"
+      },
+      {
+        "bytes": 36982,
+        "mode": "0o444",
+        "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_accepted_obsolete_environments_source_prepared_v3.py",
+        "sha256": "262196054902818db5cea7265961a3520cf23b30080b646460c1dd496ba84022"
+      },
+      {
+        "bytes": 15410,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/frozen_environment_preservation_inputs_SOURCE_PREPARED.json",
+        "sha256": "dbda584b735e728c2e200cbe89cac7f77c34414ded0f2d62b9a5a83bce05c04d"
+      },
+      {
+        "bytes": 9191,
+        "mode": "0o444",
+        "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/test_environment_preservation_admission_SOURCE_PREPARED.py",
+        "sha256": "f229e39308a411bb0631b281eebab5774317923675308775b6b352922856ed2a"
+      },
+      {
+        "bytes": 2314,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/SOURCE-PREPARED-v3-control-callable-and-exact-reuse-proof.json",
+        "sha256": "98af13078f17e6ab0e6efc785ce6728cc150f6eebed9501e3ae857a60c1b61e0"
+      },
+      {
+        "bytes": 5015,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/SOURCE-PREPARED-v4-first-five-exact-reuse-and-control-plan-proof.json",
+        "sha256": "57b75d2310a6125381be8262b88b60aada0c26f0b52a2bba32755c41ffd00c09"
+      },
+      {
+        "bytes": 24590,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/OWNERFINAL-first-five-obsolete-environment-preservation-SOURCE-and-CONTROL-PREPARATION-NOTRUN-v4.json",
+        "sha256": "0eb5a69a100bf1ecb5cad0900b587dfcbe6384ecf7363f0c1369c4894d8d9591"
+      },
+      {
+        "bytes": 5193,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/SOURCE-PREPARED-v5-eight-measured-mode-and-real-row-control-closure-proof.json",
+        "sha256": "bd46230dce337addadf86ac542360c50982ad59a620f359be3b2532b41c80a23"
+      },
+      {
+        "bytes": 9323,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-obsolete-environment-independent-SOURCE-review/OWNERFINAL-independent-first-five-obsolete-environment-SOURCE-eight-mode-closure-HOLD.json",
+        "sha256": "8e6c8a3bc8635178683aadb5ac015928cc847c89723f25f00975778e64e261b6"
+      },
+      {
+        "bytes": 17723,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/frozen_first_five_environment_preservation_inputs_SOURCE_PREPARED_v5_measured_modes.json",
+        "sha256": "333dd9b66eacc212c90b3a75c44e9902a9c0bdc56d73d88ba5a0e41e46e0696a"
+      },
+      {
+        "bytes": 12822,
+        "mode": "0o444",
+        "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/test_first_five_environment_preservation_admission_SOURCE_PREPARED_v5_measured_modes.py",
+        "sha256": "38825c7bc1bedaa549ed6eb9a96b33b2ce244ce35d84b28b6eb22da557fec720"
+      },
+      {
+        "bytes": 765564,
+        "mode": "0o600",
+        "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+        "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25"
+      },
+      {
+        "bytes": 8165,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr307-currente2-concrete-LIGHT-PREEXECUTION-v2/immutable-one-LIGHT-inputs.json",
+        "sha256": "3b4e42668cb99bc38969c6f979ece431abdd123db4217baf282c3cbb581369ce"
+      },
+      {
+        "bytes": 13606,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr308-current8d49-SOURCEFULL-preexecution/frozen-current8d49-source-FULL-inputs.json",
+        "sha256": "68cee8aeab8855f3f175c8a1a6f9e83ad66b9d2267eabfdb9969f7d55207e1c0"
+      },
+      {
+        "bytes": 378602,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/private-current8d49-source-body-mode-inventory-v3.json",
+        "sha256": "9843e9035fd7bfdf9577b9ba08f108365fbbc336ca00337f99328599b6204677"
+      },
+      {
+        "bytes": 797131,
+        "mode": "0o600",
+        "path": "/workspace/engineering/rcc-compatibility-current-e4ff-qualified-config-successor/FROZEN-current-e4ff-control3-owned-cache-SOURCE-QUALIFIED-v4.json",
+        "sha256": "1411879501e1ef2bd5aec7fbf9627457aa840badc8e86be980c25b207ee9d5dc"
+      },
+      {
+        "bytes": 634107,
+        "mode": "0o600",
+        "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/FROZEN-control3-current-b614-actual-config-v2.json",
+        "sha256": "8c5da5be25ebfcf86f286ee9f93ddad328c68b3243b0935ec5937c93376bb948"
+      },
+      {
+        "bytes": 13345,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr307-currentc97e-concrete-TOKEN-LIGHT-PREEXECUTION/immutable-one-TOKEN-LIGHT-inputs.json",
+        "sha256": "c5378aa9dfceeb454255c1724f18ef505e09fe0d5fdc679a87b4db45fb92bb79"
+      },
+      {
+        "bytes": 67022,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/FROZEN-known-nine-18-semantic-15s-config-v2-NOTRUN.json",
+        "sha256": "b9010e2996df0285971f2c7ce31c4da04a6e7672505aa4240cb2b049aaae823d"
+      },
+      {
+        "bytes": 11174,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/OWNERFINAL-first-five-v5-eight-measured-mode-SOURCE-control-and-concrete-PURE-PREPARATION-NOTRUN.json",
+        "sha256": "8d1b3029bb5b3fd1f3a4791f677aa1ed5b1f40b2ca103e1fb00399d0ba013110"
+      },
+      {
+        "bytes": 18408,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/frozen_first_five_v5_PURE_control_inputs_NOTRUN.json",
+        "sha256": "b0d14d73ad682f22fb7c11ec4247d02d540ffaf4c90280d34a6c62ea6ee36b86"
+      },
+      {
+        "bytes": 7561,
+        "mode": "0o444",
+        "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/launch_first_five_v5_mode_closure_PURE_controls_SOURCE_PREPARED.py",
+        "sha256": "6eeb6e3b07439a5148f5227015bbabac52a512feb5e9b3562f04eaeb42fa10d1"
+      },
+      {
+        "bytes": 4932,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-obsolete-environment-v5-independent-SOURCE-review/OWNERFINAL-independent-first-five-v5-measured-mode-SOURCE-GO-PURE-storage-HOLD.json",
+        "sha256": "2ae29f8f7bc6e939027886b62660ecb1e1c1476592a2e09a9ed1708c554c039b"
+      },
+      {
+        "bytes": 16282,
+        "mode": "0o444",
+        "path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/test_first_five_v6_current00b1_managed_PURE18_SOURCE_PREPARED.py",
+        "sha256": "068ae3e16c5f1df52216c99c426301f2b5aed1f8333e55cf769dd3cd86cd89bc"
+      },
+      {
+        "bytes": 16282,
+        "mode": "0o444",
+        "path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/test_first_five_v6_current00b1_managed_PURE18_SOURCE_PREPARED.py",
+        "sha256": "068ae3e16c5f1df52216c99c426301f2b5aed1f8333e55cf769dd3cd86cd89bc"
+      },
+      {
+        "bytes": 25795,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v6_current00b1_managed_PURE18_inputs_NOTRUN.json",
+        "sha256": "c46932c68629f3e899d1ba4f7086be2185ed967795c2a66a2b6263e72da7669f"
+      },
+      {
+        "bytes": 16823,
+        "mode": "0o444",
+        "path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/test_first_five_v6_current00b1_managed_PURE18_SOURCE_PREPARED_v2.py",
+        "sha256": "edeaa6ab02bd6f384d34549166fdbcd84413f7539d22aaddfeacc96be4b71c98"
+      },
+      {
+        "bytes": 16823,
+        "mode": "0o444",
+        "path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/test_first_five_v6_current00b1_managed_PURE18_SOURCE_PREPARED_v2.py",
+        "sha256": "edeaa6ab02bd6f384d34549166fdbcd84413f7539d22aaddfeacc96be4b71c98"
+      },
+      {
+        "bytes": 26745,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v6_current00b1_managed_PURE18_inputs_NOTRUN_v2.json",
+        "sha256": "c5f5d069575cf51b1a18d0f455da069c46d94771445ab23d86262ed5151e493a"
+      },
+      {
+        "bytes": 17030,
+        "mode": "0o444",
+        "path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/test_first_five_v6_current00b1_managed_PURE18_SOURCE_PREPARED_v3.py",
+        "sha256": "825bdd3b2c4bbded5a4615116ab680daff0b1e89373bb4ecf338f2df44c5725d"
+      },
+      {
+        "bytes": 27692,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v6_current00b1_managed_PURE18_inputs_NOTRUN_v3.json",
+        "sha256": "7da9e11d97f0a40bcc111caae69bd14ecec56e5dfb8fb2218601689b07c216ad"
+      },
+      {
+        "bytes": 12477,
+        "mode": "0o444",
+        "path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v6_current00b1_managed_PURE18_ROOT_ONLY_SOURCE_PREPARED_v2.py",
+        "sha256": "a07caffda9baab8a6755667569c8ed332aa8372eac12ed40b0d401af828d9d0c"
+      },
+      {
+        "bytes": 17030,
+        "mode": "0o444",
+        "path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/test_first_five_v6_current00b1_managed_PURE18_SOURCE_PREPARED_v3.py",
+        "sha256": "825bdd3b2c4bbded5a4615116ab680daff0b1e89373bb4ecf338f2df44c5725d"
+      },
+      {
+        "bytes": 7292,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr307-current9760-token-light-once4-PREEXECUTION-NOTRUN/OWNERFINAL-current9760-owning-Isort-settings-SOURCE-and-fresh-once4-PREEXEC-NOTRUN.json",
+        "sha256": "7616d9820f33e3b920262ab501229e4695527820b2dd2fcdd53bdf9858b19e8e"
+      },
+      {
+        "bytes": 365333,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr307-current9760-token-light-once4-PREEXECUTION-NOTRUN/current9760-owning-settings-1442-prepared30-current-ownfive-and-original-once3-proof.json",
+        "sha256": "5b333fe196e9055341ee859775f81581f53daf2dcbadd8ec125bb27c407deb13"
+      },
+      {
+        "bytes": 6261,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v6-current00b1-independent-PURE18-PREEXEC-review/OWNERFINAL-independent-first-five-v6-managed-machine18-SOURCE-GO-current-state-PREEXEC-HOLD.json",
+        "sha256": "4e4782340b2a066096cd46186647f707c385f884c25da77b51df9ccbfb1ef593"
+      },
+      {
+        "bytes": 17030,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/test_first_five_v7_current9760_managed_PURE18_SOURCE_PREPARED.py",
+        "sha256": "f8eef7c17be77199baa38c549b678d6ddda3c0650318cb604a6fd3b2de79ac2e"
+      },
+      {
+        "bytes": 5470,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/action_server/build.py",
+        "sha256": "75c249c111bbf3d81f027a252e7dba54771037f02b402832c0554e119cb4eb12"
+      },
+      {
+        "bytes": 391219,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/action_server/poetry.lock",
+        "sha256": "5d6acb65ba220211d1da020c78c51a5ea89465f2bbedc99aaf72319b862914e5"
+      },
+      {
+        "bytes": 4020,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/action_server/pyproject.toml",
+        "sha256": "be4011d3915e8838249546c70ae30420dadfb0d08c19b59970d8980332c7573f"
+      },
+      {
+        "bytes": 26152,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/action_server/tasks.py",
+        "sha256": "3fa7419c346fe9494bdbe89a7f245cf72287832bef36ee73ea4bd0039ef477d6"
+      },
+      {
+        "bytes": 219,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/action_server/tests/action_server_tests/test_create_conda_from_package_yaml/create_wheel/pyproject.toml",
+        "sha256": "4d581bfc7b6d64979c3aef6411198548a17713e0c8439c07d0cbb1a91fae3851"
+      },
+      {
+        "bytes": 115756,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/actions-http-helper/poetry.lock",
+        "sha256": "8e717ea54b91b17e638bb633026372fd415487a5e817768b450c0e473cd84d13"
+      },
+      {
+        "bytes": 881,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/actions-http-helper/pyproject.toml",
+        "sha256": "1888af6e0e2ce2280080920338245122563f69ce677796a5dbddc4c6bb07d28d"
+      },
+      {
+        "bytes": 423,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/actions-http-helper/tasks.py",
+        "sha256": "31523822c03af429ad7d7fab8df66a45f87b4f58876f8928df9f7c79f375992a"
+      },
+      {
+        "bytes": 179235,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/actions/poetry.lock",
+        "sha256": "b90ab7b6e3dd3a68a3d23bfee456adf6d22446f845e1bd5e2a334ec573035f15"
+      },
+      {
+        "bytes": 1219,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/actions/pyproject.toml",
+        "sha256": "9de923a2bf29d73d486ebf67982e177c0ab41d8a35266f7dd1f2d75b1ec43ec3"
+      },
+      {
+        "bytes": 418,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/actions/tasks.py",
+        "sha256": "33a572fcadc6848ebab78f01fcae880a40bd51011cb80a69149467a897807cc9"
+      },
+      {
+        "bytes": 1865,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/actions/tests/actions_core_tests/test_core_log_integration/pyproject.toml",
+        "sha256": "f2119f900206f7a6bcbedd34b7cfb1c83bd996db13fdf81710fa509ed3cc72cf"
+      },
+      {
+        "bytes": 56386,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/build_common/poetry.lock",
+        "sha256": "5dfaebdb2e73b95e022e9064f4258fefb66a4a0a2a6c3d8829cd9d2838e07160"
+      },
+      {
+        "bytes": 88066,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/common/poetry.lock",
+        "sha256": "55fb76128d984be26ba5af1dc791a7b010298f70908d969b80fd7f268e84019e"
+      },
+      {
+        "bytes": 331,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/developer/setup.yaml",
+        "sha256": "8674d6b55439fae5ac284fa92d7db8016e3589fafbf2d34e066e29345efa016a"
+      },
+      {
+        "bytes": 355,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/developer/setup_windows_amd64.yaml",
+        "sha256": "86a36910ad271616626e019e02e6c7b21fdb32eaa1e1717c2a654673504a8001"
+      },
+      {
+        "bytes": 8893,
+        "mode": "0o755",
+        "path": "/workspace/engineering/pr307/developer/toolkit.py",
+        "sha256": "e1a3f96b57c31be2a0db5cdd3d63ce9ac243a9e8e29dff5ce6e07fd897fb605f"
+      },
+      {
+        "bytes": 945,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/developer/toolkit.yaml",
+        "sha256": "0ed7beaa93dd0ba763d1618382a3de8ce307cc5cf613759d06081d735fcd7e68"
+      },
+      {
+        "bytes": 1512,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/devutils/bin/develop.bat",
+        "sha256": "daff2011d235a81f7d1556bf30bf62016aecb2498084e67bfccad8531642c589"
+      },
+      {
+        "bytes": 2992,
+        "mode": "0o700",
+        "path": "/workspace/engineering/pr307/devutils/bin/develop.sh",
+        "sha256": "484c7164f54e383b038dcb25ff39979458b6f6a3f10f20c81f50001c3c2d16c2"
+      },
+      {
+        "bytes": 91377,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/devutils/poetry.lock",
+        "sha256": "22bf11dae2a1ed46de5024da774dde4fe778c206d720929fba9244819f3b0b6e"
+      },
+      {
+        "bytes": 1092,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/devutils/pyproject.toml",
+        "sha256": "0fcd651ad99a6214718e69c734fcf58445de8d5e4d85117c6413d7c890306bff"
+      },
+      {
+        "bytes": 25741,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/devutils/src/devutils/invoke_utils.py",
+        "sha256": "7892303d075b2755b490b507c444d9aebc2f0d3089c8812df40d7f0c0fc195b5"
+      },
+      {
+        "bytes": 14308,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/devutils/src/devutils/rcc.py",
+        "sha256": "c897a607292025e3ae05a79fb002302f4ac7d5eed6033b8101dd9d5e550cc97c"
+      },
+      {
+        "bytes": 133625,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/mcp/poetry.lock",
+        "sha256": "9b84391e939e90e56422e1b9373862fbc1827b667ebba87126a6330a74069543"
+      },
+      {
+        "bytes": 3547,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/tasks.py",
+        "sha256": "b9d8fc44392003c3eac7503c2c8cff237f8896c95d5eccb97f6e75cf55eb4b1c"
+      },
+      {
+        "bytes": 132,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/templates/advanced/pyproject.toml",
+        "sha256": "ef1312a9eaf6323b143d9339defb3158ea19b67b22a7cce0ecf766ba6ed5223d"
+      },
+      {
+        "bytes": 121960,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/work-items/poetry.lock",
+        "sha256": "dcb776a04f9fb30fb93c6667cc42fe9733208e07ec23e7d54dff39650ae11bf4"
+      },
+      {
+        "bytes": 2336,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/work-items/pyproject.toml",
+        "sha256": "a09a91d33e5f91cdec649a96d72b91e4fc1e4ecf97d3654e9b243f0ac8ecc10e"
+      },
+      {
+        "bytes": 450,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/work-items/tasks.py",
+        "sha256": "e74ad7f083159457c53da828ca69b2ea6ae1a2cde465e6d2b8019bda079f1642"
+      },
+      {
+        "bytes": 37537,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v7_current9760_managed_PURE18_inputs_NOTRUN.json",
+        "sha256": "ca8279f3bdcc04c85f9d5c100ab010fc11bd9822c13633c68cdfe6eb1c3e69af"
+      },
+      {
+        "bytes": 12477,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v7_current9760_managed_PURE18_ROOT_ONLY_SOURCE_PREPARED.py",
+        "sha256": "00e4d952c0b79c4ebe95879f9a19cfa6ac15805c0f4bd1906d871048cd3b3e94"
+      },
+      {
+        "bytes": 17030,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/test_first_five_v7_current9760_managed_PURE18_SOURCE_PREPARED.py",
+        "sha256": "f8eef7c17be77199baa38c549b678d6ddda3c0650318cb604a6fd3b2de79ac2e"
+      },
+      {
+        "bytes": 6756,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/OWNERFINAL-first-five-v7-clean9760-minimum-managed-PURE18-SOURCE-and-PREEXECUTION-NOTRUN.json",
+        "sha256": "f7c7893409d99d4ebb1c209f4cabd7c3b4e2180d870fb1015292f809e46ec0e9"
+      },
+      {
+        "bytes": 15828,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v7-current9760-independent-PURE18-PREEXEC-review/OWNERFINAL-independent-first-five-v7-clean9760-managed-machine18-SOURCE-PREEXEC-GO-ROOT-envelope-v2.json",
+        "sha256": "2dd770932fd2823a3cf4880e2fd0e12992de266e5bbdaddf23096b442aba5899"
+      },
+      {
+        "bytes": 17042,
+        "mode": "0o444",
+        "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/test_first_five_v8_current9760_measured_managed_Git_PURE18_SOURCE_PREPARED.py",
+        "sha256": "0ee011db2e7edec7564ef05fc3ed610bb6f15483f52bd9ececb593c44aa5f096"
+      },
+      {
+        "bytes": 3899192,
+        "mode": "0o775",
+        "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/git",
+        "sha256": "cd36778ef52d80fce1e3944b7f334460bec0921597dcf20d3d50d87d7560a588"
+      },
+      {
+        "bytes": 40148,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v8_current9760_measured_managed_Git_PURE18_inputs_NOTRUN.json",
+        "sha256": "5a5dbe3453a8ea23ddba10c054dddfda54e2a390972f052eb961ab012315fe36"
+      },
+      {
+        "bytes": 12654,
+        "mode": "0o444",
+        "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v8_current9760_measured_managed_Git_PURE18_ROOT_ONLY_SOURCE_PREPARED.py",
+        "sha256": "0ea7d1bf6953b3626f4b8d33b151ab488e030ac35bf999a9a8dd6d49a698ec72"
+      },
+      {
+        "bytes": 1307,
+        "mode": "0o400",
+        "path": "/workspace/engineering/root-PURE18-v7-exact-reviewed-argv-original-execution/OWNERFINAL-root-original-exact-reviewed-PURE18-v7-execution.json",
+        "sha256": "d0088d399f58c9173ba0b8f71cb00aa2d5f1da638d6c2c88debf9473eb09f4af"
+      },
+      {
+        "bytes": 6833,
+        "mode": "0o400",
+        "path": "/workspace/engineering/root-reviewed-first-five-v7-PURE18-external-parent-v2.py",
+        "sha256": "700bb81131a62c48787c517d61d0e833c843c935f88ad26ea952bf05c86e8551"
+      },
+      {
+        "bytes": 4829,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v7-concrete-ROOT-parent-independent-SOURCE-PREEXEC-review/OWNERFINAL-independent-first-five-v7-named-v2-concrete-ROOT-parent-SOURCE-PREEXEC-GO.json",
+        "sha256": "cf97efe69e087d5030deebbd680dbc320ec6d4a16c46ef62888ea403a01c665d"
+      },
+      {
+        "bytes": 2672,
+        "mode": "0o400",
+        "path": "/workspace/engineering/root-first-five-v7-current9760-reviewed-PURE18-outer/OWNERFINAL-root-original-first-five-v7-PURE18-outer.json",
+        "sha256": "82743cdaacde40e78283cb38381f36c3b0a35b7227431a41b918aa69cedfded8"
+      },
+      {
+        "bytes": 884,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-first-five-v7-current9760-reviewed-PURE18-outer/external-before-envelope.json",
+        "sha256": "2f93f186b2e2a7f453e03338cef78f6e3e42d62589b63e7f99e58939c6b5744d"
+      },
+      {
+        "bytes": 884,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-first-five-v7-current9760-reviewed-PURE18-outer/external-alwayspost-envelope.json",
+        "sha256": "2f93f186b2e2a7f453e03338cef78f6e3e42d62589b63e7f99e58939c6b5744d"
+      },
+      {
+        "bytes": 1485,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-first-five-v7-current9760-reviewed-PURE18-outer/root-one-pure18-release.json",
+        "sha256": "fd1dcc5eb35dd5617cba90f508afc8e63b6e6ccc50e465782afe5a66b043c81c"
+      },
+      {
+        "bytes": 4750,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v7-original-PURE18-ACTUALFAIL-independent-review/OWNERFINAL-independent-original-PURE18-v7v2-managed-Git-ACTUALFAIL.json",
+        "sha256": "ebdfa0ae82cda27d515192d26098c12c3a689f19212cee9f58920a3304ae570c"
+      },
+      {
+        "bytes": 10162,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v7-original-PURE18-ACTUALFAIL-independent-review/private-original-PURE18-v7-guard-failure-and-managed-Git-data-proof.json",
+        "sha256": "6087388793d9c2073126bbb4705bcae5d0db40ae7b983a167966fb43d7ebef74"
+      },
+      {
+        "bytes": 1941,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v7-original-PURE18-ACTUALFAIL-independent-review/minimum-named-v8-managed-selected-Git-binding-and-fresh-namespace-PROPOSAL-NOTAPPLIED.json",
+        "sha256": "bc58275cc8c3858ababb32d650367cb715fcda38e13813d672f4231bca128994"
+      },
+      {
+        "bytes": 41854,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v8_current9760_measured_managed_Git_PURE18_inputs_NOTRUN_v2.json",
+        "sha256": "6d7203286f9aa70a19eea0c4624741ad9ea2da0b7ceb04a5e81d7fb568ff41d5"
+      },
+      {
+        "bytes": 46277,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v8_current9760_measured_managed_Git_PURE18_inputs_NOTRUN_v3_originalFAIL_bound.json",
+        "sha256": "8cb014e904b4fd754a5858c2e0349a881dbe0bcb975f5b67e0aae215b747b388"
+      }
+    ],
+    "cached_prefix": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534",
+    "cached_python": {
+      "bytes": 31903952,
+      "mode": "0o775",
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12",
+      "sha256": "ba35c76091c86640cd6bbccc8c216e5b2fc52b20c26de803edef79165022037f"
+    },
+    "census_path": "/workspace/engineering/first-five-v8-current9760-managed-Git-PURE18-once-owned/original-18-complete-machine-census.json",
+    "controls": {
+      "bytes": 17042,
+      "mode": "0o444",
+      "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/test_first_five_v8_current9760_measured_managed_Git_PURE18_SOURCE_PREPARED.py",
+      "sha256": "0ee011db2e7edec7564ef05fc3ed610bb6f15483f52bd9ececb593c44aa5f096"
+    },
+    "current9760_prepared30_source_scope": "Owner source proof current30 is checked, not a new Bootstrap or current module-origin probe. Devutils pyproject owning Isort config differs from historical00b1; manifests/locks remain per exact source proof.",
+    "current_source_1440_and_native_1192": "Actual guard reads only known V9 source_body_modes/native_original_members; no native execution/new functional qualification.",
+    "current_v9_config_binding": {
+      "bytes": 765564,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+      "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25"
+    },
+    "expected_nodeids": [
+      "__main__.EnvironmentAdmissionControls.test_00_valid_exact_accepted_environment_baseline",
+      "__main__.EnvironmentAdmissionControls.test_subject_type_refuses_completed_pytest_reuse",
+      "__main__.EnvironmentAdmissionControls.test_unapproved_root_or_source_refused",
+      "__main__.EnvironmentAdmissionControls.test_no_automatic_inactive_owner_approval",
+      "__main__.EnvironmentAdmissionControls.test_unknown_scope_is_not_quiescence",
+      "__main__.EnvironmentAdmissionControls.test_exact_scope_and_restore_path_required",
+      "__main__.EnvironmentAdmissionControls.test_aggregate_caps_cannot_be_widened",
+      "__main__.EnvironmentAdmissionControls.test_layout_baseline_parent_mount_and_floor_poisons",
+      "__main__.EnvironmentAdmissionControls.test_observed_use_and_unknown_missing_fields_fail_closed",
+      "__main__.EnvironmentAdmissionControls.test_regular_binding_baseline_body_mode_and_symlink",
+      "__main__.EnvironmentAdmissionControls.test_private_root_release_baseline_mode_and_symlink",
+      "__main__.EnvironmentAdmissionControls.test_stream_cap_boundary_retains_partial_without_touching_original",
+      "__main__.EnvironmentAdmissionControls.test_snapshot_metadata_body_and_external_hardlink_boundaries",
+      "__main__.EnvironmentAdmissionControls.test_alias_baseline_and_individual_mapping_poisons",
+      "__main__.EnvironmentAdmissionControls.test_real_accepted_source_baseline_and_wrong_identity",
+      "__main__.EnvironmentAdmissionControls.test_current_config_dependency_overlap_baseline_and_selected_prefix",
+      "__main__.EnvironmentAdmissionControls.test_restore_dependency_existing_then_missing_path",
+      "__main__.EnvironmentAdmissionControls.test_real_pax_body_mode_nsmtime_symlink_archive_baseline_and_poison"
+    ],
+    "fixture_root": "/tmp/first-five-v8-current9760-managed-Git-mode-closure-PURE18-fixtures-once-owned",
+    "frozen_environment_config": {
+      "bytes": 17723,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/frozen_first_five_environment_preservation_inputs_SOURCE_PREPARED_v5_measured_modes.json",
+      "sha256": "333dd9b66eacc212c90b3a75c44e9902a9c0bdc56d73d88ba5a0e41e46e0696a"
+    },
+    "git_binding": {
+      "bytes": 3899192,
+      "mode": "0o775",
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/git",
+      "sha256": "cd36778ef52d80fce1e3944b7f334460bec0921597dcf20d3d50d87d7560a588"
+    },
+    "historical_active_source_bindings_preserved": [
+      {
+        "head": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+        "path": "/workspace/engineering/pr308",
+        "tracked_clean": true,
+        "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+      },
+      {
+        "head": "c97edfd10edb5b1c63f8a6371bfd2905996a2da2",
+        "path": "/workspace/engineering/pr307",
+        "tracked_clean": true,
+        "tree": "f8d3477451fa601643ef6c06f6b1e616e2407643"
+      },
+      {
+        "head": "f75dcae52fcd78c5c382d3903b012e5b049ca48b",
+        "path": "/workspace/engineering/pr305",
+        "tracked_clean": true,
+        "tree": "851834ae6cc87f42abfcf3c963542191e2815599"
+      },
+      {
+        "head": "2d86c5cf92d3acb274a8ceb5d57bfb8b12c779b6",
+        "path": "/workspace/engineering/captured-child-cleanup",
+        "tracked_clean": true,
+        "tree": "653a9e73e4d27641ec86de94b90f35d41e0f24f8"
+      }
+    ],
+    "historical_system_Git_admission_scope": {
+      "binding": {
+        "bytes": 4082768,
+        "mode": "0o755",
+        "path": "/usr/bin/git",
+        "sha256": "356db14e102d68a1a37d8a1ac577dfd678d45d46e92f468bef8b7154e7bfdc60"
+      },
+      "gid": 0,
+      "reason": "Unchanged accepted ROOT parent requires1000-owned physical packet rows. Root-owned old system tool is preserved via exact oldcfg/proofs and declared row, not mislabeled as a1000-owned current input.",
+      "status": "HISTORICAL_BINARY_AND_ACTUALFAIL_EVIDENCE_NOT_CURRENT_SELECTED_MANAGED_TOOL",
+      "uid": 0
+    },
+    "historical_v6_active_source_bindings_preserved": [
+      {
+        "head": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+        "path": "/workspace/engineering/pr308",
+        "tracked_clean": true,
+        "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+      },
+      {
+        "head": "00b1bb9974b73f2da65e49c9048774c84df286ba",
+        "path": "/workspace/engineering/pr307",
+        "tracked_clean": true,
+        "tree": "2663e86b2344f9e056c3259653cb905a6d195599"
+      },
+      {
+        "head": "f75dcae52fcd78c5c382d3903b012e5b049ca48b",
+        "path": "/workspace/engineering/pr305",
+        "tracked_clean": true,
+        "tree": "851834ae6cc87f42abfcf3c963542191e2815599"
+      },
+      {
+        "head": "2d86c5cf92d3acb274a8ceb5d57bfb8b12c779b6",
+        "path": "/workspace/engineering/captured-child-cleanup",
+        "tracked_clean": true,
+        "tree": "653a9e73e4d27641ec86de94b90f35d41e0f24f8"
+      }
+    ],
+    "historical_v7_system_Git_binding_preserved": {
+      "bytes": 4082768,
+      "mode": "0o755",
+      "path": "/usr/bin/git",
+      "sha256": "356db14e102d68a1a37d8a1ac577dfd678d45d46e92f468bef8b7154e7bfdc60"
+    },
+    "managed_activation_expected": {
+      "ACTIONS_CLOUD_ROOT": "/workspace/actions-cloud",
+      "ACTIONS_HOME": "/workspace/actions-cloud/actions-home",
+      "ACTIONS_RUNTIME_TEST_PYTHON": "/workspace/actions/action_server/.venv/bin/python",
+      "BUILDX_CONFIG": "/workspace/actions-cloud/cache/buildx",
+      "GOCACHE": "/workspace/actions-cloud/cache/go-build",
+      "GOMAXPROCS": "2",
+      "GOPATH": "/workspace/actions-cloud/cache/go",
+      "PLAYWRIGHT_BROWSERS_PATH": "/workspace/actions-cloud/cache/playwright",
+      "POETRY_CACHE_DIR": "/workspace/actions-cloud/cache/pypoetry",
+      "POETRY_CONFIG_DIR": "/workspace/actions-cloud/config/pypoetry",
+      "POETRY_NO_INTERACTION": "1",
+      "PYTEST_XDIST_AUTO_NUM_WORKERS": "2",
+      "ROBOCORP_HOME": "/workspace/actions-cloud/robocorp",
+      "ROBOTS_HOME": "/workspace/actions-cloud/robots-home",
+      "UV_CACHE_DIR": "/workspace/actions-cloud/cache/uv",
+      "XDG_CACHE_HOME": "/workspace/actions-cloud/cache",
+      "XDG_CONFIG_HOME": "/workspace/actions-cloud/config",
+      "npm_config_cache": "/workspace/actions-cloud/cache/npm"
+    },
+    "measured_Git_owner": {
+      "gid": 1000,
+      "uid": 1000
+    },
+    "native_guard_count": 1192,
+    "original_v7_actual_failure": {
+      "ROOT_master": {
+        "bytes": 1307,
+        "mode": "0o400",
+        "path": "/workspace/engineering/root-PURE18-v7-exact-reviewed-argv-original-execution/OWNERFINAL-root-original-exact-reviewed-PURE18-v7-execution.json",
+        "sha256": "d0088d399f58c9173ba0b8f71cb00aa2d5f1da638d6c2c88debf9473eb09f4af"
+      },
+      "independent_failure": {
+        "bytes": 4750,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v7-original-PURE18-ACTUALFAIL-independent-review/OWNERFINAL-independent-original-PURE18-v7v2-managed-Git-ACTUALFAIL.json",
+        "sha256": "ebdfa0ae82cda27d515192d26098c12c3a689f19212cee9f58920a3304ae570c"
+      },
+      "original_inner": {
+        "bytes": 2672,
+        "mode": "0o400",
+        "path": "/workspace/engineering/root-first-five-v7-current9760-reviewed-PURE18-outer/OWNERFINAL-root-original-first-five-v7-PURE18-outer.json",
+        "sha256": "82743cdaacde40e78283cb38381f36c3b0a35b7227431a41b918aa69cedfded8"
+      },
+      "original_scope": "0 methods; source/native functional guard not reached; no retry or binary equivalence claim",
+      "stage": "BEFORE_ANY_TESTS_GIT_SELECTION_MISMATCH"
+    },
+    "original_v8_four_field_schema_construction_retained": {
+      "config": {
+        "bytes": 40148,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v8_current9760_measured_managed_Git_PURE18_inputs_NOTRUN.json",
+        "sha256": "5a5dbe3453a8ea23ddba10c054dddfda54e2a390972f052eb961ab012315fe36"
+      },
+      "disposition": "UNANNOUNCED_SOURCE_CONSTRUCTION_NOT_EXECUTABLE_ADMITTED",
+      "parent": {
+        "bytes": 12654,
+        "mode": "0o444",
+        "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v8_current9760_measured_managed_Git_PURE18_ROOT_ONLY_SOURCE_PREPARED.py",
+        "sha256": "0ea7d1bf6953b3626f4b8d33b151ab488e030ac35bf999a9a8dd6d49a698ec72"
+      }
+    },
+    "owned_root": "/workspace/engineering/first-five-v8-current9760-managed-Git-PURE18-once-owned",
+    "preservation_driver": {
+      "bytes": 37609,
+      "mode": "0o444",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_first_five_accepted_obsolete_environments_SOURCE_PREPARED_v4.py",
+      "sha256": "63476ecaa50ba863afed8602dcad82c22c9349df022d0e9f0dde8d81d60e0bb7"
+    },
+    "required_PATH_first_two": [
+      "/workspace/actions-cloud/bin",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin"
+    ],
+    "schema": "FIRST_FIVE_V8_CURRENT9760_MEASURED_MANAGED_GIT_PURE18_INPUTS",
+    "source_guard_count": 1440,
+    "stdlib_origin_bindings": {
+      "json": {
+        "bytes": 14020,
+        "mode": "0o664",
+        "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/json/__init__.py",
+        "sha256": "d5d41e2c29049515d295d81a6d40b4890fbec8d8482cfb401630f8ef2f77e4d5"
+      },
+      "os": {
+        "bytes": 40821,
+        "mode": "0o664",
+        "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/os.py",
+        "sha256": "54c43a1fc69c979c70d8f7d097174cee163bfe59937723ee353043dd4a0211e1"
+      },
+      "pathlib": {
+        "bytes": 51052,
+        "mode": "0o664",
+        "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/pathlib.py",
+        "sha256": "10ba48ae8063cfe7589436041d0d4628c05f427c7709cf8e75e486f8930cc32c"
+      },
+      "subprocess": {
+        "bytes": 88747,
+        "mode": "0o664",
+        "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py",
+        "sha256": "85d29b2bf0249f5436838298c9a60ee93508b1102e9ac43b001f8a7e7ae8f375"
+      },
+      "unittest": {
+        "bytes": 3487,
+        "mode": "0o664",
+        "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/unittest/__init__.py",
+        "sha256": "32ed48385c0377bc2900a76e9a6acc3705aeef402c72de8554b3c637420506f0"
+      }
+    }
+  },
+  "pure_launcher_binding": {
+    "bytes": 7355,
+    "mode": "0o444",
+    "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/launch_controller_boundary_PURE_ROOT_ONLY_SOURCE_PREPARED_once2.py",
+    "sha256": "4eef6de54c7c91678987b9b9c6127f4a57645ea68f094e458009e5e110ca7266"
+  },
+  "qualified_independent_data": {
+    "actual_binding": {
+      "bytes": 8089,
+      "mode": "0o600",
+      "path": "/workspace/engineering/first-five-v8-current9760-managed-Git-PURE18-once-owned/original-18-complete-machine-census.json",
+      "sha256": "28ba47b66bb90ebf73f8e4834b42005e417dfe73f9471538397d02c962518ba0"
+    },
+    "config_binding": {
+      "bytes": 47036,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v8_current9760_measured_managed_Git_PURE18_inputs_NOTRUN_v4_originalFAIL_and_historical_system_scope.json",
+      "sha256": "0d4423f45acce573da98b262613971e497a91a9415d61f59142182678897365b"
+    },
+    "control_source_binding": {
+      "bytes": 17042,
+      "mode": "0o444",
+      "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/test_first_five_v8_current9760_measured_managed_Git_PURE18_SOURCE_PREPARED.py",
+      "sha256": "0ee011db2e7edec7564ef05fc3ed610bb6f15483f52bd9ececb593c44aa5f096"
+    },
+    "decision": "GO_FIRST_FIVE_V8_ACTUAL_PURE18_ONLY",
+    "documentation": {
+      "delta": "No canonical file mutation. Reuse original machine-census identity, selected managedtool versus historicaldeclaredtool, rawstatus preservation and typed adapter/source-subject lessons.",
+      "evidence": [
+        {
+          "bytes": 8089,
+          "mode": "0o600",
+          "path": "/workspace/engineering/first-five-v8-current9760-managed-Git-PURE18-once-owned/original-18-complete-machine-census.json",
+          "sha256": "28ba47b66bb90ebf73f8e4834b42005e417dfe73f9471538397d02c962518ba0"
+        },
+        {
+          "bytes": 5072,
+          "mode": "0o600",
+          "path": "/workspace/engineering/first-five-v8-current9760-managed-Git-PURE18-once-owned/original-parent-terminal.json",
+          "sha256": "45d63719dc431e82a542a0844c122136607443034cf32018a682e20a48a56506"
+        },
+        {
+          "bytes": 3755,
+          "mode": "0o400",
+          "path": "/workspace/engineering/root-first-five-v8-current9760-measured-Git-reviewed-PURE18-outer/OWNERFINAL-root-original-first-five-v8-PURE18-outer.json",
+          "sha256": "701370f89ec6d0f412b0614968d35ffb3948d35c39d6361c79d78cd97102215c"
+        },
+        {
+          "bytes": 1550,
+          "mode": "0o400",
+          "path": "/workspace/engineering/root-PURE18-v8-exact-reviewed-argv-original-execution/OWNERFINAL-root-original-exact-reviewed-PURE18-v8-execution.json",
+          "sha256": "a41b87d2ff8257fd1242d886da43a8987e893ca33d17efc66d24f9f2df75e7b7"
+        },
+        {
+          "bytes": 4750,
+          "mode": "0o400",
+          "path": "/workspace/engineering/first-five-v7-original-PURE18-ACTUALFAIL-independent-review/OWNERFINAL-independent-original-PURE18-v7v2-managed-Git-ACTUALFAIL.json",
+          "sha256": "ebdfa0ae82cda27d515192d26098c12c3a689f19212cee9f58920a3304ae570c"
+        }
+      ],
+      "stale_ambiguity_removed": "V8 actual18 passes do not rewrite V7 zero-testFAIL or fake a V7 prepared-source binding.",
+      "uncertainty": "Actual only these18 pure tests; realprocess visibility/inactiveenvironment ownership and realarchiving remain unqualified.",
+      "upstream_disposition": "none"
+    },
+    "historical_v7_zero_test_FAILURE_retained": {
+      "bytes": 4750,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v7-original-PURE18-ACTUALFAIL-independent-review/OWNERFINAL-independent-original-PURE18-v7v2-managed-Git-ACTUALFAIL.json",
+      "sha256": "ebdfa0ae82cda27d515192d26098c12c3a689f19212cee9f58920a3304ae570c"
+    },
+    "holds": [
+      "No realaccepted obsoleteenvironment archive/remove/restore",
+      "No actual nativeRCC control3/newer5/candidate7276 qualification",
+      "No memory/cgroupkernel/calibration/profile/provider/registry/issuegraphrelease qualification"
+    ],
+    "immutable_source_scope": {
+      "current119_physical_rows_rehashed_exact_old98_preserved": true,
+      "managed18_orderedPATH19_guard_source_and_originalPASS": true,
+      "native_original_fixture_read_only_no_binary_invoked": true,
+      "prepared30_logic_and_inputs_retained": true,
+      "selected_managedGit_cd367_mode775_uidgid1000_verified_not_systemGit_equivalence": true,
+      "source1440_native1192_guard_before_child_post_and_externalbeforepost_originalPASS": true,
+      "source4_head_tree_cleanchecks_originalguardPASS": true
+    },
+    "launcher_binding": {
+      "bytes": 12668,
+      "mode": "0o444",
+      "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v8_current9760_measured_managed_Git_PURE18_ROOT_ONLY_SOURCE_PREPARED_v2.py",
+      "sha256": "70b9123cd487a9b80fd7dfe62c06ba114ea0d5e46b7f2138c4fcccc55e50305c"
+    },
+    "original_PARENT_PREEXEC_review_binding": {
+      "bytes": 9382,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v8-concrete-ROOT-parent-independent-PREEXEC-review/OWNERFINAL-independent-exact-first-five-v8-concrete-ROOT-parent-PREEXEC-GO.json",
+      "sha256": "b425a501456ef50c789d36d5446346e5bb2920c374a427ba1d663e550317878d"
+    },
+    "original_actual_result": {
+      "actual_driver_compile_of_checked_buffer634_path_origin_verified": true,
+      "child_beforePASS_postPASS": true,
+      "elapsed_master_seconds": 2.076504640004714,
+      "error_count": 0,
+      "exact18_uniqueIDs_selected_outcome_stdio_match": true,
+      "failure_count": 0,
+      "five_stdlib_origins_before_after_same_measured_own_prefix": true,
+      "master0_external_before0_child0_external_alwayspost0": true,
+      "original_census_status": "PASS_PURE_CONTROLS_ONLY",
+      "os_spec_origin_frozen_retained": true,
+      "raw_status_not_rewritten": true,
+      "real_tiny_fixture_tar_and_admission_controls_executed_not_real_environment_archive": true,
+      "skip_count": 0,
+      "tests_run": 18
+    },
+    "original_census_binding": {
+      "bytes": 8089,
+      "mode": "0o600",
+      "path": "/workspace/engineering/first-five-v8-current9760-managed-Git-PURE18-once-owned/original-18-complete-machine-census.json",
+      "sha256": "28ba47b66bb90ebf73f8e4834b42005e417dfe73f9471538397d02c962518ba0"
+    },
+    "original_child_SOURCE_PREEXEC_review_binding": {
+      "bytes": 10868,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v8-current9760-independent-SOURCE-child-PREEXEC-review/OWNERFINAL-independent-first-five-v8-measured-managed-Git-SOURCE-child-PREEXEC-GO-ROOT-parent-HOLD.json",
+      "sha256": "d5beacad97a0041aa4e61dfb338220f027cad239d56daf8f39ac9e5ed4374ce9"
+    },
+    "original_child_owner_binding": {
+      "bytes": 5072,
+      "mode": "0o600",
+      "path": "/workspace/engineering/first-five-v8-current9760-managed-Git-PURE18-once-owned/original-parent-terminal.json",
+      "sha256": "45d63719dc431e82a542a0844c122136607443034cf32018a682e20a48a56506"
+    },
+    "original_child_terminal_binding": {
+      "bytes": 2794,
+      "mode": "0o600",
+      "path": "/workspace/engineering/first-five-v8-current9760-managed-Git-PURE18-once-owned/original-child-terminal.json",
+      "sha256": "e338cd267068b96b16bc8f5455a7a04ba6c5fa2b549277a8b3b3bffb6d2b5e30"
+    },
+    "original_master_binding": {
+      "bytes": 1550,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-PURE18-v8-exact-reviewed-argv-original-execution/OWNERFINAL-root-original-exact-reviewed-PURE18-v8-execution.json",
+      "sha256": "a41b87d2ff8257fd1242d886da43a8987e893ca33d17efc66d24f9f2df75e7b7"
+    },
+    "original_master_source_binding": {
+      "bytes": 4648,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-reviewed-PURE18-v8-original-master.py",
+      "sha256": "93a7bf95aa3ecbb2b0b06db51da6d48aff2705974ed5e343f0211445cdf89440"
+    },
+    "original_outer_owner_binding": {
+      "bytes": 3755,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-first-five-v8-current9760-measured-Git-reviewed-PURE18-outer/OWNERFINAL-root-original-first-five-v8-PURE18-outer.json",
+      "sha256": "701370f89ec6d0f412b0614968d35ffb3948d35c39d6361c79d78cd97102215c"
+    },
+    "original_parent_source_binding": {
+      "bytes": 6866,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-reviewed-first-five-v8-PURE18-external-parent.py",
+      "sha256": "764028fe6aad30ba9ece309f24a8465755fe5abe042bb0efb6054c7a877a639a"
+    },
+    "original_release_binding": {
+      "bytes": 1599,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-first-five-v8-current9760-measured-Git-reviewed-PURE18-outer/root-one-pure18-release.json",
+      "sha256": "d46722768330d54815e1485d5ce288bdb20f3beb957a1e35bd5f2ff5e85df6b1"
+    },
+    "post_enclosure_precision": {
+      "ROOTmaster_retains_bound_selfrow_in_original_before_post_envelopes": true,
+      "inner_ROOTparent_selfrow_and_review_release_all119_closure_logged_before_post": true,
+      "no_universal_quiescence_or_arbitrary_hardkill_completion_claim": true
+    },
+    "prepared_source_owner": {
+      "bytes": 9322,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/OWNERFINAL-first-five-v8-current9760-measured-managed-Git-SOURCE-PREEXECUTION-final-history-scope-NOTRUN.json",
+      "sha256": "485dc5ee1c67cb79b16fb9ea140626958b02ec77c91699ce62d307b7cefc4475"
+    },
+    "proof_binding": {
+      "bytes": 14459,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v8-original-PURE18-independent-ACTUAL-review/private-original-v8-complete18-census-stdio-guards-and-capture-bindings-proof.json",
+      "sha256": "d0fdc44392450e04d6079f318ec89d088250c2f5f742df242b8ec45e084eabee"
+    },
+    "reviewer_execution": "Offline original capture JSON/stdio parsing and hashes only. No imports/tests/guard/storage/native or source change.",
+    "schema": 1,
+    "scope": "EXACT18_ADMISSION_CONTROLS_ROOT_ORIGINAL_EXECUTION_ONLY_NOT_ENVIRONMENT_PRESERVATION_OR_NATIVE",
+    "status": "GO_ORIGINAL_CURRENT9760_MEASURED_MANAGED_GIT_PURE18_ACTUAL_ONLY",
+    "storage_controller_adoption_HOLD": {
+      "ROOT_adapter_must_be_derived_from_these_exact_originals_and_bind_rawstatus_and_complete18_outcomes": true,
+      "actual_root_owner_PASS_adapter_not_created_by_this_review": true,
+      "current_ffee_controller_requires_V7_actualdecision_and_714cfg_preparedsource_f7c789_which_do_not_match_V8": true,
+      "inactive_owner_approval_not_conferred": true,
+      "named_independent_adapter_binding_required_before_controller_accepts_qualified_owner": true,
+      "needs_named_minimal_controller_decision_literal_and_cfg_pure18sourceowner485dc_retarg_NO_V7_relabel": true,
+      "raw_census8089_28ba_retains_PASS_PURE_CONTROLS_ONLY": true,
+      "real_preservation_release_current_protectedmanifest_approval_controls_capacity_still_separate": true
+    }
+  },
+  "qualified_original_actual_refs": {
+    "independent": {
+      "bytes": 10515,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v8-original-PURE18-independent-ACTUAL-review/OWNERFINAL-independent-original-first-five-v8-managed-Git-ACTUAL-PURE18-GO.json",
+      "sha256": "dd9fa8279c9503488acf753f6c4520ba201cd92a8f30168346ff9b32c4c3529d"
+    },
+    "raw": {
+      "bytes": 8089,
+      "mode": "0o600",
+      "path": "/workspace/engineering/first-five-v8-current9760-managed-Git-PURE18-once-owned/original-18-complete-machine-census.json",
+      "sha256": "28ba47b66bb90ebf73f8e4834b42005e417dfe73f9471538397d02c962518ba0"
+    }
+  },
+  "real_env_archive_copy_remove_native": false,
+  "required_PATH_first_two": [
+    "/workspace/actions-cloud/bin",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin"
+  ],
+  "schema": "CONTROLLER_BOUNDARY_PURE_QUALIFICATION_SOURCE_ONLY_V1",
+  "source_admission_only": true
+}

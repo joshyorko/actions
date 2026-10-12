@@ -1,0 +1,19 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -2151,6 +2151,16 @@
+ the old routing/idle generation if preparation fails; old workers remain leased
+ until their call completes and the wrapper is reaped.
+ 
++Reload rollback controls must follow the implementation's identity boundaries.
++The server snapshots private helper values with shallow copies, so restoration
++may replace the outer MCP catalog while retaining its original field objects.
++Capture field keys, nested object identities and immutable value contents before
++the call; do not require outer catalog identity or keep a mutable oracle alias.
++A warmup seam runs under the process pool's nonreentrant lock. Observe its held
++lock and private generation token without calling the lock-taking public getter;
++retain the public generation assertion after the reload returns. A timed-out
++baseline with missing JUnit remains failed, even when its private oracle is fixed.
++
+ Runtime source generations are local executable-source cache objects. Their key
+ binds the package name and included source signature; it is not a portable source
+ artifact digest, Package Revision ID or Runtime Plan digest. Legacy snapshots

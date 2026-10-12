@@ -1,0 +1,36 @@
+{
+  "operation": "ONE_EXACT_FIVE_COMPLETED_ROOTS_STORAGE_ONLY",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "selected_roots": 5,
+  "no_retry": true,
+  "native": "NOT_RUN",
+  "outer_returncode": 0,
+  "elapsed_seconds": 53.872948718999396,
+  "available_bytes_after": {
+    "/workspace": 1322835968,
+    "/tmp": 450834432,
+    "/dev/shm": 3901190144
+  },
+  "driver_terminal": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v5/original-one-attempt-terminal.json",
+  "driver_terminal_sha256": "52e8580911866804cfc9add0703bffffb7951f40f5891e9a887cd3a68453ea77",
+  "driver_terminal_body": {
+    "archiver": {
+      "argv": [
+        "/usr/bin/timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "600s",
+        "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+        "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v5/archive_exact_five_completed_roots_once.py"
+      ],
+      "returncode": 0
+    },
+    "native_execution": "NOT_RUN",
+    "no_retry": true,
+    "one_attempt": true,
+    "protected_post": "PASS",
+    "source_scope": "8d49d0865ad5ad27b2d4e325ec135212080625e8_STORAGE_DATA_ONLY_NO_SOURCE_NATIVE_QUALIFICATION",
+    "status": "PASS_STORAGE_PRESERVATION_ONLY"
+  },
+  "capture": "2026-10-11T19:50:12.482246+00:00"
+}

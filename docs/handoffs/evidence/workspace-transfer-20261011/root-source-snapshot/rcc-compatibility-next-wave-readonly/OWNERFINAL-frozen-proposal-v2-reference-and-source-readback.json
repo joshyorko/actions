@@ -1,0 +1,18 @@
+{
+  "status": "FROZEN_READONLY_PROPOSAL_ALL_REFERENCES_AND_SOURCE_BLOBS_EXACT_NO_EXECUTION",
+  "proposal": {
+    "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/OWNERFINAL-RCC-current-a0d-existing-PR308-compatibility-source-and-qualification-proposal-v2.json",
+    "bytes": 38725,
+    "sha256": "89b5ae9f6f41f0649d575510922ec947161fcf63f737f40a4a118985fde4b0c5"
+  },
+  "metadata_and_owning_proof_reference_count": 39,
+  "source_Git_blob_count": 22,
+  "existing_PR308_clean_unchanged": true,
+  "candidate727_inner_binary_SHA": "UNKNOWN pending exactlyone owned original acquisition",
+  "all_real_qualification_controls": "NOT_RUN",
+  "source_mutations": 0,
+  "binary_acquisitions": 0,
+  "candidate_invocations": 0,
+  "gate_install_or_provider_executions": 0,
+  "upstream_disposition": "none"
+}

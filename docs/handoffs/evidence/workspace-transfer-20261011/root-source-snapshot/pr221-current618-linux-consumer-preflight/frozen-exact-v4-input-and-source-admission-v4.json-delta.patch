@@ -1,0 +1,32 @@
+--- /workspace/engineering/pr221-current618-linux-consumer-preflight/input-and-source-admission.json
++++ /workspace/engineering/pr221-current618-linux-consumer-preflight/input-and-source-admission-v4.json
+@@ -1,5 +1,5 @@
+ {
+-  "schema": "actions-current618-linux-cp312-input-manifest/v1",
++  "schema": "actions-current618-linux-cp312-input-manifest/v4",
+   "actual_integration": {
+     "sha": "6181b044c75de35386f1ae30e71725398b6a7feb",
+     "tree": "99ac5309add45af65049546dd3a99f357884cf3b",
+@@ -25,7 +25,8 @@
+     "event": "pull_request",
+     "run_id": 38126987514,
+     "job_id": 114433293243,
+-    "API_head_not_relabelled_checkout": true
++    "API_head_not_relabelled_checkout": true,
++    "artifact_id": 11697353355
+   },
+   "tracked_member_bindings": [
+     {
+@@ -3719,9 +3720,9 @@
+     "record_sha256": "6c45d0056858ea7c083d52f8596652bd7fb99c0db23e597a49a1923c4012bcfb"
+   },
+   "original_archive": {
+-    "id": 11693813383,
+-    "run": 38118859475,
+-    "job": 114409246244,
++    "id": 11697353355,
++    "run": 38126987514,
++    "job": 114433293243,
+     "path_private": "/workspace/engineering/pr221-current618-wheel-integrity-owned/original-11697353355.zip",
+     "bytes": 28299039,
+     "sha256": "fc4018e6e7ed4a0e47c4f5888d36d55655216ca22ebd965f29ce9f1130938f8c",

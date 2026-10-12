@@ -1,0 +1,131 @@
+{
+  "schema": 1,
+  "owner_announced_at_UTC": "2026-10-11T15:16:37.308904+00:00",
+  "decision": "GO_CURRENT_E4FF_SOURCE_LIGHT_ONLY",
+  "source": {
+    "accepted_target": "e3c29cde8878307912e55ed09b6436c0f91d06d5",
+    "application": "6d92344c28a17a727944559fd52f28305ee8eff2",
+    "commit": "e4ff080375a8422bb656e52d218f198521dda078",
+    "old_original_failed_source": "b614864ba9da55c13662894b6ef3c8515d9fdb25",
+    "ordered_parents": [
+      "6d92344c28a17a727944559fd52f28305ee8eff2",
+      "e3c29cde8878307912e55ed09b6436c0f91d06d5"
+    ],
+    "tree": "973ff38f49a17a896e4d90f829a72e2ea0ea15e8"
+  },
+  "owner_LIGHT": {
+    "path": "/workspace/engineering/pr308-cache-current-e3c-source/OWNERFINAL-current-e4ff-reviewed-cache-application-and-e3c-ordinary-source-LIGHT.json",
+    "bytes": 13921,
+    "sha256": "e18d871d9daf93e21e0b34610af31e9d4198bc4a1c93431d8799464954d37c6c",
+    "mode": "0o600"
+  },
+  "independent_proof": {
+    "path": "/workspace/engineering/pr308-currente4ff-independent-SOURCE-LIGHT-review/independent-current-e4ff-data-source-proof.json",
+    "bytes": 12355,
+    "sha256": "e3051aaa621ec4bbe3e4061506f91449e48d4b8466ce624c1c9080e878616086",
+    "mode": "0o600"
+  },
+  "independent_inspectors": [
+    {
+      "path": "/workspace/engineering/pr308-currente4ff-independent-SOURCE-LIGHT-review/verify_frozen_light_readonly.py",
+      "bytes": 12231,
+      "sha256": "07a3f68ca2efbb31741e8621ac84eba5429dfe019b00de539edd67027cd03ee5",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-currente4ff-independent-SOURCE-LIGHT-review/verify_frozen_light_readonly_v2.py",
+      "bytes": 12251,
+      "sha256": "55a547d586fa3a89928e9d7d08db93a5770b3f3bdd4763d937f7e43e607d398a",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-currente4ff-independent-SOURCE-LIGHT-review/verify_frozen_light_readonly_v3.py",
+      "bytes": 12246,
+      "sha256": "a7100349cf87d45b32683af6c554e6fd365f4b874ac38efa232b20a82bde639d",
+      "mode": "0o600"
+    }
+  ],
+  "preservation_and_scope": {
+    "complete_typed_git_and_FS_modes": 1423,
+    "complete_ordinary_parent_union": true,
+    "old_b614_two_path_application_matches_exact_accepted_aa2b_patch": true,
+    "unmodified_original13_fixture_functions_except_two_optin_cache_calls": true,
+    "no_generator_or_CONTROL_pin_change": true,
+    "current_generator_retains_original_c103_D5a_control_not_current_source_selfpin": true,
+    "native1192_data_rehashed_not_current_qualification": true,
+    "producer": {
+      "current": 275,
+      "original": 268,
+      "equal": 260,
+      "changed": 8,
+      "added": 7,
+      "five_selected_equal": 5,
+      "qualification": "UNQUALIFIED"
+    },
+    "current_full": "NOT_RUN_SEPARATE_ROOT_RELEASE_AND_IMMUTABLE_ARCHIVE_AWARE_PREEXECUTION_REQUIRED",
+    "new_actual_control3_released5_candidate7276": "NOT_RUN_FOR_CURRENT_SOURCE",
+    "original_b614_failed_actual": "FAIL_UNCHANGED; final outer code OUTER_PRIMARY_OR_CLEANUP_FAILED / ProcessTreeCleanupError, capacity primary recorded separately"
+  },
+  "current_LIGHT_evidence": {
+    "scoped": {
+      "pass": 244,
+      "skip": 1,
+      "unique": 245,
+      "cache_guards_pass": 34,
+      "deselect_recorded": 3
+    },
+    "Toolkit": 96,
+    "configured_lint": "PASS_RETAINED_ORIGINAL_LOG",
+    "configured_type_files": 351,
+    "generator_outputs": 8,
+    "tracked_YAML": 30,
+    "own_declared_Bootstrap_inputs_reused": 30,
+    "concrete_recorded_own_origins": 5,
+    "new_installer_executed": false
+  },
+  "historical_alias_resolution": {
+    "owner31_bindings": {
+      "physical_current_exact": 30,
+      "archive_backed_exact": 1
+    },
+    "map": {
+      "path": "/workspace/engineering/root-failed-control3-one-byte-preservation-v4/root-exact-historical-failed-member-archive-mapping.json",
+      "bytes": 1864,
+      "sha256": "cc73027ce86ea0965f3bdd88ed3398c322dcf012b337a4ca161966f19ffee6c7",
+      "mode": "0o600"
+    },
+    "selected_member_sha256": "8dc25bb1b99503af386d12d32c0637aa3503617c6f97d66a83f4643969934d4c",
+    "selected_member_bytes": 1696,
+    "original_physical_path_absent": true,
+    "mode": "0o600",
+    "UID": 1000,
+    "GID": 1000,
+    "resolution": "original bytes independently read from exact archive member; no restoration or owner-e18d edit",
+    "inspection_scope": "only selected historical1696-byte member independently inspected; archive compressed hash verified, not all49132 members/gzipEOF independently admitted",
+    "full_preexecution_requirement": "future guard must bind this historical alias through named archive mapping; stale physical-only guard remains HOLD"
+  },
+  "prior_failures_preserved": {
+    "owner_setup": "external script sys.path import setup failure before package gate; named v2 original success retained",
+    "reviewer_inspection_only": [
+      "assumed final outer code equals primary capacity category; corrected from exact original1696 bytes",
+      "wrong generator path .github/_gen_workflows.py; successor uses tracked .github/workflows/_gen_workflows.py",
+      "expected diff --git headers for ordinary unified patch; successor parses exact --- a/ headers"
+    ],
+    "classification": "not source/test/gate failures; old inspector bytes retained, final v3 data inspection PASS"
+  },
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md: exact accepted11-line a68e cache lesson already applied by owner; independent verified reuse, no cosmetic child",
+    "canonical_patch": {
+      "path": "/workspace/engineering/pr308-owned-package-cache-independent-private-patch-review/exact-accepted-owned-package-cache-canonical-delta.patch",
+      "bytes": 1273,
+      "sha256": "a68e716ce5cef554024ba6e031237fdeeda528add0bc6a72151245284e149886",
+      "mode": "0o444"
+    },
+    "Durable_learning": "Only once-owned same-source/binary pkgs downloads may be shared serially; admit config/marker/ownership/modes/containment/publication before mounting, keep runtime roots separate; cold first publication plus warm staged package cache qualifies neither cold registry nor peak/compatibility.",
+    "Evidence": "Exact two-path aa2b application, accepted ae37 source review,34 permanent cache guard PASS including real symlink forwarding, and original measured duplicate-cache bodies; 1423 union preserves both parent guide lessons.",
+    "Stale_guidance_removed": "Ambiguity between package-cache warmth and separate Holotree/artifact/provider/runtime roots; no broad or retroactive native claim.",
+    "Remaining_uncertainty": "Current full source not run, native symlink compatibility/resource peak/cleanup not qualified, original failed3 cleanup remains FAIL, new5/7276 not run; full134/private/provider/release holds remain."
+  },
+  "upstream_disposition": "none",
+  "prohibited_operations": "No product/helper/native imports, test/gateway/installer/binary/download/extraction/restore/source/index/ref/push/merge mutation. External stdlib reviewer data inspection and receipts only."
+}

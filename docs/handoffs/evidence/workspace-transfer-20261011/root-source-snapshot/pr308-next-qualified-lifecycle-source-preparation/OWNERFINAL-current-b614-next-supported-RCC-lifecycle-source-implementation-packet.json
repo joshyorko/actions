@@ -1,0 +1,249 @@
+{
+  "schema": "actions-current-b614-supported-RCC-lifecycle-source-child-preparation/v1",
+  "status": "OWNERFINAL_SOURCE_IMPLEMENTATION_PACKET_ONLY_NO_LEASE_OR_EXECUTION",
+  "head": "b614864ba9da55c13662894b6ef3c8515d9fdb25",
+  "tree": "6fa4f5c1e9837a0d893868255575b355b3977fae",
+  "branch": "fix/rcc-candidate-wheel-identities-20261010",
+  "clean": true,
+  "source_refs": [
+    {
+      "relative_path": "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "Git_mode": "100644",
+      "Git_blob": "69ae0f4f5548f4621599ed6fbf9a98cf01bd293b",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "bytes": 36059,
+      "sha256": "259f7d7265cddc3a6f664676fbd13b478d4534a7f6c8a6b1670a8d19393cf3fb",
+      "mode": "0o600",
+      "AST_sha256": "4f732f73642f497db16a4913f058d9723ee034df8bca07f14381e63b82b5234d"
+    },
+    {
+      "relative_path": "action_server/src/actions/server/_actions_process_pool.py",
+      "Git_mode": "100644",
+      "Git_blob": "af261b4d40870ecf5415980ae1b3e2923f0734b1",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_actions_process_pool.py",
+      "bytes": 58538,
+      "sha256": "3552bf39d0dc93f94ed3a4ab056de870ae460ed709f36d3d3a37dc043c349da8",
+      "mode": "0o600",
+      "AST_sha256": "f712b7dc3ed2a4a5d8ab144943987589baf0dbeb1fe47530f96bdfeaaade5703"
+    },
+    {
+      "relative_path": "action_server/src/actions/server/_actions_import.py",
+      "Git_mode": "100644",
+      "Git_blob": "50f72e8c95dcc4455a8225eb19c8d3309faada58",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_actions_import.py",
+      "bytes": 28217,
+      "sha256": "57ad235e30fdd84c763f84efd7ccdd8514d620d5b5cfff05ac1051f60ceefad3",
+      "mode": "0o600",
+      "AST_sha256": "fd20f7ac29f370ca52c96dec0c0811948a879209fe2840a67ff15fd42b8ec80c"
+    },
+    {
+      "relative_path": "action_server/src/actions/server/_selftest.py",
+      "Git_mode": "100644",
+      "Git_blob": "ee3268ae80b424f42f341770afad86bf72ee717f",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_selftest.py",
+      "bytes": 25371,
+      "sha256": "74fc0360481981311def7dad28ae716d4d001157059eae02df15a52b615ee5af",
+      "mode": "0o600",
+      "AST_sha256": "6cb45bd1262cafb29b8b5da1d354a50d98e78a05bd6d21f1be42a4f99a207161"
+    },
+    {
+      "relative_path": "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+      "Git_mode": "100644",
+      "Git_blob": "3ba72c15516a851eb503f841bf12805a3eabfdcb",
+      "path": "/workspace/engineering/pr308/action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+      "bytes": 28406,
+      "sha256": "f697aaf73c4e89bddd21b2c48aa92fe22e315f83614525996d51ff2271fe2436",
+      "mode": "0o600",
+      "AST_sha256": "47cb70aea7a015825639137903f5edc0507b7aa3ab55c6d317bc3d66bb5aaabe"
+    },
+    {
+      "relative_path": "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
+      "Git_mode": "100644",
+      "Git_blob": "48e7006c2f6e7b43492afa702994e8f8068fefa1",
+      "path": "/workspace/engineering/pr308/action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
+      "bytes": 80545,
+      "sha256": "3f70440fdb10416d269b7f917406e8a64cbdf59bf7a787f077cda71ca436e6f0",
+      "mode": "0o600",
+      "AST_sha256": "9769e4d0ec3671aec9d723e55a8327b0ba660f564b8abaa1cac79c0c776a9cb3"
+    },
+    {
+      "relative_path": "action_server/tests/action_server_tests/test_current_candidate_import_rollback.py",
+      "Git_mode": "100644",
+      "Git_blob": "13c760dd2adbd38bfeec039eba73376bbf32745c",
+      "path": "/workspace/engineering/pr308/action_server/tests/action_server_tests/test_current_candidate_import_rollback.py",
+      "bytes": 23456,
+      "sha256": "60d81fabaa2ba0446ff888109e050c883ee944553794636fd527a6fe27d4691b",
+      "mode": "0o600",
+      "AST_sha256": "7198749e1d3240054dcca85a69bf66b067f3360d1d78ec2d1175d9d7318e50b5"
+    },
+    {
+      "relative_path": "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py",
+      "Git_mode": "100644",
+      "Git_blob": "12ec0f644d96a45824ac110b7f1dafebb4c42ce6",
+      "path": "/workspace/engineering/pr308/action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py",
+      "bytes": 15097,
+      "sha256": "1fa3944b8984314f7a00aeaf59b0927c5dd2b8995ff52536cd20e8d002feb0a3",
+      "mode": "0o600",
+      "AST_sha256": "d8ed1b96839eb34d25319149d2a9be508851f6a2c144a0e674ef250cedd39225"
+    },
+    {
+      "relative_path": "action_server/tests/action_server_tests/test_cli_successful_generation_drain.py",
+      "Git_mode": "100644",
+      "Git_blob": "7a5a378bf1f8151118034d18b5dfb269f2b24e90",
+      "path": "/workspace/engineering/pr308/action_server/tests/action_server_tests/test_cli_successful_generation_drain.py",
+      "bytes": 18046,
+      "sha256": "8f7f20fa4d17049d1a0888ca658f4d80862eb64bd17710303f208898a1906cd4",
+      "mode": "0o600",
+      "AST_sha256": "f06676b94b2d974f92258d36863a9cd59971e3dce80d48d7ef39490098cf841d"
+    },
+    {
+      "relative_path": "action_server/tests/action_server_tests/test_actions_process_pool.py",
+      "Git_mode": "100644",
+      "Git_blob": "c7446a7183e9934baad67527e0334987e8222c18",
+      "path": "/workspace/engineering/pr308/action_server/tests/action_server_tests/test_actions_process_pool.py",
+      "bytes": 11043,
+      "sha256": "cb123f3a23ceac06e15d09a51e966b2bb794e94826ebf59c38b3895dbb995c50",
+      "mode": "0o600",
+      "AST_sha256": "2209b50f9649d5406e60d205abaf1fe0bdce3f2acd2b93e18d9b82699fe30321"
+    },
+    {
+      "relative_path": "action_server/tests/action_server_tests/test_server.py",
+      "Git_mode": "100644",
+      "Git_blob": "71c732a0a9d2bf055e72b7c6d1ee707968b93baa",
+      "path": "/workspace/engineering/pr308/action_server/tests/action_server_tests/test_server.py",
+      "bytes": 59707,
+      "sha256": "603acb40e78e89c207286002fa17788bddafc744080b62e0ec73c73b8e74710f",
+      "mode": "0o600",
+      "AST_sha256": "d08349d8bdf0c16c3cf79db1ed0a2a50d072d41ced4cbe67c426d35a12e7e823"
+    },
+    {
+      "relative_path": "docs/skills/repository-operations.md",
+      "Git_mode": "100644",
+      "Git_blob": "4a68ebc9f5d80dda04be63bac8d85b54bf2ed331",
+      "path": "/workspace/engineering/pr308/docs/skills/repository-operations.md",
+      "bytes": 256123,
+      "sha256": "7735777067553f6e4b58570dc179a4e8915614fc4743dd023e8b11a30557bc31",
+      "mode": "0o600",
+      "AST_sha256": null
+    },
+    {
+      "relative_path": ".github/workflows/_gen_workflows.py",
+      "Git_mode": "100644",
+      "Git_blob": "8b5a42fc1223daaafc639370d572719b4fc8978c",
+      "path": "/workspace/engineering/pr308/.github/workflows/_gen_workflows.py",
+      "bytes": 160627,
+      "sha256": "4ed1a208be8b72f0d9ea55ff5a7c5085379e9e0256e05a9b3f44419c551752bc",
+      "mode": "0o600",
+      "AST_sha256": "93e71bb2c7e77605b6ca8b59624f73b7d43fb28248b2ae381e32cf76d52423ea"
+    }
+  ],
+  "retained_refs": [
+    {
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/OWNERFINAL-RCC-current-a0d-existing-PR308-compatibility-source-and-qualification-proposal-v2.json",
+      "bytes": 38725,
+      "sha256": "89b5ae9f6f41f0649d575510922ec947161fcf63f737f40a4a118985fde4b0c5",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/runner_contracts_v3.py",
+      "bytes": 12959,
+      "sha256": "cbae3bb074d3995153ea5e6b694e7f9e61c047c6aa511b682959a63fedf7b726",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/fixture_records_v1.py",
+      "bytes": 10361,
+      "sha256": "7dc0921e31ccb0a16bbafc00393979be8cbd844020a58329d710702f9ceabd61",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/actual_transport_v2.py",
+      "bytes": 18890,
+      "sha256": "dc2f3cc6d72ea535d3fd6f859af4b48c451f6ba2cf54aeed30a3ff96e5cfa5e9",
+      "mode": "0o600"
+    }
+  ],
+  "implementation_plan": {
+    "path": "/workspace/engineering/pr308-next-qualified-lifecycle-source-preparation/bounded-supported-lifecycle-source-plan.md",
+    "bytes": 6996,
+    "sha256": "6c2bd4efcd909864b7762bac2e50f252b81584b8c6a94eda3dc3f5dcc85b5cb3",
+    "mode": "0o600"
+  },
+  "minimum_first_child_paths": [
+    "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "existing_exact_selectors": {
+    "legacy_vertical": "tests/action_server_tests/test_rcc_runtime_adapter.py::test_real_rcc_artifact_action_vertical",
+    "persistent_legacy_unmanaged": "tests/action_server_tests/test_server.py::test_global_return_reuse_process",
+    "source_reload_unit_control": "tests/action_server_tests/test_rcc_runtime_adapter.py::test_source_only_reload_reuses_verified_artifact_without_republishing",
+    "legacy_Rcc3_failed_reload": "tests/action_server_tests/test_current_candidate_import_rollback.py::test_current_candidate_failed_reload_keeps_last_good_action_usable",
+    "watched_reload": "tests/action_server_tests/test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers",
+    "generation_drain": "tests/action_server_tests/test_cli_successful_generation_drain.py::test_successful_generation_switch_drains_old_run_on_its_source_snapshot",
+    "supported_pool_run_helper": "tests/action_server_tests/test_actions_process_pool.py::test_actions_process_pool_run",
+    "current_baseline": [
+      "tests/action_server_tests/test_source_staging_rcc_consumer.py::test_published_artifact_details_preserves_one_rcc_identity_pair",
+      "tests/action_server_tests/test_source_staging_rcc_consumer.py::test_staged_package_executes_in_managed_rcc_runtime"
+    ]
+  },
+  "first_new_named_selector_PROPOSED_NOT_IMPLEMENTED": "tests/action_server_tests/test_source_staging_rcc_consumer.py::test_staged_package_persistent_worker_reuses_one_approved_lease",
+  "version_couplings": {
+    "legacy_vertical": [
+      "descriptor==v18.19.3",
+      "reusefalse/max1",
+      "returnedrcc-v18.19.3 label not versionmeasurement",
+      "intentionalnonreused worker rawfailed-1 preserved"
+    ],
+    "rollback": [
+      "exact native7e588 hash",
+      "version18.19.3",
+      "exec-trace wrapper selected not approved5/7276 native bytes"
+    ],
+    "CLI_managed_vs_parent": [
+      "watched_write_tool packageyaml only frozen env",
+      "drain managed=bool(native_executable)",
+      "plain source worker probe matches ownCore rather than managedRoot",
+      "same_source_import_and_native_parent_are_distinct"
+    ],
+    "persistent_legacy": "calculator no_conda, counter1/2 only; not RCC persistent proof",
+    "private_runner": "Exactlytwo baseline selectors/JUnit required; new lifecycle envelope must be named independently, existing frozen two-case contracts unchanged"
+  },
+  "proposed_control_points": {
+    "persistent": "real6results/PIDcreate-time/lease/artifact/compatibility constant, counter1..6, ownedorigins",
+    "source_reload": "real rejectedmalformed source DB/catalog/bytes lastgood then correctedsource/restart; operations evidence unknown if directbinary path cannot observe",
+    "generation_drain": "real markerbarriers oldsnapshot/lease untiloldRun drain, newsource distinct, no environmental reload claim",
+    "provider_recovery": "sameURL/root/digest/native/defaultHTTPtrustcontext; outagefreshacquireFAIL then samecontextrestart acquire+workerPASS; no offlinepositive"
+  },
+  "source_authorization_dependencies": [
+    "Root accepts originalb614 SOURCEFULL and baseline actual tuple receipts",
+    "Root grants separate existingbranch sourcechild writer lease",
+    "Independent SOURCE review before CONTROL authoring",
+    "Distinct serialized actual release after new source/evidence contracts freeze"
+  ],
+  "preserved_scope_HOLD": [
+    "Legacy3 actual evidence remains original, not5/7276",
+    "Frozen Runtime new-source/native qualification and environment-change drain not established",
+    "Old source/private01f/frozen-v6/full134/Runtime publication and platform gates"
+  ],
+  "documentation_improvement": {
+    "canonical_proposed": "docs/skills/repository-operations.md",
+    "delta": {
+      "path": "/workspace/engineering/pr308-next-qualified-lifecycle-source-preparation/canonical-managed-branch-and-direct-binary-qualification-proposed.patch",
+      "bytes": 1012,
+      "sha256": "cd9d930b3c021299008c04d14b8695ad7028c42d80cf16e7b52983cf10bdb9a0",
+      "mode": "0o600"
+    },
+    "learning": "Managed package branch and direct native identity are independent of selecting a compatibility label; oldsourceCLI branch/unapprovedtracewrapper cannot qualify new binaries.",
+    "evidence": "Exact current test fixture helper conditions, candidate binary strict hash admission, legacyrollback wrapper/hash/version, current staging evidence helper and stricttwo-case runner",
+    "stale_ambiguity": "Compatibility selection alone could be mistaken for making arbitrary CLI fixtures managed.",
+    "remaining_uncertainty": "No actual lifecycle invocation; baseline first tuple pending, operation instrumentation/newmanaged budget/providerrestart source contract needs independent review."
+  },
+  "read_only_actions": "Source/AST/Gitbody/hash reads and external immutable plan construction only; no source/index/ref modifications, tests, gateway, binary/provider/service/browser/native runs or downloads",
+  "Upstream_disposition": "none",
+  "constructor": {
+    "path": "/workspace/engineering/pr308-next-qualified-lifecycle-source-preparation/freeze-bounded-supported-fixture-packet-readonly.py",
+    "bytes": 16021,
+    "sha256": "63ee62eeb2d102a9bedb197bde969a356aa956dec274b81a4c8e03ca42ffa839",
+    "mode": "0o600"
+  }
+}

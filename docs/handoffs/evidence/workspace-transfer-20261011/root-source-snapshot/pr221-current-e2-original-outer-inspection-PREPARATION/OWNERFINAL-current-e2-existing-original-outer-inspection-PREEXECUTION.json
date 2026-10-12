@@ -1,0 +1,227 @@
+{
+  "artifact_id": 11708952448,
+  "command": {
+    "argv": [
+      "/usr/bin/timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "120s",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/pr221-current-e2-original-outer-inspection-PREPARATION/inspect_existing_original_outer_once.py",
+      "--root-execute-one-existing-original-outer-inspection",
+      "/workspace/engineering/root-current-e2-one-existing-original-outer-inspection-release.json"
+    ],
+    "cwd": "/workspace",
+    "env": "PYTHONDONTWRITEBYTECODE=1; PYTHONOPTIMIZE unset; no RCC/Poetry/package/native invocation",
+    "owned_absent": "Mandatory",
+    "owned_path": "/workspace/engineering/root-current-e2-one-existing-original-outer-inspection-owned",
+    "required_review_fields": "decision exact GO_CURRENT_E2_ORIGINAL_OUTER_INSPECTION_PREEXECUTION; proposal_binding exact this OWNERFINAL",
+    "root_release_required": [
+      "schema",
+      "one_attempt=True",
+      "no_transfer_retry=True",
+      "proposal_binding",
+      "wrapper_binding",
+      "artifact_id=11708952448",
+      "outer_seconds=120",
+      "TERM_kill_after_seconds=10",
+      "independent_preexec_binding"
+    ],
+    "root_release_schema": "ROOT_ONE_CURRENT_E2_EXISTING_ORIGINAL_OUTER_INSPECTION",
+    "root_stdio": "Retain separate private original stdout/stderr/timeout terminal; no automatic retry",
+    "rootrelease_mode": "0600 regular nonsymlink"
+  },
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "Durable_learning": "Fully retained identity-matched bytes can have separate outer inspection after transfer failure; original failure and phase boundaries remain intact.",
+    "Evidence": "Original487-byte exception,195-byte safe failure,80745614-byte retained digest e16a; accepted inspect_zip and publisher policy bodies.",
+    "Remaining_uncertainty": "Original transfer EOF absent; outer inspection NOT_RUN; all inner/source/OAuth/consumer/native/release gates separate.",
+    "Stale_or_ambiguous_guidance_removed": "No transfer-success inference from file size; no unnecessary repeated acquisition; no outer-to-inner/consumer qualification.",
+    "Upstream_disposition": "none; local executor boundary, no external target authorized",
+    "delta": {
+      "bytes": 1101,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-original-outer-inspection-PREPARATION/canonical-existing-original-after-transfer-failure-proposed.patch",
+      "sha256": "b7952485a0d5c28fb42d4e61fe072e4b4b9039c38832742d35cebc88586acd5c"
+    }
+  },
+  "frozen_bindings": [
+    {
+      "bytes": 3149,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-original-outer-inspection-PREPARATION/private-original-existing-file-and-failed-transfer-input-bindings.json",
+      "sha256": "2c4dbc7d82e99e1538631084e1dbb5ed398c56d531e5ec1e5c761e817ad9a98f"
+    },
+    {
+      "bytes": 5766,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-original-outer-inspection-PREPARATION/inspect_existing_original_outer_once.py",
+      "sha256": "dc608c8be11002e2900a34b601ee369b1bad47dcaece5f273b498a1f507065de"
+    },
+    {
+      "bytes": 1101,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-original-outer-inspection-PREPARATION/canonical-existing-original-after-transfer-failure-proposed.patch",
+      "sha256": "b7952485a0d5c28fb42d4e61fe072e4b4b9039c38832742d35cebc88586acd5c"
+    },
+    {
+      "bytes": 80745614,
+      "mode": "0o600",
+      "path": "/tmp/actions-pr221-e2-aggregate-11708952448-one-owned/actions-runtime-dist-11708952448-original.zip",
+      "sha256": "e16a414fefc1778ba49d09c466fd9d8054cfbf952e7766ee5cc6558f871f4def"
+    },
+    {
+      "bytes": 1964,
+      "mode": "0o600",
+      "path": "/tmp/actions-pr221-e2-aggregate-11708952448-one-owned/original-connector-tool-result.generated.json",
+      "sha256": "ff2efabfac9753a89f1f57ef52b062c53ca30d89cae9240a60f54b1c5f554035"
+    },
+    {
+      "bytes": 205,
+      "mode": "0o600",
+      "path": "/tmp/actions-pr221-e2-aggregate-11708952448-one-owned/original-one-attempt-intent.json",
+      "sha256": "73fee1c3604f087e46b2bb5deb23de12acb31d06834d1b166769d44a5f0edc56"
+    },
+    {
+      "bytes": 52,
+      "mode": "0o600",
+      "path": "/tmp/actions-pr221-e2-aggregate-11708952448-one-owned/original-one-transfer-intent.json",
+      "sha256": "8a90cd4c7c4b5c53fc50ca6a7a57d99150dd016d31b43dc44ba1b0ac1902e409"
+    },
+    {
+      "bytes": 487,
+      "mode": "0o600",
+      "path": "/tmp/actions-pr221-e2-aggregate-11708952448-one-owned/original-transfer-exception.private.txt",
+      "sha256": "5e52ccea6a077d49a2303c6f52a87724ee9afdf9bb92f0785cc27d521d794e91"
+    },
+    {
+      "bytes": 195,
+      "mode": "0o600",
+      "path": "/tmp/actions-pr221-e2-aggregate-11708952448-one-owned/safe-transfer-failure.json",
+      "sha256": "620c69ae3acdf6f23305df3edfd988180a2008db23b3bcb955b9bd75490444a0"
+    },
+    {
+      "bytes": 2764,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/OWNERFINAL-original-current-e2-Linux-producer-checkout-identity-only.json",
+      "sha256": "117cb4b7bc46699ec940e6402fe022f8bec18a98592fd13b28e576e4db415f48"
+    },
+    {
+      "bytes": 13257,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/acquire_current_e2_aggregate_once.py",
+      "sha256": "ce9841aec8c11d59666b911c90d1781ba58b49d061a2c49e5d070b292bf7c050"
+    },
+    {
+      "bytes": 2051,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/frozen-current-e2-publisher-outer-archive-policy.json",
+      "sha256": "4ef302991978880bbc8452d6f6ad410562011deaddf8e6fe64f6438637241097"
+    },
+    {
+      "bytes": 29600,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-current-e2-one-aggregate-adoption/ROOT-adoption-plan-not-execution-release.json",
+      "sha256": "35e7b6369166678f9eb54fa8eaf424549f201bcfd59ab11e115eda8616ac91d8"
+    },
+    {
+      "bytes": 66783,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-inner-distribution-inspection-PREPARATION/private-authentic-e2-tracked-source-and-generated-input-expectations.json",
+      "sha256": "461afb70fc37b42f17ee9bbb46ee9229ce8b2abff0bc1dce8668b555a7549bb2"
+    }
+  ],
+  "limits": {
+    "GNU_TERM_kill_after_seconds": 10,
+    "compressed_cap": 100663296,
+    "distribution_count": 7,
+    "expanded_cap": 134217728,
+    "internal_CRC_deadline_seconds": 110,
+    "manifest_cap": 16384,
+    "matrix": "Exactly6 matching cp312/cp313 manylinux/macARM64/Windows slots plus1sdist",
+    "original_fsync": "Explicit fsync on read-only original ZIP FD to stabilize already-retained bytes; does not change content or retroactively complete transfer.",
+    "outer_regular_member_count": 8,
+    "postguard": "All original input file bindings unchanged; source result always distinguishes original FAIL from new outer admission. Outer kill/unreturned outcome HOLD, no successful postguard inference.",
+    "single_member_cap": 67108864,
+    "whole_root_seconds": 120,
+    "writes": "Only exclusive small0700/0600 own release/inventory/result/private failure files; no original extraction/copy/deletion"
+  },
+  "original_transfer_failure": {
+    "exception": {
+      "bytes": 487,
+      "mode": "0o600",
+      "path": "/tmp/actions-pr221-e2-aggregate-11708952448-one-owned/original-transfer-exception.private.txt",
+      "sha256": "5e52ccea6a077d49a2303c6f52a87724ee9afdf9bb92f0785cc27d521d794e91"
+    },
+    "observed_boundary": "Root reported OSError errno9 BadFD at socket.settimeout before next read after entire expected compressed file existed. Whole retained ZIP independently hash-bound only; no EOF/CRC inference.",
+    "safe_failure": {
+      "bytes": 195,
+      "mode": "0o600",
+      "path": "/tmp/actions-pr221-e2-aggregate-11708952448-one-owned/safe-transfer-failure.json",
+      "sha256": "620c69ae3acdf6f23305df3edfd988180a2008db23b3bcb955b9bd75490444a0"
+    },
+    "state": "FAIL retained; original transfer did not perform inspect_zip or publish result"
+  },
+  "original_zip": {
+    "bytes": 80745614,
+    "mode": "0o600",
+    "path": "/tmp/actions-pr221-e2-aggregate-11708952448-one-owned/actions-runtime-dist-11708952448-original.zip",
+    "sha256": "e16a414fefc1778ba49d09c466fd9d8054cfbf952e7766ee5cc6558f871f4def"
+  },
+  "required_independent_decision": "GO_CURRENT_E2_ORIGINAL_OUTER_INSPECTION_PREEXECUTION",
+  "reuse": "Original hash-verified executor AST selections only require/filenames/inspect_zip; original accepted function bodies compile from verified buffer, never module top-level/network class/transfer/main.",
+  "reused_exact_functions": [
+    {
+      "AST_sha256": "d6b567ce6406ede00183998354bb724790cfacd580fe93271aecf61c41e4f442",
+      "name": "require",
+      "original_lines": [
+        19,
+        20
+      ]
+    },
+    {
+      "AST_sha256": "4e8e62120f81fc91b450d37eca9ee9a1d4c15a86423f67aaa0fec51d30e52b3a",
+      "name": "filenames",
+      "original_lines": [
+        106,
+        121
+      ]
+    },
+    {
+      "AST_sha256": "0f723898c683b8c069ca3b1795adfe9a3651404783a1b2a934ca83d286ea7171",
+      "name": "inspect_zip",
+      "original_lines": [
+        123,
+        155
+      ]
+    }
+  ],
+  "run_id": 38157482815,
+  "schema": "OWNERFINAL_EXISTING_ORIGINAL_CURRENT_E2_OUTER_INSPECTION_PREEXECUTION",
+  "source": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "source_expectations_not_inner_admission": {
+    "HTML": "Tracked933318B and embedded987412B source assets nonempty; build-generated asset identity/authority is separately unqualified",
+    "Linux_original_checkout": "Separate original-log owner proves synthetic165c38920fe37dd81350ca8ca0419bc70a4739f2 ordereda709/e2 treeafe; does not relabel checkout actuale2",
+    "added_vs618": [
+      "actions/server/run_outputs/transport.py",
+      "actions/server/templates/zips/canvas-query.zip"
+    ],
+    "all_source_claims": "Derived from authenticated e2 Git, never a measurement of new wheel members",
+    "generated_OAuth": "Module untracked;2 required keys categories/digests only, never values; source/content authority stays HOLD",
+    "inner_RECORD_SOURCE_OAuth": "NOT_INSPECTED_NOT_ADMITTED",
+    "not_assumed_old215_or216": true,
+    "other_builder_checkouts": "UNKNOWN_NOT_INFERRED_FROM_LINUX",
+    "tracked_Python": 202,
+    "tracked_actions_files": 217,
+    "tracked_nonPython": 15
+  },
+  "source_preparation_validation": "AST syntax/read-only trusted wrapper/function selection; no helper/product imports/inspection/tests/execution or new download",
+  "source_tree": "afe2679cc93bf27fa5021c7698ee7ad3ee21a1b9",
+  "status": "PREPARATION_ONLY_INSPECTION_NOT_RUN",
+  "wrapper_binding": {
+    "bytes": 5766,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-original-outer-inspection-PREPARATION/inspect_existing_original_outer_once.py",
+    "sha256": "dc608c8be11002e2900a34b601ee369b1bad47dcaece5f273b498a1f507065de"
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "actual_active_config": {
+    "bytes": 760693,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/FROZEN-current8d49-control3-qualified-V8-config-v2.json",
+    "sha256": "a209cc117db4d17a7383ba519abdff064211960aa0b8a88ddf32569fef322f9f"
+  },
+  "archive_source_native_acceptance": "NOT_RUN_UNCHANGED",
+  "available_bytes_snapshot": {
+    "/dev/shm": 3901190144,
+    "/tmp": 600117248,
+    "/workspace": 1030774784
+  },
+  "completion_cases": [
+    179,
+    27,
+    42,
+    51,
+    50
+  ],
+  "critical_rows": 3203,
+  "critical_sections": {
+    "active_v2_all_absolute_binding_rows": 304,
+    "native1192": 1192,
+    "original237": 237,
+    "prepared30": 30,
+    "source1440": 1440
+  },
+  "current_source_git_clean_and_SHA_tree_verified": true,
+  "five_roots_body_metadata_twice_snapshots_equal": true,
+  "lexical_and_resolved_overlap": 0,
+  "native_workspace_floor": 1288490189,
+  "nine_nested_inventory_rows": "EXACT_PHYSICAL_BEFORE_TYPED_FIXED_ARCHIVE_ALIASES_AFTER",
+  "nine_row_result": {
+    "mode": "EXACT_ORIGINAL_PHYSICAL_ROWS",
+    "rows": 9
+  },
+  "original_inventory_binding": {
+    "bytes": 5067,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/private-complete-one-control-output-file-inventory.json",
+    "sha256": "51acf96b7b544c2d51bd53246ca3202aa932f03aee80b37258a05f0361f2ea4c"
+  },
+  "original_inventory_rows": 18,
+  "prepared30_current_digests_verified": true,
+  "prospective_margin_not_guaranteed": 37229363,
+  "prospective_workspace_after_gain": 1325719552,
+  "raw_parent_terminal_JUnit_stdout_remaining_in_place": true,
+  "schema": "READONLY_CURRENT_FIVE_ROOT_SOURCE_COMPLETION_AND_CRITICAL_CLOSURE",
+  "selected_allocated_bytes": 294944768,
+  "selected_allocated_bytes_by_root": {
+    "Runtime50-robot-output": 113319936,
+    "ToolkitTest": 76021760,
+    "fixture42-GREEN-log": 35262464,
+    "fixture51-TEMPORAL-log": 35356672,
+    "original27-log": 34983936
+  },
+  "selected_complete_snapshot_result": {
+    "invented_recycle_markers": false,
+    "roots": 5,
+    "status": "PASS_EXACT_FIVE_COMPLETED_OWNED_ROOTS"
+  },
+  "selected_members": 9035,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "temporal_shared_outputs_verified": 2,
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+}

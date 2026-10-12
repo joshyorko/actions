@@ -1,0 +1,96 @@
+{
+  "activation": {
+    "all19_checked_before_gateway": true,
+    "bytes": 987,
+    "metadata_preflight": {
+      "bytes": 1856,
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/managed_metadata_only_preflight.py",
+      "sha256": "1cb4cbcc01ea3a1d4f0519150047e840717b586081774c0a938bf68a3840ae35"
+    },
+    "path": "/workspace/actions-cloud/activate.sh",
+    "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+  },
+  "after": [
+    "Original combined full log, exact rc, fixed terminal census",
+    "Source/owner guards in finally preserve primary failure and secondary guard failures separately",
+    "No native/browser/provider/gateway retry/installation"
+  ],
+  "argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "600s",
+    "/workspace/actions-cloud/bin/rcc",
+    "task",
+    "script",
+    "-r",
+    "developer/toolkit.yaml",
+    "--",
+    "python",
+    "/workspace/engineering/pr282-current-c35e-independent-LIGHT-review/planned_current_c35e_configured_full.py"
+  ],
+  "body": {
+    "bytes": 6992,
+    "path": "/workspace/engineering/pr282-current-c35e-independent-LIGHT-review/planned_current_c35e_configured_full.py",
+    "sha256": "8649320416c67945410cd58920a44f7ed238edccc0c1dc833c84d4a1d1aa9bfd"
+  },
+  "cwd": "/workspace/engineering/pr282",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md: exact automatic ordinary-merge import of 58 lines from accepted a0d; provenance-observability parent lessons retained unchanged",
+    "Durable_learning_captured": "52 source-backed route census / assembled authorization / file-backed SQLite / before-side-effect snapshots / Workspace principal separation / ASGI denial-shape lines, plus 6 configured Ruff-format-isort lines",
+    "Evidence": {
+      "actual_target_auth_source_tests": "76 PASS through own prepared Runtime environment",
+      "both_parent_block_union": {
+        "bytes": 222575,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr282-actual309-refresh/FROZEN-staged-automatic-a0d-union-proof.json",
+        "sha256": "326e6fc92c18e6d86048c28cc521056798265bb581e1272f2ddc96c62ff791da"
+      },
+      "configured_lint": "Ruff check/format/isort all PASS; 314 files formatted; Mypy 350 source files PASS",
+      "exact_import_patch": {
+        "bytes": 5113,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr282-actual309-refresh/exact-both-parent-canonical-import.patch",
+        "sha256": "3ef2f6d18f1cec64996e1bb5f682adf214f9cf83613d47d21f9dbff0722ad0a5"
+      }
+    },
+    "Remaining_uncertainty": "Current full configured source and fresh current CI NOT_RUN; current browser/native/provider/Workspace-principal/backend/private/full127/release acceptance remains HOLD. Ten historical oldworkspace raw bindings remain UNAVAILABLE, not reconstructed.",
+    "Stale_or_ambiguous_guidance_removed": "Current branch now retains source authority separating route registration, request authorization and packaged/native evidence; explicit configured isort gate retained. No cosmetic child or receipt identity relabeling. Dispatch copied274 count corrected to measured275 while all old inventories retained."
+  },
+  "environment_override": {
+    "PYTEST_XDIST_AUTO_NUM_WORKERS": "2"
+  },
+  "full_execution": "NOT_RUN",
+  "independent_LIGHT": {
+    "bytes": 15676,
+    "path": "/workspace/engineering/pr282-current-c35e-independent-LIGHT-review/OWNERFINAL-independent-c35e-SOURCE-LIGHT-review-v2.json",
+    "sha256": "55a621550c4756672406eb31b3bb26375a3d6c5fad7ff8fe8faea2b321b67c8b"
+  },
+  "preconditions": [
+    "Distinct root full release and serialized broad slot",
+    "Fresh separately recorded workspace capacity >=1200000000B",
+    "Absent once-owned log/terminal/post receipt paths and private0600 originals",
+    "Exact activation19 metadata checks before gateway; no outer RCC candidate override",
+    "Current clean head/tree/source guard and own30 inputs/five file-backed origins checked before configured invoke"
+  ],
+  "review_draft_disposition": {
+    "original_failed_log": {
+      "bytes": 407,
+      "path": "/workspace/engineering/pr282-current-c35e-independent-LIGHT-review/independent-review.private.log",
+      "sha256": "77c0c6ccba38813ee9366d2fec2762379bca1b321924449d9321ef664c2c633b"
+    },
+    "original_script": {
+      "bytes": 9052,
+      "path": "/workspace/engineering/pr282-current-c35e-independent-LIGHT-review/independent_readonly_review.py",
+      "sha256": "9e2be9195b361dff0acfc7817e4af10e31b44df7f62345ae9f4397548eb5968d"
+    },
+    "reason": "Initial reviewer asserted every target blob unchanged although legitimate original PR282 leaf changes win the ordinary merge. Named v2 verifies exact Git merge-tree and no novel nondoc blobs; no product finding."
+  },
+  "scope": "configured Runtime source only; original native and Canvas/browser/provider/private actual remain historical/HOLD",
+  "source": {
+    "head": "c35ee2e279eaefe55b16aecdb80da04c590aff7c",
+    "tree": "778f784785e13d521ed3902bd60557f70e41f3a8"
+  },
+  "status": "READY_FOR_ROOT_REVIEW_ONLY_NOT_EXECUTED",
+  "upstream_disposition": "none"
+}

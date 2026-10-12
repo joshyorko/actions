@@ -1,0 +1,105 @@
+{
+  "actual_private_progress_controls": {
+    "bytes": 1635,
+    "mode": "0o400",
+    "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/actual-progress-writer-dispatch-and-combined-cap-controls.json",
+    "sha256": "7b62109b08f287d3f0e741ffb22f14cea2fd2886df20490ab48842e6aa3c988d"
+  },
+  "allowed_noncore_changes": [
+    "one original-completed FULL ownership/completion adapter",
+    "unique paths and exact executable-derived full-index address",
+    "128MiB archive cap,16MiB combined indices,128MiB removal reserve,419430400B two-copy floor",
+    "original _IndexBudgetPath constructor used in receipt line",
+    "data-only preservation is independent of SHM native floor; no native operation"
+  ],
+  "capacity_fresh_each_root_actual_release_required": true,
+  "control_source": {
+    "bytes": 4181,
+    "mode": "0o600",
+    "path": "/tmp/control-current8d49-FULL-progress-writer-dispatch-once.py",
+    "sha256": "2362c4680771e8e24d5472fa843ff4f084dad506009fdea18ca8575acdd55f24"
+  },
+  "controls": {
+    "FAIL": 0,
+    "actual_unchanged_writer_calls_PASS": 4,
+    "oversize_combined_full_or_alias_index": "REFUSED_BEFORE_TARGET_CREATE_OR_DIRECTORY_FSYNC",
+    "predecessor_loop_static_dispatch": "RED_UNUSED_CAPPED_CLASS",
+    "successor_loop_static_dispatch": "GREEN_EXPLICIT_CAPPED_CLASS",
+    "tests_archiver_source_native_rcc": "NOT_RUN",
+    "valid_baseline": "EXACT_BYTES_MODE0600_DIRECTORY_FSYNC"
+  },
+  "core_definition_AST_equal_count": 15,
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "durable_learning_captured": "The actual constructor must route progress writes through the capped/fsynced implementation; combined-index boundary controls and executable-derived full-index address qualify dispatch",
+    "evidence": [
+      {
+        "bytes": 1635,
+        "mode": "0o400",
+        "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/actual-progress-writer-dispatch-and-combined-cap-controls.json",
+        "sha256": "7b62109b08f287d3f0e741ffb22f14cea2fd2886df20490ab48842e6aa3c988d"
+      },
+      {
+        "bytes": 2025,
+        "mode": "0o400",
+        "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/static-executable-address-core-and-progress-writer-closure.json",
+        "sha256": "43a58e85174553e11fab4861bbe63af74d890ee5d476e339642937ef08a32721"
+      }
+    ],
+    "exact_delta": {
+      "bytes": 471,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/proposed-canonical-progress-writer-actual-dispatch-lesson.patch",
+      "sha256": "ae846c78a9441c2cba4ee650fe5ae3a86fae4b387e85b0022d9dd4de4ecd272b"
+    },
+    "remaining_uncertainty": "Archive compression/cap outcome and inaccessible handle scope prospective; no universal quiescence; failed V9 storage later requires distinct preparation and release",
+    "stale_or_ambiguous_guidance_removed": "Unused class definitions are not proof of capped/durable write behavior; old V5 actual3MB indices remain measured historical evidence"
+  },
+  "executable_bindings": {
+    "archive_exact_one_completed_FULL_scratch_once.py": {
+      "bytes": 20624,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/archive_exact_one_completed_FULL_scratch_once.py",
+      "sha256": "cbef9302218b8a3ba94fd86d33ef718905365340790254db84d4cdf8d6894477"
+    },
+    "guard_readonly.py": {
+      "bytes": 7370,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/guard_readonly.py",
+      "sha256": "297a1360e7239f942a438500a8428a98cacacfbcf1aff7c5ca34204f68df1b8c"
+    },
+    "launch_once.py": {
+      "bytes": 9730,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/launch_once.py",
+      "sha256": "c00c5b9b038f542d25544fe3e06ba278e8f8fc53e1343299a684944337e058e2"
+    },
+    "private-exact-one-completed-FULL-scratch-inputs.json": {
+      "bytes": 9378479,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/private-exact-one-completed-FULL-scratch-inputs.json",
+      "sha256": "1ef448b2ee0b2b00462c516a096c858287f5d117d2f43171b9f679c75b9206ee"
+    }
+  },
+  "no_SHM_mutation": true,
+  "partial_gain_not_sole_FULL_floor": true,
+  "permanent_predecessor_and_original_results": "UNCHANGED_NOT_RELABELLED",
+  "proposal_binding": {
+    "bytes": 10618,
+    "mode": "0o400",
+    "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/OWNERFINAL-one-completed-current8d49-FULL-scratch-capped-storage-PREEXECUTION-v1.json",
+    "sha256": "4e339c963a7205f4b566b930f65663d365f894ca5c690895e18d4f55cfa0e124"
+  },
+  "remaining_actual_archive_alias_verification": "NOT_RUN_PROSPECTIVE_ROOT_ONCE_ONLY_AFTER_INDEPENDENT_GO",
+  "root_release_protocol_proposal_binding": {
+    "bytes": 10618,
+    "mode": "0o400",
+    "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/OWNERFINAL-one-completed-current8d49-FULL-scratch-capped-storage-PREEXECUTION-v1.json",
+    "sha256": "4e339c963a7205f4b566b930f65663d365f894ca5c690895e18d4f55cfa0e124"
+  },
+  "schema": "OWNERFINAL_COMPLETED_FULL_STORAGE_EXECUTABLE_PROPOSAL_AND_ACTUAL_PROGRESS_CLOSURE",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "status": "PREEXECUTION_READY_FOR_INDEPENDENT_REVIEW_NO_OPERATION",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none"
+}

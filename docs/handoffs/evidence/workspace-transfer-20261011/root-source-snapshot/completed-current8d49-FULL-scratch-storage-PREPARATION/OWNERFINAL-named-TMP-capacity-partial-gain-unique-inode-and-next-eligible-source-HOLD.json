@@ -1,0 +1,88 @@
+{
+  "additional_eligible_completed_expanded_directory_at_least32MiB": 0,
+  "archive_relocation": "Requires distinct exact archive/index alias+body/mode destination proposal with current mount floors; none authorized or performed",
+  "archive_removal_restore_native_tests_downloads": "NOT_RUN",
+  "classified_excluded_counts": {
+    "completed_original_FULL": 1,
+    "known_failed_LIGHT": 1,
+    "original_ZIP": 1,
+    "original_partial_V4FAIL": 1,
+    "retained_compressed_archive_batch": 16
+  },
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "durable_learning_captured": "Count allocated blocks by unique inode, account capacity on each actual mount, distinguish partial gain from satisfying the next actual floor",
+    "evidence": "Four internal hardlink groups account16KiB path overcount; completed source floorTMP1200000000; even zero archive/index cannot restore it; bounded existingTMP scan finds only excluded large roots",
+    "exact_delta": {
+      "bytes": 712,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREPARATION/proposed-canonical-unique-inode-mount-capacity-and-partial-floor-lesson.patch",
+      "sha256": "f7f0bd0ba04fae56b14bd820c7cd5c3323a9b1405d9a75ffe6a7791e8f4a6fd3"
+    },
+    "remaining_uncertainty": "Compression not attempted; smaller unowned roots not completion-qualified; future lossless relocation needs fresh mount capacity/independent+ROOT release",
+    "stale_or_ambiguous_guidance_removed": "Selected633MiB namespace does not alone restore FULLTMPfloor; TMP gain is not workspace gain; compressed archives or failed originals are not disposable candidates"
+  },
+  "existing_TMP_topdir_scan_returncode": 0,
+  "finite128MiB_archive16MiB_index_TMP_after_lower_bound": 963735552,
+  "finite_envelope_required_additional_TMP_gain": 236264448,
+  "fresh_existing_TMP_staging_floor": 419430400,
+  "hardlink_duplicate_block_overcount_corrected": 16384,
+  "large_directories_scanned": 20,
+  "maximum_TMP_after_selected_recovery_with_hypothetical_zero_archive_index": 1114730496,
+  "native_active_serialization": "No selected-root/archive/devshm/source mutations while ROOT_V9_native_runs",
+  "new_capacity_snapshot": {
+    "/dev/shm": 3236864000,
+    "/tmp": 450785280,
+    "/workspace": 1330999296
+  },
+  "original_preparation_owner": {
+    "bytes": 7941,
+    "mode": "0o400",
+    "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREPARATION/OWNERFINAL-completed-current8d49-FULL-scratch-inventory-overlap-finite-partial-gain-PREPARATION-HOLD.json",
+    "sha256": "c3b50ad1dd36c9ce9c89cab24172a2aa1acd1170de5288f494d5d1ad7f2c5e5f"
+  },
+  "path_block_sum": 663961600,
+  "private_references": [
+    {
+      "bytes": 4620,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREPARATION/safe-bounded-existing-TMP-next-completed-candidate-metadata.json",
+      "sha256": "8f070e86051f0ae2349e863c12097ea9d76e0275b91f74333d733b0637e7329f"
+    },
+    {
+      "bytes": 2583,
+      "mode": "0o600",
+      "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREPARATION/private-existing-TMP-topdir-allocated-metadata-only.txt",
+      "sha256": "bd3bbb6e6cf07189552d9bedd38a48d43e2ffe3463e123ef1ac5ac494b782660"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREPARATION/private-existing-TMP-topdir-scan.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 712,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREPARATION/proposed-canonical-unique-inode-mount-capacity-and-partial-floor-lesson.patch",
+      "sha256": "f7f0bd0ba04fae56b14bd820c7cd5c3323a9b1405d9a75ffe6a7791e8f4a6fd3"
+    },
+    {
+      "bytes": 931932,
+      "mode": "0o600",
+      "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREPARATION/private-complete-original-FULL-scratch-body-type-metadata-and-hardlink-snapshot.json.gz",
+      "sha256": "1f258b35405482ca1c5b6dcf6f4ca1e57b2749f327e4b8bedffba4b7b4b4cae8"
+    }
+  ],
+  "required_actual_FULL_TMP_floor": 1200000000,
+  "root": "/tmp/actions-pr308-current8d49-FULL-once-1",
+  "schema": "NAMED_READONLY_TMP_COMPLETED_SOURCE_AND_PARTIAL_FLOOR_SUPPLEMENT",
+  "small_or_unowned_directory_completion": "NOT_QUALIFIED_OR_SELECTED",
+  "source_head": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "status": "HOLD_PARTIAL_GAIN_ONLY_NO_ELIGIBLE_ADDITIONAL_LARGE_EXPANDED_ROOT_NO_RELOCATION_AUTHORITY",
+  "two_archive_copies16MiB_index128MiBreserve_fit": true,
+  "unique_device_inode_allocated_gain": 663945216,
+  "upstream_disposition": "none",
+  "zero_archive_TMP_floor_shortfall": 85269504
+}

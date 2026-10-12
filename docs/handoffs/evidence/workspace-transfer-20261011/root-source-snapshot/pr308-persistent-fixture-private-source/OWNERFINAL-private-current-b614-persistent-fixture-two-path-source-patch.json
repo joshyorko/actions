@@ -1,0 +1,487 @@
+{
+  "schema": "actions-current-b614-PRIVATE-future-persistent-staging-fixture-source/v1",
+  "status": "OWNERFINAL_PRIVATE_TWO_PATH_IMPLEMENTATION_PATCH_READY_FOR_INDEPENDENT_REVIEW_NOT_APPLIED",
+  "baseline_head": "b614864ba9da55c13662894b6ef3c8515d9fdb25",
+  "baseline_tree": "6fa4f5c1e9837a0d893868255575b355b3977fae",
+  "existing_branch": "fix/rcc-candidate-wheel-identities-20261010",
+  "baseline_clean": true,
+  "all1421tracked_b614_Git_FS_body_exec_untouched": true,
+  "source_proof": {
+    "path": "/workspace/engineering/pr308-persistent-fixture-private-source/immutable-complete-b614-untouched-and-private-default-contract-proof.json",
+    "bytes": 390081,
+    "sha256": "4c42f37858baace97eba50b4f89e81e9cf96413fc48c8294630fc2407738fa70",
+    "mode": "0o600"
+  },
+  "patch": {
+    "path": "/workspace/engineering/pr308-persistent-fixture-private-source/frozen-two-path-persistent-fixture-source.patch",
+    "bytes": 24184,
+    "sha256": "7964bd4e8cf817d0ed1651dafab823d3d9902d7a714015c26675d7bd444f2c48",
+    "mode": "0o600"
+  },
+  "two_application_paths": [
+    "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "candidate_file": {
+    "path": "/workspace/engineering/pr308-persistent-fixture-private-source/test_source_staging_rcc_consumer.py",
+    "bytes": 46276,
+    "sha256": "179bd1ae91fe9b83a9399fc0b2bb59135ace7974bdd0b63d1d02647f87e051a7",
+    "mode": "0o600"
+  },
+  "candidate_guide": {
+    "path": "/workspace/engineering/pr308-persistent-fixture-private-source/repository-operations.md",
+    "bytes": 256720,
+    "sha256": "2b478077f1f2e785bb440d29fb19df8e8d943d3501cdd93ae81c1f9cf7ab04cc",
+    "mode": "0o600"
+  },
+  "original_default_contract": {
+    "original_non_target_definitions_whole_AST_exact": 12,
+    "original_module_imports_AST_exact": true,
+    "default_shared_fixture_after_persistentFalse_specialization_whole_AST_exact": true,
+    "original_default_one_call_reuseFalse_actionbytes_assertions_evidence_exact": true,
+    "original_selector_name_signature_real_rcc_integration_test_Linuxskip_marks_exact": true,
+    "no_duplicate_270line_setup_or_production_monkeypatch": "One shared original fixture body; distinct new selector delegates persistentTrue. Unit spies patch only their synthetic psutil/delegation seam, never real positive handler/native runner."
+  },
+  "new_contract": {
+    "selector": "tests/action_server_tests/test_source_staging_rcc_consumer.py::test_staged_package_persistent_worker_reuses_one_approved_lease",
+    "eligibility": "real_rcc/integration_test/Linux only; ACTIONS_REAL_RCC_ARTIFACT_TEST=1 and explicit reviewed compatibility selection required before setup; direct native bytes measured by unchanged approved helper",
+    "six_calls": "Actual production pool obtain/run_action(reuseTrue) six times; unique call artifacts/Runids, payload counter1..6 and real workerPid, parent-measured PID/create-time/ancestry plus unchanged wrapper PID/create-time",
+    "identity": "Each real descriptor must retain approved dataclass compatibility, artifact, receipt path, source hash/path and managed interpreter/Core1.0.2",
+    "lease": "After original owned pool disposal, unchanged original raw worker-evidence helper rereads bytes/hash; same receipt path/artifact and nonempty actual leaseId required; retain private lease hash and actual typed/null cleanup facts",
+    "receipt": "New separate ACTIONS_RUNTIME_STAGED_PERSISTENT_RECEIPT; original one-call receipt env/schema unchanged",
+    "not_claimed": "No new5/7276 actual success, speedup, lease release/tree reaping, CLI reload/drain/provider recovery, frozen/native current qualification or release."
+  },
+  "service_free_TDD": {
+    "unchecked_validator_RED": {
+      "items": 19,
+      "PASS": 1,
+      "FAIL": 18,
+      "ERROR": 0,
+      "SKIP": 0,
+      "names": [
+        "test_valid_synthetic_series_only",
+        "test_poisoned_synthetic_series_is_refused[pid]",
+        "test_poisoned_synthetic_series_is_refused[created]",
+        "test_poisoned_synthetic_series_is_refused[wrapper]",
+        "test_poisoned_synthetic_series_is_refused[wrapper_created]",
+        "test_poisoned_synthetic_series_is_refused[artifact]",
+        "test_poisoned_synthetic_series_is_refused[compatibility]",
+        "test_poisoned_synthetic_series_is_refused[lease]",
+        "test_poisoned_synthetic_series_is_refused[counter]",
+        "test_poisoned_synthetic_series_is_refused[missing]",
+        "test_poisoned_synthetic_series_is_refused[bool]",
+        "test_poisoned_synthetic_series_is_refused[overflow]",
+        "test_poisoned_synthetic_series_is_refused[core]",
+        "test_poisoned_synthetic_series_is_refused[python]",
+        "test_poisoned_synthetic_series_is_refused[source]",
+        "test_poisoned_synthetic_series_is_refused[source_hash]",
+        "test_poisoned_synthetic_series_is_refused[nan]",
+        "test_poisoned_synthetic_series_is_refused[few]",
+        "test_poisoned_synthetic_series_is_refused[extra]"
+      ]
+    },
+    "first_validator_GREEN": {
+      "items": 19,
+      "PASS": 19,
+      "FAIL": 0,
+      "ERROR": 0,
+      "SKIP": 0,
+      "names": [
+        "test_valid_synthetic_series_only",
+        "test_poisoned_synthetic_series_is_refused[pid]",
+        "test_poisoned_synthetic_series_is_refused[created]",
+        "test_poisoned_synthetic_series_is_refused[wrapper]",
+        "test_poisoned_synthetic_series_is_refused[wrapper_created]",
+        "test_poisoned_synthetic_series_is_refused[artifact]",
+        "test_poisoned_synthetic_series_is_refused[compatibility]",
+        "test_poisoned_synthetic_series_is_refused[lease]",
+        "test_poisoned_synthetic_series_is_refused[counter]",
+        "test_poisoned_synthetic_series_is_refused[missing]",
+        "test_poisoned_synthetic_series_is_refused[bool]",
+        "test_poisoned_synthetic_series_is_refused[overflow]",
+        "test_poisoned_synthetic_series_is_refused[core]",
+        "test_poisoned_synthetic_series_is_refused[python]",
+        "test_poisoned_synthetic_series_is_refused[source]",
+        "test_poisoned_synthetic_series_is_refused[source_hash]",
+        "test_poisoned_synthetic_series_is_refused[nan]",
+        "test_poisoned_synthetic_series_is_refused[few]",
+        "test_poisoned_synthetic_series_is_refused[extra]"
+      ]
+    },
+    "real_delegation_RED": {
+      "items": 2,
+      "PASS": 0,
+      "FAIL": 2,
+      "ERROR": 0,
+      "SKIP": 0,
+      "names": [
+        "test_synthetic_delegate_uses_actual_reuse_flag",
+        "test_synthetic_delegate_uses_existing_descriptor_dataclass_API"
+      ]
+    },
+    "selector_and_pre_setup_RED": {
+      "items": 3,
+      "PASS": 0,
+      "FAIL": 3,
+      "ERROR": 0,
+      "SKIP": 0,
+      "names": [
+        "test_persistent_fixture_selector_contract[test_staged_package_executes_in_managed_rcc_runtime]",
+        "test_persistent_fixture_selector_contract[test_staged_package_persistent_worker_reuses_one_approved_lease]",
+        "test_persistent_compatibility_before_setup"
+      ]
+    },
+    "final_permanent_controls_GREEN": {
+      "items": 24,
+      "PASS": 24,
+      "FAIL": 0,
+      "ERROR": 0,
+      "SKIP": 0,
+      "names": [
+        "test_valid_synthetic_series_only",
+        "test_poisoned_synthetic_series_is_refused[pid]",
+        "test_poisoned_synthetic_series_is_refused[created]",
+        "test_poisoned_synthetic_series_is_refused[wrapper]",
+        "test_poisoned_synthetic_series_is_refused[wrapper_created]",
+        "test_poisoned_synthetic_series_is_refused[artifact]",
+        "test_poisoned_synthetic_series_is_refused[compatibility]",
+        "test_poisoned_synthetic_series_is_refused[lease]",
+        "test_poisoned_synthetic_series_is_refused[counter]",
+        "test_poisoned_synthetic_series_is_refused[missing]",
+        "test_poisoned_synthetic_series_is_refused[bool]",
+        "test_poisoned_synthetic_series_is_refused[overflow]",
+        "test_poisoned_synthetic_series_is_refused[core]",
+        "test_poisoned_synthetic_series_is_refused[python]",
+        "test_poisoned_synthetic_series_is_refused[source]",
+        "test_poisoned_synthetic_series_is_refused[source_hash]",
+        "test_poisoned_synthetic_series_is_refused[nan]",
+        "test_poisoned_synthetic_series_is_refused[few]",
+        "test_poisoned_synthetic_series_is_refused[extra]",
+        "test_synthetic_delegate_uses_actual_reuse_flag",
+        "test_synthetic_delegate_uses_existing_descriptor_dataclass_API",
+        "test_persistent_fixture_selector_contract[test_staged_package_executes_in_managed_rcc_runtime]",
+        "test_persistent_fixture_selector_contract[test_staged_package_persistent_worker_reuses_one_approved_lease]",
+        "test_persistent_compatibility_before_setup"
+      ]
+    },
+    "source_api_fixes_before_actual": "Warm run_action must use True, compatibility dataclass uses asdict; old public selector retains all3marks and explicit new selection refuses before setup. Original drafts/RED logs preserved.",
+    "static": "Configured private candidate Ruff check/format using project configs, Isort project settings, Mypy one-file all PASS",
+    "warnings": "Four unknown integration_test warnings only because private candidate outside repository conftest marker registration; exact final output retained. No warnings suppressed by invented filters.",
+    "commands": "Exact toolkit.poetry command lines retained in private logs; managed activation + owned holotreebin cached Python/Poetry; no RCC gateway/installer/full/native/provider execution",
+    "initial_static_FAIL_history": "Original E721 strict-type style errors, incorrect private outside-project Isort config discovery, four object-index Mypy errors preserved; named corrected configured successor passed. No actual gate relabeled."
+  },
+  "private_bindings": [
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/GREEN-junit.xml",
+      "bytes": 3362,
+      "sha256": "c13456a4206a693e9e00880d71cc2bc6f129ac33c80769ee8e9fd7f95065f2b6",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/GREEN.private.log",
+      "bytes": 545,
+      "sha256": "241f90527df50d087c1aaf9e30eb0b3a221e1c8ad1cb7183b60fd467c97955c7",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/RED-junit.xml",
+      "bytes": 41717,
+      "sha256": "c9bc717169605e14f2bacda2f294dfdb530baeb09ad3f6de89cbb9e404104e55",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/RED.private.log",
+      "bytes": 42914,
+      "sha256": "2e75283aed0304f53fc80e2cc3ede4ed493d14060685d9c4a34ba656362c060e",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/candidate-test_source_staging_rcc_consumer.py",
+      "bytes": 41994,
+      "sha256": "d61817f52a326df444a2d903f20abe506f31c21067c5a97bacd22c7704ad2df3",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/delegation-GREEN-junit.xml",
+      "bytes": 3700,
+      "sha256": "307dc010ade4e2597d5c7b4526c37824f6776d8d6d63c5cf5e5a12d6d7277f8d",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/delegation-GREEN.private.log",
+      "bytes": 567,
+      "sha256": "e9a88ba09b2ae914890a7d03ec4ab18931e1b9aa247aeaab38eaa48a031ba595",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/delegation-RED-junit.xml",
+      "bytes": 8209,
+      "sha256": "de6843fbf511fc6670bf7b9ef20a74cf2dd62f04687d4b842bc55720da2e8855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/delegation-RED.private.log",
+      "bytes": 10248,
+      "sha256": "c69fad5292d4b19523aa20041d82ef42eb6f1826239750108199225ad169b18f",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/final-private-controls-GREEN-junit.xml",
+      "bytes": 2631,
+      "sha256": "0039b388ef1598683b15c717cbfe43d2c9041b17e311f39456bb5ed0170de23d",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/final-private-controls-static-GREEN.private.log",
+      "bytes": 3740,
+      "sha256": "ed3b9100f1783eac946e9e12b99934ca8e5dd9f83411a0aec05bbb94bcb704e1",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/freeze-OWNERFINAL-private-two-path-source-patch-v2.py",
+      "bytes": 8791,
+      "sha256": "9439fbb542237feb001a542ebcfa3031b7a4df553c59a5fcad642e9ed63cdf6c",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/freeze-OWNERFINAL-private-two-path-source-patch.py",
+      "bytes": 8728,
+      "sha256": "2ef7c34bc670512728bd8cec5038f43b03ba03c72e3ba1458502f0e4a2760544",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/frozen-two-path-persistent-fixture-source.patch",
+      "bytes": 24184,
+      "sha256": "7964bd4e8cf817d0ed1651dafab823d3d9902d7a714015c26675d7bd444f2c48",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/immutable-before-private-fixture-implementation-RED.json",
+      "bytes": 685,
+      "sha256": "694c419314eabc2ed7861130b579ebe19801d1cb3f6f24de7aeb0cba6623c666",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/immutable-complete-b614-untouched-and-private-default-contract-proof.json",
+      "bytes": 390081,
+      "sha256": "4c42f37858baace97eba50b4f89e81e9cf96413fc48c8294630fc2407738fa70",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/immutable-original-ownerfreeze-quiet-token-assertion-failure.json",
+      "bytes": 925,
+      "sha256": "f32320621099ae81f87b00956b18a0aa0160b2cb52e0dd11fdb8f8b70732bd7a",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/immutable-original-two-path-before-private-TDD.json",
+      "bytes": 848,
+      "sha256": "3283f151115a14bfedf2e41d753c7f78b9b515303460729b60c94e3ec923be27",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/immutable-private-delegation-RED-before-corrections.json",
+      "bytes": 800,
+      "sha256": "8cefcd948d1fa9a0673516e4bcdb8be5ca0bdb3e75fc117e22f8ab3672e4d293",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/immutable-selector-contract-RED-before-correction.json",
+      "bytes": 618,
+      "sha256": "7aeb73900a78156363f42c5b60481213d167a48447563cd690270fd6e047f902",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/initial-private-candidate-before-real-delegation-controls.py",
+      "bytes": 39376,
+      "sha256": "411f8b230c81659a8cadf5298b4716f9de225c9ada5b45ef55789f1ded44b3a0",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/new-persistent-helper-functions.py",
+      "bytes": 5462,
+      "sha256": "ff152c17343b74473d1cfb63ba05b128e1892e81441d90407b8a007a0b456e18",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/original-repository-operations.md",
+      "bytes": 256123,
+      "sha256": "7735777067553f6e4b58570dc179a4e8915614fc4743dd023e8b11a30557bc31",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/original-test_source_staging_rcc_consumer.py",
+      "bytes": 28406,
+      "sha256": "f697aaf73c4e89bddd21b2c48aa92fe22e315f83614525996d51ff2271fe2436",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/permanent-controls-GREEN-v3-junit.xml",
+      "bytes": 3763,
+      "sha256": "0aab1dbc32115ed45c049374b49e307b5d7976b477678d62fc24ca70a67b371b",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/permanent-controls-GREEN-v4-junit.xml",
+      "bytes": 2251,
+      "sha256": "fd848f73882e1e24e4da3e6a3381479e2f24e9c4b3f9d1dc6c948b8dfbfe6d7d",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/persistent-call-validator-RED.py",
+      "bytes": 195,
+      "sha256": "e042fccf5a9c1bed205f3f91e307271a6c347dc2a8cd639d7e9ac3503f08d3a8",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/private-before-configured-format-test_source_staging_rcc_consumer.py",
+      "bytes": 41994,
+      "sha256": "d61817f52a326df444a2d903f20abe506f31c21067c5a97bacd22c7704ad2df3",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/private-before-measured-worker-typing-guards.py",
+      "bytes": 44378,
+      "sha256": "e570fb4409b7837cd9df6eb830fc683c647decb95aba504deacd055c6ba0c1e5",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/private-before-selector-contract-controls.py",
+      "bytes": 44603,
+      "sha256": "6152c28df8b41772b181b4f37acc656f9448afe60755681df2eda7e5b3abe0c6",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/private-before-typed-style-correction.py",
+      "bytes": 44357,
+      "sha256": "4a36d4a374c2ec7fde20ee4caf76863baaeb0ffa302949b33f18fef049a1eef8",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/private-configured-static-permanent-controls-v2.private.log",
+      "bytes": 1295,
+      "sha256": "d9c98aa8cb1787e3f493028f7fa61adac5071848f3277c4b52d0701cbf52371f",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/private-configured-static-permanent-controls-v3.private.log",
+      "bytes": 7261,
+      "sha256": "5674d07410a82e3ebc45f7296d615c561a18d2987626e911ae3d7f4c8de86bdc",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/private-configured-static-permanent-controls-v4.private.log",
+      "bytes": 2584,
+      "sha256": "6f9f20095a72a613071fefb24069284bd9aa473f1da593fca359b7ba064a5f48",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/private-configured-static-permanent-controls.private.log",
+      "bytes": 1881,
+      "sha256": "338d9e2a6867da74b069d06856a92b34941ab0a3dd0875eb459febe802ad9fc9",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/repository-operations.md",
+      "bytes": 256720,
+      "sha256": "2b478077f1f2e785bb440d29fb19df8e8d943d3501cdd93ae81c1f9cf7ab04cc",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/selector-contract-RED-junit.xml",
+      "bytes": 6133,
+      "sha256": "a6c2ba7d44991cab7242ed53a4c5cfffebbc7c39c013ed029a774fe14a187fdc",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/selector-contract-RED.private.log",
+      "bytes": 8078,
+      "sha256": "d2f19fb7212e1800ac0583a1c09ea19eb7920fdf9a27a45668cdade8cc01228d",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/test_persistent_call_controls.py",
+      "bytes": 5775,
+      "sha256": "437b0e7bfb67874b132f5b83b9c8fb3c14183dfbe8da7783418034f2df0a8c57",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/test_source_staging_rcc_consumer.py",
+      "bytes": 46276,
+      "sha256": "179bd1ae91fe9b83a9399fc0b2bb59135ace7974bdd0b63d1d02647f87e051a7",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/verify-default-contract-and-freeze-private-patch.py",
+      "bytes": 5968,
+      "sha256": "f410075358b178fc0687b7e8e1b5012c575d03d548e8209195b396f2c9579969",
+      "mode": "0o600"
+    }
+  ],
+  "toolchain_and_proposal_bindings": [
+    {
+      "path": "/workspace/actions-cloud/activate.sh",
+      "bytes": 987,
+      "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12",
+      "bytes": 31903952,
+      "sha256": "ba35c76091c86640cd6bbccc8c216e5b2fc52b20c26de803edef79165022037f",
+      "mode": "0o775"
+    },
+    {
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/poetry",
+      "bytes": 371,
+      "sha256": "f989714d24f334397e5960032f3fb3dd7ebcebf5d600e0d520aa7c780c8b124c",
+      "mode": "0o711"
+    },
+    {
+      "path": "/workspace/engineering/pr308/action_server/pyproject.toml",
+      "bytes": 4020,
+      "sha256": "be4011d3915e8838249546c70ae30420dadfb0d08c19b59970d8980332c7573f",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308/action_server/ruff.toml",
+      "bytes": 197,
+      "sha256": "57cd34e1cac6b9ea003068016acee37b03635f79b9c484f6ed41f395631099e7",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308/devutils/ruff.toml",
+      "bytes": 328,
+      "sha256": "b0514bf74bdc31e2688f056804b003289bb14baedb6868f64e13f2ff163c0d63",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-next-qualified-lifecycle-source-preparation/OWNERFINAL-current-b614-next-supported-RCC-lifecycle-source-implementation-packet.json",
+      "bytes": 13868,
+      "sha256": "37d02cf5cee3fbb92d351b3bd5284b4e1ec19302b57797c1cde94234955f6e6f",
+      "mode": "0o600"
+    }
+  ],
+  "application_dependencies": [
+    "Root freezes/accepts original currentb614 SOURCEFULL and baseline actual3/5/7276 proof",
+    "Independent review of this exact private two-path patch/default-specialization proof",
+    "Root applies only existing PR308 branch under bounded source lease; no replacement branch",
+    "Fresh applied SOURCE current controls/static/full and separate source CONTROL/runner schemas reviewed before actual new case"
+  ],
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "exact_delta": "Eight lines at raw staged-worker evidence anchor in frozen two-path patch",
+    "learning": "Persistent reuse is a separately named six-call fixture with counter and both worker/wrapper PIDcreate-time, artifact/compatibility/receipt invariants; default one-call nonreuse remains distinct. Require worker ancestry/managedorigins/source hash, classify synthetic validation-only evidence separately and preserve terminal raw lease/unknown cleanup.",
+    "evidence": "Genuine18-poison/2-delegation/3-selector RED controls, final24 permanent controls PASS, unchanged default whole-AST/marker proof",
+    "stale_or_ambiguous_removed": "One successful RCC action or stable wrapper alone could be misread as persistent Action worker reuse.",
+    "remaining_uncertainty": "Patch not applied, sourceFULL/baseline actual pending; no new persistent native execution. Root future evidence contract/cleanup acceptance remains separate."
+  },
+  "source_writer_lease": "PRIVATE fixture edits complete; verification-only until root dispatch. No app checkout source/index/ref writes.",
+  "Upstream_disposition": "none",
+  "constructor": {
+    "path": "/workspace/engineering/pr308-persistent-fixture-private-source/freeze-OWNERFINAL-private-two-path-source-patch-v2.py",
+    "bytes": 8791,
+    "sha256": "9439fbb542237feb001a542ebcfa3031b7a4df553c59a5fcad642e9ed63cdf6c",
+    "mode": "0o600"
+  }
+}

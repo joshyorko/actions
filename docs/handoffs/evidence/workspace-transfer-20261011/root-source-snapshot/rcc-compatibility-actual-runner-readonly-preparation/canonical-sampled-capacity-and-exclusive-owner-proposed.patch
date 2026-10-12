@@ -1,0 +1,14 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -3367,3 +3367,11 @@
+ retain their hashes and scoped verification receipts. State unrecorded metadata
+ and historical observation limits. Recovered capacity does not turn an ENOSPC
+ gate green; rerun its required checks with new logs.
++
++A capacity sampler reports maxima and minima only at its observed samples,
++not a kernel quota or a universal peak. Retain its sample count, threshold
++trip, inspection failures and measured final cancellation/alive states. A
++capacity failure stays primary even when owned cleanup succeeds. Signal only
++the exact recorded command child with a matching PID and creation time; leave
++reaping to its existing exclusive supervisor. Round minimum free-byte
++requirements upward and reject booleans where integer counters are required.

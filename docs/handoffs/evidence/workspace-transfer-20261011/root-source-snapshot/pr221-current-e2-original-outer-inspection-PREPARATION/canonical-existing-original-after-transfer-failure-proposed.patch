@@ -1,0 +1,18 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -3441,6 +3441,15 @@
+ member count from the new wheel bytes even when it equals an earlier count,
+ and retain generated-input authority and content holds separately.
+ 
++A transfer may raise after writing all expected bytes. Retain its original
++failure and inspect the existing file under a distinct reviewed data-only
++release after binding its whole size and digest; do not redownload or relabel
++the failed transfer as successful. Reuse the same containment, complete member
++CRC and manifest checks. A socket-timeout error before a final EOF read proves
++that transfer failed, while matching file bytes permit a separate archive
++inspection; neither establishes inner RECORD, generated content or consumer
++acceptance. Keep those phases and their original receipts separate.
++
+ Archive size and digest authenticate bytes, not artifact, run or job labels.
+ Before an installed-consumer probe, bind those labels to an independently
+ frozen artifact qualification as well as to the producer tuple. Comparing two

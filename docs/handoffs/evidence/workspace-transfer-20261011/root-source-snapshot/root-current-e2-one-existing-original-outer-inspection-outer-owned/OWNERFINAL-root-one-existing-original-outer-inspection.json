@@ -1,0 +1,20 @@
+{
+  "status": "ROOT_ORIGINAL_EXISTING_OUTER_PASS_ONLY",
+  "release": {
+    "path": "/workspace/engineering/root-current-e2-one-existing-original-outer-inspection-release.json",
+    "bytes": 1252,
+    "sha256": "d625df45b45bdb05c3905cc54796e912e5685acd55359abb46a8930bd1ec5216",
+    "mode": "0o600"
+  },
+  "returncode": 0,
+  "error_class": null,
+  "seconds": 0.36520463999477215,
+  "result": {
+    "path": "/workspace/engineering/root-current-e2-one-existing-original-outer-inspection-owned/OWNERFINAL-one-existing-original-outer-inspection-result.json",
+    "bytes": 631,
+    "sha256": "51d8db07c502594f6144384fea4c7d9193c3957b4698f226bbc3262db405e2ec",
+    "mode": "0o600"
+  },
+  "original_transfer": "FAIL_RETAINED",
+  "inner_consumer_native_publication": "NOT_RUN_HOLD"
+}

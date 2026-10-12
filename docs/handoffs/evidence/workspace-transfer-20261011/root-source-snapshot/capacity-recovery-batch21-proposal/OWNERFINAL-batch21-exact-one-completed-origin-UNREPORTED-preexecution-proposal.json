@@ -1,0 +1,119 @@
+{
+  "schema": "capacity-batch21-owner-preexecution-proposal-v1",
+  "decision": "GO_PREPARED_EXACT_SINGLE_COMPLETED_NAMESPACE_SCRIPT_ONLY_ROOT_ONE_RELEASE_REQUIRED",
+  "script": {
+    "path": "/tmp/actions-capacity-recovery-batch21.py",
+    "bytes": 5244,
+    "sha256": "a5ad749d314c24b34debc992cb16cecdef1873f6918cfc33a388752e6b07b705"
+  },
+  "algorithm_parent": {
+    "path": "/tmp/actions-capacity-recovery-batch19.py",
+    "bytes": 5244,
+    "sha256": "48fd7e4c79e55b80ceda0b63c1d1da87feeb368cefee265d5c12bad6ad940840"
+  },
+  "all16_nonconfiguration_AST_exact_parent": true,
+  "only_configuration_changes": [
+    "DEST",
+    "STAGE",
+    "NAMES"
+  ],
+  "names_exact_allowlist": [
+    "e8634afd9d863388"
+  ],
+  "destination": "/dev/shm/actions-completed-scratch-recovery-batch21",
+  "stage_unused_new": "/tmp/actions-completed-scratch-recovery-batch21-stage",
+  "destination_stage_absent_at_preparation": true,
+  "marker_True": true,
+  "marker_sha256": "3cbc87c7681f34db4617feaa2c8801931bc5e42d8d0f560e756dd4cd92885f18",
+  "fresh_observed_member_types": {
+    "file": 12139,
+    "directory": 3336,
+    "symlink": 463,
+    "fifo": 8
+  },
+  "logical_regular_file_bytes": 626924014,
+  "observed_accessible_handles": {
+    "processes": 276,
+    "links_read": 49,
+    "unobserved_permission_transient_links_or_FD_lists": 537,
+    "candidate_live_cwd_FD_observed": 0
+  },
+  "source_origin": "UNREPORTED: zero exact namespace path occurrences in original bound cleanup499 raw log. Newness/mtime/completion marker are not source-origin proof.",
+  "cleanup499_actual_terminal_prerequisite": {
+    "path": "/workspace/engineering/captured-child-cleanup-configured-full-once-owned/one-configured-full-terminal.json",
+    "bytes": 765,
+    "sha256": "361dea9b6ad22f375755d262b9f3641155cdda12a6277a2e82d70c130f96245d"
+  },
+  "original_cleanup499_log_read_for_namespace_link_only": {
+    "path": "/workspace/engineering/captured-child-cleanup-configured-full-once-owned/one-configured-full.private.log",
+    "bytes": 338767,
+    "sha256": "885ba0ab6437c18dd2c3d7f1c4e1caf9ad981e22c0e3517de0740db88aa9ca17"
+  },
+  "exact_full_log_namespace_occurrences": 0,
+  "prior_preservation": {
+    "archives_size_SHA_mode0600_exact": 40,
+    "private_indices_size_SHA_exact": 19,
+    "whole_relocated_default_cache_normalized_recorded_metadata_body_hardlink_partition_exact": 416,
+    "original_native_full_member_set_bytes_modes_links_exact": 1192,
+    "helper_snapshots_mode0444_exact": true,
+    "cleanup499_source1422_LIGHT67_original31_proposal35_refs_exact": true,
+    "V5runner09cdc_original_actual16_and_preexecution153_refs_exact": true,
+    "failed563d": "EXISTS only; never allowlisted/read as preserved historical content/deleted"
+  },
+  "prior_baseline_review": {
+    "path": "/workspace/engineering/capacity-recovery-batch20-proposal/OWNERFINAL-batch20-exact-two-completed-scratch-preexecution-proposal.json",
+    "bytes": 6751,
+    "sha256": "2f964fa4600c232b20af26bd97e2bef1a0e3d9bcdf21bd64e8372c1cee046e7c"
+  },
+  "aggregate_counts_scope": "40 archives19indices measured before either planned recovery; batch20 and21 are separate NOT_RUN proposals. New cumulative totals unqualified until actual indices/archives independently reviewed.",
+  "future_execution_checks": "Same full private inventory plus0600gzip resolution/member metadata validation; re-inventory and accessible-handle check again before privateindex write and exact expanded-namespace removal",
+  "no_archive_removal_gateway_test_download_native_source_execution_performed": true,
+  "execution_prerequisites": [
+    "Root distinct ONE recovery release",
+    "Full source terminal0 already bound as timing prerequisite only",
+    "Fresh completion/handle/content rechecks by exact script",
+    "No failed563d/cache/source/helper/native/other namespace touched"
+  ],
+  "capacity_observation_bytes": 438624256,
+  "new_gate_authority": "HOLD separate fresh threshold/serialization/rootrelease after recovery; no promise archive/capacity succeeds",
+  "limits": [
+    "Candidate full content inventory deferred to root execution; preparation only metadata/types/marker/handle observation",
+    "No universal quiescence/ACL/xattr/inode/rootmetadata/exact TAR ns-time claim",
+    "No causal source-origin attribution from mtime or newest-directory selection",
+    "Old failed563d existence only and excluded; no retrospective failed-original baseline"
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md existing exact7d070 capacity paragraph verified by frozen batch20 proof reused",
+    "Exact_delta_or_reuse": {
+      "path": "/workspace/engineering/capacity-recovery-independent-review/canonical-completed-scratch-preservation-proposed.patch",
+      "bytes": 1068,
+      "sha256": "7d07065b5bb7742698919997c8c6621cc20d00494741eb5365251ffb09f2d208"
+    },
+    "Durable_learning_captured": "Preserve complete recorded scratch bytes before only named completed namespace removal; archived-byte preservation and completion timestamps do not establish source origin, universal quiescence or next gate authority.",
+    "Evidence": [
+      {
+        "path": "/tmp/actions-capacity-recovery-batch21.py",
+        "bytes": 5244,
+        "sha256": "a5ad749d314c24b34debc992cb16cecdef1873f6918cfc33a388752e6b07b705"
+      },
+      {
+        "path": "/tmp/actions-capacity-recovery-batch19.py",
+        "bytes": 5244,
+        "sha256": "48fd7e4c79e55b80ceda0b63c1d1da87feeb368cefee265d5c12bad6ad940840"
+      },
+      {
+        "path": "/workspace/engineering/capacity-recovery-batch20-proposal/OWNERFINAL-batch20-exact-two-completed-scratch-preexecution-proposal.json",
+        "bytes": 6751,
+        "sha256": "2f964fa4600c232b20af26bd97e2bef1a0e3d9bcdf21bd64e8372c1cee046e7c"
+      },
+      {
+        "path": "/workspace/engineering/captured-child-cleanup-configured-full-once-owned/one-configured-full.private.log",
+        "bytes": 338767,
+        "sha256": "885ba0ab6437c18dd2c3d7f1c4e1caf9ad981e22c0e3517de0740db88aa9ca17"
+      }
+    ],
+    "Stale_or_ambiguous_guidance_removed": "No recently completed directory relabeled as current full producer; zero authenticated log match remains UNREPORTED. No invented new aggregate preservation baseline.",
+    "Remaining_uncertainty": "Archival/removal NOT_RUN; actual post-removal review by distinct reviewer required; historical/full-log source origin remains unreported; future capacity and handles need fresh checks."
+  },
+  "Upstream_disposition": "none"
+}

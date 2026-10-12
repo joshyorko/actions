@@ -1,0 +1,33 @@
+--- /workspace/engineering/pr221-current618-linux-consumer-preflight/installed-consumer-runner-v3.py
++++ /workspace/engineering/pr221-current618-linux-consumer-preflight/installed-consumer-runner-v4.py
+@@ -38,7 +38,7 @@
+     ]
+ )
+ ATTEMPT = Path(
+-    "/workspace/engineering/pr221-current618-linux-consumer-preflight/installed-linux-current618-90a785d8-1"
++    "/workspace/engineering/pr221-current618-linux-consumer-preflight/installed-linux-current618-90a785d8-2"
+ )
+ WHEEL = Path(
+     "/workspace/engineering/pr221-current618-wheel-integrity-owned/actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+@@ -113,15 +113,15 @@
+     ),
+     "input_manifest": (
+         Path(
+-            "/workspace/engineering/pr221-current618-linux-consumer-preflight/input-and-source-admission.json"
+-        ),
+-        "094853d8b745dcf1f6e9a6e392f84c7b544ef0899f0afbfd0502463b8f48bd3d",
++            "/workspace/engineering/pr221-current618-linux-consumer-preflight/input-and-source-admission-v4.json"
++        ),
++        "798f11c5416e57d6d0fa39c79c9524fc52e2e022496c1c3f12b3c902facc61d3",
+     ),
+     "input_gate": (
+         Path(
+-            "/workspace/engineering/pr221-current618-linux-consumer-preflight/current-input-admission-v3.py"
+-        ),
+-        "7474e6fae0e8d8d8211bfc9376697dcd14546b9c1a4ea5925c4042786720ea25",
++            "/workspace/engineering/pr221-current618-linux-consumer-preflight/current-input-admission-v4.py"
++        ),
++        "1edf96b6b801de5e7b8c1c7c284a636cec44bc06fcb45adb6e1781e519b3a8f6",
+     ),
+ }
+ 

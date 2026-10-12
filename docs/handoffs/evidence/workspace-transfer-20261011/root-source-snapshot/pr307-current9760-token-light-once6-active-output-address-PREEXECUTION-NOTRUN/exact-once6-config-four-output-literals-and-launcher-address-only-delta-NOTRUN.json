@@ -1,0 +1,56 @@
+{
+  "address_proof": {
+    "bytes": 2772,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current9760-token-light-once6-active-output-address-PREEXECUTION-NOTRUN/all-consumed-current-executable-output-and-historical-input-address-closure-NOTRUN.json",
+    "sha256": "15a5d291a20db56ba2f6465ee410edb7e518d212fffb4ce30d9021b404be7ee8"
+  },
+  "all_other_config_fields_except_proof_and_appended_historicalbindings": "EXACT",
+  "all_other_launcher_commands_predicates_AND_MYPYPATH": "EXACT inverse wholetext after only6declaredfreshmetadata literals",
+  "code_changes": {
+    "generator_probe_code": 3,
+    "origin_probe_code": 1
+  },
+  "documentation": {
+    "bytes": 707,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current9760-once5-ACTUALFAIL-independent-review/canonical-executable-probe-output-address-and-historical-guard-scope-proposed.txt",
+    "sha256": "af6262d886c776df70b8252bd51d0bc9d04d8129dbd9cd75c2ba2a0855bc9b7b"
+  },
+  "launcher_literal_changes": [
+    [
+      "immutable-one-TOKEN-LIGHT-once5-inputs.json",
+      "immutable-one-TOKEN-LIGHT-once6-inputs.json"
+    ],
+    [
+      "15a0b35a676fe4ee29781546fe0a7a8a362b19adaac11ffba0a4dfe9220d3f6c",
+      "584230eec4851befdf8a131d35496e61fe20185f599e788822d4ad717dca1227"
+    ],
+    [
+      "/workspace/engineering/pr307-current9760-token-light-once5-owned",
+      "/workspace/engineering/pr307-current9760-token-light-once6-owned"
+    ],
+    [
+      "RELEASE_ONE_CURRENT9760_TOKEN_LIGHT_ONCE5_ONLY",
+      "RELEASE_ONE_CURRENT9760_TOKEN_LIGHT_ONCE6_ONLY"
+    ],
+    [
+      "GO_CURRENT9760_TOKEN_LIGHT_ONCE5_GATEWAY_PREEXECUTION",
+      "GO_CURRENT9760_TOKEN_LIGHT_ONCE6_GATEWAY_PREEXECUTION"
+    ],
+    [
+      "PASSED_CURRENT9760_TOKEN_LIGHT_ONCE5_ONLY",
+      "PASSED_CURRENT9760_TOKEN_LIGHT_ONCE6_ONLY"
+    ]
+  ],
+  "new_child_bindings": 274,
+  "old_child225_ROOT233_history212": "Preserved originalonce5 actual scopes; futureonce6counts separatelyderived",
+  "old_origin_baseline_unknown": "Explicit; sixnewlyobservedrows not proof originalpriorbytes unchanged",
+  "once6": "NOT_RUN",
+  "schema": 1,
+  "source": "9760d5ec44876558c4941c4c3190abc8d92d14a1",
+  "source1442_current30_ownfive": "EXACT_UNCHANGED",
+  "source_commits_env_native": "NONE",
+  "tree": "0d33ebaac258e069ef7045a29b4a3904740f6307",
+  "upstream_disposition": "none"
+}

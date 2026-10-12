@@ -1,0 +1,201 @@
+{
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; exact read-only policy delta after accepted completed-scratch paragraph",
+    "Durable_learning_captured": "Failed directory byte preservation requires explicit distinct scope and never a completion marker; stable zombie handle semantics are per-task, requiring live sibling census and preserved unavailable other-UID/historical cleanup facts.",
+    "Evidence": [
+      "Root exact failed-root-only byte preservation and named third-policy instruction",
+      "Read-only original FAIL/strict-and-second-policy HOLD retained; two complete49,132-entry byte/mode/inode snapshots exact; zero external links",
+      "Immutable Linux6.18.44 source1efe5d exit.c and proc array state mapping; two complete task-aware snapshots with zero live sameUID read errors/path matches",
+      "Proposed script exact archive/body/mode/UID/GID/PAXmtime/hardlink/CRC checks and no mutation performed; independent code review still required"
+    ],
+    "Exact_delta": {
+      "bytes": 1264,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-control3-failed-owned-preservation-proposal/canonical-failed-owned-byte-preservation-and-task-state-proposed.patch",
+      "sha256": "f8bea590361ca6d9cc1a0dd391a968ee294cd8f15a2782f8247ccd7bb369eb62"
+    },
+    "Remaining_uncertainty": "Other-UID/universal visibility and original cleanup remain UNKNOWN/FAIL; archive/removal not run; actual compressed capacity and private/native/release qualification remain held.",
+    "Stale_or_ambiguous_guidance_removed": "Prevents applying completed-recycle semantics to a failed invocation; prevents treating a Z group leader as proof that all sibling handles are released or relabeling fresh byte-preservation observations as original cleanup."
+  },
+  "Upstream_disposition": "none",
+  "all_directories_owner_writable": true,
+  "all_members_owner_UID1000": true,
+  "archive_budget": {
+    "compressed_max_bytes": 1000000000,
+    "compression_ratio_or_success": "UNPROVEN_NOT_RUN",
+    "devshm_free_reserve_bytes": 268435456,
+    "estimate_not_actual_capacity": true,
+    "estimated_capacity_after_if_max_archive_and_two16MB_indices_only": 3916132186,
+    "fresh_staging_min_bytes": 2000000000,
+    "successor_fresh_devshm_floor_bytes": 3865470567
+  },
+  "author_scope": "Private bounded preparation and read-only source/status/body/inode/process/kernel-source verification. NO archive creation, namespace removal, restoration, gate/helper/native execution, retry, provision, signal, wait or reap. Git metadata child queries only.",
+  "captured_UTC": "2026-10-11T14:38:52.475582+00:00",
+  "complete_member_count_including_root": 49132,
+  "complete_private_inventory": {
+    "bytes": 16292691,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-control3-failed-owned-preservation-proposal/private-complete-failed-root-stable-body-mode-inode-inventory-v3.json",
+    "sha256": "199fc891c3410a3f1f20bcc075bd9cd1b7f9fc9f80183710fe40f72232020a52"
+  },
+  "exact_root_release_schema_only": {
+    "destination": "/dev/shm/actions-failed-control3-original-preservation-20261011-1",
+    "inputs_sha256": "cfb97eaadadd7368043033f7aa4749655609fc7b41ff5c577bbe86d82d361bff",
+    "mode": "ARCHIVE_VERIFY_REMOVE",
+    "original_status": "FAIL_HOLD_UNCHANGED",
+    "root": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-1",
+    "schema": 1,
+    "script_sha256": "589ed17fed7be500c028cf7eef027ece4e19ab6574a9008f009fa329677c5b7e",
+    "serialized_failed_root_and_devshm": true,
+    "status": "ROOT_RELEASE_ONE_FAILED_OWNED_BYTE_PRESERVATION"
+  },
+  "external_hardlink_count": 0,
+  "frozen_inputs": {
+    "bytes": 63424,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-control3-failed-owned-preservation-proposal/frozen-preservation-inputs-v3.json",
+    "sha256": "cfb97eaadadd7368043033f7aa4749655609fc7b41ff5c577bbe86d82d361bff"
+  },
+  "future_argv_with_unresolved_release_tokens": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "600s",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/rcc-control3-failed-owned-preservation-proposal/preserve_failed_control3_once_v3.py",
+    "--inputs-sha256",
+    "cfb97eaadadd7368043033f7aa4749655609fc7b41ff5c577bbe86d82d361bff",
+    "--release",
+    "DISTINCT_ROOT_RELEASE_PATH_REQUIRED",
+    "--release-sha256",
+    "ROOT_ANNOUNCED_RELEASE_SHA256_REQUIRED",
+    "--mode",
+    "ARCHIVE_VERIFY_REMOVE"
+  ],
+  "initial_unique_allocated_bytes_observed": 2853654528,
+  "input_binding_count": 277,
+  "internal_hardlink_alias_count": 0,
+  "kernel_authority_limit": "uname Linux6.18.44 plus exact versioned source establishes specified Linux per-task exit order; deployed kernel binary/source equivalence not independently authenticated. No zombie reaping or historical cleanup claim.",
+  "kernel_exact_commit": "1efe5d048a391de3ead2804b2e7f86376c356cc5",
+  "kernel_exact_tag": "v6.18.44",
+  "kernel_source_authority": {
+    "bytes": 981,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-control3-failed-owned-preservation-proposal/immutable-public-linux-kernel-source-authority.json",
+    "sha256": "0ead54c4a467f7e5ac732bf50fee4396d1b6af4ca14819bc2abd8423d23b85f9"
+  },
+  "kernel_source_refs": {
+    "fs/proc/array.c": {
+      "bytes": 23118,
+      "immutable_url": "https://raw.githubusercontent.com/gregkh/linux/1efe5d048a391de3ead2804b2e7f86376c356cc5/fs/proc/array.c",
+      "path": "/workspace/engineering/rcc-control3-failed-owned-preservation-proposal/immutable-linux-fs-proc-array.c",
+      "sha256": "d7f9b0b88d5ea4bf2016b5f354cb4dc20ab273a1e218e72b7421446546b32846"
+    },
+    "kernel/exit.c": {
+      "bytes": 50966,
+      "immutable_url": "https://raw.githubusercontent.com/gregkh/linux/1efe5d048a391de3ead2804b2e7f86376c356cc5/kernel/exit.c",
+      "path": "/workspace/engineering/rcc-control3-failed-owned-preservation-proposal/immutable-linux-kernel-exit.c",
+      "sha256": "dbcdffb3e49f6ab6ff2fce6c42529bc552876e6481b41500e20affa313a73622"
+    }
+  },
+  "live_thread_group_leader_caveat": "Whole thread-group /proc/PID/task set is enumerated and rechecked. Every task UID/state/start_ticks is bracketed; any live same-UID task requires readable cwd/FD. A stable Z leader alone does not authorize skipping live sibling handles.",
+  "maximum_regular_file_bytes": 454846557,
+  "member_counts_including_root": {
+    "directory": 16700,
+    "file": 28961,
+    "symlink": 3471
+  },
+  "original_actual_result": {
+    "bytes": 1696,
+    "mode": "0o600",
+    "path": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-1/OWNERFINAL-one-version-actual-result.json",
+    "sha256": "8dc25bb1b99503af386d12d32c0637aa3503617c6f97d66a83f4643969934d4c"
+  },
+  "original_failed_experiment_review": {
+    "bytes": 11616,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-compatibility-control3-one-actual-independent-review/OWNERFINAL-independent-original-control3-capacity-and-cleanup-failure-STOP-review.json",
+    "sha256": "d14c888b448f5ad59dcfc5ae26b75bda80901b297f8735902146fc6536227fc3"
+  },
+  "original_failure": "FAIL_HOLD_UNCHANGED; strict original cleanup final identities/disposition/readers UNREPORTED; versions5/7276 STOP_NOT_RUN",
+  "original_root900_returncode": 1,
+  "original_root_terminal": {
+    "bytes": 1483,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-rcc-compatibility-control3-one-actual/OWNERFINAL-root-one-control3-terminal.json",
+    "sha256": "72cb3d7fb9ff99386f2c9e2a8d43282ec77ac609d1eb813543d23a6596047697"
+  },
+  "preexecution_metadata_guard": {
+    "all_input_original_bindings": true,
+    "native1192_complete_body_modes_member_set_exact": true,
+    "prepared30": true,
+    "source1421_FS_body_modes_exact": true,
+    "source_head": "b614864ba9da55c13662894b6ef3c8515d9fdb25",
+    "source_tree": "6fa4f5c1e9837a0d893868255575b355b3977fae",
+    "status": "PASS_READONLY_NOT_ARCHIVE_OR_SOURCE_GATE"
+  },
+  "prior_strict_and_second_policy_HOLD_preserved": {
+    "bytes": 683,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-control3-failed-owned-preservation-proposal/private-first-and-second-policy-HOLD-history.json",
+    "sha256": "f74f3c0c83c4b6cb28504b7dd71e4517023ff61a8681c1ce9bbbb1c89f4a36aa"
+  },
+  "regular_logical_bytes": 2773356242,
+  "remaining_limits": [
+    "Original cleanup remains FAIL/UNKNOWN; stableZ proves per-task files/fs reference release, not wait/reap.",
+    "Other UID/root handle visibility and universal quiescence UNKNOWN; no /proc/maps or future-write fence claimed.",
+    "Only before/after observed snapshots and exact archive bytes are proposed; original/live/future workload cause or broader process ownership not reconstructed.",
+    "No archive or removal has executed; compressed size/time/free-capacity outcome UNKNOWN.",
+    "Old failed563d, shared caches, native1192 and every other namespace remain selected for no mutation.",
+    "Private raw inventory/census/kernel files/archives stay outsideGit; only safe hash/count/scope receipts and canonical patch may be copied."
+  ],
+  "restoration_recipe": "Retain private complete index and original path references. Verify archive SHA, gzip CRC, member/body/metadata/hardlink union; separately authorize an empty restoration destination and restore only the indexed members without executing them. Apply recorded mode UID/GID mtime_ns where actual account permissions allow. Do not overwrite other namespaces. Original inode numbers/ACL/xattrs not promised.",
+  "root_owns_RELEASE_not_created_by_proposal": true,
+  "schema": 1,
+  "scope_only_destination": "/dev/shm/actions-failed-control3-original-preservation-20261011-1",
+  "scope_only_root": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-1",
+  "script": {
+    "bytes": 18709,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-control3-failed-owned-preservation-proposal/preserve_failed_control3_once_v3.py",
+    "sha256": "589ed17fed7be500c028cf7eef027ece4e19ab6574a9008f009fa329677c5b7e"
+  },
+  "script_steps": [
+    "Exact hash-bound separate root release; current failure/source/native input guards; Linux/UID unchanged; unique destination absent; devshm fresh free>=2,000,000,000 B.",
+    "Complete global accessible handle scan plus every live same-UID task; only identity-bracketed stableZ files/fs handle inapplicability; other-UID unknown retained. No signals.",
+    "Complete fixed-root inventory equals frozen baseline: original inode/dev/nlink, body SHA/size, mode UID/GID mtime_ns, symbolic target; external hardlinks rejected.",
+    "Private0700 destination/exclusive0600 files; stream gzip/tar with fixed1,000,000,000 B compressed ceiling and268,435,456 B free reserve; retain partial on error, no original removal.",
+    "Exact root/member union, duplicate/path rejection, every resolved file SHA/size, modes UID/GID nanosecond PAXmtime, symlinks and internal hardlink identity; read gzip through EOF/CRC/ISIZE. No extraction.",
+    "Second complete inventory must equal first; second full task-aware handle snapshot; all immutable source/native/failure guards again; complete private original index and restore recipe saved before removal.",
+    "Only separately released ARCHIVE_VERIFY_REMOVE mode can remove exact failed namespace, after root inode/header recheck. COPY_ONLY retains it. No other failed cache, source, native, venv or namespace selected.",
+    "After exact removal retain explicit removed record and require fresh /dev/shm free>=3,865,470,567 B for successor capacity. Failure/partial removal retains verified archive/index and remains HOLD; no requalification or automatic runtime retry."
+  ],
+  "source_authority_lines": {
+    "kernel_exit": "do_exit972-973 releases files/fs before989 exit_notify; exit_notify755 sets EXIT_ZOMBIE",
+    "proc_array": "126-145 maps Z;490 uses get_task_state in /proc stat"
+  },
+  "status": "NAMED_THIRD_POLICY_BYTE_PRESERVATION_PROPOSAL_ONLY_INDEPENDENT_REVIEW_AND_ROOT_RELEASE_REQUIRED",
+  "third_policy_first_census": {
+    "identity_stable_same_UID_Z_tasks": 274,
+    "live_same_UID_read_errors": 0,
+    "live_same_UID_tasks": 38,
+    "other_UID_unknown_observations": 44,
+    "owned_accessible_path_matches": 0,
+    "task_count": 334
+  },
+  "third_policy_process_proof": {
+    "bytes": 165252,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-control3-failed-owned-preservation-proposal/private-complete-task-aware-census-before-after-v3.json",
+    "sha256": "f52fefb27c38c235bda3a4d6af62783152ee027663e9ef5f3403f902c0b73fc2"
+  },
+  "third_policy_second_census": {
+    "identity_stable_same_UID_Z_tasks": 275,
+    "live_same_UID_read_errors": 0,
+    "live_same_UID_tasks": 39,
+    "other_UID_unknown_observations": 44,
+    "owned_accessible_path_matches": 0,
+    "task_count": 336
+  },
+  "two_complete_body_mode_UID_GID_mtime_inode_nlink_inventories_identical": true
+}

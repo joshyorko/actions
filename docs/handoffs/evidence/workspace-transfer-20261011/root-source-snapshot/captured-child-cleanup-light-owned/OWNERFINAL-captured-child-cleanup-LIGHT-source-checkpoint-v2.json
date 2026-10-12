@@ -1,0 +1,487 @@
+{
+  "schema": "captured-child-cleanup-light-source-checkpoint-v2",
+  "decision": "SOURCE_LIGHT_PASS_STOP_FOR_INDEPENDENT_REVIEW_FULL_AND_PUSH_NOT_AUTHORIZED",
+  "branch": "fix/captured-child-cleanup-deadline-20261011",
+  "head": "499a83d802ca9a0e2ebe3d77071af10625879297",
+  "tree": "e13ba51b094e429b7c06d6dabbbcc348cc66e86c",
+  "ordered_parents": [
+    "a0d258a16095b95b1bf9000cb1201cddfaff4779"
+  ],
+  "actual_target": "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+  "source_scope": {
+    "changed": [
+      "action_server/src/actions/server/_common/process.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "added": [
+      "action_server/tests/action_server_tests/common_tests/test_captured_process_tree_deadline.py"
+    ],
+    "whole_original_module_AST_preserved_after_removing_one_added_wait_block": true,
+    "remaining_same_deadline_only": true,
+    "Popen_exclusive_wrapper_reap_unchanged": true,
+    "strict_live_zombie_error_snapshot_result_fields_unchanged": true,
+    "legacy_Process_stop_startup20_reader2_seconds_unchanged": true,
+    "all_original_parent_leaves_and_modes_retained": true,
+    "current_leaf_count": 1422,
+    "tracked_source_line_delta": "process.py21 insertions; permanent controls220 lines; exact accepted guide12 lines"
+  },
+  "implemented_behavior": "After exclusive Popen wrapper reap, inspect identity-bound captured handles; wait only observed live nonzombie handles through remaining SAME deadline, retain wait/inspection errors, then use original strict classification. No fresh child PID lookup or extra signal.",
+  "prepared_environment": {
+    "Doctor": "PASS",
+    "Bootstrap": "Original successful own pr306 prepared proof plus30 exact inputs; five lossless independent copies on existing exec /dev/shm with literal path-only rebinding; no installer",
+    "physical_storage": "/dev/shm/actions-captured-child-cleanup-prepared-envs-20261011",
+    "own_checkout_env_links": "Each package .venv resolves to its unique owned physical environment; concrete module files resolve under own checkout source.",
+    "all5_original_complete_source_env_inventories_unchanged_after_LIGHT": true,
+    "RCC": "v18.19.3; primary/source/copied fixture22,282,402B SHA7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "existing_autouse_fixture": "Unchanged local RCC configure identity --do-not-track; no mocked/no-op override, no provider/native Runtime invocation"
+  },
+  "verification": {
+    "original_private_experiment": "Immutable1expectedFAIL8PASS retained and independent58b GO; no repeat",
+    "permanent_initial_setup_failure": {
+      "tests": 10,
+      "passed": 0,
+      "failed": 0,
+      "errors": 10,
+      "skipped": 0,
+      "failure_names": []
+    },
+    "permanent_original_RED_successor": {
+      "tests": 10,
+      "passed": 8,
+      "failed": 2,
+      "errors": 0,
+      "skipped": 0,
+      "failure_names": [
+        "test_captured_child_can_finish_after_wrapper_within_same_deadline",
+        "test_remaining_descendant_wait_error_is_reported"
+      ]
+    },
+    "permanent_fixed_GREEN": {
+      "tests": 10,
+      "passed": 10,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "failure_names": []
+    },
+    "permanent_RED_GREEN_AST_identical_except_formatter_whitespace": true,
+    "adjacent_source_controls": {
+      "tests": 104,
+      "passed": 103,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 1,
+      "failure_names": []
+    },
+    "adjacent_skip": "Existing ACTIONS_REAL_RCC_ARTIFACT_TEST opt-in absent; actual provider remains unverified",
+    "ToolkitTest": {
+      "passed": 96
+    },
+    "configured_Ruff_format_Isort": "PASS complete invoke lint",
+    "configured_Mypy": {
+      "status": "PASS",
+      "source_files": 350,
+      "notes": "Three annotation-unchecked notes for untyped permanent-test helper initializer; no type errors."
+    },
+    "generated_workflow_roundtrips": 8,
+    "all_tracked_GitHub_YAML_parsed_and_preserved": 30,
+    "whole_GitHub_bytes_exact_actual_parent": true,
+    "authored_whitespace": "PASS"
+  },
+  "native_source_parity": {
+    "producer_inventory_count": 274,
+    "original92498_count": 268,
+    "changed_old_producer_paths": [
+      "action_server/src/actions/server/_actions_run.py",
+      "action_server/src/actions/server/_api_analytics.py",
+      "action_server/src/actions/server/_api_run.py",
+      "action_server/src/actions/server/_common/process.py",
+      "action_server/src/actions/server/_models.py",
+      "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "action_server/src/actions/server/_runs_state_cache.py",
+      "action_server/src/actions/server/migrations/__init__.py"
+    ],
+    "added_producer_paths": [
+      "action_server/src/actions/server/migrations/migration_add_run_outputs.py",
+      "action_server/src/actions/server/run_outputs/__init__.py",
+      "action_server/src/actions/server/run_outputs/filesystem.py",
+      "action_server/src/actions/server/run_outputs/models.py",
+      "action_server/src/actions/server/run_outputs/service.py",
+      "action_server/src/actions/server/run_outputs/types.py"
+    ],
+    "only_new_delta_from_actual_target": [
+      "action_server/src/actions/server/_common/process.py"
+    ],
+    "five_selected_tests_exact_actual_target_and_original92498": true,
+    "qualification": "UNQUALIFIED production bytes differ; no old native/control receipt carry, rebuild, repin or execution"
+  },
+  "preservation": {
+    "original_private31_bindings_exact": true,
+    "original_failed_constructor_and_1RED8PASS_retained": true,
+    "original_Source_f432_in_pr306_unchanged": true,
+    "original_private_helpers_not_rewritten": true,
+    "source_proof_draft": "First proof failed a documentation anchoring assertion; namedv2 compares exact patch placement and passed, no product/test/gate changes or evidence rewrite"
+  },
+  "scope_limits": [
+    "No full suite run or push/PR creation/merge authorized by this checkpoint.",
+    "New permanent cleanup harness uses fake OS handles; adjacent legacy source controls use bounded host Python children, and unchanged feedback fixture local RCC identity configuration. No native Runtime/provider/browser/installer/network qualification.",
+    "Hosted readiness cause, final survivor identity and original remaining budget UNKNOWN; otherfour failure nodes unsampled.",
+    "Public fix improves captured-child remaining-budget use; it does not establish full cleanup coverage, graceful leases, PID discovery/adoption, platform/native or private acceptance."
+  ],
+  "full_gate": "HOLD pending independent review and distinct root full release. Earlier source-proof capacity684,621,824B was below reserve; owner freeze observed1,360,273,408B above1.2GiB. Capacity is a point-in-time observation and grants no gate authority.",
+  "capacity_observation_bytes": 1360273408,
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; exact accepted36cc12line lesson applied in commit499a",
+    "Durable_learning_captured": "A quick wrapper reap plus short descendant waits can return early with unused shared budget; retain strict incomplete result and exclusive wrapper ownership, and separate controlled proof from unknown hosted cause.",
+    "Evidence": "Original imported f432/AST4daa RED and independent58b; permanent unchanged-AST RED2/8 and GREEN10; source insertion uses only remaining same deadline.",
+    "Stale_or_ambiguous_guidance_removed": "No assumed whole deadline use; no transfer of synthetic clock schedule to hosted timing or wrapper reap to whole-tree success.",
+    "Remaining_uncertainty": "Hosted cause and full/native/platform acceptance still unverified; full source gate held."
+  },
+  "Upstream_disposition": "none; Actions source change, no upstream defect established",
+  "bindings": [
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/LIGHT-immutable-source-and-preservation-proof.json",
+      "bytes": 3619,
+      "sha256": "40b3dec1987269e03f416e14caa925b8c9b96d6661534e0d5184c0c2eed9e97a"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/adjacent-source-controls-exit.json",
+      "bytes": 17,
+      "sha256": "e89df0eae5ec7db81135aed16463968955c578bcc4f2ec43172eff351f080c17"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/adjacent-source-controls-junit.xml",
+      "bytes": 17767,
+      "sha256": "a734703a4f646864eac802371f3e8f1217a01a1a3baf07ec956900a921ae1595"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/adjacent-source-controls.private.log",
+      "bytes": 5554,
+      "sha256": "108ba0c852d3af5fa8afc3cf5847abe51d04e034bc5c52ea79ade874bccbae6a"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/authored-configured-format-exit.json",
+      "bytes": 17,
+      "sha256": "e89df0eae5ec7db81135aed16463968955c578bcc4f2ec43172eff351f080c17"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/authored-configured-format.private.log",
+      "bytes": 3837,
+      "sha256": "4ee3c4c9060afb94051b5da037406fed09b57f4815efd237252ebb062ccb7a31"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/checked-own30-and-five-origins.json",
+      "bytes": 5120,
+      "sha256": "27094b3536434686d21bc5d102b421c70ef7f86995844e08bf3a6e71e6908c6e"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/current-five-selected-test-inventory.json",
+      "bytes": 923,
+      "sha256": "81cb3ca5af5e8d8ef93429cf2e438149126499a5d1ff404e5904312cf2385592"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/current-producer-input-inventory.json",
+      "bytes": 45271,
+      "sha256": "123c9cf1fa060e1b0a5d3db9fad983b790f728dc08ed826d7f466d6417c0f3c0"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/doctor-exit.json",
+      "bytes": 17,
+      "sha256": "e89df0eae5ec7db81135aed16463968955c578bcc4f2ec43172eff351f080c17"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/doctor.private.log",
+      "bytes": 12890,
+      "sha256": "11d5d28df9f081b8ef40723c05dc0e8ccd8d37f49fa5d55a26520357fa3b4e1e"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/freeze_LIGHT.py",
+      "bytes": 9755,
+      "sha256": "45779cdf839545800550bda0480b98299459ffb1639ecafaf9a4be76b2e42309"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/full-configured-static-exit.json",
+      "bytes": 17,
+      "sha256": "e89df0eae5ec7db81135aed16463968955c578bcc4f2ec43172eff351f080c17"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/full-configured-static.private.log",
+      "bytes": 6379,
+      "sha256": "cf9b249493bedd18636cb2b1b61febe02c229fd3bf8247a1f86611fae1daf0d5"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/generator-roundtrip-exit.json",
+      "bytes": 17,
+      "sha256": "e89df0eae5ec7db81135aed16463968955c578bcc4f2ec43172eff351f080c17"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/generator-roundtrip-successor-v2-receipt.json",
+      "bytes": 4217,
+      "sha256": "5f0d36593e6b27ac485360995ea1c60bda88cce835dd334b2cb311ed8f19fb3f"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/generator-roundtrip.private.log",
+      "bytes": 4659,
+      "sha256": "b90f166e25412272d511fc4dbc35c31cb858c2fe6420a9cbe0ece20304c440bc"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/generator_roundtrip.py",
+      "bytes": 1460,
+      "sha256": "996d0062df190a9e937b472ec77ae8c9b90e4b5db1f37d0d4f60e86dee48a06f"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/origin-action_server.json",
+      "bytes": 439,
+      "sha256": "001ca4b0541c5628f3eaa5d6125ab6fedc2a5c92855df99a048faf9f7703f90e"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/origin-actions-http-helper.json",
+      "bytes": 436,
+      "sha256": "842acd9b6301199f894562b0d6410fabccd490c0dd8b0f27da8bbdb1d68aa742"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/origin-actions.json",
+      "bytes": 378,
+      "sha256": "3ca51f7f0deae65f5ddde918d1b90d1fcd23bc627fceac613ebc8e16221d3cb8"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/origin-devutils.json",
+      "bytes": 401,
+      "sha256": "1b2b94d055c9a7237eb1c0a4aa88974990bd3c4267eec044f3fb8110744a2fb5"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/origin-work-items.json",
+      "bytes": 412,
+      "sha256": "8406bdc484277a79e2719473807c4bc33a0737a7590c45d593f90cc92d3ce2c0"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/original-permanent-tests-preRED.private.py",
+      "bytes": 7583,
+      "sha256": "177eedbfae360daef847c2fabadae7514291062f756cb7fbfcd1d872ff7b0307"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/original-source-preRED.private.py",
+      "bytes": 31134,
+      "sha256": "f432e65a488bf06862e548dc45342d3c1fb5ea7fcc26f6371d98aae124ffc082"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/own-five-environment-copy-proof.json",
+      "bytes": 2398,
+      "sha256": "40b99aebe1804742a740afa71717cbcb74c2f801f95f3961323c41088b82490e"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/own-ignored-pinned-RCC-fixture-preparation.json",
+      "bytes": 612,
+      "sha256": "468db51e1a07c0c1d196cadeee32611aeb7271fd6859013de0f7656eb94d5f81"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/own-inputs-and-origins-exit.json",
+      "bytes": 17,
+      "sha256": "e89df0eae5ec7db81135aed16463968955c578bcc4f2ec43172eff351f080c17"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/own-inputs-and-origins.private.log",
+      "bytes": 7378,
+      "sha256": "85a9cbcaaaa08255428864cb37048039345daf85d07ec9fcb23b443750215be1"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/permanent-GREEN-exit.json",
+      "bytes": 17,
+      "sha256": "e89df0eae5ec7db81135aed16463968955c578bcc4f2ec43172eff351f080c17"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/permanent-GREEN-junit.xml",
+      "bytes": 2012,
+      "sha256": "b5e9a6e8c44e8b7f140aa28ffce58eed96db2469ffdc1899f8637891fef1d2d1"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/permanent-GREEN.private.log",
+      "bytes": 4178,
+      "sha256": "b26482761f753283ba06ddee1b8d4cc73fc22b268d927e653e88aab2cfb83097"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/permanent-original-RED-exit.json",
+      "bytes": 18,
+      "sha256": "21a22856dd1c3b5d235661edf44add028ac3ed34e52b8d065f46f9f61e58726a"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/permanent-original-RED-junit.xml",
+      "bytes": 20293,
+      "sha256": "ac53a15dfd5722d1e351356150e008e4a3bce7ff1c4ffbc8c47f27ef0d074df1"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/permanent-original-RED-successor-exit.json",
+      "bytes": 18,
+      "sha256": "21a22856dd1c3b5d235661edf44add028ac3ed34e52b8d065f46f9f61e58726a"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/permanent-original-RED-successor-junit.xml",
+      "bytes": 3458,
+      "sha256": "61f24431b928e5f9592c4b025ce4225592f4105cfddf65cf4571fdda4dc9bb13"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/permanent-original-RED-successor.private.log",
+      "bytes": 7520,
+      "sha256": "41dc8eb7bb95ed7d24c527a499d62e96e4d61e2fe3ca25e06ba2a5e843158931"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/permanent-original-RED.private.log",
+      "bytes": 22718,
+      "sha256": "724a5636c6dde493c8e7b2b05d211f4958d13dc7b85696cd8f8162688af77d02"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/permanent-test-original-RED-input.json",
+      "bytes": 580,
+      "sha256": "1aa6b64414ca8049bd944f34cddf58b4ecb90aacc345aa6bc80fbe643be3ba0c"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/prepare_own_environments.py",
+      "bytes": 4700,
+      "sha256": "8269798b6e36afef8d8873d27e3aa7378057a2179134d41d0daea3ed7f51f860"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/prepare_own_environments_existing_mount_v2.py",
+      "bytes": 5534,
+      "sha256": "939b94ff09d2fb83b07e89fe4a8c8574db4da7a2c6f41cd4432653eb8c81bd32"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/prepared-copy-v2-exit.json",
+      "bytes": 17,
+      "sha256": "e89df0eae5ec7db81135aed16463968955c578bcc4f2ec43172eff351f080c17"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/prepared-copy-v2.private.log",
+      "bytes": 83,
+      "sha256": "fea5f1443bf6791ef4d8dc45c634a89fa28d9bf0ce57bd02e170c25b05eecbfe"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/prepared-environment-action_server.private.json",
+      "bytes": 4543415,
+      "sha256": "20819b3153635a36f09aff47dcc51f232089611d35c334f4fa7aedf90d9f42c4"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/prepared-environment-actions-http-helper.private.json",
+      "bytes": 2136627,
+      "sha256": "3e1e4249505c44784a82058e9c909fe8b3f1eec2f07bccc46e0d4628e440717a"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/prepared-environment-actions.private.json",
+      "bytes": 3237670,
+      "sha256": "9808283dd33b5f9673d052c6df8a0d9e4c374cb72d98023ad74760c22c94e428"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/prepared-environment-devutils.private.json",
+      "bytes": 1881934,
+      "sha256": "22c16802518b939c45fc01b3820775e5ab40f224a8a1dfc24f97b894f5f7265d"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/prepared-environment-work-items.private.json",
+      "bytes": 1888243,
+      "sha256": "ef34158c78035a66e97b63f090777f0a147a22f933cd87bb984ba282cc87c138"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/proposed-own-prepared-environment-copy-existing-mount-v2.json",
+      "bytes": 7606,
+      "sha256": "909bcc21e13f6590a66b6f79acb5181dda1a251df196c9afa7b0f98f327c0b12"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/proposed-own-prepared-environment-copy.json",
+      "bytes": 5446,
+      "sha256": "aca2dcba88a94d9c93dd2059297225e848c0f4697996018ce062ec8d659ba676"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/prove_light_source.py",
+      "bytes": 7460,
+      "sha256": "4e8cfca5a11c510a5f83afbb2f42ea34c7a37203b83e1076696a7870d9397580"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/prove_light_source_v2.py",
+      "bytes": 7433,
+      "sha256": "486e8b13e8a67955ee223dd77befaebcd0f330d90b7f3a2a10ff1d5bfd7d05c2"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/source-preservation-exit.json",
+      "bytes": 17,
+      "sha256": "5cc319f54b05a38799195a491c303aa686eab7caccfdbbf1e8b8c07405cb7392"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/source-preservation-v2-exit.json",
+      "bytes": 17,
+      "sha256": "e89df0eae5ec7db81135aed16463968955c578bcc4f2ec43172eff351f080c17"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/source-preservation-v2.private.log",
+      "bytes": 231,
+      "sha256": "53cd64d4eb365f597959f406a845e50a6e7666e69ad99786508593e26cdce76e"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/source-preservation.private.log",
+      "bytes": 595,
+      "sha256": "48d45179f79f09b307763cb952b4656f0a6d2aead5bb8d84610fe5a2b6570b6e"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/toolkit-exit.json",
+      "bytes": 17,
+      "sha256": "e89df0eae5ec7db81135aed16463968955c578bcc4f2ec43172eff351f080c17"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/toolkit.private.log",
+      "bytes": 14480,
+      "sha256": "0bcaceee0985bb95e1d5cd0d5168ffe55af98e375bce96cb1b1b5d25a6a8dd0d"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/verify_own_prepared.py",
+      "bytes": 2541,
+      "sha256": "ab382031ec6c11663372f35b72df0b4e011e293a8eddbe565c87830c39fc2ef5"
+    },
+    {
+      "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/OWNERFINAL-original-cleanup-deterministic-control-v2.json",
+      "bytes": 17714,
+      "sha256": "ab1d68eded83108fa58c32046f2d2c2b8dfa92972b6fedf7a66a4cb72ab87c22"
+    },
+    {
+      "path": "/workspace/engineering/pr306-original-cleanup-deterministic-independent-review/OWNERFINAL-independent-original-cleanup-deterministic-RED-review.json",
+      "bytes": 7409,
+      "sha256": "58b007d23144a46522095ba727eeb8ec6cfaaf13dd09bcbbb387222c57f0bfa5"
+    },
+    {
+      "path": "/workspace/engineering/pr306-current618-fada-startup-diagnostic-original-owned/frozen-readonly-captured-live-child-cleanup-contract-proposal.json",
+      "bytes": 8483,
+      "sha256": "731094016f3a6dd34efa423b5680250a8e72b487ff4438ad76ac96a89cd86044"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup/action_server/src/actions/server/_common/process.py",
+      "bytes": 32047,
+      "sha256": "1b6f65cbd7896dd99a223c9feda90f30363ef0db56b4b0db0f32a0cfd1aa3c07"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup/docs/skills/repository-operations.md",
+      "bytes": 250724,
+      "sha256": "126a062f4b84491d0e027d8f100544a6f6782607b83151ae408e531ba05a330e"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup/action_server/tests/action_server_tests/common_tests/test_captured_process_tree_deadline.py",
+      "bytes": 7583,
+      "sha256": "177eedbfae360daef847c2fabadae7514291062f756cb7fbfcd1d872ff7b0307"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/OWNERFINAL-captured-child-cleanup-LIGHT-source-checkpoint.json",
+      "bytes": 22605,
+      "sha256": "a2b26c92d1c094bead1ed9e3a878c861ebe7c2653460eaed251b47481e2c09f0"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/freeze_LIGHT_v2.py",
+      "bytes": 1515,
+      "sha256": "b5803487c4a7aeb365188db0a9879ff89e23265abe52a52e0804347ee9ff1ce7"
+    }
+  ],
+  "construction_draft_disposition": {
+    "predecessor": {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/OWNERFINAL-captured-child-cleanup-LIGHT-source-checkpoint.json",
+      "bytes": 22605,
+      "sha256": "a2b26c92d1c094bead1ed9e3a878c861ebe7c2653460eaed251b47481e2c09f0"
+    },
+    "status": "RETAINED_UNANNOUNCED_DRAFT_CAPACITY_LABEL_CORRECTED_ONLY",
+    "reason": "Predecessor full-gate text described the earlier low-capacity observation as if still current, while its newer freeze capacity was above reserve. Both measured values and original bytes retained; source/tests/gates unchanged."
+  }
+}

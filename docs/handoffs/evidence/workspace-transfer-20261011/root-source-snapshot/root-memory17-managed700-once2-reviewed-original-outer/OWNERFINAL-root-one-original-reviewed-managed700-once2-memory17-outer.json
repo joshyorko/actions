@@ -1,0 +1,18 @@
+{
+  "capture": "2026-10-11T21:19:28.760537+00:00",
+  "elapsed_seconds": 30.874573089997284,
+  "release": {
+    "bytes": 835,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-one-memory17-pure-controls-managed700-once2-release.json",
+    "sha256": "d57c4d3348faed0da9b8e278a1da6878085b0466925c9760b2861ef271b6b9ff"
+  },
+  "returncode": 0,
+  "review": {
+    "bytes": 7336,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-memory17-managed-primary700-once2-independent-PREEXEC-review/OWNERFINAL-independent-memory17-managed-primary700-fresh-once2-PREEXECUTION-GO.json",
+    "sha256": "2e50ca5e09c385a2d3c300b578d44b944d3cb8361e62b8c6c2a45b8ceaa3db85"
+  },
+  "scope": "ONE_PURE17_ONLY_NO_NATIVE_MEMORY_POLICY_ADOPTION"
+}

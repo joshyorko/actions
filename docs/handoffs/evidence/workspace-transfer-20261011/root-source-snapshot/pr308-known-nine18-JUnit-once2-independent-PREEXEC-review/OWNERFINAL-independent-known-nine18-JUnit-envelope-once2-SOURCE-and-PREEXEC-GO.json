@@ -1,0 +1,58 @@
+{
+  "actual_successor_execution": "NOT_RUN_REQUIRES_DISTINCT_ROOT_RELEASE",
+  "bounds": "15TERM10/parent30\u00d718 +2\u00d7135guards+5\u00d730origins=960; ROOT1200TERM10/parent1230",
+  "capture": "2026-10-11T21:39:42.366580+00:00",
+  "config_binding": {
+    "bytes": 68847,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine-18-semantic-JUnit-envelope-once2-preexecution-NOTRUN/FROZEN-known-nine18-JUnit-envelope-once2-config-NOTRUN.json",
+    "sha256": "90bc9cff117ad704cfd9c1656b6e92d0d753e02438b963163aebc6a645dcf5e7"
+  },
+  "config_sha256": "90bc9cff117ad704cfd9c1656b6e92d0d753e02438b963163aebc6a645dcf5e7",
+  "contract_binding": {
+    "bytes": 6451,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine-18-semantic-JUnit-envelope-once2-preexecution-NOTRUN/exact-JUnit-envelope-once2-ROOT-release-and-command-contract-NOTRUN.json",
+    "sha256": "787d03f3113e7badad1a05bfbd4bbe59f282f5c0716857a94af134ef3477b778"
+  },
+  "decision": "GO_PRIVATE_KNOWN_NINE18_JUNIT_ENVELOPE_ONCE2_SOURCE_AND_BOUNDED_PREEXECUTION_ONLY",
+  "documentation": {
+    "disposition": "ACCEPTED_SOURCE_BACKED_EMITTER_LESSON_FOR_ROOT_EXACT_CONTEXT_APPLICATION; preserve5584copy/lock/sensitivity scope; patch has unnumbered @@, no direct gitapply validity claimed",
+    "evidence": "Original one failure type absent; ownpytest ET.Element has message keyword only; exact original AssertionError semantic collect120 frame. New source keeps raw exact-frame admission.",
+    "exact_delta": {
+      "bytes": 705,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-known-nine-18-semantic-JUnit-envelope-once2-preexecution-NOTRUN/canonical-JUnit-exception-envelope-vs-semantic-raw-frame-proposed.patch",
+      "sha256": "37c705baab06d0cf55be170d780a4e11b47c82fc8c726483f2d4fc26604d4ff2"
+    },
+    "remaining_uncertainty": "Successor18 NOT_RUN; no snapshot-oracle or native acceptance"
+  },
+  "independent_proof": {
+    "bytes": 2256,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine18-JUnit-once2-independent-PREEXEC-review/independent-exact-JUnit-envelope-omission-AST-protocol-phase-and-source-proof.json",
+    "sha256": "8b90bbbc8e2511e3ab626979c220f862e7b5e2b5cb111c4abf919480bf1d4f9a"
+  },
+  "launcher_binding": {
+    "bytes": 13798,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine-18-semantic-JUnit-envelope-once2-preexecution-NOTRUN/run_known_nine18_JUnit_envelope_once2_NOTRUN.py",
+    "sha256": "4a1bb9a87972c472413abb8f5edfbc94b5dc0dde645357a9d6bdce4d5dbabba9"
+  },
+  "launcher_sha256": "4a1bb9a87972c472413abb8f5edfbc94b5dc0dde645357a9d6bdce4d5dbabba9",
+  "limitations": "Only original firstRED protocol/assertion fact admitted; original overallFAIL remains. New18 controls, restoredGREEN, snapshotoracle sensitivity, native/generation drain/provider/adoption/release all pending. This is execution permission scoped to exact new tuple, not actualPASS.",
+  "proposal_binding": {
+    "bytes": 14782,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine-18-semantic-JUnit-envelope-once2-preexecution-NOTRUN/OWNERFINAL-known-nine18-JUnit-envelope-once2-SOURCE-and-PREEXEC-NOTRUN.json",
+    "sha256": "33198e6a6ad289cdbd117d88b0f2484e95f5359c01abaff9d21c429abba4b4ab"
+  },
+  "reviewer_execution": "READONLY_STDLIB_AST_BYTES_GIT_NO_PRODUCT_IMPORTS_OR_TESTS",
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_clean": true,
+  "source_leaves": 1440,
+  "status": "INDEPENDENT_KNOWN_NINE_SEMANTIC_RED_GREEN_PREEXECUTION_GO",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none"
+}

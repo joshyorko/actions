@@ -1,0 +1,21 @@
+{
+  "candidate_only_written": {
+    "bytes": 16412,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py",
+    "sha256": "513a079d269fb7eee5dbba21c3e06f2f79d9441141bc69dfb751607ed30ea358"
+  },
+  "constructor": {
+    "bytes": 12789,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr308-nine-real-original-baseline-independent-diagnosis/build_private_corrected_source_and_proposal.py",
+    "sha256": "6062607c55672ab56bc1ba022c3c4a209466b9edf2dd9a427da1512afb60856b"
+  },
+  "failure": "AssertionError before prospective append; original prefix contains exact84689-byte existing adapter followed by two newline separators; inspector incorrectly required prefix equality without separators.",
+  "native": "NOT_RUN",
+  "original_source_corruption": false,
+  "remaining_artifacts": "NOT_CREATED",
+  "schema": 1,
+  "status": "FAILED_PRIVATE_PREPARATION_INSPECTOR_NO_TESTS_NO_ADOPTION",
+  "tests": "NOT_RUN"
+}

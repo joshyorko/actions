@@ -1,0 +1,140 @@
+{
+  "canonical_dispositions": {
+    "7e971": "ADOPT_SCOPED_GATEWAY_VERSUS_CHECKED_CHILD_SEMANTIC_BOUNDARY",
+    "8e6": "REUSE_EXISTING_REAL_CONFIG_SCHEMA_CLOSURE_GUIDANCE",
+    "a4bca": "REUSE_EXISTING_TYPED_SEMANTIC_EMITTER_GUIDANCE"
+  },
+  "copies": [
+    {
+      "bytes": 4550,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-engineering-continuation-originals/01-OWNERFINAL-independent-control-memory-extra-five-safe-copy-canonical-application-GO.json",
+      "scope": "Exact original historical owner or SOURCE-only control; original FAIL/HOLD preserved, no qualification promotion",
+      "sha256": "2f9200bc537f21454e4620c94fd5a115da9bf741ce4bfb2185e1f3c1536abd9e",
+      "source": "/workspace/engineering/control-memory-checkpoint-extra-independent-application-review/OWNERFINAL-independent-control-memory-extra-five-safe-copy-canonical-application-GO.json",
+      "source_mode": "0o400"
+    },
+    {
+      "bytes": 3875,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-engineering-continuation-originals/02-OWNERFINAL-independent-original-defaultbackend35-ACTUALFAIL-and-typed-marker-proposal.json",
+      "scope": "Exact original historical owner or SOURCE-only control; original FAIL/HOLD preserved, no qualification promotion",
+      "sha256": "a4bca9580479e17321d29aa721df8f3faade600f422006b0c20c6d089761b3a8",
+      "source": "/workspace/engineering/rcc-defaultbackend35-original-ACTUALFAIL-independent-diagnosis/OWNERFINAL-independent-original-defaultbackend35-ACTUALFAIL-and-typed-marker-proposal.json",
+      "source_mode": "0o400"
+    },
+    {
+      "bytes": 833,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-engineering-continuation-originals/03-OWNERFINAL-root-one-original-reviewed-defaultbackend35-outer.json",
+      "scope": "Exact original historical owner or SOURCE-only control; original FAIL/HOLD preserved, no qualification promotion",
+      "sha256": "e1d44c6e5c4d2b8a7a917d381fd80ef1c431752dc5d779684142931248878504",
+      "source": "/workspace/engineering/root-defaultbackend35-reviewed-original-outer-once/OWNERFINAL-root-one-original-reviewed-defaultbackend35-outer.json",
+      "source_mode": "0o400"
+    },
+    {
+      "bytes": 27693,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-engineering-continuation-originals/04-OWNERFINAL-defaultbackend35-typed-oracle-once2-SOURCE-and-PREEXEC-NOTRUN.json",
+      "scope": "Exact original historical owner or SOURCE-only control; original FAIL/HOLD preserved, no qualification promotion",
+      "sha256": "92691f49c6d85392c4230c5d32b463e1ae60a80786a88197974d0b8d376d428b",
+      "source": "/workspace/engineering/rcc-defaultbackend35-typed-oracle-once2-PREEXEC-NOTRUN/OWNERFINAL-defaultbackend35-typed-oracle-once2-SOURCE-and-PREEXEC-NOTRUN.json",
+      "source_mode": "0o400"
+    },
+    {
+      "bytes": 16505,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-engineering-continuation-originals/05-test_default_cgroup_descriptor_walk_NOTRUN.py",
+      "scope": "Exact original historical owner or SOURCE-only control; original FAIL/HOLD preserved, no qualification promotion",
+      "sha256": "cf43fd5b5774ab61c272dc17acd9b95841a0fcd663dd56947c12c9c8f370b307",
+      "source": "/workspace/engineering/rcc-defaultbackend35-typed-oracle-once2-PREEXEC-NOTRUN/test_default_cgroup_descriptor_walk_NOTRUN.py",
+      "source_mode": "0o400"
+    },
+    {
+      "bytes": 11993,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-engineering-continuation-originals/06-OWNERFINAL-current8d49-native-memory-one-sampler-overlay-entry-and-composition-controls-SOURCE_PREPARED_NOTRUN.json",
+      "scope": "Exact original historical owner or SOURCE-only control; original FAIL/HOLD preserved, no qualification promotion",
+      "sha256": "7246751635ddddb6866adf9506032b7e95a81960628bef432509f16240fc347b",
+      "source": "/workspace/engineering/rcc-current8d49-memory-native-composition-SOURCE-PREPARED-NOTRUN/OWNERFINAL-current8d49-native-memory-one-sampler-overlay-entry-and-composition-controls-SOURCE_PREPARED_NOTRUN.json",
+      "source_mode": "0o400"
+    },
+    {
+      "bytes": 6481,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-engineering-continuation-originals/07-native_memory_sampler_overlay_v1_NOTRUN.py",
+      "scope": "Exact original historical owner or SOURCE-only control; original FAIL/HOLD preserved, no qualification promotion",
+      "sha256": "1d5bf618844a4ca501da8f86299b7e08e7af4af50fac04c5dff4381555eef9e3",
+      "source": "/workspace/engineering/rcc-current8d49-memory-native-composition-SOURCE-PREPARED-NOTRUN/native_memory_sampler_overlay_v1_NOTRUN.py",
+      "source_mode": "0o400"
+    },
+    {
+      "bytes": 9637,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-engineering-continuation-originals/08-native_memory_entry_v1_NOTRUN.py",
+      "scope": "Exact original historical owner or SOURCE-only control; original FAIL/HOLD preserved, no qualification promotion",
+      "sha256": "ae5e2220a33a8680dce308f1da119b79e856944bbbf45e101cf353e07589e620",
+      "source": "/workspace/engineering/rcc-current8d49-memory-native-composition-SOURCE-PREPARED-NOTRUN/native_memory_entry_v1_NOTRUN.py",
+      "source_mode": "0o400"
+    },
+    {
+      "bytes": 12606,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-engineering-continuation-originals/09-test_native_memory_composition_v1_NOTRUN.py",
+      "scope": "Exact original historical owner or SOURCE-only control; original FAIL/HOLD preserved, no qualification promotion",
+      "sha256": "230c499f180e4c7537ee0482b8aba0fea16eff204735db55f5612a09e8a5563b",
+      "source": "/workspace/engineering/rcc-current8d49-memory-native-composition-SOURCE-PREPARED-NOTRUN/test_native_memory_composition_v1_NOTRUN.py",
+      "source_mode": "0o400"
+    },
+    {
+      "bytes": 9323,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-engineering-continuation-originals/10-OWNERFINAL-independent-first-five-obsolete-environment-SOURCE-eight-mode-closure-HOLD.json",
+      "scope": "Exact original historical owner or SOURCE-only control; original FAIL/HOLD preserved, no qualification promotion",
+      "sha256": "8e6c8a3bc8635178683aadb5ac015928cc847c89723f25f00975778e64e261b6",
+      "source": "/workspace/engineering/first-five-obsolete-environment-independent-SOURCE-review/OWNERFINAL-independent-first-five-obsolete-environment-SOURCE-eight-mode-closure-HOLD.json",
+      "source_mode": "0o400"
+    },
+    {
+      "bytes": 24590,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-engineering-continuation-originals/11-OWNERFINAL-first-five-obsolete-environment-preservation-SOURCE-and-CONTROL-PREPARATION-NOTRUN-v4.json",
+      "scope": "Exact original historical owner or SOURCE-only control; original FAIL/HOLD preserved, no qualification promotion",
+      "sha256": "0eb5a69a100bf1ecb5cad0900b587dfcbe6384ecf7363f0c1369c4894d8d9591",
+      "source": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/OWNERFINAL-first-five-obsolete-environment-preservation-SOURCE-and-CONTROL-PREPARATION-NOTRUN-v4.json",
+      "source_mode": "0o400"
+    },
+    {
+      "bytes": 6828,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-engineering-continuation-originals/12-OWNERFINAL-independent-original-currentc97e-once2-TOKEN-LIGHT-PREEXECUTION-config-path-HOLD.json",
+      "scope": "Exact original historical owner or SOURCE-only control; original FAIL/HOLD preserved, no qualification promotion",
+      "sha256": "c21497db6231b87893ee17fded09b551f0680d5ca8df64680ab4c7c0681c56b2",
+      "source": "/workspace/engineering/pr307-currentc97e-token-once2-independent-PREEXEC-review/OWNERFINAL-independent-original-currentc97e-once2-TOKEN-LIGHT-PREEXECUTION-config-path-HOLD.json",
+      "source_mode": "0o400"
+    },
+    {
+      "bytes": 9667,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-engineering-continuation-originals/13-OWNERFINAL-independent-named-currentc97e-config-v3-token-once2-PREEXECUTION-GO.json",
+      "scope": "Exact original historical owner or SOURCE-only control; original FAIL/HOLD preserved, no qualification promotion",
+      "sha256": "3b4192fdc2656898c30044dcc995b0accb78ed7341bcf002fcea9879aacd60d3",
+      "source": "/workspace/engineering/pr307-currentc97e-token-once2-independent-PREEXEC-review/OWNERFINAL-independent-named-currentc97e-config-v3-token-once2-PREEXECUTION-GO.json",
+      "source_mode": "0o400"
+    },
+    {
+      "bytes": 1166,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-engineering-continuation-originals/14-OWNERFINAL-root-one-original-reviewed-currentc97e-token-light-once2-v3-outer.json",
+      "scope": "Exact original historical owner or SOURCE-only control; original FAIL/HOLD preserved, no qualification promotion",
+      "sha256": "54804c341fc30a3fb33f7c3fc73ed7aeecb09537acb7a6bc489448711f7cea88",
+      "source": "/workspace/engineering/root-pr307-currentc97e-reviewed-token-light-once2-v3-outer/OWNERFINAL-root-one-original-reviewed-currentc97e-token-light-once2-v3-outer.json",
+      "source_mode": "0o400"
+    },
+    {
+      "bytes": 394,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-engineering-continuation-originals/15-proposed-canonical-gateway-versus-child-status-lesson.txt",
+      "scope": "Exact original historical owner or SOURCE-only control; original FAIL/HOLD preserved, no qualification promotion",
+      "sha256": "7e9713048af1c6736dadd6f45f71a99281199bc0a233e477dd26e8c5190498c2",
+      "source": "/workspace/engineering/pr307-currentc97e-original-TOKEN-LIGHT-ACTUALFAIL-independent-diagnosis/proposed-canonical-gateway-versus-child-status-lesson.txt",
+      "source_mode": "0o400"
+    },
+    {
+      "bytes": 2044,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-engineering-continuation-originals/16-OWNERFINAL-existing-RCC125-118-reviewed-pure-controls-coordination.json",
+      "scope": "Exact original historical owner or SOURCE-only control; original FAIL/HOLD preserved, no qualification promotion",
+      "sha256": "44d32c52beeb8ec3cfd89ffba46934302b630106be10c3cb9d55298f27522ddd",
+      "source": "/workspace/engineering/rcc-upstream-current-reviewed-pure-controls-coordination-20261011/OWNERFINAL-existing-RCC125-118-reviewed-pure-controls-coordination.json",
+      "source_mode": "0o400"
+    }
+  ],
+  "parent": "843cb16dc071fc764f11f1e0b3b07432dcd04a7d",
+  "schema": 1,
+  "scope": "Private safe checkpoint; excludes configs/rawlogs/member bodies/binaries/archives/secrets; source copies are not a standalone executable bundle"
+}

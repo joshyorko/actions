@@ -1,0 +1,19 @@
+{
+  "scope": "ONE_CURRENT2314_PR307_LIGHT_ONLY",
+  "source": "2314aea95795fbc1372a6f7b0b7b298b7cf124c3",
+  "tree": "2987ed3a23e560fb40e13aadbcd6bd613ead3f25",
+  "config_sha256": "3b4e42668cb99bc38969c6f979ece431abdd123db4217baf282c3cbb581369ce",
+  "launcher_sha256": "5cfd5809778212415a41349e02c081312011cf4c1f641150d233abde4099f088",
+  "release_sha256": "709074f7a44e587bd04dfa2b22d2793f7991140ad1f4cf2dae6fb8ab7578c054",
+  "no_retry": true,
+  "FULL": "NOT_RUN",
+  "native": "NOT_RUN",
+  "outer_returncode": 0,
+  "elapsed_seconds": 88.11493729100039,
+  "capture": "2026-10-11T20:40:50.178409+00:00",
+  "capacity_after": {
+    "/workspace": 1231527936,
+    "/tmp": 316547072,
+    "/dev/shm": 3236864000
+  }
+}

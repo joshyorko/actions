@@ -1,0 +1,177 @@
+{
+  "documentation_improvement": {
+    "Added lines": 8,
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md",
+    "Disposition": "ACCEPT exact implemented b5b209 fixture-preparation paragraph;original parent guide and GET provenance lessons retained",
+    "Durable learning": "Verified environment/prefix reuse does not create an ignored pinned RCC fixture asset. Bind the default fixture path to the package version and verify an already-owned prepared output digest/mode before copying. Record source/output identities and distinguish reuse from new Bootstrap or binary build;do not borrow unrelated generated inputs.",
+    "Evidence": "Original57PASS93RuntimeError fixture failures;actual fixtures.py default RCC path,pinned18.19.3,owned22282402B7e588/mode0711,current150PASS successor;complete1421 before/after original full1242/13;all30 inputs/fiveorigins/233 path-only metadata identities preserved",
+    "Exact accepted reused delta": {
+      "bytes": 1202,
+      "path": "/workspace/engineering/pr300-actual299-independent-source-review/canonical-exact-reviewed-child.patch",
+      "sha256": "b5b2091ec74313e13abe1f2b3d1df7068736691179dbf9a3e0df5bc87270cfc5"
+    },
+    "Remaining uncertainty": "Fresh hosted exact-head checks,actual synthetic checkout source,review/thread/policy admission after retarget/push;deployed Actor provider,active revocation,HEAD/Range,shared provider/backend/native/platform/Canvas/private/release remain unqualified.",
+    "Stale or ambiguous guidance removed": "No parent text removed. Distinguishes environment reuse from ignored-output preparation and prevents failed original scopes or unrelated generated inputs from being relabeled PASS."
+  },
+  "earlier_attempts_preserved": {
+    "generator_original": "Inspector incorrectly expected all repository YAML count30; actual116. Failed before generator. Named successor scopes exact30 GitHub YAML, derives8 outputs from actual TARGETS; no source/control correction.",
+    "scoped_original": "57PASS93fixtureERROR1integrationDESELECT; required ignored RCC file absent, no failing product assertion; original raw log unchanged"
+  },
+  "independent_proofs": [
+    {
+      "bytes": 382079,
+      "path": "/workspace/engineering/pr300-actual299-independent-source-review/independent-complete-source-union-and-original-binding-proof.json",
+      "sha256": "e43aaf1f2e0dca72ea08d75cb0019e0abf0a877f338fe77682525a2fb3fd512b"
+    },
+    {
+      "bytes": 14023,
+      "path": "/workspace/engineering/pr300-actual299-independent-source-review/independent-prepared-origins-fixture-and-recorded-gates-proof.json",
+      "sha256": "ef230d681abe7bc6544303a9b58ee72b2a1cb4f80562ab61e76b54ad4fb51f95"
+    },
+    {
+      "bytes": 6022,
+      "path": "/workspace/engineering/pr300-actual299-independent-source-review/independent-predecessor-and-transport-boundary-proof.json",
+      "sha256": "2968d64cde3db43033fe38f7ca38035b236e2216b417d270ae7797c384310c58"
+    }
+  ],
+  "native_scope": {
+    "260_old_exact": true,
+    "current_producer275": 275,
+    "eight_changed_seven_added": true,
+    "five_selected_tests_separate_all_same_old_and_actual299": true,
+    "old_producer268": 268,
+    "qualification": "OLD92498_NATIVE_UNQUALIFIED;no candidate binary or native nine-case acceptance inferred"
+  },
+  "observed_at": "2026-10-11T09:41:17.222798+00:00",
+  "ordinary_merge": {
+    "head": "d4443c49973ddd629838c682111474991e3ea0c2",
+    "ordered_parents": [
+      "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+      "6181b044c75de35386f1ae30e71725398b6a7feb"
+    ],
+    "tree": "f6b711f1589bcff6b9df73ab889c30503859d90d"
+  },
+  "owner_final_checkpoint": {
+    "bytes": 72050,
+    "path": "/workspace/engineering/pr300-actual299-refresh/immutable-actual299-source-checkpoint.json",
+    "sha256": "b16ef794377b8a51a66444efa697401bc41793842ac6b7bf2986085501e967ee"
+  },
+  "recorded_gates": {
+    "Bootstrap": "Existing prepared30 inputs checked exactly with five OWN concrete module origins/prefixes; original Bootstrap bytes preserved, no new installer/bootstrap run",
+    "Doctor": "PASS",
+    "ONE_full_configured_invoke_test_not_integration": {
+      "RCC_gateway_SUCCESS": true,
+      "duration_seconds": 143.87,
+      "exit_code": 0,
+      "no_native_or_manual_actual_gate_claim": true,
+      "original_private_log": {
+        "bytes": 319769,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr300-actual299-refresh/full-configured-runtime-source.log",
+        "sha256": "b3db4a1fe6edbd3ee1d1734272bbd5aa7637a2537db2dabe3f47183ba90f0569"
+      },
+      "passed": 1242,
+      "scope": "Configured invoke test-not-integration; original skipped and excluded opt-ins remain unqualified.",
+      "single_authorized_full": true,
+      "skipped": 13,
+      "source_head": "7840057a8b055576d11d339d8c0fbb738927a491",
+      "source_tree": "10e09d88027ca4fea512ff06c57efaab95755ffb",
+      "warnings": 15,
+      "workers": 2
+    },
+    "Toolkit": {
+      "RCC_SUCCESS": true,
+      "passed": 96
+    },
+    "configured_lint": {
+      "Isort": "PASS",
+      "Ruff_check": "PASS",
+      "Ruff_format_files": 313,
+      "subject": "ordinary d444; final784 non-doc bytes/modes exact"
+    },
+    "configured_typecheck": {
+      "files": 349,
+      "status": "PASS",
+      "subject": "ordinary d444; final784 non-doc bytes/modes exact"
+    },
+    "generator": {
+      "actual_derived_TARGETS_outputs": 8,
+      "all_tracked_GitHub_YAML_and_dependabot_bytes_and_parse": 30,
+      "status": "PASS",
+      "subject": "7840057a8b055576d11d339d8c0fbb738927a491",
+      "total_repository_YAML_files_not_claimed_as30": 116
+    },
+    "scoped_Runtime_source": {
+      "integration_deselected": 1,
+      "passed": 150,
+      "skipped": 0,
+      "subject": "ordinary d444; final784 non-doc bytes/modes exact"
+    }
+  },
+  "remaining_HOLD": [
+    "Fresh current hosted CI after retarget/push",
+    "Old92498 native assets remain UNQUALIFIED:275production=260old matches+8changed+7added; five selected tests exact separately (280 combined, not production)",
+    "No actual provider/browser/PG/manual-native/consumer/platform/full-private/production principal/Canvas/ChatGPT/release claim",
+    "No active stream revocation, HEAD or Range features",
+    "No universal process-reaping or complete environment tree integrity claim"
+  ],
+  "review_actions": {
+    "owned_independent_receipts_only": true,
+    "product_tests_gate_install_download_or_actual_runs": false,
+    "read_only_standard_library_and_Git_verification": true,
+    "source_index_branch_mutation": false
+  },
+  "root_action_boundary": {
+    "not_permitted_by_this_review": "No source rewrite,forcepush,CI waiver,merge,release,issue closure,Runtime rebuild or actual consumer/provider/native retry",
+    "permitted_next": "Normal retarget existingPR300 base to integration/community-release-20261008 BEFORE normal existing feat/run-output-transport-20261010 branch push;preserve784 andordinaryd444 history",
+    "required_after_push": "Fresh complete exact-head hosted jobs/checks includinglate jobs,bracket refs/syntheticorderedparents/tree,actual checkout when required,reviews/threads/status/policy admission"
+  },
+  "schema": "actions.independent-frozen-pr300-actual299-source-review/v1",
+  "source_semantic_scope": {
+    "HEAD": "405 rejection retained, not HEAD support",
+    "Range": "416 rejection retained, not Range support",
+    "nine_foundation_paths": "source preservation, not nine native acceptance cases",
+    "request": "GET-only route; original actor plus persisted grant checked before provider reader acquisition in grant transaction; response yields after transaction exits",
+    "revocation": "future reader acquisition only; no active stream reauthorization claim",
+    "stream": "original bounded 64KiB chunks, no-store/nosniff/opaque attachment; owned shielded acquire/cancellable yield/final release unchanged",
+    "trusted_server_owned_RunOutputTransport": "default off optional keyword-only configuration, trusted callback must return Actor; no default principal/env/UUID/browser session inference"
+  },
+  "subject": {
+    "branch": "feat/run-output-transport-20261010",
+    "clean": true,
+    "head": "7840057a8b055576d11d339d8c0fbb738927a491",
+    "no_push_or_retarget_performed": true,
+    "original_remote_PR_branch_preserved": "feat/run-output-transport-20261010",
+    "sole_parent": "d4443c49973ddd629838c682111474991e3ea0c2",
+    "tree": "10e09d88027ca4fea512ff06c57efaab95755ffb",
+    "worktree": "/workspace/engineering/pr300"
+  },
+  "upstream_disposition": "none",
+  "verdict": "GO_SOURCE_ONLY_NORMAL_BASE_RETARGET_BEFORE_EXISTING_BRANCH_PUSH",
+  "verified": {
+    "all1420_nonchild_paths_exact_parent": true,
+    "all43_evidence_refs_exact": true,
+    "all8_generated_outputs_all30_tracked_GitHub_yaml": true,
+    "before_after_complete_source_proofs_identical": true,
+    "clean_final": true,
+    "complete1421_Git_FS_body_typed_modes_executable_flags": true,
+    "complete_ordinary_original3cad_actual299618_union": "All nondivergent three-way leaves exact;zero divergent paths;no original/target dropped paths",
+    "diff_check_child": "PASS",
+    "five_own_configs_module_origin_records_and_resolved_Python_paths_exact": true,
+    "four_original_historical_receipts_exact": true,
+    "ignored_generated_OAuth_member_absent": true,
+    "nine_foundation_paths_exact_original_and_actual299": true,
+    "original233_and_own233_path_rebound_metadata_hashes_and_only_checkout_path_replacement": true,
+    "original_four_transport_patch_paths_exact": true,
+    "owned_Rcc_fixture_source_and_copy_and_gateway": {
+      "bytes": 22282402,
+      "fixture_mode": "0711",
+      "no_new_Bootstrap_or_download": "Original prepared Bootstrap log exact;owned fixture copy reuse only",
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+      "version": "18.19.3"
+    },
+    "predecessor13_nested_named_original_refs_exact": true,
+    "prepared30_inputs_exact_known3155_and_current784_Git": true,
+    "whole_GitHub_exact_actual299": true
+  }
+}

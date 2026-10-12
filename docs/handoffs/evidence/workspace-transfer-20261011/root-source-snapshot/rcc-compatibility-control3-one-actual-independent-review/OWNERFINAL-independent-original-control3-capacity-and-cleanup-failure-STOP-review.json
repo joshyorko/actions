@@ -1,0 +1,218 @@
+{
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; exact read-only proposed patch",
+    "Durable_learning_captured": "Keep sampled capacity failure primary, retain available helper cleanup details separately, preserve incomplete testcase/evidence scope and distinguish fresh path scans from original ownership/reader cleanup.",
+    "Evidence": [
+      "Original72cb terminal and8dc2 actual: CAPACITY_THRESHOLD plus cleanupFAIL, -15, 137 samples, original publication PASS, staged/JUnit/lease missing",
+      "Frozen helper60acf class preserves cleanup_disposition/command_returncode but actual_transport_v5 catches only class/rc, so final disposition/census remain UNREPORTED",
+      "Root465d fresh scan explicitly declares path attribution only; reviewer captured pytest PID absent independently at one later point",
+      "Current frozen source fixture and source-backed sampler guards retain both cleanup snapshots and stop sequence after failure"
+    ],
+    "Exact_delta": {
+      "bytes": 1183,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-compatibility-control3-one-actual-independent-review/canonical-capacity-stop-and-missing-cleanup-evidence-proposed.patch",
+      "sha256": "976dc310a5188d1ab75a4b41a3c1a6d4e1b8b2f107ab05479875c3f9deb05d1d"
+    },
+    "Remaining_uncertainty": "Actual original helper final descendant identities/disposition/readers and second-case result are not retained. No new run is authorized by this review.",
+    "Stale_or_ambiguous_guidance_removed": "Prevents relabeling successful publication or an empty later path scan as full compatibility or cleanup PASS; prevents dropping cleanup detail behind a primary capacity stop."
+  },
+  "RCC": {
+    "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "version": "v18.19.3"
+  },
+  "Upstream_disposition": "none",
+  "bounded_publication_result": {
+    "RCC": {
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+      "version": "v18.19.3"
+    },
+    "artifact_digest": "sha256:f24da39838969a6369a4b073106322fc83844d4c17e3357ccbace39bfdc73b5f",
+    "control": {
+      "commit": "c10380a4d2ebc6f0aca63eb85c8f84a337da4962",
+      "tree": "21676c626a933c2d55761ec85ecf26fe0eef26bb"
+    },
+    "original": {
+      "bytes": 1469,
+      "mode": "0o600",
+      "path": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-1/publication.json",
+      "sha256": "22121727f88ac95fbbef644231efb93884cff54f8ca7281e79b089c67eafa6bd"
+    },
+    "original_raw_body_sha256": "dcd69d583f5e65404b6b97da388be3937e2d269a0ce04ec4871db430b889eeb2",
+    "provider_context": "original private URL retained outside Git, no raw URL echoed",
+    "raw_json_digest_pair_and_exact_invocation_private_validation": "PASS",
+    "scope": "first selected source-pinned publication case only; no staged-action, two-case compatibility, worker cleanup or release admission",
+    "single_invocation_count": 1,
+    "source": {
+      "commit": "b614864ba9da55c13662894b6ef3c8515d9fdb25",
+      "tree": "6fa4f5c1e9837a0d893868255575b355b3977fae"
+    },
+    "specification_digest": "sha256:5e7dcfdb9f4ca5cc19ca6b2e93cad75a3fd60f598d4a71fd10451bffc1ddc56f",
+    "status": "PASS"
+  },
+  "captured_UTC": "2026-10-11T14:17:43.585228+00:00",
+  "cleanup_attribution": {
+    "no_final_survivor_or_orphan_claim": true,
+    "original_outer_traceback": "gateway_entry/toolkit subprocess CalledProcessError; no original helper traceback or cleanup disposition retained",
+    "original_supervisor_captured_final_PID_creation_time_census": "UNREPORTED",
+    "original_supervisor_cleanup_disposition": "UNREPORTED in retained actual JSON/output",
+    "pinned_helper_branch_authority": {
+      "assessment": "In pinned Linux helper the returned ProcessTreeCleanupError with populated command_returncode/-15 identifies the unexpected-live-descendants-at-command-exit branch. This is source-based branch attribution, not a retained final census or exact termination disposition.",
+      "original_helper": {
+        "bytes": 74274,
+        "mode": "0o444",
+        "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/verify_dakota_rcc_acceptance.py",
+        "sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659"
+      },
+      "source_lines": "ProcessTreeCleanupError definition78-100; run_owned_process347-361; _supervisor_main602-627"
+    },
+    "worker_or_helper_reader_join_failures": "UNREPORTED"
+  },
+  "config_sha256": "8c5da5be25ebfcf86f286ee9f93ddad328c68b3243b0935ec5937c93376bb948",
+  "control": {
+    "commit": "c10380a4d2ebc6f0aca63eb85c8f84a337da4962",
+    "tree": "21676c626a933c2d55761ec85ecf26fe0eef26bb"
+  },
+  "decision": "FAIL_HOLD_STOP_RCC5_AND_CANDIDATE7276_NOT_RUN",
+  "failure_census": {
+    "actual_admission_failure_code": "OUTER_PRIMARY_OR_CLEANUP_FAILED",
+    "cadence_seconds": 0.2,
+    "capacity_maximum_observed_bytes": 2529735510,
+    "cleanup": {
+      "code": "CLEANUP_FAILED",
+      "status": "FAIL"
+    },
+    "command_returncode": -15,
+    "hard_sample_admission_bytes": 2576980377,
+    "helper_exception_class": "ProcessTreeCleanupError",
+    "inner_RCC_task_returncode": 10,
+    "inspection_error": false,
+    "lower_operational_failure_not_waived_by_hard_ceiling": true,
+    "not_helper600_deadline_expiry": true,
+    "observed_below_hard_bytes": 47244867,
+    "observed_excess_over_operational_bytes": 6442224,
+    "operational_stop_bytes": 2523293286,
+    "primary": {
+      "code": "CAPACITY_THRESHOLD",
+      "status": "FAIL"
+    },
+    "root900_returncode": 1,
+    "root900_seconds": 66.02190880499984,
+    "root_inner_seconds": 65.38718710200192,
+    "sample_count": 137,
+    "sampler_alive": false,
+    "sampler_cancelled": true,
+    "scope": "sampled own available entries; intervening allocations and universal peak unobserved; no kernel quota"
+  },
+  "next_bounded_transport_proposal_only": {
+    "frozen_original_helper_change": "NONE",
+    "new_execution_authorized": "NONE",
+    "new_successor_requires_immutable_config_review_distinct_root_release_fresh_capacity": "No same-attempt retry or automatic version5/candidate7276 continuation",
+    "no_default_or_synthetic_cleanup": true,
+    "retain_on_every_primary_outcome": [
+      "available original helper exception command_returncode and cleanup_disposition without normalization",
+      "private original helper exception traceback/details, with safe fixed-class/category summary only",
+      "actual captured child PID+creation-time ownership records and observation failures",
+      "actually exposed reader/join observations; missing remains UNREPORTED"
+    ]
+  },
+  "original_actual_result": {
+    "bytes": 1696,
+    "mode": "0o600",
+    "path": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-1/OWNERFINAL-one-version-actual-result.json",
+    "sha256": "8dc25bb1b99503af386d12d32c0637aa3503617c6f97d66a83f4643969934d4c"
+  },
+  "original_evidence_and_postguard_proof": {
+    "bytes": 3881,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-compatibility-control3-one-actual-independent-review/private-original-binding-and-postactual-readback.json",
+    "sha256": "25b393794f50ad445ca88204361c1ba4413499ef403b579fab57505e45faaa80"
+  },
+  "ownership_observations": {
+    "fresh_empty_path_scan_is_not_original_supervisor_capture_or_accepted_cleanup": true,
+    "independent_current_exact_captured_pytest_observation": {
+      "captured_UTC": "2026-10-11T14:15:57.413728+00:00",
+      "captured_create_time": 1791727859.99,
+      "captured_identity_current_state": "CAPTURED_PID_ABSENT_AT_READBACK",
+      "captured_pid": 564683,
+      "captured_scope": "only exact directly owned pytest identity recorded by sampler; not a descendant census",
+      "reader_facts": "UNREPORTED; no complete worker/helper reader observation retained"
+    },
+    "no_signal_wait_reap_attempted_by_reviewer": true,
+    "root_fresh_path_attributed_observation": {
+      "observed_at": 1791728135.6793206,
+      "original": {
+        "bytes": 272,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-rcc-compatibility-control3-one-actual/fresh-postfailure-path-attributed-process-observation.private.json",
+        "sha256": "465d908e79f636d55c7419b52fdce7e0f77c38dcd9c7fc056a9009cde0cfe83a"
+      },
+      "process_count": 0,
+      "scope": "FRESH path-attributed observation, NOT original supervisor capture or accepted cleanup",
+      "unobservable_processes": 0
+    },
+    "sampler_original_signal_record": {
+      "action": "SIGNAL_PYTEST_CHILD_ONLY_NO_WAIT",
+      "create_time": 1791727859.99,
+      "pid": 564683
+    },
+    "signal_scope": "exact directly owned pytest PID+create-time recorded; signal-only no wrapper wait/reap"
+  },
+  "postactual_immutable_preservation": {
+    "complete1192_retained_native_inventory_body_mode_member_set_exact": true,
+    "complete1421_source_FS_body_modes_exact": true,
+    "independently_rehashed263_bindings_bytes_size_modes": true,
+    "proof": {
+      "bytes": 3881,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-control3-one-actual-independent-review/private-original-binding-and-postactual-readback.json",
+      "sha256": "25b393794f50ad445ca88204361c1ba4413499ef403b579fab57505e45faaa80"
+    },
+    "root_reported_guard": {
+      "bindings": 263,
+      "native_members": 1192,
+      "source_body_modes": 1421,
+      "status": "PASS"
+    },
+    "source_HEAD_tree_clean_exact": true
+  },
+  "preexecution_review": {
+    "bytes": 16749,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-compatibility-runnable-transport-independent-review/OWNERFINAL-independent-current-b614-runnable-control3-preexecution-review.json",
+    "sha256": "5994780a6fdabebe2ea9ad0f13f7ee5f3a699bb6e23ce4737010e8b0afb4868d"
+  },
+  "remaining_holds": [
+    "RCC5 and candidate7276 STOP/NOT_RUN.",
+    "Full two-case current RCC3 compatibility FAIL; successful publication subset does not admit staged execution.",
+    "Action/Core result, worker lease and both typed cleanup snapshots absent; reader qualification unavailable.",
+    "Original final process cleanup, survivor/orphan/reader state not reconstructed from fresh empty scan.",
+    "No source-equivalence, current native, provider recovery/reuse/drain, private134/135, publication or release waiver."
+  ],
+  "review_scope": "Read-only original actual evidence inspection, private publication raw-body/digest validation, postactual immutable guards, one exact captured pytest PID observation. No helper/test/gateway/binary/network/retry/signal/wait/reap/source mutation.",
+  "root_terminal": {
+    "bytes": 1483,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-rcc-compatibility-control3-one-actual/OWNERFINAL-root-one-control3-terminal.json",
+    "sha256": "72cb3d7fb9ff99386f2c9e2a8d43282ec77ac609d1eb813543d23a6596047697"
+  },
+  "schema": 1,
+  "selected_case_census": {
+    "JUnit_final": "ABSENT",
+    "action_zero_result": "UNREPORTED",
+    "collected_items": 2,
+    "full_case_counts": "UNREPORTED; not 2 PASS",
+    "internal_worker_readers": "UNAVAILABLE/HOLD",
+    "publication_case": "PASSED observed in original stdout",
+    "retirement_cleanup_snapshot": "UNAVAILABLE",
+    "staged_case": "started; terminal outcome UNREPORTED",
+    "staged_receipt": "ABSENT",
+    "worker_original_lease": "ABSENT",
+    "wrapper_cleanup_snapshot": "UNAVAILABLE"
+  },
+  "source": {
+    "clean_at_readback": true,
+    "head": "b614864ba9da55c13662894b6ef3c8515d9fdb25",
+    "tree": "6fa4f5c1e9837a0d893868255575b355b3977fae"
+  }
+}

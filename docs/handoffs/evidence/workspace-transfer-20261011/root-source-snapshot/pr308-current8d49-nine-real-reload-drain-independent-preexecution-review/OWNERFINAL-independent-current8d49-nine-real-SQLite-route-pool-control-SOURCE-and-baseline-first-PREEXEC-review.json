@@ -1,0 +1,299 @@
+{
+  "schema": 1,
+  "decision": "GO_PRIVATE_CURRENT8D49_NINE_REAL_SOURCE_CONTROLS_BASELINE_FIRST_PREEXEC_CONDITIONAL_ROOT_RELEASE_ONLY",
+  "status": "SOURCE_STRUCTURE_AND_PREEXEC_REVIEWED_NOT_RUN_NOT_ADOPTED",
+  "owner_binding": {
+    "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/OWNERFINAL-current8d49-managed-reload-drain-private-source-and-nine-real-controls-PREPARED-NOTRUN.json",
+    "bytes": 6730,
+    "sha256": "faf0d846ba7e1f240dccb1b6e77ccbba23e36379010bf9ab8abf6c4e6221211f",
+    "mode": "0o400"
+  },
+  "verified_current_owner_references": [
+    {
+      "bytes": 28217,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_actions_import.py",
+      "sha256": "57ad235e30fdd84c763f84efd7ccdd8514d620d5b5cfff05ac1051f60ceefad3"
+    },
+    {
+      "bytes": 58538,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_actions_process_pool.py",
+      "sha256": "3552bf39d0dc93f94ed3a4ab056de870ae460ed709f36d3d3a37dc043c349da8"
+    },
+    {
+      "bytes": 36123,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "sha256": "c1884571a572277beef50e359f8b5e71abf593e1ebdee4bea2e47290c8da81f2"
+    },
+    {
+      "bytes": 35232,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_server.py",
+      "sha256": "0954b062ba7931609dddfd8b1f068dbac83967691e1194b6ac250a51befa20ff"
+    },
+    {
+      "bytes": 10038,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-independent-SOURCEFULL-actual-review/OWNERFINAL-independent-current8d49-original-configured-SOURCEFULL-and-retained-ROOTpost-supplement-review.json",
+      "sha256": "073e235afffab50dee204bcaae236e77ceb8e23644db15a90a0e56d48dc8dca9"
+    },
+    {
+      "bytes": 1021,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/canonical-current-source-reload-drain-transaction-scope-proposed.patch",
+      "sha256": "8354390b30343aa9a57a976aa5244e75068f8c59fc604f074af9e18110743856"
+    },
+    {
+      "bytes": 2698,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/current8d49-original-reload-pool-import-adapter-function-AST-equality-proof.json",
+      "sha256": "ab3c574e6685d227f197017eea5e4bcbfe446fda1e9e87c43e22539de9fdcc80"
+    },
+    {
+      "bytes": 4493,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/nine-real-SQLite-pool-barrier-baseline-and-private-mutant-RED-plan-NOTRUN.json",
+      "sha256": "1c33ec727106e5a3b686571011ab05dbc7259f70bacca773acdf627dd67e0a33"
+    },
+    {
+      "bytes": 1966,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/current8d49-reload-drain-recontext-implementation-and-admission.md",
+      "sha256": "8fd57f9442106b711dc724ee46201cd0b515ce2a8126825d619220a0f263e426"
+    },
+    {
+      "bytes": 24118,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-persistent-two-path-private-recontext/frozen-current8d49-two-path-persistent-fixture-source.patch",
+      "sha256": "ec23125cfcf2ca2af3e1c7e08871bb1f198e0df1db04e9be62d61b89b755b158"
+    },
+    {
+      "bytes": 17155,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-managed-reload-drain-source-packet/OWNERFINAL-current-b614-managed-reload-and-generation-drain-three-path-source-packet.json",
+      "sha256": "5978b9cf33e096f43aaa5d0a0f6b319a68c715ca4085edc5f8ccd71eaa38c1e9"
+    },
+    {
+      "bytes": 10406,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-persistent-recontext-independent-review/OWNERFINAL-independent-private-current8d49-persistent-recontext-SOURCE_ONLY-and-logging-HOLD.json",
+      "sha256": "87ce7c08689988b43a9f563b2a5a26611397e0547694b67f2c9f01d7306cc1af"
+    },
+    {
+      "bytes": 14786,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/test_current_managed_reload_sqlite_pool_barriers.py",
+      "sha256": "c148bd528f8306e638054df91dfbf915022eaf30d3e123ff845adbeae6b209eb"
+    },
+    {
+      "bytes": 99477,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/prospective-current-test_rcc_runtime_adapter-with-nine-servicefree-controls.py",
+      "sha256": "5a87636917a2d555c2e0aa5757336ef0db4c047e2f4777d63442a05c240700f5"
+    }
+  ],
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "current_source_count": 1440,
+  "original_adapter_test": {
+    "bytes": 84689,
+    "sha256": "1f1156908b523012c40fe95a2063764dbb11696a927e0330dc8d8b28c5de6ee7",
+    "AST_statements": 82,
+    "whole_byte_and_AST_prefix_preserved": true,
+    "new_definition_collisions": []
+  },
+  "prepared_controls": {
+    "standalone": {
+      "bytes": 14786,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/test_current_managed_reload_sqlite_pool_barriers.py",
+      "sha256": "c148bd528f8306e638054df91dfbf915022eaf30d3e123ff845adbeae6b209eb"
+    },
+    "prospective_append": {
+      "bytes": 99477,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/prospective-current-test_rcc_runtime_adapter-with-nine-servicefree-controls.py",
+      "sha256": "5a87636917a2d555c2e0aa5757336ef0db4c047e2f4777d63442a05c240700f5"
+    },
+    "compact_patch": {
+      "path": "/workspace/engineering/private-handoff-current1935-source-closure-PREPARATION/proposed-current8d49-adapter-nine-controls-append-only.patch",
+      "bytes": 15348,
+      "sha256": "7a8eb3af1d96b87f99025f43167e146af162f4b3cfde0596679d6beedb46a7a3",
+      "mode": "0o400"
+    },
+    "nine_named_tests": [
+      "test_actual_commit_failure_restores_original_generation_token",
+      "test_candidate_preparation_precedes_real_sqlite_writer",
+      "test_candidate_warmup_precedes_generation_switch",
+      "test_failed_warmup_restores_original_idle_and_catalog",
+      "test_publication_follows_actual_sqlite_commit",
+      "test_rejected_candidate_cleanup_preserves_last_good",
+      "test_repaired_candidate_publishes_without_admitting_failed_generation",
+      "test_running_old_handle_drains_only_after_new_publication",
+      "test_staged_pool_keeps_original_routes_until_commit"
+    ],
+    "eight_current_original_AST_proofs": [
+      {
+        "path": "action_server/src/actions/server/_actions_import.py",
+        "function": "import_action_packages",
+        "AST_sha256": "7267d2371a524853524f057297eb1a529e2a54451eaa8bf878f8c8e018a17c5f"
+      },
+      {
+        "path": "action_server/src/actions/server/_actions_process_pool.py",
+        "function": "on_reload",
+        "AST_sha256": "3afb9ab75662370db2b752281a675479d1b7bc4adc4a370809c4ae7a1322919b"
+      },
+      {
+        "path": "action_server/src/actions/server/_actions_process_pool.py",
+        "function": "obtain_process_for_action",
+        "AST_sha256": "b6ae6a5d1ef2532cfcf21aca8162cadcc8dcc28c8356d5145c29c38fcbac275d"
+      },
+      {
+        "path": "action_server/src/actions/server/_rcc_runtime_adapter.py",
+        "function": "environment_spec_fingerprint",
+        "AST_sha256": "3991f191ef9b08733b9d2b26e4b3db1ac03d2dfc8f0a8e8242041aba4b1764e2"
+      },
+      {
+        "path": "action_server/src/actions/server/_rcc_runtime_adapter.py",
+        "function": "classify_environment_change",
+        "AST_sha256": "e335e5ad0681f55c4b9c21eac329913f1bb75318ad1299868967143db7342ce7"
+      },
+      {
+        "path": "action_server/src/actions/server/_rcc_runtime_adapter.py",
+        "function": "_run_json",
+        "AST_sha256": "b96ec3611f520333593dadf4d1bf4df766726b2e249fbad458c5235030d8811d"
+      },
+      {
+        "path": "action_server/src/actions/server/_rcc_runtime_adapter.py",
+        "function": "prepare_runtime",
+        "AST_sha256": "bd2b32b186c004683b7231863aab3231678b1ff8c088f422d83b9602b45cd723"
+      },
+      {
+        "path": "action_server/src/actions/server/_server.py",
+        "function": "_reload_action_generation",
+        "AST_sha256": "26c02cf8c5c01bd62e0a31473623e1cebfeaac451d908c4c2fb6eace7578eb93"
+      }
+    ],
+    "static_one_mutant_seam_target_counts": {
+      "prepare_under_writer": 1,
+      "publish_before_commit": 1,
+      "publish_staged_routes": 1,
+      "omit_idle_restore": 1,
+      "omit_restore_token": 1,
+      "keep_old_reusable": 1,
+      "early_generation": 1,
+      "omit_candidate_cleanup": 1,
+      "omit_repaired_publish": 1
+    },
+    "cases": [
+      {
+        "expected_RED": "EXACT_ONE_SELECTED_TEST_MUST_FAIL_ITS_ORDERING_OR_LAST_GOOD_ASSERTION",
+        "mutant": "prepare_under_writer",
+        "mutation": "one declared AST statement/seam in actual current function, monkeypatch restored",
+        "native": "NOT_RUN",
+        "original_current_source_baseline": "MUST_PASS_FIRST",
+        "test": "test_candidate_preparation_precedes_real_sqlite_writer"
+      },
+      {
+        "expected_RED": "EXACT_ONE_SELECTED_TEST_MUST_FAIL_ITS_ORDERING_OR_LAST_GOOD_ASSERTION",
+        "mutant": "publish_before_commit",
+        "mutation": "one declared AST statement/seam in actual current function, monkeypatch restored",
+        "native": "NOT_RUN",
+        "original_current_source_baseline": "MUST_PASS_FIRST",
+        "test": "test_publication_follows_actual_sqlite_commit"
+      },
+      {
+        "expected_RED": "EXACT_ONE_SELECTED_TEST_MUST_FAIL_ITS_ORDERING_OR_LAST_GOOD_ASSERTION",
+        "mutant": "publish_staged_routes",
+        "mutation": "one declared AST statement/seam in actual current function, monkeypatch restored",
+        "native": "NOT_RUN",
+        "original_current_source_baseline": "MUST_PASS_FIRST",
+        "test": "test_staged_pool_keeps_original_routes_until_commit"
+      },
+      {
+        "expected_RED": "EXACT_ONE_SELECTED_TEST_MUST_FAIL_ITS_ORDERING_OR_LAST_GOOD_ASSERTION",
+        "mutant": "omit_idle_restore",
+        "mutation": "one declared AST statement/seam in actual current function, monkeypatch restored",
+        "native": "NOT_RUN",
+        "original_current_source_baseline": "MUST_PASS_FIRST",
+        "test": "test_failed_warmup_restores_original_idle_and_catalog"
+      },
+      {
+        "expected_RED": "EXACT_ONE_SELECTED_TEST_MUST_FAIL_ITS_ORDERING_OR_LAST_GOOD_ASSERTION",
+        "mutant": "omit_restore_token",
+        "mutation": "one declared AST statement/seam in actual current function, monkeypatch restored",
+        "native": "NOT_RUN",
+        "original_current_source_baseline": "MUST_PASS_FIRST",
+        "test": "test_actual_commit_failure_restores_original_generation_token"
+      },
+      {
+        "expected_RED": "EXACT_ONE_SELECTED_TEST_MUST_FAIL_ITS_ORDERING_OR_LAST_GOOD_ASSERTION",
+        "mutant": "keep_old_reusable",
+        "mutation": "one declared AST statement/seam in actual current function, monkeypatch restored",
+        "native": "NOT_RUN",
+        "original_current_source_baseline": "MUST_PASS_FIRST",
+        "test": "test_running_old_handle_drains_only_after_new_publication"
+      },
+      {
+        "expected_RED": "EXACT_ONE_SELECTED_TEST_MUST_FAIL_ITS_ORDERING_OR_LAST_GOOD_ASSERTION",
+        "mutant": "early_generation",
+        "mutation": "one declared AST statement/seam in actual current function, monkeypatch restored",
+        "native": "NOT_RUN",
+        "original_current_source_baseline": "MUST_PASS_FIRST",
+        "test": "test_candidate_warmup_precedes_generation_switch"
+      },
+      {
+        "expected_RED": "EXACT_ONE_SELECTED_TEST_MUST_FAIL_ITS_ORDERING_OR_LAST_GOOD_ASSERTION",
+        "mutant": "omit_candidate_cleanup",
+        "mutation": "one declared AST statement/seam in actual current function, monkeypatch restored",
+        "native": "NOT_RUN",
+        "original_current_source_baseline": "MUST_PASS_FIRST",
+        "test": "test_rejected_candidate_cleanup_preserves_last_good"
+      },
+      {
+        "expected_RED": "EXACT_ONE_SELECTED_TEST_MUST_FAIL_ITS_ORDERING_OR_LAST_GOOD_ASSERTION",
+        "mutant": "omit_repaired_publish",
+        "mutation": "one declared AST statement/seam in actual current function, monkeypatch restored",
+        "native": "NOT_RUN",
+        "original_current_source_baseline": "MUST_PASS_FIRST",
+        "test": "test_repaired_candidate_publishes_without_admitting_failed_generation"
+      }
+    ],
+    "collection_baseline_RED_GREEN": "NOT_RUN; static counts are not execution evidence"
+  },
+  "reviewed_meaningful_boundaries": [
+    "Real SQLite import preparation before writer; deferred publication after durable commit; staged routes/catalog not early-public",
+    "Actual warmup and commit rejection restoring old idle/catalog/generation token and original exception; failed candidate-owned source cleanup before repaired-source admission",
+    "Old can_reuse invalidation/nonretirement while finite owned synthetic thread active; warmup before token switch"
+  ],
+  "controlled_seams_and_limits": "Collection, warmup, detached retirement and OldHandle are explicit fakes; realpoolmin0. Synthetic in-flight thread does not use real obtain_process_for_action/run_action/lease completion, so no natural retirement/reaping/provider proof. Yield-owned db.connect plus commitproxy finally restores/rolls back; monkeypatch restores getdb/app/functions. Actual cleanup outcomes are unexecuted.",
+  "historical5978_scope": "Original owner bytes exact; original method digests match current; its stale b614 FS/native/FULL counts are not qualified current rows.",
+  "ROOT_command_contract": {
+    "path": "/workspace/engineering/pr308-current8d49-nine-real-reload-drain-independent-preexecution-review/frozen-nine-real-source-control-baseline-first-ROOT-command-contract-NOTRUN.json",
+    "bytes": 6839,
+    "sha256": "5f1874357496fe9c890c1acfec43fa114d51c658bd23ea23578fc3c910c1f287",
+    "mode": "0o400"
+  },
+  "metadata_precision": {
+    "original_first_hash_inspector_assertion": "FAILED before any files/result written or tests; dispatched full faf0 hash missed a zero",
+    "correct_authority": "Exact6730/faf0d846ba7e1f240dccb1b6e77ccbba23e36379010bf9ab8abf6c4e6221211f matches previously independently accepted1935 immutable copied owner and current original. Named review corrects literal only; no source/failure relabel or test rerun."
+  },
+  "go_scope": "Only distinct ROOT-authorized servicefree baseline-first selectedRED/GREEN on immutable privatefile. No product adoption, persistent/native/cache/provider/whole134/private/release GO; independent realresults needed afterward.",
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "exact_nine_line_existing_proposal_accepted_reuse": {
+      "bytes": 1021,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/canonical-current-source-reload-drain-transaction-scope-proposed.patch",
+      "sha256": "8354390b30343aa9a57a976aa5244e75068f8c59fc604f074af9e18110743856"
+    },
+    "durable_learning": "Preparation before writer differs from generation staging/durable publication; restore last-good pool/routes/source and distinguish synthetic oldworker drain witness from actual Action/lease/cleanup evidence.",
+    "evidence": "Actual import/server/pool/Database source ordering and eight exact method ASTs; nine one-seam static mutation targets; prospective complete82-statement prefix preserved; testsNOTRUN.",
+    "stale_or_ambiguous_guidance_removed": "No oldb614/native/fullcarry, collection errors as RED, or syntheticthread as measured Runtime lease; candidate repair does not admit rejected generation.",
+    "remaining_uncertainty": "All nine baseline/RED/GREEN unexecuted; current native3/5/7276/lifecycle/provider recovery/private01f/publication HOLD. Existingec231 persistent SOURCE_ONLY/loggingLOSS remains separately held."
+  },
+  "upstream_disposition": "none",
+  "review_operations": "READ_ONLY_HASH_JSON_AST_LOCAL_GIT; NO_PRODUCT_PRIVATE_IMPORT_EXEC_TESTS_NATIVE_GATES_SOURCE_INDEX_REF_MUTATIONS"
+}

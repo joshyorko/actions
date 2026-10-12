@@ -1,0 +1,70 @@
+diff --git a/devutils/src/devutils/fixtures.py b/devutils/src/devutils/fixtures.py
+index bc6b5ee6..aeb4b743 100644
+--- a/devutils/src/devutils/fixtures.py
++++ b/devutils/src/devutils/fixtures.py
+@@ -193,7 +193,8 @@ class StrRegression:
+ 
+         ``basename`` and ``fullpath`` are exclusive.
+         """
+-        from pytest_regressions.common import perform_regression_check  # type: ignore
++        from pytest_regressions.common import \
++            perform_regression_check  # type: ignore
+ 
+         __tracebackhide__ = True
+ 
+diff --git a/devutils/tests/test_http_helper_tests_workflow.py b/devutils/tests/test_http_helper_tests_workflow.py
+index 487e20bb..dcbd9c41 100644
+--- a/devutils/tests/test_http_helper_tests_workflow.py
++++ b/devutils/tests/test_http_helper_tests_workflow.py
+@@ -2,7 +2,6 @@ from pathlib import Path
+ 
+ import yaml
+ 
+-
+ ROOT = Path(__file__).resolve().parents[2]
+ 
+ 
+diff --git a/devutils/tests/test_invoke_utils.py b/devutils/tests/test_invoke_utils.py
+index fddc1f1d..29ff4014 100644
+--- a/devutils/tests/test_invoke_utils.py
++++ b/devutils/tests/test_invoke_utils.py
+@@ -2,16 +2,12 @@ from pathlib import Path
+ from types import SimpleNamespace
+ from unittest.mock import Mock
+ 
+-import tomlkit
+ import pytest
++import tomlkit
+ from invoke import Context
+ 
+-from devutils.invoke_utils import (
+-    REPOSITORY_URL,
+-    build_common_tasks,
+-    collect_deps_pyprojects,
+-    get_tag,
+-)
++from devutils.invoke_utils import (REPOSITORY_URL, build_common_tasks,
++                                   collect_deps_pyprojects, get_tag)
+ 
+ 
+ def test_common_quality_tasks_use_current_ruff_subcommands(tmp_path: Path, monkeypatch):
+diff --git a/devutils/tests/test_runtime_conformance.py b/devutils/tests/test_runtime_conformance.py
+index f4ac8f41..ccfe514a 100644
+--- a/devutils/tests/test_runtime_conformance.py
++++ b/devutils/tests/test_runtime_conformance.py
+@@ -1,11 +1,7 @@
+-from devutils.runtime_conformance import (
+-    DeploymentRevision,
+-    WorkerProfile,
+-    admit,
+-    assert_execution_subject,
+-    subject_fingerprint,
+-)
+-from devutils.runtime_conformance import RuntimePlan
++from devutils.runtime_conformance import (DeploymentRevision, RuntimePlan,
++                                          WorkerProfile, admit,
++                                          assert_execution_subject,
++                                          subject_fingerprint)
+ 
+ 
+ def test_exact_subject_is_order_independent_and_detects_changes():

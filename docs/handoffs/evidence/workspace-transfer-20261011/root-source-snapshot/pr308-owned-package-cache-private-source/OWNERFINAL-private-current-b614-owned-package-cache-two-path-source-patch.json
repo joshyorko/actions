@@ -1,0 +1,442 @@
+{
+  "capacity_diagnosis": {
+    "counterfactual_single_copy_logical_bytes": 1820974344,
+    "duplicate_repodata_bytes": 954086630,
+    "duplicate_repodata_pair_bodies": 4,
+    "limitations": [
+      "Current retained-state measurement is not original sampled peak.",
+      "Reduction is prospective, not a guarantee of future peak or RCC symlink support.",
+      "Sampler threshold/hard budget/cleanup admission unchanged.",
+      "No RCC version incompatibility conclusion."
+    ],
+    "provider_roots_separate_and_small": true,
+    "retained_current_entries": 49131,
+    "retained_current_logical_bytes": 2775060974
+  },
+  "disposition": "GO_PRIVATE_PATCH_FOR_INDEPENDENT_SOURCE_REVIEW_ONLY",
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "evidence": [
+      "exact original publication inherited actions-home and staged fresh managed-home source",
+      "four original equal distinct-inode repodata pairs",
+      "34 permanent actual helper guard/mount forwarding controls"
+    ],
+    "exact_delta": "11-line addition adjacent to staged worker lease evidence; share only admitted same-version pkgs, retain per-case roots and cold first/warm second boundary, no peak/compatibility inference",
+    "remaining_uncertainty": "RCC symlink compatibility and actual capacity/cleanup behavior require a separately reviewed successor source/full/transport and once-only actual.",
+    "stale_or_ambiguous_guidance_removed": "Clarifies package-cache warmth separately from per-case Holotree/provider isolation and whole cold-install claims; no earlier receipt relabeled."
+  },
+  "operator_interface": {
+    "cold_scope": "first publication package cache empty; staged package cache warm from that same publication",
+    "config_keys": [
+      "schema",
+      "runtime_source_sha",
+      "runtime_source_tree",
+      "label",
+      "binary_sha256",
+      "state_root",
+      "package_cache_root",
+      "state_marker_sha256"
+    ],
+    "config_schema": "exact integer 1, duplicate/unknown keys rejected",
+    "cross_version": "source/binary/label/root prefix/receipt all bound before mount",
+    "environment_key": "ACTIONS_RUNTIME_RCC_TEST_PACKAGE_CACHE_CONFIG",
+    "future_runner_config": "NOT_WIRED; distinct reviewed config/transport successor and original publication proof required",
+    "marker": "seven config identity fields excluding marker SHA; fixed 0600 file beneath version-owned 0700 root; exact digest before mount",
+    "shared_only": "once-owned actions-home/pkgs; no holotree/artifacts/provider sharing",
+    "source_identity": "40-character Git candidate SHA/tree, not runner digest"
+  },
+  "original_failed_actual": {
+    "candidate7276": "STOP_NOT_RUN",
+    "cleanup": "FAIL ProcessTreeCleanupError",
+    "current_pid_absence": "OBSERVATION_ONLY_NOT_HISTORICAL_CLEANUP_PROOF",
+    "hard_admission_bytes": 2576980377,
+    "label": "control3",
+    "observed_terminated_pytest_pid": 564683,
+    "operational_stop_bytes": 2523293286,
+    "original_log_receipts_state": "RETAINED_UNMODIFIED",
+    "other_helper_descendant_identities": "UNAVAILABLE_IN_V5",
+    "primary": "CAPACITY_THRESHOLD",
+    "publication_case": "PASS",
+    "released5": "STOP_NOT_RUN",
+    "sampled_max_bytes": 2529735510,
+    "staged_case": "STARTED_NO_TERMINAL"
+  },
+  "references": [
+    {
+      "bytes": 3895,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/GREEN-junit.xml",
+      "sha256": "c6329ab7a50f1b0051465dea6d3e8386a033e3f153086eb4384092adbb73aa29"
+    },
+    {
+      "bytes": 69,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/GREEN-managed-preflight.private.log",
+      "sha256": "9e7476b86b94c13ab1e9762548883c60e950ede7c9c4a74e9281613e05d88f48"
+    },
+    {
+      "bytes": 96,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/GREEN-terminal.json",
+      "sha256": "a377af9d0c8aeea269e173a4d34673b7c74a88c0e48e21ef066f4befb84c9db6"
+    },
+    {
+      "bytes": 1642,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/GREEN.private.log",
+      "sha256": "20673f844b6d699a970edddd3595c4b59cc2c277e8d923e6d08dfb5bb053858c"
+    },
+    {
+      "bytes": 69,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/RED-managed-preflight.private.log",
+      "sha256": "9e7476b86b94c13ab1e9762548883c60e950ede7c9c4a74e9281613e05d88f48"
+    },
+    {
+      "bytes": 96,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/RED-terminal.json",
+      "sha256": "56b0fa26a27e48941251ebd6b0bd1545cd111c355f387504fbb1fcbc272ceeac"
+    },
+    {
+      "bytes": 36893,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/RED-unchecked-test_source_staging_rcc_consumer.py",
+      "sha256": "f8126602ec698e3d079a745aade0d801dd8c80be8c0422e5bcbe1586da064ed8"
+    },
+    {
+      "bytes": 145123,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/RED-v2-junit.xml",
+      "sha256": "20db0683d6d1d0c13333dabb67d2bee659aeb5fb60ec219ff3035686949faf95"
+    },
+    {
+      "bytes": 69,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/RED-v2-managed-preflight.private.log",
+      "sha256": "9e7476b86b94c13ab1e9762548883c60e950ede7c9c4a74e9281613e05d88f48"
+    },
+    {
+      "bytes": 96,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/RED-v2-terminal.json",
+      "sha256": "56b0fa26a27e48941251ebd6b0bd1545cd111c355f387504fbb1fcbc272ceeac"
+    },
+    {
+      "bytes": 144451,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/RED-v2.private.log",
+      "sha256": "8d97d3f1adda961c8080487cab50f9eeaee66ce08742871664c43ec8f2e76235"
+    },
+    {
+      "bytes": 1359,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/RED.private.log",
+      "sha256": "29c0c5f44d72af8b6f1c9e79ecad7a60f1f4710ca6d4953cf8d00b7569b3d263"
+    },
+    {
+      "bytes": 43237,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/before-configured-static-test_source_staging_rcc_consumer.py",
+      "sha256": "57bd927b281609fb7ace7e5f4abb1b84b64872b9dd3a8b610014360cd127314f"
+    },
+    {
+      "bytes": 45542,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/before-marker-scalar-guard-test_source_staging_rcc_consumer.py",
+      "sha256": "a24348f65636d2af5155b2e134e9607a531e028351feb5bdd106e924f0e9bfb9"
+    },
+    {
+      "bytes": 47314,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/before-mount-spy-test_source_staging_rcc_consumer.py",
+      "sha256": "ae09bc13089ac33c44949854828330eecd1549053039cbe11d43ad4d54e8d0be"
+    },
+    {
+      "bytes": 3025,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/configured-private-static.private.log",
+      "sha256": "06353f12760073c6aedb22ae41ed1bac7a68771db159375ebcbb1e201f7d1bb8"
+    },
+    {
+      "bytes": 685,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/default-fixture-and-original-source-preservation-proof.json",
+      "sha256": "69b3bc2a3e56c2b31466a86c4b858f63f8f65bf5f2514a0b82dd9b4a5b1fbb92"
+    },
+    {
+      "bytes": 3895,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/final-private-GREEN-junit.xml",
+      "sha256": "f6c3e59572be75b7802d0052c1d731b41a18b09609d4b68701899a7d79e1c8ae"
+    },
+    {
+      "bytes": 3031,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/final-v2-configured-private-static-and-controls.private.log",
+      "sha256": "a117681a1db3ceac66a0b25ec5cdad6967a643b65bb3738cd82786a7ac61f285"
+    },
+    {
+      "bytes": 69,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/final-v2-managed-preflight.private.log",
+      "sha256": "9e7476b86b94c13ab1e9762548883c60e950ede7c9c4a74e9281613e05d88f48"
+    },
+    {
+      "bytes": 4204,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/final-v2-private-GREEN-junit.xml",
+      "sha256": "b5116a8fdedaf1b3e7b1b02edf95860544265209eee647f763883ec8c9182a99"
+    },
+    {
+      "bytes": 102,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/final-v2-static-terminal.json",
+      "sha256": "dd8a0147aaaf34f07ecf9c163b5bc7de711f1ccd84ad1334f1dea2f465df2c99"
+    },
+    {
+      "bytes": 3031,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/final-v3-configured-private-static-and-controls.private.log",
+      "sha256": "328697bce349314527f6a411a91915b011fd470cf972e89295d299597886bde4"
+    },
+    {
+      "bytes": 69,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/final-v3-managed-preflight.private.log",
+      "sha256": "9e7476b86b94c13ab1e9762548883c60e950ede7c9c4a74e9281613e05d88f48"
+    },
+    {
+      "bytes": 4204,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/final-v3-private-GREEN-junit.xml",
+      "sha256": "9bc758e9325ef835c7333a463cfdbd4fc6d32a3cb3f210a8ca8a3cf6043c60f0"
+    },
+    {
+      "bytes": 43,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/final-v3-static-terminal.json",
+      "sha256": "b11366dd2a04a0dc89e5503d1ca714a7e1f0facd9cb1e997b701217d328085de"
+    },
+    {
+      "bytes": 13249,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/freeze_private_owned_cache_packet.py",
+      "sha256": "54fa84531f08b526a6ccc610877f0e13b35720183f721c424a8f872849e77e25"
+    },
+    {
+      "bytes": 7159,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/marker-scalar-RED-junit.xml",
+      "sha256": "683b12ad8b3fe53241f54138aa4c8173832c8869485c7d92e55b5cc77770fd34"
+    },
+    {
+      "bytes": 99,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/marker-scalar-RED-terminal.json",
+      "sha256": "95b71517728cd77717d7bb6e058c020eae86dac08c8d99ef67244666c50dec25"
+    },
+    {
+      "bytes": 6002,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/marker-scalar-RED.private.log",
+      "sha256": "802c71e919af99d33b9fdbac0f5eb7960774e0fb8930062e8130aaf05144f20d"
+    },
+    {
+      "bytes": 46957,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/marker-scalar-original-RED-test_source_staging_rcc_consumer.py",
+      "sha256": "d687b9f6aeb3056fc8afc78555c8b0a3fcd8134b355a88a4fe2c379696c4597e"
+    },
+    {
+      "bytes": 256123,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/original-repository-operations.md",
+      "sha256": "7735777067553f6e4b58570dc179a4e8915614fc4743dd023e8b11a30557bc31"
+    },
+    {
+      "bytes": 28406,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/original-test_source_staging_rcc_consumer.py",
+      "sha256": "f697aaf73c4e89bddd21b2c48aa92fe22e315f83614525996d51ff2271fe2436"
+    },
+    {
+      "bytes": 6468,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/owned-package-cache-helper.py",
+      "sha256": "ca5379516e892e3d44c03cdc1afe0772368de696a568fc423c4cd02107335762"
+    },
+    {
+      "bytes": 22781,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/owned-package-cache-two-path.patch",
+      "sha256": "aa2b0b1d008a717915764a4ddc97b8a60386b10afe63824ef23b4b487e2ece21"
+    },
+    {
+      "bytes": 7984,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/permanent-owned-package-cache-controls.py",
+      "sha256": "42b3f860203773b878c89d8b990a4bc3394e266c18be31dd068e3cc17e3867de"
+    },
+    {
+      "bytes": 350711,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/private-original-b614-complete-tracked-body-mode-inventory.json",
+      "sha256": "3182dafdb95f5ad013cea730c4973619017fa749151d07dfe19e770c5699628a"
+    },
+    {
+      "bytes": 256888,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/repository-operations.md",
+      "sha256": "8dfb07000a288491bfe36e06a9bc99945ddc9d0ddbbcc158607ffcaa662251ac"
+    },
+    {
+      "bytes": 69,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/static-managed-preflight.private.log",
+      "sha256": "9e7476b86b94c13ab1e9762548883c60e950ede7c9c4a74e9281613e05d88f48"
+    },
+    {
+      "bytes": 102,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/static-terminal.json",
+      "sha256": "dd8a0147aaaf34f07ecf9c163b5bc7de711f1ccd84ad1334f1dea2f465df2c99"
+    },
+    {
+      "bytes": 48314,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/test_source_staging_rcc_consumer.py",
+      "sha256": "af2f79ccd395c088076381f6681860cf8160f8fd0d9169e122634fe684c37c35"
+    },
+    {
+      "bytes": 1483,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-rcc-compatibility-control3-one-actual/OWNERFINAL-root-one-control3-terminal.json",
+      "sha256": "72cb3d7fb9ff99386f2c9e2a8d43282ec77ac609d1eb813543d23a6596047697"
+    },
+    {
+      "bytes": 1696,
+      "mode": "0o600",
+      "path": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-1/OWNERFINAL-one-version-actual-result.json",
+      "sha256": "8dc25bb1b99503af386d12d32c0637aa3503617c6f97d66a83f4643969934d4c"
+    },
+    {
+      "bytes": 14600953,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-control3-owned-capacity-fixture-diagnosis/private-current-retained-state-inode-and-cache-pair-inventory.json",
+      "sha256": "68d9171528bfa54ff69fcf4c1ea1ea1b2627d0dedabcd5538a2f353e5152260d"
+    },
+    {
+      "bytes": 25279,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-rcc-compatibility-source/OWNERFINAL-current-a0d-approved-RCC-compatibility-SOURCE-LIGHT.json",
+      "sha256": "336cfca277d8e3b08035af8057e77af580fc7a5cbeb54226ae2140abedb79bba"
+    },
+    {
+      "bytes": 13279,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-compatibility-current-sourcefull-independent-actual-review/OWNERFINAL-independent-current-b614-configured-SOURCEFULL-review.json",
+      "sha256": "6087f9a712c1707b0f335090ebd97ae98c0f61945ad98e5bba06d10005e9846a"
+    },
+    {
+      "bytes": 26884,
+      "mode": "0o600",
+      "path": "/dev/shm/actions-rcc-compatibility-originals-20261011/OWNERFINAL-three-original-RCC-acquisition-data-qualification.json",
+      "sha256": "0da97bfc63a5e47de1c900e8d37ec55261d8b7ef6f68069a74167afc344c72ad"
+    },
+    {
+      "bytes": 9344,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-original-acquisition-independent-review/OWNERFINAL-independent-three-original-RCC-acquisition-data-review.json",
+      "sha256": "393a5282605f54f04cd2f93d31355da24631fcb7fb36eaf76ac26cb701f695e3"
+    },
+    {
+      "bytes": 2369,
+      "mode": "0o644",
+      "path": "/workspace/engineering/root-two-exact-approved-test-only-binary-copies.json",
+      "sha256": "2b81e077eab373ed1574371608b0112e20c5d2ec96327f40b0c1d0d2a6a39c8a"
+    },
+    {
+      "bytes": 24225,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/OWNERFINAL-private-current-b614-persistent-fixture-two-path-source-patch.json",
+      "sha256": "adeb06df026599e9a8d6e71976f6130de71ef1f3851a8a7c0b895d8b7e6bb419"
+    },
+    {
+      "bytes": 74274,
+      "mode": "0o444",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/verify_dakota_rcc_acceptance.py",
+      "sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659"
+    }
+  ],
+  "remaining_holds": [
+    "Independent private-patch source review.",
+    "Root application/composition with persistent patch on announced successor source.",
+    "New exact source FULL and reviewed immutable operator/transport successor.",
+    "No original native producer qualification upgrade.",
+    "No new 5/6 functional, internal-reader, provider recovery/reload/drain/private/full134/135/release qualification."
+  ],
+  "schema": 1,
+  "scope": {
+    "actual_rcc_execution": "NOT_RUN",
+    "applied_to_checkout": false,
+    "default_behavior": "whole original fixture AST preserved with explicit cache config absent",
+    "original_b614_full": "HISTORICAL_UNCHANGED_NOT_NEW_PATCH_FULL",
+    "patch_paths": [
+      "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "production_toolkit_pin_helper_native_browser": "UNCHANGED"
+  },
+  "source": {
+    "branch_ref_unchanged": true,
+    "checkout_index_before_and_after": {
+      "bytes": 186252,
+      "mode": "0o600",
+      "path": "/workspace/actions/.git/worktrees/pr308/index",
+      "sha256": "36525bcffc1af1a8cf640c4eaa8b14d6200bbb0c40af2a703731d9fe250d17a4"
+    },
+    "commit": "b614864ba9da55c13662894b6ef3c8515d9fdb25",
+    "tracked_leaves": 1421,
+    "tree": "6fa4f5c1e9837a0d893868255575b355b3977fae"
+  },
+  "tests": {
+    "collection": "34 permanent new unmarked tests collected by Linux nonintegration suite after application; own synthetic /dev/shm fixture skips these new POSIX controls outside Linux, no original native selector or marks altered",
+    "configured_static": {
+      "Isort": "PASS",
+      "Mypy_private_fixture_file": "PASS",
+      "Ruff": "PASS",
+      "format": "PASS"
+    },
+    "final_permanent_controls_GREEN": {
+      "DID_NOT_RAISE": 0,
+      "FileExistsError": 0,
+      "cases": 34,
+      "error": 0,
+      "fail": 0,
+      "pass": 34,
+      "skip": 0
+    },
+    "first_marker_scalar_guard_RED": {
+      "DID_NOT_RAISE": 2,
+      "FileExistsError": 0,
+      "cases": 34,
+      "error": 0,
+      "fail": 2,
+      "pass": 32,
+      "skip": 0
+    },
+    "original_first_launch": "SETUP_FAIL_BEFORE_PYTEST_PRESERVED",
+    "spy": "same original Path.symlink_to forwarding once for valid stage; zero attempts for each poisoned guard",
+    "unchecked_guard_sensitivity_RED": {
+      "DID_NOT_RAISE": 29,
+      "FileExistsError": 1,
+      "cases": 31,
+      "error": 0,
+      "fail": 30,
+      "pass": 1,
+      "skip": 0
+    }
+  },
+  "upstream_disposition": "none"
+}

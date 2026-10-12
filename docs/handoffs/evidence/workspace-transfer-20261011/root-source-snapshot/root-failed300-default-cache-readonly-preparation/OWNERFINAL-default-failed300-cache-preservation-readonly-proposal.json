@@ -1,0 +1,101 @@
+{
+  "schema": "root-failed300-default-cache-preservation-readonly-design/v1",
+  "status": "OWNER_PREPARATIONFINAL_ROOT_EXACT_MUTATION_RELEASE_REQUIRED_NO_RETRY_AUTHORITY",
+  "bounded_proposal": {
+    "path": "/workspace/engineering/root-failed300-default-cache-readonly-preparation/bounded-whole-default-cache-preservation-proposal-v2.json",
+    "bytes": 5169,
+    "sha256": "8371a8691748c3af7a986f4ad59033569087a85a1f65f2850a79f176ae96a65e"
+  },
+  "stable_complete_inspection": {
+    "path": "/workspace/engineering/root-failed300-default-cache-readonly-preparation/safe-whole-default-cache-inspection-proof.json",
+    "bytes": 3144,
+    "sha256": "ac1d1a2efa54415e8c0f1abf3e5ac0bb5d73b8c5c7cf439b0aa346b5fba04179"
+  },
+  "private_complete_source_inventory": {
+    "path": "/tmp/root-failed300-default-cache-readonly-preparation-20261011/complete-source-inventory-and-observed-handles.json",
+    "bytes": 329237,
+    "sha256": "60943726f5266defefd89dec0dcd7c604009251cf1e80dd5d211a11969e239b6"
+  },
+  "original_failed300_terminal": {
+    "path": "/workspace/engineering/pr300-current74-owner-full-contract-adoption/current74-one-reviewed-configured-full-terminal.json",
+    "bytes": 464,
+    "sha256": "27fcafcea7a3c1942717517ab97812b8586762bfa6cbeed701f7e12c549688fc"
+  },
+  "original_failed300_raw_log": {
+    "path": "/workspace/engineering/pr300-current74-owner-full-contract-adoption/current74-one-reviewed-configured-full.log",
+    "bytes": 80268,
+    "sha256": "38029425f98c3416b3dd8ad82a90f9ca96ba2e2f1818e9024286854a61bdf684"
+  },
+  "root_post_failure_source_and_refs": {
+    "path": "/workspace/engineering/pr300-current74-owner-full-contract-adoption/root-current74-postfull-complete-source-and-reference-readback.json",
+    "bytes": 519,
+    "sha256": "f0ce571d524f4ab266c590e97d87fa787ba7cefee78bf2c0e9b9ceccc70a4272"
+  },
+  "classification": "Root launcher omitted managed activation; observed default-home setup and ENOSPC before any pytest session or worker marker. This is retained toolchain preparation failure, not application or configured pytest failure.",
+  "scope": {
+    "original_whole_cache_entries": 416,
+    "file_count": 362,
+    "directory_count": 38,
+    "symlink_count": 16,
+    "logical_regular_bytes": 1132159923,
+    "hardlink_classes": 0,
+    "external_hardlink_candidates": 0,
+    "observed_live_cwd_FD_matches": 0,
+    "proc_permission_unavailable": {
+      "PermissionError": 257,
+      "FileNotFoundError": 254
+    },
+    "history_ownership_or_new_only_baseline": "UNKNOWN; preserve whole directory",
+    "existing_devshm_free": 7126839296,
+    "copy_budget": 1245375915,
+    "workspace_free_at_inventory": 208097280,
+    "proposed_root_path_is_unique_absent": true
+  },
+  "mutations_or_execution": "Owned evidence files only; no cache copy/symlink/removal, mount/provision/install/gate/retry, source or prepared-env changes",
+  "remaining_HOLDs": [
+    "Exact root mutation recipe release and complete physical+logical source/destination verification before switching any path",
+    "No global live-process or historical ownership claim from limited cwd/FD census",
+    "Future300 gate requires corrected same-launcher managed activation/preexecution review and distinct root ONE authorization; original failure remains FAIL",
+    "Existing308 compatibility source lease waits capacity/root concrete scope; private134 absent, production pins unchanged, fullprivate/release remain HOLD"
+  ],
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md; exact7content-line managed RCC home preflight paragraph proposed beside existing Cloud gateway guidance",
+    "Exact delta": {
+      "path": "/workspace/engineering/root-failed300-default-cache-readonly-preparation/canonical-exact-launcher-managed-RCC-home-preflight-proposed.patch",
+      "bytes": 1053,
+      "sha256": "811befd4b06df317ddfaee02dca3d5418568840183ecfb0ddc9e7d087fb89a6e"
+    },
+    "Durable learning captured": "Pinned executable identity and outer RCC home/cache selection require separate exact-launcher guards; absent activation can initiate default-home setup before test commands",
+    "Evidence": "Original80,268B log380294/RCC4/18.849s; default-home presence and ENOSPC literals/no pytest session markers, unchanged1423 post-readback; stable full416-entry cache inspection",
+    "Stale or ambiguous guidance removed": "Clarifies dispatcher independence from shell activation does not establish managed outer RCC home reuse; no toolchain setup failure transferred to test PASS or application regression",
+    "Remaining uncertainty": "No pre-failure default-cache baseline/new-only ownership; limited process handle census; proposed relocation not yet executed or qualified; future gate/fullprivate/release remain separate"
+  },
+  "Upstream disposition": "none",
+  "immutable_evidence_bindings": [
+    {
+      "path": "/workspace/engineering/root-failed300-default-cache-readonly-preparation/bounded-whole-default-cache-preservation-proposal-v2.json",
+      "bytes": 5169,
+      "sha256": "8371a8691748c3af7a986f4ad59033569087a85a1f65f2850a79f176ae96a65e"
+    },
+    {
+      "path": "/workspace/engineering/root-failed300-default-cache-readonly-preparation/bounded-whole-default-cache-preservation-proposal.json",
+      "bytes": 3299,
+      "sha256": "60c4bba50b11e645aaa6496e13a76deca19763d30e9bf0dcb35f5badcda8a12c"
+    },
+    {
+      "path": "/workspace/engineering/root-failed300-default-cache-readonly-preparation/canonical-exact-launcher-managed-RCC-home-preflight-proposed.patch",
+      "bytes": 1053,
+      "sha256": "811befd4b06df317ddfaee02dca3d5418568840183ecfb0ddc9e7d087fb89a6e"
+    },
+    {
+      "path": "/workspace/engineering/root-failed300-default-cache-readonly-preparation/inspect-and-freeze.py",
+      "bytes": 10140,
+      "sha256": "b5eec63fe18573529e4f2f52e8b8f8c9b05323635cacef9250a731b3777c94ad"
+    },
+    {
+      "path": "/workspace/engineering/root-failed300-default-cache-readonly-preparation/safe-whole-default-cache-inspection-proof.json",
+      "bytes": 3144,
+      "sha256": "ac1d1a2efa54415e8c0f1abf3e5ac0bb5d73b8c5c7cf439b0aa346b5fba04179"
+    }
+  ]
+}

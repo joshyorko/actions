@@ -1,0 +1,269 @@
+{
+  "16_core_archive_functions_unchanged": "Controller loads entire original63476 bytes; no code edit. Only _protected_guard augmented with stricter readonly input checks.",
+  "all25_snapshot_bindings_retained": 25,
+  "code_imports_tests_archives_compression_copy_removal_native": "NOT_RUN",
+  "controller_AST_parsed_without_import": true,
+  "current307_HEAD": "9760d5ec44876558c4941c4c3190abc8d92d14a1",
+  "current30_measured": [
+    {
+      "bytes": 5470,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/action_server/build.py",
+      "sha256": "75c249c111bbf3d81f027a252e7dba54771037f02b402832c0554e119cb4eb12"
+    },
+    {
+      "bytes": 391219,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/action_server/poetry.lock",
+      "sha256": "5d6acb65ba220211d1da020c78c51a5ea89465f2bbedc99aaf72319b862914e5"
+    },
+    {
+      "bytes": 4020,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/action_server/pyproject.toml",
+      "sha256": "be4011d3915e8838249546c70ae30420dadfb0d08c19b59970d8980332c7573f"
+    },
+    {
+      "bytes": 26152,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/action_server/tasks.py",
+      "sha256": "3fa7419c346fe9494bdbe89a7f245cf72287832bef36ee73ea4bd0039ef477d6"
+    },
+    {
+      "bytes": 219,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/action_server/tests/action_server_tests/test_create_conda_from_package_yaml/create_wheel/pyproject.toml",
+      "sha256": "4d581bfc7b6d64979c3aef6411198548a17713e0c8439c07d0cbb1a91fae3851"
+    },
+    {
+      "bytes": 115756,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/actions-http-helper/poetry.lock",
+      "sha256": "8e717ea54b91b17e638bb633026372fd415487a5e817768b450c0e473cd84d13"
+    },
+    {
+      "bytes": 881,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/actions-http-helper/pyproject.toml",
+      "sha256": "1888af6e0e2ce2280080920338245122563f69ce677796a5dbddc4c6bb07d28d"
+    },
+    {
+      "bytes": 423,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/actions-http-helper/tasks.py",
+      "sha256": "31523822c03af429ad7d7fab8df66a45f87b4f58876f8928df9f7c79f375992a"
+    },
+    {
+      "bytes": 179235,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/actions/poetry.lock",
+      "sha256": "b90ab7b6e3dd3a68a3d23bfee456adf6d22446f845e1bd5e2a334ec573035f15"
+    },
+    {
+      "bytes": 1219,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/actions/pyproject.toml",
+      "sha256": "9de923a2bf29d73d486ebf67982e177c0ab41d8a35266f7dd1f2d75b1ec43ec3"
+    },
+    {
+      "bytes": 418,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/actions/tasks.py",
+      "sha256": "33a572fcadc6848ebab78f01fcae880a40bd51011cb80a69149467a897807cc9"
+    },
+    {
+      "bytes": 1865,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/actions/tests/actions_core_tests/test_core_log_integration/pyproject.toml",
+      "sha256": "f2119f900206f7a6bcbedd34b7cfb1c83bd996db13fdf81710fa509ed3cc72cf"
+    },
+    {
+      "bytes": 56386,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/build_common/poetry.lock",
+      "sha256": "5dfaebdb2e73b95e022e9064f4258fefb66a4a0a2a6c3d8829cd9d2838e07160"
+    },
+    {
+      "bytes": 88066,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/common/poetry.lock",
+      "sha256": "55fb76128d984be26ba5af1dc791a7b010298f70908d969b80fd7f268e84019e"
+    },
+    {
+      "bytes": 331,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/developer/setup.yaml",
+      "sha256": "8674d6b55439fae5ac284fa92d7db8016e3589fafbf2d34e066e29345efa016a"
+    },
+    {
+      "bytes": 355,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/developer/setup_windows_amd64.yaml",
+      "sha256": "86a36910ad271616626e019e02e6c7b21fdb32eaa1e1717c2a654673504a8001"
+    },
+    {
+      "bytes": 8893,
+      "mode": "0o755",
+      "path": "/workspace/engineering/pr307/developer/toolkit.py",
+      "sha256": "e1a3f96b57c31be2a0db5cdd3d63ce9ac243a9e8e29dff5ce6e07fd897fb605f"
+    },
+    {
+      "bytes": 945,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/developer/toolkit.yaml",
+      "sha256": "0ed7beaa93dd0ba763d1618382a3de8ce307cc5cf613759d06081d735fcd7e68"
+    },
+    {
+      "bytes": 1512,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/devutils/bin/develop.bat",
+      "sha256": "daff2011d235a81f7d1556bf30bf62016aecb2498084e67bfccad8531642c589"
+    },
+    {
+      "bytes": 2992,
+      "mode": "0o700",
+      "path": "/workspace/engineering/pr307/devutils/bin/develop.sh",
+      "sha256": "484c7164f54e383b038dcb25ff39979458b6f6a3f10f20c81f50001c3c2d16c2"
+    },
+    {
+      "bytes": 91377,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/devutils/poetry.lock",
+      "sha256": "22bf11dae2a1ed46de5024da774dde4fe778c206d720929fba9244819f3b0b6e"
+    },
+    {
+      "bytes": 1092,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/devutils/pyproject.toml",
+      "sha256": "0fcd651ad99a6214718e69c734fcf58445de8d5e4d85117c6413d7c890306bff"
+    },
+    {
+      "bytes": 25741,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/devutils/src/devutils/invoke_utils.py",
+      "sha256": "7892303d075b2755b490b507c444d9aebc2f0d3089c8812df40d7f0c0fc195b5"
+    },
+    {
+      "bytes": 14308,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/devutils/src/devutils/rcc.py",
+      "sha256": "c897a607292025e3ae05a79fb002302f4ac7d5eed6033b8101dd9d5e550cc97c"
+    },
+    {
+      "bytes": 133625,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/mcp/poetry.lock",
+      "sha256": "9b84391e939e90e56422e1b9373862fbc1827b667ebba87126a6330a74069543"
+    },
+    {
+      "bytes": 3547,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/tasks.py",
+      "sha256": "b9d8fc44392003c3eac7503c2c8cff237f8896c95d5eccb97f6e75cf55eb4b1c"
+    },
+    {
+      "bytes": 132,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/templates/advanced/pyproject.toml",
+      "sha256": "ef1312a9eaf6323b143d9339defb3158ea19b67b22a7cce0ecf766ba6ed5223d"
+    },
+    {
+      "bytes": 121960,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/work-items/poetry.lock",
+      "sha256": "dcb776a04f9fb30fb93c6667cc42fe9733208e07ec23e7d54dff39650ae11bf4"
+    },
+    {
+      "bytes": 2336,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/work-items/pyproject.toml",
+      "sha256": "a09a91d33e5f91cdec649a96d72b91e4fc1e4ecf97d3654e9b243f0ac8ecc10e"
+    },
+    {
+      "bytes": 450,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/work-items/tasks.py",
+      "sha256": "e74ad7f083159457c53da828ca69b2ea6ae1a2cde465e6d2b8019bda079f1642"
+    }
+  ],
+  "driver_original_SHA_exact": {
+    "bytes": 37609,
+    "mode": "0o444",
+    "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_first_five_accepted_obsolete_environments_SOURCE_PREPARED_v4.py",
+    "sha256": "63476ecaa50ba863afed8602dcad82c22c9349df022d0e9f0dde8d81d60e0bb7"
+  },
+  "guard_ten_source_modules": {
+    "actual_transport_v8": {
+      "bytes": 27889,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/actual_transport_v8.py",
+      "sha256": "33dda17140ef749e22f086cc91b92ed8c3230fddfde8a4a369769e2183f695a1"
+    },
+    "fixture_records_v8": {
+      "bytes": 11489,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/fixture_records_v8.py",
+      "sha256": "7a63ee62184ea268dead0c98460c6943ebc297816e9a4df180b10ed5e04b9064"
+    },
+    "historical_binding_current8d49_v8": {
+      "bytes": 6327,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/historical_binding_current8d49_v8.py",
+      "sha256": "6f64d55837cc4ff14ee4eec013314ba512c09ecdc56f79192c1360ef46473b30"
+    },
+    "historical_binding_v1": {
+      "bytes": 1072,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/historical_binding_v1.py",
+      "sha256": "10eac48f020d4c1030bb0be26b3b283d896712b7e7b5095e08045b8192808215"
+    },
+    "historical_failed_receipt_archive_v1": {
+      "bytes": 2645,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/historical_failed_receipt_archive_v1.py",
+      "sha256": "a69291189f47812c41ce43d9d68a81a839780ce28a0a9dfc00c487c9acb26d69"
+    },
+    "owned_cache_policy_v8": {
+      "bytes": 6228,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/owned_cache_policy_v8.py",
+      "sha256": "4ccac4e3bd2c1e91352ef4e647968b4ca61f8691e1fc0f41e72a128a2942c205"
+    },
+    "owned_monitor_v1": {
+      "bytes": 4632,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/owned_monitor_v1.py",
+      "sha256": "834a7fe402e34b170f414df5dfe79762c0b49ed311a6222ba2f7bca5d87020a5"
+    },
+    "readonly_current_input_guard_v9": {
+      "bytes": 4690,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/readonly_current_input_guard_v9.py",
+      "sha256": "480be06317562b7e3a5c98a5d794bb5d2a33e7fa6186fe707823ecb1cc583626"
+    },
+    "runner_contracts_v3": {
+      "bytes": 12959,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/runner_contracts_v3.py",
+      "sha256": "cbae3bb074d3995153ea5e6b694e7f9e61c047c6aa511b682959a63fedf7b726"
+    },
+    "v9_entry_bootstrap": {
+      "bytes": 1575,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/v9_entry_bootstrap.py",
+      "sha256": "d3957c2e216731abf596897fbf0838809129a571743510692f2509228e2c7288"
+    }
+  },
+  "original61_included": true,
+  "physical_rows_rehashed_body_size_mode": 193,
+  "protected20": 20,
+  "remaining_HOLD": [
+    "ROOT inactive approval absent",
+    "Actual PURE18 result/independent absent",
+    "Concrete controller SOURCE and input-hook review not yet accepted",
+    "Root final current-manifest adoption and finite900 envelope review required",
+    "Separate ONE operation release absent"
+  ],
+  "selected5": 5,
+  "tracked_clean": true
+}

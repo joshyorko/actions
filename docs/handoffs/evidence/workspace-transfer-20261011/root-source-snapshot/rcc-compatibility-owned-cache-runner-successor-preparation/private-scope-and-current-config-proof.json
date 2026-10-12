@@ -1,0 +1,39 @@
+{
+  "conditional_config_current_source_rows": 1423,
+  "current_source_full": "NOT_RUN_NOT_INHERITED_FROM_B614",
+  "exact_dependency_copies": {
+    "actual_transport_v6.py": "931b77f3dfc67643dee279f0a5538432d52f3fefaa0ddfe2e0f32e755d189d01",
+    "fixture_records_v2.py": "ec6281e47ab7c2896cea27fbecb1f54c2106d65aa965db06b17999b2e21fd916",
+    "managed_metadata_only_preflight.py": "1cb4cbcc01ea3a1d4f0519150047e840717b586081774c0a938bf68a3840ae35",
+    "owned_monitor_v1.py": "834a7fe402e34b170f414df5dfe79762c0b49ed311a6222ba2f7bca5d87020a5",
+    "runner_contracts_v3.py": "cbae3bb074d3995153ea5e6b694e7f9e61c047c6aa511b682959a63fedf7b726"
+  },
+  "native_or_gateway_run": false,
+  "original_main_AST_exact_except_four_cache_wiring_additions": [
+    "need('ACTIONS_RUNTIME_RCC_TEST_PACKAGE_CACHE_CONFIG' not in os.environ, 'INHERITED_OPERATOR_CACHE_CONFIG')",
+    "cache_plan(config, args.label, SOURCE, TREE, BINARIES)",
+    "if root.exists():\n    validate_created_cache(config, args.label, SOURCE, TREE, BINARIES)",
+    "child['ACTIONS_RUNTIME_RCC_TEST_PACKAGE_CACHE_CONFIG'] = create_cache_marker(config, args.label, SOURCE, TREE, BINARIES)"
+  ],
+  "original_read_bound_exact_except_fixed_historical_alias": true,
+  "original_release_body_exact_after_name_normalization": true,
+  "original_transport_functions_classes_exact": [
+    "selected_binary",
+    "content_sha",
+    "private_write",
+    "FiniteSampler",
+    "original_helper_facts",
+    "make_safe_result",
+    "require_transport_binding",
+    "execute_one",
+    "owned_bytes",
+    "load_helper"
+  ],
+  "original_two_fixture_functions_AST_exact_except_guarded_cache_helper": [
+    "test_published_artifact_details_preserves_one_rcc_identity_pair",
+    "test_staged_package_executes_in_managed_rcc_runtime"
+  ],
+  "source": "e4ff080375a8422bb656e52d218f198521dda078",
+  "status": "READONLY_SCOPE_PROOF_PASS",
+  "tree": "973ff38f49a17a896e4d90f829a72e2ea0ea15e8"
+}

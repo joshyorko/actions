@@ -1,0 +1,116 @@
+{
+  "schema": 1,
+  "status": "HOLD_ORIGINAL_NATIVE_ATTEMPT_PRE_MAIN_CONTROLLER_IMPORT_BOUNDARY_FAILURE",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "config_sha256": "a209cc117db4d17a7383ba519abdff064211960aa0b8a88ddf32569fef322f9f",
+  "release_sha256": "20000301eb20be5d2768fce04535298f8a5e1fbba271829be67d8ba1510d78d6",
+  "original_outer_returncode": 1,
+  "original_elapsed_seconds": 52.88459704800334,
+  "original_launcher_returncodes": {
+    "post_returncode": 0,
+    "preflight_returncode": 0,
+    "primary_returncode": 10
+  },
+  "fixed_failure_category": "DIRECT_PACKAGE_PYTHON_IMPORT_MISSING_RUNNER_CONTRACTS_V3",
+  "source_supported_boundary": "Gateway parent inserts two fixed directories; gateway final Poetry call invokes transport directly in independent package Python; parent sys.path is process-local and does not propagate. Transport imports owned_cache_policy, which cannot import runner_contracts_v3.",
+  "original_native_root_absent": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-owned-pkgs-3",
+  "original_native_result_Junit_publication_staged_lease": "ABSENT_NOT_CREATED; not claimed cleanup-pass or zero process census",
+  "native_compatibility_failure": "NOT_ESTABLISHED; transport main and artifact/action/lease cases never started",
+  "newer5_7276": "NOTRUN_UNQUALIFIED",
+  "before_post_input_guards": "Original launcher pre0/post0; no rewriting originals or rerun",
+  "original_bindings": [
+    {
+      "path": "/workspace/engineering/root-current8d49-control3-V8-original-outer-owned/OWNERFINAL-root-one-original-current8d49-control3-V8-outer-terminal.json",
+      "bytes": 2309,
+      "sha256": "ddc3f1b1fc0adba210ee984f8aa65d8901c879956f9326e5163fbfc4106e5deb",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/root-rcc-owned-cache-one-current8d49-control3-v8-1/launcher-terminal.json",
+      "bytes": 84,
+      "sha256": "8ed0692250a3ad1480f4e3e15c519be76ef8586593579e025c8dc58ff6b29ea6",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-rcc-owned-cache-one-current8d49-control3-v8-1/post.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-rcc-owned-cache-one-current8d49-control3-v8-1/post.stdout",
+      "bytes": 69,
+      "sha256": "0c1f9f5f73680a42a7de5d496fe9ee95e084773e8a37d6d04f37d540575b21bb",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-rcc-owned-cache-one-current8d49-control3-v8-1/preflight.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-rcc-owned-cache-one-current8d49-control3-v8-1/preflight.stdout",
+      "bytes": 69,
+      "sha256": "0c1f9f5f73680a42a7de5d496fe9ee95e084773e8a37d6d04f37d540575b21bb",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-rcc-owned-cache-one-current8d49-control3-v8-1/primary-returncode.json",
+      "bytes": 19,
+      "sha256": "62685fdf06e3035754d480b16440cfd927a047fd264c641018c08a788b3618e6",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-rcc-owned-cache-one-current8d49-control3-v8-1/primary.stderr",
+      "bytes": 6297,
+      "sha256": "4425305a8ed63b6fd7dba468b74184e1e55bd2eaeac7a9ce19f9103eaa8bda5a",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-rcc-owned-cache-one-current8d49-control3-v8-1/primary.stdout",
+      "bytes": 2612,
+      "sha256": "5d75ba0cc975cdfcbb53895739c2d60dbb0fadbfbdd7ff4ccafe1bd0a1ea0caf",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/FROZEN-current8d49-control3-qualified-V8-config-v2.json",
+      "bytes": 760693,
+      "sha256": "a209cc117db4d17a7383ba519abdff064211960aa0b8a88ddf32569fef322f9f",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-rcc-current8d49-control3-V8-one-release.json",
+      "bytes": 1081,
+      "sha256": "20000301eb20be5d2768fce04535298f8a5e1fbba271829be67d8ba1510d78d6",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/gateway_entry_v8.py",
+      "bytes": 2988,
+      "sha256": "ad14539953b2b4b5039d729507d3117e021b1cf00aa767df7a049997c00784b8",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/actual_transport_v8.py",
+      "bytes": 27889,
+      "sha256": "33dda17140ef749e22f086cc91b92ed8c3230fddfde8a4a369769e2183f695a1",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/owned_cache_policy_v8.py",
+      "bytes": 6228,
+      "sha256": "4ccac4e3bd2c1e91352ef4e647968b4ca61f8691e1fc0f41e72a128a2942c205",
+      "mode": "0o444"
+    }
+  ],
+  "documentation_improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md; propose process-local import boundary lesson with V9 source successor",
+    "Durable learning captured": "Parent sys.path bootstrap does not configure independently invoked package Python; test actual final child import boundary before a native launch",
+    "Evidence": "Retained original primary.stderr and exact gateway/transport source",
+    "Stale ambiguity removed": "Original approved source/config tests did not prove direct Poetry entry importability; no RCC/platform failure inference",
+    "Remaining uncertainty": "No real RCC compatibility/action/lease/reader/persistent acceptance from this attempt"
+  },
+  "upstream_disposition": "none"
+}

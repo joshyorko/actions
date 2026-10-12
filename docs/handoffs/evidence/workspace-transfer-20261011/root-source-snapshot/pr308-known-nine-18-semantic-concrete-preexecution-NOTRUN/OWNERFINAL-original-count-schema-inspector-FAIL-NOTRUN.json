@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "status": "FAILED_METADATA_INSPECTOR_BEFORE_CONFIG_WRITE_NO_TESTS",
+  "constructor": {
+    "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/prepare_known_nine_18_config.py",
+    "bytes": 4138,
+    "sha256": "041265f1830c6b0e9105f1a8647e39ff7b98dbbdfd64f2977706f357e8da68f6",
+    "mode": "0o600"
+  },
+  "failure": "Literal whole counts dict comparison omitted retained unique_cases9 and warnings_observed_original_stdout262 metadata. Realacceptedbaseline is9PASS0F0E0SKIP; no actual outcome correction.",
+  "preserved_baseline_counts": {
+    "unique_cases": 9,
+    "passed": 9,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "warnings_observed_original_stdout": 262
+  },
+  "tests": "NOT_RUN",
+  "config": "NOT_CREATED"
+}

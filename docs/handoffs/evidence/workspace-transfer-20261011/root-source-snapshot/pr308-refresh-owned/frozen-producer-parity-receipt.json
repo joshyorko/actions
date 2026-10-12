@@ -1,0 +1,24 @@
+{
+  "head": "483e3e735c268b08acba1fd3930a9a34e0deaa91",
+  "tree": "9b69d78117e0e5cade3f59fcacc6db56a747b61f",
+  "checks": [
+    {
+      "inventory": {
+        "path": "/workspace/engineering/pr308/docs/program/evidence/runtime-frozen-current-source-20261011/producer-input-inventory.json",
+        "size": 66239,
+        "sha256": "544566c0d61547c1f9cd5e4c30b770b8a5d0d122760ad78e5596351788276d76"
+      },
+      "entries": 268,
+      "all_blobs_modes_sha256_match": true
+    },
+    {
+      "inventory": {
+        "path": "/workspace/engineering/pr308/docs/program/evidence/runtime-frozen-current-source-20261011/selected-test-inventory.json",
+        "size": 1333,
+        "sha256": "8a87d39c2f197234da0de0535d6fd2e249d29b0a20943f1f31da47248970ade6"
+      },
+      "entries": 5,
+      "all_blobs_modes_sha256_match": true
+    }
+  ]
+}

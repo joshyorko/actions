@@ -1,0 +1,25 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -96,7 +96,9 @@
+ module ownership, and source revision/tree/blob IDs; the same built view is
+ then exercised in a real browser against Runtime. This proves the candidate
+ source path only. The production template's exact published-Core 1.0.3 gate
+-remains separate and blocked until that dependency is published and verified.
++requires its own retained installed-worker and browser receipt after the
++published dependency prerequisite is verified. Producer proof alone does not
++qualify that consumer gate.
+ Pin `PYTHONPATH` to the absolute Runtime source path for this source-mode gate
+ and probe the child interpreter from the extracted project's working directory;
+ a relative path can silently select another checkout's editable Runtime. The
+@@ -1147,6 +1149,11 @@
+ and its public metadata decorators in a clean installed CLI consumer. That
+ producer proof clears the published dependency prerequisite; template Runtime
+ consumer acceptance remains separate.
++
++Preserve an original receipt's parent list, including an empty list. Authenticate
++the observed checkout SHA's ordered parents separately from the commit object;
++an empty receipt list does not establish a parentless commit or replace that
++readback, including for shallow CI checkouts.
+ 
+ Name the executed Canvas template acceptance path. The candidate-source gate
+ uses an acceptance manifest with Core 1.0.2 and then installs its own candidate

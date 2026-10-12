@@ -1,0 +1,21 @@
+{
+  "adapter": "UNCHANGED",
+  "all47existingcachecontrols": "wholefileoutsidehelper exact",
+  "changes": "exacttwo expectedPathstr expressions + sevenUID/GID comparisons reusing one callable-feature-checked snapshot; no existingtestdefinition changed otherwise",
+  "no_fake_Windows_UID": "missing/noncallablefeatures reject; no synthesized ownership",
+  "originals": [
+    {
+      "bytes": 84689,
+      "path": "/workspace/engineering/pr308/action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
+      "sha256": "1f1156908b523012c40fe95a2063764dbb11696a927e0330dc8d8b28c5de6ee7"
+    },
+    {
+      "bytes": 52201,
+      "path": "/workspace/engineering/pr308/action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+      "sha256": "a30f9e585b8dc422dcf853ac27a2da2c11f84065e58ba501b0a4c32d4f472728"
+    }
+  ],
+  "product_branch": "UNCHANGED",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "test_timeouts": "900general/10isolated unchanged"
+}

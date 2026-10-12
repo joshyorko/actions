@@ -1,0 +1,135 @@
+{
+  "schema": "capacity-batch20-owner-preexecution-proposal-v1",
+  "decision": "GO_PREPARED_SCRIPT_SCOPE_ONLY_NO_EXECUTION_BY_PREPARER_ROOT_ONE_RELEASE_REQUIRED",
+  "script": {
+    "path": "/tmp/actions-capacity-recovery-batch20.py",
+    "bytes": 5264,
+    "sha256": "9ce2004405202512c6a6d1f0ca3b0c55bb201a18f548d490b7db82765458c6cc"
+  },
+  "algorithm_parent": {
+    "path": "/tmp/actions-capacity-recovery-batch19.py",
+    "bytes": 5244,
+    "sha256": "48fd7e4c79e55b80ceda0b63c1d1da87feeb368cefee265d5c12bad6ad940840"
+  },
+  "all16_nonconfiguration_AST_exact_parent": true,
+  "only_configuration_changes": [
+    "DEST",
+    "STAGE",
+    "NAMES"
+  ],
+  "names_exact_allowlist": [
+    "6bb7d57b503d838a",
+    "9710d7e7a03133a6"
+  ],
+  "destination": "/dev/shm/actions-completed-scratch-recovery-batch20",
+  "stage_unused_new": "/tmp/actions-completed-scratch-recovery-batch20-stage",
+  "destination_stage_absent_at_preparation": true,
+  "candidate_metadata": [
+    {
+      "namespace_allowlist": "6bb7d57b503d838a",
+      "marker_True": true,
+      "marker_sha256": "3cbc87c7681f34db4617feaa2c8801931bc5e42d8d0f560e756dd4cd92885f18",
+      "observed_member_types": {
+        "file": 765,
+        "directory": 978,
+        "symlink": 10,
+        "fifo": 0
+      },
+      "logical_regular_file_bytes": 38567601,
+      "full_inventory_content_baseline": "DEFERRED_TO_ROOT_ONE_EXECUTION_NOT_MEASURED_BY_PREPARATION"
+    },
+    {
+      "namespace_allowlist": "9710d7e7a03133a6",
+      "marker_True": true,
+      "marker_sha256": "3cbc87c7681f34db4617feaa2c8801931bc5e42d8d0f560e756dd4cd92885f18",
+      "observed_member_types": {
+        "file": 759,
+        "directory": 979,
+        "symlink": 10,
+        "fifo": 0
+      },
+      "logical_regular_file_bytes": 38566629,
+      "full_inventory_content_baseline": "DEFERRED_TO_ROOT_ONE_EXECUTION_NOT_MEASURED_BY_PREPARATION"
+    }
+  ],
+  "fresh_accessible_handle_observation": {
+    "processes": 272,
+    "links_read": 31,
+    "unobserved_permission_transient_links_or_FD_lists": 537,
+    "candidate_live_cwd_FD_observed": 0
+  },
+  "private_readonly_proof": {
+    "path": "/workspace/engineering/capacity-recovery-batch20-proposal/private-readonly-preparation-proof.json",
+    "bytes": 114969,
+    "sha256": "898ee4e52c68572e45ce3fde0e5633f56d5c133afcf0d46e650e1a84697b779b"
+  },
+  "retained_prior": {
+    "archives_size_SHA_mode0600_exact": 40,
+    "private_indices_size_SHA_exact": 19,
+    "whole_relocated_default_cache_normalized_recorded_metadata_body_hardlink_partition_exact": 416,
+    "original_native_full_member_set_bytes_modes_links_exact": 1192,
+    "helper_snapshots_mode0444_exact": true,
+    "cleanup499_source1422_LIGHT67_original31_proposal35_refs_exact": true,
+    "V5runner09cdc_original_actual16_and_preexecution153_refs_exact": true,
+    "failed563d": "EXISTS only; never allowlisted/read as preserved historical content/deleted"
+  },
+  "root_current_full_terminal": {
+    "path": "/workspace/engineering/captured-child-cleanup-configured-full-once-owned/one-configured-full-terminal.json",
+    "bytes": 765,
+    "sha256": "361dea9b6ad22f375755d262b9f3641155cdda12a6277a2e82d70c130f96245d"
+  },
+  "execution_prerequisites": [
+    "ROOT distinct ONE archive/removal release after terminal prerequisite",
+    "Fresh completion marker and accessible cwd/FD rejection repeated by exact script before inventory and after verification before removal",
+    "No other/current active scratch or failed563d names",
+    "Existing destination mount only; no infrastructure, installer, source, caches, binaries or other receipts removed"
+  ],
+  "planned_effects": "Full private complete index and0600 gzip archives; resolve every file/hardlink content and size plus modes UID GID links; re-inventory entire expanded namespace; reject observed handles; remove only exact expanded namespaces AFTER successful archive verification and index write",
+  "future_gate_authority": "HOLD; two small namespaces alone insufficient for next source/native gateway threshold. Fresh required capacity/serialization/rootrelease remain separate.",
+  "capacity_observations": {
+    "workspace_available_bytes": 357367808,
+    "existing_shm_available_bytes": 5596692480,
+    "not_future_clearance": true
+  },
+  "no_recovery_archive_removal_gateway_test_native_download_execution_performed": true,
+  "limits": [
+    "No universal process quiescence; permission/transient/maps/external observer gaps retained",
+    "No retrospective historical byte baseline or full-log namespace source-origin inference",
+    "No ACL/xattr/inode/rootmetadata or exact TAR ns-mtime equivalence",
+    "Full before-removal content inventory not produced by metadata-only proposal; deferred to root actual exact script"
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; verified exact existing7d070 preservation paragraph reused unchanged",
+    "Exact_delta_or_reuse": {
+      "path": "/workspace/engineering/capacity-recovery-independent-review/canonical-completed-scratch-preservation-proposed.patch",
+      "bytes": 1068,
+      "sha256": "7d07065b5bb7742698919997c8c6621cc20d00494741eb5365251ffb09f2d208"
+    },
+    "Durable_learning_captured": "Complete immutable scratch archive/index evidence precedes only named completed expanded-namespace removal; handle observations and archive preservation do not supply new gate or source-origin authority.",
+    "Evidence": [
+      {
+        "path": "/tmp/actions-capacity-recovery-batch20.py",
+        "bytes": 5264,
+        "sha256": "9ce2004405202512c6a6d1f0ca3b0c55bb201a18f548d490b7db82765458c6cc"
+      },
+      {
+        "path": "/tmp/actions-capacity-recovery-batch19.py",
+        "bytes": 5244,
+        "sha256": "48fd7e4c79e55b80ceda0b63c1d1da87feeb368cefee265d5c12bad6ad940840"
+      },
+      {
+        "path": "/workspace/engineering/capacity-recovery-batch20-proposal/private-readonly-preparation-proof.json",
+        "bytes": 114969,
+        "sha256": "898ee4e52c68572e45ce3fde0e5633f56d5c133afcf0d46e650e1a84697b779b"
+      }
+    ],
+    "Stale_or_ambiguous_guidance_removed": "No completed-marker/mtime or capacity observation promoted to a causal source link, universal quiescence or future gate clearance; no extra namespace filtered/deleted.",
+    "Remaining_uncertainty": "Actual archival/removal NOT_RUN; future live handles/changed bytes require script rechecks; independent actual review required afterward; source origin not measured."
+  },
+  "Upstream_disposition": "none",
+  "constructor": {
+    "path": "/workspace/engineering/capacity-recovery-batch20-proposal/prepare-readonly-proof.py",
+    "bytes": 10038,
+    "sha256": "44a64b679faff1ba64a9143bd2795f0d9ba986ef90c2867d1a42df656052525a"
+  }
+}

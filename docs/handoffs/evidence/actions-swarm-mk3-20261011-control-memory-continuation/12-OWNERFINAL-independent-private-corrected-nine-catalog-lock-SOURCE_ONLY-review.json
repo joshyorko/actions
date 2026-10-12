@@ -1,0 +1,67 @@
+{
+  "decision": "GO_PRIVATE_CORRECTED_NINE_CATALOG_COPY_AND_HELD_LOCK_SOURCE_ONLY",
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "durable_learning_captured": "Rollback controls should allow only implementation-permitted outer shallow copy while freezing nested identities/content; callback under nonreentrant pool lock must avoid its lock-taking getter",
+    "evidence": "Pinned server copy(value)/helper restoration, on_reload with self._lock/warmup and generation getter with same lock, original two identity failures and seventh unfinished callback, exact private delta proof",
+    "exact_delta_binding": {
+      "bytes": 1219,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/canonical-reload-control-copy-and-lock-boundaries-proposed.patch",
+      "sha256": "5584b00182d7504808065195f3373f80eb450fa5370811d434d66ad0c5b9a7d5"
+    },
+    "remaining_uncertainty": "Corrected baseline, snapshot sensitivity and all mutant rejection outcomes unexecuted; no native functionality qualified",
+    "stale_or_ambiguous_guidance_removed": "Outer catalog identity and nested identity/content are distinct; fixed private oracle does not upgrade failed original baseline"
+  },
+  "limits": [
+    "No9PASS claim: corrected baseline/snapshot controls/mutants NOT_RUN",
+    "Original baseline timeout124/outer1 and missingfinalJUnit remainFAIL; partial4P2F is not final suite census",
+    "Raw-generation read is permitted only inside source-proven held-lock warmup callback; public post-return assertions remain",
+    "Snapshot checks catalog fixture structural/nested identity/content scope; no general arbitrary-object serialization or concurrency guarantee",
+    "No product checkout changes, adoption, native reload/drain/provider/source-runtime/whole134-139/release acceptance",
+    "Original eight pool methods and accepted persistent fixture source remain unchanged; native baseline3->5->7276 gate remains separate"
+  ],
+  "original_failure_binding": {
+    "bytes": 16829,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-nine-real-original-baseline-independent-diagnosis/OWNERFINAL-independent-original-nine-baseline-failure-and-private-control-boundary.json",
+    "sha256": "6288fb4a6d296770a1c930ae73b0854e103378417f250a00a553c7c1bf3a25e2"
+  },
+  "owner_binding": {
+    "bytes": 11323,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/OWNERFINAL-final-private-corrected-nine-source-constructor-and-original-failure-preservation-NOTRUN.json",
+    "sha256": "8641582defe1dc2aa9cf114928c0778d8faf91841b0a274f8cc3dad0b0d87500"
+  },
+  "prospective_append_binding": {
+    "bytes": 101120,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/prospective-current-test_rcc_runtime_adapter-with-corrected-nine-controls-v2.py",
+    "sha256": "0bca477b22c114a6fbbc904a19e6645794949f4eec6e181e5cb9e34510c864d9"
+  },
+  "required_next_scope": "Named final-source-bound once-2 execution contract independently reviewed, original120TERM10 baseline/450outer budgets unchanged. Genuine9PASS0F0E0SKIP finalJUnit before separate snapshot sensitivity and nine meaningful mutant RED controls; no new root authorization inferred here",
+  "reviewer_read_only": true,
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_owner_binding": {
+    "bytes": 12096,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/OWNERFINAL-private-corrected-nine-catalog-identity-and-held-lock-source-successor-NOTRUN.json",
+    "sha256": "7f5bf5a7c300ab98d6d4521d750470aafab2151cc522700ec687cfdc0234275d"
+  },
+  "source_proof": {
+    "bytes": 17392,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-private-corrected-nine-source-independent-review/independent-private-corrected-nine-copy-lock-source-proof.json",
+    "sha256": "771115378d7d966b5325d35e5243511ae66e45a7bb8fd9d4d2233747ee3b2f47"
+  },
+  "standalone_binding": {
+    "bytes": 16429,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py",
+    "sha256": "a577d21615877bc19a88ca141e5c8ac7c9779120abf7f86b7a6ec6d2367d5da2"
+  },
+  "status": "SOURCE_ONLY_ALL_ACTUAL_BASELINE_MUTANTS_ADOPTION_HOLD",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none"
+}

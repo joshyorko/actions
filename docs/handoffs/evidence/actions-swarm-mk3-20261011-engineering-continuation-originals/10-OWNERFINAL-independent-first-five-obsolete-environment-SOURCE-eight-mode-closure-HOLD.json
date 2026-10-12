@@ -1,0 +1,120 @@
+{
+  "blocking_finding": {
+    "behavior": "The driver would reject every currently declared current_config_bindings row at its strict regular-file boundary before archival. This is static source/data closure evidence, not a claimed actual guard failure.",
+    "code": "CURRENT_CONFIG_DEPENDENCY_ROWS_MISSING_REQUIRED_MODE",
+    "count": 8,
+    "source_lines": {
+      "_dependency_overlap_consumes_real_rows": 397,
+      "_protected_guard_dispatch": 477,
+      "_regular_binding_required_schema": 336
+    },
+    "why18_current_controls_miss_it": "The overlap regression supplies a synthetic complete binding including mode; the baseline policy method does not consume the real dependency rows."
+  },
+  "capacity_scope": {
+    "compression_fit": "UNKNOWN",
+    "condition": "All5 archives and combined indices fit caps, measured allocation reserve sufficient, protected closure and actual preservation complete. Not promised gain or SOURCEFULL/native/tmpfs/cgroup floor qualification.",
+    "conditional_minimum_net_allocated_gain_at_declared_caps": 274575360,
+    "original_selected_allocated_bytes": 886943744
+  },
+  "concrete_pure18_gating_requirements": [
+    "First fix named source/data schema closure, then independently freeze exact driver/config/control/current candidate and all25 snapshot bindings",
+    "Real exact baseline policy first; independently restored poisons cover wrong subject/root/source/inactive approval/UNKNOWN policy/scope/restore path/caps/layout/observed use/missing fields/mode/body/symlink/private release/stream cap/external hardlinks/aliases/accepted Git identity/current config overlap/editable dependencies/tiny PAX integrity",
+    "Concrete child and parent launcher must hash-bound interpreter/stdio/terminal/unique ABSENT fixture and owner paths; reject inherited PYTHONOPTIMIZE/PYTEST_ADDOPTS; no numbered pytest roots or cleanup",
+    "Bound controls only to tiny synthetic archive files, stdlib unittest,120TERM10 child/135 parent; no real environment compression/removal, venv execution, RCC or native",
+    "Retain all original child results and exact18 outcomes, before and parent always-post protected rows, preserved primary plus secondary captures. No announced control passes until actual evidence exists"
+  ],
+  "config": {
+    "bytes": 17539,
+    "mode": "0o400",
+    "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/frozen_first_five_environment_preservation_inputs_SOURCE_PREPARED_v4.json",
+    "sha256": "d6d933f64940c6ed3b0849a6bcd10e07f6c2c834f968c6f1b354462625e4c028"
+  },
+  "control_source": {
+    "bytes": 12323,
+    "mode": "0o444",
+    "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/test_first_five_environment_preservation_admission_SOURCE_PREPARED_v4.py",
+    "sha256": "bf271888be3d40f6be8b11c2e71de7232c0bce50ee30fcc96b1083f89498bf75"
+  },
+  "decision": "HOLD_FIRST_FIVE_OBSOLETE_ENVIRONMENT_SOURCE_CONFIG_SCHEMA_CLOSURE",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_reused": "docs/skills/repository-operations.md existing preexecution executable-selected-address/schema closure and obsolete-environment restoration/disk-vs-memory lessons reused; no cosmetic source edit",
+    "Durable_learning_captured": "Accepted Git ancestry does not establish environment inactivity. Dependencies need original-path restoration. The schema actually consumed by a boundary must be present in every real bound row; a synthetic baseline with extra fields cannot qualify the real config. Disk preservation does not qualify later tmpfs/cgroup/native gates.",
+    "Evidence": "Current8 real frozen rows omit mode while actual strict consumer requires it;16 core ASTexact/all25 inventory hashes/5+4 source identities verified",
+    "Exact_existing_environment_lesson": {
+      "bytes": 576,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/accepted-canonical-environment-and-memory-scope-lesson-reused.txt",
+      "sha256": "1152b61293a6f44d0ba61b59c24630f30bb948efbde926f2e014cb1876e7561a"
+    },
+    "Remaining_uncertainty": "18 controls, compression fit, protected manifest alias completeness, ROOT owner approval/launcher and preservation all NOT_RUN/HOLD",
+    "Stale_or_ambiguous_guidance_removed": "No SOURCEGO from synthetic-row controls or generic metadata hashes; no completed-pytest marker invented for environments, no inferred owner approval or disk-to-RAM/native promotion"
+  },
+  "driver": {
+    "bytes": 37609,
+    "mode": "0o444",
+    "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_first_five_accepted_obsolete_environments_SOURCE_PREPARED_v4.py",
+    "sha256": "63476ecaa50ba863afed8602dcad82c22c9349df022d0e9f0dde8d81d60e0bb7"
+  },
+  "independent_proof": {
+    "bytes": 18372,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-obsolete-environment-independent-SOURCE-review/private-exact-eight-missing-mode-row-consumer-and-source-AST-proof.json",
+    "sha256": "47773a817d8eb5174c73b688f9e7881117aedb18e2a43a77a0ca6f994f9b4cc7"
+  },
+  "minimum_named_successor": {
+    "config": "New immutable config binds measured modes for all8 dependency rows; preserve current v4 file unchanged. Do not broaden _regular_binding or silently synthesize missing fields.",
+    "controls": "Use actual frozen config rows as a positive boundary baseline within the existing overlap method, and missing-mode poison; retain synthetic lexical/resolved overlap poison. All18 methods still require actual measured execution after independent concrete control PREEXEC and distinct ROOT release.",
+    "retarget": "Bind successor driver/control config addresses/hashes and ensure every executable-selected path resolves the new frozen subject; preserve all old owners/source/proofs."
+  },
+  "missing_actual_preservation_authority": {
+    "independent_actual_preservation_preexec": "NOT_CREATED",
+    "independent_control_preexec": "NOT_CREATED",
+    "manifest_scope_limit": "Prepared flat physical regular-file guard does not automatically resolve a historical archived-member alias or cover typed symlinks/directories. ROOT must bind complete actual protected rows and accepted archive/index aliases in a named measured manifest; unsupported rows or incomplete coverage remain HOLD before actual execution.",
+    "required_manifest_domains": [
+      "current_source",
+      "native_fixture",
+      "prepared_inputs",
+      "active_own_prefixes",
+      "current_configs",
+      "all_prior_archives_and_indices",
+      "failed_rcc_originals_and_aliases",
+      "external_restoration_dependencies"
+    ],
+    "root_inactive_owner_approval": "NOT_CREATED; ROOT must independently adopt exact five prefixes and explicit observed-only unreadable process policy. Candidate accepted-source ancestry and zero observable matches do not manufacture owner approval.",
+    "root_one_launcher": "Not authored in this packet. ROOT needs a separately frozen bound900TERM10 parent/600TERM10 child/captures and parent postguard on returned/timeout outcomes; script finally itself cannot guarantee postguard after external SIGKILL.",
+    "root_protected_input_manifest": "NOT_CREATED; source refuses execution without a separately regular hashed ROOT-measured manifest and independent review bound to that exact manifest."
+  },
+  "owner": {
+    "bytes": 24590,
+    "mode": "0o400",
+    "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/OWNERFINAL-first-five-obsolete-environment-preservation-SOURCE-and-CONTROL-PREPARATION-NOTRUN-v4.json",
+    "sha256": "0eb5a69a100bf1ecb5cad0900b587dfcbe6384ecf7363f0c1369c4894d8d9591"
+  },
+  "reviewer_execution": "Read-only source/metadata verification only; no imports of prepared driver, tests, archive/compression/copy/removal/Git staging/native",
+  "reviewer_initial_observation": {
+    "bytes": 418,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-obsolete-environment-independent-SOURCE-review/named-initial-reviewer-declared-mode-assumption-observation.json",
+    "sha256": "0040ce18ffe0217a2ccbef0222c0f109e3a1b41f5cd2cfe75c08383b47050f07"
+  },
+  "schema": 1,
+  "status": "SOURCE_PREPARATION_HOLD_NO_CONTROL_OR_OPERATION_GO",
+  "upstream_disposition": "none",
+  "verified_unchanged_preservation_source": {
+    "body_metadata_topology_primitives": "Full SHA/body/type/mode/UID/GID/nsmtime/PAX/internal hardlinks/gzip EOF CRC/exclusive promotion/fsync/full+progress+alias index caps reused; no archiving performed",
+    "budgets": {
+      "allocation_reserve_bytes": 8388608,
+      "archive_aggregate_cap_bytes": 536870912,
+      "index_combined_cap_bytes": 67108864
+    },
+    "current_source_identity_checks": {
+      "accepted_ancestor_heads_and_trees": 5,
+      "active_heads_and_trees": 4,
+      "tracked_clean": true
+    },
+    "e717_function_class_AST_exact": 16,
+    "first_five_subjects": "Only runtime-checkout-eol five .venv prefixes; twenty other candidate prefixes remain protected",
+    "frozen_inventory_files_rehashed": 25,
+    "process_scope": "Original observable-zero evidence and944 inaccessible/racing channels remain observed-only UNKNOWN; no universal quiescence or inactive-owner authority inferred"
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "PR306_precise_next_gate": {
+    "PR_recorded_base_name": "integration/community-release-20261008",
+    "PR_recorded_base_oid": "6181b044c75de35386f1ae30e71725398b6a7feb",
+    "checks": {
+      "FAILURE": 1,
+      "SUCCESS": 18
+    },
+    "current_failed_contexts": [
+      {
+        "__typename": "CheckRun",
+        "conclusion": "FAILURE",
+        "name": "build (windows-py3.12-devmode)",
+        "status": "COMPLETED"
+      }
+    ],
+    "head": "fada8e068f61f6e0e380ec4685eed2f4cf0b9ade",
+    "named_live_integration_oid": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+    "one_next_gate": "Ordinary refresh exact existing fada branch against actual integratione2, preserving accepted source/history, then exact-head full CI including failed Windows Runtime integration startup gate. Original five FIRST90-readiness timeouts remain failed/causeUNKNOWN; do not silently retry the old tuple or waive PG/native/full84 gates.",
+    "original_evidence_limits": "Original source1154PASS142SKIP and integration5FAIL126PASS19SKIP are separately retained in existing owner; no new original log fetched here. No claim that all observed Windows failures share a proved RCC cause.",
+    "original_known_owner_path": "/workspace/engineering/pr306-current618-fada-original-Windows-failure-owned/OWNERFINAL-original306-fada-Windows-readiness-failure-v6.json",
+    "status": "BLOCKED"
+  },
+  "RCC_private_recovery": "Original private01f/frozen-v6 UNRECOVERED in retained earlier receipts. Do not call community implementation a recovered original. No private source access/publication by this handoff.",
+  "Upstream disposition": "none",
+  "canonical_records": [
+    {
+      "bytes": 4265,
+      "canonical_path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/workspace-transfer-20261011/merge-review/OWNERFINAL-emergency-one-current-local-and-remote-branch-comparison.json",
+      "historical_original_path": "/workspace/engineering/campaign-checkpoint/transfer/merge-review/OWNERFINAL-emergency-one-current-local-and-remote-branch-comparison.json",
+      "sha256": "177ce81f450827cee0013b9aaf59012a16fe9b42ac49a2f4987e7246d535d6c9"
+    },
+    {
+      "bytes": 41921,
+      "canonical_path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/workspace-transfer-20261011/merge-review/OWNERFINAL-emergency-six-PR-complete-GraphQL-named-successor.json",
+      "historical_original_path": "/workspace/engineering/campaign-checkpoint/transfer/merge-review/OWNERFINAL-emergency-six-PR-complete-GraphQL-named-successor.json",
+      "sha256": "e3c0633ff984ba70ccc595acb9adcb1c4dec2dd0b259aca8ae09ff479c35bbdf"
+    },
+    {
+      "bytes": 10282,
+      "canonical_path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/workspace-transfer-20261011/merge-review/OWNERFINAL-emergency-six-PR-integration-and-worktree-snapshot.json",
+      "historical_original_path": "/workspace/engineering/campaign-checkpoint/transfer/merge-review/OWNERFINAL-emergency-six-PR-integration-and-worktree-snapshot.json",
+      "sha256": "770362433fff4e942d46c148326c9fe6b5f7a522ea7e50190dd00eb87f7ce695"
+    },
+    {
+      "bytes": 2579,
+      "canonical_path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/workspace-transfer-20261011/merge-review/OWNERFINAL-root-derived-V8-admission-transformation-source-and-raw-provenance.json",
+      "original_path": "/workspace/engineering/root-current-v8-pure18-derived-admission-originals/OWNERFINAL-root-derived-V8-admission-transformation-source-and-raw-provenance.json",
+      "scope": "Exact ROOT safe data owner copy; independent derived review unfinished, no new operation grant.",
+      "sha256": "5c0361b00d7e1750dc1799b4ffebd12c1e53a7e4d96ff2733aacd913ca913381"
+    },
+    {
+      "bytes": 11842,
+      "canonical_path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/workspace-transfer-20261011/merge-review/OWNERFINAL-root-current-v8-PURE18-derived-admission-not-native-or-storage.json",
+      "original_path": "/workspace/engineering/root-current-v8-pure18-derived-admission-originals/OWNERFINAL-root-current-v8-PURE18-derived-admission-not-native-or-storage.json",
+      "scope": "Exact ROOT safe data owner copy; independent derived review unfinished, no new operation grant.",
+      "sha256": "bc2d5ad9e53da28b41cc1ea05501239557444d7386423b8dc9d11468b0731e76"
+    }
+  ],
+  "documentation_improvement": "Reuse accepted canonical exacttuple, original/derived receipt, guard-parent/primary deadline, immutable approved community content and storage custody lessons. This bounded retirement handoff records scope/remaining uncertainty, creates no new behavior orpolicy.",
+  "integration": {
+    "branch": "integration/community-release-20261008",
+    "parents": [
+      "a54c982462d1e7ad011d8152bfc299d997503fb3",
+      "1299cc4bb6586f467d36ca124faaaaa77362695f"
+    ],
+    "protected": false,
+    "protection_read": "Traditional protection administration UNKNOWN403, no bypass",
+    "sha": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+    "tree": "afe2679cc93bf27fa5021c7698ee7ad3ee21a1b9"
+  },
+  "operations": "Read-only GitHub/Git metadata, exact safe owner copying/moving into authorized canonical evidence subtree; no source/index edits/tests/merge/push/artifact/privatepayload/operation execution.",
+  "path_alias_scope": "Frozen originals retain historical transfer/merge-review strings. The mapping above routes those exact unchanged bytes to canonical subtree; original bytes were moved, not rewritten.",
+  "release_next_gates": {
+    "PR211": "Existing legacy Homebrew/CDN/S3 handoff remains a delivery gap; smallest repair is communitynamespace/version/integrity source and delivery redirects/manifests under existing approved publication contract, not inventing vendor privatebits. Not researched or implemented in this emergency snapshot.",
+    "PR221": "Metadata34SUCCESS+expectedSKIP not releaseGO. Current e2 distributions/content/cold consumers/authority/native/platform/211delivery still require retained 1.0.3 contract.",
+    "PR305": "Newf75 CI pending; actual implemented primary640+process-tree/readers/leases/independentpost proof next, source-only current privateHOLD remains.",
+    "PR307": "Community-owned OAuth implementation nowauthorized; approved immutable two-input content/integrity/access and meaningful changed prerequisite required, not identical builds. Fresh threeoriginals exit1/redactedHTTP, historical404 separate.",
+    "PR308": "Current8d49 hostedWindows failure preserved and actual RCC3 baseline failed; actual baseline/source changes/currenttarget refresh require review. RCC5/6 candidate paths optional later capability, not mandatory1.0.3 substitute.",
+    "PR313": "New2d86 CI pending; actual primary640/external parent+process/reader/lease postchecks next, preparedcached source is not executableapproval."
+  },
+  "remote_comparison": {
+    "ROOT_work_alias_scope": "Root reports work/community alias. One local ref lacks same-named remote, not an unpushed campaign source branch; no differing remote OIDs in17 local refs.",
+    "same_one_capture_matches": 16,
+    "tracked_dirty": "Only checkpoint known dirty; originals17 worktree statuses in complete snapshot.",
+    "unpublished_alias_rows": [
+      {
+        "local_sha": "a70993fafc99a9f94041485542d5a720797ca394",
+        "match": null,
+        "ref": "refs/heads/work",
+        "remote_sha": null
+      }
+    ]
+  },
+  "schema": 1,
+  "status": "EMERGENCY_FINAL_READONLY_HANDOFF_NO_MERGE_OR_OPERATION_GRANT",
+  "unfinished_derived18_review": {
+    "ROOT_transformation_owner_sha256": "5c0361b00d7e1750dc1799b4ffebd12c1e53a7e4d96ff2733aacd913ca913381",
+    "adapter_source_sha256": "8dbc69c8dd1d366d1e1dea97cb809613ff990e27ee9faacb3a9dfccb56a6c1b2",
+    "controller_source_sha256": "985f497f83b4acecdf9ede7220da3237599ca210016da7443351c00787721ef6",
+    "derived_owner_sha256": "bc2d5ad9e53da28b41cc1ea05501239557444d7386423b8dc9d11468b0731e76",
+    "observed_findings": "Source-only adapter and controller expected schema were read as data. ROOT reports163 before/post rows and raw status unchanged; complete independent binding/data verification had not finished. Derived PASS is not original raw status and native/storagequalification remainsfalse.",
+    "original_independent18_sha256": "dd9fa8279c9503488acf753f6c4520ba201cd92a8f30168346ff9b32c4c3529d",
+    "prepared_source_owner_sha256": "485dc5ee1c67cb79b16fb9ea140626958b02ec77c91699ce62d307b7cefc4475",
+    "status": "UNFINISHED_STOPPED_FOR_WORKSPACE_RETIREMENT_NO_COMPATIBLE_DERIVED_GO_EMITTED",
+    "successor_requirement": "New reviewer verifies exact data-adapter mapping/original raw18+dd9+485dc/closure163 then emits separately labeled derived decision ifqualified. Actual capacity/protected manifest/inactive-owner approval/controllercfg/release/operation review remain separate."
+  }
+}

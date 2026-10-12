@@ -1,0 +1,50 @@
+{
+  "graph_suffix_sha256": "d6aa504c67bb72508006751c65d0d575d2e108a1ae3f677034723ee8101843b7",
+  "native_newer": "NOT_RUN",
+  "no_issue_closure": true,
+  "publication": "HOLD",
+  "retained_graph": {
+    "CLOSED": [
+      210
+    ],
+    "OPEN": 53,
+    "contracts": 54
+  },
+  "schema": 1,
+  "source307": "9760d5ec44876558c4941c4c3190abc8d92d14a1",
+  "status": "EXISTING_ISSUE101_PR307_PR308_PR221_BODIES_RECONCILED_PRIOR_BYTES_RETAINED",
+  "updates": [
+    {
+      "new_body_bytes": 44241,
+      "new_body_sha256": "7c9c31ef1c41a2ad0e38a15223908bbeb981a8d6711da5cf569949e248d29565",
+      "number": 101,
+      "old_body_bytes": 41463,
+      "old_body_sha256": "c1a756ae8b7f74830e5986bcc3f95cd2aedb9768d017fdead3175a2c230fe5c1",
+      "type": "issue"
+    },
+    {
+      "new_body_bytes": 5577,
+      "new_body_sha256": "880a7357f9d801f9f562327d7a51d6fd581f2f0c2bad2dcb9b00dbfa434c33a8",
+      "number": 307,
+      "old_body_bytes": 4920,
+      "old_body_sha256": "df870ca304bc0c33a14e6d0f0db81934af25f9641b01373db6176bec64bd28bf",
+      "type": "pull"
+    },
+    {
+      "new_body_bytes": 15702,
+      "new_body_sha256": "eb6dccfc256936a9a2fff682f7be9fa26c21b0ed432c684a1958f96c3f429fc3",
+      "number": 308,
+      "old_body_bytes": 14874,
+      "old_body_sha256": "1ea7b32177d08afeb2f6a9b30a3bf963803b768a3b77a29589bb136408245e36",
+      "type": "pull"
+    },
+    {
+      "new_body_bytes": 26252,
+      "new_body_sha256": "cbf91997ce798105676d9a2d22012c7f2ba245db048ac3986bc2a45824483622",
+      "number": 221,
+      "old_body_bytes": 25481,
+      "old_body_sha256": "62386a5c2eaf89bb736cf21fe688f1ff049b4492ecae31d007b38250ca4fe38c",
+      "type": "pull"
+    }
+  ]
+}

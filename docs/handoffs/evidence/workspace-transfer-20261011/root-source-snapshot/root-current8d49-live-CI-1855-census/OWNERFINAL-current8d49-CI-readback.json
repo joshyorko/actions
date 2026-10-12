@@ -1,0 +1,19 @@
+{
+  "capture": "2026-10-11T18:55:59.802244+00:00",
+  "head": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "baseRefName": "integration/community-release-20261008",
+  "draft": true,
+  "check_count": 26,
+  "census": {
+    "SUCCESS": 24,
+    "FAILURE": 1,
+    "IN_PROGRESS": 1
+  },
+  "complete_merge_gates": "HOLD_CURRENT_WINDOWS_SOURCE_AND_TYPECHECK_FAILURE_PLUS_NATIVE_UNQUALIFIED",
+  "original": {
+    "path": "/workspace/engineering/root-current8d49-live-CI-1855-census/original-gh-current-checks.json",
+    "bytes": 8836,
+    "sha256": "f37742fac2245fad62a765073814bc3e5cf1697cc68d2c2d884ce6f90590b747"
+  },
+  "action": "READ_ONLY_NO_RERUN_READY_MERGE"
+}

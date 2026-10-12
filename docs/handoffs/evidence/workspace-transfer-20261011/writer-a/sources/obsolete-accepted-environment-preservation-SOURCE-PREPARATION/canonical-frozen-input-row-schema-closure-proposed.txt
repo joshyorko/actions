@@ -1,0 +1,5 @@
+Canonical target: docs/skills/repository-operations.md, beside actual selected-config admission.
+
+Exercise admission with the actual frozen configuration rows before synthetic
+poisons. A helper fixture can add fields the retained input lacks; measure required
+metadata on its owning path and reject missing fields without inferred defaults.

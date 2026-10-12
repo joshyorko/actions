@@ -1,0 +1,289 @@
+{
+  "schema": "pr312-actual309-ordinary-refresh-LIGHT-v1",
+  "status": "OWNER_LIGHTFINAL_READY_SOURCE_WRITER_RELEASE_FULL_HELD",
+  "head": "77065131a0aee63d2b1f8621476374bdde3c7b65",
+  "tree": "edf1801e565692fb3f07b809b3a95b27981fe2fe",
+  "ordered_parents": [
+    "92e6deda5c252a503510c4b6261a86cb51f73cb6",
+    "a0d258a16095b95b1bf9000cb1201cddfaff4779"
+  ],
+  "branch": "fix/runtime-checkout-eol-20261011",
+  "clean": true,
+  "complete_typed_leaves": 1423,
+  "all1423_Git_FS_body_execbits_prepost_exact": true,
+  "no_deleted_or_novel_nondoc_parent_blobs_modes": true,
+  "all_original207_checkout_input_bodies_modes_exact": true,
+  "original7_delta_paths_retained": [
+    ".gitattributes",
+    ".github/workflows/_gen_workflows.py",
+    ".github/workflows/actions_runtime_pypi_release.yml",
+    ".github/workflows/actions_runtime_tests.yml",
+    "devutils/tests/test_runtime_checkout_bytes.py",
+    "devutils/tests/test_runtime_checkout_workflows.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "new_target_auth2_test_files_body_modes_exact": true,
+  "both_parent_canonical_guide_exact_union": true,
+  "light_gate_outcomes": {
+    "Doctor": "PASS",
+    "Bootstrap": "OWN30_PREPARED_REUSE_NO_INSTALL",
+    "own_module_prefix_origin_count": 5,
+    "ignored_RCC_SHA256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "ignored_RCC_mode": "0711",
+    "Toolkit_PASS": 96,
+    "actual_Git_checkout_seven_rule_poisons_and_filters_PASS": 10,
+    "adopted_auth_inventory_and_enforcement_PASS": 76,
+    "configured_Runtime_lint_format_PASS_files": 313,
+    "configured_Runtime_Mypy_PASS_files": 349,
+    "new_devutils_tests_Ruff_format_Isort": "PASS",
+    "generator8_dependabot_all30_YAML_roundtrip": "PASS"
+  },
+  "post_light_preservation": {
+    "original_sourceFINAL62_refs_exact": true,
+    "1192_original_native_inventory_body_mode_exact": true,
+    "helpers_original_and0444_snapshot_equal": true,
+    "V5raw18_frozen50_and_browser_Node_frontend_hashes_exact": true,
+    "original_actual_V5_source": "3ec9d0acbe30ad94d02e4c24fef2587127964495",
+    "native_equivalence_or_new_actual_admission": false
+  },
+  "root_source_writer_role_transition": "No further application edits; full verification-only only after distinct root release",
+  "next_full": {
+    "status": "HELD_NOT_RUN_ROOT_DISTINCT_RELEASE_REQUIRED",
+    "cwd": "/workspace/engineering/runtime-checkout-eol",
+    "argv": [
+      "env",
+      "PYTEST_XDIST_AUTO_NUM_WORKERS=2",
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "600s",
+      "/workspace/actions-cloud/bin/rcc",
+      "task",
+      "script",
+      "-r",
+      "developer/toolkit.yaml",
+      "--",
+      "python",
+      "/workspace/engineering/pr312-actual309-refresh/full-source-gates-explicit-two-workers-root-release-required.py"
+    ],
+    "explicit_environment": {
+      "PYTEST_XDIST_AUTO_NUM_WORKERS": "2"
+    },
+    "launcher": {
+      "path": "/workspace/engineering/pr312-actual309-refresh/full-source-gates-explicit-two-workers-root-release-required.py",
+      "bytes": 376,
+      "sha256": "876adde7c0f82ee428413afc48a6b8d7851937c55f8140facb3f76335b70501d"
+    },
+    "new_log_path": "/workspace/engineering/pr312-actual309-refresh/current-union-full-source-gates.log",
+    "sequential_gates": [
+      "devutils pytest-q tests-n2",
+      "unchanged configuredRuntime invoke test-not-integration n-auto inheriting2"
+    ],
+    "attempt_count": 0,
+    "workspace_required_before_release": 1200000000
+  },
+  "fresh_workspace_bytes": 1215430656,
+  "pr312_current_hosted_CI": "Original92e/618 CI historical; new770/a0d union requires fresh complete source and hosted gates",
+  "remaining_HOLDs": [
+    "ONE current full source gate and independent source review before root-only normal push",
+    "Fresh complete exact new source hosted CI and distribution bytes",
+    "Historical Windows checkout/compiler cause and generated embedded HTML semantic equivalence UNKNOWN",
+    "Current native/private/OAuth authority/providers/cold-consumer/full7/release/tag/publication not admitted"
+  ],
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md; exact automatic union imports accepted16line1306 EOL lesson and retains complete actual309 guide; accepted externala113 worker-bound lesson reused",
+    "Exact documentation delta": "Source16line lesson plus complete target guide preserved; no cosmetic or diary child; union minus exactly16line source paragraph equals whole target canonical bytes",
+    "Durable learning captured": "Qualify all207 selected source checkout bodies and owning workflow filters; preserve exact accepted auth census; distinguish named current target and original source/full/hosted tuple; explicit xdist bound before both sequential commands",
+    "Evidence": "Exact1423 typed/body/mode union and16line removal equality; current10 checkout/filter and76 auth controls; all8 generated/all30 YAML; installed worker-plugin and configured task hashes unchanged",
+    "Stale or ambiguous guidance removed": "No old92e/618 full or CI admission transferred onto new770/a0d; no Runtime n-auto worker-bound assumption or oldnative equivalence",
+    "Remaining uncertainty": "Current full/fresh hosted/Windows generated bytes/native/private/OAuth/provider/release remain distinct gates"
+  },
+  "Upstream disposition": "none",
+  "immutable_evidence_bindings": [
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/Doctor.log",
+      "bytes": 13622,
+      "sha256": "e8199c2a128880e3f6c5a08d37a804e56d7db928d042134789b4c5e6e954717a"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/Toolkit.log",
+      "bytes": 14466,
+      "sha256": "9db418f7744f52faf67fe95d702ba3465921ade59cf711ffa2c3989df4d78aa9"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/committed-complete-union-post-light.json",
+      "bytes": 268335,
+      "sha256": "8119881fb85b4edf042c4bc7de635e1e50f5c18753fa9f85c7a59f9b0a3641d8"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/committed-complete-union-pre-light.json",
+      "bytes": 268335,
+      "sha256": "0fa1729c3194084db810d43cc3c6e82f00a0b84d889624edd5cdcbc4d4817d4f"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/freeze-light-reader-successor-v2.py",
+      "bytes": 8190,
+      "sha256": "f712ec59641c6965481034ebb85b50682803b43882ac5156875002915c3473f4"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/freeze-light.py",
+      "bytes": 8205,
+      "sha256": "a4c2deca59ad4bc87ea062713795f8b6909af7ea8f9ebf1379a28293003bf948"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/full-source-gates-explicit-two-workers-root-release-required.py",
+      "bytes": 376,
+      "sha256": "876adde7c0f82ee428413afc48a6b8d7851937c55f8140facb3f76335b70501d"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/generator-all-eight-roundtrip.json",
+      "bytes": 3813,
+      "sha256": "4c9105e7008262649b0cabdcabcb50559286719b16bab892f18673226622a460"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/generator-all-eight-roundtrip.py",
+      "bytes": 1015,
+      "sha256": "f71b22ed9658867ad837f01d6698bffcc8cca32fe8cf0dc528a13e66fcdbe0ce"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/initial-freeze-worker-task-path-inspection-failure.json",
+      "bytes": 509,
+      "sha256": "dff4e2632c88326eba2fc361dbb0200eae3a882ad5d089b22aadd203881e73ba"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/light-owned-checks.py",
+      "bytes": 654,
+      "sha256": "b6a78ecf898b9b29956b06d24bf2f4ec2a09aaedaccfa17f36ac264363f553aa"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/origin-action_server.json",
+      "bytes": 328,
+      "sha256": "6ee21ed7f1d9f863b29dc8a4cb25498ffafc129818b88aff25e148759a54bf7e"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/origin-actions-http-helper.json",
+      "bytes": 309,
+      "sha256": "7154b87e85312b262d695820b622f2eafbd24f7ffe7f5e90aca25e5e157b3750"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/origin-actions.json",
+      "bytes": 263,
+      "sha256": "13a206a60978c69b9aaad5c84d4bacd5723c958a9692ff7820520e77d5d51b32"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/origin-devutils.json",
+      "bytes": 285,
+      "sha256": "e5fa78efe728330ca469ef25076f30e48c193595b5c647340ff5d7515bc810f7"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/origin-work-items.json",
+      "bytes": 294,
+      "sha256": "ae85d53c5a888f840d5ebda2f394b7a9e317125ff443c8a937c4b2eb0332ec37"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/original-source-and62-retained-ref-prehash.json",
+      "bytes": 265537,
+      "sha256": "382c4cda67dda373083ecc41363d06b9fcec47d7b82e0b880a34b6a6d11b026e"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/own-Bootstrap-reuse-inputs-and-origins.json",
+      "bytes": 6642,
+      "sha256": "b887988b906cc73f0f30e237b70432f01b44c187312d8416d09b2990a90bc39e"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/own-light-scoped-static-generator.log",
+      "bytes": 12010,
+      "sha256": "d001249227165deb7c20e9a38d7c12549cf68f49c16144700bb77b0944215199"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/post-light-retention.log",
+      "bytes": 3932,
+      "sha256": "ea60351686963ccf0727b2d761bc14a8992269eef324b1799a7bc177ae9a0abc"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/post-light-retention.py",
+      "bytes": 294,
+      "sha256": "6c46f5c312efbe5a112a4bbbd4e82027f3e5e97c9847e734d02b9a4792466c88"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/raw18-frozen50-Node-frontend-retained-post-light.json",
+      "bytes": 12822,
+      "sha256": "281b25a2e052e88f8a2a90d37b2a3ee2619762d4bbb7d1df79b3ae88b8fafc85"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/raw18-frozen50-Node-frontend-retained-root-released-pre.json",
+      "bytes": 12822,
+      "sha256": "281b25a2e052e88f8a2a90d37b2a3ee2619762d4bbb7d1df79b3ae88b8fafc85"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/retained-native-helper-browser-and-V5-proof-post-light.json",
+      "bytes": 4730,
+      "sha256": "055594b5d47a234cb04f19325d9241aa549c2ab7b6da2e3b24b32be62c7a486e"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/retained-native-helper-browser-and-V5-proof-root-released-pre.json",
+      "bytes": 4730,
+      "sha256": "055594b5d47a234cb04f19325d9241aa549c2ab7b6da2e3b24b32be62c7a486e"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/run-owned-scoped-checks.py",
+      "bytes": 495,
+      "sha256": "5d4bea0868e1a534c297e49dd6c0ed1949ff52cad3d166a7d9d62da558550f3e"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/verify-committed-union-post-light.py",
+      "bytes": 4042,
+      "sha256": "13306c9bcb68e8362970b72f665d75ed4997c1bc4dcb85fef60244bb6099f69c"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/verify-committed-union.py",
+      "bytes": 4041,
+      "sha256": "bf66a71fc74a1cb1de401407f2a7e1f24ec072b171ef7ee249cbeb833a5a6ee6"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/verify-own-prepared.py",
+      "bytes": 2682,
+      "sha256": "7d02a940676c3abc30b66c0abc5918ef7e5d6d5ccfee21aabafdc634c2c41e1e"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/verify-retained-V5-raw-and-driver-post-light.py",
+      "bytes": 2528,
+      "sha256": "ae93ed6e3800402fb20f21708e36367278f3cc365656f4fac3a56e45c124a64d"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/verify-retained-V5-raw-and-driver-pre-full.py",
+      "bytes": 2535,
+      "sha256": "ab33d99847d4ff0f8a1c4166b6cbfc8fe6c608e8a23791053da401f952f53a12"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/verify-retained-native-helper-browser-post-light.py",
+      "bytes": 3603,
+      "sha256": "6361206e9cf7cf1baa590869cff6250b9ff6def00174e8dc0ca51201589c2891"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/verify-retained-native-helper-browser-pre-full.py",
+      "bytes": 3610,
+      "sha256": "783d08c55d5059ee700e3b319f563a279acc2c05a23ef67048ffee7e39996bfc"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh/worker-bound-mechanism-reuse-for-current-union.json",
+      "bytes": 950,
+      "sha256": "29be6db7fac0d5b5ed10e77cace021b093ea5c409fe80f4add542d473343c937"
+    }
+  ],
+  "prior_SOURCEFINAL": {
+    "path": "/workspace/engineering/runtime-checkout-eol-source/OWNERFINAL-runtime-checkout-eol-SOURCEFINAL.json",
+    "bytes": 22316,
+    "sha256": "b0d51fbc7fb87c88fc0f65af090634cc44c7cfb311e00de7b56472160b074189"
+  },
+  "readonly_preparation": {
+    "path": "/workspace/engineering/pr312-actual309-refresh-readonly/OWNERFINAL-pr312-actual309-readonly-refresh-preparation.json",
+    "bytes": 5537,
+    "sha256": "c42ef3a6e48995ad911d76a038daaff2c008449470b1b44a83ffbef28b83d6c5"
+  },
+  "independent_actual309_GO": {
+    "path": "/workspace/engineering/pr309-actual-integration-independent-review/OWNERFINAL-independent-actual309-normal-integration-readback.json",
+    "bytes": 6722,
+    "sha256": "787ed17ea97e875e5ba4ef43fdb8dbdf5d6939ef07a65d24ed64de0a191af936"
+  }
+}

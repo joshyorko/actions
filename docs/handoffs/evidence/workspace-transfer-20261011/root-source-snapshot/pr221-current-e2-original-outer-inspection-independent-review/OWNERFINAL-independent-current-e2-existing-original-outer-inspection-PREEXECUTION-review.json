@@ -1,0 +1,140 @@
+{
+  "all_outcome_requirements": [
+    "Keep distinct exclusive0700 outputs and0600 original stdout/stderr/outer terminal, no automatic retry or transfer fallback.",
+    "Validate original9input hash bindings before/after returned inspection. Pre-validation/outer-kill may lack wrapper post; missing/failed/unreturned result remains HOLD, no inferred successful postguard.",
+    "No transfer/connectors/network/inner extraction/module-top-level/provider/consumer/pip/install/RCC/native invocation.",
+    "Any failed stage stays FAIL even with intact original ZIP; no source/production/private/issue/release qualification."
+  ],
+  "approved_scope": "Distinct one original existing-file SHA/CRC/eight-outer-member and seven-row manifest inspection; explicit readonly-original-file fsync. Original failed transfer remains FAIL.",
+  "command": {
+    "argv": [
+      "/usr/bin/timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "120s",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/pr221-current-e2-original-outer-inspection-PREPARATION/inspect_existing_original_outer_once.py",
+      "--root-execute-one-existing-original-outer-inspection",
+      "/workspace/engineering/root-current-e2-one-existing-original-outer-inspection-release.json"
+    ],
+    "cwd": "/workspace",
+    "env": "PYTHONDONTWRITEBYTECODE=1; PYTHONOPTIMIZE unset; no RCC/Poetry/package/native invocation",
+    "owned_absent": "Mandatory",
+    "owned_path": "/workspace/engineering/root-current-e2-one-existing-original-outer-inspection-owned",
+    "required_review_fields": "decision exact GO_CURRENT_E2_ORIGINAL_OUTER_INSPECTION_PREEXECUTION; proposal_binding exact this OWNERFINAL",
+    "root_release_required": [
+      "schema",
+      "one_attempt=True",
+      "no_transfer_retry=True",
+      "proposal_binding",
+      "wrapper_binding",
+      "artifact_id=11708952448",
+      "outer_seconds=120",
+      "TERM_kill_after_seconds=10",
+      "independent_preexec_binding"
+    ],
+    "root_release_schema": "ROOT_ONE_CURRENT_E2_EXISTING_ORIGINAL_OUTER_INSPECTION",
+    "root_stdio": "Retain separate private original stdout/stderr/timeout terminal; no automatic retry",
+    "rootrelease_mode": "0600 regular nonsymlink"
+  },
+  "decision": "GO_CURRENT_E2_ORIGINAL_OUTER_INSPECTION_PREEXECUTION",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; accepted narrowly proposed9-line phase-boundary lesson, with one wording precision below for root contextual adoption.",
+    "Disposition": "Useful source-backed new canonical lesson proposed; root owns context adaptation, no review source edit.",
+    "Durable_learning_captured": "A transfer can fail after all expected bytes exist. Distinct reviewed inspection can qualify those retained bytes while original transfer outcome and subsequent inner/consumer phases remain separate.",
+    "Evidence": [
+      {
+        "bytes": 2912,
+        "mode": "0o400",
+        "path": "/workspace/engineering/root-current-e2-one-aggregate-adoption/OWNERFINAL-root-original-one-current-e2-aggregate-transfer-failure-and-exact-retained-ZIP.json",
+        "sha256": "6bf0790738248804416229c4540130103758f820aa63f953e0ac97b6c0f65230"
+      },
+      {
+        "bytes": 2956,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr221-current-e2-original-outer-inspection-independent-review/independent-current-e2-existing-original-outer-static-proof.json",
+        "sha256": "1d554299c1e09c19a2bf443f6c61ff29bb9f0f1a97f0fe16f205c260c98d7ffb"
+      },
+      {
+        "bytes": 80745614,
+        "mode": "0o600",
+        "path": "/tmp/actions-pr221-e2-aggregate-11708952448-one-owned/actions-runtime-dist-11708952448-original.zip",
+        "sha256": "e16a414fefc1778ba49d09c466fd9d8054cfbf952e7766ee5cc6558f871f4def"
+      }
+    ],
+    "Exact_delta_binding": {
+      "bytes": 1101,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-original-outer-inspection-PREPARATION/canonical-existing-original-after-transfer-failure-proposed.patch",
+      "sha256": "b7952485a0d5c28fb42d4e61fe072e4b4b9039c38832742d35cebc88586acd5c"
+    },
+    "Exact_required_wording_precision": "Replace \"A socket-timeout error before a final EOF read proves\" with \"An error setting the socket timeout before a final EOF read proves\". The observed exception was OSError errno9 in sock.settimeout, not TimeoutError; this does not affect executable admission.",
+    "Remaining_uncertainty": "Actual outer inspection/finalCRC and output durability still NOT_RUN; inner RECORD/generated OAuth content authority/other builds/consumer/native/private/release remain HOLD.",
+    "Stale_or_ambiguous_guidance_removed": "Whole expected byte identity is not transfer EOF success or inner-package/source-content/consumer acceptance; no need for a duplicate acquisition."
+  },
+  "independent_static_proof_binding": {
+    "bytes": 2956,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-original-outer-inspection-independent-review/independent-current-e2-existing-original-outer-static-proof.json",
+    "sha256": "1d554299c1e09c19a2bf443f6c61ff29bb9f0f1a97f0fe16f205c260c98d7ffb"
+  },
+  "original_failure_owner_binding": {
+    "bytes": 2912,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-current-e2-one-aggregate-adoption/OWNERFINAL-root-original-one-current-e2-aggregate-transfer-failure-and-exact-retained-ZIP.json",
+    "sha256": "6bf0790738248804416229c4540130103758f820aa63f953e0ac97b6c0f65230"
+  },
+  "proposal_binding": {
+    "bytes": 11141,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-original-outer-inspection-PREPARATION/OWNERFINAL-current-e2-existing-original-outer-inspection-PREEXECUTION.json",
+    "sha256": "a2da229973c198c591f4974eed2d44950945d5e851c3974c117bd9ee1c37e1cc"
+  },
+  "reviewer_operations": "Owned static proof/review outputs only, no existing-file inspector execution/download/copy/fsync/test/native/source/index mutation.",
+  "root_release_contract": {
+    "TERM_kill_after_seconds": 10,
+    "artifact_id": 11708952448,
+    "independent_preexec_binding": "Root must exact-hash bind this frozen review, including mode0400; no recursive self-binding.",
+    "mode": "0o600",
+    "no_transfer_retry": true,
+    "one_attempt": true,
+    "outer_seconds": 120,
+    "path": "/workspace/engineering/root-current-e2-one-existing-original-outer-inspection-release.json",
+    "proposal_binding": {
+      "bytes": 11141,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-original-outer-inspection-PREPARATION/OWNERFINAL-current-e2-existing-original-outer-inspection-PREEXECUTION.json",
+      "sha256": "a2da229973c198c591f4974eed2d44950945d5e851c3974c117bd9ee1c37e1cc"
+    },
+    "schema": "ROOT_ONE_CURRENT_E2_EXISTING_ORIGINAL_OUTER_INSPECTION",
+    "wrapper_binding": {
+      "bytes": 5766,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-original-outer-inspection-PREPARATION/inspect_existing_original_outer_once.py",
+      "sha256": "dc608c8be11002e2900a34b601ee369b1bad47dcaece5f273b498a1f507065de"
+    }
+  },
+  "schema": "INDEPENDENT_CURRENT_E2_EXISTING_ORIGINAL_OUTER_INSPECTION_PREEXECUTION",
+  "source_provenance": {
+    "Linux_checkout": "165c38920fe37dd81350ca8ca0419bc70a4739f2",
+    "Linux_parents": [
+      "a70993fafc99a9f94041485542d5a720797ca394",
+      "e2c81adce7858d5a952991ba9a8b7f72e902038a"
+    ],
+    "Python": 202,
+    "artifact": 11708952448,
+    "nonPython": 15,
+    "run": 38157482815,
+    "source": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+    "source_input_and_other_platform_limits": "No new inner member/source/RECORD/generated-content/origin admission; other producer checkouts UNKNOWN",
+    "tracked_source_inputs": 217,
+    "tree": "afe2679cc93bf27fa5021c7698ee7ad3ee21a1b9"
+  },
+  "upstream_disposition": "none; local executor boundary, no authorized external target",
+  "wrapper_binding": {
+    "bytes": 5766,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-original-outer-inspection-PREPARATION/inspect_existing_original_outer_once.py",
+    "sha256": "dc608c8be11002e2900a34b601ee369b1bad47dcaece5f273b498a1f507065de"
+  }
+}

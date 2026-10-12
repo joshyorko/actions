@@ -1,0 +1,71 @@
+{
+  "actual_counts": {
+    "admitted_semantic_phases": 0,
+    "launched_semantic_children": 1,
+    "observed_first_RED_failures": 1,
+    "restored_GREEN_launched": 0,
+    "unlaunched_semantic_children": 17
+  },
+  "capture": "2026-10-11T21:35:46.278922+00:00",
+  "cause": "Installed pytest JUnit failure envelope lacks type attribute; launcher required literal AssertionError attribute and stopped before validating already-retained exact AssertionError intended rawframe.",
+  "decision": "HOLD_ORIGINAL_GATE_UNCHANGED_MINIMAL_JUNIT_PROTOCOL_SUCCESSOR_PROPOSED_ONLY",
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "evidence": "Original JUnit one intended failure without type; installed pytest _add_simple154/_append_failure207 plus actual original rawlog exact intended AssertionErrorframe120.",
+    "exact_new_source_backed_delta": "--- a/docs/skills/repository-operations.md\n+++ b/docs/skills/repository-operations.md\n@@\n and validate JUnit names, modules, failures, errors, and skips before calling\n-the gate passed. Source-mode tests do not establish frozen behavior. A\n+the gate passed. For a deliberate semantic RED, the installed pytest JUnit\n+emitter may omit a failure `type` attribute. Admit that exact envelope only\n+with the original named-case AssertionError trace at the frozen source path,\n+function, line and assertion; a generic failed return code is insufficient.\n+Preserve an admission failure and use a named successor rather than relabeling\n+the original attempt. Source-mode tests do not establish frozen behavior. A\n",
+    "remaining_uncertainty": "Only firstRED observed; restoredGREEN/remainingpairs/snapshot sensitivity/native allNOTRUN. Proposed successor not applied/approved/executed.",
+    "reuse": "Retain5584 copy/held-lock boundary and finite-enclosure sensitivity scope.",
+    "stale_ambiguity_removed": "Do not assume JUnit failure type is guaranteed by this installed emitter or treat rc1 as semantic mutant admission."
+  },
+  "failure_scope": "Controller protocol-admission mismatch. First intentional mutant failure is genuine source ordering assertion; no product bug or native compatibility inference. Original overallFAIL/SEMANTIC_RED_EXCEPTION_TYPE retained.",
+  "independent_proof": {
+    "bytes": 12526,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine18-original-ACTUALFAIL-independent-review/independent-original-first-RED-JUnit-robolog-protocol-and-current-source-proof.json",
+    "sha256": "819ab5d65d696597bf5559a1225fc8a00d764837ddfd4a50b6f017b05dc33b6d"
+  },
+  "minimal_SOURCE_diff_PROPOSED_NOT_APPLIED": "--- a/run_known_nine_18_semantic_once_NOTRUN.py\n+++ b/run_known_nine_18_semantic_once_NOTRUN.py\n@@\n-        need(failure.get('type')=='AssertionError','SEMANTIC_RED_EXCEPTION_TYPE')\n+        need('type' not in failure.attrib or failure.get('type')=='AssertionError','SEMANTIC_RED_EXCEPTION_TYPE')\n",
+  "original_child_binding": {
+    "bytes": 13532,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/OWNERFINAL-root-one-original-known-nine-18-semantic-RED-restored-GREEN.json",
+    "sha256": "6f31e0179d6ee28be04661e671d7ca7954b85244f9202b79832cb91cb65e6f3d"
+  },
+  "original_config_binding": {
+    "bytes": 67022,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/FROZEN-known-nine-18-semantic-15s-config-v2-NOTRUN.json",
+    "sha256": "b9010e2996df0285971f2c7ce31c4da04a6e7672505aa4240cb2b049aaae823d"
+  },
+  "original_launcher_binding": {
+    "bytes": 13750,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/run_known_nine_18_semantic_once_NOTRUN.py",
+    "sha256": "efd17b08026cba566dea30775226dbb327f0fa05a9b2c3872088c83a5f5b310b"
+  },
+  "original_outer_binding": {
+    "bytes": 825,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-known-nine18-reviewed-original-outer-once/OWNERFINAL-root-one-original-reviewed-known-nine18-outer.json",
+    "sha256": "70fa4015876b2b4408771e330bb30d20980f0d688df92cb0f4fec7722fd4cbbc"
+  },
+  "original_release_binding": {
+    "bytes": 1513,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-one-known-nine-18-semantic-controls-release.json",
+    "sha256": "026380a40a6e0fe3356ca23f1c1fb00806e3d4a042edaa5881ba5b32b09e7fb5"
+  },
+  "proposal_contract": {
+    "next_controls": "Need named source/config review and root distinct release; no new launcher/config/source write or tests performed in this read-only lane.",
+    "only_change": "Accept omitted type or explicit AssertionError, reject every other explicit type; raw strict AssertionError/namedtask/path/function/line/assertion admission remains mandatory.",
+    "root_identity": "Original once1 remains consumed; successor must use fresh ABSENT owned once-root and exact new config/launcher bindings.",
+    "unchanged": "All current product/test source,17originalbindings, nine mutants, expected cases/counts,15TERM10/parent30/1200TERM10parent1230, rawcapture/alwayspost/source guards and originalfailure history."
+  },
+  "reviewer_execution": "READONLY_STDLIB_PARSE_NO_IMPORT_NO_TEST_NO_NATIVE_NO_SOURCE_EDIT",
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_count": 1440,
+  "status": "INDEPENDENT_ORIGINAL_KNOWN18_ACTUAL_FAIL_STOP",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,24 @@
+{
+  "authoritative_executable_binding_and_current_file": {
+    "bytes": 7008,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCEFULL-preexecution/current-installed-xdist-and-toolkit-environment-readonly-proof.json",
+    "sha256": "f9164bbdec69ef9ce511353605282e93ff48a48ba6700b72b9d8da69e617ff55"
+  },
+  "delta": "Advisorymode0o400 inheritedfromv1; executablefrozen_input_bindings andcurrentfilemode0o600. Hash/size/pathsame. No command/guard/source bytes or executedadmissionchanged.",
+  "inherited_advisory_row": {
+    "bytes": 7008,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCEFULL-preexecution/current-installed-xdist-and-toolkit-environment-readonly-proof.json",
+    "sha256": "f9164bbdec69ef9ce511353605282e93ff48a48ba6700b72b9d8da69e617ff55"
+  },
+  "original_proposal": {
+    "bytes": 13489,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCEFULL-preexecution/OWNERFINAL-current396925-managed-configured-SOURCEFULL-preexecution-proposal-v2.json",
+    "sha256": "b9f857ef1305bcd906dd9afe6630a75e913fd2d74a6a6a5d675a535eba0b154c"
+  },
+  "schema": 1,
+  "status": "INFORMATIONAL_ROW_MODE_CLARIFICATION_NO_EXECUTION_ORIGINAL_V2_UNCHANGED",
+  "upstream_disposition": "none"
+}

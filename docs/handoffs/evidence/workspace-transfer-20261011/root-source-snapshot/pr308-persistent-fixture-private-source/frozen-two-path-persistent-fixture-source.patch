@@ -1,0 +1,614 @@
+diff --git a/action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py b/action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py
+--- a/action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py
++++ b/action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py
+@@ -245,7 +245,9 @@
+ @pytest.mark.integration_test
+ @pytest.mark.real_rcc
+ @pytest.mark.skipif(sys.platform != "linux", reason="source staging requires Linux")
+-def test_staged_package_executes_in_managed_rcc_runtime(tmp_path: Path, monkeypatch):
++def _run_staged_package_managed_worker(
++    tmp_path: Path, monkeypatch, *, persistent=False
++):
+     """Consume the exact staged bytes through RCC and verify worker provenance."""
+     if os.environ.get("ACTIONS_REAL_RCC_ARTIFACT_TEST") != "1":
+         pytest.skip("set ACTIONS_REAL_RCC_ARTIFACT_TEST=1 for staged RCC proof")
+@@ -296,6 +298,19 @@
+         "        'python_executable': str(Path(sys.executable).resolve()),\n"
+         "    }\n"
+     ).encode("utf-8")
++    if persistent:
++        # Alternate action payload only; legacy default bytes remain unchanged.
++        text = action_bytes.decode("utf-8")
++        text = text.replace("import sys\n", "import sys\nimport os\n_counter = 0\n")
++        text = text.replace(
++            "    source = Path(__file__).resolve()\n",
++            "    global _counter\n    _counter += 1\n    source = Path(__file__).resolve()\n",
++        )
++        text = text.replace(
++            "    return {\n",
++            "    return {\n        'counter': str(_counter),\n        'worker_pid': str(os.getpid()),\n",
++        )
++        action_bytes = text.encode("utf-8")
+     (source_package / "package.yaml").write_bytes(manifest_bytes)
+     (source_package / "action.py").write_bytes(action_bytes)
+ 
+@@ -412,6 +427,8 @@
+                     "core_version",
+                     "python_executable",
+                 }
++                if persistent:
++                    expected_result_fields.update({"counter", "worker_pid"})
+                 descriptor = load_descriptor(package.env_json)
+                 assert descriptor is not None
+                 assert descriptor.rcc_version == rcc_version
+@@ -421,7 +438,7 @@
+                 settings = Settings(
+                     datadir=data_dir, artifacts_dir=tmp_path / "artifacts"
+                 )
+-                settings.reuse_processes = False
++                settings.reuse_processes = persistent
+                 settings.min_processes = 0
+                 settings.max_processes = 1
+                 pool = ActionsProcessPool(settings, {package.id: package}, [action])
+@@ -443,23 +460,47 @@
+                     relative_artifacts_dir="",
+                     numbered_id=1,
+                 )
+-                with pool.obtain_process_for_action(action) as handle:
+-                    worker_handle = handle
+-                    assert (
+-                        handle.run_action(
+-                            run,
+-                            package,
+-                            action,
+-                            input_json,
+-                            run_dir,
+-                            output_file,
+-                            result_json,
+-                            {},
+-                            {},
+-                            False,
++                if not persistent:
++                    with pool.obtain_process_for_action(action) as handle:
++                        worker_handle = handle
++                        assert (
++                            handle.run_action(
++                                run,
++                                package,
++                                action,
++                                input_json,
++                                run_dir,
++                                output_file,
++                                result_json,
++                                {},
++                                {},
++                                False,
++                            )
++                            == 0
+                         )
+-                        == 0
++                else:
++                    from dataclasses import asdict
++
++                    from actions.server._rcc_runtime_adapter import (
++                        approved_rcc_test_policy,
+                     )
++
++                    selector = os.environ.get("ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY")
++                    assert selector is not None
++                    expected = approved_rcc_test_policy(selector)
++                    assert descriptor.rcc_compatibility == expected
++                    worker_handle, result_json, calls = _run_persistent_staged_calls(
++                        pool,
++                        package,
++                        action,
++                        run,
++                        run_dir,
++                        source_digests,
++                        (managed_home / "holotree").resolve(),
++                        (data_dir / ".rcc-runtime-sources").resolve(),
++                        asdict(expected),
++                    )
++                    evidence["persistent_calls"] = calls
+                 payload = json.loads(result_json.read_text(encoding="utf-8"))
+                 result = payload["result"]
+                 assert isinstance(result, dict)
+@@ -508,6 +549,23 @@
+                 evidence["worker"] = _staged_worker_evidence(
+                     worker_handle, worker_artifact_digest
+                 )
++                if persistent:
++                    measured_worker = evidence["worker"]
++                    calls = evidence["persistent_calls"]
++                    assert isinstance(measured_worker, dict)
++                    assert isinstance(calls, list) and calls
++                    assert isinstance(calls[0], dict)
++                    assert (
++                        measured_worker["runtime_receipt_path"]
++                        == calls[0]["receipt_path"]
++                    )
++                    raw = measured_worker["runtime_receipt"]
++                    assert isinstance(raw, dict)
++                    assert raw["artifactDigest"] == calls[0]["artifact_digest"]
++                    assert isinstance(raw.get("leaseId"), str) and raw["leaseId"]
++                    evidence["persistent_lease_identity_sha256"] = hashlib.sha256(
++                        raw["leaseId"].encode("utf-8")
++                    ).hexdigest()
+             except Exception as error:
+                 cleanup_errors.append(f"worker lease evidence: {type(error).__name__}")
+         evidence["status"] = (
+@@ -515,7 +573,11 @@
+         )
+         if cleanup_errors:
+             evidence["cleanup_errors"] = cleanup_errors
+-        receipt_path = os.environ.get("ACTIONS_RUNTIME_STAGED_CONSUMER_RECEIPT")
++        receipt_path = os.environ.get(
++            "ACTIONS_RUNTIME_STAGED_PERSISTENT_RECEIPT"
++            if persistent
++            else "ACTIONS_RUNTIME_STAGED_CONSUMER_RECEIPT"
++        )
+         if receipt_path:
+             path = Path(receipt_path)
+             path.parent.mkdir(parents=True, exist_ok=True)
+@@ -523,6 +585,28 @@
+                 json.dumps(evidence, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+             )
+     assert evidence["status"] == "PASS"
++
++
++@pytest.mark.integration_test
++@pytest.mark.real_rcc
++@pytest.mark.skipif(sys.platform != "linux", reason="source staging requires Linux")
++def test_staged_package_executes_in_managed_rcc_runtime(tmp_path: Path, monkeypatch):
++    """Consume the exact staged bytes through RCC and verify worker provenance."""
++    _run_staged_package_managed_worker(tmp_path, monkeypatch)
++
++
++@pytest.mark.integration_test
++@pytest.mark.real_rcc
++@pytest.mark.skipif(sys.platform != "linux", reason="source staging requires Linux")
++def test_staged_package_persistent_worker_reuses_one_approved_lease(
++    tmp_path: Path, monkeypatch
++):
++    """Six genuine RCC calls retain the approved worker and env-exec lease."""
++    if os.environ.get("ACTIONS_REAL_RCC_ARTIFACT_TEST") == "1":
++        assert (
++            os.environ.get("ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY") is not None
++        ), "persistent mode requires explicit approved compatibility"
++    _run_staged_package_managed_worker(tmp_path, monkeypatch, persistent=True)
+ 
+ 
+ def test_staging_fixture_admission_reuses_approved_tuple_and_rejects_wrong_bytes(
+@@ -713,3 +797,414 @@
+     assert evidence["wrapper_cleanup_result"] == asdict(cleanup)
+     assert evidence["retirement_result"] == asdict(retirement)
+     assert evidence["runtime_receipt"] == json.loads(path.read_text())
++
++
++def _validate_persistent_call_series(
++    rows,
++    *,
++    expected_compatibility,
++    artifact_digest,
++    receipt_path,
++    source_hash,
++    managed_root,
++    source_root,
++):
++    """Validate measured six-call facts; synthetic controls are never actual proof."""
++    import math
++
++    assert isinstance(rows, list) and len(rows) == 6
++    keys = {
++        "ordinal",
++        "counter",
++        "worker_pid",
++        "worker_created",
++        "wrapper_pid",
++        "wrapper_created",
++        "artifact_digest",
++        "compatibility",
++        "receipt_path",
++        "action_source_sha256",
++        "action_source_path",
++        "python_executable",
++        "core_origin",
++        "core_version",
++    }
++    first = rows[0]
++    for index, row in enumerate(rows, 1):
++        assert isinstance(row, dict) and set(row) == keys
++        assert isinstance(row["ordinal"], int) and not isinstance(row["ordinal"], bool)
++        assert row["ordinal"] == index
++        assert isinstance(row["counter"], int) and not isinstance(row["counter"], bool)
++        assert row["counter"] == index
++        for key in ("worker_pid", "wrapper_pid"):
++            assert isinstance(row[key], int) and not isinstance(row[key], bool)
++            assert 0 < row[key] < 2**63
++        for key in ("worker_created", "wrapper_created"):
++            assert isinstance(row[key], (int, float)) and not isinstance(row[key], bool)
++            assert math.isfinite(row[key]) and row[key] > 0
++        for key in ("worker_pid", "worker_created", "wrapper_pid", "wrapper_created"):
++            assert row[key] == first[key]
++        assert row["artifact_digest"] == artifact_digest
++        assert isinstance(row["compatibility"], dict)
++        assert row["compatibility"] == expected_compatibility
++        assert row["receipt_path"] == receipt_path
++        assert row["action_source_sha256"] == source_hash
++        assert row["core_version"] == "1.0.2"
++        for key, root in (
++            ("python_executable", managed_root),
++            ("core_origin", managed_root),
++            ("action_source_path", source_root),
++        ):
++            assert isinstance(row[key], str) and Path(row[key]).is_absolute()
++            assert Path(row[key]).resolve().is_relative_to(root.resolve())
++            assert row[key] == first[key]
++    return rows
++
++
++def _run_persistent_staged_calls(
++    pool,
++    package,
++    action,
++    run,
++    run_dir,
++    source_digests,
++    managed_root,
++    source_root,
++    expected_compatibility,
++):
++    """Execute six real pool calls; never substitute the native runner or handler."""
++    from dataclasses import asdict, replace
++
++    import psutil
++
++    from actions.server._rcc_runtime_adapter import load_descriptor
++
++    rows = []
++    last_handle = None
++    result_json = None
++    expected_artifact = None
++    expected_receipt = None
++    for ordinal in range(1, 7):
++        directory = run_dir / str(ordinal)
++        directory.mkdir()
++        input_json = directory / "input.json"
++        input_json.write_text("{}", encoding="utf-8")
++        result_json = directory / "result.json"
++        output = directory / "output.txt"
++        owned_run = replace(run, id=f"{run.id}-{ordinal}", numbered_id=ordinal)
++        with pool.obtain_process_for_action(action) as handle:
++            assert (
++                handle.run_action(
++                    owned_run,
++                    package,
++                    action,
++                    input_json,
++                    directory,
++                    output,
++                    result_json,
++                    {},
++                    {},
++                    True,
++                )
++                == 0
++            )
++            result = json.loads(result_json.read_text(encoding="utf-8"))["result"]
++            assert isinstance(result, dict)
++            assert isinstance(result.get("worker_pid"), str)
++            assert result["worker_pid"].isdecimal()
++            assert result.get("counter") == str(ordinal)
++            worker_pid = int(result["worker_pid"])
++            assert worker_pid > 0
++            wrapper = psutil.Process(handle.pid)
++            worker = psutil.Process(worker_pid)
++            worker_created = worker.create_time()
++            wrapper_created = wrapper.create_time()
++            assert worker_pid == wrapper.pid or any(
++                parent.pid == wrapper.pid and parent.create_time() == wrapper_created
++                for parent in worker.parents()
++            )
++            descriptor = load_descriptor(package.env_json)
++            assert descriptor is not None
++            assert descriptor.rcc_compatibility is not None
++            compatibility = asdict(descriptor.rcc_compatibility)
++            receipt = str(handle._rcc_wrapper.receipt_file.resolve())
++            if expected_artifact is None:
++                expected_artifact = descriptor.artifact_digest
++                expected_receipt = receipt
++            rows.append(
++                {
++                    "ordinal": ordinal,
++                    "counter": int(result["counter"]),
++                    "worker_pid": worker_pid,
++                    "worker_created": worker_created,
++                    "wrapper_pid": wrapper.pid,
++                    "wrapper_created": wrapper_created,
++                    "artifact_digest": descriptor.artifact_digest,
++                    "compatibility": compatibility,
++                    "receipt_path": receipt,
++                    "action_source_sha256": result.get("action_source_sha256"),
++                    "action_source_path": result.get("action_source_path"),
++                    "python_executable": result.get("python_executable"),
++                    "core_origin": result.get("core_origin"),
++                    "core_version": result.get("core_version"),
++                }
++            )
++            last_handle = handle
++    _validate_persistent_call_series(
++        rows,
++        expected_compatibility=expected_compatibility,
++        artifact_digest=expected_artifact,
++        receipt_path=expected_receipt,
++        source_hash=source_digests["action.py"],
++        managed_root=managed_root,
++        source_root=source_root,
++    )
++    assert last_handle is not None and result_json is not None
++    return last_handle, result_json, rows
++
++
++@pytest.fixture
++def persistent_synthetic_series(tmp_path):
++    root = tmp_path / "managed"
++    source = tmp_path / "sources"
++    root.mkdir()
++    source.mkdir()
++    expected = {
++        "compatibility_id": "c" * 64,
++        "version": "v18.19.5",
++        "binary_sha256": "b" * 64,
++        "source_commit": "d" * 40,
++    }
++    kwargs = {
++        "expected_compatibility": expected,
++        "artifact_digest": "sha256:" + "a" * 64,
++        "receipt_path": str(tmp_path / "real-lease.json"),
++        "source_hash": "e" * 64,
++        "managed_root": root,
++        "source_root": source,
++    }
++    rows = [
++        {
++            "ordinal": i,
++            "counter": i,
++            "worker_pid": 123,
++            "worker_created": 1234.125,
++            "wrapper_pid": 100,
++            "wrapper_created": 1230.5,
++            "artifact_digest": kwargs["artifact_digest"],
++            "compatibility": json.loads(json.dumps(expected)),
++            "receipt_path": kwargs["receipt_path"],
++            "action_source_sha256": kwargs["source_hash"],
++            "action_source_path": str(source / "snapshot/action.py"),
++            "python_executable": str(root / "python"),
++            "core_origin": str(root / "actions/__init__.py"),
++            "core_version": "1.0.2",
++        }
++        for i in range(1, 7)
++    ]
++    return rows, kwargs
++
++
++def test_valid_synthetic_series_only(persistent_synthetic_series):
++    rows, kwargs = persistent_synthetic_series
++    assert _validate_persistent_call_series(rows, **kwargs) == rows
++
++
++@pytest.mark.parametrize(
++    "poison",
++    [
++        "pid",
++        "created",
++        "wrapper",
++        "wrapper_created",
++        "artifact",
++        "compatibility",
++        "lease",
++        "counter",
++        "missing",
++        "bool",
++        "overflow",
++        "core",
++        "python",
++        "source",
++        "source_hash",
++        "nan",
++        "few",
++        "extra",
++    ],
++)
++def test_poisoned_synthetic_series_is_refused(persistent_synthetic_series, poison):
++    rows, kwargs = persistent_synthetic_series
++    if poison == "pid":
++        rows[3]["worker_pid"] = 124
++    elif poison == "created":
++        rows[3]["worker_created"] = 1234.126
++    elif poison == "wrapper":
++        rows[3]["wrapper_pid"] = 101
++    elif poison == "wrapper_created":
++        rows[3]["wrapper_created"] = 1230.6
++    elif poison == "artifact":
++        rows[3]["artifact_digest"] = "sha256:" + "f" * 64
++    elif poison == "compatibility":
++        rows[3]["compatibility"]["binary_sha256"] = "f" * 64
++    elif poison == "lease":
++        rows[3]["receipt_path"] += "-other"
++    elif poison == "counter":
++        rows[3]["counter"] = 3
++    elif poison == "missing":
++        del rows[3]["worker_created"]
++    elif poison == "bool":
++        rows[3]["worker_pid"] = True
++    elif poison == "overflow":
++        rows[3]["worker_pid"] = 2**65
++    elif poison == "core":
++        rows[3]["core_origin"] = "/unowned/private/core.py"
++    elif poison == "python":
++        rows[3]["python_executable"] = "/unowned/python"
++    elif poison == "source":
++        rows[3]["action_source_path"] = "/unowned/action.py"
++    elif poison == "source_hash":
++        rows[3]["action_source_sha256"] = "f" * 64
++    elif poison == "nan":
++        rows[3]["worker_created"] = float("nan")
++    elif poison == "few":
++        rows.pop()
++    elif poison == "extra":
++        rows[3]["unmeasured_field"] = "synthetic"
++    with pytest.raises(AssertionError):
++        _validate_persistent_call_series(rows, **kwargs)
++
++
++def _synthetic_loop_fixture(persistent_synthetic_series, monkeypatch, require_reuse):
++    import contextlib
++    import dataclasses
++    import json
++    import types
++
++    import psutil
++
++    from actions.server._rcc_runtime_adapter import (
++        RccRuntimeDescriptor,
++        approved_rcc_test_policy,
++    )
++
++    rows, kwargs = persistent_synthetic_series
++    expected = dataclasses.asdict(
++        approved_rcc_test_policy("released-18.19.5-linux-amd64")
++    )
++    descriptor = RccRuntimeDescriptor(
++        artifact_digest=kwargs["artifact_digest"],
++        rcc_version="v18.19.5",
++        rcc_compatibility=approved_rcc_test_policy("released-18.19.5-linux-amd64"),
++    )
++    package = types.SimpleNamespace(env_json=descriptor.to_json())
++
++    class FakeProcess:
++        def __init__(self, pid):
++            self.pid = pid
++
++        def create_time(self):
++            return 1230.5 if self.pid == 100 else 1234.125
++
++        def parents(self):
++            return [FakeProcess(100)]
++
++    monkeypatch.setattr(psutil, "Process", FakeProcess)
++    calls = []
++
++    class FakeHandle:
++        pid = 100
++        _rcc_wrapper = types.SimpleNamespace(receipt_file=Path(kwargs["receipt_path"]))
++
++        def run_action(self, *args):
++            if require_reuse:
++                assert args[-1] is True, "persistent real delegation omitted reuse flag"
++            calls.append(args)
++            payload = {
++                k: rows[0][k]
++                for k in (
++                    "action_source_sha256",
++                    "action_source_path",
++                    "python_executable",
++                    "core_origin",
++                    "core_version",
++                )
++            }
++            payload.update(counter=str(len(calls)), worker_pid="123")
++            args[6].write_text(json.dumps({"result": payload}))
++            return 0
++
++    class FakePool:
++        @contextlib.contextmanager
++        def obtain_process_for_action(self, action):
++            yield FakeHandle()
++
++    run_type = dataclasses.make_dataclass(
++        "SyntheticRun", [("id", str), ("numbered_id", int)]
++    )
++    run_dir = kwargs["managed_root"].parent / "runs"
++    run_dir.mkdir()
++    result = _run_persistent_staged_calls(
++        FakePool(),
++        package,
++        object(),
++        run_type("synthetic-owned-run", 1),
++        run_dir,
++        {"action.py": kwargs["source_hash"]},
++        kwargs["managed_root"],
++        kwargs["source_root"],
++        expected,
++    )
++    assert len(calls) == 6 and len(result[2]) == 6
++    return calls
++
++
++def test_synthetic_delegate_uses_actual_reuse_flag(
++    persistent_synthetic_series, monkeypatch
++):
++    assert all(
++        call[-1] is True
++        for call in _synthetic_loop_fixture(
++            persistent_synthetic_series, monkeypatch, True
++        )
++    )
++
++
++def test_synthetic_delegate_uses_existing_descriptor_dataclass_API(
++    persistent_synthetic_series, monkeypatch
++):
++    assert (
++        len(_synthetic_loop_fixture(persistent_synthetic_series, monkeypatch, False))
++        == 6
++    )
++
++
++@pytest.mark.parametrize(
++    "name",
++    [
++        "test_staged_package_executes_in_managed_rcc_runtime",
++        "test_staged_package_persistent_worker_reuses_one_approved_lease",
++    ],
++)
++def test_persistent_fixture_selector_contract(name):
++    marks = globals()[name].pytestmark
++    assert {mark.name for mark in marks} == {"real_rcc", "integration_test", "skipif"}
++    skip = next(mark for mark in marks if mark.name == "skipif")
++    assert skip.args == (sys.platform != "linux",)
++    assert skip.kwargs == {"reason": "source staging requires Linux"}
++
++
++def test_persistent_compatibility_before_setup(tmp_path, monkeypatch):
++    monkeypatch.setenv("ACTIONS_REAL_RCC_ARTIFACT_TEST", "1")
++    monkeypatch.delenv("ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY", raising=False)
++
++    def refuse_setup(*args, **kwargs):
++        raise AssertionError(
++            "unit control reached setup before compatibility admission"
++        )
++
++    monkeypatch.setitem(globals(), "_run_staged_package_managed_worker", refuse_setup)
++    with pytest.raises(AssertionError, match="explicit approved compatibility"):
++        test_staged_package_persistent_worker_reuses_one_approved_lease(
++            tmp_path, monkeypatch
++        )
+diff --git a/docs/skills/repository-operations.md b/docs/skills/repository-operations.md
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -2280,6 +2280,14 @@
+ The staged consumer fixture retains its worker's exact env-exec lease receipt
+ and actual typed retirement/cleanup snapshots in private evidence. Missing
+ snapshots stay null; testcase success does not prove lease release or reaping.
++Persistent RCC reuse has a separate six-call staged test: results must count
++1 through 6 while worker and wrapper PID/create-time pairs, artifact,
++compatibility identity and receipt path stay fixed. The default one-call
++nonreuse test remains distinct. A matching wrapper alone does not identify the
++Action worker; require its measured PID ancestry, managed interpreter/Core
++origins and source hash. Synthetic poison/delegation controls prove validator
++sensitivity, not real reuse. Preserve the terminal raw lease and unknown
++cleanup fields; actual candidate qualification remains a separate gate.
+ 
+ Managed spec-v2 Action packages use the provisional RCC runtime adapter only
+ when `ACTIONS_RUNTIME_RCC_PROVIDER` or `ACTIONS_REAL_RCC_ARTIFACT_TEST`

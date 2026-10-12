@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "status": "EXACT_OUTER_ARGV_METADATA_CLARIFICATION_NO_SCRIPT_OR_EXECUTION_CHANGE",
+  "original_review_binding": {
+    "path": "/workspace/engineering/root-current8d49-nine-real-baseline-launcher-independent-preexecution-review/OWNERFINAL-independent-root-current8d49-nine-real-baseline-only-launcher-PREEXEC-review.json",
+    "bytes": 7205,
+    "sha256": "c26921cbdd38617032f1a4a512b02f371410fe68d11ebee60c1c79136b7212d3",
+    "mode": "0o400"
+  },
+  "correction": "The original human-readable outer command field joined 10s and450s without a space. Use this exact structured argv after root independently establishes the unchanged managed18exports and PATH primary+cachedToolkit. Originalreview/sourceprogram unchanged.",
+  "outer_argv_after_exact_activation": [
+    "env",
+    "-u",
+    "PYTHONOPTIMIZE",
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "450s",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/root-current8d49-nine-real-baseline-once.py"
+  ],
+  "decision": "GO_ROOT_CURRENT8D49_EXACT_NINE_REAL_SOURCE_BASELINE_ONLY_LAUNCHER_PREEXEC_DISTINCT_ONE_RELEASE",
+  "new_execution": "NONE",
+  "upstream_disposition": "none"
+}

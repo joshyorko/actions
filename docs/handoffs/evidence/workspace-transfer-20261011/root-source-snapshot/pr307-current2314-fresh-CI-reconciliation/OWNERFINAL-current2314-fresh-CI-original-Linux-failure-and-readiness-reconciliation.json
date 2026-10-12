@@ -1,0 +1,90 @@
+{
+  "PR_state": {
+    "draft": false,
+    "mergeable": true,
+    "mergeable_state": "unstable",
+    "readiness_changed": false,
+    "state": "open"
+  },
+  "base": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "bracket": "PR before/after and named branch source/base exact",
+  "decision": "HOLD_FRESH_CURRENT2314_CI_OAUTH_ACQUISITION_FAILURE_AND_PENDING_JOBS",
+  "declared": {
+    "PR_flows": 7,
+    "PR_jobs": 23,
+    "all_pages_complete": true,
+    "counts": {
+      "cancelled": 1,
+      "failure": 1,
+      "in_progress": 14,
+      "queued": 5,
+      "success": 2
+    },
+    "eligible_PUSH_aux_flows": 1,
+    "eligible_PUSH_aux_jobs": 1,
+    "late_missing_PR_job": "Actions Runtime PYPI Release/publish needs build-sdist+three build-wheels; absent at sample, no terminal skip inferred",
+    "materialized_jobs_and_checks": 23,
+    "review_count": 0,
+    "review_threads_count": 0,
+    "statuses_count": 0
+  },
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md existing source-backed eventfilter/latejobs/actualcheckout lessons reused; no source mutation/cosmetic child",
+    "Durable_learning": "PR delta and realpush delta differ; auxiliaryCopilot push cannot be added to PR inventory. Original checkoutSHA, failure phase and safe checked-acquisition error remain distinct from source content authority.",
+    "Evidence": "Exact seven eligible PR YAML/three-way paths, push87e\u21922314 paths, original Linux fullSHA/error and bounded metadata pages",
+    "Remaining_uncertainty": "Underlying OAuth acquisition cause and unfinishedCI; policyUNKNOWN",
+    "Stale_or_ambiguous_guidance_removed": "Named owner corrects prior draft-label semantics; cancelledMac is not expectedskip, absentpublisher not terminalPASS, no oldfull carry"
+  },
+  "fresh_failure": {
+    "acquisition": "ONE supported connector acquisition; exact decoded UTF8 and full MCP response private, wire bytes UNKNOWN. Local first persistence attempt E2BIG retained in tool history; no reacquisition/retry.",
+    "cause": "Underlying gh stderr intentionally withheld by checked helper; auth/config/content cause UNKNOWN. Source confirms PR step has no explicitGH_TOKEN while nonPR step does; absence is context, not proof of exact acquisition cause. Fail-closed behavior is exercised; no acceptance downgrade or data substitution.",
+    "job_id": 114573005798,
+    "mac_disposition": "cancelled, not expectedSKIP orPASS",
+    "mac_sibling_job": 114573005803,
+    "phase": "Build OAuth2 config (PR), after successful frontend build, before wheel packaging",
+    "process_exit": 1,
+    "run_id": 38174209448,
+    "safe_original_error": "OAuth2 acquisition failed for actions-oauth-config.yaml (exit 4)",
+    "test_census": "No pytest terminal suite in this failed producer; no test failure count inferred."
+  },
+  "historical_actual_LIGHT": {
+    "bytes": 5514,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current2314-actual-LIGHT-independent-review/OWNERFINAL-independent-original-current2314-LIGHT-and-normal-draft-push-gate-review.json",
+    "sha256": "f602a973a97f194449996cae53a2ab5f5d38b8b76378fe9d871dfb8fd6f38d03"
+  },
+  "next_dependency_ready_step": "Root may review existing fail-closed acquisition/source authorization contract and explicit PR versus nonPR environment; no product edit or fake OAuth contents proposed by this reviewer. Await distinct source authority/approved bounded nextwave; no retry.",
+  "normal_push_owner": {
+    "bytes": 835,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-pr307-current2314-normal-source-refresh-once/OWNERFINAL-root-one-normal-existing-PR307-source-refresh.json",
+    "sha256": "7ca18d3090c18c635d948e86e123315d2b9291ba1beeea3f8a4312f3306f9112"
+  },
+  "prior_review_draft_precision": "Previous independentLIGHT decision used draft wording incorrectly. Original immutable review unchanged; source push policy assessment applies to disclosed normal existingbranch progress, actual PR307non-draft preserved. No readiness mutation requested or performed.",
+  "proof": {
+    "bytes": 231988,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current2314-fresh-CI-reconciliation/private-declared-and-original-diagnosis-proof.json",
+    "sha256": "0b4b4032589b8d71e4652e9490e26f39b73d5d38a456ac860573348add39352f"
+  },
+  "remaining_HOLD": [
+    "Current23CI jobs not terminal; publisher absent, failure present. No poll loop performed.",
+    "Current localFULLNOTRUN capacity floor remains; prior complete suites and prior OAuth failures historical only.",
+    "Branch protection/rulesets not queried in this bounded reconciliation; policyUNKNOWN no bypass.",
+    "OAuth content authority, native/provider/private/release/integration/issueclosure not qualified."
+  ],
+  "sample_at": "2026-10-11T20:56:21.343873+00:00",
+  "schema": 1,
+  "source": "2314aea95795fbc1372a6f7b0b7b298b7cf124c3",
+  "synthetic": {
+    "actual_checkout": "Original failed Linux log explicitly records same full SHA",
+    "parents": [
+      "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+      "2314aea95795fbc1372a6f7b0b7b298b7cf124c3"
+    ],
+    "sha": "3906a9cf871d2f58db60dd7de12d59e4f7a13cfc",
+    "tree": "2987ed3a23e560fb40e13aadbcd6bd613ead3f25"
+  },
+  "tree": "2987ed3a23e560fb40e13aadbcd6bd613ead3f25",
+  "upstream_disposition": "none"
+}

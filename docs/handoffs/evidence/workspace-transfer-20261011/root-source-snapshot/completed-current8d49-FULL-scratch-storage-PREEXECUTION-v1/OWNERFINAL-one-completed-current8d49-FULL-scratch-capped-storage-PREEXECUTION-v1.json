@@ -1,0 +1,207 @@
+{
+  "TMP_before_removal_reserve": 134217728,
+  "TMP_preexec_two_copy_floor": 419430400,
+  "all_originals_and_failed_partial_archives": "UNCHANGED_NOT_SELECTED",
+  "allocated_unique_inode_gain": 663945216,
+  "archive_aggregate_actual_byte_cap": 134217728,
+  "capacity_snapshot": {
+    "/dev/shm": 3236864000,
+    "/tmp": 450760704,
+    "/workspace": 1320370176
+  },
+  "combined_full_progress_indices_cap": 16777216,
+  "completion": "ORIGINAL_CONFIGURED_FULL1470PASS13SKIP_WITH_DISTINCT_ROOT_ENV_SUPPLEMENT_NO_RECYCLE_MARKER",
+  "completion_bindings": [
+    {
+      "bytes": 1278,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-SOURCEFULL-preexecution/one-current8d49-configured-FULL-original-owned/original-terminal.json",
+      "sha256": "54292bf9c05c9921949ca7710aaf27842d2d1562f6b1ee4a9d86377c88f43472"
+    },
+    {
+      "bytes": 10038,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-independent-SOURCEFULL-actual-review/OWNERFINAL-independent-current8d49-original-configured-SOURCEFULL-and-retained-ROOTpost-supplement-review.json",
+      "sha256": "073e235afffab50dee204bcaae236e77ceb8e23644db15a90a0e56d48dc8dca9"
+    },
+    {
+      "bytes": 1994,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-current8d49-one-FULL-original-owned/named-readonly-post-env-supplement/OWNERFINAL-named-readonly-full-post-env-supplement.json",
+      "sha256": "1bdd39ecaae8d8ae95ed28c3441de52c4b8f95117fdc71842085fd1374c8e235"
+    },
+    {
+      "bytes": 385745,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-SOURCEFULL-preexecution/one-current8d49-configured-FULL-original-owned/original-FULL-source.private.log",
+      "sha256": "6ac0621474e03351a703ac9f963530890d1a613146ce90677c35e8e35661b069"
+    }
+  ],
+  "decision": "NO_OPERATION_BY_OWNER",
+  "derived_actual_full_index": "/tmp/actions-completed-current8d49-FULL-scratch-preserved-v1/private-complete-prestage-inventory-and-verification.json.gz",
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "durable_learning_captured": "Reuse accepted finite actual-write all-staged metadata/hardlink/gzip/footer/index-before-removal algorithm and same-mount two-copy budget; use existing capped/fsynced progress writer in actual loop",
+    "evidence": "15 original core ASTs exact; actual receipt constructor selects _IndexBudgetPath; fixed index address derived directly from executable; 663945216B unique-inode allocation and 419430400B TMP envelope",
+    "remaining_uncertainty": "Compression/capacity at execution prospective, actual preservation NOT_RUN, observed handles limited; failed V9 preservation follows only after distinct authority",
+    "stale_or_ambiguous_guidance_removed": "Defining a capped writer does not prove the removal loop uses it; completed root is not a recycle marker or a sole FULL-floor unblock"
+  },
+  "finite_envelopes": {
+    "Python_parent_child_timeout_seconds": 615,
+    "ROOT_outer_KILL_after_seconds": 10,
+    "ROOT_outer_TERM_seconds": 900,
+    "archiver_KILL_after_seconds": 10,
+    "archiver_TERM_seconds": 600,
+    "metadata_guard_timeout_seconds": 60
+  },
+  "fresh_capacity_required_before_actual": true,
+  "future_DEST": "/tmp/actions-completed-current8d49-FULL-scratch-preserved-v1",
+  "future_STAGE": "/tmp/actions-completed-current8d49-FULL-scratch-preservation-stage-v1",
+  "future_owned": "/workspace/engineering/root-completed-current8d49-FULL-scratch-storage-one-owned-v1",
+  "independent_review_required_decision": "GO_EXACT_ONE_COMPLETED_CURRENT8D49_FULL_SCRATCH_CAPPED_STORAGE_PREEXECUTION_V1",
+  "kinds": {
+    "directory": 3504,
+    "fifo": 8,
+    "file": 11808,
+    "symlink": 511
+  },
+  "managed_activation": "existing activate.sh + primary RCC PATH0 + exact cached Toolkit bin PATH1 + original18 exports; unset PYTHONOPTIMIZE/PYTEST_ADDOPTS; PYTHONDONTWRITEBYTECODE=1",
+  "member_count": 15831,
+  "native_source_qualification": "UNCHANGED_NO_NATIVE_EXECUTION",
+  "operation_argv": [
+    "/usr/bin/timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "900s",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/launch_once.py",
+    "--root-execute-reviewed-completed-current8d49-FULL-scratch",
+    "/workspace/engineering/root-completed-current8d49-FULL-scratch-storage-reviewed-release-v1.json"
+  ],
+  "original_previous_PREPARATION_HOLD": {
+    "bytes": 7941,
+    "mode": "0o400",
+    "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREPARATION/OWNERFINAL-completed-current8d49-FULL-scratch-inventory-overlap-finite-partial-gain-PREPARATION-HOLD.json",
+    "sha256": "c3b50ad1dd36c9ce9c89cab24172a2aa1acd1170de5288f494d5d1ad7f2c5e5f"
+  },
+  "private_references": [
+    {
+      "bytes": 9378479,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/private-exact-one-completed-FULL-scratch-inputs.json",
+      "sha256": "1ef448b2ee0b2b00462c516a096c858287f5d117d2f43171b9f679c75b9206ee"
+    },
+    {
+      "bytes": 20624,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/archive_exact_one_completed_FULL_scratch_once.py",
+      "sha256": "cbef9302218b8a3ba94fd86d33ef718905365340790254db84d4cdf8d6894477"
+    },
+    {
+      "bytes": 7370,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/guard_readonly.py",
+      "sha256": "297a1360e7239f942a438500a8428a98cacacfbcf1aff7c5ca34204f68df1b8c"
+    },
+    {
+      "bytes": 9730,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/launch_once.py",
+      "sha256": "c00c5b9b038f542d25544fe3e06ba278e8f8fc53e1343299a684944337e058e2"
+    },
+    {
+      "bytes": 2025,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/static-executable-address-core-and-progress-writer-closure.json",
+      "sha256": "43a58e85174553e11fab4861bbe63af74d890ee5d476e339642937ef08a32721"
+    },
+    {
+      "bytes": 931900,
+      "mode": "0o600",
+      "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/private-complete-original-FULL-scratch-snapshot.json.gz",
+      "sha256": "756788149ddee1934276b1aa20e25c6588a51ebb3a8625d7aeaf8c277b248ea4"
+    },
+    {
+      "bytes": 25087,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v5/archive_exact_five_completed_roots_once.py",
+      "sha256": "d4eba36f117f53dca6f52cd7a4337ac4e1bc160ab336a0dafa3f2a532d0153a0"
+    },
+    {
+      "bytes": 7938,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v5/guard_readonly.py",
+      "sha256": "4606f78d4b16c642c3af2b91e6f28f8183d60fb7a1261b5f267ed120f1fab432"
+    },
+    {
+      "bytes": 9513,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v5/launch_once.py",
+      "sha256": "d43e94b259f6d2bb984e6996206d553bdf5cf76bed4cfe06a061638d731f53fd"
+    },
+    {
+      "bytes": 21765,
+      "mode": "0o600",
+      "path": "/tmp/construct-current8d49-completed-FULL-storage-preexec-once.py",
+      "sha256": "5cc6db8d6ed4c0ca91e1d02bd0c9484cc05d7ad4ab1d2eec7aa145d994fe1a25"
+    },
+    {
+      "bytes": 20624,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/archive_exact_one_completed_FULL_scratch_once.py",
+      "sha256": "cbef9302218b8a3ba94fd86d33ef718905365340790254db84d4cdf8d6894477"
+    },
+    {
+      "bytes": 7370,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/guard_readonly.py",
+      "sha256": "297a1360e7239f942a438500a8428a98cacacfbcf1aff7c5ca34204f68df1b8c"
+    },
+    {
+      "bytes": 9378479,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/private-exact-one-completed-FULL-scratch-inputs.json",
+      "sha256": "1ef448b2ee0b2b00462c516a096c858287f5d117d2f43171b9f679c75b9206ee"
+    },
+    {
+      "bytes": 3010,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v3/guard_capture.py",
+      "sha256": "7ce1b282a002fbf03371ba0b1c5ba1684253ee68ffcf234f16e58e7902860c2a"
+    },
+    {
+      "bytes": 4922,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/exact_original_row_archive_aliases.py",
+      "sha256": "fdbe4493f59c0256c4ca63f0da390c71d2a1d6c98dfc9f8d4cc0b5187561712e"
+    },
+    {
+      "bytes": 6966,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v5/private-fixed-nine-original-row-future-archive-member-plan.json",
+      "sha256": "ce099428e2647c6793d3f1d2bc541d5b864c58ebffe40371007cc7d7ac3236e8"
+    }
+  ],
+  "prospective_TMP_after_recovery_lower_bound": 963710976,
+  "prospective_TMP_net_gain_at_full_archive_index_caps": 512950272,
+  "protected_before_alwayspost": "EXACT_CURRENT8D49_1440_ORIGINAL237_NATIVE1192_PREPARED30_OWN_FIVE_ORIGINS_PLUS_EXISTING_FIXED_ALIASES",
+  "purpose": "ENGINEERING_RAM_TMP_PARTIAL_RECOVERY_THEN_DISTINCT_FAILED_V9_ROOT_PRESERVATION",
+  "root_release_schema": "ROOT_ONE_EXACT_COMPLETED_CURRENT8D49_FULL_SCRATCH_STORAGE_RELEASE_V1",
+  "schema": "ONE_COMPLETED_CURRENT8D49_FULL_SCRATCH_STORAGE_PREEXECUTION_V1",
+  "selected_label": "completed-FULL-once-1",
+  "selected_root": "/tmp/actions-pr308-current8d49-FULL-once-1",
+  "sole_SOURCEFULL_floor_unblock_claim": false,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_FULL_TMP_floor": 1200000000,
+  "source_registry_provider_browser_installs_new_infrastructure": "NOT_RUN_NOT_AUTHORIZED",
+  "static_closure": {
+    "bytes": 2025,
+    "mode": "0o400",
+    "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/static-executable-address-core-and-progress-writer-closure.json",
+    "sha256": "43a58e85174553e11fab4861bbe63af74d890ee5d476e339642937ef08a32721"
+  },
+  "status": "PREEXECUTION_PENDING_INDEPENDENT_REVIEW_ROOT_DISTINCT_ONE_RELEASE",
+  "tests_archive_remove": "NOT_RUN",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,830 @@
+{
+  "schema": "original306-fada-startup-snapshot-allowlisted-proof-v1",
+  "verdict": "HOLD_RESOURCE_INITIAL_READINESS_AND_CAPTURED_LIVE_CHILD_CLEANUP_FAILURE_CAUSE_UNKNOWN",
+  "run": 38130109466,
+  "job": 114442488607,
+  "artifact": 11699761944,
+  "original_ZIP": {
+    "path": "/workspace/engineering/pr306-current618-fada-startup-diagnostic-original-owned/original-artifact-11699761944.zip",
+    "bytes": 6951,
+    "sha256": "92219c8a6699d6cdd03590f5820ad837552a8ab0b385051e9f68d215a4319d4a"
+  },
+  "original_members": [
+    {
+      "member": "34ec97696df8d90c-2.json",
+      "bytes": 4359,
+      "sha256": "707f2a842fe91bd54d88185d83130332e15e98163df55388107cd0218d517070",
+      "CRC32": "48e31f98",
+      "recorded_mode": "0o100666",
+      "private_retained_mode": "0600"
+    },
+    {
+      "member": "34ec97696df8d90c-1.json",
+      "bytes": 1578,
+      "sha256": "f03f597f4305ae96c517928bcf752885c3d948cd8a7873c3eb142eb1721f138a",
+      "CRC32": "b800f2d6",
+      "recorded_mode": "0o100666",
+      "private_retained_mode": "0600"
+    },
+    {
+      "member": "34ec97696df8d90c-4.json",
+      "bytes": 1511,
+      "sha256": "00f82b6c8180be2bdf3f529e1696cc2b2b4b7850fd035247c08390ea5e5b2aab",
+      "CRC32": "8c4e6faa",
+      "recorded_mode": "0o100666",
+      "private_retained_mode": "0600"
+    },
+    {
+      "member": "34ec97696df8d90c-3.json",
+      "bytes": 2852,
+      "sha256": "4bed888f22a9f53cb405cf009d1273f44fa99e0ff4d4972c8ae4cde7cfff64cd",
+      "CRC32": "d538eeef",
+      "recorded_mode": "0o100666",
+      "private_retained_mode": "0600"
+    },
+    {
+      "member": "7d0f2e912f58600f-1.json",
+      "bytes": 1559,
+      "sha256": "0233875a974abfde45c5f33909dcc1452171a852104aa9f8564677fcb8c67d0d",
+      "CRC32": "90822f1e",
+      "recorded_mode": "0o100666",
+      "private_retained_mode": "0600"
+    },
+    {
+      "member": "7d0f2e912f58600f-2.json",
+      "bytes": 2856,
+      "sha256": "081aa0e761bda99fbd97758d1a4e6ccbfdbbd5dc40e9edd21fb8932049965e57",
+      "CRC32": "00d1ab81",
+      "recorded_mode": "0o100666",
+      "private_retained_mode": "0600"
+    },
+    {
+      "member": "7d0f2e912f58600f-3.json",
+      "bytes": 3439,
+      "sha256": "4a2dd288268a41bc4201fe711171b994b967345c3235fb71d7afd9bc9701e6e2",
+      "CRC32": "a0b3efc5",
+      "recorded_mode": "0o100666",
+      "private_retained_mode": "0600"
+    }
+  ],
+  "expanded_bytes": 18154,
+  "actual_runner": {
+    "sha": "522b7bc6e7e9207dac0c745b49d90907ecdf3080",
+    "tree": "a31db4434c7bbe69bf572626d2174f64f9ff2f39",
+    "ordered_parents": [
+      "6181b044c75de35386f1ae30e71725398b6a7feb",
+      "fada8e068f61f6e0e380ec4685eed2f4cf0b9ade"
+    ],
+    "identity_GITHUB_SHA_equal_original_log_checkout": true
+  },
+  "candidate_source": "fada8e068f61f6e0e380ec4685eed2f4cf0b9ade",
+  "later_API_merge_ref": "3dae00de315bfa9d909cc2a546f717da342c329b",
+  "previous_failure_owner": {
+    "path": "/workspace/engineering/pr306-current618-fada-original-Windows-failure-owned/OWNERFINAL-original306-fada-Windows-readiness-failure-v6.json",
+    "bytes": 22555,
+    "sha256": "8c7dd3ed54418c4e69456e831d710b6436fdc4969be7b55fdb4d94d2b19d9427"
+  },
+  "resource_case": {
+    "identity": {
+      "GITHUB_RUN_ATTEMPT": "1",
+      "GITHUB_RUN_ID": "38130109466",
+      "GITHUB_SHA": "522b7bc6e7e9207dac0c745b49d90907ecdf3080",
+      "failure_cleanup_seconds": 20,
+      "native_executable": {
+        "status": "measured_after_start_returns"
+      },
+      "nodeid": "tests/action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[resource]",
+      "rcc_config": {
+        "sha256": "28d518e939eeb8c7625898e5f9691b051f17924a5b800726a241b2919ecab8f9",
+        "size": 61
+      },
+      "readiness_seconds": 90,
+      "sample_seconds": [
+        80,
+        88
+      ],
+      "schema": 1,
+      "source_files": {
+        "src/actions/server/_rcc.py": {
+          "sha256": "36ea643613cd17028160f79e3646f4e48d4b271c94bfaf5ac488bcca60d347da",
+          "size": 17638
+        },
+        "src/actions/server/_robo_utils/process.py": {
+          "sha256": "94c1ebe15ee8e2971da5056858b2c9726e4297a99f3b80cfae17f5b74d2a8721",
+          "size": 14638
+        },
+        "src/actions/server/_selftest.py": {
+          "sha256": "d07e6877c858d8ea51f3b8e4730dbb2014a7ef8b67038971474aa61b65cfb420",
+          "size": 26204
+        },
+        "tests/action_server_tests/fixtures.py": {
+          "sha256": "7e75dc6b39c6bcd99c24ddd122b180b787780cfe15d97e6f7089518af0272ebd",
+          "size": 13575
+        },
+        "tests/action_server_tests/native_startup_diagnostics.py": {
+          "sha256": "61da7442cf4cbbdb5c4267df1ace00ab3d7484fe161dbf23d4478883d804b8fd",
+          "size": 25197
+        },
+        "tests/action_server_tests/test_cli_live_reload_multi_package.py": {
+          "sha256": "a1bc4c378c3afce4c89f54ed1b27784db86ce98b27c03dbc8a0e72049a2eccdd",
+          "size": 15492
+        },
+        "tests/action_server_tests/test_cli_mcp_catalog_rollback.py": {
+          "sha256": "9414dbfd31a49619005dc5417e36e421d60406fd9a3385ab9b6968760eba902f",
+          "size": 14354
+        }
+      }
+    },
+    "reported_source_hash_representation": [
+      {
+        "path": "action_server/src/actions/server/_rcc.py",
+        "Git_body_sha256": "74a0646de66d3bfb5a30339080a37c5dc0f79b2e0ab46b7c16a6c19717e6d41b",
+        "Git_body_bytes": 17149,
+        "Git_mode": "100644",
+        "original_reported_body": {
+          "sha256": "36ea643613cd17028160f79e3646f4e48d4b271c94bfaf5ac488bcca60d347da",
+          "size": 17638
+        },
+        "reported_hash_and_size_equal_Git_LF_to_CRLF_representation": true,
+        "actual_checkout_newline_configuration": "UNKNOWN_NOT_RETAINED",
+        "no_body_normalization_qualification_waiver": true
+      },
+      {
+        "path": "action_server/src/actions/server/_robo_utils/process.py",
+        "Git_body_sha256": "847cf543ded2a745416e193355c810c12daccf9e81ecc344465f328af1937aa7",
+        "Git_body_bytes": 14197,
+        "Git_mode": "100644",
+        "original_reported_body": {
+          "sha256": "94c1ebe15ee8e2971da5056858b2c9726e4297a99f3b80cfae17f5b74d2a8721",
+          "size": 14638
+        },
+        "reported_hash_and_size_equal_Git_LF_to_CRLF_representation": true,
+        "actual_checkout_newline_configuration": "UNKNOWN_NOT_RETAINED",
+        "no_body_normalization_qualification_waiver": true
+      },
+      {
+        "path": "action_server/src/actions/server/_selftest.py",
+        "Git_body_sha256": "74fc0360481981311def7dad28ae716d4d001157059eae02df15a52b615ee5af",
+        "Git_body_bytes": 25371,
+        "Git_mode": "100644",
+        "original_reported_body": {
+          "sha256": "d07e6877c858d8ea51f3b8e4730dbb2014a7ef8b67038971474aa61b65cfb420",
+          "size": 26204
+        },
+        "reported_hash_and_size_equal_Git_LF_to_CRLF_representation": true,
+        "actual_checkout_newline_configuration": "UNKNOWN_NOT_RETAINED",
+        "no_body_normalization_qualification_waiver": true
+      },
+      {
+        "path": "action_server/tests/action_server_tests/fixtures.py",
+        "Git_body_sha256": "2db8403ad100977951a4a07a0585668db493147d7be316e8d60641b7a416a854",
+        "Git_body_bytes": 13151,
+        "Git_mode": "100644",
+        "original_reported_body": {
+          "sha256": "7e75dc6b39c6bcd99c24ddd122b180b787780cfe15d97e6f7089518af0272ebd",
+          "size": 13575
+        },
+        "reported_hash_and_size_equal_Git_LF_to_CRLF_representation": true,
+        "actual_checkout_newline_configuration": "UNKNOWN_NOT_RETAINED",
+        "no_body_normalization_qualification_waiver": true
+      },
+      {
+        "path": "action_server/tests/action_server_tests/native_startup_diagnostics.py",
+        "Git_body_sha256": "b365e561c79240146ed5ac8fb07735d095cab11a25dba038bd43cbf3d80bbee4",
+        "Git_body_bytes": 24556,
+        "Git_mode": "100644",
+        "original_reported_body": {
+          "sha256": "61da7442cf4cbbdb5c4267df1ace00ab3d7484fe161dbf23d4478883d804b8fd",
+          "size": 25197
+        },
+        "reported_hash_and_size_equal_Git_LF_to_CRLF_representation": true,
+        "actual_checkout_newline_configuration": "UNKNOWN_NOT_RETAINED",
+        "no_body_normalization_qualification_waiver": true
+      },
+      {
+        "path": "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py",
+        "Git_body_sha256": "1fa3944b8984314f7a00aeaf59b0927c5dd2b8995ff52536cd20e8d002feb0a3",
+        "Git_body_bytes": 15097,
+        "Git_mode": "100644",
+        "original_reported_body": {
+          "sha256": "a1bc4c378c3afce4c89f54ed1b27784db86ce98b27c03dbc8a0e72049a2eccdd",
+          "size": 15492
+        },
+        "reported_hash_and_size_equal_Git_LF_to_CRLF_representation": true,
+        "actual_checkout_newline_configuration": "UNKNOWN_NOT_RETAINED",
+        "no_body_normalization_qualification_waiver": true
+      },
+      {
+        "path": "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py",
+        "Git_body_sha256": "f02184650c57217f4784e3916d75c9d74085f3cf23685a84264bdf1571d86f34",
+        "Git_body_bytes": 13964,
+        "Git_mode": "100644",
+        "original_reported_body": {
+          "sha256": "9414dbfd31a49619005dc5417e36e421d60406fd9a3385ab9b6968760eba902f",
+          "size": 14354
+        },
+        "reported_hash_and_size_equal_Git_LF_to_CRLF_representation": true,
+        "actual_checkout_newline_configuration": "UNKNOWN_NOT_RETAINED",
+        "no_body_normalization_qualification_waiver": true
+      }
+    ],
+    "samples": [
+      {
+        "elapsed_seconds": 80.062,
+        "member": "34ec97696df8d90c-2.json",
+        "snapshot": {
+          "captured_stderr": {
+            "characters": 4312,
+            "last_rcc_command": {
+              "bundled": true,
+              "config_argument_present": true,
+              "controller": "action-server",
+              "json": true,
+              "no_pyc_management": true,
+              "no_retry_build": true,
+              "operation": "holotree variables",
+              "package_argument_present": true,
+              "robocorp": true,
+              "space": "460c42919b8a21c5",
+              "unrecognized_arguments": 0
+            }
+          },
+          "captured_stdout_characters": 0,
+          "descendant_limit_reached": false,
+          "host_readers": [
+            {
+              "alive": true,
+              "ident": 4052
+            },
+            {
+              "alive": true,
+              "ident": 7916
+            }
+          ],
+          "pipes_closed": {
+            "stderr": false,
+            "stdout": false
+          },
+          "processes": [
+            {
+              "command": {
+                "operation": "unavailable"
+              },
+              "cpu_seconds": 0.015625,
+              "created": 1791713558.2418997,
+              "handles": 100,
+              "io_bytes": {
+                "read": 64,
+                "write": 0
+              },
+              "parent_pid": 5448,
+              "pid": 6676,
+              "status": "running"
+            },
+            {
+              "command": {
+                "operation": "unavailable"
+              },
+              "cpu_seconds": 0.25,
+              "created": 1791713558.2486525,
+              "handles": 217,
+              "io_bytes": {
+                "read": 6151829,
+                "write": 334483
+              },
+              "parent_pid": 6676,
+              "pid": 2132,
+              "status": "running"
+            },
+            {
+              "command": {
+                "bundled": true,
+                "config_argument_present": true,
+                "controller": "action-server",
+                "json": true,
+                "no_pyc_management": true,
+                "no_retry_build": true,
+                "operation": "holotree variables",
+                "package_argument_present": true,
+                "robocorp": true,
+                "space": "460c42919b8a21c5",
+                "unrecognized_arguments": 0
+              },
+              "cpu_seconds": 0.28125,
+              "created": 1791713558.5789516,
+              "effective_home_matches_launch": true,
+              "env_info_cache_exists": false,
+              "handles": 157,
+              "io_bytes": {
+                "read": 3739,
+                "write": 10863444
+              },
+              "parent_pid": 2132,
+              "pid": 4980,
+              "rcc_executable": {
+                "sha256": "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4",
+                "size": 19985408
+              },
+              "staged_package": {
+                "sha256": "fca4e1c7996139099f6fcc58a058b1df672cdaf7a3870bcd456a747455fa145e",
+                "size": 204
+              },
+              "status": "running"
+            },
+            {
+              "command": {
+                "operation": "unavailable"
+              },
+              "cpu_seconds": 58.296875,
+              "created": 1791713559.2240195,
+              "handles": 243,
+              "io_bytes": {
+                "read": 973068628,
+                "write": 744234663
+              },
+              "parent_pid": 4980,
+              "pid": 2024,
+              "status": "running"
+            },
+            {
+              "command": {
+                "operation": "unavailable"
+              },
+              "cpu_seconds": 0.015625,
+              "created": 1791713635.1310918,
+              "handles": 89,
+              "io_bytes": {
+                "read": 63582,
+                "write": 0
+              },
+              "parent_pid": 2024,
+              "pid": 1300,
+              "status": "running"
+            },
+            {
+              "command": {
+                "operation": "unavailable"
+              },
+              "cpu_seconds": 0.09375,
+              "created": 1791713635.1940835,
+              "handles": 793,
+              "io_bytes": {
+                "read": 1846220,
+                "write": 105694
+              },
+              "parent_pid": 1300,
+              "pid": 3224,
+              "status": "running"
+            },
+            {
+              "command": {
+                "operation": "unavailable"
+              },
+              "cpu_seconds": 0.21875,
+              "created": 1791713635.4061184,
+              "handles": 104,
+              "io_bytes": {
+                "read": 2872778,
+                "write": 1103646
+              },
+              "parent_pid": 3224,
+              "pid": 5176,
+              "status": "running"
+            },
+            {
+              "command": {
+                "operation": "unavailable"
+              },
+              "cpu_seconds": 0.1875,
+              "created": 1791713635.4084842,
+              "handles": 104,
+              "io_bytes": {
+                "read": 2987299,
+                "write": 1241821
+              },
+              "parent_pid": 3224,
+              "pid": 2520,
+              "status": "running"
+            },
+            {
+              "command": {
+                "operation": "unavailable"
+              },
+              "cpu_seconds": 0.21875,
+              "created": 1791713635.409752,
+              "handles": 104,
+              "io_bytes": {
+                "read": 2918884,
+                "write": 1140789
+              },
+              "parent_pid": 3224,
+              "pid": 1440,
+              "status": "running"
+            },
+            {
+              "command": {
+                "operation": "unavailable"
+              },
+              "cpu_seconds": 0.28125,
+              "created": 1791713635.4110093,
+              "handles": 104,
+              "io_bytes": {
+                "read": 3205108,
+                "write": 1257764
+              },
+              "parent_pid": 3224,
+              "pid": 768,
+              "status": "running"
+            }
+          ],
+          "rcc_internal_readers": "unavailable_from_host",
+          "wrapper_pid": 6676,
+          "wrapper_returncode": null
+        },
+        "delivered_observations": {
+          "cleanup": {
+            "status": "unavailable"
+          },
+          "count_overflow": false,
+          "counts": {
+            "stderr_lines": 18,
+            "stdout_lines": 0,
+            "truncated_lines": 0
+          },
+          "lock_loss": false,
+          "mark_cap_reached": false,
+          "observation_loss": false,
+          "port_positive_after_start": null,
+          "probe_error": false,
+          "process_start_return_offset_seconds": 0.0,
+          "progress": {
+            "interval_sum_seconds": null,
+            "marks": []
+          },
+          "readiness": {
+            "stderr": {
+              "exact_match_count": 0,
+              "first_match_before_deadline_lower_bound": null,
+              "first_match_offset_seconds": null,
+              "last_match_before_deadline_lower_bound": null,
+              "last_match_offset_seconds": null,
+              "literal_marker_count": 0
+            },
+            "stdout": {
+              "exact_match_count": 0,
+              "first_match_before_deadline_lower_bound": null,
+              "first_match_offset_seconds": null,
+              "last_match_before_deadline_lower_bound": null,
+              "last_match_offset_seconds": null,
+              "literal_marker_count": 0
+            }
+          },
+          "readiness_future": "unavailable_from_host",
+          "status": "observed"
+        }
+      },
+      {
+        "elapsed_seconds": 88.109,
+        "member": "34ec97696df8d90c-3.json",
+        "snapshot": {
+          "captured_stderr": {
+            "characters": 4312,
+            "last_rcc_command": {
+              "bundled": true,
+              "config_argument_present": true,
+              "controller": "action-server",
+              "json": true,
+              "no_pyc_management": true,
+              "no_retry_build": true,
+              "operation": "holotree variables",
+              "package_argument_present": true,
+              "robocorp": true,
+              "space": "460c42919b8a21c5",
+              "unrecognized_arguments": 0
+            }
+          },
+          "captured_stdout_characters": 0,
+          "descendant_limit_reached": false,
+          "host_readers": [
+            {
+              "alive": true,
+              "ident": 4052
+            },
+            {
+              "alive": true,
+              "ident": 7916
+            }
+          ],
+          "pipes_closed": {
+            "stderr": false,
+            "stdout": false
+          },
+          "processes": [
+            {
+              "command": {
+                "operation": "unavailable"
+              },
+              "cpu_seconds": 0.015625,
+              "created": 1791713558.2418997,
+              "handles": 100,
+              "io_bytes": {
+                "read": 64,
+                "write": 0
+              },
+              "parent_pid": 5448,
+              "pid": 6676,
+              "status": "running"
+            },
+            {
+              "command": {
+                "operation": "unavailable"
+              },
+              "cpu_seconds": 0.25,
+              "created": 1791713558.2486525,
+              "handles": 217,
+              "io_bytes": {
+                "read": 6151829,
+                "write": 334483
+              },
+              "parent_pid": 6676,
+              "pid": 2132,
+              "status": "running"
+            },
+            {
+              "command": {
+                "bundled": true,
+                "config_argument_present": true,
+                "controller": "action-server",
+                "json": true,
+                "no_pyc_management": true,
+                "no_retry_build": true,
+                "operation": "holotree variables",
+                "package_argument_present": true,
+                "robocorp": true,
+                "space": "460c42919b8a21c5",
+                "unrecognized_arguments": 0
+              },
+              "cpu_seconds": 1.796875,
+              "created": 1791713558.5789516,
+              "effective_home_matches_launch": true,
+              "env_info_cache_exists": false,
+              "handles": 165,
+              "io_bytes": {
+                "read": 244398858,
+                "write": 30016529
+              },
+              "parent_pid": 2132,
+              "pid": 4980,
+              "rcc_executable": {
+                "sha256": "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4",
+                "size": 19985408
+              },
+              "staged_package": {
+                "sha256": "fca4e1c7996139099f6fcc58a058b1df672cdaf7a3870bcd456a747455fa145e",
+                "size": 204
+              },
+              "status": "running"
+            }
+          ],
+          "rcc_internal_readers": "unavailable_from_host",
+          "wrapper_pid": 6676,
+          "wrapper_returncode": null
+        },
+        "delivered_observations": {
+          "cleanup": {
+            "status": "unavailable"
+          },
+          "count_overflow": false,
+          "counts": {
+            "stderr_lines": 18,
+            "stdout_lines": 0,
+            "truncated_lines": 0
+          },
+          "lock_loss": false,
+          "mark_cap_reached": false,
+          "observation_loss": false,
+          "port_positive_after_start": null,
+          "probe_error": false,
+          "process_start_return_offset_seconds": 0.0,
+          "progress": {
+            "interval_sum_seconds": null,
+            "marks": []
+          },
+          "readiness": {
+            "stderr": {
+              "exact_match_count": 0,
+              "first_match_before_deadline_lower_bound": null,
+              "first_match_offset_seconds": null,
+              "last_match_before_deadline_lower_bound": null,
+              "last_match_offset_seconds": null,
+              "literal_marker_count": 0
+            },
+            "stdout": {
+              "exact_match_count": 0,
+              "first_match_before_deadline_lower_bound": null,
+              "first_match_offset_seconds": null,
+              "last_match_before_deadline_lower_bound": null,
+              "last_match_offset_seconds": null,
+              "literal_marker_count": 0
+            }
+          },
+          "readiness_future": "unavailable_from_host",
+          "status": "observed"
+        }
+      }
+    ],
+    "observed_Rcc_sample_delta": {
+      "RCC_pid": 4980,
+      "cpu_seconds": 1.515625,
+      "read_bytes": 244395119,
+      "write_bytes": 19153085,
+      "within_sample_process_creation_identity_equal": true
+    },
+    "active_descendant_at80_absent_captured88": {
+      "pid": 2024,
+      "parent_pid": 4980,
+      "cpu_seconds": 58.296875,
+      "io_bytes": {
+        "read": 973068628,
+        "write": 744234663
+      },
+      "command_operation": "unavailable",
+      "absence_scope": "same88snapshot_only_not_universal_reap_proof"
+    },
+    "final_report": {
+      "after_start_returned": {
+        "host_readers_alive": [
+          false,
+          false
+        ],
+        "observation": "host_only",
+        "returncode": 15
+      },
+      "delivered_observations": {
+        "cleanup": {
+          "active_reader_count": 0,
+          "cleanup_error_count": 0,
+          "descendant_reap_complete": false,
+          "descendant_snapshot_complete": true,
+          "execution_stopped": false,
+          "observed_live_child_count": 1,
+          "observed_zombie_child_count": 0,
+          "status": "returned",
+          "wrapper_reaped": true
+        },
+        "count_overflow": false,
+        "counts": {
+          "stderr_lines": 18,
+          "stdout_lines": 0,
+          "truncated_lines": 0
+        },
+        "lock_loss": false,
+        "mark_cap_reached": false,
+        "observation_loss": false,
+        "port_positive_after_start": false,
+        "probe_error": false,
+        "process_start_return_offset_seconds": 0.0,
+        "progress": {
+          "interval_sum_seconds": null,
+          "marks": []
+        },
+        "readiness": {
+          "stderr": {
+            "exact_match_count": 0,
+            "first_match_before_deadline_lower_bound": null,
+            "first_match_offset_seconds": null,
+            "last_match_before_deadline_lower_bound": null,
+            "last_match_offset_seconds": null,
+            "literal_marker_count": 0
+          },
+          "stdout": {
+            "exact_match_count": 0,
+            "first_match_before_deadline_lower_bound": null,
+            "first_match_offset_seconds": null,
+            "last_match_before_deadline_lower_bound": null,
+            "last_match_offset_seconds": null,
+            "literal_marker_count": 0
+          }
+        },
+        "readiness_future": "unavailable_from_host",
+        "status": "observed"
+      },
+      "exception": "TimeoutError",
+      "native_executable": {
+        "sha256": "602fede81a0e5d76c9b9b83097a0e9ede0787a8efe468d2f5ab326fb8fa016bf",
+        "size": 57742848
+      },
+      "outcome": "failed",
+      "sampler_alive": false,
+      "sampler_cancelled": true
+    },
+    "readiness_failure": "No observed stdout orstderr literal/regexport marker throughsample88, no deliveredRCCprogress; data does not establish deadlock or idlehang.",
+    "cleanup_failure": "MeasuredwrapperreapedTRUE/readers0 whileexecution_stoppedFALSE/descendant_reap_completeFALSE/1livechild; exactsurvivingPID and whyitremained are not in finalreport.",
+    "interpretation_limits": [
+      "RCCCPUandIObothincrease; exactpreparationcomponent/causeunknown",
+      "RCCinternalreadersunavailable; hostpipesopen/threadsactive doesnotdiagnosepipeblock",
+      "env_info_cache_existsFALSE doesnotprove wholecoldcache",
+      "reportedsourcehashmatchesCRLFrepr doesnotwaive exactGitbodyqualification",
+      "fourotherfailednodesUNSAMPLED",
+      "noRCCretry/additionalcommand/deadlineincrease/newnativeexecution"
+    ]
+  },
+  "watched_positive_comparator": {
+    "scope": "sameoriginalartifactinitialstartonly_notwholecatalogortear_down_acceptance",
+    "nodeid": "tests/action_server_tests/test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers",
+    "ready_before90": {
+      "exact_match_count": 1,
+      "first_match_before_deadline_lower_bound": true,
+      "first_match_offset_seconds": 85.453,
+      "last_match_before_deadline_lower_bound": true,
+      "last_match_offset_seconds": 85.453,
+      "literal_marker_count": 1
+    },
+    "progress_mark_count": 16,
+    "marks_arrival_offset_seconds": 82.969,
+    "interval_sum_seconds": 82.62,
+    "sampler_cancelled": true,
+    "sampler_alive": false,
+    "native_executable": {
+      "sha256": "602fede81a0e5d76c9b9b83097a0e9ede0787a8efe468d2f5ab326fb8fa016bf",
+      "size": 57742848
+    },
+    "cleanup_status": "UNAVAILABLE_NOT_MEASURED_BY_SUCCESS_FINAL"
+  },
+  "no_source_changes_tests_reruns_binary_imports_install_or_provider": true,
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; retain exactcheckoutidentity50ad andexisting firstreadiness observation_scope lessons",
+    "Exact_checkout_identity_patch": {
+      "path": "/workspace/engineering/pr306-current618-fada-original-Windows-failure-owned/canonical-original-runner-checkout-vs-current-merge-ref-proposed.patch",
+      "bytes": 486,
+      "sha256": "50ad18bce0a30cbfb1cb346d1768729b67ea20125796a6558bb57e1594ef2aec"
+    },
+    "Durable_learning_captured": "ActiveownedRCCCPU/IO and hostreader observations remain separate fromreadiness causes; capturedlivechild cleanupFAILcannotbeoverriddenbywrapperreaped/readersstopped orneighboringreadycase.",
+    "Evidence": "Original7JSONreports, exactRCC523a hash,80.062/88.109 boundedresource snapshots, finalstrictcleanupfields and85.453watchedpositive.",
+    "Stale_or_ambiguous_guidance_removed": "No timing/pipe/cachecause inference orcleanupPASS frompartialstates; sourcehashCRLFrepro kept separate fromGitbodyauthority.",
+    "Remaining_uncertainty": "Whyreadiness exceeded90, survivingcleanupPID/component, otherfour unsampled failures; no productionfix proposed until exactownershipcontract review."
+  },
+  "Upstream_disposition": "none",
+  "evidence": [
+    {
+      "path": "/workspace/engineering/pr306-current618-fada-startup-diagnostic-original-owned/artifact-11699761944-returned-reference.private.json",
+      "bytes": 1813,
+      "sha256": "c3d3cf3775efb6105f021b496772c297b60345d632eb6ce3630065209c8e8ecf"
+    },
+    {
+      "path": "/workspace/engineering/pr306-current618-fada-startup-diagnostic-original-owned/inspect_original_startup_snapshots.py",
+      "bytes": 11005,
+      "sha256": "7dfca0fa76d10e694a14f6e0e8d1ad6413de7632cd00f8f78998bf7ac23d2940"
+    },
+    {
+      "path": "/workspace/engineering/pr306-current618-fada-startup-diagnostic-original-owned/original-acquisition-disposition.json",
+      "bytes": 261,
+      "sha256": "6166358ab062cad29ece482c0553ad1793c9507a0cb4ee5d1093af0fd3f76883"
+    },
+    {
+      "path": "/workspace/engineering/pr306-current618-fada-startup-diagnostic-original-owned/original-artifact-11699761944.zip",
+      "bytes": 6951,
+      "sha256": "92219c8a6699d6cdd03590f5820ad837552a8ab0b385051e9f68d215a4319d4a"
+    },
+    {
+      "path": "/workspace/engineering/pr306-current618-fada-startup-diagnostic-original-owned/original-members/34ec97696df8d90c-1.json",
+      "bytes": 1578,
+      "sha256": "f03f597f4305ae96c517928bcf752885c3d948cd8a7873c3eb142eb1721f138a"
+    },
+    {
+      "path": "/workspace/engineering/pr306-current618-fada-startup-diagnostic-original-owned/original-members/34ec97696df8d90c-2.json",
+      "bytes": 4359,
+      "sha256": "707f2a842fe91bd54d88185d83130332e15e98163df55388107cd0218d517070"
+    },
+    {
+      "path": "/workspace/engineering/pr306-current618-fada-startup-diagnostic-original-owned/original-members/34ec97696df8d90c-3.json",
+      "bytes": 2852,
+      "sha256": "4bed888f22a9f53cb405cf009d1273f44fa99e0ff4d4972c8ae4cde7cfff64cd"
+    },
+    {
+      "path": "/workspace/engineering/pr306-current618-fada-startup-diagnostic-original-owned/original-members/34ec97696df8d90c-4.json",
+      "bytes": 1511,
+      "sha256": "00f82b6c8180be2bdf3f529e1696cc2b2b4b7850fd035247c08390ea5e5b2aab"
+    },
+    {
+      "path": "/workspace/engineering/pr306-current618-fada-startup-diagnostic-original-owned/original-members/7d0f2e912f58600f-1.json",
+      "bytes": 1559,
+      "sha256": "0233875a974abfde45c5f33909dcc1452171a852104aa9f8564677fcb8c67d0d"
+    },
+    {
+      "path": "/workspace/engineering/pr306-current618-fada-startup-diagnostic-original-owned/original-members/7d0f2e912f58600f-2.json",
+      "bytes": 2856,
+      "sha256": "081aa0e761bda99fbd97758d1a4e6ccbfdbbd5dc40e9edd21fb8932049965e57"
+    },
+    {
+      "path": "/workspace/engineering/pr306-current618-fada-startup-diagnostic-original-owned/original-members/7d0f2e912f58600f-3.json",
+      "bytes": 3439,
+      "sha256": "4a2dd288268a41bc4201fe711171b994b967345c3235fb71d7afd9bc9701e6e2"
+    },
+    {
+      "path": "/workspace/engineering/pr306-current618-fada-startup-diagnostic-original-owned/safe-original-resource-startup-snapshot-proof.json",
+      "bytes": 28123,
+      "sha256": "15f064469c15292213ad06b22214a93d4b7fa0826bd6aebb1ac213a667ffebef"
+    }
+  ]
+}

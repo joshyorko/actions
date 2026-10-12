@@ -1,0 +1,46 @@
+import hashlib,json,subprocess
+from pathlib import Path
+R=Path('/workspace/engineering/pr308');B=Path('/workspace/engineering/pr308-rcc-compatibility-source');O=Path('/workspace/engineering/pr308-approved-compatibility-independent-source-light-review')
+def bind(p):
+ h=hashlib.sha256()
+ with p.open('rb') as f:
+  for b in iter(lambda:f.read(1048576),b''):h.update(b)
+ return {'path':str(p),'bytes':p.stat().st_size,'sha256':h.hexdigest()}
+owner=B/'OWNERFINAL-current-a0d-approved-RCC-compatibility-SOURCE-LIGHT.json';d=json.loads(owner.read_bytes());assert all(bind(Path(b['path']))==b for b in d['frozen_bindings'])
+assert subprocess.check_output(['git','--no-optional-locks','rev-parse','HEAD'],cwd=R,text=True).strip()==d['source']['head']
+assert not subprocess.check_output(['git','--no-optional-locks','status','--porcelain'],cwd=R)
+prod=json.loads(Path(d['production_inventory']['path']).read_bytes());modes={}
+for row in subprocess.check_output(['git','--no-optional-locks','ls-tree','-rz',d['source']['head']],cwd=R).split(b'\0'):
+ if row:
+  h,n=row.split(b'\t',1);modes[n.decode()]=h.decode().split()
+assert len(prod['current_all_mode_blob_inputs'])==274 and all(modes[n]==v for n,v in prod['current_all_mode_blob_inputs'].items())
+assert all(modes[n]==v for n,v in prod['five_selectors_separate_exact'].items())
+fixture=json.loads(Path(d['fixture_interface']['path']).read_bytes());assert fixture['source']['head']==d['source']['head'] and fixture['source']['tree']==d['source']['tree']
+for key in ['adapter','fixture','public_harness','acquisition']:assert bind(Path(fixture[key]['path']))==fixture[key]
+refs=[bind(owner),bind(O/'safe-independent-SOURCE-LIGHT-readback.json'),bind(O/'complete-independent-source-body-mode-and-AST-proof.json'),bind(O/'safe-independent-original1192-native-helper-browser-retention.json'),bind(O/'review-source-light-independent.py'),bind(O/'verify-retained-native-data-independent.py'),bind(Path(d['fixture_interface']['path'])),bind(Path(d['documentation_improvement']['exact_delta']['path'])),bind(Path(d['production_inventory']['path']))]
+x={
+ 'schema':'independent-approved-RCC-source-light-review-v1',
+ 'decision':'GO_SOURCE_LIGHT_ONLY_FOR_DISTINCT_REVIEWED_FULL_SOURCE_GATE_NO_PUSH_OR_RCC_ACTUAL',
+ 'owner_final':refs[0],'source':d['source'],'frozen_owner_reference_count':71,
+ 'complete_preservation':{'typed_Git_and_FS_body_exec_bits':1421,'outside_six_scope_paths_exact_ordinary_parent':1415,'clean_source':True,'ordinary_parent':'0a6a9db57484a2bc6d9d49a55de5570aa12ae104','ordinary_ordered_parents':['d5a3d2f53737f4f5380b6ecb7fb93d1a651f005d','a0d258a16095b95b1bf9000cb1201cddfaff4779'],'ordinary_synthesized_union_leaf_only':'docs/skills/repository-operations.md','all_original_adapter_and_public_tests_prefix_bytes_AST_exact':True,'all_original_public_guard_and_candidate_functions_except_two_reviewed_selection_boundaries_AST_exact':True,'generator_hosted_pins_and_workflows_original_c103_D5a':True,'default_download_build_toolkit_RCC3_pins_exact':True,'original1192_native_modes_symlinks_content_helpers0444_browser_V5_bindings_independently_recomputed':True},
+ 'implementation_assessment':{
+  'approval_surface':'Exactly two committed Linux-amd64 test-only selectors; unknown/empty/historical097 selections and co-mutated serialized source/hash/platform/provenance/features fail closed against committed tuples.',
+  'binary_admission':'Adapter streams selected binary SHA before version probe and before publish/acquire/cache/exec preparation. Wrong bytes/platform stop adapter before probe/artifact/cache effects. Public harness also hashes before its owned probe and uses the same tuple/version/platform admission before acceptance; staging fixture shares adapter admission. No new binaries were invoked by LIGHT evidence or reviewer.',
+  'fresh_descriptor':'Fresh/warm/rebuild/source-reuse branches bind measured selected version and immutable compatibility identity, including source-modified flag, acquisitionSHA and required surface; legacy unset mode drops absent identity from serialization and keeps original3 path.',
+  'cache_and_exec':'Process-local cache partitions by compatibility ID plus existing source/environment/provider inputs. Changed selected tuple or removed mode rejects stale previous/exec descriptors and requires explicit re-preparation; source-only reuse under identical tuple preserves identity. No artifact digest or mutable ID alone certifies new executable.',
+  'provenance':'Selected5 original1a617/D1 is dirty=true with clean-D1 equivalence/cause UNKNOWN;727 exactbe55/source727 dirty=false is acquisition data-only approval. Source strings and required features are approved identity expectations, not measured functional support.',
+  'private_worker_evidence':'Existing real staged handle supplies owned RccProcessHandle.receipt_file; existing read_receipt validates exact artifact, verifiedTrue and nonempty leaseId. Raw JSON/body hash/path retained privately with stable before/after read. Actual typed WorkerRetirementResult and ProcessTreeCleanupResult are serialized without changing fields; missing snapshots remain null. Failed/pending/zombie/error fields are not rewritten as PASS. Existing action five-result fields/provider/leases/cleanup implementation and budgets unchanged.',
+  'native_scope':'274 producer inputs observed on this source; relative to historical268 native:261 match,7 changed,6 added; five selectors measured separately. Native92498 and old3case hosted tuples remain UNQUALIFIED for this new adapter source.'
+ },
+ 'retained_gates':{'initial_RED':'28FAIL/2PASS/137DESELECT','targeted_RED':['implicit selector propagation1FAIL','missing explicit binary before default acquisition1FAIL','real fixture descriptor assertion2FAIL/1PASS','lease-evidence serializer8FAIL'],'current_restored_source_adjacent':'180PASS/1existing actual opt-in SKIP/3integrationDESELECT/4warnings','configured_lint':'PASS313files; public helper explicit RuffPASS','configured_typecheck':'349filesPASS','Toolkit':'96PASS before last fixture-only extensions; unchanged toolkit/generator/config inputs','generator':'8outputs byte-exact/all30 GitHub YAML parsed','prepared':'DoctorPASS; concrete30-input prepared reuse and5 own prefixes/origins recorded, no Bootstrap/install repeated','full_source':'NOT_RUN; distinct root serialized/capacity release and exact frozen launcher preexecution review required','new_binary_actual':'NOT_RUN; frozen runner and distinct ONE execution authorization per selected binary required'},
+ 'preserved_construction_failures':d['preserved_failures_and_dispositions'],
+ 'reviewer_scope':'Read-only Git/data/AST/hash inspection only; no code/index/ref mutations, gateway/test reruns, candidate probes, imports of candidate payload or original acquisitions.',
+ 'source_full_preexecution':'Exact owner-announced full launcher not yet received at this SOURCE_LIGHT freeze; this decision does not authorize its execution. Root requested activation19 assertions, own prefixes/managed3 toolchain,2worker configured Runtime task,600s TERM+10, source b614/all1421 before-after guards, fresh >=1.2GiB and clear heavy slot. Review that exact launcher separately before release.',
+ 'remaining_holds':['Full configured current source suite and new hosted control/current complete CI/policies before normal push/integration.','Both5/7276 actual functional qualification, performance, persistent first+five reuse, reload/generation drain/provider recovery and full133/134/139/143/221 remain HOLD.','Released5 clean-source equivalence/cause/signatures and producer numeric job/log remain UNKNOWN/UNAVAILABLE.','Private01f/frozen-v6 reconstruction, native old92498/current frozen, whole Runtime/public-wheel/other-platform/OAuth/tag/publication/release/issueclosure not admitted.'],
+ 'Documentation_improvement':{'Canonical_file_changed_or_proposed':'docs/skills/repository-operations.md; accepted exact owner source patch','Exact_delta':refs[7],'additions':18,'removals':0,'Durable_learning':'Separate managed default pins from exact isolated-test admission and functional qualification; bind descriptors/cache/exec to source/binary compatibility identity; retain dirty-VCS limits and actual lease/typed cleanup evidence with null UNKNOWN.','Evidence':'Sourceb614 verified immutable tuples and guarded boundaries; meaningful retained RED/current180GREEN; original acquisition0da97/ind393a; stable typed serializer controls; complete1421 union and1192 retention proof.','Stale_or_ambiguous_guidance_removed':'Selected compatibility no longer conflates exact3 version-only rejection with default download pin; testcasePASS cannot stand in for lease release/reaping. Existing historical default3 and receipt descriptions retained, no cosmetic diary.','Remaining_uncertainty':'Full current source and real new binary support not executed; dirty5 source equivalence/lease release/whole ownership/full134/provider/private/native/release remain separate.'},
+ 'Upstream_disposition':'none',
+ 'evidence':refs
+}
+p=O/'OWNERFINAL-independent-current-a0d-approved-RCC-compatibility-SOURCE-LIGHT-review.json'
+with p.open('x') as f:json.dump(x,f,indent=2);f.write('\n')
+p.chmod(0o444);print(json.dumps(bind(p)))

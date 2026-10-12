@@ -1,0 +1,104 @@
+{
+  "schema": "independent-pr312-current-e3c-SOURCE-LIGHT-v1",
+  "decision": "GO_CURRENT_EC70_SOURCE_LIGHT_ONLY_SOURCEFULL_AND_FRESH_HOSTED_ACCEPTANCE_HOLD",
+  "head": "ec70a2928461941c129b1c05332dc441070e0184",
+  "tree": "47a1e4fceb22fd15eaee1ca380ad6c005abfdde6",
+  "ordered_parents": [
+    "77ed3de24f33412dff30e4e3c18841c4c09933ac",
+    "e3c29cde8878307912e55ed09b6436c0f91d06d5"
+  ],
+  "actual_target": "e3c29cde8878307912e55ed09b6436c0f91d06d5",
+  "existing_branch": "fix/runtime-checkout-eol-20261011",
+  "source": {
+    "complete_typed_Git_FS_exec_entries": 1426,
+    "all_parent_paths_preserved": true,
+    "parent_exact_entries": 1424,
+    "automatic_novel_bodies": [
+      "action_server/src/actions/server/_server.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "whole_target_server_AST_except_original_background_shutdown_exact": true,
+    "all_original10_shutdown_test_bytes": true,
+    "six_original_EOLog_control_files_exact": true,
+    "current_EOLog_selection": {
+      "Python": 202,
+      "packaged_text": 5,
+      "frontend_HTML": 1,
+      "total": 208,
+      "old_selected207_historical_only": true,
+      "old_unchanged_bodies": 206
+    }
+  },
+  "LIGHT": {
+    "Doctor": "RetainedPASS",
+    "prepared_inputs_reused": 30,
+    "concrete_owned_venv_config_interpreter_origins": 5,
+    "Toolkit_PASS": 96,
+    "shutdown_auth_incoming_transport_unique_PASS": 116,
+    "current_EOLog_unique_PASS": 10,
+    "skipped_failed_errors_in_scoped_XML": 0,
+    "configured_lint": "PASS",
+    "configured_type_files": 352,
+    "generator_roundtrips": 8,
+    "all_GitHub_YAML": 30,
+    "execution_scope": "Original cached prepared toolkit only; reviewer no test/gateway imports/exec"
+  },
+  "preserved_original_ref_count": 212,
+  "original_failure_and_old_full_scope": "Original770WindowsFAIL/ReadError10053 retained unchanged; old77 fullproposal4739 NOTRUN, original770/618 olderfull historical, no currentWindows/native/actual claim",
+  "FULL_preexecution": "Separate owner7346 review pending; stale true1424/141 output schema observed despite actual1426/212 guards, successor required before execution admission",
+  "proof": {
+    "path": "/workspace/engineering/pr312-actual300-independent-LIGHT-review/complete-independent-current-ec70-LIGHT-proof.private.json",
+    "bytes": 76111,
+    "sha256": "b0f4149cdfc98be2796cfc60b521c0fb6d8c037ec8c07ce0630ccfa85b990f78"
+  },
+  "owner": {
+    "path": "/workspace/engineering/pr312-actual300-refresh/OWNERFINAL-pr312-actual300-refresh-SOURCE-LIGHT-v2.json",
+    "bytes": 32020,
+    "sha256": "a55e76b7bc19419e77e505e962a14381e53d7c8a66ad37c270d35986d93f7765"
+  },
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md and docs/skills/provenance-observability.md exact both-parent accepted guide imports reused",
+    "Durable_learning_captured": "ASGI completed response send precedes background interruption, but client delivery/natural exit/cleanup remain independent. Incoming Actor/grant/provider transport and owned ignored RCC preparation maintain their original boundaries. EOL selection derives the current208 inputs rather than carrying old207 counts.",
+    "Evidence": {
+      "status": "PASS_EXACT_ACCEPTED_PARENT_CANONICAL_ADDED_BLOCKS",
+      "base": "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+      "imports": [
+        {
+          "parent": "77ed3de24f33412dff30e4e3c18841c4c09933ac",
+          "canonical_file": "docs/skills/repository-operations.md",
+          "exact_added_blocks_retained": 3,
+          "patch": {
+            "path": "/workspace/engineering/pr312-actual300-refresh/exact-source77-repository-operations-canonical-import.patch",
+            "bytes": 3547,
+            "sha256": "d21033cc014f8d520f6b0598a41a4e2a97174bccc0a6173d4ade0f934d827963"
+          }
+        },
+        {
+          "parent": "e3c29cde8878307912e55ed09b6436c0f91d06d5",
+          "canonical_file": "docs/skills/repository-operations.md",
+          "exact_added_blocks_retained": 1,
+          "patch": {
+            "path": "/workspace/engineering/pr312-actual300-refresh/exact-targete3c-repository-operations-canonical-import.patch",
+            "bytes": 1202,
+            "sha256": "33b125c4218be2a7871c1600fcf6de866cbc0d2441e8b2925b913b161f68cfb9"
+          }
+        },
+        {
+          "parent": "e3c29cde8878307912e55ed09b6436c0f91d06d5",
+          "canonical_file": "docs/skills/provenance-observability.md",
+          "exact_added_blocks_retained": 2,
+          "patch": {
+            "path": "/workspace/engineering/pr312-actual300-refresh/exact-targete3c-provenance-observability-canonical-import.patch",
+            "bytes": 4260,
+            "sha256": "cb68c93164dbe0fdef14dcc4028d8a24f62e3bac1d6381773abc348f84173305"
+          }
+        }
+      ],
+      "no_cosmetic_new_child": "Automatic ordinary merge only; accepted shutdown/client-order and incoming durable transport/source-fixture asset lessons retained",
+      "upstream_disposition": "none"
+    },
+    "Stale_or_ambiguous_guidance_removed": "No synchronous-shutdown or old-green-Windows claim; preannouncement29929/079d source-input metadata superseded by honest current208 owner32020/a55, no gate rerun or source rewrite",
+    "Remaining_uncertainty": "Current sourceFULL and platform client/natural exit/native/release tests remain unobserved; fullpreexec output schema correction remains pending"
+  },
+  "Upstream_disposition": "none"
+}

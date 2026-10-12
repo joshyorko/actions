@@ -1,0 +1,96 @@
+{
+  "status": "PAUSED_BOUNDED_FIXTURE_SHAPE_FAILURE_FOR_ROOT_DISPOSITION_NO_AUTH_SOURCE_DEFECT_OR_PUSH_GO",
+  "head": "ec73bb6372c1f613a3e130f0ce92f649d9d40a97",
+  "working_tree": "authorized new enforcement test file untracked; original1410trackedleaves exact; guide not yet mutated",
+  "source_copy_sha256": "c52e961fbbd6c80ca234dfce5a927b6f4ea70715ed6fca0c55324160ed6153ab",
+  "validation": {
+    "Doctor": "PASS",
+    "Bootstrap": "exact declared24 inputs and five own actual package origins PASS; reused originalprepared47b no installer",
+    "ToolkitTest": "69PASS10.86s",
+    "valid_real_assembled_baseline": "18PASS4.77s",
+    "initial_full73_cell_matrix": "62PASS1FAIL9.81s then stop; 54HTTPmatrix+6dispatchdenials+2validASGIWebSocket pass; missing-keyASGI firstclose dict overasserted reason empty"
+  },
+  "root_correction_proposal": "Use authoritative exact type/code1008 dict without inventedreason field; keep auth/state/socket/timeout predicates, new successorlog, no sourceproduction changes",
+  "source_authority": "_browser_session.py189 sends close/code1008 without reason; no original raw firstframe captured so no accept/denial report upgrade",
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; external exact proposal only pending root failure disposition",
+    "Durable_learning": "Original18-line realfileSQLite/postseed snapshot/preRCCsideeffects/Workspace boundary plus source-authoritative ASGI close/code1008/no reason shape",
+    "Evidence": [
+      "28 pinned source facts verified",
+      "18 realvalidhandler baselines PASS4.77s",
+      "initial62PASS1FAIL fixture shape mismatch preserved",
+      "authoritative _browser_session.py189 sends close/code1008 with no reason"
+    ],
+    "Stale_guidance_removed": "Clarifies registration-only in-memory DB does not support threadlocal TestClient request DB; no-RCC alone does not prove no writes; optional close reason cannot be invented",
+    "Remaining_uncertainty": "Missing/wrong ASGI closure and later extras remain incomplete; no unauthorized accept or source failure inferred; broader/native/provider/browser/full152 remain HOLD",
+    "upstream_disposition": "none",
+    "exact_proposal": {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/canonical-baseline-and-ASGI-shape-proposed.patch",
+      "sha256": "381ae20391ce339ddf67d851c5b4660506dfd513a22fde0e6c280b964beebeb4"
+    }
+  },
+  "actual_native_Rcc_provider_browser_externalnetwork_or_installer": "NONE",
+  "upstream_disposition": "none",
+  "evidence_files": [
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/before-disposition-all-parent-leaves.json",
+      "sha256": "1c9b99ad0d80a7360650f177960e9e38adbecd0c10da0ded5126316d58e1c384",
+      "bytes": 362429
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/before-source-pinned28-checkpoint.json",
+      "sha256": "dafef26b68e85341eb9d3edef07c28c11c4609fbca51017810bb5145f51b53d0",
+      "bytes": 6462
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/canonical-baseline-and-ASGI-shape-proposed.patch",
+      "sha256": "381ae20391ce339ddf67d851c5b4660506dfd513a22fde0e6c280b964beebeb4",
+      "bytes": 2152
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/current-Doctor.log",
+      "sha256": "7b6b4be7f0845930ae246dabbb6d9892d6e63cb7f53d17ca0c55da6769d76471",
+      "bytes": 13487
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/current-ToolkitTest.log",
+      "sha256": "b6d572639618fab6c2d6d7abb94d005bd45294535349df1f9d0e698e3e243686",
+      "bytes": 14344
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/current-own-five-environment-origins.log",
+      "sha256": "059be12766edeed23e429760d0b635aefef52fc8f8daa8d83d0b24c15d27fc3a",
+      "bytes": 6684
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/initial-73-cell-request-matrix.log",
+      "sha256": "f640d454bcb3f122437144ecf8762ff837b4787ac017bf86461b7e84107bd6b3",
+      "bytes": 11562
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/initial-73-cell-source-preserved.py",
+      "sha256": "c52e961fbbd6c80ca234dfce5a927b6f4ea70715ed6fca0c55324160ed6153ab",
+      "bytes": 19565
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/initial-73-cell-terminal-checkpoint.json",
+      "sha256": "fb9212d2daab8b8e4f2729c9c31cddf77ef9a7b4be71b2cb0f2ee8bf684d26cc",
+      "bytes": 1076
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/own-Bootstrap-reuse-inputs.json",
+      "sha256": "9d849313554b1ad4733e709c345d57ca3b488136cb2cd49e97cf07bf850c747f",
+      "bytes": 2720
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/paused-baseline-Documentation-improvement-proposal.json",
+      "sha256": "133a0e007b20a1949f59c0450b847463642c95a1b45eeb4fb0f4cd6e7f838177",
+      "bytes": 1228
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/valid-key-real-assembled-baseline-initial.log",
+      "sha256": "18fb873c2f3e73aefb384dfc811a5ae06c42495726bc213a8b852bf52b6437a5",
+      "bytes": 3840
+    }
+  ]
+}

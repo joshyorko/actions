@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "/workspace/engineering/pr307/devutils/.venv/bin/ruff",
+    "format",
+    "--config",
+    "ruff.toml",
+    "tests/test_actions_runtime_release_line.py"
+  ],
+  "cwd": "/workspace/engineering/pr307/devutils",
+  "elapsed_seconds": 0.007939532995806076,
+  "returncode": 0,
+  "stderr": {
+    "bytes": 0,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr307-release-line-only-configured-formatter-child-SOURCE-PREPARATION/one-release-line-configured-format.stderr.private",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 19,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr307-release-line-only-configured-formatter-child-SOURCE-PREPARATION/one-release-line-configured-format.stdout.private",
+    "sha256": "413a709001976657cb743636fd34e48fc41d8d302d665460d3f874b3313da127"
+  }
+}

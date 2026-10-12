@@ -1,0 +1,33 @@
+{
+  "actual_preservation": "NOT_RUN",
+  "argv": [
+    "/usr/bin/timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "320s",
+    "bash",
+    "-c",
+    "source /workspace/actions-cloud/activate.sh && export PATH=\"/workspace/actions-cloud/bin:/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\" && exec \"$@\"",
+    "first-five-v7-root-parent",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "-B",
+    "/workspace/engineering/root-reviewed-first-five-v7-PURE18-external-parent-v2.py"
+  ],
+  "capture": "2026-10-11T23:07:18.968419+00:00",
+  "elapsed_seconds": 0.8558562490070472,
+  "external_admission_post": "PASS",
+  "native": "NOT_RUN",
+  "parent": {
+    "bytes": 6833,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-reviewed-first-five-v7-PURE18-external-parent-v2.py",
+    "sha256": "700bb81131a62c48787c517d61d0e833c843c935f88ad26ea952bf05c86e8551"
+  },
+  "returncode": 1,
+  "review": {
+    "bytes": 4829,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v7-concrete-ROOT-parent-independent-SOURCE-PREEXEC-review/OWNERFINAL-independent-first-five-v7-named-v2-concrete-ROOT-parent-SOURCE-PREEXEC-GO.json",
+    "sha256": "cf97efe69e087d5030deebbd680dbc320ec6d4a16c46ef62888ea403a01c665d"
+  }
+}

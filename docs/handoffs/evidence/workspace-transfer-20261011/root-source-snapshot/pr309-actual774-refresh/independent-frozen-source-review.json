@@ -1,0 +1,103 @@
+{
+  "schema": "actions-pr309-independent-actual774-source-review/v1",
+  "verdict": "GO_SOURCE_REFRESH_FOR_NORMAL_EXISTING_PR_BRANCH_PUSH_ONLY",
+  "head": "ec73bb6372c1f613a3e130f0ce92f649d9d40a97",
+  "tree": "481723a9ffb8528709a6c4e437ac5ad0dc40092c",
+  "ordered_parents": [
+    "0d947f839628cc902bd409a7be93dcb49bc0aa02",
+    "774438b130afb2ead9bbc1c1b76cb6f91e72150a"
+  ],
+  "branch": "test/auth-route-census-20261010",
+  "source_receipt": {
+    "path": "/workspace/engineering/pr309-actual774-refresh/frozen-source-receipt.json",
+    "sha256": "c349b727ce6d9506ffab47c3970753d4e6a8b01d691abb05673a77a3e3bdf03b"
+  },
+  "independent_checks": {
+    "clean_worktree": true,
+    "all_committed_blob_bytes_match_worktree": true,
+    "leaf_count": 1410,
+    "no_parent_path_deleted": true,
+    "all_union_leaves_from_ordered_parents_except_combined_operations_guide": true,
+    "novel_combined_paths": [
+      "docs/skills/repository-operations.md"
+    ],
+    "actual_git_merge_tree_matches_frozen_and_prior_a96_prospective": true,
+    "original_Counter_class_path_format_full_sorted_methods_census_test_mode_blob_unchanged": {
+      "action_server/tests/action_server_tests/test_auth_route_inventory.py": [
+        "100644",
+        "blob",
+        "e1e4b314d6a535fec2175da2b5224105e4d7f8fd"
+      ]
+    },
+    "registration_and_stop_before_pool_uvicorn_only_not_request_authentication": true,
+    "whole_github_exact_actual774": true,
+    "producer_inputs_count": 268,
+    "selected_cli_inputs_count": 5,
+    "all_producer_and_selected_inputs_exact_old_actual774_native92498": true,
+    "producer_parity_scope": "Narrow input preservation only; no newly measured authentication/native/provider/browser acceptance",
+    "hash_bound_source_evidence_files_count": 28,
+    "five_own_environment_prefix_concrete_source_and_config_hashes_verified": true,
+    "workflow_generated_count": 8,
+    "workflow_and_dependabot_count": 26,
+    "all_yaml_count": 30
+  },
+  "source_gate_subject": {
+    "head": "ec73bb6372c1f613a3e130f0ce92f649d9d40a97",
+    "tree": "481723a9ffb8528709a6c4e437ac5ad0dc40092c",
+    "all_recorded_source_gates_on_exact_ordinary_merge_no_child": true
+  },
+  "verified_recorded_gates": {
+    "Doctor": "PASS",
+    "Bootstrap": "REUSED exact24 inputs plus five own prepared package environments; no installer",
+    "Toolkit": 69,
+    "scoped_auth": {
+      "pass": 80,
+      "integration_deselect": 1,
+      "skip": 0
+    },
+    "full_configured_Runtime_source": {
+      "pass": 1156,
+      "skip": 13,
+      "workers": 2
+    },
+    "full_configured_lint": "Ruff check/format/Isort PASS",
+    "typecheck_files": 338,
+    "all_workflow_and_dependabot_roundtrip": "PASS"
+  },
+  "static_limitations": [
+    "Markdown lint unavailable as declared in static log; configured Python Ruff/format/Isort and Mypy passed",
+    "13 full-suite skips and one integration focused deselection remain unverified"
+  ],
+  "old_receipts_unchanged": [
+    {
+      "path": "/workspace/engineering/pr309-refresh-receipt.json",
+      "bytes": 5644,
+      "sha256": "7d1202e83627936ff7813c6601b890ecab7b0bb0beed054e4bb6bc62cffc7c71"
+    },
+    {
+      "path": "/workspace/engineering/pr309-independent-current-review/source-control-prepush-review.json",
+      "bytes": 7679,
+      "sha256": "7374c9eaa420966f6455c7d63c3feea5dc211808cb96c0a21b9cca2acff6f6cb"
+    }
+  ],
+  "historical_ci": "Earlier0d947f current or cached predecessor jobs remain bound to their original source/base tested tuple; no hosted CI admitted for actual774 union by this source review",
+  "hold": [
+    "Fresh complete exact-head/tested-merge hosted gates",
+    "Missing/wrong/valid credential and side-effect authorization matrix",
+    "Actual authentication/native/provider/browser execution and full issue152"
+  ],
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "Accepted exact ordinary-imported delta in docs/skills/repository-operations.md and docs/skills/work-items.md; no cosmetic child proposed",
+    "Exact_delta": {
+      "path": "/workspace/engineering/pr309-actual774-refresh/canonical-imported-delta.patch",
+      "bytes": 13215,
+      "sha256": "3ca213a8c78d9493d0cec62375a0cd799ea2a762973d963e38ce97cd8bbfb07e"
+    },
+    "Durable_learning_captured": "Retain Counter route class/path_format/full sorted method multiplicity and registration-versus-enforcement limits while importing measured readiness/nativeUI/RCC progress/platform provenance/receipt digest-versus-Git/typed mapping boundaries.",
+    "Evidence": "Independent1410 full leaf/mode union and actual Git merge-tree/a96 tree481723; originalcensus/test exact bytes;28 bound evidence files and source gate logs; imported patch equals exact Git diff",
+    "Stale_or_ambiguous_guidance_removed": "Old owning guide omissions of accepted platform/readiness and typed evidence boundaries resolved by actual774 import; prior route registration and request credential/side-effect limits retained",
+    "Remaining_uncertainty": "Current hosted gates and full152 actual authentication/side-effect matrix are not qualified; no new implementation defect or novel canonical correction established"
+  },
+  "upstream_disposition": "none",
+  "reviewer_actions": "Read-only Git/files/evidence inspection only; owned review receipt outside worktree; no gateway/actual auth/native/provider/browser run/source edit/push/merge"
+}

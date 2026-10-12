@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "status": "READONLY_DEPENDENCY_READY_EXISTING_PR307_REUSE_PLAN_NO_ADOPTION",
+  "existing_owner_PR": 307,
+  "existing_branch": "fix/runtime-release-changelog-selection-20261010",
+  "worktree": "/workspace/engineering/pr307",
+  "original_head": "87e412f89b201c697d3e6bd4bd34031cdbd14df3",
+  "original_tree": "638b960a3700bbbba3026874efb158fa6e95117f",
+  "target_requested": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "live_remote": "NOT_QUERIED; root must authenticate before mutation",
+  "proof": {
+    "path": "/workspace/engineering/pr221-currente2-existing-PR307-guard-readonly-recontext/exact-existing-PR307-guard-reuse-vs-currente2-scope-proof.json",
+    "bytes": 9958,
+    "sha256": "c6b9011940837604c0b50de4814a87c100d87325a8469286163eff9b03d3258c",
+    "mode": "0o400"
+  },
+  "bindings": [
+    {
+      "path": "/workspace/engineering/pr307-guard-owned/successor-receipt.json",
+      "bytes": 12830,
+      "sha256": "dc101ebfe12f201cb0a945e3f3c070bf41684289a4df607a8a3416ba7c42fe81",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr307-independent-review/frozen-source-control-review.json",
+      "bytes": 11790,
+      "sha256": "48d03bc4256c13ceb6fee1cf81e86bd56e6fd2af2903baf99444d32101693229",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr307-current-hosted-failure-independent-review/independent-current-hosted-failure-review.json",
+      "bytes": 20333,
+      "sha256": "318e1e5131540bca918c766d998d890fec9a2ead4ee2bfb14416b8d60dcb5b5c",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr307-current-hosted-failure-independent-review/safe-authenticated-first-failure-summary.json",
+      "bytes": 12601,
+      "sha256": "b74a7b9f9f4a91375613421178b1ef90141bb0657206c6e728299d2b4775923d",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currente2-minimal-oauth-generator-private-preparation/OWNERFINAL-currente2-minimal-checked-nonblank-OAuth-generator-source-and-extracted-controls-PREPARED-NOTRUN.json",
+      "bytes": 4465,
+      "sha256": "699d2a792b7736060fa5f8fe523159b9c202f0ebe0a5142be67383286e41bb51",
+      "mode": "0o400"
+    }
+  ],
+  "canonical_exact_original_lesson": {
+    "path": "/workspace/engineering/pr221-currente2-existing-PR307-guard-readonly-recontext/exact-retained-PR307-canonical-guard-and-authority-lesson.md",
+    "bytes": 2140,
+    "sha256": "3de8e6a815882aee571693901d21b07106aadc3ea4d828ee5460547d378bb916",
+    "mode": "0o400"
+  },
+  "superseded_inline_proposal": {
+    "owner_SHA": "699d2a792b7736060fa5f8fe523159b9c202f0ebe0a5142be67383286e41bb51",
+    "disposition": "699d2a inline patch/ten controls preserved NOTRUN; DO_NOT_APPLY_OR_RUN as parallel implementation. Reuse original307 task/helper/tests."
+  },
+  "next_normal_existing_branch_plan": [
+    "Root authenticate live existing PR307 head/base and current accepted integration target before any mutation",
+    "Require clean87e and preserve all old commits/changelog/guard/receipts/gh failures",
+    "Ordinary merge exact approved current target on SAME fix/runtime-release-changelog-selection-20261010 branch; no replacement/reset/rebase/force",
+    "Retain original task function AST and full helper/test blob+mode; resolve only genuine generator/guide overlap retaining both accepted blocks; stop application conflict",
+    "Derive complete typed union/generator AST/matrices/filters/caller install ordering and current Runtime Poetry YAML gateway",
+    "Reuse existing41 meaningful baseline-first controls + controlled real Invoke\u2192RuntimePoetry synthetic-gh gateway; no external acquisition",
+    "Run current own Doctor/preparedinputs/origins/Toolkit/configured full/static/gen8 only after root writer/heavy release and independent frozen source review",
+    "Fresh hosted CI needed; approved authoritative OAuth source pair/content remains HOLD, no stubs/empty build or waiver"
+  ],
+  "execution": "No product source/ref/object mutation, tests/imports/network/actual acquisition",
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md original307 gateway/guard/authority paragraphs; exact excerpt bound, reuse on existingbranch refresh",
+    "Durable learning captured": "Reuse checked guard source ownership; separate structural validation from authority and historical failclosed producer evidence",
+    "Evidence": {
+      "path": "/workspace/engineering/pr221-currente2-existing-PR307-guard-readonly-recontext/exact-existing-PR307-guard-reuse-vs-currente2-scope-proof.json",
+      "bytes": 9958,
+      "sha256": "c6b9011940837604c0b50de4814a87c100d87325a8469286163eff9b03d3258c",
+      "mode": "0o400"
+    },
+    "Stale or ambiguous guidance removed": "Earlier inline prototype explicitly superseded; e2 not guard-adopted, old1173/41 not current gates",
+    "Remaining uncertainty": "Live refs/current union/gateway/gates and approved OAuth source/content unresolved"
+  },
+  "Upstream disposition": "none"
+}

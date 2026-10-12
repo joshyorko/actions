@@ -1,0 +1,19 @@
+{
+  "available_bytes": {
+    "/dev/shm": 3942715392,
+    "/tmp": 494702592,
+    "/workspace": 1225781248
+  },
+  "error_class": "KeyError",
+  "names": [
+    "5ed3ed80e6c9b441",
+    "650664b6f7439ed5",
+    "74b0070197a19db9"
+  ],
+  "native_qualification": "UNCHANGED_NONE_NEWER",
+  "post_guard": "KeyError",
+  "primary_returncode": null,
+  "schema": 1,
+  "seconds": 0.00010403699707239866,
+  "status": "FAIL_HOLD"
+}

@@ -1,0 +1,85 @@
+{
+  "argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "420s",
+    "bash",
+    "-c",
+    "export PATH=\"/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\"; source /workspace/actions-cloud/activate.sh && exec \"$@\"",
+    "memory17-managed-once",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/root_release_one_memory17_pure_controls_NOTRUN.py",
+    "--phase",
+    "launch",
+    "--config",
+    "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/FROZEN-memory17-pure-control-config-NOTRUN-v2.json",
+    "--config-sha256",
+    "e90827940b61e3ddb906ff0576a2ea37cd6ee7297986cc78c62844f5a888b402",
+    "--release",
+    "/workspace/engineering/root-one-memory17-pure-controls-release.json",
+    "--release-sha256",
+    "ROOT_DISTINCT_HASH_REQUIRED_NOT_GRANTED"
+  ],
+  "child_paths_before_launch": "ABSENT_AND_EXACT_DIRECT_CHILDREN",
+  "exact_config_path": "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/FROZEN-memory17-pure-control-config-NOTRUN-v2.json",
+  "exact_files": [
+    {
+      "kind": "REGULAR_NON_SYMLINK",
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-memory17-pure-controls-release.json",
+      "sha256": "ROOT_DISTINCT_RELEASE_SHA256",
+      "uid": "CURRENT_ROOT_OPERATOR_UID"
+    },
+    {
+      "bytes": 7739,
+      "kind": "REGULAR_NON_SYMLINK",
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/FROZEN-memory17-pure-control-config-NOTRUN-v2.json",
+      "sha256": "e90827940b61e3ddb906ff0576a2ea37cd6ee7297986cc78c62844f5a888b402",
+      "uid": "CURRENT_ROOT_OPERATOR_UID"
+    },
+    {
+      "bytes": 7361,
+      "kind": "REGULAR_NON_SYMLINK",
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/root_release_one_memory17_pure_controls_NOTRUN.py",
+      "sha256": "68d230410d0ff42f3c65dea09c0cd5e5b191a24e70ad3871efbb5dd2bf8201b0",
+      "uid": "CURRENT_ROOT_OPERATOR_UID"
+    }
+  ],
+  "exact_release_path": "/workspace/engineering/root-one-memory17-pure-controls-release.json",
+  "independent_review_fields": {
+    "config_sha256": "e90827940b61e3ddb906ff0576a2ea37cd6ee7297986cc78c62844f5a888b402",
+    "launcher_sha256": "68d230410d0ff42f3c65dea09c0cd5e5b191a24e70ad3871efbb5dd2bf8201b0",
+    "schema": 1,
+    "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+    "status": "INDEPENDENT_MEMORY17_PURE_PREEXECUTION_GO",
+    "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+  },
+  "mutation": "NONE_BY_REVIEWER",
+  "only_ROOT_substitution": "ROOT_DISTINCT_HASH_REQUIRED_NOT_GRANTED -> measured freshly written600release SHA",
+  "read_only_preflight_algorithm": [
+    "lstat each exact path; require stat.S_ISREG and not is_symlink, exact mode and st_uid==os.getuid.",
+    "Hash exact bytes; require accepted config/launcherSHA, fresh releaseSHA supplied to CLI.",
+    "Parse freshrelease: exact keys/schema/status/config/launcher/source/tree/root/serializedTrue and accepted independent review row; suppliedargv exactexceptfreshROOTreleaseSHA.",
+    "Require absentroot and directoutputpaths before launch; retain verifiedpreflightJSON in ROOT private wrapper.",
+    "Never create/reconstruct oldfailedroots or repair modes; anyfailedpreflight HOLD/no invocation."
+  ],
+  "reason": "Launcher parses config/release raw bytes and verifies hashes+scope, but does not itself enforce physical config/release path/type/mode/owner. ROOT must perform these exact checks in its distinct once parent immediately before invoking unchanged launcher.",
+  "root_output_before_launch": "ABSENT_INCLUDING_DANGLING_SYMLINK",
+  "root_output_path": "/workspace/engineering/root-one-memory17-pure-controls-20261011-1",
+  "root_release_requirements": {
+    "config_sha256": "e90827940b61e3ddb906ff0576a2ea37cd6ee7297986cc78c62844f5a888b402",
+    "independent_review": "REAL_BINDING_REQUIRED",
+    "launcher_sha256": "68d230410d0ff42f3c65dea09c0cd5e5b191a24e70ad3871efbb5dd2bf8201b0",
+    "root": "/workspace/engineering/root-one-memory17-pure-controls-20261011-1",
+    "schema": 1,
+    "serialized_no_other_heavy_or_storage_mutations": true,
+    "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+    "status": "ROOT_RELEASE_ONE_MEMORY17_PURE_CONTROLS",
+    "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+  },
+  "schema": 1,
+  "status": "MANDATORY_ROOT_EXTERNAL_PREFLIGHT_NOT_PERFORMED_BY_REVIEWER"
+}

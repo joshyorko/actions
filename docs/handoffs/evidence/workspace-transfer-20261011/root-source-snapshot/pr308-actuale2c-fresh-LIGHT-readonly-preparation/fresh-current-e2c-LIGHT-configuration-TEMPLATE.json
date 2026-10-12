@@ -1,0 +1,47 @@
+{
+  "Runtime_scoped_paths": [
+    "tests/action_server_tests/test_rcc_runtime_adapter.py",
+    "tests/action_server_tests/test_dakota_rcc_acceptance.py",
+    "tests/action_server_tests/test_source_staging_rcc_consumer.py",
+    "tests/action_server_tests/run_outputs/test_transport.py",
+    "tests/action_server_tests/test_shutdown_response_order.py"
+  ],
+  "accepted_B28_post_and_independent": null,
+  "binary_gate_or_old_FULL_carry": "NOT_AUTHORIZED",
+  "cached_toolkit_prefix": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534",
+  "generated_outputs_and_all_YAML_guard_argv": null,
+  "new_SOURCEFULL": "future independently accepted current sourceLIGHT+separate proposal/review/rootrelease;worker2configuredtask600TERM10/full640/whole900/prepost120;distinctABSENTonceparent fromallLIGHT pytestparents",
+  "owned_evidence_root": null,
+  "per_invocation_absent_children": [
+    "toolkit-pytest",
+    "scoped-runtime-pytest"
+  ],
+  "private_V8_assembly": "onlyafternewcurrentSOURCEFULL+independentreview;deriveactualsourcecount/expectedlabel fromacceptedidentity,notold1423/396template;freshoncecacheROOTS;retainlegacy CONTROLc103 distinctexternal64SHA;5and7276requirepreviousversionactualPASS anddistinctrootrelease",
+  "pytest_owned_parent": null,
+  "reject_inherited_PYTEST_ADDOPTS": true,
+  "retention": "all",
+  "root_LIGHT_execution_authorization": null,
+  "root_committed_ordinary_merge_owner": null,
+  "source": {
+    "commit": null,
+    "ordered_parents": [
+      "396925cb3d6527af1768b7f5333f9653c005fc55",
+      "e2c81adce7858d5a952991ba9a8b7f72e902038a"
+    ],
+    "tree": "929410b09fff3521c554cf935411c71f9e2e6b95",
+    "typed_leaves": 1440
+  },
+  "source_guard_argv": null,
+  "source_guard_requirements": {
+    "activation": "all19 including managed PATH/6478 script and primary3sha/ownmode0711",
+    "capacity_floor_workspace_bytes": 1288490189,
+    "five_concrete_origins": true,
+    "native_entries": 1192,
+    "old_BINDINGS": 237,
+    "original_source_binding": "retain e4/current396 Gitbody+exact authorized failed8dc archive alias separately; no physical-oldroot recreation",
+    "prepared_inputs": 30,
+    "source_rows": 1440
+  },
+  "source_root": "/workspace/engineering/pr308",
+  "status": "UNBOUND_READONLY_PREPARATION_NOT_EXECUTABLE"
+}

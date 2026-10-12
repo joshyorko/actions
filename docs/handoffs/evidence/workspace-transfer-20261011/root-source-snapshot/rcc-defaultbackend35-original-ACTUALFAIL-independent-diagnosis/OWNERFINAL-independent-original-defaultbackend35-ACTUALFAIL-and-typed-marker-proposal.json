@@ -1,0 +1,57 @@
+{
+  "actual_overall": "FAIL_ONE_CONSUMED_ATTEMPT",
+  "before_and_alwayspost": {
+    "each_returncode": 0,
+    "exact_current1440_prepared30_own5_old_inputs_guard_token": true
+  },
+  "counts": {
+    "errors": 0,
+    "failed": 1,
+    "passed": 34,
+    "skipped": 0,
+    "tests": 35
+  },
+  "decision": "HOLD_ORIGINAL_DEFAULTBACKEND35_ACTUALFAIL_STRICT_MESSAGE_ORACLE_MISMATCH",
+  "diagnosis": "Deliberate suppress-close audit raised expected AssertionError marker with one active duplicated descriptor generation4. Current anchored pytest.raises message pattern rejects added assertion/variable explanation. Installed pytest matching/stringification/rawmatch diff source confirms the protocol. Current control file is unchanged; no accidental source mutation or backend leak/rootcause claim.",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_reused": "docs/skills/repository-operations.md existing installed-emitter/assertion-envelope-versus-semantic-source-marker lesson reused",
+    "Durable_learning_captured": "Anchored whole-message matching conflates a semantic marker with the installed assertion emitter. Preserve exact typed marker/source-audit provenance and expected owned state rather than admit generic AssertionError or arbitrary marker substring.",
+    "Evidence": "Unchanged e574 control source362/assert_closed152, original35 XML34P1F, raw owned AssertionError frames with dup generation4, installed _pytest raises/rewrite source hashes",
+    "Remaining_uncertainty": "Future control successor NOT_APPLIED/NOT_RUN; native behavior, calibration, independent final descriptor census and broad cleanup remain unqualified",
+    "Stale_or_ambiguous_guidance_removed": "Corrected diagnosis from literal test equality to anchored match; no full backend success or global descriptor leak inference"
+  },
+  "independent_proof": {
+    "bytes": 22446,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-defaultbackend35-original-ACTUALFAIL-independent-diagnosis/private-independent-original-backend35-descriptor-audit-and-emitter-failure-proof.json",
+    "sha256": "049a090271c6ed40900eea22b453771b6612b68c82a1403ffd2f04cabd665e2c"
+  },
+  "minimum_source_proposal": {
+    "bytes": 1810,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-defaultbackend35-original-ACTUALFAIL-independent-diagnosis/minimal-typed-marker-and-owned-descriptor-state-successor-PROPOSAL-NOTAPPLIED.json",
+    "sha256": "a6f9fd07b0e95426774277a0eda79f3119e785f0b24c81d6359bb12b4ffd97ba"
+  },
+  "original_child_owner": {
+    "bytes": 5385,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-1/OWNERFINAL-root-one-original-defaultbackend35-pure-controls.json",
+    "sha256": "0a39cd8b1612be2daae1fcbbd9734b0bb75c7d3018e3c12fb9e9f2b6d453bea6"
+  },
+  "reviewer_execution": "Read-only stdlib parsing and file hashes only; no tests, prepared module imports, source edits, compression, native or retries",
+  "root_outer": {
+    "bytes": 833,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-defaultbackend35-reviewed-original-outer-once/OWNERFINAL-root-one-original-reviewed-defaultbackend35-outer.json",
+    "sha256": "e1d44c6e5c4d2b8a7a917d381fd80ef1c431752dc5d779684142931248878504"
+  },
+  "schema": 1,
+  "scope_holds": [
+    "No complete35 backend source-control GO until a named source-only correction and fresh authorized run",
+    "No host cgroup full-walk acceptance, sampler threshold/counter calibration, native RCC/Action/leases/provider/release/source adoption",
+    "No directly retained final kernel-FD census; posterior audit state assertion was unreached in original"
+  ],
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none; no confirmed upstream defect and no external coordination"
+}

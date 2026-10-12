@@ -1,0 +1,51 @@
+{
+  "final_cfg": {
+    "bytes": 47036,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v8_current9760_measured_managed_Git_PURE18_inputs_NOTRUN_v4_originalFAIL_and_historical_system_scope.json",
+    "sha256": "0d4423f45acce573da98b262613971e497a91a9415d61f59142182678897365b"
+  },
+  "no_tests_imports_Git_invocation": "NOT_RUN",
+  "old_system_root_owned_history": {
+    "binding": {
+      "bytes": 4082768,
+      "mode": "0o755",
+      "path": "/usr/bin/git",
+      "sha256": "356db14e102d68a1a37d8a1ac577dfd678d45d46e92f468bef8b7154e7bfdc60"
+    },
+    "gid": 0,
+    "reason": "Unchanged accepted ROOT parent requires1000-owned physical packet rows. Root-owned old system tool is preserved via exact oldcfg/proofs and declared row, not mislabeled as a1000-owned current input.",
+    "status": "HISTORICAL_BINARY_AND_ACTUALFAIL_EVIDENCE_NOT_CURRENT_SELECTED_MANAGED_TOOL",
+    "uid": 0
+  },
+  "physical_packet_rows119_uid_gid1000_measured": true,
+  "previous_original_failure_and_source_proof": {
+    "bytes": 6456,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/SOURCE-PREPARED-v8-original-FAIL-chain-fresh-root-controller-template-and-unchanged-method-proof-v3.json",
+    "sha256": "85ba8f46ba8d6c9adff24a02fa85898ba167b3556cb4a94eab0c6613dca43694"
+  },
+  "provisional_cfg_preserved": {
+    "bytes": 46277,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v8_current9760_measured_managed_Git_PURE18_inputs_NOTRUN_v3_originalFAIL_bound.json",
+    "sha256": "8cb014e904b4fd754a5858c2e0349a881dbe0bcb975f5b67e0aae215b747b388"
+  },
+  "retained_original98_rows_prefix_exact": true,
+  "selected_Git_four_field_binding": {
+    "bytes": 3899192,
+    "mode": "0o775",
+    "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/git",
+    "sha256": "cd36778ef52d80fce1e3944b7f334460bec0921597dcf20d3d50d87d7560a588"
+  },
+  "selected_Git_owner1000": {
+    "gid": 1000,
+    "uid": 1000
+  },
+  "unchanged_ROOT_template119_row_count": {
+    "bytes": 6718,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/ROOT-external-first-five-v8-measured-Git-parent-TEMPLATE-NOTEXECUTION.py",
+    "sha256": "b9024b2043c9857e75e13f255dabc24ebc3547293d0bf2f41a3a8a0151b433db"
+  }
+}

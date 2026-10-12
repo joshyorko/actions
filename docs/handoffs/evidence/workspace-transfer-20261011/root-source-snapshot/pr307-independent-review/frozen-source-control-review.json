@@ -1,0 +1,242 @@
+{
+  "verdict": "GO_NORMAL_PUSH_EXACT_87E412_SOURCE_CONTROL; HOLD_MERGE_HOSTED_GATES_OAUTH_AUTHORITY_AND_RUNTIME_PUBLICATION",
+  "scope": "read-only source/control and retained actual controlled test evidence; no review-side test/native rerun, acquisition or source mutation",
+  "source": {
+    "head": "87e412f89b201c697d3e6bd4bd34031cdbd14df3",
+    "tree": "638b960a3700bbbba3026874efb158fa6e95117f",
+    "parent": "0df315284ec7ddc5d8be47c07874522b52d7e9b4",
+    "ordinary_refresh_ordered_parents": [
+      "729594fc04758502ec2ed985adb428e2863a3bb1",
+      "fbde0d3a248c47c9964851355f96575c89a87329"
+    ],
+    "clean": true,
+    "exact_changed_paths": [
+      "action_server/scripts/build_oauth2_config.py",
+      "action_server/tasks.py",
+      "action_server/tests/build_system_tests/test_oauth2_config_build.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "files": [
+      {
+        "repository_path": "action_server/scripts/build_oauth2_config.py",
+        "git_mode_kind_blob": [
+          "100644",
+          "blob",
+          "7c36c134b3379673dc25f2eebd17db59703a950c"
+        ],
+        "path": "/workspace/engineering/pr307/action_server/scripts/build_oauth2_config.py",
+        "size": 4591,
+        "sha256": "f6dbc67610fefd7ec69e8972b5385506e71559ca2ff96cf41749ea07733ff4a8"
+      },
+      {
+        "repository_path": "action_server/tasks.py",
+        "git_mode_kind_blob": [
+          "100644",
+          "blob",
+          "0c9a8ce4715ad426679e11e6e9cb35e6cb06a38d"
+        ],
+        "path": "/workspace/engineering/pr307/action_server/tasks.py",
+        "size": 26152,
+        "sha256": "3fa7419c346fe9494bdbe89a7f245cf72287832bef36ee73ea4bd0039ef477d6"
+      },
+      {
+        "repository_path": "action_server/tests/build_system_tests/test_oauth2_config_build.py",
+        "git_mode_kind_blob": [
+          "100644",
+          "blob",
+          "70f839a267a08935cd10cd787427e5dec23af102"
+        ],
+        "path": "/workspace/engineering/pr307/action_server/tests/build_system_tests/test_oauth2_config_build.py",
+        "size": 10493,
+        "sha256": "fabd81e47a20b2b886664d9bc0a2c7fc7ed8e8cb01ed85ecde85256756bc3c03"
+      },
+      {
+        "repository_path": "docs/skills/repository-operations.md",
+        "git_mode_kind_blob": [
+          "100644",
+          "blob",
+          "e0cd01307c69141dc622ae47e5cd7670c3d49d76"
+        ],
+        "path": "/workspace/engineering/pr307/docs/skills/repository-operations.md",
+        "size": 230441,
+        "sha256": "aa538eb7d51d48567e92a944b0949c2dddba42e798f6498ccc2234ae9dfae0d7"
+      }
+    ]
+  },
+  "independent_preservation": {
+    "unrelated_blob_and_mode_pairs": 1404,
+    "original_history_ancestors_retained": true,
+    "original_changelog_blob_retained": true,
+    "all268_measured_native_input_blobs_retained": true,
+    "all_generator_workflows_and_existing_test_deadlines_retained": true
+  },
+  "worker_successor_receipt": {
+    "path": "/workspace/engineering/pr307-guard-owned/successor-receipt.json",
+    "size": 12830,
+    "sha256": "dc101ebfe12f201cb0a945e3f3c070bf41684289a4df607a8a3416ba7c42fe81"
+  },
+  "raw_evidence_verified": {
+    "doctor.log": {
+      "path": "/workspace/engineering/pr307-guard-owned/doctor.log",
+      "size": 12785,
+      "sha256": "01a9a16631ddc3e1b1af0ef7a21702fe0909bdb8d5adcf05bc2fa2ee3076b1f0"
+    },
+    "bootstrap.log": {
+      "path": "/workspace/engineering/pr307-guard-owned/bootstrap.log",
+      "size": 27575,
+      "sha256": "c8446b8493d5ce8157ef83d89d1977feaa10a779181b34d9e86abb3233937669"
+    },
+    "red-behavior.log": {
+      "path": "/workspace/engineering/pr307-guard-owned/red-behavior.log",
+      "size": 24328,
+      "sha256": "4a494361e72a6931a33824439700ded7239e4557ada47337a60edf4c47c25645"
+    },
+    "final-focused.log": {
+      "path": "/workspace/engineering/pr307-guard-owned/final-focused.log",
+      "size": 4177,
+      "sha256": "eaeb6ed86a395d68640ba15ac526a16340d96d2287b116e6aebd727a92aaf1e7"
+    },
+    "toolkit-test.log": {
+      "path": "/workspace/engineering/pr307-guard-owned/toolkit-test.log",
+      "size": 14344,
+      "sha256": "ffc200355edd7f38debcc72112a1876a2d1ebaed835664ba7f112fed0a0cb866"
+    },
+    "final-configured-gates.log": {
+      "path": "/workspace/engineering/pr307-guard-owned/final-configured-gates.log",
+      "size": 303939,
+      "sha256": "c791bcf9463f179f8f64aca6a1b51518440218f20a6b1838fcdc144350525852"
+    },
+    "helper-typecheck.log": {
+      "path": "/workspace/engineering/pr307-guard-owned/helper-typecheck.log",
+      "size": 3902,
+      "sha256": "cfa3a435ed2af58ee8d1699dc91e5c82b643f56dc8f0959d3b50f2255ca58222"
+    },
+    "controlled-gateway.log": {
+      "path": "/workspace/engineering/pr307-guard-owned/controlled-gateway.log",
+      "size": 3618,
+      "sha256": "cee68d786c96f2c9dc2f3f5a44cd478a6aa603222c263ab39cbf8b0298171165"
+    },
+    "controlled-gateway-receipt.json": {
+      "path": "/workspace/engineering/pr307-guard-owned/controlled-gateway-receipt.json",
+      "size": 2909,
+      "sha256": "4ae7bd2f9ce66ba94cc1424b93347627640fcb67da8324a6b5c68a9af9c1feee"
+    },
+    "refresh-union-receipt.json": {
+      "path": "/workspace/engineering/pr307-guard-owned/refresh-union-receipt.json",
+      "size": 1006,
+      "sha256": "8079402663bd9f2df3e2a45b97567272ed0962bbb33918a1d539bebcbaf22dcc"
+    },
+    "preservation-receipt.json": {
+      "path": "/workspace/engineering/pr307-guard-owned/preservation-receipt.json",
+      "size": 553,
+      "sha256": "974d586cf72756fae92ad4fabf647895a121378f138c09a32c86690f96bf2658"
+    },
+    "workflow-roundtrip-receipt.json": {
+      "path": "/workspace/engineering/pr307-guard-owned/workflow-roundtrip-receipt.json",
+      "size": 1806,
+      "sha256": "289fce29169a334ba15908e25305d2063acf6889df6192283199a6f292499f73"
+    },
+    "controlled_gateway.py": {
+      "path": "/workspace/engineering/pr307-guard-owned/controlled_gateway.py",
+      "size": 5339,
+      "sha256": "c1b91d6d32c71b3ec5f1292b36d0c5eb9f2ce9d3bd9b9e1bc1e19e13cb44e043"
+    },
+    "outer_invoke_no_yaml.py": {
+      "path": "/workspace/engineering/pr307-guard-owned/outer_invoke_no_yaml.py",
+      "size": 602,
+      "sha256": "394e1434e46dc86888be313dd8896cf42def904045945543e9f890b3d81e3ba3"
+    },
+    "workflow_roundtrip.py": {
+      "path": "/workspace/engineering/pr307-guard-owned/workflow_roundtrip.py",
+      "size": 951,
+      "sha256": "bdc8c62d763d7de12e797fa7b18870145c7b74673bcc1036a8425a77d15564fb"
+    }
+  },
+  "additional_actual_gateway_bytes": [
+    {
+      "path": "/workspace/engineering/pr307-guard-owned/gateway-children.jsonl",
+      "size": 940,
+      "sha256": "a45d3544ba1ce61160a3c63a5135eb67aadfec2b605677dffbd40265c179ead0"
+    },
+    {
+      "path": "/workspace/engineering/pr307-guard-owned/controlled-bin/gh",
+      "size": 980,
+      "sha256": "f4784afacdaa71e5443e9ba45eb04a2010034573e7e972a74087e5cd7f7828e2"
+    },
+    {
+      "path": "/workspace/engineering/pr307-guard-owned/valid_structural_pair.stdout.log",
+      "size": 168,
+      "sha256": "728b56686f5aa06c5550ab02762fdf52c3772cdf6d6dea1455d3696562b16827"
+    },
+    {
+      "path": "/workspace/engineering/pr307-guard-owned/valid_structural_pair.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr307-guard-owned/second_acquisition_failure.stdout.log",
+      "size": 119,
+      "sha256": "bad76aaf7c39b8ad1e2cff998e06bcda6a5d36bf575dbec5145ba013cc38dabc"
+    },
+    {
+      "path": "/workspace/engineering/pr307-guard-owned/second_acquisition_failure.stderr.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "reviewed_behavior": [
+    "Exact legacy authority/API input names and public task unchanged; no manifest or guessed provider/source policy.",
+    "Checked subprocess binary stdout/stderr and30-second per-input deadline; nonzero stdout cannot pass even with valid YAML.",
+    "Strict UTF8/nonblank/safe YAML/root+oauth2Config+providers mapping admission; no semantic provider qualification claimed.",
+    "Both valid bodies precede same-directory atomic replacement; original strings/module format preserved.",
+    "Meaningful first/second acquisition, timeout, API error, malformed/wrong shape, temp-write, replacement, cleanup and CLI-private-cause negative tests; RED3 demonstrates original ignored nonzero acquisition.",
+    "Safe CLI categories suppress raw source/config/stdout/stderr/exception-cause output; owned temporary cleanup preserves tested primary OSError.",
+    "Real committed Invoke Program\u2192Poetry helper proof forbids outer YAML and checks child argv/prefix/RuntimePyYAML6.0.3 origin; second-input exit17 leaves modulehash unchanged.",
+    "Outer activation hints removed only from replacement child environment; GH auth forwarding remains available; caller process environment unchanged."
+  ],
+  "accepted_gates": {
+    "focused": 41,
+    "configured_test_not_integration_pass": 1173,
+    "configured_existing_skips": 13,
+    "toolkit_pass": 69,
+    "configured_lint": "PASS",
+    "configured_typecheck_files": 335,
+    "explicit_helper_typecheck_files": 1,
+    "explicit_helper_test_ruff": "PASS",
+    "generated_workflow_roundtrip_exact": 8
+  },
+  "producer_impact_and_remaining_gates": [
+    "OAuth generated member bytes in future wheels/native artifacts must be qualified against actual checked source acquisition and approved authority; unchanged268 tracked input blobs do not imply unchanged generated payload.",
+    "Old retained wheel0f366268 and its empty generated member remain historical; narrow installed-wheel consumer GO is unchanged and cannot qualify a new artifact.",
+    "Current exact-head hosted complete merge gates are still required; local source/control GO is not merge GO.",
+    "Existing immutable recovery targets use their original task/helper/install environment; current guard does not retroactively repair or admit them.",
+    "Authoritative supported pair/revision/provider behavior still unidentified; structural empty-provider fixture cannot waive OAuth/release acceptance.",
+    "No actual remote acquisition, native/build acceptance, full integration/platform gate or Runtime publication performed."
+  ],
+  "canonical_documentation": {
+    "disposition": "INTEGRATED in exact reviewed source87e412; read-only exact delta retained outside repository",
+    "canonical_file": "docs/skills/repository-operations.md",
+    "canonical_sha256": "aa538eb7d51d48567e92a944b0949c2dddba42e798f6498ccc2234ae9dfae0d7",
+    "exact_delta": {
+      "path": "/workspace/engineering/pr307-independent-review/canonical-documentation-exact-delta.patch",
+      "size": 6915,
+      "sha256": "1f09c93bb40c75b87cb4576a3fc251b3b999d3eaeeeb96581df0cb5f24bde044"
+    },
+    "proposal_disposition": {
+      "path": "/workspace/engineering/pr307-independent-review/canonical-documentation-disposition.md",
+      "size": 2382,
+      "sha256": "2e6bb1373f1e017338004e7b9311bbe06695fbb4bb5e57d06b681519c6ddee20"
+    },
+    "accepted_proposals": [
+      "e222695e minimal boundary",
+      "bbf66a9c actual caller/gateway",
+      "4cfc8e79 consumer dry-run/provenance/floor",
+      "b07cfdc9 generated-content followup"
+    ],
+    "deferred": "2b3095 broad immutable-manifest design pending approved source ownership",
+    "stale_ambiguity": "PR command-name equivalence and dry-run/Twine implication removed; current-helper versus immutable-recovery source distinguished",
+    "remaining_uncertainty": "authority pair/revision/provider behavior and new artifact/current hosted gates",
+    "upstream": "none"
+  },
+  "private_metadata_policy": "unchanged HOLD; no original private bundle/spec substitution or publication admission"
+}

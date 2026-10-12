@@ -1,0 +1,24 @@
+{
+  "base": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "capture": "2026-10-11T23:40:41.008051+00:00",
+  "counts": {
+    "CANCELLED": 2,
+    "FAILURE": 8,
+    "IN_PROGRESS": 3,
+    "SKIPPED": 1,
+    "SUCCESS": 9
+  },
+  "draft": false,
+  "head": "9760d5ec44876558c4941c4c3190abc8d92d14a1",
+  "mandatory_FULL_native_OAuth_publication_MERGE": "HOLD",
+  "merge_state": "UNSTABLE",
+  "original_binding": {
+    "bytes": 3332,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr307-current9760-fresh-hosted-CI-reconciliation/original-head-contexts.private.json",
+    "sha256": "fdf81e7206f2261805871261e19f12f9a95cfd37dbd087b5621f6e4ce5edcd6e"
+  },
+  "schema": 1,
+  "scope": "Head/context API only; producer synthetic checkout/native/OAuth content/publication not qualified",
+  "state": "OPEN"
+}

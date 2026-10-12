@@ -1,0 +1,58 @@
+{
+  "admit_phase_AST": "SINGLE_NEED_CONDITION_ONLY",
+  "all_function_ASTs_outside_admit_phase": "EXACT",
+  "execution": "NONE",
+  "new_config": {
+    "bytes": 68847,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine-18-semantic-JUnit-envelope-once2-preexecution-NOTRUN/FROZEN-known-nine18-JUnit-envelope-once2-config-NOTRUN.json",
+    "sha256": "90bc9cff117ad704cfd9c1656b6e92d0d753e02438b963163aebc6a645dcf5e7"
+  },
+  "new_config_delta": [
+    "rootonce1\u21922/releasefreshonce2",
+    "18ownedoutput pathsretargetedonly",
+    "newstatus/capture",
+    "siximmutable originalpacket/failurebindings added"
+  ],
+  "new_launcher": {
+    "bytes": 13798,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine-18-semantic-JUnit-envelope-once2-preexecution-NOTRUN/run_known_nine18_JUnit_envelope_once2_NOTRUN.py",
+    "sha256": "4a1bb9a87972c472413abb8f5edfbc94b5dc0dde645357a9d6bdce4d5dbabba9"
+  },
+  "normalized_whole_launcher_AST": "EXACT_AFTER_ONLY_BASE_CONFIG_CONFIGSHA_AND_SINGLE_JUNIT_PREDICATE_NORMALIZATION",
+  "old_config": {
+    "bytes": 67022,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/FROZEN-known-nine-18-semantic-15s-config-v2-NOTRUN.json",
+    "sha256": "b9010e2996df0285971f2c7ce31c4da04a6e7672505aa4240cb2b049aaae823d"
+  },
+  "old_launcher": {
+    "bytes": 13750,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/run_known_nine_18_semantic_once_NOTRUN.py",
+    "sha256": "efd17b08026cba566dea30775226dbb327f0fa05a9b2c3872088c83a5f5b310b"
+  },
+  "original_config_fields_preserved": "Allotherfields exact; old plan/caseguard/source/asource/fullbudget unchanged.",
+  "output_root_absent": true,
+  "owner_prior_failure": {
+    "bytes": 5522,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine18-original-ACTUALFAIL-independent-review/OWNERFINAL-independent-original-known-nine18-semantic-ACTUALFAIL-JUnit-protocol-review.json",
+    "sha256": "4e936c2ccb342701b271dd41dea2ae4e863da758e7ff2006ab0c375c6fa30f20"
+  },
+  "permanent_test_source": {
+    "bytes": 16429,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py",
+    "sha256": "a577d21615877bc19a88ca141e5c8ac7c9779120abf7f86b7a6ec6d2367d5da2"
+  },
+  "schema": 1,
+  "single_predicate_after": "need('type' not in failure.attrib or failure.get('type')=='AssertionError','SEMANTIC_RED_EXCEPTION_TYPE')",
+  "single_predicate_before": "need(failure.get('type')=='AssertionError','SEMANTIC_RED_EXCEPTION_TYPE')",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_body_count": 1440,
+  "source_clean": true,
+  "status": "STDLIB_AST_IDENTITY_ONLY_NO_IMPORT_TEST",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+}

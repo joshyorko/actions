@@ -1,0 +1,366 @@
+{
+  "active_source_bindings": [
+    {
+      "head": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+      "path": "/workspace/engineering/pr308",
+      "tracked_clean": true,
+      "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+    },
+    {
+      "head": "c97edfd10edb5b1c63f8a6371bfd2905996a2da2",
+      "path": "/workspace/engineering/pr307",
+      "tracked_clean": true,
+      "tree": "f8d3477451fa601643ef6c06f6b1e616e2407643"
+    },
+    {
+      "head": "f75dcae52fcd78c5c382d3903b012e5b049ca48b",
+      "path": "/workspace/engineering/pr305",
+      "tracked_clean": true,
+      "tree": "851834ae6cc87f42abfcf3c963542191e2815599"
+    },
+    {
+      "head": "2d86c5cf92d3acb274a8ceb5d57bfb8b12c779b6",
+      "path": "/workspace/engineering/captured-child-cleanup",
+      "tracked_clean": true,
+      "tree": "653a9e73e4d27641ec86de94b90f35d41e0f24f8"
+    }
+  ],
+  "bindings": [
+    {
+      "bytes": 39793,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/OWNERFINAL-five-accepted-obsolete-checkout-environments-readonly-capacity-plan.json",
+      "sha256": "0c082b23462a3ea588cca2e98ac48934e5ae6a5b14cdc0083e55b3ccadffd2de"
+    },
+    {
+      "bytes": 17539,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/frozen_first_five_environment_preservation_inputs_SOURCE_PREPARED_v4.json",
+      "sha256": "d6d933f64940c6ed3b0849a6bcd10e07f6c2c834f968c6f1b354462625e4c028"
+    },
+    {
+      "bytes": 12323,
+      "mode": "0o444",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/test_first_five_environment_preservation_admission_SOURCE_PREPARED_v4.py",
+      "sha256": "bf271888be3d40f6be8b11c2e71de7232c0bce50ee30fcc96b1083f89498bf75"
+    },
+    {
+      "bytes": 576,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/accepted-canonical-environment-and-memory-scope-lesson-reused.txt",
+      "sha256": "1152b61293a6f44d0ba61b59c24630f30bb948efbde926f2e014cb1876e7561a"
+    },
+    {
+      "bytes": 37609,
+      "mode": "0o444",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_first_five_accepted_obsolete_environments_SOURCE_PREPARED_v4.py",
+      "sha256": "63476ecaa50ba863afed8602dcad82c22c9349df022d0e9f0dde8d81d60e0bb7"
+    },
+    {
+      "bytes": 2387091,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr290-action_server-private-full-body-metadata-inventory.json",
+      "sha256": "f5127b2ae573d031cb1a074bfbc82cfa66c4b53b343bec491a0121bd3cadd376"
+    },
+    {
+      "bytes": 1702413,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr290-actions-private-full-body-metadata-inventory.json",
+      "sha256": "1966729dbff3e5168dbb253d3dbb1f4a09812d511df5ff2e5b5b12c10e5db88d"
+    },
+    {
+      "bytes": 1122969,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr290-actions-http-helper-private-full-body-metadata-inventory.json",
+      "sha256": "f6452bc22d99d0018a548d464aff323a3c081c146fe7a3e0fadc5d3cab90ef0a"
+    },
+    {
+      "bytes": 988304,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr290-devutils-private-full-body-metadata-inventory.json",
+      "sha256": "fa044e527def8d6ffbe10586091f588642f7a5300ef07a48dcc5d4b75a1bc63e"
+    },
+    {
+      "bytes": 992323,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr290-work-items-private-full-body-metadata-inventory.json",
+      "sha256": "8f1fe000ea1f97b1720dd04b583de7ec0c804f1ee4fb3970b29754afc51cf190"
+    },
+    {
+      "bytes": 2382175,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr309-action_server-private-full-body-metadata-inventory.json",
+      "sha256": "8c520af93c01f9ec0fb822991b30b74c5e107834012acd74dc564ca3fa09c450"
+    },
+    {
+      "bytes": 1696007,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr309-actions-private-full-body-metadata-inventory.json",
+      "sha256": "e912eb54df5ed2f638a0f6eff6c960de7dca23da57bcb246490f0d34a2a81345"
+    },
+    {
+      "bytes": 1119318,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr309-actions-http-helper-private-full-body-metadata-inventory.json",
+      "sha256": "7155d4f13ea55fa2e6a9b8d507457325390f5f421104cf74f5fcd80d239cf156"
+    },
+    {
+      "bytes": 988304,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr309-devutils-private-full-body-metadata-inventory.json",
+      "sha256": "b08f527e8f771191a51432815c070ca08c4f1c8a23debb637c571b84bbdff096"
+    },
+    {
+      "bytes": 988579,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr309-work-items-private-full-body-metadata-inventory.json",
+      "sha256": "0f376a0b790d22b67f82b5fc1a1f1e42bb424408dc9ec5e71130bd76f234149c"
+    },
+    {
+      "bytes": 2381381,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr310-action_server-private-full-body-metadata-inventory.json",
+      "sha256": "182be779e12399e24c83ccc06f06b7f6c2b2862ba945530ac82946d36889773d"
+    },
+    {
+      "bytes": 1696664,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr310-actions-private-full-body-metadata-inventory.json",
+      "sha256": "0c5c7d3649b71df30f79c73a43f6451710e64509acfd8a98ca51952362ed4b79"
+    },
+    {
+      "bytes": 1118722,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr310-actions-http-helper-private-full-body-metadata-inventory.json",
+      "sha256": "0dd40831d5da10ed4238ac67eb858edcdcf7a59edce8078749b9b51e28edcb4a"
+    },
+    {
+      "bytes": 985102,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr310-devutils-private-full-body-metadata-inventory.json",
+      "sha256": "0ea8b5c7d7befb4fa2f09cc672cece61a0ab243847e299ab3818cf911da69e4f"
+    },
+    {
+      "bytes": 988579,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr310-work-items-private-full-body-metadata-inventory.json",
+      "sha256": "3495915b217285dda14d2157db259e609e131764ce03fe0827615ba00dadde04"
+    },
+    {
+      "bytes": 2381065,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr311-action_server-private-full-body-metadata-inventory.json",
+      "sha256": "ab50df3cc7fc0e4b0e4d14a1230cdd7a14d1efbdee98365ed6acff02e46cffb2"
+    },
+    {
+      "bytes": 1696007,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr311-actions-private-full-body-metadata-inventory.json",
+      "sha256": "434f8a074f341569c453e5a1b37f65890adebc5fe1322d15183e19273addbc02"
+    },
+    {
+      "bytes": 1118722,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr311-actions-http-helper-private-full-body-metadata-inventory.json",
+      "sha256": "c030ffcf70898c1e940ff39ab99af33f28a7d06c1ee7de5df46a432b9a134c45"
+    },
+    {
+      "bytes": 984562,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr311-devutils-private-full-body-metadata-inventory.json",
+      "sha256": "2abaa2fff5b501fa98f513ecdc091a6714df75da11d4d084d6b947ccedff80b9"
+    },
+    {
+      "bytes": 988579,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr311-work-items-private-full-body-metadata-inventory.json",
+      "sha256": "931e7dbeeae79b0dc39941658c8ac947973ace66b13c31560c1a1998cdcf644a"
+    },
+    {
+      "bytes": 2700102,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/runtime-checkout-eol-action_server-private-full-body-metadata-inventory.json",
+      "sha256": "ff3be86460a2ebb88b694e4995bc44e1fc3236c0994c875ae77dbfa51061a195"
+    },
+    {
+      "bytes": 1704618,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/runtime-checkout-eol-actions-private-full-body-metadata-inventory.json",
+      "sha256": "4fb031f0ecfb62f5b766d9819c70b27af8aeff1823099ede628d18b6b6f4a640"
+    },
+    {
+      "bytes": 1122813,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/runtime-checkout-eol-actions-http-helper-private-full-body-metadata-inventory.json",
+      "sha256": "6f3b6da2bb6d34c3a4dd655da605a3c389e032c03348cd983fcc24e030448d64"
+    },
+    {
+      "bytes": 1055896,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/runtime-checkout-eol-devutils-private-full-body-metadata-inventory.json",
+      "sha256": "ff5ed9d275a9d454081d0b75faf726fcb3f172d2bda074eee30668f366e89e88"
+    },
+    {
+      "bytes": 1004052,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/runtime-checkout-eol-work-items-private-full-body-metadata-inventory.json",
+      "sha256": "37e163ca3614303636f81e9dfdc94a1a1b1596b0b7c75f2dfdedeeb066f3433a"
+    },
+    {
+      "bytes": 33635,
+      "mode": "0o444",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_accepted_obsolete_environments_source_prepared.py",
+      "sha256": "3dfbbd245f8dcb0c0c33e855b5a3b4b3a87a4fe334367da0dada6491da9fc1e8"
+    },
+    {
+      "bytes": 34532,
+      "mode": "0o444",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_accepted_obsolete_environments_source_prepared_v2.py",
+      "sha256": "98f977690dd7ef6d68da5f0c1ee4582100b054f836767a287b9995a7443bdcfb"
+    },
+    {
+      "bytes": 36982,
+      "mode": "0o444",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_accepted_obsolete_environments_source_prepared_v3.py",
+      "sha256": "262196054902818db5cea7265961a3520cf23b30080b646460c1dd496ba84022"
+    },
+    {
+      "bytes": 15410,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/frozen_environment_preservation_inputs_SOURCE_PREPARED.json",
+      "sha256": "dbda584b735e728c2e200cbe89cac7f77c34414ded0f2d62b9a5a83bce05c04d"
+    },
+    {
+      "bytes": 9191,
+      "mode": "0o444",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/test_environment_preservation_admission_SOURCE_PREPARED.py",
+      "sha256": "f229e39308a411bb0631b281eebab5774317923675308775b6b352922856ed2a"
+    },
+    {
+      "bytes": 2314,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/SOURCE-PREPARED-v3-control-callable-and-exact-reuse-proof.json",
+      "sha256": "98af13078f17e6ab0e6efc785ce6728cc150f6eebed9501e3ae857a60c1b61e0"
+    },
+    {
+      "bytes": 5015,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/SOURCE-PREPARED-v4-first-five-exact-reuse-and-control-plan-proof.json",
+      "sha256": "57b75d2310a6125381be8262b88b60aada0c26f0b52a2bba32755c41ffd00c09"
+    },
+    {
+      "bytes": 24590,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/OWNERFINAL-first-five-obsolete-environment-preservation-SOURCE-and-CONTROL-PREPARATION-NOTRUN-v4.json",
+      "sha256": "0eb5a69a100bf1ecb5cad0900b587dfcbe6384ecf7363f0c1369c4894d8d9591"
+    },
+    {
+      "bytes": 5193,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/SOURCE-PREPARED-v5-eight-measured-mode-and-real-row-control-closure-proof.json",
+      "sha256": "bd46230dce337addadf86ac542360c50982ad59a620f359be3b2532b41c80a23"
+    },
+    {
+      "bytes": 9323,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-obsolete-environment-independent-SOURCE-review/OWNERFINAL-independent-first-five-obsolete-environment-SOURCE-eight-mode-closure-HOLD.json",
+      "sha256": "8e6c8a3bc8635178683aadb5ac015928cc847c89723f25f00975778e64e261b6"
+    },
+    {
+      "bytes": 17723,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/frozen_first_five_environment_preservation_inputs_SOURCE_PREPARED_v5_measured_modes.json",
+      "sha256": "333dd9b66eacc212c90b3a75c44e9902a9c0bdc56d73d88ba5a0e41e46e0696a"
+    },
+    {
+      "bytes": 12822,
+      "mode": "0o444",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/test_first_five_environment_preservation_admission_SOURCE_PREPARED_v5_measured_modes.py",
+      "sha256": "38825c7bc1bedaa549ed6eb9a96b33b2ce244ce35d84b28b6eb22da557fec720"
+    },
+    {
+      "bytes": 765564,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+      "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25"
+    },
+    {
+      "bytes": 8165,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-currente2-concrete-LIGHT-PREEXECUTION-v2/immutable-one-LIGHT-inputs.json",
+      "sha256": "3b4e42668cb99bc38969c6f979ece431abdd123db4217baf282c3cbb581369ce"
+    },
+    {
+      "bytes": 13606,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-SOURCEFULL-preexecution/frozen-current8d49-source-FULL-inputs.json",
+      "sha256": "68cee8aeab8855f3f175c8a1a6f9e83ad66b9d2267eabfdb9969f7d55207e1c0"
+    },
+    {
+      "bytes": 378602,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/private-current8d49-source-body-mode-inventory-v3.json",
+      "sha256": "9843e9035fd7bfdf9577b9ba08f108365fbbc336ca00337f99328599b6204677"
+    },
+    {
+      "bytes": 797131,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-current-e4ff-qualified-config-successor/FROZEN-current-e4ff-control3-owned-cache-SOURCE-QUALIFIED-v4.json",
+      "sha256": "1411879501e1ef2bd5aec7fbf9627457aa840badc8e86be980c25b207ee9d5dc"
+    },
+    {
+      "bytes": 634107,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/FROZEN-control3-current-b614-actual-config-v2.json",
+      "sha256": "8c5da5be25ebfcf86f286ee9f93ddad328c68b3243b0935ec5937c93376bb948"
+    },
+    {
+      "bytes": 13345,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-currentc97e-concrete-TOKEN-LIGHT-PREEXECUTION/immutable-one-TOKEN-LIGHT-inputs.json",
+      "sha256": "c5378aa9dfceeb454255c1724f18ef505e09fe0d5fdc679a87b4db45fb92bb79"
+    },
+    {
+      "bytes": 67022,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/FROZEN-known-nine-18-semantic-15s-config-v2-NOTRUN.json",
+      "sha256": "b9010e2996df0285971f2c7ce31c4da04a6e7672505aa4240cb2b049aaae823d"
+    }
+  ],
+  "cached_python": {
+    "bytes": 31903952,
+    "mode": "0o775",
+    "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12",
+    "sha256": "ba35c76091c86640cd6bbccc8c216e5b2fc52b20c26de803edef79165022037f"
+  },
+  "controls": {
+    "bytes": 12822,
+    "mode": "0o444",
+    "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/test_first_five_environment_preservation_admission_SOURCE_PREPARED_v5_measured_modes.py",
+    "sha256": "38825c7bc1bedaa549ed6eb9a96b33b2ce244ce35d84b28b6eb22da557fec720"
+  },
+  "current_source_1440_and_native_1192": "Actual guard reads only known V9 source_body_modes/native_original_members; no native execution/new functional qualification.",
+  "current_v9_config_binding": {
+    "bytes": 765564,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+    "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25"
+  },
+  "fixture_root": "/tmp/first-five-obsolete-environment-mode-closure-controls-once-owned",
+  "frozen_environment_config": {
+    "bytes": 17723,
+    "mode": "0o400",
+    "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/frozen_first_five_environment_preservation_inputs_SOURCE_PREPARED_v5_measured_modes.json",
+    "sha256": "333dd9b66eacc212c90b3a75c44e9902a9c0bdc56d73d88ba5a0e41e46e0696a"
+  },
+  "native_guard_count": 1192,
+  "owned_root": "/workspace/engineering/first-five-environment-mode-closure-pure-controls-once-owned-v5",
+  "preservation_driver": {
+    "bytes": 37609,
+    "mode": "0o444",
+    "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_first_five_accepted_obsolete_environments_SOURCE_PREPARED_v4.py",
+    "sha256": "63476ecaa50ba863afed8602dcad82c22c9349df022d0e9f0dde8d81d60e0bb7"
+  },
+  "schema": "FIRST_FIVE_ENVIRONMENT_MODE_CLOSURE_PURE_CONTROL_INPUTS_V5",
+  "source_guard_count": 1440
+}

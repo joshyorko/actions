@@ -1,0 +1,115 @@
+{
+  "18_controls_no_behavior_delta": true,
+  "activation18_PATH19_ownorigins_census_same": true,
+  "actual_preservation": "HOLD_SEPARATE_INACTIVE_OWNER_APPROVAL_COMPLETE_PROTECTED_MANIFEST_AND_CONTROLLER_REQUIRED",
+  "all61_original_binding_rows_retained": true,
+  "budget": {
+    "alwayspost_guard_cooperative_budget_seconds": 30,
+    "before_child_post_fallback_sum_seconds": 200,
+    "before_guard_cooperative_budget_seconds": 30,
+    "capture_and_activation_reserve_inside_outer_seconds": 40,
+    "inner_TERM_KILL_grace_seconds": 10,
+    "inner_TERM_seconds": 120,
+    "limits": "ROOT outer bounds complete admitted attempt. Cooperative per-read guards do not promise a kernel filesystem read cannot stall; external hard kill can prevent Python finally. ROOT outer must retain terminal even then. No native/RCC deadline changes.",
+    "outer_TERM_KILL_grace_seconds": 10,
+    "subprocess_parent_fallback_seconds": 140,
+    "whole_ROOT_outer_seconds": 240
+  },
+  "config_binding": {
+    "bytes": 37537,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v7_current9760_managed_PURE18_inputs_NOTRUN.json",
+    "sha256": "ca8279f3bdcc04c85f9d5c100ab010fc11bd9822c13633c68cdfe6eb1c3e69af"
+  },
+  "control_source_binding": {
+    "bytes": 17030,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/test_first_five_v7_current9760_managed_PURE18_SOURCE_PREPARED.py",
+    "sha256": "f8eef7c17be77199baa38c549b678d6ddda3c0650318cb604a6fd3b2de79ac2e"
+  },
+  "current307": {
+    "head": "9760d5ec44876558c4941c4c3190abc8d92d14a1",
+    "source_gate_outcomes_not_inferred": true,
+    "tracked_clean_observed": true,
+    "tree": "0d33ebaac258e069ef7045a29b4a3904740f6307"
+  },
+  "current30_source_inputs_bound": true,
+  "current_source_owner": {
+    "bytes": 7292,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current9760-token-light-once4-PREEXECUTION-NOTRUN/OWNERFINAL-current9760-owning-Isort-settings-SOURCE-and-fresh-once4-PREEXEC-NOTRUN.json",
+    "sha256": "7616d9820f33e3b920262ab501229e4695527820b2dd2fcdd53bdf9858b19e8e"
+  },
+  "decision": "SOURCE_AND_PREEXECUTION_PREPARATION_FROZEN_NOT_AUTHORIZED",
+  "documentation": {
+    "Canonical_file_changed_or_proposed": "Accepted environment restoration and actual frozen-row schema lessons reused; no canonical file mutation.",
+    "Durable_learning": "A clean ordinary child requires named literal source/current-input retarget; prior dirty-state HOLD and past gates remain historical.",
+    "Evidence": [
+      {
+        "bytes": 28246,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/SOURCE-PREPARED-v7-clean9760-literal-retarget-and-preserved18-AST-proof.json",
+        "sha256": "4cf0a1b4e8acc75012b33588fb32bb8bff1e6d4bc4f25eb73c4e45d208cf201d"
+      },
+      {
+        "bytes": 7292,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr307-current9760-token-light-once4-PREEXECUTION-NOTRUN/OWNERFINAL-current9760-owning-Isort-settings-SOURCE-and-fresh-once4-PREEXEC-NOTRUN.json",
+        "sha256": "7616d9820f33e3b920262ab501229e4695527820b2dd2fcdd53bdf9858b19e8e"
+      },
+      {
+        "bytes": 6261,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v6-current00b1-independent-PURE18-PREEXEC-review/OWNERFINAL-independent-first-five-v6-managed-machine18-SOURCE-GO-current-state-PREEXEC-HOLD.json",
+        "sha256": "4e4782340b2a066096cd46186647f707c385f884c25da77b51df9ccbfb1ef593"
+      }
+    ],
+    "Remaining_uncertainty": "Only metadata/AST admission preparation; true18 controls and all storage operations NOT_RUN; ROOT approvals absent.",
+    "Stale_ambiguity_removed": "Measured current9760 source and current30 inputs are distinct from historical00b1/v6 prepared identities.",
+    "Upstream_disposition": "none"
+  },
+  "exact_proposed_ROOT_outer_argv_template_NOT_AUTHORIZED": [
+    "/usr/bin/timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "240s",
+    "bash",
+    "-c",
+    "source /workspace/actions-cloud/activate.sh && export PATH=\"/workspace/actions-cloud/bin:/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\" && export PYTHONDONTWRITEBYTECODE=1 && exec /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12 /workspace/engineering/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v7_current9760_managed_PURE18_ROOT_ONLY_SOURCE_PREPARED.py --root-execute-reviewed-pure-controls \"$1\" --root-release-sha256 \"$2\"",
+    "first-five-current9760-pure18",
+    "ROOT_OWNER_ANNOUNCED_RELEASE_FILE_NOT_CREATED",
+    "ROOT_OWNER_ANNOUNCED_RELEASE_SHA256_NOT_CREATED"
+  ],
+  "execution_imports_tests_storage_native": "NOT_RUN",
+  "fresh_fixture_root": "/tmp/first-five-v7-current9760-mode-closure-PURE18-fixtures-once-owned",
+  "fresh_owned_root": "/workspace/engineering/first-five-v7-current9760-managed-PURE18-once-owned",
+  "launcher_binding": {
+    "bytes": 12477,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v7_current9760_managed_PURE18_ROOT_ONLY_SOURCE_PREPARED.py",
+    "sha256": "00e4d952c0b79c4ebe95879f9a19cfa6ac15805c0f4bd1906d871048cd3b3e94"
+  },
+  "original_v6_independent_SOURCEGO_dirty_PREEXEC_HOLD": {
+    "bytes": 6261,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v6-current00b1-independent-PURE18-PREEXEC-review/OWNERFINAL-independent-first-five-v6-managed-machine18-SOURCE-GO-current-state-PREEXEC-HOLD.json",
+    "sha256": "4e4782340b2a066096cd46186647f707c385f884c25da77b51df9ccbfb1ef593"
+  },
+  "predecessor": {
+    "bytes": 18435,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/OWNERFINAL-first-five-v6-current00b1-managed19-complete-PURE18-PREEXECUTION-NOTRUN.json",
+    "sha256": "36ed9528b7b6dc976d9db2b9887bb495e811236ea583eddac792bc9f8d567933"
+  },
+  "required_ROOT_decision": "RELEASE_ONE_FIRST_FIVE_V7_CURRENT9760_MANAGED_PURE18_ONLY",
+  "required_independent_decision": "GO_FIRST_FIVE_V7_CURRENT9760_MANAGED_PURE18_PREEXECUTION",
+  "root_release_file": "ABSENT_NOT_CREATED",
+  "schema": 1,
+  "source_proof_binding": {
+    "bytes": 28246,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/SOURCE-PREPARED-v7-clean9760-literal-retarget-and-preserved18-AST-proof.json",
+    "sha256": "4cf0a1b4e8acc75012b33588fb32bb8bff1e6d4bc4f25eb73c4e45d208cf201d"
+  },
+  "writer_A_released": true
+}

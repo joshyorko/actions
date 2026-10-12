@@ -1,0 +1,55 @@
+{
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; exact accepted canonical7d070 paragraph verified in current campaign checkpoint, no cosmetic duplicate",
+    "Durable_learning_captured": "Validate complete recorded archives and failure/history limits independently before capacity becomes gate prerequisite",
+    "Evidence": {
+      "bytes": 3846,
+      "path": "/workspace/engineering/capacity-recovery-batch20-independent-review/independent-actual-stream-and-preservation-proof.json",
+      "sha256": "0886ced63872ecfd2a0488e40d8ce5cbdd9da7cd9c750f8eeeb23adc81ce7035"
+    },
+    "Remaining_uncertainty": "Historical live handles, exact nanosecond/ACL/xattr/rootmetadata, failed563d contents and source origin remain unqualified",
+    "Stale_or_ambiguous_guidance_removed": "Completion marker/archive preservation does not establish source origin, live-process census, functionality or full execution authorization"
+  },
+  "capacity_floor_bytes": 1200000000,
+  "counts": {
+    "after_batch20_archives": 42,
+    "after_batch20_indices": 20,
+    "new_archives": 2,
+    "new_recorded_members": 3501,
+    "prior_archives": 40,
+    "prior_indices": 19
+  },
+  "fresh_workspace_bytes": 1091985408,
+  "full_execution_release": "HOLD separate root authorization/fresh floor; batch21 independently pending",
+  "independent_actual_proof": {
+    "bytes": 3846,
+    "path": "/workspace/engineering/capacity-recovery-batch20-independent-review/independent-actual-stream-and-preservation-proof.json",
+    "sha256": "0886ced63872ecfd2a0488e40d8ce5cbdd9da7cd9c750f8eeeb23adc81ce7035"
+  },
+  "independent_readonly_verifier": {
+    "bytes": 11580,
+    "path": "/workspace/engineering/capacity-recovery-batch20-independent-review/verify-readonly-actual.py",
+    "sha256": "114df3079e8ca3f2485d30c986d5a5e00cbdcdc88e728103496a11174cc90a0f"
+  },
+  "limits": [
+    "No historical live handle or expanded filesystem census replay",
+    "TAR representable mtime checked within1us; no precise nanosecond/rootmetadata/ACL/xattr/inode proof",
+    "No restore/extract/delete/archive/source/gateway/native/provider/test execution",
+    "Historical consumer refs are retained observations, not current installed-temp proof",
+    "Root separately owns fresh capacity, serialization and full execution authorization"
+  ],
+  "private_verification_log": {
+    "bytes": 481,
+    "path": "/workspace/engineering/capacity-recovery-batch20-independent-review/private-readonly-verification.log",
+    "sha256": "c3d348871698584a1ff79d4c8e97259cd3398dd2842431b1804e224b763155de"
+  },
+  "safe_root_terminal": {
+    "bytes": 1369,
+    "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch20.json",
+    "sha256": "1d651c9a8d8421d7566c1e1f085136df525a3e783dd5667748960301bc59053a"
+  },
+  "source_origin": "UNKNOWN from original root terminal, not inferred",
+  "status": "GO_SCOPED_BATCH20_PRESERVATION_ONLY_NO_GATE_AUTHORIZATION",
+  "upstream_disposition": "none",
+  "verified": "All recorded TAR bodies/types/modes/uidgid/symlinks/internal hardlink contents and gzip EOF CRC ISIZE; True markers and expandedabsence; prior420refs/cache416/source1421+71/cleanup1422/native1192/helper0444 preserved"
+}

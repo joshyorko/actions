@@ -1,0 +1,21 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -1032,6 +1032,18 @@
+ selected wheel, retain it before removing the clean environment, and bind each
+ receipt to that wheel and producer. An older wheel's count, source or passing
+ receipt cannot qualify a newer artifact, even when the versions agree.
++
++Before freezing a consumer runner, call the unchanged Runtime wheel selector
++on its actual input directory and require the exact SHA-bound wheel path.
++The selector counts matching cp312 Runtime wheels without selecting a platform;
++an additional valid Windows cp312 wheel makes a Linux candidate directory fail.
++Keep retained cross-platform originals intact. For a partial-platform fixture,
++copy the admitted original ZIP's Linux pair into a dedicated `0700` directory
++with `0600` wheel files, bind both copies to the original ZIP and hashes, and
++admit the real directory before execution. Selection does not replace complete
++wheel identity, METADATA, RECORD or tracked-source checks. A selector failure
++before creating an owned attempt is a gateway failure, with no consumer pass
++or cleanup outcome to infer.
+ 
+ Installed-member byte equality proves the installed files match the selected
+ wheel; it does not prove that build-generated payloads are complete. Bind tracked

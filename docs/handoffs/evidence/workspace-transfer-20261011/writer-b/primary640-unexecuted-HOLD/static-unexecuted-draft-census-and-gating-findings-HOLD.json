@@ -1,0 +1,23 @@
+{
+  "findings": [
+    {
+      "code": "PID_REUSE_CENSUS_NOT_COMPLETE",
+      "evidence": "census checks cached Process.is_running before create_time; psutil can return false for a reused handle, misclassifying reused as absent. Named successor must independently query current PID create_time and preserve reused/unknown rather than PASS."
+    },
+    {
+      "code": "CONTROL_CODE_AND_ACTUAL_EVIDENCE_NOT_AUTHORED",
+      "evidence": "Source preparation only. No baseline-first admission/clock/capture/process/census/lease/post controls executed or prepared yet."
+    },
+    {
+      "code": "GEOMETRY_REQUIRES_INDEPENDENT_REVIEW",
+      "evidence": "Primary GNU630TERM10 and external parent640 are real SOURCE code; before/post command60 plus exclusive cleanup enclosure80 each, not the earlier nominal before/post60 total. ROOT900 unchanged; this scope must be reviewed and cannot be claimed accepted."
+    },
+    {
+      "code": "COMPLETE_NATIVE_INNER_CLEANUP_STILL_HOLD",
+      "evidence": "Original helper observation uses no output-reader threads; managed pool/TCP/provider reader and actual Action lease predicates are not supplied by outer ECHILD."
+    }
+  ],
+  "root_release_present": false,
+  "status": "HOLD_SOURCE_DRAFT_NOT_EXECUTABLE",
+  "tests_imports_native_signals_gates": "NOT_RUN"
+}

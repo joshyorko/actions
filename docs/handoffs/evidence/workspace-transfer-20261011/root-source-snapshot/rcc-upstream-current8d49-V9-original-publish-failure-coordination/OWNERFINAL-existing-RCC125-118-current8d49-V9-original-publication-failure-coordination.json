@@ -1,0 +1,24 @@
+{
+  "capture": "2026-10-11T20:28:01.201432+00:00",
+  "scope": "EXISTING_COMMENTS_ONLY_USER_AUTHORIZED_RCC125_118",
+  "comments": [
+    {
+      "comment": 6109416621,
+      "url": "https://github.com/joshyorko/rcc/issues/125#issuecomment-6109416621",
+      "old_sha256": "1c0b770df028a7bdea83b582ff23f459ae2202b10420260f3164da48a071ce9e",
+      "new_sha256": "c90e820b647a29098435478a96c6ac53985aa8f7f383f6a41f132d4b11edd58a",
+      "old_body_preserved_entire": true
+    },
+    {
+      "comment": 6109416839,
+      "url": "https://github.com/joshyorko/rcc/issues/118#issuecomment-6109416839",
+      "old_sha256": "1c0b770df028a7bdea83b582ff23f459ae2202b10420260f3164da48a071ce9e",
+      "new_sha256": "c90e820b647a29098435478a96c6ac53985aa8f7f383f6a41f132d4b11edd58a",
+      "old_body_preserved_entire": true
+    }
+  ],
+  "first_supported_newer": "NONE_YET",
+  "production_pin": "18.19.3_UNCHANGED",
+  "kill_attribution": "UNKNOWN",
+  "Runtime_publication": "HOLD"
+}

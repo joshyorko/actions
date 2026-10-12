@@ -1,0 +1,157 @@
+{
+  "argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "900s",
+    "bash",
+    "-c",
+    "source /workspace/actions-cloud/activate.sh && exec \"$@\"",
+    "current8d49-managed-v9-once",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/managed_one_version_entry_v9.py",
+    "--config",
+    "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+    "--config-sha256",
+    "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25",
+    "--release",
+    "/workspace/engineering/root-rcc-current8d49-control3-V9-one-release.json",
+    "--release-sha256",
+    "a131e30087742764ba6dbdbc2634749924133431de3310b2065ced446b97bf3b",
+    "--label",
+    "control3",
+    "--log-root",
+    "/workspace/engineering/root-rcc-owned-cache-one-current8d49-control3-v9-1"
+  ],
+  "available_bytes_after": {
+    "/dev/shm": 3236864000,
+    "/tmp": 450785280,
+    "/workspace": 1331068928
+  },
+  "capture": "2026-10-11T20:19:14.727647+00:00",
+  "config_sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25",
+  "elapsed_seconds": 125.23336585699872,
+  "fresh_capacity_before": {
+    "/dev/shm": 3901190144,
+    "/workspace": 1335435264
+  },
+  "launcher_terminal": {
+    "body": {
+      "post_returncode": 0,
+      "preflight_returncode": 0,
+      "primary_returncode": 10
+    },
+    "bytes": 84,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-rcc-owned-cache-one-current8d49-control3-v9-1/launcher-terminal.json",
+    "sha256": "8ed0692250a3ad1480f4e3e15c519be76ef8586593579e025c8dc58ff6b29ea6"
+  },
+  "newer5_7276": "NOT_RUN",
+  "no_retry": true,
+  "original_native_result": {
+    "body": {
+      "admission_failure_class": "AdmissionFailure",
+      "admission_failure_code": "OUTER_PRIMARY_OR_CLEANUP_FAILED",
+      "command_returncode": 1,
+      "config_sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25",
+      "exception_class": null,
+      "label": "control3",
+      "last_observed_process_tree": {
+        "captured_count": 2,
+        "complete_census": false,
+        "entries": [
+          {
+            "argv_sha256": "1848d82bf520d6ef52d36a4a0ed630531fc4528899aba3d8d6b0d451015c207e",
+            "create_time": 1791749895.73,
+            "cwd": "/workspace/engineering/pr308/action_server",
+            "live": true,
+            "parent_pid": 673188,
+            "pid": 676134,
+            "zombie": false
+          },
+          {
+            "argv_sha256": "20a141159e3991e8e95d008cee2fd259874ed704b239fc26dbe2e65ac290c6bf",
+            "create_time": 1791749895.94,
+            "cwd": "/workspace/engineering/pr308/action_server",
+            "live": true,
+            "parent_pid": 676134,
+            "pid": 676135,
+            "zombie": false
+          }
+        ],
+        "retained_count": 2,
+        "sample_count_before": 61,
+        "stage": "sampled_only",
+        "truncated": false
+      },
+      "original_helper_facts": {
+        "captured_child_census": null,
+        "cleanup_disposition": "clean_no_descendants",
+        "command_returncode": 1,
+        "missing_facts_scope": "UNKNOWN_NOT_EXPOSED_BY_PINNED_HELPER",
+        "reader_join_facts": null,
+        "reaped_descendants": 0,
+        "source": "original_completed"
+      },
+      "outcome": {
+        "cleanup": {
+          "code": "CLEAN_NO_DESCENDANTS",
+          "status": "PASS"
+        },
+        "primary": {
+          "code": "COMMAND_FAILED",
+          "status": "FAIL"
+        },
+        "status": "FAIL"
+      },
+      "owned_command_identity": [
+        676135,
+        1791749895.94
+      ],
+      "owned_supervisor_identity": [
+        676134,
+        1791749895.73
+      ],
+      "sampler_final": {
+        "inspection_error": false,
+        "kernel_quota": false,
+        "maximum_observed_bytes": 664267967,
+        "peak_is_universal": false,
+        "sample_count": 62,
+        "sampler_alive": false,
+        "sampler_cancelled": true,
+        "stage": "final",
+        "threshold_triggered": false,
+        "workspace_minimum_observed_bytes": 1331298304
+      },
+      "sampler_scope": {
+        "exclusive_wrapper_owner": "existing_pinned_helper",
+        "hard_admission_bytes": 2576980377,
+        "intervening_overshoot_unknown": true,
+        "kernel_quota": false,
+        "maximum_is_sampled_only": true,
+        "operational_stop_bytes": 2523293286,
+        "primary": null,
+        "sampling_seconds": 0.2,
+        "signal_record": null
+      },
+      "scope": "two-case artifact/action/lease/typed cleanup; internal worker readers UNAVAILABLE/HOLD",
+      "secondary_exception_retention_failure_class": null,
+      "secondary_post_guard_failure_class": null,
+      "secondary_retention_failure_class": null,
+      "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+      "status": "FAIL",
+      "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+    },
+    "bytes": 2837,
+    "mode": "0o600",
+    "path": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-owned-pkgs-4/OWNERFINAL-one-version-actual-result.json",
+    "sha256": "a6811f4a7a33ff6c25e85cc213d7c4c77a7effc7516f6049b6286933f6cec56d"
+  },
+  "outer_returncode": 1,
+  "production_pin": "18.19.3_UNCHANGED",
+  "release_sha256": "a131e30087742764ba6dbdbc2634749924133431de3310b2065ced446b97bf3b",
+  "scope": "ONE_ORIGINAL_CURRENT8D49_CONTROL3_V9_NATIVE_ATTEMPT_ONLY",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+}

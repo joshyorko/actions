@@ -1,0 +1,72 @@
+{
+  "child_seconds": 600,
+  "config_binding": {
+    "bytes": 18891,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/frozen_first_five_current9760_preservation_model_SOURCE_PREPARED.json",
+    "sha256": "34cc4abc0ae85b5db0c11ce4d520fbd3f1d8d25a4872b265ded39d0244e8c5cf"
+  },
+  "controller_binding": {
+    "bytes": 11962,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/root_once_first_five_current9760_SOURCE_PREPARED_v2.py",
+    "sha256": "ffee97622f83627e77a27ec407ec4e242768060fb016a5b54a813c88a8015b03"
+  },
+  "controller_config_binding": {
+    "bytes": 63289,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/frozen_current9760_five_environment_actual_controller_inputs_SOURCE_PREPARED.json",
+    "sha256": "714f2489aa66b7dd83a95d43b1693cd3f981c344bba5e92da639dddb229df3a3"
+  },
+  "decision": "TEMPLATE_ONLY_NOT_ROOT_AUTHORIZATION",
+  "driver_binding": {
+    "bytes": 37609,
+    "mode": "0o444",
+    "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_first_five_accepted_obsolete_environments_SOURCE_PREPARED_v4.py",
+    "sha256": "63476ecaa50ba863afed8602dcad82c22c9349df022d0e9f0dde8d81d60e0bb7"
+  },
+  "inactive_owner_approval": false,
+  "inactive_owner_approval_binding": null,
+  "inactive_prefixes": [
+    "/workspace/engineering/runtime-checkout-eol/action_server/.venv",
+    "/workspace/engineering/runtime-checkout-eol/actions/.venv",
+    "/workspace/engineering/runtime-checkout-eol/actions-http-helper/.venv",
+    "/workspace/engineering/runtime-checkout-eol/devutils/.venv",
+    "/workspace/engineering/runtime-checkout-eol/work-items/.venv"
+  ],
+  "independent_review_binding": null,
+  "not_an_execution_release": true,
+  "qualified_pure18_actual_binding": null,
+  "qualified_pure18_independent_binding": null,
+  "required_PURE18_independent_schema": {
+    "actual_binding": "EXACT actual owner bytes/mode/SHA",
+    "decision": "GO_FIRST_FIVE_V7_ACTUAL_PURE18_ONLY",
+    "prepared_source_owner": "EXACT v7 SOURCE owner"
+  },
+  "required_actual_PURE18_schema": {
+    "error_count": 0,
+    "failure_count": 0,
+    "skip_count": 0,
+    "status": "PASS",
+    "tests_run": 18
+  },
+  "required_approval_schema": {
+    "accepted_sources": "EXACT accepted original checkout rows",
+    "decision": "ROOT_APPROVES_EXACT_FIVE_ACCEPTED_OBSOLETE_ENVIRONMENT_OWNERS_ONLY",
+    "prefixes": "EXACT selected5 mapping",
+    "unknown_process_channels_are_not_quiescence": true,
+    "unreadable_process_policy": "OBSERVED_ONLY_UNKNOWN_ACCEPTED_BY_ROOT"
+  },
+  "required_decision": "RELEASE_ONE_REVIEWED_ACCEPTED_OBSOLETE_ENVIRONMENT_PRESERVATION_ONLY",
+  "root_protected_manifest_binding": {
+    "bytes": 91408,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/complete_declared_current9760_protected_inputs_and_typed_alias_manifest_SOURCE_PREPARED.json",
+    "sha256": "857642326d264e0d1096638f45e6b528becf1e1abfd35485c75c9970626b5608"
+  },
+  "term_kill_grace_seconds": 10,
+  "terminal_output": "ROOT_RELEASE_PARENT_PRIVATE_ARCHIVER_TERMINAL_ABSENT",
+  "unknown_process_channels_are_not_quiescence": true,
+  "unreadable_process_policy": "OBSERVED_ONLY_UNKNOWN_ACCEPTED_BY_ROOT",
+  "whole_parent_seconds": 900
+}

@@ -1,0 +1,153 @@
+{
+  "actual": "NOT_RUN",
+  "bindings": [
+    {
+      "bytes": 25279,
+      "mode": "0444",
+      "path": "/workspace/engineering/pr308-rcc-compatibility-source/OWNERFINAL-current-a0d-approved-RCC-compatibility-SOURCE-LIGHT.json",
+      "sha256": "336cfca277d8e3b08035af8057e77af580fc7a5cbeb54226ae2140abedb79bba"
+    },
+    {
+      "bytes": 4318,
+      "mode": "0444",
+      "path": "/workspace/engineering/pr308-rcc-compatibility-source/frozen-source-two-selector-and-actual-fixture-evidence-interface-v2.json",
+      "sha256": "f50064bfcbf94ab4cb7618328f6debafe39ba6f3505a17e28f477172ae66f085"
+    },
+    {
+      "bytes": 10361,
+      "mode": "0600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/fixture_records_v1.py",
+      "sha256": "7dc0921e31ccb0a16bbafc00393979be8cbd844020a58329d710702f9ceabd61"
+    },
+    {
+      "bytes": 13834,
+      "mode": "0600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/test_fixture_records_v1.py",
+      "sha256": "a1a6ea8e39f2b68e63878aa1cb4393faee7c2747b93a313a7a76e09eadb65493"
+    },
+    {
+      "bytes": 907,
+      "mode": "0600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/frozen-b614-literal-fixture-expected-inventory.json",
+      "sha256": "49b8190d76430d9c64738cd0dccd023a3113327036f31c2c5cf230260d7986cc"
+    },
+    {
+      "bytes": 69,
+      "mode": "0600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/fixture-records-v1-managed-preflight.private.log",
+      "sha256": "9e7476b86b94c13ab1e9762548883c60e950ede7c9c4a74e9281613e05d88f48"
+    },
+    {
+      "bytes": 161,
+      "mode": "0600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/fixture-records-v1-controls.private.log",
+      "sha256": "c4e8f2e1e0c4aa22e6e5441082f10b58b3a418bd30fd871f5a0250d52ad3198b"
+    },
+    {
+      "bytes": 78,
+      "mode": "0600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/fixture-records-v1-controls-terminal.json",
+      "sha256": "c17e94d5abd4aeab2116dbde20d00df03e3c060685878654e33865b0b6913382"
+    },
+    {
+      "bytes": 11024,
+      "mode": "0600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/OWNERFINAL-service-free-runner-parser-controls-source-tuple-PENDING.json",
+      "sha256": "d37747e9aedb6e8fb4cb7cafd6b48f24a3151b56c72c34771ec4a1c8939cbcab"
+    },
+    {
+      "bytes": 3293,
+      "mode": "0600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/OWNERFINAL-pure-outer-observer-and-capacity-controls-source-tuple-PENDING.json",
+      "sha256": "10e47cec24bb26a5deb461cc77f1835adcb03b6418e5b73a3ace9409784e5b8c"
+    },
+    {
+      "bytes": 869,
+      "mode": "0600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/canonical-action-worker-and-reader-evidence-proposed.patch",
+      "sha256": "f4b31708b31726061da41655456116eb266df59bb5cf7c68a037c0ed8fa6817a"
+    },
+    {
+      "bytes": 858,
+      "mode": "0600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/canonical-sampled-capacity-and-exclusive-owner-proposed.patch",
+      "sha256": "d5b242ee539679cc9d460de63751f7e63a3f8f1d9603de4d5be7c5375057c63f"
+    }
+  ],
+  "control_provenance": {
+    "commit": "c10380a4d2ebc6f0aca63eb85c8f84a337da4962",
+    "kind": "root-approved retained legacy Git provenance for external qualification; not runner SHA256 or new hosted control",
+    "tree": "21676c626a933c2d55761ec85ecf26fe0eef26bb"
+  },
+  "controls": {
+    "elapsed_seconds": 0.013,
+    "errors": 0,
+    "failures": 0,
+    "gateway": false,
+    "native": false,
+    "passed": 62,
+    "product_module_import": false,
+    "provider": false,
+    "returncode": 0,
+    "skipped": 0,
+    "tests": 62
+  },
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "durable_learning": "Natural action return, intentional persistent-worker disposal, typed captured-tree cleanup and unexposed internal reader joins are distinct proof scopes.",
+    "evidence": "Frozen b614 staged fixture, read_receipt and typed dataclasses; 62 pure baseline/poison tests execute named raw-record adapter; root explicitly approved killed status preservation.",
+    "exact_patch": {
+      "bytes": 869,
+      "mode": "0600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/canonical-action-worker-and-reader-evidence-proposed.patch",
+      "sha256": "f4b31708b31726061da41655456116eb266df59bb5cf7c68a037c0ed8fa6817a"
+    },
+    "remaining_uncertainty": "Source independent/FULL and all actual invocation observations still pending.",
+    "stale_ambiguity_removed": "Completed-worker-only synthetic predicate cannot be applied to intentional-disposal fixture; no status rewriting or outer-for-inner reader claim."
+  },
+  "fixture_interface": {
+    "bytes": 4318,
+    "path": "/workspace/engineering/pr308-rcc-compatibility-source/frozen-source-two-selector-and-actual-fixture-evidence-interface-v2.json",
+    "sha256": "f50064bfcbf94ab4cb7618328f6debafe39ba6f3505a17e28f477172ae66f085"
+  },
+  "preserved_predecessors": "All v1/v2/v3 parser/monitor owners, original v1 RED3/80 and controls remain unchanged; v3 completed-worker parser is not silently weakened. Named fixture-record adapter uses root-approved intentional-disposal classification.",
+  "qualification_scope": {
+    "artifact_action_lease_typed_cleanup": "conditional two-case scope only; no actual measurement yet",
+    "dirty5_source_equivalence": "UNKNOWN",
+    "internal_worker_reader_join": "UNAVAILABLE/HOLD",
+    "native_274_plus_5": "UNQUALIFIED",
+    "outer_helper_readers": "separate existing helper proof required; never substitutes worker measurement",
+    "persistent_reuse_reload_drain_provider_recovery": "NOT_RUN/HOLD"
+  },
+  "source": {
+    "branch": "fix/rcc-candidate-wheel-identities-20261010",
+    "changed_paths": [
+      "action_server/scripts/verify_dakota_rcc_acceptance.py",
+      "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py",
+      "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
+      "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "clean": true,
+    "complete_typed_leaf_count": 1421,
+    "head": "b614864ba9da55c13662894b6ef3c8515d9fdb25",
+    "ordinary_merge_ordered_parents": [
+      "d5a3d2f53737f4f5380b6ecb7fb93d1a651f005d",
+      "a0d258a16095b95b1bf9000cb1201cddfaff4779"
+    ],
+    "parents": [
+      "0a6a9db57484a2bc6d9d49a55de5570aa12ae104"
+    ],
+    "tree": "6fa4f5c1e9837a0d893868255575b355b3977fae"
+  },
+  "source_LIGHT_binding_recheck_count": 71,
+  "source_LIGHT_original": {
+    "bytes": 25279,
+    "mode": "0444",
+    "path": "/workspace/engineering/pr308-rcc-compatibility-source/OWNERFINAL-current-a0d-approved-RCC-compatibility-SOURCE-LIGHT.json",
+    "sha256": "336cfca277d8e3b08035af8057e77af580fc7a5cbeb54226ae2140abedb79bba"
+  },
+  "status": "GO_SERVICE_FREE_RAW_INTERFACE_CONTROLS_ONLY",
+  "upstream_disposition": "none"
+}

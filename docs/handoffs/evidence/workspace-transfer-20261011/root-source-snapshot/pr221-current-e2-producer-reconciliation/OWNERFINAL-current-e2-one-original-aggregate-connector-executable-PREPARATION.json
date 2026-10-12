@@ -1,0 +1,854 @@
+{
+  "schema": 1,
+  "status": "PREPARATION_ONLY_READY_FOR_INDEPENDENT_PREEXECUTION_REVIEW_NO_ACQUISITION",
+  "source": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "source_tree": "afe2679cc93bf27fa5021c7698ee7ad3ee21a1b9",
+  "actual_source_ordered_parents": [
+    "a54c982462d1e7ad011d8152bfc299d997503fb3",
+    "1299cc4bb6586f467d36ca124faaaaa77362695f"
+  ],
+  "base": "a70993fafc99a9f94041485542d5a720797ca394",
+  "intended_API_synthetic": {
+    "sha": "165c38920fe37dd81350ca8ca0419bc70a4739f2",
+    "tree": "afe2679cc93bf27fa5021c7698ee7ad3ee21a1b9",
+    "ordered_parents": [
+      "a70993fafc99a9f94041485542d5a720797ca394",
+      "e2c81adce7858d5a952991ba9a8b7f72e902038a"
+    ],
+    "actual_builder_checkout": "UNKNOWN_NO_ORIGINAL_BUILDER_LOG_ACQUIRED"
+  },
+  "named_ref_bracket_stable": true,
+  "PR_draft": true,
+  "CI": {
+    "declared_PR_flows": 13,
+    "declared_PR_jobs": 34,
+    "observed_aux_push_jobs": 1,
+    "observed_checks": 35,
+    "observed_jobs": 35,
+    "success": 33,
+    "expected_WorkItems_tag_skip": 1,
+    "in_progress": 1,
+    "pending_job": 114523345200,
+    "full_CI_admission": "HOLD",
+    "snapshot_only_no_busywait": true
+  },
+  "producer_run": 38157482815,
+  "aggregate": {
+    "artifact_id": 11708952448,
+    "API_bytes": 80745614,
+    "API_sha256": "e16a414fefc1778ba49d09c466fd9d8054cfbf952e7766ee5cc6558f871f4def",
+    "expired": false,
+    "publisher_job": 114525527854,
+    "original_checkout": "UNKNOWN_NOT_INFERRED_FROM_API_HEAD_OR_SYNTHETIC",
+    "artifact_bytes": "NOT_ACQUIRED"
+  },
+  "all_five_current_artifacts": [
+    {
+      "artifact_id": 11709596949,
+      "name": "Linux-wheels",
+      "ZIP_size_API_bytes": 28812578,
+      "ZIP_digest_API": "sha256:721056719d0aa9239c675ee2e577b1b35633cc22baf82de5207ddb0e390568b1",
+      "expired": false,
+      "run_id": 38157482815,
+      "source_head": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+      "producer_job_id": 114523345379,
+      "producer_job_name": "build-wheels (ubuntu-22.04)",
+      "producer_status": "completed",
+      "producer_conclusion": "success",
+      "API_created_at": "2026-10-11T17:06:10Z",
+      "association": "Owning source upload step and run metadata; original checkout/log UNKNOWN"
+    },
+    {
+      "artifact_id": 11709371540,
+      "name": "macOS-wheels",
+      "ZIP_size_API_bytes": 26946475,
+      "ZIP_digest_API": "sha256:44cb8c3488ed9b6449dbded5cb707e67a3a1e1dae699a40dd0a84ab1f3574838",
+      "expired": false,
+      "run_id": 38157482815,
+      "source_head": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+      "producer_job_id": 114523345357,
+      "producer_job_name": "build-wheels (macos-15)",
+      "producer_status": "completed",
+      "producer_conclusion": "success",
+      "API_created_at": "2026-10-11T16:59:22Z",
+      "association": "Owning source upload step and run metadata; original checkout/log UNKNOWN"
+    },
+    {
+      "artifact_id": 11709292254,
+      "name": "action-server-dist",
+      "ZIP_size_API_bytes": 1277597,
+      "ZIP_digest_API": "sha256:4290c4dcf0bf17aceba865d3e8779918b109c3079dd9a240488bf56e5389cd2b",
+      "expired": false,
+      "run_id": 38157482815,
+      "source_head": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+      "producer_job_id": 114523345265,
+      "producer_job_name": "build-sdist (ubuntu-py3.12)",
+      "producer_status": "completed",
+      "producer_conclusion": "success",
+      "API_created_at": "2026-10-11T17:04:34Z",
+      "association": "Owning source upload step and run metadata; original checkout/log UNKNOWN"
+    },
+    {
+      "artifact_id": 11708952448,
+      "name": "actions-runtime-dist",
+      "ZIP_size_API_bytes": 80745614,
+      "ZIP_digest_API": "sha256:e16a414fefc1778ba49d09c466fd9d8054cfbf952e7766ee5cc6558f871f4def",
+      "expired": false,
+      "run_id": 38157482815,
+      "source_head": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+      "producer_job_id": 114525527854,
+      "producer_job_name": "publish (3.12)",
+      "producer_status": "completed",
+      "producer_conclusion": "success",
+      "API_created_at": "2026-10-11T17:08:43Z",
+      "association": "Owning source upload step and run metadata; original checkout/log UNKNOWN"
+    },
+    {
+      "artifact_id": 11708822024,
+      "name": "Windows-wheels",
+      "ZIP_size_API_bytes": 23708484,
+      "ZIP_digest_API": "sha256:d4a15b50eb4b18b6ae4fe75285117e670d3fba9c5a9df102bfe1a628f0ef13a5",
+      "expired": false,
+      "run_id": 38157482815,
+      "source_head": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+      "producer_job_id": 114523345424,
+      "producer_job_name": "build-wheels (windows-2022)",
+      "producer_status": "completed",
+      "producer_conclusion": "success",
+      "API_created_at": "2026-10-11T17:01:24Z",
+      "association": "Owning source upload step and run metadata; original checkout/log UNKNOWN"
+    }
+  ],
+  "producer_jobs": [
+    {
+      "id": 114523345265,
+      "name": "build-sdist (ubuntu-py3.12)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114523345357,
+      "name": "build-wheels (macos-15)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114523345379,
+      "name": "build-wheels (ubuntu-22.04)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114523345424,
+      "name": "build-wheels (windows-2022)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114525527854,
+      "name": "publish (3.12)",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "concrete_future_once_executor": {
+    "module": {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/acquire_current_e2_aggregate_once.py",
+      "bytes": 13257,
+      "sha256": "ce9841aec8c11d59666b911c90d1781ba58b49d061a2c49e5d070b292bf7c050",
+      "mode": "0o600"
+    },
+    "orchestration": {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/connector_current_e2_once_PREPARATION.js",
+      "bytes": 3273,
+      "sha256": "72cf841f30cac01b2238426e3f22033d7bacf9ecad43d0fb9b98542b13fa8286",
+      "mode": "0o600"
+    },
+    "publisher_policy": {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/frozen-current-e2-publisher-outer-archive-policy.json",
+      "bytes": 2051,
+      "sha256": "4ef302991978880bbc8452d6f6ad410562011deaddf8e6fe64f6438637241097",
+      "mode": "0o600"
+    },
+    "root_release_status": "ROOT_RELEASE_ONE_CURRENT_E2_ORIGINAL_AGGREGATE_CONNECTOR_AND_TRANSFER",
+    "required_root_release_fields": [
+      "schema",
+      "status",
+      "source",
+      "artifact_id",
+      "aggregate_API_bytes",
+      "aggregate_API_sha256",
+      "executor_sha256",
+      "publisher_policy_sha256",
+      "serialized_no_other_heavy_or_installer",
+      "data_only_no_package_native_consumer_or_publication",
+      "original_checkout_UNKNOWN_retained",
+      "proposal",
+      "independent_preexecution_GO",
+      "immutable_original_preparations_and_metadata"
+    ],
+    "root_release_requires_module_and_policy_hashes_and_exact_bound_proposal_independent_GO": true,
+    "root_distinct_release": "NOT_GRANTED_FOR_ACQUISITION",
+    "supported_connector": "mcp__codex_apps__github_download_workflow_artifact",
+    "connector_args": {
+      "repo_full_name": "joshyorko/actions",
+      "artifact_id": 11708952448,
+      "file_name": "actions-runtime-dist-11708952448-original.zip"
+    },
+    "FileService_mapping": "structuredContent.file_uri mapping, parity with nested structuredContent; file_id, filename, MIME, artifact identity, HTTPS URL retained privately. Never use Sediment download_file for FileService.",
+    "storage": "/tmp/actions-pr221-e2-aggregate-11708952448-one-owned unique absent0700; originals0600",
+    "bounds": {
+      "connector_seconds": 90,
+      "transfer_seconds": 120,
+      "transfer_and_outer_CRC_seconds": 180,
+      "whole_envelope_seconds": 300,
+      "GNU_local_cleanup_seconds": 10,
+      "compressed_bytes": 100663296,
+      "expanded_bytes": 134217728,
+      "single_member_bytes": 67108864,
+      "tool_result_serialization_bytes": 49152,
+      "tmp_free_bytes": 536870912,
+      "workspace_free_bytes": 1288490189,
+      "HTTPS_redirects_max": 3
+    },
+    "admission": "Exact API ZIP bytes/SHA; 8 safe unique regular outer members; stream every member CRC/size/SHA; six exact wheels+sdist and literal manifest with all seven body digests. No extraction, inner RECORD/import/installation/consumer/native/publication.",
+    "failed_acquisition": "Retain zero/partial original, observed logical MCP result and private exceptions; no retry/alternative/mirror. Connector timeout leaves remote terminal/cancellation UNKNOWN. DNS/remote cancellation are not claimed universally bounded; parent/local timeout remains explicit.",
+    "file_service_URLs": "Never tool text/notify/Git/stdout; generated logical response serialization private, original wire bytes UNKNOWN.",
+    "root_operator": "Replace only the two root release placeholders in a named reviewed orchestration successor, bind exact original/new bytes and release; no execution of this template."
+  },
+  "owned_search_and_static_validation": {
+    "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/safe-exact-owned-ID-search-and-static-validation.json",
+    "bytes": 996,
+    "sha256": "71cc3764609b3aa94cb33af4a16f6424bda4da6e739c45f671de83d7d28812ff",
+    "mode": "0o600"
+  },
+  "original_old_a54_preparations": [
+    {
+      "path": "/workspace/engineering/pr221-currenta54-one-original-aggregate-acquisition-preparation/OWNERFINAL-current-a54-one-original-aggregate-acquisition-PREPARATION-v2.json",
+      "bytes": 12039,
+      "sha256": "9d89e610a1f6a2c4db9a1cc5d6a1b056ad5626c3cab60dc8243048be056985da",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-connector-original-aggregate-acquisition-successor-preparation/OWNERFINAL-metadata-only-currenta54-one-connector-aggregate-acquisition-successor-preparation.json",
+      "bytes": 12446,
+      "sha256": "c3ad79fc74fb8a07477d142d6685d841bd5a26848cf446b6cbf69dd892897b27",
+      "mode": "0o400"
+    }
+  ],
+  "history": "Old GitHub CLI aggregate PREP NOT_RUN and connector PREP NOT_RUN, not download FAIL. Old 618/776 wheel or consumer receipts are historical; no current e2 carry.",
+  "Linux_original_producer_log": "ROOT owns one original separately; no acquisition by this worker. Checkout analysis pending separate named successor, no Linux-to-Mac/Windows equivalence.",
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md, workflow matrix/job inventory guidance",
+    "canonical_source_e2_SHA256": "6e4899e6fdd839535a8fc10036d6941057830177d0ca619eb1eae2fa3abafac7",
+    "exact_delta": {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/proposed-canonical-matrix-event-count-lesson.txt",
+      "bytes": 273,
+      "sha256": "62d4d0f56d363e66d062eebe0696dc421f4503a8ac2d3917fe5cbbaa3c4db5e5",
+      "mode": "0o600"
+    },
+    "durable_learning": "Include-only rows and auxiliary push job counts must be derived from exact event source, not fixed totals.",
+    "evidence": "Original local offline parser attempts retained; v3 exact source derivation gives 13 PR/34 jobs plus one actually triggered Copilot push; original complete paged jobs agree. No API repeats.",
+    "stale_or_ambiguous_guidance_removed": "Proposed delta removes ambiguity that supplemental matrix rows can become original combinations or that PR counts include auxiliary push universally. No canonical source edited.",
+    "remaining_uncertainty": "Snapshot Runtime Windows job pending; actual producer checkout not yet independently bound, aggregate byte/content/source authority/consumer/publication remain unqualified."
+  },
+  "upstream_disposition": "none; no external post",
+  "original_preparation_bindings": [
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/acquire_current_e2_aggregate_once.py",
+      "bytes": 13257,
+      "sha256": "ce9841aec8c11d59666b911c90d1781ba58b49d061a2c49e5d070b292bf7c050",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/collect_current_e2_metadata_once.py",
+      "bytes": 2628,
+      "sha256": "19ba43e7cffbfa30223ea1ce79253b853f7ff08018026571f6fd6ecc69977092",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/connector_current_e2_once_PREPARATION.js",
+      "bytes": 3273,
+      "sha256": "72cf841f30cac01b2238426e3f22033d7bacf9ecad43d0fb9b98542b13fa8286",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/connector_current_e2_once_PREPARATION.syntax-only.mjs",
+      "bytes": 3273,
+      "sha256": "72cf841f30cac01b2238426e3f22033d7bacf9ecad43d0fb9b98542b13fa8286",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/derivation-v2.private.log",
+      "bytes": 351,
+      "sha256": "42f26c0fe81b54e4944fc5a07a252f9d1288e3509190799ca0eb70e83806dfe8",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/derivation-v3.private.log",
+      "bytes": 388,
+      "sha256": "d3ade39944f630165c2109e3dde57a314667ee59d0625bd2bd956f13b0732366",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/derivation.private.log",
+      "bytes": 348,
+      "sha256": "08207c229d9a06095b838b248bc5e9db9f2412939e08069212ffcac71b1cc154",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/derive_current_e2_metadata_and_policy.py",
+      "bytes": 10750,
+      "sha256": "9a52050ccf62e120d086e06ab01d4a7581cc6d73a7f0b392ed513d34d527ec8b",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/derive_current_e2_metadata_and_policy_v2.py",
+      "bytes": 10785,
+      "sha256": "4f7c11309b0b7f1b4752d44bcd39f0c75db3d1825c2b9ec204e787a3ca5f5c21",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/derive_current_e2_metadata_and_policy_v3.py",
+      "bytes": 10815,
+      "sha256": "b6f9cab9c3f11fa5a524769509bc1ad87aaa97fb0ce83127381fd4f163300297",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/frozen-current-e2-publisher-outer-archive-policy.json",
+      "bytes": 2051,
+      "sha256": "4ef302991978880bbc8452d6f6ad410562011deaddf8e6fe64f6438637241097",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/javascript-syntax-check.private.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/metadata-collection.private.log",
+      "bytes": 145,
+      "sha256": "d2e7a8e2d48796e86ed7529df87b7d870fb9a7a9c43091a0da9a257acf2de291",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-current-e2-workflow-filter-matrix-needs-proof.json",
+      "bytes": 79774,
+      "sha256": "213629812d4c52b299d903651cba50b6397e2d85b002458fcb2183f50f145847",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-existing-owned-ID-reference-search.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/base-commit.decoded-pages.json",
+      "bytes": 3047,
+      "sha256": "d2f28e77af20b9ab26fa86c476c9a371b18613e815665ba80278a503047b3116",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/base-commit.original.json",
+      "bytes": 2760,
+      "sha256": "3ba635afded4fc3518e1eb22c98e02ae3dc928f1999a83bb8dc614e5fe30d83d",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/base-commit.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/base-ref-begin.decoded-pages.json",
+      "bytes": 412,
+      "sha256": "62e0258d5ff388201ba9b861733d92c29ebcd211a2ca49857bfdfe6e90055ec9",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/base-ref-begin.original.json",
+      "bytes": 349,
+      "sha256": "e942c39796358320842ace1f28306132cdcfc247d97656ad5dca57134565bea3",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/base-ref-begin.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/base-ref-end.decoded-pages.json",
+      "bytes": 412,
+      "sha256": "62e0258d5ff388201ba9b861733d92c29ebcd211a2ca49857bfdfe6e90055ec9",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/base-ref-end.original.json",
+      "bytes": 349,
+      "sha256": "e942c39796358320842ace1f28306132cdcfc247d97656ad5dca57134565bea3",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/base-ref-end.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/checks.decoded-pages.json",
+      "bytes": 187775,
+      "sha256": "8587beeba5c3cb3ec697833dd5c1312766861f6b585738363d44fa7e2273e7ab",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/checks.original.json",
+      "bytes": 124562,
+      "sha256": "8b045759d484070d0d9fefd75acb32799fca605270f78e21c5f67141cbff5448",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/checks.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/head-commit.decoded-pages.json",
+      "bytes": 3021,
+      "sha256": "c4a970c400255cd69262489d571d50fabc5cf53e5171bbb409bfbb7d50832608",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/head-commit.original.json",
+      "bytes": 2734,
+      "sha256": "96453956d5f574c3fdcc4f6d1a2b89b3f81aca50e805c5b1720907aea3d58a1b",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/head-commit.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/head-ref-begin.decoded-pages.json",
+      "bytes": 511,
+      "sha256": "d27c1068c5e23a37dac0b3d58e335653974854df25e263d7ded4c73c6c36e89b",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/head-ref-begin.original.json",
+      "bytes": 448,
+      "sha256": "f2c2b8fd2c72a1216a821bf59e4a463a1ebf07de91641183c0d302cd2026d615",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/head-ref-begin.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/head-ref-end.decoded-pages.json",
+      "bytes": 511,
+      "sha256": "d27c1068c5e23a37dac0b3d58e335653974854df25e263d7ded4c73c6c36e89b",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/head-ref-end.original.json",
+      "bytes": 448,
+      "sha256": "f2c2b8fd2c72a1216a821bf59e4a463a1ebf07de91641183c0d302cd2026d615",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/head-ref-end.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/intended-synthetic-commit.decoded-pages.json",
+      "bytes": 2935,
+      "sha256": "e6509a977fb01d22147222c7c4b023e5e9e2ef3499b9cb388733d1da9462e7f4",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/intended-synthetic-commit.original.json",
+      "bytes": 2648,
+      "sha256": "0c42970602c4b0e56c122f819706eacff00813458ddb6a3c281e0f213bc46048",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/intended-synthetic-commit.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482750.decoded-pages.json",
+      "bytes": 4255,
+      "sha256": "0dc8154f88756bd237802b180f5377ceaa14e279dab702f55ed20e68d1394188",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482750.original.json",
+      "bytes": 2789,
+      "sha256": "e0b2914f6d42284901ad48670b4a97ca4e1767588f626ea7faead7e9ff8b3efa",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482750.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482792.decoded-pages.json",
+      "bytes": 4791,
+      "sha256": "1cafe8a360165a7faf0baf2fadd79ab4e50eb7ae21342f22860d407fd30acff6",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482792.original.json",
+      "bytes": 3113,
+      "sha256": "716c1e89b3471f24c5623b77cfe8d8f4bf2047f9b0e2e2d1df9a195e1ed529df",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482792.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482795.decoded-pages.json",
+      "bytes": 22032,
+      "sha256": "d4acd46367b3194c2ac1337a32f6c5070330240825f9dd6cf600ff9cca8864b9",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482795.original.json",
+      "bytes": 14235,
+      "sha256": "246c73537660239ee82e320cfd58c3ec0550ce0e3e85f9664ff8c67563c4eacb",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482795.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482796.decoded-pages.json",
+      "bytes": 26121,
+      "sha256": "45c02986479303e36100abcaff8560dea5b5553030c6629eb8029ec4a35989b8",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482796.original.json",
+      "bytes": 16477,
+      "sha256": "fef89af9edbef1d50675b8bace9d2706603dc8bf0cdc734374f4839870bf9905",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482796.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482797.decoded-pages.json",
+      "bytes": 3662,
+      "sha256": "a40eb619227d4b34b3d238cd88a1eba5211370f59186c3e7cdaf06c90e485c73",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482797.original.json",
+      "bytes": 2408,
+      "sha256": "70dd67be3883d5f60d276a9219e7a01326ed916d2e7fd689a2aff48372b31f32",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482797.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482798.decoded-pages.json",
+      "bytes": 37056,
+      "sha256": "aebd26d0c1378a6e54ecc4c2a115a4b66fd00780e75f199e90c61de8da5b8cfd",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482798.original.json",
+      "bytes": 23808,
+      "sha256": "3619d032f7b66bec99d23ae241518d540fe67855937762a0e46f1488e39a9b6f",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482798.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482800.decoded-pages.json",
+      "bytes": 15163,
+      "sha256": "bdbe3bf6372f3d56b6ae8cb50dc890b194f4c758fc218bbcdcc39ba65edb08c1",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482800.original.json",
+      "bytes": 9865,
+      "sha256": "e476ddebc9a6f63c2a290da99cd06ea7d3bf6bc94b9aaa935a41c8a3689e1843",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482800.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482815.decoded-pages.json",
+      "bytes": 36052,
+      "sha256": "fa92c46b6c4676678d0b1b8827363b3783e1eb615d0a1ba626774d2637ef7b4e",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482815.original.json",
+      "bytes": 23106,
+      "sha256": "98f6bf577dd162e44b0a84745ebbd46698bc58ae319a7b6e0445c080de7c43fd",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482815.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482820.decoded-pages.json",
+      "bytes": 30531,
+      "sha256": "6c531f85991c5ee9fe9c4c8ce95df8733471d3ddd4f5db0364f3f08233d1f4c8",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482820.original.json",
+      "bytes": 19962,
+      "sha256": "5a0f76545bdc9ca9504f0451be412596e9c38f3899f248aa56d28d067eb67e4a",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482820.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482829.decoded-pages.json",
+      "bytes": 6538,
+      "sha256": "a49581ef397f49608f42de9e1d946074b80eaaed33e7ea71edb78d94d5c904c4",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482829.original.json",
+      "bytes": 4384,
+      "sha256": "9135fe2447b66a917295ee3700e09f0f6f653d33b554126fe570e75325771972",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482829.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482832.decoded-pages.json",
+      "bytes": 16976,
+      "sha256": "ef613e0c141f13f7f808bf89cc29c940cc1b3c55831e3b606581a2ffd1287204",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482832.original.json",
+      "bytes": 10724,
+      "sha256": "104b02a9bbbcd6a7518a164a7a607d362c57700de81086ba790cedcbce5a9569",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482832.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482843.decoded-pages.json",
+      "bytes": 2855,
+      "sha256": "8719bb3e94c5df9b4e5285a90dd59faaa38cdb01163d447652032e86b50bd241",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482843.original.json",
+      "bytes": 1919,
+      "sha256": "9956c9f589bd1c9a3d885a3b6a30f81c260dd6ff6632626b110bd9d12f2e8ace",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482843.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482855.decoded-pages.json",
+      "bytes": 4126,
+      "sha256": "46b0d24ee1b037b4fd06e8daf96512eb0a245f2db2c29752f245511c521da11e",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482855.original.json",
+      "bytes": 2660,
+      "sha256": "b460388d0f8a601421c716f12d7ed61710f3e8a08dd48eb58c7c6cd5f7b0df7e",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157482855.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157607013.decoded-pages.json",
+      "bytes": 3662,
+      "sha256": "9ff1af5ca446cbdd56135f4b667c59a3979d5d0e52124e0b2a7072b7ee264e6b",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157607013.original.json",
+      "bytes": 2408,
+      "sha256": "c3b622b087702890be8ae0feebf8bd2414b31ae6080c7adcd61257da1555965c",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/jobs-run-38157607013.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/pr-begin.decoded-pages.json",
+      "bytes": 41138,
+      "sha256": "9241725923d8995919a1a548a9e22c5388b39822a633b95de747d3dda2a33895",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/pr-begin.original.json",
+      "bytes": 37705,
+      "sha256": "72807a3bba7048ef220206e8df318d955deb80176cef5ea94d0a8eaf0bf5e09f",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/pr-begin.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/pr-end.decoded-pages.json",
+      "bytes": 41138,
+      "sha256": "9241725923d8995919a1a548a9e22c5388b39822a633b95de747d3dda2a33895",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/pr-end.original.json",
+      "bytes": 37705,
+      "sha256": "72807a3bba7048ef220206e8df318d955deb80176cef5ea94d0a8eaf0bf5e09f",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/pr-end.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/runs.decoded-pages.json",
+      "bytes": 220859,
+      "sha256": "5c8affb44defb2c34f3c43280b3a064a27709b16b2b05dc4db49f1639bb5c695",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/runs.original.json",
+      "bytes": 178132,
+      "sha256": "d6118d11518de1119cc9914ca178d8d3a6933447855b0d62d003dc128ba22e74",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/runs.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/runtime-artifacts.decoded-pages.json",
+      "bytes": 4633,
+      "sha256": "e1bd2db5e3064cd7db517c0aa94e24251d92da7f619842b0f0d8d0708fab0c99",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/runtime-artifacts.original.json",
+      "bytes": 3591,
+      "sha256": "52083ba8c86316d5810fad04e9c919148c0c4a5a3d4d9bd51a8d15bd7e849805",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/runtime-artifacts.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/statuses.decoded-pages.json",
+      "bytes": 5122,
+      "sha256": "ed441a4574e8567438d535132257f61d28581fbe2bd510b06e3e214ed102496f",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/statuses.original.json",
+      "bytes": 4492,
+      "sha256": "0f4893ed5264270285900048eb16c6a37157d1f1a0d73e7917192dab97b02873",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/statuses.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/proposed-canonical-matrix-event-count-lesson.txt",
+      "bytes": 273,
+      "sha256": "62d4d0f56d363e66d062eebe0696dc421f4503a8ac2d3917fe5cbbaa3c4db5e5",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/safe-current-e2-producer-metadata-reconciliation.json",
+      "bytes": 40316,
+      "sha256": "ff76b3e389b87ecda42d2164c4175a0a2b3de17ec688bb3c3bed7d6148b6102d",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/safe-exact-owned-ID-search-and-static-validation.json",
+      "bytes": 996,
+      "sha256": "71cc3764609b3aa94cb33af4a16f6424bda4da6e739c45f671de83d7d28812ff",
+      "mode": "0o600"
+    }
+  ],
+  "source_app_Git_native_provider_consumer_install_download_mutations": "NOT_RUN",
+  "private_writer_lease": "RELEASED_AFTER_THIS_OWNER_ANNOUNCEMENT"
+}

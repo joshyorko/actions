@@ -1,0 +1,82 @@
+{
+  "bindings": [
+    {
+      "bytes": 795,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-prospective-actual282-e2c-readonly/canonical-automatic-generator-union-proposed.patch",
+      "sha256": "be72a21ef0d855ec104b8f238870d16e1e309a0fb4ee803e9406c05757056f7c"
+    },
+    {
+      "bytes": 8027,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-prospective-actual282-e2c-readonly/freeze_prospective_union.py",
+      "sha256": "21486424117b024738686a7fdb7b8ce6e44a2e24676be2399743f771c5457080"
+    },
+    {
+      "bytes": 8678,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-prospective-actual282-e2c-readonly/freeze_prospective_union_v2.py",
+      "sha256": "9b4480a7a785b24fc1ee58d99307e9b7c41c93277dc7453fa84e978aeaf3a443"
+    },
+    {
+      "bytes": 8679,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-prospective-actual282-e2c-readonly/freeze_prospective_union_v3.py",
+      "sha256": "3cd026c7a4720fcd4861e5ebd5baea8ab0ddbc5cea1844635e469854df106421"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-prospective-actual282-e2c-readonly/merge-tree-original.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 41,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-prospective-actual282-e2c-readonly/merge-tree-original.stdout",
+      "sha256": "efff9ae6738213bb0d6597ea6a91b09094bb413fe6b491e572b6740d51db7fb4"
+    },
+    {
+      "bytes": 558,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-prospective-actual282-e2c-readonly/original-prospective-inspector-FAIL-disposition.json",
+      "sha256": "08e8c58e8793b72da6a686e44fa52c0d0e502f51cbc377e774bccfc96300c8bc"
+    },
+    {
+      "bytes": 285,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-prospective-actual282-e2c-readonly/original-prospective-inspector-V2-FAIL-disposition.json",
+      "sha256": "f9b1958da74e51e896d663bd657ea33dfdc2356cc0aedadb321ac896ad204c5e"
+    },
+    {
+      "bytes": 231790,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-prospective-actual282-e2c-readonly/prospective-complete-parent-union-proof.json",
+      "sha256": "0a4c41d88c7e0c043d2d79f772e72883f129b6b15122ea432713d0ddd438b5c3"
+    }
+  ],
+  "conflicts": [],
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "durable_learning": "Automatic conflict-free generator merge may contain novel combined blobs; explicit whole AST and guide-chunk union validation is still required.",
+    "evidence": "merge-tree exit0;1438 exactparent leaves plus2combined blobs; whole generatorAST and guidechunks proof",
+    "remaining_uncertainty": "Root adoption/committedtuple/newLIGHT/FULL/actual configuration and native functionality remainNOTRUN.",
+    "stale_ambiguity_removed": "No text conflict does not mean all resulting files are one parent blob or old gates apply."
+  },
+  "new_gate_plan": [
+    "Derive committed source/tree and complete1440 Git/FSexec inventory independently after root adoption; retain all old source blobs/receipts, including originalV7/V8 templates and authorized historical8dc archive alias without relabel.",
+    "Doctor/prepared30input+5concreteownorigins+activation19/primary3hash0711; no installer. New Toolkit/scoped controls each uniqueABSENTowned basetemp outside numberedparent, retentionALL, reject inheritedADDOPTS; never share basetemp between invocations.",
+    "Source LIGHT static/scoped/Toolkit/gen8+allYAML coverage derive actualcount; no prior396 qualification carry.",
+    "Named new SOURCEFULL preexecution/rootrelease/independentreview with explicitworker2 unchangedconfiguredRuntime task and original deadlines/floors. No full execution until distinct root serialization/capacity authorization.",
+    "Qualified actual config/sourceFULL must bind new source and freshly independently accepted proofs. PrivateV8 template is source-only; source-count/actualroot assembly pending. No RCC/native/provider/5/6 promotion."
+  ],
+  "ordinary_commit_required": "Root same existing PR308 branch merge current396 with actuale2c; no replacement branch/rebase/reset; preserve orderedparents and exact prospective tree",
+  "prospective_tree": "929410b09fff3521c554cf935411c71f9e2e6b95",
+  "prospective_typed_leaves": 1440,
+  "ready_dependency": "Root accepts B28 original storage/data post0 before ordinary source refresh; archiver current396 before/post guard untouched",
+  "source": "396925cb3d6527af1768b7f5333f9653c005fc55",
+  "source_Rcc_default_mode_patch": "Exact source body/mode retained in prospective tree",
+  "status": "READONLY_NEXT_READY_ORDINARY_REFRESH_PLAN_NO_ADOPTION_OR_GATES",
+  "target": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "upstream_disposition": "none"
+}

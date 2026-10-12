@@ -1,0 +1,146 @@
+{
+  "absolute_log_outputs": "ownedstdout/stderr/JUnit/robot-output; no shared product ./output",
+  "activation": "18literalexports+managedPATH first, cachedtoolkitprefix checked; inheritedPYOPT andADDOPTS refused",
+  "bounds": {
+    "child_KILL_grace": 10,
+    "child_TERM": 120,
+    "no_large_cap_payloads": true,
+    "root_parent_KILL_grace": 10,
+    "root_parent_TERM": 135
+  },
+  "child_argv": [
+    "/workspace/engineering/pr308/action_server/.venv/bin/python",
+    "-m",
+    "pytest",
+    "-n0",
+    "-q",
+    "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/test_actual_inner_boundaries_v2.py",
+    "--tb=short",
+    "--basetemp=/workspace/engineering/root-current-e2-inner-service-free-controls-v2-once-owned/basetemp",
+    "-o",
+    "tmp_path_retention_policy=all",
+    "--robocorp-log-output=/workspace/engineering/root-current-e2-inner-service-free-controls-v2-once-owned/robot-output",
+    "--robocorp-log-max-file-size=10MB",
+    "--robocorp-log-max-files=999",
+    "--junitxml=/workspace/engineering/root-current-e2-inner-service-free-controls-v2-once-owned/junit.xml"
+  ],
+  "control_binding": {
+    "bytes": 11388,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/test_actual_inner_boundaries_v2.py",
+    "sha256": "879a1370f1613a1ec832a04d8b0f9f0dde37dab0ea96f52714f47b6f16acc9f2"
+  },
+  "control_scope": [
+    "complete minimalcurrent217 source /202Python15nonPython baseline wheel+sdist with metadata RECORDtags scripts and exactlygeneratedwhitelist",
+    "independently restored RECORDmissingextra duplicated malformedhashsize self/foreignblank poisons",
+    "allZIP headers preflight typesencryptionpathcase duplicates directorysize 64MiB/128MiB/5000 exactedge readspies beforepayload",
+    "sdist RCC missingforeign case rootlinks specials64MiBheader gzipCRC/ISIZE",
+    "sourcebody/mode differences recordedHOLD",
+    "immutable reference member/size/digest/outputcap",
+    "actualoptimizer and privateROOTreleaseregular/symlink/type/mode/object guards"
+  ],
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; existing trusted-source/RECORD/generatedcontent lessons reused; add meaningful optimizer/privateROOTadmission lesson only after control evidence",
+    "Durable_learning": "Assert-based inspectors need explicit unoptimized entry and private typed rootrelease before invoking archive validation",
+    "Evidence": "reviewb1f40e + realcurrent functions/guards syntax and pending finitecontrols",
+    "Remaining_uncertainty": "All controls and inspector NOT_RUN; actualgeneratedsource/OAuth/frontend/consumer/release authority HOLD",
+    "Stale_or_ambiguous_guidance_removed": "Syntax/AST evidence cannot be called realfunctionboundaryGREEN; original015937HOLD retained"
+  },
+  "evidence": [
+    {
+      "bytes": 78788,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/frozen-executor-inputs.json",
+      "sha256": "f1bae88f9cee392f6623ac6f4c3c500bea65bd39c246df0dec002c4dc7911b9a"
+    },
+    {
+      "bytes": 23323,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/inspect_current_e2_inner_once_v2.py",
+      "sha256": "d83a7aae88a98a694310e6a1e60de2ea7e362604ee8c5d345cc6a38b4591177c"
+    },
+    {
+      "bytes": 11388,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/test_actual_inner_boundaries_v2.py",
+      "sha256": "879a1370f1613a1ec832a04d8b0f9f0dde37dab0ea96f52714f47b6f16acc9f2"
+    },
+    {
+      "bytes": 498,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/syntax-control-plan-noexecution-proof.json",
+      "sha256": "ed852b1c52eb99fdf667bb3b1697ffd0c68ad1535f1c07eb8d894909ef2d4227"
+    },
+    {
+      "bytes": 987,
+      "mode": "0o600",
+      "path": "/workspace/actions-cloud/activate.sh",
+      "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+    },
+    {
+      "bytes": 8727,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/prepare_control_plan_and_freeze_v2.py",
+      "sha256": "88086d16b25f6a64afa3ef5e529bb99c764bb738fbd6ffad20a645435b735db9"
+    },
+    {
+      "bytes": 3498,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/frozen-service-free-control-inputs-v2.json",
+      "sha256": "838593f8aacbe27d86044c633a466e41124603e26a207ce6b6715f06e5100542"
+    },
+    {
+      "bytes": 2050,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/launch_service_free_controls_once_v2.py",
+      "sha256": "6c7a1a3959890f079391ac8c800cf0f168e27fbc32c6b3289d9af7ddcfe269f4"
+    }
+  ],
+  "exact_parent_argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "135s",
+    "bash",
+    "-c",
+    "source /workspace/actions-cloud/activate.sh; exec /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python /workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/launch_service_free_controls_once_v2.py"
+  ],
+  "executor_binding": {
+    "bytes": 23323,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/inspect_current_e2_inner_once_v2.py",
+    "sha256": "d83a7aae88a98a694310e6a1e60de2ea7e362604ee8c5d345cc6a38b4591177c"
+  },
+  "fresh_absent_ownedroot": true,
+  "inspector_root_release_future": "Separate v2 executorOWNER proposal after genuinecontrolterminal and independentPREEXECGO, then distinctROOT actualinspection only",
+  "launcher_binding": {
+    "bytes": 2050,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/launch_service_free_controls_once_v2.py",
+    "sha256": "6c7a1a3959890f079391ac8c800cf0f168e27fbc32c6b3289d9af7ddcfe269f4"
+  },
+  "manifest_binding": {
+    "bytes": 78788,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/frozen-executor-inputs.json",
+    "sha256": "f1bae88f9cee392f6623ac6f4c3c500bea65bd39c246df0dec002c4dc7911b9a"
+  },
+  "original_HOLD": {
+    "bytes": 5657,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-independent-review/OWNERFINAL-independent-current-e2-inner-source-and-executable-PREEXECUTION-HOLD.json",
+    "sha256": "b1f40e5617c9f24992718d6bb1f3df4afe457ef903d57358775e61ce9f6300f7"
+  },
+  "owned_cwd": "/workspace/engineering/root-current-e2-inner-service-free-controls-v2-once-owned",
+  "predecessor": {
+    "bytes": 13205,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-PREPARATION/OWNERFINAL-current-e2-private-inner-data-executor-PREEXECUTION.json",
+    "sha256": "015937fe81a04fcdeeb64769061ade8a88108007b3d82f95d96bb1cb39a0326b"
+  },
+  "root_release": "Root must announce serialization/capacity clearance and adopt this exact frozenconditionalreviewedargv once; no actualfullinspector release implied",
+  "schema": "OWNERFINAL_CURRENT_E2_INNER_REAL_AST_CONTROL_PREEXECUTION",
+  "serial": "-n0; no installer/native/browser/network/actualfullinspection",
+  "status": "NOT_EXECUTED_REQUIRES_INDEPENDENT_CONDITIONAL_GO_ROOT_SERIALIZED_RELEASE",
+  "upstream_disposition": "none"
+}

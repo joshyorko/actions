@@ -1,0 +1,131 @@
+{
+  "ROOT_contract": {
+    "bytes": 3998,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current9760-token-light-once5-namespace-base-PREEXECUTION-NOTRUN/strict-current9760-once5-ROOT-release-and-bound-command-contract-NOTRUN.json",
+    "sha256": "6281b5fee6d6449a20d8518be4bf13cf28fd2103b1da68640765ca4c37216b19"
+  },
+  "application_source_or_config_delta": "NONE_NO_COMMIT_REF_OR_ENVIRONMENT_MUTATION",
+  "bindings": [
+    {
+      "bytes": 12706,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-namespace-base-PREEXECUTION-NOTRUN/construct_exact_private_once5_namespace_base_packet.py",
+      "sha256": "51d56c7a3a62a2f01d499030537afdf075b7490d225479cf566ca75e0f0ca9a4"
+    },
+    {
+      "bytes": 381151,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-namespace-base-PREEXECUTION-NOTRUN/current9760-unchanged1442-current30-ownfive-and-original-once4-proof.json",
+      "sha256": "f0878a7818011fa9ee2d06ccae6ea055da5b3bbaff105416b32663c2bf79e743"
+    },
+    {
+      "bytes": 2665,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-namespace-base-PREEXECUTION-NOTRUN/exact-once5-private-single-command-inverse-text-and-all-source-preservation-proof-NOTRUN.json",
+      "sha256": "83b8794681b15fd7cea73023b3f2ca9572b3810b6d89a53a41f74c0b8becb9c8"
+    },
+    {
+      "bytes": 5071,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-namespace-base-PREEXECUTION-NOTRUN/exact-private-once4-to-once5-command-and-address-delta.patch",
+      "sha256": "925ab79a35effc6e5249330be7f5707c8df5c291221a8bbf74bd467e7f34d33e"
+    },
+    {
+      "bytes": 67720,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-namespace-base-PREEXECUTION-NOTRUN/immutable-one-TOKEN-LIGHT-once5-inputs.json",
+      "sha256": "15a0b35a676fe4ee29781546fe0a7a8a362b19adaac11ffba0a4dfe9220d3f6c"
+    },
+    {
+      "bytes": 16159,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-namespace-base-PREEXECUTION-NOTRUN/launch_one_owned_token_light_once5_command_local_namespace_base.py",
+      "sha256": "fb82ab296ae98cb555f4b4ba9523107ad04771cecfde05f1bb14a70667f85f77"
+    },
+    {
+      "bytes": 2473,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-namespace-base-PREEXECUTION-NOTRUN/static-installed-namespace-source-base-and-one-call-scope-proof-NOTRUN.json",
+      "sha256": "2bd502959a5aa6289d41aa832c0c98adf402e446a1fc765760cc6755d5af942c"
+    },
+    {
+      "bytes": 3998,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once5-namespace-base-PREEXECUTION-NOTRUN/strict-current9760-once5-ROOT-release-and-bound-command-contract-NOTRUN.json",
+      "sha256": "6281b5fee6d6449a20d8518be4bf13cf28fd2103b1da68640765ca4c37216b19"
+    }
+  ],
+  "capture": "2026-10-11T23:01:32.081880+00:00",
+  "config": {
+    "bytes": 67720,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current9760-token-light-once5-namespace-base-PREEXECUTION-NOTRUN/immutable-one-TOKEN-LIGHT-once5-inputs.json",
+    "sha256": "15a0b35a676fe4ee29781546fe0a7a8a362b19adaac11ffba0a4dfe9220d3f6c"
+  },
+  "current_once5": "NOT_RUN_NO_ROOT_RELEASE_CREATED",
+  "documentation": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "evidence": "Originalonce4duplicate module diagnostic/installedMypy1.9 source explicitbases+editablepth andnamespace layout; existingtoolkit.run isolates overridechildenv; originalsource1442 preserved",
+    "exact_delta_reused": {
+      "bytes": 699,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current9760-once4-ACTUALFAIL-independent-review/canonical-namespace-source-base-and-separate-Mypy-probe-proposed.txt",
+      "sha256": "a335d05a25da80c3ff3553be26c24a282c6b90fe1298cb45ffd4b5135feab98a"
+    },
+    "remaining_uncertainty": "No new checker execution or typeerror acceptance; further meaningfultyping failures remain gateFAIL. SourceFULL/OAuthauthority/native/release unqualified.",
+    "stale_ambiguity": "src argument isnotexplicitnamespacebase; genericDevutils toolkit skip remains declared and privateprobe separate; no claim originalMYPYPATHunset",
+    "upstream_disposition": "none"
+  },
+  "exact_command_scope": "Only extra private DevutilsMypy command childenvMYPYPATH exactownsrc; sameflags/src/cwd/poetry/venv; allotherphasecommands/GNU900/primary780/REDgateway10inner1/checks preserved",
+  "launcher": {
+    "bytes": 16159,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr307-current9760-token-light-once5-namespace-base-PREEXECUTION-NOTRUN/launch_one_owned_token_light_once5_command_local_namespace_base.py",
+    "sha256": "fb82ab296ae98cb555f4b4ba9523107ad04771cecfde05f1bb14a70667f85f77"
+  },
+  "namespace_module_map_static_proof": {
+    "bytes": 2473,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current9760-token-light-once5-namespace-base-PREEXECUTION-NOTRUN/static-installed-namespace-source-base-and-one-call-scope-proof-NOTRUN.json",
+    "sha256": "2bd502959a5aa6289d41aa832c0c98adf402e446a1fc765760cc6755d5af942c"
+  },
+  "new_child_binding_count": 225,
+  "original_consumer_scopes": {
+    "ROOT_external": 184,
+    "child": 176,
+    "retained_originals": 157
+  },
+  "original_once4_failure": {
+    "bytes": 18485,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current9760-once4-ACTUALFAIL-independent-review/OWNERFINAL-independent-original-current9760-once4-ACTUALFAIL-and-explicit-namespace-base-proposal.json",
+    "sha256": "91627e87afb00072e1f311cb1822a5b1ca90d5bdb640a5f9775c448289be3842"
+  },
+  "originals_preserved": "Everyoriginalonce4config/launcher/release/output/root/error remains originalFAIL; inheritedMYPYPATH remains UNKNOWN",
+  "required_next": "IndependentSOURCE/PREEXEC GO thenROOTdistinctserializedfreshONE; sourceFULL/CI/OAuthauthority/native/release stillHOLD",
+  "schema": 1,
+  "source": "9760d5ec44876558c4941c4c3190abc8d92d14a1",
+  "source_clean": true,
+  "source_count": 1442,
+  "source_delta": {
+    "bytes": 5071,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current9760-token-light-once5-namespace-base-PREEXECUTION-NOTRUN/exact-private-once4-to-once5-command-and-address-delta.patch",
+    "sha256": "925ab79a35effc6e5249330be7f5707c8df5c291221a8bbf74bd467e7f34d33e"
+  },
+  "sourceproof": {
+    "bytes": 381151,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current9760-token-light-once5-namespace-base-PREEXECUTION-NOTRUN/current9760-unchanged1442-current30-ownfive-and-original-once4-proof.json",
+    "sha256": "f0878a7818011fa9ee2d06ccae6ea055da5b3bbaff105416b32663c2bf79e743"
+  },
+  "static_single_call_proof": {
+    "bytes": 2665,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current9760-token-light-once5-namespace-base-PREEXECUTION-NOTRUN/exact-once5-private-single-command-inverse-text-and-all-source-preservation-proof-NOTRUN.json",
+    "sha256": "83b8794681b15fd7cea73023b3f2ca9572b3810b6d89a53a41f74c0b8becb9c8"
+  },
+  "status": "OWNER_FINAL_PRIVATE_ONCE5_SINGLE_CHECKER_ENVIRONMENT_BASE_SOURCE_AND_PREEXEC_NOTRUN",
+  "tree": "0d33ebaac258e069ef7045a29b4a3904740f6307"
+}

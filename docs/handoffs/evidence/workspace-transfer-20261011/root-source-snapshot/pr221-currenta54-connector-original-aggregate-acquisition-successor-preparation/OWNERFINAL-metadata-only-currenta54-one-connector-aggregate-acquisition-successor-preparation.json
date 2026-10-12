@@ -1,0 +1,180 @@
+{
+  "bindings": [
+    {
+      "bytes": 12039,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr221-currenta54-one-original-aggregate-acquisition-preparation/OWNERFINAL-current-a54-one-original-aggregate-acquisition-PREPARATION-v2.json",
+      "sha256": "9d89e610a1f6a2c4db9a1cc5d6a1b056ad5626c3cab60dc8243048be056985da"
+    },
+    {
+      "bytes": 2145,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr282-current1299-one-original-Canvas-artifact/OWNERFINAL-root-distinct-current1299-Canvas-artifact-connector-repair-result.json",
+      "sha256": "f7761a118ba6c1d34ba679b0146794b07074cd3ee79e5cc1fc71866ab504d496"
+    },
+    {
+      "bytes": 53144,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/OWNERFINAL-current-a54-PR221-metadata-source-artifact-readiness-review.json",
+      "sha256": "63c52cc4e8f14e1148a258a5c1b8028a7b1041da59f62eb44ef47cfbb18e9297"
+    },
+    {
+      "bytes": 2098,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current1299-one-original-Canvas-artifact/original-connector-repair-11708206027.zip",
+      "sha256": "2bb9ce2302d0a309e0718df767771b90b657a366f57fbd71dd773dca23c53de9"
+    },
+    {
+      "bytes": 1983,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current1299-one-original-Canvas-artifact/original-connector-repair-response.private.json",
+      "sha256": "06ea5ccfd1ebba10e11831fedb91a26bdccb045420b272445ded6ff2858872d0"
+    },
+    {
+      "bytes": 668,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-currenta54-connector-original-aggregate-acquisition-successor-preparation/canonical-authenticated-artifact-file-reference-transport-proposed.md",
+      "sha256": "10850bb6a2c388f820db146948738a0daa4520b9bb118a19e0371c0a94b7af71"
+    }
+  ],
+  "canonical_documentation": {
+    "accepted_lines": 9,
+    "disposition": "New transport/provenance9-line source-backed proposal; rootmay integrate exacttext in nextcanonicalbatch; no executor/actual or cosmeticappsource edits.",
+    "evidence": "Retained originalCanvasgh zero-byte failure+distinctoneconnectorFileService transfer APIsha parity; actual nestedreturnedmapping schema; Runtime immutablemetadata/sourcepublisher tuple",
+    "exact_delta": {
+      "bytes": 668,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-currenta54-connector-original-aggregate-acquisition-successor-preparation/canonical-authenticated-artifact-file-reference-transport-proposed.md",
+      "sha256": "10850bb6a2c388f820db146948738a0daa4520b9bb118a19e0371c0a94b7af71"
+    },
+    "owning_guide": "docs/skills/repository-operations.md",
+    "remaining_uncertainty": "Runtimebyteacquisition/CRCs/modes/innerwheel/generatedcontent/currentproducercheckout and consumer NOTRUN; currenttargetmay supersedea54."
+  },
+  "current_CI_limit": "Parent reports33SUCCESS1SKIP metadata current; no freshAPIpoll by reviewer and no currentPRqualification inferred. Original prep pending snapshot remains historical.",
+  "duplicate_acquisition_scope": "One owned rg search acrossengineering and actions-cloud receipts found matching tuple onlymetadata/preparation/checkpoint copies (7matching JSONpaths); no owned acquired ZIP tuple found in those references. Not universalfilesystem census; root must repeat ownedexactreceipt check immediatelybefore future release.",
+  "existing_reference_schema_fact": {
+    "canvas_artifact_tuple_is_not_Runtime_acceptance": true,
+    "mapping_keys": [
+      "download_url",
+      "file_id",
+      "mime_type",
+      "file_name"
+    ],
+    "nested_identity_fields_equal": true,
+    "raw_URL_or_ID_printed_or_copied_into_this_proposal": false,
+    "returned_file_uri_type": "mapping",
+    "scheme": "https",
+    "service": "File Service; not Sediment"
+  },
+  "new_connector_or_download_calls": 0,
+  "original_PREP_status": "Original Runtimegh preparation unexecuted/UNKNOWN_NOT_RUN; no Runtimegh failure invented. Preserve exact9d89 bytes. Canvas distinct zero-bytegh failure and successful connector transport are separate actual evidence.",
+  "producer_provenance": {
+    "Linux_build_job_id": 114505954669,
+    "actual_run_head": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+    "archive_admission_does_not_establish_producer_checkout": true,
+    "original_producer_logs": "distinct future root ONE authorization needed; no log acquisition granted by this proposal",
+    "producer_not_consumer": "Successful inventory/Twine/registry-floor metadata steps are not independently installed consumer provenance or publication.",
+    "publish_job_id": 114507030652,
+    "repository": "joshyorko/actions",
+    "run_id": 38151577738,
+    "synthetic_API_commit": "188573163169e94474a424baacd5386ed4bcc366",
+    "synthetic_ordered_parents": [
+      "a70993fafc99a9f94041485542d5a720797ca394",
+      "a54c982462d1e7ad011d8152bfc299d997503fb3"
+    ],
+    "synthetic_tree_equals_actual_source": "47a1e4fceb22fd15eaee1ca380ad6c005abfdde6",
+    "upload_association": "unique declared aggregate upload name and publisher successful step+run/artifact metadata; original producer checkout/log still UNKNOWN",
+    "workflow": ".github/workflows/actions_runtime_pypi_release.yml"
+  },
+  "product_execution": false,
+  "proposed_root_protocol": {
+    "capacity_and_serialization": "Root freshavailablecapacity and independent executor GO before distinctONE. No concurrent heavy installer/full/native; no new mount/infrastructure. Existing source/evidence bytes preserved.",
+    "connector_calls": 1,
+    "connector_exact_args": {
+      "artifact_id": 11707021540,
+      "file_name": "actions-runtime-dist-11707021540-original.zip",
+      "repo_full_name": "joshyorko/actions"
+    },
+    "connector_exact_tool": "mcp__codex_apps__github_download_workflow_artifact",
+    "executor_implementation": "NOT_AUTHORED_WRITER_SLOTS_OCCUPIED; future separate frozen finite-transfer/admission executor requires independentreview+rootONErelease",
+    "file_reference_transfers": 1,
+    "first": "Read existing owner receipts before release; reuse exact11707021540/78972874/9d2f digest bytes if already acquired, no duplicate connectorcall",
+    "fresh_tmp_minimum_bytes": 536870912,
+    "output_names": "Named connector successor directory; originalghPREP files and any partialfailed receipts untouched. No materialization of inner artifacts before entire archive/data admission.",
+    "reference_resolution": "Retain original MCP response privately0600 without printing. Read structuredContent.file_uri mapping; require exact artifactID11707021540/mimeapplicationzip and nested fileID/downloadURL identity parity. Use only returned authenticated FileService download_url; no manual URL rewriting/secondartifact/reference fallback. Do not use Sediment download_file.",
+    "transfer": "One urllib boundedstream from returned privateURL to fresh O_EXCL0600 originalZIP within fresh0700 directory on existing/tmp; finite monotonic overall120s plus root TERM10KILL; remaining per-read/connect timeouts; count bytes before writing and abort above100663296. Never retry/resume. Preserve private exception/stderr without URL output. Hash while reading; exact78972874 bytes and SHA9d2f6717a6a8a6da12dfed34b984e815f5ec2a75e4622330ab8f06109868775c required before archive admission. Zero/partial/mismatched output remains failed."
+  },
+  "release_HOLD": [
+    "#221 remains draft/currentCI3pending at frozen sample; no old33S1skip carry.",
+    "All current generated OAuth/sourceauthority/platform/native/privateCLI/full132133134139143/registrypublication/tag/release/issueclosures remain separate.",
+    "Old failure/predecessor releaseconsumer receipts remain historical exact identities.",
+    "GeneratedOAuth/inputauthority/platform/private/native/gate acceptance/publication/tag/PR221merge remainHOLD. ActualproducercheckoutUNKNOWN until separate original producerlog permission/identity review."
+  ],
+  "reviewer_schema_event": "Initial URLschema diagnostic assumed string file_uri and raised TypeError. Named corrected read-only mapping inspection verified fields without exposingURL; no acquisition/data mutation.",
+  "schema": 1,
+  "selected_original": {
+    "ZIP_digest_API": "sha256:9d2f6717a6a8a6da12dfed34b984e815f5ec2a75e4622330ab8f06109868775c",
+    "ZIP_size_API_bytes": 78972874,
+    "artifact_id": 11707021540,
+    "association_limit": "upload name/job step source contract plus run/artifact metadata; original checkout/log not acquired",
+    "declared_producer_job_id": 114507030652,
+    "declared_producer_job_name": "publish (3.12)",
+    "expired": false,
+    "name": "actions-runtime-dist",
+    "producer_job_conclusion": "success",
+    "producer_job_status": "completed",
+    "run_id": 38151577738,
+    "source_head": "a54c982462d1e7ad011d8152bfc299d997503fb3"
+  },
+  "source_or_executor_authorship": false,
+  "source_roles": {
+    "actual_builder_checkout": "UNKNOWN_NO_ORIGINAL_LOG_ACQUIRED",
+    "actual_wheel_members": "UNKNOWN_NO_215_OR_202_WHEEL_COUNT_CARRY",
+    "full_tracked_leaves": 1426,
+    "head": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+    "intended_builder_synthetic": {
+      "API_tree_equals_actual_source_tree": true,
+      "actual_producer_checkout": "UNKNOWN_NO_ORIGINAL_LOG_ACQUIRED",
+      "ordered_parents": [
+        "a70993fafc99a9f94041485542d5a720797ca394",
+        "a54c982462d1e7ad011d8152bfc299d997503fb3"
+      ],
+      "sha": "188573163169e94474a424baacd5386ed4bcc366",
+      "tree": "47a1e4fceb22fd15eaee1ca380ad6c005abfdde6"
+    },
+    "tracked_Python_sources": 202,
+    "tracked_Runtime_sources": 216,
+    "tree": "47a1e4fceb22fd15eaee1ca380ad6c005abfdde6"
+  },
+  "status": "GO_METADATA_ONLY_CONNECTOR_SUCCESSOR_PREPARATION_NO_EXECUTOR_OR_ACQUISITION",
+  "strict_data_admission": {
+    "ceilings": {
+      "TERM_KILL_grace_seconds": 10,
+      "compressed_stream_ceiling_bytes": 100663296,
+      "download_deadline_seconds": 120,
+      "member_count_unknown_until_original_bytes": "Expected from publisher contract6wheels+1sdist+manifest; any difference stops admission.",
+      "original_expected_SHA256": "9d2f6717a6a8a6da12dfed34b984e815f5ec2a75e4622330ab8f06109868775c",
+      "original_expected_exact_ZIP_bytes": 78972874,
+      "outer_ZIP_declared_expanded_ceiling_bytes": 134217728,
+      "outer_ZIP_single_member_ceiling_bytes": 67108864,
+      "outer_expected_artifact_count": 7,
+      "outer_expected_regular_member_count": 8
+    },
+    "inner_materialization": "NO_AUTHORIZATION_NOW. Future root may authorize exclusive0700/O_EXCL0600 copies only after wholeouter validation; no extractall/followlinks/overwrite.",
+    "manifest": "Strict UTF8 actions-runtime-manifest.sha256; exactly7unique filename/digest records with exacttwo-space delimiter, approved7filenames only; all7wholemember bodySHA match.",
+    "matrix": "ExactlyRuntime1.0.3 sixwheel slots cp312/cp313 \u00d7 manylinux/macOSARM64/WindowsAMD64 plus one matching1.0.3sdist; sourcepublisher exact tagsets and duplicate-tag rejection mandatory, not guessed coarseplatform.",
+    "nested_or_consumer": "No nestedpackage execution/import/installation/native/provider/browser/consumer; later measurement+strictsource/RECORD/privateCore member guard+publicfloors need independent freshsubject.",
+    "outer": "Eight unique root-level regular names exactly7artifacts+manifest; no encryption, directories, symlink/special/type ambiguity, absolute/drive/backslash/NUL/traversal names, duplicate or casefold collisions; all members streamed CRC+exact expanded byte/SHA checks and declared limits before extraction.",
+    "source_contract": {
+      "actual_wheel_member_counts": "UNKNOWN, derive only after separately admitted nestedinspection; no215/196 count carry.",
+      "bytes": 18453,
+      "functions": "Read _artifact_names/verify_artifacts as immutable authority; do not run publishing/imported artifact code.",
+      "git_blob": "2fd4f8f77e58fbf7b4c173122f6496daa2aa9241",
+      "path": "action_server/scripts/publish_verified_runtime.py",
+      "ref": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+      "sha256": "236ed21dcb50b3c3934f5e15b29e61d6a7b712ed65e7dcf7cd72785d4f8fa26c"
+    }
+  },
+  "supersession_rule": "If actualtarget changes after282 integration, a54 bytes may remain historical engineeringevidence but cannot become fresh publication subject; require newlybound currentartifact/source/producer/consumer gates and no automatic newer acquisition.",
+  "upstream_disposition": "none"
+}

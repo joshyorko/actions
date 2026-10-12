@@ -1,0 +1,90 @@
+{
+  "blocking_finding": {
+    "actual_expression": "BASE=Path(__file__).resolve().parent; CONFIG=BASE/'immutable-one-TOKEN-LIGHT-inputs.json'",
+    "announced_actual_config_exists_sizeSHA_exact": true,
+    "announced_actual_config_path": "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/immutable-one-TOKEN-LIGHT-once2-inputs.json",
+    "category": "EXECUTABLE_SELECTED_CONFIG_PATH_ABSENT",
+    "failure_stage": "main(): CONFIG.read_bytes() before auth/review admission, output root creation, guards, gateway and all phases",
+    "selected_file_exists": false,
+    "selected_is_symlink": false,
+    "selected_path": "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/immutable-one-TOKEN-LIGHT-inputs.json",
+    "why_staticproof_is_insufficient": "Inverse AST proof retains original CONFIG basename even as copied config physical basename changes. Declared metadata/launcher hash validity does not prove an executable resource path exists."
+  },
+  "config_binding": {
+    "bytes": 16905,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/immutable-one-TOKEN-LIGHT-once2-inputs.json",
+    "sha256": "29368814c182f30732ab041ca580162c92071e4bb076eb164c9820ced3acc158"
+  },
+  "decision": "HOLD_CURRENTC97E_TOKEN_LIGHT_ONCE2_GATEWAY_PREEXECUTION_CONFIG_PATH_NOT_BOUND",
+  "documentation_improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md; accept exact gateway-versus-child status7e9713048af1c6736dadd6f45f71a99281199bc0a233e477dd26e8c5190498c2 and proposed executable-selected config closure addition",
+    "Durable learning captured": "Concrete executable-selected path must match announced file; copied original basename can remain missing even when inverse AST diff and metadata hashes are valid. GatewayRED/inner checked status remain distinct.",
+    "Evidence": [
+      {
+        "bytes": 16047,
+        "mode": "0o444",
+        "path": "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/launch_one_owned_token_light_once2.py",
+        "sha256": "a747b3fd108d6e8f4545fa2489876997decb04202752f8bf310732303988597e"
+      },
+      {
+        "bytes": 16905,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/immutable-one-TOKEN-LIGHT-once2-inputs.json",
+        "sha256": "29368814c182f30732ab041ca580162c92071e4bb076eb164c9820ced3acc158"
+      },
+      {
+        "bytes": 2650,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/private-exact-once2-AST-config-and-original-trace-retarget-proof.json",
+        "sha256": "d50dded2582591b8db757c4d1887a1c53e3fa64ec46363754a388e09a77802df"
+      },
+      {
+        "bytes": 495,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr307-currentc97e-token-once2-independent-PREEXEC-review/canonical-executable-selected-config-path-closure-proposed.txt",
+        "sha256": "05674bd0fb939b5df3b1dfb04af1529f57d27648bdaff97099453e7ddb3cff91"
+      }
+    ],
+    "Remaining uncertainty": "Named corrected executable successor not frozen/qualified; all actual once2/LIGHT/FULL/native/authority results pending.",
+    "Stale or ambiguous guidance removed": "Static whole-AST closure claim is insufficient for file-address closure; original current packet stays unqualified rather than silently backfilled."
+  },
+  "launcher_binding": {
+    "bytes": 16047,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/launch_one_owned_token_light_once2.py",
+    "sha256": "a747b3fd108d6e8f4545fa2489876997decb04202752f8bf310732303988597e"
+  },
+  "minimal_named_successor_required": [
+    "Change only the executable CONFIG basename to immutable-one-TOKEN-LIGHT-once2-inputs.json, bound to existing16905B293688 actual config.",
+    "Freeze new launcher hash/owner/ROOT adoption/release bindings and direct literal-selected path,sizeSHA closure proof; preserve this original7b377/a747 packet and original1075 actualFAIL. No backfill/alias under absent old basename.",
+    "Retain semantic outerRED10 only, checked innerexit1 trace+Toolkit frame, unchanged exact2failure0error0skip/semantic assertions and original nine-phase bounds. No new gate replay for source correction.",
+    "Independent review named immutable successor before distinct ROOT release. Do not launch this HOLD tuple."
+  ],
+  "proposal_binding": {
+    "bytes": 7532,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/OWNERFINAL-currentc97e-once2-minimal-gateway-boundary-TOKEN-LIGHT-PREEXECUTION-NOTRUN-metadata-v2.json",
+    "sha256": "7b377d411b0be8d91a32a1bdcf0076b9354c115a2727846639548a49bd0aedf9"
+  },
+  "reviewed_nonblocking_facts": {
+    "actual_scope": "NOT_RUN. FULL/native/OAuth authority/source-final/merge acceptance unchanged HOLD.",
+    "bounds": "Nine phases use remaining780 primary ceiling and own fresh wrapper group bounded5+5 fallback; outer900TERM10. Missing/terminated finally cannot imply complete cleanup.",
+    "config39bound_rows_and6owner_rows_exact": true,
+    "envelope_limits": "Launcher admits ROOTrelease/review initially and guards its captured selfSHA/config plus39references before/finally; ROOT must independently enforce exact release schema/owner+review binding and retain/recheck entire execution envelope all outcomes. Does not universally validate schema/unknown keys or rehash live ROOTrelease/review in guard.",
+    "gateway_delta": "Only deliberate task-gateway expected1\u219210 with mandatory stderr checked-child exit1 trace+Toolkit path and unchanged named2case semantic JUnit failure assertions; no general error normalization.",
+    "old27prefix_binding_rows_exact": true,
+    "oldsource_currentC97_typed_snapshot_parent_scope_unchanged": "No source semantic mutation in reviewed launcher delta; guarded source1442/prepared30/fiveconfigs/historical15 and protected308 tuple remain existing proposed before/alwayspost scope. No source guard replay."
+  },
+  "schema": 1,
+  "source": "c97edfd10edb5b1c63f8a6371bfd2905996a2da2",
+  "static_proof_binding": {
+    "bytes": 2650,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/private-exact-once2-AST-config-and-original-trace-retarget-proof.json",
+    "sha256": "d50dded2582591b8db757c4d1887a1c53e3fa64ec46363754a388e09a77802df"
+  },
+  "status": "INDEPENDENT_CURRENTC97E_TOKEN_LIGHT_ONCE2_PREEXECUTION_HOLD_NO_EXECUTION",
+  "tree": "f8d3477451fa601643ef6c06f6b1e616e2407643",
+  "upstream_disposition": "none"
+}

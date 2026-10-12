@@ -1,0 +1,107 @@
+{
+  "verdict": "GO_FROZEN_SOURCE_LIGHT_AND_BOUNDED_CONFIGURED_FULL_PROPOSAL_ONLY__EXECUTION_FULL_ACTUAL_HOLD",
+  "owner": {
+    "path": "/workspace/engineering/pr300-issue86-assembled-transport-source-successor/OWNERFINAL-current74-issue86-assembled-transport-LIGHT-full-and-actual-HOLD.json",
+    "bytes": 34977,
+    "sha256": "81262278d658e37b8e8d9afbdfdcfe2b69d1852619bba3898b5a576a0acf1a32"
+  },
+  "head": "74beef4d220c3a1e8f983cecd42b9bb84ac75e79",
+  "tree": "2238ed312babba9fd5ad89a3a1cc581ca6ad2dcf",
+  "sole_parent": "6db4b80689ef1394f31c0d7d4a2a3ea830b1c0b0",
+  "ordinary_merge": {
+    "complete_leaf_count": 1423,
+    "head": "6db4b80689ef1394f31c0d7d4a2a3ea830b1c0b0",
+    "ordered_parents": [
+      "7840057a8b055576d11d339d8c0fbb738927a491",
+      "a0d258a16095b95b1bf9000cb1201cddfaff4779"
+    ],
+    "tree": "6314019e0542ef4739ed63b6de0c7f91e25f6d2d"
+  },
+  "target": "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+  "existing_branch": "feat/run-output-transport-20261010",
+  "all1423_typed_Git_FS_body_exec_modes_verified": true,
+  "all1421_other_body_modes_exact_ordinary_union": true,
+  "original68_refs_verified": 68,
+  "unique_evidence_files_rehashed": 113,
+  "novel_authorized_paths": [
+    "action_server/tests/action_server_tests/run_outputs/test_transport.py",
+    "docs/skills/provenance-observability.md"
+  ],
+  "original16_functions_retained_seven_nonselected_AST_exact": true,
+  "source_results": {
+    "selected_cases": 19,
+    "real_ASGI_requests": 20,
+    "GREEN_tests": 30,
+    "PASS": 30,
+    "FAIL": 0,
+    "ERROR": 0,
+    "SKIP": 0,
+    "Toolkit_PASS": 96,
+    "lint_formatted_files": 315,
+    "Mypy_files": 351,
+    "generator_outputs": 8,
+    "GitHub_YAML": 30
+  },
+  "meaningful_RED": {
+    "original_source_pinned_omission_tests": 2,
+    "FAIL": 2,
+    "ERROR": 0,
+    "SKIP": 0,
+    "failure_class": "DID_NOT_RAISE_when_test_owned_observer_omitted",
+    "measured_SQL_only_and_file_only_changes": true,
+    "full_owned_state_restored": true,
+    "no_production_mutation": true
+  },
+  "measurement_scope": "Original assembled Runtime app/realFastAPI ASGI/realSQLite/currentpersistedgrant service and realfilesystem provider; test-only server-owned credential mapping. Only selected19/20 requests have complete per-request SQL+typedFS and exactauth/openATTEMPTS/success counts; nine inherited cases remain original scope.",
+  "native_inputs": {
+    "added": 7,
+    "changed": 8,
+    "combined": 280,
+    "current_production": 275,
+    "old_named_matches": 260,
+    "old_native_source": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+    "old_production": 268,
+    "qualification": "UNQUALIFIED; source/gates do not qualify old artifact",
+    "selected_tests_separate": 5
+  },
+  "historical_FAILURE_preserved": {
+    "artifact_review": {
+      "bytes": 28383,
+      "path": "/workspace/engineering/pr300-current618-original-startup-artifact-owned/OWNERFINAL-original-current300-eight-member-observer-evidence.json",
+      "sha256": "c55b23663895c3be3782dd618a7570d447939f5b957ffb87816a897d0b0897c8"
+    },
+    "diagnosis": {
+      "bytes": 91422,
+      "path": "/workspace/engineering/pr300-current618-original-Windows-owned/OWNERFINAL-original-current300-Windows-bounded-first-startup-diagnosis.json",
+      "sha256": "56098cf774c36b7049e1cb288a2d427deee3df4996ac2cfbe2f7bde483f7401e"
+    },
+    "source": "7840057a8b055576d11d339d8c0fbb738927a491",
+    "startup_failure_remains_HOLD": true,
+    "target": "6181b044c75de35386f1ae30e71725398b6a7feb",
+    "tested_checkout": "2076246f60afc4c8fb069b4206699e57e006890b"
+  },
+  "full_proposal": {
+    "path": "/workspace/engineering/pr300-current74-independent-light-review/proposed-current74-configured-full-command-contract.json",
+    "bytes": 1830,
+    "sha256": "2881ff048c9b97c1c97bf2455c943b1a1cfb0b9fff82a392ac0312ad37ead0a8"
+  },
+  "execution_disposition": "HOLD until root binds new current74 command/launcher and distinct capacity/serialization release. Retained old launcher asserts784 and cannot run74 unchanged. FullSOURCEFINAL/push/currentCI/ACTUAL remain held.",
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/provenance-observability.md; exact8-line1278B source patch ACCEPTED",
+    "Exact_documentation_delta": {
+      "path": "/workspace/engineering/pr300-issue86-assembled-transport-source-successor/canonical-assembled-output-transport-denial-measurement-exact-source.patch",
+      "bytes": 1278,
+      "sha256": "8895960c82512f4a4a8e0a45e4a1f0af0a5aa061865e9ffc487961a322745a7b"
+    },
+    "Durable_learning_captured": "Count attempted reader acquisition before entering provider context separately from successful readers; compare complete logical SQL/schema/tables and owned typedFS across each request after legitimate setup; unsupportedHEAD/Range remain refusal evidence.",
+    "Evidence": "19 cases20JUnit user-property request records,503auth1/openattempt1/reader0 and2omissionRED sensitivity failures with exactSQL-only/file-only change/restoration; source resolve writer lock explains logicalSQL authority.",
+    "Stale_or_ambiguous_guidance_removed": "Missing-installation-key measured403 replaces403-or404; reader-success-only count cannot prove noattempt; HEAD405/Range416 cannot qualify method support/grant resolution. Old2d18 proposal retained, exact8895 source patch adds measured logicalSQLite distinction.",
+    "Remaining_uncertainty": "Fullconfiguredsource/newCI/separatelyhashpinnedactual runner/native/private/release unqualified; hosted784 first-readiness cause/cleanup remainUNKNOWN and unchanged."
+  },
+  "Upstream_disposition": "none",
+  "review_script": {
+    "path": "/workspace/engineering/pr300-current74-independent-light-review/verify_readonly.py",
+    "bytes": 14776,
+    "sha256": "adb66be330fcba3376b384ff94b369eb0b61820e9225bac4c4d158cfbbfab6d2"
+  }
+}

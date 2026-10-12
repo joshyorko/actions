@@ -1,0 +1,23 @@
+diff --git a/docs/skills/repository-operations.md b/docs/skills/repository-operations.md
+index fb3e48f0..f4db201c 100644
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -2414,6 +2414,18 @@ successful refresh while that owner is observable can restore it. An
+ unexpected exit before controlled retirement starts keeps its distinct
+ `crash_unverified` classification across retries until the reader is joined.
+ 
++A captured-tree cleanup can report an observed live child before its shared
++deadline is exhausted. A deterministic control of the original function
++returned after 0.41 seconds following two 0.2-second descendant waits and a
++quick wrapper reap, while a captured child was modeled absent at 0.75 seconds
++within the unchanged 18-second tree budget. Keep the reported incomplete
++result false; wrapper reaping does not establish descendant completion.
++This control establishes an early-return case, not the cause of a hosted
++timeout whose surviving identity and remaining cleanup budget were not
++recorded. Any improvement must retain the same deadline and exclusive
++Popen wrapper wait ownership, with live, zombie and observation-error
++states kept distinct.
++
+ The bounded process-tree result distinguishes wrapper reaping, observed live
+ descendants, and zombie descendants. A zombie is reported and makes
+ `descendant_reap_complete` false, but does not hold execution capacity forever;

@@ -1,0 +1,14 @@
+{
+  "capture": "2026-10-11T19:09:25.036355+00:00",
+  "base": "8f753f1703e13236fbd3cd608afa203cb6205b35",
+  "head": "d55ed399a5b6ba67e88002dd6d490ac9366c2130",
+  "tree": "5c6d536cd08b8901fc744dfc9e2e2d64ed6cf271",
+  "branch": "handoff/actions-swarm-mk3-wave8-20261010",
+  "review_sha256": "5da77f15db98d5b7c1ba371087c5dcf98bdebe082406c32e6bdc60a201859c6a",
+  "files": 28,
+  "qualification_scope": "DOCS_TIME_BOUND_SOURCE_AND_ARTIFACT_RECEIPTS_ONLY_NO_NATIVE_OR_RELEASE_PROMOTION",
+  "push_attempts": 1,
+  "push_returncode": 0,
+  "remote_after": "d55ed399a5b6ba67e88002dd6d490ac9366c2130",
+  "status": "NORMAL_EXISTING_CHECKPOINT_PUSH_VERIFIED"
+}

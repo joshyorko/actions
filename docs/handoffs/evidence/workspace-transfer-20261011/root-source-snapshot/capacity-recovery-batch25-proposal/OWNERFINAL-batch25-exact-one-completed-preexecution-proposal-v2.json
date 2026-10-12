@@ -1,0 +1,279 @@
+{
+  "schema": "capacity-batch25-owner-preexecution-proposal-v1",
+  "decision": "SCRIPT_PREPARATION_ONLY_INDEPENDENT_REVIEW_AND_ROOT_ONE_RELEASE_REQUIRED",
+  "script": {
+    "path": "/tmp/actions-capacity-recovery-batch25.py",
+    "bytes": 5244,
+    "sha256": "09160c02ce8c05d48c048a0a1b228901c4e4c140812ddcdcac9b8c9dae8b78a8"
+  },
+  "algorithm_parent": {
+    "path": "/tmp/actions-capacity-recovery-batch19.py",
+    "bytes": 5244,
+    "sha256": "48fd7e4c79e55b80ceda0b63c1d1da87feeb368cefee265d5c12bad6ad940840"
+  },
+  "all16_nonconfiguration_AST_exact_parent": true,
+  "only_configuration_changes": [
+    "DEST",
+    "STAGE",
+    "NAMES"
+  ],
+  "names_exact_allowlist": [
+    "ad13a81675676d7b"
+  ],
+  "destination": "/dev/shm/actions-completed-scratch-recovery-batch25",
+  "unused_new_stage": "/tmp/actions-completed-scratch-recovery-batch25-stage",
+  "destination_stage_absent": true,
+  "completed_marker_True_before_after": true,
+  "largest_completed_by_fresh_measured_allocated_blocks": {
+    "name": "ad13a81675676d7b",
+    "allocated_unique_blocks_bytes": 686755840,
+    "regular_logical_bytes": 640084837,
+    "member_kinds": {
+      "directory": 3447,
+      "file": 12214,
+      "symlink": 488,
+      "fifo": 8
+    },
+    "marker_true": true
+  },
+  "completed_candidates_measured": 408,
+  "all_prior50_archive_names_and_failed563_excluded": true,
+  "complete_candidate_recorded_members": 16157,
+  "two_full_candidate_body_mode_mtime_uidgid_type_symlink_inventories_equal": true,
+  "fresh_accessible_handle_observations": [
+    {
+      "processes": 282,
+      "accessible_links_read": 35,
+      "unreadable_or_transient": 555,
+      "candidate_path_matches_private": []
+    },
+    {
+      "processes": 282,
+      "accessible_links_read": 35,
+      "unreadable_or_transient": 555,
+      "candidate_path_matches_private": []
+    }
+  ],
+  "source_origin": "UNREPORTED",
+  "original_current312_log_exact_owned_namespace_occurrences": 0,
+  "source_origin_scope": "No newest/mtime or marker attribution; ROOT1335/13 source-full is separately retained, not an origin proof or native qualification.",
+  "root_current312_source_full_owner": {
+    "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/OWNERFINAL-root-current312-ec70-configured-SOURCEFULL.json",
+    "bytes": 5785,
+    "sha256": "32288acae49cf7f89c8f7c67bad292d062bcf9a56bb9032175216d0c00bcb0d1"
+  },
+  "root_current312_original_full_bindings": [
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/before-full-source-activation-capacity.json",
+      "bytes": 526,
+      "sha256": "b76fdbb8d793197a9facd584fa7294f533196e11c4a1caa084aa550600614b78"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/original-configured-full.private.log",
+      "bytes": 346188,
+      "sha256": "2e2da108608f75625f88a7328ed7be1cfa166b85f76203697f48dbfab6588762"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/original-postguard.private.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/original-root900.stderr.private.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/original-root900.stdout.private.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/post-full-source-and-references.json",
+      "bytes": 234,
+      "sha256": "00e2093fd33db212350adadabf650505c987f3773ad028ceae5f4ac24de4eb7f"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/postguard-terminal-separate.json",
+      "bytes": 341,
+      "sha256": "18cba2f4b471bf72e377f8b0247016ed3645c50eb9f4de6e4ad2c69885f649b8"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/primary-terminal-before-postguards.json",
+      "bytes": 352,
+      "sha256": "1e0b56ea46fff11f309feb3ec9ec0d355567a3a54e077a850d012c0fdebd74fd"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/root-exact-complete-configured-full-node-census.private.json",
+      "bytes": 259884,
+      "sha256": "6ba77d6a5111ea178cd3631c6243eeaaff7cfb2b9125c880e8e4b26ea8f834a9"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/root-one-distinct-source-full-authorization.json",
+      "bytes": 762,
+      "sha256": "468bde137cf3573c91c23688cff8a5e38603b3c1fb3a9989c94b719af30d4b63"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/root-one-outer900-command-adoption.json",
+      "bytes": 1080,
+      "sha256": "e3d145f79cf5835ff74ba7207a28e734315e1f9ef9eb5ea95b838a08fc1838d2"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/root900-original-process-terminal.json",
+      "bytes": 212,
+      "sha256": "b5cc8aa640ba1b596a2100a7221e0d966199b105cb56ebb56c99cca290dc9550"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/terminal-primary-and-postguard-distinct.json",
+      "bytes": 914,
+      "sha256": "bf65d64945dc0c55142f36a7a6ae477edb58d64d09714c1426ba7c6f7f464e18"
+    }
+  ],
+  "current312_Git_FS_source_entries": 1426,
+  "current312_head": "ec70a2928461941c129b1c05332dc441070e0184",
+  "current312_tree": "47a1e4fceb22fd15eaee1ca380ad6c005abfdde6",
+  "current312_tracked_clean": true,
+  "prior50_archives24_indices_current_recorded_SHA_size_mode_exact": true,
+  "failed563_original_exists_excluded": true,
+  "frozen_failed_control3_native1192_helpers0444_sourceguard_inputs_reference_only": {
+    "path": "/workspace/engineering/rcc-control3-failed-owned-preservation-proposal/frozen-preservation-inputs-v3.json",
+    "bytes": 63424,
+    "sha256": "cfb97eaadadd7368043033f7aa4749655609fc7b41ff5c577bbe86d82d361bff"
+  },
+  "failed_control3_original_status": "FAIL_HOLD_UNCHANGED; v3 failed preservation remains separate NOT_RUN proposal",
+  "private_proof_bindings": [
+    {
+      "path": "/workspace/engineering/capacity-recovery-batch25-proposal/private-complete-completed-candidate-metadata-census.json",
+      "bytes": 98520,
+      "sha256": "9b411503b60aec948495345f2cbf3c61abe5edee4096a4a855e87f465b13ed29"
+    },
+    {
+      "path": "/workspace/engineering/capacity-recovery-batch25-proposal/private-complete-candidate-two-stable-inventories-v2.json",
+      "bytes": 12114798,
+      "sha256": "95bf33a7b4a675e3425dab0388f586a0c41ef2807647cad6e8c21179aae287b6"
+    },
+    {
+      "path": "/workspace/engineering/capacity-recovery-batch25-proposal/private-accessible-process-cwd-FD-before-after-v2.json",
+      "bytes": 466,
+      "sha256": "4686b3eee119bd9a5aa2b1e82eb20c9ae55c3f406688e4424b557e6b2e86c1d2"
+    },
+    {
+      "path": "/workspace/engineering/capacity-recovery-batch25-proposal/private-prior50-original-archives24-indices-current-hash-retention-v2.json",
+      "bytes": 20455,
+      "sha256": "ada727cb26e702400c95751af9fd8fce33c80a185a5d7b4a528a2856793bd0aa"
+    },
+    {
+      "path": "/workspace/engineering/capacity-recovery-batch25-proposal/private-current312-source-Git-FS-complete-body-and-exec-modes.json",
+      "bytes": 366608,
+      "sha256": "6c7febe872aef038ae80aaf0e38f94baf270f59a9e3e956f309949423e224ccc"
+    }
+  ],
+  "workspace_free_bytes_observation": 549449728,
+  "existing_shm_free_bytes_observation": 2095063040,
+  "root_proposed_exact_argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "600s",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/tmp/actions-capacity-recovery-batch25.py"
+  ],
+  "execution_prerequisites": [
+    "Independent immutable proposal/script review followed by distinct ROOT ONE release; no other heavy/shared scratch mutation active",
+    "Fresh markerTrue and no observed accessible cwd/FD matches before original full inventory and after verified archive/full reinventory before only named expanded removal",
+    "Exact original complete index saved0600 before removal; archive0600; all member bodies/sizes/modes/UIDGID/type/links resolved and full inventory unchanged",
+    "All original prior50 archives/24 indices and source/native/helper/failed roots preserved; root before/after guards separately required",
+    "Post capacity is freshly measured, never presumed: source-full floor1200000000B; cold floor1288490189B; separate release and strict policies apply"
+  ],
+  "NOT_RUN": true,
+  "limitations": [
+    "Only accessible /proc cwd/FD observations; unreadable/transient/map/external actor scope UNKNOWN, not universal quiescence",
+    "Complete archive verification/removal belongs future root execution and separate actual reviewer; proposal is not recovered capacity",
+    "Accepted exact profile records expanded mtime_ns but does not verify precise TAR ns mtime, ACL/xattrs/inode/rootmetadata",
+    "No source suite/native/provider/browser/consumer/issue/release acceptance or failed state relabeling",
+    "Current source-volume increase cannot be guaranteed from allocated-block estimate"
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md exact imported 7d070 paragraph accepted unchanged",
+    "Exact_delta_or_reuse": {
+      "path": "/workspace/engineering/capacity-recovery-independent-review/canonical-completed-scratch-preservation-proposed.patch",
+      "bytes": 1068,
+      "sha256": "7d07065b5bb7742698919997c8c6621cc20d00494741eb5365251ffb09f2d208"
+    },
+    "Durable_learning_captured": "Recorded body/mode/UIDGID/link archive evidence and a repeated full inventory and accessible handle check precede only the explicitly named completed scratch removal. Capacity and source origin remain separate evidence.",
+    "Evidence": [
+      {
+        "path": "/tmp/actions-capacity-recovery-batch25.py",
+        "bytes": 5244,
+        "sha256": "09160c02ce8c05d48c048a0a1b228901c4e4c140812ddcdcac9b8c9dae8b78a8"
+      },
+      {
+        "path": "/tmp/actions-capacity-recovery-batch19.py",
+        "bytes": 5244,
+        "sha256": "48fd7e4c79e55b80ceda0b63c1d1da87feeb368cefee265d5c12bad6ad940840"
+      },
+      {
+        "path": "/workspace/engineering/capacity-recovery-batch25-proposal/private-complete-candidate-two-stable-inventories-v2.json",
+        "bytes": 12114798,
+        "sha256": "95bf33a7b4a675e3425dab0388f586a0c41ef2807647cad6e8c21179aae287b6"
+      },
+      {
+        "path": "/workspace/engineering/capacity-recovery-batch25-proposal/private-accessible-process-cwd-FD-before-after-v2.json",
+        "bytes": 466,
+        "sha256": "4686b3eee119bd9a5aa2b1e82eb20c9ae55c3f406688e4424b557e6b2e86c1d2"
+      },
+      {
+        "path": "/workspace/engineering/capacity-recovery-batch25-proposal/private-prior50-original-archives24-indices-current-hash-retention-v2.json",
+        "bytes": 20455,
+        "sha256": "ada727cb26e702400c95751af9fd8fce33c80a185a5d7b4a528a2856793bd0aa"
+      },
+      {
+        "path": "/workspace/engineering/capacity-recovery-batch25-proposal/private-current-frozen-source-native-helper-guard-readback.json",
+        "bytes": 331,
+        "sha256": "73b7d5af359cff66c778a44f5b3c8f789411132f46fbbdc4f1b64838d013892c"
+      }
+    ],
+    "Stale_or_ambiguous_guidance_removed": "No source-origin inference from mtime/marker or cleanup/acceptance claim from fresh accessible-handle absence. Existing verified paragraph already carries the durable rule; no cosmetic duplicate.",
+    "Remaining_uncertainty": "No archive/removal executed; independent review and root release required, universal handle scope unknown, recovered capacity unmeasured."
+  },
+  "Upstream_disposition": "none",
+  "retained_metadata_construction_failure": {
+    "constructor": {
+      "path": "/workspace/engineering/capacity-recovery-batch25-proposal/finalize-readonly-proposal.py",
+      "bytes": 12636,
+      "sha256": "f8d9367a8d6c3106f2b314ea7033f946fa0cbc4d6c32a280b3661bd33d48ae5a"
+    },
+    "reason": "Guessed nonexistent /workspace/engineering/pr312 failed after read-only inventory/retention proofs, before OWNERFINAL. Corrected v2 derives existing cwd from authenticated root proposal. No archive or expanded removal executed."
+  },
+  "constructor": {
+    "path": "/workspace/engineering/capacity-recovery-batch25-proposal/finalize-readonly-proposal-v2.py",
+    "bytes": 13001,
+    "sha256": "9d5ac983465f78b85130b8899f2b6dd8fbe873fd9142c8b40f58d87d39648a1a"
+  },
+  "retained_unannounced_metadata_predecessor": {
+    "path": "/workspace/engineering/capacity-recovery-batch25-proposal/OWNERFINAL-batch25-exact-one-completed-preexecution-proposal.json",
+    "bytes": 12676,
+    "sha256": "0c2e044c853553ace12ce562b71670fb0f95250ddae5b237eeb21ca52576b8e1"
+  },
+  "current_original_guard_readback": {
+    "path": "/workspace/engineering/capacity-recovery-batch25-proposal/private-current-frozen-source-native-helper-guard-readback.json",
+    "bytes": 331,
+    "sha256": "73b7d5af359cff66c778a44f5b3c8f789411132f46fbbdc4f1b64838d013892c"
+  },
+  "current_original_guard_scope": {
+    "277_frozen_refs_current_SHA_mode": true,
+    "native1192_complete_bodies_modes_member_union": true,
+    "source_b6141421_body_modes": true,
+    "prepared30": true,
+    "failed_control3_original_FAIL_HOLD": "UNCHANGED",
+    "archive_main_NOT_RUN": true
+  },
+  "proposed_root_gate_sequence": [
+    "Independent immutable proposal/script review",
+    "Fresh source/native/failure guards and exact named capacity adoption/root ONE release",
+    "Execute unchanged 16-nonconfiguration-AST B25 script once with private log/terminal",
+    "Retain terminal every outcome; independent actual archive stream/index review separate",
+    "Fresh free-space measurement; source/full/native gate release remains separate"
+  ],
+  "proposal_scope": "PREPARATION_ONLY_NOT_AN_INDEPENDENT_ARCHIVE_EXECUTION_OR_ACTUAL_PRESERVATION_GO"
+}

@@ -1,0 +1,15 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -3258,6 +3258,12 @@
+ member count from the new wheel bytes even when it equals an earlier count,
+ and retain generated-input authority and content holds separately.
+ 
++Archive size and digest authenticate bytes, not artifact, run or job labels.
++Before an installed-consumer probe, bind those labels to an independently
++frozen artifact qualification as well as to the producer tuple. Comparing two
++label copies in the same input manifest is insufficient: changing both copies
++while retaining the correct archive bytes must still fail before installation.
++
+ The private Run output resolver locks its Workspace, checks the actor's grant
+ and acquires the provider reader within one transaction, then yields the reader
+ after the transaction exits. Revocation denies future acquisitions; reads on an

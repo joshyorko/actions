@@ -1,0 +1,136 @@
+{
+  "ROOT_external_contract": {
+    "bytes": 3745,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr313-current2d86-private-cached-bounded-LIGHT-SOURCE-NOTRUN/required-external-all-outcome-parent-and-strict-ROOT-adoption-contract-NOTRUN.json",
+    "sha256": "f3321401ebd3d7baeba11823bf6a58f2bd269bb8677b61b96484278cc32ed8bd"
+  },
+  "actual_case_counts_causes_cleanup": "UNKNOWN/NOTRUN; oldWindows90startupcause/30680-88actualcleanupUNKNOWN preserved",
+  "application_source_branch_config_ref_env_delta": "NONE",
+  "bindings": [
+    {
+      "bytes": 56066,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr313-current2d86-private-cached-bounded-LIGHT-SOURCE-NOTRUN/FROZEN-current2d86-private-cached-bounded-LIGHT-inputs-NOTRUN.json",
+      "sha256": "34af5903acb26ca56d6e8086dd9c3460b130629ae29eff5f6afffae14f117de8"
+    },
+    {
+      "bytes": 1434,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr313-current2d86-private-cached-bounded-LIGHT-SOURCE-NOTRUN/baseline-first-private-admission-address-authority-and-clock-controls-plan-NOTRUN.json",
+      "sha256": "c65a5b7dec681676840972b50fa83d8bcdfbb0965855a26f657ba4009ceb15aa"
+    },
+    {
+      "bytes": 976,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr313-current2d86-private-cached-bounded-LIGHT-SOURCE-NOTRUN/canonical-all-outcome-authority-versus-input-guards-and-honest-clock-proposed.txt",
+      "sha256": "36741a3bcb51ee44ab611afa6f192ea5f58251f8dc7a28b706893ded6e6cb300"
+    },
+    {
+      "bytes": 22322,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr313-current2d86-private-cached-bounded-LIGHT-SOURCE-NOTRUN/construct_source_specific_cached_guard_authority_and_light_packet.py",
+      "sha256": "888705ff00d16f02af5ab15c355630a8343f6c63d348696ee6708971b03279ad"
+    },
+    {
+      "bytes": 2631,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr313-current2d86-private-cached-bounded-LIGHT-SOURCE-NOTRUN/current313-source-input-alias-authority-phase-address-and-clock-scope-proof-NOTRUN.json",
+      "sha256": "802983e1aef8ff69ce087bcd6318398507586450292b86428e7f8dc2ae33f2cc"
+    },
+    {
+      "bytes": 5674,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr313-current2d86-private-cached-bounded-LIGHT-SOURCE-NOTRUN/current_2d86_readonly_source_and_full_authority_guard_NOTRUN.py",
+      "sha256": "3848812474dcd57ecae43245800660d5fe42ac5444db51c962edfa5dd92d2f05"
+    },
+    {
+      "bytes": 10258,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr313-current2d86-private-cached-bounded-LIGHT-SOURCE-NOTRUN/launch_current2d86_private_cached_bounded_LIGHT_once_NOTRUN.py",
+      "sha256": "d6561ad300300f258382c87277481c46e5f63cadba0afada7b910d073629c8b9"
+    },
+    {
+      "bytes": 22330,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr313-current2d86-private-cached-bounded-LIGHT-SOURCE-NOTRUN/named_metadata_prefix_row_path_constructor_v2.py",
+      "sha256": "431b7308757003e6a0b82ef3cc2ef06531dd9d8d86c75dc15bf512e649a3ae78"
+    },
+    {
+      "bytes": 511,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr313-current2d86-private-cached-bounded-LIGHT-SOURCE-NOTRUN/original-prefix-proof-row-versus-path-constructor-HOLD-NOTRUN.json",
+      "sha256": "3cc1ba96206babd0bcbb3df9744ada837ac970d6c596ac1300b19ca61002a6cb"
+    },
+    {
+      "bytes": 3745,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr313-current2d86-private-cached-bounded-LIGHT-SOURCE-NOTRUN/required-external-all-outcome-parent-and-strict-ROOT-adoption-contract-NOTRUN.json",
+      "sha256": "f3321401ebd3d7baeba11823bf6a58f2bd269bb8677b61b96484278cc32ed8bd"
+    }
+  ],
+  "cached_only": "Preserved originalcachedDoctor/Toolkit/ownfive/process+cleanup+observer+adapter source/static/generator; noRCCgateway",
+  "capture": "2026-10-11T23:43:02.708672+00:00",
+  "clock": "Cooperative600/perphasehard+parentwait; nohard640primaryparent. ROOT900+10 afterconcreteexternalparentreview/adoptiononly",
+  "config": {
+    "bytes": 56066,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr313-current2d86-private-cached-bounded-LIGHT-SOURCE-NOTRUN/FROZEN-current2d86-private-cached-bounded-LIGHT-inputs-NOTRUN.json",
+    "sha256": "34af5903acb26ca56d6e8086dd9c3460b130629ae29eff5f6afffae14f117de8"
+  },
+  "current_SCOPED_LIGHT_FULL": "NOT_RUN",
+  "documentation": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "evidence": "Source-specificold313cachedbody/a4f hasunboundednormalpost andprepoutput paths; newfullauthorityguard+exactprefixaliases/honestcooperativeclock. Root305review foundmetadata640withoutimplementedparent, retainedas boundarynotcopiedpromise.",
+    "exact_delta": {
+      "bytes": 976,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr313-current2d86-private-cached-bounded-LIGHT-SOURCE-NOTRUN/canonical-all-outcome-authority-versus-input-guards-and-honest-clock-proposed.txt",
+      "sha256": "36741a3bcb51ee44ab611afa6f192ea5f58251f8dc7a28b706893ded6e6cb300"
+    },
+    "remaining_uncertainty": "IndependentSOURCE/control/PREEXEC andROOTexternalparentcode/adoption/capacity/currentLIGHT/FULL/CI/native/release allpending; no imports/tests/gates executed",
+    "stale_ambiguity": "Inputs postPASS alone notfullauthority; confighashrejection notsemanticoutputaudit; sourcepreparednotexecutableparent/currentcase/reapingproof",
+    "upstream_disposition": "none"
+  },
+  "executability": "HOLD mandatoryalloutcomeexternalparent NOTAUTHORED/NOTRUN +indSOURCE/purecontrols/PREEXEC/freshfloor/ROOTgrant",
+  "floor": 1288490189,
+  "guard": {
+    "bytes": 5674,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr313-current2d86-private-cached-bounded-LIGHT-SOURCE-NOTRUN/current_2d86_readonly_source_and_full_authority_guard_NOTRUN.py",
+    "sha256": "3848812474dcd57ecae43245800660d5fe42ac5444db51c962edfa5dd92d2f05"
+  },
+  "immutable_input_rows": 142,
+  "launcher": {
+    "bytes": 10258,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr313-current2d86-private-cached-bounded-LIGHT-SOURCE-NOTRUN/launch_current2d86_private_cached_bounded_LIGHT_once_NOTRUN.py",
+    "sha256": "d6561ad300300f258382c87277481c46e5f63cadba0afada7b910d073629c8b9"
+  },
+  "meaningful_controls_plan": {
+    "bytes": 1434,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr313-current2d86-private-cached-bounded-LIGHT-SOURCE-NOTRUN/baseline-first-private-admission-address-authority-and-clock-controls-plan-NOTRUN.json",
+    "sha256": "c65a5b7dec681676840972b50fa83d8bcdfbb0965855a26f657ba4009ceb15aa"
+  },
+  "original_checkpoint": {
+    "bytes": 13446,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr313-actual-e2-refresh/OWNERFINAL-current2d86-e2-ordinary-union-and-isolated-LIGHT-FULL-PREPARATION.json",
+    "sha256": "11aaf1b32edefd7373a652d5bc2e8cd1a42193b9a4fa4f28358fd61005fa0381"
+  },
+  "original_preparation13_and_retained119": "13refs+118physical/1Git preserved, fivephysicalprefixaliases exact; notassume83",
+  "schema": 1,
+  "source": "2d86c5cf92d3acb274a8ceb5d57bfb8b12c779b6",
+  "source_clean": true,
+  "source_count": 1441,
+  "source_proof": {
+    "bytes": 2631,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr313-current2d86-private-cached-bounded-LIGHT-SOURCE-NOTRUN/current313-source-input-alias-authority-phase-address-and-clock-scope-proof-NOTRUN.json",
+    "sha256": "802983e1aef8ff69ce087bcd6318398507586450292b86428e7f8dc2ae33f2cc"
+  },
+  "status": "OWNER_FINAL_PRIVATE_CURRENT2D86_CACHED_BOUNDED_LIGHT_SOURCE_PREPARED_PREEXEC_EXTERNAL_PARENT_HOLD",
+  "tree": "653a9e73e4d27641ec86de94b90f35d41e0f24f8",
+  "workspace_observation": 633528320
+}

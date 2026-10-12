@@ -1,0 +1,214 @@
+{
+  "actual_original_result": {
+    "child_returncode": 0,
+    "elapsed_seconds": 33.61462861500331,
+    "no_retry": true,
+    "one_attempt": true,
+    "outer_returncode": 0,
+    "protected_after_returncode": 0,
+    "protected_before_returncode": 0,
+    "protected_post": "PASS"
+  },
+  "actual_terminal_binding": {
+    "bytes": 385,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-one-original-FULL-partial-relocation-owned-v1/original-one-attempt-terminal.json",
+    "sha256": "25e98d5d70504e362f815ebc4637c193dba4b2339ea9bef89e76063579227b7b"
+  },
+  "bound_original_evidence": [
+    {
+      "bytes": 878,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-reviewed-FULL-partial-relocation-original-outer-once/OWNERFINAL-root-one-original-reviewed-FULL-partial-relocation-outer.json",
+      "sha256": "7f6e2eed3ffcc1e969a41bb7f40b16940b6687c6f8eac8d30ffb8cced2f39474"
+    },
+    {
+      "bytes": 2468,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-original-FULL-partial-relocation-release-v1.json",
+      "sha256": "f5f11f09dec1256784ffc1b2d8aa6dc248da8bb63a05cb1446f47d3cb16596ff"
+    },
+    {
+      "bytes": 385,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-original-FULL-partial-relocation-owned-v1/original-one-attempt-terminal.json",
+      "sha256": "25e98d5d70504e362f815ebc4637c193dba4b2339ea9bef89e76063579227b7b"
+    },
+    {
+      "bytes": 380,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-original-FULL-partial-relocation-owned-v1/protected-before.json",
+      "sha256": "ff21290c0673a8f2523762fbcb50f09158f591a6ddcb21508bb9849936e3fafd"
+    },
+    {
+      "bytes": 380,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-original-FULL-partial-relocation-owned-v1/protected-after.json",
+      "sha256": "188c6fa7d41a1bea7abfcde84f5cd63a4ac8f7d88142f5ab88f868778b33feeb"
+    },
+    {
+      "bytes": 72,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-original-FULL-partial-relocation-owned-v1/original-partial-state-before.json",
+      "sha256": "c2cbf9e1eb92581f15d0998050e4da8970927fba9dd1afdf52eea25acd23ac77"
+    },
+    {
+      "bytes": 95,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-original-FULL-partial-relocation-owned-v1/original-partial-state-after.json",
+      "sha256": "d8514ee2764e29d93a5ec79397ddfc041a01015fed62ebe355ccdbdcbcb17ae0"
+    },
+    {
+      "bytes": 1105,
+      "mode": "0o600",
+      "path": "/dev/shm/actions-completed-FULL-original-partial-preserved-20261011-v1/private-exact-original-partial-physical-alias.json",
+      "sha256": "3c2296dfa35059eb34b7bc134613f1121e19b9b038f2f931debc1da41ade3f5c"
+    },
+    {
+      "bytes": 1408,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/private-exact-original-partial-relocation-plan.json",
+      "sha256": "e2ca10cd9b5604940edf35ed1d41003a2a146f439dddc1734c7babe5a4112742"
+    },
+    {
+      "bytes": 6232,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/exact_failed_partial_relocation_v2.py",
+      "sha256": "9058cfc3e86ebbc7f8e765d8853a4883f27cebc068f4b08d25e7104c8be3a2bc"
+    },
+    {
+      "bytes": 645,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/proposed-canonical-single-copy-promotion-and-failed-partial-alias-lesson.patch",
+      "sha256": "677897a486955f7ca9b6e6a626c10d5472314f574fcf9bd595029e7d31db6058"
+    },
+    {
+      "bytes": 467,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-original-FULL-partial-relocation-owned-v1/before/terminal.json",
+      "sha256": "82b7954bf38c67e4363fb4a01f80009f03e222b8a8a16a1caa164ada118c87a5"
+    },
+    {
+      "bytes": 2258,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-original-FULL-partial-relocation-owned-v1/before/stdout.private.log",
+      "sha256": "7dce9a07f5475e2fdc556cd739fdbf29159716be1828a8796ece335db0895187"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-original-FULL-partial-relocation-owned-v1/before/stderr.private.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 466,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-original-FULL-partial-relocation-owned-v1/after/terminal.json",
+      "sha256": "c6306ee4d73fd29b617af77ddf3843d884e90034a2ecb792f9b3bd6bb936d33c"
+    },
+    {
+      "bytes": 2258,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-original-FULL-partial-relocation-owned-v1/after/stdout.private.log",
+      "sha256": "96362144b8a8fdc527828af13446220332f2c8da42437e93919aac9b0e782293"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-original-FULL-partial-relocation-owned-v1/after/stderr.private.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "decision": "GO_EXACT_ORIGINAL_FAILED_FULL_PARTIAL_RELOCATION_ACTUAL_DATA_PRESERVATION_ONLY",
+  "documentation_improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md: exact accepted seven-line patch677897a486955f7ca9b6e6a626c10d5472314f574fcf9bd595029e7d31db6058; reuse, no cosmetic duplicate.",
+    "Durable learning captured": "A failed partial may be preserved by exact original-path physical alias while remaining unqualified gzip; durable single-copy promotion requires verification and destination fsync before staged unlink.",
+    "Evidence": "Actual partial fullSHA/mode/UIDGID/nsmtime, exact typed alias, original zero-result before/after guards; source and21smallcontrols retained in prior PREEXEC.",
+    "Remaining uncertainty": "FULL archival and original native/cleanup/private/release gates remain unqualified. Data-only fresh capacity is a launch prerequisite, not guaranteed gain.",
+    "Stale or ambiguous guidance removed": "Exact data relocation distinguished from complete archive/CRC proof; no failure result or historic path identity rewritten."
+  },
+  "exact_original_partial": {
+    "bytes": 134201221,
+    "durable_fixed_original_path_alias_exact": true,
+    "full_stream_SHA_checked": true,
+    "gid": 1000,
+    "gzip_CRC_footer_TAR_completion": "UNKNOWN_NOT_INSPECTED_NOT_QUALIFIED",
+    "mode": "0o600",
+    "mtime_ns": 1791751045104218583,
+    "new_full_body_metadata_exact": true,
+    "nlink": 1,
+    "old_physical_path_absent": true,
+    "sha256": "016597e8bc6083589de4630232147e6f13e2169cee519c86693b6dba47ac189a",
+    "uid": 1000
+  },
+  "independent_verification": {
+    "complete_body_kind_mode_UIDGID_nsmtime_dev_inode_nlink_snapshot_exact": true,
+    "consumed_release_bytes_exact": true,
+    "current_full_GitFS_source_body_modes_exact": 1440,
+    "current_named_HEAD_tree_exact": true,
+    "destination_parent_UIDGID": [
+      1000,
+      1000
+    ],
+    "destination_parent_mode": "0o700",
+    "fixed_dd091_alias_both_guards_verified": true,
+    "fixed_original_mapping_schema_rows_metadata_exact": true,
+    "mapping_UIDGID": [
+      1000,
+      1000
+    ],
+    "mapping_mode": "0o600",
+    "original_guard_observed_native_originals": 1192,
+    "original_guard_observed_old_originals": 237,
+    "original_guard_observed_origins": 5,
+    "original_guard_observed_prepared_inputs": 30,
+    "regular_internal_hardlink_partition_exact_external_hardlinks": 0,
+    "selected_expanded_FULL_root_present": true,
+    "selected_members": 15831
+  },
+  "limits": [
+    "Original capped128MiB FULL archiver attempt remains FAIL; its exact partial is retained physically through this typed alias.",
+    "No gzip CRC/footer/TAR decoding, repair or reconstruction; source failure and alias remain separate from any successful FULL archive.",
+    "Accessible handles/universal quiescence and process reaping remain UNKNOWN; no waits/signals/reaps/native/runtime tests.",
+    "Historical native/source/current runtime qualification unchanged. No native, lease, registry, full private/release acceptance."
+  ],
+  "next_FULL_release_boundary": {
+    "FULL_operation": "NOT_RUN_BY_THIS_REVIEW",
+    "conditional_PREEXEC_review_binding": {
+      "bytes": 9240,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed-current8d49-FULL-single-copy-fallback-independent-PREEXECUTION-review/OWNERFINAL-independent-exact-one-completed-FULL-single-copy256-PREEXECUTION-conditional-GO.json",
+      "sha256": "03b3ab4d157291580a2509bc9a1d79a9340b8b49ad249c86bbc64da4bb4b8c09"
+    },
+    "fresh_TMP_floor_required": 419430400,
+    "fresh_capacity_and_exclusive_serialization_required": true,
+    "this_separate_actual_alias_prerequisite": "SATISFIED_DATA_ONLY; ROOT must bind this receipt before distinct FULL release."
+  },
+  "original_preexecution_review_binding": {
+    "bytes": 9376,
+    "mode": "0o400",
+    "path": "/workspace/engineering/completed-current8d49-FULL-single-copy-fallback-independent-PREEXECUTION-review/OWNERFINAL-independent-exact-original-failed-FULL-partial-relocation-PREEXECUTION-GO.json",
+    "sha256": "c34a2b503d7bb027a10fb691d8b5a7e0d0dbff20f53053f8efccee3e931f0cb8"
+  },
+  "review_construction_history": [
+    "After complete15831snapshot PASS a metadata query treated source_inventory string as binding dict and raised TypeError; retained no operation or acceptance from failed query.",
+    "A subsequent metadata query assumed mixed stdout was whole JSON and raised JSONDecodeError; corrected by parsing retained whole JSON line and validating captured SHA/length and terminal first. No guard rerun."
+  ],
+  "root_outer_owner_binding": {
+    "bytes": 878,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-reviewed-FULL-partial-relocation-original-outer-once/OWNERFINAL-root-one-original-reviewed-FULL-partial-relocation-outer.json",
+    "sha256": "7f6e2eed3ffcc1e969a41bb7f40b16940b6687c6f8eac8d30ffb8cced2f39474"
+  },
+  "root_release_binding": {
+    "bytes": 2468,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-one-original-FULL-partial-relocation-release-v1.json",
+    "sha256": "f5f11f09dec1256784ffc1b2d8aa6dc248da8bb63a05cb1446f47d3cb16596ff"
+  },
+  "schema": "INDEPENDENT_ORIGINAL_FAILED_FULL_PARTIAL_RELOCATION_ACTUAL_DATA_ONLY_REVIEW",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "status": "PASS_ORIGINAL_ONE_DATA_RELOCATION_AND_TYPED_ALIAS_NO_GZIP_QUALIFICATION",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none"
+}

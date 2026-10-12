@@ -1,0 +1,137 @@
+{
+  "status": "CURRENT8D49_CONFIGURED_SOURCEFULL_PREEXECUTION_ONLY_EXECUTION_HOLD",
+  "source": {
+    "commit": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+    "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+    "typed_entries": 1440,
+    "clean": true
+  },
+  "source_LIGHT": {
+    "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/OWNERFINAL-current8d49-configured-SOURCE_LIGHT-PASS.json",
+    "bytes": 7674,
+    "sha256": "d7f23a52d044195187992aeac80e692429e1a1a4af16ee9b37f1971cfbdc4104",
+    "mode": "0o400"
+  },
+  "frozen_input_bindings": [
+    {
+      "path": "/workspace/engineering/pr308-current8d49-SOURCEFULL-preexecution/frozen-current8d49-source-FULL-inputs.json",
+      "bytes": 13606,
+      "sha256": "68cee8aeab8855f3f175c8a1a6f9e83ad66b9d2267eabfdb9969f7d55207e1c0",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-SOURCEFULL-preexecution/current8d49_readonly_FULL_source_and_storage_guard.py",
+      "bytes": 7681,
+      "sha256": "72f9a57a368d3fd654f574a41aa898fbf9c969feefb63a42f8019b8ff3a72c9e",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-SOURCEFULL-preexecution/current8d49_configured_FULL_body.py",
+      "bytes": 1609,
+      "sha256": "bc8a3ce505c93649c5ede230c64c77c9162f94c425d293e405c11402bed24ccf",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-SOURCEFULL-preexecution/launch_current8d49_configured_SOURCEFULL_once.py",
+      "bytes": 5791,
+      "sha256": "843ce4ad748d79c49ab6702180b2d98c91bdbddc35ff287a2faac81236c02394",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/private-current8d49-source-body-mode-inventory-v3.json",
+      "bytes": 378602,
+      "sha256": "9843e9035fd7bfdf9577b9ba08f108365fbbc336ca00337f99328599b6204677",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-SOURCEFULL-preexecution/installed-own-xdist-and-toolkit-two-worker-environment-readonly-proof.json",
+      "bytes": 2470,
+      "sha256": "996a74a44b358f1a68c908e52bb6453b9ba8baded099e9a45b6fde3ea4127d55",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current095-configured-Ruff-formatter-only-correction/root-approved-formatter-only-normal-child-source-adoption.json",
+      "bytes": 745,
+      "sha256": "edf034c9a880e625353a25d24d97400c24c04b2ffd40d8942bbb001d37c17f92",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/OWNERFINAL-current095-original-SOURCE_LIGHT-formatter-FAIL.json",
+      "bytes": 3791,
+      "sha256": "41fe5885ee867622ea9f822711ab018f54f707a318fa0e561f539bfbb3cff5a3",
+      "mode": "0o400"
+    }
+  ],
+  "prepared": {
+    "source_inputs": 30,
+    "own_module_origins": 5,
+    "managed_activation_exports": 18,
+    "first_PATH_managed": true
+  },
+  "historical": {
+    "original_rows": 237,
+    "native_members": 1192,
+    "missing8dc": "EXACT_HISTORICAL_FAIL_MEMBER_ALIAS_RETAINED",
+    "dd091": "EXACT_OLD_ARCHIVE_PHYSICAL_ALIAS_AND_INDEX_RETAINED",
+    "original095_SOURCE_LIGHT": "FAIL_PRESERVED",
+    "old_source_FULL": "HISTORICAL_NOT_CURRENT"
+  },
+  "outer_argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "900s",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/pr308-current8d49-SOURCEFULL-preexecution/launch_current8d49_configured_SOURCEFULL_once.py",
+    "<DISTINCT_ROOT_ONE_FULL_RELEASE_PATH>",
+    "<ACTUAL_ROOT_RELEASE_SHA256>"
+  ],
+  "activation": "source /workspace/actions-cloud/activate.sh; prepend /workspace/actions-cloud/bin then cached_toolkit/bin; exact18exports+firstPATH; ownRCC0711/hash checked; no inherited PYTEST_ADDOPTS/PYTHONOPTIMIZE/actual operator exports",
+  "worker_env_before_Invoke": {
+    "PYTEST_XDIST_AUTO_NUM_WORKERS": "2"
+  },
+  "configured_Runtime_argv": "toolkit.poetry(action_server, run, invoke, test-not-integration)",
+  "bounds": {
+    "outer_seconds": 900,
+    "primary_parent_seconds": 640,
+    "configured_child_seconds": 600,
+    "before_and_always_post_seconds_each": 120,
+    "TERM_KILL_after_seconds": 10
+  },
+  "pytest": {
+    "once_owned_parent": "/tmp/actions-pr308-current8d49-FULL-once-1",
+    "child_initially_ABSENT": "/tmp/actions-pr308-current8d49-FULL-once-1/Runtime-configured",
+    "retention_policy": "all",
+    "inherited_addopts": "REJECT",
+    "parent_existing": "REJECT",
+    "no_shared_numbered_parent": true
+  },
+  "capacity_floors": {
+    "workspace_bytes": 1288490189,
+    "tmp_bytes": 1200000000,
+    "fresh_current_capacity": "HOLD_workspace_belowfloor_no_waiver"
+  },
+  "independent_source_review": null,
+  "independent_FULL_preexecution_review": null,
+  "required_ROOT_release_contract": {
+    "status": "ROOT_RELEASE_ONE_SERIALIZED_CURRENT_8D49_SOURCE_FULL",
+    "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+    "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+    "proposal_sha256": "Exact SHA of this immutable proposal, bound by ROOT after independent review",
+    "current_source_independent_review": "Real independently frozen review binding path/SHA/size/mode; notnull/not ROOTrelease",
+    "current_full_preexecution_independent_review": "Real separate independently frozen review binding path/SHA/size/mode; notnull/not ROOTrelease",
+    "serialized_no_other_heavy_or_installer": true,
+    "current_storage_independent_GO": true
+  },
+  "no_self_pin": "Independent refs are distinct real ROOT release slots, never generated acceptance/source or proposal self-pins. Missing release/slots fails before parent/basetemp creation.",
+  "SOURCEFULL": "NOT_RUN",
+  "native": "NOT_RUN",
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md integrated startup four-line probe boundary; existing Runtime configured formatter paragraph verified reuse; accepted explicit basetemp/ALL and disjoint generator union patches retained for root integration",
+    "durable_learning_captured": "Default approved compatibility routes now preserve10s probe instead of general900s command runner; configured formatter gate is independent; each pytest needs initially absent isolated basetemp+ALL.",
+    "evidence": "Current7 permanent startup controls included in275-case scoped XML, configured Ruff317 and actualsourcebeforeafter; old095 formatFAIL immutable.",
+    "stale_or_ambiguous_guidance_removed": "Default compatibility location/version routes no longer silently use900s probe; Black-only evidence is not configured Ruff acceptance.",
+    "remaining_uncertainty": "CurrentSOURCEFULL and fresh3/5/7276 realfunctionality remain unqualified; private01f/frozen-v6 missing."
+  },
+  "upstream_disposition": "none"
+}

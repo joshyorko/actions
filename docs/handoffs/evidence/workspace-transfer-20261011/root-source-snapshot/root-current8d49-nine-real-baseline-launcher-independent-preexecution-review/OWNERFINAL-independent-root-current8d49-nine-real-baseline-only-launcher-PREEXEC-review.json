@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "decision": "GO_ROOT_CURRENT8D49_EXACT_NINE_REAL_SOURCE_BASELINE_ONLY_LAUNCHER_PREEXEC_DISTINCT_ONE_RELEASE",
+  "status": "INDEPENDENT_STATIC_LAUNCHER_REVIEW_GO_NOT_RUN",
+  "root_program_binding": {
+    "path": "/workspace/engineering/root-current8d49-nine-real-baseline-once.py",
+    "bytes": 6371,
+    "sha256": "5ffbdebb3cbd7301e3a1d46255fc42d6fbff63bc03c922ec4b21ba9cb426ad5a",
+    "mode": "0o400"
+  },
+  "source_controls_independent_review": {
+    "path": "/workspace/engineering/pr308-current8d49-nine-real-reload-drain-independent-preexecution-review/OWNERFINAL-independent-current8d49-nine-real-SQLite-route-pool-control-SOURCE-and-baseline-first-PREEXEC-review.json",
+    "bytes": 16437,
+    "sha256": "6da104c02c146bd2594a1c307a81b6280ce9665664cc3f34d634a886e3e3daa0",
+    "mode": "0o400"
+  },
+  "baseline_first_contract_binding": {
+    "path": "/workspace/engineering/pr308-current8d49-nine-real-reload-drain-independent-preexecution-review/frozen-nine-real-source-control-baseline-first-ROOT-command-contract-NOTRUN.json",
+    "bytes": 6839,
+    "sha256": "5f1874357496fe9c890c1acfec43fa114d51c658bd23ea23578fc3c910c1f287",
+    "mode": "0o400"
+  },
+  "test_source_binding": {
+    "bytes": 14786,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/test_current_managed_reload_sqlite_pool_barriers.py",
+    "sha256": "c148bd528f8306e638054df91dfbf915022eaf30d3e123ff845adbeae6b209eb"
+  },
+  "native_V9_config_used_readonly_binding": {
+    "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+    "bytes": 765564,
+    "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25",
+    "mode": "0o600"
+  },
+  "native_V9_original_release_readonly_binding": {
+    "path": "/workspace/engineering/root-rcc-current8d49-control3-V9-one-release.json",
+    "bytes": 1075,
+    "sha256": "a131e30087742764ba6dbdbc2634749924133431de3310b2065ced446b97bf3b",
+    "mode": "0o600"
+  },
+  "readonly_guard_binding": {
+    "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/readonly_current_input_guard_v9.py",
+    "bytes": 4690,
+    "sha256": "480be06317562b7e3a5c98a5d794bb5d2a33e7fa6186fe707823ecb1cc583626",
+    "mode": "0o400"
+  },
+  "activation_input_binding": {
+    "bytes": 12996,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/frozen-current8d49-source-LIGHT-inputs-v3.json",
+    "sha256": "81f52920b50e67619b3bb418a7c1034a2106ec52f4badd71b9d85e29b7376820"
+  },
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "execution_contract": {
+    "root_one_outer": "env -u PYTHONOPTIMIZE timeout --signal=TERM --kill-after=10s450s bash sourceactivate + pinned primary/cachedToolkit PATH + cachedToolkitPython exactly6371/5ffb script; no nativemain or mutation. Root must supply explicit real one-release invocation; this review itself does not execute.",
+    "operator_refusal": "Optimization flag/env, inheritedPYTEST_ADDOPTS and RCC_RELOAD_PRIVATE_MUTANT forbidden before source/control execution; exact18exports+PATH2 and forbiddenexports checked.",
+    "ownership": "Root-once-1 must absent; mkdir0700 exclusive, umask077; unique baselineABSENTbasetempALL/absoluteownedpytestlogger/XML; private0600 root-release bound to exact review+contract before phase.",
+    "guards": "Before and alwaysfinally after via exact readonlyV9 guard, not actual_transport.main; config pins current1440typedGitFS/old237 historicalrefs+aliases/native1192/prepared30/sharedtemporal2. Guard has no native or added nativecapacity admission. Sourcecfg SHA is independently verified and also included in guard-configbindings before any baseline.",
+    "own_origins": "Exactly5 real direct-package Python import prefix/origin snippets,15sGNUtimeout10grace; stop firstfailed. Baseline invocation only after before+all5return0. No installer or gateway/native fixture invoked.",
+    "baseline": "One exact contractargv n0/private9source/noconftest/120TERM10. No mutantloop or secondtestinvocation. Raw stdout/stderr fsynced and immutable phase terminal written before admission, including returnnonzero/timeout/spawnfail.",
+    "parent_bounds": "Subprocessrun timeout135 encloses each GNU bounded operation; root outer450TERM10. Successful pre/5origins/baseline/post phase maxima120+75+120+120=435s excluding small I/O; a missing/interruptedpost cannot be admitted as PASS.",
+    "admission": "Exactly9 unique expectedJUnit names with9PASS/0FAIL/0ERROR/0SKIP, baseline and always-post outcomes required plus every recordedreturncode0. Any unreported/error/failedpre/origin/parse/missingpost yields FAIL/HOLD; nocounts fabricated."
+  },
+  "limitations": [
+    "Baseline/futuremutants unexecuted, source notadopted. Live implementation still8d49 only.",
+    "Original nativeV9publicationFAIL/cleanup observations and native3/5/7276 compatibility remain separate; direct source-control guard is not native execution or permission.",
+    "If retained files/fsync/JUnit parse/outertimeout fails, preserve originals and stop; original trial cannot be upgraded or automatically retried.",
+    "ROOT final owner write is not separately fsynced in this exactprogram; phase rawstreams/terminals are fsynced, and finalowner absence/partialwrite requires HOLD.",
+    "This review freshly verifies script/review/contract/config/activation/release/guard references and sourceHEAD/tree/clean, not separately rescanning large original1192/archive again. Execution before/alwayspost must perform completeinput guards."
+  ],
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "exact_existing_nine_line_scope_reuse": {
+      "bytes": 1021,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/canonical-current-source-reload-drain-transaction-scope-proposed.patch",
+      "sha256": "8354390b30343aa9a57a976aa5244e75068f8c59fc604f074af9e18110743856"
+    },
+    "durable_learning": "Servicefree realSQLite/route/pool baseline must precede intended single-seam RED; synthetic thread/handles cannot admit nativelease/reaping/provider recovery. Ownedbasetemp alone is not logger isolation; use distinct absoluteownedlog and retain exceptional phases before assertion.",
+    "evidence": "Exact reviewed6371program/6839contract; frozen9testsource/8functionAST/current1440 config; actual n0singlecommand and measuredJUnit admission code plus finally guard/retention source.",
+    "stale_or_ambiguous_guidance_removed": "No sourcefixturecode preparation or oldnative/run counts promoted to execution; collection/import failure is not RED or baselinePASS.",
+    "remaining_uncertainty": "All9realcases actualbaseline NOTRUN; root ownfuture invocation/rootactualresultindependentreview needed. No newcosmetic guide lines."
+  },
+  "upstream_disposition": "none",
+  "review_operations": "STATIC_STDLIB_HASH_JSON_AST_LOCALGIT_ONLY_NO_CODEEXEC_TEST_NATIVE_SOURCE_INDEX_REF_MUTATION"
+}

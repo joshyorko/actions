@@ -1,0 +1,274 @@
+diff --git a/docs/program/engineering-handoff.md b/docs/program/engineering-handoff.md
+index 2baa4b95..22b8f4dd 100644
+--- a/docs/program/engineering-handoff.md
++++ b/docs/program/engineering-handoff.md
+@@ -599,3 +599,8 @@ Devsy remains parked. Pending request `apr_29be804c-94cd-4b62-9233-e91b5ec30774`
+ Use the five ordered actions in the new-task checkpoint at the top of this handoff. The latest Windows failure takes precedence over earlier pending status.
+ 
+ Resume from the live integration head, fetch all open issue/PR/check changes, reconcile worker status and retain the complete graph. Do not infer graph completion or publication readiness from green checkpoint PRs.
++
++
++## Current engineering successor — 2026-10-11
++
++Continue from the [curated successor](../handoffs/actions-swarm-mk3-20261011-current-engineering-successor.md) and its scoped source, actual and storage dispositions. The earlier snapshots remain historical. This documentation checkpoint preserves the original 54-contract graph and private evidence boundaries; it grants no native attempt, merge, closure, publication or infrastructure action.
+diff --git a/docs/skills/provenance-observability.md b/docs/skills/provenance-observability.md
+index 9025645c..0e13bfc1 100644
+--- a/docs/skills/provenance-observability.md
++++ b/docs/skills/provenance-observability.md
+@@ -115,6 +115,88 @@ worker readiness, cache/provider health, correlated failures/evidence/logs,
+ disk/GC state, and a redaction manifest. It rejects archive traversal,
+ absolute paths, symlinks, duplicate names, and oversized members.
+ 
++## Private common Run-output boundary
++
++`actions.server.run_outputs` keeps the existing `Run.status` and `Run.result`
++authoritative. Migration 15 adds normalized admission pins, Attempts, outputs,
++Workspace records and exact persisted grants. Trusted control-plane registration
++pins Deployment, Package Revision, Capability, Runtime Plan, worker, policy,
++provider and schema references and checks the actual Action/Package identity.
++Registration is not compiler admission or proof of provider authenticity. Actor
++IDs must come from trusted authentication; a UUID or the legacy global API key
++does not grant Workspace access.
++
++Admission rechecks execute access and immutable request/idempotency identity.
++Publication uses DB time and the current owner/Attempt/epoch/live-lease/cancel
++predicate, then commits terminal Run status/result and final output attachments
++in one transaction. Exact terminal replay is reauthorized; changed input or
++result rejects. Provider sealing precedes this commit and may leave a sealed,
++non-authoritative orphan after rollback. If sealing completes but the subsequent
++fence/metadata transaction fails, the service first commits the measured
++ref/digest/size in an ABORTED receipt, then attempts provider discard only if
++that output is unattached and no other record references the object. Cleanup
++failure retains this receipt and preserves the original error. An ambiguous
++abort commit never permits deletion. Published output/replay remains untouched.
++A crash before the abort receipt, malformed provider response or unavailable DB
++can still leave an orphan without a durable cleanup reference; no GC/retry
++service is supplied here. Expired-owner recovery requires an
++explicit trusted operator receipt; the service does not retry external effects
++automatically or prove those effects were undone.
++
++An `art_` handle encodes only the generated output UUID. Resolution requires the
++expected Workspace, a DB-backed Run/output attachment and current persisted
++Deployment read access before provider access. The handle is neither a bearer
++grant nor a provider path/key. Grant revocation affects future resolutions;
++an already authorized descriptor stream retains its read authority. Legacy
++Run lists, details, request-ID lookup, notifications, manifest fallback,
++artifact APIs and analytics exclude pinned Runs rather than infer public
++Workspace authorization.
++
++The optional server-only `RunOutputTransport` binding installs a bounded GET
++route at `/api/workspaces/{workspace_id}/outputs/{handle}` in the actual Runtime
++application. Without explicit trusted configuration that route is absent. The
++binding pairs the existing service with an authenticator that verifies its
++credential and returns a server-owned Actor; freezing the binding does not
++verify the authenticator or freeze its credential store. No CLI/environment
++mapping, default principal, browser/provider-OAuth session UUID, installation
++API token or caller-selected Actor ID supplies Workspace authority. When
++configured, installation-key authentication remains an outer gate. The trusted
++Actor authenticator and the shared resolver's current persisted read-grant
++checks are mandatory with or without an installation key and occur before
++provider acquisition. Present browser Origins must pass the existing trusted
++origin policy; an allowed Origin or a successful preflight never grants identity
++or access.
++
++This transport streams the measured opened descriptor in chunks of at most
++64 KiB and closes its resolver on completion, failure and disconnect. It serves
++`application/octet-stream` as an attachment using only the opaque handle as the
++filename, with `no-store` and `nosniff`; logical names/media types never enable
++inline active content. Handle-bearing headers are constructed only after shared
++resolution validates the canonical handle, so Unicode/control-character path
++inputs cannot turn a uniform denial into a header-encoding failure. Denied, revoked, cross-Workspace, malformed and unknown
++handles share an unavailable response before provider access. Storage acquisition
++failure returns 503; a failure after headers aborts the stream rather than
++claiming a complete artifact. Range requests return 416 explicitly and HEAD is
++not implemented. This is ASGI source evidence, not socket/native/CLI acceptance
++or the full #86 static-serving contract: HEAD, ETag, Last-Modified, single,
++suffix, multi and invalid Range behavior, Windows descriptor/reparse parity,
++shared/object providers, quotas and GC remain required. Production identity
++provider configuration and actual Canvas producer/consumer execution still need
++separate integration; a retrievable private-service output does not authorize
++changing a template's `artifact: null` without its own end-to-end proof.
++
++The private filesystem provider requires Linux descriptor features and trusted
++kernel procfs, borrows a verified service-owned root FD, and measures/seals actual
++bounded bytes. It rejects special objects through an O_PATH pin before any
++read-capable open. Its root must be separate from legacy artifact/static mounts.
++It is not a hostile-tree snapshot, public HTTP Range/HEAD service or Windows
++runtime implementation. Initial bounds are 256 KiB inputs, 1 MiB result envelope,
++64 output records per Run (including aborted records), 64 MiB per object,
++64 KiB chunks, leases up to one hour and retention up to one year. Full quotas,
++GC, output-secret policy, compiler/provider admission, production actor/provider
++wiring, adapters and Canvas execution integration remain separate gates; this
++private slice does not accept whole #83/#86/#129/#127.
++
+ ## Verification matrix
+ 
+ The dependency-free `devutils.runtime_conformance` module is the repository's
+@@ -125,6 +207,14 @@ selected runtime kind or required features. Its tests also verify changed
+ subjects and missing plans fail closed; adapters must build richer receipts on
+ top of these primitives rather than implement a second admission gate.
+ 
++For assembled output-transport denials, count provider-open attempts before
++entering the reader context; a list of successfully opened readers alone cannot
++prove that storage was never touched. Take complete logical database and owned
++filesystem snapshots after legitimate publication or grant changes, then compare
++them across each request. Compare SQL rows rather than physical SQLite bytes:
++the resolver takes idempotent writer locks even for authorized reads. HEAD 405
++and Range 416 prove rejection, not method support or persisted-grant resolution.
++
+ Contract tests must cover one collapsed and one split execution with an RCC
+ adapter and one non-RCC adapter; retry/Attempt linkage; RCC local/provider/
+ cold/warm preparation; admission off/shadow/enforce and exact-subject
+diff --git a/docs/skills/repository-operations.md b/docs/skills/repository-operations.md
+index 04b9cd54..6758d21a 100644
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -1699,6 +1699,14 @@ when the agent has no plugin installer. RCC owns the outer toolchain, while
+ Poetry owns package dependencies and lockfiles; a failed setup is not permission
+ to replace that boundary with host pip/Poetry installations.
+ 
++Cloud launchers that reuse a prepared RCC environment must bind its reviewed
++`ROBOCORP_HOME` in the same process environment that launches RCC. Apply the
++managed activation profile there or pass its reviewed settings explicitly, and
++verify the pinned executable and allowlisted home/cache values before launch.
++An absolute pinned RCC executable can still select the default home and trigger
++fresh setup when those settings are absent. Preserve that setup failure; a
++terminal gateway failure before pytest collection does not qualify a test gate.
++
+ Copilot's reserved `copilot-setup-steps` job installs the same checksum-pinned
+ Josh RCC Linux asset as the primary developer-toolkit matrix, persists its PATH
+ and writable `ROBOCORP_HOME` through GitHub environment files, and runs manifest
+@@ -1979,6 +1987,36 @@ the worker setting and outer timeout before execution.
+ 
+ ## RCC Environment Artifact execution
+ 
++An isolated, sequential RCC qualification may share only its once-owned `pkgs`
++download cache between publication and staged execution for the same source and
++binary tuple. Admit the operator configuration, root marker, ownership, modes,
++containment and publication receipt before mounting it; reject unknown or
++cross-version state. The first publication requires an empty package cache.
++Keep each case's Holotree, artifacts, provider and runtime origins separate.
++The staged case then uses the publication's warm package cache; this is not
++cold-registry or cold-install qualification. Identical retained cache bodies
++can identify duplicate storage, but do not prove a future peak or compatibility.
++Keep capacity thresholds and strict cleanup admission unchanged.
++
++A private qualification runner must bind the current source and fixture bytes,
++generate the isolated cache configuration itself, and create its seven-key
++ownership marker exclusively with mode `0600`. Refuse inherited cache selectors.
++A preserved receipt resolved from an approved archive retains its original
++path, hash and failure scope; that alias never supplies current-source acceptance.
++Require current full-source and independent configuration admission before
++root authorizes a new once-owned version attempt; previous source gates do not
++qualify a cache or source successor.
++
++RCC's private client home has a different permission contract from the
++supervisor-owned state root and package cache. The retained RCC revision's
++package initialization recursively applies mode `0750` before a `--version`
++probe returns. Admit only the explicitly reviewed `0700`/`0750` client-home
++modes with the exact owned path, owner and group; keep the state root and
++package cache at `0700` and the identity marker at `0600`. Never chmod an
++input to make admission pass. Bind observed permissions and native-source
++provenance separately: a modified build does not establish exact source
++equivalence, and a rejected home proves no publication, Action or lease result.
++
+ Managed spec-v2 Action packages use the provisional RCC runtime adapter only
+ when `ACTIONS_RUNTIME_RCC_PROVIDER` or `ACTIONS_REAL_RCC_ARTIFACT_TEST`
+ explicitly opts into artifact mode. Without either opt-in, legacy bootstrap
+@@ -2023,6 +2061,45 @@ recorded. Any improvement must retain the same deadline and exclusive
+ Popen wrapper wait ownership, with live, zombie and observation-error
+ states kept distinct.
+ 
++Record the exact provider-generated digest, Action result, and wrapper receipt
++from that run; do not reuse a digest from another disposable provider root. A
++mocked parser or RCC health/version check is not acceptance evidence.
++RCC v18.19.2 materializes `env exec` children with the artifact as their
++current directory, so import/discovery must pass the package source directory
++explicitly to `actions metadata`; `PYTHONPATH` alone does not make discovery
++scan the source tree. Record Action execution and RCC wrapper lifecycle as
++separate outcomes. An Action may return `PASS` while intentional pool
++termination produces `status: failed`, `exitCode: -1`, and
++`reason: child exited non-zero`. That receipt remains a wrapper lifecycle
++failure even when artifact identity, verification, and lease identity validate.
++For reload/recovery receipts, retain the Action Server `Popen` owner and poll
++its return code before any stop call; record that natural-exit observation
++separately from RCC wrapper receipts. `ActionServerProcess.stop()` delegates to
++`Process.stop()`, whose process-tree helper uses `psutil.wait_procs`; that helper
++can consume the direct child's wait status, so a later `Popen.poll()` value of 0
++is not natural-exit evidence. A normal `start_server` return produces CLI exit
++0. The
++explicit `/api/shutdown/` endpoint schedules `_thread.interrupt_main()` as a
++response background task, after the final ASGI response-body send completes;
++`_main_retcode` catches that `KeyboardInterrupt` and returns 1. Count exit 1 as
++the expected controlled API-interrupt outcome only when the receipt also proves
++that shutdown request and its successful 2xx response. An observed natural exit
++0 is acceptable only when captured before forced cleanup. Missing natural exit,
++an unsuccessful shutdown request, or unexplained exits such as 1 or -11 fail
++the shutdown receipt. If shutdown times out or the request fails, record
++`forced_stop_used: true`; the stop fallback is hygiene only and cannot replace
++the captured natural result. Preserve any post-stop `Popen.poll()` value as
++forced-cleanup-only evidence, never as natural exit. A `stop()` return is not
++process-exit evidence, and a captured descendant set only reports that
++observation; it does not prove complete tree reaping.
++The assembled route's service-free ordering controls require completed response
++start and final body sends before interruption; denied requests and failed
++sends must not interrupt. A server access-log status 200 does not prove that
++the client received the response. Keep client response delivery, natural exit
++and cleanup predicates separate; passing checkout-byte tests establishes no
++shutdown cause. ASGI send ordering still requires fresh platform client and
++natural-exit acceptance, and does not guarantee network delivery.
++
+ The bounded process-tree result distinguishes wrapper reaping, observed live
+ descendants, and zombie descendants. A zombie is reported and makes
+ `descendant_reap_complete` false, but does not hold execution capacity forever;
+@@ -2333,6 +2410,50 @@ with `verification.valid: true`. After the provider's digest-addressed
+ manifest was tampered with, a fresh consumer received a provider HTTP 500 and
+ the adapter rejected the acquisition; the manifest was restored afterward.
+ 
++When verified archival removes a historical receipt's expanded path, retain its
++original binding and use an explicitly reviewed mapping to the exact archive
++member. Recheck archive bytes, unique member digest and metadata, and the original
++failure status. Do not recreate the old path or relabel its identity. This alias
++proves preservation; it does not qualify a failed execution.
++
++Curate a successor by exact body identity and declared scope, not filename or
++timestamp. Copy only reviewed safe summaries and patches; a summary's binding
++to private API, provider, process-census or log bytes does not authorize copying
++that payload. Retain failed and conditional predecessors separately from
++accepted successors, including their original identities and remaining holds.
++
++Before adopting a frozen command packet, verify every file path consumed by its
++constructor, launcher, guards and body, including paths stored only in its
++configuration. Hashing the listed bindings does not prove that a separately
++named source inventory exists or belongs to the intended commit and tree.
++Preserve a rejected packet and use a named successor with a checked dependency
++closure; do not backfill a copied filename or relabel the earlier packet.
++
++For completed pytest scratch, retain the exact root identity and its own
++completion evidence; an RCC recycle marker is not that proof. Names, timestamps,
++UID and an absent lock establish correlation, not exact launch origin. Record
++inaccessible process references as unknown. Bind two complete root/member
++inventories and verify nanosecond mtimes through exact PAX fields when retaining
++them. Bound compressed writes and reserve index/verification capacity before
++release. Overflow, changed membership or incomplete verification must preserve
++the original tree; save the complete private index before removing only the root.
++
++Give every preservation-sensitive pytest invocation its own unique, absent
++`--basetemp` outside the shared numbered pytest parent, and retain policy `all`.
++The installed pytest default retains three numbered roots and registers cleanup
++at process exit; a later invocation can delete an earlier completed test root.
++Explicit basetemp bypasses that numbered-root cleanup, but pytest removes an
++existing explicit target before using it. Never reuse a retained target or share
++one basetemp setting across sequential Toolkit and Runtime invocations. Policy
++`none` increases deletion; it does not disable cleanup. Before attributing a
++vanished root, bind recorded commands and installed cleanup source, distinguish
++scratch loss from independently retained logs and source receipts, and keep
++unobserved process attribution and broader evidence references unknown.
++
++An execution release must bind the exact proposal and scoped review decision.
++A source-only GO cannot admit a full run through a common success prefix.
++Require the reviewed parent, gate and postcheck commands before release.
++
+ ## Pull Request Triage
+ 
+ Resolve both the local `origin` repository and any `upstream` repository before listing pull requests. Compare open PR head/base branches and changed-file intersections against the intended local base; do not classify a PR as superseded from its title or a different repository's PR list alone.

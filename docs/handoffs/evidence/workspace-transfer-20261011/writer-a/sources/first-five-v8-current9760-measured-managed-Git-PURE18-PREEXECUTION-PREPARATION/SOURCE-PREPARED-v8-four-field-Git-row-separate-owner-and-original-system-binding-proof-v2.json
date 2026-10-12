@@ -1,0 +1,49 @@
+{
+  "18controls_unchanged": {
+    "bytes": 17042,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/test_first_five_v8_current9760_measured_managed_Git_PURE18_SOURCE_PREPARED.py",
+    "sha256": "0ee011db2e7edec7564ef05fc3ed610bb6f15483f52bd9ececb593c44aa5f096"
+  },
+  "Git_binding_four_keys_exact": {
+    "bytes": 3899192,
+    "mode": "0o775",
+    "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/git",
+    "sha256": "cd36778ef52d80fce1e3944b7f334460bec0921597dcf20d3d50d87d7560a588"
+  },
+  "bound_rows_now": 108,
+  "launcherASTinverse_one_owner_lookup_literal_object": true,
+  "measured_Git_UIDGID_separate": {
+    "gid": 1000,
+    "uid": 1000
+  },
+  "old_full_proof": {
+    "bytes": 29295,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/SOURCE-PREPARED-v8-managed-Git-actual-path-owner-and-minimum-inverse-AST-proof.json",
+    "sha256": "847202be95a7bd09b706ef5cb5a859b90ae3020697215ac25306c08482f7abc5"
+  },
+  "original98_rows_retained": true,
+  "original_system_Git_bound_in_loop": {
+    "bytes": 4082768,
+    "mode": "0o755",
+    "path": "/usr/bin/git",
+    "sha256": "356db14e102d68a1a37d8a1ac577dfd678d45d46e92f468bef8b7154e7bfdc60"
+  },
+  "original_v8_constructions": {
+    "config": {
+      "bytes": 40148,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v8_current9760_measured_managed_Git_PURE18_inputs_NOTRUN.json",
+      "sha256": "5a5dbe3453a8ea23ddba10c054dddfda54e2a390972f052eb961ab012315fe36"
+    },
+    "disposition": "UNANNOUNCED_SOURCE_CONSTRUCTION_NOT_EXECUTABLE_ADMITTED",
+    "parent": {
+      "bytes": 12654,
+      "mode": "0o444",
+      "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v8_current9760_measured_managed_Git_PURE18_ROOT_ONLY_SOURCE_PREPARED.py",
+      "sha256": "0ea7d1bf6953b3626f4b8d33b151ab488e030ac35bf999a9a8dd6d49a698ec72"
+    }
+  },
+  "tests_imports_BINARY_invocation": "NOT_RUN"
+}

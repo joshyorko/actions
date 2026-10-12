@@ -1,0 +1,6 @@
+*** docs/skills/repository-operations.md (proposed beside capped preservation/index durability guidance)
++Verify that the actual progress-receipt constructor uses the capped, fsynced
++writer; defining that writer alone does not establish its use. Bind the
++executable full-index address and exercise combined full/progress/alias-index
++overflow before any write or removal. Keep earlier preservation results under
++their original implementation and measured byte limits.

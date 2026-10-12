@@ -1,0 +1,62 @@
+{
+  "status": "PASS_READONLY_ACTIVE_V2_ALL_SELECTED_PHYSICAL_PATHS_NO_CRITICAL_ROW_OVERLAP",
+  "active_qualified_config": {
+    "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/FROZEN-current8d49-control3-qualified-V8-config-v2.json",
+    "bytes": 760693,
+    "sha256": "a209cc117db4d17a7383ba519abdff064211960aa0b8a88ddf32569fef322f9f",
+    "mode": "0o600"
+  },
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "four_root_original_owner": {
+    "path": "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v2/OWNERFINAL-four-completed8d49-roots-capped-storage-PREEXECUTION-v2.json",
+    "bytes": 9313,
+    "sha256": "f6cf65eb7dba1500609bee28a9adc8fdda11bf1487e8dded84b62106cde5b9e7",
+    "mode": "0o400"
+  },
+  "first_config_scan": "Originala3e191 retained historical; this named supplement separately binds exacta209cc activeV2",
+  "selected_physical_roots": {
+    "ToolkitTest": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/source-LIGHT-v3-basetemp-once/ToolkitTest",
+    "original27-log": "/workspace/engineering/rcc-current8d49-private-V8-content-preparation/pure-count-alias-GREEN-owned-once/robocorp-log",
+    "fixture42-GREEN-log": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/pure-fixture-logger-GREEN-owned-once/robocorp-log",
+    "fixture51-TEMPORAL-log": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/pure-fixture-logger-GREEN-TEMPORAL-owned-once/robocorp-log"
+  },
+  "all_four_selected_roots_nosymlink_exact_resolved_path": true,
+  "scanned_sections": {
+    "active_v2_all_absolute_binding_rows": 304,
+    "original237": 237,
+    "prepared30": 30,
+    "native1192": 1192,
+    "source1440": 1440
+  },
+  "total_scanned_rows_including_duplicates": 3203,
+  "rows_with_checked_64hex_digest": 3081,
+  "lexical_and_resolved_containment": "100_percent_selected_paths_against_every_scanned_row",
+  "critical_overlap_count": 0,
+  "original237_config_binding_verified": {
+    "path": "/workspace/engineering/rcc-compatibility-current-e4ff-qualified-config-successor/FROZEN-current-e4ff-control3-owned-cache-SOURCE-QUALIFIED-v4.json",
+    "bytes": 797131,
+    "sha256": "1411879501e1ef2bd5aec7fbf9627457aa840badc8e86be980c25b207ee9d5dc",
+    "mode": "0o600"
+  },
+  "prepared30_current_digests_verified": true,
+  "active_temporal_shared_output_body_mode_UIDGID_device_inode_mtime_bindings_verified": 2,
+  "payload_scope": "Container/prepared30/shared2 identities verified here; other payloads remain enforced by before+alwayspost current-source guard, not newly qualified by containment scan",
+  "source_native_acceptance": "UNCHANGED",
+  "archive_removal_native_gates": "NOT_RUN",
+  "f6cf_f113_unchanged": true,
+  "retained_constructor_format_failure": {
+    "path": "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v2/retained-active-config-supplement-row-format-constructor-FAIL.json",
+    "bytes": 268,
+    "sha256": "b116de5828812ec16b1ae3d5dfc566dd77891eabe70a1b7a989504ba89eef353",
+    "mode": "0o400"
+  },
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "durable_learning_captured": "Existing e151 and exact completion lesson reused; every new active config requires its own bound containment scan",
+    "evidence": "a209cc activeV2 exact bytes plus complete original237/native1192/prepared30/source1440 and four physical roots",
+    "stale_or_ambiguous_guidance_removed": "a3e191 is historical rather than activeV2",
+    "remaining_uncertainty": "Containment is not universal quiescence or operation success; compression/fresh floor remain pending"
+  },
+  "upstream_disposition": "none"
+}

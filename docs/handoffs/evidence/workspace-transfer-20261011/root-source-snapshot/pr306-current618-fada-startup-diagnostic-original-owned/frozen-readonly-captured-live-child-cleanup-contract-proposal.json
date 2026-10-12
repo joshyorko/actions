@@ -1,0 +1,171 @@
+{
+  "schema": "captured-live-child-cleanup-source-contract-readonly-design-v1",
+  "decision": "HOLD_PRODUCTION_PATCH_NO_EXECUTED_SERVICE_FREE_DEFECT_CONTROL_OR_HOSTED_CAUSE_PROOF",
+  "original_snapshot_owner": {
+    "path": "/workspace/engineering/pr306-current618-fada-startup-diagnostic-original-owned/OWNERFINAL-original306-fada-startup-diagnostic-artifact-proof.json",
+    "bytes": 31201,
+    "sha256": "bbb30a3c7f258c681e9c320c07b945c41501585f9e7e477e95ef879fbd5d4fb3"
+  },
+  "source_checkout": "522b7bc6e7e9207dac0c745b49d90907ecdf3080",
+  "source_evidence": [
+    {
+      "path": "action_server/src/actions/server/_common/process.py",
+      "Git_body_sha256": "f432e65a488bf06862e548dc45342d3c1fb5ea7fcc26f6371d98aae124ffc082",
+      "functions": [
+        {
+          "name": "force_kill_process_tree_until",
+          "line": 464,
+          "end_line": 580,
+          "AST_sha256": "4daa20a96616417a162184172d77db8902ab5a10f21e2bed0dfc12368460d3bc"
+        },
+        {
+          "name": "start",
+          "line": 217,
+          "end_line": 239,
+          "AST_sha256": "2060d66167fefa35e3da188dbc1219f4e3f2c7c2909d048c1100b60696ef19e5"
+        },
+        {
+          "name": "stop",
+          "line": 249,
+          "end_line": 258,
+          "AST_sha256": "1957bd0a6347b3d6afb0479c3f7e890c7e534154e8563fe6703bff178fcb7092"
+        },
+        {
+          "name": "execution_stopped",
+          "line": 442,
+          "end_line": 449,
+          "AST_sha256": "7be83120b6602f7793998104382b985e60e878401f27aee860426737df8a76d0"
+        },
+        {
+          "name": "descendant_reap_complete",
+          "line": 452,
+          "end_line": 454,
+          "AST_sha256": "4aafb4c7e78c3b0c29e2cdd937d8c36fc39e55f697e14076064148568b253664"
+        }
+      ]
+    },
+    {
+      "path": "action_server/src/actions/server/_robo_utils/process.py",
+      "Git_body_sha256": "847cf543ded2a745416e193355c810c12daccf9e81ecc344465f328af1937aa7",
+      "functions": [
+        {
+          "name": "start",
+          "line": 111,
+          "end_line": 136,
+          "AST_sha256": "17f020e281de3d9ff0e9c34f6401a23a0a0c2523b9adb4b17ecdb64b6254558e"
+        },
+        {
+          "name": "_stop_and_reap_until",
+          "line": 138,
+          "end_line": 163,
+          "AST_sha256": "445573a843525ac833c981041b545c3e4c43b16d5aa6325835eda4e19e812b2c"
+        },
+        {
+          "name": "stop",
+          "line": 173,
+          "end_line": 182,
+          "AST_sha256": "1957bd0a6347b3d6afb0479c3f7e890c7e534154e8563fe6703bff178fcb7092"
+        }
+      ]
+    },
+    {
+      "path": "action_server/src/actions/server/_selftest.py",
+      "Git_body_sha256": "74fc0360481981311def7dad28ae716d4d001157059eae02df15a52b615ee5af",
+      "functions": [
+        {
+          "name": "start",
+          "line": 86,
+          "end_line": 240,
+          "AST_sha256": "75ac03e9e8ce82cb5f4f89feeaf6dc632ac4a34a134002e2ebcade0c60ff09d3"
+        },
+        {
+          "name": "stop",
+          "line": 242,
+          "end_line": 248,
+          "AST_sha256": "880beb75942edde61fd516637a6efc40395ed1ff1b7d661413ce6eaa4e4f9b31"
+        }
+      ]
+    },
+    {
+      "path": "action_server/tests/action_server_tests/native_startup_diagnostics.py",
+      "Git_body_sha256": "b365e561c79240146ed5ac8fb07735d095cab11a25dba038bd43cbf3d80bbee4",
+      "functions": [
+        {
+          "name": "start",
+          "line": 568,
+          "end_line": 639,
+          "AST_sha256": "9123b69ee3b007949450ab51ab62fff010f9b525c187ef52895db67f2841a57e"
+        }
+      ]
+    }
+  ],
+  "verified_contract": {
+    "selftest_startup_exception": "Preserves primary readiness exception; calls cleanup at monotonic()+20; adds incomplete note if execution_stopped false or host readers remain. Existing real failed receipt obeys this fail-closed reporting contract.",
+    "Process_stop_and_reap": "Reserves final2seconds for readers; passes deadline-2 to common captured-tree cleanup.",
+    "Process_stop": "Returns if wrapperalreadyexited; it is not used by the selftest startup-exception cleanup path, so changing stop cannot explain/improve this recorded call.",
+    "common_cleanup": "Snapshots descendants by(pid,creation_time), terminatescaptured descendants beforewrapper, waitsdescendants<=0.2 twice, Popen owns wrapper wait/reap throughremainingdeadline, then classifiescaptured descendants once.",
+    "strict_predicates": "execution_stopped requireswrapperreaped/no observedlive/errors andcomplete snapshot; descendant_reap_complete additionallyrequiresno zombies. Preserve all."
+  },
+  "observed_owned_PID_chain": {
+    "80": [
+      [
+        6676,
+        5448
+      ],
+      [
+        2132,
+        6676
+      ],
+      [
+        4980,
+        2132
+      ],
+      [
+        2024,
+        4980
+      ]
+    ],
+    "88": [
+      [
+        6676,
+        5448
+      ],
+      [
+        2132,
+        6676
+      ],
+      [
+        4980,
+        2132
+      ]
+    ],
+    "final_live_child_count": 1,
+    "final_surviving_PID": "UNAVAILABLE_NOT_IN_FINAL_OBSERVER_SCHEMA",
+    "no_discarded_or_unknown_descendant_reassigned": "Final one is an observed captured live child; exactidentity andothers outsidecapturedtree remainunavailable."
+  },
+  "conditional_minimal_improvement": {
+    "hypothesis": "A child killedasynchronously canremainlive duringtwo short waits but exitwithunusedoverall deadline afterwrapperisreaped. Current finalclassification couldreturnFALSEearly despiteavailablebudget. Originalreceipt doesnotrecord remainingdeadline/elapsed, so thisisnotestablishedforhostedfailure.",
+    "service_free_RED_plan": "Execute actual immutable force_kill_process_tree_until under deterministic fakeclock/psutil/Popen seams. One owned child hasstablePID+creationtime, terminate leavesitlive, kill schedulesitsabsence at0.75s, each initialwaitadvances0.2s, wrapperwait reapsquickly; explicit finaldeadline18s. Current resultshouldbe wrapperreapedTRUE/livechild/nonstopped whiletime<deadline andthe samechild wouldfinishinsideit. This is the proposed failingcontrol, not an executedresult.",
+    "minimal_GREEN_only_if_RED_demonstrates_defect": "Waitonly captured descendant handles against remaining SAMEtree deadline before finalclassification, afterPopenreapswrapper; do notplacewrapperinpsutilwait. Preserve recorded live/zombie/errors/snapshot predicates and20s outer/2s readersreservation. No extra source/startup/native deadline.",
+    "negative_controls": [
+      "Child remainslive throughdeadline:stillFALSE/livePID withno timeoutinflation",
+      "Zombie remains:executionstoppedanddescendantreapremainseparatelyclassified",
+      "Snapshotincomplete or terminate/kill/inspecterror:stillFALSE",
+      "Wrappernotreaped atdeadline:FALSE; Popenonlywaitowner",
+      "Passed capturedidentity PIDreused:mustnotkillnewunownedprocess",
+      "Zero remainingtime:boundedreturn,no furtherwait/retry",
+      "OriginalstartupTimeoutError survivessecondarycleanup note/error andreadersstilljoinwithin20"
+    ]
+  },
+  "alternative_if_RED_not_demonstrated": "No productionchange. Smallest test-onlydiagnostic wouldretain allowlisted final observedlive/zombie PID+creationtime membership andremainingtreebudget fromowned cleanup call; requiresseparate rootdesignauthorization, no rawcommands/env/URLs. Suchdiagnosticisnotan acceptance waiver.",
+  "source_tests_or_implementation_execution": "NOT_RUN_READONLY_PLAN_ONLY",
+  "no_source_changed_or_actual_retry": true,
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "Reuse accepted repository-operations first-readiness/actualcleanup observation scope and exact50ad originalcheckoutproposal; no sourceguide mutation.",
+    "Durable_learning_captured": "RecordedcleanupFAIL is not automatically a cleanup implementation defect: identifycallpath andavailabledeadline/capturedidentity beforepatch. The recorded failure correctly preserves strictFalse ratherthanfabricatingcleanupPASS.",
+    "Evidence": "Originalbbbsnapshot finalfields; sourceforcekill464-581/Process138-171/selfteststartup213-237 andoriginal522b sourceASThashes.",
+    "Stale_or_ambiguous_guidance_removed": "No fix of legacyProcess.stop earlyreturn for a callthatuses _stop_and_reap_until; no final survivor assignment toRCCPID4980 withoutretainedidentity; no whole20s remainingbudget assumption.",
+    "Remaining_uncertainty": "REDcontrolNOT_RUN, originalremainingbudget/survivorPID unknown, readinesscauseunknown/otherfourfailuresunsampled."
+  },
+  "Upstream_disposition": "none"
+}

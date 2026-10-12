@@ -1,0 +1,102 @@
+{
+  "all_tests_imports_compression_archive_removal_native": "NOT_RUN",
+  "blocking_current_state": [
+    {
+      "current_head": "00b1bb9974b73f2da65e49c9048774c84df286ba",
+      "current_tree": "2663e86b2344f9e056c3259653cb905a6d195599",
+      "expected_head": "00b1bb9974b73f2da65e49c9048774c84df286ba",
+      "expected_tree": "2663e86b2344f9e056c3259653cb905a6d195599",
+      "head_tree_match": true,
+      "path": "/workspace/engineering/pr307",
+      "private_status_binding": {
+        "bytes": 175,
+        "mode": "0o600",
+        "path": "/workspace/engineering/first-five-v6-current00b1-independent-PURE18-PREEXEC-review/pr307-original-readonly-Git-status.private.txt",
+        "sha256": "09304b0e287728164cd42a622abeb46ee0a77951c4a36af01d90928e646536f7"
+      },
+      "status_bytes": 175,
+      "status_sha256": "09304b0e287728164cd42a622abeb46ee0a77951c4a36af01d90928e646536f7",
+      "tracked_clean": false
+    }
+  ],
+  "bounds": {
+    "alwayspost_guard_cooperative_budget_seconds": 30,
+    "before_child_post_fallback_sum_seconds": 200,
+    "before_guard_cooperative_budget_seconds": 30,
+    "capture_and_activation_reserve_inside_outer_seconds": 40,
+    "inner_TERM_KILL_grace_seconds": 10,
+    "inner_TERM_seconds": 120,
+    "limits": "ROOT outer bounds complete admitted attempt. Cooperative per-read guards do not promise a kernel filesystem read cannot stall; external hard kill can prevent Python finally. ROOT outer must retain terminal even then. No native/RCC deadline changes.",
+    "outer_TERM_KILL_grace_seconds": 10,
+    "subprocess_parent_fallback_seconds": 140,
+    "whole_ROOT_outer_seconds": 240
+  },
+  "config_binding": {
+    "bytes": 27692,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v6_current00b1_managed_PURE18_inputs_NOTRUN_v3.json",
+    "sha256": "7da9e11d97f0a40bcc111caae69bd14ecec56e5dfb8fb2218601689b07c216ad"
+  },
+  "control_source_binding": {
+    "bytes": 17030,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/test_first_five_v6_current00b1_managed_PURE18_SOURCE_PREPARED_v3.py",
+    "sha256": "825bdd3b2c4bbded5a4615116ab680daff0b1e89373bb4ecf338f2df44c5725d"
+  },
+  "decision": "GO_FIRST_FIVE_V6_MANAGED_MACHINE18_SOURCE_ONLY_CURRENT_STATE_PREEXECUTION_HOLD",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_reused": "docs/skills/repository-operations.md existing current-source tuple/owner-before-after, real-consumer schema, measured origin, and actual machine-census versusAST count guidance reused",
+    "Durable_learning_captured": "Runtime result hooks and unique actualIDs can qualify counted controls; static count/order cannot. A correctly prepared current-head guard must refuse when the live branch becomes dirty or advances; preserve and name the retarget. Child finally and separately retained external postguard are distinct.",
+    "Evidence": "61 exact refs/82518method AST/real unittest hooks+parent census checks, root-source readback and private status snapshot; earlier sourcev4/v5 originals retained",
+    "Remaining_uncertainty": "No controls/imports run; future clean child/current tuple, ROOT envelope and real preservation authority remainHOLD",
+    "Stale_or_ambiguous_guidance_removed": "No source-ready\u2192executionGO on dirtycurrent00b1, no static18 count or child0 promotion, no historical policy source/config\u2192actual owner approval"
+  },
+  "independent_proof": {
+    "bytes": 24447,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v6-current00b1-independent-PURE18-PREEXEC-review/private-independent-v6-machine18-managed-and-current-source-guard-proof.json",
+    "sha256": "e626a9b761ce714fd72885d413ff75178da7c5de0d8a0cdcf2af91bd5322b6d1"
+  },
+  "launcher_binding": {
+    "bytes": 12477,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v6_current00b1_managed_PURE18_ROOT_ONLY_SOURCE_PREPARED_v2.py",
+    "sha256": "a07caffda9baab8a6755667569c8ed332aa8372eac12ed40b0d401af828d9d0c"
+  },
+  "named_successor_requirements": {
+    "bytes": 3542,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v6-current00b1-independent-PURE18-PREEXEC-review/minimal-v6-current-head-and-root-envelope-successor-requirements-NOTEXEC.json",
+    "sha256": "15622792f71d95eb6ed6ba04866617e62d057a3b17a60dd574aeec09ef740be7"
+  },
+  "owner": {
+    "bytes": 18435,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/OWNERFINAL-first-five-v6-current00b1-managed19-complete-PURE18-PREEXECUTION-NOTRUN.json",
+    "sha256": "36ed9528b7b6dc976d9db2b9887bb495e811236ea583eddac792bc9f8d567933"
+  },
+  "preexecution_review": "HOLD_NO_ACTUAL_CONTROLS_AUTHORIZATION",
+  "prepared_scope": {
+    "PATH_additional_identity": true,
+    "cached_stdlib_origin_count": 5,
+    "input_refs": 61,
+    "managed_allowlist": 18,
+    "method_AST_exact_v5": true,
+    "method_count": 18,
+    "native_original_rows_guarded": 1192,
+    "preservation_driver_unchanged": "63476/e717core16",
+    "source_rows_guarded": 1440
+  },
+  "remaining_holds": [
+    "Named current pr307 clean/head/tree packet and compatible source/preexec review",
+    "ROOT actual240 envelope/release/serialized capacity/external alwayspost adoption",
+    "Actual18 complete machine outcomes NOT_RUN; actual first-five archive permission/manifest/inactiveapproval absent",
+    "No native/RCC/real-host-memory/private/release qualification"
+  ],
+  "reviewer_execution": "Read-only stdlib AST/data/hash/Git; no prepared imports, tests, compression/removal/source mutation",
+  "schema": 1,
+  "source_limit": "Historical333 policy config still pinsc97 but is only pure-test input; v6 current source head guard cannot pass a dirty or advanced00b1 branch. Neither direct readonly snapshot nor PUREpass qualifies real environment inactivity or provenance.",
+  "source_review": "GO_REPAIRED_REAL_ROW_METHODS_UNCHANGED_AND_TRUE_RUNTIME_MACHINE_CENSUS",
+  "status": "INDEPENDENT_V6_PURE18_SOURCE_GO_DIRTY_OR_CHANGED_PR307_EXECUTION_HOLD",
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,33 @@
+--- /workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/test_controller_boundaries_SOURCE_PREPARED_v4_baseline_first_machine_census.py
++++ /workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/test_controller_boundaries_two_fresh_negative_fixtures_SOURCE_PREPARED_once2.py
+@@ -175,7 +175,13 @@
+         with self.assertRaises(AssertionError): self.admitted(wrong_tree=True)
+ 
+     def test_storage_changed_protected_body(self):
+-        self.fixture_admission(); self.admitted(); Path(self.cfg['physical_protected_bindings'][0]['path']).write_text('changed')
++        self.fixture_admission(); self.admitted()
++        original = self.cfg['physical_protected_bindings'][0]
++        raw = Path(original['path']).read_bytes()
++        poison = raw.replace(b'synthetic', b'poisoned!', 1)
++        assert poison != raw and len(poison) == len(raw)
++        fresh = self.file('protected-body-poison.json', poison, 0o400)
++        self.cfg['physical_protected_bindings'][0] = {**original, 'path': fresh['path']}
+         with self.assertRaises(AssertionError): self.admitted()
+ 
+     def test_storage_prepared_manifest_binding_mismatch(self):
+@@ -183,9 +189,12 @@
+         with self.assertRaises(AssertionError): self.admitted()
+ 
+     def test_storage_typed_PASS_owner_cannot_self_certify(self):
+-        self.fixture_admission(); self.admitted(); p = Path(self.auth['qualified_pure18_actual_binding']['path']); x = json.loads(p.read_bytes()); x['raw_status'] = 'SPOOFED'
+-        self.auth['qualified_pure18_actual_binding'] = self.file(p.name, x); self.refresh_release()
+-        with self.assertRaises(AssertionError): self.admitted()
++        self.fixture_admission(); self.admitted()
++        original = self.auth['qualified_pure18_actual_binding']
++        x = json.loads(Path(original['path']).read_bytes()); x['raw_status'] = 'SPOOFED'
++        self.auth['qualified_pure18_actual_binding'] = self.file('typed-derived-owner-poison.json', x, 0o400)
++        self.refresh_release()
++        with self.assertRaisesRegex(AssertionError, '^TYPED_PURE18_OWNER_NOT_DERIVED_FROM_ORIGINALS$'): self.admitted()
+ 
+     def test_private_binding_regular_mode_and_symlink(self):
+         row = self.file('private-baseline.json', {'ok': True}, 0o600); CONTROLLER.private(row, 0o600)

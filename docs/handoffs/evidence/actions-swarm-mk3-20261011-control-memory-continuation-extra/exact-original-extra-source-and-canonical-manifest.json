@@ -1,0 +1,57 @@
+{
+  "extra_canonical_dispositions": {
+    "05674": "REUSE_EXECUTABLE_ADDRESS_CLOSURE_WITH_TWO_CONFIG_BINDING_LINES",
+    "8366": "ADOPT_SCOPED_DEFAULT_BACKEND_FD_GENERATION_LESSON"
+  },
+  "extra_copies": [
+    {
+      "bytes": 4874,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-control-memory-continuation-extra/01-OWNERFINAL-independent-control-memory-continuation-safe-copy-canonical-application-GO.json",
+      "scope": "Historical original checkpoint or prepared default-backend source, no execution/adoption promotion",
+      "sha256": "ce18324a27da460e7fa97fa6c4ee9edcf4de38ecba1017c29f9744b432f52587",
+      "source": "/workspace/engineering/control-memory-checkpoint-independent-application-review/OWNERFINAL-independent-control-memory-continuation-safe-copy-canonical-application-GO.json",
+      "source_mode": "0o400"
+    },
+    {
+      "bytes": 10628,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-control-memory-continuation-extra/02-OWNERFINAL-current8d49-real-default-descriptor-walk-35-controls-SOURCE-PREPARED-NOTRUN.json",
+      "scope": "Historical original checkpoint or prepared default-backend source, no execution/adoption promotion",
+      "sha256": "e7954c3bc19374991213dd70fff3e64d2f7971e84c1c74fa573aee75f16ec7d5",
+      "source": "/workspace/engineering/rcc-current8d49-default-descriptor-walk-controls-PREPARED-NOTRUN/OWNERFINAL-current8d49-real-default-descriptor-walk-35-controls-SOURCE-PREPARED-NOTRUN.json",
+      "source_mode": "0o400"
+    },
+    {
+      "bytes": 10081,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-control-memory-continuation-extra/03-OWNERFINAL-independent-current8d49-default-descriptor19functions35cases-SOURCE-prepared-GO.json",
+      "scope": "Historical original checkpoint or prepared default-backend source, no execution/adoption promotion",
+      "sha256": "d3986dbc2335d3655fc204e4702c0dd7a715793dc91072f928cc2752e076506f",
+      "source": "/workspace/engineering/rcc-current8d49-default-backend35-independent-SOURCE-review/OWNERFINAL-independent-current8d49-default-descriptor19functions35cases-SOURCE-prepared-GO.json",
+      "source_mode": "0o400"
+    },
+    {
+      "bytes": 21758,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-control-memory-continuation-extra/04-OWNERFINAL-defaultbackend35-concrete-managed-pure-PREEXEC-NOTRUN.json",
+      "scope": "Historical original checkpoint or prepared default-backend source, no execution/adoption promotion",
+      "sha256": "4514bedc74aad1c01ce891338c2b991ddc420331addce205e05f34102e3340e3",
+      "source": "/workspace/engineering/rcc-defaultbackend35-concrete-PREEXEC-NOTRUN/OWNERFINAL-defaultbackend35-concrete-managed-pure-PREEXEC-NOTRUN.json",
+      "source_mode": "0o400"
+    },
+    {
+      "bytes": 15829,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-control-memory-continuation-extra/05-test_default_cgroup_descriptor_walk_NOTRUN.py",
+      "scope": "Historical original checkpoint or prepared default-backend source, no execution/adoption promotion",
+      "sha256": "e5744b96096a749ad1b0287743cf95fcf98a6848c5b8d82f9434a1fba6fbe09f",
+      "source": "/workspace/engineering/rcc-current8d49-default-descriptor-walk-controls-PREPARED-NOTRUN/test_default_cgroup_descriptor_walk_NOTRUN.py",
+      "source_mode": "0o400"
+    }
+  ],
+  "initial77_canonical_review": "ce18324a27da460e7fa97fa6c4ee9edcf4de38ecba1017c29f9744b432f52587",
+  "new_guide": {
+    "bytes": 254878,
+    "sha256": "48a613c8652c53e4d2692b256b68697b3b86e725dc9d2aba4058fba7a075748d"
+  },
+  "original36_manifest_sha256": "91703bb9cdd4cf616f00bd8e506b6dd9bc8228b10c707f142ef872575cfafeed",
+  "parent": "843cb16dc071fc764f11f1e0b3b07432dcd04a7d",
+  "schema": 1,
+  "scope": "No tests/native/backend adoption; original source/receipt bytes retained"
+}

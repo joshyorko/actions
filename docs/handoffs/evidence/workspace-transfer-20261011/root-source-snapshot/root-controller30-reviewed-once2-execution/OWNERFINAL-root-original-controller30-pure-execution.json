@@ -1,0 +1,38 @@
+{
+  "actual_preservation": "NOT_RUN",
+  "elapsed_seconds": 0.5776203699933831,
+  "external_post": {
+    "bytes": 900,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-controller30-reviewed-once2-execution/external-always-post-envelope.json",
+    "sha256": "9a4f62ab2f07e8f783f735eeac790cedfcb8810f24389849ae72a168a5fb8f0d"
+  },
+  "native": "NOT_RUN",
+  "release": {
+    "bytes": 1220,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-controller30-reviewed-once2-execution/root-one-controller30-pure-once2-release.json",
+    "sha256": "c9fe1f0dd80ef8acfc4ab814abb6a93f612a207654509e0cfe4a91e4d0c46500"
+  },
+  "returncode": 0,
+  "review": {
+    "bytes": 11755,
+    "mode": "0o400",
+    "path": "/workspace/engineering/controller30-two-fresh-negative-once2-independent-PREEXEC-review/OWNERFINAL-independent-controller30-two-fresh-negative-once2-SOURCE-PURE-PREEXEC-GO.json",
+    "sha256": "7735a0492f37aecde086f4d1d85a11b9046b42cb3c583e601b2c1524b3474a2c"
+  },
+  "schema": 1,
+  "status": "PASS_PENDING_INDEPENDENT_ORIGINALS",
+  "stderr_binding": {
+    "bytes": 0,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-controller30-reviewed-once2-execution/original.stderr.private",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout_binding": {
+    "bytes": 0,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-controller30-reviewed-once2-execution/original.stdout.private",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "candidate_sha": "ba85aac7324ea4463bfba8c5f8586e27706dc2fe",
+  "candidate_tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f",
+  "native_build_source_sha": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+  "native_build_source_tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f",
+  "workflow_run_id": "38098225250",
+  "workflow_run_attempt": "1",
+  "native_artifact_id": "11686643166",
+  "native_artifact_size": 59410740,
+  "native_artifact_sha256": "0905c4734d6b636a5a465e0a958cf8bc4521b5047a68da473830b95821b7c8c0",
+  "native_artifact_archive_hash_checked": true,
+  "native_byte_verification_receipt_sha256": "07b6799026a26ec985d0cf7835b3fddd2105304c09d4102ed69c51f9d5c8c2ff",
+  "resource_history_test_blob": "534e51afbc75b4d3ce473dee37d7ac00d52dbc92",
+  "manifest_sha256": "70405e6e831066a37631c7a63045010fcbc8b3c928a6a22ff5130467c3ad9d44",
+  "inventory_sha256": "154aeb29249db79a32392124a3b71a8ac325c0bdaeda1bbc2e7445e96ffc7fdf",
+  "package_tree_sha256": "739838962d9d29f873932e13d2598d51ebba58b0f97c2c52fff8550004f06ae0",
+  "embedded_files_sha256": "576d6cb8e5a8637dcfd82f675384d638736509541a0e10877420151b61c4786b",
+  "binary_sha256": "067a27c24b55690410beeb1b95e97fb098edf8e02779b36b69bbead2227433fb",
+  "binary_path": "/home/runner/work/_temp/frozen-native-package/dist/action-server/action-server"
+}

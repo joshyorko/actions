@@ -1,0 +1,60 @@
+{
+  "original_helper": {
+    "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/verify_dakota_rcc_acceptance.py",
+    "bytes": 74274,
+    "sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659"
+  },
+  "changed_functions": [
+    "run_owned_process",
+    "_reap_adopted_children",
+    "_supervisor_main"
+  ],
+  "added_functions": [
+    "_owned_identity_census"
+  ],
+  "unchanged_functions": [
+    "Deadline",
+    "ProcessTreeCleanupError",
+    "child_environment",
+    "resolve_poetry",
+    "terminate_process_tree",
+    "_supervisor_children",
+    "_process_is_live",
+    "_proc_descendants",
+    "_fallback_reap_after_error",
+    "_stop_supervised_processes",
+    "capture_process_tree",
+    "refresh_process_tree",
+    "stop_runtime_server",
+    "wait_for_process_tree_reap",
+    "classify_wrapper_exit",
+    "_source_root",
+    "_parser",
+    "_readline_with_timeout",
+    "_provider_command",
+    "start_provider",
+    "UnavailableProviderProbe",
+    "build_candidate_wheels",
+    "sha256_file",
+    "source_revision",
+    "write_evidence",
+    "record_supervisor_cleanup_failure",
+    "acceptance_status",
+    "classify_zero_provider_requests",
+    "sanitize_diagnostic_output",
+    "run_acquire_diagnostic",
+    "_verify_rcc",
+    "_sanitize_runtime_receipt",
+    "_run",
+    "require_supported_platform",
+    "_cli_platform_is_supported",
+    "main"
+  ],
+  "execution": "NOT_RUN",
+  "qualification": "HOLD until real-function boundary controls, source/helper admission, current before/always-post and distinct ROOT release",
+  "remaining_gaps": [
+    "Exception/timeout owned_cleanup_observations propagation not yet wired; original primary remains untouched.",
+    "Pre-stop snapshots plus final uncapped enumeration do not establish complete lifetime descendant ownership; the explicit completeness flag stays False.",
+    "A provider termination helper currently returns None; final tree result must be separately observed or exposed before full provider cleanup admission."
+  ]
+}

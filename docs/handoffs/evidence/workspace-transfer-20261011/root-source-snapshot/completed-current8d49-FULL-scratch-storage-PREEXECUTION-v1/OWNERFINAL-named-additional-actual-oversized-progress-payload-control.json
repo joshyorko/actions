@@ -1,0 +1,35 @@
+{
+  "FAIL": 0,
+  "PASS": 1,
+  "actual_control": {
+    "bytes": 389,
+    "mode": "0o400",
+    "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/actual-oversized-progress-payload-control.json",
+    "sha256": "80f288524d7eeb8c7ce495e7e9243eae97acaaeacb41ebe5150f071444129809"
+  },
+  "control_source": {
+    "bytes": 1680,
+    "mode": "0o600",
+    "path": "/tmp/control-current8d49-FULL-oversized-progress-payload-once.py",
+    "sha256": "53e2624a4eb9cd54fbdc41afdf2e28e874231792daece524560dea11025f6661"
+  },
+  "fixed_failure": "PRIVATE_INDEX_CAP_EXCEEDED",
+  "oversized_encoded_input_bytes": 16777234,
+  "proposal_launch_release_protocol": "UNCHANGED_BINDS_ORIGINAL4e339",
+  "schema": "NAMED_ADDITIONAL_ACTUAL_OVERSIZED_PROGRESS_PAYLOAD_CONTROL",
+  "scope": "One extra actual existing writer call for root-requested standalone oversized payload, in addition to four prior baseline/combined-index/filename controls; no product/archive/remove/source/native execution",
+  "target_created": false,
+  "unchanged_frozen_executable_proposal": {
+    "bytes": 10618,
+    "mode": "0o400",
+    "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/OWNERFINAL-one-completed-current8d49-FULL-scratch-capped-storage-PREEXECUTION-v1.json",
+    "sha256": "4e339c963a7205f4b566b930f65663d365f894ca5c690895e18d4f55cfa0e124"
+  },
+  "unchanged_frozen_owner": {
+    "bytes": 5715,
+    "mode": "0o400",
+    "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREEXECUTION-v1/OWNERFINAL-one-completed-FULL-storage-PREEXECUTION-with-actual-progress-closure-v2.json",
+    "sha256": "11b6ea14076ddb3875a22d5c22ef5b5ae668f0dbcf863a0d85cfd63edc28293d"
+  },
+  "upstream_disposition": "none"
+}

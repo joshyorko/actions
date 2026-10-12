@@ -1,0 +1,36 @@
+--- /workspace/engineering/rcc-stop-attempt-concrete-ROOT-caller-PREEXEC-NOTRUN/stop_attempt_caller_contract_v1_NOTRUN.py
++++ /workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/stop_attempt_caller_contract_v1_NOTRUN.py
+@@ -10,8 +10,8 @@
+ 
+ SOURCE='8d49d0865ad5ad27b2d4e325ec135212080625e8'
+ TREE='a80600809d373038ca76e445ba0b7b79bb7eeaa6'
+-BASE=Path('/workspace/engineering/rcc-stop-attempt-concrete-ROOT-caller-PREEXEC-NOTRUN')
+-CONFIG=BASE/'FROZEN-stop-attempt-concrete-ROOT-config-NOTRUN.json'
++BASE=Path('/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN')
++CONFIG=BASE/'FROZEN-stop-attempt-final-reserve-v2-ROOT-config-NOTRUN.json'
+ RELEASE=Path('/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-release.json')
+ CACHED='/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python'
+ 
+@@ -102,15 +102,19 @@
+         need(remaining>15,'STOP_CALLER_PRIMARY_DEADLINE_EXHAUSTED_NO_ADVANCE')
+         need(argv.count('120s')==1,'STOP_CALLER_ONLY_NOMINAL_TIMEOUT_TOKEN')
+         term_seconds=min(120,remaining-15)
+-        argv[argv.index('120s')]=f'{term_seconds:.6f}s'
++        timeout_token_index=argv.index('120s')
++        argv[timeout_token_index]=f'{term_seconds:.6f}s'
+         parent_seconds=min(parent_seconds,remaining)
+     else:term_seconds=120 if '120s' in argv else 900
+     out=root/name;out.mkdir(mode=0o700,exist_ok=False);directory(out)
+     with (out/'original.stdout.private').open('xb') as stdout,(out/'original.stderr.private').open('xb') as stderr:
+         try:
+             if primary_deadline is not None:
+-                parent_seconds=min(parent_seconds,primary_deadline-time.monotonic())
+-                need(parent_seconds>0,'STOP_CALLER_PRIMARY_DEADLINE_EXHAUSTED_NO_LAUNCH')
++                remaining=primary_deadline-time.monotonic()
++                need(remaining>15,'STOP_CALLER_PRIMARY_DEADLINE_EXHAUSTED_NO_LAUNCH')
++                term_seconds=min(120,remaining-15)
++                argv[timeout_token_index]=f'{term_seconds:.6f}s'
++                parent_seconds=min(parent_seconds,remaining)
+             result=subprocess.run(argv,cwd=root,stdout=stdout,stderr=stderr,timeout=parent_seconds,check=False)
+             observed={'returncode':result.returncode}
+         except BaseException as error:

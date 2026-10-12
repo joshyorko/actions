@@ -1,0 +1,22 @@
+--- a/docs/program/evidence/wave11/current-engineering-20261011/README.md
++++ b/docs/program/evidence/wave11/current-engineering-20261011/README.md
+@@ -221,7 +221,7 @@
+ PR #305 fixture successor `1e9c462f` is now independently reviewed by `1fc31354`
+ and normally pushed on its existing branch. Meaningful CRLF and incomplete-PID
+ controls pass after the test-only fixes; full source has 1,197 passes and 12 skips.
+-All production/probe/constants, 268+5 producer inputs, original native manifest,
++All production/probe/constants, the combined binding of 268 production inputs and five selected tests, original native manifest,
+ helpers and browser remain unchanged. Fresh hosted Windows/macOS and actual
+ forced-hang gates remain required. The V5 actual tuple stays bound to source3ec.
+ 
+@@ -274,8 +274,8 @@
+ backend/private gates remain required. PR300 waits for actual299 acceptance.
+ 
+ PR308 ordinary4ca431/tree3726 is9025/actual774, with full1155PASS13SKIP and
+-configured source gates. It preserves original verifier/tests and268+5 producer
+-inputs; independent source reviewdb8780 now accepts normal existing-branch push.
++configured source gates. It preserves original verifier/tests and the combined binding
++of 268 production inputs and five selected tests; independent source reviewdb8780 now accepts normal existing-branch push.
+ The verified current push retains old19greens as historical; fresh exacttuple
+ hosted admission remains required. PR309 is the next ordinary refresh. The two bounded source writers
+ now own309 refresh and306 Windows diagnostics. No new actual/native retry or

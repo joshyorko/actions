@@ -1,0 +1,52 @@
+{
+  "decision": "GO_ORIGINAL_COMPLETED_FULL_STORAGE_FAIL_PRESERVATION_REVIEW_ONLY_NO_RECOVERY_OR_NATIVE_QUALIFICATION",
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "durable_learning_captured": "Finite archive cap can fail safely during pre-stage while all original bytes remain. Partial compression output does not admit complete archive verification or recovery",
+    "evidence": "Original f535 private stderr fixed cap category, partial134201221 bytes, DEST empty/index absence and full15831 unchanged snapshot",
+    "exact_delta_proposed": "A compressed-cap stop during pre-stage preserves the original namespace but does not qualify its partial gzip. Keep the original failure and partial-byte binding; record full/progress index absence and verify the original snapshot before preparing a separately authorized successor.",
+    "remaining_uncertainty": "Alternative bounded storage method not reviewed; partial archive completion and current native functionality unqualified",
+    "stale_or_ambiguous_guidance_removed": "Do not equate retained partial gzip or source-post PASS with storage recovery or a complete CRC/footer check"
+  },
+  "failure": "Original compressed-write cap rejected next write; driver1/root1, original protected post PASS",
+  "limits": [
+    "No CRC/ISIZE/footer/full-TAR qualification of partial gzip",
+    "No full index, progress index or removal reached; original root exists and DEST empty",
+    "Partial archive and failures retained; no automatic retry or relocation",
+    "No storage recovery/native/source-runtime/release acceptance",
+    "Observed accessible handle profile and universal quiescence remain separate UNKNOWN",
+    "Further fallback preparation requires distinct owner, review and root authorization"
+  ],
+  "original_PREEXEC_GO": {
+    "bytes": 6221,
+    "mode": "0o400",
+    "path": "/workspace/engineering/completed-current8d49-FULL-storage-independent-PREEXECUTION-review/OWNERFINAL-independent-one-completed-current8d49-FULL-storage-PREEXECUTION-GO.json",
+    "sha256": "ab4a3c9eaac988997fb3bf58e5373015ccfe59f5ba6b96e7ab6b54fbda9ca579"
+  },
+  "original_one_attempt_no_retry": true,
+  "partial_archive": {
+    "bytes": 134201221,
+    "mode": "0o600",
+    "path": "/tmp/actions-completed-current8d49-FULL-scratch-preservation-stage-v1/completed-FULL-once-1.tar.gz",
+    "sha256": "016597e8bc6083589de4630232147e6f13e2169cee519c86693b6dba47ac189a"
+  },
+  "preservation": "All15831 selected original body/type/mode/UIDGID/nsmtime/inodes/internal-hardlink snapshot exact; current1440 and native1192 independently unchanged; before/alwayspost captures authenticate original237/prepared30/five origins PASS",
+  "proof_binding": {
+    "bytes": 20768,
+    "mode": "0o400",
+    "path": "/workspace/engineering/completed-current8d49-FULL-storage-original-FAIL-independent-review/independent-original-FULL-storage-cap-failure-and-preservation-proof.json",
+    "sha256": "2f44f3f4dff4cec5bf111b619eac5c41b900c36a28dad5141f876526cfce3a84"
+  },
+  "reviewer_read_only": true,
+  "root_owner_binding": {
+    "bytes": 479,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-current8d49-one-completed-FULL-storage-original-outer-once-v1/OWNERFINAL-root-one-original-completed-FULL-storage-outer.json",
+    "sha256": "b64aeb45ea0b3d7ed9b7f16f8a6e18278419908a78a12f56e56b8396491f65de"
+  },
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "status": "ORIGINAL_ONE_ATTEMPT_FAIL_CAP_GUARD_STOP",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none"
+}

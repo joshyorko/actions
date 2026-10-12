@@ -1,0 +1,489 @@
+{
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md after fixed CLI reason paragraph and existing OAuth authority/404 guidance",
+    "Durable learning captured": "A fixed checked OAuth acquisition exit code does not reveal the underlying HTTP status when the helper withholds command stdout and stderr. Preserve historical metadata 404 evidence separately from each fresh job's redacted failure. Bind both approved input files to the owner's repository, immutable revision and integrity records, and establish authorized access before another build; token wiring and structural empty-provider fixtures do not satisfy content authority. If acquisition stops artifact production, classify an always-run receipt upload's missing-file failure as secondary, and keep producer/browser/consumer functionality unqualified. Do not repair this boundary with guessed payloads, wider credentials or repeated identical failed builds.",
+    "Evidence": [
+      "build_oauth2_config.py",
+      {
+        "bytes": 791018,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/job-114604388443-original-decoded.private.log",
+        "sha256": "b939d38545680416894f6a8c3222ab63291656b4a96993542b95f6609baeffa6"
+      },
+      {
+        "bytes": 830190,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/job-114604389150-original-decoded.private.log",
+        "sha256": "22cf9030bd0db7a13320c985cb5a4a6ae387db1eaace5f256a8dc0f7ef07f38f"
+      },
+      {
+        "bytes": 834034,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/job-114604388882-original-decoded.private.log",
+        "sha256": "8561e4ab4a78fee2d91b87f95c8926d56898674f1b734cda5e9aab80e0638466"
+      },
+      {
+        "bytes": 7939,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/job-114604388443-original-full-API.private.json",
+        "sha256": "f5fec6f76fffedf2aca76ac8df7fbfbac9d1b94083213f3712c690403710e855"
+      },
+      {
+        "bytes": 5020,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/job-114604389150-original-full-API.private.json",
+        "sha256": "921e11fc63231d93201fb89573c78c6608dd1e6b1e41fecafd1048abdb7d9b1b"
+      },
+      {
+        "bytes": 4068,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/job-114604388882-original-full-API.private.json",
+        "sha256": "ef43a45136792e2e06daa2937d669a4157ea01321c1ebb352457ff0b4657b258"
+      }
+    ],
+    "Exact proposed delta": {
+      "bytes": 758,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/canonical-redacted-acquisition-status-approved-content-gate-and-secondary-receipt-failure-proposed.txt",
+      "sha256": "288c63dedd4a723fdf509dafb4e93dc880c19e1d55ea6138c97d74840021cf38"
+    },
+    "Existing_exact_guide_confirmed": "Lines1596-1640 built-in credential vs crossrepo authority, structural shape vs approved revision, fixed CLI reason and metadata404 ambiguity remain supported and retained.",
+    "Remaining uncertainty": "Actual HTTP status/crossrepo access/approved input revision/content/provider behavior unresolved; complete current CI/FULL/native/release remain HOLD.",
+    "Stale or ambiguous guidance removed": "Do not label a redacted checked acquisition exit1 as HTTP404; secondary missing-receipt upload does not prove browser failure, and synthetic token fixtures do not supply approved release content."
+  },
+  "Upstream disposition": "none",
+  "actual_logged_producer_merge": "eb39388640d2b7dac30b72eb584e56ffacd1b4b7",
+  "actual_logged_producer_ordered_parents": [
+    "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+    "9760d5ec44876558c4941c4c3190abc8d92d14a1"
+  ],
+  "actual_producer_commit_metadata_binding": {
+    "bytes": 6214,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/original-logged-producer-eb393-full-commit-envelope.private.json",
+    "sha256": "22585afdd3718e6ef998018ce6f77a4110ee56f11bfc3ce6106499a2d9ecd1b9"
+  },
+  "actual_producer_tree_matches_accepted_source": true,
+  "base": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "classification": {
+    "external_authority_content_access_boundary": "All three repeat the same checked first-input acquisition exit1 with builtin PR credential present. Original logs do not reveal actual HTTP response, approved revision or returned payload.",
+    "historical_OAuth404_user_steering": "Retained separately as existing external blocker, not fabricated as a fresh observed HTTP404 in these originals.",
+    "secondary_binary_failure": "Canvas receipt absent because predecessor build/browser steps skipped; this upload failure is not an observed browser/runtime functional failure.",
+    "source_defect_attribution": "No new formatter, module-base, generator, runtime native mode or artifact-consumer defect established by these failures. Current pure source/fixture passes do not qualify real config content.",
+    "upstream_defect": "NOT_ESTABLISHED"
+  },
+  "current_overall_CI": "NOT_REPOLLED; preserve initial23 contexts8FAIL/9SUCCESS/3INPROG/2CANCEL/1SKIP as capture only, not full terminal reconciliation",
+  "decision": "HOLD_CURRENT9760_HOSTED_CI_MERGE_AND_RUNTIME_1_0_3_RELEASE",
+  "exact_three_original_jobs": [
+    {
+      "MCP_envelope_binding": {
+        "bytes": 1119269,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/job-114604388443-original-logs-full-MCP.private.json",
+        "sha256": "1d12e0b62c1619678c00bf12a689d9510eb8f1c9973b76cf92e4d5345d7e41aa"
+      },
+      "acquisition_phase": "First gh api command started and returned1; before safe YAML/shape checks, second input, atomic module write or requested artifact build.",
+      "actual_checkout_proof": [
+        {
+          "SHA_output_line": 549,
+          "actual_SHA": "eb39388640d2b7dac30b72eb584e56ffacd1b4b7",
+          "command_line": 548
+        }
+      ],
+      "attempt": 1,
+      "built_in_token": {
+        "original_masked_env_observation": true,
+        "value": "NEVER_RECORDED_IN_SAFE_RECEIPT",
+        "workflow_expression_kind": "builtin secrets.GITHUB_TOKEN"
+      },
+      "completed_at": "2026-10-11T23:34:05Z",
+      "conclusion": "failure",
+      "current_native_browser_content_fixture_functionality": "UNQUALIFIED; no build/consumer/browser fixture inference from this failure",
+      "event": "pull_request",
+      "fresh_HTTP_status": "UNREPORTED/UNKNOWN; raw gh subprocess stdout/stderr intentionally withheld, not separately retained in these job logs",
+      "full_step_count": 39,
+      "head_api_source": "9760d5ec44876558c4941c4c3190abc8d92d14a1",
+      "job_id": 114604388443,
+      "job_status": "completed",
+      "lane": "Linux unsigned Action Server binary",
+      "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+      "ordered_actual_producer_parents": [
+        "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+        "9760d5ec44876558c4941c4c3190abc8d92d14a1"
+      ],
+      "original_wire_bytes": "UNKNOWN; exact connector-decoded UTF8 content only",
+      "primary_failed_step": {
+        "name": "Build OAuth2 config",
+        "number": 14
+      },
+      "producer_merge": "eb39388640d2b7dac30b72eb584e56ffacd1b4b7",
+      "producer_tree": "0d33ebaac258e069ef7045a29b4a3904740f6307",
+      "raw_bytes_binding": {
+        "bytes": 791018,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/job-114604388443-original-decoded.private.log",
+        "sha256": "b939d38545680416894f6a8c3222ab63291656b4a96993542b95f6609baeffa6"
+      },
+      "requested_artifact_build": "SKIPPED",
+      "run_id": 38184688027,
+      "safe_fixed_failure_reason": "OAuth2 acquisition failed for actions-oauth-config.yaml (exit 1)",
+      "safe_original_API_job_binding": {
+        "bytes": 7939,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/job-114604388443-original-full-API.private.json",
+        "sha256": "f5fec6f76fffedf2aca76ac8df7fbfbac9d1b94083213f3712c690403710e855"
+      },
+      "secondary_failed_steps": [
+        {
+          "category": "MISSING_DEPENDENT_CANVAS_RECEIPT_UPLOAD_AFTER_PREBUILD_ACQUISITION_FAILURE",
+          "name": "Upload Canvas candidate-source receipt",
+          "number": 22
+        }
+      ],
+      "started_at": "2026-10-11T23:32:51Z",
+      "step_status_counts": {
+        "cancelled": 0,
+        "failure": 2,
+        "skipped": 19,
+        "success": 18
+      },
+      "workflow_name": "Action Server Build (Unauthenticated)",
+      "workflow_path": ".github/workflows/frontend-build-unauthenticated.yml"
+    },
+    {
+      "MCP_envelope_binding": {
+        "bytes": 1196085,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/job-114604389150-original-logs-full-MCP.private.json",
+        "sha256": "f2f9169de51b02b8c4f575861c3e588d03bf30fbe35677e7b854ab2ed9272e84"
+      },
+      "acquisition_phase": "First gh api command started and returned1; before safe YAML/shape checks, second input, atomic module write or requested artifact build.",
+      "actual_checkout_proof": [
+        {
+          "SHA_output_line": 124,
+          "actual_SHA": "eb39388640d2b7dac30b72eb584e56ffacd1b4b7",
+          "command_line": 123
+        }
+      ],
+      "attempt": 1,
+      "built_in_token": {
+        "original_masked_env_observation": true,
+        "value": "NEVER_RECORDED_IN_SAFE_RECEIPT",
+        "workflow_expression_kind": "builtin github.token"
+      },
+      "completed_at": "2026-10-11T23:34:01Z",
+      "conclusion": "failure",
+      "current_native_browser_content_fixture_functionality": "UNQUALIFIED; no build/consumer/browser fixture inference from this failure",
+      "event": "pull_request",
+      "fresh_HTTP_status": "UNREPORTED/UNKNOWN; raw gh subprocess stdout/stderr intentionally withheld, not separately retained in these job logs",
+      "full_step_count": 24,
+      "head_api_source": "9760d5ec44876558c4941c4c3190abc8d92d14a1",
+      "job_id": 114604389150,
+      "job_status": "completed",
+      "lane": "Linux Runtime wheel",
+      "name": "build-wheels (ubuntu-22.04)",
+      "ordered_actual_producer_parents": [
+        "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+        "9760d5ec44876558c4941c4c3190abc8d92d14a1"
+      ],
+      "original_wire_bytes": "UNKNOWN; exact connector-decoded UTF8 content only",
+      "primary_failed_step": {
+        "name": "Build OAuth2 config (PR)",
+        "number": 13
+      },
+      "producer_merge": "eb39388640d2b7dac30b72eb584e56ffacd1b4b7",
+      "producer_tree": "0d33ebaac258e069ef7045a29b4a3904740f6307",
+      "raw_bytes_binding": {
+        "bytes": 830190,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/job-114604389150-original-decoded.private.log",
+        "sha256": "22cf9030bd0db7a13320c985cb5a4a6ae387db1eaace5f256a8dc0f7ef07f38f"
+      },
+      "requested_artifact_build": "SKIPPED",
+      "run_id": 38184688153,
+      "safe_fixed_failure_reason": "OAuth2 acquisition failed for actions-oauth-config.yaml (exit 1)",
+      "safe_original_API_job_binding": {
+        "bytes": 5020,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/job-114604389150-original-full-API.private.json",
+        "sha256": "921e11fc63231d93201fb89573c78c6608dd1e6b1e41fecafd1048abdb7d9b1b"
+      },
+      "secondary_failed_steps": [],
+      "started_at": "2026-10-11T23:33:03Z",
+      "step_status_counts": {
+        "cancelled": 0,
+        "failure": 1,
+        "skipped": 13,
+        "success": 10
+      },
+      "workflow_name": "Actions Runtime PYPI Release",
+      "workflow_path": ".github/workflows/actions_runtime_pypi_release.yml"
+    },
+    {
+      "MCP_envelope_binding": {
+        "bytes": 1201458,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/job-114604388882-original-logs-full-MCP.private.json",
+        "sha256": "866f1ab1d8fdb1c3576da3bb747ec7dacebc37670a338945a92e85c2e9607107"
+      },
+      "acquisition_phase": "First gh api command started and returned1; before safe YAML/shape checks, second input, atomic module write or requested artifact build.",
+      "actual_checkout_proof": [
+        {
+          "SHA_output_line": 124,
+          "actual_SHA": "eb39388640d2b7dac30b72eb584e56ffacd1b4b7",
+          "command_line": 123
+        }
+      ],
+      "attempt": 1,
+      "built_in_token": {
+        "original_masked_env_observation": true,
+        "value": "NEVER_RECORDED_IN_SAFE_RECEIPT",
+        "workflow_expression_kind": "builtin github.token"
+      },
+      "completed_at": "2026-10-11T23:33:48Z",
+      "conclusion": "failure",
+      "current_native_browser_content_fixture_functionality": "UNQUALIFIED; no build/consumer/browser fixture inference from this failure",
+      "event": "pull_request",
+      "fresh_HTTP_status": "UNREPORTED/UNKNOWN; raw gh subprocess stdout/stderr intentionally withheld, not separately retained in these job logs",
+      "full_step_count": 19,
+      "head_api_source": "9760d5ec44876558c4941c4c3190abc8d92d14a1",
+      "job_id": 114604388882,
+      "job_status": "completed",
+      "lane": "Linux Runtime sdist",
+      "name": "build-sdist (ubuntu-py3.12)",
+      "ordered_actual_producer_parents": [
+        "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+        "9760d5ec44876558c4941c4c3190abc8d92d14a1"
+      ],
+      "original_wire_bytes": "UNKNOWN; exact connector-decoded UTF8 content only",
+      "primary_failed_step": {
+        "name": "Build OAuth2 config (PR)",
+        "number": 13
+      },
+      "producer_merge": "eb39388640d2b7dac30b72eb584e56ffacd1b4b7",
+      "producer_tree": "0d33ebaac258e069ef7045a29b4a3904740f6307",
+      "raw_bytes_binding": {
+        "bytes": 834034,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/job-114604388882-original-decoded.private.log",
+        "sha256": "8561e4ab4a78fee2d91b87f95c8926d56898674f1b734cda5e9aab80e0638466"
+      },
+      "requested_artifact_build": "SKIPPED",
+      "run_id": 38184688153,
+      "safe_fixed_failure_reason": "OAuth2 acquisition failed for actions-oauth-config.yaml (exit 1)",
+      "safe_original_API_job_binding": {
+        "bytes": 4068,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/job-114604388882-original-full-API.private.json",
+        "sha256": "ef43a45136792e2e06daa2937d669a4157ea01321c1ebb352457ff0b4657b258"
+      },
+      "secondary_failed_steps": [],
+      "started_at": "2026-10-11T23:32:51Z",
+      "step_status_counts": {
+        "cancelled": 0,
+        "failure": 1,
+        "skipped": 8,
+        "success": 10
+      },
+      "workflow_name": "Actions Runtime PYPI Release",
+      "workflow_path": ".github/workflows/actions_runtime_pypi_release.yml"
+    }
+  ],
+  "initial_complete_head_snapshot": {
+    "bytes": 799,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current9760-fresh-hosted-CI-reconciliation/OWNERFINAL-current9760-fresh-hosted-head-contexts-CI-pending.json",
+    "sha256": "16dd0811eeea6f7f81809667a164f4c123f6364e0ff2bb4a474dbf3292cc0586"
+  },
+  "metadata_implementation_limits": {
+    "direct_connector_job_url": "Three original INVALID_ARGUMENT envelopes retained. Specialized runjobs returns normalized summaries, so full raw job APIs acquired by authorized ordinary read-only gh GET once each; no log fetch repeated.",
+    "direct_rejected_job_envelopes": [
+      {
+        "bytes": 343,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/job-114604388443-full-envelope.private.json",
+        "sha256": "f81a73d3edf97b2a2e601eaa751d5c8ea9cfc7f9d5d391b3b38fda08f6f7a585"
+      },
+      {
+        "bytes": 343,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/job-114604389150-full-envelope.private.json",
+        "sha256": "f81a73d3edf97b2a2e601eaa751d5c8ea9cfc7f9d5d391b3b38fda08f6f7a585"
+      },
+      {
+        "bytes": 343,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/job-114604388882-full-envelope.private.json",
+        "sha256": "f81a73d3edf97b2a2e601eaa751d5c8ea9cfc7f9d5d391b3b38fda08f6f7a585"
+      }
+    ],
+    "normalized_job_envelopes": [
+      {
+        "bytes": 12810,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/run-38184688027-jobs-full-MCP.private.json",
+        "sha256": "a95606e1216af1e1543c4f24970a5b0363072f23b8735f7420be918ee4e71e29"
+      },
+      {
+        "bytes": 9321,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/run-38184688153-jobs-full-MCP.private.json",
+        "sha256": "e41156345cd64b201fc00263549124fded258425ff9289d5de2d3a23029b828b"
+      }
+    ],
+    "private_persistence_history": "First large metadata single-argument write was rejected before process/file creation; exact original fetched result persisted by named exclusive0600 chunks without API repeat. Initial parser assumed content on rejected metadata and raised KeyError, no acceptance based on it.",
+    "wire_metadata": "SDK-decoded original logs are bound, original HTTP wire byte baseline UNKNOWN"
+  },
+  "one_precise_next_gate": {
+    "existing_input_labels": [
+      "actions-oauth-config.yaml",
+      "oauth-config.yaml"
+    ],
+    "forbidden_shortcuts": [
+      "No invented config/provider stub/empty fallback",
+      "No PAT or credential-scope widening",
+      "No schema/check/skip waiver",
+      "No release/merge based on fixture token wiring"
+    ],
+    "no_automatic_next_execution": "No repeated identical build or missing-input retry. Root resumes only when this external prerequisite changes and the exact current source tuple is reviewed.",
+    "owner_required_subject": "Approved authoritative configuration repository + immutable revision + exact pair of existing input paths + per-file integrity/content authority records + authorized bounded read access",
+    "required_qualification": "Both checked acquisitions and approved immutable identity must agree before structural parse and atomic generation. Preserve provider-policy/actual OAuth qualification separately.",
+    "scope": "Owner-controlled external content/authority decision, not speculative application implementation."
+  },
+  "original_private_data_bindings": [
+    {
+      "bytes": 7939,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/job-114604388443-original-full-API.private.json",
+      "sha256": "f5fec6f76fffedf2aca76ac8df7fbfbac9d1b94083213f3712c690403710e855"
+    },
+    {
+      "bytes": 27559,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/run-38184688027-full-envelope.private.json",
+      "sha256": "a7b8468d61d7cafd62e0c33b49e791b529c03c189e056c4cadae278b46243be2"
+    },
+    {
+      "bytes": 791018,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/job-114604388443-original-decoded.private.log",
+      "sha256": "b939d38545680416894f6a8c3222ab63291656b4a96993542b95f6609baeffa6"
+    },
+    {
+      "bytes": 1119269,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/job-114604388443-original-logs-full-MCP.private.json",
+      "sha256": "1d12e0b62c1619678c00bf12a689d9510eb8f1c9973b76cf92e4d5345d7e41aa"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/job-114604388443-original-full-API.stderr.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 5020,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/job-114604389150-original-full-API.private.json",
+      "sha256": "921e11fc63231d93201fb89573c78c6608dd1e6b1e41fecafd1048abdb7d9b1b"
+    },
+    {
+      "bytes": 27537,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/run-38184688153-full-envelope.private.json",
+      "sha256": "d6521d5f1f18eb8d2b10b100714e7eaf3235e6c93879e4e2193daf9231bdb6dd"
+    },
+    {
+      "bytes": 830190,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/job-114604389150-original-decoded.private.log",
+      "sha256": "22cf9030bd0db7a13320c985cb5a4a6ae387db1eaace5f256a8dc0f7ef07f38f"
+    },
+    {
+      "bytes": 1196085,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/job-114604389150-original-logs-full-MCP.private.json",
+      "sha256": "f2f9169de51b02b8c4f575861c3e588d03bf30fbe35677e7b854ab2ed9272e84"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/job-114604389150-original-full-API.stderr.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 4068,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/job-114604388882-original-full-API.private.json",
+      "sha256": "ef43a45136792e2e06daa2937d669a4157ea01321c1ebb352457ff0b4657b258"
+    },
+    {
+      "bytes": 27537,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/run-38184688153-full-envelope.private.json",
+      "sha256": "d6521d5f1f18eb8d2b10b100714e7eaf3235e6c93879e4e2193daf9231bdb6dd"
+    },
+    {
+      "bytes": 834034,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/job-114604388882-original-decoded.private.log",
+      "sha256": "8561e4ab4a78fee2d91b87f95c8926d56898674f1b734cda5e9aab80e0638466"
+    },
+    {
+      "bytes": 1201458,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/job-114604388882-original-logs-full-MCP.private.json",
+      "sha256": "866f1ab1d8fdb1c3576da3bb747ec7dacebc37670a338945a92e85c2e9607107"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-three-hosted-build-failures-owned/job-114604388882-original-full-API.stderr.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "release_dispositions": {
+    "Runtime1.0.3": "HOLD",
+    "engineering_merge": "BLOCKED; observed hosted required jobs fail, full source gate remains mandatory NOT_RUN",
+    "native_binary_wheel_sdist_artifact_publication": "Requested lanes skipped after acquisition failure; no artifact download/qualification",
+    "private_native_browser_full_graph": "HOLD",
+    "source9760_TOKEN_LIGHT_checkpoint": "Previously accepted ac3ec82 scope retained; successful isolated tests/synthetic acquisition distinct from hosted input authority"
+  },
+  "review_operations": "Three authorized original connector log fetches only, exact private0600 decoded copies/full envelopes; bounded full run/job/commit metadata. Read-only source/static log inspection. No retry/build/artifact download/payload fetch/source/env/index/ref/push/merge/cancel/external message.",
+  "schema": 1,
+  "source": "9760d5ec44876558c4941c4c3190abc8d92d14a1",
+  "source_support_bindings": [
+    {
+      "bytes": 4591,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/action_server/scripts/build_oauth2_config.py",
+      "sha256": "f6dbc67610fefd7ec69e8972b5385506e71559ca2ff96cf41749ea07733ff4a8"
+    },
+    {
+      "bytes": 26152,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/action_server/tasks.py",
+      "sha256": "3fa7419c346fe9494bdbe89a7f245cf72287832bef36ee73ea4bd0039ef477d6"
+    },
+    {
+      "bytes": 25502,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/.github/workflows/frontend-build-unauthenticated.yml",
+      "sha256": "af3586d88556764a6c9019c30261e6465aeedbaeff66a01c364f8d81dcd2e8de"
+    },
+    {
+      "bytes": 13299,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/.github/workflows/actions_runtime_pypi_release.yml",
+      "sha256": "ed82d00c4ce307ce86adf3fffacd76521205f82c265fe655de56471720506051"
+    },
+    {
+      "bytes": 183595,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/.github/workflows/_gen_workflows.py",
+      "sha256": "419fad99d9dac269cccc0933d79b0b6948587a827e116708a57113ddaa7a2092"
+    }
+  ],
+  "source_tree": "0d33ebaac258e069ef7045a29b4a3904740f6307",
+  "status": "OWNERFINAL_INDEPENDENT_THREE_ORIGINAL_CURRENT9760_HOSTED_BUILD_ACQUISITION_FAILURES_EXTERNAL_GATE_HOLD"
+}

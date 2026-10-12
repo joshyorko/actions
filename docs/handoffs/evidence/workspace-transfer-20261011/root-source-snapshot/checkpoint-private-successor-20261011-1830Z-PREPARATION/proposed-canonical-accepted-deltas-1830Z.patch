@@ -1,0 +1,58 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -2456,9 +2456,19 @@
+ scratch loss from independently retained logs and source receipts, and keep
+ unobserved process attribution and broader evidence references unknown.
+ 
++An explicit pytest basetemp isolates scratch files, not plugin logging output.
++The pinned robocorp.log_pytest plugin defaults --robocorp-log-output to ./output.
++For a preservation-sensitive private run, set a unique absent owned logging
++destination as well as basetemp, and verify protected generated-output digests
++before and after the run. Tracked Git/source preservation does not establish
++ignored log preservation. If an original body was not retained, report it
++unavailable; a smaller successor cannot replace its recorded digest.
++
+ An execution release must bind the exact proposal and scoped review decision.
+ A source-only GO cannot admit a full run through a common success prefix.
+ Require the reviewed parent, gate and postcheck commands before release.
++
++Count an include-only workflow matrix from its declared include rows. Supplemental rows must not become the original combinations for later includes. Bind the count to the exact event filters and changed paths, and count a triggered auxiliary push separately from PR jobs.
+ 
+ ## Pull Request Triage
+ 
+@@ -3441,6 +3451,16 @@
+ member count from the new wheel bytes even when it equals an earlier count,
+ and retain generated-input authority and content holds separately.
+ 
++A transfer may raise after writing all expected bytes. Retain its original
++failure and inspect the existing file under a distinct reviewed data-only
++release after binding its whole size and digest; do not redownload or relabel
++that transfer as successful. Reuse complete containment, member CRC and
++manifest checks. OSError with errno 9 at sock.settimeout before the next read
++establishes that error at that operation; it does not prove a socket timeout
++or successful terminal EOF. Matching bytes permit separate archive inspection,
++not inner RECORD, generated-content or consumer acceptance. Keep those phases
++and their original receipts separate.
++
+ Archive size and digest authenticate bytes, not artifact, run or job labels.
+ Before an installed-consumer probe, bind those labels to an independently
+ frozen artifact qualification as well as to the producer tuple. Comparing two
+@@ -3502,3 +3522,18 @@
+ retain their hashes and scoped verification receipts. State unrecorded metadata
+ and historical observation limits. Recovered capacity does not turn an ENOSPC
+ gate green; rerun its required checks with new logs.
++
++
++For a multi-root lossless preservation batch, enforce the aggregate compressed
++byte ceiling on each actual write, including gzip close/footer writes. Stage and
++verify every selected archive, fsync its file and staging directory entries, and
++fsync the complete immutable index before removing any expanded original. Admit
++the maximum complete progress-index footprint together with that index before
++the first removal; checking only the first progress row does not bound later rows.
++Refuse a missing staged archive rather than falling back to an uncapped writer.
++Verify internal hardlink inode partitions as well as resolved file bytes: equal
++independent files must remain independent and a hardlink group must stay linked.
++Compare PAX modification times as exact decimal nanoseconds, not rounded floats.
++Preserve a primary archive-write exception when close/footer or postguards also
++fail, recording the secondary failure separately. These guards preserve storage
++bytes and metadata; they do not establish source origin or universal quiescence.

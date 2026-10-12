@@ -1,0 +1,61 @@
+{
+  "actual_control_owner_binding": {
+    "bytes": 8873,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/OWNERFINAL-original-current-e2-inner-v2-service-free-CONTROLS-actual-metadata-successor.json",
+    "sha256": "506e020ac4148234cb06f1c0ca8a6fca56cf08fc038a64c974964ddd0a76cccb"
+  },
+  "control_binding": {
+    "bytes": 11388,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/test_actual_inner_boundaries_v2.py",
+    "sha256": "879a1370f1613a1ec832a04d8b0f9f0dde37dab0ea96f52714f47b6f16acc9f2"
+  },
+  "counts": {
+    "errors": 0,
+    "failed": 0,
+    "passed": 50,
+    "skips": 0,
+    "unique": 50,
+    "warnings": 499
+  },
+  "decision": "GO_CURRENT_E2_INNER_V2_ACTUAL_50_SERVICE_FREE_CONTROLS_ONLY",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; accept exact8 nonblank-line10bd lesson with precise contextual ZIP wording correction.",
+    "Durable_learning_captured": "Real unoptimized/private-release admission and complete ZIP-header preflight require actual restored-baseline controls; sdist per-header validation and bounded gzip integrity are a separate mechanism.",
+    "Evidence": "Original50 JUnit case names exactly match11 frozen functions; actual0 terminals and499-warning log; new ZIP two-pass preflight, TAR per-member body validation and gzip full CRC/ISIZE source.",
+    "Exact_delta": "Replace proposed \u201cAdmit all archive headers before reading payloads\u201d with \u201cAdmit all ZIP headers before reading payloads\u201d; retain the remaining entry/baseline/source-authority lines.",
+    "Remaining_uncertainty": "Original aggregate inner/source/generated-content authority and all consumer/native/release gates remain unobserved.",
+    "Stale_or_ambiguous_guidance_removed": "Avoid false all-TAR-header preflight claim; do not promote syntax, synthetic counts, or source mode diagnostics into artifact/content/consumer acceptance."
+  },
+  "executor_binding": {
+    "bytes": 23323,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/inspect_current_e2_inner_once_v2.py",
+    "sha256": "d83a7aae88a98a694310e6a1e60de2ea7e362604ee8c5d345cc6a38b4591177c"
+  },
+  "limits": [
+    "Six launcher cfg refs actually guarded before/finally, with config digest checked initially;17 executor historical refs were checked after controls and independently now, not relabeled original launcher guards.",
+    "Fifty cases exactly match source-derived parameter identities, including valid complete current217 baseline, individual restored RECORD/source poisons, read-spy header cap edges and actual entry guards.",
+    "Synthetic219/203/223 counts are baseline expectations, not observed original wheel/sdist counts.",
+    "Original015937/b1f executable HOLD and ef8ed/ccbb construction count mistakes retained; named17 correction changes metadata only.",
+    "Owner8-plan-ref guard label rejected; six actual guard rows + initial config hash distinguish from total8 plan evidence. No original code/control rerun.",
+    "18 owned regular-file bodies rehashed; no claim of a full all-type filesystem census from that file inventory.",
+    "Actual original artifact inspection requires separately reviewed proposal and distinct typed ROOT release."
+  ],
+  "proof_binding": {
+    "bytes": 1651,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-v2-actual-controls-independent-review/independent-original-control-complete-50-case-and-binding-proof.json",
+    "sha256": "50a5fb9943b3ec06679ee802f5c8911e27817c2a7429b51336d2e24d656a0b98"
+  },
+  "proposal_binding": {
+    "bytes": 7642,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/OWNERFINAL-current-e2-inner-successor-v2-service-free-CONTROL-PREEXECUTION.json",
+    "sha256": "9111b4662e384c4fe272d684ea33e2620f813cbfa9cef84bed1382260d1e69cf"
+  },
+  "schema": "INDEPENDENT_CURRENT_E2_INNER_V2_ACTUAL_CONTROLS_REVIEW",
+  "scope": "Original one synthetic real-function boundary control result only; no original aggregate artifact inspection, package import, install or native execution.",
+  "upstream_disposition": "none"
+}

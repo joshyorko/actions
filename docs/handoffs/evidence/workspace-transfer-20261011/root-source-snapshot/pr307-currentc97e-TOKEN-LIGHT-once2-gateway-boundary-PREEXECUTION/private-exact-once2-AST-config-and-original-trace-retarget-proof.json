@@ -1,0 +1,54 @@
+{
+  "actual_gate_execution": "NOT_RUN",
+  "config_binding_count": 39,
+  "config_original_binding_count": 27,
+  "current_config": {
+    "bytes": 16905,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/immutable-one-TOKEN-LIGHT-once2-inputs.json",
+    "sha256": "29368814c182f30732ab041ca580162c92071e4bb076eb164c9820ced3acc158"
+  },
+  "current_launcher": {
+    "bytes": 16047,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/launch_one_owned_token_light_once2.py",
+    "sha256": "a747b3fd108d6e8f4545fa2489876997decb04202752f8bf310732303988597e"
+  },
+  "declared_literal_delta": [
+    "Fresh base/config SHA/attempt path/release decision/review decision/pass label"
+  ],
+  "declared_semantic_delta": [
+    "Deliberate RCC RED expectedouter1\u219210",
+    "Require preserved original-style checked-child exit1 traceback and exact toolkit frame before unchanged strict two-case JUnit admission",
+    "Two added derived admission metadata fields"
+  ],
+  "failed_original_owner": {
+    "bytes": 4029,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-currentc97e-original-TOKEN-LIGHT-ACTUALFAIL-independent-diagnosis/OWNERFINAL-independent-original-currentc97e-TOKEN-LIGHT-ACTUALFAIL-and-minimum-boundary-proposal.json",
+    "sha256": "1075f04e6a27e2209d1fe2cb630747faab8fff00644fb5481d26cd99ea6f1130"
+  },
+  "original_config": {
+    "bytes": 13345,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-currentc97e-concrete-TOKEN-LIGHT-PREEXECUTION/immutable-one-TOKEN-LIGHT-inputs.json",
+    "sha256": "c5378aa9dfceeb454255c1724f18ef505e09fe0d5fdc679a87b4db45fb92bb79"
+  },
+  "original_exact_trace_matches_new_required_pattern": true,
+  "original_launcher": {
+    "bytes": 15510,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr307-currentc97e-concrete-TOKEN-LIGHT-PREEXECUTION/launch_one_owned_token_light_reviewed_mode.py",
+    "sha256": "daa820a18cfd9bc98c6a79e256fffb2f03a58ea0e415d2efacf78fead7e14dd7"
+  },
+  "original_owner": {
+    "bytes": 8675,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-currentc97e-concrete-TOKEN-LIGHT-PREEXECUTION/OWNERFINAL-currentc97e-retargeted-concrete-TOKEN-LIGHT-PREEXECUTION-final-NOTRUN.json",
+    "sha256": "b117d56bd984c4420ad3b15a860c09547326ebcc7498e78248e7796de27a6daf"
+  },
+  "phase_count": 9,
+  "schema": 1,
+  "whole_launcher_AST_exact_after_reversing_declared_delta": true,
+  "whole_original_config_exact_after_reversing_only_two_attempt_code_addresses_and_removing12_new_refs_plus_status_metadata": true
+}

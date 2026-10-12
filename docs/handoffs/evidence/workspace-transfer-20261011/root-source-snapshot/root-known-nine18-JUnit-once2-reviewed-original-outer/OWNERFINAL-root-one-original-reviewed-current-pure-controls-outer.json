@@ -1,0 +1,22 @@
+{
+  "capture": "2026-10-11T21:41:41.470038+00:00",
+  "elapsed_seconds": 60.66642856200633,
+  "job": "known9once2",
+  "native": "NOT_RUN",
+  "outer_returncode": 0,
+  "release": {
+    "bytes": 1554,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-one-known-nine18-JUnit-envelope-once2-release.json",
+    "sha256": "4e8229ec3beab8708e27add6351ff247454827cd1112191c3eca799c1f01e8b9"
+  },
+  "review": {
+    "bytes": 3648,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine18-JUnit-once2-independent-PREEXEC-review/OWNERFINAL-independent-known-nine18-JUnit-envelope-once2-SOURCE-and-PREEXEC-GO.json",
+    "sha256": "47a03a710ddaccd3eedda19f8cc00020ad56af01bb0039230a84f7ab9958625d"
+  },
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_adoption": "NONE",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+}

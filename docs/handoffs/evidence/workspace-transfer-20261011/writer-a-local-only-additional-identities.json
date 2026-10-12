@@ -1,0 +1,38 @@
+[
+  {
+    "path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/once4-toolkit-basetemp-private-exact-full-body-and-two-metadata-snapshots.json",
+    "bytes": 6665360,
+    "sha256": "22353d16f2bd9b99c279e6a86054f219510a9acdbae7aa37738cfb151c27682b",
+    "retention": "Local only; no byte-exact regeneration promise. Existing source copies permit new fixture/inventory creation, not old-evidence replacement."
+  },
+  {
+    "path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/once5-toolkit-basetemp-private-exact-full-body-and-two-metadata-snapshots.json",
+    "bytes": 6660440,
+    "sha256": "fa57e928ba53eb234b1bdacc6a09b97f9b029683ad2899482927a14cc38f2aad",
+    "retention": "Local only; no byte-exact regeneration promise. Existing source copies permit new fixture/inventory creation, not old-evidence replacement."
+  },
+  {
+    "path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/once6-toolkit-basetemp-private-exact-full-body-and-two-metadata-snapshots.json",
+    "bytes": 6665360,
+    "sha256": "f8d32dd94830c9b378d428cc769fee5969453d3838ca4533aa906b5c67289a0c",
+    "retention": "Local only; no byte-exact regeneration promise. Existing source copies permit new fixture/inventory creation, not old-evidence replacement."
+  },
+  {
+    "path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/complete_declared_current9760_protected_inputs_and_typed_alias_manifest_SOURCE_PREPARED.json",
+    "bytes": 91408,
+    "sha256": "857642326d264e0d1096638f45e6b528becf1e1abfd35485c75c9970626b5608",
+    "retention": "Local only; no byte-exact regeneration promise. Existing source copies permit new fixture/inventory creation, not old-evidence replacement."
+  },
+  {
+    "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/initial-real-readonly-snapshot-missing-before-admission-FAIL.json",
+    "bytes": 215,
+    "sha256": "bc6ce58f5b37243baf08406f794d3ef8d0ecf1d216779b2b3a8942cdda84b374",
+    "retention": "Local only; no byte-exact regeneration promise. Existing source copies permit new fixture/inventory creation, not old-evidence replacement."
+  },
+  {
+    "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/real-readonly-historical-fixture-snapshot-and-current-live-admission-PASS.json",
+    "bytes": 1672,
+    "sha256": "b3b076c9d3ed176bb4c893af68d3f70ac6025a85cab25e7820791ba76b5f5186",
+    "retention": "Local only; no byte-exact regeneration promise. Existing source copies permit new fixture/inventory creation, not old-evidence replacement."
+  }
+]

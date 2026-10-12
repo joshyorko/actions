@@ -1,0 +1,6 @@
+{
+  "status": "INITIAL_READONLY_CONSTRUCTOR_COMPARISON_FAIL",
+  "cause": "Temporal rows have integer mode plus device/inode/uidgid/mtime, not four-field bind dictionary",
+  "all_temporal_body_digests_and_modes_match": true,
+  "archive_or_guard_operation": "NOT_RUN"
+}

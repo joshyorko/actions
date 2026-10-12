@@ -1,0 +1,45 @@
+{
+  "schema": "actions-current40ad-configured-source-full-proposal/v1",
+  "status": "PROPOSAL_NOT_EXECUTED__ROOT_DISTINCT_SERIALIZATION_CAPACITY_RELEASE_REQUIRED",
+  "head": "40ad3b14d264d0e6aa7843e7c26b9fa3855fc34b",
+  "tree": "2d58cc8e47a50bc6c09d597a56ed8153aa4f2f34",
+  "cwd": "/workspace/engineering/pr305",
+  "argv": [
+    "env",
+    "PYTEST_XDIST_AUTO_NUM_WORKERS=2",
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "600s",
+    "/workspace/actions-cloud/bin/rcc",
+    "task",
+    "script",
+    "-r",
+    "developer/toolkit.yaml",
+    "--",
+    "python",
+    "-c",
+    "import os, subprocess\nfrom pathlib import Path\nimport toolkit\nr=Path(\"/workspace/engineering/pr305\")\nassert toolkit.REPOSITORY_ROOT.resolve()==r.resolve()\nassert subprocess.check_output([\"git\",\"-C\",str(r),\"rev-parse\",\"HEAD\"]).decode().strip()==\"40ad3b14d264d0e6aa7843e7c26b9fa3855fc34b\"\nassert subprocess.check_output([\"git\",\"-C\",str(r),\"rev-parse\",\"HEAD^{tree}\"]).decode().strip()==\"2d58cc8e47a50bc6c09d597a56ed8153aa4f2f34\"\nassert not subprocess.check_output([\"git\",\"-C\",str(r),\"status\",\"--porcelain\"])\nos.environ[\"PYTEST_XDIST_AUTO_NUM_WORKERS\"]=\"2\"\ntoolkit.poetry(\"action_server\",\"run\",\"invoke\",\"test-not-integration\")"
+  ],
+  "worker_environment": {
+    "PYTEST_XDIST_AUTO_NUM_WORKERS": "2"
+  },
+  "attempts_admitted": 1,
+  "timeout_TERM_seconds": 600,
+  "kill_after_seconds": 10,
+  "unchanged_gate": "toolkit.poetry(action_server,run,invoke,test-not-integration)",
+  "installed_own_xdist_plugin": {
+    "path": "/workspace/engineering/pr305/action_server/.venv/lib/python3.12/site-packages/xdist/plugin.py",
+    "bytes": 13921,
+    "sha256": "62df71dfe342969ab667cb3a4f2280a93be9c11bc9a4c2d9ead271c979d2afd8",
+    "auto_worker_function_AST_sha256": "b61539b40e0914425f64ac6a99779b4276d570517444e2b659d72f780138b9ea",
+    "env2_precedes_CPU_fallback_source_proof_only": true
+  },
+  "preexecution_requirements": [
+    "Current exact head/tree/clean own prepared30+5prefixes/RCC immutable inputs rechecked",
+    "Current heavy300 must finish; no concurrent heavy full/native/consumer",
+    "Fresh available workspace capacity at least1.2GB; captured684MB insufficient and not approval",
+    "Execute exact current-head command once; changed launcher/argv needs named immutable successor",
+    "No source push until current full and independent SOURCEFINAL GO; historical519 launcher cannot qualify40ad"
+  ]
+}

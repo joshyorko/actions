@@ -1,0 +1,25 @@
+{
+  "applied_patch_commit": "2058b1b185a79c04b24eaf46a73d278ba4f689e5",
+  "complete_source_leaves": 1426,
+  "head": "396925cb3d6527af1768b7f5333f9653c005fc55",
+  "independent_public_patch_sha256": "761b96061a9f5b3339bc576b336ce4a46eca338707332d8eeff1268a56baf856",
+  "newer_native": "NOT_RUN",
+  "normal_push": "NOT_RUN",
+  "only_patch_paths": [
+    "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "parents": [
+    "2058b1b185a79c04b24eaf46a73d278ba4f689e5",
+    "a54c982462d1e7ad011d8152bfc299d997503fb3"
+  ],
+  "patch_parent": "e4ff080375a8422bb656e52d218f198521dda078",
+  "patch_sha256": "35771648e1271447675b2f62edbe2fa6062a17c1efb2c4940039a5997543c05c",
+  "private_V8_config_and_current_SOURCE_qualification": "PENDING",
+  "production_pin": "18.19.3",
+  "schema": 1,
+  "source_clean": true,
+  "status": "ACCEPTED_PUBLIC_PATCH_APPLIED_ORDINARY_CURRENT_TARGET_UNION_SOURCE_GATES_PENDING",
+  "tree": "84f850f0d4e08b21afcd8220413ce94322370acf",
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,555 @@
+{
+  "Documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "durable_learning": "LF Python module output and exact embedded frontend asset identity are independent; input evidence is required for checkout-versus-compiler causal attribution. Include packaged nonPython source text and affected workflow trigger filters in checkout-byte qualification.",
+    "exact_delta": {
+      "bytes": 1212,
+      "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/canonical-generated-static-and-complete-checkout-scope-proposed-v2.patch",
+      "sha256": "1306a314811448c8090b4aa2e77340e676bbba397ceb6c7ee0477b908cb9b2bf"
+    },
+    "remaining_uncertainty": "Original checkout input/config and compiler intermediate were not retained.",
+    "stale_or_ambiguous_guidance_removed": "An LF module writer or CR-removal comparison must not be mistaken for embedded-content normalization or semantic equivalence. Distinguish173Python fromfive othertext bodies; attributes-only changes currently exclude both Runtime builder/test workflows."
+  },
+  "Upstream_disposition": "none",
+  "actual_service_free_control_execution": "NOT_RUN_REQUIRES_OWNER_AUTHORIZATION",
+  "all24original_owner_bindings_unchanged": true,
+  "confirmed": {
+    "Windows_CRLF_only_normalization_equal_Linux": false,
+    "Windows_CR_scaffold_mapping": [
+      {
+        "CRLF": true,
+        "input_scaffold_line_end": 1,
+        "normalized_asset_offset": 15,
+        "ordinal": 1
+      },
+      {
+        "CRLF": true,
+        "input_scaffold_line_end": 2,
+        "normalized_asset_offset": 32,
+        "ordinal": 2
+      },
+      {
+        "CRLF": true,
+        "input_scaffold_line_end": 3,
+        "normalized_asset_offset": 41,
+        "ordinal": 3
+      },
+      {
+        "CRLF": true,
+        "input_scaffold_line_end": 4,
+        "normalized_asset_offset": 70,
+        "ordinal": 4
+      },
+      {
+        "CRLF": true,
+        "input_scaffold_line_end": 5,
+        "normalized_asset_offset": 147,
+        "ordinal": 5
+      },
+      {
+        "CRLF": true,
+        "input_scaffold_line_end": 6,
+        "normalized_asset_offset": 217,
+        "ordinal": 6
+      },
+      {
+        "CRLF": true,
+        "input_scaffold_line_end": 7,
+        "normalized_asset_offset": 252,
+        "ordinal": 7
+      },
+      {
+        "CRLF": true,
+        "input_scaffold_line_end": 8,
+        "normalized_asset_offset": 987358,
+        "ordinal": 8
+      },
+      {
+        "CRLF": true,
+        "input_scaffold_line_end": 9,
+        "normalized_asset_offset": 987367,
+        "ordinal": 9
+      },
+      {
+        "CRLF": false,
+        "input_scaffold_line_end": 10,
+        "normalized_asset_offset": 987393,
+        "ordinal": 10
+      },
+      {
+        "CRLF": true,
+        "input_scaffold_line_end": 10,
+        "normalized_asset_offset": 987393,
+        "ordinal": 11
+      },
+      {
+        "CRLF": true,
+        "input_scaffold_line_end": 12,
+        "normalized_asset_offset": 987403,
+        "ordinal": 12
+      },
+      {
+        "CRLF": true,
+        "input_scaffold_line_end": 13,
+        "normalized_asset_offset": 987411,
+        "ordinal": 13
+      }
+    ],
+    "Windows_all_CR_removed_equal_Linux": true,
+    "duplicate_CR_at_scaffold_line10": true,
+    "effective_source_attributes": {
+      "text": "auto"
+    },
+    "encoder_source_refs": {
+      "byte_repr_line": 166,
+      "input_path_assignment_line": 147,
+      "outer_module_write_LF_line": 155,
+      "public_source_path": "action_server/tasks.py",
+      "read_bytes_line": 153
+    },
+    "explicit_source_eol_attribute": "UNSET",
+    "retained_assets": {
+      "Linux": {
+        "decoded_asset_CR": 0,
+        "decoded_asset_CRLF": 0,
+        "decoded_asset_LF": 134,
+        "decoded_asset_bytes": 987412,
+        "decoded_asset_sha256": "59a091e58a89ae6a09213fb6b22e9f41118eca6a8ec46d3c9e94f6261a970ae8",
+        "module_CR_count": 0,
+        "module_bytes": 989282,
+        "module_sha256": "155a07ea8663ee8dbdd0bbb1c3ea300be203f5349a259aec8dc9dadae25c6772",
+        "wheel": {
+          "bytes": 14180835,
+          "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+          "sha256": "90a785d81ca1158ab58a3feb0eabc1b3b3dabb6e395f2f503337c2cf53e986d6"
+        }
+      },
+      "Windows": {
+        "decoded_asset_CR": 13,
+        "decoded_asset_CRLF": 12,
+        "decoded_asset_LF": 134,
+        "decoded_asset_bytes": 987425,
+        "decoded_asset_sha256": "0e5242b4184d88baed99f2ffe2c6814e73957e3d0eadd34bf0181d09c57602d6",
+        "module_CR_count": 0,
+        "module_bytes": 989308,
+        "module_sha256": "d1b90f7db38f029f9bbf9a8d65294a6b86ecee9053ec2b6b77260d24cfedbf3a",
+        "wheel": {
+          "bytes": 11634753,
+          "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/actions_runtime-1.0.3-cp312-cp312-win_amd64.whl",
+          "sha256": "4be1bd325a3d5061d2c3aa7c1293caeedc65f46944613c0b623ac96c7081d883"
+        }
+      }
+    },
+    "semantic_equivalence": "NOT_ESTABLISHED",
+    "source_Runtime_HTML_input": {
+      "CR": 0,
+      "LF": 13,
+      "bytes": 372,
+      "path": "action_server/frontend/apps/runtime/index.html",
+      "sha256": "88a7a3c4cfa44110012527b59833c258dd2f5ebc4b856401c85c848e1da4a595"
+    },
+    "source_package_build_does_not_reference_static_module": true
+  },
+  "evidence": [
+    {
+      "bytes": 20324,
+      "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/OWNERFINAL-windows-generated-static-rootcause-trace.json",
+      "sha256": "91c258e08d0f9cf232d4822a556d079f37d16b07d11bcfd948eb7811318ebd9b"
+    },
+    {
+      "bytes": 78439,
+      "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/bounded-complete-runtime-checkout-and-filter-proposal-v2.json",
+      "sha256": "8575d7293cbcc2dcb025dcf8403896b4a6242c7229467a723018225bf5601bf1"
+    },
+    {
+      "bytes": 2750,
+      "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/bounded-source-fix-and-regression-proposal.json",
+      "sha256": "fcd958efec491774a8187fc7f78bc18d86d72db0313811feb36ff9149d20134d"
+    },
+    {
+      "bytes": 1212,
+      "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/canonical-generated-static-and-complete-checkout-scope-proposed-v2.patch",
+      "sha256": "1306a314811448c8090b4aa2e77340e676bbba397ceb6c7ee0477b908cb9b2bf"
+    },
+    {
+      "bytes": 753,
+      "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/canonical-generated-static-input-and-byte-identity-proposed.patch",
+      "sha256": "6bbe065087986fb8e24fa570144abc698f4ffbb6e86b61a3b8a506643fe91038"
+    },
+    {
+      "bytes": 355,
+      "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/freeze-private.log",
+      "sha256": "9d690247e1fa19a542fad095e174ba4ebbb86673c2975cf92b2624fe491b1c1f"
+    },
+    {
+      "bytes": 13281,
+      "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/freeze_complete_checkout_fix_proposal_v2.py",
+      "sha256": "1b983ad4377f9e6b1465226dc54da15dbddb18bc7d1404eacad3213295e6ec70"
+    },
+    {
+      "bytes": 15932,
+      "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/freeze_static_frontend_diagnosis.py",
+      "sha256": "868606a98b08a04a1671f0df0475c9e29cf04e2362538fcb5871ac8c04bd6ff7"
+    },
+    {
+      "bytes": 0,
+      "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/git-index-stderr.private.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 563,
+      "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/proposed-narrow-runtime-checkout-byte-identity-v2.patch",
+      "sha256": "c2f443ecee86323c135862496588fe4b6fa178cfa0cd9bcee25acd3f3d06d978"
+    },
+    {
+      "bytes": 1378,
+      "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/source-.gitattributes.private.txt",
+      "sha256": "07b5e08fadbf379e60e83e622f073d6a5c48d657ea4dc574ba381886a79cd732"
+    },
+    {
+      "bytes": 13180,
+      "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/source-.github__workflows__actions_runtime_pypi_release.yml.private.txt",
+      "sha256": "c22ee0ead9d01ef08169c3d9e329c9c17b9bcdb29a9fce969f16846f88d0347f"
+    },
+    {
+      "bytes": 5470,
+      "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/source-action_server__build.py.private.txt",
+      "sha256": "75c249c111bbf3d81f027a252e7dba54771037f02b402832c0554e119cb4eb12"
+    },
+    {
+      "bytes": 372,
+      "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/source-action_server__frontend__apps__runtime__index.html.private.txt",
+      "sha256": "88a7a3c4cfa44110012527b59833c258dd2f5ebc4b856401c85c848e1da4a595"
+    },
+    {
+      "bytes": 324510,
+      "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/source-action_server__frontend__package-lock.json.private.txt",
+      "sha256": "30e50040438c67254859807343cb53c288508b4895fb69648732277e8184a12a"
+    },
+    {
+      "bytes": 4320,
+      "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/source-action_server__frontend__package.json.private.txt",
+      "sha256": "643bf2f44e343c6bf8aee3c34f5476587c15fd2847cd3082ad8ed5d42eb0b906"
+    },
+    {
+      "bytes": 1654,
+      "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/source-action_server__frontend__scripts__inline-runtime-assets.mjs.private.txt",
+      "sha256": "a1fd02d2a1ed7a5d3ade462a719deb82e0335d66a3f9b2f12ca67976c971a1ca"
+    },
+    {
+      "bytes": 2122,
+      "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/source-action_server__frontend__vite.config.js.private.txt",
+      "sha256": "824943bbcf15289dbe9ee786eb7163a496be3f8234cc45f1a91535a28783ddb8"
+    },
+    {
+      "bytes": 4020,
+      "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/source-action_server__pyproject.toml.private.txt",
+      "sha256": "be4011d3915e8838249546c70ae30420dadfb0d08c19b59970d8980332c7573f"
+    },
+    {
+      "bytes": 27099,
+      "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/source-action_server__tasks.py.private.txt",
+      "sha256": "b35d3722b1f9ed51e57ce4dcd3f7fdc81b7df238cbcdef0eaf44d47d08555791"
+    },
+    {
+      "bytes": 13180,
+      "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/source-actions_runtime_pypi_release.yml-filter-v2.private.txt",
+      "sha256": "c22ee0ead9d01ef08169c3d9e329c9c17b9bcdb29a9fce969f16846f88d0347f"
+    },
+    {
+      "bytes": 7049,
+      "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/source-actions_runtime_tests.yml-filter-v2.private.txt",
+      "sha256": "430588021cf889391842be3a7c78eb4c04648b1bb7311f9c03da452e313fb161"
+    },
+    {
+      "bytes": 160556,
+      "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/source-generator-v2.private.txt",
+      "sha256": "76fcf5b9dadb193aa0a998e0daaf4e09d5b638cac695424d017290ce54257fa1"
+    },
+    {
+      "bytes": 185854,
+      "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/source-readonly.index",
+      "sha256": "3d82aede0bb2c0d7c70cd4caff7243fec9be768af69ae6c8289ececebaa42966"
+    }
+  ],
+  "hypotheses": [
+    {
+      "confidence": "STRONGLY_SUPPORTED_BUT_ORIGINAL_INPUT_UNAVAILABLE",
+      "name": "CRLF_checkout_HTML_scaffold_retained_through_frontend_compilation",
+      "not_established": "Actual effective core.autocrlf value, actual checked-out input CR bytes, exact compiler intermediate and initial origin of CR.",
+      "support": "13CR confined to HTML scaffold, source13LF/eolunset; separate173Python+5nonPython CRLF-only bodies. Actual checkout inputs/config and compiler intermediates are unretained."
+    }
+  ],
+  "necessary_policy_decision": "Approve an LF checkout contract for this single Runtime HTML source or first retain the missing input/config evidence. No claim that the candidate attribute fixes actual original hosted cause.",
+  "original_builder_step_bindings": [
+    {
+      "core_autocrlf_log_mentions_count": 0,
+      "effective_core_autocrlf_observation": "UNAVAILABLE",
+      "frontend_step_lines": [
+        4872,
+        4940
+      ],
+      "job_id": 114433293243,
+      "next_declared_step": "Build OAuth2 config (PR)",
+      "npm_artifacts_command_lines": [
+        4887
+      ],
+      "original_checked_out_runtime_HTML_input": "UNAVAILABLE",
+      "original_decoded_log": {
+        "bytes": 876045,
+        "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/job-114433293243-original.private.log",
+        "sha256": "325c54809da8b95c8071ad8d64ec671d8eed8453a77ce33a79c9db6060987b24"
+      },
+      "original_pre_encoder_dist_index_digest": "UNAVAILABLE",
+      "runtime_inline_script_invocation_lines": [
+        4894
+      ]
+    },
+    {
+      "core_autocrlf_log_mentions_count": 0,
+      "effective_core_autocrlf_observation": "UNAVAILABLE",
+      "frontend_step_lines": [
+        669,
+        739
+      ],
+      "job_id": 114433293117,
+      "next_declared_step": "Build OAuth2 config (PR)",
+      "npm_artifacts_command_lines": [
+        686
+      ],
+      "original_checked_out_runtime_HTML_input": "UNAVAILABLE",
+      "original_decoded_log": {
+        "bytes": 182571,
+        "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/job-114433293117-original.private.log",
+        "sha256": "6af4be956dc6b8c56c5509dc4e7e7756ea583503853ff93c9b85678d3e87a085"
+      },
+      "original_pre_encoder_dist_index_digest": "UNAVAILABLE",
+      "runtime_inline_script_invocation_lines": [
+        693
+      ]
+    },
+    {
+      "core_autocrlf_log_mentions_count": 0,
+      "effective_core_autocrlf_observation": "UNAVAILABLE",
+      "frontend_step_lines": [
+        5365,
+        5433
+      ],
+      "job_id": 114433293201,
+      "next_declared_step": "Build OAuth2 config (PR)",
+      "npm_artifacts_command_lines": [
+        5380
+      ],
+      "original_checked_out_runtime_HTML_input": "UNAVAILABLE",
+      "original_decoded_log": {
+        "bytes": 823529,
+        "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/job-114433293201-original.private.log",
+        "sha256": "4d47b2c5e5ad3b78d6fdbf5cfcb226814cf255570c2106b8215d9cf32776ed72"
+      },
+      "original_pre_encoder_dist_index_digest": "UNAVAILABLE",
+      "runtime_inline_script_invocation_lines": [
+        5387
+      ]
+    }
+  ],
+  "original_owner_qualification": {
+    "bytes": 12170,
+    "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/OWNERFINAL-current618-partial-distribution-integrity-v2.json",
+    "sha256": "9b406fdf505871e6790d7a4233d0b8c075ae6f170f2c5b7a954bbca0f0d46236"
+  },
+  "producer_checkout": "e7666eacf2687f65050b97a88e791f8d0ce4cd20",
+  "producer_ordered_parents": [
+    "a70993fafc99a9f94041485542d5a720797ca394",
+    "6181b044c75de35386f1ae30e71725398b6a7feb"
+  ],
+  "read_only_scope": {
+    "build_install_package_import_browser_native_provider": false,
+    "consumer_runner_or_control_changes": false,
+    "new_downloads_polls": 0,
+    "raw_HTML_logs_configs_signed_URLs_forwarded": false,
+    "source_changes": false
+  },
+  "remaining_holds": [
+    "Windows raw frontend body difference",
+    "Windows unavailable Unix executable mode",
+    "OAuth empty generated entries/sourceauthority",
+    "macOS/aggregate/full7/platform consumers",
+    "private/native/registry/release/whole graph"
+  ],
+  "retained_v1_construction_checkpoint": {
+    "bytes": 20324,
+    "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/OWNERFINAL-windows-generated-static-rootcause-trace.json",
+    "sha256": "91c258e08d0f9cf232d4822a556d079f37d16b07d11bcfd948eb7811318ebd9b"
+  },
+  "schema": "current618-windows-static-and-complete-checkout-rootcause-trace-v2",
+  "scope_correction": "178 tracked CRLF-only differences =173Python+5nonPython; one additional generatedfrontend Pythonbody differs. Do not call178allPython.",
+  "separate_checkout_scope_proposal": {
+    "bytes": 78439,
+    "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/bounded-complete-runtime-checkout-and-filter-proposal-v2.json",
+    "sha256": "8575d7293cbcc2dcb025dcf8403896b4a6242c7229467a723018225bf5601bf1"
+  },
+  "source": "6181b044c75de35386f1ae30e71725398b6a7feb",
+  "source_bindings": [
+    {
+      "bytes": 1378,
+      "git_blob": "a59757d045d9a4c18f553ed02beb6fdc134e529a",
+      "git_mode": "100644",
+      "private_source_snapshot": {
+        "bytes": 1378,
+        "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/source-.gitattributes.private.txt",
+        "sha256": "07b5e08fadbf379e60e83e622f073d6a5c48d657ea4dc574ba381886a79cd732"
+      },
+      "public_git_path": ".gitattributes",
+      "sha256": "07b5e08fadbf379e60e83e622f073d6a5c48d657ea4dc574ba381886a79cd732"
+    },
+    {
+      "bytes": 27099,
+      "git_blob": "905cc8e106194c1a984138e3a0bd27b384f5a4d4",
+      "git_mode": "100644",
+      "private_source_snapshot": {
+        "bytes": 27099,
+        "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/source-action_server__tasks.py.private.txt",
+        "sha256": "b35d3722b1f9ed51e57ce4dcd3f7fdc81b7df238cbcdef0eaf44d47d08555791"
+      },
+      "public_git_path": "action_server/tasks.py",
+      "sha256": "b35d3722b1f9ed51e57ce4dcd3f7fdc81b7df238cbcdef0eaf44d47d08555791"
+    },
+    {
+      "bytes": 5470,
+      "git_blob": "8839a5356c802f21dc779e8d1c3a3ed9ec88aab4",
+      "git_mode": "100644",
+      "private_source_snapshot": {
+        "bytes": 5470,
+        "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/source-action_server__build.py.private.txt",
+        "sha256": "75c249c111bbf3d81f027a252e7dba54771037f02b402832c0554e119cb4eb12"
+      },
+      "public_git_path": "action_server/build.py",
+      "sha256": "75c249c111bbf3d81f027a252e7dba54771037f02b402832c0554e119cb4eb12"
+    },
+    {
+      "bytes": 4020,
+      "git_blob": "021ab546f04306dcff615e3e31a8395110e78703",
+      "git_mode": "100644",
+      "private_source_snapshot": {
+        "bytes": 4020,
+        "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/source-action_server__pyproject.toml.private.txt",
+        "sha256": "be4011d3915e8838249546c70ae30420dadfb0d08c19b59970d8980332c7573f"
+      },
+      "public_git_path": "action_server/pyproject.toml",
+      "sha256": "be4011d3915e8838249546c70ae30420dadfb0d08c19b59970d8980332c7573f"
+    },
+    {
+      "bytes": 372,
+      "git_blob": "3bc72e26ad3a4021d75eb68128e1a6d3dab6b193",
+      "git_mode": "100644",
+      "private_source_snapshot": {
+        "bytes": 372,
+        "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/source-action_server__frontend__apps__runtime__index.html.private.txt",
+        "sha256": "88a7a3c4cfa44110012527b59833c258dd2f5ebc4b856401c85c848e1da4a595"
+      },
+      "public_git_path": "action_server/frontend/apps/runtime/index.html",
+      "sha256": "88a7a3c4cfa44110012527b59833c258dd2f5ebc4b856401c85c848e1da4a595"
+    },
+    {
+      "bytes": 4320,
+      "git_blob": "72dbfaf8b1c587eac2236213ab8b8f8117b00888",
+      "git_mode": "100644",
+      "private_source_snapshot": {
+        "bytes": 4320,
+        "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/source-action_server__frontend__package.json.private.txt",
+        "sha256": "643bf2f44e343c6bf8aee3c34f5476587c15fd2847cd3082ad8ed5d42eb0b906"
+      },
+      "public_git_path": "action_server/frontend/package.json",
+      "sha256": "643bf2f44e343c6bf8aee3c34f5476587c15fd2847cd3082ad8ed5d42eb0b906"
+    },
+    {
+      "bytes": 324510,
+      "git_blob": "13f627bfad5a5158b6b37d688a9ffe308ebfac29",
+      "git_mode": "100644",
+      "private_source_snapshot": {
+        "bytes": 324510,
+        "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/source-action_server__frontend__package-lock.json.private.txt",
+        "sha256": "30e50040438c67254859807343cb53c288508b4895fb69648732277e8184a12a"
+      },
+      "public_git_path": "action_server/frontend/package-lock.json",
+      "sha256": "30e50040438c67254859807343cb53c288508b4895fb69648732277e8184a12a"
+    },
+    {
+      "bytes": 2122,
+      "git_blob": "959509e7f35848770e0990eab89c6f81839bea72",
+      "git_mode": "100644",
+      "private_source_snapshot": {
+        "bytes": 2122,
+        "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/source-action_server__frontend__vite.config.js.private.txt",
+        "sha256": "824943bbcf15289dbe9ee786eb7163a496be3f8234cc45f1a91535a28783ddb8"
+      },
+      "public_git_path": "action_server/frontend/vite.config.js",
+      "sha256": "824943bbcf15289dbe9ee786eb7163a496be3f8234cc45f1a91535a28783ddb8"
+    },
+    {
+      "bytes": 1654,
+      "git_blob": "133941917ee6fa2fd0449068b072bcc81b703127",
+      "git_mode": "100644",
+      "private_source_snapshot": {
+        "bytes": 1654,
+        "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/source-action_server__frontend__scripts__inline-runtime-assets.mjs.private.txt",
+        "sha256": "a1fd02d2a1ed7a5d3ade462a719deb82e0335d66a3f9b2f12ca67976c971a1ca"
+      },
+      "public_git_path": "action_server/frontend/scripts/inline-runtime-assets.mjs",
+      "sha256": "a1fd02d2a1ed7a5d3ade462a719deb82e0335d66a3f9b2f12ca67976c971a1ca"
+    },
+    {
+      "bytes": 13180,
+      "git_blob": "8a6c70171fca53059f4da2b1be0cb657890c20e2",
+      "git_mode": "100644",
+      "private_source_snapshot": {
+        "bytes": 13180,
+        "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/source-.github__workflows__actions_runtime_pypi_release.yml.private.txt",
+        "sha256": "c22ee0ead9d01ef08169c3d9e329c9c17b9bcdb29a9fce969f16846f88d0347f"
+      },
+      "public_git_path": ".github/workflows/actions_runtime_pypi_release.yml",
+      "sha256": "c22ee0ead9d01ef08169c3d9e329c9c17b9bcdb29a9fce969f16846f88d0347f"
+    }
+  ],
+  "source_fix_and_RED_GREEN_plan": {
+    "bytes": 78439,
+    "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/bounded-complete-runtime-checkout-and-filter-proposal-v2.json",
+    "sha256": "8575d7293cbcc2dcb025dcf8403896b4a6242c7229467a723018225bf5601bf1"
+  },
+  "source_pipeline": {
+    "Vite_source_refs": {
+      "output_directory_line": 45,
+      "path": "action_server/frontend/vite.config.js",
+      "runtime_root_selection_lines": [
+        11,
+        13,
+        16
+      ]
+    },
+    "inline_script_source_refs": {
+      "explicit_CR_normalizer": false,
+      "path": "action_server/frontend/scripts/inline-runtime-assets.mjs",
+      "read_asset_line": 29,
+      "read_index_line": 5,
+      "write_index_line": 51
+    },
+    "npm_commands": [
+      {
+        "phase": "npm ci",
+        "tasks_line": 136
+      },
+      {
+        "phase": "npm run build:artifacts",
+        "tasks_line": 144
+      }
+    ],
+    "runtime_build": "Vite runtime mode, then inline-runtime-assets, then artifact manifest and SBOM",
+    "workflow": {
+      "build_then_OAuth_then_package": true,
+      "command": "inv build-frontend",
+      "source_path": ".github/workflows/actions_runtime_pypi_release.yml"
+    }
+  },
+  "tree": "99ac5309add45af65049546dd3a99f357884cf3b",
+  "verdict": "HOLD_PRECISE_CHECKOUT_VERSUS_COMPILER_CAUSE_UNRESOLVED"
+}

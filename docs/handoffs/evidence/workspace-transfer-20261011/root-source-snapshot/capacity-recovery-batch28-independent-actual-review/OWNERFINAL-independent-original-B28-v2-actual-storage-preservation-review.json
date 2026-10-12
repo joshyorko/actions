@@ -1,0 +1,143 @@
+{
+  "accepted_preexecution_review_binding": {
+    "bytes": 9902,
+    "mode": "0o400",
+    "path": "/workspace/engineering/capacity-recovery-batch28-independent-preexecution-review/OWNERFINAL-independent-frozen-B28-v2-capped-all-root-preexecution-review.json",
+    "sha256": "8b438380a24d81d65d2fb5d7e27a0dcdd1cc8bc16ab80ee791015d30e6acabf3"
+  },
+  "actual_owner_binding": {
+    "bytes": 3401,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-B28-v2-one-owned/OWNERFINAL-root-one-B28-v2-original-storage-terminal.json",
+    "sha256": "927a12d9c75ac3dce6390911e977d723301057d5bd0ede7353bd983af72c58cb"
+  },
+  "actual_terminal_binding": {
+    "bytes": 630,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-B28-v2-one-owned/original-one-attempt-terminal.json",
+    "sha256": "68cad40c8bab78543724b5eb703ea5fcecc454515e47dd448cea1537fc940342"
+  },
+  "current_capacity_observation_only": {
+    "/dev/shm": 3901190144,
+    "/tmp": 1170145280,
+    "/workspace": 1635061760
+  },
+  "decision": "GO_B28_V2_ACTUAL_STORAGE_PRESERVATION",
+  "documentation_improvement": {
+    "accepted_exact_delta": {
+      "bytes": 1383,
+      "mode": "0o444",
+      "path": "/workspace/engineering/capacity-recovery-batch28-archiver-source/canonical-capped-all-roots-prestage-and-topology-anchored-v2.patch",
+      "sha256": "e151ed08f1fb0e9f9168634beef80a88fd23e5636d9fc7c2feef12d72e4ad546"
+    },
+    "added_lines": 14,
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "disposition": "Exact accepted source-backed B28 delta remains sufficient; actual independently verified all34 members/5hardlink groups/caps/index metadata reinforces it. Root integration pending, no cosmetic duplicate.",
+    "durable_learning": "Bound actual gzip/footer writes and all final index bytes; stage/fsync/verify every root before removal; preserve hardlink topology as well as resolved bytes and exact nanosecond metadata; keep original primary failures.",
+    "evidence": "Independent actual stream proof plus original root0/postPASS/one consumed release and source53/16AST/RED\u219228methods controls.",
+    "remaining_uncertainty": "Origin/universal quiescence/unrecorded metadata remain unknown; optional relocation and current source/native/runtime acceptance remain separate.",
+    "stale_ambiguity_removed": "Per-root cap or resolved equal file bytes cannot prove all-root overflow preservation or link topology; restored capacity cannot upgrade original failing engineering gates."
+  },
+  "independent_verified_actual": {
+    "TAR_type_mode_UID_GID_and_PAX_decimal_nanosecond_mtime_exact": true,
+    "all34_expanded_removed_flags_true_and_expected_originals_absent": true,
+    "all34_source_base_namespace_identities_and_progress_rows_exact": true,
+    "all_gzip_CRC_EOF_ISIZE_read": true,
+    "all_private_index_cap_bytes": 16777216,
+    "all_regular_body_SHA_and_size_exact": true,
+    "archive_cap_bytes": 50331648,
+    "archive_count": 34,
+    "complete_unique_safe_member_pathset_exact": true,
+    "compressed_archive_bytes": 32630057,
+    "exact_root_headers": 34,
+    "expected_original_external_hardlinks": 0,
+    "failed563": "EXISTS_ONLY; no unbaselined whole-root unchanged claim",
+    "full_and_progress_private_index_bytes": 8816288,
+    "full_index_original_source_snapshots_exact": true,
+    "historical_qualified_bindings": {
+      "Git_snapshot": 1,
+      "archive_alias": 1,
+      "physical": 235,
+      "total": 237
+    },
+    "internal_source_hardlink_groups_preserved": 5,
+    "native_retained_members": 1192,
+    "old_archives_rehashed": 61,
+    "old_private_indices_rehashed": 27,
+    "original_failed1_archive_alias": "Whole immutable archive rehashed; unique original1696byte regular0600 UIDGID1000 member SHA exact,statusFAIL retained; no physical alias reconstruction",
+    "original_failed2_frozen_files_rehashed": 8,
+    "prepared_retained_inputs": 30,
+    "private_archive_index_modes": "0700 owned destination/0600 regular archives and both private indices; archive current UID/GID exact",
+    "protected_immutable_files_rehashed": 137,
+    "source": "396925cb3d6527af1768b7f5333f9653c005fc55",
+    "source_Git_FS_blob_OID_SHA_mode_count": 1426,
+    "symlink_targets_and_internal_hardlink_partitions_exact": true,
+    "tree": "84f850f0d4e08b21afcd8220413ce94322370acf",
+    "unique_child_members": 33013
+  },
+  "inspectors_and_preserved_readonly_failures": [
+    {
+      "bytes": 12804,
+      "mode": "0o400",
+      "path": "/workspace/engineering/capacity-recovery-batch28-independent-actual-review/verify_original_B28_actual_readonly.py",
+      "sha256": "b45ae390390e769ea4490ab37720c5de39cecb3e76aa1784524db7a32ffe34f9"
+    },
+    {
+      "bytes": 12817,
+      "mode": "0o400",
+      "path": "/workspace/engineering/capacity-recovery-batch28-independent-actual-review/verify_original_B28_actual_readonly_v2.py",
+      "sha256": "cd25722354e1a18f0e251ff30a4559874119a5be30f30a66010a1b46598b6cbb"
+    },
+    {
+      "bytes": 12932,
+      "mode": "0o400",
+      "path": "/workspace/engineering/capacity-recovery-batch28-independent-actual-review/verify_original_B28_actual_readonly_v3.py",
+      "sha256": "8215ae81799151c02ead7eef1b69fa236a6d7a870e903d4088c0578f31c9d85f"
+    },
+    {
+      "bytes": 589,
+      "mode": "0o400",
+      "path": "/workspace/engineering/capacity-recovery-batch28-independent-actual-review/original-independent-mixed-mode-representation-comparison-failure.json",
+      "sha256": "6260e2642731d852e4f1a590dc2de5c7b70419a5270585f6adfbf380224f1974"
+    },
+    {
+      "bytes": 556,
+      "mode": "0o400",
+      "path": "/workspace/engineering/capacity-recovery-batch28-independent-actual-review/original-independent-snapshot-field-comparison-failure.json",
+      "sha256": "665379e725172bf01b9260edba9f958222cc3e06999f3aa49034b8a2e953fc98"
+    }
+  ],
+  "original_execution": {
+    "all_selected_originals_before": "PASS",
+    "archiver_exit": 0,
+    "attempt_status": "PASS_STORAGE_PRESERVATION_ONLY",
+    "native_execution": "NOT_RUN",
+    "no_retry": true,
+    "one_consumed_typed_root_release": true,
+    "outer_exit": 0,
+    "protected_before": "PASS",
+    "protected_post": "PASS"
+  },
+  "original_streaming_proof": {
+    "bytes": 7895,
+    "mode": "0o400",
+    "path": "/workspace/engineering/capacity-recovery-batch28-independent-actual-review/independent-original-B28-actual-streaming-byte-metadata-proof.json",
+    "sha256": "d4c156df80cb65754c50162524f1e944b0912e07194d4ebcf150511ea32a0b26"
+  },
+  "reviewer_corrections_preserved": [
+    "First reviewer schema comparison incorrectly included original allocated-block supplement in archive metadata; named V2 excludes only unclaimed allocation supplement.",
+    "Second reviewer mode comparison expected octal text for numeric original mode rows; named V3 normalizes representation to same exact numeric permissions. Both original failures/scripts preserved; no source/archive/test/actual rerun."
+  ],
+  "schema": 1,
+  "scope_and_limits": [
+    "Storage preservation only. Neither root nor reviewer ran a product/native qualification through this task; no full/source gate, pure test rerun, archive creation, extraction, removal or relocation by reviewer.",
+    "Actual compression is now measured and admitted. This does not turn earlier source/native/cleanup/capacity failures green; original failed receipts remain failed.",
+    "Source396 body is retained, not new actuale2 source/runtime acceptance. Current future source tuple/gates/config must be independently bound.",
+    "Complete guarded archived bytes/metadata/link partition are retained; physical inode or block allocation equivalence, ACL/xattr/atime restoration and unrecorded metadata are not claimed.",
+    "Original launch origin and inaccessible process/otherUID handles UNKNOWN; no universal quiescence or retroactive complete process census.",
+    "Observed capacity is not reserved future capacity. Separate exact relocation PREEXEC/release/once execution/actual review required; this receipt permits its typed prerequisite admission only.",
+    "Eight frozen failed2 files plus failed1 archive alias and existing failed563 remain retained; no broader unbaselined entire failed-root identity claim."
+  ],
+  "status": "INDEPENDENT_ORIGINAL_B28_ACTUAL_STORAGE_PRESERVATION_GO",
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,26 @@
+{
+  "status": "READONLY_REVIEW_NO_GATE_EXECUTION",
+  "refs": [
+    {
+      "path": "/workspace/engineering/rcc-transport-v6-independent-source-review/OWNERFINAL-independent-private-transport-v6-metadata-source-review.json",
+      "bytes": 13481,
+      "sha256": "6ba9ac757fb5ca61eb3e2850885c0725c3d730c936c7946921ea908eaa28b564"
+    },
+    {
+      "path": "/workspace/engineering/rcc-transport-v6-independent-source-review/independent_readonly_v6_review.py",
+      "bytes": 9326,
+      "sha256": "fa2957ca147603d57e7122f1eed0bb894934635a01feca72c3fd483f810f8992"
+    },
+    {
+      "path": "/workspace/engineering/rcc-transport-v6-independent-source-review/independent_readonly_v6_review_v2.py",
+      "bytes": 9830,
+      "sha256": "57d1e4c762b4ad824e09eb60cc54088d09994b6c1ab12870458008b7984f44f9"
+    },
+    {
+      "path": "/workspace/engineering/rcc-transport-v6-independent-source-review/original-static-test-count-inspector-HOLD.json",
+      "bytes": 491,
+      "sha256": "533e1a1cc8a70759d8555cdf81f4edc6a40471c7e5c7f2d625d64e9d790f3b5e"
+    }
+  ],
+  "original_inspector_failure": "Function-only AST count omitted dynamically registered inherited tests. Original retained; named successor derives12+19+5 registrations."
+}

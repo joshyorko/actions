@@ -1,0 +1,15 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -3280,6 +3280,12 @@
+ 
+ ### Live pull-request base identity
+ 
++Treat planned integration priority separately from implementation prerequisites.
++When a higher-priority PR fails, the coordinator can reorder independent accepted
++work after rechecking its own exact source, target and complete gates. Preserve
++actual downstream source or acceptance prerequisites; reordering does not admit
++the failed PR or carry old CI onto the target that the independent merge advances.
++
+ Reconcile the complete exact-head check-run inventory, commit statuses and
+ workflow-run inventory before merge admission. Page each endpoint until
+ exhausted and count checks, jobs and runs separately. A successful workflow can

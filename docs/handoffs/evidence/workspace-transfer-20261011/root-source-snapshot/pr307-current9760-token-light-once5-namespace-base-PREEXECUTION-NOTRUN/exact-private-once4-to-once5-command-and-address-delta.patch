@@ -1,0 +1,43 @@
+--- /workspace/engineering/pr307-current9760-token-light-once4-PREEXECUTION-NOTRUN/launch_one_owned_token_light_once4_owning_settings_child.py
++++ /workspace/engineering/pr307-current9760-token-light-once5-namespace-base-PREEXECUTION-NOTRUN/launch_one_owned_token_light_once5_command_local_namespace_base.py
+@@ -12,9 +12,9 @@
+ 
+ ROOT=Path('/workspace/engineering/pr307')
+ BASE=Path(__file__).resolve().parent
+-CONFIG=BASE/'immutable-one-TOKEN-LIGHT-once4-inputs.json'
+-CONFIG_SHA='f70311b03b99687071ecebdf7eb99498c89cf3d1117618ecf1318f6dee191437'
+-ATTEMPT=Path('/workspace/engineering/pr307-current9760-token-light-once4-owned')
++CONFIG=BASE/'immutable-one-TOKEN-LIGHT-once5-inputs.json'
++CONFIG_SHA='15a0b35a676fe4ee29781546fe0a7a8a362b19adaac11ffba0a4dfe9220d3f6c'
++ATTEMPT=Path('/workspace/engineering/pr307-current9760-token-light-once5-owned')
+ SOURCE='9760d5ec44876558c4941c4c3190abc8d92d14a1'
+ TREE='0d33ebaac258e069ef7045a29b4a3904740f6307'
+ CACHED=Path('/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534')
+@@ -134,11 +134,11 @@
+     reviewpath=Path(sys.argv[3]);reviewraw=reviewpath.read_bytes();assert digest(reviewraw)==sys.argv[4]
+     assert reviewpath.is_file() and not reviewpath.is_symlink()
+     review=json.loads(reviewraw)
+-    assert auth['decision']=='RELEASE_ONE_CURRENT9760_TOKEN_LIGHT_ONCE4_ONLY' and auth['source']==SOURCE and auth['tree']==TREE
++    assert auth['decision']=='RELEASE_ONE_CURRENT9760_TOKEN_LIGHT_ONCE5_ONLY' and auth['source']==SOURCE and auth['tree']==TREE
+     assert auth['launcher_sha256']==digest(Path(__file__).read_bytes()) and auth['config_sha256']==CONFIG_SHA
+     SELF_EXPECTED=auth['launcher_sha256']
+     assert auth['independent_review']=={'path':str(reviewpath),'sha256':sys.argv[4]}
+-    assert review['decision']=='GO_CURRENT9760_TOKEN_LIGHT_ONCE4_GATEWAY_PREEXECUTION'
++    assert review['decision']=='GO_CURRENT9760_TOKEN_LIGHT_ONCE5_GATEWAY_PREEXECUTION'
+     assert not ATTEMPT.exists();ATTEMPT.mkdir(mode=0o700)
+     os.umask(0o077)
+     primary=None;post=None;status='FAILED';before=False
+@@ -190,11 +190,11 @@
+         run_phase('token-release-line-GREEN',gateway('import toolkit; toolkit.poetry("devutils","run","python","-m","pytest","tests/test_runtime_release_workflows.py","tests/test_actions_runtime_release_line.py","-n","0","-vv")'),green_env,180)
+         f_env=pytest_env(env,'guard-focus',True)
+         run_phase('guard-focus',gateway('import toolkit; toolkit.poetry("action_server","run","python","-m","pytest","tests/build_system_tests/test_oauth2_config_build.py","-n","0","-vv")'),f_env,180)
+-        run_phase('configured-static',gateway('import toolkit; toolkit.poetry("action_server","run","invoke","lint"); toolkit.poetry("action_server","run","invoke","typecheck"); toolkit.poetry("action_server","run","ruff","check","scripts/build_oauth2_config.py","tests/build_system_tests/test_oauth2_config_build.py"); toolkit.poetry("action_server","run","ruff","format","--check","scripts/build_oauth2_config.py","tests/build_system_tests/test_oauth2_config_build.py"); toolkit.poetry("action_server","run","mypy","scripts/build_oauth2_config.py"); toolkit.poetry("devutils","run","ruff","check","src","tests"); toolkit.poetry("devutils","run","ruff","format","--check","--config","ruff.toml","src","tests"); toolkit.poetry("devutils","run","isort","--check","src","tests"); toolkit.poetry("devutils","run","mypy","--follow-imports=silent","--namespace-packages","--explicit-package-bases","src")'),env,180)
++        run_phase('configured-static',gateway('import toolkit; toolkit.poetry("action_server","run","invoke","lint"); toolkit.poetry("action_server","run","invoke","typecheck"); toolkit.poetry("action_server","run","ruff","check","scripts/build_oauth2_config.py","tests/build_system_tests/test_oauth2_config_build.py"); toolkit.poetry("action_server","run","ruff","format","--check","scripts/build_oauth2_config.py","tests/build_system_tests/test_oauth2_config_build.py"); toolkit.poetry("action_server","run","mypy","scripts/build_oauth2_config.py"); toolkit.poetry("devutils","run","ruff","check","src","tests"); toolkit.poetry("devutils","run","ruff","format","--check","--config","ruff.toml","src","tests"); toolkit.poetry("devutils","run","isort","--check","src","tests"); toolkit.run(["poetry","run","mypy","--follow-imports=silent","--namespace-packages","--explicit-package-bases","src"], toolkit.REPOSITORY_ROOT / "devutils", env_overrides={"MYPYPATH": "/workspace/engineering/pr307/devutils/src"})'),env,180)
+         run_phase('generated-eight-and-Github30',gateway(cfg['generator_probe_code']),env,120)
+         assert not (ATTEMPT/'controlled-invoke').exists();(ATTEMPT/'controlled-invoke').mkdir(mode=0o700)
+         run_phase('controlled-invoke-command',[sys.executable,cfg['controlled_runner']['path'],str(ATTEMPT/'controlled-invoke')],package_env(env),210)
+-        status='PASSED_CURRENT9760_TOKEN_LIGHT_ONCE4_ONLY'
++        status='PASSED_CURRENT9760_TOKEN_LIGHT_ONCE5_ONLY'
+     except BaseException as error:
+         primary=error
+     finally:

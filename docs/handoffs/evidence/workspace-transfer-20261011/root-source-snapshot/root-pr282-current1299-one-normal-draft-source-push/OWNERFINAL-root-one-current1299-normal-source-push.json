@@ -1,0 +1,14 @@
+{
+  "actual_native_browser_release": "HOLD_NOT_RUN",
+  "draft": true,
+  "head": "1299cc4bb6586f467d36ca124faaaaa77362695f",
+  "hosted_CI": "FRESH_PENDING",
+  "independent_SOURCEFULL_sha256": "d09e53afeaf6bbd379a1c65e42b11af5af0bb30abc7f204ac2083e83fd06c0d0",
+  "normal_push_attempts": 1,
+  "push_returncode": 0,
+  "schema": 1,
+  "source_clean": true,
+  "status": "NORMAL_CURRENT1299_SOURCE_PUSH_REMOTE_VERIFIED",
+  "target": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+  "tree": "afe2679cc93bf27fa5021c7698ee7ad3ee21a1b9"
+}

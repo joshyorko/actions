@@ -1,0 +1,60 @@
+{
+  "ROOTrelease_path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/root-one-current2d86-private-LIGHT-release.json",
+  "attempt": "/workspace/engineering/pr313-current2d86-private-cached-LIGHT-once1-owned",
+  "bounds_honest": {
+    "always_post_guard_GNU_TERM": 60,
+    "before_guard_GNU_TERM": 60,
+    "cooperative_primary_remainder_seconds": 600,
+    "hard_primary640_parent": "NOT_IMPLEMENTED_NOT_CLAIMED",
+    "per_phase_GNU_KILL_grace": 10,
+    "per_phase_GNU_TERM": "min(declaredbudget, remaining-15)",
+    "per_phase_parent_wait": "budget+15, ownwrapperfallback5+5",
+    "whole_ROOT_KILL_grace": 10,
+    "whole_ROOT_hard_TERM_seconds": 900
+  },
+  "cached_only": "NoRCCgateway/native acquisition/provider/browsermanualexecution. Doctor/Toolkit/scopedsource cachedinterpreterfutureonly.",
+  "cleanup_limits": "Copiedacceptedhelper onlyfreshowned wrappergroup fallback/wait; no universal descendants/readers/reaping/cause facts. Hard-kill/stalledreads cannotguaranteeinnerfinally; external attemptedpost observedseparately.",
+  "compatible_review_fields": "source/tree/config_sha256/launcher_sha256; PREEXEC also external_all_outcome_parent_sha256",
+  "config": {
+    "bytes": 58670,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/FROZEN-current2d86-private-cached-bounded-LIGHT-inputs-NOTRUN.json",
+    "sha256": "2d1c4f81d6015080be4e3480914b3759e44d391b9687de45653e7c5ae895d1c2"
+  },
+  "fresh_floor": 1288490189,
+  "future_outer_command_shape": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "900s",
+    "<ROOT-reviewed-external-parent-or-child-per-reviewed-enclosure>"
+  ],
+  "guard": {
+    "bytes": 5971,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/current_2d86_readonly_source_and_full_authority_guard_NOTRUN.py",
+    "sha256": "c639494b57f8406fc699e880c8e2605acb0f622dce4c33d94655550a709bb68a"
+  },
+  "inner_command_argv": [
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/launch_current2d86_private_cached_bounded_LIGHT_once_NOTRUN.py",
+    "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/root-one-current2d86-private-LIGHT-release.json",
+    "ROOT_RELEASE_SHA256",
+    "REAL_PREEXEC_REVIEW_PATH",
+    "REAL_PREEXEC_REVIEW_SHA256"
+  ],
+  "launcher": {
+    "bytes": 10636,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/launch_current2d86_private_cached_bounded_LIGHT_once_NOTRUN.py",
+    "sha256": "daa8a0cf96b3f110c71a908767d58c7aea87649568a89a888f2c6cd8bc870070"
+  },
+  "mandatory_external_parent": "ROOT must author/review a separate enclosing caller enforcing complete ROOTrelease/SOURCEreview/PREEXEPreview/launcher/config/guard/all-input physical bodymodehash closure BEFORE and ALWAYSPOST on every outcome, including pre-admission failure beforeinnerattempt and wholehardtimeout. Bind its actual regularsource row in ROOTrelease, not boolean attestation alone. No parent is created or executable here.",
+  "required_PREEXEC_decision": "GO_CURRENT_2D86_PRIVATE_BOUNDED_LIGHT_PREEXECUTION",
+  "required_ROOT_decision": "ROOT_RELEASE_ONE_CURRENT_2D86_PRIVATE_BOUNDED_LIGHT_ONLY",
+  "required_SOURCE_decision": "GO_CURRENT_2D86_PRIVATE_BOUNDED_LIGHT_SOURCE_PREPARED_ONLY",
+  "schema": 1,
+  "source": "2d86c5cf92d3acb274a8ceb5d57bfb8b12c779b6",
+  "status": "SOURCE_PREPARED_ONLY_EXTERNAL_ROOT_PARENT_NOT_AUTHORED_NOT_RUN_PREEXEC_HOLD",
+  "tree": "653a9e73e4d27641ec86de94b90f35d41e0f24f8"
+}

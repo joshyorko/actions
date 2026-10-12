@@ -1,0 +1,1192 @@
+{
+  "schema": "actions-independent-one-current-exact-source-CI-metadata/v2",
+  "PR": 312,
+  "verdict": "HOLD_CURRENT312_HOSTED_CI_PENDING_AND_EXECUTED_WINDOWS_CHECKOUT_UNQUALIFIED",
+  "source_head": "ec70a2928461941c129b1c05332dc441070e0184",
+  "actual_base": "e3c29cde8878307912e55ed09b6436c0f91d06d5",
+  "source_tree": "47a1e4fceb22fd15eaee1ca380ad6c005abfdde6",
+  "before_after_named_refs_PR_stable": true,
+  "API_prospective_synthetic": {
+    "sha": "4c6cc8d53b409bebf1fc0e820eccb73130351008",
+    "ordered_parents": [
+      "e3c29cde8878307912e55ed09b6436c0f91d06d5",
+      "ec70a2928461941c129b1c05332dc441070e0184"
+    ],
+    "tree": "47a1e4fceb22fd15eaee1ca380ad6c005abfdde6",
+    "complete_source_tree_equal": true,
+    "actual_logged_checkout": "UNAUTHENTICATED_NO_ORIGINAL_JOB_LOG_ACQUIRED"
+  },
+  "source_typed_union": {
+    "head": "ec70a2928461941c129b1c05332dc441070e0184",
+    "tree": "47a1e4fceb22fd15eaee1ca380ad6c005abfdde6",
+    "current_typed_entries": 1426,
+    "ordered_source_parents": [
+      "77ed3de24f33412dff30e4e3c18841c4c09933ac",
+      "e3c29cde8878307912e55ed09b6436c0f91d06d5"
+    ],
+    "parent_typed_entries": [
+      1424,
+      1423
+    ],
+    "no_deleted_parent_leaves": true,
+    "novel_body_mode_paths": [
+      "action_server/src/actions/server/_server.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "typed_index_sha256": "7b474770cea6861788caaa4fe5eec459cb8fb3fd10c9d6dcce8a0137d606e7ff",
+    "source_vs_base_changed_body_mode_paths": [
+      ".gitattributes",
+      ".github/workflows/_gen_workflows.py",
+      ".github/workflows/actions_runtime_pypi_release.yml",
+      ".github/workflows/actions_runtime_tests.yml",
+      "action_server/src/actions/server/_server.py",
+      "action_server/tests/action_server_tests/test_shutdown_response_order.py",
+      "devutils/tests/test_runtime_checkout_bytes.py",
+      "devutils/tests/test_runtime_checkout_workflows.py",
+      "docs/skills/repository-operations.md"
+    ]
+  },
+  "source_typed_union_private_proof": {
+    "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/private-complete-source-parent-typed-body-mode-union.json",
+    "bytes": 227862,
+    "sha256": "a43d52adaf4fd3d7fa757270ba8fe8d4c138b65ba7e92d719840a84b1cbbbdfd"
+  },
+  "current_declared_CI": {
+    "source_workflow_paths": 25,
+    "eligible_PR_flows": 7,
+    "declared_matrix_jobs": 23,
+    "observed_allpaged_head_checks": 23,
+    "observed_allpaged_runs": 7,
+    "observed_allpaged_jobs": 23,
+    "complete_all_declared_materialized": true,
+    "check_job_IDs_equal": true,
+    "check_counts": [
+      {
+        "status": "completed",
+        "conclusion": "success",
+        "count": 18
+      },
+      {
+        "status": "in_progress",
+        "conclusion": null,
+        "count": 5
+      }
+    ],
+    "job_counts": [
+      {
+        "status": "completed",
+        "conclusion": "success",
+        "count": 18
+      },
+      {
+        "status": "in_progress",
+        "conclusion": null,
+        "count": 5
+      }
+    ],
+    "non_atomic_status_observation_equal": true,
+    "PR_changed_paths_count": 9,
+    "PR_changed_paths": [
+      ".gitattributes",
+      ".github/workflows/_gen_workflows.py",
+      ".github/workflows/actions_runtime_pypi_release.yml",
+      ".github/workflows/actions_runtime_tests.yml",
+      "action_server/src/actions/server/_server.py",
+      "action_server/tests/action_server_tests/test_shutdown_response_order.py",
+      "devutils/tests/test_runtime_checkout_bytes.py",
+      "devutils/tests/test_runtime_checkout_workflows.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "normalpush_before": "77ed3de24f33412dff30e4e3c18841c4c09933ac",
+    "normalpush_after": "ec70a2928461941c129b1c05332dc441070e0184",
+    "normalpush_changed_paths": [
+      "action_server/src/actions/server/_server.py",
+      "action_server/src/actions/server/run_outputs/transport.py",
+      "action_server/tests/action_server_tests/run_outputs/test_transport.py",
+      "docs/skills/provenance-observability.md",
+      "docs/skills/repository-operations.md"
+    ],
+    "eligible_push_workflow_paths": [],
+    "auxiliary_push_runs_observed": 0,
+    "late_Runtime_publisher": {
+      "run": 38148186340,
+      "job": 114497359251,
+      "status": "completed",
+      "conclusion": "success",
+      "needs": [
+        "build-sdist",
+        "build-wheels"
+      ],
+      "scope": "PR collector/validation; publishing steps push-tag guarded",
+      "publication_step_guards": [
+        {
+          "name": "Verify merged tag provenance and version",
+          "if": "github.event_name == 'push'"
+        },
+        {
+          "name": "Check Runtime publish credential",
+          "if": "github.event_name == 'push'"
+        },
+        {
+          "name": "Publish verified artifacts",
+          "if": "github.event_name == 'push' && steps.runtime-token.outputs.enabled == 'true'"
+        }
+      ]
+    },
+    "flows": [
+      {
+        "path": ".github/workflows/actions_core_tests.yml",
+        "source_sha256": "d9e1c8884b4321024b2f785e6b01af655e1da0be4a1f45572f51a7ef1d64b296",
+        "name": "Actions Core Tests",
+        "event": "pull_request",
+        "PR_branch_path_filter": {
+          "branches": [
+            "community",
+            "integration/**"
+          ],
+          "paths": [
+            "actions/**",
+            ".github/workflows/actions_core_tests.yml",
+            "devutils/**",
+            "actions-http-helper/**",
+            ".github/workflows/_gen_workflows.py"
+          ]
+        },
+        "declared_jobs": [
+          {
+            "id": "build",
+            "name": "build",
+            "if": null,
+            "needs": [],
+            "matrix_rows": [
+              {
+                "name": "ubuntu-py3.10-devmode",
+                "python": "3.10",
+                "os": "ubuntu-22.04"
+              },
+              {
+                "name": "windows-py3.10-devmode",
+                "python": "3.10",
+                "os": "windows-2022"
+              },
+              {
+                "name": "macos-py3.10-devmode",
+                "os": "macos-15",
+                "python": "3.10"
+              }
+            ]
+          },
+          {
+            "id": "candidate-wheel",
+            "name": "candidate-wheel",
+            "if": null,
+            "needs": [],
+            "matrix_rows": [
+              {}
+            ]
+          }
+        ],
+        "run": 38148186348,
+        "attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "id": 114495852261,
+            "name": "build (ubuntu-py3.10-devmode)",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:43:17Z",
+            "completed_at": "2026-10-11T14:44:33Z",
+            "failed_steps": []
+          },
+          {
+            "id": 114495852375,
+            "name": "build (windows-py3.10-devmode)",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:41:13Z",
+            "completed_at": "2026-10-11T14:44:11Z",
+            "failed_steps": []
+          },
+          {
+            "id": 114495852389,
+            "name": "candidate-wheel",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:43:51Z",
+            "completed_at": "2026-10-11T14:44:32Z",
+            "failed_steps": []
+          },
+          {
+            "id": 114495852418,
+            "name": "build (macos-py3.10-devmode)",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:44:50Z",
+            "completed_at": "2026-10-11T14:45:58Z",
+            "failed_steps": []
+          }
+        ]
+      },
+      {
+        "path": ".github/workflows/actions_runtime_pypi_release.yml",
+        "source_sha256": "72998a0e12719bbd49d7695696ee4bd3542e6eb4c43f5ac93aa071e917ec8b29",
+        "name": "Actions Runtime PYPI Release",
+        "event": "pull_request",
+        "PR_branch_path_filter": {
+          "branches": [
+            "community",
+            "integration/**"
+          ],
+          "paths": [
+            ".gitattributes",
+            ".github/workflows/_gen_workflows.py",
+            ".github/workflows/actions_runtime_pypi_release.yml",
+            ".github/workflows/actions_runtime_binary_release.yml",
+            ".github/workflows/actions_runtime_manylinux_release.yml",
+            "devutils/tests/test_actions_runtime_release_line.py",
+            "devutils/tests/test_runtime_release_workflows.py",
+            "docs/skills/repository-operations.md",
+            "action_server/scripts/publish_verified_runtime.py",
+            "action_server/scripts/verify_published_runtime_floor.py"
+          ]
+        },
+        "declared_jobs": [
+          {
+            "id": "build-sdist",
+            "name": "build-sdist",
+            "if": null,
+            "needs": [],
+            "matrix_rows": [
+              {
+                "name": "ubuntu-py3.12",
+                "python": "3.12",
+                "os": "ubuntu-22.04"
+              }
+            ]
+          },
+          {
+            "id": "build-wheels",
+            "name": "build-wheels",
+            "if": null,
+            "needs": [],
+            "matrix_rows": [
+              {
+                "os": "ubuntu-22.04",
+                "python": "3.12",
+                "name": "ubuntu"
+              },
+              {
+                "os": "windows-2022",
+                "python": "3.12",
+                "name": "windows"
+              },
+              {
+                "os": "macos-15",
+                "python": "3.12",
+                "name": "macos"
+              }
+            ]
+          },
+          {
+            "id": "publish",
+            "name": "publish",
+            "if": null,
+            "needs": [
+              "build-sdist",
+              "build-wheels"
+            ],
+            "matrix_rows": [
+              {
+                "python": "3.12"
+              }
+            ]
+          }
+        ],
+        "run": 38148186340,
+        "attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "id": 114495852168,
+            "name": "build-sdist (ubuntu-py3.12)",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:44:12Z",
+            "completed_at": "2026-10-11T14:45:01Z",
+            "failed_steps": []
+          },
+          {
+            "id": 114495852348,
+            "name": "build-wheels (ubuntu-22.04)",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:41:12Z",
+            "completed_at": "2026-10-11T14:43:43Z",
+            "failed_steps": []
+          },
+          {
+            "id": 114495852428,
+            "name": "build-wheels (windows-2022)",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:41:12Z",
+            "completed_at": "2026-10-11T14:45:40Z",
+            "failed_steps": []
+          },
+          {
+            "id": 114495852464,
+            "name": "build-wheels (macos-15)",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:46:27Z",
+            "completed_at": "2026-10-11T14:48:42Z",
+            "failed_steps": []
+          },
+          {
+            "id": 114497359251,
+            "name": "publish (3.12)",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:50:42Z",
+            "completed_at": "2026-10-11T14:51:04Z",
+            "failed_steps": []
+          }
+        ]
+      },
+      {
+        "path": ".github/workflows/actions_runtime_tests.yml",
+        "source_sha256": "84981311da9a21c549d5213cfaf0778162224851f8a4d639b3151a059be33872",
+        "name": "Action Server Tests",
+        "event": "pull_request",
+        "PR_branch_path_filter": {
+          "branches": [
+            "master",
+            "community",
+            "integration/**"
+          ],
+          "paths": [
+            "action_server/**",
+            ".github/workflows/actions_runtime_tests.yml",
+            "devutils/**",
+            "actions/**",
+            "actions-http-helper/**",
+            "work-items/**",
+            ".gitattributes"
+          ]
+        },
+        "declared_jobs": [
+          {
+            "id": "build",
+            "name": "build",
+            "if": null,
+            "needs": [],
+            "matrix_rows": [
+              {
+                "name": "ubuntu-py3.12-devmode",
+                "python": "3.12",
+                "os": "ubuntu-22.04"
+              },
+              {
+                "name": "windows-py3.12-devmode",
+                "python": "3.12",
+                "os": "windows-2022"
+              },
+              {
+                "name": "macos-py3.12-devmode",
+                "os": "macos-15",
+                "python": "3.12"
+              }
+            ]
+          }
+        ],
+        "run": 38148186353,
+        "attempt": 1,
+        "status": "in_progress",
+        "conclusion": null,
+        "jobs": [
+          {
+            "id": 114495852017,
+            "name": "build (ubuntu-py3.12-devmode)",
+            "status": "in_progress",
+            "conclusion": null,
+            "started_at": "2026-10-11T14:41:12Z",
+            "completed_at": null,
+            "failed_steps": []
+          },
+          {
+            "id": 114495852274,
+            "name": "build (windows-py3.12-devmode)",
+            "status": "in_progress",
+            "conclusion": null,
+            "started_at": "2026-10-11T14:41:13Z",
+            "completed_at": null,
+            "failed_steps": []
+          },
+          {
+            "id": 114495852284,
+            "name": "build (macos-py3.12-devmode)",
+            "status": "in_progress",
+            "conclusion": null,
+            "started_at": "2026-10-11T14:41:18Z",
+            "completed_at": null,
+            "failed_steps": []
+          }
+        ]
+      },
+      {
+        "path": ".github/workflows/ai-audit.yml",
+        "source_sha256": "2334d210444efcc82389a3f535032794aec91142e7f44eaf5b97bcb9816f5d0e",
+        "name": "AI audit evidence",
+        "event": "pull_request",
+        "PR_branch_path_filter": null,
+        "declared_jobs": [
+          {
+            "id": "audit",
+            "name": "audit",
+            "if": null,
+            "needs": [],
+            "matrix_rows": [
+              {}
+            ]
+          }
+        ],
+        "run": 38148186318,
+        "attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "id": 114495852087,
+            "name": "audit",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:41:12Z",
+            "completed_at": "2026-10-11T14:41:20Z",
+            "failed_steps": []
+          }
+        ]
+      },
+      {
+        "path": ".github/workflows/coverage-gate.yml",
+        "source_sha256": "e355c4769bae5e548dc7aa8c7393bdc496ebfcbdd24c1c3918d90bc7e1ef76cf",
+        "name": "Measured Python coverage gate",
+        "event": "pull_request",
+        "PR_branch_path_filter": {
+          "branches": [
+            "community",
+            "integration/community-release-20261008"
+          ]
+        },
+        "declared_jobs": [
+          {
+            "id": "coverage",
+            "name": "coverage",
+            "if": null,
+            "needs": [],
+            "matrix_rows": [
+              {}
+            ]
+          }
+        ],
+        "run": 38148186383,
+        "attempt": 1,
+        "status": "in_progress",
+        "conclusion": null,
+        "jobs": [
+          {
+            "id": 114495852320,
+            "name": "coverage",
+            "status": "in_progress",
+            "conclusion": null,
+            "started_at": "2026-10-11T14:41:12Z",
+            "completed_at": null,
+            "failed_steps": []
+          }
+        ]
+      },
+      {
+        "path": ".github/workflows/developer_toolkit.yml",
+        "source_sha256": "60ca471cb9bdff0059b1a9b1fcdf9256b666fb2fb1d533b93307d2841facc0a8",
+        "name": "RCC developer toolkit",
+        "event": "pull_request",
+        "PR_branch_path_filter": null,
+        "declared_jobs": [
+          {
+            "id": "toolkit",
+            "name": "toolkit",
+            "if": null,
+            "needs": [],
+            "matrix_rows": [
+              {
+                "lane": "primary",
+                "rcc_version": "18.19.3",
+                "os": "ubuntu-22.04",
+                "asset": "rcc-linux64",
+                "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+              },
+              {
+                "lane": "primary",
+                "rcc_version": "18.19.3",
+                "os": "macos-15",
+                "asset": "rcc-macosarm64",
+                "sha256": "778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266"
+              },
+              {
+                "lane": "primary",
+                "rcc_version": "18.19.3",
+                "os": "windows-2022",
+                "asset": "rcc-windows64.exe",
+                "sha256": "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4"
+              },
+              {
+                "lane": "n-1",
+                "rcc_version": "18.18.1",
+                "os": "ubuntu-22.04",
+                "asset": "rcc-linux64",
+                "sha256": "ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf02f2c9bb4b4ef0bfcf"
+              },
+              {
+                "lane": "n-1",
+                "rcc_version": "18.18.1",
+                "os": "macos-15",
+                "asset": "rcc-macosarm64",
+                "sha256": "57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984d2d6a8190024798d"
+              },
+              {
+                "lane": "n-1",
+                "rcc_version": "18.18.1",
+                "os": "windows-2022",
+                "asset": "rcc-windows64.exe",
+                "sha256": "705e2a4ec70a8bc3881f042a2eae222ed07e39a8360735307ee937d74d2a0f5b"
+              }
+            ]
+          }
+        ],
+        "run": 38148186386,
+        "attempt": 1,
+        "status": "in_progress",
+        "conclusion": null,
+        "jobs": [
+          {
+            "id": 114495852433,
+            "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:41:12Z",
+            "completed_at": "2026-10-11T14:44:44Z",
+            "failed_steps": []
+          },
+          {
+            "id": 114495852603,
+            "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:41:13Z",
+            "completed_at": "2026-10-11T14:44:57Z",
+            "failed_steps": []
+          },
+          {
+            "id": 114495852611,
+            "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:41:17Z",
+            "completed_at": "2026-10-11T14:43:49Z",
+            "failed_steps": []
+          },
+          {
+            "id": 114495852614,
+            "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:45:48Z",
+            "completed_at": "2026-10-11T14:49:17Z",
+            "failed_steps": []
+          },
+          {
+            "id": 114495852639,
+            "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+            "status": "in_progress",
+            "conclusion": null,
+            "started_at": "2026-10-11T14:43:45Z",
+            "completed_at": null,
+            "failed_steps": []
+          },
+          {
+            "id": 114495852652,
+            "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:41:13Z",
+            "completed_at": "2026-10-11T14:50:47Z",
+            "failed_steps": []
+          }
+        ]
+      },
+      {
+        "path": ".github/workflows/frontend-build-unauthenticated.yml",
+        "source_sha256": "2d2a21af458ccfdb771f65707d7ab60fb1f5dfa24019c94ded4a02ed46f8d36d",
+        "name": "Action Server Build (Unauthenticated)",
+        "event": "pull_request",
+        "PR_branch_path_filter": {
+          "paths": [
+            "action_server/**",
+            "work-items/**",
+            ".github/workflows/frontend-build-unauthenticated.yml"
+          ]
+        },
+        "declared_jobs": [
+          {
+            "id": "build-external",
+            "name": "Build Action Server binary without credentials",
+            "if": null,
+            "needs": [],
+            "matrix_rows": [
+              {
+                "os": "ubuntu-22.04",
+                "python": "3.12"
+              },
+              {
+                "os": "windows-2022",
+                "python": "3.12"
+              },
+              {
+                "os": "macos-15",
+                "python": "3.12"
+              }
+            ]
+          }
+        ],
+        "run": 38148186357,
+        "attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "id": 114495852245,
+            "name": "Build Action Server binary without credentials (macos-15)",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:41:17Z",
+            "completed_at": "2026-10-11T14:47:31Z",
+            "failed_steps": []
+          },
+          {
+            "id": 114495852364,
+            "name": "Build Action Server binary without credentials (windows-2022)",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:41:13Z",
+            "completed_at": "2026-10-11T14:50:40Z",
+            "failed_steps": []
+          },
+          {
+            "id": 114495852479,
+            "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+            "status": "completed",
+            "conclusion": "success",
+            "started_at": "2026-10-11T14:41:21Z",
+            "completed_at": "2026-10-11T14:46:19Z",
+            "failed_steps": []
+          }
+        ]
+      }
+    ],
+    "pending_jobs": [
+      {
+        "job": 114495852017,
+        "name": "build (ubuntu-py3.12-devmode)",
+        "status": "in_progress",
+        "conclusion": null
+      },
+      {
+        "job": 114495852274,
+        "name": "build (windows-py3.12-devmode)",
+        "status": "in_progress",
+        "conclusion": null
+      },
+      {
+        "job": 114495852284,
+        "name": "build (macos-py3.12-devmode)",
+        "status": "in_progress",
+        "conclusion": null
+      },
+      {
+        "job": 114495852320,
+        "name": "coverage",
+        "status": "in_progress",
+        "conclusion": null
+      },
+      {
+        "job": 114495852639,
+        "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+        "status": "in_progress",
+        "conclusion": null
+      }
+    ],
+    "failure_jobs": []
+  },
+  "reviews": 0,
+  "review_comments": 0,
+  "connections": {
+    "closingIssuesReferences": {
+      "count": 0,
+      "complete": true,
+      "pages": 1,
+      "unresolved": null
+    },
+    "reviewThreads": {
+      "count": 0,
+      "complete": true,
+      "pages": 1,
+      "unresolved": 0
+    }
+  },
+  "draft": true,
+  "REST_mergeable": true,
+  "REST_mergeable_state": "unstable",
+  "GraphQL_mergeStateStatus": "UNSTABLE",
+  "policy": {
+    "traditional_protection": "UNKNOWN_HTTP403_NO_BYPASS_AUTHORITY",
+    "visible_branch_rules": 0,
+    "visible_rulesets": 0,
+    "branch_protected": false,
+    "branch_endpoint_protection": {
+      "enabled": false,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    }
+  },
+  "accepted_source_and_original_snapshots_retained": [
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/OWNERFINAL-root-current312-ec70-configured-SOURCEFULL.json",
+      "bytes": 5785,
+      "sha256": "32288acae49cf7f89c8f7c67bad292d062bcf9a56bb9032175216d0c00bcb0d1"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-SOURCEFULL-independent-actual-review/OWNERFINAL-independent-currentec70-configured-SOURCEFULL-review.json",
+      "bytes": 12574,
+      "sha256": "f375b3daed2a3523c4dc55d87632655f2e90918dc8d1deb4af6493f9bd073448"
+    },
+    {
+      "path": "/workspace/engineering/root-pr312-currentec70-one-normal-push/safe-result-named-metadata-successor-no-repush.json",
+      "bytes": 2567,
+      "sha256": "6b04b9402563510ac7baf49b4e6a11250a25679caa53c20cd03f4747189b69d2"
+    }
+  ],
+  "215_distribution_tracked_source_only": null,
+  "one_conditional_current_Windows_original_log_acquisition_proposal": {
+    "status": "PROPOSAL_ONLY_ROOT_AUTHORIZATION_AND_TERMINAL_METADATA_REQUIRED_NOT_ACQUIRED",
+    "job": 114495852274,
+    "run": 38148186353,
+    "observed_job_status": "in_progress",
+    "observed_conclusion": null,
+    "currently_permitted_acquisition": false,
+    "connector_tool": "mcp__codex_apps__github_fetch_workflow_job_logs",
+    "arguments": {
+      "repo_full_name": "joshyorko/actions",
+      "job_id": 114495852274
+    },
+    "one_original_decoded_private_path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/windows114495852274-one-original-terminal-decoded.log",
+    "one_original_mode": "0600",
+    "conditions": [
+      "ROOT explicit authorization after job terminal",
+      "Search existing owned original evidence first; no duplicate acquisition or additional jobs/artifacts",
+      "Record original decoded SHA/bytecount/private acquisition envelope; no raw snippets/signed URLs in stdout or Git"
+    ],
+    "qualification": [
+      "Authenticate executed checkout from original log; API prospective4c6 is not a guessed executed checkout",
+      "Authenticate exact source ec70, original checkout ordered[e3,ec70], complete typed tree47a equivalence using authenticated original Git identity",
+      "Census source and integration counts/workers/skips/deselects; complete selected Windows EOL/checkout/shutdown fixture outcomes",
+      "Separate first readiness failures from semantic assertions and unavailable cleanup observations; no cause/cleanup inference from result alone"
+    ],
+    "old770_original_log_and_scope": "Preserved unchanged; no identity or successful-state transfer"
+  },
+  "remaining_HOLD": [
+    "Five current checks pending at capture; no original current Windows log acquired",
+    "Draft and inaccessible traditional protection remain independent normal-policy gates",
+    "No admission of private/native/current generated wheel/consumer/full release; source-full1335/13 does not substitute current hosted proof"
+  ],
+  "metadata_limits": "One complete paginated bracketed acquisition; response timestamps differ, stable refs do not imply atomic check states or actual logged checkout. No polling loop or original log/artifact acquisition.",
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md exact existing592949/9744/bf95 lessons verified integrated; no cosmetic duplicate",
+    "Exact_verified_delta_reuse": [
+      {
+        "path": "/workspace/engineering/pr300-current618-CI-admission-review/canonical-event-specific-push-paths-proposed.patch",
+        "bytes": 909,
+        "sha256": "592949e0da5d48236262b87f3d6568dbde0d78fc7cc92835a7e8a512c48f73aa"
+      },
+      {
+        "path": "/workspace/engineering/pr221-current776-preflight/canonical-policy-and-snapshot-proposed.patch",
+        "bytes": 897,
+        "sha256": "9744b01f0f2f888de5f88f129b857df33938cb1adf182ec32b30ed08b2f14fe8"
+      },
+      {
+        "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/canonical-partial-platform-consumer-scope-proposed.patch",
+        "bytes": 1158,
+        "sha256": "bf95da899763f97c016f76fa4a0cf8878ebba8326d57c11ab1a520b1df597c81"
+      }
+    ],
+    "Durable_learning_captured": "Expected jobs derive exact current source event/path filters, matrices and late needs; the same PR number does not preserve historical flow/job counts. Source/tree equality, executed checkout, artifact content and consumer/release are separately qualified.",
+    "Evidence": "Current paginated API originals, exact7/23 and13/34 YAML-derived matrices, named-ref brackets, complete typed source proof and215 Git input equality",
+    "Stale_or_ambiguous_guidance_removed": "Historical312 six-flow20 count not carried: current seven-flow23 derives additional coverage eligibility and six-job Toolkit matrix. Zero visible rules do not eliminate inaccessible traditional policy.",
+    "Remaining_uncertainty": [
+      "Five current checks pending at capture; no original current Windows log acquired",
+      "Draft and inaccessible traditional protection remain independent normal-policy gates",
+      "No admission of private/native/current generated wheel/consumer/full release; source-full1335/13 does not substitute current hosted proof"
+    ]
+  },
+  "Upstream_disposition": "none",
+  "no_tests_source_mutation_native_provider_download_push_ready_merge_or_repeatpoll": true,
+  "retained_initial_metadata_freeze_FAILURE": {
+    "script": {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/freeze-two-bounded-metadata-reviews.py",
+      "bytes": 17784,
+      "sha256": "45dabf1fa4cd867f689f5d8b81bbc643e304138a62d838a43d5d781302a275ef"
+    },
+    "failure_log": {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/freeze-private.log",
+      "bytes": 449,
+      "sha256": "715178d203ea91e1e78649f70fc591bab7f9187ac756dfb36635bc7a8e9ec9d5"
+    },
+    "scope": "Initial constructor incorrectly assumed docs-only parent-combined leaves. Exact current source also combines _server.py, already bound by accepted source/full currentec70 tree47a. No OWNERFINAL emitted, no API repeat or source modification."
+  },
+  "review_script": {
+    "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/freeze-two-bounded-metadata-reviews-v2.py",
+    "bytes": 18360,
+    "sha256": "c5c65fd5cb086e410e1eb6724105c0deabf772d26d64449d501bff5a1333c054"
+  },
+  "private_API_original_bindings": [
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/acquire-once-readonly.py",
+      "bytes": 5868,
+      "sha256": "0d95eaf106d74479305eeac0ffcc151fbad0c67cffcff8121f2a9811f5161735"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/acquisition-summary.json",
+      "bytes": 350,
+      "sha256": "f3ff513acdea904795912199aabca1728a4797c0c5a892ff96f22284eec01eaa"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/after-named-base.raw.private.json",
+      "bytes": 460,
+      "sha256": "d55b9a95c3727a798027c81bb7bb6648a2e3268f1261d8480a3708c415674a07"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/after-named-base.request.json",
+      "bytes": 294,
+      "sha256": "9668b76d4a4d9da8c07d4a47e91d476f35ea814ca04047e8fd4564e8ad6a8fc5"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/after-named-head.raw.private.json",
+      "bytes": 443,
+      "sha256": "ed2fc0119ec590562e5e85772a7a1e7d0937ddb02f7da9f285aa465b624c014f"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/after-named-head.request.json",
+      "bytes": 289,
+      "sha256": "4b2930a46d6cd5a31cc6608cf412abc2cd855dc373cca89941afa766b813c409"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/after-pr.raw.private.json",
+      "bytes": 19531,
+      "sha256": "22baca24329206957b0080e448aca5fce7161a7902e02ac4de6b17685b5f3003"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/after-pr.request.json",
+      "bytes": 253,
+      "sha256": "66d6932c5ef6a8d88a2e0e9b82256e7fc488fdfc873f46f0ead2c0caf24cc0e1"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/base-branch.raw.private.json",
+      "bytes": 5584,
+      "sha256": "f9b974b88e9a8e41a449f2e047c97fa277544da64c32f822f0a680f4392ed6a5"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/base-branch.request.json",
+      "bytes": 292,
+      "sha256": "8c8c65629792a1676430e54ab9b4acb8754f0259fc008c6850c79730d7e68998"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/base-protection.request.json",
+      "bytes": 302,
+      "sha256": "5a1805464adf39d0112439293393016ca0195b8daac7d77d3819d2763a4f1187"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/before-named-base.raw.private.json",
+      "bytes": 460,
+      "sha256": "d55b9a95c3727a798027c81bb7bb6648a2e3268f1261d8480a3708c415674a07"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/before-named-base.request.json",
+      "bytes": 294,
+      "sha256": "dd2909c10e00a149e70182c934feb78c5f43ebe21c7f89dbb2c00ce5c376e0d1"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/before-named-head.raw.private.json",
+      "bytes": 443,
+      "sha256": "ed2fc0119ec590562e5e85772a7a1e7d0937ddb02f7da9f285aa465b624c014f"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/before-named-head.request.json",
+      "bytes": 289,
+      "sha256": "3fe59e649061510a6cfad3b32819a4ef5866495600d4c4576f1206fa60052a1c"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/before-pr.raw.private.json",
+      "bytes": 19531,
+      "sha256": "22baca24329206957b0080e448aca5fce7161a7902e02ac4de6b17685b5f3003"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/before-pr.request.json",
+      "bytes": 253,
+      "sha256": "3afc1d1e56fa38d34397c3c8c18f6bd22cfc6d07211e1bc2c66d4b5ffabc0160"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/branch-rules.raw.private.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/branch-rules.request.json",
+      "bytes": 294,
+      "sha256": "95b7a14bd04af40f436fec4a8048f23c07b1273701e9942a51a050a49c28286d"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/changed-files.raw.private.json",
+      "bytes": 30310,
+      "sha256": "0d21f090ac359431ed490f63ac44a9a395b59220b12122ff52c62d954b3d5245"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/changed-files.request.json",
+      "bytes": 271,
+      "sha256": "a676baf6f4617e7ef2adf9c9f291fef623fd0ecc22911303fc64eaecf7032fd9"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/closures-page-1.raw.private.json",
+      "bytes": 755,
+      "sha256": "14fa24d3f78fc88318ada9e20586f86e2fd42ad43864370241ea2ff765b0ea45"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/closures-page-1.request.json",
+      "bytes": 148,
+      "sha256": "5c19bb5db6cefde2ea702e70326789244ad50168ade9f8deb2288cf4e09e3777"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/head-check-runs.raw.private.json",
+      "bytes": 87495,
+      "sha256": "7bcd00534eb1c952e7a4004645b0e7866d971579e4fdae5cfdb826e2b8016000"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/head-check-runs.request.json",
+      "bytes": 326,
+      "sha256": "fe011d449efb080904ea224aa19586cc7bf1ecf9bc313822f35b1ffadcd391fd"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/head-check-suites.raw.private.json",
+      "bytes": 78495,
+      "sha256": "b8b4666504963a2d11ca6cb467fc2604b70bf2f8be70ca487475ec477d49eb4f"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/head-check-suites.request.json",
+      "bytes": 317,
+      "sha256": "48ed3a8db5168126e267577309e89abcf2a9865471dc422ffcf0691eb8065830"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/head-commit.raw.private.json",
+      "bytes": 45766,
+      "sha256": "3fc5d654d6983bc7781fe77f1c07dd4f77c69509eed772339bc7f1863b77e2cf"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/head-commit.request.json",
+      "bytes": 292,
+      "sha256": "1833ea996f3d6cb30cf7e6f965b0866d92edf8b4a4c86071eb3c69106089fe7b"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/head-runs.raw.private.json",
+      "bytes": 91740,
+      "sha256": "c095fe40671d06b476e201348727689ad8cd289e43a4d6780919b6509a1b14e5"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/head-runs.request.json",
+      "bytes": 318,
+      "sha256": "8170bc7f3aa9bc98050ac6ae57bbb01b7eba832f1d9a3d1bf63824dae95679a6"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/head-statuses.raw.private.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/head-statuses.request.json",
+      "bytes": 309,
+      "sha256": "52716aaa9aca8367094601c9595249ba627f1cf96188fa0f96af44b56deaf163"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/merge-check-runs.raw.private.json",
+      "bytes": 38,
+      "sha256": "3b29ca22d800ee4f4f72aa18efc5af2f17c8f788db9d63ab463b365d2c0920a2"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/merge-check-runs.request.json",
+      "bytes": 323,
+      "sha256": "327de64336c160fa50f63e3b4740e1407c4ef0e2ec911d2c6c21a8f9a8d66e17"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/merge-check-suites.raw.private.json",
+      "bytes": 40,
+      "sha256": "4e929adbdc69abcb55cbd6c541fa88397ad113392ae033696f5e1ab55b596d50"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/merge-check-suites.request.json",
+      "bytes": 314,
+      "sha256": "f51f382858fb8e0c032385c7d7da696a520556f45e802613619fecae99184d58"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/merge-commit.raw.private.json",
+      "bytes": 35311,
+      "sha256": "d4e2dde481789a591ae152babb4181b636cc58f6b8e377d8c6ee8aecb0972d34"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/merge-commit.request.json",
+      "bytes": 292,
+      "sha256": "3b6365cb69739c1ffd4f521f60ebc4ec7ef22a3383ad044682a5b0ed9c67cdce"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/merge-runs.raw.private.json",
+      "bytes": 41,
+      "sha256": "725143e0e46d6aefd0d32064f5407f39c7c2149674a6fb60e3f3376c71e7b5ad"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/merge-runs.request.json",
+      "bytes": 315,
+      "sha256": "017eedf2813de62abdad8401353bb638e28a9ea8bd820f8ff7a4c904f8213fc4"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/merge-statuses.raw.private.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/merge-statuses.request.json",
+      "bytes": 309,
+      "sha256": "180a9567fe659268d76198d742f43a2d2e7bbd00255bb2656d928ee7977499bf"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/review-comments.raw.private.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/review-comments.request.json",
+      "bytes": 270,
+      "sha256": "0a4bc1c1fb29c2a16182b3ba6f18b8f11f2cd8afa757f58eab63c8b174f7e224"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/reviews.raw.private.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/reviews.request.json",
+      "bytes": 269,
+      "sha256": "a31a0cea2644243f9cc8731abf30ee022b5c568798090d3f7f1b910411e2e30f"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/rulesets.raw.private.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/rulesets.request.json",
+      "bytes": 282,
+      "sha256": "60d6f81bebb8b1719f1777406575f0c50029250839f8dd96cf7d62b869f612a7"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/run-38148186318-jobs.raw.private.json",
+      "bytes": 2035,
+      "sha256": "bfc97e12a515f439287a5f6f860ef2147756339cb256a04ca25bc3ab067e1eb8"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/run-38148186318-jobs.request.json",
+      "bytes": 295,
+      "sha256": "734692574282f28c3a2a08d1326db245a8bdff34da870b7af3a3f03b42051589"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/run-38148186340-jobs.raw.private.json",
+      "bytes": 24618,
+      "sha256": "e235155cc1999f1ec6db8420130409cb8c8513de349e7577247bee4fadde1580"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/run-38148186340-jobs.request.json",
+      "bytes": 296,
+      "sha256": "0e362c118d2141dc1129a3ad76915191b85c448f27a732750af425599227a42c"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/run-38148186348-jobs.raw.private.json",
+      "bytes": 15155,
+      "sha256": "9f21ed9f13aeafcb666e50e81e92aae83c7d6569662df6e318c70f0fcb8711c2"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/run-38148186348-jobs.request.json",
+      "bytes": 296,
+      "sha256": "aa7c17ff1a79a8cba2715229d1ddd20cc5f7bf70c2d72c0ef1f02abffa7708cf"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/run-38148186353-jobs.raw.private.json",
+      "bytes": 15284,
+      "sha256": "8e4b6ffef27b07e65de86109cd1bed3d05c410bd757c2226c0f4fdc989f41faa"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/run-38148186353-jobs.request.json",
+      "bytes": 296,
+      "sha256": "ebd629f3ca2b91ccc5f78a707799b1a4faa26aaf8299c7adf904329955505635"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/run-38148186357-jobs.raw.private.json",
+      "bytes": 24115,
+      "sha256": "7fc7ccba4b0d1338bfb1aa2484e9c759998183935bacc98527f842739f00d65f"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/run-38148186357-jobs.request.json",
+      "bytes": 296,
+      "sha256": "2c6130b6fcd0d491f9106507df237ae7bd2e32948ad6fc955dec8dac754785be"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/run-38148186383-jobs.raw.private.json",
+      "bytes": 3062,
+      "sha256": "596ba0f1d23e6744c2de9435107deb2fa8defc7938638c8cc4b8df6ca24d3dce"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/run-38148186383-jobs.request.json",
+      "bytes": 295,
+      "sha256": "55182448a6bc3a19514dace0467d0ec235212bf3fc90cc0ad11cc203ffe81e3f"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/run-38148186386-jobs.raw.private.json",
+      "bytes": 20920,
+      "sha256": "4787969f0312f4bcb975edcb977304591ca3fbff76b1f0efd2197701736c193e"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/run-38148186386-jobs.request.json",
+      "bytes": 296,
+      "sha256": "756893d68c4f994432121882d86ccaf93b07e481b07dcdff88f3daf199301878"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/threads-page-1.raw.private.json",
+      "bytes": 745,
+      "sha256": "94f9e980ee408d12ba3a7490058f0b174258f8f551d749809e0498148e1caeee"
+    },
+    {
+      "path": "/workspace/engineering/pr312-currentec70-one-CI-reconciliation/threads-page-1.request.json",
+      "bytes": 148,
+      "sha256": "e09743580462615599a8f91cdedc4ffbfba02a6d536a83cb423be6838032629e"
+    }
+  ]
+}

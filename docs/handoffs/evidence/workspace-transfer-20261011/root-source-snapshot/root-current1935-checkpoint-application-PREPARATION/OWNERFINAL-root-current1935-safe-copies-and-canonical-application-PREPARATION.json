@@ -1,0 +1,166 @@
+{
+  "checkpoint_base": "d55ed399a5b6ba67e88002dd6d490ac9366c2130",
+  "first_supported_newer": "NONE_YET",
+  "guide": {
+    "canonical_dispositions": {
+      "3169": "ADOPT_EXACT7",
+      "7418": "ADOPT_EXACT6",
+      "d21d": "ADOPT_FIRST3_HISTORY_LINES_REUSE_EXISTING_ACCEPTED66a3_LOGGER_GUIDANCE",
+      "f46d": "ADOPT_EXACT10",
+      "f797": "ADOPT_EXACT8_ZIP_ONLY"
+    },
+    "new_bytes": 248548,
+    "new_sha256": "a6f28284f31aad5c5e5ae4c170f53d906641edaf56af5ff495cd6f7cb03050cd",
+    "old_bytes": 245946,
+    "old_sha256": "53aa3ac04d7a3f42262b2c198474dd3ac9d573ff428676e9bb55ac5f94c9f65d",
+    "path": "docs/skills/repository-operations.md"
+  },
+  "new_files": [
+    {
+      "bytes": 11627,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/04-OWNERFINAL-current8d49-one-original-Windows-source-and-static-failure-diagnosis.json",
+      "sha256": "3f864f74b7e41f8a0faaa25aa5e9b335c09947c2ce5d467d46098366bfa7bcbd",
+      "source": "/workspace/engineering/pr308-current8d49-original-Windows-one-owned/OWNERFINAL-current8d49-one-original-Windows-source-and-static-failure-diagnosis.json"
+    },
+    {
+      "bytes": 2565,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/05-OWNERFINAL-private-current8d49-Windows-portability-source-PROPOSAL.json",
+      "sha256": "ecb19ffb860b976a70f8394f0bff50a0b1ab469bee9d1f3ae4f71590bd70bc30",
+      "source": "/workspace/engineering/pr308-current8d49-Windows-private-portability-successor/OWNERFINAL-private-current8d49-Windows-portability-source-PROPOSAL.json"
+    },
+    {
+      "bytes": 3827,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/06-proposed-two-path-assertions-and-cache-owner-features.patch",
+      "sha256": "093cb7f29b354f0b64f0e971726b4426b99549997aa6cf5611f14dec75ddf404",
+      "source": "/workspace/engineering/pr308-current8d49-Windows-private-portability-successor/proposed-two-path-assertions-and-cache-owner-features.patch"
+    },
+    {
+      "bytes": 4944,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/07-OWNERFINAL-independent-private-current8d49-Windows-portability-SOURCE-proposal-review.json",
+      "sha256": "3cb83d185dcb474a602cdf3c954d8004bdb06ee18a63ce12b0cc6fa59f957bbb",
+      "source": "/workspace/engineering/pr308-current8d49-Windows-private-portability-independent-review/OWNERFINAL-independent-private-current8d49-Windows-portability-SOURCE-proposal-review.json"
+    },
+    {
+      "bytes": 6730,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/08-OWNERFINAL-current8d49-managed-reload-drain-private-source-and-nine-real-controls-PREPARED-NOTRUN.json",
+      "sha256": "faf0d846ba7e1f240dccb1b6e77ccbba23e36379010bf9ab8abf6c4e6221211f",
+      "source": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/OWNERFINAL-current8d49-managed-reload-drain-private-source-and-nine-real-controls-PREPARED-NOTRUN.json"
+    },
+    {
+      "bytes": 24118,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/09-frozen-current8d49-two-path-persistent-fixture-source.patch",
+      "sha256": "ec23125cfcf2ca2af3e1c7e08871bb1f198e0df1db04e9be62d61b89b755b158",
+      "source": "/workspace/engineering/pr308-current8d49-persistent-two-path-private-recontext/frozen-current8d49-two-path-persistent-fixture-source.patch"
+    },
+    {
+      "bytes": 7994,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/11-OWNERFINAL-independent-original-current-e2-seven-distribution-inner-ACTUAL-integrity-review.json",
+      "sha256": "29168625d9ab51aa816e28e645285412130bca1552cb3d0132f92f31a8800dbd",
+      "source": "/workspace/engineering/pr221-current-e2-inner-v2-ACTUAL-independent-review/OWNERFINAL-independent-original-current-e2-seven-distribution-inner-ACTUAL-integrity-review.json"
+    },
+    {
+      "bytes": 4358,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/14-OWNERFINAL-currente2-original-Mac-Windows-producer-checkout-build-identity-only.json",
+      "sha256": "d67b48ef702f04b5ed4a43d2ff01626f0acac8fafc3e5aa0118b59f7f31b3444",
+      "source": "/workspace/engineering/pr221-currente2c-Mac-Windows-original-producer-log-owned/OWNERFINAL-currente2-original-Mac-Windows-producer-checkout-build-identity-only.json"
+    },
+    {
+      "bytes": 9277,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/15-OWNERFINAL-current8d49-qualified-V8-control3-config-and-managed-PREEXEC.json",
+      "sha256": "16f55dd096f13c6e8a9e9d56aa5f9f262bed2f1404e87d785f3a1f6a4a330aed",
+      "source": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/OWNERFINAL-current8d49-qualified-V8-control3-config-and-managed-PREEXEC.json"
+    },
+    {
+      "bytes": 12177,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/16-OWNERFINAL-independent-current8d49-qualified-V8-control3-config-managed-PREEXEC-review.json",
+      "sha256": "3860e929e17aeea6fb88fbacf02b61e451ed8689820425f491bdce118db4bcd7",
+      "source": "/workspace/engineering/rcc-current8d49-qualified-V8-independent-preexecution-review/OWNERFINAL-independent-current8d49-qualified-V8-control3-config-managed-PREEXEC-review.json"
+    },
+    {
+      "bytes": 13715,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/17-build_qualified_current8d49_config_v8_FINAL.py",
+      "sha256": "1992b7bc25799a0cdd0a9c203d531a0bdca1356ee4678a84c489eafe242e319c",
+      "source": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/build_qualified_current8d49_config_v8_FINAL.py"
+    },
+    {
+      "bytes": 1444,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/18-managed_one_version_entry_v8.py",
+      "sha256": "f1ae7b01b9c01d6391fa46d7cef1cbaf6630dd0bd98698df400f677617f23b6d",
+      "source": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/managed_one_version_entry_v8.py"
+    },
+    {
+      "bytes": 5013,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/19-launch_one_version_v8.py",
+      "sha256": "41c128697ab418985257df8aa2eb99abf0d22379264a34b948a12b92a2059b9e",
+      "source": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/launch_one_version_v8.py"
+    },
+    {
+      "bytes": 4664,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/20-readonly_current_input_guard_v8.py",
+      "sha256": "13e123a40b4f811a81c549b6a4387135e8d6bc515be39559f34d5fc030c398b6",
+      "source": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/readonly_current_input_guard_v8.py"
+    },
+    {
+      "bytes": 2988,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/21-gateway_entry_v8.py",
+      "sha256": "ad14539953b2b4b5039d729507d3117e021b1cf00aa767df7a049997c00784b8",
+      "source": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/gateway_entry_v8.py"
+    },
+    {
+      "bytes": 22172,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/22-OWNERFINAL-five-completed8d49-roots-capped-storage-PREEXECUTION-v4.json",
+      "sha256": "a1333777200edeaf0320f437c946e9df15e2e6ce6a3c61a976838d7b9b088b2e",
+      "source": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/OWNERFINAL-five-completed8d49-roots-capped-storage-PREEXECUTION-v4.json"
+    },
+    {
+      "bytes": 772,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/23-canonical-private-actual-fixture-history-and-pytest-logger-proposed.patch",
+      "sha256": "d21d043bb7cfcdfa32a7e9edb5239c71a649918ed800202f378449bd0e159877",
+      "source": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/canonical-private-actual-fixture-history-and-pytest-logger-proposed.patch"
+    },
+    {
+      "bytes": 548,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/24-canonical-native-path-and-POSIX-feature-proposed.txt",
+      "sha256": "3169c416f55f972f5c8ec5bad7ef970a107fb55eae6778a315b40552c5949bfd",
+      "source": "/workspace/engineering/pr308-current8d49-Windows-private-portability-successor/canonical-native-path-and-POSIX-feature-proposed.txt"
+    },
+    {
+      "bytes": 779,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/25-proposed-canonical-managed-Poetry-and-guard-capture-lesson.txt",
+      "sha256": "f46d621678d346caa1f71699ddd1f8fe7eb338fc75834e7a18b201c75d4f8e0a",
+      "source": "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v3/proposed-canonical-managed-Poetry-and-guard-capture-lesson.txt"
+    },
+    {
+      "bytes": 1068,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/26-canonical-real-data-inspector-entry-and-boundary-controls-proposed-v2.patch",
+      "sha256": "f7977ae5226da1fcd2554d2439de9216fc4806a2446d1b1300525a8e0942e868",
+      "source": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/canonical-real-data-inspector-entry-and-boundary-controls-proposed-v2.patch"
+    },
+    {
+      "bytes": 470,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/27-canonical-original-platform-checkout-identity-proposed.md",
+      "sha256": "74187436f50d80becea52d7679a6943085a950f6339dc4ce3a9fdc2c15ecf1de",
+      "source": "/workspace/engineering/pr221-currente2c-Mac-Windows-original-producer-log-owned/canonical-original-platform-checkout-identity-proposed.md"
+    },
+    {
+      "bytes": 3837,
+      "path": "docs/handoffs/actions-swarm-mk3-20261011-1935Z-engineering-successor.md",
+      "sha256": "4edb3381a10a99e05afed665261f9571dcc7613bfa056983008835d506ef2cce",
+      "source": "/workspace/engineering/private-handoff-current1935-successor-PREPARATION/proposed-1935Z-engineering-handoff-successor.md"
+    },
+    {
+      "bytes": 22481,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/safe-reference-manifest-original.json",
+      "sha256": "4bd2e8ea96b0062b21c2c3b23571d59e067b11ebd6a5eb65a488de114c9524e9",
+      "source": "/workspace/engineering/private-handoff-current1935-successor-PREPARATION/proposed-additive-safe-reference-manifest.json"
+    },
+    {
+      "bytes": 5606,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/OWNERFINAL-original-private-handoff-PROPOSAL.json",
+      "sha256": "d5fe68a6346bc0be49b429886be0274906ea4091b43046116180d9cfb6f65de8",
+      "source": "/workspace/engineering/private-handoff-current1935-successor-PREPARATION/OWNERFINAL-private-current1935-additive-handoff-PROPOSAL.json"
+    }
+  ],
+  "source_native_release": "UNCHANGED_HOLD",
+  "status": "PRIVATE_ROOT_APPLICATION_ONLY_NO_COMMIT_PUSH"
+}

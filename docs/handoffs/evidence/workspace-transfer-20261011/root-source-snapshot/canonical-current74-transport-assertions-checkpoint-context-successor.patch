@@ -1,0 +1,19 @@
+diff --git a/docs/skills/provenance-observability.md b/docs/skills/provenance-observability.md
+index 9025645c..2e6ca6ae 100644
+--- a/docs/skills/provenance-observability.md
++++ b/docs/skills/provenance-observability.md
+@@ -125,6 +125,14 @@ selected runtime kind or required features. Its tests also verify changed
+ subjects and missing plans fail closed; adapters must build richer receipts on
+ top of these primitives rather than implement a second admission gate.
+ 
++For assembled output-transport denials, count provider-open attempts before
++entering the reader context; a list of successfully opened readers alone cannot
++prove that storage was never touched. Take complete logical database and owned
++filesystem snapshots after legitimate publication or grant changes, then compare
++them across each request. Compare SQL rows rather than physical SQLite bytes:
++the resolver takes idempotent writer locks even for authorized reads. HEAD 405
++and Range 416 prove rejection, not method support or persisted-grant resolution.
++
+ Contract tests must cover one collapsed and one split execution with an RCC
+ adapter and one non-RCC adapter; retry/Attempt linkage; RCC local/provider/
+ cold/warm preparation; admission off/shadow/enforce and exact-subject

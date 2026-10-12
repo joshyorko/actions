@@ -1,0 +1,19 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -2299,6 +2299,16 @@
+ cold-registry or cold-install qualification. Identical retained cache bodies
+ can identify duplicate storage, but do not prove a future peak or compatibility.
+ Keep capacity thresholds and strict cleanup admission unchanged.
++
++RCC's private client home has a different permission contract from the
++supervisor-owned state root and package cache. The retained RCC revision's
++package initialization recursively applies mode `0750` before a `--version`
++probe returns. Admit only the explicitly reviewed `0700`/`0750` client-home
++modes with the exact owned path, owner and group; keep the state root and
++package cache at `0700` and the identity marker at `0600`. Never chmod an
++input to make admission pass. Bind observed permissions and native-source
++provenance separately: a modified build does not establish exact source
++equivalence, and a rejected home proves no publication, Action or lease result.
+ 
+ Managed spec-v2 Action packages use the provisional RCC runtime adapter only
+ when `ACTIONS_RUNTIME_RCC_PROVIDER` or `ACTIONS_REAL_RCC_ARTIFACT_TEST`

@@ -1,0 +1,90 @@
+{
+  "schema": "actions-independent-pr305-current774-pureordinary-source-review/v1",
+  "verdict": "GO_NORMAL_EXISTING_PR_BRANCH_SOURCE_REFRESH_PUSH_ONLY",
+  "head": "723397b748b48282e13480b0ab7e4cb4c7e10c8c",
+  "tree": "a58412bc551d5927580d9d9d6f5fb8989c67ffc2",
+  "ordered_parents": [
+    "1e9c462fc16534f1a6153ef666ae60a9ac9560d6",
+    "774438b130afb2ead9bbc1c1b76cb6f91e72150a"
+  ],
+  "branch": "test/canvas-runtime-cache-isolation-20261010",
+  "clean": true,
+  "frozen_receipt": {
+    "path": "/workspace/engineering/pr305-actual774-refresh/frozen-source-receipt.json",
+    "bytes": 17355,
+    "sha256": "0d21c19c364d2529dcccec9fd967ee467d3928cbfb8aa8929d884d1c2c2533c7"
+  },
+  "independent_byte_union_proof": {
+    "path": "/workspace/engineering/pr305-actual774-independent-review/independent-complete-source-and-retained-byte-proof.json",
+    "bytes": 15554,
+    "sha256": "b5c5eb0ebfdc7a024e64bda8049c569032d35b96427de44c587d49be834bd0b4"
+  },
+  "actual_existing_branch_and_base_readback": {
+    "path": "/workspace/engineering/pr305-actual774-independent-review/current-authenticated-existing-branch-readback.json",
+    "bytes": 1001,
+    "sha256": "cb98accdd5042ade82167ccb34b99f1aaa24798def207b241619e82f06136958"
+  },
+  "independent_checks": {
+    "git_merge_tree_complete_result_equals_frozen_tree": true,
+    "all1410_workingmode_blob_leaf_union_entries_exact_old_or_target_except_resolvedguide": true,
+    "all_parent_leaves_retained": true,
+    "owned3fixture_authoring_Gitblobs_exact1e9": true,
+    "whole_github_exact774": true,
+    "producer268_selected5_combined273_exact1e9_774_3ec_92498": true,
+    "named85frontend_wrapper_inputs_exact1e9_3ec_92498": true,
+    "prepared24inputs_and5own_concrete_source_prefixes_verified": true,
+    "nested_all66_source_receipt_reference_lengths_SHA256_exact": true,
+    "original1192_native_inventory_entries_names_modes_symlink_targets_hashes_exact": true,
+    "original_assetsZIP_frozenexe_helper_originals_readonlysnapshots_browser_originalV5corrected28b_ind184_exactbytes": true,
+    "external_PR282_original_edc7_helper_and_snapshot_bound_separately_not305_Gitpath": true
+  },
+  "source_gate_subject": {
+    "head": "723397b748b48282e13480b0ab7e4cb4c7e10c8c",
+    "tree": "a58412bc551d5927580d9d9d6f5fb8989c67ffc2",
+    "all_gates_same_committed_union": true
+  },
+  "verified_recorded_gates": {
+    "Doctor": "PASS",
+    "Bootstrap": "VERIFIED_REUSE exact24 source inputs plus five own prepared environments and concrete module/source/prefix checks; no installer",
+    "Toolkit": 69,
+    "scoped_source": {
+      "passed": 46,
+      "integration_deselected": 2,
+      "skip": 0,
+      "includes_service_free_atomic_Node_PID_controls": true
+    },
+    "full_configured_Runtime_source": {
+      "passed": 1200,
+      "skipped": 12,
+      "warnings": 15,
+      "seconds": 138.7,
+      "workers": 2
+    },
+    "full_configured_lint": "Ruff/format/Isort PASS",
+    "typecheck_files": 338,
+    "generated_workflows": 8,
+    "workflow_plus_dependabot_yaml": 26,
+    "all_tracked_yaml_parsed_and_preserved": 30,
+    "extra_four_yaml_not_claimed_generated": true,
+    "git_diff_check": "PASS"
+  },
+  "verification_boundary": "Independent read-only actual original gate logs and exact source/evidence bytes; no source gates reexecuted. Full1200/12/scoped46+2actualdeselect/Toolkit69/type338/static/gen8+26workflowdependabot+30trackedYAML belongs723committedunion.12skips/2realintegrationdeselections remain unverified.",
+  "preserved_source_contract": "Pure ordinary union leaves original probe constants and member/version/distribution-owner/prefix/RECORD/committed-Gitfixture checks and atomic PID publication/negative incomplete identities unchanged.15forcedhang/10poll/25future/30total/3cleanup unchanged through byte-exact three owned tests and original external helper snapshots, no widening or guard waiver.",
+  "actual_provenance_limits": "Original V5 actual remains ONLY3ec9/92498, original corrected28b+ind184 exact.3public Core sampled members+ownership/RECORD narrow gate, notwholewheel orcoldregistry. Strictforced cleanup plus separate adopted-child reap is notnaturalservice shutdown/universalfutureadoption. New723 has no actualnative/browser/provider/forcedhang run; source parity does not relabel originalexecution. EarlierV2/V3/V4 failures/report-loss limits and WinCRLF/MacemptyPID remain historicalnegative tuples.",
+  "historical_CI": "Live existing head1e9 confirmed; original18green/pending Windows notnew723admission. Fresh exact-head/syntheticmerge complete expected CI and separate current actual/provider/privatefull99/ChatGPT/OAuth/release gates remain required. No merge GO.",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md and docs/skills/work-items.md",
+    "Exact_delta": {
+      "path": "/workspace/engineering/pr305-actual774-independent-review/canonical-reviewed-imported-delta.patch",
+      "bytes": 13215,
+      "sha256": "b2eeea131311c0290f9a6d49b4963ceffb84a51b5f5ebfdfe7dc5243502af5e4"
+    },
+    "Disposition": "ACCEPT exact13215B ordinary imported accepted774 lessons.41fixture/V5 guide additions from3ec\u21921e9 each retained in current guide. No novel/cosmetic child required; unchanged source does not create a new execution lesson.",
+    "Durable_learning_captured": "Readiness failure vssemantic assertion/nativeUI gate; complete previousmark sums vsfinalmark; receipt digest vsGit ancestry; platform/Core/browser/source/harness/artifact scope. Existing committedfixture payload/atomicNodePID and rawCompletedProcess/reporting lessons retained. Combined268production+5selected binding explicit.",
+    "Evidence": "Complete gitmerge-tree matchinga584,1410mode/blob union,threefixture source preservation,66exact referenced evidence hashes, current recorded gates and original1192 measuredartifact retention. Exact imported patch matches owning Gitdiff; original41fixture guide addition lines retained.",
+    "Stale_or_ambiguous_guidance_removed": "Old owning guide omissions of accepted774 platform/readiness/typedreceipt/provenance limits corrected by ordinary import; external helper provenance not invented as305source; current cached PRbase metadata distinguished fromauthenticated namedref.",
+    "Remaining_uncertainty": "Fresh exacttuple hosted/fullcurrent actual/provider/native/forcedhang/coldregistry/wholewheel/privatefull99/ChatGPT/release gates unknown. Historical failedCI and actual oldtuple remain unchanged. Unknown Windows cause/actualcleanup predicates not inferred."
+  },
+  "upstream_disposition": "none",
+  "reviewer_actions": "Read-only stdlib/Git/source/hash/log-summary + authenticated bounded ref readback; no application/source/index mutation, native/gateway/test/browser/provider/forcedhang retry, cleanup, push/merge/newinfrastructure."
+}

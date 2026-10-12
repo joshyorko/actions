@@ -1,0 +1,152 @@
+{
+  "actual_operation": "NOT_RUN_NO_AUTHORITY_BY_REVIEW_ALONE",
+  "additional_execution_prerequisites": [
+    "ROOT must bind and validate a SEPARATE independent ACTUAL relocation/alias GO before issuing FULL release. The FULL driver verifies original actual terminal+live alias, but does not enforce this additional independent review itself.",
+    "Fresh TMP >=419430400, workspace >=16777216; SHM alias exact; unique FULL destination/stage/owned absent; all original15831 selected entries stable; current source/evidence guards PASS; serialization clear."
+  ],
+  "budgets": {
+    "KILL_after_seconds": 10,
+    "Python_child_envelope_seconds": 615,
+    "ROOT_outer_KILL_after_seconds": 10,
+    "ROOT_outer_TERM_seconds": 900,
+    "SHM_before_relocation_floor": null,
+    "TERM_child_seconds": 600,
+    "TMP_before_single_copy_floor": 419430400,
+    "TMP_removal_reserve": 134217728,
+    "combined_full_progress_alias_indices_bytes": 16777216,
+    "metadata_guard_seconds": 60,
+    "no_native_mount_floor_waiver": "DATA_ONLY_NO_NATIVE_EXECUTION",
+    "single_copy_archive_actual_bytes_including_close_footer": 268435456
+  },
+  "command_environment": "Source exact managed activate.sh first; cached Toolkit bin inserted after managed PATH first. Guard verifies 18 exact exports plus PATH, own cached prefix/Poetry, no PYTEST_ADDOPTS/PYTHONOPTIMIZE; do not install or invoke a gateway.",
+  "decision": "GO_EXACT_ONE_COMPLETED_FULL_SINGLE_COPY256_STORAGE_PREEXECUTION_V2",
+  "documentation_improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md; accept exact seven-line proposed patch 677897a486955f7ca9b6e6a626c10d5472314f574fcf9bd595029e7d31db6058",
+    "Durable learning captured": "Budget every retained compressed copy; exclusive verified same-filesystem promotion fsyncs destination and directory before unlink; failed partial relocation preserves data via typed alias without asserting gzip completion; validate alias plans before mutation.",
+    "Evidence": [
+      {
+        "bytes": 645,
+        "mode": "0o400",
+        "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/proposed-canonical-single-copy-promotion-and-failed-partial-alias-lesson.patch",
+        "sha256": "677897a486955f7ca9b6e6a626c10d5472314f574fcf9bd595029e7d31db6058"
+      },
+      {
+        "bytes": 4091,
+        "mode": "0o400",
+        "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/actual-relocation-and-single-copy-boundary-GREEN-controls.json",
+        "sha256": "36bf6cbf4f664db45551b90c52b3e9be8f64863bb79da8c5877315131de0e422"
+      },
+      {
+        "bytes": 769,
+        "mode": "0o400",
+        "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/original-malformed-schema-RED-proof.json",
+        "sha256": "ec923ca1a653872d9ec19e3ab326e5ec59fca7da62179c0f9e09296afb87ecfd"
+      }
+    ],
+    "Remaining uncertainty": "Real relocation/FULL archival NOT_RUN at review; source-operation compatibility only. Actual member CRC/TAR/index/alias preservation needs separate original-result review.",
+    "Stale or ambiguous guidance removed": "Physical-copy budget distinguished from exclusive hardlink promotion; exact failed-partial identity distinguished from a complete recoverable archive. No original guide content removed by this review."
+  },
+  "driver_binding": {
+    "bytes": 10383,
+    "mode": "0o444",
+    "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/launch_single_copy_FULL_storage_once.py",
+    "sha256": "a8a693f5fc4dadf09433e46ea54b65d67048c14f3203c9166223fa71566b24ae"
+  },
+  "evidence": {
+    "actual_small_owned_fixture_controls": {
+      "FAIL": 0,
+      "PASS": 21,
+      "SKIP": 0,
+      "no_real_selected_paths_touched": true
+    },
+    "core_whole_AST_unchanged": 17,
+    "declared_core_delta_only": [
+      "exclusive verified hardlink archive promotion",
+      "final poststage reserve comparator"
+    ],
+    "driver_consumed_bindings_exact_FULL": 9,
+    "driver_consumed_bindings_exact_relocation": 8,
+    "failed_partial_current_full_SHA_and_metadata_exact": true,
+    "future_paths_absent_at_review": true,
+    "original_schema_RED_retained": true,
+    "owner_private_references_exact": 21,
+    "rmtree_disk_usage_AST_unchanged": true,
+    "shared_config_references_exact": 22
+  },
+  "limitations": [
+    "Original 128MiB capped archive attempt remains FAIL; partial gzip CRC/footer/TAR completeness UNKNOWN and not decoded here.",
+    "Accessible process handles only; unreadable processes and universal quiescence UNKNOWN. No process signals, waits, reaps or lease/reuse qualification.",
+    "Failures before original unlink preserve original; failures after unlink preserve new fsynced exact copy and durable alias with FAIL/HOLD; no retry or reconstruction.",
+    "Outer hard termination can prevent finally; missing postguard/terminal is UNKNOWN/HOLD, not success.",
+    "Driver/proposal/review/ROOT release bindings admitted initially; ROOT must independently retain and rehash its whole execution envelope for every outcome.",
+    "Capacity is fresh execution prerequisite, not a guaranteed floor gain. No native/source-FULL TMP floor or release acceptance is waived."
+  ],
+  "owned_once_path": "/workspace/engineering/root-one-completed-FULL-single-copy-storage-owned-v2",
+  "phase": "single_copy_FULL",
+  "proposal_binding": {
+    "bytes": 13728,
+    "mode": "0o400",
+    "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/OWNERFINAL-one-completed-FULL-single-copy256-storage-PREEXECUTION-v2.json",
+    "sha256": "bda96ce65a8fbd9c1944f71c6c9b298e7b2408320df195b551ece1ff1f485526"
+  },
+  "review_operations": "READ_ONLY_AST_TEXT_JSON_HASH_STAT; no reviewed helper import/controls/test/archive/copy/unlink/native/gateway execution",
+  "root_command_argv": [
+    "/usr/bin/timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "900s",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/launch_single_copy_FULL_storage_once.py",
+    "--root-execute-reviewed-single_copy_FULL",
+    "/workspace/engineering/root-one-completed-FULL-single-copy-storage-release-v2.json"
+  ],
+  "root_release_path": "/workspace/engineering/root-one-completed-FULL-single-copy-storage-release-v2.json",
+  "root_release_required": {
+    "child_argv": [
+      "/usr/bin/timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "600s",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/archive_exact_one_completed_FULL_single_copy_once.py"
+    ],
+    "driver_binding": {
+      "bytes": 10383,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/launch_single_copy_FULL_storage_once.py",
+      "sha256": "a8a693f5fc4dadf09433e46ea54b65d67048c14f3203c9166223fa71566b24ae"
+    },
+    "independent_relocation_actual_review_binding": "Additional ROOT-enforced exact review row; MUST be validated by ROOT before launching.",
+    "independent_review_binding": "ROOT fills exact binding of THIS sealed review receipt",
+    "no_retry": true,
+    "one_attempt": true,
+    "parent_envelope": {
+      "TERM_kill_after_seconds": 10,
+      "timeout_seconds": 900
+    },
+    "proposal_binding": {
+      "bytes": 13728,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/OWNERFINAL-one-completed-FULL-single-copy256-storage-PREEXECUTION-v2.json",
+      "sha256": "bda96ce65a8fbd9c1944f71c6c9b298e7b2408320df195b551ece1ff1f485526"
+    },
+    "required_relocation_actual_binding": "ROOT fills exact 0600 original relocation terminal binding, fixed original path; status PASS_DATA_RELOCATION_ONLY, child_returncode0, protected_postPASS",
+    "schema": "ROOT_ONE_EXACT_COMPLETED_FULL_SINGLE_COPY_STORAGE_RELEASE_V2",
+    "serialized_no_other_selected_root_source_native_or_heavy_mutations": true,
+    "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+    "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+  },
+  "schema": "INDEPENDENT_EXACT_FAILED_PARTIAL_AND_COMPLETED_FULL_FALLBACK_PREEXECUTION_REVIEW",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "status": "GO_STATIC_CONDITIONAL_NOT_RELEASED_RELOCATION_ACTUAL_INDEPENDENT_APPROVAL_REQUIRED",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "unchanged_protection_scope": {
+    "before_and_alwayspost": "Exact original config+guard and alias-aware metadata subprocess; private stdout/stderr fsynced before assertions; primary and post failure retained separately. Review verifies exact guarded inputs; does not replay source guard.",
+    "current_source_entries": 1440,
+    "historical_references": 237,
+    "native_original_entries": 1192,
+    "own_origins": 5,
+    "prepared_inputs": 30
+  },
+  "upstream_disposition": "none"
+}

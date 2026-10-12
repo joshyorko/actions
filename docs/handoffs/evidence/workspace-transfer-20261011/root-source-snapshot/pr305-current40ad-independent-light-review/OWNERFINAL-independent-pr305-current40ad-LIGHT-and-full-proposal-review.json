@@ -1,0 +1,157 @@
+{
+  "schema": "actions-independent-pr305-current40ad-LIGHT/v1",
+  "verdict": "GO_FROZEN_LIGHT_SOURCE_SCOPE_AND_CURRENT_HEAD_CONFIGURED_FULL_PROPOSAL_ONLY",
+  "owner_final": {
+    "path": "/workspace/engineering/pr305-actual309-refresh/OWNERFINAL-current40ad-ordinary-a0d-source-LIGHT-full-and-actual-HOLD.json",
+    "bytes": 90785,
+    "sha256": "2d2771a4f0d44b0021c0233ae367b3957ebe4639e62396518229853fd5b5ec41"
+  },
+  "head": "40ad3b14d264d0e6aa7843e7c26b9fa3855fc34b",
+  "tree": "2d58cc8e47a50bc6c09d597a56ed8153aa4f2f34",
+  "ordered_parents": [
+    "519a0beb7451cb6e4410f0bee18c826fc493086e",
+    "a0d258a16095b95b1bf9000cb1201cddfaff4779"
+  ],
+  "existing_branch": "test/canvas-runtime-cache-isolation-20261010",
+  "complete_Git_FS_typed_body_exec_union": 1422,
+  "old112_bound_refs_bytes_modes_rehashed": 112,
+  "total_unique_bound_files_rehashed": 172,
+  "application_semantics_changed": false,
+  "target_auth_tests_preserved": 2,
+  "original_three_Canvas_bodies_modes_exact": true,
+  "original39_strict_predicate_gate_receipt_bindings_unchanged": true,
+  "accepted_nine_RCC_sample_rehashed": {
+    "bytes": 3031,
+    "path": "/workspace/engineering/pr305-actual618-refresh/accepted-nine-RCC-source-sample.json",
+    "sha256": "a16413e68569f8a1caa760c24e00cc9d12dba322bb7bbe43c677c0646069ea34"
+  },
+  "producer": {
+    "current": 274,
+    "old": 268,
+    "old_matching": 261,
+    "changed": 7,
+    "added": 6,
+    "qualification": "UNQUALIFIED old92498 and3ec V5; preserved source is not current actual evidence"
+  },
+  "selected_tests_separate": 5,
+  "combined_count": 279,
+  "LIGHT_gates": {
+    "Bootstrap": "existing30 prepared byte bindings+five own cfg/interpreter/moduleprefix-origins verified; no installer",
+    "Canvas": {
+      "integration_deselected": 4,
+      "passed": 47,
+      "seconds": 2.34,
+      "skipped": 0
+    },
+    "Doctor": "PASS",
+    "Toolkit": {
+      "passed": 96,
+      "seconds": 22.27
+    },
+    "actual_native_browser_provider_PG_TCP": "NOT_RUN",
+    "adopted_auth_source": {
+      "passed": 76,
+      "seconds": 10.84
+    },
+    "all_original_RCC_gateway_steps": "SUCCESS; each bounded canonical sequential step exit0 via set-e gate batch",
+    "all_tracked_GitHub_YAML_parsed_preserved": 30,
+    "authored_diffcheck": "PASS",
+    "configured_Mypy_files": 350,
+    "configured_lint": "Ruff check/format314+Isort PASS",
+    "current_RCC_controls": {
+      "existing_actual_optin_skipped": 1,
+      "integration_deselected": 3,
+      "passed": 112,
+      "seconds": 7.52,
+      "warnings": 4
+    },
+    "current_full_source": "HELD_NOT_RUN",
+    "generator_outputs": 8,
+    "tracked_workflow_and_dependabot_YAML": 26
+  },
+  "preservation": {
+    "original_native_inventory_body_modes": 1192,
+    "frozen_helper_mode0444": true,
+    "original_private_V5_raw_files": 18,
+    "original_V5_frozen_scope": 50,
+    "historical_V5_source": "3ec9d0acbe30ad94d02e4c24fef2587127964495",
+    "historical_native_producer": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+    "actual_current_native_browser_provider": "NOT_RUN"
+  },
+  "full_proposal": {
+    "path": "/workspace/engineering/pr305-current40ad-independent-light-review/proposed-current40ad-explicit-two-worker-configured-full-contract.json",
+    "bytes": 2455,
+    "sha256": "9a0dc99eecda428ecc03dddcb6b0db7cf5f66f25358fef5284927670629b1bef"
+  },
+  "full_execution_release": "HOLD currentheavy300, freshcapacity, root distinct serialization/current-ref prepared-input preflight. NO current full executed by reviewer; no historical launcher reuse",
+  "remaining_HOLD": [
+    "current40ad fullsource and fresh exactcurrent head/target hostedCI; old519/618 publicCI cannot carry",
+    "original V1-V4 failures and V5 actual3ec/native92498 historical only",
+    "complete39 actualbrowser/native/methods/publication/private/backend/full99/ChatGPT134/wholewheel/release",
+    "hosted gateway exit does not prove complete process-reaping/cleanup"
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md and provenance-observability.md; accepted exact automatic both-parent guide imports reused",
+    "Exact_delta": {
+      "bytes": 5113,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-actual309-refresh/exact-two-guide-both-parent-import.patch",
+      "sha256": "aef5ba97d0fe6bf7cfceedebe4dad26be9911c8238bad7418e7c4db53c853599"
+    },
+    "verified_parent_added_block_bindings": [
+      {
+        "file": "docs/skills/repository-operations.md",
+        "parent": "519a0beb7451cb6e4410f0bee18c826fc493086e",
+        "added_lines": 5,
+        "sha256": "08ee8714ff952972c9850362ad1d9227af6bf6d2c296c5665c62bee06a2ec5f7"
+      },
+      {
+        "file": "docs/skills/repository-operations.md",
+        "parent": "519a0beb7451cb6e4410f0bee18c826fc493086e",
+        "added_lines": 2,
+        "sha256": "cda62da3c3806789315a6f3701f0aadc4f6e9304f9b9cfce9d69ff810b92b76c"
+      },
+      {
+        "file": "docs/skills/repository-operations.md",
+        "parent": "519a0beb7451cb6e4410f0bee18c826fc493086e",
+        "added_lines": 122,
+        "sha256": "0c3073d82717cbeac559556b2c0b93f78f3dcb9be44932fc5324ee3333e3263e"
+      },
+      {
+        "file": "docs/skills/repository-operations.md",
+        "parent": "519a0beb7451cb6e4410f0bee18c826fc493086e",
+        "added_lines": 1,
+        "sha256": "ecf6c6e5228caf20398684cf33d400850c0f9e33774227b137480fd08288731a"
+      },
+      {
+        "file": "docs/skills/repository-operations.md",
+        "parent": "519a0beb7451cb6e4410f0bee18c826fc493086e",
+        "added_lines": 20,
+        "sha256": "6b0c1ed43cd1e415ecd86a7a477c438b7543d47eb70a0cda4a06f62fcb441738"
+      },
+      {
+        "file": "docs/skills/repository-operations.md",
+        "parent": "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+        "added_lines": 52,
+        "sha256": "a0becdaaa3e011a485e989b239618bda39bc307fcdd21868b8a72b787c7d7ac3"
+      },
+      {
+        "file": "docs/skills/repository-operations.md",
+        "parent": "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+        "added_lines": 6,
+        "sha256": "e7d6072c102f7cf4f5c90716717c1208fff2ae923f9ac5b5c4d0be8e4ddeb94d"
+      }
+    ],
+    "Durable_learning_captured": "Preserve original Canvas/RCC bodies and full typed production inventories alongside actual assembled request authority; event/source CI and historical native receipts remain separate. Explicit worker2 must precede configured n-auto execution.",
+    "Evidence": "1422 complete union/fullprepost; all112 original bindings;274+5; original1192/raw18/frozen50 retention;47Canvas+112RCC+76auth/Toolkit96/gen8/YAML30/sourceAST xdistenvironment guard",
+    "Stale_or_ambiguous_guidance_removed": "Automatic target auth guide imports retain credential/registration boundaries and configured isort gate; old519 full/CI and original3ec native actual not transferred to40ad; no cosmetic child",
+    "Remaining_uncertainty": "Current full, fresh exact hosted CI/current distribution/native/browser/provider/private/release remain HOLD"
+  },
+  "Upstream_disposition": "none",
+  "read_only_no_tests_gateway_source_index_native_provider_download_push_merge": true,
+  "review_script": {
+    "path": "/workspace/engineering/pr305-current40ad-independent-light-review/verify-readonly.py",
+    "bytes": 14557,
+    "sha256": "58d6a94dfaf8a300b83846297e0a3a20b38454004bc83e0b2d4b424c24c677f3"
+  }
+}

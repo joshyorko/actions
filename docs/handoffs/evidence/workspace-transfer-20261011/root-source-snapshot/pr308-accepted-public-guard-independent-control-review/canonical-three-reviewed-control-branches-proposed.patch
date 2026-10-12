@@ -1,0 +1,15 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -2241,9 +2241,9 @@
+ and require full CI on its exact tested merge. Production input changes also
+ require new frozen-artifact qualification; compare the retained producer
+ inventory without excluding changed files. The control permits only pushes to
+-the original opt-in branch
+-`test/rcc-provider-rollback-hosted-20261010` and the existing reviewed PR branch
+-`fix/rcc-published-artifact-details-20261010`, subject to the retained path filter.
++the original opt-in branch `test/rcc-provider-rollback-hosted-20261010` and the
++existing reviewed PR branches `fix/rcc-published-artifact-details-20261010` and
++`fix/rcc-candidate-wheel-identities-20261010`, subject to the retained path filter.
+ Local service-free control tests establish admission behavior, not an actual
+ RCC artifact execution. Record a new hosted run before claiming acceptance of
+ this candidate, and retain earlier receipts under their original identities.

@@ -1,0 +1,95 @@
+{
+  "PATH0": "/workspace/actions-cloud/bin",
+  "PATH1": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin",
+  "actual_checks": {
+    "metadata_stdout_bytes": 2258,
+    "metadata_stdout_sha256": "82cde379e75afbdbdc1e12ff5a6e31f7a9c76e13d98d755672142b504b1f8a37",
+    "source_native_qualification": "UNCHANGED",
+    "status": "PASS_DATA_ONLY_CURRENT8D49_1440_ORIGINAL237_NATIVE1192_PREPARED30_FIVE_ORIGINS",
+    "stderr_bytes": 0,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "actual_one_attempt": true,
+  "archive": "NOT_RUN",
+  "captures": {
+    "stderr_bytes": 0,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_bytes": 2258,
+    "stdout_sha256": "82cde379e75afbdbdc1e12ff5a6e31f7a9c76e13d98d755672142b504b1f8a37"
+  },
+  "decision": "PASS_READONLY_ENVIRONMENT_AND_CAPTURE_ONLY_ARCHIVE_NATIVE_HOLD",
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "durable_learning_captured": "Cached Python identity needs cached Poetry executable PATH identity; retain raw subprocess captures before asserting",
+    "evidence": "Original retained probe rc1/Poetry; named corrected rc0 actual original metadata guard plus RED1/GREEN14 pure controls",
+    "exact_delta_reference": {
+      "bytes": 779,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v3/proposed-canonical-managed-Poetry-and-guard-capture-lesson.txt",
+      "sha256": "f46d621678d346caa1f71699ddd1f8fe7eb338fc75834e7a18b201c75d4f8e0a"
+    },
+    "remaining_uncertainty": "Fresh fifth-root selection and archive/index aliases require independent review/root once release; prospective compression and capacity not measured",
+    "stale_or_ambiguous_guidance_removed": "Original discarded nested cause remains UNKNOWN; read-only environment repair is not archiving/source/native acceptance"
+  },
+  "elapsed_seconds": 15.259248169000784,
+  "four_root_operation": "NOT_RUN_HOLD_CAPACITY_INSUFFICIENT_FIFTH_ROOT_SUCCESSOR_REQUIRED",
+  "native": "NOT_RUN",
+  "original_storage_nested_cause": "UNKNOWN_UNAVAILABLE_CAPTURE_DISCARDED",
+  "output_retained_before_assertion": true,
+  "private_references": [
+    {
+      "bytes": 515,
+      "mode": "0o600",
+      "path": "/workspace/engineering/completed8d49-four-root-storage-corrected-guard-readonly-probe-v3/original-readonly-probe-terminal.json",
+      "sha256": "c04d71782b16e913a700fe720a3cda301ee84dbec0e430a4844f3a691b01f098"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/completed8d49-four-root-storage-corrected-guard-readonly-probe-v3/readonly-probe/stderr.private.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2258,
+      "mode": "0o600",
+      "path": "/workspace/engineering/completed8d49-four-root-storage-corrected-guard-readonly-probe-v3/readonly-probe/stdout.private.log",
+      "sha256": "82cde379e75afbdbdc1e12ff5a6e31f7a9c76e13d98d755672142b504b1f8a37"
+    },
+    {
+      "bytes": 475,
+      "mode": "0o600",
+      "path": "/workspace/engineering/completed8d49-four-root-storage-corrected-guard-readonly-probe-v3/readonly-probe/terminal.json",
+      "sha256": "192441b7b94cec1e323b8bb76b8f725478310a243850846946eb3b7b5a4fdef2"
+    },
+    {
+      "bytes": 1544,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v3/original-one-corrected-readonly-guard-probe-outer-terminal.json",
+      "sha256": "60e0fd888db26b2c8bbb2940060f3a03ec7ab38f4d1fe4e47d1d9e484277e68c"
+    },
+    {
+      "bytes": 8708,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v3/OWNERFINAL-V3-managed-Poetry-PATH-and-durable-guard-capture-readonly-probe-PREPARATION.json",
+      "sha256": "1dce1ab29991f7958d015ea469d5e1541ad5cd8d11db837f71a71fb0ddfcf58b"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v3/one-corrected-readonly-guard-probe-outer.stdout.private.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v3/one-corrected-readonly-guard-probe-outer.stderr.private.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "returncode": 0,
+  "schema": "OWNERFINAL_ONE_CORRECTED_READONLY_METADATA_GUARD",
+  "separate_original_readonly_probe_cause": "FileNotFoundError_poetry",
+  "source_head": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none"
+}

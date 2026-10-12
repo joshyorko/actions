@@ -1,0 +1,75 @@
+from pathlib import Path
+import ast,copy,difflib,hashlib,json,os,re,stat,subprocess
+import yaml
+R=Path('/workspace/engineering/runtime-checkout-eol');O=Path('/workspace/engineering/runtime-checkout-eol-source');D=Path('/workspace/engineering/runtime-checkout-eol-independent-light-review')
+H='92e6deda5c252a503510c4b6261a86cb51f73cb6';T='8c7362e63c85a930ca2fe962ede9bc3ebb6ffe68';B='6181b044c75de35386f1ae30e71725398b6a7feb'
+def git(*a):return subprocess.check_output(['git','-C',str(R),*a])
+def sha(p):
+ h=hashlib.sha256()
+ with Path(p).open('rb') as f:
+  for b in iter(lambda:f.read(1048576),b''):h.update(b)
+ return h.hexdigest()
+def bind(p):p=Path(p);return {'path':str(p),'bytes':p.stat().st_size,'sha256':sha(p)}
+def tree(c):return {n.decode():m.decode().split() for row in git('ls-tree','-rz',c).split(b'\0') if row for m,n in [row.split(b'\t',1)]}
+owner=O/'OWNERFINAL-runtime-checkout-eol-LIGHT.json';assert owner.stat().st_size==15090 and sha(owner)=='a6f2da2485741c6e98af49cd1e987ec640486cb4188629ddfa5c322f1ba1a1d7';v=json.loads(owner.read_text())
+assert git('rev-parse','HEAD').decode().strip()==H and git('rev-parse','HEAD^{tree}').decode().strip()==T and git('show','-s','--format=%P','HEAD').decode().split()==[B] and git('branch','--show-current').decode().strip()==v['branch']=='fix/runtime-checkout-eol-20261011' and git('status','--porcelain')==b''
+refs=v['immutable_evidence_bindings'];assert len(refs)==41
+for e in refs:assert bind(e['path'])==e
+for p,e in v['private_v4_principal_frozen_files_unchanged'].items():assert sha(p)==e or isinstance(e,dict) and bind(p)==e
+old,new=tree(B),tree(H);assert len(old)==1419 and len(new)==1421 and set(old)<=set(new)
+changed=set(v['changed_original_paths']);added=set(v['new_permanent_tests']);assert len(changed)==5 and len(added)==2 and set(new)-set(old)==added and {p for p in old if old[p]!=new[p]}==changed
+for p,e in new.items():
+ body=(R/p).read_bytes();assert body==git('show',H+':'+p) and bool((R/p).stat().st_mode&0o111)==(e[0]=='100755')
+ if p in old:assert e[0]==old[p][0]
+ if p not in changed|added:assert e==old[p]
+# Exact appended7rules, no wider global or original attribute alterations.
+a=git('show',B+':.gitattributes');b=git('show',H+':.gitattributes');rules=['action_server/src/**/*.py text eol=lf','action_server/frontend/apps/runtime/index.html text eol=lf','action_server/src/actions/server/README.md text eol=lf','action_server/src/actions/server/bin/.gitignore text eol=lf','action_server/src/actions/server/index.html text eol=lf','action_server/src/actions/server/templates/action-templates.yaml text eol=lf','action_server/src/actions/server/vendored_deps/README.md text eol=lf'];assert b==a+b'\n# Preserve exact Runtime distribution source and HTML scaffold checkout bytes.\n'+('\n'.join(rules)+'\n').encode()
+python=[p for p in old if p.startswith('action_server/src/') and p.endswith('.py')];text=[x.split()[0] for x in rules[2:]];frontend=rules[1].split()[0];selected=python+text+[frontend];assert len(python)==201 and len(text)==5 and len(selected)==len(set(selected))==207
+assert all(old[p]==new[p] and b'\r' not in git('show',B+':'+p) for p in selected)
+# Only2filter edits in generator AST and generated rawYAML; all other controls exact.
+p='.github/workflows/_gen_workflows.py';before=ast.parse(git('show',B+':'+p));after=ast.parse(git('show',H+':'+p));removed=[]
+for cls in after.body:
+ if isinstance(cls,ast.ClassDef) and cls.name=='ActionServerTests':
+  fn=next(n for n in cls.body if isinstance(n,ast.FunctionDef) and n.name=='on_part');nodes=[n for n in fn.body if isinstance(n,ast.Expr) and ast.unparse(n)=="parts['on']['pull_request']['paths'].append('.gitattributes')"];assert len(nodes)==1;fn.body.remove(nodes[0]);removed.append(cls.name)
+ if isinstance(cls,ast.ClassDef) and cls.name=='ActionServerPyPiRelease':
+  lists=[n for n in ast.walk(cls) if isinstance(n,ast.List) and any(isinstance(e,ast.Constant) and e.value=='.gitattributes' for e in n.elts)];assert len(lists)==1;lists[0].elts=[e for e in lists[0].elts if not isinstance(e,ast.Constant) or e.value!='.gitattributes'];removed.append(cls.name)
+assert ast.dump(before,include_attributes=False)==ast.dump(after,include_attributes=False) and removed==['ActionServerTests','ActionServerPyPiRelease']
+outputs=['.github/workflows/actions_runtime_tests.yml','.github/workflows/actions_runtime_pypi_release.yml']
+for p in outputs:
+ oldBody=git('show',B+':'+p);newBody=git('show',H+':'+p);assert newBody.replace(b'    - .gitattributes\n',b'')==oldBody
+ yd=yaml.load(newBody,Loader=yaml.BaseLoader);oldY=yaml.load(oldBody,Loader=yaml.BaseLoader);assert yd['on']['pull_request']['paths'].count('.gitattributes')==1;yd['on']['pull_request']['paths'].remove('.gitattributes');assert yd==oldY
+ assert '.gitattributes' not in str(oldY['on'].get('push',{}))
+allYaml=[p for p in new if p.startswith('.github/') and p.endswith(('.yml','.yaml'))];assert len(allYaml)==30 and all(new[p]==old[p] for p in allYaml if p not in outputs)
+for p in allYaml:yaml.load(git('show',H+':'+p),Loader=yaml.BaseLoader)
+# New permanent test assertions remain meaningful and original tested bodies restored.
+checkoutTree=ast.parse((R/v['new_permanent_tests'][0]).read_bytes());assert {n.name for n in ast.walk(checkoutTree) if isinstance(n,ast.FunctionDef) and n.name.startswith('test_')}=={'test_all_selected_inputs_are_exact_under_both_checkout_settings','test_old_policy_reproduces_selected_text_conversion','test_each_independent_rule_removal_breaks_valid_byte_parity','test_unrelated_binary_platform_fixtures_and_packages_keep_their_policy'}
+source=(R/v['new_permanent_tests'][0]).read_text();assert '"--no-filters"' in source and '"checkout-index", "--all", "--force"' in source and 'actual_modes ==' in source and 'with self.assertRaises(AssertionError)' in source and 'self.assert_exact_inputs(repository)' in source
+originalRED=(O/'checkout-original-policy-RED.log').read_text();green=(O/'checkout-policy-GREEN.log').read_text();filterRED=(O/'filter-original-policy-RED.log').read_text();scoped=(O/'final-owned-scoped-tests-and-static.log').read_text()
+assert 'First list contains 180 additional elements' in originalRED and 'FAILED (failures=2)' in originalRED and 'Ran 1 test' in originalRED and 'Ran 4 tests' in green and '\nOK\n' in green and '6 failed, 88 deselected' in filterRED and '10 passed in 5.78s' in scoped
+assert v['actual_Git_controls']['historical_Windows_changed_tracked_inputs_distinct']==178 and v['source_full_execution']=='NOT_RUN_ROOT_SERIALIZATION_HELD'
+assert '96 passed' in (O/'Toolkit.log').read_text();static=(O/'owned-scoped-and-static.log').read_text();assert 'Success: no issues found in 347 source files' in static or 'Success: no issues found in 347 source files' in scoped
+# Own prepared inputs, venv/prefix/origin and ignoredRCC hashes retained.
+prepared=json.loads((O/'own-Bootstrap-reuse-inputs-and-origins.json').read_text());assert len(prepared['inputs_exact_prepared_git_bytes_sha256'])==30
+for p,digest in prepared['inputs_exact_prepared_git_bytes_sha256'].items():assert sha(R/p)==digest
+for pkg,e in prepared['own5venvs_current_config_and_python'].items():assert sha(R/pkg/'.venv/pyvenv.cfg')==e['config_sha256'] and str((R/pkg/'.venv/bin/python').resolve())==e['python_resolved']
+for e in prepared['own5actual_prefix_and_source_origin_assertions']:assert Path(e['prefix']).is_relative_to(R) and Path(e['origin']).is_relative_to(R) and Path(e['origin']).is_file()
+rcc=R/'action_server/src/actions/server/bin/rcc-18.19.3';assert sha(rcc)=='7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428' and stat.S_IMODE(rcc.stat().st_mode)==0o711
+# Canonical16lines exact approved1306 source-backed proposal; no sourcebehavior/causal waiver.
+p='docs/skills/repository-operations.md';delta=git('diff',B,H,'--',p);assert delta==(O/'exact-canonical-checkout-and-generated-scope.patch').read_bytes();proposal=Path('/workspace/engineering/pr221-current618-static-frontend-trace-owned/canonical-generated-static-and-complete-checkout-scope-proposed-v2.patch');assert sha(proposal)=='1306a314811448c8090b4aa2e77340e676bbba397ceb6c7ee0477b908cb9b2bf';addedText=''.join(z[1:] for z in proposal.read_text().splitlines(keepends=True) if z.startswith('+') and not z.startswith('+++'));assert addedText in (R/p).read_text()
+# Evaluate the proposed command envelope and actual worker setting without execution.
+launcher=O/'full-source-gates-root-release-required.py';launch=ast.parse(launcher.read_bytes());calls=[n for n in launch.body if isinstance(n,ast.Expr) and isinstance(n.value,ast.Call)];args=[[ast.literal_eval(a) for a in n.value.args] for n in calls];assert args==[['devutils','run','python','-m','pytest','-q','tests','-n','2'],['action_server','run','invoke','test-not-integration']]
+argv=v['next_proposed_full_argv'];assert argv[:4]==['timeout','--signal=TERM','--kill-after=10s','600s'] and argv[4]=='/workspace/actions-cloud/bin/rcc' and argv[5:]==['task','script','-r','developer/toolkit.yaml','--','python',str(launcher)] and v['next_full_cwd']==str(R)
+tasks=ast.parse((R/'action_server/tasks.py').read_bytes());testTask=next(n for n in tasks.body if isinstance(n,ast.FunctionDef) and n.name=='test_not_integration');taskList=next(n for n in ast.walk(testTask) if isinstance(n,ast.List) and any(isinstance(z,ast.Constant) and z.value=='not integration_test' for z in n.elts));values=[z.value if isinstance(z,ast.Constant) else 'sys.executable' for z in taskList.elts];assert values[-2:]==['-n','auto']
+plugins=[]
+for pkg in ['devutils','action_server']:
+ plugin=R/pkg/'.venv/lib/python3.12/site-packages/xdist/plugin.py';t=ast.parse(plugin.read_bytes());fn=next(n for n in t.body if isinstance(n,ast.FunctionDef) and n.name=='pytest_xdist_auto_num_workers');assert 'PYTEST_XDIST_AUTO_NUM_WORKERS' in ast.unparse(fn);plugins.append(bind(plugin))
+assert 'PYTEST_XDIST_AUTO_NUM_WORKERS' not in launcher.read_text();assert os.environ.get('PYTEST_XDIST_AUTO_NUM_WORKERS') is None
+# Precise new durable lesson, proposed only; no source/index mutation.
+guide=Path('/workspace/engineering/campaign-checkpoint/docs/skills/repository-operations.md');oldGuide=guide.read_text();anchor='Final reports list exact commands and outcomes, external/service tests skipped, environments not exercised, documentation improvements, and remaining uncertainty. “Tests pass” without fresh output is not evidence.\n';assert oldGuide.count(anchor)==1
+lesson='\nRuntime’s configured `invoke test-not-integration` uses pytest `-n auto`.\nFor a bounded worker count, set `PYTEST_XDIST_AUTO_NUM_WORKERS` to the reviewed\ncount in the owned launcher before sequential package commands. An explicit\n`-n 2` on the devutils command does not bound the later Runtime command; bind\nthe worker setting and outer timeout before execution.\n'
+patch=''.join(difflib.unified_diff(oldGuide.splitlines(keepends=True),oldGuide.replace(anchor,anchor+lesson).splitlines(keepends=True),fromfile='a/docs/skills/repository-operations.md',tofile='b/docs/skills/repository-operations.md'))
+p=D/'canonical-bounded-configured-xdist-worker-proposed.patch';assert not p.exists();p.write_text(patch);p.chmod(0o600)
+proof={'source_head':H,'tree':T,'sole_parent_actual':B,'all1421_typed_FSbytes_exec_modes_exact':True,'all1414_old_other_leaves_exact':True,'only5_changed2new_paths':{'changed':sorted(changed),'added':sorted(added)},'narrow7LF_rules_only_201Python5packagedText1frontend':True,'trueGit_originalRED180_synthetic_distinct_from_Windows178':True,'GREEN4tests_bothautocrlf_seven_independent_rule_poison_controls_protected_files':True,'original_filters6RED_currentscoped10PASS':True,'generator_wholeAST_only_two_PRpath_items':True,'two_YAML_raw_only_gitattributes_other6outputs_exact_all30YAML':True,'all_matrices_needs_tags_permissions_publisher_guards_unchanged':True,'all41_owner_refs_exact':True,'prepared30_own5origins_config_RCC0711_exact':True,'Toolkit96_Runtime_type347_lint_static_gen8_recorded_PASS_full_NOT_RUN':True,'canonical_exact1306_16line_source_backed_import':bind(proposal),'execution_finding':{'severity':'HOLD_PRE_FULL_BOUND','initial_launcher':bind(launcher),'devutils_workers':2,'Runtime_selector':values,'explicit_auto_worker_env_binding':'ABSENT','host_CPUs_current':os.cpu_count(),'required':'Named frozen owned launcher/metadata successor sets PYTEST_XDIST_AUTO_NUM_WORKERS=2 before both sequential commands; same configured tasks and600TERM+10 envelope retained','installed_xdist_source_authority':plugins,'no_execution_by_reviewer':True},'canonical_new_worker_bound_proposal':bind(p),'no_source_test_gateway_native_browser_provider_download_push_merge':True,'upstream_disposition':'none'}
+f=D/'independent-initial-LIGHT-source-and-prefull-worker-bound-proof.json';assert not f.exists();f.write_text(json.dumps(proof,indent=2)+'\n');f.chmod(0o600)
+final={'schema':'actions.independent-EOL-LIGHT-prefull-review/v1','verdict':'HOLD_INITIAL_PRE_FULL_EXECUTION_WORKER_BOUND','source_scope_disposition':'GO_NARROW_LIGHT_SOURCE_SCOPE_ONLY_NOT_SOURCEFINAL','source':{'head':H,'tree':T,'sole_parent':B,'branch':v['branch']},'owner_initial_immutable':bind(owner),'independent_scope_proof':bind(f),'findings':[proof['execution_finding']],'required_successor':'Owner-announced frozen named private launcher/metadata adding explicit2-worker xdist auto bound before both commands; review before root release; initiala6f original retained','full_source_scope':'Not run. Planned ONE600TERM+10 sequenced allDevutils two-worker then configuredRuntime nonintegration remains HOLD pending correct bound and root serialization/capacity release. Completed fullsource independent review required separately.','remaining_holds':v['remaining_holds'],'Documentation_improvement':{'Canonical_file_changed_or_proposed':'docs/skills/repository-operations.md','Accepted_source_delta':bind(O/'exact-canonical-checkout-and-generated-scope.patch'),'Proposed_exact_worker_bound_delta':bind(p),'Durable_learning_captured':'Preserve all207 selected physicalLF source inputs and workflow trigger coverage separately from historical generated semantics; bind actual configuredRuntime auto-worker count before sequential full execution','Evidence':'1421leaf scope, actualGit180RED/sevenruleGREEN controls, owningfilters6RED/10GREEN; Runtime task -nauto and installedownxdist env predicate; launcher only devutils-n2/absentworkerbinding','Stale_or_ambiguous_guidance_removed':'Rejects claim that devutils-n2 automatically bounds later configuredRuntime auto; source LF controls do not diagnose historicalWindows cause or qualify new built distributions','Remaining_uncertainty':'Frozen corrected launcher, full suites, fresh Windows checkout/build/output, semantic/generated-input authority and release acceptance remain open'},'upstream_disposition':'none'}
+out=D/'OWNERFINAL-independent-initial-EOL-LIGHT-prefull-HOLD.json';assert not out.exists();out.write_text(json.dumps(final,indent=2)+'\n');out.chmod(0o600);print(json.dumps({'OWNERFINAL':bind(out),'proof':bind(f),'canonical_proposal':bind(p)}))

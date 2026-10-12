@@ -1,0 +1,14 @@
+{
+  "scope": "ONE_REVIEWED_COMPLETED_FULL_STORAGE_DATA_ONLY",
+  "no_retry": true,
+  "review_sha256": "ab4a3c9eaac988997fb3bf58e5373015ccfe59f5ba6b96e7ab6b54fbda9ca579",
+  "release_sha256": "4ffe6ad8c039338f3699b201fa487961cb479fe10a90d4ef5cecb4f071be9f3d",
+  "outer_returncode": 1,
+  "elapsed_seconds": 47.71787688200129,
+  "capture": "2026-10-11T20:37:44.371336+00:00",
+  "capacity_after": {
+    "/workspace": 1318572032,
+    "/tmp": 316547072,
+    "/dev/shm": 3236864000
+  }
+}

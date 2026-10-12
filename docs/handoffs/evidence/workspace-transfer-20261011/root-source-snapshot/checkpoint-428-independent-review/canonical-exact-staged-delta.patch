@@ -1,0 +1,97 @@
+diff --git a/docs/skills/repository-operations.md b/docs/skills/repository-operations.md
+index 91acf349..821dc73d 100644
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -171,6 +171,9 @@ For a current status refresh, read the repository issue collection across all pa
+ When a structured remote body update must preserve an audited section exactly,
+ retain its final newline as well as its visible text. Avoid trimming the body
+ payload; verify the authenticated readback against the original retained suffix.
++Require a successful, complete local body read before submitting it; a shell
++error message is output, not the authored body. Preserve the prior remote body
++and verify the exact restored text after a rejected or mistaken submission.
+ 
+ The community graph validator is part of `ToolkitTest`: run
+ `rcc run -r developer/toolkit.yaml --dev -t ToolkitTest`. The existing
+@@ -2876,7 +2879,10 @@ observations. These semantics are verified against RCC v18.19.3 commit
+ 
+ Derive the expected CI job set from the exact workflow revision, branch/path
+ filters, matrices, job conditions and dependencies. A dependent job can appear
+-only after its `needs` finish; an early check count is not final. Runtime PyPI's
++only after its `needs` finish; an early check count is not final. Exhausting a
++paginated endpoint covers currently registered jobs, not completion of the
++declared workflow. Reconcile after producer dependencies finish and retain a
++queued publisher as pending. Runtime PyPI's
+ `publish` job validates and collects artifacts on pull requests, while its
+ publishing steps are push-only. Work Items publication has a tag-only job
+ condition, so its PR job skip is expected. Keep run event and job identity for
+@@ -2893,6 +2899,47 @@ and a cancelled sampler do not expose actual cleanup snapshot, reap, live,
+ zombie or error predicates. Leave them unknown until the owned call's measured
+ result is retained separately.
+ 
++Keep the complete terminal failure census separate from this two-node observer
++coverage and from reached semantic assertions. Active owned RCC CPU/I/O at the
++sample times does not identify a preparation cause. Bind each original tested
++merge and native artifact separately from a later source union; missing marks
++cannot borrow another run's interval timings, and later observations cannot fill
++historical cleanup fields.
++
++The test-owned delivered-line observation uses the existing stdout/stderr
++callbacks, without another pipe reader, flush, process action or readiness hook.
++It retains at most 32 RCC v18.19.3 marks from lines of at most 8192 characters,
++with bounded numeric fields and no suffix or exception text. Only one complete,
++ordered 0..15 sequence from a single channel can supply the sum of intervals
++since the previous mark. Any loss, lock contention, overflow, truncation, cap or
++invalid mark permanently makes that sum unavailable, including after later
++valid marks. Probe exceptions are suppressed inside the probe before the
++existing callback logger can expose their text; original delegated startup and
++cleanup exceptions still propagate unchanged.
++
++Readiness observations use the starter's exact HTTP/HTTPS regex on the original
++line and retain channel, match counts and arrival offsets only. A stdout match
++cannot satisfy its stderr Future. Process-start return plus 90 seconds is a
++lower bound for the ready-wait deadline, not the observer's start time; a late
++match does not establish predeadline delivery. Compare private, unrounded
++monotonic instants and round only displayed offsets: rounding before adding
++the budget can falsely classify an equal or later arrival as earlier. Exact
++equality is not before the lower bound. A positive comparison establishes only
++delivery before that conservative bound, not completion before the actual
++readiness deadline. Future state, native ready-log
++emission and RCC internal pipe/forwarding state remain unavailable. Interactive
++RCC forwarding does not explicitly flush, so absent delivered lines cannot
++identify an internal or propagation failure.
++
++The owned cleanup call's original deadline, returned tuple and exception are
++unchanged. Its measured wrapper reap, execution stop, snapshot/reap predicates
++and live/zombie/error/active-reader counts are summarized without raw errors,
++reader names or PID identities. A missing result or probe failure remains
++unavailable. These fields do not initiate or prove another cleanup attempt;
++the 90-second readiness, 20-second failure cleanup, 80/88-second samples and
++50 ms sampler join remain unchanged.
++
++
+ For native readiness timeouts, separate the first ready-port wait from later
+ reload, catalog and drain semantics. A failure before readiness does not exercise
+ those later assertions. In original PR3111151 Windows, all six failures were in
+@@ -3082,6 +3129,22 @@ merge identity separate from source and control even when their trees match.
+ Older control checks and raw receipts naming an older candidate do not qualify
+ a later target union.
+ 
++Keep wheel archive integrity separate from generated-content acceptance. Check
++central-directory names, duplicates and containment before reading members;
++count directory entries separately from the regular files covered by `RECORD`.
++Require each regular member's recorded digest and size to match its bytes,
++with only `RECORD` itself intentionally unhashed. A self-consistent wheel can
++still contain an empty generated OAuth configuration. Inspect that module
++without execution, reporting fixed required field names, byte counts and
++digests rather than configuration values or URLs. Matching `METADATA`, filename
++and `RECORD` do not authenticate the generator's source pair or qualify its
++content; missing or empty required payloads remain unresolved without an
++approved input/content contract. Preserve the build's candidate, control and
++synthetic identities: a prospective PR wheel is not a wheel of the current
++integration head before that source union is actually admitted. Archive review
++does not establish registry publication, installed-consumer behavior or native
++acceptance.
++
+ The private Run output resolver locks its Workspace, checks the actor's grant
+ and acquires the provider reader within one transaction, then yields the reader
+ after the transaction exits. Revocation denies future acquisitions; reads on an

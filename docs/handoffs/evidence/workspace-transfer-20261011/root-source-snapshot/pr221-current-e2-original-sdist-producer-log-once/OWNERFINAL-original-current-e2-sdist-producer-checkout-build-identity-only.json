@@ -1,0 +1,44 @@
+{
+  "Runtime_inner_independent_sha256": "29168625d9ab51aa816e28e645285412130bca1552cb3d0132f92f31a8800dbd",
+  "acquisition": "ONE_ORIGINAL_JOB_LOG_NO_REACQUISITION",
+  "captured": "2026-10-11T19:45:35.965475+00:00",
+  "content_OAuth_frontend_consumer_native_release": "HOLD",
+  "documentation_improvement": "REUSE_ACCEPTED74187436_PER_PLATFORM_LITERAL_CHECKOUT_CONTRACT",
+  "original_transfer": "FAIL_RETAINED_NO_REDOWLOAD",
+  "proof": {
+    "bytes": 1222,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-original-sdist-producer-log-once/safe-original-sdist-producer-checkout-build-identity-proof.json",
+    "sha256": "8103d47cb2d6d59e431929750f20ebebb771f22daa7ca970f99837de41daa757"
+  },
+  "references": [
+    {
+      "bytes": 822712,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr221-current-e2-original-sdist-producer-log-once/original-decoded-sdist-producer.private.log",
+      "sha256": "3325365afafc1eb30494e253607cbae1b0052bc466c06aef4884893fb870aaeb"
+    },
+    {
+      "bytes": 1183664,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr221-current-e2-original-sdist-producer-log-once/original-escaped-logical-MCP.private.json",
+      "sha256": "e080bacbe60101776cc13dfbb740673190270f7fe4cc30db78e6fa26d95dca0e"
+    },
+    {
+      "bytes": 2935,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/intended-synthetic-commit.decoded-pages.json",
+      "sha256": "e6509a977fb01d22147222c7c4b023e5e9e2ef3499b9cb388733d1da9462e7f4"
+    },
+    {
+      "bytes": 11131,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr221-currente2c-Mac-Windows-original-producer-log-owned/current-terminal-jobs-escaped-logical-MCP.private.json",
+      "sha256": "bd4032755c52a04b02ce66e2a75a06f7b408de36b3dbb1f32175d41a6222c05f"
+    }
+  ],
+  "schema": "ORIGINAL_CURRENT_E2_SDIST_PRODUCER_IDENTITY_ONLY",
+  "scope": "LITERAL_SDIST_CHECKOUT_PLUS_RETAINED_AUTHENTIC_COMMIT_API_TREE_PARENT_AND_BUILD_ONLY",
+  "status": "READY_FOR_INDEPENDENT_SOURCE_IDENTITY_REVIEW",
+  "upstream_disposition": "none"
+}

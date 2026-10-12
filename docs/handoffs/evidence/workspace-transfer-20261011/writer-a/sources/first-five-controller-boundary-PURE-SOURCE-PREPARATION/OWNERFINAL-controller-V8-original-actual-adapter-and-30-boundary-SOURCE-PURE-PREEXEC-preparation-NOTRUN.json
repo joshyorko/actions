@@ -1,0 +1,129 @@
+{
+  "PURE_30_outcome": "NOT_RUN",
+  "PURE_future_ind_decision": "GO_CONTROLLER_BOUNDARY_PURE_PREEXECUTION_ONLY",
+  "PURE_future_root_decision": "RELEASE_ONE_CONTROLLER_BOUNDARY_PURE_QUALIFICATION_ONLY",
+  "PURE_root_release": "ABSENT",
+  "ROOT_inactive_owner_approval": {
+    "bytes": 2149,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-five-accepted-inactive-environment-owner-approval-20261011/ROOT-inactive-owner-approval-selected-five-only.json",
+    "sha256": "4d227967057c718d93314f8fb9fbdd74ee5a168ab08e71a8cba6a2519b1d28d4"
+  },
+  "actual_preservation": "HOLD_CONTROLLER30_NOTRUN_TYPED_ADAPTER_NOTCREATED_PRIVATE_INDEPENDENT_ADAPTER_ABSENT_OPERATION_GRANT_ABSENT_CAPACITY636_BELOW746",
+  "adapter_binding": {
+    "bytes": 4079,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/pure18_receipt_adapter_v8_SOURCE_PREPARED_v2_actual_receipt_schema.py",
+    "sha256": "8dbc69c8dd1d366d1e1dea97cb809613ff990e27ee9faacb3a9dfccb56a6c1b2"
+  },
+  "budgets": {
+    "ROOT_KILL": 10,
+    "ROOT_outer_reserve": 280,
+    "before_guard_cooperative": 60,
+    "child_KILL": 10,
+    "child_TERM": 180,
+    "child_fallback": 200,
+    "no_real_archive_or_native_budget_change": true,
+    "post_guard_cooperative": 60,
+    "strict_ROOT_TERM": 600
+  },
+  "control_config_binding": {
+    "bytes": 107385,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/frozen_controller_boundary30_actual_functions_typed600_PURE_inputs_NOTRUN.json",
+    "sha256": "72aaf93fb373f40cf7315c4e225b6b6cb61e7e9a876fb956075a92cebf9f1db7"
+  },
+  "control_launcher_binding": {
+    "bytes": 6736,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/launch_controller_boundary_PURE_ROOT_ONLY_SOURCE_PREPARED.py",
+    "sha256": "0df74c34a87d51a4d5759f30941389a6bf7cf2732191f310e3be66ea7f0258f4"
+  },
+  "controller_binding": {
+    "bytes": 12753,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/root_once_first_five_current9760_SOURCE_PREPARED_v3_strict_V8_adapter.py",
+    "sha256": "985f497f83b4acecdf9ede7220da3237599ca210016da7443351c00787721ef6"
+  },
+  "controls": {
+    "bytes": 21556,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/test_controller_boundaries_SOURCE_PREPARED_v4_baseline_first_machine_census.py",
+    "sha256": "993ee6a89bb79b0836f614790a4c10a297881d0c64d9a2fc56de50aa1f53e036"
+  },
+  "decision": "SOURCE_AND_PURE_PREEXECUTION_PREPARATION_NOT_AUTHORIZED",
+  "documentation": {
+    "Canonical_file_changed_or_proposed": "Accepted raw-versus-derived scope, selected-tool/namespace, environment restoration and stop-reserve-vs-native-floor lessons reused; no repository mutation.",
+    "Durable_learning": "A derived statusPASS admission must bind actual source-owned cases and original raw status/independent result; it must not relabel failed V7 or raw pure-controls scope as preservation approval.",
+    "Evidence": [
+      {
+        "bytes": 10515,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v8-original-PURE18-independent-ACTUAL-review/OWNERFINAL-independent-original-first-five-v8-managed-Git-ACTUAL-PURE18-GO.json",
+        "sha256": "dd9fa8279c9503488acf753f6c4520ba201cd92a8f30168346ff9b32c4c3529d"
+      },
+      {
+        "bytes": 5217,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/SOURCE-ONLY-30-boundaries-original-18-actual-adapter-and-preservation-literal-proof.json",
+        "sha256": "6af8254fe2f1a5907559939a09e5de643e7c39679f54fa8e6a2a3188d6a2a863"
+      },
+      {
+        "bytes": 8035,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/OWNERFINAL-current9760-first-five-concrete-preservation-SOURCE-v2-explicit-approval-PREEXEC-HOLD.json",
+        "sha256": "8c147b17f85ba4081e5b4493c3e92442fc39078c182bcb44629a101921db1099"
+      }
+    ],
+    "Remaining_uncertainty": "All30 controls and adapter execution NOT_RUN; no real preservation; current disk insufficient; controller readonly callback poisons do not qualify actual archive alias parsers.",
+    "Stale_ambiguity_removed": "Inactive approval exists; it is separate from qualified typed adapter, controller controls, capacity and actual-operation grant.",
+    "Upstream_disposition": "none"
+  },
+  "exact_future_PURE_ROOT_command_TEMPLATE": [
+    "/usr/bin/timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "600s",
+    "bash",
+    "-c",
+    "source /workspace/actions-cloud/activate.sh && export PATH=\"/workspace/actions-cloud/bin:/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\" && export PYTHONDONTWRITEBYTECODE=1 && exec /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12 -B -u /workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/launch_controller_boundary_PURE_ROOT_ONLY_SOURCE_PREPARED.py --root-release \"$1\" --root-release-sha256 \"$2\"",
+    "controller-boundary-pure30",
+    "ROOT_RELEASE_ABSENT",
+    "ROOT_RELEASE_HASH_ABSENT"
+  ],
+  "original_SOURCE_owner8c147_preserved": {
+    "bytes": 8035,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/OWNERFINAL-current9760-first-five-concrete-preservation-SOURCE-v2-explicit-approval-PREEXEC-HOLD.json",
+    "sha256": "8c147b17f85ba4081e5b4493c3e92442fc39078c182bcb44629a101921db1099"
+  },
+  "real_original_PURE18_ACTUAL_independent": {
+    "bytes": 10515,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v8-original-PURE18-independent-ACTUAL-review/OWNERFINAL-independent-original-first-five-v8-managed-Git-ACTUAL-PURE18-GO.json",
+    "sha256": "dd9fa8279c9503488acf753f6c4520ba201cd92a8f30168346ff9b32c4c3529d"
+  },
+  "real_raw18_status": "PASS_PURE_CONTROLS_ONLY_UNCHANGED",
+  "retention": "Owned stdlib unittest, unique absent private cwd/fixture, stdout/stderr/machine census retained ALL; no unsupported pytest/plugin/log claims; Root must own outer terminal on hardkill.",
+  "schema": 1,
+  "source_proof_binding": {
+    "bytes": 5217,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/SOURCE-ONLY-30-boundaries-original-18-actual-adapter-and-preservation-literal-proof.json",
+    "sha256": "6af8254fe2f1a5907559939a09e5de643e7c39679f54fa8e6a2a3188d6a2a863"
+  },
+  "storage_config_binding": {
+    "bytes": 67675,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/frozen_current9760_storage_controller_V8_qualified_source_and_actual_tokens_SOURCE_PREPARED.json",
+    "sha256": "6f1dee55ea49ac1ef91528b89619a0a9d3d6419014cdcfa93d3523fe15c3009b"
+  },
+  "storage_release_TEMPLATE": {
+    "bytes": 4748,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/ROOT_storage_release_V8_source_actual_adapter_TEMPLATE_ONLY_NOAUTHORIZATION.json",
+    "sha256": "45962dd3d9df7911f930512b7bb997adb3589148636564b1f0cc662619267805"
+  },
+  "typed_statusPASS_owner": "NOT_CREATED_ADAPTER_NOT_EXECUTED",
+  "writer_A_released": true
+}

@@ -1,0 +1,225 @@
+{
+  "head": "9475a30fbe8645fd0c6b9c2746182f7a78631059",
+  "tree": "ddb2bb30a5f7ba381867020821054e510960b917",
+  "sole_parent": "ec73bb6372c1f613a3e130f0ce92f649d9d40a97",
+  "clean": true,
+  "all_parent1410_leaves_preserved_1409modeblobpairs_exact": true,
+  "onlyguide_changed_oneauthrequesttest_added": true,
+  "all209production_workflows_locks_originalcensus_unchanged": true,
+  "current_workingbytes_all1411_exactGit": true,
+  "all39_checkpoint_evidence_refs_hashsize_original_exact": true,
+  "all_reference_bindings": [
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/before-disposition-all-parent-leaves.json",
+      "bytes": 362429,
+      "sha256": "1c9b99ad0d80a7360650f177960e9e38adbecd0c10da0ded5126316d58e1c384"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/before-source-pinned28-checkpoint.json",
+      "bytes": 6462,
+      "sha256": "dafef26b68e85341eb9d3edef07c28c11c4609fbca51017810bb5145f51b53d0"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/canonical-baseline-and-ASGI-shape-proposed.patch",
+      "bytes": 2152,
+      "sha256": "381ae20391ce339ddf67d851c5b4660506dfd513a22fde0e6c280b964beebeb4"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/current-Doctor.log",
+      "bytes": 13487,
+      "sha256": "7b6b4be7f0845930ae246dabbb6d9892d6e63cb7f53d17ca0c55da6769d76471"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/current-ToolkitTest.log",
+      "bytes": 14344,
+      "sha256": "b6d572639618fab6c2d6d7abb94d005bd45294535349df1f9d0e698e3e243686"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/current-own-five-environment-origins.log",
+      "bytes": 6684,
+      "sha256": "059be12766edeed23e429760d0b635aefef52fc8f8daa8d83d0b24c15d27fc3a"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/initial-73-cell-request-matrix.log",
+      "bytes": 11562,
+      "sha256": "f640d454bcb3f122437144ecf8762ff837b4787ac017bf86461b7e84107bd6b3"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/initial-73-cell-source-preserved.py",
+      "bytes": 19565,
+      "sha256": "c52e961fbbd6c80ca234dfce5a927b6f4ea70715ed6fca0c55324160ed6153ab"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/initial-73-cell-terminal-checkpoint.json",
+      "bytes": 1076,
+      "sha256": "fb9212d2daab8b8e4f2729c9c31cddf77ef9a7b4be71b2cb0f2ee8bf684d26cc"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/own-Bootstrap-reuse-inputs.json",
+      "bytes": 2720,
+      "sha256": "9d849313554b1ad4733e709c345d57ca3b488136cb2cd49e97cf07bf850c747f"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/paused-baseline-Documentation-improvement-proposal.json",
+      "bytes": 1228,
+      "sha256": "133a0e007b20a1949f59c0450b847463642c95a1b45eeb4fb0f4cd6e7f838177"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/paused-initial-fixture-frozen-checkpoint.json",
+      "bytes": 5365,
+      "sha256": "ae4a0c040a3067b468920a439636c65b849f6c103249e74c7e426debcf742766"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/valid-key-real-assembled-baseline-initial.log",
+      "bytes": 3840,
+      "sha256": "18fb873c2f3e73aefb384dfc811a5ae06c42495726bc213a8b852bf52b6437a5"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/before-authorized-full-source-current-scope.json",
+      "bytes": 405436,
+      "sha256": "ba22565c990f9e24284bb8e3206968094cbe03b1679ec0417b7d5d5e0650d03a"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/corrected-73-cell-request-matrix.log",
+      "bytes": 10407,
+      "sha256": "dc118404d2b8c6c097caa79cfadb9c1ff54beadfec1152e8939045a0041379d6"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/corrected-close-initial-matrix-source-preserved.py",
+      "bytes": 19551,
+      "sha256": "852bc2575154039a1151c5c0dd100f3bb68ca977026a28b237d5bff60e6cb46a"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/corrected-close-terminal-path-boundary-checkpoint.json",
+      "bytes": 1435,
+      "sha256": "32f6c83cbb88bb6e6284756b5aaa2157617414a72e6feeda25c06f84ceb786fa"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/corrected-configured-static.log",
+      "bytes": 6008,
+      "sha256": "9f960ee39d224f39536e2f7cf0d93e00b33e016bf186a74b9c1075d50d3f7c58"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/current-full-configured-source.log",
+      "bytes": 316475,
+      "sha256": "5f321606bd1b3161da2fbfa96ab7ea895148538fc62d1f71ca313e8961c08fbd"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/current-generator-roundtrip.py",
+      "bytes": 1821,
+      "sha256": "dca57c06afc3b1e39f707a4b012f5e8145b550088e15633f0406a6c9f7e7ff34"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/database-bound-final-light.log",
+      "bytes": 28345,
+      "sha256": "ee58fe905aba655ba1a3eac73611872becbf46a846feb157523511d4344d10c1"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/database-bound-final-owned-auth-mutation-RED-receipt.json",
+      "bytes": 1707,
+      "sha256": "c2f8d9c3111c4497a86afa21e6dcfd0b5e47af11ac0afafdaa1d1efe5cbd7941"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/database-bound-final-owned-auth-mutation-controls.py",
+      "bytes": 4776,
+      "sha256": "99dc98410779f7686389231e915829db296e0415a78321685a752faa663173ec"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/exact-current-canonical-delta-v2.patch",
+      "bytes": 2792,
+      "sha256": "e9d6414ca38eb3a9e16eade73449c36857298f5f6ab18e3de0be14416dbe94cf"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/exact-current-canonical-delta.patch",
+      "bytes": 2404,
+      "sha256": "20de9bf69607d067ac71e59e0bda1a0777f11879f0ab64c1e8cbf727678481f1"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/final-mount-boundary-73-cell-GREEN.log",
+      "bytes": 4300,
+      "sha256": "745463b30327e99738b97aa5f7648bbd440e6d2b86296854088fc0154e670f65"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/final-mutation-GREEN-scoped-generator.log",
+      "bytes": 27202,
+      "sha256": "64bb9c2bd8c269c3f27d22eb84103eaa1736d3a2f43548e3315046ed2e04f67f"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/final-owned-auth-mutation-RED-receipt.json",
+      "bytes": 1707,
+      "sha256": "2b96e4db8a0221152c53bae7512de148d9ab9a5214e62c44a4b501302e6c188e"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/final-owned-auth-mutation-controls.py",
+      "bytes": 4761,
+      "sha256": "652197315bb916a596172f7b618c696469f40cb217a123fa394cddc0fcdce1b3"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/generator-roundtrip.json",
+      "bytes": 10286,
+      "sha256": "20c8c062289bda9e34694e390c191f8d5da3114cc29e7acdcd7c2140fe6be44e"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/initial-configured-static.log",
+      "bytes": 6835,
+      "sha256": "e837e7d65cb20273cb786e98795521c0a2d836c24b8011578b136bf11ffaed5a"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/initial-failure-preservation-and-correction.json",
+      "bytes": 468,
+      "sha256": "f6a6088eb54abd96d928493ae9db45d7fb466d641e94b2d23eb936361d190433"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/owned-auth-mutation-RED-receipt.json",
+      "bytes": 1602,
+      "sha256": "23a9c6a0549db0caef53bba393461eab4d1edaf7fdc4799bbaa00be9b4856d97"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/owned-auth-mutation-RED.log",
+      "bytes": 24975,
+      "sha256": "85df21bf452d95f567942651d76a0685e8512d877160f197154877fe30148107"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/owned-auth-mutation-controls.py",
+      "bytes": 4288,
+      "sha256": "a5ae33441361e7ba8f6bb5fa6a0f77d891e5448b14f76d0789fac54d350c8d99"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/post-full-terminal-source-and-scope.json",
+      "bytes": 6217,
+      "sha256": "df83d129937f439d97fd8f5781bd2be26a42120ca3b5e4f95024212b0e26c757"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/pre-type-correction-current-source-preserved.py",
+      "bytes": 21760,
+      "sha256": "c84b1120821345784ee0aded03af1da3c88c766d6f35e53b48aae15a0c17ddc7"
+    },
+    {
+      "path": "/workspace/engineering/issue152-next-inprocess-proposal/grounded-test-only-proposal.json",
+      "bytes": 28747,
+      "sha256": "e21e43b02e0aff3922535e4f57d7cf0c591523889cb8d558464fa29dba7bb80f"
+    },
+    {
+      "path": "/workspace/engineering/issue152-next-inprocess-proposal/canonical-proposed-delta.patch",
+      "bytes": 1763,
+      "sha256": "9dd5249ebbd12785eb99d7a9d03777e710a458934e54f035e53f416b48177e58"
+    }
+  ],
+  "full1229pass13skip15warnings140_2s2workers_originallog_verified": true,
+  "all73_new_named_cases_individuallyPASS": {
+    "test_real_assembled_credential_matrix": 54,
+    "test_dispatch_denied_before_owned_state_or_execution": 6,
+    "test_native_asgi_websocket_auth_echo_and_close": 6,
+    "test_assembled_mount_refuses_private_storage_files": 3,
+    "test_intentional_public_bootstrap_with_configured_key": 2,
+    "test_intentional_local_no_key_operation": 2
+  },
+  "current148pass1skip1nativeDeselect_lint303_mypy339_verified": true,
+  "three_meaningful_200_write_leak_mutations_expectedFAIL_and_method_restoration_recorded": true,
+  "canonical_delta": {
+    "path": "/workspace/engineering/pr309-issue152-independent-review/canonical-reviewed-source-request-enforcement-delta.patch",
+    "bytes": 2792,
+    "sha256": "e9d6414ca38eb3a9e16eade73449c36857298f5f6ab18e3de0be14416dbe94cf"
+  },
+  "current_target_limit": "Tested774 ancestor/sourceparentec73; actualtarget776 unqualified. No current hosted/full152/196/native/private/release claim."
+}

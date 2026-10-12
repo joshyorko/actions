@@ -1,0 +1,23 @@
+{
+  "no_new_comment_or_issue": true,
+  "original_actual_failure_independent_sha256": "61506cf064896dc750ccf47450d440170861cef4cf9a5c68060ac3ea3bedf5b1",
+  "schema": 1,
+  "updates": [
+    {
+      "body_sha256": "1c0b770df028a7bdea83b582ff23f459ae2202b10420260f3164da48a071ce9e",
+      "entire_previous_body_preserved": true,
+      "first_newer_supported": "NONE",
+      "id": 6109416621,
+      "newer_native": "NOT_RUN",
+      "url": "https://github.com/joshyorko/rcc/issues/125#issuecomment-6109416621"
+    },
+    {
+      "body_sha256": "1c0b770df028a7bdea83b582ff23f459ae2202b10420260f3164da48a071ce9e",
+      "entire_previous_body_preserved": true,
+      "first_newer_supported": "NONE",
+      "id": 6109416839,
+      "newer_native": "NOT_RUN",
+      "url": "https://github.com/joshyorko/rcc/issues/118#issuecomment-6109416839"
+    }
+  ]
+}

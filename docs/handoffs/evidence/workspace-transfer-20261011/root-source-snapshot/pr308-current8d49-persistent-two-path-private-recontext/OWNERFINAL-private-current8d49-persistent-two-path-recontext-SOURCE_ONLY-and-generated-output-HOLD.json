@@ -1,0 +1,268 @@
+{
+  "schema": "private_persistent_recontext_source_only_v1",
+  "status": "PRIVATE_SOURCE_ONLY_PATCH_PREPARED_ADOPTION_HOLD_GENERATED_OUTPUT_PRESERVATION_HOLD",
+  "source": {
+    "head": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+    "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+    "tracked_clean": true,
+    "complete_tracked_body_exec_mode_bindings": 1440,
+    "final_read_only_recheck": true
+  },
+  "scope": {
+    "private_only": true,
+    "checkout_patch_applied": false,
+    "native_execution": false,
+    "package_install": false,
+    "rcc_gateway": false,
+    "new_branch": false,
+    "commit": false,
+    "push": false,
+    "adoption_prerequisite": "Distinct root approval after baseline control3/released5/candidate7276 actual acceptance"
+  },
+  "patch": {
+    "path": "/workspace/engineering/pr308-current8d49-persistent-two-path-private-recontext/frozen-current8d49-two-path-persistent-fixture-source.patch",
+    "bytes": 24118,
+    "sha256": "ec23125cfcf2ca2af3e1c7e08871bb1f198e0df1db04e9be62d61b89b755b158",
+    "mode": "0o600"
+  },
+  "default_contract": {
+    "original_non_target_whole_definitions_AST_exact": 23,
+    "module_imports_AST_exact": true,
+    "default_false_specialization_whole_AST_exact": true,
+    "default_nonreuse_assertions_and_calls_preserved": true,
+    "current_managed_cache_modes_selector_identity_startup10_preserved": true,
+    "old_accepted_24_controls_fragment_reused_once": true
+  },
+  "controls": {
+    "first_old_patch_application": "CONTEXT_APPLY_FAILURE_NOT_SEMANTIC_RED",
+    "first_mock_command": "SETUP_FAIL_POETRY_NOT_ON_PATH_BEFORE_PYTEST",
+    "named_v2_command_terminal": 0,
+    "permanent_mock_cases_passed": 24,
+    "deselected": 64,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "warnings": 683,
+    "configured_ruff_check": "PASS",
+    "configured_ruff_format": "PASS",
+    "configured_isort": "PASS",
+    "configured_mypy": "PASS_ONE_PRIVATE_SOURCE_FILE",
+    "actual_six_action_reuse": "NOT_RUN",
+    "current_semantic_RED": "NOT_RUN_NO_SEMANTIC_CHANGE_OLD_RED_RETAINED_HISTORICAL"
+  },
+  "generated_output_boundary": {
+    "status": "FAIL_PROTECTED_GENERATED_ROBOLOG_CHANGED",
+    "expected_original_robolog": {
+      "bytes": 10930091,
+      "sha256": "67e99a41034c798580f72c3177e1e71c59aea41075052966c96d1e894571e4e3"
+    },
+    "expected_original_HTML_reported_by_reviewer": {
+      "bytes": 3997693,
+      "sha256_prefix": "13aebe",
+      "full_digest_unavailable_in_this_lane": true
+    },
+    "current_readback": {
+      "path": "/workspace/engineering/pr308-current8d49-persistent-two-path-private-recontext/safe-generated-output-robolog-and-HTML-readback.json",
+      "bytes": 935,
+      "sha256": "9825c7403af109d148217dbcd72395a24f13e09163b060cddb7c22780556462c",
+      "mode": "0o600"
+    },
+    "original_raw_bodies_privately_copied_before_mock": "NO",
+    "original_raw_bodies": "UNAVAILABLE_IN_THIS_LANE",
+    "original_plugin_destination_source": {
+      "ref": {
+        "path": "/workspace/engineering/pr308/action_server/.venv/lib/python3.12/site-packages/robocorp/log_pytest/__init__.py",
+        "bytes": 7070,
+        "sha256": "c0be67f49311364569abb8c7371d8347a46102d525ae6f1f0bd702c7cbfc85d8",
+        "mode": "0o600"
+      },
+      "default_option_lines": [
+        135,
+        139
+      ],
+      "configured_destination_lines": [
+        207,
+        218
+      ],
+      "default": "./output"
+    },
+    "private_command_overrode_logging_destination": false,
+    "private_command_explicit_basetemp_and_ALL": true,
+    "tracked_preservation_does_not_cover_ignored_outputs": true,
+    "no_restoration_or_reconstruction": true,
+    "storage_preexecution_requires_root_reconciliation": true
+  },
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "accepted_persistent_lesson": "Exact eight-line accepted persistent identity/raw-lease lesson reused in prospective two-path patch next to current raw-lease paragraph",
+    "new_separate_proposal": {
+      "path": "/workspace/engineering/pr308-current8d49-persistent-two-path-private-recontext/proposed-generated-logging-output-isolation-lesson.md",
+      "bytes": 536,
+      "sha256": "66a3fa55bc0c4a32053ccfb3c457e4e37442f70ecbcd3ca263a026db836de054",
+      "mode": "0o400"
+    },
+    "durable_learning": "Scratch isolation does not isolate configured pytest plugin logging outputs",
+    "evidence": "Pinned plugin default/configuration and private argv without logging override, original protected digest versus successor readback",
+    "stale_or_ambiguous_guidance_removed": "Do not treat tracked-source equality or explicit basetemp as proof of ignored generated-output preservation",
+    "remaining_uncertainty": "Original ignored output bodies unavailable; no actual reuse/newer compatibility or cleanup-reader qualification"
+  },
+  "upstream_disposition": "none",
+  "references": [
+    {
+      "path": "/workspace/engineering/pr308-current8d49-persistent-two-path-private-recontext/safe-generated-output-robolog-and-HTML-readback.json",
+      "bytes": 935,
+      "sha256": "9825c7403af109d148217dbcd72395a24f13e09163b060cddb7c22780556462c",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-persistent-two-path-private-recontext/original-old-patch-recontext.private.log",
+      "bytes": 752,
+      "sha256": "793b945cfb1673d7443778efabea99481ff136d4ff522ee32b4ba3bfc03502ea",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-persistent-two-path-private-recontext/private-partial-old-patch-before-context-repair.py",
+      "bytes": 56132,
+      "sha256": "078d052207f7bc32ccb72f589409a7ff58499df1aad5fe661362a05aca0998ff",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-persistent-two-path-private-recontext/frozen-current8d49-two-path-persistent-fixture-source.patch",
+      "bytes": 24118,
+      "sha256": "ec23125cfcf2ca2af3e1c7e08871bb1f198e0df1db04e9be62d61b89b755b158",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-persistent-two-path-private-recontext/run_current8d49_private_mock_controls_once_v2.py",
+      "bytes": 3124,
+      "sha256": "51f7644425c9c9db86376f6a74e642f0b08b7016286a52ba9cbd09eced9d5b46",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-persistent-two-path-private-recontext/proposed-generated-logging-output-isolation-lesson.md",
+      "bytes": 536,
+      "sha256": "66a3fa55bc0c4a32053ccfb3c457e4e37442f70ecbcd3ca263a026db836de054",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-persistent-two-path-private-recontext/current8d49-default-contract-proof.private.log",
+      "bytes": 705,
+      "sha256": "706c415d486450139a263063af85713be1f6cd9fdf58d756598f3a10bcaead18",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-persistent-two-path-private-recontext/original8d49-fixture.py",
+      "bytes": 52201,
+      "sha256": "a30f9e585b8dc422dcf853ac27a2da2c11f84065e58ba501b0a4c32d4f472728",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-persistent-two-path-private-recontext/original-current8d49-private-mock-controls-and-static-v2.private.log",
+      "bytes": 8514,
+      "sha256": "7f2b094ef34ea078ab2b055a02628a7f6b4a6520868914ce40cea0a58d908fc1",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-persistent-two-path-private-recontext/original8d49-repository-operations.md",
+      "bytes": 272824,
+      "sha256": "9c4b91d1a7bf152ce7d1a17c71bbbcf03085b84b30f14ae352a96f85126199b0",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-persistent-two-path-private-recontext/verify_current8d49_default_contract_and_private_patch.py",
+      "bytes": 6064,
+      "sha256": "ed9afa0bbc723ca7fe647f2e8fe9557553615bb0466dd46633b31c3c019001ab",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-persistent-two-path-private-recontext/immutable-complete8d49-untouched-and-private-default-contract-proof.json",
+      "bytes": 395204,
+      "sha256": "a064b3d13c51b85e55c218fea9f416762cd5eca2788e4b4d2fea6aa029227746",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-persistent-two-path-private-recontext/original-current8d49-private-mock-controls-and-static.private.log",
+      "bytes": 2296,
+      "sha256": "5d20c12cef9d79956bd9e2088711c1b24eb8775bfcc177a2a1cdb87811a14391",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-persistent-two-path-private-recontext/run_current8d49_private_mock_controls_once.py",
+      "bytes": 2738,
+      "sha256": "8c2f2e8b053f106801e5b7d8193fc45bd25536ff4a2774e43273069a1b199e57",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-persistent-two-path-private-recontext/original-old-patch-recontext-terminal.json",
+      "bytes": 132,
+      "sha256": "3473ac1c7742f1e5e901b8e21a68d9ab3bad9be08ed50aa0c925b46cad419977",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-persistent-two-path-private-recontext/private-candidate/action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+      "bytes": 70071,
+      "sha256": "240215d39386365ba8198eac70cc700b72db01ac3f33135fe6dc0c6cf58f4e78",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-persistent-two-path-private-recontext/private-candidate/docs/skills/repository-operations.md",
+      "bytes": 273421,
+      "sha256": "f9df7eaa879d505a1aa74ffd93d6c5ad28631ec54ca70d96cc5bb600b45192c8",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-persistent-two-path-private-recontext/one-private-mock-controls-owned-v2/original-private-controls-junit.xml",
+      "bytes": 6135,
+      "sha256": "cec55994fb209fd249bb08b30b99a94b3e7a4501fd8a5d608c02ab64358b7ab4",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-persistent-two-path-private-recontext/private-candidate/action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py.orig",
+      "bytes": 52201,
+      "sha256": "a30f9e585b8dc422dcf853ac27a2da2c11f84065e58ba501b0a4c32d4f472728",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-persistent-two-path-private-recontext/private-candidate/action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py.rej",
+      "bytes": 14734,
+      "sha256": "775d16876c9f37177fe9c0bae716a3f3e11fcf8a7b85f50ec88f1c0105e2ddf1",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-persistent-two-path-private-recontext/private-candidate/docs/skills/repository-operations.md.orig",
+      "bytes": 272824,
+      "sha256": "9c4b91d1a7bf152ce7d1a17c71bbbcf03085b84b30f14ae352a96f85126199b0",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-persistent-two-path-private-recontext/private-candidate/docs/skills/repository-operations.md.rej",
+      "bytes": 1098,
+      "sha256": "841bbf680dc63c715a7eac9b7b75183b3a8fc42c243e7d0c594122911d5c36be",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/OWNERFINAL-private-current-b614-persistent-fixture-two-path-source-patch.json",
+      "bytes": 24225,
+      "sha256": "adeb06df026599e9a8d6e71976f6130de71ef1f3851a8a7c0b895d8b7e6bb419",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/frozen-two-path-persistent-fixture-source.patch",
+      "bytes": 24184,
+      "sha256": "7964bd4e8cf817d0ed1651dafab823d3d9902d7a714015c26675d7bd444f2c48",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-persistent-fixture-independent-review/OWNERFINAL-independent-private-b614-persistent-two-path-patch-review.json",
+      "bytes": 28752,
+      "sha256": "604911a30177ab5e30e097ccaddf7a7451c4585001b9df8c0b815be1f684fed6",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308/action_server/.venv/lib/python3.12/site-packages/robocorp/log_pytest/__init__.py",
+      "bytes": 7070,
+      "sha256": "c0be67f49311364569abb8c7371d8347a46102d525ae6f1f0bd702c7cbfc85d8",
+      "mode": "0o600"
+    }
+  ]
+}

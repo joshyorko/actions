@@ -1,0 +1,203 @@
+{
+  "actual_controller": "NOT_AUTHORED_NOT_EXECUTABLE",
+  "all_predecessor_source_and_receipts_preserved": true,
+  "bindings": [
+    {
+      "bytes": 17607,
+      "mode": 256,
+      "path": "/workspace/engineering/first-five-actual-preservation-SOURCE-assembly-HOLD/typed-existing-guard-and-alias-closure-SOURCE-PREPARED-NOTCURRENT.json",
+      "sha256": "0c51082b388fdb5a69c02dbc9d1cabb7c3a60f5df2150a58b93dbd6a2078a6f7"
+    },
+    {
+      "bytes": 3413,
+      "mode": 256,
+      "path": "/workspace/engineering/first-five-actual-preservation-SOURCE-assembly-HOLD/first-five-actual-controller-finite-assembly-and-remaining-gaps-NOTRUN.json",
+      "sha256": "ff611396bb76caab3e33452ff6cd59b25a8fe2b01be88fc2fa6ea20063ba971f"
+    },
+    {
+      "bytes": 37609,
+      "mode": 292,
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_first_five_accepted_obsolete_environments_SOURCE_PREPARED_v4.py",
+      "sha256": "63476ecaa50ba863afed8602dcad82c22c9349df022d0e9f0dde8d81d60e0bb7"
+    },
+    {
+      "bytes": 17723,
+      "mode": 256,
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/frozen_first_five_environment_preservation_inputs_SOURCE_PREPARED_v5_measured_modes.json",
+      "sha256": "333dd9b66eacc212c90b3a75c44e9902a9c0bdc56d73d88ba5a0e41e46e0696a"
+    },
+    {
+      "bytes": 4690,
+      "mode": 256,
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/readonly_current_input_guard_v9.py",
+      "sha256": "480be06317562b7e3a5c98a5d794bb5d2a33e7fa6186fe707823ecb1cc583626"
+    },
+    {
+      "bytes": 1575,
+      "mode": 256,
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/v9_entry_bootstrap.py",
+      "sha256": "d3957c2e216731abf596897fbf0838809129a571743510692f2509228e2c7288"
+    },
+    {
+      "bytes": 765564,
+      "mode": 384,
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+      "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25"
+    },
+    {
+      "bytes": 27889,
+      "mode": 292,
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/actual_transport_v8.py",
+      "sha256": "33dda17140ef749e22f086cc91b92ed8c3230fddfde8a4a369769e2183f695a1"
+    },
+    {
+      "bytes": 6228,
+      "mode": 292,
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/owned_cache_policy_v8.py",
+      "sha256": "4ccac4e3bd2c1e91352ef4e647968b4ca61f8691e1fc0f41e72a128a2942c205"
+    },
+    {
+      "bytes": 6327,
+      "mode": 292,
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/historical_binding_current8d49_v8.py",
+      "sha256": "6f64d55837cc4ff14ee4eec013314ba512c09ecdc56f79192c1360ef46473b30"
+    },
+    {
+      "bytes": 11489,
+      "mode": 292,
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/fixture_records_v8.py",
+      "sha256": "7a63ee62184ea268dead0c98460c6943ebc297816e9a4df180b10ed5e04b9064"
+    },
+    {
+      "bytes": 12959,
+      "mode": 384,
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/runner_contracts_v3.py",
+      "sha256": "cbae3bb074d3995153ea5e6b694e7f9e61c047c6aa511b682959a63fedf7b726"
+    },
+    {
+      "bytes": 4632,
+      "mode": 384,
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/owned_monitor_v1.py",
+      "sha256": "834a7fe402e34b170f414df5dfe79762c0b49ed311a6222ba2f7bca5d87020a5"
+    },
+    {
+      "bytes": 1072,
+      "mode": 384,
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/historical_binding_v1.py",
+      "sha256": "10eac48f020d4c1030bb0be26b3b283d896712b7e7b5095e08045b8192808215"
+    },
+    {
+      "bytes": 2645,
+      "mode": 384,
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/historical_failed_receipt_archive_v1.py",
+      "sha256": "a69291189f47812c41ce43d9d68a81a839780ce28a0a9dfc00c487c9acb26d69"
+    },
+    {
+      "bytes": 1466,
+      "mode": 384,
+      "path": "/workspace/engineering/root-B28-one-exact-TMP-relocation-owned/exact-original-path-to-new-physical-archive.json",
+      "sha256": "ce1450945a28a00611dff941ddcb0c414f281b7f32bbe004eb200435baa04f7f"
+    },
+    {
+      "bytes": 1864,
+      "mode": 384,
+      "path": "/workspace/engineering/root-failed-control3-one-byte-preservation-v4/root-exact-historical-failed-member-archive-mapping.json",
+      "sha256": "cc73027ce86ea0965f3bdd88ed3398c322dcf012b337a4ca161966f19ffee6c7"
+    },
+    {
+      "bytes": 35851,
+      "mode": 256,
+      "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/FROZEN-defaultbackend35-once2-exact-census-config-NOTRUN.json",
+      "sha256": "7021f53c12b5392ffe5cf14da7915f25188c68e6d5a9a3b07458b588c4b527fa"
+    },
+    {
+      "bytes": 5619,
+      "mode": 256,
+      "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-independent-ACTUAL-review/OWNERFINAL-independent-original-defaultbackend35-once2-exact-census-ACTUAL-PURE-GO.json",
+      "sha256": "232365377184c5e9534ebf13eb57e6859a2ed33a3c0c58fd66611546089df60f"
+    },
+    {
+      "bytes": 6261,
+      "mode": 256,
+      "path": "/workspace/engineering/first-five-v6-current00b1-independent-PURE18-PREEXEC-review/OWNERFINAL-independent-first-five-v6-managed-machine18-SOURCE-GO-current-state-PREEXEC-HOLD.json",
+      "sha256": "4e4782340b2a066096cd46186647f707c385f884c25da77b51df9ccbfb1ef593"
+    }
+  ],
+  "complete_current_protected_manifest": "NOT_CONSTRUCTED_NOT_ADMITTED",
+  "correction_kind": "METADATA_ONLY_NO_SOURCE_OR_GUARD_RETARGET",
+  "decision": "SOURCE_PREPARATION_FROZEN_ACTUAL_PRESERVATION_PREEXECUTION_HOLD",
+  "documentation": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md accepted environment/disk-versus-tmpfs scope paragraph reused; no repository mutation.",
+    "Durable_learning": "Logical historical aliases need their existing typed guard; a file-hash-only manifest cannot establish current source/native or missing original-path identity. Accepted inactive checkout and observed overlap do not establish universal quiescence.",
+    "Evidence": [
+      {
+        "bytes": 4690,
+        "mode": 256,
+        "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/readonly_current_input_guard_v9.py",
+        "sha256": "480be06317562b7e3a5c98a5d794bb5d2a33e7fa6186fe707823ecb1cc583626"
+      },
+      {
+        "bytes": 765564,
+        "mode": 384,
+        "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+        "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25"
+      },
+      {
+        "bytes": 35851,
+        "mode": 256,
+        "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/FROZEN-defaultbackend35-once2-exact-census-config-NOTRUN.json",
+        "sha256": "7021f53c12b5392ffe5cf14da7915f25188c68e6d5a9a3b07458b588c4b527fa"
+      },
+      {
+        "bytes": 5619,
+        "mode": 256,
+        "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-independent-ACTUAL-review/OWNERFINAL-independent-original-defaultbackend35-once2-exact-census-ACTUAL-PURE-GO.json",
+        "sha256": "232365377184c5e9534ebf13eb57e6859a2ed33a3c0c58fd66611546089df60f"
+      },
+      {
+        "bytes": 6261,
+        "mode": 256,
+        "path": "/workspace/engineering/first-five-v6-current00b1-independent-PURE18-PREEXEC-review/OWNERFINAL-independent-first-five-v6-managed-machine18-SOURCE-GO-current-state-PREEXEC-HOLD.json",
+        "sha256": "4e4782340b2a066096cd46186647f707c385f884c25da77b51df9ccbfb1ef593"
+      }
+    ],
+    "Remaining_uncertainty": "9760 clean current metadata observed but protected configuration still historical; inactive approval absent; unreadable process channels UNKNOWN; compression/restoration unmeasured.",
+    "Stale_ambiguity_removed": "Prepared source/alias closure is separated from complete current protected manifest and actual execution admission.",
+    "Upstream_disposition": "none"
+  },
+  "fresh_recorded_current307": {
+    "admission": "HOLD_CURRENT_PROTECTED_HEAD_AND_CLEAN_FS_PENDING_OWNER_FINAL",
+    "clean": true,
+    "head": "9760d5ec44876558c4941c4c3190abc8d92d14a1",
+    "status_binding": {
+      "bytes": 0,
+      "mode": 256,
+      "path": "/workspace/engineering/first-five-actual-preservation-SOURCE-assembly-HOLD/private-current307-tracked-status-observation.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tracked_status_rows": 0,
+    "tree": "0d33ebaac258e069ef7045a29b4a3904740f6307"
+  },
+  "historical_dirty_observation": "The earlier00b1 working tree was dirty; the final read-only sample in predecessor already observed clean9760. Its prose saying current307 dirty is stale; no dirty assertion is operative admission.",
+  "not_run": [
+    "imports",
+    "guards",
+    "tests",
+    "compression",
+    "copy",
+    "archive",
+    "removal",
+    "venv execution",
+    "native"
+  ],
+  "operative_remaining_hold": "Current9760 clean metadata is observed, not adopted in unchanged v5/v6 configuration. A named owner-announced head/tree protected-input retarget and independent review remain mandatory before PURE or storage execution.",
+  "predecessor": {
+    "bytes": 8933,
+    "mode": 256,
+    "path": "/workspace/engineering/first-five-actual-preservation-SOURCE-assembly-HOLD/OWNERFINAL-first-five-actual-preservation-SOURCE-assembly-and-explicit-PREEXEC-HOLD.json",
+    "sha256": "d2696f02c28cee2d3c8a904b3b98d1bb9d802900db737f86d5ae9a5bf6cd023d"
+  },
+  "root_inactive_owner_approval": "ABSENT",
+  "schema": 1,
+  "source_writer_released": true
+}

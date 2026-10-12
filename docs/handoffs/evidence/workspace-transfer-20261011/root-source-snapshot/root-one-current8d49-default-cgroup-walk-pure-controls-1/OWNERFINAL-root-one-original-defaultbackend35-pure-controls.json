@@ -1,0 +1,130 @@
+{
+  "backend_full_descriptor_walk": "OWNED_FAKE_TREE_ONLY",
+  "counts": null,
+  "elapsed_seconds": 33.38292630799697,
+  "failure": {
+    "exception_class": "ValueError"
+  },
+  "memory_sampler_native_adoption": "NONE",
+  "native": "NOT_RUN",
+  "original_census_binding": null,
+  "outcomes": {
+    "always-post": {
+      "argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "120s",
+        "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+        "/workspace/engineering/rcc-defaultbackend35-concrete-PREEXEC-NOTRUN/run_root_defaultbackend35_pure_once_NOTRUN.py",
+        "--phase",
+        "guard",
+        "--config",
+        "/workspace/engineering/rcc-defaultbackend35-concrete-PREEXEC-NOTRUN/FROZEN-defaultbackend35-concrete-config-NOTRUN.json",
+        "--config-sha256",
+        "727141f5bf2e87ffad42a16e4e6fb352c807c45e06be60f32af494ecc05ac5f6",
+        "--release",
+        "/workspace/engineering/root-one-defaultbackend35-pure-controls-release.json",
+        "--release-sha256",
+        "27e254aed07d3a8ec222e8ea30689016c3dc1f0b4328e1d7ba86773568dce8c4"
+      ],
+      "parent_seconds": 135,
+      "returncode": 0,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-1/always-post/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 61,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-1/always-post/original.stdout.private",
+        "sha256": "91b59c9cc5c2955da0d10688a4fe9a3e763e59a1bb1130068b050a933903b853"
+      }
+    },
+    "before": {
+      "argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "120s",
+        "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+        "/workspace/engineering/rcc-defaultbackend35-concrete-PREEXEC-NOTRUN/run_root_defaultbackend35_pure_once_NOTRUN.py",
+        "--phase",
+        "guard",
+        "--config",
+        "/workspace/engineering/rcc-defaultbackend35-concrete-PREEXEC-NOTRUN/FROZEN-defaultbackend35-concrete-config-NOTRUN.json",
+        "--config-sha256",
+        "727141f5bf2e87ffad42a16e4e6fb352c807c45e06be60f32af494ecc05ac5f6",
+        "--release",
+        "/workspace/engineering/root-one-defaultbackend35-pure-controls-release.json",
+        "--release-sha256",
+        "27e254aed07d3a8ec222e8ea30689016c3dc1f0b4328e1d7ba86773568dce8c4"
+      ],
+      "parent_seconds": 135,
+      "returncode": 0,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-1/before/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 61,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-1/before/original.stdout.private",
+        "sha256": "91b59c9cc5c2955da0d10688a4fe9a3e763e59a1bb1130068b050a933903b853"
+      }
+    },
+    "primary": {
+      "argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "120s",
+        "/workspace/engineering/pr308/action_server/.venv/bin/python",
+        "-m",
+        "pytest",
+        "--noconftest",
+        "-n0",
+        "-vv",
+        "-rA",
+        "/workspace/engineering/rcc-current8d49-default-descriptor-walk-controls-PREPARED-NOTRUN/test_default_cgroup_descriptor_walk_NOTRUN.py",
+        "--basetemp",
+        "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-1/basetemp",
+        "-o",
+        "tmp_path_retention_policy=all",
+        "--robocorp-log-output",
+        "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-1/logger",
+        "--junitxml",
+        "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-1/junit.xml"
+      ],
+      "parent_seconds": 150,
+      "returncode": 1,
+      "stderr_binding": {
+        "bytes": 58727,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-1/primary/original.stderr.private",
+        "sha256": "e8c674f11924c2f209ec04ecc2d4b71c30486017a641493f7030813c83629d65"
+      },
+      "stdout_binding": {
+        "bytes": 19642,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-1/primary/original.stdout.private",
+        "sha256": "a65ab6e293e782d9f0d1b77eaafbb1f8b79f11d8a6b5429bef0a264c3c22ce29"
+      }
+    }
+  },
+  "release_binding": {
+    "bytes": 1961,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-one-defaultbackend35-pure-controls-release.json",
+    "sha256": "27e254aed07d3a8ec222e8ea30689016c3dc1f0b4328e1d7ba86773568dce8c4"
+  },
+  "schema": 1,
+  "scope": "35 real default descriptor walks on owned fake trees only, no host cgroup observations/signals/threshold calibration/profile adoption",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "status": "FAIL_OR_HOLD_NO_RETRY",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+}

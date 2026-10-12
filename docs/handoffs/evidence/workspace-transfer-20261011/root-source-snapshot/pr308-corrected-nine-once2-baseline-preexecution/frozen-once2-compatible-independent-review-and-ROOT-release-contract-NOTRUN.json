@@ -1,0 +1,94 @@
+{
+  "ROOT_environment": "Source /workspace/actions-cloud/activate.sh then exact frozen18 expected exports + PATHfirsttwo /workspace/actions-cloud/bin andcachedToolkit c2fd1aa/bin. No inheritedOPT/ADDOPTS/mutant; no source installation/gateway/native.",
+  "ROOT_outer_argv_after_activation": [
+    "env",
+    "-u",
+    "PYTHONOPTIMIZE",
+    "-u",
+    "PYTEST_ADDOPTS",
+    "-u",
+    "RCC_RELOAD_PRIVATE_MUTANT",
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "450s",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/run_corrected_nine_once2_baseline.py",
+    "--release",
+    "ROOT_DISTINCT_RELEASE_PATH",
+    "--release-sha256",
+    "ROOT_DISTINCT_RELEASE_SHA256"
+  ],
+  "final_baseline_gate": "Nine unique exact named cases+reported suite totals9/0/0/0+all eight phase statuses0. Missing malformed JUnit or missingpost is HOLD; originalonce1 not upgraded.",
+  "mutants": "NOT_RUN_SEPARATE_EXPLICIT_PHASE_AUTHORIZATION_ONLY_AFTER_GENUINE_BASELINE_PASS",
+  "only_allowed_placeholder_substitution": [
+    "ROOT_DISTINCT_RELEASE_PATH",
+    "ROOT_DISTINCT_RELEASE_SHA256"
+  ],
+  "required_review_decision": "GO_CORRECTED_NINE_ONCE2_BASELINE_PREEXECUTION",
+  "required_review_fields": {
+    "config_binding": {
+      "bytes": 5694,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/frozen-corrected-nine-once2-baseline-execution-config-NOTRUN.json",
+      "sha256": "d8dd253da2711437e1c94db0950d1352afbc963963d6ae1ec3c14d43eacd336a"
+    },
+    "contract_binding": {
+      "bytes": 8708,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/frozen-corrected-nine-once2-baseline-only-command-contract-NOTRUN.json",
+      "sha256": "8f9f2aa0cb570170cd381c07ad5f849700449f3f35d3983d11dbe9a6f6d74da0"
+    },
+    "decision": "GO_CORRECTED_NINE_ONCE2_BASELINE_PREEXECUTION",
+    "launcher_binding": {
+      "bytes": 9329,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/run_corrected_nine_once2_baseline.py",
+      "sha256": "0faa08c751e98b834ed1525daf5efd2bc64820fbd7b08f698fe66ffefe3bdcc2"
+    }
+  },
+  "root_release_exact_keys": [
+    "schema",
+    "scope",
+    "source",
+    "tree",
+    "launcher_binding",
+    "config_binding",
+    "contract_binding",
+    "independent_preexecution_binding",
+    "baseline_only",
+    "native",
+    "mutants"
+  ],
+  "root_release_template_NOT_EXECUTABLE": {
+    "baseline_only": true,
+    "config_binding": {
+      "bytes": 5694,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/frozen-corrected-nine-once2-baseline-execution-config-NOTRUN.json",
+      "sha256": "d8dd253da2711437e1c94db0950d1352afbc963963d6ae1ec3c14d43eacd336a"
+    },
+    "contract_binding": {
+      "bytes": 8708,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/frozen-corrected-nine-once2-baseline-only-command-contract-NOTRUN.json",
+      "sha256": "8f9f2aa0cb570170cd381c07ad5f849700449f3f35d3983d11dbe9a6f6d74da0"
+    },
+    "independent_preexecution_binding": null,
+    "launcher_binding": {
+      "bytes": 9329,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/run_corrected_nine_once2_baseline.py",
+      "sha256": "0faa08c751e98b834ed1525daf5efd2bc64820fbd7b08f698fe66ffefe3bdcc2"
+    },
+    "mutants": "NOT_RUN",
+    "native": "NOT_RUN",
+    "schema": 1,
+    "scope": "ROOT_DISTINCT_ONE_CORRECTED_NINE_ONCE2_BASELINE_ONLY",
+    "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+    "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+  },
+  "schema": 1,
+  "serialization": "Distinct ROOT review/adoption after no other heavy/native test phase; this packet grants no execution.",
+  "status": "TEMPLATE_ONLY_NOT_AUTHORIZATION_NOT_RUN"
+}

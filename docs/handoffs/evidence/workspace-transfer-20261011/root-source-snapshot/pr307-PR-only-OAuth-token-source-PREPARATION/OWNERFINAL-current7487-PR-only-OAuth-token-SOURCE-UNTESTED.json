@@ -1,0 +1,104 @@
+{
+  "branch": "fix/runtime-release-changelog-selection-20261010",
+  "clean": true,
+  "documentation_improvement": {
+    "Canonical_file_changed": "docs/skills/repository-operations.md",
+    "Durable_learning": "Tokeninterfacewiring doesnotapprove foreigncontent/revision or proveaccess/cause; preserve existing failclosedpairedatomic30sguard",
+    "Evidence": "Exactcurrentgenerator/solemaintainedYAMLtwoPRsteps/parenthelper/task/testbytes, originalfreshjobexit4 andONE404 metadataownerbf914",
+    "Exact_delta": "Existingcredential-freePRsentence replaced by precise builtinreadonlytoken/nocrossrepoPATscope; exact8line404metadata/credential/contentauthoritylesson appendedatOAuthauthorityanchor",
+    "Remaining_uncertainty": "AllnewsourcegatesNOTRUN; originalghcauseUNKNOWN; approvedpair/revision/providerpolicyunresolved/fullmandatorycurrentlycapacityblocked",
+    "Stale_guidance_removed": "PRgeneration withoutcredentials contradictednewbuiltin wiring; no claim explicitbuiltin means authorizedapprovedcontent",
+    "canonical_patch": {
+      "bytes": 2467,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-PR-only-OAuth-token-source-PREPARATION/exact-current7487-canonical.patch",
+      "sha256": "dabe6ecec89b218837dae93f6e7d5c0a7206e325f62a1e13add155051142c05f"
+    }
+  },
+  "originals": [
+    {
+      "bytes": 183539,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-PR-only-OAuth-token-source-PREPARATION/original2314-_gen_workflows.py",
+      "sha256": "91a527f9071d72ec829e4c1012467f447d7fa2be258b33b6b211b5f739c52f7b"
+    },
+    {
+      "bytes": 13201,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-PR-only-OAuth-token-source-PREPARATION/original2314-actions_runtime_pypi_release.yml",
+      "sha256": "72998a0e12719bbd49d7695696ee4bd3542e6eb4c43f5ac93aa071e917ec8b29"
+    },
+    {
+      "bytes": 269931,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-PR-only-OAuth-token-source-PREPARATION/original2314-repository-operations.md",
+      "sha256": "3088458a24b61afe6c3a5d6dbf9b98ddab58f911d480dfccb864c995ad96bba5"
+    },
+    {
+      "bytes": 73335,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-PR-only-OAuth-token-source-PREPARATION/original2314-test_runtime_release_workflows.py",
+      "sha256": "f8b4eae6b58da308ca21b0fdbc668dba27bbc770a96093e8fbbbbcc5356ebdf2"
+    }
+  ],
+  "other_parent_leaves_exact": 1438,
+  "owned_paths": [
+    ".github/workflows/_gen_workflows.py",
+    ".github/workflows/actions_runtime_pypi_release.yml",
+    "devutils/tests/test_runtime_release_workflows.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "parent": "2314aea95795fbc1372a6f7b0b7b298b7cf124c3",
+  "plan": {
+    "bytes": 10638,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-PR-only-OAuth-token-source-PREPARATION/OWNERFINAL-current7487-token-source-gates-PREPARATION-NOTRUN.json",
+    "sha256": "78e29d5476d676d6ae8210c31e3b0c7c5400982c8eefa0a941f51e21cf19856e"
+  },
+  "prepared_reuse": {
+    "bytes": 13754,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-PR-only-OAuth-token-source-PREPARATION/private-current-prepared30-five-configs-historical15-and-ignored-output-proof.json",
+    "sha256": "a79cd6d179ecad3f4ce110d7235d50f0df0b6add74c1a699265e92c2095af18f"
+  },
+  "prior_owners": [
+    {
+      "bytes": 7834,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current2314-OAuth-authority-readonly-proposal/OWNERFINAL-current2314-OAuth-workflow-credential-and-content-authority-readonly-proposal.json",
+      "sha256": "bf91459529a3032c6041eb01bff725f062348e44ddb902f045cb5b02acab3e5e"
+    },
+    {
+      "bytes": 5514,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current2314-actual-LIGHT-independent-review/OWNERFINAL-independent-original-current2314-LIGHT-and-normal-draft-push-gate-review.json",
+      "sha256": "f602a973a97f194449996cae53a2ab5f5d38b8b76378fe9d871dfb8fd6f38d03"
+    },
+    {
+      "bytes": 5342,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current2314-fresh-CI-reconciliation/OWNERFINAL-current2314-fresh-CI-original-Linux-failure-and-readiness-reconciliation.json",
+      "sha256": "be30d8e18280382650793a847b6aaea806470f4b047b37242604de7cfc690b98"
+    }
+  ],
+  "proof": {
+    "bytes": 357745,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-PR-only-OAuth-token-source-PREPARATION/private-complete-4-path-source-and-AST-preservation-proof.json",
+    "sha256": "2818535ba4fd11a7e2e8dfa4392200d02534c2b308400102471f33fe55e199d3"
+  },
+  "schema": 1,
+  "source": "7487d94bf1a0453119928fe2d73d1413a252a312",
+  "status": "SOURCE_COMMITTED_NOT_TESTED_NO_PUSH",
+  "strict_scope": {
+    "generated": "SolemaintainedPyPI YAML exactfourline addition/twoPR envinstances; noothergenerated outputchanged",
+    "generator": "One env dict field in canary step only; undo thatfield exactwholeparentAST",
+    "helper_tasks_permissions_tagPAT": "Exactparentbytes/unchanged scopes",
+    "source308": "No mutation/sourcelease inPR308/sharedignored outputs/devshm/native; original8d49 tuple retained",
+    "tests": "Sole32line/twoparameter boundarytest addition; removeit exactwholeoldtestAST. Testsourceaddedbeforebehavior, NOTRUN"
+  },
+  "tracked_rows": 1442,
+  "tree": "4ae715a497f1f6c643efe2a301a111320b3c18e4",
+  "upstream_disposition": "none",
+  "verification": "Syntax/AST/body/exec-bit and gitdiffcheck/sourcegenerator rendering only; no pytest/Doctor/Toolkit/configuredstatic/full/Bootstrap/native/acquisition invocation"
+}

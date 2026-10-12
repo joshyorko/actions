@@ -1,0 +1,59 @@
+{
+  "ROOT_authority": "Parent NEW_TASK explicitly authorizes ONEcurrent095SOURCE_LIGHT once frozen configuration/sourceROOTrelease validated. No separate FULL or native authorization.",
+  "body": "Before120TERM10;LIGHT480TERM10;alwayspost120TERM10;no installs/newRCC/native",
+  "frozen_input_bindings": [
+    {
+      "bytes": 12886,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/frozen-currentEDF-source-LIGHT-inputs.json",
+      "sha256": "b524729137616bbba8b18b9787ba2f20fc991cae1deec60cc8c458f5bd40448d"
+    },
+    {
+      "bytes": 378602,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/private-currentEDF-source-body-mode-inventory.json",
+      "sha256": "ff7e498553805ea38a2757a4081ee8bd2989bee3e190cdfe8983136d2de78b3a"
+    },
+    {
+      "bytes": 2029,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/accepted-root-source-and-storage-adoption-input.json",
+      "sha256": "6fc137a063f227dd7c79e7c424738128731a971a8732dd2b307e3703ab1c82ba"
+    },
+    {
+      "bytes": 7234,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/currentEDF_readonly_source_and_storage_guard.py",
+      "sha256": "05f5a1d813839749fa62bf9324365f712a34dd6183aeb3a3ca6e80b783a55746"
+    },
+    {
+      "bytes": 2871,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/currentEDF_cached_source_LIGHT_body.py",
+      "sha256": "2aa482ecd56eb4dd0e1f3829a251b2e013b9eb0e9f375c24a080fcf8e0e5ee0d"
+    },
+    {
+      "bytes": 4773,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/launch_currentEDF_source_gate_once.py",
+      "sha256": "79a5490f8eb6dfccb5c2a64d1aee244868f17711f105988e5f5a156cb8fe47b0"
+    }
+  ],
+  "full": "NOT_AUTHORIZED",
+  "outer_argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "900s",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/launch_currentEDF_source_gate_once.py",
+    "LIGHT",
+    "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/root-inline-one-current095-LIGHT-authorization.json",
+    "<ACTUAL_SHA256_BELOW>"
+  ],
+  "pytest": "SeparateinitiallyABSENTToolkitTest/scopedRuntimechildren;uniqueROOTownedparent;ALL;noinheritedADDOPTS;normalconftest",
+  "source": "095e25b6b2b2c8754184b0d26f77bc70a101cee4",
+  "status": "CURRENT095_SOURCE_LIGHT_PREEXECUTION_ROOT_ONE_INLINE_AUTHORIZED",
+  "tree": "edf088b1a8acd9709b37dee2532d77c8b2246a50",
+  "upstream_disposition": "none"
+}

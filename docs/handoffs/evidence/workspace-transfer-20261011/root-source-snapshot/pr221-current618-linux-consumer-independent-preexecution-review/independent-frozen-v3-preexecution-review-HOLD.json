@@ -1,0 +1,109 @@
+{
+  "status": "HOLD_PREEXECUTION_CURRENT_ARCHIVE_IDENTITY_LABELS",
+  "proposal": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/immutable-current618-linux-consumer-preexecution-proposal-v3.json",
+    "bytes": 31495,
+    "sha256": "41ccd19946c766b97c6c49e72dcb592a38193c56763ae6c806a2d41c52b669e6"
+  },
+  "observed_utc": "2026-10-11T10:16:47.763746+00:00",
+  "remaining_concrete_finding": {
+    "field": "input_manifest.original_archive.id/run/job",
+    "observed": {
+      "id": 11693813383,
+      "run": 38118859475,
+      "job": 114409246244
+    },
+    "expected": {
+      "id": 11697353355,
+      "run": 38126987514,
+      "job": 114433293243
+    },
+    "scope": "Current archive path/size/digest is exact; these retained predecessor metadata labels contradict the current original artifact identity. No consumer execution or product failure."
+  },
+  "verified": {
+    "current_refs": 36,
+    "historical_refs": 29,
+    "owner_artifact_log_refs": 24,
+    "all_direct_size_hashes_exact": true,
+    "builder_logs_exact_checkout": 3,
+    "synthetic_and_actual_ordered_parents_and_equal_tree_exact": true,
+    "outer_original_archive_members": 2,
+    "wheel_python": 202,
+    "tracked_source_payloads": 215,
+    "wheel_RECORD_files": 221,
+    "hash_size_verified_RECORD": 220,
+    "wheel_directories": 27,
+    "dist_info_regular_files": 4,
+    "all248_members_exact_declared_inventory": true,
+    "tracked_body_and_executable_bit_source_exact": true,
+    "generated_OAuth_two_empty_fields": "AUTHORITY_HOLD",
+    "generated_RCC_7e588_exact": true,
+    "runner_all9_function_ASTs_equal_predecessor_except_two_fixed_literals": true,
+    "gate_AST_only4_measured_count_literals": [
+      [
+        215,
+        221
+      ],
+      [
+        214,
+        220
+      ],
+      [
+        209,
+        215
+      ],
+      [
+        209,
+        215
+      ]
+    ],
+    "old15_runner_control_function_AST_exact": true,
+    "known_checkout_roots": 15,
+    "future_engineering_guard": true,
+    "INVENTORY_CODE_four_origins_sys_path_exact_predecessor": true,
+    "four_helper_Git618_current_hashes_and_snapshots0444_exact": true,
+    "harness_complete1433_prehashes_current_bytes_exec_Git_clean": true,
+    "one85_control_log_and_final8_binding_log_original_old_count_RED_and84pass1_UTF8_RED_retained": true,
+    "worker595_process600_cleanup5_outer645_TERMkill10_unchanged": true,
+    "fresh_attempt_absent": true
+  },
+  "constructor_history": "Initial derivation/prewording bindings are construction observations only; preserved named before-wording artifacts and final frozen proposal pins are separate. No earlier constructor promoted to final GO.",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "/workspace/engineering/campaign-checkpoint/docs/skills/repository-operations.md",
+    "Exact_delta_or_verified_reuse": [
+      {
+        "exact_added_text": "An empty visible ruleset list does not resolve an inaccessible traditional\nbranch-protection endpoint. Bracket a paginated census with live named-ref\nreadbacks. If the target advances during collection, retain the old tuple and\nquery the new head separately; do not transfer its predecessor's passing CI.",
+        "patch": {
+          "bytes": 897,
+          "path": "/workspace/engineering/pr221-current776-preflight/canonical-policy-and-snapshot-proposed.patch",
+          "sha256": "9744b01f0f2f888de5f88f129b857df33938cb1adf182ec32b30ed08b2f14fe8"
+        },
+        "present_in_canonical_checkpoint": true,
+        "present_in_current618_source": false
+      },
+      {
+        "exact_added_text": "\nA platform artifact containing only Linux wheels does not satisfy the\nseven-artifact release inventory. A selected cp312 consumer has a distinct\nnonpublishing scope; retain its original ZIP, wheel, `METADATA`, `RECORD` and\nbuild identities while cross-platform inventory, tag and upload gates remain\npending. After integration, compare the actual merge tree and selected tracked\npayload bytes with the build's synthetic tree. Tree equality does not turn that\nearlier synthetic checkout into an actual integration build. Derive the Python\nmember count from the new wheel bytes even when it equals an earlier count,\nand retain generated-input authority and content holds separately.",
+        "patch": {
+          "bytes": 1158,
+          "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/canonical-partial-platform-consumer-scope-proposed.patch",
+          "sha256": "bf95da899763f97c016f76fa4a0cf8878ebba8326d57c11ab1a520b1df597c81"
+        },
+        "present_in_canonical_checkpoint": true,
+        "present_in_current618_source": false
+      }
+    ],
+    "Durable_learning_captured": "Current producer checkout/API head/actual integration, complete data-only bytes, selected Linux installed consumer and whole cross-platform release inventory are separate identities/gates. Derive current202 Python and215tracked payloads from currentwheel; no196-member carry. GeneratedOAuthempty and Windowsfrontend/rawmode limits remain separate holds.",
+    "Evidence": "CurrentOWNERFINAL9b406 data-only qualification/215Gitbody+exec bit bindings/221 RECORD integrity; parameter-only current counts proof and85service-free controls; final input hash bindings separately read back. Actualcurrent consumer NOTRUN.",
+    "Stale_or_ambiguous_guidance_removed": "No old776196-member consumer, equality of synthetic tree, missing-policy access or partial Linux inventory promoted to currentwholeRuntime/publication acceptance.",
+    "Remaining_uncertainty": "Current consumer execution is still NOTAUTHORIZED; execution capacity and heavy serialization must be released; macOS/aggregate/fullseven/OAuthauthority/Windowsfrontendsemantics and modes/tag/private/native/release HOLD.",
+    "Disposition": "Exact accepted bf95/9744 lesson present in root canonical guide, verified reuse; source618 lacks these paragraphs and has not been edited by private harness lane.",
+    "Upstream_disposition": "none"
+  },
+  "not_performed": [
+    "Consumer/native/service/browser/provider execution",
+    "Tests/controls/gateway/installer or downloads",
+    "Source/index/branch changes",
+    "Publication/tag/push/merge"
+  ],
+  "upstream_disposition": "none"
+}

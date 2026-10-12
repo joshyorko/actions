@@ -1,0 +1,96 @@
+{
+  "HEAD": "62f4e180f6c894777ebc8ed3a729e88d2f6531d6",
+  "HEAD_tree": "a7cb47cef9eae2ce3b219bb807b535582c67804e",
+  "V2_HOLD_preserved": {
+    "bytes": 7353,
+    "disposition": "Original byte/scope PASS did not admit incorrect budget role label; corrected by namedV3.",
+    "path": "/workspace/engineering/checkpoint-curated-successor-independent-review/OWNERFINAL-independent-curated-current-e2-documentation-PRECOMMIT-HOLD-v2.json",
+    "sha256": "357be6923182774116fa161f410475f349ce068127ce9743b2b7c6c8933b03ad"
+  },
+  "V3_audit_preserved": {
+    "bytes": 5447,
+    "path": "/workspace/engineering/checkpoint-curated-successor-independent-review/independent-curated-current-e2-documentation-V3-byte-scope-proof.json",
+    "sha256": "60a3fc565d080a247b5b95881cb25aac58cf74b17edfa7dadce9e509316ef8ca"
+  },
+  "V3_to_V4_exact_delta": {
+    "all_other_new92_files_and_three_tracked_docs": "EXACT_V3_BYTES; all84original copies andV7manifest untouched",
+    "budget_source": {
+      "bytes": 24963,
+      "path": "/workspace/engineering/rcc-current396925-private-V8-source-only/actual_transport_v8.py",
+      "scalar_AST": [
+        {
+          "cleanup_grace_seconds": 10,
+          "line": 163,
+          "timeout_seconds": 600
+        }
+      ],
+      "sha256": "18166354d9e9d9a94266bc800673c07871a6bbbc649d7ac53fc8609f069ea1b9"
+    },
+    "exact_one_sentence": "B28 statuses below describe the captured metadata-only preparation; any later authored private successor lies outside this snapshot and establishes no actual archive or removal result.",
+    "new_bytes": 16693,
+    "new_sha256": "74fc6300bb21ccf08d7bcebf405b95a5ebc7492f34e067fa5f0081ae334e6b6d",
+    "old_bytes": 16507,
+    "old_sha256": "9b30ec42d8debfdeae379e8308f3bc7572f1e673952ed56d7559a883671904a5",
+    "only_changed_checkpoint_file": "docs/program/evidence/wave11/current-engineering-successor-20261011/OPERATOR.md",
+    "role_correction": "Owned command600/cleanup10; Pythonenvelope645; gateway660TERM+10; ROOTouter900TERM+10; no budget/code/command changes"
+  },
+  "branch": "handoff/actions-swarm-mk3-wave8-20261010",
+  "canonical_documentation_improvement": {
+    "Canonical file changed or proposed": "Existing repository-operations.md and provenance-observability.md additions accepted within this packet, with exact patch hashes above",
+    "Durable learning captured": "Credential/Workspace denial-before-provider and shutdown wait ordering; isolated owned-cache modes; consumed-path dependency closure; private archive alias scope; unique absent pytest basetemp/policy all; source/full/actual release separation; consumer receipt and authentic commit parent separation",
+    "Evidence": "All 84 original bodies rehashed; accepted source-backed proposals/context dispositions retained; 1502-byte a164 canonical proposal and 4c1f actual e2 readback copied exact",
+    "Remaining uncertainty": "No new product/source/full/native/consumer/CI/release admission; original pytest38 responsible process unknown; unavailable private01f/frozenv6 and full issue graph remain HOLD",
+    "Stale or ambiguous guidance removed": "Newly inserted pytest retention paragraph refined to accepted successor; original dirty lines not removed; old313 full pass and old-target commands explicitly historical; stale blocked-publication sentence absent, consumer/parent lesson added in appropriate context"
+  },
+  "canonical_exact_additions": [
+    {
+      "current_sha256": "59d1a7fdd96ab67efbc6e0dc68df43f5544fc4c74dd09abd30003692ca24097c",
+      "exact_additions_patch_sha256": "b17d19638e8df986b16b9f3da0666bd788bef20d383b6bab84e59d225f29de81",
+      "file": "docs/skills/repository-operations.md",
+      "inserted_lines": 130,
+      "removed_original_lines": 0
+    },
+    {
+      "current_sha256": "02b54b9428bf26a7819e555defc43f9aff115cb2884c2bce794339315bc90854",
+      "exact_additions_patch_sha256": "1b452eb19bbf6d7568256e3d0cbefe78b441ce8eeaffa7667ae817797152055c",
+      "file": "docs/skills/provenance-observability.md",
+      "inserted_lines": 82,
+      "removed_original_lines": 0
+    }
+  ],
+  "canonical_total": "repository-operations130inserted/0removed; provenance-observability82inserted/0removed from original dirty snapshot. Accepted V8six-line source-context lesson is scopedSOURCE_ONLY; 1502B/a164 Canvas consumer/parent proposal adapted honestly where old stale sentence was absent.",
+  "complete_independent_proof": {
+    "bytes": 5399,
+    "path": "/workspace/engineering/checkpoint-curated-successor-independent-review/independent-curated-current-e2-documentation-V4-complete-byte-scope-proof.json",
+    "sha256": "1c243d9714f577b8bb8722c7753e4e530720e1304bf5b06fd8bcac238015b466"
+  },
+  "exact_working_document_fingerprint_sha256": "f8dc40df2b139efdb9a6e2c11387f9d2d9da1ea19b45498a7e74227edfb5b599",
+  "execution_subjects": "Actual product e2/afe/a54+1299 proven separately; historical396/5306/12dd preparation requires ordinary refresh and new gates; no old source/full/CI/native carry. Original mode/capacity/cleanupFAILs remainFAIL.",
+  "index": {
+    "bytes": 551827,
+    "sha256": "659aa4b3cc798052ba8bd351b68d55e940c63040f5a5d667dcb753899fccae6e",
+    "staged_changes": 0
+  },
+  "owner_final": {
+    "bytes": 11184,
+    "path": "/workspace/engineering/checkpoint-curated-successor-source-20261011/OWNERFINAL-curated-existing-checkpoint-current-e2-documentation-PRECOMMIT-review-v4.json",
+    "sha256": "7b121f00070a4a46380354b9045f98d901d3f01993fc03201f7ed6c87db70206"
+  },
+  "recorded_utc": "2026-10-11T17:15:09.218863+00:00",
+  "remaining_unknown": "B28 metadata-only statuses are explicitly capture-bound; any later private authoring is outside this snapshot. Full7/source/consumer/native/private/platform/fullissuegraph/OAuth/release remain separateHOLD; no universal cleanup or vanished-pytest process attribution.",
+  "reviewed_scope": {
+    "all_authorized_paths": 96,
+    "all_old_manifests_graph_collector_handoffs": "PRESERVED_EXACT_NO_REGENERATION",
+    "copied_original_bytes": 683868,
+    "copied_originals": 84,
+    "modified_tracked_paths": 3,
+    "new_files": 93,
+    "no_payload_copy": "NO_RAW_APIS_LOGS_CONFIGS_PROCESS_MEMBER_CENSUS_ARCHIVES_NATIVE_CREDENTIALS_SIGNED_URLS",
+    "nonowned_tracked_entries_exact": 3471
+  },
+  "reviewer_operations": "Read-only inspection and owned review outputs only. No repository/index/ref mutations or execution. Original inspector literal-line-wrap failure and unannounced candidate preserved; named corrected inspector does metadata validation only.",
+  "root_action_admitted": "One normal documentation-only commit/push on existing named handoff branch with exact reviewed fingerprint. No application source, native/provider/browser/consumer/gateway/source-full, archive/remove, ready/engineering-merge, issue closure or release authorization.",
+  "schema": 1,
+  "status": "GO_EXACT_CURATED_CURRENT_E2_DOCUMENTATION_PRECOMMIT_V4",
+  "upstream_disposition": "none; no new posts, original authorized RCC125/118 coordination retained"
+}

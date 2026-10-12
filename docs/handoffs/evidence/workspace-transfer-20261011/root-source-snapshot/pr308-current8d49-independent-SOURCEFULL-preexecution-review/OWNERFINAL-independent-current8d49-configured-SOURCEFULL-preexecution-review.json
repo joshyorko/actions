@@ -1,0 +1,149 @@
+{
+  "schema": 1,
+  "status": "INDEPENDENT_CONFIGURED_SOURCEFULL_PREEXECUTION_CONTRACT_GO_EXECUTION_CONDITIONAL",
+  "decision": "GO_CURRENT8D49_CONFIGURED_SOURCEFULL_PREEXECUTION_ROOT_ONE_CONDITIONAL",
+  "proposal_binding": {
+    "path": "/workspace/engineering/pr308-current8d49-SOURCEFULL-preexecution/OWNERFINAL-current8d49-configured-SOURCEFULL-preexecution-proposal.json",
+    "bytes": 6854,
+    "sha256": "7f83f654d3a69adfbd654a958d8486cc5fc2e7f1bed89e5a89d17227ef9839fd",
+    "mode": "0o400"
+  },
+  "source": {
+    "commit": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+    "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+    "typed_entries": 1440,
+    "clean": true
+  },
+  "source_LIGHT_binding": {
+    "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/OWNERFINAL-current8d49-configured-SOURCE_LIGHT-PASS.json",
+    "bytes": 7674,
+    "sha256": "d7f23a52d044195187992aeac80e692429e1a1a4af16ee9b37f1971cfbdc4104",
+    "mode": "0o400"
+  },
+  "current_source_independent_review": {
+    "path": "/workspace/engineering/pr308-current8d49-independent-SOURCE-LIGHT-review/OWNERFINAL-independent-current8d49-configured-SOURCE_LIGHT-review.json",
+    "bytes": 3596,
+    "sha256": "b0d1c4ee4cee11fc3c2ffd9f6fece609869fa4b447d43bfb8c91ca4a2bf6222b",
+    "mode": "0o400"
+  },
+  "frozen_input_bindings": [
+    {
+      "path": "/workspace/engineering/pr308-current8d49-SOURCEFULL-preexecution/frozen-current8d49-source-FULL-inputs.json",
+      "bytes": 13606,
+      "sha256": "68cee8aeab8855f3f175c8a1a6f9e83ad66b9d2267eabfdb9969f7d55207e1c0",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-SOURCEFULL-preexecution/current8d49_readonly_FULL_source_and_storage_guard.py",
+      "bytes": 7681,
+      "sha256": "72f9a57a368d3fd654f574a41aa898fbf9c969feefb63a42f8019b8ff3a72c9e",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-SOURCEFULL-preexecution/current8d49_configured_FULL_body.py",
+      "bytes": 1609,
+      "sha256": "bc8a3ce505c93649c5ede230c64c77c9162f94c425d293e405c11402bed24ccf",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-SOURCEFULL-preexecution/launch_current8d49_configured_SOURCEFULL_once.py",
+      "bytes": 5791,
+      "sha256": "843ce4ad748d79c49ab6702180b2d98c91bdbddc35ff287a2faac81236c02394",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/private-current8d49-source-body-mode-inventory-v3.json",
+      "bytes": 378602,
+      "sha256": "9843e9035fd7bfdf9577b9ba08f108365fbbc336ca00337f99328599b6204677",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-SOURCEFULL-preexecution/installed-own-xdist-and-toolkit-two-worker-environment-readonly-proof.json",
+      "bytes": 2470,
+      "sha256": "996a74a44b358f1a68c908e52bb6453b9ba8baded099e9a45b6fde3ea4127d55",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current095-configured-Ruff-formatter-only-correction/root-approved-formatter-only-normal-child-source-adoption.json",
+      "bytes": 745,
+      "sha256": "edf034c9a880e625353a25d24d97400c24c04b2ffd40d8942bbb001d37c17f92",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/OWNERFINAL-current095-original-SOURCE_LIGHT-formatter-FAIL.json",
+      "bytes": 3791,
+      "sha256": "41fe5885ee867622ea9f822711ab018f54f707a318fa0e561f539bfbb3cff5a3",
+      "mode": "0o400"
+    }
+  ],
+  "static_closure": {
+    "implementation_rows": 4,
+    "prepared_RCC_rows": 12,
+    "LIGHT_same_subject_and_frozen_refs_exact": true,
+    "original237_native1192_prepared30_5origins_context_exact_LIGHT": true,
+    "config_independent_slots_null_by_design": true,
+    "future_ROOT_release_requires_real_two_distinct_independent_rows_before_parent_creation": true,
+    "source_body_same_subject_AST_checked_no_execution": true
+  },
+  "ROOT_required_adoption": {
+    "status": "ROOT_RELEASE_ONE_SERIALIZED_CURRENT_8D49_SOURCE_FULL",
+    "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+    "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+    "proposal_sha256": "7f83f654d3a69adfbd654a958d8486cc5fc2e7f1bed89e5a89d17227ef9839fd",
+    "current_source_independent_review": {
+      "path": "/workspace/engineering/pr308-current8d49-independent-SOURCE-LIGHT-review/OWNERFINAL-independent-current8d49-configured-SOURCE_LIGHT-review.json",
+      "bytes": 3596,
+      "sha256": "b0d1c4ee4cee11fc3c2ffd9f6fece609869fa4b447d43bfb8c91ca4a2bf6222b",
+      "mode": "0o400"
+    },
+    "current_full_preexecution_independent_review": "Exact binding of THIS immutable review file, different from source-review and ROOT release; ROOT must fill after freeze.",
+    "serialized_no_other_heavy_or_installer": true,
+    "current_storage_independent_GO": true
+  },
+  "bounds": {
+    "outer_seconds": 900,
+    "primary_parent_seconds": 640,
+    "configured_child_seconds": 600,
+    "before_and_always_post_seconds_each": 120,
+    "TERM_KILL_after_seconds": 10
+  },
+  "pytest": {
+    "once_owned_parent": "/tmp/actions-pr308-current8d49-FULL-once-1",
+    "child_initially_ABSENT": "/tmp/actions-pr308-current8d49-FULL-once-1/Runtime-configured",
+    "retention_policy": "all",
+    "inherited_addopts": "REJECT",
+    "parent_existing": "REJECT",
+    "no_shared_numbered_parent": true
+  },
+  "capacity": {
+    "workspace_floor": 1288490189,
+    "tmp_floor": 1200000000,
+    "current_source_LIGHT_after_workspace": 1285701632,
+    "current_source_LIGHT_after_tmp": 1264193536,
+    "fresh_both_statvfs_required": true,
+    "current_execution": "HOLD_NOT_AUTHORIZED_OR_EXECUTED"
+  },
+  "limits": [
+    "Fresh ROOT release distinct serialized ONE only after both floors; original absent once paths and frozen metadata immutable. No actual/native/full execution permission from this review alone.",
+    "Launcher binds actual proposal+implementation+real two review files; ROOT operator must use exact GO decisions and rows above. Files are bound but review decision semantics are not dynamically parsed. No config self-pin or false acceptance fields.",
+    "Configured600TERM10 nested parent640TERM10, pre/post120TERM10 and outer900TERM10; actual timeout/error preserves original logs and always attempts post. Post/future complete process reaping not universally proved.",
+    "Old095 formatFAIL and pre-gate TypeError remain preserved; no old full/native source carry or publication gate waiver.",
+    "After ROOTfull real terminal/fresh source/native controls require separate independent qualification."
+  ],
+  "canonical_improvement": {
+    "disposition": "REUSE_EXACT_CURRENT_INTEGRATED_FOUR_LINE_STARTUP_PROBE_LESSON_AND_CONFIGURED_RUNTIME_FORMATTER_PARAGRAPH; RETAIN_ACCEPTED_EXPLICIT_ABSENT_ISOLATED_BASETEMP_ALL_LESSON",
+    "current_startup_exact_delta": "Measure selected bytes before the isolated ten-second version probe and again\nbefore use. Default location and version wrappers must select that same probe;\nthe general command runner's 900-second budget is a separate operation limit.\nInjected runners are test seams, not native timeout evidence.",
+    "formatter_exact_existing_lesson": "Runtime's `inv lint` also checks test-file formatting with\n`ruff format --check --config ../devutils/ruff.toml`. When validating a focused\nRuntime test change, use that configuration as well as `ruff check`; passing\nthe tests or the lint rules alone does not establish formatter acceptance.",
+    "evidence": "Current seven wrapper spies are among275 JUnit cells; fresh Toolkit179/scoped274+1skip, configured Ruff317/Isort/Mypy353, generator8/YAML30 observed after preserved095 formatFAIL; full static body propagates worker2/addopts before Invoke and fails closed before base creation.",
+    "remaining_uncertainty": "No real3/5/7276 operation, full source/private/release, or universal reader/reaping acceptance supplied; retained01f/frozen-v6 missing.",
+    "guide_body_binding": {
+      "path": "/workspace/engineering/pr308/docs/skills/repository-operations.md",
+      "bytes": 272824,
+      "sha256": "9c4b91d1a7bf152ce7d1a17c71bbbcf03085b84b30f14ae352a96f85126199b0",
+      "mode": "0o600"
+    },
+    "upstream_disposition": "none"
+  },
+  "upstream_disposition": "none",
+  "reviewer_execution": "NO_GATE_TEST_NATIVE_PACKAGE_IMPORT_OR_SOURCE_MUTATION"
+}

@@ -1,0 +1,34 @@
+{
+  "root": "01a128d1-75e2-71fe-9528-54b0163600dc",
+  "operator_mode": "STOP_IMPLEMENTATION_PRESERVE_HANDOFF",
+  "workers": {
+    "stack_299": {
+      "state": "STOPPED",
+      "export": "writer-a/exact-original-writer-a-safe-source-and-local-only-manifest.json",
+      "files": 106,
+      "bytes": 1823807,
+      "qualification": "WIP; source-only and NOTRUN status retained"
+    },
+    "acceptance_review": {
+      "state": "STOPPED",
+      "export": "writer-b/exact-safe-writer-b-original-source-copy-manifest.json",
+      "files": 24,
+      "bytes": 300299,
+      "qualification": "640 draft HOLD; OAuth work not started"
+    },
+    "windows_311": {
+      "state": "PRESERVATION_REVIEW_ONLY",
+      "next": "remote verification then STOP"
+    },
+    "merge_review": {
+      "state": "STOPPED",
+      "next": "None in retiring workspace"
+    },
+    "rcc_acceptance": {
+      "state": "STOPPED",
+      "next": "None in retiring workspace"
+    }
+  },
+  "source_writers_active": 0,
+  "no_new_swarm_or_infrastructure": true
+}

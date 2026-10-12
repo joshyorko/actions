@@ -1,0 +1,200 @@
+{
+  "Documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "durable_learning": "Natural action return, intentional persistent-worker disposal, typed captured-tree cleanup and unexposed internal reader joins are distinct proof scopes.",
+    "evidence": "Frozen b614 staged fixture, read_receipt and typed dataclasses; 62 pure baseline/poison tests execute named raw-record adapter; root explicitly approved killed status preservation.",
+    "exact_patch": {
+      "bytes": 869,
+      "mode": "0600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/canonical-action-worker-and-reader-evidence-proposed.patch",
+      "sha256": "f4b31708b31726061da41655456116eb266df59bb5cf7c68a037c0ed8fa6817a"
+    },
+    "remaining_uncertainty": "Source independent/FULL and all actual invocation observations still pending.",
+    "stale_ambiguity_removed": "Completed-worker-only synthetic predicate cannot be applied to intentional-disposal fixture; no status rewriting or outer-for-inner reader claim."
+  },
+  "Upstream_disposition": "none",
+  "actual_execution": "NOT_RUN",
+  "actual_record_admission": {
+    "JUnit": "unchanged parser v3 exactly two named selectors/zero skip/errors/failures",
+    "actual_execution": "NOT_RUN",
+    "controls": {
+      "bytes": 7371,
+      "mode": "0600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/OWNERFINAL-b614-raw-fixture-interface-service-free-controls.json",
+      "sha256": "93c9d45956ba9cb9dce996d7a514cb33243facba9cacc131539d70bca5d9ab6f"
+    },
+    "further_scope": "persistent reuse/reload/drain/provider recovery NOT_RUN/HOLD",
+    "implementation": {
+      "bytes": 10361,
+      "mode": "0600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/fixture_records_v1.py",
+      "sha256": "7dc0921e31ccb0a16bbafc00393979be8cbd844020a58329d710702f9ceabd61"
+    },
+    "internal_reader_join": "UNAVAILABLE/HOLD; scope explicitly stops short of full internal reader qualification",
+    "lease": "artifact/verification/lease identity strict; status and integer exit preserved. completed requires exit0; killed classified intentional persistent worker disposal after original action assertion, never natural worker success. Pending/unknown fail.",
+    "outer_cleanup": "must independently satisfy existing supervisor cleanup and reader completion; not substituted for worker predicates",
+    "publication": "strict source/control/RCC; exact one argv and original raw JSON hash binds both digests",
+    "staged": "exact AST-literal derived canonical 2-file source/staged inventory and hashes, descriptor expected tuple, original Core1.0.2/action/Python containment; original independently read lease bytes/hash/body required",
+    "typed_cleanup": "both original snapshots independently require wrapper reaped/snapshot complete/no live/no zombie/no errors; null/pending/inconsistent types fail. No measured field changed from outer cleanup."
+  },
+  "admission_claims": {
+    "JUnit": "Exactly2 named selectors, all passed,0skip0failure0error, explicit counters and actual case rowsconsistent; missing/duplicate/wrong names rejected",
+    "cleanup": "Exact retained raw fixture/provider/process receipts plus existing outer owned helper. Distinguish natural client/action return0 from separately forced long-lived provider cleanup. Missing measured fields remain unavailable/HOLD; never manufacture Runtime flags from test/statusPASS.",
+    "observer": "Only use unchanged943d observer if actual function interface supports this nonstartup owner without patching or pipe reads. Require exactly one final marker: sampler_cancelled isTrue AND sampler_alive isFalse; no duplicate/stale/missing/type coercion. Otherwise use finite sampler with exact same explicit state contract as separately reviewed runner/control proposal.",
+    "publication": "Original one-invocation rawJSON/specificationDigest/artifactDigest/observed RCCidentity+version; exact selected tuple; no waiver of existing assertions",
+    "staged_action": "Original source/staged inventory/member/modes equality, typed result exact fields and actionhash, Core1.0.2 sample, physical managed Python/Core origin and staged actionpath, actual descriptor/artifact/lease correlation from original owned records"
+  },
+  "capacity": {
+    "devshm_first_cold_available_minimum_bytes": 3865470567,
+    "first_failure": "Stop later versions; no retry/mirror/new infra/install fallback",
+    "observation_is_execution_clearance": false,
+    "observed_mount_available_bytes": 5853843456,
+    "observed_workspace_available_bytes": 876081152,
+    "owned_state_hard_bytes": 2576980377,
+    "owned_state_operational_stop_bytes": 2523293286,
+    "sampler": "Finite/cancelable with exact PID-create-time process ownership. On threshold records fixed category, stops owned command via accepted helper mechanism, preserves primary and cleanup; no unowned killing or merely post-hoc acceptance.",
+    "sampling_seconds": 0.2,
+    "workspace_floor_bytes": 1200000000
+  },
+  "draft_predecessor": {
+    "bytes": 11912,
+    "mode": "0600",
+    "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/DRAFT-RCC-compatibility-actual-runner-structure-source-tuple-PENDING-v2.json",
+    "sha256": "ada3a8a5371121af1759a8d4e9e878f7edd75cb7e8c1b59a2d041d2775d16fb8"
+  },
+  "exact_selectors": [
+    "tests/action_server_tests/test_source_staging_rcc_consumer.py::test_published_artifact_details_preserves_one_rcc_identity_pair",
+    "tests/action_server_tests/test_source_staging_rcc_consumer.py::test_staged_package_executes_in_managed_rcc_runtime"
+  ],
+  "execution_release_shape": {
+    "each_independent_fresh_capacity": "Retaining completed earlier ownedstate may make later cold capacity insufficient. No deletion/cache switch/retry; root separately reviews lossless preservation/capacity before next release.",
+    "no_automatic_three_version_loop": true,
+    "no_same_path_overwrite": "Absent once-owned root, x-mode writes, immutable before/terminal/post owner receipt",
+    "one_version_per_root_release": true,
+    "ordered_predecessor_requirement": "5 requires original current3 baseline2PASS;7276 requires original current5 scoped2PASS; missing/failure/budget stops remaining versions"
+  },
+  "existing_owner": {
+    "admission": "returncode0 AND existing successful helper disposition clean_no_descendants or reaped_exited_descendants; reject forced/unexpected descendants/timeouts/errors independently from case assertions. Retain actual reaped count, no invented complete descendant proof.",
+    "call": "run_owned_process(exact pytest two-node argv,cwd=frozen source/action_server,env=allowlisted isolatedchild,timeout_seconds=600,cleanup_grace_seconds=10)",
+    "helper": {
+      "bytes": 74274,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/verify_dakota_rcc_acceptance.py",
+      "sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659"
+    },
+    "import": "Hash bytes first, compile/import exact immutable snapshot; __file__ remains hash-pinned0444 path so existing self-launched --_supervisor code is exact. No copied Runtime/RCC implementation, no helper CLI or2400s mode.",
+    "outer_KILL_grace_seconds": 10,
+    "outer_TERM_seconds": 660,
+    "parent_bound_seconds": 645,
+    "sampler_stop_ownership_design": {
+      "Popen_observer": "Module-scoped proxy around only imported pinned helper.subprocess.Popen. Pass unchanged argv/cwd/env/stdin/stdout/stderr/start_new_session to realPopen; retain actual supervisor Popen once. No global Runtime subprocess patch, extra supervisor or replacement transport.",
+      "capacity_primary": "Threshold/inspection error is retained as fixed primary category with its measured counter/time; command returncode/helper exception/actual cleanup retained separately even if signal makes command returnnonzero. No cleanupPASS can override thresholdFAIL.",
+      "thread_final": "Finally request cancellation and boundedjoin; measured cancelledTrue AND aliveFalse with finite states required. No reader/pipes, env/command/rawURLs output.",
+      "threshold_target": "Enumerate existing helper capture of supervisor subtree, require uniquely matched direct child with exact planned pytestargv/cwd and stable(pid,create_time); signal that pytest psutil handle only. Leave supervisor running to record command return and own exclusive Popen reap/descendant cleanup. Never concurrently call terminate_process_tree/Popen.wait from sampling thread.",
+      "unknown_owner": "Fixed inspection/owner category and strict FAIL; no unowned kill or fabricated no-descendant proof. Overall original600/645/660 boundaries remain. Stop later versions."
+    }
+  },
+  "final_freeze": "conditional interface frozen; runnable transport implementation independent review and exact SOURCE_FULL gate pending",
+  "future_source_identity": {
+    "fixture_interface": {
+      "bytes": 4318,
+      "path": "/workspace/engineering/pr308-rcc-compatibility-source/frozen-source-two-selector-and-actual-fixture-evidence-interface-v2.json",
+      "sha256": "f50064bfcbf94ab4cb7618328f6debafe39ba6f3505a17e28f477172ae66f085"
+    },
+    "legacy_control_Git_fields": {
+      "commit": "c10380a4d2ebc6f0aca63eb85c8f84a337da4962",
+      "kind": "root-approved retained legacy Git provenance for external qualification; not runner SHA256 or new hosted control",
+      "tree": "21676c626a933c2d55761ec85ecf26fe0eef26bb"
+    },
+    "operator_env_selector": "ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY",
+    "source_FULL": "PENDING_REQUIRED_BEFORE_ACTUAL",
+    "source_LIGHT_bindings_rechecked": 71,
+    "source_LIGHT_independent": "PENDING",
+    "source_LIGHT_owner": {
+      "bytes": 25279,
+      "mode": "0444",
+      "path": "/workspace/engineering/pr308-rcc-compatibility-source/OWNERFINAL-current-a0d-approved-RCC-compatibility-SOURCE-LIGHT.json",
+      "sha256": "336cfca277d8e3b08035af8057e77af580fc7a5cbeb54226ae2140abedb79bba"
+    },
+    "source_head": "b614864ba9da55c13662894b6ef3c8515d9fdb25",
+    "tree": "6fa4f5c1e9837a0d893868255575b355b3977fae"
+  },
+  "gateway": {
+    "activation": "/workspace/actions-cloud/activate.sh987B/6478 unchanged",
+    "activation_checks": "All19 exports including PATH; actual managedRCC3/toolkitPython/Poetry and own30inputs/five origins checked before gateway",
+    "candidate_selection": "Only sanitized acceptance child selects exact root approved copy; outer toolkit and production pin/default3 unchanged",
+    "outer": "rcc task script -r developer/toolkit.yaml -- python -c toolkit.poetry(action_server,run,python,<external frozen runner>,<exact version config>)"
+  },
+  "input_bindings": [
+    {
+      "bytes": 38725,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/OWNERFINAL-RCC-current-a0d-existing-PR308-compatibility-source-and-qualification-proposal-v2.json",
+      "sha256": "89b5ae9f6f41f0649d575510922ec947161fcf63f737f40a4a118985fde4b0c5"
+    },
+    {
+      "bytes": 26884,
+      "path": "/dev/shm/actions-rcc-compatibility-originals-20261011/OWNERFINAL-three-original-RCC-acquisition-data-qualification.json",
+      "sha256": "0da97bfc63a5e47de1c900e8d37ec55261d8b7ef6f68069a74167afc344c72ad"
+    },
+    {
+      "bytes": 9344,
+      "path": "/workspace/engineering/rcc-original-acquisition-independent-review/OWNERFINAL-independent-three-original-RCC-acquisition-data-review.json",
+      "sha256": "393a5282605f54f04cd2f93d31355da24631fcb7fb36eaf76ac26cb701f695e3"
+    },
+    {
+      "bytes": 2369,
+      "path": "/workspace/engineering/root-two-exact-approved-test-only-binary-copies.json",
+      "sha256": "2b81e077eab373ed1574371608b0112e20c5d2ec96327f40b0c1d0d2a6a39c8a"
+    },
+    {
+      "bytes": 74274,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/verify_dakota_rcc_acceptance.py",
+      "sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659"
+    },
+    {
+      "bytes": 25279,
+      "mode": "0444",
+      "path": "/workspace/engineering/pr308-rcc-compatibility-source/OWNERFINAL-current-a0d-approved-RCC-compatibility-SOURCE-LIGHT.json",
+      "sha256": "336cfca277d8e3b08035af8057e77af580fc7a5cbeb54226ae2140abedb79bba"
+    },
+    {
+      "bytes": 4318,
+      "mode": "0444",
+      "path": "/workspace/engineering/pr308-rcc-compatibility-source/frozen-source-two-selector-and-actual-fixture-evidence-interface-v2.json",
+      "sha256": "f50064bfcbf94ab4cb7618328f6debafe39ba6f3505a17e28f477172ae66f085"
+    },
+    {
+      "bytes": 7371,
+      "mode": "0600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/OWNERFINAL-b614-raw-fixture-interface-service-free-controls.json",
+      "sha256": "93c9d45956ba9cb9dce996d7a514cb33243facba9cacc131539d70bca5d9ab6f"
+    }
+  ],
+  "isolation": {
+    "credential_checks": "No environment dump; explicit fixed safe-key overrides only; unknown policy overrides fail closed",
+    "home_tmp_actions_provider": "Only acceptance child receives separate ownedHOME/TMPDIR/TMP/TEMP/ACTIONS_HOME/ROBOCORP_HOME/provider paths; test tmp basetemp under same owned envelope",
+    "network": "Existing package dependency resolution for genuine cold publish only; retain activation trust/proxies under existing child_environment credential denial; loopback provider URLs private",
+    "root": "Unique absent0700 existing exec/dev/shm per root-released version",
+    "state_preservation": "No automatic deletion of original/raw owned state or cleanup cache; process cleanup distinct from filesystem retention; all privatefiles0600"
+  },
+  "raw_adapter_controls_actual": {
+    "native_execution": false,
+    "passed": 62,
+    "returncode": 0,
+    "tests": 62
+  },
+  "remaining_HOLD": [
+    "Independent SOURCE_LIGHT and exact SOURCE_FULL owner+review",
+    "Complete runnable actual transport and finite sampler integration controls plus independent review",
+    "Explicit root one-per-version actual release, fresh devshm/workspace capacity and serialization",
+    "Worker internal reader observation UNAVAILABLE; full persistent reuse/reload/drain/provider recovery",
+    "Released5 dirty source equivalence UNKNOWN",
+    "All actual3/5/7276 functional observations NOT_RUN; no nativeCLI/wheel/private/full134135/metadata/release/closure"
+  ],
+  "service_free_control_plan_NOT_RUN": "Superseded only for recorded pure controls: parser99 + ownership14 + rawinterface62 pass. Actual transport/sampler threading integration controls not yet implemented or executed; no actual release.",
+  "status": "CONDITIONAL_FROZEN_SOURCE_INTERFACE_AND_CONTROL_PROPOSAL_ONLY_ACTUAL_HOLD",
+  "version_order": [
+    "retained released18.19.3 control",
+    "released18.19.5 dirty-source D1 exact original1a617",
+    "candidate727 v18.19.6 exact originalbe55"
+  ]
+}

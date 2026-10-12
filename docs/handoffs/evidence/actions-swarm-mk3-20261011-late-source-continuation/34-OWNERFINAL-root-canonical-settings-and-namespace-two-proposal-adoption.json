@@ -1,0 +1,28 @@
+{
+  "added_bytes": 1638,
+  "after_bytes": 257158,
+  "after_sha256": "274140f385a4be327e0188623b23333b136da9aeb23376f7e1b7c56bae24af6c",
+  "before_bytes": 255520,
+  "before_sha256": "b97ca0fae6f2ad801570c1111251353f5a8e6e9808bf710d023661d05bc77401",
+  "decision": "ROOT_ADOPT_EXACT_TWO_MEANINGFUL_CANONICAL_PROPOSAL_BODIES",
+  "evidence": [
+    "f54a9493 source owning-settings GO",
+    "91627e87 original namespace ACTUALFAIL/proposal"
+  ],
+  "guide": "/workspace/engineering/campaign-checkpoint/docs/skills/repository-operations.md",
+  "schema": 1,
+  "scope": "SOURCE/probe scope guidance only; no success or gate promotion",
+  "sources": [
+    {
+      "bytes": 1030,
+      "path": "/workspace/engineering/pr307-current9760-token-light-once4-PREEXECUTION-NOTRUN/canonical-owning-Isort-Ruff-compatible-settings-and-partial-gate-scope-proposed.txt",
+      "sha256": "ef0aad554d9201982ae2f37305aaa98d82947f2a285590fa799a22ac76e5ab2f"
+    },
+    {
+      "bytes": 699,
+      "path": "/workspace/engineering/pr307-current9760-once4-ACTUALFAIL-independent-review/canonical-namespace-source-base-and-separate-Mypy-probe-proposed.txt",
+      "sha256": "a335d05a25da80c3ff3553be26c24a282c6b90fe1298cb45ffd4b5135feab98a"
+    }
+  ],
+  "upstream_disposition": "none"
+}

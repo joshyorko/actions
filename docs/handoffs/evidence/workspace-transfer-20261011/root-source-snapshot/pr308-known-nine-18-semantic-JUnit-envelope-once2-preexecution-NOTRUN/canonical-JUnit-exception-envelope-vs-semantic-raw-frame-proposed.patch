@@ -1,0 +1,11 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@
+ and validate JUnit names, modules, failures, errors, and skips before calling
+-the gate passed. Source-mode tests do not establish frozen behavior. A
++the gate passed. For a deliberate semantic RED, the installed pytest JUnit
++emitter may omit a failure `type` attribute. Admit that exact envelope only
++with the original named-case AssertionError trace at the frozen source path,
++function, line and assertion; a generic failed return code is insufficient.
++Preserve an admission failure and use a named successor rather than relabeling
++the original attempt. Source-mode tests do not establish frozen behavior. A

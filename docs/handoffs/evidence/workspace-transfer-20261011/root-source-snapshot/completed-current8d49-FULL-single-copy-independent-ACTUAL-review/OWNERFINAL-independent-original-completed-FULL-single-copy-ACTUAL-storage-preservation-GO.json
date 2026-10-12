@@ -1,0 +1,225 @@
+{
+  "PREEXEC_binding": {
+    "bytes": 9240,
+    "mode": "0o400",
+    "path": "/workspace/engineering/completed-current8d49-FULL-single-copy-fallback-independent-PREEXECUTION-review/OWNERFINAL-independent-exact-one-completed-FULL-single-copy256-PREEXECUTION-conditional-GO.json",
+    "sha256": "03b3ab4d157291580a2509bc9a1d79a9340b8b49ad249c86bbc64da4bb4b8c09"
+  },
+  "actual_one_attempt": {
+    "child_returncode": 0,
+    "elapsed_seconds": 92.68482983099238,
+    "native": "NOT_RUN",
+    "no_retry": true,
+    "outer_returncode": 0,
+    "protected_post": "PASS"
+  },
+  "actual_terminal_binding": {
+    "bytes": 410,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-one-completed-FULL-single-copy-storage-owned-v2/original-one-attempt-terminal.json",
+    "sha256": "8978abad7ff72aaff7acc37c41c69ac35167f449ab25b1b2369e476758280725"
+  },
+  "capacity_boundaries": {
+    "SHM_after_original_terminal": 3102658560,
+    "TMP_after_original_terminal": 859811840,
+    "cgroup_headroom": "Root-observed low headroom remains separate; no memory recovery or next native authorization by this receipt.",
+    "floors_restored_claim": false,
+    "fresh_recheck_required_for_any_future_execution": true,
+    "native_SHM_floor": 3865470567,
+    "native_workspace_floor": 1288490189,
+    "source_FULL_TMP_floor": 1200000000,
+    "workspace_after_original_terminal": 1217503232
+  },
+  "decision": "GO_ACTUAL_EXACT_COMPLETED_FULL_SINGLE_COPY_DATA_STORAGE_PRESERVATION_ONLY",
+  "documentation_improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md; reuse exact accepted seven-line promotion/failed-partial alias patch677897a486955f7ca9b6e6a626c10d5472314f574fcf9bd595029e7d31db6058 and accepted dispatch/capacity lesson; no cosmetic duplicate.",
+    "Durable learning captured": "Exclusive same-filesystem verified hardlink promotion removes the second data copy; a complete CRC/member/index archive is distinct from failed-partial byte preservation and future execution capacity.",
+    "Evidence": "Full original249279073B SHA and15832header stream/15831snapshot/indices; accepted exact promotion executable and actual zero-result guard captures.",
+    "Remaining uncertainty": "ACLs/xattrs/inode restoration/universal handles and reaping unmeasured; future capacity and native/current CI/private/full-release acceptance remain HOLD.",
+    "Stale or ambiguous guidance removed": "Progress and compressed full-index sizes are recorded by actual filenames (4587911/932293 respectively); successful preservation is not a claim that FULL/native/memory floors are restored."
+  },
+  "independent_archive_stream_verification": {
+    "TAR_types_including_root": {
+      "FIFO": 8,
+      "directory": 3505,
+      "hardlink": 4,
+      "regular": 11804,
+      "symlink": 511
+    },
+    "all_destination_files_regular_0600_UIDGID1000_nlink1": true,
+    "all_file_hashes_sizes_modes_UIDGID_PAX_nsmtime_exact": true,
+    "all_four_hardlinks_same_original_partition_and_body_identity": true,
+    "all_member_set_paths_no_duplicates_no_traversal": true,
+    "all_symlink_targets_and_FIFO_types_exact": true,
+    "archive_SHA256": "c3911c1ad83a8781d81f50ed4c52750214a0e9c1ff9cc1dc7e9d34c2cf7454d0",
+    "archive_bytes": 249279073,
+    "both_index_records_complete_original_snapshot_exact": true,
+    "combined_index_cap": 16777216,
+    "combined_indices_bytes": 5520204,
+    "compressed_full_index_bytes": 932293,
+    "finite_compressed_cap": 268435456,
+    "gzip_complete_EOF_CRC_ISIZE": true,
+    "index_original_archive_digest_snapshot_and_expanded_removed_flags_exact": true,
+    "member_count_including_root": 15832,
+    "original_entries": 15831,
+    "progress_index_bytes": 4587911,
+    "regular_body_bytes_verified": 634145074,
+    "selected_expanded_root_absent": true,
+    "unique_stage_present_empty": true
+  },
+  "independent_source_and_retention": {
+    "consumed_driver_bindings_rehashed_exact": 9,
+    "current_named_HEAD_tree_exact": true,
+    "guard_native_count": 1192,
+    "guard_originals_count": 237,
+    "guard_origins_count": 5,
+    "guard_prepared_count": 30,
+    "historical_native_reaping_release_claims": "UNCHANGED_HOLD",
+    "original_before_and_after_guards_zero_captured_SHA_lengths": true,
+    "original_failed128MiB_attempt_unchanged": "FAIL",
+    "original_failed134201221_partial_fullSHA_metadata_alias_current_exact": true,
+    "original_failed_partial_CRC_TAR_completion": "UNKNOWN_NOT_DECODED",
+    "whole_current_Git_FS_bodies_execmodes_exact": 1440
+  },
+  "relocation_actual_independent_binding": {
+    "bytes": 10669,
+    "mode": "0o400",
+    "path": "/workspace/engineering/completed-current8d49-FULL-partial-relocation-independent-ACTUAL-review/OWNERFINAL-independent-original-failed-FULL-partial-relocation-ACTUAL-data-preservation-GO.json",
+    "sha256": "80ca0332f09b857004cfd4aaaaf0dbaaf42454d35f7687724d4434581b4bc53a"
+  },
+  "review_operations": "read-only full compressed SHA, streaming original gzip/TAR verification and JSON/index/typed-alias/GitFS checks; no helper import/replay/new archive/removal/native/tests",
+  "root_outer_owner_binding": {
+    "bytes": 886,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-reviewed-FULL-single-copy-original-outer-once/OWNERFINAL-root-one-original-reviewed-FULL-single-copy-outer.json",
+    "sha256": "53a42ead8ab47648a779bbe396001c61a64cdf0ba03a517c67f132d347e5eea7"
+  },
+  "safe_original_evidence_bindings": [
+    {
+      "bytes": 886,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-reviewed-FULL-single-copy-original-outer-once/OWNERFINAL-root-one-original-reviewed-FULL-single-copy-outer.json",
+      "sha256": "53a42ead8ab47648a779bbe396001c61a64cdf0ba03a517c67f132d347e5eea7"
+    },
+    {
+      "bytes": 410,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-completed-FULL-single-copy-storage-owned-v2/original-one-attempt-terminal.json",
+      "sha256": "8978abad7ff72aaff7acc37c41c69ac35167f449ab25b1b2369e476758280725"
+    },
+    {
+      "bytes": 2425,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-completed-FULL-single-copy-storage-release-v2.json",
+      "sha256": "17ce8c02afd21e702895f43a56c8395954f29edf654c6bf62f7dec63d4044ccf"
+    },
+    {
+      "bytes": 10669,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed-current8d49-FULL-partial-relocation-independent-ACTUAL-review/OWNERFINAL-independent-original-failed-FULL-partial-relocation-ACTUAL-data-preservation-GO.json",
+      "sha256": "80ca0332f09b857004cfd4aaaaf0dbaaf42454d35f7687724d4434581b4bc53a"
+    },
+    {
+      "bytes": 10383,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/launch_single_copy_FULL_storage_once.py",
+      "sha256": "a8a693f5fc4dadf09433e46ea54b65d67048c14f3203c9166223fa71566b24ae"
+    },
+    {
+      "bytes": 21276,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/archive_exact_one_completed_FULL_single_copy_once.py",
+      "sha256": "e717faae8a9e5f7a1ccea85c17df928a728216e43bf77256c487e685d9971771"
+    },
+    {
+      "bytes": 1491,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/exclusive_single_copy_archive_promotion.py",
+      "sha256": "63c8d00d5830672ad4e03d5e5dd811d4735f32bd7ca865ff4c6f63d3c2587a09"
+    },
+    {
+      "bytes": 249279073,
+      "mode": "0o600",
+      "path": "/tmp/actions-completed-current8d49-FULL-scratch-preserved-single-v2/completed-FULL-once-1.tar.gz",
+      "sha256": "c3911c1ad83a8781d81f50ed4c52750214a0e9c1ff9cc1dc7e9d34c2cf7454d0"
+    },
+    {
+      "bytes": 932293,
+      "mode": "0o600",
+      "path": "/tmp/actions-completed-current8d49-FULL-scratch-preserved-single-v2/private-complete-prestage-inventory-and-verification.json.gz",
+      "sha256": "63748711552b625d7e343b448df6abf8f333397fec1e41c3ea8c5a6b27f98878"
+    },
+    {
+      "bytes": 4587911,
+      "mode": "0o600",
+      "path": "/tmp/actions-completed-current8d49-FULL-scratch-preserved-single-v2/private-complete-inventory-and-recovery.json",
+      "sha256": "9b4f07460b2d744c3f0a1740bccfa42d31d924ee43a718e6e0b50e885112722b"
+    },
+    {
+      "bytes": 467,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-completed-FULL-single-copy-storage-owned-v2/before/terminal.json",
+      "sha256": "f3acf8485aa874ebdd6cf942b16673549d4af43d8150d74db4837c46dbfc6699"
+    },
+    {
+      "bytes": 2258,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-completed-FULL-single-copy-storage-owned-v2/before/stdout.private.log",
+      "sha256": "8591dddf2b51f555ce44648c75dbb600f69c380e012db704b2d6ffb2fd5401a8"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-completed-FULL-single-copy-storage-owned-v2/before/stderr.private.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 466,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-completed-FULL-single-copy-storage-owned-v2/after/terminal.json",
+      "sha256": "b43d5112971969dafde09cd8608b60271c0f3eb2978fcf02c4f07b22b86c84e3"
+    },
+    {
+      "bytes": 2258,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-completed-FULL-single-copy-storage-owned-v2/after/stdout.private.log",
+      "sha256": "c6f00ef1d7004396e7764070c4fc473098418ec3a4686d17615138ea41c197c3"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-completed-FULL-single-copy-storage-owned-v2/after/stderr.private.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 380,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-completed-FULL-single-copy-storage-owned-v2/protected-before.json",
+      "sha256": "50471a4d1c56ce4e738ba21f06192f1bf2cc0cd486a88c8e58670ed09667275b"
+    },
+    {
+      "bytes": 380,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-completed-FULL-single-copy-storage-owned-v2/protected-after.json",
+      "sha256": "5105bced370878f05e3d1e8a156c749bb409fcb46b9c0cf58d853c65e1246ebc"
+    },
+    {
+      "bytes": 95,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-completed-FULL-single-copy-storage-owned-v2/original-partial-state-before.json",
+      "sha256": "d8514ee2764e29d93a5ec79397ddfc041a01015fed62ebe355ccdbdcbcb17ae0"
+    },
+    {
+      "bytes": 95,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-completed-FULL-single-copy-storage-owned-v2/original-partial-state-after.json",
+      "sha256": "d8514ee2764e29d93a5ec79397ddfc041a01015fed62ebe355ccdbdcbcb17ae0"
+    }
+  ],
+  "schema": "INDEPENDENT_ORIGINAL_COMPLETED_FULL_SINGLE_COPY_STORAGE_ACTUAL_REVIEW",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "status": "PASS_EXACT_DATA_ARCHIVE_METADATA_INDEX_AND_ORIGINAL_FAILED_PARTIAL_ALIAS",
+  "successful_fsync_and_removal_order_evidence": "Original zero child result bound to accepted exact executable/promotion helper. Source enforces all stage/body/CRC verification, complete index fsync and reserve before any removal, then exclusive same-filesystem destination/file+directory fsync before staged unlink. No independent syscall trace or retrospective process cleanup claim.",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none"
+}

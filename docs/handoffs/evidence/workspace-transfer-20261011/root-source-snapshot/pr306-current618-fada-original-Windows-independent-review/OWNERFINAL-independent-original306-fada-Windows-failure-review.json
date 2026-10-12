@@ -1,0 +1,129 @@
+{
+  "schema": "actions.independent-original306-fada-Windows-log-diagnosis/v1",
+  "verdict": "GO_BOUNDED_FAILURE_CENSUS_AND_CANONICAL_PROPOSAL_ONLY_ENGINEERING_ACCEPTANCE_HOLD",
+  "owner_final": {
+    "path": "/workspace/engineering/pr306-current618-fada-original-Windows-failure-owned/OWNERFINAL-original306-fada-Windows-readiness-failure-v6.json",
+    "bytes": 22555,
+    "sha256": "8c7dd3ed54418c4e69456e831d710b6436fdc4969be7b55fdb4d94d2b19d9427"
+  },
+  "subject": {
+    "source": "fada8e068f61f6e0e380ec4685eed2f4cf0b9ade",
+    "actual_original_runner": "522b7bc6e7e9207dac0c745b49d90907ecdf3080",
+    "ordered_parents": [
+      "6181b044c75de35386f1ae30e71725398b6a7feb",
+      "fada8e068f61f6e0e380ec4685eed2f4cf0b9ade"
+    ],
+    "tree": "a31db4434c7bbe69bf572626d2174f64f9ff2f39",
+    "later_frozen_API_merge_ref": "3dae00de315bfa9d909cc2a546f717da342c329b",
+    "run": 38130109466,
+    "job": 114442488607
+  },
+  "original_log": {
+    "path": "/workspace/engineering/pr306-current618-fada-original-Windows-failure-owned/job-114442488607-original.private.log",
+    "bytes": 821618,
+    "sha256": "4b7d014d43ace9a16f78061efc366efd0e1c51a42cbf3e0649209356b1c06cd7"
+  },
+  "all33bindings_verified": true,
+  "complete1419_typed_Git_source_equal_original_checkout": true,
+  "complete_phase_census": [
+    {
+      "phase": "source",
+      "counts": {
+        "PASSED": 1154,
+        "SKIPPED": 142
+      },
+      "total": 1296,
+      "deselected": null,
+      "duration_seconds": 410.31,
+      "complete_individual_nodes_equal_original_private_census": true,
+      "terminal_summary_reconciled": true
+    },
+    {
+      "phase": "binary",
+      "counts": {
+        "PASSED": 126,
+        "FAILED": 5,
+        "SKIPPED": 19
+      },
+      "total": 150,
+      "deselected": 1299,
+      "duration_seconds": 1639.03,
+      "complete_individual_nodes_equal_original_private_census": true,
+      "terminal_summary_reconciled": true
+    }
+  ],
+  "failed_nodes": [
+    "action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[resource]",
+    "action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[template]",
+    "action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[prompt]",
+    "action_server_tests/test_cli_mcp_resource_history.py::test_cli_resource_owner_history_across_reload_and_restart",
+    "action_server_tests/test_cli_successful_generation_drain.py::test_successful_generation_switch_drains_old_run_on_its_source_snapshot"
+  ],
+  "failure_scope": [
+    {
+      "scenario": "resource",
+      "first_readiness_timeout_before_semantics": true,
+      "budget_seconds": 90,
+      "secondary_cleanup_budget_seconds": 20,
+      "cleanup": false,
+      "variables_reported_call_duration_seconds": []
+    },
+    {
+      "scenario": "template",
+      "first_readiness_timeout_before_semantics": true,
+      "budget_seconds": 90,
+      "secondary_cleanup_budget_seconds": 20,
+      "cleanup": false,
+      "variables_reported_call_duration_seconds": []
+    },
+    {
+      "scenario": "prompt",
+      "first_readiness_timeout_before_semantics": true,
+      "budget_seconds": 90,
+      "secondary_cleanup_budget_seconds": 20,
+      "cleanup": "UNKNOWN",
+      "variables_reported_call_duration_seconds": [
+        87.2
+      ]
+    },
+    {
+      "scenario": "resource_history",
+      "first_readiness_timeout_before_semantics": true,
+      "budget_seconds": 90,
+      "secondary_cleanup_budget_seconds": 20,
+      "cleanup": "UNKNOWN",
+      "variables_reported_call_duration_seconds": []
+    },
+    {
+      "scenario": "generation_drain",
+      "first_readiness_timeout_before_semantics": true,
+      "budget_seconds": 90,
+      "secondary_cleanup_budget_seconds": 20,
+      "cleanup": "UNKNOWN",
+      "variables_reported_call_duration_seconds": []
+    }
+  ],
+  "primary": "FIVE_FIRST90s_NATIVE_READY_TIMEOUTS_BEFORE_CATALOG_HISTORY_GENERATION_DRAIN_SEMANTICS",
+  "limits": [
+    "Two original20s cleanup-incomplete notes are failures; otherthree cleanupUNKNOWN, no universal cleanup or activeprocess cause inferred",
+    "One reported87.20s holotree variables caller completion is not a hang/cache/pipe/deadlock or readiness-cause proof",
+    "Current latermerge3dae is distinct from executed522b even with equalorderedparents/fulltree; no checkoutrelabel",
+    "Construction-onlyv4 source-deselected153 claim retained and corrected to UNREPORTED/null; no sourcefull currentactual acceptance",
+    "New startupartifact snapshot content remains separate from this original log-only review; no unpublished mutable worker files sampled"
+  ],
+  "no_source_changes_tests_acquisition_ref_mutation_or_new_execution": true,
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "Exact_proposal": {
+      "path": "/workspace/engineering/pr306-current618-fada-original-Windows-failure-owned/canonical-original-runner-checkout-vs-current-merge-ref-proposed.patch",
+      "bytes": 486,
+      "sha256": "50ad18bce0a30cbfb1cb346d1768729b67ea20125796a6558bb57e1594ef2aec"
+    },
+    "Disposition": "ACCEPT exact50ad five-line originalrunner/latermerge identity lesson after independent review; ownerproposal now qualified, prior premature acceptance message is not approval evidence",
+    "Durable_learning_captured": "Bind original failure to actualjob checkout and immutable parents/fulltree; retain later currentmerge metadata separately despite content equality; reconcile each phase terminal outcomes independently",
+    "Evidence": "Original log112/113 plus Git522b/1419equalfada; frozenAPI3dae sameparents/tree distinctSHA; all1296source and150integration outcomes reconciled; originaltimeouts/cleanup/caller-duration scope",
+    "Stale_or_ambiguous_guidance_removed": "Rejects latermerge-ref identity reassignment, five-failure semanticfix inference,87.20hang inference and unreportedsource deselectcount",
+    "Remaining_uncertainty": "Readiness preparationcause, unsampledprocess/streamstate, cleanupdetails and whole306native/private/release acceptance remain unresolved; separatestartupartifact reviewed independently"
+  },
+  "upstream_disposition": "none"
+}

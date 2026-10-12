@@ -1,0 +1,12 @@
+{
+  "scope": "ROOT_DISTINCT_ONE_NINE_SERVICEFREE_BASELINE_ONLY",
+  "review_sha256": "c26921cbdd38617032f1a4a512b02f371410fe68d11ebee60c1c79136b7212d3",
+  "structured_argv_supplement_sha256": "5df525648ae00000ae1bccef71a4606e92b057123c92cd3455388e3f4df7dfc1",
+  "program_sha256": "5ffbdebb3cbd7301e3a1d46255fc42d6fbff63bc03c922ec4b21ba9cb426ad5a",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "native": "NOT_RUN",
+  "mutants": "NOT_RUN",
+  "outer_returncode": 1,
+  "elapsed_seconds": 151.18462107800588,
+  "capture": "2026-10-11T20:32:16.561559+00:00"
+}

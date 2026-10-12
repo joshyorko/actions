@@ -1,0 +1,128 @@
+{
+  "actual_control_independent_binding": {
+    "bytes": 4358,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-v2-actual-controls-independent-review/OWNERFINAL-independent-original-current-e2-inner-v2-ACTUAL-50-controls-review.json",
+    "sha256": "df6f3bc9189afcc430b3df374dbcdffe421dcaa303ec8b4848decdea2f3a31e6"
+  },
+  "actual_control_owner_binding": {
+    "bytes": 10334,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/OWNERFINAL-original-current-e2-inner-v2-service-free-CONTROLS-actual-six-guards-successor.json",
+    "sha256": "5d3727cab4f78e2302f06f4a4a856551136eda27f0eaa88df57974cb90a4f72b"
+  },
+  "actual_control_owner_rows_rehashed": 24,
+  "artifact_id": 11708952448,
+  "bounds": {
+    "inner_entry_ceiling": 5000,
+    "inner_expanded_bytes_ceiling": 134217728,
+    "inner_single_bytes_ceiling": 67108864,
+    "internal_alarm_seconds": 110,
+    "kill_grace_seconds": 10,
+    "memory_bytes": 805306368,
+    "original_compressed_bytes_ceiling": 100663296,
+    "output_bytes_ceiling": 8388608,
+    "whole_command_seconds": 120
+  },
+  "decision": "GO_CURRENT_E2_INNER_DATA_INSPECTION_PREEXECUTION",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; accept exact1068B/f7977ae5 proposed8-line entry/boundary lesson for contextual root integration.",
+    "Durable_learning_captured": "Executable admission is proven by real boundary controls with precisely scoped runtime guard rows, distinct from immutable plan evidence and outer archive integrity.",
+    "Evidence": "Original50 exact uniquePASS cases/noF/E/SKIP, actual0 terminals/499warnings; source d83a entry checks/ZIP two-pass/TAR perheader; all27+24+17 bindings and217 Git body/mode rows independently verified.",
+    "Exact_delta": "Data-only assertion inspectors reject optimized Python before admission; typed regular nonsymlink0600 ROOT release is required; all ZIP headers precede payload reads; real frozen functions use independently restored baseline poisons; structural success retains source/generated/consumer authorityHOLD.",
+    "Remaining_uncertainty": "Original inner artifact has not been inspected; actualcounts/body/modes/generated-content authority and every consumer/native/release gate remain unobserved.",
+    "Stale_or_ambiguous_guidance_removed": "Original optimized/untyped015937 HOLD preserved; false8 runtime guard count and overly broad all-archive header claim corrected in named metadata/patch successors, not rewriting originals."
+  },
+  "entry_guards": "Explicit rejection of optimization/PYTHONOPTIMIZE before assertions; lstat regular/nonsymlink0600 plus O_NOFOLLOW/fstat identity and object-only ROOT release parse before typed authorization.",
+  "evidence_rows_independently_rehashed": 27,
+  "exact_argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "120s",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/inspect_current_e2_inner_once_v2.py",
+    "--execute-root-reviewed-one-inner-inspection"
+  ],
+  "executor_binding": {
+    "bytes": 23323,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/inspect_current_e2_inner_once_v2.py",
+    "sha256": "d83a7aae88a98a694310e6a1e60de2ea7e362604ee8c5d345cc6a38b4591177c"
+  },
+  "executor_manifest_rows_before_finally": 17,
+  "manifest_binding": {
+    "bytes": 78788,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/frozen-executor-inputs.json",
+    "sha256": "f1bae88f9cee392f6623ac6f4c3c500bea65bd39c246df0dec002c4dc7911b9a"
+  },
+  "original_HOLD_binding": {
+    "bytes": 5657,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-independent-review/OWNERFINAL-independent-current-e2-inner-source-and-executable-PREEXECUTION-HOLD.json",
+    "sha256": "b1f40e5617c9f24992718d6bb1f3df4afe457ef903d57358775e61ce9f6300f7"
+  },
+  "outer_actual_independent_binding": {
+    "bytes": 8172,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-original-outer-inspection-independent-review/OWNERFINAL-independent-current-e2-original-outer-inspection-ACTUAL-data-integrity-review-v2.json",
+    "sha256": "22eed535e92d5a9f4b50b0e5f15aa8df477f4b2eab314c77a141044332b7079d"
+  },
+  "outer_original_binding": {
+    "bytes": 80745614,
+    "mode": "0o600",
+    "path": "/tmp/actions-pr221-e2-aggregate-11708952448-one-owned/actions-runtime-dist-11708952448-original.zip",
+    "sha256": "e16a414fefc1778ba49d09c466fd9d8054cfbf952e7766ee5cc6558f871f4def"
+  },
+  "proposal_binding": {
+    "bytes": 19182,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/OWNERFINAL-current-e2-inner-data-executor-v2-after-real-controls-PREEXECUTION-six-guards-successor.json",
+    "sha256": "01742c179494b23868a1204a82ece62cacf213de0ba928692df780bf147fde5c"
+  },
+  "qualification_limits": [
+    "Original transferredZIP retains its original OSError9 failure; separate outer integrityPASS remains distinct.",
+    "Actual50 control names exactly match real frozen function cases; six launcher cfg guards before/finally, initial config hash, externally bound launcher differ from eight plan evidence rows. Named corrections preserve original506e/210636/ef8ed/ccbb bytes.",
+    "Seven accepted original functions unchanged, three hardening functions validated on synthetic baseline; ZIP preflights all headers, sdist validates perTARheader inside bounded fullCRC/ISIZE gzip.",
+    "217 tracked202Python15nonPython authenticated Git rows; predicted219/203/223/222 andsdist218 remain unobserved until this inspection.",
+    "All seven distribution contents may be structurally inspected; Linux original synthetic165c ordered[a709,e2] is separately authenticated. Other builder checkouts UNKNOWN, no cross-platform producer identity inference.",
+    "Individual source-body/mode differences are recorded authorityHOLD; Windows absent Unix modes remain unknown. No CRLF/semantic waiver.",
+    "Generated OAuth two required literal fields output categories/bytecount/digest only; empty or nonempty unapproved content stays authorityHOLD. StaticHTML/generated assetbytes are separate and never raw payload in safe receipts.",
+    "Integrity/content/source authority, registry/tag/publication/cold consumer/native/private/full issues and release scopes remain separate."
+  ],
+  "required_ROOT_conditions": [
+    "Distinct new regular nonsymlink0600 release at exactv2 path; no retry.",
+    "No concurrent mutation of original aggregate, source/evidence, managed environment or selected output namespace.",
+    "Use exact120TERM+10 cached-Python argv, internal110alarm/768MiB; interpreter unoptimized/PYTHONOPTIMIZE absent and PYTHONDONTWRITEBYTECODE=1/umask077 advised for private output invariants.",
+    "Fresh ABSENT ownedv2 output root and sufficient capacity for at most8MiB output plus private terminal/log overhead; original inputs untouched.",
+    "ROOT privately retains all-outcome original parent terminal; missing final JSON or post-bindings on outer kill remains UNKNOWN/HOLD.",
+    "Before/finally all17 manifest bindings and immutable217 Git source rows must match; new27 plan refs/24 actual-control-owner refs externally checked here, not falsely relabeled executor runtime checks."
+  ],
+  "root_release": {
+    "execute": true,
+    "independent_decision": "GO_CURRENT_E2_INNER_DATA_INSPECTION_PREEXECUTION",
+    "independent_review_binding": "exactowner-announcedindependentreviewwithproposal_binding",
+    "path": "/workspace/engineering/root-current-e2-one-inner-data-inspection-release-v2.json",
+    "proposal_binding": "exactthisOWNER",
+    "schema": "ROOT_ONE_CURRENT_E2_INNER_DATA_INSPECTION"
+  },
+  "root_release_required_fields": {
+    "execute": true,
+    "independent_review_binding": "exact this independent receipt binding; decisionGO_CURRENT_E2_INNER_DATA_INSPECTION_PREEXECUTION and same proposal_binding",
+    "proposal_binding": "exact this01742 owner binding",
+    "schema": "ROOT_ONE_CURRENT_E2_INNER_DATA_INSPECTION"
+  },
+  "schema": "INDEPENDENT_CURRENT_E2_INNER_EXECUTOR_V2_PREEXECUTION_REVIEW",
+  "scope": "ONE original already-retained aggregate data-only inner inspection after distinct ROOT release; no transfer/network/extraction/install/product import/native execution.",
+  "source": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "source217_independent_proof_binding": {
+    "bytes": 335,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-v2-actual-controls-independent-review/independent-current-e2-source217-Git-body-mode-proof.json",
+    "sha256": "27bd957974794898b79edc14d3eae37b3f8a3c5d5d0b55bc8532a9d46e3e59d0"
+  },
+  "source_git_blob_mode_rows_checked": 217,
+  "tree": "afe2679cc93bf27fa5021c7698ee7ad3ee21a1b9",
+  "upstream_disposition": "none"
+}

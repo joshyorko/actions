@@ -1,0 +1,143 @@
+{
+  "parents": [
+    "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+    "ba85aac7324ea4463bfba8c5f8586e27706dc2fe"
+  ],
+  "resolved_tree": "6d1104d9f6c2372cb7fa41dfcb4f7e6b7074140d",
+  "tracked_entries": 1400,
+  "novel_entries": [
+    "docs/skills/repository-operations.md"
+  ],
+  "non_documentation_novel_entries": [],
+  "first_parent_changed": 13,
+  "second_parent_changed": 25,
+  "merge_commit": "9cb61c52fce35201221b55707d73da9e9b0840a6",
+  "remote_pushed": false,
+  "checks": [
+    {
+      "command": "rcc run -r developer/toolkit.yaml --dev -t Doctor",
+      "exit_code": 0,
+      "log": "doctor.log"
+    },
+    {
+      "command": "rcc run -r developer/toolkit.yaml --dev -t Bootstrap",
+      "exit_code": 0,
+      "log": "bootstrap.log"
+    },
+    {
+      "command": "rcc run -r developer/toolkit.yaml --dev -t ToolkitTest",
+      "exit_code": 0,
+      "passed": 62,
+      "log": "toolkit-test-after-bootstrap.log"
+    },
+    {
+      "command": "poetry run pytest -q -rs -m 'not integration_test' tests/action_server_tests/run_outputs tests/contract_tests/test_source_staging.py tests/action_server_tests/test_database.py tests/action_server_tests/test_database_shared.py tests/action_server_tests/test_artifact_storage.py tests/action_server_tests/test_artifact_binding_lock.py tests/action_server_tests/test_server_websockets.py tests/action_server_tests/test_api_analytics.py tests/action_server_tests/mcp/test_alias_history.py tests/action_server_tests/mcp/test_resource_history.py tests/action_server_tests/test_rcc_runtime_adapter.py tests/action_server_tests/test_cli_mcp_resource_history.py tests/action_server_tests/test_canvas_query_results_fixture.py tests/action_server_tests/test_source_staging_rcc_consumer.py",
+      "cwd": "action_server",
+      "exit_code": 0,
+      "passed": 321,
+      "skipped": 4,
+      "deselected": 18,
+      "log": "runtime-scoped.log"
+    },
+    {
+      "command": "poetry run invoke lint",
+      "cwd": "action_server",
+      "exit_code": 0,
+      "log": "runtime-lint.log"
+    },
+    {
+      "command": "poetry run invoke typecheck",
+      "cwd": "action_server",
+      "exit_code": 0,
+      "source_files": 340,
+      "log": "runtime-typecheck.log"
+    },
+    {
+      "command": "poetry run pytest -q -rs tests",
+      "cwd": "devutils",
+      "exit_code": 0,
+      "passed": 152,
+      "log": "devutils-tests.log"
+    },
+    {
+      "command": "poetry run ruff check src tests",
+      "cwd": "devutils",
+      "exit_code": 0,
+      "log": "devutils-lint.log"
+    },
+    {
+      "command": "git diff --cached --check",
+      "exit_code": 0
+    }
+  ],
+  "not_run": [
+    "Full Runtime suite",
+    "Frontend Node/Vitest acceptance and builds",
+    "real RCC artifact/provider consumer acceptance",
+    "PostgreSQL service acceptance",
+    "native Windows/macOS acceptance",
+    "packaged binary rebuild",
+    "hosted CI for refreshed commit",
+    "Markdown mdl lint because tool absent"
+  ],
+  "test_skips": [
+    "native Windows path resolution",
+    "native Windows locking",
+    "ACTIONS_REAL_RCC_ARTIFACT_TEST not enabled",
+    "Cross-language acceptance requires prepared frontend Node/Vitest workspace"
+  ],
+  "documentation_improvement": {
+    "canonical_file_changed": "docs/skills/repository-operations.md",
+    "durable_learning": "Retain both evidence-backed parent lessons for an additive canonical-docs conflict; compare ordered-parent non-documentation blobs and run new-union checks before carrying evidence.",
+    "evidence": "Only docs/skills/repository-operations.md is a novel blob among 1400 resolved entries; exact ordered parents, source-union receipt, scoped check logs.",
+    "stale_guidance_removed": "No prior lessons removed; append conflict markers removed and both lessons retained.",
+    "remaining_uncertainty": "Local scoped checks do not establish complete Runtime, real-provider, frontend, PostgreSQL, native, hosted or release acceptance."
+  },
+  "upstream_disposition": "none",
+  "logs": {
+    "devutils-tests.log": {
+      "sha256": "e735c57d0ddfe27ef5c1298109a79a6fed899bd65bcaba2bd535dff64f7d9415",
+      "size": 261
+    },
+    "runtime-scoped.log": {
+      "sha256": "83f06a2f1bdbf2cdc15fbff096c16da48ba3d338a88b7dc5b47975d720294c43",
+      "size": 1879
+    },
+    "docs-second-parent.diff": {
+      "sha256": "a91b8d842474f5430d67d94faccf3ed61d9e280e061dc1c0c36296baf988d0b8",
+      "size": 6329
+    },
+    "toolkit-test.log": {
+      "sha256": "3a19172461f1b57ed9aa77456a53f6308e81bd90059201c36a09e8c19e7a1436",
+      "size": 14262
+    },
+    "devutils-lint.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "toolkit-test-after-bootstrap.log": {
+      "sha256": "4d6bf8f42e63877d00586e7c11c9e6f99702533450d226241fb9fc74fea4a9c1",
+      "size": 14260
+    },
+    "docs-first-parent.diff": {
+      "sha256": "95881d10c5f5f2e477ab0333967272f7ef3a3930d16f87ca567c24de45b593f7",
+      "size": 10148
+    },
+    "runtime-typecheck.log": {
+      "sha256": "b29b687afe81d5b1d8045c61fa99968ecad046d56a5432b1a61643d280dffa88",
+      "size": 1622
+    },
+    "doctor.log": {
+      "sha256": "04023e42a8566f7ba1b7c055ea8717341af3a7d5ce008edec7e6d5d705a03850",
+      "size": 12783
+    },
+    "bootstrap.log": {
+      "sha256": "d3e8f76a4a249664ca9ad1939e75143a270295c331a47a387baef6e264dd7c67",
+      "size": 27574
+    },
+    "runtime-lint.log": {
+      "sha256": "a93cec2a64c78e30ca771337622705a8c8f538d9c5172fc3c6cdf49060ee1748",
+      "size": 399
+    }
+  }
+}

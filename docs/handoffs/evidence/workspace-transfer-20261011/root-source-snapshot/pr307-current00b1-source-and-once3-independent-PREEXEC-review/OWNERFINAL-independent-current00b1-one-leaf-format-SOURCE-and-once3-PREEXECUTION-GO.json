@@ -1,0 +1,176 @@
+{
+  "ROOT_contract_binding": {
+    "bytes": 3316,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current00b1-token-light-once3-PREEXECUTION-NOTRUN/strict-current00b1-once3-ROOT-release-and-bound-command-contract-NOTRUN.json",
+    "sha256": "412fbeb2ff179e8e7dd1a2451603e25e259b2713f0f6e7063c9cc79d1d1b5bad"
+  },
+  "ROOT_exact_argv_template": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "900s",
+    "bash",
+    "-c",
+    "source /workspace/actions-cloud/activate.sh && exec /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python /workspace/engineering/pr307-current00b1-token-light-once3-PREEXECUTION-NOTRUN/launch_one_owned_token_light_once3_format_child.py \"$@\"",
+    "pr307-token-light",
+    "/workspace/engineering/pr307-current00b1-token-light-once3-PREEXECUTION-NOTRUN/root-one-TOKEN-LIGHT-once3-release.json",
+    "ROOT_AUTH_SHA256_FROM_ANNOUNCED_TYPED_RELEASE",
+    "OWNER_ANNOUNCED_INDEPENDENT_REVIEW_PATH",
+    "OWNER_ANNOUNCED_INDEPENDENT_REVIEW_SHA256"
+  ],
+  "ROOT_parent_and_all_outcome_requirements": [
+    "Strict regular nonsymlink0600 current owning UIDGID release; ROOT validates exact template keys/types/schema1/currentsource/tree/config5fd/newlauncher23b/actual review hashpath; use one distinct fresh release and unconsumed once3 root. Child checks required fields only.",
+    "Before invocation and independent always-post on every returned/failing/timedout outcome ROOT rehashes owner/config/launcher/sourceproof/static/contract/85consumed bindings and actual review/release, plus late17a supplement and original7d5ACTUALFAIL binding. Late rows are ROOT external checks, not invented child85 checks.",
+    "Private fresh ROOT stdout/stderr/terminal must be fsynced before result assertions; source/self/config guard and external release/review envelope captures retained separately. Child reads release/review initially and guards self/config/source finally, so ROOT external before/post cannot be inferred from child PASS.",
+    "Fresh workspace>=536870912 and no heavy/native/storage/install concurrency; reject inherited optimize/pytest overrides; exact18 managed activation/PATH primary, own cached Python as frozenargv. No mode repair/newenvironment/provider input substitution.",
+    "Nine phase durations unchanged; remaining780 allocation +own fresh wrapper-group5+5 fallback insideROOT900TERM10. Preserve bounded enclosing parent and always-post attempt; hardkill/missingpost=UNKNOWN/HOLD, not universal wall-time or cleanup guarantee.",
+    "Once actual completed, independently review every original phase/RED gateway10checkedinner1+2exactsemanticfailures/GREEN/fullconfiguredstatic/gen8Github30/controlledInvoke and all source/envelope preservation. SourceAST equality and old positives do not carry as new actual or CI gates."
+  ],
+  "ROOT_release_path": "/workspace/engineering/pr307-current00b1-token-light-once3-PREEXECUTION-NOTRUN/root-one-TOKEN-LIGHT-once3-release.json",
+  "ROOT_release_required_template": {
+    "config_sha256": "5fd30d41b763da8596546a76f907966a5d2ffc479d35c449e30172daea9b3535",
+    "decision": "RELEASE_ONE_CURRENT00B1_TOKEN_LIGHT_ONCE3_ONLY",
+    "independent_review": {
+      "path": "ROOT fills exact path of THIS sealed review",
+      "sha256": "ROOT fills measured exact SHA256 of THIS sealed review"
+    },
+    "launcher_sha256": "23b6168f4834f593591113d22f26f6b2cac104a9c672767a60f060a22628cc02",
+    "schema": 1,
+    "source": "00b1bb9974b73f2da65e49c9048774c84df286ba",
+    "tree": "2663e86b2344f9e056c3259653cb905a6d195599"
+  },
+  "SOURCE_decision": "GO_ONE_LEAF_AST_EQ_FORMAT_SOURCE_CHECKPOINT_ONLY",
+  "actual_once3_gate_status": "NOT_RUN_NO_REVIEWER_IMPORT_TEST_GATEWAY_NATIVE_EXECUTION",
+  "bounds": {
+    "individual_PHASE_TERM_kill_grace": 10,
+    "individual_budgets": [
+      120,
+      120,
+      180,
+      180,
+      180,
+      180,
+      180,
+      120,
+      210
+    ],
+    "note": "Seven originalphase classes plus two newtoken phases; all run_phase calls limited by remaining780 and ownedgroup fallback5+5. Rootouter includesactivation/pre/post. FULL remains separate600+10/900 and NOTRUN.",
+    "outer": 900,
+    "outer_TERM_kill_grace": 10,
+    "phase_count": 9,
+    "primary_phase_budget": 780
+  },
+  "config_binding": {
+    "bytes": 29380,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current00b1-token-light-once3-PREEXECUTION-NOTRUN/immutable-one-TOKEN-LIGHT-once3-inputs.json",
+    "sha256": "5fd30d41b763da8596546a76f907966a5d2ffc479d35c449e30172daea9b3535"
+  },
+  "config_sha256": "5fd30d41b763da8596546a76f907966a5d2ffc479d35c449e30172daea9b3535",
+  "decision": "GO_CURRENT00B1_TOKEN_LIGHT_ONCE3_GATEWAY_PREEXECUTION",
+  "documentation_improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md; accept exact618B415e50cc7ede519d05bcfd14ba9047d2d0b915b3443bb034ce9f2d0360d10bde own-package/exact-failed-leaf paragraph, merge with equivalent497B5ce100 lesson rather than duplicate; reuse05674 executable address and7e971 gateway/child scope.",
+    "Durable learning captured": "One-file formatter0 and unchanged wholeAST/allotherbodies establish format-only source delta; complete checked package gate still requires fresh child-source actual. Match executable-selected config and bind prior failure separately.",
+    "Evidence": [
+      {
+        "bytes": 618,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr307-current00b1-token-light-once3-PREEXECUTION-NOTRUN/canonical-configured-formatter-owning-package-and-exact-failed-leaf-proposed.txt",
+        "sha256": "415e50cc7ede519d05bcfd14ba9047d2d0b915b3443bb034ce9f2d0360d10bde"
+      },
+      {
+        "bytes": 338142,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr307-current00b1-token-light-once3-PREEXECUTION-NOTRUN/current00b1-format-child-1442-prepared30-ownfive-and-original-once2-proof.json",
+        "sha256": "15d2a3c0eb86d583eb6add482c1ce0fbdc3b0795bb19afb3b9674aa8ae503c85"
+      },
+      {
+        "bytes": 3144,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr307-current00b1-token-light-once3-PREEXECUTION-NOTRUN/exact-format-child-AST-one-path-and-once3-literal-config-address-closure-proof-NOTRUN.json",
+        "sha256": "e3f634c4b57e02449a32eef234c95fe8a1cbd704e4201c2ed5053db423a819ec"
+      },
+      {
+        "bytes": 20145,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr307-currentc97e-token-once2-ACTUALFAIL-independent-review/OWNERFINAL-independent-original-currentc97e-token-once2-ACTUALFAIL-and-configured-format-cause.json",
+        "sha256": "7d5db1ae4249da154a6f6d72c2083f3d6413d6dd6f91ac66f32b1592c1db8466"
+      }
+    ],
+    "Remaining uncertainty": "Current once3 entireLIGHT, mandatoryFULL/currentCI/OAuth content/native/private/release remain unexecuted/held; parent all-outcome proof must actually exist.",
+    "Stale or ambiguous guidance removed": "No formatter-version mismatch inferred from different checked files; original once2FAIL retains positive scoped evidence but is not once3SOURCEFULL or CI proof. Late actual review binding not mislabeled as frozen child checks."
+  },
+  "late_original_failure_metadata_supplement": {
+    "bytes": 1152,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current00b1-token-light-once3-PREEXECUTION-NOTRUN/named-prior-once2-independent-ACTUALFAIL-closure-metadata-supplement.json",
+    "sha256": "17a42867e1ad7eca606d3c3c5f9bf7729eea7fd22c0cd48a0bf98b4903465ef2"
+  },
+  "launcher_binding": {
+    "bytes": 16053,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr307-current00b1-token-light-once3-PREEXECUTION-NOTRUN/launch_one_owned_token_light_once3_format_child.py",
+    "sha256": "23b6168f4834f593591113d22f26f6b2cac104a9c672767a60f060a22628cc02"
+  },
+  "launcher_sha256": "23b6168f4834f593591113d22f26f6b2cac104a9c672767a60f060a22628cc02",
+  "originals_kept_separate": {
+    "full": "Mandatory affected Devutils complete suite and Runtime nonintegration FULL NOT_RUN",
+    "native_OAuth_content_authority_current_CI_merge_release": "HOLD_NO_WAIVER",
+    "once1_and_preexec_missingpath": "UNCHANGED_FAIL_AND_HOLD_NOT_RELABELED",
+    "once2": "FAIL_CONFIGURED_FORMAT; Toolkit179P/GREEN99P/guard41P/RED2F0E/S gateway10inner1/externalbeforepost48/sourceguardsPASS; latergenInvokeNOTRUN/cleanupUNKNOWN"
+  },
+  "parent": "c97edfd10edb5b1c63f8a6371bfd2905996a2da2",
+  "prior_independent_original_once2_ACTUALFAIL_binding": {
+    "bytes": 20145,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-currentc97e-token-once2-ACTUALFAIL-independent-review/OWNERFINAL-independent-original-currentc97e-token-once2-ACTUALFAIL-and-configured-format-cause.json",
+    "sha256": "7d5db1ae4249da154a6f6d72c2083f3d6413d6dd6f91ac66f32b1592c1db8466"
+  },
+  "proposal_binding": {
+    "bytes": 19905,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current00b1-token-light-once3-PREEXECUTION-NOTRUN/OWNERFINAL-current00b1-one-leaf-format-SOURCE-and-fresh-token-once3-PREEXEC-NOTRUN.json",
+    "sha256": "7f262ac1a3c40034ba0d5193a2c74644c2572dc4aecff26d97cf32e87f380d29"
+  },
+  "schema": 1,
+  "source": "00b1bb9974b73f2da65e49c9048774c84df286ba",
+  "source_count": 1442,
+  "source_proof_binding": {
+    "bytes": 338142,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current00b1-token-light-once3-PREEXECUTION-NOTRUN/current00b1-format-child-1442-prepared30-ownfive-and-original-once2-proof.json",
+    "sha256": "15d2a3c0eb86d583eb6add482c1ce0fbdc3b0795bb19afb3b9674aa8ae503c85"
+  },
+  "static_proof_binding": {
+    "bytes": 3144,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current00b1-token-light-once3-PREEXECUTION-NOTRUN/exact-format-child-AST-one-path-and-once3-literal-config-address-closure-proof-NOTRUN.json",
+    "sha256": "e3f634c4b57e02449a32eef234c95fe8a1cbd704e4201c2ed5053db423a819ec"
+  },
+  "status": "INDEPENDENT_CURRENT00B1_ONE_LEAF_FORMAT_SOURCE_AND_FRESH_ONCE3_PREEXECUTION_GO",
+  "tree": "2663e86b2344f9e056c3259653cb905a6d195599",
+  "upstream_disposition": "none",
+  "verified_source_and_execution_delta": {
+    "SOURCE_prepared30_ownfive_historical_source_proof": "Fresh typedproof15d, old actuals preserved; own5 actual origin probes remain proposed gate and require current once3 original result.",
+    "all1442_current_FSbody_execmodes_match_source_proof": true,
+    "all_consumed_config_bindings_exact": 85,
+    "all_other1441_Gitblob_modes_exact": true,
+    "changed_source_paths": [
+      "devutils/tests/test_actions_runtime_release_line.py"
+    ],
+    "configured_own_Ruff_formatter_only_tool_result": "Author retained actual formatter0/own0.1.15; not a whole package check or test pass. Present binary/config coupled; historical previous different-file binaryversion remains unrecorded.",
+    "current_named_HEADtree_clean": true,
+    "formatted_file_bytes": 10190,
+    "literal_CONFIG_actual_new5fd_file_and_physical400_exact": true,
+    "new_packet_refs_exact": 7,
+    "once3_output_release_ABSENT": true,
+    "ordinary_sole_parent_c97": true,
+    "parent_file_bytes": 10173,
+    "protected308_scope": "Unchanged configured HEAD/tree/clean protection only; do not infer full native1192/private-nine inventory.",
+    "retained_once2_and_formatter_refs_exact": 46,
+    "selected_wrong_old_basename_not_backfilled": "Original c97once2 HOLD remains unmodified",
+    "whole_changed_module_AST_order_assertions_equal_parent": true,
+    "whole_launcher_inverse_text_AST_only_source_path_status_literals": true
+  }
+}

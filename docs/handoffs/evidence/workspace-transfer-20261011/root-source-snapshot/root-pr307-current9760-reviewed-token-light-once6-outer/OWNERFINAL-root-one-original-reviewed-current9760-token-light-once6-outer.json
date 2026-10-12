@@ -1,0 +1,27 @@
+{
+  "FULL": "NOT_RUN",
+  "authority_native_merge": "HOLD",
+  "capture": "2026-10-11T23:28:57.789208+00:00",
+  "elapsed_seconds": 109.23280810700089,
+  "external_post": {
+    "bytes": 931,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-pr307-current9760-reviewed-token-light-once6-outer/external-always-post-envelope.json",
+    "sha256": "9d5be4eb5f1f8f1fba7249d88c33d467e5abb2c75b161204383179a10df2bb72"
+  },
+  "outer_returncode": 0,
+  "release": {
+    "bytes": 683,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr307-current9760-token-light-once6-active-output-address-PREEXECUTION-NOTRUN/root-one-TOKEN-LIGHT-once6-release.json",
+    "sha256": "1d7817b0affbb67b476d034066141d86959b0348c6273d1437c09a142beffff3"
+  },
+  "review": {
+    "bytes": 12438,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current9760-private-once6-independent-SOURCE-PREEXEC-review/OWNERFINAL-independent-current9760-private-once6-all-active-output-SOURCE-and-PREEXECUTION-GO.json",
+    "sha256": "7259e22a1ebf081644e0fce8f76f0281b1194447479e46d430a93daadcac632e"
+  },
+  "source": "9760d5ec44876558c4941c4c3190abc8d92d14a1",
+  "tree": "0d33ebaac258e069ef7045a29b4a3904740f6307"
+}

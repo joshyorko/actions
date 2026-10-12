@@ -1,0 +1,40 @@
+{
+  "elapsed_seconds": 109.3812514099991,
+  "external_post": {
+    "bytes": 855,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-reviewed-stop-attempt-v2-original-execution/external-always-post-envelope.json",
+    "sha256": "4b6b7472782881dfa86a6a61a1f4002ebb9edc530e1d976a963137574ffb4a12"
+  },
+  "memory_profile_adoption": "NONE",
+  "native": "NOT_RUN",
+  "release": {
+    "bytes": 5298,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-release.json",
+    "sha256": "e7f972c9cdf35b73faec627c411f92a13b7c1f2517cf076460a1a0c719089c2b"
+  },
+  "returncode": 0,
+  "review": {
+    "bytes": 18480,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-stop-attempt-final-reserve-v2-independent-PREEXEC-review/OWNERFINAL-independent-stop-attempt-final-reserve-v2-SOURCE-and-PURE-PREEXEC-GO.json",
+    "sha256": "910b288256444311b3eac37fdf9f41199157241e8187bf7512bc28b8c4eed4f8"
+  },
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "status": "PASS_PENDING_INDEPENDENT_ORIGINALS",
+  "stderr_binding": {
+    "bytes": 0,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-reviewed-stop-attempt-v2-original-execution/original.stderr.private",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout_binding": {
+    "bytes": 99,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-reviewed-stop-attempt-v2-original-execution/original.stdout.private",
+    "sha256": "94f48f6c9f935fa457ebb304b84e27bd815a6286e8e037d2988152d8fd28b664"
+  },
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+}

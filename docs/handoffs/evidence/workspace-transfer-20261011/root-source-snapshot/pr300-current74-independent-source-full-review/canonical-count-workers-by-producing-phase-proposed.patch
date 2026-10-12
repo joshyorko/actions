@@ -1,0 +1,6 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@
++Bind worker counts to the producing phase: RCC solver parallelism is not
++pytest concurrency. Use pytest worker-creation and joined node-result records
++for suite admission, alongside the configured worker limit and final totals.

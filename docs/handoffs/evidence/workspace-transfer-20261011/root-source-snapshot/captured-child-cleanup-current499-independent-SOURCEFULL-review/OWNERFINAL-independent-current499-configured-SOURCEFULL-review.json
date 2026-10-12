@@ -1,0 +1,440 @@
+{
+  "schema": "cleanup499-independent-configured-source-full-review-v1",
+  "decision": "GO_CURRENT499_CONFIGURED_SOURCE_FULL_ONLY_ROOT_OWNS_NEXT_NORMAL_PUSH_CI",
+  "head": "499a83d802ca9a0e2ebe3d77071af10625879297",
+  "tree": "e13ba51b094e429b7c06d6dabbbcc348cc66e86c",
+  "sole_parent": "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+  "owner": {
+    "path": "/workspace/engineering/captured-child-cleanup-configured-full-once-owned/OWNERFINAL-root-cleanup499-configured-source-full.json",
+    "bytes": 13127,
+    "sha256": "0b85404be82820d0337872fd4273444a51b81996dc410ca1367fa52a3eec7661"
+  },
+  "original_full_log": {
+    "path": "/workspace/engineering/captured-child-cleanup-configured-full-once-owned/one-configured-full.private.log",
+    "bytes": 338767,
+    "sha256": "885ba0ab6437c18dd2c3d7f1c4e1caf9ad981e22c0e3517de0740db88aa9ca17"
+  },
+  "one_original_root_authorization": {
+    "path": "/workspace/engineering/captured-child-cleanup-configured-full-once-owned/root-one-exact-configured-full-authorization.json",
+    "bytes": 17645,
+    "sha256": "dc99a74bd2cb29f18fe91c306ec8ea5c216cbb2c3a47ed81db4bdb5abb691c1b"
+  },
+  "terminal": {
+    "path": "/workspace/engineering/captured-child-cleanup-configured-full-once-owned/one-configured-full-terminal.json",
+    "bytes": 765,
+    "sha256": "361dea9b6ad22f375755d262b9f3641155cdda12a6277a2e82d70c130f96245d"
+  },
+  "post": {
+    "path": "/workspace/engineering/captured-child-cleanup-configured-full-once-owned/root-postfull-complete-source-and-proposal-binding-readback.json",
+    "bytes": 1901,
+    "sha256": "dfa4ce97346fe1162e0cb4622254596d11e3d78cec0895508ffa575e5ef672d0"
+  },
+  "exact_accepted_command_and_launcher_subject": true,
+  "actual_worker_count": 2,
+  "actual_terminal_node_count": 1318,
+  "unique_complete_terminal_nodeids": 1318,
+  "counts": {
+    "PASSED": 1305,
+    "SKIPPED": 13,
+    "FAILED": 0,
+    "ERROR": 0
+  },
+  "warnings": 15,
+  "pytest_seconds": 139.95,
+  "outer_gateway_returncode": 0,
+  "execution_attempts": 1,
+  "original_complete_node_inventory_private": {
+    "path": "/workspace/engineering/captured-child-cleanup-current499-independent-SOURCEFULL-review/private-complete-original1318-nodeids-and-statuses.json",
+    "bytes": 217116,
+    "sha256": "78f245b16e4ec63eb2eae5ae531e988e6d087587d95a95954bd35bf3ac67503b"
+  },
+  "all10_permanent_cleanup_controls_PASS": [
+    [
+      "gw0",
+      "PASSED",
+      "action_server_tests/common_tests/test_captured_process_tree_deadline.py::test_captured_child_can_finish_after_wrapper_within_same_deadline"
+    ],
+    [
+      "gw0",
+      "PASSED",
+      "action_server_tests/common_tests/test_captured_process_tree_deadline.py::test_prompt_captured_child_completion"
+    ],
+    [
+      "gw0",
+      "PASSED",
+      "action_server_tests/common_tests/test_captured_process_tree_deadline.py::test_captured_child_still_live_at_deadline_remains_incomplete"
+    ],
+    [
+      "gw0",
+      "PASSED",
+      "action_server_tests/common_tests/test_captured_process_tree_deadline.py::test_unreaped_wrapper_keeps_exclusive_Popen_ownership"
+    ],
+    [
+      "gw0",
+      "PASSED",
+      "action_server_tests/common_tests/test_captured_process_tree_deadline.py::test_reused_PID_old_handle_never_signals_new_process"
+    ],
+    [
+      "gw0",
+      "PASSED",
+      "action_server_tests/common_tests/test_captured_process_tree_deadline.py::test_captured_zombie_does_not_become_reap_complete"
+    ],
+    [
+      "gw0",
+      "PASSED",
+      "action_server_tests/common_tests/test_captured_process_tree_deadline.py::test_observation_or_signal_error_keeps_cleanup_incomplete[kill_error]"
+    ],
+    [
+      "gw0",
+      "PASSED",
+      "action_server_tests/common_tests/test_captured_process_tree_deadline.py::test_observation_or_signal_error_keeps_cleanup_incomplete[snapshot_error]"
+    ],
+    [
+      "gw0",
+      "PASSED",
+      "action_server_tests/common_tests/test_captured_process_tree_deadline.py::test_remaining_descendant_wait_error_is_reported"
+    ],
+    [
+      "gw0",
+      "PASSED",
+      "action_server_tests/common_tests/test_captured_process_tree_deadline.py::test_zero_remaining_budget_cannot_signal_or_wait_longer"
+    ]
+  ],
+  "all35_proposal_refs_and1422_source67_LIGHT31_original30inputs5_origins_native1192_helpers_exact": true,
+  "source_guard_current_readonly": {
+    "status": "READ_ONLY_SOURCE_AND_RETAINED_ENVIRONMENT_IDENTITY_PASS",
+    "head": "499a83d802ca9a0e2ebe3d77071af10625879297",
+    "tree": "e13ba51b094e429b7c06d6dabbbcc348cc66e86c",
+    "parent": "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+    "source_entries": 1422,
+    "LIGHT_bindings": 67,
+    "inputs": 30,
+    "retained_concrete_origin_observations": 5,
+    "fresh_origin_execution": false,
+    "private_original_bindings": 31,
+    "frozen_helpers": 4,
+    "native_inventory_entries": 1192,
+    "available_bytes_observation_only": 1092501504,
+    "full_execution": "NOT_RUN",
+    "native_qualification": "UNQUALIFIED_274_producer_and_5_selected_tests_separately_typed"
+  },
+  "fresh_before_execution_capacity_and_activation19_proved": {
+    "path": "/workspace/engineering/captured-child-cleanup-configured-full-once-owned/before-full-checked-source-capacity.json",
+    "bytes": 1046,
+    "sha256": "1a19818fc7f19c648ffba722d1f2664ace32d416c29217f848a0730161d59cda"
+  },
+  "original_metadata_parser_failure_retained_unaccepted": {
+    "path": "/workspace/engineering/captured-child-cleanup-configured-full-once-owned/root-first-full-metadata-parser-unaccepted-draft.json",
+    "bytes": 575,
+    "sha256": "3f1801b05fa2522d48c905e91eb3107812b0e7989612346ac53f3fe62ada156d"
+  },
+  "metadata_parser_correction": "Whole terminal remainder authenticated; spaces in parameterized node identities retained, exactly1318unique actual items. No test rerun.",
+  "actual_cleanup": "UNREPORTED by source-full launcher; source suite is not real OS/hosted/native process-tree reaping acceptance",
+  "native_scope": {
+    "current_production": 274,
+    "historical_92498_production": 268,
+    "matching": 260,
+    "changed": 8,
+    "added": 6,
+    "five_selected_inputs_separate_exact": true,
+    "combined": 279,
+    "qualification": "UNQUALIFIED, including accepted cleanup process.py delta; old native92498 cannot carry"
+  },
+  "retained_limits": [
+    "Original hosted readiness cause/survivor PID/remaining cleanup budget UNKNOWN",
+    "Original RED experiment/control and predecessor source failures retain their exact identities",
+    "No hosted CI/actual native/browser/provider/registry/consumer/Runtime release admission",
+    "Fresh current branch push then complete current CI/policies required; no ready/merge or release authority from this source gate"
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md exact12-line implemented cleanup lesson retained in499; no cosmetic child",
+    "Exact_delta": {
+      "path": "/workspace/engineering/captured-child-cleanup-current499-independent-SOURCEFULL-review/exact-implemented-cleanup499-canonical-parent-delta.patch",
+      "bytes": 1445,
+      "sha256": "d196d435eb092a5a5910f38b60ca0d8542f2b06dbb97a70046802980fe1f9876"
+    },
+    "Durable_learning_captured": "A quick wrapper reap plus short descendant waits can leave time inside the unchanged shared deadline. Controlled proof supports bounded remaining-deadline improvement while preserving exclusive Popen ownership and distinct live/zombie/error states; it does not establish hosted cause.",
+    "Evidence": [
+      {
+        "path": "/workspace/engineering/captured-child-cleanup-configured-full-once-owned/OWNERFINAL-root-cleanup499-configured-source-full.json",
+        "bytes": 13127,
+        "sha256": "0b85404be82820d0337872fd4273444a51b81996dc410ca1367fa52a3eec7661"
+      },
+      {
+        "path": "/workspace/engineering/captured-child-cleanup-configured-full-once-owned/one-configured-full.private.log",
+        "bytes": 338767,
+        "sha256": "885ba0ab6437c18dd2c3d7f1c4e1caf9ad981e22c0e3517de0740db88aa9ca17"
+      },
+      {
+        "path": "/workspace/engineering/captured-child-cleanup-current499-independent-SOURCEFULL-review/exact-implemented-cleanup499-canonical-parent-delta.patch",
+        "bytes": 1445,
+        "sha256": "d196d435eb092a5a5910f38b60ca0d8542f2b06dbb97a70046802980fe1f9876"
+      }
+    ],
+    "Stale_or_ambiguous_guidance_removed": "No wrapper-reaped observation equated with whole-tree success or modeled timing transferred to unmeasured hosted lifecycle. Whole spaced parameter node identities keep complete suite counts accurate.",
+    "Remaining_uncertainty": "Current hosted/native/platform/real process cleanup remain unverified; original hosted cause unknown; source-only fullPASS does not waive skipped gates or native source mismatch."
+  },
+  "all_immediate_original_actual_binding_bytes_rehashed": [
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/OWNERFINAL-cleanup499-managed-activation-configured-full-proposal-v2.json",
+      "bytes": 22911,
+      "sha256": "e853c20af0045a217a4c979a973df807ae259c6a85e472fb20273a41dba882ac"
+    },
+    {
+      "path": "/workspace/engineering/execute-cleanup499-reviewed-managed-full-once.py",
+      "bytes": 5103,
+      "sha256": "aa227ff6924843296aad021449d8b821aa60e4fba040f14e25e12f941abb8665"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-root-launcher-independent-review/OWNERFINAL-independent-cleanup499-root-managed-full-launcher-review.json",
+      "bytes": 7587,
+      "sha256": "1aba9720926abdd4110f3b53002dcc1c779c3e166bcd08c6a125ba84be5c369f"
+    },
+    {
+      "path": "/workspace/engineering/root-cleanup499-immediate-launcher-adoption.json",
+      "bytes": 689,
+      "sha256": "272546bde200d89535d02255b18ec82f399287b161f934834eefb6d703627cab"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-once-owned/one-configured-full.private.log",
+      "bytes": 338767,
+      "sha256": "885ba0ab6437c18dd2c3d7f1c4e1caf9ad981e22c0e3517de0740db88aa9ca17"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-once-owned/one-configured-full-terminal.json",
+      "bytes": 765,
+      "sha256": "361dea9b6ad22f375755d262b9f3641155cdda12a6277a2e82d70c130f96245d"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-once-owned/root-postfull-complete-source-and-proposal-binding-readback.json",
+      "bytes": 1901,
+      "sha256": "dfa4ce97346fe1162e0cb4622254596d11e3d78cec0895508ffa575e5ef672d0"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-once-owned/root-first-full-metadata-parser-unaccepted-draft.json",
+      "bytes": 575,
+      "sha256": "3f1801b05fa2522d48c905e91eb3107812b0e7989612346ac53f3fe62ada156d"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/OWNERFINAL-captured-child-cleanup-LIGHT-source-checkpoint-v2.json",
+      "bytes": 23814,
+      "sha256": "5afd46dc62231bde85f44381bcb06fbc5d0af98d932dafbcc9d6500e6df6fdf8"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-independent-LIGHT-review/OWNERFINAL-independent-captured-child-cleanup-frozen-LIGHT-review-v3.json",
+      "bytes": 20878,
+      "sha256": "6e5c147b9d6ca432def5b7c56489bd0aa432759d4a337cd6124c17f51bbb3df8"
+    },
+    {
+      "path": "/workspace/actions-cloud/activate.sh",
+      "bytes": 987,
+      "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+    },
+    {
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/identity.yaml",
+      "bytes": 222,
+      "sha256": "5472adec10ef85bf56f79fd2664a30d33b5accf4e1edfff974ddec5f46a21daf"
+    },
+    {
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/rcc_plan.log",
+      "bytes": 10213,
+      "sha256": "8aa96805c88332227acd0b48a99aab4482850d5ed940a5c81d7ce7c5b8ae3474"
+    },
+    {
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12",
+      "bytes": 31903952,
+      "sha256": "ba35c76091c86640cd6bbccc8c216e5b2fc52b20c26de803edef79165022037f"
+    },
+    {
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/poetry",
+      "bytes": 371,
+      "sha256": "f989714d24f334397e5960032f3fb3dd7ebcebf5d600e0d520aa7c780c8b124c"
+    },
+    {
+      "path": "/workspace/engineering/root-failed300-default-cache-preservation-actual/OWNERFINAL-root-whole-default-cache-preservation-actual.json",
+      "bytes": 1521,
+      "sha256": "fdbdc5705b6a15863d3a065e1e6821f4411d2297bb2268eb268946cecbb0ac6c"
+    },
+    {
+      "path": "/workspace/engineering/root-failed300-default-cache-independent-actual-review/OWNERFINAL-independent-actual-whole-default-cache-preservation-review.json",
+      "bytes": 6524,
+      "sha256": "dd95e137add3eb9b2a7213495a55886ee59cdb7e8996aa0bdb6d96618be7c7f9"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/readonly_source_guards_v5.py",
+      "bytes": 5987,
+      "sha256": "87852509691c7353ba642440695db1de6e5897a75e395d9b121a6f4cd8d7ea7d"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/readonly-source-guard-proof-v5.json",
+      "bytes": 620,
+      "sha256": "a0cd55847df0a319d032b07626104ecf3f9bb5a0428329642e7d475a570fe080"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/managed_activation_preflight.py",
+      "bytes": 3292,
+      "sha256": "01c1c870949ae19c753f624778f98d7c958dc732f061bfdd941abd31ec05ecff"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/planned_toolkit_configured_full_body_v2.py",
+      "bytes": 4721,
+      "sha256": "4c1525cc4ee0411262c3cc5dd40f0347b89152b576a01df7298ffbd823b878bd"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/post_full_readonly_guards.py",
+      "bytes": 343,
+      "sha256": "faa9265eefe39632b5402ea1d474591d7c2a76934377f768cf12ebe76399d76f"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/checked-own30-and-five-origins.json",
+      "bytes": 5120,
+      "sha256": "27094b3536434686d21bc5d102b421c70ef7f86995844e08bf3a6e71e6908c6e"
+    },
+    {
+      "path": "/workspace/engineering/pr310-runner-qualification-owned/output/native-artifact-tree-inventory.json",
+      "bytes": 255076,
+      "sha256": "154aeb29249db79a32392124a3b71a8ac325c0bdaeda1bbc2e7445e96ffc7fdf"
+    },
+    {
+      "path": "/workspace/engineering/pr310-runner-qualification-owned/output/native-artifact-manifest.json",
+      "bytes": 3162,
+      "sha256": "70405e6e831066a37631c7a63045010fcbc8b3c928a6a22ff5130467c3ad9d44"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helper-bindings.json",
+      "bytes": 1371,
+      "sha256": "79b0b9478ef826e0c668ac6a92f3605fbb9f4ad0cdb2262fde1fb8783fcec3dc"
+    },
+    {
+      "path": "/workspace/engineering/pr306/action_server/src/actions/server/bin/rcc-18.19.3",
+      "bytes": 22282402,
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup/docs/skills/repository-operations.md",
+      "bytes": 250724,
+      "sha256": "126a062f4b84491d0e027d8f100544a6f6782607b83151ae408e531ba05a330e"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/readonly-source-guard-proof.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/readonly-source-guard-proof-v3.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/readonly-source-guard-v3.private.stderr",
+      "bytes": 1034,
+      "sha256": "e44ce5a35278d716a5cd38580975de2310c3425f459387b20333adaa6ab67257"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/readonly_source_guards.py",
+      "bytes": 5936,
+      "sha256": "019322f7206b265a1662d0ba7590e25cd1f701e69dc9fbe2fcec0295f7510cea"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/readonly_source_guards_v4.py",
+      "bytes": 5996,
+      "sha256": "3ae58eb041a4ef465b5c7184004a924fd676ecf6bd8808e13b3371f91f6f2e9b"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/readonly-source-guard-v2.private.stderr",
+      "bytes": 502,
+      "sha256": "af78ef424ea4702072fb57e16b0ac4c85cf78134364b9c1e34a4d666fab18bd3"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/readonly-source-guard-v5.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/readonly-source-guard.private.stderr",
+      "bytes": 480,
+      "sha256": "386a6aa321ac1d985180092f27dddaed7aebb900ff8b4f135a1abe4d763c8d1d"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/readonly-source-guard-proof-v2.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/readonly_source_guards_v3.py",
+      "bytes": 5975,
+      "sha256": "a121e7b190107eef57ea7e279776962c2a75851a9f1e48c6fdb54edc52187398"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/readonly-source-guard-v4.private.stderr",
+      "bytes": 560,
+      "sha256": "3e3b3e5c2806766c27e42e5f7ef359f51388896e84c69c80154bc68040d72585"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/readonly_source_guards_v2.py",
+      "bytes": 5975,
+      "sha256": "a85672de085e830dfa98a0d82da263c218e5f9ccc4ddf718c12583dd152797d8"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/readonly-source-guard-proof-v4.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr300-current74-managed-activation-independent-review/canonical-managed-gateway-activation-exact-context-v2.patch",
+      "bytes": 1025,
+      "sha256": "ee804bb1acd0102a0b28b37b66e55c3bcd1eac4f9bd70885ef5f7c245f67f994"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/OWNERFINAL-cleanup499-managed-activation-configured-full-proposal.json",
+      "bytes": 21445,
+      "sha256": "8324bc634159cc6c84c867fa54bd6f3681c5c085f95a5d0ab7ebcfa72269b72c"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-once-owned/one-configured-full.private.log",
+      "bytes": 338767,
+      "sha256": "885ba0ab6437c18dd2c3d7f1c4e1caf9ad981e22c0e3517de0740db88aa9ca17"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-once-owned/root-one-exact-configured-full-authorization.json",
+      "bytes": 17645,
+      "sha256": "dc99a74bd2cb29f18fe91c306ec8ea5c216cbb2c3a47ed81db4bdb5abb691c1b"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-once-owned/post-readonly.stdout.private.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-once-owned/post-readonly.stderr.private.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-once-owned/one-configured-full-terminal.json",
+      "bytes": 765,
+      "sha256": "361dea9b6ad22f375755d262b9f3641155cdda12a6277a2e82d70c130f96245d"
+    },
+    {
+      "path": "/workspace/engineering/pr300-current74-managed-activation-root-successor/current74-managed-activation-one-full-terminal.json",
+      "bytes": 711,
+      "sha256": "1014ef69df7615b9f92b178b218e38c848c12ff9f7a4ba65fbefc949d4190d4e"
+    },
+    {
+      "path": "/workspace/engineering/capacity-recovery-batch19-independent-review/OWNERFINAL-independent-batch19-preservation-review.json",
+      "bytes": 4516,
+      "sha256": "808d0fbb4efbcb6207566cc7deed6b11964c6ed3a063ece20b11936d1767a884"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-once-owned/before-full-checked-source-capacity.json",
+      "bytes": 1046,
+      "sha256": "1a19818fc7f19c648ffba722d1f2664ace32d416c29217f848a0730161d59cda"
+    }
+  ],
+  "Upstream_disposition": "none",
+  "constructor": {
+    "path": "/workspace/engineering/captured-child-cleanup-current499-independent-SOURCEFULL-review/verify-readonly-and-freeze-v2.py",
+    "bytes": 9395,
+    "sha256": "8b3c9b940b89ba97bc883a551d8c109a4ece316ffd81826e222600f221338a52"
+  }
+}

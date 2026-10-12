@@ -1,0 +1,192 @@
+{
+  "actual_census_binding": {
+    "bytes": 6499,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-one-current8d49-cgroup-reader-observer28-pure-controls-1/primary/original-unittest-node-census.json",
+    "sha256": "ead532aad218dff004f3026efd68697cf3e069302692f826fdb46b9693a4fb6a"
+  },
+  "actual_original_result": {
+    "actual_classes": {
+      "ObserverControls": 14,
+      "ReaderControls": 14
+    },
+    "alwayspost_returncode": 0,
+    "before_returncode": 0,
+    "errors": 0,
+    "failed": 0,
+    "no_retry": "One distinct root1 release; no reviewer rerun",
+    "outer_elapsed_seconds": 30.25687233399367,
+    "outer_returncode": 0,
+    "passed": 28,
+    "primary_returncode": 0,
+    "skipped": 0,
+    "unique_methods": 28
+  },
+  "actual_terminal_binding": {
+    "bytes": 5769,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-one-current8d49-cgroup-reader-observer28-pure-controls-1/OWNERFINAL-root-one-original-reader-observer28-pure-controls.json",
+    "sha256": "92d887da7299864e782d60418e985e1ac5d1533d3440fe94ae94d4e448ae8957"
+  },
+  "decision": "GO_ACTUAL_CURRENT8D49_READER_OBSERVER28_SYNTHETIC_CONTROLS_ONLY",
+  "documentation_improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md; reuse accepted exact d6c06054276f3cf45054eecf523d7c618dc8498e0334cc9d55257fc449510380 and8c28fc2596c6fdfc607dd35a17b3462ad217ba97670b61222393dc504861d896. No cosmetic duplicate.",
+    "Durable learning captured": "Self/mount/group identity and counter/reset/owned-stop/join invariants need explicit admission; shared counter deltas and synthetic controls remain separate from real backend/native attribution.",
+    "Evidence": "Frozen reader/source24e386/test449298 plus original true28-method census/verbose raw output and before-primary-post000 bound to exact config4cd8/launchereb3a/executor8b58.",
+    "Remaining uncertainty": "Full backend FD walk, real headroom/latency/calibration/native observer wiring and helper cleanup unqualified; native/private/release and version sequence remain HOLD.",
+    "Stale or ambiguous guidance removed": "Prepared control status resolved in this distinct actual receipt only; original PREEXEC/SOURCE/terminal pending-independent labels are not rewritten. No backend coverage or subtest case inflation."
+  },
+  "independent_evidence_checks": {
+    "actual_consumed_distinct_root_release_binding_exact": true,
+    "actual_raw_capture_SHA_size_mode_bindings_exact_all_three_phases": true,
+    "all28_original_unittest_verbose_success_lines_match_machine_census": true,
+    "all38original_and6local_refs_current_exact": true,
+    "census_format": "Original actual unittest result JSON; no fabricated JUnit;28 methods and their subtests retain original distinction.",
+    "config_launcher_executor_source_owner_review_unchanged": true,
+    "current_named_HEAD_tree_and_whole1440_FSbody_execmodes_exact": true,
+    "exact_expected_ids_and_original_success_ids_match_frozenconfig_and_sourceAST": true,
+    "guard_before_alwayspost_exact_success_literal": true,
+    "original_guard_scope": "Exact unchanged original V9 guard executed before and alwayspost for current1440/native1192/prepared30/five origins and original/alias bindings; successful fixed stdout+zero rc retained. Reviewer does not rerun guard or claim additional native behavior.",
+    "zero_failed_error_skipped_IDs": true
+  },
+  "root_outer_owner_binding": {
+    "bytes": 854,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-reader28-reviewed-original-outer-once/OWNERFINAL-root-one-original-reviewed-current-pure-controls-outer.json",
+    "sha256": "71949e589ff22ab4bb9014f03158372b8d2bdd18ddfd929dc413f862902108a5"
+  },
+  "safe_original_evidence_bindings": [
+    {
+      "bytes": 854,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-reader28-reviewed-original-outer-once/OWNERFINAL-root-one-original-reviewed-current-pure-controls-outer.json",
+      "sha256": "71949e589ff22ab4bb9014f03158372b8d2bdd18ddfd929dc413f862902108a5"
+    },
+    {
+      "bytes": 5769,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-one-current8d49-cgroup-reader-observer28-pure-controls-1/OWNERFINAL-root-one-original-reader-observer28-pure-controls.json",
+      "sha256": "92d887da7299864e782d60418e985e1ac5d1533d3440fe94ae94d4e448ae8957"
+    },
+    {
+      "bytes": 6499,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-current8d49-cgroup-reader-observer28-pure-controls-1/primary/original-unittest-node-census.json",
+      "sha256": "ead532aad218dff004f3026efd68697cf3e069302692f826fdb46b9693a4fb6a"
+    },
+    {
+      "bytes": 2305,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-cgroup-reader-observer28-pure-release.json",
+      "sha256": "56029c8c5d0bfb370b4c21052e4dbc5c01b6d55ebd467a0c1b8c359d9b7d4e7a"
+    },
+    {
+      "bytes": 10715,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-reader28-concrete-independent-PREEXEC-review/OWNERFINAL-independent-current8d49-reader-observer28-concrete-PREEXECUTION-GO.json",
+      "sha256": "58ba73b20f8d1e2132b3cfbb8eb7e4df66b493f10020b7359b507630bd698fee"
+    },
+    {
+      "bytes": 19650,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/FROZEN-reader28-concrete-source-control-config-NOTRUN.json",
+      "sha256": "4cd8f74435137100296e44aedfb54defd86a1bf70f1c42060242bd9820c65463"
+    },
+    {
+      "bytes": 11048,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/run_root_reader28_pure_once_NOTRUN.py",
+      "sha256": "eb3a26634d2695488c64597aa13451098aea7445e3fc955886e29760b7cc4a08"
+    },
+    {
+      "bytes": 3379,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/execute_frozen_reader28_unittest_census_NOTRUN.py",
+      "sha256": "8b58d50947023e6fa1a66e0bff627741bcf696bbaa075c7d6bdebfee021b645c"
+    },
+    {
+      "bytes": 8304,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/OWNERFINAL-private-current8d49-cgroup-finite-reader-owned-observer-and-28-controls-SOURCE_PREPARED_NOTRUN.json",
+      "sha256": "1cb62155075c07714bc8eb17dec5ad082bc4663e3d7269797f184fde9ec02a29"
+    },
+    {
+      "bytes": 10394,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-independent-SOURCE-review/OWNERFINAL-independent-private-cgroup-reader-observer-SOURCE-and-prepared28-controls-GO.json",
+      "sha256": "dc37624bc1e47ad007320fb39a80e722128cd1d8acfcb99dc614add1552b0caa"
+    },
+    {
+      "bytes": 265,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-current8d49-cgroup-reader-observer28-pure-controls-1/consumed-distinct-ROOT-release.json",
+      "sha256": "c1d45c7599de106d64e3fec6c448d7b5d42aed5c65d80ff9d67aec7a325a53dd"
+    },
+    {
+      "bytes": 1377,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-current8d49-cgroup-reader-observer28-pure-controls-1/before/original-terminal.json",
+      "sha256": "0ff1d23d881fcda4ad9f5f3f18edf5706dbf8dce78e0b4f4b63f036a3cd92421"
+    },
+    {
+      "bytes": 53,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-current8d49-cgroup-reader-observer28-pure-controls-1/before/original.stdout.private",
+      "sha256": "b3b95de65a991e6bcc7bcb40ff26f53c4a250bcf7afd25070314de74fdb1d59a"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-current8d49-cgroup-reader-observer28-pure-controls-1/before/original.stderr.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1376,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-current8d49-cgroup-reader-observer28-pure-controls-1/primary/original-terminal.json",
+      "sha256": "fef908770ddf4aa6e8162b1422f647dc84e91f8a7e228aa01b1dc4d663e1b0a1"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-current8d49-cgroup-reader-observer28-pure-controls-1/primary/original.stdout.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 4381,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-current8d49-cgroup-reader-observer28-pure-controls-1/primary/original.stderr.private",
+      "sha256": "43a7265ff01a5312cfd7cf0435c9fcbf347d67118cebbf0e1604c6aa7b952cc6"
+    },
+    {
+      "bytes": 1387,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-current8d49-cgroup-reader-observer28-pure-controls-1/always-post/original-terminal.json",
+      "sha256": "ac91a659d1786b51a228f275b6a794dcb7293f815f1481c967702e48ee048300"
+    },
+    {
+      "bytes": 53,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-current8d49-cgroup-reader-observer28-pure-controls-1/always-post/original.stdout.private",
+      "sha256": "b3b95de65a991e6bcc7bcb40ff26f53c4a250bcf7afd25070314de74fdb1d59a"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-current8d49-cgroup-reader-observer28-pure-controls-1/always-post/original.stderr.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "schema": 1,
+  "scope_and_unknowns": [
+    "Actual synthetic injected bundles and mocked individual fd reads/flags only; default descriptor-relative full backend walk NOT_RUN and still requires separate controls.",
+    "No real cgroup sampler/data/signal/native/process wait/reap/version functionality/calibration/policy adoption.",
+    "Proposed memory thresholds remain uncalibrated/unadopted; counters demonstrate defined in-memory interval/reset rules, not attribution of original native child kill.",
+    "Original memory17 PASS and managed-mode PREMAINFAIL/nativeV8/V9FAIL bytes remain unchanged; retained3\u21925\u21927276 profile cannot advance automatically after original3FAIL.",
+    "Actual partial/FULL storage preservation retains its own distinct data scope and does not waive future capacity/memory floors."
+  ],
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "status": "PASS_28_UNIQUE_ORIGINAL_UNITTEST_METHODS_ALL_THREE_PHASES_ZERO_NO_BACKEND_NATIVE_ADOPTION",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none"
+}

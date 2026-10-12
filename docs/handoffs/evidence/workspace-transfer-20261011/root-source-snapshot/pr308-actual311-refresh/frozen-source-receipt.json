@@ -1,0 +1,165 @@
+{
+  "schema": "actions-pr308-actual311-source-refresh/v1",
+  "status": "FROZEN_SOURCE_FOR_INDEPENDENT_REVIEW_NO_PUSH",
+  "branch": "fix/rcc-candidate-wheel-identities-20261010",
+  "head": "9025a1e44bb05992e9f220842bfaf16a99ebd04f",
+  "tree": "b658453c78785aaaf5b998ef1e1aaade4174377d",
+  "parent": "87962e6214f502948d2cc2df442167cdd02509d2",
+  "ordinary_merge": {
+    "head": "87962e6214f502948d2cc2df442167cdd02509d2",
+    "tree": "391daa0d048a701ae25d5c4b8b6522930b389338",
+    "ordered_parents": [
+      "483e3e735c268b08acba1fd3930a9a34e0deaa91",
+      "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc"
+    ]
+  },
+  "source_proof": {
+    "path": "/workspace/engineering/pr308-actual311-refresh/source-union-proof.json",
+    "bytes": 42448,
+    "sha256": "0819be7b54248ba719b703b6b488c7abe7084aa6743cdad5c10ec03024a1e7d9"
+  },
+  "source_inspector": {
+    "path": "/workspace/engineering/pr308-actual311-refresh/verify_source.py",
+    "bytes": 3547,
+    "sha256": "3a33ec893d025a034ce246c9c3d4ec77a546ffb0b9f1a379e3852082e3193efa"
+  },
+  "all_old_target_leaves_retained": true,
+  "original_verifier_and_test_exact": {
+    "action_server/scripts/verify_dakota_rcc_acceptance.py": [
+      "100644",
+      "blob",
+      "57905333b9dedc0886666ab90d705149506652c9"
+    ],
+    "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py": [
+      "100644",
+      "blob",
+      "d20d0252f088089596bb958ea6a07a626e4e379d"
+    ]
+  },
+  "all268_plus_five_exact_old_actual_target92498": true,
+  "whole_github_exact_target": true,
+  "only_followup": "Canonical exact METADATA member identity versus filename/digest clarification; no production/verifier/test/workflow mutation",
+  "gates": {
+    "Doctor": "PASS",
+    "Bootstrap": "REUSED exact24 inputs plus five own prepared package environments; no installer",
+    "Toolkit": 69,
+    "scoped_candidate_identity": {
+      "pass": 37,
+      "integration_deselect": 1,
+      "skip": 0
+    },
+    "full_configured_Runtime_source": {
+      "pass": 1152,
+      "skip": 13,
+      "workers": 2
+    },
+    "full_configured_lint": "Ruff check/format/Isort PASS",
+    "typecheck_files": 337,
+    "all_workflow_and_dependabot_roundtrip": "PASS"
+  },
+  "bootstrap_reuse": {
+    "path": "/workspace/engineering/pr308-actual311-refresh/bootstrap-reuse.json",
+    "bytes": 2734,
+    "sha256": "52b2133f852f86ca5714fcae833290ccf6477b977fa11388468271e8ffadaec6"
+  },
+  "original_bootstrap": {
+    "path": "/workspace/engineering/pr308-refresh-owned/bootstrap.log",
+    "bytes": 27575,
+    "sha256": "8812f8f47f040dee39b872299c8cc91d5380fcca9831b646647c7654c525b756"
+  },
+  "old_receipts_own_original_identities": [
+    {
+      "path": "/workspace/engineering/pr308-refresh-owned/successor-receipt.json",
+      "bytes": 11026,
+      "sha256": "87f2252e89bdc9f1368a2ea2a0b9b55095606567517e3f378a3a0ce23a5f7f1d"
+    },
+    {
+      "path": "/workspace/engineering/pr308/action_server/tests/acceptance_evidence/candidate-wheel-67e82ef7.json",
+      "bytes": 1371,
+      "sha256": "66b0b864ac03a5ddd96cc9839911073cf553cfe88e574bfdaccc6752ebbbacbf"
+    },
+    {
+      "path": "/workspace/engineering/pr308/action_server/tests/acceptance_evidence/candidate-wheel-e33987b6.json",
+      "bytes": 1687,
+      "sha256": "78bd13f05aab66a354d25b0e7a95afbc786f28afa9ccf9e626a6cedbbbcca964"
+    }
+  ],
+  "gate_logs": {
+    "diff-check": {
+      "path": "/workspace/engineering/pr308-actual311-refresh/diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "doctor": {
+      "path": "/workspace/engineering/pr308-actual311-refresh/doctor.log",
+      "bytes": 13486,
+      "sha256": "df11299983202fe66085dcc7fcf4c83a8d0735a13d99496823f6e9641650c34b"
+    },
+    "full-source": {
+      "path": "/workspace/engineering/pr308-actual311-refresh/full-source.log",
+      "bytes": 296917,
+      "sha256": "c81d25b948af6fa6b90a7c6a39ae1cc1b0e8be87edec26ce199544afa1eda16d"
+    },
+    "generator-roundtrip": {
+      "path": "/workspace/engineering/pr308-actual311-refresh/generator-roundtrip.log",
+      "bytes": 4565,
+      "sha256": "a4964544fedc728f210a2ee23ff019441e6ebdfe974aeedbb45fdf9bc19b3054"
+    },
+    "scoped": {
+      "path": "/workspace/engineering/pr308-actual311-refresh/scoped.log",
+      "bytes": 4200,
+      "sha256": "1778d5c6431173dd2988db781626a6cbd242d0e67bcf5acdb698501ad684509b"
+    },
+    "source-union-proof": {
+      "path": "/workspace/engineering/pr308-actual311-refresh/source-union-proof.log",
+      "bytes": 64,
+      "sha256": "aa9494812772b91c6a5314cf87a7a85dfd41167107d5b5d09914fbfb0bc47173"
+    },
+    "static": {
+      "path": "/workspace/engineering/pr308-actual311-refresh/static.log",
+      "bytes": 5694,
+      "sha256": "20f96ea95a88eb490cec0d63d427279552dbbb73d4b8e2059c2cebbca676b8ff"
+    },
+    "toolkit": {
+      "path": "/workspace/engineering/pr308-actual311-refresh/toolkit.log",
+      "bytes": 14346,
+      "sha256": "70e3202d1842db1cd8e5b1cb1cc2a9d2ed0987d67cdcb044ae823fc70ea49936"
+    }
+  },
+  "generator_roundtrip": {
+    "path": "/workspace/engineering/pr308-actual311-refresh/generator-roundtrip.json",
+    "bytes": 6211,
+    "sha256": "d5a8e400e35af2c927077c326088be4e18d47976ac544254ba68c3590ac45dc6"
+  },
+  "documentation_improvement": {
+    "Canonical_file_changed": "docs/skills/repository-operations.md",
+    "Exact_delta": {
+      "path": "/workspace/engineering/pr308-actual311-refresh/canonical-actual-delta.patch",
+      "bytes": 1220,
+      "sha256": "34a93d6719c8e33168155e1c03caf7d76859e4a6cc9826e8d04900826fcbb9f6"
+    },
+    "Durable_learning": "Candidate filename selection requires exact one UTF8 METADATA member and matching Name/Version; whole-wheel digest binds bytes separately and does not prove installation/provider acceptance.",
+    "Evidence": "Preserved build_candidate_wheels/validate_candidate_wheel_metadata/candidate_wheel_records source and scoped37PASS/1realRCCdeselect plus full configured source gate; verifier/test blobs unchanged",
+    "Stale_or_ambiguous_guidance_removed": "Clarified filename selection alone is insufficient and distinguishes member identity from artifact digest and actual execution",
+    "Remaining_uncertainty": "Service-free synthetic version fixture does not prove actual Poetry build/RCC/provider/private full134; current hosted/native/provider execution pending"
+  },
+  "cached_GitHub_control": {
+    "receipt": {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/pr308-current-prospective-control.json",
+      "bytes": 2648,
+      "sha256": "3300acc166c934fa7f5f59d30619e9dd2425f87334cc2e9b0af04470a37862c1"
+    },
+    "scope": "Cached GitHub controls test the oldfbde/483 tuple, not the actual1c75/87962 union. No earlier CI carried forward."
+  },
+  "not_run": [
+    "Actual RCC/provider/native/browser gate",
+    "Fresh hosted CI",
+    "Full issue134"
+  ],
+  "tool_identity": {
+    "rcc_path": "/workspace/actions-cloud/bin/rcc",
+    "rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "rcc_version": "v18.19.3 from Doctor log"
+  },
+  "upstream_disposition": "none"
+}

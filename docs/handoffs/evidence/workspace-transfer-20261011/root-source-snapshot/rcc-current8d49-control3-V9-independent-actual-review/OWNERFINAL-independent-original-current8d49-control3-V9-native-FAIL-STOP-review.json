@@ -1,0 +1,123 @@
+{
+  "JUnit_counts": {
+    "ERROR": 0,
+    "FAIL": 2,
+    "SKIP": 0,
+    "tests": 2,
+    "unique": 2
+  },
+  "cause_scope": "Exact publication/path-admission failures observed; underlying RCC publication cause and relationship between failures not attributed here. Separate root-assigned bounded original diagnosis may establish more evidence.",
+  "cleanup": {
+    "captured_child_census": null,
+    "fixed_code": "CLEAN_NO_DESCENDANTS",
+    "original_disposition": "clean_no_descendants",
+    "qualification": "NO_READER_JOIN_OR_COMPLETE_FINAL_CENSUS_PROOF_NULL_UNKNOWN",
+    "reader_join_facts": null,
+    "reaped_descendants": 0,
+    "typed_status": "PASS"
+  },
+  "config_binding": {
+    "bytes": 765564,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+    "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25"
+  },
+  "decision": "FAIL_STOP_CONTROL3_V9_NATIVE_NOT_QUALIFIED_NEWER5_7276_NOTRUN",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "Durable_learning_captured": "Separate actual command/JUnit primary failure, observed capacity stop and narrow helper cleanup from absent internal-reader/final-census facts; preserve missing actualreceipts.",
+    "Evidence": "Originala681 result/895f parent; two originalJUnitFAILs; typedclean_no_descendants withnulljoins/nullchildcensus;62sample/no threshold/no signal; absentpublication/staged and exact sourcepost identities.",
+    "Exact_delta_proposed_binding": {
+      "bytes": 440,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-control3-V9-independent-actual-review/proposed-canonical-native-failure-phase-and-cleanup-scope.txt",
+      "sha256": "2f1349348419766f646cc8e965fb4aadfe1165bde66447f5d8b684c0e8bcef5f"
+    },
+    "Remaining_uncertainty": "UnderlyingRCCpublicationcause, workerreaderjoins/completeterminalcensus/currentfunctionallease/artifactpair and newer versions remain unobserved.",
+    "Stale_or_ambiguous_guidance_removed": "No CLEAN_NO_DESCENDANTS\u2192allreadersjoined or completefinalcensus claim; no threshold signal does not assign RCCcause or prove universal peak; failednative command not admitted by sourcepost0."
+  },
+  "elapsed_root_seconds": 125.23336585699872,
+  "fixed_failure_census": [
+    {
+      "classname": "tests.action_server_tests.test_source_staging_rcc_consumer",
+      "fixed_category": "RCC_PUBLICATION_FAILED_BEFORE_PUBLICATION_RECEIPT",
+      "name": "test_published_artifact_details_preserves_one_rcc_identity_pair",
+      "outcome": "FAIL",
+      "seconds": "10.946"
+    },
+    {
+      "classname": "tests.action_server_tests.test_source_staging_rcc_consumer",
+      "fixed_category": "PACKAGE_CACHE_PUBLICATION_PATH_ADMISSION_FAILED",
+      "name": "test_staged_package_executes_in_managed_rcc_runtime",
+      "outcome": "FAIL",
+      "seconds": "0.053"
+    }
+  ],
+  "label": "control3",
+  "last_process_tree_scope": "TWO_ORIGINAL_IDENTITY_BOUND_LIVE_SAMPLES_STAGE_SAMPLED_ONLY_NOT_COMPLETE_CENSUS_NOT_PROOF_OF_LIVE_AFTER_HELPER_COMPLETION",
+  "limits": [
+    "No original acquisition/runtime/test/helper/native/import/retry/cache manipulation/process signals/reaping/source/ref mutation by reviewer.",
+    "No functional artifact/action0/publication pair/lease/currentmanaged runtime/native3/5/7276 admission; published and staged actual receipts absent.",
+    "Helper completed without raisedexception reports narrow no-descendant cleanup, not worker reader closures/universal process quiescence/adopted child reaping.",
+    "No sampled thresholdsignal proves no threshold-triggered cancellation in these62samples; no universal peak or kernel quota claim.",
+    "OriginalV8 pre-main failure and original earlier threshold/cap failures remain distinct unchanged subjects; currentV9 crossed pytest boundary but failed independently.",
+    "Defaultproductionpin3/compiledmodifiedsource-equivalenceUNKNOWN/persistent leases/fullWindowsCI/OAuth/provider/private01f/frozenv6/releases remain unqualified."
+  ],
+  "no_retry": true,
+  "one_original_attempt": true,
+  "original_parent_binding": {
+    "bytes": 5649,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-current8d49-control3-V9-original-outer-owned/OWNERFINAL-root-one-original-current8d49-control3-V9-outer-terminal.json",
+    "sha256": "895f8bc537523ebc1ee3f4feb685a9ebe5835a529aeb87ab95c67e2b31457b68"
+  },
+  "original_raw_evidence_proof_binding": {
+    "bytes": 6058,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-control3-V9-independent-actual-review/independent-original-V9-actual-failure-raw-JUnit-sampler-cleanup-evidence-proof.json",
+    "sha256": "7bad990aa74e8605c6bf7d13f5099e53e6f42131567f93bec80dc28a45b161fe"
+  },
+  "original_release_binding": {
+    "bytes": 1075,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-rcc-current8d49-control3-V9-one-release.json",
+    "sha256": "a131e30087742764ba6dbdbc2634749924133431de3310b2065ced446b97bf3b"
+  },
+  "original_result_binding": {
+    "bytes": 2837,
+    "mode": "0o600",
+    "path": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-owned-pkgs-4/OWNERFINAL-one-version-actual-result.json",
+    "sha256": "a6811f4a7a33ff6c25e85cc213d7c4c77a7effc7516f6049b6286933f6cec56d"
+  },
+  "outcome": {
+    "gateway_primary": 10,
+    "outer": 1,
+    "pytest_owned_command": 1,
+    "source_post": 0,
+    "source_pre": 0
+  },
+  "publication_receipt": "ABSENT_NOT_QUALIFIED",
+  "sampler": {
+    "maximum_observed_bytes": 664267967,
+    "peak_scope": "SAMPLED_NOT_UNIVERSAL_INTERVENING_OVERSHOOT_UNKNOWN",
+    "sampler_alive": false,
+    "sampler_cancelled": true,
+    "samples": 62,
+    "signal_record": null,
+    "threshold_triggered": false
+  },
+  "schema": "INDEPENDENT_ORIGINAL_CURRENT8D49_CONTROL3_V9_ACTUAL_FAILURE",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_data_post_proof_binding": {
+    "bytes": 2730,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-control3-V9-independent-actual-review/independent-V9-actual-failure-unchanged-config-source-native-post-proof.json",
+    "sha256": "f6bb9d96cdee36b0fff9bd7c2d3ed02c4eea13f88a66d70cc73f85d779388536"
+  },
+  "stage": "PYTEST_EXECUTED_FIRST_RCC_PUBLICATION_FAILED_SECOND_CACHE_PUBLICATION_PATH_ADMISSION_FAILED",
+  "staged_receipt": "ABSENT_NOT_QUALIFIED",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "unchanged_protection": "All308 exact config rows/historical aliases/source1440Git+FS/native1192/prepared30/temporal2 verified independently after original result; pre/post metadata0 do not qualify failed native functionality.",
+  "upstream_disposition": "none",
+  "versions5_7276": "STOP_NOTRUN_NO_OLD_POSITIVE_CARRY"
+}

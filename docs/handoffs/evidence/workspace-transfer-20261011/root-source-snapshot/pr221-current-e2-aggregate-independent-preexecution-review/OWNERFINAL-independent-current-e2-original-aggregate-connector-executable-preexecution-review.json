@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "status": "INDEPENDENT_PREEXECUTION_GO_DATA_ONLY_DISTINCT_ROOT_RELEASE_REQUIRED",
+  "decision": "GO_CURRENT_E2_ORIGINAL_AGGREGATE_CONNECTOR_PREEXECUTION_DATA_ONLY",
+  "proposal_binding": {
+    "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/OWNERFINAL-current-e2-one-original-aggregate-connector-executable-PREPARATION.json",
+    "bytes": 38696,
+    "sha256": "b5975aca856aadd7288dd21bd7c5a66db3c3cf5c3b1eabf11f198ce27d667b6b",
+    "mode": "0o400"
+  },
+  "executor_binding": {
+    "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/acquire_current_e2_aggregate_once.py",
+    "bytes": 13257,
+    "sha256": "ce9841aec8c11d59666b911c90d1781ba58b49d061a2c49e5d070b292bf7c050",
+    "mode": "0o600"
+  },
+  "orchestration_template_binding": {
+    "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/connector_current_e2_once_PREPARATION.js",
+    "bytes": 3273,
+    "sha256": "72cf841f30cac01b2238426e3f22033d7bacf9ecad43d0fb9b98542b13fa8286",
+    "mode": "0o600"
+  },
+  "publisher_policy_binding": {
+    "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/frozen-current-e2-publisher-outer-archive-policy.json",
+    "bytes": 2051,
+    "sha256": "4ef302991978880bbc8452d6f6ad410562011deaddf8e6fe64f6438637241097",
+    "mode": "0o600"
+  },
+  "proof_binding": {
+    "path": "/workspace/engineering/pr221-current-e2-aggregate-independent-preexecution-review/independent-static-original-aggregate-acquisition-admission-proof.json",
+    "bytes": 3693,
+    "sha256": "97f01d6800881b0bb8d395f831fafc67282e7f69e23bb41b8147389fa71c237a",
+    "mode": "0o400"
+  },
+  "source": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "source_tree": "afe2679cc93bf27fa5021c7698ee7ad3ee21a1b9",
+  "run_id": 38157482815,
+  "artifact_id": 11708952448,
+  "aggregate_API_bytes": 80745614,
+  "aggregate_API_sha256": "e16a414fefc1778ba49d09c466fd9d8054cfbf952e7766ee5cc6558f871f4def",
+  "ROOT_distinct_adoption_requirements": [
+    "Explicit serialized no-other-heavy-or-installer data-only root one-release exact proposal and this review binding; one connector and one transfer, no retry or alternate mirror.",
+    "Root bind template and named executable orchestration hashes; named orchestration may change ONLY ROOT_ANNOUNCED_RELEASE_PATH_REQUIRED and ROOT_ANNOUNCED_RELEASE_SHA256_REQUIRED literals, with exact readback.",
+    "Root release private0600 regular file and exact current reviewed executor/policy/proposal/independent decision/original immutable bindings. Python independently binds files but does not parse this review decision or hash orchestration, so operator must enforce these exact fields.",
+    "Fresh workspace >=1288490189B and tmp >=536870912B immediately before begin; owned absent destination; strict original capacities and timing caps retained.",
+    "Optimization forbidden: use unset PYTHONOPTIMIZE or module safely fails before connector. Root owns exact cached Python and endpoint callable; module/JS must not be imported/executed by this reviewer."
+  ],
+  "bounds": {
+    "connector_seconds": 90,
+    "transfer_seconds": 120,
+    "transfer_and_outer_CRC_seconds": 180,
+    "whole_envelope_seconds": 300,
+    "GNU_local_cleanup_seconds": 10,
+    "compressed_bytes": 100663296,
+    "expanded_bytes": 134217728,
+    "single_member_bytes": 67108864,
+    "tool_result_serialization_bytes": 49152,
+    "tmp_free_bytes": 536870912,
+    "workspace_free_bytes": 1288490189,
+    "HTTPS_redirects_max": 3
+  },
+  "scope": "Only original aggregate outer byte/CRC/manifest data acquisition/admission; no extraction/package import/RECORD/OAuth/consumer/native/tag/registry/publication/PR221 integration admission.",
+  "Linux_checkout_separate": {
+    "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/OWNERFINAL-original-current-e2-Linux-producer-checkout-identity-only.json",
+    "bytes": 2764,
+    "sha256": "117cb4b7bc46699ec940e6402fe022f8bec18a98592fd13b28e576e4db415f48",
+    "mode": "0o400"
+  },
+  "limitations": [
+    "Frozen preparation checkout UNKNOWN remains historical at capture; Linux separately authenticated165c[a709,e2]/afe, Mac/Windows/sdist/aggregate publisher checkout UNKNOWN.",
+    "CI33success1expectedskip1pending is snapshot only; no live poll/release qualification.",
+    "Local/socket/decompression deadlines and GNU parent bound remain explicit; connector/DNS/remote cancellation or remote wire bytes not universally proved.",
+    "Credential-bearing FileService URL and generated response must remain private; future root should not forward raw tool exceptions or signed URLs.",
+    "Inner artifact source/body/generated OAuth authority, full release gates and exact current consumer remain HOLD."
+  ],
+  "documentation": {
+    "decision": "ACCEPT_EXACT_SOURCE_BACKED_MATRIX_EVENT_COUNT_PROPOSAL_AND_REUSE_EXISTING_TRANSPORT_PROVENANCE_GUIDANCE",
+    "proposal_binding": {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/proposed-canonical-matrix-event-count-lesson.txt",
+      "bytes": 273,
+      "sha256": "62d4d0f56d363e66d062eebe0696dc421f4503a8ac2d3917fe5cbbaa3c4db5e5",
+      "mode": "0o600"
+    },
+    "exact_delta": "Count an include-only workflow matrix from its declared include rows. Supplemental rows must not become the original combinations for later includes. Bind the count to the exact event filters and changed paths, and count a triggered auxiliary push separately from PR jobs.\n",
+    "evidence": "25 exact Git workflow source bodies;13 PR flows/34 declared matrix cells and separately observed auxiliary push1; publisher slots derived from immutable AST. Include-only and supplemental include counts must not replace base Cartesian combinations.",
+    "stale_ambiguity": "Fixed universal job totals and API head-as-original-checkout equivalence rejected.",
+    "remaining_uncertainty": "Actual aggregate bytes not yet acquired; all-platform producer/source/content/consumer/release admission pending; no duplicate new guide prose."
+  },
+  "upstream_disposition": "none; Actions operator/data-admission boundary, no external posts",
+  "source_private_executor_or_gate_mutations": "NOT_RUN"
+}

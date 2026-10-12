@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "status": "GUIDE_ONLY_CONFLICT_RESOLUTION_PROPOSAL_NO_ORDINARY_MERGE_YET",
+  "branch": "test/canvas-runtime-cache-isolation-20261010",
+  "current_head": "5306eeb26595da4ce571b99812eb50f047cfc903",
+  "current_tree": "8418e9ffeeaaf2446771e34b5b4602bab3d357a5",
+  "actual_target": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "target_tree": "afe2679cc93bf27fa5021c7698ee7ad3ee21a1b9",
+  "original_merge_tree": "03def470efb349425112abf21f00262ae7866e33",
+  "proposed_resolved_union_tree": "851834ae6cc87f42abfcf3c963542191e2815599",
+  "only_conflict": "docs/skills/repository-operations.md",
+  "resolution_blocks": [
+    {
+      "conflict_start_line": 91,
+      "ours_bytes": 8266,
+      "ours_SHA256": "0c8f6f5e680d0b4e094ea271545650ecdbefc37dcae9da8426db2ece696e9b41",
+      "theirs_bytes": 3488,
+      "theirs_SHA256": "201bf783a7d97b9ef7e7e9c5a9b2f5685f53116c82c37864ab8d68f2185e3ef9",
+      "resolution": "Both exact accepted bodies retained once, ours then theirs"
+    }
+  ],
+  "resolved_guide": {
+    "path": "/workspace/engineering/pr305-actual-e2-refresh/private-proposed-both-parent-canonical-guide-resolution.md",
+    "bytes": 274781,
+    "sha256": "dc5c04abfa51df9f9f88fc1b018c6b3ef41a672e6af304a524351177fa168d89",
+    "mode": "0o600"
+  },
+  "original_conflicted_guide": {
+    "path": "/workspace/engineering/pr305-actual-e2-refresh/private-prospective-guide-conflict-original.txt",
+    "bytes": 274851,
+    "sha256": "d514bb667bb001e44315ebdffb99cb1a66c58f0d93576f53badba5cc6785dbf4",
+    "mode": "0o600"
+  },
+  "current_leaves": 1427,
+  "target_leaves": 1440,
+  "prospective_leaves": 1441,
+  "parent_union_paths_exact": true,
+  "non_guide_all_blobs_and_modes_from_accepted_parents": true,
+  "old_leaf_deletions": 0,
+  "changed_old_leaf_count": 12,
+  "added_leaf_count": 14,
+  "protected_manifest_script_before": {
+    "path": "/workspace/engineering/pr305/action_server/scripts/write_native_artifact_manifest.py",
+    "bytes": 8499,
+    "sha256": "aaa6855bc6c0bccc41933703fbdb2e58d9f25a118a651d254a7dce34e5fd113b",
+    "mode": "0o600"
+  },
+  "protected_manifest_blob_mode_equal_both_parents_and_union": true,
+  "source_index_HEAD_FS": "UNCHANGED",
+  "LIGHT_FULL_gateway_native_consumer_installer_download_push": "NOT_RUN",
+  "next": "Root/reviewer accepts precise guide resolution before ordinary merge. Fresh isolated LIGHT/FULL preexec preparation only; no gates until root capacity release.",
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "exact_delta": "Retain both exact accepted conflict bodies in owning Canvas section; incoming canonical guide changes outside the conflict already preserved by merge tree.",
+    "durable_learning": "Candidate Canvas bridge cache containment and published-mode provenance coexist with the separate Canvas Query template gate and strict receipts.",
+    "evidence": "Exact parent blobs and conflict-block hashes; prospective complete parent union.",
+    "stale_ambiguity_removed": "Neither parent guide block displaced by a one-sided conflict choice.",
+    "remaining_uncertainty": "No current e2 LIGHT/FULL/native/consumer qualification; old source checks are historical."
+  },
+  "upstream_disposition": "none"
+}

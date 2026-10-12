@@ -1,0 +1,45 @@
+{
+  "decision": "GO_ONE_CONNECTOR_DECODED_ORIGINAL_CURRENT_WINDOWS_LOG_FALLBACK_ONLY_FINAL_MERGE_PENDING",
+  "head": "74beef4d220c3a1e8f983cecd42b9bb84ac75e79",
+  "run": 38141331782,
+  "job": 114475648454,
+  "method": "tools.github_fetch_workflow_job_logs",
+  "arguments": {
+    "repo_full_name": "joshyorko/actions",
+    "job_id": 114475648454
+  },
+  "invocations": 1,
+  "constraints": [
+    "Fresh exclusive0700 output directory and0600 response/decoded files",
+    "Freeze complete original connector response and decoded UTF8 bytes/hash before review",
+    "No retry or artifact/gateway acquisition",
+    "Preserve direct GH failure authorization consumed; no complete accepted original exists",
+    "Wire byte identity and prior stderr signed-redirect transport remain UNKNOWN; no URL forwarding",
+    "Actual checkout/terminal interpretation follows original acquisition, no metadata-only upgrade"
+  ],
+  "bindings": [
+    {
+      "path": "/workspace/engineering/pr300-current74-final-CI-independent-review/OWNERFINAL-current74-metadata-and-one-original-Windows-acquisition-review.json",
+      "bytes": 3142,
+      "sha256": "c92e32c9bc845993ffdc2e0be7da48afad57df8f8b0d3a3ad1d7532cca73a64e"
+    },
+    {
+      "path": "/workspace/engineering/pr300-current74-original-Windows-owned/root-one-original-Windows-log-acquisition-authorization.json",
+      "bytes": 718,
+      "sha256": "545f39a36efabda12a5ba93c442f36c17437e4c2cd240b9de3eec26bac9c18d1"
+    },
+    {
+      "path": "/workspace/engineering/pr300-current74-original-Windows-owned/original-direct-gh-storage-redirect-FAIL.json",
+      "bytes": 823,
+      "sha256": "bf2846f051c65cf3037e480fb37d02966e87a672f5a601a6c0d8fc9192acd948"
+    }
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "Accepted canonical decoded-log vs wire provenance lesson reused",
+    "Durable_learning_captured": "A failed original transport is retained separately from one authorized connector-decoded successor; decoded evidence does not certify raw wire bytes.",
+    "Evidence": "Direct GH storage redirect failed before complete log return.",
+    "Stale_or_ambiguous_guidance_removed": "No duplicate accepted original or successful direct-wire acquisition claimed.",
+    "Remaining_uncertainty": "Original checkout/test census pending connector response."
+  },
+  "Upstream_disposition": "none"
+}

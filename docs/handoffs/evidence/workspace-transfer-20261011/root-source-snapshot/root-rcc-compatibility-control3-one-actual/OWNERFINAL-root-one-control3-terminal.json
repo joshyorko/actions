@@ -1,0 +1,38 @@
+{
+  "root_outer_returncode": 10,
+  "root_exception_class": null,
+  "post_guard": {
+    "bindings": 263,
+    "source_body_modes": 1421,
+    "native_members": 1192,
+    "status": "PASS"
+  },
+  "post_guard_error_class": null,
+  "seconds": 65.38718710200192,
+  "log": {
+    "path": "/workspace/engineering/root-rcc-compatibility-control3-one-actual/original-outer-launch.private.log",
+    "bytes": 8524,
+    "sha256": "f7790d973a33d5a7ac469647ee4d4b3e20140d56043de5c9af19dbeff685b42c"
+  },
+  "actual_result": {
+    "path": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-1/OWNERFINAL-one-version-actual-result.json",
+    "bytes": 1696,
+    "sha256": "8dc25bb1b99503af386d12d32c0637aa3503617c6f97d66a83f4643969934d4c"
+  },
+  "status": "FAIL_HOLD",
+  "release": {
+    "path": "/workspace/engineering/root-rcc-compatibility-control3-one-actual/root-one-control3-release.json",
+    "bytes": 633,
+    "sha256": "c3b90241c5a23026c98f42d0be625c47ead212dd9d332e7754464ee09568a20a"
+  },
+  "independent_review": {
+    "path": "/workspace/engineering/rcc-compatibility-runnable-transport-independent-review/OWNERFINAL-independent-current-b614-runnable-control3-preexecution-review.json",
+    "bytes": 16749,
+    "sha256": "5994780a6fdabebe2ea9ad0f13f7ee5f3a699bb6e23ce4737010e8b0afb4868d"
+  },
+  "remaining_versions": "NOT_RUN; distinct acceptance/config/review/release required",
+  "capacity_after": {
+    "workspace_free_bytes": 1301643264,
+    "devshm_free_bytes": 2095063040
+  }
+}

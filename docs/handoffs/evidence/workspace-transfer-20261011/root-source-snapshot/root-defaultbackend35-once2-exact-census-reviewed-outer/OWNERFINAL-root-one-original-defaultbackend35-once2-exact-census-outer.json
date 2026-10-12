@@ -1,0 +1,114 @@
+{
+  "before_envelope": {
+    "bytes": 612,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-defaultbackend35-once2-exact-census-reviewed-outer/external-before-envelope.json",
+    "sha256": "1cd36e56114ef371463ac5f46aea5877f458aa0cc9a8dbf7533b8d6540a5eb4f"
+  },
+  "capture": "2026-10-11T22:30:22.038741+00:00",
+  "elapsed_seconds": 63.32445526799711,
+  "external_alwayspost": {
+    "argv": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "120s",
+      "bash",
+      "-c",
+      "export PATH=\"/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\"; source /workspace/actions-cloud/activate.sh && exec \"$@\"",
+      "defaultbackend35-once",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/run_root_defaultbackend35_once2_exact_census_NOTRUN.py",
+      "--phase",
+      "guard",
+      "--config",
+      "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/FROZEN-defaultbackend35-once2-exact-census-config-NOTRUN.json",
+      "--config-sha256",
+      "7021f53c12b5392ffe5cf14da7915f25188c68e6d5a9a3b07458b588c4b527fa",
+      "--release",
+      "/workspace/engineering/root-one-defaultbackend35-once2-exact-census-release.json",
+      "--release-sha256",
+      "f9079a6dfb8e234e4976d1a3feb32d88be9f3ff9ba6c32bc3a6d43d5cfecbf02"
+    ],
+    "elapsed_seconds": 15.365144170995336,
+    "parent_seconds": 135,
+    "returncode": 0
+  },
+  "external_before": {
+    "argv": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "120s",
+      "bash",
+      "-c",
+      "export PATH=\"/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\"; source /workspace/actions-cloud/activate.sh && exec \"$@\"",
+      "defaultbackend35-once",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/run_root_defaultbackend35_once2_exact_census_NOTRUN.py",
+      "--phase",
+      "guard",
+      "--config",
+      "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/FROZEN-defaultbackend35-once2-exact-census-config-NOTRUN.json",
+      "--config-sha256",
+      "7021f53c12b5392ffe5cf14da7915f25188c68e6d5a9a3b07458b588c4b527fa",
+      "--release",
+      "/workspace/engineering/root-one-defaultbackend35-once2-exact-census-release.json",
+      "--release-sha256",
+      "f9079a6dfb8e234e4976d1a3feb32d88be9f3ff9ba6c32bc3a6d43d5cfecbf02"
+    ],
+    "elapsed_seconds": 16.284448489008355,
+    "parent_seconds": 135,
+    "returncode": 0
+  },
+  "native": "NOT_RUN",
+  "original_primary": {
+    "argv": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "600s",
+      "bash",
+      "-c",
+      "export PATH=\"/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\"; source /workspace/actions-cloud/activate.sh && exec \"$@\"",
+      "defaultbackend35-once",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/run_root_defaultbackend35_once2_exact_census_NOTRUN.py",
+      "--phase",
+      "launch",
+      "--config",
+      "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/FROZEN-defaultbackend35-once2-exact-census-config-NOTRUN.json",
+      "--config-sha256",
+      "7021f53c12b5392ffe5cf14da7915f25188c68e6d5a9a3b07458b588c4b527fa",
+      "--release",
+      "/workspace/engineering/root-one-defaultbackend35-once2-exact-census-release.json",
+      "--release-sha256",
+      "f9079a6dfb8e234e4976d1a3feb32d88be9f3ff9ba6c32bc3a6d43d5cfecbf02"
+    ],
+    "elapsed_seconds": 31.659603199004778,
+    "parent_seconds": 630,
+    "returncode": 0
+  },
+  "post_envelope": {
+    "bytes": 612,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-defaultbackend35-once2-exact-census-reviewed-outer/external-alwayspost-envelope.json",
+    "sha256": "1cd36e56114ef371463ac5f46aea5877f458aa0cc9a8dbf7533b8d6540a5eb4f"
+  },
+  "release": {
+    "bytes": 2026,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-one-defaultbackend35-once2-exact-census-release.json",
+    "sha256": "f9079a6dfb8e234e4976d1a3feb32d88be9f3ff9ba6c32bc3a6d43d5cfecbf02"
+  },
+  "review": {
+    "bytes": 11606,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-independent-PREEXEC-review/OWNERFINAL-independent-defaultbackend35-once2-exact-census-SOURCE-PREEXEC-GO.json",
+    "sha256": "b309b76054718d5deecce80b482f012b0ebbf9f37bdb2ccf42673dbac3758b3e"
+  },
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_adoption": "NONE",
+  "status": "PASS_PENDING_INDEPENDENT_ACTUAL",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+}

@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "status": "GO_SCOPED_PRODUCER_IDENTITY_ONLY_NO_RUNTIME_RELEASE_QUALIFICATION",
+  "source_API_label": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "producer_checkout": "165c38920fe37dd81350ca8ca0419bc70a4739f2",
+  "producer_tree": "afe2679cc93bf27fa5021c7698ee7ad3ee21a1b9",
+  "producer_ordered_parents": [
+    "a70993fafc99a9f94041485542d5a720797ca394",
+    "e2c81adce7858d5a952991ba9a8b7f72e902038a"
+  ],
+  "run_id": 38157482815,
+  "jobs": [
+    114523345357,
+    114523345424
+  ],
+  "proof": {
+    "path": "/workspace/engineering/pr221-currente2c-Mac-Windows-original-producer-log-owned/safe-original-Mac-Windows-producer-identity-proof.json",
+    "bytes": 8008,
+    "sha256": "6dcf82fca484336724f6b293c47d53156a6b4ab419ea86adbaf75bca8b9bba1c",
+    "mode": "0o400"
+  },
+  "all_original_decoded_and_logical_bindings": [
+    {
+      "path": "/workspace/engineering/pr221-currente2c-Mac-Windows-original-producer-log-owned/Mac-original-decoded-UTF8.private.log",
+      "bytes": 803153,
+      "sha256": "f8296eddcef2f0a4ad3ed0d3ae36f1ab602b139beef458ae12eab3b114273c26",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currente2c-Mac-Windows-original-producer-log-owned/Mac-original-escaped-logical-MCP-response.private.json",
+      "bytes": 1102781,
+      "sha256": "4107bf6093c3d4ca30693a75b5bc08d12b43aa41d5430afd59da73e9ad680694",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currente2c-Mac-Windows-original-producer-log-owned/Windows-original-decoded-UTF8.private.log",
+      "bytes": 182562,
+      "sha256": "e5125cd28cfca23a31c9ce431096ced1a71dbfe1d8326a52e30e037001ceb0c1",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currente2c-Mac-Windows-original-producer-log-owned/Windows-original-escaped-logical-MCP-response.private.json",
+      "bytes": 188881,
+      "sha256": "453eea5a9248da9a46741a2fd15b85891ecd2f7eaadc322af38961e059ff0e37",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currente2c-Mac-Windows-original-producer-log-owned/current-terminal-jobs-escaped-logical-MCP.private.json",
+      "bytes": 11131,
+      "sha256": "bd4032755c52a04b02ce66e2a75a06f7b408de36b3dbb1f32175d41a6222c05f",
+      "mode": "0o600"
+    }
+  ],
+  "authentic_commit_reused": {
+    "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/intended-synthetic-commit.decoded-pages.json",
+    "bytes": 2935,
+    "sha256": "e6509a977fb01d22147222c7c4b023e5e9e2ef3499b9cb388733d1da9462e7f4",
+    "mode": "0o600"
+  },
+  "Linux_original_owner_reused_no_reacquisition": {
+    "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/OWNERFINAL-original-current-e2-Linux-producer-checkout-identity-only.json",
+    "bytes": 2764,
+    "sha256": "117cb4b7bc46699ec940e6402fe022f8bec18a98592fd13b28e576e4db415f48",
+    "mode": "0o400"
+  },
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; proposed source-backed six-line clarification beside producer qualification guidance",
+    "exact_delta": {
+      "path": "/workspace/engineering/pr221-currente2c-Mac-Windows-original-producer-log-owned/canonical-original-platform-checkout-identity-proposed.md",
+      "bytes": 470,
+      "sha256": "74187436f50d80becea52d7679a6943085a950f6339dc4ce3a9fdc2c15ecf1de",
+      "mode": "0o400"
+    },
+    "durable_learning": "Per-platform literal checkout + authenticated ordered Git tuple; source labels and producer SUCCESS do not establish content/consumer acceptance",
+    "evidence": {
+      "path": "/workspace/engineering/pr221-currente2c-Mac-Windows-original-producer-log-owned/safe-original-Mac-Windows-producer-identity-proof.json",
+      "bytes": 8008,
+      "sha256": "6dcf82fca484336724f6b293c47d53156a6b4ab419ea86adbaf75bca8b9bba1c",
+      "mode": "0o400"
+    },
+    "stale_or_ambiguous_guidance_removed": "Do not treat source/head labels or Linux original checkout as proof of other platform checkout",
+    "remaining_uncertainty": "Wire bytes unavailable; built-before-repair reported wheel hashes are not artifact bytes; content/OAuth/consumer/native/private/release still HOLD"
+  },
+  "upstream_disposition": "none",
+  "worker_external_posts": "NONE",
+  "new_execution": "READ_ONLY_LOG_AND_METADATA_PARSE_ONLY"
+}

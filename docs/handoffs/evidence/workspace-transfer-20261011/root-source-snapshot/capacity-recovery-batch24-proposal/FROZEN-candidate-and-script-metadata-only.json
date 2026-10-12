@@ -1,0 +1,60 @@
+{
+  "script": {
+    "path": "/tmp/actions-capacity-recovery-batch24.py",
+    "bytes": 5244,
+    "sha256": "d3af4bfa4573925912a8d49aa9c26a893ab40fe4928083569c19e5bea4211db5"
+  },
+  "algorithm_parent": {
+    "path": "/tmp/actions-capacity-recovery-batch19.py",
+    "bytes": 5244,
+    "sha256": "48fd7e4c79e55b80ceda0b63c1d1da87feeb368cefee265d5c12bad6ad940840"
+  },
+  "16_nonconfig_AST_exact": true,
+  "sole_namespace": "646e9b21fab67902",
+  "marker_True": true,
+  "marker_sha256": "3cbc87c7681f34db4617feaa2c8801931bc5e42d8d0f560e756dd4cd92885f18",
+  "fresh_candidate_member_types": {
+    "file": 12191,
+    "directory": 3412,
+    "symlink": 481,
+    "fifo": 8
+  },
+  "logical_regular_file_bytes": 626944487,
+  "allocated_unique_entry_blocks_observation_bytes": 673456128,
+  "fresh_accessible_handles": {
+    "processes": 276,
+    "links_read": 35,
+    "unobserved_permission_transient_FDlists": 543,
+    "candidate_cwdFD_observed": 0
+  },
+  "ROOT_actual23": {
+    "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch23.json",
+    "bytes": 905,
+    "sha256": "87cbc0fd1ccb7ae1ac562c52d53c035b5b924bf97b6758c3b5626bc3e9ecb91f"
+  },
+  "ROOT23_data": {
+    "status": "ROOT_ONE_EXACT_RECOVERY_TERMINAL0_INDEPENDENT_ACTUAL_PENDING",
+    "private_inventory": {
+      "path": "/dev/shm/actions-completed-scratch-recovery-batch23/private-complete-inventory-and-recovery.json",
+      "bytes": 273753,
+      "sha256": "5a5c0000de26012048b4c7a97961fc4539792571d75262a3b0756b7aa6c89286"
+    },
+    "records": [
+      {
+        "original_namespace": "/workspace/actions-cloud/robocorp/temp/a4fa6f1c79c0a18f",
+        "archive": "/dev/shm/actions-completed-scratch-recovery-batch23/a4fa6f1c79c0a18f.tar.gz",
+        "archive_bytes": 777119,
+        "archive_sha256": "1a08a74fe43a7b226c62c8d2b1fd82cc77761a56947908e22a1b2a3cba5bc512",
+        "verified_members": 901,
+        "archive_verified_before_original_removal": true,
+        "expanded_removed": true
+      }
+    ],
+    "source_origin": "UNKNOWN, not inferred",
+    "workspace_available_observation": 644177920,
+    "script_execution_attempts": 1
+  },
+  "current_workspace_capacity_observation": 644104192,
+  "source_origin": "UNREPORTED until authenticated original exact log/preflight namespace match; mtime excluded as authority",
+  "no_execution": true
+}

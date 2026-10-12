@@ -1,0 +1,183 @@
+{
+  "schema": 1,
+  "decision": "GO_ORIGINAL_MAC_WINDOWS_PRODUCER_CHECKOUT_AND_BUILD_IDENTITY_ONLY",
+  "status": "INDEPENDENT_SCOPED_SOURCE_IDENTITY_GO_NO_RUNTIME_RELEASE_ADMISSION",
+  "owner_binding": {
+    "path": "/workspace/engineering/pr221-currente2c-Mac-Windows-original-producer-log-owned/OWNERFINAL-currente2-original-Mac-Windows-producer-checkout-build-identity-only.json",
+    "bytes": 4358,
+    "sha256": "d67b48ef702f04b5ed4a43d2ff01626f0acac8fafc3e5aa0118b59f7f31b3444",
+    "mode": "0o400"
+  },
+  "verified_exact_refs": [
+    {
+      "path": "/workspace/engineering/pr221-currente2c-Mac-Windows-original-producer-log-owned/safe-original-Mac-Windows-producer-identity-proof.json",
+      "bytes": 8008,
+      "sha256": "6dcf82fca484336724f6b293c47d53156a6b4ab419ea86adbaf75bca8b9bba1c",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currente2c-Mac-Windows-original-producer-log-owned/Mac-original-decoded-UTF8.private.log",
+      "bytes": 803153,
+      "sha256": "f8296eddcef2f0a4ad3ed0d3ae36f1ab602b139beef458ae12eab3b114273c26",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currente2c-Mac-Windows-original-producer-log-owned/Mac-original-escaped-logical-MCP-response.private.json",
+      "bytes": 1102781,
+      "sha256": "4107bf6093c3d4ca30693a75b5bc08d12b43aa41d5430afd59da73e9ad680694",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currente2c-Mac-Windows-original-producer-log-owned/Windows-original-decoded-UTF8.private.log",
+      "bytes": 182562,
+      "sha256": "e5125cd28cfca23a31c9ce431096ced1a71dbfe1d8326a52e30e037001ceb0c1",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currente2c-Mac-Windows-original-producer-log-owned/Windows-original-escaped-logical-MCP-response.private.json",
+      "bytes": 188881,
+      "sha256": "453eea5a9248da9a46741a2fd15b85891ecd2f7eaadc322af38961e059ff0e37",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currente2c-Mac-Windows-original-producer-log-owned/current-terminal-jobs-escaped-logical-MCP.private.json",
+      "bytes": 11131,
+      "sha256": "bd4032755c52a04b02ce66e2a75a06f7b408de36b3dbb1f32175d41a6222c05f",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/intended-synthetic-commit.decoded-pages.json",
+      "bytes": 2935,
+      "sha256": "e6509a977fb01d22147222c7c4b023e5e9e2ef3499b9cb388733d1da9462e7f4",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/OWNERFINAL-original-current-e2-Linux-producer-checkout-identity-only.json",
+      "bytes": 2764,
+      "sha256": "117cb4b7bc46699ec940e6402fe022f8bec18a98592fd13b28e576e4db415f48",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currente2c-Mac-Windows-original-producer-log-owned/canonical-original-platform-checkout-identity-proposed.md",
+      "bytes": 470,
+      "sha256": "74187436f50d80becea52d7679a6943085a950f6339dc4ce3a9fdc2c15ecf1de",
+      "mode": "0o400"
+    }
+  ],
+  "source_API_label": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "producer_checkout": "165c38920fe37dd81350ca8ca0419bc70a4739f2",
+  "producer_tree": "afe2679cc93bf27fa5021c7698ee7ad3ee21a1b9",
+  "producer_ordered_parents": [
+    "a70993fafc99a9f94041485542d5a720797ca394",
+    "e2c81adce7858d5a952991ba9a8b7f72e902038a"
+  ],
+  "authority": "Retained original per-platform literal fetch/merge/checkout plus retained authenticated commit API e650; no local Git object fabricated or fetched. API job rows establish run/job name and terminal status; no head_sha field exists in those rows.",
+  "platforms": [
+    {
+      "platform": "Mac",
+      "job_id": 114523345357,
+      "run_id": 38157482815,
+      "API_job_name": "build-wheels (macos-15)",
+      "API_terminal_status": "completed",
+      "API_terminal_conclusion": "success",
+      "API_head_sha_field": "ABSENT; not source authority",
+      "original_decoded_bytes_match_retained_logical_connector_content": true,
+      "checkout_fetch_merge_literal_lines": [
+        94,
+        104,
+        107
+      ],
+      "actual_literal_checkout": "165c38920fe37dd81350ca8ca0419bc70a4739f2",
+      "ordered_build_command_lines": [
+        4455,
+        4524,
+        4639,
+        5369
+      ],
+      "reported_built_before_repair_wheels": [
+        {
+          "original_line": 4780,
+          "filename": "actions_runtime-1.0.3-cp312-cp312-macosx_15_0_arm64.whl",
+          "bytes": 13529599,
+          "builder_reported_sha256": "8f3874abccc9a9cdb9aa7c4092de31da48e93d76a85a2b156e7bf6627dac596d",
+          "scope": "built-before-repair; not downloaded artifact hash"
+        },
+        {
+          "original_line": 5115,
+          "filename": "actions_runtime-1.0.3-cp313-cp313-macosx_15_0_arm64.whl",
+          "bytes": 13529600,
+          "builder_reported_sha256": "98bb56f0f85848e1e2a5917a6a0e024bfa483a04ec1a5042d29fb0882b541bbd",
+          "scope": "built-before-repair; not downloaded artifact hash"
+        }
+      ],
+      "Mac_following_repair_line_numbers": [
+        4785,
+        5120
+      ],
+      "scope": "original per-platform checkout and build identity only; filenames/version/reported hashes are not package or artifact acceptance"
+    },
+    {
+      "platform": "Windows",
+      "job_id": 114523345424,
+      "run_id": 38157482815,
+      "API_job_name": "build-wheels (windows-2022)",
+      "API_terminal_status": "completed",
+      "API_terminal_conclusion": "success",
+      "API_head_sha_field": "ABSENT; not source authority",
+      "original_decoded_bytes_match_retained_logical_connector_content": true,
+      "checkout_fetch_merge_literal_lines": [
+        81,
+        108,
+        111
+      ],
+      "actual_literal_checkout": "165c38920fe37dd81350ca8ca0419bc70a4739f2",
+      "ordered_build_command_lines": [
+        669,
+        740,
+        854,
+        1599
+      ],
+      "reported_built_before_repair_wheels": [
+        {
+          "original_line": 1002,
+          "filename": "actions_runtime-1.0.3-cp312-cp312-win_amd64.whl",
+          "bytes": 11888063,
+          "builder_reported_sha256": "77a0fc482e0b6b581b6b0431dd52bc1cc18794df461c16850af2f8f4d866815f",
+          "scope": "built-before-repair; not downloaded artifact hash"
+        },
+        {
+          "original_line": 1344,
+          "filename": "actions_runtime-1.0.3-cp313-cp313-win_amd64.whl",
+          "bytes": 11888063,
+          "builder_reported_sha256": "6747ff9a7b2858de1482d83219d096232d2dac362ee85c96e3269031921d9652",
+          "scope": "built-before-repair; not downloaded artifact hash"
+        }
+      ],
+      "Mac_following_repair_line_numbers": [],
+      "scope": "original per-platform checkout and build identity only; filenames/version/reported hashes are not package or artifact acceptance"
+    }
+  ],
+  "Linux_disposition": "Retained original117cb and e650 bytes verified and reused; Linux log not reacquired/re-reviewed by this task.",
+  "limitations": [
+    "Connector logical decoded UTF8 bytes are verified; unavailable original wire bytes remain UNKNOWN.",
+    "API Git verification/signature is not distribution signature or artifact content qualification.",
+    "Mac builder wheel hashes precede delocate repair and filename changes; Windows reported hashes remain build reports only.",
+    "No distribution bytes acquired/installed/imported or tested here; separate actual aggregate integrity291686 does not promote this producer-only review to content or consumer admission.",
+    "Generated OAuth content/input authority, full platform content and installed consumers, private metadata and Runtime1.0.3 publication remain HOLD."
+  ],
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "exact_delta_accepted_existing_proposal": {
+      "path": "/workspace/engineering/pr221-currente2c-Mac-Windows-original-producer-log-owned/canonical-original-platform-checkout-identity-proposed.md",
+      "bytes": 470,
+      "sha256": "74187436f50d80becea52d7679a6943085a950f6339dc4ce3a9fdc2c15ecf1de",
+      "mode": "0o400"
+    },
+    "durable_learning": "Authenticate each platform from its own original literal checkout and ordered commit tuple; workflow source/head labels and producer SUCCESS cannot replace actual checkout evidence or content/consumer gates.",
+    "evidence": "Verified Mac checkout107/build4455,4524,4639,5369; Windows checkout111/build669,740,854,1599; retained e650 commit tuple and two authenticated SUCCESS job rows.",
+    "stale_or_ambiguous_guidance_removed": "Linux producer proof does not establish other-platform checkout; API label is not actual checkout; builder hashes are not post-repair artifact bytes.",
+    "remaining_uncertainty": "No canonical file mutated here; six-line exact proposal accepted for root integration. Distribution/consumer/OAuth acceptance is separate and retained HOLD."
+  },
+  "upstream_disposition": "none",
+  "new_execution": "READ_ONLY_STDLIB_LOG_METADATA_HASH_PARSE; NO_TESTS_GATES_PRODUCT_IMPORTS_NATIVE_NETWORK_OR_SOURCE_MUTATIONS"
+}

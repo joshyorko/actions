@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "status": "ORIGINAL_CANVAS_ARTIFACT_ACQUISITION_OR_DATA_ADMISSION_FAILED",
+  "authorization": {
+    "path": "/workspace/engineering/pr282-current1299-one-original-Canvas-artifact/root-one-original-Canvas-artifact-authorization.json",
+    "bytes": 607,
+    "sha256": "6dcfc055cec1e24799973cb103c78a4c67d53853f24b17961224dabeba098708",
+    "mode": "0o600"
+  },
+  "original_returncode": 1,
+  "elapsed_seconds": 0.5666364259959664,
+  "original_zip": {
+    "path": "/workspace/engineering/pr282-current1299-one-original-Canvas-artifact/original-11708206027.zip",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mode": "0o600"
+  },
+  "private_stderr": {
+    "path": "/workspace/engineering/pr282-current1299-one-original-Canvas-artifact/original-acquisition.private.stderr",
+    "bytes": 668,
+    "sha256": "a51a06b69f259b7a2545fa341f76921014ae60b71c5cd946d0952d83d2490e38",
+    "mode": "0o600"
+  },
+  "error": {
+    "class": "AssertionError",
+    "message": "original_API_nonzero"
+  },
+  "verified_members": [],
+  "no_retry_or_product_execution": true,
+  "wire_redirect_URL": "NOT_EXPOSED",
+  "actual_functionality": "PENDING_INDEPENDENT_ORIGINAL_RECEIPT_REVIEW"
+}

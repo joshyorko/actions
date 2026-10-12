@@ -1,0 +1,1032 @@
+{
+  "all_local_bindings": [
+    {
+      "bytes": 67325,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/FROZEN-stop-attempt-final-reserve-v2-ROOT-config-NOTRUN.json",
+      "sha256": "213e57708b87a6fc08d616a16541f7a782f1eb4af9d0d80fa7c41c8c1c1e534b"
+    },
+    {
+      "bytes": 14343,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/ROOT-final-reserve-v2-distinct-release-and-exact-argv-contract-NOTRUN.json",
+      "sha256": "35554b406aca624d4c4d78eb782379c0d3802dd1c5a3938c8306083ed086092b"
+    },
+    {
+      "bytes": 1298,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/canonical-final-process-launch-shared-deadline-reserve-proposed.json",
+      "sha256": "cf56695b6a4f7aa6edbca4de9da5cec7627d1a88bb819aeb24f39bacb8bf1fb9"
+    },
+    {
+      "bytes": 2349,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/exact-final-prelaunch-reserve-and-named-address-common-only.patch",
+      "sha256": "274061f3c06974e3ab20972e07616ec72e7fe77076b34fc392a66c42a57ae7f8"
+    },
+    {
+      "bytes": 5064,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/exact-final-prelaunch-reserve-common-block-inverse-proof-NOTRUN.json",
+      "sha256": "9e313e85995268f01e77d79dff1c7f76ade20a17c1c5a70eba06646591f80c2d"
+    },
+    {
+      "bytes": 10049,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/freeze_named_final_prelaunch_reserve_v2_NOTRUN.py",
+      "sha256": "b1097782cbfb22cfd93b92ab587c91e790fcea7f11c534468a25ccc094626fdb"
+    },
+    {
+      "bytes": 3690,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/run_stop_attempt_external_parent_v1_NOTRUN.py",
+      "sha256": "759c172d02b4b1d417b701bfa464ef2b5ce3e7aabba13a083947003c2ff03a28"
+    },
+    {
+      "bytes": 3243,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/run_stop_attempt_inner_caller_v1_NOTRUN.py",
+      "sha256": "33685600cd45de01ad16744cc35d89f3b548015e9c840463fdb302769d01b57d"
+    },
+    {
+      "bytes": 9839,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/stop_attempt_caller_contract_v1_NOTRUN.py",
+      "sha256": "dd71f115af8690e7d721a7d8d88284b21f0a230a22af8894f1908471aed1cd1c"
+    }
+  ],
+  "all_original_bindings": [
+    {
+      "bytes": 27889,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/actual_transport_v8.py",
+      "sha256": "33dda17140ef749e22f086cc91b92ed8c3230fddfde8a4a369769e2183f695a1"
+    },
+    {
+      "bytes": 6228,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/owned_cache_policy_v8.py",
+      "sha256": "4ccac4e3bd2c1e91352ef4e647968b4ca61f8691e1fc0f41e72a128a2942c205"
+    },
+    {
+      "bytes": 1575,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/v9_entry_bootstrap.py",
+      "sha256": "d3957c2e216731abf596897fbf0838809129a571743510692f2509228e2c7288"
+    },
+    {
+      "bytes": 14600,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/cgroup_memory_reader_observer_v1_NOTRUN.py",
+      "sha256": "24e38634118730ba9d222179518d13818c094c5a6ccfd368afd56521e964d014"
+    },
+    {
+      "bytes": 3330,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/proposed_cgroup_memory_state_v1_NOTRUN.py",
+      "sha256": "d2b3e6684898ab1b64f84ac7712a1f2f355d7ea5d680eb6ded0699cc090f5260"
+    },
+    {
+      "bytes": 2985,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/test_proposed_cgroup_memory_state_NOTRUN.py",
+      "sha256": "3b3a417379f608b6a5917c7720c6e846352f88d30fda1273c301a7c5ced1a4cb"
+    },
+    {
+      "bytes": 12959,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/runner_contracts_v3.py",
+      "sha256": "cbae3bb074d3995153ea5e6b694e7f9e61c047c6aa511b682959a63fedf7b726"
+    },
+    {
+      "bytes": 765564,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+      "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25"
+    },
+    {
+      "bytes": 4632,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/owned_monitor_v1.py",
+      "sha256": "834a7fe402e34b170f414df5dfe79762c0b49ed311a6222ba2f7bca5d87020a5"
+    },
+    {
+      "bytes": 9657,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-control3-V8-original-import-failure-independent-review/OWNERFINAL-independent-original-current8d49-control3-V8-import-failure-and-retained-source-review.json",
+      "sha256": "044fe00499ada7e9c975ce3250295151bdfefb985652b72cede4225a69e1fdc4"
+    },
+    {
+      "bytes": 6858,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-control3-V9-independent-actual-review/OWNERFINAL-independent-original-current8d49-control3-V9-native-FAIL-STOP-review.json",
+      "sha256": "cb88815f6d1816ff7f8b5302420d69bd7cacb0d052fe2ba3c957ddad5e596168"
+    },
+    {
+      "bytes": 5250,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-original-mode-admission-failure-independent-review/OWNERFINAL-independent-original-memory17-managed-mode-admission-FAIL-and-source-preservation.json",
+      "sha256": "12177ef012b94dab8e9e658d488db0bb147d37b2d3bc26454147aabaff2541d7"
+    },
+    {
+      "bytes": 12879,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-managed700-once2-independent-ACTUAL-review/OWNERFINAL-independent-original-managed700-fresh-once2-memory17-ACTUAL-pure-controls-GO.json",
+      "sha256": "8c294e6731287ab8aa263a520be910915170cd0abafee4ceb79898852357d14e"
+    },
+    {
+      "bytes": 20115,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-independent-ACTUAL-review/OWNERFINAL-independent-original-current8d49-corrected-nine-once2-baseline-ACTUAL-review.json",
+      "sha256": "e54f84619b73c236a8038c5602b27cc6affef8e82bd0d3e535bb2537548a811d"
+    },
+    {
+      "bytes": 5522,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-known-nine18-original-ACTUALFAIL-independent-review/OWNERFINAL-independent-original-known-nine18-semantic-ACTUALFAIL-JUnit-protocol-review.json",
+      "sha256": "4e936c2ccb342701b271dd41dea2ae4e863da758e7ff2006ab0c375c6fa30f20"
+    },
+    {
+      "bytes": 5237,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-known-nine18-once2-independent-ACTUAL-review/OWNERFINAL-independent-original-known-nine18-once2-source-only-ACTUAL-GO.json",
+      "sha256": "60c3d5b8ec68e2b746f0be3ff6aa75e3c7401ed1bbee816e6b601c3738868c6f"
+    },
+    {
+      "bytes": 10394,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-independent-SOURCE-review/OWNERFINAL-independent-private-cgroup-reader-observer-SOURCE-and-prepared28-controls-GO.json",
+      "sha256": "dc37624bc1e47ad007320fb39a80e722128cd1d8acfcb99dc614add1552b0caa"
+    },
+    {
+      "bytes": 10560,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-reader28-independent-ACTUAL-review/OWNERFINAL-independent-original-current8d49-reader-observer28-ACTUAL-synthetic-controls-GO.json",
+      "sha256": "fcb6ab0604199980fa92ed237eaf837d9e31c84d7fef79c201f957cf945da19f"
+    },
+    {
+      "bytes": 2309,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-current8d49-control3-V8-original-outer-owned/OWNERFINAL-root-one-original-current8d49-control3-V8-outer-terminal.json",
+      "sha256": "ddc3f1b1fc0adba210ee984f8aa65d8901c879956f9326e5163fbfc4106e5deb"
+    },
+    {
+      "bytes": 5649,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-current8d49-control3-V9-original-outer-owned/OWNERFINAL-root-one-original-current8d49-control3-V9-outer-terminal.json",
+      "sha256": "895f8bc537523ebc1ee3f4feb685a9ebe5835a529aeb87ab95c67e2b31457b68"
+    },
+    {
+      "bytes": 13123,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-current8d49-memory-native-composition-SOURCE-PREPARED-NOTRUN/freeze_memory_composition_SOURCE_packet_NOTRUN.py",
+      "sha256": "dc2b899633a332dde9ef2c9e9d07f1f367afee7499a89dfe47548619270639ba"
+    },
+    {
+      "bytes": 9637,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-native-composition-SOURCE-PREPARED-NOTRUN/native_memory_entry_v1_NOTRUN.py",
+      "sha256": "ae5e2220a33a8680dce308f1da119b79e856944bbbf45e101cf353e07589e620"
+    },
+    {
+      "bytes": 6481,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-native-composition-SOURCE-PREPARED-NOTRUN/native_memory_sampler_overlay_v1_NOTRUN.py",
+      "sha256": "1d5bf618844a4ca501da8f86299b7e08e7af4af50fac04c5dff4381555eef9e3"
+    },
+    {
+      "bytes": 6355,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-native-composition-SOURCE-PREPARED-NOTRUN/prospective-ROOT-control3-root5-memory-profile-constructor-proposal-UNEXECUTABLE.json",
+      "sha256": "6abe2c8410c17d155faf2cffd8b67fad774a2d0b5b012cdc776fd31286a8bacb"
+    },
+    {
+      "bytes": 9635,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-native-composition-SOURCE-PREPARED-NOTRUN/static-original-AST-source-preservation-and-composition-control-map-NOTRUN.json",
+      "sha256": "eb456e47cb6740be6da07e2743b4bf53fb28ff95fd7b043af811077b6afc5b98"
+    },
+    {
+      "bytes": 12606,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-native-composition-SOURCE-PREPARED-NOTRUN/test_native_memory_composition_v1_NOTRUN.py",
+      "sha256": "230c499f180e4c7537ee0482b8aba0fea16eff204735db55f5612a09e8a5563b"
+    },
+    {
+      "bytes": 11993,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-native-composition-SOURCE-PREPARED-NOTRUN/OWNERFINAL-current8d49-native-memory-one-sampler-overlay-entry-and-composition-controls-SOURCE_PREPARED_NOTRUN.json",
+      "sha256": "7246751635ddddb6866adf9506032b7e95a81960628bef432509f16240fc347b"
+    },
+    {
+      "bytes": 6139,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-composition-independent-SOURCE-review/OWNERFINAL-independent-current8d49-native-memory-composition-SOURCE-HOLD.json",
+      "sha256": "d9f03ce06f0032dfdc922bcc083c7bd9c40a2c1b7f73e0c79cfc24be3340e077"
+    },
+    {
+      "bytes": 1908,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-composition-independent-SOURCE-review/minimum-delegated-attempt-latch-and-baseline-first-successor-controls-PROPOSAL-NOTAPPLIED.json",
+      "sha256": "de642078c749ef9a08c2022c663d47ccc9f9b10823986ea9e3c3cec4bae4334f"
+    },
+    {
+      "bytes": 6688,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/native_memory_sampler_overlay_v1_NOTRUN.py",
+      "sha256": "b76adb2e93b92be0ae5ddab794f0d90078649a95a271c00d79fb95ed35d34d5f"
+    },
+    {
+      "bytes": 9632,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/native_memory_entry_v1_NOTRUN.py",
+      "sha256": "312919ce452670f4ab3e03c432b2dd21495e70a278a1f28376c7c912237caf67"
+    },
+    {
+      "bytes": 17058,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/test_native_memory_composition_v1_NOTRUN.py",
+      "sha256": "3ee4c56dc8145cdf48bc2c2be4a57a1aec67d0160703d014a192a68ae69aee36"
+    },
+    {
+      "bytes": 6301,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/pure_stop_attempt_control_phase_NOTRUN.py",
+      "sha256": "db6542cbff2210516ba2bce7383f0c6e4e41af23709f1765136c4d2281bacbb1"
+    },
+    {
+      "bytes": 23762,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/FROZEN-stop-attempt-composition-pure-control-config-NOTRUN.json",
+      "sha256": "59f02612d2660b793ead8c5c945af3d648e8427f6f3a30e872f0272113bf63ff"
+    },
+    {
+      "bytes": 738,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/canonical-preauthorization-record-versus-delegated-stop-attempt-proposed.md",
+      "sha256": "7df23f07f58f041ed6519eac441a7fd9c586f8bea2f4d0757d92c4cea5c82f7a"
+    },
+    {
+      "bytes": 14368,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/freeze_stop_attempt_source_and_pure_plan_NOTRUN.py",
+      "sha256": "8e37d71713a70dc671fcbe89bfd3f253935e77965b9e70d2b3c7a72389bbf8de"
+    },
+    {
+      "bytes": 14404,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/freeze_stop_attempt_source_and_pure_plan_testmethod_scope_v2_NOTRUN.py",
+      "sha256": "3f6ab5fb300c5157f44ee478a6c3f72008df4e0a51fb37c302a8e0d0a465f689"
+    },
+    {
+      "bytes": 5796,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/minimum-current8d49-stop-attempt-pure-ROOT-phase-contract-NOTRUN.json",
+      "sha256": "b38ae9eff71cdeee9f7a0dbf4fe5d401fba5592c566f961419b6166822966e00"
+    },
+    {
+      "bytes": 398,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/original-static-nested-function-count-inspector-FAIL-NOTRUN.json",
+      "sha256": "957b6579c69427c56526270adc7da19b042917a18258fdeca49c236f952d1bf5"
+    },
+    {
+      "bytes": 7090,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/prospective-control3-root5-stop-attempt-successor-profile-proposal-UNEXECUTABLE.json",
+      "sha256": "4b8193328915a1322dab65ca3929b723e9b98e82223726419f82059be94d00e9"
+    },
+    {
+      "bytes": 3064,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/static-exact-latch-successor-AST-old16-and-newfour-control-plan-proof-NOTRUN.json",
+      "sha256": "d583e486d0b606c4f97f49ddb35b1a79eb0ac484abcfb67dede2843938d8cf5c"
+    },
+    {
+      "bytes": 900,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/canonical-shared-cgroup-headroom-vs-filesystem-capacity-proposed.md",
+      "sha256": "8c28fc2596c6fdfc607dd35a17b3462ad217ba97670b61222393dc504861d896"
+    },
+    {
+      "bytes": 742,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-memory17-managed700-once2-reviewed-original-outer/OWNERFINAL-root-one-original-reviewed-managed700-once2-memory17-outer.json",
+      "sha256": "421227a4e2eb8e8393426ecec757e3041f54112838d24abe7bddc5835e569bc8"
+    },
+    {
+      "bytes": 3719,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-memory17-pure-controls-20261011-2/junit.xml",
+      "sha256": "c198d5a004538f99f4cdf71f0769ad744891cc5cd864cddbe4ce7e92b1e5d76f"
+    },
+    {
+      "bytes": 4053,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/bounded-private-source-integration-and-future-pure-command-contract-NOTRUN.json",
+      "sha256": "9c5181a6a032ce053e540c779732ca6ee1f961be0ffd7f2076617db08177b099"
+    },
+    {
+      "bytes": 1225,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/canonical-self-cgroup-identity-and-bounded-observer-proposed.md",
+      "sha256": "d6c06054276f3cf45054eecf523d7c618dc8498e0334cc9d55257fc449510380"
+    },
+    {
+      "bytes": 10667,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/freeze_private_memory_source_packet_NOTRUN.py",
+      "sha256": "c678044b20fa43c31f4cca5dad4a9d9030dcb5b2bf3cfb192d435ba57cbaab2e"
+    },
+    {
+      "bytes": 10865,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/freeze_private_memory_source_packet_join_scope_v2_NOTRUN.py",
+      "sha256": "1fb648e9cb1f17a40c47e4b0c8aed828c4e5a6c6a7d1bf7bf8fc86e9c48b27e9"
+    },
+    {
+      "bytes": 5321,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/immutable-static-reader-observer-source-control-and-parent-binding-proof-NOTRUN.json",
+      "sha256": "c459f8294a62955c97df805ee03371afbebd954cd37c45a2982d96d69a40ed7b"
+    },
+    {
+      "bytes": 364,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/original-static-join-name-inspector-FAIL-NOTRUN.json",
+      "sha256": "213ba2a20d652fab92050f5adc9c6ac2fd6467bc344febdb7e0f2445fb501334"
+    },
+    {
+      "bytes": 14377,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/test_cgroup_memory_reader_observer_v1_NOTRUN.py",
+      "sha256": "449298ef47661a81bd46ea2c31ecd6644d559844084dc121e70d0da5870ee35d"
+    },
+    {
+      "bytes": 8304,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/OWNERFINAL-private-current8d49-cgroup-finite-reader-owned-observer-and-28-controls-SOURCE_PREPARED_NOTRUN.json",
+      "sha256": "1cb62155075c07714bc8eb17dec5ad082bc4663e3d7269797f184fde9ec02a29"
+    },
+    {
+      "bytes": 12144,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-managed-primary700-once2-preexecution-NOTRUN/FROZEN-memory17-managed-primary700-once2-pure-config-NOTRUN.json",
+      "sha256": "5802926af2eb9a0bc469f273aab0277a70ec1500b5e80372493b5ce0c09798ac"
+    },
+    {
+      "bytes": 7361,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/root_release_one_memory17_pure_controls_NOTRUN.py",
+      "sha256": "68d230410d0ff42f3c65dea09c0cd5e5b191a24e70ad3871efbb5dd2bf8201b0"
+    },
+    {
+      "bytes": 12996,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/frozen-current8d49-source-LIGHT-inputs-v3.json",
+      "sha256": "81f52920b50e67619b3bb418a7c1034a2106ec52f4badd71b9d85e29b7376820"
+    },
+    {
+      "bytes": 987,
+      "mode": "0o600",
+      "path": "/workspace/actions-cloud/activate.sh",
+      "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+    },
+    {
+      "bytes": 444,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/initial-metadata-construction-PATH-variable-expression-FAIL.json",
+      "sha256": "8f796eb0414c996936abf5bacd6da17778e9fb4f371089aed76a81fc71c1ad5d"
+    },
+    {
+      "bytes": 4690,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/readonly_current_input_guard_v9.py",
+      "sha256": "480be06317562b7e3a5c98a5d794bb5d2a33e7fa6186fe707823ecb1cc583626"
+    },
+    {
+      "bytes": 6603,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-next-native-memory-plan-independent-review/OWNERFINAL-independent-memory17-prepared-source-and-executable-HOLD-v2.json",
+      "sha256": "d7068aab83b03c9495e5bd80a93ca750b7d66df818fee93869b5b52b3fd66ece"
+    },
+    {
+      "bytes": 5944,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-control3-V9-original-publish-failure-diagnosis-owned/OWNERFINAL-original-current8d49-control3-V9-publication-failure-and-secondary-dependency-only.json",
+      "sha256": "feef7c4b07db2d3a778622dc1acf3eec00a8225c42b38aa00721926fb273410b"
+    },
+    {
+      "bytes": 8538,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-managed-primary700-once2-preexecution-NOTRUN/root_release_one_memory17_managed_primary700_once2_NOTRUN.py",
+      "sha256": "a91ec3fbe4aef23f49b6178459b87d1b5e72d18f69214a8c2f129af5eeeb486b"
+    },
+    {
+      "bytes": 7739,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/FROZEN-memory17-pure-control-config-NOTRUN-v2.json",
+      "sha256": "e90827940b61e3ddb906ff0576a2ea37cd6ee7297986cc78c62844f5a888b402"
+    },
+    {
+      "bytes": 8242,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/OWNERFINAL-memory17-concrete-pure-control-launcher-config-and-root-once-preexecution-NOTRUN-v2.json",
+      "sha256": "56d2b731ffcd6bcb3ebf5d752086e6bc30249f423279964d64271f8c8deb676f"
+    },
+    {
+      "bytes": 4021,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-concrete-independent-preexecution-review/OWNERFINAL-independent-memory17-concrete-config-launcher-and-ROOT-preflight-PREEXEC-review.json",
+      "sha256": "710c0ae33ff6c523ca5aae04f674f1e3a9d8df97883bc22549d7d53aab9deaa8"
+    },
+    {
+      "bytes": 727,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-memory17-reviewed-original-outer/OWNERFINAL-root-one-original-reviewed-memory17-outer.json",
+      "sha256": "277e37a3be16f8bd6c5bd8945c656bec37284ae7e2cda396b20a3142c809c650"
+    },
+    {
+      "bytes": 836,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-memory17-pure-controls-release.json",
+      "sha256": "5afbfc6f31f6b063e7cd201a79ee2fe88834c16e3333abbefbbcd58f08ac8375"
+    },
+    {
+      "bytes": 1069,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-original-mode-admission-failure-independent-review/canonical-measured-per-path-binary-mode-before-delegation-proposed.patch",
+      "sha256": "15ca1e894890c2d2bd383139088cf3946a3e4c89e30e2a82cd3e96b4b48e5e1b"
+    },
+    {
+      "bytes": 19650,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/FROZEN-reader28-concrete-source-control-config-NOTRUN.json",
+      "sha256": "4cd8f74435137100296e44aedfb54defd86a1bf70f1c42060242bd9820c65463"
+    },
+    {
+      "bytes": 11048,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/run_root_reader28_pure_once_NOTRUN.py",
+      "sha256": "eb3a26634d2695488c64597aa13451098aea7445e3fc955886e29760b7cc4a08"
+    },
+    {
+      "bytes": 10628,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-default-descriptor-walk-controls-PREPARED-NOTRUN/OWNERFINAL-current8d49-real-default-descriptor-walk-35-controls-SOURCE-PREPARED-NOTRUN.json",
+      "sha256": "e7954c3bc19374991213dd70fff3e64d2f7971e84c1c74fa573aee75f16ec7d5"
+    },
+    {
+      "bytes": 10081,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-default-backend35-independent-SOURCE-review/OWNERFINAL-independent-current8d49-default-descriptor19functions35cases-SOURCE-prepared-GO.json",
+      "sha256": "d3986dbc2335d3655fc204e4702c0dd7a715793dc91072f928cc2752e076506f"
+    },
+    {
+      "bytes": 4503,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-concrete-PREEXEC-NOTRUN/expected-defaultbackend35-source-derived-cases-NOTRUN.json",
+      "sha256": "c9362f6972c03c497dc090867880125253d1f7d5bcbedb646a36aeb98e560470"
+    },
+    {
+      "bytes": 15829,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-default-descriptor-walk-controls-PREPARED-NOTRUN/test_default_cgroup_descriptor_walk_NOTRUN.py",
+      "sha256": "e5744b96096a749ad1b0287743cf95fcf98a6848c5b8d82f9434a1fba6fbe09f"
+    },
+    {
+      "bytes": 4759,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-default-descriptor-walk-controls-PREPARED-NOTRUN/static-default-walk-seam-case-and-preservation-proof-NOTRUN.json",
+      "sha256": "d60309596392c2ff1e27a49fd9038f2908d1afdf6227901feeadb3b1a09f98aa"
+    },
+    {
+      "bytes": 2579,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-default-descriptor-walk-controls-PREPARED-NOTRUN/minimal-future-default-descriptor-walk-pure-command-contract-NOTRUN.json",
+      "sha256": "0fc9c357e634f72f161d5f22e6e1f1106990a9b89c0298bb3a78fa2d2960d54b"
+    },
+    {
+      "bytes": 951,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-default-descriptor-walk-controls-PREPARED-NOTRUN/canonical-default-descriptor-walk-control-coverage-proposed.md",
+      "sha256": "8366c367bbb81a857cfcc8d55863d8a193d0bc42a705ee0e3e2f751c6c74efa3"
+    },
+    {
+      "bytes": 476,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-default-descriptor-walk-controls-PREPARED-NOTRUN/original-initial-owned-reader-filename-inspection-FAIL-NOTRUN.json",
+      "sha256": "883d2ce77d35b845aa7574f2eb01c4d2f8124ef03c9e65011ecdcefc60ecd276"
+    },
+    {
+      "bytes": 10662,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/.venv/lib/python3.12/site-packages/_pytest/compat.py",
+      "sha256": "2f941a4e516816bced282a7b9e45c076729d5552a6443369184d5219ae8dcc8b"
+    },
+    {
+      "bytes": 66627,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/.venv/lib/python3.12/site-packages/_pytest/python.py",
+      "sha256": "ebf31a8738065ad418c354ceeed99562926055587c664501e9f8d194e4078202"
+    },
+    {
+      "bytes": 24139,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-concrete-PREEXEC-NOTRUN/FROZEN-defaultbackend35-concrete-config-NOTRUN.json",
+      "sha256": "727141f5bf2e87ffad42a16e4e6fb352c807c45e06be60f32af494ecc05ac5f6"
+    },
+    {
+      "bytes": 12288,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-concrete-PREEXEC-NOTRUN/run_root_defaultbackend35_pure_once_NOTRUN.py",
+      "sha256": "f49f82bbf308d7d9a00ec5cf4de67af2e9f8c52a63a405954c93cc21462c9509"
+    },
+    {
+      "bytes": 21758,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-concrete-PREEXEC-NOTRUN/OWNERFINAL-defaultbackend35-concrete-managed-pure-PREEXEC-NOTRUN.json",
+      "sha256": "4514bedc74aad1c01ce891338c2b991ddc420331addce205e05f34102e3340e3"
+    },
+    {
+      "bytes": 3875,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-original-ACTUALFAIL-independent-diagnosis/OWNERFINAL-independent-original-defaultbackend35-ACTUALFAIL-and-typed-marker-proposal.json",
+      "sha256": "a4bca9580479e17321d29aa721df8f3faade600f422006b0c20c6d089761b3a8"
+    },
+    {
+      "bytes": 22446,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-original-ACTUALFAIL-independent-diagnosis/private-independent-original-backend35-descriptor-audit-and-emitter-failure-proof.json",
+      "sha256": "049a090271c6ed40900eea22b453771b6612b68c82a1403ffd2f04cabd665e2c"
+    },
+    {
+      "bytes": 1810,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-original-ACTUALFAIL-independent-diagnosis/minimal-typed-marker-and-owned-descriptor-state-successor-PROPOSAL-NOTAPPLIED.json",
+      "sha256": "a6f9fd07b0e95426774277a0eda79f3119e785f0b24c81d6359bb12b4ffd97ba"
+    },
+    {
+      "bytes": 5385,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-1/OWNERFINAL-root-one-original-defaultbackend35-pure-controls.json",
+      "sha256": "0a39cd8b1612be2daae1fcbbd9734b0bb75c7d3018e3c12fb9e9f2b6d453bea6"
+    },
+    {
+      "bytes": 833,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-defaultbackend35-reviewed-original-outer-once/OWNERFINAL-root-one-original-reviewed-defaultbackend35-outer.json",
+      "sha256": "e1d44c6e5c4d2b8a7a917d381fd80ef1c431752dc5d779684142931248878504"
+    },
+    {
+      "bytes": 11211,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-defaultbackend35-independent-PREEXEC-review/OWNERFINAL-independent-current8d49-defaultbackend35-concrete-PREEXECUTION-GO.json",
+      "sha256": "f458c9cbf1389310803535bc033316d7fee06d3f1aa7cf2275bbdd0d1cfb0abb"
+    },
+    {
+      "bytes": 1961,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-defaultbackend35-pure-controls-release.json",
+      "sha256": "27e254aed07d3a8ec222e8ea30689016c3dc1f0b4328e1d7ba86773568dce8c4"
+    },
+    {
+      "bytes": 11017,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-1/junit.xml",
+      "sha256": "ed7306a17a64b6750ed4dab6c6d0bb6a77e2e501783798102a4df036a52274af"
+    },
+    {
+      "bytes": 1532059,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-1/logger/output.robolog",
+      "sha256": "dc0e5e6a20e719d54cc38b4efaa6cca20a3cf8305aac2840bd9bc3bf310c1f51"
+    },
+    {
+      "bytes": 116,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-1/original-primary-failure.private.json",
+      "sha256": "0df609e72bba38bbc41f269e86a6f752000e89a657a4018b0a7fbf6027ec07b5"
+    },
+    {
+      "bytes": 61,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-1/always-post/original.stdout.private",
+      "sha256": "91b59c9cc5c2955da0d10688a4fe9a3e763e59a1bb1130068b050a933903b853"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-1/always-post/original.stderr.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 61,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-1/before/original.stdout.private",
+      "sha256": "91b59c9cc5c2955da0d10688a4fe9a3e763e59a1bb1130068b050a933903b853"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-1/before/original.stderr.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 19642,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-1/primary/original.stdout.private",
+      "sha256": "a65ab6e293e782d9f0d1b77eaafbb1f8b79f11d8a6b5429bef0a264c3c22ce29"
+    },
+    {
+      "bytes": 58727,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-1/primary/original.stderr.private",
+      "sha256": "e8c674f11924c2f209ec04ecc2d4b71c30486017a641493f7030813c83629d65"
+    },
+    {
+      "bytes": 16505,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-typed-oracle-once2-PREEXEC-NOTRUN/test_default_cgroup_descriptor_walk_NOTRUN.py",
+      "sha256": "cf43fd5b5774ab61c272dc17acd9b95841a0fcd663dd56947c12c9c8f370b307"
+    },
+    {
+      "bytes": 1395,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-typed-oracle-once2-PREEXEC-NOTRUN/exact-one-control-typed-marker-traceback-posterior-successor.patch",
+      "sha256": "08f185422b0833041bb88f244b0c14e8a4f7753a9fc73c189abe0762c63a8ec0"
+    },
+    {
+      "bytes": 3311,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-typed-oracle-once2-PREEXEC-NOTRUN/typed-oracle-only-source-delta-and-sensitivity-contract-NOTRUN.json",
+      "sha256": "8456e2c7b458cabaebab581623ca79c7bec4d1ad47877eee9ed477f3d5e5efe8"
+    },
+    {
+      "bytes": 31106,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-typed-oracle-once2-PREEXEC-NOTRUN/FROZEN-defaultbackend35-typed-oracle-once2-config-NOTRUN.json",
+      "sha256": "3601150224c4408a49124c9b7ffcc7f02a1669510d452ba680f9676f1f87ec2e"
+    },
+    {
+      "bytes": 5610,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-typed-oracle-once2-PREEXEC-NOTRUN/ROOT-distinct-typed-oracle-once2-release-and-concrete-command-contract-NOTRUN.json",
+      "sha256": "408d131738f58673eb60ff3a25ce1a00b96f3ef6c51ca1ed5e0bd4f4ef445aef"
+    },
+    {
+      "bytes": 10852,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-defaultbackend35-typed-oracle-once2-PREEXEC-NOTRUN/prepare_typed_oracle_once2_packet_NOTRUN.py",
+      "sha256": "665875c4af7481d6168048781d69ec50bedbdcd3febab7510251759aec0ae52a"
+    },
+    {
+      "bytes": 12437,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-typed-oracle-once2-PREEXEC-NOTRUN/run_root_defaultbackend35_typed_oracle_once2_NOTRUN.py",
+      "sha256": "960bf48f4ad97c6b7020704802cb6324f269485eac1fb17ce48e196eb996d2c6"
+    },
+    {
+      "bytes": 27693,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-typed-oracle-once2-PREEXEC-NOTRUN/OWNERFINAL-defaultbackend35-typed-oracle-once2-SOURCE-and-PREEXEC-NOTRUN.json",
+      "sha256": "92691f49c6d85392c4230c5d32b463e1ae60a80786a88197974d0b8d376d428b"
+    },
+    {
+      "bytes": 5464,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-typed-oracle-once2-independent-PREEXEC-review/OWNERFINAL-independent-backend35-typed-oracle-once2-SOURCE-GO-JUnit-classname-PREEXEC-HOLD.json",
+      "sha256": "e30e7d5b4f687beaf894cd4c504863bb2dc8ceb3610d9872a76adffd1c53e3fd"
+    },
+    {
+      "bytes": 3992,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-typed-oracle-once2-independent-PREEXEC-review/private-independent-exact-typed-oracle-and-JUnit-classname-source-protocol-proof.json",
+      "sha256": "a9971a700dbab102437687636bc12d7987d25c1c88649e4b33626ab1d4a9252d"
+    },
+    {
+      "bytes": 1749,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-typed-oracle-once2-independent-PREEXEC-review/minimal-exact-rootdir-test-address-JUnit-classname-successor-PROPOSAL-NOTAPPLIED.json",
+      "sha256": "7bef00347ae448db4427511e88f452b4df0bffd35801a2366896848e04b5eb0f"
+    },
+    {
+      "bytes": 2138,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/original-producer-rootdir-JUnit-classname-stdout-address-data-proof-NOEXEC.json",
+      "sha256": "2221ebc78efb9e957e36d5718394571da6061c2427dbca2903c94c0786fbc95a"
+    },
+    {
+      "bytes": 2070,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/exact-census-binding-only-AST-and-negative-contract-NOTRUN.json",
+      "sha256": "67993f66df265f6181fa349b25412de8305c3e323cea436b8ad4f179393129a1"
+    },
+    {
+      "bytes": 4486,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/exact-census-launcher-only-delta.patch",
+      "sha256": "223bc2c860a5e764d5a9abcc7b6c853026efa8ba09b74bb7396254b9787361e3"
+    },
+    {
+      "bytes": 19413,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/OWNERFINAL-current8d49-memory-stop-attempt-latch-successor-SOURCE-and-pure-phase-preparation-NOTRUN.json",
+      "sha256": "1482d5e23f66e0e7639659deb49b0f533df75c83cc9bfd0dd3fd0d6dcd86fb9d"
+    },
+    {
+      "bytes": 4630,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-stop-attempt-independent-SOURCE-and-phase-PREEXEC-review/OWNERFINAL-independent-current8d49-stop-attempt-composition-SOURCE-GO-NOTEXECUTED.json",
+      "sha256": "cd5ca803945f30b806e255066cf353ff2f3342efc5f2411d9aeca2343ab0bae2"
+    },
+    {
+      "bytes": 2904,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-stop-attempt-independent-SOURCE-and-phase-PREEXEC-review/OWNERFINAL-independent-stop-attempt-PURE-PREEXEC-HOLD-ROOTcaller-ABSENT.json",
+      "sha256": "483de1234258df7b6f66993c53a0b0a088b31bd9f6e6f89da13eb13eecdfb5b4"
+    },
+    {
+      "bytes": 35851,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/FROZEN-defaultbackend35-once2-exact-census-config-NOTRUN.json",
+      "sha256": "7021f53c12b5392ffe5cf14da7915f25188c68e6d5a9a3b07458b588c4b527fa"
+    },
+    {
+      "bytes": 12589,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/run_root_defaultbackend35_once2_exact_census_NOTRUN.py",
+      "sha256": "4d52c52e806266a7b399e4d24671bc500b4aa7d98c334192fa16c30ed139f4d9"
+    },
+    {
+      "bytes": 2026,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-defaultbackend35-once2-exact-census-release.json",
+      "sha256": "f9079a6dfb8e234e4976d1a3feb32d88be9f3ff9ba6c32bc3a6d43d5cfecbf02"
+    },
+    {
+      "bytes": 11606,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-independent-PREEXEC-review/OWNERFINAL-independent-defaultbackend35-once2-exact-census-SOURCE-PREEXEC-GO.json",
+      "sha256": "b309b76054718d5deecce80b482f012b0ebbf9f37bdb2ccf42673dbac3758b3e"
+    },
+    {
+      "bytes": 5619,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-independent-ACTUAL-review/OWNERFINAL-independent-original-defaultbackend35-once2-exact-census-ACTUAL-PURE-GO.json",
+      "sha256": "232365377184c5e9534ebf13eb57e6859a2ed33a3c0c58fd66611546089df60f"
+    },
+    {
+      "bytes": 63339,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-stop-attempt-concrete-ROOT-caller-PREEXEC-NOTRUN/FROZEN-stop-attempt-concrete-ROOT-config-NOTRUN.json",
+      "sha256": "1fac2017e9ec9a25fab06b7d0d236e76c9c3a618ccc282b40710cadebd222315"
+    },
+    {
+      "bytes": 13740,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-stop-attempt-concrete-ROOT-caller-PREEXEC-NOTRUN/ROOT-distinct-stop-attempt-concrete-caller-release-and-argv-contract-NOTRUN.json",
+      "sha256": "6e9e83cc7c160299d29c1f5af220d4fe7a0a8551d5327a3c45cc0306db9274c5"
+    },
+    {
+      "bytes": 13989,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-stop-attempt-concrete-ROOT-caller-PREEXEC-NOTRUN/freeze_concrete_stop_attempt_ROOT_packet_NOTRUN.py",
+      "sha256": "81c0dbc45ea5359fab0f63bf02e243292c96625ca3faf7684a85ff4ffc3df7be"
+    },
+    {
+      "bytes": 3690,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-stop-attempt-concrete-ROOT-caller-PREEXEC-NOTRUN/run_stop_attempt_external_parent_v1_NOTRUN.py",
+      "sha256": "759c172d02b4b1d417b701bfa464ef2b5ce3e7aabba13a083947003c2ff03a28"
+    },
+    {
+      "bytes": 3243,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-stop-attempt-concrete-ROOT-caller-PREEXEC-NOTRUN/run_stop_attempt_inner_caller_v1_NOTRUN.py",
+      "sha256": "33685600cd45de01ad16744cc35d89f3b548015e9c840463fdb302769d01b57d"
+    },
+    {
+      "bytes": 5415,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-stop-attempt-concrete-ROOT-caller-PREEXEC-NOTRUN/static-exact-concrete-caller-command-deadline-and-input-closure-NOTRUN.json",
+      "sha256": "9f04dae27e23500e29aef15385d15605789351104b76dc6ccb5a909499cd86ac"
+    },
+    {
+      "bytes": 9632,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-stop-attempt-concrete-ROOT-caller-PREEXEC-NOTRUN/stop_attempt_caller_contract_v1_NOTRUN.py",
+      "sha256": "3e79c2c2c2f8aed26484c8580805197902325b8726037684041a4d7c4699d200"
+    },
+    {
+      "bytes": 45175,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-stop-attempt-concrete-ROOT-caller-PREEXEC-NOTRUN/OWNERFINAL-stop-attempt-concrete-inner-external-parent-PREEXEC-NOTRUN.json",
+      "sha256": "9fd59226cf8ac1a5d3f7e084010acf39f72fdc9b3224062b0f9cd17e2e098ff0"
+    },
+    {
+      "bytes": 9120,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-stop-attempt-concrete-caller-independent-PREEXEC-review/OWNERFINAL-independent-original-stop-attempt-concrete-caller-PREEXEC-shared-deadline-HOLD.json",
+      "sha256": "532eae986a87ba8a1597444af6c5d464f216d3777c6fac4b21bbfcce8aba0a59"
+    },
+    {
+      "bytes": 5064,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/exact-final-prelaunch-reserve-common-block-inverse-proof-NOTRUN.json",
+      "sha256": "9e313e85995268f01e77d79dff1c7f76ade20a17c1c5a70eba06646591f80c2d"
+    },
+    {
+      "bytes": 2349,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/exact-final-prelaunch-reserve-and-named-address-common-only.patch",
+      "sha256": "274061f3c06974e3ab20972e07616ec72e7fe77076b34fc392a66c42a57ae7f8"
+    }
+  ],
+  "bounds": {
+    "ROOT_KILL": 10,
+    "ROOT_outer_TERM": 1200,
+    "ROOT_parent": 1230,
+    "dynamic_TERM": "min120(remaining-15) with10KILL+5fallbackreserve",
+    "dynamic_parent": "min135(remaining) rechecked immediately beforePopen; no newstage onexhaustion",
+    "external_before_KILL": 10,
+    "external_before_TERM": 120,
+    "external_before_parent": 135,
+    "external_fallback_sum": 1200,
+    "external_post_KILL": 10,
+    "external_post_TERM": 120,
+    "external_post_parent": 135,
+    "inner_KILL": 10,
+    "inner_TERM": 900,
+    "inner_parent": 930,
+    "inner_reserved_alwayspost_parent": 135,
+    "inner_shared_deadline_enforced": true,
+    "inner_shared_primary_seconds": 765,
+    "minimum_new_stage_remaining": 15,
+    "nominal_KILL": 10,
+    "nominal_each_guard_and_phase_TERM": 120,
+    "nominal_parent": 135,
+    "uncapped_inner_nominal_fallback_sum": 1215
+  },
+  "captured": "2026-10-11T23:07:28.450656+00:00",
+  "config_binding": {
+    "bytes": 67325,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/FROZEN-stop-attempt-final-reserve-v2-ROOT-config-NOTRUN.json",
+    "sha256": "213e57708b87a6fc08d616a16541f7a782f1eb4af9d0d80fa7c41c8c1c1e534b"
+  },
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "durable_learning": "Use one final fresh launch-boundary remainder for both selectedtimeouttoken andparentfallback; refuse stages without15s reservedKILL/fallback afteroutputsetup.",
+    "evidence": [
+      {
+        "bytes": 9120,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-stop-attempt-concrete-caller-independent-PREEXEC-review/OWNERFINAL-independent-original-stop-attempt-concrete-caller-PREEXEC-shared-deadline-HOLD.json",
+        "sha256": "532eae986a87ba8a1597444af6c5d464f216d3777c6fac4b21bbfcce8aba0a59"
+      },
+      {
+        "bytes": 5064,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/exact-final-prelaunch-reserve-common-block-inverse-proof-NOTRUN.json",
+        "sha256": "9e313e85995268f01e77d79dff1c7f76ade20a17c1c5a70eba06646591f80c2d"
+      }
+    ],
+    "exact_delta": {
+      "bytes": 1298,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/canonical-final-process-launch-shared-deadline-reserve-proposed.json",
+      "sha256": "cf56695b6a4f7aa6edbca4de9da5cec7627d1a88bb819aeb24f39bacb8bf1fb9"
+    },
+    "remaining_uncertainty": "No control/gate/nativeexecution; staticarithmetic isnot runtime delaymeasurement.",
+    "stale_ambiguity": "Positive-only lastcheck and stale earlierTERM rejected under532HOLD; namedv2 correctsonlythatblock andaddresses."
+  },
+  "exact_delta_proof": {
+    "bytes": 5064,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/exact-final-prelaunch-reserve-common-block-inverse-proof-NOTRUN.json",
+    "sha256": "9e313e85995268f01e77d79dff1c7f76ade20a17c1c5a70eba06646591f80c2d"
+  },
+  "guard_only_authorization_unchanged": {
+    "dynamic_timeout_only": "Inner shared-primary calls may shorten only120s GNUtimeout token, reserving10sKILL+5s fallback; all other guard arguments frozen. External before/post remain120s/135.",
+    "exact_argv": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "120s",
+      "bash",
+      "-c",
+      "export PATH=\"/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\"; source /workspace/actions-cloud/activate.sh && exec \"$@\"",
+      "stop-attempt-guard-only",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/run_root_defaultbackend35_once2_exact_census_NOTRUN.py",
+      "--phase",
+      "guard",
+      "--config",
+      "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/FROZEN-defaultbackend35-once2-exact-census-config-NOTRUN.json",
+      "--config-sha256",
+      "7021f53c12b5392ffe5cf14da7915f25188c68e6d5a9a3b07458b588c4b527fa",
+      "--release",
+      "/workspace/engineering/root-one-defaultbackend35-once2-exact-census-release.json",
+      "--release-sha256",
+      "f9079a6dfb8e234e4976d1a3feb32d88be9f3ff9ba6c32bc3a6d43d5cfecbf02"
+    ],
+    "guard_ACTUAL_pure_review": {
+      "bytes": 5619,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-independent-ACTUAL-review/OWNERFINAL-independent-original-defaultbackend35-once2-exact-census-ACTUAL-PURE-GO.json",
+      "sha256": "232365377184c5e9534ebf13eb57e6859a2ed33a3c0c58fd66611546089df60f"
+    },
+    "guard_PREEXEC_review": {
+      "bytes": 11606,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-independent-PREEXEC-review/OWNERFINAL-independent-defaultbackend35-once2-exact-census-SOURCE-PREEXEC-GO.json",
+      "sha256": "b309b76054718d5deecce80b482f012b0ebbf9f37bdb2ccf42673dbac3758b3e"
+    },
+    "guard_config_binding": {
+      "bytes": 35851,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/FROZEN-defaultbackend35-once2-exact-census-config-NOTRUN.json",
+      "sha256": "7021f53c12b5392ffe5cf14da7915f25188c68e6d5a9a3b07458b588c4b527fa"
+    },
+    "guard_launcher_binding": {
+      "bytes": 12589,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/run_root_defaultbackend35_once2_exact_census_NOTRUN.py",
+      "sha256": "4d52c52e806266a7b399e4d24671bc500b4aa7d98c334192fa16c30ed139f4d9"
+    },
+    "historical_consumed_release": {
+      "bytes": 2026,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-defaultbackend35-once2-exact-census-release.json",
+      "sha256": "f9079a6dfb8e234e4976d1a3feb32d88be9f3ff9ba6c32bc3a6d43d5cfecbf02"
+    },
+    "permitted_phase": "guard",
+    "rerun35_or_native": false,
+    "role": "New ROOT release authorizes only identity guard reuse; old consumed release is historical admission identity, never a second35 launch grant.",
+    "schema": 1
+  },
+  "implementation_bindings": {
+    "caller_contract": {
+      "bytes": 9839,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/stop_attempt_caller_contract_v1_NOTRUN.py",
+      "sha256": "dd71f115af8690e7d721a7d8d88284b21f0a230a22af8894f1908471aed1cd1c"
+    },
+    "external_parent": {
+      "bytes": 3690,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/run_stop_attempt_external_parent_v1_NOTRUN.py",
+      "sha256": "759c172d02b4b1d417b701bfa464ef2b5ce3e7aabba13a083947003c2ff03a28"
+    },
+    "inner_caller": {
+      "bytes": 3243,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/run_stop_attempt_inner_caller_v1_NOTRUN.py",
+      "sha256": "33685600cd45de01ad16744cc35d89f3b548015e9c840463fdb302769d01b57d"
+    }
+  },
+  "original120_rows_plus_new_historical_bindings": 131,
+  "original_PREEXEC_HOLD": {
+    "bytes": 9120,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-stop-attempt-concrete-caller-independent-PREEXEC-review/OWNERFINAL-independent-original-stop-attempt-concrete-caller-PREEXEC-shared-deadline-HOLD.json",
+    "sha256": "532eae986a87ba8a1597444af6c5d464f216d3777c6fac4b21bbfcce8aba0a59"
+  },
+  "original_owner": {
+    "bytes": 45175,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-stop-attempt-concrete-ROOT-caller-PREEXEC-NOTRUN/OWNERFINAL-stop-attempt-concrete-inner-external-parent-PREEXEC-NOTRUN.json",
+    "sha256": "9fd59226cf8ac1a5d3f7e084010acf39f72fdc9b3224062b0f9cd17e2e098ff0"
+  },
+  "outputs_ROOTrelease": "ABSENT_NOT_CREATED",
+  "phase_config_helper_unchanged": [
+    {
+      "bytes": 23762,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/FROZEN-stop-attempt-composition-pure-control-config-NOTRUN.json",
+      "sha256": "59f02612d2660b793ead8c5c945af3d648e8427f6f3a30e872f0272113bf63ff"
+    },
+    {
+      "bytes": 6301,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/pure_stop_attempt_control_phase_NOTRUN.py",
+      "sha256": "db6542cbff2210516ba2bce7383f0c6e4e41af23709f1765136c4d2281bacbb1"
+    }
+  ],
+  "root_contract": {
+    "bytes": 14343,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/ROOT-final-reserve-v2-distinct-release-and-exact-argv-contract-NOTRUN.json",
+    "sha256": "35554b406aca624d4c4d78eb782379c0d3802dd1c5a3938c8306083ed086092b"
+  },
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_clean": true,
+  "source_count": 1440,
+  "status": "NAMED_FINAL_PRELAUNCH_RESERVE_V2_SOURCE_CONCRETE_PREEXEC_PREPARED_NOTRUN",
+  "tests_imports_cgroup_signals_native": "NOT_RUN",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none",
+  "writer_A": "RELEASED_AFTER_FREEZE"
+}

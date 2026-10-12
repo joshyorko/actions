@@ -1,0 +1,219 @@
+{
+  "cache_plan_sha256": "0b5809ae39cfe90caa67117a336b9deab8554cb380b38872f428ff7f47c12012",
+  "config_binding": {
+    "bytes": 760693,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/FROZEN-current8d49-control3-qualified-V8-config-v2.json",
+    "sha256": "a209cc117db4d17a7383ba519abdff064211960aa0b8a88ddf32569fef322f9f"
+  },
+  "config_sha256": "a209cc117db4d17a7383ba519abdff064211960aa0b8a88ddf32569fef322f9f",
+  "constructor_binding": {
+    "bytes": 13715,
+    "mode": "0o444",
+    "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/build_qualified_current8d49_config_v8_FINAL.py",
+    "sha256": "1992b7bc25799a0cdd0a9c203d531a0bdca1356ee4678a84c489eafe242e319c"
+  },
+  "current_source_FULL_independent": {
+    "bytes": 10038,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-current8d49-independent-SOURCEFULL-actual-review/OWNERFINAL-independent-current8d49-original-configured-SOURCEFULL-and-retained-ROOTpost-supplement-review.json",
+    "sha256": "073e235afffab50dee204bcaae236e77ceb8e23644db15a90a0e56d48dc8dca9"
+  },
+  "decision": "GO_CURRENT8D49_QUALIFIED_V8_CONTROL3_CONFIG_PREEXECUTION_DISTINCT_ROOT_ONE_CONDITIONAL",
+  "documentation_improvement": {
+    "additional_accepted_parent_post_env_delta": {
+      "bytes": 864,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-independent-SOURCEFULL-actual-review/canonical-independent-parent-readonly-post-environment-parity-proposed.patch",
+      "sha256": "76beb30f9cc657a37c2e5edc41a2465d12fa12a0c8304f573602086bfdea75b1"
+    },
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "disposition": "ACCEPT_EXACT9_LINE_d21d_HISTORICAL_PATH_SHA_LIVE_SEPARATION_OWNED_PYTEST_LOGGER_TEMPORAL_GUARD_AND5_LINE_76be_PARENT_ENV_PARITY_FOR_ROOT_CONTEXT_INTEGRATION; no cosmetic extra child.",
+    "evidence": "Installed log_pytest default ./output and explicit-option source; genuine fixture/loggerRED2 then51PASS with temporal9poisons;15 qualification poisonPASS; actual original1470/13 plus retainedROOTpostKeyError and separate environment-only postPASS.",
+    "exact_delta": {
+      "bytes": 772,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/canonical-private-actual-fixture-history-and-pytest-logger-proposed.patch",
+      "sha256": "d21d043bb7cfcdfa32a7e9edb5239c71a649918ed800202f378449bd0e159877"
+    },
+    "remaining_uncertainty": "Current native cache/lease/helper cleanup/version-specific functionality awaits real3 then5 then7276; compiled RCC3 modified source equivalence not established; private source/release gates retained.",
+    "stale_ambiguity_removed": "One binding per path; basetemp-only logging isolation; relabeling originalROOTpostFAIL or importing SOURCEFULL_TMPfloor into native policy."
+  },
+  "implementation_bindings": [
+    {
+      "bytes": 1444,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/managed_one_version_entry_v8.py",
+      "sha256": "f1ae7b01b9c01d6391fa46d7cef1cbaf6630dd0bd98698df400f677617f23b6d"
+    },
+    {
+      "bytes": 5013,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/launch_one_version_v8.py",
+      "sha256": "41c128697ab418985257df8aa2eb99abf0d22379264a34b948a12b92a2059b9e"
+    },
+    {
+      "bytes": 4664,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/readonly_current_input_guard_v8.py",
+      "sha256": "13e123a40b4f811a81c549b6a4387135e8d6bc515be39559f34d5fc030c398b6"
+    },
+    {
+      "bytes": 2988,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/gateway_entry_v8.py",
+      "sha256": "ad14539953b2b4b5039d729507d3117e021b1cf00aa767df7a049997c00784b8"
+    }
+  ],
+  "label": "control3",
+  "limits": {
+    "PR_merge": "HOLD_current_Windows_path_assertion_and_Mypy_failures_are_separate_currentCI_gates",
+    "actual_native": "NOT_RUN_BY_AUTHOR_OR_REVIEWER_CONFIG_NOT_ROOT_ADOPTED",
+    "archived8dc": "Prior authenticated archive mapping/helper binding retained; this proof did not separately rescan whole972955038-byte archive; rootfresh guards must verify it.",
+    "new5_and7276": "NOT_RUN_require_separate_same_source_predecessor_actualPASS_config_independent_review_and_ROOTrelease_no_automaticloop",
+    "process_cleanup": "Only original helper exposed facts accepted; outer deadline can interrupt post attempt, missing post evidence staysHOLD; no universalquiescence_reader_reap claim.",
+    "publication_private01f_frozen_v6_runtime_full_campaign": "HOLD"
+  },
+  "owner_binding": {
+    "bytes": 9277,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/OWNERFINAL-current8d49-qualified-V8-control3-config-and-managed-PREEXEC.json",
+    "sha256": "16f55dd096f13c6e8a9e9d56aa5f9f262bed2f1404e87d785f3a1f6a4a330aed"
+  },
+  "private_source_independent": {
+    "bytes": 5345,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-V8-fixture-logger-independent-source-review/OWNERFINAL-independent-named-current8d49-V8-fixture-logger-temporal-SOURCE_ONLY-review.json",
+    "sha256": "2fd27844ac38b179b45abb0ce1a9603f49ce513ad6e0453878c06a7770c62d11"
+  },
+  "qualification": {
+    "all291_boundrows_289physical_plus1historical_fixture_Git_snapshot_plus1archived8dc": true,
+    "current_FULL_independent": {
+      "bytes": 10038,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-independent-SOURCEFULL-actual-review/OWNERFINAL-independent-current8d49-original-configured-SOURCEFULL-and-retained-ROOTpost-supplement-review.json",
+      "sha256": "073e235afffab50dee204bcaae236e77ceb8e23644db15a90a0e56d48dc8dca9"
+    },
+    "current_LIGHT_independent": {
+      "bytes": 3596,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-independent-SOURCE-LIGHT-review/OWNERFINAL-independent-current8d49-configured-SOURCE_LIGHT-review.json",
+      "sha256": "b0d1c4ee4cee11fc3c2ffd9f6fece609869fa4b447d43bfb8c91ca4a2bf6222b"
+    },
+    "explicit_owned_absent_logger_and_basetemp_ALL": true,
+    "fresh_source1440_completeGit_FS_bytes_execbits": true,
+    "historical48314_af2f_0600_and_live52201_a30f_0600_distinct": true,
+    "native1192_complete_historical_member_bytes_modes_links": true,
+    "new_baseline_first15_source_provenance_poisons_allPASS0F0E0SKIP": true,
+    "original1470PASS13SKIP_and2workers": true,
+    "original237_all_exact_path_SHA_modes": true,
+    "original_ROOTpost_FAIL_retained": {
+      "bytes": 837,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-current8d49-one-FULL-original-owned/OWNERFINAL-root-original-current8d49-one-FULL.json",
+      "sha256": "83781777ef048357ea892ce56d42ab3906b92f49f663169dda2130ddcc1094ac"
+    },
+    "original_configured_inner_FULL": {
+      "bytes": 1278,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-SOURCEFULL-preexecution/one-current8d49-configured-FULL-original-owned/original-terminal.json",
+      "sha256": "54292bf9c05c9921949ca7710aaf27842d2d1562f6b1ee4a9d86377c88f43472"
+    },
+    "prepared30_exact_origins5_metadata_plus_gateway_runtime_checks": true,
+    "private51GREEN2RED_and_named_actual_snapshot444_correction": true,
+    "separate_readonly_supplement": {
+      "bytes": 1994,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-current8d49-one-FULL-original-owned/named-readonly-post-env-supplement/OWNERFINAL-named-readonly-full-post-env-supplement.json",
+      "sha256": "1bdd39ecaae8d8ae95ed28c3441de52c4b8f95117fdc71842085fd1374c8e235"
+    },
+    "temporal2_shared_output_body_nsmetadata_before_nestedguard_and_alwayspost": true
+  },
+  "readonly_byte_source_proof": {
+    "bytes": 1005,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-qualified-V8-independent-preexecution-review/independent-readonly-qualified-current-config-byte-source-closure-proof.json",
+    "sha256": "a6b1f1a234e8cc1bda3285ed38048eea35083322d6daabd39939efe3e9c7aa20"
+  },
+  "required_root_adoption": {
+    "distinct_once_release_regular_private_file_with_real_SHA": true,
+    "exact19_managed_activation_guard_before_gateway": true,
+    "fill_only_cache_configuration_independent_and_ROOT_release_SHA_slot": true,
+    "fresh_dev_shm_free_at_least": 3865470567,
+    "fresh_workspace_free_at_least": 1288490189,
+    "independent_review_binding_must_be_this_exact_file": true,
+    "native_TMP_floor": "NONE_ADDED;SOURCEFULL1.2GB_TMP_floor_not_applied",
+    "original_alias_and_current_data_guards_before_and_alwayspost_required": true,
+    "owned_control3_suffix3_and_log_root_must_remain_absent": true,
+    "serialized_no_other_heavy_or_devshm_mutations": true,
+    "unset_PYTHONOPTIMIZE_no_optimization_or_inherited_PYTEST_ADDOPTS_operator_overrides": true
+  },
+  "reviewer_tests_native_product_imports_source_mutations": "NOT_RUN",
+  "root_exact_argv_template": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "900s",
+    "bash",
+    "-c",
+    "source /workspace/actions-cloud/activate.sh && exec \"$@\"",
+    "current8d49-managed-once",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/managed_one_version_entry_v8.py",
+    "--config",
+    "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/FROZEN-current8d49-control3-qualified-V8-config-v2.json",
+    "--config-sha256",
+    "a209cc117db4d17a7383ba519abdff064211960aa0b8a88ddf32569fef322f9f",
+    "--release",
+    "/workspace/engineering/root-rcc-current8d49-control3-V8-one-release.json",
+    "--release-sha256",
+    "ROOT_MUST_SUPPLY_REAL_RELEASE_SHA256",
+    "--label",
+    "control3",
+    "--log-root",
+    "/workspace/engineering/root-rcc-owned-cache-one-current8d49-control3-v8-1"
+  ],
+  "root_expected_release_fields": {
+    "cache_configuration_independent": null,
+    "cache_plan_sha256": "0b5809ae39cfe90caa67117a336b9deab8554cb380b38872f428ff7f47c12012",
+    "config_sha256": "a209cc117db4d17a7383ba519abdff064211960aa0b8a88ddf32569fef322f9f",
+    "label": "control3",
+    "schema": 1,
+    "serialized_no_other_heavy_or_devshm_mutations": true,
+    "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+    "source_full_independent_sha256": "073e235afffab50dee204bcaae236e77ceb8e23644db15a90a0e56d48dc8dca9",
+    "source_full_sha256": "54292bf9c05c9921949ca7710aaf27842d2d1562f6b1ee4a9d86377c88f43472",
+    "source_independent_sha256": "b0d1c4ee4cee11fc3c2ffd9f6fece609869fa4b447d43bfb8c91ca4a2bf6222b",
+    "status": "ROOT_RELEASE_SINGLE_VERSION",
+    "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+  },
+  "root_release_template_binding": {
+    "bytes": 1003,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/ROOT-only-one-control3-release-required-fields-NOTADOPTED.json",
+    "sha256": "1491b8339be17a70d0810b4483876c9bcabad1c7d2ccdd56cfd16d52be9c44fb"
+  },
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "status": "INDEPENDENT_CURRENT_CACHE_CONFIG_GO",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "unchanged_constraints": {
+    "envelope_seconds": 645,
+    "gateway_seconds": 660,
+    "hard_admission_GiB": "2.4",
+    "helper_cleanup_grace_seconds": 10,
+    "helper_seconds": 600,
+    "internal_reader_and_captured_child_facts_null_UNKNOWN_unless_helper_exposes": true,
+    "native3_binary_SHA": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "no_new_wait_signal_reader_reap_fact_or_strict_cleanup_waiver": true,
+    "operational_stop_GiB": "2.35",
+    "outer_kill_grace_seconds": 10,
+    "outer_seconds": 900,
+    "pre_post_seconds": 120,
+    "production_pins_default3_unchanged": true,
+    "root_and_package_cache700_marker600_native_home700_or750_same_UID_primaryGID": true,
+    "sampler_cadence_seconds": 0.2,
+    "sampler_seconds": 640
+  },
+  "upstream_disposition": "none"
+}

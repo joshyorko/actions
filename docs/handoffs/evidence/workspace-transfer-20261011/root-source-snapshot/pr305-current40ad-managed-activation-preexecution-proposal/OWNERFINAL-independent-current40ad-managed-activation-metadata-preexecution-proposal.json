@@ -1,0 +1,119 @@
+{
+  "schema": "actions-independent-current40ad-activation-corrected-metadata-proposal/v1",
+  "verdict": "GO_NAMED_CURRENT40AD_ACTIVATED_PREFLIGHT_AND_FULL_PROPOSAL_ONLY__HOLD_ACTUAL_EXECUTION",
+  "head": "40ad3b14d264d0e6aa7843e7c26b9fa3855fc34b",
+  "tree": "2d58cc8e47a50bc6c09d597a56ed8153aa4f2f34",
+  "target": "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+  "original_LIGHT": {
+    "path": "/workspace/engineering/pr305-actual309-refresh/OWNERFINAL-current40ad-ordinary-a0d-source-LIGHT-full-and-actual-HOLD.json",
+    "bytes": 90785,
+    "sha256": "2d2771a4f0d44b0021c0233ae367b3957ebe4639e62396518229853fd5b5ec41"
+  },
+  "original_independent_LIGHT": {
+    "path": "/workspace/engineering/pr305-current40ad-independent-light-review/OWNERFINAL-independent-pr305-current40ad-LIGHT-and-full-proposal-review.json",
+    "bytes": 7388,
+    "sha256": "1906267501e173713226eeab16b1cba6c8ca2d75d7189f51565760b2509fd8d2"
+  },
+  "original_unactivated_full_proposal": {
+    "path": "/workspace/engineering/pr305-current40ad-independent-light-review/proposed-current40ad-explicit-two-worker-configured-full-contract.json",
+    "bytes": 2455,
+    "sha256": "9a0dc99eecda428ecc03dddcb6b0db7cf5f66f25358fef5284927670629b1bef"
+  },
+  "source_metadata_preserved": {
+    "path": "/workspace/engineering/pr305-current40ad-managed-activation-preexecution-proposal/safe-current40ad-metadata-readback-preserved.json",
+    "bytes": 1761,
+    "sha256": "2072b300b97aa9a21f4f01d15fc10ec27eb1a958ce31e9d12b320dda69243777"
+  },
+  "new_concrete_preexecution_proposal": {
+    "path": "/workspace/engineering/pr305-current40ad-managed-activation-preexecution-proposal/PROPOSED-current40ad-managed-activation-one-configured-full-v2.json",
+    "bytes": 10101,
+    "sha256": "86c4a3c327585e4904a5925beff4a6f12f48ee75113a4229bfbd7ff840b3f630"
+  },
+  "primary_RCC_pin_unchanged": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+  "all19activationexports_and_PATH_required": true,
+  "cached_toolkit_identity_setup_and_existing_Python_Poetry_bindings_verified_readonly": true,
+  "own30_five_config_recorded_origins_retained_no_new_importexecution": true,
+  "capacity_history_scope": "Rootfdbdc+inddd95 authenticate currentdefaultcache preservation/recovery only; no historicalcache baseline orgate authorization. Newworkspace capacity andserialization require rootfresh admission.",
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md and provenance-observability.md; exactacceptedbothparentguideimport reused; exactexisting activation proposal reused forowning integration agent",
+    "Exact_accepted_source_guide_import": {
+      "bytes": 5113,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-actual309-refresh/exact-two-guide-both-parent-import.patch",
+      "sha256": "aef5ba97d0fe6bf7cfceedebe4dad26be9911c8238bad7418e7c4db53c853599"
+    },
+    "Exact_activation_delta": {
+      "path": "/workspace/engineering/pr300-current74-managed-activation-independent-review/canonical-managed-gateway-activation-exact-context-v2.patch",
+      "bytes": 1025,
+      "sha256": "ee804bb1acd0102a0b28b37b66e55c3bcd1eac4f9bd70885ef5f7c245f67f994"
+    },
+    "activation_proposal_import_scope": "Already accepted proposal ee804 reused; not claiming its exactblock currently imported into source40ad or checkpoint; no duplicate cosmetic patch",
+    "Durable_learning_captured": "AbsolutemanagedRCC executable needs exactmanagedactivation/home/caches/PATH andworker/Golimits; existing cachedsetup/executables andpreparedsource mustbeadmitted beforeseparatelyreleasedfullcommand.",
+    "Evidence": [
+      {
+        "path": "/workspace/actions-cloud/activate.sh",
+        "bytes": 987,
+        "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current40ad-managed-activation-preexecution-proposal/safe-current40ad-metadata-readback-preserved.json",
+        "bytes": 1761,
+        "sha256": "2072b300b97aa9a21f4f01d15fc10ec27eb1a958ce31e9d12b320dda69243777"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current40ad-managed-activation-preexecution-proposal/PROPOSED-current40ad-managed-activation-one-configured-full-v2.json",
+        "bytes": 10101,
+        "sha256": "86c4a3c327585e4904a5925beff4a6f12f48ee75113a4229bfbd7ff840b3f630"
+      },
+      {
+        "path": "/workspace/engineering/pr305-actual309-refresh/OWNERFINAL-current40ad-ordinary-a0d-source-LIGHT-full-and-actual-HOLD.json",
+        "bytes": 90785,
+        "sha256": "2d2771a4f0d44b0021c0233ae367b3957ebe4639e62396518229853fd5b5ec41"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current40ad-independent-light-review/OWNERFINAL-independent-pr305-current40ad-LIGHT-and-full-proposal-review.json",
+        "bytes": 7388,
+        "sha256": "1906267501e173713226eeab16b1cba6c8ca2d75d7189f51565760b2509fd8d2"
+      },
+      {
+        "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/identity.yaml",
+        "bytes": 222,
+        "sha256": "5472adec10ef85bf56f79fd2664a30d33b5accf4e1edfff974ddec5f46a21daf"
+      },
+      {
+        "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/rcc_plan.log",
+        "bytes": 10213,
+        "sha256": "8aa96805c88332227acd0b48a99aab4482850d5ed940a5c81d7ce7c5b8ae3474"
+      },
+      {
+        "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12",
+        "bytes": 31903952,
+        "sha256": "ba35c76091c86640cd6bbccc8c216e5b2fc52b20c26de803edef79165022037f"
+      },
+      {
+        "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/poetry",
+        "bytes": 371,
+        "sha256": "f989714d24f334397e5960032f3fb3dd7ebcebf5d600e0d520aa7c780c8b124c"
+      },
+      {
+        "path": "/workspace/engineering/root-failed300-default-cache-preservation-actual/OWNERFINAL-root-whole-default-cache-preservation-actual.json",
+        "bytes": 1521,
+        "sha256": "fdbdc5705b6a15863d3a065e1e6821f4411d2297bb2268eb268946cecbb0ac6c"
+      },
+      {
+        "path": "/workspace/engineering/root-failed300-default-cache-independent-actual-review/OWNERFINAL-independent-actual-whole-default-cache-preservation-review.json",
+        "bytes": 6524,
+        "sha256": "dd95e137add3eb9b2a7213495a55886ee59cdb7e8996aa0bdb6d96618be7c7f9"
+      }
+    ],
+    "Stale_or_ambiguous_guidance_removed": "No old unactivated9a0d or519launcher as currentactivatedfull/no metadata/capacity recovery as actualgate/no historynativescope upgrade",
+    "Remaining_uncertainty": "Current300 actualsuccessor/cleanupterminal, futurecapacity/serialization,current40adfull+SOURCEFINAL/CI/platform/private/release remainHOLD"
+  },
+  "Upstream_disposition": "none",
+  "no_tests_source_edits_installer_activation_Rcc_Poetry_invoke_native_provider_download_push_merge_executed": true,
+  "review_constructor": {
+    "path": "/workspace/engineering/pr305-current40ad-managed-activation-preexecution-proposal/freeze-metadata-only.py",
+    "bytes": 15499,
+    "sha256": "8d3092acee5726b823d80c005744fc569da362e13c459e2375fb60353d5f6ad3"
+  }
+}

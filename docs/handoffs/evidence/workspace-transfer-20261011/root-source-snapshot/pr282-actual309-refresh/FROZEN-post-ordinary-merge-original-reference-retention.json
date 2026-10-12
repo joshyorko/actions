@@ -1,0 +1,13 @@
+{
+  "status": "PASS_POST_ORDINARY_MERGE_RETENTION_NO_LIGHT_GATE",
+  "head": "c35ee2e279eaefe55b16aecdb80da04c590aff7c",
+  "tree": "778f784785e13d521ed3902bd60557f70e41f3a8",
+  "direct_current_bound_refs_exact": 441,
+  "mutable_source_bodies_retained_in_original_e736_Git": [],
+  "prior_historical_UNAVAILABLE_binding_count": 10,
+  "historical_UNAVAILABLE_scopes_not_upgraded": true,
+  "all_source_app_and_native_history_retained": true,
+  "LIGHT_NOT_RUN": true,
+  "full_native_browser_provider_NOT_RUN": true,
+  "Upstream_disposition": "none"
+}

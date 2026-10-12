@@ -1,0 +1,21 @@
+{
+  "capture": "2026-10-11T21:33:20.405639+00:00",
+  "elapsed_seconds": 33.13230115300394,
+  "native": "NOT_RUN",
+  "outer_returncode": 1,
+  "release": {
+    "bytes": 1513,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-one-known-nine-18-semantic-controls-release.json",
+    "sha256": "026380a40a6e0fe3356ca23f1c1fb00806e3d4a042edaa5881ba5b32b09e7fb5"
+  },
+  "review": {
+    "bytes": 8766,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine-18-semantic-independent-PREEXEC-review/OWNERFINAL-independent-current8d49-known-nine-18-semantic-PREEXECUTION-GO.json",
+    "sha256": "83d424bb57e66bf7b6b7e9e393590e0a2c45abcc50ef52aca2a278ec1963143e"
+  },
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_adoption": "NONE",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+}

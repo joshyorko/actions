@@ -1,0 +1,8 @@
+*** docs/skills/repository-operations.md (proposed beside finite archive budgets and exact physical aliases)
++Budget every simultaneously retained compressed copy. A same-filesystem
++exclusive hardlink promotion may avoid a second data copy only after complete
++staging verification and durable indices; fsync the destination and its directory
++before unlinking the staged name. Preserve both names on an earlier failure.
++Relocating a failed partial preserves its exact bytes and metadata, not gzip
++completion. Keep the original failure and original path in a separately typed
++physical alias, and validate that plan before any file mutation.

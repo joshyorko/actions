@@ -1,0 +1,130 @@
+{
+  "ROOT_contract": {
+    "bytes": 4625,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current9760-token-light-once6-active-output-address-PREEXECUTION-NOTRUN/strict-current9760-once6-ROOT-release-and-bound-command-contract-NOTRUN.json",
+    "sha256": "6dd0e3a28cf4896ea0afb4f6cbde8c00672da43d2efef31ce6b558ca3a3dd48d"
+  },
+  "address_closure_proof": {
+    "bytes": 2772,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current9760-token-light-once6-active-output-address-PREEXECUTION-NOTRUN/all-consumed-current-executable-output-and-historical-input-address-closure-NOTRUN.json",
+    "sha256": "15a5d291a20db56ba2f6465ee410edb7e518d212fffb4ce30d9021b404be7ee8"
+  },
+  "application_source_ref_commit_environment_delta": "NONE",
+  "bindings": [
+    {
+      "bytes": 2772,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once6-active-output-address-PREEXECUTION-NOTRUN/all-consumed-current-executable-output-and-historical-input-address-closure-NOTRUN.json",
+      "sha256": "15a5d291a20db56ba2f6465ee410edb7e518d212fffb4ce30d9021b404be7ee8"
+    },
+    {
+      "bytes": 14902,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once6-active-output-address-PREEXECUTION-NOTRUN/construct_private_once6_all_consumed_output_addresses.py",
+      "sha256": "313718238c03759a92bf0c41b329656bbf391a0a7191dba1098c4fe8f6692590"
+    },
+    {
+      "bytes": 397278,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once6-active-output-address-PREEXECUTION-NOTRUN/current9760-unchanged1442-current30-ownfive-original-once5-and-output-baselines.json",
+      "sha256": "9b8e70fbd03b9ee06526cb7e4b9ef966b528c652eb269b1315548eda44622657"
+    },
+    {
+      "bytes": 2339,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once6-active-output-address-PREEXECUTION-NOTRUN/exact-once6-config-four-output-literals-and-launcher-address-only-delta-NOTRUN.json",
+      "sha256": "6ff0373ca03a1912d83c8fb565efb01b703b62d4856bc9f5390a3e9393dd0732"
+    },
+    {
+      "bytes": 5355,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once6-active-output-address-PREEXECUTION-NOTRUN/exact-private-once5-to-once6-two-probe-output-root-source-delta.patch",
+      "sha256": "bf0de7cd623d4e0fd7e5bc09263f9e9d404129cb25f848acf3925c75e6f0043e"
+    },
+    {
+      "bytes": 81038,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once6-active-output-address-PREEXECUTION-NOTRUN/immutable-one-TOKEN-LIGHT-once6-inputs.json",
+      "sha256": "584230eec4851befdf8a131d35496e61fe20185f599e788822d4ad717dca1227"
+    },
+    {
+      "bytes": 16159,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once6-active-output-address-PREEXECUTION-NOTRUN/launch_one_owned_token_light_once6_current_probe_outputs.py",
+      "sha256": "07a19dfb7f5365462d65b4a2ed59f7733a4516d40d3598f016a80693965d5088"
+    },
+    {
+      "bytes": 4625,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once6-active-output-address-PREEXECUTION-NOTRUN/strict-current9760-once6-ROOT-release-and-bound-command-contract-NOTRUN.json",
+      "sha256": "6dd0e3a28cf4896ea0afb4f6cbde8c00672da43d2efef31ce6b558ca3a3dd48d"
+    }
+  ],
+  "capture": "2026-10-11T23:23:46.486431+00:00",
+  "config": {
+    "bytes": 81038,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current9760-token-light-once6-active-output-address-PREEXECUTION-NOTRUN/immutable-one-TOKEN-LIGHT-once6-inputs.json",
+    "sha256": "584230eec4851befdf8a131d35496e61fe20185f599e788822d4ad717dca1227"
+  },
+  "current_once6": "NOT_RUN_NO_ROOT_RELEASE_CREATED",
+  "documentation": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "evidence": "Actualoriginalonce5mkdir failurebeforegenerator + nestedconfigs activeaddressaudit; priorPREEXEC embeddedaddressmiss retained; newallconsumedkeys/twoASTstrings/nestedYAMLoutput/currentphaseparentproof",
+    "exact_delta_reused": {
+      "bytes": 707,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current9760-once5-ACTUALFAIL-independent-review/canonical-executable-probe-output-address-and-historical-guard-scope-proposed.txt",
+      "sha256": "af6262d886c776df70b8252bd51d0bc9d04d8129dbd9cd75c2ba2a0855bc9b7b"
+    },
+    "remaining_uncertainty": "Generator8/YAML30/controlledInvoke/currentfull/native/OAuthauthority/release NOTRUN/HOLD; sixoriginpriorbaselineUNKNOWN. No factualclaim beyond frozenrows.",
+    "stale_ambiguity": "OuterCONFIG/launcherretarget notcompleteembeddedoutputclosure; historicalreadonly addresses differfrom activeoutputs; guardPASS limited to actualboundrows and original6reportbaselineUNKNOWN",
+    "upstream_disposition": "none"
+  },
+  "exact_scope": "Only currentgenerator3 plusorigin1 executableoutput literals and launcherfresh6 metadataaddresses. No historicalinputpath/globalreplace/gate/budget/flags/MYPYPATH/source changes.",
+  "launcher": {
+    "bytes": 16159,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr307-current9760-token-light-once6-active-output-address-PREEXECUTION-NOTRUN/launch_one_owned_token_light_once6_current_probe_outputs.py",
+    "sha256": "07a19dfb7f5365462d65b4a2ed59f7733a4516d40d3598f016a80693965d5088"
+  },
+  "new_child_binding_count": 274,
+  "original_once5_failure": {
+    "bytes": 18496,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current9760-once5-ACTUALFAIL-independent-review/OWNERFINAL-independent-original-current9760-once5-ACTUALFAIL-and-all-active-probe-address-proposal.json",
+    "sha256": "cae5ac59074f656c297bb8aa6ea9808d67b63a10f40e376148c188aeeeee45e2"
+  },
+  "original_scopes": {
+    "ROOT_external": 233,
+    "child": 225,
+    "historical": 212
+  },
+  "required_next": "IndependentSOURCE+PREEXEC thenROOTdistinctfreshserializedONE; no automaticallyretryoldattempt",
+  "schema": 1,
+  "source": "9760d5ec44876558c4941c4c3190abc8d92d14a1",
+  "source_clean": true,
+  "source_count": 1442,
+  "source_delta": {
+    "bytes": 5355,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current9760-token-light-once6-active-output-address-PREEXECUTION-NOTRUN/exact-private-once5-to-once6-two-probe-output-root-source-delta.patch",
+    "sha256": "bf0de7cd623d4e0fd7e5bc09263f9e9d404129cb25f848acf3925c75e6f0043e"
+  },
+  "sourceproof": {
+    "bytes": 397278,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current9760-token-light-once6-active-output-address-PREEXECUTION-NOTRUN/current9760-unchanged1442-current30-ownfive-original-once5-and-output-baselines.json",
+    "sha256": "9b8e70fbd03b9ee06526cb7e4b9ef966b528c652eb269b1315548eda44622657"
+  },
+  "static_scope_proof": {
+    "bytes": 2339,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current9760-token-light-once6-active-output-address-PREEXECUTION-NOTRUN/exact-once6-config-four-output-literals-and-launcher-address-only-delta-NOTRUN.json",
+    "sha256": "6ff0373ca03a1912d83c8fb565efb01b703b62d4856bc9f5390a3e9393dd0732"
+  },
+  "status": "OWNER_FINAL_PRIVATE_ONCE6_FOUR_ACTIVE_OUTPUT_ADDRESS_SOURCE_AND_PREEXEC_NOTRUN",
+  "tree": "0d33ebaac258e069ef7045a29b4a3904740f6307"
+}

@@ -1,0 +1,126 @@
+{
+  "ROOT_exact_argv_template": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "420s",
+    "bash",
+    "-c",
+    "export PATH=\"/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\"; source /workspace/actions-cloud/activate.sh && exec \"$@\"",
+    "memory17-managed-once",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/rcc-memory17-managed-primary700-once2-preexecution-NOTRUN/root_release_one_memory17_managed_primary700_once2_NOTRUN.py",
+    "--phase",
+    "launch",
+    "--config",
+    "/workspace/engineering/rcc-memory17-managed-primary700-once2-preexecution-NOTRUN/FROZEN-memory17-managed-primary700-once2-pure-config-NOTRUN.json",
+    "--config-sha256",
+    "5802926af2eb9a0bc469f273aab0277a70ec1500b5e80372493b5ce0c09798ac",
+    "--release",
+    "/workspace/engineering/root-one-memory17-pure-controls-managed700-once2-release.json",
+    "--release-sha256",
+    "ROOT_DISTINCT_HASH_REQUIRED_NOT_GRANTED"
+  ],
+  "ROOT_external_parent_seconds": 450,
+  "ROOT_fresh_external_preflight": [
+    "Exact regular nonsymlink/currentUIDGID1000 config400/launcher400/release600 and allSHA; no chmod/physicalrepair.",
+    "Exact ROOTrelease typedkeys/source/tree/config/launcher/root/serializedTrue andREALcompatibleindrow.",
+    "Freshrootonce2+basetemp/logger/JUnitABSENT, originalfailedonce1 consumedandnotreused.",
+    "Root outer420TERM10 plus explicitparent450; no heavy/native/storageconcurrency.",
+    "Actualsuccess remainsprocess0PENDING original17JUnitcensus; memoryprofileNOTADOPTED."
+  ],
+  "adoption_scope": "Replace only ROOT_DISTINCT_HASH_REQUIRED_NOT_GRANTED with measured newly created strict ROOTrelease hash, and bind this real compatible review. All other argv fixed. Root alone authorizes one fresh once2 attempt; no consumed once1 release reuse.",
+  "capture": "2026-10-11T21:17:14.353593+00:00",
+  "config_binding": {
+    "bytes": 12144,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-memory17-managed-primary700-once2-preexecution-NOTRUN/FROZEN-memory17-managed-primary700-once2-pure-config-NOTRUN.json",
+    "sha256": "5802926af2eb9a0bc469f273aab0277a70ec1500b5e80372493b5ce0c09798ac"
+  },
+  "config_sha256": "5802926af2eb9a0bc469f273aab0277a70ec1500b5e80372493b5ce0c09798ac",
+  "contract_binding": {
+    "bytes": 2905,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-memory17-managed-primary700-once2-preexecution-NOTRUN/named-managed-primary700-once2-compatible-root-release-contract-NOTRUN.json",
+    "sha256": "4bda9b39b59f844b1885f7b77bd38ff14553a7d200c4fa2aac6459ba8c5428f9"
+  },
+  "decision": "GO_MEMORY17_MEASURED_PRIMARY700_FRESH_ONCE2_PURE_PREEXECUTION_ONLY",
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "disposition": "ACCEPT_EXISTING_EXACT_15ca_DELTA_FOR_ROOT_INTEGRATION_NO_DUPLICATE",
+    "durable_learning": "Binary SHA equality does not imply owner-path permission equality: managed primary0700 and source fixture0711 each need independent metadata admission. Pretest failure consumes release even if output root remains absent.",
+    "evidence": "Retained277e/12177 plus measured perpath primary/fixture size/SHA/UID/GID/mode and strict new launcher predicate.",
+    "exact_delta": {
+      "bytes": 1069,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-original-mode-admission-failure-independent-review/canonical-measured-per-path-binary-mode-before-delegation-proposed.patch",
+      "sha256": "15ca1e894890c2d2bd383139088cf3946a3e4c89e30e2a82cd3e96b4b48e5e1b"
+    },
+    "remaining_uncertainty": "Pure17 NOTRUN; thresholds uncalibrated/unadopted; original killed publication cause UNKNOWN; all native compatibility remains unqualified.",
+    "stale_ambiguity_removed": "Incorrect shared-mode711 expectation corrected only in named successor; old original failure preserved."
+  },
+  "launcher_binding": {
+    "bytes": 8538,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-memory17-managed-primary700-once2-preexecution-NOTRUN/root_release_one_memory17_managed_primary700_once2_NOTRUN.py",
+    "sha256": "a91ec3fbe4aef23f49b6178459b87d1b5e72d18f69214a8c2f129af5eeeb486b"
+  },
+  "launcher_sha256": "a91ec3fbe4aef23f49b6178459b87d1b5e72d18f69214a8c2f129af5eeeb486b",
+  "original_failures_retained": [
+    {
+      "bytes": 727,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-memory17-reviewed-original-outer/OWNERFINAL-root-one-original-reviewed-memory17-outer.json",
+      "sha256": "277e37a3be16f8bd6c5bd8945c656bec37284ae7e2cda396b20a3142c809c650"
+    },
+    {
+      "bytes": 836,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-memory17-pure-controls-release.json",
+      "sha256": "5afbfc6f31f6b063e7cd201a79ee2fe88834c16e3333abbefbbcd58f08ac8375"
+    },
+    {
+      "bytes": 5250,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-original-mode-admission-failure-independent-review/OWNERFINAL-independent-original-memory17-managed-mode-admission-FAIL-and-source-preservation.json",
+      "sha256": "12177ef012b94dab8e9e658d488db0bb147d37b2d3bc26454147aabaff2541d7"
+    }
+  ],
+  "outcome_admission": "Original before/primary/post000 and17unique JUnitPASS0F/E/S required after authorized attempt; processPASS is only pending census. No native/memory calibration or cgroup sampler adoption.",
+  "owner_binding": {
+    "bytes": 17598,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-memory17-managed-primary700-once2-preexecution-NOTRUN/OWNERFINAL-memory17-measured-primary700-fresh-once2-concrete-PREEXEC-NOTRUN.json",
+    "sha256": "322b303469338c0ece68057e636698f5af052516ebea41bf1a4aa40f292a9116"
+  },
+  "proof_binding": {
+    "bytes": 2397,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-memory17-managed-primary700-once2-independent-PREEXEC-review/independent-corrected-readonly-source-and-physical-binding-proof.json",
+    "sha256": "895026606a16cb6e6e3ca71e6892cd6432ec07a8cf2d64300770c9f185275111"
+  },
+  "reviewer_execution": "NO_IMPORT_NO_TEST_NO_RCC_NO_SOURCE_EDIT",
+  "reviewer_inspection_failure_binding": {
+    "bytes": 793,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-memory17-managed-primary700-once2-independent-PREEXEC-review/retained-reviewer-inspection-failures-only.json",
+    "sha256": "fe681ec80fd30fe3b4389bab83dae1b55a3e5064b46699e5f46304a6f51894b6"
+  },
+  "root_once": "/workspace/engineering/root-one-memory17-pure-controls-20261011-2",
+  "root_release_expected": {
+    "config_sha256": "5802926af2eb9a0bc469f273aab0277a70ec1500b5e80372493b5ce0c09798ac",
+    "independent_review": null,
+    "launcher_sha256": "a91ec3fbe4aef23f49b6178459b87d1b5e72d18f69214a8c2f129af5eeeb486b",
+    "root": "/workspace/engineering/root-one-memory17-pure-controls-20261011-2",
+    "schema": 1,
+    "serialized_no_other_heavy_or_storage_mutations": true,
+    "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+    "status": "ROOT_RELEASE_ONE_MEMORY17_PURE_CONTROLS",
+    "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+  },
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "status": "INDEPENDENT_MEMORY17_PURE_PREEXECUTION_GO",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none"
+}

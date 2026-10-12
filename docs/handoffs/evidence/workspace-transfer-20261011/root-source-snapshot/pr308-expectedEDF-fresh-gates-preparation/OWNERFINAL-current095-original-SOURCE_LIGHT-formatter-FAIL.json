@@ -1,0 +1,84 @@
+{
+  "status": "CURRENT_095_SOURCE_LIGHT_FAIL_CONFIGURED_FORMATTER_NO_RETRY",
+  "source": {
+    "commit": "095e25b6b2b2c8754184b0d26f77bc70a101cee4",
+    "tree": "edf088b1a8acd9709b37dee2532d77c8b2246a50"
+  },
+  "before_returncode": 0,
+  "primary_returncode": 1,
+  "post_returncode": 0,
+  "seconds": 68.10212462899653,
+  "toolkit_passed": 179,
+  "scoped": {
+    "unique_cases": 275,
+    "passed": 274,
+    "skipped": 1,
+    "failed": 0,
+    "errors": 0,
+    "deselected_from_original_log": 3
+  },
+  "first_failure": "CONFIGURED_RUFF_FORMAT_TEST_FILE_EXTRA_BLANK_LINE",
+  "later_stages_not_run": [
+    "isort after Ruff-format",
+    "configured typecheck",
+    "generator/YAML roundtrip"
+  ],
+  "source_mode_body_pre_post_guard": "PASS_1440",
+  "original_prepared_and_historical_native_guards": "PASS_before_and_after_always",
+  "native": "NOT_RUN",
+  "FULL": "NOT_RUN",
+  "attempt": "CONSUMED_PRESERVE_NO_AUTOMATIC_RETRY",
+  "pre_gate_reader_failure": "Preserved TypeError before any guard/pytest; v2 is first consumed LIGHT attempt.",
+  "frozen_bindings": [
+    {
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/one-current095e25-source-LIGHT-original-owned-v2/original-terminal.json",
+      "bytes": 1203,
+      "sha256": "0f6c7e48a4f02d542deb0f5240f49eb9a9dabc1a8c387d4e7b7ebc1abec5b582",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/one-current095e25-source-LIGHT-original-owned-v2/original-LIGHT-source.private.log",
+      "bytes": 9892,
+      "sha256": "ed2478cf2cbcef8193e73760dfbec5112aa00152d79d04c2ee6cc4a5ebf1dbc7",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/one-current095e25-source-LIGHT-original-owned-v2/current-scoped-source-junit.xml",
+      "bytes": 55592,
+      "sha256": "006ce427d72a69d82c3e1606e771c20352ee7eb33c3e8dee023a633be838f047",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/frozen-currentEDF-source-LIGHT-inputs-v2.json",
+      "bytes": 12898,
+      "sha256": "bec99d1312335cf8bd259292d42decefb141f89afe6bf4e0aa0a6912c635edbc",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/OWNERFINAL-currentEDF-LIGHT-execution-proposal-v2.json",
+      "bytes": 3351,
+      "sha256": "8b8b85d965f402ac2529e6d5013680c0becd83146b7302a90a3fe21367702623",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/root-inline-one-current095-LIGHT-authorization-v2.json",
+      "bytes": 1751,
+      "sha256": "dadceba7c252960728a6ed888660a4eaf8d38d87953f3874b31a34aaa271e8f3",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/original-LIGHT-launcher-pre-gate-TypeError-disposition.json",
+      "bytes": 712,
+      "sha256": "1174b8d0e679194baf3b42ff06f4fc4f831f83c1d5dc570424e00f7b97bce9c9",
+      "mode": "0o400"
+    }
+  ],
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md Runtime configured Ruff-format paragraph verified reuse",
+    "durable_learning_captured": "Configured Ruff-format acceptance requires its own package configuration despite green tests and Black diagnostics.",
+    "evidence": "Actual original formatter failure and immutable task implementation, AST-equal one-line formatting proposal.",
+    "stale_or_ambiguous_guidance_removed": "Prior private formatter result is not current configured lint acceptance.",
+    "remaining_uncertainty": "Successor source and its fresh LIGHT/FULL/native qualifications remain pending."
+  },
+  "upstream_disposition": "none"
+}

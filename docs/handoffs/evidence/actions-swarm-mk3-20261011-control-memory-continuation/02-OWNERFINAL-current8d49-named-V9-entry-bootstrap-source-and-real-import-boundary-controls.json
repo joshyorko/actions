@@ -1,0 +1,124 @@
+{
+  "schema": 1,
+  "status": "SOURCE_PROPOSAL_IMPORT_BOUNDARY_EIGHT_REAL_PURE_CONTROLS_PASS_NO_NATIVE_AUTHORIZATION",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "original_V8_failure": {
+    "path": "/workspace/engineering/rcc-current8d49-control3-V8-original-pre-main-failure-owned/OWNERFINAL-original-current8d49-control3-V8-pre-main-import-failure-only.json",
+    "bytes": 5828,
+    "sha256": "c460226cef52c76f9723789cf433cceb10f5589e69ce9edba20d51e5d00006e0",
+    "mode": "0o400"
+  },
+  "original_V8_config": {
+    "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/FROZEN-current8d49-control3-qualified-V8-config-v2.json",
+    "bytes": 760693,
+    "sha256": "a209cc117db4d17a7383ba519abdff064211960aa0b8a88ddf32569fef322f9f",
+    "mode": "0o600"
+  },
+  "original_four_modules_unchanged": [
+    {
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/actual_transport_v8.py",
+      "bytes": 27889,
+      "sha256": "33dda17140ef749e22f086cc91b92ed8c3230fddfde8a4a369769e2183f695a1",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/owned_cache_policy_v8.py",
+      "bytes": 6228,
+      "sha256": "4ccac4e3bd2c1e91352ef4e647968b4ca61f8691e1fc0f41e72a128a2942c205",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/fixture_records_v8.py",
+      "bytes": 11489,
+      "sha256": "7a63ee62184ea268dead0c98460c6943ebc297816e9a4df180b10ed5e04b9064",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/historical_binding_current8d49_v8.py",
+      "bytes": 6327,
+      "sha256": "6f64d55837cc4ff14ee4eec013314ba512c09ecdc56f79192c1360ef46473b30",
+      "mode": "0o444"
+    }
+  ],
+  "named_V9_bindings": [
+    {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/v9_entry_bootstrap.py",
+      "bytes": 1575,
+      "sha256": "d3957c2e216731abf596897fbf0838809129a571743510692f2509228e2c7288",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/owned_native_entry_v9.py",
+      "bytes": 175,
+      "sha256": "b93e1154f832b06b17ed9bbc27723fe55a3a00a6a0754fd2a35219acaddf008a",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/gateway_entry_v9.py",
+      "bytes": 3018,
+      "sha256": "6ba1233e8719123ab7fc0a129793fa7e1f25bf21cecb6bdaba4e1f4e6fd2e4ac",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/managed_one_version_entry_v9.py",
+      "bytes": 1470,
+      "sha256": "51979d1ef12ad9b9d29573e14e8cbc2c91cdfdbd01a83d768a655d999ac1bd8b",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/launch_one_version_v9.py",
+      "bytes": 5039,
+      "sha256": "55188950dc7694c932d3a1e4eed45548117188bfbf415189f74a95fd3631ff6f",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/readonly_current_input_guard_v9.py",
+      "bytes": 4690,
+      "sha256": "480be06317562b7e3a5c98a5d794bb5d2a33e7fa6186fe707823ecb1cc583626",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/qualify_real_package_python_import_boundary_v9.py",
+      "bytes": 4513,
+      "sha256": "ea08e3796cc1a6ea86fffdc1da5686b7232feed272b56817d9252ce0b9cecd22",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/named-V9-entry-bootstrap-source-scope-proof.json",
+      "bytes": 3018,
+      "sha256": "13bd620786ca3d71c56a26a4fe633617d5dbacc283497aaaaee22679ee28b694",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/real-managed-package-python-original-RED-named-V9-GREEN-import-only-controls.json",
+      "bytes": 4597,
+      "sha256": "d075d1067952e9b96c8ba806bf5fe638f0958b83513e1b437c2c12f4f964281f",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/canonical-independent-package-python-entry-proposed.md",
+      "bytes": 458,
+      "sha256": "066fed0a78e012b2952f688306974e3dbf02587b40051420140717dc3c89fda0",
+      "mode": "0o400"
+    }
+  ],
+  "exact_delta": "Two fixed verified sys.path directories imported in ALL named managed/launcher/guard/gateway/native entries; final packagePython calls wrapper importing unchanged transport.main, whose original __file__ binding remains exact. Fixed original entire once-root map asserted, then only control3 ROOTS suffix3\u21924 substituted process-locally. Original bytes unchanged, declared one-root behavior change; no policy predicate/other label/budget changes.",
+  "control_outcomes": "8 expected-result PASS: genuine direct child import RED, wrapper GREEN, repeated ordinary import stable, wrong original root/other label/unknown label/reinitialization/second mutation refused. Real installed own RuntimePython,10s each120s outer; no main/pytest/product/native imports or root creation.",
+  "fresh_root4": "ABSENT; native cannot execute without new config independent/root once release",
+  "configuration": "PENDING_NEXT_NAMED_CONSTRUCTOR; do not execute oldV8 config or old release through new entries",
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md",
+    "Exact delta": {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/canonical-independent-package-python-entry-proposed.md",
+      "bytes": 458,
+      "sha256": "066fed0a78e012b2952f688306974e3dbf02587b40051420140717dc3c89fda0",
+      "mode": "0o400"
+    },
+    "Durable learning captured": "Process-local bootstrap must be admitted at exact independently invoked packagePython boundary; pre-main failure not RCC functionality",
+    "Evidence": "Original c460 failure + real independent-child RED/GREEN and bound unchanged four modules",
+    "Stale or ambiguous guidance removed": "Gateway parent importability no longer treated as proof of final child boundary; fresh once root even when predecessor did not create state",
+    "Remaining uncertainty": "Current V9 config/ind/root adoption not yet accepted, no actual3/5/7276 functionality or readers/persistent closure"
+  },
+  "Upstream disposition": "none"
+}

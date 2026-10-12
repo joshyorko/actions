@@ -1,0 +1,47 @@
+{
+  "AST_delta": [
+    "CONFIG literal basename only"
+  ],
+  "all39_refs_rehashed": true,
+  "all_gate_execution": "NOT_RUN",
+  "all_other_AST_nodes_exact": true,
+  "config_body_mode_unchanged": true,
+  "current_source": "c97edfd10edb5b1c63f8a6371bfd2905996a2da2",
+  "literal_text_delta": {
+    "after": "CONFIG=BASE/'immutable-one-TOKEN-LIGHT-once2-inputs.json'",
+    "before": "CONFIG=BASE/'immutable-one-TOKEN-LIGHT-inputs.json'",
+    "changed_lines": 1
+  },
+  "original_absent_wrong_basename_remains_absent": true,
+  "original_preexec_HOLD": {
+    "bytes": 6828,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-currentc97e-token-once2-independent-PREEXEC-review/OWNERFINAL-independent-original-currentc97e-once2-TOKEN-LIGHT-PREEXECUTION-config-path-HOLD.json",
+    "sha256": "c21497db6231b87893ee17fded09b551f0680d5ca8df64680ab4c7c0681c56b2"
+  },
+  "predecessor_launcher": {
+    "bytes": 16047,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/launch_one_owned_token_light_once2.py",
+    "sha256": "a747b3fd108d6e8f4545fa2489876997decb04202752f8bf310732303988597e"
+  },
+  "root_release_absent": true,
+  "same_once2_attempt_absent_unconsumed": true,
+  "schema": 1,
+  "scope": "READONLY_AST_SELECTED_ADDRESS_AND_FILE_HASH_CLOSURE_NO_LAUNCHER_OR_GATE_EXECUTION",
+  "selected_address_derivation": "AST CONFIG=BASE/right literal; BASE is successor __file__.resolve().parent, evaluated as pure filesystem address only",
+  "selected_config": {
+    "bytes": 16905,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/immutable-one-TOKEN-LIGHT-once2-inputs.json",
+    "sha256": "29368814c182f30732ab041ca580162c92071e4bb076eb164c9820ced3acc158"
+  },
+  "source_clean": true,
+  "successor_launcher": {
+    "bytes": 16053,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/launch_one_owned_token_light_once2_selected_config_v3.py",
+    "sha256": "979792c8f087ae36635dcf37f1620c3036e1204cc2c4c145b3e5fd775245a0f0"
+  },
+  "tree": "f8d3477451fa601643ef6c06f6b1e616e2407643"
+}

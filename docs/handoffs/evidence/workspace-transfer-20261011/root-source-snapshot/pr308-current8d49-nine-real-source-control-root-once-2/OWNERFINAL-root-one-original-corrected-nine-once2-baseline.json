@@ -1,0 +1,120 @@
+{
+  "baseline_accepted": true,
+  "capture": "2026-10-11T21:03:16.039914+00:00",
+  "config_binding": {
+    "bytes": 5694,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/frozen-corrected-nine-once2-baseline-execution-config-NOTRUN.json",
+    "sha256": "d8dd253da2711437e1c94db0950d1352afbc963963d6ae1ec3c14d43eacd336a"
+  },
+  "contract_binding": {
+    "bytes": 8708,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/frozen-corrected-nine-once2-baseline-only-command-contract-NOTRUN.json",
+    "sha256": "8f9f2aa0cb570170cd381c07ad5f849700449f3f35d3983d11dbe9a6f6d74da0"
+  },
+  "corrected_source_independent": {
+    "bytes": 4667,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-private-corrected-nine-source-independent-review/OWNERFINAL-independent-private-corrected-nine-catalog-lock-SOURCE_ONLY-review.json",
+    "sha256": "aa3f927ef250c86d8b76e02e21f6382f2a894c22b0bba7f285b08c5f60f13da4"
+  },
+  "elapsed_seconds": 33.271986053994624,
+  "independent_preexecution_binding": {
+    "bytes": 12065,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-corrected-nine-once2-independent-PREEXEC-review/OWNERFINAL-independent-corrected-nine-once2-PREEXEC-GO-with-named-outer1200-clarification.json",
+    "sha256": "45e9740dd7a789b9995b51dd676ca9bfa5fcb0f5336064751e3d260c741ffd0e"
+  },
+  "junit": {
+    "binding": {
+      "bytes": 2330,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2/baseline/original-junit.xml",
+      "sha256": "03978c3352a696e5bd834df80b6a713548fcf78e375336821b331303e150ba92"
+    },
+    "counts": {
+      "errors": 0,
+      "failed": 0,
+      "passed": 9,
+      "skipped": 0
+    },
+    "names": [
+      "test_candidate_preparation_precedes_real_sqlite_writer",
+      "test_publication_follows_actual_sqlite_commit",
+      "test_staged_pool_keeps_original_routes_until_commit",
+      "test_failed_warmup_restores_original_idle_and_catalog",
+      "test_actual_commit_failure_restores_original_generation_token",
+      "test_running_old_handle_drains_only_after_new_publication",
+      "test_candidate_warmup_precedes_generation_switch",
+      "test_rejected_candidate_cleanup_preserves_last_good",
+      "test_repaired_candidate_publishes_without_admitting_failed_generation"
+    ],
+    "reported_suite_counts": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 9
+    }
+  },
+  "launcher_binding": {
+    "bytes": 9329,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/run_corrected_nine_once2_baseline.py",
+    "sha256": "0faa08c751e98b834ed1525daf5efd2bc64820fbd7b08f698fe66ffefe3bdcc2"
+  },
+  "mutants": "NOT_RUN",
+  "native": "NOT_RUN",
+  "original_failed_baseline_retained": {
+    "bytes": 16829,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-nine-real-original-baseline-independent-diagnosis/OWNERFINAL-independent-original-nine-baseline-failure-and-private-control-boundary.json",
+    "sha256": "6288fb4a6d296770a1c930ae73b0854e103378417f250a00a553c7c1bf3a25e2"
+  },
+  "outcomes": {
+    "always-post": {
+      "elapsed_seconds": 14.8538193639979,
+      "returncode": 0
+    },
+    "before": {
+      "elapsed_seconds": 15.459027960998355,
+      "returncode": 0
+    },
+    "corrected-nine-baseline": {
+      "elapsed_seconds": 2.220511235005688,
+      "returncode": 0
+    },
+    "own-origin-0": {
+      "elapsed_seconds": 0.1644296430022223,
+      "returncode": 0
+    },
+    "own-origin-1": {
+      "elapsed_seconds": 0.11407218499516603,
+      "returncode": 0
+    },
+    "own-origin-2": {
+      "elapsed_seconds": 0.11409417299728375,
+      "returncode": 0
+    },
+    "own-origin-3": {
+      "elapsed_seconds": 0.1643246230087243,
+      "returncode": 0
+    },
+    "own-origin-4": {
+      "elapsed_seconds": 0.16456141800154,
+      "returncode": 0
+    }
+  },
+  "release_binding": {
+    "bytes": 1504,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-corrected-nine-once2-reviewed-original-outer/root-one-release.json",
+    "sha256": "eebc42c1fc383a6ed6b0da92040cb2aacea32e15a031e8b9813db755b5e3b952"
+  },
+  "schema": 1,
+  "scope": "ORIGINAL_ONCE2_CORRECTED_NINE_BASELINE_ONLY_NO_NATIVE_NO_MUTANTS",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_adoption": "NONE",
+  "source_leaves": 1440,
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+}

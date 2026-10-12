@@ -1,0 +1,68 @@
+"""Static source/config preparation only; formatter already ran, no gates/tests."""
+import ast,datetime,hashlib,json,os,stat,subprocess
+from pathlib import Path
+import xml.etree.ElementTree as ET
+B=Path('/workspace/engineering/pr307-current00b1-token-light-once3-PREEXECUTION-NOTRUN');R=Path('/workspace/engineering/pr307');F=Path('/workspace/engineering/pr307-release-line-only-configured-formatter-child-SOURCE-PREPARATION')
+O=Path('/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION')
+SOURCE='00b1bb9974b73f2da65e49c9048774c84df286ba';TREE='2663e86b2344f9e056c3259653cb905a6d195599';PARENT='c97edfd10edb5b1c63f8a6371bfd2905996a2da2'
+ATTEMPT='/workspace/engineering/pr307-current00b1-token-light-once3-owned';RELEASE=str(B/'root-one-TOKEN-LIGHT-once3-release.json')
+
+def row(p):
+ p=Path(p);s=p.lstat();assert stat.S_ISREG(s.st_mode) and not p.is_symlink();raw=p.read_bytes()
+ return {'path':str(p),'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest(),'mode':oct(stat.S_IMODE(s.st_mode))}
+def exact(r):assert row(r['path'])==r;return Path(r['path']).read_bytes()
+def put(n,j,mode=0o400):
+ p=B/n
+ with p.open('x') as f:json.dump(j,f,indent=2,sort_keys=True);f.write('\n');f.flush();os.fsync(f.fileno())
+ p.chmod(mode);return row(p)
+def git(*a):return subprocess.check_output(['git','-C',str(R),*a])
+assert git('rev-parse','HEAD').decode().strip()==SOURCE and git('rev-parse','HEAD^{tree}').decode().strip()==TREE and git('rev-parse','HEAD^').decode().strip()==PARENT and not git('status','--porcelain')
+assert git('diff','--name-only',PARENT,SOURCE).decode().splitlines()==['devutils/tests/test_actions_runtime_release_line.py']
+oldowner=row(O/'OWNERFINAL-currentc97e-once2-selected-CONFIG-basename-v3-TOKEN-LIGHT-PREEXECUTION-NOTRUN.json');old=json.loads(exact(oldowner));cfg=json.loads(exact(old['config']));oldproof=json.loads(exact(cfg['source_proof']))
+for r in cfg['bindings']:exact(r)
+outerrow=row('/workspace/engineering/root-pr307-currentc97e-reviewed-token-light-once2-v3-outer/OWNERFINAL-root-one-original-reviewed-currentc97e-token-light-once2-v3-outer.json');outer=json.loads(exact(outerrow));assert outer['outer_returncode']==1
+attempt=Path('/workspace/engineering/pr307-currentc97e-token-light-once2-owned');terminalrow=row(attempt/'original-terminal.json');term=json.loads(exact(terminalrow));assert term['status']=='FAILED' and term['before_passed'] is True and term['post_guard']=='PASS'
+originals=[oldowner,old['config'],old['launcher'],cfg['source_proof'],outerrow,terminalrow,outer['release'],outer['review'],outer['external_post']]
+for p in sorted(attempt.iterdir()):
+ if p.is_dir():
+  for name in ('terminal.json','stdout.bin','stderr.bin','junit.xml','expected-two-original-env-failures.json'):
+   if (p/name).is_file():originals.append(row(p/name))
+for p in sorted(F.iterdir()):
+ if p.is_file():originals.append(row(p))
+prior_counts={}
+for phase,expected in (('toolkit',179),('token-release-line-GREEN',99),('guard-focus',41)):
+ jr=row(attempt/phase/'junit.xml');cases=list(ET.fromstring(exact(jr)).iter('testcase'));assert len(cases)==expected and not any(t.find(n) is not None for t in cases for n in ('failure','error','skipped'))
+ prior_counts[phase]={'passed':len(cases),'failures':0,'errors':0,'skips':0,'JUnit':jr}
+redcases=list(ET.fromstring((attempt/'token-RED-parent2314'/'junit.xml').read_bytes()).iter('testcase'));assert len(redcases)==2 and all(t.find('failure') is not None and t.find('error') is None and t.find('skipped') is None for t in redcases)
+assert json.loads((attempt/'token-RED-parent2314'/'terminal.json').read_text())['returncode']==10
+assert 'returned non-zero exit status 1.' in (attempt/'token-RED-parent2314'/'stderr.bin').read_text()
+rawstatic=(attempt/'configured-static'/'stdout.bin').read_text();assert 'Would reformat: tests/test_actions_runtime_release_line.py' in rawstatic
+before=(F/'original-c97-release-line-test.py').read_bytes();after=(R/'devutils/tests/test_actions_runtime_release_line.py').read_bytes();assert ast.dump(ast.parse(before),include_attributes=False)==ast.dump(ast.parse(after),include_attributes=False)
+assert (F/'exact-own-Devutils-Ruff-version.stdout.private').read_bytes()==b'ruff 0.1.15\n'
+newrows=[]
+for r in oldproof['all_git_FS_body_and_exec_mode_exact']:
+ p=R/r['path'];m=p.lstat();raw=os.readlink(p).encode() if r['mode']=='120000' else p.read_bytes();a={**r,'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}
+ assert bool(m.st_mode&0o111)==(r['mode']=='100755') if r['mode']!='120000' else stat.S_ISLNK(m.st_mode)
+ if r['path']!='devutils/tests/test_actions_runtime_release_line.py':assert a==r
+ newrows.append(a)
+assert len(newrows)==1442
+sourceproof=put('current00b1-format-child-1442-prepared30-ownfive-and-original-once2-proof.json',{'schema':1,'status':'SOURCE_FORMAT_CHILD_STATIC_BODY_PROOF_NOT_GATE_EXECUTION','current_source':SOURCE,'current_tree':TREE,'head':SOURCE,'tree':TREE,'parent':PARENT,'all_typed_count':1442,'all_git_FS_body_and_exec_mode_exact':newrows,'prepared30_exact_original307_head':oldproof['prepared30_exact_original307_head'],'five_existing_venvs_config_only':oldproof['five_existing_venvs_config_only'],'retained_original_evidence':oldproof['retained_original_evidence']+originals,'original_sourceproof':cfg['source_proof'],'sole_SOURCE_delta':'Configured own Devutils Ruff release-line leaf format; all1441otherbody/modepairs and wholefileAST exact','prior_ACTUAL_once2_status':'FAIL_AT_CONFIGURED_STATIC_NOT_VERSION_MISMATCH','prior_ACTUAL_once2_counts':prior_counts,'prior_RED':'two semanticFAIL/gateway10/checkedinner1 unchanged','FULL_authority':'NOT_RUN_HOLD','actual_GATE_child':'NOT_RUN'})
+newcfg=dict(cfg);newcfg['source_proof']=sourceproof;newcfg['bindings']=[sourceproof if r==cfg['source_proof'] else r for r in cfg['bindings']]+originals
+# Exact duplicates are consolidated, never conflicting rows or changed subjects.
+seen={}
+for r in newcfg['bindings']:
+ if r['path'] in seen:assert seen[r['path']]==r
+ seen[r['path']]=r
+newcfg['bindings']=list(seen.values());newcfgrow=put('immutable-one-TOKEN-LIGHT-once3-inputs.json',newcfg)
+script=exact(old['launcher']).decode();changed=script.replace('currentc97e LIGHT','current00b1 LIGHT').replace("CONFIG=BASE/'immutable-one-TOKEN-LIGHT-once2-inputs.json'", "CONFIG=BASE/'immutable-one-TOKEN-LIGHT-once3-inputs.json'").replace("CONFIG_SHA='29368814c182f30732ab041ca580162c92071e4bb076eb164c9820ced3acc158'", "CONFIG_SHA='"+newcfgrow['sha256']+"'").replace("ATTEMPT=Path('/workspace/engineering/pr307-currentc97e-token-light-once2-owned')", "ATTEMPT=Path('"+ATTEMPT+"')").replace("SOURCE='"+PARENT+"'", "SOURCE='"+SOURCE+"'").replace("TREE='f8d3477451fa601643ef6c06f6b1e616e2407643'", "TREE='"+TREE+"'").replace('RELEASE_ONE_CURRENTC97E_TOKEN_LIGHT_ONCE2_ONLY','RELEASE_ONE_CURRENT00B1_TOKEN_LIGHT_ONCE3_ONLY').replace('GO_CURRENTC97E_TOKEN_LIGHT_ONCE2_GATEWAY_PREEXECUTION','GO_CURRENT00B1_TOKEN_LIGHT_ONCE3_GATEWAY_PREEXECUTION').replace('PASSED_CURRENTC97E_TOKEN_LIGHT_ONCE2_ONLY','PASSED_CURRENT00B1_TOKEN_LIGHT_ONCE3_ONLY')
+ast.parse(changed);lp=B/'launch_one_owned_token_light_once3_format_child.py';lp.write_text(changed);lp.chmod(0o444);launch=row(lp)
+# Inverse exact text equality proves no changed function other than declared source/metadata literals.
+reverse=changed.replace('current00b1 LIGHT','currentc97e LIGHT').replace('immutable-one-TOKEN-LIGHT-once3-inputs.json','immutable-one-TOKEN-LIGHT-once2-inputs.json').replace(newcfgrow['sha256'],'29368814c182f30732ab041ca580162c92071e4bb076eb164c9820ced3acc158').replace(ATTEMPT,'/workspace/engineering/pr307-currentc97e-token-light-once2-owned').replace(SOURCE,PARENT).replace(TREE,'f8d3477451fa601643ef6c06f6b1e616e2407643').replace('RELEASE_ONE_CURRENT00B1_TOKEN_LIGHT_ONCE3_ONLY','RELEASE_ONE_CURRENTC97E_TOKEN_LIGHT_ONCE2_ONLY').replace('GO_CURRENT00B1_TOKEN_LIGHT_ONCE3_GATEWAY_PREEXECUTION','GO_CURRENTC97E_TOKEN_LIGHT_ONCE2_GATEWAY_PREEXECUTION').replace('PASSED_CURRENT00B1_TOKEN_LIGHT_ONCE3_ONLY','PASSED_CURRENTC97E_TOKEN_LIGHT_ONCE2_ONLY');assert reverse==script
+assert not Path(ATTEMPT).exists() and not Path(ATTEMPT).is_symlink() and not Path(RELEASE).exists()
+canonical=B/'canonical-configured-formatter-owning-package-and-exact-failed-leaf-proposed.txt';canonical.write_text('Canonical target: docs/skills/repository-operations.md, configured package lint/formatter gates.\n\nA configured format failure identifies the owning package, config and exact reported leaf. Retain the checker argv, measured executable/version/hash and raw failed path before changing source. Formatting a different file does not satisfy that gate, even with AST equality. Bind the one-leaf format delta, whole-file AST and all other body/mode pairs, then use a fresh child-source gate namespace. Do not relabel the original failure or invent a formatter-version mismatch when the measured binaries/configuration agree.\n');canonical.chmod(0o400)
+contract=put('strict-current00b1-once3-ROOT-release-and-bound-command-contract-NOTRUN.json',{'schema':1,'status':'NOT_EXECUTABLE_ROOT_DISTINCT_RELEASE_AND_INDEPENDENT_REVIEW_REQUIRED','source':SOURCE,'tree':TREE,'config':newcfgrow,'launcher':launch,'attempt_root':ATTEMPT,'root_release_path':RELEASE,'root_release_required':'regular nonsymlink0600 exact owning UIDGID, source/tree/config/launcher review hashes and decision RELEASE_ONE_CURRENT00B1_TOKEN_LIGHT_ONCE3_ONLY','independent_review_required':{'decision':'GO_CURRENT00B1_TOKEN_LIGHT_ONCE3_GATEWAY_PREEXECUTION','source':SOURCE,'tree':TREE,'config_sha256':newcfgrow['sha256'],'launcher_sha256':launch['sha256']},'ROOT_exact_argv':['timeout','--signal=TERM','--kill-after=10s','900s','bash','-c','source /workspace/actions-cloud/activate.sh && exec /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python '+launch['path']+' "$@"','pr307-token-light',RELEASE,'ROOT_AUTH_SHA256_FROM_ANNOUNCED_TYPED_RELEASE','OWNER_ANNOUNCED_INDEPENDENT_REVIEW_PATH','OWNER_ANNOUNCED_INDEPENDENT_REVIEW_SHA256'],'budgets':old['bounds'],'freshphaseoutputs':'all9underonce3 ABSENT; basetemp/robot-output/JUnit separatelyowned; no sharednumberedtemp','typed_RED':'Only expectedgateway10 +checkedoriginalinner1 +two exact parent2314 missingtoken semanticJUnit failures; errors/timeouts/wrongfailures reject','FULL':'mandatory complete affectedDevutils and Runtime source suites separate ROOTrelease NOT_RUN','OAuth_input_authority_native_release':'HOLD_NO_ACTUAL_CONFIG_CONTENT_OR_RELEASE_CLAIM','current_LIGHT':'NOT_RUN'})
+proof=put('exact-format-child-AST-one-path-and-once3-literal-config-address-closure-proof-NOTRUN.json',{'schema':1,'status':'READONLY_METADATA_AST_BODY_PROOF_NO_GATE_EXECUTION','source':SOURCE,'tree':TREE,'parent':PARENT,'source_count':1442,'source_clean':True,'changed_paths':['devutils/tests/test_actions_runtime_release_line.py'],'all_other_body_modes_preserved':1441,'formatted_whole_file_AST':'EXACT','configured_own_formatter':'0.1.15; exact--configruff.toml; no mismatch','original_once2_SCOPE_counts':prior_counts,'original_staticFAIL':'Onlyreportedrelease-lineformatleaf; originalstatusFAILunchanged; generator/invokephasesNOTRUN','original_RED':'2F/gateway10/inner1 precise typed contract unchanged','new_launcher_inverse_text_and_AST':'EXACT_AFTER_DECLARED_LITERALS_ONLY','executable_CONFIG_selected_path':newcfgrow['path'],'new_config_closed_bindings':len(newcfg['bindings']),'new_sourceproof':sourceproof,'new_launcher':launch,'new_cfg':newcfgrow,'actual_once3':'NOT_RUN','memory_originals':'NOT_TOUCHED'})
+allrefs=[row(p) for p in sorted(B.iterdir()) if p.is_file()]
+owner=put('OWNERFINAL-current00b1-one-leaf-format-SOURCE-and-fresh-token-once3-PREEXEC-NOTRUN.json',{'schema':1,'status':'OWNER_FINAL_FORMAT_ONLY_SOURCE_AND_ONCE3_RETARGETED_PREEXEC_NOTRUN','source':SOURCE,'tree':TREE,'parent':PARENT,'source_count':1442,'source_clean':True,'samebranch_ordinary_child':'NOAMEND_REBASE_FORCE_NEWBRANCH_OR_PUSH','source_changed_paths':['devutils/tests/test_actions_runtime_release_line.py'],'source_AST':'WHOLE_MODULE_EXACT','all_other_body_modes':1441,'formatter_input_and_original_logs':{'directory':str(F),'version':'0.1.15','argv':'ownDevutils.venv/bin/ruff format --configruff.toml tests/test_actions_runtime_release_line.py','actual_terminal':0},'source_proof':sourceproof,'config':newcfgrow,'launcher':launch,'ROOT_contract':contract,'static_proof':proof,'all_new_bindings':allrefs,'all_original_once2_and_formatter_bindings':originals,'retained_original_parent_source_and_failure':oldowner,'prior_ACTUAL_counts':prior_counts,'original_once2':'FAIL_REMainsFAILED_STATIC; originalRED2F/gateway10inner1; no generator/invokePASS; observedcorrectedformatterversionssame','once3':'NOT_RUN_NO_TESTS_OR_IMPORTS_OR_GATE_OR_NATIVE','ROOTrelease':'NOT_CREATED','FULL':'MANDATORY_NOT_RUN','OAuth_authority_native_publication_merge':'HOLD','documentation':{'exact_delta':row(canonical),'evidence':'Original configured-static stdoutonlyrelease-line; ownversion0.1.15/executableconfig captured; differentpreviousformattedleaf cannotcleargate; exact1leafAST+all1441otherbytes/modes verified','disposition':'Meaningful exactleaf/ownpackage formatter lesson proposed externally, no cosmetic sourceguide child. Existing configuredpackage lint lesson reused.','remaining_uncertainty':'Independent original once2 fullreceipt pendingbinding supplement if needed; newonce3 actual gates and requiredFULL/authority/native/release unqualified.','upstream_disposition':'none'},'capture':datetime.datetime.now(datetime.timezone.utc).isoformat()})
+for r in newcfg['bindings']+allrefs:exact(r)
+print(json.dumps(owner))

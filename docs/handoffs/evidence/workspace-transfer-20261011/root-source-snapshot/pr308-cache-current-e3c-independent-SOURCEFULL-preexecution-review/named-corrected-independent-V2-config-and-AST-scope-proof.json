@@ -1,0 +1,14 @@
+{
+  "all_prepost_original_nonresolver_gates_AST_exact": true,
+  "config_delta": "Two archive alias fields, named implementation body bindings, and appended PYTHONOPTIMIZE forbidden export only",
+  "full_body_and_parent_AST_exact_after_declared_filenames_and_early_optimization_guard": true,
+  "new_resolver": "One original8dc receipt alias with physical metadata/hash and safe unique regular member/1696/SHA/mode/UIDGID/originalFAIL/cleanupFAIL and gzipEOF checks",
+  "no_archive_data_rerun_no_product_execution": true,
+  "original_failed_observation": {
+    "bytes": 582,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-cache-current-e3c-independent-SOURCEFULL-preexecution-review/original-independent-V2-normalization-omitted-optimization-addition-FAIL.json",
+    "sha256": "db5c46d106b0346baf08b8b3a215533b4ffce69d357a99d424b1f4be51d4badf"
+  },
+  "status": "PASS_READ_ONLY_NAMED_CORRECTED_EXPECTED_CONTRACT"
+}

@@ -1,0 +1,218 @@
+{
+  "schema": "independent-current-pr312-configured-SOURCEFULL-actual-review/v1",
+  "decision": "GO_CURRENT_EC70_CONFIGURED_SOURCEFULL_NORMAL_EXISTING_BRANCH_PUSH_PREREQUISITE_ONLY",
+  "owner_final": {
+    "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/OWNERFINAL-root-current312-ec70-configured-SOURCEFULL.json",
+    "bytes": 5785,
+    "sha256": "32288acae49cf7f89c8f7c67bad292d062bcf9a56bb9032175216d0c00bcb0d1"
+  },
+  "source": {
+    "head": "ec70a2928461941c129b1c05332dc441070e0184",
+    "tree": "47a1e4fceb22fd15eaee1ca380ad6c005abfdde6",
+    "ordered_parents": [
+      "77ed3de24f33412dff30e4e3c18841c4c09933ac",
+      "e3c29cde8878307912e55ed09b6436c0f91d06d5"
+    ],
+    "actual_target": "e3c29cde8878307912e55ed09b6436c0f91d06d5",
+    "cwd": "/workspace/engineering/runtime-checkout-eol",
+    "clean": true,
+    "complete_typed_Git_FS_body_exec_entries_exact": 1426
+  },
+  "scope": "Exactly current ec70 configured Runtime source acceptance. Normal existing branch push is root-owned; fresh complete hosted CI and policy admission still required. No integration/native/Windows/provider/release GO.",
+  "independent_complete_original_log_census": {
+    "raw_original": {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/original-configured-full.private.log",
+      "bytes": 346188,
+      "sha256": "2e2da108608f75625f88a7328ed7be1cfa166b85f76203697f48dbfab6588762"
+    },
+    "root_original_complete_census": {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/root-exact-complete-configured-full-node-census.private.json",
+      "bytes": 259884,
+      "sha256": "6ba77d6a5111ea178cd3631c6243eeaaff7cfb2b9125c880e8e4b26ea8f834a9"
+    },
+    "unique_complete_nodes": 1348,
+    "actual_counts": {
+      "PASSED": 1335,
+      "SKIPPED": 13,
+      "FAILED": 0,
+      "ERROR": 0
+    },
+    "actual_workers": [
+      "gw0",
+      "gw1"
+    ],
+    "pytest_seconds": 141.85,
+    "warnings": 16,
+    "independent_method": "All1348 original terminal headers/status/worker occurrences matched to full frozen unique node IDs, including39 parameterized IDs with spaces. Every file exists in current committed tests and every test definition resolves after stripping parameterization before splitting method/IPv6 delimiters.94 current test modules. Summary and raw/census SHA reconcile; no IDs truncated at spaces or IPv6 colons.",
+    "source_test_modules": 94,
+    "actual_transport_module": "action_server_tests/run_outputs/test_transport.py",
+    "actual_transport_nodes_passed": 30,
+    "actual_shutdown_module": "action_server_tests/test_shutdown_response_order.py",
+    "actual_shutdown_nodes_passed": 10,
+    "both_subsets_nonempty_unique_all_PASS": true,
+    "named_nonempty_root_supplement": {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/root-nonempty-current-full-transport-and-shutdown-node-supplement.json",
+      "bytes": 539,
+      "sha256": "e3eaf8379a59d50e8845712828650c9f73c272cb25d6a728fcba060a8a37b39e"
+    },
+    "original_root_optional_transport_predicate": "Wrong nonexistent basename was not adequate subset proof; named supplement confirms30 real-module rows without rerun/overwriting the full census.",
+    "reviewer_parser_observations": "Initial strict full-line/nonspace parser omitted39 space-bearing parameters; initial final-double-colon split hit an IPv6 parameter. These were data-parser limitations only. Full names then verified against original output and actual named source defs. No test/gate failures inferred."
+  },
+  "execution_and_retention": {
+    "reviewed_preexecution": {
+      "path": "/workspace/engineering/pr312-actual300-independent-FULL-preexecution-review-v2/OWNERFINAL-independent-current312-ec70-configured-SOURCEFULL-v2-preexecution-review.json",
+      "bytes": 15637,
+      "sha256": "2d298ee4aabec0654e3c2c0ae1f9a1574ebc0fdec58ef6d54d80fa60c079c68f"
+    },
+    "exact_proposal": {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-proposal-v2/OWNERFINAL-pr312-actual300-current-e3c-configured-full-NOEXECUTION-proposal-v2-final.json",
+      "bytes": 28071,
+      "sha256": "e890f8e2c91c75ab046bdc493cf191931082f100b82b508b6b6bd1be967ab6d0"
+    },
+    "exact_outer_argv": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "900s",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/pr312-actual300-refresh-configured-full-proposal-v2/root-distinct-one-full-primary-and-postguard-envelope-v2-final.py",
+      "--execute-root-authorized"
+    ],
+    "cwd": "/workspace/engineering/runtime-checkout-eol",
+    "root_command_adoption": {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/root-one-outer900-command-adoption.json",
+      "bytes": 1080,
+      "sha256": "e3d145f79cf5835ff74ba7207a28e734315e1f9ef9eb5ea95b838a08fc1838d2"
+    },
+    "root_distinct_ONE_authorization": {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/root-one-distinct-source-full-authorization.json",
+      "bytes": 762,
+      "sha256": "468bde137cf3573c91c23688cff8a5e38603b3c1fb3a9989c94b719af30d4b63"
+    },
+    "fresh_preflight_capacity_bytes": 1276850176,
+    "authorization_capacity_bytes": 1276882944,
+    "required_capacity_bytes": 1200000000,
+    "exclusive_heavy_slot_adopted": true,
+    "attempts": 1,
+    "automatic_retry": false,
+    "complete_root_TERM_seconds": 900,
+    "complete_root_KILL_grace_seconds": 10,
+    "primary_TERM_seconds_including_activation": 640,
+    "configured_Runtime_child_TERM_seconds": 600,
+    "separate_postguard_TERM_seconds": 120,
+    "all_inner_KILL_grace_seconds": 10,
+    "primary_result": {
+      "returncode": 0,
+      "exception_category": null,
+      "elapsed_seconds": 162.75955348199932,
+      "original_output": {
+        "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/original-configured-full.private.log",
+        "bytes": 346188,
+        "sha256": "2e2da108608f75625f88a7328ed7be1cfa166b85f76203697f48dbfab6588762"
+      }
+    },
+    "separate_postguard_result": {
+      "returncode": 0,
+      "exception_category": null,
+      "elapsed_seconds": 3.9455493959976593,
+      "original_output": {
+        "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/original-postguard.private.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "root_outer_result": {
+      "returncode": 0,
+      "exception_class": null,
+      "seconds": 166.74843814999622,
+      "source": "ec70a2928461941c129b1c05332dc441070e0184",
+      "tree": "47a1e4fceb22fd15eaee1ca380ad6c005abfdde6",
+      "no_retry": true
+    },
+    "all_returncodes_zero": true,
+    "primary_recorded_before_separate_postguard": "Verified immutable launcher AST/order and original distinct primary terminal equals final primary; post is separate and does not overwrite primary. Filesystem times are not universal chronology proof.",
+    "private_0700_owned_directory_and_0600_original_logs_auth": true,
+    "universal_cleanup_or_all_descendant_natural_exit": "NOT_CLAIMED; sourcefull parent/timeout command evidence only"
+  },
+  "fresh_independent_postterminal_preservation": {
+    "actual_owner_binding_rows_size_SHA_exact": 13,
+    "additional_nonempty_supplement_size_SHA_exact": true,
+    "preexecution_rows_size_SHA_mode_exact": 8,
+    "installed_preexecution_rows_size_SHA_mode_exact": 4,
+    "all_current_LIGHT_private_refs_exact": 35,
+    "all_historical_original_refs_exact": 212,
+    "complete1426_actual_Git_entries_and_FS_body_exec_vs_frozenproof": true,
+    "derived1426_and212_preflight_truthful": true,
+    "postguard_all1426_and212_PASS": true,
+    "own_declared_prepared_inputs_exact": 30,
+    "own_concrete_prefix_config_python_resolution_exact": 5,
+    "activation_exports_and_PATH": 19,
+    "direct_data_only_native_original_entry_paths_modes_symlinks_bodyhashes_exact": 1192,
+    "direct_data_only_helpers_original_and_0444_snapshots_exact": 4,
+    "direct_data_only_original_V5_raw_receipts_exact": 18,
+    "direct_data_only_original_V5_frozen_files_exact": 50,
+    "locked_frontend_Node_browser_exact": true,
+    "RCC_18_19_3_primary_0700_and_ignored_0711_managed_pin_exact": true
+  },
+  "preserved_historical_boundaries": {
+    "original7346_FULL_preexecution_HOLD_and_named_v2_successor": "Preserved; no retrospective predecessor GO",
+    "old77_full_proposal": "NOT_RUN historical; no actual receipt reconstructed",
+    "original770_Windows_FAILURE": "Retained source/checkout failure scope; no current Windows pass carry",
+    "current_ec70_full": "New exact current source run verified above",
+    "old92498_native_and_original3ec_V5": "Historical exact tuples/data unchanged; current source qualification is not artifact/native qualification"
+  },
+  "remaining_HOLDs": [
+    "Root normal push to existing312 branch, fresh complete exact-current hosted CI/policies and original Windows byte/integration evidence",
+    "Client-delivery/natural Runtime shutdown behavior beyond source tests remains separately unqualified",
+    "RCC-approved5/7276 actual/native/provider/browser/private/full release admission",
+    "No integration or issue-closure authorization"
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "Exact_accepted_proposed_delta": {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-proposal-v2/exact-proof-counts-and-complete-envelope-canonical-proposed.patch",
+      "bytes": 689,
+      "sha256": "e3fdb2a2d54f1a8bf8c89378dc131cdf2323416aa59cc72d7011edcc49c1ca73",
+      "mode": "0o444"
+    },
+    "Added_lines": 6,
+    "Durable_learning": "Derive/assert emitted source/reference counts from validated lists. Preserve wrong labels in named predecessors. Bound the complete activation/preflight/gate/postcheck envelope, retain original primary result before separate postchecks, and reject a guard failure even if the test process passed.",
+    "Evidence": [
+      {
+        "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/OWNERFINAL-root-current312-ec70-configured-SOURCEFULL.json",
+        "bytes": 5785,
+        "sha256": "32288acae49cf7f89c8f7c67bad292d062bcf9a56bb9032175216d0c00bcb0d1"
+      },
+      {
+        "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-proposal-v2/OWNERFINAL-pr312-actual300-current-e3c-configured-full-NOEXECUTION-proposal-v2-final.json",
+        "bytes": 28071,
+        "sha256": "e890f8e2c91c75ab046bdc493cf191931082f100b82b508b6b6bd1be967ab6d0"
+      },
+      {
+        "path": "/workspace/engineering/pr312-actual300-independent-FULL-preexecution-review-v2/OWNERFINAL-independent-current312-ec70-configured-SOURCEFULL-v2-preexecution-review.json",
+        "bytes": 15637,
+        "sha256": "2d298ee4aabec0654e3c2c0ae1f9a1574ebc0fdec58ef6d54d80fa60c079c68f"
+      },
+      {
+        "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/before-full-source-activation-capacity.json",
+        "bytes": 526,
+        "sha256": "b76fdbb8d793197a9facd584fa7294f533196e11c4a1caa084aa550600614b78"
+      },
+      {
+        "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/primary-terminal-before-postguards.json",
+        "bytes": 352,
+        "sha256": "1e0b56ea46fff11f309feb3ec9ec0d355567a3a54e077a850d012c0fdebd74fd"
+      },
+      {
+        "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/postguard-terminal-separate.json",
+        "bytes": 341,
+        "sha256": "18cba2f4b471bf72e377f8b0247016ed3645c50eb9f4de6e4ad2c69885f649b8"
+      }
+    ],
+    "Stale_guidance_removed": "Named v2 truthful1426/212 replaces original7346 stale1424/141 metadata; complete900 envelope distinct from600 child. Historical original unchanged.",
+    "Remaining_uncertainty": "Current hosted Windows/natural process shutdown/native/release limits above; test/node/source receipts alone do not qualify them.",
+    "Disposition": "Exact six-line meaningful proposed lesson and both source parent-guide lessons verified/reused, no cosmetic reviewer source edit."
+  },
+  "Upstream_disposition": "none",
+  "reviewer_product_imports_tests_gateway_downloads_native_source_ref_mutations": false
+}

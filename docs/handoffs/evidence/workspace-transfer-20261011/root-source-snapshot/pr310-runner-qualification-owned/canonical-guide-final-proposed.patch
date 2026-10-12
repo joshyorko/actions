@@ -1,0 +1,70 @@
+--- a/docs/skills/work-items.md
++++ b/docs/skills/work-items.md
+@@ -401,6 +401,30 @@
+ the source revision and named build inputs, but does not hash every build
+ dependency or attest a clean source tree.
+ 
++When replaying native UI acceptance against an existing measured build, keep
++the original manifest source SHA and record the harness commit/tree separately.
++Compare Runtime, dependency, wrapper and frontend producer inputs against the
++build revision; a changed browser acceptance script is a harness change, not a
++new packaged frontend build. The Go-wrapper consumer requires the unchanged
++frozen tree at its sibling `dist/action-server` path, and both runtime consumers
++require the original `go-wrapper/assets/assets.zip` bytes in the harness checkout.
++If that archive was not uploaded separately, an exact embedded byte range from
++the measured wrapper is usable only after its SHA-256 matches the manifest;
++recompressing the extracted tree does not recover archive identity. Use the
++canonical RCC toolchain for a fresh frontend `npm ci --no-audit --no-fund`, keep
++Node module resolution local to that checkout, and record the selected
++Playwright version, actual launch selector, browser path and browser digest.
++For Playwright 1.62.1, `headless: true` without `channel` or `executablePath`
++selects `chromium-headless-shell`; `chromium.executablePath()` returns the
++full Chromium binary and does not establish this launch identity. Inspect the
++installed selector/registry and retain actual `pw:browser` launch-path/PID
++evidence with the selected executable digest. If using `DEBUG_FILE`, each
++separate Node process recreates that stream, so its final file records only
++the last attempted browser stage. Keep Chromium `TMPDIR`
++under a short, private `/tmp` directory independently of long receipt/profile
++paths: its SingletonSocket can otherwise exceed the Unix socket path limit
++before page navigation. This qualifies replay inputs; passing native execution receipts remain a separate gate.
++
+ On Linux, macOS, and Windows, the same workflow has a separate bounded Work
+ Items consumer gate. Each matrix job builds `actions-core` as a wheel into a
+ fresh runner-owned RCC home, then runs the real frozen and Go-wrapper
+@@ -508,11 +532,11 @@
+ It verified the same empty/populated queue, Escape focus restoration, detail,
+ 320px layout, and real storage-unavailable states as the frozen gate. These are
+ Linux results only. The native workflow runs separate frozen and Go-wrapper
+-browser gates on Ubuntu and Windows; their receipts bind the manifest path,
++browser gates on Ubuntu, Windows and macOS; their receipts bind the manifest path,
+ executable hash, and (for frozen builds) the onedir package-tree hash. Windows
+ manifest paths include `.exe` for both runtimes, which the harness validates.
+-Those Windows gates still require passing hosted receipts; macOS browser
+-acceptance is not configured. The native browser harness now has an
++Windows and macOS still require their own passing hosted receipts. The native
++browser harness now has an
+ authorization-denial stage: after signing in, it removes only its own
+ `actions_browser_session` cookie, requires the packaged Runtime's Work Items
+ request to return the real middleware-generated 403, verifies that
+@@ -529,9 +553,18 @@
+ stage passed in retained Linux frozen and Go-wrapper receipts using build
+ `856c0a47`; the Go-wrapper receipt binds harness head `ec8bea13`. Those
+ bounded receipts establish normal, middleware-403/sign-in recovery and
+-storage-503 behavior for their measured artifacts only. Importing later
+-Runtime changes requires new current-source artifact admission and execution;
+-the refreshed integration union has not established those native gates. Missing
++storage-503 behavior for their measured artifacts only. Current Linux replay
++with harness `f506a04e` separately passed frozen and Go-wrapper gates against
++original build `92498aff` (build tree `80e5c775`), after unchanged Runtime,
++dependency, wrapper and packaged frontend producer inputs were verified.
++Each gate retained one non-skipped passing native testcase, all three passing
++browser stages, observed Runtime wrapper reap with complete descendant
++snapshots and zero live/zombie descendants or process-control errors, and zero
++immutable package-tree changes. The existing command supervisor independently
++reaped six exited descendants in each gate; that count is separate from Runtime
++cleanup observations. Preserve the original manifest's build source identity
++and retain the harness identity in its runner envelope. For later Runtime
++changes, repeat source/artifact admission and actual execution for each gate. Missing
+ bundled support and generic HTTP 500 remain `NOT_RUN` until
+ their separately owned or supported packaged fixtures run. Do not use response
+ interception as backend evidence.

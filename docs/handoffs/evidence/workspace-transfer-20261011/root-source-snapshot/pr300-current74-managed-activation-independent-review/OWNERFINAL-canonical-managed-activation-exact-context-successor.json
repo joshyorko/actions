@@ -1,0 +1,17 @@
+{
+  "status": "EXACT_CONTEXT_CANONICAL_DELTA_SUCCESSOR_ONLY",
+  "independent_diagnosis_and_execution_proposal_unchanged": {
+    "path": "/workspace/engineering/pr300-current74-managed-activation-independent-review/OWNERFINAL-independent-current74-root-gateway-failure-and-managed-activation-proposal.json",
+    "bytes": 8900,
+    "sha256": "0e45277cba591218014f07a68522007c3cc60cfd6f5dd5e30a90e25435f0b81e"
+  },
+  "canonical_file": "docs/skills/repository-operations.md",
+  "exact_valid_unified_patch": {
+    "path": "/workspace/engineering/pr300-current74-managed-activation-independent-review/canonical-managed-gateway-activation-exact-context-v2.patch",
+    "bytes": 1025,
+    "sha256": "ee804bb1acd0102a0b28b37b66e55c3bcd1eac4f9bd70885ef5f7c245f67f994"
+  },
+  "exact_added_text": "An absolute managed RCC executable does not select its managed RCC home.\nSource the owned activation script and verify RCC home, XDG/Poetry caches,\nPATH and explicit worker/Go limits before the gateway. Admit the existing\ncached toolkit against current setup identity and executable bindings.\nA gateway failure while preparing another home supplies no pytest counts or\nsource-suite acceptance; retain that failed attempt separately from any\nnewly authorized successor.\n",
+  "earlier_header_only_patch_retained": "Unannounced first draft used a context-only @@ marker; exact context v2 binds proper unified line ranges. No canonical/source edit performed.",
+  "Upstream_disposition": "none"
+}

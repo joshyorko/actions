@@ -1,0 +1,26 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -3280,6 +3280,23 @@
+ 
+ ### Live pull-request base identity
+ 
++A complete green pull-request rollup admits its observed source/control tuple,
++not a later integration target. Reconcile every declared matrix job with its
++workflow run and check suite; a job named `publish` on a pull request can retain
++verified artifacts while its push-only registry upload remains skipped. Check
++draft state, reviews and conversation threads separately. A protection endpoint
++that denies access is an unverified policy surface, not permission to bypass
++repository or campaign acceptance requirements.
++
++After a dependency integrates, refresh the existing source branch by an ordinary
++merge with the actual target commit. Preserve source history and historical
++receipts, inspect the complete prospective union, and regenerate all canonical
++workflow outputs before fresh configured and hosted gates. A passing current
++Windows startup can justify deferring a diagnostic-only observation proposal;
++it does not establish a timeout cause, full descendant cleanup, or acceptance of
++a different branch's earlier failure. Keep design-only acceptance separate from
++implementation and execution authorization.
++
+ Reconcile the complete exact-head check-run inventory, commit statuses and
+ workflow-run inventory before merge admission. Page each endpoint until
+ exhausted and count checks, jobs and runs separately. A successful workflow can

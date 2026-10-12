@@ -1,0 +1,67 @@
+--- a/test_current_managed_reload_sqlite_pool_barriers.py
++++ b/test_current_managed_reload_sqlite_pool_barriers.py
+@@ -132,6 +132,7 @@
+         with db.transaction():db.insert(package);db.insert(action)
+         routes.register_actions()
+         original=dict(generation=pool.generation,routes=list(app.router.routes),catalog=routes.mcp_server_setup_helper._catalog,source=(old_dir/'my_actions.py').read_bytes())
++        original['catalog_identity_snapshot'] = _catalog_identity_snapshot(original['catalog'])
+         def after():
+             events.append('after-import-before-commit')
+             assert db.in_transaction()
+@@ -150,13 +151,45 @@
+         yield c
+ 
+ 
++def _catalog_identity_snapshot(catalog):
++    """Freeze field structure, object identity and values without mutable aliases.
++
++    A rollback may copy the outer catalog. Its original field containers and
++    nested objects must remain exact, including their immutable value payloads.
++    """
++    seen = set()
++
++    def freeze(value):
++        if isinstance(value, (type(None), bool, int, float, str, bytes)):
++            return ("value", type(value), id(value), value)
++        identity = id(value)
++        if identity in seen:
++            return ("reference", type(value), identity)
++        seen.add(identity)
++        if isinstance(value, dict):
++            contents = tuple((freeze(key), freeze(item)) for key, item in value.items())
++            return ("dict", type(value), identity, contents)
++        if isinstance(value, (list, tuple)):
++            return ("sequence", type(value), identity, tuple(freeze(item) for item in value))
++        if callable(value):
++            return ("callable", type(value), identity)
++        try:
++            fields = vars(value)
++        except TypeError as error:
++            raise AssertionError("UNSUPPORTED_CATALOG_SNAPSHOT_LEAF") from error
++        contents = tuple((name, freeze(item)) for name, item in fields.items())
++        return ("object", type(value), identity, contents)
++
++    return (type(catalog), tuple((name, freeze(value)) for name, value in vars(catalog).items()))
++
++
+ def assert_last_good(c):
+     assert c.db.all(c.ActionPackage)[0].directory == str(c.old_dir)
+     assert c.db.all(c.Action)[0].docs == 'G0 docs'
+     assert c.pool.generation == c.original['generation']
+     assert c.pool.actions[0].docs == 'G0 docs'
+     assert c.app.router.routes == c.original['routes']
+-    assert c.routes.mcp_server_setup_helper._catalog is c.original['catalog']
++    assert _catalog_identity_snapshot(c.routes.mcp_server_setup_helper._catalog) == c.original['catalog_identity_snapshot']
+     assert (c.old_dir/'my_actions.py').read_bytes() == c.original['source']
+ 
+ 
+@@ -233,7 +266,8 @@
+     _install_one_private_mutant(monkeypatch,'early_generation')
+     c=catalog_case;old=OldHandle();c.pool._running_processes={'old':[old]}
+     def check():
+-        assert c.pool.generation == c.original['generation']
++        assert c.pool._lock.locked(), 'WARMUP_CALLBACK_REQUIRES_EXISTING_POOL_LOCK'
++        assert c.pool._generation == c.original['generation']
+         assert old.can_reuse
+         assert c.pool.actions[0].docs == 'G1 docs'
+     c.state['warmup']=check;c.admit()

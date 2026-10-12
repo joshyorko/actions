@@ -1,0 +1,10 @@
+import hashlib,json,subprocess
+from pathlib import Path
+r=Path('/workspace/engineering/pr282');o=Path('/workspace/engineering/pr282-actual618-refresh');prepared=json.loads((o/'own-Bootstrap-reuse-inputs-and-origins.json').read_text());config={};origins=[]
+for p,d in prepared['inputs_exact_prepared_git_bytes_sha256'].items():assert hashlib.sha256((r/p).read_bytes()).hexdigest()==d,p
+for package,record in prepared['own5venvs_current_config_and_python'].items():
+ prefix=r/package/'.venv';assert hashlib.sha256((prefix/'pyvenv.cfg').read_bytes()).hexdigest()==record['config_sha256'];assert str((prefix/'bin/python').resolve())==record['python_resolved'];config[package]=record
+for record in prepared['own5actual_prefix_and_source_origin_assertions']:
+ module=Path(record['origin']);prefix=Path(record['prefix']);assert module.is_file() and prefix.is_dir();assert module.is_relative_to(r);assert prefix.is_relative_to(r);origins.append(record)
+owned=json.loads((o/'owned-pinned-RCC-retention.json').read_text());binary=Path(owned['owned_ignored_RCC']);assert hashlib.sha256(binary.read_bytes()).hexdigest()==owned['sha256'];assert bool(binary.stat().st_mode&0o111);assert subprocess.check_output(['git','-C',str(r),'check-ignore',str(binary)]).strip();assert hashlib.sha256(Path('/workspace/actions-cloud/bin/rcc').read_bytes()).hexdigest()==owned['gateway_rcc_sha256']
+p=o/'prepared30-origin5-ownedRCC-postfull-retention.json';assert not p.exists();p.write_text(json.dumps({'status':'EXACT_POSTFULL_PREPARED_SOURCE_CONFIG_INTERPRETER_ORIGIN_AND_RCC_RETENTION','measured30_prepared_input_sha256':prepared['inputs_exact_prepared_git_bytes_sha256'],'own5config_and_python':config,'own5measured_module_origins_retained':origins,'owned_pinned_RCC':owned,'scope':'Read-only bytes/config/resolutions/origin paths; source module bodies additionally checked in complete1433 prepost inventory; no repeat Bootstrap or package gates/no installer'},indent=2)+'\n');print('Prepared30/own5config-interpreter-sourceorigins/ownedRCC postfull retention PASS')

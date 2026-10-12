@@ -1,0 +1,29 @@
+diff --git a/docs/skills/repository-operations.md b/docs/skills/repository-operations.md
+index b4e39d1f..4a68ebc9 100644
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -2263,6 +2263,24 @@ Final reports list exact commands and outcomes, external/service tests skipped,
+ 
+ ## RCC Environment Artifact execution
+ 
++Keep the bundled RCC download/build pin separate from adapter compatibility.
++A version string is identification, not source, byte or functional qualification.
++The explicit `ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY` selector admits only
++source-reviewed immutable Linux binary tuples for isolated qualification tests;
++unknown selections fail closed. Acquisition provenance is data-only approval,
++not an operational feature pass or a production compatibility claim. The
++released 18.19.5 executable reports a modified source tree at its embedded
++revision; its source equivalence and modification cause remain unknown.
++Measure selected bytes before the bounded version probe and again before use.
++Fresh descriptors and process-local cache keys bind the actual version, source,
++platform, binary, provenance and required contract surface. Changing selection
++rejects stale descriptors until explicit re-preparation; an artifact digest
++alone does not bind the executable that acquired or executes it. Preserve older
++receipts under their original tuple; matching labels or trees do not relabel them.
++The staged consumer fixture retains its worker's exact env-exec lease receipt
++and actual typed retirement/cleanup snapshots in private evidence. Missing
++snapshots stay null; testcase success does not prove lease release or reaping.
++
+ Managed spec-v2 Action packages use the provisional RCC runtime adapter only
+ when `ACTIONS_RUNTIME_RCC_PROVIDER` or `ACTIONS_REAL_RCC_ARTIFACT_TEST`
+ explicitly opts into artifact mode. Without either opt-in, legacy bootstrap

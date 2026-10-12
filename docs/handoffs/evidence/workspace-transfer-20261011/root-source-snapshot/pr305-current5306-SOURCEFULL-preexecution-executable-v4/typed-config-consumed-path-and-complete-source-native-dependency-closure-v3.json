@@ -1,0 +1,1037 @@
+{
+  "activation_exports": 18,
+  "all1192_original_native_body_mode_member_set_exact": true,
+  "all1427_current_source_typed_Git_FS_hash_modes_exact": true,
+  "correct_inventory": {
+    "bytes": 379333,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/private-current-5306-complete-source-body-mode-inventory.json",
+    "sha256": "b097508ed9b022a3b5cb0c93f71bf587c3ac7a00c843bf6612c2e35f02f16205"
+  },
+  "execution_bounds": {
+    "always_post": "finally attempts post guard even on caught preflight/primary failure; OS hard kill cannot guarantee Python finally and remains HOLD",
+    "always_post_guard_timeout_seconds": 60,
+    "max_normal_parent_envelope_seconds": 760,
+    "outer_GNU_timeout_seconds": 900,
+    "outer_KILL_grace_seconds": 10,
+    "parent_configured_subprocess_timeout_seconds": 640,
+    "pre_guard_timeout_seconds": 60,
+    "source_GNU_timeout_seconds": 600,
+    "source_KILL_grace_seconds": 10
+  },
+  "existing_original_once_directory_absent": true,
+  "file_directory_closure": [
+    {
+      "kind": "directory",
+      "path": "/workspace/engineering/pr305",
+      "resolved": "/workspace/engineering/pr305"
+    },
+    {
+      "kind": "directory",
+      "path": "/workspace/engineering/pr305/developer",
+      "resolved": "/workspace/engineering/pr305/developer"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/developer/toolkit.py",
+      "resolved": "/workspace/engineering/pr305/developer/toolkit.py"
+    },
+    {
+      "kind": "directory",
+      "path": "/workspace/engineering/pr305/action_server",
+      "resolved": "/workspace/engineering/pr305/action_server"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/action_server/.venv/bin/python",
+      "resolved": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "resolved": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/OWNERFINAL-current5306-ordinary-a54-source-LIGHT-full-and-actual-HOLD.json",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/OWNERFINAL-current5306-ordinary-a54-source-LIGHT-full-and-actual-HOLD.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution-executable-v4/current_source_full_body.py",
+      "resolved": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution-executable-v4/current_source_full_body.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution-executable-v4/current_source_prepost_guard.py",
+      "resolved": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution-executable-v4/current_source_prepost_guard.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution-executable-v4/launch_current_source_full_once.py",
+      "resolved": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution-executable-v4/launch_current_source_full_once.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/actions/.venv/pyvenv.cfg",
+      "resolved": "/workspace/engineering/pr305/actions/.venv/pyvenv.cfg"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/actions-http-helper/.venv/pyvenv.cfg",
+      "resolved": "/workspace/engineering/pr305/actions-http-helper/.venv/pyvenv.cfg"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/devutils/.venv/pyvenv.cfg",
+      "resolved": "/workspace/engineering/pr305/devutils/.venv/pyvenv.cfg"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/work-items/.venv/pyvenv.cfg",
+      "resolved": "/workspace/engineering/pr305/work-items/.venv/pyvenv.cfg"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/action_server/.venv/pyvenv.cfg",
+      "resolved": "/workspace/engineering/pr305/action_server/.venv/pyvenv.cfg"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/bin/rcc",
+      "resolved": "/workspace/actions-cloud/bin/rcc"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/action_server/src/actions/server/bin/rcc-18.19.3",
+      "resolved": "/workspace/engineering/pr305/action_server/src/actions/server/bin/rcc-18.19.3"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr310-runner-qualification-owned/output/native-artifact-manifest.json",
+      "resolved": "/workspace/engineering/pr310-runner-qualification-owned/output/native-artifact-manifest.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr310-runner-qualification-owned/output/native-artifact-tree-inventory.json",
+      "resolved": "/workspace/engineering/pr310-runner-qualification-owned/output/native-artifact-tree-inventory.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr310/action_server/go-wrapper/assets/assets.zip",
+      "resolved": "/workspace/engineering/pr310/action_server/go-wrapper/assets/assets.zip"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr310-runner-qualification-owned/dist/action-server/action-server",
+      "resolved": "/workspace/engineering/pr310-runner-qualification-owned/dist/action-server/action-server"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+      "resolved": "/workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-v5-passed-checkpoint-corrected.json",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/actual-v5-passed-checkpoint-corrected.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-v5-independent-runner-review/independent-actual-v5-review.json",
+      "resolved": "/workspace/engineering/pr305-v5-independent-runner-review/independent-actual-v5-review.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-proposal-v5.json",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-proposal-v5.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr282/action_server/tests/action_server_tests/mcp/test_canvas_query_template.py",
+      "resolved": "/workspace/engineering/pr282/action_server/tests/action_server_tests/mcp/test_canvas_query_template.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/test_canvas_query_template.py",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/test_canvas_query_template.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/action_server/scripts/write_native_artifact_manifest.py",
+      "resolved": "/workspace/engineering/pr305/action_server/scripts/write_native_artifact_manifest.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/write_native_artifact_manifest.py",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/write_native_artifact_manifest.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr310/action_server/scripts/verify_dakota_rcc_acceptance.py",
+      "resolved": "/workspace/engineering/pr310/action_server/scripts/verify_dakota_rcc_acceptance.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/verify_dakota_rcc_acceptance.py",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/verify_dakota_rcc_acceptance.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr311/action_server/tests/action_server_tests/native_startup_diagnostics.py",
+      "resolved": "/workspace/engineering/pr311/action_server/tests/action_server_tests/native_startup_diagnostics.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/native_startup_diagnostics.py",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/native_startup_diagnostics.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/actual-admission.json",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/actual-admission.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/bridge-receipt.json",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/bridge-receipt.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-1-stderr.log",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-1-stderr.log"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-1-stdout.log",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-1-stdout.log"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-2-stderr.log",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-2-stderr.log"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-2-stdout.log",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-2-stdout.log"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-3-stderr.log",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-3-stderr.log"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-3-stdout.log",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-3-stdout.log"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-receipts.json",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-receipts.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/junit.xml",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/junit.xml"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/outer-cleanup.json",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/outer-cleanup.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/preflight.json",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/preflight.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/runtime-cleanup.json",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/runtime-cleanup.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/runtime-start-final-snapshot.json",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/runtime-start-final-snapshot.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/startup-observations.json",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/startup-observations.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/worker-stderr.log",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/worker-stderr.log"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/worker-stdout.log",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/worker-stdout.log"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-v5-gateway.log",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/actual-v5-gateway.log"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/test_runner_admission_v5.py",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/test_runner_admission_v5.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/v5-driver-discovery-GREEN.json",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/v5-driver-discovery-GREEN.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/v5-driver-discovery-oldzero.json",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/v5-driver-discovery-oldzero.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/v5-driver-discovery-broadtwo.json",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/v5-driver-discovery-broadtwo.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/v5-driver-discovery-wrongfixture.json",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/v5-driver-discovery-wrongfixture.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-v4-independent-runner-review/canonical-actual-v4-proposed.patch",
+      "resolved": "/workspace/engineering/pr305-v4-independent-runner-review/canonical-actual-v4-proposed.patch"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/canonical-runner-v5-proposed.patch",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/canonical-runner-v5-proposed.patch"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/canonical-runner-v4-proposed-delta.md",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/canonical-runner-v4-proposed-delta.md"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/canonical-actual-v4-proposed-delta.md",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/canonical-actual-v4-proposed-delta.md"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/canonical-current-union.patch",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-selector-fix/canonical-current-union.patch"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr310-runner-qualification-owned/headless-selection.json",
+      "resolved": "/workspace/engineering/pr310-runner-qualification-owned/headless-selection.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/action_server/frontend/package-lock.json",
+      "resolved": "/workspace/engineering/pr305/action_server/frontend/package-lock.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helper-bindings.json",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helper-bindings.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr310/action_server/frontend/node_modules/playwright/lib/runner/index.js",
+      "resolved": "/workspace/engineering/pr310/action_server/frontend/node_modules/playwright/lib/runner/index.js"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/v5-ast-scope-proof.json",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/v5-ast-scope-proof.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-v5-final-controls-corrected2.log",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-v5-final-controls-corrected2.log"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/runner-controls-final.log",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/runner-controls-final.log"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-v3-controls.log",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-v3-controls.log"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-v3-controls-2.log",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-v3-controls-2.log"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-v5-RED.log",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-v5-RED.log"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-v5-final-controls.log",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-v5-final-controls.log"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-v5-final-controls-corrected.log",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-v5-final-controls-corrected.log"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-v4-controls.log",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-v4-controls.log"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/v5-real-collection-controls.json",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/v5-real-collection-controls.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-v5-focused-GREEN.log",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-v5-focused-GREEN.log"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v5.py",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v5.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/frozen-current-union-source-checkpoint.json",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-selector-fix/frozen-current-union-source-checkpoint.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-selector-independent-source-review/independent-frozen-source-review.json",
+      "resolved": "/workspace/engineering/pr305-selector-independent-source-review/independent-frozen-source-review.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-v4-failed-checkpoint-scoped.json",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/actual-v4-failed-checkpoint-scoped.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/test_runner_admission_v4.py",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/test_runner_admission_v4.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-v3-failed-checkpoint.json",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/actual-v3-failed-checkpoint.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/test_runner_admission_v3.py",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/test_runner_admission_v3.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/test_runner_admission_v2.py",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/test_runner_admission_v2.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/test_runner_admission.py",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/test_runner_admission.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-controls.log",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-controls.log"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-proposal.json",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-proposal.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner.py",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-v2-failed-checkpoint.json",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/actual-v2-failed-checkpoint.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-v3-independent-runner-review/independent-failed-v2-review.json",
+      "resolved": "/workspace/engineering/pr305-v3-independent-runner-review/independent-failed-v2-review.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-proposal-v2.json",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-proposal-v2.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v2.py",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v2.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-v3-independent-runner-review/independent-actual-v3-failure-review.json",
+      "resolved": "/workspace/engineering/pr305-v3-independent-runner-review/independent-actual-v3-failure-review.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-proposal-v3.json",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-proposal-v3.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v3.py",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v3.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-v4-independent-runner-review/independent-actual-v4-failure-review.json",
+      "resolved": "/workspace/engineering/pr305-v4-independent-runner-review/independent-actual-v4-failure-review.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-v4-original-output-trace.json",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/actual-v4-original-output-trace.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-proposal-v4.json",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-proposal-v4.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v4.py",
+      "resolved": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v4.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/node",
+      "resolved": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/node"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/Doctor-current-a54-original.private.log",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/Doctor-current-a54-original.private.log"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/LIGHT-current-a54-original.private.log",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/LIGHT-current-a54-original.private.log"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/committed-current-5306-typed-ordinary-union-source-proof.json",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/committed-current-5306-typed-ordinary-union-source-proof.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/current-checkout-source-junit.xml",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/current-checkout-source-junit.xml"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/current-generator8-allYAML30-roundtrip.json",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/current-generator8-allYAML30-roundtrip.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/current-scoped-source-junit.xml",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/current-scoped-source-junit.xml"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/current-source-LIGHT-terminal.json",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/current-source-LIGHT-terminal.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/exact-imported-a54-canonical-guide-delta.patch",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/exact-imported-a54-canonical-guide-delta.patch"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/freeze_current_source_LIGHT.py",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/freeze_current_source_LIGHT.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/managed-metadata-current-a54-original.private.log",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/managed-metadata-current-a54-original.private.log"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/own-current30-input-and-five-concrete-origins-Bootstrap-reuse.json",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/own-current30-input-and-five-concrete-origins-Bootstrap-reuse.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/own-origin-action_server.json",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/own-origin-action_server.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/own-origin-actions-http-helper.json",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/own-origin-actions-http-helper.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/own-origin-actions.json",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/own-origin-actions.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/own-origin-devutils.json",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/own-origin-devutils.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/own-origin-work-items.json",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/own-origin-work-items.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/post-LIGHT-complete-source-generator-and-original584-preservation.json",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/post-LIGHT-complete-source-generator-and-original584-preservation.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/private-current-5306-complete-source-body-mode-inventory.json",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/private-current-5306-complete-source-body-mode-inventory.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/prove_current_typed_union.py",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/prove_current_typed_union.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/raw18-frozen50-Node-frontend-retained-postLIGHT.json",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/raw18-frozen50-Node-frontend-retained-postLIGHT.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/readonly-generator-normalization-v2-terminal.json",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/readonly-generator-normalization-v2-terminal.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/readonly-generator-normalization-v2.private.log",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/readonly-generator-normalization-v2.private.log"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/readonly-retention-original.private.log",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/readonly-retention-original.private.log"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/readonly-retention-terminal.json",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/readonly-retention-terminal.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/retained-native-helper-browser-and-V5-proof-postLIGHT.json",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/retained-native-helper-browser-and-V5-proof-postLIGHT.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/run_current_source_LIGHT.py",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/run_current_source_LIGHT.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/typed-current-production-and-five-selector-inventory.json",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/typed-current-production-and-five-selector-inventory.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/verified-both-parent-canonical-guide-block-preservation.json",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/verified-both-parent-canonical-guide-block-preservation.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/verify-retained-actual-inputs-postLIGHT.py",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/verify-retained-actual-inputs-postLIGHT.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/verify-retained-raw-and-driver-postLIGHT.py",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/verify-retained-raw-and-driver-postLIGHT.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/verify_incoming_generator_and_original_source.py",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/verify_incoming_generator_and_original_source.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/verify_incoming_generator_and_original_source_v2.py",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/verify_incoming_generator_and_original_source_v2.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/verify_parent_guides.py",
+      "resolved": "/workspace/engineering/pr305-current-a54-source-LIGHT/verify_parent_guides.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/OWNERFINAL-current584a-ordinary-e3-source-LIGHT-full-and-actual-HOLD.json",
+      "resolved": "/workspace/engineering/pr305-current-e3c-source-LIGHT/OWNERFINAL-current584a-ordinary-e3-source-LIGHT-full-and-actual-HOLD.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305-actual309-refresh/own-Bootstrap-reuse-inputs-and-origins.json",
+      "resolved": "/workspace/engineering/pr305-actual309-refresh/own-Bootstrap-reuse-inputs-and-origins.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/FROZEN-control3-current-b614-actual-config-v2.json",
+      "resolved": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/FROZEN-control3-current-b614-actual-config-v2.json"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/actions-cloud/activate.sh",
+      "resolved": "/workspace/actions-cloud/activate.sh"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/action_server/build.py",
+      "resolved": "/workspace/engineering/pr305/action_server/build.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/action_server/poetry.lock",
+      "resolved": "/workspace/engineering/pr305/action_server/poetry.lock"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/action_server/pyproject.toml",
+      "resolved": "/workspace/engineering/pr305/action_server/pyproject.toml"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/action_server/tasks.py",
+      "resolved": "/workspace/engineering/pr305/action_server/tasks.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/action_server/tests/action_server_tests/test_create_conda_from_package_yaml/create_wheel/pyproject.toml",
+      "resolved": "/workspace/engineering/pr305/action_server/tests/action_server_tests/test_create_conda_from_package_yaml/create_wheel/pyproject.toml"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/actions-http-helper/poetry.lock",
+      "resolved": "/workspace/engineering/pr305/actions-http-helper/poetry.lock"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/actions-http-helper/pyproject.toml",
+      "resolved": "/workspace/engineering/pr305/actions-http-helper/pyproject.toml"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/actions-http-helper/tasks.py",
+      "resolved": "/workspace/engineering/pr305/actions-http-helper/tasks.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/actions/poetry.lock",
+      "resolved": "/workspace/engineering/pr305/actions/poetry.lock"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/actions/pyproject.toml",
+      "resolved": "/workspace/engineering/pr305/actions/pyproject.toml"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/actions/tasks.py",
+      "resolved": "/workspace/engineering/pr305/actions/tasks.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/actions/tests/actions_core_tests/test_core_log_integration/pyproject.toml",
+      "resolved": "/workspace/engineering/pr305/actions/tests/actions_core_tests/test_core_log_integration/pyproject.toml"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/build_common/poetry.lock",
+      "resolved": "/workspace/engineering/pr305/build_common/poetry.lock"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/common/poetry.lock",
+      "resolved": "/workspace/engineering/pr305/common/poetry.lock"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/developer/setup.yaml",
+      "resolved": "/workspace/engineering/pr305/developer/setup.yaml"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/developer/setup_windows_amd64.yaml",
+      "resolved": "/workspace/engineering/pr305/developer/setup_windows_amd64.yaml"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/developer/toolkit.yaml",
+      "resolved": "/workspace/engineering/pr305/developer/toolkit.yaml"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/devutils/bin/develop.bat",
+      "resolved": "/workspace/engineering/pr305/devutils/bin/develop.bat"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/devutils/bin/develop.sh",
+      "resolved": "/workspace/engineering/pr305/devutils/bin/develop.sh"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/devutils/poetry.lock",
+      "resolved": "/workspace/engineering/pr305/devutils/poetry.lock"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/devutils/pyproject.toml",
+      "resolved": "/workspace/engineering/pr305/devutils/pyproject.toml"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/devutils/src/devutils/invoke_utils.py",
+      "resolved": "/workspace/engineering/pr305/devutils/src/devutils/invoke_utils.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/devutils/src/devutils/rcc.py",
+      "resolved": "/workspace/engineering/pr305/devutils/src/devutils/rcc.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/mcp/poetry.lock",
+      "resolved": "/workspace/engineering/pr305/mcp/poetry.lock"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/tasks.py",
+      "resolved": "/workspace/engineering/pr305/tasks.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/templates/advanced/pyproject.toml",
+      "resolved": "/workspace/engineering/pr305/templates/advanced/pyproject.toml"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/work-items/poetry.lock",
+      "resolved": "/workspace/engineering/pr305/work-items/poetry.lock"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/work-items/pyproject.toml",
+      "resolved": "/workspace/engineering/pr305/work-items/pyproject.toml"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/work-items/tasks.py",
+      "resolved": "/workspace/engineering/pr305/work-items/tasks.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/actions/src/actions/__init__.py",
+      "resolved": "/workspace/engineering/pr305/actions/src/actions/__init__.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/actions/.venv/bin/python",
+      "resolved": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12"
+    },
+    {
+      "kind": "directory",
+      "path": "/workspace/engineering/pr305/actions/.venv",
+      "resolved": "/workspace/engineering/pr305/actions/.venv"
+    },
+    {
+      "kind": "directory",
+      "path": "/workspace/engineering/pr305/actions/src",
+      "resolved": "/workspace/engineering/pr305/actions/src"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/actions-http-helper/src/actions_http/__init__.py",
+      "resolved": "/workspace/engineering/pr305/actions-http-helper/src/actions_http/__init__.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/actions-http-helper/.venv/bin/python",
+      "resolved": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12"
+    },
+    {
+      "kind": "directory",
+      "path": "/workspace/engineering/pr305/actions-http-helper/.venv",
+      "resolved": "/workspace/engineering/pr305/actions-http-helper/.venv"
+    },
+    {
+      "kind": "directory",
+      "path": "/workspace/engineering/pr305/actions-http-helper/src",
+      "resolved": "/workspace/engineering/pr305/actions-http-helper/src"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/devutils/.venv/bin/python",
+      "resolved": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12"
+    },
+    {
+      "kind": "directory",
+      "path": "/workspace/engineering/pr305/devutils/.venv",
+      "resolved": "/workspace/engineering/pr305/devutils/.venv"
+    },
+    {
+      "kind": "directory",
+      "path": "/workspace/engineering/pr305/devutils/src",
+      "resolved": "/workspace/engineering/pr305/devutils/src"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/work-items/src/actions/work_items/__init__.py",
+      "resolved": "/workspace/engineering/pr305/work-items/src/actions/work_items/__init__.py"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/work-items/.venv/bin/python",
+      "resolved": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12"
+    },
+    {
+      "kind": "directory",
+      "path": "/workspace/engineering/pr305/work-items/.venv",
+      "resolved": "/workspace/engineering/pr305/work-items/.venv"
+    },
+    {
+      "kind": "directory",
+      "path": "/workspace/engineering/pr305/work-items/src",
+      "resolved": "/workspace/engineering/pr305/work-items/src"
+    },
+    {
+      "kind": "file",
+      "path": "/workspace/engineering/pr305/action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "resolved": "/workspace/engineering/pr305/action_server/src/actions/server/_rcc_runtime_adapter.py"
+    },
+    {
+      "kind": "directory",
+      "path": "/workspace/engineering/pr305/action_server/.venv",
+      "resolved": "/workspace/engineering/pr305/action_server/.venv"
+    },
+    {
+      "kind": "directory",
+      "path": "/workspace/engineering/pr305/action_server/src",
+      "resolved": "/workspace/engineering/pr305/action_server/src"
+    },
+    {
+      "kind": "directory",
+      "path": "/workspace/engineering/pr310-runner-qualification-owned/dist/action-server",
+      "resolved": "/workspace/engineering/pr310-runner-qualification-owned/dist/action-server"
+    }
+  ],
+  "five_existing_LIGHT_origin_prefix_path_evidence": [
+    {
+      "module": "actions",
+      "origin_evidence": {
+        "bytes": 218,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/own-origin-actions.json",
+        "sha256": "6b00bd4e70a69f4484a9d44c3447039354a9906fef5be41feff2fb284a73a549"
+      },
+      "package": "actions",
+      "scope": "Existing LIGHT-measured origin/prefix and current path existence; no fresh import/gateway executed."
+    },
+    {
+      "module": "actions_http",
+      "origin_evidence": {
+        "bytes": 264,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/own-origin-actions-http-helper.json",
+        "sha256": "0866a5c2bc030a15822b06983f3fb43b1400b20f4add57537aaec59da1b8c4d1"
+      },
+      "package": "actions-http-helper",
+      "scope": "Existing LIGHT-measured origin/prefix and current path existence; no fresh import/gateway executed."
+    },
+    {
+      "module": "devutils.invoke_utils",
+      "origin_evidence": {
+        "bytes": 240,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/own-origin-devutils.json",
+        "sha256": "f9c9bb61ea486fd667ff37367ef8656aa374af2f4e3484569f4d4cfab28125cd"
+      },
+      "package": "devutils",
+      "scope": "Existing LIGHT-measured origin/prefix and current path existence; no fresh import/gateway executed."
+    },
+    {
+      "module": "actions.work_items",
+      "origin_evidence": {
+        "bytes": 249,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/own-origin-work-items.json",
+        "sha256": "24808585e8fef1faae9b7130b4656ee211c50597fe0e0e3d2adbb8b058f37296"
+      },
+      "package": "work-items",
+      "scope": "Existing LIGHT-measured origin/prefix and current path existence; no fresh import/gateway executed."
+    },
+    {
+      "module": "actions.server._rcc_runtime_adapter",
+      "origin_evidence": {
+        "bytes": 283,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/own-origin-action_server.json",
+        "sha256": "96eb60a559a313d478c17f52e8cc42e71588b1ae33089ba1ad3c77650a967b26"
+      },
+      "package": "action_server",
+      "scope": "Existing LIGHT-measured origin/prefix and current path existence; no fresh import/gateway executed."
+    }
+  ],
+  "new_once_directory_absent": true,
+  "only_config_semantic_delta": "source_inventory: nonexistent copied1299 filename replaced by exact measured5306 inventory; implementation binding paths follow named copied identical scripts.",
+  "prepared30_exact": true,
+  "primary_PATH_guard": 19,
+  "scope": "No pre/post/body or launcher execution; no package/module imports, gateways, tests, installer or native execution. Root must recheck current source/origins/capacity at actual release.",
+  "scripts_all_original_bytes_exact": [
+    {
+      "bytes": 1143,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution-executable-v4/current_source_full_body.py",
+      "sha256": "a254b5cf4348e8f6e83c9c3f97e57f9feeb1e8168408d4886f79f017c7b993e9"
+    },
+    {
+      "bytes": 3749,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution-executable-v4/current_source_prepost_guard.py",
+      "sha256": "34583358c55324e50d03f27d1f85c5ea0aaacb2cf9858021b7505d7044346435"
+    },
+    {
+      "bytes": 3651,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution-executable-v4/launch_current_source_full_once.py",
+      "sha256": "d148d168d81836330314e220323c950d9576a2e17fb8e65eb8e60af040c41000"
+    }
+  ],
+  "source": "5306eeb26595da4ce571b99812eb50f047cfc903",
+  "status": "READ_ONLY_TYPED_CONSTRUCTOR_GUARD_PASS_NO_EXECUTION",
+  "tree": "8418e9ffeeaaf2446771e34b5b4602bab3d357a5",
+  "wrong_original_inventory": "/workspace/engineering/pr305-current-a54-source-LIGHT/private-current-1299-complete-source-body-mode-inventory.json",
+  "wrong_original_inventory_still_absent": true
+}

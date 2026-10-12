@@ -1,0 +1,26 @@
+{
+  "exact_ROOT_argv": [
+    "/usr/bin/timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "600s",
+    "bash",
+    "-c",
+    "source /workspace/actions-cloud/activate.sh && export PATH=\"/workspace/actions-cloud/bin:/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\" && export PYTHONDONTWRITEBYTECODE=1 && exec /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12 -B -u /workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/launch_controller_boundary_PURE_ROOT_ONLY_SOURCE_PREPARED_once2.py --root-release \"$1\" --root-release-sha256 \"$2\"",
+    "controller-boundary-pure30-once2",
+    "/workspace/engineering/root-controller30-reviewed-once2-execution/root-one-controller30-pure-once2-release.json",
+    "ROOT_RELEASE_SHA256_FROM_REAL_ROOT_GRANT"
+  ],
+  "exact_release_path": "/workspace/engineering/root-controller30-reviewed-once2-execution/root-one-controller30-pure-once2-release.json",
+  "old_preexec_schema_failure": "V1 status assertion, V2 absent ROOT_adoption_contract key; both before ROOTownedroot/release/any tests. Originals unchanged.",
+  "parent": {
+    "bytes": 4844,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-reviewed-controller30-once2-original-master-v3-exact-contract.py",
+    "sha256": "9bdecf4e8cbbb9a9691d97481c9bbe9783179e63694e0da2ab205f10c444cce8"
+  },
+  "review_sha256": "7735a0492f37aecde086f4d1d85a11b9046b42cb3c583e601b2c1524b3474a2c",
+  "schema": 1,
+  "scope": "Only captured currentreview shape/path/argv consumed; budget600TERM10/capture630/binding161/self/authority before-alwayspost preserved. No real storage/native grant.",
+  "status": "ROOT_CONCRETE_ONCE2_MASTER_EXACT_CURRENT7735_SCHEMA_PREPARED"
+}

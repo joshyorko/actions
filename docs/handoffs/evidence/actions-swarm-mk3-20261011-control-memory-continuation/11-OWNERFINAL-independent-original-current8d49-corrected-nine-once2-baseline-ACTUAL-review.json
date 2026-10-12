@@ -1,0 +1,433 @@
+{
+  "schema": 1,
+  "decision": "GO_ORIGINAL_CURRENT8D49_CORRECTED_NINE_ONCE2_BASELINE_ONLY",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "source_leaves": 1440,
+  "original_root": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2",
+  "original_outer_returncode": 0,
+  "elapsed_seconds_original_outer": 33.371653000998776,
+  "counts": {
+    "unique_cases": 9,
+    "passed": 9,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "warnings_observed_original_stdout": 262
+  },
+  "exact_existing_case_names": [
+    "test_candidate_preparation_precedes_real_sqlite_writer",
+    "test_publication_follows_actual_sqlite_commit",
+    "test_staged_pool_keeps_original_routes_until_commit",
+    "test_failed_warmup_restores_original_idle_and_catalog",
+    "test_actual_commit_failure_restores_original_generation_token",
+    "test_running_old_handle_drains_only_after_new_publication",
+    "test_candidate_warmup_precedes_generation_switch",
+    "test_rejected_candidate_cleanup_preserves_last_good",
+    "test_repaired_candidate_publishes_without_admitting_failed_generation"
+  ],
+  "all8_original_phase_statuses": {
+    "always-post": {
+      "elapsed_seconds": 14.8538193639979,
+      "returncode": 0
+    },
+    "before": {
+      "elapsed_seconds": 15.459027960998355,
+      "returncode": 0
+    },
+    "corrected-nine-baseline": {
+      "elapsed_seconds": 2.220511235005688,
+      "returncode": 0
+    },
+    "own-origin-0": {
+      "elapsed_seconds": 0.1644296430022223,
+      "returncode": 0
+    },
+    "own-origin-1": {
+      "elapsed_seconds": 0.11407218499516603,
+      "returncode": 0
+    },
+    "own-origin-2": {
+      "elapsed_seconds": 0.11409417299728375,
+      "returncode": 0
+    },
+    "own-origin-3": {
+      "elapsed_seconds": 0.1643246230087243,
+      "returncode": 0
+    },
+    "own-origin-4": {
+      "elapsed_seconds": 0.16456141800154,
+      "returncode": 0
+    }
+  },
+  "source_guard_results": "original before/alwayspost fixedPASS; current source1440 Git objects/FS modes/bodies clean andprepared30+native1192+temporal2 independently verified without imports",
+  "managed_origins": "all5original actual prefix/module imports returned0; no reviewerimports",
+  "independent_adoption": "releaseeebc exactreview45e+namedouter7430; exactactual1200TERM10/parent1230; original450HOLD retained",
+  "old_once1_failure": "original6288 immutable no upgrade",
+  "bindings": [
+    {
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2/OWNERFINAL-root-one-original-corrected-nine-once2-baseline.json",
+      "bytes": 4505,
+      "sha256": "72358ec90d7098593d2844611195833bdbffab7c66890b833d44f344d4647ed0",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/root-corrected-nine-once2-reviewed-original-outer/OWNERFINAL-root-one-original-reviewed-pure-source-outer.json",
+      "bytes": 877,
+      "sha256": "f32ce7ca8893448e5ef4279e66c0e851d93f0ab783e1a8d7bc3f3ad62d50a063",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/root-corrected-nine-once2-reviewed-original-outer/exact-outer-command.json",
+      "bytes": 1404,
+      "sha256": "0aab05ee58961d51b21610a480eb3ceebecf65b5d67f7ac7aacbd347fda7cdd7",
+      "mode": "0o600"
+    },
+    {
+      "bytes": 1504,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-corrected-nine-once2-reviewed-original-outer/root-one-release.json",
+      "sha256": "eebc42c1fc383a6ed6b0da92040cb2aacea32e15a031e8b9813db755b5e3b952"
+    },
+    {
+      "bytes": 9329,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/run_corrected_nine_once2_baseline.py",
+      "sha256": "0faa08c751e98b834ed1525daf5efd2bc64820fbd7b08f698fe66ffefe3bdcc2"
+    },
+    {
+      "bytes": 5694,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/frozen-corrected-nine-once2-baseline-execution-config-NOTRUN.json",
+      "sha256": "d8dd253da2711437e1c94db0950d1352afbc963963d6ae1ec3c14d43eacd336a"
+    },
+    {
+      "bytes": 8708,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/frozen-corrected-nine-once2-baseline-only-command-contract-NOTRUN.json",
+      "sha256": "8f9f2aa0cb570170cd381c07ad5f849700449f3f35d3983d11dbe9a6f6d74da0"
+    },
+    {
+      "bytes": 4667,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-private-corrected-nine-source-independent-review/OWNERFINAL-independent-private-corrected-nine-catalog-lock-SOURCE_ONLY-review.json",
+      "sha256": "aa3f927ef250c86d8b76e02e21f6382f2a894c22b0bba7f285b08c5f60f13da4"
+    },
+    {
+      "bytes": 16829,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-nine-real-original-baseline-independent-diagnosis/OWNERFINAL-independent-original-nine-baseline-failure-and-private-control-boundary.json",
+      "sha256": "6288fb4a6d296770a1c930ae73b0854e103378417f250a00a553c7c1bf3a25e2"
+    },
+    {
+      "bytes": 12065,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-independent-PREEXEC-review/OWNERFINAL-independent-corrected-nine-once2-PREEXEC-GO-with-named-outer1200-clarification.json",
+      "sha256": "45e9740dd7a789b9995b51dd676ca9bfa5fcb0f5336064751e3d260c741ffd0e"
+    },
+    {
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-independent-PREEXEC-review/FROZEN-corrected-nine-once2-named-outer1200-parent1230-clarification-NOTRUN.json",
+      "bytes": 4508,
+      "sha256": "7430c22e082927475d6a821598f2cb8ce31904a8027a490bc649b307a25a94d0",
+      "mode": "0o400"
+    },
+    {
+      "bytes": 2330,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2/baseline/original-junit.xml",
+      "sha256": "03978c3352a696e5bd834df80b6a713548fcf78e375336821b331303e150ba92"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2/consumed-distinct-root-release.json",
+      "bytes": 1891,
+      "sha256": "184e0524c163a586e24645e6260c6e2a159619ea7a66f23ebc687e8ab526b1f2",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2/baseline/always-post.terminal.json",
+      "bytes": 61,
+      "sha256": "0bf608a9f1b9f0c9e6d70009569c29980e46786cdf6fa228f6b402bc9579ca70",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2/baseline/always-post.stdout.private",
+      "bytes": 69,
+      "sha256": "0c1f9f5f73680a42a7de5d496fe9ee95e084773e8a37d6d04f37d540575b21bb",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2/baseline/always-post.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2/baseline/before.terminal.json",
+      "bytes": 63,
+      "sha256": "77612cee495e81c77154f9ddadf44bb7f2299425272687942b7490ca7aefcab6",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2/baseline/before.stdout.private",
+      "bytes": 69,
+      "sha256": "0c1f9f5f73680a42a7de5d496fe9ee95e084773e8a37d6d04f37d540575b21bb",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2/baseline/before.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2/baseline/corrected-nine-baseline.terminal.json",
+      "bytes": 62,
+      "sha256": "63af1ae2e9e01bc03b180daadfb821e170453eef9b90d4f5502150e87b5a7fba",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2/baseline/corrected-nine-baseline.stdout.private",
+      "bytes": 1859,
+      "sha256": "509159d60cb5299c38491a5a99c9d4a43f14316ddf956752944808428c67a56d",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2/baseline/corrected-nine-baseline.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2/baseline/own-origin-0.terminal.json",
+      "bytes": 63,
+      "sha256": "94d0b828d2d70b5ce5de2bce3125fc25d0f9ecb592e4d14a63869fbef38d1c72",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2/baseline/own-origin-0.stdout.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2/baseline/own-origin-0.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2/baseline/own-origin-1.terminal.json",
+      "bytes": 64,
+      "sha256": "b007b376dd143cd40c0751c6f4965e12c48446349e63c4cf3480d25202346f0f",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2/baseline/own-origin-1.stdout.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2/baseline/own-origin-1.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2/baseline/own-origin-2.terminal.json",
+      "bytes": 64,
+      "sha256": "abaaf1aafd5ceac9b19df91888f97d3682a67be320b2cd6a3e15fbf095dc6deb",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2/baseline/own-origin-2.stdout.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2/baseline/own-origin-2.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2/baseline/own-origin-3.terminal.json",
+      "bytes": 63,
+      "sha256": "2f146cce88a9b7ab5595c5640974411a88ceb94704bfb68a5673d999254efba2",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2/baseline/own-origin-3.stdout.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2/baseline/own-origin-3.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2/baseline/own-origin-4.terminal.json",
+      "bytes": 61,
+      "sha256": "97903eda9cb8fe1a941aaf81a76158e889fca2eddecb969944c3b8260e375ee2",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2/baseline/own-origin-4.stdout.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2/baseline/own-origin-4.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-corrected-nine-once2-reviewed-original-outer/original.stdout.private",
+      "bytes": 230,
+      "sha256": "a514d1039c5f9dbd9118372d604132ac5e803839e1eaf5545986e64dcbf1091f",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-corrected-nine-once2-reviewed-original-outer/original.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    }
+  ],
+  "preserved_unique_PREEXEC_bindings": [
+    {
+      "bytes": 8708,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/frozen-corrected-nine-once2-baseline-only-command-contract-NOTRUN.json",
+      "sha256": "8f9f2aa0cb570170cd381c07ad5f849700449f3f35d3983d11dbe9a6f6d74da0"
+    },
+    {
+      "bytes": 11323,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/OWNERFINAL-final-private-corrected-nine-source-constructor-and-original-failure-preservation-NOTRUN.json",
+      "sha256": "8641582defe1dc2aa9cf114928c0778d8faf91841b0a274f8cc3dad0b0d87500"
+    },
+    {
+      "bytes": 765564,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+      "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25"
+    },
+    {
+      "bytes": 1075,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-rcc-current8d49-control3-V9-one-release.json",
+      "sha256": "a131e30087742764ba6dbdbc2634749924133431de3310b2065ced446b97bf3b"
+    },
+    {
+      "bytes": 6839,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-reload-drain-independent-preexecution-review/frozen-nine-real-source-control-baseline-first-ROOT-command-contract-NOTRUN.json",
+      "sha256": "5f1874357496fe9c890c1acfec43fa114d51c658bd23ea23578fc3c910c1f287"
+    },
+    {
+      "bytes": 16829,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-nine-real-original-baseline-independent-diagnosis/OWNERFINAL-independent-original-nine-baseline-failure-and-private-control-boundary.json",
+      "sha256": "6288fb4a6d296770a1c930ae73b0854e103378417f250a00a553c7c1bf3a25e2"
+    },
+    {
+      "bytes": 6371,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-current8d49-nine-real-baseline-once.py",
+      "sha256": "5ffbdebb3cbd7301e3a1d46255fc42d6fbff63bc03c922ec4b21ba9cb426ad5a"
+    },
+    {
+      "bytes": 12096,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/OWNERFINAL-private-corrected-nine-catalog-identity-and-held-lock-source-successor-NOTRUN.json",
+      "sha256": "7f5bf5a7c300ab98d6d4521d750470aafab2151cc522700ec687cfdc0234275d"
+    },
+    {
+      "bytes": 4690,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/readonly_current_input_guard_v9.py",
+      "sha256": "480be06317562b7e3a5c98a5d794bb5d2a33e7fa6186fe707823ecb1cc583626"
+    },
+    {
+      "bytes": 12996,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/frozen-current8d49-source-LIGHT-inputs-v3.json",
+      "sha256": "81f52920b50e67619b3bb418a7c1034a2106ec52f4badd71b9d85e29b7376820"
+    },
+    {
+      "bytes": 4667,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-private-corrected-nine-source-independent-review/OWNERFINAL-independent-private-corrected-nine-catalog-lock-SOURCE_ONLY-review.json",
+      "sha256": "aa3f927ef250c86d8b76e02e21f6382f2a894c22b0bba7f285b08c5f60f13da4"
+    },
+    {
+      "bytes": 16429,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py",
+      "sha256": "a577d21615877bc19a88ca141e5c8ac7c9779120abf7f86b7a6ec6d2367d5da2"
+    },
+    {
+      "bytes": 6385,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/prepare_named_once2_baseline.py",
+      "sha256": "0ca7df2b084bb6d912dbd6befc0c8a0c654a6948770a95cb41d02657ee508f67"
+    },
+    {
+      "bytes": 8761,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/freeze_once2_packet.py",
+      "sha256": "18ae5af6b900ccd5a1ca0ebfc8aa529c93e5124b3b061a8a614f1b4d40f11057"
+    },
+    {
+      "bytes": 9329,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/run_corrected_nine_once2_baseline.py",
+      "sha256": "0faa08c751e98b834ed1525daf5efd2bc64820fbd7b08f698fe66ffefe3bdcc2"
+    },
+    {
+      "bytes": 5694,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/frozen-corrected-nine-once2-baseline-execution-config-NOTRUN.json",
+      "sha256": "d8dd253da2711437e1c94db0950d1352afbc963963d6ae1ec3c14d43eacd336a"
+    },
+    {
+      "bytes": 4036,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/frozen-once2-compatible-independent-review-and-ROOT-release-contract-NOTRUN.json",
+      "sha256": "5f81e7df6bf7404e7fd81825f715c246d76ec02fa03a2ae3cad97c9fa3e2f821"
+    },
+    {
+      "bytes": 1684,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/once2-launcher-static-closure-and-original-budget-scope-proof-NOTRUN.json",
+      "sha256": "939cd21521198ef9398c1caf22d90a31193c9a1beb1a1905f79289f3e1da17e6"
+    },
+    {
+      "bytes": 1219,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/canonical-reload-control-copy-and-lock-boundaries-proposed.patch",
+      "sha256": "5584b00182d7504808065195f3373f80eb450fa5370811d434d66ad0c5b9a7d5"
+    }
+  ],
+  "limits": [
+    "baseline9 actual servicefree source algorithm controls only",
+    "all9mutants and snapshot sensitivity NOTRUN; separate reviewed/rootreleased phase required",
+    "no native/gateway/version/provider/reload/process lease or realworker retirement/reaping qualification",
+    "no reviewer tests/imports/sourceupdates/reruns; currenthostedWindows/release/private/full133/134/139/143 limits unchanged"
+  ],
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; reuse accepted5584 copy/held-lock oracle plus exact multi-stage enclosure paragraph bound byreview45e",
+    "Durable_learning_captured": "baseline must use actual current copy/lock semantics before sensitivity; enclosingdeadline must cover fallbackall8phases includingalwayspost",
+    "Evidence": "9exactoriginalPASS/0FES, original8phase0, currenttypedsource/native/sharedoutputs, exactactual1200/1230 record",
+    "Stale_or_ambiguous_guidance_removed": "originalonce1FAIL not cleared; baselinePASS does not imply mutant sensitivity or native lifecycle",
+    "Remaining_uncertainty": "allmutants/snapshot oracle sensitivity/native/drain/provider recovery NOTRUN"
+  },
+  "upstream_disposition": "none"
+}

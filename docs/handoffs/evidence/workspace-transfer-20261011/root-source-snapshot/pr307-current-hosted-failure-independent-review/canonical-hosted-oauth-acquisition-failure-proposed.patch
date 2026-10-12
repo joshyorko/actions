@@ -1,0 +1,26 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -1286,6 +1286,23 @@
+ files. A cleanup failure is reported separately without replacing the primary error.
+ CLI failures expose fixed input names and reason categories, never raw acquisition
+ stdout, stderr, configuration or credentials.
++
++A hosted failure with `OAuth2 acquisition failed for <fixed input> (exit N)`
++identifies checked acquisition failure, not malformed YAML, missing provider
++shape or atomic replacement. Stop at that first failed step when classifying
++the result: skipped downstream binary/tests are unexecuted, and a cancelled
++matrix sibling is not evidence of the same guard failure. The first input must
++succeed before the second is requested or either can replace the module.
++The numeric exit code alone does not identify authentication, transport or
++repository-access cause because acquisition stderr remains private.
++
++Inspect each producer's actual workflow separately: package-release PR config
++steps declare no acquisition-token environment, Runtime test steps declare a
++secret-backed token, and unsigned binary steps declare the workflow token.
++Declarations do not prove actual secret availability or permission. Preserve
++the guard and release HOLD until the approved source pair and authorized
++acquisition context are established; never infer a stub or bypass from a green
++unrelated package/toolkit job or an earlier artifact with empty generated data.
+ 
+ These checks establish acquisition and consumer-compatible structural shape only.
+ They do not establish an approved source pair or revision, supported provider

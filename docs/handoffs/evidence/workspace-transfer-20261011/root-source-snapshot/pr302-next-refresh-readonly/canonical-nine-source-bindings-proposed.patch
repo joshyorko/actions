@@ -1,0 +1,18 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -2183,6 +2183,15 @@
+ This staged consumer pins published Core 1.0.2 and does not establish a Core
+ 1.0.3 consumer gate. An empty captured descendant snapshot proves only that no
+ captured process survived, not complete descendant reaping.
++
++The three-case summary authenticates nine named source files under its recorded
++candidate commit and tree. Compare those hashes to the immutable candidate,
++not to the control checkout. They do not replace review of the complete resolved
++source union or the full native producer inventory: a changed production input
++outside that sample still requires new artifact qualification. Keep the full
++suite's tested merge identity separate from both source and control, even when
++its tree equals the control tree. Checks attached to an older control, and raw
++receipts naming its older candidate, do not qualify a later target union.
+ 
+ The public Linux three-case receipt establishes scoped rollback,
+ publication-details and staged-consumer acceptance only. It does not complete

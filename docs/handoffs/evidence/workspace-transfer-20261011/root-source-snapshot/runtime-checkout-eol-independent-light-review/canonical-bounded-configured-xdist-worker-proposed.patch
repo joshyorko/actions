@@ -1,0 +1,15 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -1971,6 +1971,12 @@
+ 
+ Final reports list exact commands and outcomes, external/service tests skipped, environments not exercised, documentation improvements, and remaining uncertainty. “Tests pass” without fresh output is not evidence.
+ 
++Runtime’s configured `invoke test-not-integration` uses pytest `-n auto`.
++For a bounded worker count, set `PYTEST_XDIST_AUTO_NUM_WORKERS` to the reviewed
++count in the owned launcher before sequential package commands. An explicit
++`-n 2` on the devutils command does not bound the later Runtime command; bind
++the worker setting and outer timeout before execution.
++
+ ## RCC Environment Artifact execution
+ 
+ Managed spec-v2 Action packages use the provisional RCC runtime adapter only

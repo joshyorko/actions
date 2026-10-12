@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "status": "EXISTING_ENGINEERING_101_AND_RELEASE_221_BODIES_UPDATED_WITH_HISTORY_AND_GRAPH_PRESERVED",
+  "actual_target": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "updates": [
+    {
+      "number": 101,
+      "original_body_bytes": 35993,
+      "original_body_sha256": "28c1ab4e6293e45ce3af6ed2f738424bd7689bfcfc3f52aa91eff74562d85a89",
+      "updated_body_bytes": 37787,
+      "updated_body_sha256": "103b27008e39d17f1d2ef76531a596561b9e2bfce822b294dbf1aff3862c32d8",
+      "entire_prior_body_preserved": false,
+      "retained_graph_suffix_bytes": 28075,
+      "retained_graph_suffix_sha256": "d6aa504c67bb72508006751c65d0d575d2e108a1ae3f677034723ee8101843b7",
+      "graph_suffix_byte_exact": true
+    },
+    {
+      "number": 221,
+      "original_body_bytes": 20305,
+      "original_body_sha256": "73543167daa75d217d7374666425814e443e30d58781b8b5f70340dcb15bf3c0",
+      "updated_body_bytes": 21826,
+      "updated_body_sha256": "06281ac1eb5ff61c82b80c54c538a6fdf7f6f9cb3a00b3d3dc81d341be5a1633",
+      "entire_prior_body_preserved": true,
+      "retained_graph_suffix_bytes": null,
+      "retained_graph_suffix_sha256": null,
+      "graph_suffix_byte_exact": null
+    }
+  ],
+  "no_issue_closure_registry_tag_publication_or_new_campaign": true,
+  "source_full_and_native_qualification": "PENDING_NOT_CARRIED",
+  "recorded_utc": "2026-10-11T16:57:41.921032+00:00"
+}

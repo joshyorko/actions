@@ -1,0 +1,371 @@
+{
+  "schema": "pr282-ordinary-source-owner-LIGHT-v1",
+  "status": "OWNERFINAL_SOURCE_LIGHT_PASS_FULL_AND_ACTUAL_HOLD_INDEPENDENT_REVIEW_REQUIRED",
+  "head": "c35ee2e279eaefe55b16aecdb80da04c590aff7c",
+  "tree": "778f784785e13d521ed3902bd60557f70e41f3a8",
+  "ordered_parents": [
+    "e736f846557ed1d603348e97c5eb80060d62e3e2",
+    "a0d258a16095b95b1bf9000cb1201cddfaff4779"
+  ],
+  "branch": "feat/canvas-template-20261010",
+  "target_at_refresh": "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+  "complete_union": {
+    "all1433_original_leaves_retained_except_automatically_combined_owning_guide": true,
+    "current_full_typed_leaves": 1435,
+    "target_auth_test_modules_added": 2,
+    "no_novel_application_body_or_mode": true,
+    "whole_old_PR282_GitHub_body_mode_exact": true,
+    "both_parent_canonical_blocks_retained": true
+  },
+  "original_retention": {
+    "current_bound_receipts": 441,
+    "native_member_inventory": 1192,
+    "original_helpers_snapshots_mode": "0444",
+    "historical_V5_private_raw_records": 18,
+    "historical_V5_frozen_posthashes": 50,
+    "all_before_after_bytes_modes_retained": true,
+    "historical_UNAVAILABLE_bindings": 10,
+    "historical_mutable_guide_original_body_bound_to_Git3ec": true
+  },
+  "Canvas_strictness": {
+    "whole_original_published_method_and_entire_workflow_step_exact_original9c8": true,
+    "original_predicates": 39,
+    "helper_edc7_unchanged": true,
+    "nine_original_current_RCC_inputs_unchanged": true,
+    "no_assertion_weakening": true
+  },
+  "native_producer_scope": {
+    "historical_92498_production": 268,
+    "current_production": 275,
+    "matching": 259,
+    "changed": 9,
+    "added": 7,
+    "selected_test_inputs_separate": 5,
+    "combined_typed_inputs": 280,
+    "qualification": "UNQUALIFIED: narrow source preservation only, no old artifact/current native identity carry"
+  },
+  "dispatch_correction": "Parent initial274+5 was copied from another branch. Authoritative old PR282 owner has1433 leaves and275+5; exact old inventories and original259match9changed7added retained, no forced exclusions.",
+  "released_ONE_LIGHT": {
+    "all8_gateways_returncode": 0,
+    "each_outer_bound": "120s TERM +10s KILL",
+    "capacity_before_every_gateway_bytes": {
+      "prepared-origins": 1252417536,
+      "doctor": 1265782784,
+      "toolkit": 1266536448,
+      "canvas": 1252315136,
+      "rcc-static": 1270149120,
+      "auth": 1265881088,
+      "strict-canvas": 1231491072,
+      "generator": 1232252928
+    },
+    "prepared_inputs": 30,
+    "own_concrete_import_origins_prefixes": 5,
+    "Doctor": "PASS",
+    "Bootstrap": "Exact own existing successful Bootstrap reused, no installer/copies",
+    "ToolkitTest": {
+      "passed": 179,
+      "seconds": 38.37
+    },
+    "Canvas_source": {
+      "passed": 75,
+      "seconds": 1.76
+    },
+    "Canvas_staging_focus": {
+      "passed": 4,
+      "deselected": 24,
+      "seconds": 1.28
+    },
+    "RCC_source": {
+      "passed": 112,
+      "skipped": 1,
+      "deselected": 3,
+      "warnings": 4,
+      "seconds": 8.58,
+      "skip_scope": "existing opt-in actual NOT_RUN"
+    },
+    "target_auth_source": {
+      "passed": 76,
+      "seconds": 13.29
+    },
+    "configured_Runtime_lint": "Ruff check/format/isort PASS;314 files formatted",
+    "configured_Runtime_Mypy": 350,
+    "generated_workflow_roundtrip": 8,
+    "workflow_plus_dependabot": 26,
+    "all_GitHub_YAML": 30,
+    "managed_activation19_and_RCC7e588_own0711_verified": true,
+    "no_full_source_or_actual_browser_native_provider_consumer_execution": true,
+    "gateway_slot_released_to_root_at_terminal": true,
+    "cleanup_limit": "Source gateway terminal success does not prove universal descendants/reaping/cleanup."
+  },
+  "construction_history": {
+    "source_inspector": "Original immutable-Git/current-mutable guide distinction, UNAVAILABLE oldworkspace bindings and prior local constructor TypeError all corrected before source mutation/gates; originals retained",
+    "post_LIGHT_metadata_reader": "A read-only key introspector called len on boolean and failed; corrected by explicit field typing before post-proof. Not source/gateway/test failure.",
+    "gateway_attempts": "Exactly one root-released LIGHT sequence; no failed attempt, retry, install, full or actual gate"
+  },
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md: exact automatic ordinary-merge import of 58 lines from accepted a0d; provenance-observability parent lessons retained unchanged",
+    "Durable_learning_captured": "52 source-backed route census / assembled authorization / file-backed SQLite / before-side-effect snapshots / Workspace principal separation / ASGI denial-shape lines, plus 6 configured Ruff-format-isort lines",
+    "Evidence": {
+      "exact_import_patch": {
+        "path": "/workspace/engineering/pr282-actual309-refresh/exact-both-parent-canonical-import.patch",
+        "bytes": 5113,
+        "sha256": "3ef2f6d18f1cec64996e1bb5f682adf214f9cf83613d47d21f9dbff0722ad0a5",
+        "mode": "0o600"
+      },
+      "both_parent_block_union": {
+        "path": "/workspace/engineering/pr282-actual309-refresh/FROZEN-staged-automatic-a0d-union-proof.json",
+        "bytes": 222575,
+        "sha256": "326e6fc92c18e6d86048c28cc521056798265bb581e1272f2ddc96c62ff791da",
+        "mode": "0o600"
+      },
+      "actual_target_auth_source_tests": "76 PASS through own prepared Runtime environment",
+      "configured_lint": "Ruff check/format/isort all PASS; 314 files formatted; Mypy 350 source files PASS"
+    },
+    "Stale_or_ambiguous_guidance_removed": "Current branch now retains source authority separating route registration, request authorization and packaged/native evidence; explicit configured isort gate retained. No cosmetic child or receipt identity relabeling. Dispatch copied274 count corrected to measured275 while all old inventories retained.",
+    "Remaining_uncertainty": "Current full configured source and fresh current CI NOT_RUN; current browser/native/provider/Workspace-principal/backend/private/full127/release acceptance remains HOLD. Ten historical oldworkspace raw bindings remain UNAVAILABLE, not reconstructed."
+  },
+  "remaining_HOLD": [
+    "current full configured source suites",
+    "fresh current exact-head complete hosted CI/actual tested checkout/policies",
+    "actual current native/browser/provider/consumer",
+    "whole127/backend/private/full engineering graph",
+    "release/publication/tag/issue closure"
+  ],
+  "evidence_bindings": [
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/FROZEN-before-source-original-e736-bindings.json",
+      "bytes": 858303,
+      "sha256": "851cffb3e86fc209ca9d1a64127c03f6c3b3b86916cd0f2c986db9e91f4ec547",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/FROZEN-post-LIGHT-complete-source-original-bytes-modes.json",
+      "bytes": 478567,
+      "sha256": "2129328c0652f6a1afbde648e1d7d320f56a74bd90d7dd251383828607e712e6",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/FROZEN-post-ordinary-merge-original-reference-retention.json",
+      "bytes": 545,
+      "sha256": "363d16f7d155cbe955d3b96c5241c4a67ec0f93b66a5e1dd479ce2c2c38bed5a",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/FROZEN-staged-automatic-a0d-union-proof.json",
+      "bytes": 222575,
+      "sha256": "326e6fc92c18e6d86048c28cc521056798265bb581e1272f2ddc96c62ff791da",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/PROPOSED-current-c35e-LIGHT-sequence-root-release-required.json",
+      "bytes": 3244,
+      "sha256": "aa2590770195ff0bff600660e224e91ec8de5a30d824edd3d027315e17d6cc77",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/auth-one-root-released-LIGHT.log",
+      "bytes": 3968,
+      "sha256": "dcda3ff91c17687fd3a9b4982215440857f5a0381bfdb6d6625881d963a008ad",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/canvas-one-root-released-LIGHT.log",
+      "bytes": 4331,
+      "sha256": "cef56244049e954f99b5a797842c3cd96201d08805bd9c7a3c4b46ae9d808080",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/doctor-one-root-released-LIGHT.log",
+      "bytes": 13487,
+      "sha256": "de3d6507997e080cb5f371c019e380c3cd00d7b6848b5fdeaa9d05970870fc14",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/exact-both-parent-canonical-import.patch",
+      "bytes": 5113,
+      "sha256": "3ef2f6d18f1cec64996e1bb5f682adf214f9cf83613d47d21f9dbff0722ad0a5",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/freeze-before-source-construction-before-final-type-correction.py",
+      "bytes": 8065,
+      "sha256": "fda8dc1a780f016ae4c68e69bbd72bfb967b7d1b4fe0b5ccd8c05e8995e4c8c2",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/freeze-before-source.py",
+      "bytes": 8097,
+      "sha256": "5df922bf55e137ba48222d633c02672d6137e61d74cc70f83d7dbebf69983d6f",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/freeze-owner-SOURCE_LIGHT.py",
+      "bytes": 6594,
+      "sha256": "2444f470cbe659b433f5f657d1b27aa5c76554644f7e3d46059510504dce2c95",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/freeze-post-LIGHT-source-and-originals.py",
+      "bytes": 5274,
+      "sha256": "d3a4f3e21343a3cd155bb90e4fb5f96d3a879d1fc81f2ed1e18b10efdeeb4286",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/generator-one-root-released-LIGHT.log",
+      "bytes": 4565,
+      "sha256": "f9a271e0e1fda72cdb7c556760fcca00499f8009dd378ab02916895efdbfe27f",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/generator-roundtrip.json",
+      "bytes": 10286,
+      "sha256": "aef9a0f63fbcbe61178e6e7d8059b03918de9e17615ebbc589081e720f043b4d",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/generator-roundtrip.py",
+      "bytes": 1800,
+      "sha256": "979170b690c5826e8c4fad49da20ed896198a75e9d701c6668827ad38df3df12",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/initial-pre-source-inspector-construction-history.json",
+      "bytes": 571,
+      "sha256": "e74603d6b57c40eecd0f626db22f4009f1d74a87a9d1560f6b57305ca68e9144",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/one-root-released-LIGHT-final-terminal.json",
+      "bytes": 6206,
+      "sha256": "6556e93ebd801a1c56be1237163ea59c85c843d825461e0bc2ca4650f96a5a20",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/one-root-released-LIGHT-terminal.json",
+      "bytes": 6137,
+      "sha256": "0f5cf2325f28137e3099af2617cf0c02840d816465c62593bdbf2475d4b92893",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/origin-action_server.json",
+      "bytes": 283,
+      "sha256": "b2e16eb4d3890174053857b3195e1881e4d39d5d6144fa945cc749fb9cde006c",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/origin-actions-http-helper.json",
+      "bytes": 264,
+      "sha256": "7ee5cd9994e84624c2641c47407a30c0f3dfe3547942848d348356d2a60e1663",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/origin-actions.json",
+      "bytes": 218,
+      "sha256": "91a596b56b31d13d4f9115d5ee567b85c64bad17eaf17fcc1b7a7524cac1cdfc",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/origin-devutils.json",
+      "bytes": 240,
+      "sha256": "1d4ff6145c3e70d2b942d1f3c55efa2142c7a4207aa0c7f1ac0384a81c754347",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/origin-work-items.json",
+      "bytes": 249,
+      "sha256": "5dd7fd17c31f8ca35a3ff853387495f25bc766d53312f17c425b8ebbcda9b524",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/own-Bootstrap-reuse-inputs-and-origins.json",
+      "bytes": 6417,
+      "sha256": "9057f3d36336e1e2d7b164bca36533a0e917ecc77265c26a6e2af8bea151bd0b",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/prepared-origins-one-root-released-LIGHT.log",
+      "bytes": 6702,
+      "sha256": "43a3b9fadeb3a050c1ebd80a5401cabfd2bcdb04ae778d4531e81dde82b539c2",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/rcc-static-one-root-released-LIGHT.log",
+      "bytes": 6989,
+      "sha256": "5835065ddf459997a6c2bf377400db158d6b37d453684c588dfe4d95d965eb30",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/read-only-specialist-action-server-SKILL.md",
+      "bytes": 3940,
+      "sha256": "ea87452ad6031034bff42a1e02cbe0699b80b09c7939f505ccc773941eca01d9",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/repository-skill-specialist-read.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/run-Canvas-scoped.py",
+      "bytes": 383,
+      "sha256": "58b0214e039c63b1ee67a07bddc0e75b52080d2ce2ca9eb1b600709b79cab9b3",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/run-current-RCC-static.py",
+      "bytes": 353,
+      "sha256": "b4fbe9823b1de83af76d504f1daa68cb5c78eb6f436566c4a8334f5a0aa2ea40",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/run-current-auth-source.py",
+      "bytes": 197,
+      "sha256": "9955cf47eb71ce1e607f4726f65024a3a22d832a23b5beca89a1b4ff8fe0d58b",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/run-one-root-released-LIGHT.py",
+      "bytes": 4659,
+      "sha256": "7067fd2a3c8e62c63388bc1b2b9b16284b11cab5ace0951996ef4e247ef13f0f",
+      "mode": "0o700"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/strict-Canvas-original-gateway-preservation.json",
+      "bytes": 485,
+      "sha256": "7191bc90fe639946dc8369fffb1996af1940539c705a485bd1820ab298d04fd7",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/strict-canvas-one-root-released-LIGHT.log",
+      "bytes": 3580,
+      "sha256": "e5cf43656320bbaa17a2419937c0a62a3071648c53bed5a163aefba8cef0b478",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/toolkit-one-root-released-LIGHT.log",
+      "bytes": 14505,
+      "sha256": "50643af7fe0159ead64ccaf0652db46f041c54f5d5c1872dee14819d675a4ccb",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/verify-Canvas-gateway-contract.py",
+      "bytes": 1430,
+      "sha256": "f1dff705aa455b9b25ba6e4e430e4975b91181294b7d345d24b2b3e669197a66",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/verify-own-prepared-bootstrap.py",
+      "bytes": 2682,
+      "sha256": "defbf0f18857955a8d140f8a1b37b6857aabe85455fea6159be1d30e448b354e",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr282-actual309-refresh/verify-union-before-commit.py",
+      "bytes": 3898,
+      "sha256": "d0f1f87448fe37aeaa21771c6e850cf6190882612fcf4bd1326136947d6b8f2b",
+      "mode": "0o600"
+    }
+  ],
+  "Upstream_disposition": "none"
+}

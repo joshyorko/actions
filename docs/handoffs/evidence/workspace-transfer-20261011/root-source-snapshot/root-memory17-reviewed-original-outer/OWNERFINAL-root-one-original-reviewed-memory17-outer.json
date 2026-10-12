@@ -1,0 +1,18 @@
+{
+  "capture": "2026-10-11T21:04:07.931900+00:00",
+  "elapsed_seconds": 0.11517973701120354,
+  "release": {
+    "bytes": 836,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-one-memory17-pure-controls-release.json",
+    "sha256": "5afbfc6f31f6b063e7cd201a79ee2fe88834c16e3333abbefbbcd58f08ac8375"
+  },
+  "returncode": 1,
+  "review": {
+    "bytes": 4021,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-memory17-concrete-independent-preexecution-review/OWNERFINAL-independent-memory17-concrete-config-launcher-and-ROOT-preflight-PREEXEC-review.json",
+    "sha256": "710c0ae33ff6c523ca5aae04f674f1e3a9d8df97883bc22549d7d53aab9deaa8"
+  },
+  "scope": "ONE_PURE17_ONLY_NO_NATIVE_MEMORY_POLICY_ADOPTION"
+}

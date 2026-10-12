@@ -1,0 +1,313 @@
+{
+  "copies": [
+    {
+      "source": "/workspace/actions-cloud/receipts/pr282-review/review-receipt.json",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr282-review/review-receipt.json",
+      "bytes": 4197,
+      "sha256": "f1f02ab09c904a2b8156f4abc004e75decf999987883579e53e6d5792055e05d",
+      "mode": "0o600"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr282-writer/check-workflow-preservation.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr282-writer/check-workflow-preservation.py",
+      "bytes": 2865,
+      "sha256": "7ecd1b19d27a1de56a16744edd70b1658833254ba423173fcd0446247f1d648d",
+      "mode": "0o600"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr282-writer/hosted-workflow-checkpoint-receipt.json",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr282-writer/hosted-workflow-checkpoint-receipt.json",
+      "bytes": 6910,
+      "sha256": "75f59ec0086e1c9ac4f4ee5736194816fb34e9555821130bd180cadb723d70cb",
+      "mode": "0o600"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr282-writer/published-consumer-runner-attempt2.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr282-writer/published-consumer-runner-attempt2.py",
+      "bytes": 3198,
+      "sha256": "faa006d776eef6622e88709f2cd38a4201abd4c7094df2e8989545029bdbb74d",
+      "mode": "0o600"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr282-writer/published-consumer-runner.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr282-writer/published-consumer-runner.py",
+      "bytes": 2543,
+      "sha256": "05421377c61513cefb3d5165c638931f2945934e81bdc617b3998b0dc59d0c7d",
+      "mode": "0o600"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr282-writer/source-checkpoint-receipt.json",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr282-writer/source-checkpoint-receipt.json",
+      "bytes": 6490,
+      "sha256": "c42dd6954ca86280fd79c14220aeac597a0a493788373cab77017f664f3a2494",
+      "mode": "0o600"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr282-writer/workflow-generator-before.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr282-writer/workflow-generator-before.py",
+      "bytes": 128344,
+      "sha256": "8bca513c90021d256910a369a00a006533c7183940de46219a077a0b9ca17c55",
+      "mode": "0o600"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr299/merge-receipt.json",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr299/merge-receipt.json",
+      "bytes": 5504,
+      "sha256": "da55dcd8155e2d220af77565d543c789a0dae4de68ea7c2e80951f8e5fbf8699",
+      "mode": "0o600"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/canonical-fixture-and-output-preservation.patch",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr305-crlf-fixture/canonical-fixture-and-output-preservation.patch",
+      "bytes": 3937,
+      "sha256": "58c62090aa0f290f75f96aa17e6926aa5430ce6230378375fd2b731df89b0793",
+      "mode": "0o444"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/test_committed_fixture_crlf_RED.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr305-crlf-fixture/test_committed_fixture_crlf_RED.py",
+      "bytes": 1571,
+      "sha256": "e0f21fc21c00df61538347d927667f8ea002ee9f4ce93b604b26f8d10a57bf55",
+      "mode": "0o444"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/test_pid_handoff_current_RED.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr305-crlf-fixture/test_pid_handoff_current_RED.py",
+      "bytes": 2421,
+      "sha256": "b2e4b97527777ba93d660a74d128332503017018b27a66b3ed8ea6a25ed8d12f",
+      "mode": "0o444"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/verify-source-preservation.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr305-crlf-fixture/verify-source-preservation.py",
+      "bytes": 4238,
+      "sha256": "bf7bf618375ee1864a8f73961099ba76dd7010ccdf57677cc50577129afeb597",
+      "mode": "0o444"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr305-readonly-proposal/frozen-source-checkpoint-receipt.json",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr305-readonly-proposal/frozen-source-checkpoint-receipt.json",
+      "bytes": 7011,
+      "sha256": "d68e265a2bbbb28cc54cfed511d2e0bbc3cdaeb71a93ac08ef1d7c74aeaae60e",
+      "mode": "0o600"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr305-readonly-proposal/implement-public-mode.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr305-readonly-proposal/implement-public-mode.py",
+      "bytes": 12585,
+      "sha256": "5e2dd21aba1c3a92cc2fd5c21f59eb62f06b89997b7a5ba9a496269001df8d9f",
+      "mode": "0o600"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr305-readonly-proposal/measure-source-checkpoint.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr305-readonly-proposal/measure-source-checkpoint.py",
+      "bytes": 6016,
+      "sha256": "96b1022613d759c7efbe24bc05e362ba1d71794f0789c04b3db4dc59df57b941",
+      "mode": "0o600"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr305-readonly-proposal/original-fixture-boundary-red.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr305-readonly-proposal/original-fixture-boundary-red.py",
+      "bytes": 2581,
+      "sha256": "3635f421572f62a606b7a0409498c237c2711b7fbd4799f6e01db37dbdb94e85",
+      "mode": "0o600"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr305-runner/canonical-runner-v5-proposed.patch",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr305-runner/canonical-runner-v5-proposed.patch",
+      "bytes": 2010,
+      "sha256": "e84eb7659efef7f349231b1b8b5a80ef5c0d8a2f20e9dc2e1a9d59eea8c3e0b0",
+      "mode": "0o444"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v2.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr305-runner/canvas-native-public-runner-v2.py",
+      "bytes": 28284,
+      "sha256": "f16f5ebefe6ac74d3259b1bbc5af6054a4aedd563e24eef7a1dfebcb0e0f2454",
+      "mode": "0o444"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v3.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr305-runner/canvas-native-public-runner-v3.py",
+      "bytes": 30332,
+      "sha256": "d7650dc023ddc714fb67fb05e336c906c6156baa5d2bbceca00ae7b07361afba",
+      "mode": "0o444"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v4.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr305-runner/canvas-native-public-runner-v4.py",
+      "bytes": 33806,
+      "sha256": "da4be9f4f6f01a7079f0ff285fa8339618e663425224a4873f3cf299d6787032",
+      "mode": "0o444"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v5.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr305-runner/canvas-native-public-runner-v5.py",
+      "bytes": 35497,
+      "sha256": "09cdc6b19f5d3d9cc94fadca23373108868521e0378d33960146b1a8522e88ad",
+      "mode": "0o444"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr305-runner/canvas-native-public-runner.py",
+      "bytes": 27449,
+      "sha256": "0feee8b8c911f94496323d10dc4a92cf93cfe2ce566b54efc29e3b771b8e56d5",
+      "mode": "0o444"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr305-runner/checkpoint-v4-terminal.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr305-runner/checkpoint-v4-terminal.py",
+      "bytes": 6298,
+      "sha256": "9869c36e2417db318eb4771f2547b2459e88511abe02494746e5a395add54abe",
+      "mode": "0o600"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr305-runner/checkpoint-v5-terminal.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr305-runner/checkpoint-v5-terminal.py",
+      "bytes": 6704,
+      "sha256": "02f19cb4ef934ae0780951f01c9b195d2cfb6444c9e56447f0cf54d647d9a36f",
+      "mode": "0o600"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr305-runner/diagnose-collected-module.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr305-runner/diagnose-collected-module.py",
+      "bytes": 1128,
+      "sha256": "eac4c67b7982474e5d4a978ed095f9b9b1a8f6a802d3c848de867dd25ee7aa38",
+      "mode": "0o600"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr305-runner/prepare-v4-proposal.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr305-runner/prepare-v4-proposal.py",
+      "bytes": 9658,
+      "sha256": "b423f4d4a05cf1aab4ccc81bc2e5bb9afd6e724cb845c830b32d5b7ed4e4d9bd",
+      "mode": "0o600"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr305-runner/prepare-v5-proposal.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr305-runner/prepare-v5-proposal.py",
+      "bytes": 7824,
+      "sha256": "96b9cf98b6e5669443fddefe5ab195aa4a4e12c175009f488d8889082c74c91a",
+      "mode": "0o600"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr305-runner/test_runner_admission.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr305-runner/test_runner_admission.py",
+      "bytes": 10905,
+      "sha256": "a3415fefc1a58ad2424318acd44bebc2386bb1cb7ca480a21ab69f21eef11731",
+      "mode": "0o444"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr305-runner/test_runner_admission_v2.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr305-runner/test_runner_admission_v2.py",
+      "bytes": 13928,
+      "sha256": "5f30c9d49a806639b9ce01de62e2f61fec98db9349483c94267e4ea662619a28",
+      "mode": "0o444"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr305-runner/test_runner_admission_v3.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr305-runner/test_runner_admission_v3.py",
+      "bytes": 20133,
+      "sha256": "384ea6b542aec522424d4fbb0ed3b3006230795794b48966dae6dda881d91b74",
+      "mode": "0o444"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr305-runner/test_runner_admission_v4.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr305-runner/test_runner_admission_v4.py",
+      "bytes": 23367,
+      "sha256": "c0fe769b1aa21529de1f0f1c767cf5812c7b2953f2547787d9f658a471099cce",
+      "mode": "0o444"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr305-runner/test_runner_admission_v5.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr305-runner/test_runner_admission_v5.py",
+      "bytes": 30661,
+      "sha256": "e39fb419aed778fb9f5ef1408333ec07408f05759a85c2b212a15e19dff5932b",
+      "mode": "0o444"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr305-selector-fix/canonical-current-union.patch",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr305-selector-fix/canonical-current-union.patch",
+      "bytes": 9261,
+      "sha256": "c5e79cc6cef79c65c6e870431df654d7a39d96381e7e6b6ee9e9e7bc479d2f97",
+      "mode": "0o444"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr305-selector-fix/discover-emitted-selector.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr305-selector-fix/discover-emitted-selector.py",
+      "bytes": 1959,
+      "sha256": "e6fbe13b50f2810bf961c1da758a84334e40f14638869d3c895afe88b77aeadc",
+      "mode": "0o444"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr305-selector-fix/discover-selectors-2.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr305-selector-fix/discover-selectors-2.py",
+      "bytes": 1962,
+      "sha256": "a8fb97d1462da55f773a42c6594af82b5c63f82168d861d4b1c7181019d4ad14",
+      "mode": "0o444"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr305-selector-fix/discover-selectors.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr305-selector-fix/discover-selectors.py",
+      "bytes": 1911,
+      "sha256": "e6da81487710809a4b33ea3a3e277c8cef21cfa853ff629e5e4e6746af514d4a",
+      "mode": "0o444"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr305-selector-fix/validate-retained-discovery-errors.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr305-selector-fix/validate-retained-discovery-errors.py",
+      "bytes": 1346,
+      "sha256": "45721555e4afa6285b6b79dc8eadd2f6d9ef1d2d65d113412203a67401876652",
+      "mode": "0o600"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr310-fbde-refresh/check_workflow_roundtrip.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr310-fbde-refresh/check_workflow_roundtrip.py",
+      "bytes": 2122,
+      "sha256": "96f1d99543ebab69021acebde3d355db18e936775e6a16b591f62022b999e4e3",
+      "mode": "0o600"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr310-fbde-refresh/exact-head-harness-receipt.json",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr310-fbde-refresh/exact-head-harness-receipt.json",
+      "bytes": 669,
+      "sha256": "0ddf71cfdf20db4a7358c3f207c1c11e0facc032bc5d3ec2718714bbcc775479",
+      "mode": "0o600"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr310-fbde-refresh/local-refresh-receipt.json",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr310-fbde-refresh/local-refresh-receipt.json",
+      "bytes": 14186,
+      "sha256": "de8097731d06fe943477e279456d8362bb42f8b26aee8c80c9610f739166ff1a",
+      "mode": "0o600"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/pr310-fbde-refresh/workflow-roundtrip-receipt.json",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/pr310-fbde-refresh/workflow-roundtrip-receipt.json",
+      "bytes": 1878,
+      "sha256": "0d284944d01bbc05cb0960c9e68e59ee7ab93dcd49f0d299aead5cea74bcdca1",
+      "mode": "0o600"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/runtime-103-preflight/actual-clean-consumer-receipt.json",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/runtime-103-preflight/actual-clean-consumer-receipt.json",
+      "bytes": 9008,
+      "sha256": "7704cbac814064ba4d341f99c576b7ee36ab646b72c07e79a50d5dee186ac938",
+      "mode": "0o600"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-consumer-runner.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/runtime-103-preflight/installed-consumer-runner.py",
+      "bytes": 16652,
+      "sha256": "8ac20b20442a0e599e038664e76f4acc8779bcdebaa4340c319f43580a1133a9",
+      "mode": "0o600"
+    },
+    {
+      "source": "/workspace/actions-cloud/receipts/runtime-103-preflight/test_installed_consumer_runner.py",
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/runtime-103-preflight/test_installed_consumer_runner.py",
+      "bytes": 5192,
+      "sha256": "9ded078557289c471f3c0e9372ac71e90bccf1b3f9474c3b0067897f10416eea",
+      "mode": "0o600"
+    }
+  ],
+  "scope": "Historical source and receipts; not renewed execution authority."
+}

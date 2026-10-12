@@ -1,0 +1,340 @@
+{
+  "ROOTrelease": "NOT_CREATED",
+  "actual_tests_imports_cgroup_signals_native": "NOT_RUN",
+  "all_frozen_original_bindings": [
+    {
+      "bytes": 3330,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/proposed_cgroup_memory_state_v1_NOTRUN.py",
+      "sha256": "d2b3e6684898ab1b64f84ac7712a1f2f355d7ea5d680eb6ded0699cc090f5260"
+    },
+    {
+      "bytes": 2985,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/test_proposed_cgroup_memory_state_NOTRUN.py",
+      "sha256": "3b3a417379f608b6a5917c7720c6e846352f88d30fda1273c301a7c5ced1a4cb"
+    },
+    {
+      "bytes": 900,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/canonical-shared-cgroup-headroom-vs-filesystem-capacity-proposed.md",
+      "sha256": "8c28fc2596c6fdfc607dd35a17b3462ad217ba97670b61222393dc504861d896"
+    },
+    {
+      "bytes": 27889,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/actual_transport_v8.py",
+      "sha256": "33dda17140ef749e22f086cc91b92ed8c3230fddfde8a4a369769e2183f695a1"
+    },
+    {
+      "bytes": 12959,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/runner_contracts_v3.py",
+      "sha256": "cbae3bb074d3995153ea5e6b694e7f9e61c047c6aa511b682959a63fedf7b726"
+    },
+    {
+      "bytes": 765564,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+      "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25"
+    },
+    {
+      "bytes": 742,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-memory17-managed700-once2-reviewed-original-outer/OWNERFINAL-root-one-original-reviewed-managed700-once2-memory17-outer.json",
+      "sha256": "421227a4e2eb8e8393426ecec757e3041f54112838d24abe7bddc5835e569bc8"
+    },
+    {
+      "bytes": 3719,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-memory17-pure-controls-20261011-2/junit.xml",
+      "sha256": "c198d5a004538f99f4cdf71f0769ad744891cc5cd864cddbe4ce7e92b1e5d76f"
+    },
+    {
+      "bytes": 4053,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/bounded-private-source-integration-and-future-pure-command-contract-NOTRUN.json",
+      "sha256": "9c5181a6a032ce053e540c779732ca6ee1f961be0ffd7f2076617db08177b099"
+    },
+    {
+      "bytes": 1225,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/canonical-self-cgroup-identity-and-bounded-observer-proposed.md",
+      "sha256": "d6c06054276f3cf45054eecf523d7c618dc8498e0334cc9d55257fc449510380"
+    },
+    {
+      "bytes": 14600,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/cgroup_memory_reader_observer_v1_NOTRUN.py",
+      "sha256": "24e38634118730ba9d222179518d13818c094c5a6ccfd368afd56521e964d014"
+    },
+    {
+      "bytes": 10667,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/freeze_private_memory_source_packet_NOTRUN.py",
+      "sha256": "c678044b20fa43c31f4cca5dad4a9d9030dcb5b2bf3cfb192d435ba57cbaab2e"
+    },
+    {
+      "bytes": 10865,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/freeze_private_memory_source_packet_join_scope_v2_NOTRUN.py",
+      "sha256": "1fb648e9cb1f17a40c47e4b0c8aed828c4e5a6c6a7d1bf7bf8fc86e9c48b27e9"
+    },
+    {
+      "bytes": 5321,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/immutable-static-reader-observer-source-control-and-parent-binding-proof-NOTRUN.json",
+      "sha256": "c459f8294a62955c97df805ee03371afbebd954cd37c45a2982d96d69a40ed7b"
+    },
+    {
+      "bytes": 364,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/original-static-join-name-inspector-FAIL-NOTRUN.json",
+      "sha256": "213ba2a20d652fab92050f5adc9c6ac2fd6467bc344febdb7e0f2445fb501334"
+    },
+    {
+      "bytes": 14377,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/test_cgroup_memory_reader_observer_v1_NOTRUN.py",
+      "sha256": "449298ef47661a81bd46ea2c31ecd6644d559844084dc121e70d0da5870ee35d"
+    },
+    {
+      "bytes": 8304,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/OWNERFINAL-private-current8d49-cgroup-finite-reader-owned-observer-and-28-controls-SOURCE_PREPARED_NOTRUN.json",
+      "sha256": "1cb62155075c07714bc8eb17dec5ad082bc4663e3d7269797f184fde9ec02a29"
+    },
+    {
+      "bytes": 10394,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-independent-SOURCE-review/OWNERFINAL-independent-private-cgroup-reader-observer-SOURCE-and-prepared28-controls-GO.json",
+      "sha256": "dc37624bc1e47ad007320fb39a80e722128cd1d8acfcb99dc614add1552b0caa"
+    },
+    {
+      "bytes": 12144,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-managed-primary700-once2-preexecution-NOTRUN/FROZEN-memory17-managed-primary700-once2-pure-config-NOTRUN.json",
+      "sha256": "5802926af2eb9a0bc469f273aab0277a70ec1500b5e80372493b5ce0c09798ac"
+    },
+    {
+      "bytes": 7361,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/root_release_one_memory17_pure_controls_NOTRUN.py",
+      "sha256": "68d230410d0ff42f3c65dea09c0cd5e5b191a24e70ad3871efbb5dd2bf8201b0"
+    },
+    {
+      "bytes": 12996,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/frozen-current8d49-source-LIGHT-inputs-v3.json",
+      "sha256": "81f52920b50e67619b3bb418a7c1034a2106ec52f4badd71b9d85e29b7376820"
+    },
+    {
+      "bytes": 987,
+      "mode": "0o600",
+      "path": "/workspace/actions-cloud/activate.sh",
+      "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+    },
+    {
+      "bytes": 444,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/initial-metadata-construction-PATH-variable-expression-FAIL.json",
+      "sha256": "8f796eb0414c996936abf5bacd6da17778e9fb4f371089aed76a81fc71c1ad5d"
+    },
+    {
+      "bytes": 4690,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/readonly_current_input_guard_v9.py",
+      "sha256": "480be06317562b7e3a5c98a5d794bb5d2a33e7fa6186fe707823ecb1cc583626"
+    },
+    {
+      "bytes": 1575,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/v9_entry_bootstrap.py",
+      "sha256": "d3957c2e216731abf596897fbf0838809129a571743510692f2509228e2c7288"
+    },
+    {
+      "bytes": 6603,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-next-native-memory-plan-independent-review/OWNERFINAL-independent-memory17-prepared-source-and-executable-HOLD-v2.json",
+      "sha256": "d7068aab83b03c9495e5bd80a93ca750b7d66df818fee93869b5b52b3fd66ece"
+    },
+    {
+      "bytes": 5944,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-control3-V9-original-publish-failure-diagnosis-owned/OWNERFINAL-original-current8d49-control3-V9-publication-failure-and-secondary-dependency-only.json",
+      "sha256": "feef7c4b07db2d3a778622dc1acf3eec00a8225c42b38aa00721926fb273410b"
+    },
+    {
+      "bytes": 6858,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-control3-V9-independent-actual-review/OWNERFINAL-independent-original-current8d49-control3-V9-native-FAIL-STOP-review.json",
+      "sha256": "cb88815f6d1816ff7f8b5302420d69bd7cacb0d052fe2ba3c957ddad5e596168"
+    },
+    {
+      "bytes": 8538,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-managed-primary700-once2-preexecution-NOTRUN/root_release_one_memory17_managed_primary700_once2_NOTRUN.py",
+      "sha256": "a91ec3fbe4aef23f49b6178459b87d1b5e72d18f69214a8c2f129af5eeeb486b"
+    },
+    {
+      "bytes": 7739,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/FROZEN-memory17-pure-control-config-NOTRUN-v2.json",
+      "sha256": "e90827940b61e3ddb906ff0576a2ea37cd6ee7297986cc78c62844f5a888b402"
+    },
+    {
+      "bytes": 8242,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/OWNERFINAL-memory17-concrete-pure-control-launcher-config-and-root-once-preexecution-NOTRUN-v2.json",
+      "sha256": "56d2b731ffcd6bcb3ebf5d752086e6bc30249f423279964d64271f8c8deb676f"
+    },
+    {
+      "bytes": 4021,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-concrete-independent-preexecution-review/OWNERFINAL-independent-memory17-concrete-config-launcher-and-ROOT-preflight-PREEXEC-review.json",
+      "sha256": "710c0ae33ff6c523ca5aae04f674f1e3a9d8df97883bc22549d7d53aab9deaa8"
+    },
+    {
+      "bytes": 5250,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-original-mode-admission-failure-independent-review/OWNERFINAL-independent-original-memory17-managed-mode-admission-FAIL-and-source-preservation.json",
+      "sha256": "12177ef012b94dab8e9e658d488db0bb147d37b2d3bc26454147aabaff2541d7"
+    },
+    {
+      "bytes": 727,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-memory17-reviewed-original-outer/OWNERFINAL-root-one-original-reviewed-memory17-outer.json",
+      "sha256": "277e37a3be16f8bd6c5bd8945c656bec37284ae7e2cda396b20a3142c809c650"
+    },
+    {
+      "bytes": 836,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-memory17-pure-controls-release.json",
+      "sha256": "5afbfc6f31f6b063e7cd201a79ee2fe88834c16e3333abbefbbcd58f08ac8375"
+    },
+    {
+      "bytes": 1069,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-original-mode-admission-failure-independent-review/canonical-measured-per-path-binary-mode-before-delegation-proposed.patch",
+      "sha256": "15ca1e894890c2d2bd383139088cf3946a3e4c89e30e2a82cd3e96b4b48e5e1b"
+    },
+    {
+      "bytes": 2309,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-current8d49-control3-V8-original-outer-owned/OWNERFINAL-root-one-original-current8d49-control3-V8-outer-terminal.json",
+      "sha256": "ddc3f1b1fc0adba210ee984f8aa65d8901c879956f9326e5163fbfc4106e5deb"
+    },
+    {
+      "bytes": 5649,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-current8d49-control3-V9-original-outer-owned/OWNERFINAL-root-one-original-current8d49-control3-V9-outer-terminal.json",
+      "sha256": "895f8bc537523ebc1ee3f4feb685a9ebe5835a529aeb87ab95c67e2b31457b68"
+    }
+  ],
+  "all_local_bindings": [
+    {
+      "bytes": 19650,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/FROZEN-reader28-concrete-source-control-config-NOTRUN.json",
+      "sha256": "4cd8f74435137100296e44aedfb54defd86a1bf70f1c42060242bd9820c65463"
+    },
+    {
+      "bytes": 6974,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/ROOT-distinct-release-and-concrete-command-contract-reader28-NOTRUN.json",
+      "sha256": "be54a08d4e36d10e12d66cd6bb87885452757d46e8f3209f1958ba1fbe71ae49"
+    },
+    {
+      "bytes": 3379,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/execute_frozen_reader28_unittest_census_NOTRUN.py",
+      "sha256": "8b58d50947023e6fa1a66e0bff627741bcf696bbaa075c7d6bdebfee021b645c"
+    },
+    {
+      "bytes": 9972,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/freeze_reader28_concrete_packet_NOTRUN.py",
+      "sha256": "51e77a236d7aaedab4a887e8364a231140bb4c0a2d3f1ea4c7c9aacdb348a58f"
+    },
+    {
+      "bytes": 4083,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/immutable-static-concrete-reader28-admission-command-and-source-closure-proof-NOTRUN.json",
+      "sha256": "fe85d9280197e99c299a5e889f65033c7e1dc1abc1841c10d0e5538806fe64d9"
+    },
+    {
+      "bytes": 11048,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/run_root_reader28_pure_once_NOTRUN.py",
+      "sha256": "eb3a26634d2695488c64597aa13451098aea7445e3fc955886e29760b7cc4a08"
+    }
+  ],
+  "capture": "2026-10-11T21:37:11.517854+00:00",
+  "config_binding": {
+    "bytes": 19650,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/FROZEN-reader28-concrete-source-control-config-NOTRUN.json",
+    "sha256": "4cd8f74435137100296e44aedfb54defd86a1bf70f1c42060242bd9820c65463"
+  },
+  "documentation": {
+    "disposition": "REUSE_VERIFIED_SOURCE_PROPOSAL; concrete gate honestly labels backend coverage gap and controls NOT_RUN, no cosmetic guide child",
+    "exact_source_canonical_proposal": {
+      "bytes": 1225,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/canonical-self-cgroup-identity-and-bounded-observer-proposed.md",
+      "sha256": "d6c06054276f3cf45054eecf523d7c618dc8498e0334cc9d55257fc449510380"
+    },
+    "existing8c28_reuse": {
+      "bytes": 900,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/canonical-shared-cgroup-headroom-vs-filesystem-capacity-proposed.md",
+      "sha256": "8c28fc2596c6fdfc607dd35a17b3462ad217ba97670b61222393dc504861d896"
+    },
+    "remaining_uncertainty": "all28 actual outcomes pending; complete real backend descriptor walk remains separate untested gate",
+    "upstream_disposition": "none"
+  },
+  "executor_binding": {
+    "bytes": 3379,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/execute_frozen_reader28_unittest_census_NOTRUN.py",
+    "sha256": "8b58d50947023e6fa1a66e0bff627741bcf696bbaa075c7d6bdebfee021b645c"
+  },
+  "launcher_binding": {
+    "bytes": 11048,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/run_root_reader28_pure_once_NOTRUN.py",
+    "sha256": "eb3a26634d2695488c64597aa13451098aea7445e3fc955886e29760b7cc4a08"
+  },
+  "root_contract": {
+    "bytes": 6974,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/ROOT-distinct-release-and-concrete-command-contract-reader28-NOTRUN.json",
+    "sha256": "be54a08d4e36d10e12d66cd6bb87885452757d46e8f3209f1958ba1fbe71ae49"
+  },
+  "schema": 1,
+  "scope": "Synthetic reader/observer28 controls only; descriptor full backend test gap, memory threshold calibration, integration/native/profile/release all HOLD; failed3 retained, no automatic newer-version advance",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_clean": true,
+  "source_independent_review": {
+    "bytes": 10394,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-independent-SOURCE-review/OWNERFINAL-independent-private-cgroup-reader-observer-SOURCE-and-prepared28-controls-GO.json",
+    "sha256": "dc37624bc1e47ad007320fb39a80e722128cd1d8acfcb99dc614add1552b0caa"
+  },
+  "source_leaves": 1440,
+  "source_owner_binding": {
+    "bytes": 8304,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/OWNERFINAL-private-current8d49-cgroup-finite-reader-owned-observer-and-28-controls-SOURCE_PREPARED_NOTRUN.json",
+    "sha256": "1cb62155075c07714bc8eb17dec5ad082bc4663e3d7269797f184fde9ec02a29"
+  },
+  "static_proof": {
+    "bytes": 4083,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-cgroup-reader28-concrete-PREEXEC-NOTRUN/immutable-static-concrete-reader28-admission-command-and-source-closure-proof-NOTRUN.json",
+    "sha256": "fe85d9280197e99c299a5e889f65033c7e1dc1abc1841c10d0e5538806fe64d9"
+  },
+  "status": "PREPARED_READER_OBSERVER28_CONCRETE_PREEXEC_NOT_RUN",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "unique_output_root": "ABSENT"
+}

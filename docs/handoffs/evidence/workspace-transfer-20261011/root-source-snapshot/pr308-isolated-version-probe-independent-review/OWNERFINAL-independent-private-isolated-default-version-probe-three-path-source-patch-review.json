@@ -1,0 +1,107 @@
+{
+  "decision": "GO_PRIVATE_ISOLATED_DEFAULT_VERSION_PROBE_SOURCE_PATCH_ROOT_APPLICATION_ONLY",
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "disposition": "Exact four-line replacement accepted; root applies in owning real SOURCE child. No cosmetic duplicate.",
+    "durable_learning": "Verify bounds at actual default caller-to-subprocess dispatch, not just the direct version helper.",
+    "evidence": "Four genuine900-vs10 baseline spies, final4default10 cells pluslegacy900/injected/fixed-error cases, nine retained negatives; whole-AST and complete union preservation proofs.",
+    "exact_delta": "Replace one bounded version-probe sentence with four lines: binary bytes before isolated10s probe and again before use; default location/version wrappers share it; general900s command budget separate; injected runners are test seams, not native timing evidence.",
+    "exact_delta_binding": {
+      "bytes": 950,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/canonical-isolated-version-probe-timeout-roles-proposed.patch",
+      "sha256": "87fb5128523f350011e7940a03802b9d3f2de0548f7a1c1b101d16a0b6031e1d"
+    },
+    "remaining_uncertainty": "Real native version/functionality3/5/7276 and new-source FULL/CONTROL/config/root actual adoption remain held.",
+    "stale_ambiguity_removed": "A direct helper timeout does not bound wrappers that supply the general900s runner."
+  },
+  "execution_or_mutation_by_reviewer": {
+    "branch_refs": false,
+    "download": false,
+    "native": false,
+    "private_Git_tree_creation": false,
+    "private_source": false,
+    "product_source": false,
+    "tests_or_gates": false
+  },
+  "owner_binding": {
+    "bytes": 11313,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/OWNERFINAL-private-isolated-default-version-probe-seven-regression-source-patch.json",
+    "sha256": "87face251f86b002bd28e907254662bbb2124f5e53dc5f5b1bc6192f2b979eec"
+  },
+  "patch_binding": {
+    "bytes": 6211,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/combined-adapter-tests-canonical-three-path.patch",
+    "sha256": "805bed37940e4e5ade0e7e02da332192551b3f2bba1536022b901b1a4e24de42"
+  },
+  "proof_binding": {
+    "bytes": 1532,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-isolated-version-probe-independent-review/independent-private-probe-AST-Git-JUnit-preservation-proof.json",
+    "sha256": "67a98d7061d30d7b3e4dcbf9e1a191a28f54c9dec903ae0c6668c34b9e09950d"
+  },
+  "reviewer_inspector": {
+    "bytes": 7752,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-isolated-version-probe-independent-review/verify_private_probe_patch_readonly.py",
+    "sha256": "76890ec168948c21152ce1a83a1754fbf3cbc156581487f916190068d3315406"
+  },
+  "root_adoption_requirements": [
+    "Both original B28 actual preservation and separate exact TMP relocation ACTUAL/independent reviews accepted before existingPR308 ordinary merge.",
+    "Preserve original396 and actuale2 ordered parent histories on same existing308 branch, verify ordinary9294 complete tree. If actual target changes or unexpected code conflict, stop for named successor/context. No force/rebase/replacementbranch.",
+    "Apply exactly bound three-path patch and compare complete result toedf/1440;1437 other blob/mode pairs preserved. Derive new committed source head/tree; do not treat prospective pure tree as a tested commit.",
+    "Fresh current-source LIGHT/configured FULL, independent SOURCE qualification, fresh CONTROL/config/ROOT distinct native3\u21925\u21927276 acceptance remain required. No historical source/full/native/currentCI carry."
+  ],
+  "schema": 1,
+  "source_contexts": {
+    "current_original_Git_FS_leaves_verified": 1426,
+    "current_source_FS_unchanged": true,
+    "expected_exact_three_path_patch_tree": "edf088b1a8acd9709b37dee2532d77c8b2246a50",
+    "immutable_original_commit": "396925cb3d6527af1768b7f5333f9653c005fc55",
+    "immutable_original_tree": "84f850f0d4e08b21afcd8220413ce94322370acf",
+    "other_body_mode_pairs_exact": 1437,
+    "required_ordinary_current_target_union_tree": "929410b09fff3521c554cf935411c71f9e2e6b95",
+    "union_leaves": 1440
+  },
+  "upstream_disposition": "none; downstream Actions default-dispatch defect, no RCC125/118 worker post",
+  "verified_exact_scope": {
+    "adapter_whole_AST_change": "Only isolated verify_rcc_version compatibility runner keyword: None if runner is _subprocess_runner else runner. Whole module exact after restoring that value; signature/default3/legacy/general900/config env/hash/platform/pins/download/build/get_rcc_location unchanged.",
+    "added_cells": 7,
+    "added_permanent_functions": 4,
+    "admission_order": "Existing verify_rcc_compatibility selects policy and hashes binary bytes/platform before _rcc_version_probe. Default version/location wrapper now selects existing timeout10 probe. Explicit injected runner unchanged; it remains a service-free seam, not finite native proof.",
+    "baseline_RED": {
+      "expected_seconds": 10,
+      "genuine_expected_failures": 4,
+      "observed_actual_timeout_seconds": 900
+    },
+    "changed_paths": [
+      "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "final_GREEN": {
+      "deselected": 99,
+      "error": 0,
+      "fail": 0,
+      "new": 7,
+      "pass": 16,
+      "retained_negative": 9,
+      "skip": 0,
+      "unique_cases": 16
+    },
+    "finite_timeout_error": "Existing probe catches OSError/TimeoutExpired/UnicodeError and uses fixed compatibility error fromNone. New TimeoutExpired poison proves captured secret output is absent from error/cause.",
+    "frozen_refs": 28,
+    "new_positive_cases": "Two selectors(released5/candidate7276)\u00d7two default entrypoints(version/location)=4, plus legacy default900, explicit injected runner, default fixed timeout error=3.",
+    "original_tests_AST_prefix_exact": true,
+    "preserved_original_failures": [
+      "Initial missingcwd before command launched",
+      "Initial GREEN conftest mixed-path collection error(no selected bodies)",
+      "Newtest longline formatFAIL; AST-equal formatcorrection/finalGREEN on formatted source"
+    ],
+    "pure_control_boundaries": "Subprocess spies +mocked approved binary hash/platform/version only; no real native execution. Isolated absent per-invocation basetemp/retentionall/reject inheritedADDOPTS verified in frozen launcher/raw command.",
+    "retained_nine_negative_cases": "Unapproved selectors3/version-output privacy4/wrong binary or platform1/hash-before-probe1 all retained passing.",
+    "static_scope": "Private F-check/Ruffformat diagnostics pass; configured source-wide checks NOTRUN."
+  }
+}

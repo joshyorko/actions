@@ -1,0 +1,117 @@
+{
+  "actual_native_adoption": "NONE",
+  "capture": "2026-10-11T22:13:47.131097+00:00",
+  "controls_binding": {
+    "bytes": 12606,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-memory-native-composition-SOURCE-PREPARED-NOTRUN/test_native_memory_composition_v1_NOTRUN.py",
+    "sha256": "230c499f180e4c7537ee0482b8aba0fea16eff204735db55f5612a09e8a5563b"
+  },
+  "decision": "HOLD_PRIVATE_NATIVE_MEMORY_COMPOSITION_SOURCE_STOP_ATTEMPT_COLLISION_PREDICATE",
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "durable_learning": "Keep attempted signal distinct from ownership inspection record. Suppress only a second delegated attempt; preauthorization failure never proves first attempt. Proposed source correction must encode this distinction in a typed/latch predicate and baseline-first controls.",
+    "evidence": [
+      {
+        "bytes": 4043,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-current8d49-memory-composition-independent-SOURCE-review/independent-current-memory-composition-source-readonly-preservation-and-stop-counterexample-proof.json",
+        "sha256": "23536ca69351ee325ff0c8b2ef4c10aebc70c374e0bde0f2fcdf59d7d70e2931"
+      },
+      {
+        "bytes": 1908,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-current8d49-memory-composition-independent-SOURCE-review/minimum-delegated-attempt-latch-and-baseline-first-successor-controls-PROPOSAL-NOTAPPLIED.json",
+        "sha256": "de642078c749ef9a08c2022c663d47ccc9f9b10823986ea9e3c3cec4bae4334f"
+      }
+    ],
+    "exact_reuse": [
+      {
+        "bytes": 900,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/canonical-shared-cgroup-headroom-vs-filesystem-capacity-proposed.md",
+        "sha256": "8c28fc2596c6fdfc607dd35a17b3462ad217ba97670b61222393dc504861d896"
+      },
+      {
+        "bytes": 1225,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/canonical-self-cgroup-identity-and-bounded-observer-proposed.md",
+        "sha256": "d6c06054276f3cf45054eecf523d7c618dc8498e0334cc9d55257fc449510380"
+      },
+      {
+        "bytes": 951,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-current8d49-default-descriptor-walk-controls-PREPARED-NOTRUN/canonical-default-descriptor-walk-control-coverage-proposed.md",
+        "sha256": "8366c367bbb81a857cfcc8d55863d8a193d0bc42a705ee0e3e2f751c6c74efa3"
+      }
+    ],
+    "remaining_uncertainty": "No corrected composition controls executed; current35 backend full actual still separate; native latency/headroom calibration/profile unqualified.",
+    "stale_ambiguity": "Frozen source claim only-second-signal is not justified by record existence; SOURCEGO withheld rather than carry it into guide/native config."
+  },
+  "entry_binding": {
+    "bytes": 9637,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-memory-native-composition-SOURCE-PREPARED-NOTRUN/native_memory_entry_v1_NOTRUN.py",
+    "sha256": "ae5e2220a33a8680dce308f1da119b79e856944bbbf45e101cf353e07589e620"
+  },
+  "findings": [
+    {
+      "code": "STOP_RECORD_IS_NOT_SIGNAL_ATTEMPT",
+      "counterexamples": "Exact source traces in readonly_proof; no module imports/test executions.",
+      "locations": [
+        "MemoryComposedSampler.disk_stop",
+        "_ObservedState.observe"
+      ],
+      "required": "Latch disk callback entry before delegating; memory signal_attempted True only. Preserve all old ownership/marker/exception predicates.",
+      "severity": "source correctness blocker"
+    }
+  ],
+  "future_pure_gate": {
+    "bytes": 4610,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-memory-composition-independent-SOURCE-review/smallest-future-memory-composition-pure-control-gate-NOTEXECUTABLE.json",
+    "sha256": "c526edd7bb2f0bde8b9919ead83c049464ae3c5f3c1686c1e0ee8f1b928bf836"
+  },
+  "minimum_source_proposal": {
+    "bytes": 1908,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-memory-composition-independent-SOURCE-review/minimum-delegated-attempt-latch-and-baseline-first-successor-controls-PROPOSAL-NOTAPPLIED.json",
+    "sha256": "de642078c749ef9a08c2022c663d47ccc9f9b10823986ea9e3c3cec4bae4334f"
+  },
+  "other_reviewed_scope": {
+    "default3_and_newer_original_binaries_unchanged": true,
+    "old_modules_bodies_modes_unchanged": true,
+    "old_primary_cleanup_disk_marker_preserved": true,
+    "one_old_sampler": true,
+    "profile_gates_NULL_unexecutable": true,
+    "prospective_root5_only": true,
+    "source_roots_consumed3_4_unchanged": true,
+    "unknown_join_no_final_snapshot": true
+  },
+  "overlay_binding": {
+    "bytes": 6481,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-memory-native-composition-SOURCE-PREPARED-NOTRUN/native_memory_sampler_overlay_v1_NOTRUN.py",
+    "sha256": "1d5bf618844a4ca501da8f86299b7e08e7af4af50fac04c5dff4381555eef9e3"
+  },
+  "owner_binding": {
+    "bytes": 11993,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-memory-native-composition-SOURCE-PREPARED-NOTRUN/OWNERFINAL-current8d49-native-memory-one-sampler-overlay-entry-and-composition-controls-SOURCE_PREPARED_NOTRUN.json",
+    "sha256": "7246751635ddddb6866adf9506032b7e95a81960628bef432509f16240fc347b"
+  },
+  "readonly_proof": {
+    "bytes": 4043,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-memory-composition-independent-SOURCE-review/independent-current-memory-composition-source-readonly-preservation-and-stop-counterexample-proof.json",
+    "sha256": "23536ca69351ee325ff0c8b2ef4c10aebc70c374e0bde0f2fcdf59d7d70e2931"
+  },
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_clean": true,
+  "source_count": 1440,
+  "status": "INDEPENDENT_PRIVATE_NATIVE_MEMORY_COMPOSITION_SOURCE_HOLD",
+  "tests_imports_real_cgroup_signals_native": "NOT_RUN",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none"
+}

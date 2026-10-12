@@ -1,0 +1,73 @@
+{
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; exact accepted 7d070 preservation paragraph independently verified in root canonical checkout, reused without cosmetic duplication",
+    "Durable_learning_captured": "Verify all recorded member data and internal hardlinks before removing a named completed namespace; preserve private inventory, metadata limits and failure provenance. Capacity recovery does not qualify a failed gate or establish namespace source origin.",
+    "Evidence": {
+      "actual_preservation_proof": {
+        "bytes": 3485,
+        "path": "/workspace/engineering/capacity-recovery-batch24-independent-review/independent-actual-stream-and-preservation-proof.json",
+        "sha256": "121c19d7bcacf78fa8b06cde6729569742ef618e043698caa82d3dce79a70bae"
+      },
+      "canonical_delta": {
+        "bytes": 1068,
+        "path": "/workspace/engineering/capacity-recovery-independent-review/canonical-completed-scratch-preservation-proposed.patch",
+        "sha256": "7d07065b5bb7742698919997c8c6621cc20d00494741eb5365251ffb09f2d208"
+      }
+    },
+    "Remaining_uncertainty": "Historical live handles/removal census and exact nanoseconds/root metadata/ACL/xattrs/inodes not independently replayed; batch23 origin UNKNOWN and batch24 origin UNREPORTED. Current native functionality and private/release gates remain separately held.",
+    "Stale_or_ambiguous_guidance_removed": "Hardlink headers are resolved against retained bodies; unknown origin is not inferred and recovered capacity is separate from execution authority or functional acceptance."
+  },
+  "Upstream_disposition": "none",
+  "counts": {
+    "after_current_archives": 50,
+    "after_current_indices": 24,
+    "new_archives": 1,
+    "new_internal_hardlink_headers": 4,
+    "new_recorded_members": 16092,
+    "prior_archives": 49,
+    "prior_indices": 23
+  },
+  "fresh_capacity_observation_bytes": {
+    "dev_shm": 4967510016,
+    "workspace": 1316921344
+  },
+  "gate_authorization": "None. Root must independently enforce capacity, source/transport qualification and serialization before a distinct gate release.",
+  "independent_proof": {
+    "bytes": 3485,
+    "path": "/workspace/engineering/capacity-recovery-batch24-independent-review/independent-actual-stream-and-preservation-proof.json",
+    "sha256": "121c19d7bcacf78fa8b06cde6729569742ef618e043698caa82d3dce79a70bae"
+  },
+  "independent_readonly_verifier": {
+    "bytes": 14790,
+    "path": "/workspace/engineering/capacity-recovery-batch24-independent-review/verify-readonly-actual.py",
+    "sha256": "6b6d8d51dd3d9aad31dc2db41ae008ea76295c8ee616ac15741815fec67f464d"
+  },
+  "limits": [
+    "No historical live handle or expanded filesystem census replay",
+    "TAR representable mtime checked within1us; no precise nanosecond/rootmetadata/ACL/xattr/inode proof",
+    "No restore/extract/delete/archive/source/gateway/native/provider/test execution",
+    "Historical consumer refs are retained observations, not current installed-temp proof",
+    "Root separately owns fresh capacity, serialization and full execution authorization"
+  ],
+  "preservation": {
+    "archive_recorded_bytes_sizes_types_modes_uid_gid_symlinks_internal_hardlink_bodies_gzip_EOF_CRC_ISIZE": true,
+    "cleanup_source1422": true,
+    "default_cache416": true,
+    "native1192_helpers0444": true,
+    "original_SOURCEFULLeb73": "Hash preserved only; independent source acceptance belongs to assigned reviewer",
+    "prior_archives_indices420_baseline_refs": true,
+    "source308_1421_and71_refs": true
+  },
+  "private_log": {
+    "bytes": 402,
+    "path": "/workspace/engineering/capacity-recovery-batch24-independent-review/private-readonly-verification.log",
+    "sha256": "82e978cd70737565382c0028174f12ebe26051df852fe159b8064832d4c51f7a"
+  },
+  "root_safe": {
+    "bytes": 968,
+    "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch24.json",
+    "sha256": "2a57cd5dc26e7e5b2e089f5af40a84696eff9eebf028c64c83215e96d677e300"
+  },
+  "source_origin": "UNREPORTED; zero raw path matches, not inferred",
+  "status": "GO_SCOPED_BATCH24_ACTUAL_ARCHIVE_PRESERVATION_ONLY"
+}

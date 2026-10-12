@@ -1,0 +1,67 @@
+{
+  "all_guardenv_childenv_capacity_and_clock": "EXACT_UNCHANGED nohard640primaryclaim",
+  "all_phase_commands_outputs_cwd_cached_only": "EXACT_UNCHANGED",
+  "buffer_contract": "Captureone raw, comparelength againstsameoriginalstat andoptionaldeclaredbytes, SHAexpectedtoken thenparseEXACTreturnedraw; no extraunverifiedJSONreread. Legacyregular/nonsymlink/mode andownerUIDGIDchecks preserved.",
+  "configuration_literal": "Exactcachedfilename matchesnewfrozenconfigrow/bytes/SHA, BASEnewprivatefolder",
+  "external_parent": "NOTAUTHORED_REQUIRED; controlsNOTRUN/floorFAIL stillHOLD",
+  "guard_exact_inverse_text_after_changes": [
+    [
+      "p=Path(sys.argv[1]);m=p.lstat();assert stat.S_ISREG(m.st_mode) and not p.is_symlink() and stat.S_IMODE(m.st_mode)==0o400\n assert digest(p)==sys.argv[2];c=json.loads(p.read_bytes());root=Path(c['source_root'])",
+      "c=json.loads(verified_buffer(sys.argv[1],sys.argv[2],0o400));root=Path(c['source_root'])"
+    ],
+    [
+      "q=Path(path);s=q.lstat();assert stat.S_ISREG(s.st_mode) and not q.is_symlink() and stat.S_IMODE(s.st_mode)==mode and s.st_uid==os.getuid() and s.st_gid==os.getgid();assert digest(q)==sha;return json.loads(q.read_bytes())",
+      "return json.loads(verified_buffer(path,sha,mode,owner=True))"
+    ],
+    [
+      "rows=json.loads(Path(c['source_inventory']['path']).read_bytes())",
+      "r=c['source_inventory'];rows=json.loads(verified_buffer(r['path'],r['sha256'],int(r['mode'],8),expected_bytes=r['bytes']))"
+    ],
+    [
+      "baseline=json.loads(Path(c['native_baseline']['path']).read_bytes())",
+      "r=c['native_baseline'];baseline=json.loads(verified_buffer(r['path'],r['sha256'],int(r['mode'],8),expected_bytes=r['bytes']))"
+    ]
+  ],
+  "guard_original": {
+    "bytes": 5674,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr313-current2d86-private-cached-bounded-LIGHT-SOURCE-NOTRUN/current_2d86_readonly_source_and_full_authority_guard_NOTRUN.py",
+    "sha256": "3848812474dcd57ecae43245800660d5fe42ac5444db51c962edfa5dd92d2f05"
+  },
+  "launcher_exact_inverse_text_after_changes": [
+    [
+      "CONFIG=BASE/'FROZEN-current2d86-private-bounded-LIGHT-inputs-NOTRUN.json'",
+      "CONFIG=BASE/'FROZEN-current2d86-private-cached-bounded-LIGHT-inputs-NOTRUN.json'"
+    ],
+    [
+      "34af5903acb26ca56d6e8086dd9c3460b130629ae29eff5f6afffae14f117de8",
+      "2d1c4f81d6015080be4e3480914b3759e44d391b9687de45653e7c5ae895d1c2"
+    ],
+    [
+      "raw=p.read_bytes();assert digest(raw)==expected;return json.loads(raw)",
+      "raw=verified_buffer(p,expected,0o600,owner=True);return json.loads(raw)"
+    ],
+    [
+      "raw=p.read_bytes();assert digest(raw)==sha;return json.loads(raw)",
+      "raw=verified_buffer(p,sha,0o400,owner=True);return json.loads(raw)"
+    ],
+    [
+      "cm=CONFIG.lstat();assert stat.S_ISREG(cm.st_mode) and not CONFIG.is_symlink() and stat.S_IMODE(cm.st_mode)==0o400 and digest(CONFIG.read_bytes())==CONFIG_SHA\n cfg=json.loads(CONFIG.read_bytes())",
+      "config_raw=verified_buffer(CONFIG,CONFIG_SHA,0o400,expected_bytes=58670)\n cfg=json.loads(config_raw)"
+    ]
+  ],
+  "launcher_original": {
+    "bytes": 10258,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr313-current2d86-private-cached-bounded-LIGHT-SOURCE-NOTRUN/launch_current2d86_private_cached_bounded_LIGHT_once_NOTRUN.py",
+    "sha256": "d6561ad300300f258382c87277481c46e5f63cadba0afada7b910d073629c8b9"
+  },
+  "schema": 1,
+  "selected_JSON_rows": "Guardinventory/nativebaseline parsefromcapturedfullyboundrow too, preservingexistingexpectedbytes/hash/mode",
+  "shared_helper_SHA": "9409a7b55d2d24e90fe81a61ec0fd40a24e5caf5b852e2001f52bcbc3412ae29",
+  "source": "2d86c5cf92d3acb274a8ceb5d57bfb8b12c779b6",
+  "source1441_current30_native1192_alias5_historical118plus1": "UNCHANGED_BOUNDED_INPUT_MODEL",
+  "source_actual": "NOT_RUN",
+  "tree": "653a9e73e4d27641ec86de94b90f35d41e0f24f8",
+  "upstream_disposition": "none"
+}

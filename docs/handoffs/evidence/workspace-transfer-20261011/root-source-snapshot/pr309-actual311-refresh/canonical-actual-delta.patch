@@ -1,0 +1,17 @@
+diff --git a/docs/skills/repository-operations.md b/docs/skills/repository-operations.md
+index 11d43d15..ade436c2 100644
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -579,7 +579,11 @@ and artifact registrations. The callback returns `False` to stop before
+ process-pool or Uvicorn startup. Its explicit route-class, path, method, and
+ mount inventory includes hidden routes and the registered dynamic action; the
+ local `StaticFiles` mount is recorded as a terminal mount because it exposes no
+-nested route list. A new unclassified route fails the inventory. Since the
++nested route list. Route identity uses the route class, normalized
++`path_format`, and complete sorted method set. The classifier compares counters,
++so removed or duplicate registrations fail as well as new routes; changing a
++method or route class is also an inventory change. Preserve multiplicity when
++reviewing the census rather than reducing it to a set of URL strings. Since the
+ callback stops startup, this proves route registration and classification only.
+ Authorization acceptance requires a separate missing/wrong/valid credential
+ request matrix for protected routes and terminal mounts, including GET/HEAD,

@@ -1,0 +1,156 @@
+{
+  "schema": "actions-independent-current74-root-gateway-failure-and-activation-proposal/v1",
+  "verdict": "GO_SCOPED_DIAGNOSIS_AND_NAMED_ACTIVATION_PREFLIGHT_SUCCESSOR_PROPOSAL_ONLY__HOLD_EXECUTION",
+  "head": "74beef4d220c3a1e8f983cecd42b9bb84ac75e79",
+  "tree": "2238ed312babba9fd5ad89a3a1cc581ca6ad2dcf",
+  "target": "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+  "original_full_result": {
+    "RCC_returncode": 4,
+    "elapsed_seconds": 18.849684864995652,
+    "raw_private": {
+      "path": "/workspace/engineering/pr300-current74-owner-full-contract-adoption/current74-one-reviewed-configured-full.log",
+      "bytes": 80268,
+      "sha256": "38029425f98c3416b3dd8ad82a90f9ca96ba2e2f1818e9024286854a61bdf684"
+    },
+    "terminal": {
+      "path": "/workspace/engineering/pr300-current74-owner-full-contract-adoption/current74-one-reviewed-configured-full-terminal.json",
+      "bytes": 464,
+      "sha256": "27fcafcea7a3c1942717517ab97812b8586762bfa6cbeed701f7e12c549688fc"
+    },
+    "stage": "Outer toolkit environment preparation before configured pytest command/worker",
+    "observed_fixed_categories": {
+      "ENOSPC": true,
+      "default_HOME_robocorp_root": true,
+      "managed_robocorp_root_in_original_log": false,
+      "pytest_command_present": false,
+      "pytest_worker_start_present": false,
+      "pytest_terminal_pass_summary_present": false
+    },
+    "pytest_counts": "UNREPORTED; no tests started observed, not full source FAIL/PASS or zero-case admission",
+    "bounded_attribution": "Root declared no owned activation; reviewed fullargv setsxdist2 but noROBOCORP_HOME. Immutable export-only activation selects managedhome. Raw preparation useddefault/home/agent/.robocorp andfailedENOSPC. Source suite never reached; no upstream/cache-corruption/source-cause attribution."
+  },
+  "source_preservation": {
+    "complete1423_Git_FS_bodies_exec_exact": true,
+    "owner_original68_plus_LIGHT42_unique_refs_rehashed": 110,
+    "prepared_inputs": 30,
+    "own_environment_configs_and_recorded_origins": 5,
+    "RCC_pin0711_unchanged": true,
+    "rootpostreadback": {
+      "path": "/workspace/engineering/pr300-current74-owner-full-contract-adoption/root-current74-postfull-complete-source-and-reference-readback.json",
+      "bytes": 519,
+      "sha256": "f0ce571d524f4ab266c590e97d87fa787ba7cefee78bf2c0e9b9ceccc70a4272"
+    },
+    "LIGHT_source_full_gates_remain_separate": true
+  },
+  "activation_readonly_admission": {
+    "activation": {
+      "path": "/workspace/actions-cloud/activate.sh",
+      "bytes": 987,
+      "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+    },
+    "export_only": true,
+    "cached_setup_identity_equals_current_source": true,
+    "existing_cached_python_poetry": [
+      {
+        "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/identity.yaml",
+        "bytes": 222,
+        "sha256": "5472adec10ef85bf56f79fd2664a30d33b5accf4e1edfff974ddec5f46a21daf"
+      },
+      {
+        "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/rcc_plan.log",
+        "bytes": 10213,
+        "sha256": "8aa96805c88332227acd0b48a99aab4482850d5ed940a5c81d7ce7c5b8ae3474"
+      },
+      {
+        "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12",
+        "bytes": 31903952,
+        "sha256": "ba35c76091c86640cd6bbccc8c216e5b2fc52b20c26de803edef79165022037f"
+      },
+      {
+        "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/poetry",
+        "bytes": 371,
+        "sha256": "f989714d24f334397e5960032f3fb3dd7ebcebf5d600e0d520aa7c780c8b124c"
+      }
+    ],
+    "scope": "Current cached metadata readiness only, no complete-cache baseline or preservation/restore claim"
+  },
+  "successor_proposal": {
+    "path": "/workspace/engineering/pr300-current74-managed-activation-independent-review/PROPOSED-current74-managed-activation-preflight-and-one-full-successor.json",
+    "bytes": 6745,
+    "sha256": "33037df19d1787f55899749b4c36ee6a4aac8e131aa820c8ba870ef0b94b6416"
+  },
+  "original_failed_home": "Original whole historical cache/body baseline UNKNOWN; owner preservation work is unfinished/unreviewed at this freeze, never asserted complete",
+  "remaining_HOLD": [
+    "New exact root authorization and independent preservation/currentcapacity/serialization/preflight",
+    "Current74 actual configured source suite NOT_RUN by original failed gateway or reviewer",
+    "Actual ASGI/TCP/private/consumer/native/provider/whole86/fullgraph/release remain unresolved",
+    "No installer/new environment/retry or replacement toolkit qualification authorized"
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; exact7-line managed activation paragraph proposed at existing RCC toolchain/home guidance",
+    "Exact_delta": {
+      "path": "/workspace/engineering/pr300-current74-managed-activation-independent-review/canonical-managed-gateway-activation-proposed.patch",
+      "bytes": 659,
+      "sha256": "fdf2721e3b6f8f54fbacb9272f41a126496b2dfea7c35bd6aac364efc2014ebe"
+    },
+    "Exact_added_text": "An absolute managed RCC executable does not select its managed RCC home.\nSource the owned activation script and verify RCC home, XDG/Poetry caches,\nPATH and explicit worker/Go limits before the gateway. Admit the existing\ncached toolkit against current setup identity and executable bindings.\nA gateway failure while preparing another home supplies no pytest counts or\nsource-suite acceptance; retain that failed attempt separately from any\nnewly authorized successor.\n",
+    "Durable_learning_captured": "An absolute RCC pin alone does not bind managedhome; admit activation exports/cached setup identity before source gate, preserve failed outerenvironment attempt separately from unrun pytest/successor scope",
+    "Evidence": [
+      {
+        "path": "/workspace/engineering/pr300-current74-owner-full-contract-adoption/current74-one-reviewed-configured-full.log",
+        "bytes": 80268,
+        "sha256": "38029425f98c3416b3dd8ad82a90f9ca96ba2e2f1818e9024286854a61bdf684"
+      },
+      {
+        "path": "/workspace/engineering/pr300-current74-owner-full-contract-adoption/current74-one-reviewed-configured-full-terminal.json",
+        "bytes": 464,
+        "sha256": "27fcafcea7a3c1942717517ab97812b8586762bfa6cbeed701f7e12c549688fc"
+      },
+      {
+        "path": "/workspace/actions-cloud/activate.sh",
+        "bytes": 987,
+        "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+      },
+      {
+        "path": "/workspace/engineering/pr300-current74-managed-activation-independent-review/PROPOSED-current74-managed-activation-preflight-and-one-full-successor.json",
+        "bytes": 6745,
+        "sha256": "33037df19d1787f55899749b4c36ee6a4aac8e131aa820c8ba870ef0b94b6416"
+      },
+      {
+        "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/identity.yaml",
+        "bytes": 222,
+        "sha256": "5472adec10ef85bf56f79fd2664a30d33b5accf4e1edfff974ddec5f46a21daf"
+      },
+      {
+        "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/rcc_plan.log",
+        "bytes": 10213,
+        "sha256": "8aa96805c88332227acd0b48a99aab4482850d5ed940a5c81d7ce7c5b8ae3474"
+      },
+      {
+        "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12",
+        "bytes": 31903952,
+        "sha256": "ba35c76091c86640cd6bbccc8c216e5b2fc52b20c26de803edef79165022037f"
+      },
+      {
+        "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/poetry",
+        "bytes": 371,
+        "sha256": "f989714d24f334397e5960032f3fb3dd7ebcebf5d600e0d520aa7c780c8b124c"
+      }
+    ],
+    "Stale_or_ambiguous_guidance_removed": "Adds missing managed activation boundary to existing toolchain guidance; refuses gatewayFAIL-to-source-count or futurepreservation/earlierbaseline claims",
+    "Remaining_uncertainty": "Whole old failedhome historical baseline/preservation, newactual full result/currentCI/private/release unqualified"
+  },
+  "Upstream_disposition": "none",
+  "read_only_no_activation_execution_tests_gateway_provider_native_source_index_download_push_merge": true,
+  "original_root_authorization_consumed": {
+    "path": "/workspace/engineering/pr300-current74-owner-full-contract-adoption/root-one-reviewed-current74-full-authorization.json",
+    "bytes": 1595,
+    "sha256": "e6de8234f7629fc58d5831b3405da9c35e8c8fa81135949199c0643a2acf485c"
+  },
+  "all_rehashed_binding_files": 115,
+  "review_script": {
+    "path": "/workspace/engineering/pr300-current74-managed-activation-independent-review/verify-readonly-and-freeze-proposal.py",
+    "bytes": 16391,
+    "sha256": "325d9f8a1187547c1fed878b9d7aa7d2c1834f7d6b30a74d1d9447ce391b2c0c"
+  }
+}

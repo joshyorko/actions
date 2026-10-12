@@ -1,0 +1,146 @@
+{
+  "all_before_perphase_innerpost_externalpost_return0": true,
+  "captured": "2026-10-11T23:23:41.367376+00:00",
+  "config_binding": {
+    "bytes": 67325,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/FROZEN-stop-attempt-final-reserve-v2-ROOT-config-NOTRUN.json",
+    "sha256": "213e57708b87a6fc08d616a16541f7a782f1eb4af9d0d80fa7c41c8c1c1e534b"
+  },
+  "decision": "GO_ACTUAL_MEMORY_STOP_ATTEMPT_SYNTHETIC_COMPOSITION_FOUR_PHASES_ONLY",
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "durable_learning": "Baseline-first tests demonstrate firstauthorizedstop after unattempted record and suppression after a raised actualcallback; distinguish20unique names from38 ordered invocations.",
+    "evidence": [
+      {
+        "bytes": 18110,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-stop-attempt-v2-independent-ACTUAL-pure-review/private-independent-original-fourphase-censuses-rawframes-and-preservation-proof.json",
+        "sha256": "1750b91523857937e8fd37626c6dddcf5f1cdb9f594ad7a24c4276f61863d86c"
+      }
+    ],
+    "exact_reuse": "Existing7df/9810 attemptedcallback-vs-preauthorization-vs-success, installedmachinecensus/sourceframe and selecteddeadline/externalpost lessons.",
+    "remaining_uncertainty": "Separately accepted currentnativeprofile/runtime calibration/actualsignal proof needed.",
+    "stale_ambiguity": "NewpureACTUAL replaces NOTRUN only for thisnamed4phase scope, not originalfailures/native or calibration."
+  },
+  "original131_source1440_native1192_prepared30_own5_preserved": true,
+  "original_FAIL_HOLD": "All originald9SOURCEHOLD/9fd532PREEXCHOLD/V8V9nativeFAIL/default35first34P1F retained; namedpureGO doesnot relabel them.",
+  "original_inner": {
+    "bytes": 17745,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/OWNERFINAL-original-stop-attempt-inner-four-phases.json",
+    "sha256": "c8f6f9eb60ee4328396656c1a20dd5adf9d07f97dc0c896c1a00be7ab8555b75"
+  },
+  "original_master": {
+    "bytes": 1650,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-reviewed-stop-attempt-v2-original-execution/OWNERFINAL-root-original-reviewed-stop-attempt-v2-four-phase-execution.json",
+    "sha256": "13818ec51dd8a52c29777566f5d1ecf82978a72cb33341ec59e7d248e437cabf"
+  },
+  "original_outer": {
+    "bytes": 6045,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/OWNERFINAL-original-stop-attempt-external-parent.json",
+    "sha256": "1261fda76b7658b2c67480f7e5fc2a3ae4f67e315d42997fe17db362edb4ac63"
+  },
+  "original_release": {
+    "bytes": 5298,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-release.json",
+    "sha256": "e7f972c9cdf35b73faec627c411f92a13b7c1f2517cf076460a1a0c719089c2b"
+  },
+  "phase_census": [
+    {
+      "counts": {
+        "errors": 0,
+        "failed": 0,
+        "passed": 16,
+        "ran": 16,
+        "skipped": 0
+      },
+      "original": {
+        "bytes": 4191,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/baseline_original16/original-node-census.json",
+        "sha256": "188158e703ef25ed29488a0cb92e79ef0c73014b6c0b3902b0ad91150bfca02b"
+      },
+      "phase": "baseline_original16"
+    },
+    {
+      "counts": {
+        "errors": 0,
+        "failed": 1,
+        "passed": 0,
+        "ran": 1,
+        "skipped": 0
+      },
+      "original": {
+        "bytes": 933,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/RED_memory_preauthorization/original-node-census.json",
+        "sha256": "6d40978aab8bc932ccf7a3b42755858f96fe70abc5b7de068c85fe8f88fd3953"
+      },
+      "phase": "RED_memory_preauthorization"
+    },
+    {
+      "counts": {
+        "errors": 0,
+        "failed": 1,
+        "passed": 0,
+        "ran": 1,
+        "skipped": 0
+      },
+      "original": {
+        "bytes": 928,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/RED_disk_preauthorization/original-node-census.json",
+        "sha256": "991cc35b421bd3ce42db25e7903313f89d6ab052e4c28155057c9e88cff54d93"
+      },
+      "phase": "RED_disk_preauthorization"
+    },
+    {
+      "counts": {
+        "errors": 0,
+        "failed": 0,
+        "passed": 20,
+        "ran": 20,
+        "skipped": 0
+      },
+      "original": {
+        "bytes": 5202,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/restored_successor20/original-node-census.json",
+        "sha256": "7e07bf56f3ed3af28c8bb171bab448b8ea4eb792c2a8d1461970666d9ceeb3a0"
+      },
+      "phase": "restored_successor20"
+    }
+  ],
+  "preexecution_review": {
+    "bytes": 18480,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-stop-attempt-final-reserve-v2-independent-PREEXEC-review/OWNERFINAL-independent-stop-attempt-final-reserve-v2-SOURCE-and-PURE-PREEXEC-GO.json",
+    "sha256": "910b288256444311b3eac37fdf9f41199157241e8187bf7512bc28b8c4eed4f8"
+  },
+  "proof_binding": {
+    "bytes": 18110,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-stop-attempt-v2-independent-ACTUAL-pure-review/private-independent-original-fourphase-censuses-rawframes-and-preservation-proof.json",
+    "sha256": "1750b91523857937e8fd37626c6dddcf5f1cdb9f594ad7a24c4276f61863d86c"
+  },
+  "qualified_scope": "Controlled original16baseline +two intended originalheld predicateREDs +restored20GREEN. This proves source stop-coalescing sensitivity/preservation only.",
+  "remaining_holds": [
+    "No real cgroup path/latency/counters or sharedmemory/headroom calibration.",
+    "No real ownedchild signal/PIDreuse/peak or kernelquota proof from synthetic identities.",
+    "No nativeRCC/Action/lease/provider/internalreaders/reaping/persistent/drain/private/release acceptance."
+  ],
+  "reviewer": "Readonlyoriginal JSON/raw/text/hash/Git only; no imports/tests/replay/native",
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_count": 1440,
+  "status": "INDEPENDENT_STOP_ATTEMPT_COMPOSITION_ORIGINAL_FOUR_PHASES_ACTUAL_PURE_GO",
+  "total_ordered_method_invocations": 38,
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "unique_method_names": 20,
+  "unlocked": "Syntheticcomposition prerequisite only for separately reviewed native memory profile; no automatic actual3/5/7276 or sourceadoption.",
+  "upstream_disposition": "none"
+}

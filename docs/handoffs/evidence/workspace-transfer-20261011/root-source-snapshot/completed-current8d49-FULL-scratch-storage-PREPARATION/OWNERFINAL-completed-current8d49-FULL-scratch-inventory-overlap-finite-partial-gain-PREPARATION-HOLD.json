@@ -1,0 +1,165 @@
+{
+  "TMP_lower_bound_after_full_archive_index_caps": 963735552,
+  "additional_completed_TMP_source_or_reviewed_lossless_relocation_required_for_FULL_floor": true,
+  "all_binding_rows_lexical_and_resolved_overlap": 0,
+  "archive_removal_native_tests_installs": "NOT_RUN",
+  "captured_proc_scope": {
+    "historical_universal_quiescence": "NOT_CLAIMED",
+    "inaccessible_observations": 312,
+    "observed_cwd_fd_overlap": 0,
+    "processes": 323
+  },
+  "completion": {
+    "actual_PASS": 1470,
+    "actual_SKIP": 13,
+    "actual_workers": 2,
+    "before_primary_runnerpost": 0,
+    "named_readonly_ROOT_env_supplement": 0,
+    "not_RCC_recycle_marker": true,
+    "original": {
+      "bytes": 1278,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-SOURCEFULL-preexecution/one-current8d49-configured-FULL-original-owned/original-terminal.json",
+      "sha256": "54292bf9c05c9921949ca7710aaf27842d2d1562f6b1ee4a9d86377c88f43472"
+    },
+    "original_independent": {
+      "bytes": 10038,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-independent-SOURCEFULL-actual-review/OWNERFINAL-independent-current8d49-original-configured-SOURCEFULL-and-retained-ROOTpost-supplement-review.json",
+      "sha256": "073e235afffab50dee204bcaae236e77ceb8e23644db15a90a0e56d48dc8dca9"
+    }
+  },
+  "current_TMP_fits_finite_staging_floor": true,
+  "current_capacity": {
+    "/tmp": 450785280,
+    "/workspace": 1331298304
+  },
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "durable_learning_captured": "Reuse recorded completion vs recycle distinction, finite capped allstage durable preservation and physical alias guidance; capacity counts unique inode blocks once for hardlink groups and tests actual required mount floor",
+    "evidence": "Four internal hardlink groups; path-blocksum differs from unique-inode sum by16KiB; exactTMP1200000000 required by retained FULL input; even zero archive cannot reach it",
+    "remaining_uncertainty": "Compression prospective; another exact completed eligible TMP source/relocation needed; inaccessible handle observations retained; ROOT native currently serialized and no archive authority",
+    "stale_or_ambiguous_guidance_removed": "A large completed scratch directory is not proof that one preservation batch restores the required floor; distinguish TMP gain from workspace and avoid duplicate hardlink block accounting"
+  },
+  "executor": "NOT_AUTHORED_NOT_AUTHORIZED_FOR_ACTUAL",
+  "external_hardlinks": 0,
+  "four_internal_hardlink_groups": true,
+  "kinds": {
+    "directory": 3504,
+    "fifo": 8,
+    "file": 11808,
+    "symlink": 511
+  },
+  "logical_regular_bytes": 634145107,
+  "maximum_TMP_after_recovery_even_with_zero_archive_index_bytes": 1114730496,
+  "new_current_V9_critical_sections": {
+    "Runtime_actual_control_inventory18": 18,
+    "current_V9_absolute_binding_rows": 321,
+    "five_V5_fixed_alias_original9": 9,
+    "native1192": 1192,
+    "original237": 237,
+    "prepared30": 30,
+    "source1440": 1440
+  },
+  "no_devshm_allocation_or_mutation": true,
+  "original_members": 15831,
+  "partial_gain_only": true,
+  "path_allocated_sum": 663961600,
+  "prior_failed_roots_V4partials_archives_aliases": "UNCHANGED_NOT_SELECTED",
+  "private_references": [
+    {
+      "bytes": 931932,
+      "mode": "0o600",
+      "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREPARATION/private-complete-original-FULL-scratch-body-type-metadata-and-hardlink-snapshot.json.gz",
+      "sha256": "1f258b35405482ca1c5b6dcf6f4ca1e57b2749f327e4b8bedffba4b7b4b4cae8"
+    },
+    {
+      "bytes": 981,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREPARATION/safe-original-completed-FULL-scratch-inventory-facts.json",
+      "sha256": "265ef6fdb73db03de09b5cea8336c513c8f1fbaab43d0cadf52f68d73a17c905"
+    },
+    {
+      "bytes": 765564,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+      "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25"
+    },
+    {
+      "bytes": 5067,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/private-complete-one-control-output-file-inventory.json",
+      "sha256": "51acf96b7b544c2d51bd53246ca3202aa932f03aee80b37258a05f0361f2ea4c"
+    },
+    {
+      "bytes": 5059,
+      "mode": "0o600",
+      "path": "/tmp/actions-completed8d49-five-root-preserved-v5/private-fixed-original-row-archive-aliases.json",
+      "sha256": "e0dc9eefc35b0c0ca32cb69fc83c2b9bf3b7198b267100d1e34c266982801078"
+    },
+    {
+      "bytes": 2808,
+      "mode": "0o600",
+      "path": "/tmp/prepare-current8d49-FULL-scratch-inventory-readonly.py",
+      "sha256": "6fc83f8299e886c85a3c878f6aa5c89748078bba245498dc49361d4fb6ab0226"
+    },
+    {
+      "bytes": 8330,
+      "mode": "0o600",
+      "path": "/tmp/freeze-current8d49-full-scratch-partial-gain-hold.py",
+      "sha256": "ff170959decf398e480129670bda03fa603a0bd4c7e4752af8df3fd12d8a0034"
+    },
+    {
+      "bytes": 1278,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-SOURCEFULL-preexecution/one-current8d49-configured-FULL-original-owned/original-terminal.json",
+      "sha256": "54292bf9c05c9921949ca7710aaf27842d2d1562f6b1ee4a9d86377c88f43472"
+    },
+    {
+      "bytes": 10038,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-independent-SOURCEFULL-actual-review/OWNERFINAL-independent-current8d49-original-configured-SOURCEFULL-and-retained-ROOTpost-supplement-review.json",
+      "sha256": "073e235afffab50dee204bcaae236e77ceb8e23644db15a90a0e56d48dc8dca9"
+    },
+    {
+      "bytes": 1994,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-current8d49-one-FULL-original-owned/named-readonly-post-env-supplement/OWNERFINAL-named-readonly-full-post-env-supplement.json",
+      "sha256": "1bdd39ecaae8d8ae95ed28c3441de52c4b8f95117fdc71842085fd1374c8e235"
+    },
+    {
+      "bytes": 385745,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-SOURCEFULL-preexecution/one-current8d49-configured-FULL-original-owned/original-FULL-source.private.log",
+      "sha256": "6ac0621474e03351a703ac9f963530890d1a613146ce90677c35e8e35661b069"
+    }
+  ],
+  "prospective_finite_envelope": {
+    "ROOT_outer_KILL_after": 10,
+    "ROOT_outer_TERM": 900,
+    "all_archives_index_fsync_verify_before_any_removal": "AcceptedFIVEV5primitives_to_reuse_only_after_ROOT_and_independent_review",
+    "archive_actual_bytes_including_close_footer": 134217728,
+    "combined_full_progress_indices": 16777216,
+    "time_child_KILL_after": 10,
+    "time_child_TERM": 600,
+    "tmp_before_removal_reserve": 134217728,
+    "tmp_before_two_copies_plus_index_plus_128MiBreserve": 419430400
+  },
+  "retained_CURRENT_SOURCEFULL_TMP_floor": 1200000000,
+  "root": "/tmp/actions-pr308-current8d49-FULL-once-1",
+  "schema": "COMPLETED_CURRENT8D49_FULL_SCRATCH_STORAGE_PARTIAL_GAIN_PREPARATION",
+  "shortfall_even_hypothetical_zero_archive": 85269504,
+  "snapshot": {
+    "bytes": 931932,
+    "mode": "0o600",
+    "path": "/workspace/engineering/completed-current8d49-FULL-scratch-storage-PREPARATION/private-complete-original-FULL-scratch-body-type-metadata-and-hardlink-snapshot.json.gz",
+    "sha256": "1f258b35405482ca1c5b6dcf6f4ca1e57b2749f327e4b8bedffba4b7b4b4cae8"
+  },
+  "source_head": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "status": "PREPARATION_HOLD_NO_OPERATION_DURING_NATIVE_NO_SOLE_FULL_FLOOR_CLAIM",
+  "two_complete_snapshots_equal": true,
+  "unique_inode_allocated_gain": 663945216,
+  "unsupported_types": 0,
+  "upstream_disposition": "none"
+}

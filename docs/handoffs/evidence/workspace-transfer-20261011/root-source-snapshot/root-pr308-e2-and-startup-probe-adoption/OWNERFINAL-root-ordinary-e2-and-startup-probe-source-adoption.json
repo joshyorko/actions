@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "status": "ROOT_EXACT_ORDINARY_E2_AND_REVIEWED_STARTUP_PROBE_ADOPTED_SOURCE_GATES_PENDING",
+  "source_before": "396925cb3d6527af1768b7f5333f9653c005fc55",
+  "target": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "normal_same_branch": true,
+  "patch_sha256": "805bed37940e4e5ade0e7e02da332192551b3f2bba1536022b901b1a4e24de42",
+  "source_LIGHT_FULL_NATIVE_NEWER_RCC_qualification": "NOT_RUN_ON_NEW_SUBJECT",
+  "upstream_disposition": "none",
+  "ordinary_merge": "37a4f1c3e66cbfb18cb67e8ed041da07c3f84107",
+  "ordinary_tree": "929410b09fff3521c554cf935411c71f9e2e6b95",
+  "commit": "095e25b6b2b2c8754184b0d26f77bc70a101cee4",
+  "tree": "edf088b1a8acd9709b37dee2532d77c8b2246a50",
+  "source_leaves": 1440,
+  "prepared30": "UNCHANGED",
+  "production_pins": "UNCHANGED",
+  "GitHub_push": "NOT_RUN",
+  "clean": true,
+  "recorded_utc": "2026-10-11T17:58:34.690841+00:00"
+}

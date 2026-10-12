@@ -1,0 +1,72 @@
+{
+  "CI_FULL_content_authority_native_private_release": "HOLD_NO_EXECUTION_OR_AUTHORITY_CARRY",
+  "Toolkit181_guard41_static_gen_actual": "NOT_RUN",
+  "counts": {
+    "changed_paths": 4,
+    "new_param_cases": 2,
+    "other_workflows_byte_modes_exact": 24,
+    "tracked": 1442,
+    "unchanged_parent_leaves": 1438
+  },
+  "decision": "GO_IMMUTABLE_FOUR_PATH_SOURCE_REVIEW_ONLY_EXECUTABLE_PREEXEC_HOLD",
+  "declared_plan_checked": {
+    "FULL_each_child_seconds": 600,
+    "FULL_workers": 2,
+    "LIGHT_parent_seconds": 1200,
+    "LIGHT_phases": 8,
+    "logging": "unique absolute explicit basetemps/logger outputs ALL/reject inherited ADDOPTS declared; actual executable path/interpreter/source/self/alwayspost closure pending concrete freeze"
+  },
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md (reuse exact current7487 committed patch)",
+    "durable_learning_captured": "PR built-in token under contents:read differs from tag cross-repository PAT; token wiring and ambiguous metadata404 do not establish immutable source authority, cross-repository access or provider/release admission",
+    "evidence": {
+      "exact_diff_reversal_proof": {
+        "bytes": 412615,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-current7487-independent-source-and-plan-review/private-complete-current7487-source-event-byte-and-FS-mode-proof.json",
+        "sha256": "c16590aa1960b2ebe3f1fa525d8790b99bb9915fe99cf5ca35f752e526dea863"
+      },
+      "generator_line": 2609,
+      "new_regression_line": 1866,
+      "rendered_workflow_lines": [
+        99,
+        187
+      ]
+    },
+    "exact_delta_binding": {
+      "bytes": 2467,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-PR-only-OAuth-token-source-PREPARATION/exact-current7487-canonical.patch",
+      "sha256": "dabe6ecec89b218837dae93f6e7d5c0a7206e325f62a1e13add155051142c05f"
+    },
+    "remaining_uncertainty": "Current source untested, concrete LIGHT executor pending; approved source/revision and actual provider/private/release gates unresolved",
+    "stale_or_ambiguous_guidance_removed": "Unqualified PR generation without credentials corrected to without cross-repository PATs; no token\u2192content-access/release claim"
+  },
+  "executable_PREEXEC": "HOLD_PLAN_ONLY_NO_CONCRETE_CONFIG_ONCE_LAUNCHER_OWNER_YET",
+  "meaningful_RED_GREEN_actual": "NOT_RUN",
+  "plan_only_binding": {
+    "bytes": 10638,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-PR-only-OAuth-token-source-PREPARATION/OWNERFINAL-current7487-token-source-gates-PREPARATION-NOTRUN.json",
+    "sha256": "78e29d5476d676d6ae8210c31e3b0c7c5400982c8eefa0a941f51e21cf19856e"
+  },
+  "proof_binding": {
+    "bytes": 412615,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr307-current7487-independent-source-and-plan-review/private-complete-current7487-source-event-byte-and-FS-mode-proof.json",
+    "sha256": "c16590aa1960b2ebe3f1fa525d8790b99bb9915fe99cf5ca35f752e526dea863"
+  },
+  "reviewer_tests_imports_source_changes": "NOT_RUN",
+  "schema": "INDEPENDENT_CURRENT7487_PR_ONLY_TOKEN_SOURCE_AND_PLAN_REVIEW",
+  "sole_parent": "2314aea95795fbc1372a6f7b0b7b298b7cf124c3",
+  "source": "7487d94bf1a0453119928fe2d73d1413a252a312",
+  "source_owner_binding": {
+    "bytes": 5555,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-PR-only-OAuth-token-source-PREPARATION/OWNERFINAL-current7487-PR-only-OAuth-token-SOURCE-UNTESTED.json",
+    "sha256": "340604ceb5225d21cb0b55a313834c885277dcdb2d1734eb3215ec22a15208a3"
+  },
+  "source_scope": "One PR canary step GH_TOKEN=${{ github.token }} only, two rendered job instances; unchanged tag PAT and contents:read/events/run/defaults/helper/tasks; no pull_request_target or production changes",
+  "tree": "4ae715a497f1f6c643efe2a301a111320b3c18e4",
+  "upstream_disposition": "none"
+}

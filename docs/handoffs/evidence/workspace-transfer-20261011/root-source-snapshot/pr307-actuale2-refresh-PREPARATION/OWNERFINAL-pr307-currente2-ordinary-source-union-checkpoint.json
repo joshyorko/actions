@@ -1,0 +1,43 @@
+{
+  "canonical_exact_existing_guard_lesson_retained": true,
+  "clean": true,
+  "constructor": {
+    "bytes": 10940,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr307-actuale2-refresh-PREPARATION/freeze_ordinary_union_and_gate_preparation.py",
+    "sha256": "820ebea2794d72bc584a6d08f7fab961ad415ea79276856f3e62dde20de267d5"
+  },
+  "existing_branch": "fix/runtime-release-changelog-selection-20261010",
+  "guard_helper_tests_changelog_unchanged": true,
+  "head": "2314aea95795fbc1372a6f7b0b7b298b7cf124c3",
+  "light_full_preparation": {
+    "bytes": 6199,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-actuale2-refresh-PREPARATION/OWNERFINAL-pr307-currente2-LIGHT-FULL-PREPARATION-NOTRUN.json",
+    "sha256": "d44633a4bfb635b2fc03f2c7c132b9b919123d8697c39f69a64b1b3aea473769"
+  },
+  "named_remote_verified_before_merge": {
+    "existing_PR307": "87e412f89b201c697d3e6bd4bd34031cdbd14df3",
+    "integration": "e2c81adce7858d5a952991ba9a8b7f72e902038a"
+  },
+  "no_push_or_install_or_test_or_native_execution": true,
+  "novel_union_paths": [
+    ".github/workflows/_gen_workflows.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "ordered_parents": [
+    "87e412f89b201c697d3e6bd4bd34031cdbd14df3",
+    "e2c81adce7858d5a952991ba9a8b7f72e902038a"
+  ],
+  "proof": {
+    "bytes": 502738,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-actuale2-refresh-PREPARATION/complete-current-ordinary-union-source-and-retained-evidence-proof.json",
+    "sha256": "d3b4588d581016a596c2a9add69242c4c501da858784e93fc9105d537711de35"
+  },
+  "schema": "OWNERFINAL_PR307_ORDINARY_CURRENT_E2_SOURCE_UNION_ONLY",
+  "status": "FROZEN_ORDINARY_SOURCE_REFRESH_NOT_TESTED_NOT_PUSHED",
+  "tree": "2987ed3a23e560fb40e13aadbcd6bd613ead3f25",
+  "typed_union_count": 1442,
+  "upstream_disposition": "none"
+}

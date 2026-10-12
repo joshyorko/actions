@@ -1,0 +1,228 @@
+{
+  "schema": 1,
+  "decision": "GO_CORRECTED_NINE_ONCE2_BASELINE_PREEXECUTION",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "launcher_binding": {
+    "bytes": 9329,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/run_corrected_nine_once2_baseline.py",
+    "sha256": "0faa08c751e98b834ed1525daf5efd2bc64820fbd7b08f698fe66ffefe3bdcc2"
+  },
+  "config_binding": {
+    "bytes": 5694,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/frozen-corrected-nine-once2-baseline-execution-config-NOTRUN.json",
+    "sha256": "d8dd253da2711437e1c94db0950d1352afbc963963d6ae1ec3c14d43eacd336a"
+  },
+  "contract_binding": {
+    "bytes": 8708,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/frozen-corrected-nine-once2-baseline-only-command-contract-NOTRUN.json",
+    "sha256": "8f9f2aa0cb570170cd381c07ad5f849700449f3f35d3983d11dbe9a6f6d74da0"
+  },
+  "named_outer_clarification_binding": {
+    "path": "/workspace/engineering/pr308-corrected-nine-once2-independent-PREEXEC-review/FROZEN-corrected-nine-once2-named-outer1200-parent1230-clarification-NOTRUN.json",
+    "bytes": 4508,
+    "sha256": "7430c22e082927475d6a821598f2cb8ce31904a8027a490bc649b307a25a94d0",
+    "mode": "0o400"
+  },
+  "compatible_original_release_contract": {
+    "bytes": 4036,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/frozen-once2-compatible-independent-review-and-ROOT-release-contract-NOTRUN.json",
+    "sha256": "5f81e7df6bf7404e7fd81825f715c246d76ec02fa03a2ae3cad97c9fa3e2f821"
+  },
+  "original_HOLD_binding": {
+    "path": "/workspace/engineering/pr308-corrected-nine-once2-independent-PREEXEC-review/OWNERFINAL-independent-corrected-nine-once2-static-PREEXEC-HOLD-parent-envelope.json",
+    "bytes": 10328,
+    "sha256": "17956e0d0f086096742596decaf9527d81e8af340d414ba25e985975a60051eb",
+    "mode": "0o400"
+  },
+  "owner_binding": {
+    "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/OWNERFINAL-corrected-nine-once2-baseline-config-contract-launcher-PREEXEC-NOTRUN.json",
+    "bytes": 11099,
+    "sha256": "39d3ba4d62cd54807ded6228cdbff891ec9493e17419b04335957451c85937a4",
+    "mode": "0o400"
+  },
+  "all_verified_unique_original_bindings": [
+    {
+      "bytes": 8708,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/frozen-corrected-nine-once2-baseline-only-command-contract-NOTRUN.json",
+      "sha256": "8f9f2aa0cb570170cd381c07ad5f849700449f3f35d3983d11dbe9a6f6d74da0"
+    },
+    {
+      "bytes": 11323,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/OWNERFINAL-final-private-corrected-nine-source-constructor-and-original-failure-preservation-NOTRUN.json",
+      "sha256": "8641582defe1dc2aa9cf114928c0778d8faf91841b0a274f8cc3dad0b0d87500"
+    },
+    {
+      "bytes": 765564,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+      "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25"
+    },
+    {
+      "bytes": 1075,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-rcc-current8d49-control3-V9-one-release.json",
+      "sha256": "a131e30087742764ba6dbdbc2634749924133431de3310b2065ced446b97bf3b"
+    },
+    {
+      "bytes": 6839,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-reload-drain-independent-preexecution-review/frozen-nine-real-source-control-baseline-first-ROOT-command-contract-NOTRUN.json",
+      "sha256": "5f1874357496fe9c890c1acfec43fa114d51c658bd23ea23578fc3c910c1f287"
+    },
+    {
+      "bytes": 16829,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-nine-real-original-baseline-independent-diagnosis/OWNERFINAL-independent-original-nine-baseline-failure-and-private-control-boundary.json",
+      "sha256": "6288fb4a6d296770a1c930ae73b0854e103378417f250a00a553c7c1bf3a25e2"
+    },
+    {
+      "bytes": 6371,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-current8d49-nine-real-baseline-once.py",
+      "sha256": "5ffbdebb3cbd7301e3a1d46255fc42d6fbff63bc03c922ec4b21ba9cb426ad5a"
+    },
+    {
+      "bytes": 12096,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/OWNERFINAL-private-corrected-nine-catalog-identity-and-held-lock-source-successor-NOTRUN.json",
+      "sha256": "7f5bf5a7c300ab98d6d4521d750470aafab2151cc522700ec687cfdc0234275d"
+    },
+    {
+      "bytes": 4690,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/readonly_current_input_guard_v9.py",
+      "sha256": "480be06317562b7e3a5c98a5d794bb5d2a33e7fa6186fe707823ecb1cc583626"
+    },
+    {
+      "bytes": 12996,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/frozen-current8d49-source-LIGHT-inputs-v3.json",
+      "sha256": "81f52920b50e67619b3bb418a7c1034a2106ec52f4badd71b9d85e29b7376820"
+    },
+    {
+      "bytes": 4667,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-private-corrected-nine-source-independent-review/OWNERFINAL-independent-private-corrected-nine-catalog-lock-SOURCE_ONLY-review.json",
+      "sha256": "aa3f927ef250c86d8b76e02e21f6382f2a894c22b0bba7f285b08c5f60f13da4"
+    },
+    {
+      "bytes": 16429,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py",
+      "sha256": "a577d21615877bc19a88ca141e5c8ac7c9779120abf7f86b7a6ec6d2367d5da2"
+    },
+    {
+      "bytes": 6385,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/prepare_named_once2_baseline.py",
+      "sha256": "0ca7df2b084bb6d912dbd6befc0c8a0c654a6948770a95cb41d02657ee508f67"
+    },
+    {
+      "bytes": 8761,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/freeze_once2_packet.py",
+      "sha256": "18ae5af6b900ccd5a1ca0ebfc8aa529c93e5124b3b061a8a614f1b4d40f11057"
+    },
+    {
+      "bytes": 9329,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/run_corrected_nine_once2_baseline.py",
+      "sha256": "0faa08c751e98b834ed1525daf5efd2bc64820fbd7b08f698fe66ffefe3bdcc2"
+    },
+    {
+      "bytes": 5694,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/frozen-corrected-nine-once2-baseline-execution-config-NOTRUN.json",
+      "sha256": "d8dd253da2711437e1c94db0950d1352afbc963963d6ae1ec3c14d43eacd336a"
+    },
+    {
+      "bytes": 4036,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/frozen-once2-compatible-independent-review-and-ROOT-release-contract-NOTRUN.json",
+      "sha256": "5f81e7df6bf7404e7fd81825f715c246d76ec02fa03a2ae3cad97c9fa3e2f821"
+    },
+    {
+      "bytes": 1684,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/once2-launcher-static-closure-and-original-budget-scope-proof-NOTRUN.json",
+      "sha256": "939cd21521198ef9398c1caf22d90a31193c9a1beb1a1905f79289f3e1da17e6"
+    },
+    {
+      "bytes": 1219,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/canonical-reload-control-copy-and-lock-boundaries-proposed.patch",
+      "sha256": "5584b00182d7504808065195f3373f80eb450fa5370811d434d66ad0c5b9a7d5"
+    }
+  ],
+  "actual_execution": "NOTRUN_ROOT_DISTINCT_RELEASE_SERIALIZATION_REQUIRED",
+  "root_adoption_constraints": {
+    "required_outer_argv": [
+      "env",
+      "-u",
+      "PYTHONOPTIMIZE",
+      "-u",
+      "PYTEST_ADDOPTS",
+      "-u",
+      "RCC_RELOAD_PRIVATE_MUTANT",
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "1200s",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/run_corrected_nine_once2_baseline.py",
+      "--release",
+      "ROOT_DISTINCT_RELEASE_PATH",
+      "--release-sha256",
+      "ROOT_DISTINCT_RELEASE_SHA256"
+    ],
+    "parent_executor_timeout_seconds": 1230,
+    "source_baseline_only": true,
+    "no_mutants_or_native": true,
+    "originals_not_modified": true,
+    "ROOTrelease_exactkeys_mode600uid": "same11fields preserved with independent_preexecution_binding=this finalGO; no extra fields/mutation",
+    "finite_bound": "all8\u00d7135Pythonfallback=1080; enclosing1200TERM10 plusparent1230 covers accepted120margin and20outerparentmargin",
+    "original_configouter450_precision": "retained historical informational field superseded only by this explicit immutable actual-argv clarification; no silent reinterpretation"
+  },
+  "static_passes": {
+    "9unique_existing_case_names": [
+      "test_candidate_preparation_precedes_real_sqlite_writer",
+      "test_publication_follows_actual_sqlite_commit",
+      "test_staged_pool_keeps_original_routes_until_commit",
+      "test_failed_warmup_restores_original_idle_and_catalog",
+      "test_actual_commit_failure_restores_original_generation_token",
+      "test_running_old_handle_drains_only_after_new_publication",
+      "test_candidate_warmup_precedes_generation_switch",
+      "test_rejected_candidate_cleanup_preserves_last_good",
+      "test_repaired_candidate_publishes_without_admitting_failed_generation"
+    ],
+    "source_independent": "aa3f preserved",
+    "baseline_only": "mutant env rejected/unset; exact9 reported counts/unique names+all8phases0 required",
+    "owned_paths": "once2 absent; uniqueABSENT basetemp/absolutelogger/JUnit; privatefsync stdio andterminal; before/five own origins/alwayspost",
+    "root_release": "mode600 uid/self/config/contract/currentsource/review decision binding; oldV9release used only readonlyguard, not native execution",
+    "all_originals": "unique bound refs hash/size/mode matched; oldonce1failure/source snapshots untouched",
+    "activation": "18fixed exports/PATH2/nooptimization/noADDOPTS/operatoroverrides exact"
+  },
+  "finding_disposition": "17956 originalHOLD remains immutable. Root accepted named outer clarification only, withoutchild/source/assertion/deadline120changes. All other static checks PASS; no replay performed.",
+  "review_method": "read-only Git/FS/hash/AST/argv inspected, no imports/tests/native execution; private review metadata only",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; exact bounded multi-stage enclosure paragraph proposed; accepted5584 copy/held-lock oracle reused unchanged",
+    "Durable_learning_captured": "whole-phase envelope including killgrace and admission necessary for promised alwayspost",
+    "Evidence": "immutable450 config+launcher2\u00d7120child+5\u00d715child+120test plus10killgrace; configured135subprocessguard fallback",
+    "Stale_or_ambiguous_guidance_removed": "per-child finite bounds do not establish alwayspost within shorter parent",
+    "Remaining_uncertainty": "corrected9baseline/mutants/native NOTRUN; new parentbudget requires root adoption"
+  },
+  "canonical_exact_proposal": {
+    "path": "/workspace/engineering/pr308-corrected-nine-once2-independent-PREEXEC-review/canonical-multi-stage-enclosure-and-original-oracle-proposed.md",
+    "bytes": 577,
+    "sha256": "2ed2c0a05d54d385ef79a38874737b9fd51f11b352a97671cb70291ac6406528",
+    "mode": "0o400"
+  },
+  "upstream_disposition": "none"
+}

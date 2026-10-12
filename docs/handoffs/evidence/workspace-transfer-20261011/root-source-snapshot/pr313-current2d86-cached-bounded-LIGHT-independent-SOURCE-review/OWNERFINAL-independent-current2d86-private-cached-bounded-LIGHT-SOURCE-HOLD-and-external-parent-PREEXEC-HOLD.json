@@ -1,0 +1,112 @@
+{
+  "PREEXEC_HOLD": {
+    "actual_RELEASE": "ABSENT",
+    "capacity_admission": "FAIL_REQUIRES_FRESH_MEASUREMENT",
+    "capacity_floor": 1288490189,
+    "current_LIGHT_FULL_NATIVE": "NOT_RUN",
+    "external_parent": "Required all-outcome external parent not authored/reviewed; no valid external parent source row can be supplied.",
+    "pure_controls": "Plan only; no control source/execution, negative semantic output audit/authority mutation/clock/failure-post sensitivities remain unqualified.",
+    "recorded_workspace_bytes": 633528320
+  },
+  "SOURCE_preservation": "PASS1441/source119=118physical+1Git/prepared30/prefixaliases5/native1192/142inputrows; this preservation PASS does not clear executable SOURCE findings.",
+  "config_binding": {
+    "bytes": 56066,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr313-current2d86-private-cached-bounded-LIGHT-SOURCE-NOTRUN/FROZEN-current2d86-private-cached-bounded-LIGHT-inputs-NOTRUN.json",
+    "sha256": "34af5903acb26ca56d6e8086dd9c3460b130629ae29eff5f6afffae14f117de8"
+  },
+  "config_sha256": "34af5903acb26ca56d6e8086dd9c3460b130629ae29eff5f6afffae14f117de8",
+  "decision": "HOLD_CURRENT_2D86_PRIVATE_BOUNDED_LIGHT_SOURCE_PREPARATION",
+  "documentation_improvement": {
+    "accepted_reuse": {
+      "bytes": 976,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr313-current2d86-private-cached-bounded-LIGHT-SOURCE-NOTRUN/canonical-all-outcome-authority-versus-input-guards-and-honest-clock-proposed.txt",
+      "sha256": "36741a3bcb51ee44ab611afa6f192ea5f58251f8dc7a28b706893ded6e6cb300"
+    },
+    "additional_exact_proposed_text": "Audit every consumed configuration address against the frozen binding, including literal filenames and nested generated-code outputs. At an authority boundary, capture the bytes once, verify their hash, and parse that same buffer; hashing one read and parsing another does not prove the parsed decision was authenticated.",
+    "ambiguity_removed": "142 input rows and source-preservation PASS do not authenticate different JSON buffers or repair a missing literal file. Cooperative600 and future ROOT900 are not an implemented hard640parent.",
+    "canonical_file": "docs/skills/repository-operations.md",
+    "evidence": [
+      {
+        "bytes": 5710,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr313-current2d86-cached-bounded-LIGHT-independent-SOURCE-review/private-current2d86-boundary-address-buffer-and-preservation-proof.json",
+        "sha256": "69f6f43680796894b579d3c61a60bb0d59189ae91d0fef9c6e85b3f57a0ecb1b"
+      },
+      {
+        "bytes": 10258,
+        "mode": "0o444",
+        "path": "/workspace/engineering/pr313-current2d86-private-cached-bounded-LIGHT-SOURCE-NOTRUN/launch_current2d86_private_cached_bounded_LIGHT_once_NOTRUN.py",
+        "sha256": "d6561ad300300f258382c87277481c46e5f63cadba0afada7b910d073629c8b9"
+      },
+      {
+        "bytes": 5674,
+        "mode": "0o444",
+        "path": "/workspace/engineering/pr313-current2d86-private-cached-bounded-LIGHT-SOURCE-NOTRUN/current_2d86_readonly_source_and_full_authority_guard_NOTRUN.py",
+        "sha256": "3848812474dcd57ecae43245800660d5fe42ac5444db51c962edfa5dd92d2f05"
+      }
+    ],
+    "remaining_uncertainty": "External caller and pure sensitivities not implemented/run; current LIGHT/FULL/CI/native/readers/reaping remain unqualified."
+  },
+  "guard_binding": {
+    "bytes": 5674,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr313-current2d86-private-cached-bounded-LIGHT-SOURCE-NOTRUN/current_2d86_readonly_source_and_full_authority_guard_NOTRUN.py",
+    "sha256": "3848812474dcd57ecae43245800660d5fe42ac5444db51c962edfa5dd92d2f05"
+  },
+  "launcher_binding": {
+    "bytes": 10258,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr313-current2d86-private-cached-bounded-LIGHT-SOURCE-NOTRUN/launch_current2d86_private_cached_bounded_LIGHT_once_NOTRUN.py",
+    "sha256": "d6561ad300300f258382c87277481c46e5f63cadba0afada7b910d073629c8b9"
+  },
+  "launcher_sha256": "d6561ad300300f258382c87277481c46e5f63cadba0afada7b910d073629c8b9",
+  "material_SOURCE_findings": [
+    {
+      "consumed_path": "/workspace/engineering/pr313-current2d86-private-cached-bounded-LIGHT-SOURCE-NOTRUN/FROZEN-current2d86-private-bounded-LIGHT-inputs-NOTRUN.json",
+      "evidence": "CONFIG assignment at launcher line6 omits cached; CONFIG.lstat() before before-guard will fail.",
+      "frozen_actual_path": "/workspace/engineering/pr313-current2d86-private-cached-bounded-LIGHT-SOURCE-NOTRUN/FROZEN-current2d86-private-cached-bounded-LIGHT-inputs-NOTRUN.json",
+      "id": "SOURCE_CONFIG_LITERAL_ABSENT",
+      "minimum_correction": "Named launcher successor substitutes only exact announced cached config filename/hash; no source selectors or app changes.",
+      "severity": "SOURCE_BLOCKER"
+    },
+    {
+      "evidence": "Guard config checks digest(p) then json.loads(p.read_bytes()); typed_json checks digest(q) then parses new q.read_bytes(). Launcher config similarly digest(CONFIG.read_bytes()) then separate JSON read. Parsed buffers are not necessarily the buffers hashed.",
+      "id": "PARSED_AUTHORITY_BUFFER_NOT_HASH_VERIFIED",
+      "minimum_correction": "Capture raw once, verify hash against exact expected token, then parse that same raw; preserve regular/type/mode/UID/GID and all existing authority/source fields. Named successor only; no immutable original mutation.",
+      "severity": "SOURCE_BLOCKER"
+    }
+  ],
+  "owner_binding": {
+    "bytes": 7651,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr313-current2d86-private-cached-bounded-LIGHT-SOURCE-NOTRUN/OWNERFINAL-current2d86-private-cached-bounded-LIGHT-SOURCE-and-external-parent-HOLD-NOTRUN.json",
+    "sha256": "9b290e7c7a88645034f73136eb5c5689c01d381be394502e7b70aedc48d17e91"
+  },
+  "proof_binding": {
+    "bytes": 5710,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr313-current2d86-cached-bounded-LIGHT-independent-SOURCE-review/private-current2d86-boundary-address-buffer-and-preservation-proof.json",
+    "sha256": "69f6f43680796894b579d3c61a60bb0d59189ae91d0fef9c6e85b3f57a0ecb1b"
+  },
+  "remaining_concrete_work": {
+    "external_parent": "Bind complete source/authority/self/config/guard/reviews before AND all-outcome attempted post, including preadmission fail and whole-hardkill; parse only captured verified buffers; strict fresh600 ROOTgrant and regular source binding; own raw terminal and preserve primary/post/capture separately. Concrete900TERM+10 hard parent/fallback budget and source-only capacity floor require separate review, not metadata-only approval.",
+    "named_minimal_source_successor": "Exact filename + capture-hash-parse JSON at guard and launcher boundaries; preserve all originals and root authority fields.",
+    "pure_boundary_controls": [
+      "Correct baseline current1441/prepared30/prefix5/native1192 and typed600/400/444 authority.",
+      "Literal consumed config address must exist and match frozen row.",
+      "Captured buffer hash/parser identity poison while later path reads differ; reject before imports.",
+      "Correctly rehashed stale origin/generator outer-and-nested-YAML/JUnit/Robot output-address poison, distinct from wrongcfgsha.",
+      "Wrong release/source/tree/config/launcher/parent, prefix target, historic Git row and changed post authority.",
+      "Primary failure with postPASS, combined postFAIL, preadmission failure and whole-parent timeout preserving distinct originals.",
+      "Cooperative depleted remainder refuses launch; no claimed640hard deadline; actual unique census only after execution."
+    ]
+  },
+  "schema": 1,
+  "source": "2d86c5cf92d3acb274a8ceb5d57bfb8b12c779b6",
+  "source_leaf_count": 1441,
+  "status": "INDEPENDENT_CURRENT2D86_PRIVATE_CACHED_LIGHT_SOURCE_HOLD_PREEXEC_HOLD",
+  "tree": "653a9e73e4d27641ec86de94b90f35d41e0f24f8",
+  "upstream_disposition": "none"
+}

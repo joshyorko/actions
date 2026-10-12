@@ -1,0 +1,27 @@
+{
+  "FULL": "NOT_RUN",
+  "authority_native_merge": "HOLD",
+  "capture": "2026-10-11T22:10:08.836880+00:00",
+  "elapsed_seconds": 102.36917291198915,
+  "external_post": {
+    "bytes": 896,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-pr307-currentc97e-reviewed-token-light-once2-v3-outer/external-always-post-envelope.json",
+    "sha256": "faafc726e75e8dd3c720a523fe92b17aafd8cf377cab6fa80781f3e639d35db0"
+  },
+  "outer_returncode": 1,
+  "release": {
+    "bytes": 659,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/root-one-TOKEN-LIGHT-once2-release.json",
+    "sha256": "a07bdbe8b2e154248950bd633cded340d0c7c4204cb707ec63d5c8317fb4a4a8"
+  },
+  "review": {
+    "bytes": 9667,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-currentc97e-token-once2-independent-PREEXEC-review/OWNERFINAL-independent-named-currentc97e-config-v3-token-once2-PREEXECUTION-GO.json",
+    "sha256": "3b4192fdc2656898c30044dcc995b0accb78ed7341bcf002fcea9879aacd60d3"
+  },
+  "source": "c97edfd10edb5b1c63f8a6371bfd2905996a2da2",
+  "tree": "f8d3477451fa601643ef6c06f6b1e616e2407643"
+}

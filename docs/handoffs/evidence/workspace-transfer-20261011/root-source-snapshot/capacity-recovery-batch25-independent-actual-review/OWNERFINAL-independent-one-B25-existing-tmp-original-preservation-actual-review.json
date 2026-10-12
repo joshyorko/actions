@@ -1,0 +1,155 @@
+{
+  "schema": 1,
+  "owner_announced_at_UTC": "2026-10-11T15:20:41.563040+00:00",
+  "decision": "GO_ONE_B25_COMPLETED_NAMESPACE_ORIGINAL_BYTE_PRESERVATION_ONLY",
+  "root_owner": {
+    "path": "/workspace/engineering/root-B25-one-existing-tmp-recovery/OWNERFINAL-root-one-B25-existing-tmp-volume-terminal.json",
+    "bytes": 639,
+    "sha256": "982881775d8e85ef30b475caafd5f12a8bba562d787b6f660cb87b94cd9abb8f",
+    "mode": "0o600"
+  },
+  "independent_proof": {
+    "path": "/workspace/engineering/capacity-recovery-batch25-independent-actual-review/independent-one-B25-preservation-data-proof.json",
+    "bytes": 5277,
+    "sha256": "05c6f38a50ea448330ced6b2e4bce71a9e71675fa20a6010393690e776172f77",
+    "mode": "0o600"
+  },
+  "independent_inspectors": [
+    {
+      "path": "/workspace/engineering/capacity-recovery-batch25-independent-actual-review/verify_b25_actual_readonly.py",
+      "bytes": 11241,
+      "sha256": "756bc389f693baf54d94ca49acd57ee21029aa6f8e1b2b52a2df8c3f5d67f010",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/capacity-recovery-batch25-independent-actual-review/verify_b25_actual_readonly_v2.py",
+      "bytes": 11236,
+      "sha256": "b6fc42f0371af7294ce9d4edad38debf73503f267825433238d2e4583b2b7cff",
+      "mode": "0o600"
+    }
+  ],
+  "actual_release": {
+    "root_release": {
+      "path": "/workspace/engineering/root-B25-one-existing-tmp-recovery/root-one-distinct-B25-release.json",
+      "bytes": 484,
+      "sha256": "86f36085926f98b92d6431f67f27f38967be6aa4535c651bec566cb706bd4ee8",
+      "mode": "0o600"
+    },
+    "actual_TMP_destination_successor": {
+      "path": "/workspace/engineering/capacity-recovery-batch25-proposal/OWNERFINAL-batch25-existing-tmp-volume-only-successor-v3-NOT_RUN.json",
+      "bytes": 2120,
+      "sha256": "8ae0f2c18a20bb43aba48d54398b9666757246bb88f6c9c7c18feb87755542d6",
+      "mode": "0o600"
+    },
+    "conditional_preexecution": {
+      "path": "/workspace/engineering/capacity-recovery-batch25-independent-preexecution-review/OWNERFINAL-independent-B25-existing-tmp-destination-only-successor-preexecution-review.json",
+      "bytes": 6516,
+      "sha256": "9ce43a293587eb04fdd9f9ef464a8f91ae51d6ba6f4b04106358837407958ca7",
+      "mode": "0o400"
+    },
+    "actual_script": {
+      "path": "/tmp/actions-capacity-recovery-batch25-existing-tmp-volume-v3.py",
+      "bytes": 5240,
+      "sha256": "c6c6d47db1fbf4f42d208bdfe88b48ca9871eaa707387c49574d769d496699dc",
+      "mode": "0o600"
+    },
+    "only_AST_delta_from_original_B25": "DEST existing /dev/shm to existing /tmp; all16 nonconfig nodes and STAGE/NAMES unchanged",
+    "original_root_returncode": 0,
+    "original_root_seconds": 24.781206263003696,
+    "attempts": 1,
+    "source_origin": "UNREPORTED"
+  },
+  "independent_original_archive_readback": {
+    "archive": {
+      "path": "/tmp/actions-completed-scratch-recovery-batch25/ad13a81675676d7b.tar.gz",
+      "bytes": 250626981,
+      "sha256": "88e4b819336e03d02a18d450503af7fe1364d774efc851ea0ae3d3e2d11ed5f8",
+      "mode": "0o600"
+    },
+    "complete_index": {
+      "path": "/tmp/actions-completed-scratch-recovery-batch25/private-complete-inventory-and-recovery.json",
+      "bytes": 6609853,
+      "sha256": "fa841bbcd35e42024b5ad35182985190e9077f5ed2db95fb851af332466b2e59",
+      "mode": "0o600"
+    },
+    "original_two_stable_inventories": {
+      "path": "/workspace/engineering/capacity-recovery-batch25-proposal/private-complete-candidate-two-stable-inventories-v2.json",
+      "bytes": 12114798,
+      "sha256": "95bf33a7b4a675e3425dab0388f586a0c41ef2807647cad6e8c21179aae287b6",
+      "mode": "0o600"
+    },
+    "members": 16157,
+    "counts": {
+      "file": 12214,
+      "directory": 3447,
+      "symlink": 488,
+      "fifo": 8
+    },
+    "byte_and_mode_UID_GID_type_link_record_pairs": "ALL_MATCH_BOTH_FROZEN_ORIGINAL_SNAPSHOTS_AND_INDEX",
+    "internal_hardlinks_resolved": 4,
+    "gzip_EOF_CRC_compressed_body_sha": "PASS",
+    "no_extract_or_FIFO_open": true,
+    "expanded_only_named_completed_namespace_absent": true,
+    "stage_absent": true,
+    "root_tar_entry": "directory observed; original root metadata not independently admitted"
+  },
+  "retention": {
+    "prior50_original_archive_bytes_modes_SHA": true,
+    "prior24_indices_SHA": true,
+    "prior_inventory": {
+      "path": "/workspace/engineering/capacity-recovery-batch25-proposal/private-prior50-original-archives24-indices-current-hash-retention-v2.json",
+      "bytes": 20455,
+      "sha256": "ada727cb26e702400c95751af9fd8fce33c80a185a5d7b4a528a2856793bd0aa",
+      "mode": "0o600"
+    },
+    "original_V5_runner": {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v5.py",
+      "bytes": 35497,
+      "sha256": "09cdc6b19f5d3d9cc94fadca23373108868521e0378d33960146b1a8522e88ad",
+      "mode": "0o444"
+    },
+    "failed563d": "EXISTENCE_ONLY_NEVER_OPENED",
+    "current_SOURCE_LIGHT": {
+      "path": "/workspace/engineering/pr308-currente4ff-independent-SOURCE-LIGHT-review/OWNERFINAL-independent-current-e4ff-owned-cache-ordinary-source-LIGHT-review.json",
+      "bytes": 7021,
+      "sha256": "66a2819f6231928140574e590d3a68146d29c1f965609caa14dd65f705b8a33d",
+      "mode": "0o444"
+    },
+    "current_e4ff1423_body_FS_mode_clean": true,
+    "original_native1192_body_mode_link": true,
+    "historical_failed3_result": "Exact V4 archive-backed original8dc25; original physical root absent by authorized preservation, original failure never upgraded",
+    "archive_mapping": {
+      "path": "/workspace/engineering/root-failed-control3-one-byte-preservation-v4/root-exact-historical-failed-member-archive-mapping.json",
+      "bytes": 1864,
+      "sha256": "cc73027ce86ea0965f3bdd88ed3398c322dcf012b337a4ca161966f19ffee6c7",
+      "mode": "0o600"
+    }
+  },
+  "reviewer_inspection_failure_preserved": {
+    "original_inspector": "numeric prior archive mode compared to formatted octal string; exact values both384/0600",
+    "successor": "v2 accepts the frozen numeric schema; all fullarchive/prior/source/native checks passed",
+    "classification": "data-inspection schema assumption, not preservation or source/gate failure"
+  },
+  "remaining_limits": [
+    "No new universal handle/quiescence claim",
+    "No historical source-origin inference",
+    "No ACL/xattr/inode or original root metadata proof",
+    "No nanosecond TAR timestamp preservation claim",
+    "No native/consumer/gate acceptance upgrade"
+  ],
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md: verified reuse of exact7d070 lossless completed-scratch preservation lesson; no source/doc mutation or cosmetic delta",
+    "accepted_patch": {
+      "path": "/workspace/engineering/capacity-recovery-independent-review/canonical-completed-scratch-preservation-proposed.patch",
+      "bytes": 1068,
+      "sha256": "7d07065b5bb7742698919997c8c6621cc20d00494741eb5365251ffb09f2d208",
+      "mode": "0o600"
+    },
+    "Durable_learning": "Preserve only exactly owned completed scratch by archive/body and recorded metadata verification before expanded removal; hash-bound retained inventory and archive provide later original evidence without restoring old aliases.",
+    "Evidence": "Root once0/24.781s; independent streaming16,157 members/gzipEOF vs both frozen originals and complete index; exact prior50/24 and current1423/native1192 retention.",
+    "Stale_guidance_removed": "No source-origin inference or universal-handle claim; archive-backed failed evidence remains failed after preservation.",
+    "Remaining_uncertainty": "Original root metadata/ACL/xattr/inode/nanosecond TAR timestamps and universal quiescence remain unqualified; current capacity is a point-in-time root observation, not any future heavy-run release."
+  },
+  "upstream_disposition": "none",
+  "operations": "Read-only stdlib hashes/TAR stream/Git FS data plus external safe review receipts; no extract/restore/archive/remove/GC/test/helper/product/native/gateway/download/source/ref changes."
+}

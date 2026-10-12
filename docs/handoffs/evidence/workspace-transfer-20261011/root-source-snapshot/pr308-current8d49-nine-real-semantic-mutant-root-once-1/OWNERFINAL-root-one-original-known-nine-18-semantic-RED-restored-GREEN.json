@@ -1,0 +1,293 @@
+{
+  "actual_baseline_dependency": {
+    "bytes": 20115,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-corrected-nine-once2-independent-ACTUAL-review/OWNERFINAL-independent-original-current8d49-corrected-nine-once2-baseline-ACTUAL-review.json",
+    "sha256": "e54f84619b73c236a8038c5602b27cc6affef8e82bd0d3e535bb2537548a811d"
+  },
+  "capture": "2026-10-11T21:33:20.364346+00:00",
+  "config_binding": {
+    "bytes": 67022,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/FROZEN-known-nine-18-semantic-15s-config-v2-NOTRUN.json",
+    "sha256": "b9010e2996df0285971f2c7ce31c4da04a6e7672505aa4240cb2b049aaae823d"
+  },
+  "elapsed_seconds": 33.037762011008454,
+  "failure": {
+    "exception_class": "ValueError"
+  },
+  "independent_review": {
+    "bytes": 8766,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine-18-semantic-independent-PREEXEC-review/OWNERFINAL-independent-current8d49-known-nine-18-semantic-PREEXECUTION-GO.json",
+    "sha256": "83d424bb57e66bf7b6b7e9e393590e0a2c45abcc50ef52aca2a278ec1963143e"
+  },
+  "launcher_binding": {
+    "bytes": 13750,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/run_known_nine_18_semantic_once_NOTRUN.py",
+    "sha256": "efd17b08026cba566dea30775226dbb327f0fa05a9b2c3872088c83a5f5b310b"
+  },
+  "native": "NOT_RUN",
+  "outcomes": {
+    "always-post": {
+      "argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "120s",
+        "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+        "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/readonly_current_input_guard_v9.py",
+        "--config",
+        "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+        "--config-sha256",
+        "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25",
+        "--release",
+        "/workspace/engineering/root-rcc-current8d49-control3-V9-one-release.json",
+        "--release-sha256",
+        "a131e30087742764ba6dbdbc2634749924133431de3310b2065ced446b97bf3b",
+        "--label",
+        "control3"
+      ],
+      "elapsed_seconds": 14.857469131995458,
+      "parent_seconds": 135,
+      "returncode": 0,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/always-post/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 69,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/always-post/original.stdout.private",
+        "sha256": "0c1f9f5f73680a42a7de5d496fe9ee95e084773e8a37d6d04f37d540575b21bb"
+      }
+    },
+    "before": {
+      "argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "120s",
+        "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+        "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/readonly_current_input_guard_v9.py",
+        "--config",
+        "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+        "--config-sha256",
+        "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25",
+        "--release",
+        "/workspace/engineering/root-rcc-current8d49-control3-V9-one-release.json",
+        "--release-sha256",
+        "a131e30087742764ba6dbdbc2634749924133431de3310b2065ced446b97bf3b",
+        "--label",
+        "control3"
+      ],
+      "elapsed_seconds": 15.821566915998119,
+      "parent_seconds": 135,
+      "returncode": 0,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/before/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 69,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/before/original.stdout.private",
+        "sha256": "0c1f9f5f73680a42a7de5d496fe9ee95e084773e8a37d6d04f37d540575b21bb"
+      }
+    },
+    "own-origin-0": {
+      "argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "15s",
+        "/workspace/engineering/pr308/actions/.venv/bin/python",
+        "-c",
+        "import importlib,pathlib,sys; m=importlib.import_module('actions'); assert pathlib.Path(sys.prefix).resolve()==pathlib.Path('/workspace/engineering/pr308/actions/.venv').resolve(); assert pathlib.Path(m.__file__).resolve()==pathlib.Path('/workspace/engineering/pr308/actions/src/actions/__init__.py').resolve()"
+      ],
+      "elapsed_seconds": 0.11414762600907125,
+      "parent_seconds": 30,
+      "returncode": 0,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/own-origin-0/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/own-origin-0/original.stdout.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "own-origin-1": {
+      "argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "15s",
+        "/workspace/engineering/pr308/actions-http-helper/.venv/bin/python",
+        "-c",
+        "import importlib,pathlib,sys; m=importlib.import_module('actions_http'); assert pathlib.Path(sys.prefix).resolve()==pathlib.Path('/workspace/engineering/pr308/actions-http-helper/.venv').resolve(); assert pathlib.Path(m.__file__).resolve()==pathlib.Path('/workspace/engineering/pr308/actions-http-helper/src/actions_http/__init__.py').resolve()"
+      ],
+      "elapsed_seconds": 0.11405751400161535,
+      "parent_seconds": 30,
+      "returncode": 0,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/own-origin-1/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/own-origin-1/original.stdout.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "own-origin-2": {
+      "argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "15s",
+        "/workspace/engineering/pr308/devutils/.venv/bin/python",
+        "-c",
+        "import importlib,pathlib,sys; m=importlib.import_module('devutils.invoke_utils'); assert pathlib.Path(sys.prefix).resolve()==pathlib.Path('/workspace/engineering/pr308/devutils/.venv').resolve(); assert pathlib.Path(m.__file__).resolve()==pathlib.Path('/workspace/engineering/pr308/devutils/src/devutils/invoke_utils.py').resolve()"
+      ],
+      "elapsed_seconds": 0.11414396499458235,
+      "parent_seconds": 30,
+      "returncode": 0,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/own-origin-2/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/own-origin-2/original.stdout.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "own-origin-3": {
+      "argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "15s",
+        "/workspace/engineering/pr308/work-items/.venv/bin/python",
+        "-c",
+        "import importlib,pathlib,sys; m=importlib.import_module('actions.work_items'); assert pathlib.Path(sys.prefix).resolve()==pathlib.Path('/workspace/engineering/pr308/work-items/.venv').resolve(); assert pathlib.Path(m.__file__).resolve()==pathlib.Path('/workspace/engineering/pr308/work-items/src/actions/work_items/__init__.py').resolve()"
+      ],
+      "elapsed_seconds": 0.1142355839983793,
+      "parent_seconds": 30,
+      "returncode": 0,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/own-origin-3/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/own-origin-3/original.stdout.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "own-origin-4": {
+      "argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "15s",
+        "/workspace/engineering/pr308/action_server/.venv/bin/python",
+        "-c",
+        "import importlib,pathlib,sys; m=importlib.import_module('actions.server._rcc_runtime_adapter'); assert pathlib.Path(sys.prefix).resolve()==pathlib.Path('/workspace/engineering/pr308/action_server/.venv').resolve(); assert pathlib.Path(m.__file__).resolve()==pathlib.Path('/workspace/engineering/pr308/action_server/src/actions/server/_rcc_runtime_adapter.py').resolve()"
+      ],
+      "elapsed_seconds": 0.16422013999545015,
+      "parent_seconds": 30,
+      "returncode": 0,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/own-origin-4/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/own-origin-4/original.stdout.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "prepare_under_writer-RED": {
+      "argv": [
+        "env",
+        "-u",
+        "PYTHONOPTIMIZE",
+        "-u",
+        "PYTEST_ADDOPTS",
+        "-u",
+        "RCC_RELOAD_PRIVATE_MUTANT",
+        "RCC_RELOAD_PRIVATE_MUTANT=prepare_under_writer",
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "15s",
+        "/workspace/engineering/pr308/action_server/.venv/bin/python",
+        "-m",
+        "pytest",
+        "--noconftest",
+        "-n0",
+        "-vv",
+        "-rA",
+        "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_candidate_preparation_precedes_real_sqlite_writer",
+        "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/prepare_under_writer-red/basetemp",
+        "-o",
+        "tmp_path_retention_policy=all",
+        "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/prepare_under_writer-red/pytest-logging",
+        "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/prepare_under_writer-red/original-junit.xml",
+        "--tb=short"
+      ],
+      "elapsed_seconds": 1.7181214269949123,
+      "parent_seconds": 30,
+      "returncode": 1,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/prepare_under_writer-red/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 3690,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/prepare_under_writer-red/original.stdout.private",
+        "sha256": "831a46f06699c52f059530af30670d73793eef2ee951aa6b3eca405c0e9e8678"
+      }
+    }
+  },
+  "phase_census": "ORIGINAL18JUNIT_AND_RAW_REQUIRED_INDEPENDENT_ACTUAL_REVIEW",
+  "release_binding": {
+    "bytes": 1513,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-one-known-nine-18-semantic-controls-release.json",
+    "sha256": "026380a40a6e0fe3356ca23f1c1fb00806e3d4a042edaa5881ba5b32b09e7fb5"
+  },
+  "schema": 1,
+  "semantic_admitted_phases": [],
+  "snapshot_oracle_sensitivity": "NOT_RUN_SEPARATE_REQUIRED",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_adoption": "NONE",
+  "status": "FAIL_OR_HOLD_STOP_NO_RETRY",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+}

@@ -1,0 +1,265 @@
+{
+  "accepted_B28_actual_and_independent": [
+    {
+      "bytes": 3401,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-B28-v2-one-owned/OWNERFINAL-root-one-B28-v2-original-storage-terminal.json",
+      "sha256": "927a12d9c75ac3dce6390911e977d723301057d5bd0ede7353bd983af72c58cb"
+    },
+    {
+      "bytes": 8318,
+      "mode": "0o400",
+      "path": "/workspace/engineering/capacity-recovery-batch28-independent-actual-review/OWNERFINAL-independent-original-B28-v2-actual-storage-preservation-review.json",
+      "sha256": "a26ca4f8970e4f08cbcd88698fc56c40fd2ce03efa0d774dc03575558c2d72a0"
+    }
+  ],
+  "accepted_TMP_relocation_actual_and_independent": [
+    {
+      "bytes": 738,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-B28-one-exact-TMP-relocation-outer-owned/OWNERFINAL-root-one-original-exact-TMP-relocation.json",
+      "sha256": "bc6fa7297f84d3696b34f46d9abad750fb0649cdd83d21c29098ad8f2a960de3"
+    },
+    {
+      "bytes": 12268,
+      "mode": "0o400",
+      "path": "/workspace/engineering/capacity-recovery-B28-one-exact-TMP-relocation-independent-review/OWNERFINAL-independent-one-exact-TMP-archive-relocation-ACTUAL-storage-preservation-review.json",
+      "sha256": "d6caaf3a4eac9220887c79cc80f59fc3eb4228219d482913aac5d4de95cc3671"
+    }
+  ],
+  "cached_toolkit_prefix": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534",
+  "capacity_floor_bytes": 1288490189,
+  "concrete_origin_packages": [
+    [
+      "actions",
+      "actions"
+    ],
+    [
+      "actions-http-helper",
+      "actions_http"
+    ],
+    [
+      "devutils",
+      "devutils.invoke_utils"
+    ],
+    [
+      "work-items",
+      "actions.work_items"
+    ],
+    [
+      "action_server",
+      "actions.server._rcc_runtime_adapter"
+    ]
+  ],
+  "current_full_preexecution_independent_review": null,
+  "current_source_independent_review": null,
+  "exact_historical_failed_receipt_mapping": {
+    "bytes": 1864,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-failed-control3-one-byte-preservation-v4/root-exact-historical-failed-member-archive-mapping.json",
+    "sha256": "cc73027ce86ea0965f3bdd88ed3398c322dcf012b337a4ca161966f19ffee6c7"
+  },
+  "execution_enablement": "ROOT_CURRENT_SOURCE_GATES_ADOPTED_ONCE",
+  "expected_activation_exports": {
+    "ACTIONS_CLOUD_ROOT": "/workspace/actions-cloud",
+    "ACTIONS_HOME": "/workspace/actions-cloud/actions-home",
+    "ACTIONS_RUNTIME_TEST_PYTHON": "/workspace/actions/action_server/.venv/bin/python",
+    "BUILDX_CONFIG": "/workspace/actions-cloud/cache/buildx",
+    "GOCACHE": "/workspace/actions-cloud/cache/go-build",
+    "GOMAXPROCS": "2",
+    "GOPATH": "/workspace/actions-cloud/cache/go",
+    "PLAYWRIGHT_BROWSERS_PATH": "/workspace/actions-cloud/cache/playwright",
+    "POETRY_CACHE_DIR": "/workspace/actions-cloud/cache/pypoetry",
+    "POETRY_CONFIG_DIR": "/workspace/actions-cloud/config/pypoetry",
+    "POETRY_NO_INTERACTION": "1",
+    "PYTEST_XDIST_AUTO_NUM_WORKERS": "2",
+    "ROBOCORP_HOME": "/workspace/actions-cloud/robocorp",
+    "ROBOTS_HOME": "/workspace/actions-cloud/robots-home",
+    "UV_CACHE_DIR": "/workspace/actions-cloud/cache/uv",
+    "XDG_CACHE_HOME": "/workspace/actions-cloud/cache",
+    "XDG_CONFIG_HOME": "/workspace/actions-cloud/config",
+    "npm_config_cache": "/workspace/actions-cloud/cache/npm"
+  },
+  "expected_tracked_YAML_count": 30,
+  "forbidden_actual_operator_exports": [
+    "ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY",
+    "ACTIONS_REAL_RCC_ARTIFACT_TEST",
+    "ACTIONS_RUNTIME_RCC_PROVIDER",
+    "ACTIONS_RUNTIME_RCC_BINARY",
+    "ACTIONS_RUNTIME_RCC_TEST_PACKAGE_CACHE_CONFIG",
+    "PYTHONOPTIMIZE"
+  ],
+  "head": "095e25b6b2b2c8754184b0d26f77bc70a101cee4",
+  "historical_dd091_physical_alias": {
+    "bytes": 1466,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-B28-one-exact-TMP-relocation-owned/exact-original-path-to-new-physical-archive.json",
+    "sha256": "ce1450945a28a00611dff941ddcb0c414f281b7f32bbe004eb200435baa04f7f"
+  },
+  "historical_original_receipt_path": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-1/OWNERFINAL-one-version-actual-result.json",
+  "historical_resolver": {
+    "bytes": 2645,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/historical_failed_receipt_archive_v1.py",
+    "sha256": "a69291189f47812c41ce43d9d68a81a839780ce28a0a9dfc00c487c9acb26d69"
+  },
+  "implementation_bindings": [
+    {
+      "bytes": 7234,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/currentEDF_readonly_source_and_storage_guard.py",
+      "sha256": "05f5a1d813839749fa62bf9324365f712a34dd6183aeb3a3ca6e80b783a55746"
+    },
+    {
+      "bytes": 2871,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/currentEDF_cached_source_LIGHT_body.py",
+      "sha256": "2aa482ecd56eb4dd0e1f3829a251b2e013b9eb0e9f375c24a080fcf8e0e5ee0d"
+    },
+    {
+      "bytes": 4773,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/launch_currentEDF_source_gate_once.py",
+      "sha256": "79a5490f8eb6dfccb5c2a64d1aee244868f17711f105988e5f5a156cb8fe47b0"
+    },
+    {
+      "bytes": 1608,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/currentEDF_configured_full_body.py",
+      "sha256": "f5cb26e52c79d728782324443eb934b0abee40d78d44ebcb349dd5af59ce2b09"
+    },
+    {
+      "bytes": 378602,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/private-currentEDF-source-body-mode-inventory.json",
+      "sha256": "ff7e498553805ea38a2757a4081ee8bd2989bee3e190cdfe8983136d2de78b3a"
+    }
+  ],
+  "original_native_config": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/FROZEN-control3-current-b614-actual-config-v2.json",
+  "original_qualified_config": "/workspace/engineering/rcc-compatibility-current-e4ff-qualified-config-successor/FROZEN-current-e4ff-control3-owned-cache-SOURCE-QUALIFIED-v4.json",
+  "owned_evidence_root": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/one-current095e25-source-LIGHT-original-owned",
+  "phase": "LIGHT",
+  "prepared_environment_and_RCC_bindings": [
+    {
+      "bytes": 752,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/actions/.venv/pyvenv.cfg",
+      "sha256": "5887cd61a71323e44a5900d37b3b7ab4940dc0a279015374402555a4f73300eb"
+    },
+    {
+      "bytes": 771,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/actions-http-helper/.venv/pyvenv.cfg",
+      "sha256": "2603504a110e897d67eeb04fe32c812b957d208d704208e7bc9eef13f040a8af"
+    },
+    {
+      "bytes": 763,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/devutils/.venv/pyvenv.cfg",
+      "sha256": "75e31b8fb8fa34018e18e841a434be5d23300aeeb260abb739d62e71f99af3a6"
+    },
+    {
+      "bytes": 761,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/work-items/.venv/pyvenv.cfg",
+      "sha256": "e4514f406dd690f91eaba4e511887e090072aececa648c887211e985dbdd3c01"
+    },
+    {
+      "bytes": 761,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/.venv/pyvenv.cfg",
+      "sha256": "5d4d9ced8bfa895cd4147194914e912fef36b0108a54c853249a44ad91aae3ca"
+    },
+    {
+      "bytes": 22282402,
+      "mode": "0o700",
+      "path": "/workspace/actions-cloud/bin/rcc",
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+    },
+    {
+      "bytes": 22282402,
+      "mode": "0o711",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/bin/rcc-18.19.3",
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+    },
+    {
+      "bytes": 987,
+      "mode": "0o600",
+      "path": "/workspace/actions-cloud/activate.sh",
+      "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+    },
+    {
+      "bytes": 13921,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/.venv/lib/python3.12/site-packages/xdist/plugin.py",
+      "sha256": "62df71dfe342969ab667cb3a4f2280a93be9c11bc9a4c2d9ead271c979d2afd8"
+    },
+    {
+      "bytes": 8893,
+      "mode": "0o755",
+      "path": "/workspace/engineering/pr308/developer/toolkit.py",
+      "sha256": "e1a3f96b57c31be2a0db5cdd3d63ce9ac243a9e8e29dff5ce6e07fd897fb605f"
+    },
+    {
+      "bytes": 27099,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/tasks.py",
+      "sha256": "b35d3722b1f9ed51e57ce4dcd3f7fdc81b7df238cbcdef0eaf44d47d08555791"
+    },
+    {
+      "bytes": 11263,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/.venv/lib/python3.12/site-packages/_pytest/tmpdir.py",
+      "sha256": "236918c090160c1f6b935e162ff44ab273a700221d5f40ac15892be75e4503ee"
+    }
+  ],
+  "prepared_inputs": {
+    "action_server/build.py": "75c249c111bbf3d81f027a252e7dba54771037f02b402832c0554e119cb4eb12",
+    "action_server/poetry.lock": "5d6acb65ba220211d1da020c78c51a5ea89465f2bbedc99aaf72319b862914e5",
+    "action_server/pyproject.toml": "be4011d3915e8838249546c70ae30420dadfb0d08c19b59970d8980332c7573f",
+    "action_server/tasks.py": "b35d3722b1f9ed51e57ce4dcd3f7fdc81b7df238cbcdef0eaf44d47d08555791",
+    "action_server/tests/action_server_tests/test_create_conda_from_package_yaml/create_wheel/pyproject.toml": "4d581bfc7b6d64979c3aef6411198548a17713e0c8439c07d0cbb1a91fae3851",
+    "actions-http-helper/poetry.lock": "8e717ea54b91b17e638bb633026372fd415487a5e817768b450c0e473cd84d13",
+    "actions-http-helper/pyproject.toml": "1888af6e0e2ce2280080920338245122563f69ce677796a5dbddc4c6bb07d28d",
+    "actions-http-helper/tasks.py": "31523822c03af429ad7d7fab8df66a45f87b4f58876f8928df9f7c79f375992a",
+    "actions/poetry.lock": "b90ab7b6e3dd3a68a3d23bfee456adf6d22446f845e1bd5e2a334ec573035f15",
+    "actions/pyproject.toml": "9de923a2bf29d73d486ebf67982e177c0ab41d8a35266f7dd1f2d75b1ec43ec3",
+    "actions/tasks.py": "33a572fcadc6848ebab78f01fcae880a40bd51011cb80a69149467a897807cc9",
+    "actions/tests/actions_core_tests/test_core_log_integration/pyproject.toml": "f2119f900206f7a6bcbedd34b7cfb1c83bd996db13fdf81710fa509ed3cc72cf",
+    "build_common/poetry.lock": "5dfaebdb2e73b95e022e9064f4258fefb66a4a0a2a6c3d8829cd9d2838e07160",
+    "common/poetry.lock": "55fb76128d984be26ba5af1dc791a7b010298f70908d969b80fd7f268e84019e",
+    "developer/setup.yaml": "8674d6b55439fae5ac284fa92d7db8016e3589fafbf2d34e066e29345efa016a",
+    "developer/setup_windows_amd64.yaml": "86a36910ad271616626e019e02e6c7b21fdb32eaa1e1717c2a654673504a8001",
+    "developer/toolkit.py": "e1a3f96b57c31be2a0db5cdd3d63ce9ac243a9e8e29dff5ce6e07fd897fb605f",
+    "developer/toolkit.yaml": "0ed7beaa93dd0ba763d1618382a3de8ce307cc5cf613759d06081d735fcd7e68",
+    "devutils/bin/develop.bat": "daff2011d235a81f7d1556bf30bf62016aecb2498084e67bfccad8531642c589",
+    "devutils/bin/develop.sh": "484c7164f54e383b038dcb25ff39979458b6f6a3f10f20c81f50001c3c2d16c2",
+    "devutils/poetry.lock": "22bf11dae2a1ed46de5024da774dde4fe778c206d720929fba9244819f3b0b6e",
+    "devutils/pyproject.toml": "7ffef37af3dc666ae72f1075ac1e06d8c61405225d678b326d767fe1952825e1",
+    "devutils/src/devutils/invoke_utils.py": "7892303d075b2755b490b507c444d9aebc2f0d3089c8812df40d7f0c0fc195b5",
+    "devutils/src/devutils/rcc.py": "c897a607292025e3ae05a79fb002302f4ac7d5eed6033b8101dd9d5e550cc97c",
+    "mcp/poetry.lock": "9b84391e939e90e56422e1b9373862fbc1827b667ebba87126a6330a74069543",
+    "tasks.py": "b9d8fc44392003c3eac7503c2c8cff237f8896c95d5eccb97f6e75cf55eb4b1c",
+    "templates/advanced/pyproject.toml": "ef1312a9eaf6323b143d9339defb3158ea19b67b22a7cce0ecf766ba6ed5223d",
+    "work-items/poetry.lock": "dcb776a04f9fb30fb93c6667cc42fe9733208e07ec23e7d54dff39650ae11bf4",
+    "work-items/pyproject.toml": "a09a91d33e5f91cdec649a96d72b91e4fc1e4ecf97d3654e9b243f0ac8ecc10e",
+    "work-items/tasks.py": "e74ad7f083159457c53da828ca69b2ea6ae1a2cde465e6d2b8019bda079f1642"
+  },
+  "pytest_addopts": null,
+  "pytest_basetemp": null,
+  "pytest_owned_parent": "/tmp/actions-pr308-currentEDF-LIGHT-once-095e25b6",
+  "root_current_source_adoption": [
+    {
+      "bytes": 885,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-pr308-e2-and-startup-probe-adoption/OWNERFINAL-root-ordinary-e2-and-startup-probe-source-adoption.json",
+      "sha256": "edf047d2aeaa3b74b42cfaa3879146dfee4ee740bb9797f0f6d47c821bd39107"
+    }
+  ],
+  "source_LIGHT": null,
+  "source_count": 1440,
+  "source_inventory": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/private-currentEDF-source-body-mode-inventory.json",
+  "source_root": "/workspace/engineering/pr308",
+  "tmp_capacity_floor_bytes": 1200000000,
+  "tree": "edf088b1a8acd9709b37dee2532d77c8b2246a50"
+}

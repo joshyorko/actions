@@ -1,0 +1,181 @@
+{
+  "schema": "exact_four_completed8d49_owned_roots_storage_preexecution_v2",
+  "status": "PREEXECUTION_ONLY_DISTINCT_ROOT_AND_INDEPENDENT_GO_REQUIRED",
+  "source_head": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "predecessor_f113_owner": {
+    "path": "/workspace/engineering/completed8d49-two-root-storage-PREPARATION/OWNERFINAL-two-completed8d49-roots-capped-storage-PREEXECUTION.json",
+    "bytes": 12160,
+    "sha256": "f11305932016f7571186f883c0a93fe5feca6e698d1b5e67b216d1ccc331503b",
+    "mode": "0o400"
+  },
+  "predecessor_inventory_reused_by_reference": {
+    "path": "/workspace/engineering/completed8d49-two-root-storage-PREPARATION/private-exact-two-root-inputs.json",
+    "bytes": 2756613,
+    "sha256": "844ddad53f528088008866aa261e62c8895d0a56696718e53b0b0792a7f7c024",
+    "mode": "0o444"
+  },
+  "selected_roots": {
+    "ToolkitTest": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/source-LIGHT-v3-basetemp-once/ToolkitTest",
+    "original27-log": "/workspace/engineering/rcc-current8d49-private-V8-content-preparation/pure-count-alias-GREEN-owned-once/robocorp-log",
+    "fixture42-GREEN-log": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/pure-fixture-logger-GREEN-owned-once/robocorp-log",
+    "fixture51-TEMPORAL-log": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/pure-fixture-logger-GREEN-TEMPORAL-owned-once/robocorp-log"
+  },
+  "selected_member_count": 9026,
+  "selected_allocated_bytes": 181624832,
+  "completion": {
+    "ToolkitTest": 179,
+    "original27_controls": 27,
+    "fixture_GREEN_controls": 42,
+    "fixture_TEMPORAL_controls": 51,
+    "all_terminal_returncodes": 0,
+    "all_JUnit_selected_controls_failure_error_skip": 0,
+    "bound_parent_logs_XML_terminals": "Remain untouched outside selected roots",
+    "recycle_marker": "NOT_SYNTHESIZED_NOT_APPLICABLE_TO_OWNED_PYTEST_LOG_ROOTS"
+  },
+  "stable_full_snapshots": 2,
+  "external_hardlinks": 0,
+  "critical_qualified_current_config": {
+    "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/FROZEN-current8d49-control3-qualified-V8-config.json",
+    "bytes": 759889,
+    "sha256": "a3e191f245baa07ec04ef1129736d5839aad19a734f611dc222afa2d71d24882",
+    "mode": "0o600"
+  },
+  "scanned_critical_binding_rows": 1765,
+  "selected_critical_overlap": false,
+  "all_four_roots_actual_address_completion_controls": {
+    "path": "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v2/private-four-root-address-completion-readonly-proof.json",
+    "bytes": 1283,
+    "sha256": "ef36f50ed868518ed21cc1ea6a2e325ba07915691daa069496a9019c99bbc7e1",
+    "mode": "0o400"
+  },
+  "capacity_diagnosis": {
+    "path": "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v2/safe-capacity-allocation-diagnosis-and-prospective-four-root-margin.json",
+    "bytes": 1262,
+    "sha256": "4d13cdb0fded1c64761dfd175df5e0125519e622e61c332e1092ba5c6a792a1f",
+    "mode": "0o400"
+  },
+  "current_workspace": 1150111744,
+  "native_workspace_floor": 1288490189,
+  "prospective_workspace_after_gain": 1331736576,
+  "prospective_margin_not_guaranteed": 43246387,
+  "fresh_native_floor_must_be_rechecked_before_actual_native": true,
+  "compression_fit": "UNKNOWN;48MiB cap preserves all originals on overflow",
+  "archive_cap_including_close_footer": 50331648,
+  "complete_plus_progress_index_cap": 16777216,
+  "unchanged_allroot_prestage_before_any_removal": true,
+  "unchanged_every_member_body_type_mode_uidgid_PAXmtime_hardlink_partition_CRCISIZEEOF_fsync": true,
+  "unchanged_data_source_guard": {
+    "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+    "Git_FS_rows": 1440,
+    "original237": true,
+    "native1192": true,
+    "prepared30": true,
+    "origins5_metadata_only": true,
+    "before_and_alwayspost": "Original current-source stage-after read-only guard",
+    "checkpoint_HEAD_tree_bound": false,
+    "SOURCE_NATIVE_acceptance": "UNCHANGED"
+  },
+  "root_release_template": {
+    "path": "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v2/ROOT-exact-four-root-release-template-NOTAUTHORIZATION.json",
+    "bytes": 1438,
+    "sha256": "dfedb6bb11cb313dfb10768d0c2f18ea1f67944d5f0ae15d4979174e55da249a",
+    "mode": "0o400"
+  },
+  "required_review_decision": "GO_EXACT_FOUR_COMPLETED8D49_ROOTS_CAPPED_STORAGE_PREEXECUTION",
+  "exact_outer_argv": [
+    "/usr/bin/timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "900s",
+    "/bin/bash",
+    "--noprofile",
+    "--norc",
+    "-c",
+    "set -euo pipefail; source \"$1\"; unset PYTHONOPTIMIZE; export PYTHONDONTWRITEBYTECODE=1; exec \"$2\" \"$3\" --root-execute-reviewed-four-completed8d49-roots \"$4\"",
+    "root-one-storage",
+    "/workspace/actions-cloud/activate.sh",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v2/launch_once.py",
+    "/workspace/engineering/root-completed8d49-four-root-storage-reviewed-release-v2.json"
+  ],
+  "bounds": {
+    "aggregate_archive_actual_writes_including_close_footer": 50331648,
+    "complete_plus_maximum_progress_indices": 16777216,
+    "tmp_two_archive_copies_plus_indices_plus_reserve_before": 251658240,
+    "tmp_reserve_before_removal": 134217728,
+    "workspace_data_only_guard_floor": 16777216,
+    "shm_native_floor_not_allocated_or_waived": 3865470567,
+    "child_TERM": 600,
+    "child_KILL_after": 10,
+    "python_child_timeout": 615,
+    "outer_TERM": 900,
+    "outer_KILL_after": 10
+  },
+  "operation": "NOT_RUN_NO_ARCHIVE_REMOVAL_RESTORATION_NATIVE_OR_GATEWAY",
+  "serialized_requirement": "No new pure tests/native/source/selected roots mutations while operation; root distinct single-attempt release, no retry",
+  "private_references": [
+    {
+      "path": "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v2/ROOT-exact-four-root-release-template-NOTAUTHORIZATION.json",
+      "bytes": 1438,
+      "sha256": "dfedb6bb11cb313dfb10768d0c2f18ea1f67944d5f0ae15d4979174e55da249a",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v2/safe-capacity-allocation-diagnosis-and-prospective-four-root-margin.json",
+      "bytes": 1262,
+      "sha256": "4d13cdb0fded1c64761dfd175df5e0125519e622e61c332e1092ba5c6a792a1f",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v2/retained-initial-completion-count-assertion-SETUPFAIL.json",
+      "bytes": 277,
+      "sha256": "f65df56b61a1bef927e3d62928c860f2463dce155e781aa630d6922f7d4df2d6",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v2/private-four-root-address-completion-readonly-proof.json",
+      "bytes": 1283,
+      "sha256": "ef36f50ed868518ed21cc1ea6a2e325ba07915691daa069496a9019c99bbc7e1",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v2/archive_exact_four_completed_roots_once.py",
+      "bytes": 21686,
+      "sha256": "db9b3a24c7eb3675cffb17979d9540bb3fb5cc000e900b9f695be3256bd25df3",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v2/guard_readonly.py",
+      "bytes": 5499,
+      "sha256": "51edfe65c8872d993852a1aad498435e7f5d70959ef700d8f990654bd808810b",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v2/launch_once.py",
+      "bytes": 8614,
+      "sha256": "620d6c2841fd7aa28b8f98a6187faf31d5282895d65f6591033b9bfb7d47ffdd",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v2/build_four_root_packet_readonly.py",
+      "bytes": 10255,
+      "sha256": "6eba0eb85fa541fd0d824100f2dbb4810506611690835ea52973016260c09b44",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v2/private-four-root-input-supplement.json",
+      "bytes": 8040,
+      "sha256": "510382a61d2806b41bb5268ce9b52689eeeb155f9a01e722556bbcc79edc4ec1",
+      "mode": "0o444"
+    }
+  ],
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "durable_learning_captured": "Exact accepted e151 capped all-root durable staging/topology/metadata/primary exception lesson reused; real179/27/42/51 completion and unambiguous fullpath-to-logical archive names preserve separate logging subroots without removing bound parents",
+    "evidence": "Frozen B28 source9b47 and actuala26ca4/8b438; predecessorf113; actual four read-only address and completion helpers; exact current qualified config overlap check",
+    "stale_or_ambiguous_guidance_removed": "Do not infer51 for an earlier42case GREEN or apply RCC recycle markers to owned pytest roots; do not claim native floor restored from earlier capacity",
+    "remaining_uncertainty": "Precise whole-workspace allocation drop unproven; compression, operation result and universal quiescence prospective; ROOT/independent release required"
+  },
+  "upstream_disposition": "none"
+}

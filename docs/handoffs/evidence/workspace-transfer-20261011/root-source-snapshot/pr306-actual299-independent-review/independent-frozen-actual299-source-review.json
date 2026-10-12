@@ -1,0 +1,139 @@
+{
+  "schema": "independent-frozen-source-review/v1",
+  "verdict": "GO_NORMAL_EXISTING_PR_BRANCH_SOURCE_PUSH_ONLY",
+  "head": "fada8e068f61f6e0e380ec4685eed2f4cf0b9ade",
+  "tree": "a31db4434c7bbe69bf572626d2174f64f9ff2f39",
+  "ordered_parents": [
+    "662014533d8104c1998bce26d91211140acc08e5",
+    "6181b044c75de35386f1ae30e71725398b6a7feb"
+  ],
+  "existing_branch": "fix/database-savepoint-admission-20261010",
+  "owner_announced_final_checkpoint": {
+    "path": "/workspace/engineering/pr306-actual299-refresh/immutable-actual299-source-checkpoint.json",
+    "bytes": 98491,
+    "sha256": "9604f6b94d62648f3efaa2a8223ff7640a8ef1245e60b7281124dc6bde35b7d1"
+  },
+  "independent_complete_proof": {
+    "path": "/workspace/engineering/pr306-actual299-independent-review/independent-complete-union-source-gates-and-retained-byte-proof.json",
+    "bytes": 67647,
+    "sha256": "2d5fc898a1212677aaf645e9e70ec4bf5171d1b7dfc86c91c2c15e11b2796f09"
+  },
+  "findings": [],
+  "source_acceptance": {
+    "all1419_complete_typed_parent_paths_Gitbody_modes_FSexecbits_prepost_exact": true,
+    "original_five_DB_native_observer_CLI_test_body_modes_exact662": true,
+    "overlapping_resource_history_and_database_whole_AST_reconciliation": "Whole original module unchanged except each exact target migration fixture function; all old handoff and savepoint assertions retained. No application feature child or new native timing/cleanup/budget changes.",
+    "whole_github_exact_actual618": true,
+    "complete_frozen_refs": 123,
+    "original_owner_refs": 46,
+    "retained_draft_recovery_final_identity_refs": 5,
+    "receipt_discovery_failure_preserved_not_retroactive_precommit_failure_claim": true,
+    "recorded_source_gates": {
+      "Doctor": "PASS",
+      "Bootstrap": "30unique input bytes exact own original prepared source; five concrete module origins/prefixes currentown; no installer/newBootstrap",
+      "pinned_ignored_Rcc": "Alreadyowned18.19.3 SHA7e588/22282402B/mode0711 verified, no copy/download",
+      "Toolkit": 96,
+      "scoped": {
+        "passed": 246,
+        "PostgreSQL_skipped": 1,
+        "integration_deselected": 15,
+        "warnings": 4,
+        "seconds": 22.62
+      },
+      "full_configured_lint": "Ruffcheck/format311/Isort PASS",
+      "typecheck_files": 347,
+      "actual_generated_TARGETS_outputs": 8,
+      "all_tracked_GitHub_YAML_and_dependabot": 30,
+      "full_Runtime_source": {
+        "single_authorized_full": true,
+        "exit_code": 0,
+        "passed": 1283,
+        "skipped": 13,
+        "warnings": 15,
+        "duration_seconds": 130.75,
+        "workers": 2,
+        "RCC_GATEWAY": "SUCCESS",
+        "outer_timeout_seconds": 600,
+        "kill_grace_seconds": 10,
+        "head": "fada8e068f61f6e0e380ec4685eed2f4cf0b9ade",
+        "tree": "a31db4434c7bbe69bf572626d2174f64f9ff2f39",
+        "private_raw_log": {
+          "path": "/workspace/engineering/pr306-actual299-refresh/full-configured-runtime-source.log",
+          "bytes": 333009,
+          "sha256": "f1046fb42e03a7856a64034d8a74f2448cbe907a9f34ac6cb22b31418b6de8d1"
+        },
+        "private_raw_log_mode": "0o600",
+        "scope": "configured invoke test-not-integration; no actual native/provider/browser/PG qualification",
+        "cleanup": "Gateway exit0 and source SUCCESS only; descendant/native child reaping not established."
+      },
+      "own_prepared_environment_and_origin_checks_after_full": "PASS exact own30input/fiveconcreteorigins/configprefix/Python resolution equals light and immediatepre; no installer"
+    },
+    "own30_prepared_inputs_five_prefix_origin_configs_RCC18_19_3_0711_exact": true,
+    "original1192_inventory_metadata_assets_ZIP_helpers0444_browser_Node_frontend_raw18_frozen50_bytes_before_after_exact": true,
+    "additional16_artifact_mode_observations": "Began during full run, independently match current after-full observations; no retroactive individual-file pre-launch mode claim."
+  },
+  "producer_inventory": {
+    "current": 274,
+    "old": 268,
+    "matching": 260,
+    "changed": [
+      "action_server/src/actions/server/_actions_run.py",
+      "action_server/src/actions/server/_api_analytics.py",
+      "action_server/src/actions/server/_api_run.py",
+      "action_server/src/actions/server/_database.py",
+      "action_server/src/actions/server/_models.py",
+      "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "action_server/src/actions/server/_runs_state_cache.py",
+      "action_server/src/actions/server/migrations/__init__.py"
+    ],
+    "added": [
+      "action_server/src/actions/server/migrations/migration_add_run_outputs.py",
+      "action_server/src/actions/server/run_outputs/__init__.py",
+      "action_server/src/actions/server/run_outputs/filesystem.py",
+      "action_server/src/actions/server/run_outputs/models.py",
+      "action_server/src/actions/server/run_outputs/service.py",
+      "action_server/src/actions/server/run_outputs/types.py"
+    ],
+    "qualification": "UNQUALIFIED"
+  },
+  "five_selected_tests_separate_one_changed_history_selector": [
+    "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py"
+  ],
+  "historical_scope": {
+    "original1a_Linux_actual_cause": "UNKNOWN; fixed barrier control does not prove original scheduler/cache/deadlock/native readiness cause",
+    "c38_initial_failure": "FIRST HOLD remains retained historical failure",
+    "original_Windows_V2_artifact": "Incomplete one acquisition Forbidden/0-byte ZIP remains retained; no contents or current Windows qualification inferred",
+    "original_V5_source": "3ec9d0acbe30ad94d02e4c24fef2587127964495",
+    "original_native_producer": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+    "cleanup": "Gateway/source SUCCESS does not establish native descendants reaping; no universal cleanup claim."
+  },
+  "remaining_HOLDs": [
+    "Fresh complete exact618/sourcefada hosted CI with actual checkout/ordered parents/tree, declared workflow jobs/publisher, reviews/threads and normal policy before integration",
+    "Full issue84 and actual healthy PostgreSQL/backend acceptance",
+    "Current274 native producer (260old matches/eightchanged/sixadded) and one changed selected CLI test UNQUALIFIED for old92498 native",
+    "Workspace/trusted principal/private-source recovery/provider/browser/ChatGPT/OAuth/publication/full release acceptance",
+    "Original actual Linux cause, original incomplete Windows artifact contents, and child/process timing/cleanup not observed"
+  ],
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "Accept exact ordinary merge imports in docs/skills/repository-operations.md and docs/skills/provenance-observability.md; no cosmetic child delta.",
+    "Exact_imported_deltas": [
+      {
+        "path": "/workspace/engineering/pr306-actual299-independent-review/canonical-imported-repository-operations.patch",
+        "bytes": 9799,
+        "sha256": "58619a6cb99f7e266bf313f5ffd051d074f66ab13056ad06a26e2ee540be6055"
+      },
+      {
+        "path": "/workspace/engineering/pr306-actual299-independent-review/canonical-imported-provenance-observability.patch",
+        "bytes": 3834,
+        "sha256": "7330b295929c287d4ea82f956634d4a475d21098a197262cc1555068ca12f3a3"
+      }
+    ],
+    "Durable_learning_captured": "Preserve savepoint admission and both resource declaration handoff barriers while importing accepted scoped Run/output/Actor/grant/migration/recovery visibility boundaries. Separate candidate-presence and prior-declaration absence observations from an atomic catalog snapshot, native timing from source controls, and observation start from retrospective mode claims.",
+    "Evidence": "Exact58619a6c/7330b295 patches and all both-parent added guide lines retained;1419complete union; whole overlapping module ASTs accept only target migration fixture imports; original fiveDB/observer/CLI modules exact662;246scoped+PostgreSQLskip/full1283/13/15warn130.75s/Toolkit96/static347/gen8/all30; original46 plus exactefe draft/6c recovered constructor/2d85final identities rehashed; mode observations explicitly during full then matched after.",
+    "Stale_or_ambiguous_guidance_removed": "Imports accepted actual299 migration/output authorization/provenance scope instead of carrying old776 qualified CI. Retains two separately sampled resource-list RPC semantics and original actual native/cause uncertainty; distinguishes top-level receipt-discovery failure from successful earlier precommit source inspector.",
+    "Remaining_uncertainty": "Fresh current hostedCI and policy required; PostgreSQL/full84/private/native/provider/browser/release gates held. Historical Linux update-order cause UNKNOWN and original Forbidden Windows0B artifact remains incomplete.",
+    "Disposition": "ACCEPT_VERIFIED_EXISTING_BOTH_PARENT_CANONICAL_DELTA"
+  },
+  "review_actions": "Read-only Git/source AST/body/hash/log-summary/environment-configuration checks plus owned review outputs only. No source/index/ref edit, gateway/test/installers/provider/native/browser/download/push/merge execution.",
+  "upstream_disposition": "none"
+}

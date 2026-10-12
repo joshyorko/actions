@@ -1,0 +1,911 @@
+{
+  "blocked": [],
+  "copied_bytes": 1823807,
+  "copied_files": 106,
+  "documentation_improvement": "Exact existing canonical proposed reader/census delta, Windows portability lesson and storage scoped lessons exported; no cosmetic guide edits.",
+  "explicit_local_only": [
+    {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+      "reason": "Large private current config765564 and bound native/source/full inventories remain local; earlier frozen owners retain hashes, physical alias restoration/retarget required."
+    },
+    {
+      "reason": "No raw sensitive full inventories, archives, binary or environment copied into Git.",
+      "scope": "Three6.66MB Toolkit complete inventories, raw logs/stdio/JUnit and every binary/environment/archive"
+    }
+  ],
+  "files": [
+    {
+      "bytes": 74274,
+      "export_mode": "0o444",
+      "export_path": "sources/accepted-original-helper/verify_dakota_rcc_acceptance.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/verify_dakota_rcc_acceptance.py",
+      "sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659"
+    },
+    {
+      "bytes": 21276,
+      "export_mode": "0o444",
+      "export_path": "sources/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/archive_exact_one_completed_FULL_single_copy_once.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/archive_exact_one_completed_FULL_single_copy_once.py",
+      "sha256": "e717faae8a9e5f7a1ccea85c17df928a728216e43bf77256c487e685d9971771"
+    },
+    {
+      "bytes": 1491,
+      "export_mode": "0o444",
+      "export_path": "sources/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/exclusive_single_copy_archive_promotion.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/exclusive_single_copy_archive_promotion.py",
+      "sha256": "63c8d00d5830672ad4e03d5e5dd811d4735f32bd7ca865ff4c6f63d3c2587a09"
+    },
+    {
+      "bytes": 8399,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-controller-boundary-PURE-SOURCE-PREPARATION/OWNERFINAL-controller-V8-original-actual-adapter-and-30-boundary-SOURCE-PURE-PREEXEC-final-NOTRUN-v2.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/OWNERFINAL-controller-V8-original-actual-adapter-and-30-boundary-SOURCE-PURE-PREEXEC-final-NOTRUN-v2.json",
+      "sha256": "06b8f1d6bf52a6a13ecce62820cc2e5b6ae2bd961027268cdc51fa3dec3adeb2"
+    },
+    {
+      "bytes": 7424,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-controller-boundary-PURE-SOURCE-PREPARATION/OWNERFINAL-controller-V8-original-actual-adapter-and-30-boundary-SOURCE-PURE-PREEXEC-preparation-NOTRUN.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/OWNERFINAL-controller-V8-original-actual-adapter-and-30-boundary-SOURCE-PURE-PREEXEC-preparation-NOTRUN.json",
+      "sha256": "dbdf8422eb1107185d5c02fe5f6c1bbbba60d552138b879094ff01097b1701de"
+    },
+    {
+      "bytes": 4748,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-controller-boundary-PURE-SOURCE-PREPARATION/ROOT_storage_release_V8_source_actual_adapter_TEMPLATE_ONLY_NOAUTHORIZATION.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/ROOT_storage_release_V8_source_actual_adapter_TEMPLATE_ONLY_NOAUTHORIZATION.json",
+      "sha256": "45962dd3d9df7911f930512b7bb997adb3589148636564b1f0cc662619267805"
+    },
+    {
+      "bytes": 5217,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-controller-boundary-PURE-SOURCE-PREPARATION/SOURCE-ONLY-30-boundaries-original-18-actual-adapter-and-preservation-literal-proof.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/SOURCE-ONLY-30-boundaries-original-18-actual-adapter-and-preservation-literal-proof.json",
+      "sha256": "6af8254fe2f1a5907559939a09e5de643e7c39679f54fa8e6a2a3188d6a2a863"
+    },
+    {
+      "bytes": 107385,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-controller-boundary-PURE-SOURCE-PREPARATION/frozen_controller_boundary30_actual_functions_typed600_PURE_inputs_NOTRUN.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/frozen_controller_boundary30_actual_functions_typed600_PURE_inputs_NOTRUN.json",
+      "sha256": "72aaf93fb373f40cf7315c4e225b6b6cb61e7e9a876fb956075a92cebf9f1db7"
+    },
+    {
+      "bytes": 108389,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-controller-boundary-PURE-SOURCE-PREPARATION/frozen_controller_boundary30_actual_functions_typed600_PURE_inputs_NOTRUN_v2_cache_origin_pin.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/frozen_controller_boundary30_actual_functions_typed600_PURE_inputs_NOTRUN_v2_cache_origin_pin.json",
+      "sha256": "c95d4746dfacde271565b81ff14e4c31ab2b8ce3d6efe68e5626c5fdb7cb40f8"
+    },
+    {
+      "bytes": 67675,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-controller-boundary-PURE-SOURCE-PREPARATION/frozen_current9760_storage_controller_V8_qualified_source_and_actual_tokens_SOURCE_PREPARED.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/frozen_current9760_storage_controller_V8_qualified_source_and_actual_tokens_SOURCE_PREPARED.json",
+      "sha256": "6f1dee55ea49ac1ef91528b89619a0a9d3d6419014cdcfa93d3523fe15c3009b"
+    },
+    {
+      "bytes": 6736,
+      "export_mode": "0o444",
+      "export_path": "sources/first-five-controller-boundary-PURE-SOURCE-PREPARATION/launch_controller_boundary_PURE_ROOT_ONLY_SOURCE_PREPARED.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/launch_controller_boundary_PURE_ROOT_ONLY_SOURCE_PREPARED.py",
+      "sha256": "0df74c34a87d51a4d5759f30941389a6bf7cf2732191f310e3be66ea7f0258f4"
+    },
+    {
+      "bytes": 7355,
+      "export_mode": "0o444",
+      "export_path": "sources/first-five-controller-boundary-PURE-SOURCE-PREPARATION/launch_controller_boundary_PURE_ROOT_ONLY_SOURCE_PREPARED_v2_cache_and_origin_pin.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/launch_controller_boundary_PURE_ROOT_ONLY_SOURCE_PREPARED_v2_cache_and_origin_pin.py",
+      "sha256": "4eef6de54c7c91678987b9b9c6127f4a57645ea68f094e458009e5e110ca7266"
+    },
+    {
+      "bytes": 3337,
+      "export_mode": "0o444",
+      "export_path": "sources/first-five-controller-boundary-PURE-SOURCE-PREPARATION/pure18_receipt_adapter_v8_SOURCE_PREPARED.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/pure18_receipt_adapter_v8_SOURCE_PREPARED.py",
+      "sha256": "7a674d2efafb320ec87c38655bd5c6e271584500a0b184a892e19b052d575f28"
+    },
+    {
+      "bytes": 4079,
+      "export_mode": "0o444",
+      "export_path": "sources/first-five-controller-boundary-PURE-SOURCE-PREPARATION/pure18_receipt_adapter_v8_SOURCE_PREPARED_v2_actual_receipt_schema.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/pure18_receipt_adapter_v8_SOURCE_PREPARED_v2_actual_receipt_schema.py",
+      "sha256": "8dbc69c8dd1d366d1e1dea97cb809613ff990e27ee9faacb3a9dfccb56a6c1b2"
+    },
+    {
+      "bytes": 12753,
+      "export_mode": "0o444",
+      "export_path": "sources/first-five-controller-boundary-PURE-SOURCE-PREPARATION/root_once_first_five_current9760_SOURCE_PREPARED_v3_strict_V8_adapter.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/root_once_first_five_current9760_SOURCE_PREPARED_v3_strict_V8_adapter.py",
+      "sha256": "985f497f83b4acecdf9ede7220da3237599ca210016da7443351c00787721ef6"
+    },
+    {
+      "bytes": 15392,
+      "export_mode": "0o444",
+      "export_path": "sources/first-five-controller-boundary-PURE-SOURCE-PREPARATION/test_controller_boundaries_SOURCE_PREPARED.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/test_controller_boundaries_SOURCE_PREPARED.py",
+      "sha256": "4ce3fecee440874d19e5d5471e344b7525162aafcfd33245735fa8b0ca1bc33f"
+    },
+    {
+      "bytes": 19855,
+      "export_mode": "0o444",
+      "export_path": "sources/first-five-controller-boundary-PURE-SOURCE-PREPARATION/test_controller_boundaries_SOURCE_PREPARED_v2_machine_census.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/test_controller_boundaries_SOURCE_PREPARED_v2_machine_census.py",
+      "sha256": "6bb1f35f14d46498cf6ac4503a8faa176b45f3384658b26e07406deb552fdcb2"
+    },
+    {
+      "bytes": 20898,
+      "export_mode": "0o444",
+      "export_path": "sources/first-five-controller-boundary-PURE-SOURCE-PREPARATION/test_controller_boundaries_SOURCE_PREPARED_v3_actual_schema_machine_census.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/test_controller_boundaries_SOURCE_PREPARED_v3_actual_schema_machine_census.py",
+      "sha256": "2c01de4177b4b95caefecc23d982b9175bd420154001d8e76dff4fc5df2d1366"
+    },
+    {
+      "bytes": 21556,
+      "export_mode": "0o444",
+      "export_path": "sources/first-five-controller-boundary-PURE-SOURCE-PREPARATION/test_controller_boundaries_SOURCE_PREPARED_v4_baseline_first_machine_census.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/test_controller_boundaries_SOURCE_PREPARED_v4_baseline_first_machine_census.py",
+      "sha256": "993ee6a89bb79b0836f614790a4c10a297881d0c64d9a2fc56de50aa1f53e036"
+    },
+    {
+      "bytes": 6912,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/OWNERFINAL-current9760-first-five-concrete-preservation-SOURCE-and-approval-PREEXEC-HOLD.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/OWNERFINAL-current9760-first-five-concrete-preservation-SOURCE-and-approval-PREEXEC-HOLD.json",
+      "sha256": "6f01f982e3fe9a0060f8d9342804774b427f9e77434a7f29d685890081192673"
+    },
+    {
+      "bytes": 8035,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/OWNERFINAL-current9760-first-five-concrete-preservation-SOURCE-v2-explicit-approval-PREEXEC-HOLD.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/OWNERFINAL-current9760-first-five-concrete-preservation-SOURCE-v2-explicit-approval-PREEXEC-HOLD.json",
+      "sha256": "8c147b17f85ba4081e5b4493c3e92442fc39078c182bcb44629a101921db1099"
+    },
+    {
+      "bytes": 3447,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/ROOT_release_schema_TEMPLATE_NOT_AUTHORIZATION.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/ROOT_release_schema_TEMPLATE_NOT_AUTHORIZATION.json",
+      "sha256": "30916ce730cb78834e4ddb0ef69d262f64732ff3c38bd10318c2f2d6f3c215d6"
+    },
+    {
+      "bytes": 3450,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/ROOT_release_schema_TEMPLATE_NOT_AUTHORIZATION_v2.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/ROOT_release_schema_TEMPLATE_NOT_AUTHORIZATION_v2.json",
+      "sha256": "2b98e8d1af34f6b6e4ba4ecface8dd481e5228290d3ed7f5d604034c4dafba4b"
+    },
+    {
+      "bytes": 10631,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/SOURCE-ONLY-controller-unchanged-driver-closure-and-explicit-HOLD-proof.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/SOURCE-ONLY-controller-unchanged-driver-closure-and-explicit-HOLD-proof.json",
+      "sha256": "0292cf5d937b25807827d7d0fcf873006011e4b8a062f3cd615c307d03591e3e"
+    },
+    {
+      "bytes": 63289,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/frozen_current9760_five_environment_actual_controller_inputs_SOURCE_PREPARED.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/frozen_current9760_five_environment_actual_controller_inputs_SOURCE_PREPARED.json",
+      "sha256": "714f2489aa66b7dd83a95d43b1693cd3f981c344bba5e92da639dddb229df3a3"
+    },
+    {
+      "bytes": 18891,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/frozen_first_five_current9760_preservation_model_SOURCE_PREPARED.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/frozen_first_five_current9760_preservation_model_SOURCE_PREPARED.json",
+      "sha256": "34cc4abc0ae85b5db0c11ce4d520fbd3f1d8d25a4872b265ded39d0244e8c5cf"
+    },
+    {
+      "bytes": 11865,
+      "export_mode": "0o444",
+      "export_path": "sources/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/root_once_first_five_current9760_SOURCE_PREPARED.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/root_once_first_five_current9760_SOURCE_PREPARED.py",
+      "sha256": "661724882ceca605e76e148058efba654b71554bc3b950421b1cec81a76fb04c"
+    },
+    {
+      "bytes": 11962,
+      "export_mode": "0o444",
+      "export_path": "sources/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/root_once_first_five_current9760_SOURCE_PREPARED_v2.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/root_once_first_five_current9760_SOURCE_PREPARED_v2.py",
+      "sha256": "ffee97622f83627e77a27ec407ec4e242768060fb016a5b54a813c88a8015b03"
+    },
+    {
+      "bytes": 18435,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/OWNERFINAL-first-five-v6-current00b1-managed19-complete-PURE18-PREEXECUTION-NOTRUN.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/OWNERFINAL-first-five-v6-current00b1-managed19-complete-PURE18-PREEXECUTION-NOTRUN.json",
+      "sha256": "36ed9528b7b6dc976d9db2b9887bb495e811236ea583eddac792bc9f8d567933"
+    },
+    {
+      "bytes": 6817,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/SOURCE-PREPARED-final-current00b1-managed19-machine18-and-preserved-case-AST-proof.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/SOURCE-PREPARED-final-current00b1-managed19-machine18-and-preserved-case-AST-proof.json",
+      "sha256": "7e8daccb37f48b3c3c04951c8dd6c6a04120378d15c69d23cf5222146932c888"
+    },
+    {
+      "bytes": 5796,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/SOURCE-PREPARED-v6-current-head-activation-origin-machine18-closure-proof.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/SOURCE-PREPARED-v6-current-head-activation-origin-machine18-closure-proof.json",
+      "sha256": "f559b95baea49b8437c0aa576358ee0cfdea6455e979b925db8f503228230f6a"
+    },
+    {
+      "bytes": 25795,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v6_current00b1_managed_PURE18_inputs_NOTRUN.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v6_current00b1_managed_PURE18_inputs_NOTRUN.json",
+      "sha256": "c46932c68629f3e899d1ba4f7086be2185ed967795c2a66a2b6263e72da7669f"
+    },
+    {
+      "bytes": 26745,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v6_current00b1_managed_PURE18_inputs_NOTRUN_v2.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v6_current00b1_managed_PURE18_inputs_NOTRUN_v2.json",
+      "sha256": "c5f5d069575cf51b1a18d0f455da069c46d94771445ab23d86262ed5151e493a"
+    },
+    {
+      "bytes": 27692,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v6_current00b1_managed_PURE18_inputs_NOTRUN_v3.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v6_current00b1_managed_PURE18_inputs_NOTRUN_v3.json",
+      "sha256": "7da9e11d97f0a40bcc111caae69bd14ecec56e5dfb8fb2218601689b07c216ad"
+    },
+    {
+      "bytes": 11885,
+      "export_mode": "0o444",
+      "export_path": "sources/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v6_current00b1_managed_PURE18_ROOT_ONLY_SOURCE_PREPARED.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v6_current00b1_managed_PURE18_ROOT_ONLY_SOURCE_PREPARED.py",
+      "sha256": "ff05328438955423ab2fa591dae3318f7d005b8ed2c461c16696d8eacbf85720"
+    },
+    {
+      "bytes": 12477,
+      "export_mode": "0o444",
+      "export_path": "sources/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v6_current00b1_managed_PURE18_ROOT_ONLY_SOURCE_PREPARED_v2.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v6_current00b1_managed_PURE18_ROOT_ONLY_SOURCE_PREPARED_v2.py",
+      "sha256": "a07caffda9baab8a6755667569c8ed332aa8372eac12ed40b0d401af828d9d0c"
+    },
+    {
+      "bytes": 16282,
+      "export_mode": "0o444",
+      "export_path": "sources/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/test_first_five_v6_current00b1_managed_PURE18_SOURCE_PREPARED.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/test_first_five_v6_current00b1_managed_PURE18_SOURCE_PREPARED.py",
+      "sha256": "068ae3e16c5f1df52216c99c426301f2b5aed1f8333e55cf769dd3cd86cd89bc"
+    },
+    {
+      "bytes": 16823,
+      "export_mode": "0o444",
+      "export_path": "sources/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/test_first_five_v6_current00b1_managed_PURE18_SOURCE_PREPARED_v2.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/test_first_five_v6_current00b1_managed_PURE18_SOURCE_PREPARED_v2.py",
+      "sha256": "edeaa6ab02bd6f384d34549166fdbcd84413f7539d22aaddfeacc96be4b71c98"
+    },
+    {
+      "bytes": 17030,
+      "export_mode": "0o444",
+      "export_path": "sources/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/test_first_five_v6_current00b1_managed_PURE18_SOURCE_PREPARED_v3.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/test_first_five_v6_current00b1_managed_PURE18_SOURCE_PREPARED_v3.py",
+      "sha256": "825bdd3b2c4bbded5a4615116ab680daff0b1e89373bb4ecf338f2df44c5725d"
+    },
+    {
+      "bytes": 6756,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/OWNERFINAL-first-five-v7-clean9760-minimum-managed-PURE18-SOURCE-and-PREEXECUTION-NOTRUN.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/OWNERFINAL-first-five-v7-clean9760-minimum-managed-PURE18-SOURCE-and-PREEXECUTION-NOTRUN.json",
+      "sha256": "f7c7893409d99d4ebb1c209f4cabd7c3b4e2180d870fb1015292f809e46ec0e9"
+    },
+    {
+      "bytes": 28246,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/SOURCE-PREPARED-v7-clean9760-literal-retarget-and-preserved18-AST-proof.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/SOURCE-PREPARED-v7-clean9760-literal-retarget-and-preserved18-AST-proof.json",
+      "sha256": "4cf0a1b4e8acc75012b33588fb32bb8bff1e6d4bc4f25eb73c4e45d208cf201d"
+    },
+    {
+      "bytes": 37537,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v7_current9760_managed_PURE18_inputs_NOTRUN.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v7_current9760_managed_PURE18_inputs_NOTRUN.json",
+      "sha256": "ca8279f3bdcc04c85f9d5c100ab010fc11bd9822c13633c68cdfe6eb1c3e69af"
+    },
+    {
+      "bytes": 12477,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v7_current9760_managed_PURE18_ROOT_ONLY_SOURCE_PREPARED.py",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v7_current9760_managed_PURE18_ROOT_ONLY_SOURCE_PREPARED.py",
+      "sha256": "00e4d952c0b79c4ebe95879f9a19cfa6ac15805c0f4bd1906d871048cd3b3e94"
+    },
+    {
+      "bytes": 17030,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/test_first_five_v7_current9760_managed_PURE18_SOURCE_PREPARED.py",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/test_first_five_v7_current9760_managed_PURE18_SOURCE_PREPARED.py",
+      "sha256": "f8eef7c17be77199baa38c549b678d6ddda3c0650318cb604a6fd3b2de79ac2e"
+    },
+    {
+      "bytes": 9322,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/OWNERFINAL-first-five-v8-current9760-measured-managed-Git-SOURCE-PREEXECUTION-final-history-scope-NOTRUN.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/OWNERFINAL-first-five-v8-current9760-measured-managed-Git-SOURCE-PREEXECUTION-final-history-scope-NOTRUN.json",
+      "sha256": "485dc5ee1c67cb79b16fb9ea140626958b02ec77c91699ce62d307b7cefc4475"
+    },
+    {
+      "bytes": 8341,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/OWNERFINAL-first-five-v8-current9760-measured-managed-Git-SOURCE-and-PURE18-PREEXECUTION-NOTRUN.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/OWNERFINAL-first-five-v8-current9760-measured-managed-Git-SOURCE-and-PURE18-PREEXECUTION-NOTRUN.json",
+      "sha256": "7a3f87572e5ea9c83a82fc606933c57075ab3183f630c3f9ae890e5b7ef14c3a"
+    },
+    {
+      "bytes": 6718,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/ROOT-external-first-five-v8-measured-Git-parent-TEMPLATE-NOTEXECUTION.py",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/ROOT-external-first-five-v8-measured-Git-parent-TEMPLATE-NOTEXECUTION.py",
+      "sha256": "b9024b2043c9857e75e13f255dabc24ebc3547293d0bf2f41a3a8a0151b433db"
+    },
+    {
+      "bytes": 2567,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/SOURCE-PREPARED-v8-final-managed119-physical-row-owner-and-system-history-scope-proof.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/SOURCE-PREPARED-v8-final-managed119-physical-row-owner-and-system-history-scope-proof.json",
+      "sha256": "1b9a02719b7b9daebbc7bc6fa22728f2ac258c83ed9b7691fde1fcb0a063ceab"
+    },
+    {
+      "bytes": 2226,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/SOURCE-PREPARED-v8-four-field-Git-row-separate-owner-and-original-system-binding-proof-v2.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/SOURCE-PREPARED-v8-four-field-Git-row-separate-owner-and-original-system-binding-proof-v2.json",
+      "sha256": "7d55034d7d85906446e372214de9eb2608e11e4f5388e9673d8bb23a2153e404"
+    },
+    {
+      "bytes": 29295,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/SOURCE-PREPARED-v8-managed-Git-actual-path-owner-and-minimum-inverse-AST-proof.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/SOURCE-PREPARED-v8-managed-Git-actual-path-owner-and-minimum-inverse-AST-proof.json",
+      "sha256": "847202be95a7bd09b706ef5cb5a859b90ae3020697215ac25306c08482f7abc5"
+    },
+    {
+      "bytes": 6456,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/SOURCE-PREPARED-v8-original-FAIL-chain-fresh-root-controller-template-and-unchanged-method-proof-v3.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/SOURCE-PREPARED-v8-original-FAIL-chain-fresh-root-controller-template-and-unchanged-method-proof-v3.json",
+      "sha256": "85ba8f46ba8d6c9adff24a02fa85898ba167b3556cb4a94eab0c6613dca43694"
+    },
+    {
+      "bytes": 40148,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v8_current9760_measured_managed_Git_PURE18_inputs_NOTRUN.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v8_current9760_measured_managed_Git_PURE18_inputs_NOTRUN.json",
+      "sha256": "5a5dbe3453a8ea23ddba10c054dddfda54e2a390972f052eb961ab012315fe36"
+    },
+    {
+      "bytes": 41854,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v8_current9760_measured_managed_Git_PURE18_inputs_NOTRUN_v2.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v8_current9760_measured_managed_Git_PURE18_inputs_NOTRUN_v2.json",
+      "sha256": "6d7203286f9aa70a19eea0c4624741ad9ea2da0b7ceb04a5e81d7fb568ff41d5"
+    },
+    {
+      "bytes": 46277,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v8_current9760_measured_managed_Git_PURE18_inputs_NOTRUN_v3_originalFAIL_bound.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v8_current9760_measured_managed_Git_PURE18_inputs_NOTRUN_v3_originalFAIL_bound.json",
+      "sha256": "8cb014e904b4fd754a5858c2e0349a881dbe0bcb975f5b67e0aae215b747b388"
+    },
+    {
+      "bytes": 47036,
+      "export_mode": "0o400",
+      "export_path": "sources/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v8_current9760_measured_managed_Git_PURE18_inputs_NOTRUN_v4_originalFAIL_and_historical_system_scope.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v8_current9760_measured_managed_Git_PURE18_inputs_NOTRUN_v4_originalFAIL_and_historical_system_scope.json",
+      "sha256": "0d4423f45acce573da98b262613971e497a91a9415d61f59142182678897365b"
+    },
+    {
+      "bytes": 12654,
+      "export_mode": "0o444",
+      "export_path": "sources/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v8_current9760_measured_managed_Git_PURE18_ROOT_ONLY_SOURCE_PREPARED.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v8_current9760_measured_managed_Git_PURE18_ROOT_ONLY_SOURCE_PREPARED.py",
+      "sha256": "0ea7d1bf6953b3626f4b8d33b151ab488e030ac35bf999a9a8dd6d49a698ec72"
+    },
+    {
+      "bytes": 12668,
+      "export_mode": "0o444",
+      "export_path": "sources/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v8_current9760_measured_managed_Git_PURE18_ROOT_ONLY_SOURCE_PREPARED_v2.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v8_current9760_measured_managed_Git_PURE18_ROOT_ONLY_SOURCE_PREPARED_v2.py",
+      "sha256": "70b9123cd487a9b80fd7dfe62c06ba114ea0d5e46b7f2138c4fcccc55e50305c"
+    },
+    {
+      "bytes": 17042,
+      "export_mode": "0o444",
+      "export_path": "sources/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/test_first_five_v8_current9760_measured_managed_Git_PURE18_SOURCE_PREPARED.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/test_first_five_v8_current9760_measured_managed_Git_PURE18_SOURCE_PREPARED.py",
+      "sha256": "0ee011db2e7edec7564ef05fc3ed610bb6f15483f52bd9ececb593c44aa5f096"
+    },
+    {
+      "bytes": 24590,
+      "export_mode": "0o400",
+      "export_path": "sources/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/OWNERFINAL-first-five-obsolete-environment-preservation-SOURCE-and-CONTROL-PREPARATION-NOTRUN-v4.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/OWNERFINAL-first-five-obsolete-environment-preservation-SOURCE-and-CONTROL-PREPARATION-NOTRUN-v4.json",
+      "sha256": "0eb5a69a100bf1ecb5cad0900b587dfcbe6384ecf7363f0c1369c4894d8d9591"
+    },
+    {
+      "bytes": 11174,
+      "export_mode": "0o400",
+      "export_path": "sources/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/OWNERFINAL-first-five-v5-eight-measured-mode-SOURCE-control-and-concrete-PURE-PREPARATION-NOTRUN.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/OWNERFINAL-first-five-v5-eight-measured-mode-SOURCE-control-and-concrete-PURE-PREPARATION-NOTRUN.json",
+      "sha256": "8d1b3029bb5b3fd1f3a4791f677aa1ed5b1f40b2ca103e1fb00399d0ba013110"
+    },
+    {
+      "bytes": 1972,
+      "export_mode": "0o400",
+      "export_path": "sources/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/SOURCE-PREPARED-exact-reuse-and-not-execution-proof.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/SOURCE-PREPARED-exact-reuse-and-not-execution-proof.json",
+      "sha256": "4c1d347599b2ad363ade44a4a68a79bf6e31b97572653dd4eda4a90698cb6129"
+    },
+    {
+      "bytes": 1993,
+      "export_mode": "0o400",
+      "export_path": "sources/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/SOURCE-PREPARED-v2-exact-reuse-proof.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/SOURCE-PREPARED-v2-exact-reuse-proof.json",
+      "sha256": "46b8ead4ee721ab39f2ad6b8f853c986dd8650d1b7085a57e6807e0a74ca6e3e"
+    },
+    {
+      "bytes": 2314,
+      "export_mode": "0o400",
+      "export_path": "sources/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/SOURCE-PREPARED-v3-control-callable-and-exact-reuse-proof.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/SOURCE-PREPARED-v3-control-callable-and-exact-reuse-proof.json",
+      "sha256": "98af13078f17e6ab0e6efc785ce6728cc150f6eebed9501e3ae857a60c1b61e0"
+    },
+    {
+      "bytes": 5015,
+      "export_mode": "0o400",
+      "export_path": "sources/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/SOURCE-PREPARED-v4-first-five-exact-reuse-and-control-plan-proof.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/SOURCE-PREPARED-v4-first-five-exact-reuse-and-control-plan-proof.json",
+      "sha256": "57b75d2310a6125381be8262b88b60aada0c26f0b52a2bba32755c41ffd00c09"
+    },
+    {
+      "bytes": 5193,
+      "export_mode": "0o400",
+      "export_path": "sources/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/SOURCE-PREPARED-v5-eight-measured-mode-and-real-row-control-closure-proof.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/SOURCE-PREPARED-v5-eight-measured-mode-and-real-row-control-closure-proof.json",
+      "sha256": "bd46230dce337addadf86ac542360c50982ad59a620f359be3b2532b41c80a23"
+    },
+    {
+      "bytes": 341,
+      "export_mode": "0o400",
+      "export_path": "sources/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/canonical-frozen-input-row-schema-closure-proposed.txt",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/canonical-frozen-input-row-schema-closure-proposed.txt",
+      "sha256": "79a92193c32e68bbeefcfcadd157331b392193bdf587676e0df1722bfcc1a166"
+    },
+    {
+      "bytes": 15410,
+      "export_mode": "0o400",
+      "export_path": "sources/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/frozen_environment_preservation_inputs_SOURCE_PREPARED.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/frozen_environment_preservation_inputs_SOURCE_PREPARED.json",
+      "sha256": "dbda584b735e728c2e200cbe89cac7f77c34414ded0f2d62b9a5a83bce05c04d"
+    },
+    {
+      "bytes": 17539,
+      "export_mode": "0o400",
+      "export_path": "sources/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/frozen_first_five_environment_preservation_inputs_SOURCE_PREPARED_v4.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/frozen_first_five_environment_preservation_inputs_SOURCE_PREPARED_v4.json",
+      "sha256": "d6d933f64940c6ed3b0849a6bcd10e07f6c2c834f968c6f1b354462625e4c028"
+    },
+    {
+      "bytes": 17723,
+      "export_mode": "0o400",
+      "export_path": "sources/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/frozen_first_five_environment_preservation_inputs_SOURCE_PREPARED_v5_measured_modes.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/frozen_first_five_environment_preservation_inputs_SOURCE_PREPARED_v5_measured_modes.json",
+      "sha256": "333dd9b66eacc212c90b3a75c44e9902a9c0bdc56d73d88ba5a0e41e46e0696a"
+    },
+    {
+      "bytes": 18408,
+      "export_mode": "0o400",
+      "export_path": "sources/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/frozen_first_five_v5_PURE_control_inputs_NOTRUN.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/frozen_first_five_v5_PURE_control_inputs_NOTRUN.json",
+      "sha256": "b0d14d73ad682f22fb7c11ec4247d02d540ffaf4c90280d34a6c62ea6ee36b86"
+    },
+    {
+      "bytes": 7561,
+      "export_mode": "0o444",
+      "export_path": "sources/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/launch_first_five_v5_mode_closure_PURE_controls_SOURCE_PREPARED.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/launch_first_five_v5_mode_closure_PURE_controls_SOURCE_PREPARED.py",
+      "sha256": "6eeb6e3b07439a5148f5227015bbabac52a512feb5e9b3562f04eaeb42fa10d1"
+    },
+    {
+      "bytes": 33635,
+      "export_mode": "0o444",
+      "export_path": "sources/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_accepted_obsolete_environments_source_prepared.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_accepted_obsolete_environments_source_prepared.py",
+      "sha256": "3dfbbd245f8dcb0c0c33e855b5a3b4b3a87a4fe334367da0dada6491da9fc1e8"
+    },
+    {
+      "bytes": 34532,
+      "export_mode": "0o444",
+      "export_path": "sources/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_accepted_obsolete_environments_source_prepared_v2.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_accepted_obsolete_environments_source_prepared_v2.py",
+      "sha256": "98f977690dd7ef6d68da5f0c1ee4582100b054f836767a287b9995a7443bdcfb"
+    },
+    {
+      "bytes": 36982,
+      "export_mode": "0o444",
+      "export_path": "sources/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_accepted_obsolete_environments_source_prepared_v3.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_accepted_obsolete_environments_source_prepared_v3.py",
+      "sha256": "262196054902818db5cea7265961a3520cf23b30080b646460c1dd496ba84022"
+    },
+    {
+      "bytes": 37609,
+      "export_mode": "0o444",
+      "export_path": "sources/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_first_five_accepted_obsolete_environments_SOURCE_PREPARED_v4.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_first_five_accepted_obsolete_environments_SOURCE_PREPARED_v4.py",
+      "sha256": "63476ecaa50ba863afed8602dcad82c22c9349df022d0e9f0dde8d81d60e0bb7"
+    },
+    {
+      "bytes": 9191,
+      "export_mode": "0o444",
+      "export_path": "sources/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/test_environment_preservation_admission_SOURCE_PREPARED.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/test_environment_preservation_admission_SOURCE_PREPARED.py",
+      "sha256": "f229e39308a411bb0631b281eebab5774317923675308775b6b352922856ed2a"
+    },
+    {
+      "bytes": 12323,
+      "export_mode": "0o444",
+      "export_path": "sources/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/test_first_five_environment_preservation_admission_SOURCE_PREPARED_v4.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/test_first_five_environment_preservation_admission_SOURCE_PREPARED_v4.py",
+      "sha256": "bf271888be3d40f6be8b11c2e71de7232c0bce50ee30fcc96b1083f89498bf75"
+    },
+    {
+      "bytes": 12822,
+      "export_mode": "0o444",
+      "export_path": "sources/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/test_first_five_environment_preservation_admission_SOURCE_PREPARED_v5_measured_modes.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/test_first_five_environment_preservation_admission_SOURCE_PREPARED_v5_measured_modes.py",
+      "sha256": "38825c7bc1bedaa549ed6eb9a96b33b2ce244ce35d84b28b6eb22da557fec720"
+    },
+    {
+      "bytes": 7180,
+      "export_mode": "0o400",
+      "export_path": "sources/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/OWNERFINAL-three-completed-original-Toolkit-basetemps-SINGLECOPY-SOURCE-and-PREEXECUTION-NOTRUN.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/OWNERFINAL-three-completed-original-Toolkit-basetemps-SINGLECOPY-SOURCE-and-PREEXECUTION-NOTRUN.json",
+      "sha256": "97bc6c112f68719f0a31038e187c4659026758a10816cb566528645fa711bde7"
+    },
+    {
+      "bytes": 3275,
+      "export_mode": "0o400",
+      "export_path": "sources/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/SOURCE-PREPARED-three-Toolkit-subphase-17-AST-and-complete-before-remove-proof.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/SOURCE-PREPARED-three-Toolkit-subphase-17-AST-and-complete-before-remove-proof.json",
+      "sha256": "73af10ac9be2dfc56f44c5bc98cca243705c4b393b01c1a4f7da47f6923b5de5"
+    },
+    {
+      "bytes": 27763,
+      "export_mode": "0o444",
+      "export_path": "sources/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/archive_three_completed_Toolkit_basetemps_single_copy_SOURCE_PREPARED.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/archive_three_completed_Toolkit_basetemps_single_copy_SOURCE_PREPARED.py",
+      "sha256": "71326aec77af1545bfc24e7e87f1769a524ca35c6566b00c67b9c34a911e9ff0"
+    },
+    {
+      "bytes": 7430,
+      "export_mode": "0o600",
+      "export_path": "sources/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/collect_selected_toolkit_readonly_inventory.py",
+      "original_mode": "0o600",
+      "original_path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/collect_selected_toolkit_readonly_inventory.py",
+      "sha256": "7e4bf9b16ce4d46c24f2aae56e0a6becd0ab23c28c6c9274029fa7d4bc618518"
+    },
+    {
+      "bytes": 29034,
+      "export_mode": "0o400",
+      "export_path": "sources/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/frozen_three_original_Toolkit_basetemp_inputs_SINGLE_COPY_SOURCE_PREPARED_NOTRUN.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/frozen_three_original_Toolkit_basetemp_inputs_SINGLE_COPY_SOURCE_PREPARED_NOTRUN.json",
+      "sha256": "834ebaccb3113fbad18bc7a12e83c0a4f020fe251e86bf6bd50dbaadfdea72c5"
+    },
+    {
+      "bytes": 3289,
+      "export_mode": "0o400",
+      "export_path": "sources/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/private-current-protected-packet-physical-prefix-and-typed-alias-overlap-proof.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/private-current-protected-packet-physical-prefix-and-typed-alias-overlap-proof.json",
+      "sha256": "e04c7b9b64686ddd1718ce10d0607316bacd3b586ecf6ac2d2c07a47c020ecf9"
+    },
+    {
+      "bytes": 6920,
+      "export_mode": "0o400",
+      "export_path": "sources/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/private-original-three-Toolkit-completion-full-inventory-and-observed-process-proof.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/private-original-three-Toolkit-completion-full-inventory-and-observed-process-proof.json",
+      "sha256": "5252b25bb563a88be1a0e2bf060b17635edf67709b6ba36cbee7d2bf2383e38d"
+    },
+    {
+      "bytes": 6442,
+      "export_mode": "0o444",
+      "export_path": "sources/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/root_once_three_Toolkit_basetemps_SOURCE_PREPARED.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/root_once_three_Toolkit_basetemps_SOURCE_PREPARED.py",
+      "sha256": "6993234c7b7ffb3f6e6e97266fbfa795e1bd46718d03e8398378a1b082ffab4f"
+    },
+    {
+      "bytes": 52201,
+      "export_mode": "0o600",
+      "export_path": "sources/pr308/action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+      "original_mode": "0o600",
+      "original_path": "/workspace/engineering/pr308/action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+      "sha256": "a30f9e585b8dc422dcf853ac27a2da2c11f84065e58ba501b0a4c32d4f472728"
+    },
+    {
+      "bytes": 2565,
+      "export_mode": "0o400",
+      "export_path": "sources/pr308-current8d49-Windows-private-portability-successor/OWNERFINAL-private-current8d49-Windows-portability-source-PROPOSAL.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/pr308-current8d49-Windows-private-portability-successor/OWNERFINAL-private-current8d49-Windows-portability-source-PROPOSAL.json",
+      "sha256": "ecb19ffb860b976a70f8394f0bff50a0b1ab469bee9d1f3ae4f71590bd70bc30"
+    },
+    {
+      "bytes": 548,
+      "export_mode": "0o400",
+      "export_path": "sources/pr308-current8d49-Windows-private-portability-successor/canonical-native-path-and-POSIX-feature-proposed.txt",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/pr308-current8d49-Windows-private-portability-successor/canonical-native-path-and-POSIX-feature-proposed.txt",
+      "sha256": "3169c416f55f972f5c8ec5bad7ef970a107fb55eae6778a315b40552c5949bfd"
+    },
+    {
+      "bytes": 7981,
+      "export_mode": "0o600",
+      "export_path": "sources/pr308-current8d49-Windows-private-portability-successor/prepare_private_patch_and_pure_controls.py",
+      "original_mode": "0o600",
+      "original_path": "/workspace/engineering/pr308-current8d49-Windows-private-portability-successor/prepare_private_patch_and_pure_controls.py",
+      "sha256": "d28cddf691920e1d169bae257b93d9f7543125e39d15908cd53ad3b6c17cc6fc"
+    },
+    {
+      "bytes": 989,
+      "export_mode": "0o400",
+      "export_path": "sources/pr308-current8d49-Windows-private-portability-successor/private-minimal-AST-scope-and-original-source-proof.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/pr308-current8d49-Windows-private-portability-successor/private-minimal-AST-scope-and-original-source-proof.json",
+      "sha256": "c15c46b3b00240b650ec1c119baf8acfa4b1a9d5a2df09fda53863b8108ce788"
+    },
+    {
+      "bytes": 1686,
+      "export_mode": "0o400",
+      "export_path": "sources/pr308-current8d49-Windows-private-portability-successor/private-pure-path-and-real-cache-helper-feature-controls.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/pr308-current8d49-Windows-private-portability-successor/private-pure-path-and-real-cache-helper-feature-controls.json",
+      "sha256": "1e47be93d792c4c1c6bbc900cdce208cd709e3db38254ac90c42a4fadd1199eb"
+    },
+    {
+      "bytes": 3827,
+      "export_mode": "0o400",
+      "export_path": "sources/pr308-current8d49-Windows-private-portability-successor/proposed-two-path-assertions-and-cache-owner-features.patch",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/pr308-current8d49-Windows-private-portability-successor/proposed-two-path-assertions-and-cache-owner-features.patch",
+      "sha256": "093cb7f29b354f0b64f0e971726b4426b99549997aa6cf5611f14dec75ddf404"
+    },
+    {
+      "bytes": 7787,
+      "export_mode": "0o400",
+      "export_path": "sources/rcc-current8d49-minimum-real-cleanup-observation-SOURCE-PREPARATION/OWNERFINAL-minimum-current8d49-real-native-reader-and-final-census-SOURCE-PREPARATION-HOLD.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/rcc-current8d49-minimum-real-cleanup-observation-SOURCE-PREPARATION/OWNERFINAL-minimum-current8d49-real-native-reader-and-final-census-SOURCE-PREPARATION-HOLD.json",
+      "sha256": "53a83fd7369099a0f706bee24268e7dc97efeca082847b6575efb65a7c9792ba"
+    },
+    {
+      "bytes": 784,
+      "export_mode": "0o400",
+      "export_path": "sources/rcc-current8d49-minimum-real-cleanup-observation-SOURCE-PREPARATION/canonical-original-reader-and-final-census-SOURCE-PREPARED-delta.md",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/rcc-current8d49-minimum-real-cleanup-observation-SOURCE-PREPARATION/canonical-original-reader-and-final-census-SOURCE-PREPARED-delta.md",
+      "sha256": "158683b01635f58ac26eb07f26c3bae50cc9a093103740fd431155f138fa8ce4"
+    },
+    {
+      "bytes": 5355,
+      "export_mode": "0o444",
+      "export_path": "sources/rcc-current8d49-minimum-real-cleanup-observation-SOURCE-PREPARATION/original-helper-owned-final-census-evidence-SOURCE-PREPARED.patch",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/rcc-current8d49-minimum-real-cleanup-observation-SOURCE-PREPARATION/original-helper-owned-final-census-evidence-SOURCE-PREPARED.patch",
+      "sha256": "8fb8bf8145916eca18d2b66ee63a5544e9a117145e2acf5f36cee8c6e78cbbc7"
+    },
+    {
+      "bytes": 2031,
+      "export_mode": "0o400",
+      "export_path": "sources/rcc-current8d49-minimum-real-cleanup-observation-SOURCE-PREPARATION/private-original-helper-evidence-patch-AST-proof.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/rcc-current8d49-minimum-real-cleanup-observation-SOURCE-PREPARATION/private-original-helper-evidence-patch-AST-proof.json",
+      "sha256": "cd8b2156581d7f6acbf71d7addad62a204141aaa1adc58bdd4a379d6de0f2bb2"
+    },
+    {
+      "bytes": 9222,
+      "export_mode": "0o444",
+      "export_path": "sources/rcc-current8d49-minimum-real-cleanup-observation-SOURCE-PREPARATION/retained_original_reader_observation_SOURCE_PREPARED.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/rcc-current8d49-minimum-real-cleanup-observation-SOURCE-PREPARATION/retained_original_reader_observation_SOURCE_PREPARED.py",
+      "sha256": "7ae89df57c45d27e22d3ea21a6e541faacb4bde29df226441dd80b52ba0ada29"
+    },
+    {
+      "bytes": 3103,
+      "export_mode": "0o400",
+      "export_path": "sources/rcc-current8d49-private-V8-real-fixture-mode-successor/OWNERFINAL-current8d49-private-V8-real-historical-snapshot-mode-successor-SOURCE_ONLY.json",
+      "original_mode": "0o400",
+      "original_path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/OWNERFINAL-current8d49-private-V8-real-historical-snapshot-mode-successor-SOURCE_ONLY.json",
+      "sha256": "aaf9610e671c1624ec62a3e3ac0d7287bca177d7f3eef09b966b54efd4f6d915"
+    },
+    {
+      "bytes": 27889,
+      "export_mode": "0o444",
+      "export_path": "sources/rcc-current8d49-private-V8-real-fixture-mode-successor/actual_transport_v8.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/actual_transport_v8.py",
+      "sha256": "33dda17140ef749e22f086cc91b92ed8c3230fddfde8a4a369769e2183f695a1"
+    },
+    {
+      "bytes": 11489,
+      "export_mode": "0o444",
+      "export_path": "sources/rcc-current8d49-private-V8-real-fixture-mode-successor/fixture_records_v8.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/fixture_records_v8.py",
+      "sha256": "7a63ee62184ea268dead0c98460c6943ebc297816e9a4df180b10ed5e04b9064"
+    },
+    {
+      "bytes": 48314,
+      "export_mode": "0o444",
+      "export_path": "sources/rcc-current8d49-private-V8-real-fixture-mode-successor/historical-e4ff-staged-fixture-exact-Git-blob.snapshot.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/historical-e4ff-staged-fixture-exact-Git-blob.snapshot.py",
+      "sha256": "af2f79ccd395c088076381f6681860cf8160f8fd0d9169e122634fe684c37c35"
+    },
+    {
+      "bytes": 6327,
+      "export_mode": "0o444",
+      "export_path": "sources/rcc-current8d49-private-V8-real-fixture-mode-successor/historical_binding_current8d49_v8.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/historical_binding_current8d49_v8.py",
+      "sha256": "6f64d55837cc4ff14ee4eec013314ba512c09ecdc56f79192c1360ef46473b30"
+    },
+    {
+      "bytes": 6228,
+      "export_mode": "0o444",
+      "export_path": "sources/rcc-current8d49-private-V8-real-fixture-mode-successor/owned_cache_policy_v8.py",
+      "original_mode": "0o444",
+      "original_path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/owned_cache_policy_v8.py",
+      "sha256": "4ccac4e3bd2c1e91352ef4e647968b4ca61f8691e1fc0f41e72a128a2942c205"
+    },
+    {
+      "bytes": 113,
+      "export_mode": "0o644",
+      "export_path": "native-fixture-exact-source-literals/package.yaml",
+      "literal_assignment_line": 281,
+      "original_path": "/workspace/engineering/pr308/action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+      "scope": "Exact source literal reconstituted by ast.literal_eval; not a recovered historical executed package or native qualification.",
+      "sha256": "e160d068efc17467d8c43174bca8676208e33914ca9fc45d815a43b81ddbed1e"
+    },
+    {
+      "bytes": 560,
+      "export_mode": "0o644",
+      "export_path": "native-fixture-exact-source-literals/action.py",
+      "literal_assignment_line": 286,
+      "original_path": "/workspace/engineering/pr308/action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+      "scope": "Exact source literal reconstituted by ast.literal_eval; not a recovered historical executed package or native qualification.",
+      "sha256": "a554f7395fa4254e36ca28780a0edff940f208ca7409dfedcd829193b31c3898"
+    }
+  ],
+  "limitations": "Absolute runtime paths need reviewed retarget/regeneration. Nested source/owner references are historic and may remain local-only. This export proves copied bytes, not acceptance or complete private-data migration.",
+  "local_only": [
+    {
+      "bytes": 6665360,
+      "path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/once4-toolkit-basetemp-private-exact-full-body-and-two-metadata-snapshots.json",
+      "reason": "Full inventory, large private configuration, raw result or non-source payload remains local; do not infer preserved nested physical bindings."
+    },
+    {
+      "bytes": 6660440,
+      "path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/once5-toolkit-basetemp-private-exact-full-body-and-two-metadata-snapshots.json",
+      "reason": "Full inventory, large private configuration, raw result or non-source payload remains local; do not infer preserved nested physical bindings."
+    },
+    {
+      "bytes": 6665360,
+      "path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/once6-toolkit-basetemp-private-exact-full-body-and-two-metadata-snapshots.json",
+      "reason": "Full inventory, large private configuration, raw result or non-source payload remains local; do not infer preserved nested physical bindings."
+    },
+    {
+      "bytes": 91408,
+      "path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/complete_declared_current9760_protected_inputs_and_typed_alias_manifest_SOURCE_PREPARED.json",
+      "reason": "Full inventory, large private configuration, raw result or non-source payload remains local; do not infer preserved nested physical bindings."
+    },
+    {
+      "bytes": 215,
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/initial-real-readonly-snapshot-missing-before-admission-FAIL.json",
+      "reason": "Full inventory, large private configuration, raw result or non-source payload remains local; do not infer preserved nested physical bindings."
+    },
+    {
+      "bytes": 1672,
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/real-readonly-historical-fixture-snapshot-and-current-live-admission-PASS.json",
+      "reason": "Full inventory, large private configuration, raw result or non-source payload remains local; do not infer preserved nested physical bindings."
+    }
+  ],
+  "preserved_statuses": {
+    "Windows093cb": "UNADOPTED private portability proposal; original current8d49 product sources unchanged.",
+    "native53a": "SOURCE preparation HOLD; controls/wiring/error-path census NOTRUN",
+    "observer_partial": "Only declared reader observer and helper patch exist. No additional unfinished fixture wiring was written.",
+    "pins": "Production18.19.3 unchanged; native baseline and newer versions not qualified by this export.",
+    "resource97bc": "SOURCE/PREEXEC NOTRUN pending independent review and ROOT release"
+  },
+  "schema": 1,
+  "status": "EMERGENCY_EXACT_SAFE_SOURCE_EXPORT_ONLY_NO_NEW_QUALIFICATION",
+  "upstream_disposition": "none"
+}

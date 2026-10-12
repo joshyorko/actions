@@ -1,0 +1,72 @@
+diff --git a/docs/skills/repository-operations.md b/docs/skills/repository-operations.md
+index c28fa6a1..5a330e7a 100644
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -207,6 +207,19 @@ not relabel red-before evidence with the repaired head. For authenticated
+ HTTP/browser comparisons, record whether each request supplied a synthetic
+ bearer; a successful bearer probe and an unauthorized browser request are
+ different subjects.
++
++Once a receipt binds an authored constructor or verifier by hash, preserve that
++exact file under an immutable name before editing it. Finalize the successor
++receipt and verify every binding before its owner announces the frozen Git tuple
++and the receipt's exact path, byte size and SHA-256 for reviewer dispatch. A file
++visible in a shared workspace during construction remains a draft observation
++until that announcement. If a bound authored file was overwritten, recover it
++from retained authored snapshots or tool-call text only when both its byte size
++and SHA-256 match the original binding. Write recovered bytes to a distinct
++private path; retain the original receipts and historical dispositions. Do not
++execute the constructor during recovery, rewrite old bindings, or infer missing
++logs and execution observations. Exact content recovery preserves the dependency;
++it does not retroactively admit the predecessor receipt.
+ When adding a dated program amendment, regenerate the current graph, ledger,
+ resume record and handoff through `scripts/project_community_execution_graph.py`.
+ The CLI regression fixture must copy the current amendment from its pointer
+@@ -2910,6 +2923,16 @@ sample times does not identify a preparation cause. Bind each original tested
+ merge and native artifact separately from a later source union; missing marks
+ cannot borrow another run's interval timings, and later observations cannot fill
+ historical cleanup fields.
++For watched MCP ownership handoffs between independently refreshed packages, a new
++candidate route being listed does not prove the previous package has relinquished
++its declarations. An assembled-catalog control can publish the new template while
++the old direct route remains listed and still validly serves the old owner. Wait
++for all intended candidate declarations and the absence of every old declaration
++before asserting historical-owner rejection. Keep callback nonexecution and
++unrelated-URI success checks. The two resource-list RPCs are separate observations;
++this barrier is not an atomic catalog snapshot, nor proof of a hosted failure's
++actual update order. Preserve deadlines and the original failed execution tuple.
++
+ 
+ The test-owned delivered-line observation uses the existing stdout/stderr
+ callbacks, without another pipe reader, flush, process action or readiness hook.
+@@ -3182,6 +3205,13 @@ merge identity separate from source and control even when their trees match.
+ Older control checks and raw receipts naming an older candidate do not qualify
+ a later target union.
+ 
++The reviewed generated RCC control admits the original opt-in branch
++`test/rcc-provider-rollback-hosted-20261010` and the existing reviewed PR branches
++`fix/rcc-published-artifact-details-20261010` and
++`fix/rcc-candidate-wheel-identities-20261010`, subject to its retained path filter.
++Local service-free control tests establish admission behavior; qualify each
++new hosted source/control execution separately and retain earlier tuples.
++
+ Keep wheel archive integrity separate from generated-content acceptance. Check
+ central-directory names, duplicates and containment before reading members;
+ count directory entries separately from the regular files covered by `RECORD`.
+@@ -3198,6 +3228,16 @@ integration head before that source union is actually admitted. Archive review
+ does not establish registry publication, installed-consumer behavior or native
+ acceptance.
+ 
++A platform artifact containing only Linux wheels does not satisfy the
++seven-artifact release inventory. A selected cp312 consumer has a distinct
++nonpublishing scope; retain its original ZIP, wheel, `METADATA`, `RECORD` and
++build identities while cross-platform inventory, tag and upload gates remain
++pending. After integration, compare the actual merge tree and selected tracked
++payload bytes with the build's synthetic tree. Tree equality does not turn that
++earlier synthetic checkout into an actual integration build. Derive the Python
++member count from the new wheel bytes even when it equals an earlier count,
++and retain generated-input authority and content holds separately.
++
+ The private Run output resolver locks its Workspace, checks the actor's grant
+ and acquires the provider reader within one transaction, then yields the reader
+ after the transaction exits. Revocation denies future acquisitions; reads on an

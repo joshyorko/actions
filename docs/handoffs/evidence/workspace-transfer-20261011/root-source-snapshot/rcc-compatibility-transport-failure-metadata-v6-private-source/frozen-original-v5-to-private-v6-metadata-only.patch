@@ -1,0 +1,164 @@
+--- a/actual_transport_v5.py
++++ b/actual_transport_v6.py
+@@ -13,6 +13,7 @@
+ import threading
+ import time
+ import types
++import traceback
+ from pathlib import Path
+ 
+ from fixture_records_v2 import publication_record, staged_record
+@@ -100,7 +101,44 @@
+                                        sampler_alive=self.thread.is_alive())
+ 
+ 
+-def execute_one(helper, observer, sampler, command, env, cwd, guard, retain_output):
++def original_helper_facts(payload, *, exception=False):
++    """Read only facts actually exposed by the pinned returned object/error.
++
++    The pinned helper does not expose final captured-child or reader facts.
++    Sampled outer observations are retained separately and cannot fill them.
++    """
++    return {
++        'source': 'original_exception' if exception else 'original_completed',
++        'cleanup_disposition': getattr(payload, 'cleanup_disposition', None),
++        'command_returncode': getattr(payload, 'command_returncode', None) if exception
++                              else getattr(payload, 'returncode', None),
++        'reaped_descendants': getattr(payload, 'reaped_descendants', None),
++        'captured_child_census': None,
++        'reader_join_facts': None,
++        'missing_facts_scope': 'UNKNOWN_NOT_EXPOSED_BY_PINNED_HELPER',
++    }
++
++
++def make_safe_result(result, *, supervisor_identity=None, command_identity=None,
++                     captured_processes=None):
++    """Retain already measured ownership on every primary/cleanup outcome."""
++    safe = {key: value for key, value in result.items() if key != 'completed'}
++    safe.update(owned_supervisor_identity=list(supervisor_identity) if supervisor_identity is not None else None,
++                owned_command_identity=list(command_identity) if command_identity is not None else None,
++                last_observed_process_tree=captured_processes)
++    return safe
++
++
++def require_transport_binding(config, path):
++    """A predecessor config/release cannot execute this named successor."""
++    path = Path(path).resolve()
++    rows = [row for row in config['bindings'] if row['path'] == str(path)]
++    need(len(rows) == 1, 'TRANSPORT_IMPLEMENTATION_UNBOUND')
++    read_bound(rows[0])
++
++
++def execute_one(helper, observer, sampler, command, env, cwd, guard, retain_output,
++                *, retain_exception=None):
+     """One original transport call; output failure never erases primary/cleanup."""
+     guard()
+     primary = {'code': 'COMMAND_COMPLETE', 'status': 'PASS'}
+@@ -111,6 +149,8 @@
+     retention_failure = None
+     post_guard_failure = None
+     marker = None
++    helper_facts = None
++    exception_retention_failure = None
+     helper.subprocess = observer
+     sampler.start()
+     try:
+@@ -118,6 +158,7 @@
+             completed = helper.run_owned_process(command, timeout_seconds=600, env=env,
+                                                   cwd=cwd, cleanup_grace_seconds=10)
+             command_returncode = completed.returncode
++            helper_facts = original_helper_facts(completed)
+             if completed.returncode != 0:
+                 primary = {'code': 'COMMAND_FAILED', 'status': 'FAIL'}
+             disposition = getattr(completed, 'cleanup_disposition', None)
+@@ -128,6 +169,15 @@
+             stdout, stderr = completed.stdout, completed.stderr
+         except Exception as error:
+             exception_class = type(error).__name__
++            helper_facts = original_helper_facts(error, exception=True)
++            if retain_exception is not None:
++                try:
++                    retain_exception({'exception_class': exception_class,
++                                      'message': str(error),
++                                      'traceback': ''.join(traceback.format_exception(type(error), error, error.__traceback__)),
++                                      'original_helper_facts': helper_facts})
++                except Exception as retention_error:
++                    exception_retention_failure = type(retention_error).__name__
+             primary = {'code': 'COMMAND_TIMEOUT' if isinstance(error, helper.subprocess.TimeoutExpired)
+                        else 'COMMAND_FAILED', 'status': 'FAIL'}
+             stdout = getattr(error, 'command_stdout', None) or getattr(error, 'stdout', None) or getattr(error, 'output', '') or ''
+@@ -152,7 +202,9 @@
+                 primary = {'code': 'ADMISSION_FAILED', 'status': 'FAIL'}
+     return {'outcome': combine_outcomes(primary, cleanup), 'completed': completed,
+             'command_returncode': command_returncode,
+-            'exception_class': exception_class, 'secondary_retention_failure_class': retention_failure,
++            'exception_class': exception_class, 'original_helper_facts': helper_facts,
++            'secondary_exception_retention_failure_class': exception_retention_failure,
++            'secondary_retention_failure_class': retention_failure,
+             'secondary_post_guard_failure_class': post_guard_failure,
+             'sampler_final': marker, 'sampler_scope': sampler.state.scope()}
+ 
+@@ -217,6 +269,7 @@
+     release_raw = Path(args.release).read_bytes()
+     need(content_sha(release_raw) == args.release_sha256, 'ROOT_RELEASE_CONTENT_IDENTITY')
+     require_release(config, parse_json_object(release_raw), args.config_sha256, args.label)
++    require_transport_binding(config, __file__)
+     import psutil
+     import subprocess
+     root = Path(config['owned_root'])
+@@ -289,12 +342,16 @@
+                           pytest_argv_sha256=content_sha(json.dumps(command, separators=(',', ':')).encode()),
+                           pytest_cwd=str(source_root / 'action_server'))
+     owned_command_identity = []
++    observed_supervisor_identity = []
++    last_observed_process_tree = []
+ 
+     def observe():
+         if not observer.ready.is_set():
+             return None
+         supervisor = psutil.Process(observer.wrapper.pid)
+         identity = (supervisor.pid, supervisor.create_time())
++        if not observed_supervisor_identity:
++            observed_supervisor_identity.append(identity)
+         if state.supervisor_identity == (1, 1.0):
+             state.supervisor_identity = identity
+         need(state.supervisor_identity == identity, 'SUPERVISOR_IDENTITY_CHANGED')
+@@ -306,6 +363,12 @@
+                                  'cwd': process.cwd(), 'live': process.is_running(), 'zombie': process.status() == psutil.STATUS_ZOMBIE})
+             except psutil.NoSuchProcess:
+                 continue
++        last_observed_process_tree[:] = [{
++            'stage': 'sampled_only', 'sample_count_before': state.samples,
++            'captured_count': len(captures), 'retained_count': min(len(captures), 64),
++            'truncated': len(captures) > 64, 'complete_census': False,
++            'entries': [dict(row) for row in captures[:64]],
++        }]
+         try:
+             command_identity = select_owned_pytest(captures, identity, state.pytest_argv_sha256, state.pytest_cwd)
+             if not owned_command_identity:
+@@ -331,16 +394,21 @@
+     def retain(stdout, stderr):
+         for name, data in [('original-command.stdout', stdout), ('original-command.stderr', stderr)]:
+             private_write(root / name, data if type(data) is bytes else data.encode('utf-8'))
+-    result = execute_one(helper, observer, sampler, command, child, source_root / 'action_server', guard, retain)
+-    safe = {key: value for key, value in result.items() if key != 'completed'}
++    def retain_error(details):
++        private_write(root / 'original-helper-exception-details.private.json',
++                      (json.dumps(details, indent=2, sort_keys=True) + '\n').encode())
++    result = execute_one(helper, observer, sampler, command, child, source_root / 'action_server', guard, retain,
++                         retain_exception=retain_error)
++    safe = make_safe_result(result,
++                            supervisor_identity=observed_supervisor_identity[0] if observed_supervisor_identity else None,
++                            command_identity=owned_command_identity[0] if owned_command_identity else None,
++                            captured_processes=last_observed_process_tree[0] if last_observed_process_tree else None)
+     safe.update(label=args.label, source=SOURCE, tree=TREE, status='FAIL',
+                 scope='two-case artifact/action/lease/typed cleanup; internal worker readers UNAVAILABLE/HOLD',
+                 config_sha256=args.config_sha256)
+     try:
+         need(result['outcome']['status'] == 'PASS', 'OUTER_PRIMARY_OR_CLEANUP_FAILED')
+         need(len(owned_command_identity) == 1, 'OWNED_COMMAND_OBSERVATION_REQUIRED')
+-        safe['owned_command_identity'] = list(owned_command_identity[0])
+-        safe['owned_supervisor_identity'] = list(state.supervisor_identity)
+         validate_final_sampler_markers([result['sampler_final']])
+         junit = validate_junit((root / 'junit.xml').read_bytes())
+         expected = dict(config['fixture_expected'])

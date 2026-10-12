@@ -1,0 +1,157 @@
+{
+  "schema": 1,
+  "status": "CONCRETE_MEMORY17_PURE_PREEXECUTION_NOTRUN",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "config": {
+    "path": "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/FROZEN-memory17-pure-control-config-NOTRUN-v2.json",
+    "bytes": 7739,
+    "sha256": "e90827940b61e3ddb906ff0576a2ea37cd6ee7297986cc78c62844f5a888b402",
+    "mode": "0o400"
+  },
+  "launcher": {
+    "path": "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/root_release_one_memory17_pure_controls_NOTRUN.py",
+    "bytes": 7361,
+    "sha256": "68d230410d0ff42f3c65dea09c0cd5e5b191a24e70ad3871efbb5dd2bf8201b0",
+    "mode": "0o400"
+  },
+  "argv_template": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "420s",
+    "bash",
+    "-c",
+    "export PATH=\"/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\"; source /workspace/actions-cloud/activate.sh && exec \"$@\"",
+    "memory17-managed-once",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/root_release_one_memory17_pure_controls_NOTRUN.py",
+    "--phase",
+    "launch",
+    "--config",
+    "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/FROZEN-memory17-pure-control-config-NOTRUN-v2.json",
+    "--config-sha256",
+    "e90827940b61e3ddb906ff0576a2ea37cd6ee7297986cc78c62844f5a888b402",
+    "--release",
+    "/workspace/engineering/root-one-memory17-pure-controls-release.json",
+    "--release-sha256",
+    "ROOT_DISTINCT_HASH_REQUIRED_NOT_GRANTED"
+  ],
+  "root_once": "/workspace/engineering/root-one-memory17-pure-controls-20261011-1",
+  "root_release_expected": {
+    "schema": 1,
+    "status": "ROOT_RELEASE_ONE_MEMORY17_PURE_CONTROLS",
+    "config_sha256": "e90827940b61e3ddb906ff0576a2ea37cd6ee7297986cc78c62844f5a888b402",
+    "launcher_sha256": "68d230410d0ff42f3c65dea09c0cd5e5b191a24e70ad3871efbb5dd2bf8201b0",
+    "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+    "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+    "root": "/workspace/engineering/root-one-memory17-pure-controls-20261011-1",
+    "serialized_no_other_heavy_or_storage_mutations": true,
+    "independent_review": "REAL_BINDING_REQUIRED"
+  },
+  "independent_review_topfields_required": {
+    "schema": 1,
+    "status": "INDEPENDENT_MEMORY17_PURE_PREEXECUTION_GO",
+    "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+    "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+    "config_sha256": "e90827940b61e3ddb906ff0576a2ea37cd6ee7297986cc78c62844f5a888b402",
+    "launcher_sha256": "68d230410d0ff42f3c65dea09c0cd5e5b191a24e70ad3871efbb5dd2bf8201b0"
+  },
+  "proof_scope": "stdlib AST parse only; no imports/tests/native/version calls/gateway or future memory-policy adoption",
+  "original_bindings": [
+    {
+      "path": "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/root_release_one_memory17_pure_controls_NOTRUN.py",
+      "bytes": 7361,
+      "sha256": "68d230410d0ff42f3c65dea09c0cd5e5b191a24e70ad3871efbb5dd2bf8201b0",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/test_proposed_cgroup_memory_state_NOTRUN.py",
+      "bytes": 2985,
+      "sha256": "3b3a417379f608b6a5917c7720c6e846352f88d30fda1273c301a7c5ced1a4cb",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/proposed_cgroup_memory_state_v1_NOTRUN.py",
+      "bytes": 3330,
+      "sha256": "d2b3e6684898ab1b64f84ac7712a1f2f355d7ea5d680eb6ded0699cc090f5260",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+      "bytes": 765564,
+      "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/frozen-current8d49-source-LIGHT-inputs-v3.json",
+      "bytes": 12996,
+      "sha256": "81f52920b50e67619b3bb418a7c1034a2106ec52f4badd71b9d85e29b7376820",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/actions-cloud/activate.sh",
+      "bytes": 987,
+      "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/initial-metadata-construction-PATH-variable-expression-FAIL.json",
+      "bytes": 444,
+      "sha256": "8f796eb0414c996936abf5bacd6da17778e9fb4f371089aed76a81fc71c1ad5d",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/readonly_current_input_guard_v9.py",
+      "bytes": 4690,
+      "sha256": "480be06317562b7e3a5c98a5d794bb5d2a33e7fa6186fe707823ecb1cc583626",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/v9_entry_bootstrap.py",
+      "bytes": 1575,
+      "sha256": "d3957c2e216731abf596897fbf0838809129a571743510692f2509228e2c7288",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-next-native-memory-plan-independent-review/OWNERFINAL-independent-memory17-prepared-source-and-executable-HOLD-v2.json",
+      "bytes": 6603,
+      "sha256": "d7068aab83b03c9495e5bd80a93ca750b7d66df818fee93869b5b52b3fd66ece",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-control3-V9-original-publish-failure-diagnosis-owned/OWNERFINAL-original-current8d49-control3-V9-publication-failure-and-secondary-dependency-only.json",
+      "bytes": 5944,
+      "sha256": "feef7c4b07db2d3a778622dc1acf3eec00a8225c42b38aa00721926fb273410b",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-control3-V9-independent-actual-review/OWNERFINAL-independent-original-current8d49-control3-V9-native-FAIL-STOP-review.json",
+      "bytes": 6858,
+      "sha256": "cb88815f6d1816ff7f8b5302420d69bd7cacb0d052fe2ba3c957ddad5e596168",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/canonical-shared-cgroup-headroom-vs-filesystem-capacity-proposed.md",
+      "bytes": 900,
+      "sha256": "8c28fc2596c6fdfc607dd35a17b3462ad217ba97670b61222393dc504861d896",
+      "mode": "0o400"
+    }
+  ],
+  "all_outcome_capture": "private0600 O_EXCL + fsync file and parent; completed stdout/stderr/returncode retained before alwayspost; terminal process result needs independent original JUnit17 census",
+  "limits": "existing V9 guard current1440/prepared30/own5/native1192/308old aliases/temporal2 before+after; parent420TERM10 encloses pre120/primary120TERM10/post120; root+child paths uniqueABSENT; no inheritedADDOPTS",
+  "preparation_failure_retained": {
+    "path": "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/initial-metadata-construction-PATH-variable-expression-FAIL.json",
+    "bytes": 444,
+    "sha256": "8f796eb0414c996936abf5bacd6da17778e9fb4f371089aed76a81fc71c1ad5d",
+    "mode": "0o400"
+  },
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; reuse exact900B/8c28fc shared-cgroup memory/profile-scope paragraph",
+    "Durable_learning_captured": "concrete pure-controls argv/entry/origin/logger/stdio/once-root contract required before testing proposed memory logic",
+    "Evidence": "d706 executableHOLD and unchanged17case source bound; real input/proposal exact, no gate executed",
+    "Stale_or_ambiguous_guidance_removed": "source/design only does not authorize controls; successful pure controls would not calibrate cold-solver memory needs or attribute original kill",
+    "Remaining_uncertainty": "pure17 NOTRUN; integrated memory sampler/owned-stop controls/calibration/native gates remainHOLD"
+  },
+  "upstream_disposition": "none"
+}

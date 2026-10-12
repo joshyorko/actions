@@ -1,0 +1,1265 @@
+{
+  "schema": 1,
+  "owner_announced_at_UTC": "2026-10-11T15:55:20.476488+00:00",
+  "decision": "HOLD_CURRENT_A54_FULL_CI_AND_RELEASE_WITH_READY_ARTIFACT_METADATA_ONLY",
+  "PR": 221,
+  "source": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+  "source_tree": "47a1e4fceb22fd15eaee1ca380ad6c005abfdde6",
+  "source_ordered_parents": [
+    "e3c29cde8878307912e55ed09b6436c0f91d06d5",
+    "ec70a2928461941c129b1c05332dc441070e0184"
+  ],
+  "PR_base": "a70993fafc99a9f94041485542d5a720797ca394",
+  "draft": true,
+  "bracketed_named_refs_stable": true,
+  "declared_eligible_PR_workflows": 13,
+  "declared_and_observed_jobs_checks": 34,
+  "check_job_counts": {
+    "success": 30,
+    "expected_skipped": 1,
+    "in_progress": 3,
+    "failed": 0
+  },
+  "pending_job_ids": [
+    114505954849,
+    114505955022,
+    114505955100
+  ],
+  "pending_names": [
+    "build (windows-py3.12-devmode)",
+    "build (ubuntu-py3.12-devmode)",
+    "build (macos-py3.12-devmode)"
+  ],
+  "expected_skip": {
+    "id": 114506185205,
+    "workflow": ".github/workflows/work_items_release.yml",
+    "condition": "Work Items publish job requires refs/tags/actions-work-items-*; observed pull_request skip preserved"
+  },
+  "empty_commit_statuses": true,
+  "no_aux_push_run_observed": true,
+  "current_source_workflow_filter_matrix_needs_proof": {
+    "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-source-current-a54-exact-workflow-filter-matrix-needs-proof.json",
+    "bytes": 64786,
+    "sha256": "f2ea636b3b2fea1288fa2855f92c3b03f0278c01f94db06af9378693b7d77385",
+    "mode": "0o600"
+  },
+  "current_runs_jobs": [
+    {
+      "workflow": ".github/workflows/ai-audit.yml",
+      "run_id": 38151577830,
+      "event": "pull_request",
+      "head_sha": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+      "declared_jobs": 1,
+      "observed_jobs": 1,
+      "run_status": "completed",
+      "run_conclusion": "success",
+      "jobs": [
+        {
+          "id": 114505955079,
+          "name": "audit",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "needs": {
+        "audit": []
+      }
+    },
+    {
+      "workflow": ".github/workflows/lighthouse.yml",
+      "run_id": 38151577782,
+      "event": "pull_request",
+      "head_sha": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+      "declared_jobs": 1,
+      "observed_jobs": 1,
+      "run_status": "completed",
+      "run_conclusion": "success",
+      "jobs": [
+        {
+          "id": 114505954681,
+          "name": "lighthouse",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "needs": {
+        "lighthouse": []
+      }
+    },
+    {
+      "workflow": ".github/workflows/work_items_release.yml",
+      "run_id": 38151577814,
+      "event": "pull_request",
+      "head_sha": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+      "declared_jobs": 2,
+      "observed_jobs": 2,
+      "run_status": "completed",
+      "run_conclusion": "success",
+      "jobs": [
+        {
+          "id": 114505954747,
+          "name": "verify",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114506185205,
+          "name": "publish",
+          "status": "completed",
+          "conclusion": "skipped"
+        }
+      ],
+      "needs": {
+        "verify": [],
+        "publish": "verify"
+      }
+    },
+    {
+      "workflow": ".github/workflows/action_server_frontend_tests.yml",
+      "run_id": 38151577748,
+      "event": "pull_request",
+      "head_sha": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+      "declared_jobs": 1,
+      "observed_jobs": 1,
+      "run_status": "completed",
+      "run_conclusion": "success",
+      "jobs": [
+        {
+          "id": 114505954264,
+          "name": "action-server-frontend-tests",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "needs": {
+        "action-server-frontend-tests": []
+      }
+    },
+    {
+      "workflow": ".github/workflows/actions_runtime_tests.yml",
+      "run_id": 38151577832,
+      "event": "pull_request",
+      "head_sha": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+      "declared_jobs": 3,
+      "observed_jobs": 3,
+      "run_status": "in_progress",
+      "run_conclusion": null,
+      "jobs": [
+        {
+          "id": 114505954849,
+          "name": "build (windows-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 114505955022,
+          "name": "build (ubuntu-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 114505955100,
+          "name": "build (macos-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null
+        }
+      ],
+      "needs": {
+        "build": []
+      }
+    },
+    {
+      "workflow": ".github/workflows/frontend-build.yml",
+      "run_id": 38151577867,
+      "event": "pull_request",
+      "head_sha": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+      "declared_jobs": 3,
+      "observed_jobs": 3,
+      "run_status": "completed",
+      "run_conclusion": "success",
+      "jobs": [
+        {
+          "id": 114505955024,
+          "name": "build (ubuntu-latest)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114505955130,
+          "name": "build (macos-latest)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114505955205,
+          "name": "build (windows-latest)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "needs": {
+        "build": []
+      }
+    },
+    {
+      "workflow": ".github/workflows/copilot-setup-steps.yml",
+      "run_id": 38151577745,
+      "event": "pull_request",
+      "head_sha": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+      "declared_jobs": 1,
+      "observed_jobs": 1,
+      "run_status": "completed",
+      "run_conclusion": "success",
+      "jobs": [
+        {
+          "id": 114505954461,
+          "name": "copilot-setup-steps",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "needs": {
+        "copilot-setup-steps": []
+      }
+    },
+    {
+      "workflow": ".github/workflows/actions_core_tests.yml",
+      "run_id": 38151577819,
+      "event": "pull_request",
+      "head_sha": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+      "declared_jobs": 4,
+      "observed_jobs": 4,
+      "run_status": "completed",
+      "run_conclusion": "success",
+      "jobs": [
+        {
+          "id": 114505954602,
+          "name": "candidate-wheel",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114505954794,
+          "name": "build (ubuntu-py3.10-devmode)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114505954845,
+          "name": "build (windows-py3.10-devmode)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114505954862,
+          "name": "build (macos-py3.10-devmode)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "needs": {
+        "build": [],
+        "candidate-wheel": []
+      }
+    },
+    {
+      "workflow": ".github/workflows/http_helper_tests.yml",
+      "run_id": 38151577820,
+      "event": "pull_request",
+      "head_sha": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+      "declared_jobs": 3,
+      "observed_jobs": 3,
+      "run_status": "completed",
+      "run_conclusion": "success",
+      "jobs": [
+        {
+          "id": 114505954801,
+          "name": "build (macos-py3.10-devmode)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114505954922,
+          "name": "build (windows-py3.10-devmode)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114505954931,
+          "name": "build (ubuntu-py3.10-devmode)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "needs": {
+        "build": []
+      }
+    },
+    {
+      "workflow": ".github/workflows/actions_runtime_pypi_release.yml",
+      "run_id": 38151577738,
+      "event": "pull_request",
+      "head_sha": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+      "declared_jobs": 5,
+      "observed_jobs": 5,
+      "run_status": "completed",
+      "run_conclusion": "success",
+      "jobs": [
+        {
+          "id": 114505954595,
+          "name": "build-sdist (ubuntu-py3.12)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114505954669,
+          "name": "build-wheels (ubuntu-22.04)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114505954718,
+          "name": "build-wheels (macos-15)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114505954799,
+          "name": "build-wheels (windows-2022)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114507030652,
+          "name": "publish (3.12)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "needs": {
+        "build-sdist": [],
+        "build-wheels": [],
+        "publish": [
+          "build-sdist",
+          "build-wheels"
+        ]
+      }
+    },
+    {
+      "workflow": ".github/workflows/frontend-build-unauthenticated.yml",
+      "run_id": 38151577761,
+      "event": "pull_request",
+      "head_sha": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+      "declared_jobs": 3,
+      "observed_jobs": 3,
+      "run_status": "completed",
+      "run_conclusion": "success",
+      "jobs": [
+        {
+          "id": 114505954650,
+          "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114505954785,
+          "name": "Build Action Server binary without credentials (macos-15)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114505954787,
+          "name": "Build Action Server binary without credentials (windows-2022)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "needs": {
+        "build-external": []
+      }
+    },
+    {
+      "workflow": ".github/workflows/coverage-gate.yml",
+      "run_id": 38151577948,
+      "event": "pull_request",
+      "head_sha": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+      "declared_jobs": 1,
+      "observed_jobs": 1,
+      "run_status": "completed",
+      "run_conclusion": "success",
+      "jobs": [
+        {
+          "id": 114505955230,
+          "name": "coverage",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "needs": {
+        "coverage": []
+      }
+    },
+    {
+      "workflow": ".github/workflows/developer_toolkit.yml",
+      "run_id": 38151577744,
+      "event": "pull_request",
+      "head_sha": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+      "declared_jobs": 6,
+      "observed_jobs": 6,
+      "run_status": "completed",
+      "run_conclusion": "success",
+      "jobs": [
+        {
+          "id": 114505954562,
+          "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114505954687,
+          "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114505954752,
+          "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114505954768,
+          "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114505954776,
+          "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114505954782,
+          "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "needs": {
+        "toolkit": []
+      }
+    }
+  ],
+  "available_Runtime_release_artifact_metadata": [
+    {
+      "artifact_id": 11707270340,
+      "name": "action-server-dist",
+      "ZIP_size_API_bytes": 1023144,
+      "ZIP_digest_API": "sha256:a18839d378c8ee36bc30198ea98e9a63a6bdde2c04833d4f66792f5f645acdfc",
+      "expired": false,
+      "run_id": 38151577738,
+      "source_head": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+      "declared_producer_job_id": 114505954595,
+      "declared_producer_job_name": "build-sdist (ubuntu-py3.12)",
+      "producer_job_status": "completed",
+      "producer_job_conclusion": "success",
+      "association_limit": "upload name/job step source contract plus run/artifact metadata; original checkout/log not acquired"
+    },
+    {
+      "artifact_id": 11707091318,
+      "name": "Windows-wheels",
+      "ZIP_size_API_bytes": 23199374,
+      "ZIP_digest_API": "sha256:d3afe2e3b8cfae19c9cf0a8671d5091a44be4398a319ce2a8d701ae6f76cb863",
+      "expired": false,
+      "run_id": 38151577738,
+      "source_head": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+      "declared_producer_job_id": 114505954799,
+      "declared_producer_job_name": "build-wheels (windows-2022)",
+      "producer_job_status": "completed",
+      "producer_job_conclusion": "success",
+      "association_limit": "upload name/job step source contract plus run/artifact metadata; original checkout/log not acquired"
+    },
+    {
+      "artifact_id": 11707021540,
+      "name": "actions-runtime-dist",
+      "ZIP_size_API_bytes": 78972874,
+      "ZIP_digest_API": "sha256:9d2f6717a6a8a6da12dfed34b984e815f5ec2a75e4622330ab8f06109868775c",
+      "expired": false,
+      "run_id": 38151577738,
+      "source_head": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+      "declared_producer_job_id": 114507030652,
+      "declared_producer_job_name": "publish (3.12)",
+      "producer_job_status": "completed",
+      "producer_job_conclusion": "success",
+      "association_limit": "upload name/job step source contract plus run/artifact metadata; original checkout/log not acquired"
+    },
+    {
+      "artifact_id": 11706791771,
+      "name": "macOS-wheels",
+      "ZIP_size_API_bytes": 26445730,
+      "ZIP_digest_API": "sha256:d89e2d30b692c0974b4e4c2638a4e2e5321144ebfcbb9f19075cddb265e02d93",
+      "expired": false,
+      "run_id": 38151577738,
+      "source_head": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+      "declared_producer_job_id": 114505954718,
+      "declared_producer_job_name": "build-wheels (macos-15)",
+      "producer_job_status": "completed",
+      "producer_job_conclusion": "success",
+      "association_limit": "upload name/job step source contract plus run/artifact metadata; original checkout/log not acquired"
+    },
+    {
+      "artifact_id": 11706722331,
+      "name": "Linux-wheels",
+      "ZIP_size_API_bytes": 28304147,
+      "ZIP_digest_API": "sha256:f451fa2c30e23f1b1bbba02388842dc969fcf870e01f93b601f2ebbfae264f3a",
+      "expired": false,
+      "run_id": 38151577738,
+      "source_head": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+      "declared_producer_job_id": 114505954669,
+      "declared_producer_job_name": "build-wheels (ubuntu-22.04)",
+      "producer_job_status": "completed",
+      "producer_job_conclusion": "success",
+      "association_limit": "upload name/job step source contract plus run/artifact metadata; original checkout/log not acquired"
+    }
+  ],
+  "ready_reuse_candidate": {
+    "artifact_id": 11707021540,
+    "name": "actions-runtime-dist",
+    "ZIP_size_API_bytes": 78972874,
+    "ZIP_digest_API": "sha256:9d2f6717a6a8a6da12dfed34b984e815f5ec2a75e4622330ab8f06109868775c",
+    "expired": false,
+    "run_id": 38151577738,
+    "source_head": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+    "declared_producer_job_id": 114507030652,
+    "declared_producer_job_name": "publish (3.12)",
+    "producer_job_status": "completed",
+    "producer_job_conclusion": "success",
+    "association_limit": "upload name/job step source contract plus run/artifact metadata; original checkout/log not acquired"
+  },
+  "intended_synthetic_build": {
+    "sha": "188573163169e94474a424baacd5386ed4bcc366",
+    "ordered_parents": [
+      "a70993fafc99a9f94041485542d5a720797ca394",
+      "a54c982462d1e7ad011d8152bfc299d997503fb3"
+    ],
+    "tree": "47a1e4fceb22fd15eaee1ca380ad6c005abfdde6",
+    "API_tree_equals_actual_source_tree": true,
+    "actual_producer_checkout": "UNKNOWN_NO_ORIGINAL_LOG_ACQUIRED"
+  },
+  "current_source_package": {
+    "tracked_leaves": 216,
+    "tracked_Python": 202,
+    "nonPython": 14,
+    "wholewheel_actual_members_RECORDownership_generated_bytes": "UNKNOWN_NO_ARTIFACT_ACQUISITION",
+    "source_proof": {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-current-a54-tracked-runtime-package-and-helper-source-identities.json",
+      "bytes": 66116,
+      "sha256": "78b70ec5fd0d4512d453b965557770c990e333629bd38ac23834af47f16e8410",
+      "mode": "0o600"
+    }
+  },
+  "next_bounded_engineering_step": {
+    "first": "Root-authorized ONE original aggregate artifact11707021540 plus original Linux job114505954669 and publisher114507030652 logs, private exclusive paths; measure original compressed bytes/API digest and7 artifact+manifest inventory/source checkout before consumer admission. No acquisition performed by this lane.",
+    "reuse": "Existing exact publish_verified_runtime.py dist-dir dry-run admission, unchanged public floor Core1.0.2/Helper1.0.3 install/verify and existing wholewheel/private-Core member guard; no replacement helper or rebuild.",
+    "selection": "Derive new measured Linuxcp312 wheel/manifest pair from original aggregate bytes into its own exclusive platform directory, preserve mixed original aggregate; strict existing selector must reject foreign cp312.",
+    "identity": "Derive actual fresh wheel membership/RECORD and source/Git bindings from currenta54 and measured archive. Retain builder synthetic188573 separately; no215/202-wheel-count/e766/618 proof carry.",
+    "execute": "Only after immutable runner/argv/activation inputs/cleanup and independent preexecution GO plus distinct root capacity/serialization ONE authorization; reuse595worker/600incl5cleanup/645outer+10 installed-consumer envelope, fresh outside-checkout venv/public fixedURLSHA/pipcheck/CLI/wholemember/privateCore/origin receipts.",
+    "limits": "Installed Linux consumer only; all other platforms/generatedOAuth authority/native/private/sourcefullCI/tag/publication/release remain separate."
+  },
+  "retained_historical_scopes": {
+    "previous_e3_and_618_proofs": "HISTORICAL_ONLY",
+    "older_current33_success1_skip": "NOT_CARRIED",
+    "previous_empty_OAuth": "retained original defect/hold, current generated values uninspected; successful metadata step is not source authority or nonempty evidence",
+    "issues132_133_134_139_143": "preserved; no qualification/closure upgrade"
+  },
+  "original_CLI_collection_setup_failure": {
+    "initial3_paginated_commands": "local gh unsupported --slurp flag, no API request/raw result bytes; preserved empty stdout/private stderr",
+    "named_successor": "v2 --paginate plus stdlib complete original JSON stream decoding; first successful endpoint sampling, no pending poll"
+  },
+  "private_original_API_bindings": [
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577738.decoded-pages.json",
+      "bytes": 4633,
+      "sha256": "2f3dbf2606293cea91cfc095dcfa87f179ab8bfcadd483e66062e658277a27c3",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577738.original.json",
+      "bytes": 3591,
+      "sha256": "25f8ca8664d834d38825f687e90827b7e4153f4f12d009464bbc382b950f8d7a",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577738.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577744.decoded-pages.json",
+      "bytes": 54,
+      "sha256": "e37ba7ec8d5c087245f4b4c44bb380cfdec5a188e050a8c9d6ce003450b5443e",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577744.original.json",
+      "bytes": 32,
+      "sha256": "244563f989470892c537c9a4622920af0d228ee4528f7d00c64a06d6cd95856c",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577744.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577745.decoded-pages.json",
+      "bytes": 54,
+      "sha256": "e37ba7ec8d5c087245f4b4c44bb380cfdec5a188e050a8c9d6ce003450b5443e",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577745.original.json",
+      "bytes": 32,
+      "sha256": "244563f989470892c537c9a4622920af0d228ee4528f7d00c64a06d6cd95856c",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577745.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577748.decoded-pages.json",
+      "bytes": 54,
+      "sha256": "e37ba7ec8d5c087245f4b4c44bb380cfdec5a188e050a8c9d6ce003450b5443e",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577748.original.json",
+      "bytes": 32,
+      "sha256": "244563f989470892c537c9a4622920af0d228ee4528f7d00c64a06d6cd95856c",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577748.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577761.decoded-pages.json",
+      "bytes": 11488,
+      "sha256": "37adce6207b6b11c82568545c48973147c85d0abf8e2d74ff120eebb1224b2a0",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577761.original.json",
+      "bytes": 9025,
+      "sha256": "c41832d13e65956f87af29503a7913397645d2f9252b9b7fd7c68911ea132fc4",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577761.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577782.decoded-pages.json",
+      "bytes": 54,
+      "sha256": "e37ba7ec8d5c087245f4b4c44bb380cfdec5a188e050a8c9d6ce003450b5443e",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577782.original.json",
+      "bytes": 32,
+      "sha256": "244563f989470892c537c9a4622920af0d228ee4528f7d00c64a06d6cd95856c",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577782.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577814.decoded-pages.json",
+      "bytes": 979,
+      "sha256": "bc46841755a57cd2f3e7607f4e9f300249f35a9d17cad71a3c2fb25c77b0de0d",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577814.original.json",
+      "bytes": 749,
+      "sha256": "3a7c67a98414b891bbc0fb237028e15fcfda31927e42bad3f66c87b751e70612",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577814.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577819.decoded-pages.json",
+      "bytes": 983,
+      "sha256": "4da0cb6ec59a564f3edeaeff15d2bcb58a4c7a8bff110c49aa09b6c1ac794ad2",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577819.original.json",
+      "bytes": 753,
+      "sha256": "75c3c0019837d12f312f109c23b26b234ea9756998ad303c52f2ba2024b87e5c",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577819.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577820.decoded-pages.json",
+      "bytes": 54,
+      "sha256": "e37ba7ec8d5c087245f4b4c44bb380cfdec5a188e050a8c9d6ce003450b5443e",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577820.original.json",
+      "bytes": 32,
+      "sha256": "244563f989470892c537c9a4622920af0d228ee4528f7d00c64a06d6cd95856c",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577820.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577830.decoded-pages.json",
+      "bytes": 970,
+      "sha256": "3b57a4bb76f2f873b5d9c0cbcb606956e2f93c37919f1b85fa174d9791ac0ebb",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577830.original.json",
+      "bytes": 740,
+      "sha256": "c07c6f629459d66076364f1c3f425cbfe770d46bb695d2f878ceef0445afb5d0",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577830.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577832.decoded-pages.json",
+      "bytes": 2832,
+      "sha256": "78806debf6fdfb365abc03e25b1249ddaa5678d6164c14a82d1b44ff15e41f2f",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577832.original.json",
+      "bytes": 2196,
+      "sha256": "8ce8cbefe6e2ae6f62823f6d37fe48a1ed411ee115fd56a345b4d95117f1475c",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577832.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577867.decoded-pages.json",
+      "bytes": 2965,
+      "sha256": "5eedc199a476a076705ee1724700c96f0a400742344e8fb6809fcd26ab316549",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577867.original.json",
+      "bytes": 2329,
+      "sha256": "015da5757720991fb74e56b630d53c458024e8e9d6d2bc460905c4c583f2b3b6",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577867.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577948.decoded-pages.json",
+      "bytes": 980,
+      "sha256": "d03e3dfe693bb9ed6759e72473e4ea150c487924df09e2a4900cddcf223f5f50",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577948.original.json",
+      "bytes": 750,
+      "sha256": "56b30997d60395c9ffbacba181f5297359180ff9bdcd30909dcd6e7bd9ae8f77",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/artifacts-run-38151577948.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/base-ref-begin.json",
+      "bytes": 349,
+      "sha256": "e942c39796358320842ace1f28306132cdcfc247d97656ad5dca57134565bea3",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/base-ref-begin.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/base-ref-end.json",
+      "bytes": 349,
+      "sha256": "e942c39796358320842ace1f28306132cdcfc247d97656ad5dca57134565bea3",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/base-ref-end.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/checks-v2.decoded-pages.json",
+      "bytes": 182406,
+      "sha256": "2f4b15a59031441427d035b5fac2012a7cdabf06e38f528a66ed2bf1d50191bf",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/checks-v2.original.json",
+      "bytes": 120994,
+      "sha256": "a9183ba88f84ef2611a55d7a76a0a59b1087dc0a151408aeb47831687a056bf8",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/checks-v2.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/checks.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/checks.private.stderr",
+      "bytes": 1249,
+      "sha256": "8fbdf01d7bfc79357ac4103cac53e183b4d56414792487feadb6ab4e69c935ae",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/combined-status-v2.decoded-pages.json",
+      "bytes": 5122,
+      "sha256": "8e7aa5c67828dc53f13d93eeed8893894dfe9965f03b429c12972be839efb490",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/combined-status-v2.original.json",
+      "bytes": 4492,
+      "sha256": "b93641ac06062d7df82f506b0f3b2d769617316da1747d2f520c2d011cddf27b",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/combined-status-v2.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/combined-status.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/combined-status.private.stderr",
+      "bytes": 1249,
+      "sha256": "8fbdf01d7bfc79357ac4103cac53e183b4d56414792487feadb6ab4e69c935ae",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/head-commit.json",
+      "bytes": 2760,
+      "sha256": "6399f2f7dd7177c4278264a2ec2ac227c603acaf40ff3e4060780db12c833505",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/head-commit.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/head-ref-begin.json",
+      "bytes": 448,
+      "sha256": "af9cbd68597b9c1cfdb46ea56afafb0e366d28cf93a82910a2203c44acf0339d",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/head-ref-begin.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/head-ref-end.json",
+      "bytes": 448,
+      "sha256": "af9cbd68597b9c1cfdb46ea56afafb0e366d28cf93a82910a2203c44acf0339d",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/head-ref-end.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577738.decoded-pages.json",
+      "bytes": 36052,
+      "sha256": "54ee155869c0cda037a9e345688138cecb3779dea576292c013a6a5f796f5354",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577738.original.json",
+      "bytes": 23106,
+      "sha256": "85394c014e9ff646d32cd2f379eff32250edd9f6709fed722b97e89adfa0233c",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577738.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577744.decoded-pages.json",
+      "bytes": 30531,
+      "sha256": "7cb7bced9949e9a7b1f476d4ed5b27c24b45ddb33d78d4c1f514fd3d56753982",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577744.original.json",
+      "bytes": 19962,
+      "sha256": "5aedd1665b9c4ee2b9691709d7ae098fb080716b1117444a2c2d30432d196ea7",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577744.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577745.decoded-pages.json",
+      "bytes": 3662,
+      "sha256": "2b0da62356a7a596b9ff47b86a33be2b310fef3bf753d6445a760b0b1142b9bc",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577745.original.json",
+      "bytes": 2408,
+      "sha256": "a2f9d4e769c5026173c47b48056961ea90835deee6f066b851bd772da00bef55",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577745.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577748.decoded-pages.json",
+      "bytes": 4255,
+      "sha256": "02bf5238926dfee71c49b63e04c6a19b7d1d92b0987973e29b03c822a8a9f137",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577748.original.json",
+      "bytes": 2789,
+      "sha256": "dda57bb4e13d3d9345e44171ab6122acb21364951f9f61e1600e3ae0ae5810d4",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577748.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577761.decoded-pages.json",
+      "bytes": 35271,
+      "sha256": "539951a6f36c021b48263e677d18c0ed21fe28c84465f12419f4b696533e8448",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577761.original.json",
+      "bytes": 22659,
+      "sha256": "2ba4358bea8c20e27384f795d65e1e91044231deb245b72ae6c16d8e0ac85fc8",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577761.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577782.decoded-pages.json",
+      "bytes": 4126,
+      "sha256": "6e3f877eae77e685d87581c6bdfb6ee32b90b2022acb6c47b9040a81662a445c",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577782.original.json",
+      "bytes": 2660,
+      "sha256": "db720b9cba6489b96d462826757afce7fe65c45a74dda73378ae44c4b0ac17c3",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577782.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577814.decoded-pages.json",
+      "bytes": 6538,
+      "sha256": "8a510ef107c5722cd329af3c9d08e8b6852ba91dfb94cc1fbdc04a24e828925f",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577814.original.json",
+      "bytes": 4384,
+      "sha256": "172b2fed908bc561b6494c9776bf1b3348ceaf13a51fb803bbdcbddf3c4fd782",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577814.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577819.decoded-pages.json",
+      "bytes": 22032,
+      "sha256": "432b69399964b9505df7863f0891cf3c41fee848b038176201e49af0494a3c89",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577819.original.json",
+      "bytes": 14235,
+      "sha256": "0028412babed63dd46a11e54afa96645ccd5d5608bc43b1b9cc2217e735b5631",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577819.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577820.decoded-pages.json",
+      "bytes": 15163,
+      "sha256": "924756f52eb4019ccd3f92e7a3683e062ab5b49ea48006d66edbfe4d9c3987c5",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577820.original.json",
+      "bytes": 9865,
+      "sha256": "dc0417af24574e14afa08e8ab3d2122b5c0ef2b9a79cf5f6023c4d56aaf2442d",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577820.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577830.decoded-pages.json",
+      "bytes": 2855,
+      "sha256": "f801f1087106626e36a7e0b2d187bc6f3948c888e1ed65ca6eadd105b67b1622",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577830.original.json",
+      "bytes": 1919,
+      "sha256": "0f9cdac80bcfd1299d066b2f783401f90e341d1a3a8ad88c235192eb9b4b645d",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577830.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577832.decoded-pages.json",
+      "bytes": 23056,
+      "sha256": "ce715abdf872c995a1cc0e58cc4ba602e57c6785ac897dd12c91a8428b0fd198",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577832.original.json",
+      "bytes": 14260,
+      "sha256": "74d86b65d1ae00d721be86e640bd2b7354f27b0449eb231beeded866159ecf12",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577832.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577867.decoded-pages.json",
+      "bytes": 16976,
+      "sha256": "61c4dbbda47fa48c05888ee113e8d720196646a5bcc84e35003a982d5e548b30",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577867.original.json",
+      "bytes": 10724,
+      "sha256": "7ecc279bc3df05b4b2ea82203c986bbe9a013dea810833f438efdf46d4ed7152",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577867.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577948.decoded-pages.json",
+      "bytes": 4791,
+      "sha256": "7c8a8780d67a3549bcbe0685339fe1a63ea6c146ec887ff55f44f4436b27b9e9",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577948.original.json",
+      "bytes": 3113,
+      "sha256": "fd8b7ceabb8997e3f68461feb56233ddcb430807e2269e4727da7f1aaee98dbd",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/jobs-run-38151577948.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/pr-begin.json",
+      "bytes": 36172,
+      "sha256": "5252b4acd58ddb491f3ea25fb1df7ba017cbd98d21404c720ac3555739e435d0",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/pr-begin.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/pr-end.json",
+      "bytes": 36172,
+      "sha256": "5852bf30c2659cf7d4853d92444df92f4824a44af1f3f5dbbc84ff67ec3a4bfc",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/pr-end.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/synthetic-commit.json",
+      "bytes": 2648,
+      "sha256": "2b334e5f2ff5ac707641e183706a979a3cea61ae85ce50ab49fabfcb64f855ac",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/synthetic-commit.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/workflow-runs-v2.decoded-pages.json",
+      "bytes": 205276,
+      "sha256": "11d222f74f1d83f5a85dc46d439c6827ca6325b67076a469f306ee65e18e1abb",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/workflow-runs-v2.original.json",
+      "bytes": 165599,
+      "sha256": "0cc282e6dbaa40162e063f42bbf443d641d4f55f4cef038afa2321889bbeb719",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/workflow-runs-v2.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/workflow-runs.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/private-metadata/workflow-runs.private.stderr",
+      "bytes": 1249,
+      "sha256": "8fbdf01d7bfc79357ac4103cac53e183b4d56414792487feadb6ab4e69c935ae",
+      "mode": "0o600"
+    }
+  ],
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": {
+      "canonical_file": "docs/skills/repository-operations.md",
+      "source": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+      "source_blob": "defc67bf41b3fdf677ab85f85947001e42b42007",
+      "source_body_SHA256": "099dcee908b0eb1e27c506ef976c94279406b1bb27ccdd25273d102cb399b84b",
+      "accepted_verified_reuse": [
+        {
+          "lines": "232-268",
+          "lesson": "Enumerate every selected-wheel .py installed member, compare exact bytes inside fresh prefix/outside checkout and full private-Core AST scan; public dependency URLs/SHA/pip report distinct from local candidate wheels."
+        },
+        {
+          "lines": "3339-3349",
+          "lesson": "Producer source/build commit and tree/artifact inventory identities are separate; actual frozen receipt/JUnit required, source-mode passes do not qualify native behavior."
+        },
+        {
+          "lines": "3603-3619",
+          "lesson": "Page exact-head checks/status/runs separately; inspect skips and actual logged checkout, resolve live refs separately; earlier results do not admit changed union."
+        }
+      ],
+      "delta": "Verified reuse only, no cosmetic source/doc child."
+    },
+    "Durable_learning": "Fresh exact-event workflow/needs matrix and artifact metadata select a next engineering input, while actual checkout, wheel bytes, generated fields and installed member provenance require original evidence; old counts cannot admit new source.",
+    "Evidence": "Currenta54/a709 stable refs,13/34 filter+matrix proof, complete original pages, publisher5 currentjobs and5 artifact digests, fresh1426 typed source and216 tracked package/202Py, existing versioned source guards.",
+    "Stale_guidance_removed": "No old215 member equivalence,33S1skip CI carry, source-head-to-builder relabel, or success-status-to-actual/generatedOAuth inference.",
+    "Remaining_uncertainty": "3 pending Runtime jobs, all original producer checkout/inner artifacts/wheel inventory/OAuth values currently UNKNOWN; no original logs or artifacts acquired."
+  },
+  "upstream_disposition": "none",
+  "operations": "Bounded read-only metadata/Git/source parsing only; no artifact/log download, producer/helper/native/test/gateway/install/source/ref/publish/release/issue mutation; no pending loop or separate census campaign."
+}

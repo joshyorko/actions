@@ -1,0 +1,348 @@
+{
+  "actual_available_bytes_snapshot": {
+    "/dev/shm": 3901190144,
+    "/tmp": 450822144,
+    "/workspace": 1322729472
+  },
+  "aggregate_compressed_bytes": 95853099,
+  "all_five_expanded_original_roots_absent": true,
+  "allstage_fullindex_and_nine_fixed_alias_map_before_removal": "Original implementation AST/order/captured operation0/progress flags; not retroactive universal observation",
+  "archiver_returncode": 0,
+  "archives": [
+    {
+      "CRC_ISIZE_EOF_verified": true,
+      "GID": 1000,
+      "UID": 1000,
+      "body_mode_uidgid_exact_PAXmtime_ns_symlink_FIFO_internal_hardlink_partition_verified": true,
+      "bytes": 19578024,
+      "gzip_trailer_CRC32": 1513566432,
+      "gzip_trailer_ISIZE": 57702400,
+      "mode": "0o600",
+      "path": "/tmp/actions-completed8d49-five-root-preserved-v5/ToolkitTest.tar.gz",
+      "sha256": "f2066e8286f12180191b017346d1f2792f57a8d38a6cc0746c62e274aace6aba",
+      "verified_members": 9020
+    },
+    {
+      "CRC_ISIZE_EOF_verified": true,
+      "GID": 1000,
+      "UID": 1000,
+      "body_mode_uidgid_exact_PAXmtime_ns_symlink_FIFO_internal_hardlink_partition_verified": true,
+      "bytes": 8796121,
+      "gzip_trailer_CRC32": 1289891870,
+      "gzip_trailer_ISIZE": 34979840,
+      "mode": "0o600",
+      "path": "/tmp/actions-completed8d49-five-root-preserved-v5/original27-log.tar.gz",
+      "sha256": "129256fcb566fe4b62ace80b03f865fff3688e4dd8156c636c0decd04df5e8f9",
+      "verified_members": 2
+    },
+    {
+      "CRC_ISIZE_EOF_verified": true,
+      "GID": 1000,
+      "UID": 1000,
+      "body_mode_uidgid_exact_PAXmtime_ns_symlink_FIFO_internal_hardlink_partition_verified": true,
+      "bytes": 49782604,
+      "gzip_trailer_CRC32": 824114775,
+      "gzip_trailer_ISIZE": 113295360,
+      "mode": "0o600",
+      "path": "/tmp/actions-completed8d49-five-root-preserved-v5/Runtime50-robot-output.tar.gz",
+      "sha256": "057b55092a3d0074410d1779910bfb633ff6c01b5e8b15af6b70b8069f6bd488",
+      "verified_members": 9
+    },
+    {
+      "CRC_ISIZE_EOF_verified": true,
+      "GID": 1000,
+      "UID": 1000,
+      "body_mode_uidgid_exact_PAXmtime_ns_symlink_FIFO_internal_hardlink_partition_verified": true,
+      "bytes": 8831777,
+      "gzip_trailer_CRC32": 3003217765,
+      "gzip_trailer_ISIZE": 35256320,
+      "mode": "0o600",
+      "path": "/tmp/actions-completed8d49-five-root-preserved-v5/fixture42-GREEN-log.tar.gz",
+      "sha256": "f892410edb6c71e08c080343291e528cf501384e1fdf1d487a907ca054c3e1ac",
+      "verified_members": 2
+    },
+    {
+      "CRC_ISIZE_EOF_verified": true,
+      "GID": 1000,
+      "UID": 1000,
+      "body_mode_uidgid_exact_PAXmtime_ns_symlink_FIFO_internal_hardlink_partition_verified": true,
+      "bytes": 8864573,
+      "gzip_trailer_CRC32": 1602453635,
+      "gzip_trailer_ISIZE": 35358720,
+      "mode": "0o600",
+      "path": "/tmp/actions-completed8d49-five-root-preserved-v5/fixture51-TEMPORAL-log.tar.gz",
+      "sha256": "22def332e7581b15694d081e971fc5f1623e3dbd690a2c52b1cca240bf7f7366",
+      "verified_members": 2
+    }
+  ],
+  "before_and_alwayspost_metadata_guard": "PASS_0_ORIGINAL1440_SOURCE237_NATIVE1192_PREPARED30_FIVEORIGINS",
+  "decision": "GO_EXACT_FIVE_ORIGINAL_ROOTS_LOSSLESS_STORAGE_PRESERVATION_ONLY",
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "durable_learning_captured": "Reuse accepted actual-source-derived alias index identity and finite capped-allroot/PAX/topology/durable index lessons",
+    "evidence": "OriginalV4capFAIL retained; currentV5all9035 safe members+5rootheaders CRC/EOF/topology verified; fixed9 aliases/immutable18 rows and recorded before/post0",
+    "remaining_uncertainty": "Native first control launch still requires independent ROOT authorization/fresh floors; no source/native/release qualification from data preservation",
+    "stale_or_ambiguous_guidance_removed": "Physical original paths remain absent; verified archive/member aliases preserve original provenance without filename invention or earlier failure relabel"
+  },
+  "elapsed_seconds": 53.872948718999396,
+  "finite_archive_cap": 100663296,
+  "finite_combined_index_cap": 16777216,
+  "full_progress_and_alias_index_total_bytes": 3017563,
+  "kind_counts": {
+    "directory": 3853,
+    "file": 5154,
+    "symlink": 28
+  },
+  "limits": "No universal historical handle/quiescence/source-origin/reaping/ACL/xattr/inode-restoration or exact TAR header mtime claims; exact recorded PAX nanoseconds and captured metadata only",
+  "nine_alias_result": {
+    "mode": "VERIFIED_ARCHIVE_MEMBER_DATA_ALIAS_ORIGINAL_PATH_ABSENT",
+    "original_inventory_rewritten": false,
+    "original_paths_restored": false,
+    "rows": 9
+  },
+  "nine_original_bound_rows": "Exact member body/mode/UIDGID/PAXmtime via fixed original-row archive alias; physical originals absent, not recreated",
+  "old_V4_48MiB_cap_FAIL_and_five_partial_stage_bytes": "ALL_REHASHED_UNCHANGED_RETAINED",
+  "old_original_discarded_cause": "UNKNOWN_NOT_RETROACTIVELY_IDENTIFIED_BY_LATER_PROBE",
+  "original_inventory18_body_unchanged": true,
+  "other_nine_Runtime_control_files": "All exact body/mode retained in place",
+  "outer_returncode": 0,
+  "private_references": [
+    {
+      "bytes": 1331,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-current8d49-five-root-storage-original-outer-owned-v5/OWNERFINAL-root-one-original-five-completed8d49-storage-terminal.json",
+      "sha256": "fbca7f6d61eadd934c4997b936eb05df56df09751a6aac2a3b3c590b59301c2f"
+    },
+    {
+      "bytes": 624,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v5/original-one-attempt-terminal.json",
+      "sha256": "52e8580911866804cfc9add0703bffffb7951f40f5891e9a887cd3a68453ea77"
+    },
+    {
+      "bytes": 254533,
+      "mode": "0o600",
+      "path": "/tmp/actions-completed8d49-five-root-preserved-v5/private-complete-prestage-inventory-and-verification.json.gz",
+      "sha256": "afde4fbc9688bde2502353a8329114d9ae799c0c15ce0f837af8c69080c0e48a"
+    },
+    {
+      "bytes": 2757971,
+      "mode": "0o600",
+      "path": "/tmp/actions-completed8d49-five-root-preserved-v5/private-complete-inventory-and-recovery.json",
+      "sha256": "e5e8aa2f94a8190726c018299284e33fdb769ab608e2fc0d06d9005a4a92ea46"
+    },
+    {
+      "bytes": 5059,
+      "mode": "0o600",
+      "path": "/tmp/actions-completed8d49-five-root-preserved-v5/private-fixed-original-row-archive-aliases.json",
+      "sha256": "e0dc9eefc35b0c0ca32cb69fc83c2b9bf3b7198b267100d1e34c266982801078"
+    },
+    {
+      "bytes": 6966,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v5/private-fixed-nine-original-row-future-archive-member-plan.json",
+      "sha256": "ce099428e2647c6793d3f1d2bc541d5b864c58ebffe40371007cc7d7ac3236e8"
+    },
+    {
+      "bytes": 9838,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-independent-actual-cap-failure-review/OWNERFINAL-independent-original-five-V4-48MiB-cap-FAIL-no-removal-source-postPASS.json",
+      "sha256": "ade5ffc1fa3dfd0add1302eb40fdac45309d82273610007dfb26bf1cea5e6e39"
+    },
+    {
+      "bytes": 10993,
+      "mode": "0o600",
+      "path": "/tmp/audit-original-five-v5-success-readonly.py",
+      "sha256": "be4a6a34a92ed7d2243450c2c0a25740a4ef7412ffdf14f2445f7302054c1992"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v5/after/stderr.private.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2258,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v5/after/stdout.private.log",
+      "sha256": "fbb5df012935a0a645dbf962602f8560f2d40c271f658aa5c0f72d0393578ab4"
+    },
+    {
+      "bytes": 466,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v5/after/terminal.json",
+      "sha256": "38154257e6d3ab3b1da3f25ae39f6515ce6e499a7fc549ae8d4241a77c85f4b9"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v5/before/stderr.private.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2258,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v5/before/stdout.private.log",
+      "sha256": "88090356e389ee548a5a62c59be0b6fc8096276d38322936530087add5b8c76a"
+    },
+    {
+      "bytes": 467,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v5/before/terminal.json",
+      "sha256": "71ca6003fff379d3fb05693b14de109c6ea3f95284b339b75e5b3718996ebe37"
+    },
+    {
+      "bytes": 2077,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v5/consumed-exact-release.json",
+      "sha256": "d62567e1b9035e03e6834718a5bee610477595efb6113039511431556809d5a3"
+    },
+    {
+      "bytes": 1803,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v5/immediate-fresh-capacity-and-sourcebindings.json",
+      "sha256": "c85340314753c032c9ff7bed7c211a1157432c66f725c4a0541ef7f4bd5bf330"
+    },
+    {
+      "bytes": 325,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v5/original-archiver-terminal.json",
+      "sha256": "bda514a0ca3d320538b6da79654fdbae7e228bdde927b59b42ee9dc67ba9182c"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v5/original-archiver.stderr.private.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 759,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v5/original-archiver.stdout.private.log",
+      "sha256": "cc2701324b8976816f7e0c293f933341299dcd1f51f20440058a10349fbd75e4"
+    },
+    {
+      "bytes": 624,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v5/original-one-attempt-terminal.json",
+      "sha256": "52e8580911866804cfc9add0703bffffb7951f40f5891e9a887cd3a68453ea77"
+    },
+    {
+      "bytes": 380,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v5/protected-inputs-after.json",
+      "sha256": "9aa9cbf726fd1901d39eccdf532010216b165e082e32ee218cb6eec5c97e1f5f"
+    },
+    {
+      "bytes": 380,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v5/protected-inputs-before.json",
+      "sha256": "fb50ec303dbfb1254ec8e352b3c5e22c227b77e15325a6fb7b88b04bdf06ddfe"
+    },
+    {
+      "bytes": 107,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v5/selected-complete-originals-before.json",
+      "sha256": "3b22f1ca74ed51ac68581e70585e19c980cf3cdd549fb2e7a54e5654d8f386a1"
+    },
+    {
+      "bytes": 14927,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v5/OWNERFINAL-five-completed8d49-roots-capped-storage-PREEXECUTION-v5.json",
+      "sha256": "e82b78156e3ec08f033555f314faa30bde4a1319f769a796df68a7d556dc2d4a"
+    },
+    {
+      "bytes": 19578024,
+      "mode": "0o600",
+      "path": "/tmp/actions-completed8d49-five-root-preserved-v5/ToolkitTest.tar.gz",
+      "sha256": "f2066e8286f12180191b017346d1f2792f57a8d38a6cc0746c62e274aace6aba"
+    },
+    {
+      "bytes": 8796121,
+      "mode": "0o600",
+      "path": "/tmp/actions-completed8d49-five-root-preserved-v5/original27-log.tar.gz",
+      "sha256": "129256fcb566fe4b62ace80b03f865fff3688e4dd8156c636c0decd04df5e8f9"
+    },
+    {
+      "bytes": 49782604,
+      "mode": "0o600",
+      "path": "/tmp/actions-completed8d49-five-root-preserved-v5/Runtime50-robot-output.tar.gz",
+      "sha256": "057b55092a3d0074410d1779910bfb633ff6c01b5e8b15af6b70b8069f6bd488"
+    },
+    {
+      "bytes": 8831777,
+      "mode": "0o600",
+      "path": "/tmp/actions-completed8d49-five-root-preserved-v5/fixture42-GREEN-log.tar.gz",
+      "sha256": "f892410edb6c71e08c080343291e528cf501384e1fdf1d487a907ca054c3e1ac"
+    },
+    {
+      "bytes": 8864573,
+      "mode": "0o600",
+      "path": "/tmp/actions-completed8d49-five-root-preserved-v5/fixture51-TEMPORAL-log.tar.gz",
+      "sha256": "22def332e7581b15694d081e971fc5f1623e3dbd690a2c52b1cca240bf7f7366"
+    },
+    {
+      "bytes": 23,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-current-e2-inner-service-free-controls-v2-once-owned/basetemp/test_output_cap_preserves_exis0/baseline.json",
+      "sha256": "77171f2c359a9fffb954e57c4754f8bbf20ea1d2e62fb1c3c4dbe3e2638d2305"
+    },
+    {
+      "bytes": 2,
+      "mode": "0o644",
+      "path": "/workspace/engineering/root-current-e2-inner-service-free-controls-v2-once-owned/basetemp/test_real_private_release_guar0/release",
+      "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "bytes": 2,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-current-e2-inner-service-free-controls-v2-once-owned/basetemp/test_real_private_release_guar1/release",
+      "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "bytes": 2,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-current-e2-inner-service-free-controls-v2-once-owned/basetemp/test_real_private_release_guar2/release",
+      "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "bytes": 2,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-current-e2-inner-service-free-controls-v2-once-owned/basetemp/test_real_private_release_guar3/release",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "bytes": 9800,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-current-e2-inner-service-free-controls-v2-once-owned/junit.xml",
+      "sha256": "8fb252292db9f416bd342239ddce1b24aea3b803494e6e2d026c98d4459ea753"
+    },
+    {
+      "bytes": 137,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-current-e2-inner-service-free-controls-v2-once-owned/original-control-terminal.json",
+      "sha256": "908cc486d64d527023a8a65cd2a088a466dbd6ee67a758fd135cd75c57a9213b"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-current-e2-inner-service-free-controls-v2-once-owned/stderr.private.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2953,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-current-e2-inner-service-free-controls-v2-once-owned/stdout.private.log",
+      "sha256": "f2cdc1f75000dd55965d9e221d9b9272aaf36dfaeef074ea1d2aed250023dada"
+    }
+  ],
+  "progress_all5_expanded_removed": true,
+  "schema": "INDEPENDENT_ORIGINAL_FIVE_V5_ACTUAL_PRESERVATION",
+  "selected_roots": 5,
+  "source_head": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_native_qualification": "UNCHANGED_NATIVE_NOT_RUN",
+  "source_tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none",
+  "verified_TAR_headers_including_roots": 9040,
+  "verified_original_snapshot_members_excluding_five_root_headers": 9035
+}

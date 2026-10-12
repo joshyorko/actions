@@ -1,0 +1,236 @@
+{
+  "configured_full_argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "600s",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution/current_source_full_body.py"
+  ],
+  "current_SOURCEFULL": "NOT_RUN",
+  "current_capacity_observation": {
+    "minimum_workspace_before_full_bytes": 1288490188,
+    "status": "FRESH_CAPACITY_AND_ROOT_SERIALIZATION_REQUIRED",
+    "workspace_bytes": 1278365696
+  },
+  "documentation_improvement": {
+    "canonical_guide_delta": {
+      "bytes": 3547,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/exact-imported-a54-canonical-guide-delta.patch",
+      "sha256": "c6126de39cc685aba4aa7b1de3b9244d06922077576daebb91599af2d001454f"
+    },
+    "durable_learning": "Accepted checkout-byte builder selection, transport/shutdown source controls and own ignored RCC asset identity are distinct from prepared-env reuse and prior native/browser qualification.",
+    "evidence": "Current275scoped+10checkout source1427, own30/fiveprefixes, ignoredRCCmode0711 exact, allaccepted guide blocks verified; managed activation19/pre-post source byteguards actual parent bounded in this packet.",
+    "remaining_uncertainty": "CurrentFULL/preexecutionindreview/rootrelease/freshcapacity and independent completecurrent source acceptance remain held; old native UNQUALIFIED275production +five separately typed",
+    "stale_ambiguity_removed": "Do not carry old584a preexecution/3ec actual into5306; planned command metadata is not SOURCEFULL execution."
+  },
+  "execution_bounds": {
+    "always_post": "finally attempts post guard even on caught preflight/primary failure; OS hard kill cannot guarantee Python finally and remains HOLD",
+    "always_post_guard_timeout_seconds": 60,
+    "max_normal_parent_envelope_seconds": 760,
+    "outer_GNU_timeout_seconds": 900,
+    "outer_KILL_grace_seconds": 10,
+    "parent_configured_subprocess_timeout_seconds": 640,
+    "pre_guard_timeout_seconds": 60,
+    "source_GNU_timeout_seconds": 600,
+    "source_KILL_grace_seconds": 10
+  },
+  "frozen_input_bindings": [
+    {
+      "bytes": 28831,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution/frozen-current-source-full-inputs.json",
+      "sha256": "9d6667cdbb2e29baac0f92bc3bf4c43934633100ce1a85ba6d28efff682b1d48"
+    },
+    {
+      "bytes": 17431,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/OWNERFINAL-current5306-ordinary-a54-source-LIGHT-full-and-actual-HOLD.json",
+      "sha256": "2c277550c5475cb6c9698dfbe092dd373a5398b553769f68a230451c96c1ca14"
+    },
+    {
+      "bytes": 9714,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution/freeze_preexecution_proposal.py",
+      "sha256": "e1ce3e0648ec364f2ed16f50f2baaae5175d54cc4529450b47c65eafecc8c163"
+    },
+    {
+      "bytes": 1143,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution/current_source_full_body.py",
+      "sha256": "a254b5cf4348e8f6e83c9c3f97e57f9feeb1e8168408d4886f79f017c7b993e9"
+    },
+    {
+      "bytes": 3749,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution/current_source_prepost_guard.py",
+      "sha256": "34583358c55324e50d03f27d1f85c5ea0aaacb2cf9858021b7505d7044346435"
+    },
+    {
+      "bytes": 3651,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution/launch_current_source_full_once.py",
+      "sha256": "d148d168d81836330314e220323c950d9576a2e17fb8e65eb8e60af040c41000"
+    },
+    {
+      "bytes": 752,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305/actions/.venv/pyvenv.cfg",
+      "sha256": "2a3891386c700dece6c21b8ba80ea8d7fc514d8eade9a10374cab43dc0bd693f"
+    },
+    {
+      "bytes": 771,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305/actions-http-helper/.venv/pyvenv.cfg",
+      "sha256": "743f2feb6a1fac576fc6313ebf0bbdf5484378bdf21433fe2cc134a8775d563f"
+    },
+    {
+      "bytes": 763,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305/devutils/.venv/pyvenv.cfg",
+      "sha256": "868a9122466b928c47f90be30f1a01e28f73d5b5c586b95d57e177c97aa72a6c"
+    },
+    {
+      "bytes": 761,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305/work-items/.venv/pyvenv.cfg",
+      "sha256": "7894fbdd57bbb2c2cfca8a74fab61f425333b36c66b95ebabc200aeb7c678fb6"
+    },
+    {
+      "bytes": 761,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305/action_server/.venv/pyvenv.cfg",
+      "sha256": "eb5e96f842624fb2dd3c1a37c755f65dbcfc4eadb4697693b5e1213a91696a8a"
+    },
+    {
+      "bytes": 22282402,
+      "mode": "0o700",
+      "path": "/workspace/actions-cloud/bin/rcc",
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+    },
+    {
+      "bytes": 22282402,
+      "mode": "0o711",
+      "path": "/workspace/engineering/pr305/action_server/src/actions/server/bin/rcc-18.19.3",
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+    },
+    {
+      "bytes": 987,
+      "mode": "0o600",
+      "path": "/workspace/actions-cloud/activate.sh",
+      "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+    }
+  ],
+  "historical_preexecution": "PR305584a LIGHT5835, managed full-preexecution2cd287 and independent88f103 remain exact historical identities. Original3ec/92498 V5 actual is a separate unchanged historical tuple, not current5306 full proof.",
+  "native_browser_provider_install_or_release": "NOT_RUN_NOT_AUTHORIZED",
+  "one_attempt": {
+    "must_be_absent": true,
+    "no_automatic_retry": true,
+    "original_log": "private binary stdout/stderr with primary return/error separate from postcondition return/error",
+    "owned_output_directory": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution/one-configured-full-once-owned"
+  },
+  "outer_cwd": "/workspace/engineering/pr305",
+  "outer_managed_command": [
+    "source /workspace/actions-cloud/activate.sh",
+    "unset PYTHONOPTIMIZE",
+    "PATH primary/bin then exact cached toolkit/bin preserved",
+    "timeout --signal=TERM --kill-after=10s 900s /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python /workspace/engineering/pr305-current5306-SOURCEFULL-preexecution/launch_current_source_full_once.py --execute-root-authorized <new-root-release-path> <release-sha256>"
+  ],
+  "root_release_exact_required_schema": {
+    "independent_source_and_preexecution_review_GO": true,
+    "proposal_sha256": "THIS_OWNER_SHA256_IN_DISTINCT_ROOT_RELEASE",
+    "schema": 1,
+    "serialized_no_other_heavy_or_installer": true,
+    "source": "5306eeb26595da4ce571b99812eb50f047cfc903",
+    "status": "ROOT_RELEASE_ONE_SERIALIZED_CONFIGURED_SOURCE_FULL",
+    "tree": "8418e9ffeeaaf2446771e34b5b4602bab3d357a5"
+  },
+  "schema": 1,
+  "source": "5306eeb26595da4ce571b99812eb50f047cfc903",
+  "source_LIGHT": {
+    "bytes": 17431,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/OWNERFINAL-current5306-ordinary-a54-source-LIGHT-full-and-actual-HOLD.json",
+    "sha256": "2c277550c5475cb6c9698dfbe092dd373a5398b553769f68a230451c96c1ca14"
+  },
+  "source_guard_private_data_alias": "NOT_NEEDED: current305 LIGHT references original native files and oldV5 retained receipt paths; no missing failedRCC3 receipt row is included. Explicit current-file/helper and historical Git original-body classifications are bound.",
+  "status": "OWNERFINAL_CURRENT5306_SOURCEFULL_PREEXECUTION_READY_FOR_INDEPENDENT_REVIEW_NOT_RUN",
+  "strict_guards": {
+    "activation_exports": 18,
+    "actual_operator_exports": "forbidden allfive including cache and no optimize export",
+    "helpers0444": "explicit current before/after original and snapshot byte/mode checks; original raw18/frozen50 separate immutable Git classifications",
+    "native_original_inventory": 1192,
+    "optimize": "fail before assert-dependent guard; clear PYTHONOPTIMIZE explicitly",
+    "own_concrete_origins": 5,
+    "own_ignored_RCC_fixture": "7e588/0711",
+    "own_prepared_inputs": 30,
+    "primary_PATH": 19,
+    "primary_RCC3": "7e588/0700",
+    "source_body_and_modes": 1427,
+    "whole_native_member_set": true,
+    "workers": "PYTEST_XDIST_AUTO_NUM_WORKERS2 before configured invoke test-not-integration -n auto"
+  },
+  "subject_metadata_correction": {
+    "correct_current_tuple": {
+      "source": "5306eeb26595da4ce571b99812eb50f047cfc903",
+      "target": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+      "tree": "8418e9ffeeaaf2446771e34b5b4602bab3d357a5"
+    },
+    "current_LIGHT_subject_clarification": {
+      "bytes": 18366,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/OWNERFINAL-current5306-ordinary-a54-source-LIGHT-subject-metadata-v2.json",
+      "sha256": "896ffb6299cf9e7fca9adacc187115d43057be559226b8cfcd4b99411f9324ee"
+    },
+    "exact_historical_PR305584_bindings": [
+      {
+        "bytes": 14931,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/OWNERFINAL-current584a-ordinary-e3-source-LIGHT-full-and-actual-HOLD.json",
+        "sha256": "5835c7c1b57493d784ea39cf0c037253460b04b3b3c9c4fa48fb1db1a887c387"
+      },
+      {
+        "bytes": 8226,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr305-current584a-SOURCEFULL-preexecution/OWNERFINAL-current584a-managed-configured-SOURCEFULL-preexecution-proposal.json",
+        "sha256": "2cd287244d83b2388449794bb4ea8205ca95329c8908af8ed288c91207097718"
+      },
+      {
+        "bytes": 21234,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr305-current584a-independent-LIGHT-preexecution-review/OWNERFINAL-independent-current584a-SOURCE-LIGHT-and-managed-full-preexecution-review.json",
+        "sha256": "88f10353640947345b210faea05a9574da130dfbb74c0ee542ddb5a76286e25f"
+      }
+    ],
+    "execution_contract_unchanged": {
+      "launcher_reads_original_proposal_path": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution/OWNERFINAL-current5306-managed-configured-SOURCEFULL-preexecution-proposal.json",
+      "launcher_root_release_proposal_sha256": "fbdaba2989e187ad11547f56ff0107092a479d4592aaa48b9170cc7a2339e553",
+      "original_launcher_proposal_binding": {
+        "bytes": 8597,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution/OWNERFINAL-current5306-managed-configured-SOURCEFULL-preexecution-proposal.json",
+        "sha256": "fbdaba2989e187ad11547f56ff0107092a479d4592aaa48b9170cc7a2339e553"
+      },
+      "root_adoption": "This named metadata successor clarifies the original executable packet; distinct root adoption/release must bind the correction and retain the launcher original-proposal hash. It does not authorize execution.",
+      "source_config_scripts_argv_bounds_pre_post_guards_all_frozen_input_bindings": "UNCHANGED"
+    },
+    "old_subject_tokens": [
+      "CURRENT1299",
+      "PR282 c35/d5b1/55a621"
+    ],
+    "only_existing_fields_changed": [
+      "status",
+      "historical_preexecution"
+    ],
+    "original_unchanged_owner": {
+      "bytes": 8597,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution/OWNERFINAL-current5306-managed-configured-SOURCEFULL-preexecution-proposal.json",
+      "sha256": "fbdaba2989e187ad11547f56ff0107092a479d4592aaa48b9170cc7a2339e553"
+    },
+    "scope": "No source/Git/config/script/gate/test/native/install changes. Current full remains NOT_RUN."
+  },
+  "tree": "8418e9ffeeaaf2446771e34b5b4602bab3d357a5",
+  "upstream_disposition": "none"
+}

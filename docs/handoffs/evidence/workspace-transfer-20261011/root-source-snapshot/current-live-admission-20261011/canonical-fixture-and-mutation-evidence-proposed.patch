@@ -1,0 +1,33 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -2775,6 +2775,14 @@
+ Linux contract suite exercises successful mode normalization, invalid and
+ non-empty destinations, links/special files, source/staged-byte mutation, and
+ failure cleanup; it does not establish an RCC consumer/import proof.
++
++A mutation-rejection control must establish that its injection ran at the intended
++read stage. Preserve that observation and the measured byte/identity evidence
++separately from the expected exception. A `DID NOT RAISE` failure alone does not
++distinguish an injection that never ran from a verifier that accepted a mutation;
++an assertion after the failed raises-block supplies no observation. Keep the
++executed source-contract gate held without inferring an acquisition failure,
++timestamp cause or production bypass from that incomplete failure record.
+ The staging failure tests inject errors after mkdir at identity observation,
+ directory open, and fstat; when identity cannot be established they require the
+ original exception to survive with an explicit unresolved-cleanup note.
+@@ -3224,6 +3232,15 @@
+ than `Path.read_text()`'s locale default so expected Unicode values are stable
+ across Windows and POSIX test runners.
+ 
++Public-wheel sample controls require the exact accepted member bytes. A checkout
++can convert committed LF files to CRLF, so copying `Path.read_bytes()` from that
++checkout need not preserve a published member digest. Use an owned fixture made
++from the recorded Git blob or authenticated wheel member and verify its fixed
++digest before executing the generated probe. Keep actual worker/module digest
++predicates unchanged. Require a valid baseline before each member, version,
++ownership or prefix poison; a fixture-setup failure exercises none of those
++rejection predicates and does not establish a public Runtime/browser failure.
++
+ ## Frozen Runtime acceptance
+ 
+ For frozen Runtime acceptance, bind the candidate commit and tree separately

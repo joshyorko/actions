@@ -1,0 +1,74 @@
+{
+  "bindings_count": 291,
+  "native": "NOT_RUN",
+  "native_count": 1192,
+  "old237_all_exact": true,
+  "old_fixture_and_current_live": [
+    {
+      "bytes": 48314,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+      "sha256": "af2f79ccd395c088076381f6681860cf8160f8fd0d9169e122634fe684c37c35"
+    },
+    {
+      "bytes": 52201,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+      "sha256": "a30f9e585b8dc422dcf853ac27a2da2c11f84065e58ba501b0a4c32d4f472728"
+    }
+  ],
+  "own_origins": 5,
+  "prepared_count": 30,
+  "retained_ROOT_HOLD": {
+    "bytes": 837,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-current8d49-one-FULL-original-owned/OWNERFINAL-root-original-current8d49-one-FULL.json",
+    "sha256": "83781777ef048357ea892ce56d42ab3906b92f49f663169dda2130ddcc1094ac"
+  },
+  "separate_readonly_supplement": {
+    "bytes": 1994,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-current8d49-one-FULL-original-owned/named-readonly-post-env-supplement/OWNERFINAL-named-readonly-full-post-env-supplement.json",
+    "sha256": "1bdd39ecaae8d8ae95ed28c3441de52c4b8f95117fdc71842085fd1374c8e235"
+  },
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_FULL": {
+    "bytes": 1278,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr308-current8d49-SOURCEFULL-preexecution/one-current8d49-configured-FULL-original-owned/original-terminal.json",
+    "sha256": "54292bf9c05c9921949ca7710aaf27842d2d1562f6b1ee4a9d86377c88f43472"
+  },
+  "source_FULL_independent": {
+    "bytes": 10038,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-current8d49-independent-SOURCEFULL-actual-review/OWNERFINAL-independent-current8d49-original-configured-SOURCEFULL-and-retained-ROOTpost-supplement-review.json",
+    "sha256": "073e235afffab50dee204bcaae236e77ceb8e23644db15a90a0e56d48dc8dca9"
+  },
+  "source_count": 1440,
+  "temporal_shared_outputs": [
+    {
+      "bytes": 455856,
+      "device": 27,
+      "gid": 1000,
+      "inode": 1081293,
+      "mode": 384,
+      "mtime_ns": 1791742753051593739,
+      "path": "/workspace/engineering/pr308/action_server/output/output.robolog",
+      "sha256": "a7724d894c1d9f578eb83e26eb15c04d166e1f71211d8280e33eec8b83eba0f2",
+      "uid": 1000
+    },
+    {
+      "bytes": 916385,
+      "device": 27,
+      "gid": 1000,
+      "inode": 1081121,
+      "mode": 384,
+      "mtime_ns": 1791742753059704848,
+      "path": "/workspace/engineering/pr308/action_server/output/log.html",
+      "sha256": "4a70c69c48bce408abb0f4f6f6acffc52d619bbb52fe7005e70c299104c235a7",
+      "uid": 1000
+    }
+  ],
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "unique_path_SHA_keys": 291
+}

@@ -1,0 +1,51 @@
+{
+  "baseline_accepted": false,
+  "capture": "2026-10-11T20:32:16.531564+00:00",
+  "elapsed_seconds": 151.11607916399953,
+  "independent_review": {
+    "bytes": 16437,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-current8d49-nine-real-reload-drain-independent-preexecution-review/OWNERFINAL-independent-current8d49-nine-real-SQLite-route-pool-control-SOURCE-and-baseline-first-PREEXEC-review.json",
+    "sha256": "6da104c02c146bd2594a1c307a81b6280ce9665664cc3f34d634a886e3e3daa0"
+  },
+  "mutants": "NOT_RUN",
+  "native": "NOT_RUN",
+  "outcomes": {
+    "always-post": {
+      "elapsed_seconds": 15.072698135001701,
+      "returncode": 0
+    },
+    "before": {
+      "elapsed_seconds": 15.120843092998257,
+      "returncode": 0
+    },
+    "original-nine-baseline": {
+      "elapsed_seconds": 120.03566774099454,
+      "returncode": 124
+    },
+    "own-origin-0": {
+      "elapsed_seconds": 0.21495238300121855,
+      "returncode": 0
+    },
+    "own-origin-1": {
+      "elapsed_seconds": 0.11457199299911736,
+      "returncode": 0
+    },
+    "own-origin-2": {
+      "elapsed_seconds": 0.16461207599786576,
+      "returncode": 0
+    },
+    "own-origin-3": {
+      "elapsed_seconds": 0.16439368500141427,
+      "returncode": 0
+    },
+    "own-origin-4": {
+      "elapsed_seconds": 0.2144992679968709,
+      "returncode": 0
+    }
+  },
+  "scope": "ORIGINAL_NINE_SOURCE_BASELINE_ONLY_NO_NATIVE_NO_MUTANTS",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_adoption": "NONE",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+}

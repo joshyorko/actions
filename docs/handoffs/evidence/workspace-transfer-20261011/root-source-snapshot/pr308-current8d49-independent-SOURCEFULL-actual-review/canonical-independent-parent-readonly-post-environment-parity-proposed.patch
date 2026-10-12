@@ -1,0 +1,15 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -1589,6 +1589,12 @@
+ `ruff format --check --config ../devutils/ruff.toml`. When validating a focused
+ Runtime test change, use that configuration as well as `ruff check`; passing
+ the tests or the lint rules alone does not establish formatter acceptance.
++
++Independent configured-test post-checks must use the runner's exact
++`PYTEST_ADDOPTS` and `PYTEST_XDIST_AUTO_NUM_WORKERS` values. Environment changes
++inside the runner do not reach its parent. Preserve a missing-environment
++post-check failure and bind a separate read-only supplement; the supplement
++does not rerun or relabel the original test gate.
+ 
+ Action Server's `invoke lint` also runs Ruff check, Ruff format, and isort for
+ `src` and `tests`; its `pyproject.toml` sets isort's Black profile. Isort checks

@@ -1,0 +1,102 @@
+{
+  "actual_returncode": 1,
+  "capture": "2026-10-11T21:07:21.135693+00:00",
+  "decision": "HOLD_ORIGINAL_MEMORY17_PRE_TEST_MODE_ADMISSION_FAILED_NO_PURE_TEST_CENSUS",
+  "diagnosis": "Original launcher incorrectly applies fixture0711mode to managedprimary0700; exactSHA/size equal. Physical ROOTpreflight passed. Activation18/PATH2 checks precede this assertion and returned; no ownedroot/beforeguard/source-tests/native pipeline reached.",
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "durable_learning": "Per-path mode admission before delegation; samebinarybytes do not require fixture/managedpermissions equal; failed admission consumes once release.",
+    "evidence": "Original managedRCCguard line69/ValueError; regularmanaged700andignoredfixture711 exactsame7e588sizeUIDGID measuredread-only; source1440 unchanged.",
+    "exact_delta": {
+      "bytes": 1069,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-original-mode-admission-failure-independent-review/canonical-measured-per-path-binary-mode-before-delegation-proposed.patch",
+      "sha256": "15ca1e894890c2d2bd383139088cf3946a3e4c89e30e2a82cd3e96b4b48e5e1b"
+    },
+    "remaining_uncertainty": "Corrected bounded attempt andmemory17 outcomes await separate review andROOTrelease.",
+    "stale_or_ambiguous_guidance_removed": "Implicit managedmode==fixturemode; outputrootabsence does not authorize release reuse."
+  },
+  "elapsed_seconds": 0.11517973701120354,
+  "ignored_fixture": {
+    "bytes": 22282402,
+    "gid": 1000,
+    "mode": "0o711",
+    "path": "/workspace/engineering/pr308/action_server/src/actions/server/bin/rcc-18.19.3",
+    "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "type": "REGULAR_NONSYMLINK",
+    "uid": 1000
+  },
+  "managed_primary": {
+    "bytes": 22282402,
+    "gid": 1000,
+    "mode": "0o700",
+    "path": "/workspace/actions-cloud/bin/rcc",
+    "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "type": "REGULAR_NONSYMLINK",
+    "uid": 1000
+  },
+  "native": "NOT_RUN",
+  "original_JUnit": "ABSENT",
+  "original_guards": "NOT_RUN_BECAUSE_ACTIVATION_ADMISSION_FAILED",
+  "original_owner": {
+    "bytes": 727,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-memory17-reviewed-original-outer/OWNERFINAL-root-one-original-reviewed-memory17-outer.json",
+    "sha256": "277e37a3be16f8bd6c5bd8945c656bec37284ae7e2cda396b20a3142c809c650"
+  },
+  "original_raw_bindings": [
+    {
+      "bytes": 727,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-memory17-reviewed-original-outer/OWNERFINAL-root-one-original-reviewed-memory17-outer.json",
+      "sha256": "277e37a3be16f8bd6c5bd8945c656bec37284ae7e2cda396b20a3142c809c650"
+    },
+    {
+      "bytes": 1211,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-memory17-reviewed-original-outer/original.stderr.private",
+      "sha256": "bb13538ae2d2c4af0a0de0c23a156284dd8708baa84c17736fb66b3e4f60baed"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-memory17-reviewed-original-outer/original.stdout.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2829,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-memory17-reviewed-original-outer/verified-exact-ROOT-physical-preflight.json",
+      "sha256": "fa48f7ea875f8f7d6d4c9de5dcf1b376bbdc5f8314fb08412765861c2b89f55f"
+    }
+  ],
+  "original_release": {
+    "bytes": 836,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-one-memory17-pure-controls-release.json",
+    "sha256": "5afbfc6f31f6b063e7cd201a79ee2fe88834c16e3333abbefbbcd58f08ac8375"
+  },
+  "own_five_origin_probes": "NOT_RUN",
+  "owned_output_root": "ABSENT",
+  "policy_adoption": "NONE",
+  "prior_independent_PREEXEC": {
+    "bytes": 4021,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-memory17-concrete-independent-preexecution-review/OWNERFINAL-independent-memory17-concrete-config-launcher-and-ROOT-preflight-PREEXEC-review.json",
+    "sha256": "710c0ae33ff6c523ca5aae04f674f1e3a9d8df97883bc22549d7d53aab9deaa8"
+  },
+  "pure17_counts": "UNAVAILABLE_NOT_ZERO_OR_PASS",
+  "release_consumption": "CONSUMED_ORIGINAL_ONCE_RELEASE_EVEN_THOUGH_OUTPUTROOT_ABSENT",
+  "remaining_uncertainty": [
+    "Corrected pure17 controls NOT_RUN; no memory policy/native calibration.",
+    "Readonly source body preservation does not retroactively run skipped guards or native processes."
+  ],
+  "required_correction": "Named launcher/config/root-once2/release/indreview; measuredmanagedpath700regularUIDGID1000sizeSHA; no chmod/modebypass/helpertestchange/oldrelease retry.",
+  "reviewer_correction": "Prior710c PREEXEC review missed path-specific managedmode mismatch; original review retained, not rewritten.",
+  "safe_error_category": "MEMORY17_PRIMARY_RCC_PIN_NO_EXECUTION",
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_unchanged_current1440": "EXACT_COMPLETE_TYPED_GIT_OBJECT_SET_AND_CURRENT_FS_BODY_MODES_VERIFIED_READONLY",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none"
+}

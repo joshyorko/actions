@@ -1,0 +1,85 @@
+{
+  "complete_private_census": {
+    "bytes": 251046,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-pr282-current1299-one-configured-sourcefull/original-complete-configured-full-node-census.private.json",
+    "sha256": "b8551a2e158157d6e51d1d29a297c47cc5000265a08aec8c74eedbeb9d56f4f9"
+  },
+  "counts": {
+    "errors": 0,
+    "failed": 0,
+    "modules": 95,
+    "observed_nodeids": 1361,
+    "passed": 1349,
+    "skipped": 12,
+    "unique_nodeids": 1361,
+    "workers": [
+      "gw0",
+      "gw1"
+    ]
+  },
+  "documentation_improvement": "Accepted wholeparent canonical guide proofs retained; full typed before/after83+1192 original guards; whole-line node census retains space-bearing parameter names.",
+  "independent_actual_review": "PENDING",
+  "native_browser": "NOT_RUN",
+  "original_raw_log": {
+    "bytes": 347809,
+    "path": "/workspace/engineering/pr282-current1299-SOURCEFULL-preexecution-v2/one-configured-full-once-owned/original-configured-source-full.private.log",
+    "sha256": "81b9772fe8397f1d2cadab35e56dd4a25c91733267185e679761b02562d3c0b7"
+  },
+  "original_terminal": {
+    "bytes": 869,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr282-current1299-SOURCEFULL-preexecution-v2/one-configured-full-once-owned/original-terminal.json",
+    "sha256": "64531f55986c8de124d432b5a3056293e6d0bf16f22294beb031d8dac8769ff7"
+  },
+  "preexecution_independent": {
+    "bytes": 22757,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr282-current1299-independent-SOURCEFULL-preexecution-review/OWNERFINAL-independent-current1299-managed-SOURCEFULL-preexecution-review.json",
+    "sha256": "8c3f6364e5856a747dd717771d2b8058426c7977847fa33eac051885de1f8bfe"
+  },
+  "preexecution_owner": {
+    "bytes": 9181,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr282-current1299-SOURCEFULL-preexecution-v2/OWNERFINAL-current1299-managed-configured-SOURCEFULL-preexecution-proposal.json",
+    "sha256": "038ed3531a697f0ae699590bf6407e9dd37ecebc019231d70b68e53659c0673c"
+  },
+  "records": [
+    {
+      "returncode": 0,
+      "stage": "before"
+    },
+    {
+      "returncode": 0,
+      "stage": "configured-full"
+    },
+    {
+      "returncode": 0,
+      "stage": "after-always"
+    }
+  ],
+  "root_outer_terminal": {
+    "bytes": 294,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-pr282-current1299-one-configured-sourcefull/OWNERFINAL-root-one-current1299-sourcefull-outer-terminal.json",
+    "sha256": "6fb1b1eabcaf5fd2d0d059773dbd85c4c1dcee2bfc5bd31d28807f4fa55d3c10"
+  },
+  "schema": 1,
+  "source": "1299cc4bb6586f467d36ca124faaaaa77362695f",
+  "source_LIGHT_independent": {
+    "bytes": 18237,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr282-current1299-independent-SOURCE-LIGHT-review/OWNERFINAL-independent-current1299-SOURCE-LIGHT-review.json",
+    "sha256": "097d279bcaa111caef55f475422c6bca2ba282910869b6c07e054e6e3108b06a"
+  },
+  "source_LIGHT_owner": {
+    "bytes": 20628,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/OWNERFINAL-current1299-ordinary-a54-source-LIGHT-full-and-actual-HOLD.json",
+    "sha256": "241ed9898317e794178d48e8411eb8d38ada158732006007721eed73cdff8474"
+  },
+  "source_scope": "PR282 ordinary c35+a54 exact1440 source; no native/installed consumer/release acceptance",
+  "status": "PASS_CURRENT1299_CONFIGURED_SOURCEFULL",
+  "tree": "afe2679cc93bf27fa5021c7698ee7ad3ee21a1b9",
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,316 @@
+{
+  "schema": "pr313-current-actual300-ordinary-source-LIGHT-v1",
+  "status": "OWNER_SOURCE_LIGHT_FROZEN_INDEPENDENT_REVIEW_REQUIRED_FULL_NOT_RUN",
+  "head": "12dd3ec5c4d2a582b192ba11c5f13736757aba16",
+  "tree": "d3428cf69580a4ee252b5ad4f251588b837937d0",
+  "ordered_parents": [
+    "499a83d802ca9a0e2ebe3d77071af10625879297",
+    "e3c29cde8878307912e55ed09b6436c0f91d06d5"
+  ],
+  "branch": "fix/captured-child-cleanup-deadline-20261011",
+  "clean": true,
+  "created_at": "2026-10-11T14:11:52.366005+00:00",
+  "complete_source_count": 1424,
+  "original_parent_count": 1422,
+  "actual_target_count": 1423,
+  "union": "Exact complete automatic merge tree; no novel child/deletion; original process/test blobs+modes exact old499; both parent guide lessons exact",
+  "source_proof": {
+    "path": "/workspace/engineering/pr313-actual300-refresh/after-light-complete-current-source-and-retained-bindings-v2.json",
+    "bytes": 425534,
+    "sha256": "a52d4eed9e0ad854dba63ae94c3f6b51f247be3dcceaaa0daf9c7ee105082f04"
+  },
+  "original_retained_distinct_bindings": 119,
+  "historical_guide_resolution": "Old tracked owning guide retained as immutable old499 Git blob and exact private snapshot; physical current guide intentionally imports both parents",
+  "original_inspector_failure": "Original verifier stopped before LIGHT on historical guide physical-path binding; original constructor retained, named v2 resolution only; no retroactive PASS",
+  "original_gh_pre_API_failure": "Unsupported baseRefOid field rejected locally before any API; empty original output retained; corrected named one CI capture",
+  "LIGHT": {
+    "cached_Doctor": "PASS",
+    "checked_existing_Bootstrap_inputs": 30,
+    "fresh_concrete_own_origins": 5,
+    "Toolkit": 96,
+    "cleanup_scope": {
+      "passed": 103,
+      "skipped": 1,
+      "warnings": 4,
+      "seconds": 7.41,
+      "workers": 0
+    },
+    "full_configured_lint": "PASS_Ruff_check_format316_Isort",
+    "Mypy_files": 352,
+    "generated_workflows": 8,
+    "tracked_GitHub_YAML_including_dependabot": 30,
+    "pre_post_source_body_modes": "EXACT_1424"
+  },
+  "old_source_full": {
+    "source": "499a83d802ca9a0e2ebe3d77071af10625879297",
+    "passed": 1305,
+    "skipped": 13,
+    "current_source_requalification": false,
+    "owner": {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-once-owned/OWNERFINAL-root-cleanup499-configured-source-full.json",
+      "bytes": 13127,
+      "sha256": "0b85404be82820d0337872fd4273444a51b81996dc410ca1367fa52a3eec7661"
+    },
+    "independent": {
+      "path": "/workspace/engineering/captured-child-cleanup-current499-independent-SOURCEFULL-review/OWNERFINAL-independent-current499-configured-SOURCEFULL-review.json",
+      "bytes": 21401,
+      "sha256": "403a9a40759b5b8f996d6025b15889e154014af961c9c49ed898cab1687fd5cd"
+    }
+  },
+  "old_CI": {
+    "source": "499a83d802ca9a0e2ebe3d77071af10625879297",
+    "checks": 19,
+    "success": 18,
+    "failure": 1,
+    "job_id": 114480645718,
+    "run_id": 38143045413,
+    "failure_name": "build (windows-py3.12-devmode)",
+    "completed_at": "2026-10-11T14:05:06Z",
+    "API_synthetic": "e159d9755a4dfc97341e880ae539837f44485c2e",
+    "API_synthetic_tree": "e13ba51b094e429b7c06d6dabbbcc348cc66e86c",
+    "API_ordered_parents": [
+      "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+      "499a83d802ca9a0e2ebe3d77071af10625879297"
+    ],
+    "original_logged_checkout": "UNMEASURED_LOG_NOT_ACQUIRED",
+    "failure_phase": "UNKNOWN_NO_SOURCE_CAUSE_INFERENCE",
+    "new_source_green_carry": false
+  },
+  "one_original_log_proposal": {
+    "requires_root_distinct_release": true,
+    "connector": "github_fetch_workflow_job_logs",
+    "run_id": 38143045413,
+    "job_id": 114480645718,
+    "acquisitions": 1,
+    "private_root_mode": "0700",
+    "decoded_log_mode": "0600",
+    "signed_redirects_stdout": "FORBIDDEN",
+    "inspection": "Authenticate original logged checkout vs API; source/integration census and each failure phase; client shutdown ReadError only if original evidence says so",
+    "no_rerun_or_artifact_or_cause_waiver": true
+  },
+  "producer_binding": {
+    "production": 275,
+    "historical_production": 268,
+    "old268_changed": [
+      "action_server/src/actions/server/_actions_run.py",
+      "action_server/src/actions/server/_api_analytics.py",
+      "action_server/src/actions/server/_api_run.py",
+      "action_server/src/actions/server/_common/process.py",
+      "action_server/src/actions/server/_models.py",
+      "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "action_server/src/actions/server/_runs_state_cache.py",
+      "action_server/src/actions/server/_server.py",
+      "action_server/src/actions/server/migrations/__init__.py"
+    ],
+    "additional_current_production": [
+      "action_server/src/actions/server/migrations/migration_add_run_outputs.py",
+      "action_server/src/actions/server/run_outputs/__init__.py",
+      "action_server/src/actions/server/run_outputs/filesystem.py",
+      "action_server/src/actions/server/run_outputs/models.py",
+      "action_server/src/actions/server/run_outputs/service.py",
+      "action_server/src/actions/server/run_outputs/transport.py",
+      "action_server/src/actions/server/run_outputs/types.py"
+    ],
+    "selected_tests_separate": 5,
+    "native": "UNQUALIFIED_ALL_CURRENT_PRODUCTION_INPUTS_NO_EXCLUSIONS"
+  },
+  "private_persistent_patch": "FROZEN_UNAPPLIED_SOURCE308_b614_CLEAN_UNTOUCHED",
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "exact_old_cleanup_delta": {
+      "path": "/workspace/engineering/pr313-actual300-refresh/canonical-original-cleanup-lesson-retained.patch",
+      "bytes": 1445,
+      "sha256": "0bd405f1149f1acbd5a146833fefd5aa78bdf755b3d7237895ff72f5e9fdc277"
+    },
+    "exact_imported_target_delta": {
+      "path": "/workspace/engineering/pr313-actual300-refresh/canonical-target-prepared-RCC-lesson-imported.patch",
+      "bytes": 1202,
+      "sha256": "b78f7d2291673b4647dc11e455b952ee661b0f8796b11d4a9bc5aceafa88c8fa"
+    },
+    "durable_learning": "Preserve same deadline/exclusive Popen ownership and distinct live/zombie/error states; own prepared prefixes/origins do not supply ignored pinned RCC fixture bytes",
+    "evidence": "Original captured child RED/GREEN controls plus exact accepted source implementation; target owned ignored RCC preparation lesson and two-parent Git union",
+    "stale_ambiguity_removed": "Current typed union does not inherit old499 full/CI admission; historical source-path bindings resolve immutable Git blobs rather than assert old current FS",
+    "remaining_uncertainty": "Current full and fresh hosted CI; actual cleanup/runtime/native/provider/browser/platform and original Windows failure diagnosis remain unqualified; no duplicate PR312 shutdown change"
+  },
+  "limits": [
+    "No current full run",
+    "No source push/merge",
+    "No current hosted or actual provider/native/browser qualification",
+    "No new environments/devshm copies/installs/downloads",
+    "No timeout or cleanup success cause inference from historical failure"
+  ],
+  "upstream_disposition": "none",
+  "bindings": [
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/after-light-complete-current-source-and-retained-bindings-v2.json",
+      "bytes": 425534,
+      "sha256": "a52d4eed9e0ad854dba63ae94c3f6b51f247be3dcceaaa0daf9c7ee105082f04"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/before-light-complete-current-source-and-retained-bindings-v2.json",
+      "bytes": 425534,
+      "sha256": "5e5b8e0fdce9dd3ea9685a3d18e7378f600dfb12dda7a518bbbe3843ad7f98e3"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/cached-doctor-exit.json",
+      "bytes": 101,
+      "sha256": "a7e84e8f2c48cf21638be72058d97ad04257b17bc48dfff80da3bd4941e43e96"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/cached-toolkit-exit.json",
+      "bytes": 101,
+      "sha256": "a7e84e8f2c48cf21638be72058d97ad04257b17bc48dfff80da3bd4941e43e96"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/canonical-original-cleanup-lesson-retained.patch",
+      "bytes": 1445,
+      "sha256": "0bd405f1149f1acbd5a146833fefd5aa78bdf755b3d7237895ff72f5e9fdc277"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/canonical-target-prepared-RCC-lesson-imported.patch",
+      "bytes": 1202,
+      "sha256": "b78f7d2291673b4647dc11e455b952ee661b0f8796b11d4a9bc5aceafa88c8fa"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/current-cached-light-terminal.json",
+      "bytes": 413,
+      "sha256": "706839f37d1fa6462bbf9baf33f3a05aebcadb8ef5e95dc93793558c19ad8399"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/current-cached-light.private.log",
+      "bytes": 11263,
+      "sha256": "ecc5a5e1cf507fadba2b725fe52efeffa4f8cd0ad3b441ad57fed75d47042898"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/current-configured-static-exit.json",
+      "bytes": 101,
+      "sha256": "a7e84e8f2c48cf21638be72058d97ad04257b17bc48dfff80da3bd4941e43e96"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/current-focused-cleanup-exit.json",
+      "bytes": 101,
+      "sha256": "a7e84e8f2c48cf21638be72058d97ad04257b17bc48dfff80da3bd4941e43e96"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/current-focused-cleanup-junit.xml",
+      "bytes": 17767,
+      "sha256": "01424530df6f56f17c6a3ec2d7d75a9d3ead2e3898dcf38a9caeb858b84ec8a0"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/current-generator-roundtrip-exit.json",
+      "bytes": 101,
+      "sha256": "a7e84e8f2c48cf21638be72058d97ad04257b17bc48dfff80da3bd4941e43e96"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/current-generator-roundtrip-proof.json",
+      "bytes": 8441,
+      "sha256": "76f2d536bc749c4719fdb9035bb162b11b39008adb17813bdca41568d09e00aa"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/current-origin-action_server.json",
+      "bytes": 351,
+      "sha256": "83f687003c69cfc253f83433cca8d173951ef59137bcb2b7cd69d9663867f12f"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/current-origin-actions-http-helper.json",
+      "bytes": 342,
+      "sha256": "412ff8a4c6fddfc4ffd92908b5787094dea99cb766fb33d1e3d3760765f92697"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/current-origin-actions.json",
+      "bytes": 296,
+      "sha256": "a0f567d9f0da247dbc4c00351e15d0eb6f8155f07cd562527b1c95a914cbc152"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/current-origin-devutils.json",
+      "bytes": 318,
+      "sha256": "baed24ff19834958c4bde4f7252645823a778207fe317e7676b7e409ebd787eb"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/current-origin-work-items.json",
+      "bytes": 327,
+      "sha256": "8cf56ff6b4cd1674059d8c2b8a344658c2e2c24b498960220b659741d5cd753e"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/current-own30-five-origins-exit.json",
+      "bytes": 101,
+      "sha256": "a7e84e8f2c48cf21638be72058d97ad04257b17bc48dfff80da3bd4941e43e96"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/current-source-postguard-exit.json",
+      "bytes": 101,
+      "sha256": "a7e84e8f2c48cf21638be72058d97ad04257b17bc48dfff80da3bd4941e43e96"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/freeze_current_LIGHT.py",
+      "bytes": 6790,
+      "sha256": "73de6325885732e17542b2f6ad76b9716f79cb0478a47a7df202805ee2a907c6"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/original-API-synthetic-commit-metadata.private.json",
+      "bytes": 17518,
+      "sha256": "984c026d7f5f3e751d1fc0aa29e356f8802001be85b36aab1f49031cd7816beb"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/original-PR313-current-base-metadata.private.json",
+      "bytes": 17127,
+      "sha256": "11b999e907004ce8a02724a1595c9272a7cad87c87879094a84ebb8669de7896"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/original-PR313-one-CI-readback-v2.private.json",
+      "bytes": 6830,
+      "sha256": "d65f362a99f42262f04583798be3664e68637d927b62e98bf1698d22d9752b2a"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/original-PR313-one-CI-readback.private.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/original-failed-run-metadata.private.json",
+      "bytes": 12657,
+      "sha256": "59adab186369beea977688ab4ca50305dae6880dbe21608f7ebef08c3df21357"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/original-prelight-historical-guide-physical-binding-inspector-failure.json",
+      "bytes": 714,
+      "sha256": "eb41d31c58ed7d464ede629fe28e87027074e227e45cc27c09a8da3cbf5a17c7"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/original-run-head-commit-metadata.private.json",
+      "bytes": 16024,
+      "sha256": "44e2202047a2a0d64c439d131c53dbbad5d463e20016b5befa942678938cb7e8"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/original499-before-refresh-retained-guards.json",
+      "bytes": 620,
+      "sha256": "7cfc00ae38c11a6adedd9a0c5abc0661544b23669588e6f77707e47dea2d9c5e"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/original499-complete-retained-bindings-before-refresh.json",
+      "bytes": 28139,
+      "sha256": "00fcc297e0711841cf39665d375997dc9c7099e2810eab23e4e87c230c84f0b0"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/original499-tracked-guide-exact-Git-snapshot.md",
+      "bytes": 250724,
+      "sha256": "126a062f4b84491d0e027d8f100544a6f6782607b83151ae408e531ba05a330e"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/run_cached_light.py",
+      "bytes": 3657,
+      "sha256": "10b789c04612316a250e36a6531d180bab5387558410c7985adf44091ca73606"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/verify_current_source.py",
+      "bytes": 7490,
+      "sha256": "f91dbb0d487c4f3cee664e1c19d01e3f0d8068139ccbd14b796785180cef2e5f"
+    },
+    {
+      "path": "/workspace/engineering/pr313-actual300-refresh/verify_current_source_v2.py",
+      "bytes": 7847,
+      "sha256": "c45ed4472f1c3939ccc9187d8701f8f71f9095127ef318ae79181ca9a79a8a0b"
+    }
+  ],
+  "binding_count": 34
+}

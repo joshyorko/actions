@@ -1,0 +1,548 @@
+{
+  "candidate_count": 40,
+  "candidate_total_bytes_only_no_payload_copied": 345772,
+  "canonical_reconciliation": {
+    "accepted_V7_eight_lines": {
+      "adaptation": "First retain accepted source/cache blocks, then exact8line meaning alongside isolated cache contract; never blindly apply absent anchor or replace dirty guide.",
+      "anchor_present_in_dirty_checkpoint": false,
+      "binding": {
+        "bytes": 747,
+        "mode": "0o600",
+        "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/canonical-current-cache-runner-proposed-delta.patch",
+        "sha256": "2f830d4bb79a9963c4e9f1bb189e52ce08a8b250fdba0bbe79cad991de4e2f93"
+      },
+      "exact_anchor": "Keep capacity thresholds and strict cleanup admission unchanged."
+    },
+    "accepted_archive_alias_six_lines": {
+      "adaptation": "If long source context absent, preserve exact6line archival-preservation-versus-acceptance meaning next to evidence hash/staged-blob paragraph. No old-path recreation.",
+      "binding": {
+        "bytes": 846,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/canonical-exact-historical-receipt-archive-alias-proposed.patch",
+        "sha256": "9dd8008b4194f7cd9848796c7c7b5639862271e73ee222da46d5a59ef501d8ad"
+      },
+      "long_context_present_in_dirty_checkpoint": false
+    },
+    "conflicts": [
+      "V7 archive sentence overlaps detailed6line archival rule; keep originalfailure scope and currentconfiguration admission distinct.",
+      "Dirty guides and305/282/313 accepted imports overlap producer/path-filter/cleanup lessons; compare accepted changed blocks and preserve both, never whole-file overwrite."
+    ],
+    "new_scoped_privacy_delta": {
+      "bytes": 562,
+      "mode": "0o600",
+      "path": "/workspace/engineering/curated-successor-handoff-plan-after62f4/canonical-safe-curated-successor-proposed.patch",
+      "sha256": "1d1658ccbb582c9b5a64ad00f7d050b3300b4fee2a1392eea11edbab5a46bb3c"
+    }
+  },
+  "checkpoint": {
+    "branch": "handoff/actions-swarm-mk3-wave8-20261010",
+    "collector_rerun": "NOT_RUN",
+    "existing1180manifest_not_recollected": true,
+    "frozen_collector": {
+      "bytes": 17097,
+      "mode": "0o600",
+      "path": "/workspace/engineering/checkpoint-current-engineering-after299-0938.py",
+      "sha256": "0319f50eaa81800c7edf3bc75b80182bbfc5721ba0ef86d45c199e3bc0a6d4d1"
+    },
+    "head": "62f4e180f6c894777ebc8ed3a729e88d2f6531d6",
+    "tree": "a7cb47cef9eae2ce3b219bb807b535582c67804e"
+  },
+  "curated_rows": [
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 7829,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "actual300",
+      "mode": "0o600",
+      "original_declared_status": "ACTUAL_NORMAL_MERGE_VERIFIED_INDEPENDENT_REVIEW_PENDING",
+      "path": "/workspace/engineering/pr300-current74-root-normal-ready-and-merge/OWNERFINAL-root-actual-normal-PR300-integration.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/actual300--OWNERFINAL-root-actual-normal-PR300-integration.json",
+      "sha256": "c90ba2b4fa88774b2f92ea2585b3ec5a017a08d1c9c49887be014fbe108a7eda"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 7639,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "actual300",
+      "mode": "0o444",
+      "original_declared_status": "GO_ACTUAL_NORMAL_PR300_INTEGRATION_ONLY_RELEASE_AND_NEW_BINARY_FUNCTIONAL_QUALIFICATION_HOLD",
+      "path": "/workspace/engineering/pr300-current74-actual-integration-independent-review/OWNERFINAL-independent-actual-normal-current74-PR300-integration-review.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/actual300--OWNERFINAL-independent-actual-normal-current74-PR300-integration-review.json",
+      "sha256": "51e944e9dc6117e924b2ee8f6c448b6ab93dea318d7efe28611a535eabc7d40b"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 1078,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "actual312",
+      "mode": "0o600",
+      "original_declared_status": "ROOT_ONE_NORMAL_EXPECTED_HEAD_PR312_INTEGRATION_PASS_NAMED_METADATA_SUCCESSOR",
+      "path": "/workspace/engineering/root-pr312-currentec70-one-normal-ready-and-merge/OWNERFINAL-root-one-normal-currentec70-PR312-integration-named-successor.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/actual312--OWNERFINAL-root-one-normal-currentec70-PR312-integration-named-successor.json",
+      "sha256": "06e1867cfde7110c8645256c7ed7d34fe6b085e934d32732a35fba1c2e5dc0c1"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 13602,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "actual312",
+      "mode": "0o400",
+      "original_declared_status": "PASS_ACTUAL_NORMAL_PR312_INTEGRATION_EXACT_ACCEPTED_TREE_SOURCE_SCOPE_ONLY",
+      "path": "/workspace/engineering/pr312-actual-a54-independent-integration-review/OWNERFINAL-independent-actual-a54-PR312-normal-integration-review.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/actual312--OWNERFINAL-independent-actual-a54-PR312-normal-integration-review.json",
+      "sha256": "09808164d95dfc33f64ed2e261e23e3c280797c64b8895a51e78482ef550eece"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 12574,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "actual312",
+      "mode": "0o444",
+      "original_declared_status": "GO_CURRENT_EC70_CONFIGURED_SOURCEFULL_NORMAL_EXISTING_BRANCH_PUSH_PREREQUISITE_ONLY",
+      "path": "/workspace/engineering/pr312-currentec70-SOURCEFULL-independent-actual-review/OWNERFINAL-independent-currentec70-configured-SOURCEFULL-review.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/actual312--OWNERFINAL-independent-currentec70-configured-SOURCEFULL-review.json",
+      "sha256": "f375b3daed2a3523c4dc55d87632655f2e90918dc8d1deb4af6493f9bd073448"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 13921,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "current_e4_source_cache",
+      "mode": "0o600",
+      "original_declared_status": "OWNER_CURRENT_SOURCE_LIGHT_FROZEN_FULL_AND_NEW_RCC_ACTUAL_HOLD",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-source/OWNERFINAL-current-e4ff-reviewed-cache-application-and-e3c-ordinary-source-LIGHT.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/current_e4_source_cache--OWNERFINAL-current-e4ff-reviewed-cache-application-and-e3c-ordinary-source-LIGHT.json",
+      "sha256": "e18d871d9daf93e21e0b34610af31e9d4198bc4a1c93431d8799464954d37c6c"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 7021,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "current_e4_source_cache",
+      "mode": "0o444",
+      "original_declared_status": "GO_CURRENT_E4FF_SOURCE_LIGHT_ONLY",
+      "path": "/workspace/engineering/pr308-currente4ff-independent-SOURCE-LIGHT-review/OWNERFINAL-independent-current-e4ff-owned-cache-ordinary-source-LIGHT-review.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/current_e4_source_cache--OWNERFINAL-independent-current-e4ff-owned-cache-ordinary-source-LIGHT-review.json",
+      "sha256": "66a2819f6231928140574e590d3a68146d29c1f965609caa14dd65f705b8a33d"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 3589,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "current_e4_source_cache",
+      "mode": "0o600",
+      "original_declared_status": "ROOT_CURRENT_E4FF_CONFIGURED_SOURCEFULL_PASS_NATIVE_NOT_RUN",
+      "path": "/workspace/engineering/root-pr308-currente4ff-one-sourcefull-v2/OWNERFINAL-root-currente4ff-configured-SOURCEFULL-PASS-v2.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/current_e4_source_cache--OWNERFINAL-root-currente4ff-configured-SOURCEFULL-PASS-v2.json",
+      "sha256": "fb8a58b643957e72ba1d53d2216d4b73ac42b5e57235b2510f3159f667a2c1a0"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 10814,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "current_e4_source_cache",
+      "mode": "0o444",
+      "original_declared_status": "GO_CURRENT_E4FF_CONFIGURED_SOURCEFULL_ONLY",
+      "path": "/workspace/engineering/pr308-currente4ff-SOURCEFULL-independent-actual-review/OWNERFINAL-independent-current-e4ff-configured-SOURCEFULL-review-v2.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/current_e4_source_cache--OWNERFINAL-independent-current-e4ff-configured-SOURCEFULL-review-v2.json",
+      "sha256": "16d6709b835e1e4f16be8916b3f10eeb852c195845ebd64c5ac8fd08b19595b9"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 7994,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "current_e4_source_cache",
+      "mode": "0o444",
+      "original_declared_status": "GO_PRIVATE_TWO_PATH_CACHE_PATCH_FOR_ROOT_SOURCE_APPLICATION_AND_SEPARATE_COMPOSED_SOURCE_REVIEW_ONLY",
+      "path": "/workspace/engineering/pr308-owned-package-cache-independent-private-patch-review/OWNERFINAL-independent-private-owned-package-cache-two-path-patch-review.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/current_e4_source_cache--OWNERFINAL-independent-private-owned-package-cache-two-path-patch-review.json",
+      "sha256": "ae37fd270e8dd8755cd1774a0eb0cbcdf41d41aeb8f0fad8e394789b0a8a6878"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 14742,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "current_e4_source_cache",
+      "mode": "0o600",
+      "original_declared_status": "OWNERFINAL_NAMED_V2_CURRENT_SOURCEFULL_PREEXECUTION_REVIEW_REQUIRED_NOT_RUN",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/OWNERFINAL-current-e4ff-managed-configured-SOURCEFULL-preexecution-proposal-v2.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/current_e4_source_cache--OWNERFINAL-current-e4ff-managed-configured-SOURCEFULL-preexecution-proposal-v2.json",
+      "sha256": "776095153a1aa0120cf51644ae453296e124bf2d78ad15ba213263cf2c54a0eb"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 11224,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "current_e4_source_cache",
+      "mode": "0o400",
+      "original_declared_status": "GO_CONDITIONAL_NAMED_V2_CURRENT_E4FF_SOURCEFULL_PREEXECUTION_ONLY",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-independent-SOURCEFULL-preexecution-review/OWNERFINAL-independent-named-V2-current-e4ff-SOURCEFULL-preexecution-review.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/current_e4_source_cache--OWNERFINAL-independent-named-V2-current-e4ff-SOURCEFULL-preexecution-review.json",
+      "sha256": "5a1c97b37f8e0aca5ac60c3c4aee430a8c033b5e3dc3b168320ced58a89c8849"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 25665,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "V7_configuration",
+      "mode": "0o400",
+      "original_declared_status": "OWNER_CONDITIONAL_CURRENT_SOURCE_PINNED_CODE_AND_CONFIG_FROZEN_NOT_ACTUAL_RELEASE",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/OWNERFINAL-current-e4ff-owned-cache-transport-v7-CONDITIONAL-preexecution-proposal.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/V7_configuration--OWNERFINAL-current-e4ff-owned-cache-transport-v7-CONDITIONAL-preexecution-proposal.json",
+      "sha256": "2f4fb5d662a6b271ea7d3e360f9206ee27be16ced996dae88f886cc543141cca"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 13093,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "V7_configuration",
+      "mode": "0o400",
+      "original_declared_status": "GO_PRIVATE_SOURCE_PREPARATION_ONLY_EXECUTION_CONFIG_UNQUALIFIED",
+      "path": "/workspace/engineering/rcc-owned-cache-v7-independent-private-source-review/OWNERFINAL-independent-private-V7-current-e4ff-owned-cache-source-preparation-review.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/V7_configuration--OWNERFINAL-independent-private-V7-current-e4ff-owned-cache-source-preparation-review.json",
+      "sha256": "ff0d7698fcd3e0adae305f106395bd1ef976632fc7278dadfa38ac800255d18d"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 16776,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "V7_configuration",
+      "mode": "0o400",
+      "original_declared_status": "OWNERFINAL_CURRENT_E4FF_SOURCE_QUALIFIED_CONTROL3_CONFIG_REQUIRES_INDEPENDENT_CONFIG_GO_AND_DISTINCT_ROOT_RELEASE",
+      "path": "/workspace/engineering/rcc-compatibility-current-e4ff-qualified-config-successor/OWNERFINAL-current-e4ff-control3-SOURCE-QUALIFIED-owned-cache-config-v4.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/V7_configuration--OWNERFINAL-current-e4ff-control3-SOURCE-QUALIFIED-owned-cache-config-v4.json",
+      "sha256": "a8cad29c21c610636537ef59c91fd6c40f08afdcd635c228cef83dd7bfb526ba"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 11204,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "V7_configuration",
+      "mode": "0o400",
+      "original_declared_status": "INDEPENDENT_CURRENT_CACHE_CONFIG_GO",
+      "path": "/workspace/engineering/rcc-current-e4ff-qualified-cache-config-independent-review/OWNERFINAL-independent-current-e4ff-control3-qualified-cache-config-review.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/V7_configuration--OWNERFINAL-independent-current-e4ff-control3-qualified-cache-config-review.json",
+      "sha256": "4102c29ca80f444e3c8c028455d2f609ecb4ba9ee5179c0aa8bd67f91e754cb0"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 1046,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "V7_configuration",
+      "mode": "0o600",
+      "original_declared_status": "CURRENT_CONFIG_SOURCE_QUALIFIED_NATIVE_NOT_RUN",
+      "path": "/workspace/engineering/rcc-compatibility-current-e4ff-qualified-config-successor/qualified-config-metadata-proof.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/V7_configuration--qualified-config-metadata-proof.json",
+      "sha256": "fab4824f5d7af6151bd4eea20fb2d817bfc817e713f6b0c083b77191d017ea94"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 606,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "V7_configuration",
+      "mode": "0o600",
+      "original_declared_status": "PASS_CURRENT_SOURCE_AND_HISTORICAL_NATIVE_BODY_MODE_READONLY",
+      "path": "/workspace/engineering/rcc-compatibility-current-e4ff-qualified-config-successor/readonly-native-prepared-supplement.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/V7_configuration--readonly-native-prepared-supplement.json",
+      "sha256": "32965089ef421a7e3a336a543f2190e61ba1a1b34ff98958df110a6474994d16"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 2150,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "V7_configuration",
+      "mode": "0o600",
+      "original_declared_status": "PASS_NAMED_METADATA_SUCCESSOR_SCOPE_ONLY",
+      "path": "/workspace/engineering/rcc-compatibility-current-e4ff-qualified-config-successor/named-qualified-constructor-scope-proof.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/V7_configuration--named-qualified-constructor-scope-proof.json",
+      "sha256": "98308d850784853016d3ab881ccc97afdb0b5ccba877e6726ca86f2a1c7ec79e"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 1483,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "failed_control3_preservation",
+      "mode": "0o600",
+      "original_declared_status": "FAIL_HOLD",
+      "path": "/workspace/engineering/root-rcc-compatibility-control3-one-actual/OWNERFINAL-root-one-control3-terminal.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/failed_control3_preservation--OWNERFINAL-root-one-control3-terminal.json",
+      "sha256": "72cb3d7fb9ff99386f2c9e2a8d43282ec77ac609d1eb813543d23a6596047697"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 11616,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "failed_control3_preservation",
+      "mode": "0o400",
+      "original_declared_status": "FAIL_HOLD_STOP_RCC5_AND_CANDIDATE7276_NOT_RUN",
+      "path": "/workspace/engineering/rcc-compatibility-control3-one-actual-independent-review/OWNERFINAL-independent-original-control3-capacity-and-cleanup-failure-STOP-review.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/failed_control3_preservation--OWNERFINAL-independent-original-control3-capacity-and-cleanup-failure-STOP-review.json",
+      "sha256": "d14c888b448f5ad59dcfc5ae26b75bda80901b297f8735902146fc6536227fc3"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 1075,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "failed_control3_preservation",
+      "mode": "0o600",
+      "original_declared_status": "PRESERVATION_ONLY_TERMINAL_NO_REQUALIFICATION",
+      "path": "/workspace/engineering/root-failed-control3-one-byte-preservation-v4/OWNERFINAL-root-one-failed-control3-byte-preservation-terminal.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/failed_control3_preservation--OWNERFINAL-root-one-failed-control3-byte-preservation-terminal.json",
+      "sha256": "b5c85ac949bd07d7fa32c41cc8075b8e18dc5e88499d202569de8c13b0a97909"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 1864,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "failed_control3_preservation",
+      "mode": "0o600",
+      "original_declared_status": "EXACT_HISTORICAL_FAILED_MEMBER_PRESERVATION_MAPPING_NOT_ACTUAL_ACCEPTANCE",
+      "path": "/workspace/engineering/root-failed-control3-one-byte-preservation-v4/root-exact-historical-failed-member-archive-mapping.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/failed_control3_preservation--root-exact-historical-failed-member-archive-mapping.json",
+      "sha256": "cc73027ce86ea0965f3bdd88ed3398c322dcf012b337a4ca161966f19ffee6c7"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 639,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "capacity_B25_B26",
+      "mode": "0o600",
+      "original_declared_status": "ROOT_ONE_B25_TERMINAL",
+      "path": "/workspace/engineering/root-B25-one-existing-tmp-recovery/OWNERFINAL-root-one-B25-existing-tmp-volume-terminal.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/capacity_B25_B26--OWNERFINAL-root-one-B25-existing-tmp-volume-terminal.json",
+      "sha256": "982881775d8e85ef30b475caafd5f12a8bba562d787b6f660cb87b94cd9abb8f"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 8056,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "capacity_B25_B26",
+      "mode": "0o444",
+      "original_declared_status": "GO_ONE_B25_COMPLETED_NAMESPACE_ORIGINAL_BYTE_PRESERVATION_ONLY",
+      "path": "/workspace/engineering/capacity-recovery-batch25-independent-actual-review/OWNERFINAL-independent-one-B25-existing-tmp-original-preservation-actual-review.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/capacity_B25_B26--OWNERFINAL-independent-one-B25-existing-tmp-original-preservation-actual-review.json",
+      "sha256": "b414268ca0837d13298cbfc0dfd8c26774343b9486535cf2f78061ea75e9de36"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 640,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "capacity_B25_B26",
+      "mode": "0o600",
+      "original_declared_status": "ROOT_ONE_B26_TERMINAL",
+      "path": "/workspace/engineering/root-B26-one-existing-tmp-recovery/OWNERFINAL-root-one-B26-existing-tmp-volume-terminal.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/capacity_B25_B26--OWNERFINAL-root-one-B26-existing-tmp-volume-terminal.json",
+      "sha256": "59beb8ce609aaa3f916db3912c1192e05597b6008c83df11f72610ce00928f0e"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 8357,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "capacity_B25_B26",
+      "mode": "0o400",
+      "original_declared_status": "GO_CONDITIONAL_EXACT_SEVEN_COMPLETED_B26_EXISTING_TMP_PREEXECUTION",
+      "path": "/workspace/engineering/capacity-recovery-batch26-independent-preexecution-review/OWNERFINAL-independent-exact-seven-B26-existing-tmp-preexecution-review.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/capacity_B25_B26--OWNERFINAL-independent-exact-seven-B26-existing-tmp-preexecution-review.json",
+      "sha256": "57882f172f08678cbc88a4b17d85f9ea27c41057472b9dad3e0a154ba305fe9f"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 14931,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "current305_PENDING",
+      "mode": "0o600",
+      "original_declared_status": "OWNERFINAL_CURRENT_584a_ORDINARY_E3_SOURCE_LIGHT_GO_FOR_REVIEW_FULL_AND_ACTUAL_HOLD",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/OWNERFINAL-current584a-ordinary-e3-source-LIGHT-full-and-actual-HOLD.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/current305_PENDING--OWNERFINAL-current584a-ordinary-e3-source-LIGHT-full-and-actual-HOLD.json",
+      "sha256": "5835c7c1b57493d784ea39cf0c037253460b04b3b3c9c4fa48fb1db1a887c387"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 21234,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "current305_PENDING",
+      "mode": "0o400",
+      "original_declared_status": "NO_SINGLE_STATUS_FIELD",
+      "path": "/workspace/engineering/pr305-current584a-independent-LIGHT-preexecution-review/OWNERFINAL-independent-current584a-SOURCE-LIGHT-and-managed-full-preexecution-review.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/current305_PENDING--OWNERFINAL-independent-current584a-SOURCE-LIGHT-and-managed-full-preexecution-review.json",
+      "sha256": "88f10353640947345b210faea05a9574da130dfbb74c0ee542ddb5a76286e25f"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 20628,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "current282_PENDING",
+      "mode": "0o600",
+      "original_declared_status": "OWNERFINAL_CURRENT1299_ORDINARY_A54_SOURCE_LIGHT_GO_FOR_INDEPENDENT_REVIEW_FULL_AND_ACTUAL_HOLD",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/OWNERFINAL-current1299-ordinary-a54-source-LIGHT-full-and-actual-HOLD.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/current282_PENDING--OWNERFINAL-current1299-ordinary-a54-source-LIGHT-full-and-actual-HOLD.json",
+      "sha256": "241ed9898317e794178d48e8411eb8d38ada158732006007721eed73cdff8474"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 18237,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "current282_PENDING",
+      "mode": "0o400",
+      "original_declared_status": "GO_EXACT_CURRENT1299_ORDINARY_A54_SOURCE_LIGHT_ONLY_FULL_AND_ACTUAL_HOLD",
+      "path": "/workspace/engineering/pr282-current1299-independent-SOURCE-LIGHT-review/OWNERFINAL-independent-current1299-SOURCE-LIGHT-review.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/current282_PENDING--OWNERFINAL-independent-current1299-SOURCE-LIGHT-review.json",
+      "sha256": "097d279bcaa111caef55f475422c6bca2ba282910869b6c07e054e6e3108b06a"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 14737,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "current313_PENDING",
+      "mode": "0o600",
+      "original_declared_status": "OWNER_SOURCE_LIGHT_FROZEN_INDEPENDENT_REVIEW_REQUIRED_FULL_NOT_RUN",
+      "path": "/workspace/engineering/pr313-actual300-refresh/OWNERFINAL-pr313-current-actual300-ordinary-refresh-SOURCE_LIGHT.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/current313_PENDING--OWNERFINAL-pr313-current-actual300-ordinary-refresh-SOURCE_LIGHT.json",
+      "sha256": "0171ef23a625807d6f09dabcc25b9695ee622ca570f8b8800a75433c7a1bcbbb"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 8477,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "current313_PENDING",
+      "mode": "0o444",
+      "original_declared_status": "GO_CURRENT12DD_SOURCE_LIGHT_ONLY",
+      "path": "/workspace/engineering/pr313-current12dd-independent-LIGHT-and-preexecution-review/OWNERFINAL-independent-current12dd-SOURCE_LIGHT-GO-and-original4918-FULL-preexecution-HOLD.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/current313_PENDING--OWNERFINAL-independent-current12dd-SOURCE_LIGHT-GO-and-original4918-FULL-preexecution-HOLD.json",
+      "sha256": "3efa58d23a1f2f5f4e21f006c4548f97e0c864f3f738ce3fc23bea40df9a3a83"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 13624,
+      "content_class": "SCOPED_SUMMARY_OR_BINDING_METADATA_ONLY",
+      "group": "current313_PENDING",
+      "mode": "0o444",
+      "original_declared_status": "GO_CURRENT12DD_BOUND_FULL_PREEXECUTION",
+      "path": "/workspace/engineering/pr313-current12dd-bound-FULL-independent-preexecution-review/OWNERFINAL-independent-current12dd-root-bound-FULL-preexecution-review.json",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/current313_PENDING--OWNERFINAL-independent-current12dd-root-bound-FULL-preexecution-review.json",
+      "sha256": "bf0a16a1ea711fa673b1ac59801260bfe91bfbd5c6f380fea4ed26855940ee02"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 747,
+      "content_class": "EXACT_SOURCE_BACKED_CANONICAL_PATCH",
+      "group": "exact_canonical_deltas",
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/canonical-current-cache-runner-proposed-delta.patch",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/exact_canonical_deltas--canonical-current-cache-runner-proposed-delta.patch",
+      "sha256": "2f830d4bb79a9963c4e9f1bb189e52ce08a8b250fdba0bbe79cad991de4e2f93"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 846,
+      "content_class": "EXACT_SOURCE_BACKED_CANONICAL_PATCH",
+      "group": "exact_canonical_deltas",
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/canonical-exact-historical-receipt-archive-alias-proposed.patch",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/exact_canonical_deltas--canonical-exact-historical-receipt-archive-alias-proposed.patch",
+      "sha256": "9dd8008b4194f7cd9848796c7c7b5639862271e73ee222da46d5a59ef501d8ad"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 1273,
+      "content_class": "EXACT_SOURCE_BACKED_CANONICAL_PATCH",
+      "group": "exact_canonical_deltas",
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-owned-package-cache-independent-private-patch-review/exact-accepted-owned-package-cache-canonical-delta.patch",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/exact_canonical_deltas--exact-accepted-owned-package-cache-canonical-delta.patch",
+      "sha256": "a68e716ce5cef554024ba6e031237fdeeda528add0bc6a72151245284e149886"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 5462,
+      "content_class": "EXACT_SOURCE_BACKED_CANONICAL_PATCH",
+      "group": "exact_canonical_deltas",
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/exact-imported-e3-canonical-guide-delta.patch",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/exact_canonical_deltas--exact-imported-e3-canonical-guide-delta.patch",
+      "sha256": "0cf87ed34224683d86326baaf62802c41cc545252ecc5683faf8b7dc9b9b0c02"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 8802,
+      "content_class": "EXACT_SOURCE_BACKED_CANONICAL_PATCH",
+      "group": "exact_canonical_deltas",
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/exact-imported-a54-canonical-guide-delta.patch",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/exact_canonical_deltas--exact-imported-a54-canonical-guide-delta.patch",
+      "sha256": "0fb4f0d3c528eb9a8718e2a422c77bfc7f479af357c5eb57c51de224a27aebc3"
+    },
+    {
+      "already_in_62f4_exact_blob": false,
+      "bytes": 477,
+      "content_class": "EXACT_SOURCE_BACKED_CANONICAL_PATCH",
+      "group": "exact_canonical_deltas",
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr313-current12dd-bound-FULL-independent-preexecution-review/exact-scoped-execution-review-decision-canonical-proposed.patch",
+      "proposed_successor_relative_path": "docs/program/evidence/wave11/current-engineering-successor-20261011/exact_canonical_deltas--exact-scoped-execution-review-decision-canonical-proposed.patch",
+      "sha256": "6745f706e5dbed42b95fe8cd198a8a3b2584ddccdfc18d55221e4a5092ea1744"
+    }
+  ],
+  "dirty_canonical_guides_preserved": {
+    "docs/skills/provenance-observability.md": {
+      "bytes": 7942,
+      "mode": "0o600",
+      "path": "/workspace/engineering/campaign-checkpoint/docs/skills/provenance-observability.md",
+      "sha256": "467433a1420681798dfce4fa307d250022eebb7006db43925698c6cfc516215a"
+    },
+    "docs/skills/repository-operations.md": {
+      "bytes": 233987,
+      "mode": "0o600",
+      "path": "/workspace/engineering/campaign-checkpoint/docs/skills/repository-operations.md",
+      "sha256": "f0d27fec2a4de184dc128c50a619ae1e521cadbfd1e9c59b9afe28764cf6ace5"
+    }
+  },
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "durable_learning_captured": "Body/scope-based successor curation; private binding is not payload publication authority; failures/conditional proposals keep provenance.",
+    "evidence": "62f4 exact body comparison; unchanged0319 collector; explicit summaries/patch shortlist and raw exclusions; dirty-guide and8line/6line anchor inspection.",
+    "exact_delta": {
+      "bytes": 562,
+      "mode": "0o600",
+      "path": "/workspace/engineering/curated-successor-handoff-plan-after62f4/canonical-safe-curated-successor-proposed.patch",
+      "sha256": "1d1658ccbb582c9b5a64ad00f7d050b3300b4fee2a1392eea11edbab5a46bb3c"
+    },
+    "remaining_uncertainty": "Currentnative attempt and pendingfull/CI/release scopes; root ingestion/content/staged-byte review still required.",
+    "stale_or_ambiguous_guidance_removed": "Filename, timestamp or source/configGO is not blanket publication/native acceptance; absent patch anchors require explicit reconciliation."
+  },
+  "existing_exact_bodies_no_duplicate_needed": 0,
+  "new_exact_bodies_not_in_checkpoint": 40,
+  "operations_not_performed": [
+    "No checkpoint/index/ref/source mutation or commit/push",
+    "No oldcollector rerun/APIquery/download",
+    "No gateway/native/product import/test/full execution",
+    "No largepayloadcopy/extraction or nextversionconfiguration generation"
+  ],
+  "owner_announced_at_UTC": "2026-10-11T15:54:20.999020+00:00",
+  "pending_frontiers": {
+    "Runtime221": "HOLD; platform/content/OAuthauthority/private/cold/install/tag/publication scopes remain separate",
+    "capacityB26": "Root terminal and preexecution independent included; no actualB26 independent receipt adopted here",
+    "current282": "1299 sourceLIGHT/ind only; current full/freshCI/native/private/full127/release held",
+    "current305": "584a sourceLIGHT/ind only; current full/freshCI/native/private/full99/release held",
+    "current313": "12dd sourceLIGHT+corrected FULLpreexecution; currentfull/freshCI/oldWindowsfailure held",
+    "native_current_control3": "NO_CURRENT_PASS_AT_PLAN_FREEZE. Earlier failed-control3 capacity/cleanup remains FAIL; configuration141187/ind4102 does not execute it. No nextversionconfig until real current control3PASS.",
+    "sourcegraph": "Existing54 graph retained; no graph/ledger regeneration or campaign authorized"
+  },
+  "preserved_classifier_diagnostic": {
+    "bytes": 753,
+    "mode": "0o600",
+    "path": "/workspace/engineering/curated-successor-handoff-plan-after62f4/initial-safe-field-scanner-diagnostic.json",
+    "sha256": "44b2d98b69142e8eca23f9c0a8240a0431d9e1a1e02ba4b287e61c2c3c13aed3"
+  },
+  "private_payload_exclusions": [
+    "Raw/full/private API responses, auth requests/headers, signed asset URLs, decoded logs/stdout/stderr",
+    "Provider bodies, process/cwd/FD/PID/create-time inventories and full pytest node census",
+    "Native binaries, ZIP/wheel/sdist/archive bytes, private archive indices, registry/cache/datadir/lease snapshots",
+    "Current797131B actual configuration and marker/selector bodies; private constructor/test code/logs; original frozen helper profiles",
+    "Any referenced private body inside safe owner/review JSON: binding metadata does not authorize recursive copying"
+  ],
+  "schema": 1,
+  "selection_method": "Explicit bounded engineering shortlist; exact SHA256/size/mode and Git body identity against62f4 complete tree. No timestamp collector or recursive binding expansion. Summaries retain original statuses, including conditional/HOLD/FAIL. Root ingestion needs independent content and staged-byte verification.",
+  "status": "READONLY_CURATED_SUCCESSOR_HANDOFF_PLAN_ONLY_NOT_CHECKPOINT_ACCEPTANCE",
+  "upstream_disposition": "none"
+}

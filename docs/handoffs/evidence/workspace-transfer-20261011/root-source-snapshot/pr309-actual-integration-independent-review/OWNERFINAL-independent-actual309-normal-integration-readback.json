@@ -1,0 +1,100 @@
+{
+  "schema": "pr309-actual-normal-integration-independent-readback/v1",
+  "status": "GO_ACTUAL_NORMAL309_INTEGRATION_ONLY_NO_WHOLE_ISSUE_RELEASE_ADMISSION",
+  "captured_utc": "2026-10-11T11:37:33.074994+00:00",
+  "root_actual_owner": {
+    "path": "/workspace/engineering/pr309-actual-integration.json",
+    "bytes": 1353,
+    "sha256": "cc14479336e95bc5cafe2795bc796a7d1e3b5f6dd70d4bc66096ad5cd7850046"
+  },
+  "root_normal_authorization": {
+    "path": "/workspace/engineering/pr309-current618-root-normal-merge-authorization.json",
+    "bytes": 4927,
+    "sha256": "11216299b207fd3c7c7473959745f07aa3b1963511e9596de1822eeadfe8ec7a"
+  },
+  "final_independent_scoped_GO": {
+    "path": "/workspace/engineering/pr309-current618-independent-final-admission-review/OWNERFINAL-independent-current309-final-scoped-admission-review.json",
+    "bytes": 10066,
+    "sha256": "8d834b13a663e6768090963ef8a62860155b31b2c9b1aebbf5b11b5c3f70ab7e"
+  },
+  "accepted_source_owner": {
+    "bytes": 19843,
+    "path": "/workspace/engineering/pr309-actual618-refresh/frozen-source-receipt.json",
+    "sha256": "e00bf1644c432c14da0b71fe79ffe58373cc1df3325163127cca780bd2120d01"
+  },
+  "accepted_independent_source_GO": {
+    "bytes": 6938,
+    "path": "/workspace/engineering/pr309-actual618-independent-review/independent-frozen-current618-source-review.json",
+    "sha256": "1f0537ee03da972e181e39868ad47a28feac48aba8dee08b5448e4211feed005"
+  },
+  "source": {
+    "actual": "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+    "tree": "1181b35b11e4904405ca1a9a3a398e6c1c3abfd0",
+    "ordered_actual_parents": [
+      "6181b044c75de35386f1ae30e71725398b6a7feb",
+      "83123ff42c21587e3eb944e20af89f1a9e9ff0ea"
+    ],
+    "accepted_source": "83123ff42c21587e3eb944e20af89f1a9e9ff0ea",
+    "tested_synthetic": "012cd8fd70cecbf53e236ca35ede0ffcb35297b5",
+    "ordered_tested_parents": [
+      "6181b044c75de35386f1ae30e71725398b6a7feb",
+      "83123ff42c21587e3eb944e20af89f1a9e9ff0ea"
+    ]
+  },
+  "verified": {
+    "all1421_typed_mode_type_blob_path_entries_equal_actual_source_tested": true,
+    "typed_inventory_encoding": "git ls-tree -rz exact NUL-delimited mode/type/blob/path output",
+    "typed_inventory_sha256": "1ed74906c693217b500f2e3795298de283edd04dbc86f1db216fe2af861924fc",
+    "source_worktree1421_FS_Git_body_execbits_clean": true,
+    "authenticated_original_API_merged_true_closed_nondraft_exact_actual_head_base": true,
+    "single_named_branch_readback_exact_actual": true,
+    "all_bound_receipt_files_rehashed": 342,
+    "recorded_complete_current19SUCCESS_six_PRflows_no_auxpush_latepublisher_included": true,
+    "normal_ready_expected_head_authority_force_or_waiver_false": true,
+    "no_issue_closures": true
+  },
+  "authenticated_API": {
+    "path": "/workspace/engineering/pr309-actual-integration-API.private.json",
+    "bytes": 24532,
+    "sha256": "92ad2b281be79e3ff4b4b9cc5eaa7660806e0d4bcb1347908d05cd9b2271bcfa"
+  },
+  "single_named_ref": {
+    "path": "/workspace/engineering/pr309-actual-integration-independent-review/single-named-integration-ref-readback.txt",
+    "bytes": 91,
+    "sha256": "856bd6582ae446418b84ac3f5de823b7a7cb9567bfcf95fc83fc206fcdb234c1"
+  },
+  "original_tested_checkout_proof": "Original log checkout line113 and retained authenticated commit/complete recursive API1421 tree; historical tested012cd8 commit object absent locally, not fetched. Actual/source verified from commonGit.",
+  "CI_scope": "Retained exact831/618 complete19 success and original tested012cd8 source identity only; no new CI sampling or later-source gate carry. Publisher status is not registry publication qualification.",
+  "remaining_HOLDs": [
+    "Whole issues152/196 and retained graph closures",
+    "Native/private/provider/Workspace/ChatGPT/full backend/public identity/platform acceptance",
+    "Tag/publication/Runtime release/OAuth authority",
+    "Dependent branches require ordinary exact-target refresh plus fresh source/CI gates; historical tuples stay original"
+  ],
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "Exact_accepted_reuse": {
+      "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; exact accepted592 event-specific filters+b774 joined pytest census+50ad original checkout identity paragraphs verified already integrated",
+      "Exact_documentation_delta": "Reuse verified existing paragraphs;50ad original checkout identity five-line addition bound by exact root application receipt, no cosmetic duplicate",
+      "Exact_root_application": {
+        "path": "/workspace/engineering/canonical-original-runner-checkout-exact-context-application.json",
+        "bytes": 840,
+        "sha256": "b8c47ded156c0f638e1501dddb3a3e87437d0b342a71373ddbaff4c8c38d4da0"
+      },
+      "Durable_learning_captured": "Derive current job inventory from exact PR event paths and declared needs; bind original logged checkout separately; reconcile all joined pytest node tokens with terminal census.",
+      "Evidence": "Six eligible PR workflows19 jobs from exact831 YAML and actual job/checkIDs; publisher114444748187 success; original log113/API012cd8/full1421 typed tree equality; all150 node results match original terminal131PASS19SKIP.",
+      "Stale_or_ambiguous_guidance_removed": "No auxiliary Copilot forced from unrelated PUSH; no content-wrapper-as-log or later merge-ref relabel; no pending-at-capture documentation rewritten as priorGO.",
+      "Remaining_uncertainty": "Root final live ready/ref/check bracket and normal HTTP403-unknown policy enforcement required; broad issues/cleanup/native/private/release remain separate."
+    },
+    "Durable_learning": "Bind normal integration to ordered actual parents and complete typed tree; keep original runner checkout identity distinct from API head and later merge refs, while preserving event-specific complete late-job inventory.",
+    "Evidence": "Authenticated original merged API, single current named branch and commonGit actual/source/tested1421 typed equality; normal authority and final19-job admission receipts rehashed.",
+    "Stale_or_ambiguous_guidance_removed": "No new text/duplicate diary; accepted checkout/tree/event/late-publisher lessons reused. Merge is scoped integration, not issue closure or registry publication.",
+    "Remaining_uncertainty": "Broad issues/native/private/provider/release remain unqualified; this review performs no new CI or actual acceptance."
+  },
+  "not_performed": [
+    "CI repoll/log or ZIP acquisition/download",
+    "Tests/gateway/installer/native/provider/browser/consumer",
+    "Source/index/ref mutations or new push/PR/merge/issue closure"
+  ],
+  "upstream_disposition": "none"
+}

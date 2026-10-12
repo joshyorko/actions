@@ -1,0 +1,140 @@
+{
+  "RED_known_case_count": 9,
+  "ROOT_contract": {
+    "bytes": 7221,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/concrete-ROOT-distinct-release-command-and-independent-review-contract-NOTRUN.json",
+    "sha256": "41ab5fc7afa4f0b64b1ac34958c6702b23d9e8cf706d9229f5636f7cc4da5d7f"
+  },
+  "ROOT_release": "NOT_CREATED",
+  "actual_output_root": "ABSENT",
+  "actual_tests": "NOT_RUN",
+  "all_refs": [
+    {
+      "bytes": 67022,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/FROZEN-known-nine-18-semantic-15s-config-v2-NOTRUN.json",
+      "sha256": "b9010e2996df0285971f2c7ce31c4da04a6e7672505aa4240cb2b049aaae823d"
+    },
+    {
+      "bytes": 789,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/OWNERFINAL-original-count-schema-inspector-FAIL-NOTRUN.json",
+      "sha256": "d8b123616020160973eeedfbc79be0efcb95c0d3ff66f1534c237820df323717"
+    },
+    {
+      "bytes": 7221,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/concrete-ROOT-distinct-release-command-and-independent-review-contract-NOTRUN.json",
+      "sha256": "41ab5fc7afa4f0b64b1ac34958c6702b23d9e8cf706d9229f5636f7cc4da5d7f"
+    },
+    {
+      "bytes": 8988,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/freeze_static_source_preexecution_packet.py",
+      "sha256": "b7b8bab642c197820e15539519884e5d5763678bec1f1a1e2448bfb2eb1563e3"
+    },
+    {
+      "bytes": 9086,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/freeze_static_source_preexecution_packet_phase_schema_v2.py",
+      "sha256": "3620074f38ca5fd6c68a0733a6232afdc8de0b4a7046d7f48e00bab300f6f374"
+    },
+    {
+      "bytes": 1995,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/immutable-static-current-source-phase-map-and-closure-proof.json",
+      "sha256": "f7aa4149bb2191e6eed5dc6b051f8529bd9b7df8e90765caf588f8394f9c5a66"
+    },
+    {
+      "bytes": 438,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/original-static-phase-schema-inspector-FAIL-NOTRUN.json",
+      "sha256": "f9c5a923536006ea3d28b6b41262616c98a04806275b36ee6d7c94db904d802a"
+    },
+    {
+      "bytes": 13357,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/original-unadopted-launcher-draft-before-static-hardening.py",
+      "sha256": "b6ec3979608faf3ff5b064653e672dc7268a9a9aa860d6c512b85de6984f4854"
+    },
+    {
+      "bytes": 4138,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/prepare_known_nine_18_config.py",
+      "sha256": "041265f1830c6b0e9105f1a8647e39ff7b98dbbdfd64f2977706f357e8da68f6"
+    },
+    {
+      "bytes": 4328,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/prepare_known_nine_18_config_countschema_v2.py",
+      "sha256": "e271b4c7cfec7271919e57e0f7ac95eeb116553f26e37b8e63f3c09f9a3de95b"
+    },
+    {
+      "bytes": 13750,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/run_known_nine_18_semantic_once_NOTRUN.py",
+      "sha256": "efd17b08026cba566dea30775226dbb327f0fa05a9b2c3872088c83a5f5b310b"
+    }
+  ],
+  "baseline_actual_prerequisite": {
+    "bytes": 20115,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-corrected-nine-once2-independent-ACTUAL-review/OWNERFINAL-independent-original-current8d49-corrected-nine-once2-baseline-ACTUAL-review.json",
+    "sha256": "e54f84619b73c236a8038c5602b27cc6affef8e82bd0d3e535bb2537548a811d"
+  },
+  "config_binding": {
+    "bytes": 67022,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/FROZEN-known-nine-18-semantic-15s-config-v2-NOTRUN.json",
+    "sha256": "b9010e2996df0285971f2c7ce31c4da04a6e7672505aa4240cb2b049aaae823d"
+  },
+  "documentation": {
+    "disposition": "REUSE_ACCEPTED_5584_COPY_LOCK_BOUNDARY_AND_KNOWN_SEMANTIC_ASSERTION_PLAN",
+    "evidence": "real accepted e54 nine baseline; immutable a577 source; exact nine function/line/assertion mapping; failclosed wrong assertion/timeouts; source/body/mode unchanged",
+    "exact_delta_binding": {
+      "bytes": 1219,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/canonical-reload-control-copy-and-lock-boundaries-proposed.patch",
+      "sha256": "5584b00182d7504808065195f3373f80eb450fa5370811d434d66ad0c5b9a7d5"
+    },
+    "remaining_uncertainty": "all18 semantic phases unexecuted; snapshot oracle sensitivity unexecuted; actual assertion logs/JUnits require independent original-outcome review"
+  },
+  "fresh_unmutated_GREEN_case_count": 9,
+  "initial_metadata_count_inspector_failure": {
+    "bytes": 789,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/OWNERFINAL-original-count-schema-inspector-FAIL-NOTRUN.json",
+    "sha256": "d8b123616020160973eeedfbc79be0efcb95c0d3ff66f1534c237820df323717"
+  },
+  "launcher_binding": {
+    "bytes": 13750,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/run_known_nine_18_semantic_once_NOTRUN.py",
+    "sha256": "efd17b08026cba566dea30775226dbb327f0fa05a9b2c3872088c83a5f5b310b"
+  },
+  "native": "NOT_RUN",
+  "original_plan_120s_and_3600": "UNCHANGED",
+  "original_unadopted_launcher_draft": {
+    "bytes": 13357,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/original-unadopted-launcher-draft-before-static-hardening.py",
+    "sha256": "b6ec3979608faf3ff5b064653e672dc7268a9a9aa860d6c512b85de6984f4854"
+  },
+  "phase_count": 18,
+  "schema": 1,
+  "scope": "SOURCE semantic mutant discrimination only; no native generation/drain/provider/backend/reaping/private/release qualification or product adoption",
+  "snapshot_oracle_sensitivity": "NOT_RUN_SEPARATE_REQUIRED",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_clean": true,
+  "source_leaves": 1440,
+  "static_proof": {
+    "bytes": 1995,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/immutable-static-current-source-phase-map-and-closure-proof.json",
+    "sha256": "f7aa4149bb2191e6eed5dc6b051f8529bd9b7df8e90765caf588f8394f9c5a66"
+  },
+  "status": "PREPARED_KNOWN9_18_SEMANTIC_SOURCE_CONTROL_PREEXECUTION_NOT_RUN",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none"
+}

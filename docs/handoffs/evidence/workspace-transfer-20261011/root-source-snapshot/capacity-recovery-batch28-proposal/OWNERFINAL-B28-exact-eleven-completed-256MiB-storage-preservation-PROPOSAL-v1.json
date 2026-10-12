@@ -1,0 +1,145 @@
+{
+  "accessible_handles_before_after": [
+    {
+      "accessible_links": 35,
+      "inaccessible": 298,
+      "matches": [],
+      "universal_quiescence": "UNKNOWN"
+    },
+    {
+      "accessible_links": 35,
+      "inaccessible": 298,
+      "matches": [],
+      "universal_quiescence": "UNKNOWN"
+    }
+  ],
+  "allocated_observed_bytes": 268644352,
+  "archive_remove_execute": "NOT_RUN",
+  "bindings": [
+    {
+      "bytes": 145892,
+      "gid": 1000,
+      "mode": 384,
+      "path": "/workspace/engineering/capacity-recovery-batch28-proposal/private-complete-completed-candidate-census-and-exact-selection.json",
+      "sha256": "b75347b673016b971eabd3445a712ff41726d8249a8b33b265b6481ea5246cfd",
+      "uid": 1000
+    },
+    {
+      "bytes": 6393810,
+      "gid": 1000,
+      "mode": 384,
+      "path": "/workspace/engineering/capacity-recovery-batch28-proposal/private-two-complete-selected-body-metadata-inventories.json",
+      "sha256": "c26f4af7b6da47416ca7d46ba8fa24771e6a4943123cbb2baabc7921420759b5",
+      "uid": 1000
+    },
+    {
+      "bytes": 21594,
+      "gid": 1000,
+      "mode": 384,
+      "path": "/workspace/engineering/capacity-recovery-batch28-proposal/private-all61-original-archives27-indices-current-source-native-failed2-retention.json",
+      "sha256": "58918ef7a46cdc079ad0955cfb8e089afc187e5bb7ba037084e331113da027e8",
+      "uid": 1000
+    },
+    {
+      "bytes": 9606,
+      "mode": "0o600",
+      "path": "/workspace/engineering/capacity-recovery-batch28-proposal/prepare_readonly.py",
+      "sha256": "27e19d0aeae52fd83f12344a2f93a7d3aa0fac94b7c1ff107cb64a61a1b97e9b"
+    },
+    {
+      "bytes": 2583,
+      "mode": "0o600",
+      "path": "/workspace/engineering/capacity-recovery-batch28-proposal/supplement_readonly.py",
+      "sha256": "16b049168142608a0a80680a4c1ce20cf49e6139d7c4a6dcd94346f38dc9812f"
+    },
+    {
+      "bytes": 4158,
+      "mode": "0o600",
+      "path": "/workspace/engineering/capacity-recovery-batch28-proposal/private-original-failed2-eight-and-failed1-whole-archive-alias-retention.json",
+      "sha256": "5a90de5e53773c5042f18e2dd8fb901d2f9dab48670cc373c0b925d85cf8554e"
+    }
+  ],
+  "completed_marker_before_after": "True",
+  "current_source": {
+    "head": "396925cb3d6527af1768b7f5333f9653c005fc55",
+    "leaves": 1426,
+    "native_original_members": 1192,
+    "prepared_inputs": 30,
+    "scope": "body/mode preservation only; old native producer and current SOURCEFULL/actual qualification remain separate",
+    "tree": "84f850f0d4e08b21afcd8220413ce94322370acf"
+  },
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md: exact accepted7d070 principle verified and reused, no cosmetic duplicate/source mutation",
+    "Durable_learning": "Lossless capacity preservation is separate from origin, universal quiescence and cold/native qualification. Aggregate cap refusal must preserve originals and all partial proof.",
+    "Evidence": "Exact11 root body/metadata snapshots;61archives27indices;396source1426/prepared30/native1192; eight originalfailed2 and exact failed1 archive alias; finite accessible handles UNKNOWN elsewhere.",
+    "Exact_delta_or_verified_reuse": {
+      "bytes": 1068,
+      "mode": "0o600",
+      "path": "/workspace/engineering/capacity-recovery-independent-review/canonical-completed-scratch-preservation-proposed.patch",
+      "sha256": "7d07065b5bb7742698919997c8c6621cc20d00494741eb5365251ffb09f2d208"
+    },
+    "Remaining_uncertainty": "Compression/new archiver review and rootrelease pending, actual reclaimed bytes not measured; inaccessible references unknown.",
+    "Stale_guidance_removed": "No compression prediction or source-origin/native pass inferred from completed markers; no unsupported single archive relocation."
+  },
+  "fresh_capacity_observed_bytes": {
+    "/dev/shm": 3942715392,
+    "/tmp": 1174843392,
+    "/workspace": 1275027456
+  },
+  "future_root_script_contract": {
+    "algorithm_parent": {
+      "bytes": 5244,
+      "mode": "0o600",
+      "path": "/tmp/actions-capacity-recovery-batch19.py",
+      "sha256": "48fd7e4c79e55b80ceda0b63c1d1da87feeb368cefee265d5c12bad6ad940840"
+    },
+    "bounds": "parent900TERM+10; archiving/verification600TERM+10; serialization before any actual",
+    "fixed_future_DEST": "/dev/shm/actions-completed-scratch-recovery-batch28",
+    "fixed_future_STAGE": "/tmp/actions-completed-scratch-recovery-batch28-stage",
+    "original_nonconfiguration_AST_count": 16,
+    "requirement": "Preserve accepted16 AST nodes where possible; add a reviewed aggregate48MiB capped stream and pre-stage all selected archives before any original removal, so aggregate cap failure preserves every original and all partial files. Original B19 SHA/inventory/body/type/modeUIDGID/link/internal-hardlink verification, full gzipEOF, repeated stable inventory and finite readable-handle checks; complete0600 index before exact roots only removal. No broad selector or unrelated original/archive/index removal.",
+    "status": "NOT_AUTHORED_OR_EXECUTED_BY_THIS_V1_PROPOSAL"
+  },
+  "logical_regular_body_bytes": 186992240,
+  "member_count": 22403,
+  "optional_single_archive_relocation": {
+    "existing_tmp_archives": 42,
+    "largest_single_le48MiB_bytes": 12141503,
+    "limit": "No single<=48MiB archive supplies26MB; 249\u2013252MB ones would leave inadequate future workspace growth after this256MiB recovery. No hidden copy/remove or relocation authorization.",
+    "minimum_needed_to_reach_current_tmp1_2GB_floor": 25156608,
+    "single100_to200MiB_candidates": 0,
+    "status": "HOLD_NO_FITTING_REQUESTED_SINGLE_ARCHIVE"
+  },
+  "resource_contract": {
+    "aggregate_compressed_cap_bytes": 50331648,
+    "compression_success": "UNKNOWN_CONDITIONAL",
+    "future_tmp_staging_ceiling_plus_reserve": 184549376,
+    "index_reserve_bytes": 16777216,
+    "native_shm_floor_bytes": 3865470567,
+    "no_cold_source_or_native_release": "Fresh post-capacity floors separate",
+    "required_shm_before_release_bytes": 3932579431,
+    "workspace_reclaim": "OBSERVED_ALLOCATION_NOT_GUARANTEED_FREE_SPACE"
+  },
+  "retention": "All61 original archives27indices rehashed before and after, eight exact failed2 owner-bound originals and ca557 whole compressed archive/index/removal/terminal plus exact8dc selected member preserved; no failed stage upgraded. Failed563 existence only.",
+  "schema": "B28-exact-eleven-completed-root-readonly-proposal-v1",
+  "selected_names": [
+    "0306d8914a1521f6",
+    "6177972915b6759a",
+    "6529ebfde1b700f4",
+    "804f7be9260b8715",
+    "821e35805c5c4333",
+    "8bbbb490987515a0",
+    "9e5c2f4beb04c533",
+    "a7a47190a74dd5ab",
+    "aa04aa60cd2d7572",
+    "b4e310295f590693",
+    "e072c7f39ffed955"
+  ],
+  "selected_root_full_snapshots_equal": true,
+  "selection_policy": "Provably fewest namespaces then globally least adequate allocated sum and lexicographic tie-break. Any feasible eleven-root combination must use roots whose individual allocation is >=target-maxTopTen; all12376 resulting bounded combinations enumerated. 512MiB impossible from observed488554496 eligible total.",
+  "source_origin": "UNREPORTED_UNKNOWN",
+  "status": "GO_PROPOSAL_ONLY_CONDITIONAL_CAP_AND_INDEPENDENT_SCRIPT_REVIEW_ROOT_ONE_RELEASE_NOT_RUN",
+  "target_allocated_bytes": 268435456,
+  "universal_quiescence": "UNKNOWN",
+  "upstream_disposition": "none"
+}

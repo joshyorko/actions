@@ -1,0 +1,20 @@
+{
+  "implementation_tests_native_upload": "NONE",
+  "notes_binding": {
+    "bytes": 7277,
+    "mode": "0o600",
+    "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/workspace-transfer-20261011/rcc-review/STOPPED-current9760-OAuth-build-runtime-audit-safe-notes.json",
+    "sha256": "8dc1d2747633abda5d4f84ebac62dfb5a8ad51e72189617b932432d1043d0f51"
+  },
+  "original_wrong_output_directory_preserved": "/workspace/engineering/campaign-checkpoint/transfer/rcc-review",
+  "retention_manifest_binding": {
+    "bytes": 9578,
+    "mode": "0o600",
+    "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/workspace-transfer-20261011/rcc-review/EMERGENCY-RCC-and-release-artifact-safe-retention-manifest.json",
+    "sha256": "f846f3c9b3cbf655af62fa88821a45ddc6b02d0996cb981cd5aaa12379ecf2f5"
+  },
+  "schema": 1,
+  "status": "STOPPED_EMERGENCY_PRESERVATION_ONLY",
+  "unfinished": "OAuth packaging/MCP exact contract/security validation and currente2 artifact handoff incomplete; ROOT must preserve private originals before environment retirement.",
+  "upstream_disposition": "none"
+}

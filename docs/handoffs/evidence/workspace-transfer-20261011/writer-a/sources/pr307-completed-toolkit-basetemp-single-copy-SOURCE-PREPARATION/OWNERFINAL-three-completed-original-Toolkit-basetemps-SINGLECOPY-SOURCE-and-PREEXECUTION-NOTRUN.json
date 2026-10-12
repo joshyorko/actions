@@ -1,0 +1,122 @@
+{
+  "ROOT_release_contract_TEMPLATE": {
+    "child_seconds": 600,
+    "config_binding": {
+      "bytes": 29034,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/frozen_three_original_Toolkit_basetemp_inputs_SINGLE_COPY_SOURCE_PREPARED_NOTRUN.json",
+      "sha256": "834ebaccb3113fbad18bc7a12e83c0a4f020fe251e86bf6bd50dbaadfdea72c5"
+    },
+    "driver_binding": {
+      "bytes": 27763,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/archive_three_completed_Toolkit_basetemps_single_copy_SOURCE_PREPARED.py",
+      "sha256": "71326aec77af1545bfc24e7e87f1769a524ca35c6566b00c67b9c34a911e9ff0"
+    },
+    "independent_review_binding": null,
+    "kill_grace_seconds": 10,
+    "observed_only_unreadable_policy": "ROOT_ACCEPTS_OBSERVED_ONLY_UNKNOWN",
+    "original_terminal_path": "ROOT_RELEASE_PARENT_ABSENT/original-archive-terminal.json",
+    "outer_seconds": 900,
+    "parent_binding": {
+      "bytes": 6442,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/root_once_three_Toolkit_basetemps_SOURCE_PREPARED.py",
+      "sha256": "6993234c7b7ffb3f6e6e97266fbfa795e1bd46718d03e8398378a1b082ffab4f"
+    },
+    "unknown_process_channels_are_not_quiescence": true
+  },
+  "actual_archive_operation": "NOT_RUN",
+  "config_binding": {
+    "bytes": 29034,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/frozen_three_original_Toolkit_basetemp_inputs_SINGLE_COPY_SOURCE_PREPARED_NOTRUN.json",
+    "sha256": "834ebaccb3113fbad18bc7a12e83c0a4f020fe251e86bf6bd50dbaadfdea72c5"
+  },
+  "decision": "SOURCE_AND_PRESERVATION_PREEXECUTION_PREPARATION_NOT_AUTHORIZED",
+  "documentation": {
+    "Canonical_file_changed_or_proposed": "Accepted lossless archival/typed aliases/phase-vs-whole-scope and storage-vs-native floor lessons reused, no repository file mutation.",
+    "Durable_learning": "A completed successful Toolkit subphase is a separate scratch preservation subject within a retained failed whole attempt. It does not convert that failure into acceptance. Measure staged compression before prospective recovery; keep original inputs on refusal.",
+    "Evidence": [
+      {
+        "bytes": 6920,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/private-original-three-Toolkit-completion-full-inventory-and-observed-process-proof.json",
+        "sha256": "5252b25bb563a88be1a0e2bf060b17635edf67709b6ba36cbee7d2bf2383e38d"
+      },
+      {
+        "bytes": 3275,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/SOURCE-PREPARED-three-Toolkit-subphase-17-AST-and-complete-before-remove-proof.json",
+        "sha256": "73af10ac9be2dfc56f44c5bc98cca243705c4b393b01c1a4f7da47f6923b5de5"
+      }
+    ],
+    "Remaining_uncertainty": "Compression unmeasured; no operation/private import/control execution;951 inaccessible channels UNKNOWN;Root final current snapshot and distinct grant still required.",
+    "Stale_ambiguity_removed": "Explicit three-subtree scope excludes original raw logs/JUnit/owners; all17 original archival primitives retained; lower scratch staging threshold distinct from unchanged first-five/native floors.",
+    "Upstream_disposition": "none"
+  },
+  "driver_binding": {
+    "bytes": 27763,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/archive_three_completed_Toolkit_basetemps_single_copy_SOURCE_PREPARED.py",
+    "sha256": "71326aec77af1545bfc24e7e87f1769a524ca35c6566b00c67b9c34a911e9ff0"
+  },
+  "exact_future_ROOT_command_TEMPLATE": [
+    "/usr/bin/timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "900s",
+    "bash",
+    "-c",
+    "source /workspace/actions-cloud/activate.sh && export PATH=\"/workspace/actions-cloud/bin:/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\" && export PYTHONDONTWRITEBYTECODE=1 && exec /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12 -B -u /workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/root_once_three_Toolkit_basetemps_SOURCE_PREPARED.py --root-release \"$1\" --root-release-sha256 \"$2\"",
+    "three-Toolkit-preservation",
+    "ROOT_RELEASE_ABSENT",
+    "ROOT_RELEASE_SHA_ABSENT"
+  ],
+  "exact_selected_roots": {
+    "once4-toolkit-basetemp": "/workspace/engineering/pr307-current9760-token-light-once4-owned/toolkit/basetemp",
+    "once5-toolkit-basetemp": "/workspace/engineering/pr307-current9760-token-light-once5-owned/toolkit/basetemp",
+    "once6-toolkit-basetemp": "/workspace/engineering/pr307-current9760-token-light-once6-owned/toolkit/basetemp"
+  },
+  "finite_envelope": {
+    "ROOT_KILL": 10,
+    "ROOT_outerTERM": 900,
+    "all_internal_KILLgrace": 10,
+    "beforeTERM": 120,
+    "before_fallback": 135,
+    "childTERM": 600,
+    "child_fallback": 625,
+    "limitation": "External hardkill/kernel waits can prevent finally; ROOT retains separate original outer stdout/stderr/terminal. No universal IO bound or complete adopted-process census claim.",
+    "outer_captures_source_closure_reserve": 5,
+    "postTERM": 120,
+    "post_fallback": 135,
+    "sum_subprocess_fallbacks": 895
+  },
+  "independent_review": "ABSENT_REQUIRED",
+  "parent_binding": {
+    "bytes": 6442,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/root_once_three_Toolkit_basetemps_SOURCE_PREPARED.py",
+    "sha256": "6993234c7b7ffb3f6e6e97266fbfa795e1bd46718d03e8398378a1b082ffab4f"
+  },
+  "readonly_full_inventory_proof": {
+    "bytes": 6920,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/private-original-three-Toolkit-completion-full-inventory-and-observed-process-proof.json",
+    "sha256": "5252b25bb563a88be1a0e2bf060b17635edf67709b6ba36cbee7d2bf2383e38d"
+  },
+  "required_ROOT_decision": "RELEASE_ONE_THREE_COMPLETED_ORIGINAL_TOOLKIT_BASETEMP_PRESERVATION_ONLY",
+  "required_independent_decision": "GO_EXACT_THREE_COMPLETED_TOOLKIT_BASETEMP_PRESERVATION_PREEXECUTION",
+  "root_release": "ABSENT",
+  "schema": 1,
+  "scope": "Toolkit phase179P qualifies completed fixture scratch storage subject; entire once4/5 FAILED stays FAILED and all logs/JUnit/source/evidence outside basetemp preserved. Nested fixture-created JUnit bytes within basetemp are preserved in full private archives, not omitted.",
+  "selected_allocated_bytes": 228057088,
+  "selected_entries": 27058,
+  "source_proof_binding": {
+    "bytes": 3275,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/SOURCE-PREPARED-three-Toolkit-subphase-17-AST-and-complete-before-remove-proof.json",
+    "sha256": "73af10ac9be2dfc56f44c5bc98cca243705c4b393b01c1a4f7da47f6923b5de5"
+  },
+  "writer_A_released": true
+}

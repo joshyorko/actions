@@ -1,0 +1,192 @@
+{
+  "schema": "current618-one-Linuxcp312-consumer-independent-actual-review/v1",
+  "status": "GO_ONE_CURRENT618_LINUX_CP312_INSTALLED_CONSUMER_ONLY",
+  "observed_utc": "2026-10-11T10:58:09.435681+00:00",
+  "owner_final": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/OWNERFINAL-current618-one-installed-Linux-consumer-checkpoint.json",
+    "bytes": 12657,
+    "sha256": "cc0832511827bc73431f2adbe0dbb92ec01b52b03afa4164cea67d0ae4aaf246"
+  },
+  "proposal": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/OWNERFINAL-current618-isolated-Linux-consumer-preexecution-proposal-v5-successor-v2.json",
+    "bytes": 70901,
+    "sha256": "38d07ed81d6ce129a7786325b7447c8e2bfb8b134c1f02c78fd2c6788b0ff027"
+  },
+  "preexecution_GO": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-independent-preexecution-review/OWNERFINAL-independent-frozen-v5-preexecution-review-GO.json",
+    "bytes": 8469,
+    "sha256": "e319a803881eb5f79755f5767d8eee9b04c4a5cb03ed75386537f8f6c7ad33e7"
+  },
+  "runner": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/installed-consumer-runner-v5.py",
+    "bytes": 19506,
+    "sha256": "67912e4bfdc1de4dd83d36511bf19b19cd90e34c0d84197d30a7e05f0fce4ad9"
+  },
+  "original_actual_evidence": [
+    {
+      "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/installed-linux-current618-90a785d8-3/attempt-identity.json",
+      "bytes": 3622,
+      "sha256": "bab4e10f02119136195e85daba217369ecc5127c9580269c25c674013bd51abd"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/installed-linux-current618-90a785d8-3/cli-version.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/installed-linux-current618-90a785d8-3/cli-version.stdout.log",
+      "bytes": 6,
+      "sha256": "f5e5c9534532840fcd45bb002e69ed85c61dba2753450e26b448b7df1481e24d"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/installed-linux-current618-90a785d8-3/consumer-proof.json",
+      "bytes": 62020,
+      "sha256": "4b62247130e10789dae0db98dab646510ab94194ab47f6933e6a1cb1e9d5d083"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/installed-linux-current618-90a785d8-3/execution-cleanup-receipt.json",
+      "bytes": 1121,
+      "sha256": "16be638691d19164bafda91db987d0c4e882dc3e74623bbb9959290b3e6611c8"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/installed-linux-current618-90a785d8-3/input-admission.json",
+      "bytes": 1595,
+      "sha256": "c0d79bb4f416f1e4103b20fff62496abf45284505f5b56d2a2a428e4916d27c8"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/installed-linux-current618-90a785d8-3/install-argv.json",
+      "bytes": 609,
+      "sha256": "cfdcbbcd2485b0c8ec5421600c72be1054ba6fb58bb37c00d9e42efb2734dc08"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/installed-linux-current618-90a785d8-3/installed-inventory-raw.json",
+      "bytes": 34035,
+      "sha256": "d299fd668cc97264c515b210cd98ca17cbc793dd91746bfe67a0316b5369eb09"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/installed-linux-current618-90a785d8-3/pip-install-report.json",
+      "bytes": 864921,
+      "sha256": "65a0b1f7e9b9cb1d071e83e9f61d3ec17d7383f7830c05366f4f4b4a44ad4ee8"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/installed-linux-current618-90a785d8-3/worker.stderr.log",
+      "bytes": 123,
+      "sha256": "8ddbb80a6850c11f8d5c5bf6e832f7eded1113c309fa7f04e6f1348eaeeb3da1"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/installed-linux-current618-90a785d8-3/worker.stdout.log",
+      "bytes": 18375,
+      "sha256": "8e60b90425f4e0bb0bb24895102a9f987100d312691773cf82924b83109b10f6"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/root-one-actual-current618-v5-execution-authorization.json",
+      "bytes": 302511,
+      "sha256": "53b71a810ef12b00965d5d1f4d07c5d67df1b024b81db7ea3872c0959099c556"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/original-one-actual-current618-v5-gateway.log",
+      "bytes": 22186,
+      "sha256": "e138f2f023277e36489015d30349fbc0534271bdd55768f57fea44049d5d3464"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/original-one-actual-current618-v5-gateway-exit.json",
+      "bytes": 614,
+      "sha256": "c8547f937d32f6035751447e9e87474bc2f28f6bd1e2f308903d934a3eb69c9f"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/root-current618-consumer-v5-postexecution-harness-readback.json",
+      "bytes": 293642,
+      "sha256": "eea64ec447a4cffeb5365ad27bea652e05cac0838cc2b7c6159754a78e69537f"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/OWNERFINAL-original-current618-consumer-gateway-failure.json",
+      "bytes": 2740,
+      "sha256": "6f29ccd4b905b0036e6347aac23c12bda82cb6a719a1e7da0008eec951c0e773"
+    }
+  ],
+  "root_constructor_observed_not_executed": {
+    "path": "/workspace/engineering/freeze-current618-v5-consumer-actual.py",
+    "bytes": 5014,
+    "sha256": "64c38191093e991c0e32329c3e9d4577e4a4009e7025b179e97c6acc5c9539b9"
+  },
+  "verified": {
+    "actual_case_count": 1,
+    "skips": 0,
+    "gateway_exit": 0,
+    "CLI_version": "1.0.3",
+    "original_raw_evidence_bindings": 16,
+    "preexecution_refs_unchanged": 153,
+    "original_preserved_refs": 126,
+    "all_direct_reference_sizes_SHA_exact": true,
+    "direct_file_bindings": 179,
+    "raw_attempt0700_files0600": true,
+    "exact_pip_install_argv_and_fixed_public_Core102_Helper103_URL_SHA": true,
+    "pip_report_SHA256": "65a0b1f7e9b9cb1d071e83e9f61d3ec17d7383f7830c05366f4f4b4a44ad4ee8",
+    "pip_check_success_recorded": true,
+    "four_real_module_origins_in_fresh_prefix_no15_checkout_roots": true,
+    "202_retained_in_worker_member_measurements_equal_original_wheel_SHA": true,
+    "wholemember_private_Core_guard_ran_in_original_worker_no_violations": true,
+    "independent_202_source_AST_direct_import_inspection_no_private_Core": true,
+    "215_source_bindings221_RECORD220_hashes_input_admission": true,
+    "current_artifact_identity": {
+      "id": 11697353355,
+      "job": 114433293243,
+      "run": 38126987514
+    },
+    "builder_e766_a709_618_equal_actual618_tree_not_actual_job_relabel": true,
+    "strict_cleanup_four_true_empty_lists_temporary_removed": true,
+    "cleanup_elapsed_seconds": 20.805471299998317,
+    "observed_identity_count": 10,
+    "1433_harness_posthash_andexec_exact_e736_07b_clean": true,
+    "original_v4_failure_before_worker_and_old_preexec_proofs_unchanged": true
+  },
+  "budgets": {
+    "worker_seconds": 595,
+    "process_including_cleanup_seconds": 600,
+    "reserved_cleanup_max_seconds": 5,
+    "outer_gateway_seconds": 645,
+    "outer_TERM_KILL_grace_seconds": 10,
+    "temporary": "Fresh owned0700 /tmp/rt103-current618-* outside all known checkouts",
+    "output": "Directfiles/no newreaderthreads; primaryexceptionretained, additionalcleanup failureoverallFAIL",
+    "cleanup_scope": "Existingidentity-ownedPID/create-time point-in-time snapshots; no universaladoption/naturalshutdown/productionpool/native/service/provider/browserclaim"
+  },
+  "execution_count": "Two distinct authorized gateways: v4 refused before worker; v5 ran one installed worker. Original v4 remains FAIL; no automatic retry.",
+  "measurement_limits": [
+    "Owned installed temporary tree removed as designed: retained in-worker SHA/origin measurements, not fresh independent installed-file reread",
+    "Cleanup confirms only identity-owned point-in-time captured descendants; no universal adoption or natural shutdown claim",
+    "Original private-import static guard scope; no arbitrary dynamic code/security equivalence claim",
+    "Linuxcp312-only consumer; separate seven-distribution integrity is not other platform consumers or release admission"
+  ],
+  "remaining_HOLDs": [
+    "Required OAuth inputs EMPTY and source/content authority unresolved",
+    "Windows173Python+5text CRLF and generatedstatic semantic equivalence NOT_ESTABLISHED; historical cause UNKNOWN",
+    "No other platform/cp313 consumer, service/browser/ChatGPT/provider/native/private acceptance",
+    "No Runtime tag/Twine/upload/publication/release/PR221integration/retainedissueclosure"
+  ],
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "Exact_accepted_reuse": [
+      {
+        "path": "/workspace/engineering/pr221-current618-linux-consumer-independent-preexecution-review/canonical-selector-directory-contract-proposed.patch",
+        "bytes": 685,
+        "sha256": "fb9c9604f6f9dd32259d9a133eadafba076acfd92546ab0ccce2a080a918591c"
+      },
+      {
+        "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/canonical-independent-archive-provenance-v4-proposed.patch",
+        "bytes": 890,
+        "sha256": "5f08b459a43e6fe50c6baac0c56f0a6d5241ec6aff913498df39e0d597962aeb"
+      }
+    ],
+    "Durable_learning": "Admit actual selector directory independently of wheel digest; bind artifact/run/job to independently frozen provenance. Both exact lessons remain present; no cosmetic duplicate.",
+    "Evidence": "Original v4 preworker refusal; v5 exact isolated pair and current IDs; retained raw actual pip/origin/member/cleanup measurements",
+    "Stale_guidance_removed": "None; existing lessons prevent digest-only directory and duplicate-label provenance assumptions.",
+    "Remaining_uncertainty": "Removed installed tree cannot be reread; OAuth/source-authority/platform/private/native/full release holds remain."
+  },
+  "not_performed": [
+    "Consumer/install/payload imports/CLI/selector/control/gateway rerun",
+    "Downloads or acquisitions",
+    "Source/ref/index mutations",
+    "Tag/publication/native/provider/browser/Windows acceptance"
+  ],
+  "upstream_disposition": "none"
+}

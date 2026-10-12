@@ -1,0 +1,112 @@
+{
+  "candidate_sha": "ba85aac7324ea4463bfba8c5f8586e27706dc2fe",
+  "candidate_tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f",
+  "native_build_source_sha": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+  "native_build_source_tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f",
+  "native_build_workflow_run_id": "38098225250",
+  "native_build_workflow_run_attempt": "1",
+  "native_byte_verification_receipt_sha256": "07b6799026a26ec985d0cf7835b3fddd2105304c09d4102ed69c51f9d5c8c2ff",
+  "control_sha": "0794c498b56f17b8509409d6aa2d99a104a4a807",
+  "resource_history_test_blob": "534e51afbc75b4d3ce473dee37d7ac00d52dbc92",
+  "artifact_id": "11686643166",
+  "artifact_size": 59410740,
+  "artifact_sha256": "0905c4734d6b636a5a465e0a958cf8bc4521b5047a68da473830b95821b7c8c0",
+  "go_wrapper": "NOT_VERIFIED; separate wrapper artifact is not included in the measured provenance TAR",
+  "step_outcomes": {
+    "ARTIFACT": "success",
+    "FROZEN": "success",
+    "RCC": "success",
+    "DEPENDENCIES": "success",
+    "ACCEPTANCE": "success"
+  },
+  "status": "PASS",
+  "rcc_version": "v18.19.3",
+  "rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+  "native_build_source_tree_api_readback": "80e5c77513f6abf5d07005ee3aee47d49efd927f",
+  "frozen_artifact_verification": {
+    "candidate_sha": "ba85aac7324ea4463bfba8c5f8586e27706dc2fe",
+    "candidate_tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f",
+    "native_build_source_sha": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+    "native_build_source_tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f",
+    "workflow_run_id": "38098225250",
+    "workflow_run_attempt": "1",
+    "native_artifact_id": "11686643166",
+    "native_artifact_size": 59410740,
+    "native_artifact_sha256": "0905c4734d6b636a5a465e0a958cf8bc4521b5047a68da473830b95821b7c8c0",
+    "native_artifact_archive_hash_checked": true,
+    "native_byte_verification_receipt_sha256": "07b6799026a26ec985d0cf7835b3fddd2105304c09d4102ed69c51f9d5c8c2ff",
+    "resource_history_test_blob": "534e51afbc75b4d3ce473dee37d7ac00d52dbc92",
+    "manifest_sha256": "70405e6e831066a37631c7a63045010fcbc8b3c928a6a22ff5130467c3ad9d44",
+    "inventory_sha256": "154aeb29249db79a32392124a3b71a8ac325c0bdaeda1bbc2e7445e96ffc7fdf",
+    "package_tree_sha256": "739838962d9d29f873932e13d2598d51ebba58b0f97c2c52fff8550004f06ae0",
+    "embedded_files_sha256": "576d6cb8e5a8637dcfd82f675384d638736509541a0e10877420151b61c4786b",
+    "binary_sha256": "067a27c24b55690410beeb1b95e97fb098edf8e02779b36b69bbead2227433fb",
+    "binary_path": "/home/runner/work/_temp/frozen-native-package/dist/action-server/action-server"
+  },
+  "junit": {
+    "expected_test_cases": [
+      {
+        "classname": "tests.action_server_tests.test_cli_live_reload_multi_package",
+        "name": "test_failed_watched_reload_keeps_both_packages_and_recovers"
+      },
+      {
+        "classname": "tests.action_server_tests.test_cli_mcp_catalog_rollback",
+        "name": "test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[prompt]"
+      },
+      {
+        "classname": "tests.action_server_tests.test_cli_mcp_catalog_rollback",
+        "name": "test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[resource]"
+      },
+      {
+        "classname": "tests.action_server_tests.test_cli_mcp_catalog_rollback",
+        "name": "test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[template]"
+      },
+      {
+        "classname": "tests.action_server_tests.test_cli_mcp_resource_history",
+        "name": "test_cli_resource_owner_history_across_reload_and_restart"
+      },
+      {
+        "classname": "tests.action_server_tests.test_cli_multi_package_sync",
+        "name": "test_additive_import_serves_duplicate_action_names_across_restart"
+      },
+      {
+        "classname": "tests.action_server_tests.test_cli_multi_package_sync",
+        "name": "test_failed_sync_keeps_last_good_unmanaged_package_sources"
+      },
+      {
+        "classname": "tests.action_server_tests.test_cli_multi_package_sync",
+        "name": "test_start_sync_rejects_bad_later_package_without_partial_database_update"
+      },
+      {
+        "classname": "tests.action_server_tests.test_cli_multi_package_sync",
+        "name": "test_start_sync_treats_repeated_dirs_as_one_desired_set"
+      },
+      {
+        "classname": "tests.action_server_tests.test_cli_multi_package_sync",
+        "name": "test_sync_rejects_historical_mcp_alias_capture_and_rename_recovers"
+      },
+      {
+        "classname": "tests.action_server_tests.test_cli_successful_generation_drain",
+        "name": "test_successful_generation_switch_drains_old_run_on_its_source_snapshot"
+      }
+    ],
+    "tests": 11,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "status": "PASS"
+  },
+  "test_harness": {
+    "control_sha": "0794c498b56f17b8509409d6aa2d99a104a4a807",
+    "control_tree": "34699b9908f69a4f7542034d541090bde203e60e",
+    "harness_runtime_source_tree": "20dca119289b1d6e40bd1065fd06b0d82aad3098",
+    "harness_runtime_reference_sha": "ba85aac7324ea4463bfba8c5f8586e27706dc2fe",
+    "harness_runtime_source_differences": [],
+    "resource_history_test_blob": "534e51afbc75b4d3ce473dee37d7ac00d52dbc92",
+    "all_selected_test_blobs_match_native_candidate": true,
+    "native_candidate_sha": "ba85aac7324ea4463bfba8c5f8586e27706dc2fe",
+    "native_candidate_tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f",
+    "harness_runtime_equals_native_source": true,
+    "status": "PASS"
+  }
+}

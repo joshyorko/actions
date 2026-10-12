@@ -1,0 +1,17 @@
+{
+  "status": "ROOT_ONE_B26_TERMINAL",
+  "returncode": 0,
+  "elapsed_seconds": 15.943260910004028,
+  "attempts": 1,
+  "source_origin": "UNREPORTED",
+  "release_sha256": "d49ed7c0961cca5da86ff6da394c75309f58b81b33260e1f553c5635758e4b4f",
+  "original_log": {
+    "path": "/workspace/engineering/root-B26-one-existing-tmp-recovery/original-one-b26-process.private.log",
+    "bytes": 1044,
+    "sha256": "eecc40eb3b957d1d39fe51f3fd2893169a0222d6ad5b32a7b7ed8f696e0799c9"
+  },
+  "workspace_available_bytes": 1345114112,
+  "tmp_available_bytes": 1150889984,
+  "devshm_available_bytes": 3942780928,
+  "post_source_original_native_guard": "PASS"
+}

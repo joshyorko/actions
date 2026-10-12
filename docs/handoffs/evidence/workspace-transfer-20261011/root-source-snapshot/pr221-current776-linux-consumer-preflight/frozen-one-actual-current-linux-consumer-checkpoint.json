@@ -1,0 +1,189 @@
+{
+  "status": "ONE_CURRENT_LINUX_CP312_CONSUMER_PASSED_PENDING_INDEPENDENT_ACTUAL_REVIEW",
+  "captured_at": "2026-10-11T08:51:28.250964+00:00",
+  "runner_sha256": "1768d6edebc874f5f76ea77a6a3a49d6effa46e144340b7f49bf6f3da0fcf809",
+  "independent_preexecution_GO_sha256": "6346a5feb759d9fb6615d20da814b02de8c528ae273ec7eaa20e56b8327fdb7f",
+  "case_count": 1,
+  "skips": 0,
+  "gateway_exit": 0,
+  "cli_version": "1.0.3",
+  "installed_python_members": 196,
+  "runtime_wheel": {
+    "path": "/workspace/engineering/pr221-current302-linux-wheel-owned/actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+    "python_member_count": 196,
+    "sha256": "f82ee06c09e07bd224e797e11b7e58138920c0c8df49ef814ac50b0087d81c6c"
+  },
+  "input_admission": {
+    "actual_integration": {
+      "ordered_parents": [
+        "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+        "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+      ],
+      "producer_not_relabelled_actual": true,
+      "producer_tree_equal_actual": true,
+      "sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf"
+    },
+    "generated_oauth_content": "EMPTY_CONTENT_AUTHORITY_HOLD",
+    "original_producer": {
+      "control": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "control_tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
+      "source_candidate": "d642a3ac24f8da85101538bdfdf59b509fd74bfb",
+      "source_tree": "fdf2823ebcdbd938b9047fd452c9fb13eb4be4e4",
+      "synthetic": "f5dd0e18d9cda660c2eaa6bbc33a11180ddd7158",
+      "synthetic_ordered_parents": [
+        "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+        "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+      ],
+      "synthetic_tree_equals_control": true,
+      "target": "774438b130afb2ead9bbc1c1b76cb6f91e72150a"
+    },
+    "python_member_count": 196,
+    "record_entries": 215,
+    "record_sha256": "f9075e4a4f1d842f08f10938898921753781c86aa7462f0b0c06b5de9a6a3c3a",
+    "record_verified_entries": 214,
+    "scope": "Linuxcp312 input only; no seven-artifact/tag/publication/full-producer/native claim",
+    "tracked_payload_source_matches": 209
+  },
+  "producer": {
+    "actual_integration_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+    "actual_integration_tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
+    "api_head": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+    "artifact_id": 11693813383,
+    "artifact_zip_bytes": 28271148,
+    "artifact_zip_sha256": "32485758f22e51b529d3ea657c4f4c0033233f6c84ec7d3d605c4493c11d82c6",
+    "attempt": 1,
+    "build_is_actual_integration_job": false,
+    "checkout": "f5dd0e18d9cda660c2eaa6bbc33a11180ddd7158",
+    "event": "pull_request",
+    "parents": [
+      "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+      "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    ],
+    "publication": false,
+    "run_id": 38118859475,
+    "scope": "two originalLinuxwheels only; consumer selects cp312; seven-artifact gate HOLD",
+    "source_candidate": "d642a3ac24f8da85101538bdfdf59b509fd74bfb",
+    "source_tree": "fdf2823ebcdbd938b9047fd452c9fb13eb4be4e4",
+    "tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf"
+  },
+  "public_dependencies": {
+    "actions-core": {
+      "sha256": "9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80",
+      "url": "https://files.pythonhosted.org/packages/b6/ed/33c5999ac5e932434fcc5b392420efdf9b25922ca02a76622b856759ea16/actions_core-1.0.2-py3-none-any.whl",
+      "version": "1.0.2"
+    },
+    "actions-http-helper": {
+      "sha256": "46ed7ce0e0d3e2e05456d937b5b24bc9dfa0d7d4b98f8119b9fdf00d4fa7e9f9",
+      "url": "https://files.pythonhosted.org/packages/53/3b/cefc0608e6ec71697c60c68ede2efa306fd7d50b1736c4b6b094b3424dc6/actions_http_helper-1.0.3-py3-none-any.whl",
+      "version": "1.0.3"
+    }
+  },
+  "cleanup": {
+    "status": "passed",
+    "wrapper_reaped": true,
+    "descendant_snapshot_complete": true,
+    "descendant_reap_complete": true,
+    "temporary_removed": true,
+    "cleanup_errors": [],
+    "active_readers": [],
+    "observed_live_children": [],
+    "observed_zombie_children": [],
+    "elapsed_seconds": 19.646487973001058,
+    "limits": [
+      "point-in-time captured descendants; no universal adoption proof"
+    ]
+  },
+  "limits": [
+    "Linux cp312 only",
+    "original f5dd PR producer; tree equals actual776; selected209 tracked payloads only",
+    "two Linux wheels available; full seven-artifact/tag/publication gate HOLD",
+    "generated OAuth required inputs measured EMPTY; authority/content HOLD even if imports pass",
+    "no tag provenance, upload, publication or Runtime service/browser proof",
+    "Core1.0.2 public floor; historical Core1.0.3/193-member proof remains separate"
+  ],
+  "evidence": [
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-linux-current776-f82ee06c-1/attempt-identity.json",
+      "bytes": 3574,
+      "sha256": "fb001e1a2e18df90a107c5addeb594a6952a227adeddebacf38e5284726a5feb"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-linux-current776-f82ee06c-1/cli-version.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-linux-current776-f82ee06c-1/cli-version.stdout.log",
+      "bytes": 6,
+      "sha256": "f5e5c9534532840fcd45bb002e69ed85c61dba2753450e26b448b7df1481e24d"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-linux-current776-f82ee06c-1/consumer-proof.json",
+      "bytes": 59991,
+      "sha256": "e017df65302402751a006870e74ed1c2c91d182df27b2b8b9acbcc02ca884d95"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-linux-current776-f82ee06c-1/execution-cleanup-receipt.json",
+      "bytes": 1186,
+      "sha256": "251e6c03c00d21b6a3ab9a25a26b4f197d00491190027c27b65c9867c0e13a78"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-linux-current776-f82ee06c-1/input-admission.json",
+      "bytes": 1321,
+      "sha256": "a5dec314012b942b928a6e9242d17e91f0995e8e002a2c92b32fbe09dff544c6"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-linux-current776-f82ee06c-1/install-argv.json",
+      "bytes": 578,
+      "sha256": "7c4ec787b43be7a013bba6694397a19ef15f7e150b7795d13ee8be68b73f5172"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-linux-current776-f82ee06c-1/installed-inventory-raw.json",
+      "bytes": 33093,
+      "sha256": "3190a67326c07e7ba004d18aadfa7378e841b289e4de40c2eeb876eefcbde989"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-linux-current776-f82ee06c-1/pip-install-report.json",
+      "bytes": 864890,
+      "sha256": "55f0383fa964348769308d60aacb1ef32d6c65ad87b8e1a46c21ef23bd9aa463"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-linux-current776-f82ee06c-1/worker.stderr.log",
+      "bytes": 123,
+      "sha256": "8ddbb80a6850c11f8d5c5bf6e832f7eded1113c309fa7f04e6f1348eaeeb3da1"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-linux-current776-f82ee06c-1/worker.stdout.log",
+      "bytes": 18344,
+      "sha256": "d49d5cada8b39f92bdb57b87f4823bc1de7c0783083e1032ddb0992c74c69b9c"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/root-one-actual-execution-authorization.json",
+      "bytes": 2085,
+      "sha256": "148574083bcc5d2e7e134382327554796bc0b94dcb3208906984a1c3268fdae7"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/original-one-actual-gateway.log",
+      "bytes": 22156,
+      "sha256": "a1141619a2ed46d9f24d7c02d259c68b4523f67ae63f3ad4b0bb74a8d6784718"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/original-one-actual-gateway.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/immutable-current776-linux-consumer-preexecution-proposal-v2.json",
+      "bytes": 25752,
+      "sha256": "57a8beb87e5a1c03fae276e4b22d7fc8734d1f42cc3c739ceb989a0d946e73a7"
+    }
+  ],
+  "remaining_HOLD": [
+    "generated OAuth source authority and content",
+    "full seven-artifact cross-platform inventory",
+    "tag/publication provenance and upload",
+    "current native/private/full retained acceptance graph"
+  ],
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,6 @@
+{
+  "path": "/workspace/engineering/pr307/devutils/pyproject.toml",
+  "original_sha256": "7ffef37af3dc666ae72f1075ac1e06d8c61405225d678b326d767fe1952825e1",
+  "exact_append": "\n[tool.isort]\nline_length = 88\nmulti_line_output = 3\ninclude_trailing_comma = true\nuse_parentheses = true\n",
+  "basis": "Explicit owning Devutils settings align vertical parenthesized import layout with existing Ruff formatter; no Runtime profile or dependency/lock/gate changes"
+}

@@ -1,0 +1,128 @@
+{
+  "schema": "actions-independent-current776-linuxcp312-consumer-preexecution-review/v1",
+  "verdict": "GO_REVIEWED_ONE_BOUNDED_LINUX_CP312_CONSUMER_ATTEMPT_SUBJECT_TO_ROOT_SERIALIZATION_AND_EXACT_HASH_READBACK",
+  "proposal": {
+    "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/immutable-current776-linux-consumer-preexecution-proposal-v2.json",
+    "bytes": 25752,
+    "sha256": "57a8beb87e5a1c03fae276e4b22d7fc8734d1f42cc3c739ceb989a0d946e73a7"
+  },
+  "independent_input_and_safety_proof": {
+    "path": "/workspace/engineering/pr221-current776-linux-consumer-independent-review/independent-frozen-proposal-input-and-safety-proof.json",
+    "bytes": 12853,
+    "sha256": "7a8cf2c0780ab522ee30d3613c67be40380eaafbde0ad61420192430bd10f49e"
+  },
+  "execution_subject": {
+    "runner": {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-consumer-runner-v2.py",
+      "bytes": 19366,
+      "sha256": "1768d6edebc874f5f76ea77a6a3a49d6effa46e144340b7f49bf6f3da0fcf809"
+    },
+    "input_gate": {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/current-input-admission-v2.py",
+      "bytes": 7267,
+      "sha256": "3be2b971a43de3848c5a1aec59eecbeb6ac9dd796a81a6f2e489eab782492d1a"
+    },
+    "manifest": {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/input-and-source-admission.json",
+      "bytes": 147945,
+      "sha256": "ff5560c8233985e2755e1e9288f780018f625a7ec4184f3eac98e4a14d50e594"
+    },
+    "artifact": {
+      "path": "/workspace/engineering/pr221-current302-linux-wheel-owned/original-Linux-wheels-11693813383.zip",
+      "bytes": 28271148,
+      "sha256": "32485758f22e51b529d3ea657c4f4c0033233f6c84ec7d3d605c4493c11d82c6"
+    },
+    "wheel": {
+      "path": "/workspace/engineering/pr221-current302-linux-wheel-owned/actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 14166151,
+      "sha256": "f82ee06c09e07bd224e797e11b7e58138920c0c8df49ef814ac50b0087d81c6c"
+    },
+    "producer": {
+      "control": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "control_tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
+      "source_candidate": "d642a3ac24f8da85101538bdfdf59b509fd74bfb",
+      "source_tree": "fdf2823ebcdbd938b9047fd452c9fb13eb4be4e4",
+      "target": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+      "synthetic": "f5dd0e18d9cda660c2eaa6bbc33a11180ddd7158",
+      "synthetic_ordered_parents": [
+        "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+        "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+      ],
+      "synthetic_tree_equals_control": true
+    },
+    "actual_integration": {
+      "sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
+      "ordered_parents": [
+        "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+        "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+      ],
+      "producer_tree_equal_actual": true,
+      "producer_not_relabelled_actual": true
+    },
+    "harness": {
+      "checkout": "/workspace/engineering/pr282",
+      "head": "c75dfa6969c2c562a59a967e2e674fea6c8af457",
+      "scope": "Ownpreparedgatewayonly; not wheelproducer. Immutablefloor/process/guard bytes equalGitactual776."
+    },
+    "attempt_root": "/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-linux-current776-f82ee06c-1",
+    "attempt_root_absent_at_review": true
+  },
+  "bounded_command": {
+    "cwd": "/workspace/engineering/pr282",
+    "activate": "source /workspace/actions-cloud/activate.sh",
+    "argv": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "645s",
+      "/workspace/actions-cloud/bin/rcc",
+      "task",
+      "script",
+      "-r",
+      "developer/toolkit.yaml",
+      "--",
+      "python",
+      "-c",
+      "import toolkit; toolkit.poetry(\"action_server\", \"run\", \"python\", \"/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-consumer-runner-v2.py\")"
+    ],
+    "subject": "ONE invocation only after root confirms exact hashes, serialized slot and capacity; stop on failure. No rerun authorized by this review."
+  },
+  "findings": [],
+  "verified": {
+    "frozen_reference_bindings": "All announced private runner/gate/manifest/helper/artifact/source/retained-original references rehashed; producer candidate/control/synthetic and actual776 Git trees/ordered parents checked independently",
+    "artifact": "Original mode0600 ZIP contains two safe original wheel members; selected cp312 full SHA exact; central directory unique/safe/nonlinked/nonencrypted and all original member bytes/CRCs checked read-only without extraction",
+    "metadata_record": "Name actions-runtime/Version1.0.3 equal immutable d642 pyproject; cp312 manylinux tags/nonpure wheel;241 members,26 directories,215 files/RECORD rows,214 SHA+size verified rows and unhashed self row",
+    "current_source": "209 selected tracked payloads byteexact d642 and actual776;196 Python members independently derived from this wheel, no old-count qualification carry",
+    "generated_OAuth": "287-byte fixed assignment/AST measured both required strings empty; no import or raw content printed; source-authority/content HOLD persists",
+    "preserved_helpers": "Four private0600 unchanged helper snapshots exact actual776 Git body/modes and source bindings; five original runner functions plus inventory child code AST unchanged",
+    "origin_and_private_import_guard": "Fresh venv prefix distinct base; four real module origins prefix-contained;15 known checkout roots cover all current registered worktrees including broad /workspace/engineering; exact complete wheel Python set/hash binding; all bound members under fresh prefix, outside all known checkout roots; unimported private-Core AST scan retained unchanged",
+    "floor": "Uses unchanged isolated uncached binary-only PyPI install command with Core1.0.2 and Helper1.0.3; exact public URL/SHA/version admission; pip check, module imports and CLI1.0.3 must pass on actual attempt, currently NOT_RUN",
+    "ownership": "Fresh absent attempt root mode0700; fresh /tmp owned0700 venv; direct stdout/stderr files without reader threads; PID/create-time captured descendant identities; finally cleanup preserves primary failure, secondary cleanup fails admission; removes only owned temporary after wrapper reaped and no observed live descendants",
+    "deadline_classification": "595-second worker deadline from supervisor start; process cleanup deadline min(start+600,now+5). 600 is not a separate whole-supervisor hard wall: setup/file deletion/reporting also bounded by outer645s timeout plus10s TERM-to-KILL grace. No natural shutdown/universal descendant capture claim.",
+    "servicefree_evidence": "85 focused PASS/0SKIP/2warnings; configured four-file Ruff/format/Isort commands through own prepared gateway SUCCESS. UTF8 metadata genuineRED and earlier fixture/static failures preserved; no replay by independent reviewer."
+  },
+  "qualification_limits": [
+    "PREEXECUTION controls and byte review only; actual consumer not executed or accepted",
+    "Original f5dd build/controla346/source d642 remains original producer; actual776 complete tree equality authenticated without relabeling original build as integration job",
+    "Linux cp312 only; cp313 outer member hash only, full seven-artifact inventory/tag/Twine/upload/official publication HOLD",
+    "Both generated OAuth input strings EMPTY; approved source pair authority/content/full producer qualification HOLD regardless any future consumer PASS",
+    "No Runtime service/native/provider/browser/backend/ChatGPT/private01f/frozen-v6/full134/release acceptance",
+    "Original old12340/7704/00d1 artifact/consumer evidence retained separately; no identity carry"
+  ],
+  "review_scaffold_disposition": "Initial independent scaffold incorrectly expected0444 snapshots; corrected to owner-announced private0600 snapshot contract after measuring all four actual modes. Frozen bytes unchanged; not a product or gate failure.",
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md",
+    "Exact delta": {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/canonical-partial-platform-consumer-scope-proposed.patch",
+      "bytes": 1158,
+      "sha256": "bf95da899763f97c016f76fa4a0cf8878ebba8326d57c11ab1a520b1df597c81"
+    },
+    "Disposition": "ACCEPT exact source-backed proposed partial-platform paragraph bf95da899763f97c016f76fa4a0cf8878ebba8326d57c11ab1a520b1df597c81 for root integration; no source edit or cosmetic duplicate",
+    "Durable learning captured": "A two-wheel Linux artifact supports only a selected nonpublishing cp312 consumer; preserve ZIP/wheel/METADATA/RECORD and original build roles. Postintegration tree equality does not relabel the synthetic build. Derive member count from new wheel; generated-input authority/content holds remain separate.",
+    "Evidence": "Independent original116938 ZIP324857/current wheel f82ee06c,241member/214RECORD/209current-source/196Python verification; actual776/controla346/syntheticf5dd treea1c equality; immutable85focused controls and unchanged776 helper byte bindings.",
+    "Stale or ambiguous guidance removed": "Clarifies partial-platform consumer versus complete release inventory, producer versus actual integration build, and equal-count versus exact wheel identity; does not claim current consumer PASS.",
+    "Remaining uncertainty": "Root current slot/capacity clearance and actual installed import/public-floor/member/CLI/cleanup outcomes; fullseven/generatedsourceauthority/content/native/provider/private/release gates remain HOLD."
+  },
+  "Upstream disposition": "none"
+}

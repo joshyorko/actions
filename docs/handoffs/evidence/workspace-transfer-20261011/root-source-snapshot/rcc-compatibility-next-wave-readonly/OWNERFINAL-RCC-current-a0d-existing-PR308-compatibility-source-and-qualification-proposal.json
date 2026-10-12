@@ -1,0 +1,440 @@
+{
+  "accepted_owning_original_proof_refs": [
+    {
+      "bytes": 6722,
+      "path": "/workspace/engineering/pr309-actual-integration-independent-review/OWNERFINAL-independent-actual309-normal-integration-readback.json",
+      "sha256": "787ed17ea97e875e5ba4ef43fdb8dbdf5d6939ef07a65d24ed64de0a191af936"
+    },
+    {
+      "bytes": 7857,
+      "path": "/workspace/engineering/pr308-current618-threecase-independent-review/OWNERFINAL-independent-current308-original-threecase-review.json",
+      "sha256": "5dbff4ce52ad00d7167315944f9f62f82b6199d118b6ed19663b2bca21014771"
+    },
+    {
+      "bytes": 21359,
+      "path": "/workspace/engineering/pr308-current618-fresh-threecase-original-owned/OWNERFINAL-original-current618-threecase-proof-v2.json",
+      "sha256": "ade1a51327e4539dd526ccc3bc95faf672b2883ee4d5562dafe36c2475fa2ee3"
+    },
+    {
+      "bytes": 6721,
+      "path": "/workspace/engineering/checkpoint-1180-independent-review/OWNERFINAL-independent-committed-remote1180-checkpoint-review.json",
+      "sha256": "1dd305504ca67bd699e1a2f97780d5427f2cbc8f37404e59aee819e79627f2e2"
+    }
+  ],
+  "documentation_improvement": {
+    "Canonicalfilechanged/proposed": "docs/skills/repository-operations.md",
+    "Durablelearning": "Download/build pins and adapter compatibility are independent; measured binary/source compatibility must bind fresh descriptors, cache reuse and exec. Artifact identity alone cannot identify an RCC implementation, and same-version historical tuples do not qualify later source.",
+    "Evidence": {
+      "bytes": 6555,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/actual-a0d-and-existing-PR308-frozen-source-bindings.json",
+      "sha256": "abb0c448de890db219769c936d6dacb7e89ea1188428d9abebcc656437b6b3f0"
+    },
+    "Exactdelta": {
+      "bytes": 1354,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/canonical-qualified-RCC-executable-identity-proposed.patch",
+      "sha256": "324d8c0b671e0e908ac1b881d127b7c70cf69fdcba45b5f97363065e5710d233"
+    },
+    "Remaininguncertainty": "New5/6 functionalacceptance and727innerbytes/signatures pending; proposed policy is not implemented. All current accepted3 proofs retain identity/scope.",
+    "Staleguidanceremoved": "Proposedclarification removes inference that widening an exact version string alone certifies compatibility; no current canonical text or productionpin edited."
+  },
+  "first_real_qualification_wave_proposal": {
+    "capacity": "Acquisition<=200MiB; functional owned-state hard2.4GiB/operationalstop2.35GiB with0.2seconddisk sampling and>=1.2GiBworkspacefree floor. Firstcold attempt needs freshcapacity >=3.6GiB or an explicit root-reviewed equal bounded existing-volume envelope; do not launch against current low capacity. Do not inherit upstream interrupted solver caches or bypass checksum errors. No infrastructure provisioning.",
+    "cleanup": "Only owned provider/Runtime/helper descendants with exact PID/create-time/owner snapshot. Preserve primary exception/output and actual returned cleanup; all measured Runtime wrapper/snapshot/reap flags TRUE, errors/readers/live/zombie lists empty, final sampler explicitcancelledTrue/aliveFalse if sampler used. Provider natural exit and forced cleanup are separate. Failed/unknown cleanup stops acceptance, no empty-owner inference. Private DB/APIkey/profiles/fullstdout remain outsideGit; safe counters/hash receipts only.",
+    "counts": "Exactly2named real cases/0skip/0error per selected version; at most6 total across three separately root-released single attempts. Stop entire remaining wave on first failed version, missing claim or budget bound; no automatic retry.",
+    "cwd": "/workspace/engineering/pr308/action_server after clean ordinarya0d source freeze; exact future head/tree and all selected bytes required before actual",
+    "deadline": "600seconds command execution +10seconds existing owned cleanup grace, parent bounded645seconds and outertimeoutTERM660+kill10 per version. Before runner freeze verify exact inherited helper timeout/cleanup stages fit645; no double wrapper, no unchanged2400second CLI mode accidentally admitted. Across three serial root-released attempts <=2010seconds outer envelope; version measurement<=10seconds included, not added waiver.",
+    "environment": "ACTIONS_REAL_RCC_ARTIFACT_TEST=1; ACTIONS_RUNTIME_RCC_BINARY=<owned exact executable>; explicit reviewed isolated compatibility policy selector/reference; unique0700ACTIONS_HOME/ROBOCORP_HOME/TMPDIR/TMP/TEMP/providerroot per attempt; existing real RCC cache serve loopback only. No inherited provider credentials, shared cache mutation, Devsy/Dakota or external application service. Package downloads needed by genuine cold environment publication are declared network dependency work, not forbidden external-provider or no-network proof.",
+    "first_exact_selectors": [
+      "tests/action_server_tests/test_source_staging_rcc_consumer.py::test_published_artifact_details_preserves_one_rcc_identity_pair",
+      "tests/action_server_tests/test_source_staging_rcc_consumer.py::test_staged_package_executes_in_managed_rcc_runtime"
+    ],
+    "fixture_extension": "Reuse these existing real fixtures through the shared identity policy; retain default3 assertion variant distinct. No copied RCC/Runtime implementation. New-version branch compares actual admitted tuple instead of literal3 while preserving one publish, exact spec/artifact pair, all staged source/member/mode/worker-origin/Core1.0.2/result/lease/cleanup assertions. Existing original3 rollback thirdcase and its nine-input summary remain retained at their source/control identity, not upgraded by these two direct-binary cases.",
+    "not_run_not_authorized": true,
+    "runner_freeze_prerequisites": "Immutable actualS/head/tree, source/fixture/approval/binary before hashes, actual helper self-launched path bytes, argv/cwd/env, exclusive absent attemptroot, finite process ownership, meaningful selector/count/name/provenance/cleanup negative controls and independent review. Actual requires distinct root authorization after acquisition/source/full/static and capacity/serialization. This proposal itself executes no workload.",
+    "tool_gateway": "Outertoolchain stays activatedRCC3 \u2192 taskscript developer/toolkit.yaml \u2192 toolkit.poetry(action_server,run,python,frozen-compatibility-runner.py). Immutable runner uses the existing reviewed Linux ownership helper to invoke exactly python -m pytest -n0 -vv -rA -m integration_test\\ and\\ real_rcc <two exact selectors> --junitxml=<freshownedfile>. No candidate-wheel mode invocation, no host pip/Poetry fallback, no PYTHONPATH/source substitution.",
+    "versions_in_order": [
+      "existing exact released3 control",
+      "released5 source d1aec/binary1a617",
+      "current candidate6 source727/inner digest from independent acquisition qualification"
+    ]
+  },
+  "functional_matrix_and_remaining_dependencies": [
+    {
+      "cell": "artifact publication/acquire/execution/lease/stagedsource",
+      "initial_scope": "one actual Action plus imported metadata in managed RCC; exact source/Core/lease/verification and cleanup",
+      "new5_6": "planned2cases each, NOT_RUN",
+      "reuse": "two exact real staging selectors above"
+    },
+    {
+      "cell": "persistent worker first+fivewarmcalls",
+      "required_extension": "Dedicated owned variant reuse_processes=True/min0/max1, actual PID+create-time/generation+lease invariant and exactly6 real results. Existing unmodified vertical and legacy Pythonpool tests do not prove this RCC cell. No publish/reacquire between warmcalls; rawwall/CPU/RSSperactualscope retained without speedup claims.",
+      "reuse": "real test_rcc_runtime_adapter artifact fixture plus existing ActionsProcessPool APIs and test_actions_process_pool_run scheduling helper",
+      "status": "Sourcefixture extension and independent frozen runner required, not initial2case admission"
+    },
+    {
+      "cell": "source-only reload and last-good recovery",
+      "required_extension": "New-version wrapper identity must be separately frozen before using existing real RCC argv trace; actualsourcegeneration change, changed result, unchangedartifact and zero environment operations asserted.",
+      "reuse": "test_source_only_reload_reuses_verified_artifact_without_republishing service-free seam; real test_current_candidate_failed_reload_keeps_last_good_action_usable",
+      "status": "Existing3 real rollback retained; new5/6 real cell pending"
+    },
+    {
+      "cell": "environment reload/inflightgeneration/leasedrain",
+      "required_extension": "Real worker bounded handshake using owned files/events, oldlease/pid during call, distinctenvironment fingerprint/artifact, newgeneration switch then oldcall result/drain/reap. Fake unit test is control only, not new-version functional proof.",
+      "reuse": "test_environment_change_does_not_reuse_cached_artifact + test_route_and_pool_reload_commits_after_inflight_old_call + test_reload_marks_running_generation_non_reusable",
+      "status": "Deferred exact existingfixture extraction/runner review; no production generation algorithm reimplementation"
+    },
+    {
+      "cell": "multiplepackages/concurrentworkers",
+      "required_extension": "Actual RCC managed variant with two packages/max2 workers, deterministic separate results/identity/leases/routing and boundedcleanup. Original genericpool/frozennative tests remain distinct.",
+      "reuse": "test_actions_process_pool_max_concurrent and test_failed_watched_reload_keeps_both_packages_and_recovers",
+      "status": "NOT_RUN/new-source fixture review needed; no full workerplacement conformance claim"
+    },
+    {
+      "cell": "provideroutage/restart/recovery/lastgood",
+      "required_extension": "Same explicitprovider ANDtrust-carrier inputs across outage; unavailableHTTPcarrier mustfailclosed. Do not omitprovider orcarrier to fakeofflinepositive. Supported retainedfilesystemcarrier scenario needs existing RCC CLIfeature and narrowexplicitconsumer seam reviewed first; namedprofile carrier inference remains upstreamknown gap.",
+      "reuse": "existing public candidate-wheel verifier failedselected-provider diagnostics, count-and-reject loopback instrumentation and pinned-provider descriptor semantics",
+      "status": "Initial2case does not qualify offline restart/full134. Preserve all failed current3 negatives; new5/6 controllednegative/recovery follow separate owned source/runner authorization."
+    }
+  ],
+  "historical_candidate": {
+    "linux_binary_sha256": "b5aa13f0921abd7c4b459c12b3042e58fecb8b7220756ad76ed7d651d74dbfd1",
+    "scope": "RCC125 issue-body named historical candidate only. Never insert it as727 identity or substitute its binary for the current requested candidate.",
+    "source": "09796bf78ab4d79ef91dc7fa4bbb23be7aa14033",
+    "tree": "4f1338a5de382c313edef39cfbc57c2374afea0f"
+  },
+  "issue_ownership": {
+    "133": "Actions RCC/Holotree full environment/execution integration; genuine worker workloads required, not storage research alone.",
+    "134": "Current v2 Artifact/acquire/lease/source-only reload/environment-generation/drain/restart/provider/no-fallback/frozen lifecycle vertical.",
+    "139": "Shared exact-subject adapter/worker conformance and negative modes; this bounded RCC Linux qualification cannot close all conformance.",
+    "143": "Typed adapter features and shared admission; RCC identity belongs to namespaced adapter descriptor, not generic Run/Deployment authority; no second-adapter parity claim.",
+    "221": "Runtime integration/release owner remains root; production bundled3 and all OAuth/platform/private/native/publication holds unchanged.",
+    "RCC118": "Upstream artifact identity/provider/materialization/lease/ABI contract. Use existing supported CLI and receipts; no Actions Holotree/provider/lease database implementation.",
+    "RCC125": "Measured benchmark and optimization evidence. Existing five-run and external communitya709 controls are historical; not current a0d consumer proof or a release prerequisite."
+  },
+  "meaningful_source_controls_not_run": [
+    "Existing3 version rejection/control stays exact; baseline3 accepted path/default download/build unchanged.",
+    "Valid approved5 tuple and exact7276 tuple accepted only with isolated operator mode; missing mode rejects before RCC operation/cache mutation.",
+    "Unknown version, unsupported required feature, wrong native byte digest, same version with wrong source, platform/architecture mismatch, changed trusted receipt provenance and co-mutated local manifest copies all rejected.",
+    "Fake version3 string from wrong binary/source cannot qualify a5/6 override; empty/oversized/multiline version output rejected categorically without raw secret-bearing diagnostics.",
+    "Measured5/6 fresh/warm/rebuild descriptors never say3; exact same compatibility tuple can reuse source-only descriptor; changed native tuple cannot reuse cached descriptor even when package/provider/environment remain equal.",
+    "Persisted3 descriptor under selected5/6 is refused/reprepared explicitly, not relabeled; selected tuple changes between prepare and exec fail before launch.",
+    "Two fixtures sharing same artifact but different RCC identities stay partitioned; malformed/unknown new descriptor fields stay fail-closed.",
+    "Legacy trace wrapper expectations and all existing provider/identity/lease/generation/cleanup negatives preserved; new direct-binary fixtures avoid unqualified wrapper shortcuts."
+  ],
+  "measured_existing_couplings": [
+    {
+      "facts": [
+        "RCC_VERSION=v18.19.3 and verify_rcc_version accepts exact string only.",
+        "Fresh RccRuntimeDescriptor defaults to3; prepare_runtime fresh/rebuild/warm-reuse branches do not measure selected version.",
+        "Process-local prepared cache key is(cache_identity,environment_fingerprint,provider), with no binary/source identity; source-only change can return old cached descriptor without acquire.",
+        "build_exec_command uses current selected path but descriptor has no authenticated binary/source compatibility identity; changing selected binary cannot be diagnosed by current fields."
+      ],
+      "path": "action_server/src/actions/server/_rcc_runtime_adapter.py"
+    },
+    {
+      "facts": [
+        "Both RCC_VERSION=18.19.3 determine bundled file/download release; these defaults must remain byte-identical.",
+        "_build_common/rcc_bundle.py collects pinned package data; no ZIP/native rebuild or bundle substitution needed for isolated override qualification."
+      ],
+      "path": "action_server/src/actions/server/_download_rcc.py + action_server/build.py"
+    },
+    {
+      "facts": [
+        "Both actuala0d and existingPR308 have hardcoded version3/Linux digest; currentPR308 adds accepted parent-deadline/control behavior which must be preserved.",
+        "Candidate-wheel mode builds local candidate Core/Helper and has2400secondworker/CLI watchdog; do not accidentally invoke that whole mode for this first public isolated compatibility wave."
+      ],
+      "path": "action_server/scripts/verify_dakota_rcc_acceptance.py"
+    },
+    {
+      "facts": [
+        "Real tests hardcode3 digest/version and fresh descriptor expectation, in addition to production verifier.",
+        "Rollback test traces RCC through a generated executable wrapper delegating to the measured real binary. A new hash check cannot misclassify that wrapper as the native RCC asset or silently trust arbitrary wrapper bytes. Preserve legacy3 fixture and qualify any new wrapper separately; first new-version direct-binary tests need no wrapper."
+      ],
+      "path": "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py + test_current_candidate_import_rollback.py"
+    },
+    {
+      "facts": [
+        "Currentactual fixture uses Python3.11.11/Core1.0.2; older a709 fixture Core1.0.0 is distinct.",
+        "reuse_processes=False,min0,max1; cannot certify warm persistent pool/reload.",
+        "Action can succeed while intentionally terminated RCC wrapper receipt is failed/-1; this remains failed lifecycle, never a natural-cleanup pass."
+      ],
+      "path": "test_rcc_runtime_adapter.py::test_real_rcc_artifact_action_vertical"
+    }
+  ],
+  "minimal_existing_source_implementation_route": {
+    "contract": "Add one narrow shared immutable RCC compatibility value/verifier in the existing adapter, reused by qualification fixtures. Preserve legacy3 verifier/serialization/default fixture behavior, default download/build and public helper contracts. Keep verify_rcc_version returning the measured string for existing callers; internally use the shared tuple admission for explicitly configured qualification overrides.",
+    "descriptor_cache_exec": "Fresh5/6 descriptors record measured version and compatibility_id/source/binary hashes (no local paths as durable authority). Partition cache by compatibility identity in addition to existing package/environment/provider; change invalidates source-reuse. On restart or exec reject stale identity under the new selection, or explicitly reprepare by existing verified digest while preserving original trust inputs; never relabel a3 descriptor as5/6. Legacy3 descriptors keep their existing accepted behavior but cannot act as evidence for a selected5/6 binary.",
+    "identity_fields": [
+      "runtime_kind=rcc",
+      "adapter_contract=rcc-runtime/v1",
+      "required_surface=env-publish/acquire/exec + verified artifact identity + process lease receipt",
+      "observed version",
+      "RCC repository/source SHA",
+      "actual platform/architecture",
+      "exact native binary SHA256",
+      "trusted original qualification receipt digest",
+      "compatibility_id=SHA256 canonical tuple"
+    ],
+    "operator_test_policy": "Explicit opt-in isolated qualification selector may select only committed/source-reviewed approved tuples for released5/current7276; it cannot add arbitrary entries via environment/package/manifest. For6 the exact digest remains pending acquisition. A mutable manifest/hash pair cannot self-certify provenance; source revision/run/artifact labels must bind the independent frozen acquisition qualification. Unknown version/source/hash/platform/required-feature/approval fails before publish, acquire, cache write or execution. Newer versions do not automatically become production defaults or broadly compatible version ranges.",
+    "primary_owned_files": [
+      "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
+      "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "scope_stop": "No generic plugin framework, provider implementation, lease DB, broad capability policy, manifest rewrite or native binary build. Shared public-helper pin adaptation only if needed after these source changes freeze; separate source/control pins never self-pin.",
+    "small_explicit_callsite_if_needed": "action_server/src/actions/server/_action_package_handler.py supplies a measured compatibility value to prepare_runtime; optional injection seam for service-free tests must not change real launch/assertion behavior.",
+    "wrappers": "Default3 tracing fixture remains unchanged. Before newer rollback/reload instrumentation, freeze an owned launcher wrapper separate from native binary, bind exact wrapper/template/cwd/env/delegation and native hash in its approved fixture receipt; no arbitrary wrapper attestation, exec substitution or monkeypatching product expectations. If shared verifier cannot preserve exact delegation safely within this narrow route, freeze concrete interface HOLD before changing architecture."
+  },
+  "observed_at": "2026-10-11T12:13:46.996091+00:00",
+  "original_metadata_refs": [
+    {
+      "bytes": 18321,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/actions-issue-133.private.json",
+      "sha256": "af92d333ff73135c0a23bcd7dd01dd7773ca51092205339bbbb8d50e9f0dc03f"
+    },
+    {
+      "bytes": 17421,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/actions-issue-134.private.json",
+      "sha256": "fa73a328464bff20937bab1e68350d0a8de2e4a742bd6089a455fb7618084398"
+    },
+    {
+      "bytes": 21147,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/actions-issue-139.private.json",
+      "sha256": "25b65fa9331b08fe0bcd45ab8df32f906f10de7bd994c177b91bb8e075aa6b5c"
+    },
+    {
+      "bytes": 22229,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/actions-issue-143.private.json",
+      "sha256": "69235d19119946d84186f0e6d2815a2a533b71cf4bf5a2a5e323cbb319050ec8"
+    },
+    {
+      "bytes": 22154,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/actions-issue-221.private.json",
+      "sha256": "cad66553624389903881bae115705bd4a7440b1c6b6f224d281d02721efd18cc"
+    },
+    {
+      "bytes": 26140,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/actions-pr308.private.json",
+      "sha256": "4e5204cc533a59f85886228fb525a53f033fd4bd53fe70a1be8978d0bccddc88"
+    },
+    {
+      "bytes": 334,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/rcc-18.19.5-ref.private.json",
+      "sha256": "56bb26ab2e623690eb256dcee77b6d1e6eadfc2bf56da797d6946d69f96210ad"
+    },
+    {
+      "bytes": 177380,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/rcc-current727-tree.private.json",
+      "sha256": "669f1821bcc4e7ad8d039253c464f946c5bb7ce81eb7ca0135498fc872c39b41"
+    },
+    {
+      "bytes": 54296,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/rcc-issue-118.private.json",
+      "sha256": "4cf2595e539ceda671b1d3174cae76d7489e9e6a783b4a673132c0680f66d26b"
+    },
+    {
+      "bytes": 41443,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/rcc-issue-125.private.json",
+      "sha256": "6a39266f685247fa8303ba1ea69f58e048819b0a82acd1717dd017e9ef580395"
+    },
+    {
+      "bytes": 324,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/rcc-main-ref.private.json",
+      "sha256": "a98be4ad399aa39c6abe03e92f357a8873bb9976cc0a4ea7216a7d7229813187"
+    },
+    {
+      "bytes": 4138,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/rcc-native-38105340592-artifacts.private.json",
+      "sha256": "53c956ba5b3157f02ca052121a16c06e6709653185a1a3e4acf10128a534dfac"
+    },
+    {
+      "bytes": 11602,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/rcc-native-38105340592-run.private.json",
+      "sha256": "094056b4768692813d8620f2bef1659e096c8f6593c5a23af5af6603c6d5fa3d"
+    },
+    {
+      "bytes": 16583,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/rcc-release-18.19.3.private.json",
+      "sha256": "2cf7036d0070d81c89babc37a90f6624a9afb75ca177f8902d614a01bd362e5c"
+    },
+    {
+      "bytes": 16866,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/rcc-release-18.19.5.private.json",
+      "sha256": "c62a2bf7996affb7dfea3699df783c1f982bbb76af986eb0bfcaa8ec7229e98b"
+    },
+    {
+      "bytes": 133,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/rcc-release-18.19.6.private.json",
+      "sha256": "010563d2cfb8f1e87f700936ce59ee3a33364da46e3db41b0049227918ece74d"
+    },
+    {
+      "bytes": 1495,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/rcc-source-097.private.json",
+      "sha256": "56c3e232841589a3f05912905a93b618065c2eaa1ddc16bc6fc39a2d48b377f7"
+    },
+    {
+      "bytes": 2662,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/rcc-source-727.private.json",
+      "sha256": "c829c7986d2ca0d8234e8b2d0fe33843007ed25884d2ae597be40bc7978a6a8e"
+    },
+    {
+      "bytes": 46829,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/rcc727-.github_workflows_rcc.yaml.private.json",
+      "sha256": "dadb22a3e87a01f5bc0aa457339cce9aad2bf01412655e7f4b9de90f1d0e586c"
+    },
+    {
+      "bytes": 7607,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/rcc727-cmd_environmentAcquire.go.private.json",
+      "sha256": "c0ff4e330b48630a38577f46e8b6bdd58b259298bb9e0d7a7c0b3d0b445f49de"
+    },
+    {
+      "bytes": 13546,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/rcc727-cmd_environmentExec.go.private.json",
+      "sha256": "854d0b9ad39f1f241ad1fb936e1217ef540bfb79590c32c615eeab446f00ae89"
+    },
+    {
+      "bytes": 11355,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/rcc727-cmd_environmentPublish.go.private.json",
+      "sha256": "5046a71cc6ed634b91f14bb6de3e13ff81c41bffc5f809e90e35197fd62b1119"
+    },
+    {
+      "bytes": 127,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/rcc727-env-command.private.json",
+      "sha256": "e45906ce02e79f16fb87a838d86bb4e497e37a9591f97608fa013bbcd8b9cbc2"
+    },
+    {
+      "bytes": 127,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/rcc727-native-workflow.private.json",
+      "sha256": "e45906ce02e79f16fb87a838d86bb4e497e37a9591f97608fa013bbcd8b9cbc2"
+    },
+    {
+      "bytes": 1028,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/rcc727-version.private.json",
+      "sha256": "65b2bb3f17531942e059fdf91d56276f4d552dfcc3ceeeb23060fc02ea5433eb"
+    },
+    {
+      "bytes": 33250,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/rcc727-.github_workflows_rcc.yaml.source-original.txt",
+      "sha256": "3d22e6e2ef10d126064c6771d413783109a50d751dd7138044f57aa6e4dc77a1"
+    },
+    {
+      "bytes": 4779,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/rcc727-cmd_environmentAcquire.go.source-original.txt",
+      "sha256": "9b743dd8864314ae30bd890efb5702c7c831223a5b71d6a3524ea2bbcf600caf"
+    },
+    {
+      "bytes": 9103,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/rcc727-cmd_environmentExec.go.source-original.txt",
+      "sha256": "1e62d683fc6d8b4fb7b43add6530dcc9188fc69a435b764d09bc2d68d4b3a1f2"
+    },
+    {
+      "bytes": 7498,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/rcc727-cmd_environmentPublish.go.source-original.txt",
+      "sha256": "1bc233eca22f99ffbb68cd5486a8a71fe209deb1d2c42f0cbeb62d945a13ac7d"
+    },
+    {
+      "bytes": 48,
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/rcc727-version.source-original.txt",
+      "sha256": "38bd449305ec225fea5bbf5df9ce4f6c996fc38e84a9e61f7ba77e8dbce7414e"
+    }
+  ],
+  "read_only_actions": "Metadata/API/source/AST/body-hash inspection only; no candidate binaries acquired or invoked, no source edits, tests, pip/Poetry installs, providerlaunch, cachemutation, ref/index changes, issue edits or closures.",
+  "remaining_holds": [
+    "current727 inner binary SHA and exact originalreceipt acquisition",
+    "No full133/134/139/143 or221closure",
+    "Unknown/unqualified RCC remains incompatible; no generic >=18version support",
+    "No production pin/download/build/native rebuild change",
+    "No private01f/frozen-v6 recovery orCLI2510/privateoperatoracceptance",
+    "No newnative/frozenRuntime275producer reuse based on92498",
+    "No platform/OAuth/sourceauthority/release/tag/publication claim",
+    "No benchmark speedup/materializer recommendation or research-based release gate"
+  ],
+  "schema": "ownerfinal_readonly_bounded_RCC_compatibility_implementation_and_qualification_proposal",
+  "source_bindings": {
+    "bytes": 6555,
+    "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/actual-a0d-and-existing-PR308-frozen-source-bindings.json",
+    "sha256": "abb0c448de890db219769c936d6dacb7e89ea1188428d9abebcc656437b6b3f0"
+  },
+  "source_subject": {
+    "actual": "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+    "branch": "fix/rcc-candidate-wheel-identities-20261010",
+    "current_existing_PR308": 308,
+    "head": "d5a3d2f53737f4f5380b6ecb7fb93d1a651f005d",
+    "next": "Ordinary merge current accepted a0d into the same existing branch; retain accepted public parent-deadline helper/test changes which differ from a0d. Source S then separate control C exact-source pins if generator needs current source admission. No replacement branch, reset, rebase, source-copy rollback or force push.",
+    "source_parent": "c10380a4d2ebc6f0aca63eb85c8f84a337da4962",
+    "tree": "fa3f7728d315c9a192f88e17acf15f164d4eee13",
+    "worktree": "/workspace/engineering/pr308"
+  },
+  "status": "READY_FOR_EXISTING_PR308_SOURCE_LEASE_AND_SEPARATE_THREE_ORIGINAL_ACQUISITION_RELEASE_NO_EXECUTION",
+  "three_original_acquisition_release_plan": {
+    "archive_admission": "Fail traversal/absolute paths/duplicate names/symlink or hardlink escapes/CRC/expanded-budget violations. Measure actual selected member rather than invent a size. Match rcc-linux64 SHA256SUMS to archive member, native receipt binary.sha256, exact native source727 and platform Linux amd64, run/job producer identity and Robot binarySha256. Reuse upstream source-bound schema and _validate_receipt_commit semantics by inspection; do not import candidate payload code.",
+    "bounds": "One authenticated acquisition per named original;90seconds each/300seconds aggregate plus10seconds cleanup;200MiB combined original/extracted owned budget. No alternative mirror, retry, re-download or native executable invocation. Retain original API bytes/digest, transport receipt, archive digest and every admitted member SHA/mode. Metadata-only failures and guessed path404 observations remain retained.",
+    "freeze_before_source_execution": "Owner-announced acquisition qualification with exact inner727 digest is a prerequisite for registry entry and runner review. Missing or divergent binary/receipt/source remains HOLD; never weaken verifier to accept version output alone.",
+    "not_executed": true,
+    "owned_destination": "/workspace/engineering/rcc-compatibility-next-wave-owned/originals (new0700; original files0600, selected executable0700)",
+    "requested_originals": [
+      "released5 rcc-linux64 asset549249380",
+      "candidate727 native-runtime-binaries ZIP11689755940",
+      "candidate727 Linux-native receipt ZIP11689851536"
+    ],
+    "signature_scope": "Record any original signature/attestation and issuer/source subject if supplied; otherwise UNKNOWN. Authenticated GitHub publisher API digest + exact original receipt/build chain permits only user-approved isolated qualification, not cryptographic publisher-signature or production-release admission.",
+    "total_expected_download_bytes": 71634898
+  },
+  "upstream_disposition": "none; existing version-policy constraint and existing118named-carrier gap inspected, no newly confirmed upstreamdefect or issue mutation",
+  "versions": [
+    {
+      "download_build_pin": "unchanged18.19.3",
+      "linux_asset_id": 534050859,
+      "linux_bytes": 22282402,
+      "linux_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+      "new_acquisition_required": false,
+      "source": "4148c2b71705c9d2baf0e88b48d08a79cb7bda0f",
+      "status": "retained_default_and_existing_scoped_acceptance",
+      "version": "v18.19.3"
+    },
+    {
+      "URL": "https://github.com/joshyorko/rcc/releases/download/v18.19.5/rcc-linux64",
+      "index_asset_id": 549249378,
+      "index_sha256": "fbf3f53357f40463790a9f6b6bdc6c9f5e8fcd69ad158831a6620d5d149f4f4de",
+      "linux_asset_id": 549249380,
+      "linux_bytes": 22360226,
+      "linux_sha256": "1a617ad7c736fa67c605e20e5ebe3c7d54b02cd548f733e05c809cf49a48db1e",
+      "published_at": "2026-09-07T19:02:08Z",
+      "source": "d1aec7d0bb897a81274423c7a6bb747233f9c263",
+      "standalone_publisher_signature_asset": "not_present_in_observed_release_assets_not_a_signature_verification_claim",
+      "status": "released_metadata_authenticated_operator_isolated_qualification_not_yet_functionally_admitted_here",
+      "tag_ref_source_exact": true,
+      "version": "v18.19.5"
+    },
+    {
+      "Linux_receipt_ZIP": {
+        "artifact_id": 11689851536,
+        "bytes": 185396,
+        "name": "linux-amd64-native-runtime-receipt",
+        "sha256": "ec8d7cc46646fcfca7a228392e1bc2cb53341d838563802abd7d306c1f07eaba"
+      },
+      "binary_ZIP": {
+        "artifact_id": 11689755940,
+        "bytes": 49089276,
+        "name": "native-runtime-binaries",
+        "sha256": "88f406c654de1155e717ded1534fa058ca1c5375007109f2a06364d3a5036ac2"
+      },
+      "binary_member": "rcc-linux64",
+      "build_contract": "Exact727 workflow pins candidate checkout; stages rcc-linux64 only after SHA256SUMS check; binds native/Robot receipts to binary.sha256 and source commit using existing _validate_receipt_commit.",
+      "inner_linux_binary_sha256": null,
+      "parents": [
+        "07db6221a3540d227f2106eccf69fe0e7c11fee0",
+        "324524fffa4bd0f76c618f9fbb6ede30e733b2ff"
+      ],
+      "publisher_signing_verification": "UNKNOWN pending original receipt/build provenance; SHA256SUMS and GitHub artifact digest are not a publisher signature",
+      "release_tag": "v18.19.6 release API404 observed; no release/tag publication inferred",
+      "run": 38105340592,
+      "run_status": "completed_success",
+      "source": "727c1ff8b679cdbbe12836e53c87734a1edb0071",
+      "status": "exact_current_source_candidate_UNQUALIFIED_binary_inner_SHA_required",
+      "tree": "cfae5c5ee9df0e5031e8e9ae37040b5c98ac6152",
+      "version": "v18.19.6"
+    }
+  ]
+}

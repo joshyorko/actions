@@ -1,0 +1,287 @@
+{
+  "adjacent_files_unchanged": [
+    {
+      "bytes": 3997693,
+      "device": 27,
+      "gid": 1000,
+      "inode": 1081121,
+      "mode": 384,
+      "mtime_ns": 1791742439924077128,
+      "nlink": 1,
+      "path": "/workspace/engineering/pr308/action_server/output/log.html",
+      "sha256": "13aebe97ef17c1dad5a63e6f5dcaf2a24fcd68e824a62ea605d14cb8d192e612",
+      "uid": 1000
+    }
+  ],
+  "caps_and_budgets": {
+    "TERM_kill_after_seconds": 10,
+    "aggregate_archive_compressed_cap": 16777216,
+    "all_complete_index_mapping_bytes_cap": 65536,
+    "capacity_snapshot_NOTpromise": {
+      "/dev/shm": 3901190144,
+      "/tmp": 1264193536,
+      "/workspace": 1296760832
+    },
+    "compression_verify_deadline_seconds": 90,
+    "each_current_guard_seconds": 90,
+    "fresh_TMP_floor_before": 1217891328,
+    "guard_TERM_kill_after_seconds": 10,
+    "post_removed_payload_reverify_seconds": 30,
+    "subprocess_python_wait_seconds": 100,
+    "tmp_floor_after_archive_budget": 1200000000,
+    "whole_parent_seconds": 300,
+    "workspace_storage_operation_floor": "No false FULLfloor at storage before stage; root intent is reclaim10932224 allocated bytes so later FULL separately requires1288490189 workspace fresh."
+  },
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; exact accepted completed-scratch7d070 lossless preservation and archive-alias9dd800 lessons reused; no cosmetic guide mutation.",
+    "Durable_learning": "Only completed unbound generated file may be reclaimed after exact body+metadata durable gzip/mapping admission; current source guard must stay on8d49. Storage prerequisite does not waive subsequent FULL capacity floor.",
+    "Evidence": "Sourcefile SHA+NSmtime+one-link metadata, zero273/237/native1192/tracked1440 pointermatches, exact currentLIGHT terminal0, currentguard frozenbytes.",
+    "Remaining_uncertainty": "Actual operation/compressedsize/fresh capacity unknown; inaccessible processes and universal quiescence unknown; no new source/native proof.",
+    "Stale_or_ambiguous_guidance_removed": "No source396 guard carried forward; no logowner evidence removed; no directorytimestamp preservation claim afterunlink; no compression expectation treated capacity result.",
+    "Upstream_disposition": "none"
+  },
+  "finite_handle_observation": {
+    "inaccessible_attempts": 611,
+    "observed_match_count": 0,
+    "readable_link_count": 35,
+    "source_completion": "Root owner attributes output to terminal current8d49 LIGHT; terminal0 and original file timestamps matched completion window; not source/native producer qualification.",
+    "time_ns": 1791742829826844937,
+    "universal_quiescence": "UNKNOWN"
+  },
+  "frozen_bindings": [
+    {
+      "bytes": 7674,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/OWNERFINAL-current8d49-configured-SOURCE_LIGHT-PASS.json",
+      "sha256": "d7f23a52d044195187992aeac80e692429e1a1a4af16ee9b37f1971cfbdc4104"
+    },
+    {
+      "bytes": 12996,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/frozen-current8d49-source-LIGHT-inputs-v3.json",
+      "sha256": "81f52920b50e67619b3bb418a7c1034a2106ec52f4badd71b9d85e29b7376820"
+    },
+    {
+      "bytes": 7234,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/current8d49_readonly_source_and_storage_guard_v3.py",
+      "sha256": "2012ddc87e897c14171d18dae2fa56c49458d0b14831eeb745c4ff08f9fa65ae"
+    },
+    {
+      "bytes": 1781,
+      "mode": "0o400",
+      "path": "/workspace/engineering/one-current8d49-generated-robolog-preservation-PREPARATION/private-exact-robolog-unbound-source-and-parent-metadata.json",
+      "sha256": "b49cb3e5dce17b234710cc650af7910a0d34163cb10f2fd73db67c4967778e5f"
+    },
+    {
+      "bytes": 987,
+      "mode": "0o600",
+      "path": "/workspace/actions-cloud/activate.sh",
+      "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+    },
+    {
+      "bytes": 2645,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/historical_failed_receipt_archive_v1.py",
+      "sha256": "a69291189f47812c41ce43d9d68a81a839780ce28a0a9dfc00c487c9acb26d69"
+    },
+    {
+      "bytes": 11800,
+      "mode": "0o400",
+      "path": "/workspace/engineering/one-current8d49-generated-robolog-preservation-PREPARATION/preserve_one_generated_robolog.py",
+      "sha256": "c6c420f4966228dbcc8a9a25df2babeb3bc3f3dcee2d0da7c1126b79dcfbb42e"
+    },
+    {
+      "bytes": 358,
+      "mode": "0o400",
+      "path": "/workspace/engineering/one-current8d49-generated-robolog-preservation-PREPARATION/private-finite-source-open-handle-scan.json",
+      "sha256": "59fa2c2596fef3404793c6f2c4bf6190a6ef939f66de1cd1894a2f3d4e239723"
+    },
+    {
+      "bytes": 1198,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/one-current8d49-source-LIGHT-original-owned-v3/original-terminal.json",
+      "sha256": "a0a46e59ba28081562e02d1e888c74489731b5535748759a06f6fbb732e4e253"
+    },
+    {
+      "bytes": 11766,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/one-current8d49-source-LIGHT-original-owned-v3/original-LIGHT-source.private.log",
+      "sha256": "d43e63c642527fa4e8c7acaf61d6382e60c1d1b74a07742e067d65c84f26acdc"
+    },
+    {
+      "bytes": 55592,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/one-current8d49-source-LIGHT-original-owned-v3/current-scoped-source-junit.xml",
+      "sha256": "1f839efb94e5cd383882af11957391e3de1c1fb42e7245a37d6c1bb4b313cd76"
+    },
+    {
+      "bytes": 4040,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/one-current8d49-source-LIGHT-original-owned-v3/current-generator8-allYAML-roundtrip.json",
+      "sha256": "cd2a587de6af98661d2e6fa12870853ecf6f2e7fb8ce1c7e3e40f1f4555fe41a"
+    },
+    {
+      "bytes": 3759,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/OWNERFINAL-current8d49-LIGHT-execution-proposal-v3.json",
+      "sha256": "60121b80d3bbf17e59a0f05579d72b4ab8639b3bedf3813b788711b426e2fb0c"
+    },
+    {
+      "bytes": 1628,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/root-inline-one-current8d49-LIGHT-authorization-v3.json",
+      "sha256": "72ef82f704f2c057eff4fa6eefc44163877d1b965cdbc3007962515410e08917"
+    },
+    {
+      "bytes": 3791,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/OWNERFINAL-current095-original-SOURCE_LIGHT-formatter-FAIL.json",
+      "sha256": "41fe5885ee867622ea9f822711ab018f54f707a318fa0e561f539bfbb3cff5a3"
+    },
+    {
+      "bytes": 2846,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/current8d49_cached_source_LIGHT_body_v3.py",
+      "sha256": "6deb5e5a38495f0d83e5dc020c4cb0c722292cc4aec898f66830fd6904590884"
+    },
+    {
+      "bytes": 4780,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/launch_current8d49_source_gate_once_v3.py",
+      "sha256": "c49bf4bc67271a09c07a5aefd313ab390cb69dbad56534b0fd55d514ee00c5b9"
+    },
+    {
+      "bytes": 378602,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/private-current8d49-source-body-mode-inventory-v3.json",
+      "sha256": "9843e9035fd7bfdf9577b9ba08f108365fbbc336ca00337f99328599b6204677"
+    },
+    {
+      "bytes": 885,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-pr308-e2-and-startup-probe-adoption/OWNERFINAL-root-ordinary-e2-and-startup-probe-source-adoption.json",
+      "sha256": "edf047d2aeaa3b74b42cfaa3879146dfee4ee740bb9797f0f6d47c821bd39107"
+    },
+    {
+      "bytes": 745,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current095-configured-Ruff-formatter-only-correction/root-approved-formatter-only-normal-child-source-adoption.json",
+      "sha256": "edf034c9a880e625353a25d24d97400c24c04b2ffd40d8942bbb001d37c17f92"
+    }
+  ],
+  "guard_reuse": {
+    "activation": "Root command sources boundactivate.sh, original guard asserts all18 exports plus PATH first managedbin =19 total; forbidden actual-candidate exports remain absent.",
+    "config": {
+      "bytes": 12996,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/frozen-current8d49-source-LIGHT-inputs-v3.json",
+      "sha256": "81f52920b50e67619b3bb418a7c1034a2106ec52f4badd71b9d85e29b7376820"
+    },
+    "guard": {
+      "bytes": 7234,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/current8d49_readonly_source_and_storage_guard_v3.py",
+      "sha256": "2012ddc87e897c14171d18dae2fa56c49458d0b14831eeb745c4ff08f9fa65ae"
+    },
+    "hash_binding_before_helper_invocation": "Script verifies exact guard/config/resolver/activation/sourceowner bytes before subprocess; currentLIGHT helper source preserved, no replacement guard.",
+    "mode": "Before and after both use original LIGHT guard stage after; every current1440/237/1192/30/origin5/alias check runs, capacity admission before-stage is intentionally bypassed for storage prerequisite only. No old396 substitution.",
+    "product_execution": "No suite/native/RCC actual/install/download. Existing original guard performs only its accepted five package-origin metadata probes through own prepared Poetry."
+  },
+  "original_file": {
+    "allocated": 10932224,
+    "bytes": 10930091,
+    "device": 27,
+    "gid": 1000,
+    "inode": 1081293,
+    "mode": 384,
+    "mtime_ns": 1791742439736072602,
+    "nlink": 1,
+    "path": "/workspace/engineering/pr308/action_server/output/output.robolog",
+    "sha256": "67e99a41034c798580f72c3177e1e71c59aea41075052966c96d1e894571e4e3",
+    "uid": 1000
+  },
+  "original_parent": {
+    "device": 27,
+    "gid": 1000,
+    "inode": 1081294,
+    "kind": "DIRECTORY_NOT_SYMLINK",
+    "mode": 448,
+    "path": "/workspace/engineering/pr308/action_server/output",
+    "uid": 1000
+  },
+  "read_only_source_validation": "AST parsed only; no test/native/compression/copy/extraction/remove execution in preparation.",
+  "required_independent_decision": "GO_ONE_CURRENT8D49_GENERATED_ROBOLOG_PRESERVATION_PREEXECUTION",
+  "root_execution": {
+    "all_new_outputs_absent": "Required",
+    "cwd": "/workspace",
+    "gzip_destination": "/tmp/actions-one-current8d49-generated-robolog-preserved/output.robolog.gz",
+    "independent_review_fields": [
+      "decision exact GO_ONE_CURRENT8D49_GENERATED_ROBOLOG_PRESERVATION_PREEXECUTION",
+      "proposal_binding exact thisOWNERFINAL"
+    ],
+    "mapping_destination": "/tmp/actions-one-current8d49-generated-robolog-preserved/private-complete-original-metadata-and-path-mapping.json",
+    "no_actual_here": "NOT_RUN",
+    "outer_argv": [
+      "/usr/bin/timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "300s",
+      "/bin/bash",
+      "-c",
+      "source /workspace/actions-cloud/activate.sh; exec /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python /workspace/engineering/one-current8d49-generated-robolog-preservation-PREPARATION/preserve_one_generated_robolog.py --root-execute-one-reviewed-generated-robolog /workspace/engineering/root-one-current8d49-generated-robolog-release.json"
+    ],
+    "owned_root": "/workspace/engineering/root-one-current8d49-generated-robolog-owned",
+    "release_mode": "0600",
+    "required_release": [
+      "schema",
+      "one_attempt=True",
+      "no_retry=True",
+      "proposal_binding",
+      "script_binding",
+      "outer_seconds=300",
+      "TERM_kill_after_seconds=10",
+      "independent_preexec_binding"
+    ],
+    "root_rawstdio": "Private exclusive outer stdout/stderr/terminal oneveryreturned/timeout outcome",
+    "rootrelease_path": "/workspace/engineering/root-one-current8d49-generated-robolog-release.json",
+    "rootrelease_schema": "ROOT_ONE_CURRENT8D49_GENERATED_ROBOLOG_PRESERVATION"
+  },
+  "schema": "OWNERFINAL_ONE_COMPLETED8D49_UNBOUND_GENERATED_ROBOLOG_LOSSLESS_PRESERVATION_PREEXECUTION",
+  "script_binding": {
+    "bytes": 11800,
+    "mode": "0o400",
+    "path": "/workspace/engineering/one-current8d49-generated-robolog-preservation-PREPARATION/preserve_one_generated_robolog.py",
+    "sha256": "c6c420f4966228dbcc8a9a25df2babeb3bc3f3dcee2d0da7c1126b79dcfbb42e"
+  },
+  "source_current": {
+    "before_primary_post": 0,
+    "commit": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+    "current_LIGHT": {
+      "bytes": 7674,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/OWNERFINAL-current8d49-configured-SOURCE_LIGHT-PASS.json",
+      "sha256": "d7f23a52d044195187992aeac80e692429e1a1a4af16ee9b37f1971cfbdc4104"
+    },
+    "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+    "typed_files": 1440
+  },
+  "status": "NOT_EXECUTED_REQUIRES_DISTINCT_ROOT_ONE_RELEASE_AND_INDEPENDENT_GO",
+  "storage_protocol": [
+    "Fresh exactfile regular one-link completed currentLIGHT output; source path not any current frozen/native/qualified/tracked binding.",
+    "Current source/original/native/helper guard before, exact file+adjacent metadata and parent identity/body before.",
+    "Fresh unique0700/tmp destination; gzip through16MiB actual-write cap including footer, retain original and partial gzip if cap/failure. No compression size promise.",
+    "Read full gzip throughEOF/CRC/ISIZE with original-size overflow guard; compare exact10930091 byte SHA; preserve original modeUIDGID/nsmtime/dev/inode/nlink in small durable index/mapping.",
+    "fsync gzip and parent, durable complete metadata/pathmapping<=64KiB and reread before any unlink. Recheck exact original body+metadata+adjacent body and finite handles.",
+    "Only ROOT-approved expanded original file unlink; original directory remains inode/type/modeUIDGID, log.html unchanged. Parent directory mtime/ctime change naturally; no metadata equivalence claim on those timestamps.",
+    "Always original current8d49 after guard and adjacent files; original still exact on failure beforeunlink, gzip wholebody exact afterunlink; preserve primary+secondary separately. On root timeout incompletepostguard isHOLD; no automaticretry."
+  ],
+  "unbound_path_proof": {
+    "compared_rows": 273,
+    "current_LIGHT_bindings": 14,
+    "native_rows": 1192,
+    "qualified_rows": 237,
+    "source_path_matches": 0,
+    "tracked_rows": 1440
+  }
+}

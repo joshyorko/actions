@@ -1,0 +1,96 @@
+{
+  "counts": {
+    "before_post": {
+      "each_returncode": 0,
+      "original_expected_guard_token": true
+    },
+    "nine_fresh_restored_GREEN": {
+      "each_errors": 0,
+      "each_original_pytest_exit": 0,
+      "each_passes": 1,
+      "each_skips": 0,
+      "each_tests": 1
+    },
+    "nine_intended_RED": {
+      "each_errors": 0,
+      "each_failures": 1,
+      "each_original_pytest_exit": 1,
+      "each_skips": 0,
+      "each_tests": 1
+    },
+    "own_origins": {
+      "count": 5,
+      "each_returncode": 0,
+      "scope": "Exact module/prefix assertion commands; intentionally empty stdout"
+    }
+  },
+  "decision": "GO_ORIGINAL_KNOWN_NINE18_SEMANTIC_RED_RESTORED_GREEN_SOURCE_ONLY_ACTUAL",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_reused": "docs/skills/repository-operations.md accepted semantic raw-frame/JUnit emitter and catalog lock/copy scope lessons reused; no cosmetic repository edit",
+    "Durable_learning_captured": "Installed pytest JUnit may omit failure.type; admit deliberate RED only with named-case original AssertionError trace at exact frozen source path/function/line/assertion, preserving failed predecessor. Green baseline plus these9 semantic counterfactuals does not establish snapshot-oracle sensitivity or native behavior.",
+    "Evidence": "All18 original XML and9 raw Robot traces; exact source frames, prior4e936 failure/819ab emitter proof retained",
+    "Exact_delta": {
+      "bytes": 705,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-known-nine-18-semantic-JUnit-envelope-once2-preexecution-NOTRUN/canonical-JUnit-exception-envelope-vs-semantic-raw-frame-proposed.patch",
+      "sha256": "37c705baab06d0cf55be170d780a4e11b47c82fc8c726483f2d4fc26604d4ff2"
+    },
+    "Remaining_uncertainty": "Snapshot sensitivity/native/managed-worker acceptance remain NOT_RUN/HOLD",
+    "Stale_or_ambiguous_guidance_removed": "No mandatory JUnit type inferred; no native claim or generic failed-returncode admission"
+  },
+  "independent_proof": {
+    "bytes": 57548,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine18-once2-independent-ACTUAL-review/private-independent-original-nine18-JUnit-raw-frame-and-current-scope-proof.json",
+    "sha256": "d7bf88854f2188d389ded11ae324b1e9b191788f477d3aa57cd70788a33eb3ad"
+  },
+  "owner": {
+    "bytes": 69048,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/OWNERFINAL-root-one-original-known-nine-18-semantic-RED-restored-GREEN.json",
+    "sha256": "e7ef0386bf1c830930f56c4b2984178e60e02a9c3495798dd4df74495f1ed0b1"
+  },
+  "preexec_review": {
+    "bytes": 3648,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine18-JUnit-once2-independent-PREEXEC-review/OWNERFINAL-independent-known-nine18-JUnit-envelope-once2-SOURCE-and-PREEXEC-GO.json",
+    "sha256": "47a03a710ddaccd3eedda19f8cc00020ad56af01bb0039230a84f7ab9958625d"
+  },
+  "preservation": {
+    "first_failed_attempt_remains_FAIL": true,
+    "historical_config_scope": 237,
+    "native_original_member_bodies_modes_types_links": 1192,
+    "original_actual_FAIL": {
+      "bytes": 5522,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-known-nine18-original-ACTUALFAIL-independent-review/OWNERFINAL-independent-original-known-nine18-semantic-ACTUALFAIL-JUnit-protocol-review.json",
+      "sha256": "4e936c2ccb342701b271dd41dea2ae4e863da758e7ff2006ab0c375c6fa30f20"
+    },
+    "prepared_inputs": 30,
+    "reviewer_initial_readonly_assumption": {
+      "bytes": 791,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-known-nine18-once2-independent-ACTUAL-review/named-initial-reviewer-origin-stdout-JSON-assumption-FAIL.json",
+      "sha256": "8c7c21d3eb12525263f6ec766c0c685026c1a6d03dd04e5a538325a102a79ab8"
+    },
+    "source_Git_FS_clean_current_rows": 1440
+  },
+  "remaining_holds": [
+    "Snapshot-oracle sensitivity NOT_RUN; nine semantic seams only",
+    "No actual RCC binary probes, managed Action/artifact/lease/native generation/drain/provider or internal-reader acceptance",
+    "No source adoption, full private contract, release/publication/issue/merge waiver"
+  ],
+  "reviewer_execution": "No tests, product imports, gateway, native binary, source or original-evidence mutation",
+  "root_outer": {
+    "bytes": 858,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-known-nine18-JUnit-once2-reviewed-original-outer/OWNERFINAL-root-one-original-reviewed-current-pure-controls-outer.json",
+    "sha256": "af180b68c8c1066755a69fd86ec01eec45a91e36e02d13db48642ed07d52df15"
+  },
+  "schema": 1,
+  "semantic_evidence": "All9 original robolog streams independently decoded with stdlib memo/location/trace records. Exact named failed task + AssertionError + frozen source path/function/line/assertion verified against retained test body and admission JSON; JUnit names/counters independently parsed. Generic rc1, collection errors, skips and mutator sanity sentinel were not substituted.",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "status": "INDEPENDENT_ORIGINAL18_SOURCE_ONLY_ACTUAL_GO",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none"
+}

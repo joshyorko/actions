@@ -1,0 +1,245 @@
+{
+  "schema": "capacity-batch23-owner-preexecution-proposal-v1",
+  "decision": "GO_EXACT_SINGLE_COMPLETED_NAMESPACE_SCRIPT_PREPARATION_ONLY_ROOT_RELEASE_REQUIRED",
+  "script": {
+    "path": "/tmp/actions-capacity-recovery-batch23.py",
+    "bytes": 5244,
+    "sha256": "f7be14664fed8c9315c87a668971f80c3d7194dd6570e5b96b09c161e4501d38"
+  },
+  "algorithm_parent": {
+    "path": "/tmp/actions-capacity-recovery-batch19.py",
+    "bytes": 5244,
+    "sha256": "48fd7e4c79e55b80ceda0b63c1d1da87feeb368cefee265d5c12bad6ad940840"
+  },
+  "all16_nonconfiguration_AST_exact_parent": true,
+  "only_configuration_changes": [
+    "DEST",
+    "STAGE",
+    "NAMES"
+  ],
+  "names_exact_allowlist": [
+    "a4fa6f1c79c0a18f"
+  ],
+  "destination": "/dev/shm/actions-completed-scratch-recovery-batch23",
+  "unused_new_stage": "/tmp/actions-completed-scratch-recovery-batch23-stage",
+  "destination_stage_absent": true,
+  "fresh_completed_marker": {
+    "True": true,
+    "sha256": "3cbc87c7681f34db4617feaa2c8801931bc5e42d8d0f560e756dd4cd92885f18"
+  },
+  "fresh_candidate_member_types": {
+    "file": 474,
+    "directory": 418,
+    "symlink": 9,
+    "fifo": 0
+  },
+  "logical_regular_file_bytes": 24357272,
+  "ROOT_non_directory_file_plus_symlink_entry_bytes": 24358227,
+  "allocated_unique_entry_blocks_bytes_observation": 27328512,
+  "accessible_handle_observation": {
+    "processes": 288,
+    "links_read": 151,
+    "unobserved_permission_transient_or_FDlists": 543,
+    "candidate_cwd_FD_observed": 0
+  },
+  "source_origin": "UNREPORTED; older/markerTrue/mtime do not establish producer identity",
+  "batch22_frozen_proposal": {
+    "path": "/workspace/engineering/capacity-recovery-batch22-proposal/OWNERFINAL-batch22-exact-five-completed-preexecution-proposal.json",
+    "bytes": 9836,
+    "sha256": "c34b4ef28b2f0c6ae3436f542bc401e3da3bbac9f040739e6020977d5a0e1349"
+  },
+  "batch22_ROOT_one_adoption": {
+    "path": "/workspace/engineering/root-one-capacity-batch22-adoption.json",
+    "bytes": 3539,
+    "sha256": "2e29b92847f4cc36a5a20a645ee679f2c95e315097c19a74201b84cd9d9c4561"
+  },
+  "all_batch22_adoption14_bindings_rehashed": [
+    {
+      "path": "/tmp/actions-capacity-recovery-batch22.py",
+      "bytes": 5324,
+      "sha256": "cc4ee6e5e21e635255c6f6700a7f175b558d68d15336ab8ecd774b642a36cc24"
+    },
+    {
+      "path": "/tmp/actions-capacity-recovery-batch19.py",
+      "bytes": 5244,
+      "sha256": "48fd7e4c79e55b80ceda0b63c1d1da87feeb368cefee265d5c12bad6ad940840"
+    },
+    {
+      "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch20.json",
+      "bytes": 1369,
+      "sha256": "1d651c9a8d8421d7566c1e1f085136df525a3e783dd5667748960301bc59053a"
+    },
+    {
+      "path": "/dev/shm/actions-completed-scratch-recovery-batch20/private-complete-inventory-and-recovery.json",
+      "bytes": 1091421,
+      "sha256": "374435b650b15120fa439fcb7b9dda08257eea77f3594b1d391653d9b1f6b830"
+    },
+    {
+      "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch21.json",
+      "bytes": 969,
+      "sha256": "2fc2396bdcbcd154c8d3cb11d7caa5e5f236ae407e2d74059143c2623585c485"
+    },
+    {
+      "path": "/dev/shm/actions-completed-scratch-recovery-batch21/private-complete-inventory-and-recovery.json",
+      "bytes": 6545943,
+      "sha256": "d7bde07567769fc8f55def85540306cebb39e657e55fb30b677071daa93ac06f"
+    },
+    {
+      "path": "/workspace/engineering/capacity-recovery-batch22-proposal/private-readonly-preparation-proof.json",
+      "bytes": 104839,
+      "sha256": "760c4e61a99e77f5b10e42edf4e42bc37a0299ec1cf80e4bbf8337cb25fce034"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-current499-independent-SOURCEFULL-review/OWNERFINAL-independent-current499-configured-SOURCEFULL-review.json",
+      "bytes": 21401,
+      "sha256": "403a9a40759b5b8f996d6025b15889e154014af961c9c49ed898cab1687fd5cd"
+    },
+    {
+      "path": "/workspace/engineering/capacity-recovery-independent-review/canonical-completed-scratch-preservation-proposed.patch",
+      "bytes": 1068,
+      "sha256": "7d07065b5bb7742698919997c8c6621cc20d00494741eb5365251ffb09f2d208"
+    },
+    {
+      "path": "/tmp/actions-capacity-recovery-batch22.py",
+      "bytes": 5324,
+      "sha256": "cc4ee6e5e21e635255c6f6700a7f175b558d68d15336ab8ecd774b642a36cc24"
+    },
+    {
+      "path": "/tmp/actions-capacity-recovery-batch19.py",
+      "bytes": 5244,
+      "sha256": "48fd7e4c79e55b80ceda0b63c1d1da87feeb368cefee265d5c12bad6ad940840"
+    },
+    {
+      "path": "/workspace/engineering/capacity-recovery-batch22-proposal/private-readonly-preparation-proof.json",
+      "bytes": 104839,
+      "sha256": "760c4e61a99e77f5b10e42edf4e42bc37a0299ec1cf80e4bbf8337cb25fce034"
+    },
+    {
+      "path": "/workspace/engineering/capacity-recovery-batch22-proposal/prepare-readonly-proof-and-freeze.py",
+      "bytes": 10772,
+      "sha256": "bef0ce9a1da412d6ba9f136ac54f00e093cbfcd2ef3d343a28cf123b8a41b070"
+    }
+  ],
+  "prior_retention_scope": {
+    "accepted_prior40archives19indices": "Immutable before22 proof rehashed and retained via adopted c34/760c chain; no giant repeat stream or new historical claim",
+    "ROOT_recorded_total_before22": "43archives21indices;20/21 original root receipts/index/archives retained, independent streamed review remains separately attributed",
+    "ROOT20_21_originals": [
+      {
+        "owner": {
+          "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch20.json",
+          "bytes": 1369,
+          "sha256": "1d651c9a8d8421d7566c1e1f085136df525a3e783dd5667748960301bc59053a"
+        },
+        "private_index": {
+          "path": "/dev/shm/actions-completed-scratch-recovery-batch20/private-complete-inventory-and-recovery.json",
+          "bytes": 1091421,
+          "sha256": "374435b650b15120fa439fcb7b9dda08257eea77f3594b1d391653d9b1f6b830"
+        },
+        "ROOT_recorded_archives": 2,
+        "independent_stream_scope": "Retain originally pending status here; no new actual validation claim"
+      },
+      {
+        "owner": {
+          "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch21.json",
+          "bytes": 969,
+          "sha256": "2fc2396bdcbcd154c8d3cb11d7caa5e5f236ae407e2d74059143c2623585c485"
+        },
+        "private_index": {
+          "path": "/dev/shm/actions-completed-scratch-recovery-batch21/private-complete-inventory-and-recovery.json",
+          "bytes": 6545943,
+          "sha256": "d7bde07567769fc8f55def85540306cebb39e657e55fb30b677071daa93ac06f"
+        },
+        "ROOT_recorded_archives": 1,
+        "independent_stream_scope": "Retain originally pending status here; no new actual validation claim"
+      }
+    ],
+    "batch22_actual": "May be active; no mutable actualindex/log read or future acceptance/count invented"
+  },
+  "current_source_native_retention_readonly": {
+    "status": "READ_ONLY_SOURCE_AND_RETAINED_ENVIRONMENT_IDENTITY_PASS",
+    "head": "499a83d802ca9a0e2ebe3d77071af10625879297",
+    "tree": "e13ba51b094e429b7c06d6dabbbcc348cc66e86c",
+    "parent": "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+    "source_entries": 1422,
+    "LIGHT_bindings": 67,
+    "inputs": 30,
+    "retained_concrete_origin_observations": 5,
+    "fresh_origin_execution": false,
+    "private_original_bindings": 31,
+    "frozen_helpers": 4,
+    "native_inventory_entries": 1192,
+    "available_bytes_observation_only": 949678080,
+    "full_execution": "NOT_RUN",
+    "native_qualification": "UNQUALIFIED_274_producer_and_5_selected_tests_separately_typed"
+  },
+  "native1192_full_member_set_exact_current": true,
+  "current_cleanup_SOURCEFULL_review": {
+    "path": "/workspace/engineering/captured-child-cleanup-current499-independent-SOURCEFULL-review/OWNERFINAL-independent-current499-configured-SOURCEFULL-review.json",
+    "bytes": 21401,
+    "sha256": "403a9a40759b5b8f996d6025b15889e154014af961c9c49ed898cab1687fd5cd"
+  },
+  "failed563d": "EXISTS bounded; not allowlisted/read-as-complete historical baseline/touched",
+  "workspace_available_bytes_observation": 948072448,
+  "execution_prerequisites": [
+    "Root distinct ONE recovery release after current batch22 recovery terminal",
+    "Exact script repeats fresh marker/accessible-handle checks before full inventory and after successful archive verification/reinventory before removal",
+    "Existingmount private0600gzip+complete0600 index; no copy/install/newnamespaceGC or any other scratch/source/cache/helper/native deletion"
+  ],
+  "capacity_gate_subjects": {
+    "source_full_existing_exact_proposal_floor_bytes": 1200000000,
+    "native_first_actual_strict_1point2GiB_floor_bytes": 1288490189,
+    "target_fresh_bytes": 1300000000,
+    "capacity_after_recovery_NOT_PROVEN": "Observe fresh after actual recovery; if below required subject threshold HOLD, no forced launch"
+  },
+  "no_recovery_archive_removal_test_gateway_native_download_source_execution_by_preparer": true,
+  "limits": [
+    "Metadata candidate body inventory deferred to root actual exact script",
+    "Accessible cwdFD observations omit permission/transient/maps/external users; no universal quiescence",
+    "No ACL/xattr/inode/rootmetadata/exact TAR nsmtime or causal source-origin inference",
+    "Retained prior SHA bindings do not replace original independent archive stream reviews"
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md exact existing7d070 preservation paragraph reused unchanged",
+    "Exact_delta_or_reuse": {
+      "path": "/workspace/engineering/capacity-recovery-independent-review/canonical-completed-scratch-preservation-proposed.patch",
+      "bytes": 1068,
+      "sha256": "7d07065b5bb7742698919997c8c6621cc20d00494741eb5365251ffb09f2d208"
+    },
+    "Durable_learning_captured": "Preserve complete archive/index evidence before only named completed expanded removal; handle observations and capacity planning do not provide future source/native gate authority.",
+    "Evidence": [
+      {
+        "path": "/tmp/actions-capacity-recovery-batch23.py",
+        "bytes": 5244,
+        "sha256": "f7be14664fed8c9315c87a668971f80c3d7194dd6570e5b96b09c161e4501d38"
+      },
+      {
+        "path": "/tmp/actions-capacity-recovery-batch19.py",
+        "bytes": 5244,
+        "sha256": "48fd7e4c79e55b80ceda0b63c1d1da87feeb368cefee265d5c12bad6ad940840"
+      },
+      {
+        "path": "/workspace/engineering/root-one-capacity-batch22-adoption.json",
+        "bytes": 3539,
+        "sha256": "2e29b92847f4cc36a5a20a645ee679f2c95e315097c19a74201b84cd9d9c4561"
+      },
+      {
+        "path": "/workspace/engineering/captured-child-cleanup-current499-independent-SOURCEFULL-review/OWNERFINAL-independent-current499-configured-SOURCEFULL-review.json",
+        "bytes": 21401,
+        "sha256": "403a9a40759b5b8f996d6025b15889e154014af961c9c49ed898cab1687fd5cd"
+      }
+    ],
+    "Stale_or_ambiguous_guidance_removed": "No ROOT-recorded recovery promoted to independently streamed preservation; separate decimal source-full and strict binary native-cold floor are explicit.",
+    "Remaining_uncertainty": "Actual batch23 NOT_RUN and new actual review required; fresh future capacity/handles are unknown; source origin UNREPORTED."
+  },
+  "retained_initial_metadata_metric_inspector_failure": {
+    "path": "/workspace/engineering/capacity-recovery-batch23-proposal/retained-preparation-size-definition-correction.json",
+    "bytes": 1236,
+    "sha256": "b83218801222b12f39c6d6459be9cd23ff94cc5d8fccac51baa6998d3cd84d57"
+  },
+  "Upstream_disposition": "none",
+  "constructor": {
+    "path": "/workspace/engineering/capacity-recovery-batch23-proposal/prepare-readonly-and-freeze-v2.py",
+    "bytes": 10107,
+    "sha256": "974c416318f6e09d9cd1acff002da0a58fcd2feb22c3d332538cfd772eb61b8a"
+  }
+}

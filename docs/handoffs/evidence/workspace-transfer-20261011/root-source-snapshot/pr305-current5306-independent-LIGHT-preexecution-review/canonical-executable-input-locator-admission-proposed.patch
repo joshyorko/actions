@@ -1,0 +1,10 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@
+ Hash receipts as exact file bytes and test Git ancestry with full source commit
+ IDs. A receipt SHA-256 is not a commit ID.
++
++Resolve each executable input locator against its bound source receipt before
++release. A label-only metadata successor does not repair a missing or cross-branch
++input path; freeze a new execution contract with corrected locators and preserve
++the original packet without backfilling misleading filenames.

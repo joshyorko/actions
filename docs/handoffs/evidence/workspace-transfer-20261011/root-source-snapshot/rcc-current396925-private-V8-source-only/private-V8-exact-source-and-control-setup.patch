@@ -1,0 +1,88 @@
+--- a/owned_cache_policy_v1.py
++++ b/owned_cache_policy_v8.py
+@@ -91,11 +91,21 @@
+          "CACHE_OWNED_DIRECTORY")
+ 
+ 
++def _owned_rcc_home(path):
++    """Only the native-managed home may use0750, with current UID and GID."""
++    meta = path.lstat()
++    need(stat.S_ISDIR(meta.st_mode) and not path.is_symlink()
++         and path.resolve(strict=True) == path
++         and stat.S_IMODE(meta.st_mode) in (0o700, 0o750)
++         and meta.st_uid == os.getuid() and meta.st_gid == os.getgid(),
++         "CACHE_NATIVE_HOME_MODE_OWNER_GROUP")
++
++
+ def create_cache_marker(config, label, source, tree, binaries):
+     plan = cache_plan(config, label, source, tree, binaries)
+     root = Path(config["owned_root"])
+     _owned_directory(root)
+-    _owned_directory(root / "actions-home")
++    _owned_rcc_home(root / "actions-home")
+     cache = Path(plan["marker"]["package_cache_root"])
+     need(not cache.exists() and not cache.is_symlink(), "CACHE_COLD_ROOT_MUST_BE_ABSENT")
+     # Exclusivity retains unexpected existing/partial state instead of replacing.
+@@ -112,7 +122,7 @@
+     plan = cache_plan(config, label, source, tree, binaries)
+     root = Path(config["owned_root"])
+     _owned_directory(root)
+-    _owned_directory(root / "actions-home")
++    _owned_rcc_home(root / "actions-home")
+     _owned_directory(Path(plan["marker"]["package_cache_root"]))
+     path = Path(plan["marker_path"])
+     meta = path.lstat()
+--- a/fixture_records_v2.py
++++ b/fixture_records_v8.py
+@@ -1,4 +1,4 @@
+-"""Data-only admission for the frozen b614 two-case interface.
++"""Data-only admission for the independently source-bound two-case interface.
+ 
+ No product import, process launch, file access or URL/command forwarding.
+ Callers retain original bytes privately and supply independently read lease bytes.
+@@ -157,8 +157,8 @@
+     beneath(result['core_origin'], value['managed_root'], 'ACTION_CORE_CONTAINMENT')
+     beneath(result['python_executable'], value['managed_root'], 'ACTION_PYTHON_CONTAINMENT')
+     beneath(result['action_source_path'], str(PurePosixPath(expected['staged_case_root']) / 'runtime-data' / '.rcc-runtime-sources'), 'ACTION_SOURCE_CONTAINMENT')
+-    intentional_context = (value['source_commit'] == 'b614864ba9da55c13662894b6ef3c8515d9fdb25'
+-                           and value['source_tree'] == '6fa4f5c1e9837a0d893868255575b355b3977fae'
++    intentional_context = (value['source_commit'] == expected['source']['commit']
++                           and value['source_tree'] == expected['source']['tree']
+                            and value['status'] == 'PASS' and result['core_version'] == '1.0.2')
+     worker = worker_record(value['worker'], value['artifact_digest'], original_lease_raw, expected['owned_root'],
+                            rcc_version=value['rcc_version'], intentional_disposal_context=intentional_context)
+--- a/actual_transport_v7.py
++++ b/actual_transport_v8.py
+@@ -16,9 +16,9 @@
+ import traceback
+ from pathlib import Path
+ 
+-from owned_cache_policy_v1 import cache_plan, require_cache_release, create_cache_marker, validate_created_cache
++from owned_cache_policy_v8 import cache_plan, require_cache_release, create_cache_marker, validate_created_cache
+ from historical_binding_v1 import verify_missing_original
+-from fixture_records_v2 import publication_record, staged_record
++from fixture_records_v8 import publication_record, staged_record
+ from owned_monitor_v1 import CapacityState, SupervisorPopenObserver
+ from runner_contracts_v3 import (
+     AdmissionFailure, authorize_signal, combine_outcomes, need, next_version,
+@@ -28,8 +28,8 @@
+ 
+ HELPER = '/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/verify_dakota_rcc_acceptance.py'
+ HELPER_SHA = '60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659'
+-SOURCE = 'e4ff080375a8422bb656e52d218f198521dda078'
+-TREE = '973ff38f49a17a896e4d90f829a72e2ea0ea15e8'
++SOURCE = '396925cb3d6527af1768b7f5333f9653c005fc55'
++TREE = '84f850f0d4e08b21afcd8220413ce94322370acf'
+ CONTROL = 'c10380a4d2ebc6f0aca63eb85c8f84a337da4962'
+ CONTROL_TREE = '21676c626a933c2d55761ec85ecf26fe0eef26bb'
+ BINARIES = {
+--- a/test_owned_cache_v7.py
++++ b/test_owned_cache_v8.py
+@@ -122,6 +122,7 @@
+             path = root/'rcc-package-cache-owner.json'; path.write_bytes(b'prior'); path.chmod(0o600)
+             config['owned_root'] = str(root)
+             plan = copy.deepcopy(config['owned_package_cache']); plan['marker_path'] = str(path)
++            plan['marker']['package_cache_root'] = str(root/'actions-home/pkgs')
+             with patch.object(P, 'cache_plan', return_value=plan):
+                 with self.assertRaises(FileExistsError): P.create_cache_marker(config, 'control3', T.SOURCE, T.TREE, T.BINARIES)
+             self.assertEqual(path.read_bytes(), b'prior')

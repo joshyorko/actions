@@ -1,0 +1,142 @@
+{
+  "schema": "independent-capacity-batch25-preexecution-review/v1",
+  "decision": "GO_CONDITIONAL_ONE_ROOT_AUTHORIZED_EXACT_COMPLETED_BATCH25_SCRIPT_PREEXECUTION_ONLY",
+  "owner_final": {
+    "path": "/workspace/engineering/capacity-recovery-batch25-proposal/OWNERFINAL-batch25-exact-one-completed-preexecution-proposal-v2.json",
+    "bytes": 14371,
+    "sha256": "f561a2dfe1c8b640318686930ab7754844f36208c5ff9268707025ca0a6053ea"
+  },
+  "script": {
+    "path": "/tmp/actions-capacity-recovery-batch25.py",
+    "bytes": 5244,
+    "sha256": "09160c02ce8c05d48c048a0a1b228901c4e4c140812ddcdcac9b8c9dae8b78a8"
+  },
+  "accepted_algorithm_parent": {
+    "path": "/tmp/actions-capacity-recovery-batch19.py",
+    "bytes": 5244,
+    "sha256": "48fd7e4c79e55b80ceda0b63c1d1da87feeb368cefee265d5c12bad6ad940840"
+  },
+  "exact_root_proposed_command": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "600s",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/tmp/actions-capacity-recovery-batch25.py"
+  ],
+  "single_completed_namespace_allowlist": [
+    "ad13a81675676d7b"
+  ],
+  "destination": "/dev/shm/actions-completed-scratch-recovery-batch25",
+  "unused_new_stage": "/tmp/actions-completed-scratch-recovery-batch25-stage",
+  "independent_AST_review": {
+    "all16_nonconfiguration_module_AST_sections_byte_normalized_equal_B19": true,
+    "configuration_changes_only": [
+      "DEST",
+      "STAGE",
+      "NAMES"
+    ],
+    "no_product_imports_binary_invocations_process_kill_env_changes": true,
+    "filesystem_mutation_scope_if_future_root_releases": "New private destination/archive/index; rmtree onlyBASE/NAMES named completed expanded root after verification; unused exact per-name staged archive unlink only if file exists and verifies. No native/source/cache/environment/receipt/failed563 removal."
+  },
+  "independent_original_data_observations": {
+    "all_owner_private_proof_constructor_predecessor_current312_and_failedguard_ref_size_SHA_exact": true,
+    "source_root_real_dir_not_symlink_marker_True": true,
+    "source_member_paths_types_modes_mtime_ns_UID_GID_symlink_targets_and_all_regular_body_hashes_fresh_exact_both_recorded_snapshots": 16157,
+    "source_member_counts": {
+      "directory": 3447,
+      "file": 12214,
+      "symlink": 488,
+      "fifo": 8
+    },
+    "two_recorded_snapshots_exact": true,
+    "regular_source_files_not_executed": 12214,
+    "all_prior_original_archive_bytes_size_SHA_mode_fresh_exact": 50,
+    "all_prior_original_index_bytes_size_SHA_fresh_exact": 24,
+    "current_destination_and_stage_absent": true,
+    "failed563_exists_only_and_excluded_no_inside_reads": true,
+    "current312_sourcefull_owner_and_all13_original_refs_rehashed_unchanged": true,
+    "current312_tracked_source_clean": true,
+    "frozen_failed_control3_preservation_input_manifest_SHA_exact": "cfb97eaadadd7368043033f7aa4749655609fc7b41ff5c577bbe86d82d361bff",
+    "failed_control3_guards": "Reference-only current owner snapshot, not a failed-gate GO or relocation authorization",
+    "source_origin": "UNREPORTED",
+    "source_origin_not_inferred_from_time_marker_or_current312_PASS": true
+  },
+  "archive_before_remove_contract": {
+    "same_accepted_B19_order": "MarkerTrue + accessible handles -> complete original inventory -> new archive or verified unusedstage ->0600 archive -> all member byte/size/mode UID GID/kind/symlink/hardlink resolved verification -> original full reinventory exact -> second accessible-handle rejection ->0600 complete index saved -> only named expanded rmtree -> receipt records removal",
+    "hardlinks": "Existing tarfile.extractfile resolves internal TAR hardlink members and verifies each original recorded file body/size; no independent inode topology claim",
+    "FIFO": "Type-only record and TAR kind comparison; FIFO never read as stream",
+    "no_script_retry_loop": true,
+    "partial_or_timeout": "Archive/removal failure retains originals/partial archive/index and requires diagnosis; no automatic retry or future capacity GO. Complete archive/index precede destructive named removal."
+  },
+  "conditional_root_release_prerequisites": {
+    "independent_receipt_and_explicit_distinct_ONE_release_required": true,
+    "root_failed_control3_lossless_preservation_is_separate_first_step": "Not authorized or executed by this B25 review; retain failed original bytes/status/guard evidence and use its own reviewed mapping",
+    "root_immediate_byte_hash_script_and_named_inputs_recheck": true,
+    "fresh_absent_destination_stage_AND_private_parent_scope": true,
+    "fresh_marker_True_and_accessible_cwd_FD_check_before_and_after_archive_plus_full_stability_check": true,
+    "no_other_heavy_or_shared_scratch_mutation": true,
+    "fresh_available_shm_and_workspace_measurements_before_after_required": true,
+    "future_source_floor_bytes": 1200000000,
+    "future_cold_floor_bytes": 1288490189,
+    "these_future_gate_floors_are_separate_releases_not_archival_GO": true,
+    "private_0700_destination_0600_archive_complete_index_and_root_logs_terminal": true,
+    "all_original50archives24indices_source_native_helpers_receipts_failed563_preserved_before_after": true,
+    "exact_executed_script_root_timeout_TERM_seconds": 600,
+    "KILL_grace_seconds": 10
+  },
+  "limits": [
+    "Preexecution only: no new archive created, no gzip/TAR verification or expanded removal performed by reviewer",
+    "Recorded original source body/mode/UID/GID/mtime_ns/type/link inventories verified; precise TAR ns mtime, ACL/xattrs/inode topology/rootmetadata not qualified",
+    "Accessible /proc cwd/FD observations omit unreadable/transient/maps/external actors; absence is not universal quiescence",
+    "Archive streaming/member CRC/SHA and removal/capacity observation require separate frozen actual review",
+    "No current312 origin proof, native/provider/browser/consumer/source/release/issue acceptance upgrade",
+    "Recovered free space not presumed from allocated block/logical byte estimates"
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "Exact_accepted_reuse": {
+      "path": "/workspace/engineering/capacity-recovery-independent-review/canonical-completed-scratch-preservation-proposed.patch",
+      "bytes": 1068,
+      "sha256": "7d07065b5bb7742698919997c8c6621cc20d00494741eb5365251ffb09f2d208"
+    },
+    "Durable_learning": "Complete byte/mode/UID/GID/link archive evidence, repeated full inventory and accessible-handle check precede only explicitly named completed scratch removal. Capacity/source origin and source acceptance remain separate.",
+    "Evidence": [
+      {
+        "path": "/workspace/engineering/capacity-recovery-batch25-proposal/OWNERFINAL-batch25-exact-one-completed-preexecution-proposal-v2.json",
+        "bytes": 14371,
+        "sha256": "f561a2dfe1c8b640318686930ab7754844f36208c5ff9268707025ca0a6053ea"
+      },
+      {
+        "path": "/tmp/actions-capacity-recovery-batch25.py",
+        "bytes": 5244,
+        "sha256": "09160c02ce8c05d48c048a0a1b228901c4e4c140812ddcdcac9b8c9dae8b78a8"
+      },
+      {
+        "path": "/tmp/actions-capacity-recovery-batch19.py",
+        "bytes": 5244,
+        "sha256": "48fd7e4c79e55b80ceda0b63c1d1da87feeb368cefee265d5c12bad6ad940840"
+      },
+      {
+        "path": "/workspace/engineering/capacity-recovery-batch25-proposal/private-complete-candidate-two-stable-inventories-v2.json",
+        "bytes": 12114798,
+        "sha256": "95bf33a7b4a675e3425dab0388f586a0c41ef2807647cad6e8c21179aae287b6"
+      },
+      {
+        "path": "/workspace/engineering/capacity-recovery-batch25-proposal/private-accessible-process-cwd-FD-before-after-v2.json",
+        "bytes": 466,
+        "sha256": "4686b3eee119bd9a5aa2b1e82eb20c9ae55c3f406688e4424b557e6b2e86c1d2"
+      },
+      {
+        "path": "/workspace/engineering/capacity-recovery-batch25-proposal/private-prior50-original-archives24-indices-current-hash-retention-v2.json",
+        "bytes": 20455,
+        "sha256": "ada727cb26e702400c95751af9fd8fce33c80a185a5d7b4a528a2856793bd0aa"
+      }
+    ],
+    "Stale_guidance_removed": "No newest/mtime origin inference or universal handle/cleanup claim; accepted7d070 already captures rule so no cosmetic duplicate.",
+    "Remaining_uncertainty": "Archive/removal NOT_RUN and fresh recovered capacity UNKNOWN; inaccessible handle and metadata limitations remain.",
+    "Disposition": "Exact accepted7d070 paragraph verified/reused unchanged algorithm; no source guide edit."
+  },
+  "Upstream_disposition": "none",
+  "reviewer_archive_remove_restore_GC_native_gates_source_ref_mutations": false
+}

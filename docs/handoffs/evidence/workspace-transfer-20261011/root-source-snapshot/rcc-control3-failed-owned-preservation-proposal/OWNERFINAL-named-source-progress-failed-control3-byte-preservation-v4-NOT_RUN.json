@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "status": "NOT_RUN_NAMED_SOURCE_PROGRESS_ONLY_SUCCESSOR_REVIEW_REQUIRED",
+  "script": {
+    "path": "/workspace/engineering/rcc-control3-failed-owned-preservation-proposal/preserve_failed_control3_once_v4.py",
+    "bytes": 18125,
+    "sha256": "ba6393154ff6104718a101d133c768e40100f4b4d589a636ff3dc92c2450e6bb",
+    "mode": "0o600"
+  },
+  "helper": {
+    "path": "/workspace/engineering/rcc-control3-failed-owned-preservation-proposal/source_progress_guard_v4.py",
+    "bytes": 3060,
+    "sha256": "660aa4fbecb78fb4fe394f507b75bdedee9f5492233b30c15baedbae7111e728",
+    "mode": "0o600"
+  },
+  "inputs": {
+    "path": "/workspace/engineering/rcc-control3-failed-owned-preservation-proposal/frozen-preservation-inputs-v4.json",
+    "bytes": 76679,
+    "sha256": "ebcc9dc65a768eadcfdd624d9cdf2fd94a5804c4964a88cb72897026d971f383",
+    "mode": "0o600"
+  },
+  "source_progress": {
+    "path": "/workspace/engineering/rcc-control3-failed-owned-preservation-proposal/current-e4ff-source-progress-complete-body-mode-proof-v4.json",
+    "bytes": 419966,
+    "sha256": "4cf89b355842fbc1f00eec11054a95010e0a6d6c8c0acca11d4da1c379b1edc5",
+    "mode": "0o600"
+  },
+  "original_v3_script": {
+    "path": "/workspace/engineering/rcc-control3-failed-owned-preservation-proposal/preserve_failed_control3_once_v3.py",
+    "bytes": 18709,
+    "sha256": "589ed17fed7be500c028cf7eef027ece4e19ab6574a9008f009fa329677c5b7e",
+    "mode": "0o600"
+  },
+  "original_v3_inputs": {
+    "path": "/workspace/engineering/rcc-control3-failed-owned-preservation-proposal/frozen-preservation-inputs-v3.json",
+    "bytes": 63424,
+    "sha256": "cfb97eaadadd7368043033f7aa4749655609fc7b41ff5c577bbe86d82d361bff",
+    "mode": "0o600"
+  },
+  "original_proposal": {
+    "path": "/workspace/engineering/rcc-control3-failed-owned-preservation-proposal/OWNERFINAL-third-policy-exact-failed-control3-byte-preservation-PROPOSAL.json",
+    "bytes": 12944,
+    "sha256": "ab2e9f147ba9096d31259cbad6aec2d2d0c372542857b9938882c5f2bc4112ca",
+    "mode": "0o400"
+  },
+  "change": "Only current source guard separates historicalb614 exact Git1421 payload from current e4ff complete Git+FS proof; historical snapshots/default fixtures/native remain frozen. Archive/remove/kernel/task/type/hash/mode/UIDGID/mtime/bounds/release policy unchanged.",
+  "current_count": 1423,
+  "historical_count": 1421,
+  "original_status": "FAIL_HOLD_UNCHANGED",
+  "native_executed": false,
+  "archive_executed": false,
+  "root_release_schema": {
+    "schema": 1,
+    "status": "ROOT_RELEASE_ONE_FAILED_OWNED_BYTE_PRESERVATION",
+    "root": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-1",
+    "destination": "/dev/shm/actions-failed-control3-original-preservation-20261011-1",
+    "script_sha256": "ba6393154ff6104718a101d133c768e40100f4b4d589a636ff3dc92c2450e6bb",
+    "inputs_sha256": "ebcc9dc65a768eadcfdd624d9cdf2fd94a5804c4964a88cb72897026d971f383",
+    "mode": "ARCHIVE_VERIFY_REMOVE",
+    "original_status": "FAIL_HOLD_UNCHANGED",
+    "serialized_failed_root_and_devshm": true
+  }
+}

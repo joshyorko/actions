@@ -1,0 +1,407 @@
+{
+  "schema": "original-cleanup-private-deterministic-control-v1",
+  "decision": "RED_CONFIRMED_ORIGINAL_CAPTURED_CHILD_EARLY_RETURN_WITH_UNUSED_BUDGET_NO_PRODUCTION_PATCH_AUTHORITY",
+  "source": {
+    "prepared_head": "fada8e068f61f6e0e380ec4685eed2f4cf0b9ade",
+    "tree": "a31db4434c7bbe69bf572626d2174f64f9ff2f39",
+    "body": {
+      "path": "/workspace/engineering/pr306/action_server/src/actions/server/_common/process.py",
+      "bytes": 31134,
+      "sha256": "f432e65a488bf06862e548dc45342d3c1fb5ea7fcc26f6371d98aae124ffc082"
+    },
+    "function_AST_sha256": "4daa20a96616417a162184172d77db8902ab5a10f21e2bed0dfc12368460d3bc",
+    "original_actual_checkout": "522b7bc6e7e9207dac0c745b49d90907ecdf3080",
+    "original_actual_body_exact": true,
+    "worktree_clean_before_and_after": true
+  },
+  "environment": {
+    "checked_preflight": {
+      "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/checked-preflight.json",
+      "bytes": 5462,
+      "sha256": "81c0629add8c94f2880a66d5722708e0c7067503f8c7dddbfdf79720a0e9b2ef"
+    },
+    "own_concrete_module_origins": 5,
+    "prepared_input_count": 30,
+    "RCC_version_in_original_gateway_logs": "v18.19.3",
+    "RCC_binary": {
+      "path": "/workspace/actions-cloud/bin/rcc",
+      "bytes": 22282402,
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+    },
+    "no_install": true
+  },
+  "execution": {
+    "commands": [
+      "source /workspace/actions-cloud/activate.sh; timeout --signal=TERM --kill-after=10s 60s rcc task script -r developer/toolkit.yaml -- python /workspace/engineering/pr306-original-cleanup-deterministic-control-owned/preflight.py",
+      "source /workspace/actions-cloud/activate.sh; timeout --signal=TERM --kill-after=10s 60s rcc task script -r developer/toolkit.yaml -- python -c [toolkit.poetry action_server run python -m pytest -q -n 0 --confcutdir=owned-control --junitxml=owned-control/original-control-junit.xml owned-control/test_original_cleanup_control.py]"
+    ],
+    "exact_pytest_argv": [
+      "run",
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "-n",
+      "0",
+      "--confcutdir=/workspace/engineering/pr306-original-cleanup-deterministic-control-owned",
+      "--junitxml=/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/original-control-junit.xml",
+      "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/test_original_cleanup_control.py"
+    ],
+    "gateway_exit": 10,
+    "nested_pytest_exit": 1,
+    "outer_timeout": false,
+    "tests": 9,
+    "passed": 8,
+    "failed": 1,
+    "errors": 0,
+    "skipped": 0,
+    "failed_test": "test_asynchronous_child_completion_uses_available_deadline",
+    "pytest_seconds": 0.391,
+    "focused_control_executions": 1,
+    "real_child_processes_or_network": false,
+    "scope": "Canonical gateway processes only; target process tree, wrapper and psutil state are fakes; no actual provider/native Runtime/process-tree launch"
+  },
+  "early_return_witness": {
+    "scenario": "asynchronous-exit",
+    "clock_end": 0.41,
+    "deadline": 18.0,
+    "unused_budget": 17.59,
+    "child_absent_at": 0.75,
+    "wrapper_reaped": true,
+    "execution_stopped": false,
+    "descendant_reap_complete": false,
+    "live": [
+      200
+    ],
+    "zombies": [],
+    "error_count": 0,
+    "snapshot_complete": true,
+    "actions": [
+      "child_terminate",
+      "wrapper_terminate",
+      "child_kill"
+    ],
+    "trace": [
+      {
+        "event": "snapshot",
+        "time": 0.0
+      },
+      {
+        "event": "child_terminate",
+        "time": 0.0
+      },
+      {
+        "event": "wrapper_terminate",
+        "time": 0.0
+      },
+      {
+        "event": "psutil_wait",
+        "time": 0.0,
+        "count": 1,
+        "timeout": 0.2
+      },
+      {
+        "event": "child_kill",
+        "time": 0.2
+      },
+      {
+        "event": "psutil_wait",
+        "time": 0.2,
+        "count": 1,
+        "timeout": 0.2
+      },
+      {
+        "event": "Popen_wait",
+        "time": 0.4,
+        "timeout": 17.400000000000002
+      }
+    ]
+  },
+  "control_outcomes": [
+    {
+      "scenario": "PID-reuse",
+      "clock_end": 0.41,
+      "unused_budget": 17.59,
+      "wrapper_reaped": true,
+      "execution_stopped": true,
+      "descendant_reap_complete": true,
+      "live": [],
+      "zombies": [],
+      "error_count": 0,
+      "snapshot_complete": true
+    },
+    {
+      "scenario": "asynchronous-exit",
+      "clock_end": 0.41,
+      "unused_budget": 17.59,
+      "wrapper_reaped": true,
+      "execution_stopped": false,
+      "descendant_reap_complete": false,
+      "live": [
+        200
+      ],
+      "zombies": [],
+      "error_count": 0,
+      "snapshot_complete": true
+    },
+    {
+      "scenario": "kill-error",
+      "clock_end": 0.41,
+      "unused_budget": 17.59,
+      "wrapper_reaped": true,
+      "execution_stopped": false,
+      "descendant_reap_complete": false,
+      "live": [
+        200
+      ],
+      "zombies": [],
+      "error_count": 1,
+      "snapshot_complete": true
+    },
+    {
+      "scenario": "never-exits",
+      "clock_end": 0.41,
+      "unused_budget": 17.59,
+      "wrapper_reaped": true,
+      "execution_stopped": false,
+      "descendant_reap_complete": false,
+      "live": [
+        200
+      ],
+      "zombies": [],
+      "error_count": 0,
+      "snapshot_complete": true
+    },
+    {
+      "scenario": "prompt-exit",
+      "clock_end": 0.41,
+      "unused_budget": 17.59,
+      "wrapper_reaped": true,
+      "execution_stopped": true,
+      "descendant_reap_complete": true,
+      "live": [],
+      "zombies": [],
+      "error_count": 0,
+      "snapshot_complete": true
+    },
+    {
+      "scenario": "snapshot-error",
+      "clock_end": 0.41,
+      "unused_budget": 17.59,
+      "wrapper_reaped": true,
+      "execution_stopped": false,
+      "descendant_reap_complete": false,
+      "live": [],
+      "zombies": [],
+      "error_count": 1,
+      "snapshot_complete": false
+    },
+    {
+      "scenario": "wrapper-not-reaped",
+      "clock_end": 18.0,
+      "unused_budget": 0,
+      "wrapper_reaped": false,
+      "execution_stopped": false,
+      "descendant_reap_complete": false,
+      "live": [],
+      "zombies": [],
+      "error_count": 1,
+      "snapshot_complete": true
+    },
+    {
+      "scenario": "zero-budget",
+      "clock_end": 0.0,
+      "unused_budget": 0,
+      "wrapper_reaped": true,
+      "execution_stopped": false,
+      "descendant_reap_complete": false,
+      "live": [
+        200
+      ],
+      "zombies": [],
+      "error_count": 0,
+      "snapshot_complete": true
+    },
+    {
+      "scenario": "zombie",
+      "clock_end": 0.41,
+      "unused_budget": 17.59,
+      "wrapper_reaped": true,
+      "execution_stopped": true,
+      "descendant_reap_complete": false,
+      "live": [],
+      "zombies": [
+        200
+      ],
+      "error_count": 0,
+      "snapshot_complete": true
+    }
+  ],
+  "interpretation": [
+    "The actual imported immutable function returns incomplete at 0.41 of18 with captured child live; the model permits absence at0.75 within unchanged deadline.",
+    "Child state is a deterministic clock-based model; terminate/kill invocations are recorded, not real OS timing or proof that kill causes hosted absence.",
+    "PID-reuse control models an identity-bound old psutil handle raising NoSuchProcess; it does not independently test psutil operating-system PID protection.",
+    "Observed false result is correctly fail-closed. Control proves available-budget early return, not an acceptance bypass or universal deadline-completion promise.",
+    "RED test also asserts original witness preconditions; a future GREEN regression must preserve desired completion assertion and replace original-only witness assertions with repaired-state observations, not relabel this execution."
+  ],
+  "conditional_minimal_fix_proposal": "Only after root review/authorization: bounded wait of captured descendant handles using remaining SAME tree deadline after exclusive Popen wrapper reap, then strict original final classification. Never put wrapper in psutil wait or extend18/20/readers reservation; do not waive zombie/live/error/snapshot fields.",
+  "remaining_uncertainty": [
+    "Hosted cleanup remaining deadline and survivor identity unavailable; original readiness rootcause UNKNOWN; otherfour failure nodes unsampled.",
+    "No repaired function, GREEN production test, realprocess, Runtime native/provider or private acceptance execution performed."
+  ],
+  "bindings": [
+    {
+      "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/canonical-captured-tree-unused-deadline-proposed.patch",
+      "bytes": 1244,
+      "sha256": "36cc60d3263af329268d80c32f28fdd6ae5909fd71d9fc7bd60ba59c3dd04f93"
+    },
+    {
+      "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/checked-preflight.json",
+      "bytes": 5462,
+      "sha256": "81c0629add8c94f2880a66d5722708e0c7067503f8c7dddbfdf79720a0e9b2ef"
+    },
+    {
+      "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/freeze-original.private.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/freeze_original_control.py",
+      "bytes": 9425,
+      "sha256": "dfb7e1f7426565f52ca04403bd19a83fe011c8c36822fff9bbcb3a9a2495c7fa"
+    },
+    {
+      "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/origin-action_server.json",
+      "bytes": 274,
+      "sha256": "cd17c3befc236a34548de3fabf6cdc17e054e1e4d98b50a0182cc3a71033024a"
+    },
+    {
+      "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/origin-actions-http-helper.json",
+      "bytes": 265,
+      "sha256": "a8b7e8021c2199fa8e177d29f9195efd0545cab352d8b1501c1f0c7251735c11"
+    },
+    {
+      "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/origin-actions.json",
+      "bytes": 219,
+      "sha256": "09a6a3095b14b75066f80868d5159506f1dc83a46731bc8bbd68ed6f13e84a2a"
+    },
+    {
+      "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/origin-devutils.json",
+      "bytes": 241,
+      "sha256": "57ef86c1b0f116f4ed287eb9fcf64a7ebe78fcc93abeed21ab42464cf553ec97"
+    },
+    {
+      "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/origin-work-items.json",
+      "bytes": 250,
+      "sha256": "d0a9310d856017309e6f3d7168f78aedbcb7bb55f647b9488e10645f3a0c967a"
+    },
+    {
+      "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/original-control-exit.json",
+      "bytes": 18,
+      "sha256": "21a22856dd1c3b5d235661edf44add028ac3ed34e52b8d065f46f9f61e58726a"
+    },
+    {
+      "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/original-control-junit.xml",
+      "bytes": 2874,
+      "sha256": "bdae2172c6a360419336efd0b7a4ff9d4336d77cbe4ab20fe5db1a680a425de3"
+    },
+    {
+      "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/original-control.private.log",
+      "bytes": 9367,
+      "sha256": "6c0103b18d56afb3f8774f2536a3a70506c4cd7c39b71fd3b3190695d26839ff"
+    },
+    {
+      "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/outcome-PID-reuse.json",
+      "bytes": 868,
+      "sha256": "f69fa7f855c429c99980a474e29741ea7a9904b8862489a6dc1d7df765eee30f"
+    },
+    {
+      "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/outcome-asynchronous-exit.json",
+      "bytes": 967,
+      "sha256": "1a872d1733a320cb75098e13f59a293f467c9bf6f82e51842e7eb261e74ba7d0"
+    },
+    {
+      "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/outcome-kill-error.json",
+      "bytes": 960,
+      "sha256": "011ae63765996d90ea3a1de09214ef52d73f7d3b1c8c0bcaca9983f6330a29c7"
+    },
+    {
+      "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/outcome-never-exits.json",
+      "bytes": 961,
+      "sha256": "1233590edbbdc0ed4462840b62793526f205c3bcd484df4894916b82240eed5d"
+    },
+    {
+      "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/outcome-prompt-exit.json",
+      "bytes": 947,
+      "sha256": "cd99aebac586500b03f30366ca6a4193c52d75edbe302b16c15e46288c60c35a"
+    },
+    {
+      "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/outcome-snapshot-error.json",
+      "bytes": 875,
+      "sha256": "4cceb708ab7084a5883f78af8a4ae9ddc45fd27eda9826a92e3f866be2794efb"
+    },
+    {
+      "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/outcome-wrapper-not-reaped.json",
+      "bytes": 1052,
+      "sha256": "ff207636469bbcfe9d56986a49a918feaa7da836ef711a5ce3db7517c746b434"
+    },
+    {
+      "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/outcome-zero-budget.json",
+      "bytes": 680,
+      "sha256": "9f49e23b87b10e78e8bb74a7cb552e48b9cfb7fd9827a98a74d97f5d1d745cfe"
+    },
+    {
+      "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/outcome-zombie.json",
+      "bytes": 955,
+      "sha256": "e65485779317704c5976b3797d66fa89ff17e79d1e9b3f96c03a6b80aa7a8119"
+    },
+    {
+      "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/preflight-exit.json",
+      "bytes": 17,
+      "sha256": "e89df0eae5ec7db81135aed16463968955c578bcc4f2ec43172eff351f080c17"
+    },
+    {
+      "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/preflight-original.private.log",
+      "bytes": 6684,
+      "sha256": "430608b9225c0047d9d395b3ea49cba144a87dd6d326ae456c96292124bf5b97"
+    },
+    {
+      "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/preflight.py",
+      "bytes": 3174,
+      "sha256": "cca860794245455d91dc3b9ccfd5dc7f6aa757dfde6aa9b6123bd89c9a6c6869"
+    },
+    {
+      "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/test_original_cleanup_control.py",
+      "bytes": 6967,
+      "sha256": "f73570bb3366ac1084ded7d6127e03dcba5a3cbf80fe7e2f18eeab1193aff09a"
+    },
+    {
+      "path": "/workspace/engineering/pr306-current618-fada-startup-diagnostic-original-owned/frozen-readonly-captured-live-child-cleanup-contract-proposal.json",
+      "bytes": 8483,
+      "sha256": "731094016f3a6dd34efa423b5680250a8e72b487ff4438ad76ac96a89cd86044"
+    },
+    {
+      "path": "/workspace/engineering/pr306/action_server/src/actions/server/_common/process.py",
+      "bytes": 31134,
+      "sha256": "f432e65a488bf06862e548dc45342d3c1fb5ea7fcc26f6371d98aae124ffc082"
+    },
+    {
+      "path": "/workspace/engineering/pr306-actual299-refresh/after-full-own-Bootstrap-reuse-inputs-and-origins.json",
+      "bytes": 6419,
+      "sha256": "7e2701d78d4ff244beb186121404980d9e63b4b35256b676570846393997ec24"
+    },
+    {
+      "path": "/workspace/engineering/pr306-refresh-preparation/bootstrap.log",
+      "bytes": 27576,
+      "sha256": "25fa23496d40adf4c9ac632ea9ce80c7330b089393fe14d2a47b29a7552e54a8"
+    }
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; exact named patch proposed, not applied",
+    "Durable_learning_captured": "Exclusive wrapper reap and short descendant waits can leave unused shared budget; preserve incomplete observation rather than treating wrapper reap as whole-tree success.",
+    "Evidence": "Actual original body/AST, nine controlled outcomes, RED1/8PASS and unchanged18-second deadline; proposal73109 and original observed artifact retained.",
+    "Stale_or_ambiguous_guidance_removed": "No assumed full deadline use and no transfer of synthetic scheduling to hosted timing/rootcause; existing strict cleanup contract retained.",
+    "Remaining_uncertainty": "Hosted remainingbudget/survivor UNKNOWN; production improvement not implemented or tested."
+  },
+  "Upstream_disposition": "none; source behavior belongs to Actions, no upstream defect established"
+}

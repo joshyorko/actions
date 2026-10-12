@@ -1,0 +1,21 @@
+{
+  "capture": "2026-10-11T21:59:32.985323+00:00",
+  "elapsed_seconds": 33.574276838990045,
+  "native": "NOT_RUN",
+  "outer_returncode": 1,
+  "release": {
+    "bytes": 1961,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-one-defaultbackend35-pure-controls-release.json",
+    "sha256": "27e254aed07d3a8ec222e8ea30689016c3dc1f0b4328e1d7ba86773568dce8c4"
+  },
+  "review": {
+    "bytes": 11211,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-defaultbackend35-independent-PREEXEC-review/OWNERFINAL-independent-current8d49-defaultbackend35-concrete-PREEXECUTION-GO.json",
+    "sha256": "f458c9cbf1389310803535bc033316d7fee06d3f1aa7cf2275bbdd0d1cfb0abb"
+  },
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_adoption": "NONE",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+}

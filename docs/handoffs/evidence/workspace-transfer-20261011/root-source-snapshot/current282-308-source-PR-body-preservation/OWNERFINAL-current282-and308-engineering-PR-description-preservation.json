@@ -1,0 +1,23 @@
+{
+  "no_ready_merge_release_or_closure": true,
+  "schema": 1,
+  "source_and_native_scopes_separate": true,
+  "updates": [
+    {
+      "draft": true,
+      "entire_previous_body_preserved": true,
+      "head": "1299cc4bb6586f467d36ca124faaaaa77362695f",
+      "new_body_sha256": "b9591fb72b6a0e960974199d7a944a8d7354cb2e733401835c333c4f6836a5e7",
+      "number": 282,
+      "old_body_sha256": "47570eab4986afe6a9ebefe12119c2a1cd2a93682acff3e522450b159b1f8ddd"
+    },
+    {
+      "draft": true,
+      "entire_previous_body_preserved": true,
+      "head": "e4ff080375a8422bb656e52d218f198521dda078",
+      "new_body_sha256": "1dd50cd2263d5b1b861f871ff7a882867d8813110f4f6142851af96bc0303ce5",
+      "number": 308,
+      "old_body_sha256": "53893c5559bd40c5fb9b5b4e939bb5a895857ae1387160e057f275313919b4d6"
+    }
+  ]
+}

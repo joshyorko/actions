@@ -1,0 +1,306 @@
+{
+  "copy_and_archive_counts": {
+    "body_extraction": "NOT_RUN; TAR member reads for verification only",
+    "copied_compressed_cap": 268435456,
+    "hardlink_headers": 3,
+    "members": 14805,
+    "original_index_sha": "7976469c878721a9a8e27e42962ae9899628aad21b3463174f2aa9ef08cc7e2b",
+    "root_headers": 1,
+    "source_bytes": 248921681,
+    "whole_compressed_identity": "28e391747a904f4162e01a0b95ea67ea43bc4db8159f21345af65889ab4680b5"
+  },
+  "destination": "/workspace/engineering/retained-capacity-archives-B28-relocation/dd09121ba364f685.tar.gz",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md exact completed-scratch7d070 and reviewed historical archive-alias9dd800 lessons reused; no cosmetic source mutation",
+    "Durable_learning": "Byte-preserving relocation needs an exact reviewed new-path mapping before old archive-path removal, and per-volume fresh capacity; storage preservation never upgrades the old failure.",
+    "Evidence": "Original248921681 SHA28e391/immutable index14805members/whole gzip CRC, exact source file modeUIDGID/mtime/inode and separate B28 stable input preservation.",
+    "Remaining_uncertainty": "Actual B28 completion and this relocation require separate root authorization and independent review; storage origin/quiescence/native scopes remain unknown or held.",
+    "Stale_guidance_removed": "No fictional100\u2013200MiB candidate or single<=48MiB sufficient relocation; no silent old-index rewrite or old physical alias treated current.",
+    "verified_reuse": [
+      {
+        "bytes": 1068,
+        "mode": "0o600",
+        "path": "/workspace/engineering/capacity-recovery-independent-review/canonical-completed-scratch-preservation-proposed.patch",
+        "sha256": "7d07065b5bb7742698919997c8c6621cc20d00494741eb5365251ffb09f2d208"
+      },
+      {
+        "bytes": 846,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/canonical-exact-historical-receipt-archive-alias-proposed.patch",
+        "sha256": "9dd8008b4194f7cd9848796c7c7b5639862271e73ee222da46d5a59ef501d8ad"
+      }
+    ]
+  },
+  "frozen_bindings": [
+    {
+      "bytes": 747,
+      "mode": "0o600",
+      "path": "/workspace/engineering/capacity-recovery-B28-one-exact-TMP-relocation-source/pure-one-relocation-controls-final.private.log",
+      "sha256": "21f27ce647a41478ec1fb2af65547e7aec2bdc70721d45f50b869dd3fdf78902"
+    },
+    {
+      "bytes": 747,
+      "mode": "0o600",
+      "path": "/workspace/engineering/capacity-recovery-B28-one-exact-TMP-relocation-source/pure-one-relocation-controls-first.private.log",
+      "sha256": "adebf3719443a081b824d0ea0b9a9fec173c0bb64c37cda95afe210b20ad06aa"
+    },
+    {
+      "bytes": 747,
+      "mode": "0o600",
+      "path": "/workspace/engineering/capacity-recovery-B28-one-exact-TMP-relocation-source/pure-one-relocation-controls.private.log",
+      "sha256": "adebf3719443a081b824d0ea0b9a9fec173c0bb64c37cda95afe210b20ad06aa"
+    },
+    {
+      "bytes": 14264,
+      "mode": "0o444",
+      "path": "/workspace/engineering/capacity-recovery-B28-one-exact-TMP-relocation-source/relocate_one.py",
+      "sha256": "d6d6aedf6c4760eb0afaa40978627137ea15fc63f87cd365aa53ddf283983c8f"
+    },
+    {
+      "bytes": 5676,
+      "mode": "0o444",
+      "path": "/workspace/engineering/capacity-recovery-B28-one-exact-TMP-relocation-source/test_pure_relocation.py",
+      "sha256": "86c44f1a54ce3a1662f3f44d0e137140b46e244aaa4be24a14b26a49d20d9339"
+    },
+    {
+      "bytes": 5486,
+      "mode": "0o444",
+      "path": "/workspace/engineering/capacity-recovery-B28-one-exact-TMP-relocation-source/test_pure_relocation_before_independent_poison_reset_fix.py",
+      "sha256": "48d2151dbf82596571d833b3002ce212f78421ab945017375c3b16ed587b27e2"
+    },
+    {
+      "bytes": 6750,
+      "mode": "0o444",
+      "path": "/workspace/engineering/capacity-recovery-batch28-proposal-v2/OWNERFINAL-after-B28-v2-one-exact-original-TMP-archive-relocation-PREPARATION.json",
+      "sha256": "4e725dccaa72bd49079444bc0990dc7ff4919ade0ad535a316d2a69080fb8980"
+    },
+    {
+      "bytes": 1472,
+      "mode": "0o600",
+      "path": "/workspace/engineering/capacity-recovery-batch28-proposal-v2/private-optional-single-original-archive-relocation-readonly-full-member-proof.json",
+      "sha256": "f95e2613b2417a11505246c17d2b9bf00c8ff43b719dc9ff261b5fa0e0b0839d"
+    },
+    {
+      "bytes": 3787,
+      "mode": "0o600",
+      "path": "/workspace/engineering/capacity-recovery-batch28-proposal-v2/inspect_optional_relocation_metadata.py",
+      "sha256": "10cb4cf18b2fad4c6248ce44c50e4f1f0b9e1cba61ccb236e2f904b6436923bc"
+    },
+    {
+      "bytes": 6255,
+      "mode": "0o444",
+      "path": "/workspace/engineering/capacity-recovery-batch28-archiver-source/guard_readonly.py",
+      "sha256": "cbc167f72c130977ea4c54109db12ee343bbd59656d324dedcc5c066de179920"
+    },
+    {
+      "bytes": 9932707,
+      "mode": "0o444",
+      "path": "/workspace/engineering/capacity-recovery-batch28-archiver-source/frozen-actual-protected-inputs-and-selected34.json",
+      "sha256": "1c60541dc39efd937fd88bf40d37f9db76e924a644a64b929612e12f663943c1"
+    },
+    {
+      "bytes": 22424,
+      "mode": "0o444",
+      "path": "/workspace/engineering/capacity-recovery-batch28-archiver-source/OWNERFINAL-exact-B28-v2-capped-prestage-PREEXECUTION.json",
+      "sha256": "6c16653fd56fbd5cb5684163135b79b74730ac6c860b35acc9664d2295103e56"
+    },
+    {
+      "bytes": 1068,
+      "mode": "0o600",
+      "path": "/workspace/engineering/capacity-recovery-independent-review/canonical-completed-scratch-preservation-proposed.patch",
+      "sha256": "7d07065b5bb7742698919997c8c6621cc20d00494741eb5365251ffb09f2d208"
+    },
+    {
+      "bytes": 846,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/canonical-exact-historical-receipt-archive-alias-proposed.patch",
+      "sha256": "9dd8008b4194f7cd9848796c7c7b5639862271e73ee222da46d5a59ef501d8ad"
+    },
+    {
+      "bytes": 14860,
+      "mode": "0o444",
+      "path": "/workspace/engineering/capacity-recovery-B28-one-exact-TMP-relocation-source/OWNERFINAL-one-exact-TMP-archive-relocation-PREEXECUTION.json",
+      "sha256": "998ffe3c30136221e8629b5534d38b0f00b573b0efaa0731edd078bcf0134d11"
+    }
+  ],
+  "limits": {
+    "archive_copy_byte_cap": 268435456,
+    "checkpoint_reserve": 16777216,
+    "copy_allocated_ceil": 248922112,
+    "estimated_not_promised_TMP_after_source_archive_removal": 1423765504,
+    "estimated_not_promised_workspace_after_B28_then_copy": 1431703552,
+    "fresh_actual_capacity_required": true,
+    "fresh_workspace_required_before_copy": 1606618317,
+    "normal_growth_reserve": 52428800,
+    "workspace_floor": 1288490189
+  },
+  "metadata_only_successor": "This successor corrects only the control-case count and adds provenance of the original packet. Driver source still consumes the exact original owner proposal_binding; independent review should bind that original plus this exact successor. No source/test rerun, original owner18 retained.",
+  "original_archive": {
+    "allocated": 248922112,
+    "bytes": 248921681,
+    "device": 33,
+    "gid": 1000,
+    "inode": 36163,
+    "mode": 384,
+    "mtime_ns": 1791699730751885610,
+    "nlink": 1,
+    "path": "/tmp/actions-completed-scratch-recovery-batch3/dd09121ba364f685.tar.gz",
+    "sha256": "28e391747a904f4162e01a0b95ea67ea43bc4db8159f21345af65889ab4680b5",
+    "uid": 1000
+  },
+  "original_index": {
+    "allocated": 13553664,
+    "bytes": 13551365,
+    "device": 33,
+    "gid": 1000,
+    "inode": 36164,
+    "mode": 384,
+    "mtime_ns": 1791699764843975716,
+    "nlink": 1,
+    "path": "/tmp/actions-completed-scratch-recovery-batch3/private-complete-inventory-and-recovery.json",
+    "sha256": "7976469c878721a9a8e27e42962ae9899628aad21b3463174f2aa9ef08cc7e2b",
+    "uid": 1000
+  },
+  "preconditions": {
+    "B28_child_returncode": 0,
+    "B28_fixed_terminal": "/workspace/engineering/root-B28-v2-one-owned/original-one-attempt-terminal.json",
+    "B28_independent_actual_decision": "GO_B28_V2_ACTUAL_STORAGE_PRESERVATION",
+    "B28_independent_binding_field": "actual_terminal_binding must exactly equal root-release B28_actual_terminal_binding",
+    "B28_protected_post": "PASS",
+    "B28_status": "PASS_STORAGE_PRESERVATION_ONLY",
+    "fresh_workspace_before_copy": 1606618317,
+    "fresh_workspace_before_unlink": 1357696205,
+    "original_destination_parent_and_owned_outputs": "Must be absent",
+    "serialized": "No other archiver/FULL/native/installer; root separate one-release only",
+    "source_original_identity": "Complete captured bytes/hash/modeUIDGID/inode/dev/nlink/mtime_ns rechecked; source symlink/refcount refused"
+  },
+  "predecessor_owner_binding": {
+    "bytes": 14860,
+    "mode": "0o444",
+    "path": "/workspace/engineering/capacity-recovery-B28-one-exact-TMP-relocation-source/OWNERFINAL-one-exact-TMP-archive-relocation-PREEXECUTION.json",
+    "sha256": "998ffe3c30136221e8629b5534d38b0f00b573b0efaa0731edd078bcf0134d11"
+  },
+  "protected_scope": {
+    "LIGHT": 33,
+    "SOURCE": 1426,
+    "alias_only_exception": "/tmp/actions-completed-scratch-recovery-batch3/dd09121ba364f685.tar.gz -> /workspace/engineering/retained-capacity-archives-B28-relocation/dd09121ba364f685.tar.gz",
+    "existing_failed1_alias": "unchanged exact ca557/8dc mapping",
+    "failed2_original_files": 8,
+    "failed563": "existence-only excluded",
+    "historical_failure_states": "unchanged; no storage-to-native qualification",
+    "immutable_file_rows": 137,
+    "native_members": 1192,
+    "original_archives": 61,
+    "original_indices": 27,
+    "prepared_inputs": 30,
+    "qualified_original_refs": 237
+  },
+  "protocol": [
+    "Validate this exact proposal, own script, preexec independent exact decision, B28 actual terminal+independent actual proof and root once-release.",
+    "Load original unchanged hash-pinned B28 data-only guard from verified bytes, verify SOURCE1426/native1192/prepared30/all61archive27index/current failed2eight/historical ca557+8dc and original237 qualified aliases.",
+    "Stream exact one source to exclusive0600 destination in new0700 root through <=256MiB actual copy cap; retain original and partial output on failures.",
+    "Preserve original UIDGID/mode/mtime_ns, fsync new file and parent. Reread whole compressed SHA/size, all14805 existing-index members/body/type/modeUIDGID/symlink/internal3 hardlink headers; force complete gzip EOF/CRC/ISIZE.",
+    "Do not requalify original TAR nanosecond rounding or reconstruct payloads: byte-identical archive preserves all original header bytes exactly.",
+    "Persist fsynced one old\u2192new physical alias and verified-copy receipt against untouched original index BEFORE exact old compressed archive unlink. No other file/parent/index/member removal.",
+    "Recheck original full identity+index SHA, verify alias-aware protected inputs, finite accessible FD/cwd no known match, fresh workspace floor+growth+checkpoint reserve.",
+    "Only then unlink exact old compressed archive; fsync its parent.",
+    "Always protected postguard on returned outcomes: before unlink requires old physical archive; after unlink uses only one exact mapped new physical archive. Preserve primary error separately from cleanup/receipt errors; partial receipt on forced outerkill is HOLD. No retry."
+  ],
+  "pure_controls": {
+    "argv": [
+      "/usr/bin/timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "180s",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/capacity-recovery-B28-one-exact-TMP-relocation-source/test_pure_relocation.py"
+    ],
+    "cases": "Exact stream/cap/exclusive output/original+partial retained; one exact alias with missing/duplicate refusal; B28 actual proof required, twelve independent typed release poisons reset originals per poison.",
+    "count_reconciliation": "5 methods; valid baseline per method plus12 release poisons and2 alias poisons =>19 effective baseline/subcase assertions. Original owner18 label was an arithmetic metadata error; log/source unchanged.",
+    "effective_cases_including_subtests": 19,
+    "env": "PYTHONDONTWRITEBYTECODE=1",
+    "framework": "stdlib unittest",
+    "fresh_absent_root": "/tmp/actions-one-exact-relocation-pure-owned-20261011-2",
+    "initial_control": "First suite PASS was found to share mutated actual/ind test documents across poisons; source+log preserved, final test restores each exact baseline first. No actual data or source was affected.",
+    "methods_pass": 5,
+    "pytest_basetemp": "NOT_USED",
+    "skips": 0
+  },
+  "remaining_unknown": [
+    "B28 actual pending",
+    "Relocation actual pending",
+    "Fresh capacity pending",
+    "Original origin and inaccessible handles/global quiescence UNKNOWN",
+    "Original TAR ns precision remains historical",
+    "No native/RCC5/6/newintegration/release qualification"
+  ],
+  "required_independent_decision": "GO_ONE_EXACT_B28_TMP_ARCHIVE_RELOCATION_PREEXECUTION",
+  "root_execution_contract": {
+    "cwd": "/workspace",
+    "driver_consumed_proposal_binding": {
+      "bytes": 14860,
+      "mode": "0o444",
+      "path": "/workspace/engineering/capacity-recovery-B28-one-exact-TMP-relocation-source/OWNERFINAL-one-exact-TMP-archive-relocation-PREEXECUTION.json",
+      "sha256": "998ffe3c30136221e8629b5534d38b0f00b573b0efaa0731edd078bcf0134d11"
+    },
+    "mapping_name": "exact-original-path-to-new-physical-archive.json",
+    "no_automatic_retry": true,
+    "operation_argv": [
+      "/usr/bin/timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "600s",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/capacity-recovery-B28-one-exact-TMP-relocation-source/relocate_one.py",
+      "--root-execute-one-reviewed-exact-relocation",
+      "/workspace/engineering/root-B28-one-exact-TMP-relocation-release.json"
+    ],
+    "outer_argv": [
+      "/usr/bin/timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "900s",
+      "/usr/bin/timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "600s",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/capacity-recovery-B28-one-exact-TMP-relocation-source/relocate_one.py",
+      "--root-execute-one-reviewed-exact-relocation",
+      "/workspace/engineering/root-B28-one-exact-TMP-relocation-release.json"
+    ],
+    "owned_output_root": "/workspace/engineering/root-B28-one-exact-TMP-relocation-owned",
+    "root_release_mode": "0600",
+    "root_release_path": "/workspace/engineering/root-B28-one-exact-TMP-relocation-release.json",
+    "root_release_required": [
+      "schema",
+      "one_attempt=True",
+      "no_retry=True",
+      "proposal_binding",
+      "script_binding",
+      "root_argv=operation_argv",
+      "root_envelope={timeout_seconds:900,TERM_kill_after_seconds:10}",
+      "operation_envelope={timeout_seconds:600,TERM_kill_after_seconds:10}",
+      "source_scope",
+      "independent_preexec_binding",
+      "B28_actual_terminal_binding",
+      "B28_independent_actual_binding"
+    ],
+    "root_release_schema": "ROOT_ONE_EXACT_B28_ARCHIVE_RELOCATION_RELEASE",
+    "root_stdout_stderr_terminal": "Separate exclusive private files retained by root outer launcher, including timeout outcome; driver private owned exception/postguard/terminal receipts on returned outcomes",
+    "source_env": "PYTHONDONTWRITEBYTECODE=1, PYTHONOPTIMIZE unset; pure stdlib storage, no RCC/Poetry/package execution"
+  },
+  "schema": "OWNERFINAL_EXACT_ONE_TMP_COMPRESSED_ARCHIVE_RELOCATION_PREEXECUTION",
+  "script_binding": {
+    "bytes": 14264,
+    "mode": "0o444",
+    "path": "/workspace/engineering/capacity-recovery-B28-one-exact-TMP-relocation-source/relocate_one.py",
+    "sha256": "d6d6aedf6c4760eb0afaa40978627137ea15fc63f87cd365aa53ddf283983c8f"
+  },
+  "source_head": "396925cb3d6527af1768b7f5333f9653c005fc55",
+  "source_scope": "396_STORAGE_BYTE_RELOCATION_NOT_NATIVE_OR_INTEGRATION_QUALIFICATION",
+  "source_tree": "84f850f0d4e08b21afcd8220413ce94322370acf",
+  "source_writer": "RELEASED_TO_RCC; metadata-only correction",
+  "status": "NOT_EXECUTED_REQUIRES_DISTINCT_ROOT_RELEASE_AFTER_B28_ACTUAL_INDEPENDENT_GO",
+  "upstream_disposition": "none"
+}

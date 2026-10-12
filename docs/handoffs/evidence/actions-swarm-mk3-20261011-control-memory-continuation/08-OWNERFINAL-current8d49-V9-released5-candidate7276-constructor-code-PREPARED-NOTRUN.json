@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "status": "CODE_PREPARATION_ONLY_NO_NEXT_VERSION_CONFIG_OR_NATIVE_ADMISSION",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "constructor": {
+    "path": "/workspace/engineering/rcc-current8d49-V9-next-version-code-PREPARED-NOTRUN/prepare_same_source_next_version_V9_config_UNRESOLVED.py",
+    "bytes": 7183,
+    "sha256": "ad4321372cb401eb76f74549e77483a1abf669415e3e5100a3b5e18eed76f84e",
+    "mode": "0o400"
+  },
+  "existing_frozen_V9_inputs": [
+    {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+      "bytes": 765564,
+      "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/OWNERFINAL-current8d49-qualified-V9-entry-config-and-managed-PREEXECUTION-proposal.json",
+      "bytes": 7708,
+      "sha256": "a68a1536079388ba03721f976982f3772bc5387d15d2403c0e736baa24be592d",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/v9_entry_bootstrap.py",
+      "bytes": 1575,
+      "sha256": "d3957c2e216731abf596897fbf0838809129a571743510692f2509228e2c7288",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/owned_native_entry_v9.py",
+      "bytes": 175,
+      "sha256": "b93e1154f832b06b17ed9bbc27723fe55a3a00a6a0754fd2a35219acaddf008a",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/gateway_entry_v9.py",
+      "bytes": 3018,
+      "sha256": "6ba1233e8719123ab7fc0a129793fa7e1f25bf21cecb6bdaba4e1f4e6fd2e4ac",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/launch_one_version_v9.py",
+      "bytes": 5039,
+      "sha256": "55188950dc7694c932d3a1e4eed45548117188bfbf415189f74a95fd3631ff6f",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/managed_one_version_entry_v9.py",
+      "bytes": 1470,
+      "sha256": "51979d1ef12ad9b9d29573e14e8cbc2c91cdfdbd01a83d768a655d999ac1bd8b",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/readonly_current_input_guard_v9.py",
+      "bytes": 4690,
+      "sha256": "480be06317562b7e3a5c98a5d794bb5d2a33e7fa6186fe707823ecb1cc583626",
+      "mode": "0o400"
+    }
+  ],
+  "current_V9_control3_actual": "PENDING_DEPENDENCY; no output polls or acceptance inferred",
+  "future_sequence": [
+    "Existing control3 exact configured original actual + independent GO required",
+    "Fill only authenticated predecessor original result/root/independent binding slots in a NEW named final constructor; preserve this unresolved code",
+    "Construct released5 metadata with fixed1a617/version5/revisiond1aec/modifiedtrue isolated selector, retain all source/budgets/291original +namedV9 entries; acquisition source-equivalence UNKNOWN",
+    "Independent released5 CONFIG + root one fresh release required; if FAIL retain/STOP, no next-label loop",
+    "Only accepted actual released5 same-source plus control3 permits analogous candidate7276 metadata be55/revision727/modifiedfalse, independent CONFIG and root distinct once"
+  ],
+  "preservation": "No edits to boundV9/V8 files, pr308/source/pins, releases, configs or /dev/shm; no code executed except stdlib AST/source construction",
+  "root_identity": "Released5 originalpkgs1 and candidate7276 originalpkgs1 remain required fixed roots; nativecontrol3 currentpkgs4; absence checked only upon eventual constructor/root admission",
+  "operator_policy": "No environment/PYTHONPATH/operator-selected binaries or arbitrary root; constants are exact accepted source/acquisition tuples; helpers/cache modes/features/source predicates unchanged",
+  "cleanup_and_scope": "Two artifact/action/lease/typed cleanup cells only; readersNULL/UNKNOWN persistent/reload/providerrecovery HOLD; no fake PASS from acquisition/version strings",
+  "current_native": "No first newer support qualified; constructor approval slots areNone and no config writer exists",
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md; accepted same-source sequence and acquisition-vs-functionality lesson reused",
+    "Exact scope note": {
+      "path": "/workspace/engineering/rcc-current8d49-V9-next-version-code-PREPARED-NOTRUN/canonical-same-source-predecessor-admission-reused.md",
+      "bytes": 455,
+      "sha256": "d1827f8ba00e420878f63b90d53d1582e4cd94fd5cc5f5adfa5b933af6531bea",
+      "mode": "0o400"
+    },
+    "Durable learning captured": "Original same-source accepted predecessor and distinct per-version once grant before next metadata/native; sourceidentity alone notfeaturequalification",
+    "Evidence": "Existing frozen V9/source8d49, exact adapterapproved tuples and immutable native sequence guard; actualnextcasesNOTRUN",
+    "Stale ambiguity removed": "No source-only/acquisition proof promoted into later native admission, no predecessor loops or failed-result retargeting",
+    "Remaining uncertainty": "Control3actual/indreview and future5/7276 configs/execution remain dependencies"
+  },
+  "Upstream disposition": "none"
+}

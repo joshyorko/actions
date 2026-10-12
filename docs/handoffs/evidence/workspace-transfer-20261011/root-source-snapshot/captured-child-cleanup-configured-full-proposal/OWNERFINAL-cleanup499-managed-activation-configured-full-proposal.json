@@ -1,0 +1,321 @@
+{
+  "schema": "captured-child-cleanup499-managed-configured-full-proposal-v1",
+  "decision": "READY_FOR_ROOT_REVIEW_ONLY_NOT_EXECUTED_NO_FULL_AUTHORITY",
+  "head": "499a83d802ca9a0e2ebe3d77071af10625879297",
+  "tree": "e13ba51b094e429b7c06d6dabbbcc348cc66e86c",
+  "sole_parent": "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+  "LIGHT": {
+    "path": "/workspace/engineering/captured-child-cleanup-light-owned/OWNERFINAL-captured-child-cleanup-LIGHT-source-checkpoint-v2.json",
+    "bytes": 23814,
+    "sha256": "5afd46dc62231bde85f44381bcb06fbc5d0af98d932dafbcc9d6500e6df6fdf8"
+  },
+  "independent_LIGHT": {
+    "path": "/workspace/engineering/captured-child-cleanup-independent-LIGHT-review/OWNERFINAL-independent-captured-child-cleanup-frozen-LIGHT-review-v3.json",
+    "bytes": 20878,
+    "sha256": "6e5c147b9d6ca432def5b7c56489bd0aa432759d4a337cd6124c17f51bbb3df8"
+  },
+  "read_only_verification": {
+    "LIGHT_bindings": 67,
+    "available_bytes_observation_only": 1327906816,
+    "fresh_origin_execution": false,
+    "frozen_helpers": 4,
+    "full_execution": "NOT_RUN",
+    "head": "499a83d802ca9a0e2ebe3d77071af10625879297",
+    "inputs": 30,
+    "native_inventory_entries": 1192,
+    "native_qualification": "UNQUALIFIED_274_producer_and_5_selected_tests_separately_typed",
+    "parent": "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+    "private_original_bindings": 31,
+    "retained_concrete_origin_observations": 5,
+    "source_entries": 1422,
+    "status": "READ_ONLY_SOURCE_AND_RETAINED_ENVIRONMENT_IDENTITY_PASS",
+    "tree": "e13ba51b094e429b7c06d6dabbbcc348cc66e86c"
+  },
+  "activation": {
+    "path": "/workspace/actions-cloud/activate.sh",
+    "bytes": 987,
+    "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+  },
+  "allowlisted_activation_exports": {
+    "ACTIONS_CLOUD_ROOT": "/workspace/actions-cloud",
+    "ROBOCORP_HOME": "/workspace/actions-cloud/robocorp",
+    "XDG_CACHE_HOME": "/workspace/actions-cloud/cache",
+    "XDG_CONFIG_HOME": "/workspace/actions-cloud/config",
+    "POETRY_CACHE_DIR": "/workspace/actions-cloud/cache/pypoetry",
+    "POETRY_CONFIG_DIR": "/workspace/actions-cloud/config/pypoetry",
+    "UV_CACHE_DIR": "/workspace/actions-cloud/cache/uv",
+    "npm_config_cache": "/workspace/actions-cloud/cache/npm",
+    "GOCACHE": "/workspace/actions-cloud/cache/go-build",
+    "GOPATH": "/workspace/actions-cloud/cache/go",
+    "PLAYWRIGHT_BROWSERS_PATH": "/workspace/actions-cloud/cache/playwright",
+    "PYTEST_XDIST_AUTO_NUM_WORKERS": "2",
+    "POETRY_NO_INTERACTION": "1",
+    "BUILDX_CONFIG": "/workspace/actions-cloud/cache/buildx",
+    "ACTIONS_HOME": "/workspace/actions-cloud/actions-home",
+    "ROBOTS_HOME": "/workspace/actions-cloud/robots-home",
+    "GOMAXPROCS": "2",
+    "ACTIONS_RUNTIME_TEST_PYTHON": "/workspace/actions/action_server/.venv/bin/python"
+  },
+  "PATH_condition": "First entry exactly /workspace/actions-cloud/bin; inherited remaining PATH retained",
+  "activation_export_count_including_PATH": 19,
+  "command": {
+    "cwd": "/workspace/engineering/captured-child-cleanup",
+    "argv": [
+      "bash",
+      "--noprofile",
+      "--norc",
+      "-c",
+      "set -euo pipefail\nsource \"$1\"\n\"$2\" \"$3\" \"$4\"\nshift 4\nexec \"$@\"\n",
+      "captured-child-cleanup499-managed-full",
+      "/workspace/actions-cloud/activate.sh",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/captured-child-cleanup-configured-full-proposal/managed_activation_preflight.py",
+      "/workspace/engineering/captured-child-cleanup-configured-full-once-owned/before-full-checked-source-capacity.json",
+      "env",
+      "PYTEST_XDIST_AUTO_NUM_WORKERS=2",
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "600s",
+      "/workspace/actions-cloud/bin/rcc",
+      "task",
+      "script",
+      "-r",
+      "developer/toolkit.yaml",
+      "--",
+      "python",
+      "-c",
+      "import hashlib,os,subprocess\nfrom pathlib import Path\nimport toolkit\nroot=toolkit.REPOSITORY_ROOT\nassert root==Path('/workspace/engineering/captured-child-cleanup')\nassert subprocess.check_output(['git','rev-parse','HEAD'],cwd=root).decode().strip()=='499a83d802ca9a0e2ebe3d77071af10625879297'\nassert subprocess.check_output(['git','rev-parse','HEAD^{tree}'],cwd=root).decode().strip()=='e13ba51b094e429b7c06d6dabbbcc348cc66e86c'\nassert subprocess.check_output(['git','status','--porcelain'],cwd=root)==b''\nassert os.environ['PYTEST_XDIST_AUTO_NUM_WORKERS']=='2'\nfor name,h in {'action_server/build.py': '75c249c111bbf3d81f027a252e7dba54771037f02b402832c0554e119cb4eb12', 'action_server/poetry.lock': '5d6acb65ba220211d1da020c78c51a5ea89465f2bbedc99aaf72319b862914e5', 'action_server/pyproject.toml': 'be4011d3915e8838249546c70ae30420dadfb0d08c19b59970d8980332c7573f', 'action_server/tasks.py': 'b35d3722b1f9ed51e57ce4dcd3f7fdc81b7df238cbcdef0eaf44d47d08555791', 'action_server/tests/action_server_tests/test_create_conda_from_package_yaml/create_wheel/pyproject.toml': '4d581bfc7b6d64979c3aef6411198548a17713e0c8439c07d0cbb1a91fae3851', 'actions-http-helper/poetry.lock': '8e717ea54b91b17e638bb633026372fd415487a5e817768b450c0e473cd84d13', 'actions-http-helper/pyproject.toml': '1888af6e0e2ce2280080920338245122563f69ce677796a5dbddc4c6bb07d28d', 'actions-http-helper/tasks.py': '31523822c03af429ad7d7fab8df66a45f87b4f58876f8928df9f7c79f375992a', 'actions/poetry.lock': 'b90ab7b6e3dd3a68a3d23bfee456adf6d22446f845e1bd5e2a334ec573035f15', 'actions/pyproject.toml': '9de923a2bf29d73d486ebf67982e177c0ab41d8a35266f7dd1f2d75b1ec43ec3', 'actions/tasks.py': '33a572fcadc6848ebab78f01fcae880a40bd51011cb80a69149467a897807cc9', 'actions/tests/actions_core_tests/test_core_log_integration/pyproject.toml': 'f2119f900206f7a6bcbedd34b7cfb1c83bd996db13fdf81710fa509ed3cc72cf', 'build_common/poetry.lock': '5dfaebdb2e73b95e022e9064f4258fefb66a4a0a2a6c3d8829cd9d2838e07160', 'common/poetry.lock': '55fb76128d984be26ba5af1dc791a7b010298f70908d969b80fd7f268e84019e', 'developer/setup.yaml': '8674d6b55439fae5ac284fa92d7db8016e3589fafbf2d34e066e29345efa016a', 'developer/setup_windows_amd64.yaml': '86a36910ad271616626e019e02e6c7b21fdb32eaa1e1717c2a654673504a8001', 'developer/toolkit.py': 'e1a3f96b57c31be2a0db5cdd3d63ce9ac243a9e8e29dff5ce6e07fd897fb605f', 'developer/toolkit.yaml': '0ed7beaa93dd0ba763d1618382a3de8ce307cc5cf613759d06081d735fcd7e68', 'devutils/bin/develop.bat': 'daff2011d235a81f7d1556bf30bf62016aecb2498084e67bfccad8531642c589', 'devutils/bin/develop.sh': '484c7164f54e383b038dcb25ff39979458b6f6a3f10f20c81f50001c3c2d16c2', 'devutils/poetry.lock': '22bf11dae2a1ed46de5024da774dde4fe778c206d720929fba9244819f3b0b6e', 'devutils/pyproject.toml': '7ffef37af3dc666ae72f1075ac1e06d8c61405225d678b326d767fe1952825e1', 'devutils/src/devutils/invoke_utils.py': '7892303d075b2755b490b507c444d9aebc2f0d3089c8812df40d7f0c0fc195b5', 'devutils/src/devutils/rcc.py': 'c897a607292025e3ae05a79fb002302f4ac7d5eed6033b8101dd9d5e550cc97c', 'mcp/poetry.lock': '9b84391e939e90e56422e1b9373862fbc1827b667ebba87126a6330a74069543', 'tasks.py': 'b9d8fc44392003c3eac7503c2c8cff237f8896c95d5eccb97f6e75cf55eb4b1c', 'templates/advanced/pyproject.toml': 'ef1312a9eaf6323b143d9339defb3158ea19b67b22a7cce0ecf766ba6ed5223d', 'work-items/poetry.lock': 'dcb776a04f9fb30fb93c6667cc42fe9733208e07ec23e7d54dff39650ae11bf4', 'work-items/pyproject.toml': 'a09a91d33e5f91cdec649a96d72b91e4fc1e4ecf97d3654e9b243f0ac8ecc10e', 'work-items/tasks.py': 'e74ad7f083159457c53da828ca69b2ea6ae1a2cde465e6d2b8019bda079f1642'}.items(): assert hashlib.sha256((root/name).read_bytes()).hexdigest()==h\nfor package,module,prefix in [('actions', 'actions', '/dev/shm/actions-captured-child-cleanup-prepared-envs-20261011/actions/.venv'), ('actions-http-helper', 'actions_http', '/dev/shm/actions-captured-child-cleanup-prepared-envs-20261011/actions-http-helper/.venv'), ('devutils', 'devutils.invoke_utils', '/dev/shm/actions-captured-child-cleanup-prepared-envs-20261011/devutils/.venv'), ('work-items', 'actions.work_items', '/dev/shm/actions-captured-child-cleanup-prepared-envs-20261011/work-items/.venv'), ('action_server', 'actions.server._common.process', '/dev/shm/actions-captured-child-cleanup-prepared-envs-20261011/action_server/.venv')]:\n code=\"import importlib,sys;from pathlib import Path;m=importlib.import_module(\"+repr(module)+\");assert Path(sys.prefix).resolve()==Path(\"+repr(prefix)+\");assert Path(m.__file__).resolve().is_relative_to(Path(\"+repr(str(ROOT))+ \")/\"+repr(package)+\"/'src')\"\n toolkit.poetry(package,'run','python','-c',code)\nos.environ['PYTEST_XDIST_AUTO_NUM_WORKERS']='2'\ntoolkit.poetry('action_server','run','invoke','test-not-integration')\n"
+    ],
+    "scope": "Exact configured invoke test-not-integration task; explicit2worker env precedes invoke; not targeted replacement",
+    "deadline_TERM_seconds": 600,
+    "KILL_grace_seconds": 10,
+    "attempts": 1,
+    "before_full_preflight": "Same activated shell; checked ROOT300 successful terminal and fresh >=1.2GB; retained references and1422source/30inputs rehashed; five concrete origins checked through toolkit.poetry before invoke",
+    "log": "/workspace/engineering/captured-child-cleanup-configured-full-once-owned/one-configured-full.private.log",
+    "terminal": "/workspace/engineering/captured-child-cleanup-configured-full-once-owned/one-configured-full-terminal.json",
+    "post_argv": [
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/captured-child-cleanup-configured-full-proposal/post_full_readonly_guards.py",
+      "/workspace/engineering/captured-child-cleanup-configured-full-once-owned/post-full-source-guards.json"
+    ],
+    "parent_recording": "Root owner uses private0700 execution directory and0600 log/terminal; records actual returncode/time/hash before post-guards even if failure; no retry or overwritten predecessor",
+    "unexpected_failure": "Preserve log/terminal; source/runtime/native equivalence not inferred; root disposition required"
+  },
+  "execution_prerequisites": {
+    "ROOT_distinct_release": "REQUIRED_NOT_GRANTED_BY_PROPOSAL",
+    "root300_serialized_full_terminal": "REQUIRED_FRESH_PATH_SHA_AND_returncode0",
+    "root_serialized_heavy_slot": "REQUIRED_NO_OTHER_FULL_INSTALLER_OR_ACTUAL",
+    "fresh_workspace_available_bytes_minimum": 1200000000,
+    "current_capacity": "Observation only, not execution clearance",
+    "storage": "Existing owned executable /dev/shm package envs; no install/copy/rebinding now",
+    "no_native_provider_browser_consumer_registry_tag_release": true
+  },
+  "preservation": {
+    "all67_LIGHT": true,
+    "all1422_source_body_modes": true,
+    "own30_inputs_and_five_recorded_origins": true,
+    "source_Rcc_0711_primary_0700_owned_fixture_0711": true,
+    "private_original31": true,
+    "original_native1192_and4helpers0444": true,
+    "all_failed_readonly_drafts_retained": "v1 wrongly required primary0711; v2 wrongly assumed0755; v3 used inventory-relative wrong root; v4 hashed symlink text instead of recorded target bytes. v5 corrected against actual retained LIGHT/native inventory; failures are read-only proof construction, not package/runtime failures."
+  },
+  "native_source_scope": "274 production inputs:8 old paths changed+6 added vs92498;5selected tests exact but separately typed; UNQUALIFIED, no original native receipt upgrade",
+  "cache_preservation_history_only": [
+    {
+      "path": "/workspace/engineering/root-failed300-default-cache-preservation-actual/OWNERFINAL-root-whole-default-cache-preservation-actual.json",
+      "bytes": 1521,
+      "sha256": "fdbdc5705b6a15863d3a065e1e6821f4411d2297bb2268eb268946cecbb0ac6c"
+    },
+    {
+      "path": "/workspace/engineering/root-failed300-default-cache-independent-actual-review/OWNERFINAL-independent-actual-whole-default-cache-preservation-review.json",
+      "bytes": 6524,
+      "sha256": "dd95e137add3eb9b2a7213495a55886ee59cdb7e8996aa0bdb6d96618be7c7f9"
+    }
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; exact accepted managed-activation proposal reused, no source edit",
+    "Durable_learning_captured": "The activated shell and toolkit identity must be checked before dependency-sensitive full commands; exact activation export contract, configured task and explicit worker budget stay bound together. Distinguish primary/fixture modes and native symlink-target byte hashes from assumed defaults.",
+    "Evidence": "987B activation6478; LIGHT5afd/ind6e5c; read-only v5 source proof; exact configured task body lines652-672; accepted canonical activation patch separately bound below",
+    "Stale_or_ambiguous_guidance_removed": "No default-cache or bare-host gateway substitution, no old failed full-command adoption, no after-run probe represented as before-run evidence.",
+    "Remaining_uncertainty": "Full suite NOT_RUN; fresh >=1.2GB/root300 terminal/serialized authority pending; hosted readiness cause and native qualification unchanged.",
+    "accepted_exact_canonical_delta": {
+      "path": "/workspace/engineering/pr300-current74-managed-activation-independent-review/canonical-managed-gateway-activation-exact-context-v2.patch",
+      "bytes": 1025,
+      "sha256": "ee804bb1acd0102a0b28b37b66e55c3bcd1eac4f9bd70885ef5f7c245f67f994"
+    }
+  },
+  "Upstream_disposition": "none",
+  "bindings": [
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/OWNERFINAL-captured-child-cleanup-LIGHT-source-checkpoint-v2.json",
+      "bytes": 23814,
+      "sha256": "5afd46dc62231bde85f44381bcb06fbc5d0af98d932dafbcc9d6500e6df6fdf8"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-independent-LIGHT-review/OWNERFINAL-independent-captured-child-cleanup-frozen-LIGHT-review-v3.json",
+      "bytes": 20878,
+      "sha256": "6e5c147b9d6ca432def5b7c56489bd0aa432759d4a337cd6124c17f51bbb3df8"
+    },
+    {
+      "path": "/workspace/actions-cloud/activate.sh",
+      "bytes": 987,
+      "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+    },
+    {
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/identity.yaml",
+      "bytes": 222,
+      "sha256": "5472adec10ef85bf56f79fd2664a30d33b5accf4e1edfff974ddec5f46a21daf"
+    },
+    {
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/rcc_plan.log",
+      "bytes": 10213,
+      "sha256": "8aa96805c88332227acd0b48a99aab4482850d5ed940a5c81d7ce7c5b8ae3474"
+    },
+    {
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12",
+      "bytes": 31903952,
+      "sha256": "ba35c76091c86640cd6bbccc8c216e5b2fc52b20c26de803edef79165022037f"
+    },
+    {
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/poetry",
+      "bytes": 371,
+      "sha256": "f989714d24f334397e5960032f3fb3dd7ebcebf5d600e0d520aa7c780c8b124c"
+    },
+    {
+      "path": "/workspace/engineering/root-failed300-default-cache-preservation-actual/OWNERFINAL-root-whole-default-cache-preservation-actual.json",
+      "bytes": 1521,
+      "sha256": "fdbdc5705b6a15863d3a065e1e6821f4411d2297bb2268eb268946cecbb0ac6c"
+    },
+    {
+      "path": "/workspace/engineering/root-failed300-default-cache-independent-actual-review/OWNERFINAL-independent-actual-whole-default-cache-preservation-review.json",
+      "bytes": 6524,
+      "sha256": "dd95e137add3eb9b2a7213495a55886ee59cdb7e8996aa0bdb6d96618be7c7f9"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/readonly_source_guards_v5.py",
+      "bytes": 5987,
+      "sha256": "87852509691c7353ba642440695db1de6e5897a75e395d9b121a6f4cd8d7ea7d"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/readonly-source-guard-proof-v5.json",
+      "bytes": 620,
+      "sha256": "a0cd55847df0a319d032b07626104ecf3f9bb5a0428329642e7d475a570fe080"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/managed_activation_preflight.py",
+      "bytes": 3292,
+      "sha256": "01c1c870949ae19c753f624778f98d7c958dc732f061bfdd941abd31ec05ecff"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/planned_toolkit_configured_full_body.py",
+      "bytes": 4721,
+      "sha256": "2edee9b7eb4dc01c331ff4058ee3b903cdb5b346c953ff4904dfeea3f77c4725"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/post_full_readonly_guards.py",
+      "bytes": 343,
+      "sha256": "faa9265eefe39632b5402ea1d474591d7c2a76934377f768cf12ebe76399d76f"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-light-owned/checked-own30-and-five-origins.json",
+      "bytes": 5120,
+      "sha256": "27094b3536434686d21bc5d102b421c70ef7f86995844e08bf3a6e71e6908c6e"
+    },
+    {
+      "path": "/workspace/engineering/pr310-runner-qualification-owned/output/native-artifact-tree-inventory.json",
+      "bytes": 255076,
+      "sha256": "154aeb29249db79a32392124a3b71a8ac325c0bdaeda1bbc2e7445e96ffc7fdf"
+    },
+    {
+      "path": "/workspace/engineering/pr310-runner-qualification-owned/output/native-artifact-manifest.json",
+      "bytes": 3162,
+      "sha256": "70405e6e831066a37631c7a63045010fcbc8b3c928a6a22ff5130467c3ad9d44"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helper-bindings.json",
+      "bytes": 1371,
+      "sha256": "79b0b9478ef826e0c668ac6a92f3605fbb9f4ad0cdb2262fde1fb8783fcec3dc"
+    },
+    {
+      "path": "/workspace/engineering/pr306/action_server/src/actions/server/bin/rcc-18.19.3",
+      "bytes": 22282402,
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup/docs/skills/repository-operations.md",
+      "bytes": 250724,
+      "sha256": "126a062f4b84491d0e027d8f100544a6f6782607b83151ae408e531ba05a330e"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/readonly-source-guard-proof.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/readonly-source-guard-proof-v3.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/readonly-source-guard-v3.private.stderr",
+      "bytes": 1034,
+      "sha256": "e44ce5a35278d716a5cd38580975de2310c3425f459387b20333adaa6ab67257"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/readonly_source_guards.py",
+      "bytes": 5936,
+      "sha256": "019322f7206b265a1662d0ba7590e25cd1f701e69dc9fbe2fcec0295f7510cea"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/readonly_source_guards_v4.py",
+      "bytes": 5996,
+      "sha256": "3ae58eb041a4ef465b5c7184004a924fd676ecf6bd8808e13b3371f91f6f2e9b"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/readonly-source-guard-v2.private.stderr",
+      "bytes": 502,
+      "sha256": "af78ef424ea4702072fb57e16b0ac4c85cf78134364b9c1e34a4d666fab18bd3"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/readonly-source-guard-v5.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/readonly-source-guard.private.stderr",
+      "bytes": 480,
+      "sha256": "386a6aa321ac1d985180092f27dddaed7aebb900ff8b4f135a1abe4d763c8d1d"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/readonly-source-guard-proof-v2.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/readonly_source_guards_v3.py",
+      "bytes": 5975,
+      "sha256": "a121e7b190107eef57ea7e279776962c2a75851a9f1e48c6fdb54edc52187398"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/readonly-source-guard-v4.private.stderr",
+      "bytes": 560,
+      "sha256": "3e3b3e5c2806766c27e42e5f7ef359f51388896e84c69c80154bc68040d72585"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/readonly_source_guards_v2.py",
+      "bytes": 5975,
+      "sha256": "a85672de085e830dfa98a0d82da263c218e5f9ccc4ddf718c12583dd152797d8"
+    },
+    {
+      "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/readonly-source-guard-proof-v4.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr300-current74-managed-activation-independent-review/canonical-managed-gateway-activation-exact-context-v2.patch",
+      "bytes": 1025,
+      "sha256": "ee804bb1acd0102a0b28b37b66e55c3bcd1eac4f9bd70885ef5f7c245f67f994"
+    }
+  ]
+}

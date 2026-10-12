@@ -1,0 +1,116 @@
+{
+  "LIGHT_outer_command_template": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "720s",
+    "bash",
+    "-c",
+    "source /workspace/actions-cloud/activate.sh; export PATH=/workspace/actions-cloud/bin:/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH; timeout --signal=TERM --kill-after=10s 480s /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python /workspace/engineering/pr308-actuale2c-fresh-LIGHT-readonly-preparation/run_current_e2c_template_LIGHT.py <NAMED_ROOT_ADOPTED_CURRENT_CONFIG>"
+  ],
+  "bindings": [
+    {
+      "bytes": 2280,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-actuale2c-fresh-LIGHT-readonly-preparation/fresh-current-e2c-LIGHT-configuration-TEMPLATE.json",
+      "sha256": "e11cb9974782377a8ab0e71a44550aebd88c61e236ad4bb8f8931a3543a00b85"
+    },
+    {
+      "bytes": 9855,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-actuale2c-fresh-LIGHT-readonly-preparation/prepare_next_root_merge_and_light.py",
+      "sha256": "71d714f4179a8b5e6ba74063bf3bbe2f45f53c8378e16d0dad20d1221c49e875"
+    },
+    {
+      "bytes": 1088,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-actuale2c-fresh-LIGHT-readonly-preparation/root_ordinary_merge_guards.py",
+      "sha256": "9befc5bb05fdc0bf9433a8514e0fc8b454bb46149f20352140855f0eddbd3430"
+    },
+    {
+      "bytes": 2656,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-actuale2c-fresh-LIGHT-readonly-preparation/run_current_e2c_template_LIGHT.py",
+      "sha256": "22055c9c924f11e9d33fc086f15f93d06fce76d3455631cf84ca32d1026267dd"
+    },
+    {
+      "bytes": 4882,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-prospective-actual282-e2c-readonly/OWNERFINAL-readonly-current396-actuale2c-prospective-ordinary-refresh-plan.json",
+      "sha256": "3c95302056e907c489e85469e47156b3224fbcba5a02a1604e04179dc4743a49"
+    },
+    {
+      "bytes": 16930,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current396925-private-V8-source-only/OWNERFINAL-private-current396925-V8-minimal-mode-and-source-context-SOURCE_ONLY-v2.json",
+      "sha256": "db4d3729943cd7c71ada8e1b0430bf61886a5ad8522ff076a8cf525e63e9dd06"
+    },
+    {
+      "bytes": 6813,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current396925-private-V8-independent-source-review/OWNERFINAL-independent-private-current396925-V8-source-only-review.json",
+      "sha256": "8ac3aed11e1efe07c6859bcf29171c38925b6d8657a8fc2ff17b02db4d78eb2c"
+    },
+    {
+      "bytes": 848,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCEFULL-preexecution/canonical-explicit-absent-isolated-pytest-basetemp-retention-proposed.patch",
+      "sha256": "ff1283b175568162e82b7cc3c60482e5bf3de8543991736641d8144488fe8d06"
+    },
+    {
+      "bytes": 795,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-prospective-actual282-e2c-readonly/canonical-automatic-generator-union-proposed.patch",
+      "sha256": "be72a21ef0d855ec104b8f238870d16e1e309a0fb4ee803e9406c05757056f7c"
+    }
+  ],
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "evidence": "ToolkitTest invokespytest directly with inheritedenv; explicit toolkit/scoped basetemps are distinct children and assertedabsent; read-only prospective1440 ASTunion proof.",
+    "exact_reuse": "Accepted ff1283 uniqueABSENTbasetemp/ALL/rejectinheritedADDOPTS lesson plus proposedbe72 generatorAST/guideunion; applyafterroot source adoption ratherthan cosmetic preparation prose.",
+    "remaining_uncertainty": "New committedroot/qualification/actualsupportstillpending.",
+    "stale_ambiguity_removed": "NONEretentiondoesnotdisablecleanup; one sharedADDOPTS basetemp acrosspytestinvocations can deleteearlier evidence. Conflict-free merge/newtree cannotcarryoldgates."
+  },
+  "gates_run": "NONE",
+  "product_source_worktree_refs_mutated": "NONE",
+  "prospective_tree": "929410b09fff3521c554cf935411c71f9e2e6b95",
+  "root_ordinary_merge_commands_only_after_B28_independent_post0": [
+    [
+      "python",
+      "/workspace/engineering/pr308-actuale2c-fresh-LIGHT-readonly-preparation/root_ordinary_merge_guards.py",
+      "before"
+    ],
+    [
+      "git",
+      "-C",
+      "/workspace/engineering/pr308",
+      "merge",
+      "--no-ff",
+      "--no-commit",
+      "e2c81adce7858d5a952991ba9a8b7f72e902038a"
+    ],
+    [
+      "python",
+      "/workspace/engineering/pr308-actuale2c-fresh-LIGHT-readonly-preparation/root_ordinary_merge_guards.py",
+      "merged-index"
+    ],
+    [
+      "git",
+      "-C",
+      "/workspace/engineering/pr308",
+      "commit",
+      "-m",
+      "Merge accepted Canvas source into RCC compatibility branch"
+    ],
+    [
+      "python",
+      "/workspace/engineering/pr308-actuale2c-fresh-LIGHT-readonly-preparation/root_ordinary_merge_guards.py",
+      "committed"
+    ]
+  ],
+  "source_current": "396925cb3d6527af1768b7f5333f9653c005fc55",
+  "source_target": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "status": "READONLY_PREPARATION_TEMPLATES_SOURCE_AND_GATES_NOT_ADOPTED",
+  "unbound_fields": "Unknown actual merge commit/owner, B28 acceptance, guard/config hashes, once evidence and pytest parents remain null. Templates rejectexecution until namedfinal config reviewed/adopted.",
+  "upstream_disposition": "none; no RCC125/118 workercomment sent"
+}

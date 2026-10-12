@@ -1,0 +1,51 @@
+{
+  "contradiction": {
+    "frozen_snapshot_actual_owner_mode": "0o444",
+    "guard_failure_category": "HISTORICAL_ALIAS_MODE",
+    "helper_HISTORICAL_FIXTURE_SNAPSHOT_mode": "0o400",
+    "scope": "Static read-only contradiction; no real helper/native execution. Synthetic fixture controls override their snapshot tuple."
+  },
+  "decision": "HOLD_PRIVATE_V8_HISTORICAL_SNAPSHOT_MODE_CONTRADICTION",
+  "documentation": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "disposition": "Accept source-backed9-line historical path+SHA versus live fixture and explicit owned logger/shared temporal guard lesson d21d043bb7cfcdfa32a7e9edb5239c71a649918ed800202f378449bd0e159877; real snapshot mode contradiction must be corrected before planned guard is considered executable.",
+    "evidence": "Installed robocorp.log_pytest defaults ./output; baseline-first RED2 and measured GREEN51 original JUnits; real immutable snapshot body exact original e4 Git.",
+    "remaining_uncertainty": "Native current control3/5/7276 and lease cleanup actual unexecuted; new config not constructed."
+  },
+  "read_only_verification": {
+    "GREEN": {
+      "errors": 0,
+      "failures": 0,
+      "skips": 0,
+      "tests": 42
+    },
+    "GREEN_TEMPORAL": {
+      "errors": 0,
+      "failures": 0,
+      "skips": 0,
+      "tests": 51
+    },
+    "RED": {
+      "errors": 0,
+      "failures": 2,
+      "skips": 0,
+      "tests": 2
+    },
+    "all12_prior_non_main_read_bound_functions_classes_AST_exact": true,
+    "all23_declared_refs_hash_size_mode_exact": true,
+    "historical_e4_Git_snapshot_body_exact": true,
+    "policy_fixture_modules_byte_exact": true
+  },
+  "required_successor": "Preserve original owner/source/snapshot; named helper guard-only snapshot-mode correction plus measured real snapshot admission and exact successor source bindings before configuration adoption. No root/native release granted.",
+  "reviewer_tests_native_source_changes": "NOT_RUN",
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_owner": {
+    "bytes": 8424,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/OWNERFINAL-current8d49-private-V8-historical-fixture-owned-logger-temporal-SOURCE_ONLY.json",
+    "sha256": "5c990848ab9470781e9a566d7890a452bff387e0942d76d3074afca088d1527c"
+  },
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none"
+}

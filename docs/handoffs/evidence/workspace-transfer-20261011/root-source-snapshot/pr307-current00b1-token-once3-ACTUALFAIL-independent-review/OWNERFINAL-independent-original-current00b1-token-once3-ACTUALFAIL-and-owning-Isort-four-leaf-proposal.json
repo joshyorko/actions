@@ -1,0 +1,859 @@
+{
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md; proposed insertion adjacent to owning formatter/package-scope guidance",
+    "Durable learning captured": "After an owning-package Isort failure, retain the exact reported file scope and settings-search context. A package without an Isort profile does not inherit another package's Black profile. Preserve import bindings in each lexical scope and non-import bodies when sorting imports; verify the same files with both the owning Ruff formatter and Isort before accepting a formatting-only successor. A newly reached failing tool does not invalidate earlier completed phases or qualify phases that never ran.",
+    "Evidence": [
+      "/workspace/engineering/pr307-current00b1-token-light-once3-owned/configured-static/terminal.json",
+      "/workspace/engineering/pr307-current00b1-token-light-once3-owned/configured-static/stderr.bin",
+      "/workspace/engineering/pr307/devutils/poetry.lock",
+      "/workspace/engineering/pr307/devutils/pyproject.toml",
+      "/workspace/engineering/pr307/.editorconfig"
+    ],
+    "Exact proposed delta": {
+      "bytes": 503,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current00b1-token-once3-ACTUALFAIL-independent-review/canonical-owning-isort-settings-and-sequential-static-scope-proposed.txt",
+      "sha256": "ac49263ccb0bf2a6dabd290b6abf0f3bb7991f53045654411f9d37c606f0c86c"
+    },
+    "Remaining uncertainty": "No reviewer formatting execution; exact edits and simultaneous Ruff/Isort compatibility await bounded writer checks; FULL/native/OAuth/release remain HOLD.",
+    "Stale or ambiguous guidance removed": "Do not infer cross-package Isort profile, whole-module AST equality after import sorting, or successful later tools from a partially completed static phase."
+  },
+  "Upstream disposition": "none",
+  "construction_history": {
+    "failure": "TypeError: guard capture fields are fixed integer counts, not lists; corrected only reviewer parsing before receipt seal",
+    "no_tests_or_source_mutation": true,
+    "original_constructor": "seal_original_once3_readonly_review.py"
+  },
+  "consumed_85_bindings": [
+    {
+      "bytes": 503555,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-actuale2-refresh-PREPARATION/complete-current-ordinary-union-source-and-retained-evidence-proof-v2.json",
+      "sha256": "aa2ffa5fa4154c13db50e54224d5836858222abaa174291748866830f97c98db"
+    },
+    {
+      "bytes": 2306,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-actuale2-refresh-PREPARATION/OWNERFINAL-pr307-currente2-ordinary-source-union-checkpoint-v2.json",
+      "sha256": "1b7d1972291f963eab3fc02fd729be5b65c47acdf0b07615642f85a109eaabdd"
+    },
+    {
+      "bytes": 6635,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-actuale2-refresh-PREPARATION/OWNERFINAL-pr307-currente2-LIGHT-FULL-PREPARATION-NOTRUN-v2.json",
+      "sha256": "07e2f750dfc50aa61def631644715afb4bfa97294d108050f66359a4b365cc52"
+    },
+    {
+      "bytes": 987,
+      "mode": "0o600",
+      "path": "/workspace/actions-cloud/activate.sh",
+      "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+    },
+    {
+      "bytes": 22282402,
+      "mode": "0o700",
+      "path": "/workspace/actions-cloud/bin/rcc",
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+    },
+    {
+      "bytes": 602,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-guard-owned/outer_invoke_no_yaml.py",
+      "sha256": "394e1434e46dc86888be313dd8896cf42def904045945543e9f890b3d81e3ba3"
+    },
+    {
+      "bytes": 6408,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr307-currente2-concrete-LIGHT-PREEXECUTION/controlled_invoke_owned_stage.py",
+      "sha256": "998b74ededfcafca9fd287c172313d5ebdf88f149141471fff5a3dd027bbbf51"
+    },
+    {
+      "bytes": 6432,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-currente2-concrete-LIGHT-PREEXECUTION/OWNERFINAL-current2314-concrete-LIGHT-PREEXECUTION.json",
+      "sha256": "6d1ad9685a70707b18b059be186a383eb49893fd35824e6cbaee729f855ba9eb"
+    },
+    {
+      "bytes": 7378,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-currente2-concrete-LIGHT-PREEXECUTION/immutable-one-LIGHT-inputs.json",
+      "sha256": "c975688c6a77a20dba9a0edbc133ffd3bb18938642321256bf2288c137a6cbb9"
+    },
+    {
+      "bytes": 11777,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr307-currente2-concrete-LIGHT-PREEXECUTION/launch_one_owned_light.py",
+      "sha256": "f650ff517d2b5910c89c1ed68497fe01e623149fb4689db0a09e7a32048442d3"
+    },
+    {
+      "bytes": 8165,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-currente2-concrete-LIGHT-PREEXECUTION-v2/immutable-one-LIGHT-inputs.json",
+      "sha256": "3b4e42668cb99bc38969c6f979ece431abdd123db4217baf282c3cbb581369ce"
+    },
+    {
+      "bytes": 12568,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr307-currente2-concrete-LIGHT-PREEXECUTION-v2/launch_one_owned_light.py",
+      "sha256": "5cfd5809778212415a41349e02c081312011cf4c1f641150d233abde4099f088"
+    },
+    {
+      "bytes": 7174,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-currente2-concrete-LIGHT-PREEXECUTION-v2/OWNERFINAL-current2314-concrete-LIGHT-PREEXECUTION-v2.json",
+      "sha256": "f5242f221043785c61916793ffec05c4d3dee9820642c9de210ef435298d3e4d"
+    },
+    {
+      "bytes": 5555,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-PR-only-OAuth-token-source-PREPARATION/OWNERFINAL-current7487-PR-only-OAuth-token-SOURCE-UNTESTED.json",
+      "sha256": "340604ceb5225d21cb0b55a313834c885277dcdb2d1734eb3215ec22a15208a3"
+    },
+    {
+      "bytes": 10638,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-PR-only-OAuth-token-source-PREPARATION/OWNERFINAL-current7487-token-source-gates-PREPARATION-NOTRUN.json",
+      "sha256": "78e29d5476d676d6ae8210c31e3b0c7c5400982c8eefa0a941f51e21cf19856e"
+    },
+    {
+      "bytes": 13754,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-PR-only-OAuth-token-source-PREPARATION/private-current-prepared30-five-configs-historical15-and-ignored-output-proof.json",
+      "sha256": "a79cd6d179ecad3f4ce110d7235d50f0df0b6add74c1a699265e92c2095af18f"
+    },
+    {
+      "bytes": 357745,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-PR-only-OAuth-token-source-PREPARATION/private-complete-4-path-source-and-AST-preservation-proof.json",
+      "sha256": "2818535ba4fd11a7e2e8dfa4392200d02534c2b308400102471f33fe55e199d3"
+    },
+    {
+      "bytes": 372673,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current7487-concrete-TOKEN-LIGHT-PREEXECUTION/current1442-prepared30-ownfive-historical15-proof.json",
+      "sha256": "9a653f3d8d1573f8e7fb09a46d14f2e0eb1836f4fa82206e91a1275d19399ac8"
+    },
+    {
+      "bytes": 338142,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current00b1-token-light-once3-PREEXECUTION-NOTRUN/current00b1-format-child-1442-prepared30-ownfive-and-original-once2-proof.json",
+      "sha256": "15d2a3c0eb86d583eb6add482c1ce0fbdc3b0795bb19afb3b9674aa8ae503c85"
+    },
+    {
+      "bytes": 3092,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-currentc97e-configured-format-source/OWNERFINAL-currentc97e-configured-format-source-UNTESTED.json",
+      "sha256": "9acb6637c1056bdfb754664ab22e2d884eb10fdadf47d8313e10a1cefb86ca90"
+    },
+    {
+      "bytes": 311739,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-currentc97e-configured-format-source/private-complete-current1442-formatter-only-preservation-proof.json",
+      "sha256": "ee5148cedc4eff924ab6c4440d123176534318b8203ff22c42b71b90ba1949ce"
+    },
+    {
+      "bytes": 752,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-token-test-configured-format-owned/original-format-terminal.json",
+      "sha256": "e8b6b0af232a702caebd2063149a9986e0bcaa527abc3d84e4144c4a0512e0b5"
+    },
+    {
+      "bytes": 19,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-token-test-configured-format-owned/original-formatter.stdout",
+      "sha256": "413a709001976657cb743636fd34e48fc41d8d302d665460d3f874b3313da127"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-token-test-configured-format-owned/original-formatter.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 7977,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current7487-concrete-TOKEN-LIGHT-PREEXECUTION/OWNERFINAL-current7487-concrete-TOKEN-LIGHT-PREEXECUTION-final-NOTRUN.json",
+      "sha256": "96f47b2ea0be2ce21a7ed78025c75a6cd0b3a84c38d73b65d44d117ec8719e46"
+    },
+    {
+      "bytes": 15510,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current7487-concrete-TOKEN-LIGHT-PREEXECUTION/launch_one_owned_token_light_final.py",
+      "sha256": "569549f01f29793754b366847158b4a9987bc1e173506ab94dc6d59042d5ee59"
+    },
+    {
+      "bytes": 10890,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current7487-concrete-TOKEN-LIGHT-PREEXECUTION/immutable-one-TOKEN-LIGHT-inputs.json",
+      "sha256": "f3ab8fca12e64862d2093526e0cc2fe46ac700961e9ef302e124996ee710a05a"
+    },
+    {
+      "bytes": 8675,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-currentc97e-concrete-TOKEN-LIGHT-PREEXECUTION/OWNERFINAL-currentc97e-retargeted-concrete-TOKEN-LIGHT-PREEXECUTION-final-NOTRUN.json",
+      "sha256": "b117d56bd984c4420ad3b15a860c09547326ebcc7498e78248e7796de27a6daf"
+    },
+    {
+      "bytes": 13345,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-currentc97e-concrete-TOKEN-LIGHT-PREEXECUTION/immutable-one-TOKEN-LIGHT-inputs.json",
+      "sha256": "c5378aa9dfceeb454255c1724f18ef505e09fe0d5fdc679a87b4db45fb92bb79"
+    },
+    {
+      "bytes": 15510,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr307-currentc97e-concrete-TOKEN-LIGHT-PREEXECUTION/launch_one_owned_token_light_reviewed_mode.py",
+      "sha256": "daa820a18cfd9bc98c6a79e256fffb2f03a58ea0e415d2efacf78fead7e14dd7"
+    },
+    {
+      "bytes": 4029,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-currentc97e-original-TOKEN-LIGHT-ACTUALFAIL-independent-diagnosis/OWNERFINAL-independent-original-currentc97e-TOKEN-LIGHT-ACTUALFAIL-and-minimum-boundary-proposal.json",
+      "sha256": "1075f04e6a27e2209d1fe2cb630747faab8fff00644fb5481d26cd99ea6f1130"
+    },
+    {
+      "bytes": 864,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-pr307-currentc97e-reviewed-token-light-original-outer/OWNERFINAL-root-one-original-reviewed-currentc97e-token-light-outer.json",
+      "sha256": "09d76b7460b784b094b3c868fb71520951a7592411d88e4a36de7e24a5b4313a"
+    },
+    {
+      "bytes": 279,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once-owned/original-terminal.json",
+      "sha256": "1e32aaa379fa33103e59b0cb13b721d262ede7532263162df7e4388740533795"
+    },
+    {
+      "bytes": 229,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once-owned/before-guard.json",
+      "sha256": "172f7b45aaad032f0e347e3b1df053d56b86f45b40c855ab6f1168f599cc226f"
+    },
+    {
+      "bytes": 229,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once-owned/always-post-guard.json",
+      "sha256": "172f7b45aaad032f0e347e3b1df053d56b86f45b40c855ab6f1168f599cc226f"
+    },
+    {
+      "bytes": 678,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once-owned/token-RED-parent2314/terminal.json",
+      "sha256": "81df776243a6a74aec1371b80595eb0991ac56b92856dbbe93812b81c9f20892"
+    },
+    {
+      "bytes": 5432,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once-owned/token-RED-parent2314/stdout.bin",
+      "sha256": "624dd70e44815fb9171475c590137c6f7f927e4d07c1f57e3199d988c49e858f"
+    },
+    {
+      "bytes": 4851,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once-owned/token-RED-parent2314/stderr.bin",
+      "sha256": "d43986ce1df5e23b98edcba0858d5d88a719ea5b0b03a54a864295e77ad53c51"
+    },
+    {
+      "bytes": 4496,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once-owned/token-RED-parent2314/junit.xml",
+      "sha256": "c940d8cd22df7889d3e75973baa32c217ed5223b097d415f8294a98774276bdd"
+    },
+    {
+      "bytes": 9405,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/OWNERFINAL-currentc97e-once2-selected-CONFIG-basename-v3-TOKEN-LIGHT-PREEXECUTION-NOTRUN.json",
+      "sha256": "314aa47a592a41e11b995469af21feadb33a151be2c1e3d9a8ff6579dcab7717"
+    },
+    {
+      "bytes": 16905,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/immutable-one-TOKEN-LIGHT-once2-inputs.json",
+      "sha256": "29368814c182f30732ab041ca580162c92071e4bb076eb164c9820ced3acc158"
+    },
+    {
+      "bytes": 16053,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/launch_one_owned_token_light_once2_selected_config_v3.py",
+      "sha256": "979792c8f087ae36635dcf37f1620c3036e1204cc2c4c145b3e5fd775245a0f0"
+    },
+    {
+      "bytes": 326548,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-currentc97e-concrete-TOKEN-LIGHT-PREEXECUTION/current1442-prepared30-ownfive-historical15-proof.json",
+      "sha256": "1e3fad6f53b2975ef1de63081a4abc7e8099c5bcd2dad6a01d9dbe3b3c601216"
+    },
+    {
+      "bytes": 1166,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-pr307-currentc97e-reviewed-token-light-once2-v3-outer/OWNERFINAL-root-one-original-reviewed-currentc97e-token-light-once2-v3-outer.json",
+      "sha256": "54804c341fc30a3fb33f7c3fc73ed7aeecb09537acb7a6bc489448711f7cea88"
+    },
+    {
+      "bytes": 279,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/original-terminal.json",
+      "sha256": "1e32aaa379fa33103e59b0cb13b721d262ede7532263162df7e4388740533795"
+    },
+    {
+      "bytes": 659,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/root-one-TOKEN-LIGHT-once2-release.json",
+      "sha256": "a07bdbe8b2e154248950bd633cded340d0c7c4204cb707ec63d5c8317fb4a4a8"
+    },
+    {
+      "bytes": 9667,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-currentc97e-token-once2-independent-PREEXEC-review/OWNERFINAL-independent-named-currentc97e-config-v3-token-once2-PREEXECUTION-GO.json",
+      "sha256": "3b4192fdc2656898c30044dcc995b0accb78ed7341bcf002fcea9879aacd60d3"
+    },
+    {
+      "bytes": 896,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-pr307-currentc97e-reviewed-token-light-once2-v3-outer/external-always-post-envelope.json",
+      "sha256": "faafc726e75e8dd3c720a523fe92b17aafd8cf377cab6fa80781f3e639d35db0"
+    },
+    {
+      "bytes": 1416,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/configured-static/terminal.json",
+      "sha256": "cf3645b04082bfb2e140746a8d0309afa0e1968e65ad66defb49367d9fe2885f"
+    },
+    {
+      "bytes": 2955,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/configured-static/stdout.bin",
+      "sha256": "357fbb18e20a85e04677f495ffd344014ea895285827547630f9f131fc767511"
+    },
+    {
+      "bytes": 5413,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/configured-static/stderr.bin",
+      "sha256": "e0918b583a1d668d4cb39f2eb883a3feb9b18bfb518fefaff3b4619a91a59f53"
+    },
+    {
+      "bytes": 436,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/doctor/terminal.json",
+      "sha256": "b6937064a258be88290d1ac70f5452d3f6eb6caea6508b58816f00209260d315"
+    },
+    {
+      "bytes": 334,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/doctor/stdout.bin",
+      "sha256": "af93a9faa034da4c57f64b6f421eef915fc9742c6ec73e6013e0404e04e99211"
+    },
+    {
+      "bytes": 13153,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/doctor/stderr.bin",
+      "sha256": "9f243e5fce51d70240466c6da1e26a2e458622f5c7d065c6e62cbf7d6624863a"
+    },
+    {
+      "bytes": 620,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/guard-focus/terminal.json",
+      "sha256": "d450a9871cc5a76c006570f6d32305c91e56e3020938055a37745cd59ba68bb1"
+    },
+    {
+      "bytes": 6272,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/guard-focus/stdout.bin",
+      "sha256": "57a7e1137e05ec5ad52440daec5e8fd1939119c3e39da3719fb80c250d825a98"
+    },
+    {
+      "bytes": 3522,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/guard-focus/stderr.bin",
+      "sha256": "e4f5978fb65c8f0d537564c345fccfb559724a3a2858030c2c6116d8ba7e5ebd"
+    },
+    {
+      "bytes": 6813,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/guard-focus/junit.xml",
+      "sha256": "33182fe3dc48a2867b54dfc4dd7851589588b43a6b31a2b64807bb21a5ba5900"
+    },
+    {
+      "bytes": 1567,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/own-five-origins/terminal.json",
+      "sha256": "f59785781e72dcc152a581c0a7baba77c963d90cfa1d6d4e4af0e7592ac75637"
+    },
+    {
+      "bytes": 3192,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/own-five-origins/stdout.bin",
+      "sha256": "18a3491fc5e3200275e08fd82edc0ed984aac30bbf35a5f83b7ef7e2bb237ad8"
+    },
+    {
+      "bytes": 3523,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/own-five-origins/stderr.bin",
+      "sha256": "c2bbe631ad60da7c3acef3c27f387a602c15cb1e265b56046d2b3d0b27bee3bf"
+    },
+    {
+      "bytes": 679,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/token-RED-parent2314/terminal.json",
+      "sha256": "c6951c7bb48e189c613cb94426eebab31e7b62b26c534cc24d47822e03543463"
+    },
+    {
+      "bytes": 5433,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/token-RED-parent2314/stdout.bin",
+      "sha256": "8620efd0ca0c4e1443f30cd2a1004a3d5228a3b699fff3d3bde014947191e33e"
+    },
+    {
+      "bytes": 4851,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/token-RED-parent2314/stderr.bin",
+      "sha256": "d5bf2d45cae7122a274e902fd503168c092ed7420f1ad6c4615e2f38c370f004"
+    },
+    {
+      "bytes": 4496,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/token-RED-parent2314/junit.xml",
+      "sha256": "3316b7e9bc0f584f841ee0abcb08a07f68af16c39cae2e6a7eeeeeb84dd04e94"
+    },
+    {
+      "bytes": 247,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/token-RED-parent2314/expected-two-original-env-failures.json",
+      "sha256": "3593dbe22a9a42214431d4830a3dd5f316ca511adc16d17091e90c7fccf8b927"
+    },
+    {
+      "bytes": 650,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/token-release-line-GREEN/terminal.json",
+      "sha256": "a2f74a443ee018899c019ca8a4ff1763c6c51ffea020d083be57a7a03455d03f"
+    },
+    {
+      "bytes": 13993,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/token-release-line-GREEN/stdout.bin",
+      "sha256": "7db0b92674eb1cea39e60722cedabf87c6a1b3dee8233629768017a7424b9975"
+    },
+    {
+      "bytes": 3522,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/token-release-line-GREEN/stderr.bin",
+      "sha256": "67730ae8e73807b9782c7aace67e639cbf2708924a01b3d525f2ce8ed0fea095"
+    },
+    {
+      "bytes": 16357,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/token-release-line-GREEN/junit.xml",
+      "sha256": "a1288505ea65cf92f13b8cbce76b16b381d0fde9a2dbffe398ecde99802a1fbc"
+    },
+    {
+      "bytes": 442,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/toolkit/terminal.json",
+      "sha256": "1e9bbcc312078d18f7d394d49a4780eb30e6226d1f2626346d0de7623210835c"
+    },
+    {
+      "bytes": 1460,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/toolkit/stdout.bin",
+      "sha256": "6077f2ff6b7c589a00d0ee725d5746e59555df2aa77c69f49c4e94e8f9e4a919"
+    },
+    {
+      "bytes": 13154,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/toolkit/stderr.bin",
+      "sha256": "3846b52eed3592c94d6575e4d04edabd637c4081c799c718f45e379a327dd278"
+    },
+    {
+      "bytes": 30055,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/toolkit/junit.xml",
+      "sha256": "0138560236e70d18d2312c9967d1a19707111cf92faf2ba7a92e57c72219df94"
+    },
+    {
+      "bytes": 793,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-release-line-only-configured-formatter-child-SOURCE-PREPARATION/exact-own-Devutils-Ruff-version.original-terminal.json",
+      "sha256": "540d3516b34974205003534a6cf53f917321acee66e42fadbd6ca11e1af29088"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-release-line-only-configured-formatter-child-SOURCE-PREPARATION/exact-own-Devutils-Ruff-version.stderr.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 12,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-release-line-only-configured-formatter-child-SOURCE-PREPARATION/exact-own-Devutils-Ruff-version.stdout.private",
+      "sha256": "50d1ab8e890b924eee95ed61eb7893c2b350bf5e4f1ac2eed8b6a4de6d09dabc"
+    },
+    {
+      "bytes": 10190,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-release-line-only-configured-formatter-child-SOURCE-PREPARATION/formatted-release-line-test.py",
+      "sha256": "6d06058d6e7c26f17643744f380e3d611128222315894570d59942c36075fd4a"
+    },
+    {
+      "bytes": 1479,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-release-line-only-configured-formatter-child-SOURCE-PREPARATION/formatter-source-AST-and-one-path-delta-proof.json",
+      "sha256": "6d0004f4f8de0b42d3144d9bb480a54e63fd9e6ddcd3b4d5e5ac4d5a6f043b85"
+    },
+    {
+      "bytes": 879,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-release-line-only-configured-formatter-child-SOURCE-PREPARATION/one-release-line-configured-format.original-terminal.json",
+      "sha256": "8a922e0f08310b78b99852f3f267cf2a6879424c7d19ba6c86e6e22ef8324bfc"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-release-line-only-configured-formatter-child-SOURCE-PREPARATION/one-release-line-configured-format.stderr.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 19,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-release-line-only-configured-formatter-child-SOURCE-PREPARATION/one-release-line-configured-format.stdout.private",
+      "sha256": "413a709001976657cb743636fd34e48fc41d8d302d665460d3f874b3313da127"
+    },
+    {
+      "bytes": 159921,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-release-line-only-configured-formatter-child-SOURCE-PREPARATION/original-c97-complete-tree.private",
+      "sha256": "bab7d5fe7e7f6378f57f44f8dd2d62f3745efa43885fa02bbd3a8688ca6df73f"
+    },
+    {
+      "bytes": 10173,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-release-line-only-configured-formatter-child-SOURCE-PREPARATION/original-c97-release-line-test.py",
+      "sha256": "78b5a997dd734c57e922295f7b1b54adee9bb34e379f5890e78673b2786171a3"
+    },
+    {
+      "bytes": 760,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-release-line-only-configured-formatter-child-SOURCE-PREPARATION/original-formatter-input-bindings.json",
+      "sha256": "bb80a412703ba8d26f23203436bf70eae6397e1a0d5f07a2703d0b6273ea5ea9"
+    }
+  ],
+  "current_source_at_review": {
+    "clean": true,
+    "full_typed_Git_FS_body_exec_mode_count": 1442
+  },
+  "decision": "HOLD_SOURCE_PUSH_AND_FULL_NATIVE_AUTHORITY",
+  "evidence_bindings": [
+    {
+      "bytes": 1164,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-pr307-current00b1-reviewed-token-light-once3-outer/OWNERFINAL-root-one-original-reviewed-current00b1-token-light-once3-outer.json",
+      "sha256": "9449bf7a824b018d2b860ea0a6681af584f35a79df37d8e1cfe94b111e81c2c9"
+    },
+    {
+      "bytes": 279,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current00b1-token-light-once3-owned/original-terminal.json",
+      "sha256": "283c974b2aebfa06957ea6974aef63cf6c0732a0c558fab7bcb9952c1aa5cd39"
+    },
+    {
+      "bytes": 229,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current00b1-token-light-once3-owned/before-guard.json",
+      "sha256": "7898ee37aae00a4503ea3310c3821c7849dd031bf4535ba8755f4789eba8f54d"
+    },
+    {
+      "bytes": 229,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current00b1-token-light-once3-owned/always-post-guard.json",
+      "sha256": "7898ee37aae00a4503ea3310c3821c7849dd031bf4535ba8755f4789eba8f54d"
+    },
+    {
+      "bytes": 894,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-pr307-current00b1-reviewed-token-light-once3-outer/external-before-envelope.json",
+      "sha256": "870898d9745a32b2bfceed6cf671f69fa74897eb40a213c634c1f3d5221b417d"
+    },
+    {
+      "bytes": 894,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-pr307-current00b1-reviewed-token-light-once3-outer/external-always-post-envelope.json",
+      "sha256": "870898d9745a32b2bfceed6cf671f69fa74897eb40a213c634c1f3d5221b417d"
+    },
+    {
+      "bytes": 30055,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current00b1-token-light-once3-owned/toolkit/junit.xml",
+      "sha256": "ebb16de9afb3917e3e3a4272d520d91c88ba6c1ac0e461acad8f1b61d1fcde16"
+    },
+    {
+      "bytes": 441,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current00b1-token-light-once3-owned/toolkit/terminal.json",
+      "sha256": "0c2f9ba925a006920832e64b772242ba9acb64c63bc15770cce7b6aad848c27c"
+    },
+    {
+      "bytes": 1460,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current00b1-token-light-once3-owned/toolkit/stdout.bin",
+      "sha256": "bea64a0c07379e3c131e39db0b5de6e03b8bf1aeae824ddee9d5369c83c4ddee"
+    },
+    {
+      "bytes": 13152,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current00b1-token-light-once3-owned/toolkit/stderr.bin",
+      "sha256": "ca14fe29c376a1a4f78995581812382d1679bdc156fbbe7b160ef993ad9594e9"
+    },
+    {
+      "bytes": 16357,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current00b1-token-light-once3-owned/token-release-line-GREEN/junit.xml",
+      "sha256": "56141519a8ec4e720f936c40afe9312a8492005ddf5cb2030c8fa69459a76770"
+    },
+    {
+      "bytes": 650,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current00b1-token-light-once3-owned/token-release-line-GREEN/terminal.json",
+      "sha256": "a91220954dfbae6a4f1dd54beab4995a4b4bfec982c4cd5d80b7d91d2523c0e7"
+    },
+    {
+      "bytes": 13993,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current00b1-token-light-once3-owned/token-release-line-GREEN/stdout.bin",
+      "sha256": "efaeaf56d505a7789c0e348c3d8c731424627dc7e4b42ca166faac50251032fb"
+    },
+    {
+      "bytes": 3524,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current00b1-token-light-once3-owned/token-release-line-GREEN/stderr.bin",
+      "sha256": "9f37f09716b2ca1f7d094ecd64c0fc5914ee51d81a3231361f1839c0a06781bf"
+    },
+    {
+      "bytes": 6813,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current00b1-token-light-once3-owned/guard-focus/junit.xml",
+      "sha256": "d7b07b2306b45b27968d9b75752771bf2afd6a27b576bb26f3b395d7b1b4df63"
+    },
+    {
+      "bytes": 621,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current00b1-token-light-once3-owned/guard-focus/terminal.json",
+      "sha256": "fafc3dabeb3ef016d5ac7c9d9ba743a957b20f93b2cfcc6a625f7a0a20856adb"
+    },
+    {
+      "bytes": 6272,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current00b1-token-light-once3-owned/guard-focus/stdout.bin",
+      "sha256": "8fd4ca38dff2674664ee3250de0a918fa7b99f1890529197e78becccfc0633fd"
+    },
+    {
+      "bytes": 3522,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current00b1-token-light-once3-owned/guard-focus/stderr.bin",
+      "sha256": "1bad5274810520af2219c6a0183d4d28edff50c13c01cc9b63ccdb68e516f140"
+    },
+    {
+      "bytes": 4496,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current00b1-token-light-once3-owned/token-RED-parent2314/junit.xml",
+      "sha256": "5e78a4ce231494fb7e4ae7fe84ee5185b472f3333dffbbc17a54f8d73827554f"
+    },
+    {
+      "bytes": 679,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current00b1-token-light-once3-owned/token-RED-parent2314/terminal.json",
+      "sha256": "b14d39661f93f8a73d614375e6f03cc4b42a9d9cd1eed3d68dc8489a1f145e35"
+    },
+    {
+      "bytes": 5433,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current00b1-token-light-once3-owned/token-RED-parent2314/stdout.bin",
+      "sha256": "6a4096716d41c6ed2f1ec16e5e77b214398473ccf21052d75dfdf144c31ec946"
+    },
+    {
+      "bytes": 4851,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current00b1-token-light-once3-owned/token-RED-parent2314/stderr.bin",
+      "sha256": "baf8fa59fd8cb66eb295444865eb6c9e27b0f46064db84cf8f0f96320f4c02c8"
+    },
+    {
+      "bytes": 1416,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current00b1-token-light-once3-owned/configured-static/terminal.json",
+      "sha256": "7ede1c3363c610c3c5f474ab878284471910a5ecce6ed66767b0746840191faa"
+    },
+    {
+      "bytes": 2947,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current00b1-token-light-once3-owned/configured-static/stdout.bin",
+      "sha256": "b1d33927fa1ee36992cc36d81370b1cf8561fdb7a9b5691841ed1ef0618c5317"
+    },
+    {
+      "bytes": 5884,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-current00b1-token-light-once3-owned/configured-static/stderr.bin",
+      "sha256": "a670329b07929b169db3f3d8da02db518699eca935fb0e9e5f2fc02998aef592"
+    }
+  ],
+  "guards": {
+    "ROOT_external_before_and_alwayspost_exact_binding_count": 96,
+    "child_before_and_alwayspost": "PASS",
+    "consumed_exact_bindings": 85,
+    "own_environment_configs": 5,
+    "prepared_inputs": 30
+  },
+  "minimal_authorized_source_proposal": {
+    "existing_branch_parent": "00b1bb9974b73f2da65e49c9048774c84df286ba",
+    "full_gate": "MANDATORY_NOT_RUN; no source push until accepted LIGHT and later full source gate",
+    "only_four_import_sort_leaves": [
+      "devutils/src/devutils/fixtures.py",
+      "devutils/tests/test_http_helper_tests_workflow.py",
+      "devutils/tests/test_runtime_conformance.py",
+      "devutils/tests/test_invoke_utils.py"
+    ],
+    "procedure": "Use owning locked Isort5.13.2 from Devutils with same settings search context; explicitly --settings-path src if necessary to preserve actual src/tests search. Sort only these four reported leaves. Keep configs, gates, imports/aliases/names and all non-import executable/assertion bodies unchanged. Verify own Ruff0.1.15 formatter and Isort on the same leaves, then full configured scopes. If incompatible output is measured, stop and preserve diagnostics; do not borrow Runtime Black profile or silently alter gates.",
+    "proof": "Compare import binding multisets per lexical scope and all non-import AST; import-order AST itself may legitimately change. All other typed body/modes remain exact. Preserve once3 FAIL and prior once1/once2; fresh descendant and separate ROOT once4 authorization required."
+  },
+  "original_actual_censuses": {
+    "guard-focus": {
+      "errors": 0,
+      "failures": 0,
+      "gateway_returncode": 0,
+      "passed": 41,
+      "skips": 0,
+      "unique_cases": 41
+    },
+    "token-RED-parent2314": {
+      "errors": 0,
+      "failures": 2,
+      "gateway_returncode": 10,
+      "passed": 0,
+      "skips": 0,
+      "unique_cases": 2
+    },
+    "token-release-line-GREEN": {
+      "errors": 0,
+      "failures": 0,
+      "gateway_returncode": 0,
+      "passed": 99,
+      "skips": 0,
+      "unique_cases": 99
+    },
+    "toolkit": {
+      "errors": 0,
+      "failures": 0,
+      "gateway_returncode": 0,
+      "passed": 179,
+      "skips": 0,
+      "unique_cases": 179
+    }
+  },
+  "original_root": {
+    "bytes": 1164,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-pr307-current00b1-reviewed-token-light-once3-outer/OWNERFINAL-root-one-original-reviewed-current00b1-token-light-once3-outer.json",
+    "sha256": "9449bf7a824b018d2b860ea0a6681af584f35a79df37d8e1cfe94b111e81c2c9"
+  },
+  "outer_elapsed_seconds": 101.42027666600188,
+  "outer_returncode": 1,
+  "parent": "c97edfd10edb5b1c63f8a6371bfd2905996a2da2",
+  "primary_failure": {
+    "all_four_unchanged_from_c97": true,
+    "checked_inner_returncode": 1,
+    "cleanup_final_readers_and_descendant_census": "UNKNOWN",
+    "command_from_original": "poetry run isort --check src tests",
+    "cwd": "/workspace/engineering/pr307/devutils",
+    "failure_scope": "import sorting/formatting; exact required text transform NOT_RUN by reviewer",
+    "gateway_returncode": 10,
+    "installed_and_locked_version": "5.13.2",
+    "phase": "configured-static",
+    "preceding_static_results": {
+      "Devutils_Ruff_format_files": 20,
+      "OAuth_helper_format_files": 2,
+      "OAuth_helper_mypy_files": 1,
+      "Ruff_checks": "PASS",
+      "Runtime_format_files": 317,
+      "Runtime_mypy_files": 354
+    },
+    "reported_four_leaf_bindings": [
+      {
+        "bytes": 18271,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/devutils/src/devutils/fixtures.py",
+        "sha256": "8faf839aeb78b5a9d4f6943c0f552552ca3e6ca926ba298535e883016840bc7e"
+      },
+      {
+        "bytes": 681,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/devutils/tests/test_http_helper_tests_workflow.py",
+        "sha256": "10854de432fa25ab4de744af22243ba7588677af52a0d208c7df51463e255bea"
+      },
+      {
+        "bytes": 1621,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/devutils/tests/test_runtime_conformance.py",
+        "sha256": "631bd94abca1247a61efe3b05770a93abd04a68a6e32674cf07f633452902c74"
+      },
+      {
+        "bytes": 9201,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/devutils/tests/test_invoke_utils.py",
+        "sha256": "8aca8a7aff3695f38061095c9a180e391f6322d66111212d5889860f93516533"
+      }
+    ],
+    "tool": "Isort"
+  },
+  "remaining_phases": {
+    "Devutils_mypy_after_Isort": "NOT_RUN",
+    "controlled_Invoke": "NOT_RUN",
+    "workflow_generation": "NOT_RUN"
+  },
+  "review_operations": "Read-only source/Git/stdlib parsing and hashing; wrote owned review outputs only. No tests/imports/helper replay/source/ref/index/push/ready/merge/download/native operation.",
+  "schema": 1,
+  "settings_provenance": {
+    "Devutils_pyproject_Isort_profile": "ABSENT",
+    "Runtime_Isort_profile": "black; distinct owning package",
+    "actual_show_config": "NOT_RUN/NOT_PRINTED; settings are source-derived, not a new tool observation",
+    "bindings": [
+      {
+        "bytes": 986,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/devutils/pyproject.toml",
+        "sha256": "7ffef37af3dc666ae72f1075ac1e06d8c61405225d678b326d767fe1952825e1"
+      },
+      {
+        "bytes": 256,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/.editorconfig",
+        "sha256": "2d5d7c3a7823865a233c371f68e21f406159fe64b341e28f054c2f2115987123"
+      },
+      {
+        "bytes": 91377,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/devutils/poetry.lock",
+        "sha256": "22bf11dae2a1ed46de5024da774dde4fe778c206d720929fba9244819f3b0b6e"
+      },
+      {
+        "bytes": 12230,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/devutils/.venv/lib/python3.12/site-packages/isort-5.13.2.dist-info/METADATA",
+        "sha256": "0ea75cd7867f063eae46bf9dff4e9c5a1cd27376b6876c764cbbc2900fb5ea3a"
+      },
+      {
+        "bytes": 247,
+        "mode": "0o711",
+        "path": "/workspace/engineering/pr307/devutils/.venv/bin/isort",
+        "sha256": "c7cc4fc04fd9cbbd2d22850efcbb07f56d06d9615e78b80ff36ca98f5bb54830"
+      },
+      {
+        "bytes": 328,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/devutils/ruff.toml",
+        "sha256": "b0514bf74bdc31e2688f056804b003289bb14baedb6868f64e13f2ff163c0d63"
+      }
+    ],
+    "installed_Metadata_and_package_lock_confirm": "5.13.2",
+    "static_settings_search": "first directory src -> Devutils -> repository .editorconfig; indent4 and package defaults79/GRID/profile empty"
+  },
+  "source": "00b1bb9974b73f2da65e49c9048774c84df286ba",
+  "status": "INDEPENDENT_ORIGINAL_CURRENT00B1_ONCE3_ACTUALFAIL_CONFIRMED",
+  "tree": "2663e86b2344f9e056c3259653cb905a6d195599"
+}

@@ -1,0 +1,19 @@
+{
+  "FULL": "NOT_RUN_LOCAL_CAPACITY",
+  "base": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "documentation_improvement": "Existing accepted guard/logging/source-authority guidance reused; no cosmetic duplicate.",
+  "draft_before": false,
+  "draft_changed": false,
+  "fresh_hosted_CI": "PENDING",
+  "independent_review_sha256": "f602a973a97f194449996cae53a2ab5f5d38b8b76378fe9d871dfb8fd6f38d03",
+  "merge_release_native": "HOLD",
+  "normal_push_returncode": 0,
+  "old_body_preserved": true,
+  "old_remote": "87e412f89b201c697d3e6bd4bd34031cdbd14df3",
+  "remote_ref_verified": true,
+  "schema": "ROOT_ONE_NORMAL_EXISTING_PR307_SOURCE_REFRESH",
+  "source": "2314aea95795fbc1372a6f7b0b7b298b7cf124c3",
+  "time": "2026-10-11T20:55:12.612654+00:00",
+  "tree": "2987ed3a23e560fb40e13aadbcd6bd613ead3f25",
+  "upstream_disposition": "none"
+}

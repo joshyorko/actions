@@ -1,0 +1,75 @@
+{
+  "schema": 1,
+  "source": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "source_tree": "afe2679cc93bf27fa5021c7698ee7ad3ee21a1b9",
+  "source_path": "action_server/scripts/publish_verified_runtime.py",
+  "source_blob": "2fd4f8f77e58fbf7b4c173122f6496daa2aa9241",
+  "source_body_bytes": 18453,
+  "source_body_SHA256": "236ed21dcb50b3c3934f5e15b29e61d6a7b712ed65e7dcf7cd72785d4f8fa26c",
+  "artifact_prefix": "actions_runtime",
+  "distribution_version": "1.0.3",
+  "manifest_name": "actions-runtime-manifest.sha256",
+  "wheel_slots": [
+    {
+      "python": "cp312",
+      "abi": "cp312",
+      "platform_label": "manylinux",
+      "exact_platform_tag_set": [
+        "manylinux_2_17_x86_64",
+        "manylinux_2_5_x86_64",
+        "manylinux1_x86_64",
+        "manylinux2014_x86_64"
+      ]
+    },
+    {
+      "python": "cp312",
+      "abi": "cp312",
+      "platform_label": "macos",
+      "exact_platform_tag_set": [
+        "macosx_12_0_arm64"
+      ]
+    },
+    {
+      "python": "cp312",
+      "abi": "cp312",
+      "platform_label": "windows",
+      "exact_platform_tag_set": [
+        "win_amd64"
+      ]
+    },
+    {
+      "python": "cp313",
+      "abi": "cp313",
+      "platform_label": "manylinux",
+      "exact_platform_tag_set": [
+        "manylinux_2_17_x86_64",
+        "manylinux_2_5_x86_64",
+        "manylinux1_x86_64",
+        "manylinux2014_x86_64"
+      ]
+    },
+    {
+      "python": "cp313",
+      "abi": "cp313",
+      "platform_label": "macos",
+      "exact_platform_tag_set": [
+        "macosx_12_0_arm64"
+      ]
+    },
+    {
+      "python": "cp313",
+      "abi": "cp313",
+      "platform_label": "windows",
+      "exact_platform_tag_set": [
+        "win_amd64"
+      ]
+    }
+  ],
+  "wheel_count": 6,
+  "sdist_count": 1,
+  "outer_regular_members": 8,
+  "source_constants_derivation": "Immutable AST literal Python/platform generators; owning verifier body retained by SHA; no imported publishing code.",
+  "compressed_byte_ceiling": 100663296,
+  "expanded_byte_ceiling": 134217728,
+  "single_member_byte_ceiling": 67108864
+}

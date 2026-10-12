@@ -1,0 +1,25 @@
+{
+  "status": "ROOT_ONE_CURRENT_SOURCEFULL_OUTER_TERMINAL",
+  "returncode": 0,
+  "elapsed_seconds": 137.38308166199567,
+  "source": "e4ff080375a8422bb656e52d218f198521dda078",
+  "tree": "973ff38f49a17a896e4d90f829a72e2ea0ea15e8",
+  "attempts": 1,
+  "root_authorization_sha256": "8f7e8878dd9f5710060517eef618b04ee9979a2f574a00e8c09a6170750ec69d",
+  "independent_reviews": [
+    [
+      "/workspace/engineering/pr308-currente4ff-independent-SOURCE-LIGHT-review/OWNERFINAL-independent-current-e4ff-owned-cache-ordinary-source-LIGHT-review.json",
+      "66a2819f6231928140574e590d3a68146d29c1f965609caa14dd65f705b8a33d"
+    ],
+    [
+      "/workspace/engineering/pr308-cache-current-e3c-independent-SOURCEFULL-preexecution-review/OWNERFINAL-independent-named-V2-current-e4ff-SOURCEFULL-preexecution-review.json",
+      "5a1c97b37f8e0aca5ac60c3c4aee430a8c033b5e3dc3b168320ced58a89c8849"
+    ]
+  ],
+  "original_outer_output": {
+    "path": "/workspace/engineering/root-pr308-currente4ff-one-sourcefull-v2/original-outer900.private.log",
+    "bytes": 254,
+    "sha256": "f651a2ed74035e2a2d2e55e21ab714e256c3e7d048ec6f9e5f28fa0c6d3c0256"
+  },
+  "native_new_Rcc": "NOT_RUN"
+}

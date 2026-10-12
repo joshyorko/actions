@@ -1,0 +1,27 @@
+{
+  "FULL": "NOT_RUN",
+  "authority_native_merge": "HOLD",
+  "capture": "2026-10-11T22:28:11.648493+00:00",
+  "elapsed_seconds": 101.42027666600188,
+  "external_post": {
+    "bytes": 894,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-pr307-current00b1-reviewed-token-light-once3-outer/external-always-post-envelope.json",
+    "sha256": "870898d9745a32b2bfceed6cf671f69fa74897eb40a213c634c1f3d5221b417d"
+  },
+  "outer_returncode": 1,
+  "release": {
+    "bytes": 669,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr307-current00b1-token-light-once3-PREEXECUTION-NOTRUN/root-one-TOKEN-LIGHT-once3-release.json",
+    "sha256": "4e993f6a49ed86cb7a4a25c8634912060e0e33dcc1e99ef7791e4ee1cb895cc2"
+  },
+  "review": {
+    "bytes": 11534,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current00b1-source-and-once3-independent-PREEXEC-review/OWNERFINAL-independent-current00b1-one-leaf-format-SOURCE-and-once3-PREEXECUTION-GO.json",
+    "sha256": "bd355fed21393d32deef7a7e31bf8d047492e2d11c9a329ced392aa3bcadcfcb"
+  },
+  "source": "00b1bb9974b73f2da65e49c9048774c84df286ba",
+  "tree": "2663e86b2344f9e056c3259653cb905a6d195599"
+}

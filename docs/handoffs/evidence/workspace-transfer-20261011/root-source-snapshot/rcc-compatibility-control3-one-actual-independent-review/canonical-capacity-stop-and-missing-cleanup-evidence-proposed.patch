@@ -1,0 +1,19 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -2280,6 +2280,16 @@
+ The staged consumer fixture retains its worker's exact env-exec lease receipt
+ and actual typed retirement/cleanup snapshots in private evidence. Missing
+ snapshots stay null; testcase success does not prove lease release or reaping.
++
++A sampled capacity stop remains the primary failure even when an earlier
++selected testcase passed. Retain the helper exception's available command
++return code and cleanup disposition separately from that stop; an exception
++class alone does not report the final captured-descendant or reader states.
++Missing final JUnit, staged-action, lease or typed-cleanup evidence remains
++unverified. A fresh postfailure scan by owned path or argv is a separate
++point-in-time observation, not the original ownership snapshot or a reader
++join, and cannot turn the failed cleanup into a pass. Stop later compatibility
++versions after any primary, cleanup, evidence or sampled-budget failure.
+ 
+ Managed spec-v2 Action packages use the provisional RCC runtime adapter only
+ when `ACTIONS_RUNTIME_RCC_PROVIDER` or `ACTIONS_REAL_RCC_ARTIFACT_TEST`

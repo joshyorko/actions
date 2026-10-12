@@ -1,0 +1,63 @@
+{
+  "all_other3636_tracked_body_modes_preserved": true,
+  "captured": "2026-10-11T22:27:18.438972+00:00",
+  "copied_payload_bytes": 148185,
+  "copies": 16,
+  "decision": "GO_SCOPED_16_SAFE_EXACT_COPIES_AND_CURRENT_CANONICAL_APPLICATION_ONLY",
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "durable_learning": "Checked childsemantic result and gatewaystatus separate; callback invocation distinctfrom preauthorization record and successfulsignal.",
+    "evidence": [
+      {
+        "bytes": 30636,
+        "mode": "0o400",
+        "path": "/workspace/engineering/control-memory-engineering-continuation16-independent-copy-canonical-review/independent-continuation16-originals-parent3636-and-canonical642byte-proof.json",
+        "sha256": "84a13218cf0d7b4efbd1ad61ebceeb20a0719debad7355d6d54462afc1eb1f70"
+      },
+      {
+        "bytes": 394,
+        "mode": "0o600",
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-engineering-continuation-originals/15-proposed-canonical-gateway-versus-child-status-lesson.txt",
+        "sha256": "7e9713048af1c6736dadd6f45f71a99281199bc0a233e477dd26e8c5190498c2"
+      },
+      {
+        "bytes": 974,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-current8d49-memory-composition-independent-SOURCE-review/canonical-owned-stop-record-versus-attempt-precision-PROPOSED.json",
+        "sha256": "9810f2dbc5f22ac3dca60a8b5a2c169c6fe2b50cd2358cace485bb2e2cee9100"
+      }
+    ],
+    "exact_delta": "642B/10 serialized lines afteraccepted254878: adaptedgateway7e971 +callback-invocation9810. Earlier248548prefix/acceptedguide exact.",
+    "remaining_uncertainty": "Finalhandoff/latest actualappendix and engineering/currentnative/release gates unapproved.",
+    "stale_ambiguity_removed": "No generic gateway error normalization or recordexistence-as-attempt; source/control copies supply no gate/nativepromotion."
+  },
+  "guide": {
+    "bytes": 255520,
+    "mode": "0o600",
+    "path": "/workspace/engineering/campaign-checkpoint/docs/skills/repository-operations.md",
+    "sha256": "b97ca0fae6f2ad801570c1111251353f5a8e6e9808bf710d023661d05bc77401"
+  },
+  "index_unmodified": true,
+  "limits": [
+    "No stage/commit/push/finalhandoff approval; draft needs latest actual/source appendix and separate review.",
+    "Historical OWNER/PREEXEC/source/FAIL/HOLD scopes unchanged; original backend34P1F and compositionSOURCEHOLDd9f03 notpromoted.",
+    "No defaultbackend35 actual/native3/5/7276/headroom/calibration/profile/release GO."
+  ],
+  "manifest": {
+    "bytes": 10653,
+    "mode": "0o600",
+    "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-engineering-continuation-originals/exact-original-continuation-copy-manifest.json",
+    "sha256": "16a8bfb3a0fc6c58494d07b25ce5fede6b3dc3dd0c03f483652d35a294d7fcd6"
+  },
+  "original41_preserved": true,
+  "parent": "843cb16dc071fc764f11f1e0b3b07432dcd04a7d",
+  "proof_binding": {
+    "bytes": 30636,
+    "mode": "0o400",
+    "path": "/workspace/engineering/control-memory-engineering-continuation16-independent-copy-canonical-review/independent-continuation16-originals-parent3636-and-canonical642byte-proof.json",
+    "sha256": "84a13218cf0d7b4efbd1ad61ebceeb20a0719debad7355d6d54462afc1eb1f70"
+  },
+  "schema": 1,
+  "status": "INDEPENDENT_CONTINUATION16_COPY_CANONICAL_GO_NOT_FINAL_HANDOFF",
+  "upstream_disposition": "none byreviewer; copied44d32 retains separately authorizedexistingRCC125/118 updates"
+}

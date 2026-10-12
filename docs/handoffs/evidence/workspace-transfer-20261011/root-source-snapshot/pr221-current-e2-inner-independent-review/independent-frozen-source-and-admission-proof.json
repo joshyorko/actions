@@ -1,0 +1,30 @@
+{
+  "changed_functions": [
+    "zip_payload",
+    "inspect_wheel",
+    "inspect_sdist"
+  ],
+  "entry_observations": {
+    "optimized_interpreter_not_rejected": true,
+    "release_not_lstat_regular_nonsymlink_mode_checked": true
+  },
+  "evidence_verified": 17,
+  "exact_functions": [
+    "safe_path",
+    "norm_version",
+    "constraints",
+    "canonical_name",
+    "source_compare",
+    "oauth_categories",
+    "inspect_metadata"
+  ],
+  "fresh_output_absent": true,
+  "no_executor_import_or_execution": true,
+  "owner": {
+    "bytes": 13205,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-PREPARATION/OWNERFINAL-current-e2-private-inner-data-executor-PREEXECUTION.json",
+    "sha256": "015937fe81a04fcdeeb64769061ade8a88108007b3d82f95d96bb1cb39a0326b"
+  },
+  "release_absent": true
+}

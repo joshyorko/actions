@@ -1,0 +1,302 @@
+{
+  "schema": "capacity-batch24-owner-preexecution-proposal-v1",
+  "decision": "GO_EXACT_SINGLE_COMPLETED_NAMESPACE_SCRIPT_PREPARATION_ONLY_ROOT_ONE_RELEASE_REQUIRED",
+  "script": {
+    "path": "/tmp/actions-capacity-recovery-batch24.py",
+    "bytes": 5244,
+    "sha256": "d3af4bfa4573925912a8d49aa9c26a893ab40fe4928083569c19e5bea4211db5"
+  },
+  "algorithm_parent": {
+    "path": "/tmp/actions-capacity-recovery-batch19.py",
+    "bytes": 5244,
+    "sha256": "48fd7e4c79e55b80ceda0b63c1d1da87feeb368cefee265d5c12bad6ad940840"
+  },
+  "all16_nonconfiguration_AST_exact_parent": true,
+  "only_configuration_changes": [
+    "DEST",
+    "STAGE",
+    "NAMES"
+  ],
+  "names_exact_allowlist": [
+    "646e9b21fab67902"
+  ],
+  "destination": "/dev/shm/actions-completed-scratch-recovery-batch24",
+  "unused_new_stage": "/tmp/actions-completed-scratch-recovery-batch24-stage",
+  "destination_stage_absent": true,
+  "fresh_completed_marker_True": true,
+  "candidate_metadata": {
+    "member_types": {
+      "file": 12191,
+      "directory": 3412,
+      "symlink": 481,
+      "fifo": 8
+    },
+    "logical_regular_file_bytes": 626944487,
+    "allocated_unique_blocks_observation": 673456128
+  },
+  "fresh_accessible_handle_observation": {
+    "processes": 275,
+    "links_read": 31,
+    "unobserved_permission_transient_FDlists": 543,
+    "candidate_live_cwdFD_observed": 0
+  },
+  "source_origin": "UNREPORTED",
+  "raw_original_full_exact_namespace_path_occurrences": 0,
+  "source_origin_limit": "No timestamp/newest/completion-marker inference; even an exact log path would not itself prove readiness/native cause.",
+  "original_ROOT308_SOURCEFULL": {
+    "path": "/workspace/engineering/root-rcc308-one-current-b614-source-full/OWNERFINAL-root-current-b614-configured-SOURCEFULL.json",
+    "bytes": 6277,
+    "sha256": "eb73d4a34acaf77266f6aff75f758fa674e6b48aff968a31bbeca85148319bf8"
+  },
+  "ROOT308_current_source": {
+    "clean": true,
+    "complete_typed_inputs": 1421,
+    "head": "b614864ba9da55c13662894b6ef3c8515d9fdb25",
+    "tree": "6fa4f5c1e9837a0d893868255575b355b3977fae"
+  },
+  "ROOT308_source1421_BODY_Git_execmodes_and71_LIGHT_refs_exact_current": true,
+  "ROOT308_prepared30_own5cfg_exact_and_beforeafter_origin_observations_retained": true,
+  "ROOT308_full_prepost_native1192_helpers0444_original_browser_Node_V5_hashes_retained": true,
+  "original_full_proof_bindings": [
+    {
+      "path": "/workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/before-full-source-prepost.json",
+      "bytes": 1661,
+      "sha256": "42ecde2002ccbb7afb8ea2f790efd6a082f4420525243a47b6d3b48d26ccc446"
+    },
+    {
+      "path": "/workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/after-full-source-prepost.json",
+      "bytes": 1659,
+      "sha256": "44be1525ef81a2ece7a6aae8f12d8d461c9618f48783ae3361f673fe9399ba4a"
+    },
+    {
+      "path": "/workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/before-full-original-native-helper-browser-V5-readback.json",
+      "bytes": 4720,
+      "sha256": "88b95c803cb08c84aede15794eef09521350d6fb617ac2e06081eebb853f4985"
+    },
+    {
+      "path": "/workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/after-full-original-native-helper-browser-V5-readback.json",
+      "bytes": 4720,
+      "sha256": "88b95c803cb08c84aede15794eef09521350d6fb617ac2e06081eebb853f4985"
+    }
+  ],
+  "original_full_immediate_bindings": [
+    {
+      "path": "/workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/SOURCEFULL-one-attempt-original.log",
+      "bytes": 356425,
+      "sha256": "78535ee1ea9b2115efb3ed5d6fd380a7f8f5b697a5d9ce23d7d8963bedd81974"
+    },
+    {
+      "path": "/workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/SOURCEFULL-one-attempt-terminal.json",
+      "bytes": 1894,
+      "sha256": "26fff37d2493e607fe2dfde46454c1a94bc8a79eb0488176fbe17f36f99aab2b"
+    },
+    {
+      "path": "/workspace/engineering/root-rcc308-one-current-b614-source-full/root-parent-terminal.json",
+      "bytes": 662,
+      "sha256": "213652beb4902bd9e29d72ec6608b76be2a7f9f28e53d4b98ae26a2b1e20c1e4"
+    },
+    {
+      "path": "/workspace/engineering/root-rcc308-one-current-b614-source-full/root-one-exact-full-release.json",
+      "bytes": 4345,
+      "sha256": "eeed11fa0a33a6fe849c58a257a21441e00865ffa5253e3036162e7120653cd0"
+    },
+    {
+      "path": "/workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/SOURCEFULL-execution-attempt-consumed.json",
+      "bytes": 250,
+      "sha256": "6a5efe7ee40bd4c11514d7e7e78a3c54ca02d52e6f39e0708bf9eab8c96d4015"
+    },
+    {
+      "path": "/workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/OWNERFINAL-reviewed-inputs-current-b614-SOURCEFULL-preexecution-proposal-v2.json",
+      "bytes": 7660,
+      "sha256": "084faca6148648888627bfd7ffd0045d5b518b20ab6f77e5b8882adb404be32e"
+    },
+    {
+      "path": "/workspace/engineering/pr308-compatibility-SOURCEFULL-independent-preexecution-review/OWNERFINAL-independent-current-b614-SOURCEFULL-preexecution-review.json",
+      "bytes": 10256,
+      "sha256": "17accc56f011bd853c579bad2d93a514f9200a2c25984b3038686b5ceeace7fb"
+    },
+    {
+      "path": "/workspace/engineering/pr308-rcc-compatibility-source/OWNERFINAL-current-a0d-approved-RCC-compatibility-SOURCE-LIGHT.json",
+      "bytes": 25279,
+      "sha256": "336cfca277d8e3b08035af8057e77af580fc7a5cbeb54226ae2140abedb79bba"
+    },
+    {
+      "path": "/workspace/engineering/pr308-approved-compatibility-independent-source-light-review/OWNERFINAL-independent-current-a0d-approved-RCC-compatibility-SOURCE-LIGHT-review.json",
+      "bytes": 11528,
+      "sha256": "ea79c4b762d3cdcd5b9d54d2ab475b250596e55e78c6a3ead0574b1845f4ee92"
+    },
+    {
+      "path": "/workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/installed-own-worker-env-and-unchanged-task-source-proof.json",
+      "bytes": 4185,
+      "sha256": "ba919b6939211dd84b0ce554761891a65ab2acc592037ec7d3fc0ba4bd3fed3d"
+    },
+    {
+      "path": "/workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/launch-one-root-reviewed-source-full.py",
+      "bytes": 3831,
+      "sha256": "939e347375912065aa888e9fcbc93fb481f521090da05108ea41f5f290b267a9"
+    },
+    {
+      "path": "/workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/run-one-configured-source-full.py",
+      "bytes": 1759,
+      "sha256": "b53e3a68665c4b6089058f822484fd61f57f9789ee9fdd929500bec6e3027393"
+    },
+    {
+      "path": "/workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/sourcefull-frozen-inputs.json",
+      "bytes": 2057,
+      "sha256": "9c1264413c6e7a2ef586b2f30262545b46fdd41f97a180fd5c7fcc1f48834e03"
+    },
+    {
+      "path": "/workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/verify-current-full-source-prepost.py",
+      "bytes": 5092,
+      "sha256": "ab23faf6717906e50685529d6926ba40b529a83df61943e4311f5b4050a55e29"
+    },
+    {
+      "path": "/workspace/engineering/pr308-rcc-compatibility-source/OWNERFINAL-current-a0d-approved-RCC-compatibility-SOURCE-LIGHT.json",
+      "bytes": 25279,
+      "sha256": "336cfca277d8e3b08035af8057e77af580fc7a5cbeb54226ae2140abedb79bba"
+    },
+    {
+      "path": "/workspace/engineering/pr308-approved-compatibility-independent-source-light-review/OWNERFINAL-independent-current-a0d-approved-RCC-compatibility-SOURCE-LIGHT-review.json",
+      "bytes": 11528,
+      "sha256": "ea79c4b762d3cdcd5b9d54d2ab475b250596e55e78c6a3ead0574b1845f4ee92"
+    },
+    {
+      "path": "/workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/launch-one-root-reviewed-source-full-v2.py",
+      "bytes": 3874,
+      "sha256": "dd29d5a09d9477f48c4f30fdfc79201f2746d2bed20f23920191221a0a9ad83a"
+    },
+    {
+      "path": "/workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/private-binary-log-exception-preservation-construction-RED-GREEN.json",
+      "bytes": 795,
+      "sha256": "f24dfb2101bc664996b172ffb073b35bbeefda965d17e0e5980f6f45aac33794"
+    },
+    {
+      "path": "/workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/OWNERFINAL-reviewed-inputs-current-b614-SOURCEFULL-preexecution-proposal.json",
+      "bytes": 6006,
+      "sha256": "ef74b758d3e51155cc5337fc10d411d7d238ae28f85b8a689f0770fb5903540b"
+    }
+  ],
+  "ROOT_source_full_status_scope": "Original ROOT source-full PASS reported, independent full-review disposition pending/separately owned. This binds source/log preservation only; no independent full-suite, actual or native qualification from this preparation.",
+  "prior_retention": {
+    "prior48archives22indices_before23": "Frozen prior40/19+ROOT20/21+ROOT22 chain retained; no giant re-stream or new past handle claims",
+    "ROOT22_23_originals": [
+      {
+        "owner": {
+          "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch22.json",
+          "bytes": 2690,
+          "sha256": "e8fd9a9370a10e07d739a9a7b2685e4cfac84699d8e11903ef5b4a7bfdc626b8"
+        },
+        "private_index": {
+          "path": "/dev/shm/actions-completed-scratch-recovery-batch22/private-complete-inventory-and-recovery.json",
+          "bytes": 3231675,
+          "sha256": "5696d89f29d0bcaac9098d56d25ce9174614203b748af6c4e561b3105b29ec81"
+        },
+        "ROOT_recorded_archives": 5,
+        "acceptance_scope": "Retained original ROOT counts and pending-at-capture status; this metadata proposal is not independent actual stream validation"
+      },
+      {
+        "owner": {
+          "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch23.json",
+          "bytes": 905,
+          "sha256": "87cbc0fd1ccb7ae1ac562c52d53c035b5b924bf97b6758c3b5626bc3e9ecb91f"
+        },
+        "private_index": {
+          "path": "/dev/shm/actions-completed-scratch-recovery-batch23/private-complete-inventory-and-recovery.json",
+          "bytes": 273753,
+          "sha256": "5a5c0000de26012048b4c7a97961fc4539792571d75262a3b0756b7aa6c89286"
+        },
+        "ROOT_recorded_archives": 1,
+        "acceptance_scope": "Retained original ROOT counts and pending-at-capture status; this metadata proposal is not independent actual stream validation"
+      }
+    ],
+    "current_ROOT_recorded_total_before24": "49archives23indices; independent actual scope remains attributable to designated reviews, not this preparation"
+  },
+  "prior_frozen_preparation_chain": {
+    "path": "/workspace/engineering/capacity-recovery-batch23-proposal/OWNERFINAL-batch23-exact-one-completed-preexecution-proposal.json",
+    "bytes": 11818,
+    "sha256": "aa811248656870b96ee16d19a0dfcad79d92d7771e72c2178147fc8f271e2840"
+  },
+  "failed563d": "EXISTS only and excluded; no deletion or historical content baseline claim",
+  "workspace_available_bytes_observation": 643567616,
+  "execution_prerequisites": [
+    "ROOT distinct ONE recovery release; full source terminal available",
+    "Exact script fresh marker/no observed accessible handles before full inventory and again after successful archive resolution/reinventory before removal",
+    "Complete private0600gzip/index; named expanded namespace only after every recorded member SHA/size/modeUIDGID/link and full reinventory match",
+    "No other namespace/cache/native/helper/source/receipt touched"
+  ],
+  "cold_actual_authority": "HOLD until fresh>=1.2GiB1288490189B, slot clear and separate current actual proposal/review/root release; no capacity guarantee",
+  "no_archival_removal_source_control_test_gateway_native_download_execution_by_preparer": true,
+  "limits": [
+    "Complete candidate before-removal content inventory deferred to root actual script",
+    "Observed handle scan is not universal quiescence; permissions/transients/maps/external actors remain unobserved",
+    "No ACL/xattr/inode/rootmetadata/exact TAR ns-time or source-origin-by-mtime claim",
+    "Preserved ROOT pass/log bindings do not admit new RCC binaries or private/provider/native functional behavior"
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md exact existing7d070 preservation paragraph reused unchanged",
+    "Exact_delta_or_reuse": {
+      "path": "/workspace/engineering/capacity-recovery-independent-review/canonical-completed-scratch-preservation-proposed.patch",
+      "bytes": 1068,
+      "sha256": "7d07065b5bb7742698919997c8c6621cc20d00494741eb5365251ffb09f2d208"
+    },
+    "Durable_learning_captured": "Complete archive/index evidence and rechecks precede only named completed scratch removal, while producer provenance and actual cold-gate authority remain separate.",
+    "Evidence": [
+      {
+        "path": "/tmp/actions-capacity-recovery-batch24.py",
+        "bytes": 5244,
+        "sha256": "d3af4bfa4573925912a8d49aa9c26a893ab40fe4928083569c19e5bea4211db5"
+      },
+      {
+        "path": "/tmp/actions-capacity-recovery-batch19.py",
+        "bytes": 5244,
+        "sha256": "48fd7e4c79e55b80ceda0b63c1d1da87feeb368cefee265d5c12bad6ad940840"
+      },
+      {
+        "path": "/workspace/engineering/root-rcc308-one-current-b614-source-full/OWNERFINAL-root-current-b614-configured-SOURCEFULL.json",
+        "bytes": 6277,
+        "sha256": "eb73d4a34acaf77266f6aff75f758fa674e6b48aff968a31bbeca85148319bf8"
+      },
+      {
+        "path": "/workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/before-full-source-prepost.json",
+        "bytes": 1661,
+        "sha256": "42ecde2002ccbb7afb8ea2f790efd6a082f4420525243a47b6d3b48d26ccc446"
+      },
+      {
+        "path": "/workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/after-full-source-prepost.json",
+        "bytes": 1659,
+        "sha256": "44be1525ef81a2ece7a6aae8f12d8d461c9618f48783ae3361f673fe9399ba4a"
+      },
+      {
+        "path": "/workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/before-full-original-native-helper-browser-V5-readback.json",
+        "bytes": 4720,
+        "sha256": "88b95c803cb08c84aede15794eef09521350d6fb617ac2e06081eebb853f4985"
+      },
+      {
+        "path": "/workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/after-full-original-native-helper-browser-V5-readback.json",
+        "bytes": 4720,
+        "sha256": "88b95c803cb08c84aede15794eef09521350d6fb617ac2e06081eebb853f4985"
+      }
+    ],
+    "Stale_or_ambiguous_guidance_removed": "Do not label the newest completed scratch as source-full producer from mtime or carry a source suite pass into binary/actual acceptance.",
+    "Remaining_uncertainty": "Recovery NOT_RUN; actual review by separate reader and fresh cold capacity/slot required; namespace source origin remains bounded/unreported."
+  },
+  "Upstream_disposition": "none",
+  "constructor": {
+    "path": "/workspace/engineering/capacity-recovery-batch24-proposal/finalize-readonly-proposal.py",
+    "bytes": 11305,
+    "sha256": "923bac3f16aacbe7b2d4ebf7e2a6a868ac01432323eede4fd99fed4fa8591b0d"
+  },
+  "candidate_metadata_constructor": {
+    "path": "/workspace/engineering/capacity-recovery-batch24-proposal/FROZEN-candidate-and-script-metadata-only.json",
+    "bytes": 2332,
+    "sha256": "e5f5749e9c4006a38318e843c1d002b45ce3797c14bd0ac39f29901431cb414a"
+  },
+  "retained_unannounced_scope_wording_predecessor": {
+    "binding": {
+      "path": "/workspace/engineering/capacity-recovery-batch24-proposal/OWNERFINAL-batch24-exact-one-completed-preexecution-proposal.json",
+      "bytes": 15180,
+      "sha256": "5192250425d110f736258f8b8ce17ca22f8ab5053b7cbba484ec07df2fff9f1e"
+    },
+    "disposition": "Unannounced metadata draft only; phrase independently reviewed elsewhere was ambiguous and removed before announcement. ROOT ownereb73 explicitly remains independent-review-pending; all original hash/source/proposal measurements unchanged."
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "status": "ORIGINAL_SINGLE_CONNECTOR_AND_TRANSFER_FAILURE_RETAINED_COMPLETE_ZIP_BYTES_MATCH_ONLY",
+  "source": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "artifact_id": 11708952448,
+  "root_release": {
+    "path": "/workspace/engineering/root-current-e2-one-aggregate-adoption/ROOT-one-original-e2-aggregate-release.json",
+    "bytes": 28432,
+    "sha256": "6a06d0c32e1aebd5be8efc35b60c10e8c57690e961cb4015fc80c1ebd4ede640",
+    "mode": "0o400"
+  },
+  "orchestration_adoption": {
+    "path": "/workspace/engineering/root-current-e2-one-aggregate-adoption/ROOT-original-and-named-orchestration-adoption.json",
+    "bytes": 969,
+    "sha256": "52c062cfbd722631033909ab380644a66d988b2a4b7e82debbff3f5d7d76f487",
+    "mode": "0o400"
+  },
+  "original_owned_files": [
+    {
+      "path": "/tmp/actions-pr221-e2-aggregate-11708952448-one-owned/actions-runtime-dist-11708952448-original.zip",
+      "bytes": 80745614,
+      "sha256": "e16a414fefc1778ba49d09c466fd9d8054cfbf952e7766ee5cc6558f871f4def",
+      "mode": "0o600"
+    },
+    {
+      "path": "/tmp/actions-pr221-e2-aggregate-11708952448-one-owned/original-connector-tool-result.generated.json",
+      "bytes": 1964,
+      "sha256": "ff2efabfac9753a89f1f57ef52b062c53ca30d89cae9240a60f54b1c5f554035",
+      "mode": "0o600"
+    },
+    {
+      "path": "/tmp/actions-pr221-e2-aggregate-11708952448-one-owned/original-one-attempt-intent.json",
+      "bytes": 205,
+      "sha256": "73fee1c3604f087e46b2bb5deb23de12acb31d06834d1b166769d44a5f0edc56",
+      "mode": "0o600"
+    },
+    {
+      "path": "/tmp/actions-pr221-e2-aggregate-11708952448-one-owned/original-one-transfer-intent.json",
+      "bytes": 52,
+      "sha256": "8a90cd4c7c4b5c53fc50ca6a7a57d99150dd016d31b43dc44ba1b0ac1902e409",
+      "mode": "0o600"
+    },
+    {
+      "path": "/tmp/actions-pr221-e2-aggregate-11708952448-one-owned/original-transfer-exception.private.txt",
+      "bytes": 487,
+      "sha256": "5e52ccea6a077d49a2303c6f52a87724ee9afdf9bb92f0785cc27d521d794e91",
+      "mode": "0o600"
+    },
+    {
+      "path": "/tmp/actions-pr221-e2-aggregate-11708952448-one-owned/safe-transfer-failure.json",
+      "bytes": 195,
+      "sha256": "620c69ae3acdf6f23305df3edfd988180a2008db23b3bcb955b9bd75490444a0",
+      "mode": "0o600"
+    }
+  ],
+  "failure": {
+    "class": "OSError",
+    "errno": 9,
+    "stage": "sock.settimeout before next response.read after complete expected ZIP body written",
+    "original_socket_terminal": "UNKNOWN",
+    "outer_inspection": "NOT_RUN",
+    "explicit_fsync_from_module": "NOT_REACHED",
+    "retry": "FORBIDDEN_NO_SECOND_CONNECTOR_OR_TRANSFER"
+  },
+  "qualification": "COMPLETE_EXPECTED_ZIP_BYTES_ONLY_NOT_OUTER_OR_INNER_ADMISSION",
+  "next": "Distinct finite existing-file outer inspection+durability admission requires separate ROOTrelease; originalfailure neverrelabeled",
+  "upstream_disposition": "none; local executor socket EOF handling defect"
+}

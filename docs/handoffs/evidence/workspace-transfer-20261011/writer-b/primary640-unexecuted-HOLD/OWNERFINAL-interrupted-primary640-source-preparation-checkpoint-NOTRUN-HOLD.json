@@ -1,0 +1,191 @@
+{
+  "ROOT_authorization": "NONE_NEW_EXECUTION",
+  "capture": "2026-10-12T00:22:19.199094+00:00",
+  "current_product_branch_mutations": "NONE",
+  "documentation": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "delta": {
+      "bytes": 517,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/canonical-primary-only-deadline-external-authority-and-owned-cleanup-proposed.txt",
+      "sha256": "e5305ce13a50adb9b95181f896be45c9b9cd68704a4edb1352d76057901446a7"
+    },
+    "evidence": "Original305 independent HOLD33eb and original60acf helper645 geometry; drafted GNU/exclusive external parent and snapshot observations are SOURCE only; native contract9731 separates inner cleanup.",
+    "remaining_uncertainty": "No control execution or acceptance of draft; no native or current source-light pass",
+    "stale_ambiguity": "Metadata640 not enforcement; ECHILD/regularfile capture not inner reader or lease pass"
+  },
+  "files": [
+    {
+      "bytes": 50238,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/FROZEN-305-primary640-inputs-NOTRUN.json",
+      "sha256": "93ceb104e8a93fbdd872d1fa42523fe6ba3456ba6936d67be6b626fc3fb3876e"
+    },
+    {
+      "bytes": 62198,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/FROZEN-313-primary640-inputs-NOTRUN.json",
+      "sha256": "756757a5c35b180f065bf91c67f41a9582ba9e8699d333f11ea14508eb0ad8cc"
+    },
+    {
+      "bytes": 517,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/canonical-primary-only-deadline-external-authority-and-owned-cleanup-proposed.txt",
+      "sha256": "e5305ce13a50adb9b95181f896be45c9b9cd68704a4edb1352d76057901446a7"
+    },
+    {
+      "bytes": 10076,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/construct_source_only_primary640_profiles.py",
+      "sha256": "c467b4a629d88bc770fa48e2e609d24f63abe4f6d996c8d2810244f3fef37351"
+    },
+    {
+      "bytes": 6744,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/current_305_primary_only_phase_child_NOTRUN.py",
+      "sha256": "1138f7722843382200689047c16215f3c1cb21e17c1d91d099359facbae62358"
+    },
+    {
+      "bytes": 4329,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/current_305_read_only_source_guard_NOTRUN.py",
+      "sha256": "564a6716401b88c8c98398ebb979d7ae1699b319af8c8844116fa9a42f603fde"
+    },
+    {
+      "bytes": 6729,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/current_313_primary_only_phase_child_NOTRUN.py",
+      "sha256": "c51cabace4ceebc4e3733f8d7bb1aa4276355dd9b45ee7fd726ac1d8dda6eb4c"
+    },
+    {
+      "bytes": 4595,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/current_313_read_only_source_guard_NOTRUN.py",
+      "sha256": "9c57d50066d1bdbf1d0b1c68d8b8b7cae8b87c6944b9ece0baf0981920193d8f"
+    },
+    {
+      "bytes": 5682,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/exact-source-profile-and-original-phase-preservation-proof-NOTRUN.json",
+      "sha256": "6ba67e1ff2570fc2c6e218ad76afec8f5152f1da27b69f9ec95dce8c3507c210"
+    },
+    {
+      "bytes": 4963,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/original_supervisor_observation_entry_NOTRUN.py",
+      "sha256": "3e7d0b5caea59fa317dfee1eeecdd224ce7b932db7b07dcc539d58d259f7e1a4"
+    },
+    {
+      "bytes": 11922,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/owned_primary_boundary_NOTRUN.py",
+      "sha256": "7d0b24e76d4e632719450ffea641ce858cc891edabddcbbed9c1c4bcfa5942bc"
+    },
+    {
+      "bytes": 11507,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/source_light_external_parent_NOTRUN.py",
+      "sha256": "61486e29a9ec9d61c12d718557e34fc110bbf592e148bd7601309f5929ac27f3"
+    },
+    {
+      "bytes": 1300,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/static-unexecuted-draft-census-and-gating-findings-HOLD.json",
+      "sha256": "a0df3d897e35d2a7571efaf7b3737310895ed47640f4ee38dce911df39a84f78"
+    }
+  ],
+  "findings": {
+    "bytes": 1300,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/static-unexecuted-draft-census-and-gating-findings-HOLD.json",
+    "sha256": "a0df3d897e35d2a7571efaf7b3737310895ed47640f4ee38dce911df39a84f78"
+  },
+  "prior_SOURCE_HOLD_and_originals": "Preserved byte-exact; verified both config binding sets",
+  "profiles": [
+    {
+      "bindings_verified": 127,
+      "complete_currentFS_NATIVE_NOT_RECAPTURED": "Only frozen references rehashed here; no whole-gate or native qualification",
+      "config": {
+        "bytes": 50238,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/FROZEN-305-primary640-inputs-NOTRUN.json",
+        "sha256": "93ceb104e8a93fbdd872d1fa42523fe6ba3456ba6936d67be6b626fc3fb3876e"
+      },
+      "profile": "305",
+      "source": "f75dcae52fcd78c5c382d3903b012e5b049ca48b",
+      "source_clean": true,
+      "source_leaf_count_declared_from_retained_inventory": 1441,
+      "tree": "851834ae6cc87f42abfcf3c963542191e2815599"
+    },
+    {
+      "bindings_verified": 158,
+      "complete_currentFS_NATIVE_NOT_RECAPTURED": "Only frozen references rehashed here; no whole-gate or native qualification",
+      "config": {
+        "bytes": 62198,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/FROZEN-313-primary640-inputs-NOTRUN.json",
+        "sha256": "756757a5c35b180f065bf91c67f41a9582ba9e8699d333f11ea14508eb0ad8cc"
+      },
+      "profile": "313",
+      "source": "2d86c5cf92d3acb274a8ceb5d57bfb8b12c779b6",
+      "source_clean": true,
+      "source_leaf_count_declared_from_retained_inventory": 1441,
+      "tree": "653a9e73e4d27641ec86de94b90f35d41e0f24f8"
+    }
+  ],
+  "python_AST_parse_only": [
+    {
+      "bytes": 10076,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/construct_source_only_primary640_profiles.py",
+      "sha256": "c467b4a629d88bc770fa48e2e609d24f63abe4f6d996c8d2810244f3fef37351"
+    },
+    {
+      "bytes": 6744,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/current_305_primary_only_phase_child_NOTRUN.py",
+      "sha256": "1138f7722843382200689047c16215f3c1cb21e17c1d91d099359facbae62358"
+    },
+    {
+      "bytes": 4329,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/current_305_read_only_source_guard_NOTRUN.py",
+      "sha256": "564a6716401b88c8c98398ebb979d7ae1699b319af8c8844116fa9a42f603fde"
+    },
+    {
+      "bytes": 6729,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/current_313_primary_only_phase_child_NOTRUN.py",
+      "sha256": "c51cabace4ceebc4e3733f8d7bb1aa4276355dd9b45ee7fd726ac1d8dda6eb4c"
+    },
+    {
+      "bytes": 4595,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/current_313_read_only_source_guard_NOTRUN.py",
+      "sha256": "9c57d50066d1bdbf1d0b1c68d8b8b7cae8b87c6944b9ece0baf0981920193d8f"
+    },
+    {
+      "bytes": 4963,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/original_supervisor_observation_entry_NOTRUN.py",
+      "sha256": "3e7d0b5caea59fa317dfee1eeecdd224ce7b932db7b07dcc539d58d259f7e1a4"
+    },
+    {
+      "bytes": 11922,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/owned_primary_boundary_NOTRUN.py",
+      "sha256": "7d0b24e76d4e632719450ffea641ce858cc891edabddcbbed9c1c4bcfa5942bc"
+    },
+    {
+      "bytes": 11507,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/source_light_external_parent_NOTRUN.py",
+      "sha256": "61486e29a9ec9d61c12d718557e34fc110bbf592e148bd7601309f5929ac27f3"
+    }
+  ],
+  "remaining": "Named PID-reuse correction, actual-function control source+independent review/ROOT release and original ACTUAL census, complete inner native cleanup/source qualification and floors remain required. Work checkpointed for ROOT OAuth priority, no code adoption.",
+  "schema": 1,
+  "status": "OWNER_FINAL_PRIVATE_PRIMARY640_SOURCE_PREPARATION_CHECKPOINT_HOLD_NOT_EXECUTABLE",
+  "tests_imports_helpers_gates_signals_native": "NOT_RUN",
+  "upstream_disposition": "none"
+}

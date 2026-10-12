@@ -1,0 +1,362 @@
+{
+  "actual_RCC_native_gateway_provider_network_source_or_branch_execution": "NOT_RUN",
+  "actual_control_test_execution": "NOT_RUN",
+  "application_dependencies": [
+    "baseline3control then5 then7276 actual owner+independent acceptance",
+    "independent source-packet GO",
+    "explicit root sourcewriter lease",
+    "original persistent patch applied with exact unchanged default specialization",
+    "current integration ordinary union review",
+    "service-free meaningful RED/GREEN and scoped/static/generated gates",
+    "separate serialized configured sourceFULL and capacity review",
+    "new runner/schema distinct review and one ROOT actual release per admitted version"
+  ],
+  "application_paths": [
+    "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+    "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "barrier_scope": {
+    "candidate_environment": "real prepared/verified before the old action admission barrier",
+    "last_good": "real SyntaxError candidate failed before publication, old DB/catalog/pool/source preserved then repaired source admitted separately",
+    "new_commit": "actual import transaction plus assembled _ActionRoutes and real reload publish callback, generation token/new catalog/new result",
+    "not_claimed": "old action during cold environment creation; watcher/native CLI/HTTP/browser timing",
+    "old_admission": "real action writes owned marker and original PID/source; parent pins PID/create-time/ancestry",
+    "release": "only after new action success; old result must remain old generation and old snapshot hash; actual typed retirement retained",
+    "timing": "new fixture one30s barrier/50ms sampling within original600s command; no old deadline changes"
+  },
+  "baseline": {
+    "clean": true,
+    "head": "b614864ba9da55c13662894b6ef3c8515d9fdb25",
+    "scope": "frozen b614/a0d source; latest integrated e3c is a distinct future ordinary-refresh decision, never silently substituted",
+    "tree": "6fa4f5c1e9837a0d893868255575b355b3977fae"
+  },
+  "bindings": [
+    {
+      "bytes": 10867,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-managed-reload-drain-source-packet/managed-source-reload-generation-drain-fixture-packet.md",
+      "sha256": "70eeb4cf5baa186f7fc2c3fab1f375c216d412977995b8963a63d97b87bd22f3"
+    },
+    {
+      "bytes": 1021,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-managed-reload-drain-source-packet/canonical-managed-reload-and-drain-evidence-proposed.patch",
+      "sha256": "8354390b30343aa9a57a976aa5244e75068f8c59fc604f074af9e18110743856"
+    },
+    {
+      "bytes": 24225,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-persistent-fixture-private-source/OWNERFINAL-private-current-b614-persistent-fixture-two-path-source-patch.json",
+      "sha256": "adeb06df026599e9a8d6e71976f6130de71ef1f3851a8a7c0b895d8b7e6bb419"
+    },
+    {
+      "bytes": 28752,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-persistent-fixture-independent-review/OWNERFINAL-independent-private-b614-persistent-two-path-patch-review.json",
+      "sha256": "604911a30177ab5e30e097ccaddf7a7451c4585001b9df8c0b815be1f684fed6"
+    },
+    {
+      "bytes": 25279,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-rcc-compatibility-source/OWNERFINAL-current-a0d-approved-RCC-compatibility-SOURCE-LIGHT.json",
+      "sha256": "336cfca277d8e3b08035af8057e77af580fc7a5cbeb54226ae2140abedb79bba"
+    },
+    {
+      "bytes": 13279,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-compatibility-current-sourcefull-independent-actual-review/OWNERFINAL-independent-current-b614-configured-SOURCEFULL-review.json",
+      "sha256": "6087f9a712c1707b0f335090ebd97ae98c0f61945ad98e5bba06d10005e9846a"
+    },
+    {
+      "bytes": 82646,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/OWNERFINAL-current-b614-runnable-three-version-RCC-compatibility-proposal-v2.json",
+      "sha256": "50bb3864ab95e6cfca705a8a0f6112e87b3fc56b0e513c19e12d856c3ea3a095"
+    },
+    {
+      "bytes": 28406,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+      "sha256": "f697aaf73c4e89bddd21b2c48aa92fe22e315f83614525996d51ff2271fe2436"
+    },
+    {
+      "bytes": 80545,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
+      "sha256": "3f70440fdb10416d269b7f917406e8a64cbdf59bf7a787f077cda71ca436e6f0"
+    },
+    {
+      "bytes": 36059,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "sha256": "259f7d7265cddc3a6f664676fbd13b478d4534a7f6c8a6b1670a8d19393cf3fb"
+    },
+    {
+      "bytes": 58538,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_actions_process_pool.py",
+      "sha256": "3552bf39d0dc93f94ed3a4ab056de870ae460ed709f36d3d3a37dc043c349da8"
+    },
+    {
+      "bytes": 28217,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_actions_import.py",
+      "sha256": "57ad235e30fdd84c763f84efd7ccdd8514d620d5b5cfff05ac1051f60ceefad3"
+    },
+    {
+      "bytes": 24361,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_action_package_handler.py",
+      "sha256": "a623ec0d2a7862bc5f27599fda853cb039ce68459b18c95e01c7a53adcdedb64"
+    },
+    {
+      "bytes": 17219,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_api_action_routes.py",
+      "sha256": "9f8135a8bdb238bb1c83e91a1612d0814cec7309d7b32075157db719194540e3"
+    },
+    {
+      "bytes": 34736,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_server.py",
+      "sha256": "3be0ce254252211270fecf2906da2cec5d438b3203fefd68ad3d0731cf4d42bb"
+    },
+    {
+      "bytes": 81503,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/scripts/verify_dakota_rcc_acceptance.py",
+      "sha256": "8f21502f64fed9ee5d26eb6a080a625ee575954e1f659c1f51ee1ea31bda57c7"
+    },
+    {
+      "bytes": 256123,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/docs/skills/repository-operations.md",
+      "sha256": "7735777067553f6e4b58570dc179a4e8915614fc4743dd023e8b11a30557bc31"
+    },
+    {
+      "bytes": 4720,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-rcc-compatibility-source/after-source-retained-native-helper-browser-and-V5-proof.json",
+      "sha256": "88b95c803cb08c84aede15794eef09521350d6fb617ac2e06081eebb853f4985"
+    },
+    {
+      "bytes": 28665,
+      "mode": "0o444",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-proposal-v5.json",
+      "sha256": "f915a178adfa23833fe7a2e047e9c0b98f995fdd4b95730e1bb522e5f48fe7ee"
+    },
+    {
+      "bytes": 255076,
+      "mode": "0o644",
+      "path": "/workspace/engineering/pr310-runner-qualification-owned/output/native-artifact-tree-inventory.json",
+      "sha256": "154aeb29249db79a32392124a3b71a8ac325c0bdaeda1bbc2e7445e96ffc7fdf"
+    },
+    {
+      "bytes": 3162,
+      "mode": "0o644",
+      "path": "/workspace/engineering/pr310-runner-qualification-owned/output/native-artifact-manifest.json",
+      "sha256": "70405e6e831066a37631c7a63045010fcbc8b3c928a6a22ff5130467c3ad9d44"
+    },
+    {
+      "bytes": 73556451,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr310/action_server/go-wrapper/assets/assets.zip",
+      "sha256": "c85862c9b4dba354953c02cbb80e520052f07cb6d506600bf4a07d2f755135e0"
+    },
+    {
+      "bytes": 17633792,
+      "mode": "0o755",
+      "path": "/workspace/engineering/pr310-runner-qualification-owned/dist/action-server/action-server",
+      "sha256": "067a27c24b55690410beeb1b95e97fb098edf8e02779b36b69bbead2227433fb"
+    }
+  ],
+  "documentation_improvement": {
+    "added_lines": 9,
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "durable_learning": "live source-cache zero publish/acquire is distinct from restart reacquire; committed new generation and old in-flight completion require separate measured barriers",
+    "evidence": "frozen actual prepare_runtime cached changed-generation branch/previous_descriptor acquire branch; import transaction/deferred publication and pool on_reload draining semantics, exact source ASTs bound",
+    "exact_delta": {
+      "bytes": 1021,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-managed-reload-drain-source-packet/canonical-managed-reload-and-drain-evidence-proposed.patch",
+      "sha256": "8354390b30343aa9a57a976aa5244e75068f8c59fc604f074af9e18110743856"
+    },
+    "remaining_uncertainty": "new fixtures/controls/native actual NOT_RUN; observation seam/dependency envelope and original raw readers require review; private117/01f/full134135/release HOLD",
+    "stale_ambiguity_removed": "zero env ops does not mean zero RCC commands or durable restart; successful new call does not mean old generation retired"
+  },
+  "forward_observer": "test-owned original _run_json forwarding callable exactly once; approved direct binary, no RCC3-specific shim; observer delegation controls and design GO required before source application",
+  "function_AST_line_evidence": {
+    "action_server/src/actions/server/_actions_import.py": [
+      {
+        "AST_sha256": "7267d2371a524853524f057297eb1a529e2a54451eaa8bf878f8c8e018a17c5f",
+        "end_line": 124,
+        "line": 50,
+        "name": "import_action_packages"
+      }
+    ],
+    "action_server/src/actions/server/_actions_process_pool.py": [
+      {
+        "AST_sha256": "3afb9ab75662370db2b752281a675479d1b7bc4adc4a370809c4ae7a1322919b",
+        "end_line": 1044,
+        "line": 977,
+        "name": "on_reload"
+      },
+      {
+        "AST_sha256": "b6ae6a5d1ef2532cfcf21aca8162cadcc8dcc28c8356d5145c29c38fcbac275d",
+        "end_line": 1448,
+        "line": 1229,
+        "name": "obtain_process_for_action"
+      }
+    ],
+    "action_server/src/actions/server/_rcc_runtime_adapter.py": [
+      {
+        "AST_sha256": "3991f191ef9b08733b9d2b26e4b3db1ac03d2dfc8f0a8e8242041aba4b1764e2",
+        "end_line": 452,
+        "line": 439,
+        "name": "environment_spec_fingerprint"
+      },
+      {
+        "AST_sha256": "e335e5ad0681f55c4b9c21eac329913f1bb75318ad1299868967143db7342ce7",
+        "end_line": 462,
+        "line": 455,
+        "name": "classify_environment_change"
+      },
+      {
+        "AST_sha256": "b96ec3611f520333593dadf4d1bf4df766726b2e249fbad458c5235030d8811d",
+        "end_line": 523,
+        "line": 500,
+        "name": "_run_json"
+      },
+      {
+        "AST_sha256": "bd2b32b186c004683b7231863aab3231678b1ff8c088f422d83b9602b45cd723",
+        "end_line": 774,
+        "line": 615,
+        "name": "prepare_runtime"
+      }
+    ],
+    "action_server/src/actions/server/_server.py": [
+      {
+        "AST_sha256": "26c02cf8c5c01bd62e0a31473623e1cebfeaac451d908c4c2fb6eace7578eb93",
+        "end_line": 95,
+        "line": 29,
+        "name": "_reload_action_generation"
+      }
+    ]
+  },
+  "identity_prerequisites": {
+    "baseline_actual_per_binary": "PENDING_NOT_RUN_REQUIRED_BEFORE_SOURCE_APPLICATION",
+    "future_env_change": "Python3.12.15 to3.13.8, Core1.0.2 unchanged; fingerprint/spec/artifact and original candidate publish/acquire strict; separate dependency/actual budget admission required, not authorized installation",
+    "latest_source_commit_for_new_wave": "freeze after authorized ordinary refresh to actual integration, no source self-pin; separate reviewed actual control schema/runner",
+    "persistent_patch": "independently reviewed adeb/7964+6049; NOT_APPLIED",
+    "root_approved_binary_hashes": [
+      "1a617ad7c736fa67c605e20e5ebe3c7d54b02cd548f733e05c809cf49a48db1e",
+      "be55dadc391ae4ac7dd38356755a1698c595fdf41bd4a0141f8df7cc9d29f00e"
+    ],
+    "selectors": [
+      "released-18.19.5-linux-amd64",
+      "candidate-727-18.19.6-linux-amd64"
+    ],
+    "source_FULL_independent": "6087f9a712c1707b0f335090ebd97ae98c0f61945ad98e5bba06d10005e9846a"
+  },
+  "new_real_selectors": [
+    "test_managed_rcc_source_reload_reuses_verified_environment",
+    "test_managed_rcc_environment_generation_drains_and_recovers_last_good"
+  ],
+  "packet": {
+    "bytes": 10867,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr308-managed-reload-drain-source-packet/managed-source-reload-generation-drain-fixture-packet.md",
+    "sha256": "70eeb4cf5baa186f7fc2c3fab1f375c216d412977995b8963a63d97b87bd22f3"
+  },
+  "retained_original_native_scope": {
+    "members": 1192,
+    "qualification": "historical native producer/control tuple remains UNQUALIFIED for current source; original bytes only, not rebuilt/imported/executed"
+  },
+  "schema": 1,
+  "source_body_and_function_bindings": [
+    {
+      "bytes": 28406,
+      "git_blob": "3ba72c15516a851eb503f841bf12805a3eabfdcb",
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+      "relative_path": "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+      "sha256": "f697aaf73c4e89bddd21b2c48aa92fe22e315f83614525996d51ff2271fe2436"
+    },
+    {
+      "bytes": 80545,
+      "git_blob": "48e7006c2f6e7b43492afa702994e8f8068fefa1",
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
+      "relative_path": "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
+      "sha256": "3f70440fdb10416d269b7f917406e8a64cbdf59bf7a787f077cda71ca436e6f0"
+    },
+    {
+      "bytes": 36059,
+      "git_blob": "69ae0f4f5548f4621599ed6fbf9a98cf01bd293b",
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "relative_path": "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "sha256": "259f7d7265cddc3a6f664676fbd13b478d4534a7f6c8a6b1670a8d19393cf3fb"
+    },
+    {
+      "bytes": 58538,
+      "git_blob": "af261b4d40870ecf5415980ae1b3e2923f0734b1",
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_actions_process_pool.py",
+      "relative_path": "action_server/src/actions/server/_actions_process_pool.py",
+      "sha256": "3552bf39d0dc93f94ed3a4ab056de870ae460ed709f36d3d3a37dc043c349da8"
+    },
+    {
+      "bytes": 28217,
+      "git_blob": "50f72e8c95dcc4455a8225eb19c8d3309faada58",
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_actions_import.py",
+      "relative_path": "action_server/src/actions/server/_actions_import.py",
+      "sha256": "57ad235e30fdd84c763f84efd7ccdd8514d620d5b5cfff05ac1051f60ceefad3"
+    },
+    {
+      "bytes": 24361,
+      "git_blob": "a306eb11038f8cd4114415fb978321eb2ac51a0f",
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_action_package_handler.py",
+      "relative_path": "action_server/src/actions/server/_action_package_handler.py",
+      "sha256": "a623ec0d2a7862bc5f27599fda853cb039ce68459b18c95e01c7a53adcdedb64"
+    },
+    {
+      "bytes": 17219,
+      "git_blob": "7e5ad63318ea9073ad2ef806ff95e18495c5eca7",
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_api_action_routes.py",
+      "relative_path": "action_server/src/actions/server/_api_action_routes.py",
+      "sha256": "9f8135a8bdb238bb1c83e91a1612d0814cec7309d7b32075157db719194540e3"
+    },
+    {
+      "bytes": 34736,
+      "git_blob": "3684b01c4155ca8efd35d5f6b318c6aefcb8efe3",
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_server.py",
+      "relative_path": "action_server/src/actions/server/_server.py",
+      "sha256": "3be0ce254252211270fecf2906da2cec5d438b3203fefd68ad3d0731cf4d42bb"
+    },
+    {
+      "bytes": 81503,
+      "git_blob": "df113b7713afa9d64512fc242b8ae6cb96b7773e",
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/scripts/verify_dakota_rcc_acceptance.py",
+      "relative_path": "action_server/scripts/verify_dakota_rcc_acceptance.py",
+      "sha256": "8f21502f64fed9ee5d26eb6a080a625ee575954e1f659c1f51ee1ea31bda57c7"
+    },
+    {
+      "bytes": 256123,
+      "git_blob": "4a68ebc9f5d80dda04be63bac8d85b54bf2ed331",
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/docs/skills/repository-operations.md",
+      "relative_path": "docs/skills/repository-operations.md",
+      "sha256": "7735777067553f6e4b58570dc179a4e8915614fc4743dd023e8b11a30557bc31"
+    }
+  ],
+  "source_writer_authority": "NONE_CURRENTLY",
+  "status": "OWNERFINAL_THREE_EXISTING_PATH_SOURCE_DESIGN_ONLY_NOT_APPLIED_CONTROLS_NOT_RUN",
+  "upstream_disposition": "none"
+}

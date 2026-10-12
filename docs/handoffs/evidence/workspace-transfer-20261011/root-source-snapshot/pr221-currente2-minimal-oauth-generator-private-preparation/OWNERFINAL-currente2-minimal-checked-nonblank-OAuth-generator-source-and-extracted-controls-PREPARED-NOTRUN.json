@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "status": "PRIVATE_SOURCE_AND_TEST_PREPARATION_ONLY_NOTRUN",
+  "source_label": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "actual_current_source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "scope": "existing Runtime221 producer task; preserve retained PR307 ownership, no replacement branch",
+  "bindings": [
+    {
+      "path": "/workspace/engineering/pr221-currente2-minimal-oauth-generator-private-preparation/original-currente2-real-build_oauth2_config.py",
+      "bytes": 1707,
+      "sha256": "3ee626ec71ad57aac022fbc7c72de5812409bebbc5426a1328d125b90597b2c2",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currente2-minimal-oauth-generator-private-preparation/proposed-currente2-real-build_oauth2_config.py",
+      "bytes": 1989,
+      "sha256": "36584ed40f1fd74357eb3f7fd506f03cbbd8f763ad94de3fa940b00d41baf873",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currente2-minimal-oauth-generator-private-preparation/minimal-currente2-checked-nonblank-OAuth-generator.patch",
+      "bytes": 799,
+      "sha256": "0cfdb3365a6f4296bcaaa660d167967f27652f4c9c19d00851becba15a6448ca",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currente2-minimal-oauth-generator-private-preparation/test_extracted_real_currente2_oauth_minimal_guard_PREPARED_NOTRUN.py",
+      "bytes": 4911,
+      "sha256": "6d22db700cd266907e94afad434aa1002d76464c3805082abf0fde74b3ecda99",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currente2-minimal-oauth-generator-private-preparation/current-source-scope-and-existing-PR307-ownership-proof.json",
+      "bytes": 1204,
+      "sha256": "ffbd21e5695b5b2a1f6b42dc47434bc0e08a66da0b5ca97990810b64d4258d14",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr221-currente2-minimal-oauth-generator-private-preparation/canonical-checked-nonblank-generated-OAuth-source-proposed.md",
+      "bytes": 467,
+      "sha256": "69b52eb6c4aa23a4f829e00765b835129080d5e52e3f7f2bf2196c3ebd760029",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr307-guard-owned/successor-receipt.json",
+      "bytes": 12830,
+      "sha256": "dc101ebfe12f201cb0a945e3f3c070bf41684289a4df607a8a3416ba7c42fe81",
+      "mode": "0o600"
+    }
+  ],
+  "prepared_control_cases": 10,
+  "baseline_first": "Every poison starts from success of the extracted real function and exact generated data, then restores prior sentinel or removes only owned synthetic destination",
+  "planned_RED": "Original first/second nonzero valid-body, zeroexit empty/blank and absent-destination second-failure controls must fail; strict UTF8 and success controls are expected to pass",
+  "planned_GREEN": "Same 10 cases against sole proposed function; all source/context/body assertions identical",
+  "execution": "NOTRUN; no pytest/import of product/no gh/no network/no native/source mutation",
+  "limits": [
+    "No finite gh timeout added by this minimal proposal",
+    "No malformed nonempty/YAML structural admission or paired-atomic-write claim",
+    "No sourceauthority/providerpayload resolution; current measured empty7 distributions remain release HOLD",
+    "Existing gh stderr behavior is unchanged; raw config/logs must stay private",
+    "Destination write errors/atomic replacement are broader retained307 scope; not claimed repaired"
+  ],
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md",
+    "Exact delta": {
+      "path": "/workspace/engineering/pr221-currente2-minimal-oauth-generator-private-preparation/canonical-checked-nonblank-generated-OAuth-source-proposed.md",
+      "bytes": 467,
+      "sha256": "69b52eb6c4aa23a4f829e00765b835129080d5e52e3f7f2bf2196c3ebd760029",
+      "mode": "0o400"
+    },
+    "Durable learning captured": "checked exits + strict UTF8/nonblank before generated-source destination opens; authority/content and old-artifact repair remain separate",
+    "Evidence": "Current extracted REAL function source + original7 EMPTY report; prepared controls NOTRUN",
+    "Stale or ambiguous guidance removed": "stdout bytes or producer success alone cannot admit configuration; no inferred authority from nonblank",
+    "Remaining uncertainty": "Source authority/schema/timeouts/atomic writing/full producer and consumer qualification remain unresolved"
+  },
+  "Upstream disposition": "none"
+}

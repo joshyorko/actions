@@ -1,0 +1,109 @@
+{
+  "actual_owned_archive_root_and_release": "ABSENT_VERIFIED; no operation/authorization/compression/expanded removal",
+  "capacity": "Current root-reported floor now sufficient, no storage-operation authority inferred from capacity; future gates use distinct fresh guards.",
+  "current_point_in_time_observations": [
+    {
+      "bytes": 455856,
+      "frozen_original_identity_matches": false,
+      "mode": "0o600",
+      "observed_at_ns": 1791742990382260443,
+      "original_bytes": 10930091,
+      "original_sha256": "67e99a41034c798580f72c3177e1e71c59aea41075052966c96d1e894571e4e3",
+      "path": "/workspace/engineering/pr308/action_server/output/output.robolog",
+      "sha256": "a7724d894c1d9f578eb83e26eb15c04d166e1f71211d8280e33eec8b83eba0f2"
+    },
+    {
+      "bytes": 916385,
+      "frozen_original_identity_matches": false,
+      "mode": "0o600",
+      "observed_at_ns": 1791742990383200285,
+      "original_bytes": 3997693,
+      "original_sha256": "13aebe97ef17c1dad5a63e6f5dcaf2a24fcd68e824a62ea605d14cb8d192e612",
+      "path": "/workspace/engineering/pr308/action_server/output/log.html",
+      "sha256": "4a70c69c48bce408abb0f4f6f6acffc52d619bbb52fe7005e70c299104c235a7"
+    }
+  ],
+  "decision": "HOLD_ORIGINAL_CURRENT8D49_GENERATED_ROBOLOG_PREEXECUTION_STALE_SELECTED_BYTES",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; existing7d070 exact original-inventory recheck lesson reused; optional precise source-backed clarification proposed below for next real guide update, not applied by reviewer.",
+    "Durable_learning_captured": "A producer terminal and tracked-source guard do not freeze unbound generated files. A changed frozen source binding invalidates preservation approval even when code and immutable owner receipts stay unchanged.",
+    "Evidence": [
+      {
+        "bytes": 14752,
+        "mode": "0o400",
+        "path": "/workspace/engineering/one-current8d49-generated-robolog-preservation-PREPARATION/OWNERFINAL-one-current8d49-unbound-generated-robolog-preservation-PREEXECUTION.json",
+        "sha256": "92e864fa1bd9ab8a46368b7db86acf3d667a592330187a3e1fb73f752c13acc8"
+      },
+      {
+        "bytes": 2801,
+        "mode": "0o400",
+        "path": "/workspace/engineering/one-current8d49-generated-robolog-preservation-PREPARATION/OWNERFINAL-original-selected-output-changed-no-operation-disposition.json",
+        "sha256": "98892130efe992608a262c01130dbae95d5d39778388e7e1b2914b1afa4dbea6"
+      },
+      {
+        "selected_original_vs_current_bytes_digests": "Both measured identity mismatches; no payload copied or emitted"
+      }
+    ],
+    "Exact_optional_delta": "A completed untracked output can change after its producer terminates.\nRecheck its frozen bytes and adjacent-file bindings before reclaiming it; a\ntracked-source guard is not that proof. If they changed, retain the stale HOLD\nand call the old bodies unavailable until an exact surviving copy is verified.\n",
+    "Remaining_uncertainty": "Original bodies in any other location are UNKNOWN; compression/native/source gates were not executed by this review.",
+    "Stale_or_ambiguous_guidance_removed": "Unbound means excluded from current acceptance bindings, not immutable or disposable without a current exact-byte check; no metadata-only preservation claim."
+  },
+  "frozen_input_refs": 20,
+  "frozen_input_refs_integrity": "EXACT_REHASHED; selected generated source is separate and has changed",
+  "next": "No compression operation using92e864. Preserve proposal/no-operation HOLD and current smaller file observation; old original bodies unavailable unless independently verified exact surviving copy is reported. No automatic retry/new candidate.",
+  "old_body_disposition": {
+    "other_lanes_or_locations": "UNKNOWN_PENDING_WINDOWS_OWNER_RESPONSE; do not infer preservation from surviving metadata",
+    "restoration": "NOT_ATTEMPTED; no reconstruction or fake old-path restoration",
+    "stack_preparation_lane": "Exact copies UNAVAILABLE_HERE, hash+metadata only; preparation did not permit copy/compression"
+  },
+  "original_proposal_binding": {
+    "bytes": 14752,
+    "mode": "0o400",
+    "path": "/workspace/engineering/one-current8d49-generated-robolog-preservation-PREPARATION/OWNERFINAL-one-current8d49-unbound-generated-robolog-preservation-PREEXECUTION.json",
+    "sha256": "92e864fa1bd9ab8a46368b7db86acf3d667a592330187a3e1fb73f752c13acc8"
+  },
+  "owner_no_operation_disposition_binding": {
+    "bytes": 2801,
+    "mode": "0o400",
+    "path": "/workspace/engineering/one-current8d49-generated-robolog-preservation-PREPARATION/OWNERFINAL-original-selected-output-changed-no-operation-disposition.json",
+    "sha256": "98892130efe992608a262c01130dbae95d5d39778388e7e1b2914b1afa4dbea6"
+  },
+  "reviewer_operations": "Read-only frozen refs and current tiny generated file hashes; owned independent HOLD receipt only. No compression/copy/unlink/source/test/native/network/gateway mutation.",
+  "schema": "INDEPENDENT_STALE_ORIGINAL_GENERATED_OUTPUT_PREEXECUTION_HOLD",
+  "selected_original_adjacent_metadata": [
+    {
+      "bytes": 3997693,
+      "device": 27,
+      "gid": 1000,
+      "inode": 1081121,
+      "mode": 384,
+      "mtime_ns": 1791742439924077128,
+      "nlink": 1,
+      "path": "/workspace/engineering/pr308/action_server/output/log.html",
+      "sha256": "13aebe97ef17c1dad5a63e6f5dcaf2a24fcd68e824a62ea605d14cb8d192e612",
+      "uid": 1000
+    }
+  ],
+  "selected_original_source_metadata": {
+    "allocated": 10932224,
+    "bytes": 10930091,
+    "device": 27,
+    "gid": 1000,
+    "inode": 1081293,
+    "mode": 384,
+    "mtime_ns": 1791742439736072602,
+    "nlink": 1,
+    "path": "/workspace/engineering/pr308/action_server/output/output.robolog",
+    "sha256": "67e99a41034c798580f72c3177e1e71c59aea41075052966c96d1e894571e4e3",
+    "uid": 1000
+  },
+  "source_and_native_qualification": "No change/upgrade; current8d49 LIGHT/ROOTFULL separate, a successful tracked source guard cannot establish unchanged untracked generated output bytes.",
+  "source_rebinding": "NONE; changed current files do not replace old hash/metadata binding",
+  "unchanged_script_binding": {
+    "bytes": 11800,
+    "mode": "0o400",
+    "path": "/workspace/engineering/one-current8d49-generated-robolog-preservation-PREPARATION/preserve_one_generated_robolog.py",
+    "sha256": "c6c420f4966228dbcc8a9a25df2babeb3bc3f3dcee2d0da7c1126b79dcfbb42e"
+  },
+  "upstream_disposition": "none"
+}

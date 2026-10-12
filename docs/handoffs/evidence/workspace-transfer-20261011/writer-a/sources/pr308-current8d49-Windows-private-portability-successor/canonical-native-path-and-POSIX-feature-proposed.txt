@@ -1,0 +1,7 @@
+On Windows, `str(Path("/service-free/rcc"))` renders native separators even when
+a fixture starts from a POSIX-looking literal. Compare captured subprocess and
+injected-runner arguments with the same Path contract; keep version, argument
+order and timeout assertions intact. A Linux-only runtime fixture skip does not
+exclude its helper from Windows type checks. Admit callable UID/GID features
+before using POSIX ownership, read the real values once, and fail closed when
+those features are unavailable; never synthesize Windows ownership values.

@@ -1,0 +1,88 @@
+{
+  "schema": "actions.independent-EOL-LIGHT-prefull-review/v1",
+  "verdict": "HOLD_INITIAL_PRE_FULL_EXECUTION_WORKER_BOUND",
+  "source_scope_disposition": "GO_NARROW_LIGHT_SOURCE_SCOPE_ONLY_NOT_SOURCEFINAL",
+  "source": {
+    "head": "92e6deda5c252a503510c4b6261a86cb51f73cb6",
+    "tree": "8c7362e63c85a930ca2fe962ede9bc3ebb6ffe68",
+    "sole_parent": "6181b044c75de35386f1ae30e71725398b6a7feb",
+    "branch": "fix/runtime-checkout-eol-20261011"
+  },
+  "owner_initial_immutable": {
+    "path": "/workspace/engineering/runtime-checkout-eol-source/OWNERFINAL-runtime-checkout-eol-LIGHT.json",
+    "bytes": 15090,
+    "sha256": "a6f2da2485741c6e98af49cd1e987ec640486cb4188629ddfa5c322f1ba1a1d7"
+  },
+  "independent_scope_proof": {
+    "path": "/workspace/engineering/runtime-checkout-eol-independent-light-review/independent-initial-LIGHT-source-and-prefull-worker-bound-proof.json",
+    "bytes": 3461,
+    "sha256": "e667afd95a4f04846c4174f6f0fcc045809bf5424300c76820f753cd47338701"
+  },
+  "findings": [
+    {
+      "severity": "HOLD_PRE_FULL_BOUND",
+      "initial_launcher": {
+        "path": "/workspace/engineering/runtime-checkout-eol-source/full-source-gates-root-release-required.py",
+        "bytes": 229,
+        "sha256": "70c834e35917b2eb86d3ae4fa72188730a458537fd0771cce126e36c46ae1820"
+      },
+      "devutils_workers": 2,
+      "Runtime_selector": [
+        "sys.executable",
+        "-m",
+        "pytest",
+        "-m",
+        "not integration_test",
+        "-rfE",
+        "-vv",
+        "--force-regen",
+        "-n",
+        "auto"
+      ],
+      "explicit_auto_worker_env_binding": "ABSENT",
+      "host_CPUs_current": 5,
+      "required": "Named frozen owned launcher/metadata successor sets PYTEST_XDIST_AUTO_NUM_WORKERS=2 before both sequential commands; same configured tasks and600TERM+10 envelope retained",
+      "installed_xdist_source_authority": [
+        {
+          "path": "/workspace/engineering/runtime-checkout-eol/devutils/.venv/lib/python3.12/site-packages/xdist/plugin.py",
+          "bytes": 11561,
+          "sha256": "011ebe37d0c1b79ee1a01c5067ae013763f84a8563a181d68ee9b990f23f4810"
+        },
+        {
+          "path": "/workspace/engineering/runtime-checkout-eol/action_server/.venv/lib/python3.12/site-packages/xdist/plugin.py",
+          "bytes": 13921,
+          "sha256": "62df71dfe342969ab667cb3a4f2280a93be9c11bc9a4c2d9ead271c979d2afd8"
+        }
+      ],
+      "no_execution_by_reviewer": true
+    }
+  ],
+  "required_successor": "Owner-announced frozen named private launcher/metadata adding explicit2-worker xdist auto bound before both commands; review before root release; initiala6f original retained",
+  "full_source_scope": "Not run. Planned ONE600TERM+10 sequenced allDevutils two-worker then configuredRuntime nonintegration remains HOLD pending correct bound and root serialization/capacity release. Completed fullsource independent review required separately.",
+  "remaining_holds": [
+    "No full source qualification or independent SOURCE GO yet",
+    "No fresh hosted Runtime builder/test checkout or Windows distribution proof",
+    "Original effective checkout configuration and frontend input/compiler causation UNKNOWN",
+    "Generated embedded HTML CR semantics UNKNOWN; no normalization/content waiver",
+    "Private/OAuth/provider/native/cold registry/full seven installed consumers/release/tag/publication HOLD",
+    "No push/new PR or actual execution by this worker"
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "Accepted_source_delta": {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/exact-canonical-checkout-and-generated-scope.patch",
+      "bytes": 1724,
+      "sha256": "3a3588c1740acc52904b405c7987b26d111a2705b5208eb5bd30d60d469d060d"
+    },
+    "Proposed_exact_worker_bound_delta": {
+      "path": "/workspace/engineering/runtime-checkout-eol-independent-light-review/canonical-bounded-configured-xdist-worker-proposed.patch",
+      "bytes": 823,
+      "sha256": "a113e8c4001305664c781dccc7c5d62a5f0de929df0dc9e09b9c2f41f0d87434"
+    },
+    "Durable_learning_captured": "Preserve all207 selected physicalLF source inputs and workflow trigger coverage separately from historical generated semantics; bind actual configuredRuntime auto-worker count before sequential full execution",
+    "Evidence": "1421leaf scope, actualGit180RED/sevenruleGREEN controls, owningfilters6RED/10GREEN; Runtime task -nauto and installedownxdist env predicate; launcher only devutils-n2/absentworkerbinding",
+    "Stale_or_ambiguous_guidance_removed": "Rejects claim that devutils-n2 automatically bounds later configuredRuntime auto; source LF controls do not diagnose historicalWindows cause or qualify new built distributions",
+    "Remaining_uncertainty": "Frozen corrected launcher, full suites, fresh Windows checkout/build/output, semantic/generated-input authority and release acceptance remain open"
+  },
+  "upstream_disposition": "none"
+}

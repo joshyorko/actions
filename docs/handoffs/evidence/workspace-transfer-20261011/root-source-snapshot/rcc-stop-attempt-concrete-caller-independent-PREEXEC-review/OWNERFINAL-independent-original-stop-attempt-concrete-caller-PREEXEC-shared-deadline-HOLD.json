@@ -1,0 +1,173 @@
+{
+  "ROOT_argv_preserved_NOT_AUTHORIZED": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "1200s",
+    "bash",
+    "-c",
+    "export PATH=\"/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\"; source /workspace/actions-cloud/activate.sh && exec \"$@\"",
+    "stop-attempt-root-once",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/rcc-stop-attempt-concrete-ROOT-caller-PREEXEC-NOTRUN/run_stop_attempt_external_parent_v1_NOTRUN.py",
+    "--caller-config-sha256",
+    "1fac2017e9ec9a25fab06b7d0d236e76c9c3a618ccc282b40710cadebd222315",
+    "--release",
+    "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-release.json",
+    "--release-sha256",
+    "ROOT_REAL_DISTINCT_RELEASE_SHA256"
+  ],
+  "blocking_finding": {
+    "code": "PREPOPEN_SHARED_DEADLINE_RESERVE_STALE",
+    "earlier_TERM_computation_lines": [
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106
+    ],
+    "function": "capture",
+    "minimal_named_successor": "Immediately before subprocess.run, recompute remaining; require remaining>15; recompute TERM=min120(remaining-15), update the selected timeout argument and bound parent fallback from that same snapshot. Do not retain a stale earlier TERM or attempt to find the now-replaced120s token without retaining its exact selected index. Preserve originalpacket/code/config and all budgets/phasehelper/predicates.",
+    "path": "/workspace/engineering/rcc-stop-attempt-concrete-ROOT-caller-PREEXEC-NOTRUN/stop_attempt_caller_contract_v1_NOTRUN.py",
+    "selected_actual_launch_recheck_lines": [
+      111,
+      112,
+      113,
+      114
+    ],
+    "source_fact": "TERM computed from earlier remaining with a15s reserve, followed by mkdir/open. Final recheck changes only parent_seconds and admits any positive remainder. The final TERM token and10KILL+5fallback reserve are not recomputed together.",
+    "static_arithmetic_witness_NOT_RUNTIME_OBSERVATION": {
+      "TERM_plus_KILL10_plus_margin5_seconds": 30,
+      "available_parent_seconds": 10,
+      "computed_TERM_seconds": 15,
+      "current_final_positive_check_passes": true,
+      "earlier_remaining_seconds": 30,
+      "later_remaining_after_output_setup_seconds": 10,
+      "new_child_is_not_blocked_by_the_final_more_than15_reserve_check_because_it_is_missing": true
+    }
+  },
+  "caller_config_binding": {
+    "bytes": 63339,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-stop-attempt-concrete-ROOT-caller-PREEXEC-NOTRUN/FROZEN-stop-attempt-concrete-ROOT-config-NOTRUN.json",
+    "sha256": "1fac2017e9ec9a25fab06b7d0d236e76c9c3a618ccc282b40710cadebd222315"
+  },
+  "decision": "HOLD_SELECTED_PREPOPEN_DEADLINE_RESERVE_NOT_RECOMPUTED",
+  "documentation": {
+    "canonical_delta_proposal_only": "At the selected process-launch boundary, derive the command timeout and parent fallback from the same fresh remaining-deadline measurement. A later positive-only check does not preserve a grace reserve computed before output setup. Refuse a new stage when the final remainder cannot cover its reserved kill and fallback handling.",
+    "evidence": [
+      {
+        "bytes": 9632,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-stop-attempt-concrete-ROOT-caller-PREEXEC-NOTRUN/stop_attempt_caller_contract_v1_NOTRUN.py",
+        "sha256": "3e79c2c2c2f8aed26484c8580805197902325b8726037684041a4d7c4699d200"
+      }
+    ],
+    "existing_lessons_reused": "Selected-address closure, exact original machine census/source frames, distinct source-vs-actual admission and external parent postguard scope.",
+    "uncertainty": "Static counterexample only; no original control run, no runtime setup delay measurement and no native/process cleanup claim.",
+    "upstream_disposition": "none"
+  },
+  "further_adoption_requirements": {
+    "ROOT_outer_argv_and_parent_geometry_remain_separately_selfbound": true,
+    "ROOT_release600_uid_gid_own_config_review_all_self_bindings_strict_exact_keys": true,
+    "ROOT_required_release_decision": "ROOT_RELEASE_ONE_STOP_ATTEMPT_SOURCE_CONTROLS_ONLY",
+    "after_correction_new_body_cfg_release_review_hashes_and_exact_selected_addresses": true,
+    "complete_original_guard_rows_before_allphases_inner_alwayspost_external_alwayspost": true,
+    "do_not_infer_callback_or_native_acceptance_from_source_or_future_purepasses": true,
+    "nominal1215_is_not810_or_unconditional_completion_under900": true
+  },
+  "implementation_bindings": {
+    "caller_contract": {
+      "bytes": 9632,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-stop-attempt-concrete-ROOT-caller-PREEXEC-NOTRUN/stop_attempt_caller_contract_v1_NOTRUN.py",
+      "sha256": "3e79c2c2c2f8aed26484c8580805197902325b8726037684041a4d7c4699d200"
+    },
+    "external_parent": {
+      "bytes": 3690,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-stop-attempt-concrete-ROOT-caller-PREEXEC-NOTRUN/run_stop_attempt_external_parent_v1_NOTRUN.py",
+      "sha256": "759c172d02b4b1d417b701bfa464ef2b5ce3e7aabba13a083947003c2ff03a28"
+    },
+    "inner_caller": {
+      "bytes": 3243,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-stop-attempt-concrete-ROOT-caller-PREEXEC-NOTRUN/run_stop_attempt_inner_caller_v1_NOTRUN.py",
+      "sha256": "33685600cd45de01ad16744cc35d89f3b548015e9c840463fdb302769d01b57d"
+    }
+  },
+  "original_config_sha256": "59f02612d2660b793ead8c5c945af3d648e8427f6f3a30e872f0272113bf63ff",
+  "original_helper_sha256": "db6542cbff2210516ba2bce7383f0c6e4e41af23709f1765136c4d2281bacbb1",
+  "originals_preserved": {
+    "all_original_paths_unmodified": true,
+    "backend35_scoped_ACTUAL_pure_GO": {
+      "bytes": 5619,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-independent-ACTUAL-review/OWNERFINAL-independent-original-defaultbackend35-once2-exact-census-ACTUAL-PURE-GO.json",
+      "sha256": "232365377184c5e9534ebf13eb57e6859a2ed33a3c0c58fd66611546089df60f"
+    },
+    "prior_phase_owner": {
+      "bytes": 19413,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/OWNERFINAL-current8d49-memory-stop-attempt-latch-successor-SOURCE-and-pure-phase-preparation-NOTRUN.json",
+      "sha256": "1482d5e23f66e0e7639659deb49b0f533df75c83cc9bfd0dd3fd0d6dcd86fb9d"
+    },
+    "prior_source_GO": {
+      "bytes": 4630,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-stop-attempt-independent-SOURCE-and-phase-PREEXEC-review/OWNERFINAL-independent-current8d49-stop-attempt-composition-SOURCE-GO-NOTEXECUTED.json",
+      "sha256": "cd5ca803945f30b806e255066cf353ff2f3342efc5f2411d9aeca2343ab0bae2"
+    }
+  },
+  "owner_binding": {
+    "bytes": 45175,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-stop-attempt-concrete-ROOT-caller-PREEXEC-NOTRUN/OWNERFINAL-stop-attempt-concrete-inner-external-parent-PREEXEC-NOTRUN.json",
+    "sha256": "9fd59226cf8ac1a5d3f7e084010acf39f72fdc9b3224062b0f9cd17e2e098ff0"
+  },
+  "reviewer_execution": "Only original files read/hashed, JSON and AST inspection. No app import, guard, controls, test, native, source or gate execution.",
+  "root_contract_binding": {
+    "bytes": 13740,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-stop-attempt-concrete-ROOT-caller-PREEXEC-NOTRUN/ROOT-distinct-stop-attempt-concrete-caller-release-and-argv-contract-NOTRUN.json",
+    "sha256": "6e9e83cc7c160299d29c1f5af220d4fe7a0a8551d5327a3c45cc0306db9274c5"
+  },
+  "schema": 1,
+  "scope": "READ_ONLY_SOURCE_AND_CONCRETE_PURE_PREEXECUTION_NO_EXECUTION",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_count": 1440,
+  "status": "INDEPENDENT_STOP_ATTEMPT_COMPOSITION_PURE_PREEXECUTION_HOLD",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "verified_static_passes": {
+    "RED_control_frame_lines": [
+      208,
+      222
+    ],
+    "all120_frozen_rows_body_size_mode_hash_exact": true,
+    "counts": [
+      "16PASS0FES",
+      "oneSpecificAssertionRED0P1F0ES",
+      "oneSpecificAssertionRED0P1F0ES",
+      "20PASS0FES"
+    ],
+    "fixed_guard_only_authorization_exact_and_no_backend35_launch_or_native": true,
+    "four_phase_outputaddresses_and_phase_expectations_exact_original_config": true,
+    "fresh_source_control_root_and_distinct_release_ABSENT": true,
+    "guard_before_each_phase_inner_finally_and_external_finally_present": true,
+    "new_distinct_typed_ROOT_release_and_independent_review_required": true,
+    "original59f_phaseconfig_and_db65_helper_exact_unchanged": true,
+    "original_command_captures_fsync_before_rc_census_admission": true,
+    "phase_order": [
+      "baseline_original16",
+      "RED_memory_preauthorization",
+      "RED_disk_preauthorization",
+      "restored_successor20"
+    ],
+    "three_implementations0400_exact": true,
+    "uncapped_nominal_four_guard_and_phase_pluspost1215_honestly_declared": true,
+    "whole_inner900_and_fallback930_external135_plus930_plus1351200_captureparent1230_declared": true
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "concrete_blocking_source_findings": [],
+  "controls_binding": {
+    "bytes": 15829,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-default-descriptor-walk-controls-PREPARED-NOTRUN/test_default_cgroup_descriptor_walk_NOTRUN.py",
+    "sha256": "e5744b96096a749ad1b0287743cf95fcf98a6848c5b8d82f9434a1fba6fbe09f"
+  },
+  "decision": "GO_PRIVATE_DEFAULT_DESCRIPTOR_WALK19_FUNCTIONS35_PLANNED_CASES_SOURCE_ONLY",
+  "documentation_improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md; accept exact951B proposed8366c367bbb81a857cfcc8d55863d8a193d0bc42a705ee0e3e2f751c6c74efa3 after existingd6c observer paragraph, reuse8c28; no cosmetic duplicate.",
+    "Durable learning captured": "Injected bundles do not exercise default descriptor walk; captured unchanged backend with owned fake filesystem/real syscall audit needs baseline-first poisons, descriptor-generation closure and exact failed syscall/path/errno to prevent unrelated setup masks.",
+    "Evidence": [
+      {
+        "bytes": 15829,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-current8d49-default-descriptor-walk-controls-PREPARED-NOTRUN/test_default_cgroup_descriptor_walk_NOTRUN.py",
+        "sha256": "e5744b96096a749ad1b0287743cf95fcf98a6848c5b8d82f9434a1fba6fbe09f"
+      },
+      {
+        "bytes": 14600,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/cgroup_memory_reader_observer_v1_NOTRUN.py",
+        "sha256": "24e38634118730ba9d222179518d13818c094c5a6ccfd368afd56521e964d014"
+      },
+      {
+        "bytes": 951,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-current8d49-default-descriptor-walk-controls-PREPARED-NOTRUN/canonical-default-descriptor-walk-control-coverage-proposed.md",
+        "sha256": "8366c367bbb81a857cfcc8d55863d8a193d0bc42a705ee0e3e2f751c6c74efa3"
+      }
+    ],
+    "Remaining uncertainty": "35 planned cases unexecuted; real cgroup kernel latency, thresholds/calibration/native sampler/adoption/cleanup/release remain HOLD.",
+    "Stale or ambiguous guidance removed": "19 named pytest functions/35 planned parameterized cases distinguished from28 prior unittest methods and actual passed case census. Numeric FD closure distinguished from registered generations."
+  },
+  "future_command_contract_binding": {
+    "bytes": 2579,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-default-descriptor-walk-controls-PREPARED-NOTRUN/minimal-future-default-descriptor-walk-pure-command-contract-NOTRUN.json",
+    "sha256": "0fc9c357e634f72f161d5f22e6e1f1106990a9b89c0298bb3a78fa2d2960d54b"
+  },
+  "limitations": [
+    "Real default reader against regular fake files is not real kernel cgroup IO/latency/headroom/native signal or lease qualification.",
+    "Audit generations are logical generations within this single private control walk, not universal process-wide FD/reaping proof. Unreadable/historical process handles remain outside scope.",
+    "Byte/call/deadline caps do not guarantee kernel syscall cancellation; live/unjoined/unknown observer remains FAIL.",
+    "Actual35 collection, sensitivity outcomes and all before/after guards unexecuted; no claimed RED/GREEN success from static preparation."
+  ],
+  "proposal_binding": {
+    "bytes": 10628,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-default-descriptor-walk-controls-PREPARED-NOTRUN/OWNERFINAL-current8d49-real-default-descriptor-walk-35-controls-SOURCE-PREPARED-NOTRUN.json",
+    "sha256": "e7954c3bc19374991213dd70fff3e64d2f7971e84c1c74fa573aee75f16ec7d5"
+  },
+  "required_next_pure_gate": [
+    "Separate concrete reviewed launcher/config and strict distinct ROOT600 release; this SOURCE proposal and future command template alone authorize no import/test.",
+    "Bind owner/control/module/policy/helper/original28+17/native/source refs by exact SHA/physical mode before and alwayspost. Own Runtime interpreter and managed18+PATH2/primary700 fixture711 metadata; all current1440/native1192/prepared30/five origins identity guards.",
+    "Use fresh ABSENT private700 output/basetemp/logger/JUnit and ALL retention; absolute private robocorp logger, private working directory, -n0 and --noconftest; reject inherited optimize/pytest/operator/native overrides. Inner120TERM10 with150parent; full concrete parent must enclose before/primary/alwayspost.",
+    "Actual gate must collect/run35 unique parameterized pytest nodeIDs from19 test functions, zero failure/error/skip, and retain original per-node/JUnit/stdout/stderr plus complete source/data guards. Do not label35 as unique unittest methods or infer actual collection from this AST arithmetic.",
+    "No conftest/native helper/process/signal/cgroup backend writes; syscall audit paths only owned synthetic tree. Read-only source guard imports may probe existing package origins but must not execute native main.",
+    "After actual35 independent outcome, combine only its verified fake-backend scope with original synthetic reader28/state17. Real cgroup identity/latency/memory thresholds and native sampler/profile integration remain separate gates; existing3FAIL still stops automatic3\u21925\u21927276 progression."
+  ],
+  "reviewer_inspection_history": "Initial read guessed a test basename and returned file-not-found. Corrected by using announced controls_binding; no execution, source edit or qualification from failed read.",
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_count": 1440,
+  "source_independent_binding": {
+    "bytes": 10394,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-independent-SOURCE-review/OWNERFINAL-independent-private-cgroup-reader-observer-SOURCE-and-prepared28-controls-GO.json",
+    "sha256": "dc37624bc1e47ad007320fb39a80e722128cd1d8acfcb99dc614add1552b0caa"
+  },
+  "source_module_binding": {
+    "bytes": 14600,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/cgroup_memory_reader_observer_v1_NOTRUN.py",
+    "sha256": "24e38634118730ba9d222179518d13818c094c5a6ccfd368afd56521e964d014"
+  },
+  "status": "INDEPENDENT_DEFAULT_DESCRIPTOR_BACKEND35_SOURCE_PREPARED_GO_NOT_EXECUTED",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none",
+  "verification": {
+    "AST_named_test_functions": 19,
+    "AST_parametrized_planned_pytest_cases": 35,
+    "actual_test_collection_and_execution": "NOT_RUN",
+    "all_new_references_exact": 5,
+    "all_retained_references_exact": 16,
+    "approved_patch_seams": [
+      "CGROUP_ROOT",
+      "PROC_CGROUP",
+      "PROC_MOUNTINFO",
+      "os.open",
+      "os.dup",
+      "os.read",
+      "os.fstat",
+      "os.close"
+    ],
+    "baseline_first_and_error_specificity": "All poison functions first require complete expected finite snapshot and exact12 open/dup records with full generation closure. Generic unavailable cases additionally require exact intended open/read path and errno (ELOOP/ENOTDIR/ENOENT/EIO); unrelated audit/setup failure cannot satisfy both checks.",
+    "captured_default_backend": "CgroupReader called with no read_bundle injection; actual default identity read_bundle is m.read_cgroup_bundle asserted. _file/_read_fd/backend function bodies not copied/replaced.",
+    "case_expansion_by_function": {
+      "test_actual_counter_read_exceeding_cap_is_bounded_and_closed": 1,
+      "test_actual_proc_read_exceeding_cap_is_bounded_and_closed": 1,
+      "test_counter_directory_type_rejected_and_all_handles_closed": 1,
+      "test_deadline_after_actual_read_fails_and_closes_current_file": 1,
+      "test_descriptor_audit_detects_deliberately_suppressed_close_after_valid_baseline": 1,
+      "test_membership_changes_between_real_before_after_reads": 1,
+      "test_missing_local_counter_file_rejects_and_closes_full_walk": 1,
+      "test_mount_id_changes_between_real_before_after_reads": 1,
+      "test_noncanonical_expected_component_rejected_before_descriptor_open": 3,
+      "test_real_default_walk_baseline_complete_finite_snapshot": 1,
+      "test_real_global_event_file_duplicate_key_rejected": 1,
+      "test_real_local_event_file_non_ascii_rejected": 1,
+      "test_real_memory_current_file_invalid_payload_rejected": 1,
+      "test_real_memory_max_file_invalid_payload_rejected": 4,
+      "test_real_mount_file_duplicate_root_rejected": 1,
+      "test_real_walk_fstat_identity_drift_at_each_boundary": 4,
+      "test_real_walk_read_error_preserves_reason_and_closes_descriptors": 4,
+      "test_repeated_default_walk_closes_each_reused_numeric_fd_generation": 1,
+      "test_symlinks_fail_closed_at_each_real_nofollow_boundary": 6
+    },
+    "descriptor_generation_oracle": "Each real opened/duplicated FD registered with unique logical generation, closed exactly once and no active generation left; repeated numericFD reuse handled; deliberate suppressed duplicate close must be caught before saved-real-close cleanup, rather than cleanup hiding failure.",
+    "meaningful_boundaries": "Six actual nofollow boundaries; unsafe components before opens; type/missing files/finite payload/schema/caps; membership/mount before-after mutation; all four directory fstat identity boundaries; four read errors; expired readdeadline with current file closed; deliberate missed-close sensitivity.",
+    "old28test449298_old17_policy_FiniteSampler_selector_authorizer_unchanged": true,
+    "reader_module24e386_unchanged": true,
+    "real_syscalls": "Audit delegates to saved real open/dup/fstat/read/close using private fake proc/mount/group regular files. Only3 existing path constants are retargeted; absolute/relative external path guards before delegation, no real proc/sys paths intended.",
+    "source_current_product_modes": "No product source changes; frozen1440 source tuple and read-only original V9/source guard inputs retained. Reviewer does not run guard.",
+    "source_new_seam_required": false
+  }
+}

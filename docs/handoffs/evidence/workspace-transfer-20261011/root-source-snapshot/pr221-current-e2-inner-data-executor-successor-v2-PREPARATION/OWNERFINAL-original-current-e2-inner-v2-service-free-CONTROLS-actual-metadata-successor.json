@@ -1,0 +1,181 @@
+{
+  "actual_original_aggregate_inspection": "NOT_RUN",
+  "census": {
+    "errors": 0,
+    "failed": 0,
+    "passed": 50,
+    "pytest_seconds": 40.87,
+    "root_elapsed_seconds": 43.316994433997024,
+    "skipped": 0,
+    "unique": 50,
+    "warnings": 499
+  },
+  "construction_metadata_successor": {
+    "correction": "Unannounced constructionlabel21historicalbindings corrected to derived17; no source/control/code/evidencebytes changed; actual8launcher checks unchanged",
+    "predecessor": {
+      "bytes": 8328,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/OWNERFINAL-original-current-e2-inner-v2-service-free-CONTROLS-actual.json",
+      "sha256": "ef8ed2e56dad4061d0c6d0d5623c5e46d00c6ee0b4c780d60e31b451e9c77108"
+    }
+  },
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": {
+      "bytes": 1072,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/canonical-real-data-inspector-entry-and-boundary-controls-proposed.patch",
+      "sha256": "10bd741b725aee1ebc786e5d6e78a5b10e20fb4ee2d27ca3c06c8d1ef85d796a"
+    },
+    "Durable_learning": "Unoptimized/privateROOTentry, preflightallheaders and realrestoredbaselinecontrols are executable trust/resource boundaries",
+    "Evidence": "50actualcurrent-frozenfunctioncontrols + sourceAST + originalb1f40HOLD kept",
+    "Remaining_uncertainty": "Originalcurrentaggregate innerstillNOTRUN; generatedOAuth/frontend/sourceauthorityhold",
+    "Stale_or_ambiguous_guidance_removed": "Syntax-onlyGREEN is not boundaryGREEN; structuralcounts are not consumer/contentauthority"
+  },
+  "evidence": [
+    {
+      "bytes": 78788,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/frozen-executor-inputs.json",
+      "sha256": "f1bae88f9cee392f6623ac6f4c3c500bea65bd39c246df0dec002c4dc7911b9a"
+    },
+    {
+      "bytes": 23323,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/inspect_current_e2_inner_once_v2.py",
+      "sha256": "d83a7aae88a98a694310e6a1e60de2ea7e362604ee8c5d345cc6a38b4591177c"
+    },
+    {
+      "bytes": 11388,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/test_actual_inner_boundaries_v2.py",
+      "sha256": "879a1370f1613a1ec832a04d8b0f9f0dde37dab0ea96f52714f47b6f16acc9f2"
+    },
+    {
+      "bytes": 498,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/syntax-control-plan-noexecution-proof.json",
+      "sha256": "ed852b1c52eb99fdf667bb3b1697ffd0c68ad1535f1c07eb8d894909ef2d4227"
+    },
+    {
+      "bytes": 987,
+      "mode": "0o600",
+      "path": "/workspace/actions-cloud/activate.sh",
+      "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+    },
+    {
+      "bytes": 8727,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/prepare_control_plan_and_freeze_v2.py",
+      "sha256": "88086d16b25f6a64afa3ef5e529bb99c764bb738fbd6ffad20a645435b735db9"
+    },
+    {
+      "bytes": 3498,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/frozen-service-free-control-inputs-v2.json",
+      "sha256": "838593f8aacbe27d86044c633a466e41124603e26a207ce6b6715f06e5100542"
+    },
+    {
+      "bytes": 2050,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/launch_service_free_controls_once_v2.py",
+      "sha256": "6c7a1a3959890f079391ac8c800cf0f168e27fbc32c6b3289d9af7ddcfe269f4"
+    },
+    {
+      "bytes": 7642,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/OWNERFINAL-current-e2-inner-successor-v2-service-free-CONTROL-PREEXECUTION.json",
+      "sha256": "9111b4662e384c4fe272d684ea33e2620f813cbfa9cef84bed1382260d1e69cf"
+    },
+    {
+      "bytes": 7058,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-inner-v2-control-independent-review/OWNERFINAL-independent-current-e2-inner-v2-service-free-control-PREEXECUTION-review.json",
+      "sha256": "b318668ced8ea0acc62c666f0cb25449229070f52bceef3b24c119d20af31216"
+    },
+    {
+      "bytes": 1081,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/ROOT-one-service-free-control-execution-authorization.json",
+      "sha256": "03f022494298ecec45351016842a0689d8248dec52ff7a95de9ccc2fca38bf8a"
+    },
+    {
+      "bytes": 528,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/root-original-one-control-outer-terminal.json",
+      "sha256": "9475275fad6f367a2510100690b45bf17fd7983f6aead7619e2437e8ce7709cb"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/root-outer-stdout.private.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/root-outer-stderr.private.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 137,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-current-e2-inner-service-free-controls-v2-once-owned/original-control-terminal.json",
+      "sha256": "908cc486d64d527023a8a65cd2a088a466dbd6ee67a758fd135cd75c57a9213b"
+    },
+    {
+      "bytes": 2953,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-current-e2-inner-service-free-controls-v2-once-owned/stdout.private.log",
+      "sha256": "f2cdc1f75000dd55965d9e221d9b9272aaf36dfaeef074ea1d2aed250023dada"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-current-e2-inner-service-free-controls-v2-once-owned/stderr.private.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 9800,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-current-e2-inner-service-free-controls-v2-once-owned/junit.xml",
+      "sha256": "8fb252292db9f416bd342239ddce1b24aea3b803494e6e2d026c98d4459ea753"
+    },
+    {
+      "bytes": 12765,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/private-original-control-complete-JUnit-node-census.json",
+      "sha256": "c68bf352a708cb4bcaafa05536baac68a0109da89d474862108be0eb0a91ab2d"
+    },
+    {
+      "bytes": 5067,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/private-complete-one-control-output-file-inventory.json",
+      "sha256": "51acf96b7b544c2d51bd53246ca3202aa932f03aee80b37258a05f0361f2ea4c"
+    },
+    {
+      "bytes": 1072,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/canonical-real-data-inspector-entry-and-boundary-controls-proposed.patch",
+      "sha256": "10bd741b725aee1ebc786e5d6e78a5b10e20fb4ee2d27ca3c06c8d1ef85d796a"
+    },
+    {
+      "bytes": 9048,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/freeze_original_controls_and_inner_preexecution_v2.py",
+      "sha256": "f742389b4e2d24284d80ff746aa2d369edacc1ca1345ae54349652344d99ea22"
+    }
+  ],
+  "package_import_install_native": "NOT_RUN",
+  "proposal_binding": {
+    "bytes": 7642,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/OWNERFINAL-current-e2-inner-successor-v2-service-free-CONTROL-PREEXECUTION.json",
+    "sha256": "9111b4662e384c4fe272d684ea33e2620f813cbfa9cef84bed1382260d1e69cf"
+  },
+  "real_guards": "Actuallauncher8planrefs and activation18+PATH/cachedprefix verifiedbefore/alwayspost; additional executor17 historicalbindings rehashed post-control, not relabeled actuallauncher checks",
+  "remaining_holds": "This is not aggregateinspection, producercheckout/platform/consumer/sourceauthority/generatedOAuth/frontend/release qualification",
+  "schema": "OWNERFINAL_ORIGINAL_CURRENT_E2_INNER_V2_ACTUAL_SERVICE_FREE_CONTROLS",
+  "shared_product_outputs": "untouched by exactabsoluteownedcontrolargv",
+  "status": "PASS_REAL_FROZEN_FUNCTION_SERVICE_FREE_CONTROLS_ONLY",
+  "upstream_disposition": "none"
+}

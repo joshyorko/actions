@@ -1,0 +1,12 @@
+{
+  "status": "ORIGINAL_INSPECTOR_STOPPED_NO_SCOPE_RECEIPT_CREATED",
+  "constructor": {
+    "path": "/workspace/engineering/rcc-compatibility-transport-failure-metadata-v6-private-source/prove_v6_scope.py",
+    "bytes": 7488,
+    "sha256": "d5f4aebb205c3e9e07ecf3ae54fb30329f73ef6028e5fb2eda10e663f3e79126"
+  },
+  "failure": "Selected historical config-v1 while expecting actual config-v2 SHA8c5; prior whole AST normalization had passed",
+  "original_stderr_bytes": "UNAVAILABLE_TOOL_ASSERTION_ONLY",
+  "correction": "Named v2 changes ONLY selected original config path to frozen config-v2 from actual owner metadata",
+  "retrospective_original_PASS": false
+}

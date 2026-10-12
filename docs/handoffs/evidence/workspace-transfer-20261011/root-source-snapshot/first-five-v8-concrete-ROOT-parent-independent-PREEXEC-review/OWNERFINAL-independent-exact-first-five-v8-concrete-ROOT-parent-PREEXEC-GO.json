@@ -1,0 +1,168 @@
+{
+  "ROOT_capture_parent_seconds": 350,
+  "ROOT_pre_execution_requirements": {
+    "ROOTmaster_rehashes_self_owner_review_parent_childreview_before_and_on_all_outcomes": true,
+    "capture_original_MASTER_terminal_returncodes_timeout_and_alloutcome_bound_before_alwayspost_closure": true,
+    "no_replay_old_v7_failed_consumed_namespaces": true,
+    "owner_announced_one_attempt_adoption_of_exact_this_review_parent_childreview_config_all119rows": true,
+    "reject_inherited_operator_overrides_including_ADDOPTS_PYOPT_before_activation": true,
+    "serialized_no_otherheavy_storage_devshm_or_source_mutations": true,
+    "strict_generated_release600_uidgid1000_under_fresh_outer700_and_exactexpectedgrant": true
+  },
+  "ROOT_release_expected_shape": {
+    "ROOT_capture_parent_seconds": 350,
+    "ROOT_envelope_seconds": 320,
+    "ROOT_parent_binding": {
+      "bytes": 6866,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-reviewed-first-five-v8-PURE18-external-parent.py",
+      "sha256": "764028fe6aad30ba9ece309f24a8465755fe5abe042bb0efb6054c7a877a639a"
+    },
+    "config_binding": {
+      "bytes": 47036,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v8_current9760_measured_managed_Git_PURE18_inputs_NOTRUN_v4_originalFAIL_and_historical_system_scope.json",
+      "sha256": "0d4423f45acce573da98b262613971e497a91a9415d61f59142182678897365b"
+    },
+    "decision": "RELEASE_ONE_FIRST_FIVE_V8_CURRENT9760_MEASURED_GIT_MANAGED_PURE18_ONLY",
+    "independent_review_binding": {
+      "bytes": 10868,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v8-current9760-independent-SOURCE-child-PREEXEC-review/OWNERFINAL-independent-first-five-v8-measured-managed-Git-SOURCE-child-PREEXEC-GO-ROOT-parent-HOLD.json",
+      "sha256": "d5beacad97a0041aa4e61dfb338220f027cad239d56daf8f39ac9e5ed4374ce9"
+    },
+    "launcher_binding": {
+      "bytes": 12668,
+      "mode": "0o444",
+      "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v8_current9760_measured_managed_Git_PURE18_ROOT_ONLY_SOURCE_PREPARED_v2.py",
+      "sha256": "70b9123cd487a9b80fd7dfe62c06ba114ea0d5e46b7f2138c4fcccc55e50305c"
+    },
+    "schema": 1,
+    "serialized_no_other_heavy_or_storage_mutations": true
+  },
+  "actual_scope_HOLD": [
+    "PURE18 actualNOTRUN untilROOTseparateonceexecution",
+    "actualstorage/obsoleteenvironmentinactiveownerapproval remainsabsent",
+    "no native/cgroupprofile/provider/consumer/registry/wholegraphadmission"
+  ],
+  "budget": {
+    "ROOT_capture_parent": 350,
+    "ROOT_outer_KILL_grace": 10,
+    "ROOT_outer_TERM": 320,
+    "child_cooperative_guard_seconds_each": 30,
+    "child_original_inner_KILL": 10,
+    "child_original_inner_TERM": 120,
+    "child_original_inner_fallback": 140,
+    "child_parent_fallback": 260,
+    "external_before_child_post_fallback_sum": 320,
+    "externalguard_KILL_grace": 5,
+    "externalguard_TERM_seconds": 20,
+    "externalguard_parent_fallback": 30,
+    "original_child_KILL_grace": 10,
+    "original_child_TERM": 240,
+    "scope": "New separately approved ROOT orchestration; original child240 is not reinterpreted as the complete external parent."
+  },
+  "child_independent_binding": {
+    "bytes": 10868,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v8-current9760-independent-SOURCE-child-PREEXEC-review/OWNERFINAL-independent-first-five-v8-measured-managed-Git-SOURCE-child-PREEXEC-GO-ROOT-parent-HOLD.json",
+    "sha256": "d5beacad97a0041aa4e61dfb338220f027cad239d56daf8f39ac9e5ed4374ce9"
+  },
+  "child_launcher_binding": {
+    "bytes": 12668,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v8_current9760_measured_managed_Git_PURE18_ROOT_ONLY_SOURCE_PREPARED_v2.py",
+    "sha256": "70b9123cd487a9b80fd7dfe62c06ba114ea0d5e46b7f2138c4fcccc55e50305c"
+  },
+  "config_binding": {
+    "bytes": 47036,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v8_current9760_measured_managed_Git_PURE18_inputs_NOTRUN_v4_originalFAIL_and_historical_system_scope.json",
+    "sha256": "0d4423f45acce573da98b262613971e497a91a9415d61f59142182678897365b"
+  },
+  "control_source_binding": {
+    "bytes": 17042,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/test_first_five_v8_current9760_measured_managed_Git_PURE18_SOURCE_PREPARED.py",
+    "sha256": "0ee011db2e7edec7564ef05fc3ed610bb6f15483f52bd9ececb593c44aa5f096"
+  },
+  "decision": "GO_EXACT_FIRST_FIVE_V8_CONCRETE_ROOT_PARENT_PURE18_PREEXECUTION",
+  "documentation": {
+    "delta": "No canonical file mutation; reuse reviewed selected-address and exact named two-literal parent adoption/captured-buffer/external postguard budget lessons.",
+    "evidence": [
+      {
+        "bytes": 1419,
+        "mode": "0o400",
+        "path": "/workspace/engineering/OWNERFINAL-root-concrete-first-five-v8-parent-SOURCE-NOTRUN.json",
+        "sha256": "4fa342b8695391ad1baad69fb153dda9df5b44c17af05281369f7897f08e6565"
+      },
+      {
+        "bytes": 6866,
+        "mode": "0o400",
+        "path": "/workspace/engineering/root-reviewed-first-five-v8-PURE18-external-parent.py",
+        "sha256": "764028fe6aad30ba9ece309f24a8465755fe5abe042bb0efb6054c7a877a639a"
+      },
+      {
+        "bytes": 6718,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/ROOT-external-first-five-v8-measured-Git-parent-TEMPLATE-NOTEXECUTION.py",
+        "sha256": "b9024b2043c9857e75e13f255dabc24ebc3547293d0bf2f41a3a8a0151b433db"
+      },
+      {
+        "bytes": 10868,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v8-current9760-independent-SOURCE-child-PREEXEC-review/OWNERFINAL-independent-first-five-v8-measured-managed-Git-SOURCE-child-PREEXEC-GO-ROOT-parent-HOLD.json",
+        "sha256": "d5beacad97a0041aa4e61dfb338220f027cad239d56daf8f39ac9e5ed4374ce9"
+      }
+    ],
+    "stale_ambiguity_removed": "Absent REVIEW placeholders are closed only in new764 concreteparent, originalb902 template remains unexecuted and unchanged.",
+    "uncertainty": "No parent/guard/import/control executed; hard outerkill may prevent Pythonfinally, so ROOT master must retain original outer terminal on every outcome.",
+    "upstream_disposition": "none"
+  },
+  "exact_ROOT_master_argv": [
+    "/usr/bin/timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "320s",
+    "bash",
+    "-c",
+    "source /workspace/actions-cloud/activate.sh && export PATH=\"/workspace/actions-cloud/bin:/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\" && export PYTHONDONTWRITEBYTECODE=1 && exec /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python -B /workspace/engineering/root-reviewed-first-five-v8-PURE18-external-parent.py"
+  ],
+  "owner_binding": {
+    "bytes": 1419,
+    "mode": "0o400",
+    "path": "/workspace/engineering/OWNERFINAL-root-concrete-first-five-v8-parent-SOURCE-NOTRUN.json",
+    "sha256": "4fa342b8695391ad1baad69fb153dda9df5b44c17af05281369f7897f08e6565"
+  },
+  "parent_binding": {
+    "bytes": 6866,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-reviewed-first-five-v8-PURE18-external-parent.py",
+    "sha256": "764028fe6aad30ba9ece309f24a8465755fe5abe042bb0efb6054c7a877a639a"
+  },
+  "reviewer_execution": "Read-only original hashes/JSON/AST only, no tests/imports/guard/storage/native/source edits.",
+  "schema": 1,
+  "source": "9760d5ec44876558c4941c4c3190abc8d92d14a1",
+  "static_verified": {
+    "all_actual_parent_selected_physical_rows_body_mode_SHA_UIDGID1000_checked": 127,
+    "child_true18_machine_census_only_passes_fulluniqueIDs_zeroFES_actual_driver_origin": true,
+    "config119_currentphysical_rows_original98_and_nestedhistory_sourceUID0_not_selectedloop": true,
+    "distinct_parent_generated600_release_exacttyped_grant_with_parent_selfrow": true,
+    "fresh_outer_release_child_fixture_roots_ABSENT": true,
+    "guard_uses_exact_verified_childmodule_buffer_nonmain_and_ROOTrelease_review_globals": true,
+    "parent_selfrow_is_current__file__400_and_in_each_closure": true,
+    "rawbefore_primary_alwayspost_stdio_and_phase_terminals_sealed_fsynced": true,
+    "root_review_decision_matches_child_compatibleGO": true,
+    "selected_REVIEW_file_actual10868_hashd5be_mode400_uidgid1000_exact": true,
+    "source1440_native1192_managed18_PATH19_5origins_retained_by_unchanged_guard": true,
+    "whole_parent_inverse_text_and_AST_exact_after_only2_REVIEW_literals": true
+  },
+  "status": "GO_EXACT_TWO_REVIEW_LITERAL_PARENT_SUCCESSOR_PREEXECUTION_ONLY_NOTRUN",
+  "template_binding": {
+    "bytes": 6718,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/ROOT-external-first-five-v8-measured-Git-parent-TEMPLATE-NOTEXECUTION.py",
+    "sha256": "b9024b2043c9857e75e13f255dabc24ebc3547293d0bf2f41a3a8a0151b433db"
+  },
+  "tree": "0d33ebaac258e069ef7045a29b4a3904740f6307"
+}

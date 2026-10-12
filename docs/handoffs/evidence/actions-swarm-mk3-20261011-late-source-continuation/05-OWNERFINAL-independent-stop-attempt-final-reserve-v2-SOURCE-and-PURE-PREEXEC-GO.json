@@ -1,0 +1,335 @@
+{
+  "ROOT_execution_requirements": {
+    "ROOT_outer1200TERM10_parent1230_capture_original_terminal_even_if_inner_hardkilled": true,
+    "allrow_self_config_review_release_rootroles_before_eachstage_and_alwayspost": true,
+    "bind_exact_this0400_review_current213e_config_and_all3implementations": true,
+    "compatible_status_and_allliteral_fields_must_equal": true,
+    "fail_closed_on_exhaustion_or_anywrongcount_frame_skip_error_capturefailure_noadvance_noretry": true,
+    "fresh700_ownedroot_and_literal_phase_output_paths_exclusiveABSENT": true,
+    "new_distinct0600_regular_nonsymlink_UIDGID1000_fixed_release_path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-release.json",
+    "original_STDOUT_STDERR_terminal_and_machinecensus_fsynced_before_admission": true,
+    "primary_and_post_and_retention_failure_kept_separate": true,
+    "serialize_no_otherheavy_storage_source_or_devshm_mutations": true,
+    "sourcecontrols_only_no_real_cgroup_signals_native_profile_or_provider_admission": true
+  },
+  "caller_config_sha256": "213e57708b87a6fc08d616a16541f7a782f1eb4af9d0d80fa7c41c8c1c1e534b",
+  "caller_contract_sha256": "dd71f115af8690e7d721a7d8d88284b21f0a230a22af8894f1908471aed1cd1c",
+  "config_binding": {
+    "bytes": 67325,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/FROZEN-stop-attempt-final-reserve-v2-ROOT-config-NOTRUN.json",
+    "sha256": "213e57708b87a6fc08d616a16541f7a782f1eb4af9d0d80fa7c41c8c1c1e534b"
+  },
+  "config_sha256": "59f02612d2660b793ead8c5c945af3d648e8427f6f3a30e872f0272113bf63ff",
+  "deadline_scope": {
+    "ROOT_KILL": 10,
+    "ROOT_outer_TERM": 1200,
+    "ROOT_parent": 1230,
+    "dynamic_TERM": "min120(remaining-15) with10KILL+5fallbackreserve",
+    "dynamic_parent": "min135(remaining) rechecked immediately beforePopen; no newstage onexhaustion",
+    "external_before_KILL": 10,
+    "external_before_TERM": 120,
+    "external_before_parent": 135,
+    "external_fallback_sum": 1200,
+    "external_post_KILL": 10,
+    "external_post_TERM": 120,
+    "external_post_parent": 135,
+    "inner_KILL": 10,
+    "inner_TERM": 900,
+    "inner_parent": 930,
+    "inner_reserved_alwayspost_parent": 135,
+    "inner_shared_deadline_enforced": true,
+    "inner_shared_primary_seconds": 765,
+    "minimum_new_stage_remaining": 15,
+    "nominal_KILL": 10,
+    "nominal_each_guard_and_phase_TERM": 120,
+    "nominal_parent": 135,
+    "uncapped_inner_nominal_fallback_sum": 1215
+  },
+  "decision": "GO_EXACT_CURRENT8D49_STOP_ATTEMPT_FINAL_RESERVE_V2_PURE_PREEXECUTION",
+  "documentation": {
+    "delta": "No canonical file edit. The exact previously proposed launch-boundary freshness lesson is now represented in source: recompute selected command timeout and fallback from the same final remaining-budget observation, with the15s reserve checked at launch.",
+    "evidence": [
+      {
+        "bytes": 9120,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-stop-attempt-concrete-caller-independent-PREEXEC-review/OWNERFINAL-independent-original-stop-attempt-concrete-caller-PREEXEC-shared-deadline-HOLD.json",
+        "sha256": "532eae986a87ba8a1597444af6c5d464f216d3777c6fac4b21bbfcce8aba0a59"
+      },
+      {
+        "bytes": 5064,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/exact-final-prelaunch-reserve-common-block-inverse-proof-NOTRUN.json",
+        "sha256": "9e313e85995268f01e77d79dff1c7f76ade20a17c1c5a70eba06646591f80c2d"
+      },
+      {
+        "bytes": 9839,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/stop_attempt_caller_contract_v1_NOTRUN.py",
+        "sha256": "dd71f115af8690e7d721a7d8d88284b21f0a230a22af8894f1908471aed1cd1c"
+      }
+    ],
+    "stale_ambiguity_removed": "The old positive-only final check and stale earlier TERM are preserved only in historical original9fd/532, not passed off as current reserve closure.",
+    "uncertainty": "No imports, controls, guard, real process, native, cgroup or operation executed; whole900 may expire before completing all nominal1215 fallback phases and must fail closed.",
+    "upstream_disposition": "none"
+  },
+  "exact_ROOT_argv_template_NOT_AUTHORIZED": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "1200s",
+    "bash",
+    "-c",
+    "export PATH=\"/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\"; source /workspace/actions-cloud/activate.sh && exec \"$@\"",
+    "stop-attempt-root-once",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/run_stop_attempt_external_parent_v1_NOTRUN.py",
+    "--caller-config-sha256",
+    "213e57708b87a6fc08d616a16541f7a782f1eb4af9d0d80fa7c41c8c1c1e534b",
+    "--release",
+    "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-release.json",
+    "--release-sha256",
+    "ROOT_REAL_DISTINCT_RELEASE_SHA256"
+  ],
+  "exact_delta_proof_binding": {
+    "bytes": 5064,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/exact-final-prelaunch-reserve-common-block-inverse-proof-NOTRUN.json",
+    "sha256": "9e313e85995268f01e77d79dff1c7f76ade20a17c1c5a70eba06646591f80c2d"
+  },
+  "external_parent_sha256": "759c172d02b4b1d417b701bfa464ef2b5ce3e7aabba13a083947003c2ff03a28",
+  "guard_only_authorization": {
+    "dynamic_timeout_only": "Inner shared-primary calls may shorten only120s GNUtimeout token, reserving10sKILL+5s fallback; all other guard arguments frozen. External before/post remain120s/135.",
+    "exact_argv": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "120s",
+      "bash",
+      "-c",
+      "export PATH=\"/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\"; source /workspace/actions-cloud/activate.sh && exec \"$@\"",
+      "stop-attempt-guard-only",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/run_root_defaultbackend35_once2_exact_census_NOTRUN.py",
+      "--phase",
+      "guard",
+      "--config",
+      "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/FROZEN-defaultbackend35-once2-exact-census-config-NOTRUN.json",
+      "--config-sha256",
+      "7021f53c12b5392ffe5cf14da7915f25188c68e6d5a9a3b07458b588c4b527fa",
+      "--release",
+      "/workspace/engineering/root-one-defaultbackend35-once2-exact-census-release.json",
+      "--release-sha256",
+      "f9079a6dfb8e234e4976d1a3feb32d88be9f3ff9ba6c32bc3a6d43d5cfecbf02"
+    ],
+    "guard_ACTUAL_pure_review": {
+      "bytes": 5619,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-independent-ACTUAL-review/OWNERFINAL-independent-original-defaultbackend35-once2-exact-census-ACTUAL-PURE-GO.json",
+      "sha256": "232365377184c5e9534ebf13eb57e6859a2ed33a3c0c58fd66611546089df60f"
+    },
+    "guard_PREEXEC_review": {
+      "bytes": 11606,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-independent-PREEXEC-review/OWNERFINAL-independent-defaultbackend35-once2-exact-census-SOURCE-PREEXEC-GO.json",
+      "sha256": "b309b76054718d5deecce80b482f012b0ebbf9f37bdb2ccf42673dbac3758b3e"
+    },
+    "guard_config_binding": {
+      "bytes": 35851,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/FROZEN-defaultbackend35-once2-exact-census-config-NOTRUN.json",
+      "sha256": "7021f53c12b5392ffe5cf14da7915f25188c68e6d5a9a3b07458b588c4b527fa"
+    },
+    "guard_launcher_binding": {
+      "bytes": 12589,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/run_root_defaultbackend35_once2_exact_census_NOTRUN.py",
+      "sha256": "4d52c52e806266a7b399e4d24671bc500b4aa7d98c334192fa16c30ed139f4d9"
+    },
+    "historical_consumed_release": {
+      "bytes": 2026,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-defaultbackend35-once2-exact-census-release.json",
+      "sha256": "f9079a6dfb8e234e4976d1a3feb32d88be9f3ff9ba6c32bc3a6d43d5cfecbf02"
+    },
+    "permitted_phase": "guard",
+    "rerun35_or_native": false,
+    "role": "New ROOT release authorizes only identity guard reuse; old consumed release is historical admission identity, never a second35 launch grant.",
+    "schema": 1
+  },
+  "guard_only_role": {
+    "complete_originalguard_before_each_phase_inner_and_external_alwayspost": true,
+    "newROOTgrant_explicitly_authorizes_only_phase_guard": true,
+    "no35_rerun_native_or_new_release_from_old_consumedgrant": true,
+    "old_guard4d52_7021_historical_f907_identity_preserved": true
+  },
+  "helper_sha256": "db6542cbff2210516ba2bce7383f0c6e4e41af23709f1765136c4d2281bacbb1",
+  "implementation_bindings": {
+    "caller_contract": {
+      "bytes": 9839,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/stop_attempt_caller_contract_v1_NOTRUN.py",
+      "sha256": "dd71f115af8690e7d721a7d8d88284b21f0a230a22af8894f1908471aed1cd1c"
+    },
+    "external_parent": {
+      "bytes": 3690,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/run_stop_attempt_external_parent_v1_NOTRUN.py",
+      "sha256": "759c172d02b4b1d417b701bfa464ef2b5ce3e7aabba13a083947003c2ff03a28"
+    },
+    "inner_caller": {
+      "bytes": 3243,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/run_stop_attempt_inner_caller_v1_NOTRUN.py",
+      "sha256": "33685600cd45de01ad16744cc35d89f3b548015e9c840463fdb302769d01b57d"
+    }
+  },
+  "inner_caller_sha256": "33685600cd45de01ad16744cc35d89f3b548015e9c840463fdb302769d01b57d",
+  "original_PREEXEC_HOLD": {
+    "bytes": 9120,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-stop-attempt-concrete-caller-independent-PREEXEC-review/OWNERFINAL-independent-original-stop-attempt-concrete-caller-PREEXEC-shared-deadline-HOLD.json",
+    "sha256": "532eae986a87ba8a1597444af6c5d464f216d3777c6fac4b21bbfcce8aba0a59"
+  },
+  "original_owner": {
+    "bytes": 45175,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-stop-attempt-concrete-ROOT-caller-PREEXEC-NOTRUN/OWNERFINAL-stop-attempt-concrete-inner-external-parent-PREEXEC-NOTRUN.json",
+    "sha256": "9fd59226cf8ac1a5d3f7e084010acf39f72fdc9b3224062b0f9cd17e2e098ff0"
+  },
+  "owner_binding": {
+    "bytes": 51246,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/OWNERFINAL-stop-attempt-final-prelaunch-reserve-v2-SOURCE-PREEXEC-NOTRUN.json",
+    "sha256": "bbc712b0d171349e262c1ac5c7c789f5df86c0c93dde2a011515f4ca038f9b6e"
+  },
+  "phase_census_admission": {
+    "RED_disk_preauthorization": "0P1F0E0S exact one AssertionError/sourcefunction/frame222",
+    "RED_memory_preauthorization": "0P1F0E0S exact one AssertionError/sourcefunction/frame208",
+    "baseline_original16": "16P0F0E0S exact IDs and original held overlay",
+    "helper_returns0_only_expected_original_machine_census_no_generic_nonzero_normalization": true,
+    "restored_successor20": "20P0F0E0S exact IDs and successor overlay"
+  },
+  "required_ROOT_release_template": {
+    "caller_config_sha256": "213e57708b87a6fc08d616a16541f7a782f1eb4af9d0d80fa7c41c8c1c1e534b",
+    "config_sha256": "59f02612d2660b793ead8c5c945af3d648e8427f6f3a30e872f0272113bf63ff",
+    "decision": "ROOT_RELEASE_ONE_STOP_ATTEMPT_SOURCE_CONTROLS_ONLY",
+    "guard_only_authorization": {
+      "dynamic_timeout_only": "Inner shared-primary calls may shorten only120s GNUtimeout token, reserving10sKILL+5s fallback; all other guard arguments frozen. External before/post remain120s/135.",
+      "exact_argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "120s",
+        "bash",
+        "-c",
+        "export PATH=\"/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\"; source /workspace/actions-cloud/activate.sh && exec \"$@\"",
+        "stop-attempt-guard-only",
+        "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+        "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/run_root_defaultbackend35_once2_exact_census_NOTRUN.py",
+        "--phase",
+        "guard",
+        "--config",
+        "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/FROZEN-defaultbackend35-once2-exact-census-config-NOTRUN.json",
+        "--config-sha256",
+        "7021f53c12b5392ffe5cf14da7915f25188c68e6d5a9a3b07458b588c4b527fa",
+        "--release",
+        "/workspace/engineering/root-one-defaultbackend35-once2-exact-census-release.json",
+        "--release-sha256",
+        "f9079a6dfb8e234e4976d1a3feb32d88be9f3ff9ba6c32bc3a6d43d5cfecbf02"
+      ],
+      "guard_ACTUAL_pure_review": {
+        "bytes": 5619,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-independent-ACTUAL-review/OWNERFINAL-independent-original-defaultbackend35-once2-exact-census-ACTUAL-PURE-GO.json",
+        "sha256": "232365377184c5e9534ebf13eb57e6859a2ed33a3c0c58fd66611546089df60f"
+      },
+      "guard_PREEXEC_review": {
+        "bytes": 11606,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-independent-PREEXEC-review/OWNERFINAL-independent-defaultbackend35-once2-exact-census-SOURCE-PREEXEC-GO.json",
+        "sha256": "b309b76054718d5deecce80b482f012b0ebbf9f37bdb2ccf42673dbac3758b3e"
+      },
+      "guard_config_binding": {
+        "bytes": 35851,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/FROZEN-defaultbackend35-once2-exact-census-config-NOTRUN.json",
+        "sha256": "7021f53c12b5392ffe5cf14da7915f25188c68e6d5a9a3b07458b588c4b527fa"
+      },
+      "guard_launcher_binding": {
+        "bytes": 12589,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/run_root_defaultbackend35_once2_exact_census_NOTRUN.py",
+        "sha256": "4d52c52e806266a7b399e4d24671bc500b4aa7d98c334192fa16c30ed139f4d9"
+      },
+      "historical_consumed_release": {
+        "bytes": 2026,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-defaultbackend35-once2-exact-census-release.json",
+        "sha256": "f9079a6dfb8e234e4976d1a3feb32d88be9f3ff9ba6c32bc3a6d43d5cfecbf02"
+      },
+      "permitted_phase": "guard",
+      "rerun35_or_native": false,
+      "role": "New ROOT release authorizes only identity guard reuse; old consumed release is historical admission identity, never a second35 launch grant.",
+      "schema": 1
+    },
+    "helper_sha256": "db6542cbff2210516ba2bce7383f0c6e4e41af23709f1765136c4d2281bacbb1",
+    "implementation_bindings": {
+      "caller_contract": {
+        "bytes": 9839,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/stop_attempt_caller_contract_v1_NOTRUN.py",
+        "sha256": "dd71f115af8690e7d721a7d8d88284b21f0a230a22af8894f1908471aed1cd1c"
+      },
+      "external_parent": {
+        "bytes": 3690,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/run_stop_attempt_external_parent_v1_NOTRUN.py",
+        "sha256": "759c172d02b4b1d417b701bfa464ef2b5ce3e7aabba13a083947003c2ff03a28"
+      },
+      "inner_caller": {
+        "bytes": 3243,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/run_stop_attempt_inner_caller_v1_NOTRUN.py",
+        "sha256": "33685600cd45de01ad16744cc35d89f3b548015e9c840463fdb302769d01b57d"
+      }
+    },
+    "independent_PREEXEC": null,
+    "schema": 1,
+    "serialized_no_other_heavy_or_storage_mutations": true,
+    "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+    "source_independent": {
+      "bytes": 4630,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-stop-attempt-independent-SOURCE-and-phase-PREEXEC-review/OWNERFINAL-independent-current8d49-stop-attempt-composition-SOURCE-GO-NOTEXECUTED.json",
+      "sha256": "cd5ca803945f30b806e255066cf353ff2f3342efc5f2411d9aeca2343ab0bae2"
+    },
+    "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+  },
+  "reviewer_execution": "READ_ONLY_SOURCE_HASH_JSON_AST_GIT_ONLY_NO_IMPORT_TEST_GUARD_OR_NATIVE",
+  "root_contract_binding": {
+    "bytes": 14343,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/ROOT-final-reserve-v2-distinct-release-and-exact-argv-contract-NOTRUN.json",
+    "sha256": "35554b406aca624d4c4d78eb782379c0d3802dd1c5a3938c8306083ed086092b"
+  },
+  "schema": 1,
+  "scope": "SOURCE_AND_CONCRETE_PURE_PREEXECUTION_ONLY_NO_EXECUTION",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_independent_sha256": "cd5ca803945f30b806e255066cf353ff2f3342efc5f2411d9aeca2343ab0bae2",
+  "status": "INDEPENDENT_STOP_ATTEMPT_COMPOSITION_PURE_PREEXECUTION_GO",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "verified": {
+    "all_4phase_output_paths_root_contract_unchanged_andABSENT": true,
+    "current8d49_a806_git_head_tree_trackedclean_observed": true,
+    "final_actual_TERM_argument_and_parentfallback_updated_from_same_remaining_snapshot": true,
+    "final_prelaunch_remaining_rechecked_greater_than15": true,
+    "inner_and_external_wholebytes_exact_at_new_addresses": true,
+    "original120_rows_exact_plus11_new_immutable_rows_all131_hash_size_mode_checked": true,
+    "original59f_config_db65_helper_four_phase_commands_expectations_sourceframes_exact": true,
+    "original9fd532_and_failed_runtime_owners_not_relabelled": true,
+    "selected_CONFIG_basename_resolves_announced213e67325_body_exact": true,
+    "timeout_token_index_saved_before_initial120s_replacement": true,
+    "wholecommon_inverse_text_AST_exact_only_BASE_CFG_saved_timeout_index_and_finalreserveblock": true
+  }
+}

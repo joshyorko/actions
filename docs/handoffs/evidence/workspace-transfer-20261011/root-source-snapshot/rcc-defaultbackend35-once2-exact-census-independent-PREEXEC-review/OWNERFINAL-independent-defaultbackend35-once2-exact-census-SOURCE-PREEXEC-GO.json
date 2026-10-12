@@ -1,0 +1,204 @@
+{
+  "ROOT_exact_child_argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "600s",
+    "bash",
+    "-c",
+    "export PATH=\"/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\"; source /workspace/actions-cloud/activate.sh && exec \"$@\"",
+    "defaultbackend35-once",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/run_root_defaultbackend35_once2_exact_census_NOTRUN.py",
+    "--phase",
+    "launch",
+    "--config",
+    "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/FROZEN-defaultbackend35-once2-exact-census-config-NOTRUN.json",
+    "--config-sha256",
+    "7021f53c12b5392ffe5cf14da7915f25188c68e6d5a9a3b07458b588c4b527fa",
+    "--release",
+    "/workspace/engineering/root-one-defaultbackend35-once2-exact-census-release.json",
+    "--release-sha256",
+    "ROOT_REAL_DISTINCT_RELEASE_SHA256"
+  ],
+  "ROOT_external_parent_requirement": {
+    "ROOT_adoption_requirements": [
+      "Wait for currently running PR307 LIGHT terminal; serialize no other heavy/storage/native mutations",
+      "Before first launch, rehash this independent400 review, ROOT600 release,400 config/launcher,87 retained files/current source/native/prepared/origins under exact18 managed exports+PATH2 and no inherited pytest/optimize/operator override",
+      "ROOT independently executes exact same launcher with --phase guard before AND in an external always-post step on every outcome, including inner600TERM/KILL; each guard120TERM10 with135 parent",
+      "ROOT whole caller930s must cover135 external-before +630 inner envelope +135 external-post =900 fallback plus30capture margin. This does not increase any child/control/guard budget. Preserve raw private captured outputs and separate original-primary/post/retention results before assertion.",
+      "Rehash strict typed release/review/self/config/all frozen refs again on every outcome; child finally alone does not establish post after hardkill",
+      "New once2 root/release/basetemp/logger/JUnit initially ABSENT; no old namespace reuse/automatic retry",
+      "Actual independent admission must inspect complete original35 XML AND stdout names, exact rootdir/classname/source path and0F/E/S. PREEXEC is no actual35 pass count"
+    ],
+    "external_alwayspost_parent": 135,
+    "external_before_parent": 135,
+    "external_guard_argv_template": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "120s",
+      "bash",
+      "-c",
+      "export PATH=\"/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\"; source /workspace/actions-cloud/activate.sh && exec \"$@\"",
+      "defaultbackend35-once",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/run_root_defaultbackend35_once2_exact_census_NOTRUN.py",
+      "--phase",
+      "guard",
+      "--config",
+      "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/FROZEN-defaultbackend35-once2-exact-census-config-NOTRUN.json",
+      "--config-sha256",
+      "7021f53c12b5392ffe5cf14da7915f25188c68e6d5a9a3b07458b588c4b527fa",
+      "--release",
+      "/workspace/engineering/root-one-defaultbackend35-once2-exact-census-release.json",
+      "--release-sha256",
+      "ROOT_REAL_DISTINCT_RELEASE_SHA256"
+    ],
+    "inner_parent": 630,
+    "inner_reviewed_envelope": {
+      "KILL_grace_seconds": 10,
+      "TERM_seconds": 600,
+      "exact_argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "600s",
+        "bash",
+        "-c",
+        "export PATH=\"/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\"; source /workspace/actions-cloud/activate.sh && exec \"$@\"",
+        "defaultbackend35-once",
+        "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+        "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/run_root_defaultbackend35_once2_exact_census_NOTRUN.py",
+        "--phase",
+        "launch",
+        "--config",
+        "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/FROZEN-defaultbackend35-once2-exact-census-config-NOTRUN.json",
+        "--config-sha256",
+        "7021f53c12b5392ffe5cf14da7915f25188c68e6d5a9a3b07458b588c4b527fa",
+        "--release",
+        "/workspace/engineering/root-one-defaultbackend35-once2-exact-census-release.json",
+        "--release-sha256",
+        "ROOT_REAL_DISTINCT_RELEASE_SHA256"
+      ],
+      "original_internal_budgets_unchanged": {
+        "alwayspost": 120,
+        "alwayspost_kill": 10,
+        "alwayspost_parent": 135,
+        "before": 120,
+        "before_kill": 10,
+        "before_parent": 135,
+        "fallback_sum": 420,
+        "margin": 180,
+        "primary": 120,
+        "primary_kill": 10,
+        "primary_parent": 150,
+        "root_kill": 10,
+        "root_outer": 600,
+        "root_parent": 630
+      },
+      "parent_wait_seconds": 630
+    },
+    "outermost_total_seconds": 930
+  },
+  "ROOT_release_template": {
+    "config_binding": {
+      "bytes": 35851,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/FROZEN-defaultbackend35-once2-exact-census-config-NOTRUN.json",
+      "sha256": "7021f53c12b5392ffe5cf14da7915f25188c68e6d5a9a3b07458b588c4b527fa"
+    },
+    "independent_preexecution_review": null,
+    "launcher_binding": {
+      "bytes": 12589,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/run_root_defaultbackend35_once2_exact_census_NOTRUN.py",
+      "sha256": "4d52c52e806266a7b399e4d24671bc500b4aa7d98c334192fa16c30ed139f4d9"
+    },
+    "root": "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-2",
+    "schema": 1,
+    "serialized_no_other_heavy_or_storage_mutations": true,
+    "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+    "source_independent_review": {
+      "bytes": 10081,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-default-backend35-independent-SOURCE-review/OWNERFINAL-independent-current8d49-default-descriptor19functions35cases-SOURCE-prepared-GO.json",
+      "sha256": "d3986dbc2335d3655fc204e4702c0dd7a715793dc91072f928cc2752e076506f"
+    },
+    "source_owner_binding": {
+      "bytes": 10628,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-default-descriptor-walk-controls-PREPARED-NOTRUN/OWNERFINAL-current8d49-real-default-descriptor-walk-35-controls-SOURCE-PREPARED-NOTRUN.json",
+      "sha256": "e7954c3bc19374991213dd70fff3e64d2f7971e84c1c74fa573aee75f16ec7d5"
+    },
+    "status": "ROOT_DISTINCT_ONE_DEFAULT_DESCRIPTOR35_ONCE2_EXACT_CENSUS_PURE_CONTROLS",
+    "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+  },
+  "actual_tests_imports_collector_native": "NOT_RUN",
+  "bounds": "Inner600TERM10/630 and original120TERM10 phases unchanged; added ROOT external120TERM10/135 before+alwayspost, wholecaller930 covers900fallback+30capture only",
+  "config_binding": {
+    "bytes": 35851,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/FROZEN-defaultbackend35-once2-exact-census-config-NOTRUN.json",
+    "sha256": "7021f53c12b5392ffe5cf14da7915f25188c68e6d5a9a3b07458b588c4b527fa"
+  },
+  "config_sha256": "7021f53c12b5392ffe5cf14da7915f25188c68e6d5a9a3b07458b588c4b527fa",
+  "contract_binding": {
+    "bytes": 6253,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/ROOT-distinct-once2-exact-census-command-contract-NOTRUN.json",
+    "sha256": "a246d9b4f6bbbff37b1fbd108d4bcb3f91d60d746a75d26b6d2d7e4507c76f14"
+  },
+  "control_successor_proof_sha256": "8456e2c7b458cabaebab581623ca79c7bec4d1ad47877eee9ed477f3d5e5efe8",
+  "controls_binding": {
+    "bytes": 16505,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-defaultbackend35-typed-oracle-once2-PREEXEC-NOTRUN/test_default_cgroup_descriptor_walk_NOTRUN.py",
+    "sha256": "cf43fd5b5774ab61c272dc17acd9b95841a0fcd663dd56947c12c9c8f370b307"
+  },
+  "controls_sha256": "cf43fd5b5774ab61c272dc17acd9b95841a0fcd663dd56947c12c9c8f370b307",
+  "decision": "GO_DEFAULTBACKEND35_ONCE2_EXACT_CENSUS_SOURCE_AND_PREEXECUTION_ONLY",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_reused": "docs/skills/repository-operations.md existing emitter/semantic-marker and selected-address/producer-protocol closure lessons reused",
+    "Durable_learning_captured": "JUnit classname follows rootdir-relative nodeid; displayed stdout source path is cwd-relative. Bind explicit rootdir and exact full classname/path without foreign-class or suffix waiver; external parent postguard is distinct from child finally.",
+    "Evidence": "Original35 directory-qualified XML/rootdir, installed junitxml.py producer51ea, preservedcf43 control, new exactcensus AST/argv/proof/87 hashes",
+    "Remaining_uncertainty": "Once2 actual35, host cgroup latency/calibration and native behavior remain NOT_RUN/HOLD",
+    "Stale_or_ambiguous_guidance_removed": "Old bare-stem expectation rejected under originale30HOLD; no sourceguard-finally-after-hardkill or process0\u219235 count promotion"
+  },
+  "independent_proof": {
+    "bytes": 5729,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-independent-PREEXEC-review/private-independent-exact-rootdir-classname-stdout-and-launch-closure-proof.json",
+    "sha256": "376e6b9e31aec5c8b53f58beaa35b66f6550dcef9439acb93291c87df0712fc0"
+  },
+  "launcher_binding": {
+    "bytes": 12589,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/run_root_defaultbackend35_once2_exact_census_NOTRUN.py",
+    "sha256": "4d52c52e806266a7b399e4d24671bc500b4aa7d98c334192fa16c30ed139f4d9"
+  },
+  "launcher_sha256": "4d52c52e806266a7b399e4d24671bc500b4aa7d98c334192fa16c30ed139f4d9",
+  "limits": [
+    "35 controlled default descriptor walks on owned fake tree only; no real-host cgroup latency/calibration/source adoption",
+    "No new native RCC/Action/lease/provider/internal readers/threshold policy/full private/release qualification",
+    "Exact ROOT release and serialized execution followed independent ACTUAL review remain required"
+  ],
+  "original_ACTUALFAIL_and_PREEXECHOLD_preserved": {
+    "first34P1F": "Original remains FAIL, a4b bound unchanged",
+    "typed_once2_census_HOLD": "Original926/e30 unchanged; no attempted gate at that subject"
+  },
+  "owner": {
+    "bytes": 30838,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/OWNERFINAL-defaultbackend35-once2-exact-rootdir-census-SOURCE-and-PREEXEC-NOTRUN.json",
+    "sha256": "16e9559a0cd9aab43d295695625fc8f5062b98fde2796afb0c708e95eae62b60"
+  },
+  "reviewer_execution": "Read-only stdlib AST/data/hash/Git verification only; no tests/imports of prepared modules/collector/source writes/native",
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_count": 1440,
+  "source_review": "GO_UNCHANGED_TYPED_FINAL_CONTROL_AND_EXACT_CENSUS_BINDING_SOURCE_ONLY",
+  "status": "INDEPENDENT_DEFAULTBACKEND35_ONCE2_EXACT_CENSUS_SOURCE_PREEXECUTION_GO",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none"
+}

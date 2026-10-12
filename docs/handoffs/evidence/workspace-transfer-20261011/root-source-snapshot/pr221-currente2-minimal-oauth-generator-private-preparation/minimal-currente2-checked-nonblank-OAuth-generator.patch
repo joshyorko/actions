@@ -1,0 +1,24 @@
+--- a/action_server/tasks.py
++++ b/action_server/tasks.py
+@@ -514,6 +514,7 @@
+             f"{base_api_url}/{actions_config_file_name}",
+         ],
+         stdout=subprocess.PIPE,
++        check=True,
+     ).stdout.decode("utf-8")
+ 
+     default_user_config_contents = subprocess.run(
+@@ -525,7 +526,13 @@
+             f"{base_api_url}/{default_user_config_file_name}",
+         ],
+         stdout=subprocess.PIPE,
++        check=True,
+     ).stdout.decode("utf-8")
++
++    if not result_actions_config_contents.strip():
++        raise RuntimeError("OAuth2 actions configuration is empty")
++    if not default_user_config_contents.strip():
++        raise RuntimeError("OAuth2 default-user configuration is empty")
+ 
+     file_contents = {
+         "actions_config": result_actions_config_contents,

@@ -1,0 +1,108 @@
+{
+  "Documentationimprovement": {
+    "Canonicalfilechanged/proposed": "docs/skills/repository-operations.md changed in9724 and71f60",
+    "Durablelearning": "Separate published-Core acceptance from candidate-wheel source proof; bind measured worker samples, explicit browser selection, source bytes and zero-skip JUnit. Privately own short browser-only temp roots to avoid Chromium Unix socket length limits, retain owned cleanup on success/failure.",
+    "Evidence": "Immutable publication receipt4c7e6530:core-publication-readback.json; accepted candidate artifact11684141199; browser selection RED/GREEN; attempt1 actualerror-context; browser temp RED/GREEN; scoped57pass and configured checks.",
+    "Remaininguncertainty": "Source Runtime/published Core/browser path nowproved at exact71f60. Three member samples limited; adoptedbrowserzombies remaina cleanup observation; authorizedartifactretrieval and frozen/ChatGPT acceptance stillblocked by sharedcontracts. Combinedhostedexact-head gates pendingworkflowintegration.",
+    "Staleguidanceremoved": "Obsolete unpublished-Core hold and priorPR282 sourcehash; guide now records published1.0.3/a709 and separate candidate/published lanes."
+  },
+  "Upstreamdisposition": "none; no authorized upstream reportingtarget, local test-harness defect.",
+  "actual_consumer_evidence": {
+    "gateway_log": "/workspace/actions-cloud/receipts/pr282-writer/published-consumer-gateway-attempt2.log",
+    "junit_sha256": "b258c5cca3c0aa6a9499f75a672b2a1c2540a3e6c6ce6320c1a72c7f8c0e7e1a",
+    "outer_cleanup_observation": {
+      "limits": "Adopted browser zombies cannot be reaped by this owner. Runtime structuredcleanup fullypassed, browser/root removalpassed, universaldescendantadoption notclaimed.",
+      "live_execution": false,
+      "pgid": 18414,
+      "pids": [
+        18418,
+        18419
+      ],
+      "ppid": 1,
+      "status": "Z(defunct)"
+    },
+    "receipt_sha256": "387915157b68d339a0bca151868c706cfc8e62e6c03609e9c96fdf11ecd3d727",
+    "run_root": "/workspace/actions-cloud/receipts/pr282-writer/published-71f60ee8b931cb968866db5a8f45ba2056d18ed8-2"
+  },
+  "changed_paths": [
+    "action_server/tests/action_server_tests/mcp/test_canvas_query_template.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "checks": {
+    "Bootstrap": "PASS five isolated package environments",
+    "Doctor": "PASS",
+    "ToolkitTest": "62passed",
+    "actual_published_attempt1": "FAILED;1test,1failure,0skips; ChromiumSingletonSocket pathlength beforepage",
+    "actual_published_attempt2": "PASS one exactcase,0skips/failures/errors,38.34s; strict proposedhostedvalidator independentlyaccepted actualreceipt+JUnit",
+    "browser_selection_green": "2passed",
+    "browser_selection_red": "2failed priorselection",
+    "browser_temp_green": "4passed with selection tests",
+    "browser_temp_red": "2failed priorinheritedlongpath",
+    "configured_lint": "PASS299formattedfiles; optionalMarkdownmdl unavailable",
+    "configured_typecheck": "PASS331files",
+    "full_runtime_suite": "NOT_RUN; scope narrows to template/bundle/contracts and actual published consumer, combinedexact-head hostedgates pending",
+    "portable_affected_scope": "57passed,2integrationdeselected"
+  },
+  "hosted_proposal": {
+    "application": "Root serial generatorintegration only; sourceworktree untouched.",
+    "path": "/workspace/actions-cloud/receipts/pr282-writer/hosted-invocation-delta.yml",
+    "sha256": "79cf37ceeb58dcac1e03896022632e823d6134201891411b3bc75aec2625d971"
+  },
+  "normal_refresh": {
+    "leaf_count": 1402,
+    "novel_blobs": [
+      "docs/skills/repository-operations.md"
+    ],
+    "parents": [
+      "66cc132367be02b05bc08c981b900a68d156cd52",
+      "ba85aac7324ea4463bfba8c5f8586e27706dc2fe"
+    ],
+    "tree": "f127446b25cefae27c9df744a88195ce5bf38a45"
+  },
+  "preserved": "All other tracked source, templates, manifests, ZIPs, generator and generated workflow bytes identical to refresh0859e15c. No push.",
+  "runner_review": {
+    "actual_consumer_status": "NOT_RUN; attempt1 retained, attempt2 requires independent review and serialized parent GO",
+    "browser": {
+      "path": "/workspace/actions-cloud/cache/playwright/chromium-1234/chrome-linux64/chrome",
+      "playwright": "1.62.1",
+      "sha256": "0b20b130e7edd9dd51873be867761295fe0cfad490c2b9a64f95bd3cfc08fa71",
+      "version": "Google Chrome for Testing151.0.7922.34"
+    },
+    "checkpoint": "71f60ee8b931cb968866db5a8f45ba2056d18ed8",
+    "cleanup": {
+      "browser": "existing _run_owned_process_tree180s with known explicit executable; version query10s",
+      "outer": "existing reviewed _run_owned_process_tree, private child session,600s deadline plus finite owned cleanup",
+      "playwright_workers": 1,
+      "runtime": "existing Process._stop_and_reap_until20s; require execution_stopped and no active readers, preserve primary failure",
+      "worker_cap": 2
+    },
+    "failure_observability": "Preserves CalledProcessError/TimeoutExpired stdout and stderr to separate owned pytest logs and final gateway before re-raising.",
+    "gate": "tests/action_server_tests/mcp/test_canvas_query_template.py::test_canvas_template_runs_through_runtime_and_real_browser",
+    "launch": [
+      "/workspace/engineering/pr282/action_server/.venv/bin/python",
+      "/workspace/actions-cloud/receipts/pr282-writer/published-consumer-runner-attempt2.py"
+    ],
+    "limits": [
+      "Published Core module sample only; no full-wheel/cold acquisition claim",
+      "artifact:null remainspartial",
+      "No frozen Runtime/ChatGPT/authorized artifact acceptance"
+    ],
+    "outer_toolchain": "source /workspace/actions-cloud/activate.sh; prepend verified RCC holotree bin containing Node20.19.3/Poetry2.1.1",
+    "rcc": {
+      "path": "/workspace/actions-cloud/bin/rcc",
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+      "version": "18.19.3"
+    },
+    "run_root": "/workspace/actions-cloud/receipts/pr282-writer/published-71f60ee8b931cb968866db5a8f45ba2056d18ed8-2",
+    "runner": "/workspace/actions-cloud/receipts/pr282-writer/published-consumer-runner-attempt2.py",
+    "runner_sha256": "faa006d776eef6622e88709f2cd38a4201abd4c7094df2e8989545029bdbb74d",
+    "tree": "30e880f0640a446a3db2b6e555e6801ee6dc92fc"
+  },
+  "source": {
+    "commit": "71f60ee8b931cb968866db5a8f45ba2056d18ed8",
+    "parents": [
+      "9724a8fbc49ff4119b0af49ad16dd0dbc97e6a5b"
+    ],
+    "tree": "30e880f0640a446a3db2b6e555e6801ee6dc92fc"
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "acquisition": {
+    "bytes": 26884,
+    "path": "/dev/shm/actions-rcc-compatibility-originals-20261011/OWNERFINAL-three-original-RCC-acquisition-data-qualification.json",
+    "sha256": "0da97bfc63a5e47de1c900e8d37ec55261d8b7ef6f68069a74167afc344c72ad"
+  },
+  "actual_status": "NOT_RUN",
+  "adapter": {
+    "bytes": 36059,
+    "path": "/workspace/engineering/pr308/action_server/src/actions/server/_rcc_runtime_adapter.py",
+    "sha256": "259f7d7265cddc3a6f664676fbd13b478d4534a7f6c8a6b1670a8d19393cf3fb"
+  },
+  "approved_test_only_selectors": [
+    {
+      "binary_sha256": "1a617ad7c736fa67c605e20e5ebe3c7d54b02cd548f733e05c809cf49a48db1e",
+      "selector": "released-18.19.5-linux-amd64",
+      "source_commit": "d1aec7d0bb897a81274423c7a6bb747233f9c263",
+      "source_modified": true,
+      "version": "v18.19.5"
+    },
+    {
+      "binary_sha256": "be55dadc391ae4ac7dd38356755a1698c595fdf41bd4a0141f8df7cc9d29f00e",
+      "selector": "candidate-727-18.19.6-linux-amd64",
+      "source_commit": "727c1ff8b679cdbbe12836e53c87734a1edb0071",
+      "source_modified": false,
+      "version": "v18.19.6"
+    }
+  ],
+  "fixture": {
+    "bytes": 28406,
+    "path": "/workspace/engineering/pr308/action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+    "sha256": "f697aaf73c4e89bddd21b2c48aa92fe22e315f83614525996d51ff2271fe2436"
+  },
+  "functional_qualification": "NOT_RUN/HOLD; APPROVED_TEST_ONLY provenance admits no functionality",
+  "integration_nodes": [
+    "test_published_artifact_details_preserves_one_rcc_identity_pair",
+    "test_staged_package_executes_in_managed_rcc_runtime"
+  ],
+  "legacy_Git_control_fields": {
+    "candidate": "RCC_ROLLBACK_CANDIDATE_SHA/TREE bound to actual source Git tuple",
+    "control": "RCC_ROLLBACK_CONTROL_SHA/TREE requires separate 40-character Git tuple, not external runner SHA256; SOURCE commit keeps prior c103 hosted pins unchanged"
+  },
+  "legacy_unset_selector": {
+    "binary_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "default_download_build_and_toolkit_pin": "UNCHANGED",
+    "version": "v18.19.3"
+  },
+  "limits": [
+    "Acquire JSON is not env-exec lease receipt and has no leaseId",
+    "Retirement and wrapper cleanup snapshots remain distinct; null not inferred PASS",
+    "Existing five action-result fields unchanged",
+    "Testcase PASS does not prove lease release, natural reaping, whole Runtime ownership, or cold registry",
+    "Private 01f/frozen-v6 unavailable; full134/provider/metadata/release remain HOLD",
+    "RCC 5 modified-source equivalence/cause UNKNOWN"
+  ],
+  "metadata_constructor_correction": {
+    "category": "second node label corrected to AST-derived actual existing node before immutable owner announcement",
+    "original_draft": "/workspace/engineering/pr308-rcc-compatibility-source/frozen-source-two-selector-and-actual-fixture-evidence-interface.json",
+    "source_changed": false,
+    "tests_or_actual_repeated": false
+  },
+  "public_harness": {
+    "bytes": 81503,
+    "path": "/workspace/engineering/pr308/action_server/scripts/verify_dakota_rcc_acceptance.py",
+    "sha256": "8f21502f64fed9ee5d26eb6a080a625ee575954e1f659c1f51ee1ea31bda57c7"
+  },
+  "publication_identity": "one original env publish JSON supplies BOTH canonical APIs; recorder invocation count/assertions unchanged",
+  "receipt_outputs": {
+    "publication": "ACTIONS_RUNTIME_PUBLISHED_DETAILS_RECEIPT",
+    "staged_consumer": "ACTIONS_RUNTIME_STAGED_CONSUMER_RECEIPT"
+  },
+  "selector_environment": "ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY",
+  "source": {
+    "head": "b614864ba9da55c13662894b6ef3c8515d9fdb25",
+    "tree": "6fa4f5c1e9837a0d893868255575b355b3977fae"
+  },
+  "staged_private_worker_fields": {
+    "artifact_digest": "descriptor artifact used by actual managed handle",
+    "retirement_result": "dataclasses.asdict actual WorkerRetirementResult or null UNKNOWN",
+    "runtime_receipt": "read_receipt validates exact artifact, verification and leaseId; original JSON retained privately",
+    "runtime_receipt_path": "actual handle._rcc_wrapper.receipt_file; private path",
+    "runtime_receipt_sha256": "stable exact original raw receipt bytes, not reconstructed",
+    "wrapper_cleanup_result": "dataclasses.asdict actual returned ProcessTreeCleanupResult or null UNKNOWN"
+  }
+}

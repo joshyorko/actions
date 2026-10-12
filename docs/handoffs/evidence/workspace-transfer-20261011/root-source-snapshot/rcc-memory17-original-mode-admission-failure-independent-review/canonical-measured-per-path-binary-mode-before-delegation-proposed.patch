@@ -1,0 +1,17 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -3566,6 +3566,14 @@
+ retention also fails, and fail closed if a successful result cannot be retained.
+ Use separate owned before/after captures and refuse a reused capture path.
+ 
++Permission modes belong to their measured owning paths, even when binary digests
++match. The managed primary RCC and an ignored checkout fixture can legitimately
++have different modes. Admit each exact regular, nonsymlink path with its own
++owner, group, size, digest and mode before delegation; do not borrow the fixture
++mode or chmod the managed binary to satisfy a mistaken guard. A failed admission
++before the owned output root, source guards and tests still consumes that one
++release. Preserve it and bind any correction to a fresh namespace and release.
++
+ Data-only inspectors that use assertions must reject optimized Python before
+ reading admission inputs; syntax compilation does not prove those checks ran.
+ Require the root release to be a regular, nonsymlink, mode-0600 file before

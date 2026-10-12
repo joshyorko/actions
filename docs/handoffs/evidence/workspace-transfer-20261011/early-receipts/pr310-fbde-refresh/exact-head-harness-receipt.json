@@ -1,0 +1,13 @@
+{
+  "control_sha": "4b2df94d77b1145a9ed586fb924eeb88c478d01c",
+  "control_tree": "f035fd321afe1a5821a249fa7ccd3aea95ee703d",
+  "harness_runtime_source_tree": "20dca119289b1d6e40bd1065fd06b0d82aad3098",
+  "harness_runtime_reference_sha": "ba85aac7324ea4463bfba8c5f8586e27706dc2fe",
+  "harness_runtime_source_differences": [],
+  "resource_history_test_blob": "534e51afbc75b4d3ce473dee37d7ac00d52dbc92",
+  "all_selected_test_blobs_match_native_candidate": true,
+  "native_candidate_sha": "ba85aac7324ea4463bfba8c5f8586e27706dc2fe",
+  "native_candidate_tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f",
+  "harness_runtime_equals_native_source": true,
+  "status": "PASS"
+}

@@ -1,0 +1,137 @@
+{
+  "ROOT_contract": {
+    "bytes": 5055,
+    "mode": "0o400",
+    "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/strict600-controller30-fresh-once2-ROOT-release-and-concrete-command-NOTRUN.json",
+    "sha256": "fcc9df73175a497e7219ca6bf8a6bd8059768b622ed58629f7c5576754fb27f2"
+  },
+  "actual_environment_preservation_native": "NOTRUN_HOLD_NO_ROOT_STORAGE_GRANT",
+  "adapter_binding": {
+    "bytes": 4079,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/pure18_receipt_adapter_v8_SOURCE_PREPARED_v2_actual_receipt_schema.py",
+    "sha256": "8dbc69c8dd1d366d1e1dea97cb809613ff990e27ee9faacb3a9dfccb56a6c1b2"
+  },
+  "bindings": [
+    {
+      "bytes": 113923,
+      "mode": "0o400",
+      "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/FROZEN-controller-boundary30-two-fresh-negative-fixtures-once2-inputs-NOTRUN.json",
+      "sha256": "9fd1bbc6f4b8cb64695457977071b510192e1c8cbd6b3727a39b931cb710d887"
+    },
+    {
+      "bytes": 444,
+      "mode": "0o400",
+      "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/canonical-fresh-negative-specimens-integrity-versus-semantic-predicate-proposed.txt",
+      "sha256": "e3e1d2cdb5f5d480d19d677b40d4c0b0fca00f3c04924ba13ccc3e32247a5e59"
+    },
+    {
+      "bytes": 11943,
+      "mode": "0o600",
+      "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/construct_exact_two_negative_fixtures_and_fresh_pure30_packet.py",
+      "sha256": "b7c0f95d6234bcf83a6b87af5f2d7837b40016909359f38f33d8c68400ffc7fb"
+    },
+    {
+      "bytes": 2331,
+      "mode": "0o400",
+      "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/exact-two-negative-fixture-only-source-delta.patch",
+      "sha256": "e082753c78af7be37f35f933949907dba60399e673f91952e059ac00e6d3f38d"
+    },
+    {
+      "bytes": 2997,
+      "mode": "0o400",
+      "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/exact-two-negative-method-AST-all-other28-and-original-controller-adapter-profile-proof-NOTRUN.json",
+      "sha256": "b3b6198ef3775dfa4942f38ad40b78be80abbf3435401056b45d8d23078fc3ed"
+    },
+    {
+      "bytes": 7355,
+      "mode": "0o444",
+      "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/launch_controller_boundary_PURE_ROOT_ONLY_SOURCE_PREPARED_once2.py",
+      "sha256": "4eef6de54c7c91678987b9b9c6127f4a57645ea68f094e458009e5e110ca7266"
+    },
+    {
+      "bytes": 5055,
+      "mode": "0o400",
+      "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/strict600-controller30-fresh-once2-ROOT-release-and-concrete-command-NOTRUN.json",
+      "sha256": "fcc9df73175a497e7219ca6bf8a6bd8059768b622ed58629f7c5576754fb27f2"
+    },
+    {
+      "bytes": 21990,
+      "mode": "0o444",
+      "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/test_controller_boundaries_two_fresh_negative_fixtures_SOURCE_PREPARED_once2.py",
+      "sha256": "411341f94a58fb0bb37d957ce4922e320a894a5dbe6832f5d890bcdd8aa30229"
+    }
+  ],
+  "capture": "2026-10-11T23:49:30.460552+00:00",
+  "config_binding": {
+    "bytes": 113923,
+    "mode": "0o400",
+    "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/FROZEN-controller-boundary30-two-fresh-negative-fixtures-once2-inputs-NOTRUN.json",
+    "sha256": "9fd1bbc6f4b8cb64695457977071b510192e1c8cbd6b3727a39b931cb710d887"
+  },
+  "controller_binding": {
+    "bytes": 12753,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/root_once_first_five_current9760_SOURCE_PREPARED_v3_strict_V8_adapter.py",
+    "sha256": "985f497f83b4acecdf9ede7220da3237599ca210016da7443351c00787721ef6"
+  },
+  "controls": {
+    "bytes": 21990,
+    "mode": "0o444",
+    "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/test_controller_boundaries_two_fresh_negative_fixtures_SOURCE_PREPARED_once2.py",
+    "sha256": "411341f94a58fb0bb37d957ce4922e320a894a5dbe6832f5d890bcdd8aa30229"
+  },
+  "current_ACTUAL": "NOTRUN",
+  "current_guard_binding_count": 161,
+  "decision": "SOURCE_PREPARED_PURE_PREEXEC_REVIEW_REQUIRED_NO_EXECUTION",
+  "documentation": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "evidence": "Original61e/9246census28P2errors +ind2a7e exacttwofreshspecimenproposal; two-methodonlyAST scopes freshpath/samewidth/originalhash andsemanticRegex independentlyinspectable",
+    "exact_delta": {
+      "bytes": 444,
+      "mode": "0o400",
+      "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/canonical-fresh-negative-specimens-integrity-versus-semantic-predicate-proposed.txt",
+      "sha256": "e3e1d2cdb5f5d480d19d677b40d4c0b0fca00f3c04924ba13ccc3e32247a5e59"
+    },
+    "remaining_uncertainty": "New30controls/SOURCE/PREEXEC/ROOTone remainunexecuted; typedadapterexecution/storage/parser/native actualgates remainseparate",
+    "stale_ambiguity": "A fixturePermissionError isnotintendedguardrejection; measuredfreshmutant hash neededto reach semanticownerpredicate while wrongbodymustpreserveoriginalexpectedhash",
+    "upstream_disposition": "none"
+  },
+  "launcher_binding": {
+    "bytes": 7355,
+    "mode": "0o444",
+    "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/launch_controller_boundary_PURE_ROOT_ONLY_SOURCE_PREPARED_once2.py",
+    "sha256": "4eef6de54c7c91678987b9b9c6127f4a57645ea68f094e458009e5e110ca7266"
+  },
+  "mutant_leaf_creation": "SOURCEdefinitions only; futureROOTtestscreate fresh400distinctleafspecimens; no original400writes/chmod andno fixturescreatedduringpreparation",
+  "original142_bindings": "ALLBYTE_MODE_HASH_UNCHANGED",
+  "original_ACTUAL": "28PASS0FAIL2ERROR genuinePermissionError_setupfailremainFAIL",
+  "original_ACTUALFAIL": {
+    "bytes": 3795,
+    "mode": "0o400",
+    "path": "/workspace/engineering/controller30-original-ACTUALFAIL-independent-diagnosis/OWNERFINAL-independent-original-controller30-ACTUALFAIL-and-minimal-two-negative-fixture-proposal.json",
+    "sha256": "2a7e61f236db15ada4d3ddda355d8a3d0730ec58e1f0f3d1d9963c4ee97d12f8"
+  },
+  "original_owner": {
+    "bytes": 8399,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/OWNERFINAL-controller-V8-original-actual-adapter-and-30-boundary-SOURCE-PURE-PREEXEC-final-NOTRUN-v2.json",
+    "sha256": "06b8f1d6bf52a6a13ecce62820cc2e5b6ae2bd961027268cdc51fa3dec3adeb2"
+  },
+  "other28_AST_ids_caps_budgets": "UNCHANGED",
+  "raw18_dd9_source485_approval4d227_history": "ALLUNCHANGED_NOTRELABELED",
+  "schema": 1,
+  "source_delta": {
+    "bytes": 2331,
+    "mode": "0o400",
+    "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/exact-two-negative-fixture-only-source-delta.patch",
+    "sha256": "e082753c78af7be37f35f933949907dba60399e673f91952e059ac00e6d3f38d"
+  },
+  "source_proof": {
+    "bytes": 2997,
+    "mode": "0o400",
+    "path": "/workspace/engineering/controller30-two-negative-fixture-once2-SOURCE-PURE-PREEXEC-NOTRUN/exact-two-negative-method-AST-all-other28-and-original-controller-adapter-profile-proof-NOTRUN.json",
+    "sha256": "b3b6198ef3775dfa4942f38ad40b78be80abbf3435401056b45d8d23078fc3ed"
+  },
+  "status": "OWNER_FINAL_CONTROLLER30_TWO_NEGATIVE_FIXTURE_ONLY_SOURCE_AND_ONCE2_PURE_PREEXEC_NOTRUN"
+}

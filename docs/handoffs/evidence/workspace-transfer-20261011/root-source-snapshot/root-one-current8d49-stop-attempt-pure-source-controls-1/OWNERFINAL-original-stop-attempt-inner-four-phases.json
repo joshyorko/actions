@@ -1,0 +1,400 @@
+{
+  "census_bindings": {
+    "RED_disk_preauthorization": {
+      "bytes": 928,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/RED_disk_preauthorization/original-node-census.json",
+      "sha256": "991cc35b421bd3ce42db25e7903313f89d6ab052e4c28155057c9e88cff54d93"
+    },
+    "RED_memory_preauthorization": {
+      "bytes": 933,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/RED_memory_preauthorization/original-node-census.json",
+      "sha256": "6d40978aab8bc932ccf7a3b42755858f96fe70abc5b7de068c85fe8f88fd3953"
+    },
+    "baseline_original16": {
+      "bytes": 4191,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/baseline_original16/original-node-census.json",
+      "sha256": "188158e703ef25ed29488a0cb92e79ef0c73014b6c0b3902b0ad91150bfca02b"
+    },
+    "restored_successor20": {
+      "bytes": 5202,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/restored_successor20/original-node-census.json",
+      "sha256": "7e07bf56f3ed3af28c8bb171bab448b8ea4eb792c2a8d1461970666d9ceeb3a0"
+    }
+  },
+  "elapsed_seconds": 77.82610311600729,
+  "failure": null,
+  "memory_profile_adoption": "NONE",
+  "native": "NOT_RUN",
+  "outcomes": {
+    "RED_disk_preauthorization": {
+      "TERM_seconds": 120,
+      "argv": [
+        "env",
+        "-u",
+        "PYTHONOPTIMIZE",
+        "-u",
+        "PYTEST_ADDOPTS",
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "120.000000s",
+        "/workspace/engineering/pr308/action_server/.venv/bin/python",
+        "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/pure_stop_attempt_control_phase_NOTRUN.py",
+        "--config-sha256",
+        "59f02612d2660b793ead8c5c945af3d648e8427f6f3a30e872f0272113bf63ff",
+        "--release",
+        "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-release.json",
+        "--release-sha256",
+        "e7f972c9cdf35b73faec627c411f92a13b7c1f2517cf076460a1a0c719089c2b",
+        "--phase",
+        "RED_disk_preauthorization"
+      ],
+      "parent_seconds": 135,
+      "returncode": 0,
+      "shared_primary_deadline": 75181.252379136,
+      "stderr_binding": {
+        "bytes": 1082,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/RED_disk_preauthorization/original.stderr.private",
+        "sha256": "733590e60389ed65d07df48afc332af7d5f6ec24b6b88633db0e7c3f7bce9765"
+      },
+      "stdout_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/RED_disk_preauthorization/original.stdout.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "RED_memory_preauthorization": {
+      "TERM_seconds": 120,
+      "argv": [
+        "env",
+        "-u",
+        "PYTHONOPTIMIZE",
+        "-u",
+        "PYTEST_ADDOPTS",
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "120.000000s",
+        "/workspace/engineering/pr308/action_server/.venv/bin/python",
+        "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/pure_stop_attempt_control_phase_NOTRUN.py",
+        "--config-sha256",
+        "59f02612d2660b793ead8c5c945af3d648e8427f6f3a30e872f0272113bf63ff",
+        "--release",
+        "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-release.json",
+        "--release-sha256",
+        "e7f972c9cdf35b73faec627c411f92a13b7c1f2517cf076460a1a0c719089c2b",
+        "--phase",
+        "RED_memory_preauthorization"
+      ],
+      "parent_seconds": 135,
+      "returncode": 0,
+      "shared_primary_deadline": 75181.252379136,
+      "stderr_binding": {
+        "bytes": 1101,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/RED_memory_preauthorization/original.stderr.private",
+        "sha256": "c7ff8c69a12557bb68e82716b3e46d6e00e879143c0d05968c654b961696b296"
+      },
+      "stdout_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/RED_memory_preauthorization/original.stdout.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "always-post": {
+      "TERM_seconds": 120,
+      "argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "120s",
+        "bash",
+        "-c",
+        "export PATH=\"/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\"; source /workspace/actions-cloud/activate.sh && exec \"$@\"",
+        "stop-attempt-guard-only",
+        "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+        "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/run_root_defaultbackend35_once2_exact_census_NOTRUN.py",
+        "--phase",
+        "guard",
+        "--config",
+        "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/FROZEN-defaultbackend35-once2-exact-census-config-NOTRUN.json",
+        "--config-sha256",
+        "7021f53c12b5392ffe5cf14da7915f25188c68e6d5a9a3b07458b588c4b527fa",
+        "--release",
+        "/workspace/engineering/root-one-defaultbackend35-once2-exact-census-release.json",
+        "--release-sha256",
+        "f9079a6dfb8e234e4976d1a3feb32d88be9f3ff9ba6c32bc3a6d43d5cfecbf02"
+      ],
+      "parent_seconds": 135,
+      "returncode": 0,
+      "shared_primary_deadline": null,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/inner-always-post/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 61,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/inner-always-post/original.stdout.private",
+        "sha256": "91b59c9cc5c2955da0d10688a4fe9a3e763e59a1bb1130068b050a933903b853"
+      }
+    },
+    "baseline_original16": {
+      "TERM_seconds": 120,
+      "argv": [
+        "env",
+        "-u",
+        "PYTHONOPTIMIZE",
+        "-u",
+        "PYTEST_ADDOPTS",
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "120.000000s",
+        "/workspace/engineering/pr308/action_server/.venv/bin/python",
+        "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/pure_stop_attempt_control_phase_NOTRUN.py",
+        "--config-sha256",
+        "59f02612d2660b793ead8c5c945af3d648e8427f6f3a30e872f0272113bf63ff",
+        "--release",
+        "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-release.json",
+        "--release-sha256",
+        "e7f972c9cdf35b73faec627c411f92a13b7c1f2517cf076460a1a0c719089c2b",
+        "--phase",
+        "baseline_original16"
+      ],
+      "parent_seconds": 135,
+      "returncode": 0,
+      "shared_primary_deadline": 75181.252379136,
+      "stderr_binding": {
+        "bytes": 2991,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/baseline_original16/original.stderr.private",
+        "sha256": "2182bf89a1efa58d2cb35a48bd0550afbe7f4ff3ec5c79fb6f4f74bc9c9aef36"
+      },
+      "stdout_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/baseline_original16/original.stdout.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "guard-RED_disk_preauthorization": {
+      "TERM_seconds": 120,
+      "argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "120.000000s",
+        "bash",
+        "-c",
+        "export PATH=\"/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\"; source /workspace/actions-cloud/activate.sh && exec \"$@\"",
+        "stop-attempt-guard-only",
+        "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+        "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/run_root_defaultbackend35_once2_exact_census_NOTRUN.py",
+        "--phase",
+        "guard",
+        "--config",
+        "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/FROZEN-defaultbackend35-once2-exact-census-config-NOTRUN.json",
+        "--config-sha256",
+        "7021f53c12b5392ffe5cf14da7915f25188c68e6d5a9a3b07458b588c4b527fa",
+        "--release",
+        "/workspace/engineering/root-one-defaultbackend35-once2-exact-census-release.json",
+        "--release-sha256",
+        "f9079a6dfb8e234e4976d1a3feb32d88be9f3ff9ba6c32bc3a6d43d5cfecbf02"
+      ],
+      "parent_seconds": 135,
+      "returncode": 0,
+      "shared_primary_deadline": 75181.252379136,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/inner-guard-RED_disk_preauthorization/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 61,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/inner-guard-RED_disk_preauthorization/original.stdout.private",
+        "sha256": "91b59c9cc5c2955da0d10688a4fe9a3e763e59a1bb1130068b050a933903b853"
+      }
+    },
+    "guard-RED_memory_preauthorization": {
+      "TERM_seconds": 120,
+      "argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "120.000000s",
+        "bash",
+        "-c",
+        "export PATH=\"/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\"; source /workspace/actions-cloud/activate.sh && exec \"$@\"",
+        "stop-attempt-guard-only",
+        "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+        "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/run_root_defaultbackend35_once2_exact_census_NOTRUN.py",
+        "--phase",
+        "guard",
+        "--config",
+        "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/FROZEN-defaultbackend35-once2-exact-census-config-NOTRUN.json",
+        "--config-sha256",
+        "7021f53c12b5392ffe5cf14da7915f25188c68e6d5a9a3b07458b588c4b527fa",
+        "--release",
+        "/workspace/engineering/root-one-defaultbackend35-once2-exact-census-release.json",
+        "--release-sha256",
+        "f9079a6dfb8e234e4976d1a3feb32d88be9f3ff9ba6c32bc3a6d43d5cfecbf02"
+      ],
+      "parent_seconds": 135,
+      "returncode": 0,
+      "shared_primary_deadline": 75181.252379136,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/inner-guard-RED_memory_preauthorization/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 61,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/inner-guard-RED_memory_preauthorization/original.stdout.private",
+        "sha256": "91b59c9cc5c2955da0d10688a4fe9a3e763e59a1bb1130068b050a933903b853"
+      }
+    },
+    "guard-baseline_original16": {
+      "TERM_seconds": 120,
+      "argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "120.000000s",
+        "bash",
+        "-c",
+        "export PATH=\"/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\"; source /workspace/actions-cloud/activate.sh && exec \"$@\"",
+        "stop-attempt-guard-only",
+        "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+        "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/run_root_defaultbackend35_once2_exact_census_NOTRUN.py",
+        "--phase",
+        "guard",
+        "--config",
+        "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/FROZEN-defaultbackend35-once2-exact-census-config-NOTRUN.json",
+        "--config-sha256",
+        "7021f53c12b5392ffe5cf14da7915f25188c68e6d5a9a3b07458b588c4b527fa",
+        "--release",
+        "/workspace/engineering/root-one-defaultbackend35-once2-exact-census-release.json",
+        "--release-sha256",
+        "f9079a6dfb8e234e4976d1a3feb32d88be9f3ff9ba6c32bc3a6d43d5cfecbf02"
+      ],
+      "parent_seconds": 135,
+      "returncode": 0,
+      "shared_primary_deadline": 75181.252379136,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/inner-guard-baseline_original16/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 61,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/inner-guard-baseline_original16/original.stdout.private",
+        "sha256": "91b59c9cc5c2955da0d10688a4fe9a3e763e59a1bb1130068b050a933903b853"
+      }
+    },
+    "guard-restored_successor20": {
+      "TERM_seconds": 120,
+      "argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "120.000000s",
+        "bash",
+        "-c",
+        "export PATH=\"/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\"; source /workspace/actions-cloud/activate.sh && exec \"$@\"",
+        "stop-attempt-guard-only",
+        "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+        "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/run_root_defaultbackend35_once2_exact_census_NOTRUN.py",
+        "--phase",
+        "guard",
+        "--config",
+        "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/FROZEN-defaultbackend35-once2-exact-census-config-NOTRUN.json",
+        "--config-sha256",
+        "7021f53c12b5392ffe5cf14da7915f25188c68e6d5a9a3b07458b588c4b527fa",
+        "--release",
+        "/workspace/engineering/root-one-defaultbackend35-once2-exact-census-release.json",
+        "--release-sha256",
+        "f9079a6dfb8e234e4976d1a3feb32d88be9f3ff9ba6c32bc3a6d43d5cfecbf02"
+      ],
+      "parent_seconds": 135,
+      "returncode": 0,
+      "shared_primary_deadline": 75181.252379136,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/inner-guard-restored_successor20/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 61,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/inner-guard-restored_successor20/original.stdout.private",
+        "sha256": "91b59c9cc5c2955da0d10688a4fe9a3e763e59a1bb1130068b050a933903b853"
+      }
+    },
+    "restored_successor20": {
+      "TERM_seconds": 120,
+      "argv": [
+        "env",
+        "-u",
+        "PYTHONOPTIMIZE",
+        "-u",
+        "PYTEST_ADDOPTS",
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "120.000000s",
+        "/workspace/engineering/pr308/action_server/.venv/bin/python",
+        "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/pure_stop_attempt_control_phase_NOTRUN.py",
+        "--config-sha256",
+        "59f02612d2660b793ead8c5c945af3d648e8427f6f3a30e872f0272113bf63ff",
+        "--release",
+        "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-release.json",
+        "--release-sha256",
+        "e7f972c9cdf35b73faec627c411f92a13b7c1f2517cf076460a1a0c719089c2b",
+        "--phase",
+        "restored_successor20"
+      ],
+      "parent_seconds": 135,
+      "returncode": 0,
+      "shared_primary_deadline": 75181.252379136,
+      "stderr_binding": {
+        "bytes": 3785,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/restored_successor20/original.stderr.private",
+        "sha256": "a4dc0ab03baa380c006079f645f5d51520180b49cd2760e187d1c14c2faad226"
+      },
+      "stdout_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/restored_successor20/original.stdout.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "phase_order": [
+    "baseline_original16",
+    "RED_memory_preauthorization",
+    "RED_disk_preauthorization",
+    "restored_successor20"
+  ],
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "status": "PASS_FOUR_PURE_PHASES_PENDING_INDEPENDENT_ORIGINALS",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+}

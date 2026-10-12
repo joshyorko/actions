@@ -1,0 +1,234 @@
+{
+  "schema": "independent-current12dd-root-bound-FULL-preexecution-review/v1",
+  "decision": "GO_CURRENT12DD_BOUND_FULL_PREEXECUTION",
+  "owner_bound_proposal": {
+    "path": "/workspace/engineering/pr313-current12dd-bound-full-proposal/OWNERFINAL-current12dd-root-bound-FULL-preexecution.json",
+    "bytes": 6398,
+    "sha256": "b02f599200e38e6c6c65cb420ddebf16f537890a3f0b2b8f9a17bc16c8e5694c"
+  },
+  "original4918_proposal": {
+    "path": "/workspace/engineering/pr313-actual300-refresh/OWNERFINAL-pr313-current12dd-managed-configured-full-PREEXECUTION-proposal.json",
+    "bytes": 8972,
+    "sha256": "49181f170c7818f442976147a32b2a9738a484642aa9143c31ac7f962a55b88d"
+  },
+  "original_source_LIGHT": {
+    "path": "/workspace/engineering/pr313-actual300-refresh/OWNERFINAL-pr313-current-actual300-ordinary-refresh-SOURCE_LIGHT.json",
+    "bytes": 14737,
+    "sha256": "0171ef23a625807d6f09dabcc25b9695ee622ca570f8b8800a75433c7a1bcbbb"
+  },
+  "prior_independent_SOURCE_LIGHT_GO_and_original4918_FULL_HOLD": {
+    "path": "/workspace/engineering/pr313-current12dd-independent-LIGHT-and-preexecution-review/OWNERFINAL-independent-current12dd-SOURCE_LIGHT-GO-and-original4918-FULL-preexecution-HOLD.json",
+    "bytes": 8477,
+    "sha256": "3efa58d23a1f2f5f4e21f006c4548f97e0c864f3f738ce3fc23bea40df9a3a83"
+  },
+  "source": {
+    "head": "12dd3ec5c4d2a582b192ba11c5f13736757aba16",
+    "tree": "d3428cf69580a4ee252b5ad4f251588b837937d0",
+    "ordered_parents": [
+      "499a83d802ca9a0e2ebe3d77071af10625879297",
+      "e3c29cde8878307912e55ed09b6436c0f91d06d5"
+    ],
+    "cwd": "/workspace/engineering/captured-child-cleanup",
+    "clean": true,
+    "complete_typed_Git_FS_body_exec_exact": 1424
+  },
+  "independent_read_only_observations": {
+    "all10_bound_rows_exact_size_SHA": true,
+    "all7_original4918_rows_exact_size_SHA": true,
+    "all34_SOURCE_LIGHT_rows_exact_size_SHA": true,
+    "all119_original_retained_rows_current_except_authenticated_old499_guide_Git_snapshot_exact": true,
+    "original4918_and3efa_HOLD_unchanged_no_retroactive_GO": true,
+    "primary_argv_exact_four_timeout_prefix_plus_original4918_bash_argv": true,
+    "post_argv_exact_four_timeout_prefix_plus_original4918_post_argv": true,
+    "unchanged_original_body_activation19_managed_18_19_3_pins_worker2_600child": true,
+    "root_wrapper_SHA": {
+      "path": "/workspace/engineering/pr313-current12dd-bound-full-proposal/root_one_bound_full.py",
+      "bytes": 4000,
+      "sha256": "dd0b2bf10c96204f782e3d8767fb72201510ba600bfd377b619a0f72cea2b2ee"
+    },
+    "root_AST_run_phase_calls_in_order": [
+      "primary_argv",
+      "post_argv"
+    ],
+    "one_subprocess_run_implementation_called_once_per_phase": true,
+    "primary_seal_before_post_verified_code": true,
+    "primary_seal_error_categorically_retained_and_forces_failure": true,
+    "overall_zero_requires_primary_zero_post_zero_no_primary_seal_error": true,
+    "new_owned_attempt_directory_absent": true,
+    "no_tests_gateway_product_helper_imports_binary_invocation_source_ref_mutation": true
+  },
+  "exact_placeholder_free_root_command": {
+    "cwd": "/workspace/engineering/captured-child-cleanup",
+    "argv": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "900s",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/pr313-current12dd-bound-full-proposal/root_one_bound_full.py",
+      "--execute-root-authorized"
+    ]
+  },
+  "exact_reviewed_primary_and_post": {
+    "primary_argv": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "640s",
+      "bash",
+      "--noprofile",
+      "--norc",
+      "-c",
+      "set -euo pipefail\nsource \"$1\"\n\"$2\" \"$3\" \"$4\"\nshift 4\nexec \"$@\"\n",
+      "pr313-current12dd-managed-full",
+      "/workspace/actions-cloud/activate.sh",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/pr313-actual300-refresh/planned_current12dd_managed_preflight.py",
+      "/workspace/engineering/pr313-current12dd-configured-full-once-owned/before-full-complete-source-and-activation.json",
+      "env",
+      "PYTEST_XDIST_AUTO_NUM_WORKERS=2",
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "600s",
+      "/workspace/actions-cloud/bin/rcc",
+      "task",
+      "script",
+      "-r",
+      "developer/toolkit.yaml",
+      "--",
+      "python",
+      "-c",
+      "\"\"\"Future configured source full body; preparation only, not executed.\"\"\"\nimport hashlib\nimport json\nimport os\nimport sys\nfrom pathlib import Path\nimport toolkit\n\nROOT=Path('/workspace/engineering/captured-child-cleanup')\nassert toolkit.REPOSITORY_ROOT==ROOT\nsys.path.insert(0,'/workspace/engineering/pr313-actual300-refresh')\nfrom verify_current_source_v2 import check,bind\n\nOWNER=Path('/workspace/engineering/pr313-actual300-refresh/OWNERFINAL-pr313-current-actual300-ordinary-refresh-SOURCE_LIGHT.json')\nassert bind(OWNER)['sha256']=='0171ef23a625807d6f09dabcc25b9695ee622ca570f8b8800a75433c7a1bcbbb'\nfor row in json.loads(OWNER.read_bytes())['bindings']:assert bind(row['path'])==row\ncheck()\nassert os.environ['PYTEST_XDIST_AUTO_NUM_WORKERS']=='2'\nassert os.environ.get('ACTIONS_REAL_RCC_ARTIFACT_TEST')!='1'\ntoolkit.poetry('action_server','run','invoke','test-not-integration')\n"
+    ],
+    "post_argv": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "60s",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/pr313-actual300-refresh/planned_current12dd_postfull.py",
+      "/workspace/engineering/pr313-current12dd-configured-full-once-owned/after-full-complete-source-and-retained-bindings.json"
+    ]
+  },
+  "bounded_root_contract": {
+    "complete_parent_TERM_seconds": 900,
+    "primary_including_activation_preflight_TERM_seconds": 640,
+    "unchanged_Runtime_child_TERM_seconds": 600,
+    "separate_post_TERM_seconds": 60,
+    "KILL_grace_seconds_each": 10,
+    "workers": 2,
+    "attempts": 1,
+    "no_retry_loop": true,
+    "run_phase_primary_exception_category_preserved_separate_returncode": true,
+    "root_exclusive_private_output_and_terminal_each_phase": "os.open O_EXCL0600; primary sealed before separate postguard and final combined terminal retains both without overwriting",
+    "incomplete_external_expiry_or_output_hash_I_O_or_terminal_write_failure": "Outer root original stdout/stderr/terminal required; missing internal receipts UNKNOWN/FAIL, no universal always-post or cleanup claim. Binding/log I_O may interrupt orchestration; parent must fail and retain external primary observations."
+  },
+  "root_distinct_release_prerequisites": {
+    "required_fresh_workspace_available_bytes": 1200000000,
+    "root_exclusive_heavy_slot_no_other_full_RCC_actual_provider_native_browser_consumer_installer_or_shared_scratch_mutation": true,
+    "no_execution_release_by_this_review": true,
+    "root_new_owned_parent_0700": "/workspace/engineering/pr313-current12dd-configured-full-once-owned",
+    "root_auth_0600_file": "/workspace/engineering/pr313-current12dd-configured-full-once-owned/root-one-current12dd-full-authorization.json",
+    "required_authorization_fields": {
+      "head": "12dd3ec5c4d2a582b192ba11c5f13736757aba16",
+      "tree": "d3428cf69580a4ee252b5ad4f251588b837937d0",
+      "attempts": 1,
+      "serialized_heavy_slot_clearance": true,
+      "bound_full_proposal": {
+        "path": "/workspace/engineering/pr313-current12dd-bound-full-proposal/OWNERFINAL-current12dd-root-bound-FULL-preexecution.json",
+        "bytes": 6398,
+        "sha256": "b02f599200e38e6c6c65cb420ddebf16f537890a3f0b2b8f9a17bc16c8e5694c"
+      },
+      "full_proposal": {
+        "path": "/workspace/engineering/pr313-actual300-refresh/OWNERFINAL-pr313-current12dd-managed-configured-full-PREEXECUTION-proposal.json",
+        "bytes": 8972,
+        "sha256": "49181f170c7818f442976147a32b2a9738a484642aa9143c31ac7f962a55b88d"
+      },
+      "source_LIGHT": {
+        "path": "/workspace/engineering/pr313-actual300-refresh/OWNERFINAL-pr313-current-actual300-ordinary-refresh-SOURCE_LIGHT.json",
+        "bytes": 14737,
+        "sha256": "0171ef23a625807d6f09dabcc25b9695ee622ca570f8b8800a75433c7a1bcbbb"
+      },
+      "independent_preexecution_review": "This owner-announced exact receipt path/bytes/SHA with decision GO_CURRENT12DD_BOUND_FULL_PREEXECUTION, written by root after distinct ONE release"
+    },
+    "required_environment": {
+      "PR313_CURRENT12DD_SERIALIZED_HEAVY_SLOT": "root-pr313-current12dd-one-configured-full",
+      "PR313_CURRENT12DD_DISTINCT_ROOT_RELEASE_PATH": "Exact new0600 root auth path above",
+      "PR313_CURRENT12DD_DISTINCT_ROOT_RELEASE_SHA256": "Exact SHA of root newly released authorization"
+    },
+    "root_wrapper_must_check_exact_scoped_review_decision_not_startswith_GO": true,
+    "before_launch_all_source1424_original119_LIGHT34_preexec7_bound10_activation30_inputs_five_own_origins_native1192_helpers_browser_guards_required": true,
+    "private_external_root900_stdout_stderr_terminal_on_every_outcome_required": true,
+    "actual_worker_census_and_postguard_scope_must_be_read_back_before_SOURCEFULL_GO": true
+  },
+  "separate_conditional_original_Windows_acquisition_proposal_review": {
+    "proposal_binding": {
+      "path": "/workspace/engineering/pr313-actual300-refresh/OWNERFINAL-pr313-current-actual300-ordinary-refresh-SOURCE_LIGHT.json",
+      "bytes": 14737,
+      "sha256": "0171ef23a625807d6f09dabcc25b9695ee622ca570f8b8800a75433c7a1bcbbb"
+    },
+    "field": "one_original_log_proposal",
+    "repository": "joshyorko/actions",
+    "connector_tool": "github_fetch_workflow_job_logs",
+    "parameters": {
+      "repo_full_name": "joshyorko/actions",
+      "job_id": 114480645718
+    },
+    "run_id": 38143045413,
+    "acquisitions": 1,
+    "status_at_review": "Original job log NOT_ACQUIRED; failed status known from authenticated metadata, actual logged checkout/failure phase UNKNOWN",
+    "conditional_admission": "Root may explicitly authorize exactlyONE connector-decoded original acquisition in new0700/0600 owned path with complete MCP response and decodedUTF8 size/SHA retained privately. No raw signed URL forwarding, retry, artifact acquisition or invented cause. Acquisition is separate from SOURCEFULL release.",
+    "reviewer_acquisition_or_network_sampling": false
+  },
+  "remaining_HOLDs": [
+    "Current12dd FULL NOT_RUN until root distinctrelease/freshcapacity/serialization",
+    "Fresh complete hosted CI/policies and current Windows byte/integration evidence",
+    "Original4991305PASS13SKIP source proof historical and old19CI18SUCCESS1WindowsFAIL no current carry",
+    "Producer275 versus old268259match9changed7add/five selectors separate: old92498 native UNQUALIFIED",
+    "Private/provider/native/browser/Runtime release/integration/issue closure"
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "Exact_new_source_backed_proposed_delta": {
+      "path": "/workspace/engineering/pr313-current12dd-bound-FULL-independent-preexecution-review/exact-scoped-execution-review-decision-canonical-proposed.patch",
+      "bytes": 477,
+      "sha256": "6745f706e5dbed42b95fe8cd198a8a3b2584ddccdfc18d55221e4a5092ea1744"
+    },
+    "Added_lines": 3,
+    "Existing_verified_reused_parent_patches": [
+      {
+        "path": "/workspace/engineering/pr313-actual300-refresh/canonical-original-cleanup-lesson-retained.patch",
+        "bytes": 1445,
+        "sha256": "0bd405f1149f1acbd5a146833fefd5aa78bdf755b3d7237895ff72f5e9fdc277"
+      },
+      {
+        "path": "/workspace/engineering/pr313-actual300-refresh/canonical-target-prepared-RCC-lesson-imported.patch",
+        "bytes": 1202,
+        "sha256": "b78f7d2291673b4647dc11e455b952ee661b0f8796b11d4a9bc5aceafa88c8fa"
+      }
+    ],
+    "Durable_learning": "Root execution authorization binds the exact proposal and scoped FULL decision; a source-only GO prefix cannot authorize another gate. Enforce the reviewed parent/gate/post commands before release.",
+    "Evidence": [
+      {
+        "path": "/workspace/engineering/pr313-current12dd-bound-full-proposal/OWNERFINAL-current12dd-root-bound-FULL-preexecution.json",
+        "bytes": 6398,
+        "sha256": "b02f599200e38e6c6c65cb420ddebf16f537890a3f0b2b8f9a17bc16c8e5694c"
+      },
+      {
+        "path": "/workspace/engineering/pr313-current12dd-bound-full-proposal/root_one_bound_full.py",
+        "bytes": 4000,
+        "sha256": "dd0b2bf10c96204f782e3d8767fb72201510ba600bfd377b619a0f72cea2b2ee"
+      },
+      {
+        "path": "/workspace/engineering/pr313-current12dd-independent-LIGHT-and-preexecution-review/OWNERFINAL-independent-current12dd-SOURCE_LIGHT-GO-and-original4918-FULL-preexecution-HOLD.json",
+        "bytes": 8477,
+        "sha256": "3efa58d23a1f2f5f4e21f006c4548f97e0c864f3f738ce3fc23bea40df9a3a83"
+      }
+    ],
+    "Stale_guidance_removed": "Original4918 bare-command metadata was not an executable complete envelope; source preflight broad GO-prefix cannot substitute for current root wrapper exact FULL-decision admission. Original proposals/HOLD remain unchanged.",
+    "Remaining_uncertainty": "No current FULL or original Windows log executed/acquired by reviewer; interruptions and actual cleanup remain unqualified.",
+    "Disposition": "Accept exact existing20line parent lessons and propose only three durable scoped-release lines externally; no repository source guide mutation."
+  },
+  "Upstream_disposition": "none"
+}

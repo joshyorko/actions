@@ -1,0 +1,128 @@
+{
+  "actual_executed": false,
+  "documentation_improvement": {
+    "Canonical_file_changed": "docs/skills/repository-operations.md",
+    "Durable_learning": "fixture overrides determine cache containment; separate candidate and three-member public-Core proof; resolved-union native producer parity; explicit browser ownership and exact case admission",
+    "Evidence": "Exact frozen source plus service-free controls and full source/parity inventories; earlier proposal c61 integrated with implemented public-mode scope and precise limits",
+    "Remaining_uncertainty": "Actual public-Core/frozen Canvas bridge awaits immutable runner review and separate authorization; Runtime release OAuth config HOLD remains; real artifact resolver/production host/private/public cold install/whole epic unqualified",
+    "Stale_guidance_removed": "Explicit path automatically means unmanaged browser; caller env alone fixes fixture cache; candidate base implies public worker; raw-tip delta describes resolved union; member sample authenticates entire wheel/cold install"
+  },
+  "full_inventory": {
+    "added": [
+      "action_server/scripts/frozen_wrapper_acceptance_plugin.py",
+      "action_server/scripts/verify_frozen_catalog_harness.py",
+      "action_server/scripts/verify_frozen_catalog_wrapper_artifact.py",
+      "action_server/tests/action_server_tests/mcp/test_canvas_runtime_admission.py",
+      "action_server/tests/contract_tests/test_frozen_wrapper_acceptance_plugin.py",
+      "action_server/tests/contract_tests/test_verify_frozen_catalog_harness.py",
+      "action_server/tests/contract_tests/test_verify_frozen_catalog_junit.py",
+      "action_server/tests/contract_tests/test_verify_frozen_catalog_wrapper_artifact.py",
+      "developer/tests/test_frozen_wrapper_metadata.py",
+      "docs/program/evidence/runtime-frozen-current-source-20261011/README.md",
+      "docs/program/evidence/runtime-frozen-current-source-20261011/build-log-evidence.json",
+      "docs/program/evidence/runtime-frozen-current-source-20261011/byte-source-review.json",
+      "docs/program/evidence/runtime-frozen-current-source-20261011/current-control-independent-review.json",
+      "docs/program/evidence/runtime-frozen-current-source-20261011/inspect_archives.py",
+      "docs/program/evidence/runtime-frozen-current-source-20261011/manifest.json",
+      "docs/program/evidence/runtime-frozen-current-source-20261011/producer-input-inventory.json",
+      "docs/program/evidence/runtime-frozen-current-source-20261011/selected-test-inventory.json"
+    ],
+    "changed_original": [
+      ".github/workflows/_gen_workflows.py",
+      ".github/workflows/actions_runtime_frozen_catalog_rollback.yml",
+      "action_server/docs/DEVELOPMENT.md",
+      "action_server/scripts/verify_frozen_catalog_artifact.py",
+      "action_server/scripts/verify_frozen_catalog_junit.py",
+      "action_server/tests/action_server_tests/mcp/test_mcp_apps_authoring.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "current_leaf_count": 1407,
+    "deleted": [],
+    "no_production_frontend_wrapper_manifest_template_delta": true,
+    "old_leaf_count": 1390,
+    "unchanged_original_leaves": 1383
+  },
+  "head": "14c1c1965314b192c4118c3281f5539d29f0aa6f",
+  "logs": {
+    "admission-green.log": {
+      "path": "/workspace/actions-cloud/receipts/pr305-readonly-proposal/admission-green.log",
+      "sha256": "0251d01128f06c367b63fac1d2dc1fbc1afc4739af69e5e576eefcb1617ec569"
+    },
+    "admission-red.log": {
+      "path": "/workspace/actions-cloud/receipts/pr305-readonly-proposal/admission-red.log",
+      "sha256": "17f4cb4ab532bb54dc6206888345849245b47a6162d3a82600148bb3651b55a1"
+    },
+    "bootstrap.log": {
+      "path": "/workspace/actions-cloud/receipts/pr305-readonly-proposal/bootstrap.log",
+      "sha256": "1c556a0f55684fbe7be59187a1aa5dd1bb864f89ee599f27a35d56a1d65ec5ab"
+    },
+    "doctor.log": {
+      "path": "/workspace/actions-cloud/receipts/pr305-readonly-proposal/doctor.log",
+      "sha256": "79141936889ce9d1d8bb4cb4d7393d83a0eaf4061297f2f45eb5a8e5fcc337a6"
+    },
+    "final-source-gates.log": {
+      "path": "/workspace/actions-cloud/receipts/pr305-readonly-proposal/final-source-gates.log",
+      "sha256": "7c867fa3a9d248e023a9379bc39b2798a71fea8021aa14fa043589afca470928"
+    },
+    "original-boundary-red.log": {
+      "path": "/workspace/actions-cloud/receipts/pr305-readonly-proposal/original-boundary-red.log",
+      "sha256": "ba7638486df4823b1e63f8f0f827bc73b14ef197f730be9a2e40682dec606ac7"
+    },
+    "scoped-green.log": {
+      "path": "/workspace/actions-cloud/receipts/pr305-readonly-proposal/scoped-green.log",
+      "sha256": "1e71a4e5db139b343841219db90e66220ef0a06e276d39da9738b6434022f0b5"
+    },
+    "static-gates.log": {
+      "path": "/workspace/actions-cloud/receipts/pr305-readonly-proposal/static-gates.log",
+      "sha256": "2211ff3628ade0a505879c8287fd6d09e4bde969b045cd93fbb0f5145953be60"
+    },
+    "toolkit-test.log": {
+      "path": "/workspace/actions-cloud/receipts/pr305-readonly-proposal/toolkit-test.log",
+      "sha256": "f77450d5447d3f01b59a3797f0db1ac1987e957ddfd5fac8fe39f764cd108a94"
+    }
+  },
+  "native_producer": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+  "native_tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f",
+  "ordinary_merge": {
+    "conflicts": [],
+    "head": "71aab046754ae0e0837f223fd0ba6b8513e63a62",
+    "parents": [
+      "ca3ea2aa4c8a5fa7c1d9773f79347dfb64f310cc",
+      "fbde0d3a248c47c9964851355f96575c89a87329"
+    ],
+    "tree": "d7d21a0f25c69d28728231b6e238b85d93d0cffe"
+  },
+  "parents": [
+    "71aab046754ae0e0837f223fd0ba6b8513e63a62"
+  ],
+  "producer_and_selected_deltas": [],
+  "producer_entries": 268,
+  "pushed": false,
+  "selected_test_entries": 5,
+  "semantic_preservation": {
+    "candidate_preparation_and_localwheel_scope_retained": true,
+    "existing_cache_sibling_allocation_retained": true,
+    "five_run_count_and_records_ast_equal": true,
+    "frontend_browser_resource_privacy_assertions_same_blob_as_native": true,
+    "native_start_timeout120_and_arguments_ast_equal": true,
+    "resource_search_status_source_prefix_equal_except_one_added_trailing_LF_and_relocated_candidate_constants": true
+  },
+  "status": "SOURCE_CHECKPOINT_FROZEN_NO_PUSH_NO_ACTUAL_CONSUMER",
+  "tests": {
+    "bootstrap": "PASS five actual package environments",
+    "configured_static": "Ruff check+format+Isort PASS; Mypy335PASS",
+    "doctor": "PASS",
+    "limitations": [
+      "Markdownlint unavailable",
+      "No full package integration suite",
+      "No opt-in actual consumer run",
+      "Fresh exact-head hosted checks not run"
+    ],
+    "red": "11 missing seam controls failed/1 existing cache control passed; immutable old fixture actual selector+candidate seams2expectedRED; no actual browser/native/wheel build",
+    "scoped_final": "24PASS/4integrationDESELECTED/0SKIP",
+    "service_free_controls": "18PASS",
+    "toolkit": "69PASS"
+  },
+  "tree": "b95b352dd20cec016ea5dac204b81eeb331a8b3d",
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,137 @@
+{
+  "schema": "current618-linux-consumer-independent-v5-preexecution-review/v1",
+  "status": "GO_V5_PREEXECUTION_ONLY_DISTINCT_ROOT_CAPACITY_SERIALIZATION_AND_ONE_EXECUTION_REQUIRED",
+  "observed_utc": "2026-10-11T10:50:04.551561+00:00",
+  "owner_final_proposal": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/OWNERFINAL-current618-isolated-Linux-consumer-preexecution-proposal-v5-successor-v2.json",
+    "bytes": 70901,
+    "sha256": "38d07ed81d6ce129a7786325b7447c8e2bfb8b134c1f02c78fd2c6788b0ff027"
+  },
+  "runner": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/installed-consumer-runner-v5.py",
+    "bytes": 19506,
+    "sha256": "67912e4bfdc1de4dd83d36511bf19b19cd90e34c0d84197d30a7e05f0fce4ad9"
+  },
+  "gate": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/current-input-admission-v4.py",
+    "bytes": 9288,
+    "sha256": "1edf96b6b801de5e7b8c1c7c284a636cec44bc06fcb45adb6e1781e519b3a8f6"
+  },
+  "manifest": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/input-and-source-admission-v5.json",
+    "bytes": 170704,
+    "sha256": "596942a7c85fe6f742777454d6d1a76c1bc3e8c29ed88f693eea28af856d7c34"
+  },
+  "verified": {
+    "final_refs": 153,
+    "preserved_original_refs": 126,
+    "owner_refs": 24,
+    "unique_direct_file_bindings": 165,
+    "all_ref_sizes_SHA_exact": true,
+    "original_Linux_pair_copies_original_ZIP_bytes_exact": true,
+    "private_input_directory0700_files0600": true,
+    "real_unchanged_selector_controls_mixed2_baseline1_foreign2_metadata_and_identity": true,
+    "recorded100_controls0skip_existing93_AST_exact": true,
+    "all9_runner_functions_and_remaining_globals_exact_v4_four_literals_only": true,
+    "manifest_only_private_wheel_path_changed": true,
+    "independently_bound_current_archive_identity": {
+      "id": 11697353355,
+      "run": 38126987514,
+      "job": 114433293243
+    },
+    "current_counts": {
+      "python": 202,
+      "tracked_source_payloads": 215,
+      "RECORD_files": 221,
+      "RECORD_hashsize_verified": 220,
+      "directories": 27
+    },
+    "all215_producer_Git_bytes_modes_and_all221_RECORD220_hashes_exact": true,
+    "four_distinfo_and_two_generated_exceptions_separate": true,
+    "clean1433_harness_e736_07b_prehash_and_execbits": true,
+    "unchanged_four_helpers_Git618_and0444_snapshots_Rcc7e588_15roots": true,
+    "fresh_suffix3_absent": true,
+    "original_v3_HOLD_v4_preexecGO_and_original_actual_FAILURE_unmodified": true,
+    "initial_KeyError_preparation_diagnostic_retained_no_product_failure": true,
+    "metadata_only_v5_successor_scope_correction_not_test_rerun": true
+  },
+  "exact_planned_gateway": {
+    "cwd": "/workspace/engineering/pr282",
+    "activate": "source /workspace/actions-cloud/activate.sh",
+    "argv": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "645s",
+      "/workspace/actions-cloud/bin/rcc",
+      "task",
+      "script",
+      "-r",
+      "developer/toolkit.yaml",
+      "--",
+      "python",
+      "-c",
+      "import toolkit; toolkit.poetry(\"action_server\", \"run\", \"python\", \"/workspace/engineering/pr221-current618-linux-consumer-preflight/installed-consumer-runner-v5.py\")"
+    ],
+    "attempt_root": "/workspace/engineering/pr221-current618-linux-consumer-preflight/installed-linux-current618-90a785d8-3",
+    "attempt_absent": true,
+    "authorization": "NOTAUTHORIZED: independent immutablev5GO then distinct newROOTONEexecution/capacity/serialization release. Originalv4ONE authorization failed beforeworker and cannot be reused. No actual retry in this preparation."
+  },
+  "budgets": {
+    "worker_seconds": 595,
+    "process_including_cleanup_seconds": 600,
+    "reserved_cleanup_max_seconds": 5,
+    "outer_gateway_seconds": 645,
+    "outer_TERM_KILL_grace_seconds": 10,
+    "temporary": "Fresh owned0700 /tmp/rt103-current618-* outside all known checkouts",
+    "output": "Directfiles/no newreaderthreads; primaryexceptionretained, additionalcleanup failureoverallFAIL",
+    "cleanup_scope": "Existingidentity-ownedPID/create-time point-in-time snapshots; no universaladoption/naturalshutdown/productionpool/native/service/provider/browserclaim"
+  },
+  "capacity": "No actual consumer executed by reviewer. Fresh >=1.2GB and serialization plus distinct root ONE authorization required; recorded freeze space is not current capacity approval.",
+  "failure_disposition": "Original v4 failed at real mixed-directory selector before attempt/worker/install/CLI/cleanup. v5 isolates exact original bytes without weakening selector or guards. Original refusal and consumed authorization remain historical, not a consumer result.",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md: explicit accepted reuse of exact already root-integrated selector-directory contract, without a duplicate guide child",
+    "Exact_accepted_delta": {
+      "path": "/workspace/engineering/pr221-current618-linux-consumer-independent-preexecution-review/canonical-selector-directory-contract-proposed.patch",
+      "bytes": 685,
+      "sha256": "fb9c9604f6f9dd32259d9a133eadafba076acfd92546ab0ccce2a080a918591c"
+    },
+    "Already_integrated_block_verified_in_root_owned_guide": true,
+    "root_owned_guide_observed_body_sha256": "d4b39f1a20ba302ac5247177dcd83ff19a427a47512b9ae0114e45cab3b75196",
+    "Durable_learning_captured": "Admit actual physical selector directory, not only the fixedwheel digest; preserve crossplatform originals and isolate exact platform bytes; realhelper rejects extra matchingcp312; beforeattempt/worker refusal yields no installedconsumer orcleanup outcome. V5 preparation admits unchangedselector and fullinputguard before immutablefreeze.",
+    "Evidence": [
+      "Originalv4gateway failedbeforeATTEMPT6f29",
+      "Originalmixed2cp312 rejected by exact unchangedsource helper f1ad14",
+      "Finaldedicated0700/0600 originalLinuxpair copies ZIPfc4018/owner9b406 exact; realselector returns90a785cp312",
+      "Servicefree100PASS: existing93controls unchanged+7directoryidentity controls; full215tracked202Python221RECORD220verified",
+      "Original1433harness current pre/post exact and126originalref bindings retained"
+    ],
+    "Stale_or_ambiguous_guidance_removed": "Existing digest-only or selected-file admission cannot imply parentdirectory exclusivity. The root accepted8-line block already states this; independently prepared85ac proposal is equivalent and retained as superseded/unintegrated instead of duplicated.",
+    "Equivalent_unintegrated_proposal_disposition": {
+      "proposal": {
+        "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/canonical-real-directory-selector-before-consumer-v5-proposed.patch",
+        "bytes": 1325,
+        "sha256": "85acda07f8dbc42205d8c3200da7392fcfd72ca86e5596ef4ccfae619bdddfed"
+      },
+      "status": "DO_NOT_APPLY_DUPLICATE; acceptedfb9 block sufficient; private modes alreadyenforced controls andexistingprivateinput policy"
+    },
+    "Remaining_uncertainty": "Independent frozenv5GO and separate rootONEexecution/capacity/serialization release pending; no actualconsumer/cleanup; OAuth/fullseven/platform/private/native/publication/release HOLD.",
+    "Upstream_disposition": "none"
+  },
+  "remaining_HOLDs": [
+    "Current installedLinuxcp312 consumer NOTQUALIFIED; v5 private prep/servicefree100PASS/read-onlydirectoryadmission is not actualconsumer",
+    "Independentv5preexecutionGO and root distinct newONEexecution/capacity/serialization release",
+    "Fullseven artifactinventory/platform semantics/native/private/backend/Workspace/ChatGPT/coldregistry/tag/publication/release gates unchanged",
+    "Empty generatedOAuth input authority/content HOLD regardless subsequent import smoke",
+    "OriginalWindows/Mac producer/receipt/provenance/content conclusions remain original own scoped qualification; Linux pair preparation does not qualify those consumers",
+    "Cleanup is only future identity-owned point-in-time observation; originalv4failedgateway never created attempt/worker and has no cleanup receipt"
+  ],
+  "not_performed": [
+    "Selector/control/gateway/consumer rerun",
+    "Runtime payload imports/install/CLI",
+    "Source/index/branch changes",
+    "Download or acquisition",
+    "Publication/tag/native/provider/browser/Windows gates/push/merge"
+  ],
+  "upstream_disposition": "none"
+}

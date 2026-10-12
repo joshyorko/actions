@@ -1,0 +1,18 @@
+{
+  "returncode": 0,
+  "elapsed_seconds": 156.33012433099793,
+  "parent_exception": null,
+  "log": {
+    "path": "/workspace/engineering/captured-child-cleanup-configured-full-once-owned/one-configured-full.private.log",
+    "bytes": 338767,
+    "sha256": "885ba0ab6437c18dd2c3d7f1c4e1caf9ad981e22c0e3517de0740db88aa9ca17"
+  },
+  "authorization": {
+    "path": "/workspace/engineering/captured-child-cleanup-configured-full-once-owned/root-one-exact-configured-full-authorization.json",
+    "bytes": 17645,
+    "sha256": "dc99a74bd2cb29f18fe91c306ec8ea5c216cbb2c3a47ed81db4bdb5abb691c1b"
+  },
+  "head": "499a83d802ca9a0e2ebe3d77071af10625879297",
+  "tree": "e13ba51b094e429b7c06d6dabbbcc348cc66e86c",
+  "actual_cleanup": "UNREPORTED by this source-full launcher"
+}

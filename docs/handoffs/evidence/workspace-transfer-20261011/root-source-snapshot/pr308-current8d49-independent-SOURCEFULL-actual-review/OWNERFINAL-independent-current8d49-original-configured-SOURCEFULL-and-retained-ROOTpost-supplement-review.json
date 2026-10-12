@@ -1,0 +1,203 @@
+{
+  "schema": 1,
+  "status": "INDEPENDENT_CURRENT_SOURCEFULL_GO_RETAINED_ROOT_POST_FAILURE_SEPARATE_SUPPLEMENT",
+  "decision": "GO_CURRENT8D49_ORIGINAL_CONFIGURED_SOURCEFULL_ONLY_WITH_SEPARATE_READONLY_POST_SUPPLEMENT",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "complete_typed_source": 1440,
+  "original_configured_FULL_terminal": {
+    "path": "/workspace/engineering/pr308-current8d49-SOURCEFULL-preexecution/one-current8d49-configured-FULL-original-owned/original-terminal.json",
+    "bytes": 1278,
+    "sha256": "54292bf9c05c9921949ca7710aaf27842d2d1562f6b1ee4a9d86377c88f43472",
+    "mode": "0o600"
+  },
+  "original_configured_FULL_log": {
+    "path": "/workspace/engineering/pr308-current8d49-SOURCEFULL-preexecution/one-current8d49-configured-FULL-original-owned/original-FULL-source.private.log",
+    "bytes": 385745,
+    "sha256": "6ac0621474e03351a703ac9f963530890d1a613146ce90677c35e8e35661b069",
+    "mode": "0o600"
+  },
+  "original_ROOT_owner_binding": {
+    "path": "/workspace/engineering/root-current8d49-one-FULL-original-owned/OWNERFINAL-root-original-current8d49-one-FULL.json",
+    "bytes": 837,
+    "sha256": "83781777ef048357ea892ce56d42ab3906b92f49f663169dda2130ddcc1094ac",
+    "mode": "0o400"
+  },
+  "original_ROOT_status": "FAIL_OR_HOLD_NO_RETRY_UNCHANGED",
+  "original_ROOT_extra_post_returncode": 1,
+  "original_ROOT_missing_env_failure_binding": {
+    "path": "/workspace/engineering/root-current8d49-one-FULL-original-owned/original-root-all-outcome-post.stderr.private.log",
+    "bytes": 415,
+    "sha256": "854ddb4a317faa4cc8d94edfe8048761249cd4b38a05677ecdbbce0e547c92cd",
+    "mode": "0o600"
+  },
+  "named_readonly_post_env_supplement": {
+    "path": "/workspace/engineering/root-current8d49-one-FULL-original-owned/named-readonly-post-env-supplement/OWNERFINAL-named-readonly-full-post-env-supplement.json",
+    "bytes": 1994,
+    "sha256": "1bdd39ecaae8d8ae95ed28c3441de52c4b8f95117fdc71842085fd1374c8e235",
+    "mode": "0o400"
+  },
+  "named_supplement_frozen_facts": {
+    "original_ROOT_owner": {
+      "path": "/workspace/engineering/root-current8d49-one-FULL-original-owned/OWNERFINAL-root-original-current8d49-one-FULL.json",
+      "bytes": 837,
+      "sha256": "83781777ef048357ea892ce56d42ab3906b92f49f663169dda2130ddcc1094ac",
+      "mode": "0o400"
+    },
+    "original_ROOT_post_stderr": {
+      "path": "/workspace/engineering/root-current8d49-one-FULL-original-owned/original-root-all-outcome-post.stderr.private.log",
+      "bytes": 415,
+      "sha256": "854ddb4a317faa4cc8d94edfe8048761249cd4b38a05677ecdbbce0e547c92cd",
+      "mode": "0o600"
+    },
+    "original_FULL_terminal": {
+      "path": "/workspace/engineering/pr308-current8d49-SOURCEFULL-preexecution/one-current8d49-configured-FULL-original-owned/original-terminal.json",
+      "bytes": 1278,
+      "sha256": "54292bf9c05c9921949ca7710aaf27842d2d1562f6b1ee4a9d86377c88f43472",
+      "mode": "0o600"
+    },
+    "supplement_stdout": {
+      "path": "/workspace/engineering/root-current8d49-one-FULL-original-owned/named-readonly-post-env-supplement/original-named-readonly-post.stdout.private.log",
+      "bytes": 2258,
+      "sha256": "9f401d9a8b3148295357b161462ce716cd6f2e26ae675504ce9d4232c696d83a",
+      "mode": "0o600"
+    },
+    "supplement_stderr": {
+      "path": "/workspace/engineering/root-current8d49-one-FULL-original-owned/named-readonly-post-env-supplement/original-named-readonly-post.stderr.private.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": "0o600"
+    },
+    "only_environment_metadata": {
+      "PYTEST_ADDOPTS": "--basetemp=/tmp/actions-pr308-current8d49-FULL-once-1/Runtime-configured -o tmp_path_retention_policy=all",
+      "PYTEST_XDIST_AUTO_NUM_WORKERS": "2"
+    }
+  },
+  "root_release_binding": {
+    "path": "/workspace/engineering/root-one-current8d49-source-FULL-release.json",
+    "bytes": 1332,
+    "sha256": "b85c05ec030e2d2748884e45591cfcf4c307b45b5aad28dae3625828b5f2abce",
+    "mode": "0o400"
+  },
+  "source_LIGHT_independent": {
+    "path": "/workspace/engineering/pr308-current8d49-independent-SOURCE-LIGHT-review/OWNERFINAL-independent-current8d49-configured-SOURCE_LIGHT-review.json",
+    "bytes": 3596,
+    "sha256": "b0d1c4ee4cee11fc3c2ffd9f6fece609869fa4b447d43bfb8c91ca4a2bf6222b",
+    "mode": "0o400"
+  },
+  "FULL_preexecution_independent": {
+    "path": "/workspace/engineering/pr308-current8d49-independent-SOURCEFULL-preexecution-review/OWNERFINAL-independent-current8d49-configured-SOURCEFULL-preexecution-review.json",
+    "bytes": 8414,
+    "sha256": "023c1de496e5c8d1a399b0110dc79161bdb2f92ebcaf71678da3a5adfe7b742c",
+    "mode": "0o400"
+  },
+  "actual_gate_results": {
+    "before": 0,
+    "configured_primary": 0,
+    "runner_after_always": 0,
+    "ROOT_outer": 0,
+    "ROOT_extra_post": 1,
+    "named_readonly_supplement": 0,
+    "pytest_unique_named_outcomes": 1483,
+    "pytest_PASS": 1470,
+    "pytest_SKIP": 13,
+    "pytest_FAIL": 0,
+    "pytest_ERROR": 0,
+    "warnings": 16,
+    "pytest_seconds": 108.86,
+    "pytest_workers": 2,
+    "configured_parent_seconds": 140.64416317599535
+  },
+  "pre_post_guard_originals": [
+    {
+      "stage": "before",
+      "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+      "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+      "source_count": 1440,
+      "old_originals": 237,
+      "native_originals": 1192,
+      "prepared": 30,
+      "origins": 5,
+      "dd091_physical_alias_verified": true,
+      "failed_history": "UNCHANGED",
+      "workspace_free": 1296637952,
+      "tmp_free": 1264189440,
+      "native": "NOT_RUN"
+    },
+    {
+      "stage": "after",
+      "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+      "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+      "source_count": 1440,
+      "old_originals": 237,
+      "native_originals": 1192,
+      "prepared": 30,
+      "origins": 5,
+      "dd091_physical_alias_verified": true,
+      "failed_history": "UNCHANGED",
+      "workspace_free": 1296097280,
+      "tmp_free": 600219648,
+      "native": "NOT_RUN"
+    }
+  ],
+  "named_supplement_guard": {
+    "stage": "after",
+    "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+    "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+    "source_count": 1440,
+    "old_originals": 237,
+    "native_originals": 1192,
+    "prepared": 30,
+    "origins": 5,
+    "dd091_physical_alias_verified": true,
+    "failed_history": "UNCHANGED",
+    "workspace_free": 1296039936,
+    "tmp_free": 600219648,
+    "native": "NOT_RUN"
+  },
+  "preservation": {
+    "current1440_Git_FS_OID_exec_bits_independently_fresh": true,
+    "all_FULL8_frozen_bindings_and_LIGHT14_frozen_bindings_current_exact": true,
+    "original237_native1192_prepared30_5_origins": "Independent LIGHT proof plus actual before/runnerpost/namedreadonlypost complete exact guard outputs and frozen helper bodies; no current native qualification.",
+    "old8dc_FAILED_receipt_alias_and_dd091_relocation": "Retained unchanged, no recreation/relabel",
+    "original095_LIGHT_FAILED": "Preserved unchanged; current child full outcome distinct",
+    "old_source_FULL_counts": "NOT_CARRIED"
+  },
+  "scope": "Current configured sourceFULL1470/13 acceptance only; extra ROOTpost failure remains HOLD in its original owner, separate read-only supplement supplies explicit current-env post evidence. Neither status is overwritten, no suite retry.",
+  "capacity": {
+    "source_FULL_existing_floors": {
+      "workspace": 1288490189,
+      "tmp": 1200000000
+    },
+    "observed_source_FULL_before": {
+      "workspace": 1296637952,
+      "tmp": 1264189440
+    },
+    "observed_source_FULL_after": {
+      "workspace": 1296097280,
+      "tmp": 600219648
+    },
+    "future_SOURCEFULL": "HOLD_tmp_below_source_only1.2GB_floor; freshfloors required",
+    "native_transport_existing_floors": {
+      "dev_shm": 3865470567,
+      "workspace": 1288490189
+    },
+    "native_tmp_note": "No1.2GB TMP native floor invented; native ownedtmp/cache/state and original live budget policies must independently pass. Observed resources are not reservation."
+  },
+  "future_native_admission": "HOLD_until_currentV8meaningfulcontrols+indsource+qualifiedcurrentconfig+indconfig/freshnativefloors/distinctROOTone3then5then7276; no implicit actual execution",
+  "native_readers_private_metadata_release": "UNQUALIFIED_HOLD; original01f/frozen-v6 unavailable",
+  "documentation": {
+    "exact_proposed_delta": "\nIndependent configured-test post-checks must use the runner's exact\n`PYTEST_ADDOPTS` and `PYTEST_XDIST_AUTO_NUM_WORKERS` values. Environment changes\ninside the runner do not reach its parent. Preserve a missing-environment\npost-check failure and bind a separate read-only supplement; the supplement\ndoes not rerun or relabel the original test gate.\n",
+    "patch_binding": {
+      "path": "/workspace/engineering/pr308-current8d49-independent-SOURCEFULL-actual-review/canonical-independent-parent-readonly-post-environment-parity-proposed.patch",
+      "bytes": 864,
+      "sha256": "76beb30f9cc657a37c2e5edc41a2465d12fa12a0c8304f573602086bfdea75b1",
+      "mode": "0o400"
+    },
+    "evidence": "Original ROOT parent independent post KeyError PYTEST_ADDOPTS after inner configured before/primary/post0; exactcfgAddopts+xdist2-only named read-only supplement returned0. Child environment is process-local; safe correction preserves original gates/failures.",
+    "integrated_existing_lessons": "Startup4line probe versus general900, configured Runtime formatter and accepted isolated absent basetemp/ALL guidance reused; no cosmetic guide child.",
+    "remaining_uncertainty": "No actual newerRCC/native/publication/metadata qualification; universal reader/reaping and stale unexecuted robolog proposal not admitted."
+  },
+  "upstream_disposition": "none; local orchestration environment boundary, no external posts",
+  "reviewer_tests_source_full_native_product_imports_source_mutation": "NOT_RUN"
+}

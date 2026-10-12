@@ -1,0 +1,175 @@
+{
+  "schema": 1,
+  "status": "MEMORY17_PREEXEC_PREPARED_NOTRUN_REQUIRES_ROOT_AND_INDEPENDENT",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "launcher": {
+    "path": "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/root_release_one_memory17_pure_controls_NOTRUN.py",
+    "bytes": 7361,
+    "sha256": "68d230410d0ff42f3c65dea09c0cd5e5b191a24e70ad3871efbb5dd2bf8201b0",
+    "mode": "0o400"
+  },
+  "source_guard_config": {
+    "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+    "bytes": 765564,
+    "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25",
+    "mode": "0o600"
+  },
+  "managed_rcc": {
+    "path": "/workspace/actions-cloud/bin/rcc",
+    "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+  },
+  "activation": {
+    "ACTIONS_CLOUD_ROOT": "/workspace/actions-cloud",
+    "ACTIONS_HOME": "/workspace/actions-cloud/actions-home",
+    "ACTIONS_RUNTIME_TEST_PYTHON": "/workspace/actions/action_server/.venv/bin/python",
+    "BUILDX_CONFIG": "/workspace/actions-cloud/cache/buildx",
+    "GOCACHE": "/workspace/actions-cloud/cache/go-build",
+    "GOMAXPROCS": "2",
+    "GOPATH": "/workspace/actions-cloud/cache/go",
+    "PLAYWRIGHT_BROWSERS_PATH": "/workspace/actions-cloud/cache/playwright",
+    "POETRY_CACHE_DIR": "/workspace/actions-cloud/cache/pypoetry",
+    "POETRY_CONFIG_DIR": "/workspace/actions-cloud/config/pypoetry",
+    "POETRY_NO_INTERACTION": "1",
+    "PYTEST_XDIST_AUTO_NUM_WORKERS": "2",
+    "ROBOCORP_HOME": "/workspace/actions-cloud/robocorp",
+    "ROBOTS_HOME": "/workspace/actions-cloud/robots-home",
+    "UV_CACHE_DIR": "/workspace/actions-cloud/cache/uv",
+    "XDG_CACHE_HOME": "/workspace/actions-cloud/cache",
+    "XDG_CONFIG_HOME": "/workspace/actions-cloud/config",
+    "npm_config_cache": "/workspace/actions-cloud/cache/npm"
+  },
+  "path_prefix2": [
+    "/workspace/actions-cloud/bin",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin"
+  ],
+  "forbidden_operator_exports": [
+    "ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY",
+    "ACTIONS_REAL_RCC_ARTIFACT_TEST",
+    "ACTIONS_RUNTIME_RCC_PROVIDER",
+    "ACTIONS_RUNTIME_RCC_BINARY",
+    "ACTIONS_RUNTIME_RCC_TEST_PACKAGE_CACHE_CONFIG",
+    "PYTHONOPTIMIZE"
+  ],
+  "basetemp": "/workspace/engineering/root-one-memory17-pure-controls-20261011-1/basetemp",
+  "logger": "/workspace/engineering/root-one-memory17-pure-controls-20261011-1/logger",
+  "junit": "/workspace/engineering/root-one-memory17-pure-controls-20261011-1/junit.xml",
+  "pytest_argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "120s",
+    "/workspace/engineering/pr308/action_server/.venv/bin/python",
+    "-m",
+    "pytest",
+    "-n0",
+    "-vv",
+    "-rA",
+    "--basetemp",
+    "/workspace/engineering/root-one-memory17-pure-controls-20261011-1/basetemp",
+    "--robocorp-log-output",
+    "/workspace/engineering/root-one-memory17-pure-controls-20261011-1/logger",
+    "-o",
+    "tmp_path_retention_policy=all",
+    "--junitxml",
+    "/workspace/engineering/root-one-memory17-pure-controls-20261011-1/junit.xml",
+    "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/test_proposed_cgroup_memory_state_NOTRUN.py"
+  ],
+  "frozen_bindings": [
+    {
+      "path": "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/root_release_one_memory17_pure_controls_NOTRUN.py",
+      "bytes": 7361,
+      "sha256": "68d230410d0ff42f3c65dea09c0cd5e5b191a24e70ad3871efbb5dd2bf8201b0",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/test_proposed_cgroup_memory_state_NOTRUN.py",
+      "bytes": 2985,
+      "sha256": "3b3a417379f608b6a5917c7720c6e846352f88d30fda1273c301a7c5ced1a4cb",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/proposed_cgroup_memory_state_v1_NOTRUN.py",
+      "bytes": 3330,
+      "sha256": "d2b3e6684898ab1b64f84ac7712a1f2f355d7ea5d680eb6ded0699cc090f5260",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+      "bytes": 765564,
+      "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/frozen-current8d49-source-LIGHT-inputs-v3.json",
+      "bytes": 12996,
+      "sha256": "81f52920b50e67619b3bb418a7c1034a2106ec52f4badd71b9d85e29b7376820",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/actions-cloud/activate.sh",
+      "bytes": 987,
+      "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/rcc-memory17-pure-controls-concrete-preexecution-NOTRUN/initial-metadata-construction-PATH-variable-expression-FAIL.json",
+      "bytes": 444,
+      "sha256": "8f796eb0414c996936abf5bacd6da17778e9fb4f371089aed76a81fc71c1ad5d",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/readonly_current_input_guard_v9.py",
+      "bytes": 4690,
+      "sha256": "480be06317562b7e3a5c98a5d794bb5d2a33e7fa6186fe707823ecb1cc583626",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/v9_entry_bootstrap.py",
+      "bytes": 1575,
+      "sha256": "d3957c2e216731abf596897fbf0838809129a571743510692f2509228e2c7288",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-next-native-memory-plan-independent-review/OWNERFINAL-independent-memory17-prepared-source-and-executable-HOLD-v2.json",
+      "bytes": 6603,
+      "sha256": "d7068aab83b03c9495e5bd80a93ca750b7d66df818fee93869b5b52b3fd66ece",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-control3-V9-original-publish-failure-diagnosis-owned/OWNERFINAL-original-current8d49-control3-V9-publication-failure-and-secondary-dependency-only.json",
+      "bytes": 5944,
+      "sha256": "feef7c4b07db2d3a778622dc1acf3eec00a8225c42b38aa00721926fb273410b",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-control3-V9-independent-actual-review/OWNERFINAL-independent-original-current8d49-control3-V9-native-FAIL-STOP-review.json",
+      "bytes": 6858,
+      "sha256": "cb88815f6d1816ff7f8b5302420d69bd7cacb0d052fe2ba3c957ddad5e596168",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/canonical-shared-cgroup-headroom-vs-filesystem-capacity-proposed.md",
+      "bytes": 900,
+      "sha256": "8c28fc2596c6fdfc607dd35a17b3462ad217ba97670b61222393dc504861d896",
+      "mode": "0o400"
+    }
+  ],
+  "expected_test_census": {
+    "passed": 17,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "unique_cases": 17
+  },
+  "envelope": {
+    "before_seconds": 120,
+    "primary_seconds": 120,
+    "after_seconds": 120,
+    "all_kill_grace_seconds": 10,
+    "root_parent_seconds": 420
+  },
+  "native_memory_policy": "NOT_ADOPTED; test-only proposed thresholds remain uncalibrated",
+  "root_release_path": "/workspace/engineering/root-one-memory17-pure-controls-release.json",
+  "originals": "No helper/test/source/sampler modifications; old V9 evidence bound through existing readonly guard config"
+}

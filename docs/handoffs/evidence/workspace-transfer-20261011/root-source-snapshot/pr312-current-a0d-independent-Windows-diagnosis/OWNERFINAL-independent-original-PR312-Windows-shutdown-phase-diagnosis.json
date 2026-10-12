@@ -1,0 +1,129 @@
+{
+  "schema": "independent-original-PR312-Windows-diagnosis-v1",
+  "verdict": "HOLD_CURRENT770_ORIGINAL_WINDOWS_INTEGRATION_FAILURE_NO_EOL_CAUSE_OR_WAIVER",
+  "run": 38138100611,
+  "job": 114466057789,
+  "source": "77065131a0aee63d2b1f8621476374bdde3c7b65",
+  "base": "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+  "tree": "edf1801e565692fb3f07b809b3a95b27981fe2fe",
+  "original_acquisition": {
+    "path": "/workspace/engineering/pr312-current-a0d-original-Windows-owned/root-one-original-decoded-log-acquisition.json",
+    "bytes": 1215,
+    "sha256": "5f55a64439aedb2251a9b20da127415149762dfdabca776e591bc9406575cdc7"
+  },
+  "original_log": {
+    "path": "/workspace/engineering/pr312-current-a0d-original-Windows-owned/original-decoded-Windows-job.log",
+    "bytes": 939230,
+    "sha256": "d446e96f11c20ed63e59656e2ab81f315cde1e892ccfe32eb975ad79c8842336"
+  },
+  "original_connector_response_private": {
+    "path": "/workspace/engineering/pr312-current-a0d-original-Windows-owned/original-connector-response.private.json",
+    "bytes": 969719,
+    "sha256": "8279f12a2a31fbcb420c2bb7689782d0e07ea4944856b019d899bc29d851ef23"
+  },
+  "transport": "StructuredContent decoded content exactUTF8/CRLF; connector wire bytes unavailable. Only root original acquisition; reviewer acquired no additional log/artifact/API.",
+  "logged_checkout": {
+    "sha": "71bb6ca2901bc4de7fae86058e72ac2a4016d248",
+    "API_ordered_parents": [
+      "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+      "77065131a0aee63d2b1f8621476374bdde3c7b65"
+    ],
+    "API_tree": "edf1801e565692fb3f07b809b3a95b27981fe2fe",
+    "source_API_tree_equal": true,
+    "local_synthetic_commit_object": "UNAVAILABLE; existingAPI+loggedidentity qualified, no object fetch",
+    "original_API_metadata_review": {
+      "path": "/workspace/engineering/pr312-current-a0d-one-CI-reconciliation/OWNERFINAL-independent-current312-one-complete-CI-metadata-review.json",
+      "bytes": 37117,
+      "sha256": "3173a8642a0a1970bc2df6fce6361961f9c3ed9795d6e24737ebd672aa41396d"
+    }
+  },
+  "source_phase": {
+    "PASS": 1166,
+    "SKIP": 142,
+    "FAIL": 0,
+    "ERROR": 0,
+    "unique_nodes": 1308,
+    "pytest_workers": [
+      "gw0",
+      "gw1"
+    ],
+    "seconds": 359.06,
+    "warnings": 14
+  },
+  "integration_phase": {
+    "PASS": 130,
+    "SKIP": 19,
+    "FAIL": 1,
+    "ERROR": 0,
+    "unique_selected_nodes": 150,
+    "collected": 1461,
+    "deselected": 1311,
+    "workers": "Sequential configured --jobs0; no xdist workers",
+    "seconds": 1644.8,
+    "configured_step_exit": 1
+  },
+  "failed_nodes": [
+    {
+      "node": "action_server_tests\\test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers",
+      "phase": "Shutdown client response-header read AFTER readiness/last-good/correctedB2 assertions",
+      "FIRST90_timeout": false,
+      "exception_category": "httpx.ReadError / WinError10053",
+      "trace": "Testline341 _shutdown; helperline116 client.post",
+      "last_good_marker": true,
+      "correctedB2_semantic_assertions_reached_before_shutdown": true,
+      "server_access_status": 200,
+      "client_success_response": "NOT_ADMITTED; receive_response_headers failed",
+      "natural_exit_rc1": "UNKNOWN_NOT_REACHED",
+      "final_recovery_restart_markers": "ABSENT; shutdownfailedbeforeprint/restart",
+      "legacy_stop_request": "Killing process/subprocesses observed",
+      "identity_owned_cleanup_result_readers_samplers_reaping": "UNKNOWN; access/legacykill lines not complete result"
+    }
+  ],
+  "complete_integration_census": {
+    "path": "/workspace/engineering/pr312-current-a0d-independent-Windows-diagnosis/safe-complete-integration-node-census.json",
+    "bytes": 22210,
+    "sha256": "af09416613438167b260eddf3734d0bc5ed6886fd6a5508599f83d434345cb1e"
+  },
+  "LF_evidence": {
+    "source_tests_logged_PASS": [
+      "action_server_tests\\test_database_shared.py::test_historical_migration_checkout_preserves_git_blob_bytes",
+      "contract_tests\\test_active_contracts.py::test_wheel_fixture_member_writer_preserves_lf_bytes_on_windows",
+      "contract_tests\\test_package_revision_schema.py::test_portable_fixture_is_stably_serialized",
+      "contract_tests\\test_package_revision_schema.py::test_consumer_reference_fixture_is_stably_serialized"
+    ],
+    "new_devutils_EOLists_in_this_Windows_Runtime_log": "NOT_OBSERVED; no invented Toolkit counters",
+    "original_frozen_artifact_members": "UNMEASURED; no artifact acquisition",
+    "cause": "UNKNOWN; no EOL-caused-shutdown attribution",
+    "unchanged_test_handler_selftest_Git_blobs_exactbase": [
+      "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py",
+      "action_server/src/actions/server/_server.py",
+      "action_server/src/actions/server/_selftest.py"
+    ]
+  },
+  "bounded_next_boundary": "Existing conditional shutdown route synchronously calls _thread.interrupt_main before returning. Separately authorized service-free response-send ordering controls can test this boundary; not fixture tolerance, retry, timeout increase or sourcefix acceptance.",
+  "followon_startup_artifact_proposal": "Not requested. Solefailure is after readiness/recovery; startup80/88 receipt is not required to classify failed client shutdown read and cannot establish response completion or exit unless actual predicates recorded. Extra acquisition requires distinctrootrelease/exactjobsource tuple.",
+  "remaining_HOLD": [
+    "PR312 integration/currentWindows acceptance/Runtime1.0.3publication",
+    "Client200 delivery/naturalshutdown/completeownedcleanup",
+    "Cause/sourcefixqualification; no actual/rerun/native/private/newinfra release"
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md external exact4line proposal",
+    "Exact_delta": {
+      "path": "/workspace/engineering/pr312-current-a0d-independent-Windows-diagnosis/canonical-server-access-client-completion-proposed.patch",
+      "bytes": 391,
+      "sha256": "38c6d770c16a1d66ece6a367a5b3a79733160b189c5e1f24accb09535f86ec13"
+    },
+    "Durable_learning_captured": "Access status differs from actual client receipt; classify reached phase and separate response, naturalexit, cleanup, LF evidence",
+    "Evidence": "Original serveraccess200/clientReadError10053; _shutdowntrace afterlastgood+correctedB2; fourLFrelatedsourcePASS nodes",
+    "Stale_or_ambiguous_guidance_removed": "Not FIRST90 recurrence; no naturalexit inferred from access200; no artifact bytes/cause inferred from sourceLF tests",
+    "Remaining_uncertainty": "Transport interruptioncause and actual parentexit/readers/reaping unresolved"
+  },
+  "Upstream_disposition": "none",
+  "constructor": {
+    "path": "/workspace/engineering/pr312-current-a0d-independent-Windows-diagnosis/verify-original-log-readonly-v3.py",
+    "bytes": 10321,
+    "sha256": "a2317e2d0c3692c095ccb4eca4fcac366ac22aba09f9255597d71913963d1eb1"
+  },
+  "non_gate_inspection_limits": "Exploratory missing assumed devutils contract path, saved jobs list mismatch, fixed-count delimiter and SKIPPED word-boundary assumptions failed before receipt; originals retained. Original wrapped skip line joins SKIPPED with reason-tail, parsed known literal status prefix and independently reconciled full150 terminal counts. Earlier saved jobstatusIN_PROGRESS is historical; original newer log supplies integrationterminal1."
+}

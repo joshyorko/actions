@@ -1,0 +1,20 @@
+diff --git a/docs/skills/repository-operations.md b/docs/skills/repository-operations.md
+index 60ebe7d3..108d6024 100644
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -3350,6 +3350,15 @@ existing global API token or a typed reference as a Workspace grant. Native,
+ public authenticated transport, HTTP Range/HEAD, Windows provider and complete
+ multi-adapter lifecycle acceptance need their own measured gates.
+ 
++The private resolver authorizes the actor and acquires the provider reader inside
++the Workspace transaction lock, then yields the stream after that transaction
++exits. Revocation denies later resolutions; it does not recall an already
++authorized open reader. The revocation regression replaces `provider.open` with
++a failure sentinel to prove that a denied actor, wrong Workspace or revoked grant
++never reaches the provider. Keep reader-acquisition authorization separate from
++active-stream revocation; a durable handle or successful restart is not evidence
++for the latter.
++
+ 
+ A stage failure after provider sealing must retain actual seal metadata in the
+ aborted output record before any cleanup. The private provider's transient owned

@@ -1,0 +1,112 @@
+{
+  "bounds": {
+    "child_KILL_grace": 10,
+    "child_TERM": 120,
+    "no_large_cap_payloads": true,
+    "root_parent_KILL_grace": 10,
+    "root_parent_TERM": 135
+  },
+  "child_argv": [
+    "/workspace/engineering/pr308/action_server/.venv/bin/python",
+    "-m",
+    "pytest",
+    "-n0",
+    "-q",
+    "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/test_actual_inner_boundaries_v2.py",
+    "--tb=short",
+    "--basetemp=/workspace/engineering/root-current-e2-inner-service-free-controls-v2-once-owned/basetemp",
+    "-o",
+    "tmp_path_retention_policy=all",
+    "--robocorp-log-output=/workspace/engineering/root-current-e2-inner-service-free-controls-v2-once-owned/robot-output",
+    "--robocorp-log-max-file-size=10MB",
+    "--robocorp-log-max-files=999",
+    "--junitxml=/workspace/engineering/root-current-e2-inner-service-free-controls-v2-once-owned/junit.xml"
+  ],
+  "control_binding": {
+    "bytes": 11388,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/test_actual_inner_boundaries_v2.py",
+    "sha256": "879a1370f1613a1ec832a04d8b0f9f0dde37dab0ea96f52714f47b6f16acc9f2"
+  },
+  "control_functions": [
+    "test_complete_current_layout_wheel_and_sdist_baseline",
+    "test_RECORD_poison_independent_restored_baseline",
+    "test_wheel_source_generated_metadata_poisons",
+    "test_sdist_restored_baseline_poisons",
+    "test_all_ZIP_headers_refused_before_any_payload_read",
+    "test_exact_ZIP_cap_header_boundaries_admitted",
+    "test_inner_reference_identity_poison",
+    "test_body_and_mode_differences_remain_HOLD_without_normalization",
+    "test_real_private_release_guard",
+    "test_real_unoptimized_guard",
+    "test_output_cap_preserves_existing_receipts_and_creates_no_overcap_file"
+  ],
+  "decision": "GO_CURRENT_E2_INNER_V2_SERVICE_FREE_CONTROL_PREEXECUTION_ONLY",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; reuse precise partial-inspector admission lesson proposed in b1f40 plus existing RECORD/generated-content boundary guidance.",
+    "Durable_learning_captured": "Boundary controls must invoke frozen implementation on separately restored valid baseline and isolate pytest logging outputs; planning controls is not their GREEN evidence.",
+    "Evidence": "8 frozen refs/config refs exact; real AST execution fixture source and11 control functions reviewed without import; explicit guards precede actual inspection; unchanged seven functions independently AST-equal.",
+    "Remaining_uncertainty": "Control run and all original artifact content remain unobserved.",
+    "Stale_or_ambiguous_guidance_removed": "Do not convert current control PREEXEC into executable original-artifact inspection GO or relabel prior015937 HOLD."
+  },
+  "exact_parent_argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "135s",
+    "bash",
+    "-c",
+    "source /workspace/actions-cloud/activate.sh; exec /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python /workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/launch_service_free_controls_once_v2.py"
+  ],
+  "executor_binding": {
+    "bytes": 23323,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/inspect_current_e2_inner_once_v2.py",
+    "sha256": "d83a7aae88a98a694310e6a1e60de2ea7e362604ee8c5d345cc6a38b4591177c"
+  },
+  "launcher_binding": {
+    "bytes": 2050,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/launch_service_free_controls_once_v2.py",
+    "sha256": "6c7a1a3959890f079391ac8c800cf0f168e27fbc32c6b3289d9af7ddcfe269f4"
+  },
+  "original_HOLD_binding": {
+    "bytes": 5657,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-independent-review/OWNERFINAL-independent-current-e2-inner-source-and-executable-PREEXECUTION-HOLD.json",
+    "sha256": "b1f40e5617c9f24992718d6bb1f3df4afe457ef903d57358775e61ce9f6300f7"
+  },
+  "owner_evidence_bindings_verified": 8,
+  "proposal_binding": {
+    "bytes": 7642,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/OWNERFINAL-current-e2-inner-successor-v2-service-free-CONTROL-PREEXECUTION.json",
+    "sha256": "9111b4662e384c4fe272d684ea33e2620f813cbfa9cef84bed1382260d1e69cf"
+  },
+  "required_ROOT_conditions": [
+    "Distinct exact frozen proposal+independent decision adoption and one run only; no actual-inspector release implied.",
+    "No simultaneous archive/native/source/gateway operations that mutate shared refs or selected roots.",
+    "Fresh capacity remains sufficient for owned control logs and native floor; no inherited PYTHONOPTIMIZE/PYTEST_ADDOPTS.",
+    "Managed activation18 literal exports+PATH first/cached Toolkit prefix checked; own prepared Runtime Python unchanged.",
+    "ROOT privately retains all-outcome parent terminal; launcher missing terminal/post on parent kill remains UNKNOWN/HOLD.",
+    "Before/alwayspost binding guards and unique owned control directory. No retry or baseline count promotion before original JUnit/terminal review."
+  ],
+  "schema": "INDEPENDENT_CURRENT_E2_INNER_V2_CONTROL_PREEXECUTION_SOURCE_REVIEW",
+  "scope": "ONE service-free real-AST synthetic boundary control run only after separate ROOT release. Actual original aggregate inspector remains HOLD.",
+  "source": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "static_findings": [
+    "Real frozen executor functions compiled from hash-bound AST; main is not invoked by controls. Source217 Git bodies seed independently rebuilt synthetic wheel/sdist baseline.",
+    "Original seven inspector functions and inspect_wheel/inspect_sdist unchanged from previous frozen executor; zip_payload now admits all headers before reads.",
+    "Explicit unoptimized entry and regular nonsymlink0600 private ROOT release guard added before actual inspector consumption.",
+    "RECORD and source/metadata/generated poisons each restore a valid baseline; ZIP cap edges use header read-spies, avoiding large payload allocation.",
+    "Controls include source body/mode mismatch authority HOLD, output budget/noovercap-file, immutable member/size/digest, real optimizer/private-release guards.",
+    "Explicit -n0/ABSENTbasetempALL/privatecwd/absolute logger output and JUnit avoid shared product ./output mutation."
+  ],
+  "tree": "afe2679cc93bf27fa5021c7698ee7ad3ee21a1b9",
+  "unknowns": [
+    "All controls NOT_RUN; synthetic expected219/203/223 counts do not measure original artifact.",
+    "Actual inner integrity, OAuth/frontend/generated authority, other-platform source, consumer/native/private/publication/release remain HOLD.",
+    "Current entry-guard changes and changed zip preflight need original control terminal/JUnit review, then a separate actual executor proposal and independent admission."
+  ],
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,38 @@
+diff --git a/docs/program/evidence/wave11/current-engineering-20261011/README.md b/docs/program/evidence/wave11/current-engineering-20261011/README.md
+index 50e93bd5..ad33b2f0 100644
+--- a/docs/program/evidence/wave11/current-engineering-20261011/README.md
++++ b/docs/program/evidence/wave11/current-engineering-20261011/README.md
+@@ -135,3 +135,33 @@ explicitly deferred; its design and independent review are retained. Full OAuth
+ manifest/source-authority architecture remains deferred pending owner input. No
+ issue closure, publication, infrastructure change, Devsy or Dakota writer occurred.
+ Upstream disposition: none.
++
++The next engineering checkpoint retains current-target source freezes #310
++`dfca3f8e`, #306 `c38e22c7`, and #305 `3ec9d0ac`, with independent source
++reviews `6282ffab`, `4533d20b`, and `d29a5c61`. Their fresh hosted gates are
++separate from local source admission. The original #310 first-readiness failures
++remain unmodified; the refreshed observer adds evidence without a cause claim.
++#306 changes one native producer input, so the original frozen binary does not
++qualify its changed database source. #299 is refreshing against actual target
++`1c7585fe`; #300 still follows actual accepted #299 integration.
++
++#305's separately qualified V4 attempt failed its external launch-evidence
++assertion after Playwright returned zero. Independent review `5fe7bbe6` verifies
++five declared successful tool Runs, two separate resource Runs, sampled public
++Core members, strict Runtime cleanup, final sampler state and six outer reaps.
++These are partial observations: the original JSON/DEBUG output was overwritten
++by an empty exception fallback, and no authoritative copy was found. Browser
++acceptance remains HOLD. The scoped failed checkpoint `21385511` is retained
++unchanged; the exhaustive private cache index and full logs remain outside Git.
++A new named runner must preserve returned bytes and pass independent qualification
++before another separately authorized attempt. No failure is relabeled green.
++
++The recorded #305 push-reference correction preserves the reviewed commit on
++the actual existing PR branch and removes only the new reference accidentally
++created by this task, after exact-head and no-other-work checks. Canonical
++guidance now requires querying the actual PR reference before every push.
++The previous 169-file checkpoint's independent committed/remote readback is
++included. Accepted proposals are adapted into canonical guidance; PostgreSQL
++already-aborted recovery and native Work Items limitations were already present
++and are retained without duplicate instructions. No issue closure, publication,
++infrastructure change, Devsy or Dakota writer occurred. Upstream disposition: none.

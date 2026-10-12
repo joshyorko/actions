@@ -1,0 +1,120 @@
+{
+  "all_old_v4_v5_v6_v7_bytes_retained": true,
+  "controller_binding": {
+    "bytes": 11865,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/root_once_first_five_current9760_SOURCE_PREPARED.py",
+    "sha256": "661724882ceca605e76e148058efba654b71554bc3b950421b1cec81a76fb04c"
+  },
+  "controller_config_binding": {
+    "bytes": 63289,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/frozen_current9760_five_environment_actual_controller_inputs_SOURCE_PREPARED.json",
+    "sha256": "714f2489aa66b7dd83a95d43b1693cd3f981c344bba5e92da639dddb229df3a3"
+  },
+  "current_source_owner": {
+    "bytes": 7292,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current9760-token-light-once4-PREEXECUTION-NOTRUN/OWNERFINAL-current9760-owning-Isort-settings-SOURCE-and-fresh-once4-PREEXEC-NOTRUN.json",
+    "sha256": "7616d9820f33e3b920262ab501229e4695527820b2dd2fcdd53bdf9858b19e8e"
+  },
+  "decision": "CONCRETE_SOURCE_FROZEN_ACTUAL_PRESERVATION_PREEXECUTION_HOLD",
+  "documentation": {
+    "Canonical_file_changed_or_proposed": "Existing canonical environment restoration/schema/alias preservation lessons reused; no repository file mutation.",
+    "Durable_learning": "Typed historical aliases and inactive-environment ownership require separate approval and delegated exact guards; flat pointer hashes cannot qualify missing/current bodies.",
+    "Evidence": [
+      {
+        "bytes": 91408,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/complete_declared_current9760_protected_inputs_and_typed_alias_manifest_SOURCE_PREPARED.json",
+        "sha256": "857642326d264e0d1096638f45e6b528becf1e1abfd35485c75c9970626b5608"
+      },
+      {
+        "bytes": 10631,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/SOURCE-ONLY-controller-unchanged-driver-closure-and-explicit-HOLD-proof.json",
+        "sha256": "0292cf5d937b25807827d7d0fcf873006011e4b8a062f3cd615c307d03591e3e"
+      },
+      {
+        "bytes": 7292,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr307-current9760-token-light-once4-PREEXECUTION-NOTRUN/OWNERFINAL-current9760-owning-Isort-settings-SOURCE-and-fresh-once4-PREEXEC-NOTRUN.json",
+        "sha256": "7616d9820f33e3b920262ab501229e4695527820b2dd2fcdd53bdf9858b19e8e"
+      }
+    ],
+    "Remaining_uncertainty": "No controller controls/imports/actual staging executed; compression unknown;944 unreadable process observations not quiescence; finite parent may hard-kill before finally.",
+    "Stale_ambiguity_removed": "A source-prepared Root template is explicitly non-authorizing and actual PURE18/storage operations remain absent.",
+    "Upstream_disposition": "none"
+  },
+  "driver_binding": {
+    "bytes": 37609,
+    "mode": "0o444",
+    "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_first_five_accepted_obsolete_environments_SOURCE_PREPARED_v4.py",
+    "sha256": "63476ecaa50ba863afed8602dcad82c22c9349df022d0e9f0dde8d81d60e0bb7"
+  },
+  "exact_future_ROOT_command_TEMPLATE": [
+    "/usr/bin/timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "900s",
+    "bash",
+    "-c",
+    "source /workspace/actions-cloud/activate.sh && export PATH=\"/workspace/actions-cloud/bin:/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\" && export PYTHONDONTWRITEBYTECODE=1 && exec /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12 -u /workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/root_once_first_five_current9760_SOURCE_PREPARED.py --root-release \"$1\" --root-release-sha256 \"$2\"",
+    "first-five-current9760-preservation",
+    "ROOT_RELEASE_ABSENT",
+    "ROOT_RELEASE_HASH_ABSENT"
+  ],
+  "finite_budget": {
+    "archive_TERM": 600,
+    "archive_fallback": 620,
+    "before_TERM": 120,
+    "before_fallback": 135,
+    "fallback_sum": 890,
+    "kill_after": 10,
+    "limitation": "External outer900 is mandatory; kernel stalls/hard kill can prevent finally. ROOT must own/capture outer terminal on every outcome.",
+    "outer_capture_activation_reserve": 10,
+    "post_TERM": 120,
+    "post_fallback": 135,
+    "whole_ROOT_outer_TERM": 900
+  },
+  "operation_status": "NOT_RUN",
+  "predecessor_storage_partial": {
+    "bytes": 10104,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-actual-preservation-SOURCE-assembly-HOLD/OWNERFINAL-first-five-actual-preservation-SOURCE-assembly-clean9760-observation-successor-HOLD.json",
+    "sha256": "7ce4c3d73d26887aa6cc97b25a15e527bef2163b7ff49b4c35fe22fbe366dec1"
+  },
+  "preservation_config_binding": {
+    "bytes": 18891,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/frozen_first_five_current9760_preservation_model_SOURCE_PREPARED.json",
+    "sha256": "34cc4abc0ae85b5db0c11ce4d520fbd3f1d8d25a4872b265ded39d0244e8c5cf"
+  },
+  "proof": {
+    "bytes": 10631,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/SOURCE-ONLY-controller-unchanged-driver-closure-and-explicit-HOLD-proof.json",
+    "sha256": "0292cf5d937b25807827d7d0fcf873006011e4b8a062f3cd615c307d03591e3e"
+  },
+  "root_protected_manifest_binding": {
+    "bytes": 91408,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/complete_declared_current9760_protected_inputs_and_typed_alias_manifest_SOURCE_PREPARED.json",
+    "sha256": "857642326d264e0d1096638f45e6b528becf1e1abfd35485c75c9970626b5608"
+  },
+  "root_release_TEMPLATE": {
+    "bytes": 3447,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/ROOT_release_schema_TEMPLATE_NOT_AUTHORIZATION.json",
+    "sha256": "30916ce730cb78834e4ddb0ef69d262f64732ff3c38bd10318c2f2d6f3c215d6"
+  },
+  "safe_control_plan_not_execution": [
+    "Valid synthetic private approval/review/bindings, individual missing/wrong hash/mode/type/self/config/current-head poisons using actual controller boundary functions.",
+    "Actual18 caller result required; wrong/missing result or absent inactive approval rejects before loader/archive.",
+    "Hash-checked module loader actual origin/bytes and no cached-bytecode import; missing/wrong private source rejects.",
+    "Augmented guard retains originalreturn/exception and fails before original archival if typed alias/input guard fails.",
+    "Completed nonzero/timeout raw outputs and primary exception retained; post failure remains separate; no retry."
+  ],
+  "schema": 1,
+  "writer_A_released": true
+}

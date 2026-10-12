@@ -1,0 +1,22 @@
+{
+  "capture": "2026-10-11T21:12:22.826541+00:00",
+  "elapsed_seconds": 33.61462861500331,
+  "native": "NOT_RUN",
+  "no_retry": true,
+  "one_attempt": true,
+  "outer_returncode": 0,
+  "release": {
+    "bytes": 2468,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-one-original-FULL-partial-relocation-release-v1.json",
+    "sha256": "f5f11f09dec1256784ffc1b2d8aa6dc248da8bb63a05cb1446f47d3cb16596ff"
+  },
+  "review": {
+    "bytes": 9376,
+    "mode": "0o400",
+    "path": "/workspace/engineering/completed-current8d49-FULL-single-copy-fallback-independent-PREEXECUTION-review/OWNERFINAL-independent-exact-original-failed-FULL-partial-relocation-PREEXECUTION-GO.json",
+    "sha256": "c34a2b503d7bb027a10fb691d8b5a7e0d0dbff20f53053f8efccee3e931f0cb8"
+  },
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+}

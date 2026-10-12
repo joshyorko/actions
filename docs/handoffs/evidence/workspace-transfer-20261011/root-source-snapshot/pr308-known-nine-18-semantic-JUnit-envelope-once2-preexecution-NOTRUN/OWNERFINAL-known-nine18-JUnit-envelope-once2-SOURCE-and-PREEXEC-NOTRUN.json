@@ -1,0 +1,291 @@
+{
+  "all_frozen_refs": [
+    {
+      "bytes": 68847,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-known-nine-18-semantic-JUnit-envelope-once2-preexecution-NOTRUN/FROZEN-known-nine18-JUnit-envelope-once2-config-NOTRUN.json",
+      "sha256": "90bc9cff117ad704cfd9c1656b6e92d0d753e02438b963163aebc6a645dcf5e7"
+    },
+    {
+      "bytes": 13798,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-known-nine-18-semantic-JUnit-envelope-once2-preexecution-NOTRUN/run_known_nine18_JUnit_envelope_once2_NOTRUN.py",
+      "sha256": "4a1bb9a87972c472413abb8f5edfbc94b5dc0dde645357a9d6bdce4d5dbabba9"
+    },
+    {
+      "bytes": 6451,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-known-nine-18-semantic-JUnit-envelope-once2-preexecution-NOTRUN/exact-JUnit-envelope-once2-ROOT-release-and-command-contract-NOTRUN.json",
+      "sha256": "787d03f3113e7badad1a05bfbd4bbe59f282f5c0716857a94af134ef3477b778"
+    },
+    {
+      "bytes": 2933,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-known-nine-18-semantic-JUnit-envelope-once2-preexecution-NOTRUN/exact-once2-source-AST-config-delta-proof-NOTRUN.json",
+      "sha256": "fcbcb227ce3b5e40618fc3ca26e57bb4d9576bd9dcc414e587e50dfe112b2a99"
+    },
+    {
+      "bytes": 705,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-known-nine-18-semantic-JUnit-envelope-once2-preexecution-NOTRUN/canonical-JUnit-exception-envelope-vs-semantic-raw-frame-proposed.patch",
+      "sha256": "37c705baab06d0cf55be170d780a4e11b47c82fc8c726483f2d4fc26604d4ff2"
+    },
+    {
+      "bytes": 11099,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/OWNERFINAL-corrected-nine-once2-baseline-config-contract-launcher-PREEXEC-NOTRUN.json",
+      "sha256": "39d3ba4d62cd54807ded6228cdbff891ec9493e17419b04335957451c85937a4"
+    },
+    {
+      "bytes": 16429,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py",
+      "sha256": "a577d21615877bc19a88ca141e5c8ac7c9779120abf7f86b7a6ec6d2367d5da2"
+    },
+    {
+      "bytes": 4667,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-private-corrected-nine-source-independent-review/OWNERFINAL-independent-private-corrected-nine-catalog-lock-SOURCE_ONLY-review.json",
+      "sha256": "aa3f927ef250c86d8b76e02e21f6382f2a894c22b0bba7f285b08c5f60f13da4"
+    },
+    {
+      "bytes": 765564,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+      "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25"
+    },
+    {
+      "bytes": 1075,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-rcc-current8d49-control3-V9-one-release.json",
+      "sha256": "a131e30087742764ba6dbdbc2634749924133431de3310b2065ced446b97bf3b"
+    },
+    {
+      "bytes": 4690,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/readonly_current_input_guard_v9.py",
+      "sha256": "480be06317562b7e3a5c98a5d794bb5d2a33e7fa6186fe707823ecb1cc583626"
+    },
+    {
+      "bytes": 12996,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/frozen-current8d49-source-LIGHT-inputs-v3.json",
+      "sha256": "81f52920b50e67619b3bb418a7c1034a2106ec52f4badd71b9d85e29b7376820"
+    },
+    {
+      "bytes": 16829,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-nine-real-original-baseline-independent-diagnosis/OWNERFINAL-independent-original-nine-baseline-failure-and-private-control-boundary.json",
+      "sha256": "6288fb4a6d296770a1c930ae73b0854e103378417f250a00a553c7c1bf3a25e2"
+    },
+    {
+      "bytes": 6839,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-reload-drain-independent-preexecution-review/frozen-nine-real-source-control-baseline-first-ROOT-command-contract-NOTRUN.json",
+      "sha256": "5f1874357496fe9c890c1acfec43fa114d51c658bd23ea23578fc3c910c1f287"
+    },
+    {
+      "bytes": 6371,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-current8d49-nine-real-baseline-once.py",
+      "sha256": "5ffbdebb3cbd7301e3a1d46255fc42d6fbff63bc03c922ec4b21ba9cb426ad5a"
+    },
+    {
+      "bytes": 20115,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-independent-ACTUAL-review/OWNERFINAL-independent-original-current8d49-corrected-nine-once2-baseline-ACTUAL-review.json",
+      "sha256": "e54f84619b73c236a8038c5602b27cc6affef8e82bd0d3e535bb2537548a811d"
+    },
+    {
+      "bytes": 4505,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2/OWNERFINAL-root-one-original-corrected-nine-once2-baseline.json",
+      "sha256": "72358ec90d7098593d2844611195833bdbffab7c66890b833d44f344d4647ed0"
+    },
+    {
+      "bytes": 733,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-corrected-nine-semantic-mutant-readonly-command-plan-NOTRUN/canonical-baseline-mutation-sensitivity-and-catalog-scope-reused.md",
+      "sha256": "073afcbf111490cdcc58ecb4402cf11cffbb3d437721b45a42fa3f3e804106b5"
+    },
+    {
+      "bytes": 28217,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_actions_import.py",
+      "sha256": "57ad235e30fdd84c763f84efd7ccdd8514d620d5b5cfff05ac1051f60ceefad3"
+    },
+    {
+      "bytes": 35232,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_server.py",
+      "sha256": "0954b062ba7931609dddfd8b1f068dbac83967691e1194b6ac250a51befa20ff"
+    },
+    {
+      "bytes": 58538,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_actions_process_pool.py",
+      "sha256": "3552bf39d0dc93f94ed3a4ab056de870ae460ed709f36d3d3a37dc043c349da8"
+    },
+    {
+      "bytes": 64964,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-corrected-nine-semantic-mutant-readonly-command-plan-NOTRUN/OWNERFINAL-known-nine-semantic-mutant-RED-restored-GREEN-exact-command-contract-plan-NOTRUN.json",
+      "sha256": "f179092502812f9d3884b077c57f4e4df955c156758dd22709b489e2d8aa6eae"
+    },
+    {
+      "bytes": 7057,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/OWNERFINAL-known-nine-18-semantic-concrete-15s-RED-fresh-GREEN-PREEXEC-NOTRUN.json",
+      "sha256": "64e2941d79fd64711b069800e84e384ceb3f4d96197f8e2aa469dca20e019e21"
+    },
+    {
+      "bytes": 67022,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/FROZEN-known-nine-18-semantic-15s-config-v2-NOTRUN.json",
+      "sha256": "b9010e2996df0285971f2c7ce31c4da04a6e7672505aa4240cb2b049aaae823d"
+    },
+    {
+      "bytes": 13750,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/run_known_nine_18_semantic_once_NOTRUN.py",
+      "sha256": "efd17b08026cba566dea30775226dbb327f0fa05a9b2c3872088c83a5f5b310b"
+    },
+    {
+      "bytes": 5522,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-known-nine18-original-ACTUALFAIL-independent-review/OWNERFINAL-independent-original-known-nine18-semantic-ACTUALFAIL-JUnit-protocol-review.json",
+      "sha256": "4e936c2ccb342701b271dd41dea2ae4e863da758e7ff2006ab0c375c6fa30f20"
+    },
+    {
+      "bytes": 13532,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/OWNERFINAL-root-one-original-known-nine-18-semantic-RED-restored-GREEN.json",
+      "sha256": "6f31e0179d6ee28be04661e671d7ca7954b85244f9202b79832cb91cb65e6f3d"
+    },
+    {
+      "bytes": 825,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-known-nine18-reviewed-original-outer-once/OWNERFINAL-root-one-original-reviewed-known-nine18-outer.json",
+      "sha256": "70fa4015876b2b4408771e330bb30d20980f0d688df92cb0f4fec7722fd4cbbc"
+    }
+  ],
+  "baseline_dependency": {
+    "bytes": 20115,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-corrected-nine-once2-independent-ACTUAL-review/OWNERFINAL-independent-original-current8d49-corrected-nine-once2-baseline-ACTUAL-review.json",
+    "sha256": "e54f84619b73c236a8038c5602b27cc6affef8e82bd0d3e535bb2537548a811d"
+  },
+  "bounds": "18\u00d730+2\u00d7135+5\u00d730=960<=1200outerTERM10/parent1230;15s phaseTERM10 unchanged",
+  "canonical_binding": {
+    "bytes": 705,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine-18-semantic-JUnit-envelope-once2-preexecution-NOTRUN/canonical-JUnit-exception-envelope-vs-semantic-raw-frame-proposed.patch",
+    "sha256": "37c705baab06d0cf55be170d780a4e11b47c82fc8c726483f2d4fc26604d4ff2"
+  },
+  "capture": "2026-10-11T21:37:11.406254+00:00",
+  "config_binding": {
+    "bytes": 68847,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine-18-semantic-JUnit-envelope-once2-preexecution-NOTRUN/FROZEN-known-nine18-JUnit-envelope-once2-config-NOTRUN.json",
+    "sha256": "90bc9cff117ad704cfd9c1656b6e92d0d753e02438b963163aebc6a645dcf5e7"
+  },
+  "contract_binding": {
+    "bytes": 6451,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine-18-semantic-JUnit-envelope-once2-preexecution-NOTRUN/exact-JUnit-envelope-once2-ROOT-release-and-command-contract-NOTRUN.json",
+    "sha256": "787d03f3113e7badad1a05bfbd4bbe59f282f5c0716857a94af134ef3477b778"
+  },
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "disposition": "AcceptedROOTemitterlesson proposedforindependentreview; retain5584copy/lock/sensitivity scope.",
+    "evidence": "Original4e936 JUnitfailuretypeABSENT+installedpytestemitter _add_simple154/append_failure207 and raw exactAssertionErrorcollect120.",
+    "exact_delta": {
+      "bytes": 705,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-known-nine-18-semantic-JUnit-envelope-once2-preexecution-NOTRUN/canonical-JUnit-exception-envelope-vs-semantic-raw-frame-proposed.patch",
+      "sha256": "37c705baab06d0cf55be170d780a4e11b47c82fc8c726483f2d4fc26604d4ff2"
+    },
+    "remaining_uncertainty": "Successor18NOTRUN; snapshot/native/releaseUNQUALIFIED.",
+    "stale_ambiguity_removed": "Do not require nonemitted type attribute; never weaken actualraw intendedassertion checks or relabeloriginalgate."
+  },
+  "fixture": {
+    "bytes": 16429,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py",
+    "sha256": "a577d21615877bc19a88ca141e5c8ac7c9779120abf7f86b7a6ec6d2367d5da2"
+  },
+  "launcher_binding": {
+    "bytes": 13798,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine-18-semantic-JUnit-envelope-once2-preexecution-NOTRUN/run_known_nine18_JUnit_envelope_once2_NOTRUN.py",
+    "sha256": "4a1bb9a87972c472413abb8f5edfbc94b5dc0dde645357a9d6bdce4d5dbabba9"
+  },
+  "native": "NOT_RUN",
+  "new_release_absent": true,
+  "new_release_path": "/workspace/engineering/root-one-known-nine18-JUnit-envelope-once2-release.json",
+  "new_root": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2",
+  "new_root_absent": true,
+  "original_once1_consumed": true,
+  "original_packet_binding": {
+    "bytes": 7057,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine-18-semantic-concrete-preexecution-NOTRUN/OWNERFINAL-known-nine-18-semantic-concrete-15s-RED-fresh-GREEN-PREEXEC-NOTRUN.json",
+    "sha256": "64e2941d79fd64711b069800e84e384ceb3f4d96197f8e2aa469dca20e019e21"
+  },
+  "phases": 18,
+  "prior_ACTUALFAIL": {
+    "bytes": 5522,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine18-original-ACTUALFAIL-independent-review/OWNERFINAL-independent-original-known-nine18-semantic-ACTUALFAIL-JUnit-protocol-review.json",
+    "sha256": "4e936c2ccb342701b271dd41dea2ae4e863da758e7ff2006ab0c375c6fa30f20"
+  },
+  "product_source_updates": "NONE",
+  "proof_binding": {
+    "bytes": 2933,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine-18-semantic-JUnit-envelope-once2-preexecution-NOTRUN/exact-once2-source-AST-config-delta-proof-NOTRUN.json",
+    "sha256": "fcbcb227ce3b5e40618fc3ca26e57bb4d9576bd9dcc414e587e50dfe112b2a99"
+  },
+  "required_independent_compatible_topfields": {
+    "config_sha256": "90bc9cff117ad704cfd9c1656b6e92d0d753e02438b963163aebc6a645dcf5e7",
+    "launcher_sha256": "4a1bb9a87972c472413abb8f5edfbc94b5dc0dde645357a9d6bdce4d5dbabba9",
+    "schema": 1,
+    "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+    "status": "INDEPENDENT_KNOWN_NINE_SEMANTIC_RED_GREEN_PREEXECUTION_GO",
+    "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+  },
+  "root_release_template": {
+    "baseline_dependency": {
+      "bytes": 20115,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-independent-ACTUAL-review/OWNERFINAL-independent-original-current8d49-corrected-nine-once2-baseline-ACTUAL-review.json",
+      "sha256": "e54f84619b73c236a8038c5602b27cc6affef8e82bd0d3e535bb2537548a811d"
+    },
+    "config_binding": {
+      "bytes": 68847,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-known-nine-18-semantic-JUnit-envelope-once2-preexecution-NOTRUN/FROZEN-known-nine18-JUnit-envelope-once2-config-NOTRUN.json",
+      "sha256": "90bc9cff117ad704cfd9c1656b6e92d0d753e02438b963163aebc6a645dcf5e7"
+    },
+    "independent_review": null,
+    "launcher_binding": {
+      "bytes": 13798,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-known-nine-18-semantic-JUnit-envelope-once2-preexecution-NOTRUN/run_known_nine18_JUnit_envelope_once2_NOTRUN.py",
+      "sha256": "4a1bb9a87972c472413abb8f5edfbc94b5dc0dde645357a9d6bdce4d5dbabba9"
+    },
+    "schema": 1,
+    "scope": "ROOT_DISTINCT_ONE_KNOWN_NINE_18_SEMANTIC_RED_RESTORED_GREEN",
+    "serialized_no_other_heavy_or_storage_mutations": true,
+    "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+    "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+  },
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_clean": true,
+  "source_leaves": 1440,
+  "status": "OWNER_FINAL_KNOWN_NINE18_JUNIT_ENVELOPE_ONCE2_SOURCE_PREEXEC_NOTRUN",
+  "tests": "NOT_RUN",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none"
+}

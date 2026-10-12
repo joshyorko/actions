@@ -1,0 +1,169 @@
+{
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md, owning formatter paragraph",
+    "Durable learning captured": "Explicit owning Isort width88/vertical-parenthesized/trailing-comma settings resolve measured GRID79 versus Ruff conflict without profile borrowing, lock/dependency changes or gate suppression; keep source inputs history distinct after config-only metadata change.",
+    "Evidence": [
+      {
+        "bytes": 11059,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/OWNERFINAL-original-four-leaf-Isort-format-and-owning-Ruff-conflict-HOLD.json",
+        "sha256": "48add80b119f3604d5e677ce82cbbaedf6118d7d69fa9de56244f79b9a8346a4"
+      },
+      {
+        "bytes": 826,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr307-own-Isort-Ruff-compatibility-source-successor-PREPARATION/complete-Devutils-own-Ruff-CHECK.original-terminal.json",
+        "sha256": "d32770666f51a2c67990e4837bfb54b6ae928521954c909dbd60c940556dcf4b"
+      },
+      {
+        "bytes": 891,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr307-own-Isort-Ruff-compatibility-source-successor-PREPARATION/complete-Devutils-own-Ruff-format-CHECK.original-terminal.json",
+        "sha256": "e825df56ea16ecbd439851599d22973e872e5aed6cd33131de046042a80c4d3c"
+      },
+      {
+        "bytes": 831,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr307-own-Isort-Ruff-compatibility-source-successor-PREPARATION/complete-Devutils-own-Isort-CHECK.original-terminal.json",
+        "sha256": "1afdb7aa441633c4b1bec2fdab23ad1b718a06b15cf6729cc6b87869dfc991d1"
+      },
+      {
+        "bytes": 365333,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr307-current9760-token-light-once4-PREEXECUTION-NOTRUN/current9760-owning-settings-1442-prepared30-current-ownfive-and-original-once3-proof.json",
+        "sha256": "5b333fe196e9055341ee859775f81581f53daf2dcbadd8ec125bb27c407deb13"
+      }
+    ],
+    "Exact proposed delta": {
+      "bytes": 1030,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current9760-token-light-once4-PREEXECUTION-NOTRUN/canonical-owning-Isort-Ruff-compatible-settings-and-partial-gate-scope-proposed.txt",
+      "sha256": "ef0aad554d9201982ae2f37305aaa98d82947f2a285590fa799a22ac76e5ab2f"
+    },
+    "Remaining uncertainty": "Fresh once4, complete source suites, current CI and OAuth/native/release acceptance remain unqualified.",
+    "Stale or ambiguous guidance removed": "Sorting only imports is not enough when configured tools disagree. A target that converges to its original bytes is preserved and is not a required novel path. TOKENLIGHT checks do not redefine generic toolkit release gates."
+  },
+  "Upstream disposition": "none",
+  "actual_observed_owning_compatibility_checks": [
+    {
+      "command": [
+        "/workspace/engineering/pr307/devutils/.venv/bin/ruff",
+        "check",
+        "src",
+        "tests"
+      ],
+      "original_terminal": {
+        "bytes": 826,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr307-own-Isort-Ruff-compatibility-source-successor-PREPARATION/complete-Devutils-own-Ruff-CHECK.original-terminal.json",
+        "sha256": "d32770666f51a2c67990e4837bfb54b6ae928521954c909dbd60c940556dcf4b"
+      },
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/workspace/engineering/pr307/devutils/.venv/bin/ruff",
+        "format",
+        "--check",
+        "--config",
+        "ruff.toml",
+        "src",
+        "tests"
+      ],
+      "original_terminal": {
+        "bytes": 891,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr307-own-Isort-Ruff-compatibility-source-successor-PREPARATION/complete-Devutils-own-Ruff-format-CHECK.original-terminal.json",
+        "sha256": "e825df56ea16ecbd439851599d22973e872e5aed6cd33131de046042a80c4d3c"
+      },
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/workspace/engineering/pr307/devutils/.venv/bin/isort",
+        "--check",
+        "src",
+        "tests"
+      ],
+      "original_terminal": {
+        "bytes": 831,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr307-own-Isort-Ruff-compatibility-source-successor-PREPARATION/complete-Devutils-own-Isort-CHECK.original-terminal.json",
+        "sha256": "1afdb7aa441633c4b1bec2fdab23ad1b718a06b15cf6729cc6b87869dfc991d1"
+      },
+      "returncode": 0
+    }
+  ],
+  "actual_source_review": {
+    "Isort_four_explicit_settings": {
+      "include_trailing_comma": true,
+      "line_length": 88,
+      "multi_line_output": 3,
+      "use_parentheses": true
+    },
+    "all_other_TOML_dependency_build_tables_locks_gates": "EXACT",
+    "changed_four_paths": [
+      "devutils/pyproject.toml",
+      "devutils/tests/test_http_helper_tests_workflow.py",
+      "devutils/tests/test_invoke_utils.py",
+      "devutils/tests/test_runtime_conformance.py"
+    ],
+    "clean": true,
+    "current_source30_changed_rows": [
+      "devutils/pyproject.toml"
+    ],
+    "existing_own_five_config_bindings_exact": true,
+    "fixtures_exact_original_bytes": true,
+    "full_typed_Git_FS_body_exec_mode_count": 1442,
+    "original_prepared30_history_retained": {
+      "bytes": 338142,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-current00b1-token-light-once3-PREEXECUTION-NOTRUN/current00b1-format-child-1442-prepared30-ownfive-and-original-once2-proof.json",
+      "sha256": "15d2a3c0eb86d583eb6add482c1ce0fbdc3b0795bb19afb3b9674aa8ae503c85"
+    },
+    "other29_inputs_exact": true,
+    "test_import_contiguous_block_positions_binding_multisets_nonimport_AST": "EXACT",
+    "unchanged_other_body_modes": 1438
+  },
+  "all_current_config_consumed_bindings_exact": 176,
+  "all_new_owner_bindings_exact": 9,
+  "all_retained_original_evidence_exact": 157,
+  "corrected_metadata_no_gate_replay": {
+    "bytes": 314836,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-own-Isort-Ruff-compatibility-source-successor-PREPARATION/OWNER-precommit-named-derived-four-path-owning-settings-static-PASS.json",
+    "sha256": "097b999acb3c237b7fe8b06cd010c659a740386501d29896530c2fbe807c8341"
+  },
+  "decision": "GO_CURRENT9760_OWNING_ISORT_SETTINGS_SOURCE_ONLY",
+  "limits": {
+    "actual_OAuth_content_authority_native_private_release_CI_merge": "HOLD",
+    "generic_Devutils_toolkit_release_tasks": "UNCHANGED; only explicitly authorized TOKENLIGHT compatibility checks",
+    "import_side_effects": "No universal semantic equivalence claim; only binding/block/nonimport AST plus original observed checks",
+    "once4": "NOT_RUN; fresh ROOT release and independent PREEXEC review required",
+    "wholeDevutils_Runtime_FULL": "MANDATORY_NOT_RUN"
+  },
+  "operations": "Read-only stdlib parsing/hashing and no-optional-locks Git metadata. No imports/tests/source/ref/index/gateway/native/download/push/merge.",
+  "original_collector_guessed_five_FAIL": {
+    "bytes": 849,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-own-Isort-Ruff-compatibility-source-successor-PREPARATION/original-post-static-guessed-five-modified-paths-inspector-FAIL.json",
+    "sha256": "d4c8466bd369a47b5e378a98679d8a3220afaf2eb38d737ef1bf6cb2f6a29500"
+  },
+  "original_conflict": {
+    "bytes": 11059,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/OWNERFINAL-original-four-leaf-Isort-format-and-owning-Ruff-conflict-HOLD.json",
+    "sha256": "48add80b119f3604d5e677ce82cbbaedf6118d7d69fa9de56244f79b9a8346a4"
+  },
+  "owner_binding": {
+    "bytes": 7292,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current9760-token-light-once4-PREEXECUTION-NOTRUN/OWNERFINAL-current9760-owning-Isort-settings-SOURCE-and-fresh-once4-PREEXEC-NOTRUN.json",
+    "sha256": "7616d9820f33e3b920262ab501229e4695527820b2dd2fcdd53bdf9858b19e8e"
+  },
+  "parent": "00b1bb9974b73f2da65e49c9048774c84df286ba",
+  "schema": 1,
+  "source": "9760d5ec44876558c4941c4c3190abc8d92d14a1",
+  "status": "INDEPENDENT_CURRENT9760_OWNING_DEVUTILS_SETTINGS_SOURCE_GO",
+  "tree": "0d33ebaac258e069ef7045a29b4a3904740f6307"
+}

@@ -1,0 +1,71 @@
+{
+  "schema": "actions-batch15-independent-capacity-preservation-review/v1",
+  "status": "GO_SCOPED_BATCH15_RECORDED_ARCHIVE_AND_PRIOR_REFERENCE_PRESERVATION_ONLY",
+  "observed_utc": "2026-10-11T10:40:17.570544+00:00",
+  "owner_safe": {
+    "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch15.json",
+    "bytes": 1962,
+    "sha256": "644b9afe894a710251bcf0780ac67bc4eb6c0a197f8d73656761ea3ddd80e879"
+  },
+  "independent_archive_stream_proof": {
+    "path": "/workspace/engineering/capacity-recovery-batch15-independent-review/independent-one-archive-stream-proof.json",
+    "bytes": 1729,
+    "sha256": "a2dde21ac8d19af253970fac1bfc56dddbc50e83771a42405e060aa4089d2383"
+  },
+  "independent_prior_reference_proof": {
+    "path": "/workspace/engineering/capacity-recovery-batch15-independent-review/independent-prior33-archives14-indices-preservation-proof.json",
+    "bytes": 17274,
+    "sha256": "a50b7c5587edcf5cc34fa8a44b33f98567d2d299a391032aaa5a53571d883b04"
+  },
+  "counts": {
+    "new_archives": 1,
+    "new_recorded_members": 15082,
+    "new_internal_hardlinks": 4,
+    "new_logical_regular_file_bytes": 602563272,
+    "prior_archives": 33,
+    "prior_indices": 14,
+    "prior_summaries": 14,
+    "total_retained_archives": 34,
+    "total_retained_indices": 15
+  },
+  "recorded_member_types": {
+    "file": 11674,
+    "directory": 2943,
+    "symlink": 457,
+    "fifo": 8,
+    "hardlink_headers": 4
+  },
+  "verified": {
+    "archive_member_byte_SHA_size_mode_UID_GID_symlink_internal_hardlink_content": true,
+    "gzip_EOF_CRC_ISIZE": true,
+    "completion_recycle_True": true,
+    "archive_and_private_index_mode0600_parent0700": true,
+    "expanded_original_absent": true,
+    "batch14_AST_equivalence_except3literal_configuration_values": true,
+    "original_V5runner_09cdc": true,
+    "all_prior_archive_index_safe_summary_review_hashes": true,
+    "failed563d_existence_only": true
+  },
+  "capacity_scope": "Root-recorded free2605572096B is that recovery observation; later environment copies/current free space are not measured or approved by this archive review. Existing /dev/shm mount used; no infrastructure created by reviewer.",
+  "limitations": [
+    "Retained archive/index/script/log qualification only; no historical expanded filesystem/live-handle census replay",
+    "No ACL/xattr/inode/rootmetadata/precise TAR nanosecond timestamp claim",
+    "No failed563d contents/state verification or retroactive source/consumer/failed-gate acceptance",
+    "No recovery/removal/restore/extraction/copy/installer/actual/native/provider/test/download by reviewer",
+    "No private member paths/payloads or oversized inventory keys included in safe receipts"
+  ],
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "Exact_delta_or_reuse": {
+      "path": "/workspace/engineering/capacity-recovery-independent-review/canonical-completed-scratch-preservation-proposed.patch",
+      "bytes": 1068,
+      "sha256": "7d07065b5bb7742698919997c8c6621cc20d00494741eb5365251ffb09f2d208"
+    },
+    "Durable_learning": "Same verified7d070 archive/inventory preservation algorithm retains complete recorded member bytes and metadata before exact completed scratch removal, separately preserving failed namespace existence and historical observation limits.",
+    "Evidence": "15082 streamed members; internal hardlinks; gzipCRC/ISIZE EOF; all prior33 archives/14 indices/source script/log/summary/review hashes and V5runner; AST exact accepted batch14 algorithm except3config literals.",
+    "Stale_or_ambiguous_guidance_removed": "No guidance removed; retained lesson prevents preservation from implying unrecorded metadata, historical full process census or a failed gate PASS.",
+    "Remaining_uncertainty": "Historical full handle census, ACL/xattrs/inode/rootmetadata/precise TARmtime and failed563d contents/state remain unqualified. Consumer capacity/serialization separately belongs to root.",
+    "Disposition": "Verified exact accepted7d070 paragraph remains verbatim in canonical guide; no cosmetic duplication."
+  },
+  "upstream_disposition": "none"
+}

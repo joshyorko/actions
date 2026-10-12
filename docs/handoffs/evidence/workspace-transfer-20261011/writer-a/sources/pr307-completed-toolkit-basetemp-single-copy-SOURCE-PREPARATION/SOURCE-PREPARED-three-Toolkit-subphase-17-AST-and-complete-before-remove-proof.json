@@ -1,0 +1,75 @@
+{
+  "actualToolkit_completed_cases_each179_noFES": true,
+  "all_archival_or_private_guard_import_tests": "NOT_RUN",
+  "bounded_packet_rows879_no_overlap": true,
+  "data_only_readonly_fullinventory": {
+    "bytes": 6920,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/private-original-three-Toolkit-completion-full-inventory-and-observed-process-proof.json",
+    "sha256": "5252b25bb563a88be1a0e2bf060b17635edf67709b6ba36cbee7d2bf2383e38d"
+  },
+  "driver": {
+    "bytes": 27763,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/archive_three_completed_Toolkit_basetemps_single_copy_SOURCE_PREPARED.py",
+    "sha256": "71326aec77af1545bfc24e7e87f1769a524ca35c6566b00c67b9c34a911e9ff0"
+  },
+  "metadata_before_after_equal_body_hashes_all_members": true,
+  "mtime_UIDGID_links_hardlink_partition_ROOTbytes_gzipEOF": "Inherited unchanged17 qualified primitives, source only current subject.",
+  "new_safety_orchestration": "All3 pre-stage archives/fullindex CRC/body/metadata already verified and fsynced, all3 single-copy promotions verified, all3 final-path aliases plus maximum progress16MiB budget durable beforeANYrmtree. Original17 primitives unchanged.",
+  "once4_and_once5_whole_FAILURES_RETAINED": true,
+  "once6_scope_only_no_release_waiver": true,
+  "original_accepted_e717": {
+    "bytes": 21276,
+    "mode": "0o444",
+    "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/archive_exact_one_completed_FULL_single_copy_once.py",
+    "sha256": "e717faae8a9e5f7a1ccea85c17df928a728216e43bf77256c487e685d9971771"
+  },
+  "parent": {
+    "bytes": 6442,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/root_once_three_Toolkit_basetemps_SOURCE_PREPARED.py",
+    "sha256": "6993234c7b7ffb3f6e6e97266fbfa795e1bd46718d03e8398378a1b082ffab4f"
+  },
+  "private_inventory_snapshots_single_body_scan_two_metadata_scans": true,
+  "protected_prefix_alias_check": {
+    "bytes": 3289,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-completed-toolkit-basetemp-single-copy-SOURCE-PREPARATION/private-current-protected-packet-physical-prefix-and-typed-alias-overlap-proof.json",
+    "sha256": "e04c7b9b64686ddd1718ce10d0607316bacd3b586ecf6ac2d2c07a47c020ecf9"
+  },
+  "rootCaps": {
+    "RCCNativeWorkspaceFloorSeparate": 1288490189,
+    "allocation_reserve": 8388608,
+    "entryThreshold": 427819008,
+    "gzip": 268435456,
+    "indices": 16777216,
+    "prospectivePostSelectedFloor": 746586112,
+    "stop_reserve": 134217728
+  },
+  "source_root_mutations": "NONE",
+  "two_recontextualized_scope_functions": [
+    "load_config",
+    "_completion_admitted"
+  ],
+  "unchanged17_AST_nodes": [
+    "sha",
+    "inventory",
+    "verify",
+    "reject_live_handles",
+    "_CappedWriter",
+    "_write_and_close_preserving_primary",
+    "_snapshot",
+    "_ns_text",
+    "_strict_verify",
+    "_fsync_path",
+    "_index_bytes_except",
+    "_IndexBudgetPath",
+    "_ReadOnlyTar",
+    "_GuardedShutil",
+    "_prestage_all",
+    "_key_for_root",
+    "_root"
+  ],
+  "unknown_process_channels951_not_quiescence": true
+}

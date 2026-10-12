@@ -1,0 +1,121 @@
+{
+  "schema": "independent-cleanup499-root-one-full-launcher-review-v1",
+  "decision": "GO_EXACT_ROOT_LAUNCHER_SUBJECT_ONLY_DISTINCT_ROOT_RELEASE_AND_FRESH_CAPACITY_SLOT_REQUIRED",
+  "head": "499a83d802ca9a0e2ebe3d77071af10625879297",
+  "tree": "e13ba51b094e429b7c06d6dabbbcc348cc66e86c",
+  "sole_parent": "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+  "launcher": {
+    "path": "/workspace/engineering/execute-cleanup499-reviewed-managed-full-once.py",
+    "bytes": 5103,
+    "sha256": "aa227ff6924843296aad021449d8b821aa60e4fba040f14e25e12f941abb8665"
+  },
+  "accepted_proposal": {
+    "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/OWNERFINAL-cleanup499-managed-activation-configured-full-proposal-v2.json",
+    "bytes": 22911,
+    "sha256": "e853c20af0045a217a4c979a973df807ae259c6a85e472fb20273a41dba882ac"
+  },
+  "accepted_independent_proposal_review": {
+    "path": "/workspace/engineering/captured-child-cleanup-independent-configured-full-proposal-review/OWNERFINAL-independent-cleanup499-managed-full-proposal-v2-review.json",
+    "bytes": 14227,
+    "sha256": "5f7af70d07bef988eea89cab2857d6c8261e1f607c9b47717786ff405de19a01"
+  },
+  "exact35_pre_post_bindings_rehashed": true,
+  "source_and_retention_readonly_observation": {
+    "status": "READ_ONLY_SOURCE_AND_RETAINED_ENVIRONMENT_IDENTITY_PASS",
+    "head": "499a83d802ca9a0e2ebe3d77071af10625879297",
+    "tree": "e13ba51b094e429b7c06d6dabbbcc348cc66e86c",
+    "parent": "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+    "source_entries": 1422,
+    "LIGHT_bindings": 67,
+    "inputs": 30,
+    "retained_concrete_origin_observations": 5,
+    "fresh_origin_execution": false,
+    "private_original_bindings": 31,
+    "frozen_helpers": 4,
+    "native_inventory_entries": 1192,
+    "available_bytes_observation_only": 1228529664,
+    "full_execution": "NOT_RUN",
+    "native_qualification": "UNQUALIFIED_274_producer_and_5_selected_tests_separately_typed"
+  },
+  "guard_import_main_not_executed": true,
+  "no_Runtime_application_import_full_test_or_gateway_executed_by_reviewer": true,
+  "command_exact_accepted_proposal": true,
+  "activation19_PATH_toolkit_identity_primary_fixture_Rcc": true,
+  "five_actual_own_import_origins_before_configured_invoke": "Required by exact accepted future command; reviewer only rehashed existing concrete origin observations",
+  "execution_bounds": {
+    "configured_Runtime_task": "invoke test-not-integration",
+    "explicit_worker_env": "PYTEST_XDIST_AUTO_NUM_WORKERS=2 before invoke",
+    "inner": "600s TERM +10s KILL",
+    "parent_subprocess_timeout": 640,
+    "post_readonly_timeout": 60,
+    "attempts": 1
+  },
+  "future_owned_output_root_absent_at_review": true,
+  "output_creation_contract": "One exclusive new0700 root; x/xb authorization, log, terminal and post files; private0600 before child output",
+  "ROOT_environment_must_bind_exact": {
+    "CLEANUP499_SERIALIZED_HEAVY_SLOT": "root-captured-child-cleanup499-one-configured-full",
+    "CLEANUP499_ROOT300_TERMINAL_PATH": "/workspace/engineering/pr300-current74-managed-activation-root-successor/current74-managed-activation-one-full-terminal.json",
+    "CLEANUP499_ROOT300_TERMINAL_SHA256": "1014ef69df7615b9f92b178b218e38c848c12ff9f7a4ba65fbefc949d4190d4e",
+    "CLEANUP499_CAPACITY_REVIEW_PATH": "/workspace/engineering/capacity-recovery-batch19-independent-review/OWNERFINAL-independent-batch19-preservation-review.json",
+    "CLEANUP499_CAPACITY_REVIEW_SHA256": "808d0fbb4efbcb6207566cc7deed6b11964c6ed3a063ece20b11936d1767a884"
+  },
+  "root300_successful_terminal": {
+    "path": "/workspace/engineering/pr300-current74-managed-activation-root-successor/current74-managed-activation-one-full-terminal.json",
+    "bytes": 711,
+    "sha256": "1014ef69df7615b9f92b178b218e38c848c12ff9f7a4ba65fbefc949d4190d4e"
+  },
+  "capacity_preservation_history": {
+    "path": "/workspace/engineering/capacity-recovery-batch19-independent-review/OWNERFINAL-independent-batch19-preservation-review.json",
+    "bytes": 4516,
+    "sha256": "808d0fbb4efbcb6207566cc7deed6b11964c6ed3a063ece20b11936d1767a884"
+  },
+  "PR282_released_LIGHT_terminal": {
+    "path": "/workspace/engineering/pr282-actual309-refresh/one-root-released-LIGHT-final-terminal.json",
+    "bytes": 6206,
+    "sha256": "6556e93ebd801a1c56be1237163ea59c85c843d825461e0bc2ca4650f96a5a20"
+  },
+  "execution_prerequisites": {
+    "ROOT_distinct_release_and_serialized_no_other_heavy_gateway": "REQUIRED",
+    "fresh_available_bytes_before_both_guard_and_activated_preflight": 1200000000,
+    "review_capacity_is_observation_only": true,
+    "no_retry_newinstall_copy_namespace_GC_native_provider_browser_consumer_publication": true
+  },
+  "failure_disposition": "Parent invocation exceptions freeze original log/terminal with actual cleanup UNREPORTED. Timeout/exception never supplies cleanup, source-suite acceptance or retry authority. Any post timeout/failure leaves full terminal retained and full acceptance HOLD until post guards complete; reviewer GO is not an actual full result.",
+  "historical_predecessors_retained": {
+    "proposal8324_and_review_f730_HOLD": "Retained unchanged through accepted proposal/ref graph; not substituted as accepted command"
+  },
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; reuse exact accepted managed gateway activation patch, no cosmetic child",
+    "Exact_delta": {
+      "path": "/workspace/engineering/pr300-current74-managed-activation-independent-review/canonical-managed-gateway-activation-exact-context-v2.patch",
+      "bytes": 1025,
+      "sha256": "ee804bb1acd0102a0b28b37b66e55c3bcd1eac4f9bd70885ef5f7c245f67f994"
+    },
+    "Durable_learning_captured": "An absolute pinned RCC path does not select the managed RCC home. Bind the sourced activation, cached toolkit identity, explicit worker budget, named prerequisite terminal, fresh capacity and configured command before execution; preserve failed attempts separately.",
+    "Evidence": [
+      {
+        "path": "/workspace/engineering/execute-cleanup499-reviewed-managed-full-once.py",
+        "bytes": 5103,
+        "sha256": "aa227ff6924843296aad021449d8b821aa60e4fba040f14e25e12f941abb8665"
+      },
+      {
+        "path": "/workspace/engineering/captured-child-cleanup-configured-full-proposal/OWNERFINAL-cleanup499-managed-activation-configured-full-proposal-v2.json",
+        "bytes": 22911,
+        "sha256": "e853c20af0045a217a4c979a973df807ae259c6a85e472fb20273a41dba882ac"
+      },
+      {
+        "path": "/workspace/engineering/captured-child-cleanup-independent-configured-full-proposal-review/OWNERFINAL-independent-cleanup499-managed-full-proposal-v2-review.json",
+        "bytes": 14227,
+        "sha256": "5f7af70d07bef988eea89cab2857d6c8261e1f607c9b47717786ff405de19a01"
+      },
+      {
+        "path": "/workspace/engineering/pr300-current74-managed-activation-root-successor/current74-managed-activation-one-full-terminal.json",
+        "bytes": 711,
+        "sha256": "1014ef69df7615b9f92b178b218e38c848c12ff9f7a4ba65fbefc949d4190d4e"
+      }
+    ],
+    "Stale_or_ambiguous_guidance_removed": "No bare-host/default-home full invocation, no observed capacity promoted to future clearance, no parent timeout interpreted as measured cleanup or completed source suite.",
+    "Remaining_uncertainty": "Actual full is NOT_RUN; future capacity/serialization required, actual cleanup remains UNREPORTED unless separately measured, hosted readiness causes/native qualification/private/release remain HOLD."
+  },
+  "Upstream_disposition": "none"
+}

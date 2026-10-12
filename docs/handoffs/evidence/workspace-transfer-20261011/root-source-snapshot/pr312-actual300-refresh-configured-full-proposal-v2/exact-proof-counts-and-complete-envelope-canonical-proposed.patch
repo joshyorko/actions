@@ -1,0 +1,12 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -543,3 +543,9 @@
+ Preserve failed probes and named successors, and distinguish observations made
+ after a gate starts from evidence checked before that gate.
+ 
++Derive emitted source and reference counts from the exact validated proof lists,
++and assert their expected bounds before returning a receipt. Preserve mislabeled
++metadata when naming a corrected successor. Bound the complete preflight, gate
++and postcheck envelope as well as the gate subprocess. Record the primary result
++before separate postcheck results on every outcome; a passing test subprocess
++does not override a failed guard.

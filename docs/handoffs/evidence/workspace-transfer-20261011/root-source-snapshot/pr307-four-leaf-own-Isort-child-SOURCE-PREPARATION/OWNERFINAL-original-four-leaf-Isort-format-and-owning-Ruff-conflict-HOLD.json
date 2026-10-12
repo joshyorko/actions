@@ -1,0 +1,231 @@
+{
+  "HEAD_clean": false,
+  "actual_executions": "Own Isort version/show-config/four-leaf formatter and Ruff check PASS; own Ruff format CHECK original1FAIL. No pytest/import of product/native/gateway/full. Later Isort CHECK/diffcheck not executed after failure.",
+  "all_other_body_mode_pairs_exact": 1438,
+  "capture": "2026-10-11T22:40:39.283378+00:00",
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "evidence": "Real locked Isort5.13.2 settings/argv + Ruff0.1.15 mismatch on exact three leaves; snapshots/non-import AST/import multisets retained",
+    "exact_delta": {
+      "bytes": 787,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/canonical-owning-Isort-and-Ruff-compatibility-HOLD-proposed.txt",
+      "sha256": "eb402f4f5da9f0f0978429ea79feb2b64fe36df6ced6e1ca32a3ea6425c97a42"
+    },
+    "remaining_uncertainty": "No owning settings change authorized yet; import side-effect ordering equivalence and full gate/native/content authority remain unqualified",
+    "stale_ambiguity": "Import sorting alone may fail owning Ruff; do not assume cross-formatter compatibility or whole import-order AST equality"
+  },
+  "failed_terminal": {
+    "bytes": 1020,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/four-own-Ruff-format-CHECK.original-terminal.json",
+    "sha256": "b0dc09a658aac626fcc05ec4bef1967954102e3154aa3fbf5ce99ad3d694f17e"
+  },
+  "import_proof": {
+    "bytes": 10422,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/exact-four-import-scope-and-all-other1438-body-mode-proof.json",
+    "sha256": "d70c22d6ec4cfe28fa18ffb2ef360ba187f9700edb74bac9454cbf2838ffdd81"
+  },
+  "original_once3_FAIL": {
+    "bytes": 38512,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current00b1-token-once3-ACTUALFAIL-independent-review/OWNERFINAL-independent-original-current00b1-token-once3-ACTUALFAIL-and-owning-Isort-four-leaf-proposal.json",
+    "sha256": "a5d9de122535a9d7075a33f37b656e74b99206190db647e11aeb54856149a6e2"
+  },
+  "preserved_records": [
+    {
+      "bytes": 787,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/canonical-owning-Isort-and-Ruff-compatibility-HOLD-proposed.txt",
+      "sha256": "eb402f4f5da9f0f0978429ea79feb2b64fe36df6ced6e1ca32a3ea6425c97a42"
+    },
+    {
+      "bytes": 10422,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/exact-four-import-scope-and-all-other1438-body-mode-proof.json",
+      "sha256": "d70c22d6ec4cfe28fa18ffb2ef360ba187f9700edb74bac9454cbf2838ffdd81"
+    },
+    {
+      "bytes": 1016,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/exact-four-own-configured-isort-format.original-terminal.json",
+      "sha256": "e9eb03a23f557631a43d04032f6a87c593688fff58c9ff78b57bab3a4759a9ab"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/exact-four-own-configured-isort-format.stderr.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 307,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/exact-four-own-configured-isort-format.stdout.private",
+      "sha256": "44107f1d9c271820aaa5110c7214e7a021a4571febaf0af4d0e5d5e5aeb9f8c2"
+    },
+    {
+      "bytes": 18285,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/formatted-fixtures.py",
+      "sha256": "832e77d44d4863537befb87ca0a04eae4952bb1ca40e8638f5ed3416ec650432"
+    },
+    {
+      "bytes": 680,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/formatted-test_http_helper_tests_workflow.py",
+      "sha256": "979f4ad6596522913466119d0eaf8d2336bd0a1936487d903f6247fe540d58df"
+    },
+    {
+      "bytes": 9217,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/formatted-test_invoke_utils.py",
+      "sha256": "631e1682fa874a7bb77d22a0158c1eaaa28a2a8dfb973cb6399a9399095e160c"
+    },
+    {
+      "bytes": 1684,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/formatted-test_runtime_conformance.py",
+      "sha256": "254d00895e57282185ec2fc602cbe4ac79f256be446385803c3db13c1bb10ab3"
+    },
+    {
+      "bytes": 954,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/four-own-Ruff-check.original-terminal.json",
+      "sha256": "66433d045b70eb25f8a816504bda9967680bbcaf1e024005850d97a3f363f773"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/four-own-Ruff-check.stderr.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/four-own-Ruff-check.stdout.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1020,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/four-own-Ruff-format-CHECK.original-terminal.json",
+      "sha256": "b0dc09a658aac626fcc05ec4bef1967954102e3154aa3fbf5ce99ad3d694f17e"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/four-own-Ruff-format-CHECK.stderr.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 189,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/four-own-Ruff-format-CHECK.stdout.private",
+      "sha256": "bbb5e09eb66e5494fffc9d507b342e42dbebb2488c46f90f195dd4ef3f3da694"
+    },
+    {
+      "bytes": 18271,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/original-fixtures.py",
+      "sha256": "8faf839aeb78b5a9d4f6943c0f552552ca3e6ca926ba298535e883016840bc7e"
+    },
+    {
+      "bytes": 2468,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/original-measured-four-leaf-Isort-versus-Ruff-source-delta.patch",
+      "sha256": "e522267e5313a665cf93c9bf0f8646fada1c5c972a7f4fceb636caaaa0dedbe8"
+    },
+    {
+      "bytes": 314401,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/original-source-and-tool-settings-before-format.json",
+      "sha256": "f329e89df500e1cc07a84cdd5bfb219b7af1ed2a42b1872042647043bc0dad09"
+    },
+    {
+      "bytes": 681,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/original-test_http_helper_tests_workflow.py",
+      "sha256": "10854de432fa25ab4de744af22243ba7588677af52a0d208c7df51463e255bea"
+    },
+    {
+      "bytes": 9201,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/original-test_invoke_utils.py",
+      "sha256": "8aca8a7aff3695f38061095c9a180e391f6322d66111212d5889860f93516533"
+    },
+    {
+      "bytes": 1621,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/original-test_runtime_conformance.py",
+      "sha256": "631bd94abca1247a61efe3b05770a93abd04a68a6e32674cf07f633452902c74"
+    },
+    {
+      "bytes": 1031,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/own-isort-src-settings-show-config.original-terminal.json",
+      "sha256": "f35dbdee97fc57bf25c9aaa26c91d141b2007fa2297f2113a42769b129b7c11a"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/own-isort-src-settings-show-config.stderr.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 18874,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/own-isort-src-settings-show-config.stdout.private",
+      "sha256": "1ad54afb262949294db754c97b4250613355506862160f96508363d285e420c5"
+    },
+    {
+      "bytes": 807,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/own-isort-version.original-terminal.json",
+      "sha256": "188d15c2d7f91acb4f185b0f38d7d5b85b4476400bf9f09609e0e6ecd324c081"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/own-isort-version.stderr.private",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 7,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/own-isort-version.stdout.private",
+      "sha256": "dd60e27071563ad9e26c3078968c26b5e8647e593bfe793f3d12d141a240d2a7"
+    },
+    {
+      "bytes": 6153,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/prepare_exact_four_isort_and_checks.py",
+      "sha256": "481a711151db017a5bf1cbf4f3834350a826948698dc6a633e898e894b0bbf05"
+    },
+    {
+      "bytes": 2822,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/smallest-owning-Devutils-import-formatter-compatibility-proposal-NOTAPPLIED.json",
+      "sha256": "952327146900a3f9b7d530b44fdab00480e7c5e44ac93fd8e6983f351b5c4fab"
+    }
+  ],
+  "proposal": {
+    "bytes": 2822,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/smallest-owning-Devutils-import-formatter-compatibility-proposal-NOTAPPLIED.json",
+    "sha256": "952327146900a3f9b7d530b44fdab00480e7c5e44ac93fd8e6983f351b5c4fab"
+  },
+  "schema": 1,
+  "source": "00b1bb9974b73f2da65e49c9048774c84df286ba",
+  "source_changes": [
+    "devutils/src/devutils/fixtures.py",
+    "devutils/tests/test_http_helper_tests_workflow.py",
+    "devutils/tests/test_runtime_conformance.py",
+    "devutils/tests/test_invoke_utils.py"
+  ],
+  "source_commit_once4_push": "NOT_CREATED_NOT_EXECUTED",
+  "source_count": 1442,
+  "status": "OWNER_FINAL_MEASURED_FOUR_LEAF_IMPORT_FORMAT_CONFLICT_HOLD",
+  "tree": "2663e86b2344f9e056c3259653cb905a6d195599",
+  "upstream_disposition": "none"
+}

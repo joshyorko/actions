@@ -1,0 +1,460 @@
+{
+  "schema": 1,
+  "status": "INDEPENDENT_SAFE_SOURCE_CLOSURE_AND_SCOPED_ATTRIBUTES_STAGED_DOCS_GO",
+  "decision": "GO_EXACT43_STAGED_CURRENT1935_SAFE_SOURCE_CLOSURE_EXISTING_CHECKPOINT_DOCS_COMMIT_PUSH_ONLY",
+  "owner_binding": {
+    "path": "/workspace/engineering/root-current1935-source-closure-application-PREPARATION/OWNERFINAL-root-current1935-source-closure-and-scoped-attributes-application-PREPARATION.json",
+    "bytes": 7267,
+    "sha256": "ddd72d9d00a21ddc3057176fa35bdff968ca6c6a548d06abd79ff1931b0b773a",
+    "mode": "0o400"
+  },
+  "named_attribute_only_correction_binding": {
+    "path": "/workspace/engineering/root-current1935-source-closure-application-PREPARATION/OWNERFINAL-named-immutable-one-source-EOF-attribute-correction.json",
+    "bytes": 861,
+    "sha256": "004d9e0669c10ae435ca3be1579f70fc5b3f1414526ddc85941916d4b8eea439",
+    "mode": "0o400"
+  },
+  "prior25working_docs_GO": "647ac884d05c60c311240465e23303f92713fc580a550ac82c35967d6a59a7fc",
+  "checkpoint": {
+    "base": "d55ed399a5b6ba67e88002dd6d490ac9366c2130",
+    "exact_staged_paths": 43,
+    "new_source_closure_additions": 18,
+    "reviewed_staged_Git_tree": "1f90a0ef0a6c7fe408380720ebdb2ef45806c255",
+    "index_SHA256": "26e0a62cf0195acb862885fd597b27e96cca4c6d352c4c5b41bff22f61cf8eb7",
+    "staged_rows_SHA256": "b312970edbd2d129f551e7e1c83a86f2d64380c6b40925a33b7e54f38f1461e6",
+    "exact_staged_rows": [
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/actions-swarm-mk3-20261011-1935Z-engineering-successor.md",
+        "bytes": 3837,
+        "sha256": "4edb3381a10a99e05afed665261f9571dcc7613bfa056983008835d506ef2cce",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/actions-swarm-mk3-20261011-1935Z-engineering-successor.md",
+        "Git_mode": "100644",
+        "Git_oid": "3aae0b0968aeb2895480f8fe3c807358723fa2fc"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/.gitattributes",
+        "bytes": 152,
+        "sha256": "571ccf11205e84fe09b6691f3c3398264e1dc10a1f7bb1089f7bd96403bd0be9",
+        "mode": "0o600",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/.gitattributes",
+        "Git_mode": "100644",
+        "Git_oid": "882dab93fce0009b4ae6a9101c8809bbcd26ba19"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/01-owned_cache_policy_v8.py",
+        "bytes": 6228,
+        "sha256": "4ccac4e3bd2c1e91352ef4e647968b4ca61f8691e1fc0f41e72a128a2942c205",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/01-owned_cache_policy_v8.py",
+        "Git_mode": "100644",
+        "Git_oid": "f4e752189ce26fbcbe5a9fa5e079da43a1c25a7b"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/02-actual_transport_v8.py",
+        "bytes": 27889,
+        "sha256": "33dda17140ef749e22f086cc91b92ed8c3230fddfde8a4a369769e2183f695a1",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/02-actual_transport_v8.py",
+        "Git_mode": "100644",
+        "Git_oid": "7e597532677d9c682000349e7fb562145caee5b2"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/03-historical_binding_current8d49_v8.py",
+        "bytes": 6327,
+        "sha256": "6f64d55837cc4ff14ee4eec013314ba512c09ecdc56f79192c1360ef46473b30",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/03-historical_binding_current8d49_v8.py",
+        "Git_mode": "100644",
+        "Git_oid": "5e2b2d48a2bc056712a63f6c30fc961b72f91045"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/04-fixture_records_v8.py",
+        "bytes": 11489,
+        "sha256": "7a63ee62184ea268dead0c98460c6943ebc297816e9a4df180b10ed5e04b9064",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/04-fixture_records_v8.py",
+        "Git_mode": "100644",
+        "Git_oid": "8ba8c89147e1f41529a423e002cc30cf40c7c92e"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/05-runner_contracts_v3.py",
+        "bytes": 12959,
+        "sha256": "cbae3bb074d3995153ea5e6b694e7f9e61c047c6aa511b682959a63fedf7b726",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/05-runner_contracts_v3.py",
+        "Git_mode": "100644",
+        "Git_oid": "76c0b2bcb393a93b02f6a59afce74002dd9e0909"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/06-owned_monitor_v1.py",
+        "bytes": 4632,
+        "sha256": "834a7fe402e34b170f414df5dfe79762c0b49ed311a6222ba2f7bca5d87020a5",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/06-owned_monitor_v1.py",
+        "Git_mode": "100644",
+        "Git_oid": "f29b6df85c47433adf1902d0a30c1837c6b406de"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/07-historical_binding_v1.py",
+        "bytes": 1072,
+        "sha256": "10eac48f020d4c1030bb0be26b3b283d896712b7e7b5095e08045b8192808215",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/07-historical_binding_v1.py",
+        "Git_mode": "100644",
+        "Git_oid": "5f6d38a24952ae7bdccf2186557e8a7c99e2fcc9"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/08-historical_failed_receipt_archive_v1.py",
+        "bytes": 2645,
+        "sha256": "a69291189f47812c41ce43d9d68a81a839780ce28a0a9dfc00c487c9acb26d69",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/08-historical_failed_receipt_archive_v1.py",
+        "Git_mode": "100644",
+        "Git_oid": "21be32d70303339df1ecb4d94a0a316a659ab71c"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/09-test_current_managed_reload_sqlite_pool_barriers.py",
+        "bytes": 14786,
+        "sha256": "c148bd528f8306e638054df91dfbf915022eaf30d3e123ff845adbeae6b209eb",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/09-test_current_managed_reload_sqlite_pool_barriers.py",
+        "Git_mode": "100644",
+        "Git_oid": "f0ab18460b5db9e3f610d735141242438c48e493"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/10-proposed-current8d49-adapter-nine-controls-append-only.patch",
+        "bytes": 15348,
+        "sha256": "7a8eb3af1d96b87f99025f43167e146af162f4b3cfde0596679d6beedb46a7a3",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/10-proposed-current8d49-adapter-nine-controls-append-only.patch",
+        "Git_mode": "100644",
+        "Git_oid": "1a87a09e678044b1ef2a59015b84ccdf30a78f9b"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/11-nine-real-SQLite-pool-barrier-baseline-and-private-mutant-RED-plan-NOTRUN.json",
+        "bytes": 4493,
+        "sha256": "1c33ec727106e5a3b686571011ab05dbc7259f70bacca773acdf627dd67e0a33",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/11-nine-real-SQLite-pool-barrier-baseline-and-private-mutant-RED-plan-NOTRUN.json",
+        "Git_mode": "100644",
+        "Git_oid": "afe31732bdbc03b50359714aed04d0d234da8a0f"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/12-current8d49-reload-drain-recontext-implementation-and-admission.md",
+        "bytes": 1966,
+        "sha256": "8fd57f9442106b711dc724ee46201cd0b515ce2a8126825d619220a0f263e426",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/12-current8d49-reload-drain-recontext-implementation-and-admission.md",
+        "Git_mode": "100644",
+        "Git_oid": "e2fdd2d98673d0794c30e7c7ca775e984503eeee"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/13-canonical-current-source-reload-drain-transaction-scope-proposed.patch",
+        "bytes": 1021,
+        "sha256": "8354390b30343aa9a57a976aa5244e75068f8c59fc604f074af9e18110743856",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/13-canonical-current-source-reload-drain-transaction-scope-proposed.patch",
+        "Git_mode": "100644",
+        "Git_oid": "2c845586c2e5cbf53cbea9c8158b011d9d3cddc7"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/OWNERFINAL-original-old-v4-v7-coverage-reconciliation.json",
+        "bytes": 1415,
+        "sha256": "3c1d5868486c9fba6e2cf3fc24a7479862d42531c7849f3acb84d5a9eedefab5",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/OWNERFINAL-original-old-v4-v7-coverage-reconciliation.json",
+        "Git_mode": "100644",
+        "Git_oid": "f4809766f3562905227e1071311134e2598f6c6d"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/OWNERFINAL-original-source-closure-PROPOSAL.json",
+        "bytes": 2400,
+        "sha256": "f92d2c46afcf5cf097a19f91603313720c16ff48a83825e9b88994e12e2646c6",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/OWNERFINAL-original-source-closure-PROPOSAL.json",
+        "Git_mode": "100644",
+        "Git_oid": "a3a558c2469f005eaf6e90928e197b8946f6e5cb"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/source-closure-manifest-original.json",
+        "bytes": 22258,
+        "sha256": "80c8215bc256c5cc36509beaba95aef6e9629718d9cf5c620e084ba3a5b728ec",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/source-closure-manifest-original.json",
+        "Git_mode": "100644",
+        "Git_oid": "01937a4c9e94866cf934a5ace1fc9c2932893a88"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/.gitattributes",
+        "bytes": 441,
+        "sha256": "ce8db9ba386c4d2bfb2520b8da1cbd15ccd0fe03d157c92a314375ca8150d082",
+        "mode": "0o600",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/.gitattributes",
+        "Git_mode": "100644",
+        "Git_oid": "c1377b30fc45de814c18d51a314bb2bc2752e534"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/04-OWNERFINAL-current8d49-one-original-Windows-source-and-static-failure-diagnosis.json",
+        "bytes": 11627,
+        "sha256": "3f864f74b7e41f8a0faaa25aa5e9b335c09947c2ce5d467d46098366bfa7bcbd",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/04-OWNERFINAL-current8d49-one-original-Windows-source-and-static-failure-diagnosis.json",
+        "Git_mode": "100644",
+        "Git_oid": "b737b3db837b05ccdbd04985a62cacaad159025e"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/05-OWNERFINAL-private-current8d49-Windows-portability-source-PROPOSAL.json",
+        "bytes": 2565,
+        "sha256": "ecb19ffb860b976a70f8394f0bff50a0b1ab469bee9d1f3ae4f71590bd70bc30",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/05-OWNERFINAL-private-current8d49-Windows-portability-source-PROPOSAL.json",
+        "Git_mode": "100644",
+        "Git_oid": "bcb1e21f5d2b522440a42b90868a1beb8b57d878"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/06-proposed-two-path-assertions-and-cache-owner-features.patch",
+        "bytes": 3827,
+        "sha256": "093cb7f29b354f0b64f0e971726b4426b99549997aa6cf5611f14dec75ddf404",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/06-proposed-two-path-assertions-and-cache-owner-features.patch",
+        "Git_mode": "100644",
+        "Git_oid": "873420bdd802c39a9db356ff38ae8f8a7e6bed1e"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/07-OWNERFINAL-independent-private-current8d49-Windows-portability-SOURCE-proposal-review.json",
+        "bytes": 4944,
+        "sha256": "3cb83d185dcb474a602cdf3c954d8004bdb06ee18a63ce12b0cc6fa59f957bbb",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/07-OWNERFINAL-independent-private-current8d49-Windows-portability-SOURCE-proposal-review.json",
+        "Git_mode": "100644",
+        "Git_oid": "8e21986b76cc56a07674aa39400655886cd96db9"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/08-OWNERFINAL-current8d49-managed-reload-drain-private-source-and-nine-real-controls-PREPARED-NOTRUN.json",
+        "bytes": 6730,
+        "sha256": "faf0d846ba7e1f240dccb1b6e77ccbba23e36379010bf9ab8abf6c4e6221211f",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/08-OWNERFINAL-current8d49-managed-reload-drain-private-source-and-nine-real-controls-PREPARED-NOTRUN.json",
+        "Git_mode": "100644",
+        "Git_oid": "a4322c3d23ca1e74a2c3686f19c896744542d518"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/09-frozen-current8d49-two-path-persistent-fixture-source.patch",
+        "bytes": 24118,
+        "sha256": "ec23125cfcf2ca2af3e1c7e08871bb1f198e0df1db04e9be62d61b89b755b158",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/09-frozen-current8d49-two-path-persistent-fixture-source.patch",
+        "Git_mode": "100644",
+        "Git_oid": "49507029d139542f9b9e177771989a9bb3ed77e2"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/11-OWNERFINAL-independent-original-current-e2-seven-distribution-inner-ACTUAL-integrity-review.json",
+        "bytes": 7994,
+        "sha256": "29168625d9ab51aa816e28e645285412130bca1552cb3d0132f92f31a8800dbd",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/11-OWNERFINAL-independent-original-current-e2-seven-distribution-inner-ACTUAL-integrity-review.json",
+        "Git_mode": "100644",
+        "Git_oid": "8338471cc53943a298d8aecf0b28ee05d7ae9d18"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/14-OWNERFINAL-currente2-original-Mac-Windows-producer-checkout-build-identity-only.json",
+        "bytes": 4358,
+        "sha256": "d67b48ef702f04b5ed4a43d2ff01626f0acac8fafc3e5aa0118b59f7f31b3444",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/14-OWNERFINAL-currente2-original-Mac-Windows-producer-checkout-build-identity-only.json",
+        "Git_mode": "100644",
+        "Git_oid": "2f5b8c2d41742e51aba2ec40112ed126280b3184"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/15-OWNERFINAL-current8d49-qualified-V8-control3-config-and-managed-PREEXEC.json",
+        "bytes": 9277,
+        "sha256": "16f55dd096f13c6e8a9e9d56aa5f9f262bed2f1404e87d785f3a1f6a4a330aed",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/15-OWNERFINAL-current8d49-qualified-V8-control3-config-and-managed-PREEXEC.json",
+        "Git_mode": "100644",
+        "Git_oid": "46f72173202068eeae43fe0ea4d5e3b444eba1e4"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/16-OWNERFINAL-independent-current8d49-qualified-V8-control3-config-managed-PREEXEC-review.json",
+        "bytes": 12177,
+        "sha256": "3860e929e17aeea6fb88fbacf02b61e451ed8689820425f491bdce118db4bcd7",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/16-OWNERFINAL-independent-current8d49-qualified-V8-control3-config-managed-PREEXEC-review.json",
+        "Git_mode": "100644",
+        "Git_oid": "4d1c2e067b4a87e0948bf8a7df27060ac3630d54"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/17-build_qualified_current8d49_config_v8_FINAL.py",
+        "bytes": 13715,
+        "sha256": "1992b7bc25799a0cdd0a9c203d531a0bdca1356ee4678a84c489eafe242e319c",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/17-build_qualified_current8d49_config_v8_FINAL.py",
+        "Git_mode": "100644",
+        "Git_oid": "4752a397409a73b56e6961cc5a0a763b8891162e"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/18-managed_one_version_entry_v8.py",
+        "bytes": 1444,
+        "sha256": "f1ae7b01b9c01d6391fa46d7cef1cbaf6630dd0bd98698df400f677617f23b6d",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/18-managed_one_version_entry_v8.py",
+        "Git_mode": "100644",
+        "Git_oid": "d35fb3a04252c8d3912df7e7db4cbdd93999ec68"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/19-launch_one_version_v8.py",
+        "bytes": 5013,
+        "sha256": "41c128697ab418985257df8aa2eb99abf0d22379264a34b948a12b92a2059b9e",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/19-launch_one_version_v8.py",
+        "Git_mode": "100644",
+        "Git_oid": "f517784921b0fcf3bc8c4702ff9c1aaaf36a86f8"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/20-readonly_current_input_guard_v8.py",
+        "bytes": 4664,
+        "sha256": "13e123a40b4f811a81c549b6a4387135e8d6bc515be39559f34d5fc030c398b6",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/20-readonly_current_input_guard_v8.py",
+        "Git_mode": "100644",
+        "Git_oid": "b6d8e2259cf33282acc4c3a35ebc914039a317e0"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/21-gateway_entry_v8.py",
+        "bytes": 2988,
+        "sha256": "ad14539953b2b4b5039d729507d3117e021b1cf00aa767df7a049997c00784b8",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/21-gateway_entry_v8.py",
+        "Git_mode": "100644",
+        "Git_oid": "1124f30b6a8a42281926b4dfd061c637a63425ae"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/22-OWNERFINAL-five-completed8d49-roots-capped-storage-PREEXECUTION-v4.json",
+        "bytes": 22172,
+        "sha256": "a1333777200edeaf0320f437c946e9df15e2e6ce6a3c61a976838d7b9b088b2e",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/22-OWNERFINAL-five-completed8d49-roots-capped-storage-PREEXECUTION-v4.json",
+        "Git_mode": "100644",
+        "Git_oid": "95716aad52802acaa70df1d960d7492680d89d45"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/23-canonical-private-actual-fixture-history-and-pytest-logger-proposed.patch",
+        "bytes": 772,
+        "sha256": "d21d043bb7cfcdfa32a7e9edb5239c71a649918ed800202f378449bd0e159877",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/23-canonical-private-actual-fixture-history-and-pytest-logger-proposed.patch",
+        "Git_mode": "100644",
+        "Git_oid": "a3fe1690f98f34c18f7590b33766945d1ed3d5ea"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/24-canonical-native-path-and-POSIX-feature-proposed.txt",
+        "bytes": 548,
+        "sha256": "3169c416f55f972f5c8ec5bad7ef970a107fb55eae6778a315b40552c5949bfd",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/24-canonical-native-path-and-POSIX-feature-proposed.txt",
+        "Git_mode": "100644",
+        "Git_oid": "9c9a327339fcd55e1cbfb0a7519883a660503367"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/25-proposed-canonical-managed-Poetry-and-guard-capture-lesson.txt",
+        "bytes": 779,
+        "sha256": "f46d621678d346caa1f71699ddd1f8fe7eb338fc75834e7a18b201c75d4f8e0a",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/25-proposed-canonical-managed-Poetry-and-guard-capture-lesson.txt",
+        "Git_mode": "100644",
+        "Git_oid": "bdfb88d80ad23efd7aec5018fe53549566f476aa"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/26-canonical-real-data-inspector-entry-and-boundary-controls-proposed-v2.patch",
+        "bytes": 1068,
+        "sha256": "f7977ae5226da1fcd2554d2439de9216fc4806a2446d1b1300525a8e0942e868",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/26-canonical-real-data-inspector-entry-and-boundary-controls-proposed-v2.patch",
+        "Git_mode": "100644",
+        "Git_oid": "2912c4f1770bc3b0761dcdfd8ea64bccfef370ce"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/27-canonical-original-platform-checkout-identity-proposed.md",
+        "bytes": 470,
+        "sha256": "74187436f50d80becea52d7679a6943085a950f6339dc4ce3a9fdc2c15ecf1de",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/27-canonical-original-platform-checkout-identity-proposed.md",
+        "Git_mode": "100644",
+        "Git_oid": "4eacd1b5684383431a85d1b6cd48878d6bca08ee"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/OWNERFINAL-original-private-handoff-PROPOSAL.json",
+        "bytes": 5606,
+        "sha256": "d5fe68a6346bc0be49b429886be0274906ea4091b43046116180d9cfb6f65de8",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/OWNERFINAL-original-private-handoff-PROPOSAL.json",
+        "Git_mode": "100644",
+        "Git_oid": "d813d57c588735af5c6bf0216ea27cccf9da77ef"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/safe-reference-manifest-original.json",
+        "bytes": 22481,
+        "sha256": "4bd2e8ea96b0062b21c2c3b23571d59e067b11ebd6a5eb65a488de114c9524e9",
+        "mode": "0o644",
+        "relative_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/safe-reference-manifest-original.json",
+        "Git_mode": "100644",
+        "Git_oid": "53c6d1f7a87d97e24507077f56709d9b9206cffe"
+      },
+      {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/skills/repository-operations.md",
+        "bytes": 248548,
+        "sha256": "a6f28284f31aad5c5e5ae4c170f53d906641edaf56af5ff495cd6f7cb03050cd",
+        "mode": "0o600",
+        "relative_path": "docs/skills/repository-operations.md",
+        "Git_mode": "100644",
+        "Git_oid": "8ed3245c1db49cb2ec770231913d7b0a2d51b3e4"
+      }
+    ],
+    "working_equals_all43staged_bytes": true,
+    "no_other_staged_or_working_delta": true,
+    "all3594other_parent_tracked_body_Gitmode_FS_executable_preserved": true,
+    "guide_prior39insertions_0deletions_unchanged": true
+  },
+  "source_closure": {
+    "thirteen_new_unique_originals_bytes": 110855,
+    "all13originalbodySHA_size_physicalmode_verified": true,
+    "all16sourceclosurecopied_originalbytes_exact": true,
+    "eight_actual_V8_dependencies_public_source": "Exact original body evidence only; recorded absolute imports/paths unchanged; not standalone executable package/admitted native entry",
+    "nine_prepared_control_test_source_bytes": 14786,
+    "nine_controls_status": "NOT_RUN_NO_ADOPTION; source retention and syntax parse are not test acceptance",
+    "old76v4_rows_exact_subset_of84v7": true,
+    "no13source_body_hash_duplicate_old84_or_original1935": true,
+    "historical48314source": "Existing reachable e4ff080375a8422bb656e52d218f198521dda078 Git blob48314/af2f79ccd395c088076381f6681860cf8160f8fd0d9169e122634fe684c37c35 independently verified; ancestor current8d49; exactexistingprivate0444snapshot, not recopied/reconstructed",
+    "external_prerequisites": "Private config, native binaries/1192, original helper60acf and archives/indices/maps, exact currentrealfixtures/preparedactivation, independent/rootexecutionrelease remain external; no execution grant"
+  },
+  "attributes": {
+    "1935_scope": "* -text only byteconversion plus three literal filenames whitespace=-blank-at-eol; no directory/general *.patch/global-whitespace waiver",
+    "source_closure_scope": "* -text only byteconversion plus only08-historical_failed_receipt_archive_v1.py whitespace=-blank-at-eof",
+    "original_source_blank_EOF": "Exact original2645/a692911 unchanged; original stagedFAIL2 remains in immutable named correction receipt, no normalization",
+    "normal_authored_whitespace": "Unchanged; exact all43 gitdiffcachedcheck returned0 using scopedattributes",
+    "hash_bound_exception_guard": "Applies only reviewed immutable basenames/hashes; any body/path/attribute changes require named fresh review"
+  },
+  "privacy": {
+    "JSON_parsing_and_Python_AST_without_import": "PASS",
+    "literal_credential_Bearer_privatekey_signedURL_scan": "PASS_NO_MATCHES",
+    "manual_safe_source_scope": "Original public private-orchestration SOURCE is retained as reviewable code; no rawprivateURL/log/API/fullindex/memberpayload/binary/generatedOAuth/privateconfig contents or fictionalwire equivalence",
+    "original1935and1830_1853_oldpayloads": "Preserved with parent completebody/Gitmode proof"
+  },
+  "failure_dispositions": {
+    "rootapplication_native_control3_RUNNING_SEPARATE_at_capture": "Historical frozen metadata; actual044fe failure review is separate, no rewrite",
+    "original_V8_control3_actual": "FAIL ModuleNotFoundError before main; no native predicates promoted by these source copies",
+    "FIVE_v4cap48FAIL": "Retained; later storage/config reviews external",
+    "V9": "Not included, not reviewed/adopted by thisdocsreceipt"
+  },
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "delta": "No extra prose in thissourceclosureaddition: preserve exact prior39insertions, reuse existing config-consumed-path closure paragraph and separate historicalpath+SHA/currentlive lesson",
+    "verified_reused_contract": "Before adopting a frozen command packet, verify every file path consumed by its constructor, launcher, guards and body, including paths stored only in its configuration; preserve rejected packets/named checked closure instead of backfilling filenames.",
+    "evidence": "Actual imported8dependency AST/code bodies now exactcopied; failedV8 directchild import044fe independently preserved; externalrequiredinputs/absoluteimports explicitly declared; historicalGit48314 verified and13unique110855 source manifest records exact originals.",
+    "stale_or_ambiguous_guidance_removed": "Owner receipts alone do not retain imported executable source; copying dependencies is not standalone execution/native approval or an originalfailure repair.",
+    "remaining_uncertainty": "Independent source/full/native configs/realrootreleases still needed for any execution; nine reloadcontrols/preparedpersistent/publication/private/fullgraph HOLD. No duplicate/cosmetic canonical growth."
+  },
+  "upstream_disposition": "none",
+  "review_operations": "READ_ONLY_STDLIB_HASH_JSON_AST_GIT_INDEX_AND_TREE_PARSE; NO_PRODUCT_IMPORT_TESTS_HEAVY_GATES_NATIVE_NETWORK_APPLICATION_SOURCE_INDEX_EDIT_COMMIT_PUSH"
+}

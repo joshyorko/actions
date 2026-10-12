@@ -1,0 +1,6 @@
+{
+  "scope": "Reviewer metadata constructor only; no archive/guard/native run",
+  "failure": "304-row assertion evaluated historical a3e191 from input supplement rather than separately bound active a209cc",
+  "corrected_successor": "verify_readonly_v2.py",
+  "original_script_sha256": "5556e9af86c4a76193997fc9972e6ae7905238a4e1c02a77fc7df14e87648792"
+}

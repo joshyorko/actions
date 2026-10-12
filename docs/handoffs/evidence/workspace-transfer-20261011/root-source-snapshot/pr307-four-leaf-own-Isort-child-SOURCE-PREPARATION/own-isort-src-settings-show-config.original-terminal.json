@@ -1,0 +1,29 @@
+{
+  "argv": [
+    "/workspace/engineering/pr307/devutils/.venv/bin/isort",
+    "--settings-path",
+    "src",
+    "--show-config",
+    "src/devutils/fixtures.py",
+    "tests/test_http_helper_tests_workflow.py",
+    "tests/test_runtime_conformance.py",
+    "tests/test_invoke_utils.py"
+  ],
+  "capture": "2026-10-11T22:39:37.360258+00:00",
+  "cwd": "/workspace/engineering/pr307/devutils",
+  "elapsed_seconds": 0.11548258099355735,
+  "returncode": 0,
+  "stderr": {
+    "bytes": 0,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/own-isort-src-settings-show-config.stderr.private",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 18874,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION/own-isort-src-settings-show-config.stdout.private",
+    "sha256": "1ad54afb262949294db754c97b4250613355506862160f96508363d285e420c5"
+  },
+  "timeout_seconds": 60
+}

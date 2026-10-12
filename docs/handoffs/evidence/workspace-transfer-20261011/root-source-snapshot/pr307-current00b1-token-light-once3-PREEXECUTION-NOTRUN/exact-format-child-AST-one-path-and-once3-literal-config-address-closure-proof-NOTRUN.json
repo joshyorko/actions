@@ -1,0 +1,78 @@
+{
+  "actual_once3": "NOT_RUN",
+  "all_other_body_modes_preserved": 1441,
+  "changed_paths": [
+    "devutils/tests/test_actions_runtime_release_line.py"
+  ],
+  "configured_own_formatter": "0.1.15; exact--configruff.toml; no mismatch",
+  "executable_CONFIG_selected_path": "/workspace/engineering/pr307-current00b1-token-light-once3-PREEXECUTION-NOTRUN/immutable-one-TOKEN-LIGHT-once3-inputs.json",
+  "formatted_whole_file_AST": "EXACT",
+  "memory_originals": "NOT_TOUCHED",
+  "new_cfg": {
+    "bytes": 29380,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current00b1-token-light-once3-PREEXECUTION-NOTRUN/immutable-one-TOKEN-LIGHT-once3-inputs.json",
+    "sha256": "5fd30d41b763da8596546a76f907966a5d2ffc479d35c449e30172daea9b3535"
+  },
+  "new_config_closed_bindings": 85,
+  "new_launcher": {
+    "bytes": 16053,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr307-current00b1-token-light-once3-PREEXECUTION-NOTRUN/launch_one_owned_token_light_once3_format_child.py",
+    "sha256": "23b6168f4834f593591113d22f26f6b2cac104a9c672767a60f060a22628cc02"
+  },
+  "new_launcher_inverse_text_and_AST": "EXACT_AFTER_DECLARED_LITERALS_ONLY",
+  "new_sourceproof": {
+    "bytes": 338142,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current00b1-token-light-once3-PREEXECUTION-NOTRUN/current00b1-format-child-1442-prepared30-ownfive-and-original-once2-proof.json",
+    "sha256": "15d2a3c0eb86d583eb6add482c1ce0fbdc3b0795bb19afb3b9674aa8ae503c85"
+  },
+  "original_RED": "2F/gateway10/inner1 precise typed contract unchanged",
+  "original_once2_SCOPE_counts": {
+    "guard-focus": {
+      "JUnit": {
+        "bytes": 6813,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/guard-focus/junit.xml",
+        "sha256": "33182fe3dc48a2867b54dfc4dd7851589588b43a6b31a2b64807bb21a5ba5900"
+      },
+      "errors": 0,
+      "failures": 0,
+      "passed": 41,
+      "skips": 0
+    },
+    "token-release-line-GREEN": {
+      "JUnit": {
+        "bytes": 16357,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/token-release-line-GREEN/junit.xml",
+        "sha256": "a1288505ea65cf92f13b8cbce76b16b381d0fde9a2dbffe398ecde99802a1fbc"
+      },
+      "errors": 0,
+      "failures": 0,
+      "passed": 99,
+      "skips": 0
+    },
+    "toolkit": {
+      "JUnit": {
+        "bytes": 30055,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/toolkit/junit.xml",
+        "sha256": "0138560236e70d18d2312c9967d1a19707111cf92faf2ba7a92e57c72219df94"
+      },
+      "errors": 0,
+      "failures": 0,
+      "passed": 179,
+      "skips": 0
+    }
+  },
+  "original_staticFAIL": "Onlyreportedrelease-lineformatleaf; originalstatusFAILunchanged; generator/invokephasesNOTRUN",
+  "parent": "c97edfd10edb5b1c63f8a6371bfd2905996a2da2",
+  "schema": 1,
+  "source": "00b1bb9974b73f2da65e49c9048774c84df286ba",
+  "source_clean": true,
+  "source_count": 1442,
+  "status": "READONLY_METADATA_AST_BODY_PROOF_NO_GATE_EXECUTION",
+  "tree": "2663e86b2344f9e056c3259653cb905a6d195599"
+}

@@ -1,0 +1,5 @@
+import toolkit
+toolkit.poetry("action_server", "run", "python", "-c", 'import sys,actions.server; from pathlib import Path; r=Path.cwd(); assert Path(sys.prefix).resolve()==(r/".venv").resolve(); assert Path(actions.server.__file__).resolve().is_relative_to(r/"src"); print("OWN_SOURCE_AND_PREFIX=PASS")')
+toolkit.poetry("action_server", "run", "python", "-m", "pytest", "-q", "tests/action_server_tests/run_outputs", "tests/action_server_tests/test_artifact_storage.py", "tests/action_server_tests/test_database_shared.py", "tests/action_server_tests/mcp/test_alias_history.py", "tests/action_server_tests/mcp/test_resource_history.py", "-m", "not integration_test")
+
+toolkit.poetry("action_server", "run", "python", "-m", "pytest", "-q", "tests/action_server_tests/test_rcc_runtime_adapter.py", "tests/action_server_tests/test_source_staging_rcc_consumer.py", "-m", "not integration_test")

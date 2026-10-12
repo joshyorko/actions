@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "decision": "GO_PRIVATE_CURRENT8D49_V8_CONTENT_AND_PLAN_ONLY",
+  "status": "NOT_EXECUTABLE_CONFIG_NOT_NATIVE_ADMISSION",
+  "content_owner_binding": {
+    "path": "/workspace/engineering/rcc-current8d49-private-V8-content-preparation/OWNERFINAL-current8d49-private-V8-four-module-NOTEXECUTABLE-content-preparation.json",
+    "bytes": 6445,
+    "sha256": "a334cb363d8d4003e9ddd6dc375096e05758560c4b487b0077389e54d058e704",
+    "mode": "0o400"
+  },
+  "pure_plan_binding": {
+    "path": "/workspace/engineering/rcc-current8d49-private-V8-content-preparation/OWNERFINAL-current8d49-private-V8-count-alias-baseline-first-testcase-plan-NOTRUN.json",
+    "bytes": 5064,
+    "sha256": "0312800a81387367d98a794956ef38014ad6d439977697a4b7a6a68bf498d539",
+    "mode": "0o400"
+  },
+  "source": {
+    "commit": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+    "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+    "complete_typed_source": 1440
+  },
+  "module_bindings": [
+    {
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-content-preparation/actual_transport_v8.py",
+      "bytes": 26218,
+      "sha256": "7b7948fd86b260cd338aa077a4c9d7acf62ef6fcc22a38d115bd02ba40a63604",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-content-preparation/owned_cache_policy_v8.py",
+      "bytes": 6228,
+      "sha256": "4ccac4e3bd2c1e91352ef4e647968b4ca61f8691e1fc0f41e72a128a2942c205",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-content-preparation/fixture_records_v8.py",
+      "bytes": 11489,
+      "sha256": "7a63ee62184ea268dead0c98460c6943ebc297816e9a4df180b10ed5e04b9064",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-content-preparation/historical_binding_current8d49_v8.py",
+      "bytes": 3115,
+      "sha256": "b83a8d625ec08d8dbae9862a9ab34f3a4b5856594fba10dd3468b58b2cca8165",
+      "mode": "0o444"
+    }
+  ],
+  "AST_proof": {
+    "all_non_read_bound_main_functions_classes_exact": true,
+    "main_only_added_nestedguard_statements": 7,
+    "whole_module_exact_after_declaredSOURCE_TREE_import_read_bound_main_projection": true,
+    "fixture_records_wholebytes_exact": true,
+    "cache_policy_only_root2_to3": true,
+    "sampler_process_helper_cleanup_budgets_strictness_unchanged": true
+  },
+  "source_count_guard": "Exact1440 count/path-set/Gitmode/object/Gitbody+FSbody/mode; current scope not old1423.",
+  "required_new_controls": {
+    "baseline_first": true,
+    "count_poison_count": 10,
+    "alias_poison_count": 11,
+    "source": "Run exact extracted guard AST with synthetic FS/Git seams; no mutated assertions, product/native/Git process; fixed admission categories and no Action sentinel.",
+    "alias": "Owned tiny mapping/body/index controls only. Independently fixed TMP_ORIGINAL stays fixed when signed mapping seam is changed to exercise semantic co-mutation predicates beyond initial hash. Wrong original tuple/bytes/owner/mode/mtime/index/recreatedoldpath/history fail.",
+    "legacy": "Original8dc exact resolver delegate unchanged;172 prior controls not new source qualification. Future qualified config must retain old237 historical fixture via exact immutable old Git/snapshot binding and currentlive fixture separately; never omit row or tolerateoldhash/livepathmismatch.",
+    "execution": "After root FULL terminal and distinct root capacity/serialization clearance, pure controls only with unique absent basetemp+ALL; no native/cache-root or old failed-root mutations."
+  },
+  "config_and_actual": "ABSENT_NOT_CONSTRUCTED; requires actualcurrentSOURCEFULL+indGO, new purecontrols/qualifiedconstructor/configindGO, freshcapacity and distinctroot one3\u21925\u21927276 version releases; no auto retries/old sourcecarry.",
+  "packet_state_precision": "Frozen NOT_RUN currentSOURCEFULL field is an unqualified/no-result placeholder; external root run was active and is reviewed separately, never inferred from this source packet.",
+  "inspector_correction": {
+    "path": "/workspace/engineering/rcc-current8d49-private-V8-independent-content-plan-review/original-readonly-guard-statement-count-inspector-FAIL.json",
+    "bytes": 319,
+    "sha256": "0e3320ca82922b71105d0e34b48019d1426809182873c006769de134d4883513",
+    "mode": "0o400"
+  },
+  "documentation": {
+    "disposition": "REUSE_EXACT_ACCEPTED_STARTUP4_LINE_MODE9_LINE_EXPECTED_CURRENT_SOURCE_CONTEXT_AND_BASETEMP_LESSONS; NO_COSMETIC_EXTRA_DELTA",
+    "evidence": "Actual current sourceLIGHT seven startup regressions/configured gatePASS; private mode/source-context bytes exact acceptedV8. Added strict typed current source count and exact ce145 oldindex/archive physical alias routing implement established original-byte/source separation.",
+    "remaining_uncertainty": "New alias/count controls not executed by reviewer, currentFULL independently unqualified pending separate review, actual3/5/7276 and private01f/frozen-v6 HOLD."
+  },
+  "upstream_disposition": "none; existing upstreamdraft unsent",
+  "reviewed_code_tests_native_imports_source_writes": "NOT_RUN"
+}

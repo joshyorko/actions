@@ -1,0 +1,175 @@
+{
+  "ROOT_adoption_requirements": [
+    "Fill ONLY independent_preexecution_review with this actual sealed receipt binding and ROOT_REAL_DISTINCT_RELEASE_SHA256 with the measured newly created strict600 release hash. ROOT alone releases one fresh attempt; no consumed release/root reuse.",
+    "Reject inherited overrides before exact managed activation; prepend verified cached Toolkit bin then source activate.sh so managed primary is PATH first/cached Toolkit second; current source/five own origins remain exact. No RCC native/task/gateway/install execution.",
+    "No concurrent heavy/native/storage mutations. Root captures private outer stdout/stderr/terminal for every outcome and retains whole proposal/config/launcher/review/release binding readback.",
+    "Before/alwayspost120TERM10+135parent, primary120TERM10+150parent sum420 insideROOT600TERM10+630parent. Timeout/hardkill or missing final guard/result remains FAIL/HOLD; no universal process cleanup claim.",
+    "After authorized actual run, separate independent original35-case node/JUnit/semantic/backend scope and all guard/source review is required; PREEXEC/source static proofs are not actual success."
+  ],
+  "ROOT_exact_argv_template": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "600s",
+    "bash",
+    "-c",
+    "export PATH=\"/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\"; source /workspace/actions-cloud/activate.sh && exec \"$@\"",
+    "defaultbackend35-once",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/rcc-defaultbackend35-concrete-PREEXEC-NOTRUN/run_root_defaultbackend35_pure_once_NOTRUN.py",
+    "--phase",
+    "launch",
+    "--config",
+    "/workspace/engineering/rcc-defaultbackend35-concrete-PREEXEC-NOTRUN/FROZEN-defaultbackend35-concrete-config-NOTRUN.json",
+    "--config-sha256",
+    "727141f5bf2e87ffad42a16e4e6fb352c807c45e06be60f32af494ecc05ac5f6",
+    "--release",
+    "/workspace/engineering/root-one-defaultbackend35-pure-controls-release.json",
+    "--release-sha256",
+    "ROOT_REAL_DISTINCT_RELEASE_SHA256"
+  ],
+  "ROOT_parent_seconds": 630,
+  "ROOT_release_path": "/workspace/engineering/root-one-defaultbackend35-pure-controls-release.json",
+  "ROOT_release_required_template": {
+    "config_binding": {
+      "bytes": 24139,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-concrete-PREEXEC-NOTRUN/FROZEN-defaultbackend35-concrete-config-NOTRUN.json",
+      "sha256": "727141f5bf2e87ffad42a16e4e6fb352c807c45e06be60f32af494ecc05ac5f6"
+    },
+    "independent_preexecution_review": null,
+    "launcher_binding": {
+      "bytes": 12288,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-defaultbackend35-concrete-PREEXEC-NOTRUN/run_root_defaultbackend35_pure_once_NOTRUN.py",
+      "sha256": "f49f82bbf308d7d9a00ec5cf4de67af2e9f8c52a63a405954c93cc21462c9509"
+    },
+    "root": "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-1",
+    "schema": 1,
+    "serialized_no_other_heavy_or_storage_mutations": true,
+    "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+    "source_independent_review": {
+      "bytes": 10081,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-default-backend35-independent-SOURCE-review/OWNERFINAL-independent-current8d49-default-descriptor19functions35cases-SOURCE-prepared-GO.json",
+      "sha256": "d3986dbc2335d3655fc204e4702c0dd7a715793dc91072f928cc2752e076506f"
+    },
+    "source_owner_binding": {
+      "bytes": 10628,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-default-descriptor-walk-controls-PREPARED-NOTRUN/OWNERFINAL-current8d49-real-default-descriptor-walk-35-controls-SOURCE-PREPARED-NOTRUN.json",
+      "sha256": "e7954c3bc19374991213dd70fff3e64d2f7971e84c1c74fa573aee75f16ec7d5"
+    },
+    "status": "ROOT_DISTINCT_ONE_DEFAULT_DESCRIPTOR35_PURE_CONTROLS",
+    "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+  },
+  "actual_tests_imports_real_cgroup_signals_native": "NOT_RUN_BY_REVIEWER",
+  "bounds": {
+    "alwayspost": 120,
+    "alwayspost_kill": 10,
+    "alwayspost_parent": 135,
+    "before": 120,
+    "before_kill": 10,
+    "before_parent": 135,
+    "fallback_sum": 420,
+    "margin": 180,
+    "primary": 120,
+    "primary_kill": 10,
+    "primary_parent": 150,
+    "root_kill": 10,
+    "root_outer": 600,
+    "root_parent": 630
+  },
+  "config_binding": {
+    "bytes": 24139,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-defaultbackend35-concrete-PREEXEC-NOTRUN/FROZEN-defaultbackend35-concrete-config-NOTRUN.json",
+    "sha256": "727141f5bf2e87ffad42a16e4e6fb352c807c45e06be60f32af494ecc05ac5f6"
+  },
+  "config_sha256": "727141f5bf2e87ffad42a16e4e6fb352c807c45e06be60f32af494ecc05ac5f6",
+  "contract_binding": {
+    "bytes": 5077,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-defaultbackend35-concrete-PREEXEC-NOTRUN/ROOT-distinct-defaultbackend35-release-and-command-contract-NOTRUN.json",
+    "sha256": "e97d8827327743f02ea6e36779348a55b281a975bbdca72793ae739f6babfe73"
+  },
+  "controls_binding": {
+    "bytes": 15829,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-default-descriptor-walk-controls-PREPARED-NOTRUN/test_default_cgroup_descriptor_walk_NOTRUN.py",
+    "sha256": "e5744b96096a749ad1b0287743cf95fcf98a6848c5b8d82f9434a1fba6fbe09f"
+  },
+  "controls_sha256": "e5744b96096a749ad1b0287743cf95fcf98a6848c5b8d82f9434a1fba6fbe09f",
+  "decision": "GO_CURRENT8D49_DEFAULT_DESCRIPTOR35_CONCRETE_PURE_PREEXECUTION_ONLY",
+  "documentation_improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md; reuse exact accepted8366c367bbb81a857cfcc8d55863d8a193d0bc42a705ee0e3e2f751c6c74efa3 default-backend/FDgeneration delta andd6c/8c28 scope lessons; no cosmetic duplicate.",
+    "Durable learning captured": "Captured default walk versus injected bundle, real fake-tree syscall/FD-generation proof and exact expanded pytest census are distinct from physical cgroup/native qualification. Executable-selected config address must match actual frozen file.",
+    "Evidence": "Exact56packet/50consumed refs; literal CONFIG closure; independently reconstructed35IDs from frozen decorators and installed pytest source; exact admission/census/guard code read only.",
+    "Remaining uncertainty": "Actual35 result unexecuted; real cgroup/kernel latency/memory thresholds/native/adoption/reaping/private/release unknown/HOLD.",
+    "Stale or ambiguous guidance removed": "19 functions/35 case expansions distinguished from unittest method count and actual executed results. Code-selected path closure checked independently of owner labels/static proof."
+  },
+  "expected_cases_binding": {
+    "bytes": 4503,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-defaultbackend35-concrete-PREEXEC-NOTRUN/expected-defaultbackend35-source-derived-cases-NOTRUN.json",
+    "sha256": "c9362f6972c03c497dc090867880125253d1f7d5bcbedb646a36aeb98e560470"
+  },
+  "installed_pytest_ID_protocol_source_bindings": [
+    {
+      "bytes": 10662,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/.venv/lib/python3.12/site-packages/_pytest/compat.py",
+      "sha256": "2f941a4e516816bced282a7b9e45c076729d5552a6443369184d5219ae8dcc8b"
+    },
+    {
+      "bytes": 66627,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/.venv/lib/python3.12/site-packages/_pytest/python.py",
+      "sha256": "ebf31a8738065ad418c354ceeed99562926055587c664501e9f8d194e4078202"
+    }
+  ],
+  "launcher_binding": {
+    "bytes": 12288,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-defaultbackend35-concrete-PREEXEC-NOTRUN/run_root_defaultbackend35_pure_once_NOTRUN.py",
+    "sha256": "f49f82bbf308d7d9a00ec5cf4de67af2e9f8c52a63a405954c93cc21462c9509"
+  },
+  "launcher_sha256": "f49f82bbf308d7d9a00ec5cf4de67af2e9f8c52a63a405954c93cc21462c9509",
+  "limits": [
+    "35 cases are parameterized pytest expansions from19 test functions; original28 distinct unittest methods and17 pure state cases retain separate history.",
+    "Default backend controls use real syscalls only against owned fake regular-file proc/mount/group trees; they do not qualify real kernel cgroup identity, latency, syscall cancellation, memory headroom/RSS or signal enforcement.",
+    "Proposed memory observer/thresholds/native wiring/profile adoption remain NONE/HOLD; original V9/managed-mode failures remain unchanged, and original3FAIL does not permit automatic5/7276 sequence advancement.",
+    "Fresh absolute logging/basetemp isolation preserves prior source outputs; no tests/imports, protected-data guard replay or filesystem mutation by this review."
+  ],
+  "proposal_binding": {
+    "bytes": 21758,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-defaultbackend35-concrete-PREEXEC-NOTRUN/OWNERFINAL-defaultbackend35-concrete-managed-pure-PREEXEC-NOTRUN.json",
+    "sha256": "4514bedc74aad1c01ce891338c2b991ddc420331addce205e05f34102e3340e3"
+  },
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_count": 1440,
+  "source_review_binding": {
+    "bytes": 10081,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-default-backend35-independent-SOURCE-review/OWNERFINAL-independent-current8d49-default-descriptor19functions35cases-SOURCE-prepared-GO.json",
+    "sha256": "d3986dbc2335d3655fc204e4702c0dd7a715793dc91072f928cc2752e076506f"
+  },
+  "static_verified": {
+    "ROOT_release_and_unique_owned_output_root_absent": true,
+    "actual_executable_CONFIG_path_equal_announced_existing_exact24139_SHA727141_0400": true,
+    "actual_launcher_selected_path_resolves_exact_declared_regular0400": true,
+    "admission": "Exact regular nonsymlink0400 config/launcher, exact ROOT600 UIDGID1000 bodySHA, strict allowed keys/type equality/source/tree/self/config/source owner/source review/independent preexec row before guard and finally; managedRCC700 sizeSHA UIDGID admitted without executing RCC.",
+    "all_consumed_config_bindings_exact": 50,
+    "capture_and_actual_census": "Exclusive0700 output/phase dirs with0600 stdout/stderr/file+parent fsync before return assertions. Real ownRuntime -n0 --noconftest/ALL/private absolute basetemp/logger/JUnit. Caller requires process0+JUnit35unique exactname/class with0F/E/S+real stdout35PASSED named nodes resolving to exact frozen control path; no method35 or fabricated XML claim.",
+    "expected19_functions35expandednames_independently_derived_AST_and_installedpytest_id_escaping_as_data": true,
+    "managed_environment": "Exact18 activation fields +PATH2/own cached parent; reject optimize/pytest/native/operator overrides; old readonly V9 current1440/native1192/prepared30/own5/originals before+alwayspost.",
+    "packet_local_bindings_exact": 6,
+    "packet_original_bindings_exact": 50,
+    "source_reader24e386_controls_e574_policy_d2b3_old28_17_FiniteSampler_selector_authorizer_unchanged": true
+  },
+  "status": "INDEPENDENT_DEFAULTBACKEND35_CONCRETE_PREEXECUTION_GO",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none"
+}

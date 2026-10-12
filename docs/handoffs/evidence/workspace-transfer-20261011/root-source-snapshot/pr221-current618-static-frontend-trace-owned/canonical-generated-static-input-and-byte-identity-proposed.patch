@@ -1,0 +1,12 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -3250,0 +3251,9 @@
++When qualifying generated Runtime frontend content, decode `_static_contents.py`
++as data and bind each asset's bytes to its builder checkout. The encoder reads
++`dist/index.html` as bytes and writes their representation; setting the generated
++module's newline to LF does not normalize the embedded asset. Keep outer module
++CRLF differences, decoded asset CR differences and semantic equivalence separate.
++A carriage-return-removal comparison is diagnostic evidence, not a source or
++content waiver. If the original frontend input and effective checkout newline
++setting were not retained, keep checkout-versus-compiler causation unknown.
++

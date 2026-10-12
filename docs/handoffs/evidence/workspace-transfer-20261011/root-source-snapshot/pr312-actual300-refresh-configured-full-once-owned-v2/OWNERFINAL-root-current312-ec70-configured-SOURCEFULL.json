@@ -1,0 +1,124 @@
+{
+  "status": "CURRENT_EC70_CONFIGURED_SOURCEFULL_PASS_INDEPENDENT_ACTUAL_REVIEW_PENDING",
+  "head": "ec70a2928461941c129b1c05332dc441070e0184",
+  "tree": "47a1e4fceb22fd15eaee1ca380ad6c005abfdde6",
+  "actual_target": "e3c29cde8878307912e55ed09b6436c0f91d06d5",
+  "ordered_parents": [
+    "77ed3de24f33412dff30e4e3c18841c4c09933ac",
+    "e3c29cde8878307912e55ed09b6436c0f91d06d5"
+  ],
+  "source_scope": "current configured Runtime source suite only; no hosted Windows/current native/release admission",
+  "counts": {
+    "PASSED": 1335,
+    "SKIPPED": 13,
+    "FAILED": 0,
+    "ERROR": 0
+  },
+  "unique_nodes": 1348,
+  "actual_workers": [
+    "gw0",
+    "gw1"
+  ],
+  "pytest_seconds": 141.85,
+  "primary_seconds": 162.75955348199932,
+  "postguard_seconds": 3.9455493959976593,
+  "all_primary_and_postguard_returncodes": 0,
+  "preconditions1426_212": {
+    "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/before-full-source-activation-capacity.json",
+    "bytes": 526,
+    "sha256": "b76fdbb8d793197a9facd584fa7294f533196e11c4a1caa084aa550600614b78"
+  },
+  "postconditions": {
+    "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/post-full-source-and-references.json",
+    "bytes": 234,
+    "sha256": "00e2093fd33db212350adadabf650505c987f3773ad028ceae5f4ac24de4eb7f"
+  },
+  "proposal": {
+    "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-proposal-v2/OWNERFINAL-pr312-actual300-current-e3c-configured-full-NOEXECUTION-proposal-v2-final.json",
+    "bytes": 28071,
+    "sha256": "e890f8e2c91c75ab046bdc493cf191931082f100b82b508b6b6bd1be967ab6d0"
+  },
+  "independent_preexecution": {
+    "path": "/workspace/engineering/pr312-actual300-independent-FULL-preexecution-review-v2/OWNERFINAL-independent-current312-ec70-configured-SOURCEFULL-v2-preexecution-review.json",
+    "bytes": 15637,
+    "sha256": "2d298ee4aabec0654e3c2c0ae1f9a1574ebc0fdec58ef6d54d80fa60c079c68f"
+  },
+  "source_LIGHT_independent": {
+    "path": "/workspace/engineering/pr312-actual300-independent-LIGHT-review/OWNERFINAL-independent-pr312-current-ec70-SOURCE-LIGHT-review.json",
+    "bytes": 5446,
+    "sha256": "2a5f94a163f43bdc6e8fe968d44274d60469bb3224f33e02fd09cf3b30e11692"
+  },
+  "remaining_HOLD": [
+    "current full independent actual review",
+    "normal push to existing312 branch",
+    "fresh complete hosted CI and original Windows byte/integration proof",
+    "RCC/newbinary/native/private/Runtime1.0.3 release gates"
+  ],
+  "bindings": [
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/before-full-source-activation-capacity.json",
+      "bytes": 526,
+      "sha256": "b76fdbb8d793197a9facd584fa7294f533196e11c4a1caa084aa550600614b78"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/original-configured-full.private.log",
+      "bytes": 346188,
+      "sha256": "2e2da108608f75625f88a7328ed7be1cfa166b85f76203697f48dbfab6588762"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/original-postguard.private.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/original-root900.stderr.private.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/original-root900.stdout.private.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/post-full-source-and-references.json",
+      "bytes": 234,
+      "sha256": "00e2093fd33db212350adadabf650505c987f3773ad028ceae5f4ac24de4eb7f"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/postguard-terminal-separate.json",
+      "bytes": 341,
+      "sha256": "18cba2f4b471bf72e377f8b0247016ed3645c50eb9f4de6e4ad2c69885f649b8"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/primary-terminal-before-postguards.json",
+      "bytes": 352,
+      "sha256": "1e0b56ea46fff11f309feb3ec9ec0d355567a3a54e077a850d012c0fdebd74fd"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/root-exact-complete-configured-full-node-census.private.json",
+      "bytes": 259884,
+      "sha256": "6ba77d6a5111ea178cd3631c6243eeaaff7cfb2b9125c880e8e4b26ea8f834a9"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/root-one-distinct-source-full-authorization.json",
+      "bytes": 762,
+      "sha256": "468bde137cf3573c91c23688cff8a5e38603b3c1fb3a9989c94b719af30d4b63"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/root-one-outer900-command-adoption.json",
+      "bytes": 1080,
+      "sha256": "e3d145f79cf5835ff74ba7207a28e734315e1f9ef9eb5ea95b838a08fc1838d2"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/root900-original-process-terminal.json",
+      "bytes": 212,
+      "sha256": "b5cc8aa640ba1b596a2100a7221e0d966199b105cb56ebb56c99cca290dc9550"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual300-refresh-configured-full-once-owned-v2/terminal-primary-and-postguard-distinct.json",
+      "bytes": 914,
+      "sha256": "bf65d64945dc0c55142f36a7a6ae477edb58d64d09714c1426ba7c6f7f464e18"
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "schema": "independent-RCC-compatibility-SOURCEFULL-preexecution-review-v1",
+  "decision": "GO_CONDITIONAL_PREEXECUTION_ONLY_EXACT_ROOT_OUTER900_ADOPTION_DISTINCT_CAPACITY_AND_SERIALIZATION_RELEASE_REQUIRED",
+  "owner_final_proposal": {
+    "path": "/workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/OWNERFINAL-reviewed-inputs-current-b614-SOURCEFULL-preexecution-proposal-v2.json",
+    "bytes": 7660,
+    "sha256": "084faca6148648888627bfd7ffd0045d5b518b20ab6f77e5b8882adb404be32e"
+  },
+  "immutable_launcher": {
+    "bytes": 3874,
+    "path": "/workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/launch-one-root-reviewed-source-full-v2.py",
+    "sha256": "dd29d5a09d9477f48c4f30fdfc79201f2746d2bed20f23920191221a0a9ad83a"
+  },
+  "source": {
+    "clean": true,
+    "complete_typed_inputs": 1421,
+    "head": "b614864ba9da55c13662894b6ef3c8515d9fdb25",
+    "tree": "6fa4f5c1e9837a0d893868255575b355b3977fae"
+  },
+  "reviewed_root_execution_argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "900s",
+    "bash",
+    "--noprofile",
+    "--norc",
+    "-c",
+    "source /workspace/actions-cloud/activate.sh\nexec /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12 /workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/launch-one-root-reviewed-source-full-v2.py --execute-reviewed-proposal"
+  ],
+  "execution_cwd": "/workspace/engineering/pr308",
+  "exact_configured_full_argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "600s",
+    "/workspace/actions-cloud/bin/rcc",
+    "task",
+    "script",
+    "-r",
+    "developer/toolkit.yaml",
+    "--",
+    "python",
+    "/workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/run-one-configured-source-full.py"
+  ],
+  "exact_configured_package_argv": [
+    "poetry",
+    "run",
+    "invoke",
+    "test-not-integration"
+  ],
+  "configured_package_cwd": "/workspace/engineering/pr308/action_server",
+  "adoption_contract": {
+    "parent": "Root must wrap the exact original bash argv with reviewed timeout --signal=TERM --kill-after=10s 900s. Original084f bare outer metadata is preserved and does not itself establish a parent bound. No owner/source changes required; root explicitly accepted this separate parent envelope.",
+    "budgets": {
+      "parent_TERM_seconds": 900,
+      "parent_KILL_grace_seconds": 10,
+      "preflight_seconds": 120,
+      "full_TERM_seconds": 600,
+      "full_KILL_grace_seconds": 10,
+      "postconditions_seconds": 120,
+      "maximum_component_stage_seconds": 850,
+      "parent_margin_seconds": 50
+    },
+    "authority": "Exactly one source full only after distinct root release; this review is not execution authority. No candidate5/7276, provider/native/browser/consumer/install/hosted control invocation authorized.",
+    "capacity": "Root must verify fresh /workspace free>=1200000000 immediately before release; launcher independently rejects below floor before full. Current preparation/independent metadata are not release capacity evidence. Root batch20/21 recovery and clear heavy slot must precede execution.",
+    "identity": "Immediately before the root command, rehash exact084f proposal/dd29 launcher/all10 proposal bindings and sourceLIGHT336c/all71 references, exactb614/6fa clean1421 source, activation6478 and managed/own7e588 RCC modes,30 prepared inputs/five configs. Rehash nested installed xdist/toolkit/task source identities in the bound worker proof; launcher dynamically checks five own prefixes/origins before and after.",
+    "environment": "Source only exact activation6478; all18 exports plus primary PATHfirst verified before RCC. Root selected binary/provider/real opt-in compatibility flags must be absent. ROOT managed toolkit/RCC3 unchanged. Driver allows only normal declared RCC task/holotree PATH additions while checking cached sys.prefix and managedbin presence, then sets ACTIONS_RUNTIME_TEST_PYTHON to ownpr308 interpreter before unchanged invoke.",
+    "outputs": "Require all seven fresh named output paths absent and no other actor using the owned root. Exclusive xb raw log consumes the namespace; one-attempt marker written only after preflight. No retry or overwrite after any failure.",
+    "completion": "Overall root parent exit0 plus launcher terminalPASS, full_startedTrue, exact configured full return0 and postconditions return0 are required. Validate observed full counts/worker2 from original log after execution; do not predict or carry an older full count. Parent timeout/failure or absent postcondition/terminal remains HOLD even if a child log contains passing tests."
+  },
+  "verified_readonly": {
+    "all10_proposal_and71_sourceLIGHT_bindings_prepost_exact": true,
+    "source_complete1421_and_execbodies_clean": true,
+    "prepared30_inputs_five_config_hashes_exact": true,
+    "activation18_export_values_and_PATH19_exact_source_derived": true,
+    "managed_RCC3_700_and_ignored_own_RCC3_711_sha7e588_exact": true,
+    "worker2": "Actual installed own xdist reads PYTEST_XDIST_AUTO_NUM_WORKERS before CPU fallback; unchanged toolkit copies it and unchanged task uses pytest -n auto. Hash/source excerpts independently match three current files. Actualworker2 remains an execution result to check.",
+    "dynamic_prepost": "Frozen guard performs five concrete own Poetry interpreter/module-origin calls, all1421 source bodies/execmodes/all71refs/30configs and hash-pinned original1192/helper0444/browser/historicalV5 inventory inspector; no new binaries invoked by those data checks.",
+    "sourceLIGHT_preservation": "Original defaults/control c103/D5a and18 guide lines accepted ea79 remain exact; current ordinary parent0a6 retained.",
+    "all_execution_outputs_absent_at_review": true
+  },
+  "primary_and_secondary_failure_handling": {
+    "private_log": "umask077/exclusive binary raw original stdout+stderr; no payload printed to chat",
+    "full_return": "Full configured return remains primary; postcondition exception/return stored separately and cannot convert failure toPASS",
+    "preflight_exception": "Primary category and full encoded traceback retained separately; if preflight rejects, marker/full not started",
+    "postcondition_exception": "Encoded traceback avoids original binary-stream TypeError; final statusFAIL/HOLD retains primary fields",
+    "originals": "ef74 initial proposal/939e old launcher and pure private-log TypeError RED + encoded trace GREEN preserved; named084f/dd29 changed only proposal filename and two logging sites. No actual full or preflight was executed during preparation/review."
+  },
+  "reviewer_construction_history": "Initial independent literal-only shell parser handled ${NAME} but omitted $NAME expansion and failed. Original read-only reviewer script retained; namedv2 adds the equivalent literal expansion and verifies all18 values without sourcing activation. No owner/source/gate bytes changed and no full preflight ran.",
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md in immutableb614; exact accepted18-line source patch reused",
+    "Exact_delta": {
+      "path": "/workspace/engineering/pr308-rcc-compatibility-source/exact-canonical-RCC-compatibility-and-measured-worker-evidence.patch",
+      "bytes": 1920,
+      "sha256": "ece9cb0e885e5e1fad61fe718e897d6988d86c4de15f5520fbebbd31d1ed9d2d"
+    },
+    "additions": 18,
+    "removals": 0,
+    "Durable_learning": "Default managed pins, exact isolated provenance/descriptor/cache identity and functional qualification remain separate; typed lease/cleanup evidence retains null UNKNOWN. The root adoption additionally separates child task timeout from parent/pre/post envelope without relabeling original metadata.",
+    "Evidence": "Accepted SOURCE_LIGHTea79/sourceb614, frozen084f/dd29 code inspection, actual activation/worker/task source hashes, unchanged ef74/TypeError correction and exact root-agreed900 adoption.",
+    "Stale_or_ambiguous_guidance_removed": "No source/guide child or cosmetic diary; original bare outer metadata explicitly remains a limitation until reviewed root bound is adopted.",
+    "Remaining_uncertainty": "No source full or new binary functional qualification executed; modified5 clean-source equivalence, typed worker release/reaping, full133/134/provider/private/native/platform/OAuth/release remain HOLD."
+  },
+  "Upstream_disposition": "none",
+  "evidence": [
+    {
+      "path": "/workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/OWNERFINAL-reviewed-inputs-current-b614-SOURCEFULL-preexecution-proposal-v2.json",
+      "bytes": 7660,
+      "sha256": "084faca6148648888627bfd7ffd0045d5b518b20ab6f77e5b8882adb404be32e"
+    },
+    {
+      "path": "/workspace/engineering/pr308-compatibility-SOURCEFULL-independent-preexecution-review/safe-independent-frozen-full-launcher-readback.json",
+      "bytes": 2917,
+      "sha256": "c6e7c37b34bfc01cac58aa08bb42e3c2ddc8fd82b257e31f9505cc96b818b9e1"
+    },
+    {
+      "path": "/workspace/engineering/pr308-compatibility-SOURCEFULL-independent-preexecution-review/review-full-launcher-readonly.py",
+      "bytes": 8088,
+      "sha256": "682bd72cb32f7709ae24e561f17d25a26000db1f24ec4f85bc1d2ca15683dfb0"
+    },
+    {
+      "path": "/workspace/engineering/pr308-compatibility-SOURCEFULL-independent-preexecution-review/review-full-launcher-readonly-v2.py",
+      "bytes": 8110,
+      "sha256": "c1b570a29765282e1059cc2ffedf0a2a91d3466ec6f2ba1555a546d5abdf224c"
+    },
+    {
+      "path": "/workspace/engineering/pr308-approved-compatibility-independent-source-light-review/OWNERFINAL-independent-current-a0d-approved-RCC-compatibility-SOURCE-LIGHT-review.json",
+      "bytes": 11528,
+      "sha256": "ea79c4b762d3cdcd5b9d54d2ab475b250596e55e78c6a3ead0574b1845f4ee92"
+    },
+    {
+      "path": "/workspace/engineering/pr308-rcc-compatibility-source/exact-canonical-RCC-compatibility-and-measured-worker-evidence.patch",
+      "bytes": 1920,
+      "sha256": "ece9cb0e885e5e1fad61fe718e897d6988d86c4de15f5520fbebbd31d1ed9d2d"
+    }
+  ],
+  "current_readonly_workspace_free_bytes": 1287483392,
+  "current_execution_status": "NOT_RUN; distinct root capacity/serialization release absent"
+}

@@ -1,0 +1,73 @@
+{
+  "actual_result": "FAIL_ONE_CONSUMED_ATTEMPT_NO_RELABEL",
+  "decision": "HOLD_ORIGINAL_CURRENTC97E_TOKEN_LIGHT_ACTUALFAIL_GATEWAY_EXIT_PROTOCOL_MISMATCH",
+  "diagnosis": "The deliberate RED pytest produced both intended assertion failures and the original checked-child traceback reports exit1. The RCC task-script process returned10; the current launcher expected outer1 and raised before its JUnit admission. This is an observed current transport-status mismatch, not an OAuth/network/source test failure or confirmed general RCC exit-code mapping.",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md proposed task-gateway versus checked-child status distinction; existing emitter/owner-once/absolute-ALL isolation lessons retained",
+    "Durable_learning_captured": "Observed gateway return10 differs from intended inner pytest1; retain semantic assertions and checked-child trace rather than a universal exit-code assumption",
+    "Evidence": "Original2FAIL/0E/S XML, original exit1 CalledProcessError toolkit trace, outer phase10/expected1 terminal, toolkit run(check=True), before/alwayspost PASS",
+    "Exact_delta": {
+      "bytes": 394,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-currentc97e-original-TOKEN-LIGHT-ACTUALFAIL-independent-diagnosis/proposed-canonical-gateway-versus-child-status-lesson.txt",
+      "sha256": "7e9713048af1c6736dadd6f45f71a99281199bc0a233e477dd26e8c5190498c2"
+    },
+    "Remaining_uncertainty": "General RCC internal mapping unverified; all later gates and OAuth visibility/content authority still pending",
+    "Stale_or_ambiguous_guidance_removed": "The private harness outer1 assumption is contradicted for this exact task-gateway boundary; original failed attempt remains FAIL"
+  },
+  "independent_proof": {
+    "bytes": 7291,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-currentc97e-original-TOKEN-LIGHT-ACTUALFAIL-independent-diagnosis/private-independent-original-token-light-boundary-failure-proof.json",
+    "sha256": "503de6a1c7d490d33ca5890b223fa3041fe9ef2430640cb8dfaa1bf8b5e8694c"
+  },
+  "minimum_private_successor_proposal": {
+    "product_source_change": "NONE",
+    "scope": "Keep same c97 source/2314 baseline; only deliberate RCC RED outer expected1\u219210, retain exact2 names/failures/no error/skip/canary assertion admission and additionally require exact original-style toolkit CalledProcessError exit1 trace. Fresh once2 namespace/release/config/self bindings; no generic exit10 admission, no changed gateway/direct Python path/budgets/other phases."
+  },
+  "no_current_GREEN_Runtime_static_gen_Invoke_or_FULL_claim": true,
+  "phase_census": [
+    {
+      "elapsed_seconds": 4.531624328010366,
+      "expected_returncode": 0,
+      "phase": "doctor",
+      "returncode": 0
+    },
+    {
+      "elapsed_seconds": 10.805034254008206,
+      "expected_returncode": 0,
+      "phase": "own-five-origins",
+      "returncode": 0
+    },
+    {
+      "elapsed_seconds": 38.95667851599865,
+      "expected_returncode": 0,
+      "phase": "toolkit",
+      "returncode": 0
+    },
+    {
+      "elapsed_seconds": 4.729017093006405,
+      "expected_returncode": 1,
+      "phase": "token-RED-parent2314",
+      "returncode": 10
+    }
+  ],
+  "root_original_outer": {
+    "bytes": 864,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-pr307-currentc97e-reviewed-token-light-original-outer/OWNERFINAL-root-one-original-reviewed-currentc97e-token-light-outer.json",
+    "sha256": "09d76b7460b784b094b3c868fb71520951a7592411d88e4a36de7e24a5b4313a"
+  },
+  "schema": 1,
+  "source": "c97edfd10edb5b1c63f8a6371bfd2905996a2da2",
+  "tree": "f8d3477451fa601643ef6c06f6b1e616e2407643",
+  "unreached_phases": [
+    "token-release-line-GREEN",
+    "guard-focus",
+    "configured-static",
+    "generated-eight-and-Github30",
+    "controlled-invoke",
+    "controlled-invoke-command"
+  ],
+  "upstream_disposition": "none; no confirmed upstream defect or new external coordination"
+}

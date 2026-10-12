@@ -1,0 +1,47 @@
+{
+  "additional_bytes": 110855,
+  "additional_unique_files": 13,
+  "canonical_delta": "Existing sourceclosure guidance reused; no additional canonical prose",
+  "constructor": {
+    "bytes": 11765,
+    "mode": "0o600",
+    "path": "/workspace/engineering/private-handoff-current1935-source-closure-PREPARATION/prepare_source_closure_manifest.py",
+    "sha256": "f43fa72ff4ffa2df59e663ad4114a4dd56d16ac30fedef6ccda51fe252a890cb"
+  },
+  "historical48314_fixture": "Exact existing Git blob/ancestry proved; no redundant copy; original mode0444 required for later reviewed reconstruction",
+  "manifest": {
+    "bytes": 22258,
+    "mode": "0o400",
+    "path": "/workspace/engineering/private-handoff-current1935-source-closure-PREPARATION/proposed-unique-safe-source-closure-manifest.json",
+    "sha256": "80c8215bc256c5cc36509beaba95aef6e9629718d9cf5c620e084ba3a5b728ec"
+  },
+  "nativefirstnewer": "NONE",
+  "original1935_immutable": [
+    {
+      "bytes": 5606,
+      "mode": "0o400",
+      "path": "/workspace/engineering/private-handoff-current1935-successor-PREPARATION/OWNERFINAL-private-current1935-additive-handoff-PROPOSAL.json",
+      "sha256": "d5fe68a6346bc0be49b429886be0274906ea4091b43046116180d9cfb6f65de8"
+    },
+    {
+      "bytes": 22481,
+      "mode": "0o400",
+      "path": "/workspace/engineering/private-handoff-current1935-successor-PREPARATION/proposed-additive-safe-reference-manifest.json",
+      "sha256": "4bd2e8ea96b0062b21c2c3b23571d59e067b11ebd6a5eb65a488de114c9524e9"
+    },
+    {
+      "bytes": 3837,
+      "mode": "0o400",
+      "path": "/workspace/engineering/private-handoff-current1935-successor-PREPARATION/proposed-1935Z-engineering-handoff-successor.md",
+      "sha256": "4edb3381a10a99e05afed665261f9571dcc7613bfa056983008835d506ef2cce"
+    }
+  ],
+  "reload": "Exact standalone nine-control source plus compact append-only patch; testsNOT_RUN; current adapter unchanged",
+  "root_adoption_required": true,
+  "schema": "OWNERFINAL_PRIVATE_SOURCE_CLOSURE_PROPOSAL",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_runtime_closure": "Eight additional modules plus existing five1935 constructor/entry/guard modules; historical snapshot and external immutable helper privately required",
+  "status": "FROZEN_SOURCE_ONLY_PREPARATION_NO_APPLICATION_OR_EXECUTION",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none"
+}

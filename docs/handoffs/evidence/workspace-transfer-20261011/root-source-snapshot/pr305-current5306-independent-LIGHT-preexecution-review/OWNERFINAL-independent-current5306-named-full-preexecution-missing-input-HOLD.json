@@ -1,0 +1,446 @@
+{
+  "schema": "actions-independent-current3055306-preexecution-input-admission-HOLD/v1",
+  "decision": "HOLD_CURRENT5306_FULL_PREEXECUTION_MISSING_BOUND_SOURCE_INVENTORY_PATH",
+  "source": {
+    "head": "5306eeb26595da4ce571b99812eb50f047cfc903",
+    "tree": "8418e9ffeeaaf2446771e34b5b4602bab3d357a5",
+    "base": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+    "unchanged_clean": true
+  },
+  "accepted_source_LIGHT": {
+    "path": "/workspace/engineering/pr305-current5306-independent-LIGHT-preexecution-review/OWNERFINAL-independent-current5306-SOURCE-LIGHT-review.json",
+    "bytes": 16663,
+    "sha256": "c6ba4df0f15ec59c81d7d643da71457db513fd274064df41ee1ded2f92fa2e96",
+    "mode": "0o400"
+  },
+  "original_executable_owner": {
+    "path": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution/OWNERFINAL-current5306-managed-configured-SOURCEFULL-preexecution-proposal.json",
+    "bytes": 8597,
+    "sha256": "fbdaba2989e187ad11547f56ff0107092a479d4592aaa48b9170cc7a2339e553",
+    "mode": "0o600"
+  },
+  "named_metadata_FULL": {
+    "path": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution/OWNERFINAL-current5306-managed-configured-SOURCEFULL-preexecution-subject-metadata-v2.json",
+    "bytes": 11869,
+    "sha256": "0993125d3ea8c732a7f851e5d3c20df5f71aa1e318bc887c449c1bfd1f9ee623",
+    "mode": "0o600"
+  },
+  "named_metadata_LIGHT": {
+    "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/OWNERFINAL-current5306-ordinary-a54-source-LIGHT-subject-metadata-v2.json",
+    "bytes": 18366,
+    "sha256": "896ffb6299cf9e7fca9adacc187115d43057be559226b8cfcd4b99411f9324ee",
+    "mode": "0o600"
+  },
+  "named_metadata_disposition": {
+    "path": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution/OWNERFINAL-current5306-metadata-only-subject-correction-disposition-v2.json",
+    "bytes": 4163,
+    "sha256": "ef9e901932051bf0daf0f993f0462ceeb0c69a67f7a12aeaa9f60e68b86d8539",
+    "mode": "0o600"
+  },
+  "named_metadata_subject_correction": "CORRECT_CURRENT5306_a54_PR305584_LABELS_ONLY_EXACT_NO_EXECUTABLE_CHANGE",
+  "blocking_verified_finding": {
+    "configuration": {
+      "path": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution/frozen-current-source-full-inputs.json",
+      "bytes": 28831,
+      "sha256": "9d6667cdbb2e29baac0f92bc3bf4c43934633100ce1a85ba6d28efff682b1d48",
+      "mode": "0o600"
+    },
+    "configured_locator": "/workspace/engineering/pr305-current-a54-source-LIGHT/private-current-1299-complete-source-body-mode-inventory.json",
+    "configured_locator_exists": false,
+    "configured_locator_symlink": false,
+    "actual_accepted_locator": {
+      "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/private-current-5306-complete-source-body-mode-inventory.json",
+      "bytes": 379333,
+      "sha256": "b097508ed9b022a3b5cb0c93f71bf587c3ac7a00c843bf6612c2e35f02f16205",
+      "mode": "0o600"
+    },
+    "actual_accepted_locator_bound_in_source_LIGHT": true,
+    "actual_inventory_entries": 1427,
+    "source_guard": {
+      "path": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution/current_source_prepost_guard.py",
+      "bytes": 3749,
+      "sha256": "34583358c55324e50d03f27d1f85c5ea0aaacb2cf9858021b7505d7044346435",
+      "mode": "0o600"
+    },
+    "exact_dataflow": "Guard reads cfg[source_inventory] before configuredfull. Nonexistent locator causes preguard failure; launcher stops before full_started and consumes unique output attempt if run. Static/data readback only, no guard/test execution.",
+    "not_a_source_test_or_native_failure": true,
+    "no_repair_by_label_only_successor": true
+  },
+  "technical_current_checks_completed": {
+    "all14_original_executable_refs_hash_size_mode_exact": [
+      {
+        "path": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution/frozen-current-source-full-inputs.json",
+        "bytes": 28831,
+        "sha256": "9d6667cdbb2e29baac0f92bc3bf4c43934633100ce1a85ba6d28efff682b1d48",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/OWNERFINAL-current5306-ordinary-a54-source-LIGHT-full-and-actual-HOLD.json",
+        "bytes": 17431,
+        "sha256": "2c277550c5475cb6c9698dfbe092dd373a5398b553769f68a230451c96c1ca14",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution/freeze_preexecution_proposal.py",
+        "bytes": 9714,
+        "sha256": "e1ce3e0648ec364f2ed16f50f2baaae5175d54cc4529450b47c65eafecc8c163",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution/current_source_full_body.py",
+        "bytes": 1143,
+        "sha256": "a254b5cf4348e8f6e83c9c3f97e57f9feeb1e8168408d4886f79f017c7b993e9",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution/current_source_prepost_guard.py",
+        "bytes": 3749,
+        "sha256": "34583358c55324e50d03f27d1f85c5ea0aaacb2cf9858021b7505d7044346435",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution/launch_current_source_full_once.py",
+        "bytes": 3651,
+        "sha256": "d148d168d81836330314e220323c950d9576a2e17fb8e65eb8e60af040c41000",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305/actions/.venv/pyvenv.cfg",
+        "bytes": 752,
+        "sha256": "2a3891386c700dece6c21b8ba80ea8d7fc514d8eade9a10374cab43dc0bd693f",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305/actions-http-helper/.venv/pyvenv.cfg",
+        "bytes": 771,
+        "sha256": "743f2feb6a1fac576fc6313ebf0bbdf5484378bdf21433fe2cc134a8775d563f",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305/devutils/.venv/pyvenv.cfg",
+        "bytes": 763,
+        "sha256": "868a9122466b928c47f90be30f1a01e28f73d5b5c586b95d57e177c97aa72a6c",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305/work-items/.venv/pyvenv.cfg",
+        "bytes": 761,
+        "sha256": "7894fbdd57bbb2c2cfca8a74fab61f425333b36c66b95ebabc200aeb7c678fb6",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305/action_server/.venv/pyvenv.cfg",
+        "bytes": 761,
+        "sha256": "eb5e96f842624fb2dd3c1a37c755f65dbcfc4eadb4697693b5e1213a91696a8a",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/actions-cloud/bin/rcc",
+        "bytes": 22282402,
+        "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+        "mode": "0o700"
+      },
+      {
+        "path": "/workspace/engineering/pr305/action_server/src/actions/server/bin/rcc-18.19.3",
+        "bytes": 22282402,
+        "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+        "mode": "0o711"
+      },
+      {
+        "path": "/workspace/actions-cloud/activate.sh",
+        "bytes": 987,
+        "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a",
+        "mode": "0o600"
+      }
+    ],
+    "all38_LIGHT_refs_hash_size_mode_exact": [
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/Doctor-current-a54-original.private.log",
+        "bytes": 13485,
+        "sha256": "7b7f7fae7d633d93b7906145911e082b7842c55a2ea64259c32e23a9a5571e3e",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/LIGHT-current-a54-original.private.log",
+        "bytes": 10371,
+        "sha256": "4d0f71843a41e0ef48f9b72690882763e1355079f9a3088018a0a59a13234fdf",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/committed-current-5306-typed-ordinary-union-source-proof.json",
+        "bytes": 2780,
+        "sha256": "5b875e942fdc76fbe84c3fe347b16ec238e9c6bb80f08d8d07da3010c90ba422",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/current-checkout-source-junit.xml",
+        "bytes": 2006,
+        "sha256": "7d76e3f42e2472ab7c6b44d5e511eafaaa9292a29d185dcf0317a235bb1ec826",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/current-generator8-allYAML30-roundtrip.json",
+        "bytes": 4073,
+        "sha256": "d664217c0f1bc726f16fec78dfa9e74acb1efb3994a345a907c03b8dd6137603",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/current-scoped-source-junit.xml",
+        "bytes": 52893,
+        "sha256": "770f85532276232d5a529860fed761e772743d9be696a1f4b7ff6491646de0e2",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/current-source-LIGHT-terminal.json",
+        "bytes": 522,
+        "sha256": "d5d78498224b3f83c409d609af954c198a7997b6fbdf6310fa8216be63dcc3e5",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/exact-imported-a54-canonical-guide-delta.patch",
+        "bytes": 3547,
+        "sha256": "c6126de39cc685aba4aa7b1de3b9244d06922077576daebb91599af2d001454f",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/freeze_current_source_LIGHT.py",
+        "bytes": 7185,
+        "sha256": "95e21cb6cef4dd040ed187f820c3432f1a7bfbd444325a5a9bf16541a37abe53",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/managed-metadata-current-a54-original.private.log",
+        "bytes": 69,
+        "sha256": "9e7476b86b94c13ab1e9762548883c60e950ede7c9c4a74e9281613e05d88f48",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/own-current30-input-and-five-concrete-origins-Bootstrap-reuse.json",
+        "bytes": 4885,
+        "sha256": "457289d536c3db04d4b614e4b3ae7188afc63475abeee7e1ec64b5f2387643b0",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/own-origin-action_server.json",
+        "bytes": 283,
+        "sha256": "96eb60a559a313d478c17f52e8cc42e71588b1ae33089ba1ad3c77650a967b26",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/own-origin-actions-http-helper.json",
+        "bytes": 264,
+        "sha256": "0866a5c2bc030a15822b06983f3fb43b1400b20f4add57537aaec59da1b8c4d1",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/own-origin-actions.json",
+        "bytes": 218,
+        "sha256": "6b00bd4e70a69f4484a9d44c3447039354a9906fef5be41feff2fb284a73a549",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/own-origin-devutils.json",
+        "bytes": 240,
+        "sha256": "f9c9bb61ea486fd667ff37367ef8656aa374af2f4e3484569f4d4cfab28125cd",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/own-origin-work-items.json",
+        "bytes": 249,
+        "sha256": "24808585e8fef1faae9b7130b4656ee211c50597fe0e0e3d2adbb8b058f37296",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/post-LIGHT-complete-source-generator-and-original584-preservation.json",
+        "bytes": 803,
+        "sha256": "88cd9725cad657d5d85967c5bd06aeca33104c9f4f2eb6de19b8a3b9063cde8b",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/private-current-5306-complete-source-body-mode-inventory.json",
+        "bytes": 379333,
+        "sha256": "b097508ed9b022a3b5cb0c93f71bf587c3ac7a00c843bf6612c2e35f02f16205",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/prove_current_typed_union.py",
+        "bytes": 5380,
+        "sha256": "8cfa5f46adccfb975656b36f638778ca4f10826799e864c4f148e7be66411f62",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/raw18-frozen50-Node-frontend-retained-postLIGHT.json",
+        "bytes": 12822,
+        "sha256": "281b25a2e052e88f8a2a90d37b2a3ee2619762d4bbb7d1df79b3ae88b8fafc85",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/readonly-generator-normalization-v2-terminal.json",
+        "bytes": 18,
+        "sha256": "df4d721d233a2334088d2d2e0110346ae9e509ff46bf0b379fbcfa85c715af4d",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/readonly-generator-normalization-v2.private.log",
+        "bytes": 45,
+        "sha256": "04216555b5f46591ec7a4aac960a54a303cd184e6d6dc9c6ed87340969fa3644",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/readonly-retention-original.private.log",
+        "bytes": 752,
+        "sha256": "2eb97cb7c323c1c685e20f1dd19664b108fb0e3db613b03ab362541b0fbc6683",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/readonly-retention-terminal.json",
+        "bytes": 263,
+        "sha256": "3493f187484ff26536c31343af17ac25a5b33ea986c7b9f2f3d006dad20d5275",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/retained-native-helper-browser-and-V5-proof-postLIGHT.json",
+        "bytes": 4751,
+        "sha256": "ac36efa52d343f893d63df90c8d72e9afe79a18317facb94deb3bafbdcfb586f",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/run_current_source_LIGHT.py",
+        "bytes": 4723,
+        "sha256": "3157f455ac5faf70d11a4ae00cd2e600962f56b33e6f6d6d0fb8f9552327b2f8",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/typed-current-production-and-five-selector-inventory.json",
+        "bytes": 98363,
+        "sha256": "4b85a24694b1ae2aa031ab7de53daf1a2a466634fa50bfca28341c7cbc1d4c4e",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/verified-both-parent-canonical-guide-block-preservation.json",
+        "bytes": 3503,
+        "sha256": "9b2882183e6bf0c0c88c99ca5a0c225a6540e0ba9d068d1809d8e59a9f3d4855",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/verify-retained-actual-inputs-postLIGHT.py",
+        "bytes": 3630,
+        "sha256": "344871d96ae9f3ce9e78ead0297ca8a3024aaadfce4d8aec8a6971989b6f8c38",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/verify-retained-raw-and-driver-postLIGHT.py",
+        "bytes": 2534,
+        "sha256": "7f8fa405ab05986f6fcd4ae1764557c15432063fb7f146a540bbda5aed1530c6",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/verify_incoming_generator_and_original_source.py",
+        "bytes": 3425,
+        "sha256": "5d728717a8955c53b695547e543a0c0f31ff35d5ad912e47565c708ffec2d341",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/verify_incoming_generator_and_original_source_v2.py",
+        "bytes": 3701,
+        "sha256": "dd7f639ed7d57ff5c6ec418920900eaa152fe5620cd5bfa64867b5fe6e7c100d",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-a54-source-LIGHT/verify_parent_guides.py",
+        "bytes": 2384,
+        "sha256": "b8bdd406b2bc16531c81e001ca577288c296e63b195acf61d61583f40b4a92b5",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/OWNERFINAL-current584a-ordinary-e3-source-LIGHT-full-and-actual-HOLD.json",
+        "bytes": 14931,
+        "sha256": "5835c7c1b57493d784ea39cf0c037253460b04b3b3c9c4fa48fb1db1a887c387",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr305-actual309-refresh/own-Bootstrap-reuse-inputs-and-origins.json",
+        "bytes": 6428,
+        "sha256": "75db58a41f5b65cb2bf6a801ec43ddf961e7913c2a951bf875abadf1066be1f3",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/FROZEN-control3-current-b614-actual-config-v2.json",
+        "bytes": 634107,
+        "sha256": "8c5da5be25ebfcf86f286ee9f93ddad328c68b3243b0935ec5937c93376bb948",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/actions-cloud/activate.sh",
+        "bytes": 987,
+        "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/verify_dakota_rcc_acceptance.py",
+        "bytes": 74274,
+        "sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659",
+        "mode": "0o444"
+      }
+    ],
+    "all83_retained_payload_refs_hash_size_mode_exact": true,
+    "named_metadata_diff_only_status_historical_fields_plusclarification": true,
+    "original_source_and_scripts_untouched": true,
+    "future_full_output_dir_ABSENT": true
+  },
+  "required_successor": "Distinct owner-frozen executable preexecution packet with corrected current5306 inventory locator, new configuration/proposal bindings and correct labels. Preserve fbdaba/099312/config/scripts; do not create alias file named1299. Same source5306/tree8418 and configured bounds can be retained; independent review before ROOT release. No source or gate replay required.",
+  "remaining_HOLD": [
+    "SOURCEFULL NOT_RUN/no authorization consumed",
+    "Fresh>=1.2GiB plus ROOT exclusive serialized slot required; current capacity remains belowfloor",
+    "Actualnative/browser/provider/private/backend/full99/release/hosted-current-CI remain held; oldV5 not carried"
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "Exact_verified_locator_lesson_proposal": {
+      "path": "/workspace/engineering/pr305-current5306-independent-LIGHT-preexecution-review/canonical-executable-input-locator-admission-proposed.patch",
+      "bytes": 524,
+      "sha256": "cb8827ae8e5e2941b3ecb5e98d9d026d733eb232108a3075c4a21659ff994a56",
+      "mode": "0o600"
+    },
+    "Exact_proposed_text": "Resolve each executable input locator against its bound source receipt before\nrelease. A label-only metadata successor does not repair a missing or cross-branch\ninput path; freeze a new execution contract with corrected locators and preserve\nthe original packet without backfilling misleading filenames.\n",
+    "Existing_subject_label_lesson": {
+      "path": "/workspace/engineering/pr305-current5306-independent-LIGHT-preexecution-review/canonical-execution-packet-subject-label-consistency-proposed.patch",
+      "bytes": 496,
+      "sha256": "b60f87c246e47eacb033c129320f3eb017d789d6b606f98ff550f73805ea694f",
+      "mode": "0o600"
+    },
+    "Durable_learning_captured": "Admit input locators against the frozen owning source receipt, not just labels and hashes of the packet itself; distinguish metadata-only corrections from corrected execution contracts.",
+    "Evidence": "8597B/fbdaba and11869B/099312 configs both reference absent1299 path; accepted17431B/2c277 LIGHT binds existing5306 inventory1427; original beforeguard dataflow and unchanged14+38ref proof",
+    "Stale_or_ambiguous_guidance_removed": "Correct named metadata does not make original executable locator correct. Old PR282basename is not backfilled or relabeled as currentPR305 source.",
+    "Remaining_uncertainty": "No actualfull attempt or errorclass measured; staticmissing-input is blocking beforeexecution. SourceLIGHT GO unchanged."
+  },
+  "Upstream_disposition": "none",
+  "retained_private_inspector_failures": [
+    {
+      "script": {
+        "path": "/workspace/engineering/pr305-current5306-independent-LIGHT-preexecution-review/review-current5306-named-metadata-and-original-managed-contract-readonly.py",
+        "bytes": 14663,
+        "sha256": "8de316575008f8f7899b8d3d732069f7522eee9d5da658884daa7562089907af",
+        "mode": "0o600"
+      },
+      "fixed_reason": "SUMMARY_BOOLEAN_SYNTAX_ERROR_BEFORE_EXECUTION"
+    },
+    {
+      "script": {
+        "path": "/workspace/engineering/pr305-current5306-independent-LIGHT-preexecution-review/review-current5306-named-metadata-and-original-managed-contract-readonly-v2.py",
+        "bytes": 14988,
+        "sha256": "f9f74324efe96bf72957a08a5dfc5b44e72973003a45f1278955f8178b8c4ab7",
+        "mode": "0o600"
+      },
+      "fixed_reason": "ACTUAL_BOUND_EXECUTABLE_CONFIG_SOURCE_INVENTORY_MISSING_PATH",
+      "reported_as_blocking_finding": true
+    }
+  ],
+  "no_source_tests_product_import_guard_gateway_native_provider_download_install_branch_push_or_merge": true,
+  "review_script": {
+    "path": "/workspace/engineering/pr305-current5306-independent-LIGHT-preexecution-review/freeze-current5306-named-full-preexecution-missing-input-HOLD.py",
+    "bytes": 8220,
+    "sha256": "7447016af2a3c63e99c2c23da711f60fd95549018fbfaff8b7e4b3b9bbf7c332",
+    "mode": "0o600"
+  }
+}

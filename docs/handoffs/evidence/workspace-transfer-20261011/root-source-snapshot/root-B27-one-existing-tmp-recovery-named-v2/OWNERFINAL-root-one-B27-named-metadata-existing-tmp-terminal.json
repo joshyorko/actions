@@ -1,0 +1,21 @@
+{
+  "archive_attempts": 1,
+  "available_bytes": {
+    "/dev/shm": 3942715392,
+    "/tmp": 485412864,
+    "/workspace": 1305722880
+  },
+  "error_class": null,
+  "names": [
+    "5ed3ed80e6c9b441",
+    "650664b6f7439ed5",
+    "74b0070197a19db9"
+  ],
+  "native_newer_qualification": "NONE_UNCHANGED",
+  "original_failed_wrapper_retained": true,
+  "post_guard": 0,
+  "primary_returncode": 0,
+  "schema": 1,
+  "seconds": 46.09084561400232,
+  "status": "PRESERVATION_ONLY_PASS"
+}

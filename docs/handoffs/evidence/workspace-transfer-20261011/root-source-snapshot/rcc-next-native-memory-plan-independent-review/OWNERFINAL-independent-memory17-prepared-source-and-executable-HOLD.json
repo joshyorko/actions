@@ -1,0 +1,99 @@
+{
+  "decision": "HOLD_EXECUTABLE_CONTROL_PREEXECUTION_PENDING_EXACT_CONFIG_ARGV_LOGGER_AND_ROOT_RELEASE",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; accepted existing owner proposal 900B/8c28fc2596c6fdfc607dd35a17b3462ad217ba97670b61222393dc504861d896 reused",
+    "Durable_learning": "Filesystem capacity cannot measure shared-cgroup memory; observed counter deltas cannot identify a particular killed child; version sequence is profile-scoped",
+    "Evidence": "Exact bound post-only snapshot, original native failure, runner next_version and actual transport call inspected read-only",
+    "Remaining_uncertainty": "Original kill source; fresh headroom; cold solver envelope; all proposed controls and integration NOTRUN",
+    "Stale_guidance_removed": "No source guidance removed; proposed precision rejects disk-only=>memory-safe inference and universal predecessor-rule inference"
+  },
+  "execution_HOLD_reasons": [
+    "No immutable control config, exact command, interpreter/activation tuple, ABSENT private cwd/basetemp ALL/absolute logger/JUnit/stdio paths, finite parent/child envelope or typed root release schema is included. This is a source/design packet, not executable PREEXECUTION.",
+    "Prepared17 cases do not cover integrated authorized signal/foreign PID/current create-time/inspection failure/final join. Owner explicitly requires those before actual transport adoption.",
+    "No new finite sampler/cgroup filesystem reader/owned process integration has been implemented or executed; initial3.9GiB-style policy is proposed conservatism, not measured cold solver fit."
+  ],
+  "preservation": "Original V9 failure/source/transport/17case sources remain untouched; no source/native/import/test/download/cleanup operations",
+  "proposal_binding": {
+    "bytes": 7205,
+    "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/OWNERFINAL-next-native-finite-cgroup-memory-admission-and-retained-version-rule-proposal-NOTRUN.json",
+    "sha256": "277539befd07ebe3253a06d9fccb250f8a454b5d47c20390e247f39c2821dc55"
+  },
+  "schema": 1,
+  "scope": "Read-only prepared pure memory-state source/design review; no imports/tests/native execution",
+  "static_findings": {
+    "all_11_owned_binding_bytes_modes": "PASS",
+    "before_high_counts": "Do not attribute original child kill from post-only cumulative counters",
+    "finite_schema_and_counter_latching": "Source implements exact-int admission, fixed categories, reserve/identity/max/schema/counter-loss permanent latch",
+    "pure_cases_derived_from_AST": 17,
+    "retained_sequence": "Exact next_version requires preceding PASS2/skip0/error0 before versions5/7276; existing actual_transport calls it before execution. Separate diagnostic profile requires separate authorization."
+  },
+  "upstream_disposition": "none",
+  "verified_bindings": [
+    {
+      "bytes": 3330,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/proposed_cgroup_memory_state_v1_NOTRUN.py",
+      "sha256": "d2b3e6684898ab1b64f84ac7712a1f2f355d7ea5d680eb6ded0699cc090f5260"
+    },
+    {
+      "bytes": 2985,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/test_proposed_cgroup_memory_state_NOTRUN.py",
+      "sha256": "3b3a417379f608b6a5917c7720c6e846352f88d30fda1273c301a7c5ced1a4cb"
+    },
+    {
+      "bytes": 478,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-current8d49-V9-kill-cgroup-readonly-current-20261011.json",
+      "sha256": "180d5b5c8ee993b4a2480cc616913fcc1922c1e3d3df6f697140aea67ae3e618"
+    },
+    {
+      "bytes": 5944,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-control3-V9-original-publish-failure-diagnosis-owned/OWNERFINAL-original-current8d49-control3-V9-publication-failure-and-secondary-dependency-only.json",
+      "sha256": "feef7c4b07db2d3a778622dc1acf3eec00a8225c42b38aa00721926fb273410b"
+    },
+    {
+      "bytes": 6858,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-control3-V9-independent-actual-review/OWNERFINAL-independent-original-current8d49-control3-V9-native-FAIL-STOP-review.json",
+      "sha256": "cb88815f6d1816ff7f8b5302420d69bd7cacb0d052fe2ba3c957ddad5e596168"
+    },
+    {
+      "bytes": 38725,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-compatibility-next-wave-readonly/OWNERFINAL-RCC-current-a0d-existing-PR308-compatibility-source-and-qualification-proposal-v2.json",
+      "sha256": "89b5ae9f6f41f0649d575510922ec947161fcf63f737f40a4a118985fde4b0c5"
+    },
+    {
+      "bytes": 12959,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/runner_contracts_v3.py",
+      "sha256": "cbae3bb074d3995153ea5e6b694e7f9e61c047c6aa511b682959a63fedf7b726"
+    },
+    {
+      "bytes": 27889,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/actual_transport_v8.py",
+      "sha256": "33dda17140ef749e22f086cc91b92ed8c3230fddfde8a4a369769e2183f695a1"
+    },
+    {
+      "bytes": 4632,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/owned_monitor_v1.py",
+      "sha256": "834a7fe402e34b170f414df5dfe79762c0b49ed311a6222ba2f7bca5d87020a5"
+    },
+    {
+      "bytes": 5593,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-V9-next-version-code-PREPARED-NOTRUN/OWNERFINAL-current8d49-V9-released5-candidate7276-constructor-code-PREPARED-NOTRUN.json",
+      "sha256": "7f07054ac5aea81ea2f88a76b75ffee41c22ce05487909b131d77aaa225b53c9"
+    },
+    {
+      "bytes": 900,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/canonical-shared-cgroup-headroom-vs-filesystem-capacity-proposed.md",
+      "sha256": "8c28fc2596c6fdfc607dd35a17b3462ad217ba97670b61222393dc504861d896"
+    }
+  ]
+}

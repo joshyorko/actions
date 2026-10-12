@@ -1,0 +1,21 @@
+{
+  "FULL": "NOT_RUN",
+  "capture": "2026-10-11T21:43:42.710199+00:00",
+  "elapsed_seconds": 59.467877639006474,
+  "merge_release_native": "HOLD",
+  "outer_returncode": 1,
+  "release": {
+    "bytes": 651,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr307-currentc97e-concrete-TOKEN-LIGHT-PREEXECUTION/root-one-TOKEN-LIGHT-release.json",
+    "sha256": "46ee048809142cba9bcc25ff9e1485fbcda298c871d045ed2a7d07480e4fff6d"
+  },
+  "review": {
+    "bytes": 6826,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-currentc97e-independent-TOKEN-LIGHT-PREEXECUTION-review/OWNERFINAL-independent-currentc97e-concrete-TOKEN-LIGHT-PREEXECUTION-GO.json",
+    "sha256": "65844b92bbb6af07a2585e164811a265151d214abd48f81205dc536a41ba3f57"
+  },
+  "source": "c97edfd10edb5b1c63f8a6371bfd2905996a2da2",
+  "tree": "f8d3477451fa601643ef6c06f6b1e616e2407643"
+}

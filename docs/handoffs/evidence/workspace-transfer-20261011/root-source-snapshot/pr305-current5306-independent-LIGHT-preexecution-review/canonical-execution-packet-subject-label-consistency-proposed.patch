@@ -1,0 +1,10 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@
+ Hash receipts as exact file bytes and test Git ancestry with full source commit
+ IDs. A receipt SHA-256 is not a commit ID.
++
++Construct current-source, branch and historical-predecessor labels from the bound
++source checkpoint. Check status and history labels against executable pins; retain
++a contradictory predecessor packet and issue a named metadata-only successor
++without replaying accepted gates.

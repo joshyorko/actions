@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "status": "REVIEWER_ADDRESS_AST_HELPER_ASSUMPTION_FAIL_NO_GATE_EXECUTION",
+  "cause": "Initial reviewer helper assumed selected CONFIG AST was Path literal call; actual CONFIG is BASE/right-literal BinOp. Corrected readonly derivation confirms selected path equals frozen config; not a launcher defect or gate outcome.",
+  "binding": {
+    "path": "/workspace/engineering/rcc-defaultbackend35-typed-oracle-once2-PREEXEC-NOTRUN/run_root_defaultbackend35_typed_oracle_once2_NOTRUN.py",
+    "bytes": 12437,
+    "mode": "0o400",
+    "sha256": "960bf48f4ad97c6b7020704802cb6324f269485eac1fb17ce48e196eb996d2c6"
+  }
+}

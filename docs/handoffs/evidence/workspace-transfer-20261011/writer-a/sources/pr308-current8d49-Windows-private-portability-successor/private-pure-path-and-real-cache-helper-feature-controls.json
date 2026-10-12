@@ -1,0 +1,59 @@
+{
+  "fixture_removed_by_owned_TemporaryDirectory": true,
+  "method": "stdlib pure pathlib + actual corrected helper AST in one tiny owned /dev/shm fixture; no Pytest/product imports/native",
+  "originalWindowsLiteralRED": 2,
+  "original_47_control_functions": "UNCHANGED_NOT_RERUN",
+  "passed": 9,
+  "rows": [
+    {
+      "budget_and_argv_tail_unchanged": true,
+      "literal_original_equal": true,
+      "path_kind": "PurePosixPath",
+      "proposed_contract_equal": true,
+      "shape": "default"
+    },
+    {
+      "budget_and_argv_tail_unchanged": true,
+      "literal_original_equal": true,
+      "path_kind": "PurePosixPath",
+      "proposed_contract_equal": true,
+      "shape": "injected"
+    },
+    {
+      "budget_and_argv_tail_unchanged": true,
+      "literal_original_equal": false,
+      "path_kind": "PureWindowsPath",
+      "proposed_contract_equal": true,
+      "shape": "default"
+    },
+    {
+      "budget_and_argv_tail_unchanged": true,
+      "literal_original_equal": false,
+      "path_kind": "PureWindowsPath",
+      "proposed_contract_equal": true,
+      "shape": "injected"
+    },
+    {
+      "UID_GID_read_once": true,
+      "feature_baseline": "actual_helper_FS_PASS",
+      "native": "NOT_RUN"
+    },
+    {
+      "feature_poison": "missing_uid",
+      "guard_rejected_before_filesystem_effects": true
+    },
+    {
+      "feature_poison": "noncallable_uid",
+      "guard_rejected_before_filesystem_effects": true
+    },
+    {
+      "feature_poison": "missing_gid",
+      "guard_rejected_before_filesystem_effects": true
+    },
+    {
+      "feature_poison": "noncallable_gid",
+      "guard_rejected_before_filesystem_effects": true
+    }
+  ],
+  "skipped": 0
+}

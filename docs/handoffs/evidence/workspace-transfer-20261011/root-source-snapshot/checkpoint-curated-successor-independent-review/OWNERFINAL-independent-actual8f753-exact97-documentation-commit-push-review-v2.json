@@ -1,0 +1,106 @@
+{
+  "actual_commit": "8f753f1703e13236fbd3cd608afa203cb6205b35",
+  "actual_tree": "072f3124766cfb0c6d859a977b1613b686ac6da0",
+  "attribute_correction": {
+    "actual_commit_diff_check": "PASS0_NO_DIAGNOSTICS",
+    "bytes": 1106,
+    "independent_positive_negative_controls": "Preserved v2 copied-index proof: literal16contextrecords allowed; Markdown trailing/patchspace-before-tab/blankEOF remainchecked",
+    "path": "docs/program/evidence/wave11/current-engineering-successor-20261011/.gitattributes",
+    "scope": "Exactly nine hash-bound patch basenames -text whitespace=-blank-at-eol; no wildcards/root/global suppression",
+    "sha256": "74dfb6f3cfd55fa2a09ef252a9338952993910363108336cb29eb701e66e4225"
+  },
+  "bindings": [
+    {
+      "bytes": 1126,
+      "path": "/workspace/engineering/root-one-curated-e2-engineering-checkpoint-commit-push/named-exact-patch-context-successor/OWNERFINAL-root-named-exact97-normal-checkpoint-commit-push.json",
+      "sha256": "5ed83512a60c9a76e0b7c5c84721acea0aea2e844db80a13fac9ec7fa5c06741"
+    },
+    {
+      "bytes": 15908,
+      "path": "/workspace/engineering/checkpoint-curated-successor-independent-review/staged-patch-context-attribute-successor/OWNERFINAL-independent-exact-staged-patch-context-attribute-successor-proposal-v2.json",
+      "sha256": "29c4959035c2c0b6fefa570742b08abad0b12a3ed92f2ef66c5876e53752c657"
+    },
+    {
+      "bytes": 27258,
+      "path": "/workspace/engineering/root-one-curated-e2-engineering-checkpoint-commit-push/original-staged96-before-literal-patch-attribute-successor.json",
+      "sha256": "23ab2cbeb2eaf9fafd07ad3e2af6f5c4b3e0bbb219dcb2e509913b959e26a91e"
+    },
+    {
+      "bytes": 1366,
+      "path": "/workspace/engineering/root-one-curated-e2-engineering-checkpoint-commit-push/OWNERFINAL-root-one-normal-curated-engineering-checkpoint-commit-push.json",
+      "sha256": "870e9c51e87594d1ea585d8944300721fec4754eb1efd3968b30b6af1a09ecb0"
+    },
+    {
+      "bytes": 1106,
+      "path": "/workspace/engineering/checkpoint-curated-successor-independent-review/staged-patch-context-attribute-successor/proposed-local-current-e2-patch-context.gitattributes",
+      "sha256": "74dfb6f3cfd55fa2a09ef252a9338952993910363108336cb29eb701e66e4225"
+    },
+    {
+      "bytes": 243089,
+      "path": "/workspace/engineering/checkpoint-curated-successor-independent-review/staged-patch-context-attribute-successor/proposed-repository-operations-with-literal-patch-context.md",
+      "sha256": "197c25a5ad7681d3ec77755f50704ac799f111a5a440c3eee0b7492bcb72b846"
+    },
+    {
+      "bytes": 786,
+      "path": "/workspace/engineering/checkpoint-curated-successor-independent-review/staged-patch-context-attribute-successor/canonical-exact-frozen-patch-context-and-attributes-proposed.patch",
+      "sha256": "2191de083d2f9720ce649a70a8114ada283c82da51d75f3252b48f1d3c3691a8"
+    }
+  ],
+  "branch": "handoff/actions-swarm-mk3-wave8-20261010",
+  "canonical_documentation_improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md",
+    "Durable learning captured": "In a hash-bound unified patch, a single-space blank hunk context is payload.\nVerify diagnostic lines and original hashes before adding exact-basename local\n`-text whitespace=-blank-at-eol` attributes for those frozen patches; preserve\nauthored Markdown and other whitespace checks.",
+    "Evidence": "Original16diagnostics/749d, nineoriginalGitparse passes, copied-index positive/negative checks in29c495; actual97tree exactlyanticipated072f andfour-lineinsertion verified againstoriginal08922stagebody",
+    "Remaining uncertainty": "Documentation-only checkpoint does not qualify any new source/runtime/native/artifact/provider/browser/consumer/CI or fullissue/release gates",
+    "Stale or ambiguous guidance removed": "Existing immutable-byte/-text guidance omitted valid single-space blank hunk contexts; preserve patchpayloads instead of stripping bytes or suppressing all whitespace checks"
+  },
+  "complete_mode_blob_body_preservation": {
+    "all_current_FS": "ALL3568_GIT_BLOBS_AND_SYMLINK_EXEC_MODES_EXACT",
+    "changed_paths": 97,
+    "current_tracked_files": 3568,
+    "old1180_graph_handoffs_collector": "Unchanged parent3471 subset, no rewrite/regeneration",
+    "original84_bytes": 683868,
+    "original84_safe_copies": "ALL_ORIGINAL_SHA_SIZE_AND100644_EXACT",
+    "original_staged95": "COMPLETE_GIT_BODY_MODE_EXACT",
+    "parent_nonowned_entries_unchanged": 3471
+  },
+  "current_HEAD_FS": "EXACT_ACTUAL_CLEAN",
+  "current_readback_index": {
+    "bytes": 572139,
+    "sha256": "a4e3c84657d5b382855fb953412b3da901ce4d173b65e3973f0976ba44f6e432",
+    "unchanged_during_independent_actual_review": true
+  },
+  "engineering_scope": "Actual product target e2/afe remains separate from this docsbranch8f/072f. Historical396/5306/12dd prep/fullNOTRUN and original nativeFAIL preserved; RCC5/7276 NOTRUN/default3/DevsyOFF/private01f/frozenv6/fullplatform/issuegraph/OAuth/publication/release HOLD. No productbaseline merge bycheckpoint.",
+  "expected_independent97_tree": "072f3124766cfb0c6d859a977b1613b686ac6da0",
+  "named_remote": {
+    "exact_ref": "refs/heads/handoff/actions-swarm-mk3-wave8-20261010",
+    "observed_SHA": "8f753f1703e13236fbd3cd608afa203cb6205b35",
+    "readback": {
+      "bytes": 93,
+      "path": "/workspace/engineering/checkpoint-curated-successor-independent-review/committed-exact-named-remote-readback.private.stdout",
+      "sha256": "4d8c4fefb0baef87725a7788cf5e066c007f6ffc0c38f2021dfa831b3833ee8f"
+    },
+    "returncode": 0
+  },
+  "original_initial_failure": {
+    "binding": {
+      "bytes": 1366,
+      "path": "/workspace/engineering/root-one-curated-e2-engineering-checkpoint-commit-push/OWNERFINAL-root-one-normal-curated-engineering-checkpoint-commit-push.json",
+      "sha256": "870e9c51e87594d1ea585d8944300721fec4754eb1efd3968b30b6af1a09ecb0"
+    },
+    "disposition": "Original first staged diff-check STOP and no-commit/no-push preserved; exact patch-context successor is separate",
+    "initial_index_metadata": "Initial reviewerwrite-tree populated cache-tree metadata d743->named5a635 with same96body/modes; staleguard constructorFAIL and history retained in29c495, never claimed noinitialindexwrite"
+  },
+  "original_receipt_construction_FAILURE": {
+    "cause": "bind returned rawbytes in remote-readback field rather than bindingmetadata; serialization failed after all source/Git/remote/index assertions passed. Originalpartial retained and not treated as acceptance; namedv2 fixes serialization and reuses originalremote output only.",
+    "original_script": "/workspace/engineering/checkpoint-curated-successor-independent-review/verify_committed_current_e2_checkpoint_readonly.py",
+    "partial_original": "/workspace/engineering/checkpoint-curated-successor-independent-review/OWNERFINAL-independent-actual8f753-exact97-documentation-commit-push-review.json"
+  },
+  "original_reviewed_staged96_tree": "08922f4b38be1d1ebd382f0c84b2e04678e4ab61",
+  "recorded_utc": "2026-10-11T17:35:25.270451+00:00",
+  "reviewer_operations": "Read-only localGit objects/FS and one authenticated exactnamed remote ref query with optional-locks disabled; owned review outputs only. No checkout/index/ref changes, tests/gateway/native/acquisitions/archives/removals/commit/push.",
+  "schema": 1,
+  "sole_parent": "62f4e180f6c894777ebc8ed3a729e88d2f6531d6",
+  "status": "PASS_EXACT97_NORMAL_DOCUMENTATION_COMMIT_AND_NAMED_REMOTE_READBACK",
+  "upstream_disposition": "none; existing authorized RCC125/118 posts retained, no new external posts"
+}

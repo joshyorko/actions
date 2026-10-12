@@ -1,0 +1,18 @@
+{
+  "distribution_files": 7,
+  "extraction": "NOT_RUN",
+  "inner_consumer_native": "NOT_RUN",
+  "manifest_records": 7,
+  "new_transfer": "NOT_RUN",
+  "original_socket_BadFD": "FAIL_RETAINED; not retroactively repaired",
+  "original_transfer": "FAIL_RETAINED",
+  "outer_members": 8,
+  "protected_post": "PASS",
+  "status": "PASS_ORIGINAL_E2_AGGREGATE_OUTER_DATA_ONLY",
+  "whole_ZIP": {
+    "bytes": 80745614,
+    "mode": "0o600",
+    "path": "/tmp/actions-pr221-e2-aggregate-11708952448-one-owned/actions-runtime-dist-11708952448-original.zip",
+    "sha256": "e16a414fefc1778ba49d09c466fd9d8054cfbf952e7766ee5cc6558f871f4def"
+  }
+}

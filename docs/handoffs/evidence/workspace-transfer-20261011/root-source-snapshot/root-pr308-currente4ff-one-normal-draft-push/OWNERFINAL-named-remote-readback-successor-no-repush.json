@@ -1,0 +1,10 @@
+{
+  "fresh_remote_branch_and_graphql_agree": true,
+  "head": "e4ff080375a8422bb656e52d218f198521dda078",
+  "initial_stale_API_readback_retained": true,
+  "normal_push_attempts": 1,
+  "production_pin": "18.19.3",
+  "schema": 1,
+  "source_and_native_scopes": "SOURCEFULL accepted e4; ACTUAL new native5/6 NOT_RUN; no integration",
+  "status": "NORMAL_DRAFT_SOURCE_PUSH_REMOTE_VERIFIED"
+}

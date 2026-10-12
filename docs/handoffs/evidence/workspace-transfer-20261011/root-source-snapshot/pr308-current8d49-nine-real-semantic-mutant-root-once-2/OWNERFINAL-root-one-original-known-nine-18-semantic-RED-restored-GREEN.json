@@ -1,0 +1,1642 @@
+{
+  "actual_baseline_dependency": {
+    "bytes": 20115,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-corrected-nine-once2-independent-ACTUAL-review/OWNERFINAL-independent-original-current8d49-corrected-nine-once2-baseline-ACTUAL-review.json",
+    "sha256": "e54f84619b73c236a8038c5602b27cc6affef8e82bd0d3e535bb2537548a811d"
+  },
+  "capture": "2026-10-11T21:41:41.435398+00:00",
+  "config_binding": {
+    "bytes": 68847,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine-18-semantic-JUnit-envelope-once2-preexecution-NOTRUN/FROZEN-known-nine18-JUnit-envelope-once2-config-NOTRUN.json",
+    "sha256": "90bc9cff117ad704cfd9c1656b6e92d0d753e02438b963163aebc6a645dcf5e7"
+  },
+  "elapsed_seconds": 60.57466353599739,
+  "failure": null,
+  "independent_review": {
+    "bytes": 3648,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine18-JUnit-once2-independent-PREEXEC-review/OWNERFINAL-independent-known-nine18-JUnit-envelope-once2-SOURCE-and-PREEXEC-GO.json",
+    "sha256": "47a03a710ddaccd3eedda19f8cc00020ad56af01bb0039230a84f7ab9958625d"
+  },
+  "launcher_binding": {
+    "bytes": 13798,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-known-nine-18-semantic-JUnit-envelope-once2-preexecution-NOTRUN/run_known_nine18_JUnit_envelope_once2_NOTRUN.py",
+    "sha256": "4a1bb9a87972c472413abb8f5edfbc94b5dc0dde645357a9d6bdce4d5dbabba9"
+  },
+  "native": "NOT_RUN",
+  "outcomes": {
+    "always-post": {
+      "argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "120s",
+        "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+        "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/readonly_current_input_guard_v9.py",
+        "--config",
+        "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+        "--config-sha256",
+        "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25",
+        "--release",
+        "/workspace/engineering/root-rcc-current8d49-control3-V9-one-release.json",
+        "--release-sha256",
+        "a131e30087742764ba6dbdbc2634749924133431de3310b2065ced446b97bf3b",
+        "--label",
+        "control3"
+      ],
+      "elapsed_seconds": 14.613049033010611,
+      "parent_seconds": 135,
+      "returncode": 0,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/always-post/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 69,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/always-post/original.stdout.private",
+        "sha256": "0c1f9f5f73680a42a7de5d496fe9ee95e084773e8a37d6d04f37d540575b21bb"
+      }
+    },
+    "before": {
+      "argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "120s",
+        "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+        "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/readonly_current_input_guard_v9.py",
+        "--config",
+        "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+        "--config-sha256",
+        "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25",
+        "--release",
+        "/workspace/engineering/root-rcc-current8d49-control3-V9-one-release.json",
+        "--release-sha256",
+        "a131e30087742764ba6dbdbc2634749924133431de3310b2065ced446b97bf3b",
+        "--label",
+        "control3"
+      ],
+      "elapsed_seconds": 14.960793361009564,
+      "parent_seconds": 135,
+      "returncode": 0,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/before/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 69,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/before/original.stdout.private",
+        "sha256": "0c1f9f5f73680a42a7de5d496fe9ee95e084773e8a37d6d04f37d540575b21bb"
+      }
+    },
+    "early_generation-RED": {
+      "argv": [
+        "env",
+        "-u",
+        "PYTHONOPTIMIZE",
+        "-u",
+        "PYTEST_ADDOPTS",
+        "-u",
+        "RCC_RELOAD_PRIVATE_MUTANT",
+        "RCC_RELOAD_PRIVATE_MUTANT=early_generation",
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "15s",
+        "/workspace/engineering/pr308/action_server/.venv/bin/python",
+        "-m",
+        "pytest",
+        "--noconftest",
+        "-n0",
+        "-vv",
+        "-rA",
+        "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_candidate_warmup_precedes_generation_switch",
+        "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/early_generation-red/basetemp",
+        "-o",
+        "tmp_path_retention_policy=all",
+        "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/early_generation-red/pytest-logging",
+        "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/early_generation-red/original-junit.xml",
+        "--tb=short"
+      ],
+      "elapsed_seconds": 1.6688711590104504,
+      "parent_seconds": 30,
+      "returncode": 1,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/early_generation-red/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 5895,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/early_generation-red/original.stdout.private",
+        "sha256": "956ddf302c967e24c61e49e90475548a676cf950a94a8e9de7017cd93e7ee449"
+      }
+    },
+    "early_generation-RESTORED_GREEN": {
+      "argv": [
+        "env",
+        "-u",
+        "PYTHONOPTIMIZE",
+        "-u",
+        "PYTEST_ADDOPTS",
+        "-u",
+        "RCC_RELOAD_PRIVATE_MUTANT",
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "15s",
+        "/workspace/engineering/pr308/action_server/.venv/bin/python",
+        "-m",
+        "pytest",
+        "--noconftest",
+        "-n0",
+        "-vv",
+        "-rA",
+        "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_candidate_warmup_precedes_generation_switch",
+        "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/early_generation-restored_green/basetemp",
+        "-o",
+        "tmp_path_retention_policy=all",
+        "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/early_generation-restored_green/pytest-logging",
+        "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/early_generation-restored_green/original-junit.xml",
+        "--tb=short"
+      ],
+      "elapsed_seconds": 1.7692764930106932,
+      "parent_seconds": 30,
+      "returncode": 0,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/early_generation-restored_green/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 1349,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/early_generation-restored_green/original.stdout.private",
+        "sha256": "ca87cbcd9f437901a448bdd566921c17c4b0e95ae36b4998761b682ed3f4c131"
+      }
+    },
+    "keep_old_reusable-RED": {
+      "argv": [
+        "env",
+        "-u",
+        "PYTHONOPTIMIZE",
+        "-u",
+        "PYTEST_ADDOPTS",
+        "-u",
+        "RCC_RELOAD_PRIVATE_MUTANT",
+        "RCC_RELOAD_PRIVATE_MUTANT=keep_old_reusable",
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "15s",
+        "/workspace/engineering/pr308/action_server/.venv/bin/python",
+        "-m",
+        "pytest",
+        "--noconftest",
+        "-n0",
+        "-vv",
+        "-rA",
+        "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_running_old_handle_drains_only_after_new_publication",
+        "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/keep_old_reusable-red/basetemp",
+        "-o",
+        "tmp_path_retention_policy=all",
+        "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/keep_old_reusable-red/pytest-logging",
+        "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/keep_old_reusable-red/original-junit.xml",
+        "--tb=short"
+      ],
+      "elapsed_seconds": 1.6682008589996258,
+      "parent_seconds": 30,
+      "returncode": 1,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/keep_old_reusable-red/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 2125,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/keep_old_reusable-red/original.stdout.private",
+        "sha256": "6748693eed13a58b7cfc07b612a5e238374b3f49a20ad93e4e49e28125ac20b5"
+      }
+    },
+    "keep_old_reusable-RESTORED_GREEN": {
+      "argv": [
+        "env",
+        "-u",
+        "PYTHONOPTIMIZE",
+        "-u",
+        "PYTEST_ADDOPTS",
+        "-u",
+        "RCC_RELOAD_PRIVATE_MUTANT",
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "15s",
+        "/workspace/engineering/pr308/action_server/.venv/bin/python",
+        "-m",
+        "pytest",
+        "--noconftest",
+        "-n0",
+        "-vv",
+        "-rA",
+        "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_running_old_handle_drains_only_after_new_publication",
+        "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/keep_old_reusable-restored_green/basetemp",
+        "-o",
+        "tmp_path_retention_policy=all",
+        "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/keep_old_reusable-restored_green/pytest-logging",
+        "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/keep_old_reusable-restored_green/original-junit.xml",
+        "--tb=short"
+      ],
+      "elapsed_seconds": 1.5681410480028717,
+      "parent_seconds": 30,
+      "returncode": 0,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/keep_old_reusable-restored_green/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 1369,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/keep_old_reusable-restored_green/original.stdout.private",
+        "sha256": "337cf438f2fc54d682e6d1966a82f39a11180fb4f5e7b20cf54b6094f8e31713"
+      }
+    },
+    "omit_candidate_cleanup-RED": {
+      "argv": [
+        "env",
+        "-u",
+        "PYTHONOPTIMIZE",
+        "-u",
+        "PYTEST_ADDOPTS",
+        "-u",
+        "RCC_RELOAD_PRIVATE_MUTANT",
+        "RCC_RELOAD_PRIVATE_MUTANT=omit_candidate_cleanup",
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "15s",
+        "/workspace/engineering/pr308/action_server/.venv/bin/python",
+        "-m",
+        "pytest",
+        "--noconftest",
+        "-n0",
+        "-vv",
+        "-rA",
+        "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_rejected_candidate_cleanup_preserves_last_good",
+        "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_candidate_cleanup-red/basetemp",
+        "-o",
+        "tmp_path_retention_policy=all",
+        "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_candidate_cleanup-red/pytest-logging",
+        "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_candidate_cleanup-red/original-junit.xml",
+        "--tb=short"
+      ],
+      "elapsed_seconds": 1.8190891349950107,
+      "parent_seconds": 30,
+      "returncode": 1,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_candidate_cleanup-red/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 1861,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_candidate_cleanup-red/original.stdout.private",
+        "sha256": "deb7a0bf3c25bd53c24517df0a11ea19fd581348bae1f47c5013df45a009e2b9"
+      }
+    },
+    "omit_candidate_cleanup-RESTORED_GREEN": {
+      "argv": [
+        "env",
+        "-u",
+        "PYTHONOPTIMIZE",
+        "-u",
+        "PYTEST_ADDOPTS",
+        "-u",
+        "RCC_RELOAD_PRIVATE_MUTANT",
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "15s",
+        "/workspace/engineering/pr308/action_server/.venv/bin/python",
+        "-m",
+        "pytest",
+        "--noconftest",
+        "-n0",
+        "-vv",
+        "-rA",
+        "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_rejected_candidate_cleanup_preserves_last_good",
+        "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_candidate_cleanup-restored_green/basetemp",
+        "-o",
+        "tmp_path_retention_policy=all",
+        "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_candidate_cleanup-restored_green/pytest-logging",
+        "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_candidate_cleanup-restored_green/original-junit.xml",
+        "--tb=short"
+      ],
+      "elapsed_seconds": 1.769406435007113,
+      "parent_seconds": 30,
+      "returncode": 0,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_candidate_cleanup-restored_green/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 1367,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_candidate_cleanup-restored_green/original.stdout.private",
+        "sha256": "94ccaf0733124ab5e97165ea149303140d8125ed1a5792818607002e4257b147"
+      }
+    },
+    "omit_idle_restore-RED": {
+      "argv": [
+        "env",
+        "-u",
+        "PYTHONOPTIMIZE",
+        "-u",
+        "PYTEST_ADDOPTS",
+        "-u",
+        "RCC_RELOAD_PRIVATE_MUTANT",
+        "RCC_RELOAD_PRIVATE_MUTANT=omit_idle_restore",
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "15s",
+        "/workspace/engineering/pr308/action_server/.venv/bin/python",
+        "-m",
+        "pytest",
+        "--noconftest",
+        "-n0",
+        "-vv",
+        "-rA",
+        "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_failed_warmup_restores_original_idle_and_catalog",
+        "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_idle_restore-red/basetemp",
+        "-o",
+        "tmp_path_retention_policy=all",
+        "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_idle_restore-red/pytest-logging",
+        "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_idle_restore-red/original-junit.xml",
+        "--tb=short"
+      ],
+      "elapsed_seconds": 1.6685217560007004,
+      "parent_seconds": 30,
+      "returncode": 1,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_idle_restore-red/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 4350,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_idle_restore-red/original.stdout.private",
+        "sha256": "f1318881d326682174d00e87b0cd4c0f47ff2a8049773d74d9b4f534747482d1"
+      }
+    },
+    "omit_idle_restore-RESTORED_GREEN": {
+      "argv": [
+        "env",
+        "-u",
+        "PYTHONOPTIMIZE",
+        "-u",
+        "PYTEST_ADDOPTS",
+        "-u",
+        "RCC_RELOAD_PRIVATE_MUTANT",
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "15s",
+        "/workspace/engineering/pr308/action_server/.venv/bin/python",
+        "-m",
+        "pytest",
+        "--noconftest",
+        "-n0",
+        "-vv",
+        "-rA",
+        "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_failed_warmup_restores_original_idle_and_catalog",
+        "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_idle_restore-restored_green/basetemp",
+        "-o",
+        "tmp_path_retention_policy=all",
+        "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_idle_restore-restored_green/pytest-logging",
+        "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_idle_restore-restored_green/original-junit.xml",
+        "--tb=short"
+      ],
+      "elapsed_seconds": 1.5682584540045355,
+      "parent_seconds": 30,
+      "returncode": 0,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_idle_restore-restored_green/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 3589,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_idle_restore-restored_green/original.stdout.private",
+        "sha256": "95681646cbf52f41d9d765b5cf132f203853658324f6ad84680951cd1de90970"
+      }
+    },
+    "omit_repaired_publish-RED": {
+      "argv": [
+        "env",
+        "-u",
+        "PYTHONOPTIMIZE",
+        "-u",
+        "PYTEST_ADDOPTS",
+        "-u",
+        "RCC_RELOAD_PRIVATE_MUTANT",
+        "RCC_RELOAD_PRIVATE_MUTANT=omit_repaired_publish",
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "15s",
+        "/workspace/engineering/pr308/action_server/.venv/bin/python",
+        "-m",
+        "pytest",
+        "--noconftest",
+        "-n0",
+        "-vv",
+        "-rA",
+        "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_repaired_candidate_publishes_without_admitting_failed_generation",
+        "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_repaired_publish-red/basetemp",
+        "-o",
+        "tmp_path_retention_policy=all",
+        "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_repaired_publish-red/pytest-logging",
+        "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_repaired_publish-red/original-junit.xml",
+        "--tb=short"
+      ],
+      "elapsed_seconds": 1.6188256989989895,
+      "parent_seconds": 30,
+      "returncode": 1,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_repaired_publish-red/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 2168,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_repaired_publish-red/original.stdout.private",
+        "sha256": "7608e639871be0edc375b6866c39e1f9d2dd92c08755bad47f8eae9c4efe82fb"
+      }
+    },
+    "omit_repaired_publish-RESTORED_GREEN": {
+      "argv": [
+        "env",
+        "-u",
+        "PYTHONOPTIMIZE",
+        "-u",
+        "PYTEST_ADDOPTS",
+        "-u",
+        "RCC_RELOAD_PRIVATE_MUTANT",
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "15s",
+        "/workspace/engineering/pr308/action_server/.venv/bin/python",
+        "-m",
+        "pytest",
+        "--noconftest",
+        "-n0",
+        "-vv",
+        "-rA",
+        "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_repaired_candidate_publishes_without_admitting_failed_generation",
+        "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_repaired_publish-restored_green/basetemp",
+        "-o",
+        "tmp_path_retention_policy=all",
+        "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_repaired_publish-restored_green/pytest-logging",
+        "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_repaired_publish-restored_green/original-junit.xml",
+        "--tb=short"
+      ],
+      "elapsed_seconds": 1.569958783002221,
+      "parent_seconds": 30,
+      "returncode": 0,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_repaired_publish-restored_green/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 1401,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_repaired_publish-restored_green/original.stdout.private",
+        "sha256": "adf9abcfe8347b3b17f411cffd83aef4feee54c0d2fa47bd277ada5b732776bb"
+      }
+    },
+    "omit_restore_token-RED": {
+      "argv": [
+        "env",
+        "-u",
+        "PYTHONOPTIMIZE",
+        "-u",
+        "PYTEST_ADDOPTS",
+        "-u",
+        "RCC_RELOAD_PRIVATE_MUTANT",
+        "RCC_RELOAD_PRIVATE_MUTANT=omit_restore_token",
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "15s",
+        "/workspace/engineering/pr308/action_server/.venv/bin/python",
+        "-m",
+        "pytest",
+        "--noconftest",
+        "-n0",
+        "-vv",
+        "-rA",
+        "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_actual_commit_failure_restores_original_generation_token",
+        "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_restore_token-red/basetemp",
+        "-o",
+        "tmp_path_retention_policy=all",
+        "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_restore_token-red/pytest-logging",
+        "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_restore_token-red/original-junit.xml",
+        "--tb=short"
+      ],
+      "elapsed_seconds": 1.6176586270012194,
+      "parent_seconds": 30,
+      "returncode": 1,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_restore_token-red/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 2896,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_restore_token-red/original.stdout.private",
+        "sha256": "77601f4c69bb6f0ced99c3f49294d7a103ca81f721b7ec7576e4516988f2bd02"
+      }
+    },
+    "omit_restore_token-RESTORED_GREEN": {
+      "argv": [
+        "env",
+        "-u",
+        "PYTHONOPTIMIZE",
+        "-u",
+        "PYTEST_ADDOPTS",
+        "-u",
+        "RCC_RELOAD_PRIVATE_MUTANT",
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "15s",
+        "/workspace/engineering/pr308/action_server/.venv/bin/python",
+        "-m",
+        "pytest",
+        "--noconftest",
+        "-n0",
+        "-vv",
+        "-rA",
+        "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_actual_commit_failure_restores_original_generation_token",
+        "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_restore_token-restored_green/basetemp",
+        "-o",
+        "tmp_path_retention_policy=all",
+        "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_restore_token-restored_green/pytest-logging",
+        "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_restore_token-restored_green/original-junit.xml",
+        "--tb=short"
+      ],
+      "elapsed_seconds": 1.5681675459927646,
+      "parent_seconds": 30,
+      "returncode": 0,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_restore_token-restored_green/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 2156,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_restore_token-restored_green/original.stdout.private",
+        "sha256": "d84021ed67b8e20afe132975bfc210e29005b2371cbd7e87387900b483192d59"
+      }
+    },
+    "own-origin-0": {
+      "argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "15s",
+        "/workspace/engineering/pr308/actions/.venv/bin/python",
+        "-c",
+        "import importlib,pathlib,sys; m=importlib.import_module('actions'); assert pathlib.Path(sys.prefix).resolve()==pathlib.Path('/workspace/engineering/pr308/actions/.venv').resolve(); assert pathlib.Path(m.__file__).resolve()==pathlib.Path('/workspace/engineering/pr308/actions/src/actions/__init__.py').resolve()"
+      ],
+      "elapsed_seconds": 0.16430655699514318,
+      "parent_seconds": 30,
+      "returncode": 0,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/own-origin-0/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/own-origin-0/original.stdout.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "own-origin-1": {
+      "argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "15s",
+        "/workspace/engineering/pr308/actions-http-helper/.venv/bin/python",
+        "-c",
+        "import importlib,pathlib,sys; m=importlib.import_module('actions_http'); assert pathlib.Path(sys.prefix).resolve()==pathlib.Path('/workspace/engineering/pr308/actions-http-helper/.venv').resolve(); assert pathlib.Path(m.__file__).resolve()==pathlib.Path('/workspace/engineering/pr308/actions-http-helper/src/actions_http/__init__.py').resolve()"
+      ],
+      "elapsed_seconds": 0.11427096799889114,
+      "parent_seconds": 30,
+      "returncode": 0,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/own-origin-1/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/own-origin-1/original.stdout.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "own-origin-2": {
+      "argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "15s",
+        "/workspace/engineering/pr308/devutils/.venv/bin/python",
+        "-c",
+        "import importlib,pathlib,sys; m=importlib.import_module('devutils.invoke_utils'); assert pathlib.Path(sys.prefix).resolve()==pathlib.Path('/workspace/engineering/pr308/devutils/.venv').resolve(); assert pathlib.Path(m.__file__).resolve()==pathlib.Path('/workspace/engineering/pr308/devutils/src/devutils/invoke_utils.py').resolve()"
+      ],
+      "elapsed_seconds": 0.11424036699463613,
+      "parent_seconds": 30,
+      "returncode": 0,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/own-origin-2/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/own-origin-2/original.stdout.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "own-origin-3": {
+      "argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "15s",
+        "/workspace/engineering/pr308/work-items/.venv/bin/python",
+        "-c",
+        "import importlib,pathlib,sys; m=importlib.import_module('actions.work_items'); assert pathlib.Path(sys.prefix).resolve()==pathlib.Path('/workspace/engineering/pr308/work-items/.venv').resolve(); assert pathlib.Path(m.__file__).resolve()==pathlib.Path('/workspace/engineering/pr308/work-items/src/actions/work_items/__init__.py').resolve()"
+      ],
+      "elapsed_seconds": 0.16467137899599038,
+      "parent_seconds": 30,
+      "returncode": 0,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/own-origin-3/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/own-origin-3/original.stdout.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "own-origin-4": {
+      "argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "15s",
+        "/workspace/engineering/pr308/action_server/.venv/bin/python",
+        "-c",
+        "import importlib,pathlib,sys; m=importlib.import_module('actions.server._rcc_runtime_adapter'); assert pathlib.Path(sys.prefix).resolve()==pathlib.Path('/workspace/engineering/pr308/action_server/.venv').resolve(); assert pathlib.Path(m.__file__).resolve()==pathlib.Path('/workspace/engineering/pr308/action_server/src/actions/server/_rcc_runtime_adapter.py').resolve()"
+      ],
+      "elapsed_seconds": 0.16464775400527287,
+      "parent_seconds": 30,
+      "returncode": 0,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/own-origin-4/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/own-origin-4/original.stdout.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "prepare_under_writer-RED": {
+      "argv": [
+        "env",
+        "-u",
+        "PYTHONOPTIMIZE",
+        "-u",
+        "PYTEST_ADDOPTS",
+        "-u",
+        "RCC_RELOAD_PRIVATE_MUTANT",
+        "RCC_RELOAD_PRIVATE_MUTANT=prepare_under_writer",
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "15s",
+        "/workspace/engineering/pr308/action_server/.venv/bin/python",
+        "-m",
+        "pytest",
+        "--noconftest",
+        "-n0",
+        "-vv",
+        "-rA",
+        "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_candidate_preparation_precedes_real_sqlite_writer",
+        "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/prepare_under_writer-red/basetemp",
+        "-o",
+        "tmp_path_retention_policy=all",
+        "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/prepare_under_writer-red/pytest-logging",
+        "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/prepare_under_writer-red/original-junit.xml",
+        "--tb=short"
+      ],
+      "elapsed_seconds": 1.9700710979959695,
+      "parent_seconds": 30,
+      "returncode": 1,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/prepare_under_writer-red/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 3690,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/prepare_under_writer-red/original.stdout.private",
+        "sha256": "dc528d3a0f4d86db997568290fcbb3792e274a3b488beadbd07ee2d42f2ad377"
+      }
+    },
+    "prepare_under_writer-RESTORED_GREEN": {
+      "argv": [
+        "env",
+        "-u",
+        "PYTHONOPTIMIZE",
+        "-u",
+        "PYTEST_ADDOPTS",
+        "-u",
+        "RCC_RELOAD_PRIVATE_MUTANT",
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "15s",
+        "/workspace/engineering/pr308/action_server/.venv/bin/python",
+        "-m",
+        "pytest",
+        "--noconftest",
+        "-n0",
+        "-vv",
+        "-rA",
+        "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_candidate_preparation_precedes_real_sqlite_writer",
+        "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/prepare_under_writer-restored_green/basetemp",
+        "-o",
+        "tmp_path_retention_policy=all",
+        "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/prepare_under_writer-restored_green/pytest-logging",
+        "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/prepare_under_writer-restored_green/original-junit.xml",
+        "--tb=short"
+      ],
+      "elapsed_seconds": 1.7691786830109777,
+      "parent_seconds": 30,
+      "returncode": 0,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/prepare_under_writer-restored_green/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 1369,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/prepare_under_writer-restored_green/original.stdout.private",
+        "sha256": "f9775d1a97d41dc0f185cff71e47c89dd889e129b3fdfdf1b6b649486600dfe0"
+      }
+    },
+    "publish_before_commit-RED": {
+      "argv": [
+        "env",
+        "-u",
+        "PYTHONOPTIMIZE",
+        "-u",
+        "PYTEST_ADDOPTS",
+        "-u",
+        "RCC_RELOAD_PRIVATE_MUTANT",
+        "RCC_RELOAD_PRIVATE_MUTANT=publish_before_commit",
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "15s",
+        "/workspace/engineering/pr308/action_server/.venv/bin/python",
+        "-m",
+        "pytest",
+        "--noconftest",
+        "-n0",
+        "-vv",
+        "-rA",
+        "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_publication_follows_actual_sqlite_commit",
+        "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/publish_before_commit-red/basetemp",
+        "-o",
+        "tmp_path_retention_policy=all",
+        "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/publish_before_commit-red/pytest-logging",
+        "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/publish_before_commit-red/original-junit.xml",
+        "--tb=short"
+      ],
+      "elapsed_seconds": 1.7186494100023992,
+      "parent_seconds": 30,
+      "returncode": 1,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/publish_before_commit-red/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 3643,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/publish_before_commit-red/original.stdout.private",
+        "sha256": "f32afa0cf2bd7eafb158b5d21d4b7daeeaa263005e216460725523e5c9887258"
+      }
+    },
+    "publish_before_commit-RESTORED_GREEN": {
+      "argv": [
+        "env",
+        "-u",
+        "PYTHONOPTIMIZE",
+        "-u",
+        "PYTEST_ADDOPTS",
+        "-u",
+        "RCC_RELOAD_PRIVATE_MUTANT",
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "15s",
+        "/workspace/engineering/pr308/action_server/.venv/bin/python",
+        "-m",
+        "pytest",
+        "--noconftest",
+        "-n0",
+        "-vv",
+        "-rA",
+        "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_publication_follows_actual_sqlite_commit",
+        "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/publish_before_commit-restored_green/basetemp",
+        "-o",
+        "tmp_path_retention_policy=all",
+        "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/publish_before_commit-restored_green/pytest-logging",
+        "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/publish_before_commit-restored_green/original-junit.xml",
+        "--tb=short"
+      ],
+      "elapsed_seconds": 1.56795280399092,
+      "parent_seconds": 30,
+      "returncode": 0,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/publish_before_commit-restored_green/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 1353,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/publish_before_commit-restored_green/original.stdout.private",
+        "sha256": "a865d035a62f119de2f699ff42a13cd65215af2da6ee905f9af4b5c39354a900"
+      }
+    },
+    "publish_staged_routes-RED": {
+      "argv": [
+        "env",
+        "-u",
+        "PYTHONOPTIMIZE",
+        "-u",
+        "PYTEST_ADDOPTS",
+        "-u",
+        "RCC_RELOAD_PRIVATE_MUTANT",
+        "RCC_RELOAD_PRIVATE_MUTANT=publish_staged_routes",
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "15s",
+        "/workspace/engineering/pr308/action_server/.venv/bin/python",
+        "-m",
+        "pytest",
+        "--noconftest",
+        "-n0",
+        "-vv",
+        "-rA",
+        "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_staged_pool_keeps_original_routes_until_commit",
+        "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/publish_staged_routes-red/basetemp",
+        "-o",
+        "tmp_path_retention_policy=all",
+        "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/publish_staged_routes-red/pytest-logging",
+        "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/publish_staged_routes-red/original-junit.xml",
+        "--tb=short"
+      ],
+      "elapsed_seconds": 1.668544741012738,
+      "parent_seconds": 30,
+      "returncode": 1,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/publish_staged_routes-red/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 6237,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/publish_staged_routes-red/original.stdout.private",
+        "sha256": "b7e25adbbd3632f8f1659b7a4254a6c182f9fe63ee6e4724b259240ff546a0ec"
+      }
+    },
+    "publish_staged_routes-RESTORED_GREEN": {
+      "argv": [
+        "env",
+        "-u",
+        "PYTHONOPTIMIZE",
+        "-u",
+        "PYTEST_ADDOPTS",
+        "-u",
+        "RCC_RELOAD_PRIVATE_MUTANT",
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "15s",
+        "/workspace/engineering/pr308/action_server/.venv/bin/python",
+        "-m",
+        "pytest",
+        "--noconftest",
+        "-n0",
+        "-vv",
+        "-rA",
+        "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_staged_pool_keeps_original_routes_until_commit",
+        "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/publish_staged_routes-restored_green/basetemp",
+        "-o",
+        "tmp_path_retention_policy=all",
+        "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/publish_staged_routes-restored_green/pytest-logging",
+        "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/publish_staged_routes-restored_green/original-junit.xml",
+        "--tb=short"
+      ],
+      "elapsed_seconds": 1.6180691460031085,
+      "parent_seconds": 30,
+      "returncode": 0,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/publish_staged_routes-restored_green/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 1365,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/publish_staged_routes-restored_green/original.stdout.private",
+        "sha256": "b971aa8138d7b31291f4bc43dd9e2ffd183dd3f5f307ec4260a143aa134caeb6"
+      }
+    }
+  },
+  "phase_census": "ORIGINAL18JUNIT_AND_RAW_REQUIRED_INDEPENDENT_ACTUAL_REVIEW",
+  "release_binding": {
+    "bytes": 1554,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-one-known-nine18-JUnit-envelope-once2-release.json",
+    "sha256": "4e8229ec3beab8708e27add6351ff247454827cd1112191c3eca799c1f01e8b9"
+  },
+  "schema": 1,
+  "semantic_admitted_phases": [
+    {
+      "actual_counts": {
+        "errors": 0,
+        "failed": 1,
+        "passed": 0,
+        "skipped": 0
+      },
+      "actual_reported_counts": {
+        "errors": 0,
+        "failures": 1,
+        "skipped": 0,
+        "tests": 1
+      },
+      "junit_binding": {
+        "bytes": 1950,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/prepare_under_writer-red/original-junit.xml",
+        "sha256": "10d582a3d9ad1a66b4d8fe08fa543bbbbf7753d1e41a230b0470cf2f9f199cf3"
+      },
+      "label": "prepare_under_writer",
+      "phase": "RED",
+      "semantic_assertion": {
+        "actual_task_status": "FAIL",
+        "actual_test": "test_candidate_preparation_precedes_real_sqlite_writer",
+        "exception_class": "AssertionError",
+        "intended_assertion_frames": [
+          {
+            "assertion": "assert not db.in_transaction(), 'CANDIDATE_PREPARATION_MUST_PRECEDE_WRITER_TRANSACTION'",
+            "function": "collect",
+            "line": 120,
+            "record_line": 2051,
+            "source": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py"
+          }
+        ],
+        "robolog_binding": {
+          "bytes": 86540,
+          "mode": "0o600",
+          "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/prepare_under_writer-red/pytest-logging/output.robolog",
+          "sha256": "5227f11c87b7e070ba9214f1447f7655d4e052bfb4a2aeec86199c700c011a92"
+        }
+      },
+      "test": "test_candidate_preparation_precedes_real_sqlite_writer"
+    },
+    {
+      "actual_counts": {
+        "errors": 0,
+        "failed": 0,
+        "passed": 1,
+        "skipped": 0
+      },
+      "actual_reported_counts": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 1
+      },
+      "junit_binding": {
+        "bytes": 479,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/prepare_under_writer-restored_green/original-junit.xml",
+        "sha256": "30ee95aa81af110dde4c80b4f650ebc9e489ce0d22513ab768ab783396774875"
+      },
+      "label": "prepare_under_writer",
+      "phase": "RESTORED_GREEN",
+      "test": "test_candidate_preparation_precedes_real_sqlite_writer"
+    },
+    {
+      "actual_counts": {
+        "errors": 0,
+        "failed": 1,
+        "passed": 0,
+        "skipped": 0
+      },
+      "actual_reported_counts": {
+        "errors": 0,
+        "failures": 1,
+        "skipped": 0,
+        "tests": 1
+      },
+      "junit_binding": {
+        "bytes": 1917,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/publish_before_commit-red/original-junit.xml",
+        "sha256": "df035c204e2d52daaeaa9de7d82de64846cb2136a76868094bee863952ef9d5c"
+      },
+      "label": "publish_before_commit",
+      "phase": "RED",
+      "semantic_assertion": {
+        "actual_task_status": "FAIL",
+        "actual_test": "test_publication_follows_actual_sqlite_commit",
+        "exception_class": "AssertionError",
+        "intended_assertion_frames": [
+          {
+            "assertion": "assert not db.in_transaction(), 'PUBLICATION_MUST_FOLLOW_DURABLE_SQLITE_COMMIT'",
+            "function": "committed_publish",
+            "line": 145,
+            "record_line": 3156,
+            "source": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py"
+          }
+        ],
+        "robolog_binding": {
+          "bytes": 112744,
+          "mode": "0o600",
+          "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/publish_before_commit-red/pytest-logging/output.robolog",
+          "sha256": "2cce0e5bc8cebfc980a34a160d56c18c094f4a73cd43d0f61a8b409a38964ee7"
+        }
+      },
+      "test": "test_publication_follows_actual_sqlite_commit"
+    },
+    {
+      "actual_counts": {
+        "errors": 0,
+        "failed": 0,
+        "passed": 1,
+        "skipped": 0
+      },
+      "actual_reported_counts": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 1
+      },
+      "junit_binding": {
+        "bytes": 470,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/publish_before_commit-restored_green/original-junit.xml",
+        "sha256": "fa255b19706decbe833c835ad3296ad0c24ab1a7c77ef9e66b7934242f89b97d"
+      },
+      "label": "publish_before_commit",
+      "phase": "RESTORED_GREEN",
+      "test": "test_publication_follows_actual_sqlite_commit"
+    },
+    {
+      "actual_counts": {
+        "errors": 0,
+        "failed": 1,
+        "passed": 0,
+        "skipped": 0
+      },
+      "actual_reported_counts": {
+        "errors": 0,
+        "failures": 1,
+        "skipped": 0,
+        "tests": 1
+      },
+      "junit_binding": {
+        "bytes": 3584,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/publish_staged_routes-red/original-junit.xml",
+        "sha256": "438d5bb01ea8160b67526cda2cedebae95b302a16322c39690c756110495a5bd"
+      },
+      "label": "publish_staged_routes",
+      "phase": "RED",
+      "semantic_assertion": {
+        "actual_task_status": "FAIL",
+        "actual_test": "test_staged_pool_keeps_original_routes_until_commit",
+        "exception_class": "AssertionError",
+        "intended_assertion_frames": [
+          {
+            "assertion": "assert app.router.routes == original['routes'], 'STAGED_ROUTES_MUST_NOT_PUBLISH'",
+            "function": "after",
+            "line": 141,
+            "record_line": 3210,
+            "source": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py"
+          }
+        ],
+        "robolog_binding": {
+          "bytes": 124816,
+          "mode": "0o600",
+          "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/publish_staged_routes-red/pytest-logging/output.robolog",
+          "sha256": "8e88538979db67d39a25440b165023caa4825caeada36927c4ddd31940295ffe"
+        }
+      },
+      "test": "test_staged_pool_keeps_original_routes_until_commit"
+    },
+    {
+      "actual_counts": {
+        "errors": 0,
+        "failed": 0,
+        "passed": 1,
+        "skipped": 0
+      },
+      "actual_reported_counts": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 1
+      },
+      "junit_binding": {
+        "bytes": 476,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/publish_staged_routes-restored_green/original-junit.xml",
+        "sha256": "74ffd048c71faf9d21c32891cd815cf172f9075f81842d4937041b501affac73"
+      },
+      "label": "publish_staged_routes",
+      "phase": "RESTORED_GREEN",
+      "test": "test_staged_pool_keeps_original_routes_until_commit"
+    },
+    {
+      "actual_counts": {
+        "errors": 0,
+        "failed": 1,
+        "passed": 0,
+        "skipped": 0
+      },
+      "actual_reported_counts": {
+        "errors": 0,
+        "failures": 1,
+        "skipped": 0,
+        "tests": 1
+      },
+      "junit_binding": {
+        "bytes": 1527,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_idle_restore-red/original-junit.xml",
+        "sha256": "807eb20453e3071720793bd93ea734fa388ec9ee12eec20c314f8f02e59c0126"
+      },
+      "label": "omit_idle_restore",
+      "phase": "RED",
+      "semantic_assertion": {
+        "actual_task_status": "FAIL",
+        "actual_test": "test_failed_warmup_restores_original_idle_and_catalog",
+        "exception_class": "AssertionError",
+        "intended_assertion_frames": [
+          {
+            "assertion": "assert c.pool._idle_processes is original_idle",
+            "function": "test_failed_warmup_restores_original_idle_and_catalog",
+            "line": 227,
+            "record_line": 3301,
+            "source": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py"
+          }
+        ],
+        "robolog_binding": {
+          "bytes": 147610,
+          "mode": "0o600",
+          "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_idle_restore-red/pytest-logging/output.robolog",
+          "sha256": "b3e0fe897af764c8a04c9339dcf817b97e32766f43e2f7b2e953a5ec5e145640"
+        }
+      },
+      "test": "test_failed_warmup_restores_original_idle_and_catalog"
+    },
+    {
+      "actual_counts": {
+        "errors": 0,
+        "failed": 0,
+        "passed": 1,
+        "skipped": 0
+      },
+      "actual_reported_counts": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 1
+      },
+      "junit_binding": {
+        "bytes": 478,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_idle_restore-restored_green/original-junit.xml",
+        "sha256": "4f1f6aa6add8c4677564204ae37419ea47e59672ef3b8a3eaed960987149cb20"
+      },
+      "label": "omit_idle_restore",
+      "phase": "RESTORED_GREEN",
+      "test": "test_failed_warmup_restores_original_idle_and_catalog"
+    },
+    {
+      "actual_counts": {
+        "errors": 0,
+        "failed": 1,
+        "passed": 0,
+        "skipped": 0
+      },
+      "actual_reported_counts": {
+        "errors": 0,
+        "failures": 1,
+        "skipped": 0,
+        "tests": 1
+      },
+      "junit_binding": {
+        "bytes": 1295,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_restore_token-red/original-junit.xml",
+        "sha256": "8fbb6fc38db2859218fc9ed4b23739bdfc3b5054d140a01714f962cb308908d8"
+      },
+      "label": "omit_restore_token",
+      "phase": "RED",
+      "semantic_assertion": {
+        "actual_task_status": "FAIL",
+        "actual_test": "test_actual_commit_failure_restores_original_generation_token",
+        "exception_class": "AssertionError",
+        "intended_assertion_frames": [
+          {
+            "assertion": "assert c.pool.generation == c.original['generation']",
+            "function": "assert_last_good",
+            "line": 189,
+            "record_line": 3391,
+            "source": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py"
+          }
+        ],
+        "robolog_binding": {
+          "bytes": 138199,
+          "mode": "0o600",
+          "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_restore_token-red/pytest-logging/output.robolog",
+          "sha256": "f05e17d9b44ad51e5dd6eb233ceb81b8912dbbd2b6f0511fb893fe942d375e2e"
+        }
+      },
+      "test": "test_actual_commit_failure_restores_original_generation_token"
+    },
+    {
+      "actual_counts": {
+        "errors": 0,
+        "failed": 0,
+        "passed": 1,
+        "skipped": 0
+      },
+      "actual_reported_counts": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 1
+      },
+      "junit_binding": {
+        "bytes": 486,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_restore_token-restored_green/original-junit.xml",
+        "sha256": "e14d962d30d55fd6509326a04ba7398402e3f73532b96595d6f0cc9dba2b48a6"
+      },
+      "label": "omit_restore_token",
+      "phase": "RESTORED_GREEN",
+      "test": "test_actual_commit_failure_restores_original_generation_token"
+    },
+    {
+      "actual_counts": {
+        "errors": 0,
+        "failed": 1,
+        "passed": 0,
+        "skipped": 0
+      },
+      "actual_reported_counts": {
+        "errors": 0,
+        "failures": 1,
+        "skipped": 0,
+        "tests": 1
+      },
+      "junit_binding": {
+        "bytes": 1238,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/keep_old_reusable-red/original-junit.xml",
+        "sha256": "213c23cdf7646d55c742f9bc5c6a65d102f2fbdfc3f23cf5a6bb23c1373c40bd"
+      },
+      "label": "keep_old_reusable",
+      "phase": "RED",
+      "semantic_assertion": {
+        "actual_task_status": "FAIL",
+        "actual_test": "test_running_old_handle_drains_only_after_new_publication",
+        "exception_class": "AssertionError",
+        "intended_assertion_frames": [
+          {
+            "assertion": "assert not old.can_reuse and old not in c.retired",
+            "function": "test_running_old_handle_drains_only_after_new_publication",
+            "line": 256,
+            "record_line": 3150,
+            "source": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py"
+          }
+        ],
+        "robolog_binding": {
+          "bytes": 109941,
+          "mode": "0o600",
+          "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/keep_old_reusable-red/pytest-logging/output.robolog",
+          "sha256": "4863835ab971f59b98c767c363bfe3613963732d5c0c861b177f8f9bb84b9f8f"
+        }
+      },
+      "test": "test_running_old_handle_drains_only_after_new_publication"
+    },
+    {
+      "actual_counts": {
+        "errors": 0,
+        "failed": 0,
+        "passed": 1,
+        "skipped": 0
+      },
+      "actual_reported_counts": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 1
+      },
+      "junit_binding": {
+        "bytes": 482,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/keep_old_reusable-restored_green/original-junit.xml",
+        "sha256": "5434670541c7f9da79ce30e437f249f86e22f6fcce9d39f38e49c7656e3b0860"
+      },
+      "label": "keep_old_reusable",
+      "phase": "RESTORED_GREEN",
+      "test": "test_running_old_handle_drains_only_after_new_publication"
+    },
+    {
+      "actual_counts": {
+        "errors": 0,
+        "failed": 1,
+        "passed": 0,
+        "skipped": 0
+      },
+      "actual_reported_counts": {
+        "errors": 0,
+        "failures": 1,
+        "skipped": 0,
+        "tests": 1
+      },
+      "junit_binding": {
+        "bytes": 2967,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/early_generation-red/original-junit.xml",
+        "sha256": "6008b9bc590c6f0ffc2b04e0e5e6859d23a62d650d470e28b8b3bfaccdb36372"
+      },
+      "label": "early_generation",
+      "phase": "RED",
+      "semantic_assertion": {
+        "actual_task_status": "FAIL",
+        "actual_test": "test_candidate_warmup_precedes_generation_switch",
+        "exception_class": "AssertionError",
+        "intended_assertion_frames": [
+          {
+            "assertion": "assert c.pool._generation == c.original['generation']",
+            "function": "check",
+            "line": 270,
+            "record_line": 3250,
+            "source": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py"
+          }
+        ],
+        "robolog_binding": {
+          "bytes": 126834,
+          "mode": "0o600",
+          "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/early_generation-red/pytest-logging/output.robolog",
+          "sha256": "5bf9a2e62001fc33c999a3536eb797219b9e418f150442b6e9876f7de6768684"
+        }
+      },
+      "test": "test_candidate_warmup_precedes_generation_switch"
+    },
+    {
+      "actual_counts": {
+        "errors": 0,
+        "failed": 0,
+        "passed": 1,
+        "skipped": 0
+      },
+      "actual_reported_counts": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 1
+      },
+      "junit_binding": {
+        "bytes": 473,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/early_generation-restored_green/original-junit.xml",
+        "sha256": "6d06144a538428fc7563dd8604e3f6b3b31835f1b998325779cd95b9fa866572"
+      },
+      "label": "early_generation",
+      "phase": "RESTORED_GREEN",
+      "test": "test_candidate_warmup_precedes_generation_switch"
+    },
+    {
+      "actual_counts": {
+        "errors": 0,
+        "failed": 1,
+        "passed": 0,
+        "skipped": 0
+      },
+      "actual_reported_counts": {
+        "errors": 0,
+        "failures": 1,
+        "skipped": 0,
+        "tests": 1
+      },
+      "junit_binding": {
+        "bytes": 954,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_candidate_cleanup-red/original-junit.xml",
+        "sha256": "9f126f9fb1426ceb382295872dd329f6dc9cea0be59a679335548fb58c7c9896"
+      },
+      "label": "omit_candidate_cleanup",
+      "phase": "RED",
+      "semantic_assertion": {
+        "actual_task_status": "FAIL",
+        "actual_test": "test_rejected_candidate_cleanup_preserves_last_good",
+        "exception_class": "AssertionError",
+        "intended_assertion_frames": [
+          {
+            "assertion": "assert not c.new_dir.exists()",
+            "function": "test_rejected_candidate_cleanup_preserves_last_good",
+            "line": 284,
+            "record_line": 2134,
+            "source": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py"
+          }
+        ],
+        "robolog_binding": {
+          "bytes": 85808,
+          "mode": "0o600",
+          "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_candidate_cleanup-red/pytest-logging/output.robolog",
+          "sha256": "28e636242f9240f73a712ee264e40e6fa33fe290dd63a3abfa2fce68e30f5d53"
+        }
+      },
+      "test": "test_rejected_candidate_cleanup_preserves_last_good"
+    },
+    {
+      "actual_counts": {
+        "errors": 0,
+        "failed": 0,
+        "passed": 1,
+        "skipped": 0
+      },
+      "actual_reported_counts": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 1
+      },
+      "junit_binding": {
+        "bytes": 476,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_candidate_cleanup-restored_green/original-junit.xml",
+        "sha256": "2b292f090240d3deee456c0066077432e8d042b40c07ce06b06f0290e15e7d08"
+      },
+      "label": "omit_candidate_cleanup",
+      "phase": "RESTORED_GREEN",
+      "test": "test_rejected_candidate_cleanup_preserves_last_good"
+    },
+    {
+      "actual_counts": {
+        "errors": 0,
+        "failed": 1,
+        "passed": 0,
+        "skipped": 0
+      },
+      "actual_reported_counts": {
+        "errors": 0,
+        "failures": 1,
+        "skipped": 0,
+        "tests": 1
+      },
+      "junit_binding": {
+        "bytes": 1245,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_repaired_publish-red/original-junit.xml",
+        "sha256": "bcc7e3ebc6abc89f7a41a20e32c6d3bb308b3cdae6cb523f21c4c2cb3dc3438e"
+      },
+      "label": "omit_repaired_publish",
+      "phase": "RED",
+      "semantic_assertion": {
+        "actual_task_status": "FAIL",
+        "actual_test": "test_repaired_candidate_publishes_without_admitting_failed_generation",
+        "exception_class": "AssertionError",
+        "intended_assertion_frames": [
+          {
+            "assertion": "assert c.routes.mcp_server_setup_helper._catalog.tools[0].description=='G3 docs'",
+            "function": "test_repaired_candidate_publishes_without_admitting_failed_generation",
+            "line": 295,
+            "record_line": 3283,
+            "source": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py"
+          }
+        ],
+        "robolog_binding": {
+          "bytes": 141072,
+          "mode": "0o600",
+          "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_repaired_publish-red/pytest-logging/output.robolog",
+          "sha256": "06ede1ac01b92f047d017d675dcf31332936a7a7e304bb1b101a19f765398c20"
+        }
+      },
+      "test": "test_repaired_candidate_publishes_without_admitting_failed_generation"
+    },
+    {
+      "actual_counts": {
+        "errors": 0,
+        "failed": 0,
+        "passed": 1,
+        "skipped": 0
+      },
+      "actual_reported_counts": {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 1
+      },
+      "junit_binding": {
+        "bytes": 494,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-2/omit_repaired_publish-restored_green/original-junit.xml",
+        "sha256": "ddfe3dc41f84804e2ab44a3d86e1ea98e4b92dfd2f8a9f476cebb3dd6f187c67"
+      },
+      "label": "omit_repaired_publish",
+      "phase": "RESTORED_GREEN",
+      "test": "test_repaired_candidate_publishes_without_admitting_failed_generation"
+    }
+  ],
+  "snapshot_oracle_sensitivity": "NOT_RUN_SEPARATE_REQUIRED",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_adoption": "NONE",
+  "status": "PASS_KNOWN9_SEMANTIC_RED_FRESH_GREEN_SOURCE_ONLY",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+}

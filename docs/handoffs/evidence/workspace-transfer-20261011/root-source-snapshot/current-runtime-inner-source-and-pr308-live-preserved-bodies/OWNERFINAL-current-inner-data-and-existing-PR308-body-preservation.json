@@ -1,0 +1,36 @@
+{
+  "capture": "2026-10-11 19:25 UTC",
+  "scope": "EXISTING_ENGINEERING_ISSUE_PR_LEADS_ONLY_NO_NEW_ISSUES_OR_CLOSURES",
+  "updates": [
+    {
+      "number": 101,
+      "old_bytes": 39701,
+      "old_sha256": "9479a31141db32b04d3f9ff2d035f3404c2c5c9a8a205c450e4db067b63b4b27",
+      "new_bytes": 41463,
+      "new_sha256": "c1a756ae8b7f74830e5986bcc3f95cd2aedb9768d017fdead3175a2c230fe5c1",
+      "prior_body_preserved": true,
+      "graph_suffix_unchanged": true
+    },
+    {
+      "number": 221,
+      "old_bytes": 23722,
+      "old_sha256": "ff81d5a15beef8b4a80a11d4ed781aedcc2512fca63e6cdbd4d446f1c993f217",
+      "new_bytes": 25481,
+      "new_sha256": "62386a5c2eaf89bb736cf21fe688f1ff049b4492ecae31d007b38250ca4fe38c",
+      "prior_body_preserved": true,
+      "graph_suffix_unchanged": false
+    },
+    {
+      "number": 308,
+      "old_bytes": 13236,
+      "old_sha256": "1dd50cd2263d5b1b861f871ff7a882867d8813110f4f6142851af96bc0303ce5",
+      "new_bytes": 14874,
+      "new_sha256": "1ea7b32177d08afeb2f6a9b30a3bf963803b768a3b77a29589bb136408245e36",
+      "prior_body_preserved": true,
+      "graph_suffix_unchanged": false
+    }
+  ],
+  "RCC_production_pin": "18.19.3_UNCHANGED",
+  "first_supported_newer": "NONE_YET",
+  "release": "HOLD"
+}

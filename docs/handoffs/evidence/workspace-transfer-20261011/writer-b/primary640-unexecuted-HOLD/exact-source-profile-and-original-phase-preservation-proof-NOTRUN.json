@@ -1,0 +1,117 @@
+{
+  "profiles": [
+    {
+      "actual_controls_and_SOURCE_LIGHT": "NOT_RUN_HOLD",
+      "config": {
+        "bytes": 50238,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/FROZEN-305-primary640-inputs-NOTRUN.json",
+        "sha256": "93ceb104e8a93fbdd872d1fa42523fe6ba3456ba6936d67be6b626fc3fb3876e"
+      },
+      "eight_actual_helper_ASTs_exact": true,
+      "guard": {
+        "bytes": 4329,
+        "mode": "0o444",
+        "path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/current_305_read_only_source_guard_NOTRUN.py",
+        "sha256": "564a6716401b88c8c98398ebb979d7ae1699b319af8c8844116fa9a42f603fde"
+      },
+      "hard_primary": "GNU630TERM10_PLUS_EXCLUSIVE_PARENT_ABSOLUTE640_RESERVED_FALLBACK",
+      "immutable_input_count": 127,
+      "originals": [
+        {
+          "bytes": 46758,
+          "mode": "0o400",
+          "path": "/workspace/engineering/pr305-currentf75-private-bounded-LIGHT-guard-env-successor-SOURCE-NOTRUN/FROZEN-currentf75-private-bounded-LIGHT-inputs-NOTRUN.json",
+          "sha256": "b8d3c87613d25af5a713357c816660e786eed2616fb2e5179e431b1a30ac66b1"
+        },
+        {
+          "bytes": 9886,
+          "mode": "0o444",
+          "path": "/workspace/engineering/pr305-currentf75-private-bounded-LIGHT-guard-env-successor-SOURCE-NOTRUN/launch_current_f75_private_bounded_LIGHT_once_NOTRUN.py",
+          "sha256": "901554474e78b30cadf576404fe4b1a82cd8825f92a7b70699ffb8cc431cc7fb"
+        },
+        {
+          "bytes": 3760,
+          "mode": "0o444",
+          "path": "/workspace/engineering/pr305-currentf75-private-bounded-LIGHT-guard-env-successor-SOURCE-NOTRUN/current_f75_readonly_input_guard_NOTRUN.py",
+          "sha256": "6b47724ebb0be4b86f2e8ebf4026a32c20e39e8f1320bf9d6a64692a2f44d693"
+        },
+        {
+          "bytes": 8227,
+          "mode": "0o400",
+          "path": "/workspace/engineering/pr305-currentf75-private-bounded-LIGHT-guard-env-successor-SOURCE-NOTRUN/OWNERFINAL-currentf75-private-bounded-LIGHT-parent-env-SOURCE-successor-NOTRUN.json",
+          "sha256": "7cfea2305edc4f9def1f89d75688b218e55a5c9b9129aae1e1f7867b2259f2cc"
+        }
+      ],
+      "phases_inverse_exact": true,
+      "primary_child": {
+        "bytes": 6744,
+        "mode": "0o444",
+        "path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/current_305_primary_only_phase_child_NOTRUN.py",
+        "sha256": "1138f7722843382200689047c16215f3c1cb21e17c1d91d099359facbae62358"
+      },
+      "profile": "305",
+      "source": "f75dcae52fcd78c5c382d3903b012e5b049ca48b",
+      "source_count": 1441,
+      "tree": "851834ae6cc87f42abfcf3c963542191e2815599",
+      "whole": "ROOT900TERM10_PARENT930_REQUIRED_NOT_RUN"
+    },
+    {
+      "actual_controls_and_SOURCE_LIGHT": "NOT_RUN_HOLD",
+      "config": {
+        "bytes": 62198,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/FROZEN-313-primary640-inputs-NOTRUN.json",
+        "sha256": "756757a5c35b180f065bf91c67f41a9582ba9e8699d333f11ea14508eb0ad8cc"
+      },
+      "eight_actual_helper_ASTs_exact": true,
+      "guard": {
+        "bytes": 4595,
+        "mode": "0o444",
+        "path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/current_313_read_only_source_guard_NOTRUN.py",
+        "sha256": "9c57d50066d1bdbf1d0b1c68d8b8b7cae8b87c6944b9ece0baf0981920193d8f"
+      },
+      "hard_primary": "GNU630TERM10_PLUS_EXCLUSIVE_PARENT_ABSOLUTE640_RESERVED_FALLBACK",
+      "immutable_input_count": 158,
+      "originals": [
+        {
+          "bytes": 58670,
+          "mode": "0o400",
+          "path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/FROZEN-current2d86-private-cached-bounded-LIGHT-inputs-NOTRUN.json",
+          "sha256": "2d1c4f81d6015080be4e3480914b3759e44d391b9687de45653e7c5ae895d1c2"
+        },
+        {
+          "bytes": 10636,
+          "mode": "0o444",
+          "path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/launch_current2d86_private_cached_bounded_LIGHT_once_NOTRUN.py",
+          "sha256": "daa8a0cf96b3f110c71a908767d58c7aea87649568a89a888f2c6cd8bc870070"
+        },
+        {
+          "bytes": 5971,
+          "mode": "0o444",
+          "path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/current_2d86_readonly_source_and_full_authority_guard_NOTRUN.py",
+          "sha256": "c639494b57f8406fc699e880c8e2605acb0f622dce4c33d94655550a709bb68a"
+        },
+        {
+          "bytes": 7221,
+          "mode": "0o400",
+          "path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/OWNERFINAL-current2d86-private-CONFIG-captured-buffer-minimal-SOURCE-successor-NOTRUN.json",
+          "sha256": "bc1382cdcb88faddf36e56c6d6823efe77252e065167383ce5843a96bb94f494"
+        }
+      ],
+      "phases_inverse_exact": true,
+      "primary_child": {
+        "bytes": 6729,
+        "mode": "0o444",
+        "path": "/workspace/engineering/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/current_313_primary_only_phase_child_NOTRUN.py",
+        "sha256": "c51cabace4ceebc4e3733f8d7bb1aa4276355dd9b45ee7fd726ac1d8dda6eb4c"
+      },
+      "profile": "313",
+      "source": "2d86c5cf92d3acb274a8ceb5d57bfb8b12c779b6",
+      "source_count": 1441,
+      "tree": "653a9e73e4d27641ec86de94b90f35d41e0f24f8",
+      "whole": "ROOT900TERM10_PARENT930_REQUIRED_NOT_RUN"
+    }
+  ],
+  "schema": 1
+}

@@ -1,0 +1,22 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -1979,6 +1979,19 @@
+ 
+ ## RCC Environment Artifact execution
+ 
++Keep the bundled RCC download/build pin separate from adapter compatibility.
++A version string is identification, not source, byte or functional qualification.
++For an operator-approved isolated override, retain the exact RCC source, producer
++receipt, platform, executable digest and required contract features; an unknown
++or unqualified tuple stays incompatible rather than entering a broad version range.
++Measure the selected executable again before use and keep its actual version and
++compatibility identity in fresh descriptors and process-local cache keys. The
++Environment Artifact digest alone does not bind the RCC executable that acquired
++or executes it. Changing binaries must invalidate preparation reuse and reject
++a stale execution descriptor until it is explicitly requalified. Preserve older
++receipts under their original source/binary tuple; a later source with the same
++version label or matching tree does not relabel an earlier executed binary.
++
+ Managed spec-v2 Action packages use the provisional RCC runtime adapter only
+ when `ACTIONS_RUNTIME_RCC_PROVIDER` or `ACTIONS_REAL_RCC_ARTIFACT_TEST`
+ explicitly opts into artifact mode. Without either opt-in, legacy bootstrap

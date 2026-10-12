@@ -1,0 +1,132 @@
+{
+  "actual_machine_census_function_source": "unittest loader supplies actual suite.test.id values, TextTestResult hooks record each runtime status including subtests; parent requires18unique18PASS0FAIL0ERROR0SKIP and exact source-bound expected IDs. NOT_RUN.",
+  "config": {
+    "bytes": 27692,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v6_current00b1_managed_PURE18_inputs_NOTRUN_v3.json",
+    "sha256": "7da9e11d97f0a40bcc111caae69bd14ecec56e5dfb8fb2218601689b07c216ad"
+  },
+  "control_case_class_AST_exact_vs_v5": true,
+  "controls": {
+    "bytes": 17030,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/test_first_five_v6_current00b1_managed_PURE18_SOURCE_PREPARED_v3.py",
+    "sha256": "825bdd3b2c4bbded5a4615116ab680daff0b1e89373bb4ecf338f2df44c5725d"
+  },
+  "current00b1_root_binding": {
+    "head": "00b1bb9974b73f2da65e49c9048774c84df286ba",
+    "path": "/workspace/engineering/pr307",
+    "tracked_clean": true,
+    "tree": "2663e86b2344f9e056c3259653cb905a6d195599"
+  },
+  "expected_case_ids": [
+    "__main__.EnvironmentAdmissionControls.test_00_valid_exact_accepted_environment_baseline",
+    "__main__.EnvironmentAdmissionControls.test_subject_type_refuses_completed_pytest_reuse",
+    "__main__.EnvironmentAdmissionControls.test_unapproved_root_or_source_refused",
+    "__main__.EnvironmentAdmissionControls.test_no_automatic_inactive_owner_approval",
+    "__main__.EnvironmentAdmissionControls.test_unknown_scope_is_not_quiescence",
+    "__main__.EnvironmentAdmissionControls.test_exact_scope_and_restore_path_required",
+    "__main__.EnvironmentAdmissionControls.test_aggregate_caps_cannot_be_widened",
+    "__main__.EnvironmentAdmissionControls.test_layout_baseline_parent_mount_and_floor_poisons",
+    "__main__.EnvironmentAdmissionControls.test_observed_use_and_unknown_missing_fields_fail_closed",
+    "__main__.EnvironmentAdmissionControls.test_regular_binding_baseline_body_mode_and_symlink",
+    "__main__.EnvironmentAdmissionControls.test_private_root_release_baseline_mode_and_symlink",
+    "__main__.EnvironmentAdmissionControls.test_stream_cap_boundary_retains_partial_without_touching_original",
+    "__main__.EnvironmentAdmissionControls.test_snapshot_metadata_body_and_external_hardlink_boundaries",
+    "__main__.EnvironmentAdmissionControls.test_alias_baseline_and_individual_mapping_poisons",
+    "__main__.EnvironmentAdmissionControls.test_real_accepted_source_baseline_and_wrong_identity",
+    "__main__.EnvironmentAdmissionControls.test_current_config_dependency_overlap_baseline_and_selected_prefix",
+    "__main__.EnvironmentAdmissionControls.test_restore_dependency_existing_then_missing_path",
+    "__main__.EnvironmentAdmissionControls.test_real_pax_body_mode_nsmtime_symlink_archive_baseline_and_poison"
+  ],
+  "historical_active_sources_preserved": [
+    {
+      "head": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+      "path": "/workspace/engineering/pr308",
+      "tracked_clean": true,
+      "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+    },
+    {
+      "head": "c97edfd10edb5b1c63f8a6371bfd2905996a2da2",
+      "path": "/workspace/engineering/pr307",
+      "tracked_clean": true,
+      "tree": "f8d3477451fa601643ef6c06f6b1e616e2407643"
+    },
+    {
+      "head": "f75dcae52fcd78c5c382d3903b012e5b049ca48b",
+      "path": "/workspace/engineering/pr305",
+      "tracked_clean": true,
+      "tree": "851834ae6cc87f42abfcf3c963542191e2815599"
+    },
+    {
+      "head": "2d86c5cf92d3acb274a8ceb5d57bfb8b12c779b6",
+      "path": "/workspace/engineering/captured-child-cleanup",
+      "tracked_clean": true,
+      "tree": "653a9e73e4d27641ec86de94b90f35d41e0f24f8"
+    }
+  ],
+  "launcher": {
+    "bytes": 12477,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-v6-current00b1-managed-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v6_current00b1_managed_PURE18_ROOT_ONLY_SOURCE_PREPARED_v2.py",
+    "sha256": "a07caffda9baab8a6755667569c8ed332aa8372eac12ed40b0d401af828d9d0c"
+  },
+  "managed_activation_fields": 18,
+  "module_origins_source_bound": {
+    "json": {
+      "bytes": 14020,
+      "mode": "0o664",
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/json/__init__.py",
+      "sha256": "d5d41e2c29049515d295d81a6d40b4890fbec8d8482cfb401630f8ef2f77e4d5"
+    },
+    "os": {
+      "bytes": 40821,
+      "mode": "0o664",
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/os.py",
+      "sha256": "54c43a1fc69c979c70d8f7d097174cee163bfe59937723ee353043dd4a0211e1"
+    },
+    "pathlib": {
+      "bytes": 51052,
+      "mode": "0o664",
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/pathlib.py",
+      "sha256": "10ba48ae8063cfe7589436041d0d4628c05f427c7709cf8e75e486f8930cc32c"
+    },
+    "subprocess": {
+      "bytes": 88747,
+      "mode": "0o664",
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py",
+      "sha256": "85d29b2bf0249f5436838298c9a60ee93508b1102e9ac43b001f8a7e7ae8f375"
+    },
+    "unittest": {
+      "bytes": 3487,
+      "mode": "0o664",
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/unittest/__init__.py",
+      "sha256": "32ed48385c0377bc2900a76e9a6acc3705aeef402c72de8554b3c637420506f0"
+    }
+  },
+  "old_v4_owner": {
+    "bytes": 24590,
+    "mode": "0o400",
+    "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/OWNERFINAL-first-five-obsolete-environment-preservation-SOURCE-and-CONTROL-PREPARATION-NOTRUN-v4.json",
+    "sha256": "0eb5a69a100bf1ecb5cad0900b587dfcbe6384ecf7363f0c1369c4894d8d9591"
+  },
+  "ordered_PATH_first_two": [
+    "/workspace/actions-cloud/bin",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin"
+  ],
+  "original_v5_source_owner": {
+    "bytes": 11174,
+    "mode": "0o400",
+    "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/OWNERFINAL-first-five-v5-eight-measured-mode-SOURCE-control-and-concrete-PURE-PREPARATION-NOTRUN.json",
+    "sha256": "8d1b3029bb5b3fd1f3a4791f677aa1ed5b1f40b2ca103e1fb00399d0ba013110"
+  },
+  "packet_binding_rows_rehashed": 61,
+  "root_release_and_independent_before_post_bindings": "Dynamic exact ROOT-auth/hash and independent review binding guarded together with config+self at both admitted attempt phases.",
+  "schema": 1,
+  "source_before_alwayspost_call_sites": 2,
+  "source_native_future_guard_counts": [
+    1440,
+    1192
+  ],
+  "static_no_import_no_tests_no_gateway_no_real_archive_or_venv_execution": true
+}

@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "status": "NOT_RUN_NAMED_EXISTING_VOLUME_DESTINATION_ONLY_SUCCESSOR",
+  "original_owner": {
+    "path": "/workspace/engineering/capacity-recovery-batch25-proposal/OWNERFINAL-batch25-exact-one-completed-preexecution-proposal-v2.json",
+    "bytes": 14371,
+    "sha256": "f561a2dfe1c8b640318686930ab7754844f36208c5ff9268707025ca0a6053ea",
+    "mode": "0o400"
+  },
+  "original_script": {
+    "path": "/tmp/actions-capacity-recovery-batch25.py",
+    "bytes": 5244,
+    "sha256": "09160c02ce8c05d48c048a0a1b228901c4e4c140812ddcdcac9b8c9dae8b78a8",
+    "mode": "0o600"
+  },
+  "original_independent": {
+    "path": "/workspace/engineering/capacity-recovery-batch25-independent-preexecution-review/OWNERFINAL-independent-exact-completed-batch25-preexecution-review.json",
+    "bytes": 8669,
+    "sha256": "d3e12c07de52063a50a570824a78c51bdd2658e1dc809a57fc31b6eda9c8914f",
+    "mode": "0o444"
+  },
+  "script": {
+    "path": "/tmp/actions-capacity-recovery-batch25-existing-tmp-volume-v3.py",
+    "bytes": 5240,
+    "sha256": "c6c6d47db1fbf4f42d208bdfe88b48ca9871eaa707387c49574d769d496699dc",
+    "mode": "0o600"
+  },
+  "only_change": "DEST /dev/shm\u2192existing /tmp volume. Exact16 nonconfigurationAST and STAGE/NAMES unchanged; no archive moved/replaced; preserves coldshm3.942GB, before B25 append would reduce below3.865GB floor.",
+  "destination": "/tmp/actions-completed-scratch-recovery-batch25",
+  "names": [
+    "ad13a81675676d7b"
+  ],
+  "full_original_proofs_reused_unchanged": true,
+  "source_origin": "UNREPORTED",
+  "existing_tmp_free_bytes": 1483538432,
+  "no_provisioning": true,
+  "fresh_tmp_required_before_release": 1000000000,
+  "after_source_progress_guard": "Currente4ff1423 GitFS+historicalb6141421+originalfailedarchive ca5579/root0; do not require absent originalexpandedroot.",
+  "bounded_future_argv": [
+    "env",
+    "-u",
+    "PYTHONOPTIMIZE",
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "600s",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/tmp/actions-capacity-recovery-batch25-existing-tmp-volume-v3.py"
+  ]
+}

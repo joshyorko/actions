@@ -1,0 +1,68 @@
+import ast,datetime,hashlib,json,os,stat,subprocess,tomllib
+from pathlib import Path
+B=Path(__file__).resolve().parent;R=Path('/workspace/engineering/pr307');OLD=Path('/workspace/engineering/pr307-current00b1-token-light-once3-PREEXECUTION-NOTRUN');F=Path('/workspace/engineering/pr307-own-Isort-Ruff-compatibility-source-successor-PREPARATION');CONFLICT=Path('/workspace/engineering/pr307-four-leaf-own-Isort-child-SOURCE-PREPARATION')
+SOURCE='9760d5ec44876558c4941c4c3190abc8d92d14a1';TREE='0d33ebaac258e069ef7045a29b4a3904740f6307';PARENT='00b1bb9974b73f2da65e49c9048774c84df286ba'
+ATTEMPT='/workspace/engineering/pr307-current9760-token-light-once4-owned';RELEASE=str(B/'root-one-TOKEN-LIGHT-once4-release.json')
+def row(p):
+ p=Path(p);s=p.lstat();assert stat.S_ISREG(s.st_mode) and not p.is_symlink();b=p.read_bytes();return {'path':str(p),'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest(),'mode':oct(stat.S_IMODE(s.st_mode))}
+def exact(r):assert row(r['path'])==r;return Path(r['path']).read_bytes()
+def put(n,v,mode=0o400):
+ p=B/n
+ with p.open('x') as f:json.dump(v,f,indent=2,sort_keys=True);f.write('\n');f.flush();os.fsync(f.fileno())
+ p.chmod(mode);return row(p)
+def git(*a):return subprocess.check_output(['git','-C',str(R),*a])
+assert git('rev-parse','HEAD').decode().strip()==SOURCE and git('rev-parse','HEAD^{tree}').decode().strip()==TREE and git('rev-parse','HEAD^').decode().strip()==PARENT and not git('status','--porcelain')
+changed=git('diff','--name-only',PARENT,SOURCE).decode().splitlines();assert changed==['devutils/pyproject.toml','devutils/tests/test_http_helper_tests_workflow.py','devutils/tests/test_invoke_utils.py','devutils/tests/test_runtime_conformance.py']
+oldowner=row(OLD/'OWNERFINAL-current00b1-one-leaf-format-SOURCE-and-fresh-token-once3-PREEXEC-NOTRUN.json');old=json.loads(exact(oldowner));cfg=json.loads(exact(old['config']));oldproof=json.loads(exact(cfg['source_proof']))
+for r in cfg['bindings']:exact(r)
+diag=row('/workspace/engineering/pr307-current00b1-token-once3-ACTUALFAIL-independent-review/OWNERFINAL-independent-original-current00b1-token-once3-ACTUALFAIL-and-owning-Isort-four-leaf-proposal.json');diagnosis=json.loads(exact(diag));assert diagnosis['guards']['ROOT_external_before_and_alwayspost_exact_binding_count']==96 and diagnosis['guards']['consumed_exact_bindings']==85
+assert diagnosis['original_actual_censuses']['toolkit']['passed']==179 and diagnosis['original_actual_censuses']['token-release-line-GREEN']['passed']==99 and diagnosis['original_actual_censuses']['guard-focus']['passed']==41
+originals=[oldowner,old['config'],old['launcher'],old['source_proof'],old['ROOT_contract'],diag]
+originals+=diagnosis['evidence_bindings']
+for directory in (CONFLICT,F):
+ for p in sorted(directory.iterdir()):
+  if p.is_file():originals.append(row(p))
+for p in sorted(OLD.iterdir()):
+ if p.is_file():originals.append(row(p))
+# Original consumed rows and all failed attempts remain frozen. The new literal configuration table is independent.
+newrows=[]
+for r in oldproof['all_git_FS_body_and_exec_mode_exact']:
+ p=R/r['path'];s=p.lstat();b=os.readlink(p).encode() if r['mode']=='120000' else p.read_bytes();assert bool(s.st_mode&0o111)==(r['mode']=='100755') if r['mode']!='120000' else stat.S_ISLNK(s.st_mode)
+ a={**r,'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest()}
+ assert git('cat-file','-p',git('rev-parse',SOURCE+':'+r['path']).decode().strip())==b
+ if r['path'] not in changed:assert a==r
+ newrows.append(a)
+assert len(newrows)==1442
+before=tomllib.loads((F/'original-owning-Devutils-pyproject.toml').read_text());after=tomllib.loads((R/'devutils/pyproject.toml').read_text());isort=after['tool'].pop('isort');assert after==before and isort=={'line_length':88,'multi_line_output':3,'include_trailing_comma':True,'use_parentheses':True}
+prepared=[]
+for r in oldproof['prepared30_exact_original307_head']:
+ raw=(R/r['path']).read_bytes();a={**r,'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}
+ if r['path']=='devutils/pyproject.toml':a['equal_original307_head']=False;a['current_delta']='Only [tool.isort] formatting settings; original package/dependency/build tables exact and original lock unchanged.'
+ else:assert a==r
+ prepared.append(a)
+assert len(prepared)==30
+for a in oldproof['five_existing_venvs_config_only']:exact(a['pyvenv_config'])
+sourceproof=put('current9760-owning-settings-1442-prepared30-current-ownfive-and-original-once3-proof.json',{'schema':1,'status':'SOURCE_SETTINGS_AND_IMPORT_FORMAT_BODY_PROOF_NOT_GATE_EXECUTION','source':SOURCE,'tree':TREE,'head':SOURCE,'current_source':SOURCE,'current_tree':TREE,'parent':PARENT,'all_typed_count':1442,'all_git_FS_body_and_exec_mode_exact':newrows,'prepared30_current_source_inputs':prepared,'original_prepared30_label_and_bytes':old['source_proof'],'five_existing_venvs_config_only':oldproof['five_existing_venvs_config_only'],'retained_original_evidence':oldproof['retained_original_evidence']+originals,'original_sourceproof':old['source_proof'],'sole_SOURCE_delta':'Devutils-owned explicit four Isort settings + three import-only test leaves. fixtures.py restored exact parentbytes;1438otherbody/modes exact. Dependency/build tables/lock/gate declarations unchanged.','prior_ACTUAL_once3':'FAIL_AT_ISORT; previous completed179/99/41 and known2RED gateway10/checkedinner1 preserve exact subjects','prior_ACTUAL_once3_census':diagnosis['original_actual_censuses'],'prior_ROOT_external_scope':96,'prior_child_binding_scope':85,'mandatory_full_authority_native_release':'NOT_RUN_HOLD','actual_GATE_child':'NOT_RUN'})
+newcfg=dict(cfg);newcfg['source_proof']=sourceproof
+rows=[sourceproof if r==cfg['source_proof'] else r for r in cfg['bindings']]+originals
+seen={}
+for r in rows:
+ if r['path'] in seen:assert seen[r['path']]==r
+ seen[r['path']]=r
+newcfg['bindings']=list(seen.values());newcfgrow=put('immutable-one-TOKEN-LIGHT-once4-inputs.json',newcfg)
+script=exact(old['launcher']).decode();replacements=[('current00b1 LIGHT','current9760 LIGHT'),('immutable-one-TOKEN-LIGHT-once3-inputs.json','immutable-one-TOKEN-LIGHT-once4-inputs.json'),(old['config']['sha256'],newcfgrow['sha256']),('/workspace/engineering/pr307-current00b1-token-light-once3-owned',ATTEMPT),(PARENT,SOURCE),('2663e86b2344f9e056c3259653cb905a6d195599',TREE),('RELEASE_ONE_CURRENT00B1_TOKEN_LIGHT_ONCE3_ONLY','RELEASE_ONE_CURRENT9760_TOKEN_LIGHT_ONCE4_ONLY'),('GO_CURRENT00B1_TOKEN_LIGHT_ONCE3_GATEWAY_PREEXECUTION','GO_CURRENT9760_TOKEN_LIGHT_ONCE4_GATEWAY_PREEXECUTION'),('PASSED_CURRENT00B1_TOKEN_LIGHT_ONCE3_ONLY','PASSED_CURRENT9760_TOKEN_LIGHT_ONCE4_ONLY'),('prepared30_exact_original307_head','prepared30_current_source_inputs')]
+changed_script=script
+for a,b in replacements:assert a in changed_script;changed_script=changed_script.replace(a,b)
+reverse=changed_script
+for a,b in reversed(replacements):reverse=reverse.replace(b,a)
+assert reverse==script;ast.parse(changed_script)
+launchpath=B/'launch_one_owned_token_light_once4_owning_settings_child.py';launchpath.write_text(changed_script);launchpath.chmod(0o444);launch=row(launchpath)
+assert not Path(ATTEMPT).exists() and not Path(ATTEMPT).is_symlink() and not Path(RELEASE).exists()
+canonical=B/'canonical-owning-Isort-Ruff-compatible-settings-and-partial-gate-scope-proposed.txt';canonical.write_text('Canonical target: docs/skills/repository-operations.md, owning package formatting contract.\n\nWhen owning Ruff format and Isort disagree on import layout, preserve both measured outputs and the discovered settings before changing configuration. Resolve the owning package\'s settings explicitly: here width 88 and vertical parenthesized imports with trailing commas satisfy both unchanged tools without importing another package\'s profile or changing dependencies, locks or gates. Preserve imported module/name/alias/relative-level multisets per AST block and every non-import body; a targeted file that converges to its original bytes is preserved, not a required novel delta. Qualify the same owning src/tests scope with both checks before a fresh source-bound TOKENLIGHT attempt. These explicitly authorized compatibility checks do not widen the developer-toolkit release-authoritative Devutils task. Earlier completed phase counts remain source-specific; later phases and full suites remain unqualified after a partial failure.\n');canonical.chmod(0o400)
+contract=put('strict-current9760-once4-ROOT-release-and-bound-command-contract-NOTRUN.json',{'schema':1,'status':'NOT_EXECUTABLE_ROOT_DISTINCT_RELEASE_AND_INDEPENDENT_REVIEW_REQUIRED','source':SOURCE,'tree':TREE,'config':newcfgrow,'launcher':launch,'attempt_root':ATTEMPT,'root_release_path':RELEASE,'root_release_required':'regular nonsymlink0600 exact owningUIDGID/config/launcher/source/tree/realreview SHA; decision RELEASE_ONE_CURRENT9760_TOKEN_LIGHT_ONCE4_ONLY','independent_review_required':{'decision':'GO_CURRENT9760_TOKEN_LIGHT_ONCE4_GATEWAY_PREEXECUTION','source':SOURCE,'tree':TREE,'config_sha256':newcfgrow['sha256'],'launcher_sha256':launch['sha256']},'ROOT_exact_argv':['timeout','--signal=TERM','--kill-after=10s','900s','bash','-c','source /workspace/actions-cloud/activate.sh && exec /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python '+launch['path']+' "$@"','pr307-token-light',RELEASE,'ROOT_AUTH_SHA256_FROM_ANNOUNCED_TYPED_RELEASE','OWNER_ANNOUNCED_INDEPENDENT_REVIEW_PATH','OWNER_ANNOUNCED_INDEPENDENT_REVIEW_SHA256'],'budgets':old['bounds'],'typed_RED':'original known missing-token2semanticFAIL /gateway10/checkedinner1 unchanged; errors/wrongfailures/timeouts reject','source_guards':'Complete1442+current30inputs+ownfiveconfigs+originals; only guard data key renamed explicitly, same cardinality/hash/body/exec predicates','original_prepared_input_limit':'29 of30 exactoriginal; owning pyproject only Isorttable change; dependencies/build/lock same; old30 proof retained as history','scope':'TOKENLIGHT compatibility checks do not change generic release Devutils task','FULL_OAuth_authority_native_release':'mandatory affected Devutils+Runtime FULL NOT_RUN; OAuthauthority/content/native/publication HOLD','once4_actual':'NOT_RUN'})
+proof=put('exact-four-source-delta-owning-config-and-once4-literal-address-closure-NOTRUN.json',{'schema':1,'status':'SOURCE_METADATA_PROOF_NO_GATE_EXECUTION','source':SOURCE,'tree':TREE,'parent':PARENT,'source_count':1442,'clean':True,'novel_paths':changed,'all_other_typed_body_modes':1438,'formatter_original_targets':4,'final_novel_import_leaves':3,'fixture_originalbytes':'EXACT','config_toml_all_other_tables':'EXACT','config_explicit_Isort':isort,'all_original_non_import_AST_and_per_scope_import_bindings':'EXACT; arbitrary import side-effect behavior not universally proven','complete_Devutils_static_checks':[row(F/(n+'.original-terminal.json')) for n in ['complete-Devutils-own-Ruff-CHECK','complete-Devutils-own-Ruff-format-CHECK','complete-Devutils-own-Isort-CHECK']],'retained_original_conflict':row(CONFLICT/'OWNERFINAL-original-four-leaf-Isort-format-and-owning-Ruff-conflict-HOLD.json'),'collector_guessedfive_failure':row(F/'original-post-static-guessed-five-modified-paths-inspector-FAIL.json'),'named_metadata_only_correction':row(F/'OWNER-precommit-named-derived-four-path-owning-settings-static-PASS.json'),'launcher_inverse_text_AST':'EXACT after listed source/config/namespace/status and prepared-data key literals only; no budgets/checks/gate args changed','changed_launcher_literals':replacements,'new_child_binding_count':len(newcfg['bindings']),'original_external96_child85':'Retained once3 subjects, not asserted new once4 counts','once4':'NOT_RUN','upstream_disposition':'none'})
+allrefs=[row(p) for p in sorted(B.iterdir()) if p.is_file()]
+owner=put('OWNERFINAL-current9760-owning-Isort-settings-SOURCE-and-fresh-once4-PREEXEC-NOTRUN.json',{'schema':1,'status':'OWNER_FINAL_CURRENT9760_OWNING_FORMAT_SETTINGS_SOURCE_AND_ONCE4_PREPARED_NOTRUN','source':SOURCE,'tree':TREE,'parent':PARENT,'source_count':1442,'source_clean':True,'same_existing_branch_ordinary_child':'Noamend/rebase/force/newbranch/push','source_changed_paths':changed,'all_other_body_modes':1438,'sourceproof':sourceproof,'config':newcfgrow,'launcher':launch,'ROOT_contract':contract,'static_proof':proof,'new_bindings':allrefs,'retained_original_once3_and_source_binding_count':len(originals),'prior_qualified_scope':diagnosis['original_actual_censuses'],'prior_external96_child85':'Original once3 exact subject only','original_once3_conflict_metadata_FAILs':'ALLpreserved/no relabel/no gate retry','current_source_actual_static':'Owning ownRuff check/src tests0, ownRuff formatCHECK0, ownIsortCHECK0; no pytest/gateway/full/native','current_child_actual':'NOT_RUN_NO_ROOT_RELEASE_CREATED','mandatory_full_authority_native_publication_merge':'HOLD','documentation':{'canonical_file_proposed':'docs/skills/repository-operations.md','exact_delta':row(canonical),'evidence':'Original Isort GRID79 vsRuff conflict then root-authorized explicitown4settings resolve actualwholeDevutilssrc/tests dualchecks; scopedbindings/nonimportAST/all1438 otherbytes/modes +configtables proven','stale_ambiguity':'No crosspackage profile/dependency/gate changes; importedAST order notwholeAST equality; targetedconvergedfixture neednotremainnovel; ToolkitDevutilsrelease task unchanged','remaining_uncertainty':'IndependentSOURCE/settings/once4PREEXEC and actualROOTonce4/FULL/currentCI/OAuthinputauthority/native/release not admitted; import side-effects not universally proven','upstream_disposition':'none'},'capture':datetime.datetime.now(datetime.timezone.utc).isoformat()})
+for r in newcfg['bindings']+allrefs:exact(r)
+assert not git('status','--porcelain')
+print(json.dumps(owner))

@@ -1,0 +1,88 @@
+{
+  "actual_control_count": 0,
+  "actual_returncodes": {
+    "external_alwayspost": 1,
+    "external_before": 1,
+    "master": 1,
+    "primary": "NOT_RUN"
+  },
+  "captured": "2026-10-11T23:11:58.433386+00:00",
+  "decision": "HOLD_ORIGINAL_MANAGED_GIT_SELECTION_CONFIG_BINDING_MISMATCH_BEFORE_CONTROLS",
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "durable_learning": "Managedactivation selects executableaddress; preactivation/systemtool provenance cannotreplaceactualselectedtuple. Passingfileenvelope isseparate fromfunctionalguard. Onceconsumednamespace cannotbe reused merelybecause testsneverstarted.",
+    "evidence": [
+      {
+        "bytes": 10162,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v7-original-PURE18-ACTUALFAIL-independent-review/private-original-PURE18-v7-guard-failure-and-managed-Git-data-proof.json",
+        "sha256": "6087388793d9c2073126bbb4705bcae5d0db40ae7b983a167966fb43d7ebef74"
+      },
+      {
+        "bytes": 1941,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v7-original-PURE18-ACTUALFAIL-independent-review/minimum-named-v8-managed-selected-Git-binding-and-fresh-namespace-PROPOSAL-NOTAPPLIED.json",
+        "sha256": "bc58275cc8c3858ababb32d650367cb715fcda38e13813d672f4231bca128994"
+      }
+    ],
+    "remaining_uncertainty": "ManagedGit version/functionality/new18 outcomes notexecuted; environmentpreservation/native remainunqualified.",
+    "stale_ambiguity_removed": "Correcting cfg toolidentity doesnot normalize/waive the exact which predicate or relabel oldPREEXEC asactualPASS."
+  },
+  "exact_failure": "managed_environment line28: shutil.which git selectedcachedGit underboundPATH; cfg Gitbinding/systemGit differs.",
+  "minimum_named_source_proposal": {
+    "bytes": 1941,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v7-original-PURE18-ACTUALFAIL-independent-review/minimum-named-v8-managed-selected-Git-binding-and-fresh-namespace-PROPOSAL-NOTAPPLIED.json",
+    "sha256": "bc58275cc8c3858ababb32d650367cb715fcda38e13813d672f4231bca128994"
+  },
+  "namespace": "CONSUMED_OLD_OUTER_RELEASE; downstreamownedroot/fixture remainABSENT but mustusefreshsuccessor",
+  "original_PREEXEC_GO": {
+    "bytes": 4829,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v7-concrete-ROOT-parent-independent-SOURCE-PREEXEC-review/OWNERFINAL-independent-first-five-v7-named-v2-concrete-ROOT-parent-SOURCE-PREEXEC-GO.json",
+    "sha256": "cf97efe69e087d5030deebbd680dbc320ec6d4a16c46ef62888ea403a01c665d"
+  },
+  "original_master": {
+    "bytes": 1307,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-PURE18-v7-exact-reviewed-argv-original-execution/OWNERFINAL-root-original-exact-reviewed-PURE18-v7-execution.json",
+    "sha256": "d0088d399f58c9173ba0b8f71cb00aa2d5f1da638d6c2c88debf9473eb09f4af"
+  },
+  "original_outer": {
+    "bytes": 2672,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-first-five-v7-current9760-reviewed-PURE18-outer/OWNERFINAL-root-original-first-five-v7-PURE18-outer.json",
+    "sha256": "82743cdaacde40e78283cb38381f36c3b0a35b7227431a41b918aa69cedfded8"
+  },
+  "original_unchanged_binaries": {
+    "managed": {
+      "bytes": 3899192,
+      "mode": "0o775",
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/git",
+      "sha256": "cd36778ef52d80fce1e3944b7f334460bec0921597dcf20d3d50d87d7560a588"
+    },
+    "system": {
+      "bytes": 4082768,
+      "mode": "0o755",
+      "path": "/usr/bin/git",
+      "sha256": "356db14e102d68a1a37d8a1ac577dfd678d45d46e92f468bef8b7154e7bfdc60"
+    }
+  },
+  "physical_envelopes": "PASS_SEPARATE_FROM_FUNCTIONAL_GUARD",
+  "readonly_proof": {
+    "bytes": 10162,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v7-original-PURE18-ACTUALFAIL-independent-review/private-original-PURE18-v7-guard-failure-and-managed-Git-data-proof.json",
+    "sha256": "6087388793d9c2073126bbb4705bcae5d0db40ae7b983a167966fb43d7ebef74"
+  },
+  "remaining_holds": [
+    "PURE18 actualNOT_RUN; no complete source/nativefunctionalguard result from thisattempt.",
+    "No environmentpreservation/cachedeletion/installation/nativeRCC/profile/provider/fullrelease qualification.",
+    "Sourcecfg Gitselection namedcorrection requires independentreview and ROOTdistinctoncegrant."
+  ],
+  "reviewer": "Read bytes/JSON/Git-sourcepredicates only; no imports/guards/tests/whichsubprocess/Gitbinary/native/sourceedit",
+  "schema": 1,
+  "source_context": "Current9760/pr3088d49 toolenvironment; no sourcebranch/cfg/path/body changes byreviewer.",
+  "status": "INDEPENDENT_ORIGINAL_PURE18_V7V2_ACTUALFAIL_NO_RETRY",
+  "upstream_disposition": "none"
+}

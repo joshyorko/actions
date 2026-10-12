@@ -1,0 +1,149 @@
+{
+  "RCC": {
+    "candidate7276": {
+      "Actions_functionality": "NOT_QUALIFIED",
+      "Linux_receipt_ZIP": {
+        "artifact_id": 11689851536,
+        "name": "linux-amd64-native-runtime-receipt",
+        "original": {
+          "bytes": 185396,
+          "path": "/dev/shm/actions-rcc-compatibility-originals-20261011/original-artifact-11689851536.zip",
+          "sha256": "ec8d7cc46646fcfca7a228392e1bc2cb53341d838563802abd7d306c1f07eaba"
+        }
+      },
+      "approved_test_copy": "/dev/shm/actions-rcc-approved-test-only-binaries-20261011/candidate7276",
+      "file": {
+        "bytes": 22384802,
+        "path": "/dev/shm/actions-rcc-compatibility-originals-20261011/selected-native-source727-linux-amd64-rcc",
+        "sha256": "be55dadc391ae4ac7dd38356755a1698c595fdf41bd4a0141f8df7cc9d29f00e"
+      },
+      "native_ZIP": {
+        "artifact_id": 11689755940,
+        "name": "native-runtime-binaries",
+        "original": {
+          "bytes": 49089276,
+          "path": "/dev/shm/actions-rcc-compatibility-originals-20261011/original-artifact-11689755940.zip",
+          "sha256": "88f406c654de1155e717ded1534fa058ca1c5375007109f2a06364d3a5036ac2"
+        }
+      },
+      "reacquisition": "Original GitHub artifacts11689755940 and11689851536/run38105340592, then select exact Linux member SHAbe55. No v18.19.6 release/tag fallback; artifact retention is not guaranteed.",
+      "revision": "727c1ff8b679cdbbe12836e53c87734a1edb0071",
+      "run_id": 38105340592,
+      "tree": "cfae5c5ee9df0e5031e8e9ae37040b5c98ac6152",
+      "vcs_modified": false
+    },
+    "original_acquisition_owner": {
+      "bytes": 26884,
+      "mode": "0o600",
+      "path": "/dev/shm/actions-rcc-compatibility-originals-20261011/OWNERFINAL-three-original-RCC-acquisition-data-qualification.json",
+      "sha256": "0da97bfc63a5e47de1c900e8d37ec55261d8b7ef6f68069a74167afc344c72ad"
+    },
+    "primary3": {
+      "file": {
+        "bytes": 22282402,
+        "mode": "0o700",
+        "path": "/workspace/actions-cloud/bin/rcc",
+        "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+      },
+      "reacquisition": "Exact binary hash retained. Original release asset ID/full source-equivalence receipt not extracted here; do not assume latest or rebuild identical.",
+      "source_fixture_mode": "0o711 at pr308/action_server/src/actions/server/bin/rcc-18.19.3",
+      "version": "v18.19.3"
+    },
+    "released5": {
+      "Actions_functionality": "NOT_QUALIFIED",
+      "approved_test_copy": "/dev/shm/actions-rcc-approved-test-only-binaries-20261011/released5",
+      "file": {
+        "bytes": 22360226,
+        "path": "/dev/shm/actions-rcc-compatibility-originals-20261011/released-18.19.5-original-asset549249380.bin",
+        "sha256": "1a617ad7c736fa67c605e20e5ebe3c7d54b02cd548f733e05c809cf49a48db1e"
+      },
+      "reacquisition": "Original releaseasset549249380 through authenticatedGitHub octetstream API; exactSHA required, access/availability not rechecked.",
+      "release_asset_id": 549249380,
+      "repository": "joshyorko/rcc",
+      "revision": "d1aec7d0bb897a81274423c7a6bb747233f9c263",
+      "source_equivalence": "UNKNOWN",
+      "vcs_modified": true,
+      "version": "v18.19.5"
+    }
+  },
+  "Runtime_release_artifacts": {
+    "currente2_handoff": "Currente2 artifact IDs/paths not established by this stopped audit. ROOT owns run38157482815/sourcee2c81/checkout165c original producer and distribution receipts; use those exact bindings. Never substitute historical618 bodies or infer a current artifact ID.",
+    "historical618_cp312_consumer_input": {
+      "bytes": 14180835,
+      "outer_artifact_id": 11697353355,
+      "outer_sha256": "fc4018e6e7ed4a0e47c4f5888d36d55655216ca22ebd965f29ce9f1130938f8c",
+      "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "run": 38126987514,
+      "sha256": "90a785d81ca1158ab58a3feb0eabc1b3b3dabb6e395f2f503337c2cf53e986d6"
+    },
+    "historical618_known_originals": [
+      {
+        "artifact_id": 11698787320,
+        "file": {
+          "bytes": 26440059,
+          "path": "/workspace/engineering/pr221-current618-complete-distribution-integrity-owned/original-11698787320.zip",
+          "sha256": "4ea0a96e1d9144db5b5ad900fabeae5db5b8737845e2582053d27e017b18ca79"
+        },
+        "kind": "historical618_Runtime_platform_or_aggregate_original",
+        "producer_checkout": "e7666eacf2687f65050b97a88e791f8d0ce4cd20",
+        "producer_run": 38126987514,
+        "reacquisition": "Original GitHub artifact ID retained; availability/retention/authentication not checked; re-acquired bytes must match original SHA. Not guaranteed permanent."
+      },
+      {
+        "artifact_id": 11698838081,
+        "file": {
+          "bytes": 78961912,
+          "path": "/workspace/engineering/pr221-current618-complete-distribution-integrity-owned/original-11698838081.zip",
+          "sha256": "ceecae3505dea985f0d023223056ad45d15ab53973dbd6893f71819d8720e279"
+        },
+        "kind": "historical618_Runtime_platform_or_aggregate_original",
+        "producer_checkout": "e7666eacf2687f65050b97a88e791f8d0ce4cd20",
+        "producer_run": 38126987514,
+        "reacquisition": "Original GitHub artifact ID retained; availability/retention/authentication not checked; re-acquired bytes must match original SHA. Not guaranteed permanent."
+      }
+    ],
+    "historical618_owner": {
+      "bytes": 24118,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr221-current618-complete-distribution-integrity-owned/OWNERFINAL-current618-complete-original-distribution-integrity.json",
+      "sha256": "75757b7de4162b6e8afd739fd983b99325cd18ea2a368a279d4f233197c4314a"
+    },
+    "native1192_original_root": "/workspace/engineering/pr310-runner-qualification-owned/dist/action-server",
+    "native_manifest_and_original_alias_authority": {
+      "bytes": 765564,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+      "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25"
+    },
+    "native_wrapped_payload": {
+      "bytes": 73556451,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr310/action_server/go-wrapper/assets/assets.zip",
+      "sha256": "c85862c9b4dba354953c02cbb80e520052f07cb6d506600bf4a07d2f755135e0"
+    },
+    "native_wrapped_reacquisition": "No remote artifact ID retained in this bounded index; preserve exact original c858 ZIP/1192 tree+manifest privately. Rebuild does not guarantee same bytes."
+  },
+  "audit_notes_binding": {
+    "bytes": 7277,
+    "mode": "0o600",
+    "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/workspace-transfer-20261011/rcc-review/STOPPED-current9760-OAuth-build-runtime-audit-safe-notes.json",
+    "sha256": "8dc1d2747633abda5d4f84ebac62dfb5a8ad51e72189617b932432d1043d0f51"
+  },
+  "documentation_improvement": "Preserve source-only acquisition versus functionality and metadata references versus durable original payloads; interrupted OAuth notes proposed exact provenance/auth boundary lesson.",
+  "inspection_limits": "Metadata drawn only from already-owned exact receipts after emergency stop. No remote availability checks, new acquisition, native binary streaming/execution, archive extraction, test/build or source mutation. Paths may expire with this workspace/devshm.",
+  "local_only_evidence_CRITICAL": {
+    "archive_alias_mapping": "/workspace/engineering/root-failed-control3-one-byte-preservation-v4/root-exact-historical-failed-member-archive-mapping.json (cc73027\u2026) and /workspace/engineering/root-B28-one-exact-TMP-relocation-owned/exact-original-path-to-new-physical-archive.json (ce145\u2026); retain mapping+archive bytes+indices privately, do not regenerate failed roots.",
+    "irreproducible_actuals": "Original nativeV8 pre-main importFAIL, V9 root4 publish-killUNKNOWN and controller30 28PASS2ERROR, releases/rawstdio/censuses/leases if any, source/full proofs and historical aliases cannot be faithfully reacquired by rerun. Preserve original private bodies/index/archives outsideGit.",
+    "prepared_envs": "Prepared environments and lossless failed caches are local provenance/state; not replaced by installation to simulate previous evidence.",
+    "source_checkpoints": "Existing accepted Git branches/checkpoint objects may be fetched if already pushed, but unpushed private config/source/control and canonical evidence owners must be retained as original files. Private01f/frozen-v6 remain absent and must not be reconstructed."
+  },
+  "no_payloads_copied": "This file contains safe identity metadata/path references only. No binaries, logs, rawAPI, signed URLs, credentials, archives, private indices or provider/census payloads copied into Git.",
+  "retention_priority": [
+    "Exact binaries+original RCC ZIPs/receipt ZIPs/embedded source tuples and acquired Runtime distributions before workspace shutdown.",
+    "Original actual failed/run evidence, aliases+archives+indices and immutable release/config/source owners outsideGit; cannot be replaced by synthetic transcripts.",
+    "Safe notes/OWNERFINAL/checkpoint source refs in transfer/rcc-review; ROOT controls any durable publication/transfer of private payloads."
+  ],
+  "schema": 1,
+  "status": "EMERGENCY_SAFE_RETENTION_INDEX_NOT_BINARY_OR_LOG_TRANSFER",
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,136 @@
+{
+  "elapsed_seconds": 109.10484972198901,
+  "failure": null,
+  "inner_original_binding": {
+    "bytes": 17745,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/OWNERFINAL-original-stop-attempt-inner-four-phases.json",
+    "sha256": "c8f6f9eb60ee4328396656c1a20dd5adf9d07f97dc0c896c1a00be7ab8555b75"
+  },
+  "memory_profile_adoption": "NONE",
+  "native": "NOT_RUN",
+  "outcomes": {
+    "before": {
+      "TERM_seconds": 120,
+      "argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "120s",
+        "bash",
+        "-c",
+        "export PATH=\"/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\"; source /workspace/actions-cloud/activate.sh && exec \"$@\"",
+        "stop-attempt-guard-only",
+        "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+        "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/run_root_defaultbackend35_once2_exact_census_NOTRUN.py",
+        "--phase",
+        "guard",
+        "--config",
+        "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/FROZEN-defaultbackend35-once2-exact-census-config-NOTRUN.json",
+        "--config-sha256",
+        "7021f53c12b5392ffe5cf14da7915f25188c68e6d5a9a3b07458b588c4b527fa",
+        "--release",
+        "/workspace/engineering/root-one-defaultbackend35-once2-exact-census-release.json",
+        "--release-sha256",
+        "f9079a6dfb8e234e4976d1a3feb32d88be9f3ff9ba6c32bc3a6d43d5cfecbf02"
+      ],
+      "parent_seconds": 135,
+      "returncode": 0,
+      "shared_primary_deadline": null,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/external-before/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 61,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/external-before/original.stdout.private",
+        "sha256": "91b59c9cc5c2955da0d10688a4fe9a3e763e59a1bb1130068b050a933903b853"
+      }
+    },
+    "post": {
+      "TERM_seconds": 120,
+      "argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "120s",
+        "bash",
+        "-c",
+        "export PATH=\"/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\"; source /workspace/actions-cloud/activate.sh && exec \"$@\"",
+        "stop-attempt-guard-only",
+        "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+        "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/run_root_defaultbackend35_once2_exact_census_NOTRUN.py",
+        "--phase",
+        "guard",
+        "--config",
+        "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/FROZEN-defaultbackend35-once2-exact-census-config-NOTRUN.json",
+        "--config-sha256",
+        "7021f53c12b5392ffe5cf14da7915f25188c68e6d5a9a3b07458b588c4b527fa",
+        "--release",
+        "/workspace/engineering/root-one-defaultbackend35-once2-exact-census-release.json",
+        "--release-sha256",
+        "f9079a6dfb8e234e4976d1a3feb32d88be9f3ff9ba6c32bc3a6d43d5cfecbf02"
+      ],
+      "parent_seconds": 135,
+      "returncode": 0,
+      "shared_primary_deadline": null,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/external-always-post/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 61,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/external-always-post/original.stdout.private",
+        "sha256": "91b59c9cc5c2955da0d10688a4fe9a3e763e59a1bb1130068b050a933903b853"
+      }
+    },
+    "primary": {
+      "TERM_seconds": 900,
+      "argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "900s",
+        "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+        "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/run_stop_attempt_inner_caller_v1_NOTRUN.py",
+        "--caller-config-sha256",
+        "213e57708b87a6fc08d616a16541f7a782f1eb4af9d0d80fa7c41c8c1c1e534b",
+        "--release",
+        "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-release.json",
+        "--release-sha256",
+        "e7f972c9cdf35b73faec627c411f92a13b7c1f2517cf076460a1a0c719089c2b"
+      ],
+      "parent_seconds": 930,
+      "returncode": 0,
+      "shared_primary_deadline": null,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/external-primary/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/external-primary/original.stdout.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "release_binding": {
+    "bytes": 5298,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-release.json",
+    "sha256": "e7f972c9cdf35b73faec627c411f92a13b7c1f2517cf076460a1a0c719089c2b"
+  },
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "status": "PASS_STOP_ATTEMPT_SOURCE_CONTROLS_PENDING_INDEPENDENT_ORIGINALS",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+}

@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "status": "ORIGINAL_EXACT_CANVAS_ARTIFACT_BYTES_ACQUIRED_BY_DISTINCT_CONNECTOR_REPAIR",
+  "artifact_id": 11708206027,
+  "run_id": 38154052443,
+  "source_head": "1299cc4bb6586f467d36ca124faaaaa77362695f",
+  "original_cli_zero_byte_failure_retained": true,
+  "one_connector_repair_call": true,
+  "one_file_reference_transfer": true,
+  "original_zip": {
+    "path": "/workspace/engineering/pr282-current1299-one-original-Canvas-artifact/original-connector-repair-11708206027.zip",
+    "bytes": 2098,
+    "sha256": "2bb9ce2302d0a309e0718df767771b90b657a366f57fbd71dd773dca23c53de9",
+    "mode": "0o600"
+  },
+  "original_connector_private_response": {
+    "path": "/workspace/engineering/pr282-current1299-one-original-Canvas-artifact/original-connector-repair-response.private.json",
+    "bytes": 1983,
+    "sha256": "06ea5ccfd1ebba10e11831fedb91a26bdccb045420b272445ded6ff2858872d0",
+    "mode": "0o600"
+  },
+  "verified_members": [
+    {
+      "name": "published-core-receipt.sanitized.json",
+      "creator": 3,
+      "external_attr": 2175008800,
+      "CRC": 3571729111,
+      "body": {
+        "path": "/workspace/engineering/pr282-current1299-one-original-Canvas-artifact/verified-connector-repair-members/published-core-receipt.sanitized.json",
+        "bytes": 3695,
+        "sha256": "690476d9ef525e33e749aa405c98a9efd9c8b0f38fdf47cb1682389fe4a0f868",
+        "mode": "0o600"
+      }
+    },
+    {
+      "name": "junit.xml",
+      "creator": 3,
+      "external_attr": 2175008800,
+      "CRC": 995672536,
+      "body": {
+        "path": "/workspace/engineering/pr282-current1299-one-original-Canvas-artifact/verified-connector-repair-members/junit.xml",
+        "bytes": 320,
+        "sha256": "37490aa741f14ee165638a174b1adcd077fe8f9e63e0eca06760bc53afac824e",
+        "mode": "0o600"
+      }
+    }
+  ],
+  "error": null,
+  "elapsed_seconds": 0.16181400500499876,
+  "actual_functionality": "INDEPENDENT_RECEIPT_REVIEW_PENDING",
+  "temporary_file_reference_URL_exposed_in_prior_tool_output": "ROOT_METADATA_PRINT_MISTAKE_RETAINED_DO_NOT_REPRINT",
+  "wire_archive_source_digest_match": true,
+  "no_product_execution": true
+}

@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "status": "ROOT_ONE_EXACT_STORAGE_RELOCATION_PASS_AND_BOTH_POSTS_PASS",
+  "one_attempt": true,
+  "no_retry": true,
+  "operation_exit": 0,
+  "root_data_post_exit": 0,
+  "native_qualification": "NONE",
+  "driver_original_terminal": {
+    "path": "/workspace/engineering/root-B28-one-exact-TMP-relocation-owned/original-one-relocation-terminal.json",
+    "bytes": 130,
+    "sha256": "83c176e87e07586a355e8269b224d38be88fccf0794ba2ab19707bcd54b3156d",
+    "status": "PASS_EXACT_STORAGE_RELOCATION_ONLY",
+    "protected_post": "PASS",
+    "source_removed": true
+  },
+  "capacity": {
+    "/workspace": 1382936576,
+    "/tmp": 1419046912,
+    "/dev/shm": 3901190144
+  },
+  "recorded_utc": "2026-10-11T17:52:23.432216+00:00"
+}

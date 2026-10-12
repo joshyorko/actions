@@ -1,0 +1,48 @@
+{
+  "accepted_source_readback": [
+    {
+      "head": "ec70a2928461941c129b1c05332dc441070e0184",
+      "path": "/workspace/engineering/runtime-checkout-eol",
+      "tracked_clean": true,
+      "tree": "47a1e4fceb22fd15eaee1ca380ad6c005abfdde6"
+    },
+    {
+      "head": "5c8084c61389e293eb992c24bc0f2962f705378e",
+      "path": "/workspace/engineering/pr290",
+      "tracked_clean": true,
+      "tree": "65954e87147645985ee44f82de9907e937892112"
+    },
+    {
+      "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "path": "/workspace/engineering/pr310",
+      "tracked_clean": true,
+      "tree": "17c1afa7fbaa6ae817830d85226b41f67dd8b820"
+    },
+    {
+      "head": "d75b25fb4c354e5c95bc0f639b426d6ff402104b",
+      "path": "/workspace/engineering/pr311",
+      "tracked_clean": true,
+      "tree": "22c984ea5ce5275803308790c519263e7027b40c"
+    },
+    {
+      "head": "83123ff42c21587e3eb944e20af89f1a9e9ff0ea",
+      "path": "/workspace/engineering/pr309",
+      "tracked_clean": true,
+      "tree": "1181b35b11e4904405ca1a9a3a398e6c1c3abfd0"
+    }
+  ],
+  "actual_preservation": "NOT_RUN",
+  "approval_binding": {
+    "bytes": 2149,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-five-accepted-inactive-environment-owner-approval-20261011/ROOT-inactive-owner-approval-selected-five-only.json",
+    "sha256": "4d227967057c718d93314f8fb9fbdd74ee5a168ab08e71a8cba6a2519b1d28d4"
+  },
+  "guard_scope": "Original observed-only process scan and944 inaccessible/racing channels remainUNKNOWN; no universalquiescence claim. No active source/environment selected.",
+  "other20_protected": true,
+  "requirements": "No archiving or removal before independent actual18/controllercontrols/fullcurrentmanifest/strict release/all indices verified durable. Caps/globalnativefloors unchanged.",
+  "schema": 1,
+  "selected_root_count": 5,
+  "source_review_sha256": "8db7a5c7a40a6f28756117535ee9ed1a5c6d7106c9f78f7cbdc27a4a24c5d7c8",
+  "status": "ROOT_INACTIVE_OWNER_APPROVAL_ONLY_NOT_OPERATION_RELEASE"
+}

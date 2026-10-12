@@ -1,0 +1,62 @@
+{
+  "all1421_old_other_leaves_exact": true,
+  "all_original141refs_and41current_refs_exact": true,
+  "canonical_exact_accepted_delta": {
+    "bytes": 2030,
+    "path": "/workspace/engineering/pr312-shutdown-response-order-source/exact-canonical-response-order-and-client-completion.patch",
+    "sha256": "79130164c7fc47a42066a121dbee82ca8e07bdeee08a9c09cd44542ab6b110e2"
+  },
+  "installed_Starlette_semantic_source_bindings": {
+    "/workspace/engineering/runtime-checkout-eol/action_server/.venv/lib/python3.12/site-packages/starlette/background.py": {
+      "bytes": 1122,
+      "sha256": "0fe5e952915181406765e035b4783330e82e6dee8809564594e03830bd2ad53f"
+    },
+    "/workspace/engineering/runtime-checkout-eol/action_server/.venv/lib/python3.12/site-packages/starlette/responses.py": {
+      "bytes": 21431,
+      "sha256": "08d72dc83a57a63effef942a54ff6c7294442ffea8feb179dabf8f302d704b02"
+    }
+  },
+  "junit_original_outcomes": {
+    "final-scoped-junit.xml": {
+      "ERROR": 0,
+      "FAIL": 0,
+      "PASS": 86,
+      "SKIP": 0,
+      "cases": 86
+    },
+    "ordering-GREEN-junit.xml": {
+      "ERROR": 0,
+      "FAIL": 0,
+      "PASS": 10,
+      "SKIP": 0,
+      "cases": 10
+    },
+    "ordering-RED-junit.xml": {
+      "ERROR": 0,
+      "FAIL": 5,
+      "PASS": 5,
+      "SKIP": 0,
+      "cases": 10
+    }
+  },
+  "original_prepytest_setup_failure": "retained; no RED count credited",
+  "owner": {
+    "bytes": 29872,
+    "path": "/workspace/engineering/pr312-shutdown-response-order-source/OWNERFINAL-pr312-shutdown-response-order-LIGHT-source-checkpoint.json",
+    "sha256": "7812bf4345169e1d52bd0debadb4f5d7c641b44ba079bae139ac125af2bd1f44"
+  },
+  "prepared30_and_five_own_origin_receipts_preserved": true,
+  "source": {
+    "actual_target": "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+    "branch": "fix/runtime-checkout-eol-20261011",
+    "clean": true,
+    "head": "77ed3de24f33412dff30e4e3c18841c4c09933ac",
+    "sole_parent": "77065131a0aee63d2b1f8621476374bdde3c7b65",
+    "tree": "943c9b88d5d508a4c59b0461b6220ec86e1a7d62"
+  },
+  "source_complete1424_Git_FS_body_execmode_exact": true,
+  "source_limits": "No native/browser/provider/gateway/full tests replayed; fresh client200/naturalrc1/Windows/native-source equivalence and root full execution remain HOLD",
+  "status": "GO_SOURCE_LIGHT_ONLY_NOT_FULL_OR_PLATFORM_ACCEPTANCE",
+  "upstream_disposition": "none",
+  "whole_server_AST_exact_after_only_FastAPI_injection_and_background_task_scheduling_normalization": true
+}

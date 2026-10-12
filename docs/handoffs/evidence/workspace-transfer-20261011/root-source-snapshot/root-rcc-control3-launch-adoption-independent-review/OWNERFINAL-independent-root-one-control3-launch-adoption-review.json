@@ -1,0 +1,102 @@
+{
+  "schema": "independent-root-first-control3-launch-adoption-v1",
+  "decision": "GO_ROOT_FIRST_CONTROL3_LAUNCH_ADOPTION_ONLY_DISTINCT_FRESH_ROOT_RELEASE_AND_CAPACITY_REQUIRED",
+  "source": {
+    "head": "b614864ba9da55c13662894b6ef3c8515d9fdb25",
+    "tree": "6fa4f5c1e9837a0d893868255575b355b3977fae",
+    "target": "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+    "worktree": "/workspace/engineering/pr308"
+  },
+  "wrapper": {
+    "path": "/workspace/engineering/root-rcc-compatibility-control3-one-actual/root_once_actual.py",
+    "bytes": 5267,
+    "sha256": "d8f552b722e2435e60df502db2640601779a5d6d679b02bbc5b4a7b83cb07cd5"
+  },
+  "transport_owner": {
+    "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/OWNERFINAL-current-b614-runnable-three-version-RCC-compatibility-proposal-v2.json",
+    "bytes": 82646,
+    "sha256": "50bb3864ab95e6cfca705a8a0f6112e87b3fc56b0e513c19e12d856c3ea3a095"
+  },
+  "first_config": {
+    "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/FROZEN-control3-current-b614-actual-config-v2.json",
+    "bytes": 634107,
+    "sha256": "8c5da5be25ebfcf86f286ee9f93ddad328c68b3243b0935ec5937c93376bb948"
+  },
+  "transport_independent_preexecution": {
+    "path": "/workspace/engineering/rcc-compatibility-runnable-transport-independent-review/OWNERFINAL-independent-current-b614-runnable-control3-preexecution-review.json",
+    "bytes": 16749,
+    "sha256": "5994780a6fdabebe2ea9ad0f13f7ee5f3a699bb6e23ce4737010e8b0afb4868d"
+  },
+  "exact_reviewed_ROOT_outer_argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "900s",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/root-rcc-compatibility-control3-one-actual/root_once_actual.py",
+    "--root-execute-reviewed-one-control3",
+    "/workspace/engineering/rcc-compatibility-runnable-transport-independent-review/OWNERFINAL-independent-current-b614-runnable-control3-preexecution-review.json",
+    "5994780a6fdabebe2ea9ad0f13f7ee5f3a699bb6e23ce4737010e8b0afb4868d"
+  ],
+  "cwd": "/workspace/engineering/pr308",
+  "separate_bounds_seconds": {
+    "ROOT_entire_wrapper_TERM": 900,
+    "ROOT_KILL_after": 10,
+    "frozen_inner_gateway_TERM": 660,
+    "inner_KILL_after": 10,
+    "original_consumer_command": 600,
+    "original_cleanup": 10,
+    "original_helper_parent": 645
+  },
+  "root_guards": {
+    "owner_refs_enforced": 263,
+    "source_bodies_and_modes_enforced": 1421,
+    "native_original_inventory_enforced": 1192,
+    "review_file_SHA_before_and_after": true,
+    "activation19_checked_by_cached_metadata_only_preflight_before_gateway": true,
+    "version_selector": "control3 only",
+    "fresh_workspace_min_bytes": 1288490189,
+    "fresh_devshm_min_bytes": 3865470567,
+    "no_attempt_or_release_files_exist_at_review": true,
+    "no_retry_or_loop": true,
+    "exclusive_private_authorization_log_terminal_writes": true,
+    "primary_return_or_exception_category_preserved_and_post_guard_failure_separate": true
+  },
+  "execution_conditions": [
+    "Immediate wrapper/owner/config/transport-review hashes unchanged before launch; source guards must pass",
+    "Fresh workspace>=1288490189B and devshm>=3865470567B, exclusive heavy slot and no concurrent devshm mutations",
+    "Root executes exactly above900+10 parent; frozen660+10 gateway and fixture600/10/645 unchanged",
+    "Root independently retains exclusive private outer stdout/stderr/terminal on every outcome, including before-wrapper-terminal preflight failures or parent timeout",
+    "Exactly one root release/attempt; failures remain HOLD and no automatic retry or next version",
+    "Actual PASS_TO_REVIEW requires independent returned actual receipt/cleanup/lease/results admission; it is not self-qualified by root terminal presence"
+  ],
+  "remaining_HOLD": [
+    "No actual control3 execution or5/7276 functionality observed by this review",
+    "Released5 and candidate727 later configs need distinct independent preparation and root release",
+    "Current production download/build pin3 unchanged; no release/private/native/unlistedfeature qualification",
+    "ROOT outer bound adopted separately because original wrapper only bounds its inner gateway; initial/pre/post phases are outside660"
+  ],
+  "proof": {
+    "path": "/workspace/engineering/root-rcc-control3-launch-adoption-independent-review/complete-root-control3-command-adoption-proof.private.json",
+    "bytes": 4815,
+    "sha256": "c49fd8f5699ab9b4c6f38d2fd5a2c8e62cfff4cbfcdc6012b28d09d882dc9c6d"
+  },
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md accepted separate command/supervisor/outer deadline and source/byte identity lessons reused, no cosmetic source delta",
+    "Durable_learning_captured": "A timeout around the gateway excludes preparation/postguards. Bound the entire root adoption separately, bind exact reviewer/source identities, and preserve primary and secondary outcomes under exclusive one-attempt evidence.",
+    "Evidence": {
+      "unmodified_wrapper_SHA256": "d8f552b722e2435e60df502db2640601779a5d6d679b02bbc5b4a7b83cb07cd5",
+      "frozen_inner660": true,
+      "root_explicit_outer900_adoption": true,
+      "cached_metadata_only_activation_preflight": {
+        "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/managed_metadata_only_preflight.py",
+        "bytes": 1856,
+        "sha256": "1cb4cbcc01ea3a1d4f0519150047e840717b586081774c0a938bf68a3840ae35"
+      }
+    },
+    "Stale_or_ambiguous_guidance_removed": "660s is not claimed as a complete root pre/full/post deadline; wrapper PASS_TO_REVIEW is not functional acceptance.",
+    "Remaining_uncertainty": "Actual resource use, lifecycle/lease cleanup, results and isolated binary compatibility remain unobserved until root separately authorizes and freezes one actual."
+  },
+  "Upstream_disposition": "none",
+  "reviewer_activity": "Only SHA/stat/AST/source reads and external review receipt writes; no payload import/preflight/gateway/native/test/download/source/ref mutation"
+}

@@ -1,0 +1,95 @@
+{
+  "status": "OWNER_PREPARATIONFINAL_READY_FOR_ROOT_RELEASE_SAME_PR312_ORDINARY_REFRESH",
+  "source": "92e6deda5c252a503510c4b6261a86cb51f73cb6",
+  "tree": "8c7362e63c85a930ca2fe962ede9bc3ebb6ffe68",
+  "existing_branch": "fix/runtime-checkout-eol-20261011",
+  "actual_target": "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+  "prospective_ordered_local_parents": [
+    "92e6deda5c252a503510c4b6261a86cb51f73cb6",
+    "a0d258a16095b95b1bf9000cb1201cddfaff4779"
+  ],
+  "prospective_tree": "edf1801e565692fb3f07b809b3a95b27981fe2fe",
+  "prospective_typed_leaf_count": 1423,
+  "conflicts": [],
+  "source_seven_delta_paths_all_non_doc_exact": true,
+  "only_novel_union_doc_blob_preserves_complete_target_after_exact_source16_lesson_removal": true,
+  "all62_original_sourceFINAL_refs_exact": true,
+  "prepared30_and_own_five_prefix_origin_configuration_Rcc0711_reusable": true,
+  "new_environment_or_installer_required": false,
+  "proposed_source_action": "On root writer release and independent actual309 GO: ordinary git merge --no-ff a0d into same existing312 branch; no source implementation or cosmetic docs child. Freeze same predicted1423-leaf tree after clean typed/body/mode verification.",
+  "required_light_gates": [
+    "Doctor",
+    "prepared30/five own concrete origins/RCC0711 reuse",
+    "Toolkit actual current count",
+    "exact unchanged207 Git checkout rules and seven poisons, six workflow filters",
+    "adopted73 auth request census + source preservation",
+    "configured Runtime lint/typecheck and new devutils tests static",
+    "generator8+dependabot and all30 YAML",
+    "original1192/native/helper0444/browser/Node/frontend/raw18/frozen50 rehash"
+  ],
+  "full_gate": "HELD until distinct root source-verification serialization/capacity release; ONE explicitenv2\u2192600TERM+10 RCC\u2192existing bounded sequential full launcher; source1423/refs/artifacts prepost required",
+  "fresh_workspace_bytes": 1275437056,
+  "workspace_floor_for_full": 1200000000,
+  "current_capacity_for_light_only": true,
+  "current312_hosted_CI": "Old92e/618 tuple remains historical; metadata base.sha618 is not live named targeta0d. No carried-forward admission of new prospective tree.",
+  "remaining_holds": [
+    "No source refresh/full/fresh CI yet",
+    "Independent actual309 readback prerequisite before commit/gates",
+    "Hosted Windows/current generated distribution/native/OAuth/private/other consumers/full release remain HOLD"
+  ],
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "Verified reuse of source1306 integrated16 lines, accepted external a113 worker bound, live named-ref/prospective-tree identity guidance in docs/skills/repository-operations.md",
+    "Durable learning captured": "Bracket immutable source and named target refs; PR metadata base can lag actual integration. A conflict-free docs/source union is still a changed tested subject and requires fresh source and hosted gates.",
+    "Evidence": "Authenticated312 base618 vs namedrefa0d, object-only automatic unionedf180/1423, complete parent blob/mode proof; all62 prior source refs checked",
+    "Stale or ambiguous guidance removed": "No transfer of old618 CI or oldSOURCEFINAL full gates onto a0d union; no invented source implementation or unverified native equivalence",
+    "Remaining uncertainty": "Final new source/full/hosted and Windows/generated/private/release acceptance remain separate"
+  },
+  "Upstream disposition": "none",
+  "immutable_readonly_preparation_evidence": [
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh-readonly/PR312-current.private.json",
+      "bytes": 17593,
+      "sha256": "1d454dc5ad83fe7aeb23d4258141e4e375fb880763f12dc82a26fb19926f70c4"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh-readonly/integration-after.private.json",
+      "bytes": 448,
+      "sha256": "f7409f127cb722c3b72093e69646649d611085232ae58ecaa964f58dfd34387e"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh-readonly/integration-before.private.json",
+      "bytes": 448,
+      "sha256": "f7409f127cb722c3b72093e69646649d611085232ae58ecaa964f58dfd34387e"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh-readonly/prospective-complete-typed-tree.json",
+      "bytes": 240678,
+      "sha256": "f1f5d06047fa342fa8777b08fb6f4f94879d36b7655fd80ea71a6123bbd9527e"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh-readonly/prospective-object-only-merge-tree.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh-readonly/prospective-object-only-merge-tree.txt",
+      "bytes": 41,
+      "sha256": "7a2bbb0a633feb94d7f1c8dc0dbd271030c332e5a940d215f90d8bd160d45cc8"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh-readonly/prospective-union-and-source-preservation-proof.json",
+      "bytes": 1838,
+      "sha256": "94c581c1e1bd654b0496298c7f42537cf81a027f458bfa98a19d5f3ff9439c76"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh-readonly/source-branch-after.private.json",
+      "bytes": 431,
+      "sha256": "88132b8e689f4aeb3a15f66831d46202eb16c0348b06b67acd5d86394a01b6a3"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual309-refresh-readonly/source-branch-before.private.json",
+      "bytes": 431,
+      "sha256": "88132b8e689f4aeb3a15f66831d46202eb16c0348b06b67acd5d86394a01b6a3"
+    }
+  ]
+}

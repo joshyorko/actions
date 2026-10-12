@@ -1,0 +1,95 @@
+{
+  "child_seconds": 600,
+  "config_binding": {
+    "bytes": 18891,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/frozen_first_five_current9760_preservation_model_SOURCE_PREPARED.json",
+    "sha256": "34cc4abc0ae85b5db0c11ce4d520fbd3f1d8d25a4872b265ded39d0244e8c5cf"
+  },
+  "controller_binding": {
+    "bytes": 12753,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/root_once_first_five_current9760_SOURCE_PREPARED_v3_strict_V8_adapter.py",
+    "sha256": "985f497f83b4acecdf9ede7220da3237599ca210016da7443351c00787721ef6"
+  },
+  "controller_config_binding": {
+    "bytes": 67675,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/frozen_current9760_storage_controller_V8_qualified_source_and_actual_tokens_SOURCE_PREPARED.json",
+    "sha256": "6f1dee55ea49ac1ef91528b89619a0a9d3d6419014cdcfa93d3523fe15c3009b"
+  },
+  "decision": "TEMPLATE_ONLY_NOT_ROOT_AUTHORIZATION",
+  "driver_binding": {
+    "bytes": 37609,
+    "mode": "0o444",
+    "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_first_five_accepted_obsolete_environments_SOURCE_PREPARED_v4.py",
+    "sha256": "63476ecaa50ba863afed8602dcad82c22c9349df022d0e9f0dde8d81d60e0bb7"
+  },
+  "inactive_owner_approval": false,
+  "inactive_owner_approval_binding": {
+    "bytes": 2149,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-five-accepted-inactive-environment-owner-approval-20261011/ROOT-inactive-owner-approval-selected-five-only.json",
+    "sha256": "4d227967057c718d93314f8fb9fbdd74ee5a168ab08e71a8cba6a2519b1d28d4"
+  },
+  "inactive_prefixes": [
+    "/workspace/engineering/runtime-checkout-eol/action_server/.venv",
+    "/workspace/engineering/runtime-checkout-eol/actions/.venv",
+    "/workspace/engineering/runtime-checkout-eol/actions-http-helper/.venv",
+    "/workspace/engineering/runtime-checkout-eol/devutils/.venv",
+    "/workspace/engineering/runtime-checkout-eol/work-items/.venv"
+  ],
+  "independent_review_binding": null,
+  "not_an_execution_release": true,
+  "original_pure18_actual_independent_binding": {
+    "bytes": 10515,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v8-original-PURE18-independent-ACTUAL-review/OWNERFINAL-independent-original-first-five-v8-managed-Git-ACTUAL-PURE18-GO.json",
+    "sha256": "dd9fa8279c9503488acf753f6c4520ba201cd92a8f30168346ff9b32c4c3529d"
+  },
+  "original_pure18_census_binding": {
+    "bytes": 8089,
+    "mode": "0o600",
+    "path": "/workspace/engineering/first-five-v8-current9760-managed-Git-PURE18-once-owned/original-18-complete-machine-census.json",
+    "sha256": "28ba47b66bb90ebf73f8e4834b42005e417dfe73f9471538397d02c962518ba0"
+  },
+  "qualified_pure18_actual_binding": null,
+  "qualified_pure18_independent_binding": null,
+  "required_PURE18_independent_schema": {
+    "actual_binding": "EXACT actual owner bytes/mode/SHA",
+    "decision": "GO_FIRST_FIVE_V8_ACTUAL_PURE18_ONLY",
+    "original_actual_independent_binding": {
+      "bytes": 10515,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v8-original-PURE18-independent-ACTUAL-review/OWNERFINAL-independent-original-first-five-v8-managed-Git-ACTUAL-PURE18-GO.json",
+      "sha256": "dd9fa8279c9503488acf753f6c4520ba201cd92a8f30168346ff9b32c4c3529d"
+    },
+    "prepared_source_owner": "EXACT v7 SOURCE owner"
+  },
+  "required_actual_PURE18_schema": {
+    "error_count": 0,
+    "failure_count": 0,
+    "skip_count": 0,
+    "status": "PASS",
+    "tests_run": 18
+  },
+  "required_approval_schema": {
+    "accepted_sources": "EXACT accepted original checkout rows",
+    "decision": "ROOT_APPROVES_EXACT_FIVE_ACCEPTED_OBSOLETE_ENVIRONMENT_OWNERS_ONLY",
+    "prefixes": "EXACT selected5 mapping",
+    "unknown_process_channels_are_not_quiescence": true,
+    "unreadable_process_policy": "OBSERVED_ONLY_UNKNOWN_ACCEPTED_BY_ROOT"
+  },
+  "required_decision": "RELEASE_ONE_REVIEWED_ACCEPTED_OBSOLETE_ENVIRONMENT_PRESERVATION_ONLY",
+  "root_protected_manifest_binding": {
+    "bytes": 91408,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-current9760-concrete-preservation-SOURCE-PREPARATION/complete_declared_current9760_protected_inputs_and_typed_alias_manifest_SOURCE_PREPARED.json",
+    "sha256": "857642326d264e0d1096638f45e6b528becf1e1abfd35485c75c9970626b5608"
+  },
+  "term_kill_grace_seconds": 10,
+  "terminal_output": "ROOT_RELEASE_PARENT_PRIVATE_ARCHIVER_TERMINAL_ABSENT",
+  "unknown_process_channels_are_not_quiescence": true,
+  "unreadable_process_policy": "OBSERVED_ONLY_UNKNOWN_ACCEPTED_BY_ROOT",
+  "whole_parent_seconds": 900
+}

@@ -1,0 +1,37 @@
+{
+  "operation": "ONE_EXACT_FIVE_COMPLETED_ROOTS_STORAGE_ONLY",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "selected_roots": 5,
+  "no_retry": true,
+  "native": "NOT_RUN",
+  "outer_returncode": 1,
+  "elapsed_seconds": 36.01844337199873,
+  "available_bytes_after": {
+    "/workspace": 1030508544,
+    "/tmp": 549773312,
+    "/dev/shm": 3901190144
+  },
+  "driver_terminal": "/workspace/engineering/root-completed8d49-five-root-storage-one-owned-v4/original-one-attempt-terminal.json",
+  "driver_terminal_sha256": "b9d17f18dd03b913bd75e40a1325999b73d106f420e0ca2ddc4853387cca39cc",
+  "driver_terminal_body": {
+    "archiver": {
+      "argv": [
+        "/usr/bin/timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "600s",
+        "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+        "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/archive_exact_five_completed_roots_once.py"
+      ],
+      "returncode": 1
+    },
+    "native_execution": "NOT_RUN",
+    "no_retry": true,
+    "one_attempt": true,
+    "primary_exception_type": "CalledProcessError",
+    "protected_post": "PASS",
+    "source_scope": "8d49d0865ad5ad27b2d4e325ec135212080625e8_STORAGE_DATA_ONLY_NO_SOURCE_NATIVE_QUALIFICATION",
+    "status": "FAIL"
+  },
+  "capture": "2026-10-11T19:40:09.578689+00:00"
+}

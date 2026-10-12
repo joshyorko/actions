@@ -1,0 +1,9 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -543,3 +543,6 @@
+ Preserve failed probes and named successors, and distinguish observations made
+ after a gate starts from evidence checked before that gate.
+ 
++An execution release must bind the exact proposal and scoped review decision.
++A source-only GO cannot admit a full run through a common success prefix.
++Require the reviewed parent, gate and postcheck commands before release.

@@ -1,0 +1,59 @@
+diff --git a/docs/skills/repository-operations.md b/docs/skills/repository-operations.md
+index 28ddb312..ad214c20 100644
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -166,6 +166,27 @@ its narrower contract and the outer supervisor's own result separately. A DEBUG
+ browser launch path can establish the selected executable for that launch; it
+ does not establish a live PID identity or natural shutdown.
+ 
++Preserve a returned CompletedProcess's raw stdout, stderr and return code before
++checking post-command receipts. A later assertion may have no stream attributes;
++its exception fallback must not overwrite already captured output with empty
++values. Retain the primary assertion and bounded cleanup observations separately.
++If the executed report or browser launch evidence is unavailable, command exit
++zero and successful persisted tool Runs remain partial observations. They do not
++admit the combined browser gate. Search only the retained command, worker and
++owned supervisor evidence for an authoritative copy; do not reconstruct a report
++from a last-run marker, exit code or subsequent run. Keep any later JSON reporter
++channel handling tied to the locked reporter schema and measured launch path.
++
++The locked Playwright JSON reporter can carry a test worker's stderr in the named
++case's result.stderr entries rather than the CLI's outer stderr. Preserve the
++owned command's raw JSON and outer stderr, validate exactly one intended passed
++case/result without skips, retries or errors, then inspect only its recognized
++text or strictly decoded base64 chunks for the measured DEBUG launch path. Missing,
++malformed or wrong-case/path evidence remains a failure. This path observation
++identifies the selected executable for that launch; it is not a live PID or natural
++shutdown proof. Locked reporter source explains possible channels; it cannot
++recover missing bytes from an earlier failed attempt.
++
+ Read the Runtime testcase outcome and its cleanup measurements separately. A
+ failed testcase can retain true wrapper/snapshot/reap flags, empty error/reader/
+ live/zombie lists and a stopped final sampler; those measured fields qualify
+@@ -3224,6 +3245,26 @@ Read non-ASCII JSON golden fixtures with an explicit `encoding="utf-8"` rather
+ than `Path.read_text()`'s locale default so expected Unicode values are stable
+ across Windows and POSIX test runners.
+ 
++Synthetic published-member fixtures must use authenticated committed Git blob
++bytes, rather than a checkout representation that can change through CRLF
++conversion. Keep the expected registry-sample digests unchanged. This authority
++applies only to synthetic fixtures: hash actual installed worker members as raw
++bytes, require distribution ownership and the expected prefix/version, and keep
++modified-member rejection intact. A portable checkout-representation control
++must exercise the exact sample baseline and all admission poisons; it does not
++prove a public installation or whole-wheel authentication.
++
++Treat a PID-file handoff as complete only after a valid positive integer PID is
++observed; file existence alone is not publication completion or process identity.
++The browser deadline fixture writes its actual Node PID as a one-field JSON
++record to an exclusive same-directory temporary file, then renames it into place.
++Absent, empty, incomplete or invalid records remain pending within the existing
++poll deadline. Verify that PID's live descendants separately. A controlled partial
++write can test publication without launching a browser; it does not qualify the
++forced-hang timeout or cleanup gate. A parsing failure before those assertions
++neither qualifies nor disproves cleanup. Preserve the primary failure and mark
++unreturned cleanup observations unavailable.
++
+ ## Frozen Runtime acceptance
+ 
+ For frozen Runtime acceptance, bind the candidate commit and tree separately

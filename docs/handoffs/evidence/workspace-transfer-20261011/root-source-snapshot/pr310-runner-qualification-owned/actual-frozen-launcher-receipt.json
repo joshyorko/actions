@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=15s",
+    "660s",
+    "/workspace/actions-cloud/bin/rcc",
+    "task",
+    "script",
+    "--no-build",
+    "-r",
+    "/workspace/engineering/pr310/developer/toolkit.yaml",
+    "--",
+    "python",
+    "-c",
+    "import toolkit; toolkit.poetry(\"action_server\", \"run\", \"python\", \"/workspace/engineering/pr310-runner-qualification-owned/owned-native-command-proposal-v2.py\", \"--kind\", 'frozen', \"--execute-reviewed-proposal\")"
+  ],
+  "cwd": "/workspace/engineering/pr310",
+  "runner_sha256": "cbbb61581274a6caa830c8c400386735e738d28f3ea0700577a0926293693368",
+  "qualification_receipt_sha256": "3ad8fd9181ec9164a3b1fb538d83253b6edb7c0c0b16d379f5fc06fc83d4f35c",
+  "exit_code": 0,
+  "elapsed_seconds": 40.86025447500015,
+  "outer_log": "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen-outer.log",
+  "outer_log_sha256": "18a18c8ebe455a059249713f6c590e444351f8fa8c741ae3ea90e248961aac92"
+}

@@ -1,0 +1,159 @@
+{
+  "ROOT_external_parent_preparation": {
+    "budgets_preserved": {
+      "before_child_post_fallback_sum": 320,
+      "outer_TERM": 320,
+      "parent_capture": 350,
+      "phase_fallbacks": [
+        30,
+        260,
+        30
+      ]
+    },
+    "original_parent": {
+      "bytes": 6833,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-reviewed-first-five-v7-PURE18-external-parent-v2.py",
+      "sha256": "700bb81131a62c48787c517d61d0e833c843c935f88ad26ea952bf05c86e8551"
+    },
+    "status": "HOLD_REVIEW_FILE_HASH_ABSENT_AND_SEPARATE_ROOT_ADOPTION_REQUIRED",
+    "template": {
+      "bytes": 6718,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/ROOT-external-first-five-v8-measured-Git-parent-TEMPLATE-NOTEXECUTION.py",
+      "sha256": "b9024b2043c9857e75e13f255dabc24ebc3547293d0bf2f41a3a8a0151b433db"
+    }
+  },
+  "ROOT_release_file": "ABSENT_NOT_CREATED",
+  "actual_storage": "HOLD_separate_approval_controller_controls_actualPURE18_and_PREEXEC_root_release",
+  "all_previous_namespaces_consumed": "Original v7 remains consumed despite absent child/fixture roots.",
+  "budget": {
+    "alwayspost_guard_cooperative_budget_seconds": 30,
+    "before_child_post_fallback_sum_seconds": 200,
+    "before_guard_cooperative_budget_seconds": 30,
+    "capture_and_activation_reserve_inside_outer_seconds": 40,
+    "inner_TERM_KILL_grace_seconds": 10,
+    "inner_TERM_seconds": 120,
+    "limits": "ROOT outer bounds complete admitted attempt. Cooperative per-read guards do not promise a kernel filesystem read cannot stall; external hard kill can prevent Python finally. ROOT outer must retain terminal even then. No native/RCC deadline changes.",
+    "outer_TERM_KILL_grace_seconds": 10,
+    "subprocess_parent_fallback_seconds": 140,
+    "whole_ROOT_outer_seconds": 240
+  },
+  "child_launcher_change": "Only typed release/review decisions plus scoped strict Git UID/GID assertion; which/path/hash/size/mode and PATH19 unchanged.",
+  "config_binding": {
+    "bytes": 47036,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v8_current9760_measured_managed_Git_PURE18_inputs_NOTRUN_v4_originalFAIL_and_historical_system_scope.json",
+    "sha256": "0d4423f45acce573da98b262613971e497a91a9415d61f59142182678897365b"
+  },
+  "control_source_binding": {
+    "bytes": 17042,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/test_first_five_v8_current9760_measured_managed_Git_PURE18_SOURCE_PREPARED.py",
+    "sha256": "0ee011db2e7edec7564ef05fc3ed610bb6f15483f52bd9ececb593c44aa5f096"
+  },
+  "controls_18_whole_AST_unchanged_except_fresh_fixture_literal": true,
+  "decision": "SOURCE_AND_CHILD_PREEXECUTION_PREPARATION_FROZEN_NOT_AUTHORIZED",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "Existing canonical selected-tool-after-activation and consumed-namespace lessons reused. No repository guide mutation.",
+    "Durable_learning": "Activated PATH selects a concrete binary distinct from system Git; bind its actual body/path/owner rather than claiming a symlink or changing PATH. An aborted attempt consumes its namespace even before fixtures exist.",
+    "Evidence": [
+      {
+        "bytes": 4750,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v7-original-PURE18-ACTUALFAIL-independent-review/OWNERFINAL-independent-original-PURE18-v7v2-managed-Git-ACTUALFAIL.json",
+        "sha256": "ebdfa0ae82cda27d515192d26098c12c3a689f19212cee9f58920a3304ae570c"
+      },
+      {
+        "bytes": 6456,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/SOURCE-PREPARED-v8-original-FAIL-chain-fresh-root-controller-template-and-unchanged-method-proof-v3.json",
+        "sha256": "85ba8f46ba8d6c9adff24a02fa85898ba167b3556cb4a94eab0c6613dca43694"
+      }
+    ],
+    "Remaining_uncertainty": "v8 tests unrun; ROOT external tuple and approval absent; no native/storage/function qualification.",
+    "Stale_ambiguity_removed": "Managed Git body is distinguished from historical system Git; original before-tests FAIL remains separate from future tests.",
+    "Upstream_disposition": "none"
+  },
+  "exact_proposed_ROOT_outer_argv_template_NOT_AUTHORIZED": [
+    "/usr/bin/timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "240s",
+    "bash",
+    "-c",
+    "source /workspace/actions-cloud/activate.sh && export PATH=\"/workspace/actions-cloud/bin:/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\" && export PYTHONDONTWRITEBYTECODE=1 && exec /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12 /workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v8_current9760_measured_managed_Git_PURE18_ROOT_ONLY_SOURCE_PREPARED_v2.py --root-execute-reviewed-pure-controls \"$1\" --root-release-sha256 \"$2\"",
+    "first-five-current9760-v8-measured-Git-pure18",
+    "ROOT_OWNER_ANNOUNCED_RELEASE_FILE_NOT_CREATED",
+    "ROOT_OWNER_ANNOUNCED_RELEASE_SHA256_NOT_CREATED"
+  ],
+  "four_source_heads_unchanged": "Last exact SOURCE/independent current9760 snapshot retained; no fresh Git execution in preparation. Future gates enforce HEAD/tree/clean.",
+  "fresh_fixture_root": "/tmp/first-five-v8-current9760-managed-Git-mode-closure-PURE18-fixtures-once-owned",
+  "fresh_owned_root": "/workspace/engineering/first-five-v8-current9760-managed-Git-PURE18-once-owned",
+  "historical_system_Git_source_evidence_scope": {
+    "binding": {
+      "bytes": 4082768,
+      "mode": "0o755",
+      "path": "/usr/bin/git",
+      "sha256": "356db14e102d68a1a37d8a1ac577dfd678d45d46e92f468bef8b7154e7bfdc60"
+    },
+    "gid": 0,
+    "reason": "Unchanged accepted ROOT parent requires1000-owned physical packet rows. Root-owned old system tool is preserved via exact oldcfg/proofs and declared row, not mislabeled as a1000-owned current input.",
+    "status": "HISTORICAL_BINARY_AND_ACTUALFAIL_EVIDENCE_NOT_CURRENT_SELECTED_MANAGED_TOOL",
+    "uid": 0
+  },
+  "launcher_binding": {
+    "bytes": 12668,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v8_current9760_measured_managed_Git_PURE18_ROOT_ONLY_SOURCE_PREPARED_v2.py",
+    "sha256": "70b9123cd487a9b80fd7dfe62c06ba114ea0d5e46b7f2138c4fcccc55e50305c"
+  },
+  "measured_Git_binding_four_keys": {
+    "bytes": 3899192,
+    "mode": "0o775",
+    "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/git",
+    "sha256": "cd36778ef52d80fce1e3944b7f334460bec0921597dcf20d3d50d87d7560a588"
+  },
+  "measured_Git_owner": {
+    "gid": 1000,
+    "uid": 1000
+  },
+  "no_binary_equivalence_or_invocation": true,
+  "original_v7_ACTUALFAIL": {
+    "bytes": 4750,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v7-original-PURE18-ACTUALFAIL-independent-review/OWNERFINAL-independent-original-PURE18-v7v2-managed-Git-ACTUALFAIL.json",
+    "sha256": "ebdfa0ae82cda27d515192d26098c12c3a689f19212cee9f58920a3304ae570c"
+  },
+  "original_v7_ROOT_inner": {
+    "bytes": 2672,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-first-five-v7-current9760-reviewed-PURE18-outer/OWNERFINAL-root-original-first-five-v7-PURE18-outer.json",
+    "sha256": "82743cdaacde40e78283cb38381f36c3b0a35b7227431a41b918aa69cedfded8"
+  },
+  "original_v7_ROOT_master": {
+    "bytes": 1307,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-PURE18-v7-exact-reviewed-argv-original-execution/OWNERFINAL-root-original-exact-reviewed-PURE18-v7-execution.json",
+    "sha256": "d0088d399f58c9173ba0b8f71cb00aa2d5f1da638d6c2c88debf9473eb09f4af"
+  },
+  "preserved_original_v7_SOURCE_and_all_original98": true,
+  "required_ROOT_decision": "RELEASE_ONE_FIRST_FIVE_V8_CURRENT9760_MEASURED_GIT_MANAGED_PURE18_ONLY",
+  "required_independent_decision": "GO_FIRST_FIVE_V8_CURRENT9760_MEASURED_GIT_MANAGED_PURE18_PREEXECUTION",
+  "reviewer_or_worker_tests_import_storage_native": "NOT_RUN",
+  "schema": 1,
+  "source_preparation_predecessor": {
+    "bytes": 8341,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/OWNERFINAL-first-five-v8-current9760-measured-managed-Git-SOURCE-and-PURE18-PREEXECUTION-NOTRUN.json",
+    "sha256": "7a3f87572e5ea9c83a82fc606933c57075ab3183f630c3f9ae890e5b7ef14c3a"
+  },
+  "source_proof_binding": {
+    "bytes": 2567,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/SOURCE-PREPARED-v8-final-managed119-physical-row-owner-and-system-history-scope-proof.json",
+    "sha256": "1b9a02719b7b9daebbc7bc6fa22728f2ac258c83ed9b7691fde1fcb0a063ceab"
+  },
+  "system_Git_original_row_preserved_and_guarded": "Four-field declaration preserved; immutable originalcfg/ACTUALFAIL proof guarded. It is not the selected current executable and not placed in1000-owned physical row loop.",
+  "writer_A_released": true
+}

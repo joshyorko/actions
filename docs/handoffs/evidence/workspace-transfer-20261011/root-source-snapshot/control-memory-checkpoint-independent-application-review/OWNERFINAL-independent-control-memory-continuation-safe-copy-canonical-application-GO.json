@@ -1,0 +1,81 @@
+{
+  "allowed_changed_paths_count": 38,
+  "bytes": 303157,
+  "capture": "2026-10-11T21:52:00.358950+00:00",
+  "decision": "GO_NORMAL_DOCUMENTATION_COMMIT_PUSH_EXISTING_CHECKPOINT_BRANCH_ONLY_AFTER_ROOT_OWN_STAGE_COMMITTED_HASH_READBACK",
+  "documentation": {
+    "accepted_existing_source_lessons": "Exact root77line append sufficient; no cosmetic extra proposal or session diary",
+    "canonical_dispositions": [
+      {
+        "decision": "ACCEPT_SOURCE_BACKED",
+        "delta": "per-child fixed bootstrap/import boundary; path-owned700 vs711 and consumed pre-root release",
+        "evidence": "copies01/02/09 preserve original V8 import and memory17 admission failures; copies10 pure17 successor actual only"
+      },
+      {
+        "decision": "ACCEPT_SOURCE_BACKED",
+        "delta": "Original subprocess tuple, primary/secondary publication and null cleanup scope",
+        "evidence": "copies05/06 retain control3 FAIL; signal:killed sourceUNKNOWN and missing publication; no5/7276 execution"
+      },
+      {
+        "decision": "ACCEPT_WITH_EXISTING_BACKEND_ADOPTION_HOLD",
+        "delta": "8c28 shared memory/headroom/profile and d6 self identity/read caps/join/interval attribution",
+        "evidence": "copies15/16/33/34/35/36 preserve pure/synthetic-only policy and observer; no full backend/native/headroom calibration"
+      },
+      {
+        "decision": "ACCEPT_SOURCE_BACKED_NO_NATIVE_OR_COMPLETE_ORACLE_CLAIM",
+        "delta": "5584 catalog immutable nested snapshot/held-lock boundary and37c observed omitted JUnit type",
+        "evidence": "copies11/12/13/14/32 retain original failures, corrected baseline and specific known18 source-only sensitivity scope"
+      },
+      {
+        "decision": "ACCEPT_SOURCE_BACKED",
+        "delta": "Exact fallback enclosure, actual baseline first and no stale correction carry",
+        "evidence": "copies11/13/14 original baseline/protocol FAIL preserved alongside named source-only successors"
+      },
+      {
+        "decision": "ACCEPT_SOURCE_BACKED_REUSE_CURRENT_SOURCE_LESSONS_NO_NEW_WIRING_CLAIM",
+        "delta": "Progress writer dispatch, capped index/executableaddresses/budgets/single hardlink copy and typed failed partial alias",
+        "evidence": "copies17/18/19/20 scope lossless storage only, original failed partial remainsFAIL; no gzip completion upgrade or native qualification"
+      },
+      {
+        "decision": "ACCEPT_PLAN_SCOPE_NO_COMPLETED_RECOVERY_OR_NATIVE_CLAIM",
+        "delta": "Unique device/inode recovery bytes, distinct environment/restoration dependency subject and disk versus RAM",
+        "evidence": "copy28 is explicit readonly environment capacity proposal, no removal; source dependencies/prefix/symlinks remain obligations"
+      }
+    ],
+    "exact_delta": {
+      "added_lines": 77,
+      "bytes": 5560,
+      "deleted_lines": 0,
+      "sha256": "455b0055a42da56391e59118083842089fe25df77aff43c77021f2291808ab71"
+    },
+    "remaining_uncertainty": "This is WORKING application and unchanged index review. ROOT must stage exact allowed paths then verify staged/committed originals and actual remote; private external references/full archives not bundled or newly admitted; backend/native/current campaign release holds remain",
+    "stale_ambiguity_removed": "Prepared source and synthetic/pure/data-preservation receipts cannot qualify backend/native/release or erase original failure; per-path modes and protocol emitters are measured independently"
+  },
+  "files": 36,
+  "guide_binding": {
+    "bytes": 254108,
+    "mode": "0o600",
+    "path": "/workspace/engineering/campaign-checkpoint/docs/skills/repository-operations.md",
+    "sha256": "15e988c9bb0e7ce9930a849a7daaef04b42ee24a924b39683d60986ecb9097aa"
+  },
+  "independent_proof": {
+    "bytes": 34603,
+    "mode": "0o400",
+    "path": "/workspace/engineering/control-memory-checkpoint-independent-application-review/independent-all36-exact-original-copies-parent-preservation-and-scope-proof.json",
+    "sha256": "188229771d64ff45d84ed6d36ecb1aca4155db38c7685f59df5c807f1b096413"
+  },
+  "index_stage_listing_SHA256": "d78252f60ae443fc504186ede56758018adb63e799ab831838c6e2cdd70b50ed",
+  "manifest_binding": {
+    "bytes": 23084,
+    "mode": "0o600",
+    "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/actions-swarm-mk3-20261011-control-memory-continuation/exact-safe-original-source-and-owner-copy-manifest.json",
+    "sha256": "91703bb9cdd4cf616f00bd8e506b6dd9bc8228b10c707f142ef872575cfafeed"
+  },
+  "old_tracked_preserved_except_append": 3636,
+  "parent": "843cb16dc071fc764f11f1e0b3b07432dcd04a7d",
+  "privacy": "SELECTED_COPY_BYTES_INSPECTED_NO_CREDENTIAL_SIGNED_URL_RAW_PRIVATE_PAYLOAD_FOUND",
+  "reviewer_tests_source_stage_commit_push": "NONE",
+  "schema": 1,
+  "status": "INDEPENDENT_EXACT_SAFE_CHECKPOINT_APPLICATION_GO",
+  "upstream_disposition": "none"
+}

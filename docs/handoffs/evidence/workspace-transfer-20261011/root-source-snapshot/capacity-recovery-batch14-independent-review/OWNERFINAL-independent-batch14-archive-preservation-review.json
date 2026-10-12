@@ -1,0 +1,106 @@
+{
+  "schema": "actions.independent-completed-scratch-batch14-preservation-review/v1",
+  "verdict": "GO_SCOPED_BATCH14_ARCHIVE_AND_PRIOR_REFERENCE_PRESERVATION_ONLY",
+  "owner_final_safe": {
+    "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch14.json",
+    "bytes": 2420,
+    "sha256": "88a81e8424dec8d5ef57b5ea37422273d6e1a24f90082f25630f177c9dd04619"
+  },
+  "independent_archive_stream_proof": {
+    "path": "/workspace/engineering/capacity-recovery-batch14-independent-review/independent-two-archive-stream-proof.json",
+    "bytes": 2583,
+    "sha256": "77af609822d3ea972798c85edd62c136b497958174536bb864ed9b207fe52d2f"
+  },
+  "independent_prior_reference_proof": {
+    "path": "/workspace/engineering/capacity-recovery-batch14-independent-review/independent-prior31-archives13-indices-preservation-proof.json",
+    "bytes": 16049,
+    "sha256": "b14541a10e9a7c4bcfd23026dcae4124365cff179747d63163fbe75074591b5b"
+  },
+  "counts": {
+    "new_archives": 2,
+    "new_members": 30318,
+    "new_internal_hardlinks": 8,
+    "new_logical_regular_bytes": 1206963857,
+    "prior_archives": 31,
+    "prior_indices": 13,
+    "prior_summaries": 13,
+    "total_retained_archives": 33,
+    "total_retained_indices": 14
+  },
+  "safe_archive_aggregates": [
+    {
+      "archive_ordinal": 1,
+      "archive_bytes": 249447428,
+      "archive_sha256": "215414f3fd42f10a159194ba80bee0c484b87736f012f1eaf5b51f62ed5d6bfc",
+      "root_directory_header": 1,
+      "members_verified": 15160,
+      "kinds": {
+        "file": 11710,
+        "directory": 2980,
+        "symlink": 462,
+        "fifo": 8,
+        "hardlink_headers": 4
+      },
+      "resolved_internal_hardlink_data_verified": 4,
+      "logical_regular_file_bytes_verified": 602564438,
+      "completed_recycle_marker_verified": true,
+      "expanded_namespace_absent": true,
+      "gzip_EOF_CRC_ISIZE_verified": true
+    },
+    {
+      "archive_ordinal": 2,
+      "archive_bytes": 250994967,
+      "archive_sha256": "438a48f33703a9190766118df30dec3dfc920b98b18cf75de64f76eea29fcf7f",
+      "root_directory_header": 1,
+      "members_verified": 15158,
+      "kinds": {
+        "file": 11710,
+        "directory": 2974,
+        "symlink": 466,
+        "fifo": 8,
+        "hardlink_headers": 4
+      },
+      "resolved_internal_hardlink_data_verified": 4,
+      "logical_regular_file_bytes_verified": 604399419,
+      "completed_recycle_marker_verified": true,
+      "expanded_namespace_absent": true,
+      "gzip_EOF_CRC_ISIZE_verified": true
+    }
+  ],
+  "verified": {
+    "gzip_EOF_CRC_ISIZE": true,
+    "all30318_unique_recorded_members": true,
+    "bytes_size_SHA_mode_UID_GID": true,
+    "symlink_targets_exact_without_dereference": true,
+    "internal_hardlink_payloads_same_archive": true,
+    "completion_markers_True": true,
+    "two_expanded_namespaces_absent": true,
+    "AST_same_batch13_except_three_allowed_constants": true,
+    "existing_mount_only": true,
+    "private_index_and_archive_modes0600_parent0700": true,
+    "prior31_archives13_indices_and_safe_receipts_exact": true,
+    "original_V5runner09cdc_exact": true,
+    "failed563d_exists_only": true
+  },
+  "limitations": [
+    "After-removal retained archive/index/source/log qualification; no historical expanded filesystem or complete live handle census replay",
+    "No ACL/xattr/inode/rootmetadata/precise TAR mtime qualification",
+    "No source/native/consumer/cache/venv/provider/release or original failed gate admission",
+    "No recovery/deletion/restore/extraction/download/gate/native/source/ref operation by reviewer; own safe review outputs only",
+    "No member inventory keys or private payloads included in safe receipts"
+  ],
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "Exact_delta_disposition": "Accept existing exact7d070 paragraph verbatim in owning guide; same verified algorithm gives no new durable lesson requiring cosmetic duplication",
+    "Accepted_patch": {
+      "path": "/workspace/engineering/capacity-recovery-independent-review/canonical-completed-scratch-preservation-proposed.patch",
+      "bytes": 1068,
+      "sha256": "7d07065b5bb7742698919997c8c6621cc20d00494741eb5365251ffb09f2d208"
+    },
+    "Durable_learning_captured": "Retain full recorded byte/member metadata archives and inventories before exact completed scratch removal; keep failed namespaces and historical process observations separate",
+    "Evidence": "30318 members including internal hardlinks and gzipEOF; complete byte/mode/UID/GID/symlink comparisons; script AST parity batch13; prior31 archive/13 index/safe-summary hashes; V5runner exact",
+    "Stale_or_ambiguous_guidance_removed": "No guidance removed; retained paragraph prevents archive preservation from implying unrecorded metadata, historical full handle census or failed gate PASS",
+    "Remaining_uncertainty": "Historical full process census, ACL/xattrs/inode/rootmetadata/precise TARmtime and failed563d contents/state remain unqualified"
+  },
+  "upstream_disposition": "none"
+}

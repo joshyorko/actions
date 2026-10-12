@@ -1,0 +1,112 @@
+{
+  "actual_original18": {
+    "actual_five_before_after_stdlib_origins_exact": true,
+    "actual_unique_source_ids": 18,
+    "adapter_not_invoked": true,
+    "all_outcomes": "PASSED",
+    "independent_binding": {
+      "bytes": 10515,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v8-original-PURE18-independent-ACTUAL-review/OWNERFINAL-independent-original-first-five-v8-managed-Git-ACTUAL-PURE18-GO.json",
+      "sha256": "dd9fa8279c9503488acf753f6c4520ba201cd92a8f30168346ff9b32c4c3529d"
+    },
+    "original_checked634_driver_origin_exact": true,
+    "original_dd9_config_copy_exact": true,
+    "raw_binding": {
+      "bytes": 8089,
+      "mode": "0o600",
+      "path": "/workspace/engineering/first-five-v8-current9760-managed-Git-PURE18-once-owned/original-18-complete-machine-census.json",
+      "sha256": "28ba47b66bb90ebf73f8e4834b42005e417dfe73f9471538397d02c962518ba0"
+    },
+    "raw_status": "PASS_PURE_CONTROLS_ONLY",
+    "source_owner": {
+      "bytes": 9322,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/OWNERFINAL-first-five-v8-current9760-measured-managed-Git-SOURCE-PREEXECUTION-final-history-scope-NOTRUN.json",
+      "sha256": "485dc5ee1c67cb79b16fb9ea140626958b02ec77c91699ce62d307b7cefc4475"
+    }
+  },
+  "all_unique_nested_binding_tuples_exact": 152,
+  "baseline_first": "Restored valid adapter/admission/layout/loader/refusal/grant paths precede associated poisons; timeout/output controls inspect actual unchanged one_subprocess with injected subprocess/retention seams. No real archive call or delegated production guard is invoked by controls.",
+  "case_counts": {
+    "actual_outcomes": "NOT_RUN",
+    "declared_unique_machine_ids": 30,
+    "source_unittest_methods": 30
+  },
+  "control_scope": {
+    "actual_layout_threshold": 1,
+    "adapter": 12,
+    "delegated_refusal_propagation": 1,
+    "primary_timeout_secondary_retention": 1,
+    "private_regular_mode_symlink": 1,
+    "returned_nonzero_raw_retention": 1,
+    "storage_admission": 10,
+    "strict_typed_pure_grant": 2,
+    "verified_source_loader": 1
+  },
+  "expected_cases": [
+    "__main__.ControllerBoundaryControls.test_00_valid_adapter_preserves_original_raw_status",
+    "__main__.ControllerBoundaryControls.test_adapter_v7_label_rejected",
+    "__main__.ControllerBoundaryControls.test_adapter_count_boolean_not_integer",
+    "__main__.ControllerBoundaryControls.test_adapter_missing_or_duplicate_selected_case",
+    "__main__.ControllerBoundaryControls.test_adapter_failed_real_result_not_hidden_by_zero_counters",
+    "__main__.ControllerBoundaryControls.test_adapter_nonzero_skip",
+    "__main__.ControllerBoundaryControls.test_adapter_wrong_source_owner",
+    "__main__.ControllerBoundaryControls.test_adapter_wrong_owned_census_path",
+    "__main__.ControllerBoundaryControls.test_adapter_before_or_post_not_qualified",
+    "__main__.ControllerBoundaryControls.test_adapter_wrong_driver_or_origin",
+    "__main__.ControllerBoundaryControls.test_adapter_origin_changed_between_phases",
+    "__main__.ControllerBoundaryControls.test_adapter_unknown_native_flag",
+    "__main__.ControllerBoundaryControls.test_10_valid_synthetic_admission_actual_boundary",
+    "__main__.ControllerBoundaryControls.test_strict_storage_child600_no_widen",
+    "__main__.ControllerBoundaryControls.test_storage_missing_inactive_approval",
+    "__main__.ControllerBoundaryControls.test_storage_wrong_approval_scope",
+    "__main__.ControllerBoundaryControls.test_storage_requires_unknown_is_not_quiescence",
+    "__main__.ControllerBoundaryControls.test_storage_dirty_protected_checkout",
+    "__main__.ControllerBoundaryControls.test_storage_wrong_current_tree",
+    "__main__.ControllerBoundaryControls.test_storage_changed_protected_body",
+    "__main__.ControllerBoundaryControls.test_storage_prepared_manifest_binding_mismatch",
+    "__main__.ControllerBoundaryControls.test_storage_typed_PASS_owner_cannot_self_certify",
+    "__main__.ControllerBoundaryControls.test_private_binding_regular_mode_and_symlink",
+    "__main__.ControllerBoundaryControls.test_layout_stopreserve_not_RCC_native_floor",
+    "__main__.ControllerBoundaryControls.test_verified_module_wrong_hash_before_execution",
+    "__main__.ControllerBoundaryControls.test_delegated_alias_refusal_remains_failure",
+    "__main__.ControllerBoundaryControls.test_nonzero_completed_output_retained_before_assertions",
+    "__main__.ControllerBoundaryControls.test_timeout_and_capture_failure_preserve_primary",
+    "__main__.ControllerBoundaryControls.test_strict600_typed_pure_ROOT_grant",
+    "__main__.ControllerBoundaryControls.test_pure_ROOT_grant_never_allows_real_storage"
+  ],
+  "explicit_config_bindings_exact": 142,
+  "future_real_preservation": "NOT_AUTHORIZED; inactive approval4d227 does not replace typed adapter creation, derived independent review, actual30 PASS, layout capacity746586112 or distinct operation grant. No real alias-parser/cgroup/native qualification.",
+  "launcher": {
+    "alwayspost_guard_cooperative60": true,
+    "before_guard_cooperative60": true,
+    "cached_python_five_origins_managed18_PATH2_before_finally": true,
+    "child_GNU_TERM180_KILL10_python_fallback200": true,
+    "denied_flags": [
+      "PYTHONOPTIMIZE",
+      "PYTHONHOME",
+      "PYTHONPATH",
+      "PYTEST_ADDOPTS"
+    ],
+    "fresh_owned_root_and_fixture_ABSENT_at_review": true,
+    "hardkill_external_ROOT_terminal_required": true,
+    "nominal_bounded_stage_total320_enclosed_ROOT600": true,
+    "self_config_review_exact_closure": true,
+    "source_stdout_stderr_fsynchronized_mode600": true,
+    "typed_ROOT_grant_600_10": true
+  },
+  "method": "Read-only stdlib filesystem/hash/AST/data inspection only; no module imports, compile/exec, adaptation, controls or operations executed.",
+  "original_controller_whole_function_AST": {
+    "all_other_functions_classes_exact": true,
+    "named_change": "V8 original raw-derived typed receipt admission; original archive driver remains exact63476ec.",
+    "only_changed_function": "admit"
+  },
+  "owner_binding": {
+    "bytes": 8399,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/OWNERFINAL-controller-V8-original-actual-adapter-and-30-boundary-SOURCE-PURE-PREEXEC-final-NOTRUN-v2.json",
+    "sha256": "06b8f1d6bf52a6a13ecce62820cc2e5b6ae2bd961027268cdc51fa3dec3adeb2"
+  },
+  "schema": 1
+}

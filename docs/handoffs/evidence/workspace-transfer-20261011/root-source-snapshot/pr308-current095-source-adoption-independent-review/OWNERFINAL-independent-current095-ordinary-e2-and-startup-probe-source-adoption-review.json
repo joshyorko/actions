@@ -1,0 +1,114 @@
+{
+  "accepted_patch_binding": {
+    "bytes": 6211,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/combined-adapter-tests-canonical-three-path.patch",
+    "sha256": "805bed37940e4e5ade0e7e02da332192551b3f2bba1536022b901b1a4e24de42"
+  },
+  "actual_root_owner_binding": {
+    "bytes": 885,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-pr308-e2-and-startup-probe-adoption/OWNERFINAL-root-ordinary-e2-and-startup-probe-source-adoption.json",
+    "sha256": "edf047d2aeaa3b74b42cfaa3879146dfee4ee740bb9797f0f6d47c821bd39107"
+  },
+  "admission_limits": [
+    "This approves exact source adoption only; source LIGHT currently owned elsewhere remains separate pending qualification.",
+    "Fresh current095 configuredFULL, separate CONTROL/source pin and exact native execution configuration/root releases remain required; no old sourceFULL/native/currentCI carry.",
+    "Pure seven-regression source evidence and nine retained negatives are service-free spies, not native timeout/functionality evidence.",
+    "Versions5/7276/native/platform/private/provider/fullissue/release acceptance remains HOLD; original failed RCC3/capacity/cleanup receipts unchanged.",
+    "No normalpush/integration authorization supplied by this source-adoption review."
+  ],
+  "decision": "GO_CURRENT095_PR308_ORDINARY_E2_AND_STARTUP_PROBE_SOURCE_ADOPTION_ONLY",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md exact four-line startup-probe lesson already integrated in current095, verified; no duplicate addition.",
+    "Durable_learning_captured": "Verify bounds at actual default caller-to-subprocess dispatch, not just the direct version helper.",
+    "Evidence": [
+      {
+        "bytes": 2488,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr308-current095-source-adoption-independent-review/independent-current095-complete-source-adoption-proof.json",
+        "sha256": "91345fa4f595f768074a22400d76515722eff599a2cf1d418d31ba64770d7274"
+      },
+      {
+        "bytes": 6943,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr308-isolated-version-probe-independent-review/OWNERFINAL-independent-private-isolated-default-version-probe-three-path-source-patch-review.json",
+        "sha256": "108fd72da96150681b3d70cc75e5ffba47912db3f402a1f77bddbc9986fc846b"
+      },
+      {
+        "bytes": 6211,
+        "mode": "0o444",
+        "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/combined-adapter-tests-canonical-three-path.patch",
+        "sha256": "805bed37940e4e5ade0e7e02da332192551b3f2bba1536022b901b1a4e24de42"
+      }
+    ],
+    "Exact_delta": {
+      "bytes": 950,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-isolated-version-probe-private-patch/canonical-isolated-version-probe-timeout-roles-proposed.patch",
+      "sha256": "87fb5128523f350011e7940a03802b9d3f2de0548f7a1c1b101d16a0b6031e1d"
+    },
+    "Remaining_uncertainty": "Current sourceLIGHT/FULL and real native3/5/7276 functionality still require independent fresh evidence; source equivalence of modified released binary remains unknown.",
+    "Reuse_reason": "This is the already accepted meaningful owning-guide correction, applied exactly with real source child and preserved parent guide chunks; another paragraph would duplicate it.",
+    "Stale_or_ambiguous_guidance_removed": "A direct version helper timeout did not bound default wrappers that forwarded the general900-second runner. Current guide separates isolated10-second version admission, default wrappers, general command budget and injected-runner test seams."
+  },
+  "independent_complete_Git_FS_AST_and_patch_proof": {
+    "bytes": 2488,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-current095-source-adoption-independent-review/independent-current095-complete-source-adoption-proof.json",
+    "sha256": "91345fa4f595f768074a22400d76515722eff599a2cf1d418d31ba64770d7274"
+  },
+  "ordinary_merge": "37a4f1c3e66cbfb18cb67e8ed041da07c3f84107",
+  "ordinary_merge_ordered_parents": [
+    "396925cb3d6527af1768b7f5333f9653c005fc55",
+    "e2c81adce7858d5a952991ba9a8b7f72e902038a"
+  ],
+  "ordinary_merge_tree": "929410b09fff3521c554cf935411c71f9e2e6b95",
+  "previous_accepted_private_source_review_binding": {
+    "bytes": 6943,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-isolated-version-probe-independent-review/OWNERFINAL-independent-private-isolated-default-version-probe-three-path-source-patch-review.json",
+    "sha256": "108fd72da96150681b3d70cc75e5ffba47912db3f402a1f77bddbc9986fc846b"
+  },
+  "production_boundaries": {
+    "binary_selection_hash_platform_contract": "No change outside accepted verify_rcc_version runner dispatch",
+    "default_production_RCC": "Existing3 unchanged",
+    "downloader_build_pin_files": "All nonpatch body/mode pairs exact ordinary union; accepted adapter patch has no downloader/build/pin/signature change",
+    "new_behavior": "Default selected-version probe uses isolated ten-second probe rather than forwarding general900-second command runner; explicitly injected runner preserved as test seam.",
+    "selected_native_inputs": "Historical native1192 and actual failure receipts are not current-source functionality evidence"
+  },
+  "reviewer_operations": "Owned source-adoption proof/receipt only; no source/index/ref edits, imports, gate/test/native execution, archive mutation or download.",
+  "schema": "INDEPENDENT_CURRENT095_PR308_SOURCE_ADOPTION_REVIEW",
+  "sole_child_parent": "37a4f1c3e66cbfb18cb67e8ed041da07c3f84107",
+  "source_checks": {
+    "adapter_test_bodies": "Exact accepted proposed bytes; prior original module controls/test AST preservation proof rehashed",
+    "all_current_Git_FS_typed_bodies_and_exec_modes": "PASS1440",
+    "canonical_child": "Exact accepted literal four-line replacement",
+    "child_modes": "All unchanged",
+    "guide_parent_change_chunks": "All six source-parent and six target-parent chunks preserved",
+    "immutable_private_patch_refs_rehashed": 28,
+    "ordinary_combined_leaves": [
+      ".github/workflows/_gen_workflows.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "other_mode_blob_pairs_exact": 1437,
+    "source_clean_before_after": true,
+    "startup_child_changes": [
+      "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "union_path_set": "Exact complete parent union; no deletion/additional application leaf",
+    "whole_generator_top_level_parent_nodes": 32
+  },
+  "source_head": "095e25b6b2b2c8754184b0d26f77bc70a101cee4",
+  "source_tree": "edf088b1a8acd9709b37dee2532d77c8b2246a50",
+  "storage_prerequisite_binding": {
+    "bytes": 12268,
+    "mode": "0o400",
+    "path": "/workspace/engineering/capacity-recovery-B28-one-exact-TMP-relocation-independent-review/OWNERFINAL-independent-one-exact-TMP-archive-relocation-ACTUAL-storage-preservation-review.json",
+    "sha256": "d6caaf3a4eac9220887c79cc80f59fc3eb4228219d482913aac5d4de95cc3671"
+  },
+  "typed_source_leaves": 1440,
+  "upstream_disposition": "none"
+}

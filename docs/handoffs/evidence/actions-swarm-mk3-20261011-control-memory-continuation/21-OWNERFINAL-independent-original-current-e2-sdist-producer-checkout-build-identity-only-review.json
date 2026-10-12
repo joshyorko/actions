@@ -1,0 +1,98 @@
+{
+  "schema": 1,
+  "status": "INDEPENDENT_ORIGINAL_SDIST_SOURCE_IDENTITY_ONLY_GO",
+  "decision": "GO_ORIGINAL_CURRENT_E2_SDIST_PRODUCER_CHECKOUT_BUILD_IDENTITY_ONLY",
+  "owner_binding": {
+    "path": "/workspace/engineering/pr221-current-e2-original-sdist-producer-log-once/OWNERFINAL-original-current-e2-sdist-producer-checkout-build-identity-only.json",
+    "bytes": 2123,
+    "sha256": "5936470707c8a98f1d7ac2303ed8639024dac132f624e4a08dcbf426d20124ba",
+    "mode": "0o400"
+  },
+  "verified_all_five_original_references": [
+    {
+      "bytes": 1222,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-original-sdist-producer-log-once/safe-original-sdist-producer-checkout-build-identity-proof.json",
+      "sha256": "8103d47cb2d6d59e431929750f20ebebb771f22daa7ca970f99837de41daa757"
+    },
+    {
+      "bytes": 822712,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr221-current-e2-original-sdist-producer-log-once/original-decoded-sdist-producer.private.log",
+      "sha256": "3325365afafc1eb30494e253607cbae1b0052bc466c06aef4884893fb870aaeb"
+    },
+    {
+      "bytes": 1183664,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr221-current-e2-original-sdist-producer-log-once/original-escaped-logical-MCP.private.json",
+      "sha256": "e080bacbe60101776cc13dfbb740673190270f7fe4cc30db78e6fa26d95dca0e"
+    },
+    {
+      "bytes": 2935,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/intended-synthetic-commit.decoded-pages.json",
+      "sha256": "e6509a977fb01d22147222c7c4b023e5e9e2ef3499b9cb388733d1da9462e7f4"
+    },
+    {
+      "bytes": 11131,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr221-currente2c-Mac-Windows-original-producer-log-owned/current-terminal-jobs-escaped-logical-MCP.private.json",
+      "sha256": "bd4032755c52a04b02ce66e2a75a06f7b408de36b3dbb1f32175d41a6222c05f"
+    }
+  ],
+  "actual_original_checkout": "165c38920fe37dd81350ca8ca0419bc70a4739f2",
+  "authenticated_producer_tree": "afe2679cc93bf27fa5021c7698ee7ad3ee21a1b9",
+  "authenticated_ordered_parents": [
+    "a70993fafc99a9f94041485542d5a720797ca394",
+    "e2c81adce7858d5a952991ba9a8b7f72e902038a"
+  ],
+  "existing_e2_local_tree_readonly": {
+    "source": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+    "tree": "afe2679cc93bf27fa5021c7698ee7ad3ee21a1b9",
+    "qualified_scope": "existing local source tree equality only; synthetic commit tuple authority remains retained authenticated API; no fetch/ref/object fabricated"
+  },
+  "literal_source_and_build": {
+    "checkout_command_line": 123,
+    "checkout_result_line": 124,
+    "OAuth_generator_line": 5458,
+    "GH_TOKEN_advice_lines": [
+      5464,
+      5467
+    ],
+    "OAuth_destination_write_line": 5470,
+    "sdist_build_line": 5476,
+    "sdist_build_command": "uv run --no-project --python 3.12 poetry build -f sdist",
+    "Runtime_version_line": 5483,
+    "builder_reported_version": "actions-runtime (1.0.3)"
+  },
+  "authenticated_job_metadata": {
+    "job_id": 114523345265,
+    "run_id": 38157482815,
+    "name": "build-sdist (ubuntu-py3.12)",
+    "status": "completed",
+    "conclusion": "success",
+    "head_sha": "ABSENT_UNKNOWN; original literal checkout is the source authority"
+  },
+  "decoded_log_equals_retained_logical_connector_content": true,
+  "limitations": [
+    "Original connector wire bytes unavailable; exact decoded UTF8-to-retained-logical-content parity is verified.",
+    "Two GH_TOKEN advice messages and destination write are observed; individual gh return codes and HTTP status are NOT_RECORDED. No HTTP404 or successful valid payload inferred.",
+    "Version output and producer SUCCESS establish build identity only; no filename/hash imputation, package member/generated OAuth/static content/source authority/installed consumer acceptance.",
+    "Separately accepted aggregate integrity291686 and seven-artifact empty OAuth measurements remain separate, with OAuth authority/content and native/private/Runtime publication HOLD."
+  ],
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "exact_existing_delta_accepted_reuse": {
+      "path": "/workspace/engineering/pr221-currente2c-Mac-Windows-original-producer-log-owned/canonical-original-platform-checkout-identity-proposed.md",
+      "bytes": 470,
+      "sha256": "74187436f50d80becea52d7679a6943085a950f6339dc4ce3a9fdc2c15ecf1de",
+      "mode": "0o400"
+    },
+    "durable_learning": "Authenticate each distribution producer from its own literal original checkout and retained ordered Git tuple; source/API labels and SUCCESS cannot substitute for package content or installed-consumer qualification.",
+    "evidence": "Original sdist git-log1 literal165c line124, build5476/version5483 after generator5458/advice5464,5467/write5470; retained e650 API treeafe ordered[a709,e2] and authenticated job265 completedSUCCESS.",
+    "stale_or_ambiguous_guidance_removed": "No Linux/Mac/Windows proof inferred as sdist checkout; no headlabel or generated destination write promoted to content authority.",
+    "remaining_uncertainty": "Accepted470B six-line7418 delta already captures this producer rule; no duplicate prose or guide mutation. Payload authority and release gates remain HOLD."
+  },
+  "upstream_disposition": "none",
+  "review_operations": "READ_ONLY_STDLIB_LOG_JSON_HASH_AND_EXISTING_LOCAL_GIT_TREE_QUERY_ONLY; NO_REACQUISITION_GATES_INSTALL_IMPORT_NATIVE_TAG_RELEASE_SOURCE_MUTATION"
+}

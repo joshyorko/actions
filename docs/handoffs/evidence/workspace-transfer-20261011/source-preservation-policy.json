@@ -1,0 +1,10 @@
+{
+  "mode": "EMERGENCY_PRESERVATION_ONLY",
+  "no_new_tests_builds_benchmarks_native_merges_release_or_pin_changes": true,
+  "git_history_policy": "Normal existing-branch pushes only; no force or accepted-history rewrite",
+  "process_status": "Snapshot excludes command arguments to avoid secrets; zombie processes are recorded, not claimed to be clean descendants. No unrelated processes killed.",
+  "source_scope": "All registered product worktrees clean. Private source drafts preserved as WIP text with manifests; tests are not rerun for copying.",
+  "local_only_policy": "No established external artifact destination. Record measured hashes and reacquisition/regeneration limits. Do not commit environments, binaries, caches, raw sensitive logs, credentials, private RCC source.",
+  "additional_fixture_checkout": "/workspace/actions-cloud/devcontainer-validation/.git is an empty directory, not a Git repository; old validation-source.txt records7c98236069171f57031218f938963238986293bd. Rebuild clean toolkit rather than treating it as an owned branch.",
+  "canonical_guidance": "Previously independently accepted106-line repository-operations additions preserved. Emergency transfer does not create new acceptance claims."
+}

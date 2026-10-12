@@ -1,0 +1,17 @@
+{
+  "original_staged_check": "FAIL_2_ONE_HASH_BOUND_IMMUTABLE_SOURCE_BLANK_EOF_LINE44_NO_COMMIT",
+  "correction": "EXACT_ONE_IMMUTABLE_SOURCE_BASENAME_BLANK_EOF_ONLY_PRESERVE_ALL_ORIGINAL_BYTES",
+  "source": {
+    "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/08-historical_failed_receipt_archive_v1.py",
+    "bytes": 2645,
+    "sha256": "a69291189f47812c41ce43d9d68a81a839780ce28a0a9dfc00c487c9acb26d69"
+  },
+  "new_attribute": {
+    "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/.gitattributes",
+    "bytes": 152,
+    "sha256": "571ccf11205e84fe09b6691f3c3398264e1dc10a1f7bb1089f7bd96403bd0be9"
+  },
+  "old_attribute_sha256": "14577bcdc942456ff5404a97706d5da5f9244ef23400ed66daed074b20b84335",
+  "normal_authored_whitespace": "NO_CHANGE",
+  "prior3immutablepatchblankcontext": "NO_CHANGE"
+}

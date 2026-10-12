@@ -1,0 +1,9 @@
+import hashlib,os,sys
+from pathlib import Path
+expected={'ACTIONS_CLOUD_ROOT': '/workspace/actions-cloud', 'ROBOCORP_HOME': '/workspace/actions-cloud/robocorp', 'XDG_CACHE_HOME': '/workspace/actions-cloud/cache', 'XDG_CONFIG_HOME': '/workspace/actions-cloud/config', 'POETRY_CACHE_DIR': '/workspace/actions-cloud/cache/pypoetry', 'POETRY_CONFIG_DIR': '/workspace/actions-cloud/config/pypoetry', 'UV_CACHE_DIR': '/workspace/actions-cloud/cache/uv', 'npm_config_cache': '/workspace/actions-cloud/cache/npm', 'GOCACHE': '/workspace/actions-cloud/cache/go-build', 'GOPATH': '/workspace/actions-cloud/cache/go', 'PLAYWRIGHT_BROWSERS_PATH': '/workspace/actions-cloud/cache/playwright', 'PYTEST_XDIST_AUTO_NUM_WORKERS': '2', 'POETRY_NO_INTERACTION': '1', 'BUILDX_CONFIG': '/workspace/actions-cloud/cache/buildx', 'ACTIONS_HOME': '/workspace/actions-cloud/actions-home', 'ROBOTS_HOME': '/workspace/actions-cloud/robots-home', 'GOMAXPROCS': '2', 'ACTIONS_RUNTIME_TEST_PYTHON': '/workspace/actions/action_server/.venv/bin/python'}
+assert len(expected)+1==19
+for key,value in expected.items():assert os.environ.get(key)==value,key
+assert os.environ['PATH'].split(os.pathsep)[0]=='/workspace/actions-cloud/bin'
+assert Path(sys.executable).resolve()==Path('/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12')
+for p,h in [('/workspace/actions-cloud/activate.sh','6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a'),('/workspace/actions-cloud/bin/rcc','7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428'),('/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/verify_dakota_rcc_acceptance.py','60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659')]:assert hashlib.sha256(Path(p).read_bytes()).hexdigest()==h
+print('PASS_METADATA_ONLY_MANAGED_ACTIVATION19_AND_CACHED_PYTHON_NO_GATEWAY')

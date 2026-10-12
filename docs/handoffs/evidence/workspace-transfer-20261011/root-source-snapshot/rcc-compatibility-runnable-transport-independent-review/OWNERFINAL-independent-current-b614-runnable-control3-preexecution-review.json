@@ -1,0 +1,311 @@
+{
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; accept exact owner proposed patch, no repository edits in read-only lane",
+    "Durable_learning_captured": "Separate successful action return from intentional persistent-worker disposal; preserve raw legacy3 terminal fields, require both strict actual typed cleanup snapshots, and retain unavailable independent internal-reader qualification.",
+    "Evidence": [
+      "b614 action_server/tests/action_server_tests/test_rcc_runtime_adapter.py:2010-2032 action0 then exact failed/-1/reason; pinned body authenticated in full1421 proof",
+      "b614 test_source_staging_rcc_consumer.py:436-526 reuse_processes=False, action0 assertion, actual unchanged lease/typed snapshots and original status",
+      "ProcessTreeCleanupResult source lines432-454 measured derivation; WorkerRetirementResult lines45-49",
+      "fixture_records_v2.py strict legacy version/status/exit/reason/context and both typed snapshots; original RED1 and final268 service-free controls"
+    ],
+    "Exact_delta": {
+      "bytes": 1164,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/canonical-action-worker-and-reader-evidence-proposed-v2.patch",
+      "sha256": "837d3a02d8cd2f8e17928b6288c2aa211571a02dc86dbd3f10f10e0ae756a236"
+    },
+    "Remaining_uncertainty": "New actual runs remain NOT_RUN; no worker-reader, reuse/drain/recovery, native/private or full issue/release qualification.",
+    "Stale_or_ambiguous_guidance_removed": "Rejects treating action return0 as natural worker exit or inventing reader joins from wrapper/outer cleanup; narrows old completed/killed-only parser exclusion using existing RCC3 source authority."
+  },
+  "Upstream_disposition": "none",
+  "captured_UTC": "2026-10-11T14:07:38.917969+00:00",
+  "command_binding": {
+    "actual_transport": {
+      "bytes": 20308,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/actual_transport_v5.py",
+      "sha256": "e9db56723b5257a113e6f81ff6d56ab5567e615d508be48361d8d5bb95587283"
+    },
+    "constructor": {
+      "bytes": 10428,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/build_actual_config_v4.py",
+      "sha256": "61a586cfaa363eaa9f488a2600b41818c63e7471b6870b040d670fede32366a4"
+    },
+    "exact_pytest_argv": [
+      "/workspace/engineering/pr308/action_server/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-n0",
+      "-vv",
+      "-rA",
+      "-m",
+      "integration_test and real_rcc",
+      "--basetemp",
+      "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-1/pytest",
+      "--junitxml",
+      "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-1/junit.xml",
+      "tests/action_server_tests/test_source_staging_rcc_consumer.py::test_published_artifact_details_preserves_one_rcc_identity_pair",
+      "tests/action_server_tests/test_source_staging_rcc_consumer.py::test_staged_package_executes_in_managed_rcc_runtime"
+    ],
+    "fixture_adapter": {
+      "bytes": 11504,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/fixture_records_v2.py",
+      "sha256": "ec6281e47ab7c2896cea27fbecb1f54c2106d65aa965db06b17999b2e21fd916"
+    },
+    "frozen_helper": {
+      "exclusive_Popen_owner": true,
+      "mode": "0o444",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/verify_dakota_rcc_acceptance.py",
+      "sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659"
+    },
+    "gateway_entry": {
+      "bytes": 2890,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/gateway_entry_v1.py",
+      "sha256": "ad5bd4f75cf30cb78b53d31506910996233d45d79f46c335f0fa052b09fe92ba"
+    },
+    "named_cases": [
+      "tests/action_server_tests/test_source_staging_rcc_consumer.py::test_published_artifact_details_preserves_one_rcc_identity_pair",
+      "tests/action_server_tests/test_source_staging_rcc_consumer.py::test_staged_package_executes_in_managed_rcc_runtime"
+    ],
+    "pytest_workers": 0
+  },
+  "conditional_later_versions": {
+    "binaries": [
+      {
+        "actual_status": "NOT_RUN",
+        "binary": {
+          "bytes": 22282402,
+          "mode": "0o700",
+          "path": "/workspace/actions-cloud/bin/rcc",
+          "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+        },
+        "label": "control3",
+        "selector": null,
+        "version": "v18.19.3"
+      },
+      {
+        "actual_status": "NOT_RUN",
+        "binary": {
+          "bytes": 22360226,
+          "mode": "0o700",
+          "path": "/dev/shm/actions-rcc-approved-test-only-binaries-20261011/released5",
+          "sha256": "1a617ad7c736fa67c605e20e5ebe3c7d54b02cd548f733e05c809cf49a48db1e"
+        },
+        "label": "released5",
+        "selector": "released-18.19.5-linux-amd64",
+        "version": "v18.19.5"
+      },
+      {
+        "actual_status": "NOT_RUN",
+        "binary": {
+          "bytes": 22384802,
+          "mode": "0o700",
+          "path": "/dev/shm/actions-rcc-approved-test-only-binaries-20261011/candidate7276",
+          "sha256": "be55dadc391ae4ac7dd38356755a1698c595fdf41bd4a0141f8df7cc9d29f00e"
+        },
+        "label": "candidate7276",
+        "selector": "candidate-727-18.19.6-linux-amd64",
+        "version": "v18.19.6"
+      }
+    ],
+    "each_later_config": "Distinct absent owned root, exact reviewed constructor4 config, hash-bound immediate previous original PASS_SCOPED/source+tree+2PASS zero skip/failure/error; cumulative ordered original predecessor rows",
+    "each_later_release": "New distinct exact root release and separate immutable config/preexecution review with fresh capacity; not authorized by current first-control3 GO",
+    "first_control3_only_now": true,
+    "no_auto_loop_or_retry": true,
+    "sequence": [
+      "control3",
+      "released5",
+      "candidate7276"
+    ],
+    "stop_remaining": "Any command, cleanup, original receipt, input guard, JUnit, sampler, capacity or required claim failure/missing stops remaining versions"
+  },
+  "decision": "GO_FIRST_CONTROL3_PREEXECUTION_ONLY_DISTINCT_ROOT_RELEASE_REQUIRED",
+  "execution_conditions": {
+    "all_five_concrete_own_origins_before_qualification_child": true,
+    "budgets_command_cleanup_helper_outer_kill": [
+      600,
+      10,
+      645,
+      660,
+      10
+    ],
+    "capacity_current_point_in_time": {
+      "/dev/shm": 4967510016,
+      "/workspace": 1293570048
+    },
+    "exclusive_wrapper_wait_and_reap_owner": "original helper 60acf725",
+    "first_devshm_min_free_bytes": 3865470567,
+    "fresh_config_owned_root_absent": true,
+    "hard_owned_sample_admission_bytes": 2576980377,
+    "immutable_guards_pre_post_and_root_after_every_outcome": true,
+    "managed_activation19_and_cached_metadata_preflight_first": true,
+    "operational_owned_sample_stop_bytes": 2523293286,
+    "root_release_workspace_min_free_bytes": 1288490189,
+    "runner_internal_workspace_floor_bytes": 1200000000,
+    "sampled_limits_only_no_kernel_quota_no_universal_peak": true,
+    "sampler_finite_seconds": 640,
+    "sampler_join_seconds": 3,
+    "sampler_seconds": 0.2,
+    "sampler_signal_scope": "only directly owned unique exact argv/cwd pytest PID+creation-time, identity rechecked, no supervisor signal/no wait/reap",
+    "serialized_no_other_heavy_or_devshm_mutation_required": true,
+    "workspace_floor_distinction": "Root strict 1.2 GiB cold release prerequisite is retained; runner internal sampled/guard floor is 1.2 decimal GB, no equivalence claimed. Root rechecks stricter floor before launch."
+  },
+  "first_config": {
+    "bytes": 634107,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/FROZEN-control3-current-b614-actual-config-v2.json",
+    "sha256": "8c5da5be25ebfcf86f286ee9f93ddad328c68b3243b0935ec5937c93376bb948"
+  },
+  "immutable_readback": {
+    "all_bytes_sizes_modes_exact": true,
+    "complete_Git_FS_tracked_body_modes": 1421,
+    "config175_bindings": 175,
+    "original_native_complete_member_set_exact": true,
+    "owner263_bindings": 263,
+    "prepared_inputs": 30,
+    "proof": {
+      "bytes": 66435,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-runnable-transport-independent-review/private-complete-binding-and-source-readback.json",
+      "sha256": "7a7027700a5e77262b152a7c341a5c07e7a3e631421d7f2b928b87b9f37974a1"
+    },
+    "proof_is_private_outside_Git": true,
+    "retained_complete_native_members": 1192,
+    "unique_bound_files": 263
+  },
+  "legacy_control": {
+    "head": "c10380a4d2ebc6f0aca63eb85c8f84a337da4962",
+    "scope": "provenance only; not new source self-pin or actual receipt",
+    "tree": "21676c626a933c2d55761ec85ecf26fe0eef26bb"
+  },
+  "owner_final": {
+    "bytes": 82646,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/OWNERFINAL-current-b614-runnable-three-version-RCC-compatibility-proposal-v2.json",
+    "sha256": "50bb3864ab95e6cfca705a8a0f6112e87b3fc56b0e513c19e12d856c3ea3a095"
+  },
+  "remaining_holds": [
+    "All three current actual RCC runs NOT_RUN at this review.",
+    "Released RCC5 modified source D1 clean source equivalence UNKNOWN; approved binary test only.",
+    "Independent internal worker reader joins UNAVAILABLE; persistence/reuse/reload/generation drain/provider recovery NOT_RUN/HOLD.",
+    "Existing native inventory is preservation proof, not new native producer/consumer qualification.",
+    "Fresh complete hosted CI, integration, publication, private missing source reconstruction, whole134/135 and release remain HOLD."
+  ],
+  "review_scope": "Independent read-only final runnable transport/source/input/schema review; no application/helper import, test/control execution, gateway, binary invocation, network, acquisition, retry or source mutation.",
+  "root_first_launch": {
+    "activation_script": "/workspace/actions-cloud/activate.sh",
+    "activation_sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a",
+    "argv": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "660s",
+      "/workspace/actions-cloud/bin/rcc",
+      "task",
+      "script",
+      "-r",
+      "developer/toolkit.yaml",
+      "--",
+      "python",
+      "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/gateway_entry_v1.py",
+      "--config",
+      "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/FROZEN-control3-current-b614-actual-config-v2.json",
+      "--config-sha256",
+      "8c5da5be25ebfcf86f286ee9f93ddad328c68b3243b0935ec5937c93376bb948",
+      "--release",
+      "ROOT_ONCE_OWNER_RELEASE_PATH_REQUIRED",
+      "--release-sha256",
+      "ROOT_ANNOUNCED_RELEASE_SHA256_REQUIRED",
+      "--label",
+      "control3"
+    ],
+    "checked_metadata_preflight_argv": [
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/managed_metadata_only_preflight.py"
+    ],
+    "cwd": "/workspace/engineering/pr308",
+    "explicit_export": {
+      "PYTEST_XDIST_AUTO_NUM_WORKERS": "2"
+    },
+    "fresh_private_log_and_terminal": "ROOT owned once paths before execution",
+    "preflight_must_succeed_before_gateway": true,
+    "release_tokens": "unresolved typed requirements, not executable literal paths or invented approval"
+  },
+  "root_release": {
+    "fresh_private_log_and_terminal_root_owned_exclusive": true,
+    "hash_bound_release_path_and_sha_required": true,
+    "no_unresolved_placeholder_may_be_executed": true,
+    "required_exact_body": {
+      "config_sha256": "8c5da5be25ebfcf86f286ee9f93ddad328c68b3243b0935ec5937c93376bb948",
+      "label": "control3",
+      "schema": 1,
+      "serialized_no_other_heavy_or_devshm_mutations": true,
+      "source": "b614864ba9da55c13662894b6ef3c8515d9fdb25",
+      "source_full_independent_sha256": "6087f9a712c1707b0f335090ebd97ae98c0f61945ad98e5bba06d10005e9846a",
+      "source_full_sha256": "eb73d4a34acaf77266f6aff75f758fa674e6b48aff968a31bbeca85148319bf8",
+      "source_independent_sha256": "ea79c4b762d3cdcd5b9d54d2ab475b250596e55e78c6a3ead0574b1845f4ee92",
+      "status": "ROOT_RELEASE_SINGLE_VERSION",
+      "tree": "6fa4f5c1e9837a0d893868255575b355b3977fae"
+    },
+    "root_owns_authorization_and_one_execution": true,
+    "state": "SCHEMA_ONLY_NOT_AUTHORED_NOT_AUTHORIZED_BY_THIS_REVIEW"
+  },
+  "schema": 1,
+  "service_free_original_evidence": {
+    "actual_config_command_poison_controls": "actual equality predicate with 14 per-argument alterations plus missing/extra/original missing field",
+    "config_original_missing_pytest_argv_RED": "1 FAIL, original preserved; no runtime started",
+    "final_log": {
+      "bytes": 368,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/runnable-final-v2-integrated-service-free-controls.private.log",
+      "sha256": "c4282edc0e1f6e7d799962034c674fb8714f727f571b7bb5304780d3b6eec073"
+    },
+    "final_original_service_free_controls": "268 PASS / 0 SKIP / 0 FAIL / 0 ERROR in 0.231s; no reviewer rerun",
+    "final_terminal": {
+      "bytes": 99,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/runnable-final-v2-integrated-service-free-controls-terminal.json",
+      "sha256": "cde1768a4bbf34189dcd3baf36c30655fee9d24dad8f2489ba4cdf05f7d49417"
+    },
+    "legacy_parser_original_RED": "1 FAIL, source-established legacy retirement rejected by old parser",
+    "source_FULL_original_counts": "1363 PASS / 13 SKIP / 0 FAIL / 0 ERROR; 1376 unique nodes, two workers; separate source gate"
+  },
+  "source": {
+    "complete_body_mode_count": 1421,
+    "head": "b614864ba9da55c13662894b6ef3c8515d9fdb25",
+    "tree": "6fa4f5c1e9837a0d893868255575b355b3977fae",
+    "worktree": "/workspace/engineering/pr308"
+  },
+  "source_FULL": {
+    "bytes": 6277,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-rcc308-one-current-b614-source-full/OWNERFINAL-root-current-b614-configured-SOURCEFULL.json",
+    "sha256": "eb73d4a34acaf77266f6aff75f758fa674e6b48aff968a31bbeca85148319bf8"
+  },
+  "source_FULL_independent": {
+    "bytes": 13279,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr308-compatibility-current-sourcefull-independent-actual-review/OWNERFINAL-independent-current-b614-configured-SOURCEFULL-review.json",
+    "sha256": "6087f9a712c1707b0f335090ebd97ae98c0f61945ad98e5bba06d10005e9846a"
+  },
+  "source_LIGHT_independent": {
+    "bytes": 11528,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr308-approved-compatibility-independent-source-light-review/OWNERFINAL-independent-current-a0d-approved-RCC-compatibility-SOURCE-LIGHT-review.json",
+    "sha256": "ea79c4b762d3cdcd5b9d54d2ab475b250596e55e78c6a3ead0574b1845f4ee92"
+  },
+  "strict_actual_admission": {
+    "both_cleanup_snapshots": "retirement execution_stopped + complete snapshot + wrapper_reaped strictly true, all live/zombie/error collections empty; wrapper snapshot independently same strict predicate. Derived properties match ProcessTreeCleanupResult source. Missing/null/error/false remain rejection.",
+    "exact_JUnit": "2 named cases, 2 PASS, 0 SKIP, 0 FAIL, 0 ERROR",
+    "internal_worker_reader_qualification": "UNAVAILABLE/HOLD; not synthesized from outer helper cleanup",
+    "lease": "independently retained original bytes + SHA + parsed body + artifactDigest + verified true + bounded lease identity",
+    "legacy_exception": "Only frozen b614/6fa intentional nonreuse fixture action success with RCC3 v18.19.3 failed/-1/exact child exited non-zero reason, both strict cleanup snapshots. No RCC5/7276 failed exception. Original status/exit/reason retained; not natural worker exit.",
+    "original_missing_evidence_or_lease_path_escape": "FAIL, stop sequence",
+    "outer_cleanup": "only clean_no_descendants or reaped_exited_descendants dispositions; forced/unexpected/timeouts/input guard/retention/sampler failures prevent PASS_SCOPED",
+    "publication": "single real invocation matching original source/control/binary tuple and both raw digests; provider fixture cleanup is poll-not-none, natural provider exit not claimed",
+    "staged": "exact source literals/inventory, staged body equality, actual typed action return0 from unchanged source assertion, Core1.0.2 origin/executable inside owned managed holotree"
+  }
+}

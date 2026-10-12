@@ -1,0 +1,122 @@
+--- a/verify_dakota_rcc_acceptance.py
++++ b/verify_dakota_rcc_acceptance.py
+@@ -350,6 +350,7 @@
+         )
+         completed.cleanup_disposition = result["cleanup_disposition"]
+         completed.reaped_descendants = result["reaped_descendants"]
++        completed.owned_cleanup_observations = result["owned_cleanup_observations"]
+         if result.get("unexpected_live_descendants") and not result["timed_out"]:
+             raise ProcessTreeCleanupError(
+                 "command exited while owned descendants were still live; "
+@@ -420,14 +421,19 @@
+         ) from exc
+ 
+ 
++_OWNED_WAIT_OBSERVATIONS = []
++
++
+ def _reap_adopted_children(*, deadline: float) -> int:
+     reaped = 0
+     while True:
+         try:
+             pid, _status = os.waitpid(-1, os.WNOHANG)
+         except ChildProcessError:  # waitpid(-1) confirmed ECHILD
++            _OWNED_WAIT_OBSERVATIONS.append({"event": "ECHILD"})
+             return reaped
+         if pid > 0:
++            _OWNED_WAIT_OBSERVATIONS.append({"event": "waitpid", "pid": pid, "wait_status": _status})
+             reaped += 1
+             continue
+         if time.monotonic() >= deadline:
+@@ -566,6 +572,36 @@
+     )
+ 
+ 
++def _owned_identity_census(psutil_module, captured):
++    """Data-only uncapped final enumeration; unknown identities stay unknown."""
++    report = {"final_owned_children": [], "captured_identity_states": [],
++              "errors": [], "complete": False}
++    try:
++        for process in _supervisor_children(psutil_module):
++            report["final_owned_children"].append(
++                {"pid": process.pid, "create_time": process.create_time(),
++                 "status": process.status()})
++        for identity in captured:
++            pid, epoch = identity
++            state = "UNKNOWN"
++            try:
++                process = psutil_module.Process(pid)
++                if process.create_time() != epoch:
++                    state = "REUSED_PID"
++                else:
++                    state = "ZOMBIE" if process.status() == psutil_module.STATUS_ZOMBIE else "LIVE"
++            except psutil_module.NoSuchProcess:
++                state = "ABSENT"
++            except psutil_module.Error:
++                report["errors"].append("CAPTURED_IDENTITY_INSPECTION_UNAVAILABLE")
++            report["captured_identity_states"].append(
++                {"pid": pid, "create_time": epoch, "state": state})
++        report["complete"] = not report["errors"]
++    except psutil_module.Error:
++        report["errors"].append("FINAL_ENUMERATION_UNAVAILABLE")
++    return report
++
++
+ def _supervisor_main() -> int:
+     """Contain one Linux command and all descendants in a dedicated subreaper."""
+ 
+@@ -576,6 +612,7 @@
+         return 2
+     import psutil
+ 
++    _OWNED_WAIT_OBSERVATIONS.clear()
+     payload = json.load(sys.stdin)
+     command = payload["command"]
+     grace = float(payload["cleanup_grace_seconds"])
+@@ -599,10 +636,21 @@
+                     stderr=stderr_file,
+                     start_new_session=True,
+                 )
++                try:
++                    command_identity = [child.pid, psutil.Process(child.pid).create_time()]
++                except psutil.Error:
++                    command_identity = None
+                 while child.poll() is None and time.monotonic() < command_deadline:
+                     time.sleep(0.02)
+                 timed_out = child.poll() is None
+                 descendants = _supervisor_children(psutil)
++                captured_identities = []
++                capture_errors = []
++                for owned in descendants:
++                    try:
++                        captured_identities.append([owned.pid, owned.create_time()])
++                    except psutil.Error:
++                        capture_errors.append("PRE_STOP_IDENTITY_UNAVAILABLE")
+                 unexpected_live = any(
+                     _process_is_live(process, psutil) for process in descendants
+                 )
+@@ -614,6 +662,7 @@
+                 # all require waitpid(-1) to observe ECHILD before evidence returns.
+                 if child.poll() is None:
+                     raise ProcessTreeCleanupError("supervised owner remains unreaped")
++                final_owned_census = _owned_identity_census(psutil, captured_identities)
+                 stdout_file.flush()
+                 stderr_file.flush()
+                 stdout_file.seek(0)
+@@ -626,6 +675,16 @@
+                     "cleanup_disposition": disposition,
+                     "reaped_descendants": reaped_descendants,
+                     "unexpected_live_descendants": unexpected_live,
++                    "owned_cleanup_observations": {
++                        "command_identity": command_identity,
++                        "command_returncode": child.returncode,
++                        "pre_stop_identities": captured_identities,
++                        "capture_errors": capture_errors,
++                        "waitpid_observations": list(_OWNED_WAIT_OBSERVATIONS),
++                        "final_owned_census": final_owned_census,
++                        "scope": "supervisor_current_and_pre_stop_owned_identities_only",
++                        "all_lifetime_descendants_complete": False,
++                    },
+                 }
+             except BaseException:
+                 if child is not None:

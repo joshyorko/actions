@@ -1,0 +1,69 @@
+{
+  "schema": "actions-independent-current776-auth-request-source-review/v1",
+  "decision": "GO_NORMAL_EXISTING_PR_BRANCH_SOURCE_PUSH_ONLY",
+  "head": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+  "tree": "3c2c8ad1c9a067ec774eafd6f5d254cb8703213b",
+  "ordered_parents": [
+    "9475a30fbe8645fd0c6b9c2746182f7a78631059",
+    "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0"
+  ],
+  "branch": "test/auth-route-census-20261010",
+  "subject": "Current776 ordinary source union retaining original73 assembled request authorization cases and accepted RCC source imports",
+  "proof": {
+    "path": "/workspace/engineering/pr309-actual776-independent-review/independent-exact-current776-source-proof.json",
+    "bytes": 18300,
+    "sha256": "81e36662b2e38c6aca7ff62f2cc71d9642cadb16e65a14f22b815dc81889e9db"
+  },
+  "reviewer_script": {
+    "path": "/workspace/engineering/pr309-actual776-independent-review/verify_immutable_source.py",
+    "bytes": 8575,
+    "sha256": "9c9b5650fef7c1a1a329654c6b57624352910afbba7eb4731e47d817e3b4519c"
+  },
+  "frozen_checkpoint": {
+    "path": "/workspace/engineering/pr309-actual776-refresh/immutable-current776-refresh-source-checkpoint.json",
+    "bytes": 13033,
+    "sha256": "437aafe5f58d667b11d1456fd5860bfd80a4c429515fa47c815dcdfbaeb0b159"
+  },
+  "prior_independent_source_review": {
+    "path": "/workspace/engineering/pr309-issue152-independent-review/independent-frozen-request-enforcement-source-review.json",
+    "bytes": 9318,
+    "sha256": "92214dbb41ced101f1e0e34552006fe55b6515085d1afac59a4e001b998aafe3"
+  },
+  "verified_source_acceptance": {
+    "ordinary_complete_union": "Git merge-tree exactly3c2c;1411 current leaves, no deletions, only guide novel against both parents; working bytes/modes/executable bits exact pre-full and Git",
+    "auth_source": "Original608line test,census,27non-guide source facts unchanged. All73 current named testcells PASS:54 matrix with18real positivehandler cases,6 dispatch denials,6bounded nativeASGIWebSocket,3private-file refusals,2public,2local-no-key",
+    "denial_meaning": "Retained fileSQLite/thread-owned connections, post-seed logicalSQL/files/secrets snapshots, Database.connect alias-safe read sentinel, denial-only no pool/RCC/import/provider calls, actual positive-handler outputs; original global/env/Path.home/client/database/auth identity restoration source accepted under unchanged bytes",
+    "meaningful_RED": "All original39evidence refs and three real auth-bypass/write/leak negative controls preserved; 9475 original209-production equality remains historical. Narrow currentreuse is unchanged auth/test source only; no repeated mutation execution",
+    "current_gates": "Original raw currentfull1245PASS13SKIP15warnings146.04s2workers/RCCsuccess; all73 individuallyPASS; scoped225PASS1SKIP4actualDESELECT; configured303format/lint339Mypy;Toolkit96;8generated workflows,26outputs plus4otherYAML exact30 current bytes",
+    "onboarding": "24prepared own-source input hashes and five concrete package source/prefix origins retained exact, no reviewer installer/gateway execution",
+    "RCC_and_native": "Nine named RCC inputs exact current/actual776/candidate d642; full268 producer inventory differsold92498 at Runtimeadapter only; five selected tests unchanged; native UNQUALIFIED"
+  },
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md",
+    "Disposition": "ACCEPT exact two parent-imported patches already in5130638; preserve original31 auth-request guide lines, do not add duplicate cosmetic prose",
+    "Exact deltas": [
+      {
+        "path": "/workspace/engineering/pr309-actual776-independent-review/canonical-imported-target-delta-vs-auth-parent.patch",
+        "bytes": 10332,
+        "sha256": "cb9dadcba5d128b5d3241b5ae9e7a47dcf087bac77123931bc787b1ff1acf7aa"
+      },
+      {
+        "path": "/workspace/engineering/pr309-actual776-independent-review/canonical-imported-combined-delta-vs-target.patch",
+        "bytes": 5113,
+        "sha256": "26a716527452b799ae8a7178ed533a33da30912e8864531d7b319509a571cfe7"
+      }
+    ],
+    "Durable learning captured": "Capture real assembled app before native startup; keep fileSQLite alive across worker-thread requests; snapshot after legitimate seeding; observe Database.connect aliases; valid real handlers distinguish authorization from dispatch; two-segment artifact refusal and exact1008 WebSocket shape. Imported RCC lessons preserve single response canonical digests/raw lifecycle/JUnit/source-control-tested-merge identities and nine-file sample vs fullproducer/private-source boundaries.",
+    "Evidence": "Prior immutable92214 independent608line test/mutation source review, current complete1411 Git union, all73 current PASS, current nine target bindings and full268 one-adapter delta; canonical patches byte-exact to parent\u2192513 Git diffs.",
+    "Stale or ambiguous guidance removed": "Actual776 lacked assembled request matrix lessons; prior9475 guide used older artifact-only/one-case RCC guidance. Ordinary merge now retains both reviewed lessons; no current209-production mutation equality or nine-source-sample native qualification implied.",
+    "Remaining uncertainty": "Fresh current513/776 hosted gates, complete issue152/196/Workspace identity and binding, actual backend/native/platform/private/ChatGPT/publication scopes remain unqualified."
+  },
+  "remaining_HOLDs": [
+    "Fresh complete exact513/776 prospective merge CI/reviews/threads/policies required before integration; no old774/ec73/9475 checks carried.",
+    "Current imported Runtimeadapter invalidates old92498 native producer qualification; this review runs no native/provider/browser/artifact gate.",
+    "The real-positive deterministic subset and nativeASGI messages do not qualify valid import/execution/network/browser/Workspace ownership or alloptional transports.",
+    "Full152/196/Workspace/backend/private frozen-v6/ChatGPT/Runtime release remain retained HOLD."
+  ],
+  "authorization_boundary": "Root owns guarded normal push to authenticated existing PR ref; this receipt authorizes source push scope only. Reviewer made no repository/source/index changes, test/gateway/actual run, artifact download, push or merge.",
+  "Upstream disposition": "none"
+}

@@ -1,0 +1,22 @@
+{
+  "capture": "2026-10-11T21:03:16.054739+00:00",
+  "elapsed_seconds": 33.371653000998776,
+  "job": "nine2",
+  "native": "NOT_RUN",
+  "outer_returncode": 0,
+  "release": {
+    "bytes": 1504,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-corrected-nine-once2-reviewed-original-outer/root-one-release.json",
+    "sha256": "eebc42c1fc383a6ed6b0da92040cb2aacea32e15a031e8b9813db755b5e3b952"
+  },
+  "review": {
+    "bytes": 12065,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-corrected-nine-once2-independent-PREEXEC-review/OWNERFINAL-independent-corrected-nine-once2-PREEXEC-GO-with-named-outer1200-clarification.json",
+    "sha256": "45e9740dd7a789b9995b51dd676ca9bfa5fcb0f5336064751e3d260c741ffd0e"
+  },
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_adoption": "NONE",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+}

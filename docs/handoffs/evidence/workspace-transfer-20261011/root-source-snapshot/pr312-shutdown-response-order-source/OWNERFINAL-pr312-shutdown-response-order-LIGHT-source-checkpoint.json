@@ -1,0 +1,467 @@
+{
+  "schema": "actions-pr312-assembled-shutdown-response-order-LIGHT/v1",
+  "status": "OWNERFINAL_LIGHT_SOURCE_READY_FOR_INDEPENDENT_REVIEW_FULL_AND_CI_HOLD",
+  "head": "77ed3de24f33412dff30e4e3c18841c4c09933ac",
+  "tree": "943c9b88d5d508a4c59b0461b6220ec86e1a7d62",
+  "sole_parent": "77065131a0aee63d2b1f8621476374bdde3c7b65",
+  "actual_target": "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+  "existing_branch": "fix/runtime-checkout-eol-20261011",
+  "clean": true,
+  "complete_typed_proof": {
+    "path": "/workspace/engineering/pr312-shutdown-response-order-source/immutable-post-LIGHT-committed-all1424-typed-source-proof.json",
+    "bytes": 390800,
+    "sha256": "e84ce0f5edf3108ace0b238c37b09112e3c36742bfbf236d4b069d47d2581c33",
+    "mode": "0o600"
+  },
+  "before_source": {
+    "path": "/workspace/engineering/pr312-shutdown-response-order-source/immutable-pre-edit-original770-all1423-and-source-final-CI-retention.json",
+    "bytes": 422459,
+    "sha256": "2b406dc7acda497d7c1214dd97a40cb2ef86012c5ea7de9bf2c54d033ff39afc",
+    "mode": "0o600"
+  },
+  "before_commit": {
+    "path": "/workspace/engineering/pr312-shutdown-response-order-source/immutable-before-commit-LIGHT-preservation-proof.json",
+    "bytes": 1374,
+    "sha256": "598ec591e3f87986c80a5c50cad9ace21110e3b1886bf93e1aca9d41138b34a5",
+    "mode": "0o600"
+  },
+  "preserved_original_bound_refs": 141,
+  "novel_scope": {
+    "allowed_paths": [
+      "action_server/src/actions/server/_server.py",
+      "docs/skills/repository-operations.md",
+      "action_server/tests/action_server_tests/test_shutdown_response_order.py"
+    ],
+    "unchanged_parent_leaves": 1421,
+    "old_parent_leaves": 1423,
+    "current_leaves": 1424,
+    "all_original_non_guide_EOLog_paths_exact": true,
+    "whole_original_server_AST_after_two_declared_changes_exact": true,
+    "no_original_integration_node_or_status_or_exit_or_timeout_changes": true
+  },
+  "implementation": "Existing guarded/authenticated POST shutdown schedules original _thread.interrupt_main as existing FastAPI response BackgroundTasks; timeout default/query and JSONnull response remain; Starlette completes final ASGI body send before task; failed sends and denied requests do not run task. No guarantees of TCP client receipt.",
+  "measured_source_controls": {
+    "original_prepytest_cached_setup_failure": "FileNotFoundError poetry before pytest; no test counts/RED claim; immutable owner5c61 retained. Named PATH correction uses existing owned cached holotreebin only, frozen activation unchanged, no installer/gateway.",
+    "genuine_original_behavior_RED": {
+      "items": 10,
+      "PASS": 5,
+      "FAIL": 5,
+      "ERROR": 0,
+      "SKIP": 0,
+      "names": [
+        "tests.action_server_tests.test_shutdown_response_order::test_shutdown_interrupt_follows_completed_final_body[]",
+        "tests.action_server_tests.test_shutdown_response_order::test_shutdown_interrupt_follows_completed_final_body[timeout=5]",
+        "tests.action_server_tests.test_shutdown_response_order::test_shutdown_interrupt_follows_completed_final_body[timeout=-1]",
+        "tests.action_server_tests.test_shutdown_response_order::test_failed_shutdown_send_does_not_interrupt[start]",
+        "tests.action_server_tests.test_shutdown_response_order::test_failed_shutdown_send_does_not_interrupt[body]",
+        "tests.action_server_tests.test_shutdown_response_order::test_denied_shutdown_does_not_interrupt[None]",
+        "tests.action_server_tests.test_shutdown_response_order::test_denied_shutdown_does_not_interrupt[owned-wrong-key]",
+        "tests.action_server_tests.test_shutdown_response_order::test_rejected_shutdown_request_does_not_interrupt[GET--405]",
+        "tests.action_server_tests.test_shutdown_response_order::test_rejected_shutdown_request_does_not_interrupt[HEAD--405]",
+        "tests.action_server_tests.test_shutdown_response_order::test_rejected_shutdown_request_does_not_interrupt[POST-timeout=invalid-422]"
+      ]
+    },
+    "first_source_GREEN": {
+      "items": 10,
+      "PASS": 10,
+      "FAIL": 0,
+      "ERROR": 0,
+      "SKIP": 0,
+      "names": [
+        "tests.action_server_tests.test_shutdown_response_order::test_shutdown_interrupt_follows_completed_final_body[]",
+        "tests.action_server_tests.test_shutdown_response_order::test_shutdown_interrupt_follows_completed_final_body[timeout=5]",
+        "tests.action_server_tests.test_shutdown_response_order::test_shutdown_interrupt_follows_completed_final_body[timeout=-1]",
+        "tests.action_server_tests.test_shutdown_response_order::test_failed_shutdown_send_does_not_interrupt[start]",
+        "tests.action_server_tests.test_shutdown_response_order::test_failed_shutdown_send_does_not_interrupt[body]",
+        "tests.action_server_tests.test_shutdown_response_order::test_denied_shutdown_does_not_interrupt[None]",
+        "tests.action_server_tests.test_shutdown_response_order::test_denied_shutdown_does_not_interrupt[owned-wrong-key]",
+        "tests.action_server_tests.test_shutdown_response_order::test_rejected_shutdown_request_does_not_interrupt[GET--405]",
+        "tests.action_server_tests.test_shutdown_response_order::test_rejected_shutdown_request_does_not_interrupt[HEAD--405]",
+        "tests.action_server_tests.test_shutdown_response_order::test_rejected_shutdown_request_does_not_interrupt[POST-timeout=invalid-422]"
+      ]
+    },
+    "final_after_AST_equivalent_format_scoped_auth": {
+      "items": 86,
+      "PASS": 86,
+      "FAIL": 0,
+      "ERROR": 0,
+      "SKIP": 0,
+      "names": [
+        "tests.action_server_tests.test_shutdown_response_order::test_shutdown_interrupt_follows_completed_final_body[]",
+        "tests.action_server_tests.test_shutdown_response_order::test_shutdown_interrupt_follows_completed_final_body[timeout=5]",
+        "tests.action_server_tests.test_shutdown_response_order::test_shutdown_interrupt_follows_completed_final_body[timeout=-1]",
+        "tests.action_server_tests.test_shutdown_response_order::test_failed_shutdown_send_does_not_interrupt[start]",
+        "tests.action_server_tests.test_shutdown_response_order::test_failed_shutdown_send_does_not_interrupt[body]",
+        "tests.action_server_tests.test_shutdown_response_order::test_denied_shutdown_does_not_interrupt[None]",
+        "tests.action_server_tests.test_shutdown_response_order::test_denied_shutdown_does_not_interrupt[owned-wrong-key]",
+        "tests.action_server_tests.test_shutdown_response_order::test_rejected_shutdown_request_does_not_interrupt[GET--405]",
+        "tests.action_server_tests.test_shutdown_response_order::test_rejected_shutdown_request_does_not_interrupt[HEAD--405]",
+        "tests.action_server_tests.test_shutdown_response_order::test_rejected_shutdown_request_does_not_interrupt[POST-timeout=invalid-422]",
+        "tests.action_server_tests.test_auth_route_inventory::test_assembled_auth_route_inventory_stops_before_server_start[False]",
+        "tests.action_server_tests.test_auth_route_inventory::test_assembled_auth_route_inventory_stops_before_server_start[True]",
+        "tests.action_server_tests.test_auth_route_inventory::test_auth_route_inventory_rejects_new_uncategorized_route",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[valid-secrets-write]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[valid-work-item-create]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[valid-work-item-read]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[valid-work-item-delete]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[valid-attachment-create]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[valid-attachment-read]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[valid-attachment-delete]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[valid-schedule-create]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[valid-schedule-update]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[valid-schedule-delete]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[valid-run-summary]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[valid-run-artifact]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[valid-run-log]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[valid-mounted-artifact]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[valid-mounted-artifact-head]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[valid-analytics-summary]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[valid-action-packages]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[valid-robot-catalog]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[missing-secrets-write]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[missing-work-item-create]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[missing-work-item-read]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[missing-work-item-delete]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[missing-attachment-create]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[missing-attachment-read]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[missing-attachment-delete]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[missing-schedule-create]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[missing-schedule-update]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[missing-schedule-delete]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[missing-run-summary]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[missing-run-artifact]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[missing-run-log]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[missing-mounted-artifact]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[missing-mounted-artifact-head]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[missing-analytics-summary]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[missing-action-packages]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[missing-robot-catalog]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[wrong-secrets-write]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[wrong-work-item-create]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[wrong-work-item-read]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[wrong-work-item-delete]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[wrong-attachment-create]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[wrong-attachment-read]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[wrong-attachment-delete]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[wrong-schedule-create]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[wrong-schedule-update]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[wrong-schedule-delete]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[wrong-run-summary]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[wrong-run-artifact]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[wrong-run-log]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[wrong-mounted-artifact]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[wrong-mounted-artifact-head]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[wrong-analytics-summary]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[wrong-action-packages]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_real_assembled_credential_matrix[wrong-robot-catalog]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_dispatch_denied_before_owned_state_or_execution[robot-import-missing]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_dispatch_denied_before_owned_state_or_execution[robot-import-wrong]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_dispatch_denied_before_owned_state_or_execution[robot-run-missing]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_dispatch_denied_before_owned_state_or_execution[robot-run-wrong]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_dispatch_denied_before_owned_state_or_execution[action-run-missing]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_dispatch_denied_before_owned_state_or_execution[action-run-wrong]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_native_asgi_websocket_auth_echo_and_close[valid-/api/ws]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_native_asgi_websocket_auth_echo_and_close[valid-/api/ws/summary]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_native_asgi_websocket_auth_echo_and_close[missing-/api/ws]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_native_asgi_websocket_auth_echo_and_close[missing-/api/ws/summary]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_native_asgi_websocket_auth_echo_and_close[wrong-/api/ws]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_native_asgi_websocket_auth_echo_and_close[wrong-/api/ws/summary]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_assembled_mount_refuses_private_storage_files[/artifacts/.action-server-run-bindings.json/payload.bin]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_assembled_mount_refuses_private_storage_files[/artifacts/unrelated.txt/payload.bin]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_assembled_mount_refuses_private_storage_files[/artifacts/missing/payload.bin]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_intentional_public_bootstrap_with_configured_key[/config]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_intentional_public_bootstrap_with_configured_key[/]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_intentional_local_no_key_operation[run-summary-None]",
+        "tests.action_server_tests.test_auth_route_enforcement::test_intentional_local_no_key_operation[work-item-create-None]"
+      ]
+    },
+    "Toolkit": {
+      "PASS": 96,
+      "seconds": 15.85
+    },
+    "original_EOLog_scoped": {
+      "PASS": 10,
+      "seconds": 4.53
+    },
+    "Doctor": "PASS cached prepared toolchain; no RCC gateway invoked",
+    "Bootstrap": "30 checked prepared source inputs; five actual own prefixes and concrete source origins; no install",
+    "configured_Runtime_lint": "PASS Ruffcheck/Ruffformat314/Isort; Markdownlint unavailable existing warning preserved",
+    "configured_Runtime_typecheck": "PASS350files; existing annotation-unchecked notes preserved",
+    "generator": "8 generated outputs plus dependabot/all30trackedYAML bytes exact"
+  },
+  "execution": "PURE_CACHED_TOOLKIT_ONLY; owned pinned holotree Python/Poetry and managed activation plus explicit reviewed binPATH; zero RCC gateway/native/provider/browser/full executions",
+  "private_refs": [
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/OWNER-original-cached-RED-setup-failure-no-test-counts.json",
+      "bytes": 1875,
+      "sha256": "5c61a5c177fb443f720b7ba5e4c2538cf5f61eadc530a4d81fbc34e7344e3cbb",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/configured-new-test-format.private.log",
+      "bytes": 336,
+      "sha256": "95c835216d761ac309a4dac17cbab5a514b40fc32bec3d5cff20eefe62f3f4c7",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/current-generator-all-eight-roundtrip.py",
+      "bytes": 1028,
+      "sha256": "3207b0dd5fb297293ccea5edf815026c9c9362a15c0d87662d40dbaadbf1610f",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/current-verify-own-prepared.py",
+      "bytes": 2695,
+      "sha256": "def7e39c57490ce2ac7baec29ea8f36893405984741e5ef5f243bff460fc401c",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/exact-canonical-response-order-and-client-completion.patch",
+      "bytes": 2030,
+      "sha256": "79130164c7fc47a42066a121dbee82ca8e07bdeee08a9c09cd44542ab6b110e2",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/final-cached-LIGHT.private.log",
+      "bytes": 10110,
+      "sha256": "1b0b153fac04abcaea5a80c699f13c34893e094c2bd1a4b8148b8784bc4fbea7",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/final-scoped-junit.xml",
+      "bytes": 14134,
+      "sha256": "c731ac452f3e087d147ddd2aa3c4df74b5967ec6ba3114526c033403065316c0",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/freeze-OWNERFINAL-LIGHT.py",
+      "bytes": 7772,
+      "sha256": "1a6556985efcf8b37c2651746550a1c7bd32ccf3a052dee61df10331fb73a0c0",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/freeze-before-source-edits.py",
+      "bytes": 4262,
+      "sha256": "c9d9dbe56d83a6a30aa4597e47689c8d03924272432fd7d284955de866b98f68",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/generator-all-eight-roundtrip.json",
+      "bytes": 3813,
+      "sha256": "4c9105e7008262649b0cabdcabcb50559286719b16bab892f18673226622a460",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/immutable-before-commit-LIGHT-preservation-proof.json",
+      "bytes": 1374,
+      "sha256": "598ec591e3f87986c80a5c50cad9ace21110e3b1886bf93e1aca9d41138b34a5",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/immutable-expected-RED-before-production-edit.json",
+      "bytes": 2043,
+      "sha256": "8daea5398d02d679e6d7e841c419596da3e94c812bf99327807ff7ba549aded0",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/immutable-post-LIGHT-committed-all1424-typed-source-proof.json",
+      "bytes": 390800,
+      "sha256": "e84ce0f5edf3108ace0b238c37b09112e3c36742bfbf236d4b069d47d2581c33",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/immutable-pre-edit-original770-all1423-and-source-final-CI-retention.json",
+      "bytes": 422459,
+      "sha256": "2b406dc7acda497d7c1214dd97a40cb2ef86012c5ea7de9bf2c54d033ff39afc",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/ordering-GREEN-junit.xml",
+      "bytes": 1826,
+      "sha256": "b353416e0aa5f56ad6264cefa098d10317199eeb743cdcc6da348b28c549807d",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/ordering-GREEN.private.log",
+      "bytes": 1133,
+      "sha256": "cb7a3b9537952b87f61f1f87dc243740e420288f6bb9d5eaff19b824280ca40e",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/ordering-RED-junit.xml",
+      "bytes": 9281,
+      "sha256": "03315223394a38c59ce3b6652201287d92e3b9a6b5146f9aebde850b8c18e50a",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/ordering-RED.private.log",
+      "bytes": 43350,
+      "sha256": "49ad1b757b8938b9e66bd32c31ca82eed6a3737833493bcdc5f53c306712bbbb",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/origin-action_server.json",
+      "bytes": 328,
+      "sha256": "6ee21ed7f1d9f863b29dc8a4cb25498ffafc129818b88aff25e148759a54bf7e",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/origin-actions-http-helper.json",
+      "bytes": 309,
+      "sha256": "7154b87e85312b262d695820b622f2eafbd24f7ffe7f5e90aca25e5e157b3750",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/origin-actions.json",
+      "bytes": 263,
+      "sha256": "13a206a60978c69b9aaad5c84d4bacd5723c958a9692ff7820520e77d5d51b32",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/origin-devutils.json",
+      "bytes": 285,
+      "sha256": "e5fa78efe728330ca469ef25076f30e48c193595b5c647340ff5d7515bc810f7",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/origin-work-items.json",
+      "bytes": 294,
+      "sha256": "ae85d53c5a888f840d5ebda2f394b7a9e317125ff443c8a937c4b2eb0332ec37",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/original-RED.private.log",
+      "bytes": 1592,
+      "sha256": "a9fadc9f12e88821d068ea50b37d91a3a7ac23e46c80f7990db51a6eef0179b6",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/own-Bootstrap-reuse-inputs-and-origins.json",
+      "bytes": 6642,
+      "sha256": "b887988b906cc73f0f30e237b70432f01b44c187312d8416d09b2990a90bc39e",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/post-LIGHT-V5-retention.private.log",
+      "bytes": 221,
+      "sha256": "6aa79d9cc2f60987881be1dcbb936fa63d1781ccf4b4acd19b95b28eeab4571d",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/post-LIGHT-native-retention.private.log",
+      "bytes": 63,
+      "sha256": "1a8dbe4243e393a542bf934aace44feb9aaa281a0c63a191f58b7bcf8c1eded8",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/post-LIGHT-native1192-helper-browser-retained.json",
+      "bytes": 4730,
+      "sha256": "055594b5d47a234cb04f19325d9241aa549c2ab7b6da2e3b24b32be62c7a486e",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/post-LIGHT-pre-edit-verify-retained-V5-raw-and-driver-current-full-post.py",
+      "bytes": 2541,
+      "sha256": "bfbf52a326e6e7a8dfadd3ca48d201a359474dc0480ba10455b96f3001e2b84c",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/post-LIGHT-pre-edit-verify-retained-native-helper-browser-current-full-post.py",
+      "bytes": 3607,
+      "sha256": "1c1e37c502cf4812c5ae760e1616a9260e2d2cad3e25c5e483220cb9654ac027",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/post-LIGHT-raw18-frozen50-Node-frontend-retained.json",
+      "bytes": 12822,
+      "sha256": "281b25a2e052e88f8a2a90d37b2a3ee2619762d4bbb7d1df79b3ae88b8fafc85",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/pre-edit-native1192-helper-browser-retained.json",
+      "bytes": 4730,
+      "sha256": "055594b5d47a234cb04f19325d9241aa549c2ab7b6da2e3b24b32be62c7a486e",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/pre-edit-raw18-frozen50-Node-frontend-retained.json",
+      "bytes": 12822,
+      "sha256": "281b25a2e052e88f8a2a90d37b2a3ee2619762d4bbb7d1df79b3ae88b8fafc85",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/pre-edit-verify-retained-V5-raw-and-driver-current-full-post.py",
+      "bytes": 2539,
+      "sha256": "4fcdaf4aa24cd2c311c3cae83428bd60268ef8f0286fdd4a345b03351e00d47d",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/pre-edit-verify-retained-native-helper-browser-current-full-post.py",
+      "bytes": 3605,
+      "sha256": "f69d3d85e154e93e5671a1eb86921f9bd91cdee3cb7e073d862580782bf68428",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/run-current-shutdown-light-cached.py",
+      "bytes": 957,
+      "sha256": "7df6d4f2432dfea3dcce466413e2a3c018b3efd6522f0d3dfcff7fcb25bd5c39",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/run-green-cached-toolkit.py",
+      "bytes": 395,
+      "sha256": "4e23ff63d99760169fc896229f67216bd91e024240f23108df8a6098769fc8d6",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/run-red-cached-toolkit-v2.py",
+      "bytes": 393,
+      "sha256": "8b62605c826a0b2a61ed7e7a4eaefda207b14138dc6c3b811e6053e47476bb97",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/run-red-cached-toolkit.py",
+      "bytes": 393,
+      "sha256": "495b8245a2137e50215b2766d2bf18c66da00cb2303de3d38ffb78ba5739adf1",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/test-shutdown-before-configured-format.py",
+      "bytes": 5994,
+      "sha256": "67e9527925273d5bb1c1a872e27a2488d2ffd33d40a364b427f863819b579b15",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/verify-before-commit-and-freeze-LIGHT.py",
+      "bytes": 4940,
+      "sha256": "96a61361fcc055c5293889b03f6cfae6e9cff1090382741639a69fcbd666399d",
+      "mode": "0o600"
+    }
+  ],
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "exact_delta": {
+      "path": "/workspace/engineering/pr312-shutdown-response-order-source/exact-canonical-response-order-and-client-completion.patch",
+      "bytes": 2030,
+      "sha256": "79130164c7fc47a42066a121dbee82ca8e07bdeee08a9c09cd44542ab6b110e2",
+      "mode": "0o600"
+    },
+    "learning": "Replace stale synchronous shutdown-call description with response BackgroundTasks after completed ASGI finalbody; explain denied/failedsend no interrupt, access200 is not clientdelivery, keep naturalexit/cleanup distinct.",
+    "evidence": "Genuine5FAIL5PASS RED, 10GREEN, final86 real assembled/auth tests; original owned Windows ReadError10053 after access200.",
+    "stale_removed": "Synchronous endpoint-call wording now qualified by exact response-send ordering.",
+    "uncertainty": "Windows TCP client delivery and expected naturalrc1 remain fresh platform acceptance, no EOLcausal claim/no universal cleanup."
+  },
+  "remaining_HOLD": [
+    "ONE affected-package configured full after independent LIGHT and distinct root serialized release/fresh capacity",
+    "Fresh complete current-head CI and original strict watched Windows client200/naturalrc1 result",
+    "Whole frozen/native inputs unqualified after new server production change; no old artifact carry",
+    "Runtime1.0.3/OAuthsourceauthority/fullrelease/private134/99/backend/ChatGPT gates unchanged"
+  ],
+  "constructor": {
+    "path": "/workspace/engineering/pr312-shutdown-response-order-source/freeze-OWNERFINAL-LIGHT.py",
+    "bytes": 7772,
+    "sha256": "1a6556985efcf8b37c2651746550a1c7bd32ccf3a052dee61df10331fb73a0c0",
+    "mode": "0o600"
+  },
+  "Upstream_disposition": "none"
+}

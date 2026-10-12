@@ -1,0 +1,23 @@
+{
+  "addition_bytes": 1039,
+  "after_bytes": 258197,
+  "after_sha256": "33f06976644ea54d96232d7d0056745e02240d985426c2278239091a1781fec4",
+  "before_sha256": "274140f385a4be327e0188623b23333b136da9aeb23376f7e1b7c56bae24af6c",
+  "canonical": "/workspace/engineering/campaign-checkpoint/docs/skills/repository-operations.md",
+  "decision": "ROOT_ADOPT_EXACT_SOURCE_BACKED_ACTIVE_OUTPUT_AND_FINAL_LAUNCH_RESERVE_LESSONS",
+  "proposals": [
+    {
+      "bytes": 707,
+      "path": "/workspace/engineering/pr307-current9760-once5-ACTUALFAIL-independent-review/canonical-executable-probe-output-address-and-historical-guard-scope-proposed.txt",
+      "sha256": "af6262d886c776df70b8252bd51d0bc9d04d8129dbd9cd75c2ba2a0855bc9b7b"
+    },
+    {
+      "body_selection": "exact_addition",
+      "path": "/workspace/engineering/rcc-stop-attempt-caller-final-reserve-v2-PREEXEC-NOTRUN/canonical-final-process-launch-shared-deadline-reserve-proposed.json",
+      "sha256": "cf56695b6a4f7aa6edbca4de9da5cec7627d1a88bb819aeb24f39bacb8bf1fb9"
+    }
+  ],
+  "schema": 1,
+  "scope": "Engineering process only; original actual failures retained, no native/calibration/publication acceptance.",
+  "upstream_disposition": "none"
+}

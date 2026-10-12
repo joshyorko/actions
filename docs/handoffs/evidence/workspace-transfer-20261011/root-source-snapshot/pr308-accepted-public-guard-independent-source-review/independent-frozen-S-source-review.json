@@ -1,0 +1,61 @@
+{
+  "schema": "actions-pr308-independent-source-guard-review/v1",
+  "decision": "GO_SOURCE_S_FOR_SEPARATE_CONTROL_AUTHORING_ONLY",
+  "head": "7eb5bce946750555ab009f77592862920a901506",
+  "tree": "3ff76037779763d0461ff3a755b900c9ed83dcf8",
+  "sole_parent": "bc4296014fed571b478bc86911217e5f1dbcdc01",
+  "ordinary_ordered_parents": [
+    "4ca431b51b018b947fac6f096ca3cdc21028dd28",
+    "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0"
+  ],
+  "branch": "fix/rcc-candidate-wheel-identities-20261010",
+  "checkpoint": {
+    "path": "/workspace/engineering/pr308-accepted-public-guard-source/SOURCE-frozen-checkpoint.json",
+    "bytes": 12828,
+    "sha256": "523e46db8f4ea12dfbb0afbe8f6d2ce675cb0aedd79658b8b4d2585f151afb8b"
+  },
+  "proof": {
+    "path": "/workspace/engineering/pr308-accepted-public-guard-independent-source-review/independent-frozen-S-source-proof.json",
+    "bytes": 10595,
+    "sha256": "0d5b9133c4cf0d4c2b69cc2c8726cd2ee35ac92a360f47611cc662b6a4bb9228"
+  },
+  "reviewer_script": {
+    "path": "/workspace/engineering/pr308-accepted-public-guard-independent-source-review/verify_source_v3.py",
+    "bytes": 10284,
+    "sha256": "7cb81b946c89bccc264fb26fb5a9f147084baa8b8af22fd9d14b146cf789f4a1"
+  },
+  "independent_source_findings": {
+    "union": "Complete1409 S0 ordinary merge tree exact4ca+actual776, no deleted/extra leaves. Only guard script/test/canonicalguide changed;1406other modes/blobs exact. Current1409 bytes+mode+executable bit exact final-pre-full snapshot and committed Git.",
+    "guard": "Both helpers and main TimeoutExpired branch exact accepted639 AST. Original entire308 verifier AST identical after removing only these additions; no native/profile module import or production behavior change. Timeout demotes aggregate FAIL with fixedwatchdog_timeout; preserves private original bytes/hash/status, cells/unknown fields, atomic same-directory replacement; annotation collisions and unavailable/persistence faults remain fixed failed parent categories; cleanup_state unknown. Non-timeout/ProcessTreeCleanupError/completed paths unchanged.",
+    "controls": "Seven fixture/control functions exact639 AST,19cases. Original308 entiretest AST preserved after removing new controls/hashlib import. Original16FAIL3PASS RED then19PASS GREEN verified raw logs; fullsource individually passes same19 cases; secondaryerrors/secret-bearing arbitrary stderr remain checked nonleak, ownedtemp/unrelatedfile boundaries retained.",
+    "source_gates": "Raw1190PASS13SKIP15warnings129.13s2workers RCCsuccess; scoped133PASS1existingreal_RCCopt-inSKIP3integrationDESELECT; fullconfiguredRuffcheck/format301/Isort andMypy337;Toolkit96;8generated+26workflow/dependabot outputs plus4otherYAML exact30 sourcebytes.",
+    "prepared_environments": "30declared input hashes, original own Bootstrap log and five actual recorded prefix/source origins verified; no reviewer gateway or installer.",
+    "candidate_negative_contract": "Original live opt-in function AST, wheel identity/version/assertions/argv unchanged. It requires aggregateFAIL and failed offline-warm cells. Watchdog2465 =2400+6*10+5; testtimeout2510=2465+4*10+5, cleanupgrace10 remain original. No actual execution of that CLI or positivecandidate qualification.",
+    "native_producer": "Current268production+5selectedtests exact776; old92498 differs at Runtimeadapter only, five selected unchanged. Oldnative UNQUALIFIED; guard scripts excluded from productioninput claim by declared inventory scope, not an exclusion invented by review."
+  },
+  "reviewer_diagnostic_limits": [
+    "Initial reviewer AST selector counted pre-existing TimeoutExpired handlers throughout module; namedv2 narrowed to main to compare only added branch.",
+    "Namedv2 literal_eval rejected declared arithmetic watchdog expression; namedv3 bounded AST numeric evaluator uses only integers/names/addition/multiplication, without executing verifier. Originals preserved; these were reviewer inspection failures, not repository gate failures.",
+    "Frozen checkpoint file and originalrefs are authority, not worker controller stdout metadata shadow."
+  ],
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md",
+    "Exact accepted delta": {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-independent-source-review/canonical-reviewed-implemented-delta.patch",
+      "bytes": 4385,
+      "sha256": "2bd81847fda0b761e42b24c704dbe9eccda907c21f40cc3b4e5d88bf704e12f6"
+    },
+    "Disposition": "ACCEPT implemented canonical2bd81847 exact S0\u2192S Gitdiff, already in frozen7eb source; no cosmetic or duplicateparagraph.",
+    "Durable learning captured": "Worker receipt provisional until parent success; deadline receipt guard retains originalworker measurements and atomic aggregateFAIL; service-free guard reuse is independent of native/profile implementation. Existing negativecandidate test must not be treated as successful lifecycle;2465/2510envelope is separate from shorter hosted three-case gate. Source checkpoint review precedes separate pinnedcontrol.",
+    "Evidence": "Exact639 helper/main-handler andseven19control AST reuse; original module/test ASTpreservation; RED16/3\u2192GREEN19/currentfull1190/13; actualcandidate negativeassertions andunchangedconstants; complete1409union/268oldnative adapterdelta.",
+    "Stale or ambiguous guidance removed": "Broad sourceRuntime/candidate wrapper-failure wording narrowed to retainedcandidate history; original44afd parent failure distinguished from implementedguard; greennegative test and short three-case execution cannot imply positivecandidate or parentdeadline coverage.",
+    "Remaining uncertainty": "New separate control pins/branch permission/source assertions and fresh hostedthree-case/fullCI require review;2465candidateCLI positiveacceptance/notrun; nativechangedadapter/private01f/frozen-v6/full134/OAuth/coldrelease remain HOLD."
+  },
+  "authorization_boundary": "SOURCE GO permits separate CONTROL authoring only. It does not authorize push, hosted actual execution, integration, private source reconstruction or publication. Root retains all such dispatch/integration gates.",
+  "remaining_HOLDs": [
+    "SOURCE GO authorizes separate CONTROL preparation only; no push/hostedactual/integration.",
+    "Guard service-free19controls does not execute2465watchdog/2510CLItest or turn negativeofflinecontract into positivecandidateacceptance.",
+    "Oldnative92498 adapter change UNQUALIFIED; whole639native/profile implementation excluded; private01f/frozen-v6 absent/full134/release HOLD."
+  ],
+  "Upstream disposition": "none"
+}

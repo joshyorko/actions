@@ -1,0 +1,463 @@
+{
+  "binding_count": 45,
+  "complete_union": {
+    "automatic_combined_paths": [
+      ".gitattributes",
+      ".github/workflows/_gen_workflows.py",
+      ".github/workflows/actions_runtime_tests.yml",
+      "docs/skills/repository-operations.md"
+    ],
+    "leaves": 1440,
+    "no_deletions": true,
+    "no_novel_application_body_or_mode": true,
+    "original_leaves": 1435,
+    "proof": {
+      "bytes": 3132,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/committed-current-1299-typed-ordinary-union-source-proof.json",
+      "sha256": "8def4ba9cec4a4d7f0db729e90e9d1177bf4dd4e914296eb592f0e4f2c1a66bf"
+    }
+  },
+  "construction_history": {
+    "LIGHT_first_attempt": "Doctor and own30/fiveorigins and Toolkit179 and checkout10 passed; next command SETUP_SELECTION_FAIL before package cases because PR305-only test_canvas_runtime_admission.py absent in PR282. Original log/script/terminal and zero-case JUnit retained; named continuation fixed selected filenames only. Passed Toolkit/checkout scopes not repeated.",
+    "historical_reference_inspector": "original assumed one retained mutable guide was original3ec body; exact hash rejected. Read-only 300-commit source search found original40ad identity; named v2 verifies exact old hash and size without restoring/relabeling current mutable path.",
+    "typed_inspector": "original copied PR305 Canvas/source path guard raised KeyError before proof; named v2 uses actual PR282 paths; original retained"
+  },
+  "current_capacity": {
+    "full_floor_bytes": 1288490188,
+    "full_status": "HOLD_DISTINCT_ROOT_CAPACITY_AND_SERIALIZATION",
+    "workspace_available_bytes": 1292435456
+  },
+  "documentation_improvement": {
+    "both_parent_block_evidence": {
+      "bytes": 9929,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/verified-both-parent-canonical-and-historical-reference-preservation.json",
+      "sha256": "d0445abaf765f0ee5d5f7142768ef0077450812ce79ded2de567e5ab0d92b9eb"
+    },
+    "canonical_files_changed_or_imported": [
+      "docs/skills/repository-operations.md",
+      "docs/skills/provenance-observability.md"
+    ],
+    "durable_learning": "Prepared environment reuse and ignored RCC asset identity are separate; Runtime generated frontend payload bytes and module checkout EOL are separately qualified; builder/test path filters must select checkout-byte changes; source response-send ordering and transport provider-open/denial/stream cleanup have bounded source scopes.",
+    "evidence": "1440 exact typed union, both-parent changed guide blocks present byte-exact, original39 whole Canvas AST/step, actual checkout10 and scoped303/focus4 source controls with configured lint/type/gen gates.",
+    "exact_imported_accepted_delta": {
+      "bytes": 8802,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/exact-imported-a54-canonical-guide-delta.patch",
+      "sha256": "0fb4f0d3c528eb9a8718e2a422c77bfc7f479af357c5eb57c51de224a27aebc3"
+    },
+    "remaining_uncertainty": "Current SOURCEFULL/hosted exact-head policy and browser/native/provider/private/backend/full127/release gates remain held; original hosted EOL causation and ten original unavailable records not invented.",
+    "stale_or_ambiguous_guidance_removed": "Old c35 current generator byte claim does not apply after accepted EOL path-filter import; old source/full/actual proofs remain historical. Producer276 and five selectors separately typed, no oldnative equality carry. No cosmetic child."
+  },
+  "frozen_bindings": [
+    {
+      "bytes": 13487,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/Doctor-current-a54-original.private.log",
+      "sha256": "482f1bc7f4bffd352f9bb1b3ad0d044bf8217ce0a7ef2c60c4b597e6637f47ad"
+    },
+    {
+      "bytes": 18,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/Doctor-current-a54-terminal.json",
+      "sha256": "df4d721d233a2334088d2d2e0110346ae9e509ff46bf0b379fbcfa85c715af4d"
+    },
+    {
+      "bytes": 3132,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/committed-current-1299-typed-ordinary-union-source-proof.json",
+      "sha256": "8def4ba9cec4a4d7f0db729e90e9d1177bf4dd4e914296eb592f0e4f2c1a66bf"
+    },
+    {
+      "bytes": 2006,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/current-checkout-source-junit.xml",
+      "sha256": "3506baf9b5066a51e760bbe9d371fa07fcadb76434f6472f497ed512eaa8a6f0"
+    },
+    {
+      "bytes": 4073,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/current-generator8-allYAML30-roundtrip.json",
+      "sha256": "b4c1f5b6768ae62aecd2ea54a06ae922a9870009d2536fb38a009f50ade025d3"
+    },
+    {
+      "bytes": 55550,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/current-scoped-source-junit-v2.xml",
+      "sha256": "363ed3c8cbc2165d936f77131e530edacc0d24cca21a871f0cd445164d698a56"
+    },
+    {
+      "bytes": 238,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/current-scoped-source-junit.xml",
+      "sha256": "35ce8911e051bbd50ac239408589659962c59a4dbe4154763571ab36f0e356c9"
+    },
+    {
+      "bytes": 6185,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/current-source-LIGHT-continuation-v2-original.private.log",
+      "sha256": "fb9a60cbc1e0b4ad47ef0e1d76fdd1fc124553785a1edb4dc674f457de8884fd"
+    },
+    {
+      "bytes": 18,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/current-source-LIGHT-continuation-v2-terminal.json",
+      "sha256": "df4d721d233a2334088d2d2e0110346ae9e509ff46bf0b379fbcfa85c715af4d"
+    },
+    {
+      "bytes": 8716,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/current-source-LIGHT-original.private.log",
+      "sha256": "8505daaf6ddab11c3302cd9604efe1aacaa506afe1a88830d01d2187903833cc"
+    },
+    {
+      "bytes": 18,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/current-source-LIGHT-terminal.json",
+      "sha256": "8869ca5e7f3ae989b151917c32f706ea8b83fd8d2ab5fd425117c4860c4e595f"
+    },
+    {
+      "bytes": 855,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/current-staging-four-controls-junit-v2.xml",
+      "sha256": "5f85d7c373a02b6bd52323e797f17de3cf0179f7f1ced56e9aae1a36d9e0059b"
+    },
+    {
+      "bytes": 8802,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/exact-imported-a54-canonical-guide-delta.patch",
+      "sha256": "0fb4f0d3c528eb9a8718e2a422c77bfc7f479af357c5eb57c51de224a27aebc3"
+    },
+    {
+      "bytes": 9526,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/freeze_current_source_LIGHT.py",
+      "sha256": "5ea3777070fda6fdf736453a29aef41f09189931bbfb40c25328a9ea53e96391"
+    },
+    {
+      "bytes": 69,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/managed-metadata-only-preflight.private.log",
+      "sha256": "9e7476b86b94c13ab1e9762548883c60e950ede7c9c4a74e9281613e05d88f48"
+    },
+    {
+      "bytes": 4874,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/own-current30-input-and-five-concrete-origins-Bootstrap-reuse.json",
+      "sha256": "62b02152f69a28158c5783b32a96607654c8a7988ac1d1eee054a059dbc9df29"
+    },
+    {
+      "bytes": 283,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/own-origin-action_server.json",
+      "sha256": "b2e16eb4d3890174053857b3195e1881e4d39d5d6144fa945cc749fb9cde006c"
+    },
+    {
+      "bytes": 264,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/own-origin-actions-http-helper.json",
+      "sha256": "7ee5cd9994e84624c2641c47407a30c0f3dfe3547942848d348356d2a60e1663"
+    },
+    {
+      "bytes": 218,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/own-origin-actions.json",
+      "sha256": "91a596b56b31d13d4f9115d5ee567b85c64bad17eaf17fcc1b7a7524cac1cdfc"
+    },
+    {
+      "bytes": 240,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/own-origin-devutils.json",
+      "sha256": "1d4ff6145c3e70d2b942d1f3c55efa2142c7a4207aa0c7f1ac0384a81c754347"
+    },
+    {
+      "bytes": 249,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/own-origin-work-items.json",
+      "sha256": "5dd7fd17c31f8ca35a3ff853387495f25bc766d53312f17c425b8ebbcda9b524"
+    },
+    {
+      "bytes": 686,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/post-LIGHT-complete-source-and-pinned-RCC-preservation.json",
+      "sha256": "7e4079d8f5d986039f0e7f3098a89fa9fc5b63e18a9ae71a883303634bb9d369"
+    },
+    {
+      "bytes": 382661,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/private-current-1299-complete-source-body-mode-inventory.json",
+      "sha256": "75df3cd7174e14dc7402bea8cf24988d91c284cdbc73e6636227aa1b24b89279"
+    },
+    {
+      "bytes": 5785,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/prove_current_typed_union.py",
+      "sha256": "dd68c54ea4c96282b7f8c2fc9557b68731aa1b741cd68add538ea28e692425fb"
+    },
+    {
+      "bytes": 5799,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/prove_current_typed_union_v2.py",
+      "sha256": "7908742b8321d350cad55d184681eb4d1af4a46e28a65b715096f48a02ed7ca9"
+    },
+    {
+      "bytes": 12822,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/raw18-frozen50-Node-frontend-retained-postLIGHT.json",
+      "sha256": "281b25a2e052e88f8a2a90d37b2a3ee2619762d4bbb7d1df79b3ae88b8fafc85"
+    },
+    {
+      "bytes": 176,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/readonly-historical441-reference-precheck.json",
+      "sha256": "f77d5f2f99956f7b7f0448bc9f9f0cfa923004406cca77019e3568fff2105c91"
+    },
+    {
+      "bytes": 341,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/readonly-retention-and-strict-Canvas.private.log",
+      "sha256": "1e0e2b753f0995e0d8243d159e2f0e743654117c42418a70bc57c2b03e683abc"
+    },
+    {
+      "bytes": 238,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/readonly-retention-terminal.json",
+      "sha256": "cc391157a12b3e98b102dd304f254e8be6c43ccbf022f0bb090dc3a130741eba"
+    },
+    {
+      "bytes": 4751,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/retained-native-helper-browser-and-V5-proof-postLIGHT.json",
+      "sha256": "ac36efa52d343f893d63df90c8d72e9afe79a18317facb94deb3bafbdcfb586f"
+    },
+    {
+      "bytes": 4536,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/run_current_source_LIGHT.py",
+      "sha256": "ed9d8d3ff0359995bab77a3ee0e2af8d59defa02bd85b5f133abfed83e862405"
+    },
+    {
+      "bytes": 2681,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/run_current_source_LIGHT_continuation_v2.py",
+      "sha256": "7b4b4c925e9f0c96af2846c761fd155455b9643a9d8b298c0d9cdacd1a9819a2"
+    },
+    {
+      "bytes": 485,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/strict-Canvas-original-gateway-preservation.json",
+      "sha256": "9f4802a5f335c62d998f288f4fa7a7fc5b0a5b1ac39d2ac7bd72f4fde43f90b6"
+    },
+    {
+      "bytes": 98762,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/typed-current-production-and-five-selector-inventory.json",
+      "sha256": "4899098199986f336c4646943b64654894dd6a182415873b4b232a0ff22a1a60"
+    },
+    {
+      "bytes": 9929,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/verified-both-parent-canonical-and-historical-reference-preservation.json",
+      "sha256": "d0445abaf765f0ee5d5f7142768ef0077450812ce79ded2de567e5ab0d92b9eb"
+    },
+    {
+      "bytes": 3630,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/verify-retained-actual-inputs-postLIGHT.py",
+      "sha256": "9be4420ff32853a99d2312931145f7bcd7f2155d5cceb5d900db1f610124e398"
+    },
+    {
+      "bytes": 2534,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/verify-retained-raw-and-driver-postLIGHT.py",
+      "sha256": "47f53bbf08359c7d7c0289a035e33f9ec6623ac6f2764a837d7bb5b8d79415ce"
+    },
+    {
+      "bytes": 3997,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/verify_parent_guides_and_historical_refs.py",
+      "sha256": "f6206205b25902cb342075cd4943b6dba0bda0d999c5e0a6ea018419a223476c"
+    },
+    {
+      "bytes": 3990,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/verify_parent_guides_and_historical_refs_v2.py",
+      "sha256": "b119bc2f5117159a7748af112b49b18939d4c5f90dedb0f25c626bc314ced15f"
+    },
+    {
+      "bytes": 1509,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/verify_strict_Canvas.py",
+      "sha256": "ebe25af308421cc54666bfc2d7a91dd9ef9f2074489a53a1f3801bca28507cb6"
+    },
+    {
+      "bytes": 16006,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-actual309-refresh/OWNERFINAL-current-c35e-ordinary-a0d-source-LIGHT-full-and-actual-HOLD.json",
+      "sha256": "79513104c6a9b9bc67d6b1d58ce2993bead4cc8db156dee99ab0dada3ecd12b8"
+    },
+    {
+      "bytes": 6417,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-actual309-refresh/own-Bootstrap-reuse-inputs-and-origins.json",
+      "sha256": "9057f3d36336e1e2d7b164bca36533a0e917ecc77265c26a6e2af8bea151bd0b"
+    },
+    {
+      "bytes": 987,
+      "mode": "0o600",
+      "path": "/workspace/actions-cloud/activate.sh",
+      "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+    },
+    {
+      "bytes": 22282402,
+      "mode": "0o700",
+      "path": "/workspace/actions-cloud/bin/rcc",
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+    },
+    {
+      "bytes": 22282402,
+      "mode": "0o711",
+      "path": "/workspace/engineering/pr282/action_server/src/actions/server/bin/rcc-18.19.3",
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+    }
+  ],
+  "gates": {
+    "Bootstrap": "EXACT_30_OWN_INPUTS_FIVE_CONCRETE_PREFIX_ORIGINS_REUSE_NO_INSTALL",
+    "Doctor": "PASS",
+    "Toolkit": {
+      "pass": 179
+    },
+    "all_tracked_YAML_parsed_preserved": 30,
+    "configured_lint": "PASS_FULL_RUFF_FORMAT_ISORT_317_FILES",
+    "configured_typecheck": {
+      "source_files": 353,
+      "status": "PASS"
+    },
+    "focused_staging_contracts": {
+      "deselect": 24,
+      "pass": 4,
+      "same_size_and_constant_timestamp_poison_and_after_read_metadata": "UNCHANGED_PERMANENT_CONTROLS_PASS"
+    },
+    "full_configured_Runtime_source": "NOT_RUN_DISTINCT_ROOT_RELEASE_REQUIRED",
+    "generator_roundtrip": 8,
+    "scoped_package": {
+      "deselect": 3,
+      "module_outcomes": {
+        "tests.action_server_tests.run_outputs.test_transport": {
+          "pass": 30,
+          "skip": 0
+        },
+        "tests.action_server_tests.test_auth_route_enforcement": {
+          "pass": 73,
+          "skip": 0
+        },
+        "tests.action_server_tests.test_auth_route_inventory": {
+          "pass": 3,
+          "skip": 0
+        },
+        "tests.action_server_tests.test_dakota_rcc_acceptance": {
+          "pass": 35,
+          "skip": 0
+        },
+        "tests.action_server_tests.test_rcc_runtime_adapter": {
+          "pass": 76,
+          "skip": 1
+        },
+        "tests.action_server_tests.test_shutdown_response_order": {
+          "pass": 10,
+          "skip": 0
+        },
+        "tests.action_server_tests.test_source_staging_rcc_consumer": {
+          "pass": 1,
+          "skip": 0
+        },
+        "tests.contract_tests.test_source_read": {
+          "pass": 47,
+          "skip": 0
+        },
+        "tests.contract_tests.test_source_staging": {
+          "pass": 28,
+          "skip": 0
+        }
+      },
+      "pass": 303,
+      "scope_counts": {
+        "accepted_shutdown_response_order": 10,
+        "accepted_transport": 30,
+        "assembled_auth": 76,
+        "originalCanvas_read_staging": 75,
+        "original_RCC_source": 112
+      },
+      "skip": 1,
+      "skip_scope": "existing opt-in real RCC probe; three native integration nodes deselected; no actual browser/provider/native"
+    },
+    "target_checkout_servicefree": {
+      "Git_checkout_and_affected_workflow_selection": "PASS_RETAINED_ACCEPTED_CONTROLS",
+      "pass": 10
+    }
+  },
+  "original_preservation": {
+    "historical441": {
+      "UNAVAILABLE10": "original historical unknowns preserved, not reconstructed",
+      "current_exact": 440,
+      "one_old_mutable_PR305_guide_original_body_verified_in_Git": "40ad3b14d264d0e6aa7843e7c26b9fa3855fc34b"
+    },
+    "incoming_generator_change": "accepted .gitattributes PR path-filter delta; whole old generator byte equality is not claimed",
+    "native1192_helpers0444_raw18_frozen50_Node_browser": "read-only original snapshots and Git source identities checked separately, no actual or changed-head carry",
+    "nine_original_RCC_production_inputs": "unchanged original method pins and production fixture/source bodies",
+    "old_c35_owner_and_evidence_files": "all original unchanged",
+    "original39_whole_Canvas_method_AST_and_workflow_step_exact_9c": true,
+    "original_source_read_source_staging_Canvas_tests_RCC_fixture_bodies_modes_exact_c35": true
+  },
+  "producer": {
+    "added": [
+      "action_server/src/actions/server/migrations/migration_add_run_outputs.py",
+      "action_server/src/actions/server/run_outputs/__init__.py",
+      "action_server/src/actions/server/run_outputs/filesystem.py",
+      "action_server/src/actions/server/run_outputs/models.py",
+      "action_server/src/actions/server/run_outputs/service.py",
+      "action_server/src/actions/server/run_outputs/transport.py",
+      "action_server/src/actions/server/run_outputs/types.py",
+      "action_server/src/actions/server/templates/zips/canvas-query.zip"
+    ],
+    "changed": [
+      "action_server/src/actions/server/_actions_run.py",
+      "action_server/src/actions/server/_api_analytics.py",
+      "action_server/src/actions/server/_api_run.py",
+      "action_server/src/actions/server/_models.py",
+      "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "action_server/src/actions/server/_runs_state_cache.py",
+      "action_server/src/actions/server/_server.py",
+      "action_server/src/actions/server/migrations/__init__.py",
+      "action_server/src/actions/server/templates/action-templates.yaml",
+      "action_server/src/actions/server/templates/action-templates.zip"
+    ],
+    "current_production_count": 276,
+    "deleted": [],
+    "five_selector_changes": [],
+    "match": 258,
+    "native_qualification": "UNQUALIFIED",
+    "old_production_count": 268
+  },
+  "remaining_HOLD": [
+    "Independent SOURCE_LIGHT and enforced FULLpreexecution review",
+    "One full source requires fresh >=1.2GiB capacity and distinct root exact release and serialized slot; NOT_RUN",
+    "No install/native/provider/browser/PG/manualretry/push/merge/source-policy waiver",
+    "Historical browser V5 3ec/92498 and original c35 source/actual receipts remain their original identities"
+  ],
+  "schema": 1,
+  "source": {
+    "accepted_target": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+    "commit": "1299cc4bb6586f467d36ca124faaaaa77362695f",
+    "existing_branch": "feat/canvas-template-20261010",
+    "ordered_parents": [
+      "c35ee2e279eaefe55b16aecdb80da04c590aff7c",
+      "a54c982462d1e7ad011d8152bfc299d997503fb3"
+    ],
+    "original_accepted_source": "c35ee2e279eaefe55b16aecdb80da04c590aff7c",
+    "tree": "afe2679cc93bf27fa5021c7698ee7ad3ee21a1b9"
+  },
+  "status": "OWNERFINAL_CURRENT1299_ORDINARY_A54_SOURCE_LIGHT_GO_FOR_INDEPENDENT_REVIEW_FULL_AND_ACTUAL_HOLD",
+  "upstream_disposition": "none"
+}

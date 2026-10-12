@@ -1,0 +1,150 @@
+{
+  "head": "80ba4c3adce0d0f5fd8a7040d271ab19433e4042",
+  "tree": "3c78f95d814fe2603f40169783fc3c4a84cd6315",
+  "retained_inventory_comparison": [
+    {
+      "inventory": {
+        "path": "/workspace/engineering/pr299/docs/program/evidence/runtime-frozen-current-source-20261011/producer-input-inventory.json",
+        "size": 66239,
+        "sha256": "544566c0d61547c1f9cd5e4c30b770b8a5d0d122760ad78e5596351788276d76"
+      },
+      "entries": 268,
+      "matches": 262,
+      "differences": [
+        {
+          "path": "action_server/src/actions/server/_actions_run.py",
+          "observed": {
+            "mode": "100644",
+            "kind": "blob",
+            "blob": "24fc844ad99c658d70f6f5069f0df250bb72ad87",
+            "sha256": "945fa1ce70ee4834410c8d37fd92372e6772aa8a1a0d128f4cada3035ddbd301"
+          },
+          "historical": {
+            "mode": "100644",
+            "kind": "blob",
+            "blob": "3637cfcd94e5d91f0bf5b9b2fc4b3e94d4562826",
+            "sha256": "4e6d1c0be66939a3e87719f52f47083822506d1936a6c036d0f73ed522b5b702"
+          }
+        },
+        {
+          "path": "action_server/src/actions/server/_api_analytics.py",
+          "observed": {
+            "mode": "100644",
+            "kind": "blob",
+            "blob": "8b3177b995500ec111fbc79b8e7c8589319b1cd2",
+            "sha256": "7e18d7142655607645b526d3e3bde397f22fee874e21c789104a3cad0ca25bfb"
+          },
+          "historical": {
+            "mode": "100644",
+            "kind": "blob",
+            "blob": "7f82f03353940b457fb5057e22e02a5c6f962197",
+            "sha256": "86df893f425a5910e4e9a242a3ee21a9e709600f3a6e45968fba76878cc0dcc7"
+          }
+        },
+        {
+          "path": "action_server/src/actions/server/_api_run.py",
+          "observed": {
+            "mode": "100644",
+            "kind": "blob",
+            "blob": "9f0bab96b6e65c0bd455cc4c8aaa8cc554a22c24",
+            "sha256": "be672635fc9cc000dc3d573a4a0e182d3e42f2d2f48f469b2b1ab27dd2dfc872"
+          },
+          "historical": {
+            "mode": "100644",
+            "kind": "blob",
+            "blob": "424094841a29bd11d6bc7fb0f3b9e528573353d9",
+            "sha256": "0e4ff75583d1754b1c4e2bceb8e1b411718cf7ce3c4a066588ab25744f04a9c6"
+          }
+        },
+        {
+          "path": "action_server/src/actions/server/_models.py",
+          "observed": {
+            "mode": "100644",
+            "kind": "blob",
+            "blob": "405304f2e593fdfe949b431851eb0dae39c6ab96",
+            "sha256": "bc9ad180099414005575b2d034741176f8d86b1b758f6bbf1c3e3b5497aadbf9"
+          },
+          "historical": {
+            "mode": "100644",
+            "kind": "blob",
+            "blob": "e2cd220d7c948d87bf961a253c28b3ee54e8dcbb",
+            "sha256": "530cdbfe913495b9eaff54bc029ef1340840d1598aff205d3e6047ea4d296a73"
+          }
+        },
+        {
+          "path": "action_server/src/actions/server/_runs_state_cache.py",
+          "observed": {
+            "mode": "100644",
+            "kind": "blob",
+            "blob": "3774e9a0e77d43e63a18733a4ff5652454ef06ce",
+            "sha256": "4b7fea14ad672f7f039ff63fc9b75b7195c4f7cb44f79d81b5dc8f3069f4ca7c"
+          },
+          "historical": {
+            "mode": "100644",
+            "kind": "blob",
+            "blob": "6428a201a110b8d1073fc3b5265d9282723de944",
+            "sha256": "0f5714321d4bb1af809b565efd48d4a96a7d66e93bb3967bc1cb3c5bed6cb73c"
+          }
+        },
+        {
+          "path": "action_server/src/actions/server/migrations/__init__.py",
+          "observed": {
+            "mode": "100644",
+            "kind": "blob",
+            "blob": "7889794dd3db1019bf4cdc179fa892c05943dc79",
+            "sha256": "c3001c1c3fa605c315b04c43b8dfd845495e3dc3773a0098be60d0d5efe931f6"
+          },
+          "historical": {
+            "mode": "100644",
+            "kind": "blob",
+            "blob": "cb68bcb4a2e41ecefcb5a409ce5c26065a505d05",
+            "sha256": "0bfc8983263177242f12a32824d88596f665fabcd08c96344709c9e00e1ce37e"
+          }
+        }
+      ]
+    },
+    {
+      "inventory": {
+        "path": "/workspace/engineering/pr299/docs/program/evidence/runtime-frozen-current-source-20261011/selected-test-inventory.json",
+        "size": 1333,
+        "sha256": "8a87d39c2f197234da0de0535d6fd2e249d29b0a20943f1f31da47248970ade6"
+      },
+      "entries": 5,
+      "matches": 5,
+      "differences": []
+    }
+  ],
+  "original299_added_producer_paths_absent_from_historical_inventory": [
+    {
+      "path": "action_server/src/actions/server/migrations/migration_add_run_outputs.py",
+      "blob_mode_kind": "100644 blob 3629ef55d42815acc7c1701bdd5b6949d3394ec6",
+      "sha256": "ebb773140f650555ac85628b9599363d6ec6b180841c86200a0fee622d4b9de4"
+    },
+    {
+      "path": "action_server/src/actions/server/run_outputs/__init__.py",
+      "blob_mode_kind": "100644 blob 6787c69b364901f1a1eed93e553ae8cfe4d194ef",
+      "sha256": "4c29ad35ab314ea4472025d453703b124a08262cfa24a51baf3a1a2ffb58ae38"
+    },
+    {
+      "path": "action_server/src/actions/server/run_outputs/filesystem.py",
+      "blob_mode_kind": "100644 blob 89170173dd0f1771e1a9923bb8532f2b28448dd1",
+      "sha256": "db8daf79dc0d2a06ecec9a2c3ab67319d6df420c2a44578948d46f2b558c5606"
+    },
+    {
+      "path": "action_server/src/actions/server/run_outputs/models.py",
+      "blob_mode_kind": "100644 blob ae75ceee659776fd51e1dda36528a22640afba19",
+      "sha256": "c69318f6893484156fba1002f8372711fc83e32e56d0e29c54e985cc26196065"
+    },
+    {
+      "path": "action_server/src/actions/server/run_outputs/service.py",
+      "blob_mode_kind": "100644 blob 55f5c09aeb0a3e9199b56916bb7fee41708b35c6",
+      "sha256": "46174068c6d5fb1609a38630fd460983c071a51a48bec4bb6ecdeff42446fe62"
+    },
+    {
+      "path": "action_server/src/actions/server/run_outputs/types.py",
+      "blob_mode_kind": "100644 blob cac30880373c26f648bb1c835fb74449f567cb22",
+      "sha256": "9195c6986edee9b2821e5e75c88a556ab4ef747eb065adb05b72b415165767d3"
+    }
+  ],
+  "artifact_proof": "NOT_QUALIFIED for refreshed299; six changed plus six added producer inputs relative to frozen build"
+}

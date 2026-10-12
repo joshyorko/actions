@@ -1,0 +1,117 @@
+{
+  "checkpoint_base": "d55ed399a5b6ba67e88002dd6d490ac9366c2130",
+  "native_control3": "RUNNING_SEPARATE_FROZEN_SOURCE",
+  "new_files": [
+    {
+      "bytes": 6228,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/01-owned_cache_policy_v8.py",
+      "sha256": "4ccac4e3bd2c1e91352ef4e647968b4ca61f8691e1fc0f41e72a128a2942c205",
+      "source": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/owned_cache_policy_v8.py"
+    },
+    {
+      "bytes": 27889,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/02-actual_transport_v8.py",
+      "sha256": "33dda17140ef749e22f086cc91b92ed8c3230fddfde8a4a369769e2183f695a1",
+      "source": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/actual_transport_v8.py"
+    },
+    {
+      "bytes": 6327,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/03-historical_binding_current8d49_v8.py",
+      "sha256": "6f64d55837cc4ff14ee4eec013314ba512c09ecdc56f79192c1360ef46473b30",
+      "source": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/historical_binding_current8d49_v8.py"
+    },
+    {
+      "bytes": 11489,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/04-fixture_records_v8.py",
+      "sha256": "7a63ee62184ea268dead0c98460c6943ebc297816e9a4df180b10ed5e04b9064",
+      "source": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/fixture_records_v8.py"
+    },
+    {
+      "bytes": 12959,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/05-runner_contracts_v3.py",
+      "sha256": "cbae3bb074d3995153ea5e6b694e7f9e61c047c6aa511b682959a63fedf7b726",
+      "source": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/runner_contracts_v3.py"
+    },
+    {
+      "bytes": 4632,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/06-owned_monitor_v1.py",
+      "sha256": "834a7fe402e34b170f414df5dfe79762c0b49ed311a6222ba2f7bca5d87020a5",
+      "source": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/owned_monitor_v1.py"
+    },
+    {
+      "bytes": 1072,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/07-historical_binding_v1.py",
+      "sha256": "10eac48f020d4c1030bb0be26b3b283d896712b7e7b5095e08045b8192808215",
+      "source": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/historical_binding_v1.py"
+    },
+    {
+      "bytes": 2645,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/08-historical_failed_receipt_archive_v1.py",
+      "sha256": "a69291189f47812c41ce43d9d68a81a839780ce28a0a9dfc00c487c9acb26d69",
+      "source": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/historical_failed_receipt_archive_v1.py"
+    },
+    {
+      "bytes": 14786,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/09-test_current_managed_reload_sqlite_pool_barriers.py",
+      "sha256": "c148bd528f8306e638054df91dfbf915022eaf30d3e123ff845adbeae6b209eb",
+      "source": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/test_current_managed_reload_sqlite_pool_barriers.py"
+    },
+    {
+      "bytes": 15348,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/10-proposed-current8d49-adapter-nine-controls-append-only.patch",
+      "sha256": "7a8eb3af1d96b87f99025f43167e146af162f4b3cfde0596679d6beedb46a7a3",
+      "source": "/workspace/engineering/private-handoff-current1935-source-closure-PREPARATION/proposed-current8d49-adapter-nine-controls-append-only.patch"
+    },
+    {
+      "bytes": 4493,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/11-nine-real-SQLite-pool-barrier-baseline-and-private-mutant-RED-plan-NOTRUN.json",
+      "sha256": "1c33ec727106e5a3b686571011ab05dbc7259f70bacca773acdf627dd67e0a33",
+      "source": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/nine-real-SQLite-pool-barrier-baseline-and-private-mutant-RED-plan-NOTRUN.json"
+    },
+    {
+      "bytes": 1966,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/12-current8d49-reload-drain-recontext-implementation-and-admission.md",
+      "sha256": "8fd57f9442106b711dc724ee46201cd0b515ce2a8126825d619220a0f263e426",
+      "source": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/current8d49-reload-drain-recontext-implementation-and-admission.md"
+    },
+    {
+      "bytes": 1021,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/13-canonical-current-source-reload-drain-transaction-scope-proposed.patch",
+      "sha256": "8354390b30343aa9a57a976aa5244e75068f8c59fc604f074af9e18110743856",
+      "source": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/canonical-current-source-reload-drain-transaction-scope-proposed.patch"
+    },
+    {
+      "bytes": 22258,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/source-closure-manifest-original.json",
+      "sha256": "80c8215bc256c5cc36509beaba95aef6e9629718d9cf5c620e084ba3a5b728ec",
+      "source": "/workspace/engineering/private-handoff-current1935-source-closure-PREPARATION/proposed-unique-safe-source-closure-manifest.json"
+    },
+    {
+      "bytes": 2400,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/OWNERFINAL-original-source-closure-PROPOSAL.json",
+      "sha256": "f92d2c46afcf5cf097a19f91603313720c16ff48a83825e9b88994e12e2646c6",
+      "source": "/workspace/engineering/private-handoff-current1935-source-closure-PREPARATION/OWNERFINAL-private-current1935-unique-safe-source-closure-PROPOSAL.json"
+    },
+    {
+      "bytes": 1415,
+      "path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/OWNERFINAL-original-old-v4-v7-coverage-reconciliation.json",
+      "sha256": "3c1d5868486c9fba6e2cf3fc24a7479862d42531c7849f3acb84d5a9eedefab5",
+      "source": "/workspace/engineering/private-handoff-current1935-source-closure-PREPARATION/OWNERFINAL-old-v4-and-verified-v7-source-coverage-reconciliation.json"
+    }
+  ],
+  "new_local_attributes": {
+    "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/.gitattributes": {
+      "bytes": 84,
+      "sha256": "14577bcdc942456ff5404a97706d5da5f9244ef23400ed66daed074b20b84335"
+    },
+    "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/.gitattributes": {
+      "bytes": 441,
+      "sha256": "ce8db9ba386c4d2bfb2520b8da1cbd15ccd0fe03d157c92a314375ca8150d082"
+    }
+  },
+  "original1935_review": "647ac884d05c60c311240465e23303f92713fc580a550ac82c35967d6a59a7fc",
+  "original_tracked_guide": "UNCHANGED_AFTER_ACCEPTED39_LINES",
+  "public_source_only": "NO_PRIVATE_NATIVE_CONFIG_BINARY_LOG_INDEX_OR_OAUTH_CONTENT",
+  "source_private9controls": "NOTRUN_NO_ADOPTION",
+  "status": "PRIVATE_APPLICATION_NO_COMMIT_PUSH_OR_NATIVE_GRANT"
+}

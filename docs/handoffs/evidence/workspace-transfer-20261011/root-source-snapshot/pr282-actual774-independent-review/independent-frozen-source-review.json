@@ -1,0 +1,101 @@
+{
+  "schema": "actions-independent-pr282-actual774-pureordinary-source-review/v1",
+  "verdict": "GO_NORMAL_EXISTING_PR_BRANCH_SOURCE_REFRESH_PUSH_ONLY",
+  "head": "e9641caaa1f11414fe92874eb40e159cb48604a6",
+  "tree": "6ec12ad4150a1f0d37fb418d5a956e8268a4ffcc",
+  "ordered_parents": [
+    "9c8f1c95caeded6495877280ed1465fd9850b254",
+    "774438b130afb2ead9bbc1c1b76cb6f91e72150a"
+  ],
+  "branch": "feat/canvas-template-20261010",
+  "clean": true,
+  "frozen_receipt": {
+    "path": "/workspace/engineering/pr282-actual774-refresh/frozen-source-receipt.json",
+    "bytes": 14946,
+    "sha256": "6c8490d1836eb816d6631b86f28e2b8a6a667f5e89bfb812c6c81cc536fb71ff"
+  },
+  "independent_source_proof": {
+    "path": "/workspace/engineering/pr282-actual774-independent-review/independent-complete-source-byte-proof.json",
+    "bytes": 9625,
+    "sha256": "1d8a773ad8bcd056886d4c18d4f96b4059cfbffeafd7ecfffacbc3eda01302c7"
+  },
+  "authenticated_existing_branch_readback": {
+    "path": "/workspace/engineering/pr282-actual774-independent-review/authenticated-existing-branch-readback.json",
+    "bytes": 756,
+    "sha256": "b94c8554c47456ed09429384f3659a78576c3f8a36eeabf590a33f508cf4394b"
+  },
+  "independent_checks": {
+    "Gitmerge_tree_exact_frozen6ec12": true,
+    "full1423_union_modes_blobs_and_working_bytes_no_deletions": true,
+    "no_novel_nondoc_leaf": true,
+    "entire_original9c_GitHub_generator_workflows_exact": true,
+    "Canvas39strict_predicates_measurement_versions_rawmetadata_fixeddiagnostics_controller_unchanged": true,
+    "edc7_Canvashelperoriginal305snapshot_same_readonlybytes": true,
+    "source_read_and_source_staging_production_mode_blob_bytes_exact9c_774_92498": true,
+    "entire_original9c_staging_test_body_exact": true,
+    "staging4_controls_review": "Same-device+inode before-read same-sized byte mutation and constant timestamp bytes recheck; after-read explicit ownedfdmtime change, asserted actualmutation/original ValueError/ownedtree cleanup. Real success+negative source controls retained, no newlyclaimed TDD or timestampguess.",
+    "producer269exact9c_vs92498_266match2templatechanged1CanvasZIPadded": true,
+    "five_selectors_separate_exact9c_774_92498": true,
+    "24preparedsourceinputhashes_and5ownconcrete_source_prefixes_exact": true,
+    "nested39_original_evidence_lengths_SHA256_exact": true
+  },
+  "source_gate_subject": {
+    "head": "e9641caaa1f11414fe92874eb40e159cb48604a6",
+    "tree": "6ec12ad4150a1f0d37fb418d5a956e8268a4ffcc",
+    "all_gates_same_committed_union": true
+  },
+  "verified_recorded_gates": {
+    "Doctor": "PASS",
+    "Bootstrap": "VERIFIED_REUSE exact24sourceinputs plus five own prepared environments and concrete source/prefix checks; no installer",
+    "Toolkit": 152,
+    "scoped_source_staging_and_read": 75,
+    "staging_focused_controls": {
+      "passed": 4,
+      "deselected": 24,
+      "skip": 0
+    },
+    "full_configured_Runtime_source": {
+      "passed": 1167,
+      "skipped": 12,
+      "warnings": 15,
+      "seconds": 135.61,
+      "workers": 2
+    },
+    "full_configured_lint": "Ruff/format/Isort PASS",
+    "typecheck_files": 338,
+    "generated_workflows": 8,
+    "workflow_plus_dependabot_yaml": 26,
+    "all_tracked_yaml_parsed_and_preserved": 30,
+    "extra_four_yaml_not_claimed_generated": true,
+    "git_diff_check": "PASS"
+  },
+  "gate_verification_limit": "Original recorded logs independently inspected and source/evidence hashes checked, no gate reexecution. Full1167PASS12SKIP15warnings135.61s/2workers,75scoped+4staging24deselect/Toolkit152/static338/gen8/26workflowdependabot30trackedYAML belongs exacte964union.12existing skips remain unverified.",
+  "process_cleanup_limit": {
+    "source_suite_PASS": true,
+    "exact_retained_readback": {
+      "path": "/workspace/engineering/pr282-actual774-refresh/after-full-state-readback.json",
+      "bytes": 1075,
+      "sha256": "ff60fb1cd25372f14b0a025e2597caa3392813d60454d9dbc6509ff0f5650d0f"
+    },
+    "two_migrated_warning_identities": "230317/230329 immediate recordedPPID1/stateZ; sourcegateway completion does not establish fullreaping. No historical state reconstructed, currentPIDquery, causeinfer or kill performed by reviewer.",
+    "complete_descendant_reaping": "NOT_PROVEN",
+    "actual_native_cleanup": "NOT_RUN_UNKNOWN"
+  },
+  "historical_and_actual_limits": "Original a0/de891 Toolkit staging failure remains original tuple, callback/stat/read observations and timestamp cause UNKNOWN. Currentold9c26green historical; no carry to e964. Strict originalCanvas version/admission does not prove new packaged contents or execution.92498 is NOT_QUALIFIED for current269inputset, no exclusions/nativeborrow. Fresh complete exacthead/syntheticmerge CI, actual strictCanvas/native/browser/provider/privatefull127/ChatGPT/coldinstaller/OAuth/release remain HOLD.",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md and docs/skills/work-items.md",
+    "Exact_delta": {
+      "path": "/workspace/engineering/pr282-actual774-independent-review/canonical-reviewed-imported-delta.patch",
+      "bytes": 13215,
+      "sha256": "7bb8b8e528ab96773f53036f01c36dc731a77229588779b926b04aee60c3a188"
+    },
+    "Disposition": "ACCEPT exact13215B ordinary imported accepted774guide lessons; no cosmeticchild. All197prior operations-guide addedlines froma0\u21929c retained, including staging10line and own-source-origin lessons.",
+    "Durable_learning_captured": "First-readiness versus reachedsemantic/nativeUI gates, full RCC previousmark interval sum versus finalmark, typed receipt SHA versus sourceGit ancestry, separate platform/Core/browser/harness/artifact provenance, preserved staging bytes versus metadata controls.",
+    "Evidence": "Independent complete1423 mode/blob union/Gitmerge-tree6ec12; original39/wholeGitHub bytes, originalstaging4 controls,edc7helper snapshot and39 nested evidence SHA; currentsource gates. Imported exactguidepatch matches owningGitdiff.",
+    "Stale_or_ambiguous_guidance_removed": "Earlier owningguide omissions of acceptedplatform/readiness/provenance limits resolved by ordinaryimport; generic digest and execution claims remain separate. Staging callback/stat cause not inferred from passing correctedlocalcontrols.",
+    "Remaining_uncertainty": "Fresh currentCI/strictCanvas actual/qualified currentnative artifact/full127/provider/private/ChatGPT/coldregistry/release unknown; sourcegateway two recordedzombies means fullreaping unproved.",
+    "Additional_delta_decision": "Existing canonical bounded-process-tree zombie/reaping distinction and separate watchdog/termination/reaping guidance already explicitly cover this sourcePASS-versus-reaping boundary. No additional duplicate paragraph justified; exact imported guide improvement and retained limitations sufficient."
+  },
+  "upstream_disposition": "none",
+  "reviewer_actions": "Read-only Git/stdbyte/hash/logsummary/JSON/ref review. No source/index edit, native/browser/provider/staging oractualCanvas/gateway test execution, processkill/cleanup, retry, push/merge/newinfra."
+}

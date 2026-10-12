@@ -1,0 +1,85 @@
+{
+  "schema": "actions-independent-pr312-current-a0d-SOURCEFINAL/v1",
+  "verdict": "GO_NORMAL_EXISTING_PR312_BRANCH_SOURCE_PUSH_ONLY",
+  "owner_final": {
+    "path": "/workspace/engineering/pr312-actual309-refresh/OWNERFINAL-pr312-current-a0d-SOURCEFINAL.json",
+    "bytes": 21917,
+    "sha256": "d922c435dd20c585f134bbc9bae76ede367ff2bd40f901c5952fd65ffc64c82b"
+  },
+  "head": "77065131a0aee63d2b1f8621476374bdde3c7b65",
+  "tree": "edf1801e565692fb3f07b809b3a95b27981fe2fe",
+  "ordered_parents": [
+    "92e6deda5c252a503510c4b6261a86cb51f73cb6",
+    "a0d258a16095b95b1bf9000cb1201cddfaff4779"
+  ],
+  "existing_branch": "fix/runtime-checkout-eol-20261011",
+  "verified": {
+    "complete_Git_FS_body_exec_typed_parent_union": 1423,
+    "prepost_exact": true,
+    "protected_inputs": 207,
+    "protected_Python": 201,
+    "protected_text_frontend": 6,
+    "original_seven_LF_rules_two_filters_preserved": true,
+    "target_auth_files_preserved": 2,
+    "old_source_refs": 62,
+    "unique_binding_files_rehashed": 161,
+    "current_one_full": {
+      "devutils": {
+        "PASS": 162,
+        "SKIP": 0,
+        "fixed_n2_argv": true,
+        "raw_worker_count_UNREPORTED_quiet_output": true,
+        "seconds": 11.12
+      },
+      "configured_Runtime": {
+        "PASS": 1295,
+        "SKIP": 13,
+        "warnings": 15,
+        "items": 1308,
+        "workers": 2,
+        "seconds": 137.55
+      },
+      "RCC_returncode": 0,
+      "elapsed_seconds": 158.75892454999848,
+      "timeout_TERM": 600,
+      "kill_after": 10,
+      "attempts": 1
+    },
+    "original_native_tree_entries_independently_rehashed_mode_checked": 1192,
+    "original_helper_snapshots_mode0444": true,
+    "original_raw_V5_receipts": 18,
+    "original_frozen_V5_member_hash_scope": 50,
+    "V5_original_source3ec_and_native92498_preserved_no_current_actual_carry": true,
+    "prepared_inputs": 30,
+    "own_config_prefix_origin_count": 5,
+    "RCC_pin_mode0711": true
+  },
+  "raw_log_binding_private": {
+    "path": "/workspace/engineering/pr312-actual309-refresh/current-union-full-source-gates.log",
+    "bytes": 334117,
+    "sha256": "24e9f04c84414328049ec589c8722bb50bf0fe91a928a273c1dd2a60eb589549"
+  },
+  "history": "Independent unannounced inspector expected verbose devutils worker count in quiet output; corrected to measured fixed-n2 argv/node startup before final freeze. Original wrong-task inspector and wrong own-prefix metadata preflight failures retained; corrected metadata successor preceded ONE current full. No source gate failure or retry relabeling. Original92e/618 full and hosted tuples historical.",
+  "remaining_HOLD": [
+    "Root live PRhead/base/existing remote ref before normal source push",
+    "Fresh complete770/a0d hosted tests/builds and current distribution bytes",
+    "13 skipped source tests remain unverified",
+    "Windows effective-checkout/compiler cause and embedded HTML semantics UNKNOWN",
+    "Current native/provider/private01f/frozen-v6/OAuth authority/full7 consumers/ChatGPT/issues/release/tag/publication unqualified"
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; accepted source1306 16-line lesson and accepted a113 explicit-worker lesson reused",
+    "Exact_delta": "Source guide minus exactly one16-line EOL lesson equals complete targeta0d guide; all target registration/credential/history guidance preserved. Explicit xdist environment2 precedes BOTH sequential commands; no cosmetic child.",
+    "Durable_learning_captured": "Tracked text/owning workflow filters need complete checkout qualification; actual configured n-auto worker count must inherit explicit bound and be measured independently from devutils-n2.",
+    "Evidence": "207 unchanged protected bodies/modes,1423 complete pre/post union,exact launcher876a and rootdc19,current raw24e9 devutils162 fixed-n2 argv+Runtime1295 observed2workers, unchanged original native/3ecV5 inputs",
+    "Stale_or_ambiguous_guidance_removed": "No old92e/618 full or hosted carry; NOT_RUN retained-native label interpreted as original native/browser execution only, not denial of separate current source full execution",
+    "Remaining_uncertainty": "Fresh current hosted/cross-platform generated distributions, skipped integrations, native/private/content authority and release remain HOLD"
+  },
+  "Upstream_disposition": "none",
+  "read_only_no_tests_gateway_source_index_download_ref_push_merge_mutation": true,
+  "review_script": {
+    "path": "/workspace/engineering/pr312-current-a0d-independent-sourcefinal-review/verify-readonly.py",
+    "bytes": 11879,
+    "sha256": "5c3efb1d9bb20d0f691527497821369cce42a74a61e51e487406b57d33553c6c"
+  }
+}

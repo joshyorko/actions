@@ -1,0 +1,27 @@
+{
+  "FULL": "NOT_RUN",
+  "authority_native_merge": "HOLD",
+  "capture": "2026-10-11T23:14:02.862167+00:00",
+  "elapsed_seconds": 110.62015221000183,
+  "external_post": {
+    "bytes": 923,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-pr307-current9760-reviewed-token-light-once5-outer/external-always-post-envelope.json",
+    "sha256": "cc5d3a63936b723af1cbdf7c0d349a06a490583231cddb2879c030c091dbcd15"
+  },
+  "outer_returncode": 1,
+  "release": {
+    "bytes": 682,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr307-current9760-token-light-once5-namespace-base-PREEXECUTION-NOTRUN/root-one-TOKEN-LIGHT-once5-release.json",
+    "sha256": "caaeff571e25db5174bd431e5844c16dcf5a9494869e6e7c36df1e7801c9c1a7"
+  },
+  "review": {
+    "bytes": 10857,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current9760-private-once5-independent-SOURCE-PREEXEC-review/OWNERFINAL-independent-current9760-private-once5-single-Mypy-base-SOURCE-and-PREEXECUTION-GO.json",
+    "sha256": "9fb52068671f163f66861472484875bb991f42fb57faff6833b94606fbdaf6d7"
+  },
+  "source": "9760d5ec44876558c4941c4c3190abc8d92d14a1",
+  "tree": "0d33ebaac258e069ef7045a29b4a3904740f6307"
+}

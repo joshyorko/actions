@@ -1,0 +1,45 @@
+{
+  "schema": "actions-batch18-independent-capacity-preservation-review/v1",
+  "status": "GO_SCOPED_BATCH18_PRESERVATION_PREREQUISITE_ONLY_NO_FULL_AUTHORIZATION",
+  "safe_owner": {
+    "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch18.json",
+    "bytes": 1990,
+    "sha256": "237931b35f056558aa010733459b27912b0f54dbb08a1204c6fde05f7c7e2ba9"
+  },
+  "independent_proof": {
+    "path": "/workspace/engineering/capacity-recovery-batch18-independent-review/independent-one-archive-stream-and-preservation-proof.json",
+    "bytes": 3144,
+    "sha256": "411f940ddf8740915f7ca0feb4dbd53c20cc35c98e58222048667bcc0bc2c2b8"
+  },
+  "counts": {
+    "new_archives": 1,
+    "new_members": 16810,
+    "prior_archives": 38,
+    "prior_indices": 17,
+    "total_preserved_archives": 39,
+    "total_preserved_indices": 18
+  },
+  "all_recorded_bytes_modes_UID_GID_symlinks_internal_hardlinks_and_gzip_EOF_CRC_ISIZE": true,
+  "completion_marker_True": true,
+  "expanded_namespace_absent": true,
+  "source312_current770_treeedf180_clean1423_exact": true,
+  "source312_SOURCEFINALd922_and_all_current_refs_exact": true,
+  "source312_SOURCEFINAL_acceptance_independent_review_NOT_performed": true,
+  "current_workspace_free_bytes": 1360031744,
+  "limitations": [
+    "No historical expanded filesystem or complete live-handle census replay",
+    "No ACL/xattr/inode/rootmetadata/precise TAR nanosecond timestamps claim",
+    "Failed563d existence only; no failure state or contents qualification",
+    "Consumer installed temp already removed; original observations hash-preserved only",
+    "No restore/extraction/removal/archive mutation/source edit/gates/actual/native execution",
+    "Root fresh capacity/serialization/full authorization remains separate"
+  ],
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md; exact accepted7d070 paragraph verified verbatim, no cosmetic duplicate",
+    "Durable learning captured": "Require complete recorded archive bytes/metadata and resolved hardlink content before completed scratch removal; preserve failed and historical observation limits separately",
+    "Evidence": "16810 streamed members/gzip EOF and AST-equivalent18 algorithm;38prior archives/17indices,169Linuxconsumer references,312current1423 and62oldsource refs exact",
+    "Stale or ambiguous guidance removed": "No archive preservation equated with full handle census, failed-gate acceptance, current consumer installation or full-test authorization",
+    "Remaining uncertainty": "Historical ACL/xattrs/inodes/rootmetadata/precise timestamps/live handles and failed563d contents remain unqualified; root owns full capacity/serialization authorization"
+  },
+  "upstream_disposition": "none"
+}

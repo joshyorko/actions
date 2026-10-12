@@ -1,0 +1,27 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -114,6 +114,24 @@
+ case without skips or retries and the existing five persisted Runtime Run
+ records. These are implemented admission controls; an actual native/public-Core
+ bridge receipt still requires a separately reviewed immutable runner and run.
++
++An external pytest ownership hook must bind to the module object on the exact
++collected item, not just a qualified preimport of the same file. Pytest can
++collect that file under a different module name, leaving the live hook unset.
++Qualify the actual collection boundary with `--collect-only`: require the
++expected single node, source file and bytes before installing only the owned
++callback, and restore the previous hook in `finally`. Exercise public-mode
++admission and exact command/result forwarding on that collected object with a
++fake controller; collection controls do not execute Runtime or authenticate a
++product result.
++
++Preserve primary test output and the returned outer supervisor cleanup result
++before raising for a nonzero worker exit. If public-mode admission fails before
++Runtime startup, missing Runtime cleanup observations remain unavailable; a
++failed strict cleanup assertion does not identify a Runtime leak. Keep that
++failed attempt distinct from the next immutable runner proposal and require
++new review and execution authority. Do not relax product assertions or infer
++cleanup fields from a different process owner's result.
+ 
+ Compare retained native producer inputs to the resolved ordinary merge tree,
+ then repeat at the committed harness checkpoint. Divergent tips can omit later

@@ -1,0 +1,83 @@
+{
+  "ROOT_KILL_grace_seconds": 10,
+  "ROOT_capture_parent_seconds": 350,
+  "ROOT_outer_TERM_seconds": 320,
+  "accepted_child_review_binding": {
+    "bytes": 15828,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v7-current9760-independent-PURE18-PREEXEC-review/OWNERFINAL-independent-first-five-v7-clean9760-managed-machine18-SOURCE-PREEXEC-GO-ROOT-envelope-v2.json",
+    "sha256": "2dd770932fd2823a3cf4880e2fd0e12992de266e5bbdaddf23096b442aba5899"
+  },
+  "capture": "2026-10-11T23:04:56.819115+00:00",
+  "config_binding": {
+    "bytes": 37537,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v7_current9760_managed_PURE18_inputs_NOTRUN.json",
+    "sha256": "ca8279f3bdcc04c85f9d5c100ab010fc11bd9822c13633c68cdfe6eb1c3e69af"
+  },
+  "decision": "GO_EXACT_FIRST_FIVE_V7_VERIFIED_BUFFER_NAMED_V2_ROOT_PARENT_PURE18_ONLY",
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "evidence": [
+      {
+        "bytes": 3892,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v7-concrete-ROOT-parent-independent-SOURCE-PREEXEC-review/independent-PURE18-named-v2-exact-verified-buffer-inverse-text-and-AST-proof.json",
+        "sha256": "e528ca3f7a41383fb51d605b9c13b6256092cd09b31ce7832aa272a21e9d09ff"
+      }
+    ],
+    "remaining_uncertainty": "Actual18/machinecensus/externalpost outcomes andrealpreservation/native stillpending.",
+    "stale_ambiguity": "Originallivepath reread wasnot capturedbuffer proof; namedv2 sourcecorrects it withoutrelabellingv1HOLD.",
+    "verified_lesson": "Exactcapturedrawbuffer SHA/size is checked beforeparse/compile. Preserveoriginalfilename/non-mainnamespace/globalROOTbindings andunchangedguard."
+  },
+  "exact_ROOT_argv": [
+    "/usr/bin/timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "320s",
+    "bash",
+    "-c",
+    "source /workspace/actions-cloud/activate.sh && export PATH=\"/workspace/actions-cloud/bin:/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\" && exec \"$@\"",
+    "first-five-v7-root-parent",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "-B",
+    "/workspace/engineering/root-reviewed-first-five-v7-PURE18-external-parent-v2.py"
+  ],
+  "launcher_binding": {
+    "bytes": 12477,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v7-current9760-managed-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v7_current9760_managed_PURE18_ROOT_ONLY_SOURCE_PREPARED.py",
+    "sha256": "00e4d952c0b79c4ebe95879f9a19cfa6ac15805c0f4bd1906d871048cd3b3e94"
+  },
+  "original_parent_HOLD": {
+    "bytes": 4958,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v7-concrete-ROOT-parent-independent-SOURCE-PREEXEC-review/OWNERFINAL-independent-first-five-v7-concrete-ROOT-parent-SOURCE-PREEXEC-HOLD.json",
+    "sha256": "518431256e8017d5ef351fe9983b2ed58eb1bbfc0d7132a475018b6489079a2a"
+  },
+  "parent_binding": {
+    "bytes": 6833,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-reviewed-first-five-v7-PURE18-external-parent-v2.py",
+    "sha256": "700bb81131a62c48787c517d61d0e833c843c935f88ad26ea952bf05c86e8551"
+  },
+  "readonly_inverse_proof": {
+    "bytes": 3892,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v7-concrete-ROOT-parent-independent-SOURCE-PREEXEC-review/independent-PURE18-named-v2-exact-verified-buffer-inverse-text-and-AST-proof.json",
+    "sha256": "e528ca3f7a41383fb51d605b9c13b6256092cd09b31ce7832aa272a21e9d09ff"
+  },
+  "required_ROOT_preflight": [
+    "Rehash thisGO0400/parentv2/config/launcher/review2dd/current98rows; exactcachedPython-B afteractivation18/PATH2, rejectinheritedoptimize/PYTHONHOME/PYTHONPATH/pytest overrides.",
+    "OUTER/release/fixture/ownedrootfreshABSENT; no otherheavy/storage/source/environmentmutations. Exactcurrent4source refs before/alwayspost, no carryold dirtysourceproof.",
+    "ROOTacknowledges thisexactsourcebody/admittedargv beforeoneexecution; parentcreates distinctregular600grantundernew700ownedOUTER and includesexactself/review/config/launcher/budgets. No grantcreatedbyreviewer.",
+    "Rawbefore/primary/post/closure/terminal retained privately; independentactualmustderive exact18unique machinecensus and allguards, not parent0only."
+  ],
+  "schema": 1,
+  "scope_limits": [
+    "SOURCE/PREEXEC only, PURE18 NOT_RUN; no actualenvironmentpreservation/storage/native/profile/consumer/provider/release admission.",
+    "Originaldeb723/HOLD518 preserved. Capture/kernelstall guaranteeslimitedtowholeROOTfiniteenclosure; no numericaluniversalIOcompletionclaim."
+  ],
+  "status": "INDEPENDENT_FIRST_FIVE_V7_NAMED_V2_ROOT_PARENT_SOURCE_PREEXECUTION_GO",
+  "upstream_disposition": "none"
+}

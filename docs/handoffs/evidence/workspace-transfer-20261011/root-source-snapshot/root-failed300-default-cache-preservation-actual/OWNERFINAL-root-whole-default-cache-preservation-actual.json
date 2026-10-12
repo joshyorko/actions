@@ -1,0 +1,33 @@
+{
+  "status": "PASS_ALL_CURRENT_CACHE_BYTES_PRESERVED_LOGICAL_PATH_RETAINED",
+  "authorization": {
+    "path": "/workspace/engineering/root-failed300-default-cache-preservation-actual/root-exact-once-preservation-authorization.json",
+    "bytes": 1543,
+    "sha256": "c135777079dd5b47f3cf527e0bab763b94f614f6a617617afa32e00ef55e786b"
+  },
+  "private_complete_inventories": {
+    "path": "/dev/shm/actions-root-failed300-default-cache-preservation-20261011/complete-private-preservation-inventories.json",
+    "bytes": 822733,
+    "sha256": "281f8947c3667d6191c017651d4f96116a03abf85518c42876c57ff82f0122c7"
+  },
+  "source": "/home/agent/.robocorp/pkgs",
+  "physical_destination": "/dev/shm/actions-root-failed300-default-cache-preservation-20261011/pkgs",
+  "removed_only_verified_expanded_backup": "/home/agent/.robocorp/pkgs.actions-failed300-preserved-backup-20261011",
+  "files": 362,
+  "directories": 38,
+  "symlinks": 16,
+  "regular_bytes": 1132159923,
+  "history_baseline": "UNKNOWN; all current entries preserved without filtering",
+  "copy_events": [
+    {
+      "copy_returncode": 0,
+      "elapsed_seconds": 1.17353110100521
+    }
+  ],
+  "elapsed_seconds": 5.663243384005909,
+  "overlay_free_before": 207171584,
+  "overlay_free_after": 1340346368,
+  "default_cache_preservation_does_not_authorize_any_gate": true,
+  "observed_handle_limits": "Observed /proc cwd and fd symlink targets only; not a complete process/maps or historical handle census",
+  "no_atomic_exchange_or_universal_quiescence_claim": true
+}

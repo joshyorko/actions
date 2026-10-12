@@ -1,0 +1,12 @@
+{
+  "decision": "PASS_READONLY_INDEPENDENT_ORIGINAL_NATIVE1192_AND_V5_RETENTION_ONLY",
+  "native_typed_bodies_symlinks_modes_exact": 1192,
+  "V5_private_raw_originals": 18,
+  "V5_frozen50_current_files": 50,
+  "V5_frozen50_historical_exact3ec_Git_blobs": 0,
+  "historical_source_not_relabelled_current": true,
+  "Node_frontend_browser_identity_exact": true,
+  "helper_or_native_or_browser_code_executed": false,
+  "scope": "Original data retention, not current native or RCC qualification",
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,110 @@
+{
+  "all25_inventories_bound": 25,
+  "all_prior25_scope_source_prototypes_preserved": [
+    {
+      "bytes": 36982,
+      "mode": "0o444",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_accepted_obsolete_environments_source_prepared_v3.py",
+      "sha256": "262196054902818db5cea7265961a3520cf23b30080b646460c1dd496ba84022"
+    },
+    {
+      "bytes": 15410,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/frozen_environment_preservation_inputs_SOURCE_PREPARED.json",
+      "sha256": "dbda584b735e728c2e200cbe89cac7f77c34414ded0f2d62b9a5a83bce05c04d"
+    }
+  ],
+  "archive_tests_and_control_run": "NOT_RUN",
+  "config": {
+    "bytes": 17539,
+    "mode": "0o400",
+    "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/frozen_first_five_environment_preservation_inputs_SOURCE_PREPARED_v4.json",
+    "sha256": "d6d933f64940c6ed3b0849a6bcd10e07f6c2c834f968c6f1b354462625e4c028"
+  },
+  "controls": {
+    "bytes": 12323,
+    "mode": "0o444",
+    "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/test_first_five_environment_preservation_admission_SOURCE_PREPARED_v4.py",
+    "sha256": "bf271888be3d40f6be8b11c2e71de7232c0bce50ee30fcc96b1083f89498bf75"
+  },
+  "driver": {
+    "bytes": 37609,
+    "mode": "0o444",
+    "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_first_five_accepted_obsolete_environments_SOURCE_PREPARED_v4.py",
+    "sha256": "63476ecaa50ba863afed8602dcad82c22c9349df022d0e9f0dde8d81d60e0bb7"
+  },
+  "old16_function_class_AST_exact": [
+    "sha",
+    "inventory",
+    "verify",
+    "reject_live_handles",
+    "_CappedWriter",
+    "_write_and_close_preserving_primary",
+    "_snapshot",
+    "_ns_text",
+    "_strict_verify",
+    "_fsync_path",
+    "_index_bytes_except",
+    "_IndexBudgetPath",
+    "_ReadOnlyTar",
+    "_GuardedShutil",
+    "_key_for_root",
+    "_root"
+  ],
+  "original_helper": {
+    "bytes": 21276,
+    "mode": "0o444",
+    "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/archive_exact_one_completed_FULL_single_copy_once.py",
+    "sha256": "e717faae8a9e5f7a1ccea85c17df928a728216e43bf77256c487e685d9971771"
+  },
+  "protected20_roots": [
+    "/workspace/engineering/pr290/action_server/.venv",
+    "/workspace/engineering/pr290/actions/.venv",
+    "/workspace/engineering/pr290/actions-http-helper/.venv",
+    "/workspace/engineering/pr290/devutils/.venv",
+    "/workspace/engineering/pr290/work-items/.venv",
+    "/workspace/engineering/pr309/action_server/.venv",
+    "/workspace/engineering/pr309/actions/.venv",
+    "/workspace/engineering/pr309/actions-http-helper/.venv",
+    "/workspace/engineering/pr309/devutils/.venv",
+    "/workspace/engineering/pr309/work-items/.venv",
+    "/workspace/engineering/pr310/action_server/.venv",
+    "/workspace/engineering/pr310/actions/.venv",
+    "/workspace/engineering/pr310/actions-http-helper/.venv",
+    "/workspace/engineering/pr310/devutils/.venv",
+    "/workspace/engineering/pr310/work-items/.venv",
+    "/workspace/engineering/pr311/action_server/.venv",
+    "/workspace/engineering/pr311/actions/.venv",
+    "/workspace/engineering/pr311/actions-http-helper/.venv",
+    "/workspace/engineering/pr311/devutils/.venv",
+    "/workspace/engineering/pr311/work-items/.venv"
+  ],
+  "selected_roots": [
+    "/workspace/engineering/runtime-checkout-eol/action_server/.venv",
+    "/workspace/engineering/runtime-checkout-eol/actions/.venv",
+    "/workspace/engineering/runtime-checkout-eol/actions-http-helper/.venv",
+    "/workspace/engineering/runtime-checkout-eol/devutils/.venv",
+    "/workspace/engineering/runtime-checkout-eol/work-items/.venv"
+  ],
+  "source_syntax": "AST_PARSE_ONLY_NO_IMPORT_OR_EXECUTION",
+  "unittest_methods": [
+    "test_00_valid_exact_accepted_environment_baseline",
+    "test_subject_type_refuses_completed_pytest_reuse",
+    "test_unapproved_root_or_source_refused",
+    "test_no_automatic_inactive_owner_approval",
+    "test_unknown_scope_is_not_quiescence",
+    "test_exact_scope_and_restore_path_required",
+    "test_aggregate_caps_cannot_be_widened",
+    "test_layout_baseline_parent_mount_and_floor_poisons",
+    "test_observed_use_and_unknown_missing_fields_fail_closed",
+    "test_regular_binding_baseline_body_mode_and_symlink",
+    "test_private_root_release_baseline_mode_and_symlink",
+    "test_stream_cap_boundary_retains_partial_without_touching_original",
+    "test_snapshot_metadata_body_and_external_hardlink_boundaries",
+    "test_alias_baseline_and_individual_mapping_poisons",
+    "test_real_accepted_source_baseline_and_wrong_identity",
+    "test_current_config_dependency_overlap_baseline_and_selected_prefix",
+    "test_restore_dependency_existing_then_missing_path",
+    "test_real_pax_body_mode_nsmtime_symlink_archive_baseline_and_poison"
+  ]
+}

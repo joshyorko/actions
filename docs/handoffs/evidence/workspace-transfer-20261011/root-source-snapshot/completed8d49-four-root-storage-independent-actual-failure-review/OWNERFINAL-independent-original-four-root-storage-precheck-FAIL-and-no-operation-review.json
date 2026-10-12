@@ -1,0 +1,51 @@
+{
+  "decision": "HOLD_ORIGINAL_FOUR_ROOT_STORAGE_PRECHECK_FAILURE_NO_ARCHIVER_OPERATION",
+  "root_original": {
+    "path": "/workspace/engineering/root-current8d49-four-root-storage-original-outer-owned/OWNERFINAL-root-one-original-four-completed8d49-storage-terminal.json",
+    "bytes": 1048,
+    "sha256": "88695261bd5796838bea75dcec472e2f3b34a67da4bdc2599c42838e87f42da7",
+    "mode": "0o400"
+  },
+  "driver_original": {
+    "path": "/workspace/engineering/root-completed8d49-four-root-storage-one-owned-v2/original-one-attempt-terminal.json",
+    "bytes": 357,
+    "sha256": "890441b9b0a55e0c961e530a6beb958151255866fc8677f1ba825994d89b85c1",
+    "mode": "0o600"
+  },
+  "root_elapsed_seconds": 24.642070874993806,
+  "original_private_tracebacks": [
+    {
+      "path": "/workspace/engineering/root-completed8d49-four-root-storage-one-owned-v2/original-primary-traceback.private.log",
+      "bytes": 524,
+      "sha256": "ed8a231af2ae971d077f486e6370882c5578986927576fc4f48191e3eeda2b13",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/root-completed8d49-four-root-storage-one-owned-v2/postguard-failure.private.log",
+      "bytes": 522,
+      "sha256": "bb1e1fb58419a2f3ca049dd7c88e828f982ec068c8a349d3593af0350314e8a0",
+      "mode": "0o600"
+    }
+  ],
+  "failure": "Beforemetadata subprocessnonzero,thenalwayspostsubprocessnonzero; originalcaptured nestedstdoutstderr discarded before assertion",
+  "nested_actual_stdout_stderr": "UNAVAILABLE_FROM_ORIGINAL_ATTEMPT_NO_RECONSTRUCTION",
+  "all_four_selected_roots_remain": true,
+  "all9026_selected_body_metadata_snapshots_exact": true,
+  "archive_stage_destination_absent": true,
+  "archiver": "NOT_RUN",
+  "expanded_removal": "NOT_RUN",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "source_native_qualification": "UNCHANGED",
+  "possible_Poetry_PATH_cause": "PENDING_DISTINCT_RETAINED_READONLY_PROBE_NOT_INFERRED_FROM_ASSERTION",
+  "original_f6cf_f113": "Retained unchanged; this attempt is consumed despite archiver not starting",
+  "new_operation_requires": "Named corrected reviewed successor and distinct root one-attempt release",
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "durable_learning": "Already adopted parent-environment lesson reused; retain captured nested subprocess stdout/stderr and terminal before asserting success",
+    "evidence": "Originaldriver357B/890441 and two exactCURRENT_DATA_ONLY assertion traces; nestedcapture discarded by actualguard source",
+    "stale_or_ambiguous_guidance_removed": "An outer assertion alone does not expose nested failure cause; archiverNOTRUN is not storage success",
+    "remaining_uncertainty": "Nestedfailure cause unknown pending originalreadonlyprobe; no universalquiescence or nativefloor restoration"
+  },
+  "upstream_disposition": "none"
+}

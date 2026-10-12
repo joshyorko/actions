@@ -1,0 +1,14 @@
+{
+  "fixture_inventory": "{\"entries\":[{\"mode\":420,\"path\":\"action.py\",\"sha256\":\"a554f7395fa4254e36ca28780a0edff940f208ca7409dfedcd829193b31c3898\",\"size\":560},{\"mode\":420,\"path\":\"package.yaml\",\"sha256\":\"e160d068efc17467d8c43174bca8676208e33914ca9fc45d815a43b81ddbed1e\",\"size\":113}],\"sourcePolicyVersion\":1}",
+  "fixture_path": "/workspace/engineering/pr308/action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+  "fixture_sha256": "f697aaf73c4e89bddd21b2c48aa92fe22e315f83614525996d51ff2271fe2436",
+  "fixture_sizes": {
+    "action.py": 560,
+    "package.yaml": 113
+  },
+  "fixture_source_sha256": {
+    "action.py": "a554f7395fa4254e36ca28780a0edff940f208ca7409dfedcd829193b31c3898",
+    "package.yaml": "e160d068efc17467d8c43174bca8676208e33914ca9fc45d815a43b81ddbed1e"
+  },
+  "method": "AST literal-only derivation; no product module import/execution"
+}

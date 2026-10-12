@@ -1,0 +1,113 @@
+{
+  "SOURCE_LIGHT": {
+    "bytes": 25279,
+    "path": "/workspace/engineering/pr308-rcc-compatibility-source/OWNERFINAL-current-a0d-approved-RCC-compatibility-SOURCE-LIGHT.json",
+    "sha256": "336cfca277d8e3b08035af8057e77af580fc7a5cbeb54226ae2140abedb79bba"
+  },
+  "activation": "Exact18 declared exports+PATHfirst(primary bin)=19 checked before RCC; RCC task adds declared developer/holotree PATH entries, preserves worker env; driver verifies own toolkit prefix and managed PATH presence",
+  "actual_browser_or_new_RCC_binary_or_provider_or_native_or_install": "NOT_AUTHORIZED/NOT_RUN",
+  "bounds": {
+    "TERM_then_KILL_seconds": 10,
+    "automatic_retry": false,
+    "configured_full_timeout_seconds": 600,
+    "full_attempts": 1,
+    "readonly_postconditions_seconds": 120,
+    "readonly_preflight_before_seconds": 120
+  },
+  "configured_full_argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "600s",
+    "/workspace/actions-cloud/bin/rcc",
+    "task",
+    "script",
+    "-r",
+    "developer/toolkit.yaml",
+    "--",
+    "python",
+    "/workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/run-one-configured-source-full.py"
+  ],
+  "configured_package_argv": [
+    "poetry",
+    "run",
+    "invoke",
+    "test-not-integration"
+  ],
+  "configured_package_cwd": "/workspace/engineering/pr308/action_server",
+  "cwd": "/workspace/engineering/pr308",
+  "documentation_improvement": {
+    "canonical_file_changed": "docs/skills/repository-operations.md in frozen SOURCE b614",
+    "disposition": "Exact18 source-backed lines independently accepted in ea79; no cosmetic source child",
+    "exact_delta": {
+      "bytes": 1920,
+      "path": "/workspace/engineering/pr308-rcc-compatibility-source/exact-canonical-RCC-compatibility-and-measured-worker-evidence.patch",
+      "sha256": "ece9cb0e885e5e1fad61fe718e897d6988d86c4de15f5520fbebbd31d1ed9d2d"
+    },
+    "remaining_uncertainty": "Full source and new3/5/6 functionality remain NOTRUN; modified5 source equivalence, private134/metadata/provider/release HOLD"
+  },
+  "failure_handling": "Retain original0600 stdout/stderr log; preserve primary return/exception and distinct postcondition result; postconditions run after full on every outcome; consume exactlyone attempt marker immediately before full; stop/freeze on failure",
+  "fresh_workspace_bytes_at_preparation": 357376000,
+  "frozen_launcher_input_bindings": [
+    {
+      "bytes": 4185,
+      "path": "/workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/installed-own-worker-env-and-unchanged-task-source-proof.json",
+      "sha256": "ba919b6939211dd84b0ce554761891a65ab2acc592037ec7d3fc0ba4bd3fed3d"
+    },
+    {
+      "bytes": 3831,
+      "path": "/workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/launch-one-root-reviewed-source-full.py",
+      "sha256": "939e347375912065aa888e9fcbc93fb481f521090da05108ea41f5f290b267a9"
+    },
+    {
+      "bytes": 1759,
+      "path": "/workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/run-one-configured-source-full.py",
+      "sha256": "b53e3a68665c4b6089058f822484fd61f57f9789ee9fdd929500bec6e3027393"
+    },
+    {
+      "bytes": 2057,
+      "path": "/workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/sourcefull-frozen-inputs.json",
+      "sha256": "9c1264413c6e7a2ef586b2f30262545b46fdd41f97a180fd5c7fcc1f48834e03"
+    },
+    {
+      "bytes": 5092,
+      "path": "/workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/verify-current-full-source-prepost.py",
+      "sha256": "ab23faf6717906e50685529d6926ba40b529a83df61943e4311f5b4050a55e29"
+    },
+    {
+      "bytes": 25279,
+      "path": "/workspace/engineering/pr308-rcc-compatibility-source/OWNERFINAL-current-a0d-approved-RCC-compatibility-SOURCE-LIGHT.json",
+      "sha256": "336cfca277d8e3b08035af8057e77af580fc7a5cbeb54226ae2140abedb79bba"
+    },
+    {
+      "bytes": 11528,
+      "path": "/workspace/engineering/pr308-approved-compatibility-independent-source-light-review/OWNERFINAL-independent-current-a0d-approved-RCC-compatibility-SOURCE-LIGHT-review.json",
+      "sha256": "ea79c4b762d3cdcd5b9d54d2ab475b250596e55e78c6a3ead0574b1845f4ee92"
+    }
+  ],
+  "immutable_prepost": "All1421 Git/FS bodies+execmodes/clean; all71 frozen LIGHT refs; prepared30+five concrete own prefixes/module origins; managedRCC andignoredownpin7e588/mode0700+0711; original1192 native/helpers0444/browser/Nodefrontend/historicalV5 via exact reviewed original inventory-inspector AST except private output names",
+  "independent_SOURCE_LIGHT_GO": {
+    "bytes": 11528,
+    "path": "/workspace/engineering/pr308-approved-compatibility-independent-source-light-review/OWNERFINAL-independent-current-a0d-approved-RCC-compatibility-SOURCE-LIGHT-review.json",
+    "sha256": "ea79c4b762d3cdcd5b9d54d2ab475b250596e55e78c6a3ead0574b1845f4ee92"
+  },
+  "new_RCC_selector_and_real_flags": "must be absent; full source test only, opt-in actual cases remain unqualified",
+  "outer_launcher_argv": [
+    "bash",
+    "--noprofile",
+    "--norc",
+    "-c",
+    "source /workspace/actions-cloud/activate.sh\nexec /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12 /workspace/engineering/pr308-rcc-compatibility-SOURCEFULL-preexecution/launch-one-root-reviewed-source-full.py --execute-reviewed-proposal"
+  ],
+  "required_capacity_before_full_bytes": 1200000000,
+  "scope": "PREPARATION_ONLY; source full execution HOLD until independent preexecution GO and distinct root one-attempt release",
+  "source": {
+    "clean": true,
+    "complete_typed_inputs": 1421,
+    "head": "b614864ba9da55c13662894b6ef3c8515d9fdb25",
+    "tree": "6fa4f5c1e9837a0d893868255575b355b3977fae"
+  },
+  "source_inputs_or_task_changed": false,
+  "upstream_disposition": "none",
+  "worker_env": "PYTEST_XDIST_AUTO_NUM_WORKERS=2 established by sourced managed activation before launcher, verified before invoke; unchanged configured task -nauto honors installed own xdist env hook"
+}

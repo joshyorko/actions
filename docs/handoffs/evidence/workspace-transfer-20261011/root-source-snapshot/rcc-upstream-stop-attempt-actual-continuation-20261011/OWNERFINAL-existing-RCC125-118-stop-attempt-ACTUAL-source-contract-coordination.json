@@ -1,0 +1,34 @@
+{
+  "first_supported_newer_RCC": "NONE",
+  "no_new_issue": true,
+  "production_pin": "18.19.3",
+  "released5_candidate7276_execution": "NOT_RUN",
+  "retained_actions_ownership": [
+    133,
+    134,
+    139,
+    143,
+    221
+  ],
+  "schema": 1,
+  "status": "EXISTING_RCC125_118_COMMENT_UPDATE_VERIFIED_PRIOR_BODY_EXACT",
+  "tested_contract": "Controlled default35 and ordered stop16RED1RED1GREEN20 source acceptance only.",
+  "updates": [
+    {
+      "id": 6109416621,
+      "new_bytes": 13783,
+      "new_sha256": "3e86dbfa53511e1d56e7914ed951c95afb6bcf18354908ecd4e56f1f8bac0986",
+      "old_bytes": 11572,
+      "old_sha256": "bf6fe4c06598322ee9611c06508540c72de9b5c736ed96a75ff7ef7c09d403bb",
+      "url": "https://github.com/joshyorko/rcc/issues/125#issuecomment-6109416621"
+    },
+    {
+      "id": 6109416839,
+      "new_bytes": 13783,
+      "new_sha256": "3e86dbfa53511e1d56e7914ed951c95afb6bcf18354908ecd4e56f1f8bac0986",
+      "old_bytes": 11572,
+      "old_sha256": "bf6fe4c06598322ee9611c06508540c72de9b5c736ed96a75ff7ef7c09d403bb",
+      "url": "https://github.com/joshyorko/rcc/issues/118#issuecomment-6109416839"
+    }
+  ]
+}

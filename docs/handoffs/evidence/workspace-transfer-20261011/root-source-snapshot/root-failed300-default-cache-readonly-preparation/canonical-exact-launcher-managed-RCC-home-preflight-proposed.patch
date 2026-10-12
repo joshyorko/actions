@@ -1,0 +1,17 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -1699,6 +1699,14 @@
+ Poetry owns package dependencies and lockfiles; a failed setup is not permission
+ to replace that boundary with host pip/Poetry installations.
+ 
++Cloud launchers that reuse a prepared RCC environment must bind its reviewed
++`ROBOCORP_HOME` in the same process environment that launches RCC. Apply the
++managed activation profile there or pass its reviewed settings explicitly, and
++verify the pinned executable and allowlisted home/cache values before launch.
++An absolute pinned RCC executable can still select the default home and trigger
++fresh setup when those settings are absent. Preserve that setup failure; a
++terminal gateway failure before pytest collection does not qualify a test gate.
++
+ Copilot's reserved `copilot-setup-steps` job installs the same checksum-pinned
+ Josh RCC Linux asset as the primary developer-toolkit matrix, persists its PATH
+ and writable `ROBOCORP_HOME` through GitHub environment files, and runs manifest

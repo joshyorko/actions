@@ -1,0 +1,12 @@
+{
+  "status": "ONE_ACTUAL_CURRENT74_FULL_TERMINAL",
+  "returncode": 4,
+  "elapsed_seconds": 18.849684864995652,
+  "log": {
+    "path": "/workspace/engineering/pr300-current74-owner-full-contract-adoption/current74-one-reviewed-configured-full.log",
+    "bytes": 80268,
+    "sha256": "38029425f98c3416b3dd8ad82a90f9ca96ba2e2f1818e9024286854a61bdf684"
+  },
+  "head": "74beef4d220c3a1e8f983cecd42b9bb84ac75e79",
+  "tree": "2238ed312babba9fd5ad89a3a1cc581ca6ad2dcf"
+}

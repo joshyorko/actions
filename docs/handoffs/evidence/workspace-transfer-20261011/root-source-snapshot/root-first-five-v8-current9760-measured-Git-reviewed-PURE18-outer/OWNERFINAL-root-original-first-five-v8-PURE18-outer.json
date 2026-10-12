@@ -1,0 +1,87 @@
+{
+  "actual_preservation": "NOT_RUN",
+  "capture": "2026-10-11T23:26:03.462612+00:00",
+  "elapsed_seconds": 1.8857737520011142,
+  "external_alwayspost": {
+    "argv": [
+      "/usr/bin/timeout",
+      "--signal=TERM",
+      "--kill-after=5s",
+      "20s",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "-B",
+      "/workspace/engineering/root-reviewed-first-five-v8-PURE18-external-parent.py",
+      "--guard",
+      "d46722768330d54815e1485d5ce288bdb20f3beb957a1e35bd5f2ff5e85df6b1"
+    ],
+    "elapsed_seconds": 0.4658006809913786,
+    "parent_seconds": 30,
+    "returncode": 0
+  },
+  "external_before": {
+    "argv": [
+      "/usr/bin/timeout",
+      "--signal=TERM",
+      "--kill-after=5s",
+      "20s",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "-B",
+      "/workspace/engineering/root-reviewed-first-five-v8-PURE18-external-parent.py",
+      "--guard",
+      "d46722768330d54815e1485d5ce288bdb20f3beb957a1e35bd5f2ff5e85df6b1"
+    ],
+    "elapsed_seconds": 0.4660577979957452,
+    "parent_seconds": 30,
+    "returncode": 0
+  },
+  "external_before_envelope": {
+    "bytes": 899,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-first-five-v8-current9760-measured-Git-reviewed-PURE18-outer/external-before-envelope.json",
+    "sha256": "3309112905ecab197b65a7b6cf4905d4d203203a4b34d1947b0c3d5abc44d420"
+  },
+  "external_post_envelope": {
+    "bytes": 899,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-first-five-v8-current9760-measured-Git-reviewed-PURE18-outer/external-alwayspost-envelope.json",
+    "sha256": "3309112905ecab197b65a7b6cf4905d4d203203a4b34d1947b0c3d5abc44d420"
+  },
+  "native": "NOT_RUN",
+  "original_primary": {
+    "argv": [
+      "/usr/bin/timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "240s",
+      "bash",
+      "-c",
+      "source /workspace/actions-cloud/activate.sh && export PATH=\"/workspace/actions-cloud/bin:/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\" && export PYTHONDONTWRITEBYTECODE=1 && exec /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12 /workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v8_current9760_measured_managed_Git_PURE18_ROOT_ONLY_SOURCE_PREPARED_v2.py --root-execute-reviewed-pure-controls \"$1\" --root-release-sha256 \"$2\"",
+      "first-five-current9760-v8-measured-Git-pure18",
+      "/workspace/engineering/root-first-five-v8-current9760-measured-Git-reviewed-PURE18-outer/root-one-pure18-release.json",
+      "d46722768330d54815e1485d5ce288bdb20f3beb957a1e35bd5f2ff5e85df6b1"
+    ],
+    "elapsed_seconds": 0.8676441489951685,
+    "parent_seconds": 260,
+    "returncode": 0
+  },
+  "parent": {
+    "bytes": 6866,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-reviewed-first-five-v8-PURE18-external-parent.py",
+    "sha256": "764028fe6aad30ba9ece309f24a8465755fe5abe042bb0efb6054c7a877a639a"
+  },
+  "release": {
+    "bytes": 1599,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-first-five-v8-current9760-measured-Git-reviewed-PURE18-outer/root-one-pure18-release.json",
+    "sha256": "d46722768330d54815e1485d5ce288bdb20f3beb957a1e35bd5f2ff5e85df6b1"
+  },
+  "review": {
+    "bytes": 10868,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v8-current9760-independent-SOURCE-child-PREEXEC-review/OWNERFINAL-independent-first-five-v8-measured-managed-Git-SOURCE-child-PREEXEC-GO-ROOT-parent-HOLD.json",
+    "sha256": "d5beacad97a0041aa4e61dfb338220f027cad239d56daf8f39ac9e5ed4374ce9"
+  },
+  "scope": "PURE18 only",
+  "status": "PASS_PENDING_INDEPENDENT_ACTUAL"
+}

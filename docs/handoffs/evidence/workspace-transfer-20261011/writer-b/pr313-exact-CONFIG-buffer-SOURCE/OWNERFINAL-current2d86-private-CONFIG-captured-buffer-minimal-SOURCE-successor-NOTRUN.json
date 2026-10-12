@@ -1,0 +1,128 @@
+{
+  "ROOT_external_contract": {
+    "bytes": 3769,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/required-external-all-outcome-parent-and-strict-ROOT-adoption-contract-NOTRUN.json",
+    "sha256": "3537d886fd806d435db8f3899c2d6b572b5b882925dc2737acec1b12958670a7"
+  },
+  "actual_controls_SOURCE_LIGHT_FULL_native": "NOT_RUN_HOLD",
+  "app_source_HEAD_ref_env_delta": "NONE",
+  "bindings": [
+    {
+      "bytes": 58670,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/FROZEN-current2d86-private-cached-bounded-LIGHT-inputs-NOTRUN.json",
+      "sha256": "2d1c4f81d6015080be4e3480914b3759e44d391b9687de45653e7c5ae895d1c2"
+    },
+    {
+      "bytes": 322,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/canonical-verified-authority-buffer-and-consumed-CONFIG-proposed.txt",
+      "sha256": "574c551c8e3adb86ce44bcd6305a7836040f1da3a8f6bf5c06fa6ad8e83697b8"
+    },
+    {
+      "bytes": 11322,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/construct_exact_CONFIG_and_verified_buffer_source_successor.py",
+      "sha256": "32fbbf2462c9fbc81a7d9c913bd3ed7629f9cdda6de54879c1ecc0dd87427af0"
+    },
+    {
+      "bytes": 5971,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/current_2d86_readonly_source_and_full_authority_guard_NOTRUN.py",
+      "sha256": "c639494b57f8406fc699e880c8e2605acb0f622dce4c33d94655550a709bb68a"
+    },
+    {
+      "bytes": 3919,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/exact-consumed-CONFIG-and-captured-buffer-parser-identity-source-proof-NOTRUN.json",
+      "sha256": "0905ab419dab7fa5e2091087ccb1906d830ac3ea5324df820f43ba3345fee670"
+    },
+    {
+      "bytes": 10636,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/launch_current2d86_private_cached_bounded_LIGHT_once_NOTRUN.py",
+      "sha256": "daa8a0cf96b3f110c71a908767d58c7aea87649568a89a888f2c6cd8bc870070"
+    },
+    {
+      "bytes": 1045,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/required-buffer-identity-and-nested-address-controls-plan-NOTRUN.json",
+      "sha256": "95ca293edfa3d3acc92444f6b2b0cad8f7af7deff13cf2c5925f8ef2c61c07ff"
+    },
+    {
+      "bytes": 3769,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/required-external-all-outcome-parent-and-strict-ROOT-adoption-contract-NOTRUN.json",
+      "sha256": "3537d886fd806d435db8f3899c2d6b572b5b882925dc2737acec1b12958670a7"
+    }
+  ],
+  "capture": "2026-10-11T23:55:57.490918+00:00",
+  "config": {
+    "bytes": 58670,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/FROZEN-current2d86-private-cached-bounded-LIGHT-inputs-NOTRUN.json",
+    "sha256": "2d1c4f81d6015080be4e3480914b3759e44d391b9687de45653e7c5ae895d1c2"
+  },
+  "control_plan": {
+    "bytes": 1045,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/required-buffer-identity-and-nested-address-controls-plan-NOTRUN.json",
+    "sha256": "95ca293edfa3d3acc92444f6b2b0cad8f7af7deff13cf2c5925f8ef2c61c07ff"
+  },
+  "documentation": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "evidence": "Ind2cb465 literaladdress+doubleJSONread findings; exactinverseSOURCEdiff captured-bufferhelper verifiedwithoutimports/tests; alloriginalbounds/inputmodels unchanged",
+    "exact_delta": {
+      "bytes": 322,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/canonical-verified-authority-buffer-and-consumed-CONFIG-proposed.txt",
+      "sha256": "574c551c8e3adb86ce44bcd6305a7836040f1da3a8f6bf5c06fa6ad8e83697b8"
+    },
+    "remaining_uncertainty": "NewSOURCEind/control/parent/PREEXEC/resource and ROOTactualsource/native/cleanup requirements stillpending. No tests/imports/fixtures/gates/version/native execution.",
+    "stale_ambiguity": "Hashingonebufferdoesnotauthenticateanotherparsedread; filenamesmustmatchactualconsumedcfg; metadata640 isnotimplementedparent",
+    "upstream_disposition": "none"
+  },
+  "exact_corrective_scope": "CONFIGcachedbasename+verifiedsamebufferJSONparsing atconfig/release/reviews/source-data boundaries; sameauthorityschema/UIDGID/mode/source/native/prefix/phase/selectors/cached-only/outputpaths/budgets/floor",
+  "floor": 1288490189,
+  "guard": {
+    "bytes": 5971,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/current_2d86_readonly_source_and_full_authority_guard_NOTRUN.py",
+    "sha256": "c639494b57f8406fc699e880c8e2605acb0f622dce4c33d94655550a709bb68a"
+  },
+  "immutable_input_rows": 150,
+  "launcher": {
+    "bytes": 10636,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/launch_current2d86_private_cached_bounded_LIGHT_once_NOTRUN.py",
+    "sha256": "daa8a0cf96b3f110c71a908767d58c7aea87649568a89a888f2c6cd8bc870070"
+  },
+  "material_remaining": "Mandatoryexternalalloutcomeparent/controlproof/capacity andactualprimary-only640 boundedmechanism/completeownedtree-reader-lease-postcleanup acceptance; no SOURCEready/PREEXECGO selfclaim",
+  "original9b290_SOURCE_and_indHOLD": "Preservedbyteexact",
+  "original_independent_SOURCE_HOLD": {
+    "bytes": 7897,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr313-current2d86-cached-bounded-LIGHT-independent-SOURCE-review/OWNERFINAL-independent-current2d86-private-cached-bounded-LIGHT-SOURCE-HOLD-and-external-parent-PREEXEC-HOLD.json",
+    "sha256": "2cb465a46bfe285f2fed33e52610ea72764f1f46512df8146d653e2f8b43f2b9"
+  },
+  "original_source_owner": {
+    "bytes": 7651,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr313-current2d86-private-cached-bounded-LIGHT-SOURCE-NOTRUN/OWNERFINAL-current2d86-private-cached-bounded-LIGHT-SOURCE-and-external-parent-HOLD-NOTRUN.json",
+    "sha256": "9b290e7c7a88645034f73136eb5c5689c01d381be394502e7b70aedc48d17e91"
+  },
+  "schema": 1,
+  "source": "2d86c5cf92d3acb274a8ceb5d57bfb8b12c779b6",
+  "source_clean": true,
+  "source_count": 1441,
+  "source_proof": {
+    "bytes": 3919,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr313-current2d86-config-captured-buffer-SOURCE-successor-NOTRUN/exact-consumed-CONFIG-and-captured-buffer-parser-identity-source-proof-NOTRUN.json",
+    "sha256": "0905ab419dab7fa5e2091087ccb1906d830ac3ea5324df820f43ba3345fee670"
+  },
+  "status": "OWNER_FINAL_CURRENT2D86_PRIVATE_CONFIG_BUFFER_SOURCE_PREPARED_ALL_EXECUTION_HOLD",
+  "tree": "653a9e73e4d27641ec86de94b90f35d41e0f24f8",
+  "workspace_observation": 606760960
+}

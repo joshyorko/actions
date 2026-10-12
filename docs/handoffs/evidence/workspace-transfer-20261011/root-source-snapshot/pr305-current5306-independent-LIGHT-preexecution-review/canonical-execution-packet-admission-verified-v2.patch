@@ -1,0 +1,19 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -3173,6 +3173,16 @@
+ accepted source tree without being an ancestor of a later branch; compare its
+ production inputs separately and preserve both identities.
+ 
++Construct current-source, branch and historical-predecessor labels from the bound
++source checkpoint. Check status and history labels against executable pins; retain
++a contradictory predecessor packet and issue a named metadata-only successor
++without replaying accepted gates.
++
++Resolve each executable input locator against its bound source receipt before
++release. A label-only metadata successor does not repair a missing or cross-branch
++input path; freeze a new execution contract with corrected locators and preserve
++the original packet without backfilling misleading filenames.
++
+ Bind Playwright dependency measurements to the frontend's executed
+ `node_modules` path. Require it to resolve to the measured prepared tree before
+ discovery or execution; an absent or different ignored link is a readiness

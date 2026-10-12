@@ -1,0 +1,341 @@
+{
+  "acquisition": {
+    "MCP_full_logical_response_retained": true,
+    "decodedUTF8_exact": true,
+    "direct_storage_downloads": 0,
+    "initial_local_save": "execargumenttoolong beforefilewrite; originalstoredresponse savedwithoutnewnetworkcall",
+    "original_wire_bytes": "UNKNOWN",
+    "supported_connector_calls": 1
+  },
+  "decision": "HOLD_CURRENT_WINDOWS_SOURCE_AND_STATIC_GATES_PORTABILITY_DEFECTS_PROVED",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; seven-line nativePath/POSIXfeature lesson bound in privatepatchproposal",
+    "Durable_learning": "Use actual nativePath rendering for argv assertions; runtimeplatformskip and staticplatformfeature availability are separate",
+    "Evidence": "original checkout/API +1483wholeline outcomes/twooriginalstacks/sevenmypyerrors +nineprivatecontrols",
+    "Remaining_uncertainty": "No productpatchadopted/newWindowsgate/nativequalification",
+    "Stale_or_ambiguous_guidance_removed": "Avoid attributing fixtureformat assertionsto adapterregression/integrationtimeout; avoid Linuxskip\u21d2Windowsstaticexclusion"
+  },
+  "evidence": [
+    {
+      "bytes": 321839,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-original-Windows-one-owned/private-whole-line-unique-source-node-census.json",
+      "sha256": "fdcab98c9d48bfa690b99ba6bed561171ee28411a4480b3fdfb7d8220b69bda9"
+    },
+    {
+      "bytes": 667884,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-original-Windows-one-owned/original-decoded-Windows-job.log",
+      "sha256": "a2d10d756d501289f165126c19afde19852dbb5d4f56f1db36d0036ecc7609ee"
+    },
+    {
+      "bytes": 540,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-original-Windows-one-owned/root-delegated-one-original-log-authorization.json",
+      "sha256": "8d954574198b0472787a4ee27f9b0a8a60291c0b5231f9e857782ded3a4c7493"
+    },
+    {
+      "bytes": 10271,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-original-Windows-one-owned/private-original-first-failure-blocks-and-static-errors.json",
+      "sha256": "ea3407f78bf82e2896d7b166f70f900dba78e6599c64c423293c3387de0f3b17"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-original-Windows-one-owned/synthetic-commit-stderr.private.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-original-Windows-one-owned/run-stderr.private.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 12667,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-original-Windows-one-owned/run-stdout.private.json",
+      "sha256": "bbc81bedbcccabf60bb9a12b9ff1d1fd00d4a6ca383223edf6bd99a65dc9c59c"
+    },
+    {
+      "bytes": 1238,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-original-Windows-one-owned/private-exact-failed-source-bindings.json",
+      "sha256": "bf1528c58f6981f35002134576c007bc440cbd435b2b749c3669fd439fe43dae"
+    },
+    {
+      "bytes": 2648,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-original-Windows-one-owned/synthetic-commit-stdout.private.json",
+      "sha256": "1807c108e6170044ff60b57504d961fab26845cc00c7990c25db4a4a88829ce8"
+    },
+    {
+      "bytes": 690021,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-original-Windows-one-owned/original-full-logical-MCP-response.private.json",
+      "sha256": "d65d514eb589e1da6976d97be2b3899718f5c05f9a4a160bfeb1d79e98cfc7a0"
+    },
+    {
+      "bytes": 5670,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-original-Windows-one-owned/job-stdout.private.json",
+      "sha256": "2c632ac66822a551e88f3543bd697ea3d88fd417f25d788d469993198946a4df"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-original-Windows-one-owned/job-stderr.private.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 7118,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current8d49-original-Windows-one-owned/freeze_original_windows_diagnosis.py",
+      "sha256": "af5036c6a2067b2aac480a6f83966e6bc69bbc102c6111bac330886cedd266f7"
+    },
+    {
+      "bytes": 2565,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-Windows-private-portability-successor/OWNERFINAL-private-current8d49-Windows-portability-source-PROPOSAL.json",
+      "sha256": "ecb19ffb860b976a70f8394f0bff50a0b1ab469bee9d1f3ae4f71590bd70bc30"
+    }
+  ],
+  "failed_nodes": [
+    "action_server_tests\\test_rcc_runtime_adapter.py::test_legacy_default_version_route_keeps_general_command_budget",
+    "action_server_tests\\test_rcc_runtime_adapter.py::test_isolated_explicit_injected_version_runner_is_preserved"
+  ],
+  "failure_classification": {
+    "integration": "SKIPPED_AFTER_SOURCEFAILURE; no originalintegration timeoutornewnativeclaim",
+    "production_adapter_regression": "NOT_ESTABLISHED; capturedarguments follow unchangedPathstrcontract",
+    "static": "Sevenattr-defined errors: os.getuid/getgid absentfromWindowsstub; checked354files",
+    "tests": "Two hardcoded POSIX-string expectedarguments conflict with actual str(WindowsPath) renderedbackslashes; original900.0 equals900, no generalcommandbudget defect"
+  },
+  "full_source_outcomes": {
+    "errors": 0,
+    "failed": 2,
+    "passed": 1257,
+    "seconds": 391.74,
+    "skipped": 224,
+    "unique": 1483,
+    "warnings": 15,
+    "workers": [
+      "gw0",
+      "gw1"
+    ]
+  },
+  "job": {
+    "completed_at": "2026-10-11T18:48:45Z",
+    "conclusion": "failure",
+    "head_sha": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+    "id": 114544417671,
+    "name": "build (windows-py3.12-devmode)",
+    "run_id": 38164596550,
+    "started_at": "2026-10-11T18:37:33Z",
+    "status": "completed"
+  },
+  "operations": "Read-only original log once; metadata APIs once each; no rerun/native/productsource/ref changes. Private service-free portability proposal separate.",
+  "original_checkout": {
+    "evidence": "original checkout git-log output + original authenticated API; local synthetic object UNAVAILABLE",
+    "ordered_parents": [
+      "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+      "8d49d0865ad5ad27b2d4e325ec135212080625e8"
+    ],
+    "sha": "8d582979cad2aae844814abbe42ce1f2ca840ed9",
+    "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+  },
+  "private_patch_proposal": {
+    "bytes": 2565,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-current8d49-Windows-private-portability-successor/OWNERFINAL-private-current8d49-Windows-portability-source-PROPOSAL.json",
+    "sha256": "ecb19ffb860b976a70f8394f0bff50a0b1ab469bee9d1f3ae4f71590bd70bc30"
+  },
+  "remaining_holds": [
+    "sourceadoption/freshfullandWindowsCI",
+    "allnewnativeRCC5/6qualification",
+    "release/private/provider/publication"
+  ],
+  "run": {
+    "conclusion": null,
+    "event": "pull_request",
+    "head_branch": "fix/rcc-candidate-wheel-identities-20261010",
+    "head_sha": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+    "id": 38164596550,
+    "run_attempt": 1,
+    "status": "in_progress"
+  },
+  "schema": "OWNERFINAL_CURRENT8D49_ONE_ORIGINAL_WINDOWS_FAILURE_DIAGNOSIS",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "steps": [
+    {
+      "conclusion": "success",
+      "name": "Set up job",
+      "number": 1,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Checkout repository and submodules",
+      "number": 2,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Install the latest version of uv",
+      "number": 3,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Install Python 3.12",
+      "number": 4,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Install devutils requirements",
+      "number": 5,
+      "status": "completed"
+    },
+    {
+      "conclusion": "skipped",
+      "name": "Install project (not dev)",
+      "number": 6,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Install project (dev)",
+      "number": 7,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Setup go",
+      "number": 8,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Setup node",
+      "number": 9,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Build frontend",
+      "number": 10,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Build OAuth2 config",
+      "number": 11,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Test Go wrapper child lifecycle",
+      "number": 12,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Build binary",
+      "number": 13,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Upload artifact: action_server/dist/final/",
+      "number": 14,
+      "status": "completed"
+    },
+    {
+      "conclusion": "failure",
+      "name": "Test (not integration)",
+      "number": 15,
+      "status": "completed"
+    },
+    {
+      "conclusion": "skipped",
+      "name": "Install Playwright Chromium for Runtime browser acceptance",
+      "number": 16,
+      "status": "completed"
+    },
+    {
+      "conclusion": "skipped",
+      "name": "Verify Canvas published-Core Runtime and browser acceptance",
+      "number": 17,
+      "status": "completed"
+    },
+    {
+      "conclusion": "skipped",
+      "name": "Upload Canvas published-Core receipt",
+      "number": 18,
+      "status": "completed"
+    },
+    {
+      "conclusion": "skipped",
+      "name": "Test (integration)",
+      "number": 19,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Retain Windows native startup diagnostics",
+      "number": 20,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "`inv lint`, potentially fixed with `inv pretty`",
+      "number": 21,
+      "status": "completed"
+    },
+    {
+      "conclusion": "failure",
+      "name": "`inv typecheck`",
+      "number": 22,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "`inv docs` with checking on files changed",
+      "number": 23,
+      "status": "completed"
+    },
+    {
+      "conclusion": "skipped",
+      "name": "Post Setup node",
+      "number": 43,
+      "status": "completed"
+    },
+    {
+      "conclusion": "skipped",
+      "name": "Post Setup go",
+      "number": 44,
+      "status": "completed"
+    },
+    {
+      "conclusion": "skipped",
+      "name": "Post Install the latest version of uv",
+      "number": 45,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Post Checkout repository and submodules",
+      "number": 46,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Complete job",
+      "number": 47,
+      "status": "completed"
+    }
+  ],
+  "upstream_disposition": "none; Actions-owned testportabilitydefects, no externalmutation"
+}

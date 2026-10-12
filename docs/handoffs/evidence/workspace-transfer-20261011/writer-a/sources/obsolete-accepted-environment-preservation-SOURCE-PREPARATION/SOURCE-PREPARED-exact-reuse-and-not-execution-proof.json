@@ -1,0 +1,49 @@
+{
+  "config_binding": {
+    "bytes": 15410,
+    "mode": "0o400",
+    "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/frozen_environment_preservation_inputs_SOURCE_PREPARED.json",
+    "sha256": "dbda584b735e728c2e200cbe89cac7f77c34414ded0f2d62b9a5a83bce05c04d"
+  },
+  "control_execution": "NOT_RUN",
+  "driver_binding": {
+    "bytes": 33635,
+    "mode": "0o444",
+    "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_accepted_obsolete_environments_source_prepared.py",
+    "sha256": "3dfbbd245f8dcb0c0c33e855b5a3b4b3a87a4fe334367da0dada6491da9fc1e8"
+  },
+  "exact_original_function_or_class_AST_names": [
+    "sha",
+    "inventory",
+    "verify",
+    "reject_live_handles",
+    "_CappedWriter",
+    "_write_and_close_preserving_primary",
+    "_snapshot",
+    "_ns_text",
+    "_strict_verify",
+    "_fsync_path",
+    "_index_bytes_except",
+    "_IndexBudgetPath",
+    "_ReadOnlyTar",
+    "_GuardedShutil",
+    "_key_for_root",
+    "_root"
+  ],
+  "modified_functions": [
+    "load_config",
+    "_completion_admitted",
+    "_prestage_all"
+  ],
+  "original_helper_binding": {
+    "bytes": 21276,
+    "mode": "0o444",
+    "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/archive_exact_one_completed_FULL_single_copy_once.py",
+    "sha256": "e717faae8a9e5f7a1ccea85c17df928a728216e43bf77256c487e685d9971771"
+  },
+  "prestage_only_change": "Replace irrelevant TMP floor with same-overlay stage/destination/config device and aggregate archive+index+allocation+reserve check; rest of prestage AST unchanged.",
+  "root_protected_manifest": "NOT_CREATED_MANDATORY_SEPARATE_ROOT_OWNER_MEASURED_AND_INDEPENDENTLY_REVIEWED_BINDING",
+  "storage_execution": "NOT_RUN",
+  "subject_admission": "Explicit accepted environment/ROOT inactive owner policy, never recycle/pytest marker.",
+  "syntax": "AST_PARSE_ONLY_NO_IMPORT_OR_EXECUTION"
+}

@@ -1,0 +1,1249 @@
+{
+  "schema": 1,
+  "status": "READONLY_CONCRETE_KNOWN9_MUTANT_RED_FRESH_UNMUTATED_GREEN_COMMAND_PLAN_NOTRUN",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "source_leaves": 1440,
+  "baseline_dependency": {
+    "path": "/workspace/engineering/pr308-corrected-nine-once2-independent-ACTUAL-review/OWNERFINAL-independent-original-current8d49-corrected-nine-once2-baseline-ACTUAL-review.json",
+    "bytes": 20115,
+    "sha256": "e54f84619b73c236a8038c5602b27cc6affef8e82bd0d3e535bb2537548a811d",
+    "mode": "0o400"
+  },
+  "root_once": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1",
+  "required_sequence": "onebeforeguard +fiveownoriginchecks, then eachdeclared pairRED\u2192freshunmutatedGREEN inexactlistedorder, alwayspostguard on everyoutcome; stop atfirstunexpectedsemanticresult, no retry/unknownmutant/automaticnative",
+  "known_cases": [
+    {
+      "label": "prepare_under_writer",
+      "exact_test_name": "test_candidate_preparation_precedes_real_sqlite_writer",
+      "product_current_function": {
+        "file": "_actions_import.py",
+        "function": "import_action_packages"
+      },
+      "one_declared_mutation": "candidate preparation loop wrapped insidewriter",
+      "semantic_RED_predicate": {
+        "exception": "AssertionError",
+        "source_file": "test_current_managed_reload_sqlite_pool_barriers_successor_v2.py",
+        "source_function": "collect",
+        "source_line": 120,
+        "assertion_source": "assert not db.in_transaction(), 'CANDIDATE_PREPARATION_MUST_PRECEDE_WRITER_TRANSACTION'",
+        "fixed_message_if_present": "CANDIDATE_PREPARATION_MUST_PRECEDE_WRITER_TRANSACTION",
+        "required_failure_text": "exact frozen sourceframe/function/assertion or fixed message, not merely generic assertion failure",
+        "reject": [
+          "PRIVATE_MUTANT_MUST_CHANGE_EXACTLY_ONE_CURRENT_SEAM",
+          "collection/import/compileerror",
+          "ModuleNotFoundError",
+          "SyntaxError other than owned caught sentinel",
+          "timeout124/137 or deadlock",
+          "fixture-setup ERROR",
+          "wrongcase/unknownlabel",
+          "missingsource/assertionframe"
+        ]
+      },
+      "phases": {
+        "RED": {
+          "argv": [
+            "env",
+            "-u",
+            "PYTHONOPTIMIZE",
+            "-u",
+            "PYTEST_ADDOPTS",
+            "-u",
+            "RCC_RELOAD_PRIVATE_MUTANT",
+            "RCC_RELOAD_PRIVATE_MUTANT=prepare_under_writer",
+            "timeout",
+            "--signal=TERM",
+            "--kill-after=10s",
+            "120s",
+            "/workspace/engineering/pr308/action_server/.venv/bin/python",
+            "-m",
+            "pytest",
+            "--noconftest",
+            "-n0",
+            "-vv",
+            "-rA",
+            "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_candidate_preparation_precedes_real_sqlite_writer",
+            "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/prepare_under_writer-red/basetemp",
+            "-o",
+            "tmp_path_retention_policy=all",
+            "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/prepare_under_writer-red/pytest-logging",
+            "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/prepare_under_writer-red/original-junit.xml",
+            "--tb=short"
+          ],
+          "cwd": "/workspace/engineering/pr308/action_server",
+          "output_parent": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/prepare_under_writer-red",
+          "required_parent": "fresh0700 exclusive parent created only after rootrelease; children remain ABSENT untilpytest",
+          "stdout": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/prepare_under_writer-red/original.stdout.private",
+          "stderr": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/prepare_under_writer-red/original.stderr.private",
+          "junit": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/prepare_under_writer-red/original-junit.xml",
+          "expected_returncode": 1,
+          "expected_exact_cases": 1,
+          "expected_counts": {
+            "passed": 0,
+            "failed": 1,
+            "errors": 0,
+            "skipped": 0
+          }
+        },
+        "RESTORED_GREEN": {
+          "argv": [
+            "env",
+            "-u",
+            "PYTHONOPTIMIZE",
+            "-u",
+            "PYTEST_ADDOPTS",
+            "-u",
+            "RCC_RELOAD_PRIVATE_MUTANT",
+            "timeout",
+            "--signal=TERM",
+            "--kill-after=10s",
+            "120s",
+            "/workspace/engineering/pr308/action_server/.venv/bin/python",
+            "-m",
+            "pytest",
+            "--noconftest",
+            "-n0",
+            "-vv",
+            "-rA",
+            "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_candidate_preparation_precedes_real_sqlite_writer",
+            "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/prepare_under_writer-restored_green/basetemp",
+            "-o",
+            "tmp_path_retention_policy=all",
+            "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/prepare_under_writer-restored_green/pytest-logging",
+            "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/prepare_under_writer-restored_green/original-junit.xml",
+            "--tb=short"
+          ],
+          "cwd": "/workspace/engineering/pr308/action_server",
+          "output_parent": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/prepare_under_writer-restored_green",
+          "required_parent": "fresh0700 exclusive parent created only after rootrelease; children remain ABSENT untilpytest",
+          "stdout": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/prepare_under_writer-restored_green/original.stdout.private",
+          "stderr": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/prepare_under_writer-restored_green/original.stderr.private",
+          "junit": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/prepare_under_writer-restored_green/original-junit.xml",
+          "expected_returncode": 0,
+          "expected_exact_cases": 1,
+          "expected_counts": {
+            "passed": 1,
+            "failed": 0,
+            "errors": 0,
+            "skipped": 0
+          }
+        }
+      }
+    },
+    {
+      "label": "publish_before_commit",
+      "exact_test_name": "test_publication_follows_actual_sqlite_commit",
+      "product_current_function": {
+        "file": "_actions_import.py",
+        "function": "import_action_packages"
+      },
+      "one_declared_mutation": "publish_generation before leavingtransaction",
+      "semantic_RED_predicate": {
+        "exception": "AssertionError",
+        "source_file": "test_current_managed_reload_sqlite_pool_barriers_successor_v2.py",
+        "source_function": "committed_publish",
+        "source_line": 145,
+        "assertion_source": "assert not db.in_transaction(), 'PUBLICATION_MUST_FOLLOW_DURABLE_SQLITE_COMMIT'",
+        "fixed_message_if_present": "PUBLICATION_MUST_FOLLOW_DURABLE_SQLITE_COMMIT",
+        "required_failure_text": "exact frozen sourceframe/function/assertion or fixed message, not merely generic assertion failure",
+        "reject": [
+          "PRIVATE_MUTANT_MUST_CHANGE_EXACTLY_ONE_CURRENT_SEAM",
+          "collection/import/compileerror",
+          "ModuleNotFoundError",
+          "SyntaxError other than owned caught sentinel",
+          "timeout124/137 or deadlock",
+          "fixture-setup ERROR",
+          "wrongcase/unknownlabel",
+          "missingsource/assertionframe"
+        ]
+      },
+      "phases": {
+        "RED": {
+          "argv": [
+            "env",
+            "-u",
+            "PYTHONOPTIMIZE",
+            "-u",
+            "PYTEST_ADDOPTS",
+            "-u",
+            "RCC_RELOAD_PRIVATE_MUTANT",
+            "RCC_RELOAD_PRIVATE_MUTANT=publish_before_commit",
+            "timeout",
+            "--signal=TERM",
+            "--kill-after=10s",
+            "120s",
+            "/workspace/engineering/pr308/action_server/.venv/bin/python",
+            "-m",
+            "pytest",
+            "--noconftest",
+            "-n0",
+            "-vv",
+            "-rA",
+            "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_publication_follows_actual_sqlite_commit",
+            "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/publish_before_commit-red/basetemp",
+            "-o",
+            "tmp_path_retention_policy=all",
+            "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/publish_before_commit-red/pytest-logging",
+            "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/publish_before_commit-red/original-junit.xml",
+            "--tb=short"
+          ],
+          "cwd": "/workspace/engineering/pr308/action_server",
+          "output_parent": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/publish_before_commit-red",
+          "required_parent": "fresh0700 exclusive parent created only after rootrelease; children remain ABSENT untilpytest",
+          "stdout": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/publish_before_commit-red/original.stdout.private",
+          "stderr": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/publish_before_commit-red/original.stderr.private",
+          "junit": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/publish_before_commit-red/original-junit.xml",
+          "expected_returncode": 1,
+          "expected_exact_cases": 1,
+          "expected_counts": {
+            "passed": 0,
+            "failed": 1,
+            "errors": 0,
+            "skipped": 0
+          }
+        },
+        "RESTORED_GREEN": {
+          "argv": [
+            "env",
+            "-u",
+            "PYTHONOPTIMIZE",
+            "-u",
+            "PYTEST_ADDOPTS",
+            "-u",
+            "RCC_RELOAD_PRIVATE_MUTANT",
+            "timeout",
+            "--signal=TERM",
+            "--kill-after=10s",
+            "120s",
+            "/workspace/engineering/pr308/action_server/.venv/bin/python",
+            "-m",
+            "pytest",
+            "--noconftest",
+            "-n0",
+            "-vv",
+            "-rA",
+            "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_publication_follows_actual_sqlite_commit",
+            "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/publish_before_commit-restored_green/basetemp",
+            "-o",
+            "tmp_path_retention_policy=all",
+            "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/publish_before_commit-restored_green/pytest-logging",
+            "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/publish_before_commit-restored_green/original-junit.xml",
+            "--tb=short"
+          ],
+          "cwd": "/workspace/engineering/pr308/action_server",
+          "output_parent": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/publish_before_commit-restored_green",
+          "required_parent": "fresh0700 exclusive parent created only after rootrelease; children remain ABSENT untilpytest",
+          "stdout": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/publish_before_commit-restored_green/original.stdout.private",
+          "stderr": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/publish_before_commit-restored_green/original.stderr.private",
+          "junit": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/publish_before_commit-restored_green/original-junit.xml",
+          "expected_returncode": 0,
+          "expected_exact_cases": 1,
+          "expected_counts": {
+            "passed": 1,
+            "failed": 0,
+            "errors": 0,
+            "skipped": 0
+          }
+        }
+      }
+    },
+    {
+      "label": "publish_staged_routes",
+      "exact_test_name": "test_staged_pool_keeps_original_routes_until_commit",
+      "product_current_function": {
+        "file": "_server.py",
+        "function": "_reload_action_generation"
+      },
+      "one_declared_mutation": "publish_prepared_actions immediately afterpreparedassignment",
+      "semantic_RED_predicate": {
+        "exception": "AssertionError",
+        "source_file": "test_current_managed_reload_sqlite_pool_barriers_successor_v2.py",
+        "source_function": "after",
+        "source_line": 141,
+        "assertion_source": "assert app.router.routes == original['routes'], 'STAGED_ROUTES_MUST_NOT_PUBLISH'",
+        "fixed_message_if_present": "STAGED_ROUTES_MUST_NOT_PUBLISH",
+        "required_failure_text": "exact frozen sourceframe/function/assertion or fixed message, not merely generic assertion failure",
+        "reject": [
+          "PRIVATE_MUTANT_MUST_CHANGE_EXACTLY_ONE_CURRENT_SEAM",
+          "collection/import/compileerror",
+          "ModuleNotFoundError",
+          "SyntaxError other than owned caught sentinel",
+          "timeout124/137 or deadlock",
+          "fixture-setup ERROR",
+          "wrongcase/unknownlabel",
+          "missingsource/assertionframe"
+        ]
+      },
+      "phases": {
+        "RED": {
+          "argv": [
+            "env",
+            "-u",
+            "PYTHONOPTIMIZE",
+            "-u",
+            "PYTEST_ADDOPTS",
+            "-u",
+            "RCC_RELOAD_PRIVATE_MUTANT",
+            "RCC_RELOAD_PRIVATE_MUTANT=publish_staged_routes",
+            "timeout",
+            "--signal=TERM",
+            "--kill-after=10s",
+            "120s",
+            "/workspace/engineering/pr308/action_server/.venv/bin/python",
+            "-m",
+            "pytest",
+            "--noconftest",
+            "-n0",
+            "-vv",
+            "-rA",
+            "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_staged_pool_keeps_original_routes_until_commit",
+            "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/publish_staged_routes-red/basetemp",
+            "-o",
+            "tmp_path_retention_policy=all",
+            "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/publish_staged_routes-red/pytest-logging",
+            "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/publish_staged_routes-red/original-junit.xml",
+            "--tb=short"
+          ],
+          "cwd": "/workspace/engineering/pr308/action_server",
+          "output_parent": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/publish_staged_routes-red",
+          "required_parent": "fresh0700 exclusive parent created only after rootrelease; children remain ABSENT untilpytest",
+          "stdout": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/publish_staged_routes-red/original.stdout.private",
+          "stderr": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/publish_staged_routes-red/original.stderr.private",
+          "junit": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/publish_staged_routes-red/original-junit.xml",
+          "expected_returncode": 1,
+          "expected_exact_cases": 1,
+          "expected_counts": {
+            "passed": 0,
+            "failed": 1,
+            "errors": 0,
+            "skipped": 0
+          }
+        },
+        "RESTORED_GREEN": {
+          "argv": [
+            "env",
+            "-u",
+            "PYTHONOPTIMIZE",
+            "-u",
+            "PYTEST_ADDOPTS",
+            "-u",
+            "RCC_RELOAD_PRIVATE_MUTANT",
+            "timeout",
+            "--signal=TERM",
+            "--kill-after=10s",
+            "120s",
+            "/workspace/engineering/pr308/action_server/.venv/bin/python",
+            "-m",
+            "pytest",
+            "--noconftest",
+            "-n0",
+            "-vv",
+            "-rA",
+            "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_staged_pool_keeps_original_routes_until_commit",
+            "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/publish_staged_routes-restored_green/basetemp",
+            "-o",
+            "tmp_path_retention_policy=all",
+            "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/publish_staged_routes-restored_green/pytest-logging",
+            "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/publish_staged_routes-restored_green/original-junit.xml",
+            "--tb=short"
+          ],
+          "cwd": "/workspace/engineering/pr308/action_server",
+          "output_parent": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/publish_staged_routes-restored_green",
+          "required_parent": "fresh0700 exclusive parent created only after rootrelease; children remain ABSENT untilpytest",
+          "stdout": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/publish_staged_routes-restored_green/original.stdout.private",
+          "stderr": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/publish_staged_routes-restored_green/original.stderr.private",
+          "junit": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/publish_staged_routes-restored_green/original-junit.xml",
+          "expected_returncode": 0,
+          "expected_exact_cases": 1,
+          "expected_counts": {
+            "passed": 1,
+            "failed": 0,
+            "errors": 0,
+            "skipped": 0
+          }
+        }
+      }
+    },
+    {
+      "label": "omit_idle_restore",
+      "exact_test_name": "test_failed_warmup_restores_original_idle_and_catalog",
+      "product_current_function": {
+        "file": "_actions_process_pool.py",
+        "function": "on_reload"
+      },
+      "one_declared_mutation": "remove restoredoriginal idle-containerassignment",
+      "semantic_RED_predicate": {
+        "exception": "AssertionError",
+        "source_file": "test_current_managed_reload_sqlite_pool_barriers_successor_v2.py",
+        "source_function": "test_failed_warmup_restores_original_idle_and_catalog",
+        "source_line": 227,
+        "assertion_source": "assert c.pool._idle_processes is original_idle",
+        "fixed_message_if_present": null,
+        "required_failure_text": "exact frozen sourceframe/function/assertion or fixed message, not merely generic assertion failure",
+        "reject": [
+          "PRIVATE_MUTANT_MUST_CHANGE_EXACTLY_ONE_CURRENT_SEAM",
+          "collection/import/compileerror",
+          "ModuleNotFoundError",
+          "SyntaxError other than owned caught sentinel",
+          "timeout124/137 or deadlock",
+          "fixture-setup ERROR",
+          "wrongcase/unknownlabel",
+          "missingsource/assertionframe"
+        ]
+      },
+      "phases": {
+        "RED": {
+          "argv": [
+            "env",
+            "-u",
+            "PYTHONOPTIMIZE",
+            "-u",
+            "PYTEST_ADDOPTS",
+            "-u",
+            "RCC_RELOAD_PRIVATE_MUTANT",
+            "RCC_RELOAD_PRIVATE_MUTANT=omit_idle_restore",
+            "timeout",
+            "--signal=TERM",
+            "--kill-after=10s",
+            "120s",
+            "/workspace/engineering/pr308/action_server/.venv/bin/python",
+            "-m",
+            "pytest",
+            "--noconftest",
+            "-n0",
+            "-vv",
+            "-rA",
+            "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_failed_warmup_restores_original_idle_and_catalog",
+            "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_idle_restore-red/basetemp",
+            "-o",
+            "tmp_path_retention_policy=all",
+            "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_idle_restore-red/pytest-logging",
+            "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_idle_restore-red/original-junit.xml",
+            "--tb=short"
+          ],
+          "cwd": "/workspace/engineering/pr308/action_server",
+          "output_parent": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_idle_restore-red",
+          "required_parent": "fresh0700 exclusive parent created only after rootrelease; children remain ABSENT untilpytest",
+          "stdout": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_idle_restore-red/original.stdout.private",
+          "stderr": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_idle_restore-red/original.stderr.private",
+          "junit": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_idle_restore-red/original-junit.xml",
+          "expected_returncode": 1,
+          "expected_exact_cases": 1,
+          "expected_counts": {
+            "passed": 0,
+            "failed": 1,
+            "errors": 0,
+            "skipped": 0
+          }
+        },
+        "RESTORED_GREEN": {
+          "argv": [
+            "env",
+            "-u",
+            "PYTHONOPTIMIZE",
+            "-u",
+            "PYTEST_ADDOPTS",
+            "-u",
+            "RCC_RELOAD_PRIVATE_MUTANT",
+            "timeout",
+            "--signal=TERM",
+            "--kill-after=10s",
+            "120s",
+            "/workspace/engineering/pr308/action_server/.venv/bin/python",
+            "-m",
+            "pytest",
+            "--noconftest",
+            "-n0",
+            "-vv",
+            "-rA",
+            "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_failed_warmup_restores_original_idle_and_catalog",
+            "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_idle_restore-restored_green/basetemp",
+            "-o",
+            "tmp_path_retention_policy=all",
+            "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_idle_restore-restored_green/pytest-logging",
+            "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_idle_restore-restored_green/original-junit.xml",
+            "--tb=short"
+          ],
+          "cwd": "/workspace/engineering/pr308/action_server",
+          "output_parent": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_idle_restore-restored_green",
+          "required_parent": "fresh0700 exclusive parent created only after rootrelease; children remain ABSENT untilpytest",
+          "stdout": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_idle_restore-restored_green/original.stdout.private",
+          "stderr": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_idle_restore-restored_green/original.stderr.private",
+          "junit": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_idle_restore-restored_green/original-junit.xml",
+          "expected_returncode": 0,
+          "expected_exact_cases": 1,
+          "expected_counts": {
+            "passed": 1,
+            "failed": 0,
+            "errors": 0,
+            "skipped": 0
+          }
+        }
+      }
+    },
+    {
+      "label": "omit_restore_token",
+      "exact_test_name": "test_actual_commit_failure_restores_original_generation_token",
+      "product_current_function": {
+        "file": "_server.py",
+        "function": "_reload_action_generation"
+      },
+      "one_declared_mutation": "remove restore_generation(old_process_generation) rollbackcall",
+      "semantic_RED_predicate": {
+        "exception": "AssertionError",
+        "source_file": "test_current_managed_reload_sqlite_pool_barriers_successor_v2.py",
+        "source_function": "assert_last_good",
+        "source_line": 189,
+        "assertion_source": "assert c.pool.generation == c.original['generation']",
+        "fixed_message_if_present": null,
+        "required_failure_text": "exact frozen sourceframe/function/assertion or fixed message, not merely generic assertion failure",
+        "reject": [
+          "PRIVATE_MUTANT_MUST_CHANGE_EXACTLY_ONE_CURRENT_SEAM",
+          "collection/import/compileerror",
+          "ModuleNotFoundError",
+          "SyntaxError other than owned caught sentinel",
+          "timeout124/137 or deadlock",
+          "fixture-setup ERROR",
+          "wrongcase/unknownlabel",
+          "missingsource/assertionframe"
+        ]
+      },
+      "phases": {
+        "RED": {
+          "argv": [
+            "env",
+            "-u",
+            "PYTHONOPTIMIZE",
+            "-u",
+            "PYTEST_ADDOPTS",
+            "-u",
+            "RCC_RELOAD_PRIVATE_MUTANT",
+            "RCC_RELOAD_PRIVATE_MUTANT=omit_restore_token",
+            "timeout",
+            "--signal=TERM",
+            "--kill-after=10s",
+            "120s",
+            "/workspace/engineering/pr308/action_server/.venv/bin/python",
+            "-m",
+            "pytest",
+            "--noconftest",
+            "-n0",
+            "-vv",
+            "-rA",
+            "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_actual_commit_failure_restores_original_generation_token",
+            "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_restore_token-red/basetemp",
+            "-o",
+            "tmp_path_retention_policy=all",
+            "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_restore_token-red/pytest-logging",
+            "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_restore_token-red/original-junit.xml",
+            "--tb=short"
+          ],
+          "cwd": "/workspace/engineering/pr308/action_server",
+          "output_parent": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_restore_token-red",
+          "required_parent": "fresh0700 exclusive parent created only after rootrelease; children remain ABSENT untilpytest",
+          "stdout": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_restore_token-red/original.stdout.private",
+          "stderr": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_restore_token-red/original.stderr.private",
+          "junit": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_restore_token-red/original-junit.xml",
+          "expected_returncode": 1,
+          "expected_exact_cases": 1,
+          "expected_counts": {
+            "passed": 0,
+            "failed": 1,
+            "errors": 0,
+            "skipped": 0
+          }
+        },
+        "RESTORED_GREEN": {
+          "argv": [
+            "env",
+            "-u",
+            "PYTHONOPTIMIZE",
+            "-u",
+            "PYTEST_ADDOPTS",
+            "-u",
+            "RCC_RELOAD_PRIVATE_MUTANT",
+            "timeout",
+            "--signal=TERM",
+            "--kill-after=10s",
+            "120s",
+            "/workspace/engineering/pr308/action_server/.venv/bin/python",
+            "-m",
+            "pytest",
+            "--noconftest",
+            "-n0",
+            "-vv",
+            "-rA",
+            "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_actual_commit_failure_restores_original_generation_token",
+            "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_restore_token-restored_green/basetemp",
+            "-o",
+            "tmp_path_retention_policy=all",
+            "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_restore_token-restored_green/pytest-logging",
+            "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_restore_token-restored_green/original-junit.xml",
+            "--tb=short"
+          ],
+          "cwd": "/workspace/engineering/pr308/action_server",
+          "output_parent": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_restore_token-restored_green",
+          "required_parent": "fresh0700 exclusive parent created only after rootrelease; children remain ABSENT untilpytest",
+          "stdout": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_restore_token-restored_green/original.stdout.private",
+          "stderr": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_restore_token-restored_green/original.stderr.private",
+          "junit": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_restore_token-restored_green/original-junit.xml",
+          "expected_returncode": 0,
+          "expected_exact_cases": 1,
+          "expected_counts": {
+            "passed": 1,
+            "failed": 0,
+            "errors": 0,
+            "skipped": 0
+          }
+        }
+      }
+    },
+    {
+      "label": "keep_old_reusable",
+      "exact_test_name": "test_running_old_handle_drains_only_after_new_publication",
+      "product_current_function": {
+        "file": "_actions_process_pool.py",
+        "function": "on_reload"
+      },
+      "one_declared_mutation": "removeprocess.can_reuse=False",
+      "semantic_RED_predicate": {
+        "exception": "AssertionError",
+        "source_file": "test_current_managed_reload_sqlite_pool_barriers_successor_v2.py",
+        "source_function": "test_running_old_handle_drains_only_after_new_publication",
+        "source_line": 256,
+        "assertion_source": "assert not old.can_reuse and old not in c.retired",
+        "fixed_message_if_present": null,
+        "required_failure_text": "exact frozen sourceframe/function/assertion or fixed message, not merely generic assertion failure",
+        "reject": [
+          "PRIVATE_MUTANT_MUST_CHANGE_EXACTLY_ONE_CURRENT_SEAM",
+          "collection/import/compileerror",
+          "ModuleNotFoundError",
+          "SyntaxError other than owned caught sentinel",
+          "timeout124/137 or deadlock",
+          "fixture-setup ERROR",
+          "wrongcase/unknownlabel",
+          "missingsource/assertionframe"
+        ]
+      },
+      "phases": {
+        "RED": {
+          "argv": [
+            "env",
+            "-u",
+            "PYTHONOPTIMIZE",
+            "-u",
+            "PYTEST_ADDOPTS",
+            "-u",
+            "RCC_RELOAD_PRIVATE_MUTANT",
+            "RCC_RELOAD_PRIVATE_MUTANT=keep_old_reusable",
+            "timeout",
+            "--signal=TERM",
+            "--kill-after=10s",
+            "120s",
+            "/workspace/engineering/pr308/action_server/.venv/bin/python",
+            "-m",
+            "pytest",
+            "--noconftest",
+            "-n0",
+            "-vv",
+            "-rA",
+            "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_running_old_handle_drains_only_after_new_publication",
+            "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/keep_old_reusable-red/basetemp",
+            "-o",
+            "tmp_path_retention_policy=all",
+            "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/keep_old_reusable-red/pytest-logging",
+            "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/keep_old_reusable-red/original-junit.xml",
+            "--tb=short"
+          ],
+          "cwd": "/workspace/engineering/pr308/action_server",
+          "output_parent": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/keep_old_reusable-red",
+          "required_parent": "fresh0700 exclusive parent created only after rootrelease; children remain ABSENT untilpytest",
+          "stdout": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/keep_old_reusable-red/original.stdout.private",
+          "stderr": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/keep_old_reusable-red/original.stderr.private",
+          "junit": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/keep_old_reusable-red/original-junit.xml",
+          "expected_returncode": 1,
+          "expected_exact_cases": 1,
+          "expected_counts": {
+            "passed": 0,
+            "failed": 1,
+            "errors": 0,
+            "skipped": 0
+          }
+        },
+        "RESTORED_GREEN": {
+          "argv": [
+            "env",
+            "-u",
+            "PYTHONOPTIMIZE",
+            "-u",
+            "PYTEST_ADDOPTS",
+            "-u",
+            "RCC_RELOAD_PRIVATE_MUTANT",
+            "timeout",
+            "--signal=TERM",
+            "--kill-after=10s",
+            "120s",
+            "/workspace/engineering/pr308/action_server/.venv/bin/python",
+            "-m",
+            "pytest",
+            "--noconftest",
+            "-n0",
+            "-vv",
+            "-rA",
+            "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_running_old_handle_drains_only_after_new_publication",
+            "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/keep_old_reusable-restored_green/basetemp",
+            "-o",
+            "tmp_path_retention_policy=all",
+            "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/keep_old_reusable-restored_green/pytest-logging",
+            "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/keep_old_reusable-restored_green/original-junit.xml",
+            "--tb=short"
+          ],
+          "cwd": "/workspace/engineering/pr308/action_server",
+          "output_parent": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/keep_old_reusable-restored_green",
+          "required_parent": "fresh0700 exclusive parent created only after rootrelease; children remain ABSENT untilpytest",
+          "stdout": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/keep_old_reusable-restored_green/original.stdout.private",
+          "stderr": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/keep_old_reusable-restored_green/original.stderr.private",
+          "junit": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/keep_old_reusable-restored_green/original-junit.xml",
+          "expected_returncode": 0,
+          "expected_exact_cases": 1,
+          "expected_counts": {
+            "passed": 1,
+            "failed": 0,
+            "errors": 0,
+            "skipped": 0
+          }
+        }
+      }
+    },
+    {
+      "label": "early_generation",
+      "exact_test_name": "test_candidate_warmup_precedes_generation_switch",
+      "product_current_function": {
+        "file": "_actions_process_pool.py",
+        "function": "on_reload"
+      },
+      "one_declared_mutation": "movegenerationincrement beforewarmup whileexistinglockheld",
+      "semantic_RED_predicate": {
+        "exception": "AssertionError",
+        "source_file": "test_current_managed_reload_sqlite_pool_barriers_successor_v2.py",
+        "source_function": "check",
+        "source_line": 270,
+        "assertion_source": "assert c.pool._generation == c.original['generation']",
+        "fixed_message_if_present": null,
+        "required_failure_text": "exact frozen sourceframe/function/assertion or fixed message, not merely generic assertion failure",
+        "reject": [
+          "PRIVATE_MUTANT_MUST_CHANGE_EXACTLY_ONE_CURRENT_SEAM",
+          "collection/import/compileerror",
+          "ModuleNotFoundError",
+          "SyntaxError other than owned caught sentinel",
+          "timeout124/137 or deadlock",
+          "fixture-setup ERROR",
+          "wrongcase/unknownlabel",
+          "missingsource/assertionframe"
+        ]
+      },
+      "phases": {
+        "RED": {
+          "argv": [
+            "env",
+            "-u",
+            "PYTHONOPTIMIZE",
+            "-u",
+            "PYTEST_ADDOPTS",
+            "-u",
+            "RCC_RELOAD_PRIVATE_MUTANT",
+            "RCC_RELOAD_PRIVATE_MUTANT=early_generation",
+            "timeout",
+            "--signal=TERM",
+            "--kill-after=10s",
+            "120s",
+            "/workspace/engineering/pr308/action_server/.venv/bin/python",
+            "-m",
+            "pytest",
+            "--noconftest",
+            "-n0",
+            "-vv",
+            "-rA",
+            "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_candidate_warmup_precedes_generation_switch",
+            "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/early_generation-red/basetemp",
+            "-o",
+            "tmp_path_retention_policy=all",
+            "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/early_generation-red/pytest-logging",
+            "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/early_generation-red/original-junit.xml",
+            "--tb=short"
+          ],
+          "cwd": "/workspace/engineering/pr308/action_server",
+          "output_parent": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/early_generation-red",
+          "required_parent": "fresh0700 exclusive parent created only after rootrelease; children remain ABSENT untilpytest",
+          "stdout": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/early_generation-red/original.stdout.private",
+          "stderr": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/early_generation-red/original.stderr.private",
+          "junit": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/early_generation-red/original-junit.xml",
+          "expected_returncode": 1,
+          "expected_exact_cases": 1,
+          "expected_counts": {
+            "passed": 0,
+            "failed": 1,
+            "errors": 0,
+            "skipped": 0
+          }
+        },
+        "RESTORED_GREEN": {
+          "argv": [
+            "env",
+            "-u",
+            "PYTHONOPTIMIZE",
+            "-u",
+            "PYTEST_ADDOPTS",
+            "-u",
+            "RCC_RELOAD_PRIVATE_MUTANT",
+            "timeout",
+            "--signal=TERM",
+            "--kill-after=10s",
+            "120s",
+            "/workspace/engineering/pr308/action_server/.venv/bin/python",
+            "-m",
+            "pytest",
+            "--noconftest",
+            "-n0",
+            "-vv",
+            "-rA",
+            "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_candidate_warmup_precedes_generation_switch",
+            "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/early_generation-restored_green/basetemp",
+            "-o",
+            "tmp_path_retention_policy=all",
+            "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/early_generation-restored_green/pytest-logging",
+            "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/early_generation-restored_green/original-junit.xml",
+            "--tb=short"
+          ],
+          "cwd": "/workspace/engineering/pr308/action_server",
+          "output_parent": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/early_generation-restored_green",
+          "required_parent": "fresh0700 exclusive parent created only after rootrelease; children remain ABSENT untilpytest",
+          "stdout": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/early_generation-restored_green/original.stdout.private",
+          "stderr": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/early_generation-restored_green/original.stderr.private",
+          "junit": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/early_generation-restored_green/original-junit.xml",
+          "expected_returncode": 0,
+          "expected_exact_cases": 1,
+          "expected_counts": {
+            "passed": 1,
+            "failed": 0,
+            "errors": 0,
+            "skipped": 0
+          }
+        }
+      }
+    },
+    {
+      "label": "omit_candidate_cleanup",
+      "exact_test_name": "test_rejected_candidate_cleanup_preserves_last_good",
+      "product_current_function": {
+        "file": "_actions_import.py",
+        "function": "import_action_packages"
+      },
+      "one_declared_mutation": "remove reversecandidatecleanup loop",
+      "semantic_RED_predicate": {
+        "exception": "AssertionError",
+        "source_file": "test_current_managed_reload_sqlite_pool_barriers_successor_v2.py",
+        "source_function": "test_rejected_candidate_cleanup_preserves_last_good",
+        "source_line": 284,
+        "assertion_source": "assert not c.new_dir.exists()",
+        "fixed_message_if_present": null,
+        "required_failure_text": "exact frozen sourceframe/function/assertion or fixed message, not merely generic assertion failure",
+        "reject": [
+          "PRIVATE_MUTANT_MUST_CHANGE_EXACTLY_ONE_CURRENT_SEAM",
+          "collection/import/compileerror",
+          "ModuleNotFoundError",
+          "SyntaxError other than owned caught sentinel",
+          "timeout124/137 or deadlock",
+          "fixture-setup ERROR",
+          "wrongcase/unknownlabel",
+          "missingsource/assertionframe"
+        ]
+      },
+      "phases": {
+        "RED": {
+          "argv": [
+            "env",
+            "-u",
+            "PYTHONOPTIMIZE",
+            "-u",
+            "PYTEST_ADDOPTS",
+            "-u",
+            "RCC_RELOAD_PRIVATE_MUTANT",
+            "RCC_RELOAD_PRIVATE_MUTANT=omit_candidate_cleanup",
+            "timeout",
+            "--signal=TERM",
+            "--kill-after=10s",
+            "120s",
+            "/workspace/engineering/pr308/action_server/.venv/bin/python",
+            "-m",
+            "pytest",
+            "--noconftest",
+            "-n0",
+            "-vv",
+            "-rA",
+            "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_rejected_candidate_cleanup_preserves_last_good",
+            "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_candidate_cleanup-red/basetemp",
+            "-o",
+            "tmp_path_retention_policy=all",
+            "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_candidate_cleanup-red/pytest-logging",
+            "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_candidate_cleanup-red/original-junit.xml",
+            "--tb=short"
+          ],
+          "cwd": "/workspace/engineering/pr308/action_server",
+          "output_parent": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_candidate_cleanup-red",
+          "required_parent": "fresh0700 exclusive parent created only after rootrelease; children remain ABSENT untilpytest",
+          "stdout": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_candidate_cleanup-red/original.stdout.private",
+          "stderr": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_candidate_cleanup-red/original.stderr.private",
+          "junit": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_candidate_cleanup-red/original-junit.xml",
+          "expected_returncode": 1,
+          "expected_exact_cases": 1,
+          "expected_counts": {
+            "passed": 0,
+            "failed": 1,
+            "errors": 0,
+            "skipped": 0
+          }
+        },
+        "RESTORED_GREEN": {
+          "argv": [
+            "env",
+            "-u",
+            "PYTHONOPTIMIZE",
+            "-u",
+            "PYTEST_ADDOPTS",
+            "-u",
+            "RCC_RELOAD_PRIVATE_MUTANT",
+            "timeout",
+            "--signal=TERM",
+            "--kill-after=10s",
+            "120s",
+            "/workspace/engineering/pr308/action_server/.venv/bin/python",
+            "-m",
+            "pytest",
+            "--noconftest",
+            "-n0",
+            "-vv",
+            "-rA",
+            "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_rejected_candidate_cleanup_preserves_last_good",
+            "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_candidate_cleanup-restored_green/basetemp",
+            "-o",
+            "tmp_path_retention_policy=all",
+            "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_candidate_cleanup-restored_green/pytest-logging",
+            "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_candidate_cleanup-restored_green/original-junit.xml",
+            "--tb=short"
+          ],
+          "cwd": "/workspace/engineering/pr308/action_server",
+          "output_parent": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_candidate_cleanup-restored_green",
+          "required_parent": "fresh0700 exclusive parent created only after rootrelease; children remain ABSENT untilpytest",
+          "stdout": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_candidate_cleanup-restored_green/original.stdout.private",
+          "stderr": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_candidate_cleanup-restored_green/original.stderr.private",
+          "junit": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_candidate_cleanup-restored_green/original-junit.xml",
+          "expected_returncode": 0,
+          "expected_exact_cases": 1,
+          "expected_counts": {
+            "passed": 1,
+            "failed": 0,
+            "errors": 0,
+            "skipped": 0
+          }
+        }
+      }
+    },
+    {
+      "label": "omit_repaired_publish",
+      "exact_test_name": "test_repaired_candidate_publishes_without_admitting_failed_generation",
+      "product_current_function": {
+        "file": "_actions_import.py",
+        "function": "import_action_packages"
+      },
+      "one_declared_mutation": "remove postcommitpublish_generation call",
+      "semantic_RED_predicate": {
+        "exception": "AssertionError",
+        "source_file": "test_current_managed_reload_sqlite_pool_barriers_successor_v2.py",
+        "source_function": "test_repaired_candidate_publishes_without_admitting_failed_generation",
+        "source_line": 295,
+        "assertion_source": "assert c.routes.mcp_server_setup_helper._catalog.tools[0].description=='G3 docs'",
+        "fixed_message_if_present": null,
+        "required_failure_text": "exact frozen sourceframe/function/assertion or fixed message, not merely generic assertion failure",
+        "reject": [
+          "PRIVATE_MUTANT_MUST_CHANGE_EXACTLY_ONE_CURRENT_SEAM",
+          "collection/import/compileerror",
+          "ModuleNotFoundError",
+          "SyntaxError other than owned caught sentinel",
+          "timeout124/137 or deadlock",
+          "fixture-setup ERROR",
+          "wrongcase/unknownlabel",
+          "missingsource/assertionframe"
+        ]
+      },
+      "phases": {
+        "RED": {
+          "argv": [
+            "env",
+            "-u",
+            "PYTHONOPTIMIZE",
+            "-u",
+            "PYTEST_ADDOPTS",
+            "-u",
+            "RCC_RELOAD_PRIVATE_MUTANT",
+            "RCC_RELOAD_PRIVATE_MUTANT=omit_repaired_publish",
+            "timeout",
+            "--signal=TERM",
+            "--kill-after=10s",
+            "120s",
+            "/workspace/engineering/pr308/action_server/.venv/bin/python",
+            "-m",
+            "pytest",
+            "--noconftest",
+            "-n0",
+            "-vv",
+            "-rA",
+            "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_repaired_candidate_publishes_without_admitting_failed_generation",
+            "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_repaired_publish-red/basetemp",
+            "-o",
+            "tmp_path_retention_policy=all",
+            "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_repaired_publish-red/pytest-logging",
+            "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_repaired_publish-red/original-junit.xml",
+            "--tb=short"
+          ],
+          "cwd": "/workspace/engineering/pr308/action_server",
+          "output_parent": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_repaired_publish-red",
+          "required_parent": "fresh0700 exclusive parent created only after rootrelease; children remain ABSENT untilpytest",
+          "stdout": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_repaired_publish-red/original.stdout.private",
+          "stderr": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_repaired_publish-red/original.stderr.private",
+          "junit": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_repaired_publish-red/original-junit.xml",
+          "expected_returncode": 1,
+          "expected_exact_cases": 1,
+          "expected_counts": {
+            "passed": 0,
+            "failed": 1,
+            "errors": 0,
+            "skipped": 0
+          }
+        },
+        "RESTORED_GREEN": {
+          "argv": [
+            "env",
+            "-u",
+            "PYTHONOPTIMIZE",
+            "-u",
+            "PYTEST_ADDOPTS",
+            "-u",
+            "RCC_RELOAD_PRIVATE_MUTANT",
+            "timeout",
+            "--signal=TERM",
+            "--kill-after=10s",
+            "120s",
+            "/workspace/engineering/pr308/action_server/.venv/bin/python",
+            "-m",
+            "pytest",
+            "--noconftest",
+            "-n0",
+            "-vv",
+            "-rA",
+            "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py::test_repaired_candidate_publishes_without_admitting_failed_generation",
+            "--basetemp=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_repaired_publish-restored_green/basetemp",
+            "-o",
+            "tmp_path_retention_policy=all",
+            "--robocorp-log-output=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_repaired_publish-restored_green/pytest-logging",
+            "--junitxml=/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_repaired_publish-restored_green/original-junit.xml",
+            "--tb=short"
+          ],
+          "cwd": "/workspace/engineering/pr308/action_server",
+          "output_parent": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_repaired_publish-restored_green",
+          "required_parent": "fresh0700 exclusive parent created only after rootrelease; children remain ABSENT untilpytest",
+          "stdout": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_repaired_publish-restored_green/original.stdout.private",
+          "stderr": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_repaired_publish-restored_green/original.stderr.private",
+          "junit": "/workspace/engineering/pr308-current8d49-nine-real-semantic-mutant-root-once-1/omit_repaired_publish-restored_green/original-junit.xml",
+          "expected_returncode": 0,
+          "expected_exact_cases": 1,
+          "expected_counts": {
+            "passed": 1,
+            "failed": 0,
+            "errors": 0,
+            "skipped": 0
+          }
+        }
+      }
+    }
+  ],
+  "before_and_alwayspost_argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "120s",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/readonly_current_input_guard_v9.py",
+    "--config",
+    "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+    "--config-sha256",
+    "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25",
+    "--release",
+    "/workspace/engineering/root-rcc-current8d49-control3-V9-one-release.json",
+    "--release-sha256",
+    "a131e30087742764ba6dbdbc2634749924133431de3310b2065ced446b97bf3b",
+    "--label",
+    "control3"
+  ],
+  "origins": [
+    {
+      "module": "actions",
+      "origin": "/workspace/engineering/pr308/actions/src/actions/__init__.py",
+      "prefix": "/workspace/engineering/pr308/actions/.venv",
+      "python": "/workspace/engineering/pr308/actions/.venv/bin/python"
+    },
+    {
+      "module": "actions_http",
+      "origin": "/workspace/engineering/pr308/actions-http-helper/src/actions_http/__init__.py",
+      "prefix": "/workspace/engineering/pr308/actions-http-helper/.venv",
+      "python": "/workspace/engineering/pr308/actions-http-helper/.venv/bin/python"
+    },
+    {
+      "module": "devutils.invoke_utils",
+      "origin": "/workspace/engineering/pr308/devutils/src/devutils/invoke_utils.py",
+      "prefix": "/workspace/engineering/pr308/devutils/.venv",
+      "python": "/workspace/engineering/pr308/devutils/.venv/bin/python"
+    },
+    {
+      "module": "actions.work_items",
+      "origin": "/workspace/engineering/pr308/work-items/src/actions/work_items/__init__.py",
+      "prefix": "/workspace/engineering/pr308/work-items/.venv",
+      "python": "/workspace/engineering/pr308/work-items/.venv/bin/python"
+    },
+    {
+      "module": "actions.server._rcc_runtime_adapter",
+      "origin": "/workspace/engineering/pr308/action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "prefix": "/workspace/engineering/pr308/action_server/.venv",
+      "python": "/workspace/engineering/pr308/action_server/.venv/bin/python"
+    }
+  ],
+  "managed_activation": "exactretained18exports/PATHfirsttwo managedbin+cachedToolkitbin; root refusesinheritedADDOPTS/OPT/mutant/operatorsbeforecommands, then RED childsets onlyknownlabel; no environment PYTHONPATH or installers",
+  "finite_ROOT_enclosure_PROPOSED_NOT_ADOPTED": {
+    "phase_count": 25,
+    "composition": "2guards+5originchecks+18selectedpytestchildren",
+    "each_Python_fallback_seconds": 135,
+    "sum_Python_fallback_seconds": 3375,
+    "minimum_GNU_bounds_including_grace_seconds": 2725,
+    "outer_seconds": 3600,
+    "outer_TERM_KILL_grace_seconds": 10,
+    "parent_executor_seconds": 3630,
+    "margin_after_fallback_seconds": 225,
+    "child_deadlines_unchanged": "guards120TERM10, origins15TERM10, pytest120TERM10; no native budget modification"
+  },
+  "admission": {
+    "RED": "return1; exactlyone testcase selectednamedcase FAILURE AssertionError atintendedsemanticframe; noERROR/SKIP; suites totals1/1/0/0; actualhelpercompilerseam sanitymustnotbefailure",
+    "RESTORED_GREEN": "newprocess no inheritedmutant; return0; exactlysame1casePASS0F/E/S; currentproductGitFS+privatecode byteidentity before/alwayspost; notameasuredsame-process objectidentityrestoration",
+    "all_case_count": "18distinctoutputphase JUnits/18originalreturncodes andraws; restoreGREENconditionallyonlyafterintendedRED, stops onunexpectedresult",
+    "log_capture": "private0600 O_EXCL fd beforecommand, flush/fsync fileandparent; terminalandprimaryerrorseparatefromalwayspost",
+    "catalog_scope": "copy-aware snapshotstructure used inlast-goodtests; nineexistingmutants donotindependentlypoisonnestedcatalogsnapshotfields; sensitivityofthat oracle separatelyNOTRUN",
+    "held_lock_scope": "early_generation expects private_generation equalityfailure underexistinglock; WARMUP_CALLBACK_REQUIRES_EXISTING_POOL_LOCK mustremaintrue; nevercallpubliclockgetter insidecallback",
+    "cleanup_scope": "syntheticcontrolled thread2second release/join alreadyfixturefinally; no actualnativePID/lease/reap inference"
+  },
+  "root_release_PREREQ": "Future exactlauncher/config/self/root/source/contracts+independentrealGO binding required; thiscommandplan createsnoroot/release andgrantsnoexecution; no launcherwritten whiletwo productwritersactive",
+  "all_original_bindings": [
+    {
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-baseline-preexecution/OWNERFINAL-corrected-nine-once2-baseline-config-contract-launcher-PREEXEC-NOTRUN.json",
+      "bytes": 11099,
+      "sha256": "39d3ba4d62cd54807ded6228cdbff891ec9493e17419b04335957451c85937a4",
+      "mode": "0o400"
+    },
+    {
+      "bytes": 16429,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-nine-real-private-catalog-lock-source-successor-final-v4-NOTRUN/test_current_managed_reload_sqlite_pool_barriers_successor_v2.py",
+      "sha256": "a577d21615877bc19a88ca141e5c8ac7c9779120abf7f86b7a6ec6d2367d5da2"
+    },
+    {
+      "bytes": 4667,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-private-corrected-nine-source-independent-review/OWNERFINAL-independent-private-corrected-nine-catalog-lock-SOURCE_ONLY-review.json",
+      "sha256": "aa3f927ef250c86d8b76e02e21f6382f2a894c22b0bba7f285b08c5f60f13da4"
+    },
+    {
+      "bytes": 765564,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+      "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25"
+    },
+    {
+      "bytes": 1075,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-rcc-current8d49-control3-V9-one-release.json",
+      "sha256": "a131e30087742764ba6dbdbc2634749924133431de3310b2065ced446b97bf3b"
+    },
+    {
+      "bytes": 4690,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/readonly_current_input_guard_v9.py",
+      "sha256": "480be06317562b7e3a5c98a5d794bb5d2a33e7fa6186fe707823ecb1cc583626"
+    },
+    {
+      "bytes": 12996,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/frozen-current8d49-source-LIGHT-inputs-v3.json",
+      "sha256": "81f52920b50e67619b3bb418a7c1034a2106ec52f4badd71b9d85e29b7376820"
+    },
+    {
+      "bytes": 16829,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-nine-real-original-baseline-independent-diagnosis/OWNERFINAL-independent-original-nine-baseline-failure-and-private-control-boundary.json",
+      "sha256": "6288fb4a6d296770a1c930ae73b0854e103378417f250a00a553c7c1bf3a25e2"
+    },
+    {
+      "bytes": 6839,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-reload-drain-independent-preexecution-review/frozen-nine-real-source-control-baseline-first-ROOT-command-contract-NOTRUN.json",
+      "sha256": "5f1874357496fe9c890c1acfec43fa114d51c658bd23ea23578fc3c910c1f287"
+    },
+    {
+      "bytes": 6371,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-current8d49-nine-real-baseline-once.py",
+      "sha256": "5ffbdebb3cbd7301e3a1d46255fc42d6fbff63bc03c922ec4b21ba9cb426ad5a"
+    },
+    {
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-independent-ACTUAL-review/OWNERFINAL-independent-original-current8d49-corrected-nine-once2-baseline-ACTUAL-review.json",
+      "bytes": 20115,
+      "sha256": "e54f84619b73c236a8038c5602b27cc6affef8e82bd0d3e535bb2537548a811d",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current8d49-nine-real-source-control-root-once-2/OWNERFINAL-root-one-original-corrected-nine-once2-baseline.json",
+      "bytes": 4505,
+      "sha256": "72358ec90d7098593d2844611195833bdbffab7c66890b833d44f344d4647ed0",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr308-corrected-nine-semantic-mutant-readonly-command-plan-NOTRUN/canonical-baseline-mutation-sensitivity-and-catalog-scope-reused.md",
+      "bytes": 733,
+      "sha256": "073afcbf111490cdcc58ecb4402cf11cffbb3d437721b45a42fa3f3e804106b5",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_actions_import.py",
+      "bytes": 28217,
+      "sha256": "57ad235e30fdd84c763f84efd7ccdd8514d620d5b5cfff05ac1051f60ceefad3",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_server.py",
+      "bytes": 35232,
+      "sha256": "0954b062ba7931609dddfd8b1f068dbac83967691e1194b6ac250a51befa20ff",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_actions_process_pool.py",
+      "bytes": 58538,
+      "sha256": "3552bf39d0dc93f94ed3a4ab056de870ae460ed709f36d3d3a37dc043c349da8",
+      "mode": "0o600"
+    }
+  ],
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; accepted5584oracle+finiteenclosure reuse with exactsemantic-failure/snapshot-scope paragraph proposed",
+    "Durable_learning_captured": "intendedRED distinctfromfixture/import/deadlock, freshunmutatedGREEN distinctfromsameprocess restoration; catalog field sensitivity separatelyunmeasured",
+    "Evidence": "exacta577 sourceAST nineexistingseams/assertions, e54f authentic9baselinePASS, frozen5f case mapping, actualcurrentalgo sourcebytes",
+    "Stale_or_ambiguous_guidance_removed": "arbitraryfailure cannot demonstrate mutantcatching; ninePASS/RED cannot implyallnestedcatalogor native lifecycle proof",
+    "Remaining_uncertainty": "all18plannedphase outcomesNOTRUN; snapshot sensitivity+native/provider lifecycleHOLD"
+  },
+  "upstream_disposition": "none"
+}

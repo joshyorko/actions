@@ -1,0 +1,31 @@
+{
+  "OAuth_audit_implementation": "NOT_STARTED_NO_FILES_NO_PR307_MUTATION",
+  "capture": "2026-10-12T00:35:38.068103+00:00",
+  "copied_bytes": 300299,
+  "copy_recheck": "PASS_ALL24",
+  "documentation": "Exact byte-bound primary deadline/outer-inner cleanup and verified-buffer/address proposals included; no copied proposal is claimed adopted. No cosmetic guide change.",
+  "manifest_binding": {
+    "bytes": 17665,
+    "mode": "0o400",
+    "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/workspace-transfer-20261011/writer-b/exact-safe-writer-b-original-source-copy-manifest.json",
+    "sha256": "32799866b58a24474a2312ef2bdc275e0668fb44a3061a48190c19c4b7b8c348"
+  },
+  "operations": "Stopped. No further tests, imports, builds, native/cgroup reads/signals, source updates, commit/stage/push by worker. Only approved safe preservation copies/manifest/receipt written.",
+  "pr313_minimal_config_buffer_source": {
+    "independent_SOURCE_sha256": "e3d0798b53f547cea0be6421aad955a85edc8dabd9829c96279ae04ac3bfbffb",
+    "owner_sha256": "bc1382cdcb88faddf36e56c6d6823efe77252e065167383ce5843a96bb94f494",
+    "status": "SOURCE_GO_ONLY_PREEXEC_AND_EXECUTION_HOLD"
+  },
+  "primary640_checkpoint": {
+    "owner_sha256": "f7ce8eb2514871d90c684ad05b2987e790a088be10e56e2c23281773b1809903",
+    "remaining": "PID-reuse classification, real control source+execution, independent geometry/authority/cleanup review and native inner reader/lease acceptance remain incomplete",
+    "status": "UNREVIEWED_UNTESTED_HOLD"
+  },
+  "remaining_local_only": "Full native assets/1192 inventories, historical raw logs/robolog/JUnit/archives/helper dependencies/package environments and other prior private packets remain outside selected export; referenced identities preserved, not standalone-execution completeness. ROOT owns aggregate emergency curation.",
+  "safe_original_copies": 24,
+  "schema": 1,
+  "source305f75_3132d86_3079760": "clean unchanged; ROOT owns remote preservation",
+  "status": "STOPPED_PRIVATE_SOURCE_EXPORTED_NO_EXECUTION_AUTHORITY",
+  "upstream_disposition": "none",
+  "writer_B_lease": "RELEASED_STOPPED"
+}

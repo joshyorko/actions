@@ -1,0 +1,253 @@
+{
+  "schema": "actions-independent-one-normal-actual-PR312-integration-readback/v1",
+  "decision": "PASS_ACTUAL_NORMAL_PR312_INTEGRATION_EXACT_ACCEPTED_TREE_SOURCE_SCOPE_ONLY",
+  "PR": 312,
+  "actual": {
+    "sha": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+    "tree": "47a1e4fceb22fd15eaee1ca380ad6c005abfdde6",
+    "ordered_parents": [
+      "e3c29cde8878307912e55ed09b6436c0f91d06d5",
+      "ec70a2928461941c129b1c05332dc441070e0184"
+    ],
+    "named_target_branch": "integration/community-release-20261008",
+    "fresh_named_target_sha": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+    "fresh_PR_closed_merged": true,
+    "source_head": "ec70a2928461941c129b1c05332dc441070e0184",
+    "original_tested_synthetic": "4c6cc8d53b409bebf1fc0e820eccb73130351008",
+    "synthetic_and_actual_distinct_commits_same_complete_tree": true,
+    "current_source_worktree_HEAD_clean": true,
+    "all1426_typed_blob_mode_oid_body_size_SHA_equality": true,
+    "all1426_current_tracked_FS_bodies_exec_modes_exact": true,
+    "complete_private_tree_proof": {
+      "path": "/workspace/engineering/pr312-actual-a54-independent-integration-review/private-all1426-actual-and-source-body-mode-byte-hash-proof.json",
+      "bytes": 376434,
+      "sha256": "75988c74fb7e6bedfc099a4e91f3d315a5a6875f17c4430d93e07283ca4ee7ed"
+    }
+  },
+  "root_action_review": {
+    "before_draft": true,
+    "normal_ready_readback_draft": false,
+    "expected_head_normal_API_merge": {
+      "sha": "ec70a2928461941c129b1c05332dc441070e0184",
+      "merge_method": "merge"
+    },
+    "one_original_merge_response_success": true,
+    "no_second_merge_recorded": true,
+    "normal_policy_enforcement_no_override": true,
+    "fresh_root_pre_ready23_exact_declared_checkIDs_SUCCESS": true,
+    "zero_legacy_commit_statuses_state_pending_is_not_an_unfinished_check_job": true,
+    "protection403_UNVERIFIED_not_bypass_authority": true
+  },
+  "original_root_post_merge_metadata_FAILURE": {
+    "original": {
+      "path": "/workspace/engineering/root-pr312-currentec70-one-normal-ready-and-merge/original-post-merge-guessed-target-ref-readback-FAIL.json",
+      "bytes": 321,
+      "sha256": "88b087395ddb9cac493873b49e2bdaca2bbb7dbda5b36ee4db06cb915aa5ad49"
+    },
+    "scope": "First action succeeded ready and expected-head merge plus actual Git object readback; guessed target lookup HTTP404 afterwards failed. Named metadata-only successor derives original authenticated base.ref. Failure preserved; no second merge or retry claimed.",
+    "first_owner_actual_local_git_proof_pending": true,
+    "named_localproof_then_independently_verified": {
+      "path": "/workspace/engineering/root-pr312-currentec70-one-normal-ready-and-merge/named-actual-local-Git-object-and-1426-complete-source-proof.json",
+      "bytes": 684,
+      "sha256": "39a6d1d844cf51a1a184e913c5a9b981589094cc434d3b3c631685b5b251739d"
+    }
+  },
+  "accepted_exact_source_CI_and_original_Windows_scopes": {
+    "original_final_admission": {
+      "path": "/workspace/engineering/pr312-currentec70-terminal-CI-successor-02/OWNERFINAL-independent-current312-terminal-original-Windows-scoped-admission-review.json",
+      "bytes": 68109,
+      "sha256": "26326f3d77a03cd1a604c1606f8393668558279c6bc24ace521910385010443e"
+    },
+    "all23_current_jobs_SUCCESS": true,
+    "source_Linux": {
+      "PASS": 1335,
+      "SKIP": 13
+    },
+    "original_current_Windows_source": {
+      "PASS": 1176,
+      "SKIP": 172,
+      "unique_nodes": 1348
+    },
+    "original_current_Windows_integration": {
+      "PASS": 131,
+      "SKIP": 19,
+      "deselected": 1351,
+      "unique_nodes": 150
+    },
+    "shutdown10PASS": true,
+    "transport30SKIP_explicit_Linux_only": true,
+    "original_harness_cleanup_readers": "UNKNOWN",
+    "old770_failures": "Historical originals unchanged; no inferred explanation or success relabel"
+  },
+  "root_owned_original_bindings": [
+    {
+      "path": "/workspace/engineering/root-pr312-currentec70-one-normal-ready-and-merge/OWNERFINAL-root-one-normal-currentec70-PR312-integration-named-successor.json",
+      "bytes": 1078,
+      "sha256": "06e1867cfde7110c8645256c7ed7d34fe6b085e934d32732a35fba1c2e5dc0c1"
+    },
+    {
+      "path": "/workspace/engineering/root-pr312-currentec70-one-normal-ready-and-merge/actual-Git-object-fetch.private.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/root-pr312-currentec70-one-normal-ready-and-merge/actual-Git-object-fetch.private.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/root-pr312-currentec70-one-normal-ready-and-merge/exact-current-PR-body-request.json",
+      "bytes": 4403,
+      "sha256": "6256a78ab646012f6beb98dddd9080ab03bd15dfb01689492515ed0b8e60ef0e"
+    },
+    {
+      "path": "/workspace/engineering/root-pr312-currentec70-one-normal-ready-and-merge/named-actual-local-Git-object-and-1426-complete-source-proof.json",
+      "bytes": 684,
+      "sha256": "39a6d1d844cf51a1a184e913c5a9b981589094cc434d3b3c631685b5b251739d"
+    },
+    {
+      "path": "/workspace/engineering/root-pr312-currentec70-one-normal-ready-and-merge/named-successor-actual-derived-base-target-ref.private.json",
+      "bytes": 448,
+      "sha256": "af9cbd68597b9c1cfdb46ea56afafb0e366d28cf93a82910a2203c44acf0339d"
+    },
+    {
+      "path": "/workspace/engineering/root-pr312-currentec70-one-normal-ready-and-merge/named-successor-actual-merged-PR.private.json",
+      "bytes": 21092,
+      "sha256": "dd6534d4cd875fb6f183754f99850f5b5e591a126c784d99da655da22d90c533"
+    },
+    {
+      "path": "/workspace/engineering/root-pr312-currentec70-one-normal-ready-and-merge/original-actual-integration-git-commit.private.json",
+      "bytes": 2760,
+      "sha256": "6399f2f7dd7177c4278264a2ec2ac227c603acaf40ff3e4060780db12c833505"
+    },
+    {
+      "path": "/workspace/engineering/root-pr312-currentec70-one-normal-ready-and-merge/original-after-ready-before-merge-PR.private.json",
+      "bytes": 20112,
+      "sha256": "4259d1f4194f40d789d92bbb130c2ffb6daa43432033e863a77d8a179105d9d8"
+    },
+    {
+      "path": "/workspace/engineering/root-pr312-currentec70-one-normal-ready-and-merge/original-before-ready-PR.private.json",
+      "bytes": 18851,
+      "sha256": "65d6816085277a2511f87a64be88647e56719cd76d560696c5c9c29e6a82065e"
+    },
+    {
+      "path": "/workspace/engineering/root-pr312-currentec70-one-normal-ready-and-merge/original-before-ready-current-checks.private.json",
+      "bytes": 82812,
+      "sha256": "bd30b60338b59eba2c693fbe9633fc5d54f932bcd65c7ef01cd5f3aeda19c399"
+    },
+    {
+      "path": "/workspace/engineering/root-pr312-currentec70-one-normal-ready-and-merge/original-body-update-response.private.json",
+      "bytes": 20111,
+      "sha256": "2abd2781da111933212af7c7984a22a9700b4b1ab1b2d9a844e9a890d23df7b2"
+    },
+    {
+      "path": "/workspace/engineering/root-pr312-currentec70-one-normal-ready-and-merge/original-final-status.private.json",
+      "bytes": 4492,
+      "sha256": "8ff85df295f42f36ac38a8d6b08bac33e82381c50d320d2cadad799ba9faa601"
+    },
+    {
+      "path": "/workspace/engineering/root-pr312-currentec70-one-normal-ready-and-merge/original-normal-ready-response.private.json",
+      "bytes": 109,
+      "sha256": "500c9b6e40504e7cc27da91e72865aec202dce8a0b0b937b471cbde8c373809e"
+    },
+    {
+      "path": "/workspace/engineering/root-pr312-currentec70-one-normal-ready-and-merge/original-one-normal-merge-response.private.json",
+      "bytes": 109,
+      "sha256": "31081f895d01e6929fc825568a5e42d6c344b9228f5f879b9df95bfc4b36b881"
+    },
+    {
+      "path": "/workspace/engineering/root-pr312-currentec70-one-normal-ready-and-merge/original-post-merge-guessed-target-ref-readback-FAIL.json",
+      "bytes": 321,
+      "sha256": "88b087395ddb9cac493873b49e2bdaca2bbb7dbda5b36ee4db06cb915aa5ad49"
+    },
+    {
+      "path": "/workspace/engineering/root-pr312-currentec70-one-normal-ready-and-merge/root-one-normal-expected-head-merge-request.json",
+      "bytes": 77,
+      "sha256": "aa93cb9048118714de8e53da603ab517437e75c3bf6362d8141cb4df9820f95c"
+    }
+  ],
+  "reviewer_one_fresh_metadata_bindings": [
+    {
+      "path": "/workspace/engineering/pr312-actual-a54-independent-integration-review/one-fresh-authenticated-derived-target-ref.raw.private.json",
+      "bytes": 448,
+      "sha256": "af9cbd68597b9c1cfdb46ea56afafb0e366d28cf93a82910a2203c44acf0339d"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual-a54-independent-integration-review/one-fresh-authenticated-derived-target-ref.request.json",
+      "bytes": 243,
+      "sha256": "a7f0dd98b00cf98e5a199120f530ab929a5fa15672ddd6521c7512da831cc6c0"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual-a54-independent-integration-review/one-fresh-authenticated-derived-target-ref.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual-a54-independent-integration-review/one-fresh-merged-PR.raw.private.json",
+      "bytes": 21092,
+      "sha256": "dd6534d4cd875fb6f183754f99850f5b5e591a126c784d99da655da22d90c533"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual-a54-independent-integration-review/one-fresh-merged-PR.request.json",
+      "bytes": 200,
+      "sha256": "faddd85fa7fb1b7c7cf688e354fb9105bf2a1b895d3cf0c54f27468944586b9d"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual-a54-independent-integration-review/one-fresh-merged-PR.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr312-actual-a54-independent-integration-review/private-all1426-actual-and-source-body-mode-byte-hash-proof.json",
+      "bytes": 376434,
+      "sha256": "75988c74fb7e6bedfc099a4e91f3d315a5a6875f17c4430d93e07283ca4ee7ed"
+    }
+  ],
+  "remaining_HOLD": [
+    "Private01f/frozen-v6 unrecovered; full private/native/provider/browser/consumer/full graph and issue contracts not admitted",
+    "OAuth required-content authority and release/tag/publication acceptance remain HOLD",
+    "Normal source integration and tree equality do not relabel earlier synthetic producer artifacts or transfer old CI to later target",
+    "Current308e4 full-qualified branch remains separate exacte3 tuple; no refresh, native gate, retry or artifact admission by this review"
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md exact integrated named-ref/snapshot, original executed-checkout and actual-versus-synthetic-tree lessons accepted; no cosmetic duplicate",
+    "Exact_verified_delta_reuse": [
+      {
+        "path": "/workspace/engineering/pr300-current618-CI-admission-review/canonical-event-specific-push-paths-proposed.patch",
+        "bytes": 909,
+        "sha256": "592949e0da5d48236262b87f3d6568dbde0d78fc7cc92835a7e8a512c48f73aa"
+      },
+      {
+        "path": "/workspace/engineering/pr221-current776-preflight/canonical-policy-and-snapshot-proposed.patch",
+        "bytes": 897,
+        "sha256": "9744b01f0f2f888de5f88f129b857df33938cb1adf182ec32b30ed08b2f14fe8"
+      },
+      {
+        "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/canonical-partial-platform-consumer-scope-proposed.patch",
+        "bytes": 1158,
+        "sha256": "bf95da899763f97c016f76fa4a0cf8878ebba8326d57c11ab1a520b1df597c81"
+      },
+      {
+        "path": "/workspace/engineering/pr306-current618-fada-original-Windows-failure-owned/canonical-original-runner-checkout-vs-current-merge-ref-proposed.patch",
+        "bytes": 486,
+        "sha256": "50ad18bce0a30cbfb1cb346d1768729b67ea20125796a6558bb57e1594ef2aec"
+      },
+      {
+        "path": "/workspace/engineering/pr300-pr309-current618-bounded-successor-CI-review/canonical-verbose-pytest-terminal-census-proposed.patch",
+        "bytes": 836,
+        "sha256": "b774083c0e21e360209d962aa95054bbb8fee4cacc5fa7dff1c0c89b2b5dad53"
+      }
+    ],
+    "Durable_learning_captured": "Derive the target name from authenticated PR base.ref, verify named ref and actual ordered parents/full tree separately from action response, and preserve post-success metadata failures rather than retrying the merge. Actual tree equality preserves byte scope but does not relabel synthetic build identity.",
+    "Evidence": "Root immutable one expected-head merge response, original guessed-ref404, named authenticated-base successor, independent fresh actual PR/ref plus local1426 full typed/tree/FS proof; prior original log/CI qualification",
+    "Stale_or_ambiguous_guidance_removed": "First root metadata failure is retained separately from successful one merge. Root initial local-proof PENDING remains history; later named684B proof and this independent actual1426 verification establish only that successor scope.",
+    "Remaining_uncertainty": "Original process/readers cleanup, legacy policy403, consumer/private/native/whole release acceptance unchanged"
+  },
+  "Upstream_disposition": "none",
+  "reviewer_no_source_ref_ready_merge_push_fetch_retest_gateway_download_or_process_mutation": true,
+  "review_script": {
+    "path": "/workspace/engineering/pr312-actual-a54-independent-integration-review/review-once-owned-actual-integration-readonly.py",
+    "bytes": 9917,
+    "sha256": "aca99488dca3dc452366ae9f41bb68207c5f72c461d788b2dbbf2ec6f5d1202d"
+  }
+}

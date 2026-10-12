@@ -1,0 +1,136 @@
+{
+  "ROOT_adoption_contract": {
+    "command_template": [
+      "/usr/bin/timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "600s",
+      "bash",
+      "-c",
+      "source /workspace/actions-cloud/activate.sh && export PATH=\"/workspace/actions-cloud/bin:/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\" && export PYTHONDONTWRITEBYTECODE=1 && exec /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12 -B -u /workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/launch_controller_boundary_PURE_ROOT_ONLY_SOURCE_PREPARED_v2_cache_and_origin_pin.py --root-release \"$1\" --root-release-sha256 \"$2\"",
+      "controller-boundary-pure30",
+      "ROOT_RELEASE_ABSENT",
+      "ROOT_RELEASE_HASH_ABSENT"
+    ],
+    "config_binding": {
+      "bytes": 108389,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/frozen_controller_boundary30_actual_functions_typed600_PURE_inputs_NOTRUN_v2_cache_origin_pin.json",
+      "sha256": "c95d4746dfacde271565b81ff14e4c31ab2b8ce3d6efe68e5626c5fdb7cb40f8"
+    },
+    "decision": "RELEASE_ONE_CONTROLLER_BOUNDARY_PURE_QUALIFICATION_ONLY",
+    "external_caller": "ROOT retains original outer terminal/stdout/stderr and hardkill outcome; actual acceptance requires both complete before/post guards and exact30 unique machine and original stderr outcomes. No automatic retry, storage execution or new adoption is authorized by this review.",
+    "independent_review_binding": "Bind this frozen receipt exactly; do not substitute old operation review.",
+    "launcher_binding": {
+      "bytes": 7355,
+      "mode": "0o444",
+      "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/launch_controller_boundary_PURE_ROOT_ONLY_SOURCE_PREPARED_v2_cache_and_origin_pin.py",
+      "sha256": "4eef6de54c7c91678987b9b9c6127f4a57645ea68f094e458009e5e110ca7266"
+    },
+    "new_release": "Regular nonsymlink0600 UID/GID1000 under owned nonsymlink0700 parent; exact SHA passed externally.",
+    "real_environment_archive_copy_remove_or_native_authorized": false,
+    "term_kill_grace_seconds": 10,
+    "whole_ROOT_seconds": 600
+  },
+  "accepted_control_scope": {
+    "actual_layout_threshold": 1,
+    "adapter": 12,
+    "delegated_refusal_propagation": 1,
+    "primary_timeout_secondary_retention": 1,
+    "private_regular_mode_symlink": 1,
+    "returned_nonzero_raw_retention": 1,
+    "storage_admission": 10,
+    "strict_typed_pure_grant": 2,
+    "verified_source_loader": 1
+  },
+  "adapter_binding": {
+    "bytes": 4079,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/pure18_receipt_adapter_v8_SOURCE_PREPARED_v2_actual_receipt_schema.py",
+    "sha256": "8dbc69c8dd1d366d1e1dea97cb809613ff990e27ee9faacb3a9dfccb56a6c1b2"
+  },
+  "config_binding": {
+    "bytes": 108389,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/frozen_controller_boundary30_actual_functions_typed600_PURE_inputs_NOTRUN_v2_cache_origin_pin.json",
+    "sha256": "c95d4746dfacde271565b81ff14e4c31ab2b8ce3d6efe68e5626c5fdb7cb40f8"
+  },
+  "controller_binding": {
+    "bytes": 12753,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/root_once_first_five_current9760_SOURCE_PREPARED_v3_strict_V8_adapter.py",
+    "sha256": "985f497f83b4acecdf9ede7220da3237599ca210016da7443351c00787721ef6"
+  },
+  "controls_binding": {
+    "bytes": 21556,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/test_controller_boundaries_SOURCE_PREPARED_v4_baseline_first_machine_census.py",
+    "sha256": "993ee6a89bb79b0836f614790a4c10a297881d0c64d9a2fc56de50aa1f53e036"
+  },
+  "decision": "GO_CONTROLLER_BOUNDARY_PURE_PREEXECUTION_ONLY",
+  "documentation_improvement": {
+    "ambiguity_removed": "SOURCE/PURE PREEXEC GO is neither actual30 PASS nor permission to archive the five real prefixes. Alias callback poison tests propagation only.",
+    "canonical_file": "docs/skills/repository-operations.md; accepted raw-versus-derived and physical-envelope-versus-functional-admission lessons reused, no guide mutation.",
+    "durable_verified_learning": "A typed PASS may derive from original source-owned census and independently bound actual result while retaining raw PASS_PURE_CONTROLS_ONLY and native_or_storage_qualification=False. Inactive-owner approval, controlled boundary proof, capacity and real operation grant remain separate.",
+    "evidence": [
+      {
+        "bytes": 10515,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-v8-original-PURE18-independent-ACTUAL-review/OWNERFINAL-independent-original-first-five-v8-managed-Git-ACTUAL-PURE18-GO.json",
+        "sha256": "dd9fa8279c9503488acf753f6c4520ba201cd92a8f30168346ff9b32c4c3529d"
+      },
+      {
+        "bytes": 8089,
+        "mode": "0o600",
+        "path": "/workspace/engineering/first-five-v8-current9760-managed-Git-PURE18-once-owned/original-18-complete-machine-census.json",
+        "sha256": "28ba47b66bb90ebf73f8e4834b42005e417dfe73f9471538397d02c962518ba0"
+      },
+      {
+        "bytes": 6480,
+        "mode": "0o400",
+        "path": "/workspace/engineering/first-five-controller30-independent-SOURCE-PURE-PREEXEC-review/private-independent-controller30-frozen-bindings-actual-data-and-control-scope-proof.json",
+        "sha256": "30d8d93f5f45f91860eab10a16de817e0109fb63a8cfdf2829c3d8a059839024"
+      }
+    ],
+    "remaining_uncertainty": "30 controls not executed; derived adapter not emitted; actual storage capacity remains inadequate and operation grant absent. Kernel-stalled I/O is enclosed by finite ROOT termination, not guaranteed cooperative completion."
+  },
+  "independent_proof_binding": {
+    "bytes": 6480,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-controller30-independent-SOURCE-PURE-PREEXEC-review/private-independent-controller30-frozen-bindings-actual-data-and-control-scope-proof.json",
+    "sha256": "30d8d93f5f45f91860eab10a16de817e0109fb63a8cfdf2829c3d8a059839024"
+  },
+  "launcher_binding": {
+    "bytes": 7355,
+    "mode": "0o444",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/launch_controller_boundary_PURE_ROOT_ONLY_SOURCE_PREPARED_v2_cache_and_origin_pin.py",
+    "sha256": "4eef6de54c7c91678987b9b9c6127f4a57645ea68f094e458009e5e110ca7266"
+  },
+  "originals": "Original V7 ACTUALFAIL, old SOURCE/PREEXEC scopes, ffee controller, 634 driver/raw18 narrower status, approval4d227 and old reserve/capacity proofs preserved unchanged.",
+  "preservation_holds": {
+    "delegated_alias_case": "Synthetic callback refusal propagation only, not actual alias parser qualification.",
+    "derived_independent": "ABSENT",
+    "derived_status_PASS_owner": "NOT_CREATED",
+    "fresh_actual_capacity_required": true,
+    "operation_grant": "ABSENT",
+    "recorded_workspace_capacity": 636653568,
+    "unchanged_layout_stop_reserve_threshold": 746586112,
+    "unknown_process_channels": "Not universal quiescence; ROOT explicit selected-owner approval is separate."
+  },
+  "result": {
+    "PURE_ACTUAL_30": "NOT_RUN",
+    "PURE_PREEXECUTION_GO_CONDITIONAL_DISTINCT_ROOT_RELEASE": true,
+    "SOURCE_GO": true,
+    "native": "NOT_RUN",
+    "real_preservation": "HOLD"
+  },
+  "schema": 1,
+  "source_owner_binding": {
+    "bytes": 8399,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-controller-boundary-PURE-SOURCE-PREPARATION/OWNERFINAL-controller-V8-original-actual-adapter-and-30-boundary-SOURCE-PURE-PREEXEC-final-NOTRUN-v2.json",
+    "sha256": "06b8f1d6bf52a6a13ecce62820cc2e5b6ae2bd961027268cdc51fa3dec3adeb2"
+  },
+  "status": "INDEPENDENT_CONTROLLER_BOUNDARY_SOURCE_AND_PURE_PREEXECUTION_GO",
+  "upstream_disposition": "none"
+}

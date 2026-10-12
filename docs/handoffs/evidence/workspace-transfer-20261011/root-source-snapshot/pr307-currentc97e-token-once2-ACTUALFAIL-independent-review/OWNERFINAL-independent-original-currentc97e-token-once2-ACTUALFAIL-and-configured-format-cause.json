@@ -1,0 +1,443 @@
+{
+  "actual_phase_inventory": {
+    "configured-static": {
+      "elapsed_seconds": 19.686396912002238,
+      "expected": 0,
+      "gateway_returncode": 10,
+      "wrapper_fallback_recorded": null
+    },
+    "doctor": {
+      "elapsed_seconds": 4.225939536001533,
+      "expected": 0,
+      "gateway_returncode": 0,
+      "wrapper_fallback_recorded": null
+    },
+    "guard-focus": {
+      "elapsed_seconds": 7.488858558994252,
+      "expected": 0,
+      "gateway_returncode": 0,
+      "original_unique_JUnit": {
+        "errors": 0,
+        "failed": 0,
+        "skipped": 0,
+        "total": 41
+      },
+      "wrapper_fallback_recorded": null
+    },
+    "own-five-origins": {
+      "elapsed_seconds": 10.965300815994851,
+      "expected": 0,
+      "gateway_returncode": 0,
+      "wrapper_fallback_recorded": null
+    },
+    "token-RED-parent2314": {
+      "elapsed_seconds": 4.686918860999867,
+      "expected": 10,
+      "gateway_returncode": 10,
+      "original_unique_JUnit": {
+        "errors": 0,
+        "failed": 2,
+        "skipped": 0,
+        "total": 2
+      },
+      "wrapper_fallback_recorded": null
+    },
+    "token-release-line-GREEN": {
+      "elapsed_seconds": 14.665972479007905,
+      "expected": 0,
+      "gateway_returncode": 0,
+      "original_unique_JUnit": {
+        "errors": 0,
+        "failed": 0,
+        "skipped": 0,
+        "total": 99
+      },
+      "wrapper_fallback_recorded": null
+    },
+    "toolkit": {
+      "elapsed_seconds": 40.265073886999744,
+      "expected": 0,
+      "gateway_returncode": 0,
+      "original_unique_JUnit": {
+        "errors": 0,
+        "failed": 0,
+        "skipped": 0,
+        "total": 179
+      },
+      "wrapper_fallback_recorded": null
+    }
+  },
+  "actual_terminal_binding": {
+    "bytes": 279,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/original-terminal.json",
+    "sha256": "1e32aaa379fa33103e59b0cb13b721d262ede7532263162df7e4388740533795"
+  },
+  "decision": "GO_ORIGINAL_CURRENTC97E_TOKEN_LIGHT_ONCE2_ACTUALFAIL_DIAGNOSIS_AND_PRESERVATION_ONLY",
+  "documentation_improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md; proposed exact package-full-format versus single-file receipt paragraph; reuse accepted05674 pathclosure and7e971 gateway/innerstatus scope lessons.",
+    "Durable learning captured": "A single-file format success does not cover an unchanged sibling in complete package scope; bind actual packageformatter/cwd/config and distinguish present provenance from unrecorded historical version.",
+    "Evidence": [
+      {
+        "bytes": 752,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr307-token-test-configured-format-owned/original-format-terminal.json",
+        "sha256": "e8b6b0af232a702caebd2063149a9986e0bcaa527abc3d84e4144c4a0512e0b5"
+      },
+      {
+        "bytes": 1416,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/configured-static/terminal.json",
+        "sha256": "cf3645b04082bfb2e140746a8d0309afa0e1968e65ad66defb49367d9fe2885f"
+      },
+      {
+        "bytes": 2955,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/configured-static/stdout.bin",
+        "sha256": "357fbb18e20a85e04677f495ffd344014ea895285827547630f9f131fc767511"
+      },
+      {
+        "bytes": 5413,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/configured-static/stderr.bin",
+        "sha256": "e0918b583a1d668d4cb39f2eb883a3feb9b18bfb518fefaff3b4619a91a59f53"
+      },
+      {
+        "bytes": 22981,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr307/devutils/.venv/lib/python3.12/site-packages/ruff-0.1.15.dist-info/METADATA",
+        "sha256": "12996545490923e7c0596e63f1e4ecf883d40740df883e375f60357380674852"
+      },
+      {
+        "bytes": 497,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr307-currentc97e-token-once2-ACTUALFAIL-independent-review/canonical-full-format-scope-versus-single-file-receipt-proposed.txt",
+        "sha256": "5ce100fd5c322ad58e087e6dc100e60d22539cf336e21caee7ca25694f566305"
+      }
+    ],
+    "Remaining uncertainty": "Proposed/current author formatting successor, fresh full gates/actualonce+remaininggenInvoke pending; original c97 remainsFAIL, native/OAuth/private/releases HOLD.",
+    "Stale or ambiguous guidance removed": "No claim of formatter pingpong/version drift; failed sibling is a different file from prior receipt. Current captured48 envelopecount not45/49; sourceguard != cleanup."
+  },
+  "elapsed_seconds": 102.36917291198915,
+  "first_unexpected_failure": {
+    "RCC_task_gateway_exit": 10,
+    "actual_command": [
+      "poetry",
+      "run",
+      "ruff",
+      "format",
+      "--check",
+      "--config",
+      "ruff.toml",
+      "src",
+      "tests"
+    ],
+    "checked_inner_tool_exit": 1,
+    "cwd": "/workspace/engineering/pr307/devutils",
+    "exact_reported_reformat_file": "tests/test_actions_runtime_release_line.py",
+    "expected_gateway_exit": 0,
+    "later_phases": "Generated8/Github30 and controlledInvoke NOT_RUN",
+    "phase": "configured-static",
+    "preceding_static_scopes_completed": "Runtime configuredlint317formatted/type354; helper Rufflint/format2 and Mypy1; Devutils Ruffcheck src/tests. Following Devutils Isort/Mypy not reached.",
+    "report": "1 file would be reformatted,19 files already formatted",
+    "tool": "Devutils own package Poetry run Ruffformat"
+  },
+  "formatter_provenance": {
+    "Devutils_lock_version": "0.1.15",
+    "actual_path_resolution_evidence": "Immutable toolkit.package_environment strips active environments, prepends package.venv/bin, cwdpackage; checked Poetrycommand and original log confirm package/config invocation. Present binary+METADATA are read-only measured, no --version execution.",
+    "binary_SHA256": "01330d499829a450228cf386b6132966c7c5304d5569c661d148d501161936ce",
+    "binary_bytes": 20325104,
+    "failing_file_immutable_c97_7487_2314_equal": {
+      "bytes": 10173,
+      "sha256": "78b5a997dd734c57e922295f7b1b54adee9bb34e379f5890e78673b2786171a3"
+    },
+    "installed_distribution_version_read_without_import": "ruff0.1.15",
+    "no_version_mismatch_proven": true,
+    "ownDevutils_and_Runtime_current_Ruff_binary_bytes_equal": true,
+    "prior_formatter_argv": [
+      "/workspace/engineering/pr307/devutils/.venv/bin/ruff",
+      "format",
+      "--config",
+      "ruff.toml",
+      "tests/test_runtime_release_workflows.py"
+    ],
+    "prior_formatter_historical_binary_digest_or_version": "UNREPORTED_NOT_RETROACTIVELY_INFERRED",
+    "prior_formatter_receipt_covered_only": "tests/test_runtime_release_workflows.py",
+    "source_attribution": "Existing sibling in current307 branch union, unchanged by c97token formatting correction; package-wide formatter scope exposed it."
+  },
+  "minimal_later_source_correction_proposal": {
+    "cwd": "/workspace/engineering/pr307/devutils",
+    "exact_formatter_argv": [
+      "/workspace/engineering/pr307/devutils/.venv/bin/ruff",
+      "format",
+      "--config",
+      "ruff.toml",
+      "tests/test_actions_runtime_release_line.py"
+    ],
+    "prerequisite": "ROOT sourcewriter authority, actual own locked Ruff0.1.15 binary/config binding; do not run from this review.",
+    "required_next_gates": "Fresh named source tuple/complete package formatter/static checks plus mandatory Devutils complete suite+Runtime configured nonintegration FULL; separately reviewed fresh once gateway/semantic/capture contract and original results. No same-source actual rerun, no skip/waiver/push of c97FAIL.",
+    "required_proof": "Whole testmodule AST/function order/assertion bodies unchanged; allother1441source body/modes unchanged; preserve original c97FAIL and prior different-file format receipt. Existing author child00b1 not qualified by this review.",
+    "scope": "ONE existing test file formatter-only, no product/generator/helper/config/lock/version change",
+    "source_file": "devutils/tests/test_actions_runtime_release_line.py"
+  },
+  "original_preservation_and_unknowns": {
+    "FULL_native_authority_currentCI_merge": "NOT_RUN_OR_HOLD_NO_WAIVER",
+    "ROOT_external_before_and_alwayspost": "PASS exact_binding_count48 in each original capture, with parentbinding separately recorded; dispatch45/49 not treated as original census. All39 cfg rows currently rehashed exact.",
+    "ROOT_release_review_self_config_bindings_unchanged": true,
+    "configured_static_wrapper": "Original process.wait returned10 at19.6863969s; no timeout/fallback flag recorded. No signal/retry byreviewer.",
+    "current_worktree_after_this_original_attempt": "Separate writer announced format-only child00b1; this review does not claim currentFS still c97 or admit that unreviewed successor. Originalc97 Git source/actual prepost retained.",
+    "descendant_reader_final_cleanup": "UNREPORTED_UNKNOWN; source preservation/outer zero guard is not cleanup proof.",
+    "original_before_and_child_alwayspost_source_guard": "PASS currentc97 at actualcapture1442 typedFS/prepared30/fiveconfigs/historical15; not process cleanup",
+    "original_earlier1075FAIL_and_c214_STATIC_HOLD": "RETAINED_UNCHANGED"
+  },
+  "outer_returncode": 1,
+  "reviewer_inspection_history": "A batched source search included nonexistent devutils/tasks.py; search exit2 was a metadata-inspection path miss, no sourcegate/tool execution. Current failure identified from original complete logs before proposal.",
+  "reviewer_operations": "Read-only original raw logs/XML/terminal/hash/AST/config/installed metadata/immutable Git file hashes; no Ruff/version/test/helper import/gateway/retry/source mutation",
+  "root_owner_binding": {
+    "bytes": 1166,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-pr307-currentc97e-reviewed-token-light-once2-v3-outer/OWNERFINAL-root-one-original-reviewed-currentc97e-token-light-once2-v3-outer.json",
+    "sha256": "54804c341fc30a3fb33f7c3fc73ed7aeecb09537acb7a6bc489448711f7cea88"
+  },
+  "safe_original_evidence_bindings": [
+    {
+      "bytes": 1166,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-pr307-currentc97e-reviewed-token-light-once2-v3-outer/OWNERFINAL-root-one-original-reviewed-currentc97e-token-light-once2-v3-outer.json",
+      "sha256": "54804c341fc30a3fb33f7c3fc73ed7aeecb09537acb7a6bc489448711f7cea88"
+    },
+    {
+      "bytes": 279,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/original-terminal.json",
+      "sha256": "1e32aaa379fa33103e59b0cb13b721d262ede7532263162df7e4388740533795"
+    },
+    {
+      "bytes": 896,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-pr307-currentc97e-reviewed-token-light-once2-v3-outer/external-before-envelope.json",
+      "sha256": "faafc726e75e8dd3c720a523fe92b17aafd8cf377cab6fa80781f3e639d35db0"
+    },
+    {
+      "bytes": 896,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-pr307-currentc97e-reviewed-token-light-once2-v3-outer/external-always-post-envelope.json",
+      "sha256": "faafc726e75e8dd3c720a523fe92b17aafd8cf377cab6fa80781f3e639d35db0"
+    },
+    {
+      "bytes": 659,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-TOKEN-LIGHT-once2-gateway-boundary-PREEXECUTION/root-one-TOKEN-LIGHT-once2-release.json",
+      "sha256": "a07bdbe8b2e154248950bd633cded340d0c7c4204cb707ec63d5c8317fb4a4a8"
+    },
+    {
+      "bytes": 9667,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-currentc97e-token-once2-independent-PREEXEC-review/OWNERFINAL-independent-named-currentc97e-config-v3-token-once2-PREEXECUTION-GO.json",
+      "sha256": "3b4192fdc2656898c30044dcc995b0accb78ed7341bcf002fcea9879aacd60d3"
+    },
+    {
+      "bytes": 5333,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-reviewed-pr307-currentc97e-token-light-once2-v3-parent.py",
+      "sha256": "32f0adacf4e55cecf9805d3c833c400b9c17e03aa6bcb8583b73fd6da8517994"
+    },
+    {
+      "bytes": 436,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/doctor/terminal.json",
+      "sha256": "b6937064a258be88290d1ac70f5452d3f6eb6caea6508b58816f00209260d315"
+    },
+    {
+      "bytes": 334,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/doctor/stdout.bin",
+      "sha256": "af93a9faa034da4c57f64b6f421eef915fc9742c6ec73e6013e0404e04e99211"
+    },
+    {
+      "bytes": 13153,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/doctor/stderr.bin",
+      "sha256": "9f243e5fce51d70240466c6da1e26a2e458622f5c7d065c6e62cbf7d6624863a"
+    },
+    {
+      "bytes": 1567,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/own-five-origins/terminal.json",
+      "sha256": "f59785781e72dcc152a581c0a7baba77c963d90cfa1d6d4e4af0e7592ac75637"
+    },
+    {
+      "bytes": 3192,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/own-five-origins/stdout.bin",
+      "sha256": "18a3491fc5e3200275e08fd82edc0ed984aac30bbf35a5f83b7ef7e2bb237ad8"
+    },
+    {
+      "bytes": 3523,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/own-five-origins/stderr.bin",
+      "sha256": "c2bbe631ad60da7c3acef3c27f387a602c15cb1e265b56046d2b3d0b27bee3bf"
+    },
+    {
+      "bytes": 442,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/toolkit/terminal.json",
+      "sha256": "1e9bbcc312078d18f7d394d49a4780eb30e6226d1f2626346d0de7623210835c"
+    },
+    {
+      "bytes": 1460,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/toolkit/stdout.bin",
+      "sha256": "6077f2ff6b7c589a00d0ee725d5746e59555df2aa77c69f49c4e94e8f9e4a919"
+    },
+    {
+      "bytes": 13154,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/toolkit/stderr.bin",
+      "sha256": "3846b52eed3592c94d6575e4d04edabd637c4081c799c718f45e379a327dd278"
+    },
+    {
+      "bytes": 30055,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/toolkit/junit.xml",
+      "sha256": "0138560236e70d18d2312c9967d1a19707111cf92faf2ba7a92e57c72219df94"
+    },
+    {
+      "bytes": 679,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/token-RED-parent2314/terminal.json",
+      "sha256": "c6951c7bb48e189c613cb94426eebab31e7b62b26c534cc24d47822e03543463"
+    },
+    {
+      "bytes": 5433,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/token-RED-parent2314/stdout.bin",
+      "sha256": "8620efd0ca0c4e1443f30cd2a1004a3d5228a3b699fff3d3bde014947191e33e"
+    },
+    {
+      "bytes": 4851,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/token-RED-parent2314/stderr.bin",
+      "sha256": "d5bf2d45cae7122a274e902fd503168c092ed7420f1ad6c4615e2f38c370f004"
+    },
+    {
+      "bytes": 4496,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/token-RED-parent2314/junit.xml",
+      "sha256": "3316b7e9bc0f584f841ee0abcb08a07f68af16c39cae2e6a7eeeeeb84dd04e94"
+    },
+    {
+      "bytes": 650,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/token-release-line-GREEN/terminal.json",
+      "sha256": "a2f74a443ee018899c019ca8a4ff1763c6c51ffea020d083be57a7a03455d03f"
+    },
+    {
+      "bytes": 13993,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/token-release-line-GREEN/stdout.bin",
+      "sha256": "7db0b92674eb1cea39e60722cedabf87c6a1b3dee8233629768017a7424b9975"
+    },
+    {
+      "bytes": 3522,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/token-release-line-GREEN/stderr.bin",
+      "sha256": "67730ae8e73807b9782c7aace67e639cbf2708924a01b3d525f2ce8ed0fea095"
+    },
+    {
+      "bytes": 16357,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/token-release-line-GREEN/junit.xml",
+      "sha256": "a1288505ea65cf92f13b8cbce76b16b381d0fde9a2dbffe398ecde99802a1fbc"
+    },
+    {
+      "bytes": 620,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/guard-focus/terminal.json",
+      "sha256": "d450a9871cc5a76c006570f6d32305c91e56e3020938055a37745cd59ba68bb1"
+    },
+    {
+      "bytes": 6272,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/guard-focus/stdout.bin",
+      "sha256": "57a7e1137e05ec5ad52440daec5e8fd1939119c3e39da3719fb80c250d825a98"
+    },
+    {
+      "bytes": 3522,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/guard-focus/stderr.bin",
+      "sha256": "e4f5978fb65c8f0d537564c345fccfb559724a3a2858030c2c6116d8ba7e5ebd"
+    },
+    {
+      "bytes": 6813,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/guard-focus/junit.xml",
+      "sha256": "33182fe3dc48a2867b54dfc4dd7851589588b43a6b31a2b64807bb21a5ba5900"
+    },
+    {
+      "bytes": 1416,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/configured-static/terminal.json",
+      "sha256": "cf3645b04082bfb2e140746a8d0309afa0e1968e65ad66defb49367d9fe2885f"
+    },
+    {
+      "bytes": 2955,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/configured-static/stdout.bin",
+      "sha256": "357fbb18e20a85e04677f495ffd344014ea895285827547630f9f131fc767511"
+    },
+    {
+      "bytes": 5413,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307-currentc97e-token-light-once2-owned/configured-static/stderr.bin",
+      "sha256": "e0918b583a1d668d4cb39f2eb883a3feb9b18bfb518fefaff3b4619a91a59f53"
+    },
+    {
+      "bytes": 22981,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/devutils/.venv/lib/python3.12/site-packages/ruff-0.1.15.dist-info/METADATA",
+      "sha256": "12996545490923e7c0596e63f1e4ecf883d40740df883e375f60357380674852"
+    },
+    {
+      "bytes": 20325104,
+      "mode": "0o711",
+      "path": "/workspace/engineering/pr307/devutils/.venv/bin/ruff",
+      "sha256": "01330d499829a450228cf386b6132966c7c5304d5569c661d148d501161936ce"
+    },
+    {
+      "bytes": 20325104,
+      "mode": "0o711",
+      "path": "/workspace/engineering/pr307/action_server/.venv/bin/ruff",
+      "sha256": "01330d499829a450228cf386b6132966c7c5304d5569c661d148d501161936ce"
+    },
+    {
+      "bytes": 328,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/devutils/ruff.toml",
+      "sha256": "b0514bf74bdc31e2688f056804b003289bb14baedb6868f64e13f2ff163c0d63"
+    },
+    {
+      "bytes": 91377,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr307/devutils/poetry.lock",
+      "sha256": "22bf11dae2a1ed46de5024da774dde4fe778c206d720929fba9244819f3b0b6e"
+    },
+    {
+      "bytes": 8893,
+      "mode": "0o755",
+      "path": "/workspace/engineering/pr307/developer/toolkit.py",
+      "sha256": "e1a3f96b57c31be2a0db5cdd3d63ce9ac243a9e8e29dff5ce6e07fd897fb605f"
+    },
+    {
+      "bytes": 752,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-token-test-configured-format-owned/original-format-terminal.json",
+      "sha256": "e8b6b0af232a702caebd2063149a9986e0bcaa527abc3d84e4144c4a0512e0b5"
+    }
+  ],
+  "schema": 1,
+  "source": "c97edfd10edb5b1c63f8a6371bfd2905996a2da2",
+  "status": "FAIL_CONFIGURED_DEVUTILS_PACKAGE_RUFF_FORMAT_CHECK_NO_SOURCE_PUSH",
+  "tree": "f8d3477451fa601643ef6c06f6b1e616e2407643",
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,1 @@
+Audit every consumed configuration address against the frozen binding, including literal filenames and nested generated-code outputs. At an authority boundary, capture the bytes once, verify their hash, and parse that same buffer; hashing one read and parsing another does not prove the parsed decision was authenticated.

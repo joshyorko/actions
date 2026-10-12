@@ -1,0 +1,10 @@
+{
+  "staged_files_before_this_receipt": 2994,
+  "staged_bytes": 45263340,
+  "git_blob_SHA1_exact_body_mismatches": 0,
+  "preservation_policy": "Historical original source/patch bytes kept exact; no formatter or whitespace cleanup of originals. Git copies are evidence, not accepted application changes.",
+  "git_diff_cached_check": "Reports original archived source whitespace; no canonical handoff or guide finding. Not claimed PASS.",
+  "archived_whitespace_findings": 619,
+  "private_diff_check_output_sha256": "b7b9a65e0060b660a28626427d4339ff9678345e8362183bdf2b9d2849e98a7a",
+  "no_tests_builds_or_runtime_acceptance_executed": true
+}

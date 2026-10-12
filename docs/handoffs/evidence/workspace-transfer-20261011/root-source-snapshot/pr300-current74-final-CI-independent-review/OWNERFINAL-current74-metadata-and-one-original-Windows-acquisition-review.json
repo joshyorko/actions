@@ -1,0 +1,73 @@
+{
+  "decision": "GO_COMPLETE_DECLARED_CURRENT_PR_RUN_JOB_METADATA_AND_ONE_WINDOWS_ORIGINAL_ACQUISITION_FINAL_MERGE_HOLD",
+  "source": {
+    "head": "74beef4d220c3a1e8f983cecd42b9bb84ac75e79",
+    "tree": "2238ed312babba9fd5ad89a3a1cc581ca6ad2dcf",
+    "target": "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+    "typed_Git_FS_entries": 1423,
+    "clean": true
+  },
+  "PR_flows": 6,
+  "declared_jobs": 19,
+  "actual_terminal_success_jobs": 19,
+  "pending_or_skipped_jobs": 0,
+  "late_publisher": 114477246440,
+  "aux_push_triggered": false,
+  "reviews": 0,
+  "threads": 0,
+  "draft": true,
+  "mergeable_clean": true,
+  "original_full": {
+    "pass": 1325,
+    "skip": 13,
+    "failed": 0,
+    "errors": 0,
+    "unique_nodes": 1338,
+    "actual_pytest_workers": [
+      "gw0",
+      "gw1"
+    ],
+    "created": "2/2",
+    "warnings": 15,
+    "pytest_seconds": 150.09,
+    "outer_seconds": 157.6333483720009,
+    "configured_transport_module_nodes": 30,
+    "transport_all_pass": true,
+    "RCC_solver_worker_lines": "Distinct producer scope; never evidence of pytest worker count"
+  },
+  "original_full_refs_rehashed": 129,
+  "proof": {
+    "path": "/workspace/engineering/pr300-current74-final-CI-independent-review/complete-source-and-metadata-proof.private.json",
+    "bytes": 458143,
+    "sha256": "a557f13bfb9884398a5bdc1d583dce1a9ca5ea6a62ce2b651a23bf7de6a0de33"
+  },
+  "Windows_log_acquisition_proposal": {
+    "job": 114475648454,
+    "run": 38141331782,
+    "head": "74beef4d220c3a1e8f983cecd42b9bb84ac75e79",
+    "base": "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+    "attempts": 1,
+    "endpoint": "repos/joshyorko/actions/actions/jobs/114475648454/logs",
+    "scope": "Acquire one original private decoded log once; preserve transport and decoded hashes; validate actual checkout and complete terminal census before final merge admission; no artifact or retry",
+    "admission": "GO_ONE_ORIGINAL_CURRENT_WINDOWS_LOG_ACQUISITION_ONLY"
+  },
+  "holds": [
+    "Original current Windows checkout/terminal log pending",
+    "Synthetic local object unavailable; API tree/parents pending",
+    "Separate statuses/check-runs/protection originals unavailable; 403 policy UNKNOWN not bypass",
+    "Draft readiness required before normal merge",
+    "No native/private/whole86/release qualification"
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md accepted checkpoint event-specific/late-job/checkout lessons reused",
+    "Durable_learning_captured": "Derive PR and push job inventories from separate actual event deltas, include needs-created publishers, and distinguish terminal metadata from original checkout/test evidence.",
+    "Evidence": {
+      "declared_workflows": 6,
+      "late_publisher": 114477246440,
+      "event_deltas_separately_derived": true
+    },
+    "Stale_or_ambiguous_guidance_removed": "No old784 WindowsFAIL or old Copilot/job counts carried to current74; step skips distinguished from skipped jobs.",
+    "Remaining_uncertainty": "Actual current Windows checkout and inaccessible policy evidence pending."
+  },
+  "Upstream_disposition": "none"
+}

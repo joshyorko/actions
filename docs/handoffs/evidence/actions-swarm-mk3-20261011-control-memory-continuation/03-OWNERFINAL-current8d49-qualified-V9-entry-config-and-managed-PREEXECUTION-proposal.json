@@ -1,0 +1,133 @@
+{
+  "schema": 1,
+  "status": "NAMED_CURRENT8D49_V9_SOURCE_QUALIFIED_CONFIG_PREEXECUTION_PROPOSAL_NATIVE_HOLD",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "label": "control3",
+  "config": {
+    "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+    "bytes": 765564,
+    "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25",
+    "mode": "0o600"
+  },
+  "cache_plan_sha256": "1d0af9c61e34ed5e9ed20fb1a21a7240f59974ba8102c7de57141cfccae0da18",
+  "source_V9_proposal": {
+    "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/OWNERFINAL-current8d49-named-V9-entry-bootstrap-source-and-real-import-boundary-controls.json",
+    "bytes": 6824,
+    "sha256": "6b5fe2d1b6f260b44f3f0aaf3652543d86242afe265b827bef24f314c11fa440",
+    "mode": "0o400"
+  },
+  "source_V9_independent": {
+    "path": "/workspace/engineering/rcc-current8d49-V9-entry-bootstrap-independent-source-review/OWNERFINAL-independent-current8d49-V9-entry-bootstrap-SOURCE-review.json",
+    "bytes": 5852,
+    "sha256": "bfce810be260cf7b9630516777fc9c6c9197c976feffa16927db22396d032c8b",
+    "mode": "0o400"
+  },
+  "constructors": [
+    {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/build_exact_current8d49_V9_control3_config.py",
+      "bytes": 4712,
+      "sha256": "26185a654ca76f583b74865642cf245456e248ff1b3d5b657aa6d49b91ca7767",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/build_exact_current8d49_V9_config_with_source_review_v2.py",
+      "bytes": 2125,
+      "sha256": "7b84bc66b116efd13f85d8cfdbec05f881e6e97a16c250c86e83fcbca0be5630",
+      "mode": "0o444"
+    }
+  ],
+  "data_only_real_package_all_entry_plan_control": {
+    "observed_exec_tool_chunk": "e2a683",
+    "observed_returncode": 0,
+    "code": {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/validate_named_V9_config_plan_import_only.py",
+      "bytes": 2256,
+      "sha256": "525a74f8f1ee8ee7f144bc495c838c45441a86323042dccf973c98a7c86c38e7",
+      "mode": "0o444"
+    },
+    "outcome": "Six named entries imported; gateway last call wrapper; original transport __file__ preserved; confige66 cacheplan1d0 valid; no main/native/root4 creation",
+    "configv2_correspondence": "Only appended independent review/constructor/proof bindings, otherwise e66 raw JSON fields preserved; data-only cacheplan/source/root/argv unchanged, no repeated control needed"
+  },
+  "current_counts": {
+    "source_typed": 1440,
+    "original_V8_bindings_preserved": 291,
+    "V9_initial_bindings": 305,
+    "final_V9_bindings": 308,
+    "native_historical_members": 1192,
+    "prepared_inputs": 30,
+    "own_origins": 5,
+    "declared_pytest_selectors": 2,
+    "actual_boundary_controls_expected_outcomes": 8
+  },
+  "original_input_ownership": "Original237 historical rows retained exact(path,SHA,mode), old source fixture vs separate live8d49 binding and originaldd091/8dc aliases retained; no omissions or re-created bytes",
+  "exact_behavior_delta": "Fixed control3 root3\u21924 process-local binding after full originalROOTS map admission; other versions/policy functions/modes/UIDGID/source/features unchanged. New wrapper independently bootstraps paths before importing old transport.main. All V8 files/config/release/FAIL retained.",
+  "execution_argv_template_NOT_GRANTED": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "900s",
+    "bash",
+    "-c",
+    "source /workspace/actions-cloud/activate.sh && exec \"$@\"",
+    "current8d49-managed-v9-once",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/managed_one_version_entry_v9.py",
+    "--config",
+    "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+    "--config-sha256",
+    "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25",
+    "--release",
+    "/workspace/engineering/root-rcc-current8d49-control3-V9-one-release.json",
+    "--release-sha256",
+    "ROOT_DISTINCT_HASH_REQUIRED_NOT_GRANTED",
+    "--label",
+    "control3",
+    "--log-root",
+    "/workspace/engineering/root-rcc-owned-cache-one-current8d49-control3-v9-1"
+  ],
+  "root_adoption_contract_NOT_GRANTED": {
+    "schema": 1,
+    "status": "ROOT_RELEASE_SINGLE_VERSION",
+    "config_sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25",
+    "label": "control3",
+    "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+    "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+    "source_full_sha256": "54292bf9c05c9921949ca7710aaf27842d2d1562f6b1ee4a9d86377c88f43472",
+    "source_independent_sha256": "b0d1c4ee4cee11fc3c2ffd9f6fece609869fa4b447d43bfb8c91ca4a2bf6222b",
+    "source_full_independent_sha256": "073e235afffab50dee204bcaae236e77ceb8e23644db15a90a0e56d48dc8dca9",
+    "serialized_no_other_heavy_or_devshm_mutations": true,
+    "cache_plan_sha256": "1d0af9c61e34ed5e9ed20fb1a21a7240f59974ba8102c7de57141cfccae0da18",
+    "cache_configuration_independent": "REAL_NEW_REVIEW_BINDING_REQUIRED"
+  },
+  "native_admission_still_REQUIRED": [
+    "Independent exact current V9 CONFIG review with compatible schema/status/source/tree/label/config/cacheplan",
+    "Distinct root once release matching new config, cacheplan, independent review; this proposal grants no execution",
+    "Immediately fresh workspace>=1288490189 and SHM>=3865470567; no sourceFULL-onlyTMP floor imported",
+    "Fresh log root and root4 ABSENT; no other heavy/source/devshm mutation",
+    "Managed activation19/PATH, source1440/prepared30/own5/native1192/bindings/temporal2 exact before and alwayspost"
+  ],
+  "current_capacity_observation_not_future_grant": {
+    "/workspace": 1338499072,
+    "/dev/shm": 3901190144,
+    "/tmp": 450813952
+  },
+  "original_native_V8_result": "PRE_MAIN_IMPORT_FAILURE; no functional3/5/7276 admission. Original suffix3 remains absent, never reused",
+  "original_config_and_historical_FAILURES": "V8a209/200003 and c460/ind044 unchanged; originalROOT postFAIL/sourceFULL supplement retained; Windows/source7MypyHOLD retained separately",
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md",
+    "Exact delta": {
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/canonical-independent-package-python-entry-proposed.md",
+      "bytes": 458,
+      "sha256": "066fed0a78e012b2952f688306974e3dbf02587b40051420140717dc3c89fda0",
+      "mode": "0o400"
+    },
+    "Durable learning captured": "Final independent packagePython import boundary must be tested; bootstrap source paths fixed; pre-main failure no RCC functionality; fresh once root even absent predecessor",
+    "Evidence": "Original failurec460 + source6b5/import8controls + independentbfce; same data-only current config cacheplan",
+    "Stale or ambiguous guidance removed": "Parent bootstrap not treated as child inheritance or native success; wholecache behavior explicitly differs only once-root identity",
+    "Remaining uncertainty": "New independent configuration/root adoption/actual3 and later5/7276 not qualified; internal readers/persistent/reload/release HOLD"
+  },
+  "Upstream disposition": "none",
+  "worker_external_messages": "NONE",
+  "native_product_tests_gateway_executed": "NOTRUN"
+}

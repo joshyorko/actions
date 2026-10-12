@@ -1,0 +1,122 @@
+{
+  "actual_child_result_binding": {
+    "bytes": 2781,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-current-e2-one-inner-data-inspection-owned-v2/OWNERFINAL-one-current-e2-inner-data-inspection-result.json",
+    "sha256": "a3ba900df40cfb3389c66d0f167864aef8d96ba4a1039d662fc185317d319cce"
+  },
+  "actual_counts": {
+    "Linux_Mac_directory_entries_each": 27,
+    "Windows_directory_entries_each": 0,
+    "each_wheel_Python": 203,
+    "each_wheel_RECORD_hashed": 222,
+    "each_wheel_RECORD_rows": 223,
+    "each_wheel_nonPython": 16,
+    "each_wheel_package_regular": 219,
+    "sdist": 1,
+    "sdist_inventory_regular": 223,
+    "sdist_package_regular": 218,
+    "tracked217_equal_in_each_distribution": true,
+    "tracked_absences": 0,
+    "tracked_differences": 0,
+    "wheels": 6
+  },
+  "artifact_id": 11708952448,
+  "decision": "GO_CURRENT_E2_ORIGINAL_SEVEN_DISTRIBUTION_INNER_STRUCTURAL_INTEGRITY_ONLY",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; verified reuse of f797 entry/boundary lesson and existing per-platform RECORD/source/generated authority guidance.",
+    "Durable_learning_captured": "Current original distribution counts are now measured independently per platform; equal tracked bodies and valid RECORD do not establish builder checkout, generated OAuth/frontend authority or consumer/release acceptance.",
+    "Evidence": "Original0 parent5.197922s and protectedpostPASS; all7 hash-bound reports,223/222 wheel RECORD,217 body comparisons matching authentic Git rows; empty OAuth and separate HTML digests. Windows has zero directory entries and unavailable Unix modes, unlike Linux/Mac27.",
+    "Exact_delta": "Accept exact8-line f797 lesson already proposed: unoptimized typed ROOT admission, full ZIP-header preflight and restored real-function controls; retain source/generated/consumer authority separation. No new cosmetic paragraph required for this actual receipt.",
+    "Remaining_uncertainty": "Generated-input/frontend source authority, other builder checkout and every installed/native/private/full release gate remain open.",
+    "Stale_or_ambiguous_guidance_removed": "Predicted219/203/223 labels are replaced by actual measured counts only for this original tuple; old215/full7 and transferFAIL remain historical. No body equality relabeled producer identity or empty content acceptance."
+  },
+  "original_reports": [
+    {
+      "bytes": 226901,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-current-e2-one-inner-data-inspection-owned-v2/private-actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl-inspection.json",
+      "sha256": "926d832e96254fca373a85f7d9a387afc9eddd4bf5f895284b3def0992e81899"
+    },
+    {
+      "bytes": 226714,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-current-e2-one-inner-data-inspection-owned-v2/private-actions_runtime-1.0.3-cp312-cp312-macosx_12_0_arm64.whl-inspection.json",
+      "sha256": "0c93b7245b5dcad8d19898f6b7a66a0502782ce0a15123b7460d13f3273be791"
+    },
+    {
+      "bytes": 219004,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-current-e2-one-inner-data-inspection-owned-v2/private-actions_runtime-1.0.3-cp312-cp312-win_amd64.whl-inspection.json",
+      "sha256": "a93cacfdba80f59aede9a5b5c561492bcc2e697fcb0327f937acfdf2db883906"
+    },
+    {
+      "bytes": 226714,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-current-e2-one-inner-data-inspection-owned-v2/private-actions_runtime-1.0.3-cp313-cp313-macosx_12_0_arm64.whl-inspection.json",
+      "sha256": "7d84a65524c273022678cadc9812ec544950e97765508a47535154828adc0818"
+    },
+    {
+      "bytes": 226901,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-current-e2-one-inner-data-inspection-owned-v2/private-actions_runtime-1.0.3-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl-inspection.json",
+      "sha256": "6d3de4fe57723138cfb44387925068c9913c35e574b5792c1c4aaab19388a3bb"
+    },
+    {
+      "bytes": 219004,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-current-e2-one-inner-data-inspection-owned-v2/private-actions_runtime-1.0.3-cp313-cp313-win_amd64.whl-inspection.json",
+      "sha256": "4389343855e67dbe31892a9f4295570d7871477deac492d5c05709c3db1049e0"
+    },
+    {
+      "bytes": 215851,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-current-e2-one-inner-data-inspection-owned-v2/private-actions_runtime-1.0.3.tar.gz-inspection.json",
+      "sha256": "e6dcae3a4bc01f56cf993a4262eaa20d00620859ac086df0b72d8c7b862c5b19"
+    }
+  ],
+  "original_zip_binding": {
+    "bytes": 80745614,
+    "mode": "0o600",
+    "path": "/tmp/actions-pr221-e2-aggregate-11708952448-one-owned/actions-runtime-dist-11708952448-original.zip",
+    "sha256": "e16a414fefc1778ba49d09c466fd9d8054cfbf952e7766ee5cc6558f871f4def"
+  },
+  "parent_binding": {
+    "bytes": 1550,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-current-e2-one-inner-data-inspection-original-outer-owned-v2/OWNERFINAL-root-one-original-current-e2-inner-data-inspection-outer-terminal-v2.json",
+    "sha256": "60d63b42430bda3005527e6d445df7af7c0ea8ccc8d70d7a307738720472da76"
+  },
+  "preexecution_independent_binding": {
+    "bytes": 9100,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-v2-executor-independent-PREEXECUTION-review/OWNERFINAL-independent-current-e2-inner-executor-v2-PREEXECUTION-review.json",
+    "sha256": "2a39cd0acc247db96ffcd1f798e829d1360eb11e7133ebdd63750507cbee6b4f"
+  },
+  "proof_binding": {
+    "bytes": 12835,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-v2-ACTUAL-independent-review/independent-original-seven-report-count-source-and-authority-proof.json",
+    "sha256": "ce5ddd6e731e5671c505b778b7969dab90cdd1b8af28ca314bdfba79cb96182c"
+  },
+  "proposal_binding": {
+    "bytes": 19182,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/OWNERFINAL-current-e2-inner-data-executor-v2-after-real-controls-PREEXECUTION-six-guards-successor.json",
+    "sha256": "01742c179494b23868a1204a82ece62cacf213de0ba928692df780bf147fde5c"
+  },
+  "qualification": "Exact original result from approved frozen executor with50 real-function controls and runtime17 source/input pre/post checks. Reviewer rehashed reports and cross-checked source/reference/count invariants; did not rerun inspector or read inner archive payloads.",
+  "remaining_holds": [
+    "All seven generated OAuth modules have two empty required strings; required input/content authority remains HOLD.",
+    "Generated/static decoded index987412 and trackedHTML933318 are separately nonempty with distinct digests; no semantic equivalence or generated frontend authority admitted.",
+    "All217 tracked bodies match e2, with available Unix executable modes equal; Windows Unix modes unavailable remains UNKNOWN. This is packaged-body comparison, not builder checkout or compiler causation.",
+    "Linux original synthetic165c ordered[a709,e2]/treeafe separately authenticated; Mac/Windows/sdist builder checkout UNKNOWN. Do not substitute actuale2 for buildcheckout.",
+    "Original transfer6bf OSError9 FAIL retained; separate outer22eed and new innerPASS do not relabel transfer terminal.",
+    "No extracted package, import/install/cold registry/consumer/native/provider/private/code01f/frozenv6/issue or publication/release acceptance.",
+    "Other actual7 package payloads outside217 and generated exceptions include sdist buildmetadata; source authority remains bounded by explicit observed rows."
+  ],
+  "schema": "INDEPENDENT_ORIGINAL_CURRENT_E2_INNER_DATA_ACTUAL_REVIEW",
+  "source": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "tree": "afe2679cc93bf27fa5021c7698ee7ad3ee21a1b9",
+  "upstream_disposition": "none"
+}

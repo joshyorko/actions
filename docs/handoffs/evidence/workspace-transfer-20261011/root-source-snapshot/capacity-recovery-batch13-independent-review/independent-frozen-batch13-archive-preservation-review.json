@@ -1,0 +1,163 @@
+{
+  "capacity": {
+    "independent_current_available_bytes": 1573621760,
+    "root_recorded_post_recovery_available_bytes": 2286272512,
+    "scope": "Different timestamps;current broadsource activity may change available bytes. No capacity operation performed by reviewer."
+  },
+  "counts": {
+    "new_archives": 2,
+    "new_internal_hardlink_headers_resolved": 8,
+    "new_kind_totals": {
+      "directory": 6337,
+      "fifo": 16,
+      "file": 23903,
+      "symlink": 933
+    },
+    "new_logical_regular_payload_bytes": 1229972426,
+    "new_recorded_members": 31189,
+    "prior_archives_original_SHA_bytes_preserved": 29,
+    "prior_complete_private_indices_original_SHA_bytes_preserved": 12,
+    "prior_review_files_rehashed": 15,
+    "prior_safe_summaries_original_hash_preserved": 12,
+    "total_retained_archives_thirteen_batches": 31,
+    "total_retained_private_indices_thirteen_batches": 13
+  },
+  "documentation_improvement": {
+    "Accepted_exact_delta_reused": {
+      "bytes": 1068,
+      "path": "/workspace/engineering/capacity-recovery-independent-review/canonical-completed-scratch-preservation-proposed.patch",
+      "sha256": "7d07065b5bb7742698919997c8c6621cc20d00494741eb5365251ffb09f2d208"
+    },
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "Disposition": "REUSE verified existing7d070 preservation lesson for unchanged reviewed algorithm;no cosmetic or session-diary source addition",
+    "Durable_learning": "Archive only completed scratch with retained completion marker and pre-removal member-byte/metadata verification;retain exact inventories/archives and failed namespaces separately. Byte-preserved recovery is distinct from repeating failed tests or upgrading historical process observations.",
+    "Evidence": "Current31,189 archive-member comparisons including8 internalhardlinks and gzip trailers;exactmodeUIDGIDsymlink/FIFO headers;root source/index/log hash bindings;AST paritybatch12 except3configuration values;prior29archives/12indices and09cdcrunner hashes exact.",
+    "Remaining_uncertainty": "Historical complete handlecensus,ACL/xattr/inode/rootmetadata/preciseTARmtime and removed-source timestamps remain unqualified;failed563d content and state not inspected.",
+    "Stale_or_ambiguous_guidance_removed": "No prior guidance removed. Explicitly prevents capacity recovery or post-removal archive readback from being read as full historical handlecensus,failedgatePASS,universal metadata preservation or native acceptance."
+  },
+  "historical_before_removal_scope": "Owner reported completed session10168 exit0. Source algorithm, original index/log and archive flags retain verification-before-exact-removal ordering. This review streams retained archives after removal;it does not independently replay the removed expanded filesystem or historical handles.",
+  "independent_archive_stream_proof": {
+    "bytes": 3561,
+    "path": "/workspace/engineering/capacity-recovery-batch13-independent-review/independent-two-archive-stream-preservation-proof.json",
+    "sha256": "7c9d1347be7c655a32c61a0ae5afbfb74e146873c6e70cc3c196eba502d502f5"
+  },
+  "independent_prior_reference_proof": {
+    "bytes": 14714,
+    "path": "/workspace/engineering/capacity-recovery-batch13-independent-review/independent-prior29-archives12-indices-and-original-reference-proof.json",
+    "sha256": "3026c493faa4d3eaf532e1a42c92529d2d207ef153c9384dee325fddfa308806"
+  },
+  "limitations": [
+    "No GC/extraction/restore/removal/source/test/gateway/download/native/provider/remote/push operation by reviewer",
+    "No historical complete handlecensus or universal process-reaping claim",
+    "No ACL/xattr/inode/rootmetadata/preciseTARmtime admission",
+    "No retroactive failedgate or source/native/release admission",
+    "No private index/memberpaths/payload/config/rawarchive content in safe stdout"
+  ],
+  "observed_at": "2026-10-11T09:58:38.806298+00:00",
+  "owner_final_safe_summary": {
+    "bytes": 2244,
+    "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch13.json",
+    "sha256": "e95c0d759973dde731805be7ea41a79b79fcd01a84cce1be6c9e470d17c0a6fb"
+  },
+  "prior_immutable_baselines": {
+    "batch12_review": {
+      "bytes": 7693,
+      "path": "/workspace/engineering/capacity-recovery-batch12-independent-review/independent-batch12-archive-preservation-review-final.json",
+      "sha256": "ef773bf11d9c72a3fba5b72461bdb0722db4dea366edad83553cc062a4324dc8"
+    },
+    "failed563d": "Existence only;no baseline byte/member/state/hash or retro gate admission",
+    "original_V5runner": {
+      "bytes": 35497,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v5.py",
+      "sha256": "09cdc6b19f5d3d9cc94fadca23373108868521e0378d33960146b1a8522e88ad"
+    }
+  },
+  "private_complete_index": {
+    "bytes": 12870622,
+    "path": "/tmp/actions-completed-scratch-recovery-batch13/private-complete-inventory-and-recovery.json",
+    "sha256": "226d8039eb15b841d59feed312645481963398558d5e81c3532cbcaa2eaf93f4"
+  },
+  "readonly_inspector_disposition": {
+    "initial_AST_guard_assumed_scalar_assignment": "Owned reader corrected to compare unchanged AST shapes and only permitted constant values for Path calls;root recovery script not changed/executed",
+    "initial_legacy_summary_assumed_archives_key": "Owned reader supports retained initial recovery_records schema;old summary unchanged",
+    "no_product_source_or_capacity_failure_reclassification": true,
+    "original_owned_initial_inspectors_preserved": true
+  },
+  "recovery_script": {
+    "bytes": 5258,
+    "path": "/tmp/actions-capacity-recovery-batch13.py",
+    "sha256": "a5462314ec21cd6c3f497b039f1f0aac1abfc6860486620a1f3164121558c5da"
+  },
+  "schema": "actions.independent-completed-scratch-batch13-preservation-review/v1",
+  "terminal_log": {
+    "bytes": 344,
+    "path": "/tmp/actions-capacity-recovery-batch13.log",
+    "sha256": "56fcf95b96ad9b923c70a404035bfba5fa740ca15991ff4967081ee4d3162a4e"
+  },
+  "two_safe_archive_aggregates": [
+    {
+      "all_inventory_names_exact_unique": true,
+      "all_recorded_member_kind_mode_UID_GID_exact": true,
+      "all_regular_and_internal_hardlink_size_SHA_exact": true,
+      "archive": "/tmp/actions-completed-scratch-recovery-batch13/1664205128f89d2a.tar.gz",
+      "archive_bytes": 249583283,
+      "archive_sha256": "9c0ee080689f65af14c6784fa8c9c63ee782e3aa77cfe999577e8ebdcf04a93f",
+      "completed_recycle_true_marker_verified": true,
+      "gzip_CRC_and_size_trailer_verified": true,
+      "internal_hardlink_headers": 4,
+      "logical_regular_file_bytes_verified": 603055543,
+      "member_kind_counts": {
+        "directory": 3000,
+        "fifo": 8,
+        "file": 11764,
+        "symlink": 468
+      },
+      "original_expanded_namespace_currently_absent": true,
+      "original_namespace": "/workspace/actions-cloud/robocorp/temp/1664205128f89d2a",
+      "recorded_members": 15240,
+      "root_headers_excluded_from_metadata_admission": 1,
+      "symlink_targets_exact_no_dereference": true,
+      "tar_headers": 15241
+    },
+    {
+      "all_inventory_names_exact_unique": true,
+      "all_recorded_member_kind_mode_UID_GID_exact": true,
+      "all_regular_and_internal_hardlink_size_SHA_exact": true,
+      "archive": "/tmp/actions-completed-scratch-recovery-batch13/e9752d23b1fadd92.tar.gz",
+      "archive_bytes": 250216680,
+      "archive_sha256": "05053b891be3647313eefc57dc04f5e1460cb7cb519e46cda8407b11cd30423c",
+      "completed_recycle_true_marker_verified": true,
+      "gzip_CRC_and_size_trailer_verified": true,
+      "internal_hardlink_headers": 4,
+      "logical_regular_file_bytes_verified": 626916883,
+      "member_kind_counts": {
+        "directory": 3337,
+        "fifo": 8,
+        "file": 12139,
+        "symlink": 465
+      },
+      "original_expanded_namespace_currently_absent": true,
+      "original_namespace": "/workspace/actions-cloud/robocorp/temp/e9752d23b1fadd92",
+      "recorded_members": 15949,
+      "root_headers_excluded_from_metadata_admission": 1,
+      "symlink_targets_exact_no_dereference": true,
+      "tar_headers": 15950
+    }
+  ],
+  "upstream_disposition": "none",
+  "verdict": "GO_SCOPED_BATCH13_ARCHIVE_AND_PRIOR_REFERENCE_PRESERVATION_ONLY",
+  "verified": {
+    "FIFO_headers_type_metadata_no_pipe_open": true,
+    "batch13_AST_exact_reviewed_batch12_except_DEST_STAGE_NAMES_constant_values": true,
+    "complete31189_private_index_names_unique_equal_archive_members": true,
+    "existing_two_expanded_namespaces_absent": true,
+    "failed563d_exists_only": true,
+    "gzip_EOF_CRC_and_ISIZE_trailers": true,
+    "new_index0600_parent0700_all31_archives_regular0600": true,
+    "original_V5runner09cdc_SHA_bytes_unchanged": true,
+    "recorded_kind_mode_UID_GID": true,
+    "recycle_now_True_complete_markers": true,
+    "regular_and_resolved_internal_hardlink_bytes_size_SHA": true,
+    "symlink_targets_no_dereference": true
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "activation": {
+    "ACTIONS_CLOUD_ROOT": "/workspace/actions-cloud",
+    "ACTIONS_HOME": "/workspace/actions-cloud/actions-home",
+    "ACTIONS_RUNTIME_TEST_PYTHON": "/workspace/actions/action_server/.venv/bin/python",
+    "BUILDX_CONFIG": "/workspace/actions-cloud/cache/buildx",
+    "GOCACHE": "/workspace/actions-cloud/cache/go-build",
+    "GOMAXPROCS": "2",
+    "GOPATH": "/workspace/actions-cloud/cache/go",
+    "PLAYWRIGHT_BROWSERS_PATH": "/workspace/actions-cloud/cache/playwright",
+    "POETRY_CACHE_DIR": "/workspace/actions-cloud/cache/pypoetry",
+    "POETRY_CONFIG_DIR": "/workspace/actions-cloud/config/pypoetry",
+    "POETRY_NO_INTERACTION": "1",
+    "PYTEST_XDIST_AUTO_NUM_WORKERS": "2",
+    "ROBOCORP_HOME": "/workspace/actions-cloud/robocorp",
+    "ROBOTS_HOME": "/workspace/actions-cloud/robots-home",
+    "UV_CACHE_DIR": "/workspace/actions-cloud/cache/uv",
+    "XDG_CACHE_HOME": "/workspace/actions-cloud/cache",
+    "XDG_CONFIG_HOME": "/workspace/actions-cloud/config",
+    "npm_config_cache": "/workspace/actions-cloud/cache/npm"
+  },
+  "argv": [
+    "/workspace/engineering/pr308/action_server/.venv/bin/python",
+    "-m",
+    "pytest",
+    "-n0",
+    "-q",
+    "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/test_actual_inner_boundaries_v2.py",
+    "--tb=short",
+    "--basetemp=/workspace/engineering/root-current-e2-inner-service-free-controls-v2-once-owned/basetemp",
+    "-o",
+    "tmp_path_retention_policy=all",
+    "--robocorp-log-output=/workspace/engineering/root-current-e2-inner-service-free-controls-v2-once-owned/robot-output",
+    "--robocorp-log-max-file-size=10MB",
+    "--robocorp-log-max-files=999",
+    "--junitxml=/workspace/engineering/root-current-e2-inner-service-free-controls-v2-once-owned/junit.xml"
+  ],
+  "bindings": [
+    {
+      "bytes": 78788,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/frozen-executor-inputs.json",
+      "sha256": "f1bae88f9cee392f6623ac6f4c3c500bea65bd39c246df0dec002c4dc7911b9a"
+    },
+    {
+      "bytes": 23323,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/inspect_current_e2_inner_once_v2.py",
+      "sha256": "d83a7aae88a98a694310e6a1e60de2ea7e362604ee8c5d345cc6a38b4591177c"
+    },
+    {
+      "bytes": 11388,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/test_actual_inner_boundaries_v2.py",
+      "sha256": "879a1370f1613a1ec832a04d8b0f9f0dde37dab0ea96f52714f47b6f16acc9f2"
+    },
+    {
+      "bytes": 498,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/syntax-control-plan-noexecution-proof.json",
+      "sha256": "ed852b1c52eb99fdf667bb3b1697ffd0c68ad1535f1c07eb8d894909ef2d4227"
+    },
+    {
+      "bytes": 987,
+      "mode": "0o600",
+      "path": "/workspace/actions-cloud/activate.sh",
+      "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+    },
+    {
+      "bytes": 8727,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/prepare_control_plan_and_freeze_v2.py",
+      "sha256": "88086d16b25f6a64afa3ef5e529bb99c764bb738fbd6ffad20a645435b735db9"
+    }
+  ],
+  "owned": "/workspace/engineering/root-current-e2-inner-service-free-controls-v2-once-owned"
+}

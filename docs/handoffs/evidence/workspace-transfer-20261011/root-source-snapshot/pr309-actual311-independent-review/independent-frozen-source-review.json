@@ -1,0 +1,166 @@
+{
+  "verdict": "GO_NORMAL_GUARDED_EXISTING_REF_PUSH_EXACT_0d947f839628cc902bd409a7be93dcb49bc0aa02_ACTUAL311_SOURCE_REFRESH; HOLD_FRESH_HOSTED_MERGE_AND_FULL152",
+  "scope": "independentread-only frozen source/evidence/doc acceptance; no source/gate/native/provider/browser execution or push",
+  "source": {
+    "head": "0d947f839628cc902bd409a7be93dcb49bc0aa02",
+    "tree": "ec4d3d4e6ad9fc0dc9450254698b4827c7f734d5",
+    "parent": "51392cfcb6e8e09968e359e45a9ace3b4c6afbc0",
+    "ordinary_merge_tree": "65b4ed6efe2b26e7192fe8981a84d4fc0050d7fb",
+    "ordered_ordinary_parents": [
+      "41d4ee41190d7d3f3969212471863c70852295ba",
+      "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc"
+    ],
+    "actual_target_tree": "35a5168a3904ba41e29047fec2a4cd3b50880a78",
+    "same_existing_branch": "test/auth-route-census-20261010",
+    "clean": true
+  },
+  "independent_preservation": {
+    "old_and_target_leaf_sets_retained": true,
+    "old_leaves": 1407,
+    "target_leaves": 1409,
+    "final_leaves": 1410,
+    "ordinarynonconflicting_threeway_paths_checked": 1409,
+    "onlyboth_changedguide": [
+      "docs/skills/repository-operations.md"
+    ],
+    "both_parent_guide_addedblocks_retained": true,
+    "ownedimplementation_modes_blobs_unchanged": {
+      "action_server/tests/action_server_tests/test_auth_route_inventory.py": [
+        "100644",
+        "blob",
+        "e1e4b314d6a535fec2175da2b5224105e4d7f8fd"
+      ]
+    },
+    "all_other_nonowned_modes_blobs_exact_target": true,
+    "final_only_delta": "canonicalguide5add1remove",
+    "final_all_other_modes_blobs_equal_tested_union": 1409,
+    "native268_mode_blob_SHA_exact_old_target_reference": true,
+    "selected5_mode_blob_SHA_exact_old_target_reference": true,
+    "whole_github_generator_workflows_exact_actualtarget": true
+  },
+  "behavior_and_negative_control_review": "Unchangedrealroute graph captured at before_start returnsFalse beforepool/Uvicorn; Counter ofrouteclass/Starlettepath_format/complete_sortedmethodtuple recordsmultiplicity/hiddenroute/terminalmount andrejectsextraormissingidentity. Existingstartupbarrier anduncategorizednegative controls meaningful; handwrittenclassification isnotrequestcredentialenforcement oroptionaltransport coverage.",
+  "fresh_actual_source_checks": {
+    "Doctor": "PASS",
+    "Bootstrap": "verified24input_sourcebyteequalprepared/fiveownpyvenvconfigs_present; existingownedBootstraplogPASS;noinstaller",
+    "Toolkit": 69,
+    "scoped_pass": 80,
+    "integration_or_real_RCC_deselected": 1,
+    "source_pass": 1153,
+    "source_skips": 13,
+    "warnings": 15,
+    "full_configured_lint": "Ruffcheck/format/IsortPASS",
+    "configured_typecheck_files": 338,
+    "all_YAML_dependabot_roundtrip": 26,
+    "actual_source_python": "/workspace/engineering/pr309/action_server/.venv/bin/python",
+    "gate_source": "ordinaryunion with finalguide workingtext; frozenchild changesonlyguide andallotherleafpairs match",
+    "canonicaldiffcheck": "PASS"
+  },
+  "original_worker_receipt": {
+    "path": "/workspace/engineering/pr309-actual311-refresh/frozen-source-receipt.json",
+    "bytes": 6413,
+    "sha256": "7654ba25146baecf37b18423183ef3609c5fd231ecc19f81d0d6393fdd258906"
+  },
+  "verified_raw_log_bindings": {
+    "diff-check": {
+      "path": "/workspace/engineering/pr309-actual311-refresh/diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "doctor": {
+      "path": "/workspace/engineering/pr309-actual311-refresh/doctor.log",
+      "bytes": 13484,
+      "sha256": "1ab619a5c7bc4084f6ec170eff3e4aa7f0e2ac9e74e8ca7913ead3aca1d31853"
+    },
+    "full-source": {
+      "path": "/workspace/engineering/pr309-actual311-refresh/full-source.log",
+      "bytes": 297105,
+      "sha256": "c58f73ff1f110da65d912c108f2c8af0bdeb65e6d87d0f90078641f8d2211215"
+    },
+    "generator-roundtrip": {
+      "path": "/workspace/engineering/pr309-actual311-refresh/generator-roundtrip.log",
+      "bytes": 4561,
+      "sha256": "1882e41a2c5fc7f5ff7a1ada6b2225152fb9df7d168bb831954c11b3118fc526"
+    },
+    "scoped": {
+      "path": "/workspace/engineering/pr309-actual311-refresh/scoped.log",
+      "bytes": 4465,
+      "sha256": "0d83fb50ac16ba83d0e6f24e731e1611cfc9da111d803200afa304e1fc74dd24"
+    },
+    "source-union-proof": {
+      "path": "/workspace/engineering/pr309-actual311-refresh/source-union-proof.log",
+      "bytes": 64,
+      "sha256": "aa9494812772b91c6a5314cf87a7a85dfd41167107d5b5d09914fbfb0bc47173"
+    },
+    "static": {
+      "path": "/workspace/engineering/pr309-actual311-refresh/static.log",
+      "bytes": 5692,
+      "sha256": "40321dc6f4731de2a8e883f6cc2158b9608c4545da48e483ea216a7d5a8897f4"
+    },
+    "toolkit": {
+      "path": "/workspace/engineering/pr309-actual311-refresh/toolkit.log",
+      "bytes": 14342,
+      "sha256": "70f1aafce843ccccd8647b0736fb3c3d295616a16cd86be9751300b2bfad6bd8"
+    }
+  },
+  "verified_source_proof": {
+    "path": "/workspace/engineering/pr309-actual311-refresh/source-union-proof.json",
+    "bytes": 42280,
+    "sha256": "3dc8808e32fb4556428b2938206162b9d3f56d52ede57ce538724ab8ef6e0f27"
+  },
+  "verified_source_inspector": {
+    "path": "/workspace/engineering/pr309-actual311-refresh/verify_source.py",
+    "bytes": 3437,
+    "sha256": "8a0538e2698c43adc0ec913487c023b359a4dde49f48f9b8b8ac12e181829347"
+  },
+  "verified_Bootstrap_reuse": {
+    "path": "/workspace/engineering/pr309-actual311-refresh/bootstrap-reuse.json",
+    "bytes": 2720,
+    "sha256": "9d849313554b1ad4733e709c345d57ca3b488136cb2cd49e97cf07bf850c747f"
+  },
+  "original_Bootstrap_binding": {
+    "path": "/workspace/engineering/pr309-bootstrap.log",
+    "bytes": 27576,
+    "sha256": "a2d74004b9b8cc641cc92e26e07157332032c5018a7116ccf2df67a51c91e4ab"
+  },
+  "historical_original_receipts_retained": [
+    {
+      "path": "/workspace/engineering/pr309-refresh-receipt.json",
+      "bytes": 5644,
+      "sha256": "7d1202e83627936ff7813c6601b890ecab7b0bb0beed054e4bb6bc62cffc7c71"
+    },
+    {
+      "path": "/workspace/engineering/pr309-independent-current-review/source-control-prepush-review.json",
+      "bytes": 7679,
+      "sha256": "7374c9eaa420966f6455c7d63c3feea5dc211808cb96c0a21b9cca2acff6f6cb"
+    }
+  ],
+  "cached_old_control_retained": {
+    "receipt": {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/pr309-current-prospective-control.json",
+      "bytes": 2648,
+      "sha256": "434b0a7ae2923029a535cc9c0d8b502d43245f1c3833e102be1f77b329d4be99"
+    },
+    "scope": "Oldfbde/41d tested merge08f051/tree211cea; not the current1c75/5139 union. No earlier CI carried forward."
+  },
+  "held_gates": [
+    "Fresh exactnewhead/source/control/actualtarget19declaredhostedjobs/reviews/threads/draft/policy beforemerge; earlierfbde/sourceheadCI ishistorical, no oldgreen carry.",
+    "If actualtargetadvancesbeforeintegration recomputeordinaryunionandrequiredgates; sourceparity alone notadmissionoflaterbase.",
+    "268+5trackedinputparityis scopedproducer sourceevidence, not newactualwheel/frozen/platform/managedCore/lifecycle/releaseexecution.",
+    "Full#152 missing/wrong/validcredential, GETHEAD/download/WebSocket/streaming/sideeffect rejection and trusted optionaltransport/requestmatrix remainseparateHOLD.",
+    "Private metadata/fullRuntime1.0.3publication andremaining retainedacceptancegraph remainHOLD."
+  ],
+  "canonical_documentation": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "exact_integrated_delta": {
+      "path": "/workspace/engineering/pr309-actual311-independent-review/canonical-integrated-actual311-delta.patch",
+      "bytes": 1238,
+      "sha256": "1371319e50f1fd45f2c8191c6c37f246532077bf4dea018b8046da6458dad347"
+    },
+    "disposition": "GO_INTEGRATED currentfrozen guideclarification; originalimplementation/test assertionsunchanged; no duplicatedsourceproposalneeded",
+    "durable_learning": "Route census compares Counter identities of class/path_format/full sorted methods; duplicated, missing, changed-class/method registrations fail alongside new routes. URL-set equality loses meaningful evidence.",
+    "evidence": "directunchangedsource semanticinspection/currentrawscoped+fullconfigured sourcegates/24inputreuse/268+5sourceparity/26YAMLroundtrip",
+    "stale_ambiguity": "Replaced new-route-only rejection description with precise multiplicity and identity contract",
+    "remaining_uncertainty": "Registration/classification remains distinct from complete missing/wrong/valid credentials and side-effect matrix/full152; current full hosted/native execution pending",
+    "upstream": "none"
+  }
+}

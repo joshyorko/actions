@@ -1,0 +1,88 @@
+diff --git a/docs/program/evidence/wave11/current-engineering-20261011/README.md b/docs/program/evidence/wave11/current-engineering-20261011/README.md
+index ad33b2f0..1e43266f 100644
+--- a/docs/program/evidence/wave11/current-engineering-20261011/README.md
++++ b/docs/program/evidence/wave11/current-engineering-20261011/README.md
+@@ -165,3 +165,83 @@ included. Accepted proposals are adapted into canonical guidance; PostgreSQL
+ already-aborted recovery and native Work Items limitations were already present
+ and are retained without duplicate instructions. No issue closure, publication,
+ infrastructure change, Devsy or Dakota writer occurred. Upstream disposition: none.
++
++The next retained engineering records include the independently accepted Canvas
++V5 execution at source `3ec9d0ac` and native `92498`. The corrected scoped receipt
++`28b2af71` and independent actual review `1848613d` establish one passing named
++Playwright case, five declared tool Runs, two separate resource Runs, sampled
++public Core members, measured launch path, strict Runtime/sampler cleanup and six
++outer reaps. The initial scoped receipt `b475` remains unchanged: its caller labels
++were corrected in the additive successor, without changing raw execution or
++admission. These observations do not establish live browser PID identity, natural
++shutdown, whole-wheel/cold-registry acquisition or the complete Canvas contract.
++Earlier V2, V3 and V4 failed attempts retain their original status.
++
++PR #299 source `2ad0fd6a` is independently reviewed and normally pushed on its
++existing branch after importing actual target `1c7585fe`. All original owned source
++and tests remain intact; full source passes 1,200 tests with 13 skips. Its six
++changed and six added producer inputs prevent old-native qualification. PR #300
++still follows actual accepted #299 integration. PR #282 source `9c8f1c95` now has
++independent source approval and is normally pushed after a test-only staging
++correction: full source passes 1,164 tests with 12 skips, and all 30 tracked YAML
++files parse unchanged. Original Canvas producer differences remain unqualified.
++Fresh hosted CI and all retained production acceptance requirements still apply.
++
++The current #305 Windows and macOS failures are independent fixture boundaries:
++committed LF bytes differ from a CRLF checkout used to construct a synthetic
++public-wheel sample, and file existence exposed an empty PID handoff before
++publication completed. The old #282 staging test mutated after returning the old
++buffer. Original hosted causes beyond those measured boundaries remain unknown;
++cleanup assertions not reached supply no cleanup result. Their immutable failure
++reviews are retained separately from source corrections and the successful V5
++tuple. New source cannot inherit that tuple's execution result.
++
++Workspace ENOSPC interrupted two source gates. Six completed scratch namespaces
++were losslessly archived on an existing mount before their expanded copies were
++removed. Independent review `91848589` streamed all 89,606 recorded members,
++including 18 internal hardlinks, and verified bytes plus recorded metadata. The
++private archives and complete inventory stay outside Git. Unrecorded metadata
++and historical live-handle observations remain explicit limits; failed ENOSPC
++checks remain failed and required fresh runs. No source, receipt, compiled native,
++consumer tree or infrastructure was replaced.
++
++The original public RCC source `44afd960` remains recovered unchanged. Its
++service-free parent-timeout control demonstrates that the parent returns failure
++while an earlier worker PASS receipt remains provisional. Reviewed proposal
++`ccec5878` and independent design review `246ec909` authorize a bounded source
++correction on that existing branch, preserving original worker evidence and
++separate cleanup measurements. This design does not recover missing private
++`01f1a98c` or frozen-v6 bytes and is not provider/native/metadata acceptance.
++
++Canonical guidance incorporates the exact follow-up, fixture/mutation/PID,
++completed-scratch and parent-deadline proposals, with historical source wording
++and design-only limits retained. No issue closure, release publication or
++infrastructure provisioning occurred. Upstream disposition: none.
++
++PR #305 fixture successor `1e9c462f` is now independently reviewed by `1fc31354`
++and normally pushed on its existing branch. Meaningful CRLF and incomplete-PID
++controls pass after the test-only fixes; full source has 1,197 passes and 12 skips.
++All production/probe/constants, 268+5 producer inputs, original native manifest,
++helpers and browser remain unchanged. Fresh hosted Windows/macOS and actual
++forced-hang gates remain required. The V5 actual tuple stays bound to source3ec.
++
++Two more completed scratch namespaces were archived with the same scoped
++algorithm. Independent review `70951f62` verifies all 30,078 recorded members and
++eight internal hardlinks, plus unchanged hashes for the original six archives and
++inventory. Both new private archives and inventory remain outside Git. The
++recorded metadata and historical-observation limits remain unchanged.
++
++PR #310 is normally integrated at actual `774438b130afb2ead9bbc1c1b76cb6f91e72150a`,
++tree `17c1afa7fbaa6ae817830d85226b41f67dd8b820`, with ordered parents1c75/dfca.
++Independent final merge GO `27f4bd75` verifies all 22 fresh jobs, 21 SUCCESS and
++one expected tag-only Work Items SKIP. Root actual readback `65173ddf` matches the
++reviewed syntheticd07c tree exactly. Original FIRST-readiness failures remain
++failed and full #208/backend/browser/private/OAuth/release acceptance stays HOLD.
++Other PRs' old1c75 source/control tests remain historical; none carries unchanged
++admission onto the new named target. PR #302 now refreshes its separate source
++and control tuples after this accepted producer dependency. Public RCC work
++continues on its existing branch with a controlled ordinary774 refresh.
++
++PR #221 remains draft at774/a709. Authenticated complete closingIssuesReferences
++is empty with no pagination remainder. No issue closure, tag, release publication
++or replacement infrastructure occurred. Upstream disposition: none.

@@ -1,0 +1,17 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -1883,6 +1883,14 @@
+ binaries live in the ignored `devutils/bin/` location; launchers verify the version on
+ later runs and invoke the root toolkit without creating a separate activation environment.
+ 
++An absolute managed RCC executable does not select its managed RCC home.
++Source the owned activation script and verify RCC home, XDG/Poetry caches,
++PATH and explicit worker/Go limits before the gateway. Admit the existing
++cached toolkit against current setup identity and executable bindings.
++A gateway failure while preparing another home supplies no pytest counts or
++source-suite acceptance; retain that failed attempt separately from any
++newly authorized successor.
++
+ RCC owns the isolated toolchain and holotree cache. Poetry and committed package lockfiles
+ remain the dependency and release authorities. Set `ROBOCORP_HOME` to a writable,
+ repository- or CI-scoped cache when diagnosing environment resolution, then run

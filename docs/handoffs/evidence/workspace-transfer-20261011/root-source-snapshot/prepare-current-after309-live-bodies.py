@@ -1,0 +1,47 @@
+import hashlib
+import json
+from pathlib import Path
+
+base = Path('/workspace/engineering')
+issue = json.loads((base / 'issue101-current-live-1143.private.json').read_bytes())
+pr = json.loads((base / 'pr221-current-live-1143.private.json').read_bytes())
+history = issue['body'][issue['body'].index('**58 open issues'):]
+assert len(history.encode()) == 28075
+assert hashlib.sha256(history.encode()).hexdigest() == 'd6aa504c67bb72508006751c65d0d575d2e108a1ae3f677034723ee8101843b7'
+lead = '''## Actions Convergence & Closure Readiness
+
+Actual engineering integration is `a0d258a16095b95b1bf9000cb1201cddfaff4779`, tree `1181b35b11e4904405ca1a9a3a398e6c1c3abfd0`, after normal #309 integration with ordered6181/83123 parents. Independent final admission8d834b13 reconciles all19 successful declared jobs and original Windows checkout012cd8 with131 integration passes/19skips. Root actualcc144793 and independent actual787ed17e verify all1,421 typed entries. Original012cd8 is authenticated by retained runner/API evidence; its Git object is unavailable locally. #292, #290, #311, #310, #302 and #299 retain their accepted scoped integrations. No whole issue or Runtime release acceptance follows from these merges.
+
+The existing #300 stack is clean locally at74beef4d/tree2238ed31 after ordinary784+a0d union and its authorized transport assertions. Independent LIGHTf5deb9fd verifies30 passes,19 selected cases/20 real requests, complete logical SQL and typed filesystem snapshots, exact authorization/open-attempt/success counters, and two meaningful mutation controls. Production is unchanged; HEAD/Range remain refusals. Its one full run and separate actual envelope remain held. The original784/618 Windows run remains failed:130passes/19skips/one FIRST readiness timeout, with unknown causal phase and owned cleanup; original observer56098cf7/c55b2366 remains unchanged.
+
+Necessary Windows checkout-byte correction #312 is draft. Original92e source and its full gates are independently accepted a64c6b1c. Its ordinary a0d refresh is clean77065131/treeedf1801e; independent LIGHTefda1d98 verifies all1,423 union entries,207 protected checkout inputs, seven narrow LF rules, workflow filters and both target auth tests. Root released exactly one serialized full run with explicit two-worker bounds and600-second TERM plus10-second kill-after. Fresh source final review, normal existing-branch push and complete current hosted/platform gates remain prerequisites. Historical178 CRLF-only wheel differences and separate generated HTML difference are not waived.
+
+The two active source writers are the existing #305 current-target refresh and a necessary independent captured-child cleanup fix. The latter follows original imported-production1RED/8PASS and independent58b007d2: the current function can return early with a captured child alive while its deadline still has time. The bounded correction preserves the deadline, strict cleanup predicates and exclusive wrapper ownership. It has no hosted causality or accepted implementation claim yet. Its initial permanent-test fixture setup failure remains retained. Original #306 fada Windows still has126 integration passes/19skips/five FIRST readiness failures; seven-member diagnostics show one surviving captured child after wrapper reap, with survivor PID and readiness cause unknown. The other four failures remain unsampled. No automatic CI retry or deadline increase is admitted.
+
+Existing #305519a0beb, #306fada8e06 and #282e736f846 retain reviewed source checkpoints against6181; their old CI cannot admit the new a0d target. #308 sourcec10380a4/controld5a3d2f5 has independent original fresh three-case actual GO5dbff4ce: seven original members, nine exact sample bindings, one real publication and natural HTTP return before separate cleanup. That acceptance remains d5a/c103/6181-scoped. Current-target refresh, complete CI, private01f/frozen-v6 recovery, CLI2510, full supervisor/metadata, native/provider and whole134 acceptance remain HOLD.
+
+#221 remains draft against communitya709. Current a0d metadata at11:54:48UTC has34 check contexts:32SUCCESS, one running and one expected Work Items tag-publisher skip; authenticated closure/review/thread pagination is complete with zero entries. This metadata is not a complete release admission. Prior6181 seven-distribution integrity38ec59ef and Linuxcp312 installed-consumer07a2e926 retain their narrow scopes:202 measured installed Python members,215 source payloads, public Core1.0.2/Helper1.0.3 provenance and strict captured cleanup. The first gateway refusal before worker creation remains failed; the separately authorized v5 worker passed. Removed installed files are retained measurements. Both required OAuth strings remain empty in all six wheels and the sdist. Approved source/content authority, current combined CI, all-platform/native/private consumers, immutable tag, publication, downloads/checksums and owning Homebrew installation/upgrade remain gates. No Runtime publication or #221 integration is admitted.
+
+The [1,180-original engineering checkpoint](https://github.com/joshyorko/actions/tree/62f4e180f6c894777ebc8ed3a729e88d2f6531d6/docs/program/evidence/wave11/current-engineering-20261011) is normally committed/pushed on the existing handoff branch, retaining all644 prior originals unchanged and536 new safe originals after staged independent GO05a681ba. Committed remote readback is recorded separately. Completed scratch now has38 verified private archives across17 batches on existing mounts; failed563d remains failed and retained. Raw logs, ZIPs, original artifact member payloads, private code and archive indices stay outside Git. The inherited22,524-byte manifest alias remains unrecovered. Devsy is disabled; no Dakota writers or replacement infrastructure. The full54-contract graph and four close-ready recommendations remain open, with293–296 human-review-only. The audited snapshot below retains its exact text and final newline.
+
+'''
+pr_lead = '''Actual integration is `a0d258a16095b95b1bf9000cb1201cddfaff4779`, tree `1181b35b11e4904405ca1a9a3a398e6c1c3abfd0`, after normal #309 admission. Independent final8d834b13 and actual787ed17e verify complete19-job CI, original Windows131passes/19skips and all1,421 typed entries. Previous6181 source/CI/artifacts retain their scopes; tree or payload equality does not grant whole-release admission.
+
+This PR remains draft against communitya709. Current metadata at11:54:48UTC records34 check contexts:32SUCCESS, one running and one expected Work Items tag-publisher skip; complete authenticated closures/reviews/threads are zero. Complete current declared-flow/job reconciliation and final release acceptance remain separate. Necessary checkout-byte correction PR312 has reviewed original92e source/full gates and current770/a0d LIGHTefda1d98; exactly one two-worker bounded full run is authorized. Fresh source final review, normal push, hosted Windows/platform byte proof and all other release gates remain required.
+
+The prior6181 original seven-distribution integrity review38ec59ef covers six wheels and one sdist. Linuxcp312 installed-consumer07a2e926 records202 measured installed Python members,215 source payloads, public Core1.0.2/Helper1.0.3 provenance and strict captured cleanup. Its first mixed-directory gateway refused before worker creation; the separately authorized v5 worker passed. Removed installed files are retained measurements, not a current tree reread. Windows has178 CRLF-only tracked differences and a separate generated HTML difference with unknown semantic equivalence. Both required OAuth strings remain empty in every distribution. Approved content/source authority, current combined CI and all supported installed/native/private consumers, immutable tag, registry/API verification, downloads/checksums and owning Homebrew installation/upgrade remain HOLD. No Runtime tag, publication, release asset or Homebrew action occurred.
+
+#300 transport LIGHTf5deb9fd is accepted locally at74beef4d after the current-target union, with30 passes and meaningful SQL/file mutation controls; full/actual/current hosted gates remain held. Its original Windows timeout and #306's five original readiness failures are preserved. A bounded public captured-child cleanup correction follows independent58b007d2 without increasing any deadline or claiming hosted causality. Existing #305 refresh continues as the other source writer. #308's fresh three-case actual5dbff4ce remains c103/d5a/6181-scoped; private01f/frozen-v6, CLI2510 and full supervisor/metadata acceptance remain HOLD.
+
+The [1,180-original checkpoint](https://github.com/joshyorko/actions/tree/62f4e180f6c894777ebc8ed3a729e88d2f6531d6/docs/program/evidence/wave11/current-engineering-20261011) preserves644 originals plus536 new safe originals after staged05a681ba; committed remote readback is separate. Devsy remains disabled, with no Dakota writers or replacement infrastructure. No issue closure or whole54-contract acceptance is admitted. The full prior PR body follows unchanged.
+
+<details>
+<summary>Preserved prior engineering and release context</summary>
+
+'''
+for name, body in [('issue101-current-engineering-after309-1158-body.md', lead + history),
+                   ('pr221-current-engineering-after309-1158-body.md', pr_lead + pr['body'] + '\n\n</details>\n')]:
+    path = base / name
+    with path.open('x') as stream:
+        stream.write(body)
+    print(name, len(body.encode()), hashlib.sha256(body.encode()).hexdigest())

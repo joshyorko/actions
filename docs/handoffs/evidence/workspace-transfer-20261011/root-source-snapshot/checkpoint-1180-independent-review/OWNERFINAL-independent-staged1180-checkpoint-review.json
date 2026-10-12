@@ -1,0 +1,133 @@
+{
+  "admission": {
+    "all1180_staged_blobs_originals_copies_SHA_sizes_typed_modes": true,
+    "all_other_parent_entries_unchanged": true,
+    "canonical_exact_additions": 74,
+    "canonical_removed_lines": 0,
+    "historical_installed_members_absent_after_owned_cleanup": 196,
+    "historical_noncurrent_aliases": 26,
+    "nested_current_exact": 5370,
+    "new536_bytes": 27405588,
+    "new536_frozen_plan_exact": true,
+    "no_unclassified_nested_aliases": true,
+    "prior644_records_blobs_modes_unchanged": true,
+    "privacy_safe_selection": true,
+    "staged_tree_object_entries_exact": true,
+    "unstaged_clean": true
+  },
+  "allowed_next": "Root normal commit/push on the existing handoff branch after this GO; independent committed/remote readback remains separate.",
+  "documentation_improvement": {
+    "Canonicalfilechanged/proposed": "docs/skills/repository-operations.md staged root-owned exact74 added lines,0removals",
+    "Durablelearning": "Nine verified blocks: ignored RCC fixture assets, bounded xdist worker environment, early captured cleanup versus wrapper reap, original checkout versus later merge ref, PR versus push changed-file filters, concatenated verbose SKIPPED census, tracked/generated embedded checkout bytes, independently anchored archive provenance labels, and selector directory exclusivity.",
+    "Evidence": {
+      "bytes": 9311,
+      "path": "/workspace/engineering/checkpoint-1180-independent-review/canonical74-and-README-scope-proof.json",
+      "sha256": "fa5e78a67d867edc4770fbe4e4102888a91ce8b728fcfb4aa8ba3b8ee54d4086"
+    },
+    "Exactdelta": {
+      "bytes": 9800,
+      "path": "/workspace/engineering/checkpoint-1180-independent-review/exact-staged-canonical74-delta.patch",
+      "sha256": "12e81b60538872f8c9f81d63922f53fcb0783c442a68b33f1a34957e11f8d53d"
+    },
+    "Remaininguncertainty": "Historical checkout/hosted cleanup causality, semantic frontend equivalence, private/native/all-platform/release scope remain explicitly unqualified; documentation does not change acceptance gates.",
+    "Staleguidanceremoved": "No prior guidance removed; exact accepted clauses inserted at source-appropriate existing anchors, preserving old canonical blocks."
+  },
+  "historical_limits": {
+    "historical_issue86_source": "Two784 Git blobs independently exact; current authorized source writer changes do not relabel historical proposal as current actual proof.",
+    "inherited_policy_index": "Historical physical-index HOLD and named semantic644 successor remain preserved; current comparison uses entry serialization only.",
+    "initial_pre_Ruff_renderer": "One19364/ade8 constructor identity observation is not a frozen execution pin; original bytes not recovered. Named prewording originals and final v3/v4/v5 wrappers remain distinct and exact.",
+    "removed_installed_tree": "196 inherited installed-file hashes remain measured historical receipts, not fresh installed tree reread.",
+    "unrecovered22524B_alias": "Original22524/a483 remains unrecovered; no new reconstruction or predecessor admission.",
+    "zero_byte_log_observations": "Three binding occurrences across two construction logger files subsequently appended; not immutable terminal log originals."
+  },
+  "no_source_index_git_ref_collector_gate_actual_download_mutation": true,
+  "observed_at": "2026-10-11T11:56:36.141315+00:00",
+  "owner": {
+    "bytes": 1195,
+    "path": "/workspace/engineering/checkpoint-1180-staged-identity.json",
+    "sha256": "33287890a920eb440cb4f0d3e682ec572375a0d111bccad5567f93b71613aa39"
+  },
+  "proof_bindings": [
+    {
+      "bytes": 560123,
+      "path": "/workspace/engineering/checkpoint-1180-independent-review/all1180-original-copy-typed-staged-byte-proof-v3.json",
+      "sha256": "2d5807ec9a247f92b9d1b723f0b2075ad3b9211dc54673fc1044c82062835aa0"
+    },
+    {
+      "bytes": 3387725,
+      "path": "/workspace/engineering/checkpoint-1180-independent-review/new536-nested-original-binding-readback.json",
+      "sha256": "c1aafaed24eb079f9cce2e7bf5d5755374ea361a3926ae4379781c362d82f39f"
+    },
+    {
+      "bytes": 9311,
+      "path": "/workspace/engineering/checkpoint-1180-independent-review/canonical74-and-README-scope-proof.json",
+      "sha256": "fa5e78a67d867edc4770fbe4e4102888a91ce8b728fcfb4aa8ba3b8ee54d4086"
+    },
+    {
+      "bytes": 9800,
+      "path": "/workspace/engineering/checkpoint-1180-independent-review/exact-staged-canonical74-delta.patch",
+      "sha256": "12e81b60538872f8c9f81d63922f53fcb0783c442a68b33f1a34957e11f8d53d"
+    },
+    {
+      "bytes": 9651,
+      "path": "/workspace/engineering/checkpoint-1180-independent-review/verify-staged-readonly.py",
+      "sha256": "ec9fc4832889a2d82761bf0b5aee6ee50bbdcf76351ecb5205be2a50d23829cc"
+    },
+    {
+      "bytes": 9712,
+      "path": "/workspace/engineering/checkpoint-1180-independent-review/verify-staged-readonly-reader-successor-v2.py",
+      "sha256": "a06a3aeac01f766d5d09f7dc7c1ca9750ee7613a566688baf07e39fd4fc9be74"
+    },
+    {
+      "bytes": 9796,
+      "path": "/workspace/engineering/checkpoint-1180-independent-review/verify-staged-readonly-reader-successor-v3.py",
+      "sha256": "14d6adc598a54906f911b9807ecf5fc6c9fdadfebf3be46622925ef5b2958f09"
+    },
+    {
+      "bytes": 345,
+      "path": "/workspace/engineering/checkpoint-1180-independent-review/initial-reader-staged-name-encoding-diagnostic.json",
+      "sha256": "17a3603aba9dc2d1fa0530921f8d4121a202d070199010f63eaba11d39007e53"
+    },
+    {
+      "bytes": 426,
+      "path": "/workspace/engineering/checkpoint-1180-independent-review/reader-nullable-size-sort-diagnostic.json",
+      "sha256": "b447107b2f54fd40cccc1b1a1293217272eb50d7ccb561d7877b8e4fb3fbba50"
+    },
+    {
+      "bytes": 143269,
+      "path": "/workspace/engineering/checkpoint-1180-independent-review/precise-historical-nested-alias-and-measurement-dispositions.json",
+      "sha256": "a6b7b4e9146eae3d18ac40895f4d3ab7fb848b26456f6777339e3dbc130709b0"
+    },
+    {
+      "bytes": 1814,
+      "path": "/workspace/engineering/checkpoint-1180-independent-review/new536-safe-content-and-declared-scope-proof.json",
+      "sha256": "084a802e6b99f59b378062c98bd47e9431632dafa75dab701de10f4befe1576d"
+    },
+    {
+      "bytes": 12221,
+      "path": "/workspace/engineering/checkpoint-1180-independent-review/finalize-readonly-review.py",
+      "sha256": "4524209bb851d4e713d83008aebdf28e6339bf97c7d821b04775e9a12abb1c96"
+    }
+  ],
+  "remaining_holds": [
+    "No issue closure or full54-contract graph closure",
+    "No current-head CI carry to later source",
+    "No native or private acceptance upgrade",
+    "No OAuth/sourceauthority/platform/registry/tag/Runtime release admission",
+    "No unimplemented cleanup improvement or hosted timeout cause established"
+  ],
+  "schema": "independent_readonly_ownerfinal_staged_checkpoint_review",
+  "status": "GO_STAGED_1180_NORMAL_EXISTING_HANDOFF_COMMIT_PUSH_ONLY_NO_ENGINEERING_GATE_WAIVER",
+  "subject": {
+    "base": "bd023f9fd2ea8007031c2bd4f909cab4546dabe1",
+    "branch": "handoff/actions-swarm-mk3-wave8-20261010",
+    "frozen_staged_tree": "a7cb47cef9eae2ce3b219bb807b535582c67804e",
+    "semantic_index_encoding": "SHA256(git --no-optional-locks ls-files -s -z output)",
+    "semantic_index_sha256": "5df1402f20f2315488c0151b7a316dc19f73680d6d5b8ccbc2aff1b33ada0e78",
+    "staged_names_encoding": "SHA256(git --no-optional-locks diff --cached --name-status -z output)",
+    "staged_names_sha256": "7eb9a5a000d0789e8a274a0843594c0ee6a0727a8cc7db769a42c6970b797cd5",
+    "staged_paths": 539,
+    "worktree": "/workspace/engineering/campaign-checkpoint"
+  },
+  "upstream_disposition": "none"
+}

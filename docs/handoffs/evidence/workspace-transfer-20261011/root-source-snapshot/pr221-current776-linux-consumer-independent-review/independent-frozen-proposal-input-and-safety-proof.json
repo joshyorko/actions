@@ -1,0 +1,266 @@
+{
+  "proposal": {
+    "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/immutable-current776-linux-consumer-preexecution-proposal-v2.json",
+    "bytes": 25752,
+    "sha256": "57a8beb87e5a1c03fae276e4b22d7fc8734d1f42cc3c739ceb989a0d946e73a7"
+  },
+  "runner": {
+    "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-consumer-runner-v2.py",
+    "bytes": 19366,
+    "sha256": "1768d6edebc874f5f76ea77a6a3a49d6effa46e144340b7f49bf6f3da0fcf809"
+  },
+  "input_gate": {
+    "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/current-input-admission-v2.py",
+    "bytes": 7267,
+    "sha256": "3be2b971a43de3848c5a1aec59eecbeb6ac9dd796a81a6f2e489eab782492d1a"
+  },
+  "input_manifest": {
+    "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/input-and-source-admission.json",
+    "bytes": 147945,
+    "sha256": "ff5560c8233985e2755e1e9288f780018f625a7ec4184f3eac98e4a14d50e594"
+  },
+  "verified_unique_nested_frozen_bindings": 39,
+  "nested_hash_bindings": [
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-consumer-runner-v2.py",
+      "bytes": 19366,
+      "sha256": "1768d6edebc874f5f76ea77a6a3a49d6effa46e144340b7f49bf6f3da0fcf809"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/current-input-admission-v2.py",
+      "bytes": 7267,
+      "sha256": "3be2b971a43de3848c5a1aec59eecbeb6ac9dd796a81a6f2e489eab782492d1a"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/input-and-source-admission.json",
+      "bytes": 147945,
+      "sha256": "ff5560c8233985e2755e1e9288f780018f625a7ec4184f3eac98e4a14d50e594"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current302-linux-wheel-owned/original-Linux-wheels-11693813383.zip",
+      "bytes": 28271148,
+      "sha256": "32485758f22e51b529d3ea657c4f4c0033233f6c84ec7d3d605c4493c11d82c6"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current302-linux-wheel-owned/actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 14166151,
+      "sha256": "f82ee06c09e07bd224e797e11b7e58138920c0c8df49ef814ac50b0087d81c6c"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current302-linux-wheel-owned/safe-prospective-runtime103-qualification-review.json",
+      "bytes": 9081,
+      "sha256": "5ae089d08c7bb6b231d9c6adfa313d2f6961aa5ae03116829ad1b25588719578"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current302-linux-wheel-owned/safe-current-linux-wheel-inspection.json",
+      "bytes": 152714,
+      "sha256": "535b308837dab9737412243646dc085a560202dbd58b9e9315dd1cac54808c82"
+    },
+    {
+      "path": "/workspace/engineering/pr282/action_server/scripts/verify_published_runtime_floor.py",
+      "bytes": 8925,
+      "sha256": "f1ad142a6cd83ca1a71ed0a6183d558a6d72f00f073b492ce0d18e563a067193"
+    },
+    {
+      "path": "/workspace/engineering/pr282/action_server/scripts/publish_verified_runtime.py",
+      "bytes": 18453,
+      "sha256": "236ed21dcb50b3c3934f5e15b29e61d6a7b712ed65e7dcf7cd72785d4f8fa26c"
+    },
+    {
+      "path": "/workspace/engineering/pr311/action_server/tests/contract_tests/test_active_contracts.py",
+      "bytes": 38962,
+      "sha256": "b76ec605e343e8bec7dea6e230dad3f516eabc4fd90a2769638b0d9111a6ade0"
+    },
+    {
+      "path": "/workspace/engineering/pr282/action_server/src/actions/server/_common/process.py",
+      "bytes": 31134,
+      "sha256": "f432e65a488bf06862e548dc45342d3c1fb5ea7fcc26f6371d98aae124ffc082"
+    },
+    {
+      "path": "/workspace/actions-cloud/bin/rcc",
+      "bytes": 22282402,
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/unchanged-helper-snapshots/floor/verify_published_runtime_floor.py",
+      "bytes": 8925,
+      "sha256": "f1ad142a6cd83ca1a71ed0a6183d558a6d72f00f073b492ce0d18e563a067193"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/unchanged-helper-snapshots/publisher/publish_verified_runtime.py",
+      "bytes": 18453,
+      "sha256": "236ed21dcb50b3c3934f5e15b29e61d6a7b712ed65e7dcf7cd72785d4f8fa26c"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/unchanged-helper-snapshots/guard/test_active_contracts.py",
+      "bytes": 38962,
+      "sha256": "b76ec605e343e8bec7dea6e230dad3f516eabc4fd90a2769638b0d9111a6ade0"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/unchanged-helper-snapshots/process/process.py",
+      "bytes": 31134,
+      "sha256": "f432e65a488bf06862e548dc45342d3c1fb5ea7fcc26f6371d98aae124ffc082"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/current-input-metadata-RED.log",
+      "bytes": 7776,
+      "sha256": "812d7e91eec86ea968308fc6b9e4fee5d4185a5a3f24ce02486d43e339350e87"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/private-focused-format-and-static.log",
+      "bytes": 6147,
+      "sha256": "12ae28253fe8992aa68438da58319c220e7d01f4d0f2c5c5d97880df0282c8fe"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/private-focused-green-v2.log",
+      "bytes": 13714,
+      "sha256": "6ef41082bac3875b48a8e9ec19c4b5cffde4c03d41005ea298165db34c2ea85d"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/private-focused-green-v3.log",
+      "bytes": 6906,
+      "sha256": "9c0aa16de30eed3f73c6ec5821c244f5e68eefa0c45807334084eb35ba7af953"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/run-private-focused-green-v3.py",
+      "bytes": 663,
+      "sha256": "3f817fbd53a1c32d42b32e91dc5e7f67a08e93aadb1161eabcfd2610343e544e"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-consumer-runner.py",
+      "bytes": 16652,
+      "sha256": "8ac20b20442a0e599e038664e76f4acc8779bcdebaa4340c319f43580a1133a9"
+    },
+    {
+      "path": "/workspace/engineering/pr221-clean-consumer-independent-review/immutable-runner-preexecution-review.json",
+      "bytes": 12934,
+      "sha256": "195ba97f0ffefb42cc53ba11544cefd65b4cc1c288753e810417a3f1c3aa36fe"
+    },
+    {
+      "path": "/workspace/engineering/pr221-clean-consumer-independent-review/actual-one-consumer-review.json",
+      "bytes": 18432,
+      "sha256": "00d1b3c51f2e250e07bed48df92ff5f0e688c86525440e5109ebad525c681f63"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/runtime-103-preflight/actual-clean-consumer-receipt.json",
+      "bytes": 9008,
+      "sha256": "7704cbac814064ba4d341f99c576b7ee36ab646b72c07e79a50d5dee186ac938"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-consumer-runner.py",
+      "bytes": 18722,
+      "sha256": "2f50a3f6bfa0e2a5544fad7c816be1b3e0e9020827acfb741514c5b7cc22143c"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/current-input-admission.py",
+      "bytes": 6786,
+      "sha256": "ca4d216307932b7971d7cae295fb4019bd8b85f6bf029221e8c709f0c4c3acc8"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/paused-immutable-current776-consumer-preparation-proposal.json",
+      "bytes": 16138,
+      "sha256": "d26aa60f9e710d1d20e399041b3b9b36aeba0233f7324542bd61c87f68f096ae"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/canonical-partial-platform-consumer-scope-proposed.patch",
+      "bytes": 1158,
+      "sha256": "bf95da899763f97c016f76fa4a0cf8878ebba8326d57c11ab1a520b1df597c81"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/exact-final-v2-runner-reuse-delta.patch",
+      "bytes": 10230,
+      "sha256": "f26c91c8ffc07186740bd9b2ba2fe2da8445247b15a581199e02236187909d24"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/final-freeze-inspector-diagnostic.json",
+      "bytes": 564,
+      "sha256": "10322a00121f404fcfb84fce675e46295fe504f4b7ca97205af3b84c9d3b6955"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/original-helper-and-runner-bindings.json",
+      "bytes": 5120,
+      "sha256": "c65b41209d011a5a3e88ad05295ddaa5731587865ecaea00b0b59b3949217e91"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/run-private-admission-format.py",
+      "bytes": 346,
+      "sha256": "346049e7d46abd60733db774bebde4100db2c7feaa8b2329b4ebdf5b654fc248"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/run-private-admission-red.py",
+      "bytes": 363,
+      "sha256": "2a18a14baaf8d3facea8218f1aec6485b43f3d239bf9fc452b1ee2d3687e2ef5"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/run-private-focused-green-v2.py",
+      "bytes": 598,
+      "sha256": "9b0e1de02beece74ef8de5c489ae785a146cccd359465bba87332a280629b337"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/safe-members-original-function.txt",
+      "bytes": 571,
+      "sha256": "ba7bbc338c47fce501f0beb5faec501e3fc9c72a13802e70b14a5e75cbb5fc10"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/test_current_input_admission.py",
+      "bytes": 7808,
+      "sha256": "9ac6546291ad088eb1af09e698ea094fba4b512be2b3f10426acb4c0874a5f15"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/test_installed_consumer_runner_v2.py",
+      "bytes": 9838,
+      "sha256": "af8441563c24deeb9dd96def1721c6d92924e44329c102f581da9678b53ca68e"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/unvalidated-private-runner-reuse-delta.patch",
+      "bytes": 10382,
+      "sha256": "416a92dc2365b82ac431074948000a41e730e8a51803c84d2563f8bed7a76c6a"
+    }
+  ],
+  "actual_integration": {
+    "sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+    "tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
+    "ordered_parents": [
+      "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+      "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    ],
+    "producer_tree_equal_actual": true,
+    "producer_not_relabelled_actual": true
+  },
+  "producer_distinct_roles": {
+    "control": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+    "control_tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
+    "source_candidate": "d642a3ac24f8da85101538bdfdf59b509fd74bfb",
+    "source_tree": "fdf2823ebcdbd938b9047fd452c9fb13eb4be4e4",
+    "target": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+    "synthetic": "f5dd0e18d9cda660c2eaa6bbc33a11180ddd7158",
+    "synthetic_ordered_parents": [
+      "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+      "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    ],
+    "synthetic_tree_equals_control": true
+  },
+  "original_ZIP_and_selected_wheel_exact_owned0600": true,
+  "outer_members": 2,
+  "wheel_members": 241,
+  "directories": 26,
+  "regular_files_RECORD_rows": 215,
+  "RECORD_hash_size_verified": 214,
+  "Python_members_derived_current_bytes": 196,
+  "tracked_payloads_current_actual776_and_original_d642_equal": 209,
+  "METADATA_and_source_pyproject_name_version_equal": true,
+  "generated_OAuth_AST_fixed_empty_strings": "MEASURED_EMPTY_CONTENT_AUTHORITY_HOLD",
+  "unchanged_helper_snapshot_Git776_mode_blob_bindings": true,
+  "five_original_runner_function_AST_and_inventory_code_equal": true,
+  "all_known_worktrees_covered_by_fifteen_checkout_roots": true,
+  "known_worktree_count": 14,
+  "fresh_attempt_path_absent": true,
+  "deadline_scope": "595s worker measured from supervisor start; owned process cleanup uses min(start+600,now+5); outer gateway645s with TERM then10s KILL grace also bounds setup/temporary removal/reporting. 600 is not an independently enforced whole-supervisor wall timeout.",
+  "servicefree_controls": "85 PASS/0SKIP final, initial UTF8 metadata RED and earlier draft/static/fixture failure identities retained. No replay by reviewer.",
+  "scope": "No actual installed import,pip,Runtime/native/provider/browser/gateway execution or network download by reviewer; Linuxcp312 futureattempt only; fullseven/generatedsourceauthority/content/private/release HOLD",
+  "canonical_patch": {
+    "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/canonical-partial-platform-consumer-scope-proposed.patch",
+    "bytes": 1158,
+    "sha256": "bf95da899763f97c016f76fa4a0cf8878ebba8326d57c11ab1a520b1df597c81"
+  }
+}

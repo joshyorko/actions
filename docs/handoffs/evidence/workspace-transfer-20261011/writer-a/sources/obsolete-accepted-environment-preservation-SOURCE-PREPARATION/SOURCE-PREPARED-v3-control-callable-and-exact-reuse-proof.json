@@ -1,0 +1,59 @@
+{
+  "archive_or_environment_operations": "NOT_RUN",
+  "controls": {
+    "bytes": 9191,
+    "mode": "0o444",
+    "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/test_environment_preservation_admission_SOURCE_PREPARED.py",
+    "sha256": "f229e39308a411bb0631b281eebab5774317923675308775b6b352922856ed2a"
+  },
+  "controls_run": "NOT_RUN",
+  "driver": {
+    "bytes": 36982,
+    "mode": "0o444",
+    "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_accepted_obsolete_environments_source_prepared_v3.py",
+    "sha256": "262196054902818db5cea7265961a3520cf23b30080b646460c1dd496ba84022"
+  },
+  "driver_or_product_import": "NOT_RUN",
+  "old16_AST_exact": [
+    "sha",
+    "inventory",
+    "verify",
+    "reject_live_handles",
+    "_CappedWriter",
+    "_write_and_close_preserving_primary",
+    "_snapshot",
+    "_ns_text",
+    "_strict_verify",
+    "_fsync_path",
+    "_index_bytes_except",
+    "_IndexBudgetPath",
+    "_ReadOnlyTar",
+    "_GuardedShutil",
+    "_key_for_root",
+    "_root"
+  ],
+  "original_driver": {
+    "bytes": 21276,
+    "mode": "0o444",
+    "path": "/workspace/engineering/completed-current8d49-FULL-storage-single-copy-fallback-PREPARATION-v2/archive_exact_one_completed_FULL_single_copy_once.py",
+    "sha256": "e717faae8a9e5f7a1ccea85c17df928a728216e43bf77256c487e685d9971771"
+  },
+  "syntax_checks": "AST_PARSE_ONLY",
+  "unittest_methods": [
+    "test_00_valid_exact_accepted_environment_baseline",
+    "test_subject_type_refuses_completed_pytest_reuse",
+    "test_unapproved_root_or_source_refused",
+    "test_no_automatic_inactive_owner_approval",
+    "test_unknown_scope_is_not_quiescence",
+    "test_exact_scope_and_restore_path_required",
+    "test_aggregate_caps_cannot_be_widened",
+    "test_layout_baseline_parent_mount_and_floor_poisons",
+    "test_observed_use_and_unknown_missing_fields_fail_closed",
+    "test_regular_binding_baseline_body_mode_and_symlink",
+    "test_private_root_release_baseline_mode_and_symlink",
+    "test_stream_cap_boundary_retains_partial_without_touching_original",
+    "test_snapshot_metadata_body_and_external_hardlink_boundaries",
+    "test_alias_baseline_and_individual_mapping_poisons",
+    "test_real_accepted_source_baseline_and_wrong_identity"
+  ]
+}

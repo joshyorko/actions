@@ -1,0 +1,128 @@
+{
+  "all_previous_notrun_and_failures_preserved": true,
+  "argv_dependency_note": "Only three dataarguments cannot be literaluntil ROOT typedrelease+independentreview announced. Root mustsubstitute exacthash/path/hash withoutsource/commandchanges; placeholderargv cannot execute/admit. Launcherrequires exact four dataargs after ownscript.",
+  "attempt_root": {
+    "absent": true,
+    "mode": "0700oncreation",
+    "path": "/workspace/engineering/pr307-current7487-token-light-once-owned"
+  },
+  "bounds": {
+    "individual_PHASE_TERM_kill_grace": 10,
+    "individual_budgets": [
+      120,
+      120,
+      180,
+      180,
+      180,
+      180,
+      180,
+      120,
+      210
+    ],
+    "note": "Seven originalphase classes plus two newtoken phases; all run_phase calls limited by remaining780 and ownedgroup fallback5+5. Rootouter includesactivation/pre/post. FULL remains separate600+10/900 and NOTRUN.",
+    "outer": 900,
+    "outer_TERM_kill_grace": 10,
+    "phase_count": 9,
+    "primary_phase_budget": 780
+  },
+  "config": {
+    "bytes": 10890,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current7487-concrete-TOKEN-LIGHT-PREEXECUTION/immutable-one-TOKEN-LIGHT-inputs.json",
+    "sha256": "f3ab8fca12e64862d2093526e0cc2fe46ac700961e9ef302e124996ee710a05a"
+  },
+  "constructor": {
+    "bytes": 5307,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr307-current7487-concrete-TOKEN-LIGHT-PREEXECUTION/construct_launcher_after_preserved_path_assertion.py",
+    "sha256": "a22b801ef74921b5ef3ecb38d4e050f356af1661fdae4f1c7e59a1cafcb4e445"
+  },
+  "current_source_prepared": {
+    "bytes": 372673,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current7487-concrete-TOKEN-LIGHT-PREEXECUTION/current1442-prepared30-ownfive-historical15-proof.json",
+    "sha256": "9a653f3d8d1573f8e7fb09a46d14f2e0eb1836f4fa82206e91a1275d19399ac8"
+  },
+  "documentation_improvement": {
+    "Canonical_file_changed": "docs/skills/repository-operations.md same7487commit, exactsourceownerpatch; no newcosmeticexecutorlesson",
+    "Durable_learning": "PRbuiltinreadonlycredential versus tag-onlyPAT/content404authority distinction, existinginterface-specificlogging/ownerbeforealwayspost guard reused",
+    "Evidence": "Sourceowner340604/privatecfgself guards/oldactualLIGHTf602 sourceprefix facts/currentconstructorAST; all newgates NOTRUN",
+    "Remaining_uncertainty": "AllcurrentgatesNOTRUN, oldparentactuals historical; OAuthrepo404/currentapprovedrevision+providerpolicy unknown; FULLcapacityblocked",
+    "Stale_guidance_removed": "Oldcredential-freePRsentence corrected only toactualnewwiring; no authcause/sourceauthoritypromotion"
+  },
+  "exact_root_adoption_argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "900s",
+    "bash",
+    "-c",
+    "source /workspace/actions-cloud/activate.sh && exec /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python /workspace/engineering/pr307-current7487-concrete-TOKEN-LIGHT-PREEXECUTION/launch_one_owned_token_light_final.py \"$@\"",
+    "pr307-token-light",
+    "/workspace/engineering/pr307-current7487-concrete-TOKEN-LIGHT-PREEXECUTION/root-one-TOKEN-LIGHT-release.json",
+    "ROOT_AUTH_SHA256_FROM_ANNOUNCED_TYPED_RELEASE",
+    "OWNER_ANNOUNCED_INDEPENDENT_REVIEW_PATH",
+    "OWNER_ANNOUNCED_INDEPENDENT_REVIEW_SHA256"
+  ],
+  "launcher": {
+    "bytes": 15510,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current7487-concrete-TOKEN-LIGHT-PREEXECUTION/launch_one_owned_token_light_final.py",
+    "sha256": "569549f01f29793754b366847158b4a9987bc1e173506ab94dc6d59042d5ee59"
+  },
+  "mandatory_FULL": "CurrentaffectedDevutils complete suite andRuntime test-not-integration mandatory; NOTRUN. Proposedpackagefull separateROOTrelease requiresTMP1.2B/workspace1.28849B; no waiver fromLIGHTGO ornormalprogresspush.",
+  "metadata_precision_predecessor": {
+    "bytes": 7510,
+    "correction": "NineactualAST runphasecalls, not mistaken eight-item phasebudgetmetadata. No source/config/argv/gatechange.",
+    "path": "/workspace/engineering/pr307-current7487-concrete-TOKEN-LIGHT-PREEXECUTION/OWNERFINAL-current7487-concrete-TOKEN-LIGHT-PREEXECUTION-NOTRUN.json",
+    "sha256": "b766837b0daca0448f111c69657fb5f4b83696eeaa05cb573b30464ff693a2e6"
+  },
+  "parent": "2314aea95795fbc1372a6f7b0b7b298b7cf124c3",
+  "preservation": {
+    "before_always_post": "Complete1442GitFSexec/30inputs/fiveconfigs/15historicalrefs/all18cfgbindings/configself/launcherrootauthhash, sourceclean; own308Githead8d49/treea806/clean only; originalignored307outputs exact",
+    "failure_behavior": "Privatephase stdout/stderrfsynced andoriginalterminalwritten beforeexitassert; originalprimarypreserved with postguardfailure separate; nopoll/rerun/namespaceoverwrite",
+    "scope_limit": "No independentwholeprivate9namespace/native1192 inventory asserted bythis307launcher; no source308/binary/helpermutation/nativeclaim"
+  },
+  "prototype_not_adopted": {
+    "bytes": 15478,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current7487-concrete-TOKEN-LIGHT-PREEXECUTION/launch_one_owned_token_light.py",
+    "sha256": "ad16baf229e05fd4edb44b5ea45b3bccc7fa395bdb19a9288e96a7622f2c0c63"
+  },
+  "root_release_contract": {
+    "config_sha256": "f3ab8fca12e64862d2093526e0cc2fe46ac700961e9ef302e124996ee710a05a",
+    "decision": "RELEASE_ONE_CURRENT7487_TOKEN_LIGHT_ONLY",
+    "file": "/workspace/engineering/pr307-current7487-concrete-TOKEN-LIGHT-PREEXECUTION/root-one-TOKEN-LIGHT-release.json",
+    "independent_review": "Exactannouncedpath/hash pair",
+    "launcher_sha256": "569549f01f29793754b366847158b4a9987bc1e173506ab94dc6d59042d5ee59",
+    "outerstdio": "Root must create distinctexclusive private outerstdout/stderr/terminal; root-onlyrelease andoneoperation no retry.",
+    "regular_nonsymlink": "0600ownUIDGID/hashbound initially",
+    "review_decision_required": "GO_CURRENT7487_TOKEN_LIGHT_PREEXECUTION",
+    "root_before_invocation": "Freshworkspacefloor536870912, serializednootherheavy/native/storage/install; allcfg/source/review/self bindingsexactandABSENTattempt. No releasefile existsyet.",
+    "source": "7487d94bf1a0453119928fe2d73d1413a252a312",
+    "tree": "4ae715a497f1f6c643efe2a301a111320b3c18e4"
+  },
+  "schema": 1,
+  "source": "7487d94bf1a0453119928fe2d73d1413a252a312",
+  "source_owner": {
+    "bytes": 5555,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-PR-only-OAuth-token-source-PREPARATION/OWNERFINAL-current7487-PR-only-OAuth-token-SOURCE-UNTESTED.json",
+    "sha256": "340604ceb5225d21cb0b55a313834c885277dcdb2d1734eb3215ec22a15208a3"
+  },
+  "static_proof": {
+    "bytes": 6299,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-current7487-concrete-TOKEN-LIGHT-PREEXECUTION/private-current7487-final-preexec-bindings-and-source-static-proof.json",
+    "sha256": "ef219ea5c167c997f8d93deb9e920d8d14fd912738536ffc333c13b66ca02016"
+  },
+  "status": "CONCRETE_PREEXECUTION_NOTRUN_REQUIRES_INDEPENDENT_GO_ROOT_SERIALIZATION_RELEASE",
+  "test_scope": {
+    "GREEN": "OwnDevutils real releaseworkflow/line tests, original41Runtimehelper tests and normalToolkit; no actualOAuthnetwork/content/credentialrequests",
+    "RED": "Actualnewtwo-jobtest reads original2314YAML via existingbaseline seam; ownDevutils pytest n0, originalrc1 required plus exactlytwo namedfailedXMLcases atmissingcanaryenv, noerror/skip; source/generator unmodified",
+    "logging": "Allpytest distinctABSENTabsoluteALLbasetemp/JUnit/privateabsstdio; RuntimeexplicitabsoluteRobotlogger; cachedToolkit and ownDevutils pluginabsence explicitly checked, nounsupported option or pluginclaim; controlledInvoke staging ownsprivateoutputs",
+    "static_and_gen": "OriginalRuntime configuredlint/type and helper checks, ownDevutils Ruffcheck/configuredformat/Isort/Mypy; all8generated roundtripequal and30YAML; no source rewritesbygates"
+  },
+  "tree": "4ae715a497f1f6c643efe2a301a111320b3c18e4",
+  "upstream_disposition": "none"
+}

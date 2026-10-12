@@ -1,0 +1,140 @@
+{
+  "activation": {
+    "bytes": 987,
+    "mode": "0o600",
+    "path": "/workspace/actions-cloud/activate.sh",
+    "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+  },
+  "attempt_root_absent": true,
+  "cwd": "/workspace/engineering/pr307",
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "delta": "Ordinary merge imports accepted e2 knowledge and retains exact existing307 checked30s/strictUTF8/safeYAML/pairedatomic/sourceauthority block; no cosmetic extra child",
+    "evidence": {
+      "bytes": 502738,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-actuale2-refresh-PREPARATION/complete-current-ordinary-union-source-and-retained-evidence-proof.json",
+      "sha256": "d3b4588d581016a596c2a9add69242c4c501da858784e93fc9105d537711de35"
+    },
+    "remaining_uncertainty": "Fresh currentorigins/scoped/static/generated/full and authoritative OAuth content remain unqualified",
+    "stale_ambiguity_removed": "Old1173/41 tests remain historical, e2 now source union but not gated/adopted integration; rejected699d unchanged"
+  },
+  "full": {
+    "admission": "complete unique node IDs/JUnit counts; no unexpected FAIL/ERROR; existing SKIPs remain unqualified; preserve raw stdout/stderr/private logging/current source full typed before/alwayspost",
+    "always_post_guard_budget_seconds": 120,
+    "child_budget_seconds": 600,
+    "env": {
+      "PYTEST_ADDOPTS": "--basetemp=/workspace/engineering/pr307-actuale2-light-full-once-owned/basetemp -o tmp_path_retention_policy=all -o tmp_path_retention_count=999999 --robocorp-log-output=/workspace/engineering/pr307-actuale2-light-full-once-owned/robot-output --junitxml=/workspace/engineering/pr307-actuale2-light-full-once-owned/full-junit.xml",
+      "PYTEST_XDIST_AUTO_NUM_WORKERS": "2"
+    },
+    "fresh_tmp_floor_bytes": 1200000000,
+    "fresh_workspace_floor_bytes": 1288490189,
+    "gateway": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "600s",
+      "rcc",
+      "task",
+      "script",
+      "-r",
+      "developer/toolkit.yaml",
+      "--",
+      "python",
+      "-c",
+      "import toolkit; toolkit.poetry(\"action_server\", \"run\", \"invoke\", \"test-not-integration\")"
+    ],
+    "kill_grace_seconds": 10,
+    "outer_budget_seconds": 900,
+    "primary_budget_seconds": 640,
+    "workers": 2
+  },
+  "generator_delta_vs_target": "One inherited original307 release_text removal in ActionServerBinaryRelease; no new install ordering",
+  "head": "2314aea95795fbc1372a6f7b0b7b298b7cf124c3",
+  "light": {
+    "child_budget_seconds": 180,
+    "configured_static": "toolkit.poetry(action_server,run,invoke,lint); toolkit.poetry(action_server,run,invoke,typecheck); explicit unchanged build helper/test Ruff +helper Mypy required",
+    "controlled_real_Invoke_gateway": "Reuse preserved original synthetic-gh gateway semantics under NEW owned paths only; old fixed output paths must not be rerun/overwritten. Recontextualized private runner needs separate immutable source review before execution; no real gh acquisition",
+    "doctor": [
+      "rcc",
+      "run",
+      "-r",
+      "developer/toolkit.yaml",
+      "--dev",
+      "-t",
+      "Doctor"
+    ],
+    "focus_gateway": [
+      "rcc",
+      "task",
+      "script",
+      "-r",
+      "developer/toolkit.yaml",
+      "--",
+      "python",
+      "-c",
+      "import toolkit; toolkit.poetry(\"action_server\", \"run\", \"python\", \"-m\", \"pytest\", \"tests/build_system_tests/test_oauth2_config_build.py\", \"-n\", \"0\", \"-vv\", \"--basetemp=/workspace/engineering/pr307-actuale2-light-full-once-owned/light-basetemp\", \"-o\", \"tmp_path_retention_policy=all\", \"-o\", \"tmp_path_retention_count=999999\", \"--robocorp-log-output=/workspace/engineering/pr307-actuale2-light-full-once-owned/light-robot-output\", \"--junitxml=/workspace/engineering/pr307-actuale2-light-full-once-owned/light-junit.xml\")"
+    ],
+    "generator": "source-pinned generator outputs into fresh owned directory;8 exact generated bodies plus all30GitHub YAML parse; no tracked writes",
+    "kill_grace_seconds": 10,
+    "own_prepared_reuse": "30current inputs exact old87;5configs exist; historical successful ownBootstraplog retained. Actual fresh ownPoetry sys.prefix/module origins must be measured before gate; no newBootstrap authorized",
+    "parent_budget_seconds": 300,
+    "toolkit": [
+      "rcc",
+      "run",
+      "-r",
+      "developer/toolkit.yaml",
+      "--dev",
+      "-t",
+      "ToolkitTest"
+    ]
+  },
+  "managed_RCC": {
+    "bytes": 22282402,
+    "mode": "0o700",
+    "path": "/workspace/actions-cloud/bin/rcc",
+    "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+  },
+  "no_installs_or_native_or_services": "No newBootstrap/pip/Poetry installs/provider/native/browser/OAuth network inputs; no fake config/stubs/authority waiver",
+  "no_user_binary_override": [
+    "ACTIONS_RCC_TEST_BINARY_SELECTOR",
+    "ACTIONS_RCC_TEST_BINARY"
+  ],
+  "owned_attempt_root": "/workspace/engineering/pr307-actuale2-light-full-once-owned",
+  "parents": [
+    "87e412f89b201c697d3e6bd4bd34031cdbd14df3",
+    "e2c81adce7858d5a952991ba9a8b7f72e902038a"
+  ],
+  "preserved_initial_preparation": {
+    "bytes": 6199,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-actuale2-refresh-PREPARATION/OWNERFINAL-pr307-currente2-LIGHT-FULL-PREPARATION-NOTRUN.json",
+    "sha256": "d44633a4bfb635b2fc03f2c7c132b9b919123d8697c39f69a64b1b3aea473769"
+  },
+  "reject_inherited": [
+    "PYTHONOPTIMIZE",
+    "PYTEST_ADDOPTS"
+  ],
+  "remaining_holds": [
+    "CurrentLIGHT/FULLNOT_RUN",
+    "Authoritative OAuth pair/revision/providers/fullrelease HOLD; retained original acquisition failures unchanged",
+    "Fresh hosted CI/sourcecheckout after independent review/rootnormalpush",
+    "No new native/currentproducer qualification"
+  ],
+  "schema": "PR307_CURRENT_E2_LIGHT_FULL_PREPARATION_ONLY",
+  "source_proof": {
+    "bytes": 503555,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-actuale2-refresh-PREPARATION/complete-current-ordinary-union-source-and-retained-evidence-proof-v2.json",
+    "sha256": "aa2ffa5fa4154c13db50e54224d5836858222abaa174291748866830f97c98db"
+  },
+  "status": "NOT_RUN_CAPACITY_AND_SERIALIZATION_AND_INDEPENDENT_REVIEW_REQUIRED",
+  "toolkit_definition": {
+    "bytes": 945,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr307/developer/toolkit.yaml",
+    "sha256": "0ed7beaa93dd0ba763d1618382a3de8ce307cc5cf613759d06081d735fcd7e68"
+  },
+  "tree": "2987ed3a23e560fb40e13aadbcd6bd613ead3f25",
+  "upstream_disposition": "none"
+}

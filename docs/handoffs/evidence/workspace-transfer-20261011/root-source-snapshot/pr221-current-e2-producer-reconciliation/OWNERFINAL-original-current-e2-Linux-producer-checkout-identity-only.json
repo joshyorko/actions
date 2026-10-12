@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "status": "SCOPED_ORIGINAL_LINUX_PRODUCER_CHECKOUT_IDENTITY_ONLY",
+  "run_id": 38157482815,
+  "job_id": 114523345379,
+  "actual_job_checkout": "165c38920fe37dd81350ca8ca0419bc70a4739f2",
+  "actual_job_checkout_tree": "afe2679cc93bf27fa5021c7698ee7ad3ee21a1b9",
+  "actual_ordered_parents": [
+    "a70993fafc99a9f94041485542d5a720797ca394",
+    "e2c81adce7858d5a952991ba9a8b7f72e902038a"
+  ],
+  "literal_checkout_command_line": 123,
+  "literal_checkout_result_line": 124,
+  "actual_e2_source_tree_equal": true,
+  "producer_API_head_is_not_checkout": true,
+  "authentic_immutable_API_commit": {
+    "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/private-metadata/intended-synthetic-commit.decoded-pages.json",
+    "bytes": 2935,
+    "sha256": "e6509a977fb01d22147222c7c4b023e5e9e2ef3499b9cb388733d1da9462e7f4",
+    "mode": "0o600"
+  },
+  "root_original_UTF8_log": {
+    "path": "/workspace/engineering/pr221-current-e2-original-Linux-producer-log/original-decoded-Linux-wheel-producer.private.log",
+    "bytes": 907108,
+    "sha256": "d82e968ee64918770d78e5b7b10ff8e35aa1457452b015a587d014a47b584c3f",
+    "mode": "0o600"
+  },
+  "root_safe_original_log_acquisition_receipt": {
+    "path": "/workspace/engineering/pr221-current-e2-original-Linux-producer-log/safe-one-original-producer-log-acquisition-receipt.json",
+    "bytes": 743,
+    "sha256": "005c2b45ab40e5cda02b6d38dc5283bdbaa4c8054db24dc895bc78312678e9f2",
+    "mode": "0o400"
+  },
+  "frozen_PREPARATION_NOT_REWRITTEN": {
+    "path": "/workspace/engineering/pr221-current-e2-producer-reconciliation/OWNERFINAL-current-e2-one-original-aggregate-connector-executable-PREPARATION.json",
+    "bytes": 38696,
+    "sha256": "b5975aca856aadd7288dd21bd7c5a66db3c3cf5c3b1eabf11f198ce27d667b6b",
+    "mode": "0o400"
+  },
+  "separate_named_successor": "This original-log identity is observed after preparation freeze; it does not replace its earlier UNKNOWN-at-capture field.",
+  "artifact_bytes": "NOT_ACQUIRED",
+  "Mac_Windows_sdist_checkout_identity": "UNAVAILABLE_NOT_INFERRED_FROM_LINUX",
+  "build_package_Git_body_modes_GENERATED_OAuth_RECORD_inner_content_authority": "NOT_QUALIFIED_BY_CHECKOUT_OR_SUCCESS",
+  "installed_build_source_origins": "No stronger source equivalence claim from unrelated embedded action/tool hashes or build-log path references.",
+  "Git_authentic_tree_source_reference": "Same complete source tree; original checkout is the synthetic ordered a709/e2 commit, not actual integration e2.",
+  "documentation_delta": "Reuse canonical authenticated original-checkout identity and artifact-vs-source separation; no new duplicate prose.",
+  "upstream_disposition": "none",
+  "new_download_gateway_consumer_native_source_Git_mutations": "NOT_RUN"
+}

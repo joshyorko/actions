@@ -1,0 +1,141 @@
+{
+  "backend_full_descriptor_walk": "OWNED_FAKE_TREE_ONLY",
+  "counts": {
+    "errors": 0,
+    "failed": 0,
+    "passed": 35,
+    "skipped": 0,
+    "unique_cases": 35
+  },
+  "elapsed_seconds": 31.548584251999273,
+  "failure": null,
+  "memory_sampler_native_adoption": "NONE",
+  "native": "NOT_RUN",
+  "original_census_binding": {
+    "bytes": 8362,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-2/original-pytest35-node-census.json",
+    "sha256": "c9d8045627d6ed83e40dae72f17fc4d9ceebb24c3664443f7f864706a4c6841f"
+  },
+  "outcomes": {
+    "always-post": {
+      "argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "120s",
+        "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+        "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/run_root_defaultbackend35_once2_exact_census_NOTRUN.py",
+        "--phase",
+        "guard",
+        "--config",
+        "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/FROZEN-defaultbackend35-once2-exact-census-config-NOTRUN.json",
+        "--config-sha256",
+        "7021f53c12b5392ffe5cf14da7915f25188c68e6d5a9a3b07458b588c4b527fa",
+        "--release",
+        "/workspace/engineering/root-one-defaultbackend35-once2-exact-census-release.json",
+        "--release-sha256",
+        "f9079a6dfb8e234e4976d1a3feb32d88be9f3ff9ba6c32bc3a6d43d5cfecbf02"
+      ],
+      "parent_seconds": 135,
+      "returncode": 0,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-2/always-post/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 61,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-2/always-post/original.stdout.private",
+        "sha256": "91b59c9cc5c2955da0d10688a4fe9a3e763e59a1bb1130068b050a933903b853"
+      }
+    },
+    "before": {
+      "argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "120s",
+        "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+        "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/run_root_defaultbackend35_once2_exact_census_NOTRUN.py",
+        "--phase",
+        "guard",
+        "--config",
+        "/workspace/engineering/rcc-defaultbackend35-once2-exact-census-PREEXEC-NOTRUN/FROZEN-defaultbackend35-once2-exact-census-config-NOTRUN.json",
+        "--config-sha256",
+        "7021f53c12b5392ffe5cf14da7915f25188c68e6d5a9a3b07458b588c4b527fa",
+        "--release",
+        "/workspace/engineering/root-one-defaultbackend35-once2-exact-census-release.json",
+        "--release-sha256",
+        "f9079a6dfb8e234e4976d1a3feb32d88be9f3ff9ba6c32bc3a6d43d5cfecbf02"
+      ],
+      "parent_seconds": 135,
+      "returncode": 0,
+      "stderr_binding": {
+        "bytes": 0,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-2/before/original.stderr.private",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_binding": {
+        "bytes": 61,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-2/before/original.stdout.private",
+        "sha256": "91b59c9cc5c2955da0d10688a4fe9a3e763e59a1bb1130068b050a933903b853"
+      }
+    },
+    "primary": {
+      "argv": [
+        "timeout",
+        "--signal=TERM",
+        "--kill-after=10s",
+        "120s",
+        "/workspace/engineering/pr308/action_server/.venv/bin/python",
+        "-m",
+        "pytest",
+        "--noconftest",
+        "-n0",
+        "-vv",
+        "-rA",
+        "/workspace/engineering/rcc-defaultbackend35-typed-oracle-once2-PREEXEC-NOTRUN/test_default_cgroup_descriptor_walk_NOTRUN.py",
+        "--basetemp",
+        "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-2/basetemp",
+        "-o",
+        "tmp_path_retention_policy=all",
+        "--robocorp-log-output",
+        "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-2/logger",
+        "--junitxml",
+        "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-2/junit.xml",
+        "--rootdir",
+        "/workspace/engineering"
+      ],
+      "parent_seconds": 150,
+      "returncode": 0,
+      "stderr_binding": {
+        "bytes": 58727,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-2/primary/original.stderr.private",
+        "sha256": "e8c674f11924c2f209ec04ecc2d4b71c30486017a641493f7030813c83629d65"
+      },
+      "stdout_binding": {
+        "bytes": 15364,
+        "mode": "0o600",
+        "path": "/workspace/engineering/root-one-current8d49-default-cgroup-walk-pure-controls-2/primary/original.stdout.private",
+        "sha256": "5dd5e5d2206d926a0d7d3fdced031d67487ce3fde48956fb34263c6a9384f637"
+      }
+    }
+  },
+  "release_binding": {
+    "bytes": 2026,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-one-defaultbackend35-once2-exact-census-release.json",
+    "sha256": "f9079a6dfb8e234e4976d1a3feb32d88be9f3ff9ba6c32bc3a6d43d5cfecbf02"
+  },
+  "schema": 1,
+  "scope": "35 real default descriptor walks on owned fake trees only, no host cgroup observations/signals/threshold calibration/profile adoption",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "status": "PASS_35_FAKE_BACKEND_CASES_PENDING_INDEPENDENT_ORIGINAL_CENSUS",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+}

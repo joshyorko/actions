@@ -1,0 +1,14 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -3728,6 +3728,11 @@
+ committing; a docs-only conflict does not establish source-tree identity or
+ transfer old test results to the new union.
+ 
++An automatic Git merge can combine workflow-generator and guide blobs without
++a textual conflict. Verify the complete generator AST against both parents and
++retain each accepted guide change; regenerate and compare every owned workflow.
++A conflict-free prospective tree is preparation evidence, not new source gates.
++
+ Before refreshing a dependent pull request, confirm that its dependency's
+ accepted source is present in the current target ref. An older dependency commit
+ in the PR branch or a previously reviewed local union is not sufficient. Refresh

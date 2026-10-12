@@ -1,0 +1,105 @@
+{
+  "actual_execution": "NOT_RUN",
+  "config": {
+    "bytes": 13345,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-currentc97e-concrete-TOKEN-LIGHT-PREEXECUTION/immutable-one-TOKEN-LIGHT-inputs.json",
+    "sha256": "c5378aa9dfceeb454255c1724f18ef505e09fe0d5fdc679a87b4db45fb92bb79"
+  },
+  "decision": "GO_CURRENTC97E_TOKEN_LIGHT_PREEXECUTION",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_reused": "docs/skills/repository-operations.md exact7487 canonical patch retained by c97 formatter child",
+    "Durable_learning_captured": "PR acquisition receives only builtin github.token under contents:read; tag-only cross-repository PAT stays separate. A metadata404 and credential wiring establish neither approved source content nor cross-repository access. Acquisition, source/content authority and provider admission remain distinct.",
+    "Evidence": "Current source formatter AST equality, prior independently verified generator one-line and two rendered PR env blocks, unchanged tag PAT/permissions/tasks; canonical patch full hash bound here",
+    "Remaining_uncertainty": "No current c97 test execution; actual OAuth visibility and approved revision still UNKNOWN. No cosmetic child required.",
+    "Stale_or_ambiguous_guidance_removed": "Old credential-free PR statement corrected to absence of cross-repository PAT, without promoting source authority",
+    "exact_delta": {
+      "bytes": 2467,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr307-PR-only-OAuth-token-source-PREPARATION/exact-current7487-canonical.patch",
+      "sha256": "dabe6ecec89b218837dae93f6e7d5c0a7206e325f62a1e13add155051142c05f"
+    }
+  },
+  "independent_static_proof": {
+    "bytes": 12382,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-currentc97e-independent-TOKEN-LIGHT-PREEXECUTION-review/private-independent-currentc97-source-and-launcher-static-proof.json",
+    "sha256": "9a5ac1bf84a013f8780a465ab9729507873de2df67a400aa12abdbbb2cd99e23"
+  },
+  "launcher": {
+    "bytes": 15510,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr307-currentc97e-concrete-TOKEN-LIGHT-PREEXECUTION/launch_one_owned_token_light_reviewed_mode.py",
+    "sha256": "daa820a18cfd9bc98c6a79e256fffb2f03a58ea0e415d2efacf78fead7e14dd7"
+  },
+  "owner": {
+    "bytes": 8675,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr307-currentc97e-concrete-TOKEN-LIGHT-PREEXECUTION/OWNERFINAL-currentc97e-retargeted-concrete-TOKEN-LIGHT-PREEXECUTION-final-NOTRUN.json",
+    "sha256": "b117d56bd984c4420ad3b15a860c09547326ebcc7498e78248e7796de27a6daf"
+  },
+  "parents": [
+    "7487d94bf1a0453119928fe2d73d1413a252a312"
+  ],
+  "preexecution_review": "GO_EXACT_BOUND_PACKET_ONLY",
+  "remaining_holds": [
+    "All currentc97 source gates still NOT_RUN, affected full suites require separate Root release after LIGHT and capacity qualification",
+    "Remote2314 source CI is historical and not currentc97 proof",
+    "OAuth repository404 visibility and approved source/content authority remain unresolved; readonly builtin PR token is not cross-repository access qualification",
+    "No native RCC/wheel/browser/provider/installed-consumer/private/backend/full issue/release/publication/merge qualification"
+  ],
+  "root_release_requirements": {
+    "always_post": "Launcher attempts current source/config/self/retained-reference guard in finally; post failures retained separately without replacing original primary. Outer forced termination must not be labelled complete postguard without retained evidence.",
+    "argv_template": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "900s",
+      "bash",
+      "-c",
+      "source /workspace/actions-cloud/activate.sh && exec /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python /workspace/engineering/pr307-currentc97e-concrete-TOKEN-LIGHT-PREEXECUTION/launch_one_owned_token_light_reviewed_mode.py \"$@\"",
+      "pr307-token-light",
+      "/workspace/engineering/pr307-currentc97e-concrete-TOKEN-LIGHT-PREEXECUTION/root-one-TOKEN-LIGHT-release.json",
+      "ROOT_AUTH_SHA256_FROM_ANNOUNCED_TYPED_RELEASE",
+      "OWNER_ANNOUNCED_INDEPENDENT_REVIEW_PATH",
+      "OWNER_ANNOUNCED_INDEPENDENT_REVIEW_SHA256"
+    ],
+    "attempt_path": "/workspace/engineering/pr307-currentc97e-token-light-once-owned",
+    "bounds": {
+      "outer_KILL_grace_seconds": 10,
+      "outer_TERM_seconds": 900,
+      "owned_wrapper_fallback_seconds": [
+        5,
+        5
+      ],
+      "per_phase_TERM_KILL_grace_seconds": 10,
+      "primary_remaining_budget_seconds": 780
+    },
+    "config_sha256": "c5378aa9dfceeb454255c1724f18ef505e09fe0d5fdc679a87b4db45fb92bb79",
+    "decision": "RELEASE_ONE_CURRENTC97E_TOKEN_LIGHT_ONLY",
+    "fresh_before_execution": [
+      "ABSENT unique attempt and distinct outer outputs; no consumed attempt reuse",
+      "Workspace free >=536870912 bytes; serialized with no other heavy/native/storage/install",
+      "Unset PYTHONOPTIMIZE and inherited PYTEST_ADDOPTS; preserve exact activation 18 allowlisted exports plus primary RCC PATH",
+      "Cached interpreter exact; launcher0444/config0400 and all reference/body/mode guards unchanged",
+      "Root captures private original outer stdout/stderr/terminal on all outcomes; preserve first failure, no automatic retry"
+    ],
+    "independent_review": "Exact owner-announced path and SHA256 of this receipt; bind in regular nonsymlink 0600 own-UID/GID release before launch",
+    "launcher_sha256": "daa820a18cfd9bc98c6a79e256fffb2f03a58ea0e415d2efacf78fead7e14dd7",
+    "release_path": "/workspace/engineering/pr307-currentc97e-concrete-TOKEN-LIGHT-PREEXECUTION/root-one-TOKEN-LIGHT-release.json",
+    "schema": 1,
+    "source": "c97edfd10edb5b1c63f8a6371bfd2905996a2da2",
+    "tree": "f8d3477451fa601643ef6c06f6b1e616e2407643"
+  },
+  "schema": 1,
+  "source": "c97edfd10edb5b1c63f8a6371bfd2905996a2da2",
+  "source_review": "GO_FORMATTER_ONLY_CHILD_UNTESTED",
+  "tree": "f8d3477451fa601643ef6c06f6b1e616e2407643",
+  "upstream_disposition": "none; no confirmed dependency defect and no external posts",
+  "verified_admission": {
+    "GREEN": "Current own Devutils workflow/line tests and baseline removed, Runtime helper guards, configured static, original Toolkit task, 8 generated roundtrips and all30 YAML, staged real Invoke with fake gh only",
+    "RED": "Exactly 2 named parameterized testcase failures, pytest exit1, no skip/error, canary.get and builtin-token literal in assertion text; no JUnit failure.type requirement",
+    "counts": "Toolkit181/Runtime41 are declared expected source-gate scope, not executed pass counts",
+    "isolation": "All pytest scopes own distinct initially absent absolute basetemp/JUnit and ALL retention; Runtime-only Robot logger option; controlled Invoke private staged outputs"
+  }
+}

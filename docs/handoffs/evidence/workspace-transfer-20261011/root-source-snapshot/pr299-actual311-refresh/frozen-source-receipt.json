@@ -1,0 +1,404 @@
+{
+  "schema": "actions-pr299-actual311-source-refresh/v1",
+  "status": "FROZEN_SOURCE_FOR_INDEPENDENT_REVIEW_NO_PUSH",
+  "branch": "feat/shared-run-output-20261010",
+  "head": "2ad0fd6a899d26aa92d719390f639a76b89fb6f3",
+  "tree": "ae973b037c3370ce605c8b7b0db813e0ff48a6fa",
+  "parent": "a5b389269fcfb363fdfafbfe91a2f3172d410326",
+  "ordinary_merge": {
+    "head": "a5b389269fcfb363fdfafbfe91a2f3172d410326",
+    "tree": "0f5a438ef06a22a1efabe155aba471f68a44c537",
+    "ordered_parents": [
+      "80ba4c3adce0d0f5fd8a7040d271ab19433e4042",
+      "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc"
+    ]
+  },
+  "source_proof": {
+    "path": "/workspace/engineering/pr299-actual311-refresh/source-union-proof.json",
+    "bytes": 90872,
+    "sha256": "3b6a9d14f50b23d785eed89f176fdddca1f8e8edd2b0048aca0ea0a646081b2a"
+  },
+  "source_inspector": {
+    "path": "/workspace/engineering/pr299-actual311-refresh/verify_source.py",
+    "bytes": 5479,
+    "sha256": "1d089947b6bddaae663eb28b050aa9c951bc0fed043633750347595cc557b3a2"
+  },
+  "all_old_target_leaves_retained": true,
+  "original23_source_test_modes_blobs_exact9cb_and80ba": {
+    "action_server/src/actions/server/_actions_run.py": [
+      "100644",
+      "blob",
+      "24fc844ad99c658d70f6f5069f0df250bb72ad87"
+    ],
+    "action_server/src/actions/server/_api_analytics.py": [
+      "100644",
+      "blob",
+      "8b3177b995500ec111fbc79b8e7c8589319b1cd2"
+    ],
+    "action_server/src/actions/server/_api_run.py": [
+      "100644",
+      "blob",
+      "9f0bab96b6e65c0bd455cc4c8aaa8cc554a22c24"
+    ],
+    "action_server/src/actions/server/_models.py": [
+      "100644",
+      "blob",
+      "405304f2e593fdfe949b431851eb0dae39c6ab96"
+    ],
+    "action_server/src/actions/server/_runs_state_cache.py": [
+      "100644",
+      "blob",
+      "3774e9a0e77d43e63a18733a4ff5652454ef06ce"
+    ],
+    "action_server/src/actions/server/migrations/__init__.py": [
+      "100644",
+      "blob",
+      "7889794dd3db1019bf4cdc179fa892c05943dc79"
+    ],
+    "action_server/src/actions/server/migrations/migration_add_run_outputs.py": [
+      "100644",
+      "blob",
+      "3629ef55d42815acc7c1701bdd5b6949d3394ec6"
+    ],
+    "action_server/src/actions/server/run_outputs/__init__.py": [
+      "100644",
+      "blob",
+      "6787c69b364901f1a1eed93e553ae8cfe4d194ef"
+    ],
+    "action_server/src/actions/server/run_outputs/filesystem.py": [
+      "100644",
+      "blob",
+      "89170173dd0f1771e1a9923bb8532f2b28448dd1"
+    ],
+    "action_server/src/actions/server/run_outputs/models.py": [
+      "100644",
+      "blob",
+      "ae75ceee659776fd51e1dda36528a22640afba19"
+    ],
+    "action_server/src/actions/server/run_outputs/service.py": [
+      "100644",
+      "blob",
+      "55f5c09aeb0a3e9199b56916bb7fee41708b35c6"
+    ],
+    "action_server/src/actions/server/run_outputs/types.py": [
+      "100644",
+      "blob",
+      "cac30880373c26f648bb1c835fb74449f567cb22"
+    ],
+    "action_server/tests/action_server_tests/mcp/test_alias_history.py": [
+      "100644",
+      "blob",
+      "2ff3159d6dd04e583a903fb5b913a7491a3ce9c8"
+    ],
+    "action_server/tests/action_server_tests/mcp/test_resource_history.py": [
+      "100644",
+      "blob",
+      "ef1f0d0c14afd7895c268e817699113f7325679f"
+    ],
+    "action_server/tests/action_server_tests/run_outputs/test_concurrency.py": [
+      "100644",
+      "blob",
+      "6aff0138011bc1e5bce88e70ba542044601292ff"
+    ],
+    "action_server/tests/action_server_tests/run_outputs/test_filesystem.py": [
+      "100644",
+      "blob",
+      "b10f3ede197762836b043df60101a95f02bbd62d"
+    ],
+    "action_server/tests/action_server_tests/run_outputs/test_migration.py": [
+      "100644",
+      "blob",
+      "91d10765b9d3441c76817735790c9a318eb94e3c"
+    ],
+    "action_server/tests/action_server_tests/run_outputs/test_service.py": [
+      "100644",
+      "blob",
+      "4fcd73a8764c52f2681ba909541d578ddd2457cf"
+    ],
+    "action_server/tests/action_server_tests/test_artifact_storage.py": [
+      "100644",
+      "blob",
+      "3dc769d5b5372af72e8991140135cd652cea0bdf"
+    ],
+    "action_server/tests/action_server_tests/test_database.py": [
+      "100644",
+      "blob",
+      "fbca68efd3222f2b40ed6db6799ef4edad513796"
+    ],
+    "action_server/tests/action_server_tests/test_database/test_database_schema_evolution.txt": [
+      "100644",
+      "blob",
+      "41ad231369f0d38413ca0749ea865bfca9a23d7d"
+    ],
+    "action_server/tests/action_server_tests/test_database_shared.py": [
+      "100644",
+      "blob",
+      "6836bef3d56d454ec0d2a90b5bd530a3ad51a5b3"
+    ],
+    "action_server/tests/action_server_tests/test_server_websockets.py": [
+      "100644",
+      "blob",
+      "c4f6fc5a04d380a6bb7ac3b0874dfd0286dd77e4"
+    ]
+  },
+  "producer_comparison": {
+    "current_count": 274,
+    "current274_exact_original299": true,
+    "historical_count": 268,
+    "historical262_match": true,
+    "historical6changed": {
+      "action_server/src/actions/server/_actions_run.py": {
+        "historical": [
+          "100644",
+          "blob",
+          "3637cfcd94e5d91f0bf5b9b2fc4b3e94d4562826"
+        ],
+        "current": [
+          "100644",
+          "blob",
+          "24fc844ad99c658d70f6f5069f0df250bb72ad87"
+        ]
+      },
+      "action_server/src/actions/server/_api_analytics.py": {
+        "historical": [
+          "100644",
+          "blob",
+          "7f82f03353940b457fb5057e22e02a5c6f962197"
+        ],
+        "current": [
+          "100644",
+          "blob",
+          "8b3177b995500ec111fbc79b8e7c8589319b1cd2"
+        ]
+      },
+      "action_server/src/actions/server/_api_run.py": {
+        "historical": [
+          "100644",
+          "blob",
+          "424094841a29bd11d6bc7fb0f3b9e528573353d9"
+        ],
+        "current": [
+          "100644",
+          "blob",
+          "9f0bab96b6e65c0bd455cc4c8aaa8cc554a22c24"
+        ]
+      },
+      "action_server/src/actions/server/_models.py": {
+        "historical": [
+          "100644",
+          "blob",
+          "e2cd220d7c948d87bf961a253c28b3ee54e8dcbb"
+        ],
+        "current": [
+          "100644",
+          "blob",
+          "405304f2e593fdfe949b431851eb0dae39c6ab96"
+        ]
+      },
+      "action_server/src/actions/server/_runs_state_cache.py": {
+        "historical": [
+          "100644",
+          "blob",
+          "6428a201a110b8d1073fc3b5265d9282723de944"
+        ],
+        "current": [
+          "100644",
+          "blob",
+          "3774e9a0e77d43e63a18733a4ff5652454ef06ce"
+        ]
+      },
+      "action_server/src/actions/server/migrations/__init__.py": {
+        "historical": [
+          "100644",
+          "blob",
+          "cb68bcb4a2e41ecefcb5a409ce5c26065a505d05"
+        ],
+        "current": [
+          "100644",
+          "blob",
+          "7889794dd3db1019bf4cdc179fa892c05943dc79"
+        ]
+      }
+    },
+    "historical6added": {
+      "action_server/src/actions/server/migrations/migration_add_run_outputs.py": [
+        "100644",
+        "blob",
+        "3629ef55d42815acc7c1701bdd5b6949d3394ec6"
+      ],
+      "action_server/src/actions/server/run_outputs/__init__.py": [
+        "100644",
+        "blob",
+        "6787c69b364901f1a1eed93e553ae8cfe4d194ef"
+      ],
+      "action_server/src/actions/server/run_outputs/filesystem.py": [
+        "100644",
+        "blob",
+        "89170173dd0f1771e1a9923bb8532f2b28448dd1"
+      ],
+      "action_server/src/actions/server/run_outputs/models.py": [
+        "100644",
+        "blob",
+        "ae75ceee659776fd51e1dda36528a22640afba19"
+      ],
+      "action_server/src/actions/server/run_outputs/service.py": [
+        "100644",
+        "blob",
+        "55f5c09aeb0a3e9199b56916bb7fee41708b35c6"
+      ],
+      "action_server/src/actions/server/run_outputs/types.py": [
+        "100644",
+        "blob",
+        "cac30880373c26f648bb1c835fb74449f567cb22"
+      ]
+    },
+    "5_selected_tests_exact_old_target92498": true,
+    "old92498qualification": "HOLD; changed plus added leaves are not excluded; no current native build or execution"
+  },
+  "whole_github_exact_target": true,
+  "only_followup": "Canonical reader-acquisition versus active-stream revocation clarification; no production/service/test/workflow mutation",
+  "gates": {
+    "Doctor": "PASS",
+    "Bootstrap": "REUSED exact24 inputs plus five own prepared package environments; no installer",
+    "Toolkit": 69,
+    "scoped_shared_run_output": {
+      "pass": 189,
+      "integration_deselect": 12,
+      "skip": 1
+    },
+    "full_configured_Runtime_source": {
+      "pass": 1200,
+      "skip": 13,
+      "workers": 2
+    },
+    "full_configured_lint": "Ruff check/format/Isort PASS",
+    "typecheck_files": 347,
+    "all_workflow_and_dependabot_roundtrip": "PASS"
+  },
+  "bootstrap_reuse": {
+    "path": "/workspace/engineering/pr299-actual311-refresh/bootstrap-reuse.json",
+    "bytes": 2734,
+    "sha256": "e4bd2d1144a002eeebbf5fdad0c72166a0fa2d41d1adeec41319a24351647ee4"
+  },
+  "original_bootstrap": {
+    "path": "/workspace/engineering/pr299-refresh-owned/bootstrap.log",
+    "bytes": 14145,
+    "sha256": "8bdeac2f153ad303d8c3b68743517072374630ef3af2b488fb52824a006fab69"
+  },
+  "old_receipts_own_original_identities": [
+    {
+      "path": "/workspace/engineering/pr299-refresh-owned/successor-receipt.json",
+      "bytes": 22519,
+      "sha256": "0982b641af073a82c4105aa02538f7e21b219faf35e89d3f2818b9c96c5f5d52"
+    },
+    {
+      "path": "/workspace/engineering/pr299-independent-current-review/independent-current-source-review.json",
+      "bytes": 15206,
+      "sha256": "8604a06969f760f9343e427f564c5e4527337cfa3aa39c37fa3698dcb9a78929"
+    },
+    {
+      "path": "/workspace/engineering/pr299-windows-independent-diagnosis.json",
+      "bytes": 7249,
+      "sha256": "4eef69f680caf8891a6c2749b345f753cf5b9d71bc3f4e8e4b3301e9bff406b8"
+    },
+    {
+      "path": "/workspace/engineering/pr311-original-windows-independent-review/original-hosted-diagnostic-review.json",
+      "bytes": 18731,
+      "sha256": "81b819b9eb7a4d25bb46e0517b27bc303f78b80c32c7df89a6da4198967afe95"
+    },
+    {
+      "path": "/workspace/engineering/campaign-checkpoint/docs/program/evidence/wave8-convergence-20261010/results-receipts/pr299_owner.json",
+      "bytes": 6578,
+      "sha256": "74f5ed37fabfcdcf84696d53ee50311d468930d7ae705e9a8dedb674cf276034"
+    },
+    {
+      "path": "/workspace/engineering/campaign-checkpoint/docs/program/evidence/wave8-convergence-20261010/results-receipts/pr299_review.json",
+      "bytes": 5835,
+      "sha256": "4eff29d4e2c34c0bb05cca496772be3a858a1e02a0d62acb93032a3e42fccf6f"
+    }
+  ],
+  "gate_logs": {
+    "diff-check": {
+      "path": "/workspace/engineering/pr299-actual311-refresh/diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "doctor": {
+      "path": "/workspace/engineering/pr299-actual311-refresh/doctor.log",
+      "bytes": 13487,
+      "sha256": "fdbd3016959c4813c117e3a3efdc87fe1d116545fada56dd30b8006e608b85ea"
+    },
+    "full-source": {
+      "path": "/workspace/engineering/pr299-actual311-refresh/full-source.log",
+      "bytes": 308725,
+      "sha256": "cce5029e2d51951e0751b4f9a142a63765a0269e2c49b44e2db676173b111575"
+    },
+    "generator-roundtrip": {
+      "path": "/workspace/engineering/pr299-actual311-refresh/generator-roundtrip.log",
+      "bytes": 4565,
+      "sha256": "df710675e7254774d730c0c823e3613ed3669ca27c9674d632adc9dd4e6f1fda"
+    },
+    "scoped": {
+      "path": "/workspace/engineering/pr299-actual311-refresh/scoped.log",
+      "bytes": 4564,
+      "sha256": "0164433d74b90578b474acf5917bda23be1ee76d979a2bdda166d3febb44df1d"
+    },
+    "source-union-proof": {
+      "path": "/workspace/engineering/pr299-actual311-refresh/source-union-proof.log",
+      "bytes": 64,
+      "sha256": "aa9494812772b91c6a5314cf87a7a85dfd41167107d5b5d09914fbfb0bc47173"
+    },
+    "static": {
+      "path": "/workspace/engineering/pr299-actual311-refresh/static.log",
+      "bytes": 5694,
+      "sha256": "81d0568ad1acaca220cb50f3b8c1b6945d04539a417eeeef4dbaa7e3792f97c2"
+    },
+    "toolkit": {
+      "path": "/workspace/engineering/pr299-actual311-refresh/toolkit.log",
+      "bytes": 14346,
+      "sha256": "f49c48d6226fdfa9576f269d049be8f42c5209e2c2f3ccbe0c9811225623f959"
+    }
+  },
+  "generator_roundtrip": {
+    "path": "/workspace/engineering/pr299-actual311-refresh/generator-roundtrip.json",
+    "bytes": 6211,
+    "sha256": "d5a8e400e35af2c927077c326088be4e18d47976ac544254ba68c3590ac45dc6"
+  },
+  "documentation_improvement": {
+    "Canonical_file_changed": "docs/skills/repository-operations.md",
+    "Exact_delta": {
+      "path": "/workspace/engineering/pr299-actual311-refresh/canonical-actual-delta.patch",
+      "bytes": 1203,
+      "sha256": "b2331e6946e7c276dcf71d1ce98292c8ef4783931628f2c665e752357a26a4a3"
+    },
+    "Durable_learning": "Authorization and provider reader acquisition occur inside the same Workspace transaction; open-reader streaming exits that transaction and is not recalled by later revocation. Revoked grants deny future acquisition before provider access.",
+    "Evidence": "Preserved RunOutputService.resolve/ResolvedOutput.read source and existing deny-before-provider sentinel regression; scoped189PASS1platformSKIP12integrationDESELECT and full configured source gate; original23 blobs unchanged",
+    "Stale_or_ambiguous_guidance_removed": "Clarified successful handle/restart/read-acquisition evidence does not establish active-stream revocation or public authenticated transport",
+    "Remaining_uncertainty": "Current hosted/native/backend/transport acceptance and fullprivate134 remain open; historical native262/6+6 mismatch, Windows FIRSTreadiness cause and cleanup dimensions unknown; PR300 waits actual299 admission"
+  },
+  "cached_GitHub_control": {
+    "receipt": {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/pr299-current-prospective-control.json",
+      "bytes": 2648,
+      "sha256": "9772d5bd3aa7b18c02e551f847250f992d004ee2728f95f652d117074607af20"
+    },
+    "scope": "Cached GitHub controls test the oldfbde/80ba tuple, not the actual1c75/a5b389 union. No earlier CI carried forward."
+  },
+  "historical_failure_scope": {
+    "299_original": "9cb resourceFIRSTstartup90s timeout, variables89.28/16marks89.259;20s cleanup incomplete dimensionUNKNOWN",
+    "311_original": "1151 sixFIRSTtimeouts;two samplednodes80/88CPU_IO,templateunsampled,rawprogressabsent; no causeinference",
+    "preservation": "Originalbytehash/source identities retained; actual1c75 import does not retrospectively fixcause or requalify older execution"
+  },
+  "not_run": [
+    "Actual RCC/provider/native/browser/PostgreSQL gate",
+    "Fresh hosted CI",
+    "Public authenticated transport or fullprivate134",
+    "PR300 retarget/refresh before actual299 admission"
+  ],
+  "tool_identity": {
+    "rcc_path": "/workspace/actions-cloud/bin/rcc",
+    "rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "rcc_version": "v18.19.3 from Doctor log"
+  },
+  "upstream_disposition": "none"
+}

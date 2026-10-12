@@ -1,0 +1,56 @@
+{
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; exact accepted7d070 preservationparagraph verified, no cosmetic duplicate",
+    "Durable_learning_captured": "Complete archive preservation is separate from namespace origin, source or functional acceptance, and gate capacity/authority",
+    "Evidence": {
+      "bytes": 6094,
+      "path": "/workspace/engineering/capacity-recovery-batch22-independent-review/independent-actual-stream-and-preservation-proof.json",
+      "sha256": "ae295c6e26b618887afb28afe9a171d4abe14838e910a08e052bdfc8baa0601b"
+    },
+    "Remaining_uncertainty": "Historical filesystem/livehandles metadata limits, originUNKNOWN, failedgatecontents and actualcoldfunctionalqualification remainHOLD",
+    "Stale_or_ambiguous_guidance_removed": "Unknown namespace origin not inferred; source1.2GB floor is separate from stricter cold-native envelope"
+  },
+  "Upstream_disposition": "none",
+  "actual_cold_floor_bytes": 1288490189,
+  "counts": {
+    "after22_archives": 48,
+    "after22_indices": 22,
+    "new_archives": 5,
+    "new_internal_hardlink_headers": 0,
+    "new_recorded_members": 9564,
+    "prior_archives": 43,
+    "prior_indices": 21
+  },
+  "fresh_workspace_bytes": 644194304,
+  "gateway_authority": "None from archive review; root308 full already separately running, future312 full needs distinct release/fresh floor/serialization",
+  "independent_proof": {
+    "bytes": 6094,
+    "path": "/workspace/engineering/capacity-recovery-batch22-independent-review/independent-actual-stream-and-preservation-proof.json",
+    "sha256": "ae295c6e26b618887afb28afe9a171d4abe14838e910a08e052bdfc8baa0601b"
+  },
+  "independent_readonly_verifier": {
+    "bytes": 12878,
+    "path": "/workspace/engineering/capacity-recovery-batch22-independent-review/verify-readonly-actual.py",
+    "sha256": "0c857a64df23f23c17206f6e3d72f0c26595ee0335fede694cbe1001cccdaa0f"
+  },
+  "limits": [
+    "Historicallivehandles/removalcensus not replayed",
+    "Representable TARmtime agrees within1us; exactnanoseconds/rootmetadata/ACL/xattrs/inodes unknown",
+    "Failed563d existence only, untouched",
+    "No extraction/removal/source/gateway/native/test execution by reviewer"
+  ],
+  "preservation": "Allnew recordedpayload/types/modes/uidgid/symlinks/hardlinkcontent/gzipEOF CRC ISIZE exact; prior420refs plus20/21 three archives+indices/cache416/source3081421+71/cleanup1422/native1192/helper0444 unchanged",
+  "private_log": {
+    "bytes": 724,
+    "path": "/workspace/engineering/capacity-recovery-batch22-independent-review/private-readonly-verification.log",
+    "sha256": "d794806864c89e1e7334904365c9e33262a17ebf0cf7dc868cba697affce5a03"
+  },
+  "root_safe": {
+    "bytes": 2690,
+    "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch22.json",
+    "sha256": "e8fd9a9370a10e07d739a9a7b2685e4cfac84699d8e11903ef5b4a7bfdc626b8"
+  },
+  "source_full_floor_bytes": 1200000000,
+  "source_origin": "UNKNOWN; not inferred",
+  "status": "GO_SCOPED_BATCH22_ARCHIVE_PRESERVATION_ONLY_NO_GATE_AUTHORIZATION"
+}

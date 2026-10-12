@@ -1,0 +1,63 @@
+{
+  "scope": "Read-only PR282 dependency-ready engineering review; no repository source changed",
+  "pr_head": "66cc132367be02b05bc08c981b900a68d156cd52",
+  "pr_tree": "ca8685372e67ce07b55f9a830a60134582107873",
+  "publication_source": "a70993fafc99a9f94041485542d5a720797ca394",
+  "publication_tag": "actions-core-1.0.3",
+  "registry_files": [
+    {
+      "filename": "actions_core-1.0.3-py3-none-any.whl",
+      "sha256": "8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265",
+      "url": "https://files.pythonhosted.org/packages/25/b9/86adaaf08f60deb47c749f8dc2b59a0c672b9278daf917304bffd613ba90/actions_core-1.0.3-py3-none-any.whl",
+      "yanked": false
+    },
+    {
+      "filename": "actions_core-1.0.3.tar.gz",
+      "sha256": "1df0ac65bf75103da654d7b3abe0c66da590af07bb24399613f83f20a24f0691",
+      "url": "https://files.pythonhosted.org/packages/37/dc/ddb21765ddc7c471144e1ef247f1573cf1d438c0bbbe56e396120ea851a2/actions_core-1.0.3.tar.gz",
+      "yanked": false
+    }
+  ],
+  "historical_receipts_source": "4c7e653060cf7618955a9c0655c35525a36e7c8d:docs/program/evidence/wave2-overlay-20261010T2005Z",
+  "accepted_prior_checkpoint": "2c6de9797122de0ebf09a75ffeb01073dd75a4ba",
+  "accepted_checkpoint_template_test_bundle_bytes_unchanged": true,
+  "hosted_run": 38087550206,
+  "hosted_artifact": 11684141199,
+  "hosted_artifact_zip_sha256": "a901a4eb84c9b7712ad98626568db853b3abbf52368d5c468bc1df151ea6ce95",
+  "tested_checkout": "121599e9c6c714ec98161b1a5060e659e4401fd8",
+  "tested_tree": "ca8685372e67ce07b55f9a830a60134582107873",
+  "pinned_browser": {
+    "path": "<runner-home>/.cache/ms-playwright/chromium-1234/chrome-linux64/chrome",
+    "sha256": "0b20b130e7edd9dd51873be867761295fe0cfad490c2b9a64f95bd3cfc08fa71",
+    "status": "passed",
+    "version": "Google Chrome for Testing 151.0.7922.34"
+  },
+  "candidate_wheel_sha256": "80f8e0b828ceb92d7cb7412a92f9306a4b0d2960365bf9aee899ad0cd71144f8",
+  "published_consumer_hosted_gate_present": false,
+  "remaining_production_contract_gap": "artifact:null fails shared Success; no caller-owned Workspace/application/revision authorized artifact binding",
+  "next_bounded_wave": {
+    "branch": "existing feat/canvas-template-20261010",
+    "source_changes": [
+      "Reuse published Runtime/browser test; emit measured source/worker/resource/browser receipt",
+      "Preserve explicit pinned Playwright browser selection; remove implicit host Chromium override from published consumer",
+      "Run published consumer in existing Linux workflow and archive validated sanitized receipt beside distinct candidate receipt",
+      "Correct stale canonical published-floor and acceptance-path guidance"
+    ],
+    "expected_assertions": [
+      "Production canvas package manifest unchanged and declares actions-core=1.0.3; other five templates remain1.0.2",
+      "Managed worker version1.0.3, distribution-owned selected files, resolved interpreter-prefix containment, three measured member hashes match independently verified published wheel",
+      "Runtime tools/list returns exact ui association; resources/read bytes and MIME equal embedded source resource",
+      "Runtime match alpha returns exactly two rows, miss returns fixed no_matches; artifact:null stays explicitly partial",
+      "Actual browser path is pinned Playwright executable, version and SHA recorded; two real search calls, no external browser requests, no artifact-status button",
+      "Receipt source commit/tree match actual checkout; JUnit exactly1 executed case,0 skips,0failures,0errors",
+      "Candidate receipt remains distinct; no inference of complete-wheel,cold-acquisition,packaged/frozen,authorization or ChatGPT acceptance"
+    ]
+  },
+  "documentation_proposal": "/workspace/actions-cloud/receipts/pr282-review/documentation-proposal.md",
+  "upstream_disposition": "none",
+  "uncertainty": [
+    "Current published consumer has no serialized receipt; historical1-passmanualsystemChromium checkpoint is not whole-current-union evidence",
+    "No source defect or upstream defect reproduced in this read-only lane",
+    "All production artifact acceptance must wait for shared binding contracts; do not invent artifact handles"
+  ]
+}

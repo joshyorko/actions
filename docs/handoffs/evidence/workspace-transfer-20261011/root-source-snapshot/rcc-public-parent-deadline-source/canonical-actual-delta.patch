@@ -1,0 +1,34 @@
+diff --git a/docs/skills/repository-operations.md b/docs/skills/repository-operations.md
+index b6d9d1de..442b5448 100644
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -2860,6 +2860,29 @@ starting its acceptance work. Its dedicated supervisor adopts descendants as a
+ subreaper and drains exited children through `ECHILD` on successful completion.
+ Unexpected live descendants, failed ownership inspection, or incomplete cleanup
+ remain failures; cleanup escalation cannot silently preserve an earlier PASS.
++The worker acceptance receipt remains provisional until its external parent
++returns successfully. In the retained public parent at `44afd960`, a timeout follows
++the generic exception path and returns failure without changing a receipt already
++written by the worker. A retained worker `PASS` therefore cannot establish a
++successful parent deadline or overall acceptance. Require both outcomes; do
++not infer failed Runtime cleanup from a parent timeout when the worker measured
++cleanup separately. Keep those measured cells and the original failed attempt.
++
++The parent-deadline receipt guard marks overall acceptance failed using the
++fixed `watchdog_timeout` reason while retaining the worker's measured cells and
++unknown fields. It first preserves the original worker receipt bytes in an
++invocation-owned private file and binds their digest and original acceptance
++status in the aggregate receipt. It atomically replaces the aggregate through
++a same-directory private temporary file. Absent or malformed worker evidence
++is not synthesized; fixed unavailable or persistence-failure states retain the
++primary parent failure without exposing arbitrary command or exception bodies.
++An existing worker key reserved for the new supervisor annotation produces a
++fixed `annotation_conflict` failure without overwriting unknown worker data.
++That unchanged worker status remains provisional because the parent failed.
++Controls cover valid, missing, malformed and failed receipts, plus serialization,
++write, fsync and replacement failures. Existing-root refusal remains authoritative.
++Public checkpoint recovery and service-free controls do not recover a missing
++private inspector/specification or qualify provider, metadata or native execution.
+ The wrapper cell accepts only terminal `completed` with an integer zero exit
+ code, excluding booleans, missing status and nonterminal states. Focused tests
+ exercise detached live writers and fast-exiting adopted children, but source

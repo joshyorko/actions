@@ -1,0 +1,112 @@
+{
+  "capture_UTC": "2026-10-12T00:36:30.438153+00:00",
+  "dirty_status": "See prior complete17worktree snapshot; only checkpoint tracked dirty known, no source/index mutations by this reader.",
+  "local_branches": [
+    {
+      "local_sha": "1299cc4bb6586f467d36ca124faaaaa77362695f",
+      "match": true,
+      "ref": "refs/heads/feat/canvas-template-20261010",
+      "remote_sha": "1299cc4bb6586f467d36ca124faaaaa77362695f"
+    },
+    {
+      "local_sha": "74beef4d220c3a1e8f983cecd42b9bb84ac75e79",
+      "match": true,
+      "ref": "refs/heads/feat/run-output-transport-20261010",
+      "remote_sha": "74beef4d220c3a1e8f983cecd42b9bb84ac75e79"
+    },
+    {
+      "local_sha": "3155fc55ea7d47afbc547fddc963b5860462924b",
+      "match": true,
+      "ref": "refs/heads/feat/shared-run-output-20261010",
+      "remote_sha": "3155fc55ea7d47afbc547fddc963b5860462924b"
+    },
+    {
+      "local_sha": "2d86c5cf92d3acb274a8ceb5d57bfb8b12c779b6",
+      "match": true,
+      "ref": "refs/heads/fix/captured-child-cleanup-deadline-20261011",
+      "remote_sha": "2d86c5cf92d3acb274a8ceb5d57bfb8b12c779b6"
+    },
+    {
+      "local_sha": "fada8e068f61f6e0e380ec4685eed2f4cf0b9ade",
+      "match": true,
+      "ref": "refs/heads/fix/database-savepoint-admission-20261010",
+      "remote_sha": "fada8e068f61f6e0e380ec4685eed2f4cf0b9ade"
+    },
+    {
+      "local_sha": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+      "match": true,
+      "ref": "refs/heads/fix/rcc-candidate-wheel-identities-20261010",
+      "remote_sha": "8d49d0865ad5ad27b2d4e325ec135212080625e8"
+    },
+    {
+      "local_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "match": true,
+      "ref": "refs/heads/fix/rcc-published-artifact-details-20261010",
+      "remote_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    },
+    {
+      "local_sha": "ec70a2928461941c129b1c05332dc441070e0184",
+      "match": true,
+      "ref": "refs/heads/fix/runtime-checkout-eol-20261011",
+      "remote_sha": "ec70a2928461941c129b1c05332dc441070e0184"
+    },
+    {
+      "local_sha": "9760d5ec44876558c4941c4c3190abc8d92d14a1",
+      "match": true,
+      "ref": "refs/heads/fix/runtime-release-changelog-selection-20261010",
+      "remote_sha": "9760d5ec44876558c4941c4c3190abc8d92d14a1"
+    },
+    {
+      "local_sha": "843cb16dc071fc764f11f1e0b3b07432dcd04a7d",
+      "match": true,
+      "ref": "refs/heads/handoff/actions-swarm-mk3-wave8-20261010",
+      "remote_sha": "843cb16dc071fc764f11f1e0b3b07432dcd04a7d"
+    },
+    {
+      "local_sha": "639b591a19d80688afcfabf62d6f4bff8b8a0d69",
+      "match": true,
+      "ref": "refs/heads/mk3/wave9-rcc-public-source-union-20261010",
+      "remote_sha": "639b591a19d80688afcfabf62d6f4bff8b8a0d69"
+    },
+    {
+      "local_sha": "83123ff42c21587e3eb944e20af89f1a9e9ff0ea",
+      "match": true,
+      "ref": "refs/heads/test/auth-route-census-20261010",
+      "remote_sha": "83123ff42c21587e3eb944e20af89f1a9e9ff0ea"
+    },
+    {
+      "local_sha": "f75dcae52fcd78c5c382d3903b012e5b049ca48b",
+      "match": true,
+      "ref": "refs/heads/test/canvas-runtime-cache-isolation-20261010",
+      "remote_sha": "f75dcae52fcd78c5c382d3903b012e5b049ca48b"
+    },
+    {
+      "local_sha": "5c8084c61389e293eb992c24bc0f2962f705378e",
+      "match": true,
+      "ref": "refs/heads/test/mcp-alias-frozen-control-20261010",
+      "remote_sha": "5c8084c61389e293eb992c24bc0f2962f705378e"
+    },
+    {
+      "local_sha": "d75b25fb4c354e5c95bc0f639b426d6ff402104b",
+      "match": true,
+      "ref": "refs/heads/test/runtime-installed-wheel-import-guard-20261010",
+      "remote_sha": "d75b25fb4c354e5c95bc0f639b426d6ff402104b"
+    },
+    {
+      "local_sha": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "match": true,
+      "ref": "refs/heads/test/workitems-ui-errors-20261010",
+      "remote_sha": "dfca3f8e63465595acff421f37f34d2a9d0a1b39"
+    },
+    {
+      "local_sha": "a70993fafc99a9f94041485542d5a720797ca394",
+      "match": null,
+      "ref": "refs/heads/work",
+      "remote_sha": null
+    }
+  ],
+  "original_rows_SHA256": "448559292b92dec8b047821e39227b14a4a655e52c654a451ff79bb8c16a42fe",
+  "remote_integration_sha": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "schema": 1,
+  "status": "ONE_READONLY_NAMED_REMOTE_BRANCH_COMPARISON_NOT_PUSH_OR_MERGE"
+}

@@ -1,0 +1,214 @@
+{
+  "error_count": 0,
+  "failure_count": 0,
+  "native_or_storage_qualification": false,
+  "prepared_source_owner": {
+    "bytes": 9322,
+    "mode": "0o400",
+    "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/OWNERFINAL-first-five-v8-current9760-measured-managed-Git-SOURCE-PREEXECUTION-final-history-scope-NOTRUN.json",
+    "sha256": "485dc5ee1c67cb79b16fb9ea140626958b02ec77c91699ce62d307b7cefc4475"
+  },
+  "raw_actual_independent": {
+    "actual_binding": {
+      "bytes": 8089,
+      "mode": "0o600",
+      "path": "/workspace/engineering/first-five-v8-current9760-managed-Git-PURE18-once-owned/original-18-complete-machine-census.json",
+      "sha256": "28ba47b66bb90ebf73f8e4834b42005e417dfe73f9471538397d02c962518ba0"
+    },
+    "config_binding": {
+      "bytes": 47036,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/frozen_first_five_v8_current9760_measured_managed_Git_PURE18_inputs_NOTRUN_v4_originalFAIL_and_historical_system_scope.json",
+      "sha256": "0d4423f45acce573da98b262613971e497a91a9415d61f59142182678897365b"
+    },
+    "control_source_binding": {
+      "bytes": 17042,
+      "mode": "0o444",
+      "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/test_first_five_v8_current9760_measured_managed_Git_PURE18_SOURCE_PREPARED.py",
+      "sha256": "0ee011db2e7edec7564ef05fc3ed610bb6f15483f52bd9ececb593c44aa5f096"
+    },
+    "decision": "GO_FIRST_FIVE_V8_ACTUAL_PURE18_ONLY",
+    "documentation": {
+      "delta": "No canonical file mutation. Reuse original machine-census identity, selected managedtool versus historicaldeclaredtool, rawstatus preservation and typed adapter/source-subject lessons.",
+      "evidence": [
+        {
+          "bytes": 8089,
+          "mode": "0o600",
+          "path": "/workspace/engineering/first-five-v8-current9760-managed-Git-PURE18-once-owned/original-18-complete-machine-census.json",
+          "sha256": "28ba47b66bb90ebf73f8e4834b42005e417dfe73f9471538397d02c962518ba0"
+        },
+        {
+          "bytes": 5072,
+          "mode": "0o600",
+          "path": "/workspace/engineering/first-five-v8-current9760-managed-Git-PURE18-once-owned/original-parent-terminal.json",
+          "sha256": "45d63719dc431e82a542a0844c122136607443034cf32018a682e20a48a56506"
+        },
+        {
+          "bytes": 3755,
+          "mode": "0o400",
+          "path": "/workspace/engineering/root-first-five-v8-current9760-measured-Git-reviewed-PURE18-outer/OWNERFINAL-root-original-first-five-v8-PURE18-outer.json",
+          "sha256": "701370f89ec6d0f412b0614968d35ffb3948d35c39d6361c79d78cd97102215c"
+        },
+        {
+          "bytes": 1550,
+          "mode": "0o400",
+          "path": "/workspace/engineering/root-PURE18-v8-exact-reviewed-argv-original-execution/OWNERFINAL-root-original-exact-reviewed-PURE18-v8-execution.json",
+          "sha256": "a41b87d2ff8257fd1242d886da43a8987e893ca33d17efc66d24f9f2df75e7b7"
+        },
+        {
+          "bytes": 4750,
+          "mode": "0o400",
+          "path": "/workspace/engineering/first-five-v7-original-PURE18-ACTUALFAIL-independent-review/OWNERFINAL-independent-original-PURE18-v7v2-managed-Git-ACTUALFAIL.json",
+          "sha256": "ebdfa0ae82cda27d515192d26098c12c3a689f19212cee9f58920a3304ae570c"
+        }
+      ],
+      "stale_ambiguity_removed": "V8 actual18 passes do not rewrite V7 zero-testFAIL or fake a V7 prepared-source binding.",
+      "uncertainty": "Actual only these18 pure tests; realprocess visibility/inactiveenvironment ownership and realarchiving remain unqualified.",
+      "upstream_disposition": "none"
+    },
+    "historical_v7_zero_test_FAILURE_retained": {
+      "bytes": 4750,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v7-original-PURE18-ACTUALFAIL-independent-review/OWNERFINAL-independent-original-PURE18-v7v2-managed-Git-ACTUALFAIL.json",
+      "sha256": "ebdfa0ae82cda27d515192d26098c12c3a689f19212cee9f58920a3304ae570c"
+    },
+    "holds": [
+      "No realaccepted obsoleteenvironment archive/remove/restore",
+      "No actual nativeRCC control3/newer5/candidate7276 qualification",
+      "No memory/cgroupkernel/calibration/profile/provider/registry/issuegraphrelease qualification"
+    ],
+    "immutable_source_scope": {
+      "current119_physical_rows_rehashed_exact_old98_preserved": true,
+      "managed18_orderedPATH19_guard_source_and_originalPASS": true,
+      "native_original_fixture_read_only_no_binary_invoked": true,
+      "prepared30_logic_and_inputs_retained": true,
+      "selected_managedGit_cd367_mode775_uidgid1000_verified_not_systemGit_equivalence": true,
+      "source1440_native1192_guard_before_child_post_and_externalbeforepost_originalPASS": true,
+      "source4_head_tree_cleanchecks_originalguardPASS": true
+    },
+    "launcher_binding": {
+      "bytes": 12668,
+      "mode": "0o444",
+      "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/launch_first_five_v8_current9760_measured_managed_Git_PURE18_ROOT_ONLY_SOURCE_PREPARED_v2.py",
+      "sha256": "70b9123cd487a9b80fd7dfe62c06ba114ea0d5e46b7f2138c4fcccc55e50305c"
+    },
+    "original_PARENT_PREEXEC_review_binding": {
+      "bytes": 9382,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v8-concrete-ROOT-parent-independent-PREEXEC-review/OWNERFINAL-independent-exact-first-five-v8-concrete-ROOT-parent-PREEXEC-GO.json",
+      "sha256": "b425a501456ef50c789d36d5446346e5bb2920c374a427ba1d663e550317878d"
+    },
+    "original_actual_result": {
+      "actual_driver_compile_of_checked_buffer634_path_origin_verified": true,
+      "child_beforePASS_postPASS": true,
+      "elapsed_master_seconds": 2.076504640004714,
+      "error_count": 0,
+      "exact18_uniqueIDs_selected_outcome_stdio_match": true,
+      "failure_count": 0,
+      "five_stdlib_origins_before_after_same_measured_own_prefix": true,
+      "master0_external_before0_child0_external_alwayspost0": true,
+      "original_census_status": "PASS_PURE_CONTROLS_ONLY",
+      "os_spec_origin_frozen_retained": true,
+      "raw_status_not_rewritten": true,
+      "real_tiny_fixture_tar_and_admission_controls_executed_not_real_environment_archive": true,
+      "skip_count": 0,
+      "tests_run": 18
+    },
+    "original_census_binding": {
+      "bytes": 8089,
+      "mode": "0o600",
+      "path": "/workspace/engineering/first-five-v8-current9760-managed-Git-PURE18-once-owned/original-18-complete-machine-census.json",
+      "sha256": "28ba47b66bb90ebf73f8e4834b42005e417dfe73f9471538397d02c962518ba0"
+    },
+    "original_child_SOURCE_PREEXEC_review_binding": {
+      "bytes": 10868,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v8-current9760-independent-SOURCE-child-PREEXEC-review/OWNERFINAL-independent-first-five-v8-measured-managed-Git-SOURCE-child-PREEXEC-GO-ROOT-parent-HOLD.json",
+      "sha256": "d5beacad97a0041aa4e61dfb338220f027cad239d56daf8f39ac9e5ed4374ce9"
+    },
+    "original_child_owner_binding": {
+      "bytes": 5072,
+      "mode": "0o600",
+      "path": "/workspace/engineering/first-five-v8-current9760-managed-Git-PURE18-once-owned/original-parent-terminal.json",
+      "sha256": "45d63719dc431e82a542a0844c122136607443034cf32018a682e20a48a56506"
+    },
+    "original_child_terminal_binding": {
+      "bytes": 2794,
+      "mode": "0o600",
+      "path": "/workspace/engineering/first-five-v8-current9760-managed-Git-PURE18-once-owned/original-child-terminal.json",
+      "sha256": "e338cd267068b96b16bc8f5455a7a04ba6c5fa2b549277a8b3b3bffb6d2b5e30"
+    },
+    "original_master_binding": {
+      "bytes": 1550,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-PURE18-v8-exact-reviewed-argv-original-execution/OWNERFINAL-root-original-exact-reviewed-PURE18-v8-execution.json",
+      "sha256": "a41b87d2ff8257fd1242d886da43a8987e893ca33d17efc66d24f9f2df75e7b7"
+    },
+    "original_master_source_binding": {
+      "bytes": 4648,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-reviewed-PURE18-v8-original-master.py",
+      "sha256": "93a7bf95aa3ecbb2b0b06db51da6d48aff2705974ed5e343f0211445cdf89440"
+    },
+    "original_outer_owner_binding": {
+      "bytes": 3755,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-first-five-v8-current9760-measured-Git-reviewed-PURE18-outer/OWNERFINAL-root-original-first-five-v8-PURE18-outer.json",
+      "sha256": "701370f89ec6d0f412b0614968d35ffb3948d35c39d6361c79d78cd97102215c"
+    },
+    "original_parent_source_binding": {
+      "bytes": 6866,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-reviewed-first-five-v8-PURE18-external-parent.py",
+      "sha256": "764028fe6aad30ba9ece309f24a8465755fe5abe042bb0efb6054c7a877a639a"
+    },
+    "original_release_binding": {
+      "bytes": 1599,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-first-five-v8-current9760-measured-Git-reviewed-PURE18-outer/root-one-pure18-release.json",
+      "sha256": "d46722768330d54815e1485d5ce288bdb20f3beb957a1e35bd5f2ff5e85df6b1"
+    },
+    "post_enclosure_precision": {
+      "ROOTmaster_retains_bound_selfrow_in_original_before_post_envelopes": true,
+      "inner_ROOTparent_selfrow_and_review_release_all119_closure_logged_before_post": true,
+      "no_universal_quiescence_or_arbitrary_hardkill_completion_claim": true
+    },
+    "prepared_source_owner": {
+      "bytes": 9322,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v8-current9760-measured-managed-Git-PURE18-PREEXECUTION-PREPARATION/OWNERFINAL-first-five-v8-current9760-measured-managed-Git-SOURCE-PREEXECUTION-final-history-scope-NOTRUN.json",
+      "sha256": "485dc5ee1c67cb79b16fb9ea140626958b02ec77c91699ce62d307b7cefc4475"
+    },
+    "proof_binding": {
+      "bytes": 14459,
+      "mode": "0o400",
+      "path": "/workspace/engineering/first-five-v8-original-PURE18-independent-ACTUAL-review/private-original-v8-complete18-census-stdio-guards-and-capture-bindings-proof.json",
+      "sha256": "d0fdc44392450e04d6079f318ec89d088250c2f5f742df242b8ec45e084eabee"
+    },
+    "reviewer_execution": "Offline original capture JSON/stdio parsing and hashes only. No imports/tests/guard/storage/native or source change.",
+    "schema": 1,
+    "scope": "EXACT18_ADMISSION_CONTROLS_ROOT_ORIGINAL_EXECUTION_ONLY_NOT_ENVIRONMENT_PRESERVATION_OR_NATIVE",
+    "status": "GO_ORIGINAL_CURRENT9760_MEASURED_MANAGED_GIT_PURE18_ACTUAL_ONLY",
+    "storage_controller_adoption_HOLD": {
+      "ROOT_adapter_must_be_derived_from_these_exact_originals_and_bind_rawstatus_and_complete18_outcomes": true,
+      "actual_root_owner_PASS_adapter_not_created_by_this_review": true,
+      "current_ffee_controller_requires_V7_actualdecision_and_714cfg_preparedsource_f7c789_which_do_not_match_V8": true,
+      "inactive_owner_approval_not_conferred": true,
+      "named_independent_adapter_binding_required_before_controller_accepts_qualified_owner": true,
+      "needs_named_minimal_controller_decision_literal_and_cfg_pure18sourceowner485dc_retarg_NO_V7_relabel": true,
+      "raw_census8089_28ba_retains_PASS_PURE_CONTROLS_ONLY": true,
+      "real_preservation_release_current_protectedmanifest_approval_controls_capacity_still_separate": true
+    }
+  },
+  "raw_census_binding": {
+    "bytes": 8089,
+    "mode": "0o600",
+    "path": "/workspace/engineering/first-five-v8-current9760-managed-Git-PURE18-once-owned/original-18-complete-machine-census.json",
+    "sha256": "28ba47b66bb90ebf73f8e4834b42005e417dfe73f9471538397d02c962518ba0"
+  },
+  "raw_status": "PASS_PURE_CONTROLS_ONLY",
+  "schema": "ROOT_TYPED_V8_PURE18_DERIVED_ADMISSION_V1",
+  "skip_count": 0,
+  "status": "PASS",
+  "tests_run": 18
+}

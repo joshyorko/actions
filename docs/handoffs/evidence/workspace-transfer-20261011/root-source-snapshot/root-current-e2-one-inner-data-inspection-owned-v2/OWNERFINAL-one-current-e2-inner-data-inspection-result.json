@@ -1,0 +1,57 @@
+{
+  "protected_post": "PASS",
+  "remaining_holds": [
+    "generated OAuth authority",
+    "generated frontend source/producer authority",
+    "other-platform producer checkout",
+    "install/consumer/native/private/release/publication"
+  ],
+  "reports": [
+    {
+      "bytes": 226901,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-current-e2-one-inner-data-inspection-owned-v2/private-actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl-inspection.json",
+      "sha256": "926d832e96254fca373a85f7d9a387afc9eddd4bf5f895284b3def0992e81899"
+    },
+    {
+      "bytes": 226714,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-current-e2-one-inner-data-inspection-owned-v2/private-actions_runtime-1.0.3-cp312-cp312-macosx_12_0_arm64.whl-inspection.json",
+      "sha256": "0c93b7245b5dcad8d19898f6b7a66a0502782ce0a15123b7460d13f3273be791"
+    },
+    {
+      "bytes": 219004,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-current-e2-one-inner-data-inspection-owned-v2/private-actions_runtime-1.0.3-cp312-cp312-win_amd64.whl-inspection.json",
+      "sha256": "a93cacfdba80f59aede9a5b5c561492bcc2e697fcb0327f937acfdf2db883906"
+    },
+    {
+      "bytes": 226714,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-current-e2-one-inner-data-inspection-owned-v2/private-actions_runtime-1.0.3-cp313-cp313-macosx_12_0_arm64.whl-inspection.json",
+      "sha256": "7d84a65524c273022678cadc9812ec544950e97765508a47535154828adc0818"
+    },
+    {
+      "bytes": 226901,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-current-e2-one-inner-data-inspection-owned-v2/private-actions_runtime-1.0.3-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl-inspection.json",
+      "sha256": "6d3de4fe57723138cfb44387925068c9913c35e574b5792c1c4aaab19388a3bb"
+    },
+    {
+      "bytes": 219004,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-current-e2-one-inner-data-inspection-owned-v2/private-actions_runtime-1.0.3-cp313-cp313-win_amd64.whl-inspection.json",
+      "sha256": "4389343855e67dbe31892a9f4295570d7871477deac492d5c05709c3db1049e0"
+    },
+    {
+      "bytes": 215851,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-current-e2-one-inner-data-inspection-owned-v2/private-actions_runtime-1.0.3.tar.gz-inspection.json",
+      "sha256": "e6dcae3a4bc01f56cf993a4262eaa20d00620859ac086df0b72d8c7b862c5b19"
+    }
+  ],
+  "scope": "DATA_ONLY_CURRENT_AGGREGATE_INNER_INTEGRITY",
+  "source": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "status": "PASS_STRUCTURAL_INNER_INTEGRITY_WITH_CONTENT_AUTHORITY_HOLDS",
+  "tree": "afe2679cc93bf27fa5021c7698ee7ad3ee21a1b9"
+}

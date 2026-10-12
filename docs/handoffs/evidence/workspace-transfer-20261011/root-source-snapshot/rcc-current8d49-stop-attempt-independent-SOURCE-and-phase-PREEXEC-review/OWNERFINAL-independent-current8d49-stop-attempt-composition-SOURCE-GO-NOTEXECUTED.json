@@ -1,0 +1,82 @@
+{
+  "captured": "2026-10-11T22:35:57.523196+00:00",
+  "controls_binding": {
+    "bytes": 17058,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/test_native_memory_composition_v1_NOTRUN.py",
+    "sha256": "3ee4c56dc8145cdf48bc2c2be4a57a1aec67d0160703d014a192a68ae69aee36"
+  },
+  "decision": "GO_PRIVATE_NATIVE_MEMORY_COMPOSITION_SOURCE_STOP_ATTEMPT_LATCH_AND20_PREPARED_CONTROLS_ONLY",
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "durable_learning": "Track first callback-entry attempt including raised callback; failed preauthorization is not an attempt. Preserve original marker/primary/cleanup while suppressing only a second attempt.",
+    "evidence": [
+      {
+        "bytes": 12350,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-current8d49-stop-attempt-independent-SOURCE-and-phase-PREEXEC-review/independent-exact-latch-old16-new4-phase-source-and-current-preservation-proof.json",
+        "sha256": "14fc2efa9939983ffd0e16a2e92075ee484d2f445ffcff8c9bb32d7de8de4921"
+      },
+      {
+        "bytes": 738,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/canonical-preauthorization-record-versus-delegated-stop-attempt-proposed.md",
+        "sha256": "7df23f07f58f041ed6519eac441a7fd9c586f8bea2f4d0757d92c4cea5c82f7a"
+      }
+    ],
+    "exact_delta_accepted": {
+      "bytes": 738,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/canonical-preauthorization-record-versus-delegated-stop-attempt-proposed.md",
+      "sha256": "7df23f07f58f041ed6519eac441a7fd9c586f8bea2f4d0757d92c4cea5c82f7a"
+    },
+    "existing_9810_application_reuse": "Actual callback invocation/preauthorization/success distinctions in root guide accepted; no cosmetic duplicate.",
+    "remaining_uncertainty": "20methods/old16baseline/twoREDs unexecuted; realbackend35/currentnative/calibration/headroom unqualified.",
+    "stale_ambiguity": "Old record-existence predicate/sourceGO superseded only by named source scope, not originalFAIL/native."
+  },
+  "entry_binding": {
+    "bytes": 9632,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/native_memory_entry_v1_NOTRUN.py",
+    "sha256": "312919ce452670f4ab3e03c432b2dd21495e70a278a1f28376c7c912237caf67"
+  },
+  "overlay_binding": {
+    "bytes": 6688,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/native_memory_sampler_overlay_v1_NOTRUN.py",
+    "sha256": "b76adb2e93b92be0ae5ddab794f0d90078649a95a271c00d79fb95ed35d34d5f"
+  },
+  "owner_binding": {
+    "bytes": 19413,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/OWNERFINAL-current8d49-memory-stop-attempt-latch-successor-SOURCE-and-pure-phase-preparation-NOTRUN.json",
+    "sha256": "1482d5e23f66e0e7639659deb49b0f533df75c83cc9bfd0dd3fd0d6dcd86fb9d"
+  },
+  "phase_config_binding": {
+    "bytes": 23762,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/FROZEN-stop-attempt-composition-pure-control-config-NOTRUN.json",
+    "sha256": "59f02612d2660b793ead8c5c945af3d648e8427f6f3a30e872f0272113bf63ff"
+  },
+  "phase_helper_binding": {
+    "bytes": 6301,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/pure_stop_attempt_control_phase_NOTRUN.py",
+    "sha256": "db6542cbff2210516ba2bce7383f0c6e4e41af23709f1765136c4d2281bacbb1"
+  },
+  "proof_binding": {
+    "bytes": 12350,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-stop-attempt-independent-SOURCE-and-phase-PREEXEC-review/independent-exact-latch-old16-new4-phase-source-and-current-preservation-proof.json",
+    "sha256": "14fc2efa9939983ffd0e16a2e92075ee484d2f445ffcff8c9bb32d7de8de4921"
+  },
+  "schema": 1,
+  "scope": "Named SOURCE only; d9 originalHOLD retained and correctedsource doesnot relabel originals. All pure phases NOTRUN; native profile/adoption/default3/newer/private/release unqualified.",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_clean": true,
+  "source_count": 1440,
+  "source_findings": [],
+  "status": "INDEPENDENT_NATIVE_MEMORY_COMPOSITION_STOP_ATTEMPT_SOURCE_PREPARED_GO_NOT_EXECUTED",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,165 @@
+{
+  "adoption_protocol": {
+    "bounds": {
+      "always_post": "finally after caughtprimary/preflightfailure; OSkill doesnotguaranteefinallycompletion, unknown remainsHOLD",
+      "one_fresh_attempt_directory": "one-current396925-configured-source-full-once",
+      "outer_KILL_grace_seconds": 10,
+      "outer_TERM_seconds": 900,
+      "parent_full_subprocess_timeout_seconds": 640,
+      "pre_and_post_timeout_seconds_each": 120,
+      "retry": "FORBIDDEN",
+      "source_KILL_grace_seconds": 10,
+      "source_TERM_seconds": 600
+    },
+    "command_template": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "900s",
+      "bash",
+      "-c",
+      ". /workspace/actions-cloud/activate.sh\nexport PATH=\"/workspace/actions-cloud/bin:/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\"\nexec /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python /workspace/engineering/pr308-native-home-mode-current-a54-SOURCEFULL-preexecution/launch_current396925_source_full_once_v2.py --execute-root-authorized \"$1\" \"$2\"",
+      "current396925-source-full-v2-root-only",
+      "ROOT_RELEASE_FILE_REQUIRED",
+      "ROOT_RELEASE_SHA256_REQUIRED"
+    ],
+    "distinct_root_release_required": true,
+    "fresh_tmp_floor_bytes": 1200000000,
+    "fresh_workspace_floor_bytes": 1288490189,
+    "never_execute_if_target_or_source_changed": "After new integration ordinary samebranch refresh requires newlybound source+LIGHT/fullproposal; current396 review cannot carry.",
+    "proposal_sha256": "b9f857ef1305bcd906dd9afe6630a75e913fd2d74a6a6a5d675a535eba0b154c",
+    "requires_exact_source_tree_and_hashed_LIGHT_plus_independent_preexecution_receipts": true,
+    "root_release_schema": 1,
+    "root_release_status": "ROOT_RELEASE_ONE_SERIALIZED_CURRENT396925_CONFIGURED_SOURCE_FULL",
+    "serialized_no_other_heavy_or_installer": true,
+    "source_argv": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "600s",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCEFULL-preexecution/current396925_source_full_body_v2.py"
+    ],
+    "worker_count": "Explicit PYTEST_XDIST_AUTO_NUM_WORKERS2 before unchanged Runtime invoke test-not-integration; xdist plugin/package_environment source bindings retained"
+  },
+  "advisory_mode_clarification": "OriginalV2 nested informational worker proof mode400 stale; executable frozen row and actualfile600 verified. Named1327B702c supplement accepted without rewriting V2/commands/guards.",
+  "bindings": [
+    {
+      "bytes": 13489,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCEFULL-preexecution/OWNERFINAL-current396925-managed-configured-SOURCEFULL-preexecution-proposal-v2.json",
+      "sha256": "b9f857ef1305bcd906dd9afe6630a75e913fd2d74a6a6a5d675a535eba0b154c"
+    },
+    {
+      "bytes": 662,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current396925-independent-SOURCEFULL-preexecution-review/independent-static-current396925-SOURCEFULL-input-proof.json",
+      "sha256": "d5e57d5954ed68e7ea9c6def42df16e96b3fb2448b01a67f1578c02ac9cd9e97"
+    },
+    {
+      "bytes": 1327,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCEFULL-preexecution/OWNERFINAL-v2-inherited-worker-proof-mode-advisory-clarification.json",
+      "sha256": "702c7303f690af233ebec5e1d3cb537b7f364adb0da2dcd049bef80c78e9f19b"
+    },
+    {
+      "bytes": 848,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCEFULL-preexecution/canonical-explicit-absent-isolated-pytest-basetemp-retention-proposed.patch",
+      "sha256": "ff1283b175568162e82b7cc3c60482e5bf3de8543991736641d8144488fe8d06"
+    },
+    {
+      "bytes": 5111,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pytest38-vanished-numbered-retention-independent-review/OWNERFINAL-independent-vanished-pytest38-retention-reconciliation-and-source-HOLD-v2.json",
+      "sha256": "2406370ad9a0263d4bdc45c2c246fe314101517cb4c970245edcba02ff9f85c6"
+    },
+    {
+      "bytes": 7048,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current396925-independent-SOURCEFULL-preexecution-review/verify-static-current396925-preexecution-inputs.py",
+      "sha256": "213d77b407afc6bb2d24f8566e25183907b341ccf93e275f6e7477cadf033eca"
+    },
+    {
+      "bytes": 7110,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current396925-independent-SOURCEFULL-preexecution-review/verify-static-current396925-preexecution-inputs-v2.py",
+      "sha256": "3771275a00e00ef964fbf23c3583acb562afd19efd643dd9f55102d86d2da682"
+    },
+    {
+      "bytes": 421,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current396925-independent-SOURCEFULL-preexecution-review/original-reviewer-readonly-schema-TypeError.json",
+      "sha256": "8ce1cdcfcb66506a82b7c1b83e04f8525fbf6e2410b0a2ef03cee8ae89f28c09"
+    }
+  ],
+  "canonical_documentation": {
+    "accepted_lines": 6,
+    "disposition": "Accept exact source-backed six-line absent-owned-basetemp/ALL/inherited-options-rejection proposal. Root may use this compact implementation guidance with existing accepted eleven-line attribution/receipt boundary; avoid duplicate prose. No appguide edits by reviewer.",
+    "evidence": "Exact installedtmpdir/pathlib sources and concrete launcher parentexclusive creation/childabsence checks; configured invocations1 and inheritedADDOPTSreject; historical38 absence independently reviewed",
+    "exact_delta": {
+      "bytes": 848,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCEFULL-preexecution/canonical-explicit-absent-isolated-pytest-basetemp-retention-proposed.patch",
+      "sha256": "ff1283b175568162e82b7cc3c60482e5bf3de8543991736641d8144488fe8d06"
+    },
+    "owning_guide": "docs/skills/repository-operations.md",
+    "remaining_uncertainty": "Future sourcefull outcome and postguards not observed; OSkill may prevent finally, capacity must be fresh, targetmaychange.",
+    "stale_ambiguity": "Explicit target reuse destroys evidence; NONE keep0 is not cleanup disabled; default numbered parent not used here"
+  },
+  "execution_limit": "Both freshspace observations belowfloor; fullNOTRUN. Root cannot adopt or launch until both actualfloor guards and serialized distinctrelease pass. Native3/5/7276, public/privaterelease and finalmerge/CI gates unchanged/HOLD.",
+  "gates_tests_native_execution": 0,
+  "named_metadata_only_correction": {
+    "correction": "Narrative physical typecount corrected:237 total minus1fixtureGit minus1archive alias equals235physical. All reference/proof/code bindings and GO/HOLD boundaries unchanged.",
+    "original_bytes": 9067,
+    "original_path": "/workspace/engineering/pr308-current396925-independent-SOURCEFULL-preexecution-review/OWNERFINAL-independent-current396925-managed-isolated-SOURCEFULL-v2-static-preexecution-review.json",
+    "original_sha256": "e51839d3b0209ca17f951cc3133349fabd49b54ba8429eefd01c7647e8a6fb7b"
+  },
+  "original_payloads": {
+    "historical_failed_control3": "Originalmissing8dc exact archivedmember/ca557 bound without path restoration; FAIL remainsFAIL",
+    "original282": "1349PASS12SKIP originalsourcefull/logs/receipts unchanged; vanished38 scratch cannot be archived/reconstructed",
+    "originalV1": "1f974 proposal/45da config unchanged/HOLD unavailable fakearchive prerequisite, not retried",
+    "originalqualified237": "235 physical exact bindings +1 historicalfixture exactGitblob +1 exact archivedmember alias; total237. No oldnative currentproducer qualification."
+  },
+  "review_scope": "Immutable static preexecution only; no sourcefull or native gate invocation",
+  "reviewer_failure": "First readonly schema inspector mistook archive mapping bindingdict forpathname, TypeError before gates/mutation. Original retained; named readonlyV2 follows correctpath and verifiesallrefs.",
+  "schema": 1,
+  "scratch_contract": {
+    "child": "/tmp/actions-pr308-current396925-configured-full-once-v2/pytest",
+    "child_absent_before_invocation": true,
+    "cleanup": "NOT_AUTHORIZED_RETAIN_ALL",
+    "default_shared_numbered_parent": "NOT_USED",
+    "full_configured_invocations": 1,
+    "inherited_PYTEST_ADDOPTS": "REJECTED_NO_OVERRIDE",
+    "other_Toolkit_or_Light_uses_this_path": false,
+    "parent": "/tmp/actions-pr308-current396925-configured-full-once-v2",
+    "parent_exclusive0700_create_only_after_release": true,
+    "retention_policy": "all"
+  },
+  "source": "396925cb3d6527af1768b7f5333f9653c005fc55",
+  "source_mutations": false,
+  "status": "INDEPENDENT_CURRENT396925_SOURCEFULL_PREEXECUTION_GO_EXECUTION_HOLD_CAPACITY_ROOT_RELEASE",
+  "tree": "84f850f0d4e08b21afcd8220413ce94322370acf",
+  "upstream_disposition": "none",
+  "verified": {
+    "LIGHT33_bindings": true,
+    "both_floors_met": false,
+    "complete_Git_FS_source1426_exact": true,
+    "fresh_capacity_observation": {
+      "tmp": 1174843392,
+      "workspace": 1270521856
+    },
+    "historical237_bindings": true,
+    "historical_changed_fixture_Git": 1,
+    "historical_missing_aliases": 1,
+    "native1192": true,
+    "no_gate_imports_or_executions": true,
+    "no_root_release_or_attempt_created": true,
+    "prepared30": true,
+    "proposal26_bindings": true,
+    "schema": 1,
+    "source": "396925cb3d6527af1768b7f5333f9653c005fc55",
+    "status": "STATIC_PREEXECUTION_GO_CAPACITY_DISTINCT_ROOT_RELEASE_HELD",
+    "tree": "84f850f0d4e08b21afcd8220413ce94322370acf"
+  }
+}

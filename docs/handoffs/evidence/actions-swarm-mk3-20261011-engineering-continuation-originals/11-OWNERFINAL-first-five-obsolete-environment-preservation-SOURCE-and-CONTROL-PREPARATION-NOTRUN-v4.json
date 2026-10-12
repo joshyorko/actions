@@ -1,0 +1,387 @@
+{
+  "candidate_owner_binding": {
+    "bytes": 39793,
+    "mode": "0o400",
+    "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/OWNERFINAL-five-accepted-obsolete-checkout-environments-readonly-capacity-plan.json",
+    "sha256": "0c082b23462a3ea588cca2e98ac48934e5ae6a5b14cdc0083e55b3ccadffd2de"
+  },
+  "config_binding": {
+    "bytes": 17539,
+    "mode": "0o400",
+    "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/frozen_first_five_environment_preservation_inputs_SOURCE_PREPARED_v4.json",
+    "sha256": "d6d933f64940c6ed3b0849a6bcd10e07f6c2c834f968c6f1b354462625e4c028"
+  },
+  "conservative_conditional_ledger": {
+    "aggregate_archive_compressed_cap_bytes": 536870912,
+    "cgroup_headroom3113851289": "Uncalibrated proposed admission, not guaranteed RSS or solver fit.",
+    "combined_full_progress_alias_indices_cap_bytes": 67108864,
+    "compression_fit": "UNKNOWN_NOT_MEASURED; cap refusal retains selected originals and owned partial artifacts, no partial discard/recompression.",
+    "filesystem_allocation_reserve_bytes": 8388608,
+    "fresh_workspace_stop_reserve_bytes": 134217728,
+    "minimum_net_allocated_gain_if_all_five_complete_at_caps": 274575360,
+    "required_workspace_start_free_bytes": 746586112,
+    "source_FULL_TMP_floor_or_native_memory_admission": "NOT_QUALIFIED; later exact old compressed TMP/SHM archive relocation needs distinct reviewed operation and fresh measurements."
+  },
+  "control_source_binding": {
+    "bytes": 12323,
+    "mode": "0o444",
+    "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/test_first_five_environment_preservation_admission_SOURCE_PREPARED_v4.py",
+    "sha256": "bf271888be3d40f6be8b11c2e71de7232c0bce50ee30fcc96b1083f89498bf75"
+  },
+  "decision": "SOURCE_PREPARED_FIRST_FIVE_ONLY_NOT_CONTROL_OR_STORAGE_PREEXECUTION_GO",
+  "documentation_improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md existing accepted allocation/environment restoration paragraph reused exactly; private evidence text remains unchanged.",
+    "Durable learning captured": "Merged checkout obsolescence does not establish environment inactivity; interpreter/editable dependencies require original-path restoration. Disk preservation gain and later tmpfs/cgroup recovery have separate admission.",
+    "Evidence": {
+      "bytes": 576,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/accepted-canonical-environment-and-memory-scope-lesson-reused.txt",
+      "sha256": "1152b61293a6f44d0ba61b59c24630f30bb948efbde926f2e014cb1876e7561a"
+    },
+    "Remaining uncertainty": "All controls unexecuted; compression fit, current unreadable process use, ROOT protected-row completeness/typed alias handling, root parent adoption and exact later relocation still HOLD.",
+    "Stale or ambiguous guidance removed": "No cosmetic source delta. Explicitly refuses completed-pytest marker reuse, inferred inactive-owner authority, stale physical aliases and disk\u21d2memory gate claims."
+  },
+  "driver_binding": {
+    "bytes": 37609,
+    "mode": "0o444",
+    "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_first_five_accepted_obsolete_environments_SOURCE_PREPARED_v4.py",
+    "sha256": "63476ecaa50ba863afed8602dcad82c22c9349df022d0e9f0dde8d81d60e0bb7"
+  },
+  "first_dependency_ready_selection": {
+    "accepted_ancestor": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+    "all25_frozen_body_metadata_inventory_bindings": [
+      {
+        "bytes": 2387091,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr290-action_server-private-full-body-metadata-inventory.json",
+        "sha256": "f5127b2ae573d031cb1a074bfbc82cfa66c4b53b343bec491a0121bd3cadd376"
+      },
+      {
+        "bytes": 1702413,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr290-actions-private-full-body-metadata-inventory.json",
+        "sha256": "1966729dbff3e5168dbb253d3dbb1f4a09812d511df5ff2e5b5b12c10e5db88d"
+      },
+      {
+        "bytes": 1122969,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr290-actions-http-helper-private-full-body-metadata-inventory.json",
+        "sha256": "f6452bc22d99d0018a548d464aff323a3c081c146fe7a3e0fadc5d3cab90ef0a"
+      },
+      {
+        "bytes": 988304,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr290-devutils-private-full-body-metadata-inventory.json",
+        "sha256": "fa044e527def8d6ffbe10586091f588642f7a5300ef07a48dcc5d4b75a1bc63e"
+      },
+      {
+        "bytes": 992323,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr290-work-items-private-full-body-metadata-inventory.json",
+        "sha256": "8f1fe000ea1f97b1720dd04b583de7ec0c804f1ee4fb3970b29754afc51cf190"
+      },
+      {
+        "bytes": 2382175,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr309-action_server-private-full-body-metadata-inventory.json",
+        "sha256": "8c520af93c01f9ec0fb822991b30b74c5e107834012acd74dc564ca3fa09c450"
+      },
+      {
+        "bytes": 1696007,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr309-actions-private-full-body-metadata-inventory.json",
+        "sha256": "e912eb54df5ed2f638a0f6eff6c960de7dca23da57bcb246490f0d34a2a81345"
+      },
+      {
+        "bytes": 1119318,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr309-actions-http-helper-private-full-body-metadata-inventory.json",
+        "sha256": "7155d4f13ea55fa2e6a9b8d507457325390f5f421104cf74f5fcd80d239cf156"
+      },
+      {
+        "bytes": 988304,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr309-devutils-private-full-body-metadata-inventory.json",
+        "sha256": "b08f527e8f771191a51432815c070ca08c4f1c8a23debb637c571b84bbdff096"
+      },
+      {
+        "bytes": 988579,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr309-work-items-private-full-body-metadata-inventory.json",
+        "sha256": "0f376a0b790d22b67f82b5fc1a1f1e42bb424408dc9ec5e71130bd76f234149c"
+      },
+      {
+        "bytes": 2381381,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr310-action_server-private-full-body-metadata-inventory.json",
+        "sha256": "182be779e12399e24c83ccc06f06b7f6c2b2862ba945530ac82946d36889773d"
+      },
+      {
+        "bytes": 1696664,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr310-actions-private-full-body-metadata-inventory.json",
+        "sha256": "0c5c7d3649b71df30f79c73a43f6451710e64509acfd8a98ca51952362ed4b79"
+      },
+      {
+        "bytes": 1118722,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr310-actions-http-helper-private-full-body-metadata-inventory.json",
+        "sha256": "0dd40831d5da10ed4238ac67eb858edcdcf7a59edce8078749b9b51e28edcb4a"
+      },
+      {
+        "bytes": 985102,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr310-devutils-private-full-body-metadata-inventory.json",
+        "sha256": "0ea8b5c7d7befb4fa2f09cc672cece61a0ab243847e299ab3818cf911da69e4f"
+      },
+      {
+        "bytes": 988579,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr310-work-items-private-full-body-metadata-inventory.json",
+        "sha256": "3495915b217285dda14d2157db259e609e131764ce03fe0827615ba00dadde04"
+      },
+      {
+        "bytes": 2381065,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr311-action_server-private-full-body-metadata-inventory.json",
+        "sha256": "ab50df3cc7fc0e4b0e4d14a1230cdd7a14d1efbdee98365ed6acff02e46cffb2"
+      },
+      {
+        "bytes": 1696007,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr311-actions-private-full-body-metadata-inventory.json",
+        "sha256": "434f8a074f341569c453e5a1b37f65890adebc5fe1322d15183e19273addbc02"
+      },
+      {
+        "bytes": 1118722,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr311-actions-http-helper-private-full-body-metadata-inventory.json",
+        "sha256": "c030ffcf70898c1e940ff39ab99af33f28a7d06c1ee7de5df46a432b9a134c45"
+      },
+      {
+        "bytes": 984562,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr311-devutils-private-full-body-metadata-inventory.json",
+        "sha256": "2abaa2fff5b501fa98f513ecdc091a6714df75da11d4d084d6b947ccedff80b9"
+      },
+      {
+        "bytes": 988579,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/pr311-work-items-private-full-body-metadata-inventory.json",
+        "sha256": "931e7dbeeae79b0dc39941658c8ac947973ace66b13c31560c1a1998cdcf644a"
+      },
+      {
+        "bytes": 2700102,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/runtime-checkout-eol-action_server-private-full-body-metadata-inventory.json",
+        "sha256": "ff3be86460a2ebb88b694e4995bc44e1fc3236c0994c875ae77dbfa51061a195"
+      },
+      {
+        "bytes": 1704618,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/runtime-checkout-eol-actions-private-full-body-metadata-inventory.json",
+        "sha256": "4fb031f0ecfb62f5b766d9819c70b27af8aeff1823099ede628d18b6b6f4a640"
+      },
+      {
+        "bytes": 1122813,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/runtime-checkout-eol-actions-http-helper-private-full-body-metadata-inventory.json",
+        "sha256": "6f3b6da2bb6d34c3a4dd655da605a3c389e032c03348cd983fcc24e030448d64"
+      },
+      {
+        "bytes": 1055896,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/runtime-checkout-eol-devutils-private-full-body-metadata-inventory.json",
+        "sha256": "ff5ed9d275a9d454081d0b75faf726fcb3f172d2bda074eee30668f366e89e88"
+      },
+      {
+        "bytes": 1004052,
+        "mode": "0o400",
+        "path": "/workspace/engineering/obsolete-accepted-environments-four-checkout-readonly-preparation/runtime-checkout-eol-work-items-private-full-body-metadata-inventory.json",
+        "sha256": "37e163ca3614303636f81e9dfdc94a1a1b1596b0b7c75f2dfdedeeb066f3433a"
+      }
+    ],
+    "exact_selected5": [
+      "/workspace/engineering/runtime-checkout-eol/action_server/.venv",
+      "/workspace/engineering/runtime-checkout-eol/actions/.venv",
+      "/workspace/engineering/runtime-checkout-eol/actions-http-helper/.venv",
+      "/workspace/engineering/runtime-checkout-eol/devutils/.venv",
+      "/workspace/engineering/runtime-checkout-eol/work-items/.venv"
+    ],
+    "measured_allocated_bytes": 886943744,
+    "protected20_exact_roots": [
+      "/workspace/engineering/pr290/action_server/.venv",
+      "/workspace/engineering/pr290/actions/.venv",
+      "/workspace/engineering/pr290/actions-http-helper/.venv",
+      "/workspace/engineering/pr290/devutils/.venv",
+      "/workspace/engineering/pr290/work-items/.venv",
+      "/workspace/engineering/pr309/action_server/.venv",
+      "/workspace/engineering/pr309/actions/.venv",
+      "/workspace/engineering/pr309/actions-http-helper/.venv",
+      "/workspace/engineering/pr309/devutils/.venv",
+      "/workspace/engineering/pr309/work-items/.venv",
+      "/workspace/engineering/pr310/action_server/.venv",
+      "/workspace/engineering/pr310/actions/.venv",
+      "/workspace/engineering/pr310/actions-http-helper/.venv",
+      "/workspace/engineering/pr310/devutils/.venv",
+      "/workspace/engineering/pr310/work-items/.venv",
+      "/workspace/engineering/pr311/action_server/.venv",
+      "/workspace/engineering/pr311/actions/.venv",
+      "/workspace/engineering/pr311/actions-http-helper/.venv",
+      "/workspace/engineering/pr311/devutils/.venv",
+      "/workspace/engineering/pr311/work-items/.venv"
+    ],
+    "selected_is_environment_not_completed_pytest_namespace": true,
+    "selected_tree": "47a1e4fceb22fd15eaee1ca380ad6c005abfdde6",
+    "selected_worktree_source": "ec70a2928461941c129b1c05332dc441070e0184"
+  },
+  "indispensable_missing_execution_authority": {
+    "independent_actual_preservation_preexec": "NOT_CREATED",
+    "independent_control_preexec": "NOT_CREATED",
+    "manifest_scope_limit": "Prepared flat physical regular-file guard does not automatically resolve a historical archived-member alias or cover typed symlinks/directories. ROOT must bind complete actual protected rows and accepted archive/index aliases in a named measured manifest; unsupported rows or incomplete coverage remain HOLD before actual execution.",
+    "required_manifest_domains": [
+      "current_source",
+      "native_fixture",
+      "prepared_inputs",
+      "active_own_prefixes",
+      "current_configs",
+      "all_prior_archives_and_indices",
+      "failed_rcc_originals_and_aliases",
+      "external_restoration_dependencies"
+    ],
+    "root_inactive_owner_approval": "NOT_CREATED; ROOT must independently adopt exact five prefixes and explicit observed-only unreadable process policy. Candidate accepted-source ancestry and zero observable matches do not manufacture owner approval.",
+    "root_one_launcher": "Not authored in this packet. ROOT needs a separately frozen bound900TERM10 parent/600TERM10 child/captures and parent postguard on returned/timeout outcomes; script finally itself cannot guarantee postguard after external SIGKILL.",
+    "root_protected_input_manifest": "NOT_CREATED; source refuses execution without a separately regular hashed ROOT-measured manifest and independent review bound to that exact manifest."
+  },
+  "phase": "SOURCE_AND_CONTROL_PREPARATION_ONLY",
+  "proposed_servicefree_controls_NOTRUN": {
+    "baseline_first": "test_00_valid_exact_accepted_environment_baseline executes actual prepared _admit_policy on exact frozen candidate/config; each independent poison restores original fixture/model first.",
+    "before_and_alwayspost_required": "Exact current driver/config/control/candidate/all25 inventory and active-source/protected config/native provenance bindings; scoped root protected manifest and same originals before launch/finally under separate ROOT-reviewed control launcher.",
+    "control_launcher_and_ROOT_release": "NOT_CREATED; proposal only, so command NOT_AUTHORIZED.",
+    "environment": "PYTHONOPTIMIZE and PYTEST_ADDOPTS rejected; PYTHONDONTWRITEBYTECODE=1; private owner cwd and absolute private stdout/stderr; stdlib imports only, no RCC/package/venv execution.",
+    "future_unique_control_owner": "/workspace/engineering/first-five-obsolete-environments-servicefree-control-once-owned",
+    "future_unique_fixture": "/tmp/first-five-obsolete-environment-policy-controls-once-owned",
+    "method_count": 18,
+    "other_real_callables": [
+      "actual _verify_source with accepted retained Git baseline/wrong identity",
+      "actual _private_json and _regular_binding with owned private file baseline/body/mode/symlink poisons",
+      "actual _admit_layout with same-overlay/absent/parent/floor baseline and each poison",
+      "actual _admit_process_observation with explicit UNKNOWN baseline/live/malformed/absent field poisons",
+      "actual _dependency_overlap with literal selected-prefix poison",
+      "actual _environment_dependencies with existing/missing owned editable dependency",
+      "actual _admit_alias_map with exact five aliases and independent mapping/schema/scope poisons",
+      "actual unchanged _CappedWriter exact boundary/no extra byte and retained original/partial",
+      "actual unchanged _snapshot hardlink ownership/body mutation and _strict_verify tiny real PAX archive metadata/body/ns/link poisons"
+    ],
+    "parent_term_kill_grace_seconds": 10,
+    "proposed_exact_child_argv": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "120s",
+      "/usr/bin/python3",
+      "-u",
+      "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/test_first_five_environment_preservation_admission_SOURCE_PREPARED_v4.py"
+    ],
+    "proposed_parent_budget_seconds": 135,
+    "retention": "Stdlib unittest with no numbered pytest roots or cleanup; preserve all owned fixture/captures. No --basetemp/pytest/Robot-plugin claim.",
+    "scope_is_not_actual_environment_archive": "Any future test archive contains only synthetic tiny files within fresh owned fixture, never selected real environment bytes.",
+    "source_methods": [
+      "test_00_valid_exact_accepted_environment_baseline",
+      "test_subject_type_refuses_completed_pytest_reuse",
+      "test_unapproved_root_or_source_refused",
+      "test_no_automatic_inactive_owner_approval",
+      "test_unknown_scope_is_not_quiescence",
+      "test_exact_scope_and_restore_path_required",
+      "test_aggregate_caps_cannot_be_widened",
+      "test_layout_baseline_parent_mount_and_floor_poisons",
+      "test_observed_use_and_unknown_missing_fields_fail_closed",
+      "test_regular_binding_baseline_body_mode_and_symlink",
+      "test_private_root_release_baseline_mode_and_symlink",
+      "test_stream_cap_boundary_retains_partial_without_touching_original",
+      "test_snapshot_metadata_body_and_external_hardlink_boundaries",
+      "test_alias_baseline_and_individual_mapping_poisons",
+      "test_real_accepted_source_baseline_and_wrong_identity",
+      "test_current_config_dependency_overlap_baseline_and_selected_prefix",
+      "test_restore_dependency_existing_then_missing_path",
+      "test_real_pax_body_mode_nsmtime_symlink_archive_baseline_and_poison"
+    ]
+  },
+  "prototype_preservation": [
+    {
+      "bytes": 33635,
+      "mode": "0o444",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_accepted_obsolete_environments_source_prepared.py",
+      "sha256": "3dfbbd245f8dcb0c0c33e855b5a3b4b3a87a4fe334367da0dada6491da9fc1e8"
+    },
+    {
+      "bytes": 34532,
+      "mode": "0o444",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_accepted_obsolete_environments_source_prepared_v2.py",
+      "sha256": "98f977690dd7ef6d68da5f0c1ee4582100b054f836767a287b9995a7443bdcfb"
+    },
+    {
+      "bytes": 36982,
+      "mode": "0o444",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/preserve_accepted_obsolete_environments_source_prepared_v3.py",
+      "sha256": "262196054902818db5cea7265961a3520cf23b30080b646460c1dd496ba84022"
+    },
+    {
+      "bytes": 15410,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/frozen_environment_preservation_inputs_SOURCE_PREPARED.json",
+      "sha256": "dbda584b735e728c2e200cbe89cac7f77c34414ded0f2d62b9a5a83bce05c04d"
+    },
+    {
+      "bytes": 9191,
+      "mode": "0o444",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/test_environment_preservation_admission_SOURCE_PREPARED.py",
+      "sha256": "f229e39308a411bb0631b281eebab5774317923675308775b6b352922856ed2a"
+    },
+    {
+      "bytes": 2314,
+      "mode": "0o400",
+      "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/SOURCE-PREPARED-v3-control-callable-and-exact-reuse-proof.json",
+      "sha256": "98af13078f17e6ab0e6efc785ce6728cc150f6eebed9501e3ae857a60c1b61e0"
+    }
+  ],
+  "schema": "ownerfinal-first-five-accepted-obsolete-environment-preservation-source-preparation-v4",
+  "source_AST_and_selection_proof": {
+    "bytes": 5015,
+    "mode": "0o400",
+    "path": "/workspace/engineering/obsolete-accepted-environment-preservation-SOURCE-PREPARATION/SOURCE-PREPARED-v4-first-five-exact-reuse-and-control-plan-proof.json",
+    "sha256": "57b75d2310a6125381be8262b88b60aada0c26f0b52a2bba32755c41ffd00c09"
+  },
+  "source_changes": {
+    "aliases": "All five archive names single-copy promoted and verified first; complete fsynced restoration mapping before any expanded environment removal. Prefix absence must never be represented as live origin/physical-file PASS.",
+    "new_admission_and_preservation_boundary": "Typed immutable ROOT release/config/self/independent-review and ROOT protected manifest; source/config overlap checks; observable cwd/fd/exe/cmd/maps UNKNOWN policy; external cached interpreter and editable-source restoration dependencies; durable complete all-five physical restoration aliases before any selected removal; original primary exception preserved separately from postguard/report failure.",
+    "only_retargeted_existing_functions": [
+      "load_config: named fixed-five selection plus all25 baseline references",
+      "_completion_admitted: exact environment subject, accepted Git ancestor/current head/clean, current root metadata/body/inodes, explicit ROOT inactive-owner approval",
+      "_prestage_all: overlay staging/destination/configuration device/accounting replaces irrelevant TMP condition; original prestage body unchanged otherwise"
+    ],
+    "reviewed_archive_reuse": "16 original e717 function/class ASTs exact, including body inventory, PAX nanoseconds, hardlink partition, gzip EOF/CRC, capped writes, full pre-stage index, projected progress budget, filesystem fsync and exact single-copy promotion.",
+    "source_parse_only": "No imports, controls, compression, archive payload copies/removals, venv execution, tests/native/gateway/Git mutation."
+  },
+  "storage_parent_and_release_contract_NOTRUN": {
+    "archival_before_any_removal": "Two complete stable inventories; all-five staged fullbody/PAX/type/mode/UID/GID/ns/hardlink/gzip verification and immutable index; all-five exclusive promotion and complete durable aliases; maximum full progress/index/aliases budget checked; protected before-removal guard; only exact selected prefixes removable.",
+    "finally": "Driver preserves original primary error, categorically annotates secondary post/report error; ROOT outer must preserve captured original terminal/counters and separate post result even driver nonzero/timeout.",
+    "independent_required_decision": "GO_EXACT_ACCEPTED_OBSOLETE_ENVIRONMENT_PRESERVATION_PREEXECUTION",
+    "independent_review_mode": "0400 regular hash bound",
+    "root_release_decision": "RELEASE_ONE_REVIEWED_ACCEPTED_OBSOLETE_ENVIRONMENT_PRESERVATION_ONLY",
+    "root_release_mode": "0600 regular nonsymlink ownedUID/GID under exact private0700 parent",
+    "root_release_must_bind": [
+      "driver byte/mode/hash",
+      "config byte/mode/hash",
+      "independent reviewed exact protected manifest byte/mode/hash",
+      "independent PREEXEC decision and matching exact three bindings",
+      "inactive_owner_approval bool True/exact selected prefixes",
+      "unknown_process_channels_are_not_quiescence bool True/observed-only policy",
+      "child600/whole_parent900/TERM+KILL10",
+      "exclusive terminal output under root-owned release parent"
+    ]
+  },
+  "timestamp_utc": "2026-10-11 21:55:25 UTC",
+  "upstream_disposition": "none",
+  "writer_lease": "SOURCE_PREPARATION_FROZEN_RELEASED_NO_AUTOMATIC_EXECUTION"
+}

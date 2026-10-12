@@ -1,0 +1,438 @@
+{
+  "bindings": [
+    {
+      "bytes": 27889,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/actual_transport_v8.py",
+      "sha256": "33dda17140ef749e22f086cc91b92ed8c3230fddfde8a4a369769e2183f695a1"
+    },
+    {
+      "bytes": 6228,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/owned_cache_policy_v8.py",
+      "sha256": "4ccac4e3bd2c1e91352ef4e647968b4ca61f8691e1fc0f41e72a128a2942c205"
+    },
+    {
+      "bytes": 1575,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/v9_entry_bootstrap.py",
+      "sha256": "d3957c2e216731abf596897fbf0838809129a571743510692f2509228e2c7288"
+    },
+    {
+      "bytes": 14600,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/cgroup_memory_reader_observer_v1_NOTRUN.py",
+      "sha256": "24e38634118730ba9d222179518d13818c094c5a6ccfd368afd56521e964d014"
+    },
+    {
+      "bytes": 3330,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/proposed_cgroup_memory_state_v1_NOTRUN.py",
+      "sha256": "d2b3e6684898ab1b64f84ac7712a1f2f355d7ea5d680eb6ded0699cc090f5260"
+    },
+    {
+      "bytes": 2985,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/test_proposed_cgroup_memory_state_NOTRUN.py",
+      "sha256": "3b3a417379f608b6a5917c7720c6e846352f88d30fda1273c301a7c5ced1a4cb"
+    },
+    {
+      "bytes": 12959,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/runner_contracts_v3.py",
+      "sha256": "cbae3bb074d3995153ea5e6b694e7f9e61c047c6aa511b682959a63fedf7b726"
+    },
+    {
+      "bytes": 765564,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+      "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25"
+    },
+    {
+      "bytes": 4632,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/owned_monitor_v1.py",
+      "sha256": "834a7fe402e34b170f414df5dfe79762c0b49ed311a6222ba2f7bca5d87020a5"
+    },
+    {
+      "bytes": 9657,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-control3-V8-original-import-failure-independent-review/OWNERFINAL-independent-original-current8d49-control3-V8-import-failure-and-retained-source-review.json",
+      "sha256": "044fe00499ada7e9c975ce3250295151bdfefb985652b72cede4225a69e1fdc4"
+    },
+    {
+      "bytes": 6858,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-control3-V9-independent-actual-review/OWNERFINAL-independent-original-current8d49-control3-V9-native-FAIL-STOP-review.json",
+      "sha256": "cb88815f6d1816ff7f8b5302420d69bd7cacb0d052fe2ba3c957ddad5e596168"
+    },
+    {
+      "bytes": 5250,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-original-mode-admission-failure-independent-review/OWNERFINAL-independent-original-memory17-managed-mode-admission-FAIL-and-source-preservation.json",
+      "sha256": "12177ef012b94dab8e9e658d488db0bb147d37b2d3bc26454147aabaff2541d7"
+    },
+    {
+      "bytes": 12879,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-memory17-managed700-once2-independent-ACTUAL-review/OWNERFINAL-independent-original-managed700-fresh-once2-memory17-ACTUAL-pure-controls-GO.json",
+      "sha256": "8c294e6731287ab8aa263a520be910915170cd0abafee4ceb79898852357d14e"
+    },
+    {
+      "bytes": 20115,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-corrected-nine-once2-independent-ACTUAL-review/OWNERFINAL-independent-original-current8d49-corrected-nine-once2-baseline-ACTUAL-review.json",
+      "sha256": "e54f84619b73c236a8038c5602b27cc6affef8e82bd0d3e535bb2537548a811d"
+    },
+    {
+      "bytes": 5522,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-known-nine18-original-ACTUALFAIL-independent-review/OWNERFINAL-independent-original-known-nine18-semantic-ACTUALFAIL-JUnit-protocol-review.json",
+      "sha256": "4e936c2ccb342701b271dd41dea2ae4e863da758e7ff2006ab0c375c6fa30f20"
+    },
+    {
+      "bytes": 5237,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-known-nine18-once2-independent-ACTUAL-review/OWNERFINAL-independent-original-known-nine18-once2-source-only-ACTUAL-GO.json",
+      "sha256": "60c3d5b8ec68e2b746f0be3ff6aa75e3c7401ed1bbee816e6b601c3738868c6f"
+    },
+    {
+      "bytes": 10394,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-cgroup-reader-observer-independent-SOURCE-review/OWNERFINAL-independent-private-cgroup-reader-observer-SOURCE-and-prepared28-controls-GO.json",
+      "sha256": "dc37624bc1e47ad007320fb39a80e722128cd1d8acfcb99dc614add1552b0caa"
+    },
+    {
+      "bytes": 10560,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-reader28-independent-ACTUAL-review/OWNERFINAL-independent-original-current8d49-reader-observer28-ACTUAL-synthetic-controls-GO.json",
+      "sha256": "fcb6ab0604199980fa92ed237eaf837d9e31c84d7fef79c201f957cf945da19f"
+    },
+    {
+      "bytes": 2309,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-current8d49-control3-V8-original-outer-owned/OWNERFINAL-root-one-original-current8d49-control3-V8-outer-terminal.json",
+      "sha256": "ddc3f1b1fc0adba210ee984f8aa65d8901c879956f9326e5163fbfc4106e5deb"
+    },
+    {
+      "bytes": 5649,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-current8d49-control3-V9-original-outer-owned/OWNERFINAL-root-one-original-current8d49-control3-V9-outer-terminal.json",
+      "sha256": "895f8bc537523ebc1ee3f4feb685a9ebe5835a529aeb87ab95c67e2b31457b68"
+    },
+    {
+      "bytes": 13123,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-current8d49-memory-native-composition-SOURCE-PREPARED-NOTRUN/freeze_memory_composition_SOURCE_packet_NOTRUN.py",
+      "sha256": "dc2b899633a332dde9ef2c9e9d07f1f367afee7499a89dfe47548619270639ba"
+    },
+    {
+      "bytes": 9637,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-native-composition-SOURCE-PREPARED-NOTRUN/native_memory_entry_v1_NOTRUN.py",
+      "sha256": "ae5e2220a33a8680dce308f1da119b79e856944bbbf45e101cf353e07589e620"
+    },
+    {
+      "bytes": 6481,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-native-composition-SOURCE-PREPARED-NOTRUN/native_memory_sampler_overlay_v1_NOTRUN.py",
+      "sha256": "1d5bf618844a4ca501da8f86299b7e08e7af4af50fac04c5dff4381555eef9e3"
+    },
+    {
+      "bytes": 6355,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-native-composition-SOURCE-PREPARED-NOTRUN/prospective-ROOT-control3-root5-memory-profile-constructor-proposal-UNEXECUTABLE.json",
+      "sha256": "6abe2c8410c17d155faf2cffd8b67fad774a2d0b5b012cdc776fd31286a8bacb"
+    },
+    {
+      "bytes": 9635,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-native-composition-SOURCE-PREPARED-NOTRUN/static-original-AST-source-preservation-and-composition-control-map-NOTRUN.json",
+      "sha256": "eb456e47cb6740be6da07e2743b4bf53fb28ff95fd7b043af811077b6afc5b98"
+    },
+    {
+      "bytes": 12606,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-native-composition-SOURCE-PREPARED-NOTRUN/test_native_memory_composition_v1_NOTRUN.py",
+      "sha256": "230c499f180e4c7537ee0482b8aba0fea16eff204735db55f5612a09e8a5563b"
+    },
+    {
+      "bytes": 11993,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-native-composition-SOURCE-PREPARED-NOTRUN/OWNERFINAL-current8d49-native-memory-one-sampler-overlay-entry-and-composition-controls-SOURCE_PREPARED_NOTRUN.json",
+      "sha256": "7246751635ddddb6866adf9506032b7e95a81960628bef432509f16240fc347b"
+    },
+    {
+      "bytes": 6139,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-composition-independent-SOURCE-review/OWNERFINAL-independent-current8d49-native-memory-composition-SOURCE-HOLD.json",
+      "sha256": "d9f03ce06f0032dfdc922bcc083c7bd9c40a2c1b7f73e0c79cfc24be3340e077"
+    },
+    {
+      "bytes": 1908,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-composition-independent-SOURCE-review/minimum-delegated-attempt-latch-and-baseline-first-successor-controls-PROPOSAL-NOTAPPLIED.json",
+      "sha256": "de642078c749ef9a08c2022c663d47ccc9f9b10823986ea9e3c3cec4bae4334f"
+    },
+    {
+      "bytes": 6688,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/native_memory_sampler_overlay_v1_NOTRUN.py",
+      "sha256": "b76adb2e93b92be0ae5ddab794f0d90078649a95a271c00d79fb95ed35d34d5f"
+    },
+    {
+      "bytes": 9632,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/native_memory_entry_v1_NOTRUN.py",
+      "sha256": "312919ce452670f4ab3e03c432b2dd21495e70a278a1f28376c7c912237caf67"
+    },
+    {
+      "bytes": 17058,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/test_native_memory_composition_v1_NOTRUN.py",
+      "sha256": "3ee4c56dc8145cdf48bc2c2be4a57a1aec67d0160703d014a192a68ae69aee36"
+    },
+    {
+      "bytes": 6301,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/pure_stop_attempt_control_phase_NOTRUN.py",
+      "sha256": "db6542cbff2210516ba2bce7383f0c6e4e41af23709f1765136c4d2281bacbb1"
+    }
+  ],
+  "budgets": {
+    "ROOT_kill": 10,
+    "ROOT_outer_TERM": 1200,
+    "ROOT_parent": 1230,
+    "alwayspost_TERM": 120,
+    "alwayspost_parent": 135,
+    "before_TERM": 120,
+    "before_parent": 135,
+    "each_four_phase_TERM": 120,
+    "each_phase_parent": 135,
+    "fallback_sum": 810,
+    "margin": 390
+  },
+  "concrete_orchestration_independent": null,
+  "controls": {
+    "bytes": 17058,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/test_native_memory_composition_v1_NOTRUN.py",
+    "sha256": "3ee4c56dc8145cdf48bc2c2be4a57a1aec67d0160703d014a192a68ae69aee36"
+  },
+  "helper": {
+    "bytes": 6301,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/pure_stop_attempt_control_phase_NOTRUN.py",
+    "sha256": "db6542cbff2210516ba2bce7383f0c6e4e41af23709f1765136c4d2281bacbb1"
+  },
+  "original_SOURCE_HOLD": {
+    "bytes": 6139,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-memory-composition-independent-SOURCE-review/OWNERFINAL-independent-current8d49-native-memory-composition-SOURCE-HOLD.json",
+    "sha256": "d9f03ce06f0032dfdc922bcc083c7bd9c40a2c1b7f73e0c79cfc24be3340e077"
+  },
+  "original_overlay": {
+    "bytes": 6481,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-memory-native-composition-SOURCE-PREPARED-NOTRUN/native_memory_sampler_overlay_v1_NOTRUN.py",
+    "sha256": "1d5bf618844a4ca501da8f86299b7e08e7af4af50fac04c5dff4381555eef9e3"
+  },
+  "phase_order": [
+    "baseline_original16",
+    "RED_memory_preauthorization",
+    "RED_disk_preauthorization",
+    "restored_successor20"
+  ],
+  "phases": {
+    "RED_disk_preauthorization": {
+      "child_TERM_seconds": 120,
+      "expected_counts": {
+        "errors": 0,
+        "failed": 1,
+        "passed": 0,
+        "ran": 1,
+        "skipped": 0
+      },
+      "expected_ids": [
+        "frozen_stop_attempt_controls.CompositionControls.test_disk_preauthorization_unavailable_allows_first_valid_memory_stop"
+      ],
+      "kill_grace_seconds": 10,
+      "kind": "RED",
+      "methods": [
+        "test_disk_preauthorization_unavailable_allows_first_valid_memory_stop"
+      ],
+      "output": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/RED_disk_preauthorization",
+      "overlay_role": "original_held",
+      "parent_seconds": 135,
+      "predicate": {
+        "exception": "AssertionError",
+        "function": "test_disk_preauthorization_unavailable_allows_first_valid_memory_stop",
+        "line": 222,
+        "source_assertion": "self.assertEqual(calls, [42, 42])",
+        "source_path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/test_native_memory_composition_v1_NOTRUN.py"
+      }
+    },
+    "RED_memory_preauthorization": {
+      "child_TERM_seconds": 120,
+      "expected_counts": {
+        "errors": 0,
+        "failed": 1,
+        "passed": 0,
+        "ran": 1,
+        "skipped": 0
+      },
+      "expected_ids": [
+        "frozen_stop_attempt_controls.CompositionControls.test_memory_preauthorization_record_false_allows_first_valid_disk_stop"
+      ],
+      "kill_grace_seconds": 10,
+      "kind": "RED",
+      "methods": [
+        "test_memory_preauthorization_record_false_allows_first_valid_disk_stop"
+      ],
+      "output": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/RED_memory_preauthorization",
+      "overlay_role": "original_held",
+      "parent_seconds": 135,
+      "predicate": {
+        "exception": "AssertionError",
+        "function": "test_memory_preauthorization_record_false_allows_first_valid_disk_stop",
+        "line": 208,
+        "source_assertion": "self.assertEqual(records, [(42, 3.0)])",
+        "source_path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/test_native_memory_composition_v1_NOTRUN.py"
+      }
+    },
+    "baseline_original16": {
+      "child_TERM_seconds": 120,
+      "expected_counts": {
+        "errors": 0,
+        "failed": 0,
+        "passed": 16,
+        "ran": 16,
+        "skipped": 0
+      },
+      "expected_ids": [
+        "frozen_stop_attempt_controls.CompositionControls.test_absent_original_observation_never_fabricates_child_or_sample",
+        "frozen_stop_attempt_controls.CompositionControls.test_alive_or_unknown_join_fails_without_final_snapshot",
+        "frozen_stop_attempt_controls.CompositionControls.test_existing_command_primary_and_cleanup_failure_not_relabelled",
+        "frozen_stop_attempt_controls.CompositionControls.test_factory_install_once_and_same_original_functions_retained",
+        "frozen_stop_attempt_controls.CompositionControls.test_foreign_and_reused_pid_never_receive_stop",
+        "frozen_stop_attempt_controls.CompositionControls.test_initial_memory_admission_before_original_sampler_factory",
+        "frozen_stop_attempt_controls.CompositionControls.test_later_disk_failure_after_memory_stop_no_second_signal",
+        "frozen_stop_attempt_controls.CompositionControls.test_marker_mismatch_and_result_key_collision_fail_closed",
+        "frozen_stop_attempt_controls.CompositionControls.test_memory_failure_demotes_pass_retains_original_primary_cleanup",
+        "frozen_stop_attempt_controls.CompositionControls.test_memory_read_error_failure_not_disk_pass_or_child_attribution",
+        "frozen_stop_attempt_controls.CompositionControls.test_observation_error_marks_both_inspection_scopes_fail",
+        "frozen_stop_attempt_controls.CompositionControls.test_one_original_sampler_callback_marker_and_budgets_unchanged",
+        "frozen_stop_attempt_controls.CompositionControls.test_original_execution_exception_not_swallowed_or_second_delegation",
+        "frozen_stop_attempt_controls.CompositionControls.test_original_join_exception_retained_memory_unknown_fail",
+        "frozen_stop_attempt_controls.CompositionControls.test_prospective_profile_roots_and_missing_gate_cannot_promote",
+        "frozen_stop_attempt_controls.CompositionControls.test_simultaneous_disk_memory_failure_suppresses_second_signal"
+      ],
+      "kill_grace_seconds": 10,
+      "kind": "BASELINE",
+      "methods": [
+        "test_absent_original_observation_never_fabricates_child_or_sample",
+        "test_alive_or_unknown_join_fails_without_final_snapshot",
+        "test_existing_command_primary_and_cleanup_failure_not_relabelled",
+        "test_factory_install_once_and_same_original_functions_retained",
+        "test_foreign_and_reused_pid_never_receive_stop",
+        "test_initial_memory_admission_before_original_sampler_factory",
+        "test_later_disk_failure_after_memory_stop_no_second_signal",
+        "test_marker_mismatch_and_result_key_collision_fail_closed",
+        "test_memory_failure_demotes_pass_retains_original_primary_cleanup",
+        "test_memory_read_error_failure_not_disk_pass_or_child_attribution",
+        "test_observation_error_marks_both_inspection_scopes_fail",
+        "test_one_original_sampler_callback_marker_and_budgets_unchanged",
+        "test_original_execution_exception_not_swallowed_or_second_delegation",
+        "test_original_join_exception_retained_memory_unknown_fail",
+        "test_prospective_profile_roots_and_missing_gate_cannot_promote",
+        "test_simultaneous_disk_memory_failure_suppresses_second_signal"
+      ],
+      "output": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/baseline_original16",
+      "overlay_role": "original_held",
+      "parent_seconds": 135
+    },
+    "restored_successor20": {
+      "child_TERM_seconds": 120,
+      "expected_counts": {
+        "errors": 0,
+        "failed": 0,
+        "passed": 20,
+        "ran": 20,
+        "skipped": 0
+      },
+      "expected_ids": [
+        "frozen_stop_attempt_controls.CompositionControls.test_absent_original_observation_never_fabricates_child_or_sample",
+        "frozen_stop_attempt_controls.CompositionControls.test_alive_or_unknown_join_fails_without_final_snapshot",
+        "frozen_stop_attempt_controls.CompositionControls.test_disk_preauthorization_unavailable_allows_first_valid_memory_stop",
+        "frozen_stop_attempt_controls.CompositionControls.test_existing_command_primary_and_cleanup_failure_not_relabelled",
+        "frozen_stop_attempt_controls.CompositionControls.test_factory_install_once_and_same_original_functions_retained",
+        "frozen_stop_attempt_controls.CompositionControls.test_foreign_and_reused_pid_never_receive_stop",
+        "frozen_stop_attempt_controls.CompositionControls.test_initial_memory_admission_before_original_sampler_factory",
+        "frozen_stop_attempt_controls.CompositionControls.test_later_disk_failure_after_memory_stop_no_second_signal",
+        "frozen_stop_attempt_controls.CompositionControls.test_marker_mismatch_and_result_key_collision_fail_closed",
+        "frozen_stop_attempt_controls.CompositionControls.test_memory_failure_demotes_pass_retains_original_primary_cleanup",
+        "frozen_stop_attempt_controls.CompositionControls.test_memory_preauthorization_record_false_allows_first_valid_disk_stop",
+        "frozen_stop_attempt_controls.CompositionControls.test_memory_read_error_failure_not_disk_pass_or_child_attribution",
+        "frozen_stop_attempt_controls.CompositionControls.test_observation_error_marks_both_inspection_scopes_fail",
+        "frozen_stop_attempt_controls.CompositionControls.test_one_original_sampler_callback_marker_and_budgets_unchanged",
+        "frozen_stop_attempt_controls.CompositionControls.test_original_execution_exception_not_swallowed_or_second_delegation",
+        "frozen_stop_attempt_controls.CompositionControls.test_original_join_exception_retained_memory_unknown_fail",
+        "frozen_stop_attempt_controls.CompositionControls.test_prospective_profile_roots_and_missing_gate_cannot_promote",
+        "frozen_stop_attempt_controls.CompositionControls.test_raised_disk_callback_is_attempt_and_blocks_memory_second_stop",
+        "frozen_stop_attempt_controls.CompositionControls.test_raised_memory_callback_is_attempt_and_blocks_later_disk_second_stop",
+        "frozen_stop_attempt_controls.CompositionControls.test_simultaneous_disk_memory_failure_suppresses_second_signal"
+      ],
+      "kill_grace_seconds": 10,
+      "kind": "GREEN",
+      "methods": [
+        "test_absent_original_observation_never_fabricates_child_or_sample",
+        "test_alive_or_unknown_join_fails_without_final_snapshot",
+        "test_disk_preauthorization_unavailable_allows_first_valid_memory_stop",
+        "test_existing_command_primary_and_cleanup_failure_not_relabelled",
+        "test_factory_install_once_and_same_original_functions_retained",
+        "test_foreign_and_reused_pid_never_receive_stop",
+        "test_initial_memory_admission_before_original_sampler_factory",
+        "test_later_disk_failure_after_memory_stop_no_second_signal",
+        "test_marker_mismatch_and_result_key_collision_fail_closed",
+        "test_memory_failure_demotes_pass_retains_original_primary_cleanup",
+        "test_memory_preauthorization_record_false_allows_first_valid_disk_stop",
+        "test_memory_read_error_failure_not_disk_pass_or_child_attribution",
+        "test_observation_error_marks_both_inspection_scopes_fail",
+        "test_one_original_sampler_callback_marker_and_budgets_unchanged",
+        "test_original_execution_exception_not_swallowed_or_second_delegation",
+        "test_original_join_exception_retained_memory_unknown_fail",
+        "test_prospective_profile_roots_and_missing_gate_cannot_promote",
+        "test_raised_disk_callback_is_attempt_and_blocks_memory_second_stop",
+        "test_raised_memory_callback_is_attempt_and_blocks_later_disk_second_stop",
+        "test_simultaneous_disk_memory_failure_suppresses_second_signal"
+      ],
+      "output": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1/restored_successor20",
+      "overlay_role": "successor",
+      "parent_seconds": 135
+    }
+  },
+  "root_once": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-1",
+  "root_release_path": "/workspace/engineering/root-one-current8d49-stop-attempt-pure-source-controls-release.json",
+  "runtime_prefix": "/workspace/engineering/pr308/action_server/.venv",
+  "runtime_python": "/workspace/engineering/pr308/action_server/.venv/bin/python",
+  "schema": 1,
+  "scope": "Synthetic composition only; baseline16 original heldsource; exactly2 observed semantic defect REDs require named AssertionError frames; four new methods include2 raised-stop preservation sensitivities; successor20GREEN. No actualmemory/native/config adoption.",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_before_and_alwayspost": {
+    "bytes": 765564,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-current8d49-qualified-V9-entry-bootstrap-preparation/FROZEN-current8d49-control3-qualified-V9-entry-config-v2.json",
+    "sha256": "5dc48075c8a2c91042f38a4c4c8941e9eb7f5c0feb82dcc93917cb8ec76c9f25"
+  },
+  "source_count": 1440,
+  "source_guard_command": "Use existing identity-only V9 readonly guard, not native MAIN; current1440/native1192/prepared30/old refs/temporal2 +same18/PATH2/fiveorigins",
+  "source_independent": null,
+  "status": "SOURCE_PURE_CONTROL_CONFIG_PREPARED_NOT_EXECUTABLE_WITHOUT_DISTINCT_ROOT_REVIEW_RELEASE",
+  "successor_overlay": {
+    "bytes": 6688,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/native_memory_sampler_overlay_v1_NOTRUN.py",
+    "sha256": "b76adb2e93b92be0ae5ddab794f0d90078649a95a271c00d79fb95ed35d34d5f"
+  },
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6"
+}

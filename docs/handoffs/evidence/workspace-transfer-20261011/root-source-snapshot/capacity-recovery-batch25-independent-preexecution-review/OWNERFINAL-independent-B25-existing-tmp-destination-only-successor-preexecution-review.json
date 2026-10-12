@@ -1,0 +1,95 @@
+{
+  "Documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "disposition": "Existing7d070 completed-scratch paragraph is sufficient unchanged: private verified archives may live at the explicitly approved existing destination; repeated original verification and limits apply. No cosmetic duplicate or source guide mutation.",
+    "durable_learning": "Destination choice and measured available capacity remain separate from source origin and acceptance. Exact DEST-only profile preserves accepted archive/remove semantics while leaving retained old archives in place.",
+    "evidence": "Exact17 module-section comparison with one DEST difference, four original bound records and unchanged original independent scope; fresh existing/tmp1483538432 and absent once paths.",
+    "exact_accepted_reuse": {
+      "bytes": 1068,
+      "mode": "0o600",
+      "path": "/workspace/engineering/capacity-recovery-independent-review/canonical-completed-scratch-preservation-proposed.patch",
+      "sha256": "7d07065b5bb7742698919997c8c6621cc20d00494741eb5365251ffb09f2d208"
+    },
+    "remaining_uncertainty": "Original fresh source guard, preservation mapping, root execution, resulting archive/CRC/member verification and measured capacity await separate root release/readback.",
+    "stale_ambiguity_removed": "Do not carry old /dev/shm destination or infer cold floor from an archive proposal; do not keep original failed-root physical guards after authorized archive preservation."
+  },
+  "Upstream_disposition": "none",
+  "bindings": {
+    "original_independent": {
+      "bytes": 8669,
+      "mode": "0o444",
+      "path": "/workspace/engineering/capacity-recovery-batch25-independent-preexecution-review/OWNERFINAL-independent-exact-completed-batch25-preexecution-review.json",
+      "sha256": "d3e12c07de52063a50a570824a78c51bdd2658e1dc809a57fc31b6eda9c8914f"
+    },
+    "original_owner": {
+      "bytes": 14371,
+      "mode": "0o400",
+      "path": "/workspace/engineering/capacity-recovery-batch25-proposal/OWNERFINAL-batch25-exact-one-completed-preexecution-proposal-v2.json",
+      "sha256": "f561a2dfe1c8b640318686930ab7754844f36208c5ff9268707025ca0a6053ea"
+    },
+    "original_script": {
+      "bytes": 5244,
+      "mode": "0o600",
+      "path": "/tmp/actions-capacity-recovery-batch25.py",
+      "sha256": "09160c02ce8c05d48c048a0a1b228901c4e4c140812ddcdcac9b8c9dae8b78a8"
+    },
+    "script": {
+      "bytes": 5240,
+      "mode": "0o600",
+      "path": "/tmp/actions-capacity-recovery-batch25-existing-tmp-volume-v3.py",
+      "sha256": "c6c6d47db1fbf4f42d208bdfe88b48ca9871eaa707387c49574d769d496699dc"
+    }
+  },
+  "captured_UTC": "2026-10-11T15:04:42.606579+00:00",
+  "fresh_readonly_observations": {
+    "destination_absent": true,
+    "stage_absent": true,
+    "tmp_available_bytes": 1483538432
+  },
+  "independent_diff": {
+    "BASE_STAGE_NAMES_exact": true,
+    "all16_nonconfiguration_AST_exact": true,
+    "new_volume_or_infrastructure": false,
+    "old_retained_archive_relocation": false,
+    "only_changed_AST": "DEST assignment /dev/shm/actions-completed-scratch-recovery-batch25 to /tmp/actions-completed-scratch-recovery-batch25",
+    "selected_namespace": [
+      "ad13a81675676d7b"
+    ]
+  },
+  "owner": {
+    "bytes": 2120,
+    "mode": "0o600",
+    "path": "/workspace/engineering/capacity-recovery-batch25-proposal/OWNERFINAL-batch25-existing-tmp-volume-only-successor-v3-NOT_RUN.json",
+    "sha256": "8ae0f2c18a20bb43aba48d54398b9666757246bb88f6c9c7c18feb87755542d6"
+  },
+  "remaining_limits": [
+    "Source origin UNREPORTED; marker/time/source312 success cannot infer origin.",
+    "Original archive algorithm checks each resolved regular/hardlink body,size,type,mode,UIDGID/linktext before removal; unrecorded inode topology, ACL/xattr, rootmetadata and exact archived ns mtime remain unqualified.",
+    "Accessible process observations omit unreadable/transient/maps/external actors; no universal quiescence.",
+    "No archival execution, restore, GC, source mutation, native/provider/browser or release gate by reviewer.",
+    "Failedcontrol3 capacity/cleanup failure remains unchanged; no completion marker applied to it."
+  ],
+  "reuse_disposition": "Accepted original f561 proposal and d3e12 independent review remain unchanged and conditional. This review does not remeasure their original50 archives24indices or16157 candidate members and does not upgrade provenance or unrecorded metadata. Root must perform original immediate guards before/after ONE execution.",
+  "root_release_required": {
+    "actual_review": "Separate frozen original archive/index CRC/member/readback after root run required; capacity reclaim measured, not guessed.",
+    "changed_failed_and_current_source_guard": "Historical b6141421 Git plus current e4ff1423 GitFS/clean/ancestor and preserved failed3 archive/index/member mapping replace impossible old expanded-path/currentb614FS assumptions. Require frozen reviewed mapping, not silent omission or original receipt rewrite.",
+    "cold_shm_floor": "Measure before/after independently; placing only new B25 archive/index on existing/tmp must not become a new native execution or cold-cache qualification.",
+    "distinct_0600_hashed_authorization": "Bind this owner/script/independent hashes, exact namespace/destination, serial no-other-scratch/heavy mutation and consumed once flag; verify private destination absent/root parent scope before launching. Script itself has no root authorization parser, so root wrapper owns these checks.",
+    "exact_future_argv": [
+      "env",
+      "-u",
+      "PYTHONOPTIMIZE",
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "600s",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+      "/tmp/actions-capacity-recovery-batch25-existing-tmp-volume-v3.py"
+    ],
+    "execution_budgets": "env -u PYTHONOPTIMIZE timeout --signal=TERM --kill-after=10s 600s exact cached Python and c6c6 script; root private output/log terminal; stop on failure; no automatic retry.",
+    "fresh_existing_tmp_floor_bytes": 1000000000,
+    "original_source_guard": "Fresh complete original candidate body/type/mode/UIDGID/mtime/link set matches retained two snapshots, markerTrue, repeated accessible cwdFD observations, before/afterall50archives24indices/native/source/helpers/failed563 preservation as original d3e12 requirements."
+  },
+  "schema": 1,
+  "status": "GO_CONDITIONAL_DESTINATION_ONLY_B25_EXISTING_TMP_PREEXECUTION"
+}

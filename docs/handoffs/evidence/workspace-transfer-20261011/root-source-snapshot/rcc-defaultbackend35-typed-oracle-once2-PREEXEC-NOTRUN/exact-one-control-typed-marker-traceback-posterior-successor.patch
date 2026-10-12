@@ -1,0 +1,24 @@
+--- /workspace/engineering/rcc-current8d49-default-descriptor-walk-controls-PREPARED-NOTRUN/test_default_cgroup_descriptor_walk_NOTRUN.py
++++ /workspace/engineering/rcc-defaultbackend35-typed-oracle-once2-PREEXEC-NOTRUN/test_default_cgroup_descriptor_walk_NOTRUN.py
+@@ -359,7 +359,19 @@
+ def test_descriptor_audit_detects_deliberately_suppressed_close_after_valid_baseline(tree):
+     baseline(tree)
+     audit = SyscallAudit(tree, omit_one_close=True)
+-    with pytest.raises(AssertionError, match='^DEFAULT_WALK_OPEN_DESCRIPTORS$'):
++    with pytest.raises(AssertionError) as caught:
+         default_snapshot(tree, audit)
++    assert type(caught.value) is AssertionError
++    assert str(caught.value).splitlines()[0] == 'DEFAULT_WALK_OPEN_DESCRIPTORS'
++    traceback = caught.value.__traceback__
++    audit_frames = []
++    while traceback is not None:
++        if traceback.tb_frame.f_code is SyscallAudit.assert_closed.__code__:
++            audit_frames.append(traceback.tb_frame)
++        traceback = traceback.tb_next
++    assert len(audit_frames) == 1 and audit_frames[0].f_locals.get('self') is audit
+     assert audit.omitted and not audit.active
+-
++    closed_generations = {row['generation'] for row in audit.closed}
++    unmatched = [row for row in audit.records if row['generation'] not in closed_generations]
++    assert len(unmatched) == 1 and unmatched[0]['origin'] == 'dup'
++
