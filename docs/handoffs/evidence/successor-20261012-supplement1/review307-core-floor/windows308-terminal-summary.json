@@ -1,0 +1,36 @@
+{
+  "run_id": 38197295365,
+  "head_sha": "22f74384442647db313d630b27ec0a8da11f6f67",
+  "job_id": 114642702420,
+  "job_name": "build (windows-py3.12-devmode)",
+  "status": "completed",
+  "conclusion": "success",
+  "attempt": 1,
+  "actual_checkout": "5e1216bae2f8afd97e9f7158c85f5ec6d9ebb3e3",
+  "checkout_tree": "bc57b450d4242c02a9fc4b6ed68a108215f86dcd",
+  "checkout_ordered_parents": [
+    "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+    "22f74384442647db313d630b27ec0a8da11f6f67"
+  ],
+  "unit": {
+    "command": "poetry run inv test-not-integration",
+    "passed": 1373,
+    "skipped": 225,
+    "warnings": 15,
+    "seconds": 364.03
+  },
+  "frozen_binary": {
+    "command": "poetry run inv test-binary --jobs 0",
+    "passed": 131,
+    "skipped": 21,
+    "deselected": 1601,
+    "seconds": 1642.02
+  },
+  "post_tests": [
+    "configured lint",
+    "configured typecheck"
+  ],
+  "qualification": "Exact-head Windows job/source identity and parsed suite outcome; not Linux baseline, lease/reader cleanup, minimum Core1.0.2 MCP acceptance or full release.",
+  "retention": "Log fetched once after terminal status; only structured IDs/counts/scope exported. No raw logs, signed URLs or private diagnostic bodies.",
+  "checkout_tree_equals_actual_head": true
+}

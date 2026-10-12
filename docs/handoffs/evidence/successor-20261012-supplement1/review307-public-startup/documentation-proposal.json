@@ -1,0 +1,14 @@
+{
+  "canonical_file": "docs/skills/repository-operations.md",
+  "insertion_point": "Installed-consumer qualification guidance near Core and Runtime compatibility",
+  "exact_delta": "For an installed idle CLI probe with a configured API key, ordinary protected HTTP without a key returns 403 from `_ConfiguredAPIKeyMiddleware`; test valid bearer access separately. Keep `--actions-sync=false`, zero minimum workers, and any normal shipped RCC feedback explicit in the scope. Public dependency origins, HTTP readiness and captured-set wrapper cleanup establish idle installed behavior; managed Action/environment acquisition, active-reader census and RCC lease acceptance require separate gates.\n\nVerify directory permissions after startup, rather than relying only on the creation mode. Record actual child-directory modes and the private ancestor boundary; a child home can be `0750` while the enclosing run root remains `0700`. Treat a true captured snapshot flag as an observed condition for the scoped receipt, not a final uncapped process/reader/lease census.",
+  "durable_learning": "Use the installed source's precise missing-key status, distinguish idle startup from managed/native acceptance, and verify post-start rather than initial permissions.",
+  "evidence": [
+    "independent-public-origin-verification.json verifies exact installed accepted middleware403 and public Core48/Helper2/Runtime203 Python-member parity",
+    "startup-and-command-bounds.json binds the original failed401 assertion and revised403 expectation to otherwise unchanged control code",
+    "Actual once2 root/datadir/robots-home/tmp remain0700, ACTIONS_HOME is0750, output logs0600; initial blanket0700 verifier failure is retained",
+    "Public command receipt/log hashes independently match9OAuthPASS and NoBrokenRequirements"
+  ],
+  "stale_or_ambiguous_guidance_removed": "Avoid assuming401 for this configured-key middleware, treating a mkdir0700 call as the final mode, or describing idle HTTP/captured cleanup as a genuine native Action/RCC lease gate.",
+  "remaining_uncertainty": "The cause of ACTIONS_HOME's post-start0750 mode was not independently traced. Managed Action acquisition/baseline, final uncapped descendant/reader census, RCC lease queries, other platforms and whole208/fullrelease/publicRuntimepublication remain unqualified."
+}

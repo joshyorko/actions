@@ -1,0 +1,9 @@
+{
+  "time": "2026-10-12T03:42:21.013837+00:00",
+  "scope": "fresh publicminimumCore1.0.2 installedOAuth andidleHTTP;no managedAction,build,lease/native gate",
+  "visible_headroom": 2758520832,
+  "disk_available": 13323759616,
+  "runtime_head": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+  "new_namespace": "/workspace/successor-evidence/pr307-packaged/minimum-core-consumer",
+  "oauth_tests_sha256": "2b691ab93abbd25f0df9a8c632c3498e4ac6651473de6693091e17006a419b89"
+}

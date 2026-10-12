@@ -1,0 +1,169 @@
+{
+  "commit": "22f74384442647db313d630b27ec0a8da11f6f67",
+  "tree": "bc57b450d4242c02a9fc4b6ed68a108215f86dcd",
+  "source_fix": "6e2d7d7697c108ca7bdb7170743e3e620c2426ef",
+  "source_fix_tree": "9305cf0ea7784dc44d4f4bdc79961a81e9a4300a",
+  "ordered_parents": [
+    "6e2d7d7697c108ca7bdb7170743e3e620c2426ef",
+    "48eeaf171e695d9b8ac140ea53239eaeb6eff331"
+  ],
+  "scope": "immutable AST identity/clock models with fake Popen/psutil/cleanup; no signals/process launches/native/build/git mutations",
+  "helper_sha256": "4cf5157364a151ace87735148873bc6f33aa4a27e3ec5f3defc639053b903f39",
+  "controls": [
+    {
+      "case": "already_exited",
+      "capture_verified": false,
+      "delegated": [],
+      "join_timeouts": [],
+      "ownership_confirmed": false,
+      "complete": false,
+      "errors": [
+        "PROVIDER_CAPTURE_OWNER_EXITED",
+        "PROVIDER_OWNER_UNCONFIRMED"
+      ],
+      "status": "PASS"
+    },
+    {
+      "case": "exits_during_capture",
+      "capture_verified": false,
+      "delegated": [],
+      "join_timeouts": [],
+      "ownership_confirmed": false,
+      "complete": false,
+      "errors": [
+        "PROVIDER_CAPTURE_OWNER_CHANGED",
+        "PROVIDER_OWNER_UNCONFIRMED"
+      ],
+      "status": "PASS"
+    },
+    {
+      "case": "birth_changes",
+      "capture_verified": false,
+      "delegated": [],
+      "join_timeouts": [],
+      "ownership_confirmed": false,
+      "complete": false,
+      "errors": [
+        "PROVIDER_CAPTURE_OWNER_CHANGED",
+        "PROVIDER_OWNER_UNCONFIRMED"
+      ],
+      "status": "PASS"
+    },
+    {
+      "case": "valid_exit",
+      "capture_verified": true,
+      "delegated": [
+        {
+          "pids": [
+            777
+          ],
+          "deadline": 12.0,
+          "snapshot_complete": true
+        }
+      ],
+      "join_timeouts": [
+        1.5
+      ],
+      "ownership_confirmed": true,
+      "complete": true,
+      "errors": [],
+      "status": "PASS"
+    },
+    {
+      "case": "descendant_reused",
+      "capture_verified": true,
+      "delegated": [],
+      "join_timeouts": [
+        2.0
+      ],
+      "ownership_confirmed": true,
+      "complete": false,
+      "errors": [
+        "PROVIDER_DESCENDANT_IDENTITY_CHANGED"
+      ],
+      "status": "PASS"
+    },
+    {
+      "case": "descendant_unknown",
+      "capture_verified": true,
+      "delegated": [],
+      "join_timeouts": [
+        2.0
+      ],
+      "ownership_confirmed": true,
+      "complete": false,
+      "errors": [
+        "PROVIDER_DESCENDANT_AccessDenied"
+      ],
+      "status": "PASS"
+    },
+    {
+      "case": "descendant_absent",
+      "capture_verified": true,
+      "delegated": [
+        {
+          "pids": [
+            777
+          ],
+          "deadline": 12.0,
+          "snapshot_complete": true
+        }
+      ],
+      "join_timeouts": [
+        1.5
+      ],
+      "ownership_confirmed": true,
+      "complete": true,
+      "errors": [],
+      "status": "PASS"
+    },
+    {
+      "case": "ledger_mutated",
+      "capture_verified": true,
+      "delegated": [],
+      "join_timeouts": [
+        2.0
+      ],
+      "ownership_confirmed": true,
+      "complete": false,
+      "errors": [
+        "PROVIDER_DESCENDANT_CAPTURE_CHANGED"
+      ],
+      "status": "PASS"
+    },
+    {
+      "case": "scheduler_delay",
+      "capture_verified": true,
+      "delegated": [
+        {
+          "pids": [
+            777
+          ],
+          "deadline": 10.05,
+          "snapshot_complete": true
+        }
+      ],
+      "join_timeouts": [
+        0.0
+      ],
+      "ownership_confirmed": true,
+      "complete": false,
+      "errors": [],
+      "status": "PASS"
+    }
+  ],
+  "merge_preservation": {
+    "prior308_non_guide_paths_identical": 9,
+    "accepted_target_other_paths_identical": 24,
+    "generator_target_AST_preserved_except_existing308_rollback_class": true,
+    "generator_rollback_class_identical_to308_fix": true,
+    "provider_code_and_fixtures_identical_to_fix": true
+  },
+  "elapsed_ceiling_removed": true,
+  "verdict": "GO_SOURCE",
+  "upstream_disposition": "none",
+  "writer_source_hash_bindings_verified": 8,
+  "writer_evidence_hash_bindings_verified": 12,
+  "profile_sha256": "72d469205a5595e7d2a87c8fb94d7c5a3fe95c6953d3a8fef440c0a3e5f2eb2f",
+  "profile_native_launch_permitted": false
+}

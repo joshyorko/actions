@@ -1,0 +1,165 @@
+{
+  "approved_design_receipt": {
+    "bytes": 7375,
+    "sha256": "13d2540b750c14346cdc367ccd52f8be9832543db5b0cb5f6820e1b4bf748a42"
+  },
+  "base_commit": "22f74384442647db313d630b27ec0a8da11f6f67",
+  "base_tree": "bc57b450d4242c02a9fc4b6ed68a108215f86dcd",
+  "commands": {
+    "configured_static": "fresh pinned toolkit PATH+own homes/caches poetry run invoke lint typecheck;Ruff/format/IsortPASS,mypy360filesPASS exit0; markdownlint unavailable",
+    "diff_check": "PASS",
+    "extended_helper_mypy": "same six pre-existing22f/b0a diagnostics, no new errors;exit1 separate diagnostic",
+    "focused_final": "prepared package python -m pytest -n0 -q tests/action_server_tests/test_owned_cleanup_evidence.py tests/action_server_tests/test_dakota_rcc_acceptance.py tests/action_server_tests/test_provider_startup_cleanup.py tests/action_server_tests/test_source_staging_rcc_consumer.py tests/action_server_tests/test_rcc_runtime_adapter.py -m \"not integration_test\" --basetemp=/workspace/successor-pr308/census-focused-final --junitxml=/workspace/successor-evidence/pr308/census-focused-final.xml;317PASS/1SKIP/3nativeDESELECTED/4warnings8.44s exit0",
+    "helper_ruff": "PASS exit0",
+    "red": "prepared package python -m pytest -n0 -q test_owned_cleanup_evidence.py;17 expectedFAIL+1 existing defaultPASS on22f",
+    "schema_green": "18PASS0.28s; then26 wire/poison PASS1.28s",
+    "wait_birth_red": "PID/status alone wrongly matched stale singleton birth;1 expectedFAIL then corrected unavailable matched identity",
+    "windows_diagnostic": "prepared package python -m mypy --platform win32 --follow-imports=silent --show-column-numbers --namespace-packages --explicit-package-bases3 affected fixturefiles;PASS3files exit0"
+  },
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "durable_learning": "opt-in typed metadata scoped from native qualification; exact identity keys and enumeration states; wait PID cannot imply birth; actual outcome/primary-object preservation; unavailable facts on invalid transport and pre-JSON failure; cooperative Python deadlines do not enforce full census/persistence bound",
+    "evidence": "approved design review,160-row roundtrip,17RED and wait-birth1RED,317affectedGREEN, injected actual supervisor path, unchanged6 function ASTs",
+    "remaining_uncertainty": [
+      "exact89a schema/transport increment source independent review and exact-head required CI pending",
+      "current provider ownership/cleanup controls are source-only; actual shipped18.19.3 provider reader and lease execution facts absent",
+      "single global primary deadline and bounded terminal cleanup require independent controller design review and source/control qualification; no old ROOT/script grant applies",
+      "opt-in census metadata source seam is prepared; actual final native uncapped census/reaping/reader/sampler observations and robust failure publication remain unqualified; escaping pre-JSON supervisor failures attach unavailable facts only",
+      "actual passive same-lease creation/release observation remains missing; lifecycle inspect public source can reconcile/delete records and is not admitted as read-only observation",
+      "actual self-cgroup endpoint unproven: route0::/, mountroot/.., visible cgroup.procs empty on two bounded reads; strict retained reader rejects mount root",
+      "proposed conservative3113851289 initial headroom/536870912 reserve remain unaccepted and uncalibrated, regardless visible mount free memory",
+      "fresh native namespace, overhead budget, before/during/after observer and terminal output retention not yet admitted"
+    ],
+    "stale_or_ambiguous_guidance_removed": "reap counts/PID references are not identity reap proof; metadata cannot substitute for independent whole-operation watchdog"
+  },
+  "evidence_files": {
+    "census-configured-static.log": {
+      "bytes": 2017,
+      "sha256": "778e1a5579507144667e47736eafc8ebbbbfc3bfd84d0a4321060c657185ed33"
+    },
+    "census-focused-final.log": {
+      "bytes": 1401,
+      "sha256": "85a7c2073778e2e8056f18d292d5eaeb339373e24a0c1b6833832d1c222a9743"
+    },
+    "census-focused-final.xml": {
+      "bytes": 56630,
+      "sha256": "fc77074677bacb3a15864d18fbde71037ff1a02329a595099b29ccb00f04fa9b"
+    },
+    "census-helper-mypy-final.log": {
+      "bytes": 849,
+      "sha256": "a481aca896e012cd781f6442c9a4b260ddf2090ff7451680020c82233fbf8c21"
+    },
+    "census-helper-ruff-final.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "census-schema-green.log": {
+      "bytes": 250,
+      "sha256": "11e47238d89ec64a53a48d7a703be072e1f1c27b854a7d8ab382e1643bca33f7"
+    },
+    "census-schema-red.log": {
+      "bytes": 17491,
+      "sha256": "559b609af50c53260cdaf5dd345d3f6df9bf4ac5ad5d542d5dea22dbe7a89f38"
+    },
+    "census-schema-red.xml": {
+      "bytes": 19069,
+      "sha256": "ad1eb26491fd7a33ed390d106650d8e161fa125dcf136ac2d9414db5e3080c48"
+    },
+    "census-wait-birth-red.log": {
+      "bytes": 1311,
+      "sha256": "2324a6882eda66b4e5a6ac0e7733d1d711c765f1766dacbdad59661bbf7a39ad"
+    },
+    "census-windows-mypy.log": {
+      "bytes": 43,
+      "sha256": "8228fcc5ce46d42d01caf3cd941f4e9c5f2bcc372bb5b147a2f0572d2dd675a8"
+    },
+    "census-wire-green.log": {
+      "bytes": 248,
+      "sha256": "105b22813a7b3414310f2dd1ddbdac9a7b095670ea6602ee46581040826f7dd3"
+    }
+  },
+  "explicit_unavailable_facts": [
+    "readers",
+    "sampler",
+    "whole_operation_enforcer",
+    "wait-event birth identity without actual witness",
+    "pre-JSON supervisor/fallback failure census"
+  ],
+  "head": "89a599d92aa17a9065c9fc98b62bee0adb0b4cf2",
+  "native_attempts_consumed": 0,
+  "native_profile": {
+    "bytes": 14111,
+    "path": "/workspace/successor-evidence/pr308/native-baseline-profile-89a599d9-v5-SOURCE-PREPARED-NOTRUN.json",
+    "sha256": "ef11c31827bb50435b86e0889e06bcd8de57f5aa49765feade22f64beb230b2c"
+  },
+  "new_native_dispatch_signals_fallback_disksink_watchdog_or_lease_queries": false,
+  "patch": {
+    "bytes": 49404,
+    "path": "/workspace/successor-evidence/pr308/census-89a599d9-source.patch",
+    "sha256": "a3f807d6e2eaee29ae86f7856ac1595ba1d8a5b3ff69da0b05ea5e7744da10e1"
+  },
+  "resource": {
+    "filesystems": {
+      "/dev/shm": {
+        "device": 36,
+        "free_bytes": 9441349632
+      },
+      "/tmp": {
+        "device": 33,
+        "free_bytes": 9441173504
+      },
+      "/workspace": {
+        "device": 27,
+        "free_bytes": 13327372288
+      }
+    },
+    "memory.events": {
+      "high": 0,
+      "low": 0,
+      "max": 25204,
+      "oom": 0,
+      "oom_group_kill": 0,
+      "oom_kill": 0
+    },
+    "memory.events.local": {
+      "high": 0,
+      "low": 0,
+      "max": 25204,
+      "oom": 0,
+      "oom_group_kill": 0,
+      "oom_kill": 0
+    },
+    "memory_current": 14426263552,
+    "memory_max": 17179869184,
+    "scope": "visible_cgroup_mount_diagnostic_only; self binding unproven",
+    "time_unix": 1791776120.3477807,
+    "visible_headroom_bytes": 2753605632
+  },
+  "schema": 1,
+  "scope": "approved opt-in source metadata seam only; default execution/output/signal/fallback/grace algorithms retained",
+  "source_files": {
+    "action_server/scripts/verify_dakota_rcc_acceptance.py": {
+      "bytes": 109724,
+      "sha256": "eba6fd546cbbc7061ebb082b1157e1b5807e857aa19defcea6538eade2230363"
+    },
+    "action_server/tests/action_server_tests/test_owned_cleanup_evidence.py": {
+      "bytes": 18004,
+      "sha256": "a99314a6122b6d2e8e45e10a73c7e3a9d02ae2ca0c6ced4fe4f1978d5e2cf8d3"
+    },
+    "docs/skills/repository-operations.md": {
+      "bytes": 287431,
+      "sha256": "d3c04c03ac2584df575b574eb7be1b5760026dc1204776f73187da249a8766d3"
+    }
+  },
+  "tree": "84617bea63a662822056c1b4ecc5d9e126c0feb9",
+  "unchanged_ast_functions": {
+    "_capture_provider_ownership": true,
+    "_fallback_reap_after_error": true,
+    "_proc_descendants": true,
+    "_process_is_live": true,
+    "cleanup_provider_until": true,
+    "terminate_process_tree": true
+  },
+  "upstream_disposition": "none",
+  "worktree_clean": true
+}

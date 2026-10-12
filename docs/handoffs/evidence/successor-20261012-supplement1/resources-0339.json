@@ -1,0 +1,18 @@
+{
+  "observed_at": "2026-10-12T03:36:23.071785+00:00",
+  "host": "9e619bc297a7",
+  "boot_id": "22d23245-c9c1-4789-8cbd-70bfa9b3b274",
+  "uid": 1000,
+  "gid": 1000,
+  "memory_max": 17179869184,
+  "memory_current": 14418051072,
+  "memory_headroom": 2761818112,
+  "memory_events": "low 0\nhigh 0\nmax 25204\noom 0\noom_kill 0\noom_group_kill 0\n",
+  "disk_available": {
+    "/workspace": 13327241216,
+    "/tmp": 9441173504,
+    "/dev/shm": 9441349632
+  },
+  "self_binding": "UNQUALIFIED",
+  "managed_action_baseline_attempts": 0
+}

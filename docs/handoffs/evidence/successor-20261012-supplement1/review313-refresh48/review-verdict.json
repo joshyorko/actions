@@ -1,0 +1,65 @@
+{
+  "verdict": "GO_REFRESH_SOURCE",
+  "scope": "exact ordered-parent refresh composition and retained source/test controls; no new complete cleanup acceptance",
+  "head": "216ad55b5bcafaa54ba61fcc87982a57573adce7",
+  "tree": "4c124ca711b6acaea657a2b6b713fb906f176ff7",
+  "ordered_parents": [
+    "bd4f3f8397dd4563fe767484bf7de15ab99a0123",
+    "48eeaf171e695d9b8ac140ea53239eaeb6eff331"
+  ],
+  "new_target": "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+  "complete_target_delta": [
+    "action_server/src/actions/server/_common/process.py",
+    "action_server/tests/action_server_tests/common_tests/test_captured_process_tree_deadline.py",
+    "action_server/tests/action_server_tests/common_tests/test_system_mutex.py",
+    "action_server/tests/action_server_tests/robo_utils/test_system_mutex.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "all4_non_doc_target_delta_blobs_and_modes_exact_bd4": true,
+  "every_other_non_doc_entry_exact_target48": true,
+  "doc_parent_lessons_preserved": {
+    "full_feature_mutex_paragraph_retained": true,
+    "full_target_portable_oauth_paragraph_retained": true,
+    "feature_pytest_preservation_and_shared_deadline_lessons_retained": true,
+    "target_offline_oauth_and_redirect_lessons_retained": true,
+    "no_conflict_markers": true
+  },
+  "remaining_refresh_findings": [],
+  "scoped_test_evidence": {
+    "file": "/workspace/successor-evidence/pr313-refreshed48-cleanup-mutex.log",
+    "sha256": "6dc25ddce71e84a57c1d631df436eba5bdccc498391272c20e3704aaec75ac47",
+    "result": "21 passed in7.18s",
+    "classification": "10 modeled captured-cleanup cases plus11 mutex cases; parent execution log, independently read. No native Runtime/tree/reader/lease proof inferred."
+  },
+  "retained_prior_reviews": {
+    "mutex": "bd4 exact mutex-test hashes remain unchanged from independent early-acquire rejection and acquisition-error cleanup controls.",
+    "oauth": "All target48 non-documentation entries remain exact, preserving accepted23 OAuth source; no broader union CI acceptance inferred."
+  },
+  "historical_failed_control": {
+    "file": "/workspace/successor-evidence/pr313-refreshed48-first-composition-control-FAIL.json",
+    "status": "FAIL retained",
+    "reason": "Incorrect only-mutex/docs scope expectation omitted retained production process.py and captured-deadline regression from actual target diff. No source bytes changed to make the corrected composition assertion pass."
+  },
+  "whole313_process_tree_readers_lease_verdict": "HOLD",
+  "new_exact_head_ci_required": true,
+  "limitations": [
+    "Previous bd4 independent review was mutex correction only, not whole313 complete cleanup acceptance.",
+    "This refresh has production process.py and its regression in the actual diff to48; do not infer original2d source was already present in targete2/48.",
+    "Unchanged individual source blobs do not replace fresh CI for the new combined tree.",
+    "No native/build/host install/external mutations or publication performed in this lane."
+  ],
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "insertion_point": "Live pull-request base identity, after the paragraph beginning For an ordinary stacked-branch refresh",
+    "exact_delta": "Inventory the complete diff from the live target before describing the refreshed PR's scope. Retained feature changes can still add production code and tests to that target even when the refresh resolved only documentation.",
+    "durable_learning": "Resolution scope and integration scope differ: only documentation may require conflict resolution while the actual target diff still carries production and regression changes.",
+    "evidence": [
+      "pr313-refreshed48-first-composition-control-FAIL.json retained the incorrect expectation of only mutex tests and documentation",
+      "immutable-composition.json independently enumerates five actual target-delta files, including process.py and the captured-deadline test",
+      "All four non-documentation target-delta blobs and modes match bd4; all other non-documentation entries match48"
+    ],
+    "stale_or_ambiguous_guidance_removed": "Clarify that a documentation-only conflict resolution does not make the complete refreshed PR documentation-only or test-only.",
+    "remaining_uncertainty": "Fresh exact216 CI and whole313 native process-tree/reader/lease acceptance remain pending. This proposal records a general scope check, not per-run identities in the canonical guide."
+  },
+  "upstream_disposition": "none"
+}

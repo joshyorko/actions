@@ -1,0 +1,13 @@
+{
+  "expected_only_mutex_and_docs": true,
+  "result": "FAIL",
+  "actual_delta": [
+    "action_server/src/actions/server/_common/process.py",
+    "action_server/tests/action_server_tests/common_tests/test_captured_process_tree_deadline.py",
+    "action_server/tests/action_server_tests/common_tests/test_system_mutex.py",
+    "action_server/tests/action_server_tests/robo_utils/test_system_mutex.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "reason": "Retained PR313 also contains production shared-deadline cleanup change and its regression test; never infer target ancestry/containment from prior summary.",
+  "source_bytes_changed_by_resolution": false
+}

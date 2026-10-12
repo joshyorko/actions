@@ -1,0 +1,54 @@
+{
+  "commit": "c5643f828ba0b299c0c2a99a9755d90b39b04b3c",
+  "tree": "5fd6b2a52a6dffb0df8df6b5d6387e94195a0e06",
+  "helper_sha256": "11f3fda89a60174905be4e1db92f7d025fe110cba838a242b862f0c290ed3ed0",
+  "scope": "immutable AST, mocked Popen/identity/signalling, disposable stream-control Threads only; no provider/native/build/infra launches or source edits",
+  "findings": [
+    {
+      "case": "original_popen_already_exited_current_pid_reused",
+      "original_popen_returncode": 0,
+      "captured_current_pid_create_time": 200.0,
+      "forwarded_descendant_pids": [
+        777
+      ],
+      "ownership_confirmed": true,
+      "complete": true,
+      "result": "EXPECTED_RED: unrelated descendants authorized for cleanup"
+    },
+    {
+      "case": "scheduler_delay_exceeds_elapsed_smoke_ceiling",
+      "test_path": "action_server/tests/action_server_tests/test_provider_startup_cleanup.py",
+      "assert_line": 238,
+      "elapsed": 0.09999999999999964,
+      "tree_deadline": 10.05,
+      "join_timeout": 0.0,
+      "helper_correctly_incomplete": true,
+      "result": "EXPECTED_RED: immutable elapsed assertion fails despite correct remaining-time request"
+    }
+  ],
+  "controls": [
+    {
+      "case": "tree_then_reader_shared_deadline",
+      "tree_deadline": 12.0,
+      "join_timeout": 1.5,
+      "status": "PASS"
+    },
+    {
+      "case": "original_stream_error_queue_identity_and_duplicate_rejection",
+      "identity_preserved": true,
+      "fixed_reader_error": "OSError",
+      "thread_stopped": true,
+      "status": "PASS"
+    },
+    {
+      "case": "startup_json_primary_preserved_with_cleanup_secondary",
+      "primary": "RuntimeError: invalid startup JSON",
+      "secondary_fixed_class": "RuntimeError",
+      "primary_identity_not_replaced": true,
+      "no_Popen_execution": true,
+      "status": "PASS"
+    }
+  ],
+  "verdict": "HOLD_SOURCE",
+  "upstream_disposition": "none"
+}

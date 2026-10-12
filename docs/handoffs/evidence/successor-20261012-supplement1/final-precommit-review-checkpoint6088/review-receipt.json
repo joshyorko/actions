@@ -1,0 +1,109 @@
+{
+  "schema": "actions-checkpoint-precommit-review/v1",
+  "observed_at_utc": "2026-10-12",
+  "disposition": "GO_BOUNDED_PRECOMMIT",
+  "scope": "Read-only review of docs/evidence delta in actions-checkpoint at precommit HEAD; not release approval or remote-push verification.",
+  "checkpoint": {
+    "repo": "/workspace/actions-checkpoint",
+    "head": "6088e6dbf81ff6aa212c7bebaf115534e885295d",
+    "parent_immutable_handoff": "/workspace/actions-handoff",
+    "parent_head": "0d5424ee8ec7c0a0ccea42a91eeecea144aa2934",
+    "parent_handoff_clean": true
+  },
+  "worktree": {
+    "changed_paths": [
+      "docs/handoffs/actions-cloud-successor-checkpoint-20261012.md",
+      "docs/skills/repository-operations.md"
+    ],
+    "product_source_changes": false,
+    "issue_ledger_changed": false,
+    "issue_rows_retained": 54,
+    "issues_created": 0,
+    "issues_closed": 0
+  },
+  "supplement": {
+    "manifest": "docs/handoffs/evidence/successor-20261012-supplement1/manifest.json",
+    "payload_count": 60,
+    "payload_bytes": 273959,
+    "manifest_sha256": "823a934238b3dde2dbac20c8ffde00907fb93956db0e6a5011557a46c68b8d84",
+    "all_payload_sizes_and_sha256_match": true,
+    "payload_errors": [],
+    "all_payloads_json": true,
+    "rawlogs_or_binary_payloads_in_manifest": false,
+    "secret_or_signed_url_pattern_hits": [],
+    "native_attempts": 0
+  },
+  "preserved_baseline": {
+    "manifest": "docs/handoffs/evidence/successor-20261012/manifest.json",
+    "payload_count": 37,
+    "payload_bytes": 346659,
+    "all_payload_sizes_and_sha256_match": true,
+    "all_payload_bytes_identical_to_6088": true,
+    "errors": [],
+    "immutable_parent_handoff_head_unchanged_and_clean": true
+  },
+  "bounded_claims": {
+    "pr308": {
+      "head": "fe1bdee3d5014d39a763d088535c29d65b38315d",
+      "tree": "c0371a7a0fa113be56199f260029ee1c09f63d1a",
+      "normal_fastforward": true,
+      "state": "open",
+      "draft": true,
+      "review": "GO_SOURCE minimal opt-in metadata transport only",
+      "new_head_ci": "PENDING",
+      "native_attempts": 0,
+      "review_scope": "approved opt-in source-observation schema/transport only; no full controller or native approval"
+    },
+    "pr307_minimum_core": {
+      "verdict": "PASS_IDLE_STARTUP_SCOPED",
+      "installed_python_members": {
+        "Runtime": 203,
+        "Core": 47,
+        "HTTP_Helper": 2
+      },
+      "OAuth_controls": "9 PASS",
+      "idle_http": "200/403/200",
+      "minimum_Core_MCP_and_managed_Action": "UNTESTED"
+    },
+    "pr306": {
+      "head": "eb0df4f97f390b413e364fe68364b81a65663f02",
+      "run_id": 38198300720,
+      "job_id": 114645811548,
+      "checkout": "fdaba3e7d29d9e8c3a8412fdd67fc5fb293ec8a6",
+      "tree": "f8e4e760733f6b16f6dcc66ff057d1f2fad87bc2",
+      "source": "1299 PASS, 178 skipped",
+      "frozen": "131 PASS, 21 skipped",
+      "five_original_failure_nodes": "PASS on current terminal run",
+      "historical_cause": "UNKNOWN",
+      "incorrect_index_receipt": "preserved and explicitly corrected; no original failure relabeled"
+    },
+    "pr313": "19 refreshed-head checks passed; whole cleanup acceptance remains open",
+    "runtime_1_0_3": "HOLD",
+    "community_release": "HOLD"
+  },
+  "documentation_review": {
+    "canonical_files": [
+      "docs/handoffs/actions-cloud-successor-checkpoint-20261012.md",
+      "docs/skills/repository-operations.md"
+    ],
+    "guide_aligns_with_fe1_schema1_and_poison_controls": true,
+    "guide_preserves_Core_host_floor_vs_managed_feature_pin_and_scoped_MCP_gate": true,
+    "handoff_marks_308_exact_head_CI_pending": true,
+    "handoff_preserves_306_unknown_historical_cause": true,
+    "no_issue_graph_mutations": true
+  },
+  "blockers_or_followups": [
+    "Exact fe1 new-head CI is pending.",
+    "Minimum-Core installed MCP discovery/resource/tool execution remains untested.",
+    "Native, full process/reader/lease/deadline, release installation/platform and publication gates remain unqualified.",
+    "Remote tree/blob verification is pending the parent commit/push and must be a separate review."
+  ],
+  "evidence_paths": [
+    "docs/handoffs/evidence/successor-20261012-supplement1/current-projection.json",
+    "docs/handoffs/evidence/successor-20261012-supplement1/pr308/fe1bdee3-remote-source-readback.json",
+    "docs/handoffs/evidence/successor-20261012-supplement1/review308-transport-fixed/review.json",
+    "docs/handoffs/evidence/successor-20261012-supplement1/review307-core-floor/minimum-core-installed-review.json",
+    "docs/handoffs/evidence/successor-20261012-supplement1/newterminal306/sourcebound-terminal-review.json",
+    "docs/handoffs/evidence/successor-20261012-supplement1/diagnose306/current-windows-original-five-index-first-FAIL.json"
+  ]
+}

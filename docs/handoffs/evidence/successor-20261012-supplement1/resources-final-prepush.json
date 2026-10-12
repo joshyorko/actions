@@ -1,0 +1,15 @@
+{
+  "observed_at": "2026-10-12T04:00:51.127793+00:00",
+  "memory_max": 17179869184,
+  "memory_current": 14614290432,
+  "memory_headroom": 2565578752,
+  "memory_events": "low 0\nhigh 0\nmax 25204\noom 0\noom_kill 0\noom_group_kill 0\n",
+  "disk_available": {
+    "/workspace": 13181767680,
+    "/tmp": 9441153024,
+    "/dev/shm": 9441349632
+  },
+  "self_binding": "UNQUALIFIED",
+  "managedActionbaselineAttempts": 0,
+  "toolkit": "supported pinnedRCC18.19.3 DoctorBootstrapToolkitTest179PASS;RCC outerPoetrypackage;diskTMP"
+}

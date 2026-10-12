@@ -1,0 +1,88 @@
+{
+  "head": "fe1bdee3d5014d39a763d088535c29d65b38315d",
+  "source_sha256": "9bd4e6fb0b4b04831bb7562e4ba9f32761ee33de3290482cd1afafc39cf08c3c",
+  "scope": "immutable stdlib models; no native, signals or provider launch",
+  "controls": [
+    {
+      "name": "valid_root_only_complete",
+      "pass": true
+    },
+    {
+      "name": "absent_child_without_birth_witness_incomplete",
+      "pass": true
+    },
+    {
+      "name": "reap_birth_rejected_pid_2",
+      "pass": true
+    },
+    {
+      "name": "parent_transport_unavailable_pid_2",
+      "pass": true
+    },
+    {
+      "name": "raw_forged_child_completion_false_pid_2",
+      "pass": true
+    },
+    {
+      "name": "reap_birth_rejected_pid_999",
+      "pass": true
+    },
+    {
+      "name": "parent_transport_unavailable_pid_999",
+      "pass": true
+    },
+    {
+      "name": "raw_forged_child_completion_false_pid_999",
+      "pass": true
+    },
+    {
+      "name": "known_row_pid_rejected_None",
+      "pass": true
+    },
+    {
+      "name": "known_row_parent_unavailable_None",
+      "pass": true
+    },
+    {
+      "name": "known_row_pid_rejected_999",
+      "pass": true
+    },
+    {
+      "name": "known_row_parent_unavailable_999",
+      "pass": true
+    },
+    {
+      "name": "known_row_pid_rejected_True",
+      "pass": true
+    },
+    {
+      "name": "known_row_parent_unavailable_True",
+      "pass": true
+    },
+    {
+      "name": "raw_wait_pid_does_not_prove_birth",
+      "pass": true
+    },
+    {
+      "name": "status_race_preserves_census",
+      "pass": true
+    },
+    {
+      "name": "status_race_no_metadata_error",
+      "pass": true
+    },
+    {
+      "name": "status_race_does_not_invent_reap",
+      "pass": true
+    },
+    {
+      "name": "unavailable_facts_never_complete",
+      "pass": true
+    },
+    {
+      "name": "failed_enumeration_never_complete",
+      "pass": true
+    }
+  ],
+  "passed": 20
+}

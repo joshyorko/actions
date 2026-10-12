@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "verdict": "GO_SOURCE",
+  "head": "fe1bdee3d5014d39a763d088535c29d65b38315d",
+  "tree": "c0371a7a0fa113be56199f260029ee1c09f63d1a",
+  "parent": "89a599d92aa17a9065c9fc98b62bee0adb0b4cf2",
+  "source_sha256": "9bd4e6fb0b4b04831bb7562e4ba9f32761ee33de3290482cd1afafc39cf08c3c",
+  "scope": "approved opt-in source-observation schema/transport only; no full controller or native approval",
+  "held_receipt": {
+    "path": "/workspace/successor-evidence/review308-transport/review.json",
+    "sha256": "27baefceb4c667e7d3f3706c7c29256fbe9885872743da389deff44353cff579",
+    "preserved": true
+  },
+  "resolved_findings": [
+    "every schema1 nonnull matched_identity rejected, including same numeric PID",
+    "known census observed_pid required and equal identity PID",
+    "process disappears during status: absent current birth cleared, full census retained, no invented reap",
+    "in-memory child birth claims cannot make schema1 scoped completeness true"
+  ],
+  "independent_verification": {
+    "original_red": "6 expected failures,0errors,30deselected,0.13s against immutable89a",
+    "corrective_green": "36passed,0failures,0errors,0skips,0.22s against immutablefe1",
+    "stdlib_models": "20PASS including same/cross-PID poisons,parent unavailable fields,raw forged completion,Popen-root-only positive,child absence negative,status-race preservation",
+    "ast_preservation": "13critical execution,transport,signals,fallback,provider functions unchanged from89a",
+    "receipt_verification": "all17 artifacts/source/previous-control byte and SHA checks match",
+    "diff_check": "PASS",
+    "clean_product_checkout": "confirmed exactfe1/treec037 with no dirty files"
+  },
+  "full_minimal_scope_findings": {
+    "default": "flag absent by default; prior injected actual default/opt-in supervisor controls pass; dispatch,outputs,legacy error and cleanup algorithms unchanged",
+    "ownership": "metadata ledger has no signal authority; no new PID-only cleanup path; current observer birth matches are unavailable",
+    "census": "uncapped160rows with samePID/differentbirth preserved; failed enumeration distinct from empty; unknown/reused cannot assert completion",
+    "outcomes": "same typed field on result,timeout,cleanup error; raw output and primary wait exception identity preserved by injected controls",
+    "unavailable": "reader,sampler,enforcer and genuine preJSON supervisor failure census remain explicitly unavailable",
+    "root_completion": "schema1 can report only root absence plus originalPopenwait and ECHILD; child absence or any raw wait event remains incomplete"
+  },
+  "writer_retained_evidence": {
+    "affected": "323PASS/1SKIP/3nativeDESELECTED7.38s",
+    "configured_static": "360filesPASS",
+    "windows_diagnostic": "3filesPASS",
+    "extended_helper_mypy": "same6preexistingdiagnostics, not a passing gate"
+  },
+  "remaining_gates": [
+    "exactfe1 required CI pending",
+    "full package suite for metadata increment not independently run",
+    "full controller design HOLD",
+    "native profile SOURCE_PREPARED_NOTRUN",
+    "RCC18.19.3 provider/lease execution,reader/sampler qualification and outer enforcement unavailable"
+  ],
+  "documentation_proposal": "/workspace/successor-evidence/review308-transport-fixed/documentation-proposal.md",
+  "documentation_previous_proposal_disposition": "substantive89a proposal integrated by equivalent seven canonical lines; additional operational poison-control paragraph proposed",
+  "evidence_files": {
+    "immutable-model.py": {
+      "bytes": 3590,
+      "sha256": "2056c432090e2fb4a3058b6bdae0e99c031d355f107770fb1a28775f4cd122dc"
+    },
+    "immutable-model.json": {
+      "bytes": 1893,
+      "sha256": "266d0a22859a1c22efec23b19581b8ca0daa6252857a9d9d2e293b369b8a9778"
+    },
+    "ast-controls.json": {
+      "bytes": 727,
+      "sha256": "f97d52ccc2920e517f6bdbf644547886d1149d280bef59eff2210a87a119ce2e"
+    },
+    "writer-receipt-verification.json": {
+      "bytes": 1915,
+      "sha256": "e47e39a42d7ab154ba24754a75614135b0f416f93d219f6f6e9521ac8d23f780"
+    },
+    "red.xml": {
+      "bytes": 7136,
+      "sha256": "d4d3325e040d83f6b3eca4a0c9f4e586333144b6c3fa74d3b4723c0a53bd73d6"
+    },
+    "red.log": {
+      "bytes": 6561,
+      "sha256": "e2ff6545e4d8a17622b09f0d3998a637d7d73a3dbb0b62ca4c55bb13163bfb00"
+    },
+    "green.xml": {
+      "bytes": 6990,
+      "sha256": "0c58982bd33c49ad0610507929d3ca2e8109a56cb8fd7b650af2164c56b2cd5b"
+    },
+    "green.log": {
+      "bytes": 189,
+      "sha256": "883f600a15415a0edb5caa3cbf34921801060fea7956909b90ad9133e77f43f0"
+    },
+    "documentation-proposal.md": {
+      "bytes": 1637,
+      "sha256": "b5546836e287caff66aa016c33d8be0643c1a21ca170d2d71284a29499e63338"
+    }
+  },
+  "no_product_edits": true,
+  "native_attempts": 0,
+  "upstream_disposition": "none"
+}

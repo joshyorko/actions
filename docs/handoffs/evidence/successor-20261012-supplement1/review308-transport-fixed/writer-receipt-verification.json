@@ -1,0 +1,74 @@
+{
+  "receipt_sha256": "c361e20e2d179eeece71662782fc645dd4b3c08f672d46b1d29d2e781b308655",
+  "checks": {
+    "census-poison-configured-static.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "census-poison-focused.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "census-poison-focused.xml": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "census-poison-green.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "census-poison-green.xml": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "census-poison-helper-mypy-initial.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "census-poison-helper-ruff.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "census-poison-red.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "census-poison-red.xml": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "census-poison-windows-mypy.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "profile": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "patch": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "action_server/scripts/verify_dakota_rcc_acceptance.py": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "action_server/tests/action_server_tests/test_owned_cleanup_evidence.py": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "docs/skills/repository-operations.md": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "/workspace/successor-evidence/review308-transport/census-pid-model.json": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "/workspace/successor-evidence/review308-transport/schema-model.json": {
+      "bytes_match": true,
+      "sha256_match": true
+    }
+  },
+  "all_match": true
+}

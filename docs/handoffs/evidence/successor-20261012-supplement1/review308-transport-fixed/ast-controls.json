@@ -1,0 +1,21 @@
+{
+  "head": "fe1bdee3d5014d39a763d088535c29d65b38315d",
+  "tree": "c0371a7a0fa113be56199f260029ee1c09f63d1a",
+  "base": "89a599d92aa17a9065c9fc98b62bee0adb0b4cf2",
+  "source_sha256": "9bd4e6fb0b4b04831bb7562e4ba9f32761ee33de3290482cd1afafc39cf08c3c",
+  "unchanged_critical_asts": {
+    "terminate_process_tree": true,
+    "_fallback_reap_after_error": true,
+    "_proc_descendants": true,
+    "_process_is_live": true,
+    "_capture_provider_ownership": true,
+    "cleanup_provider_until": true,
+    "main": true,
+    "_supervisor_children": true,
+    "ProcessTreeCleanupError": true,
+    "run_owned_process": true,
+    "_reap_adopted_children": true,
+    "_stop_supervised_processes": true,
+    "_supervisor_main": true
+  }
+}

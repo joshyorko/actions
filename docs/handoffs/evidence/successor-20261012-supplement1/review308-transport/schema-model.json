@@ -1,0 +1,31 @@
+{
+  "head": "89a599d92aa17a9065c9fc98b62bee0adb0b4cf2",
+  "tree": "84617bea63a662822056c1b4ecc5d9e126c0feb9",
+  "source_sha256": "eba6fd546cbbc7061ebb082b1157e1b5807e857aa19defcea6538eade2230363",
+  "scope": "immutable stdlib-only schema and observer controls; no native, signals or process launch except git readonly",
+  "controls": [
+    {
+      "name": "cross_pid_reap_identity_poison",
+      "wait_pid": 999,
+      "matched_identity_pid": 2,
+      "decoder_accepts": true,
+      "census_reap_complete": true,
+      "parent_transport_complete": true
+    },
+    {
+      "name": "unwitnessed_birth_poison",
+      "decoder_accepts": true,
+      "census_reap_complete": true
+    },
+    {
+      "name": "exit_between_birth_and_status",
+      "state": "absent",
+      "retained_current_birth": 1.0,
+      "decoder_accepts": false,
+      "decoder_error": "ValueError",
+      "transport_observation_errors": [
+        "ValueError"
+      ]
+    }
+  ]
+}

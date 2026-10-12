@@ -1,0 +1,98 @@
+{
+  "head": "eb0df4f97f390b413e364fe68364b81a65663f02",
+  "tree": "f8e4e760733f6b16f6dcc66ff057d1f2fad87bc2",
+  "ordered_parents": [
+    "b3defc66e7e127b071511f0ac1940847054dcaea",
+    "48eeaf171e695d9b8ac140ea53239eaeb6eff331"
+  ],
+  "common_ancestor": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "actual_complete_delta_vs_target": [
+    "action_server/src/actions/server/_database.py",
+    "action_server/tests/action_server_tests/mcp/test_resource_history.py",
+    "action_server/tests/action_server_tests/native_startup_diagnostics.py",
+    "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py",
+    "action_server/tests/action_server_tests/test_database.py",
+    "action_server/tests/action_server_tests/test_native_startup_diagnostics.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "all6_non_doc_delta_blobs_and_modes_exact_feature_parent": true,
+  "all_other_non_doc_blobs_and_modes_exact_current_target": true,
+  "complete_tree_non_doc_composition_verified": true,
+  "blob_proof": [
+    {
+      "path": "action_server/src/actions/server/_database.py",
+      "mode": "100644",
+      "head_git_blob": "6fd267165834f60968ee10a8653dd084a39ad521",
+      "feature_git_blob": "6fd267165834f60968ee10a8653dd084a39ad521",
+      "head_sha256": "c48ff5838d333ebd2c483be30036d9e3b8588d29c8d6dbbe324e247b9168bdd4",
+      "feature_sha256": "c48ff5838d333ebd2c483be30036d9e3b8588d29c8d6dbbe324e247b9168bdd4",
+      "exact_feature_parent_blob_and_mode": true,
+      "differs_from_current_target": true
+    },
+    {
+      "path": "action_server/tests/action_server_tests/mcp/test_resource_history.py",
+      "mode": "100644",
+      "head_git_blob": "042daa2e74b6d2e95ef9355883b3a80012dc4ce5",
+      "feature_git_blob": "042daa2e74b6d2e95ef9355883b3a80012dc4ce5",
+      "head_sha256": "d01c1b093021f881736560fb020b9c42f2df0016179344a5637ba69b09c45d9d",
+      "feature_sha256": "d01c1b093021f881736560fb020b9c42f2df0016179344a5637ba69b09c45d9d",
+      "exact_feature_parent_blob_and_mode": true,
+      "differs_from_current_target": true
+    },
+    {
+      "path": "action_server/tests/action_server_tests/native_startup_diagnostics.py",
+      "mode": "100644",
+      "head_git_blob": "82c78389b43c01d742093593d61c04b2dac0fcbd",
+      "feature_git_blob": "82c78389b43c01d742093593d61c04b2dac0fcbd",
+      "head_sha256": "b365e561c79240146ed5ac8fb07735d095cab11a25dba038bd43cbf3d80bbee4",
+      "feature_sha256": "b365e561c79240146ed5ac8fb07735d095cab11a25dba038bd43cbf3d80bbee4",
+      "exact_feature_parent_blob_and_mode": true,
+      "differs_from_current_target": true
+    },
+    {
+      "path": "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py",
+      "mode": "100644",
+      "head_git_blob": "db382dd51b101ed2604fce593b98ae5e71e13496",
+      "feature_git_blob": "db382dd51b101ed2604fce593b98ae5e71e13496",
+      "head_sha256": "1143c170cb768b2234a22f87cddda9dcf829399c769891547bc5384bc4cd199a",
+      "feature_sha256": "1143c170cb768b2234a22f87cddda9dcf829399c769891547bc5384bc4cd199a",
+      "exact_feature_parent_blob_and_mode": true,
+      "differs_from_current_target": true
+    },
+    {
+      "path": "action_server/tests/action_server_tests/test_database.py",
+      "mode": "100644",
+      "head_git_blob": "979108c2c9e09c206378ffd7c83223a847239ed8",
+      "feature_git_blob": "979108c2c9e09c206378ffd7c83223a847239ed8",
+      "head_sha256": "97d445e8d07c7ec09af1bffb1948ea16665eaae3b79a3baa1346e8a6ba92fabd",
+      "feature_sha256": "97d445e8d07c7ec09af1bffb1948ea16665eaae3b79a3baa1346e8a6ba92fabd",
+      "exact_feature_parent_blob_and_mode": true,
+      "differs_from_current_target": true
+    },
+    {
+      "path": "action_server/tests/action_server_tests/test_native_startup_diagnostics.py",
+      "mode": "100644",
+      "head_git_blob": "ce93748b4d29bf95965e13dd54ce1d12fd51e182",
+      "feature_git_blob": "ce93748b4d29bf95965e13dd54ce1d12fd51e182",
+      "head_sha256": "d26fdec852b8a70f98237226dac6bcf47a5a4e3fc1e4cb21ddd5e3c868f7d0c5",
+      "feature_sha256": "d26fdec852b8a70f98237226dac6bcf47a5a4e3fc1e4cb21ddd5e3c868f7d0c5",
+      "exact_feature_parent_blob_and_mode": true,
+      "differs_from_current_target": true
+    }
+  ],
+  "doc_checks": [
+    {
+      "parent": "b3defc66e7e127b071511f0ac1940847054dcaea",
+      "all_added_doc_blocks_retained_exactly": true,
+      "verified_block_count": 4
+    },
+    {
+      "parent": "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+      "all_added_doc_blocks_retained_exactly": true,
+      "verified_block_count": 6
+    }
+  ],
+  "no_doc_conflict_markers": true,
+  "git_diff_check": "PASS",
+  "scope": "Independent immutable Git-object composition review; no native execution or prior/new CI equivalence inferred"
+}

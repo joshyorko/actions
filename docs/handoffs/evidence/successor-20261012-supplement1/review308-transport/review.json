@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "verdict": "HOLD_SOURCE",
+  "head": "89a599d92aa17a9065c9fc98b62bee0adb0b4cf2",
+  "tree": "84617bea63a662822056c1b4ecc5d9e126c0feb9",
+  "base": "22f74384442647db313d630b27ec0a8da11f6f67",
+  "source_sha256": "eba6fd546cbbc7061ebb082b1157e1b5807e857aa19defcea6538eade2230363",
+  "scope": "read-only immutable source schema/transport review, no native/controller acceptance",
+  "blocking_findings": [
+    {
+      "id": "unwitnessed-reap-identity",
+      "symbol": "OwnedCleanupEvidence.from_dict / census_reap_complete",
+      "line": 348,
+      "finding": "Schema1 accepts non-null matched_identity despite no birth witness; accepts event pid999 with identity pid2 and reports completion through parent transport.",
+      "correction": "Reject non-null matched_identity in current schema; a future witnessed schema needs explicit validated witness and PID binding."
+    },
+    {
+      "id": "contradictory-census-pid",
+      "symbol": "OwnedCleanupEvidence.from_dict",
+      "line": 309,
+      "finding": "Known identity PID1 with observed_pid999 absent census row accepted and reports completion.",
+      "correction": "Require observed_pid matching each known identity PID; poison controls through parent transport."
+    }
+  ],
+  "nonblocking_findings": [
+    {
+      "id": "disappearance-after-birth-read",
+      "symbol": "_OwnedCleanupObserver.observe_final",
+      "line": 454,
+      "finding": "NoSuchProcess from status after successful create_time read leaves absent row with non-null birth. Strict roundtrip discards complete ledger as unavailable ValueError.",
+      "correction": "Clear current birth on missing-process branch, retaining recorded owned identity; add injected exit-between-reads regression."
+    }
+  ],
+  "independent_checks": {
+    "isolated_immutable_new_test_file": "30 PASS,1206 pre-existing plugin/AST deprecation warnings,0.34s; copies only in own evidence namespace",
+    "critical_legacy_asts": "9 identical to22f including termination,fallback,provider capture/cleanup and main",
+    "writer_receipt_hashes": "all16 artifact/source byte and SHA checks match",
+    "default_behavior": "request flag absent by default; legacy output decoding,error classes,grace algorithms and signals preserved; actual injected default/opt-in supervisor controls pass",
+    "typed_evidence": "current emitter wait birth unavailable; uncapped160row ledger and samePID/differentbirth controls pass; enum failure explicit; missing/preJSON facts unavailable; primary errors and raw output fields preserved except blocking forged fact acceptance"
+  },
+  "not_claimed": [
+    "newhead CI",
+    "native RCC/provider execution",
+    "full package suite independently rerun",
+    "whole-operation enforcement",
+    "lease facts",
+    "unknown identity signal authority"
+  ],
+  "documentation_proposal": "/workspace/successor-evidence/review308-transport/documentation-proposal.md",
+  "evidence_files": {
+    "schema-model.json": {
+      "bytes": 946,
+      "sha256": "dd3b6cd6cc8549dc40411e5d2316b644b3ae0b3f78d35f3d2ecd0a7ce3f452e8"
+    },
+    "census-pid-model.json": {
+      "bytes": 166,
+      "sha256": "978344a9df4440f8a571f5969e35783ad42bb9a555260f82685fea9d1ea188e6"
+    },
+    "ast-controls.json": {
+      "bytes": 526,
+      "sha256": "a245efc8588c475ce93b93a81c6e9c6146d4f9e7c29ad5c11accf0190442a234"
+    },
+    "writer-receipt-verification.json": {
+      "bytes": 1710,
+      "sha256": "af0f829fd6a2953877fe9f454b1167dd031257a75d6c69b27ef798fe7d2880d8"
+    },
+    "isolated-tests.xml": {
+      "bytes": 5716,
+      "sha256": "3af00e62027fba91e3b61952b61e8448b5653393f2756e97b97e94020424ac17"
+    },
+    "isolated-tests.log": {
+      "bytes": 39143,
+      "sha256": "94be73c591ef0e341eb69136c7777dcddbed388f3935d332aba25ac617594ef6"
+    },
+    "documentation-proposal.md": {
+      "bytes": 1420,
+      "sha256": "b1c6f6df6369b01e8082961190c5a5ac048e0e4faceded361c7bb5ca3ef6470f"
+    }
+  },
+  "upstream_disposition": "none",
+  "no_product_edits": true,
+  "native_attempts": 0
+}

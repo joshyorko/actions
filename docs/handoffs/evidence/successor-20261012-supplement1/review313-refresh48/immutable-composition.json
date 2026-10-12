@@ -1,0 +1,69 @@
+{
+  "head": "216ad55b5bcafaa54ba61fcc87982a57573adce7",
+  "tree": "4c124ca711b6acaea657a2b6b713fb906f176ff7",
+  "ordered_parents": [
+    "bd4f3f8397dd4563fe767484bf7de15ab99a0123",
+    "48eeaf171e695d9b8ac140ea53239eaeb6eff331"
+  ],
+  "actual_complete_delta_vs_target": [
+    "action_server/src/actions/server/_common/process.py",
+    "action_server/tests/action_server_tests/common_tests/test_captured_process_tree_deadline.py",
+    "action_server/tests/action_server_tests/common_tests/test_system_mutex.py",
+    "action_server/tests/action_server_tests/robo_utils/test_system_mutex.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "all4_non_doc_delta_blobs_and_modes_exact_feature_parent": true,
+  "all_other_non_doc_blobs_and_modes_exact_current_target": true,
+  "complete_tree_non_doc_composition_verified": true,
+  "blob_proof": [
+    {
+      "path": "action_server/src/actions/server/_common/process.py",
+      "mode": "100644",
+      "head_git_blob": "ea17e07f6567b69638e741598fb68f674223cb5c",
+      "feature_git_blob": "ea17e07f6567b69638e741598fb68f674223cb5c",
+      "head_sha256": "1b6f65cbd7896dd99a223c9feda90f30363ef0db56b4b0db0f32a0cfd1aa3c07",
+      "feature_sha256": "1b6f65cbd7896dd99a223c9feda90f30363ef0db56b4b0db0f32a0cfd1aa3c07",
+      "exact_feature_parent_blob_and_mode": true,
+      "differs_from_current_target": true
+    },
+    {
+      "path": "action_server/tests/action_server_tests/common_tests/test_captured_process_tree_deadline.py",
+      "mode": "100644",
+      "head_git_blob": "669f8090b479e8579bf4e1948710a025f5e6ead7",
+      "feature_git_blob": "669f8090b479e8579bf4e1948710a025f5e6ead7",
+      "head_sha256": "177eedbfae360daef847c2fabadae7514291062f756cb7fbfcd1d872ff7b0307",
+      "feature_sha256": "177eedbfae360daef847c2fabadae7514291062f756cb7fbfcd1d872ff7b0307",
+      "exact_feature_parent_blob_and_mode": true,
+      "differs_from_current_target": true
+    },
+    {
+      "path": "action_server/tests/action_server_tests/common_tests/test_system_mutex.py",
+      "mode": "100644",
+      "head_git_blob": "7bf43ec6b76a8f4c3f502812385f4cffb64ec7c3",
+      "feature_git_blob": "7bf43ec6b76a8f4c3f502812385f4cffb64ec7c3",
+      "head_sha256": "8cc28545a190ebe9151899f51575d28e8bb310a8910fa10953acd2617e703502",
+      "feature_sha256": "8cc28545a190ebe9151899f51575d28e8bb310a8910fa10953acd2617e703502",
+      "exact_feature_parent_blob_and_mode": true,
+      "differs_from_current_target": true
+    },
+    {
+      "path": "action_server/tests/action_server_tests/robo_utils/test_system_mutex.py",
+      "mode": "100644",
+      "head_git_blob": "f93907c7fa39312ea6128d8de8b490a25d82ac4b",
+      "feature_git_blob": "f93907c7fa39312ea6128d8de8b490a25d82ac4b",
+      "head_sha256": "be8b531ec800c15866a38e606704e133605f440a3f36426bc8a750d7626b5a2c",
+      "feature_sha256": "be8b531ec800c15866a38e606704e133605f440a3f36426bc8a750d7626b5a2c",
+      "exact_feature_parent_blob_and_mode": true,
+      "differs_from_current_target": true
+    }
+  ],
+  "doc_checks": {
+    "full_feature_mutex_paragraph_retained": true,
+    "full_target_portable_oauth_paragraph_retained": true,
+    "feature_pytest_preservation_and_shared_deadline_lessons_retained": true,
+    "target_offline_oauth_and_redirect_lessons_retained": true,
+    "no_conflict_markers": true
+  },
+  "git_diff_check": "PASS",
+  "scope": "Independent immutable Git-object composition review; no new execution/reader/native/lease acceptance"
+}

@@ -1,0 +1,15 @@
+{
+  "canonical_file": "docs/skills/repository-operations.md",
+  "insertion_point": "Live pull-request base identity, after the paragraph beginning For an ordinary stacked-branch refresh",
+  "disposition": "REUSE_PREVIOUS_REFRESH_SCOPE_PROPOSAL_ONCE",
+  "previous_proposal": "/workspace/successor-evidence/review313-refresh48/documentation-proposal.json",
+  "exact_delta": "Inventory the complete diff from the live target before describing the refreshed PR's scope. Retained feature changes can still add production code and tests to that target even when the refresh resolved only documentation.",
+  "durable_learning": "Conflict-resolution scope does not define the complete union: this conflict-free refresh carries six feature source/test blobs into the new target. Retain existing fresh-CI guidance and add the proposed target-diff inventory clarification once.",
+  "evidence": [
+    "immutable-composition.json independently validates every tree entry against ordered parents[b3defc66,48eeaf]",
+    "Six non-documentation target-delta blobs and modes are exactb3def; all others are exact48",
+    "All four added documentation blocks fromb3def and six from48 are retained exactly"
+  ],
+  "stale_or_ambiguous_guidance_removed": "Avoid labeling a refresh's complete scope from the presence or absence of merge conflicts. Do not duplicate the already-proposed clarification or repeat the existing fresh-CI requirement as a new rule.",
+  "remaining_uncertainty": "Fresh exacteb0 CI remains pending; priorb3def CI and original6181 Windows failure remain separate historical evidence."
+}

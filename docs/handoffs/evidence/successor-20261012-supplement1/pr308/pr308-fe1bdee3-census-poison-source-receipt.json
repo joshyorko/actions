@@ -1,0 +1,161 @@
+{
+  "commands": {
+    "affected_focused": "prepared package python -m pytest -n0 -q tests/action_server_tests/test_owned_cleanup_evidence.py tests/action_server_tests/test_dakota_rcc_acceptance.py tests/action_server_tests/test_provider_startup_cleanup.py tests/action_server_tests/test_source_staging_rcc_consumer.py tests/action_server_tests/test_rcc_runtime_adapter.py -m \"not integration_test\" --basetemp=/workspace/successor-pr308/census-poison-focused --junitxml=/workspace/successor-evidence/pr308/census-poison-focused.xml;323PASS/1SKIP/3nativeDESELECTED4warnings7.38s exit0",
+    "configured_static": "fresh pinned toolkit PATH+own homes/caches poetry run invoke lint typecheck;Ruff/format/IsortPASS,mypy360filesPASS exit0; markdownlint unavailable",
+    "diff_check": "PASS",
+    "extended_helper_mypy": "same six pre-existing diagnostics unchanged, no new;exit1 separately retained",
+    "helper_ruff": "PASS exit0",
+    "own_green": "prepared package python -m pytest -n0 -q tests/action_server_tests/test_owned_cleanup_evidence.py;36PASS1.31s exit0",
+    "red": "prepared package python -m pytest -n0 -q tests/action_server_tests/test_owned_cleanup_evidence.py -k \"unwitnessed or matching_observed or disappearance_after or in_memory_poison\";6 expectedFAIL/30DESELECTED against89a;exit1",
+    "windows_diagnostic": "prepared package mypy --platform win32 three affected fixture files;3filesPASS exit0"
+  },
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "durable_learning": "schema1 cannot consume birth assertions without actual witness; captured PID and observed PID must agree; disappearance after birth read preserves absent census without inventing identity reap; component reaping remains root-only when no child/wait evidence is qualified",
+    "evidence": "independent immutable poison controls,6 RED plus36 own/323affected GREEN;9 underlying function ASTs unchanged",
+    "remaining_uncertainty": [
+      "exactfe1 corrective schema/observer source independent review and exact-head required CI pending",
+      "current provider ownership/cleanup controls are source-only; actual shipped18.19.3 provider reader and lease execution facts absent",
+      "single global primary deadline and bounded terminal cleanup require independent controller design review and source/control qualification; no old ROOT/script grant applies",
+      "opt-in census metadata source seam is prepared; actual final native uncapped census/reaping/reader/sampler observations and robust failure publication remain unqualified; escaping pre-JSON supervisor failures attach unavailable facts only",
+      "actual passive same-lease creation/release observation remains missing; lifecycle inspect public source can reconcile/delete records and is not admitted as read-only observation",
+      "actual self-cgroup endpoint unproven: route0::/, mountroot/.., visible cgroup.procs empty on two bounded reads; strict retained reader rejects mount root",
+      "proposed conservative3113851289 initial headroom/536870912 reserve remain unaccepted and uncalibrated, regardless visible mount free memory",
+      "fresh native namespace, overhead budget, before/during/after observer and terminal output retention not yet admitted"
+    ],
+    "stale_or_ambiguous_guidance_removed": "decoder cannot accept asserted wait identity while producer leaves it null; absence row cannot retain current birth"
+  },
+  "evidence_files": {
+    "census-poison-configured-static.log": {
+      "bytes": 2017,
+      "sha256": "778e1a5579507144667e47736eafc8ebbbbfc3bfd84d0a4321060c657185ed33"
+    },
+    "census-poison-focused.log": {
+      "bytes": 1402,
+      "sha256": "5f334eee70b51c17a2ea862e7d3522edcbfa59267e2c8adeb05a2e4a01e16df8"
+    },
+    "census-poison-focused.xml": {
+      "bytes": 57604,
+      "sha256": "81a5b8af78e1da19ade1dfa2c39eb10d29e3f2673e8b640f0b7d7ae94bb4c13a"
+    },
+    "census-poison-green.log": {
+      "bytes": 250,
+      "sha256": "8b031575c12ab3dddca655b3bd7c938d8e02a0a216cbb602177185c48f46ee06"
+    },
+    "census-poison-green.xml": {
+      "bytes": 6270,
+      "sha256": "e605fce2879e7d12f9508ebb3328a0a5d07677fab17df4f2ee8b02e132ecb33a"
+    },
+    "census-poison-helper-mypy-initial.log": {
+      "bytes": 849,
+      "sha256": "5e9aef944010206a637ed6639f0b9f7ffda043ff74983f9c9111b024d0d408c2"
+    },
+    "census-poison-helper-ruff.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "census-poison-red.log": {
+      "bytes": 5893,
+      "sha256": "4ffe6ac17084d268b6d39b02cc25400392f08cae8cd40b9c3043b601eee11353"
+    },
+    "census-poison-red.xml": {
+      "bytes": 6167,
+      "sha256": "391749f24aa4d2ae36a17d4ae70fed448df6210c017d0dbd7d419bf3c267f954"
+    },
+    "census-poison-windows-mypy.log": {
+      "bytes": 43,
+      "sha256": "8228fcc5ce46d42d01caf3cd941f4e9c5f2bcc372bb5b147a2f0572d2dd675a8"
+    }
+  },
+  "head": "fe1bdee3d5014d39a763d088535c29d65b38315d",
+  "held_predecessor": "89a599d92aa17a9065c9fc98b62bee0adb0b4cf2",
+  "held_predecessor_tree": "84617bea63a662822056c1b4ecc5d9e126c0feb9",
+  "independent_controls": {
+    "/workspace/successor-evidence/review308-transport/census-pid-model.json": {
+      "bytes": 166,
+      "sha256": "978344a9df4440f8a571f5969e35783ad42bb9a555260f82685fea9d1ea188e6"
+    },
+    "/workspace/successor-evidence/review308-transport/schema-model.json": {
+      "bytes": 946,
+      "sha256": "dd3b6cd6cc8549dc40411e5d2316b644b3ae0b3f78d35f3d2ecd0a7ce3f452e8"
+    }
+  },
+  "native_attempts_consumed": 0,
+  "native_dispatch_signal_fallback_output_disksink_watchdog_or_lease_behavior_changed": false,
+  "patch": {
+    "bytes": 8554,
+    "path": "/workspace/successor-evidence/pr308/census-poison-fe1bdee3-source.patch",
+    "sha256": "17936505570fbe8015c6d8d3736efb0efc61ea4961b3e89338b235ef2af9ec05"
+  },
+  "profile": {
+    "bytes": 14584,
+    "path": "/workspace/successor-evidence/pr308/native-baseline-profile-fe1bdee3-v6-SOURCE-PREPARED-NOTRUN.json",
+    "sha256": "50b29f623fda690fbe58f954fc07cdd70887949d684ca54cdd6bc1333352bed5"
+  },
+  "resource": {
+    "filesystems": {
+      "/dev/shm": {
+        "device": 36,
+        "free_bytes": 9441349632
+      },
+      "/tmp": {
+        "device": 33,
+        "free_bytes": 9441173504
+      },
+      "/workspace": {
+        "device": 27,
+        "free_bytes": 13183139840
+      }
+    },
+    "memory.events": {
+      "high": 0,
+      "low": 0,
+      "max": 25204,
+      "oom": 0,
+      "oom_group_kill": 0,
+      "oom_kill": 0
+    },
+    "memory.events.local": {
+      "high": 0,
+      "low": 0,
+      "max": 25204,
+      "oom": 0,
+      "oom_group_kill": 0,
+      "oom_kill": 0
+    },
+    "memory_current": 14587793408,
+    "memory_max": 17179869184,
+    "scope": "visible_cgroup_mount_diagnostic_only; self binding unproven",
+    "time_unix": 1791776983.642889,
+    "visible_headroom_bytes": 2592075776
+  },
+  "schema": 1,
+  "source_files": {
+    "action_server/scripts/verify_dakota_rcc_acceptance.py": {
+      "bytes": 110032,
+      "sha256": "9bd4e6fb0b4b04831bb7562e4ba9f32761ee33de3290482cd1afafc39cf08c3c"
+    },
+    "action_server/tests/action_server_tests/test_owned_cleanup_evidence.py": {
+      "bytes": 21231,
+      "sha256": "3b4b74edad00bba6c4b4bd94d297ec532128a6c2c54a2a7bee3cd2247b7084dc"
+    },
+    "docs/skills/repository-operations.md": {
+      "bytes": 287964,
+      "sha256": "c120ae973912a689ec6c7bce49aae5a4686ffc9b5203de2934b23c26eefad5b2"
+    }
+  },
+  "tree": "c0371a7a0fa113be56199f260029ee1c09f63d1a",
+  "unchanged_ast_functions": {
+    "_capture_provider_ownership": true,
+    "_fallback_reap_after_error": true,
+    "_proc_descendants": true,
+    "_reap_adopted_children": true,
+    "_stop_supervised_processes": true,
+    "_supervisor_main": true,
+    "cleanup_provider_until": true,
+    "run_owned_process": true,
+    "terminate_process_tree": true
+  },
+  "upstream_disposition": "none",
+  "worktree_clean": true
+}

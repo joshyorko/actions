@@ -1,0 +1,53 @@
+{
+  "schema": "actions-successor-current-projection/v1",
+  "observed_at": "2026-10-12T03:57:30.342885+00:00",
+  "prior_checkpoint": "6088e6dbf81ff6aa212c7bebaf115534e885295d",
+  "handoff_immutable": "0d5424ee8ec7c0a0ccea42a91eeecea144aa2934",
+  "integration": "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+  "community": "a70993fafc99a9f94041485542d5a720797ca394",
+  "source_heads": {
+    "305": "f75dcae52fcd78c5c382d3903b012e5b049ca48b",
+    "306": "eb0df4f97f390b413e364fe68364b81a65663f02",
+    "307": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+    "308_remote": "fe1bdee3d5014d39a763d088535c29d65b38315d",
+    "313": "216ad55b5bcafaa54ba61fcc87982a57573adce7"
+  },
+  "superseding_scopes": {
+    "307": "NORMAL_MERGED23a\u219248; actual7artifact hashes/source/members validated; publicCore1.0.3 and1.0.2 minimumfloor /Helper1.0.3 defaultregistrylocked; each9installedOAuthPASS+dependencycheck+idleHTTP200/403/200,independentlyreviewed origins/memberparity+postpermissions. No concretehostCorefloorblockerfound; minimumCoreMCP/managedAction/allplatform/fullinstalled acceptance untested.",
+    "308": "fe1 normalfastforward remoteverified; independentGO_SOURCE minimaloptin transport;6RED89\u219236GREENfe1+20models,323focusedPASS,1SKIP3nativeDESELECT. ExactnewheadCI pending, prior22 all25SUCCESS source-boundWindows1373unit/131binaryPASS. Fullcontroller/native HOLD; held89receipts preserved.",
+    "313": "216all19checksSUCCESS;21focusedPASS; independentcomplete target deltaGO; wholecleanupHOLD",
+    "306": "eb0all19checksSUCCESS;Windows fdaba3e exactparents/tree with1299unit/131binaryPASS;5actualoriginalFIRSTfailure nodesnowPASS; indexsubstitutionFAILpreserved/corrected. SQLite16PASS +independentmerge-treeGO; historicalcauseUNKNOWN; native/dependency/cleanup prerequisitesHOLD",
+    "305": "source/censusonly;actualprimary640/watchdog/browser/reader/lease acceptanceHOLD"
+  },
+  "native_attempts": 0,
+  "runtime1_0_3": "HOLD",
+  "rcc18_19_6_publication": "ABSOLUTE_HOLD",
+  "external_native_blockers": [
+    "visible self-cgroup route0::/ mountroot/.. andemptydirectmembership cannotbindownidentity",
+    "numericnativefloor/reserve unaccepted anduncalibrated;visibleheadroom belowproposal"
+  ],
+  "internal_native_holds": [
+    "independent whole-operation enforcer inclcensus/hash/fsync/receipt",
+    "identitysafe global-deadline fallback and explicit native disk outcome",
+    "actualpassive lease schema/creation/release witness; public inspect may reconcile/delete records"
+  ],
+  "retained_contracts": 54,
+  "issues_created": 0,
+  "issues_closed": 0,
+  "old_receipts": "byte-identical; historicalFAIL/NOT_RUN unchanged",
+  "local_only_evidence": "Rawlogs, distributions, environments and scripts not exported unless separatelymanifested. References/hashes in receipts do not recover their bytes.",
+  "documentation_dispositions": [
+    "publicidle startup403/permissions/capturedscope integrated",
+    "306/313 complete targetdiff lesson integratedonce",
+    "controller outerendpoint/watchdogFAIL lesson integrated",
+    "oldvsnewemptycatalog distinction clarified",
+    "89productguide remainsunreviewedlocal source until review; no claimed nativeauthority",
+    "Corefloor hostvsmanagedfeatures +minimumMCPscope integrated",
+    "acceptedfe1 schema transport andpoisonedparentwirecontrols integrated;89HOLD preserved",
+    "terminal306 wrongnodeindex independentlycaught, firstFAILpreserved correctedfromoriginaldiagnosis, PRbodycorrected/remoteverified"
+  ],
+  "upstream_disposition": "none",
+  "latest_ci_snapshot": "current-checks-0400.json",
+  "latest_resource_snapshot": "resources-final-prepush.json",
+  "precommit_review": "final-precommit-review-checkpoint6088/review-receipt.json bounded60payloadreview; added latestCI/resource snapshots andthisreceipt verifiedbyroot"
+}
