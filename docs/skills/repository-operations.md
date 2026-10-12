@@ -2620,6 +2620,36 @@ record paths, root/digest/lease identity, no-follow reads, stable bytes, and
 actual before/after observations. Help output and terminal process receipts
 alone do not provide those facts.
 
+`run_owned_process(..., collect_cleanup_evidence=True)` is an opt-in Linux
+source-observation transport. The default command payload, outputs, termination,
+fallback, and grace behavior remain unchanged. The observer retains the full
+PID/creation-time ledger, including different births of one PID, and distinguishes
+successful empty enumeration from failed or unavailable enumeration. Census
+states retain live, zombie, absent, reused, and unknown observations; this ledger
+is never supplied as signal authority. Root identity requires the existing
+verified live/birth capture. Existing `waitpid` calls retain raw PID/status events
+and the actual terminal ECHILD observation without adding waits. A wait PID alone
+does not establish birth identity, so these events leave `matched_identity` null.
+Absence and legacy reap counts are not converted into observed identity reaps.
+
+The same typed `cleanup_evidence` is attached to command results, timeout, and
+cleanup-error outcomes while retaining their existing output fields. Wait errors
+retain their original exception object; metadata failures record fixed secondary
+classes and cannot replace that primary error. Malformed or missing metadata and
+supervisor failures before JSON publication have explicitly unavailable facts,
+not an empty clean census. Reader, sampler, and whole-operation enforcer facts
+remain null because this increment does not measure them. Scoped census/reap
+completion does not prove the whole native fixture or Runtime acceptance.
+
+An absolute Python deadline limits only operations that consume its remaining
+budget. Final census, output hashing, fsync, and receipt persistence require an
+independently enforced outer endpoint before a whole-operation hard bound is
+claimed. Watchdog intervention is failure with explicitly unavailable cleanup
+facts; it is not evidence that owned processes were reaped. The opt-in metadata
+does not change native dispatch, fallback signals, disk-output retention, lease
+observation, or watchdog behavior; those designs and native budgets require
+separate admission.
+
 Pooled worker retirement retains its existing stdout/stderr output threads and
 joins them together with the protocol reader using the caller's one deadline.
 Typed `WorkerReaderResult` values record each join, final alive state, and fixed
