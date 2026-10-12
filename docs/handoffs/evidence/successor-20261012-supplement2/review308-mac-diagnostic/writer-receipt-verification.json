@@ -1,0 +1,93 @@
+{
+  "writer_receipt_sha256": "659221ea3a8c1fd5e179e8904480675767b914730ee6db001ac9716801027629",
+  "checks": {
+    "mac-provider-diagnostic.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "mac-provider-diagnostic.xml": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "mac-provider-deadline-model-0546.json": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "mac-provider-deadline-model-red.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "mac-provider-teardown-red.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "mac-provider-teardown-red.xml": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "mac-provider-teardown-green.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "mac-provider-teardown-green.xml": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "mac-provider-controls-final.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "mac-provider-controls-final.xml": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "mac-provider-affected-final.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "mac-provider-affected-final.xml": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "mac-provider-static-final.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "native-baseline-profile-b30e220c-v8-SOURCE-PREPARED-NOTRUN.json": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "mac-provider-b30e220c-source.patch": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "action_server/tests/action_server_tests/test_provider_startup_cleanup.py": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "action_server/scripts/verify_dakota_rcc_acceptance.py": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "action_server/src/actions/server/_common/process.py": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "docs/skills/repository-operations.md": {
+      "bytes_match": true,
+      "sha256_match": true
+    }
+  },
+  "all_match": true,
+  "mac_raw_log_facts": {
+    "sha256": "64683c5c6b0ab50d6bc0a679dd3ff3745ae9543dc7b48d4f8827bbd46dcbc0c6",
+    "bytes": 1299567,
+    "actual_summary_seen": "1 failed, 1420 passed, 216 skipped, 16 warnings in 141.71s",
+    "actual_assertion_seen": "provider_stopped = False",
+    "actual_cause": "NOT_ESTABLISHED; oldassertiondiscardstypedresult"
+  }
+}

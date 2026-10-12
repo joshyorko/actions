@@ -1,0 +1,8 @@
+{
+  "time": "2026-10-12T04:39:42.470600+00:00",
+  "run": 38201632027,
+  "head": "fe1bdee3d5014d39a763d088535c29d65b38315d",
+  "status": "in_progress",
+  "reason": "bounded reproduction of injected Windows OS missingWNOHANG and constant fakeclock fallback; preserve heldrun notrerunidentical",
+  "native_attempts": 0
+}

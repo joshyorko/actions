@@ -1,0 +1,32 @@
+[
+  {
+    "wheel": "actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+    "all_archive_Python_members_exact_expected_set": true,
+    "count": 203
+  },
+  {
+    "wheel": "actions_runtime-1.0.3-cp313-cp313-win_amd64.whl",
+    "all_archive_Python_members_exact_expected_set": true,
+    "count": 203
+  },
+  {
+    "wheel": "actions_runtime-1.0.3-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+    "all_archive_Python_members_exact_expected_set": true,
+    "count": 203
+  },
+  {
+    "wheel": "actions_runtime-1.0.3-cp312-cp312-macosx_12_0_arm64.whl",
+    "all_archive_Python_members_exact_expected_set": true,
+    "count": 203
+  },
+  {
+    "wheel": "actions_runtime-1.0.3-cp312-cp312-win_amd64.whl",
+    "all_archive_Python_members_exact_expected_set": true,
+    "count": 203
+  },
+  {
+    "wheel": "actions_runtime-1.0.3-cp313-cp313-macosx_12_0_arm64.whl",
+    "all_archive_Python_members_exact_expected_set": true,
+    "count": 203
+  }
+]

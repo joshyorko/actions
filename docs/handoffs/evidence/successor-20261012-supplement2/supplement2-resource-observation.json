@@ -1,0 +1,10 @@
+{
+  "observed_at": "2026-10-12T05:17:57.471341+00:00",
+  "memory_current": 14313979904,
+  "memory_max": 17179869184,
+  "memory_headroom": 2865889280,
+  "memory_events": "low 0\nhigh 0\nmax 34411\noom 0\noom_kill 0\noom_group_kill 0\n",
+  "native_admission": false,
+  "native_attempts": 0,
+  "self_binding_still_unqualified": true
+}

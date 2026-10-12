@@ -21,12 +21,12 @@ the repository toolchain.
 
 ## Source progress and acceptance limits
 
-The original hosted snapshot is [timestamped 2026-10-12T03:32:11.889219Z](evidence/successor-20261012-supplement1/current-checks-0335.json). The [latest snapshot](evidence/successor-20261012-supplement1/current-checks-0400.json) records306/313 terminal success and308 fresh-head checks in progress. Later source and admission observations are in the [additive projection](evidence/successor-20261012-supplement1/current-projection.json) and [supplement manifest](evidence/successor-20261012-supplement1/manifest.json). The original 37 receipts remain byte-identical.
+The original hosted snapshot is [timestamped 2026-10-12T03:32:11.889219Z](evidence/successor-20261012-supplement1/current-checks-0335.json). The [05:14 UTC snapshot](evidence/successor-20261012-supplement2/current-checks-supplement2.json) records306/313 terminal success and308 at0546 with22 successful checks, one macOS failure and Windows still running. The [second additive supplement](evidence/successor-20261012-supplement2/manifest.json) preserves later source, packaged-consumer, failure and workspace-access evidence. The original37 and first-supplement63 receipts remain byte-identical.
 
 | PR | Preserved successor head | Verified progress | Remaining gate |
 |---|---|---|---|
 | #307 | `23a6be5044f7a9377180f7ec7d33c50ad8c4c364` | All 23 checks passed; scoped independent source/security and packaged OAuth acceptance; normal merge into integration verified | Broader release installed/native/platform/dependency gates remain separate |
-| #308 | `fe1bdee3d5014d39a763d088535c29d65b38315d` | Normal fast-forward and independent source review; 323 focused tests pass; predecessor22 had all25 checks passing | Fresh exact-head CI; full controller/deadline/census/lease controls, self-cgroup admission, genuine18.19.3 Action baseline |
+| #308 | pushed `eeb806e7699d7f8e6878d5cc1dd83cd22e795ff5` | Diagnostic source329 tests pass; independent old-test RED/four-control GREEN and documentation-only successor review accepted; normal remote push verified. Historical0546 had22 successful checks, macOS failed and Windows running at05:14 | Fresh exact-eeb CI; actual macOS cause remains unknown; full controller/deadline/census/lease controls, self-cgroup admission, genuine18.19.3 Action baseline |
 | #313 | `216ad55b5bcafaa54ba61fcc87982a57573adce7` | All 19 refreshed-head checks passed; 21 cleanup/mutex controls pass; independent exact target-diff review preserves four feature source/test blobs | Complete shared-deadline process/reader/lease acceptance |
 | #306 | `eb0df4f97f390b413e364fe68364b81a65663f02` | Ordinary refresh onto accepted integration; six feature source/test blobs preserved; independent merge-tree review; 16 SQLite tests pass; all19 checks pass including Windows | Five original Windows failure nodes now pass; historical cause remains unknown; native/dependency/cleanup prerequisites remain open |
 | #305 | `f75dcae52fcd78c5c382d3903b012e5b049ca48b` | Exact public source and separate retained 640-second draft audited | Enforceable primary bound and actual browser/descendant/reader/lease cleanup |
@@ -64,6 +64,32 @@ on fe1; 36 metadata tests and 20 independent controls pass. The exact source was
 independently accepted and normally pushed. It is opt-in observation transport,
 not native controller wiring. Its new CI is separate from predecessor22. Missing
 reader/sampler/enforcer facts and wait-event birth identity stay unavailable.
+
+The fe1 source run was cancelled once after a bounded reproduction established
+that fake waitpid backends omitted WNOHANG on Windows, entering a nonadvancing
+legacy fallback. Its actual CANCELLED receipt and full-log diagnosis remain
+preserved. The0546 correction changes tests and guidance only. Its macOS run
+reports1420 passed,216 skipped and one failed provider-stopped assertion. The
+original test discarded typed cleanup facts and had no emergency teardown;
+the actual failure cause remains unknown. A controlled scheduler overshoot
+demonstrates one possible route, without proving that route occurred on macOS.
+Diagnostic b30 preserves strict live/complete assertions and the same0.2-second
+budget, adds typed diagnostics and original-child teardown, and changes no
+production helper. Independent review accepts that diagnostic scope. The additive
+documentation-only successor eeb corrects the final zero-budget wait wording,
+preserves all tested source bytes, and was normally pushed and remotely verified.
+It requires fresh exact-head CI and remains distinct from failing0546.
+
+The fe1 seven-file package set also passed independent complete Python-member,
+manifest, RECORD and generated-input provenance checks. A fresh public Core1.0.2/
+Helper1.0.3 consumer passes nine installed OAuth tests, dependency checks,
+bundled-template creation and idle HTTP200/403/200. This qualifies that package
+scope only; it does not qualify later complete source heads or native Action,
+MCP, reader/descendant/lease, platform or release acceptance.
+
+After the platform reported a05:10 UTC disconnection, a bounded read-only shell
+check exited0 on the same host9e619bc297a7 and clean b30 checkout. The existing
+workspace and workers were retained; no uncertain operation was replayed.
 
 A separate fresh minimum-Core consumer uses public Core1.0.2/Helper1.0.3. All
 203 Runtime,47 Core and2 Helper installed Python members match the measured

@@ -1,0 +1,31 @@
+{
+  "actual_root_cause": "UNKNOWN: prior test discarded typed cleanup result; controlled scheduler overshoot is a viable route, not proof of actual macOS cause",
+  "assertion": "provider_stopped = False",
+  "conclusion": "failure",
+  "failure_node": "test_dakota_rcc_acceptance.py::test_provider_startup_failure_uses_bounded_kill_fallback",
+  "head": "0546ef30a30ff8229cb8fa6268e492c5cd74134e",
+  "job": 114668292448,
+  "native_baseline_attempts": 0,
+  "observed_at": "2026-10-12T05:14:24.071052+00:00",
+  "producer": {
+    "parents": [
+      "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+      "0546ef30a30ff8229cb8fa6268e492c5cd74134e"
+    ],
+    "sha": "6433af24a322be5f8a715934663b925d5b3cf044",
+    "tree": "cca24f6fd8f6c18034ef3a12b77dd37e5fe64a97"
+  },
+  "raw_log": {
+    "bytes": 1299567,
+    "local_only": true,
+    "path": "/workspace/successor-evidence/pr308/decoded-0546-macos114668292448.log",
+    "sha256": "64683c5c6b0ab50d6bc0a679dd3ff3745ae9543dc7b48d4f8827bbd46dcbc0c6"
+  },
+  "run": 38205604794,
+  "unit": {
+    "failed": 1,
+    "passed": 1420,
+    "seconds": 141.71,
+    "skipped": 216
+  }
+}

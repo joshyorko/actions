@@ -1,0 +1,160 @@
+{
+  "actual_mac_ci_parent_report": {
+    "failure": "test_provider_startup_failure_uses_bounded_kill_fallback provider_stopped False",
+    "head": "0546ef30a30ff8229cb8fa6268e492c5cd74134e",
+    "job": 114668292448,
+    "logs_fetched_by_this_lane": 0,
+    "run": 38205604794,
+    "unit": "1420PASS/216SKIP/1FAIL141.71s"
+  },
+  "base_commit": "0546ef30a30ff8229cb8fa6268e492c5cd74134e",
+  "diagnosis": {
+    "actual_mac_cause": "NOT_CONFIRMED; old test discarded typed result. Ownership error and cooperative scheduler overshoot remain distinguishable candidates",
+    "old_local_smoke": "1PASS0.39s unchanged0546",
+    "overshoot_control": "Original unconditional live assertion controlledRED under verified capture when wait .3 resumes +.15 beyond deadline100.4; no newkill, typed wrapper_reapedFalse. Timely twin kill100.3+.1wait completeTrue. No OSprocess/signals in model",
+    "teardown_control": "Immutable0546 test controlledRED1FAIL with livechild after injected ownership cleanup failure; outercontrol safefinally disposes. Updated test GREEN1 preserves typed diagnostic and disposes originalPopen"
+  },
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "durable_learning": "Preserve originalPopen and typed cleanup failure; emergency finally is separate from acceptance. Cooperative wait can resume after absolute deadline; no newkill then unreaped typedfact, distinguish from ownership failure",
+    "evidence": "Controlled immutable0546 teardownRED/newGREEN and exacthelper scheduler control; strict realchild smoke +329affected/static360PASS",
+    "remaining_uncertainty": "Actual Mac rootcause and next exact-head CI; full native/controller/lease admission unchanged"
+  },
+  "evidence_files": [
+    {
+      "bytes": 253,
+      "path": "/workspace/successor-evidence/pr308/mac-provider-diagnostic.log",
+      "sha256": "46765a92b493a08c77edeb7f4c2d17030cf81fc3f0be522680c2a9c4b651aa3d"
+    },
+    {
+      "bytes": 402,
+      "path": "/workspace/successor-evidence/pr308/mac-provider-diagnostic.xml",
+      "sha256": "1a0341921d111783a1d4cbed3488a114f8c8d290db28ba766034f53d7954024b"
+    },
+    {
+      "bytes": 2368,
+      "path": "/workspace/successor-evidence/pr308/mac-provider-deadline-model-0546.json",
+      "sha256": "6b005bbe23abc735ddbae73bed6a25422e7311147d26108cdf470477fe89e525"
+    },
+    {
+      "bytes": 2454,
+      "path": "/workspace/successor-evidence/pr308/mac-provider-deadline-model-red.log",
+      "sha256": "5e483d7f428731b36773a56498f2cc41680c25bf1cded909c14ae68f6ac952ad"
+    },
+    {
+      "bytes": 2415,
+      "path": "/workspace/successor-evidence/pr308/mac-provider-teardown-red.log",
+      "sha256": "c4ede74a17457bec045be9e1046c666ecb4d39293af2a75a9ed3648f5abb9c05"
+    },
+    {
+      "bytes": 2352,
+      "path": "/workspace/successor-evidence/pr308/mac-provider-teardown-red.xml",
+      "sha256": "c1346bf97dd8b1d9b911dfa96b50f3dc1aff62a99438bdc28fa826f533e29f86"
+    },
+    {
+      "bytes": 257,
+      "path": "/workspace/successor-evidence/pr308/mac-provider-teardown-green.log",
+      "sha256": "6e723ab1a744b7d750a423fc46972445cf8e45458807e4a70493c95b6bd8c0bb"
+    },
+    {
+      "bytes": 423,
+      "path": "/workspace/successor-evidence/pr308/mac-provider-teardown-green.xml",
+      "sha256": "591774ab2f4776d94a935009c7bbeaecad3c219bce69856cdc3f3146f6f65bd3"
+    },
+    {
+      "bytes": 257,
+      "path": "/workspace/successor-evidence/pr308/mac-provider-controls-final.log",
+      "sha256": "70e2f1dd878e17f20f53dd58b306e75b1cc0b008518a1365ce0ffc435d96b30a"
+    },
+    {
+      "bytes": 739,
+      "path": "/workspace/successor-evidence/pr308/mac-provider-controls-final.xml",
+      "sha256": "f5f4d346a2c1684e82c713dffbd60afe1d971c959f8a47cf132e8578bc1437e1"
+    },
+    {
+      "bytes": 1408,
+      "path": "/workspace/successor-evidence/pr308/mac-provider-affected-final.log",
+      "sha256": "f7b41190301e67d22890514cb218172fa86c1a4f4fafd56256d388b1f58fb888"
+    },
+    {
+      "bytes": 58623,
+      "path": "/workspace/successor-evidence/pr308/mac-provider-affected-final.xml",
+      "sha256": "ca66fddffffb6384f5d12635e34eb698043f85808e0e8d6977366ff8da98809e"
+    },
+    {
+      "bytes": 2017,
+      "path": "/workspace/successor-evidence/pr308/mac-provider-static-final.log",
+      "sha256": "778e1a5579507144667e47736eafc8ebbbbfc3bfd84d0a4321060c657185ed33"
+    }
+  ],
+  "head": "b30e220cbc458edaad605d36081c014e2cec190b",
+  "lease_commands_executed": false,
+  "native_attempts_consumed": 0,
+  "native_profile": {
+    "bytes": 1858,
+    "path": "/workspace/successor-evidence/pr308/native-baseline-profile-b30e220c-v8-SOURCE-PREPARED-NOTRUN.json",
+    "sha256": "768dddb34be8e388dc882a2c5240cdaeee5f72d84cafd6dbb9378ebdf91957cb"
+  },
+  "patch": {
+    "bytes": 9226,
+    "path": "/workspace/successor-evidence/pr308/mac-provider-b30e220c-source.patch",
+    "sha256": "89eba86c28eb4832db057e218e06985166b196ef2093ebffae8ad37f83ed5bbe"
+  },
+  "production_helper_and_process_byte_identical_to_0546": true,
+  "push_by_this_lane": false,
+  "resource": {
+    "/dev/shm": {
+      "free_bytes": 9441349632
+    },
+    "/tmp": {
+      "free_bytes": 9441153024
+    },
+    "/workspace": {
+      "free_bytes": 12874326016
+    },
+    "memory.current": "14316630016",
+    "memory.events": "low 0\nhigh 0\nmax 34411\noom 0\noom_kill 0\noom_group_kill 0",
+    "memory.max": "17179869184",
+    "scope": "visible mount only; self binding unproven",
+    "time_unix": 1791781936.5352767,
+    "visible_headroom_bytes": 2863239168
+  },
+  "schema": 1,
+  "scope": "Diagnostic and teardown test-only increment; actual Mac cause unconfirmed, no production fix claimed",
+  "source_files": [
+    {
+      "bytes": 43540,
+      "path": "/workspace/actions-pr308/action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py",
+      "sha256": "37bf41455f2278b0b78078cfed23a5c1dac21eddefae7a9fda15a0687e38f05d"
+    },
+    {
+      "bytes": 19528,
+      "path": "/workspace/actions-pr308/action_server/tests/action_server_tests/test_provider_startup_cleanup.py",
+      "sha256": "f8b4627141b68fee7087e7fa555b7a0994e141f52641429368446075b3f9673e"
+    },
+    {
+      "bytes": 110032,
+      "path": "/workspace/actions-pr308/action_server/scripts/verify_dakota_rcc_acceptance.py",
+      "sha256": "9bd4e6fb0b4b04831bb7562e4ba9f32761ee33de3290482cd1afafc39cf08c3c"
+    },
+    {
+      "bytes": 31134,
+      "path": "/workspace/actions-pr308/action_server/src/actions/server/_common/process.py",
+      "sha256": "f432e65a488bf06862e548dc45342d3c1fb5ea7fcc26f6371d98aae124ffc082"
+    },
+    {
+      "bytes": 289317,
+      "path": "/workspace/actions-pr308/docs/skills/repository-operations.md",
+      "sha256": "1f18e45aa1fed9da803845b8dd2794beffc03ebe967297a10cb45d984e5e4f6a"
+    }
+  ],
+  "tree": "f0ec0c48365fe4b36c054339c906f01889ce107c",
+  "upstream_disposition": "none",
+  "verification": {
+    "command_mistakes_retained": "Initial model import missingpsutil corrected before control. Initial control wrong cwd wrote no source and pytest no-tests exit4; initial Poetryformat wrong root no pyproject exit1; corrected package commands authoritative",
+    "configured_static": "Fresh pinned toolkit PATH ownhome/caches Poetry invoke lint typecheck; Ruff/format/IsortPASS/mypy360filesPASS exit0; markdownlint unavailable",
+    "diff_check": "PASS",
+    "focused": "Prepared package python -m pytest -n0 affected5files not integration_test;329PASS/1SKIP/3nativeDESEL4warnings7.46s exit0"
+  },
+  "worktree_clean": true
+}

@@ -1,0 +1,43 @@
+{
+  "cases": [
+    {
+      "actual_supervisor_source_control": true,
+      "fallback_entered": false,
+      "observations": [
+        {
+          "clock_value": 12.0,
+          "grace": 1.0,
+          "loop_condition_if_entered": true,
+          "missing_attribute": "WNOHANG",
+          "primary_class": "AttributeError"
+        }
+      ],
+      "opt_in": false,
+      "signals_called": false
+    },
+    {
+      "actual_supervisor_source_control": true,
+      "fallback_entered": false,
+      "observations": [
+        {
+          "clock_value": 12.0,
+          "grace": 1.0,
+          "loop_condition_if_entered": true,
+          "missing_attribute": "WNOHANG",
+          "primary_class": "AttributeError"
+        }
+      ],
+      "opt_in": true,
+      "signals_called": false
+    }
+  ],
+  "helper_sha256": "9bd4e6fb0b4b04831bb7562e4ba9f32761ee33de3290482cd1afafc39cf08c3c",
+  "model": "Windows API omitting os.WNOHANG; unchanged exactfe test function, fallback sentinel records original failure without entering legacy loop",
+  "native_or_rcc_or_lease_commands_executed": false,
+  "production_code_changed": false,
+  "source_head": "fe1bdee3d5014d39a763d088535c29d65b38315d",
+  "source_tree": "c0371a7a0fa113be56199f260029ee1c09f63d1a",
+  "status": "REPRODUCED_BOUNDED",
+  "test_sha256": "3b4b74edad00bba6c4b4bd94d297ec532128a6c2c54a2a7bee3cd2247b7084dc",
+  "upstream_disposition": "none"
+}

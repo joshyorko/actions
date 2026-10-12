@@ -1,0 +1,151 @@
+{
+  "base_commit": "fe1bdee3d5014d39a763d088535c29d65b38315d",
+  "commands": {
+    "affected_final": "prepared package python -m pytest -n0 -q tests/action_server_tests/test_owned_cleanup_evidence.py tests/action_server_tests/test_dakota_rcc_acceptance.py tests/action_server_tests/test_provider_startup_cleanup.py tests/action_server_tests/test_source_staging_rcc_consumer.py tests/action_server_tests/test_rcc_runtime_adapter.py -m \"not integration_test\" --basetemp=/workspace/successor-pr308/windows-wait-model-final --junitxml=/workspace/successor-evidence/pr308/windows-wait-model-final.xml;326PASS/1SKIP/3nativeDESELECTED4warnings6.44s exit0",
+    "bounded_reproduction": "exactfe actual default+optin supervisor test under missing-WNOHANG host namespace; poison fallback catches AttributeError before real loop; fakeclock12/grace1 proves12<14 predicate",
+    "configured_static_final": "fresh pinned toolkit PATH+own homes/caches poetry run invoke lint typecheck;Ruff/format/IsortPASS,mypy360filesPASS exit0; markdownlint unavailable",
+    "diff_check": "PASS",
+    "first_static_failure_retained": "helper insertion misplaced existing roundtrip assertions; Ruff4errors; restored original assertions and relocated helper, final gates passed",
+    "red": "prepared package python -m pytest -n0 -q test_owned_cleanup_evidence.py::test_actual_supervisor_wires_observer_only_when_requested;2 expectedFAIL/2PASS with constants absent/present;exit1",
+    "windows_mypy": "prepared package mypy --platform win32 affected model file;PASS1file diagnostic exit0"
+  },
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "durable_learning": "forced Linux models need explicit primitives on Windows; frozen-clock fake-child controls poison unexpected real fallback; missing model APIs must produce bounded failure with no /proc reads/raw signals",
+    "evidence": "actual parent Windows terminal logs + exactfe bounded reproduction +2RED/326focusedPASS and unchanged production helperbytes",
+    "remaining_uncertainty": [
+      "exact054 test-only portable-model source independent review and fresh exact-head required CI pending",
+      "current provider ownership/cleanup controls are source-only; actual shipped18.19.3 provider reader and lease execution facts absent",
+      "single global primary deadline and bounded terminal cleanup require independent controller design review and source/control qualification; no old ROOT/script grant applies",
+      "opt-in census metadata source seam is prepared; actual final native uncapped census/reaping/reader/sampler observations and robust failure publication remain unqualified; escaping pre-JSON supervisor failures attach unavailable facts only",
+      "actual passive same-lease creation/release observation remains missing; lifecycle inspect public source can reconcile/delete records and is not admitted as read-only observation",
+      "actual self-cgroup endpoint unproven: route0::/, mountroot/.., visible cgroup.procs empty on two bounded reads; strict retained reader rejects mount root",
+      "proposed conservative3113851289 initial headroom/536870912 reserve remain unaccepted and uncalibrated, regardless visible mount free memory",
+      "fresh native namespace, overhead budget, before/during/after observer and terminal output retention not yet admitted"
+    ],
+    "stale_or_ambiguous_guidance_removed": "copying host os namespace does not guarantee Linux WNOHANG on Windows"
+  },
+  "evidence_files": {
+    "windows-fe1-job-current.json": {
+      "bytes": 4958,
+      "sha256": "4c7da861b2d315cc7d4ffb88fec510f8904b1737930cc566029fb3b77b789dbc"
+    },
+    "windows-fe1-missing-wnohang-bounded-reproduction.json": {
+      "bytes": 1394,
+      "sha256": "73cd55c36cbabc702f405ad2565c9597cbc689ae0bfc4e7d0934a53464e41c83"
+    },
+    "windows-wait-model-final.log": {
+      "bytes": 1405,
+      "sha256": "6b47c55e9ef54e414f45e63fae5c6b87f5a403a530b7be750d1097a0cf641466"
+    },
+    "windows-wait-model-final.xml": {
+      "bytes": 58111,
+      "sha256": "a3b7734decee502a664e73cb5d663e402dd05ad30914bbc6b31f71a89919a7b2"
+    },
+    "windows-wait-model-green.log": {
+      "bytes": 1405,
+      "sha256": "20f4a5f505b511ab1b9147e61bf0442d41e9778bfffe864272a309c69bffc1cf"
+    },
+    "windows-wait-model-red.log": {
+      "bytes": 18681,
+      "sha256": "a7fc8c4046f2a6a7e57ceef1c7a5888677c41ebdf41228ce70c7f2055d4154ea"
+    },
+    "windows-wait-model-red.xml": {
+      "bytes": 19050,
+      "sha256": "cb9a433b978caa6f2bb2c71b8ec52e84677c81076902d6c7c9f15e1024cc9220"
+    },
+    "windows-wait-model-static-final.log": {
+      "bytes": 2017,
+      "sha256": "778e1a5579507144667e47736eafc8ebbbbfc3bfd84d0a4321060c657185ed33"
+    },
+    "windows-wait-model-static.log": {
+      "bytes": 557,
+      "sha256": "74410c4e1dd7b9a3de6a01f689afc7125c9939823554ff856d0cc908858c5474"
+    },
+    "windows-wait-model-windows-mypy-final.log": {
+      "bytes": 42,
+      "sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e"
+    }
+  },
+  "head": "0546ef30a30ff8229cb8fa6268e492c5cd74134e",
+  "lease_commands_executed": false,
+  "native_attempts_consumed": 0,
+  "native_profile": {
+    "bytes": 15016,
+    "path": "/workspace/successor-evidence/pr308/native-baseline-profile-0546ef30-v7-SOURCE-PREPARED-NOTRUN.json",
+    "sha256": "771bcbe1fbbeaf22ad973721b748db86cde8e55f2258d95b49b8afc12915f3b1"
+  },
+  "patch": {
+    "bytes": 6735,
+    "path": "/workspace/successor-evidence/pr308/windows-wait-0546ef30-source.patch",
+    "sha256": "49bd2a293d837ff5cc545af10ad6224641f87d89b932f35f36ae7b3f1965070f"
+  },
+  "production_helper_byte_identical_to_fe1": true,
+  "production_timeout_fallback_signal_output_permission_pin_changed": false,
+  "resource": {
+    "filesystems": {
+      "/dev/shm": {
+        "device": 36,
+        "free_bytes": 9441349632
+      },
+      "/tmp": {
+        "device": 33,
+        "free_bytes": 9441153024
+      },
+      "/workspace": {
+        "device": 27,
+        "free_bytes": 12878184448
+      }
+    },
+    "memory.events": {
+      "high": 0,
+      "low": 0,
+      "max": 25204,
+      "oom": 0,
+      "oom_group_kill": 0,
+      "oom_kill": 0
+    },
+    "memory.events.local": {
+      "high": 0,
+      "low": 0,
+      "max": 25204,
+      "oom": 0,
+      "oom_group_kill": 0,
+      "oom_kill": 0
+    },
+    "memory_current": 14941011968,
+    "memory_max": 17179869184,
+    "scope": "visible_cgroup_mount_diagnostic_only; self binding unproven",
+    "time_unix": 1791780450.445168,
+    "visible_headroom_bytes": 2238857216
+  },
+  "schema": 1,
+  "source_files": {
+    "action_server/scripts/verify_dakota_rcc_acceptance.py": {
+      "bytes": 110032,
+      "sha256": "9bd4e6fb0b4b04831bb7562e4ba9f32761ee33de3290482cd1afafc39cf08c3c"
+    },
+    "action_server/tests/action_server_tests/test_owned_cleanup_evidence.py": {
+      "bytes": 22616,
+      "sha256": "e29d39003511665c785c9cdd62d56a7827a0cd442a596846c3216d4c7d797590"
+    },
+    "docs/skills/repository-operations.md": {
+      "bytes": 288589,
+      "sha256": "37e71da0f497c1aa61a9a28337da3cb7798d225ea3133c2957be155c378ac387"
+    }
+  },
+  "tree": "cca24f6fd8f6c18034ef3a12b77dd37e5fe64a97",
+  "upstream_disposition": "none",
+  "windows_ci": {
+    "cancel_or_rerun_by_this_lane": false,
+    "fresh_corrected_windows_runtime_result": "PENDING",
+    "job_id": 114656105418,
+    "logs_fetched_by_this_lane": 0,
+    "own_readonly_job_api": "observed in_progress unit step15 at snapshot; build/frontend/OAuth/Go-wrapper completed",
+    "parent_verified_raw_log_facts": "two WNOHANG AttributeError testFAILs03:59:39/40; actual_supervisor...[False] starts04:00:44 and never completes before cancellation; no final suite total claimed",
+    "parent_verified_terminal": "CANCELLED2026-10-12T04:41:34Z",
+    "run_id": 38201632027,
+    "source_head": "fe1bdee3d5014d39a763d088535c29d65b38315d"
+  },
+  "worktree_clean": true
+}

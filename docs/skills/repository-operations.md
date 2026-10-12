@@ -1056,6 +1056,13 @@ all coexist with an empty generated configuration when the acquisition command
 fails and its return code is ignored. Keep generated-payload/source admission
 separate from installed-wheel identity and dependency-floor admission.
 
+For each retained Runtime wheel, compare the complete set of Python archive
+paths with the tracked Runtime Python paths from the exact producer tree plus
+explicitly admitted generated modules. Require set equality before checking
+member bytes; iterating only present tracked members cannot detect omissions.
+Record generated input hashes against actual checkout bytes, including the
+explicit LF-to-CRLF transform for Windows when applicable.
+
 The generated `actions_runtime_recovery.yml` workflow is the only recovery lane for an
 immutable Runtime tag. Its required `release_ref` and full 40-hex `release_sha` inputs
 are checked against the exact tag object and `origin/community` ancestry before any
@@ -3781,3 +3788,23 @@ facts; it is not evidence that owned processes were reaped. The opt-in metadata
 does not change native dispatch, fallback signals, disk-output retention, lease
 observation, or watchdog behavior; those designs and native budgets require
 separate admission.
+
+Injected Linux supervisor controls must supply every Linux primitive they use,
+including `WNOHANG=1` in a fake `waitpid` namespace; copying host `os` attributes
+is insufficient on Windows. When a control uses a constant monotonic clock and
+fake process, replace unexpected legacy fallback with a failing sentinel.
+Missing model primitives must produce bounded test failures, rather than enter
+Linux `/proc` enumeration or a grace loop whose clock never advances. Exercise
+the model with POSIX constants both absent and present. These test substitutions
+leave production fallback and timeout contracts intact.
+
+Provider startup failure tests retain the original `Popen` and the primary
+exception's typed cleanup result. Assert observed cleanup facts before emergency
+test teardown and report those facts on failure. Reap and close that original
+child in `finally`; successful teardown cannot qualify a failed cleanup.
+A cooperative `Popen.wait` may resume after its requested timeout because of
+scheduler delay. If the absolute cleanup deadline has expired, the current
+helper skips a new kill. If its final zero-budget wait still fails, it records
+an unreaped wrapper. Injected clock controls distinguish that outcome from failed
+ownership capture. An old live-child
+assertion without typed facts cannot identify which path failed.

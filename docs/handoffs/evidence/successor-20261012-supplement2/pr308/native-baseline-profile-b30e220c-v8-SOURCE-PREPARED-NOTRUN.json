@@ -1,0 +1,45 @@
+{
+  "baseline_binary": {
+    "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "version": "18.19.3"
+  },
+  "head": "b30e220cbc458edaad605d36081c014e2cec190b",
+  "lease_commands_executed": false,
+  "native_attempts_consumed": 0,
+  "native_launched": false,
+  "previous_profile": {
+    "bytes": 15016,
+    "path": "/workspace/successor-evidence/pr308/native-baseline-profile-0546ef30-v7-SOURCE-PREPARED-NOTRUN.json",
+    "sha256": "771bcbe1fbbeaf22ad973721b748db86cde8e55f2258d95b49b8afc12915f3b1"
+  },
+  "remaining_holds": [
+    "Exact source independent review and actual macOS/Windows/Linux required CI",
+    "Actual Mac0546 ownership-vs-deadline cause unconfirmed; old failing test discarded typed cleanup result",
+    "Self-cgroup binding missing; visible mount diagnostic not admission",
+    "Proposed 3113851289 memory floor remains unaccepted/uncalibrated",
+    "Full controller/native budgets not implemented/admitted",
+    "Actual same-lease passive create/release observation missing; no inspect/lease queries run",
+    "Actual provider reader/output/artifact/final uncapped census cleanup not native-qualified"
+  ],
+  "resource_diagnostic": {
+    "/dev/shm": {
+      "free_bytes": 9441349632
+    },
+    "/tmp": {
+      "free_bytes": 9441153024
+    },
+    "/workspace": {
+      "free_bytes": 12874326016
+    },
+    "memory.current": "14316630016",
+    "memory.events": "low 0\nhigh 0\nmax 34411\noom 0\noom_kill 0\noom_group_kill 0",
+    "memory.max": "17179869184",
+    "scope": "visible mount only; self binding unproven",
+    "time_unix": 1791781936.5352767,
+    "visible_headroom_bytes": 2863239168
+  },
+  "schema": 1,
+  "source_delta": "Only test diagnostic/teardown and injected scheduler control; production helper unchanged",
+  "status": "NOT_ADMITTED",
+  "tree": "f0ec0c48365fe4b36c054339c906f01889ce107c"
+}

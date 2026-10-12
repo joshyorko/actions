@@ -1,0 +1,24 @@
+{
+  "time": "2026-10-12T04:03:48.147230+00:00",
+  "pull_requests": {
+    "307": {
+      "head": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+      "title": "fix: package community OAuth inputs and Runtime release notes",
+      "state": "closed",
+      "merged": true,
+      "draft": false,
+      "body_sha256": "256928110bb4f8f285abf5c703ffc253ea9ef39b3e257bbed965d1c15f8f1f87",
+      "requested_text_verified": true
+    },
+    "308": {
+      "head": "fe1bdee3d5014d39a763d088535c29d65b38315d",
+      "title": "fix(runtime): preserve RCC cleanup and typed ownership evidence",
+      "state": "open",
+      "merged": false,
+      "draft": true,
+      "body_sha256": "f6a810c57b26f518f648d7cf91dc5114bba84efb374a000b530f05b092cbfae3",
+      "requested_text_verified": true
+    }
+  },
+  "scope": "metadata reflects acceptedfinalchange; mergecommitmessage/historicalreceipts unchanged"
+}

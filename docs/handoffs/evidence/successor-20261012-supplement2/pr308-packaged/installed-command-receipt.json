@@ -1,0 +1,86 @@
+{
+  "time": "2026-10-12T04:16:38.961471+00:00",
+  "source": "fe1bdee3d5014d39a763d088535c29d65b38315d",
+  "artifact": 11725299041,
+  "scope": "packaged installedminCoreOAuth/realtemplate/idleHTTP only; no managedAction/wholecleanup/MCPfloor execution",
+  "results": [
+    {
+      "label": "installed-inventory",
+      "command": [
+        "python",
+        "/workspace/successor-evidence/run-prepared-package.py",
+        "/workspace/successor-evidence/pr308-packaged/installed-minimum-core-consumer",
+        "poetry",
+        "run",
+        "python",
+        "consumer_inventory.py"
+      ],
+      "exit_code": 0,
+      "output_sha256": "d5af9fb6aee96e8c1f7760749dfed0370ae3147ac2a0be02d61741e7c598895a",
+      "bytes": 346
+    },
+    {
+      "label": "installed-oauth",
+      "command": [
+        "python",
+        "/workspace/successor-evidence/run-prepared-package.py",
+        "/workspace/successor-evidence/pr308-packaged/installed-minimum-core-consumer",
+        "poetry",
+        "run",
+        "pytest",
+        "-q",
+        "test_installed_oauth.py"
+      ],
+      "exit_code": 0,
+      "output_sha256": "fb8bec9fc58f3d954b791ced932a7ded6b6f9cc0a34884363a5d688f90a75235",
+      "bytes": 98
+    },
+    {
+      "label": "installed-pip-check",
+      "command": [
+        "python",
+        "/workspace/successor-evidence/run-prepared-package.py",
+        "/workspace/successor-evidence/pr308-packaged/installed-minimum-core-consumer",
+        "poetry",
+        "run",
+        "python",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "exit_code": 0,
+      "output_sha256": "9261363b733079a641c2e4cc9bc46ffa1d8336945a87f807b6cf68847dbc9b09",
+      "bytes": 30
+    },
+    {
+      "label": "installed-real-template",
+      "command": [
+        "python",
+        "/workspace/successor-evidence/run-prepared-package.py",
+        "/workspace/successor-evidence/pr308-packaged/installed-minimum-core-consumer",
+        "poetry",
+        "run",
+        "python",
+        "real_bundled_template.py"
+      ],
+      "exit_code": 0,
+      "output_sha256": "ac9c15ec7da459eb47798a9f6a0a2e6bee53501df0e69c9b8f4e1972214084d7",
+      "bytes": 252
+    },
+    {
+      "label": "installed-idle-startup",
+      "command": [
+        "python",
+        "/workspace/successor-evidence/run-prepared-package.py",
+        "/workspace/successor-evidence/pr308-packaged/installed-minimum-core-consumer",
+        "poetry",
+        "run",
+        "python",
+        "check_installed_startup.py"
+      ],
+      "exit_code": 0,
+      "output_sha256": "e8068e310c7bdc7fa25b4cf4fd6cf02ece3888263617750cb8cf634e4da41cf4",
+      "bytes": 1388
+    }
+  ]
+}

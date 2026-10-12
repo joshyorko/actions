@@ -1,0 +1,93 @@
+{
+  "artifact": {
+    "id": 11725299041,
+    "run_id": 38201632080,
+    "head_sha": "fe1bdee3d5014d39a763d088535c29d65b38315d",
+    "size": 80773117,
+    "digest": "sha256:db54fbcf04ac43261f6174b7f1e3444604785ce2d746c8273b183f0ac8f455f6",
+    "expired": false
+  },
+  "jobs": [
+    {
+      "id": 114656105462,
+      "name": "build-wheels (ubuntu-22.04)",
+      "status": "completed",
+      "conclusion": "success",
+      "publication_steps": []
+    },
+    {
+      "id": 114656105527,
+      "name": "build-wheels (macos-15)",
+      "status": "completed",
+      "conclusion": "success",
+      "publication_steps": []
+    },
+    {
+      "id": 114656105548,
+      "name": "build-wheels (windows-2022)",
+      "status": "completed",
+      "conclusion": "success",
+      "publication_steps": []
+    },
+    {
+      "id": 114656105578,
+      "name": "build-sdist (ubuntu-py3.12)",
+      "status": "completed",
+      "conclusion": "success",
+      "publication_steps": []
+    },
+    {
+      "id": 114657031518,
+      "name": "publish (3.12)",
+      "status": "completed",
+      "conclusion": "success",
+      "publication_steps": [
+        {
+          "name": "Check Runtime publish credential",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Publish verified artifacts",
+          "conclusion": "skipped"
+        }
+      ]
+    }
+  ],
+  "actual_checkout": {
+    "sha": "fc2f1e747a6b417d19e82916eb88ad76f27a6472",
+    "tree": "c0371a7a0fa113be56199f260029ee1c09f63d1a",
+    "parents": [
+      "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+      "fe1bdee3d5014d39a763d088535c29d65b38315d"
+    ],
+    "head_tree_equal": true,
+    "authority": "independent gh api git/commits readback; decoded logs fetched once per completed build job"
+  },
+  "checkout_logs": [
+    {
+      "job_id": 114656105462,
+      "actual_checkout_sha": "fc2f1e747a6b417d19e82916eb88ad76f27a6472",
+      "checkout_message_matches_requested_head_and_target": true,
+      "raw_exported": false
+    },
+    {
+      "job_id": 114656105527,
+      "actual_checkout_sha": "fc2f1e747a6b417d19e82916eb88ad76f27a6472",
+      "checkout_message_matches_requested_head_and_target": true,
+      "raw_exported": false
+    },
+    {
+      "job_id": 114656105548,
+      "actual_checkout_sha": "fc2f1e747a6b417d19e82916eb88ad76f27a6472",
+      "checkout_message_matches_requested_head_and_target": true,
+      "raw_exported": false
+    },
+    {
+      "job_id": 114656105578,
+      "actual_checkout_sha": "fc2f1e747a6b417d19e82916eb88ad76f27a6472",
+      "checkout_message_matches_requested_head_and_target": true,
+      "raw_exported": false
+    }
+  ],
+  "raw_logs_or_signed_urls_exported": false
+}

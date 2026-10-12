@@ -1,0 +1,94 @@
+{
+  "source_head": "0546ef30a30ff8229cb8fa6268e492c5cd74134e",
+  "scope": "injected source control; no OS signals/processes; not proof of actual Mac failure cause",
+  "rows": [
+    {
+      "overshoot_seconds": 0.0,
+      "calls": [
+        {
+          "operation": "terminate",
+          "now": 100.0
+        },
+        {
+          "operation": "wait",
+          "timeout": 0.30000000000000426,
+          "now": 100.0
+        },
+        {
+          "operation": "kill",
+          "now": 100.30000000000001
+        },
+        {
+          "operation": "wait",
+          "timeout": 0.09999999999999432,
+          "now": 100.30000000000001
+        }
+      ],
+      "capture_verified": true,
+      "cleanup": {
+        "scope": "captured_provider_tree_and_startup_reader_only",
+        "pid": 123,
+        "create_time": 10.0,
+        "ownership_confirmed": true,
+        "tree": {
+          "wrapper_reaped": true,
+          "live_descendant_pids": [],
+          "zombie_descendant_pids": [],
+          "errors": [],
+          "descendant_snapshot_complete": true
+        },
+        "reader": {
+          "joined": true,
+          "alive": false,
+          "error": null
+        },
+        "errors": [],
+        "complete": true
+      },
+      "original_live_assertion_would_pass": true
+    },
+    {
+      "overshoot_seconds": 0.15,
+      "calls": [
+        {
+          "operation": "terminate",
+          "now": 100.0
+        },
+        {
+          "operation": "wait",
+          "timeout": 0.30000000000000426,
+          "now": 100.0
+        },
+        {
+          "operation": "wait",
+          "timeout": 0.0,
+          "now": 100.45
+        }
+      ],
+      "capture_verified": true,
+      "cleanup": {
+        "scope": "captured_provider_tree_and_startup_reader_only",
+        "pid": 123,
+        "create_time": 10.0,
+        "ownership_confirmed": true,
+        "tree": {
+          "wrapper_reaped": false,
+          "live_descendant_pids": [],
+          "zombie_descendant_pids": [],
+          "errors": [
+            "wrapper pid 123 was not reaped before deadline"
+          ],
+          "descendant_snapshot_complete": true
+        },
+        "reader": {
+          "joined": true,
+          "alive": false,
+          "error": null
+        },
+        "errors": [],
+        "complete": false
+      },
+      "original_live_assertion_would_pass": false
+    }
+  ]
+}

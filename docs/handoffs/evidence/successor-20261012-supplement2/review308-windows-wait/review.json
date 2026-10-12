@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "verdict": "GO_SOURCE",
+  "head": "0546ef30a30ff8229cb8fa6268e492c5cd74134e",
+  "tree": "cca24f6fd8f6c18034ef3a12b77dd37e5fe64a97",
+  "parent": "fe1bdee3d5014d39a763d088535c29d65b38315d",
+  "scope": "test-only portable Linux wait-model correction; no runtime/native/controller acceptance",
+  "changed_files": [
+    "action_server/tests/action_server_tests/test_owned_cleanup_evidence.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "production_helper_sha256": "9bd4e6fb0b4b04831bb7562e4ba9f32761ee33de3290482cd1afafc39cf08c3c",
+  "product_source_unchanged": true,
+  "independent_controls": {
+    "red": "2expectedmissing-WNOHANGAttributeError failures/34deselected0.19s againstimmutablefe1; directreap controls do not enter fallback",
+    "green": "39PASS0FAIL0SKIP0.20s againstimmutable0546 under missing-WNOHANG host namespace",
+    "guarded_operations": "own harness-local OS double rejects any realwaitpid,kill,killpg and replacesgetpid; actualsupervisor test mocksCDLL/prctl,psutil,Popen and installs failingfallback sentinel",
+    "waitpid_namespace_coverage": "all5 substitutions use explicitLinux WNOHANG=1 plus injectedwaitpid",
+    "assertion_preservation": "all26previous functions retain everyexisting assertion; no added skips",
+    "fallback_failure_control": "injectedwait error produces bounded sentinelAssertion with originalRuntimeError ascontext; no realfallback loop or signals",
+    "deadline_preservation": "production helper byte-identical; prior model deadlines,clock values,wait count andoutput assertions preserved",
+    "writer_hash_checks": "all15 artifact/source checks match; retainedfirststaticfailure followed bycleanfinalstaticresult",
+    "diff_check": "PASS",
+    "product_checkout": "clean exact0546"
+  },
+  "retained_writer_evidence": {
+    "affected_focused": "326PASS/1SKIP/3nativeDESELECTED6.44s",
+    "configured_static": "360filesPASS",
+    "win32_type_diagnostic": "1filePASS"
+  },
+  "windows_evidence_limit": "Parent-reported decodedfe1 terminal logs show2WNOHANG failures and actualsupervisorFalse hang beforecancel; no finalfullsuite total. This review did not fetch rawWindows logs. Corrected0546runtimeCI result is pending; simulatedcontrolPASS is notWindowsCI.",
+  "remaining_gates": [
+    "fresh exact0546Windows andotherrequiredCI",
+    "native profileSOURCE_PREPARED_NOTRUN",
+    "fullcontrollerdesign andhardbound HOLD",
+    "RCC/providerreader,sampler,lease/cgroupadmissionunqualified"
+  ],
+  "evidence_files": {
+    "immutable-source-check.json": {
+      "bytes": 562,
+      "sha256": "611dd5f25d3c7ef9c26646fffa8e26e966e008b5324d678ee4cea5c1f14a24c7"
+    },
+    "assertion-controls.json": {
+      "bytes": 1864,
+      "sha256": "f66c91d36cd2944435917ce75f36dee6c2996822f2bbd564161cd36eff4e27d5"
+    },
+    "writer-receipt-verification.json": {
+      "bytes": 1695,
+      "sha256": "0ba912282dec47e67ad99dcb7d407db7e4163c769b2cc588f9cb4282dc7558ec"
+    },
+    "red.xml": {
+      "bytes": 3967,
+      "sha256": "85f216d08774ea732d5df59d2567e01dba298c9f6390829bc787ee8b620aa3af"
+    },
+    "red.log": {
+      "bytes": 3925,
+      "sha256": "c49984fa2a6ec213f6c1e3de063fb55efbf02355b1418ecd5c0368c6c01d46fd"
+    },
+    "green.xml": {
+      "bytes": 7323,
+      "sha256": "7f7c5bea91eff99b50238cad9a14762f2c60794116364cf79cfdc18816043d61"
+    },
+    "green.log": {
+      "bytes": 186,
+      "sha256": "ca3106f34a003ddb5d3389325e03bd03b66e3996060c1e71884ddd16a99aea7d"
+    },
+    "documentation-proposal.md": {
+      "bytes": 1314,
+      "sha256": "4c3617b1a690157cf4404bf76c8b4410bea58fcd34153b23ebded810a1a70db2"
+    },
+    "red/conftest.py": {
+      "bytes": 739,
+      "sha256": "3be58f3af1e77ae2fe903863fed937f868d583be9aeb2945620c12bc8a96a95c"
+    },
+    "green/conftest.py": {
+      "bytes": 739,
+      "sha256": "3be58f3af1e77ae2fe903863fed937f868d583be9aeb2945620c12bc8a96a95c"
+    }
+  },
+  "documentation_proposal": "/workspace/successor-evidence/review308-windows-wait/documentation-proposal.md",
+  "canonical_delta_current": "new9lineguideparagraph accurately documentscompleteLinuxprimitive modeling andconstantclock fallbacksentinels; proposed2sentence audit/isolation refinement",
+  "no_product_edits": true,
+  "native_attempts": 0,
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,12 @@
+{
+  "time": "2026-10-12T04:53:16.727592+00:00",
+  "head": "0546ef30a30ff8229cb8fa6268e492c5cd74134e",
+  "tree": "cca24f6fd8f6c18034ef3a12b77dd37e5fe64a97",
+  "parent": "fe1bdee3d5014d39a763d088535c29d65b38315d",
+  "remote_ref": "0546ef30a30ff8229cb8fa6268e492c5cd74134e",
+  "pr_head": "0546ef30a30ff8229cb8fa6268e492c5cd74134e",
+  "draft": true,
+  "state": "open",
+  "normal_fastforward": true,
+  "scope": "testmodelGO only; newCI andnative separate"
+}

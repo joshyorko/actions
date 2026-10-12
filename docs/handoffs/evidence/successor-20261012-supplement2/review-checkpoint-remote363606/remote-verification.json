@@ -1,0 +1,77 @@
+{
+  "schema": "actions-checkpoint-remote-verification/v1",
+  "observed_at_utc": "2026-10-12T04:03:37Z",
+  "verdict": "REMOTE_COMMIT_TREE_AND_MANIFEST_MATCH",
+  "scope": "Read-only GitHub ref/commit/tree verification and local committed-byte audit. Does not qualify release or native acceptance.",
+  "remote": {
+    "repository": "joshyorko/actions",
+    "branch": "handoff/actions-swarm-mk3-wave8-20261010",
+    "ref_commit": "363606398d536541599cc71a8cfd43ff09ad02d7",
+    "commit_parent": "6088e6dbf81ff6aa212c7bebaf115534e885295d",
+    "tree_sha": "d3ee1f7389359b96b2fac2bc5b030f1bef5cd3a4",
+    "recursive_tree": {
+      "api_truncated": false,
+      "entry_count": 7903,
+      "blob_count": 6749,
+      "local_ls_tree_leaf_count": 6749,
+      "remote_local_canonical_sha256": "9e3dfa670eb4e1cb52e6e5ac44e8b6f761d16bafa81b17250bdba63f72e2382b",
+      "all_leaf_paths_modes_blob_shas_match": true,
+      "fingerprint_definition": "SHA256 of all remote blob leaves sorted by UTF-8 path; each record is UTF-8 path, NUL, mode, NUL, Git blob SHA, LF. Local fingerprint computed from git ls-tree -r --full-tree at the exact commit."
+    },
+    "commit_readback": "GitHub Git Commit API; exact sole parent and tree match local commit."
+  },
+  "local": {
+    "repo": "/workspace/actions-checkpoint",
+    "head": "363606398d536541599cc71a8cfd43ff09ad02d7",
+    "parent": "6088e6dbf81ff6aa212c7bebaf115534e885295d",
+    "tree": "d3ee1f7389359b96b2fac2bc5b030f1bef5cd3a4",
+    "working_tree_clean": true,
+    "commit_changed_files": 66,
+    "added": 64,
+    "modified": 2,
+    "deleted": 0,
+    "immutable_handoff_repo": "/workspace/actions-handoff",
+    "immutable_handoff_head": "0d5424ee8ec7c0a0ccea42a91eeecea144aa2934",
+    "immutable_handoff_clean": true
+  },
+  "supplement_manifest": {
+    "path": "docs/handoffs/evidence/successor-20261012-supplement1/manifest.json",
+    "manifest_sha256": "1cc1105115e97e6e4bcbf490a8e03f1272616daa49fdb7e8a2f249a0c5193592",
+    "payload_count": 63,
+    "payload_bytes": 298242,
+    "payload_sha256_and_size_pass": true,
+    "every_payload_git_blob_sha_matches_remote_recursive_tree": true,
+    "payloads_all_json": true
+  },
+  "original_37_receipts": {
+    "path": "docs/handoffs/evidence/successor-20261012/manifest.json",
+    "count": 37,
+    "all_manifest_hash_and_size_checks_pass": true,
+    "all_bytes_equal_checkpoint_parent_6088": true
+  },
+  "independent_pr308_readback": {
+    "pr_number": 308,
+    "state": "open",
+    "draft": true,
+    "head": "fe1bdee3d5014d39a763d088535c29d65b38315d",
+    "base": "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+    "check_runs_observed_at_utc": "2026-10-12T04:03:37Z",
+    "total": 24,
+    "success": 18,
+    "in_progress": 6,
+    "failure_or_cancelled": 0
+  },
+  "repository_snapshot_note": {
+    "current_checks_0400_payload_observed_at": "2026-10-12T03:58:18.720169+00:00",
+    "PR308_snapshot_counts": {
+      "success": 9,
+      "in_progress": 14
+    },
+    "snapshot_is_historical_and_timestamped": true
+  },
+  "limits": [
+    "This validates remote commit/tree and manifest payload integrity only.",
+    "Current PR308 checks were still in progress at the independent read time.",
+    "Runtime 1.0.3 release, native, full process/reader/lease/deadline, and publication acceptance remain separate gates."
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "canonical_file": "docs/skills/repository-operations.md",
+  "insertion_point": "after Installed-member byte equality paragraph near Runtime artifact inventory",
+  "exact_delta": "For each retained Runtime wheel, compare the complete set of Python archive paths with the tracked Runtime Python paths from the exact producer tree plus the explicitly admitted generated modules. Require set equality before checking member bytes; iterating only present tracked members cannot detect an omitted file. Record generated configuration input hashes against the actual checkout bytes, including an explicit LF-to-CRLF transform for Windows when applicable.",
+  "durable_learning": "Source-byte parity needs complete membership, and generated input provenance may legitimately differ from Git LF bytes on Windows.",
+  "evidence": [
+    "Independent verifier reread seven manifest distributions and all six wheel RECORDs, with all202 tracked members present/exact and only the203rd generated module",
+    "reviewer-complete-python-membership.json independently checks every Python archive path across all six wheels",
+    "reviewer-producer-provenance.json establishes synthetic checkout fc2f1e7 has complete tree equal to fe source",
+    "Windows generated strings and INPUT_SHA256 match explicit CRLF transforms of the two public Git YAML blobs"
+  ],
+  "stale_or_ambiguous_guidance_removed": "Closes ambiguity between byte equality for observed members and completeness of the expected source inventory.",
+  "remaining_uncertainty": "These source/resource checks do not establish installed behavior on Windows/macOS, native managed Action/MCP/lease acceptance, full new-head CI or publication.",
+  "upstream_disposition": "none"
+}

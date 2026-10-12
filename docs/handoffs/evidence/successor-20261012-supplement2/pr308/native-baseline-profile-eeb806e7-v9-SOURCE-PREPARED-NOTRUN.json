@@ -1,0 +1,37 @@
+{
+  "delta": "Documentation-only correction: final zero-budget wrapper wait may succeed after skipped kill; all admission holds and budgets unchanged",
+  "head": "eeb806e7699d7f8e6878d5cc1dd83cd22e795ff5",
+  "lease_commands_executed": false,
+  "native_attempts_consumed": 0,
+  "native_launched": false,
+  "previous_profile": {
+    "bytes": 1858,
+    "path": "/workspace/successor-evidence/pr308/native-baseline-profile-b30e220c-v8-SOURCE-PREPARED-NOTRUN.json",
+    "sha256": "768dddb34be8e388dc882a2c5240cdaeee5f72d84cafd6dbb9378ebdf91957cb"
+  },
+  "schema": 1,
+  "source_files": {
+    "action_server/scripts/verify_dakota_rcc_acceptance.py": {
+      "bytes": 110032,
+      "path": "/workspace/actions-pr308/action_server/scripts/verify_dakota_rcc_acceptance.py",
+      "sha256": "9bd4e6fb0b4b04831bb7562e4ba9f32761ee33de3290482cd1afafc39cf08c3c"
+    },
+    "action_server/src/actions/server/_common/process.py": {
+      "bytes": 31134,
+      "path": "/workspace/actions-pr308/action_server/src/actions/server/_common/process.py",
+      "sha256": "f432e65a488bf06862e548dc45342d3c1fb5ea7fcc26f6371d98aae124ffc082"
+    },
+    "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py": {
+      "bytes": 43540,
+      "path": "/workspace/actions-pr308/action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py",
+      "sha256": "37bf41455f2278b0b78078cfed23a5c1dac21eddefae7a9fda15a0687e38f05d"
+    },
+    "action_server/tests/action_server_tests/test_provider_startup_cleanup.py": {
+      "bytes": 19528,
+      "path": "/workspace/actions-pr308/action_server/tests/action_server_tests/test_provider_startup_cleanup.py",
+      "sha256": "f8b4627141b68fee7087e7fa555b7a0994e141f52641429368446075b3f9673e"
+    }
+  },
+  "status": "NOT_ADMITTED",
+  "tree": "ce7ae02d6c7db06ceffedf771c6eb365d11517b9"
+}
