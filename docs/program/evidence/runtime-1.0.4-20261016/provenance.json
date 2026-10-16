@@ -1,0 +1,14 @@
+{
+  "private_wheel_sha256": "52602dc18a6e39d49082370280f8f58914ba83257a07941e39a2ce05497b4958",
+  "raw_receipt_sha256": {
+    "combined-abc.json": "447018ddd61fbee75de11a45707bbd63edf5fe3b1b48f278a1ca9b2bb434992d",
+    "restart-retrieval.json": "05acf12eabbbdbbb48b64371e95022960be938d71a8b23a788007076d1bc4d26",
+    "wheel-provenance.json": "00809cdb147e829e6cc8d620e500f1dcfa5e86307f56b9782ed4327afbb5f5a7"
+  },
+  "sanitization": "Machine paths replaced by named roots. Private homes, keys, databases, archives and logs excluded. Sanitized file hashes differ from raw hashes.",
+  "source_heads": {
+    "317": "dd5ccf3ae76451536012f15e3bf1b1adc728f9eb",
+    "318": "ffa6ed49726c4ece12c6648c021058e06927ddb8",
+    "320": "38b16fc489c48462c4952eec65b9b17572d8958a"
+  }
+}

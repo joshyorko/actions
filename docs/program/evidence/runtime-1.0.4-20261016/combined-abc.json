@@ -1,0 +1,706 @@
+{
+  "acceptance_passed": true,
+  "candidate_source": "38b16fc489c48462c4952eec65b9b17572d8958a",
+  "environment_spec_sha256": "72f1c6590c0a68526341e88d38eb34bbc40fdcf8923ef73b9d8facbf5d765868",
+  "evidence_scope": "Private Linux CPython3.12 candidate wheel; reviewed Template08 source plus declared INVOICE_INPUT; no publication or native release qualification",
+  "generated_at": "2026-10-16T15:52:10.672122+00:00",
+  "modes": {
+    "A": {
+      "duration_seconds": 44.705847,
+      "environment_spec_sha256": "72f1c6590c0a68526341e88d38eb34bbc40fdcf8923ef73b9d8facbf5d765868",
+      "no_build_reuse": {
+        "command": [
+          "$RCC18_19_7/rcc",
+          "ht",
+          "vars",
+          "-r",
+          "robot.yaml",
+          "--json",
+          "--no-build"
+        ],
+        "duration_seconds": 0.316733,
+        "exit_code": 0,
+        "stderr": "$EVIDENCE/template-ac/A/reuse.stderr",
+        "stdout": "$EVIDENCE/template-ac/A/reuse.stdout"
+      },
+      "reason": "truth, repeat, alternate input and failure verified",
+      "resolve": {
+        "command": [
+          "$RCC18_19_7/rcc",
+          "ht",
+          "vars",
+          "-r",
+          "robot.yaml",
+          "--json"
+        ],
+        "duration_seconds": 35.25262,
+        "exit_code": 0,
+        "stderr": "$EVIDENCE/template-ac/A/resolve.stderr",
+        "stdout": "$EVIDENCE/template-ac/A/resolve.stdout"
+      },
+      "source_digest": "d12b25b01fa9366ee195c6009db68b5499f3a560600044e813b3edce7499a05e",
+      "status": "PASS",
+      "trials": [
+        {
+          "command": [
+            "$RCC18_19_7/rcc",
+            "run",
+            "-r",
+            "robot.yaml",
+            "-t",
+            "ValidateBatch",
+            "-e",
+            "$EVIDENCE/template-ac/A/baseline/env.json",
+            "--silent"
+          ],
+          "duration_seconds": 2.07343,
+          "exit_code": 0,
+          "fixture": "invoices.json",
+          "name": "baseline",
+          "outputs": {
+            "ground_truth_match": true,
+            "invoice_count": 3,
+            "report_sha256": "bcc8fe3de30d2b0c1a0e781ca86007593ef4ca03cef9bf9c8b49f760ced18a87",
+            "results_sha256": "20d13594809fec43b64307fe126f10bc81fbe4f46053a0b1a6d7f4c92701aa23"
+          },
+          "stderr": "$EVIDENCE/template-ac/A/baseline/run.stderr",
+          "stdout": "$EVIDENCE/template-ac/A/baseline/run.stdout",
+          "task": "ValidateBatch"
+        },
+        {
+          "command": [
+            "$RCC18_19_7/rcc",
+            "run",
+            "-r",
+            "robot.yaml",
+            "-t",
+            "ValidateBatch",
+            "-e",
+            "$EVIDENCE/template-ac/A/repeat/env.json",
+            "--silent"
+          ],
+          "duration_seconds": 3.128712,
+          "exit_code": 0,
+          "fixture": "invoices.json",
+          "name": "repeat",
+          "outputs": {
+            "ground_truth_match": true,
+            "invoice_count": 3,
+            "report_sha256": "bcc8fe3de30d2b0c1a0e781ca86007593ef4ca03cef9bf9c8b49f760ced18a87",
+            "results_sha256": "20d13594809fec43b64307fe126f10bc81fbe4f46053a0b1a6d7f4c92701aa23"
+          },
+          "stderr": "$EVIDENCE/template-ac/A/repeat/run.stderr",
+          "stdout": "$EVIDENCE/template-ac/A/repeat/run.stdout",
+          "task": "ValidateBatch"
+        },
+        {
+          "command": [
+            "$RCC18_19_7/rcc",
+            "run",
+            "-r",
+            "robot.yaml",
+            "-t",
+            "ValidateBatch",
+            "-e",
+            "$EVIDENCE/template-ac/A/alternate/env.json",
+            "--silent"
+          ],
+          "duration_seconds": 1.986505,
+          "exit_code": 0,
+          "fixture": "invoices-alternate.json",
+          "name": "alternate",
+          "outputs": {
+            "ground_truth_match": true,
+            "invoice_count": 2,
+            "report_sha256": "4f57125ad76860b303de54cbaa6957d2183a5331b4d47e7867e763106efe5524",
+            "results_sha256": "0fa746568e7c141461af035d532cac0626a4043dea2929ceb3ed7892e30d3b91"
+          },
+          "stderr": "$EVIDENCE/template-ac/A/alternate/run.stderr",
+          "stdout": "$EVIDENCE/template-ac/A/alternate/run.stdout",
+          "task": "ValidateBatch"
+        },
+        {
+          "command": [
+            "$RCC18_19_7/rcc",
+            "run",
+            "-r",
+            "robot.yaml",
+            "-t",
+            "FailBatch",
+            "-e",
+            "$EVIDENCE/template-ac/A/failure/env.json",
+            "--silent"
+          ],
+          "duration_seconds": 1.923357,
+          "exit_code": 10,
+          "fixture": "invoices.json",
+          "name": "failure",
+          "stderr": "$EVIDENCE/template-ac/A/failure/run.stderr",
+          "stdout": "$EVIDENCE/template-ac/A/failure/run.stdout",
+          "task": "FailBatch"
+        }
+      ],
+      "trust_policy": "classic local environment; no artifact signature claim",
+      "worker": "ad1acef4c097"
+    },
+    "B": {
+      "api": {
+        "base_url": "http://127.0.0.1:52057",
+        "catalog_after_count": 1,
+        "catalog_before_count": 0,
+        "import": {
+          "message": "Successfully imported robot 'tmp00_9e4r3'",
+          "robot_name": "tmp00_9e4r3",
+          "robot_path": "$EVIDENCE/template-b-server/sessions/f6bc422456d54addb5177b20d4abbd47/home/.robots/tmp00_9e4r3",
+          "success": true
+        }
+      },
+      "api_output_checks": {
+        "alternate": {
+          "ground_truth_match": true,
+          "invoice_count": 2,
+          "report_sha256": "4f57125ad76860b303de54cbaa6957d2183a5331b4d47e7867e763106efe5524",
+          "results_sha256": "0fa746568e7c141461af035d532cac0626a4043dea2929ceb3ed7892e30d3b91"
+        },
+        "baseline": {
+          "ground_truth_match": true,
+          "invoice_count": 3,
+          "report_sha256": "bcc8fe3de30d2b0c1a0e781ca86007593ef4ca03cef9bf9c8b49f760ced18a87",
+          "results_sha256": "20d13594809fec43b64307fe126f10bc81fbe4f46053a0b1a6d7f4c92701aa23"
+        }
+      },
+      "checks": {
+        "catalog_visible": true,
+        "default_output_matches_ground_truth": true,
+        "default_validation_run_passed": true,
+        "downloaded_outputs_match_fixed_truth": true,
+        "failure_artifact_written": true,
+        "failure_run_failed": true,
+        "import_succeeded": true,
+        "imported_source_digest_matches": true,
+        "independent_database_records_match_api": true,
+        "input_values_reached_task": true,
+        "input_values_recorded": true,
+        "report_and_csv_persisted_in_api_artifacts": true,
+        "run_logs_persisted_in_api_artifacts": true,
+        "validation_run_passed": true
+      },
+      "durations_seconds": {
+        "baseline": 39.779,
+        "failure": 2.689,
+        "validation": 1.154
+      },
+      "evidence_paths": {
+        "baseline_run": "$EVIDENCE/template-b/runs/run-ee6c3379-d65f-4eb9-b5fc-0489dfd93948",
+        "catalog_after": "$EVIDENCE/template-b/catalog-after.json",
+        "catalog_before": "$EVIDENCE/template-b/catalog-before.json",
+        "failure_run": "$EVIDENCE/template-b/runs/run-ca040f38-66b5-4348-95c3-824d41c9d002",
+        "import": "$EVIDENCE/template-b/import.json",
+        "validation_run": "$EVIDENCE/template-b/runs/run-ff57e63d-9ff9-4830-8727-7a3fbfd0dfd5"
+      },
+      "inputs_test": {
+        "baseline_invoice_count": 3,
+        "baseline_output_check": {
+          "ground_truth_match": true,
+          "invoice_count": 3,
+          "report_sha256": "bcc8fe3de30d2b0c1a0e781ca86007593ef4ca03cef9bf9c8b49f760ced18a87",
+          "results_sha256": "20d13594809fec43b64307fe126f10bc81fbe4f46053a0b1a6d7f4c92701aa23"
+        },
+        "baseline_run_id": "run-ee6c3379-d65f-4eb9-b5fc-0489dfd93948",
+        "expected_invoice_count": 2,
+        "output_check": {
+          "ground_truth_match": true,
+          "invoice_count": 2,
+          "report_sha256": "4f57125ad76860b303de54cbaa6957d2183a5331b4d47e7867e763106efe5524",
+          "results_sha256": "0fa746568e7c141461af035d532cac0626a4043dea2929ceb3ed7892e30d3b91"
+        },
+        "reached_task_output": true,
+        "recorded_on_run": true,
+        "requested": {
+          "INVOICE_INPUT": "$EVIDENCE/template-b-server/sessions/f6bc422456d54addb5177b20d4abbd47/home/.robots/tmp00_9e4r3/devdata/invoices-alternate.json"
+        },
+        "status": "PASS"
+      },
+      "mode": "B",
+      "persisted_records": [
+        {
+          "id": "run-ca040f38-66b5-4348-95c3-824d41c9d002",
+          "inputs": "{}",
+          "robot_package_path": "$EVIDENCE/template-b-server/sessions/f6bc422456d54addb5177b20d4abbd47/home/.robots/tmp00_9e4r3",
+          "robot_task_name": "FailBatch",
+          "status": 3
+        },
+        {
+          "id": "run-ee6c3379-d65f-4eb9-b5fc-0489dfd93948",
+          "inputs": "{}",
+          "robot_package_path": "$EVIDENCE/template-b-server/sessions/f6bc422456d54addb5177b20d4abbd47/home/.robots/tmp00_9e4r3",
+          "robot_task_name": "ValidateBatch",
+          "status": 2
+        },
+        {
+          "id": "run-ff57e63d-9ff9-4830-8727-7a3fbfd0dfd5",
+          "inputs": "{\"INVOICE_INPUT\": \"$EVIDENCE/template-b-server/sessions/f6bc422456d54addb5177b20d4abbd47/home/.robots/tmp00_9e4r3/devdata/invoices-alternate.json\"}",
+          "robot_package_path": "$EVIDENCE/template-b-server/sessions/f6bc422456d54addb5177b20d4abbd47/home/.robots/tmp00_9e4r3",
+          "robot_task_name": "ValidateBatch",
+          "status": 2
+        }
+      ],
+      "reason": "ALL_ROBOT_API_ACCEPTANCE_CHECKS_PASSED",
+      "requested_rcc": {
+        "exit_code": 0,
+        "path": "$RCC18_19_7/rcc",
+        "version_output": "v18.19.7"
+      },
+      "runs": {
+        "baseline": {
+          "artifacts": {
+            "files": [
+              {
+                "name": "__action_server_output.txt",
+                "sha256": "d94a5178b62e2d0524d32fb2e5cba49b8fc39df9b7436fbc49a66c9cc527fef3",
+                "size_in_bytes": 409
+              },
+              {
+                "name": "environment_linux_amd64_freeze.yaml",
+                "sha256": "c59d903bb9e6dcbd09545751013b8ce5e450455f0aa7ab23fdc0b6e09df4e182",
+                "size_in_bytes": 600
+              },
+              {
+                "name": "journal.run",
+                "sha256": "c8a8fb29df4a6145ed6fe6c25e980845285467bc84213b17ad944f587407016e",
+                "size_in_bytes": 2195
+              },
+              {
+                "name": "log.html",
+                "sha256": "f030d52a174254d7e92e0fc9f9caa2c88ef61753b8fdb3c7d972d81f28935933",
+                "size_in_bytes": 875006
+              },
+              {
+                "name": "output.robolog",
+                "sha256": "c004b1bafc8e17e4582a51b2342288713f501e8956530491668f4a1b54656627",
+                "size_in_bytes": 8164
+              },
+              {
+                "name": "report.json",
+                "sha256": "bcc8fe3de30d2b0c1a0e781ca86007593ef4ca03cef9bf9c8b49f760ced18a87",
+                "size_in_bytes": 209
+              },
+              {
+                "name": "results.csv",
+                "sha256": "20d13594809fec43b64307fe126f10bc81fbe4f46053a0b1a6d7f4c92701aa23",
+                "size_in_bytes": 177
+              },
+              {
+                "name": "stderr.log",
+                "sha256": "36ea06d573b135e78504427a588cd5d49dc45822c84a4ecd20722749662b1887",
+                "size_in_bytes": 394
+              },
+              {
+                "name": "stdout.log",
+                "sha256": "d94a5178b62e2d0524d32fb2e5cba49b8fc39df9b7436fbc49a66c9cc527fef3",
+                "size_in_bytes": 409
+              }
+            ],
+            "log_files": [
+              "__action_server_output.txt",
+              "log.html",
+              "output.robolog"
+            ],
+            "required_robot_outputs_missing": []
+          },
+          "duration_seconds": 39.779,
+          "evidence_dir": "$EVIDENCE/template-b/runs/run-ee6c3379-d65f-4eb9-b5fc-0489dfd93948",
+          "imported_robot_outputs": {
+            "directory_exists": true,
+            "files": [
+              {
+                "name": "report.json",
+                "sha256": "bcc8fe3de30d2b0c1a0e781ca86007593ef4ca03cef9bf9c8b49f760ced18a87"
+              },
+              {
+                "name": "results.csv",
+                "sha256": "20d13594809fec43b64307fe126f10bc81fbe4f46053a0b1a6d7f4c92701aa23"
+              }
+            ]
+          },
+          "run_detail": {
+            "action_id": "",
+            "action_name": null,
+            "error_message": null,
+            "id": "run-ee6c3379-d65f-4eb9-b5fc-0489dfd93948",
+            "inputs": "{}",
+            "numbered_id": 1,
+            "relative_artifacts_dir": "runs/run-ee6c3379-d65f-4eb9-b5fc-0489dfd93948",
+            "request_id": "",
+            "result": "{\"output\": \"\\nCollecting task validate_batch_task from: tasks.py\\n========================= Running: \\u001b[96mvalidate_batch_task\\u001b[0m =========================\\n\\u001b[96mvalidate_batch_task\\u001b[0m status: PASS\\n================================================================================\\nLog (html): $EVIDENCE/template-b-server/sessions/f6bc422456d54addb5177b20d4abbd47/home/.robots/tmp00_9e4r3/output/log.html\\n\", \"artifacts_dir\": \"$EVIDENCE/template-b-server/sessions/f6bc422456d54addb5177b20d4abbd47/datadir/artifacts/runs/run-ee6c3379-d65f-4eb9-b5fc-0489dfd93948\"}",
+            "robot_env_hash": "",
+            "robot_package_path": "$EVIDENCE/template-b-server/sessions/f6bc422456d54addb5177b20d4abbd47/home/.robots/tmp00_9e4r3",
+            "robot_task_name": "ValidateBatch",
+            "run_time": null,
+            "run_type": "robot",
+            "start_time": "2026-10-16T15:51:39.575816+00:00",
+            "status": 2,
+            "stderr": null,
+            "stdout": null
+          },
+          "run_id": "run-ee6c3379-d65f-4eb9-b5fc-0489dfd93948",
+          "status": "PASSED",
+          "submitted_status": "REQUESTED"
+        },
+        "failure": {
+          "artifacts": {
+            "files": [
+              {
+                "name": "__action_server_output.txt",
+                "sha256": "6403afa09a57cca779699e1c3721f9077c7580e02b9adb5f89c58e57f1204be1",
+                "size_in_bytes": 2496
+              },
+              {
+                "name": "environment_linux_amd64_freeze.yaml",
+                "sha256": "c59d903bb9e6dcbd09545751013b8ce5e450455f0aa7ab23fdc0b6e09df4e182",
+                "size_in_bytes": 600
+              },
+              {
+                "name": "failure.json",
+                "sha256": "cef9f63a80a342b0d76ab1d33ce68b1673f414f57dd6d5846a4deefd8d1a52f4",
+                "size_in_bytes": 66
+              },
+              {
+                "name": "journal.run",
+                "sha256": "1fd54e03434557bd80a75e572586e2ff249d9fc8da85052c990935c10453fb3e",
+                "size_in_bytes": 2213
+              },
+              {
+                "name": "log.html",
+                "sha256": "ea8aea985ecb4ace3201dff3edafe7c716a246665c9ffaa627c1b30f9ae967a5",
+                "size_in_bytes": 875966
+              },
+              {
+                "name": "output.robolog",
+                "sha256": "0c2a0a1a4d80d0f8cbc10bbd3d1be50c0db1dc3fa6b5793cc466d5138218ce3d",
+                "size_in_bytes": 10164
+              },
+              {
+                "name": "stderr.log",
+                "sha256": "36ea06d573b135e78504427a588cd5d49dc45822c84a4ecd20722749662b1887",
+                "size_in_bytes": 394
+              },
+              {
+                "name": "stdout.log",
+                "sha256": "6cd8c10e183db439a3003ffc8923919bd335452de3084738376eba2863242a30",
+                "size_in_bytes": 1557
+              }
+            ],
+            "log_files": [
+              "__action_server_output.txt",
+              "log.html",
+              "output.robolog"
+            ],
+            "required_robot_outputs_missing": [
+              "report.json",
+              "results.csv"
+            ]
+          },
+          "duration_seconds": 2.689,
+          "evidence_dir": "$EVIDENCE/template-b/runs/run-ca040f38-66b5-4348-95c3-824d41c9d002",
+          "imported_robot_outputs": {
+            "directory_exists": true,
+            "files": [
+              {
+                "name": "failure.json",
+                "sha256": "cef9f63a80a342b0d76ab1d33ce68b1673f414f57dd6d5846a4deefd8d1a52f4"
+              }
+            ]
+          },
+          "run_detail": {
+            "action_id": "",
+            "action_name": null,
+            "error_message": "Error running: $EVIDENCE/installed/venv/lib/python3.12/site-packages/actions/server/bin/rcc-18.19.3 task run --robot $EVIDENCE/template-b-server/sessions/f6bc422456d54addb5177b20d4abbd47/home/.robots/tmp00_9e4r3/robot.yaml --task FailBatch --silent -e /workspace/actions-cloud/robocorp/temp/e2b6f0b226567b61/actions-robot-env-isqc4v60/env.json --controller action-server --bundled --robocorp.\nROBOCORP_HOME: $EVIDENCE/template-b-server/robots-home\n\nStdout: \nCollecting task fail_batch from: tasks.py\n============================= Running: \u001b[96mfail_batch\u001b[0m ==============================\n\u001b[96mfail_batch\u001b[0m status: \u001b[91mFAIL\n\u001b[0m\u001b[91m\ndeliberate failure requested\n\u001b[0m===================== Full Traceback (running \u001b[96mfail_batch\u001b[0m) ======================\n\u001b[91mTraceback (most recent call last):\n  File \"$EVIDENCE/template-b-server/robots-home/holotree/3963031_a78733b_9fcd2534/lib/python3.12/site-packages/robocorp/tasks/_commands.py\", line 453, in run\n    result = task.run(**kwargs)\n             ^^^^^^^^^^^^^^^^^^\n  File \"$EVIDENCE/template-b-server/robots-home/holotree/3963031_a78733b_9fcd2534/lib/python3.12/site-packages/robocorp/tasks/_task.py\", line 57, in run\n    return self.method(**kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"$EVIDENCE/template-b-server/sessions/f6bc422456d54addb5177b20d4abbd47/home/.robots/tmp00_9e4r3/tasks.py\", line 37, in fail_batch\n    validate_batch(input_path, output_dir, force_failure=True)\n  File \"$EVIDENCE/template-b-server/sessions/f6bc422456d54addb5177b20d4abbd47/home/.robots/tmp00_9e4r3/invoice_robot/validator.py\", line 117, in validate_batch\n    raise RuntimeError(\"deliberate failure requested\")\nRuntimeError: deliberate failure requested\n\n\u001b[0m================================================================================\nLog (html): $EVIDENCE/template-b-server/sessions/f6bc422456d54addb5177b20d4abbd47/home/.robots/tmp00_9e4r3/output/log.html\n\nStderr: $EVIDENCE/template-b-server/robots-home/holotree/3963031_a78733b_9fcd2534/lib/python3.12/site-packages/robocorp/tasks/cli.py:65: Warning: Usage of the native system certificate stores can\u2019t be enabled, ensure you have the `robocorp-truststore` dependency installed in the environment and that you're using Python 3.10.12 and pip 23.2.1 at minimum.\n  _inject_truststore()\n",
+            "id": "run-ca040f38-66b5-4348-95c3-824d41c9d002",
+            "inputs": "{}",
+            "numbered_id": 3,
+            "relative_artifacts_dir": "runs/run-ca040f38-66b5-4348-95c3-824d41c9d002",
+            "request_id": "",
+            "result": null,
+            "robot_env_hash": "",
+            "robot_package_path": "$EVIDENCE/template-b-server/sessions/f6bc422456d54addb5177b20d4abbd47/home/.robots/tmp00_9e4r3",
+            "robot_task_name": "FailBatch",
+            "run_time": null,
+            "run_type": "robot",
+            "start_time": "2026-10-16T15:52:20.511686+00:00",
+            "status": 3,
+            "stderr": null,
+            "stdout": null
+          },
+          "run_id": "run-ca040f38-66b5-4348-95c3-824d41c9d002",
+          "status": "FAILED",
+          "submitted_status": "REQUESTED"
+        },
+        "validation": {
+          "artifacts": {
+            "files": [
+              {
+                "name": "__action_server_output.txt",
+                "sha256": "d94a5178b62e2d0524d32fb2e5cba49b8fc39df9b7436fbc49a66c9cc527fef3",
+                "size_in_bytes": 409
+              },
+              {
+                "name": "environment_linux_amd64_freeze.yaml",
+                "sha256": "c59d903bb9e6dcbd09545751013b8ce5e450455f0aa7ab23fdc0b6e09df4e182",
+                "size_in_bytes": 600
+              },
+              {
+                "name": "journal.run",
+                "sha256": "5bcaf44926c123adb54a7f7c12d786e4fd9acdae4f270fa5f925dfb899097c43",
+                "size_in_bytes": 2048
+              },
+              {
+                "name": "log.html",
+                "sha256": "87c8fd5f2fa8e26a67f325f6af1c443c91292c2c896f50f9856b56b70dd5367c",
+                "size_in_bytes": 875010
+              },
+              {
+                "name": "output.robolog",
+                "sha256": "90cd057ea13bf2182065e9b31009129cdc0eaf558617b4b707e5d27fb017d108",
+                "size_in_bytes": 8170
+              },
+              {
+                "name": "report.json",
+                "sha256": "4f57125ad76860b303de54cbaa6957d2183a5331b4d47e7867e763106efe5524",
+                "size_in_bytes": 208
+              },
+              {
+                "name": "results.csv",
+                "sha256": "0fa746568e7c141461af035d532cac0626a4043dea2929ceb3ed7892e30d3b91",
+                "size_in_bytes": 136
+              },
+              {
+                "name": "stderr.log",
+                "sha256": "36ea06d573b135e78504427a588cd5d49dc45822c84a4ecd20722749662b1887",
+                "size_in_bytes": 394
+              },
+              {
+                "name": "stdout.log",
+                "sha256": "d94a5178b62e2d0524d32fb2e5cba49b8fc39df9b7436fbc49a66c9cc527fef3",
+                "size_in_bytes": 409
+              }
+            ],
+            "log_files": [
+              "__action_server_output.txt",
+              "log.html",
+              "output.robolog"
+            ],
+            "required_robot_outputs_missing": []
+          },
+          "duration_seconds": 1.154,
+          "evidence_dir": "$EVIDENCE/template-b/runs/run-ff57e63d-9ff9-4830-8727-7a3fbfd0dfd5",
+          "imported_robot_outputs": {
+            "directory_exists": true,
+            "files": [
+              {
+                "name": "report.json",
+                "sha256": "4f57125ad76860b303de54cbaa6957d2183a5331b4d47e7867e763106efe5524"
+              },
+              {
+                "name": "results.csv",
+                "sha256": "0fa746568e7c141461af035d532cac0626a4043dea2929ceb3ed7892e30d3b91"
+              }
+            ]
+          },
+          "run_detail": {
+            "action_id": "",
+            "action_name": null,
+            "error_message": null,
+            "id": "run-ff57e63d-9ff9-4830-8727-7a3fbfd0dfd5",
+            "inputs": "{\"INVOICE_INPUT\": \"$EVIDENCE/template-b-server/sessions/f6bc422456d54addb5177b20d4abbd47/home/.robots/tmp00_9e4r3/devdata/invoices-alternate.json\"}",
+            "numbered_id": 2,
+            "relative_artifacts_dir": "runs/run-ff57e63d-9ff9-4830-8727-7a3fbfd0dfd5",
+            "request_id": "",
+            "result": "{\"output\": \"\\nCollecting task validate_batch_task from: tasks.py\\n========================= Running: \\u001b[96mvalidate_batch_task\\u001b[0m =========================\\n\\u001b[96mvalidate_batch_task\\u001b[0m status: PASS\\n================================================================================\\nLog (html): $EVIDENCE/template-b-server/sessions/f6bc422456d54addb5177b20d4abbd47/home/.robots/tmp00_9e4r3/output/log.html\\n\", \"artifacts_dir\": \"$EVIDENCE/template-b-server/sessions/f6bc422456d54addb5177b20d4abbd47/datadir/artifacts/runs/run-ff57e63d-9ff9-4830-8727-7a3fbfd0dfd5\"}",
+            "robot_env_hash": "",
+            "robot_package_path": "$EVIDENCE/template-b-server/sessions/f6bc422456d54addb5177b20d4abbd47/home/.robots/tmp00_9e4r3",
+            "robot_task_name": "ValidateBatch",
+            "run_time": null,
+            "run_type": "robot",
+            "start_time": "2026-10-16T15:52:19.357882+00:00",
+            "status": 2,
+            "stderr": null,
+            "stdout": null
+          },
+          "run_id": "run-ff57e63d-9ff9-4830-8727-7a3fbfd0dfd5",
+          "status": "PASSED",
+          "submitted_status": "REQUESTED"
+        }
+      },
+      "runtime": {
+        "adapter": "Private candidate wheel; checked-in Template08 runtime-lock.json remains 1.0.2",
+        "bundled_rcc_actual_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+        "bundled_rcc_expected_path": "$EVIDENCE/installed/venv/lib/python3.12/site-packages/actions/server/bin/rcc-18.19.3",
+        "bundled_rcc_path": "$EVIDENCE/installed/venv/lib/python3.12/site-packages/actions/server/bin/rcc-18.19.3",
+        "bundled_rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+        "bundled_rcc_version": "18.19.3",
+        "bundled_rcc_version_exit_code": 0,
+        "bundled_rcc_version_output": "v18.19.3",
+        "candidate_source": "38b16fc489c48462c4952eec65b9b17572d8958a",
+        "private_datadir": "$EVIDENCE/template-b-server/sessions/f6bc422456d54addb5177b20d4abbd47/datadir",
+        "private_home": "$EVIDENCE/template-b-server/sessions/f6bc422456d54addb5177b20d4abbd47/home",
+        "private_robots_home": "$EVIDENCE/template-b-server/robots-home",
+        "python": "3.12.15",
+        "runtime_venv": "$EVIDENCE/installed/venv",
+        "runtime_version": "1.0.4rc2",
+        "server_pid": 8389,
+        "wheel_sha256": "52602dc18a6e39d49082370280f8f58914ba83257a07941e39a2ce05497b4958"
+      },
+      "source_digest": "d12b25b01fa9366ee195c6009db68b5499f3a560600044e813b3edce7499a05e",
+      "status": "PASS",
+      "upload_zip_sha256": "1580bdab7d1be70f06768528fa8212edda971e6ef61fd178feb2ac97bffc0fb9"
+    },
+    "C": {
+      "duration_seconds": 123.901334,
+      "evidence": {
+        "archive": "$EVIDENCE/template-ac/C/transport/7d8e5d06690e83ffc77adb81477f805bd95a576990bbd921d9b3473b22555a71.rcca",
+        "archive_execution_receipt": "$EVIDENCE/template-ac/C/receipts/archive-only-artifact-exec.json",
+        "archive_output": "$EVIDENCE/template-ac/C/archive-output",
+        "deployment_trust_roots": "$EVIDENCE/template-ac/C/deployment-trust/trust-roots.json",
+        "directory": "$EVIDENCE/template-ac/C",
+        "logs": "$EVIDENCE/template-ac/C/logs",
+        "provider_execution_receipt": "$EVIDENCE/template-ac/C/receipts/provider-artifact-exec.json",
+        "provider_output": "$EVIDENCE/template-ac/C/provider-output",
+        "result": "$EVIDENCE/template-ac/C/c-result.json",
+        "trust_carrier": "$EVIDENCE/template-ac/C/detached-trust-carrier"
+      },
+      "identity": {
+        "archive_acquire_result": {
+          "artifactDigest": "sha256:7d8e5d06690e83ffc77adb81477f805bd95a576990bbd921d9b3473b22555a71",
+          "cacheHit": "provider",
+          "materializationId": "c2fd1aa_5a1fac3_6c1c9e89",
+          "path": "$EVIDENCE/template-ac/C/archive-only-home/holotree/c2fd1aa_5a1fac3_6c1c9e89",
+          "verification": {
+            "builder": "rcc-holotree-v12",
+            "code": "valid",
+            "decisionID": "sha256:39a68492b3ccea6b0ba1f43122905b7c015029d1a0cc0760092c0352e1b13790",
+            "keyID": "template-08-ephemeral-ed25519",
+            "platform": "linux_amd64",
+            "policyMode": "strict-remote",
+            "valid": true
+          }
+        },
+        "archive_bytes": 105570085,
+        "archive_robo_home": "$EVIDENCE/template-ac/C/archive-only-home",
+        "artifact": "sha256:7d8e5d06690e83ffc77adb81477f805bd95a576990bbd921d9b3473b22555a71",
+        "deployment_robo_home": "$EVIDENCE/template-ac/C/consumer-home",
+        "environment_specification_digest": "sha256:b8e5cb4c1f190cf3044fb0e03b6fe3b6587b571c04d78db8d4299178c1c32c9b",
+        "execution_receipts": {
+          "archive_only": {
+            "artifactDigest": "sha256:7d8e5d06690e83ffc77adb81477f805bd95a576990bbd921d9b3473b22555a71",
+            "cacheHit": "local-materialization",
+            "exitCode": 0,
+            "leaseId": "fef7cb7bea23002f2704d2b6d335c9ba",
+            "status": "completed",
+            "verification": {
+              "code": "valid",
+              "decisionID": "sha256:b022537cf27ea0e4c2bb6a6852b786547cbb93021419fc997faaa0dea3974855",
+              "keyID": "template-08-ephemeral-ed25519",
+              "policyMode": "strict-remote",
+              "valid": true
+            }
+          },
+          "provider_acquire": {
+            "artifactDigest": "sha256:7d8e5d06690e83ffc77adb81477f805bd95a576990bbd921d9b3473b22555a71",
+            "cacheHit": "local-materialization",
+            "exitCode": 0,
+            "leaseId": "9b1def187b2d9a18ba83b1b0ff03cddd",
+            "status": "completed",
+            "verification": {
+              "code": "valid",
+              "decisionID": "sha256:cb848acbb8a62f251f0f0b01a023b6556a8bc0df5bcdfd917054909f43eeb907",
+              "keyID": "template-08-ephemeral-ed25519",
+              "policyMode": "strict-remote",
+              "valid": true
+            }
+          }
+        },
+        "outputs": {
+          "archive_only": {
+            "ground_truth_match": true,
+            "invoice_count": 3,
+            "report_sha256": "bcc8fe3de30d2b0c1a0e781ca86007593ef4ca03cef9bf9c8b49f760ced18a87",
+            "results_sha256": "20d13594809fec43b64307fe126f10bc81fbe4f46053a0b1a6d7f4c92701aa23"
+          },
+          "provider_acquire": {
+            "ground_truth_match": true,
+            "invoice_count": 3,
+            "report_sha256": "bcc8fe3de30d2b0c1a0e781ca86007593ef4ca03cef9bf9c8b49f760ced18a87",
+            "results_sha256": "20d13594809fec43b64307fe126f10bc81fbe4f46053a0b1a6d7f4c92701aa23"
+          }
+        },
+        "provider": "http://127.0.0.1:37691",
+        "provider_acquire_result": {
+          "artifactDigest": "sha256:7d8e5d06690e83ffc77adb81477f805bd95a576990bbd921d9b3473b22555a71",
+          "cacheHit": "provider",
+          "materializationId": "c2fd1aa_5a1fac3_6c1c9e89",
+          "path": "$EVIDENCE/template-ac/C/consumer-home/holotree/c2fd1aa_5a1fac3_6c1c9e89",
+          "verification": {
+            "builder": "rcc-holotree-v12",
+            "code": "valid",
+            "decisionID": "sha256:b9cd0146c7fa58796947b607906ca9022426e925bd0befcb38ff40fec3b5317d",
+            "keyID": "template-08-ephemeral-ed25519",
+            "platform": "linux_amd64",
+            "policyMode": "strict-remote",
+            "valid": true
+          }
+        },
+        "provider_server_exit_code": 0,
+        "provider_server_pid": 7880,
+        "publish_result": {
+          "artifactDigest": "sha256:7d8e5d06690e83ffc77adb81477f805bd95a576990bbd921d9b3473b22555a71",
+          "legacyBlueprintKey": "a967cd5f12c1d328",
+          "objectCount": 5077,
+          "reusedBytes": 0,
+          "specificationDigest": "sha256:b8e5cb4c1f190cf3044fb0e03b6fe3b6587b571c04d78db8d4299178c1c32c9b",
+          "uploadedBytes": 104114629
+        },
+        "rcc_sha256": "f8e0394be7f47ee84d6f4cd734822b87b492a4d6102f977f6a18f29453703d48",
+        "rcc_version": "v18.19.7",
+        "source_digest": "d12b25b01fa9366ee195c6009db68b5499f3a560600044e813b3edce7499a05e",
+        "trust_policy": "strict-remote; detached filesystem carrier; deployment-owned roots",
+        "warm_reuse_result": {
+          "artifactDigest": "sha256:7d8e5d06690e83ffc77adb81477f805bd95a576990bbd921d9b3473b22555a71",
+          "cacheHit": "local-materialization",
+          "materializationId": "c2fd1aa_5a1fac3_6c1c9e89",
+          "path": "$EVIDENCE/template-ac/C/consumer-home/holotree/c2fd1aa_5a1fac3_6c1c9e89",
+          "verification": {
+            "builder": "rcc-holotree-v12",
+            "code": "valid",
+            "decisionID": "sha256:a8d349115335c6f9d01502f418afb6a7e7adbd693af04ed975ea59fcf3ae1016",
+            "keyID": "template-08-ephemeral-ed25519",
+            "platform": "linux_amd64",
+            "policyMode": "strict-remote",
+            "valid": true
+          }
+        },
+        "worker_platform": "linux_amd64"
+      },
+      "reason": "strict provider acquisition, provider-down warm reuse, provider-acquired leased task execution, strict archive-only import/task execution, output validation, and unknown-signer rejection passed",
+      "status": "PASS"
+    },
+    "D": {
+      "issues": [
+        "https://github.com/joshyorko/actions/issues/133",
+        "https://github.com/joshyorko/actions/issues/134"
+      ],
+      "reason": "Action Server robot artifact worker requires Actions #133/#134. C does not prove D.",
+      "status": "NOT IMPLEMENTED"
+    }
+  },
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+  "rcc": {
+    "path": "$RCC18_19_7/rcc",
+    "platform": "linux_amd64",
+    "sha256": "f8e0394be7f47ee84d6f4cd734822b87b492a4d6102f977f6a18f29453703d48",
+    "version": "v18.19.7"
+  },
+  "schema_version": 1,
+  "source_digest": "d12b25b01fa9366ee195c6009db68b5499f3a560600044e813b3edce7499a05e",
+  "worker": "ad1acef4c097"
+}

@@ -1,0 +1,21 @@
+{
+  "raw_junit_sha256": "b7d210b620f245458de003abc892bb061c7b806c52152588fab795ecf2e1c9b0",
+  "real_rcc_test_executed": true,
+  "skips": [
+    {
+      "name": "test_storage_handles_mixed_resolved_drive_prefixes",
+      "reason": "native Windows path resolution"
+    }
+  ],
+  "suites": [
+    {
+      "errors": "0",
+      "failures": "0",
+      "name": "pytest",
+      "skipped": "1",
+      "tests": "181",
+      "time": "65.340",
+      "timestamp": "2026-10-16T15:52:59.553288+00:00"
+    }
+  ]
+}
