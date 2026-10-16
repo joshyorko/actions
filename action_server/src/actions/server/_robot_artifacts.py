@@ -37,7 +37,15 @@ def _identity(info: os.stat_result) -> tuple[int, ...]:
         info.st_size,
         info.st_mtime_ns,
         info.st_ctime_ns,
+        getattr(info, "st_birthtime_ns", 0),
     )
+
+
+def _opened_identity(info: os.stat_result) -> tuple[int, ...]:
+    # CPython on Windows may expose creation time through lstat's ctime and
+    # change time through fstat's ctime (python/cpython#157671). Birthtime is
+    # comparable across both APIs. Keep full ctime checks within each API.
+    return _identity(info)[:6] + (getattr(info, "st_birthtime_ns", info.st_ctime_ns),)
 
 
 def _checked_stat(path: Path) -> os.stat_result:
@@ -162,7 +170,7 @@ def _read_file(path: Path, expected: os.stat_result, remaining: int) -> bytes:
     descriptor = os.open(path, flags)
     try:
         before = os.fstat(descriptor)
-        if _identity(before) != _identity(expected):
+        if _opened_identity(before) != _opened_identity(expected):
             raise RobotArtifactError("Robot artifact changed before opening")
         content = bytearray()
         limit = min(MAX_FILE_BYTES, remaining)
@@ -176,7 +184,7 @@ def _read_file(path: Path, expected: os.stat_result, remaining: int) -> bytes:
         if (
             len(content) != before.st_size
             or _identity(os.fstat(descriptor)) != _identity(before)
-            or _identity(_checked_stat(path)) != _identity(before)
+            or _identity(_checked_stat(path)) != _identity(expected)
         ):
             raise RobotArtifactError("Robot artifact changed during reading")
         _checked_ancestors(path.parent)

@@ -1907,6 +1907,27 @@ values and derives its working root from the configuration file's directory
 output isolation from `-e`, or move the configuration file without separately
 verifying the resulting execution semantics.
 
+For Robot snapshots, compare like-for-like timestamps across pathname and
+open-descriptor metadata. CPython 3.12.15 on Windows maps pathname `st_ctime_ns`
+to creation time but descriptor `st_ctime_ns` to change time; after a rewrite,
+strict cross-API ctime equality rejects an unchanged file. This is tracked in
+[CPython #157671](https://github.com/python/cpython/issues/157671); the consumed
+implementation is in `v3.12.15` `Modules/posixmodule.c` (`win32_xstat`) and
+`Python/fileutils.c` (`_Py_fstat_noraise`). Use explicit `st_birthtime_ns` when
+available for the cross-API comparison, preserving device/inode, mode, link
+count, size and mtime checks. Retain full ctime and birthtime checks separately
+for pathname-to-pathname and descriptor-to-descriptor observations. Revisit
+this compatibility boundary when the supported CPython versions resolve the
+upstream discrepancy; do not simply remove mutation checks.
+
+Unsafe filename fixtures must verify that the filesystem created the exact
+literal directory entry. Windows can normalize trailing dots/spaces, interpret
+backslashes as separators, route device names to devices, and interpret a colon
+as an alternate stream. A successful write does not prove that the collector
+will enumerate the supplied name. Keep platform-independent inventory-boundary
+rejection tests for every forbidden name alongside literal filesystem tests;
+only the latter may skip when the literal entry cannot exist.
+
 Windows non-strict path resolution can retain an extended local-drive prefix
 (`\\?\C:\...`) while the already resolved storage root uses `C:\...`. The
 artifact containment comparisons treat only fully qualified ordinary and

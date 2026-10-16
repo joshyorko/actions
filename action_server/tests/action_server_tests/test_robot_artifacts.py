@@ -284,7 +284,32 @@ def test_rejects_nonportable_output_names(artifact_case, name):
     except OSError:
         pytest.skip("Filesystem does not permit this unsafe fixture name")
 
+    if name not in {entry.name for entry in (package / "output").iterdir()}:
+        pytest.skip("Filesystem did not create the literal unsafe entry name")
     _assert_rejected(artifact_case)
+
+
+@pytest.mark.parametrize(
+    "name", ["CON.txt", "trailing.", "trailing ", "name:stream", "back\\slash"]
+)
+def test_inventory_rejects_nonportable_names_before_path_access(
+    artifact_case, monkeypatch, name
+):
+    from contextlib import contextmanager
+
+    module = _collector()
+    output = artifact_case[0] / "output"
+    output.mkdir()
+
+    @contextmanager
+    def unsafe_entries(path):
+        assert path == output
+        yield iter([SimpleNamespace(name=name)])
+
+    with monkeypatch.context() as patch:
+        patch.setattr(module.os, "scandir", unsafe_entries)
+        _assert_rejected(artifact_case)
+    assert artifact_case[2].list_files(artifact_case[3]) == []
 
 
 @pytest.mark.parametrize(
@@ -559,3 +584,70 @@ def test_rejects_parent_replacement_before_source_open(artifact_case, monkeypatc
 
     assert replaced
     assert artifact_case[2].list_files(artifact_case[3]) == []
+
+
+@pytest.mark.parametrize(
+    "changed_field",
+    [
+        None,
+        "st_ctime_ns",
+        "st_ino",
+        "st_nlink",
+        "st_size",
+        "st_mtime_ns",
+        "st_birthtime_ns",
+    ],
+)
+def test_windows_stat_api_timestamps_preserve_identity_and_mutation_checks(
+    artifact_case, monkeypatch, changed_field
+):
+    module = _collector()
+    source = _put(artifact_case[0] / "output", "report.json", b"rewritten")
+    original_lstat = Path.lstat
+    original_fstat = os.fstat
+    original_read = os.read
+    identity = source.stat()
+    read_started = False
+
+    def fields(info):
+        return {
+            name: getattr(info, name) for name in dir(info) if name.startswith("st_")
+        }
+
+    def pathname_stat(path, *args, **kwargs):
+        info = original_lstat(path, *args, **kwargs)
+        if path == source:
+            values = fields(info)
+            values.update(st_ctime_ns=100, st_birthtime_ns=100)
+            return SimpleNamespace(**values)
+        return info
+
+    def descriptor_stat(fd):
+        info = original_fstat(fd)
+        if (info.st_dev, info.st_ino) == (identity.st_dev, identity.st_ino):
+            values = fields(info)
+            values.update(st_ctime_ns=200, st_birthtime_ns=100)
+            if changed_field and read_started:
+                values[changed_field] += 1
+            return SimpleNamespace(**values)
+        return info
+
+    def read(fd, size):
+        nonlocal read_started
+        read_started = True
+        return original_read(fd, size)
+
+    monkeypatch.setattr(Path, "lstat", pathname_stat)
+    monkeypatch.setattr(module.os, "fstat", descriptor_stat)
+    monkeypatch.setattr(module.os, "read", read)
+    if changed_field:
+        _assert_rejected(artifact_case)
+        assert (
+            read_started
+        ), "Must reject mutation after accepting the API timestamp difference"
+        assert artifact_case[2].list_files(artifact_case[3]) == []
+    else:
+        _collect(artifact_case)
+        assert (
+            artifact_case[2].read_bytes(artifact_case[3], "report.json") == b"rewritten"
+        )
