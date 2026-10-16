@@ -65,7 +65,7 @@ def forbidden(*args, **kwargs):
 async def verify():
     checks = 0
     with tempfile.TemporaryDirectory(prefix="runtime-boundaries-") as temp:
-        root = Path(temp)
+        root = Path(temp).resolve(strict=True)
         storage = create_artifact_storage("local", root)
         storage.create_run_artifacts_dir("runs/run-a")
         storage.write_bytes("runs/run-a", "payload.bin", b"0123456789")

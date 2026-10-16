@@ -129,3 +129,21 @@ def test_multipart_zip_still_reaches_upload_boundary(monkeypatch):
     assert response.status_code == 200
     assert response.json()["message"] == "controlled upload"
     assert seen == [("robot.zip", b"zip-control")]
+
+
+def test_installed_boundary_probe_accepts_owned_temp_alias(tmp_path, monkeypatch):
+    import os
+    import runpy
+    import tempfile
+    from pathlib import Path
+
+    if os.name == "nt":
+        pytest.skip("POSIX temporary-directory alias control")
+    physical = tmp_path / "physical"
+    physical.mkdir()
+    alias = tmp_path / "alias"
+    alias.symlink_to(physical, target_is_directory=True)
+    monkeypatch.setattr(tempfile, "tempdir", str(alias))
+    script = Path(__file__).parents[2] / "scripts" / "verify_request_boundaries.py"
+    namespace = runpy.run_path(str(script))
+    asyncio.run(namespace["verify"]())

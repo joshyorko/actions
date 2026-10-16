@@ -3998,3 +3998,9 @@ their protected-API classification. Update those exact entries when introducing
 this boundary; do not normalize every subclass to APIRoute or weaken the
 unknown-route rejection control. The multipart upload control verifies that the
 ordinary ZIP file field still reaches the importer through FastAPI parsing.
+
+Installed-consumer probes must resolve their newly created, owned temporary
+root before opening artifact storage. POSIX temp paths can traverse a system
+alias (notably macOS `/var`); storage intentionally rejects symlink ancestors.
+The temporary-alias regression reproduces that rejection without relaxing the
+production storage contract, then exercises the probe using the physical root.
