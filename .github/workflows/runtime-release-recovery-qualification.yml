@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   qualify:
-    if: github.repository == 'joshyorko/actions' && github.ref == 'refs/heads/qualification/runtime-release-recovery-20261016' && false
+    if: github.repository == 'joshyorko/actions' && github.ref == 'refs/heads/qualification/runtime-release-recovery-20261016'
     runs-on: ubuntu-22.04
     timeout-minutes: 45
     steps:
