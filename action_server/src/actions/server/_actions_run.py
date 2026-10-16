@@ -21,6 +21,7 @@ from ._settings import (
 
 if typing.TYPE_CHECKING:
     from ._models import Action, ActionPackage, Run
+    from ._runs_state_cache import RunRuntimeInfo
 
 log = logging.getLogger(__name__)
 
@@ -325,8 +326,23 @@ class _ActionsRunner:
 
         self.response_handler.set_run_id(self._run_id)
 
-        fut = run_in_thread.run_in_thread(self._run_action)
+        from actions.server._runs_state_cache import get_global_runs_state
+
+        # Cancellation must be available before an async response can return,
+        # including while the worker has not entered its execution method.
+        runs_state = get_global_runs_state()
+        runtime_info = runs_state.create_run_runtime_info(self._run_id)
+        try:
+            fut = run_in_thread.run_in_thread(lambda: self._run_action(runtime_info))
+        except BaseException:
+            runs_state.discard_run_runtime_info(self._run_id, runtime_info)
+            raise
         self._future = fut
+        fut.add_done_callback(
+            lambda _future: runs_state.discard_run_runtime_info(
+                self._run_id, runtime_info
+            )
+        )
 
         if self.timeout is None:
             # Wait for the future to be resolved.
@@ -346,7 +362,7 @@ class _ActionsRunner:
         self.response_handler.set_async_completion()
         return "async-return"
 
-    def _run_action(self) -> Any:
+    def _run_action(self, runtime_info: "RunRuntimeInfo") -> Any:
         """
         This is where the action is actually run (to completion).
 
@@ -368,7 +384,7 @@ class _ActionsRunner:
                 ]
             )
 
-        result = self._run_action_impl()
+        result = self._run_action_impl(runtime_info)
         if self._returning_async_result:
             # We're returning an async result, so, we need to call the callback.
             if self.callback_url:
@@ -402,7 +418,7 @@ class _ActionsRunner:
                     )
         return result
 
-    def _run_action_impl(self) -> Any:
+    def _run_action_impl(self, runtime_info: "RunRuntimeInfo") -> Any:
         from concurrent.futures import CancelledError
         from typing import Literal
 
@@ -410,7 +426,6 @@ class _ActionsRunner:
             ActionsProcessPool,
             ProcessHandle,
         )
-        from actions.server._runs_state_cache import get_global_runs_state
 
         action_package: "ActionPackage" = self.action_package
         action: "Action" = self.action
@@ -428,9 +443,6 @@ class _ActionsRunner:
         settings = get_settings()
         artifact_storage = get_artifact_storage()
 
-        global_runs_state = get_global_runs_state()
-        runtime_info = global_runs_state.create_run_runtime_info(self._run_id)
-
         db = get_db()
         with db.connect():  # Connection is per-thread, so, we need to create a new one.
             actions_process_pool: ActionsProcessPool = get_actions_process_pool()
@@ -442,6 +454,8 @@ class _ActionsRunner:
                 # This can take some time to complete if multiple actions are
                 # running in parallel (i.e.: the process pool may be full).
                 initial_time = time.monotonic()  # Initial time
+                if runtime_info.is_canceled():
+                    raise CancelledError("Run canceled before process acquisition")
                 process_handle_ctx = actions_process_pool.obtain_process_for_action(
                     action,
                     runtime_info,

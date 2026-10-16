@@ -1,3 +1,4 @@
+import hashlib
 import importlib.util
 import json
 import os
@@ -5,9 +6,12 @@ import signal
 import subprocess
 import sys
 import time
+import tomllib
 import urllib.error
 import urllib.request
+import zipfile
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -24,8 +28,264 @@ def _harness():
     spec = importlib.util.spec_from_file_location("dakota_rcc_acceptance", SCRIPT)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     return module
+
+
+@pytest.fixture
+def parent_receipt_control(tmp_path, monkeypatch):
+    harness = _harness()
+    # Fault injection belongs to this verifier, not pytest's logging or files.
+    for name in ("json", "os", "tempfile"):
+        monkeypatch.setattr(
+            harness, name, SimpleNamespace(**vars(getattr(harness, name)))
+        )
+    receipt = tmp_path / "receipt.json"
+    for key in (
+        "ACTIONS_RUNTIME_RCC_BINARY",
+        "ACTIONS_ACCEPTANCE_POETRY",
+        "ACTIONS_ACCEPTANCE_ROBOCORP_HOME",
+    ):
+        monkeypatch.setenv(key, "synthetic-unused")
+    monkeypatch.setattr(harness, "_cli_platform_is_supported", lambda: True)
+    monkeypatch.setattr(harness, "child_environment", lambda *args, **kwargs: {})
+
+    def invoke(worker):
+        monkeypatch.setattr(harness, "run_owned_process", worker)
+        return harness.main(["--receipt", str(receipt)])
+
+    return harness, receipt, invoke
+
+
+def _worker_bytes(status="PASS"):
+    return (
+        json.dumps(
+            {
+                "acceptance_status": status,
+                "cells": {"process_cleanup": "PASS", "authenticated_action": status},
+                "unrecognized_worker_field": {"measured": [3, False, None]},
+            },
+            separators=(",", ":"),
+        )
+        + "\n"
+    ).encode()
+
+
+@pytest.mark.parametrize("worker_status", ["PASS", "FAIL"])
+def test_parent_deadline_demotes_overall_receipt_preserving_worker_measurements(
+    parent_receipt_control, worker_status, capsys
+):
+    harness, receipt, invoke = parent_receipt_control
+    original = _worker_bytes(worker_status)
+    calls = []
+
+    def timeout(command, **kwargs):
+        calls.append((command, kwargs))
+        receipt.write_bytes(original)
+        raise subprocess.TimeoutExpired(["secret-command"], 1, stderr="secret-stderr")
+
+    assert invoke(timeout) == 1
+    assert len(calls) == 1
+    assert calls[0][1]["timeout_seconds"] == 2465 == harness.CLI_WATCHDOG_SECONDS
+    assert calls[0][0][-1] == "--_worker"
+    updated = json.loads(receipt.read_bytes())
+    worker = json.loads(original)
+    assert updated["acceptance_status"] == "FAIL"
+    assert {
+        key: value for key, value in updated.items() if key != "supervisor_deadline"
+    } == {
+        **worker,
+        "acceptance_status": "FAIL",
+    }
+    assert updated["cells"] == worker["cells"]
+    assert updated["unrecognized_worker_field"] == worker["unrecognized_worker_field"]
+    deadline = updated["supervisor_deadline"]
+    preserved = receipt.parent / deadline["worker_receipt_file"]
+    assert deadline == {
+        "reason": "watchdog_timeout",
+        "cleanup_state": "unknown",
+        "worker_acceptance_status": worker_status,
+        "worker_receipt_sha256": hashlib.sha256(original).hexdigest(),
+        "worker_receipt_file": preserved.name,
+    }
+    assert preserved.read_bytes() == original
+    assert preserved.parent == receipt.parent
+    assert preserved.name.startswith(".rcc-worker-original-")
+    if os.name == "posix":
+        assert receipt.stat().st_mode & 0o777 == 0o600
+        assert preserved.stat().st_mode & 0o777 == 0o600
+    assert not list(receipt.parent.glob(".rcc-deadline-*"))
+    output = capsys.readouterr()
+    assert "watchdog_timeout" in output.err
+    assert "secret" not in output.err + output.out
+
+
+def test_parent_deadline_annotation_collision_preserves_unknown_worker_field(
+    parent_receipt_control, capsys
+):
+    _, receipt, invoke = parent_receipt_control
+    original = b'{"acceptance_status":"PASS","cells":{},"supervisor_deadline":{"unknown":"secret-worker-value"}}'
+
+    def timeout(*args, **kwargs):
+        receipt.write_bytes(original)
+        raise subprocess.TimeoutExpired(["secret-command"], 1)
+
+    assert invoke(timeout) == 1
+    assert receipt.read_bytes() == original
+    assert not list(receipt.parent.glob(".rcc-*"))
+    output = capsys.readouterr()
+    assert "watchdog_timeout" in output.err
+    assert "receipt_state=annotation_conflict" in output.err
+    assert "secret" not in output.err + output.out
+
+
+@pytest.mark.parametrize(
+    ("original", "state"),
+    [
+        (None, "unavailable"),
+        (b"not-json-secret", "invalid_json"),
+        (b"\xff", "invalid_json"),
+        (b"[]", "invalid_shape"),
+        (b"null", "invalid_shape"),
+        (b'{"acceptance_status":"PASS","cells":[]}', "invalid_shape"),
+        (b'{"acceptance_status":"PASS","cells":null}', "invalid_shape"),
+    ],
+)
+def test_parent_deadline_never_fabricates_missing_or_malformed_worker_receipt(
+    parent_receipt_control, original, state, capsys
+):
+    _, receipt, invoke = parent_receipt_control
+
+    def timeout(*args, **kwargs):
+        if original is not None:
+            receipt.write_bytes(original)
+        raise subprocess.TimeoutExpired(["secret-command"], 1)
+
+    assert invoke(timeout) == 1
+    assert receipt.exists() is (original is not None)
+    if original is not None:
+        assert receipt.read_bytes() == original
+    assert not list(receipt.parent.glob(".rcc-*"))
+    output = capsys.readouterr()
+    assert "watchdog_timeout" in output.err
+    assert f"receipt_state={state}" in output.err
+    assert "secret" not in output.err + output.out
+
+
+@pytest.mark.parametrize(
+    ("failure_phase", "state"),
+    [
+        ("read", "read_failed"),
+        ("preserve", "preservation_failed"),
+        ("encode", "encode_failed"),
+        ("write", "write_failed"),
+        ("fsync", "write_failed"),
+        ("replace", "replace_failed"),
+    ],
+)
+def test_parent_deadline_persistence_failure_preserves_primary_and_owned_files(
+    parent_receipt_control, monkeypatch, failure_phase, state, capsys
+):
+    harness, receipt, invoke = parent_receipt_control
+    original = _worker_bytes()
+    unrelated = receipt.parent / ".rcc-deadline-unrelated"
+    unrelated.write_bytes(b"not-owned")
+
+    def fail(*args, **kwargs):
+        raise OSError("secret-secondary-path-token")
+
+    def timeout(*args, **kwargs):
+        receipt.write_bytes(original)
+        if failure_phase == "read":
+            real_read = Path.read_bytes
+            monkeypatch.setattr(
+                Path,
+                "read_bytes",
+                lambda path: fail() if path == receipt else real_read(path),
+            )
+        elif failure_phase == "preserve":
+            monkeypatch.setattr(harness.tempfile, "mkstemp", fail)
+        elif failure_phase == "encode":
+            monkeypatch.setattr(harness.json, "dumps", fail)
+        elif failure_phase == "write":
+            real_fdopen = harness.os.fdopen
+            calls = 0
+
+            class FailingWriter:
+                def __init__(self, stream):
+                    self.stream = stream
+
+                def __enter__(self):
+                    return self
+
+                def __exit__(self, *args):
+                    self.stream.close()
+
+                def __getattr__(self, name):
+                    return getattr(self.stream, name)
+
+                def write(self, payload):
+                    fail()
+
+            def fail_aggregate_write(*args, **kwargs):
+                nonlocal calls
+                calls += 1
+                stream = real_fdopen(*args, **kwargs)
+                return FailingWriter(stream) if calls == 2 else stream
+
+            monkeypatch.setattr(harness.os, "fdopen", fail_aggregate_write)
+        elif failure_phase == "fsync":
+            real = harness.os.fsync
+            calls = 0
+
+            def fail_aggregate(*args, **kwargs):
+                nonlocal calls
+                calls += 1
+                if calls == 2:
+                    fail()
+                return real(*args, **kwargs)
+
+            monkeypatch.setattr(harness.os, "fsync", fail_aggregate)
+        else:
+            monkeypatch.setattr(harness.os, "replace", fail)
+        raise subprocess.TimeoutExpired(["secret-command"], 1)
+
+    assert invoke(timeout) == 1
+    output = capsys.readouterr()
+    assert "watchdog_timeout" in output.err
+    assert f"receipt_state={state}" in output.err
+    assert "secret" not in output.err + output.out
+    monkeypatch.undo()
+    assert receipt.read_bytes() == original
+    assert unrelated.read_bytes() == b"not-owned"
+    assert list(receipt.parent.glob(".rcc-deadline-*")) == [unrelated]
+    for preserved in receipt.parent.glob(".rcc-worker-original-*"):
+        assert preserved.read_bytes() == original
+
+
+@pytest.mark.parametrize(
+    "outcome", ["completed_zero", "completed_nonzero", "exception"]
+)
+def test_parent_nondeadline_completion_keeps_original_worker_receipt(
+    parent_receipt_control, outcome
+):
+    _, receipt, invoke = parent_receipt_control
+    original = _worker_bytes()
+
+    def worker(command, **kwargs):
+        receipt.write_bytes(original)
+        if outcome == "exception":
+            raise RuntimeError("fixed synthetic exception")
+        return subprocess.CompletedProcess(
+            command, 0 if outcome == "completed_zero" else 7, "", ""
+        )
+
+    assert invoke(worker) == (
+        0 if outcome == "completed_zero" else 7 if outcome == "completed_nonzero" else 1
+    )
+    assert receipt.read_bytes() == original
+    assert not list(receipt.parent.glob(".rcc-*"))
 
 
 def test_dakota_acceptance_harness_describes_candidate_wheel_proof():
@@ -215,6 +475,92 @@ def test_child_environment_keeps_ca_and_proxy_settings_without_credentials(tmp_p
     assert result["HOME"] == str(tmp_path / "isolated" / "home")
     assert not {"GITHUB_TOKEN", "AWS_SECRET_ACCESS_KEY", "ACTIONS_API_KEY"} & set(
         result
+    )
+
+
+@pytest.mark.parametrize("core_metadata_version", ["1.0.3", "1.0.2"])
+def test_candidate_wheels_follow_checked_out_versions_and_validate_metadata(
+    tmp_path, monkeypatch, core_metadata_version
+):
+    harness = _harness()
+    source_root = tmp_path / "source"
+    (source_root / "actions").mkdir(parents=True)
+    (source_root / "actions-http-helper").mkdir()
+    script_dir = source_root / "action_server" / "scripts"
+    script_dir.mkdir(parents=True)
+    monkeypatch.setattr(
+        harness,
+        "__file__",
+        str(script_dir / "verify_dakota_rcc_acceptance.py"),
+    )
+    source_versions = {
+        "actions": ("actions-core", "1.0.3"),
+        "actions-http-helper": ("actions-http-helper", "1.0.3"),
+    }
+    for directory, (distribution, version) in source_versions.items():
+        (source_root / directory / "pyproject.toml").write_text(
+            f'[tool.poetry]\nname = "{distribution}"\nversion = "{version}"\n',
+            encoding="utf-8",
+        )
+
+    def fake_poetry(command, *, cwd, **kwargs):
+        project = tomllib.loads((Path(cwd) / "pyproject.toml").read_text())["tool"][
+            "poetry"
+        ]
+        distribution = project["name"]
+        version = project["version"]
+        if command[1] == "version":
+            return SimpleNamespace(returncode=0, stdout=f"{version}\n", stderr="")
+
+        wheelhouse = Path(command[command.index("--output") + 1])
+        filename_distribution = distribution.replace("-", "_")
+        wheel = wheelhouse / (f"{filename_distribution}-{version}-py3-none-any.whl")
+        metadata_path = f"{filename_distribution}-{version}.dist-info/METADATA"
+        metadata_version = (
+            core_metadata_version if distribution == "actions-core" else version
+        )
+        with zipfile.ZipFile(wheel, "w") as archive:
+            archive.writestr(
+                metadata_path,
+                f"Metadata-Version: 2.1\nName: {distribution}\nVersion: {metadata_version}\n\n",
+            )
+        return SimpleNamespace(returncode=0, stdout="", stderr="")
+
+    monkeypatch.setattr(harness, "run_owned_process", fake_poetry)
+    task_root = tmp_path / "task"
+    task_root.mkdir()
+    arguments = {
+        "root": task_root,
+        "source_env": {
+            "PATH": os.environ.get("PATH", os.defpath),
+            "ACTIONS_ACCEPTANCE_ROBOCORP_HOME": str(tmp_path / "rcc-home"),
+        },
+        "poetry": Path("/pinned/poetry"),
+        "deadline": harness.Deadline.after(30),
+    }
+    if core_metadata_version != "1.0.3":
+        with pytest.raises(RuntimeError, match="wheel METADATA"):
+            harness.build_candidate_wheels(**arguments)
+        return
+
+    candidate_wheels = harness.build_candidate_wheels(**arguments)
+
+    assert candidate_wheels.core.version == "1.0.3"
+    assert candidate_wheels.helper.version == "1.0.3"
+    assert candidate_wheels.core.path.name == "actions_core-1.0.3-py3-none-any.whl"
+    assert candidate_wheels.helper.path.name == (
+        "actions_http_helper-1.0.3-py3-none-any.whl"
+    )
+    assert harness.candidate_version_fields(candidate_wheels) == {
+        "actions_core": "1.0.3",
+        "actions_http_helper": "1.0.3",
+    }
+    wheel_records = harness.candidate_wheel_records(candidate_wheels)
+    assert wheel_records.keys() == {"actions-core", "actions-http-helper"}
+    assert wheel_records["actions-core"]["version"] == "1.0.3"
+    assert wheel_records["actions-http-helper"]["version"] == "1.0.3"
+    assert wheel_records["actions-core"]["filename"] == (
+        "actions_core-1.0.3-py3-none-any.whl"
     )
 
 
@@ -729,7 +1075,43 @@ def test_success_reaps_fast_exit_detached_child_before_echild(tmp_path):
                 pass
 
 
-def test_provider_startup_failure_uses_bounded_kill_fallback(tmp_path, monkeypatch):
+def _capture_provider_fixture_child(owner, reported_pid):
+    """Bind a fixture report to a live, verified root or descendant identity."""
+    import psutil
+
+    assert owner.capture_verified and owner.snapshot_complete
+    assert owner.process.poll() is None
+    root = psutil.Process(owner.pid)
+    assert root.create_time() == owner.create_time
+    descendants = tuple(
+        (child, child.create_time()) for child in root.children(recursive=True)
+    )
+    candidates = ((root, owner.create_time),) + descendants
+    matches = [
+        (child, birth) for child, birth in candidates if child.pid == reported_pid
+    ]
+    assert len(matches) == 1, "PROVIDER_FIXTURE_CHILD_UNOWNED"
+    assert psutil.Process(owner.pid).create_time() == owner.create_time
+    assert owner.process.poll() is None
+    child, birth = matches[0]
+    assert psutil.Process(child.pid).create_time() == birth
+    return child, birth, descendants
+
+
+def _provider_fixture_child_stopped(child, birth):
+    import psutil
+
+    try:
+        current = psutil.Process(child.pid)
+        assert current.create_time() == birth, "PROVIDER_FIXTURE_CHILD_REUSED"
+        return not current.is_running() or current.status() == psutil.STATUS_ZOMBIE
+    except psutil.NoSuchProcess:
+        return True
+
+
+def test_provider_startup_failure_uses_bounded_kill_fallback(
+    tmp_path, monkeypatch, launcher=False
+):
     harness = _harness()
     pid_file = tmp_path / "provider.pid"
     fake_server = (
@@ -738,29 +1120,156 @@ def test_provider_startup_failure_uses_bounded_kill_fallback(tmp_path, monkeypat
         f"Path({str(pid_file)!r}).write_text(str(os.getpid())); "
         "print('not-json', flush=True); time.sleep(60)"
     )
+    if launcher:
+        # Model a redirector that waits for its distinct Python child.
+        fake_server = (
+            "import signal,subprocess,sys; "
+            "signal.signal(signal.SIGTERM, signal.SIG_IGN); "
+            f"child=subprocess.Popen([sys.executable,'-c',{fake_server!r}]); "
+            "child.wait()"
+        )
     monkeypatch.setattr(
         harness,
         "_provider_command",
         lambda _rcc, _root: [sys.executable, "-c", fake_server],
     )
 
-    with pytest.raises(RuntimeError, match="startup JSON"):
-        harness.start_provider(
-            "/unused/rcc",
-            tmp_path / "provider-root",
-            harness.child_environment(os.environ, task_root=tmp_path / "runtime"),
-            deadline=harness.Deadline.after(3),
-            cleanup_grace_seconds=0.2,
+    captured = []
+    actual_popen = subprocess.Popen
+    fixture_child = []
+    fixture_descendants = []
+    original_readline = harness._readline_with_timeout
+
+    def capture_startup_child(*args, owner, **kwargs):
+        line = original_readline(*args, owner=owner, **kwargs)
+        child, birth, descendants = _capture_provider_fixture_child(
+            owner, int(pid_file.read_text())
         )
+        fixture_child.append((child, birth))
+        fixture_descendants.extend(descendants)
+        return line
 
-    import psutil
+    monkeypatch.setattr(harness, "_readline_with_timeout", capture_startup_child)
 
-    provider_pid = int(pid_file.read_text())
+    def owned_popen(*args, **kwargs):
+        process = actual_popen(*args, **kwargs)
+        captured.append(process)
+        return process
+
+    monkeypatch.setattr(
+        harness,
+        "subprocess",
+        SimpleNamespace(**dict(vars(subprocess), Popen=owned_popen)),
+    )
     try:
-        provider_stopped = (
-            not psutil.Process(provider_pid).is_running()
-            or psutil.Process(provider_pid).status() == psutil.STATUS_ZOMBIE
+        with pytest.raises(RuntimeError, match="startup JSON") as caught:
+            harness.start_provider(
+                "/unused/rcc",
+                tmp_path / "provider-root",
+                harness.child_environment(os.environ, task_root=tmp_path / "runtime"),
+                deadline=harness.Deadline.after(3),
+                cleanup_grace_seconds=0.2,
+            )
+
+        assert len(captured) == 1
+        process = captured[0]
+        result = caught.value.provider_cleanup_result
+        diagnostic = json.dumps(result.to_dict(), sort_keys=True)
+        assert len(fixture_child) == 1
+        child, birth = fixture_child[0]
+        assert process.poll() is not None, diagnostic
+        assert _provider_fixture_child_stopped(child, birth), diagnostic
+        assert result.complete, diagnostic
+    finally:
+        # Only the original Popen owns this wait and emergency test teardown.
+        # Preserve the cleanup result above; teardown is not acceptance evidence.
+        # PID-file contents never grant signal authority. Only the verified
+        # root's captured descendants, with unchanged births, may be killed.
+        import psutil
+
+        try:
+            for child, birth in reversed(fixture_descendants):
+                try:
+                    if psutil.Process(child.pid).create_time() == birth:
+                        child.kill()
+                except psutil.NoSuchProcess:
+                    pass
+        finally:
+            for process in captured:
+                try:
+                    if process.poll() is None:
+                        process.kill()
+                    process.wait(timeout=2)
+                finally:
+                    for stream in (process.stdout, process.stderr):
+                        if stream is not None:
+                            stream.close()
+
+
+def test_public_harness_uses_shared_test_only_binary_admission(tmp_path, monkeypatch):
+    from actions.server import _rcc_runtime_adapter as adapter
+
+    harness = _harness()
+    rcc = tmp_path / "rcc"
+    rcc.write_bytes(b"owned synthetic RCC")
+    rcc.chmod(0o700)
+    selector = "released-18.19.5-linux-amd64"
+    sha = "1a617ad7c736fa67c605e20e5ebe3c7d54b02cd548f733e05c809cf49a48db1e"
+    monkeypatch.setattr(harness, "sha256_file", lambda _path: sha)
+    monkeypatch.setattr(adapter, "_rcc_platform", lambda: "linux-amd64", raising=False)
+    monkeypatch.setattr(
+        harness,
+        "run_owned_process",
+        lambda *args, **kwargs: subprocess.CompletedProcess(
+            args[0], 0, "v18.19.5\n", ""
+        ),
+    )
+    env = {
+        "ACTIONS_RUNTIME_RCC_BINARY": str(rcc),
+        "ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY": selector,
+    }
+    assert harness._verify_rcc(
+        env, task_root=tmp_path / "task", deadline=harness.Deadline(30)
+    ) == (str(rcc), sha)
+    child = harness.child_environment(
+        env,
+        task_root=tmp_path / "child",
+        extra={"ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY": selector},
+    )
+    assert child["ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY"] == selector
+    monkeypatch.setattr(harness, "sha256_file", lambda _path: "0" * 64)
+    with pytest.raises((adapter.RccRuntimeError, RuntimeError), match="compatibility"):
+        harness._verify_rcc(
+            env, task_root=tmp_path / "wrong", deadline=harness.Deadline(30)
         )
-    except psutil.NoSuchProcess:
-        provider_stopped = True
-    assert provider_stopped
+
+
+def test_public_harness_rejects_pending_unknown_policy_before_binary_launch(
+    tmp_path, monkeypatch
+):
+    harness = _harness()
+    calls = []
+    monkeypatch.setattr(
+        harness, "run_owned_process", lambda *args, **kwargs: calls.append(args)
+    )
+    env = {
+        "ACTIONS_RUNTIME_RCC_BINARY": str(tmp_path / "unused"),
+        "ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY": "candidate-097-18.19.6-linux-amd64",
+    }
+    with pytest.raises(RuntimeError, match="compatibility"):
+        harness._verify_rcc(
+            env, task_root=tmp_path / "task", deadline=harness.Deadline(30)
+        )
+    assert not calls
+
+
+def test_public_harness_runtime_child_retains_only_approved_test_selection(tmp_path):
+    harness = _harness()
+    key = "ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY"
+    value = "released-18.19.5-linux-amd64"
+    env = harness.child_environment({key: value}, task_root=tmp_path / "runtime")
+    assert env[key] == value
+    with pytest.raises(RuntimeError, match="compatibility"):
+        harness.child_environment(
+            {}, task_root=tmp_path / "poison", extra={key: "unapproved"}
+        )

@@ -2127,8 +2127,8 @@ class ActionServerRccProviderRollback(BaseWorkflow):
     target = "actions_runtime_rcc_provider_rollback.yml"
     project_name = "action_server"
     rcc_sha256 = "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
-    candidate_sha = "d642a3ac24f8da85101538bdfdf59b509fd74bfb"
-    candidate_tree = "fdf2823ebcdbd938b9047fd452c9fb13eb4be4e4"
+    candidate_sha = "c10380a4d2ebc6f0aca63eb85c8f84a337da4962"
+    candidate_tree = "21676c626a933c2d55761ec85ecf26fe0eef26bb"
 
     def __init__(self):
         super().__init__()
@@ -2154,6 +2154,7 @@ class ActionServerRccProviderRollback(BaseWorkflow):
                     "branches": [
                         "test/rcc-provider-rollback-hosted-20261010",
                         "fix/rcc-published-artifact-details-20261010",
+                        "fix/rcc-candidate-wheel-identities-20261010",
                     ],
                     "paths": paths[:],
                 },

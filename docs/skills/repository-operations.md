@@ -391,6 +391,17 @@ Check both the affected Windows target and the native target, then run the
 existing platform behavior tests. A focused `mypy --platform win32` invocation
 is diagnostic unless the repository's configured CI runs that target.
 
+RCC version-runner fixtures must derive expected command arguments with
+`str(Path(...))`, since Windows renders the same path with native separators.
+The Linux-only owned package-cache helper admits callable `getuid` and `getgid`
+features before calling either feature, reading configuration, or accessing
+cache paths. It measures each feature once for that admission. Missing or
+noncallable features fail with `PACKAGE_CACHE_POSIX_OWNER_FEATURES`; they do
+not skip owner verification. Keep the measured UID/GID checks and private
+0700 roots, 0600 markers, and explicitly allowed 0700/0750 client-home modes.
+Tests exercise unavailable features without creating a cache, and the existing
+cache poison tests retain containment, ownership, and mode rejection.
+
 The Dakota RCC candidate acceptance script fails closed outside Linux. Its
 receipt cleanup uses POSIX `fchmod`; keep cleanup-demotion and permission-mode
 assertions limited to platforms that provide that contract. On Windows, retain
@@ -1695,6 +1706,11 @@ address the first failure before treating lint as green. The configured
 `devutils` gates in `developer/toolkit.py` run `pytest tests` and `ruff check
 src tests`.
 
+Runtime's `inv lint` also checks test-file formatting with
+`ruff format --check --config ../devutils/ruff.toml`. When validating a focused
+Runtime test change, use that configuration as well as `ruff check`; passing
+the tests or the lint rules alone does not establish formatter acceptance.
+
 Action Server's `invoke lint` also runs Ruff check, Ruff format, and isort for
 `src` and `tests`; its `pyproject.toml` sets isort's Black profile. Isort checks
 imports nested inside test functions as well as module-level imports. When a
@@ -2570,6 +2586,207 @@ Final reports list exact commands and outcomes, external/service tests skipped, 
 
 ## RCC Environment Artifact execution
 
+Keep the bundled RCC download/build pin separate from adapter compatibility.
+A version string is identification, not source, byte or functional qualification.
+The explicit `ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY` selector admits only
+source-reviewed immutable Linux binary tuples for isolated qualification tests;
+unknown selections fail closed. Acquisition provenance is data-only approval,
+not an operational feature pass or a production compatibility claim. The
+released 18.19.5 executable reports a modified source tree at its embedded
+revision; its source equivalence and modification cause remain unknown.
+Measure selected bytes before the isolated ten-second version probe and again
+before use. Default location and version wrappers must select that same probe;
+the general command runner's 900-second budget is a separate operation limit.
+Injected runners are test seams, not native timeout evidence.
+Fresh descriptors and process-local cache keys bind the actual version, source,
+platform, binary, provenance and required contract surface. Changing selection
+rejects stale descriptors until explicit re-preparation; an artifact digest
+alone does not bind the executable that acquired or executes it. Preserve older
+receipts under their original tuple; matching labels or trees do not relabel them.
+The staged consumer fixture retains its worker's exact env-exec lease receipt
+and actual typed retirement/cleanup snapshots in private evidence. Missing
+snapshots stay null; testcase success does not prove lease release or reaping.
+
+The staged consumer now rejects absent or pending worker retirement, incomplete
+wrapper/descendant cleanup, live or zombie descendants, errors, and missing or
+unjoined stdout/stderr/protocol readers before writing a passing fixture receipt.
+It preserves the original lease terminal status. The exact legacy 18.19.3
+`failed`/`-1`/`child exited non-zero` shape requires the successful Action's
+intentional nonreuse disposal context; it is not generalized to newer RCCs.
+This gate covers worker cleanup and the already verified lease receipt's
+terminal shape. Provider reader cleanup, full ownership census, and independent
+lease-release observation remain separate native admission requirements.
+
+The provider harness retains the original startup `readline` thread against its
+exact `Popen` object, PID, and captured creation time. Stream failures cross the
+existing queue with their original exception identity; private cleanup evidence
+contains the fixed error class. A second startup reader is rejected.
+Owner capture must observe the original `Popen` still live before and after
+the root/descendant snapshot and confirm the root's creation time again before
+committing that snapshot. An already exited, changed, or failed capture retains
+no discovered descendants as signal authority. Cleanup validates each captured
+descendant's PID and creation time before delegating; reused or unknown
+identities prevent completion. Previously verified descendants remain owned
+after the original provider exits, without acquiring a fresh tree from its PID.
+`cleanup_provider_until` checks that owner before signalling and uses the
+existing process-tree cleanup routine and startup-thread join under one absolute
+caller deadline. Missing or mismatched ownership, an unavailable or live reader,
+and observation errors cannot produce a complete cleanup result. Startup
+failure remains primary when cleanup observation also fails. The two native
+fixtures retain this typed result and require completion before reporting PASS.
+Its scope is the captured provider tree and startup reader: it does not prove
+an uncapped supervisor census, a single whole-test deadline, or lease release.
+The legacy `terminate_process_tree` routine remains a separate operation.
+
+The verified RCC binary help advertises `env lifecycle inspect --artifact ...
+--json`, but its name and help do not prove passive observation. In
+[public revision 4148c2b7](https://github.com/joshyorko/rcc/blob/4148c2b71705c9d2baf0e88b48d08a79cb7bda0f/environmentlifecycle/admin.go#L79),
+`Inspect` invokes reconciliation; the
+[reconciler](https://github.com/joshyorko/rcc/blob/4148c2b71705c9d2baf0e88b48d08a79cb7bda0f/environmentlifecycle/reconcile.go#L61)
+removes provisional journals and stale lease records. Do not use that operation
+as read-only evidence of natural lease release. The shipped binary with SHA256
+`7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428`
+embeds `vcs.modified=true`, so the public revision does not establish its exact
+source or lease schema. A passive lease observer needs separately admitted raw
+record paths, root/digest/lease identity, no-follow reads, stable bytes, and
+actual before/after observations. Help output and terminal process receipts
+alone do not provide those facts.
+
+`run_owned_process(..., collect_cleanup_evidence=True)` is an opt-in Linux
+source-observation transport. The default command payload, outputs, termination,
+fallback, and grace behavior remain unchanged. The observer retains the full
+PID/creation-time ledger, including different births of one PID, and distinguishes
+successful empty enumeration from failed or unavailable enumeration. Census
+states retain live, zombie, absent, reused, and unknown observations; this ledger
+is never supplied as signal authority. Root identity requires the existing
+verified live/birth capture. Existing `waitpid` calls retain raw PID/status events
+and the actual terminal ECHILD observation without adding waits. A wait PID alone
+does not establish birth identity, so these events leave `matched_identity` null.
+Absence and legacy reap counts are not converted into observed identity reaps.
+Schema 1 rejects every nonnull wait-event `matched_identity`, including a
+matching numeric PID, because it contains no birth witness. Known census rows
+must record the same observed PID as their captured identity. If a process
+disappears between its birth and status reads, retain an absent row with null
+current birth; do not discard the whole census or invent a reap event. Schema 1
+can establish scoped root-only reaping from the separate Popen wait fact, but
+cannot establish reaping of captured children from these wait events.
+
+The same typed `cleanup_evidence` is attached to command results, timeout, and
+cleanup-error outcomes while retaining their existing output fields. Wait errors
+retain their original exception object; metadata failures record fixed secondary
+classes and cannot replace that primary error. Malformed or missing metadata and
+supervisor failures before JSON publication have explicitly unavailable facts,
+not an empty clean census. Reader, sampler, and whole-operation enforcer facts
+remain null because this increment does not measure them. Scoped census/reap
+completion does not prove the whole native fixture or Runtime acceptance.
+
+An absolute Python deadline limits only operations that consume its remaining
+budget. Final census, output hashing, fsync, and receipt persistence require an
+independently enforced outer endpoint before a whole-operation hard bound is
+claimed. Watchdog intervention is failure with explicitly unavailable cleanup
+facts; it is not evidence that owned processes were reaped. The opt-in metadata
+does not change native dispatch, fallback signals, disk-output retention, lease
+observation, or watchdog behavior; those designs and native budgets require
+separate admission.
+
+Injected Linux supervisor controls must supply every Linux primitive they use,
+including `WNOHANG=1` in a fake `waitpid` namespace; copying the host's `os`
+attributes is insufficient on Windows. When a control uses a constant monotonic
+clock and fake process, replace its unexpected legacy fallback with a failing
+sentinel. A missing model primitive must produce a bounded test failure, not
+enter Linux `/proc` enumeration or a grace loop whose clock never advances.
+Exercise the model with POSIX constants absent as well as present. These are
+test-only substitutions; production fallback and timeout contracts stay intact.
+
+Pooled worker retirement retains its existing stdout/stderr output threads and
+joins them together with the protocol reader using the caller's one deadline.
+Typed `WorkerReaderResult` values record each join, final alive state, and fixed
+error class. A live or unobserved reader or failed join keeps capacity pending.
+A successfully joined, inactive reader releases capacity even if its output
+callback failed; the error remains visible for acceptance and diagnosis.
+The existing callback dispatcher still logs ordinary consumer exceptions and
+continues to later consumers. Its optional error observer records the first
+fixed exception class against the actual retained output thread. Observer
+failure does not replace the original exception or change dispatch ordering;
+an unmatched thread is recorded as unowned and leaves cleanup unconfirmed.
+Each retirement attempt shares its caller's deadline across all reader joins.
+A later retry may receive a new caller deadline and observes the same retained
+thread objects. These worker facts are separate
+from the Runtime server's existing `Process._stop_and_reap_until` readers and
+from provider startup readers. Thread closure does not prove lease release or
+complete descendant reaping; native admission must still check those facts.
+
+The retained provider startup reader has its own ownership checks: its original
+owner must still refer to the caller's exact process object, and the reader must
+still refer to that exact owner. Observe that same thread using the existing
+absolute cleanup endpoint even when process-tree birth capture is unconfirmed.
+A successful reader join measures only the reader; it does not grant process
+signal authority, confirm tree cleanup, or prove lease release. Missing or
+changed object bindings keep reader evidence unavailable. Join errors remain
+fixed secondary classes attached to the original startup failure. Classify
+`join()` and `is_alive()` exceptions in separate observation scopes. A one-shot
+liveness error remains a liveness error even if a subsequent probe sees the
+thread stopped; that attempt remains incomplete and preserves the primary
+startup exception.
+
+Provider startup failure tests retain the original `Popen` and the primary
+exception's typed cleanup result. Assert the observed cleanup facts before
+emergency test teardown, and report those facts on failure. Always kill, wait,
+and close that original child's pipes in `finally`; successful teardown cannot
+retroactively qualify a failed cleanup. A cooperative `Popen.wait` may resume
+after its requested timeout because of scheduler delay. If the absolute cleanup
+deadline has expired, the current helper skips a new kill. If its final
+zero-budget wait still fails, it records an unreaped wrapper. Use injected clock controls to distinguish that outcome from failed
+ownership capture; a live-child assertion without its typed result cannot
+identify which path failed.
+
+A Windows virtual-environment Python executable may be a redirector that
+launches a distinct Python child. A fixture's reported PID therefore need not
+equal the original `Popen.pid`. Before provider cleanup, bind the reported child
+to the verified original root or one of its observed descendants and record its
+birth. Afterwards require the original launcher reaped, that child stopped, and
+typed tree/reader cleanup complete. Reject unknown membership or changed births.
+Emergency fixture teardown may signal only those verified captured identities;
+a PID file alone never grants authority. Exercise a distinct launcher/child
+fixture on every source platform, preserving the package interpreter and the
+cleanup deadline. A later source-suite pass does not identify the cause of an
+earlier cleanup failure whose typed diagnostic was discarded.
+
+Source CLI gates must also set a task-owned writable `ROBOTS_HOME`, alongside
+their isolated `ACTIONS_HOME`, RCC home, temporary directory, and package caches.
+The CLI creates the Robot home before dispatching commands, so the default
+`~/.robots` can fail even project creation and package metadata tests in a
+read-only host home. Keep the Robot and Action homes separate; overriding the
+RCC developer home alone does not isolate either Runtime-owned home.
+
+Memory admission must bind the process's cgroup membership to the visible
+cgroup2 mount and exact counter directory before describing counters as its
+self-cgroup limit. A namespace route of `0::/` alone does not establish that
+binding when the mount's root is different. Preserve an unsupported mount
+identity as an admission hold; a visible mount's free headroom and filesystem
+capacity cannot replace the missing ownership/scope check.
+
+An isolated, sequential RCC qualification may share only its once-owned `pkgs`
+download cache between publication and staged execution for the same source and
+binary tuple. Admit the operator configuration, root marker, ownership, modes,
+containment and publication receipt before mounting it; reject unknown or
+cross-version state. The first publication requires an empty package cache.
+Keep each case's Holotree, artifacts, provider and runtime origins separate.
+The staged case then uses the publication's warm package cache; this is not
+cold-registry or cold-install qualification. Identical retained cache bodies
+can identify duplicate storage, but do not prove a future peak or compatibility.
+Keep capacity thresholds and strict cleanup admission unchanged.
+
+RCC's private client home has a different permission contract from the
+supervisor-owned state root and package cache. The retained RCC revision's
+package initialization recursively applies mode `0750` before a `--version`
+probe returns. Admit only the explicitly reviewed `0700`/`0750` client-home
+modes with the exact owned path, owner and group; keep the state root and
+package cache at `0700` and the identity marker at `0600`. Never chmod an
+input to make admission pass. Bind observed permissions and native-source
+provenance separately: a modified build does not establish exact source
+equivalence, and a rejected home proves no publication, Action or lease result.
+
 Managed spec-v2 Action packages use the provisional RCC runtime adapter only
 when `ACTIONS_RUNTIME_RCC_PROVIDER` or `ACTIONS_REAL_RCC_ARTIFACT_TEST`
 explicitly opts into artifact mode. Without either opt-in, legacy bootstrap
@@ -2615,9 +2832,9 @@ branch permissions unchanged. Record a new hosted execution for the new tuple
 and require full CI on its exact tested merge. Production input changes also
 require new frozen-artifact qualification; compare the retained producer
 inventory without excluding changed files. The control permits only pushes to
-the original opt-in branch
-`test/rcc-provider-rollback-hosted-20261010` and the existing reviewed PR branch
-`fix/rcc-published-artifact-details-20261010`, subject to the retained path filter.
+the original opt-in branch `test/rcc-provider-rollback-hosted-20261010` and the
+existing reviewed PR branches `fix/rcc-published-artifact-details-20261010` and
+`fix/rcc-candidate-wheel-identities-20261010`, subject to the retained path filter.
 Local service-free control tests establish admission behavior, not an actual
 RCC artifact execution. Record a new hosted run before claiming acceptance of
 this candidate, and retain earlier receipts under their original identities.
@@ -2710,6 +2927,20 @@ run outside the pool lock. An incomplete retirement remains pending and
 non-reusable; an action finalizer retains its one semaphore token until the
 wrapper is reaped and no observed live descendant remains. Retry is in-band,
 and a genuinely free additional capacity slot remains usable.
+
+An accepted asynchronous legacy Run registers its cancellation state before
+submitting the worker and before returning `async-return`. Pass that same
+`RunRuntimeInfo` into execution; creating it only on worker entry leaves a
+queued, persisted Run temporarily uncancellable. Check cancellation before
+process acquisition and use the existing terminal transition for valid canceled
+inputs. Retire only the dispatch's own state identity on submission failure or
+Future completion, including validation failure; a stale Future cleanup callback
+cannot remove a replacement entry. Input validation response and persisted-status
+policy remain separate from cancellation admission. Scoped Runs still reject
+legacy registration and cancellation and use the authorized common lifecycle.
+Prove this boundary with a held executor, genuine Run storage and cancellation
+state, rather than increasing an action fixture's sleep or weakening its cancel
+assertion.
 
 For lock-deadline tests, control the monotonic clock and use a recording lock to
 assert the exact remaining timeout, including zero after expiry. Keep real-lock
@@ -3291,12 +3522,74 @@ starting its acceptance work. Its dedicated supervisor adopts descendants as a
 subreaper and drains exited children through `ECHILD` on successful completion.
 Unexpected live descendants, failed ownership inspection, or incomplete cleanup
 remain failures; cleanup escalation cannot silently preserve an earlier PASS.
+The worker acceptance receipt remains provisional until its external parent
+returns successfully. In the retained public parent at `44afd960`, a timeout follows
+the generic exception path and returns failure without changing a receipt already
+written by the worker. A retained worker `PASS` therefore cannot establish a
+successful parent deadline or overall acceptance. Require both outcomes; do
+not infer failed Runtime cleanup from a parent timeout when the worker measured
+cleanup separately. Keep those measured cells and the original failed attempt.
+
+The parent-deadline receipt guard marks overall acceptance failed using the
+fixed `watchdog_timeout` reason while retaining the worker's measured cells and
+unknown fields. It first preserves the original worker receipt bytes in an
+invocation-owned private file and binds their digest and original acceptance
+status in the aggregate receipt. It atomically replaces the aggregate through
+a same-directory private temporary file. Absent or malformed worker evidence
+is not synthesized; fixed unavailable or persistence-failure states retain the
+primary parent failure without exposing arbitrary command or exception bodies.
+An existing worker key reserved for the new supervisor annotation produces a
+fixed `annotation_conflict` failure without overwriting unknown worker data.
+That unchanged worker status remains provisional because the parent failed.
+Controls cover valid, missing, malformed and failed receipts, plus serialization,
+write, fsync and replacement failures. Existing-root refusal remains authoritative.
+Public checkpoint recovery and service-free controls do not recover a missing
+private inspector/specification or qualify provider, metadata or native execution.
 The wrapper cell accepts only terminal `completed` with an integer zero exit
 code, excluding booleans, missing status and nonterminal states. Focused tests
-exercise detached live writers and fast-exiting adopted children, but source
-Runtime/candidate-wheel receipts still show a failed RCC wrapper. These harness
+exercise detached live writers and fast-exiting adopted children, but the
+retained candidate-wheel receipts keep their historical failed RCC wrapper. These harness
 checks do not establish production pool retirement, lease-release ordering,
 frozen Runtime acceptance or remote-provider acceptance.
+
+The Dakota RCC candidate-wheel verifier derives Core and HTTP Helper versions
+from each checked-out package using the pinned Poetry executable, then checks
+that each built wheel's filename and `METADATA` agree with that source version.
+Filename selection alone does not admit the archive: the verifier requires
+exactly one `.dist-info/METADATA` member, decodes it as UTF-8, and compares its
+`Name` and `Version` with the expected distribution and checked-out package
+version reported by pinned Poetry.
+Keep these member-level identity checks separate from the whole-wheel SHA-256
+recorded in the receipt; that digest binds bytes but does not prove installation
+or a provider-backed run.
+The same candidate identities flow into the synthetic Action expectation and
+success or failure receipt. This identifies the local candidate under test; it
+does not establish a registry publication or provider-backed Runtime result.
+Keep historical receipts bound to their recorded source revision: a prior
+Core 1.0.2 candidate result is not a current-source result when the checked-out
+Core metadata declares 1.0.3.
+
+The candidate-version regression controls Poetry's version and build responses
+and creates synthetic wheel ZIPs. It admits the matching source, filename and
+`METADATA` tuple and rejects a metadata-version mutation. That service-free
+result qualifies the verifier's identity checks; it does not prove an actual
+Poetry build, RCC action, provider request or unavailable-provider warm reuse.
+The live test remains separately opt-in through `ACTIONS_REAL_RCC_ACCEPTANCE=1`.
+The retained opt-in candidate-wheel test expects overall `FAIL` and failed
+offline-warm cells. A passing test verifies that negative contract; it does not
+qualify a successful candidate lifecycle. Preserve those assertions during guard
+reuse and qualify a positive candidate proof separately. Its retained parent
+watchdog is 2465 seconds and the test envelope is 2510 seconds with a 10-second
+cleanup grace. A shorter control gateway does not cover that invocation.
+Keep parent watchdog receipt handling separate from native-mode and trust-profile
+selection. Reusing its reviewed helpers and timeout branch does not require those
+implementations. Review the completed source checkpoint before authoring a separate
+hosted-control commit that pins its commit and tree. The three-case provider control
+does not exercise the candidate-wheel CLI parent's timeout path.
+When refreshing this verifier onto native control changes, compare the committed
+producer-input and selected-test inventories at the merged tree before carrying
+artifact evidence forward. Preserved producer bytes do not change the source
+identity or failed wrapper cell of an older candidate-wheel receipt.
 
 With RCC v18.19.2 `cache serve`, two isolated consumer homes acquired the
 recorded digest through the same provider and each returned the exact digest

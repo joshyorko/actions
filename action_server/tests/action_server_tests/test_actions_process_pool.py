@@ -208,6 +208,52 @@ def test_actions_process_pool_run(actions_process_pool: ActionsProcessPool, tmpd
             assert run_info.result_json.exists()
 
 
+def test_worker_output_callback_errors_remain_visible_without_stopping_dispatch(
+    actions_process_pool: ActionsProcessPool, tmpdir, monkeypatch
+):
+    import time
+
+    action = next(iter(actions_process_pool.actions))
+    package = actions_process_pool.action_package_id_to_action_package[
+        action.action_package_id
+    ]
+    (Path(package.directory) / "action.py").write_text(
+        "from actions import action\n"
+        "@action\n"
+        "def greet(name: str, title='Mr.') -> str:\n"
+        "    print('callback-boundary-1', flush=True)\n"
+        "    print('callback-boundary-2', flush=True)\n"
+        "    return f'Hello {title} {name}.'\n"
+    )
+    seen = []
+    original = ProcessHandle.run_action
+
+    def failing_output(line):
+        if b"callback-boundary-" in line:
+            seen.append(line.strip())
+            raise OSError("private callback failure")
+
+    def run_with_failing_callback(handle, *args, **kwargs):
+        with handle._on_output.register(failing_output):
+            return original(handle, *args, **kwargs)
+
+    monkeypatch.setattr(ProcessHandle, "run_action", run_with_failing_callback)
+    with _create_run(tmpdir, actions_process_pool, action, 1) as run_info:
+        assert run_info.future.result(timeout=10) == 0
+        output = run_info.output_file.read_bytes()
+        assert b"callback-boundary-1" in output
+        assert b"callback-boundary-2" in output
+        assert seen == [b"callback-boundary-1", b"callback-boundary-2"]
+        result = run_info.process_handle.retire(time.monotonic() + 2)
+        assert result.capacity_releasable
+        assert result.readers is not None
+        assert all(item.joined and item.alive is False for item in result.readers)
+        failures = [item for item in result.readers if item.error is not None]
+        assert len(failures) == 1
+        assert failures[0].role == "stdout"
+        assert failures[0].error == "OSError"
+
+
 def test_actions_process_pool_process_crash(
     actions_process_pool: ActionsProcessPool, tmpdir
 ):
