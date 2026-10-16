@@ -4264,3 +4264,14 @@ to completed owned trials after checking process ownership. Do not clear the
 active shared toolchain or another writer's environment. The affected trial is
 failed until rerun successfully with adequate space; a cache cleanup is not a
 passing integration result.
+
+The dedicated backup workflow uploads the unchanged `bundle/` as
+`runtime-release-bundle-<backup-run>-1` and the exact original ZIP/receipt as
+`runtime-release-archive-<backup-run>-1`. Its job has contents/actions read only,
+no package credential and no publication action. It requests90-day retention;
+record actual GitHub `expires_at` values rather than assuming a repository cap.
+Wait for each run to succeed before moving the backup branch, then independently
+verify both artifact digests and every original payload member before recording
+IDs in the reviewed registry. Reseed into a separate run; never rerun an existing
+backup whose artifacts may be needed. The workflow stays off the default/release
+branch to preserve the original source's workflow-tree release constraint.
