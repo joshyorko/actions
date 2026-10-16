@@ -4250,3 +4250,11 @@ to completed owned trials after checking process ownership. Do not clear the
 active shared toolchain or another writer's environment. The affected trial is
 failed until rerun successfully with adequate space; a cache cleanup is not a
 passing integration result.
+
+Recovery qualification must record a freshly dispatched disposable preparation
+separately from the protected owner preparation before any destructive test.
+The qualification helper uses a fixed preparation/validate dispatch allowlist,
+posts each request once and preserves uncertain outcomes. Its receipt records
+the creating controller run/head, explicit disposable purpose, original manifest
+and ZIP digests. A fresh request never reruns or mutates the existing owner
+preparation. Workflow artifacts retain this identification independently.
