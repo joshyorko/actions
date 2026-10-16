@@ -18,7 +18,7 @@ from urllib.request import url2pathname
 
 EXPECTED_CORE = "1.0.2"
 EXPECTED_HELPER = "1.0.3"
-EXPECTED_RUNTIME = "1.0.3"
+EXPECTED_RUNTIME = "1.0.4"
 EXPECTED_PUBLIC_PACKAGES = {
     "actions-core": {
         "version": EXPECTED_CORE,
@@ -292,7 +292,7 @@ def select_runtime_wheel(directory: Path) -> Path:
         candidates.append(wheel)
     if len(candidates) != 1:
         raise ValueError(
-            "Expected exactly one cp312 actions-runtime 1.0.3 wheel in "
+            f"Expected exactly one cp312 actions-runtime {EXPECTED_RUNTIME} wheel in "
             f"{directory}, found {len(candidates)}"
         )
     return candidates[0]

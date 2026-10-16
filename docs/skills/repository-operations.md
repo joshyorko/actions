@@ -1419,7 +1419,12 @@ requires an exact heading such as `## actions-runtime-1.0.3` (a date suffix
 does not match). The selected section runs through the next H1 or H2, includes
 any H3 subsections, and omits its matched heading. The generic `inv set-version`
 helper updates the legacy `action_server/docs/CHANGELOG.md` using a dated H2;
-it does not prepare the dedicated Runtime changelog. The historical
+it does not prepare the dedicated Runtime changelog. A Runtime release bump
+also updates the strict `EXPECTED_RUNTIME` pin in
+`action_server/scripts/verify_published_runtime_floor.py` and the corresponding
+release identity/fixture tests; do not change the public dependency versions,
+registry URLs/digests or wrong-version rejection rules to make that bump pass.
+The historical
 `action_server/docs/CHANGELOG.md` and `action-server-v1.2.x` tags remain a
 separate legacy delivery line. Tagged PyPI runs fail closed when
 `PYPI_TOKEN_ACTIONS_RUNTIME` is absent rather than reporting successful release
