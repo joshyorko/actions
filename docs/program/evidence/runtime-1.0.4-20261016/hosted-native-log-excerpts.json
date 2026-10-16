@@ -1,0 +1,41 @@
+[
+  {
+    "job_id": 117060598253,
+    "source_head": "38b16fc489c48462c4952eec65b9b17572d8958a",
+    "tested_merge": "cc52d97c141c56b843facab0aa4a5d09bebeb9a6",
+    "tested_tree": "59a4f704b3d2db2297460d4e4fcd7447b8ed909e",
+    "matches_candidate_tree": true,
+    "excerpt": [
+      "2026-10-16T15:49:28.3389928Z HEAD is now at cc52d97 Merge 38b16fc489c48462c4952eec65b9b17572d8958a into 670765e35c96871cb0302ba85469120fa196cc8f",
+      "2026-10-16T15:53:54.4172389Z Artifact action-server-native-provenance-windows-2022-38926885898-1.zip successfully finalized. Artifact ID 12056793398",
+      "2026-10-16T15:53:54.4173989Z Artifact action-server-native-provenance-windows-2022-38926885898-1 has been successfully uploaded! Final size is 48920999 bytes. Artifact ID is 12056793398",
+      "2026-10-16T15:55:16.9866088Z 31 passed in 60.23s (0:01:00)",
+      "2026-10-16T15:57:57.4426782Z 2 passed in 88.81s (0:01:28)",
+      "2026-10-16T15:57:58.9366741Z Artifact dakota-workitems-native-windows-2022-38926885898-1.zip successfully finalized. Artifact ID 12056794014",
+      "2026-10-16T15:57:58.9369388Z Artifact dakota-workitems-native-windows-2022-38926885898-1 has been successfully uploaded! Final size is 1576 bytes. Artifact ID is 12056794014",
+      "2026-10-16T15:59:07.9627623Z Artifact native-acceptance-windows-2022-cc52d97c141c56b843facab0aa4a5d09bebeb9a6.zip successfully finalized. Artifact ID 12058001348",
+      "2026-10-16T15:59:07.9632210Z Artifact native-acceptance-windows-2022-cc52d97c141c56b843facab0aa4a5d09bebeb9a6 has been successfully uploaded! Final size is 480809 bytes. Artifact ID is 12058001348",
+      "2026-10-16T15:59:11.0854062Z Artifact action-server-unauthenticated-windows-2022.zip successfully finalized. Artifact ID 12058240851",
+      "2026-10-16T15:59:11.0855898Z Artifact action-server-unauthenticated-windows-2022 has been successfully uploaded! Final size is 53759427 bytes. Artifact ID is 12058240851"
+    ]
+  },
+  {
+    "job_id": 117060598502,
+    "source_head": "38b16fc489c48462c4952eec65b9b17572d8958a",
+    "tested_merge": "cc52d97c141c56b843facab0aa4a5d09bebeb9a6",
+    "tested_tree": "59a4f704b3d2db2297460d4e4fcd7447b8ed909e",
+    "matches_candidate_tree": true,
+    "excerpt": [
+      "2026-10-16T15:54:35.6699220Z HEAD is now at cc52d97 Merge 38b16fc489c48462c4952eec65b9b17572d8958a into 670765e35c96871cb0302ba85469120fa196cc8f",
+      "2026-10-16T15:57:05.9249810Z Artifact action-server-native-provenance-macos-15-38926885898-1.zip successfully finalized. Artifact ID 12056993406",
+      "2026-10-16T15:57:05.9253090Z Artifact action-server-native-provenance-macos-15-38926885898-1 has been successfully uploaded! Final size is 50978020 bytes. Artifact ID is 12056993406",
+      "2026-10-16T15:59:38.3684360Z 2 passed in 60.54s (0:01:00)",
+      "2026-10-16T15:59:40.0883980Z Artifact dakota-workitems-native-macos-15-38926885898-1.zip successfully finalized. Artifact ID 12057826730",
+      "2026-10-16T15:59:40.0885180Z Artifact dakota-workitems-native-macos-15-38926885898-1 has been successfully uploaded! Final size is 1562 bytes. Artifact ID is 12057826730",
+      "2026-10-16T16:00:27.4845580Z Artifact native-acceptance-macos-15-cc52d97c141c56b843facab0aa4a5d09bebeb9a6.zip successfully finalized. Artifact ID 12057587954",
+      "2026-10-16T16:00:27.4861290Z Artifact native-acceptance-macos-15-cc52d97c141c56b843facab0aa4a5d09bebeb9a6 has been successfully uploaded! Final size is 310008 bytes. Artifact ID is 12057587954",
+      "2026-10-16T16:00:30.8363140Z Artifact action-server-unauthenticated-macos-15.zip successfully finalized. Artifact ID 12056779495",
+      "2026-10-16T16:00:30.8364590Z Artifact action-server-unauthenticated-macos-15 has been successfully uploaded! Final size is 58905545 bytes. Artifact ID is 12056779495"
+    ]
+  }
+]

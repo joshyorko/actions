@@ -1,0 +1,24 @@
+{
+  "317": {
+    "repair_members_identical_to_source": {
+      "action_server/src/actions/server/_api_robots.py": true,
+      "action_server/src/actions/server/_robot_artifacts.py": true
+    },
+    "source_head": "dd5ccf3ae76451536012f15e3bf1b1adc728f9eb",
+    "source_tree": "dca41a7f32cc52605decf3829fa0fb379612182d",
+    "tested_pr_merge": "c03d570afad4df7386a996a7ffd9f3fdf97a74e5",
+    "tested_pr_merge_tree": "322a7795fa008f0de9a9d3e1cd1ed5845843245c",
+    "whole_tree_equals_head": false
+  },
+  "320": {
+    "repair_members_identical_to_source": {
+      "action_server/src/actions/server/_api_robots.py": true,
+      "action_server/src/actions/server/_robot_artifacts.py": true
+    },
+    "source_head": "38b16fc489c48462c4952eec65b9b17572d8958a",
+    "source_tree": "59a4f704b3d2db2297460d4e4fcd7447b8ed909e",
+    "tested_pr_merge": "cc52d97c141c56b843facab0aa4a5d09bebeb9a6",
+    "tested_pr_merge_tree": "59a4f704b3d2db2297460d4e4fcd7447b8ed909e",
+    "whole_tree_equals_head": true
+  }
+}

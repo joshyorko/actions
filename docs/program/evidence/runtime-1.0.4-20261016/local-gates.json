@@ -1,0 +1,133 @@
+[
+  {
+    "command": "Doctor",
+    "gateway": "RCC18.19.3 / Poetry2.1.1",
+    "outcome": "PASS",
+    "raw_log_sha256": "989b1af6c9462eda1fcb3307abbfbeb89074e86acdd996dcfb0b81b08f478129",
+    "scope": "Toolchain preparation before the repair; not production-code acceptance",
+    "source_head": "49f259d27454ee8e5c05260f52191b71c32c575e",
+    "summaries": [
+      "RCC developer toolkit checks passed."
+    ]
+  },
+  {
+    "command": "Bootstrap",
+    "gateway": "RCC18.19.3 / Poetry2.1.1",
+    "outcome": "PASS",
+    "raw_log_sha256": "f3682ec010a12aad76e9606bbd43ca05816f7572d04dc051d34b79aa072af641",
+    "scope": "Toolchain preparation before the repair; not production-code acceptance",
+    "source_head": "49f259d27454ee8e5c05260f52191b71c32c575e",
+    "summaries": []
+  },
+  {
+    "command": "ToolkitTest",
+    "gateway": "RCC18.19.3 / Poetry2.1.1",
+    "outcome": "PASS",
+    "raw_log_sha256": "dfb8d6b7d3d1d03fd6198ee62e4c5d2e20398492211ce7e83cb5ed5569de7daa",
+    "scope": "Toolchain preparation before the repair; not production-code acceptance",
+    "source_head": "49f259d27454ee8e5c05260f52191b71c32c575e",
+    "summaries": [
+      "============================= 179 passed in 41.28s ============================="
+    ]
+  },
+  {
+    "command": "poetry run invoke test-not-integration",
+    "gateway": "RCC18.19.3 / Poetry2.1.1",
+    "outcome": "PASS",
+    "raw_log_sha256": "8e76bccd493de02cfe15bc9d2946fc28975482be71dd3e18e06659da7dcced76",
+    "source_head": "dd5ccf3ae76451536012f15e3bf1b1adc728f9eb",
+    "summaries": [
+      "========== 1485 passed, 14 skipped, 16 warnings in 193.81s (0:03:13) ==========="
+    ]
+  },
+  {
+    "command": "poetry run invoke lint",
+    "gateway": "RCC18.19.3 / Poetry2.1.1",
+    "outcome": "PASS",
+    "raw_log_sha256": "1de3c5f1f6ed0643b0be6a5d92508d3be3da4f919ae8d9b550ca8e1c3439709f",
+    "source_head": "dd5ccf3ae76451536012f15e3bf1b1adc728f9eb",
+    "summaries": [
+      "321 files already formatted",
+      "Markdown lint wasn't found in PATH, consider installing and adding it in order to be able to lint package's *.md documents."
+    ]
+  },
+  {
+    "command": "poetry run invoke typecheck",
+    "gateway": "RCC18.19.3 / Poetry2.1.1",
+    "outcome": "PASS",
+    "raw_log_sha256": "40e547d0375f52e416f1aca2fdadfd0cd404125ce94ff008cf5c59adc7405edc",
+    "source_head": "dd5ccf3ae76451536012f15e3bf1b1adc728f9eb",
+    "summaries": [
+      "Success: no issues found in 359 source files"
+    ]
+  },
+  {
+    "command": "Doctor",
+    "gateway": "RCC18.19.3 / Poetry2.1.1",
+    "outcome": "PASS",
+    "raw_log_sha256": "079765b46c20806c96aa2478618ff8d105ba910be1c83d729bc4fec33fc6f3be",
+    "source_head": "38b16fc489c48462c4952eec65b9b17572d8958a",
+    "summaries": [
+      "RCC developer toolkit checks passed."
+    ]
+  },
+  {
+    "command": "Bootstrap",
+    "gateway": "RCC18.19.3 / Poetry2.1.1",
+    "outcome": "PASS",
+    "raw_log_sha256": "7b4d401443c6029f83a1a58791fc28a6a0c397825361ab484c5d7eee94af7128",
+    "source_head": "38b16fc489c48462c4952eec65b9b17572d8958a",
+    "summaries": []
+  },
+  {
+    "command": "ToolkitTest",
+    "gateway": "RCC18.19.3 / Poetry2.1.1",
+    "outcome": "PASS",
+    "raw_log_sha256": "43dcb69347a9b5480a04ba257568885254d9846a0b36b37f44226a297eaf8e94",
+    "source_head": "38b16fc489c48462c4952eec65b9b17572d8958a",
+    "summaries": [
+      "============================= 179 passed in 55.33s ============================="
+    ]
+  },
+  {
+    "command": "poetry run invoke test-not-integration",
+    "gateway": "RCC18.19.3 / Poetry2.1.1",
+    "outcome": "PASS",
+    "raw_log_sha256": "9280bda1cf766fe5f261b55697588ddd6aaf7732de4855545fd47449cb0425b8",
+    "source_head": "38b16fc489c48462c4952eec65b9b17572d8958a",
+    "summaries": [
+      "========== 1526 passed, 15 skipped, 16 warnings in 165.33s (0:02:45) ==========="
+    ]
+  },
+  {
+    "command": "poetry run invoke lint",
+    "gateway": "RCC18.19.3 / Poetry2.1.1",
+    "outcome": "PASS",
+    "raw_log_sha256": "5f7c609702e4d270c58dbfb26007abaf3441d7ca9dc432da1d209951c77776db",
+    "source_head": "38b16fc489c48462c4952eec65b9b17572d8958a",
+    "summaries": [
+      "323 files already formatted",
+      "Markdown lint wasn't found in PATH, consider installing and adding it in order to be able to lint package's *.md documents."
+    ]
+  },
+  {
+    "command": "poetry run invoke typecheck",
+    "gateway": "RCC18.19.3 / Poetry2.1.1",
+    "outcome": "PASS",
+    "raw_log_sha256": "fedc34e3751e1e1d1c6216c843d685ef4bc6effa8359058a7cfe0e570c300afb",
+    "source_head": "38b16fc489c48462c4952eec65b9b17572d8958a",
+    "summaries": [
+      "Success: no issues found in 361 source files"
+    ]
+  },
+  {
+    "command": "poetry run pytest focused inputs/artifacts/lifecycle/storage with ACTIONS_ROBOT_INPUT_RCC",
+    "gateway": "RCC18.19.3 / Poetry2.1.1",
+    "outcome": "PASS",
+    "raw_log_sha256": "3ac43a48b44c9bfc7f002ac9d75359d15090c5e813d0c82a85bce4e674761816",
+    "source_head": "38b16fc489c48462c4952eec65b9b17572d8958a",
+    "summaries": [
+      "180 passed, 1 skipped in 65.34s (0:01:05)"
+    ]
+  }
+]

@@ -11,6 +11,12 @@ not admit either repair to the frozen Runtime 1.0.3 campaign.
 | Separate staging base, unchanged | `670765e35c96871cb0302ba85469120fa196cc8f` |
 | Combined tree | `59a4f704b3d2db2297460d4e4fcd7447b8ed909e` |
 
+`hosted-source-identity.json` distinguishes source heads from GitHub merge
+checkouts. #317 is tested as `c03d570a` with staging-base changes; both repaired
+production modules have identical blobs to #317. #320 is tested as `cc52d97c`
+with a whole tree exactly equal to its source head. Native completed-job log
+excerpts bind that checkout to the retained artifact IDs.
+
 The candidate contains normal local merges of both repairs onto the separate
 1.0.4 staging base. Its GitHub PR merge tree equals its source tree. No existing
 PR was merged, no integration base was advanced, and no release/tag/template was
@@ -64,7 +70,7 @@ worktrees; each ToolkitTest ran 179 tests.
 | Clean install dependency check | PASS; published Core 1.0.2, HTTP helper 1.0.3, Work Items 0.4.4 |
 | Template08 A / B / C | PASS / PASS / PASS |
 | Authenticated process-restart retrieval | PASS; all 26 artifacts unchanged |
-| Hosted full/native gates | See `hosted-ci.json`; pending at initial evidence push |
+| Hosted full/native gates | Both heads: native-build, wheel/sdist, Work Items and audit PASS; full tests/toolkit still running at this checkpoint; see `hosted-ci.json` |
 
 The combined focused command was:
 
@@ -128,6 +134,10 @@ were checked for every artifact. Then the first Runtime exited, its original
 robot path was renamed out of reach, and a new process reopened the same datadir
 and database. All 26 artifact names/hashes, statuses, full bytes, ranges and
 selected text payloads were verified again. See `restart-retrieval.json`.
+
+All execution in this campaign used the selected Cloud Linux environment or
+GitHub-hosted runners. Existing CI harness/artifact names containing `dakota`
+are historical labels; no Dakota or Devsy machine was accessed.
 
 Public evidence contains fixed-fixture workload files, curated receipts and
 sanitized summaries only. Machine paths use named roots. Homes, credentials,

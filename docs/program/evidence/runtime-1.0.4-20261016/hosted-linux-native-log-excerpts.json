@@ -1,0 +1,26 @@
+{
+  "job_id": 117060598448,
+  "source_head": "38b16fc489c48462c4952eec65b9b17572d8958a",
+  "tested_merge": "cc52d97c141c56b843facab0aa4a5d09bebeb9a6",
+  "tested_tree": "59a4f704b3d2db2297460d4e4fcd7447b8ed909e",
+  "matches_candidate_tree": true,
+  "excerpt": [
+    "2026-10-16T15:56:12.3370387Z HEAD is now at cc52d97 Merge 38b16fc489c48462c4952eec65b9b17572d8958a into 670765e35c96871cb0302ba85469120fa196cc8f",
+    "2026-10-16T15:56:48.1896631Z 59 passed, 2 skipped in 6.67s",
+    "2026-10-16T15:56:50.5794467Z 42 passed in 0.84s",
+    "2026-10-16T15:56:52.7281604Z 60 passed in 0.56s",
+    "2026-10-16T15:58:16.9065308Z Artifact action-server-native-provenance-ubuntu-22.04-38926885898-1.zip successfully finalized. Artifact ID 12058016187",
+    "2026-10-16T15:58:16.9066933Z Artifact action-server-native-provenance-ubuntu-22.04-38926885898-1 has been successfully uploaded! Final size is 59625417 bytes. Artifact ID is 12058016187",
+    "2026-10-16T15:59:13.2156294Z Artifact canvas-query-candidate-38926885898-1.zip successfully finalized. Artifact ID 12056629789",
+    "2026-10-16T15:59:13.2157295Z Artifact canvas-query-candidate-38926885898-1 has been successfully uploaded! Final size is 2065 bytes. Artifact ID is 12056629789",
+    "2026-10-16T15:59:45.5857471Z 31 passed in 29.66s",
+    "2026-10-16T16:00:21.9970007Z 31 passed in 32.54s",
+    "2026-10-16T16:01:17.7803925Z 2 passed in 53.54s",
+    "2026-10-16T16:01:19.0396209Z Artifact dakota-workitems-native-ubuntu-22.04-38926885898-1.zip successfully finalized. Artifact ID 12057637671",
+    "2026-10-16T16:01:19.0397948Z Artifact dakota-workitems-native-ubuntu-22.04-38926885898-1 has been successfully uploaded! Final size is 1559 bytes. Artifact ID is 12057637671",
+    "2026-10-16T16:02:02.4225050Z Artifact native-acceptance-ubuntu-22.04-cc52d97c141c56b843facab0aa4a5d09bebeb9a6.zip successfully finalized. Artifact ID 12057602825",
+    "2026-10-16T16:02:02.4226874Z Artifact native-acceptance-ubuntu-22.04-cc52d97c141c56b843facab0aa4a5d09bebeb9a6 has been successfully uploaded! Final size is 317189 bytes. Artifact ID is 12057602825",
+    "2026-10-16T16:02:09.9411109Z Artifact action-server-unauthenticated-ubuntu-22.04.zip successfully finalized. Artifact ID 12056809396",
+    "2026-10-16T16:02:09.9412062Z Artifact action-server-unauthenticated-ubuntu-22.04 has been successfully uploaded! Final size is 78061235 bytes. Artifact ID is 12056809396"
+  ]
+}
