@@ -1,0 +1,33 @@
+{
+  "candidate_repository": "actions/upload-artifact",
+  "owner": "GitHub Actions",
+  "consumed_revision": "ea165f8d65b6e75b540449e92b4886f43607fa02",
+  "classification": "Observed external artifact lifecycle limit; existing report. The local guide overstated recovery. No new upstream implementation defect confirmed.",
+  "evidence": {
+    "rehearsal_run_id": 38951953388,
+    "attempt_1_conclusion": "success",
+    "original_artifact_id": 12069241955,
+    "attempt_2_conclusion": "failure; rebuild refused before upload",
+    "post_rerun_artifact_listing": [],
+    "original_artifact_direct_lookup": "HTTP404",
+    "original_attempt_api": "success"
+  },
+  "deduplication": {
+    "issues": [
+      "repo:actions/upload-artifact rerun artifacts",
+      "repo:actions/runner rerun artifacts deleted"
+    ],
+    "pull_requests": [
+      "repo:actions/upload-artifact rerun artifacts",
+      "repo:actions/runner rerun artifacts"
+    ],
+    "existing_report": "https://github.com/actions/upload-artifact/issues/323",
+    "existing_report_state": "open",
+    "discussion_reference": "https://github.com/actions/upload-artifact/issues/323#issuecomment-2786789065"
+  },
+  "disposition": "Linked existing report; no upstream issue/comment/source mutation. Local documentation correction is draft PR324.",
+  "follow_up_trigger": "Verify a future documented retention/recovery capability against actual full-rerun artifact retrieval before promising recovery.",
+  "downstream_gate": "Original preparation artifact retrieval after all-jobs rerun FAILED; owner preparation38951733318 untouched.",
+  "temporary_mitigation": "Preserve original successful preparation and independently downloaded bundle; retry publication only with original inputs while original artifact remains. Current button cannot import a lost-artifact backup.",
+  "remaining_uncertainty": "GitHub service implementation and any future retention guarantee; no live partial publication was attempted."
+}

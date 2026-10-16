@@ -3,13 +3,19 @@
     "tested_merge": "135e3126eb8e04fd1d13d3841a98bad7f3a168f3",
     "tree": "c426aad8258a61da8dbf592696ea37a5499e5bb4",
     "complete_tree_matches_qualified_head": true,
-    "preserved_ref": "refs/heads/qualification/runtime-1.0.4-pr321-9e8cfd7c"
+    "preserved_ref": "refs/heads/qualification/runtime-1.0.4-pr321-9e8cfd7c",
+    "normal_merge": "70b5cbfe97535615f69feef8e90a5c07b058858e",
+    "merged_at": "2026-10-16T18:58:59Z",
+    "merge_tree_matches_qualified_head": true
   },
   "322": {
     "tested_merge": "f021b68812602145478309ce305075242a49b89a",
     "tree": "c426aad8258a61da8dbf592696ea37a5499e5bb4",
     "complete_tree_matches_qualified_head": true,
-    "preserved_ref": "refs/heads/qualification/runtime-1.0.4-pr322-9e8cfd7c"
+    "preserved_ref": "refs/heads/qualification/runtime-1.0.4-pr322-9e8cfd7c",
+    "normal_merge": "d222f94edca26953c1506ab258adc458ded17c56",
+    "merged_at": "2026-10-16T18:59:42Z",
+    "merge_tree_matches_qualified_head": true
   },
   "qualified_head": "9e8cfd7caa602031db4eba75f545b1211f882561",
   "qualified_tree": "c426aad8258a61da8dbf592696ea37a5499e5bb4",
@@ -18,5 +24,10 @@
   "button_bulk_pr": 323,
   "button_bulk_normal_merge": "87acac608dca272d0f9f11956717e7a21ee3e7cf",
   "qualification_helper_branch": "qualification/runtime-release-button-20261016",
-  "qualification_helper_paused_head": "8d452c186c26a27a67f8247457275f3046730aa8"
+  "qualification_helper_paused_head": "8d452c186c26a27a67f8247457275f3046730aa8",
+  "qualification_helper_active_head": "2baf0b544344017a1ff9cb48c257dd50f61eb41c",
+  "qualification_helper_run_id": 38953832412,
+  "initial_helper_run_id": 38951701437,
+  "retention_documentation_draft_pr": 324,
+  "retention_documentation_draft_head": "6e2b050167bd1607757f211d51d13a274195d2bf"
 }

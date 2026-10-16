@@ -25,6 +25,11 @@
       "result": "B/restart PASS;26 artifacts",
       "retained_log_basename": "runtime104-ready-template-b.log",
       "raw_log_sha256": "e4bf3412f728781dff223ead0175115faaa4c8955ba2e48df10a75bbbcf32b8b"
+    },
+    "isolated_qualification_helper": {
+      "result": "8 tests, Ruff and format PASS",
+      "raw_log_sha256": "4100851be51dda79e312feedf6758c3210f345000d96865d2c82208d9adda79e",
+      "retained_log_basename": "runtime104-helper-final-green.log"
     }
   },
   "historical_runtime_baseline": "1544 passed/15 skipped at14b1c0b9; Runtime production/test/build/frontend/lock inputs unchanged through9e8cfd7c. Final hosted full source checks are independent."

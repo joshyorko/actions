@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   qualify:
-    if: github.repository == 'joshyorko/actions' && github.ref == 'refs/heads/qualification/runtime-release-button-20261016' && false
+    if: github.repository == 'joshyorko/actions' && github.ref == 'refs/heads/qualification/runtime-release-button-20261016'
     runs-on: ubuntu-22.04
     timeout-minutes: 45
     steps:
@@ -24,7 +24,8 @@ jobs:
       - name: Exercise preparation and read-only validation only
         env:
           GH_TOKEN: ${{ github.token }}
-          EXPECTED_SOURCE_SHA: REPLACE_WITH_QUALIFIED_COMMUNITY_MERGE
+          EXPECTED_SOURCE_SHA: 'd222f94edca26953c1506ab258adc458ded17c56'
+          QUALIFICATION_RESUME_REPORT: scripts/runtime104_qualification_resume.json
         run: python scripts/qualify_runtime_release_button.py
       - name: Retain qualification report and independently hashed manifests
         if: always()

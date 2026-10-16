@@ -4210,12 +4210,20 @@ acceptance ZIP from the hosted producer was independently observed to match its
 GitHub digest; do not downgrade a mismatch to a warning or extract first.
 
 Publication validates the preparation's original successful **attempt**, rather
-than its mutable latest-run status. GitHub's rerun operation updates that status
-even when the controller immediately refuses to rebuild on attempt2. The named
-`-1` artifact and reviewed manifest remain fixed; an accidental refused rerun
-must not invalidate recovery of a PyPI prefix or native draft already owned by
-the original bundle. The run-attempt API still must prove canonical workflow,
-community controller SHA, exact attempt number and successful conclusion.
+than its mutable latest-run status. This check is necessary but does not preserve
+its artifact. A hosted all-jobs rerun was observed to remove the original artifact
+before the controller refused attempt2; direct artifact lookup then returned404.
+The existing upstream report is [actions/upload-artifact#323](https://github.com/actions/upload-artifact/issues/323).
+Therefore **never rerun preparation**, even when the rebuild guard will refuse
+it. Preserve the original successful run and independently downloaded bundle
+before publication. Retry publication with the same original inputs while that
+original artifact remains available. If preparation is rerun or its artifact is
+lost after partial publication, stop: the current button cannot restore it from
+a local backup, and rebuilding/substituting a different preparation is unsafe.
+Owner-reviewed artifact recovery support would be required; do not weaken digest,
+source, run or ownership checks to bypass the missing artifact. Before publication
+has begun, a fresh preparation may be reviewed separately. An original-attempt
+API success alone is not evidence that the bundle is still downloadable.
 
 Only `joshyorko` may enter the publication writer: both the original actor and
 triggering actor (including reruns) must be Josh. A read-only preflight rejects
@@ -4247,12 +4255,19 @@ negative/rerun controls. This permits qualification through the existing
 connected GitHub app when a shell credential has expired, without transferring
 credentials or changing repository security settings.
 
-A local platform-tagged Runtime wheel used for functional acceptance is separate
-from the portable release matrix. Record its exact filename/hash, compare every
-installed Runtime member (including generated non-Python assets) with the wheel,
-and compare tracked Python members with the named Git source. Qualify the
-canonical seven-distribution inventory independently. Preserve source versus
-tested-merge identities even when complete trees match. Evidence branches can
-contain additional reports/harnesses; never substitute their HEAD as the builder
-or release source. Preserve exact CI checkout commits on qualification refs
-before closing a PR when later preparation must retrieve their provenance.
+The qualification helper captures job logs for marker checks rather than printing
+them to a terminal. The [GitHub CLI API reference](https://cli.github.com/manual/gh_api)
+documents the explicit escape-sequence flag. Current GitHub CLI refuses text containing terminal escapes
+unless `gh api --allow-escape-sequences` is explicit. Use it only with captured
+output, strip CSI and control bytes before parsing, and never render the raw
+response. A bounded read retry may handle transient log availability but cannot
+repair that deterministic CLI refusal. The hosted error distinguishes these
+cases; do not guess from a subprocess exit code alone.
+
+A reporting failure after accepted preparation/rerun writes does not authorize
+repeating those writes. Resume from the retained report, independently verify
+each original successful attempt and still-available immutable artifact/manifest
+digest, then run only missing read-only validations. A lost rehearsal artifact
+remains an explicit failed recovery gate while independent owner-bundle checks
+continue. Keep the original failed helper receipt. Recovery never changes the
+release source or rebuilds an admitted bundle.

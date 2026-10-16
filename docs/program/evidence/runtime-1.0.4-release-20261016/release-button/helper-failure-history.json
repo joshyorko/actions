@@ -1,0 +1,30 @@
+{
+  "release_source_unchanged": "d222f94edca26953c1506ab258adc458ded17c56",
+  "owner_preparation_unchanged": 38951733318,
+  "preparation_writes_repeated": false,
+  "publication_performed": false,
+  "failed_helper_runs": [
+    {
+      "run_id": 38951701437,
+      "head": "8c73c8bc59a662a33c8ac8c443308d402355c846",
+      "failure": "subprocess job-log read exit1; original stderr was captured but not printed",
+      "known_completed": "both preparations successful; rehearsal rerun2 accepted and refused; no validations dispatched"
+    },
+    {
+      "run_id": 38952640028,
+      "head": "21a0d4d9dc224dc815974738f1b33301efd13513",
+      "failure": "original preparation artifact absent/ambiguous/expired",
+      "root_evidence": "rehearsal artifact12069241955 removed after all-jobs rerun; direct lookup404, empty run artifact list; owner artifact remains",
+      "known_completed": "original owner bundle reverified; original successful rehearsal attempt identity reverified; no writes repeated"
+    },
+    {
+      "run_id": 38953148120,
+      "head": "776e8a70f6622f72fce9295f512d91b6d07478a8",
+      "failure": "job117145873045 logs unavailable after bounded reads: the response contains terminal escape sequences; pass --allow-escape-sequences to output it anyway",
+      "root_evidence": "deterministic GitHub CLI text-output protection; bounded availability retries cannot repair it",
+      "repair": "capture log text without terminal rendering, explicitly permit capture, strip CSI/control bytes before parsing; regression red/green and8helpertests pass",
+      "known_completed": "original owner bundle reverified; missing rehearsal recorded as failed gate; no writes repeated"
+    }
+  ],
+  "external_recovery_gate": "FAILED; unchanged by independent owner-bundle validations"
+}

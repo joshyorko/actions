@@ -22,7 +22,7 @@
     "whole GitHub artifact ZIP digest before bounded safe extraction",
     "native source/platform/architecture, binary and dual acceptance/history digest binding",
     "read-only validation never adopts a hidden private draft",
-    "original successful preparation attempt remains valid after a refused accidental rerun",
+    "original successful attempt metadata is verified independently of latest status; artifact availability is separately required and is lost on full preparation rerun",
     "only Josh as original and triggering actor can enter or rerun publication writer",
     "immutable owned draft/tag/assets; exact existing digest/size checks and only missing uploads",
     "no automatic retry after an uncertain external write; original-bundle convergence and completed no-op",
@@ -45,21 +45,67 @@
   ],
   "deliberately_unrun": [
     "final package/tag/native release publication",
-    "template/deployment/Homebrew dispatch"
+    "template/deployment/Homebrew dispatch",
+    "actual live partial-publication recovery"
   ],
-  "remaining_qualification": [
-    "actual default-branch preparation/validation and safe-rerun controls, pending approved promotion"
-  ],
+  "remaining_qualification": [],
   "material_limits": [
     "native manual route refuses any configured signing credential; currently consumes qualified unsigned producers only",
-    "cross-service publication is not atomic; original-bundle retries must finish a possible PyPI prefix while native stays a draft"
+    "cross-service publication is not atomic; original-bundle retries must finish a possible PyPI prefix while native stays a draft",
+    "A full preparation rerun deletes its original GitHub artifact before the controller refuses rebuilding. The original-attempt API guard does not preserve bytes. Never rerun preparation; missing-artifact recovery is unsupported by the current button. Draft PR324 corrects the guide."
   ],
-  "merge_blocker": {
-    "action": "normal merge PR321",
-    "target": "integration/runtime-1.0.4-robot-fixes",
-    "outcome": "denied by automatic approval review; known not executed",
-    "reason": "initial restriction on merging draft work without further approval",
-    "follow_up": "explicit approval requested for normal merges321 and322 at9e8cfd7c; response pending",
-    "community_merge_322": "not attempted"
-  }
+  "merge_outcomes": {
+    "prior_denial": "known unexecuted; resolved by fresh explicit numbered approval from Josh",
+    "321": "70b5cbfe97535615f69feef8e90a5c07b058858e",
+    "322": "d222f94edca26953c1506ab258adc458ded17c56",
+    "both_trees_match_qualified_source": true
+  },
+  "failed_gates": [
+    {
+      "gate": "artifact retrieval after full preparation rerun",
+      "run_id": 38951953388,
+      "original_artifact_id": 12069241955,
+      "outcome": "FAILED; original artifact deleted; direct lookup HTTP404",
+      "reason": "external GitHub artifact lifecycle limit",
+      "original_owner_preparation_available": 38951733318,
+      "documentation_correction_pr": 324
+    }
+  ],
+  "actual_button_gates": {
+    "owner_preparation": {
+      "run_id": 38951733318,
+      "attempt": 1,
+      "conclusion": "success"
+    },
+    "first_owner_validation": {
+      "run_id": 38953955933,
+      "conclusion": "success",
+      "publish_job": "skipped"
+    },
+    "missing_artifact_validation": {
+      "run_id": 38953883654,
+      "conclusion": "failure as expected",
+      "marker": "Artifact not found for name: runtime-release-bundle-38951953388-1",
+      "publish_job": "skipped"
+    },
+    "owner_validation_repeat": {
+      "run_id": 38954043063,
+      "conclusion": "success",
+      "publish_job": "skipped"
+    },
+    "wrong_reviewed_digest": {
+      "run_id": 38954149205,
+      "conclusion": "failure as expected",
+      "marker": "reviewed manifest digest mismatch",
+      "publish_job": "skipped"
+    },
+    "isolated_helper": {
+      "run_id": 38953832412,
+      "head": "2baf0b544344017a1ff9cb48c257dd50f61eb41c",
+      "conclusion": "failure; retains failed external artifact-retrieval gate",
+      "owner_bundle_qualified": true,
+      "preparation_writes_repeated": false
+    }
+  },
+  "remaining_decision": "Josh chooses final publication with preserved original preparation and known artifact-retention limit, or requires a separately reviewed durable recovery extension first."
 }

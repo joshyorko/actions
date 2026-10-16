@@ -1,0 +1,151 @@
+{
+  "controller_sha": "d222f94edca26953c1506ab258adc458ded17c56",
+  "files": {
+    "evidence/actions_core_tests.yml.json": {
+      "sha256": "a749c4da1aeb91b1b18ffa82bec8f5372bd22331faf0c1dc78d0816b87804a68",
+      "size": 1336
+    },
+    "evidence/actions_runtime_pypi_release.yml.json": {
+      "sha256": "132d0ce174f39b7eab42bda4b89ea5cc176a2699cb143a2a04264106c06ebcd6",
+      "size": 1549
+    },
+    "evidence/actions_runtime_tests.yml.json": {
+      "sha256": "a5eb98081824c4bcf2eaf9f81d9c2b37707022c9c8180bbcf151f480dcb11269",
+      "size": 1137
+    },
+    "evidence/ai-audit.yml.json": {
+      "sha256": "0a017e4ac7db04d90a6eb3e30311c83575fa063fbb6cffa840ea370bb4c90086",
+      "size": 668
+    },
+    "evidence/coverage-gate.yml.json": {
+      "sha256": "daec8a29560e2e19f82ba8e2571209f822fb5086dc5a85dd7c42428128e7f401",
+      "size": 676
+    },
+    "evidence/developer_toolkit.yml.json": {
+      "sha256": "9885bc52c1eab797d543f71a13b244b1a30d26a0bd834410f57b8821da09e19f",
+      "size": 2207
+    },
+    "evidence/frontend-build-unauthenticated.yml.json": {
+      "sha256": "911869188bdaf9d169da79f21eb076e635015a2a823d1c0d79b1acd33500aaa7",
+      "size": 1238
+    },
+    "evidence/github-artifacts.json": {
+      "sha256": "969f6b0d3b252e2a5805df521b0b522499c963990cbdf670e986993a1d052572",
+      "size": 3195
+    },
+    "evidence/http_helper_tests.yml.json": {
+      "sha256": "519ffe7ceaeb84f1ab95f760e3089a2590005d7cfc9f7a0d93ccbffcc5ec9819",
+      "size": 1133
+    },
+    "evidence/macos-15-manifest.json": {
+      "sha256": "763cb05df9949390dbd7596ee07c2eae577042df4101a50d07f795c84c329707",
+      "size": 3151
+    },
+    "evidence/macos-15-native-acceptance.json": {
+      "sha256": "6ac085f9b24286d42c73d79c06bf34dc4ce49a1bd316f7f4b42118484848fbff",
+      "size": 3537
+    },
+    "evidence/macos-15-native-history.json": {
+      "sha256": "c72e5d96c4c6188cebffe563f397e719eec0379a75b8c3579af0f4931c398b92",
+      "size": 1686
+    },
+    "evidence/package-Linux.json": {
+      "sha256": "39b21d48fe63bc4d0f2c51230cf82bca9efd54189ba4b94c17335211bb1123d8",
+      "size": 662
+    },
+    "evidence/package-Windows.json": {
+      "sha256": "4dad23685ca03f9f372584ddd41230aa7e01d4b259c0059dd71eb0e09331e328",
+      "size": 530
+    },
+    "evidence/package-macOS.json": {
+      "sha256": "287b64dab1814f6c431b36f7c9cd7bdb72219f3cde6be251e80351c377e520bb",
+      "size": 534
+    },
+    "evidence/package-sdist.json": {
+      "sha256": "91de7d0efda73a14f21a474b448c8c263d1ace54bd1b27df279a54de6bb3ee84",
+      "size": 376
+    },
+    "evidence/ubuntu-22.04-manifest.json": {
+      "sha256": "b799f41758f8c9fa6a09c62fba139cc9e9e8f0d0af5eaf370c781af58855ea26",
+      "size": 3162
+    },
+    "evidence/ubuntu-22.04-native-acceptance.json": {
+      "sha256": "3ac54a7c03eab86603bca48e40b3cb88cd2072c91d01ddb45398e45c8902d599",
+      "size": 3537
+    },
+    "evidence/ubuntu-22.04-native-history.json": {
+      "sha256": "184b01790ba92aac4d7f713fe6c6eeb566463a0bedbf1ab3beeefc92a3af9432",
+      "size": 1686
+    },
+    "evidence/windows-2022-manifest.json": {
+      "sha256": "73d7d75e6bac3a30efdba96d47502be36e5dc5dbfdfe6201bc68bb1739492f14",
+      "size": 3246
+    },
+    "evidence/windows-2022-native-acceptance.json": {
+      "sha256": "be4733b24fc374bfe638762edd27c9e86d761b5957da915c0d0d0a4777b3945b",
+      "size": 3670
+    },
+    "evidence/windows-2022-native-history.json": {
+      "sha256": "773f1bd0e0f5c2c234cdaa35df5621ecc3c24b5d21d89abe49666decb9fa4566",
+      "size": 1762
+    },
+    "native/actions-runtime-1.0.4-linux64": {
+      "sha256": "d3c450a2b10b226613588cc40cc6ec18873b23c7427958b0752711e4531a1de4",
+      "size": 82259802
+    },
+    "native/actions-runtime-1.0.4-macos-arm64": {
+      "sha256": "cd4a4e93a17b54fbbb085e97ae136d98f0520453c262150ca0903fa73cc0959f",
+      "size": 62804066
+    },
+    "native/actions-runtime-1.0.4-sha256.txt": {
+      "sha256": "8882a0e22fc92c271290a113f2fe436ef610ee5f4393b46429d6a513b01c1e6a",
+      "size": 298
+    },
+    "native/actions-runtime-1.0.4-windows64.exe": {
+      "sha256": "0111026e5ff739f364b40c74daab57cc391f061be432396ffa86282d616bc6d7",
+      "size": 57892352
+    },
+    "pypi/actions-runtime-manifest.sha256": {
+      "sha256": "2d9f0b40436d5cd4a94ed1a06cae10f0fd4f682dba831298f031f250307e6d4d",
+      "size": 939
+    },
+    "pypi/actions_runtime-1.0.4-cp312-cp312-macosx_12_0_arm64.whl": {
+      "sha256": "5b2a1bf8b32473d9a5ae2798f7389320f2236da4b8f0e5b70613cda9d74aaa8f",
+      "size": 13540563
+    },
+    "pypi/actions_runtime-1.0.4-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+      "sha256": "ab0925ddfbc804d4790b5bd839461310b851c3dedf5f4781e4b4c8472bcf5eba",
+      "size": 14444908
+    },
+    "pypi/actions_runtime-1.0.4-cp312-cp312-win_amd64.whl": {
+      "sha256": "bc6c426f1634a4fcd6a3dee1570ec079b65cfd64acd94c1b206744977ca3fd7f",
+      "size": 11895173
+    },
+    "pypi/actions_runtime-1.0.4-cp313-cp313-macosx_12_0_arm64.whl": {
+      "sha256": "12a23994cb20f71e3b886b160eaf2375b5aa41cbe9801734bf1077c210ee8298",
+      "size": 13540563
+    },
+    "pypi/actions_runtime-1.0.4-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+      "sha256": "f87dacccffd82066d5a2ecbad07ee825ad9fcab75af73c5500c1858c8e0f620b",
+      "size": 14444908
+    },
+    "pypi/actions_runtime-1.0.4-cp313-cp313-win_amd64.whl": {
+      "sha256": "3e464609d66bb29a2008fdaf5a63dac94e1f70b9c0a9bfede6915a8d65355b68",
+      "size": 11895174
+    },
+    "pypi/actions_runtime-1.0.4.tar.gz": {
+      "sha256": "ad6a88dabd10b0e3ac00d747697c0a9f77ee9b98d431709c48cc08a6e6ddc716",
+      "size": 1285470
+    }
+  },
+  "native_signing": "unsigned; all signing credentials required absent by preparation workflow",
+  "preparation_run_attempt": 1,
+  "preparation_run_id": 38951733318,
+  "qualification_sha": "9e8cfd7caa602031db4eba75f545b1211f882561",
+  "release_notes": "- Forward ordinary string inputs only through the selected trusted Robot task's\n  explicit `inputEnvironment` declaration. Reject undeclared/protected names and\n  bounded input failures before Run, counter or artifact admission; retain\n  Runtime Work Item controls and private temporary task environments.\n- Retain bounded snapshots of the configured Robot `artifactsDir` after task\n  success or failure. Preserve workload names, authenticated downloads and HTTP\n  ranges, and retrieval after source removal and Runtime database restart.\n- Correct Windows pathname/descriptor timestamp comparisons without weakening\n  identity, mutation, portable-name, link/reparse, hardlink or collection-limit\n  checks. Retain already admitted complete files and private collection errors.\n- Carry forward the accepted 1.0.3 static-path namespace and streamed Robot form\n  guards. Keep declared dependency floors and bundled RCC 18.19.3 unchanged.\n\nSnapshots require trusted source namespaces and may include pre-existing files;\nthey do not promise an atomic tree or exclusive invocation attribution.",
+  "repository": "joshyorko/actions",
+  "schema_version": 1,
+  "source_sha": "d222f94edca26953c1506ab258adc458ded17c56",
+  "tree": "c426aad8258a61da8dbf592696ea37a5499e5bb4",
+  "version": "1.0.4"
+}

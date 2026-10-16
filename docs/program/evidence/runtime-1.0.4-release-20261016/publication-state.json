@@ -1,5 +1,5 @@
 {
-  "observed_at": "2026-10-16 18:46:47 UTC",
+  "observed_at": "2026-10-16T19:21:58.448240+00:00",
   "runtime_1_0_3": {
     "tag_object": "f5b8b14abb8bf35c8abba4701ccb2007e5f6fbbe",
     "tag_commit": "20ccdae585b621a02080f545808fb3036f656e58",
@@ -30,12 +30,18 @@
   "runtime_1_0_4": {
     "tag_present": false,
     "native_release_present": false,
-    "publication_performed_by_this_task": false
+    "publication_performed_by_this_task": false,
+    "public_release_visible": false
   },
   "pypi": {
-    "observed_at": "2026-10-16T18:46:48.044851+00:00",
+    "observed_at": "2026-10-16T19:21:21.660323+00:00",
     "latest": "1.0.3",
     "version_1_0_3_present": true,
     "version_1_0_4_present": false
+  },
+  "preserved_refs": {
+    "community_release_source": "d222f94edca26953c1506ab258adc458ded17c56",
+    "runtime104_staging": "70b5cbfe97535615f69feef8e90a5c07b058858e",
+    "frozen103_branch": "8b26cb60b1a6caf7011baded4a4005d6df663bb5"
   }
 }

@@ -1,0 +1,190 @@
+{
+  "status": "FAILED",
+  "source_sha": "d222f94edca26953c1506ab258adc458ded17c56",
+  "qualification_sha": "9e8cfd7caa602031db4eba75f545b1211f882561",
+  "version": "1.0.4",
+  "dispatches": [
+    {
+      "label": "missing-rerun-artifact-fails-closed",
+      "workflow": "runtime-release-publish.yml",
+      "inputs": {
+        "operation": "validate",
+        "preparation_run_id": "38951953388",
+        "source_sha": "d222f94edca26953c1506ab258adc458ded17c56",
+        "expected_version": "1.0.4",
+        "manifest_sha256": "558e6b1898e736a1c5b1e02b3f21cc016dba1e3a12509d4659976900c3ce86cb"
+      },
+      "outcome": "run located",
+      "run_id": 38953883654,
+      "html_url": "https://github.com/joshyorko/actions/actions/runs/38953883654"
+    },
+    {
+      "label": "owner-validation-first",
+      "workflow": "runtime-release-publish.yml",
+      "inputs": {
+        "operation": "validate",
+        "preparation_run_id": "38951733318",
+        "source_sha": "d222f94edca26953c1506ab258adc458ded17c56",
+        "expected_version": "1.0.4",
+        "manifest_sha256": "1a77f6c8e09869d6bd45df1b14e6a9ce3f908bcf09351b76cee26a209504878a"
+      },
+      "outcome": "run located",
+      "run_id": 38953955933,
+      "html_url": "https://github.com/joshyorko/actions/actions/runs/38953955933"
+    },
+    {
+      "label": "owner-validation-repeat",
+      "workflow": "runtime-release-publish.yml",
+      "inputs": {
+        "operation": "validate",
+        "preparation_run_id": "38951733318",
+        "source_sha": "d222f94edca26953c1506ab258adc458ded17c56",
+        "expected_version": "1.0.4",
+        "manifest_sha256": "1a77f6c8e09869d6bd45df1b14e6a9ce3f908bcf09351b76cee26a209504878a"
+      },
+      "outcome": "run located",
+      "run_id": 38954043063,
+      "html_url": "https://github.com/joshyorko/actions/actions/runs/38954043063"
+    },
+    {
+      "label": "wrong-reviewed-digest-refused",
+      "workflow": "runtime-release-publish.yml",
+      "inputs": {
+        "operation": "validate",
+        "preparation_run_id": "38951733318",
+        "source_sha": "d222f94edca26953c1506ab258adc458ded17c56",
+        "expected_version": "1.0.4",
+        "manifest_sha256": "0a77f6c8e09869d6bd45df1b14e6a9ce3f908bcf09351b76cee26a209504878a"
+      },
+      "outcome": "run located",
+      "run_id": 38954149205,
+      "html_url": "https://github.com/joshyorko/actions/actions/runs/38954149205"
+    }
+  ],
+  "runs": [
+    {
+      "id": 38951733318,
+      "run_attempt": 1,
+      "head_sha": "d222f94edca26953c1506ab258adc458ded17c56",
+      "head_branch": "community",
+      "event": "workflow_dispatch",
+      "path": ".github/workflows/runtime-release-prepare.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/joshyorko/actions/actions/runs/38951733318",
+      "label": "owner-handoff-preparation"
+    },
+    {
+      "id": 38951953388,
+      "run_attempt": 1,
+      "head_sha": "d222f94edca26953c1506ab258adc458ded17c56",
+      "head_branch": "community",
+      "event": "workflow_dispatch",
+      "path": ".github/workflows/runtime-release-prepare.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/joshyorko/actions/actions/runs/38951953388",
+      "label": "retry-rehearsal-preparation"
+    },
+    {
+      "id": 38951953388,
+      "run_attempt": 2,
+      "head_sha": "d222f94edca26953c1506ab258adc458ded17c56",
+      "head_branch": "community",
+      "event": "workflow_dispatch",
+      "path": ".github/workflows/runtime-release-prepare.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/joshyorko/actions/actions/runs/38951953388",
+      "label": "preparation-rerun-refused-as-expected"
+    },
+    {
+      "id": 38953883654,
+      "run_attempt": 1,
+      "head_sha": "d222f94edca26953c1506ab258adc458ded17c56",
+      "head_branch": "community",
+      "event": "workflow_dispatch",
+      "path": ".github/workflows/runtime-release-publish.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/joshyorko/actions/actions/runs/38953883654",
+      "label": "missing-rerun-artifact-fails-closed"
+    },
+    {
+      "id": 38953955933,
+      "run_attempt": 1,
+      "head_sha": "d222f94edca26953c1506ab258adc458ded17c56",
+      "head_branch": "community",
+      "event": "workflow_dispatch",
+      "path": ".github/workflows/runtime-release-publish.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/joshyorko/actions/actions/runs/38953955933",
+      "label": "owner-validation-first"
+    },
+    {
+      "id": 38954043063,
+      "run_attempt": 1,
+      "head_sha": "d222f94edca26953c1506ab258adc458ded17c56",
+      "head_branch": "community",
+      "event": "workflow_dispatch",
+      "path": ".github/workflows/runtime-release-publish.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/joshyorko/actions/actions/runs/38954043063",
+      "label": "owner-validation-repeat"
+    },
+    {
+      "id": 38954149205,
+      "run_attempt": 1,
+      "head_sha": "d222f94edca26953c1506ab258adc458ded17c56",
+      "head_branch": "community",
+      "event": "workflow_dispatch",
+      "path": ".github/workflows/runtime-release-publish.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/joshyorko/actions/actions/runs/38954149205",
+      "label": "wrong-reviewed-digest-refused"
+    }
+  ],
+  "bundles": [
+    {
+      "label": "owner-handoff",
+      "run_id": 38951733318,
+      "artifact_id": 12069321636,
+      "artifact_digest": "sha256:bbe3d066fb082c1dc61a8916af549bf9a7b66369f36866a2b37a8256a95524e5",
+      "manifest_sha256": "1a77f6c8e09869d6bd45df1b14e6a9ce3f908bcf09351b76cee26a209504878a",
+      "manifest_file": "owner-handoff-release-bundle.json",
+      "source_sha": "d222f94edca26953c1506ab258adc458ded17c56",
+      "qualification_sha": "9e8cfd7caa602031db4eba75f545b1211f882561",
+      "version": "1.0.4"
+    }
+  ],
+  "publication_performed": false,
+  "resumed_from_helper_run": 38951701437,
+  "failed_gates": [
+    {
+      "gate": "original artifact retrieval after preparation rerun",
+      "run_id": 38951953388,
+      "original_artifact_id": 12069241955,
+      "outcome": "original artifact now returns HTTP404",
+      "upstream_existing_report": "https://github.com/actions/upload-artifact/issues/323",
+      "owner_preparation_unchanged": 38951733318
+    }
+  ],
+  "rehearsal_rerun": {
+    "run_id": 38951953388,
+    "requested_attempt": 2,
+    "outcome": "previously accepted; not repeated"
+  },
+  "owner_bundle_qualified": true,
+  "publication_state_unchanged": true,
+  "owner_handoff": {
+    "preparation_run_id": 38951733318,
+    "source_sha": "d222f94edca26953c1506ab258adc458ded17c56",
+    "expected_version": "1.0.4",
+    "manifest_sha256": "1a77f6c8e09869d6bd45df1b14e6a9ce3f908bcf09351b76cee26a209504878a"
+  },
+  "error_type": "QualificationError",
+  "error": "Owner bundle validated; preparation-rerun artifact recovery remains failed. Preserve the untouched owner preparation; never rebuild for recovery."
+}
