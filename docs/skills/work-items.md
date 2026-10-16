@@ -44,6 +44,33 @@ the Action Server database. The binding is written after the local Run record
 is committed, so a partially published run is not exposed as a valid remote
 Run.
 
+Robot completion copies the selected configuration's `artifactsDir`, or
+`output` when absent, into that Run's existing storage key before publishing
+terminal status. The collector preserves nested relative names and root-level
+Robot logs. It rejects noncanonical roots, portable-name collisions, reserved
+Runtime names, links/reparse points, hardlinked files and special files. Its
+bounds are 10,000 entries, depth 32, 50 MiB per file and 500 MiB total, with
+64 KiB reads and checks of actual bytes and file identity. Collection failure
+marks the Run failed; the console and any already admitted complete files remain
+available. A nonzero task result still collects failure diagnostics.
+The selected configuration is a mapping of at most 64 KiB.
+A missing output directory is an empty snapshot; an existing output root that
+is a regular file fails collection. Trusted package ancestor aliases are
+canonicalized before validating the source tree, while links at the package,
+configuration and output entries remain rejected. Collection errors suppress
+raw parser/filesystem exception chains because those can quote private values.
+
+This is a completion-time snapshot of a trusted source tree. Pre-existing files
+can be included; collection does not establish that the current invocation
+created every file, provide an atomic tree snapshot, or defend against writers
+with authority to replace the package or ancestor namespaces. Keep these
+namespaces trusted and avoid concurrent artifact writers during collection.
+Later source changes/removal do not change the retained Run copies. Restart
+with the original database to recover terminal status; the immutable artifact
+binding retains initial metadata and cannot be republished with changed status.
+Run `test_robot_artifacts.py` and `test_robot_run_artifacts.py` for the bounded
+collector and authenticated success/failure retrieval after restart.
+
 - Attachment names are one safe filename component: reject empty/dot names, absolute paths, either path separator, quotes, and C0 controls. Resolve roots and candidates before containment checks so symlink escapes fail.
 - Treat item IDs and persisted SQLite file paths as untrusted. Item directories must resolve to strict descendants of the files root; equality with the root is invalid, so reject IDs such as `""` and `"."`. A persisted path must equal the resolved expected `<files_root>/<item_id>/<name>` before read, unlink, or recursive item deletion; verify item existence before deriving or removing its directory.
 - SQLite reservation must acquire `BEGIN IMMEDIATE` before FIFO selection, order by `created_at ASC, rowid ASC` so equal timestamps retain SQLite insertion order without a schema migration, conditionally update the selected `PENDING` row in that same transaction, and roll back on errors; this claims each pending item once across competing processes while retaining the adapter's 30-second SQLite lock timeout.

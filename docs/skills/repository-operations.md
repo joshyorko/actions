@@ -1893,6 +1893,20 @@ selection does not establish native Windows or cross-host shared-filesystem
 behavior. These containment checks do not close pathname replacement races
 against a writer with authority to mutate the storage namespace.
 
+Robot collection has a separate source boundary. The bounded completion-time
+snapshot described in [Work Items](work-items.md#safety-invariants) preserves
+workload names and durable per-Run copies without claiming an atomic tree or
+exclusive invocation attribution. The prior Runtime 1.0.3 candidate
+`48eeaf171e695d9b8ac140ea53239eaeb6eff331` copied only a root log allowlist from
+`<package>/output`; a passed task did not establish retention of `report.json`,
+`results.csv` or failure diagnostics. Keep #316 acceptance tied to artifact
+list/download bytes and retrieval after source removal and database restart.
+RCC 18.19.3 appends `ROBOT_ROOT` and `ROBOT_ARTIFACTS` after injected environment
+values and derives its working root from the configuration file's directory
+(`robot/robot.go` at tag `v18.19.3`, lines 478-485 and 542-559). Do not infer
+output isolation from `-e`, or move the configuration file without separately
+verifying the resulting execution semantics.
+
 Windows non-strict path resolution can retain an extended local-drive prefix
 (`\\?\C:\...`) while the already resolved storage root uses `C:\...`. The
 artifact containment comparisons treat only fully qualified ordinary and

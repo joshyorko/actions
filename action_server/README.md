@@ -104,6 +104,26 @@ After it's started, it's possible to access the following URLs:
 - `/openapi.json`: Provides the openapi spec for the action server.
 - `/docs`: Provides access to the APIs available in the server and a UI to test it.
 
+## Robot run artifacts
+
+After a Robot task exits, Runtime retains regular files from its configured
+`artifactsDir`, or `output` when absent, including failure diagnostics. List
+them at `/api/runs/{run_id}/artifacts` and download them through the existing
+artifact endpoints with your configured Runtime credentials.
+
+Collection captures the trusted output tree as it exists at task completion.
+Pre-existing files can be included. Avoid concurrent writers while Runtime
+collects the files; collection does not provide an atomic tree snapshot or
+prove which invocation created them. Later source changes do not alter the
+retained copies.
+
+Output roots must be canonical relative paths inside the Robot package.
+Runtime rejects links, hardlinks, special files, portable-name collisions and
+reserved names such as `env.json` and `__action_server_*`. Limits are 50 MiB per
+file, 500 MiB total, 10,000 entries and depth 32. A collection error marks the
+Run failed and preserves its console and any complete files already retained.
+The selected Robot configuration must fit within 64 KiB.
+
 ## Documentation
 
 Explore our [docs](https://github.com/joshyorko/actions/tree/community/action_server/docs) for extensive documentation.
