@@ -1399,6 +1399,21 @@ stderr, and the original exit status when a probe fails.
 Keep the 2.x patch line at or above 2.23.4: it replaces the rate-limited
 GitHub `get-virtualenv` blob URL with the supported `bootstrap.pypa.io` URL
 ([upstream fix](https://github.com/pypa/cibuildwheel/pull/2775)).
+Before preparing a follow-on Runtime release, compare its staging base with the
+accepted preceding release source. A branch forked before the preceding
+candidate's final security repair can omit already accepted boundary guards.
+Carry those reviewed changes forward into the isolated follow-on preparation
+branch, verify both the prior guards and the new feature boundaries, and qualify
+the resulting union. This does not authorize modifying the preceding release's
+frozen branch or publishing either version out of sequence. A historical green
+candidate or private wheel does not qualify that changed union or version.
+Historical measured-receipt unit fixtures must likewise retain their recorded
+input bytes. Bundle the measured Runtime identity text with its hash check for
+shallow CI checkouts; do not rebind a receipt to a later version or relax the
+live admission predicates. CRLF simulations commit those canonical historical
+bytes before changing worktree line endings. Current Runtime/browser acceptance
+still requires a fresh consumer run, separate from that historical unit control.
+
 The clean-break distribution identity is `actions-runtime`; its package version,
 `actions.server.__version__`, Runtime changelog, and `actions-runtime-X.Y.Z` tag
 must agree. Native release notes come from
@@ -1410,7 +1425,12 @@ requires an exact heading such as `## actions-runtime-1.0.3` (a date suffix
 does not match). The selected section runs through the next H1 or H2, includes
 any H3 subsections, and omits its matched heading. The generic `inv set-version`
 helper updates the legacy `action_server/docs/CHANGELOG.md` using a dated H2;
-it does not prepare the dedicated Runtime changelog. The historical
+it does not prepare the dedicated Runtime changelog. A Runtime release bump
+also updates the strict `EXPECTED_RUNTIME` pin in
+`action_server/scripts/verify_published_runtime_floor.py` and the corresponding
+release identity/fixture tests; do not change the public dependency versions,
+registry URLs/digests or wrong-version rejection rules to make that bump pass.
+The historical
 `action_server/docs/CHANGELOG.md` and `action-server-v1.2.x` tags remain a
 separate legacy delivery line. Tagged PyPI runs fail closed when
 `PYPI_TOKEN_ACTIONS_RUNTIME` is absent rather than reporting successful release
@@ -1924,6 +1944,41 @@ release does not perform application cleanup. A Linux pass or mocked platform
 selection does not establish native Windows or cross-host shared-filesystem
 behavior. These containment checks do not close pathname replacement races
 against a writer with authority to mutate the storage namespace.
+
+Robot collection has a separate source boundary. The bounded completion-time
+snapshot described in [Work Items](work-items.md#safety-invariants) preserves
+workload names and durable per-Run copies without claiming an atomic tree or
+exclusive invocation attribution. The prior Runtime 1.0.3 candidate
+`48eeaf171e695d9b8ac140ea53239eaeb6eff331` copied only a root log allowlist from
+`<package>/output`; a passed task did not establish retention of `report.json`,
+`results.csv` or failure diagnostics. Keep #316 acceptance tied to artifact
+list/download bytes and retrieval after source removal and database restart.
+RCC 18.19.3 appends `ROBOT_ROOT` and `ROBOT_ARTIFACTS` after injected environment
+values and derives its working root from the configuration file's directory
+(`robot/robot.go` at tag `v18.19.3`, lines 478-485 and 542-559). Do not infer
+output isolation from `-e`, or move the configuration file without separately
+verifying the resulting execution semantics.
+
+For Robot snapshots, compare like-for-like timestamps across pathname and
+open-descriptor metadata. CPython 3.12.15 on Windows maps pathname `st_ctime_ns`
+to creation time but descriptor `st_ctime_ns` to change time; after a rewrite,
+strict cross-API ctime equality rejects an unchanged file. This is tracked in
+[CPython #157671](https://github.com/python/cpython/issues/157671); the consumed
+implementation is in `v3.12.15` `Modules/posixmodule.c` (`win32_xstat`) and
+`Python/fileutils.c` (`_Py_fstat_noraise`). Use explicit `st_birthtime_ns` when
+available for the cross-API comparison, preserving device/inode, mode, link
+count, size and mtime checks. Retain full ctime and birthtime checks separately
+for pathname-to-pathname and descriptor-to-descriptor observations. Revisit
+this compatibility boundary when the supported CPython versions resolve the
+upstream discrepancy; do not simply remove mutation checks.
+
+Unsafe filename fixtures must verify that the filesystem created the exact
+literal directory entry. Windows can normalize trailing dots/spaces, interpret
+backslashes as separators, route device names to devices, and interpret a colon
+as an alternate stream. A successful write does not prove that the collector
+will enumerate the supplied name. Keep platform-independent inventory-boundary
+rejection tests for every forbidden name alongside literal filesystem tests;
+only the latter may skip when the literal entry cannot exist.
 
 Windows non-strict path resolution can retain an extended local-drive prefix
 (`\\?\C:\...`) while the already resolved storage root uses `C:\...`. The
@@ -3433,6 +3488,74 @@ Runtime regression. Preserve the failed receipt alongside the RCC rerun.
 
 ### Robot source connection and portable archive identity
 
+#### Robot task input delivery
+
+The input-forwarding repair for #315 targets Runtime 1.0.4. It does not change
+the accepted 1.0.3 release source or bump the package version. The original
+1.0.3 candidate at `48eeaf171e695d9b8ac140ea53239eaeb6eff331` persists
+`RobotRunRequestAPI.inputs` but does not consume it. Keep that failure separate
+from later candidate-source acceptance: a PASSED Run with matching persisted
+inputs does not prove that a task received them.
+
+The request remains an optional string-to-string map. A nonempty map requires
+an explicit `inputEnvironment` list on the selected task in `robot.yaml`, or
+the legacy `package.yaml` when no `robot.yaml` exists. For example:
+
+```yaml
+tasks:
+  ValidateBatch:
+    shell: python -m robocorp.tasks run tasks.py -t validate_batch_task
+    inputEnvironment:
+      - INVOICE_INPUT
+```
+
+The declaration names the exact environment destinations that this trusted task
+accepts as ordinary inputs. A declaration on another task grants no access.
+Names must match `[A-Za-z_][A-Za-z0-9_]*`, contain at most 128 characters and
+be unique ignoring case. Request names must match their declarations exactly.
+Process, interpreter, loader, Runtime, Work Item and recognized secret-control
+names are rejected even when declared; `_robot_inputs.py` owns the protected
+name/prefix/suffix list. In particular, inputs cannot replace `PATH`,
+`PYTHONPATH`, `RC_WORKITEM_DB_PATH`, `RC_WORKITEM_QUEUE_NAME`, `ROBOT_ROOT` or
+`ROBOT_ARTIFACTS`. This is an explicit input-name boundary, not a sandbox for
+the trusted package or its interpretation of input values.
+
+The request and declaration each allow at most 32 names. Each value allows at
+most 4096 UTF-8 bytes, without NUL or invalid Unicode. The compact JSON object,
+with literal Unicode and separators `,` and `:`, allows at most 16384 UTF-8
+bytes. Input declaration reads are bounded to a 1 MiB configuration.
+The byte limit bounds the read, not YAML nesting or parsing complexity. The
+declaration is read at admission and RCC later reads the configuration again.
+This boundary assumes trusted package source; it does not provide an immutable
+package snapshot against concurrent edits. Invalid
+nonempty inputs return HTTP 422 before settings, database, Run/counter,
+artifact or background-task work. Absent/empty inputs preserve legacy execution
+without requiring declarations. Metadata validation for the legacy package
+form does not establish RCC execution support for that format.
+
+Validated strings enter only RCC's task `-e` JSON file. Runtime-owned Work Item
+variables retain authority. The file lives in an owned temporary directory,
+with requested POSIX modes `0700` on the directory and `0600` on the file,
+is removed after success or failure and is not published as an artifact.
+These modes do not establish Windows ACL isolation.
+Inputs remain ordinary persisted `Run.inputs`, so use the separate secrets
+mechanism for secrets. Neither launcher mutates `os.environ` or injects inputs
+into RCC's control-process environment; the standalone helper uses the same
+validation and returns its existing error tuple on rejection without logging
+values. Nonempty helper inputs require an unpacked package directory.
+
+`test_robot_run_inputs.py` separates launch construction from actual delivery.
+The default tests check literal strings, selected-task declarations, protected
+controls, limits, pre-admission refusal and private-file cleanup. The opt-in
+`ACTIONS_ROBOT_INPUT_RCC=/absolute/path/to/rcc` gate requires v18.19.3 and runs
+the real API handler and RCC task three times with distinct supplied values and
+then absent inputs. It checks the task-written output and persisted Run inputs.
+A skipped gate is not delivery or RCC-metadata compatibility evidence. This
+source-mode gate does not qualify a published wheel, native binary or Windows
+execution. Preserve the untouched Template08 #8 failure before adding its
+minimal `ValidateBatch.inputEnvironment: [INVOICE_INPUT]` declaration for a new
+candidate acceptance run.
+
 Robot HTTPS download admission resolves and checks every destination's entire
 DNS answer set, then connects to one admitted literal address. HTTP Host and TLS
 SNI/certificate verification retain the original hostname through HTTPX request
@@ -4004,3 +4127,109 @@ root before opening artifact storage. POSIX temp paths can traverse a system
 alias (notably macOS `/var`); storage intentionally rejects symlink ancestors.
 The temporary-alias regression reproduces that rejection without relaxing the
 production storage contract, then exercises the probe using the physical root.
+
+### Manual Runtime release preparation and publication
+
+The manual **Prepare Actions Runtime Release** / **Publish Actions Runtime
+Release** workflows follow RCC's two-phase preparation model. Dispatch both
+from `community`; their controller rejects any other branch or stale controller
+SHA. No local Poetry or manually created tag is needed. Preparation takes the
+merged `source_sha`, the fully qualified PR `qualification_sha`, and the exact
+already-prepared stable `expected_version`. Both commits must be ancestors of
+community with identical complete Git trees. A normal merge may have a different
+commit identity; the bundle retains the actual producer checkout SHAs, qualified
+head, release source and common tree rather than rewriting their provenance.
+
+Preparation requires successful latest exact-head Runtime, Core, HTTP Helper,
+coverage, audit, toolkit and native workflows, including every required job.
+Each wheel/sdist builder records its actual checkout/tree, run/attempt, version
+and distribution digests separately. All seven distributions must match those
+receipts. Each native binary must match its producer manifest and both successful
+frozen/Go-wrapper browser/storage and large-history receipts. Existing wheel
+private-import, published-dependency floor and request-boundary gates remain in
+the canonical producer workflow. A prior source without these new build receipts
+cannot be admitted by substituting historical evidence.
+
+The current manual native route consumes credential-free qualification binaries.
+It fails closed if **any** existing native signing credential is configured;
+never clear credentials or silently bypass signing to make preparation pass.
+Signed preparation would require a reviewed extension of this route. No Homebrew,
+CDN, S3, template, credential or security-setting mutation is part of this button.
+
+1. In GitHub Actions, run **Prepare Actions Runtime Release** on `community`
+   with the three exact inputs above. It creates no tag/release/package and
+   retains `runtime-release-bundle-<run-id>-1` for 30 days. Never rerun a
+   preparation: start another only before publication, or retain the original
+   bundle for publication recovery.
+2. Independently inspect `release-bundle.json`, its source/run identities and
+   full artifact inventory. Record its SHA-256 from the preparation summary
+   after comparing the downloaded bytes.
+3. Run **Publish Actions Runtime Release** on `community` with
+   `operation=validate`, `preparation_run_id`, `source_sha`, `expected_version`
+   and `manifest_sha256` copied from that reviewed preparation. Validation has
+   read-only permissions, no package credential and no publication writes.
+4. Josh selects `operation=publish` with those same four immutable inputs when
+   final publication is authorized. The writer uses the existing `pypi`
+   environment/token and `contents: write`; it needs no new PAT or
+   `actions: write`. It publishes the retained bytes directly, then creates the
+   source-bound tag and publishes the complete native release. A tag created
+   by `GITHUB_TOKEN` does not trigger the legacy tag-push publishers, so the
+   controller deliberately does not depend on those events.
+
+Publication reserves a manifest-bound draft before any PyPI upload and stages
+all four native assets there. Only exact missing PyPI files are uploaded, with
+all existing filename/digest/size entries checked first. The tag and public
+native release follow confirmation of the complete seven-file PyPI set.
+Cross-service publication is not atomic: an interruption can leave a prefix on
+PyPI and a private native draft. Rerun **publication** with the original inputs;
+it reconciles actual remote state first and adds only missing matching files.
+A complete matching rerun is a no-op. It never uses `--skip-existing`, replaces
+assets, retargets/deletes tags, adopts another preparation's release, or retries
+an uncertain write in the same process. Mismatched or unexpected remote bytes
+fail closed and require owner investigation. Keep the original preparation
+artifact available until the release is complete; do not rebuild nondeterministic
+artifacts to resume a partial publication.
+
+GitHub's release API lists private drafts only to callers with push access.
+Read-only validation therefore checks visible bytes and tag identity and reports
+that private-draft ownership remains the writer's responsibility. It does not
+adopt or authorize an unseen draft. The writer repeats all checks with its
+job-scoped write token and must prove exact draft ownership before any write.
+The API also requires workflow-write authority when a release's target modifies
+workflow files relative to the current default branch; GITHUB_TOKEN cannot gain
+that authority. The controller checks the release source's complete workflow
+tree equals current community's workflow tree before publication. Preserve that
+condition for a retry; never add a PAT or weaken the source check as a workaround.
+These constraints come from the official
+[GitHub release API](https://docs.github.com/en/rest/releases/releases#list-releases).
+
+The preparation downloader verifies the complete downloaded ZIP against GitHub's
+`sha256:` artifact digest before extraction, then verifies each retained member
+against producer receipts. These are separate integrity checks. The native
+acceptance ZIP from the hosted producer was independently observed to match its
+GitHub digest; do not downgrade a mismatch to a warning or extract first.
+
+Publication validates the preparation's original successful **attempt**, rather
+than its mutable latest-run status. GitHub's rerun operation updates that status
+even when the controller immediately refuses to rebuild on attempt2. The named
+`-1` artifact and reviewed manifest remain fixed; an accidental refused rerun
+must not invalidate recovery of a PyPI prefix or native draft already owned by
+the original bundle. The run-attempt API still must prove canonical workflow,
+community controller SHA, exact attempt number and successful conclusion.
+
+Only `joshyorko` may enter the publication writer: both the original actor and
+triggering actor (including reruns) must be Josh. A read-only preflight rejects
+another actor's publication request before checkout or credential loading; the
+writer job and Python command repeat the owner guard. Preparation and
+`operation=validate` remain available to authorized collaborators without any
+publication write. This enforces the owner's final-publish boundary without a
+new credential, environment approval rule or broader repository permission.
+
+Repeated private Template08 trials create separate RCC package stores and
+materializations. Check workspace capacity before another full trial. If RCC
+fails with `no space left on device`, preserve receipts, outputs, logs, installed
+wheel evidence and Git work; remove only identified disposable caches belonging
+to completed owned trials after checking process ownership. Do not clear the
+active shared toolchain or another writer's environment. The affected trial is
+failed until rerun successfully with adequate space; a cache cleanup is not a
+passing integration result.

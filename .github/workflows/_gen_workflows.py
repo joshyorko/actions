@@ -2543,6 +2543,11 @@ class ActionServerPyPiRelease(BaseWorkflow):
                         "devutils/tests/test_runtime_release_workflows.py",
                         "docs/skills/repository-operations.md",
                         "action_server/scripts/publish_verified_runtime.py",
+                        "action_server/scripts/runtime_release_button.py",
+                        "action_server/scripts/write_runtime_build_source.py",
+                        ".github/workflows/runtime-release-prepare.yml",
+                        ".github/workflows/runtime-release-publish.yml",
+                        "devutils/tests/test_runtime_release_button.py",
                         "action_server/scripts/verify_published_runtime_floor.py",
                         "devutils/tests/test_runtime_registry_floor_canary.py",
                         "devutils/tests/test_candidate_core_wheel.py",
@@ -2616,6 +2621,7 @@ rm src/actions/server/bin/rcc* -f
         steps = self.common_build_steps()
         steps.append(self.build_sdist())
         steps.append(self.upload_artifact_action_server_dist())
+        steps.extend(self.build_source_receipt("dist", "sdist"))
         return steps
 
     def build_manylinux_wheels(self):
@@ -2670,7 +2676,14 @@ rm src/actions/server/bin/rcc* -f
             "run": f"{run_in_env}python scripts/verify_published_runtime_floor.py wheelhouse",
         })
         steps.append(self.upload_artifact_manylinux_wheels())
+        steps.extend(self.build_source_receipt("wheelhouse", "${{ runner.os }}"))
         return steps
+
+    def build_source_receipt(self, directory, lane):
+        return [
+            {"name": "Bind distribution bytes to producer checkout", "run": f"{run_in_env}python scripts/write_runtime_build_source.py {directory}"},
+            self.upload_artifact(name=f"runtime-build-source-{lane}", path="action_server/runtime-build-source.json", pinned=True),
+        ]
 
     def matrix_runtime_wheels(self, pyversion: str):
         matrix = self.matrix_cibuildwheel(pyversion)

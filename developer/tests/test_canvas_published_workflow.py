@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import ast
+import hashlib
 import importlib.util
 import io
 import json
@@ -56,6 +57,20 @@ def _relocate(value, replacements):
     return value
 
 
+def _admission_input(relative: str, repository: Path = ROOT) -> bytes:
+    if repository == ROOT and relative == ADMISSION_INPUTS[0]:
+        # This is a historical measured receipt, not current Runtime evidence.
+        # Bundle its exact module bytes for shallow hosted checkouts; do not
+        # rewrite its measured hash when the current package version changes.
+        content = FIXTURE.with_suffix(".runtime-init.txt").read_bytes()
+        measured = json.loads(FIXTURE.read_text())
+        assert (
+            hashlib.sha256(content).hexdigest() == measured["runtime"]["module_sha256"]
+        )
+        return content
+    return subprocess.check_output(["git", "show", f"HEAD:{relative}"], cwd=repository)
+
+
 def _validate(
     tmp_path: Path,
     mutation: str | None = None,
@@ -65,12 +80,10 @@ def _validate(
     expected_browser_version: str | None = None,
 ):
     # Git checkout may convert text inputs to CRLF. Preserve the measured
-    # fixture's byte contract with current Git blobs, not normalized work files.
+    # fixture's byte contract with canonical inputs, not normalized work files.
     checkout = tmp_path / "admission-checkout"
     for relative in ADMISSION_INPUTS:
-        content = subprocess.check_output(
-            ["git", "show", f"HEAD:{relative}"], cwd=input_repository
-        )
+        content = _admission_input(relative, input_repository)
         path = checkout / relative
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(content)
@@ -368,7 +381,7 @@ def test_measured_admission_uses_git_bytes_from_crlf_checkout(
     repository = tmp_path / "crlf-checkout"
     repository.mkdir()
     for relative in ADMISSION_INPUTS:
-        content = subprocess.check_output(["git", "show", f"HEAD:{relative}"], cwd=ROOT)
+        content = _admission_input(relative)
         path = repository / relative
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(content)
