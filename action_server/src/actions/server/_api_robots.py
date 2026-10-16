@@ -1223,28 +1223,16 @@ async def run_robot_task(
             except Exception as write_err:
                 log.warning(f"Failed to write robot output file: {write_err}")
 
-            # Copy robot output files to artifacts directory
-            # RCC puts output in the robot's 'output' directory by default
-            # This includes .robolog files (from robocorp-log) and RF output files
-            robot_output_dir = package_path / "output"
-            if robot_output_dir.exists():
-                # Copy .robolog files for log.html generation
-                for robolog_file in robot_output_dir.glob("*.robolog"):
-                    try:
-                        shutil.copy2(robolog_file, artifacts_dir / robolog_file.name)
-                        log.debug(f"Copied {robolog_file.name} to artifacts")
-                    except Exception as copy_err:
-                        log.warning(f"Failed to copy {robolog_file.name}: {copy_err}")
+            # Retain workload files and failure diagnostics before publishing
+            # terminal status. The collector uses the configured storage key.
+            from actions.server._robot_artifacts import collect_robot_artifacts
 
-                # Also copy Robot Framework output files if present
-                for output_name in ["log.html", "output.xml", "report.html"]:
-                    src_file = robot_output_dir / output_name
-                    if src_file.exists():
-                        try:
-                            shutil.copy2(src_file, artifacts_dir / output_name)
-                            log.debug(f"Copied {output_name} to artifacts")
-                        except Exception as copy_err:
-                            log.warning(f"Failed to copy {output_name}: {copy_err}")
+            collect_robot_artifacts(
+                package_path,
+                robot_config_file,
+                get_artifact_storage(),
+                run.relative_artifacts_dir,
+            )
 
             if result.success:
                 run.status = RunStatus.PASSED
