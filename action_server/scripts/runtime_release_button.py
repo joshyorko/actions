@@ -55,7 +55,9 @@ def require(condition, message):
 
 def validate_version(version):
     require(
-        re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+", version),
+        re.fullmatch(
+            r"(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)", version
+        ),
         "expected stable X.Y.Z version",
     )
 
@@ -145,6 +147,11 @@ def check_source(root, source, qualification, version):
     require(
         tree == git(root, "rev-parse", f"{qualification}^{{tree}}"),
         "release and qualification complete trees differ",
+    )
+    require(
+        git(root, "rev-parse", f"{source}:.github/workflows")
+        == git(root, "rev-parse", "origin/community:.github/workflows"),
+        "release workflow files differ from current community; GITHUB_TOKEN cannot create this source's release/tag without workflow-write authority",
     )
     project = tomllib.loads(git(root, "show", f"{source}:action_server/pyproject.toml"))
     require(
@@ -444,6 +451,10 @@ def prepare(args):
             path=f".github/workflows/{filename}",
             count=count,
         )
+        run["qualified_jobs"] = [
+            {key: job[key] for key in ("id", "name", "conclusion", "html_url")}
+            for job in jobs
+        ]
         runs[filename] = run
     args.output.mkdir(parents=True)
     evidence = args.output / "evidence"
@@ -465,6 +476,7 @@ def prepare(args):
                     "html_url",
                     "created_at",
                     "updated_at",
+                    "qualified_jobs",
                 )
             },
         )
@@ -498,6 +510,10 @@ def prepare(args):
             and proof["tree"] == tree
             and proof["version"] == args.version,
             "package receipt source mismatch",
+        )
+        require(
+            re.fullmatch(r"[0-9a-f]{40}", proof["source_sha"]),
+            "package checkout SHA must be full hex",
         )
         git(root, "fetch", "--no-tags", "origin", proof["source_sha"])
         require(
@@ -542,6 +558,10 @@ def prepare(args):
             manifest["workflow_run_id"] == str(native_run["id"])
             and manifest["workflow_run_attempt"] == str(native_run["run_attempt"]),
             "native producer mismatch",
+        )
+        require(
+            re.fullmatch(r"[0-9a-f]{40}", manifest["source_sha"]),
+            "native checkout SHA must be full hex",
         )
         git(root, "fetch", "--no-tags", "origin", manifest["source_sha"])
         require(
@@ -711,9 +731,20 @@ def verify(args):
 def publish(args):
     manifest = verify(args)
     release, tag = release_state(args.version)
-    native_missing = reconcile_release(manifest, args.manifest_sha256, release, tag)
+    # Read-only tokens may not see private drafts (GitHub lists those only
+    # with push access). Validation checks visible bytes and tag identity;
+    # the writer must independently establish draft ownership before any write.
+    if args.command == "validate" and release is None:
+        require(
+            tag is None or tag == args.source_sha, "existing tag targets another source"
+        )
+        native_missing = None
+    else:
+        native_missing = reconcile_release(manifest, args.manifest_sha256, release, tag)
     package_missing = reconcile_pypi(
-        manifest, pypi_files(args.version), owned=release is not None
+        manifest,
+        pypi_files(args.version),
+        owned=release is not None or args.command == "validate",
     )
     print(
         json.dumps(
@@ -722,6 +753,9 @@ def publish(args):
                 "source_sha": args.source_sha,
                 "missing_native": native_missing,
                 "missing_pypi": package_missing,
+                "ownership": "writer must verify private draft ownership before any write"
+                if args.command == "validate"
+                else "verified",
             },
             sort_keys=True,
         )

@@ -218,7 +218,7 @@ def test_zip_traversal_duplicate_symlink_and_bomb_are_rejected(tmp_path):
 
 
 def test_release_version_never_inferred_or_adapted():
-    for value in ["v1.0.4", "1.0.4rc1", "1.0", "1.0.4/../../x"]:
+    for value in ["v1.0.4", "1.0.4rc1", "1.0", "1.0.4/../../x", "01.0.4"]:
         with pytest.raises(button.ReleaseError):
             button.validate_version(value)
     button.validate_version("1.0.4")
@@ -371,3 +371,83 @@ def test_manual_workflows_have_read_only_validation_and_explicit_publication():
             workflow["concurrency"]["group"]
             == "runtime-release-${{ inputs.expected_version }}"
         )
+
+
+def test_read_only_validation_cannot_adopt_a_hidden_draft(monkeypatch):
+    from types import SimpleNamespace
+
+    m = manifest()
+    monkeypatch.setattr(button, "verify", lambda args: m)
+    monkeypatch.setattr(
+        button, "release_state", lambda version: (None, m["source_sha"])
+    )
+    monkeypatch.setattr(
+        button, "pypi_files", lambda version: [pypi_file("a.whl", "b" * 64, 12)]
+    )
+    monkeypatch.setattr(
+        button,
+        "api",
+        lambda *args, **kwargs: pytest.fail("write before ownership verification"),
+    )
+    args = SimpleNamespace(
+        command="validate",
+        source_sha=m["source_sha"],
+        version=m["version"],
+        manifest_sha256="e" * 64,
+    )
+    button.publish(args)
+    args.command = "publish"
+    with pytest.raises(button.ReleaseError, match="without an owned"):
+        button.publish(args)
+
+
+def test_source_binding_accepts_normal_merge_but_rejects_changed_workflow_tree(
+    tmp_path,
+):
+    import subprocess
+
+    repo, remote = tmp_path / "repo", tmp_path / "remote.git"
+    subprocess.run(["git", "init", "--bare", "--quiet", str(remote)], check=True)
+    subprocess.run(
+        ["git", "init", "--quiet", "--initial-branch=community", str(repo)], check=True
+    )
+
+    def git(*args):
+        return button.git(repo, *args)
+
+    git("config", "user.email", "synthetic@example.invalid")
+    git("config", "user.name", "Synthetic release test")
+    git("remote", "add", "origin", str(remote))
+    for name, contents in {
+        "action_server/pyproject.toml": '[tool.poetry]\nname="actions-runtime"\nversion="1.0.4"\n',
+        "action_server/src/actions/server/__init__.py": '__version__ = "1.0.4"\n',
+        "action_server/scripts/verify_published_runtime_floor.py": 'EXPECTED_RUNTIME = "1.0.4"\n',
+        "action_server/docs/ACTIONS_RUNTIME_CHANGELOG.md": "## actions-runtime-1.0.4\n\nSynthetic notes.\n",
+        ".github/workflows/button.yml": "name: synthetic\n",
+    }.items():
+        path = repo / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(contents)
+    git("add", ".")
+    git("commit", "--quiet", "-m", "base")
+    git("checkout", "--quiet", "-b", "qualified")
+    (repo / "qualified.txt").write_text("qualified\n")
+    git("add", ".")
+    git("commit", "--quiet", "-m", "qualified source")
+    qualified = git("rev-parse", "HEAD")
+    git("checkout", "--quiet", "community")
+    git("merge", "--quiet", "--no-ff", "qualified", "-m", "normal merge")
+    source = git("rev-parse", "HEAD")
+    git("push", "--quiet", "origin", "community")
+    assert source != qualified
+    assert button.check_source(repo, source, qualified, "1.0.4") == git(
+        "rev-parse", "HEAD^{tree}"
+    )
+    with pytest.raises(button.ReleaseError, match="version mismatch"):
+        button.check_source(repo, source, qualified, "1.0.5")
+    (repo / ".github/workflows/button.yml").write_text("name: changed\n")
+    git("add", ".")
+    git("commit", "--quiet", "-m", "controller workflow changed")
+    git("push", "--quiet", "origin", "community")
+    with pytest.raises(button.ReleaseError, match="workflow files differ"):
+        button.check_source(repo, source, qualified, "1.0.4")

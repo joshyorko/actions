@@ -62,3 +62,6 @@ test-actions/
 .codex
 .serena
 .clawpatch
+
+# Generated per-job distribution provenance; retained as a workflow artifact.
+action_server/runtime-build-source.json

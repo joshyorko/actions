@@ -4189,3 +4189,16 @@ an uncertain write in the same process. Mismatched or unexpected remote bytes
 fail closed and require owner investigation. Keep the original preparation
 artifact available until the release is complete; do not rebuild nondeterministic
 artifacts to resume a partial publication.
+
+GitHub's release API lists private drafts only to callers with push access.
+Read-only validation therefore checks visible bytes and tag identity and reports
+that private-draft ownership remains the writer's responsibility. It does not
+adopt or authorize an unseen draft. The writer repeats all checks with its
+job-scoped write token and must prove exact draft ownership before any write.
+The API also requires workflow-write authority when a release's target modifies
+workflow files relative to the current default branch; GITHUB_TOKEN cannot gain
+that authority. The controller checks the release source's complete workflow
+tree equals current community's workflow tree before publication. Preserve that
+condition for a retry; never add a PAT or weaken the source check as a workaround.
+These constraints come from the official
+[GitHub release API](https://docs.github.com/en/rest/releases/releases#list-releases).
