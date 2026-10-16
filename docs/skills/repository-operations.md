@@ -4127,3 +4127,65 @@ root before opening artifact storage. POSIX temp paths can traverse a system
 alias (notably macOS `/var`); storage intentionally rejects symlink ancestors.
 The temporary-alias regression reproduces that rejection without relaxing the
 production storage contract, then exercises the probe using the physical root.
+
+### Manual Runtime release preparation and publication
+
+The manual **Prepare Actions Runtime Release** / **Publish Actions Runtime
+Release** workflows follow RCC's two-phase preparation model. Dispatch both
+from `community`; their controller rejects any other branch or stale controller
+SHA. No local Poetry or manually created tag is needed. Preparation takes the
+merged `source_sha`, the fully qualified PR `qualification_sha`, and the exact
+already-prepared stable `expected_version`. Both commits must be ancestors of
+community with identical complete Git trees. A normal merge may have a different
+commit identity; the bundle retains the actual producer checkout SHAs, qualified
+head, release source and common tree rather than rewriting their provenance.
+
+Preparation requires successful latest exact-head Runtime, Core, HTTP Helper,
+coverage, audit, toolkit and native workflows, including every required job.
+Each wheel/sdist builder records its actual checkout/tree, run/attempt, version
+and distribution digests separately. All seven distributions must match those
+receipts. Each native binary must match its producer manifest and both successful
+frozen/Go-wrapper browser/storage and large-history receipts. Existing wheel
+private-import, published-dependency floor and request-boundary gates remain in
+the canonical producer workflow. A prior source without these new build receipts
+cannot be admitted by substituting historical evidence.
+
+The current manual native route consumes credential-free qualification binaries.
+It fails closed if **any** existing native signing credential is configured;
+never clear credentials or silently bypass signing to make preparation pass.
+Signed preparation would require a reviewed extension of this route. No Homebrew,
+CDN, S3, template, credential or security-setting mutation is part of this button.
+
+1. In GitHub Actions, run **Prepare Actions Runtime Release** on `community`
+   with the three exact inputs above. It creates no tag/release/package and
+   retains `runtime-release-bundle-<run-id>-1` for 30 days. Never rerun a
+   preparation: start another only before publication, or retain the original
+   bundle for publication recovery.
+2. Independently inspect `release-bundle.json`, its source/run identities and
+   full artifact inventory. Record its SHA-256 from the preparation summary
+   after comparing the downloaded bytes.
+3. Run **Publish Actions Runtime Release** on `community` with
+   `operation=validate`, `preparation_run_id`, `source_sha`, `expected_version`
+   and `manifest_sha256` copied from that reviewed preparation. Validation has
+   read-only permissions, no package credential and no publication writes.
+4. Josh selects `operation=publish` with those same four immutable inputs when
+   final publication is authorized. The writer uses the existing `pypi`
+   environment/token and `contents: write`; it needs no new PAT or
+   `actions: write`. It publishes the retained bytes directly, then creates the
+   source-bound tag and publishes the complete native release. A tag created
+   by `GITHUB_TOKEN` does not trigger the legacy tag-push publishers, so the
+   controller deliberately does not depend on those events.
+
+Publication reserves a manifest-bound draft before any PyPI upload and stages
+all four native assets there. Only exact missing PyPI files are uploaded, with
+all existing filename/digest/size entries checked first. The tag and public
+native release follow confirmation of the complete seven-file PyPI set.
+Cross-service publication is not atomic: an interruption can leave a prefix on
+PyPI and a private native draft. Rerun **publication** with the original inputs;
+it reconciles actual remote state first and adds only missing matching files.
+A complete matching rerun is a no-op. It never uses `--skip-existing`, replaces
+assets, retargets/deletes tags, adopts another preparation's release, or retries
+an uncertain write in the same process. Mismatched or unexpected remote bytes
+fail closed and require owner investigation. Keep the original preparation
+artifact available until the release is complete; do not rebuild nondeterministic
+artifacts to resume a partial publication.
