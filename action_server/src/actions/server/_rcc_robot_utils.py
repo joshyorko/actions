@@ -9,6 +9,8 @@ from typing import Dict, List, Optional, Tuple
 import yaml
 from pydantic import BaseModel, Field
 
+from actions.server._robot_inputs import robot_task_environment, validate_robot_inputs
+
 logger = logging.getLogger(__name__)
 
 
@@ -252,8 +254,7 @@ def run_robot_task(
     secrets_file: Optional[Path] = None,  # For passing secrets if needed
 ) -> Tuple[str, str, int]:
     """
-    Executes `rcc task run --robot <robot_package_path> --task <task_name>`
-    (potentially with --json inputs if applicable).
+    Executes RCC with inputs declared in the selected task's inputEnvironment list.
     Captures and returns stdout, stderr, and the exit code of the subprocess.
     Handles potential errors during subprocess execution.
     """
@@ -268,30 +269,11 @@ def run_robot_task(
 
     args = ["task", "run", "--robot", rcc_target_path_str, "--task", task_name]
 
-    # Handling inputs: RCC can take inputs via environment variables.
-    # A common way is to set them prefixed, e.g., RC_INPUT_my_var=value
-    # Or, if the robot uses a library like Robocorp.WorkItems, inputs can be passed
-    # via a work item JSON. RCC doesn't have a direct `--json-inputs` flag for `task run`.
-    # For now, we'll assume inputs are handled by the robot itself via env vars or work items
-    # that might be configured through `holotree variables` or `robot.yaml` `env` section.
-    # If direct input passing is needed, it would typically involve setting environment variables
-    # for the subprocess.
-
-    _env_vars = os.environ.copy()  # Reserved for future use in subprocess calls
-    if inputs:
-        # This is a simplistic way; robots might expect specific env var formats
-        # or a work-items.json file. For now, just logging.
-        logger.info(
-            f"Inputs provided for task {task_name}: {inputs}. These are not directly passed via CLI args by this function yet."
-        )
-        # Example of setting env vars if needed:
-        # for key, value in inputs.items():
-        #     env_vars[f"RC_INPUT_{key.upper()}"] = str(value)
-
-    # TODO: Explore how to pass `inputs` to `rcc task run`.
-    # This might involve creating a temporary input work-item JSON and passing its path,
-    # or setting environment variables if the robot is designed to pick them up.
-    # For now, `inputs` are not directly used in the command.
+    try:
+        task_inputs = validate_robot_inputs(robot_package_path, task_name, inputs)
+    except ValueError as error:
+        logger.warning("Invalid Robot task inputs: %s", error)
+        return "", str(error), -1
 
     if run_id:
         # RCC can associate logs with a run ID if the environment is set up for it
@@ -307,9 +289,11 @@ def run_robot_task(
 
     # `_run_rcc_command` uses `cwd=None` by default, which means it runs from the action server's CWD.
     # This should be fine as `--robot` takes an absolute or relative path to the robot.
-    stdout, stderr, exit_code = _run_rcc_command(
-        args
-    )  # env=env_vars if passing custom env
+    if task_inputs:
+        with robot_task_environment(task_inputs) as env_file:
+            stdout, stderr, exit_code = _run_rcc_command([*args, "-e", str(env_file)])
+    else:
+        stdout, stderr, exit_code = _run_rcc_command(args)
 
     if exit_code != 0:
         logger.error(
