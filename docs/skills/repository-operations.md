@@ -1774,11 +1774,20 @@ links/special files, and atomically renamed into the robot root; failed copies
 are removed before a response is returned. These limits and policies are the
 immediate importer boundary, not the later immutable Package Revision/compiler
 acceptance in #148.
+
+The supported Robot ZIP profile requires the package root, its ancestors, and
+temporary/extracted source namespaces to remain under trusted service or
+administrator control throughout copy, validation, publication, and cleanup.
+Inode checks and POSIX modes do not establish capability binding against hostile
+namespace mutation or Windows ACL isolation. Remote-URL import remains
+experimental until its real TLS/IP/SNI/redirect acceptance is qualified.
 The URL importer validates the caller-supplied URL before converting GitHub
 repository shorthand, so credentials and fragments cannot be discarded by
-normalization. Its DNS check remains a pre-request address-policy check; the
-mocked URL tests are not proof that the HTTP connection is pinned against DNS
-rebinding, so real URL/SSRF acceptance remains a separate gate. In the RCC
+normalization. Each request connects to an admitted literal address while
+retaining the original HTTP Host and TLS SNI/certificate verification. Redirects
+repeat admission with a fresh client, and environment proxies are disabled.
+Instrumented transport tests stop before real TCP/TLS traffic, so real URL/SSRF
+acceptance remains a separate gate. In the RCC
 developer toolkit, Linux `Package task smoke (Linux)` must pass before
 `Build and verify community binary (Linux)` can run; a package-test failure
 therefore leaves the frozen/native gate skipped rather than failed.
@@ -3937,6 +3946,20 @@ ancestry, and absence of both the remote tag and registry version. A successful
 tag workflow must still be followed by registry file/hash and installed public
 API verification. Never move a tag or replace a published distribution to recover
 a failed release.
+
+Community OAuth builds use the two repository-owned YAML inputs, whose public
+catalog intentionally contains no hosted registrations. Do not carry forward a
+release requirement to acquire proprietary hosted applications or an unavailable
+vendor configuration repository. Bind the generated input strings and hashes to
+the selected distributions and installed consumers, then verify that unsupported
+hosted modes and invalid custom registrations fail closed. This preserves the
+security requirement while qualifying operator-owned custom applications.
+
+An uploaded native diagnostics artifact establishes availability only. Inspect
+its source binding and measured reader/descendant/lease fields before treating
+it as cleanup qualification. Deterministic captured-handle controls and ordinary
+hosted passes retain their declared scope; they do not explain older readiness
+failures or close complete cleanup contracts.
 
 Portable source tests read the tracked public hosted catalog through the getter
 boundary, without requiring a pre-existing generated `_oauth2_config` module.

@@ -1,5 +1,35 @@
 # Actions Community engineering handoff — active Cloud checkpoint
 
+## Runtime 1.0.3 release convergence
+
+The release owner has frozen the [supported local subset](runtime-1.0.3-release-scope.md)
+independently of the full #82/#101 roadmap and its 54-contract graph. Convergence
+started from `48eeaf171e695d9b8ac140ea53239eaeb6eff331`, targeting `community`
+`a70993fafc99a9f94041485542d5a720797ca394`. Resolve the live refs and actual CI
+producer checkout before every admission; the historical snapshots below are
+retained evidence rather than current branch identities.
+
+The current release gate adds full installed-consumer verification to each final
+repaired wheel through the existing PyPI workflow. Production Runtime source and
+RCC v18.19.3 pins remain unchanged. Public OAuth inputs intentionally lack hosted
+registrations; private operator-owned custom applications and fail-closed
+unsupported modes are the applicable contract. No proprietary registration or
+vendor credential acquisition is a prerequisite.
+
+Optional PRs #306/#313 remain deferred pending their declared specialized gates.
+PRs #305/#308 are deferred. Both robot defects #315/#316 reproduce on the actual
+1.0.3 candidate using Template 08; their separately reviewed repairs target
+1.0.4 and do not hold the scoped 1.0.3 release. Template PR #8 stays draft until
+repaired-candidate acceptance and CI pass and must not be merged automatically.
+
+Publication must be established from the exact merged commit and immutable tag,
+real tag workflows, registry bytes, installed public Runtime, native downloads
+and checksums. A successful PR-event publisher is a dry run. Homebrew handoff
+#211 remains separate. Preserve all earlier failures with their source identities;
+this scope freeze does not accept or close the retained roadmap contracts.
+
+## Retained historical handoff
+
 ## Current convergence — 2026-10-10T03:42:00Z
 
 The 28-PR cohort remains 20 target-integrated, 8 open/blocked and 0 merge-ready. Integration is `6d438feb6c92f8bb01428f665ac423fb101b4017`; community is `36b8192dbb8143e016af3351f7d25b22a35c9944`. PR273 head `6ece09c4` and its synthetic merge `ccf6e064` have tree `a560aceae`. Exact-head workflows remain in progress. See the [03:42 receipt](evidence/convergence-followup-20261010T0342Z.json) and the [03:41 PR audit](evidence/convergence-live-prs-20261010T0341Z.json).
