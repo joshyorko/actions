@@ -20,5 +20,35 @@
     "tested_pr_merge": "cc52d97c141c56b843facab0aa4a5d09bebeb9a6",
     "tested_pr_merge_tree": "59a4f704b3d2db2297460d4e4fcd7447b8ed909e",
     "whole_tree_equals_head": true
-  }
+  },
+  "candidate_diff_from_staging_base": [
+    "action_server/README.md",
+    "action_server/src/actions/server/_api_robots.py",
+    "action_server/src/actions/server/_rcc_robot_utils.py",
+    "action_server/src/actions/server/_robot_artifacts.py",
+    "action_server/src/actions/server/_robot_inputs.py",
+    "action_server/tests/action_server_tests/test_robot_artifacts.py",
+    "action_server/tests/action_server_tests/test_robot_run_artifacts.py",
+    "action_server/tests/action_server_tests/test_robot_run_inputs.py",
+    "docs/skills/repository-operations.md",
+    "docs/skills/work-items.md"
+  ],
+  "combined_preserves_reviewed_modules": {
+    "action_server/src/actions/server/_rcc_robot_utils.py": {
+      "blob": "1276a01339888542b371760522c4824cadad5c77",
+      "identical_in_candidate": true,
+      "reviewed_source": "ffa6ed49726c4ece12c6648c021058e06927ddb8"
+    },
+    "action_server/src/actions/server/_robot_artifacts.py": {
+      "blob": "3d3df6577b7894695f83a5e7ffb6ea9d5c9851cf",
+      "identical_in_candidate": true,
+      "reviewed_source": "dd5ccf3ae76451536012f15e3bf1b1adc728f9eb"
+    },
+    "action_server/src/actions/server/_robot_inputs.py": {
+      "blob": "d9fc2daa46424bfa7464196cca65df432415d0ec",
+      "identical_in_candidate": true,
+      "reviewed_source": "ffa6ed49726c4ece12c6648c021058e06927ddb8"
+    }
+  },
+  "staging_base": "670765e35c96871cb0302ba85469120fa196cc8f"
 }

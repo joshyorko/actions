@@ -1,0 +1,68 @@
+[
+  {
+    "pr": "317",
+    "job_id": 117060316436,
+    "platform": "ubuntu-22.04",
+    "summary": [
+      "2026-10-16T15:56:10.4091906Z HEAD is now at c03d570 Merge dd5ccf3ae76451536012f15e3bf1b1adc728f9eb into 670765e35c96871cb0302ba85469120fa196cc8f",
+      "2026-10-16T15:59:28.8196768Z ========== 1487 passed, 12 skipped, 16 warnings in 111.04s (0:01:51) ===========",
+      "2026-10-16T16:08:33.3758442Z ========= 132 passed, 20 skipped, 1502 deselected in 503.58s (0:08:23) ========="
+    ],
+    "scope": "Hosted portable and integration suites; skipped tests remain unverified"
+  },
+  {
+    "pr": "320",
+    "job_id": 117060599311,
+    "platform": "ubuntu-22.04",
+    "summary": [
+      "2026-10-16T15:50:37.7914398Z HEAD is now at cc52d97 Merge 38b16fc489c48462c4952eec65b9b17572d8958a into 670765e35c96871cb0302ba85469120fa196cc8f",
+      "2026-10-16T15:55:27.5046369Z ========== 1528 passed, 13 skipped, 16 warnings in 161.28s (0:02:41) ===========",
+      "2026-10-16T16:09:42.5845358Z ========= 132 passed, 20 skipped, 1544 deselected in 795.43s (0:13:15) ========="
+    ],
+    "scope": "Hosted portable and integration suites; skipped tests remain unverified"
+  },
+  {
+    "pr": "317",
+    "job_id": 117060316115,
+    "platform": "macos-15",
+    "summary": [
+      "2026-10-16T15:56:31.6321740Z HEAD is now at c03d570 Merge dd5ccf3ae76451536012f15e3bf1b1adc728f9eb into 670765e35c96871cb0302ba85469120fa196cc8f",
+      "2026-10-16T16:01:39.9414900Z ========== 1326 passed, 173 skipped, 16 warnings in 173.19s (0:02:53) ==========",
+      "2026-10-16T16:16:50.5075860Z ========= 132 passed, 20 skipped, 1502 deselected in 894.90s (0:14:54) ========="
+    ],
+    "scope": "Hosted portable and integration suites; skipped tests remain unverified"
+  },
+  {
+    "pr": "320",
+    "job_id": 117060599273,
+    "platform": "macos-15",
+    "summary": [
+      "2026-10-16T15:59:34.0855600Z HEAD is now at cc52d97 Merge 38b16fc489c48462c4952eec65b9b17572d8958a into 670765e35c96871cb0302ba85469120fa196cc8f",
+      "2026-10-16T16:04:55.7132490Z ========== 1367 passed, 174 skipped, 16 warnings in 157.17s (0:02:37) ==========",
+      "2026-10-16T16:20:12.8661810Z ========= 132 passed, 20 skipped, 1544 deselected in 903.88s (0:15:03) ========="
+    ],
+    "scope": "Hosted portable and integration suites; skipped tests remain unverified"
+  },
+  {
+    "pr": "317",
+    "job_id": 117060316639,
+    "platform": "windows-2022",
+    "summary": [
+      "2026-10-16T15:54:37.0427107Z HEAD is now at c03d570 Merge dd5ccf3ae76451536012f15e3bf1b1adc728f9eb into 670765e35c96871cb0302ba85469120fa196cc8f",
+      "2026-10-16T16:05:49.1829814Z ========= 1312 passed, 187 skipped, 15 warnings in 429.12s (0:07:09) ==========",
+      "2026-10-16T16:34:35.3742533Z ======== 131 passed, 21 skipped, 1502 deselected in 1704.22s (0:28:24) ========"
+    ],
+    "scope": "Hosted portable and integration suites; skipped tests remain unverified"
+  },
+  {
+    "pr": "320",
+    "job_id": 117060599042,
+    "platform": "windows-2022",
+    "summary": [
+      "2026-10-16T15:57:05.8227330Z HEAD is now at cc52d97 Merge 38b16fc489c48462c4952eec65b9b17572d8958a into 670765e35c96871cb0302ba85469120fa196cc8f",
+      "2026-10-16T16:08:31.9329464Z ========= 1353 passed, 188 skipped, 15 warnings in 419.86s (0:06:59) ==========",
+      "2026-10-16T16:36:59.8623626Z ======== 131 passed, 21 skipped, 1544 deselected in 1685.76s (0:28:05) ========"
+    ],
+    "scope": "Hosted portable and integration suites; skipped tests remain unverified"
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "job_id": 117060316639,
+    "observed_passes": [
+      "2026-10-16T16:00:01.4843632Z [gw1] [ 52%] PASSED action_server_tests\\test_robot_artifacts.py::test_completed_snapshot_survives_source_changes_and_removal ",
+      "2026-10-16T16:00:02.3401383Z [gw1] [ 55%] PASSED action_server_tests\\test_robot_artifacts.py::test_inventory_rejects_nonportable_names_before_path_access[CON.txt] ",
+      "2026-10-16T16:00:02.3547514Z [gw1] [ 55%] PASSED action_server_tests\\test_robot_artifacts.py::test_inventory_rejects_nonportable_names_before_path_access[trailing.] ",
+      "2026-10-16T16:00:02.3691151Z [gw1] [ 55%] PASSED action_server_tests\\test_robot_artifacts.py::test_inventory_rejects_nonportable_names_before_path_access[trailing ] ",
+      "2026-10-16T16:00:02.3839149Z [gw1] [ 55%] PASSED action_server_tests\\test_robot_artifacts.py::test_inventory_rejects_nonportable_names_before_path_access[name:stream] ",
+      "2026-10-16T16:00:02.3984580Z [gw1] [ 55%] PASSED action_server_tests\\test_robot_artifacts.py::test_inventory_rejects_nonportable_names_before_path_access[back\\\\slash] ",
+      "2026-10-16T16:00:02.9188213Z [gw1] [ 57%] PASSED action_server_tests\\test_robot_artifacts.py::test_windows_stat_api_timestamps_preserve_identity_and_mutation_checks[None] ",
+      "2026-10-16T16:00:02.9489135Z [gw1] [ 57%] PASSED action_server_tests\\test_robot_artifacts.py::test_windows_stat_api_timestamps_preserve_identity_and_mutation_checks[st_ctime_ns] ",
+      "2026-10-16T16:00:02.9751562Z [gw1] [ 57%] PASSED action_server_tests\\test_robot_artifacts.py::test_windows_stat_api_timestamps_preserve_identity_and_mutation_checks[st_ino] ",
+      "2026-10-16T16:00:02.9996171Z [gw1] [ 57%] PASSED action_server_tests\\test_robot_artifacts.py::test_windows_stat_api_timestamps_preserve_identity_and_mutation_checks[st_nlink] ",
+      "2026-10-16T16:00:03.0319167Z [gw1] [ 57%] PASSED action_server_tests\\test_robot_artifacts.py::test_windows_stat_api_timestamps_preserve_identity_and_mutation_checks[st_size] ",
+      "2026-10-16T16:00:03.0573290Z [gw1] [ 57%] PASSED action_server_tests\\test_robot_artifacts.py::test_windows_stat_api_timestamps_preserve_identity_and_mutation_checks[st_mtime_ns] ",
+      "2026-10-16T16:00:03.0831143Z [gw1] [ 57%] PASSED action_server_tests\\test_robot_artifacts.py::test_windows_stat_api_timestamps_preserve_identity_and_mutation_checks[st_birthtime_ns] "
+    ]
+  },
+  {
+    "job_id": 117060599042,
+    "observed_passes": [
+      "2026-10-16T16:03:24.9484305Z [gw0] [ 53%] PASSED action_server_tests\\test_robot_artifacts.py::test_windows_stat_api_timestamps_preserve_identity_and_mutation_checks[None] ",
+      "2026-10-16T16:03:24.9734781Z [gw0] [ 53%] PASSED action_server_tests\\test_robot_artifacts.py::test_windows_stat_api_timestamps_preserve_identity_and_mutation_checks[st_ctime_ns] ",
+      "2026-10-16T16:03:25.0027619Z [gw0] [ 53%] PASSED action_server_tests\\test_robot_artifacts.py::test_windows_stat_api_timestamps_preserve_identity_and_mutation_checks[st_ino] ",
+      "2026-10-16T16:03:25.0280253Z [gw0] [ 53%] PASSED action_server_tests\\test_robot_artifacts.py::test_windows_stat_api_timestamps_preserve_identity_and_mutation_checks[st_nlink] ",
+      "2026-10-16T16:03:25.0536840Z [gw0] [ 53%] PASSED action_server_tests\\test_robot_artifacts.py::test_windows_stat_api_timestamps_preserve_identity_and_mutation_checks[st_size] ",
+      "2026-10-16T16:03:25.0799932Z [gw0] [ 53%] PASSED action_server_tests\\test_robot_artifacts.py::test_windows_stat_api_timestamps_preserve_identity_and_mutation_checks[st_mtime_ns] ",
+      "2026-10-16T16:03:25.1054525Z [gw0] [ 53%] PASSED action_server_tests\\test_robot_artifacts.py::test_windows_stat_api_timestamps_preserve_identity_and_mutation_checks[st_birthtime_ns] ",
+      "2026-10-16T16:07:39.3361951Z [gw1] [ 80%] PASSED action_server_tests\\test_robot_artifacts.py::test_completed_snapshot_survives_source_changes_and_removal ",
+      "2026-10-16T16:07:41.0222549Z [gw1] [ 83%] PASSED action_server_tests\\test_robot_artifacts.py::test_inventory_rejects_nonportable_names_before_path_access[CON.txt] ",
+      "2026-10-16T16:07:41.0380116Z [gw1] [ 83%] PASSED action_server_tests\\test_robot_artifacts.py::test_inventory_rejects_nonportable_names_before_path_access[trailing.] ",
+      "2026-10-16T16:07:41.0686719Z [gw1] [ 83%] PASSED action_server_tests\\test_robot_artifacts.py::test_inventory_rejects_nonportable_names_before_path_access[trailing ] ",
+      "2026-10-16T16:07:41.0846583Z [gw1] [ 83%] PASSED action_server_tests\\test_robot_artifacts.py::test_inventory_rejects_nonportable_names_before_path_access[name:stream] ",
+      "2026-10-16T16:07:41.1001539Z [gw1] [ 83%] PASSED action_server_tests\\test_robot_artifacts.py::test_inventory_rejects_nonportable_names_before_path_access[back\\\\slash] "
+    ]
+  }
+]

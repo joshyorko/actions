@@ -70,7 +70,7 @@ worktrees; each ToolkitTest ran 179 tests.
 | Clean install dependency check | PASS; published Core 1.0.2, HTTP helper 1.0.3, Work Items 0.4.4 |
 | Template08 A / B / C | PASS / PASS / PASS |
 | Authenticated process-restart retrieval | PASS; all 26 artifacts unchanged |
-| Hosted full/native gates | Both heads: native-build, wheel/sdist, Work Items and audit PASS; full tests/toolkit still running at this checkpoint; see `hosted-ci.json` |
+| Hosted full/native gates | PASS: all six workflows at #317 and all six at #320; all platform full/native jobs green; #318 five existing workflows remain green at unchanged head. See `hosted-ci.json` and test/native log excerpts. |
 
 The combined focused command was:
 
@@ -147,7 +147,9 @@ their own hashes in `SHA256SUMS`.
 
 ## Handoff and remaining decision
 
-Keep all three PRs Draft until fresh hosted results and owner review are accepted.
+All fresh hosted gates are green. Keep all three PRs Draft pending owner review
+and explicit merge approval. No test, native or package publication gate is
+waived; individual suite skips remain unverified as recorded in the excerpts.
 The recommended single union review is #320 into the separate 1.0.4 staging
 branch. Alternatively #317 then #318 produces the same union after base integration;
 recheck its final tree and hosted results. Do not merge both routes redundantly.
@@ -161,8 +163,8 @@ current freeze, PR #221/#319 and publication remain outside this campaign.
 Template08's declaration and eventual published-Runtime lock update require their
 own reviewed template change; the private adapter is not a shipped lock.
 
-The exact next decision is whether Josh accepts the union and authorizes its
-merge into 1.0.4 staging after the outstanding hosted/native gates pass. Final
+The exact next decision is whether Josh accepts the qualified union and
+authorizes its merge into 1.0.4 staging. Final
 package/template publication remains Josh's separate decision.
 
 ## Required receipts
@@ -172,7 +174,7 @@ Documentation improvement:
 - Durable learning: cross-API Windows ctime semantics and literal-name fixture preconditions; retain portable inventory-boundary tests on every platform.
 - Evidence: the failed Windows job, versioned CPython source, seven red/green timestamp cases and five added inventory rejection cases.
 - Stale/ambiguous guidance removed: implicit equality of pathname/descriptor ctime and successful-write-as-literal-name assumptions.
-- Remaining uncertainty: native/hosted gates listed in the current CI receipt; source namespace trust and non-atomic snapshot limits remain explicit.
+- Remaining uncertainty: suite skips and optional Markdown lint remain unverified; native Template08 A/B/C and final 1.0.4 release publication are not exercised. Source namespace trust and non-atomic snapshot limits remain explicit.
 
 Upstream disposition:
 - Candidate: python/cpython, consumed Windows CPython 3.12.15.
