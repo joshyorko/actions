@@ -1407,6 +1407,12 @@ branch, verify both the prior guards and the new feature boundaries, and qualify
 the resulting union. This does not authorize modifying the preceding release's
 frozen branch or publishing either version out of sequence. A historical green
 candidate or private wheel does not qualify that changed union or version.
+Historical measured-receipt unit fixtures must likewise retain their recorded
+input bytes. Bundle the measured Runtime identity text with its hash check for
+shallow CI checkouts; do not rebind a receipt to a later version or relax the
+live admission predicates. CRLF simulations commit those canonical historical
+bytes before changing worktree line endings. Current Runtime/browser acceptance
+still requires a fresh consumer run, separate from that historical unit control.
 
 The clean-break distribution identity is `actions-runtime`; its package version,
 `actions.server.__version__`, Runtime changelog, and `actions-runtime-X.Y.Z` tag
