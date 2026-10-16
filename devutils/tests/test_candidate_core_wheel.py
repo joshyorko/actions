@@ -64,7 +64,9 @@ def test_candidate_core_installation_is_pr_only_and_release_keeps_registry_resol
     assert candidate["if"] == "github.event_name == 'pull_request'"
     assert steps.index(candidate) < steps.index(build)
     assert "--no-deps" not in build["env"]["CIBW_TEST_COMMAND"]
-    assert "pip check" in build["env"]["CIBW_TEST_COMMAND"]
+    assert '--installed-wheel "{wheel}"' in build["env"]["CIBW_TEST_COMMAND"]
+    verifier = root / "action_server/scripts/verify_published_runtime_floor.py"
+    assert '"-m", "pip", "check"' in verifier.read_text()
 
 
 def test_installer_requires_helper_distribution_identity(tmp_path):

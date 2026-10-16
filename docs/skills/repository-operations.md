@@ -1375,7 +1375,27 @@ Runtime release authority is one generated PyPI workflow for `actions-runtime-*`
 tags. It builds one sdist and the supported cp312/cp313 macOS arm64, manylinux
 x86_64, and Windows amd64 wheels into one retained artifact set. Poetry 2.1.1
 and the committed lock remain authoritative; cibuildwheel 2.23.4 must clean-test
-each wheel with `python -m pip check` and `python -m actions.server version`.
+each final repaired wheel with
+`verify_published_runtime_floor.py --installed-wheel "{wheel}" --checkout-root "{project}"`.
+The shared verifier runs `pip check`, the existing public API and CLI probes,
+and an inventory of every installed Runtime Python member. It requires exact
+member-byte equality with that selected wheel, scans all members for private
+Core imports, and checks pip's installed archive origin and SHA-256. Its OAuth
+check reads generated literals without executing them and binds both contents
+and `INPUT_SHA256` to the raw repository-owned input files. CRLF input bytes
+remain distinct from LF input bytes.
+The command runs inside each cp312/cp313 platform test environment after
+cibuildwheel installs its repaired `{wheel}`. The separate uncached cp312 canary
+keeps the exact published Core 1.0.2 and Helper 1.0.3 provenance checks and runs
+the same full installed-wheel probe. Source-wheel uninstall-order tests reuse
+that probe but qualify their own rebuilt wheels only.
+`{project}` is the package root, including the isolated manylinux `/project`
+copy. Exclude the monorepo parent from imports only when the package is
+`action_server` and the parent contains `AGENTS.md`, `actions/src`, and
+`actions-http-helper/src`; otherwise exclude the package root. Never treat the
+parent of an isolated `/project` as the source checkout. Check search paths
+before `pip check` and again after imports. Preserve captured child stdout,
+stderr, and the original exit status when a probe fails.
 Keep the 2.x patch line at or above 2.23.4: it replaces the rate-limited
 GitHub `get-virtualenv` blob URL with the supported `bootstrap.pypa.io` URL
 ([upstream fix](https://github.com/pypa/cibuildwheel/pull/2775)).
@@ -1471,7 +1491,10 @@ The validator's `--download-root` mode rejects duplicate basenames across
 separate downloaded artifact directories before copying or merging their files.
 Determine whether a failed job attempted publication from its workflow event
 and upload-step conclusions, not its display name. A pull-request job named
-`publish` can fail artifact validation before credential or upload steps run.
+`publish` can fail artifact validation or succeed after dry-run checks while
+tag provenance, credential, and upload steps are skipped. Actions artifact
+retention is separate from registry publication; verify the registry bytes
+after an actual upload.
 Approved local publication
 is executable only through `action_server/scripts/publish_verified_runtime.py`:
 it downloads the retained `actions-runtime-dist` for an explicit run ID,
@@ -1513,8 +1536,8 @@ Stage only the selected host cp312 wheel when calling
 `verify_published_runtime_floor.py`: the complete release inventory contains
 three cp312 platform wheels and its selector requires exactly one. Its isolated
 public install and import verification checks loaded imports and exact public
-dependency URLs and digests. Combine that result with the installed-wheel
-contract's full Python-member byte and private-Core import guard. Derive the
+dependency URLs and digests, then invokes the shared full Python-member byte,
+public API, and private-Core import checks on the same selected wheel. Derive the
 member inventory from the selected wheel, retain it before removing the clean
 environment, and bind each receipt to that wheel and producer. An older wheel's
 member count, source or passing receipt cannot qualify a newer artifact.

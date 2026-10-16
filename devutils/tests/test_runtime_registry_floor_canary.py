@@ -1,3 +1,4 @@
+import hashlib
 import importlib.util
 import json
 import os
@@ -278,6 +279,7 @@ def test_runtime_release_workflow_runs_canary_on_community_and_integration_prs()
     assert canary_index < next(
         i for i, step in enumerate(steps) if "Upload artifact" in step.get("name", "")
     )
+
     publish_steps = workflow["jobs"]["publish"]["steps"]
     token_check = next(
         step
@@ -294,3 +296,177 @@ def test_runtime_release_workflow_runs_canary_on_community_and_integration_prs()
         upload["if"]
         == "github.event_name == 'push' && steps.runtime-token.outputs.enabled == 'true'"
     )
+
+
+def _oauth_wheel(tmp_path, *, newline=b"\n", generated_contents=None):
+    project = tmp_path / "project"
+    inputs = project / "oauth2"
+    inputs.mkdir(parents=True)
+    raw = b"formatVersion: 1.0.0\noauth2Config:\n  providers: {}\n".replace(
+        b"\n", newline
+    )
+    pairs = {
+        "actions_config": "actions-oauth-config.yaml",
+        "default_user_config": "oauth-config.yaml",
+    }
+    for filename in pairs.values():
+        (inputs / filename).write_bytes(raw)
+    contents = {key: raw.decode("utf-8") for key in pairs}
+    if generated_contents is not None:
+        contents = generated_contents
+    hashes = {
+        filename: hashlib.sha256(contents[key].encode("utf-8")).hexdigest()
+        for key, filename in pairs.items()
+    }
+    wheel = _wheel(tmp_path, "actions-runtime", "1.0.3")
+    with zipfile.ZipFile(wheel, "a") as archive:
+        archive.writestr(
+            "actions/server/_oauth2_config.py",
+            f"FILE_CONTENTS = {contents!r}\nINPUT_SHA256 = {hashes!r}\n",
+        )
+    return wheel, project, hashes
+
+
+@pytest.mark.parametrize("newline", [b"\n", b"\r\n"])
+def test_selected_wheel_oauth_binds_exact_owned_input_bytes(tmp_path, newline):
+    wheel, project, hashes = _oauth_wheel(tmp_path, newline=newline)
+    assert module.verify_oauth_input_binding(wheel, project) == hashes
+
+
+def test_selected_wheel_oauth_rejects_self_consistent_unowned_payload(tmp_path):
+    wheel, project, _ = _oauth_wheel(
+        tmp_path,
+        generated_contents={"actions_config": "", "default_user_config": ""},
+    )
+    with pytest.raises(RuntimeError, match="OAuth2.*input"):
+        module.verify_oauth_input_binding(wheel, project)
+
+
+def test_selected_wheel_oauth_rejects_executable_generated_values(tmp_path):
+    wheel, project, _ = _oauth_wheel(tmp_path)
+    other = tmp_path / "executable.whl"
+    with zipfile.ZipFile(wheel) as source, zipfile.ZipFile(other, "w") as target:
+        for name in source.namelist():
+            contents = source.read(name)
+            if name == "actions/server/_oauth2_config.py":
+                contents = b"FILE_CONTENTS = dict()\nINPUT_SHA256 = {}\n"
+            target.writestr(name, contents)
+    with pytest.raises(RuntimeError, match="literal"):
+        module.verify_oauth_input_binding(other, project)
+
+
+def test_cibuildwheel_checks_each_final_repaired_wheel():
+    workflow = yaml.safe_load(
+        (WORKFLOWS / "actions_runtime_pypi_release.yml").read_text()
+    )
+    build = next(
+        step
+        for step in workflow["jobs"]["build-wheels"]["steps"]
+        if step.get("name") == "Build and clean-test wheels"
+    )
+    assert build["env"]["CIBW_TEST_COMMAND"] == (
+        'python "{project}/scripts/verify_published_runtime_floor.py" '
+        '--installed-wheel "{wheel}" --checkout-root "{project}"'
+    )
+    assert set(build["env"]["CIBW_BUILD"].split()) == {
+        f"cp{python}-*{platform}*{architecture}"
+        for python in ("312", "313")
+        for platform, architecture in (
+            ("macos", "arm64"),
+            ("manylinux", "x86_64"),
+            ("win", "amd64"),
+        )
+    }
+
+
+def test_installed_wheel_rejects_wrong_metadata_before_execution(tmp_path):
+    wheel = _wheel(tmp_path, "actions-runtime", "1.0.2")
+    with pytest.raises(ValueError, match="Unexpected Runtime version"):
+        module.main(["--installed-wheel", str(wheel), "--checkout-root", str(tmp_path)])
+
+
+def test_selected_wheel_origin_rejects_another_same_version_archive(tmp_path):
+    wheel = _wheel(tmp_path, "actions-runtime", "1.0.3")
+    direct_url = {
+        "url": wheel.resolve().as_uri(),
+        "archive_info": {"hashes": {"sha256": "0" * 64}},
+    }
+    with pytest.raises(RuntimeError, match="selected Runtime wheel"):
+        module.verify_selected_runtime_origin(wheel, direct_url)
+
+
+def test_selected_wheel_origin_binds_local_archive_url_and_digest(tmp_path):
+    wheel = _wheel(tmp_path, "actions-runtime", "1.0.3")
+    direct_url = {
+        "url": wheel.resolve().as_uri(),
+        "archive_info": {
+            "hashes": {"sha256": hashlib.sha256(wheel.read_bytes()).hexdigest()}
+        },
+    }
+    module.verify_selected_runtime_origin(wheel, direct_url)
+
+
+def test_selected_wheel_origin_resolves_local_archive_alias(tmp_path):
+    wheel = _wheel(tmp_path, "actions-runtime", "1.0.3")
+    alias = tmp_path / "wheel-alias.whl"
+    try:
+        alias.symlink_to(wheel)
+    except OSError as error:
+        pytest.skip(f"file symlinks are unavailable: {error}")
+    module.verify_selected_runtime_origin(
+        wheel,
+        {
+            "url": alias.absolute().as_uri(),
+            "archive_info": {
+                "hashes": {"sha256": hashlib.sha256(wheel.read_bytes()).hexdigest()}
+            },
+        },
+    )
+
+
+def test_failed_real_probe_preserves_stdout_stderr_and_exit_code(
+    tmp_path, monkeypatch, capsys
+):
+    wheel = _wheel(tmp_path, "actions-runtime", "1.0.3")
+    monkeypatch.setattr(
+        module,
+        "build_import_path_guard",
+        lambda _: (
+            "import sys\n"
+            "print('controlled-probe-stdout')\n"
+            "print('controlled-probe-stderr', file=sys.stderr)\n"
+            "raise SystemExit(23)\n"
+        ),
+    )
+    with pytest.raises(subprocess.CalledProcessError) as failed:
+        module.verify_installed_runtime_wheel(
+            Path(sys.executable), wheel, tmp_path, ROOT
+        )
+    assert failed.value.returncode == 23
+    captured = capsys.readouterr()
+    assert "controlled-probe-stdout" in captured.out
+    assert "controlled-probe-stderr" in captured.err
+
+
+@pytest.mark.parametrize("source", ["actions/src", "actions-http-helper/src", "."])
+def test_installed_mode_excludes_monorepo_sibling_search_paths(tmp_path, source):
+    repository = tmp_path / "repo"
+    project = repository / "action_server"
+    project.mkdir(parents=True)
+    (repository / "AGENTS.md").write_text("repository instructions\n")
+    for sibling in ("actions/src", "actions-http-helper/src"):
+        (repository / sibling).mkdir(parents=True)
+    checkout = module.source_checkout_root(project)
+    assert checkout == repository
+    result = _run_child_path_guard(checkout, tmp_path, str(repository / source))
+    assert result.returncode != 0
+    assert "source checkout" in result.stderr
+
+
+def test_installed_mode_keeps_isolated_package_boundary(tmp_path):
+    project = tmp_path / "project"
+    project.mkdir()
+    checkout = module.source_checkout_root(project)
+    assert checkout == project
+    result = _run_child_path_guard(checkout, tmp_path)
+    assert result.returncode == 0, result.stderr

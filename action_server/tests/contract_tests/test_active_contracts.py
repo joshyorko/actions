@@ -1,11 +1,11 @@
-import ast
-import hashlib
+import importlib.util
 import json
 import os
 import shutil
 import stat
 import subprocess
 import sys
+import tempfile
 import tomllib
 import zipfile
 from pathlib import Path
@@ -116,193 +116,22 @@ def test_active_contracts_scan_supported_docs_templates_and_build_inputs():
     )
 
 
-def _private_core_imports(source: str) -> list[int]:
-    violations = []
-    tree = ast.parse(source)
-    importlib_names: set[str] = set()
-    import_module_names: set[str] = set()
-    builtin_module_names: set[str] = set()
-    builtin_import_names = {"__import__"}
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Import):
-            importlib_names.update(
-                alias.asname or alias.name
-                for alias in node.names
-                if alias.name == "importlib"
-            )
-            importlib_names.update(
-                "importlib"
-                for alias in node.names
-                if alias.name.startswith("importlib.") and alias.asname is None
-            )
-            builtin_module_names.update(
-                alias.asname or alias.name
-                for alias in node.names
-                if alias.name == "builtins"
-            )
-        elif isinstance(node, ast.ImportFrom) and node.module == "importlib":
-            import_module_names.update(
-                alias.asname or alias.name
-                for alias in node.names
-                if alias.name == "import_module"
-            )
-        elif isinstance(node, ast.ImportFrom) and node.module == "builtins":
-            builtin_import_names.update(
-                alias.asname or alias.name
-                for alias in node.names
-                if alias.name == "__import__"
-            )
-
-    def static_string(node):
-        if isinstance(node, ast.Constant) and isinstance(node.value, str):
-            return node.value
-        if isinstance(node, ast.BinOp) and isinstance(node.op, ast.Add):
-            left, right = static_string(node.left), static_string(node.right)
-            if left is not None and right is not None:
-                return left + right
-        return None
-
-    for node in ast.walk(tree):
-        if isinstance(node, ast.ImportFrom):
-            if (node.module or "").startswith("actions._") or (
-                node.module == "actions"
-                and any(alias.name.startswith("_") for alias in node.names)
-            ):
-                violations.append(node.lineno)
-        elif isinstance(node, ast.Import):
-            if any(alias.name.startswith("actions._") for alias in node.names):
-                violations.append(node.lineno)
-        elif isinstance(node, ast.Call):
-            function = node.func
-            builtin_import = (
-                isinstance(function, ast.Name) and function.id in builtin_import_names
-            ) or (
-                isinstance(function, ast.Attribute)
-                and function.attr == "__import__"
-                and isinstance(function.value, ast.Name)
-                and function.value.id in builtin_module_names
-            )
-            module_import = (
-                isinstance(function, ast.Name) and function.id in import_module_names
-            ) or (
-                isinstance(function, ast.Attribute)
-                and function.attr == "import_module"
-                and isinstance(function.value, ast.Name)
-                and function.value.id in importlib_names
-            )
-            if not builtin_import and not module_import:
-                continue
-            keywords = {keyword.arg: keyword.value for keyword in node.keywords}
-            module = static_string(node.args[0] if node.args else keywords.get("name"))
-            if module is None:
-                continue
-            if module_import and module.startswith("."):
-                package = static_string(
-                    keywords.get(
-                        "package", node.args[1] if len(node.args) > 1 else None
-                    )
-                )
-                if package and (
-                    package.startswith("actions._")
-                    or (package == "actions" and module.startswith("._"))
-                ):
-                    violations.append(node.lineno)
-            elif module.startswith("actions._"):
-                violations.append(node.lineno)
-            elif builtin_import and module == "actions":
-                fromlist = keywords.get(
-                    "fromlist", node.args[3] if len(node.args) > 3 else None
-                )
-                if isinstance(fromlist, (ast.List, ast.Tuple)) and any(
-                    (static_string(value) or "").startswith("_")
-                    for value in fromlist.elts
-                ):
-                    violations.append(node.lineno)
-    return violations
-
-
-def _private_core_imports_in_file(path: Path) -> list[int]:
-    return _private_core_imports(path.read_text(encoding="utf-8"))
-
-
-def _private_core_imports_in_tree(root: Path) -> list[str]:
-    violations: list[str] = []
-    for path in sorted(root.rglob("*.py")):
-        relative = path.relative_to(root).as_posix()
-        violations.extend(
-            f"{relative}:{line}" for line in _private_core_imports_in_file(path)
-        )
-    return violations
-
-
-def _assert_runtime_wheel_python_members_match(
-    wheel: Path, installed_members: dict[str, Path]
-) -> list[tuple[str, Path, str]]:
-    with zipfile.ZipFile(wheel) as archive:
-        wheel_members = sorted(
-            name for name in archive.namelist() if name.endswith(".py")
-        )
-        assert set(installed_members) == set(wheel_members), (
-            "installed Runtime Python member inventory differs from selected wheel: "
-            f"missing={sorted(set(wheel_members) - set(installed_members))}, "
-            f"unexpected={sorted(set(installed_members) - set(wheel_members))}"
-        )
-        result = []
-        for member in wheel_members:
-            installed_path = installed_members[member].resolve()
-            installed_bytes = installed_path.read_bytes()
-            wheel_bytes = archive.read(member)
-            installed_digest = hashlib.sha256(installed_bytes).hexdigest()
-            wheel_digest = hashlib.sha256(wheel_bytes).hexdigest()
-            assert installed_digest == wheel_digest, (
-                f"installed Runtime member differs from selected wheel: {member} "
-                f"installed={installed_digest} wheel={wheel_digest}"
-            )
-            result.append((member, installed_path, installed_digest))
-    return result
-
-
-def _assert_wheel_digest(
-    wheel: Path, observed_digest: str, package_name: str
-) -> None:
-    expected_digest = hashlib.sha256(wheel.read_bytes()).hexdigest()
-    assert observed_digest == expected_digest, (
-        f"{package_name} wheel SHA-256 differs for {wheel}: "
-        f"observed={observed_digest} expected={expected_digest}"
-    )
-
-
-def _assert_installed_runtime_wheel_has_no_private_core_imports(
-    wheel: Path,
-    installed_members: dict[str, Path],
-    *,
-    prefix: Path,
-    checkout: Path,
-) -> list[tuple[str, Path, str]]:
-    environment_root = prefix.resolve()
-    checkout_root = checkout.resolve()
-    resolved_members = {}
-    for member, path in installed_members.items():
-        resolved = path.resolve()
-        assert resolved.is_relative_to(environment_root), (
-            f"installed Runtime module is outside the clean environment: {resolved}"
-        )
-        assert not resolved.is_relative_to(checkout_root), (
-            f"installed Runtime module resolved into the checkout: {resolved}"
-        )
-        resolved_members[member] = resolved
-    bound_members = _assert_runtime_wheel_python_members_match(
-        wheel, resolved_members
-    )
-    violations: list[str] = []
-    for member, path, _ in bound_members:
-        violations.extend(
-            f"{member}:{line}" for line in _private_core_imports_in_file(path)
-        )
-    assert not violations, "Runtime imports Core-private modules:\n" + "\n".join(
-        violations
-    )
-    return bound_members
+_VERIFIER_SPEC = importlib.util.spec_from_file_location(
+    "runtime_wheel_verifier", ROOT / "scripts/verify_published_runtime_floor.py"
+)
+assert _VERIFIER_SPEC and _VERIFIER_SPEC.loader
+_WHEEL_VERIFIER = importlib.util.module_from_spec(_VERIFIER_SPEC)
+_VERIFIER_SPEC.loader.exec_module(_WHEEL_VERIFIER)
+_private_core_imports = _WHEEL_VERIFIER._private_core_imports
+_private_core_imports_in_file = _WHEEL_VERIFIER._private_core_imports_in_file
+_private_core_imports_in_tree = _WHEEL_VERIFIER._private_core_imports_in_tree
+_assert_runtime_wheel_python_members_match = (
+    _WHEEL_VERIFIER._assert_runtime_wheel_python_members_match
+)
+_assert_wheel_digest = _WHEEL_VERIFIER._assert_wheel_digest
+_assert_installed_runtime_wheel_has_no_private_core_imports = (
+    _WHEEL_VERIFIER._assert_installed_runtime_wheel_has_no_private_core_imports
+)
 
 
 def test_installed_runtime_tree_scan_catches_unimported_private_core_modules(
@@ -701,6 +530,12 @@ def _build_wheels(output: Path, python: Path) -> list[Path]:
         environment.pop("PYTHONPATH", None)
         if name == "action_server":
             environment["ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD"] = "true"
+            subprocess.run(
+                [str(python), "scripts/build_oauth2_config.py"],
+                cwd=package,
+                check=True,
+                env=environment,
+            )
         subprocess.run(
             command,
             cwd=package,
@@ -780,206 +615,15 @@ def _install_and_probe(python: Path, wheels: list[Path]) -> None:
         check=True,
         env=environment,
     )
-    subprocess.run([str(python), "-m", "pip", "check"], check=True, env=environment)
-    checkout = str(REPO.resolve())
     core_wheel = next(path for path in wheels if path.name.startswith("actions_core-"))
     runtime_wheel = next(
         path for path in wheels if path.name.startswith("actions_runtime-")
     )
-    probe = f"""
-import base64
-import hashlib
-import importlib
-import importlib.metadata
-import inspect
-import json
-import pathlib
-import sys
-import tempfile
-
-environment_root = pathlib.Path(sys.prefix).resolve()
-checkout_root = pathlib.Path({checkout!r}).resolve()
-for name in ("actions", "actions.mcp", "actions.work_items", "actions.server", "actions_http"):
-    module = importlib.import_module(name)
-    origin = pathlib.Path(module.__file__).resolve()
-    assert origin.is_relative_to(environment_root), origin
-    assert not origin.is_relative_to(checkout_root), origin
-
-from actions import ActionContext, ActionsListActionTypedDict, Request
-from actions.server._protocols import JSONValue
-assert ActionsListActionTypedDict.__required_keys__ == {{
-    "name", "line", "file", "docs", "input_schema", "output_schema",
-    "managed_params_schema", "options",
-}}
-assert JSONValue is not None
-encoded_context = base64.b64encode(
-    json.dumps({{"secrets": {{"token": "kept"}}}}).encode("utf-8")
-).decode("ascii")
-assert ActionContext(encoded_context).value == {{"secrets": {{"token": "kept"}}}}
-
-from actions.server_integration import (
-    DEFAULT_EXCLUSION_PATTERNS,
-    EPManagedParameters,
-    ManagedParameters,
-    PluginManager,
-    format_lint_results,
-)
-request = Request.model_validate({{"headers": {{"X-Request-ID": "request-1"}}, "cookies": {{}}}})
-managed = ManagedParameters({{"request": request}})
-plugin_manager = PluginManager()
-plugin_manager.set_instance(EPManagedParameters, managed)
-request_parameter = inspect.signature(lambda request: None).parameters["request"]
-assert plugin_manager.get_instance(EPManagedParameters) is managed
-assert managed.is_managed_param("request", param=request_parameter)
-assert managed.inject_managed_params(
-    inspect.signature(lambda request: None), None, {{}}, {{}}
-) == {{"request": request}}
-assert managed.get_request_contexts({{}}, {{}}).request is request
-from actions.server._preload_actions.preload_actions_server_main import MessagesHandler
-handler = MessagesHandler.__new__(MessagesHandler)
-worker_plugins = handler._plugin_manager_kwargs(
-    {{"request": {{"headers": {{"X-Request-ID": "worker-request"}}, "cookies": {{}}}}}}
-)["plugin_manager"]
-worker_request = worker_plugins.get_instance(EPManagedParameters).get_request_contexts({{}}, {{}}).request
-assert worker_request.headers["X-Request-ID"] == "worker-request"
-
-formatted = format_lint_results({{
-    "file": "actions.py",
-    "errors": [{{
-        "range": {{"start": {{"line": 7}}}},
-        "severity": 1,
-        "message": "missing description",
-    }}],
-}})
-assert formatted is not None and formatted.found_critical
-assert "Error (line 7): missing description" in formatted.message
-
-from actions.server.package.package_exclude import PackageExcludeHandler
-with tempfile.TemporaryDirectory() as directory:
-    root = pathlib.Path(directory)
-    (root / ".git").mkdir()
-    (root / ".git" / "config").write_text("ignored")
-    (root / "keep.txt").write_text("kept")
-    excludes = PackageExcludeHandler()
-    excludes.fill_exclude_patterns(DEFAULT_EXCLUSION_PATTERNS)
-    found = sorted(relative for _, relative in excludes.collect_files_excluding_patterns(root))
-    assert found == ["keep.txt"], found
-
-for name in (
-    "actions.server._actions_process_pool",
-    "actions.server._actions_import",
-    "actions.server._encryption",
-    "actions.server._new_project",
-    "actions.server._preload_actions.preload_actions_server_main",
-    "actions.server.package._package_metadata",
-):
-    importlib.import_module(name)
-
-runtime_distribution = importlib.metadata.distribution("actions-runtime")
-runtime_modules = []
-for distribution_file in runtime_distribution.files or ():
-    member = distribution_file.as_posix()
-    if member.endswith(".py"):
-        path = pathlib.Path(
-            runtime_distribution.locate_file(distribution_file)
-        ).resolve()
-        runtime_modules.append({{
-            "member": member,
-            "path": str(path),
-            "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
-        }})
-assert runtime_modules, "installed Runtime distribution has no Python modules"
-wheel_path = pathlib.Path({str(runtime_wheel.resolve())!r})
-wheel_sha256 = hashlib.sha256(wheel_path.read_bytes()).hexdigest()
-core_wheel_path = pathlib.Path({str(core_wheel.resolve())!r})
-core_wheel_sha256 = hashlib.sha256(core_wheel_path.read_bytes()).hexdigest()
-print("RUNTIME_WHEEL_MEMBER_INVENTORY=" + json.dumps({{
-    "environment_prefix": str(pathlib.Path(sys.prefix).resolve()),
-    "wheel_path": str(wheel_path),
-    "wheel_sha256": wheel_sha256,
-    "core_wheel_path": str(core_wheel_path),
-    "core_wheel_sha256": core_wheel_sha256,
-    "modules": runtime_modules,
-}}, sort_keys=True))
-"""
-    probe_result = subprocess.run(
-        [str(python), "-c", probe],
-        check=True,
-        capture_output=True,
-        text=True,
-        env=environment,
-    )
-    inventory_prefix = "RUNTIME_WHEEL_MEMBER_INVENTORY="
-    inventory_lines = [
-        line
-        for line in probe_result.stdout.splitlines()
-        if line.startswith(inventory_prefix)
-    ]
-    assert len(inventory_lines) == 1, (
-        "clean Runtime probe did not emit exactly one wheel inventory; "
-        f"stdout={probe_result.stdout!r} stderr={probe_result.stderr!r}"
-    )
-    inventory = json.loads(inventory_lines[0][len(inventory_prefix) :])
-    assert inventory["wheel_path"] == str(runtime_wheel.resolve()), (
-        f"Runtime probe selected a different wheel: {inventory['wheel_path']}"
-    )
-    assert inventory["core_wheel_path"] == str(core_wheel.resolve()), (
-        f"Runtime probe selected a different Core wheel: {inventory['core_wheel_path']}"
-    )
-    _assert_wheel_digest(runtime_wheel, inventory["wheel_sha256"], "Runtime")
-    _assert_wheel_digest(core_wheel, inventory["core_wheel_sha256"], "Core")
-    environment_prefix = Path(inventory["environment_prefix"]).resolve()
-    installed_members = {
-        item["member"]: Path(item["path"]) for item in inventory["modules"]
-    }
-    assert len(installed_members) == len(inventory["modules"]), (
-        "installed Runtime distribution contains duplicate Python member paths"
-    )
-    bound_members = _assert_installed_runtime_wheel_has_no_private_core_imports(
-        runtime_wheel,
-        installed_members,
-        prefix=environment_prefix,
-        checkout=REPO,
-    )
-    assert len(bound_members) == len(inventory["modules"])
-    for member, path, digest in bound_members:
-        observed = next(
-            item for item in inventory["modules"] if item["member"] == member
+    _WHEEL_VERIFIER.verify_oauth_input_binding(runtime_wheel, ROOT)
+    with tempfile.TemporaryDirectory(prefix="runtime-wheel-probe-") as directory:
+        _WHEEL_VERIFIER.verify_installed_runtime_wheel(
+            python, runtime_wheel, Path(directory), REPO, core_wheel=core_wheel
         )
-        assert observed["path"] == str(path)
-        assert observed["sha256"] == digest
-    print(
-        "RUNTIME_WHEEL_PRIVATE_IMPORT_SCAN="
-        + json.dumps(
-            {
-                "environment_prefix": str(environment_prefix),
-                "runtime_wheel_path": str(runtime_wheel.resolve()),
-                "runtime_wheel_sha256": inventory["wheel_sha256"],
-                "core_wheel_path": str(core_wheel.resolve()),
-                "core_wheel_sha256": inventory["core_wheel_sha256"],
-                "members": [
-                    {"path": member, "installed_path": str(path), "sha256": digest}
-                    for member, path, digest in bound_members
-                ],
-            },
-            sort_keys=True,
-        ),
-        flush=True,
-    )
-    subprocess.run(
-        [str(python), "-m", "actions.server", "--help"], check=True, env=environment
-    )
-    subprocess.run(
-        [
-            str(
-                python.parent
-                / ("action-server.exe" if os.name == "nt" else "action-server")
-            ),
-            "--help",
-        ],
-        check=True,
-        env=environment,
-    )
 
 
 def test_runtime_clean_wheels_install_outside_checkout_in_both_uninstall_orders(

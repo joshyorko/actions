@@ -2544,6 +2544,8 @@ class ActionServerPyPiRelease(BaseWorkflow):
                         "docs/skills/repository-operations.md",
                         "action_server/scripts/publish_verified_runtime.py",
                         "action_server/scripts/verify_published_runtime_floor.py",
+                        "devutils/tests/test_runtime_registry_floor_canary.py",
+                        "devutils/tests/test_candidate_core_wheel.py",
                     ],
                 },
             }
@@ -2626,7 +2628,7 @@ rm src/actions/server/bin/rcc* -f
                 "CIBW_BUILD": CIBW_BUILD,
                 "CIBW_BUILD_VERBOSITY": 1,
                 "CIBW_BEFORE_TEST": "${{ github.event_name == 'pull_request' && 'python {project}/scripts/install_candidate_core.py {project}/candidate-core-wheelhouse {project}/candidate-helper-wheelhouse' || '' }}",
-                "CIBW_TEST_COMMAND": "python -m pip check && python -m actions.server version",
+                "CIBW_TEST_COMMAND": 'python "{project}/scripts/verify_published_runtime_floor.py" --installed-wheel "{wheel}" --checkout-root "{project}"',
             },
         }
 

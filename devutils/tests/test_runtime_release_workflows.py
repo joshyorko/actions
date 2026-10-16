@@ -208,8 +208,8 @@ def test_runtime_release_workflows_have_one_verified_pypi_publisher():
         in provenance
     )
     assert "package_version=$(poetry version --short)" not in provenance
-    assert "python -m pip check" in pypi
-    assert "python -m actions.server version" in pypi
+    assert '--installed-wheel "{wheel}"' in pypi
+    assert '"actions.server", "version"' in FLOOR_VERIFIER.read_text()
     assert "actions/upload-artifact@" in pypi
     assert "actions/download-artifact@" in pypi
     assert "needs:" in pypi
