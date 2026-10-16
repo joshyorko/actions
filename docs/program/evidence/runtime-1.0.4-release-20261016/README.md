@@ -1,14 +1,19 @@
 # Runtime 1.0.4 versioned-wheel qualification checkpoint
 
-This records actual version 1.0.4 at **ec5a66a48c05980ac3637c2158b0212156fd7935**,
-complete source tree **b65aca3b45da59a67cfaf8f279e0a0054afa6724**. It carries the
+This records actual version 1.0.4 at **87acac608dca272d0f9f11956717e7a21ee3e7cf**,
+complete source tree **62dd004a447c265889bc45f25ef716affab4c953**. It carries the
 accepted 1.0.3 security repairs plus the distinct #317/#318 robot fixes, followed
 by version/changelog and release-fixture repairs. It supersedes private rc1/rc2
-as versioned-wheel evidence. A separately reviewed release-button change is
-being added in [#323](https://github.com/joshyorko/actions/pull/323); this checkpoint
-is not proof of that changed controller/tree or its future final hosted head.
+as versioned-wheel evidence. The separately reviewed release-button change in
+[#323](https://github.com/joshyorko/actions/pull/323), head
+**1db830e73a6f9041616be40dadcad624e95e9ecf**, is now merged normally into the
+isolated preparation branch as this source. Its full Devutils suite passes
+**208 tests**, including interrupted-write recovery and no-op reruns. Hosted
+qualification of this complete source is still pending; this is a checkpoint,
+not a completed release approval. The preceding versioned checkpoint remains
+[immutable at05e80839](https://github.com/joshyorko/actions/blob/05e80839fcd26701a46c2cd6acd971931ca51035/docs/program/evidence/runtime-1.0.4-release-20261016/README.md).
 
-- Approved combined #320 was merged normally as **d234fda2dec409ee54d45af9aa7f7cf4b2e16fac** into separate 1.0.4 staging. Original drafts #317/#318 were not merged again.
+- Approved combined #320 was merged normally as **d234fda2dec409ee54d45af9aa7f7cf4b2e16fac** into separate 1.0.4 staging. No individual #317/#318 merge operation was performed. GitHub marks those original draft PRs closed/merged by ancestry through #320; do not merge their changes a second time.
 - #321 is the release preparation review; #322 is the community promotion review. Both current tested merge trees equal this exact source tree (see `source-identity.json`). Neither publication nor a final tag is performed by this evidence push.
 - Prior 1.0.3 accepted community source **20ccdae585b621a02080f545808fb3036f656e58** was carried forward by normal merge **e4189907f515c324a49ddcebd40976163ee57451**. Its source branch/tag/assets were not changed. Independent public reads at 17:01 UTC confirmed PyPI/native 1.0.3 exists and 1.0.4 does not (`publication-state.json`).
 
@@ -20,13 +25,20 @@ Devutils: **179 passed**; strict release-version controls: **135 passed**;
 Runtime lint/type checks and strict Twine: **passed**. The full Runtime suite ran
 at 14b1c0b9; ec5 changes only the historical measured-receipt test fixture and
 canonical documentation, with production/package/workflow inputs unchanged.
-Toolkit and the final wheel build/install/real-wheel integration ran after ec5.
+The subsequent controller/workflow changes do not change Runtime production,
+Runtime tests, frontend, build script or lockfile inputs. The final wheel
+build/install and real-wheel integration ran fresh at87acac. The208-test
+controller/Devutils suite ran on the exact complete tree merged as87acac.
 Skipped tests remain unverified. `ci-checkpoint.json` is a timestamped exact-head
 snapshot; pending workflows are not reported as passed. Use final hosted checks
 before merging or publishing a subsequent candidate.
 
-The six supported hosted wheels plus sdist pass the canonical PyPI gate; the
-three native build/browser/storage/history lanes pass. This local functional
+The preceding ec5 source passed its PyPI/native lanes; those receipts remain
+historical for this changed complete tree. Fresh87acac hosted Linux/macOS wheel
+lanes and sdist passed, and their new producer receipts were independently
+verified (`hosted-wheel-controls.json`). Windows, aggregate PyPI, source and
+other hosted gates must finish; consult `ci-checkpoint.json` and live exact-head
+checks. No pending gate is counted as passed. This local functional
 wheel is Linux CPython3.12, not the full portable release inventory:
 
 | Private artifact | SHA-256 |
@@ -70,9 +82,13 @@ checkpoint qualifies their versioned union with the carried-forward security
 repairs; it does not weaken portable path, reparse/link, inventory bounds,
 privacy or process-lifecycle contracts.
 
-Finish the separately reviewed release button, qualify its final hosted head,
-complete the normal staging/promotion preparation sequence, then run only
-non-publishing preparation/validation. Josh retains the final `publish` action.
+Qualify this final hosted head, complete the normal staging/promotion
+preparation sequence, then exercise only non-publishing preparation/validation.
+`controller-review.json` records the reviewed permission, provenance and retry
+controls and their deliberate limits. The manual route refuses any configured
+native signing credential; it cannot silently replace a signed release with an
+unsigned one. Cross-service publication is not atomic; original-bundle retries
+finish missing bytes without replacement. Josh retains the final `publish` action.
 No final1.0.4 tag, package, native release, template or deployment is authorized
 in this campaign. Do not merge #317/#318 a second time or mix the work back into
 1.0.3.

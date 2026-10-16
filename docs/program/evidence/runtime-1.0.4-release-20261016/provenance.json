@@ -1,14 +1,14 @@
 {
   "private_wheel_sha256": "2a03feab07f156b60b0e85e614ee97de8e7de07fa4572d9e0fcfaf576fc9b894",
   "raw_receipt_sha256": {
-    "combined-abc.json": "ab68baaf82e2a70df38510d10323b5fbef3703fd824095a3a6e1a43a343aeaa1",
-    "restart-retrieval.json": "4ed48530fdb04bc5742a6585fbc9ff1f3c91216efa9afb05e762f373dbc0d74b",
-    "wheel-provenance.json": "fc7bb53be395af92fb15ee32194f4a7a6df361d42d9e1a0842a0348ddea8870b"
+    "combined-abc.json": "2f058869ad2aeea5a23005cb34141af6b2da594d61b8efe6baef105128360dc6",
+    "restart-retrieval.json": "61226e8ad7296af192cb0a1fab1fdc19b64189a7b9e6cab214f2da1d040a82b1",
+    "wheel-provenance.json": "425665917a540881c0b021c51af1b80ffbd49e3fd0ec80098e52d4b7482be31b"
   },
   "sanitization": "Machine paths replaced by named roots. Private homes, keys, databases, archives and logs excluded. Sanitized file hashes differ from raw hashes.",
   "source_heads": {
     "accepted_103_community": "20ccdae585b621a02080f545808fb3036f656e58",
     "approved_320_merge": "d234fda2dec409ee54d45af9aa7f7cf4b2e16fac",
-    "release_preparation": "ec5a66a48c05980ac3637c2158b0212156fd7935"
+    "release_preparation": "87acac608dca272d0f9f11956717e7a21ee3e7cf"
   }
 }

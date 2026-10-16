@@ -1,6 +1,6 @@
 {
-  "source": "ec5a66a48c05980ac3637c2158b0212156fd7935",
-  "qualification_scope": "Versioned Runtime production inputs and installed real-wheel acceptance; fixture/tooling source identity distinctions are in README.",
+  "source": "87acac608dca272d0f9f11956717e7a21ee3e7cf",
+  "qualification_scope": "Current wheel/install/A/B/C/restart checks are fresh at87acac. Full Runtime1544/15 suite ran at14b1c0b9; Runtime production/test/build inputs are unchanged through87acac. Controller208 suite ran at1db830e7, the identical complete tree merged as87acac.",
   "gates": {
     "toolkit": {
       "result": "179 passed",
@@ -34,23 +34,28 @@
     },
     "strict_twine": {
       "result": "PASS",
-      "retained_log_basename": "runtime104-release-final-twine.log",
-      "raw_log_sha256": "f71276d6af2b89e54c8038989e8036bae34cfa5c877f0b53638cbc53e1c1ffbb"
+      "retained_log_basename": "runtime104-final-build.log",
+      "raw_log_sha256": "6b7d23ae2c136852cbb672cca75fde8bf98d1e9d7fb4e61db4c5abd7dae9064d"
     },
     "installed_request_boundaries": {
       "result": "26 controls PASS",
       "retained_log_basename": "installed-boundary-summary.txt",
-      "raw_log_sha256": "ba33bb7022e729cabb5cd896c8857279a919f3bbd9323e42dd1289992a8cf2e2"
+      "raw_log_sha256": "9acddcd7c3ca80a5ae94a953c3597876e90d8af363e2ea6209411f6c05bcaf54"
     },
     "template_ac": {
       "result": "A/C PASS",
-      "retained_log_basename": "runtime104-release-template-ac.log",
-      "raw_log_sha256": "ab06afa1c5e0b2e9b02977024e795bfb0482be55ba678f4372778807959c376c"
+      "retained_log_basename": "runtime104-final-template-ac.log",
+      "raw_log_sha256": "5690b7f0b8c89e1c99d19a766fee1110c7317d153c895d8684f1a0aad2b79381"
     },
     "template_b_restart": {
       "result": "B/restart PASS",
-      "retained_log_basename": "runtime104-release-template-b-v2.log",
-      "raw_log_sha256": "edb2a4a5b575320a004cf5f463b6ae120c9d9a218abf993156c15eca480a0c0b"
+      "retained_log_basename": "runtime104-final-template-b.log",
+      "raw_log_sha256": "dd4f363ac9f95e91d4d171327a56205a4c13fb32f148aedbab34d37073de94c6"
+    },
+    "controller_devutils": {
+      "result": "208 passed",
+      "retained_log_basename": "runtime104-button-digest-local.log",
+      "raw_log_sha256": "262c7acba89a8091fda40eed70c671629d058db68283ede69fba0b4e255dc444"
     }
   }
 }

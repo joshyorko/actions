@@ -1,19 +1,18 @@
 {
   "321": {
-    "tested_merge": "501970baec0034137a7bf34d1499c33aab6b453c",
-    "tree": "b65aca3b45da59a67cfaf8f279e0a0054afa6724",
-    "whole_tree_matches_release_source": true
+    "tested_merge": "c35d43a6440d3b5fcd7d25fa7a021e5bc92f077f",
+    "tree": "62dd004a447c265889bc45f25ef716affab4c953",
+    "complete_tree_matches_qualified_head": true
   },
   "322": {
-    "tested_merge": "d153598127c4ed978596815dc1ce05fd8dc81f45",
-    "tree": "b65aca3b45da59a67cfaf8f279e0a0054afa6724",
-    "whole_tree_matches_release_source": true
+    "tested_merge": "de22b7c788fa0db3271cfa36851ad322e65b3fb7",
+    "tree": "62dd004a447c265889bc45f25ef716affab4c953",
+    "complete_tree_matches_qualified_head": true
   },
-  "approved_union_merge": "d234fda2dec409ee54d45af9aa7f7cf4b2e16fac",
-  "preceding_community": "20ccdae585b621a02080f545808fb3036f656e58",
-  "preceding_tag_commit": "20ccdae585b621a02080f545808fb3036f656e58",
-  "production_inputs_unchanged_after_14b1_fixture_fix": true,
-  "release_source": "ec5a66a48c05980ac3637c2158b0212156fd7935",
-  "release_tree": "b65aca3b45da59a67cfaf8f279e0a0054afa6724",
-  "security_carry_merge": "e4189907f515c324a49ddcebd40976163ee57451"
+  "qualified_head": "87acac608dca272d0f9f11956717e7a21ee3e7cf",
+  "qualified_tree": "62dd004a447c265889bc45f25ef716affab4c953",
+  "button_head": "1db830e73a6f9041616be40dadcad624e95e9ecf",
+  "button_normal_merge": "87acac608dca272d0f9f11956717e7a21ee3e7cf",
+  "approved_robot_union_merge": "d234fda2dec409ee54d45af9aa7f7cf4b2e16fac",
+  "preceding_published_source": "20ccdae585b621a02080f545808fb3036f656e58"
 }
