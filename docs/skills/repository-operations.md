@@ -4246,3 +4246,12 @@ retains the successful owner-handoff preparation separately from deliberate
 negative/rerun controls. This permits qualification through the existing
 connected GitHub app when a shell credential has expired, without transferring
 credentials or changing repository security settings.
+
+A completed hosted run can precede availability of its downloadable job log.
+The qualification helper waits with a bounded sequence of read-only log fetches
+and retains the final error if logs stay unavailable. A reporting failure after
+accepted preparation/rerun writes does not authorize repeating those writes.
+Resume from the retained report, independently verify each original successful
+attempt and both immutable artifact/manifest digests, then run only the missing
+read-only validations. The original failed helper receipt remains evidence;
+recovery never changes the release source or rebuilds an admitted bundle.

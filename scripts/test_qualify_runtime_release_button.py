@@ -1,5 +1,7 @@
 import importlib.util
 import unittest
+from unittest.mock import patch
+import subprocess
 from pathlib import Path
 
 spec = importlib.util.spec_from_file_location(
@@ -10,6 +12,43 @@ spec.loader.exec_module(qualify)
 
 
 class DispatchContract(unittest.TestCase):
+    def test_saved_preparation_rejects_another_source(self):
+        saved = {
+            "id": 123,
+            "run_attempt": 1,
+            "head_sha": "b" * 40,
+            "head_branch": "community",
+            "event": "workflow_dispatch",
+            "path": ".github/workflows/runtime-release-prepare.yml",
+            "status": "completed",
+            "conclusion": "success",
+        }
+        with patch.object(qualify, "api", return_value=saved):
+            with self.assertRaisesRegex(
+                qualify.QualificationError, "saved preparation identity mismatch"
+            ):
+                qualify.saved_preparation(123, "a" * 40)
+
+    def test_job_log_read_waits_for_availability(self):
+        pending = subprocess.CompletedProcess([], 1, "", "gh: Not Found (HTTP 404)")
+        ready = subprocess.CompletedProcess([], 0, "never rerun preparation", "")
+        with (
+            patch.object(qualify.subprocess, "run", side_effect=[pending, ready]),
+            patch.object(qualify.time, "sleep"),
+        ):
+            self.assertEqual(qualify.job_logs(123), "never rerun preparation")
+
+    def test_job_log_read_reports_bounded_failure(self):
+        pending = subprocess.CompletedProcess([], 1, "", "gh: Not Found (HTTP 404)")
+        with (
+            patch.object(qualify.subprocess, "run", return_value=pending),
+            patch.object(qualify.time, "monotonic", side_effect=[0, 181]),
+        ):
+            with self.assertRaisesRegex(
+                qualify.QualificationError, "job123 logs unavailable.*HTTP 404"
+            ):
+                qualify.job_logs(123)
+
     def test_validation_can_never_select_publication(self):
         workflow, inputs = qualify.dispatch_input(
             "validate", "a" * 40, "b" * 40, "1.0.4", 123, "c" * 64

@@ -3,6 +3,7 @@
 This helper belongs only to the qualification branch, not the release candidate.
 Its job token has contents:read/actions:write and no package credential.
 """
+
 from __future__ import annotations
 
 import hashlib
@@ -210,6 +211,41 @@ def result(report, label, run):
     snapshot(report)
 
 
+def saved_preparation(run_id, source):
+    run = api(f"repos/{REPO}/actions/runs/{run_id}/attempts/1")
+    require(
+        run["id"] == run_id
+        and run["run_attempt"] == 1
+        and run["head_sha"] == source
+        and run["head_branch"] == "community"
+        and run["event"] == "workflow_dispatch"
+        and run["path"] == f".github/workflows/{PREPARE}"
+        and run["status"] == "completed"
+        and run["conclusion"] == "success",
+        "saved preparation identity mismatch",
+    )
+    return run
+
+
+def job_logs(job_id):
+    # Run completion can precede availability of its downloadable job log.
+    # Retrying this bounded read never repeats a workflow dispatch or rerun.
+    deadline = time.monotonic() + 180
+    while True:
+        response = subprocess.run(
+            ["gh", "api", f"repos/{REPO}/actions/jobs/{job_id}/logs"],
+            capture_output=True,
+            text=True,
+        )
+        if response.returncode == 0:
+            return response.stdout
+        require(
+            time.monotonic() < deadline,
+            f"job{job_id} logs unavailable after bounded reads: {response.stderr.strip()}",
+        )
+        time.sleep(3)
+
+
 def bundle(report, label, run_id, source, qualification, version):
     listing = api(f"repos/{REPO}/actions/runs/{run_id}/artifacts?per_page=100")[
         "artifacts"
@@ -325,12 +361,7 @@ def validate(
     )
     if expected == "failure":
         checker = next(job for job in jobs if job["name"] == "validate")
-        logs = subprocess.run(
-            ["gh", "api", f"repos/{REPO}/actions/jobs/{checker['id']}/logs"],
-            check=True,
-            capture_output=True,
-            text=True,
-        ).stdout
+        logs = job_logs(checker["id"])
         require(
             "reviewed manifest digest mismatch" in logs,
             "negative validation failed for an unexpected reason",
@@ -341,12 +372,7 @@ def validate(
 def assert_log_marker(run_id, job_name, marker):
     jobs = api(f"repos/{REPO}/actions/runs/{run_id}/jobs?per_page=100")["jobs"]
     job = next(job for job in jobs if job["name"] == job_name)
-    logs = subprocess.run(
-        ["gh", "api", f"repos/{REPO}/actions/jobs/{job['id']}/logs"],
-        check=True,
-        capture_output=True,
-        text=True,
-    ).stdout
+    logs = job_logs(job["id"])
     require(marker in logs, "negative control failed for an unexpected reason")
 
 
@@ -382,45 +408,85 @@ def main():
     snapshot(report)
     try:
         publication_absent(version)
-        production = dispatch(
-            report,
-            "owner-handoff-preparation",
-            "prepare",
-            source,
-            qualification,
-            version,
+        resume = None
+        if os.environ.get("QUALIFICATION_RESUME_REPORT"):
+            resume = json.loads(
+                Path(os.environ["QUALIFICATION_RESUME_REPORT"]).read_text()
+            )
+            require(
+                resume["status"] == "FAILED"
+                and resume["source_sha"] == source
+                and resume["qualification_sha"] == qualification
+                and resume["version"] == version
+                and resume["publication_performed"] is False,
+                "saved qualification identity mismatch",
+            )
+            report["resumed_from_helper_run"] = 38951701437
+        production = (
+            resume["bundles"][0]["run_id"]
+            if resume
+            else dispatch(
+                report,
+                "owner-handoff-preparation",
+                "prepare",
+                source,
+                qualification,
+                version,
+            )
         )
-        run = wait_run(production)
+        run = saved_preparation(production, source) if resume else wait_run(production)
         result(report, "owner-handoff-preparation", run)
         require(run["conclusion"] == "success", "owner preparation failed")
         production_digest, _ = bundle(
             report, "owner-handoff", production, source, qualification, version
         )
-        rehearsal = dispatch(
-            report,
-            "retry-rehearsal-preparation",
-            "prepare",
-            source,
-            qualification,
-            version,
+        if resume:
+            require(
+                production_digest == resume["bundles"][0]["manifest_sha256"],
+                "original owner manifest changed",
+            )
+        rehearsal = (
+            resume["bundles"][1]["run_id"]
+            if resume
+            else dispatch(
+                report,
+                "retry-rehearsal-preparation",
+                "prepare",
+                source,
+                qualification,
+                version,
+            )
         )
-        run = wait_run(rehearsal)
+        run = saved_preparation(rehearsal, source) if resume else wait_run(rehearsal)
         result(report, "retry-rehearsal-preparation", run)
         require(run["conclusion"] == "success", "rehearsal preparation failed")
         rehearsal_digest, artifact_digest = bundle(
             report, "retry-rehearsal", rehearsal, source, qualification, version
         )
-        endpoint = f"repos/{REPO}/actions/runs/{rehearsal}/rerun"
-        ALLOWED_WRITES.add(endpoint)
-        report["rehearsal_rerun"] = {
-            "run_id": rehearsal,
-            "requested_attempt": 2,
-            "outcome": "request uncertain",
-        }
-        snapshot(report)
-        api(endpoint, method="POST")
-        report["rehearsal_rerun"]["outcome"] = "accepted"
-        snapshot(report)
+        if resume:
+            require(
+                artifact_digest == resume["bundles"][1]["artifact_digest"]
+                and rehearsal_digest == resume["bundles"][1]["manifest_sha256"]
+                and resume["rehearsal_rerun"]["run_id"] == rehearsal
+                and resume["rehearsal_rerun"]["outcome"] == "accepted",
+                "original rehearsal bundle or rerun identity changed",
+            )
+            report["rehearsal_rerun"] = dict(
+                resume["rehearsal_rerun"], outcome="previously accepted; not repeated"
+            )
+            snapshot(report)
+        else:
+            endpoint = f"repos/{REPO}/actions/runs/{rehearsal}/rerun"
+            ALLOWED_WRITES.add(endpoint)
+            report["rehearsal_rerun"] = {
+                "run_id": rehearsal,
+                "requested_attempt": 2,
+                "outcome": "request uncertain",
+            }
+            snapshot(report)
+            api(endpoint, method="POST")
+            report["rehearsal_rerun"]["outcome"] = "accepted"
+            snapshot(report)
         rerun = wait_run(rehearsal, attempt=2)
         result(report, "preparation-rerun-refused-as-expected", rerun)
         require(
