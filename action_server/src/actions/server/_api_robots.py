@@ -17,7 +17,7 @@ from urllib.parse import urljoin, urlparse, urlsplit, urlunsplit
 import fastapi
 import yaml
 from fastapi import File, Form, UploadFile
-from fastapi.routing import APIRouter
+from fastapi.routing import APIRoute, APIRouter
 from pydantic import BaseModel
 
 from actions.server._database import datetime_to_str
@@ -50,7 +50,44 @@ _ALLOWED_ZIP_CONTENT_TYPES = {
     "application/octet-stream",
 }
 
-robots_api_router = APIRouter(prefix="/api/robots")
+_MAX_URLENCODED_BYTES = 16 * 1024
+
+
+class _BoundedRobotFormRoute(APIRoute):
+    def get_route_handler(self):
+        handler = super().get_route_handler()
+
+        async def bounded_handler(request: fastapi.Request):
+            content_type = request.headers.get("content-type", "").split(";", 1)[0]
+            if content_type.strip().lower() == "application/x-www-form-urlencoded":
+                # FastAPI parses Form parameters before calling the importer.
+                # Bound actual streamed bytes before invoking that parser; the
+                # declared length is only an early-rejection optimization.
+                length = request.headers.get("content-length", "")
+                if (
+                    length.isascii()
+                    and length.isdecimal()
+                    and (
+                        len(length.lstrip("0")) > 5
+                        or int(length[-5:]) > _MAX_URLENCODED_BYTES
+                    )
+                ):
+                    raise fastapi.HTTPException(413, "Robot form exceeds size limit")
+                body = bytearray()
+                async for chunk in request.stream():
+                    if len(body) + len(chunk) > _MAX_URLENCODED_BYTES:
+                        raise fastapi.HTTPException(
+                            413, "Robot form exceeds size limit"
+                        )
+                    body.extend(chunk)
+                # Request.stream() replays its cached body for FastAPI's parser.
+                request._body = bytes(body)
+            return await handler(request)
+
+        return bounded_handler
+
+
+robots_api_router = APIRouter(prefix="/api/robots", route_class=_BoundedRobotFormRoute)
 
 
 # Catalog Response Models

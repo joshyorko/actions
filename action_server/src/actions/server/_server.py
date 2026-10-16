@@ -146,6 +146,21 @@ class _ConfiguredAPIKeyMiddleware:
         await self.app(scope, receive, send)
 
 
+class _ArtifactStaticFiles(StaticFiles):
+    def get_path(self, scope) -> str:
+        from starlette._utils import get_route_path
+        from starlette.exceptions import HTTPException
+
+        # Reject Windows namespace syntax before Starlette joins/normalizes the
+        # URL and calls realpath. Containment after realpath is too late: UNC
+        # resolution can already contact a remote host. Apply on every platform
+        # so artifact URLs have the same portable contract.
+        route_path = get_route_path(scope)
+        if "\\" in route_path or ":" in route_path or "\x00" in route_path:
+            raise HTTPException(status_code=404)
+        return super().get_path(scope)
+
+
 def _mount_artifact_static_files(
     app: FastAPI,
     backend: str,
@@ -156,7 +171,7 @@ def _mount_artifact_static_files(
     if backend == "local":
         from starlette.types import ASGIApp
 
-        static_files: ASGIApp = StaticFiles(directory=root)
+        static_files: ASGIApp = _ArtifactStaticFiles(directory=root)
         if api_key:
             from starlette._utils import get_route_path
             from starlette.middleware.authentication import AuthenticationMiddleware
@@ -183,7 +198,7 @@ def _mount_artifact_static_files(
 
                 scoped_scope = dict(scope)
                 scoped_scope["path"] = "/" + "/".join(path_parts[1:])
-                scoped_static_files = StaticFiles(
+                scoped_static_files = _ArtifactStaticFiles(
                     directory=storage.root.joinpath(*relative_artifacts_dir.split("/"))
                 )
                 await scoped_static_files(scoped_scope, receive, send)
