@@ -4275,3 +4275,11 @@ verify both artifact digests and every original payload member before recording
 IDs in the reviewed registry. Reseed into a separate run; never rerun an existing
 backup whose artifacts may be needed. The workflow stays off the default/release
 branch to preserve the original source's workflow-tree release constraint.
+
+The reuploaded payload's GitHub ZIP digest can differ even when the original
+manifest and every member are byte-identical. Record each new transport ZIP
+digest separately from the original preparation ZIP digest retained inside the
+raw-archive artifact; the manifest digest is a third, independent identity.
+Verify all three layers instead of comparing different envelopes as if they were
+the same ZIP. The first hosted backup and independent download established this
+with identical original ZIP, manifest and all34 members.
