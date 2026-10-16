@@ -3468,6 +3468,74 @@ Runtime regression. Preserve the failed receipt alongside the RCC rerun.
 
 ### Robot source connection and portable archive identity
 
+#### Robot task input delivery
+
+The input-forwarding repair for #315 targets Runtime 1.0.4. It does not change
+the accepted 1.0.3 release source or bump the package version. The original
+1.0.3 candidate at `48eeaf171e695d9b8ac140ea53239eaeb6eff331` persists
+`RobotRunRequestAPI.inputs` but does not consume it. Keep that failure separate
+from later candidate-source acceptance: a PASSED Run with matching persisted
+inputs does not prove that a task received them.
+
+The request remains an optional string-to-string map. A nonempty map requires
+an explicit `inputEnvironment` list on the selected task in `robot.yaml`, or
+the legacy `package.yaml` when no `robot.yaml` exists. For example:
+
+```yaml
+tasks:
+  ValidateBatch:
+    shell: python -m robocorp.tasks run tasks.py -t validate_batch_task
+    inputEnvironment:
+      - INVOICE_INPUT
+```
+
+The declaration names the exact environment destinations that this trusted task
+accepts as ordinary inputs. A declaration on another task grants no access.
+Names must match `[A-Za-z_][A-Za-z0-9_]*`, contain at most 128 characters and
+be unique ignoring case. Request names must match their declarations exactly.
+Process, interpreter, loader, Runtime, Work Item and recognized secret-control
+names are rejected even when declared; `_robot_inputs.py` owns the protected
+name/prefix/suffix list. In particular, inputs cannot replace `PATH`,
+`PYTHONPATH`, `RC_WORKITEM_DB_PATH`, `RC_WORKITEM_QUEUE_NAME`, `ROBOT_ROOT` or
+`ROBOT_ARTIFACTS`. This is an explicit input-name boundary, not a sandbox for
+the trusted package or its interpretation of input values.
+
+The request and declaration each allow at most 32 names. Each value allows at
+most 4096 UTF-8 bytes, without NUL or invalid Unicode. The compact JSON object,
+with literal Unicode and separators `,` and `:`, allows at most 16384 UTF-8
+bytes. Input declaration reads are bounded to a 1 MiB configuration.
+The byte limit bounds the read, not YAML nesting or parsing complexity. The
+declaration is read at admission and RCC later reads the configuration again.
+This boundary assumes trusted package source; it does not provide an immutable
+package snapshot against concurrent edits. Invalid
+nonempty inputs return HTTP 422 before settings, database, Run/counter,
+artifact or background-task work. Absent/empty inputs preserve legacy execution
+without requiring declarations. Metadata validation for the legacy package
+form does not establish RCC execution support for that format.
+
+Validated strings enter only RCC's task `-e` JSON file. Runtime-owned Work Item
+variables retain authority. The file lives in an owned temporary directory,
+with requested POSIX modes `0700` on the directory and `0600` on the file,
+is removed after success or failure and is not published as an artifact.
+These modes do not establish Windows ACL isolation.
+Inputs remain ordinary persisted `Run.inputs`, so use the separate secrets
+mechanism for secrets. Neither launcher mutates `os.environ` or injects inputs
+into RCC's control-process environment; the standalone helper uses the same
+validation and returns its existing error tuple on rejection without logging
+values. Nonempty helper inputs require an unpacked package directory.
+
+`test_robot_run_inputs.py` separates launch construction from actual delivery.
+The default tests check literal strings, selected-task declarations, protected
+controls, limits, pre-admission refusal and private-file cleanup. The opt-in
+`ACTIONS_ROBOT_INPUT_RCC=/absolute/path/to/rcc` gate requires v18.19.3 and runs
+the real API handler and RCC task three times with distinct supplied values and
+then absent inputs. It checks the task-written output and persisted Run inputs.
+A skipped gate is not delivery or RCC-metadata compatibility evidence. This
+source-mode gate does not qualify a published wheel, native binary or Windows
+execution. Preserve the untouched Template08 #8 failure before adding its
+minimal `ValidateBatch.inputEnvironment: [INVOICE_INPUT]` declaration for a new
+candidate acceptance run.
+
 Robot HTTPS download admission resolves and checks every destination's entire
 DNS answer set, then connects to one admitted literal address. HTTP Host and TLS
 SNI/certificate verification retain the original hostname through HTTPX request
