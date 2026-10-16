@@ -4226,9 +4226,10 @@ branch, repository/head/attempt and artifact IDs/digests/sizes must all match.
 Each readiness check downloads both healthy raw archives, verifies actual ZIP
 size/digest, receipt identity, the original ZIP and unchanged manifest digests,
 and every nested member/inventory before counting a copy. An available API row
-alone does not prove readable recovery bytes. Missing copies fail closed;
-metadata/identity mismatches and corrupt or unreadable bytes are never downgraded
-to availability warnings. Recovery uses a registered backup run through the existing
+alone does not prove readable recovery bytes. Missing or expired copies do not count as healthy; validation and publication
+require at least two remaining healthy registered runs. Identity mismatches,
+corrupt bytes and download failures stop verification even when other registered
+copies remain. Recovery uses a registered backup run through the existing
 numeric `preparation_run_id` input, while release ownership remains bound to the
 original unchanged manifest. The controller still verifies current community,
 complete source/qualification/workflow trees, original successful preparation,
