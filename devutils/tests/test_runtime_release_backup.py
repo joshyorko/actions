@@ -258,3 +258,195 @@ def test_valid_recovery_cannot_bypass_original_member_integrity(recovery):
     (recovery.args.bundle / "pypi/a.whl").write_bytes(b"other")
     with pytest.raises(button.ReleaseError, match="bundle digest mismatch"):
         button.verify(recovery.args)
+
+
+def archive_module(monkeypatch):
+    path = SCRIPTS / "runtime_release_backup.py"
+    assert path.is_file(), "nonpublishing archive implementation is missing"
+    spec = importlib.util.spec_from_file_location("backup_archive", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    monkeypatch.setattr(module, "button", button)
+    return module
+
+
+@pytest.fixture
+def archive_case(recovery, monkeypatch, tmp_path):
+    import hashlib
+    import io
+    import zipfile
+
+    raw = io.BytesIO()
+    with zipfile.ZipFile(raw, "w") as z:
+        for path in sorted(recovery.args.bundle.rglob("*")):
+            if path.is_file():
+                z.write(path, path.relative_to(recovery.args.bundle).as_posix())
+    original = raw.getvalue()
+    original_item = artifact(123, "bundle", 1901)
+    original_item.update(
+        digest="sha256:" + hashlib.sha256(original).hexdigest(),
+        size_in_bytes=len(original),
+    )
+    recovery.artifacts[123] = [original_item]
+    downloads = {1901: original}
+    # Bootstrapping copies is read-only; publication still requires a populated policy.
+    recovery.registry.write_text(
+        json.dumps(
+            {"schema_version": 1, "repository": button.REPOSITORY, "bundles": []}
+        )
+    )
+
+    def run(command, **kwargs):
+        if command[:2] == ["gh", "api"]:
+            assert "/artifacts/" in command[-1] and command[-1].endswith("/zip")
+            identity = int(command[-1].split("/artifacts/")[1].split("/")[0])
+            kwargs["stdout"].write(downloads[identity])
+        else:
+            assert "twine" in command, "unexpected archive subprocess"
+        return SimpleNamespace(returncode=0)
+
+    monkeypatch.setattr(button.subprocess, "run", run)
+    monkeypatch.setattr(
+        button, "publish", lambda *args: pytest.fail("archive entered publication")
+    )
+    args = SimpleNamespace(**vars(recovery.args))
+    args.preparation_run_id = 123
+    args.output = tmp_path / "backup-output"
+    return SimpleNamespace(
+        recovery=recovery, args=args, original=original, downloads=downloads
+    )
+
+
+def test_archive_preserves_original_zip_manifest_and_every_member(
+    archive_case, monkeypatch
+):
+    archive = archive_module(monkeypatch)
+    monkeypatch.setattr(archive, "backup_controller", lambda root: "d" * 40)
+    receipt = archive.archive(archive_case.args)
+    out = archive_case.args.output
+    assert (out / "archive/original-bundle.zip").read_bytes() == archive_case.original
+    original_bundle = archive_case.recovery.args.bundle
+    for path in original_bundle.rglob("*"):
+        if path.is_file():
+            assert (
+                out / "bundle" / path.relative_to(original_bundle)
+            ).read_bytes() == path.read_bytes()
+    assert set(
+        p.relative_to(out / "bundle").as_posix()
+        for p in (out / "bundle").rglob("*")
+        if p.is_file()
+    ) == set(archive_case.recovery.manifest["files"]) | {button.MANIFEST}
+    assert receipt["preparation_run_id"] == 123
+    assert receipt["manifest_sha256"] == archive_case.args.manifest_sha256
+    assert receipt["publication_performed"] is False
+
+
+def test_archive_verifies_zip_digest_before_extraction(archive_case, monkeypatch):
+    archive = archive_module(monkeypatch)
+    monkeypatch.setattr(archive, "backup_controller", lambda root: "d" * 40)
+    archive_case.recovery.artifacts[123][0]["digest"] = "sha256:" + "0" * 64
+    with pytest.raises(button.ReleaseError, match="archive digest mismatch"):
+        archive.archive(archive_case.args)
+    assert not (archive_case.args.output / "bundle").exists()
+
+
+def test_archive_refuses_existing_output(archive_case, monkeypatch):
+    archive = archive_module(monkeypatch)
+    monkeypatch.setattr(archive, "backup_controller", lambda root: "d" * 40)
+    archive_case.args.output.mkdir()
+    keep = archive_case.args.output / "keep"
+    keep.write_text("owned content")
+    with pytest.raises(button.ReleaseError, match="output already exists"):
+        archive.archive(archive_case.args)
+    assert keep.read_text() == "owned content"
+
+
+def test_one_surviving_registered_raw_archive_can_reseed_copies(
+    archive_case, monkeypatch
+):
+    import hashlib
+    import io
+    import zipfile
+
+    archive = archive_module(monkeypatch)
+    monkeypatch.setattr(archive, "backup_controller", lambda root: "d" * 40)
+    r = archive_case.recovery
+    original_digest = hashlib.sha256(archive_case.original).hexdigest()
+    receipt = {
+        "schema_version": 1,
+        "repository": button.REPOSITORY,
+        "preparation_run_id": 123,
+        "manifest_sha256": r.args.manifest_sha256,
+        "source_sha": r.args.source_sha,
+        "version": "1.0.4",
+        "original_archive_sha256": original_digest,
+    }
+    raw = io.BytesIO()
+    with zipfile.ZipFile(raw, "w") as z:
+        z.writestr("original-bundle.zip", archive_case.original)
+        z.writestr("backup-receipt.json", json.dumps(receipt))
+    sidecar = raw.getvalue()
+    item = r.artifacts[201][1]
+    item.update(
+        digest="sha256:" + hashlib.sha256(sidecar).hexdigest(),
+        size_in_bytes=len(sidecar),
+    )
+    r.record["original_archive_sha256"] = original_digest
+    r.record["backups"][0]["archive"] = {
+        k: item[k] for k in ("id", "digest", "size_in_bytes")
+    }
+    r.save_record()
+    r.artifacts[123].clear()  # The original artifact is gone.
+    r.artifacts[202].clear()  # Only one independent backup survives.
+    r.artifacts[201].pop(0)  # Its raw archive alone suffices to reseed, not publish.
+    archive_case.downloads[item["id"]] = sidecar
+    archive_case.args.preparation_run_id = 201
+    result = archive.archive(archive_case.args)
+    assert result["preparation_run_id"] == 123
+    assert result["source_run_id"] == 201
+    assert (
+        archive_case.args.output / "archive/original-bundle.zip"
+    ).read_bytes() == archive_case.original
+    assert (archive_case.args.output / "bundle" / button.MANIFEST).read_bytes() == (
+        r.args.bundle / button.MANIFEST
+    ).read_bytes()
+    with pytest.raises(button.ReleaseError, match="two independent healthy backups"):
+        button.verify(r.args)
+
+
+@pytest.mark.parametrize(
+    "mutation", ["wrong_branch", "rerun", "wrong_workflow", "stale_checkout"]
+)
+def test_archive_controller_refuses_unsafe_execution(monkeypatch, tmp_path, mutation):
+    archive = archive_module(monkeypatch)
+    env = {
+        "GITHUB_REPOSITORY": button.REPOSITORY,
+        "GITHUB_REF": "refs/heads/backup/runtime-release-bundles",
+        "GITHUB_WORKFLOW_REF": f"{button.REPOSITORY}/{button.BACKUP_WORKFLOW}@refs/heads/backup/runtime-release-bundles",
+        "GITHUB_WORKFLOW_SHA": "d" * 40,
+        "GITHUB_RUN_ATTEMPT": "1",
+    }
+    if mutation == "wrong_branch":
+        env["GITHUB_REF"] = "refs/heads/community"
+    if mutation == "rerun":
+        env["GITHUB_RUN_ATTEMPT"] = "2"
+    if mutation == "wrong_workflow":
+        env["GITHUB_WORKFLOW_REF"] = "other"
+    if mutation == "stale_checkout":
+        env["GITHUB_WORKFLOW_SHA"] = "e" * 40
+    for key, value in env.items():
+        monkeypatch.setenv(key, value)
+    monkeypatch.setattr(button, "git", lambda *args: "d" * 40)
+    with pytest.raises(button.ReleaseError):
+        archive.backup_controller(tmp_path)
+
+
+def test_archive_checks_actual_downloaded_zip_size_before_extraction(
+    archive_case, monkeypatch
+):
+    archive = archive_module(monkeypatch)
+    monkeypatch.setattr(archive, "backup_controller", lambda root: "d" * 40)
+    archive_case.recovery.artifacts[123][0]["size_in_bytes"] += 1
+    with pytest.raises(button.ReleaseError, match="archive size mismatch"):
+        archive.archive(archive_case.args)
+    assert not (archive_case.args.output / "bundle").exists()

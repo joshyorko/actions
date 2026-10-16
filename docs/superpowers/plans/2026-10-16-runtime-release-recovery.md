@@ -35,7 +35,7 @@
 - [x] Add regression tests for a different carrier with unchanged original preparation, missing/wrong registry, fork/run/workflow mismatch and original-attempt failure; observe red.
 - [x] Implement exact identity resolution and two independent healthy-backup requirements without changing release ownership or workflows.
 - [x] Run focused tests and existing ownership/partial-publication tests; add source fixtures for new policy checks without weakening assertions.
-- [ ] Update canonical operations guidance with implemented and tested guarantees; push a reviewable checkpoint.
+- [x] Update canonical operations guidance with implemented and tested guarantees; push a reviewable checkpoint.
 
 ### Task2: Nonpublishing archive and independent copies
 
@@ -43,9 +43,9 @@
 
 **Interfaces:** archive command consumes original/registered carrier run ID plus reviewed source/version/manifest and a fresh output directory; emits unchanged `bundle/`, exact `archive/original-bundle.zip` and a bounded JSON receipt. It may read APIs and local files but never publish or mutate remote objects.
 
-- [ ] Add tests proving exact ZIP/member preservation, safe extraction, no remote writes, refusing rerun/unsafe controller, and reseeding from a single surviving registered raw archive; observe red.
-- [ ] Implement archive staging with original ZIP verification before extraction and full existing bundle verification afterward.
-- [ ] Run complete Devutils tests, configured lint/isort/format and `git diff --check` through RCC/Poetry.
+- [x] Add tests proving exact ZIP/member preservation, safe extraction, no remote writes, refusing rerun/unsafe controller, and reseeding from a single surviving registered raw archive; observe red.
+- [x] Implement archive staging with original ZIP verification before extraction and full existing bundle verification afterward.
+- [x] Run complete Devutils tests, configured lint/isort/format and `git diff --check` through RCC/Poetry.
 - [ ] Push source checkpoint and dedicated backup workflow. Create two independent owner backups without touching the original run; independently verify downloaded output and record their immutable metadata.
 
 ### Task3: Destructive rehearsal and review evidence

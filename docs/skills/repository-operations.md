@@ -4234,6 +4234,20 @@ provenance, expiry and member-integrity refusal. An empty registry deliberately
 blocks validation/publication until actual independently retained backups are
 reviewed and recorded; a successful original-attempt API response is insufficient.
 
+
+`action_server/scripts/runtime_release_backup.py` is a nonpublishing archiver for
+the separate `backup/runtime-release-bundles` branch/controller. It refuses reruns
+and stale/wrong workflow checkouts, stages into a fresh directory, verifies the
+actual downloaded ZIP size and GitHub ZIP digest before bounded safe extraction,
+and repeats all original manifest/source/member/package verification. It retains
+both the unchanged payload and exact original ZIP plus a receipt. A registered
+surviving raw archive may reseed another independent run even if the original
+preparation and its normal payload artifact are unavailable. Reseeding never
+rebuilds or changes the original manifest or release ownership. This bootstrap
+operation is read-only apart from local staging; only the branch workflow uploads
+new artifacts. It cannot enter the publication command or use its credential.
+Archive-role permission does not bypass the publisher's two-copy policy.
+
 Only `joshyorko` may enter the publication writer: both the original actor and
 triggering actor (including reruns) must be Josh. A read-only preflight rejects
 another actor's publication request before checkout or credential loading; the

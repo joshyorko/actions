@@ -282,6 +282,10 @@ def download(run, artifact_name, destination, *, retain_archive=False):
         )
     require(result.returncode == 0, "artifact download failed")
     require(
+        archive.stat().st_size == artifact["size_in_bytes"],
+        "GitHub artifact archive size mismatch",
+    )
+    require(
         artifact.get("digest") == "sha256:" + sha256(archive),
         "GitHub artifact archive digest mismatch",
     )
