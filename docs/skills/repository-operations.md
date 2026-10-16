@@ -1399,6 +1399,15 @@ stderr, and the original exit status when a probe fails.
 Keep the 2.x patch line at or above 2.23.4: it replaces the rate-limited
 GitHub `get-virtualenv` blob URL with the supported `bootstrap.pypa.io` URL
 ([upstream fix](https://github.com/pypa/cibuildwheel/pull/2775)).
+Before preparing a follow-on Runtime release, compare its staging base with the
+accepted preceding release source. A branch forked before the preceding
+candidate's final security repair can omit already accepted boundary guards.
+Carry those reviewed changes forward into the isolated follow-on preparation
+branch, verify both the prior guards and the new feature boundaries, and qualify
+the resulting union. This does not authorize modifying the preceding release's
+frozen branch or publishing either version out of sequence. A historical green
+candidate or private wheel does not qualify that changed union or version.
+
 The clean-break distribution identity is `actions-runtime`; its package version,
 `actions.server.__version__`, Runtime changelog, and `actions-runtime-X.Y.Z` tag
 must agree. Native release notes come from

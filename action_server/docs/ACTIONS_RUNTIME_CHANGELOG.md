@@ -8,20 +8,29 @@ an Actions Runtime release.
 
 ## Unreleased
 
-Runtime 1.0.3 remains an unpublished source candidate. Preparing its tag-
-matching notes does not establish release approval, a tag, or published
-artifacts.
+Runtime 1.0.4 is a source release candidate. Preparing versioned notes and
+qualification artifacts does not establish a tag or published release. Publish
+1.0.3 and complete its owner verification before promoting or publishing 1.0.4.
 
-Candidate acceptance and downstream handoff remain tracked separately from the
-versioned release notes. Prepublication acceptance gates remain open: issue
-[#134](https://github.com/joshyorko/actions/issues/134) still requires its
-provider-backed offline-warm RCC acceptance; a selected-provider
-503-before-execution check does not establish warm reuse. Issue
-[#153](https://github.com/joshyorko/actions/issues/153) still requires its
-real-browser security acceptance. Issue
-[#211](https://github.com/joshyorko/actions/issues/211) covers post-publication
-native handoff, including Homebrew installation and upgrade verification. The
-Runtime candidate does not claim Canvas authoring or execution.
+## actions-runtime-1.0.4
+
+- Forward ordinary string inputs only through the selected trusted Robot task's
+  explicit `inputEnvironment` declaration. Reject undeclared/protected names and
+  bounded input failures before Run, counter or artifact admission; retain
+  Runtime Work Item controls and private temporary task environments.
+- Retain bounded snapshots of the configured Robot `artifactsDir` after task
+  success or failure. Preserve workload names, authenticated downloads and HTTP
+  ranges, and retrieval after source removal and Runtime database restart.
+- Correct Windows pathname/descriptor timestamp comparisons without weakening
+  identity, mutation, portable-name, link/reparse, hardlink or collection-limit
+  checks. Retain already admitted complete files and private collection errors.
+- Carry forward the accepted 1.0.3 static-path namespace and streamed Robot form
+  guards. Keep published dependency floors and bundled RCC 18.19.3 unchanged.
+
+Snapshots require trusted source namespaces and may include pre-existing files;
+they do not promise an atomic tree or exclusive invocation attribution. Runtime
+artifact-worker/provider acceptance, full browser issue closure and external
+native distribution handoff remain separately gated (#134, #153 and #211).
 
 ## actions-runtime-1.0.3
 
