@@ -4210,12 +4210,20 @@ acceptance ZIP from the hosted producer was independently observed to match its
 GitHub digest; do not downgrade a mismatch to a warning or extract first.
 
 Publication validates the preparation's original successful **attempt**, rather
-than its mutable latest-run status. GitHub's rerun operation updates that status
-even when the controller immediately refuses to rebuild on attempt2. The named
-`-1` artifact and reviewed manifest remain fixed; an accidental refused rerun
-must not invalidate recovery of a PyPI prefix or native draft already owned by
-the original bundle. The run-attempt API still must prove canonical workflow,
-community controller SHA, exact attempt number and successful conclusion.
+than its mutable latest-run status. This check is necessary but does not preserve
+its artifact. A hosted all-jobs rerun was observed to remove the original artifact
+before the controller refused attempt2; direct artifact lookup then returned404.
+The existing upstream report is [actions/upload-artifact#323](https://github.com/actions/upload-artifact/issues/323).
+Therefore **never rerun preparation**, even when the rebuild guard will refuse
+it. Preserve the original successful run and independently downloaded bundle
+before publication. Retry publication with the same original inputs while that
+original artifact remains available. If preparation is rerun or its artifact is
+lost after partial publication, stop: the current button cannot restore it from
+a local backup, and rebuilding/substituting a different preparation is unsafe.
+Owner-reviewed artifact recovery support would be required; do not weaken digest,
+source, run or ownership checks to bypass the missing artifact. Before publication
+has begun, a fresh preparation may be reviewed separately. An original-attempt
+API success alone is not evidence that the bundle is still downloadable.
 
 Only `joshyorko` may enter the publication writer: both the original actor and
 triggering actor (including reruns) must be Josh. A read-only preflight rejects
@@ -4252,6 +4260,7 @@ The qualification helper waits with a bounded sequence of read-only log fetches
 and retains the final error if logs stay unavailable. A reporting failure after
 accepted preparation/rerun writes does not authorize repeating those writes.
 Resume from the retained report, independently verify each original successful
-attempt and both immutable artifact/manifest digests, then run only the missing
-read-only validations. The original failed helper receipt remains evidence;
+attempt and each still-available immutable artifact/manifest digest, then run
+only the missing read-only validations. A lost rehearsal artifact remains an
+explicit failed recovery gate while independent owner-bundle checks continue. The original failed helper receipt remains evidence;
 recovery never changes the release source or rebuilds an admitted bundle.

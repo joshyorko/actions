@@ -339,6 +339,7 @@ def validate(
     digest,
     *,
     expected="success",
+    failure_marker="reviewed manifest digest mismatch",
 ):
     run_id = dispatch(
         report,
@@ -363,7 +364,7 @@ def validate(
         checker = next(job for job in jobs if job["name"] == "validate")
         logs = job_logs(checker["id"])
         require(
-            "reviewed manifest digest mismatch" in logs,
+            failure_marker in logs,
             "negative validation failed for an unexpected reason",
         )
     return run_id
@@ -460,61 +461,105 @@ def main():
         run = saved_preparation(rehearsal, source) if resume else wait_run(rehearsal)
         result(report, "retry-rehearsal-preparation", run)
         require(run["conclusion"] == "success", "rehearsal preparation failed")
-        rehearsal_digest, artifact_digest = bundle(
-            report, "retry-rehearsal", rehearsal, source, qualification, version
-        )
-        if resume:
-            require(
-                artifact_digest == resume["bundles"][1]["artifact_digest"]
-                and rehearsal_digest == resume["bundles"][1]["manifest_sha256"]
-                and resume["rehearsal_rerun"]["run_id"] == rehearsal
-                and resume["rehearsal_rerun"]["outcome"] == "accepted",
-                "original rehearsal bundle or rerun identity changed",
+        missing_rehearsal = (
+            resume
+            and api(
+                f"repos/{REPO}/actions/artifacts/{resume['bundles'][1]['artifact_id']}",
+                missing=True,
             )
+            is None
+        )
+        if missing_rehearsal:
+            require(
+                resume["rehearsal_rerun"]["run_id"] == rehearsal
+                and resume["rehearsal_rerun"]["outcome"] == "accepted",
+                "saved rerun identity mismatch",
+            )
+            report["failed_gates"] = [
+                {
+                    "gate": "original artifact retrieval after preparation rerun",
+                    "run_id": rehearsal,
+                    "original_artifact_id": resume["bundles"][1]["artifact_id"],
+                    "outcome": "original artifact now returns HTTP404",
+                    "upstream_existing_report": "https://github.com/actions/upload-artifact/issues/323",
+                    "owner_preparation_unchanged": production,
+                }
+            ]
             report["rehearsal_rerun"] = dict(
                 resume["rehearsal_rerun"], outcome="previously accepted; not repeated"
             )
-            snapshot(report)
+            rerun = wait_run(rehearsal, attempt=2)
+            result(report, "preparation-rerun-refused-as-expected", rerun)
+            require(rerun["conclusion"] == "failure", "rerun refusal missing")
+            assert_log_marker(rehearsal, "prepare", "never rerun preparation")
+            validate(
+                report,
+                "missing-rerun-artifact-fails-closed",
+                source,
+                qualification,
+                version,
+                rehearsal,
+                resume["bundles"][1]["manifest_sha256"],
+                expected="failure",
+                failure_marker="Artifact not found",
+            )
         else:
-            endpoint = f"repos/{REPO}/actions/runs/{rehearsal}/rerun"
-            ALLOWED_WRITES.add(endpoint)
-            report["rehearsal_rerun"] = {
-                "run_id": rehearsal,
-                "requested_attempt": 2,
-                "outcome": "request uncertain",
-            }
-            snapshot(report)
-            api(endpoint, method="POST")
-            report["rehearsal_rerun"]["outcome"] = "accepted"
-            snapshot(report)
-        rerun = wait_run(rehearsal, attempt=2)
-        result(report, "preparation-rerun-refused-as-expected", rerun)
-        require(
-            rerun["conclusion"] == "failure",
-            "preparation must refuse rebuilding on a rerun",
-        )
-        assert_log_marker(rehearsal, "prepare", "never rerun preparation")
-        _, retained_digest = bundle(
-            report,
-            "retry-rehearsal-after-refusal",
-            rehearsal,
-            source,
-            qualification,
-            version,
-        )
-        require(
-            retained_digest == artifact_digest,
-            "original artifact changed after refused rerun",
-        )
-        validate(
-            report,
-            "original-attempt-survives-refused-rerun",
-            source,
-            qualification,
-            version,
-            rehearsal,
-            rehearsal_digest,
-        )
+            rehearsal_digest, artifact_digest = bundle(
+                report, "retry-rehearsal", rehearsal, source, qualification, version
+            )
+            if resume:
+                require(
+                    artifact_digest == resume["bundles"][1]["artifact_digest"]
+                    and rehearsal_digest == resume["bundles"][1]["manifest_sha256"]
+                    and resume["rehearsal_rerun"]["run_id"] == rehearsal
+                    and resume["rehearsal_rerun"]["outcome"] == "accepted",
+                    "original rehearsal bundle or rerun identity changed",
+                )
+                report["rehearsal_rerun"] = dict(
+                    resume["rehearsal_rerun"],
+                    outcome="previously accepted; not repeated",
+                )
+                snapshot(report)
+            else:
+                endpoint = f"repos/{REPO}/actions/runs/{rehearsal}/rerun"
+                ALLOWED_WRITES.add(endpoint)
+                report["rehearsal_rerun"] = {
+                    "run_id": rehearsal,
+                    "requested_attempt": 2,
+                    "outcome": "request uncertain",
+                }
+                snapshot(report)
+                api(endpoint, method="POST")
+                report["rehearsal_rerun"]["outcome"] = "accepted"
+                snapshot(report)
+            rerun = wait_run(rehearsal, attempt=2)
+            result(report, "preparation-rerun-refused-as-expected", rerun)
+            require(
+                rerun["conclusion"] == "failure",
+                "preparation must refuse rebuilding on a rerun",
+            )
+            assert_log_marker(rehearsal, "prepare", "never rerun preparation")
+            _, retained_digest = bundle(
+                report,
+                "retry-rehearsal-after-refusal",
+                rehearsal,
+                source,
+                qualification,
+                version,
+            )
+            require(
+                retained_digest == artifact_digest,
+                "original artifact changed after refused rerun",
+            )
+            validate(
+                report,
+                "original-attempt-survives-refused-rerun",
+                source,
+                qualification,
+                version,
+                rehearsal,
+                rehearsal_digest,
+            )
         validate(
             report,
             "owner-validation-first",
@@ -547,6 +592,7 @@ def main():
         publication_absent(version)
         report.update(
             status="PASS",
+            owner_bundle_qualified=True,
             publication_state_unchanged=True,
             owner_handoff={
                 "preparation_run_id": production,
@@ -554,6 +600,10 @@ def main():
                 "expected_version": version,
                 "manifest_sha256": production_digest,
             },
+        )
+        require(
+            not report.get("failed_gates"),
+            "Owner bundle validated; preparation-rerun artifact recovery remains failed. Preserve the untouched owner preparation; never rebuild for recovery.",
         )
     except Exception as error:
         report.update(
