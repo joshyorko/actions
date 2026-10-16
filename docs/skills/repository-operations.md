@@ -4223,8 +4223,13 @@ runs, each with an exact registered, present, unexpired bundle artifact and raw
 archive artifact. Same-run duplicate artifacts do not count as independent.
 Registry source/version/original preparation/manifest identities, backup workflow,
 branch, repository/head/attempt and artifact IDs/digests/sizes must all match.
-Missing copies fail closed; metadata/identity mismatches are never downgraded to
-availability warnings. Recovery uses a registered backup run through the existing
+Each readiness check downloads both healthy raw archives, verifies actual ZIP
+size/digest, receipt identity, the original ZIP and unchanged manifest digests,
+and every nested member/inventory before counting a copy. An available API row
+alone does not prove readable recovery bytes. Missing or expired copies do not count as healthy; validation and publication
+require at least two remaining healthy registered runs. Identity mismatches,
+corrupt bytes and download failures stop verification even when other registered
+copies remain. Recovery uses a registered backup run through the existing
 numeric `preparation_run_id` input, while release ownership remains bound to the
 original unchanged manifest. The controller still verifies current community,
 complete source/qualification/workflow trees, original successful preparation,
@@ -4234,6 +4239,11 @@ provenance, expiry and member-integrity refusal. An empty registry deliberately
 blocks validation/publication until actual independently retained backups are
 reviewed and recorded; a successful original-attempt API response is insufficient.
 
+
+The reviewed template `action_server/scripts/runtime_release_backup_workflow.yml`
+is copied unchanged onto the separate backup branch; it never enters the default
+`.github/workflows` tree. It has read-only contents/actions permissions and no
+publication environment or credential.
 
 `action_server/scripts/runtime_release_backup.py` is a nonpublishing archiver for
 the separate `backup/runtime-release-bundles` branch/controller. It refuses reruns
@@ -4265,27 +4275,13 @@ active shared toolchain or another writer's environment. The affected trial is
 failed until rerun successfully with adequate space; a cache cleanup is not a
 passing integration result.
 
-The dedicated backup workflow uploads the unchanged `bundle/` as
-`runtime-release-bundle-<backup-run>-1` and the exact original ZIP/receipt as
-`runtime-release-archive-<backup-run>-1`. Its job has contents/actions read only,
-no package credential and no publication action. It requests90-day retention;
-record actual GitHub `expires_at` values rather than assuming a repository cap.
-Wait for each run to succeed before moving the backup branch, then independently
-verify both artifact digests and every original payload member before recording
-IDs in the reviewed registry. Reseed into a separate run; never rerun an existing
-backup whose artifacts may be needed. The workflow stays off the default/release
-branch to preserve the original source's workflow-tree release constraint.
-
-The reuploaded payload's GitHub ZIP digest can differ even when the original
-manifest and every member are byte-identical. Record each new transport ZIP
-digest separately from the original preparation ZIP digest retained inside the
-raw-archive artifact; the manifest digest is a third, independent identity.
-Verify all three layers instead of comparing different envelopes as if they were
-the same ZIP. The first hosted backup and independent download established this
-with identical original ZIP, manifest and all34 members.
-
-A disposable preparation has its own original run, manifest and ZIP identities,
-even when its source/version or individual distributions match an owner release.
-Keep disposable registry entries and destructive targets in the qualification
-branch only. The production registry must bind owner copies to the unchanged
-owner manifest and original preparation; a rehearsal is not a replacement release.
+A destructive recovery rehearsal must pin one freshly created disposable run and
+its creating controller receipt, permanently reject the protected owner run,
+verify both registered backup archives before the request, and recheck the
+original attempt/source immediately before the single rerun POST. Save an
+uncertain response before sending; never blindly repeat it. A later qualification
+may resume only read-only loss/retrieval checks after actual state is reconciled.
+Keep disposable registry rows on nonpublishing qualification/backup branches,
+never in the reviewed default publication registry. Compare tested code blobs to
+the repair commit, retain original owner snapshots before/after, and distinguish
+shared-verifier qualification from unrun default-button activation before merge.
