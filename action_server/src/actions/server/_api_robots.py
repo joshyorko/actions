@@ -26,6 +26,7 @@ from actions.server._portable_paths import (
     portable_path_collision_key,
 )
 from actions.server._rcc import get_rcc_robots
+from actions.server._robot_inputs import robot_task_environment, validate_robot_inputs
 from actions.server._runs_state_cache import get_global_runs_state
 from actions.server._settings import get_settings
 
@@ -1012,6 +1013,13 @@ async def run_robot_task(
 
     from actions.server._models import RUN_ID_COUNTER, Counter, Run, RunStatus, get_db
 
+    try:
+        task_inputs = validate_robot_inputs(
+            Path(request.robot_package_path), request.task_name, request.inputs
+        )
+    except ValueError as error:
+        raise fastapi.HTTPException(status_code=422, detail=str(error)) from None
+
     # Get settings for paths
     settings = get_settings()
     db = get_db()
@@ -1177,9 +1185,9 @@ async def run_robot_task(
                 "--silent",  # Reduce verbose RCC output
             ]
 
-            # Create environment JSON file for work items configuration
+            # Only declared task inputs enter RCC's task environment.
             # RCC's -e flag expects a JSON file path, not inline VAR:value syntax
-            env_vars = {}
+            env_vars = dict(task_inputs)
 
             # RC_WORKITEM_DB_PATH: path to shared SQLite database for work items
             workitems_db_path = str(settings.datadir / "workitems.db")
@@ -1188,13 +1196,6 @@ async def run_robot_task(
             # RC_WORKITEM_QUEUE_NAME: the queue to read work items from
             if workitem_queue:
                 env_vars["RC_WORKITEM_QUEUE_NAME"] = workitem_queue
-
-            # Write env vars to a temp JSON file if we have any
-            env_file = None
-            if env_vars:
-                env_file = artifacts_dir / "env.json"
-                env_file.write_text(json.dumps(env_vars, indent=2))
-                rcc_args.extend(["-e", str(env_file)])
 
             # Only add --space if we have an env hash (for pre-built environments)
             if run.robot_env_hash:
@@ -1207,12 +1208,14 @@ async def run_robot_task(
             output_file = artifacts_dir / "__action_server_output.txt"
 
             # Run the robot task
-            result = rcc._run_rcc(
-                rcc_args,
-                timeout=3600,  # 1 hour timeout
-                cwd=str(package_path),
-                show_interactive_output=True,
-            )
+            with robot_task_environment(env_vars) as env_file:
+                rcc_args.extend(["-e", str(env_file)])
+                result = rcc._run_rcc(
+                    rcc_args,
+                    timeout=3600,  # 1 hour timeout
+                    cwd=str(package_path),
+                    show_interactive_output=True,
+                )
 
             # Save output to file for logs page
             try:
@@ -1223,28 +1226,16 @@ async def run_robot_task(
             except Exception as write_err:
                 log.warning(f"Failed to write robot output file: {write_err}")
 
-            # Copy robot output files to artifacts directory
-            # RCC puts output in the robot's 'output' directory by default
-            # This includes .robolog files (from robocorp-log) and RF output files
-            robot_output_dir = package_path / "output"
-            if robot_output_dir.exists():
-                # Copy .robolog files for log.html generation
-                for robolog_file in robot_output_dir.glob("*.robolog"):
-                    try:
-                        shutil.copy2(robolog_file, artifacts_dir / robolog_file.name)
-                        log.debug(f"Copied {robolog_file.name} to artifacts")
-                    except Exception as copy_err:
-                        log.warning(f"Failed to copy {robolog_file.name}: {copy_err}")
+            # Retain workload files and failure diagnostics before publishing
+            # terminal status. The collector uses the configured storage key.
+            from actions.server._robot_artifacts import collect_robot_artifacts
 
-                # Also copy Robot Framework output files if present
-                for output_name in ["log.html", "output.xml", "report.html"]:
-                    src_file = robot_output_dir / output_name
-                    if src_file.exists():
-                        try:
-                            shutil.copy2(src_file, artifacts_dir / output_name)
-                            log.debug(f"Copied {output_name} to artifacts")
-                        except Exception as copy_err:
-                            log.warning(f"Failed to copy {output_name}: {copy_err}")
+            collect_robot_artifacts(
+                package_path,
+                robot_config_file,
+                get_artifact_storage(),
+                run.relative_artifacts_dir,
+            )
 
             if result.success:
                 run.status = RunStatus.PASSED
