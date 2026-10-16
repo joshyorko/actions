@@ -485,3 +485,67 @@ def test_download_verifies_github_archive_digest_before_extraction(
     with pytest.raises(button.ReleaseError, match="archive digest mismatch"):
         button.download({"id": 12}, "proof", tmp_path / "bad")
     assert not (tmp_path / "bad").exists()
+
+
+@pytest.mark.parametrize("original_conclusion", ["success", "failure"])
+def test_publication_keeps_original_success_after_an_accidental_preparation_rerun(
+    monkeypatch, tmp_path, original_conclusion
+):
+    import hashlib
+    import json
+    from types import SimpleNamespace
+
+    bundle = tmp_path / "bundle"
+    native = bundle / "native"
+    native.mkdir(parents=True)
+    (bundle / "pypi").mkdir()
+    for suffix in ("linux64", "macos-arm64", "windows64.exe", "sha256.txt"):
+        (native / f"actions-runtime-1.0.4-{suffix}").write_bytes(b"synthetic")
+    m = dict(
+        manifest(),
+        schema_version=1,
+        repository=button.REPOSITORY,
+        qualification_sha="a" * 40,
+        tree="b" * 40,
+        controller_sha="c" * 40,
+        preparation_run_attempt=1,
+    )
+    path = bundle / button.MANIFEST
+    path.write_text(json.dumps(m))
+    args = SimpleNamespace(
+        root=tmp_path,
+        bundle=bundle,
+        manifest_sha256=hashlib.sha256(path.read_bytes()).hexdigest(),
+        preparation_run_id=123,
+        source_sha="a" * 40,
+        version="1.0.4",
+    )
+    monkeypatch.setattr(button, "controller", lambda *args: None)
+    monkeypatch.setattr(button, "check_source", lambda *args: m["tree"])
+    monkeypatch.setattr(button, "verify_files", lambda *args: None)
+    monkeypatch.setattr(button, "verify_artifacts", lambda *args: None)
+    monkeypatch.setattr(button.subprocess, "run", lambda *args, **kwargs: None)
+    requested = []
+
+    def api(endpoint):
+        requested.append(endpoint)
+        return {
+            "path": button.PREPARE_WORKFLOW,
+            "event": "workflow_dispatch",
+            "head_branch": "community",
+            "head_sha": m["controller_sha"],
+            "run_attempt": 1 if endpoint.endswith("/attempts/1") else 2,
+            "conclusion": original_conclusion
+            if endpoint.endswith("/attempts/1")
+            else "failure",
+        }
+
+    monkeypatch.setattr(button, "api", api)
+    if original_conclusion == "success":
+        assert button.verify(args) == m
+    else:
+        with pytest.raises(
+            button.ReleaseError, match="preparation run identity/state mismatch"
+        ):
+            button.verify(args)
+    assert requested == [f"repos/{button.REPOSITORY}/actions/runs/123/attempts/1"]

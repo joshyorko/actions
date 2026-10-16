@@ -694,7 +694,13 @@ def verify(args):
         == manifest["tree"],
         "bundle tree mismatch",
     )
-    run = api(f"repos/{REPOSITORY}/actions/runs/{args.preparation_run_id}")
+    # An accidental preparation rerun is refused before rebuilding, but it changes
+    # the run's latest status. Bind to the original successful attempt so it
+    # cannot invalidate recovery of an already partially published bundle.
+    run = api(
+        f"repos/{REPOSITORY}/actions/runs/{args.preparation_run_id}/attempts/"
+        f"{manifest['preparation_run_attempt']}"
+    )
     require(
         run["path"] == PREPARE_WORKFLOW
         and run["event"] == "workflow_dispatch"

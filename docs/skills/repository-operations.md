@@ -4208,3 +4208,11 @@ The preparation downloader verifies the complete downloaded ZIP against GitHub's
 against producer receipts. These are separate integrity checks. The native
 acceptance ZIP from the hosted producer was independently observed to match its
 GitHub digest; do not downgrade a mismatch to a warning or extract first.
+
+Publication validates the preparation's original successful **attempt**, rather
+than its mutable latest-run status. GitHub's rerun operation updates that status
+even when the controller immediately refuses to rebuild on attempt2. The named
+`-1` artifact and reviewed manifest remain fixed; an accidental refused rerun
+must not invalidate recovery of a PyPI prefix or native draft already owned by
+the original bundle. The run-attempt API still must prove canonical workflow,
+community controller SHA, exact attempt number and successful conclusion.
