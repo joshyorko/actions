@@ -1,0 +1,30 @@
+{
+  "artifactDigest": "sha256:67f306caa7412eee18926a7d33f67a4ff57e1bf1671c9825134f2dd728167e48",
+  "cacheHit": "local-materialization",
+  "compatibility_status": "compatible",
+  "exitCode": 0,
+  "leaseId": "0e6e235b6d5998b4115c8c0732af9615",
+  "materializationId": "c2fd1aa_5a1fac3_755451b2",
+  "omitted": "Machine CPU and library inventories; raw receipt retained privately",
+  "raw_receipt_sha256": "fb169cbc8141110d4fd401b758c663f56d43d285004740e4c887fe5ba2cc193b",
+  "status": "completed",
+  "verification": {
+    "artifactDigest": "sha256:67f306caa7412eee18926a7d33f67a4ff57e1bf1671c9825134f2dd728167e48",
+    "builder": "rcc-holotree-v12",
+    "code": "valid",
+    "decisionID": "sha256:91431006ee74c268274c64094a7300f7a0a8a89f6ca5fc2af820c8151c7f5776",
+    "keyID": "template-08-ephemeral-ed25519",
+    "leaseID": "0e6e235b6d5998b4115c8c0732af9615",
+    "platform": "linux_amd64",
+    "policyDigest": "sha256:ced4a09b57ecb988f876d825e65c80ea32237c7327f0bc11d7f9a40bf0a50bb3",
+    "policyMode": "strict-remote",
+    "policyRevision": "artifacttrust/v1",
+    "provenanceDigest": "sha256:c4708cd637219398aee80dd98e645e14dbe646af17f1788146e42f551c957783",
+    "revocationCheckedAt": "2026-10-16T16:53:26Z",
+    "revocationSnapshot": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "revocationSource": "rcc-publish",
+    "sbomDigest": "sha256:0f240957f12bdb61195169faeb73b12e263e5587bd34888f57dfc1a85448b3ce",
+    "valid": true,
+    "verifiedAt": "2026-10-16T16:53:26Z"
+  }
+}

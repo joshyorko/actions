@@ -4127,3 +4127,11 @@ root before opening artifact storage. POSIX temp paths can traverse a system
 alias (notably macOS `/var`); storage intentionally rejects symlink ancestors.
 The temporary-alias regression reproduces that rejection without relaxing the
 production storage contract, then exercises the probe using the physical root.
+
+A local platform-tagged Runtime wheel used for functional acceptance is a separate
+artifact from the portable release matrix. Record its exact filename/hash,
+compare every installed Runtime member (including generated non-Python assets)
+with the wheel, and compare tracked Python members with the named Git source.
+Do not count that functional wheel as one of the six supported release wheels;
+qualify the canonical seven-distribution inventory independently. Preserve any
+source-versus-tested-merge identity distinction even when complete trees match.

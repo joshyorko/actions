@@ -1,0 +1,19 @@
+{
+  "321": {
+    "tested_merge": "501970baec0034137a7bf34d1499c33aab6b453c",
+    "tree": "b65aca3b45da59a67cfaf8f279e0a0054afa6724",
+    "whole_tree_matches_release_source": true
+  },
+  "322": {
+    "tested_merge": "d153598127c4ed978596815dc1ce05fd8dc81f45",
+    "tree": "b65aca3b45da59a67cfaf8f279e0a0054afa6724",
+    "whole_tree_matches_release_source": true
+  },
+  "approved_union_merge": "d234fda2dec409ee54d45af9aa7f7cf4b2e16fac",
+  "preceding_community": "20ccdae585b621a02080f545808fb3036f656e58",
+  "preceding_tag_commit": "20ccdae585b621a02080f545808fb3036f656e58",
+  "production_inputs_unchanged_after_14b1_fixture_fix": true,
+  "release_source": "ec5a66a48c05980ac3637c2158b0212156fd7935",
+  "release_tree": "b65aca3b45da59a67cfaf8f279e0a0054afa6724",
+  "security_carry_merge": "e4189907f515c324a49ddcebd40976163ee57451"
+}

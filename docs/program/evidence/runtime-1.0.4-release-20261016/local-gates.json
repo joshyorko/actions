@@ -1,0 +1,56 @@
+{
+  "source": "ec5a66a48c05980ac3637c2158b0212156fd7935",
+  "qualification_scope": "Versioned Runtime production inputs and installed real-wheel acceptance; fixture/tooling source identity distinctions are in README.",
+  "gates": {
+    "toolkit": {
+      "result": "179 passed",
+      "retained_log_basename": "runtime104-release-toolkit-green.log",
+      "raw_log_sha256": "c66061734c5672f31f1e94513e1b896a341a9662db4835e8417b6c35bda7e60b"
+    },
+    "runtime_full": {
+      "result": "1544 passed, 15 skipped",
+      "retained_log_basename": "runtime104-release-full.log",
+      "raw_log_sha256": "4c47aa7049165c55ba52721c4e4dd7955ae0986acc12bcf1c6b380cd0c3b239d"
+    },
+    "runtime_lint": {
+      "result": "PASS",
+      "retained_log_basename": "runtime104-release-lint.log",
+      "raw_log_sha256": "5301f169eb1fdc9101421db7a0d06d455e6c48c919740c54dd6c0a37e46ad4fa"
+    },
+    "runtime_types": {
+      "result": "PASS",
+      "retained_log_basename": "runtime104-release-types.log",
+      "raw_log_sha256": "303602d45eeb0004ecf81a538b2c1321099cba9778701d657233178c047521f8"
+    },
+    "devutils_full": {
+      "result": "179 passed",
+      "retained_log_basename": "runtime104-release-devutils-full.log",
+      "raw_log_sha256": "0af865ea98612c8216dcf57527adb0d0775ad914372d40841440a9b36c7230e6"
+    },
+    "release_version_controls": {
+      "result": "135 passed",
+      "retained_log_basename": "runtime104-release-version-green.log",
+      "raw_log_sha256": "e362b99717cfea28c27531edc5bf0369082a8b81c2d728bb273dcd35fc20c866"
+    },
+    "strict_twine": {
+      "result": "PASS",
+      "retained_log_basename": "runtime104-release-final-twine.log",
+      "raw_log_sha256": "f71276d6af2b89e54c8038989e8036bae34cfa5c877f0b53638cbc53e1c1ffbb"
+    },
+    "installed_request_boundaries": {
+      "result": "26 controls PASS",
+      "retained_log_basename": "installed-boundary-summary.txt",
+      "raw_log_sha256": "ba33bb7022e729cabb5cd896c8857279a919f3bbd9323e42dd1289992a8cf2e2"
+    },
+    "template_ac": {
+      "result": "A/C PASS",
+      "retained_log_basename": "runtime104-release-template-ac.log",
+      "raw_log_sha256": "ab06afa1c5e0b2e9b02977024e795bfb0482be55ba678f4372778807959c376c"
+    },
+    "template_b_restart": {
+      "result": "B/restart PASS",
+      "retained_log_basename": "runtime104-release-template-b-v2.log",
+      "raw_log_sha256": "edb2a4a5b575320a004cf5f463b6ae120c9d9a218abf993156c15eca480a0c0b"
+    }
+  }
+}

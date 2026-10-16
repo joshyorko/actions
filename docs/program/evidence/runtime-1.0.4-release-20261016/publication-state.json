@@ -1,0 +1,28 @@
+{
+  "native_release_1.0.3": {
+    "assets": [
+      "actions-runtime-1.0.3-linux64",
+      "actions-runtime-1.0.3-macos-arm64",
+      "actions-runtime-1.0.3-sha256.txt",
+      "actions-runtime-1.0.3-windows64.exe"
+    ],
+    "draft": false,
+    "present": true,
+    "query_exit": 0,
+    "tag": "actions-runtime-1.0.3"
+  },
+  "native_release_1.0.4": {
+    "not_found": true,
+    "present": false,
+    "query_exit": 1
+  },
+  "observed_at": "2026-10-16T17:01:42.246254+00:00",
+  "pypi_latest": "1.0.3",
+  "pypi_versions": {
+    "1.0.3": true,
+    "1.0.4": false
+  },
+  "remote_tag_refs": [
+    "f5b8b14abb8bf35c8abba4701ccb2007e5f6fbbe\trefs/tags/actions-runtime-1.0.3"
+  ]
+}

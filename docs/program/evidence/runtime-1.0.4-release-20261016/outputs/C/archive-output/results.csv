@@ -1,0 +1,4 @@
+invoice_id,vendor,amount_cents,currency,classification
+INV-1001,Northwind Paper,2450,USD,ready
+INV-1002,Contoso Parts,125000,USD,review
+INV-1003,Fabrikam Office,50000,USD,ready
