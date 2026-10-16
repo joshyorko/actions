@@ -4210,12 +4210,29 @@ acceptance ZIP from the hosted producer was independently observed to match its
 GitHub digest; do not downgrade a mismatch to a warning or extract first.
 
 Publication validates the preparation's original successful **attempt**, rather
-than its mutable latest-run status. GitHub's rerun operation updates that status
-even when the controller immediately refuses to rebuild on attempt2. The named
-`-1` artifact and reviewed manifest remain fixed; an accidental refused rerun
-must not invalidate recovery of a PyPI prefix or native draft already owned by
-the original bundle. The run-attempt API still must prove canonical workflow,
-community controller SHA, exact attempt number and successful conclusion.
+than its mutable latest-run status. That API result does not preserve storage:
+a full preparation rerun was observed to remove its original artifact before
+attempt2 refused rebuilding. Existing [actions/upload-artifact#323](https://github.com/actions/upload-artifact/issues/323)
+tracks the platform behavior. Never rerun a preparation or rebuild to resume a
+partial publication.
+
+The controller's reviewed `action_server/release-bundle-backups.json` registry
+separates the unchanged original preparation/manifest from its transport run.
+Read-only validation and publication now require two distinct successful backup
+runs, each with an exact registered, present, unexpired bundle artifact and raw
+archive artifact. Same-run duplicate artifacts do not count as independent.
+Registry source/version/original preparation/manifest identities, backup workflow,
+branch, repository/head/attempt and artifact IDs/digests/sizes must all match.
+Missing copies fail closed; metadata/identity mismatches are never downgraded to
+availability warnings. Recovery uses a registered backup run through the existing
+numeric `preparation_run_id` input, while release ownership remains bound to the
+original unchanged manifest. The controller still verifies current community,
+complete source/qualification/workflow trees, original successful preparation,
+strict package inventory and every retained member hash/size. Regression tests
+cover original identity preservation, independent-copy requirements and collision,
+provenance, expiry and member-integrity refusal. An empty registry deliberately
+blocks validation/publication until actual independently retained backups are
+reviewed and recorded; a successful original-attempt API response is insufficient.
 
 Only `joshyorko` may enter the publication writer: both the original actor and
 triggering actor (including reruns) must be Josh. A read-only preflight rejects
