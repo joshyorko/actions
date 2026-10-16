@@ -20,7 +20,9 @@ This evidence contains metadata and hashes, no binaries, credentials or signed U
 
 ## Remaining gates and owner boundary
 
-A read-only follow-up at `32830e6e0e9b6a65e72d1ff0ac495bb310eb3603` verifies the reseeded carrier with A. Final exact-head hosted CI/native results will be recorded in the final evidence checkpoint and PR325 before handoff. No passing result is claimed here for those pending runs.
+Read-only follow-up [38982004911](https://github.com/joshyorko/actions/actions/runs/38982004911), head `32830e6e0e9b6a65e72d1ff0ac495bb310eb3603`, passed with actions:read. It verified owner original/A/B and disposable A/reseeded-C transports after original loss, all nine negative controls and unchanged owner snapshots. No second rerun or publication occurred.
+
+Final repair source is `d3656450bf9ddddef29b9aab5c86a316e394024c`; its release-code blobs equal the qualified implementation at `221edc4e7357aca64fc654f8ab5805c484042f2c`. All eight workflows at implementation head221ed passed, including full Windows integration. At final source head d3656450bf9ddddef29b9aab5c86a316e394024c, seven workflows and25of26jobs passed; Windows Runtime integration remains pending. Native acceptance passed on all three platforms. See ci-current-head.json and implementation-head-ci.json. An earlier intermediate head had one Windows post-cancellation10-second read timeout; its exact outcome is retained in `intermediate-ci-failure.json`, without changing tests or claiming a Runtime repair.
 
 Production-controller activation remains **UNRUN until an approved merge of Draft PR325**. The branch qualification calls the unchanged shared verifier with exact code-blob binding; it does not bypass or pretend to exercise the production controller's current-community guard.
 

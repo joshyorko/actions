@@ -1,0 +1,33 @@
+{
+  "original_loss": {
+    "run_id": 38981527410,
+    "head_sha": "692d8a1954cedcce30af4288b3e72881cf6156ed",
+    "artifact_id": 12080844904,
+    "artifact_digest": "sha256:130d980e475dafd13e5dbdf64f8be68da2461179def0438d3e29e41deb21744c",
+    "artifact_size": 8964,
+    "download_sha256_verified": true
+  },
+  "reseed": {
+    "run_id": 38981788683,
+    "head_sha": "9cd625d87bcc33092f39143f2a0b5b0b488ab879",
+    "registered_source_run_id": 38978632251,
+    "source_kind": "registered-raw-archive",
+    "original_unavailable": true,
+    "second_disposable_backup_physically_retained": true,
+    "only_one_disposable_backup_registered_for_reseed": true,
+    "independent_original_zip_manifest_and_34_members": "PASS"
+  },
+  "publication_performed": false,
+  "reseed_carrier_validation": {
+    "run_id": 38982004911,
+    "head_sha": "32830e6e0e9b6a65e72d1ff0ac495bb310eb3603",
+    "operation": "verify-after-loss",
+    "actions_permission": "read",
+    "artifact_id": 12081178987,
+    "artifact_digest": "sha256:d5aa39b9c750eee562549d4edf8f3efd9a6be6f60833ec2e67a035ac153137d1",
+    "artifact_size": 8697,
+    "download_sha256_verified": true,
+    "status": "PASS",
+    "protected_owner_unchanged": true
+  }
+}

@@ -4258,6 +4258,16 @@ operation is read-only apart from local staging; only the branch workflow upload
 new artifacts. It cannot enter the publication command or use its credential.
 Archive-role permission does not bypass the publisher's two-copy policy.
 
+Reuploading an unchanged payload creates a new transport ZIP whose GitHub digest
+may differ. Verify each outer artifact against its own reviewed GitHub size and
+digest; compare the raw sidecar's inner original ZIP to the unchanged original
+archive digest, then compare the unchanged manifest and every member. A raw
+reseed receipt identifies `source_kind=registered-raw-archive` and its source run;
+review the new run/head/artifact identities before adding it to the registry.
+The backup workflow requests 90-day retention for both artifacts. Record actual
+expiry and renew exact-byte copies before expiry; a successful past verification
+does not make an expired copy healthy.
+
 Only `joshyorko` may enter the publication writer: both the original actor and
 triggering actor (including reruns) must be Josh. A read-only preflight rejects
 another actor's publication request before checkout or credential loading; the
