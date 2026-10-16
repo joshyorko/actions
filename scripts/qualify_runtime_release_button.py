@@ -228,17 +228,24 @@ def saved_preparation(run_id, source):
 
 
 def job_logs(job_id):
-    # Run completion can precede availability of its downloadable job log.
-    # Retrying this bounded read never repeats a workflow dispatch or rerun.
+    # Capture untrusted log text without rendering it, then strip its controls.
+    # Retrying a bounded read never repeats a workflow dispatch or rerun.
     deadline = time.monotonic() + 180
     while True:
         response = subprocess.run(
-            ["gh", "api", f"repos/{REPO}/actions/jobs/{job_id}/logs"],
+            [
+                "gh",
+                "api",
+                "--allow-escape-sequences",
+                f"repos/{REPO}/actions/jobs/{job_id}/logs",
+            ],
             capture_output=True,
             text=True,
+            timeout=60,
         )
         if response.returncode == 0:
-            return response.stdout
+            plain = re.sub(r"\x1b\[[0-?]*[ -/]*[@-~]", "", response.stdout)
+            return re.sub(r"[\x00-\x08\x0b-\x1f\x7f-\x9f]", "", plain)
         require(
             time.monotonic() < deadline,
             f"job{job_id} logs unavailable after bounded reads: {response.stderr.strip()}",

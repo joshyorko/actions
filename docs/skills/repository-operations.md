@@ -4255,12 +4255,18 @@ negative/rerun controls. This permits qualification through the existing
 connected GitHub app when a shell credential has expired, without transferring
 credentials or changing repository security settings.
 
-A completed hosted run can precede availability of its downloadable job log.
-The qualification helper waits with a bounded sequence of read-only log fetches
-and retains the final error if logs stay unavailable. A reporting failure after
-accepted preparation/rerun writes does not authorize repeating those writes.
-Resume from the retained report, independently verify each original successful
-attempt and each still-available immutable artifact/manifest digest, then run
-only the missing read-only validations. A lost rehearsal artifact remains an
-explicit failed recovery gate while independent owner-bundle checks continue. The original failed helper receipt remains evidence;
-recovery never changes the release source or rebuilds an admitted bundle.
+The qualification helper captures job logs for marker checks rather than printing
+them to a terminal. Current GitHub CLI refuses text containing terminal escapes
+unless `gh api --allow-escape-sequences` is explicit. Use it only with captured
+output, strip CSI and control bytes before parsing, and never render the raw
+response. A bounded read retry may handle transient log availability but cannot
+repair that deterministic CLI refusal. The hosted error distinguishes these
+cases; do not guess from a subprocess exit code alone.
+
+A reporting failure after accepted preparation/rerun writes does not authorize
+repeating those writes. Resume from the retained report, independently verify
+each original successful attempt and still-available immutable artifact/manifest
+digest, then run only missing read-only validations. A lost rehearsal artifact
+remains an explicit failed recovery gate while independent owner-bundle checks
+continue. Keep the original failed helper receipt. Recovery never changes the
+release source or rebuilds an admitted bundle.
