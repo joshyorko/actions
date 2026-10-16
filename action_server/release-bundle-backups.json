@@ -1,5 +1,80 @@
 {
   "schema_version": 1,
   "repository": "joshyorko/actions",
-  "bundles": []
+  "bundles": [
+    {
+      "manifest_sha256": "1a77f6c8e09869d6bd45df1b14e6a9ce3f908bcf09351b76cee26a209504878a",
+      "source_sha": "d222f94edca26953c1506ab258adc458ded17c56",
+      "version": "1.0.4",
+      "preparation_run_id": 38951733318,
+      "original_archive_sha256": "bbe3d066fb082c1dc61a8916af549bf9a7b66369f36866a2b37a8256a95524e5",
+      "backups": [
+        {
+          "run_id": 38977206416,
+          "head_sha": "0094f6520567eb5a8429418e58678d1bc77c3ca4",
+          "bundle": {
+            "id": 12080016098,
+            "digest": "sha256:aba2d10da80f145c119136d624b6830cd5b68129a0cb29fcbe6b37b0efc79b90",
+            "size_in_bytes": 271548672
+          },
+          "archive": {
+            "id": 12079238969,
+            "digest": "sha256:2e928c89ebd86f2593466951ae4318e9ae5fc5a9e63e368972a19fb06a3f7611",
+            "size_in_bytes": 271549979
+          }
+        },
+        {
+          "run_id": 38977943959,
+          "head_sha": "447cb36c319f9d9cf546341e675cc101535e09a8",
+          "bundle": {
+            "id": 12080011272,
+            "digest": "sha256:b5678cea68761c8a4a1c24de2c62fa6c1296cda3922196ae1b31b11950322bca",
+            "size_in_bytes": 271548672
+          },
+          "archive": {
+            "id": 12079936308,
+            "digest": "sha256:6f6354374ae423891948de639779121bf3f619811bd9fef093f1d819646e2b94",
+            "size_in_bytes": 271549979
+          }
+        }
+      ]
+    },
+    {
+      "manifest_sha256": "5f20a741b4aeac15efae65a6269769f2628ebfccf90a5b596d5da85fb92f08a4",
+      "source_sha": "d222f94edca26953c1506ab258adc458ded17c56",
+      "version": "1.0.4",
+      "preparation_run_id": 38977611441,
+      "original_archive_sha256": "b0ea696e523d5fd1ab59651258234bb26b658343ea0b5ae9edc8d1c65a77974e",
+      "backups": [
+        {
+          "run_id": 38978632251,
+          "head_sha": "c5dad9cd7fd67ded5f3a88e9c9b58977d32ca41b",
+          "bundle": {
+            "id": 12079933054,
+            "digest": "sha256:90a5dabc0f265ca4ad43c223de8422b4979007c58fb151158f0143f48d3433c3",
+            "size_in_bytes": 271548673
+          },
+          "archive": {
+            "id": 12079873038,
+            "digest": "sha256:783bc2da1d0a90dd18a15834bc0a11e9adb17846857613cdb2d185cbbbacdd40",
+            "size_in_bytes": 271549980
+          }
+        },
+        {
+          "run_id": 38978889937,
+          "head_sha": "b5cd14680a5b1ff1f3d6bfab3505fa5319270da1",
+          "bundle": {
+            "id": 12079778744,
+            "digest": "sha256:f81967f8951676bc5b4c004a2df3eea24ae831279960f6e8c9c209e6d5cbf046",
+            "size_in_bytes": 271548673
+          },
+          "archive": {
+            "id": 12079669346,
+            "digest": "sha256:2dcce66ddc4fa06d5ae5e645d7f56d20590735b3e75bcf9fee2b0387f12520e3",
+            "size_in_bytes": 271549980
+          }
+        }
+      ]
+    }
+  ]
 }

@@ -16,6 +16,7 @@ import shutil
 import stat
 import subprocess
 import sys
+import tempfile
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -281,6 +282,10 @@ def download(run, artifact_name, destination, *, retain_archive=False):
             stderr=subprocess.PIPE,
         )
     require(result.returncode == 0, "artifact download failed")
+    require(
+        archive.stat().st_size == artifact["size_in_bytes"],
+        "GitHub artifact archive size mismatch",
+    )
     require(
         artifact.get("digest") == "sha256:" + sha256(archive),
         "GitHub artifact archive digest mismatch",
@@ -781,7 +786,66 @@ def verify_backup(record, backup, *, archive_only=False):
             "backup artifact metadata differs from recovery registry",
         )
         result[role] = item
+    if not archive_only:
+        verify_backup_bytes(record, backup, result["archive"])
     return result
+
+
+def verify_backup_bytes(record, backup, artifact):
+    """An API row is insufficient: prove the retained original bytes are readable."""
+    with tempfile.TemporaryDirectory(prefix="runtime-release-recovery-") as temporary:
+        root = Path(temporary)
+        retained = root / "archive"
+        downloaded = download({"id": backup["run_id"]}, artifact["name"], retained)
+        require(
+            all(
+                downloaded[key] == artifact[key]
+                for key in ("id", "digest", "size_in_bytes")
+            ),
+            "backup archive changed during verification",
+        )
+        require(
+            {path.name for path in retained.iterdir()}
+            == {"original-bundle.zip", "backup-receipt.json"}
+            and all(
+                path.is_file() and not path.is_symlink() and path.stat().st_nlink == 1
+                for path in retained.iterdir()
+            ),
+            "backup raw archive inventory mismatch",
+        )
+        receipt_path = retained / "backup-receipt.json"
+        require(receipt_path.stat().st_size <= 1024**2, "backup receipt bound exceeded")
+        receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+        require(
+            isinstance(receipt, dict)
+            and receipt.get("schema_version") == 1
+            and receipt.get("repository") == REPOSITORY
+            and receipt.get("controller_sha") == backup["head_sha"]
+            and all(
+                receipt.get(key) == record[key]
+                for key in (
+                    "preparation_run_id",
+                    "source_sha",
+                    "version",
+                    "manifest_sha256",
+                    "original_archive_sha256",
+                )
+            ),
+            "backup raw receipt differs from reviewed release identity",
+        )
+        original = retained / "original-bundle.zip"
+        require(
+            sha256(original) == record["original_archive_sha256"],
+            "backup original ZIP digest mismatch",
+        )
+        bundle = root / "bundle"
+        extract_zip(original, bundle)
+        require(
+            sha256(bundle / MANIFEST) == record["manifest_sha256"],
+            "backup original manifest digest mismatch",
+        )
+        manifest = json.loads((bundle / MANIFEST).read_text(encoding="utf-8"))
+        verify_files(bundle, manifest)
 
 
 def verify_recovery(root, digest, manifest, transport_id):
