@@ -4233,3 +4233,16 @@ to completed owned trials after checking process ownership. Do not clear the
 active shared toolchain or another writer's environment. The affected trial is
 failed until rerun successfully with adequate space; a cache cleanup is not a
 passing integration result.
+
+The isolated `qualification/runtime-release-button-20261016` helper branch is an
+execution harness, not release source. Its job uses `contents: read` and
+`actions: write` solely to dispatch preparation, read-only validation and a
+refused preparation rerun. Its Python write allowlist excludes release/tag
+creation and rejects publication inputs; all publisher dispatches hardcode
+`operation=validate`. It carries no package credential and must not be merged
+into the release/default branch. It preserves uncertain dispatch outcomes for
+inspection rather than posting again, rejects ambiguous new-run matches, and
+retains the successful owner-handoff preparation separately from deliberate
+negative/rerun controls. This permits qualification through the existing
+connected GitHub app when a shell credential has expired, without transferring
+credentials or changing repository security settings.
