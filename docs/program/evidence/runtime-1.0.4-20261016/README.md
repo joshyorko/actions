@@ -104,6 +104,14 @@ remains 1.0.2; B explicitly uses the private candidate wheel adapter. A/C use
 checksum-verified RCC 18.19.7; Runtime B uses bundled checksum-verified RCC
 18.19.3. A/C tests ran through the existing Template08 comparison harness;
 B ran its existing `_execute_mode` using an isolated wheel-backed Runtime.
+`qualification-harness.py` is the exact successful B/restart harness, preserved
+with its SHA in `provenance.json`. It uses explicit sandbox paths and contains no
+credential values. Recreate those worktree/install paths before rerunning it
+through `rcc task script -r developer/toolkit.yaml -- python <harness>`. It clears
+inherited RCC interpreter selectors before starting the installed Runtime; the
+first preparation attempt exposed `PYTHON_EXE` selecting the outer toolchain
+instead of the isolated installed environment. That failed attempt supplied no
+acceptance evidence; the successful run uses the sanitized child environment.
 
 `combined-abc.json` binds each mode to the same source digest. A validates
 default/repeat/alternate truth, deliberate failure and no-build reuse. C validates
