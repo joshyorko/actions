@@ -46,7 +46,7 @@
 - [x] Add tests proving exact ZIP/member preservation, safe extraction, no remote writes, refusing rerun/unsafe controller, and reseeding from a single surviving registered raw archive; observe red.
 - [x] Implement archive staging with original ZIP verification before extraction and full existing bundle verification afterward.
 - [x] Run complete Devutils tests, configured lint/isort/format and `git diff --check` through RCC/Poetry.
-- [ ] Push source checkpoint and dedicated backup workflow. Create two independent owner backups without touching the original run; independently verify downloaded output and record their immutable metadata.
+- [x] Push source checkpoint and dedicated backup workflow. Create two independent owner backups without touching the original run; independently verify downloaded output and record their immutable metadata.
 
 ### Task3: Destructive rehearsal and review evidence
 

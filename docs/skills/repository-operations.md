@@ -4223,8 +4223,12 @@ runs, each with an exact registered, present, unexpired bundle artifact and raw
 archive artifact. Same-run duplicate artifacts do not count as independent.
 Registry source/version/original preparation/manifest identities, backup workflow,
 branch, repository/head/attempt and artifact IDs/digests/sizes must all match.
-Missing copies fail closed; metadata/identity mismatches are never downgraded to
-availability warnings. Recovery uses a registered backup run through the existing
+Each readiness check downloads both healthy raw archives, verifies actual ZIP
+size/digest, receipt identity, the original ZIP and unchanged manifest digests,
+and every nested member/inventory before counting a copy. An available API row
+alone does not prove readable recovery bytes. Missing copies fail closed;
+metadata/identity mismatches and corrupt or unreadable bytes are never downgraded
+to availability warnings. Recovery uses a registered backup run through the existing
 numeric `preparation_run_id` input, while release ownership remains bound to the
 original unchanged manifest. The controller still verifies current community,
 complete source/qualification/workflow trees, original successful preparation,
@@ -4234,6 +4238,11 @@ provenance, expiry and member-integrity refusal. An empty registry deliberately
 blocks validation/publication until actual independently retained backups are
 reviewed and recorded; a successful original-attempt API response is insufficient.
 
+
+The reviewed template `action_server/scripts/runtime_release_backup_workflow.yml`
+is copied unchanged onto the separate backup branch; it never enters the default
+`.github/workflows` tree. It has read-only contents/actions permissions and no
+publication environment or credential.
 
 `action_server/scripts/runtime_release_backup.py` is a nonpublishing archiver for
 the separate `backup/runtime-release-bundles` branch/controller. It refuses reruns

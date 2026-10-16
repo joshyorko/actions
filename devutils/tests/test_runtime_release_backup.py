@@ -103,6 +103,49 @@ def recovery(tmp_path, monkeypatch):
                 },
             }
         )
+    import hashlib
+    import io
+    import zipfile
+
+    original_stream = io.BytesIO()
+    with zipfile.ZipFile(original_stream, "w") as z:
+        for path in sorted(bundle.rglob("*")):
+            if path.is_file():
+                z.write(path, path.relative_to(bundle).as_posix())
+    original_zip = original_stream.getvalue()
+    record["original_archive_sha256"] = hashlib.sha256(original_zip).hexdigest()
+    downloads = {}
+    for backup in record["backups"]:
+        receipt = {
+            key: record[key]
+            for key in (
+                "preparation_run_id",
+                "source_sha",
+                "version",
+                "manifest_sha256",
+                "original_archive_sha256",
+            )
+        }
+        receipt.update(
+            schema_version=1,
+            repository=button.REPOSITORY,
+            controller_sha=backup["head_sha"],
+        )
+        stream = io.BytesIO()
+        with zipfile.ZipFile(stream, "w") as z:
+            z.writestr("original-bundle.zip", original_zip)
+            z.writestr("backup-receipt.json", json.dumps(receipt))
+        content = stream.getvalue()
+        item = artifacts[backup["run_id"]][1]
+        item.update(
+            digest="sha256:" + hashlib.sha256(content).hexdigest(),
+            size_in_bytes=len(content),
+        )
+        backup["archive"] = {
+            key: item[key] for key in ("id", "digest", "size_in_bytes")
+        }
+        downloads[item["id"]] = content
+
     registry_path = tmp_path / "action_server/release-bundle-backups.json"
     registry_path.parent.mkdir()
 
@@ -149,7 +192,14 @@ def recovery(tmp_path, monkeypatch):
     monkeypatch.setattr(button, "controller", lambda *args: None)
     monkeypatch.setattr(button, "check_source", lambda *args: manifest["tree"])
     monkeypatch.setattr(button, "verify_artifacts", lambda *args: None)
-    monkeypatch.setattr(button.subprocess, "run", lambda *args, **kwargs: None)
+
+    def subprocess_run(command, **kwargs):
+        if command[:2] == ["gh", "api"]:
+            identity = int(command[-1].split("/artifacts/")[1].split("/")[0])
+            kwargs["stdout"].write(downloads[identity])
+        return SimpleNamespace(returncode=0)
+
+    monkeypatch.setattr(button.subprocess, "run", subprocess_run)
     args = SimpleNamespace(
         root=tmp_path,
         bundle=bundle,
@@ -167,6 +217,8 @@ def recovery(tmp_path, monkeypatch):
         artifacts=artifacts,
         requests=requests,
         registry=registry_path,
+        downloads=downloads,
+        original_zip=original_zip,
     )
 
 
@@ -450,3 +502,104 @@ def test_archive_checks_actual_downloaded_zip_size_before_extraction(
     with pytest.raises(button.ReleaseError, match="archive size mismatch"):
         archive.archive(archive_case.args)
     assert not (archive_case.args.output / "bundle").exists()
+
+
+def test_reviewed_backup_workflow_cannot_load_a_publication_credential():
+    import yaml
+
+    template = SCRIPTS / "runtime_release_backup_workflow.yml"
+    assert template.is_file(), "reviewable backup workflow template missing"
+    workflow = yaml.safe_load(template.read_text())
+    assert workflow["permissions"] == {"contents": "read", "actions": "read"}
+    job = workflow["jobs"]["backup"]
+    assert "permissions" not in job and "environment" not in job
+    assert "secrets." not in template.read_text()
+    uploads = [
+        step
+        for step in job["steps"]
+        if "actions/upload-artifact@" in step.get("uses", "")
+    ]
+    assert len(uploads) == 2
+    assert {step["with"]["name"] for step in uploads} == {
+        "runtime-release-bundle-${{ github.run_id }}-1",
+        "runtime-release-archive-${{ github.run_id }}-1",
+    }
+    assert all(step["with"]["retention-days"] == 90 for step in uploads)
+    assert not workflow["concurrency"]["cancel-in-progress"]
+
+
+def test_available_metadata_does_not_count_as_a_readable_backup(recovery, monkeypatch):
+    def unavailable(command, **kwargs):
+        return SimpleNamespace(returncode=1 if command[:2] == ["gh", "api"] else 0)
+
+    monkeypatch.setattr(button.subprocess, "run", unavailable)
+    with pytest.raises(button.ReleaseError, match="artifact download failed"):
+        button.verify(recovery.args)
+
+
+@pytest.mark.parametrize(
+    "mutation,expected",
+    [
+        ("receipt-source", "raw receipt differs"),
+        ("original-zip", "original ZIP digest mismatch"),
+        ("member", "bundle digest mismatch"),
+        ("manifest", "original manifest digest mismatch"),
+    ],
+)
+def test_backup_readability_rejects_wrong_receipts_and_nested_bytes(
+    recovery, mutation, expected
+):
+    import hashlib
+    import io
+    import zipfile
+
+    original = recovery.original_zip
+    if mutation == "original-zip":
+        content = bytearray(original)
+        content[60] ^= 1
+        original = bytes(content)
+    if mutation in {"member", "manifest"}:
+        stream = io.BytesIO()
+        with zipfile.ZipFile(io.BytesIO(original)) as source, zipfile.ZipFile(
+            stream, "w"
+        ) as target:
+            for entry in source.infolist():
+                content = source.read(entry.filename)
+                if mutation == "member" and entry.filename == "pypi/a.whl":
+                    content = b"other"
+                if mutation == "manifest" and entry.filename == button.MANIFEST:
+                    content += b"\n"
+                target.writestr(entry, content)
+        original = stream.getvalue()
+        recovery.record["original_archive_sha256"] = hashlib.sha256(
+            original
+        ).hexdigest()
+    changed = (
+        recovery.record["backups"]
+        if mutation in {"member", "manifest"}
+        else recovery.record["backups"][1:]
+    )
+    for backup in changed:
+        identity = backup["archive"]["id"]
+        with zipfile.ZipFile(io.BytesIO(recovery.downloads[identity])) as source:
+            receipt = json.loads(source.read("backup-receipt.json"))
+        receipt["original_archive_sha256"] = recovery.record["original_archive_sha256"]
+        if mutation == "receipt-source":
+            receipt["source_sha"] = "f" * 40
+        stream = io.BytesIO()
+        with zipfile.ZipFile(stream, "w") as target:
+            target.writestr("original-bundle.zip", original)
+            target.writestr("backup-receipt.json", json.dumps(receipt))
+        content = stream.getvalue()
+        recovery.downloads[identity] = content
+        metadata = recovery.artifacts[backup["run_id"]][1]
+        metadata.update(
+            digest="sha256:" + hashlib.sha256(content).hexdigest(),
+            size_in_bytes=len(content),
+        )
+        backup["archive"] = {
+            key: metadata[key] for key in ("id", "digest", "size_in_bytes")
+        }
+    recovery.save_record()
+    with pytest.raises(button.ReleaseError, match=expected):
+        button.verify(recovery.args)

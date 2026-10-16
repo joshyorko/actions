@@ -31,7 +31,9 @@ A reviewed JSON registry in the controller checkout binds manifest digest,
 source/version, original preparation, original ZIP digest, each backup run/head,
 and both immutable artifact IDs/digests/sizes. Validation and publication require
 two distinct successful registered backups whose bundle and raw-archive artifacts
-are present, unexpired and metadata-identical. One deleted original preparation
+are present, unexpired and metadata-identical, with each raw archive downloaded
+and its receipt, exact original ZIP, unchanged manifest and all nested members
+verified before the copy counts as healthy. One deleted original preparation
 therefore does not remove either backup. A read-only archive command can use one
 surviving registered raw archive to reseed another copy without rebuilding.
 
