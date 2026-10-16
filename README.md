@@ -81,6 +81,42 @@ The community release surface has one server distribution and separate library d
 
 “Action Server” names the executable and server product. “Actions Runtime” names its PyPI distribution; they are not parallel server packages.
 
+## Release status and roadmap
+
+Status checked **October 9, 2026**. This roadmap separates what people can install today from release candidates and architecture work that is still proposed.
+
+### Available today
+
+The supported entry point is a single local Action Server: install `actions-runtime`, create a project with `action-server new`, then run it with `action-server start`. The quickstart above is the current adoption path. The published package versions are:
+
+| Distribution | Latest on PyPI |
+| --- | ---: |
+| `actions-runtime` | 1.0.2 |
+| `actions-core` | 1.0.2 |
+| `actions-http-helper` | 1.0.3 |
+| `actions-work-items` | 0.4.4 |
+
+Native Action Server release **1.0.1** is also available. Its published Linux, macOS arm64, and Windows x64 binaries are marked unsigned. Linux startup and a representative Action were verified; post-download execution on macOS and Windows was not verified for that release. PyPI and native release versions are tracked separately.
+
+### Release candidates
+
+HTTP Helper 1.0.3 and Core 1.0.2 are published and verified on PyPI; Work Items 0.4.4 is also published. Runtime 1.0.3 is a source candidate and is **not published**. Its declared floors are Core `^1.0.2`, HTTP Helper `^1.0.3`, and Work Items `^0.4.4`.
+
+The candidate contains bounded Run-history handling, browser-origin/authentication changes, Robot download/archive protections, refreshed Runtime administration assets, and current Work Items loading. These source changes do not establish release acceptance. RCC issue [#134](https://github.com/joshyorko/actions/issues/134) remains open: the selected-provider HTTP 503 negative fails closed before execution, while provider-backed offline-warm acceptance still fails and complete RCC lifecycle acceptance is unproven. Browser issue [#153](https://github.com/joshyorko/actions/issues/153) still requires real-browser evidence. Native handoff issue [#211](https://github.com/joshyorko/actions/issues/211) remains open pending external verification. PyPI Runtime is 1.0.2; native Action Server remains 1.0.1. No native 1.0.3 assets are available. Canvas remains an independent entrypoint; no Canvas authoring or execution feature is claimed here.
+
+### Proposed milestones
+
+1. **Close the local native support boundary.** Entry: build an identified candidate from an exact source commit for each supported OS. Exit: install or run each platform artifact and verify version, startup, MCP, and a representative Action; record browser and persistence checks separately. Resolve Windows startup and complete macOS execution evidence before claiming full native acceptance.
+2. **Prove durable execution.** Entry: agree on persisted Run and Attempt ownership and shared database contracts. Exit: demonstrate execution, cancellation, and artifact behavior across process restart and independent Runtime instances before describing distributed execution as supported.
+3. **Prove the adapter boundary.** Entry: complete the RCC lifecycle contract and define shared adapter conformance cases. Exit: pass those cases with RCC and a genuinely different adapter before calling the adapter boundary generic.
+4. **Expand placement and product workflows.** Entry: accept the durable execution and adapter proofs. Exit: validate independent workers, Canvas, and workflow capabilities against the same package and execution contracts before describing those placements or product paths as supported.
+
+These are evidence gates, not release dates or promises. Review the roadmap when a candidate is published, a milestone's exit evidence is accepted, or a material blocker changes; no target dates are assigned. The broader architecture is tracked in [issue #82](https://github.com/joshyorko/actions/issues/82); the public roadmap gap and compatibility policy are tracked in [issue #155](https://github.com/joshyorko/actions/issues/155). Distributed Runs, a second adapter, Canvas foundry, and cross-placement execution are not established by the roadmap or by draft designs.
+
+### Compatibility and releases
+
+Published distributions follow their own version and dependency contracts. Published templates resolve published dependencies; candidate templates may pin candidate dependencies for validation, but remain unreleased until those dependencies are published. The `2026-07-28` MCP protocol is the current advertised protocol version. Compatibility with future runtime adapters, distributed deployments, or draft architecture contracts is not implied. See the [Actions Runtime release notes](./action_server/docs/ACTIONS_RUNTIME_CHANGELOG.md) for Runtime release history and candidate notes; published artifacts remain the source of truth for what users can install.
+
 ---
 
 

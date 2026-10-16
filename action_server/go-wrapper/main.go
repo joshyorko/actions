@@ -392,9 +392,14 @@ func extractAndRun(config RunConfig) {
 	cmd.Stderr = os.Stderr
 	cmd.Stdin = os.Stdin
 
-	err = cmd.Run()
+	err = runChild(cmd)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error executing %s: %s\n", config.ExecutableName, err)
+		if exitErr, ok := err.(*exec.ExitError); ok {
+			if code := exitErr.ExitCode(); code >= 0 {
+				os.Exit(code)
+			}
+		}
 		os.Exit(1)
 	}
 }

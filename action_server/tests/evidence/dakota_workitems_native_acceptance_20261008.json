@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "source_sha": "43cf9a266c9a1a15046e963d51bf2affd39e0756",
+  "build_version": "dakota-workitems-43cf9a26-local",
+  "platform": "Linux",
+  "architecture": "x86_64",
+  "status": "PASS",
+  "consumer_execution": "Runtime action executed by the packaged Runtime worker",
+  "test_harness_sqlite_writes": [
+    "seed stale reservation fixture only"
+  ],
+  "worker_dependencies": {
+    "actions-core": "1.0.2 (task-local wheel)",
+    "actions-work-items": "0.4.4"
+  },
+  "checks": [
+    "consumer_action_reserves_input_and_releases_completed_with_parent_linked_output",
+    "consumer_action_releases_failed_with_error_details_then_fails_run",
+    "consumer_action_recovers_orphaned_reservation_retries_and_completes",
+    "runtime_restart_state_and_output_persistence"
+  ],
+  "build_command": "TMPDIR=<task-local-build-tmp> GOTMPDIR=<task-local-build-tmp> GOCACHE=<task-local-go-cache> GOMODCACHE=<task-local-go-mod-cache> PATH=<task-local-rcc-bin> .venv/bin/python -m invoke build-executable --go-wrapper --version dakota-workitems-43cf9a26-local",
+  "build_output": [
+    "PyInstaller frozen directory build completed",
+    "Go wrapper build completed with RCC Go 1.23.6",
+    "frozen and Go-wrapper executables launched and served Runtime APIs"
+  ],
+  "acceptance_command": ".venv/bin/python scripts/dakota_workitems_native_acceptance.py --source-sha 43cf9a266c9a1a15046e963d51bf2affd39e0756 --build-version dakota-workitems-43cf9a26-local --rcc-home <task-local-rcc-home> --receipt <task-local-receipt>",
+  "cases": [
+    {
+      "kind": "frozen",
+      "sha256": "e012781ab014a3c217539c8560e18ad22961aea224fafdff01f27411ce3f2227",
+      "status": "PASS"
+    },
+    {
+      "kind": "go-wrapper",
+      "sha256": "3630dcb21f89327bf3623b606c250f1bb3e268237d1b7f59c75d97fa392e03d7",
+      "status": "PASS"
+    }
+  ],
+  "actions_core_wheel_sha256": "9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80",
+  "consumer_actions": [
+    {
+      "scenario": "success",
+      "http_status": 200
+    },
+    {
+      "scenario": "failure",
+      "http_status": 500
+    },
+    {
+      "scenario": "recovery",
+      "http_status": 200
+    }
+  ],
+  "api_state_readbacks": {
+    "after_success": {
+      "input_state": "COMPLETED",
+      "output_state": "PENDING",
+      "output_queue": "default_output",
+      "parent_link_verified": true
+    },
+    "after_failure": {
+      "input_state": "FAILED",
+      "error_code": "SYNTHETIC_PROCESSOR_FAILURE",
+      "error_message": "synthetic consumer failure"
+    },
+    "after_recovery": {
+      "input_state": "COMPLETED",
+      "output_state": "PENDING",
+      "parent_link_verified": true
+    },
+    "after_restart": {
+      "success_state": "COMPLETED",
+      "failure_state": "FAILED",
+      "recovery_state": "COMPLETED",
+      "stats": {
+        "queue_name": "default",
+        "pending": 0,
+        "in_progress": 0,
+        "done": 2,
+        "failed": 1,
+        "total": 3
+      },
+      "output_parent_links_verified": true
+    }
+  },
+  "pytest_output": "2 passed, 0 failed",
+  "integration_base_sha": "06c62be524ee259688db068e22548a17851c01e3",
+  "toolchain_readiness": {
+    "rcc": "v18.19.3",
+    "rcc_linux_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "doctor": "PASS",
+    "bootstrap": "PASS",
+    "toolkit_test": "PASS (Ruff; 25 passed)"
+  },
+  "work_items_package_suite": {
+    "status": "PASS",
+    "command": "PATH=<task-local-RCC-bin> TEST_REDIS_URL=redis://127.0.0.1:16379/15 TEST_MONGODB_URI=mongodb://127.0.0.1:27027 work-items/.venv/bin/python -m pytest -q work-items/tests",
+    "output": "241 passed, 28 skipped, 10 xfailed in 3.11s",
+    "services": "Redis 7 and MongoDB 7 in Compose project dakota-workitems-full-rerun-20261008; task containers and network removed"
+  }
+}

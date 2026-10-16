@@ -1,0 +1,6 @@
+# Community Runtime does not provide hosted OAuth application registrations.
+# mode: actions fails explicitly for every provider in this catalog.
+# Use mode: custom with your own registered application in --oauth2-settings.
+formatVersion: '1.0.0'
+oauth2Config:
+  providers: {}

@@ -1,0 +1,42 @@
+{
+  "fixtureVersion": "query-results-fixture/0.1",
+  "view": {
+    "kind": "query-results",
+    "title": "Search records",
+    "form": {
+      "field": "query",
+      "label": "Search records",
+      "inputType": "text",
+      "required": true,
+      "maxLength": 64,
+      "submitBindingId": "binding.search-records"
+    },
+    "result": {
+      "table": "result.rows",
+      "error": "result.error",
+      "artifactHandle": "result.artifact.handle",
+      "artifactStatusBindingId": "binding.result-artifact-status"
+    }
+  },
+  "input": { "query": "alpha" },
+  "success": {
+    "rows": [
+      { "id": "record-001", "title": "Alpha guide", "category": "Guide" },
+      {
+        "id": "record-002",
+        "title": "Alpha checklist",
+        "category": "Checklist"
+      }
+    ],
+    "artifact": { "handle": "art_7Wk3qN9pL2xD5mR8sV4cY1" },
+    "error": null
+  },
+  "domainError": {
+    "rows": [],
+    "artifact": null,
+    "error": {
+      "code": "no_matches",
+      "message": "No records matched that query."
+    }
+  }
+}

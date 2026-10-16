@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-10-09T21:15:47Z",
+  "repository": "joshyorko/actions",
+  "scope": "Read-only current-ref audit of historical/stacked PRs 215-219 and 251. No GitHub mutation, PR closure, merge, branch change, or code edit.",
+  "sources": {
+    "github_pr_metadata": "mcp__codex_apps__github_get_pr_info, live read at observation time",
+    "github_workflow_runs": "mcp__codex_apps__github_fetch_commit_workflow_runs, exact listed head SHAs",
+    "github_reviews": "mcp__codex_apps__github_list_pull_request_reviews; no submitted reviews returned for these six PRs",
+    "git_fetch": "origin refs/pull/{215,216,217,218,219,221,251}/head and named integration branch refs",
+    "current_refs": {
+      "community": "c30f953bae1a322e1d09549607ab42f1badce440",
+      "integration/community-release-20261008": "446ff1b3328028154684c035f4e395ae35284067",
+      "integration/runtime-release-final-20261009": "204593afdbbb6a5be51c2c5fab3758805ad4412c",
+      "integration/cloud-convergence-20261009": "e032e95d38c91aead08d30b42ec7620b8ea726a4"
+    }
+  },
+  "lineage_findings": {
+    "pr221": {
+      "state": "open",
+      "draft": true,
+      "base": "community",
+      "base_sha_at_live_metadata": "011c5482285ea516f39292100c429a905e6e3e36",
+      "head": "integration/community-release-20261008",
+      "head_sha": "446ff1b3328028154684c035f4e395ae35284067",
+      "merge_commit": null,
+      "mergeable_reported": false,
+      "includes_exact_heads": [215, 216, 217, 218, 219, 251],
+      "current_community_contains_pr221_head": false,
+      "hypothetical_merge_to_current_community": {
+        "command": "git merge-tree --write-tree refs/remotes/review/community refs/remotes/review/pr221",
+        "tree": "e1bbee16c080b6e647c32838829c68ea7e011f82",
+        "conflict": "devutils/tests/test_invoke_utils.py"
+      },
+      "note": "PR221 is the preserving rollup, not a merged community result. Current release-final and cloud-convergence branches are divergent candidate lines; they are not interchangeable targets."
+    },
+    "exact_head_ancestry": {
+      "215": {"pr221": true, "runtime_release_final": true, "cloud_convergence": true, "community": false},
+      "216": {"pr221": true, "runtime_release_final": true, "cloud_convergence": true, "community": false},
+      "217": {"pr221": true, "runtime_release_final": true, "cloud_convergence": true, "community": false},
+      "218": {"pr221": true, "runtime_release_final": true, "cloud_convergence": true, "community": false},
+      "219": {"pr221": true, "runtime_release_final": true, "cloud_convergence": true, "community": false},
+      "251": {"pr221": true, "runtime_release_final": true, "cloud_convergence": false, "community": false}
+    }
+  },
+  "pull_requests": [
+    {
+      "number": 215,
+      "owner_login": "joshyorko",
+      "functional_owner": "root integration / release owner",
+      "state": "open",
+      "draft": true,
+      "head_branch": "convergence/actions-full-graph-20261008",
+      "head_sha": "d07f79b355f976f97948720474fd050d0a32ea16",
+      "base_branch": "community",
+      "base_sha": "7c98236069171f57031218f938963238986293bd",
+      "mergeable_reported": false,
+      "implementation": "Historical release-safeguard checkpoint; exact source is in PR221 and release-final/cloud-convergence candidates. The original publication claim was NOT_RUN at this checkpoint. Helper 1.0.3 and Core 1.0.2 have since been published and verified by separate immutable release receipts; Runtime 1.0.3 remains unadmitted.",
+      "verification": {"reported": "16 hosted checks SUCCESS at exact head", "workflow_runs": [37785345641, 37785345557, 37785345566, 37785345774], "reviews": 0},
+      "smallest_merge_gate": "Do not merge the historical head alone. Resolve the current PR221-to-community devutils/tests/test_invoke_utils.py conflict, then admit the exact current release candidate only after its current package/native/security/platform gates pass.",
+      "dependency": "Consolidated Runtime release admission and immutable artifact gates; Helper/Core publication work is already superseded by verified later package releases.",
+      "next_action": "Retain as history under PR221; evaluate any still-needed Runtime safeguard at the exact current candidate, not by replaying this stale head.",
+      "disposition": "blocked"
+    },
+    {
+      "number": 216,
+      "owner_login": "joshyorko",
+      "functional_owner": "root integration / Runtime and native acceptance owner",
+      "state": "open",
+      "draft": true,
+      "head_branch": "review/runtime-checkpoint-20261008",
+      "head_sha": "d26fa423080cec22522402f2193b17a5f32b336a",
+      "base_branch": "community",
+      "base_sha": "7c98236069171f57031218f938963238986293bd",
+      "mergeable_reported": false,
+      "implementation": "Bounded browser-origin, Run history and reconnect source repairs are complete for this checkpoint; later native/session/history proof and follow-up fixes live in PR221 descendants. Whole native/package acceptance remains incomplete.",
+      "verification": {"reported": "23 hosted checks SUCCESS at exact head", "workflow_runs": [37827009812, 37827009411, 37827009511, 37827009432, 37827009435, 37827009686, 37827009525, 37827009520], "reviews": 0},
+      "smallest_merge_gate": "No standalone replay. The preserving rollup has a current-base conflict; after resolving it, rerun the affected browser/Runtime gates on the exact candidate and complete outstanding Windows/macOS product acceptance.",
+      "dependency": "PR221 consolidated candidate and remaining native browser/session/reconnect requirements.",
+      "next_action": "Retain original history; carry only current exact candidate evidence into release admission.",
+      "disposition": "blocked"
+    },
+    {
+      "number": 217,
+      "owner_login": "joshyorko",
+      "functional_owner": "root integration / Core release owner",
+      "state": "open",
+      "draft": true,
+      "head_branch": "review/core-checkpoint-20261008",
+      "head_sha": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2",
+      "base_branch": "community",
+      "base_sha": "7c98236069171f57031218f938963238986293bd",
+      "mergeable_reported": false,
+      "implementation": "Core public API and Core 1.0.2 promotion outcome are already delivered through separate community PR248/immutable release receipts. The old PR217 head also contains Runtime/integration test and lock changes that remain part of the Runtime candidate lineage; its exact branch is not in community.",
+      "verification": {"reported": "15 hosted checks SUCCESS at exact head", "workflow_runs": [37831562324, 37831562334, 37831562347, 37831562429], "reviews": 0},
+      "smallest_merge_gate": "No merge gate remains for the Core 1.0.2 deliverable; do not replay the old mixed Core/Runtime checkpoint. Runtime residuals require current registry-resolved dependency and package/native gates on the current Runtime candidate.",
+      "dependency": "Core 1.0.2 is live; Runtime 1.0.3 candidate admission remains separate and incomplete.",
+      "next_action": "Treat the Core portion as already integrated through PR248; retain the original PR217 history and gate only the current Runtime candidate work.",
+      "disposition": "alreadyintegrated"
+    },
+    {
+      "number": 218,
+      "owner_login": "joshyorko",
+      "functional_owner": "root integration; Devsy native Work Items consumer lane",
+      "state": "open",
+      "draft": true,
+      "head_branch": "review/workitems-checkpoint-20261008",
+      "head_sha": "95ddbe88106be594ea9954bdb36909702c5e2869",
+      "base_branch": "community",
+      "base_sha": "7c98236069171f57031218f938963238986293bd",
+      "mergeable_reported": false,
+      "implementation": "The bounded package/source checkpoint is included in PR221; subsequent PR256 is source recovery only. Native Work Items transitions, packaged Windows/macOS behavior and full recovery/accessibility acceptance remain incomplete.",
+      "verification": {"reported": "16 hosted checks SUCCESS, 1 SKIPPED at exact head", "workflow_runs": [37785524726, 37785524878, 37785525053, 37785524612, 37785524905, 37785524761, 37785524551], "reviews": 0},
+      "smallest_merge_gate": "Do not merge the historical checkpoint by itself. Run exact-head packaged consumer and native platform gates against the admitted current Work Items/Runtime candidate; retain the known generated-module failure and source-recovery limits.",
+      "dependency": "Current #208 packaged consumer/platform acceptance, not merely source transfer or Work Items 0.4.4 registry presence.",
+      "next_action": "Keep PR218 in the preserving rollup and complete the assigned #208 current-head package/platform gates.",
+      "disposition": "blocked"
+    },
+    {
+      "number": 219,
+      "owner_login": "joshyorko",
+      "functional_owner": "root integration / architecture owner",
+      "state": "open",
+      "draft": true,
+      "head_branch": "review/design-checkpoints-20261008",
+      "head_sha": "ee612f467aa3bf379ccccf238ac985fa2846afde",
+      "base_branch": "community",
+      "base_sha": "7c98236069171f57031218f938963238986293bd",
+      "mergeable_reported": false,
+      "implementation": "Design and README snapshot only; production Deployment schema and MCP showcase are unfinished. Later PR223/PR262 refine separate scoped design/source proofs. This old PR does not deliver either product contract.",
+      "verification": {"reported": "6 hosted checks SUCCESS, 1 FAILURE at exact head; RCC run 37785784827 failed; audit run 37785784794 succeeded", "workflow_runs": [37785784794, 37785784827], "reviews": 0},
+      "smallest_merge_gate": "No product merge from this checkpoint. If a specific documentation claim is still needed, compare it with the current #129/#126 contract and PR223/PR262 content; preserve the unrelated inherited N-1 WebSocket failure as #209 evidence.",
+      "dependency": "Current #129 Deployment admission and #126 packaged MCP showcase gates; the old failed N-1 check is independently tracked under #209.",
+      "next_action": "Retain as design history; use the current scoped contracts and exact later evidence rather than merge the stale two-file snapshot.",
+      "disposition": "blocked"
+    },
+    {
+      "number": 251,
+      "owner_login": "joshyorko",
+      "functional_owner": "root integration / #134 RCC acceptance owner",
+      "state": "open",
+      "draft": true,
+      "head_branch": "test/rcc-provider-dead-warm-20261009",
+      "head_sha": "2eaac1c1fe5c53320d647a35dd137f8fd9411f3b",
+      "base_branch": "repair/rcc-graceful-retirement-20261009",
+      "base_sha": "29f213e021e5c828aee43de16604ad41cfe88965",
+      "mergeable_reported": true,
+      "implementation": "The bounded diagnostic harness and negative provider-dead warm result are complete; the result proves current configured-provider behavior fails before creating a warm worker. This is a diagnostic failure, not a passing #134 acceptance cell. Exact source is already in PR221 and runtime-release-final; it is not in cloud-convergence.",
+      "verification": {"reported": "3 hosted workflows SUCCESS at exact head", "workflow_runs": [37967816655, 37967816688, 37967816678], "reviews": 0, "full_suite_after_final_diagnostics": "NOT_RUN; earlier configured portable suite and focused tests are tied to earlier checkpoints as disclosed in PR body"},
+      "smallest_merge_gate": "No code gate is outstanding for the three hosted workflows; retain the negative receipt and do not mark warm acceptance passing. No separate merge advances community because the source is already in the preserving candidate and its intended repair base is a branch target, not community.",
+      "dependency": "PR247 retirement parent and the unresolved #134 provider trust-carrier/warm acceptance contract.",
+      "next_action": "Keep the exact negative receipt attached to #134/current candidate; resolve the provider-dead warm contract before any success claim.",
+      "disposition": "alreadyintegrated"
+    }
+  ],
+  "overall": {
+    "actually_ready_to_merge_to_current_community": [],
+    "reason": "PRs215-219 target an obsolete community base and all six exact heads are contained in PR221 or another candidate lineage; the PR221-to-current-community synthetic merge currently conflicts in devutils/tests/test_invoke_utils.py. PR221 itself remains open/draft and unmerged. PR251's exact base is unchanged and its hosted runs are green, but it is a negative diagnostic already present in the preserving candidate, not an independent community admission.",
+    "merge_convergence_sequence": [
+      "Resolve the devutils/tests/test_invoke_utils.py conflict in the PR221 rollup against live community without losing either side.",
+      "Recompute and validate the exact rollup candidate against the chosen current integration/community target; do not reuse checks from old PR heads as combined-tree proof.",
+      "Keep PR217's Core 1.0.2 released slice separate from the unpublished Runtime 1.0.3 candidate; run only the remaining current Runtime/package/native gates.",
+      "Keep PR251's provider-dead warm result classified as FAIL/diagnostic until the actual #134 acceptance contract passes."
+    ],
+    "canonical_documentation": {
+      "file_reviewed": "docs/skills/repository-operations.md#pull-request-triage",
+      "existing_rule": "Record actual tested checkout SHA and synthetic merge parents/tree; when a base advances, compare the hypothetical merge and rerun affected gates. A combined rollup replaces separate PRs only after exact-tree gates.",
+      "docs_improvement": "The existing canonical rule covers this audit; no guide change is proposed. This JSON receipt adds current live lineage/status and explicit outcome distinctions.",
+      "evidence": "Live PR metadata/check-run APIs, explicit fetched PR/integration refs, git ancestry tests, current base tree comparison, and git merge-tree synthetic result.",
+      "upstream_disposition": "none; no confirmed upstream defect was investigated or reported"
+    }
+  }
+}

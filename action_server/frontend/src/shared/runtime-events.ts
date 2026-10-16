@@ -1,13 +1,14 @@
 import type { QueryClient } from "@tanstack/react-query";
 import { runtimeQueryKeys } from "./runtime-query-keys";
 import { WEBSOCKET_BASE_URL } from "./constants";
-import { WebsocketConn } from "./utils/websocketConn";
-import type { Run } from "./types";
+import { WebsocketConn, type WebsocketStatus } from "./utils/websocketConn";
+import type { RunSummary } from "./types";
 
 export type RuntimeEvent =
   | { type: "connect" | "mtime_changed" }
-  | { type: "runs_collected"; runs: Run[] }
-  | { type: "run_added"; run: Run }
+  | { type: "runs_unavailable" }
+  | { type: "runs_collected"; runs: RunSummary[] }
+  | { type: "run_added"; run: RunSummary }
   | {
       type: "run_changed";
       run_id: string;
@@ -29,7 +30,9 @@ export const applyRuntimeEvent = async (
   }
   await queryClient.invalidateQueries({
     queryKey:
-      event.type === "runs_collected" || event.type === "run_added"
+      event.type === "runs_collected" ||
+      event.type === "run_added" ||
+      event.type === "runs_unavailable"
         ? runtimeQueryKeys.runs()
         : runtimeQueryKeys.root,
   });
@@ -42,17 +45,21 @@ export const createRuntimeEventAdapter = (queryClient: QueryClient) => {
 };
 
 export const subscribeRuntimeEvents = (queryClient: QueryClient) => {
-  const socket = new WebsocketConn(`${WEBSOCKET_BASE_URL}/api/ws`);
+  const socket = new WebsocketConn(`${WEBSOCKET_BASE_URL}/api/ws/summary`);
   const adapter = createRuntimeEventAdapter(queryClient);
+
+  socket.on("status", (status: WebsocketStatus) => {
+    queryClient.setQueryData(runtimeQueryKeys.websocketStatus(), status);
+  });
 
   socket.on("connect", () => {
     void adapter({ type: "connect" });
-    void socket.emit("start_listen_run_events");
+    void socket.emit("start_listen_run_events").catch(() => undefined);
   });
-  socket.on("runs_collected", (runs: Run[]) =>
+  socket.on("runs_collected", (runs: RunSummary[]) =>
     adapter({ type: "runs_collected", runs }),
   );
-  socket.on("run_added", ({ run }: { run: Run }) =>
+  socket.on("run_added", ({ run }: { run: RunSummary }) =>
     adapter({ type: "run_added", run }),
   );
   socket.on(
@@ -61,6 +68,7 @@ export const subscribeRuntimeEvents = (queryClient: QueryClient) => {
       adapter({ type: "run_changed", ...data }),
   );
   socket.on("mtime_changed", () => adapter({ type: "mtime_changed" }));
-  void socket.connect();
+  socket.on("runs_unavailable", () => adapter({ type: "runs_unavailable" }));
+  void socket.connect().catch(() => undefined);
   return () => socket.disconnect();
 };

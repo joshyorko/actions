@@ -184,9 +184,7 @@ class SchedulerEngine:
                     f"Error processing schedule {schedule.id} ({schedule.name})"
                 )
 
-    async def _process_schedule(
-        self, schedule: "Schedule", now: datetime
-    ) -> None:
+    async def _process_schedule(self, schedule: "Schedule", now: datetime) -> None:
         """Claim a schedule across PostgreSQL Runtime processes before processing it."""
         from actions.server._database import datetime_to_str
         from actions.server._models import Schedule, get_db
@@ -266,7 +264,9 @@ class SchedulerEngine:
 
         # Check rate limits
         if not await self._check_rate_limit(schedule, now):
-            await self._record_skip(schedule, now, ScheduleSkipReason.RATE_LIMITED, claim)
+            await self._record_skip(
+                schedule, now, ScheduleSkipReason.RATE_LIMITED, claim
+            )
             return
 
         # Check dependencies

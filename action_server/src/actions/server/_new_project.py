@@ -59,7 +59,7 @@ def handle_new_project(
                 from pathlib import Path
 
                 # Consider empty only if the directory has files that don't match the exclusion patterns.
-                from actions._collect_actions import DEFAULT_EXCLUSION_PATTERNS
+                from actions.server_integration import DEFAULT_EXCLUSION_PATTERNS
 
                 package_exclude_handler = PackageExcludeHandler()
                 package_exclude_handler.fill_exclude_patterns(

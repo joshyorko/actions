@@ -645,6 +645,326 @@ def test_routes(action_server_process: ActionServerProcess, data_regression):
 
 
 @pytest.mark.integration_test
+def test_summary_run_list_is_bounded_and_legacy_list_and_detail_remain_full(
+    action_server_process: ActionServerProcess,
+):
+    from dataclasses import replace
+
+    from action_server_tests.sample_data import RUN, RUN2
+
+    from actions.server._models import create_db
+
+    input_payload = json.dumps(
+        {"credential_like_value": "input-secret", "padding": "i" * 512_000}
+    )
+    result_payload = json.dumps(
+        {"credential_like_value": "result-secret", "padding": "r" * 512_000}
+    )
+    sensitive_run = replace(
+        RUN,
+        id="run-sensitive-payload",
+        numbered_id=3,
+        inputs=input_payload,
+        result=result_payload,
+        error_message="error-secret",
+    )
+    robot_run = replace(
+        RUN2,
+        id="run-robot-summary",
+        numbered_id=0,
+        run_type="robot",
+        action_id="",
+        robot_package_path="p" * 4096,
+        robot_task_name="t" * 2048,
+    )
+
+    action_server_process.datadir.mkdir(parents=True, exist_ok=True)
+    with create_db(action_server_process.datadir / "server.db") as db:
+        with db.transaction():
+            db.insert(RUN)
+            db.insert(RUN2)
+            db.insert(sensitive_run)
+            db.insert(robot_run)
+
+    action_server_process.start(
+        db_file="server.db",
+        env={
+            "ACTIONS_HOME": str(action_server_process.datadir / ".actions"),
+            "ROBOTS_HOME": str(action_server_process.datadir / ".robots"),
+        },
+    )
+    client = ActionServerClient(action_server_process)
+
+    legacy_response = client.get_get_response("/api/runs", None)
+    assert legacy_response.status_code == 200
+    legacy_body = legacy_response.text
+    assert len(legacy_body) > 1_000_000
+    assert "input-secret" in legacy_body
+    assert "result-secret" in legacy_body
+    assert "error-secret" in legacy_body
+
+    response = client.get_get_response("/api/runs/summary", None, params={"limit": 1})
+    assert response.status_code == 200
+    summary_body = response.text
+    assert len(summary_body) < 16_384
+    summaries = json.loads(summary_body)
+    assert len(summaries) == 1
+    summary = summaries[0]
+    assert summary["id"] == sensitive_run.id
+    for detail_field in (
+        "inputs",
+        "result",
+        "error_message",
+        "relative_artifacts_dir",
+        "stdout",
+        "stderr",
+    ):
+        assert detail_field not in summary
+    assert "input-secret" not in summary_body
+    assert "result-secret" not in summary_body
+    assert "error-secret" not in summary_body
+
+    paged_response = client.get_get_response(
+        "/api/runs/summary", None, params={"limit": 1, "offset": 1}
+    )
+    assert paged_response.status_code == 200
+    paged = json.loads(paged_response.text)
+    assert [item["id"] for item in paged] == [RUN2.id]
+
+    robot_response = client.get_get_response(
+        "/api/runs/summary",
+        None,
+        params={"run_type": "robot", "limit": 1},
+    )
+    robot_summary = json.loads(robot_response.text)[0]
+    assert robot_summary["id"] == robot_run.id
+    assert len(robot_summary["robot_package_path"]) == 256
+    assert robot_summary["robot_package_path"].endswith("…")
+    assert len(robot_summary["robot_task_name"]) == 128
+    assert robot_summary["robot_task_name"].endswith("…")
+
+    import actions_http
+
+    oversized_limit = actions_http.get(
+        client.build_full_url("/api/runs/summary?limit=201"),
+        **client.requests_kwargs(),
+    )
+    assert oversized_limit.status_code == 422
+
+    detail_response = client.get_get_response(f"/api/runs/{sensitive_run.id}", None)
+    assert detail_response.status_code == 200
+    detail = json.loads(detail_response.text)
+    assert detail["inputs"] == input_payload
+    assert detail["result"] == result_payload
+    assert detail["error_message"] == "error-secret"
+
+
+@pytest.mark.integration_test
+def test_summary_run_list_reports_corrupt_identity_without_disclosing_it(
+    action_server_process: ActionServerProcess,
+):
+    from dataclasses import replace
+
+    from action_server_tests.sample_data import RUN
+
+    from actions.server._models import create_db
+
+    private_bad_id = "corrupt-run-id-" + ("x" * 200)
+    action_server_process.datadir.mkdir(parents=True, exist_ok=True)
+    with create_db(action_server_process.datadir / "server.db") as db:
+        with db.transaction():
+            db.insert(replace(RUN, id=private_bad_id, numbered_id=1))
+
+    action_server_process.start(db_file="server.db")
+    client = ActionServerClient(action_server_process)
+    import actions_http
+
+    response = actions_http.get(
+        client.build_full_url("/api/runs/summary"), **client.requests_kwargs()
+    )
+
+    assert response.status_code == 503
+    assert response.text
+    assert private_bad_id not in response.text
+    assert "inputs" not in response.text
+    assert "result" not in response.text
+
+
+def test_run_summary_state_selects_only_summary_columns(monkeypatch, tmp_path):
+    from dataclasses import replace
+
+    from action_server_tests.sample_data import RUN
+
+    from actions.server._models import create_db
+    from actions.server._runs_state_cache import RunsState
+
+    run = replace(
+        RUN, inputs="input-secret" * 100_000, result="result-secret" * 100_000
+    )
+    with create_db(tmp_path / "server.db") as db:
+        with db.transaction():
+            db.insert(run)
+
+        queries = []
+        select = db.select
+
+        def capture_select(model, sql, values=None):
+            queries.append((model, sql, values))
+            return select(model, sql, values)
+
+        monkeypatch.setattr(db, "select", capture_select)
+        state = RunsState(db)
+        with state.semaphore:
+            records = state.get_current_run_summaries(limit=1)
+
+    assert len(records) == 1
+    assert records[0].id == run.id
+    assert not hasattr(records[0], "inputs")
+    assert not hasattr(records[0], "result")
+    assert not hasattr(records[0], "error_message")
+    assert len(queries) == 1
+    sql = queries[0][1]
+    assert sql.startswith(
+        "SELECT id, status, action_id, start_time, run_time, numbered_id, run_type, "
+    )
+    assert "robot_package_path, robot_task_name FROM run" in sql
+    assert "SELECT *" not in sql
+    assert "inputs" not in sql
+    assert "result" not in sql
+    assert "error_message" not in sql
+
+
+def test_run_summary_invalid_database_text_returns_service_unavailable(
+    monkeypatch, tmp_path
+):
+    from action_server_tests.sample_data import RUN
+
+    from actions.server import _runs_state_cache
+    from actions.server._api_run import list_run_summaries
+    from actions.server._models import RUN_SUMMARY_UNAVAILABLE_MESSAGE, create_db
+    from actions.server._runs_state_cache import RunsState
+
+    with create_db(tmp_path / "server.db") as db:
+        with db.transaction():
+            db.insert(RUN)
+            db.update_by_id(type(RUN), RUN.id, {"robot_package_path": b"corrupt\\xff"})
+
+        state = RunsState(db)
+        monkeypatch.setattr(_runs_state_cache, "get_global_runs_state", lambda: state)
+        from fastapi import HTTPException
+
+        with pytest.raises(HTTPException) as error:
+            list_run_summaries()
+
+    assert error.value.status_code == 503
+    assert error.value.detail == RUN_SUMMARY_UNAVAILABLE_MESSAGE
+    assert "corrupt" not in str(error.value.detail)
+
+
+def test_run_summary_fields_have_a_finite_page_budget():
+    from types import SimpleNamespace
+
+    from pydantic import ValidationError
+
+    from actions.server._models import (
+        RUN_LIST_MAX_ACTION_ID_CHARS,
+        RUN_LIST_MAX_ACTION_NAME_CHARS,
+        RUN_LIST_MAX_ID_CHARS,
+        RUN_LIST_MAX_ITEMS,
+        RUN_LIST_MAX_RESPONSE_BYTES,
+        RUN_LIST_MAX_ROBOT_PACKAGE_PATH_CHARS,
+        RUN_LIST_MAX_ROBOT_TASK_NAME_CHARS,
+        RUN_LIST_MAX_START_TIME_CHARS,
+        RunListItemModel,
+    )
+
+    run = SimpleNamespace(
+        id="\x00" * RUN_LIST_MAX_ID_CHARS,
+        status=4,
+        action_id="\x00" * RUN_LIST_MAX_ACTION_ID_CHARS,
+        start_time="\x00" * RUN_LIST_MAX_START_TIME_CHARS,
+        run_time=1_000_000_000,
+        numbered_id=9_223_372_036_854_775_807,
+        run_type="robot",
+        action_name="\x00" * (RUN_LIST_MAX_ACTION_NAME_CHARS * 4),
+        robot_package_path="\x00" * (RUN_LIST_MAX_ROBOT_PACKAGE_PATH_CHARS * 4),
+        robot_task_name="\x00" * (RUN_LIST_MAX_ROBOT_TASK_NAME_CHARS * 4),
+    )
+    summary = RunListItemModel.from_run(run).model_dump()
+    assert summary["id"] == run.id
+    assert summary["action_id"] == run.action_id
+    assert summary["start_time"] == run.start_time
+    assert len(summary["action_name"]) == RUN_LIST_MAX_ACTION_NAME_CHARS
+    assert len(summary["robot_package_path"]) == RUN_LIST_MAX_ROBOT_PACKAGE_PATH_CHARS
+    assert len(summary["robot_task_name"]) == RUN_LIST_MAX_ROBOT_TASK_NAME_CHARS
+    assert summary["action_name"].endswith("…")
+    assert summary["robot_package_path"].endswith("…")
+    assert summary["robot_task_name"].endswith("…")
+    assert "inputs" not in summary
+    assert "result" not in summary
+    assert "error_message" not in summary
+
+    worst_case_page = json.dumps(
+        [summary] * RUN_LIST_MAX_ITEMS,
+        ensure_ascii=False,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    assert len(worst_case_page) <= RUN_LIST_MAX_RESPONSE_BYTES
+
+    for field, max_chars in (
+        ("id", RUN_LIST_MAX_ID_CHARS),
+        ("action_id", RUN_LIST_MAX_ACTION_ID_CHARS),
+    ):
+        invalid_identity = SimpleNamespace(
+            **{**run.__dict__, field: "x" * (max_chars + 1)}
+        )
+        with pytest.raises(ValidationError):
+            RunListItemModel.from_run(invalid_identity)
+
+
+def test_run_api_openapi_distinguishes_legacy_summary_and_detail_contracts():
+    from fastapi import FastAPI
+
+    from actions.server._api_run import run_api_router
+
+    app = FastAPI()
+    app.include_router(run_api_router)
+    spec = app.openapi()
+
+    legacy_items = spec["paths"]["/api/runs"]["get"]["responses"]["200"]["content"][
+        "application/json"
+    ]["schema"]["items"]["$ref"]
+    summary_operation = spec["paths"]["/api/runs/summary"]["get"]
+    summary_items = summary_operation["responses"]["200"]["content"][
+        "application/json"
+    ]["schema"]["items"]["$ref"]
+    detail_schema = spec["paths"]["/api/runs/{run_id}"]["get"]["responses"]["200"][
+        "content"
+    ]["application/json"]["schema"]["$ref"]
+
+    assert legacy_items == "#/components/schemas/RunDetailModel"
+    assert summary_items == "#/components/schemas/RunListItemModel"
+    assert detail_schema == "#/components/schemas/RunDetailModel"
+    assert {parameter["name"] for parameter in summary_operation["parameters"]} == {
+        "run_type",
+        "limit",
+        "offset",
+    }
+    summary_fields = spec["components"]["schemas"]["RunListItemModel"]["properties"]
+    assert all(
+        field not in summary_fields
+        for field in (
+            "inputs",
+            "result",
+            "error_message",
+            "relative_artifacts_dir",
+            "stdout",
+            "stderr",
+        )
+    )
+
+
+@pytest.mark.integration_test
 @pytest.mark.parametrize(
     "path",
     [
@@ -1228,46 +1548,232 @@ def test_port_in_use(action_server_process: ActionServerProcess, tmpdir):
 
 
 @pytest.mark.integration_test
-def test_action_package_rename(
-    action_server_process: ActionServerProcess, client: ActionServerClient, tmpdir
-):
-    calculator = Path(tmpdir) / "calculator" / "action_calculator.py"
-    calculator.parent.mkdir(parents=True, exist_ok=True)
-    calculator.write_text(
-        """
-from actions import action
+def test_action_package_rename(action_server_process: ActionServerProcess, tmpdir):
+    import httpx
+
+    from actions.server._models import load_db
+    from actions.server._selftest import ActionServerExitedError
+
+    calculator_dir = Path(tmpdir) / "calculator"
+    calculator_file = calculator_dir / "action_calculator.py"
+    calculator_dir.mkdir(parents=True, exist_ok=True)
+    calculator_file.write_text(
+        """from actions import action
 
 @action
 def calculator_sum(v1: float, v2: float) -> float:
     return v1 + v2
-"""
+""",
+        encoding="utf-8",
     )
+
+    datadir = action_server_process.datadir
+
+    def persisted_state():
+        with load_db(datadir / "server.db") as db:
+            with db.connect():
+                with db.cursor() as cursor:
+                    rows = []
+                    for query in (
+                        "SELECT * FROM action_package ORDER BY id",
+                        "SELECT * FROM action ORDER BY id",
+                        "SELECT * FROM mcp_catalog_name ORDER BY id",
+                    ):
+                        db.execute_query(cursor, query)
+                        columns = tuple(column[0] for column in cursor.description)
+                        rows.append(
+                            tuple(
+                                dict(zip(columns, row, strict=True))
+                                for row in cursor.fetchall()
+                            )
+                        )
+                return tuple(rows)
+
+    def call_mcp(process, method: str, params: dict):
+        headers = {
+            "Accept": "application/json, text/event-stream",
+            "MCP-Protocol-Version": "2026-07-28",
+            "Mcp-Method": method,
+        }
+        if "name" in params:
+            headers["Mcp-Name"] = params["name"]
+        with httpx.Client(
+            base_url=f"http://{process.host}:{process.port}",
+            timeout=10,
+            trust_env=False,
+        ) as mcp_client:
+            response = mcp_client.post(
+                "/mcp",
+                headers=headers,
+                json={
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "method": method,
+                    "params": {
+                        **params,
+                        "_meta": {
+                            "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+                            "io.modelcontextprotocol/clientCapabilities": {},
+                        },
+                    },
+                },
+            )
+        assert response.status_code == 200, response.text
+        payload = response.json()
+        assert "error" not in payload, payload
+        return payload["result"]
+
+    def assert_serves_calculation(
+        process: ActionServerProcess,
+        expected_path: str,
+        tool_name: str,
+        expected_tools: set[str],
+    ) -> None:
+        current_client = ActionServerClient(process)
+        openapi = json.loads(current_client.get_openapi_json())
+        assert list(openapi["paths"].keys()) == [expected_path]
+        response = current_client.post_get_response(
+            expected_path.lstrip("/"),
+            {"v1": 2.0, "v2": 3.0},
+        )
+        assert response.status_code == 200, response.text
+        assert response.json() == 5.0
+
+        tools = call_mcp(process, "tools/list", {})["tools"]
+        assert {tool["name"] for tool in tools} == expected_tools
+        result = call_mcp(
+            process,
+            "tools/call",
+            {"name": tool_name, "arguments": {"v1": 2.0, "v2": 3.0}},
+        )
+        assert result["structuredContent"] == {"result": 5.0}
 
     action_server_process.start(
-        actions_sync=True, cwd=Path(tmpdir / "calculator"), db_file="server.db"
+        actions_sync=True, cwd=calculator_dir, db_file="server.db"
     )
-    # Check that the actions are there
-    openapi1 = json.loads(client.get_openapi_json())
-    action_server_process.stop()
-
-    action_server_process = ActionServerProcess(Path(action_server_process.datadir))
-
-    os.rename(Path(tmpdir) / "calculator", Path(tmpdir) / "calculator_new")
-    action_server_process.start(
-        actions_sync=True, cwd=Path(tmpdir / "calculator_new"), db_file="server.db"
-    )
-    client = ActionServerClient(action_server_process)
+    original_path = "/api/actions/calculator/calculator-sum/run"
     try:
-        openapi2 = json.loads(client.get_openapi_json())
+        assert_serves_calculation(
+            action_server_process,
+            original_path,
+            "calculator_sum",
+            {"calculator_sum"},
+        )
+        original_state = persisted_state()
     finally:
         action_server_process.stop()
 
-    assert list(openapi1["paths"].keys()) == [
-        "/api/actions/calculator/calculator-sum/run"
-    ]
-    assert list(openapi2["paths"].keys()) == [
-        "/api/actions/calculator-new/calculator-sum/run"
-    ]
+    calculator_new_dir = Path(tmpdir) / "calculator_new"
+    os.rename(calculator_dir, calculator_new_dir)
+
+    rejected_process = ActionServerProcess(datadir)
+    with pytest.raises(ActionServerExitedError) as error:
+        rejected_process.start(
+            actions_sync=True, cwd=calculator_new_dir, db_file="server.db"
+        )
+    diagnostic = str(error.value) + rejected_process.get_stderr()
+    rejected_process.stop()
+    assert (
+        "MCP tool key 'calculator_sum' is reserved for ('calculator', 'calculator_sum')"
+        in diagnostic
+    )
+    assert persisted_state() == original_state
+
+    # The rejected rename leaves the original package pool and public action
+    # usable after a sync-free restart from its last-good source directory.
+    os.rename(calculator_new_dir, calculator_dir)
+    retained_process = ActionServerProcess(datadir)
+    retained_process.start(cwd=calculator_dir, db_file="server.db")
+    try:
+        assert_serves_calculation(
+            retained_process,
+            original_path,
+            "calculator_sum",
+            {"calculator_sum"},
+        )
+        assert persisted_state() == original_state
+    finally:
+        retained_process.stop()
+
+    # A package rename is still supported when the new package also adopts a
+    # fresh public action/MCP key instead of capturing the old owner's key.
+    os.rename(calculator_dir, calculator_new_dir)
+    calculator_file = calculator_new_dir / "action_calculator.py"
+    calculator_file.write_text(
+        """from actions import action
+
+@action
+def calculator_sum_renamed(v1: float, v2: float) -> float:
+    return v1 + v2
+""",
+        encoding="utf-8",
+    )
+
+    renamed_path = "/api/actions/calculator-new/calculator-sum-renamed/run"
+    renamed_process = ActionServerProcess(datadir)
+    renamed_process.start(
+        actions_sync=True, cwd=calculator_new_dir, db_file="server.db"
+    )
+    try:
+        assert_serves_calculation(
+            renamed_process,
+            renamed_path,
+            "calculator_sum_renamed",
+            {"calculator_sum_renamed"},
+        )
+        renamed_state = persisted_state()
+        packages, actions, bindings = renamed_state
+        assert any(package["name"] == "calculator" for package in packages)
+        assert any(package["name"] == "calculator_new" for package in packages)
+        assert any(
+            action["name"] == "calculator_sum_renamed" and action["enabled"]
+            for action in actions
+        )
+        assert (
+            "tool",
+            "calculator_sum",
+            "calculator",
+            "calculator_sum",
+        ) in {
+            (
+                binding["namespace"],
+                binding["name"],
+                binding["package_name"],
+                binding["action_name"],
+            )
+            for binding in bindings
+        }
+        assert (
+            "tool",
+            "calculator_sum_renamed",
+            "calculator_new",
+            "calculator_sum_renamed",
+        ) in {
+            (
+                binding["namespace"],
+                binding["name"],
+                binding["package_name"],
+                binding["action_name"],
+            )
+            for binding in bindings
+        }
+    finally:
+        renamed_process.stop()
+
+    restarted_process = ActionServerProcess(datadir)
+    restarted_process.start(
+        actions_sync=True, cwd=calculator_new_dir, db_file="server.db"
+    )
+    try:
+        assert_serves_calculation(
+            restarted_process,
+            renamed_path,
+            "calculator_sum_renamed",
+            {"calculator_sum_renamed"},
+        )
+        assert persisted_state() == renamed_state
+    finally:
+        restarted_process.stop()
 
 
 @pytest.mark.integration_test

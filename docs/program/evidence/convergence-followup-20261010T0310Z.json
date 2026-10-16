@@ -1,0 +1,142 @@
+{
+  "observed_at_utc": "2026-10-10T03:10:33Z",
+  "repository": "joshyorko/actions",
+  "cohort": {
+    "items": 28,
+    "target_integrated": 20,
+    "open_blocked": 8,
+    "merge_ready": 0,
+    "target_integrated_prs": [
+      219,
+      220,
+      251,
+      256,
+      257,
+      259,
+      262,
+      263,
+      264,
+      265,
+      266,
+      267,
+      268,
+      269,
+      270,
+      271,
+      274,
+      275,
+      276,
+      277
+    ],
+    "open_prs": [
+      215,
+      216,
+      217,
+      218,
+      221,
+      272,
+      273,
+      278
+    ],
+    "classification": "Target-branch PR integration only; issue contracts, owning-issue acceptance, release and publication remain separate."
+  },
+  "refs": {
+    "community": {
+      "branch": "community",
+      "head": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+      "tree": "5c51bd27c1fb6c34f3cf54ca2d00ae93e2f5c641"
+    },
+    "integration": {
+      "branch": "integration/community-release-20261008",
+      "head": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+      "tree": "92e79c92f2f64585cbe66f068f5757f205fbe976"
+    },
+    "runtime_candidate": {
+      "branch": "integration/runtime-release-final-20261009",
+      "head": "6a53578fac029a0696834c30438c858f5f0003be",
+      "tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d"
+    }
+  },
+  "open_pr_audit": {
+    "path": "evidence/convergence-live-prs-20261010T0310Z.json",
+    "sha256": "d41dfac713df9176280dc80e5e2d50d117b85da07f417d5b2b70ca25db8bcf32"
+  },
+  "new_integrations": [
+    {
+      "pr": 276,
+      "merged_at_utc": "2026-10-10T03:07:26Z",
+      "source_head": "54dae1c0a8383797fa99ba5c50e2a2cf2d829302",
+      "merge_sha": "be9890c8b7dccd915539492778eb48bb7addc3ec",
+      "tree": "c5549761f508856dbcab5c85e828666e3877adcb",
+      "checks": "16 exact-head checks PASS",
+      "merge": "normal, non-admin, head-guarded; root verified current remote integration and conflict-free/disjoint accepted base delta",
+      "scope": "Bounded TLS checkpoint; no whole-issue acceptance."
+    },
+    {
+      "pr": 277,
+      "merged_at_utc": "2026-10-10T03:07:51Z",
+      "source_head": "bf435498de94acc5e64f89dfe3dcd3916b5046f3",
+      "merge_sha": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+      "tree": "92e79c92f2f64585cbe66f068f5757f205fbe976",
+      "checks": "16 exact-head checks PASS",
+      "merge": "normal, non-admin, head-guarded; root verified current remote integration and conflict-free/disjoint accepted base delta",
+      "scope": "Bounded wheel/interpreter checkpoint; no whole-issue acceptance."
+    }
+  ],
+  "pr273": {
+    "head": "7b7cb0a9cd870d86c07ef2d82364e40ec479c23c",
+    "target": "integration/community-release-20261008",
+    "api_mergeable": "CONFLICTING",
+    "tested_synthetic_merge": "c5c003a2d3d9dc9006be7221c61d8c25d3530201",
+    "tested_tree": "9bc3bbffcf41fcc7442c6113187809b3181b2167",
+    "synthetic_tree_at_integration_6d438": "9bc3bbffcf41fcc7442c6113187809b3181b2167",
+    "tree_still_matches": true,
+    "runtime_run_id": 38017606117,
+    "runtime_result": "Linux/macOS each 1 missing-credential failure; Windows 6 integration failures including same credential and five harness errors; independent archive provenance BLOCKED. Do not claim current PR273 exact-head full acceptance.",
+    "post_0305_update": "Root reports a separate local candidate prefix 439c19ad with 22 focused credential-log/npm-helper tests passing. This is not the published PR273 head, hosted combined-gate result, or archive-fidelity proof."
+  },
+  "rcc_cleanup": {
+    "candidate": "969219e7aa398f61b11466a2dc16ac3143568ff5",
+    "tests": "70 passed, 2 opt-in skipped",
+    "probe": "HTTP shutdown 200; natural process exit -11 before forced stop; FAIL",
+    "limits": "Reported receipt/log hashes in root 03:04 receipt; full JSON transfer pending and not Cloud-remeasured. No cleanup PASS and no upstream defect asserted."
+  },
+  "native_archive_provenance": {
+    "status": "BLOCKED",
+    "reviewer_receipt": "native-review worktree reported SHA-256 07f382814ad8a2b78959091b8ec6bd5a7868b10cf5f989ac1f8cd775490aa5ea",
+    "limits": "Full review JSON transfer pending, not Cloud-remeasured. Reported mismatches include post-manifest bytecode, extra Windows RCC binary, macOS hidden dylibs/symlink handling, and missing inventory."
+  },
+  "issue_acceptance_changed": false,
+  "stage_counts_unchanged": true,
+  "whole_issue_completion_ids": [
+    210
+  ],
+  "accounting": {
+    "retained_contracts": 54,
+    "original_archives": 16,
+    "archive_hashes": "unchanged from prior verified checkpoint; no ZIP rewritten",
+    "stages": {
+      "READY": 0,
+      "ACTIVE": 7,
+      "REVIEW": 8,
+      "BLOCKED": 29,
+      "INTEGRATED": 9,
+      "COMPLETE": 1
+    }
+  },
+  "release_state": {
+    "Core": "1.0.2 published and verified",
+    "Helper": "1.0.3 published and verified",
+    "Runtime/native": "1.0.3 held and unpublished"
+  },
+  "upstream_disposition": "None. No confirmed upstream defect; current blockers are in Actions-owned integration/artifact/lifecycle work.",
+  "additional_root_local_validation": {
+    "candidate_prefix": "439c19ad",
+    "scope": "22 focused credential-log and simulated Windows npm-helper tests passed, as reported by root after PR273 03:09 snapshot.",
+    "limits": "Local focused validation only; does not update PR273 remote head, replace failed recorded full Runtime matrix, or establish archive/native acceptance."
+  },
+  "refs_receipt": {
+    "path": "evidence/convergence-refs-20261010T0310Z.json",
+    "sha256": "47aaa6aea04b6bcdc534039e369c0fad2f51c803a86b3e08438a5d9a93632529"
+  }
+}

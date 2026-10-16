@@ -1,0 +1,287 @@
+{
+  "observed_at_utc": "2026-10-10T02:42:00Z",
+  "repository": "joshyorko/actions",
+  "source_revision": "governance pre-amendment HEAD a8b05ef71bae853d9f6f0cda210ed7fe3fe981c6",
+  "cohort": {
+    "items": 28,
+    "target_integrated": 17,
+    "open_blocked": 11,
+    "merge_ready": 0,
+    "target_integrated_prs": [
+      219,
+      220,
+      251,
+      256,
+      257,
+      259,
+      262,
+      263,
+      264,
+      265,
+      266,
+      267,
+      268,
+      269,
+      270,
+      271,
+      275
+    ],
+    "open_prs": [
+      215,
+      216,
+      217,
+      218,
+      221,
+      272,
+      273,
+      274,
+      276,
+      277,
+      278
+    ]
+  },
+  "refs": {
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "integration": "ce6b3cef5316302ed065619a52eddbc8e5d44e1b",
+    "integration_tree": "d37254343e5db0c13318c33b8d093a175bddd318",
+    "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
+    "release_ready": false,
+    "source": "git ls-remote at 02:42Z; Runtime candidate is root-reported release pointer"
+  },
+  "pr275_merge": {
+    "number": 275,
+    "state": "merged",
+    "merged_at_utc": "2026-10-10T02:37:27Z",
+    "merge_sha": "ce6b3cef5316302ed065619a52eddbc8e5d44e1b",
+    "tree": "d37254343e5db0c13318c33b8d093a175bddd318",
+    "reviewed_source_head": "dc610f3ba14b9a64b7fd4b4bcb6ec1fccb00beab",
+    "reviewed_source_tree": "d37254343e5db0c13318c33b8d093a175bddd318",
+    "tree_relation": "Merged tree equals reviewed head/synthetic tree."
+  },
+  "current_candidate": {
+    "pr": 273,
+    "head": "7b7cb0a9cd870d86c07ef2d82364e40ec479c23c",
+    "tree": "9bc3bbffcf41fcc7442c6113187809b3181b2167",
+    "base": "ce6b3cef5316302ed065619a52eddbc8e5d44e1b",
+    "synthetic_merge_tree_after_base_advance": "9bc3bbffcf41fcc7442c6113187809b3181b2167",
+    "tree_equals_candidate": true,
+    "draft": true,
+    "source": "Root PR candidate report; current refs independently read. Local git merge-tree reproduced tree."
+  },
+  "pr273_workflows_at_02_42Z": [
+    {
+      "run_id": 38017606169,
+      "name": "Measured Python coverage gate",
+      "status": "in_progress"
+    },
+    {
+      "run_id": 38017606205,
+      "name": "Actions Runtime PYPI Release",
+      "status": "queued"
+    },
+    {
+      "run_id": 38017606117,
+      "name": "Action Server Tests",
+      "status": "in_progress"
+    },
+    {
+      "run_id": 38017606098,
+      "name": "AI audit evidence",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "run_id": 38017606134,
+      "name": "RCC developer toolkit",
+      "status": "in_progress"
+    },
+    {
+      "run_id": 38017606102,
+      "name": "Action Server Build (Unauthenticated)",
+      "status": "in_progress"
+    },
+    {
+      "run_id": 38017606147,
+      "name": "Work Items Release",
+      "status": "completed",
+      "conclusion": "success",
+      "publication": "not established; publication step status must be checked separately"
+    }
+  ],
+  "integration_candidate_checks_at_02_42Z": {
+    "head": "ce6b3cef5316302ed065619a52eddbc8e5d44e1b",
+    "workflow_runs": [
+      {
+        "run_id": 38017645185,
+        "name": "Measured Python coverage gate",
+        "status": "in_progress"
+      },
+      {
+        "run_id": 38017645196,
+        "name": "Actions Core Tests",
+        "status": "queued"
+      },
+      {
+        "run_id": 38017645174,
+        "name": "Copilot Setup Steps",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "run_id": 38017645188,
+        "name": "Work Items Release",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "run_id": 38017645213,
+        "name": "Action Server Frontend tests",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "run_id": 38017645256,
+        "name": "Lighthouse CI",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "run_id": 38017645250,
+        "name": "Action Server Build (Unauthenticated)",
+        "status": "in_progress"
+      },
+      {
+        "run_id": 38017645212,
+        "name": "AI audit evidence",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "run_id": 38017645293,
+        "name": "HTTP Helper Tests",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "run_id": 38017645251,
+        "name": "Actions Runtime PYPI Release",
+        "status": "in_progress"
+      },
+      {
+        "run_id": 38017645242,
+        "name": "Frontend Build",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "run_id": 38017645200,
+        "name": "RCC developer toolkit",
+        "status": "in_progress"
+      }
+    ]
+  },
+  "component_admission": {
+    "pr274": "Bounded Work Items harness source review accepted; old exact-head runs green. Original owner is assigned to refresh on post-PR275 base; no whole #208 gate.",
+    "pr272": "Bounded snapshot/rollback source review accepted; original RCC owner is assigned to validate on current base; no whole #134 gate.",
+    "pr278": "Full stacked diff includes source-generation snapshots/rollback and receipt binding, not just CLI portability. Sol accepted the bounded snapshot/cache behavior; independent review also found the natural-cleanup receipt invalid, with a concrete Actions/RCC lifecycle issue under existing owner. The production cleanup correction and current full consumer proof remain separate from whole #134 acceptance.",
+    "pr275": "Merged normally; merge tree equals reviewed source tree. This checkpoint does not imply Runtime/native publication or whole #208 completion."
+  },
+  "registry_readback_at_02_41Z": {
+    "core_1_0_2": "Published registry metadata read agrees with previously admitted wheel/sdist hashes; metadata readback only, no new bytes downloaded.",
+    "helper_1_0_3": "Published registry metadata read agrees with previously admitted wheel/sdist hashes; metadata readback only, no new bytes downloaded.",
+    "runtime_1_0_3": "PyPI returned 404 and GitHub release actions-runtime-1.0.3 was not found; no publication occurred."
+  },
+  "issue_state": {
+    "issue_objects": 54,
+    "issue_array_canonical_json_sha256": "3629102800b720555de322bf3649fcbcb4991d3695f02b909caa9e205bed6f60",
+    "whole_issue_acceptance_changed": false,
+    "stage_counts_unchanged": true,
+    "completed_issue_ids": [
+      210
+    ],
+    "scope_note": "PR counts and bounded source admissions remain separate from whole-issue acceptance."
+  },
+  "archive_integrity": {
+    "count": 16,
+    "previous_zip_hashes_unchanged": true,
+    "previous_hash_source": "v4 amendment prior_zip_sha256 plus v4 self-hash",
+    "zips": {
+      "canvas-execution-graph-amendment-20261009-v2.zip": {
+        "bytes": 6855,
+        "sha256": "1c5c7e4923c2143a1e57f85320f335210bb50a827b38a90e61442eb9ff3e3dcf"
+      },
+      "canvas-execution-graph-amendment-20261009-v3.zip": {
+        "bytes": 7286,
+        "sha256": "7d6552000d69c8876278097e00d87a8cd7f29e33987ce8e16049a9dd948aa281"
+      },
+      "canvas-execution-graph-amendment-20261009-v4.zip": {
+        "bytes": 7262,
+        "sha256": "b0363a6fcb2d42cba9fa50e3821b15e18213b196ab938ba51afa9eaaa3c803c3"
+      },
+      "canvas-execution-graph-amendment-20261009.zip": {
+        "bytes": 6683,
+        "sha256": "7c7ae532483d186c65190b5d3177ed08ed9d9f34d3905338d02a44e488226cd7"
+      },
+      "community-20261008.zip": {
+        "bytes": 456808,
+        "sha256": "3c5516a93dd65804fc3f9d88d1f5d4c0511291f7626159f63746f4a8fd745705"
+      },
+      "community-20261009-acceleration.zip": {
+        "bytes": 112671,
+        "sha256": "641c7b2c70d71580f771e2d85082a00b871fa87c8f63b29655aec9972ab82d48"
+      },
+      "community-20261009-checkpoint.zip": {
+        "bytes": 87365,
+        "sha256": "8bdc8b152121809055e65a0cd616ea2d6055d651a6b8eae3f65c1c89bab2899c"
+      },
+      "community-20261009-cloud-admission.zip": {
+        "bytes": 69121,
+        "sha256": "b283b7d77b6166028acca21faeac057f25c5d8a43d0fbbe1e1e4c1b88782b2c0"
+      },
+      "community-20261009-convergence.zip": {
+        "bytes": 165902,
+        "sha256": "0040cdd1a8e0cce22185179905349f01a0839b575a087f6d85128f37e061b237"
+      },
+      "community-20261009-fanout.zip": {
+        "bytes": 117686,
+        "sha256": "8326e8c78d042db34be7a8fd5a3a848b9849d743bd08bafdcf323b1701332d0e"
+      },
+      "community-20261009-final-checkpoint.zip": {
+        "bytes": 129162,
+        "sha256": "085608370a2f7a14730c49a3efadda57bd4645459059f0f0e0fb78a8d53622f4"
+      },
+      "community-20261009-resume.zip": {
+        "bytes": 123440,
+        "sha256": "ab1a1415b29d9bc0af16befd07ab792920e4dafc3beda37ddb7f1d4a016b7541"
+      },
+      "community-20261009-update.zip": {
+        "bytes": 36121,
+        "sha256": "209cd547060efe61facc1d8ac39909b5945d831cd29f5f26a127fba4d19f1df4"
+      },
+      "community-20261009-update2.zip": {
+        "bytes": 35524,
+        "sha256": "2ab7c866896f87e347a4e8891bb622b393e9816f401e86a813f263f6e7cc8d31"
+      },
+      "community-20261009-update3.zip": {
+        "bytes": 71453,
+        "sha256": "911ef5b930bb1dac07f15f8648f55a1852814c090638a1b56238b473b03bc842"
+      },
+      "http-helper-1.0.3-verified-dist.zip": {
+        "bytes": 30034,
+        "sha256": "13fc05a548ef079764a7f91e432cbdfe3f349038a20d48a846868e3e4b73b2eb"
+      }
+    }
+  },
+  "documentation_delta": {
+    "file": "docs/skills/repository-operations.md",
+    "change": "Added guidance to review the full merge-base diff of stacked PRs and compare the combined candidate synthetic merge tree after integrating a component; prior checks apply to the new candidate only when its tested tree is identical.",
+    "evidence": "PR275 merged tree equals reviewed source tree; after base advance, local git merge-tree recomputed candidate tree 9bc3bbff equal to candidate tree. Existing FETCH_HEAD/refspec guidance was verified and not duplicated."
+  },
+  "upstream_disposition": "none; observed issues belong to Actions Runtime/CI; no verified upstream RCC defect.",
+  "limits": [
+    "At this snapshot PR273 Runtime, native, RCC toolkit and coverage workflows are in progress or queued; no combined gate pass.",
+    "No PyPI Runtime or native 1.0.3 publication; no release readiness.",
+    "The branch-protection API read was 403; required policy is unknown, not absent.",
+    "Historic checks remain bound to their exact tested refs/trees."
+  ]
+}

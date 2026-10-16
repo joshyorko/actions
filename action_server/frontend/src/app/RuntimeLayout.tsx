@@ -29,7 +29,10 @@ export const RuntimeLayout = ({ children }: { children: ReactNode }) => {
     return (
         <div className="flex min-h-screen bg-background">
             <div id="runtime-navigation">
-                <RuntimeNavigation isMobileOpen={mobileNavigationOpen} />
+                <RuntimeNavigation
+                    isMobileOpen={mobileNavigationOpen}
+                    onNavigate={() => setMobileNavigationOpen(false)}
+                />
             </div>
             {mobileNavigationOpen && (
                 <button

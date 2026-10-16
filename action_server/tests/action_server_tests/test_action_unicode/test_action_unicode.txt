@@ -1,7 +1,7 @@
 {
     "openapi": "3.1.0",
     "info": {
-        "title": "Sema4.ai Action Server",
+        "title": "Actions Runtime",
         "version": "<removed-for-compare>"
     },
     "servers": [

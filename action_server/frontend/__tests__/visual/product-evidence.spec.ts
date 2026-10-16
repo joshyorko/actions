@@ -262,6 +262,25 @@ test("rejects drifted Runtime and legacy client requests", async ({
       }),
     ]),
   );
+  const summaryResponse = await request.get("/api/runs/summary?limit=200");
+  expect(summaryResponse.status()).toBe(200);
+  const runSummaries = await summaryResponse.json();
+  expect(JSON.stringify(runSummaries).length).toBeLessThan(20_000);
+  expect(runSummaries).toEqual(
+    expect.arrayContaining([
+      expect.objectContaining({
+        id: expect.any(String),
+        status: expect.any(Number),
+        run_type: expect.any(String),
+      }),
+    ]),
+  );
+  for (const summary of runSummaries) {
+    expect(summary).not.toHaveProperty("inputs");
+    expect(summary).not.toHaveProperty("result");
+    expect(summary).not.toHaveProperty("error_message");
+    expect(summary).not.toHaveProperty("relative_artifacts_dir");
+  }
   const artifacts = await (
     await request.get("/api/runs/run-passed/artifacts")
   ).json();

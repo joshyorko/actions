@@ -1,0 +1,101 @@
+{
+  "observed_at": "2026-10-10T03:21:00Z",
+  "scope": "Reviewed corrections assembled for fresh hosted verification; not integration or release admission.",
+  "code_checkpoint": {
+    "head": "29f01ac79af17b061e66c1587bb8df01f4f8071a",
+    "tree": "4d63cd659b83b4ab78b9c80abe66ccd5762ce81a"
+  },
+  "accepted_integration": {
+    "head": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+    "tree": "92e79c92f2f64585cbe66f068f5757f205fbe976",
+    "latest_admitted_prs": [
+      274,
+      275,
+      276,
+      277
+    ]
+  },
+  "cohort": {
+    "total": 28,
+    "integrated": 20,
+    "blocked": 8,
+    "merge_ready": 0,
+    "open": [
+      215,
+      216,
+      217,
+      218,
+      221,
+      272,
+      273,
+      278
+    ]
+  },
+  "corrections": [
+    {
+      "commit": "b67b99c15d77b213d0ea34eda0444b6a18b1c3d3",
+      "scope": "Windows npm invocation and strict UTF-8 credential-log inspection",
+      "independent_review": "Luna source ACCEPT",
+      "root_validation": {
+        "source": "439c19ad",
+        "tests": "test_log_credentials.py plus Windows npm command regression",
+        "passed": 22,
+        "seconds": 1.82
+      },
+      "native_windows": "NOT RUN on corrected candidate"
+    },
+    {
+      "commit": "369839b9c85f3be8ab8dd33024ae9b38d4ef14f7",
+      "scope": "Comparison-only equivalent Windows local-drive prefixes; preserve I/O namespace and reparse checks",
+      "independent_review": "Luna source ACCEPT",
+      "root_validation": {
+        "source": "b9e6a206eba5c781c6b93c5ab10d3540bf4cb1fa",
+        "tests": "test_artifact_storage.py",
+        "passed": 52,
+        "skipped": 1,
+        "seconds": 2.76
+      },
+      "native_windows": "NOT RUN on corrected candidate"
+    },
+    {
+      "commit": "969219e7aa398f61b11466a2dc16ac3143568ff5",
+      "scope": "RCC natural shutdown receipt captured before forced cleanup",
+      "independent_review": "Luna source ACCEPT for receipt correction only",
+      "root_validation": {
+        "source": "31994384dec6036498c88e22a6161b2bae7d6785",
+        "tests": "current candidate rollback, source snapshots, RCC adapter",
+        "passed": 70,
+        "skipped": 2,
+        "seconds": 3.9
+      },
+      "real_rcc": "FAIL: shutdown HTTP200 followed by natural returncode -11; original failed receipt preserved; secure exact checkpoint push recovered"
+    },
+    {
+      "commit": "29f01ac79af17b061e66c1587bb8df01f4f8071a",
+      "scope": "Pre-execution faithful tar with frozen tree, manifest and inventory; strict symlink/locator/metadata/mode binding; four Go source inputs use LF",
+      "independent_review": "Sol ACCEPT exact patch SHA65093797af41caf8c1e2c2eb213c07df0efad1d7e4444e1760c3662f39570e77 after closing six independently reproduced defects",
+      "root_validation": {
+        "tests": "unittest discover -s action_server/scripts -p test_native_artifact*.py",
+        "passed": 13,
+        "ruff": "PASS",
+        "format": "PASS"
+      },
+      "hosted_artifact_roundtrip": "NOT RUN on corrected candidate"
+    }
+  ],
+  "other_validation": {
+    "graph": "12 regression tests PASS; canonical check validates54 projections COMPLETE1",
+    "historical_evidence": "all16 ZIP Git blobs identical to46a06485",
+    "style": "Root full configured Ruff rules, format with tasks.py generated-file exclusions, and Isort PASS at31994384",
+    "local_full_mypy": "BLOCKED: reused prepared virtualenv lacks declared/locked types-pyinstaller; no dependency changes or ad-hoc install",
+    "prior_7b_hosted_steps": "Root API read confirms lint/typecheck/docs all SUCCESS on Linux114111272613, macOS114111272435, Windows114111272483 despite integration-test failures"
+  },
+  "remaining_gates": [
+    "Fresh exact-source Windows/full Runtime CI",
+    "Independent complete archive remeasurement on all three OSes",
+    "Real RCC natural shutdown failure -11 diagnosis and proof",
+    "Configured legacy ci.robocorp.dev credentialed test remains unresolved; no waiver",
+    "Normal integration into community, release publication, artifact retrieval and owning Homebrew cask validation"
+  ],
+  "upstream_disposition": "Actions-local defects; no confirmed upstream cause or issue publication. Third-party findings remain drafts without authority."
+}

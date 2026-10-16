@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useRuntimeRun } from "@/queries/runtime";
 
 import { Button } from "@/core/components/ui/Button";
 import { ErrorBanner } from "@/core/components/ui/ErrorBanner";
@@ -11,7 +12,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/core/components/ui/Table";
-import { useActionServerContext } from "@/shared/context/actionServerContext";
 import { baseUrl, fetchRunArtifactsList } from "@/shared/api-client";
 import { ArtifactInfo, AsyncLoaded } from "@/shared/types";
 
@@ -31,7 +31,7 @@ const formatBytes = (size: number) => {
 export const ArtifactsPage = () => {
   const navigate = useNavigate();
   const { runId } = useParams<{ runId: string }>();
-  const { loadedRuns } = useActionServerContext();
+  const runQuery = useRuntimeRun(runId ?? "");
   const [artifactState, setArtifactState] = useState<
     AsyncLoaded<ArtifactInfo[]>
   >({
@@ -39,9 +39,7 @@ export const ArtifactsPage = () => {
     data: undefined,
   });
 
-  const run = useMemo(() => {
-    return loadedRuns.data?.find((item) => item.id === runId);
-  }, [loadedRuns.data, runId]);
+  const run = runQuery.data;
 
   useEffect(() => {
     if (!runId) {
@@ -58,7 +56,7 @@ export const ArtifactsPage = () => {
     );
   }
 
-  if (loadedRuns.isPending) {
+  if (runQuery.isPending) {
     return (
       <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
         Loading run metadata…

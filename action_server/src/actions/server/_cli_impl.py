@@ -118,8 +118,9 @@ def _add_start_server_command(command_parser, defaults):
         choices=["auto", "localhost.run", "bore", "cloudflare"],
         default="auto",
         help=(
-            "Tunnel provider for --expose. Options: auto (try all), "
-            "localhost.run (SSH-based), bore (Rust binary), cloudflare (cloudflared). "
+            "Tunnel provider for --expose. Options: auto (try HTTPS providers in order), "
+            "localhost.run (SSH-based HTTPS), bore (plain HTTP, disabled), "
+            "cloudflare (cloudflared HTTPS). "
             "(default: %(default)s)"
         ),
     )
@@ -273,6 +274,40 @@ def _add_start_server_command(command_parser, defaults):
     _add_kill_lock_holder_args(start_parser, defaults)
     add_verbose_args(start_parser, defaults)
     _add_whitelist_args(start_parser, defaults)
+
+
+def _add_expose_command(command_parser):
+    from actions.server._cli_helpers import add_json_output_args
+
+    expose_parser = command_parser.add_parser(
+        "expose", help="Inspect and manage an explicitly selected tunnel"
+    )
+    expose_subparsers = expose_parser.add_subparsers(
+        dest="expose_command", required=True
+    )
+
+    providers_parser = expose_subparsers.add_parser(
+        "providers", help="List installed tunnel providers and transport security"
+    )
+    add_json_output_args(providers_parser)
+
+    start_parser = expose_subparsers.add_parser(
+        "start", help="Start a tunnel and hold its lifecycle until it stops"
+    )
+    start_parser.add_argument(
+        "--provider",
+        required=True,
+        choices=["localhost.run", "bore", "cloudflare"],
+        help="Select an installed provider; Bore is disabled because it uses HTTP.",
+    )
+    start_parser.add_argument("--port", required=True, type=int)
+    add_json_output_args(start_parser)
+
+    for action in ("status", "stop"):
+        action_parser = expose_subparsers.add_parser(
+            action, help=f"{action.capitalize()} the owned tunnel lifecycle"
+        )
+        add_json_output_args(action_parser)
 
 
 def _add_kill_lock_holder_args(parser, defaults):
@@ -474,6 +509,7 @@ def _create_parser():
 
     # Starts the server
     _add_start_server_command(command_subparser, defaults)
+    _add_expose_command(command_subparser)
 
     # Import
     _add_import_command(command_subparser, defaults)
@@ -553,6 +589,7 @@ def _setup_stderr_logging(log_level):
     from logging import StreamHandler
 
     from actions.server._robo_utils.log_formatter import (
+        TransportCredentialFilter,
         UvicornAccessDisableOAuth2LogFilter,
     )
 
@@ -571,6 +608,7 @@ def _setup_stderr_logging(log_level):
         formatter = FormatterStdout("%(message)s", datefmt="[%X]")
         stream_handler.addFilter(UvicornLogFilter())
 
+    stream_handler.addFilter(TransportCredentialFilter())
     stream_handler.addFilter(UvicornAccessDisableOAuth2LogFilter())
     stream_handler.setFormatter(formatter)
     logger = logging.root
@@ -581,6 +619,7 @@ def _setup_logging(datadir: Path, log_level):
     from logging.handlers import RotatingFileHandler
 
     from actions.server._robo_utils.log_formatter import (
+        TransportCredentialFilter,
         UvicornAccessDisableOAuth2LogFilter,
     )
 
@@ -591,6 +630,7 @@ def _setup_logging(datadir: Path, log_level):
     rotating_handler = RotatingFileHandler(
         log_file, maxBytes=1_000_000, backupCount=3, encoding="utf-8"
     )
+    rotating_handler.addFilter(TransportCredentialFilter())
     rotating_handler.addFilter(UvicornAccessDisableOAuth2LogFilter())
     rotating_handler.setLevel(log_level)
     rotating_handler.setFormatter(
@@ -606,6 +646,10 @@ def _import_actions(
     base_args: ArgumentsNamespaceBaseImportOrStart,
     settings: "Settings",
     disable_not_imported: bool,
+    after_import: typing.Callable[
+        [], tuple[typing.Callable[[], None], typing.Callable[[], None]]
+    ]
+    | None = None,
 ) -> int:
     """
     Args:
@@ -623,14 +667,14 @@ def _import_actions(
         base_args.dir = ["."]
 
     try:
-        for action_package_dir in base_args.dir:
-            _actions_import.import_action_package(
-                datadir=settings.datadir,
-                action_package_dir=os.path.abspath(action_package_dir),
-                skip_lint=base_args.skip_lint,
-                disable_not_imported=disable_not_imported,
-                whitelist=base_args.whitelist,
-            )
+        _actions_import.import_action_packages(
+            datadir=settings.datadir,
+            action_package_dirs=[os.path.abspath(path) for path in base_args.dir],
+            skip_lint=base_args.skip_lint,
+            disable_not_imported=disable_not_imported,
+            whitelist=base_args.whitelist,
+            after_import=after_import,
+        )
     except ActionServerValidationError as e:
         log.critical(
             bold_red(
@@ -651,14 +695,29 @@ def _redact_cli_arguments(args: Sequence[str]) -> list[str]:
     from actions.server._database import redact_database_url
 
     redacted: list[str] = []
-    redact_next = False
+    redact_next: str | None = None
     for argument in args:
         if redact_next:
-            redacted.append(str(redact_database_url(argument)))
-            redact_next = False
+            redacted.append(
+                "<redacted>"
+                if redact_next == "api-key"
+                else str(redact_database_url(argument))
+            )
+            redact_next = None
         elif argument == "--database-url":
             redacted.append(argument)
-            redact_next = True
+            redact_next = "database-url"
+        elif (
+            argument.startswith("--")
+            and len(argument.partition("=")[0]) > 2
+            and "--api-key".startswith(argument.partition("=")[0])
+        ):
+            option, separator, _ = argument.partition("=")
+            if separator:
+                redacted.append(f"{option}=<redacted>")
+            else:
+                redacted.append(option)
+                redact_next = "api-key"
         elif argument.startswith("--database-url="):
             option, value = argument.split("=", 1)
             redacted.append(f"{option}={redact_database_url(value)}")
@@ -704,6 +763,32 @@ def _main_retcode(
     if command == "version":
         print(__version__)
         sys.stdout.flush()
+        return 0
+
+    if command == "expose":
+        from . import _community_expose_lifecycle as lifecycle
+
+        expose_args = typing.cast(typing.Any, base_args)
+        try:
+            if expose_args.expose_command == "providers":
+                receipt = lifecycle.providers()
+            elif expose_args.expose_command == "start":
+                receipt = lifecycle.run_foreground(
+                    expose_args.provider,
+                    expose_args.port,
+                    on_started=lambda started: _print_expose_receipt(
+                        started, as_json=expose_args.json
+                    ),
+                )
+            elif expose_args.expose_command == "status":
+                receipt = lifecycle.status()
+            else:
+                receipt = lifecycle.stop()
+        except (OSError, RuntimeError, ValueError) as error:
+            log.error("Tunnel lifecycle failed (%s).", type(error).__name__)
+            return 1
+        if expose_args.expose_command != "start":
+            _print_expose_receipt(receipt, as_json=expose_args.json)
         return 0
 
     if not is_subcommand:
@@ -811,6 +896,16 @@ def _main_retcode(
         log.critical(bold_red(str(e)))
         return 1
     return 0
+
+
+def _print_expose_receipt(receipt: dict[str, typing.Any], *, as_json: bool) -> None:
+    if as_json:
+        import json
+
+        print(json.dumps(receipt, sort_keys=True), flush=True)
+    else:
+        for key, value in receipt.items():
+            print(f"{key}: {value}", flush=True)
 
 
 @dataclass

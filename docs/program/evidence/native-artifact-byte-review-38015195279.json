@@ -1,0 +1,101 @@
+{
+  "review": "independent native artifact-byte binding",
+  "workflow_run_id": 38015195279,
+  "workflow_run_attempt": 1,
+  "workflow_head_sha": "7f233e2a9a18866f3bb04aca1f3f9155b96e889b",
+  "tested_merge_sha": "3e785feb3a9909c09d86b24c326d7d495c7d7236",
+  "tested_merge_parents": [
+    "46a06485f776265e64e84629c468f26b4389d2bd",
+    "7f233e2a9a18866f3bb04aca1f3f9155b96e889b"
+  ],
+  "platforms": {
+    "Linux-x86_64": {
+      "provenance_artifact": {
+        "id": 11656520313,
+        "zip_sha256": "fa6d1fa6a7e00bfe40baf6d98021b37f277d48d383c76ec157e7a7159075cf63"
+      },
+      "binary_artifact": {
+        "id": 11656875112,
+        "zip_sha256": "0658f68f8c2876f0a6e7be6745fa5e0e64e7adf0f58ec57aa302ec34e20b01a6"
+      },
+      "manifest_sha256": "05489b6912aeaf941931baf6d77f8ff674f8b821df381ceb41296e283ddcf61b",
+      "frozen_executable_sha256": "f43226e82994ec74c8b6b37275af2cfc9c37c531e809a00af3aca84313db0be1",
+      "go_wrapper_sha256": "e2418a5ca7a34a5f1dd5a0ca5b9131840c93b08a959082464be71f230f37f2a4",
+      "native_acceptance_artifact": {
+        "id": 11654844986,
+        "zip_sha256": "9c4949f150fe8b93ee50b2f6916794c532de72bda2eee429c1bba7d84a05e62f"
+      },
+      "consumer_receipt_artifact": {
+        "id": 11655826105,
+        "zip_sha256": "c3cffb2885e4b0f684ec98be05d62d343540d7c70ac015a43bfe1d42c3f35e31"
+      },
+      "candidate_core_wheel_sha256_in_receipt": "bb1c4277b6edc68a2f8bf160e56197c8abf728fd8b8e8ecf884ac651aa4603b9"
+    },
+    "Darwin-arm64": {
+      "provenance_artifact": {
+        "id": 11656410818,
+        "zip_sha256": "5e2288e8bfa691eb5d74d9b8e4332906ba8e38590d0c607445362edc6ed22bfe"
+      },
+      "binary_artifact": {
+        "id": 11655971062,
+        "zip_sha256": "afc1910631d404691d69ed7f383f429a5e8f00568295f2aa05b984e7dfbd24b8"
+      },
+      "manifest_sha256": "af0794d683a969b2a7a0d03cb05498fa105454f655b0df9ced817e1a7295180b",
+      "frozen_executable_sha256": "8961b54e5f357fd96b41f9cbbdb2b7402aa4857ab6db5345a7d954849317d4ee",
+      "go_wrapper_sha256": "559f89d0925b7a7ea3fdd1f804d508ee0b3be491a1b94afb27e837a18815fbe1",
+      "native_acceptance_artifact": {
+        "id": 11655801239,
+        "zip_sha256": "43131bebc302966a260865e570247ddead93ff13896908c5db1e10fe849d29c3"
+      },
+      "consumer_receipt_artifact": {
+        "id": 11656270782,
+        "zip_sha256": "2369c488f5d7ee36174060f01ba7bcb73937a4e80f52bcf588adc9dd9e27a7bc"
+      },
+      "candidate_core_wheel_sha256_in_receipt": "bb1c4277b6edc68a2f8bf160e56197c8abf728fd8b8e8ecf884ac651aa4603b9"
+    },
+    "Windows-AMD64": {
+      "provenance_artifact": {
+        "id": 11656790369,
+        "zip_sha256": "ea41987852c44ca15b3e80245ddd52883b725f84d1338dc4b2ceff10e3b9dffb"
+      },
+      "binary_artifact": {
+        "id": 11656960252,
+        "zip_sha256": "7795354269784b987ce7b144dc3570b8b272c25dbc08c90e2efbd25b52c51f48"
+      },
+      "manifest_sha256": "de68a1576e30ba9199476b0f36ace7b1c73c04c92bb7c6e86990407d2992d262",
+      "frozen_executable_sha256": "ef687a26e664d9d74e496dac6cf22e276e9ade29d53b1eb42f6c95ad5b570412",
+      "go_wrapper_sha256": "4fd84cc3f91fcb85f984d4555069f3b166a22307e46dc9d780c084523b2fc37d",
+      "native_acceptance_artifact": {
+        "id": 11656785351,
+        "zip_sha256": "74016ce90633a4094373ddc5b67c4ee65687653380f9ab8e741bdd3a1ae217ec"
+      },
+      "consumer_receipt_artifact": {
+        "id": 11656915196,
+        "zip_sha256": "83aeca62a4a951619778c0c877a560e20a51a07b3ba0093f1e1bd0f49dc4b80f"
+      },
+      "candidate_core_wheel_sha256_in_receipt": "b02c692c85ffb85f610f6c6a161044fa08f89058f63ca5330f64baf81a9cfba5"
+    }
+  },
+  "observed": {
+    "all_artifact_zip_hashes_match_github_metadata": true,
+    "all_manifests_bind_run_source_platform_and_architecture": true,
+    "all_six_executable_byte_hashes_match_manifests_and_consumer_receipts": true,
+    "all_ui_tree_inventories_match_per_platform_manifest_sha": true,
+    "all_native_acceptance_receipts_pass_frozen_and_go_wrapper": true,
+    "all_ui_receipts_pass_bounded_normal_and_storage_error_browser_stages": true,
+    "all_consumer_receipts_pass_two_cases": true,
+    "large_artifacts_persisted": false
+  },
+  "limits": [
+    "UI receipts are PASS_BOUNDED and explicitly omit authorization-denial UI, induced missing-runtime support, and generic HTTP 500 states.",
+    "Consumer receipts explicitly limit stale-reservation recovery to seeded persisted state; they do not simulate a process crash, worker transitions, attachments, full-route accessibility, or non-Chromium browsers.",
+    "Candidate Core wheel hashes are recorded per platform, but the wheel bytes are not included in these workflow artifacts; this review did not independently hash those wheel files or claim equality with published PyPI bytes.",
+    "Native manifests say they bind Git HEAD and named files, not a clean-source attestation.",
+    "No ChatGPT product behavior, public tunnel behavior, complete Work Items lifecycle, or whole-issue acceptance is inferred."
+  ],
+  "tested_tree_oid": "4f6880df0413bfd578af432ee6c7770560b1904c",
+  "candidate_tree_oid": "4f6880df0413bfd578af432ee6c7770560b1904c",
+  "recorded_at_utc": "2026-10-10T02:19:35.344138+00:00",
+  "original_review_receipt_sha256": "d90426d99268b1c2563595866a8e836ae2cf91f8b8379aa0f80231ab2d5c1cf2",
+  "receipt_normalization": "Tree IDs are Git object IDs, not SHA-256 file digests; two original field names were corrected without changing their values."
+}

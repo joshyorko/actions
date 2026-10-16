@@ -9,8 +9,34 @@ from typing import Iterator
 
 import pytest
 
-from actions.server._actions_process_pool import ActionsProcessPool, ProcessHandle
+from actions.server._actions_process_pool import (
+    ActionsProcessPool,
+    ProcessHandle,
+    _worker_python_executable,
+)
 from actions.server._robo_utils.run_in_thread import run_in_thread
+
+
+def test_rcc_worker_ignores_stale_persisted_python_executable():
+    assert (
+        _worker_python_executable(
+            object(),
+            {"PYTHON_EXE": "/stale/previous-artifact/python"},
+            frozen=True,
+            source_python="/source/runtime/python",
+        )
+        == "python"
+    )
+
+    assert (
+        _worker_python_executable(
+            None,
+            {"PYTHON_EXE": "/legacy/environment/python"},
+            frozen=True,
+            source_python="/source/runtime/python",
+        )
+        == "/legacy/environment/python"
+    )
 
 
 @pytest.fixture

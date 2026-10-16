@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-10-10T03:57:03.780557+00:00",
+  "candidate_parent": "32f7b1e78d24da7fc867b7daadb48fe68080975d",
+  "candidate_parent_tree": "9d081b765514fb366faeb55ce1226a12d6bd6a1c",
+  "watcher_source_commit": "f0b31ac4578e7e87ddf5a1f94d01ef6b252e7a2e",
+  "watcher_source_tree": "7b2abbe917956f24e96370cb18a80a2989d88e43",
+  "watcher_review": "Independent Sol ACCEPT for lifecycle only; 10 focused tests plus direct timeout/body-exception checks PASS. Not proof of RCC crash causality.",
+  "root_watcher_tests": {
+    "source": "f0b31ac4578e7e87ddf5a1f94d01ef6b252e7a2e",
+    "command": "prepared Python pytest -p no:cacheprovider -q action_server/tests/action_server_tests/test_watcher_shutdown.py action_server/tests/action_server_tests/test_community_expose.py with candidate Runtime/Core/Helper/devutils source paths",
+    "passed": 37,
+    "seconds": 1.96,
+    "real_rcc": "NOT RUN"
+  },
+  "governance_merge": "a303efb2fe5e0b07fe209bc5e7b989b6312926ae",
+  "production_diff_from_watch_source": "Empty for action_server/actions/actions-http-helper/work-items; merge adds governance only.",
+  "graph": {
+    "check": "PASS: 54 issue projections; COMPLETE=1",
+    "tests_passed": 12,
+    "historical_zip_count": 16,
+    "historical_zip_git_blobs_unchanged": true,
+    "historical_baseline": "46a06485f776265e64e84629c468f26b4389d2bd"
+  },
+  "prior_candidate_gate_receipt": "pr273-exact-gates-20261010T0348Z.json",
+  "prior_gate_receipt_sha256": "ea4d685fd7eb58cc8fc29729c2c3eaa194b9e96e158e102617be6e557d7a9ce0",
+  "admission": "BLOCKED; this candidate needs fresh hosted checks and exact artifact proof. RCC969 natural exit -11 and legacy credential gate remain open.",
+  "rcc_diagnostic": "One diagnostic-only trace on unchanged969 active; no crash suppression or repeated blind retry.",
+  "macos_rcc_provenance": "Existing reviewer conducting one bounded owning-release-versus-bundle Mach-O comparison; filename/hash mismatch not waived.",
+  "integration": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+  "pr_counts": {
+    "integrated": 20,
+    "blocked": 8,
+    "merge_ready": 0
+  },
+  "documentation": {
+    "changed": "docs/skills/repository-operations.md",
+    "learning": "Watcher stop request differs from actual thread exit; finite off-loop join preserves live reload dependencies and explicit failure semantics."
+  },
+  "upstream_disposition": "Actions-local lifecycle correction; cause of native crash remains unconfirmed. No upstream report."
+}

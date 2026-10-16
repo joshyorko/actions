@@ -1,96 +1,58 @@
 ## Configuring OAuth2
 
-In this case, a developer must create an application in the proper service
-(say, `google` and `slack`), and fill in the details in the `OAuth2 Settings YAML`.
+Community Runtime supplies no hosted OAuth application registrations. Every
+provider in the public catalog is intentionally absent, so `mode: actions`
+fails closed. Register your own application and use `mode: custom`; a public
+endpoint default is not a client registration.
 
-- On Windows it's default location is `%LOCALAPPDATA%/actions/action-server/oauth2_config.yaml`.
-- On Linux/Mac it's default location is `~/.actions/action-server/oauth2_config.yaml`.
-- It's also possible to specify a different `oauth2_config.yaml` location in the `start` arguments.
+Create the private settings template with:
 
-Below is an example showing how to configure it.
+```sh
+action-server oauth2 user-config-path
+```
 
-Keep in mind that the `devServerInfo` information is only used from VSCode to
-launch the action server to collect OAuth2 data.
+Keep that file outside source control. Runtime creates a new template with
+POSIX mode `0600` and preserves an existing file; operators must also protect
+its directory and Windows ACLs. Select a different private file with
+`action-server start --oauth2-settings /path/to/private-oauth2.yaml`.
+
+Register the exact redirect URI `<Runtime base URL>/actions/oauth2/` with your
+provider. Its scheme, hostname and port must match the Runtime URL. For example,
+a local Runtime at `http://localhost:8080` needs
+`http://localhost:8080/actions/oauth2/`. Use HTTPS when required by the provider.
+
+This Microsoft example requires your own registered client ID and tenant.
+Replace both placeholders before use; they are not usable registrations.
+Microsoft endpoint paths come from Runtime's public provider defaults.
 
 ```yaml
 formatVersion: "1.0.0"
-
-# OAuth2 configuration for Development
-# This configuration is shared by Sema4 Ai tools like Studio, VS Code extension and Action Server
-
-# NOTE: Only edit this file manually if you know you way around OAuth2
 oauth2Config:
-  # For the localhost development to work the redirect urls must be set when registering the OAuth applications
-  # and also known by the applications.
-  # For Sema4 Ai tools the valid redirect url list is as follows:
-  # - http://localhost:61080/actions/oauth2/
-  # - http://localhost:61081/actions/oauth2/
-  # - https://localhost:61080/actions/oauth2/
-  # - https://localhost:61081/actions/oauth2/
-  #
-  # We need to have two ports to mitigate potential port collisiont and we need the ´http://´ and `https://`
-  # Variants because some OAuth providers demand https even in localhost.
-  #
-  # !!! If you are creating your own OAuth app you must register these redirect urls !!!
-
-  # Some OAuth providers e.g. Slack require the redirects to only happen to
-  # HTTPS addresses.
-  # If your company has a shared certicate for this you can add it below.
-  #
-  # If one is not provided and a provider with `requiresHttps: true` is found,
-  # Sema4 Ai tooling creates a set of self-signed certificates and uses them
-  #
-  # Disclaimer: When using a self-signed certificate, the browser may complain
-  # and an exception needs to be accepted to proceed to the site unless
-  # the self-signed certificate is imported in the system.
-
-  sslKeyfile: ""
-  sslCertfile: ""
-
-  # List supported OAuth providers
   providers:
-    # The provider names here are lowercase and reserved word.
-    # There are hardcoded features to the names listed here.
     microsoft:
-      # This mode uses a validated OAuth app provided and configured by Sema4 Ai
-      mode: actions
-
-    slack:
       mode: custom
-      name: Slack
-      clientId: "xxx"
-      clientSecret: "yyy"
-
-    github:
-      mode: custom
-      name: GitHub
-      clientId: ""
-      clientSecret: ""
-
-    hubspot:
-      mode: custom
-      name: HubSpot
-      clientId: ""
-      clientSecret: ""
-
-    google:
-      mode: custom
-      name: Google
-      clientId: ""
-      clientSecret: ""
-
-    zendesk:
-      mode: custom
-      name: Zendesk
-      clientId: ""
-      clientSecret: ""
-      server: ""
+      clientId: "REPLACE_WITH_REGISTERED_CLIENT_ID"
+      server: "https://login.microsoftonline.com/REPLACE_WITH_TENANT_ID"
+      # Add clientSecret only when your registered application requires one.
 ```
 
-Now, with the OAuth2 settings configured, it should be possible to make a
-`login` into the needed provider when running the action in the Action Server UI.
+For other providers, use their public endpoint defaults or configure explicit
+`authorizationEndpoint` and `tokenEndpoint` values. A nonblank registered
+`clientId` is required. Without a client secret, Runtime uses S256 PKCE, which
+requires a provider and application registration that support public clients.
+Do not put client secrets or tokens in public catalogs or build inputs.
 
-## VSCode development
+Custom-application token exchange and fail-closed unsupported modes are tested
+with an owned local issuer. This does not certify a public provider registration.
+In configured-key deployments, a Runtime browser-session cookie does not
+authorize the protected OAuth status, logout and reference-management routes.
+Do not assume that signing into the Runtime UI completes provider OAuth.
+
+## Legacy VSCode integration
+
+The following describes an older extension workflow. It is not qualified by the
+Runtime 1.0.3 acceptance receipts and does not supply hosted registrations.
+
 
 When developing inside of VSCode it's possible to run/debug actions directly
 from the `TASK/ACTION PACKAGES` view.

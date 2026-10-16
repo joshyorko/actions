@@ -1,15 +1,15 @@
-import { useEffect, useMemo, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { Button } from '@/core/components/ui/Button';
 import { Loading } from '@/core/components/ui/Loading';
 import { ErrorBanner } from '@/core/components/ui/ErrorBanner';
-import { useActionServerContext } from '@/shared/context/actionServerContext';
 import { baseUrl, collectRunArtifacts } from '@/shared/api-client';
 import { AsyncLoaded, Run, RunStatus } from '@/shared/types';
 import { Badge } from '@/core/components/ui/Badge';
 import { cn } from '@/shared/utils/cn';
 import { copyToClipboard } from '@/shared/utils/helpers';
+import { useRuntimeRun } from '@/queries/runtime';
 
 const OUTPUT_ARTIFACT_NAME = '__action_server_output.txt';
 
@@ -153,7 +153,7 @@ const renderStatusBadge = (status: RunStatus) => {
 export const LogsPage = () => {
   const navigate = useNavigate();
   const { runId } = useParams<{ runId: string }>();
-  const { loadedRuns } = useActionServerContext();
+  const runQuery = useRuntimeRun(runId ?? '');
   const [artifactsState, setArtifactsState] = useState<AsyncLoaded<Record<string, string>>>({
     isPending: true,
     data: {},
@@ -161,9 +161,7 @@ export const LogsPage = () => {
   const [activeTab, setActiveTab] = useState<'console' | 'fullLog'>('console');
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
-  const run = useMemo<Run | undefined>(() => {
-    return loadedRuns.data?.find((item) => item.id === runId);
-  }, [loadedRuns.data, runId]);
+  const run: Run | undefined = runQuery.data;
 
   useEffect(() => {
     if (!runId) {
@@ -182,7 +180,7 @@ export const LogsPage = () => {
     );
   }
 
-  if (loadedRuns.isPending) {
+  if (runQuery.isPending) {
     return (
       <div className="flex h-full items-center justify-center">
         <Loading text="Loading run details..." />
@@ -194,7 +192,9 @@ export const LogsPage = () => {
     return (
       <div className="flex h-full items-center justify-center">
         <div className="max-w-md rounded-lg p-8 text-center">
-          <ErrorBanner message={`Run ${runId} was not found in the local cache.`} />
+          <ErrorBanner
+            message={runQuery.error?.message ?? `Run ${runId} was not found.`}
+          />
           <div className="mt-6">
             <Button variant="secondary" size="lg" onClick={() => navigate('/runs')}>
               Back to run history
@@ -246,6 +246,30 @@ export const LogsPage = () => {
           </div>
         </div>
       </div>
+
+      <details className="rounded-xl border border-border bg-card p-5 shadow-sm">
+        <summary className="cursor-pointer font-medium text-card-foreground">
+          Show run inputs and result
+        </summary>
+        <div className="mt-4 grid gap-5 lg:grid-cols-2">
+          <section className="min-w-0">
+            <h3 className="mb-2 text-sm font-semibold text-muted-foreground">
+              Inputs
+            </h3>
+            <pre className="max-h-96 overflow-auto rounded-md bg-muted/40 p-3 text-xs text-foreground">
+              {run.inputs || 'No inputs recorded.'}
+            </pre>
+          </section>
+          <section className="min-w-0">
+            <h3 className="mb-2 text-sm font-semibold text-muted-foreground">
+              Result
+            </h3>
+            <pre className="max-h-96 overflow-auto rounded-md bg-muted/40 p-3 text-xs text-foreground">
+              {run.result ?? run.error_message ?? 'No result recorded.'}
+            </pre>
+          </section>
+        </div>
+      </details>
 
       {/* Tabs */}
       <div className="flex items-center gap-1 border-b border-border">

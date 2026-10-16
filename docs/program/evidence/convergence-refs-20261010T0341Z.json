@@ -1,0 +1,29 @@
+{
+  "observed_at_utc": "2026-10-10T03:41:00Z",
+  "source": "git ls-remote origin and exact local commit/tree readback",
+  "refs": {
+    "community": {
+      "branch": "community",
+      "head": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+      "tree": "5c51bd27c1fb6c34f3cf54ca2d00ae93e2f5c641"
+    },
+    "integration": {
+      "branch": "integration/community-release-20261008",
+      "head": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+      "tree": "92e79c92f2f64585cbe66f068f5757f205fbe976"
+    },
+    "runtime_candidate": {
+      "branch": "integration/runtime-release-final-20261009",
+      "head": "6a53578fac029a0696834c30438c858f5f0003be",
+      "tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d"
+    }
+  },
+  "pr273": {
+    "head": "6ece09c439d12e02bcbde9dcd2164956b97829e2",
+    "tree": "a560aceae1fe26726989c5c17803bde477a26060",
+    "base": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+    "synthetic_merge_tree": "a560aceae1fe26726989c5c17803bde477a26060",
+    "tree_matches": true,
+    "api_mergeable": true
+  }
+}

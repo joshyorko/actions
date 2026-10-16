@@ -1,0 +1,17 @@
+{
+  "version": "actions-canonical-json/v1",
+  "vectors": [
+    {
+      "input": "{\"z\":1,\"a\":\"e\\u0301\"}",
+      "canonical": "{\"a\":\"é\",\"z\":1}"
+    },
+    {
+      "input": "{\"items\":[3,2,1],\"ok\":true}",
+      "canonical": "{\"items\":[3,2,1],\"ok\":true}"
+    },
+    {
+      "input": "[333333333.33333329,4.50,2e-3,1e-27]",
+      "canonical": "[333333333.3333333,4.5,0.002,1e-27]"
+    }
+  ]
+}

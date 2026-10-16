@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Local MCP Apps host harness</title>
+    </head>
+    <body>
+        <main>
+            <h1>Local MCP Apps host harness</h1>
+            <button id="replace-input" type="button">Replace with beta</button>
+            <button id="replace-context" type="button">
+                Replace host context
+            </button>
+            <button id="remount" type="button">Remount view</button>
+            <output id="host-protocol">Waiting for initialize</output>
+            <iframe id="canvas-view" title="Canvas query fixture"></iframe>
+        </main>
+        <script type="module" src="/src/host-harness.ts"></script>
+    </body>
+</html>

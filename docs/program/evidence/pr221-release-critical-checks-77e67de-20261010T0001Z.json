@@ -1,0 +1,27 @@
+{
+  "recorded_at": "2026-10-10T00:01:40Z",
+  "pr": 221,
+  "head": "77e67de36606ac4cb958874249a61ceff79dcd01",
+  "base": "community",
+  "core_matrix_receipt": "/workspace/work/community-resume/evidence/pr221-core-python310-green-77e67de-38006225927.json",
+  "check_status": "All listed checks completed with success, except explicitly skipped publish jobs/steps.",
+  "key_checks": {
+    "actions_core_tests": {"run": 38006225927, "path": ".github/workflows/actions_core_tests.yml", "result": "Ubuntu/macOS/Windows Python3.10 tests, lint, typecheck and docs checks all pass"},
+    "coverage": {"run": 38006225959, "result": "success"},
+    "rcc_toolkit": {"run": 38006225947, "result": "6/6 success"},
+    "action_server_unauthenticated": {"run": 38006225962, "result": "Ubuntu/macOS/Windows success"},
+    "runtime_release": {"run": 38006225967, "result": "sdist and Ubuntu/Windows/macOS wheels success", "publish_job": {"job_id": 114077839092, "result": "success", "tag_provenance_credential_and_actual_publish_steps": "skipped; no publication"}},
+    "http_helper": {"run": 38006225939, "result": "three OS jobs success"},
+    "frontend": {"run": 38006225920, "result": "three OS jobs success"},
+    "action_server_frontend": {"run": 38006225916, "result": "success"},
+    "work_items_verify": {"run": 38006225923, "result": "success", "publish": "skipped"},
+    "lighthouse": {"run": 38006225944, "result": "success"},
+    "audit": {"run": 38006225917, "result": "success"}
+  },
+  "checkout": {
+    "synthetic_merge": "0a5e33ca27c7728bc1620954b14908fd76dfdc56",
+    "parents": ["36b8192dbb8143e016af3351f7d25b22a35c9944", "77e67de36606ac4cb958874249a61ceff79dcd01"],
+    "tree": "a2c6e78d8b25d56d8028bc57e94d00bcbfb9e1d9"
+  },
+  "publication": "None. PyPI provenance/credential/publish gates were skipped on pull_request; Work Items publish was skipped."
+}

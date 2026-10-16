@@ -1,7 +1,51 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 // Work Item Types
-export type WorkItemState = 'PENDING' | 'IN_PROGRESS' | 'DONE' | 'FAILED';
+export type WorkItemState =
+  | 'PENDING'
+  | 'IN_PROGRESS'
+  | 'DONE'
+  | 'COMPLETED'
+  | 'FAILED';
+
+export class WorkItemsApiError extends Error {
+  constructor(
+    message: string,
+    readonly status: number,
+    readonly code?: string,
+  ) {
+    super(message);
+    this.name = 'WorkItemsApiError';
+  }
+}
+
+export async function parseWorkItemsApiError(response: {
+  json: () => Promise<unknown>;
+  status: number;
+  statusText: string;
+}): Promise<WorkItemsApiError> {
+  const bodyValue = await response.json().catch(() => ({}));
+  const body =
+    typeof bodyValue === 'object' && bodyValue !== null
+      ? (bodyValue as Record<string, unknown>)
+      : {};
+  const detail = body.detail;
+  let detailMessage: string | undefined;
+  let code: string | undefined;
+  if (typeof detail === 'string') {
+    detailMessage = detail;
+  } else if (typeof detail === 'object' && detail !== null) {
+    const detailObject = detail as Record<string, unknown>;
+    if (typeof detailObject.message === 'string') detailMessage = detailObject.message;
+    if (typeof detailObject.code === 'string') code = detailObject.code;
+  }
+  const message =
+    detailMessage ||
+    (typeof body.message === 'string' && body.message) ||
+    response.statusText ||
+    `HTTP ${response.status}`;
+  return new WorkItemsApiError(message, response.status, code);
+}
 
 export interface WorkItemResponse {
   id: string;
@@ -55,19 +99,22 @@ export const useWorkItems = (
 
       const response = await fetch(`/api/work-items?${params.toString()}`);
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        const message = errorData.message || errorData.detail || response.statusText;
-        throw new Error(message);
+        throw await parseWorkItemsApiError(response);
       }
       return response.json();
     },
     refetchInterval: (query) => {
-      // Don't auto-refresh if there's an error (e.g., package not installed)
+      // Don't auto-refresh after an error; the user can retry from the error state.
       return query.state.error ? false : 5000;
     },
     retry: (failureCount, error) => {
-      // Don't retry if package not installed
-      if (error.message.includes('not installed')) return false;
+      // Runtime support, storage, or access errors need a user action.
+      if (
+        error instanceof WorkItemsApiError &&
+        (error.status === 403 || error.status === 503)
+      ) {
+        return false;
+      }
       return failureCount < 3;
     },
   });
@@ -85,9 +132,7 @@ export const useWorkItemStats = (queueName?: string) => {
 
       const response = await fetch(`/api/work-items/stats?${params.toString()}`);
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        const message = errorData.message || errorData.detail || response.statusText;
-        throw new Error(message);
+        throw await parseWorkItemsApiError(response);
       }
       return response.json();
     },
@@ -95,7 +140,12 @@ export const useWorkItemStats = (queueName?: string) => {
       return query.state.error ? false : 5000;
     },
     retry: (failureCount, error) => {
-      if (error.message.includes('not installed')) return false;
+      if (
+        error instanceof WorkItemsApiError &&
+        (error.status === 403 || error.status === 503)
+      ) {
+        return false;
+      }
       return failureCount < 3;
     },
   });
@@ -110,9 +160,7 @@ export const useWorkItem = (itemId: string | null) => {
 
       const response = await fetch(`/api/work-items/${itemId}`);
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        const message = errorData.message || errorData.detail || response.statusText;
-        throw new Error(message);
+        throw await parseWorkItemsApiError(response);
       }
       return response.json();
     },
@@ -133,8 +181,7 @@ export const useCreateWorkItem = () => {
       });
 
       if (!response.ok) {
-        const error = await response.json().catch(() => ({}));
-        throw new Error(error.message || 'Failed to create work item');
+        throw await parseWorkItemsApiError(response);
       }
 
       return response.json();
@@ -157,8 +204,7 @@ export const useDeleteWorkItem = () => {
       });
 
       if (!response.ok) {
-        const error = await response.json().catch(() => ({}));
-        throw new Error(error.message || 'Failed to delete work item');
+        throw await parseWorkItemsApiError(response);
       }
     },
     onSuccess: () => {
@@ -175,9 +221,7 @@ export const useWorkItemQueues = () => {
     queryFn: async () => {
       const response = await fetch('/api/work-items?limit=1000');
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        const message = errorData.message || errorData.detail || response.statusText;
-        throw new Error(message);
+        throw await parseWorkItemsApiError(response);
       }
       const data: WorkItemListResponse = await response.json();
       const queueNames = new Set<string>();
@@ -186,7 +230,12 @@ export const useWorkItemQueues = () => {
     },
     refetchInterval: 10000,
     retry: (failureCount, error) => {
-      if (error.message.includes('not installed')) return false;
+      if (
+        error instanceof WorkItemsApiError &&
+        (error.status === 403 || error.status === 503)
+      ) {
+        return false;
+      }
       return failureCount < 3;
     },
   });

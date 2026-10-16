@@ -31,7 +31,8 @@ describe('Actions frontend topology', () => {
     const canvasEntry = read('apps/canvas-view/src/main.tsx');
     expect(runtimeEntry).toContain("../../../src/App");
     expect(canvasEntry).not.toContain("from '../../../src/App'");
-    expect(canvasEntry).toContain('Canvas View');
+    expect(canvasEntry).toContain('import { McpCanvasView } from "./McpCanvasView";');
+    expect(canvasEntry).toContain("render(<McpCanvasView />)");
     expect(read('apps/runtime/index.html')).toContain('/src/main.tsx');
     expect(read('apps/canvas-view/index.html')).toContain('/src/main.tsx');
   });

@@ -29,6 +29,36 @@ Runtime Plan. A parent/child Run, workflow fan-out/fan-in, Work Item, and
 interaction link uses an explicit typed link with its source and destination
 Workspace checks.
 
+Portable Package Revision content is separate from its consumer-side scoped
+references. The manifest may declare logical Package identity, capability and
+environment requirements, Runtime Plans, and logical binding requirements;
+Workspace IDs, Deployment binding references/values, credentials, provider
+URLs, Worker Profiles, and host-local paths do not belong in that portable
+content. A consumer-side `PackageRevisionRef` carries Workspace, logical
+Package, and immutable revision identity; a `RuntimePlanRef` additionally
+identifies its owning Package Revision and immutable plan digest/schema/
+compatibility identity. The experimental schema and fixtures in
+`docs/design/package-revision-v1-schema-draft.md` exercise only these structural
+boundaries. Their example digests are not production digest calculations, and
+schema validation does not prove cross-reference resolution or Run pinning.
+The reference experiment has one authoritative owning package reference at
+`runtimePlanRef.packageRevisionRef`; an outer duplicate is forbidden even if
+it matches. Its `revisionDigest` is the complete `PackageRevisionId` called
+`revision_id` in the #129 domain draft, separate from source artifact and plan
+digests. Plan schema versions are positive JSON integers in both portable plan
+headers and scoped references. The registry's supported versions and the
+reference's match to an immutable manifest still require consumer validation.
+The field mapping and regression cases are documented in the experimental
+schema draft; they do not approve the paused #129 production API or identifier
+syntax.
+
+The Package Revision fixtures under `docs/design/fixtures/package-revision-v1`
+have canonical UTF-8 JSON bytes with LF endings. Their scoped `.gitattributes`
+rule preserves those bytes on Windows checkouts with `core.autocrlf=true`.
+Verify checkout bytes as well as Git blobs; do not normalize test inputs or relax
+the byte comparisons to hide checkout conversion. This is fixture preservation,
+not approval of a production Package Revision digest algorithm.
+
 ## Admission and execution receipt
 
 Run creation stores one immutable `AdmissionSnapshot` containing the schema
@@ -115,7 +145,105 @@ worker readiness, cache/provider health, correlated failures/evidence/logs,
 disk/GC state, and a redaction manifest. It rejects archive traversal,
 absolute paths, symlinks, duplicate names, and oversized members.
 
+## Private common Run-output boundary
+
+`actions.server.run_outputs` keeps the existing `Run.status` and `Run.result`
+authoritative. Migration 15 adds normalized admission pins, Attempts, outputs,
+Workspace records and exact persisted grants. Trusted control-plane registration
+pins Deployment, Package Revision, Capability, Runtime Plan, worker, policy,
+provider and schema references and checks the actual Action/Package identity.
+Registration is not compiler admission or proof of provider authenticity. Actor
+IDs must come from trusted authentication; a UUID or the legacy global API key
+does not grant Workspace access.
+
+Admission rechecks execute access and immutable request/idempotency identity.
+Publication uses DB time and the current owner/Attempt/epoch/live-lease/cancel
+predicate, then commits terminal Run status/result and final output attachments
+in one transaction. Exact terminal replay is reauthorized; changed input or
+result rejects. Provider sealing precedes this commit and may leave a sealed,
+non-authoritative orphan after rollback. If sealing completes but the subsequent
+fence/metadata transaction fails, the service first commits the measured
+ref/digest/size in an ABORTED receipt, then attempts provider discard only if
+that output is unattached and no other record references the object. Cleanup
+failure retains this receipt and preserves the original error. An ambiguous
+abort commit never permits deletion. Published output/replay remains untouched.
+A crash before the abort receipt, malformed provider response or unavailable DB
+can still leave an orphan without a durable cleanup reference; no GC/retry
+service is supplied here. Expired-owner recovery requires an
+explicit trusted operator receipt; the service does not retry external effects
+automatically or prove those effects were undone.
+
+An `art_` handle encodes only the generated output UUID. Resolution requires the
+expected Workspace, a DB-backed Run/output attachment and current persisted
+Deployment read access before provider access. The handle is neither a bearer
+grant nor a provider path/key. Grant revocation affects future resolutions;
+an already authorized descriptor stream retains its read authority. Legacy
+Run lists, details, request-ID lookup, notifications, manifest fallback,
+artifact APIs and analytics exclude pinned Runs rather than infer public
+Workspace authorization.
+
+The optional server-only `RunOutputTransport` binding installs a bounded GET
+route at `/api/workspaces/{workspace_id}/outputs/{handle}` in the actual Runtime
+application. Without explicit trusted configuration that route is absent. The
+binding pairs the existing service with an authenticator that verifies its
+credential and returns a server-owned Actor; freezing the binding does not
+verify the authenticator or freeze its credential store. No CLI/environment
+mapping, default principal, browser/provider-OAuth session UUID, installation
+API token or caller-selected Actor ID supplies Workspace authority. When
+configured, installation-key authentication remains an outer gate. The trusted
+Actor authenticator and the shared resolver's current persisted read-grant
+checks are mandatory with or without an installation key and occur before
+provider acquisition. Present browser Origins must pass the existing trusted
+origin policy; an allowed Origin or a successful preflight never grants identity
+or access.
+
+This transport streams the measured opened descriptor in chunks of at most
+64 KiB and closes its resolver on completion, failure and disconnect. It serves
+`application/octet-stream` as an attachment using only the opaque handle as the
+filename, with `no-store` and `nosniff`; logical names/media types never enable
+inline active content. Handle-bearing headers are constructed only after shared
+resolution validates the canonical handle, so Unicode/control-character path
+inputs cannot turn a uniform denial into a header-encoding failure. Denied, revoked, cross-Workspace, malformed and unknown
+handles share an unavailable response before provider access. Storage acquisition
+failure returns 503; a failure after headers aborts the stream rather than
+claiming a complete artifact. Range requests return 416 explicitly and HEAD is
+not implemented. This is ASGI source evidence, not socket/native/CLI acceptance
+or the full #86 static-serving contract: HEAD, ETag, Last-Modified, single,
+suffix, multi and invalid Range behavior, Windows descriptor/reparse parity,
+shared/object providers, quotas and GC remain required. Production identity
+provider configuration and actual Canvas producer/consumer execution still need
+separate integration; a retrievable private-service output does not authorize
+changing a template's `artifact: null` without its own end-to-end proof.
+
+For assembled output-transport denials, count provider-open attempts before
+entering the reader context; a list of successfully opened readers alone cannot
+prove that storage was never touched. Take complete logical database and owned
+filesystem snapshots after legitimate publication or grant changes, then compare
+them across each request. Compare SQL rows rather than physical SQLite bytes:
+the resolver takes idempotent writer locks even for authorized reads. HEAD 405
+and Range 416 prove rejection, not method support or persisted-grant resolution.
+
+The private filesystem provider requires Linux descriptor features and trusted
+kernel procfs, borrows a verified service-owned root FD, and measures/seals actual
+bounded bytes. It rejects special objects through an O_PATH pin before any
+read-capable open. Its root must be separate from legacy artifact/static mounts.
+It is not a hostile-tree snapshot, public HTTP Range/HEAD service or Windows
+runtime implementation. Initial bounds are 256 KiB inputs, 1 MiB result envelope,
+64 output records per Run (including aborted records), 64 MiB per object,
+64 KiB chunks, leases up to one hour and retention up to one year. Full quotas,
+GC, output-secret policy, compiler/provider admission, production actor/provider
+wiring, adapters and Canvas execution integration remain separate gates; this
+private slice does not accept whole #83/#86/#129/#127.
+
 ## Verification matrix
+
+Platform-neutral CLI checks such as `--help` and refusal to overwrite an existing
+receipt must run before the Linux-only process-supervisor eligibility check; they
+must not create supervisor state. The RCC acceptance CLI still fails closed on
+unsupported platforms before candidate execution. Tests that prove Linux
+subreaper or process-group cleanup must be explicitly Linux-only. Skipping those
+process-proof tests elsewhere is not macOS or Windows cleanup acceptance, and a
+mocked `CompletedProcess` does not establish descendant cleanup.
 
 The dependency-free `devutils.runtime_conformance` module is the repository's
 small executable contract for this boundary. It canonicalizes exact-subject

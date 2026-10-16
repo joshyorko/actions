@@ -109,6 +109,7 @@ class ArgumentsNamespace(Protocol):
         "package",
         "import",
         "start",
+        "expose",
         "version",
         "new",
         "migrate",

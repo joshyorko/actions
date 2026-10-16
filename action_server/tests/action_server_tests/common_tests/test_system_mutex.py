@@ -126,15 +126,17 @@ def test_gen_mutex_name_from_path():
 def test_system_mutex_error_on_timeout():
     import os
     import threading
+    import uuid
 
     from actions.server._common.system_mutex import SystemMutex
 
-    mutex = SystemMutex("test_system_mutex_error_on_timeout")
+    mutex_name = f"test_system_mutex_error_on_timeout_{os.getpid()}_{uuid.uuid4().hex}"
+    mutex = SystemMutex(mutex_name)
     assert mutex.get_mutex_aquired()
     mutex_creation_info = [""]
 
     def thread():
-        mutex2 = SystemMutex("test_system_mutex_error_on_timeout")
+        mutex2 = SystemMutex(mutex_name)
         assert not mutex2.get_mutex_aquired()
         mutex_creation_info[0] = mutex2.mutex_creation_info
 
@@ -143,7 +145,7 @@ def test_system_mutex_error_on_timeout():
     t.join()
     info = mutex_creation_info[0]
     assert str(os.getpid()) in info
-    assert 'mutex = SystemMutex("test_system_mutex_error_on_timeout")' in info
+    assert "mutex = SystemMutex(mutex_name)" in info
 
 
 def test_system_mutex_timed_acquire_no_error_on_timeout():

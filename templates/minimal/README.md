@@ -2,6 +2,6 @@
 
 The template is a minimal example of an action. It contains necessary files and follows the required structure, but is not doing anything apart from returning a simple message.
 
-🚀 You can leverage the whole Python ecosystem when creating actions. Sema4.ai provides a bunch of libraries; you can make your own. The sky is the limit.
+Actions can use Python packages declared in the project's `package.yaml`.
 
-👉 Check [Action Server](https://github.com/Sema4AI/actions/tree/master/action_server/docs) and [Actions](https://github.com/Sema4AI/actions/tree/master/actions/docs) docs for more information.
+See the [Action Server guide](https://github.com/joshyorko/actions/tree/community/action_server) and [Actions library guide](https://github.com/joshyorko/actions/tree/community/actions) for current documentation.

@@ -1,0 +1,51 @@
+{
+  "artifact": {
+    "created_at": "2026-10-10T07:29:06Z",
+    "id": 11663219434,
+    "name": "rcc-provider-rollback-38034464513-1",
+    "sha256": "a5ab71966d175bde8556a3f7e976630ab13aed9f5d9306c8045dc7c5bcf9d0f8",
+    "size_bytes": 1529,
+    "verified_download_members": {
+      "acceptance-summary.json": {
+        "sha256": "c27e2d26cbfb7e687e54ca6dcda0475207edae6428bba29753d0e1c1300c1cba",
+        "size_bytes": 2039
+      },
+      "acceptance-summary.log": {
+        "sha256": "69894eb892003a6c87c3e681369beca268169c829d759abff728496febd39659",
+        "size_bytes": 448
+      }
+    }
+  },
+  "control": {
+    "commit": "e4f2f92292971408c48885e3e0a869cac9036630",
+    "tree": "a96701ec234cec2d0c26f0e60f6fe85ebe444d86"
+  },
+  "job": {
+    "conclusion": "success",
+    "id": 114161917930,
+    "name": "build",
+    "run_id": 38034464513
+  },
+  "run": {
+    "id": 38034464513,
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "source": {
+    "candidate_commit": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+    "candidate_tree": "6cb691b44666347f3e0de68c9830bd6824a4a0a0",
+    "candidate_artifact_run": 38032640853,
+    "candidate_native_artifact_id": 11662342341,
+    "candidate_native_artifact_sha256": "18acd5e0fee3c93aed5cdeee404557417cc1964c0c93b7950065a7add5325cf6"
+  },
+  "workflow_steps": {
+    "runner_libc_preflight": "success",
+    "pinned_rcc_install_and_verify": "success",
+    "action_server_default_rcc_preseed_and_verify": "success",
+    "developer_environment_install": "success",
+    "post_install_rcc_reverification": "success",
+    "rollback_test": "success",
+    "receipt_admission": "success",
+    "evidence_upload": "success"
+  }
+}

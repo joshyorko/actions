@@ -11,7 +11,8 @@ import { ErrorBanner } from '@/core/components/ui/ErrorBanner';
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from '@/core/components/ui/DropdownMenu';
 import { Select, SelectItem } from '@/core/components/ui/Select';
 import { useActionServerContext } from '@/shared/context/actionServerContext';
-import { Run, RunStatus } from '@/shared/types';
+import { useRuntimeRunPages, useRuntimeWebsocketStatus } from '@/queries/runtime';
+import { RunSummary, RunStatus } from '@/shared/types';
 import { cn } from '@/shared/utils/cn';
 import { baseUrl } from '@/shared/api-client';
 import { runtimeQueryKeys } from '@/shared/runtime-query-keys';
@@ -26,7 +27,7 @@ const statusLabel: Record<RunStatus, string> = {
   [RunStatus.CANCELLED]: 'Cancelled',
 };
 
-const formatDuration = (run: Run) => {
+const formatDuration = (run: RunSummary) => {
   if (!run.run_time) {
     return '—';
   }
@@ -56,10 +57,13 @@ const RobotIcon = () => (
 export const RunHistoryPage = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
-  const { loadedRuns, loadedActions } = useActionServerContext();
+  const { loadedActions } = useActionServerContext();
   const queryClient = useQueryClient();
   const [typeFilter, setTypeFilter] = useState<string>('all');
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const runsQuery = useRuntimeRunPages(typeFilter);
+  const websocketStatus = useRuntimeWebsocketStatus();
+  const allRuns = runsQuery.data?.pages.flat() ?? [];
 
   const handleRefresh = async () => {
     setIsRefreshing(true);
@@ -83,17 +87,9 @@ export const RunHistoryPage = () => {
 
   const currentSearch = searchParams.get('search') || '';
   const filteredRuns = useMemo(() => {
-    if (!loadedRuns.data) {
-      return [];
-    }
-    let runs = [...loadedRuns.data];
+    let runs = [...allRuns];
     runs.sort((a, b) => b.numbered_id - a.numbered_id);
-    
-    // Filter by type
-    if (typeFilter !== 'all') {
-      runs = runs.filter((run) => (run.run_type || 'action') === typeFilter);
-    }
-    
+
     if (!currentSearch.trim()) {
       return runs;
     }
@@ -110,10 +106,10 @@ export const RunHistoryPage = () => {
       const label = actionLookup.get(run.action_id) || '';
       return label.toLowerCase().includes(lowered) || run.id.toLowerCase().includes(lowered);
     });
-  }, [actionLookup, currentSearch, loadedRuns.data, typeFilter]);
+  }, [actionLookup, allRuns, currentSearch]);
 
   // Get run name/label based on type
-  const getRunLabel = (run: Run) => {
+  const getRunLabel = (run: RunSummary) => {
     const runType = run.run_type || 'action';
     if (runType === 'robot') {
       return run.robot_task_name || 'Unknown Task';
@@ -122,7 +118,7 @@ export const RunHistoryPage = () => {
   };
 
   // Get run subtitle based on type
-  const getRunSubtitle = (run: Run) => {
+  const getRunSubtitle = (run: RunSummary) => {
     const runType = run.run_type || 'action';
     if (runType === 'robot') {
       return run.robot_package_path || '';
@@ -130,11 +126,11 @@ export const RunHistoryPage = () => {
     return run.id;
   };
 
-  const handleViewDetails = (run: Run) => {
+  const handleViewDetails = (run: RunSummary) => {
     navigate(`/logs/${run.id}`);
   };
 
-  const handleDownloadLogs = (run: Run) => {
+  const handleDownloadLogs = (run: RunSummary) => {
     // Create a temporary anchor element to trigger the download
     const link = document.createElement('a');
     link.href = `${baseUrl}/api/runs/${run.id}/log.html`;
@@ -145,7 +141,7 @@ export const RunHistoryPage = () => {
     document.body.removeChild(link);
   };
 
-  if (loadedRuns.isPending) {
+  if (runsQuery.isPending) {
     return (
       <div className="flex h-full items-center justify-center">
         <Loading text="Loading run history…" />
@@ -153,15 +149,16 @@ export const RunHistoryPage = () => {
     );
   }
 
-  if (loadedRuns.errorMessage) {
+  if (runsQuery.error) {
     return (
       <div className="p-6">
-        <ErrorBanner message={`Unable to load run history: ${loadedRuns.errorMessage}`} />
+        <ErrorBanner message={`Unable to load run history: ${runsQuery.error.message}`} />
       </div>
     );
   }
 
   if (filteredRuns.length === 0) {
+    const noRunsExist = allRuns.length === 0;
     return (
       <div className="h-full space-y-4 p-6 animate-fadeInUp">
         <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-border bg-muted/30 p-12 text-center min-h-[400px]">
@@ -175,14 +172,27 @@ export const RunHistoryPage = () => {
               <line x1="3" x2="3.01" y1="18" y2="18" />
             </svg>
           </div>
-          <h2 className="text-lg font-semibold text-foreground">No runs recorded yet</h2>
+          <h2 className="text-lg font-semibold text-foreground">
+            {noRunsExist ? 'No runs recorded yet' : 'No runs match this search'}
+          </h2>
           <p className="mt-2 max-w-sm text-sm text-muted-foreground">
-            Trigger an Action or Robot run to populate the history. Use the Actions page to test your
-            automation flows.
+            {noRunsExist
+              ? 'Trigger an Action or Robot run to populate the history. Use the Actions page to test your automation flows.'
+              : 'Search only includes pages loaded so far. Load older runs to search more of your history.'}
           </p>
-          <Button className="mt-6" onClick={() => navigate('/actions')}>
-            Go to actions
-          </Button>
+          {runsQuery.hasNextPage ? (
+            <Button
+              className="mt-6"
+              disabled={runsQuery.isFetchingNextPage}
+              onClick={() => void runsQuery.fetchNextPage()}
+            >
+              {runsQuery.isFetchingNextPage ? 'Loading older runs…' : 'Load older runs'}
+            </Button>
+          ) : noRunsExist ? (
+            <Button className="mt-6" onClick={() => navigate('/actions')}>
+              Go to actions
+            </Button>
+          ) : null}
         </div>
       </div>
     );
@@ -190,6 +200,15 @@ export const RunHistoryPage = () => {
 
   return (
     <div className="h-full space-y-6 p-6 animate-fadeInUp">
+      {websocketStatus.data.phase === 'reconnecting' ? (
+        <p role="status" className="rounded-md border border-border p-3 text-sm text-muted-foreground">
+          Live run updates are reconnecting (attempt {websocketStatus.data.attempt} of {websocketStatus.data.maxAttempts}).
+        </p>
+      ) : websocketStatus.data.phase === 'offline' ? (
+        <div role="status" className="rounded-md border border-border p-3 text-sm text-muted-foreground">
+          Live run updates are offline after {websocketStatus.data.maxAttempts} attempts. Refresh runs to check for changes.
+        </div>
+      ) : null}
       <div className="rounded-lg border border-border bg-card shadow-sm">
         <div className="flex flex-col gap-4 border-b border-border p-6 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1">
@@ -379,6 +398,22 @@ export const RunHistoryPage = () => {
                 })}
               </TableBody>
             </Table>
+          </div>
+          <div className="mt-4 flex items-center justify-between gap-4 text-sm text-muted-foreground">
+            <span>
+              {runsQuery.hasNextPage
+                ? `Loaded ${allRuns.length} runs, newest first.`
+                : `Showing all ${allRuns.length} runs.`}
+            </span>
+            {runsQuery.hasNextPage ? (
+              <Button
+                variant="secondary"
+                disabled={runsQuery.isFetchingNextPage}
+                onClick={() => void runsQuery.fetchNextPage()}
+              >
+                {runsQuery.isFetchingNextPage ? 'Loading older runs…' : 'Load older runs'}
+              </Button>
+            ) : null}
           </div>
         </div>
       </div>

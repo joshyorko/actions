@@ -140,10 +140,13 @@ To make a new release for a library, ensure the following steps are accomplished
 2. The version is bumped according to [semantic versioning](https://semver.org/). This can be done by running
    `inv set-version <version>`, which updates all relevant files with the new version number, then adds an entry to the
    _docs/CHANGELOG.md_ describing the changes.
-3. The changes above are already committed/integrated into `master`, the test workflows in GitHub Actions are passing,
-   and you're operating on the `master` branch locally.
-4. You run `inv make-release` to create and push the release tag which will trigger the GitHub workflow that makes the
-   release.
+3. Commit and integrate the release changes into `community` in the canonical
+   `joshyorko/actions` repository. Verify that CI passes and that the release
+   commit is reachable from `origin/community`. Use the local `community` branch.
+4. Run `inv make-release` to create and push the release tag. The command checks
+   the branch, canonical remote, refreshed community ancestry, version progression,
+   and absence of an existing tag before it tags the commit. The tag triggers the
+   package's release workflow.
 
 > To trigger a release, a commit should be tagged with the name and version of the library. The tag can be generated
 > and pushed automatically with `inv make-release`. After the tag has been pushed, a corresponding GitHub Actions 

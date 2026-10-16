@@ -1,6 +1,5 @@
 from actions.server._database import Database
 
-
 _ARCHIVE_TABLE = "run_legacy_output_archive"
 
 
@@ -64,6 +63,7 @@ ON CONFLICT (run_id) DO UPDATE SET
     stderr = COALESCE({_ARCHIVE_TABLE}.stderr, excluded.stderr)
 """
             )
+
 
 def migrate(db: Database) -> None:
     from actions.server.migrations import MIGRATION_ID_TO_NAME

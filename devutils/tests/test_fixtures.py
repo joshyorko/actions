@@ -69,7 +69,7 @@ def test_actions_run_uses_metadata_bootstrap_and_preserves_tokens_on_windows(
     assert 'entry_point.name == "actions"' in args[2]
     assert 'entry_point.value != "actions.cli:main"' in args[2]
     assert 'if sys.path and sys.path[0] == "":' in args[2]
-    assert 'del sys.path[0]' in args[2]
+    assert "del sys.path[0]" in args[2]
     assert captured["kwargs"]["stdin"] is fixtures.subprocess.DEVNULL
     assert "shell" not in captured["kwargs"]
 

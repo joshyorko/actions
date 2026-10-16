@@ -12,6 +12,10 @@ description: Use when implementing, reviewing, debugging, testing, releasing, or
 3. Inspect `git status --short --branch`, the affected package's `pyproject.toml`, tests, and package-local documentation before changing files.
 4. Read the relevant canonical guide. For Work Items, read `docs/skills/work-items.md`.
 5. Use `rcc:action-server` for Action Server package/API behavior. Use `rcc:rcc-workitems` for queues, adapters, producer/consumer flows, and attachments.
+6. When a possible defect may belong to an upstream repository, use
+   [`docs/skills/upstream-reporting.md`](../../../docs/skills/upstream-reporting.md)
+   before proposing or filing a report. Reading or applying this workflow does
+   not itself authorize external mutations.
 
 ## Specialized RCC skills
 
@@ -45,6 +49,7 @@ Cosmetic prose and session diaries do not count. Never document planned behavior
 Every lane returns:
 
 ```text
+Upstream disposition: none | <factual issue, existing-report, local-fix, or no-finding disposition>
 Documentation improvement:
 - Canonical file changed or proposed:
 - Durable learning captured:

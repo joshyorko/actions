@@ -5,6 +5,7 @@ Repository-local operational knowledge lives here. Read root `AGENTS.md` first, 
 | Guide | Use for |
 |---|---|
 | [Repository operations](repository-operations.md) | Package boundaries, environments, testing, commits, releases, and evidence rules |
+| [Upstream defect reporting](upstream-reporting.md) | Evidence-first ownership checks, issue deduplication, authorized reports, follow-up, and disposition receipts |
 | [Work Items](work-items.md) | `actions-work-items`, adapters, queues, attachments, Action Server integration, and backend support |
 | [Provenance and observability](provenance-observability.md) | Runtime evidence, audit records, OpenTelemetry, receipts, privacy, and support exports |
 

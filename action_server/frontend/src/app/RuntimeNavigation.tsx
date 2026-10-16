@@ -15,8 +15,10 @@ const items = [
 
 export const RuntimeNavigation = ({
     isMobileOpen = false,
+    onNavigate,
 }: {
     isMobileOpen?: boolean;
+    onNavigate?: () => void;
 }) => {
     const location = useLocation();
     const [isCollapsed, setIsCollapsed] = useLocalStorage(
@@ -83,6 +85,7 @@ export const RuntimeNavigation = ({
                     <Link
                         key={path}
                         to={path}
+                        onClick={onNavigate}
                         className={cn(
                             "sidebar-nav-item sidebar-nav-item-lg",
                             location.pathname.startsWith(path) && "active",

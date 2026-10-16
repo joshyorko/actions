@@ -8,11 +8,28 @@ from pathlib import Path
 from threading import Lock
 from types import ModuleType
 from typing import Any
-from urllib.parse import unquote, urlparse
+from urllib.parse import urlparse
+from urllib.request import url2pathname
 
 _MODULE_NAME = "_actions_server_work_items"
 _lock = Lock()
 _cached: ModuleType | None = None
+
+
+class WorkItemsPackageUnavailableError(ImportError):
+    """The Runtime cannot find the installed Work Items package source tree."""
+
+
+class WorkItemsPackageLoadError(ImportError):
+    """The Runtime found Work Items source but could not execute its package."""
+
+
+def _clear_private_work_items_modules() -> None:
+    """Remove this loader's private package and its partially imported children."""
+    child_prefix = f"{_MODULE_NAME}."
+    for module_name in tuple(sys.modules):
+        if module_name == _MODULE_NAME or module_name.startswith(child_prefix):
+            sys.modules.pop(module_name, None)
 
 
 def locate_work_items_package() -> Path:
@@ -23,7 +40,9 @@ def locate_work_items_package() -> Path:
             str(work_items_distribution.locate_file("actions/work_items/__init__.py"))
         )
     except PackageNotFoundError as error:
-        raise ImportError("Unable to locate actions-work-items package") from error
+        raise WorkItemsPackageUnavailableError(
+            "Unable to locate actions-work-items package"
+        ) from error
 
     if package_path.is_file():
         return package_path
@@ -31,12 +50,16 @@ def locate_work_items_package() -> Path:
     try:
         direct_url_text = work_items_distribution.read_text("direct_url.json")
         if direct_url_text is None:
-            raise ImportError("Unable to locate actions-work-items package")
+            raise WorkItemsPackageUnavailableError(
+                "Unable to locate actions-work-items package"
+            )
         direct_url = json.loads(direct_url_text)
         url = direct_url["url"]
         editable = direct_url["dir_info"]["editable"]
     except (json.JSONDecodeError, KeyError, TypeError):
-        raise ImportError("Unable to locate actions-work-items package") from None
+        raise WorkItemsPackageUnavailableError(
+            "Unable to locate actions-work-items package"
+        ) from None
 
     parsed_url = urlparse(url) if isinstance(url, str) else None
     if (
@@ -45,12 +68,16 @@ def locate_work_items_package() -> Path:
         or parsed_url.scheme != "file"
         or parsed_url.netloc not in ("", "localhost")
     ):
-        raise ImportError("Unable to locate actions-work-items package")
+        raise WorkItemsPackageUnavailableError(
+            "Unable to locate actions-work-items package"
+        )
 
     try:
-        editable_root = Path(unquote(parsed_url.path)).resolve()
+        editable_root = Path(url2pathname(parsed_url.path)).resolve()
         if not editable_root.is_dir():
-            raise ImportError("Unable to locate actions-work-items package")
+            raise WorkItemsPackageUnavailableError(
+                "Unable to locate actions-work-items package"
+            )
 
         for relative_package_path in (
             "src/actions/work_items/__init__.py",
@@ -60,9 +87,13 @@ def locate_work_items_package() -> Path:
             if package_path.is_relative_to(editable_root) and package_path.is_file():
                 return package_path
     except (OSError, ValueError):
-        raise ImportError("Unable to locate actions-work-items package") from None
+        raise WorkItemsPackageUnavailableError(
+            "Unable to locate actions-work-items package"
+        ) from None
 
-    raise ImportError("Unable to locate actions-work-items package")
+    raise WorkItemsPackageUnavailableError(
+        "Unable to locate actions-work-items package"
+    )
 
 
 def load_work_items_module() -> ModuleType:
@@ -80,14 +111,16 @@ def load_work_items_module() -> ModuleType:
             submodule_search_locations=[str(package_path.parent)],
         )
         if spec is None or spec.loader is None:
-            raise ImportError("Unable to load actions-work-items package")
+            raise WorkItemsPackageLoadError("Unable to load actions-work-items package")
         module = importlib.util.module_from_spec(spec)
         sys.modules[_MODULE_NAME] = module
         try:
             spec.loader.exec_module(module)
-        except Exception:
-            sys.modules.pop(_MODULE_NAME, None)
-            raise
+        except Exception as error:
+            _clear_private_work_items_modules()
+            raise WorkItemsPackageLoadError(
+                "Unable to load actions-work-items package"
+            ) from error
         _cached = module
         return module
 

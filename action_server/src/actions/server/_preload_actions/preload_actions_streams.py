@@ -17,7 +17,9 @@
 import json
 import logging
 import queue
+import socket
 import threading
+import time
 from typing import Optional
 
 log = logging.getLogger(__name__)
@@ -127,6 +129,10 @@ class JsonRpcStreamReaderThread(threading.Thread):
                         return
         except ConnectionResetError:
             pass  # Just ignore this one (connection was closed)
+        except socket.timeout:
+            # The parent uses the shared TCP socket's timeout only after the
+            # Action response has been collected, while retiring this worker.
+            log.debug("Worker stream reader stopped during terminal retirement.")
         except Exception:
             log.exception("Error in JsonRpcStreamReader.")
         finally:
@@ -250,3 +256,47 @@ class JsonRpcStreamWriter(object):
                     self._wfile.closed,
                 )
                 return False
+
+    def write_with_deadline(self, message, sock, deadline: float) -> None:
+        """Write one frame directly to its TCP socket by an absolute deadline.
+
+        This is reserved for terminal worker exit after the last normal protocol
+        response has been collected. Normal writes continue using the buffered
+        stream so their existing behavior is unchanged.
+        """
+        remaining = deadline - time.monotonic()
+        if remaining <= 0 or not self._wfile_lock.acquire(timeout=remaining):
+            self._shutdown_socket(sock)
+            raise TimeoutError("Timed out waiting for the JSON-RPC writer lock")
+
+        original_timeout = None
+        try:
+            original_timeout = sock.gettimeout()
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                raise TimeoutError("JSON-RPC write deadline expired")
+
+            body = json.dumps(message, **self._json_dumps_args).encode("utf-8")
+            header = f"Content-Length: {len(body)}\r\n\r\n".encode("ascii")
+            sock.settimeout(remaining)
+            sock.sendall(header + body)
+        except socket.timeout as exc:
+            self._shutdown_socket(sock)
+            raise TimeoutError("Timed out writing the JSON-RPC frame") from exc
+        except BaseException:
+            self._shutdown_socket(sock)
+            raise
+        finally:
+            try:
+                if original_timeout is not None or sock.fileno() >= 0:
+                    sock.settimeout(original_timeout)
+            except OSError:
+                pass
+            self._wfile_lock.release()
+
+    @staticmethod
+    def _shutdown_socket(sock) -> None:
+        try:
+            sock.shutdown(socket.SHUT_RDWR)
+        except OSError:
+            pass

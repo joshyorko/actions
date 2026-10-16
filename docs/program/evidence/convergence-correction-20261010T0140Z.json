@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "repository": "joshyorko/actions",
+  "observed_at_utc": "2026-10-10T01:40:00Z",
+  "scope": "Dated correction to the 01:35 convergence snapshot; the 01:35 receipt and raw audit remain unchanged.",
+  "supersedes_projection": {
+    "path": "evidence/convergence-followup-20261010T0135Z.json",
+    "sha256": "56fe9824ad4d04e404bf60792f978cff58b5f25aed18d6bf1609673359cb79fc"
+  },
+  "evidence_copy": {
+    "path": "evidence/combined-e1e30ef-windows-typecheck.txt",
+    "source": "/workspace/work/community-resume/evidence/combined-e1e30ef-windows-typecheck.txt",
+    "size_bytes": 2214,
+    "sha256": "43e889d85131a79fb5c869dbda7c09c15cde0f70fd80722e11bfa64666a14277",
+    "byte_identical_to_source": true
+  },
+  "typecheck_clarification": {
+    "prior_wording": "The 01:35 summary described six Windows typing errors as Action Server/Core.",
+    "correction": "The six platform-specific errors were in the Action Server Runtime target; do not label them Core errors. The separate 19 Work Items type errors belong to that package.",
+    "bounded_mypy_output": "The copied mypy --platform win32 run checks 301 files and reports 7 remaining environment/type-stub errors: missing actions.server_integration stubs and Core symbols from the installed Actions package, plus missing PyInstaller.utils.hooks stubs. It is not a full typecheck pass. Root reports the 25 newly exposed Windows/Work Items target errors were removed in its unpushed combined source candidate; that candidate is not admitted."
+  },
+  "pr276_current_readback": {
+    "head": "bd10bb575a7327563892ce29623a5afc327fd82e",
+    "base": "integration/community-release-20261008",
+    "merge_state": "UNSTABLE",
+    "draft": false,
+    "check_counts": {
+      "IN_PROGRESS": 2,
+      "SUCCESS": 27,
+      "SKIPPED": 1
+    },
+    "url": "https://github.com/joshyorko/actions/pull/276",
+    "change": "Root changed the PR base from community to integration/community-release-20261008 using a normal REST update. The head is unchanged.",
+    "scope": "This current readback supersedes only the 01:35 base field. It does not mark PR276 merged or all checks complete."
+  },
+  "issue_acceptance_changed": false,
+  "stage_counts_unchanged": true,
+  "upstream_disposition": "none; no confirmed upstream defect was found or reported."
+}

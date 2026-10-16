@@ -106,6 +106,71 @@ class OriginPolicy:
         except ValueError:
             return False
 
+    def allows_request_origin(
+        self,
+        origin: str,
+        *,
+        request_scheme: str,
+        socket_server: object,
+        trusted_server_urls: Sequence[str] = (),
+    ) -> bool:
+        """Allow explicit origins or an authority trusted by deployment/socket config."""
+        if self.allows(origin):
+            return True
+
+        try:
+            parsed_origin = _parse_origin(origin)
+        except ValueError:
+            return False
+
+        for server_url in trusted_server_urls:
+            trusted_origin = _parse_configured_origin(server_url)
+            if trusted_origin is not None and _same_origin(
+                parsed_origin, trusted_origin
+            ):
+                return True
+
+        scheme = {
+            "http": "http",
+            "https": "https",
+            "ws": "http",
+            "wss": "https",
+        }.get(request_scheme.lower())
+        if scheme is None or not isinstance(socket_server, (tuple, list)):
+            return False
+
+        if len(socket_server) < 2:
+            return False
+        socket_host, socket_port = socket_server[0], socket_server[1]
+        if not isinstance(socket_host, str) or not socket_host:
+            return False
+        try:
+            port = int(socket_port)
+            bracketed_host = (
+                f"[{socket_host}]"
+                if ":" in socket_host and not socket_host.startswith("[")
+                else socket_host
+            )
+            socket_origin = _parse_origin(f"{scheme}://{bracketed_host}:{port}")
+        except (TypeError, ValueError):
+            return False
+
+        return _same_origin(parsed_origin, socket_origin)
+
+
+def _parse_configured_origin(url: str) -> Optional[_ParsedOrigin]:
+    try:
+        parsed = urlsplit(url)
+        if not parsed.netloc:
+            return None
+        return _parse_origin(f"{parsed.scheme}://{parsed.netloc}")
+    except (ValueError, UnicodeError):
+        return None
+
+
+def _same_origin(left: _ParsedOrigin, right: _ParsedOrigin) -> bool:
+    return left == right
+
 
 def validate_cors_origins(origins: Sequence[str]) -> tuple[str, ...]:
     """Validate configured origins without including their values in errors."""

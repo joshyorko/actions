@@ -1,0 +1,58 @@
+{
+  "observed_at": "2026-10-10T14:12:08Z",
+  "base_source": "5e3b61125bc17aafe6d7ee92db6b9f14a34b82fa",
+  "defect": "Single jsdom table update duration was compared with a browser frame budget, failing at34.13ms in hosted run38056869588/job114227041036. Rendering assertions did not fail.",
+  "repair": "Deterministic data, five fixed paired samples, median update/mount ratio<1.25, existing1000ms mount ceiling, exact updated cells/counts/retained same-order row DOM identity.",
+  "verification": [
+    {
+      "command": "npm test -- --maxWorkers=1",
+      "result": "PASS:280tests31files33.68s; before semantics-preserving testfile formatting"
+    },
+    {
+      "command": "node_modules/.bin/vitest run __tests__/performance/Table.perf.test.tsx",
+      "result": "PASS:14tests after final formatting"
+    },
+    {
+      "command": "npm run test:types",
+      "result": "PASS after materializing committed Canvas JSON fixture omitted from sparse checkout"
+    },
+    {
+      "command": "npm run test:lint",
+      "result": "PASS"
+    },
+    {
+      "command": "git diff --check",
+      "result": "PASS"
+    }
+  ],
+  "independent_review": "luna_frozen_receipt_review APPROVE direction; independent14/14PASS, observed medianmount7.23ms/update3.74ms ratio0.52; terminology corrected to same-order retained DOM identity.",
+  "limits": [
+    "The1.25ratio is a bounded regression criterion, not statistically calibrated.",
+    "jsdom does not establish60fps/browserlayout performance.",
+    "Configured package Prettier checks appsource; whole-filedefaultformatting would cause unrelatedchanges to preexistingteststyle, preserved2spaces/singlequotes.",
+    "Exact-head hosted CI remainsNOTRUN until publication."
+  ],
+  "log_evidence": {
+    "frontend-update-full-suite.log": {
+      "sha256": "d09d8aaa037ef6b2ebd2157bd153e1f360518a4e5bd5f2abe6727ab6f317ac02",
+      "bytes": 371
+    },
+    "frontend-update-final-focused.log": {
+      "sha256": "1ebcd5a03aa4382fc528529fe5183512a6550e444e433abb7d7bfd86d8503672",
+      "bytes": 294
+    },
+    "frontend-update-types.log": {
+      "sha256": "11536fe3442bbec2b91b2d2debe8937c594d1f860920efe004432ad8b13aa19b",
+      "bytes": 61
+    },
+    "frontend-update-lint.log": {
+      "sha256": "40779ff11a223d0e955790ce60c9b7508b53c680c9e5fe68c32b2058ee26d098",
+      "bytes": 117
+    }
+  },
+  "upstream_disposition": "none; local benchmark contract defect",
+  "documentation_improvement": [
+    "action_server/frontend/__tests__/performance/README.md",
+    "docs/skills/repository-operations.md"
+  ]
+}

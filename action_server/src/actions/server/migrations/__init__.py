@@ -45,6 +45,9 @@ MIGRATION_ID_TO_NAME: Dict[int, str] = {
     11: "align_schema_indexes",
     # we'll look for a 'migration_reconcile_run_columns' module based on this.
     12: "reconcile_run_columns",
+    13: "add_mcp_catalog_names",
+    14: "add_mcp_resource_routing",
+    15: "add_run_outputs",
 }
 
 CURRENT_VERSION: int = max(MIGRATION_ID_TO_NAME.keys())
@@ -101,7 +104,9 @@ def migrate_db(
             "Preparing to migrate database at: %s",
             redact_database_url(db_path),
         )
-        backup_file = parent_dir / f"{name}-pre-migration-{to_version}-{time.time()}.bak"
+        backup_file = (
+            parent_dir / f"{name}-pre-migration-{to_version}-{time.time()}.bak"
+        )
         log.info("Creating backup at: %s", backup_file)
         shutil.copyfile(path, backup_file)
 
@@ -128,7 +133,9 @@ It seems that this version of the database ({redact_database_url(db.db_path)}) i
 Please erase it and recreate it from scratch."""
                     )
                 db.create_tables(get_model_db_rules())
-                db.insert(Migration(CURRENT_VERSION, MIGRATION_ID_TO_NAME[CURRENT_VERSION]))
+                db.insert(
+                    Migration(CURRENT_VERSION, MIGRATION_ID_TO_NAME[CURRENT_VERSION])
+                )
                 from actions.server._models import ALL_COUNTERS, Counter
 
                 for counter in ALL_COUNTERS:

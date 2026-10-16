@@ -53,10 +53,17 @@ def package_environment(cwd: Path = REPOSITORY_ROOT) -> dict[str, str]:
     return environment
 
 
-def run(command: list[str], cwd: Path = REPOSITORY_ROOT) -> None:
+def run(
+    command: list[str],
+    cwd: Path = REPOSITORY_ROOT,
+    env_overrides: dict[str, str] | None = None,
+) -> None:
     """Run a command without shell parsing so it works on every RCC platform."""
     print("+", " ".join(command), f"(in {cwd})", flush=True)
-    subprocess.run(command, cwd=cwd, env=package_environment(cwd), check=True)
+    environment = package_environment(cwd)
+    if env_overrides:
+        environment.update(env_overrides)
+    subprocess.run(command, cwd=cwd, env=environment, check=True)
 
 
 def poetry(package: str, *arguments: str) -> None:
@@ -207,6 +214,14 @@ def check_all() -> None:
     test()
 
 
+def coverage() -> None:
+    """Run the measured monorepo portable-suite coverage gate."""
+    run(
+        [sys.executable, "developer/coverage_gate.py"],
+        env_overrides={"ACTIONS_RUNTIME_TEST_PYTHON": sys.executable},
+    )
+
+
 def frontend_test() -> None:
     run(["npm", "ci", "--no-audit", "--no-fund"], REPOSITORY_ROOT / "action_server" / "frontend")
     run(["npm", "run", "test"], REPOSITORY_ROOT / "action_server" / "frontend")
@@ -251,6 +266,7 @@ COMMANDS = {
     "typecheck": typecheck,
     "docs": docs,
     "check-all": check_all,
+    "coverage": coverage,
     "frontend-test": frontend_test,
     "install-community": install_community,
 }

@@ -1,0 +1,30 @@
+{
+  "README.md": {
+    "bytes": 1427,
+    "sha256": "1aaaf686697807ec66f3a02e42711a14e59caafdee6563273219c347fb982327"
+  },
+  "build-log-evidence.json": {
+    "bytes": 6749,
+    "sha256": "7353107a52edea78c346e2333913e2376c97e14f4f3a6c5ad4f12cecce559d7b"
+  },
+  "byte-source-review.json": {
+    "bytes": 11361,
+    "sha256": "07b6799026a26ec985d0cf7835b3fddd2105304c09d4102ed69c51f9d5c8c2ff"
+  },
+  "current-control-independent-review.json": {
+    "bytes": 1637,
+    "sha256": "3f27b4a2c0c548fa459a97fdad769a020079e536a0b7871302d0831e6b63221d"
+  },
+  "inspect_archives.py": {
+    "bytes": 9381,
+    "sha256": "f8dcd78f72421b3a9e105c326c1cce46457a42fc8fa38ba0f39280bd085c475b"
+  },
+  "producer-input-inventory.json": {
+    "bytes": 66239,
+    "sha256": "544566c0d61547c1f9cd5e4c30b770b8a5d0d122760ad78e5596351788276d76"
+  },
+  "selected-test-inventory.json": {
+    "bytes": 1333,
+    "sha256": "8a87d39c2f197234da0de0535d6fd2e249d29b0a20943f1f31da47248970ade6"
+  }
+}

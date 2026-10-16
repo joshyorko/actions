@@ -76,6 +76,7 @@ _LEGACY_BOOLEAN_COLUMNS = {
     "NOTIFY_ON_SUCCESS",
     "NOTIFICATION_SENT",
 }
+_WINDOWS_DRIVE_PATH = re.compile(r"^[A-Za-z]:(?:\\|/(?!/))")
 
 
 def _tokenize_sql(sql: str) -> List[_SQLToken]:
@@ -362,6 +363,11 @@ def redact_database_url(value: Union[Path, str]) -> Union[Path, str]:
 def normalize_database_url(value: Union[Path, str]) -> Union[Path, str]:
     if not isinstance(value, str):
         return value
+    # urlsplit treats rooted drive paths such as C:\data\server.db as a
+    # one-letter URL scheme. Preserve those filesystem paths before scheme
+    # validation so Database can select SQLite normally on Windows.
+    if _WINDOWS_DRIVE_PATH.match(value):
+        return value
 
     try:
         parsed = urlsplit(value)
@@ -484,7 +490,7 @@ class Database:
                 raise RuntimeError(
                     "PostgreSQL support requires the actions-runtime PostgreSQL extra."
                 ) from e
-            conn = psycopg.connect(cast(str, self._db_path))
+            conn = psycopg.connect(cast(str, self._db_path), autocommit=True)
         else:
             conn = sqlite3.connect(self._db_path, isolation_level=None)
             conn.execute("PRAGMA foreign_keys = ON")
@@ -535,7 +541,9 @@ class Database:
                             (lock_key,),
                         )
                 except Exception:
-                    log.debug("Unable to release PostgreSQL schedule claim", exc_info=True)
+                    log.debug(
+                        "Unable to release PostgreSQL schedule claim", exc_info=True
+                    )
             claim_connection.close()
 
     def _next_savepoint_name(self):
@@ -634,14 +642,32 @@ class Database:
 
             self._tlocal.in_transaction += 1
             try:
-                self.execute("BEGIN")
-                yield
+                if self.backend_name == "postgresql":
+                    # Default psycopg mode begins a transaction implicitly on
+                    # the first query. Using the driver's transaction manager
+                    # with autocommit connections gives this context ownership
+                    # of the full transaction and keeps standalone reads from
+                    # leaving an implicit transaction open.
+                    with conn.transaction():
+                        yield
+                else:
+                    self.execute("BEGIN")
+                    try:
+                        yield
+                        conn.commit()
+                    except BaseException:
+                        log.exception("Error. Rolling back database")
+                        try:
+                            conn.rollback()
+                        except BaseException:
+                            # Preserve the admission/commit error; a rollback
+                            # error must not disguise the original failure.
+                            log.exception("Database rollback also failed")
+                        raise
             except BaseException:
-                log.exception("Error. Rolling back database")
-                conn.rollback()
+                if self.backend_name == "postgresql":
+                    log.exception("Error. Rolling back database")
                 raise
-            else:
-                conn.commit()
             finally:
                 self._tlocal.in_transaction -= 1
                 assert (
@@ -1051,9 +1077,7 @@ ORDER BY table_name, index_name, sequence_in_index;
             )
         return "".join(adapted)
 
-    def execute_query(
-        self, cursor: Any, sql: str, values: Optional[list] = None
-    ):
+    def execute_query(self, cursor: Any, sql: str, values: Optional[list] = None):
         """
         Executes a query which will NOT change the database (and should return values).
 

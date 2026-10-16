@@ -1,0 +1,251 @@
+{
+  "schema_version": 1,
+  "repository": "joshyorko/actions",
+  "observed_at_utc": "2026-10-10T00:49:38Z",
+  "branch_readback": {
+    "community": {
+      "ref": "refs/heads/community",
+      "head": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+      "tree": "5c51bd27c1fb6c34f3cf54ca2d00ae93e2f5c641"
+    },
+    "integration": {
+      "ref": "refs/heads/integration/community-release-20261008",
+      "head": "77e67de36606ac4cb958874249a61ceff79dcd01",
+      "tree": "a2c6e78d8b25d56d8028bc57e94d00bcbfb9e1d9"
+    },
+    "runtime_candidate": {
+      "ref": "refs/heads/integration/runtime-release-final-20261009",
+      "head": "6a53578fac029a0696834c30438c858f5f0003be",
+      "tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d"
+    },
+    "observed_at_utc": "2026-10-10T00:49:38Z",
+    "readback_receipt": "evidence/convergence-refs-20261010T0049Z.txt",
+    "readback_receipt_sha256": "ab50217bb955317ade4de75dacea7b4cb70c9ff6bc7f90c86a0fc247e1dcd2af"
+  },
+  "cohort": {
+    "definition": "21-PR convergence cohort; integration means merged to the recorded PR target, not completion of the owning issue.",
+    "items": 21,
+    "target_integrated": 15,
+    "open_blocked": 6,
+    "merge_ready": 0,
+    "target_integrated_prs": [
+      219,
+      220,
+      251,
+      257,
+      259,
+      262,
+      263,
+      264,
+      265,
+      266,
+      267,
+      268,
+      269,
+      270,
+      271
+    ],
+    "open_prs": [
+      215,
+      216,
+      217,
+      218,
+      221,
+      256
+    ],
+    "live_query_receipt": "evidence/convergence-live-prs-20261010T0049Z.json",
+    "live_query_sha256": "e6b0c88088cc8ab4b6aed24b3bafcbe20f42e6135746f08a3d7f81ae95a4225e"
+  },
+  "issue_accounting": {
+    "retained_issue_contracts": 54,
+    "currently_open": 53,
+    "accepted_closed": [
+      210
+    ],
+    "whole_issue_review_ready": 0,
+    "issue_acceptance_changed": false,
+    "graph_stage_counts": {
+      "READY": 0,
+      "ACTIVE": 7,
+      "REVIEW": 8,
+      "BLOCKED": 29,
+      "INTEGRATED": 9,
+      "COMPLETE": 1
+    }
+  },
+  "open_prs": [
+    {
+      "number": 215,
+      "url": "https://github.com/joshyorko/actions/pull/215",
+      "head": "d07f79b355f976f97948720474fd050d0a32ea16",
+      "base": "community",
+      "draft": true,
+      "mergeability": "CONFLICTING",
+      "merge_state": "DIRTY",
+      "exact_head_checks": {
+        "success": 16
+      },
+      "blocker_or_next_action": "GitHub reports a merge conflict on this exact draft head; route any required unique delta through the current PR221 candidate or supersede this checkpoint."
+    },
+    {
+      "number": 216,
+      "url": "https://github.com/joshyorko/actions/pull/216",
+      "head": "d26fa423080cec22522402f2193b17a5f32b336a",
+      "base": "community",
+      "draft": true,
+      "mergeability": "CONFLICTING",
+      "merge_state": "DIRTY",
+      "exact_head_checks": {
+        "success": 23
+      },
+      "blocker_or_next_action": "GitHub reports a merge conflict on this exact draft head; account for any still-needed unique Runtime history/WebSocket delta through the current integration route or supersede this checkpoint."
+    },
+    {
+      "number": 217,
+      "url": "https://github.com/joshyorko/actions/pull/217",
+      "head": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2",
+      "base": "community",
+      "draft": true,
+      "mergeability": "CONFLICTING",
+      "merge_state": "DIRTY",
+      "exact_head_checks": {
+        "success": 15
+      },
+      "blocker_or_next_action": "GitHub reports a merge conflict on this exact draft head; the public Core meta API still needs a separately versioned release. Route required release changes through the current integration route or supersede this checkpoint."
+    },
+    {
+      "number": 218,
+      "url": "https://github.com/joshyorko/actions/pull/218",
+      "head": "95ddbe88106be594ea9954bdb36909702c5e2869",
+      "base": "community",
+      "draft": true,
+      "mergeability": "MERGEABLE",
+      "merge_state": "CLEAN",
+      "exact_head_checks": {
+        "success": 16,
+        "skipped": 1
+      },
+      "blocker_or_next_action": "Draft is cleanly mergeable, but relevant packaged Work Items consumer acceptance remains downstream of PR256; mergeability alone is not whole #208 acceptance."
+    },
+    {
+      "number": 221,
+      "url": "https://github.com/joshyorko/actions/pull/221",
+      "head": "77e67de36606ac4cb958874249a61ceff79dcd01",
+      "base": "community",
+      "draft": true,
+      "mergeability": "MERGEABLE",
+      "merge_state": "CLEAN",
+      "exact_head_checks": {
+        "success": 29,
+        "skipped": 1
+      },
+      "blocker_or_next_action": "Exact-head hosted checks pass on the current integration tree; publication steps are skipped. Root owns admission and no Runtime/native publication or issue acceptance is implied."
+    },
+    {
+      "number": 256,
+      "url": "https://github.com/joshyorko/actions/pull/256",
+      "head": "524e503b384a56bf854326c1f7f03833c60e6c53",
+      "base": "integration/community-release-20261008",
+      "draft": true,
+      "mergeability": "MERGEABLE",
+      "merge_state": "UNSTABLE",
+      "exact_head_checks": {
+        "in_progress": 3,
+        "success": 9,
+        "skipped": 1
+      },
+      "blocker_or_next_action": "Current head 524e503 has bounded source review ACCEPT and formatting checks passing; 9 checks succeed, 3 remain in progress and publication is skipped. Wait for the exact-head native/RCC/coverage results. The b676 artifact-admission PASS is bound to b676, not silently promoted to this successor."
+    }
+  ],
+  "pr256_exact_head": {
+    "head": "524e503b384a56bf854326c1f7f03833c60e6c53",
+    "base": "integration/community-release-20261008",
+    "merge_state": "UNSTABLE",
+    "observed_at_utc": "2026-10-10T00:49:38Z",
+    "status_counts": {
+      "in_progress": 3,
+      "success": 9,
+      "skipped": 1
+    },
+    "in_progress_jobs": [
+      {
+        "name": "coverage",
+        "details_url": "https://github.com/joshyorko/actions/actions/runs/38010164269/job/114088071425"
+      },
+      {
+        "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+        "details_url": "https://github.com/joshyorko/actions/actions/runs/38010164271/job/114088071696"
+      },
+      {
+        "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+        "details_url": "https://github.com/joshyorko/actions/actions/runs/38010164271/job/114088071587"
+      }
+    ],
+    "run_ids": {
+      "native": 38010164278,
+      "rcc": 38010164271,
+      "coverage": 38010164269
+    },
+    "source_review": "ACCEPT, bounded to this source head; configured lint/format/isort/diff checks passed.",
+    "source_review_receipt": {
+      "path": "evidence/pr256-524e503-independent-source-review-20261010T0044Z.json",
+      "sha256": "77624d492cda460e14f0e4b8ddb30059fe17555a2d600a779c9deb1886e8d346"
+    },
+    "predecessor_artifact_review": {
+      "head": "b676daf3d51de89b1bfc51c90a76c01ed24d8bfb",
+      "path": "evidence/pr256-b676-artifact-admission-review-20261010T0034Z.json",
+      "sha256": "bef5b9cc8328b0184cd43d1c259b72df2836cb0ba9eacbb0b49012043aa8bab7",
+      "result": "Bounded Linux/Windows frozen and Go-wrapper artifact admission PASS for b676. This result remains bound to that predecessor."
+    },
+    "limits": [
+      "Hosted exact-head matrix incomplete",
+      "macOS UI remains skipped",
+      "No whole #208 acceptance or publication"
+    ]
+  },
+  "rcc_state": {
+    "remote_branch": "devsy/rcc-local-acceptance-20261009",
+    "last_remote_readback": "6a0db09d2623d084ae0de43f7ec7737bd28ea157",
+    "admission": "Not admitted; no #134 completion claim.",
+    "current_owner_report": "The existing native RCC producer is active on a newer local candidate referred to as c8, but its full SHA and remote readback were not present in the observed source refs. Owner is correcting candidate cleanup, receipt SHA binding, server-exit observation, and a reviewed prune path that might delete snapshots still used by live workers.",
+    "reported_turn_prefix": "01a12339",
+    "evidence_boundary": "c8 and the active-turn status are coordinator-reported; only 6a0db09 is verified here as the remote branch head. The correction/review is not yet an admitted checkpoint.",
+    "upstream_disposition": "none; no upstream defect confirmed."
+  },
+  "release_state": {
+    "core": "1.0.2 published and verified",
+    "helper": "1.0.3 published and verified",
+    "runtime_native": "1.0.3 held and unpublished",
+    "core_meta_api": "Current source API remains unreleased and requires a separately versioned Core package; this is not a blanket Runtime release blocker beyond actual API consumers."
+  },
+  "preservation": {
+    "baseline_commit": "cfd6c8a7f9332d226feef560fff07c0bd976064f",
+    "issue_rows_equal_baseline": true,
+    "issue_projection_sha256": "2e456f91eadf4776459e38890bd5d02fc940bad5082e3ed146a2298ecea5abe9",
+    "old_archive_count": 16,
+    "current_old_archive_count": 16,
+    "old_archive_hashes_unchanged": true,
+    "old_archives": {
+      "docs/program/evidence/canvas-execution-graph-amendment-20261009-v2.zip": "1c5c7e4923c2143a1e57f85320f335210bb50a827b38a90e61442eb9ff3e3dcf",
+      "docs/program/evidence/canvas-execution-graph-amendment-20261009-v3.zip": "7d6552000d69c8876278097e00d87a8cd7f29e33987ce8e16049a9dd948aa281",
+      "docs/program/evidence/canvas-execution-graph-amendment-20261009-v4.zip": "b0363a6fcb2d42cba9fa50e3821b15e18213b196ab938ba51afa9eaaa3c803c3",
+      "docs/program/evidence/canvas-execution-graph-amendment-20261009.zip": "7c7ae532483d186c65190b5d3177ed08ed9d9f34d3905338d02a44e488226cd7",
+      "docs/program/evidence/community-20261008.zip": "3c5516a93dd65804fc3f9d88d1f5d4c0511291f7626159f63746f4a8fd745705",
+      "docs/program/evidence/community-20261009-acceleration.zip": "641c7b2c70d71580f771e2d85082a00b871fa87c8f63b29655aec9972ab82d48",
+      "docs/program/evidence/community-20261009-checkpoint.zip": "8bdc8b152121809055e65a0cd616ea2d6055d651a6b8eae3f65c1c89bab2899c",
+      "docs/program/evidence/community-20261009-cloud-admission.zip": "b283b7d77b6166028acca21faeac057f25c5d8a43d0fbbe1e1e4c1b88782b2c0",
+      "docs/program/evidence/community-20261009-convergence.zip": "0040cdd1a8e0cce22185179905349f01a0839b575a087f6d85128f37e061b237",
+      "docs/program/evidence/community-20261009-fanout.zip": "8326e8c78d042db34be7a8fd5a3a848b9849d743bd08bafdcf323b1701332d0e",
+      "docs/program/evidence/community-20261009-final-checkpoint.zip": "085608370a2f7a14730c49a3efadda57bd4645459059f0f0e0fb78a8d53622f4",
+      "docs/program/evidence/community-20261009-resume.zip": "ab1a1415b29d9bc0af16befd07ab792920e4dafc3beda37ddb7f1d4a016b7541",
+      "docs/program/evidence/community-20261009-update.zip": "209cd547060efe61facc1d8ac39909b5945d831cd29f5f26a127fba4d19f1df4",
+      "docs/program/evidence/community-20261009-update2.zip": "2ab7c866896f87e347a4e8891bb622b393e9816f401e86a813f263f6e7cc8d31",
+      "docs/program/evidence/community-20261009-update3.zip": "911ef5b930bb1dac07f15f8648f55a1852814c090638a1b56238b473b03bc842",
+      "docs/program/evidence/http-helper-1.0.3-verified-dist.zip": "13fc05a548ef079764a7f91e432cbdfe3f349038a20d48a846868e3e4b73b2eb"
+    }
+  },
+  "documentation_disposition": {
+    "canonical_guide_delta": "None. Existing repository-operations guidance already distinguishes exact-head evidence from owning-issue completion and candidate source/wheel identity; no duplicate prose added.",
+    "upstream_disposition": "none"
+  }
+}

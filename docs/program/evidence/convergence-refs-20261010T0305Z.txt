@@ -1,0 +1,17 @@
+Observed at 2026-10-10T03:05:30Z
+
+Remote refs (git ls-remote):
+36b8192dbb8143e016af3351f7d25b22a35c9944 refs/heads/community
+d54687003b865bf2ea520d7cacf54e4badbbf8cf refs/heads/integration/community-release-20261008
+6a53578fac029a0696834c30438c858f5f0003be refs/heads/integration/runtime-release-final-20261009
+
+PR274 integration commit:
+d54687003b865bf2ea520d7cacf54e4badbbf8cf tree e10b0c54d26d00b7b51c27b115327530da0edc61
+
+PR273 tested synthetic merge:
+c5c003a2d3d9dc9006be7221c61d8c25d3530201 tree 9bc3bbffcf41fcc7442c6113187809b3181b2167
+parents: 46a06485f776265e64e84629c468f26b4389d2bd 7b7cb0a9cd870d86c07ef2d82364e40ec479c23c
+
+Recomputed current-base synthetic merge:
+integration d54687003b865bf2ea520d7cacf54e4badbbf8cf + PR273 head 7b7cb0a9cd870d86c07ef2d82364e40ec479c23c -> tree 9bc3bbffcf41fcc7442c6113187809b3181b2167
+Result matches tested tree.

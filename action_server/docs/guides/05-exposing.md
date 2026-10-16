@@ -8,6 +8,14 @@ The server selects an available public tunnel provider. Use
 explicitly. Tunnel URLs are provider-owned and are not guaranteed to remain
 stable after the server stops.
 
+When an API key is enabled, `action-server start --expose` verifies that the
+public endpoint reports the current Runtime identity, rejects an unauthenticated
+MCP initialize, and accepts an authenticated MCP initialize before it prints
+the public URL. This check makes no action call. Its result is specific to this
+legacy startup path; it does not set the separate persisted `expose start/status`
+lifecycle to ready. Local synthetic transport tests do not verify a live tunnel,
+provider availability, public TLS, or native Windows/macOS CI.
+
 ### Authentication
 
 Currently the Action Server supports a basic authentication scheme using

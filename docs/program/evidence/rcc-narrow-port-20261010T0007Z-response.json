@@ -1,0 +1,46 @@
+{
+  "observed_at": "2026-10-10T00:06:21.023Z",
+  "dispatch": {
+    "request_id": "actions-root-rcc-narrow-port-20261010T0007Z-v1",
+    "state": "accepted",
+    "wait_mode": "dispatch",
+    "thread_id": "01a12224-8dc6-7dc1-9542-65d3a1de0955",
+    "turn_id": "01a12321-53e7-75a1-9a19-acd2cf04ee7a",
+    "replayed": false,
+    "retry_same_request_id": "returns_receipt_without_dispatch",
+    "native_state_authoritative": true
+  },
+  "effective_settings_event": {
+    "method": "thread/settings/updated",
+    "params": {
+      "threadId": "01a12224-8dc6-7dc1-9542-65d3a1de0955",
+      "threadSettings": {
+        "disabledPluginIds": [],
+        "cwd": "/workspaces/actions-worktrees/devsy-rcc-local-acceptance",
+        "approvalPolicy": "never",
+        "approvalsReviewer": "user",
+        "sandboxPolicy": {
+          "type": "dangerFullAccess"
+        },
+        "activePermissionProfile": null,
+        "model": "gpt-6-luna",
+        "modelProvider": "headroom",
+        "serviceTier": null,
+        "effort": "medium",
+        "summary": null,
+        "collaborationMode": {
+          "mode": "default",
+          "settings": {
+            "model": "gpt-6-luna",
+            "reasoning_effort": "medium",
+            "developer_instructions": null
+          }
+        },
+        "multiAgentMode": "explicitRequestOnly",
+        "personality": null
+      }
+    },
+    "emittedAtMs": 1791590749170
+  },
+  "error": null
+}

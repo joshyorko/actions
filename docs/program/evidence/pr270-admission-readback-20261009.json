@@ -1,0 +1,12 @@
+{
+  "baseRefName": "integration/community-release-20261008",
+  "headRefOid": "5efcfebf1c572808a441e2360d1c1e68a77020a9",
+  "mergeCommit": {
+    "oid": "4e8f8f1ec4f16d1d7d95b6564d3c3bdb237bc95f"
+  },
+  "mergedAt": "2026-10-09T23:24:16Z",
+  "state": "MERGED",
+  "observed_at": "2026-10-09T23:24:28.637981+00:00",
+  "integration_head": "4e8f8f1ec4f16d1d7d95b6564d3c3bdb237bc95f",
+  "integration_tree": "e706a9b93258df863d50ce67cb00ee09a62d6012"
+}

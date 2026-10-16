@@ -8,8 +8,9 @@ from typing import Any, Mapping, Optional, Tuple
 
 def subject_fingerprint(subject: Mapping[str, Any]) -> str:
     """Return a stable digest for the protected, exact execution subject."""
-    encoded = json.dumps(subject, sort_keys=True, separators=(",", ":"),
-                         ensure_ascii=True).encode("utf-8")
+    encoded = json.dumps(
+        subject, sort_keys=True, separators=(",", ":"), ensure_ascii=True
+    ).encode("utf-8")
     return hashlib.sha256(encoded).hexdigest()
 
 
@@ -70,12 +71,18 @@ class WorkerProfile:
     features: Tuple[str, ...] = ()
 
     def supports(self, plan: RuntimePlan) -> bool:
-        return (plan.runtime_kind in self.runtime_kinds and
-                set(plan.required_features).issubset(self.features))
+        return plan.runtime_kind in self.runtime_kinds and set(
+            plan.required_features
+        ).issubset(self.features)
 
 
-def admit(subject: Mapping[str, Any], mode: str, generation: str,
-          plan: RuntimePlan, worker: Optional[WorkerProfile]) -> AdmissionSnapshot:
+def admit(
+    subject: Mapping[str, Any],
+    mode: str,
+    generation: str,
+    plan: RuntimePlan,
+    worker: Optional[WorkerProfile],
+) -> AdmissionSnapshot:
     """Compute one canonical admission result without adapter fallback."""
     if worker is None:
         outcome, reason = "no_worker", "no eligible worker"
@@ -83,12 +90,14 @@ def admit(subject: Mapping[str, Any], mode: str, generation: str,
         outcome, reason = "incompatible", "worker does not support selected plan"
     else:
         outcome, reason = "ready", ""
-    return AdmissionSnapshot(subject_fingerprint(subject), mode, outcome,
-                             reason, generation)
+    return AdmissionSnapshot(
+        subject_fingerprint(subject), mode, outcome, reason, generation
+    )
 
 
-def assert_execution_subject(snapshot: AdmissionSnapshot,
-                             subject: Mapping[str, Any]) -> None:
+def assert_execution_subject(
+    snapshot: AdmissionSnapshot, subject: Mapping[str, Any]
+) -> None:
     """Reject execution when protected inputs no longer match admission."""
     if snapshot.fingerprint != subject_fingerprint(subject):
         raise ValueError("execution subject changed after admission")

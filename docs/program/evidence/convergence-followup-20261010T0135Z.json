@@ -1,0 +1,364 @@
+{
+  "schema_version": 1,
+  "repository": "joshyorko/actions",
+  "observed_at_utc": "2026-10-10T01:35:00Z",
+  "supersedes_current_projection": {
+    "path": "evidence/convergence-followup-20261010T0056Z.json",
+    "sha256": "6e6d0500b13af1ec9ece2d48b21692654a76a254f36e50af57d3910eba4a51fa",
+    "scope": "Refresh the open-PR cohort and exact remote target refs; preceding receipts remain unchanged."
+  },
+  "target_refs": {
+    "community": {
+      "ref": "refs/heads/community",
+      "head": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+      "tree": "5c51bd27c1fb6c34f3cf54ca2d00ae93e2f5c641"
+    },
+    "integration": {
+      "ref": "refs/heads/integration/community-release-20261008",
+      "head": "46a06485f776265e64e84629c468f26b4389d2bd",
+      "tree": "be7d58f57a645aa07e1bbfd6ed773bd402c1acf9"
+    },
+    "runtime_candidate": {
+      "ref": "refs/heads/integration/runtime-release-final-20261009",
+      "head": "6a53578fac029a0696834c30438c858f5f0003be",
+      "tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d"
+    }
+  },
+  "cohort": {
+    "items": 27,
+    "target_integrated": 16,
+    "open_blocked": 11,
+    "merge_ready": 0,
+    "target_integrated_prs": [
+      219,
+      220,
+      251,
+      256,
+      257,
+      259,
+      262,
+      263,
+      264,
+      265,
+      266,
+      267,
+      268,
+      269,
+      270,
+      271
+    ],
+    "open_prs": [
+      215,
+      216,
+      217,
+      218,
+      221,
+      272,
+      273,
+      274,
+      275,
+      276,
+      277
+    ]
+  },
+  "open_prs": [
+    {
+      "pr": 215,
+      "head": "d07f79b355f976f97948720474fd050d0a32ea16",
+      "branch": "convergence/actions-full-graph-20261008",
+      "base": "community",
+      "draft": true,
+      "merge_state": "DIRTY",
+      "checks": {
+        "SUCCESS": 16
+      },
+      "url": "https://github.com/joshyorko/actions/pull/215",
+      "owner": "Root integration",
+      "next_action": "Reconcile or supersede the conflicted legacy checkpoint through the current integration route; do not merge the dirty branch directly."
+    },
+    {
+      "pr": 216,
+      "head": "d26fa423080cec22522402f2193b17a5f32b336a",
+      "branch": "review/runtime-checkpoint-20261008",
+      "base": "community",
+      "draft": true,
+      "merge_state": "DIRTY",
+      "checks": {
+        "SUCCESS": 23
+      },
+      "url": "https://github.com/joshyorko/actions/pull/216",
+      "owner": "Root integration",
+      "next_action": "Reconcile the distinct Runtime history/WebSocket changes through the current route; the exact legacy branch is dirty/conflicting."
+    },
+    {
+      "pr": 217,
+      "head": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2",
+      "branch": "review/core-checkpoint-20261008",
+      "base": "community",
+      "draft": true,
+      "merge_state": "DIRTY",
+      "checks": {
+        "SUCCESS": 15
+      },
+      "url": "https://github.com/joshyorko/actions/pull/217",
+      "owner": "Root integration",
+      "next_action": "Reconcile unique Core public-contract changes through the current route; the exact legacy branch is dirty/conflicting."
+    },
+    {
+      "pr": 218,
+      "head": "95ddbe88106be594ea9954bdb36909702c5e2869",
+      "branch": "review/workitems-checkpoint-20261008",
+      "base": "community",
+      "draft": true,
+      "merge_state": "CLEAN",
+      "checks": {
+        "SUCCESS": 16,
+        "SKIPPED": 1
+      },
+      "url": "https://github.com/joshyorko/actions/pull/218",
+      "owner": "Root integration and Work Items consumer owner",
+      "next_action": "Retain as a bounded packaged-consumer checkpoint; reconcile with current Work Items proof. No whole #208 acceptance."
+    },
+    {
+      "pr": 221,
+      "head": "46a06485f776265e64e84629c468f26b4389d2bd",
+      "branch": "integration/community-release-20261008",
+      "base": "community",
+      "draft": true,
+      "merge_state": "CLEAN",
+      "checks": {
+        "SUCCESS": 29,
+        "SKIPPED": 1
+      },
+      "url": "https://github.com/joshyorko/actions/pull/221",
+      "owner": "Root integration",
+      "next_action": "Exact current-head hosted checks are green, but reviewed component fixes still require one pushed candidate and configured combined gates before admission."
+    },
+    {
+      "pr": 272,
+      "head": "2def236adf76f6731c88c29d9d27e5181de6275f",
+      "branch": "devsy/rcc-narrow-acceptance-20261010",
+      "base": "integration/community-release-20261008",
+      "draft": true,
+      "merge_state": "CLEAN",
+      "checks": {
+        "SUCCESS": 16
+      },
+      "url": "https://github.com/joshyorko/actions/pull/272",
+      "owner": "Existing Devsy RCC producer; root integration",
+      "next_action": "Independent review and combined full integration validation remain; hosted checks alone do not admit the source slice."
+    },
+    {
+      "pr": 273,
+      "head": "f30aed327adcf148d69f45c71b742dd89bb6f617",
+      "branch": "fix/runtime-tests-integration-triggers-20261010",
+      "base": "integration/community-release-20261008",
+      "draft": true,
+      "merge_state": "UNSTABLE",
+      "checks": {
+        "FAILURE": 3,
+        "SUCCESS": 10,
+        "IN_PROGRESS": 2
+      },
+      "url": "https://github.com/joshyorko/actions/pull/273",
+      "owner": "Root integration",
+      "next_action": "Current published head has three failed checks; root is composing reviewed fixes into a successor. Validate only the exact pushed successor."
+    },
+    {
+      "pr": 274,
+      "head": "a0d727eb7831f855e284d005f3048755cbfdc1be",
+      "branch": "fix/workitems-acceptance-typecheck-20261010",
+      "base": "integration/community-release-20261008",
+      "draft": true,
+      "merge_state": "CLEAN",
+      "checks": {
+        "SUCCESS": 12,
+        "SKIPPED": 1
+      },
+      "url": "https://github.com/joshyorko/actions/pull/274",
+      "owner": "Root integration; Work Items author completed bounded typing patch",
+      "next_action": "Source review accepted and 12 required hosted checks passed; full combined Runtime/Work Items gate remains pending.",
+      "source_review": "ACCEPTED, bounded to the Work Items typing fix."
+    },
+    {
+      "pr": 275,
+      "head": "dc610f3ba14b9a64b7fd4b4bcb6ec1fccb00beab",
+      "branch": "fix/windows-runtime-typecheck-20261010",
+      "base": "integration/community-release-20261008",
+      "draft": true,
+      "merge_state": "UNSTABLE",
+      "checks": {
+        "IN_PROGRESS": 3,
+        "SUCCESS": 12,
+        "QUEUED": 1
+      },
+      "url": "https://github.com/joshyorko/actions/pull/275",
+      "owner": "Root integration",
+      "next_action": "Windows typing source review accepted; finish exact-head hosted checks and combined cross-platform validation.",
+      "source_review": "ACCEPTED, bounded to Windows-targeted Action Server typing fix."
+    },
+    {
+      "pr": 276,
+      "head": "bd10bb575a7327563892ce29623a5afc327fd82e",
+      "branch": "fix/tls-long-hostname-certificate-20261010",
+      "base": "community",
+      "draft": false,
+      "merge_state": "UNSTABLE",
+      "checks": {
+        "IN_PROGRESS": 7,
+        "SUCCESS": 21,
+        "SKIPPED": 1,
+        "QUEUED": 1
+      },
+      "url": "https://github.com/joshyorko/actions/pull/276",
+      "owner": "Root integration; TLS author completed bounded patch",
+      "next_action": "TLS source review accepted; finish exact-head hosted checks before integration admission.",
+      "source_review": "ACCEPTED, bounded to long-hostname TLS certificate CN fix."
+    },
+    {
+      "pr": 277,
+      "head": "417c9c0222dfd57b2537ef51b8ace50bfac6187b",
+      "branch": "fix/runtime-wheel-test-interpreter-20261010",
+      "base": "integration/community-release-20261008",
+      "draft": true,
+      "merge_state": "UNSTABLE",
+      "checks": {
+        "QUEUED": 10,
+        "FAILURE": 1,
+        "SUCCESS": 3,
+        "IN_PROGRESS": 1
+      },
+      "url": "https://github.com/joshyorko/actions/pull/277",
+      "owner": "Root integration; wheel-interpreter author",
+      "next_action": "Root source review accepted for the two-commit interpreter-selection/docs correction; exact-head hosted checks and combined validation remain.",
+      "source_review": "ACCEPTED, bounded to active interpreter selection and documentation correction."
+    }
+  ],
+  "whole_issue_accounting": {
+    "retained_contracts": 54,
+    "currently_open": 53,
+    "accepted_closed": [
+      210
+    ],
+    "whole_issue_review_ready": 0,
+    "acceptance_changed": false,
+    "raw_ledger_issue_records_sha256": "3629102800b720555de322bf3649fcbcb4991d3695f02b909caa9e205bed6f60",
+    "execution_graph_stage_counts": {
+      "READY": 0,
+      "ACTIVE": 7,
+      "REVIEW": 8,
+      "BLOCKED": 29,
+      "INTEGRATED": 9,
+      "COMPLETE": 1
+    }
+  },
+  "release_state": {
+    "core": "1.0.2 published and verified",
+    "helper": "1.0.3 published and verified",
+    "runtime_native": "1.0.3 held and unpublished",
+    "publication": "No publication performed in this checkpoint."
+  },
+  "combined_gate_observation": {
+    "source": "Root-reported configured Runtime CI and combined Win32 mypy observations; combined local candidate was not pushed or admitted at snapshot time.",
+    "failures": "Configured Runtime validation exposed 21 Linux integration failures, 6 macOS portable failures, and Windows typing failures (6 Action Server/Core plus 19 Work Items). Reviewed fixes are being composed; no combined full-gate PASS is claimed.",
+    "windows_typecheck": "Root reports mypy --platform win32 over 301 files leaves 7 pre-existing Cloud/Core/stub errors; all 25 newly exposed Work Items/Windows target errors are gone. This is not a full typecheck PASS.",
+    "evidence": "evidence/combined-e1e30ef-windows-typecheck.txt",
+    "scope": "Local diagnostic results are not an exact pushed-candidate receipt."
+  },
+  "live_pr_audit": {
+    "path": "evidence/convergence-live-prs-20261010T0135Z.json",
+    "sha256": "56e647f20c93698e901bf641e52826f53d3f3c4052852c4e917caf6387c64107"
+  },
+  "historical_archives_unchanged": {
+    "count": 16,
+    "files": [
+      {
+        "path": "evidence/canvas-execution-graph-amendment-20261009-v2.zip",
+        "size_bytes": 6855,
+        "sha256": "1c5c7e4923c2143a1e57f85320f335210bb50a827b38a90e61442eb9ff3e3dcf"
+      },
+      {
+        "path": "evidence/canvas-execution-graph-amendment-20261009-v3.zip",
+        "size_bytes": 7286,
+        "sha256": "7d6552000d69c8876278097e00d87a8cd7f29e33987ce8e16049a9dd948aa281"
+      },
+      {
+        "path": "evidence/canvas-execution-graph-amendment-20261009-v4.zip",
+        "size_bytes": 7262,
+        "sha256": "b0363a6fcb2d42cba9fa50e3821b15e18213b196ab938ba51afa9eaaa3c803c3"
+      },
+      {
+        "path": "evidence/canvas-execution-graph-amendment-20261009.zip",
+        "size_bytes": 6683,
+        "sha256": "7c7ae532483d186c65190b5d3177ed08ed9d9f34d3905338d02a44e488226cd7"
+      },
+      {
+        "path": "evidence/community-20261008.zip",
+        "size_bytes": 456808,
+        "sha256": "3c5516a93dd65804fc3f9d88d1f5d4c0511291f7626159f63746f4a8fd745705"
+      },
+      {
+        "path": "evidence/community-20261009-acceleration.zip",
+        "size_bytes": 112671,
+        "sha256": "641c7b2c70d71580f771e2d85082a00b871fa87c8f63b29655aec9972ab82d48"
+      },
+      {
+        "path": "evidence/community-20261009-checkpoint.zip",
+        "size_bytes": 87365,
+        "sha256": "8bdc8b152121809055e65a0cd616ea2d6055d651a6b8eae3f65c1c89bab2899c"
+      },
+      {
+        "path": "evidence/community-20261009-cloud-admission.zip",
+        "size_bytes": 69121,
+        "sha256": "b283b7d77b6166028acca21faeac057f25c5d8a43d0fbbe1e1e4c1b88782b2c0"
+      },
+      {
+        "path": "evidence/community-20261009-convergence.zip",
+        "size_bytes": 165902,
+        "sha256": "0040cdd1a8e0cce22185179905349f01a0839b575a087f6d85128f37e061b237"
+      },
+      {
+        "path": "evidence/community-20261009-fanout.zip",
+        "size_bytes": 117686,
+        "sha256": "8326e8c78d042db34be7a8fd5a3a848b9849d743bd08bafdcf323b1701332d0e"
+      },
+      {
+        "path": "evidence/community-20261009-final-checkpoint.zip",
+        "size_bytes": 129162,
+        "sha256": "085608370a2f7a14730c49a3efadda57bd4645459059f0f0e0fb78a8d53622f4"
+      },
+      {
+        "path": "evidence/community-20261009-resume.zip",
+        "size_bytes": 123440,
+        "sha256": "ab1a1415b29d9bc0af16befd07ab792920e4dafc3beda37ddb7f1d4a016b7541"
+      },
+      {
+        "path": "evidence/community-20261009-update.zip",
+        "size_bytes": 36121,
+        "sha256": "209cd547060efe61facc1d8ac39909b5945d831cd29f5f26a127fba4d19f1df4"
+      },
+      {
+        "path": "evidence/community-20261009-update2.zip",
+        "size_bytes": 35524,
+        "sha256": "2ab7c866896f87e347a4e8891bb622b393e9816f401e86a813f263f6e7cc8d31"
+      },
+      {
+        "path": "evidence/community-20261009-update3.zip",
+        "size_bytes": 71453,
+        "sha256": "911ef5b930bb1dac07f15f8648f55a1852814c090638a1b56238b473b03bc842"
+      },
+      {
+        "path": "evidence/http-helper-1.0.3-verified-dist.zip",
+        "size_bytes": 30034,
+        "sha256": "13fc05a548ef079764a7f91e432cbdfe3f349038a20d48a846868e3e4b73b2eb"
+      }
+    ]
+  },
+  "upstream_disposition": "none; no confirmed upstream defect was found or reported.",
+  "documentation_improvement": "No new guide text: docs/skills/repository-operations.md already states that exact PR checkpoint evidence proves only its tested slice, not whole issue acceptance or release readiness.",
+  "target_refs_observed_at_utc": "2026-10-10T01:36:00Z",
+  "target_refs_receipt": {
+    "path": "evidence/convergence-refs-20261010T0136Z.txt",
+    "sha256": "839a6e50c1680fa4348f5783d40fc5352bd2e1e172675a5448b6cacfc66a0033"
+  }
+}

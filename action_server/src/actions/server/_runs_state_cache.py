@@ -8,12 +8,13 @@ import logging
 import threading
 import typing
 from contextlib import contextmanager
-from dataclasses import asdict, dataclass
+from copy import copy
+from dataclasses import dataclass
 from typing import Any, Dict, Literal, Optional
 
 if typing.TYPE_CHECKING:
     from ._database import Database
-    from ._models import Run
+    from ._models import Run, RunSummaryRecord
 
 
 log = logging.getLogger(__name__)
@@ -72,7 +73,9 @@ class RunsState:
         self._db = db
         self._run_id_to_runtime_info: dict[str, RunRuntimeInfo] = {}
 
-    def get_current_run_state(self, offset: int = 0, limit: int = 200) -> list["Run"]:
+    def get_current_run_state(
+        self, offset: int = 0, limit: int = 200, run_type: Optional[str] = None
+    ) -> list["Run"]:
         from ._database import Database
         from ._models import Run
 
@@ -82,9 +85,39 @@ class RunsState:
         db: Database = self._db
 
         with db.connect():
-            return self._db.all(
-                Run, offset=offset, limit=limit, order_by="numbered_id DESC"
+            query = "SELECT * FROM run WHERE NOT EXISTS (SELECT 1 FROM run_pin WHERE run_pin.run_id=run.id)"
+            values: list[Any] = []
+            if run_type:
+                query += " AND run_type = ?"
+                values.append(run_type)
+            query += " ORDER BY numbered_id DESC LIMIT ? OFFSET ?"
+            values.extend((limit, offset))
+            return db.select(Run, query, values)
+
+    def get_current_run_summaries(
+        self, offset: int = 0, limit: int = 200, run_type: Optional[str] = None
+    ) -> list["RunSummaryRecord"]:
+        from ._database import Database
+        from ._models import RunSummaryRecord
+
+        assert (
+            self.semaphore._value == 0
+        ), "Clients getting the current run state must acquire the semaphore."
+        db: Database = self._db
+
+        with db.connect():
+            query = (
+                "SELECT id, status, action_id, start_time, run_time, numbered_id, "
+                "run_type, robot_package_path, robot_task_name FROM run "
+                "WHERE NOT EXISTS (SELECT 1 FROM run_pin WHERE run_pin.run_id=run.id)"
             )
+            values: list[Any] = []
+            if run_type:
+                query += " AND run_type = ?"
+                values.append(run_type)
+            query += " ORDER BY numbered_id DESC LIMIT ? OFFSET ?"
+            values.extend((limit, offset))
+            return db.select(RunSummaryRecord, query, values)
 
     def get_run_from_id(self, run_id: str) -> "Run":
         """
@@ -100,7 +133,11 @@ class RunsState:
         db: Database = self._db
 
         with db.connect():
-            return db.first(Run, "SELECT * FROM run WHERE id = ?", [run_id])
+            return db.first(
+                Run,
+                "SELECT * FROM run WHERE id = ? AND NOT EXISTS (SELECT 1 FROM run_pin WHERE run_pin.run_id=run.id)",
+                [run_id],
+            )
 
     def get_run_from_request_id(self, request_id: str) -> "Run":
         """
@@ -116,7 +153,18 @@ class RunsState:
         db: Database = self._db
 
         with db.connect():
-            return db.first(Run, "SELECT * FROM run WHERE request_id = ?", [request_id])
+            return db.first(
+                Run,
+                "SELECT * FROM run WHERE request_id = ? AND NOT EXISTS (SELECT 1 FROM run_pin WHERE run_pin.run_id=run.id)",
+                [request_id],
+            )
+
+    def is_scoped_run(self, run_id: str) -> bool:
+        """Known scoped Runs never enter unauthenticated legacy read/cache paths."""
+        from .run_outputs.models import RunPin
+
+        with self._db.connect():
+            return bool(self._db.all(RunPin, where="run_id=?", values=[run_id]))
 
     def register(self, listener):
         assert (
@@ -131,10 +179,10 @@ class RunsState:
         self._run_listeners.pop(listener, None)
 
     def on_run_inserted(self, run: "Run"):
-        # Semaphore is acquired internally in this case.
-        from ._models import Run
-
-        run_copy = Run(**asdict(run))
+        if self.is_scoped_run(run.id):
+            return
+        # Keep a stable shallow snapshot without copying potentially large payloads.
+        run_copy = copy(run)
         with self.semaphore:
             for listener in self._run_listeners.keys():
                 listener(RunChangeEvent("added", run_copy))
@@ -143,6 +191,8 @@ class RunsState:
         """
         Creates the runtime info for a run and returns it.
         """
+        if self.is_scoped_run(run_id):
+            raise PermissionError("scoped Run requires common authorized lifecycle")
         runtime_info = RunRuntimeInfo(run_id)
         assert run_id not in self._run_id_to_runtime_info
         self._run_id_to_runtime_info[run_id] = runtime_info
@@ -151,13 +201,15 @@ class RunsState:
     def on_run_changed(self, run: "Run", changes: Dict[str, Any]):
         from actions.server._models import RunStatus
 
-        # Semaphore is acquired internally in this case.
-        from ._models import Run
+        if self.is_scoped_run(run.id):
+            return
 
-        run_copy = Run(**asdict(run))
+        # Keep a stable shallow snapshot without copying potentially large payloads.
+        run_copy = copy(run)
+        changes_copy = changes.copy()
         with self.semaphore:
             for listener in self._run_listeners.keys():
-                listener(RunChangeEvent("changed", run_copy, changes))
+                listener(RunChangeEvent("changed", run_copy, changes_copy))
 
             if run_copy.status not in (RunStatus.RUNNING, RunStatus.NOT_RUN):
                 # Finished run, remove from runtime info.
@@ -174,6 +226,8 @@ class RunsState:
             True if the run was canceled, False otherwise (if the run was not running).
         """
 
+        if self.is_scoped_run(run_id):
+            return False
         with self.semaphore:
             runtime_info = self._run_id_to_runtime_info.get(run_id)
             if runtime_info is not None:

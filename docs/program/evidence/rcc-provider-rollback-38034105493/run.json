@@ -1,0 +1,47 @@
+{
+  "artifact": {
+    "id": 11662274079,
+    "name": "rcc-provider-rollback-38034105493-1",
+    "sha256": "b53191036f121eff2c31b8671e2576859fae291dc5251d1dff946fde5a8be969",
+    "size_bytes": 1850,
+    "members": {
+      "acceptance-summary.json": {
+        "size_bytes": 2483,
+        "sha256": "20df31ab4c85fae29a3f3fa466bca3e9bd5920d44e3d97316f6982f35e72872e"
+      },
+      "acceptance-summary.log": {
+        "size_bytes": 787,
+        "sha256": "514f51e7e40396e2767c427bf1ad52252327b91eeef0e12cc0b59cb2cbaec849"
+      }
+    }
+  },
+  "candidate": {
+    "commit": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+    "tree": "6cb691b44666347f3e0de68c9830bd6824a4a0a0"
+  },
+  "workflow_control": {
+    "commit": "7b61728ff25578b95b8ac182d6e05951bdb9798f",
+    "tree": "290bc63400cfa2ac61a8e561ac33fe21ba89354e"
+  },
+  "run": {
+    "id": 38034105493,
+    "url": "https://github.com/joshyorko/actions/actions/runs/38034105493",
+    "job_id": 114160864486,
+    "job_name": "build",
+    "conclusion": "failure",
+    "runner_image": "ubuntu-22.04",
+    "runner_glibc": "2.35",
+    "test_node": "tests/action_server_tests/test_current_candidate_import_rollback.py::test_current_candidate_failed_reload_keeps_last_good_action_usable",
+    "pytest_exit_code": 1,
+    "test_conclusion": "failure",
+    "admission": "failure",
+    "failure_phase": "initial Action Server package acquire, before rollback assertions",
+    "failure": "RCC v18.19.3 rejected the test artifact: required libc minimum 2.36; runner provides 2.35",
+    "pinned_rcc": {
+      "version": "v18.19.3",
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+    },
+    "lifecycle_receipt": "not produced; test failed before the rollback scenario completed"
+  },
+  "scope": "This is a runner/artifact compatibility failure, not evidence that RCC provider rollback passed or failed. Preserve the result; use a runner meeting the artifact's declared glibc floor for a new attempt."
+}

@@ -1,0 +1,463 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-10-10T03:37:54Z",
+  "repository": "joshyorko/actions",
+  "method": "Read-only GitHub connector get_pr_info, list_pull_request_reviews, list_pull_request_review_threads, fetch_commit_workflow_runs, fetch_workflow_run_jobs, and compare_commits. PR runs are attached to the exact head SHA. No reruns or remote mutations. The workflow-run connector returns PR-triggered runs from the first page only; \u201call returned success\u201d is not treated as proof of every required check unless separately supported by the PR body/run details.",
+  "refs": {
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "integration": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+    "pr273_current_head": "6ece09c439d12e02bcbde9dcd2164956b97829e2",
+    "pr273_current_tree_reported_by_root": "a560aceae1fe26726989c5c17803bde477a26060"
+  },
+  "historical_checkpoint_ancestry": {
+    "comparison_source": "GitHub compare_commits against current integration and community refs",
+    "integration_contains_exact_heads": {
+      "215": "d07f79b355f976f97948720474fd050d0a32ea16",
+      "216": "d26fa423080cec22522402f2193b17a5f32b336a",
+      "217": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2",
+      "218": "95ddbe88106be594ea9954bdb36909702c5e2869"
+    },
+    "compare_to_integration": {
+      "215": {
+        "status": "ahead",
+        "ahead_by": 339,
+        "behind_by": 0,
+        "merge_base": "d07f79b355f976f97948720474fd050d0a32ea16"
+      },
+      "216": {
+        "status": "ahead",
+        "ahead_by": 337,
+        "behind_by": 0,
+        "merge_base": "d26fa423080cec22522402f2193b17a5f32b336a"
+      },
+      "217": {
+        "status": "ahead",
+        "ahead_by": 334,
+        "behind_by": 0,
+        "merge_base": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2"
+      },
+      "218": {
+        "status": "ahead",
+        "ahead_by": 340,
+        "behind_by": 0,
+        "merge_base": "95ddbe88106be594ea9954bdb36909702c5e2869"
+      }
+    },
+    "compare_to_community": {
+      "215": {
+        "status": "diverged",
+        "community_ahead_by": 57,
+        "head_behind_by": 2
+      },
+      "216": {
+        "status": "diverged",
+        "community_ahead_by": 57,
+        "head_behind_by": 4
+      },
+      "217": {
+        "status": "diverged",
+        "community_ahead_by": 57,
+        "head_behind_by": 7
+      },
+      "218": {
+        "status": "diverged",
+        "community_ahead_by": 57,
+        "head_behind_by": 1
+      }
+    },
+    "candidate_inclusion": {
+      "272_head_969219e7": {
+        "against_pr273_6ece": {
+          "status": "ahead",
+          "ahead_by": 71,
+          "behind_by": 0,
+          "merge_base": "969219e7aa398f61b11466a2dc16ac3143568ff5"
+        }
+      },
+      "278_head_c1c33ce7": {
+        "against_pr273_6ece": {
+          "status": "ahead",
+          "ahead_by": 82,
+          "behind_by": 0,
+          "merge_base": "c1c33ce77895d7b522f2229524d386ed72f8ba3b"
+        }
+      }
+    },
+    "interpretation": "PR215-218 source checkpoints are ancestors of integration but are not merged to community; PR221 is the existing rollup route. PR272 and PR278 exact heads are ancestors of PR273 current head 6ece09, so do not cherry-pick or independently merge their already-contained commits. This is commit ancestry, not whole-issue acceptance."
+  },
+  "pull_requests": [
+    {
+      "number": 215,
+      "state": "open",
+      "draft": true,
+      "mergeable": false,
+      "author": "joshyorko",
+      "head": {
+        "ref": "convergence/actions-full-graph-20261008",
+        "sha": "d07f79b355f976f97948720474fd050d0a32ea16"
+      },
+      "base": {
+        "ref": "community",
+        "pr_base_sha_snapshot": "7c98236069171f57031218f938963238986293bd"
+      },
+      "checks_at_exact_head": {
+        "attached_workflow_runs": 4,
+        "all_returned_success": true,
+        "run_ids": [
+          37785345641,
+          37785345557,
+          37785345566,
+          37785345774
+        ],
+        "body_historical_claim": "16 hosted checks passed"
+      },
+      "reviews": {
+        "submitted_reviews": 0,
+        "inline_review_threads": 0
+      },
+      "owner_and_dependency": "Root is sole integration owner; checkpoint scope/release safeguards are carried in PR221.",
+      "disposition": "blocked; stale community base and conflicts; do not merge separately. Source is in integration, not community.",
+      "smallest_next_action": "Keep PR221 as the single rollup to community; after exact candidate gates pass and PR221 is admitted, reconcile/close this historical checkpoint by ancestry."
+    },
+    {
+      "number": 216,
+      "state": "open",
+      "draft": true,
+      "mergeable": false,
+      "author": "joshyorko",
+      "head": {
+        "ref": "review/runtime-checkpoint-20261008",
+        "sha": "d26fa423080cec22522402f2193b17a5f32b336a"
+      },
+      "base": {
+        "ref": "community",
+        "pr_base_sha_snapshot": "7c98236069171f57031218f938963238986293bd"
+      },
+      "checks_at_exact_head": {
+        "attached_workflow_runs": 8,
+        "all_returned_success": true,
+        "run_ids": [
+          37827009812,
+          37827009411,
+          37827009511,
+          37827009432,
+          37827009435,
+          37827009686,
+          37827009525,
+          37827009520
+        ],
+        "body_historical_claim": "23 hosted checks passed"
+      },
+      "reviews": {
+        "submitted_reviews": 0,
+        "inline_review_threads": 0
+      },
+      "owner_and_dependency": "Root is sole integration owner; the checkpoint is represented through PR221.",
+      "disposition": "blocked; stale community base and conflicts; do not merge separately. Source is in integration, not community.",
+      "smallest_next_action": "Use PR221 as the rollup; no duplicate cherry-pick."
+    },
+    {
+      "number": 217,
+      "state": "open",
+      "draft": true,
+      "mergeable": false,
+      "author": "joshyorko",
+      "head": {
+        "ref": "review/core-checkpoint-20261008",
+        "sha": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2"
+      },
+      "base": {
+        "ref": "community",
+        "pr_base_sha_snapshot": "7c98236069171f57031218f938963238986293bd"
+      },
+      "checks_at_exact_head": {
+        "attached_workflow_runs": 4,
+        "all_returned_success": true,
+        "run_ids": [
+          37831562324,
+          37831562334,
+          37831562347,
+          37831562429
+        ],
+        "body_historical_claim": "15 hosted checks passed"
+      },
+      "reviews": {
+        "submitted_reviews": 0,
+        "inline_review_threads": 0
+      },
+      "owner_and_dependency": "Root is sole integration owner; source/API checkpoint is in PR221. Published Core/Helper dependencies are verified, but Runtime/native publication remains held.",
+      "disposition": "blocked; stale community base and conflicts; do not merge separately. Source is in integration, not community.",
+      "smallest_next_action": "Use PR221 as the rollup; do not duplicate-cherry-pick."
+    },
+    {
+      "number": 218,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "author": "joshyorko",
+      "head": {
+        "ref": "review/workitems-checkpoint-20261008",
+        "sha": "95ddbe88106be594ea9954bdb36909702c5e2869"
+      },
+      "base": {
+        "ref": "community",
+        "pr_base_sha_snapshot": "7c98236069171f57031218f938963238986293bd"
+      },
+      "merge_commit_sha_reported_but_not_merged": "cb07d400f3d019003a7180321aee5ab56aa5a9da",
+      "checks_at_exact_head": {
+        "attached_workflow_runs": 7,
+        "all_returned_success": true,
+        "run_ids": [
+          37785524726,
+          37785524878,
+          37785525053,
+          37785524612,
+          37785524905,
+          37785524761,
+          37785524551
+        ],
+        "body_historical_claim": "16 passed, 1 skipped"
+      },
+      "reviews": {
+        "submitted_reviews": 0,
+        "inline_review_threads": 0
+      },
+      "owner_and_dependency": "Root is sole integration owner; native Work Items browser proof on PR221 is bounded and does not complete full #208.",
+      "disposition": "blocked on the shared PR221/current native admission path; source is already in integration and is not community-merged. Draft/open metadata does not itself block admission, and unfinished whole-issue #208 contracts do not by themselves block this bounded component slice.",
+      "smallest_next_action": "Carry its already-contained changes through PR221 after the exact current candidate and native gates pass; preserve the separate remaining #208 native/UI/accessibility/recovery contracts without merging this stale checkpoint independently."
+    },
+    {
+      "number": 221,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "author": "joshyorko",
+      "head": {
+        "ref": "integration/community-release-20261008",
+        "sha": "6d438feb6c92f8bb01428f665ac423fb101b4017"
+      },
+      "base": {
+        "ref": "community",
+        "pr_base_sha_snapshot": "36b8192dbb8143e016af3351f7d25b22a35c9944"
+      },
+      "checks_at_exact_head": {
+        "attached_workflow_runs": 12,
+        "all_returned_success": true,
+        "run_ids": [
+          38019479122,
+          38019479204,
+          38019479186,
+          38019479133,
+          38019479185,
+          38019479131,
+          38019479194,
+          38019479193,
+          38019479192,
+          38019479138,
+          38019479159,
+          38019479125
+        ],
+        "publish_job": "run 38019479138 publish job succeeded with provenance, credential, and publish steps skipped"
+      },
+      "reviews": {
+        "submitted_reviews": 0,
+        "inline_review_threads": 0
+      },
+      "owner_and_dependency": "Root is the sole integration/admission owner; depends on current PR273 exact-head gates and the separate RCC/native/publication acceptance conditions.",
+      "disposition": "blocked; prior exact integration head checks are green, but current candidate PR273 has open/failing exact-head gates. No publication occurred.",
+      "smallest_next_action": "Finish/resolve exact PR273 candidate gates, then root rechecks the rollup head and admits to community under the release gate."
+    },
+    {
+      "number": 272,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "author": "joshyorko",
+      "head": {
+        "ref": "devsy/rcc-narrow-acceptance-20261010",
+        "sha": "969219e7aa398f61b11466a2dc16ac3143568ff5"
+      },
+      "base": {
+        "ref": "integration/community-release-20261008",
+        "pr_base_sha_snapshot": "ce6b3cef5316302ed065619a52eddbc8e5d44e1b"
+      },
+      "pr_body_stale_head": "77373111c9fa43dbee005a9bf7f864e3aa883446",
+      "checks_at_exact_head": {
+        "attached_workflow_runs": 5,
+        "all_returned_success": true,
+        "run_ids": [
+          38019563155,
+          38019563214,
+          38019563087,
+          38019563159,
+          38019563074
+        ],
+        "runtime_publish_steps": "skipped"
+      },
+      "reviews": {
+        "submitted_reviews": 0,
+        "inline_review_threads": 0,
+        "operational_review_reported_by_root": "Earlier exact production-module review accepted natural shutdown semantics; it does not satisfy current full-suite/source-merge gates."
+      },
+      "owner_and_dependency": "Devsy owns RCC source lane; root owns integration. Exact head is an ancestor of PR273 6ece09, so changes are already in that candidate.",
+      "disposition": "blocked; stale candidate description/base and open #134 lifecycle/cleanup constraints. Do not separately merge or duplicate-pick.",
+      "smallest_next_action": "Amend its provenance/body if retained, and judge the contained source only through current PR273 exact-head runtime/RCC acceptance; preserve HTTP 200 then natural -11 as FAIL until resolved.",
+      "check_limit": "The attached PR-run list does not include an Action Server Tests workflow; its green release/toolkit/native/coverage runs are not full package-test proof."
+    },
+    {
+      "number": 273,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "author": "joshyorko",
+      "head": {
+        "ref": "fix/runtime-tests-integration-triggers-20261010",
+        "sha": "6ece09c439d12e02bcbde9dcd2164956b97829e2",
+        "tree_reported_by_root": "a560aceae1fe26726989c5c17803bde477a26060"
+      },
+      "base": {
+        "ref": "integration/community-release-20261008",
+        "pr_base_sha_snapshot": "6d438feb6c92f8bb01428f665ac423fb101b4017"
+      },
+      "checks_at_exact_head": {
+        "38021120828": {
+          "name": "AI audit evidence",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        "38021120834": {
+          "name": "Action Server Tests",
+          "status": "in_progress",
+          "jobs": {
+            "ubuntu-py3.12-devmode": "in_progress",
+            "macos-py3.12-devmode": "in_progress",
+            "windows-py3.12-devmode": "in_progress"
+          }
+        },
+        "38021120872": {
+          "name": "Action Server Build (Unauthenticated)",
+          "status": "in_progress",
+          "jobs": {
+            "ubuntu-22.04": "in_progress",
+            "windows-2022": "in_progress",
+            "macos-15": "in_progress"
+          }
+        },
+        "38021120824": {
+          "name": "Actions Runtime PYPI Release",
+          "status": "in_progress after root-authorized rerun of failed jobs",
+          "previous_attempt_failure": {
+            "job_id": 114122115567,
+            "step": "Install project (not dev)",
+            "root_diagnosis": "Poetry locked wcwidth 0.8.2 download encountered BrokenPipeError 32, followed by ProtocolError and ChunkedEncodingError; no implementation assertion failure was reported."
+          },
+          "current_attempt_jobs": {
+            "ubuntu-22.04": {
+              "job_id": 114122362582,
+              "status": "in_progress",
+              "active_step": "Build frontend (PR)"
+            },
+            "macos-15": {
+              "job_id": 114122362527,
+              "status": "in_progress",
+              "active_step": "Install project (not dev)"
+            },
+            "windows-2022": {
+              "job_id": 114122362406,
+              "status": "in_progress",
+              "active_step": "Install project (not dev)"
+            },
+            "sdist": {
+              "job_id": 114122363354,
+              "status": "success"
+            }
+          },
+          "publish": "not reached; no publication occurred"
+        },
+        "38021120806": {
+          "name": "RCC developer toolkit",
+          "status": "in_progress",
+          "jobs": "six primary/N-1 jobs in progress"
+        },
+        "38021120812": {
+          "name": "Measured Python coverage gate",
+          "status": "in_progress"
+        },
+        "38021120796": {
+          "name": "Work Items Release",
+          "status": "in_progress"
+        }
+      },
+      "prior_head_not_current": {
+        "sha": "3a37d7f793b8f5dbae31f77e9bc39afa3a9d6a8a",
+        "runtime_action_server_tests": "Linux/macOS integration failed; Windows integration was still running at 03:35Z",
+        "native_unauthenticated_workflow": "all Linux/Windows/macOS jobs and packaged UI steps passed at that old exact head; not proof for 6ece09"
+      },
+      "reviews": {
+        "submitted_reviews": 0,
+        "inline_review_threads": 0,
+        "operational_review_reported_by_root": "Sol accepted 6ece09 Windows RCC packaging/baseline-guard fix; 9 targeted tests passed and root reports 41 broader tests plus 4 integration deselections. This is not a GitHub submitted review."
+      },
+      "owner_and_dependency": "Root owns candidate and sole integration. It contains exact PR272 and PR278 head ancestry. Root says Windows RCC packaging/source review is complete; current hosted gates remain authoritative.",
+      "disposition": "blocked; exact current head has Runtime/native/toolkit/coverage checks pending after root-authorized failed-job rerun. Earlier wheel failure was a dependency-download transport error, not a confirmed source defect.",
+      "smallest_next_action": "Wait for the already-authorized exact-head rerun and remaining 6ece09 checks; do not launch another retry. Reassess only any persistent source-backed failures.",
+      "pr_body_observation": {
+        "reported_head_at_observation": "3a37d7f793b8f5dbae31f77e9bc39afa3a9d6a8a",
+        "metadata_updated_at_at_observation": "2026-10-10T03:35:44Z",
+        "subsequent_root_update": "Root reports PR body corrected to 6ece09c439d12e02bcbde9dcd2164956b97829e2 at 2026-10-10T03:37:39Z; earlier body observation is historical only."
+      }
+    },
+    {
+      "number": 278,
+      "state": "open",
+      "draft": true,
+      "mergeable": true,
+      "author": "joshyorko",
+      "head": {
+        "ref": "fix/rcc-harness-portability-20261010",
+        "sha": "c1c33ce77895d7b522f2229524d386ed72f8ba3b"
+      },
+      "base": {
+        "ref": "integration/community-release-20261008",
+        "pr_base_sha_snapshot": "46a06485f776265e64e84629c468f26b4389d2bd"
+      },
+      "checks_at_exact_head": {
+        "attached_workflow_runs": 5,
+        "all_returned_success": true,
+        "run_ids": [
+          38014327083,
+          38014327095,
+          38014327114,
+          38014327060,
+          38014327084
+        ]
+      },
+      "reviews": {
+        "submitted_reviews": 0,
+        "inline_review_threads": 0
+      },
+      "owner_and_dependency": "Root owns integration; RCC harness portability checkpoint is already included in PR273 6ece09 ancestry.",
+      "disposition": "blocked as a separate stale-base checkpoint; do not merge or cherry-pick independently.",
+      "smallest_next_action": "Use PR273 exact-head full Runtime/native checks to validate the contained changes; after PR273 admission, resolve this historical PR by ancestry.",
+      "check_limit": "The attached PR-run list does not include an Action Server Tests workflow; green harness-specific workflow checks do not prove the combined current candidate suite."
+    }
+  ],
+  "counts": {
+    "requested_open_prs": 8,
+    "open": 8,
+    "draft": 8,
+    "mergeable_true": 5,
+    "mergeable_false": 3,
+    "formal_review_submissions": 0,
+    "inline_review_threads": 0,
+    "merge_ready": 0
+  },
+  "documentation_improvement": {
+    "canonical_file": "docs/program/engineering-handoff.md and its current evidence JSON",
+    "proposed_delta": "Refresh the current-convergence section to name PR273 remote head 6ece09c439d12e02bcbde9dcd2164956b97829e2, record that PR272/PR278 heads are ancestors of it, correct the stale PR description heads (969219... vs 773731... and 6ece09... vs 3a37d7...), and preserve exact new run 380211... failure/pending states. Keep the historical checkpoint ancestry distinction already documented.",
+    "evidence": "GitHub API metadata/runs and compare_commits observed 2026-10-10T03:35-03:37Z; refs and exact run/job IDs are in this receipt.",
+    "uncertainty": "Rerun of failed Runtime wheel jobs is now in progress; result unknown. Previous failure was diagnosed as Poetry downloading locked wcwidth 0.8.2 failing with BrokenPipeError 32/ProtocolError/ChunkedEncodingError, not an implementation assertion."
+  },
+  "upstream_disposition": "none; this is a local Actions convergence/status audit.",
+  "ref_note": "Each pull-request base SHA below is the base snapshot reported by GitHub PR metadata at audit time, not a claim that it is the current live target ref. Current live community/integration tips are recorded separately at top level."
+}

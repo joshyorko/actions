@@ -1,13 +1,13 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useId } from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { Loading } from '@/core/components/ui/Loading';
-import { ErrorBanner } from '@/core/components/ui/ErrorBanner';
 import { Button } from '@/core/components/ui/Button';
 import { Badge } from '@/core/components/ui/Badge';
 import { Input } from '@/core/components/ui/Input';
 import { Select, SelectItem } from '@/core/components/ui/Select';
 import {
   Dialog,
+  DialogTrigger,
   DialogContent,
   DialogHeader,
   DialogTitle,
@@ -148,6 +148,36 @@ function DownloadIcon({ className }: IconProps): JSX.Element {
   );
 }
 
+function WorkItemsErrorState({
+  title,
+  message,
+  onRetry,
+}: {
+  title: string;
+  message: string;
+  onRetry: () => void;
+}): JSX.Element {
+  return (
+    <div className="p-6">
+      <div
+        role="alert"
+        aria-labelledby="work-items-error-title"
+        className="flex flex-col gap-4 rounded-md border border-destructive/20 bg-destructive/5 p-4 sm:flex-row sm:items-start sm:justify-between"
+      >
+        <div className="min-w-0">
+          <h2 id="work-items-error-title" className="text-base font-semibold text-destructive">
+            {title}
+          </h2>
+          <p className="mt-1 text-sm text-muted-foreground">{message}</p>
+        </div>
+        <Button className="shrink-0" variant="outline" onClick={onRetry}>
+          Retry
+        </Button>
+      </div>
+    </div>
+  );
+}
+
 function CopyIcon({ className }: IconProps): JSX.Element {
   return (
     <SvgIcon className={className}>
@@ -175,6 +205,7 @@ const StateIcon = ({ state }: { state: WorkItemState }) => {
     case 'IN_PROGRESS':
       return <PlayIcon className="h-3 w-3" />;
     case 'DONE':
+    case 'COMPLETED':
       return <CheckIcon className="h-3 w-3" />;
     case 'FAILED':
       return <XIcon className="h-3 w-3" />;
@@ -189,6 +220,7 @@ const getStateBadgeVariant = (state: WorkItemState) => {
     case 'IN_PROGRESS':
       return 'info';
     case 'DONE':
+    case 'COMPLETED':
       return 'success';
     case 'FAILED':
       return 'error';
@@ -208,6 +240,7 @@ function StatCard({ label, value, percentage, state }: StatCardProps): JSX.Eleme
     PENDING: 'border-l-warning',
     IN_PROGRESS: 'border-l-info',
     DONE: 'border-l-success',
+    COMPLETED: 'border-l-success',
     FAILED: 'border-l-destructive',
   }[state];
 
@@ -233,12 +266,20 @@ function StatCard({ label, value, percentage, state }: StatCardProps): JSX.Eleme
 
 // Create Item Dialog Component
 interface CreateItemDialogProps {
+  children: React.ReactNode;
   open: boolean;
   onOpenChange: (open: boolean) => void;
   defaultQueueName?: string;
 }
 
-function CreateItemDialog({ open, onOpenChange, defaultQueueName }: CreateItemDialogProps): JSX.Element {
+function CreateItemDialog({
+  children,
+  open,
+  onOpenChange,
+  defaultQueueName,
+}: CreateItemDialogProps): JSX.Element {
+  const formId = useId();
+  const errorId = `${formId}-error`;
   const [queueName, setQueueName] = useState(defaultQueueName || '');
   const [payloadText, setPayloadText] = useState('{\n  \n}');
   const [validationError, setValidationError] = useState<string | null>(null);
@@ -281,6 +322,7 @@ function CreateItemDialog({ open, onOpenChange, defaultQueueName }: CreateItemDi
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-[600px] w-[90vw]">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
@@ -296,8 +338,10 @@ function CreateItemDialog({ open, onOpenChange, defaultQueueName }: CreateItemDi
 
         <div className="space-y-4 py-4">
           <div className="space-y-2">
-            <label className="text-sm font-medium text-card-foreground">Queue Name</label>
+            <label htmlFor={`${formId}-queue`} className="text-sm font-medium text-card-foreground">Queue Name</label>
             <Input
+              id={`${formId}-queue`}
+              aria-describedby={validationError ? errorId : undefined}
               value={queueName}
               onChange={(e) => setQueueName(e.target.value)}
               placeholder="e.g., email-processing"
@@ -306,8 +350,11 @@ function CreateItemDialog({ open, onOpenChange, defaultQueueName }: CreateItemDi
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium text-card-foreground">Payload (JSON)</label>
+            <label htmlFor={`${formId}-payload`} className="text-sm font-medium text-card-foreground">Payload (JSON)</label>
             <textarea
+              id={`${formId}-payload`}
+              aria-invalid={!!validationError}
+              aria-describedby={validationError ? errorId : undefined}
               value={payloadText}
               onChange={(e) => {
                 setPayloadText(e.target.value);
@@ -324,7 +371,7 @@ function CreateItemDialog({ open, onOpenChange, defaultQueueName }: CreateItemDi
           </div>
 
           {validationError && (
-            <div className="rounded-lg border border-destructive/50 bg-destructive/10 px-4 py-3">
+            <div id={errorId} role="alert" className="rounded-lg border border-destructive/50 bg-destructive/10 px-4 py-3">
               <p className="text-sm text-destructive">{validationError}</p>
             </div>
           )}
@@ -555,47 +602,46 @@ export function WorkItemsPage(): JSX.Element {
   }
 
   if (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    const isNotInstalled = errorMessage.includes('not installed');
+    const errorDetails = error as Error & { status?: number; code?: string };
+    const status = errorDetails.status ?? 0;
+    const code = errorDetails.code;
+    let title = 'Unable to load Work Items';
+    let message = 'The Runtime could not return Work Items data. Check the Runtime connection, then retry.';
 
-    if (isNotInstalled) {
-      return (
-        <div className="h-full space-y-4 p-6 animate-fadeInUp">
-          <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-border bg-muted/30 p-12 text-center min-h-[400px]">
-            <div className="mb-4 rounded-full bg-warning/10 p-4">
-              <QueueIcon className="h-8 w-8 text-warning" />
-            </div>
-            <h2 className="text-lg font-semibold text-foreground">Work Items Not Available</h2>
-            <p className="mt-2 max-w-md text-sm text-muted-foreground">
-              The <code className="px-1.5 py-0.5 rounded bg-muted font-mono text-xs">actions-work-items</code> package
-              is not installed in your action package environment.
-            </p>
-            <p className="mt-4 max-w-md text-sm text-muted-foreground">
-              Add it to your <code className="px-1.5 py-0.5 rounded bg-muted font-mono text-xs">package.yaml</code> dependencies:
-            </p>
-            <pre className="mt-3 p-4 rounded-lg bg-muted/50 border border-border font-mono text-xs text-left">
-{`dependencies:
-  conda-forge:
-    - python=3.11
-  pypi:
-    - actions-work-items`}
-            </pre>
-          </div>
-        </div>
-      );
+    if (status === 403) {
+      title = 'Access denied';
+      message = 'Your request is not authorized to read Work Items from this Runtime. Check your Runtime access or ask an administrator.';
+    } else if (code === 'work_items_runtime_unavailable') {
+      title = 'Work Items support unavailable';
+      message = 'This Runtime is missing its Work Items support. Update or reinstall the Runtime, then restart it.';
+    } else if (code === 'work_items_load_failed') {
+      title = 'Work Items failed to load';
+      message = 'The Runtime found Work Items support but could not load it. Update or reinstall the Runtime, then restart it.';
+    } else if (code === 'work_items_storage_unavailable') {
+      title = 'Work Items storage unavailable';
+      message = 'The Runtime could not access local Runtime storage. Check its storage availability and permissions, then retry.';
+    } else if (status >= 500) {
+      title = 'Work Items server error';
+      message = 'The Runtime returned a server error while loading Work Items. Check Action Server logs, then retry.';
+    } else if (status > 0 && errorDetails.message) {
+      message = errorDetails.message;
     }
 
+    return <WorkItemsErrorState title={title} message={message} onRetry={refetch} />;
+  }
+
+  if (!itemsData || !Array.isArray(itemsData.items)) {
     return (
-      <div className="p-6">
-        <ErrorBanner
-          message={`Unable to load work items: ${errorMessage}`}
-        />
-      </div>
+      <WorkItemsErrorState
+        title="Work Items data unavailable"
+        message="The Runtime did not return Work Items queue data. Retry to load it again."
+        onRetry={refetch}
+      />
     );
   }
 
   // Empty state
-  if (!itemsData?.items || itemsData.items.length === 0) {
+  if (itemsData.items.length === 0) {
     return (
       <div className="h-full space-y-4 p-6 animate-fadeInUp">
         <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-border bg-muted/30 p-12 text-center min-h-[400px]">
@@ -606,17 +652,17 @@ export function WorkItemsPage(): JSX.Element {
           <p className="mt-2 max-w-sm text-sm text-muted-foreground">
             Start automating workflows by creating your first work item
           </p>
-          <Button className="mt-6" onClick={() => setCreateDialogOpen(true)}>
-            <PlusIcon className="h-4 w-4 mr-2" />
-            Create First Item
-          </Button>
+          <CreateItemDialog
+            open={createDialogOpen}
+            onOpenChange={setCreateDialogOpen}
+            defaultQueueName={selectedQueue !== 'all' ? selectedQueue : undefined}
+          >
+            <Button className="mt-6">
+              <PlusIcon className="h-4 w-4 mr-2" />
+              Create First Item
+            </Button>
+          </CreateItemDialog>
         </div>
-
-        <CreateItemDialog
-          open={createDialogOpen}
-          onOpenChange={setCreateDialogOpen}
-          defaultQueueName={selectedQueue !== 'all' ? selectedQueue : undefined}
-        />
       </div>
     );
   }
@@ -645,10 +691,16 @@ export function WorkItemsPage(): JSX.Element {
                 </SelectItem>
               ))}
             </Select>
-            <Button onClick={() => setCreateDialogOpen(true)}>
-              <PlusIcon className="h-4 w-4 mr-2" />
-              Create Item
-            </Button>
+            <CreateItemDialog
+              open={createDialogOpen}
+              onOpenChange={setCreateDialogOpen}
+              defaultQueueName={selectedQueue !== 'all' ? selectedQueue : undefined}
+            >
+              <Button>
+                <PlusIcon className="h-4 w-4 mr-2" />
+                Create Item
+              </Button>
+            </CreateItemDialog>
           </div>
         </div>
 
@@ -788,11 +840,6 @@ export function WorkItemsPage(): JSX.Element {
       </div>
 
       {/* Dialogs */}
-      <CreateItemDialog
-        open={createDialogOpen}
-        onOpenChange={setCreateDialogOpen}
-        defaultQueueName={selectedQueue !== 'all' ? selectedQueue : undefined}
-      />
       <ItemDetailDialog
         open={detailDialogOpen}
         onOpenChange={setDetailDialogOpen}

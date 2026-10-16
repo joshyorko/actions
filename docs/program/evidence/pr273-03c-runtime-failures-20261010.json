@@ -1,0 +1,43 @@
+{
+  "source_head": "03c864ef76eace98d3fbf07b5d4c53133b9ed5fd",
+  "tested_merge": "8c1d6287e14ab29b2d12cbeaf8746ad977b477ac",
+  "base": "46a06485f776265e64e84629c468f26b4389d2bd",
+  "workflow_run": 38014353200,
+  "observed_at": "2026-10-10T02:02Z",
+  "jobs": [
+    {
+      "id": 114101229240,
+      "footer": [
+        "2026-10-10T01:51:26.0730830Z FAILED action_server_tests/test_dakota_rcc_acceptance.py::test_dakota_acceptance_harness_describes_candidate_wheel_proof - AssertionError: Dakota RCC acceptance cleanup is verified on Linux only",
+        "2026-10-10T01:51:26.0735200Z FAILED action_server_tests/test_dakota_rcc_acceptance.py::test_cli_rejects_existing_receipt_before_creating_supervisor_state - AssertionError: Failed: assert 'existing acceptance receipt' in result.stderr",
+        "2026-10-10T01:51:26.0737800Z FAILED action_server_tests/test_dakota_rcc_acceptance.py::test_owned_linux_process_accepts_path_arguments - AttributeError: 'CompletedProcess' object has no attribute 'cleanup_disposition'",
+        "2026-10-10T01:51:26.0739190Z FAILED action_server_tests/test_dakota_rcc_acceptance.py::test_total_timeout_terminates_owned_descendant_processes - PermissionError: [Errno 1] Operation not permitted",
+        "2026-10-10T01:51:26.0740020Z ====== 4 failed, 798 passed, 13 skipped, 15 warnings in 127.75s (0:02:07) ======"
+      ]
+    },
+    {
+      "id": 114101229170,
+      "footer": [
+        "2026-10-10T01:55:02.7554710Z FAILED action_server_tests/test_action_unicode.py::test_action_unicode - Failed: Files differ and --force-regen set, regenerating file at:",
+        "2026-10-10T01:55:02.7555688Z FAILED action_server_tests/test_cloud.py::test_cloud_list_organizations - AssertionError: ACTION_SERVER_TEST_ACCESS_CREDENTIALS environment required for test.",
+        "2026-10-10T01:55:02.7557132Z FAILED action_server_tests/test_dakota_workitems_native_acceptance.py::test_packaged_runtime_executes_work_item_consumer_lifecycle[frozen-DAKOTA_WORKITEMS_FROZEN_EXECUTABLE] - TypeError: argument should be a str or an os.PathLike object where __fspath__ returns a str, not 'NoneType'",
+        "2026-10-10T01:55:02.7558076Z FAILED action_server_tests/test_dakota_workitems_native_acceptance.py::test_packaged_runtime_executes_work_item_consumer_lifecycle[go-wrapper-DAKOTA_WORKITEMS_GO_WRAPPER_EXECUTABLE] - TypeError: argument should be a str or an os.PathLike object where __fspath__ returns a str, not 'NoneType'",
+        "2026-10-10T01:55:02.7558765Z FAILED action_server_tests/test_dakota_workitems_native_ui_acceptance.py::test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery - AssertionError: Failed: assert executable_value and manifest_value",
+        "2026-10-10T01:55:02.7559451Z FAILED action_server_tests/test_devenv.py::test_devenv - AssertionError: Expected returncode: 2. Found: 1.",
+        "2026-10-10T01:55:02.7561278Z FAILED action_server_tests/test_devenv.py::test_run_actions_with_custom_pythonpath - urllib3.exceptions.HTTPError: HTTP 500: Internal Server Error",
+        "2026-10-10T01:55:02.7561689Z FAILED action_server_tests/test_server.py::test_import_no_conda - Failed: Files differ and --force-regen set, regenerating file at:",
+        "2026-10-10T01:55:02.7562545Z FAILED action_server_tests/test_server.py::test_full_run - urllib3.exceptions.HTTPError: HTTP 500: Internal Server Error",
+        "2026-10-10T01:55:02.7562962Z FAILED action_server_tests/test_server.py::test_full_run_with_env_build - urllib3.exceptions.HTTPError: HTTP 500: Internal Server Error",
+        "2026-10-10T01:55:02.7563382Z FAILED action_server_tests/test_server.py::test_server_full_openapi_flag - Failed: Files differ and --force-regen set, regenerating file at:",
+        "2026-10-10T01:55:02.7564293Z FAILED action_server_tests/test_server.py::test_action_package_cwd - actions.server._selftest.ActionServerExitedError: The process already exited with returncode: 1",
+        "2026-10-10T01:55:02.7580293Z FAILED action_server_tests/test_server_parent_pid.py::test_mcp_sse_does_not_starve_server_or_sigterm - AssertionError: Failed: assert len(child_pids) >= 2",
+        "2026-10-10T01:55:02.7581011Z FAILED action_server_tests/test_server_secrets.py::test_secrets_simple - actions.server._selftest.ActionServerExitedError: The process already exited with returncode: 1",
+        "2026-10-10T01:55:03.0222940Z FAILED action_server_tests/test_server_websockets.py::test_server_websockets - urllib3.exceptions.HTTPError: HTTP 500: Internal Server Error",
+        "2026-10-10T01:55:03.0223843Z FAILED action_server_tests/test_server_whitelist.py::test_whitelist_on_start - Failed: Files differ and --force-regen set, regenerating file at:",
+        "2026-10-10T01:55:03.0225469Z FAILED action_server_tests/test_server_whitelist.py::test_whitelist_on_start_run - Failed: Files differ and --force-regen set, regenerating file at:",
+        "2026-10-10T01:55:03.0226890Z ==== 17 failed, 104 passed, 15 skipped, 815 deselected in 334.20s (0:05:34) ===="
+      ]
+    }
+  ],
+  "scope": "Exact historical candidate only. New source fixes require fresh CI."
+}

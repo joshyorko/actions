@@ -1,0 +1,28 @@
+{
+  "source": "GitHub artifact metadata; Cloud byte download blocked by HTTP403",
+  "run_id": 38010164278,
+  "head": "524e503b384a56bf854326c1f7f03833c60e6c53",
+  "artifacts": [
+    {
+      "id": 11652684520,
+      "name": "native-acceptance-macos-15-54825acf84d1995c3f1c5242e8cf3b670dc122ad",
+      "size_in_bytes": 43442,
+      "digest": "sha256:30971aaa5b7ea6662c42cf8b26a512eedea270529f402953feb9bc90525249d3",
+      "expired": false
+    },
+    {
+      "id": 11652669811,
+      "name": "native-acceptance-windows-2022-54825acf84d1995c3f1c5242e8cf3b670dc122ad",
+      "size_in_bytes": 468927,
+      "digest": "sha256:7081df2b3ea70216bf00dd73a72b1ed32e4ae396e162cb3431f6dc833c875d45",
+      "expired": false
+    },
+    {
+      "id": 11652503476,
+      "name": "native-acceptance-ubuntu-22.04-54825acf84d1995c3f1c5242e8cf3b670dc122ad",
+      "size_in_bytes": 304313,
+      "digest": "sha256:4f7b17dc39fe349b3dd6d2005dc8cd515e358d3a99146c33c6d600945e778ec8",
+      "expired": false
+    }
+  ]
+}

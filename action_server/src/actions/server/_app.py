@@ -119,6 +119,7 @@ def get_app() -> _CustomFastAPI:
         version=__version__,
     )
     app.state.cors_origin_policy = origin_policy
+    app.state.trusted_server_origins = (settings.server_url,)
 
     app.add_middleware(
         _OriginPolicyCORSMiddleware,  # type: ignore[arg-type]

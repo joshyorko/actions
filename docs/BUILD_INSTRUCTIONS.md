@@ -50,10 +50,41 @@ Choose the gate for the change; a source build does not replace these gates.
 |---|---|
 | Toolkit contracts | `rcc run -r developer/toolkit.yaml --dev -t ToolkitTest`: gateway Ruff and pytest contracts only |
 | Portable Python | `rcc run -r developer/toolkit.yaml --dev -t Test`: package gates, excluding Work Items service tests and Action Server integration tests |
+| Measured Python coverage | `rcc run -r developer/toolkit.yaml --dev -t Coverage`: the same five portable package suites with a pytest-cov floor and complete `src/**/*.py` inventory check |
 | Static Python checks | Toolkit `Lint` and `Typecheck`; `CheckAll` combines Doctor, lint, typecheck, and portable tests |
 | Frontend full tests | Toolkit `FrontendTest`: `npm ci` followed by `npm run test`; separate from shipping quality gates |
 | Work Items services and packaging | `.devcontainer/bin/verify-work-items`: full pytest, lock/lint, wheel/sdist and clean-wheel checks; requires healthy `TEST_REDIS_URL` and `TEST_MONGODB_URI` |
 | Dev Container | `.devcontainer/bin/smoke` inside the repository Dev Container as non-root: pinned-tool checks, bootstrap, and Work Items release gate |
+
+### Measured Python coverage
+
+The dedicated `Coverage` task measures pytest-cov line coverage for `actions`,
+`actions-http-helper`, `devutils`, `work-items`, and `action_server`, then
+aggregates covered executable statements over all five package `src/` trees.
+The committed `.coverage-thresholds.json` sets the minimum from the first
+complete passing measurement; the current recorded floor is 53.38%. This is a
+line-coverage floor, not branch coverage or a claim about every Python process
+started by a test.
+
+Coverage JSON reports must include every maintained `src/**/*.py` file,
+including namespace-package modules that a test may not import. Missing suites,
+reports, unexpected non-source files, or a result below the floor fail the task;
+only validated per-source file counts contribute to the aggregate. The Work Items
+portable suite excludes `persistent_backend_service`, and the Action Server
+suite excludes `integration_test`; those remain separate service/integration
+verification. The Action Server command keeps its regression snapshots strict
+and uses the active RCC Python for its wheel test through
+`ACTIONS_RUNTIME_TEST_PYTHON`.
+
+The `coverage-gate.yml` workflow runs this gate on Linux for pull requests and
+pushes to `community`, after toolkit contract checks and package bootstrap. It
+uploads per-package coverage JSON and a summary receipt even on failure. When
+running locally, preserve those JSON files to distinguish `BLOCKED` setup from
+test failures. Only an intentional baseline change should use
+`developer/coverage_gate.py --record-baseline`; normal CI never rewrites the
+threshold. Subprocess coverage depends on pytest-cov activation and environment
+inheritance. This gate makes no complete subprocess or installed-wheel coverage
+claim.
 
 ### Frontend shipping gates
 

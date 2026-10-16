@@ -24,11 +24,51 @@ def _read_response_headers(connection: socket.socket) -> bytes:
     return bytes(response)
 
 
-def _is_live_process(pid: int) -> bool:
+def _process_inventory(root_pid: int) -> dict[int, float]:
     import psutil
 
     try:
-        return psutil.Process(pid).status() != psutil.STATUS_ZOMBIE
+        descendants = psutil.Process(root_pid).children(recursive=True)
+    except psutil.NoSuchProcess:
+        return {}
+
+    inventory = {}
+    for process in descendants:
+        try:
+            if process.status() != psutil.STATUS_ZOMBIE:
+                inventory[process.pid] = process.create_time()
+        except psutil.NoSuchProcess:
+            continue
+    return inventory
+
+
+def _action_worker_inventory(process_inventory: dict[int, float]) -> dict[int, float]:
+    import psutil
+
+    workers = {}
+    for pid, created_at in process_inventory.items():
+        try:
+            process = psutil.Process(pid)
+            if (
+                abs(process.create_time() - created_at) < 0.001
+                and process.status() != psutil.STATUS_ZOMBIE
+                and "preload_actions_server_main" in process.cmdline()
+            ):
+                workers[pid] = created_at
+        except psutil.NoSuchProcess:
+            continue
+    return workers
+
+
+def _is_live_process(pid: int, created_at: float) -> bool:
+    import psutil
+
+    try:
+        process = psutil.Process(pid)
+        return (
+            abs(process.create_time() - created_at) < 0.001
+            and process.status() != psutil.STATUS_ZOMBIE
+        )
     except psutil.NoSuchProcess:
         return False
 
@@ -51,13 +91,24 @@ def test_mcp_sse_does_not_starve_server_or_sigterm(
         min_processes=2,
     )
     process = action_server_process.process
-    child_pids: list[int] = []
+    owned_processes: dict[int, float] = {}
+    worker_processes: dict[int, float] = {}
     sse_connection: socket.socket | None = None
     try:
-        import psutil
-
-        child_pids = [child.pid for child in psutil.Process(process.pid).children()]
-        assert len(child_pids) >= 2
+        readiness_deadline = time.monotonic() + 5
+        while time.monotonic() < readiness_deadline:
+            owned_processes = _process_inventory(process.pid)
+            worker_processes = _action_worker_inventory(owned_processes)
+            if len(worker_processes) >= 2:
+                break
+            if process.returncode is not None:
+                break
+            time.sleep(0.05)
+        assert len(worker_processes) >= 2, (
+            "Expected two live preload workers under the Action Server process "
+            f"tree; found {sorted(worker_processes)}. "
+            f"Server stderr:\n{action_server_process.get_stderr()}"
+        )
         sse_connection = socket.create_connection(
             (action_server_process.host, action_server_process.port), timeout=2
         )
@@ -88,30 +139,48 @@ def test_mcp_sse_does_not_starve_server_or_sigterm(
             time.sleep(0.05)
         assert process.returncode is not None, "SIGTERM did not stop Action Server"
         while (
-            any(_is_live_process(pid) for pid in child_pids)
+            any(
+                _is_live_process(pid, created_at)
+                for pid, created_at in owned_processes.items()
+            )
             and time.monotonic() < deadline
         ):
             time.sleep(0.05)
-        assert not any(_is_live_process(pid) for pid in child_pids)
+        surviving_processes = [
+            pid
+            for pid, created_at in owned_processes.items()
+            if _is_live_process(pid, created_at)
+        ]
+        assert not surviving_processes, (
+            "owned Action Server descendants survived SIGTERM: "
+            f"{surviving_processes}"
+        )
     finally:
         if sse_connection is not None:
             sse_connection.close()
         if process.returncode is None:
             kill_process_and_subprocesses(process.pid)
             process.join()
-        for child_pid in child_pids:
-            if _is_live_process(child_pid):
-                kill_process_and_subprocesses(child_pid)
+        for pid, created_at in owned_processes.items():
+            if _is_live_process(pid, created_at):
+                kill_process_and_subprocesses(pid)
         cleanup_deadline = time.monotonic() + 5
         while (
-            any(_is_live_process(pid) for pid in child_pids)
+            any(
+                _is_live_process(pid, created_at)
+                for pid, created_at in owned_processes.items()
+            )
             and time.monotonic() < cleanup_deadline
         ):
             time.sleep(0.05)
-        surviving_child_pids = [pid for pid in child_pids if _is_live_process(pid)]
+        surviving_processes = [
+            pid
+            for pid, created_at in owned_processes.items()
+            if _is_live_process(pid, created_at)
+        ]
         assert (
-            not surviving_child_pids
-        ), f"recorded child processes survived cleanup: {surviving_child_pids}"
+            not surviving_processes
+        ), f"owned Action Server descendants survived cleanup: {surviving_processes}"
 
 
 @pytest.mark.integration_test

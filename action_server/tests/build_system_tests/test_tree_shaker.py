@@ -151,9 +151,7 @@ import { Chart } from '@/enterprise/components/Chart';  // ALLOWED
         (dist_dir / "asset.svg").write_text("@sema4ai/components", encoding="utf-8")
         (dist_dir / "index.js.map").write_text("@sema4ai/components", encoding="utf-8")
 
-        assert (
-            TreeShaker(root_dir=tmp_path).scan_directory(dist_dir) == []
-        )
+        assert TreeShaker(root_dir=tmp_path).scan_directory(dist_dir) == []
 
 
 class TestDetectRemovedProductImports:
@@ -356,7 +354,7 @@ import { KBSearch } from '@/enterprise/pages/KB';  // VIOLATION
         # Arrange
         violations = [
             ImportViolation(
-                file_path=Path("src/core/Dashboard.tsx"),
+                file_path=Path(r"src\core\Dashboard.tsx"),
                 line_number=3,
                 import_statement="import { Button } from '@sema4ai/components';",
                 prohibited_module="@sema4ai/components",
@@ -370,6 +368,7 @@ import { KBSearch } from '@/enterprise/pages/KB';  // VIOLATION
 
         # Assert
         assert "src/core/Dashboard.tsx:3" in report
+        assert r"src\core\Dashboard.tsx:3" not in report
         assert "@sema4ai/components" in report
         assert "error" in report.lower()
 
