@@ -4209,13 +4209,50 @@ against producer receipts. These are separate integrity checks. The native
 acceptance ZIP from the hosted producer was independently observed to match its
 GitHub digest; do not downgrade a mismatch to a warning or extract first.
 
-A local platform-tagged Runtime wheel used for functional acceptance is a separate
-artifact from the portable release matrix. Record its exact filename/hash,
-compare every installed Runtime member (including generated non-Python assets)
-with the wheel, and compare tracked Python members with the named Git source.
-Do not count that functional wheel as one of the six supported release wheels;
-qualify the canonical seven-distribution inventory independently. Preserve any
-source-versus-tested-merge identity distinction even when complete trees match.
-An evidence branch may contain reports and additional operating guidance beyond
-the qualified source. Name the actual builder source SHA/tree explicitly in its
-receipts; do not substitute the evidence branch's HEAD as the producer identity.
+Publication validates the preparation's original successful **attempt**, rather
+than its mutable latest-run status. GitHub's rerun operation updates that status
+even when the controller immediately refuses to rebuild on attempt2. The named
+`-1` artifact and reviewed manifest remain fixed; an accidental refused rerun
+must not invalidate recovery of a PyPI prefix or native draft already owned by
+the original bundle. The run-attempt API still must prove canonical workflow,
+community controller SHA, exact attempt number and successful conclusion.
+
+Only `joshyorko` may enter the publication writer: both the original actor and
+triggering actor (including reruns) must be Josh. A read-only preflight rejects
+another actor's publication request before checkout or credential loading; the
+writer job and Python command repeat the owner guard. Preparation and
+`operation=validate` remain available to authorized collaborators without any
+publication write. This enforces the owner's final-publish boundary without a
+new credential, environment approval rule or broader repository permission.
+
+Repeated private Template08 trials create separate RCC package stores and
+materializations. Check workspace capacity before another full trial. If RCC
+fails with `no space left on device`, preserve receipts, outputs, logs, installed
+wheel evidence and Git work; remove only identified disposable caches belonging
+to completed owned trials after checking process ownership. Do not clear the
+active shared toolchain or another writer's environment. The affected trial is
+failed until rerun successfully with adequate space; a cache cleanup is not a
+passing integration result.
+
+The isolated `qualification/runtime-release-button-20261016` helper branch is an
+execution harness, not release source. Its job uses `contents: read` and
+`actions: write` solely to dispatch preparation, read-only validation and a
+refused preparation rerun. Its Python write allowlist excludes release/tag
+creation and rejects publication inputs; all publisher dispatches hardcode
+`operation=validate`. It carries no package credential and must not be merged
+into the release/default branch. It preserves uncertain dispatch outcomes for
+inspection rather than posting again, rejects ambiguous new-run matches, and
+retains the successful owner-handoff preparation separately from deliberate
+negative/rerun controls. This permits qualification through the existing
+connected GitHub app when a shell credential has expired, without transferring
+credentials or changing repository security settings.
+
+A local platform-tagged Runtime wheel used for functional acceptance is separate
+from the portable release matrix. Record its exact filename/hash, compare every
+installed Runtime member (including generated non-Python assets) with the wheel,
+and compare tracked Python members with the named Git source. Qualify the
+canonical seven-distribution inventory independently. Preserve source versus
+tested-merge identities even when complete trees match. Evidence branches can
+contain additional reports/harnesses; never substitute their HEAD as the builder
+or release source. Preserve exact CI checkout commits on qualification refs
+before closing a PR when later preparation must retrieve their provenance.

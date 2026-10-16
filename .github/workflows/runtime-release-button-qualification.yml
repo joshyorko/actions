@@ -1,0 +1,38 @@
+name: Qualify Runtime Release Buttons Without Publication
+on:
+  push:
+    branches: [qualification/runtime-release-button-20261016]
+permissions:
+  contents: read
+  actions: write
+concurrency:
+  group: runtime104-release-button-qualification
+  cancel-in-progress: false
+jobs:
+  qualify:
+    if: github.repository == 'joshyorko/actions' && github.ref == 'refs/heads/qualification/runtime-release-button-20261016' && false
+    runs-on: ubuntu-22.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - run: python scripts/test_qualify_runtime_release_button.py
+      - name: Exercise preparation and read-only validation only
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXPECTED_SOURCE_SHA: REPLACE_WITH_QUALIFIED_COMMUNITY_MERGE
+        run: python scripts/qualify_runtime_release_button.py
+      - name: Retain qualification report and independently hashed manifests
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: runtime104-release-button-qualification-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            qualification-report.json
+            *-release-bundle.json
+          if-no-files-found: warn
+          retention-days: 30

@@ -1,61 +1,31 @@
 {
-  "source": "87acac608dca272d0f9f11956717e7a21ee3e7cf",
-  "qualification_scope": "Current wheel/install/A/B/C/restart checks are fresh at87acac. Full Runtime1544/15 suite ran at14b1c0b9; Runtime production/test/build inputs are unchanged through87acac. Controller208 suite ran at1db830e7, the identical complete tree merged as87acac.",
+  "source": "9e8cfd7caa602031db4eba75f545b1211f882561",
   "gates": {
-    "toolkit": {
-      "result": "179 passed",
-      "retained_log_basename": "runtime104-release-toolkit-green.log",
-      "raw_log_sha256": "c66061734c5672f31f1e94513e1b896a341a9662db4835e8417b6c35bda7e60b"
+    "controller_devutils": {
+      "result": "213 passed",
+      "retained_log_basename": "runtime104-button-owner-final-green.log",
+      "raw_log_sha256": "a3a6134d9b54d9924dda19d6ad92a32eeaeb5d5b6bcfcaf8281985af1eb7c6e2"
     },
-    "runtime_full": {
-      "result": "1544 passed, 15 skipped",
-      "retained_log_basename": "runtime104-release-full.log",
-      "raw_log_sha256": "4c47aa7049165c55ba52721c4e4dd7955ae0986acc12bcf1c6b380cd0c3b239d"
-    },
-    "runtime_lint": {
-      "result": "PASS",
-      "retained_log_basename": "runtime104-release-lint.log",
-      "raw_log_sha256": "5301f169eb1fdc9101421db7a0d06d455e6c48c919740c54dd6c0a37e46ad4fa"
-    },
-    "runtime_types": {
-      "result": "PASS",
-      "retained_log_basename": "runtime104-release-types.log",
-      "raw_log_sha256": "303602d45eeb0004ecf81a538b2c1321099cba9778701d657233178c047521f8"
-    },
-    "devutils_full": {
-      "result": "179 passed",
-      "retained_log_basename": "runtime104-release-devutils-full.log",
-      "raw_log_sha256": "0af865ea98612c8216dcf57527adb0d0775ad914372d40841440a9b36c7230e6"
-    },
-    "release_version_controls": {
-      "result": "135 passed",
-      "retained_log_basename": "runtime104-release-version-green.log",
-      "raw_log_sha256": "e362b99717cfea28c27531edc5bf0369082a8b81c2d728bb273dcd35fc20c866"
-    },
-    "strict_twine": {
-      "result": "PASS",
-      "retained_log_basename": "runtime104-final-build.log",
-      "raw_log_sha256": "6b7d23ae2c136852cbb672cca75fde8bf98d1e9d7fb4e61db4c5abd7dae9064d"
+    "fresh_build": {
+      "result": "PASS; final-source bytes match the qualified wheel",
+      "retained_log_basename": "runtime104-ready-build.log",
+      "raw_log_sha256": "950f366ec8165d828d07cfb3413837fba56c334c3d966b543c5cce34a0dd96f4"
     },
     "installed_request_boundaries": {
-      "result": "26 controls PASS",
+      "result": "26 controls PASS;205 Python/221 total Runtime members",
       "retained_log_basename": "installed-boundary-summary.txt",
-      "raw_log_sha256": "9acddcd7c3ca80a5ae94a953c3597876e90d8af363e2ea6209411f6c05bcaf54"
+      "raw_log_sha256": "92b4c0e0854d3bc55390716365c4b1ce284c3d93be01c72da4bce9e93e8ccf69"
     },
     "template_ac": {
       "result": "A/C PASS",
-      "retained_log_basename": "runtime104-final-template-ac.log",
-      "raw_log_sha256": "5690b7f0b8c89e1c99d19a766fee1110c7317d153c895d8684f1a0aad2b79381"
+      "retained_log_basename": "runtime104-ready-template-ac.log",
+      "raw_log_sha256": "bf6e83c3df58d7cab660f67f5e130f5ed91d48c61b1454c9cb55b6d0427c026b"
     },
     "template_b_restart": {
-      "result": "B/restart PASS",
-      "retained_log_basename": "runtime104-final-template-b.log",
-      "raw_log_sha256": "dd4f363ac9f95e91d4d171327a56205a4c13fb32f148aedbab34d37073de94c6"
-    },
-    "controller_devutils": {
-      "result": "208 passed",
-      "retained_log_basename": "runtime104-button-digest-local.log",
-      "raw_log_sha256": "262c7acba89a8091fda40eed70c671629d058db68283ede69fba0b4e255dc444"
+      "result": "B/restart PASS;26 artifacts",
+      "retained_log_basename": "runtime104-ready-template-b.log",
+      "raw_log_sha256": "e4bf3412f728781dff223ead0175115faaa4c8955ba2e48df10a75bbbcf32b8b"
     }
-  }
+  },
+  "historical_runtime_baseline": "1544 passed/15 skipped at14b1c0b9; Runtime production/test/build/frontend/lock inputs unchanged through9e8cfd7c. Final hosted full source checks are independent."
 }

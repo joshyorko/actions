@@ -227,6 +227,8 @@ def test_release_version_never_inferred_or_adapted():
 def test_validate_never_writes_or_requires_publication_credentials(
     monkeypatch, tmp_path
 ):
+    monkeypatch.setenv("GITHUB_ACTOR", "joshyorko")
+    monkeypatch.setenv("GITHUB_TRIGGERING_ACTOR", "joshyorko")
     from types import SimpleNamespace
 
     m = manifest()
@@ -256,6 +258,8 @@ def test_validate_never_writes_or_requires_publication_credentials(
 def test_interruption_after_each_external_write_resumes_without_duplicates(
     monkeypatch, tmp_path
 ):
+    monkeypatch.setenv("GITHUB_ACTOR", "joshyorko")
+    monkeypatch.setenv("GITHUB_TRIGGERING_ACTOR", "joshyorko")
     from types import SimpleNamespace
 
     m, digest = manifest(), "e" * 64
@@ -357,7 +361,10 @@ def test_manual_workflows_have_read_only_validation_and_explicit_publication():
     assert publish["permissions"] == prepare["permissions"]
     assert "permissions" not in publish["jobs"]["validate"]
     writer = publish["jobs"]["publish"]
-    assert writer["if"] == "inputs.operation == 'publish'"
+    assert (
+        writer["if"]
+        == "inputs.operation == 'publish' && github.actor == 'joshyorko' && github.triggering_actor == 'joshyorko'"
+    )
     assert writer["needs"] == "validate"
     assert writer["environment"] == "pypi"
     assert writer["permissions"] == {"contents": "write", "actions": "read"}
@@ -374,6 +381,8 @@ def test_manual_workflows_have_read_only_validation_and_explicit_publication():
 
 
 def test_read_only_validation_cannot_adopt_a_hidden_draft(monkeypatch):
+    monkeypatch.setenv("GITHUB_ACTOR", "joshyorko")
+    monkeypatch.setenv("GITHUB_TRIGGERING_ACTOR", "joshyorko")
     from types import SimpleNamespace
 
     m = manifest()
@@ -485,3 +494,91 @@ def test_download_verifies_github_archive_digest_before_extraction(
     with pytest.raises(button.ReleaseError, match="archive digest mismatch"):
         button.download({"id": 12}, "proof", tmp_path / "bad")
     assert not (tmp_path / "bad").exists()
+
+
+@pytest.mark.parametrize("original_conclusion", ["success", "failure"])
+def test_publication_keeps_original_success_after_an_accidental_preparation_rerun(
+    monkeypatch, tmp_path, original_conclusion
+):
+    import hashlib
+    import json
+    from types import SimpleNamespace
+
+    bundle = tmp_path / "bundle"
+    native = bundle / "native"
+    native.mkdir(parents=True)
+    (bundle / "pypi").mkdir()
+    for suffix in ("linux64", "macos-arm64", "windows64.exe", "sha256.txt"):
+        (native / f"actions-runtime-1.0.4-{suffix}").write_bytes(b"synthetic")
+    m = dict(
+        manifest(),
+        schema_version=1,
+        repository=button.REPOSITORY,
+        qualification_sha="a" * 40,
+        tree="b" * 40,
+        controller_sha="c" * 40,
+        preparation_run_attempt=1,
+    )
+    path = bundle / button.MANIFEST
+    path.write_text(json.dumps(m))
+    args = SimpleNamespace(
+        root=tmp_path,
+        bundle=bundle,
+        manifest_sha256=hashlib.sha256(path.read_bytes()).hexdigest(),
+        preparation_run_id=123,
+        source_sha="a" * 40,
+        version="1.0.4",
+    )
+    monkeypatch.setattr(button, "controller", lambda *args: None)
+    monkeypatch.setattr(button, "check_source", lambda *args: m["tree"])
+    monkeypatch.setattr(button, "verify_files", lambda *args: None)
+    monkeypatch.setattr(button, "verify_artifacts", lambda *args: None)
+    monkeypatch.setattr(button.subprocess, "run", lambda *args, **kwargs: None)
+    requested = []
+
+    def api(endpoint):
+        requested.append(endpoint)
+        return {
+            "path": button.PREPARE_WORKFLOW,
+            "event": "workflow_dispatch",
+            "head_branch": "community",
+            "head_sha": m["controller_sha"],
+            "run_attempt": 1 if endpoint.endswith("/attempts/1") else 2,
+            "conclusion": original_conclusion
+            if endpoint.endswith("/attempts/1")
+            else "failure",
+        }
+
+    monkeypatch.setattr(button, "api", api)
+    if original_conclusion == "success":
+        assert button.verify(args) == m
+    else:
+        with pytest.raises(
+            button.ReleaseError, match="preparation run identity/state mismatch"
+        ):
+            button.verify(args)
+    assert requested == [f"repos/{button.REPOSITORY}/actions/runs/123/attempts/1"]
+
+
+@pytest.mark.parametrize(
+    "actor,triggering_actor",
+    [
+        ("another-writer", "joshyorko"),
+        ("joshyorko", "another-writer"),
+        ("another-writer", "another-writer"),
+    ],
+)
+def test_only_josh_can_enter_publication_or_rerun_writer(
+    monkeypatch, actor, triggering_actor
+):
+    from types import SimpleNamespace
+
+    monkeypatch.setenv("GITHUB_ACTOR", actor)
+    monkeypatch.setenv("GITHUB_TRIGGERING_ACTOR", triggering_actor)
+    monkeypatch.setattr(
+        button,
+        "verify",
+        lambda *args: pytest.fail("nonowner entered publication validation"),
+    )
+    with pytest.raises(button.ReleaseError, match="Only joshyorko"):
+        button.publish(SimpleNamespace(command="publish"))

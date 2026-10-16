@@ -1,99 +1,136 @@
-# Runtime 1.0.4 versioned-wheel qualification checkpoint
+# Runtime 1.0.4 qualification and release-button handoff
 
-This records actual version 1.0.4 at **87acac608dca272d0f9f11956717e7a21ee3e7cf**,
-complete source tree **62dd004a447c265889bc45f25ef716affab4c953**. It carries the
-accepted 1.0.3 security repairs plus the distinct #317/#318 robot fixes, followed
-by version/changelog and release-fixture repairs. It supersedes private rc1/rc2
-as versioned-wheel evidence. The separately reviewed release-button change in
-[#323](https://github.com/joshyorko/actions/pull/323), head
-**1db830e73a6f9041616be40dadcad624e95e9ecf**, is now merged normally into the
-isolated preparation branch as this source. Its full Devutils suite passes
-**208 tests**, including interrupted-write recovery and no-op reruns. Hosted
-qualification of this complete source is still pending; this is a checkpoint,
-not a completed release approval. The preceding versioned checkpoint remains
-[immutable at05e80839](https://github.com/joshyorko/actions/blob/05e80839fcd26701a46c2cd6acd971931ca51035/docs/program/evidence/runtime-1.0.4-release-20261016/README.md).
+The qualified source is **9e8cfd7caa602031db4eba75f545b1211f882561**, complete
+Git tree **c426aad8258a61da8dbf592696ea37a5499e5bb4**. All **17 exact-head
+PR-event workflow runs pass**, including both full Runtime suites, both complete
+PyPI matrices, both six-lane toolkit matrices, all six native jobs, Core, Helper,
+coverage, audit and Work Items verification. Final receipts retain each exact
+run/job identity; skipped publishing jobs are expected and do not represent a
+publication.
 
-- Approved combined #320 was merged normally as **d234fda2dec409ee54d45af9aa7f7cf4b2e16fac** into separate 1.0.4 staging. No individual #317/#318 merge operation was performed. GitHub marks those original draft PRs closed/merged by ancestry through #320; do not merge their changes a second time.
-- #321 is the release preparation review; #322 is the community promotion review. Both current tested merge trees equal this exact source tree (see `source-identity.json`). Neither publication nor a final tag is performed by this evidence push.
-- Prior 1.0.3 accepted community source **20ccdae585b621a02080f545808fb3036f656e58** was carried forward by normal merge **e4189907f515c324a49ddcebd40976163ee57451**. Its source branch/tag/assets were not changed. Independent public reads at 17:01 UTC confirmed PyPI/native 1.0.3 exists and 1.0.4 does not (`publication-state.json`).
+**Current blocker:** automatic approval review rejected the normal merge of
+PR #321 into separate 1.0.4 staging, citing the initial restriction on merging
+draft work without further approval. No merge was executed. #321 is now ready
+for review; #322 remains the separate community promotion draft. An explicit
+numbered approval for these two normal merges is pending. The new buttons cannot
+be exercised on `community` until their workflow files reach that default branch.
+Final publication is reserved for Josh.
 
-## Local and hosted gates
+## Source and review points
 
-`local-gates.json` binds retained private logs to SHA-256 and gate outcomes.
-Runtime full suite: **1544 passed, 15 skipped**; Toolkit: **179 passed**;
-Devutils: **179 passed**; strict release-version controls: **135 passed**;
-Runtime lint/type checks and strict Twine: **passed**. The full Runtime suite ran
-at 14b1c0b9; ec5 changes only the historical measured-receipt test fixture and
-canonical documentation, with production/package/workflow inputs unchanged.
-The subsequent controller/workflow changes do not change Runtime production,
-Runtime tests, frontend, build script or lockfile inputs. The final wheel
-build/install and real-wheel integration ran fresh at87acac. The208-test
-controller/Devutils suite ran on the exact complete tree merged as87acac.
-Skipped tests remain unverified. `ci-checkpoint.json` is a timestamped exact-head
-snapshot; pending workflows are not reported as passed. Use final hosted checks
-before merging or publishing a subsequent candidate.
+| Item | Exact source / state |
+|---|---|
+| #317 artifact retention Windows repair | `dd5ccf3ae76451536012f15e3bf1b1adc728f9eb` |
+| #318 declared input forwarding | `ffa6ed49726c4ece12c6648c021058e06927ddb8` |
+| Approved #320 combined source | `38b16fc489c48462c4952eec65b9b17572d8958a` |
+| Normal #320 staging merge | `d234fda2dec409ee54d45af9aa7f7cf4b2e16fac` |
+| #323 release-button bulk change | `1db830e73a6f9041616be40dadcad624e95e9ecf`, normal prep merge `87acac608dca272d0f9f11956717e7a21ee3e7cf` |
+| Final preparation / promotion #321 / #322 | `9e8cfd7caa602031db4eba75f545b1211f882561` |
+| Published preceding 1.0.3 source | `20ccdae585b621a02080f545808fb3036f656e58` |
 
-The preceding ec5 source passed its PyPI/native lanes; those receipts remain
-historical for this changed complete tree. Fresh87acac hosted Linux/macOS wheel
-lanes and sdist passed, and their new producer receipts were independently
-verified (`hosted-wheel-controls.json`). Windows, aggregate PyPI, source and
-other hosted gates must finish; consult `ci-checkpoint.json` and live exact-head
-checks. No pending gate is counted as passed. This local functional
-wheel is Linux CPython3.12, not the full portable release inventory:
+GitHub closed the original #317/#318 drafts as merged by ancestry through #320;
+no separate merge operations were performed. Do not merge their changes again.
+The preparation carries forward the accepted 1.0.3 static-path namespace and
+streamed-form security guards. Its package, Runtime identity, strict installed
+verifier and exact Runtime changelog heading all agree on 1.0.4; dependency/RCC
+pins and the historical Action Server changelog are unchanged.
+`source-identity.json` binds both tested PR merge commits to the identical
+complete tree. Those exact builder commits are preserved on qualification refs.
+The evidence branch includes reports and a qualification harness beyond the
+qualified source; its HEAD is not the release source.
 
-| Private artifact | SHA-256 |
+## Passed artifact and functional gates
+
+The actual source-built 1.0.4 wheel has **no version adapter**. A clean isolated
+install binds **221 total Runtime members**, **205 Python members**, and every
+tracked Runtime Python member to the named source. Exact public Core 1.0.2 and
+Helper 1.0.3 registry URLs/digests, `pip check`, private Core import scanning and
+**26 request-boundary controls** pass. `wheel-provenance.json` records the proof.
+The local functional wheel is separate from the six supported hosted release
+wheels plus sdist; `hosted-wheel-controls.json` records current Linux, macOS and
+Windows producer scans, all 205 members and repeated 26-control passes.
+
+| Private functional artifact | SHA-256 |
 |---|---|
 | `actions_runtime-1.0.4-cp312-cp312-linux_x86_64.whl` | `2a03feab07f156b60b0e85e614ee97de8e7de07fa4572d9e0fcfaf576fc9b894` |
 | `actions_runtime-1.0.4.tar.gz` | `ad6a88dabd10b0e3ac00d747697c0a9f77ee9b98d431709c48cc08a6e6ddc716` |
 
-`wheel-provenance.json` proves no version adapter, all **221** Runtime wheel
-members match installed bytes, all **205** installed Python members were checked,
-and tracked Python members match the exact Git source. Installation was isolated,
-with exact published Core1.0.2/Helper1.0.3 URL/hash receipts, `pip check`, private
-Core import scans, and **26** request-boundary controls. Those dependencies,
-registry URLs/digests and security constraints were retained.
+Fresh Template08 **A/B/C PASS** at the final source. Template source is
+`joshyorko/robot-templates` **ee2f6c1d7dbc7f84312b046f66d019a09a9c6a50**;
+the only private declaration adapter is
+`ValidateBatch.inputEnvironment: [INVOICE_INPUT]`. Its checked-in runtime lock
+remains 1.0.2 and no template was published. B explicitly uses the isolated 1.0.4
+wheel and bundled RCC 18.19.3; A/C use RCC 18.19.7. Baseline, repeat, alternate
+input and deliberate-failure outputs prove values are consumed and artifacts
+survive both task outcomes. C verifies strict provider acquisition, provider-down
+warm reuse, archive-only execution and unknown-signer rejection; it does not
+claim the future Runtime artifact-worker mode D.
 
-## Meaningful Template08 and restart acceptance
+`restart-retrieval.json` verifies all **26 artifacts** before and after a fresh
+Runtime process opens the same database/datadir while the original imported
+robot path is unavailable. Listings, full downloads, text views, hashes and HTTP
+ranges match. Missing and wrong credentials return 403, and deliberate
+`failure.json` bytes are exact. The old Runtime exited before restart.
 
-`combined-abc.json` records fresh **A/B/C PASS** against
-`joshyorko/robot-templates` source **ee2f6c1d7dbc7f84312b046f66d019a09a9c6a50**.
-The sole template declaration adapter is
-`ValidateBatch.inputEnvironment: [INVOICE_INPUT]`; its checked-in runtime lock
-remains1.0.2 and was not pushed/published. Mode B explicitly runs the isolated
-1.0.4 wheel. A/C use RCC18.19.7; B uses bundled RCC18.19.3 with the pinned digest.
-Baseline/repeat/alternate outputs demonstrate declared input values are consumed;
-deliberate failure retains exact `failure.json` bytes. Fixed synthetic outputs
-and curated C receipts are included, without raw machine/library inventories.
+Controller/Devutils: **213 passed**, with Ruff/format/isort passing. The historical
+full local Runtime baseline is 1544 passed/15 skipped at 14b1c0b9, whose Runtime
+production/test/frontend/build/lock inputs remain unchanged; current hosted
+full source qualification is independent. Skipped external-service tests remain
+unverified. An earlier private C trial failed when disposable RCC stores filled
+the cloud workspace; its result was not admitted. The final-source A/B/C trial
+passed after capacity was restored while preserving receipts, outputs and Git.
 
-`restart-retrieval.json` verifies **26** retained artifacts both before and after
-restarting into a fresh Runtime process using the same database/datadir. The
-original imported robot path was made unavailable by renaming it. Every listing,
-full download, text view, byte hash and Range response matches after restart;
-missing/wrong authentication remains403. The original Runtime exited before the
-new one started. Successful and failed task outputs both remain retrievable.
+## Release-button implementation and remaining qualification
 
-## Review and handoff boundary
+The source adds **Prepare Actions Runtime Release** and **Publish Actions Runtime
+Release**, using RCC's reviewed preparation run/source/version/manifest pattern
+and Room's explicit owner/triggering-owner publication guard. The writer is
+restricted to Josh, uses the existing `pypi` credential and job-scoped
+`contents: write`, and publishes retained bytes directly. It does not depend on
+a GITHUB_TOKEN-created tag triggering legacy tag-push publishers.
 
-The original Windows non-integration regression was repaired in #317 at
-dd5ccf3ae76451536012f15e3bf1b1adc728f9eb. #318 remains
-ffa6ed49726c4ece12c6648c021058e06927ddb8. Their original combined/source/native
-qualification is separately retained in the earlier evidence branch. This
-checkpoint qualifies their versioned union with the carried-forward security
-repairs; it does not weaken portable path, reparse/link, inventory bounds,
-privacy or process-lifecycle contracts.
+Preparation verifies current source/version/full tree, complete canonical jobs,
+seven distribution producer receipts, archive digests, and native binary plus
+both frozen/Go-wrapper acceptance/history receipts. Publication defaults to
+read-only validation, reserves a manifest-owned private native draft before any
+PyPI upload, accepts only exact matching existing bytes, uploads only missing
+files, and creates the immutable tag/public native release after the full PyPI
+set is confirmed. It never overwrites assets, retargets tags or blindly skips
+existing files. Cross-service publication is not atomic: a prefix may remain on
+PyPI until an original-bundle retry finishes. Original successful preparation
+attempts remain valid after a refused accidental rerun. Any configured native
+signing credential blocks the unsigned manual route instead of bypassing it.
 
-Qualify this final hosted head, complete the normal staging/promotion
-preparation sequence, then exercise only non-publishing preparation/validation.
-`controller-review.json` records the reviewed permission, provenance and retry
-controls and their deliberate limits. The manual route refuses any configured
-native signing credential; it cannot silently replace a signed release with an
-unsigned one. Cross-service publication is not atomic; original-bundle retries
-finish missing bytes without replacement. Josh retains the final `publish` action.
-No final1.0.4 tag, package, native release, template or deployment is authorized
-in this campaign. Do not merge #317/#318 a second time or mix the work back into
-1.0.3.
+A separately scoped helper is reviewable on
+`qualification/runtime-release-button-20261016`, paused checkpoint
+**8d452c186c26a27a67f8247457275f3046730aa8**. Its four contract tests and Ruff
+pass. It uses `contents: read`/`actions: write` with a fixed dispatch allowlist,
+hardcodes `operation=validate`, and carries no package credential. It is not
+release source and must not be merged into community. It is paused pending
+approved promotion, then will exercise two preparations, a refused preparation
+rerun with original-attempt retrieval, repeated validation and wrong-digest
+refusal. Those actual UI gates remain **unrun** at this checkpoint.
 
-Machine roots are replaced by named placeholders in public JSON. Secret values,
-private homes, databases, archives, binaries and raw logs are excluded.
-`provenance.json` contains original private-receipt hashes; sanitized public
-bytes differ. `SHA256SUMS` covers the public evidence files.
+The cloud shell GitHub credential expired; the existing connected app successfully
+pushed this harness without a credential/security-setting change. The actual
+merge remains blocked by automatic approval review, not by the shell failure.
+
+## Concrete handoff sequence
+
+1. Approve normal merges #321 into `integration/runtime-1.0.4-robot-fixes`, then
+   #322 into `community`, both at the exact qualified head above. Recheck both
+   resulting trees equal the qualified tree; preserve 1.0.3 tag/assets/source.
+2. Activate only the isolated qualification helper with that exact community
+   merge SHA, retaining qualified head 9e8c. Run preparation/read-only validation
+   and the safe-rerun negative controls; retain the original green owner-handoff
+   preparation and independently reviewed manifest digest.
+3. Give Josh the exact preparation run ID, community source SHA, version 1.0.4
+   and `release-bundle.json` SHA-256. He selects `operation=publish` in GitHub
+   Actions when final publication is authorized. No local Poetry or manual tag
+   creation is needed.
+
+No final 1.0.4 tag, PyPI/native release, template, Homebrew dispatch or deployment
+was performed. `publication-state.json` independently confirms public 1.0.3 and
+absence of 1.0.4. Raw secrets, homes, databases, environment archives, binaries
+and logs are excluded. Public JSON uses named root placeholders; original raw
+receipt hashes differ from sanitized copies. `SHA256SUMS` covers public files.

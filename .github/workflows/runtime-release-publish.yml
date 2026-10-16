@@ -40,6 +40,13 @@ jobs:
     if: github.repository == 'joshyorko/actions' && github.ref == 'refs/heads/community'
     runs-on: ubuntu-22.04
     steps:
+      - name: Require Josh for a publication request
+        if: inputs.operation == 'publish'
+        run: |
+          if [[ "$GITHUB_ACTOR" != joshyorko || "$GITHUB_TRIGGERING_ACTOR" != joshyorko ]]; then
+            echo 'Only Josh may request publication or rerun its writer.' >&2
+            exit 1
+          fi
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
           ref: ${{ github.workflow_sha }}
@@ -68,7 +75,7 @@ jobs:
           --preparation-run-id "$PREPARATION_RUN" --manifest-sha256 "$MANIFEST_SHA256"
           --bundle "$RUNNER_TEMP/runtime-release-bundle"
   publish:
-    if: inputs.operation == 'publish'
+    if: inputs.operation == 'publish' && github.actor == 'joshyorko' && github.triggering_actor == 'joshyorko'
     needs: validate
     runs-on: ubuntu-22.04
     environment: pypi

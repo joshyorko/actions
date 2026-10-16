@@ -1,33 +1,65 @@
 {
-  "reviewed_source": "87acac608dca272d0f9f11956717e7a21ee3e7cf",
-  "reviewed_tree": "62dd004a447c265889bc45f25ef716affab4c953",
-  "button_pr": 323,
-  "button_head": "1db830e73a6f9041616be40dadcad624e95e9ecf",
-  "scope": "Manual preparation/publication controller; no final publication performed",
-  "reviewed_controls": [
-    "current community controller and workflow tree binding",
-    "stable exact version / runtime version / installed verifier / release-note checks",
-    "latest exact-head complete canonical workflow job admission",
-    "seven distribution producer checkout and digest receipts",
-    "GitHub artifact archive SHA256 before bounded traversal/link-safe extraction",
-    "native manifest, platform, architecture, binary and dual acceptance/history digest equality",
-    "default read-only validation with hidden-draft ownership deferred to writer",
-    "existing pypi credential only in explicit publication job; job-scoped contents write",
-    "source/manifest-owned private draft and immutable exact existing bytes",
-    "lost-response recovery after each committed external write; completed rerun no-op",
-    "no tag or asset replacement, blind skip-existing, new credential or downstream tag-trigger dependency"
+  "reviewed_source": "9e8cfd7caa602031db4eba75f545b1211f882561",
+  "reviewed_tree": "c426aad8258a61da8dbf592696ea37a5499e5bb4",
+  "bulk_button_pr": 323,
+  "bulk_button_merge": "87acac608dca272d0f9f11956717e7a21ee3e7cf",
+  "follow_up_repairs": [
+    "bf6b3a46b8716eb309b12fa8af4d4475a2061c46",
+    "9e8cfd7caa602031db4eba75f545b1211f882561"
   ],
   "local_validation": {
-    "devutils": "208 passed",
+    "devutils": "213 passed",
     "ruff": "PASS",
-    "format": "PASS",
-    "isort": "PASS"
+    "isort": "PASS",
+    "format": "PASS"
   },
-  "raw_local_log_sha256": "262c7acba89a8091fda40eed70c671629d058db68283ede69fba0b4e255dc444",
-  "limitations": [
-    "Manual route admits existing unsigned native producers only when all signing credentials are absent; any configured signer fails closed.",
-    "Cross-service publication cannot be atomic; a PyPI prefix may remain until the original-bundle publication retry completes.",
-    "Actual default-branch preparation/validation runs remain pending full hosted qualification and safe source promotion.",
-    "Final publishing network writes are intentionally unrun; Josh retains the final publish action."
-  ]
+  "local_validation_log_sha256": "a3a6134d9b54d9924dda19d6ad92a32eeaeb5d5b6bcfcaf8281985af1eb7c6e2",
+  "reviewed_controls": [
+    "current merged community controller and exact complete source/workflow trees",
+    "exact stable version in pyproject, Runtime identity, strict installed verifier and changelog",
+    "latest successful complete canonical qualification jobs",
+    "seven distribution producer source/version/digest receipts",
+    "whole GitHub artifact ZIP digest before bounded safe extraction",
+    "native source/platform/architecture, binary and dual acceptance/history digest binding",
+    "read-only validation never adopts a hidden private draft",
+    "original successful preparation attempt remains valid after a refused accidental rerun",
+    "only Josh as original and triggering actor can enter or rerun publication writer",
+    "immutable owned draft/tag/assets; exact existing digest/size checks and only missing uploads",
+    "no automatic retry after an uncertain external write; original-bundle convergence and completed no-op",
+    "existing package credential only in the explicit owner writer; no new PAT/security setting",
+    "direct publication avoids reliance on GITHUB_TOKEN-created tag downstream events"
+  ],
+  "upstream_designs": [
+    {
+      "repository": "joshyorko/rcc",
+      "sha": "758c97808bef8ae8bc5779d82c23ee11abfa47b3",
+      "path": ".github/workflows/publish-release.yml",
+      "adopted": "prepare run/source/version/manifest digest plus direct publication of reviewed artifacts; no copied Homebrew PAT/environment setting"
+    },
+    {
+      "repository": "joshyorko/josh-room",
+      "sha": "a5fa91a00ef24cd09025d3b09aa8deaa8232adfd",
+      "path": ".github/workflows/release.yml",
+      "adopted": "explicit owner and triggering-owner publication gate, staged draft reconciliation; no template publication"
+    }
+  ],
+  "deliberately_unrun": [
+    "final package/tag/native release publication",
+    "template/deployment/Homebrew dispatch"
+  ],
+  "remaining_qualification": [
+    "actual default-branch preparation/validation and safe-rerun controls, pending approved promotion"
+  ],
+  "material_limits": [
+    "native manual route refuses any configured signing credential; currently consumes qualified unsigned producers only",
+    "cross-service publication is not atomic; original-bundle retries must finish a possible PyPI prefix while native stays a draft"
+  ],
+  "merge_blocker": {
+    "action": "normal merge PR321",
+    "target": "integration/runtime-1.0.4-robot-fixes",
+    "outcome": "denied by automatic approval review; known not executed",
+    "reason": "initial restriction on merging draft work without further approval",
+    "follow_up": "explicit approval requested for normal merges321 and322 at9e8cfd7c; response pending",
+    "community_merge_322": "not attempted"
+  }
 }

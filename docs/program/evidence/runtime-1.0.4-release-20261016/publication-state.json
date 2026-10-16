@@ -1,28 +1,41 @@
 {
-  "native_release_1.0.3": {
+  "observed_at": "2026-10-16 18:46:47 UTC",
+  "runtime_1_0_3": {
+    "tag_object": "f5b8b14abb8bf35c8abba4701ccb2007e5f6fbbe",
+    "tag_commit": "20ccdae585b621a02080f545808fb3036f656e58",
+    "native_release_public": true,
     "assets": [
-      "actions-runtime-1.0.3-linux64",
-      "actions-runtime-1.0.3-macos-arm64",
-      "actions-runtime-1.0.3-sha256.txt",
-      "actions-runtime-1.0.3-windows64.exe"
-    ],
-    "draft": false,
-    "present": true,
-    "query_exit": 0,
-    "tag": "actions-runtime-1.0.3"
+      {
+        "name": "actions-runtime-1.0.3-linux64",
+        "digest": "sha256:8d07146f7e0ed3be8c7d9e7f7042907b86ad899a4c47d1a755edb98975dc6579",
+        "size": 82243466
+      },
+      {
+        "name": "actions-runtime-1.0.3-macos-arm64",
+        "digest": "sha256:720ed3da25311268234dec8bff5710dde21f16e5d2485e03018025d21d93731c",
+        "size": 62787554
+      },
+      {
+        "name": "actions-runtime-1.0.3-sha256.txt",
+        "digest": "sha256:481535421457f4dfa03f14013245dc086ad03bb81707f161d07088df14ca3953",
+        "size": 298
+      },
+      {
+        "name": "actions-runtime-1.0.3-windows64.exe",
+        "digest": "sha256:fa65aad9abb483d3e8005ffd5c93cbcf669e00e86d7d70e8030f74bc895cb331",
+        "size": 57877504
+      }
+    ]
   },
-  "native_release_1.0.4": {
-    "not_found": true,
-    "present": false,
-    "query_exit": 1
+  "runtime_1_0_4": {
+    "tag_present": false,
+    "native_release_present": false,
+    "publication_performed_by_this_task": false
   },
-  "observed_at": "2026-10-16T17:01:42.246254+00:00",
-  "pypi_latest": "1.0.3",
-  "pypi_versions": {
-    "1.0.3": true,
-    "1.0.4": false
-  },
-  "remote_tag_refs": [
-    "f5b8b14abb8bf35c8abba4701ccb2007e5f6fbbe\trefs/tags/actions-runtime-1.0.3"
-  ]
+  "pypi": {
+    "observed_at": "2026-10-16T18:46:48.044851+00:00",
+    "latest": "1.0.3",
+    "version_1_0_3_present": true,
+    "version_1_0_4_present": false
+  }
 }
