@@ -4283,3 +4283,9 @@ raw-archive artifact; the manifest digest is a third, independent identity.
 Verify all three layers instead of comparing different envelopes as if they were
 the same ZIP. The first hosted backup and independent download established this
 with identical original ZIP, manifest and all34 members.
+
+A disposable preparation has its own original run, manifest and ZIP identities,
+even when its source/version or individual distributions match an owner release.
+Keep disposable registry entries and destructive targets in the qualification
+branch only. The production registry must bind owner copies to the unchanged
+owner manifest and original preparation; a rehearsal is not a replacement release.
