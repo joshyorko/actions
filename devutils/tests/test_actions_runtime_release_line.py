@@ -48,8 +48,8 @@ def test_runtime_distribution_and_embedded_rcc_identity_are_explicit():
     ).read_text()
 
     assert pyproject["name"] == "actions-runtime"
-    assert pyproject["version"] == "1.0.3"
-    assert '__version__ = "1.0.3"' in runtime_init
+    assert pyproject["version"] == "1.0.4"
+    assert '__version__ = "1.0.4"' in runtime_init
     assert 'RCC_VERSION = "18.19.3"' in rcc_download
     assert "joshyorko/rcc/releases/download/v{RCC_VERSION}" in rcc_download
 
@@ -204,7 +204,7 @@ def test_native_runtime_release_notes_match_the_exact_tag_contract():
     changelog = (
         ROOT / "action_server" / "docs" / "ACTIONS_RUNTIME_CHANGELOG.md"
     ).read_text()
-    tag = "actions-runtime-1.0.3"
+    tag = "actions-runtime-1.0.4"
     headings = re.findall(r"^## (.+)$", changelog, flags=re.MULTILINE)
     release_class_start = GENERATOR.index("class ActionServerBinaryRelease")
     release_class_end = GENERATOR.index("class ActionServerRuntimeRecovery")

@@ -70,6 +70,7 @@ jobs:
           uv run --no-project --python ${{ matrix.python }} poetry run pytest -q
           tests/action_server_tests/test_artifact_storage.py
           tests/action_server_tests/test_artifact_binding_lock.py
+          tests/action_server_tests/test_request_boundary_limits.py
 
       - name: Verify tunnel pipe lifecycle on the native platform
         run: >-
