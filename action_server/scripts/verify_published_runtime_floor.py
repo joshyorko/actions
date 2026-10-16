@@ -551,6 +551,11 @@ print("RUNTIME_WHEEL_MEMBER_INVENTORY=" + json.dumps({{
 """
     )
     probe += build_import_path_guard(Path(checkout))
+    probe += (
+        Path(__file__)
+        .with_name("verify_request_boundaries.py")
+        .read_text(encoding="utf-8")
+    )
     try:
         subprocess.run(
             [str(python), "-c", build_import_path_guard(Path(checkout))],
@@ -580,6 +585,9 @@ print("RUNTIME_WHEEL_MEMBER_INVENTORY=" + json.dumps({{
         if error.stderr:
             print(error.stderr, file=sys.stderr, end="", flush=True)
         raise
+    for line in probe_result.stdout.splitlines():
+        if line.startswith("RUNTIME_REQUEST_BOUNDARIES="):
+            print(line, flush=True)
     inventory_prefix = "RUNTIME_WHEEL_MEMBER_INVENTORY="
     inventory_lines = [
         line
