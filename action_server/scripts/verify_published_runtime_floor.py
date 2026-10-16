@@ -18,7 +18,7 @@ from urllib.request import url2pathname
 
 EXPECTED_CORE = "1.0.2"
 EXPECTED_HELPER = "1.0.3"
-EXPECTED_RUNTIME = "1.0.3"
+EXPECTED_RUNTIME = "1.0.4"
 EXPECTED_PUBLIC_PACKAGES = {
     "actions-core": {
         "version": EXPECTED_CORE,
@@ -292,7 +292,7 @@ def select_runtime_wheel(directory: Path) -> Path:
         candidates.append(wheel)
     if len(candidates) != 1:
         raise ValueError(
-            "Expected exactly one cp312 actions-runtime 1.0.3 wheel in "
+            f"Expected exactly one cp312 actions-runtime {EXPECTED_RUNTIME} wheel in "
             f"{directory}, found {len(candidates)}"
         )
     return candidates[0]
@@ -551,6 +551,11 @@ print("RUNTIME_WHEEL_MEMBER_INVENTORY=" + json.dumps({{
 """
     )
     probe += build_import_path_guard(Path(checkout))
+    probe += (
+        Path(__file__)
+        .with_name("verify_request_boundaries.py")
+        .read_text(encoding="utf-8")
+    )
     try:
         subprocess.run(
             [str(python), "-c", build_import_path_guard(Path(checkout))],
@@ -580,6 +585,9 @@ print("RUNTIME_WHEEL_MEMBER_INVENTORY=" + json.dumps({{
         if error.stderr:
             print(error.stderr, file=sys.stderr, end="", flush=True)
         raise
+    for line in probe_result.stdout.splitlines():
+        if line.startswith("RUNTIME_REQUEST_BOUNDARIES="):
+            print(line, flush=True)
     inventory_prefix = "RUNTIME_WHEEL_MEMBER_INVENTORY="
     inventory_lines = [
         line

@@ -49,12 +49,12 @@ def _pip_report(overrides=None):
 
 
 def test_selects_one_cp312_runtime_wheel(tmp_path):
-    expected = _wheel(tmp_path, "actions-runtime", "1.0.3")
+    expected = _wheel(tmp_path, "actions-runtime", "1.0.4")
     _wheel(
         tmp_path,
         "actions-runtime",
-        "1.0.3",
-        "actions_runtime-1.0.3-cp313-cp313-manylinux_2_17_x86_64.whl",
+        "1.0.4",
+        "actions_runtime-1.0.4-cp313-cp313-manylinux_2_17_x86_64.whl",
     )
     assert module.select_runtime_wheel(tmp_path) == expected
 
@@ -72,12 +72,12 @@ def test_rejects_non_runtime_distribution(tmp_path):
 
 
 def test_rejects_ambiguous_cp312_wheel_inventory(tmp_path):
-    _wheel(tmp_path, "actions-runtime", "1.0.3")
+    _wheel(tmp_path, "actions-runtime", "1.0.4")
     _wheel(
         tmp_path,
         "actions-runtime",
-        "1.0.3",
-        "actions_runtime-1.0.3-cp312-abi3-manylinux_2_17_x86_64.whl",
+        "1.0.4",
+        "actions_runtime-1.0.4-cp312-abi3-manylinux_2_17_x86_64.whl",
     )
     with pytest.raises(ValueError, match="exactly one cp312"):
         module.select_runtime_wheel(tmp_path)
@@ -318,7 +318,7 @@ def _oauth_wheel(tmp_path, *, newline=b"\n", generated_contents=None):
         filename: hashlib.sha256(contents[key].encode("utf-8")).hexdigest()
         for key, filename in pairs.items()
     }
-    wheel = _wheel(tmp_path, "actions-runtime", "1.0.3")
+    wheel = _wheel(tmp_path, "actions-runtime", "1.0.4")
     with zipfile.ZipFile(wheel, "a") as archive:
         archive.writestr(
             "actions/server/_oauth2_config.py",
@@ -386,7 +386,7 @@ def test_installed_wheel_rejects_wrong_metadata_before_execution(tmp_path):
 
 
 def test_selected_wheel_origin_rejects_another_same_version_archive(tmp_path):
-    wheel = _wheel(tmp_path, "actions-runtime", "1.0.3")
+    wheel = _wheel(tmp_path, "actions-runtime", "1.0.4")
     direct_url = {
         "url": wheel.resolve().as_uri(),
         "archive_info": {"hashes": {"sha256": "0" * 64}},
@@ -396,7 +396,7 @@ def test_selected_wheel_origin_rejects_another_same_version_archive(tmp_path):
 
 
 def test_selected_wheel_origin_binds_local_archive_url_and_digest(tmp_path):
-    wheel = _wheel(tmp_path, "actions-runtime", "1.0.3")
+    wheel = _wheel(tmp_path, "actions-runtime", "1.0.4")
     direct_url = {
         "url": wheel.resolve().as_uri(),
         "archive_info": {
@@ -407,7 +407,7 @@ def test_selected_wheel_origin_binds_local_archive_url_and_digest(tmp_path):
 
 
 def test_selected_wheel_origin_resolves_local_archive_alias(tmp_path):
-    wheel = _wheel(tmp_path, "actions-runtime", "1.0.3")
+    wheel = _wheel(tmp_path, "actions-runtime", "1.0.4")
     alias = tmp_path / "wheel-alias.whl"
     try:
         alias.symlink_to(wheel)
@@ -427,7 +427,7 @@ def test_selected_wheel_origin_resolves_local_archive_alias(tmp_path):
 def test_failed_real_probe_preserves_stdout_stderr_and_exit_code(
     tmp_path, monkeypatch, capsys
 ):
-    wheel = _wheel(tmp_path, "actions-runtime", "1.0.3")
+    wheel = _wheel(tmp_path, "actions-runtime", "1.0.4")
     monkeypatch.setattr(
         module,
         "build_import_path_guard",

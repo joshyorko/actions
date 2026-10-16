@@ -40,3 +40,6 @@ action_server/src/actions/server/bin/.gitignore text eol=lf
 action_server/src/actions/server/index.html text eol=lf
 action_server/src/actions/server/templates/action-templates.yaml text eol=lf
 action_server/src/actions/server/vendored_deps/README.md text eol=lf
+
+# Historical measured receipt identity is an exact byte fixture, including LF.
+developer/tests/fixtures/canvas-published-71f60-receipt.runtime-init.txt -text
