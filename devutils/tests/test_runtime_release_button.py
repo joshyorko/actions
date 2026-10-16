@@ -227,6 +227,8 @@ def test_release_version_never_inferred_or_adapted():
 def test_validate_never_writes_or_requires_publication_credentials(
     monkeypatch, tmp_path
 ):
+    monkeypatch.setenv("GITHUB_ACTOR", "joshyorko")
+    monkeypatch.setenv("GITHUB_TRIGGERING_ACTOR", "joshyorko")
     from types import SimpleNamespace
 
     m = manifest()
@@ -256,6 +258,8 @@ def test_validate_never_writes_or_requires_publication_credentials(
 def test_interruption_after_each_external_write_resumes_without_duplicates(
     monkeypatch, tmp_path
 ):
+    monkeypatch.setenv("GITHUB_ACTOR", "joshyorko")
+    monkeypatch.setenv("GITHUB_TRIGGERING_ACTOR", "joshyorko")
     from types import SimpleNamespace
 
     m, digest = manifest(), "e" * 64
@@ -357,7 +361,10 @@ def test_manual_workflows_have_read_only_validation_and_explicit_publication():
     assert publish["permissions"] == prepare["permissions"]
     assert "permissions" not in publish["jobs"]["validate"]
     writer = publish["jobs"]["publish"]
-    assert writer["if"] == "inputs.operation == 'publish'"
+    assert (
+        writer["if"]
+        == "inputs.operation == 'publish' && github.actor == 'joshyorko' && github.triggering_actor == 'joshyorko'"
+    )
     assert writer["needs"] == "validate"
     assert writer["environment"] == "pypi"
     assert writer["permissions"] == {"contents": "write", "actions": "read"}
@@ -374,6 +381,8 @@ def test_manual_workflows_have_read_only_validation_and_explicit_publication():
 
 
 def test_read_only_validation_cannot_adopt_a_hidden_draft(monkeypatch):
+    monkeypatch.setenv("GITHUB_ACTOR", "joshyorko")
+    monkeypatch.setenv("GITHUB_TRIGGERING_ACTOR", "joshyorko")
     from types import SimpleNamespace
 
     m = manifest()
@@ -549,3 +558,27 @@ def test_publication_keeps_original_success_after_an_accidental_preparation_reru
         ):
             button.verify(args)
     assert requested == [f"repos/{button.REPOSITORY}/actions/runs/123/attempts/1"]
+
+
+@pytest.mark.parametrize(
+    "actor,triggering_actor",
+    [
+        ("another-writer", "joshyorko"),
+        ("joshyorko", "another-writer"),
+        ("another-writer", "another-writer"),
+    ],
+)
+def test_only_josh_can_enter_publication_or_rerun_writer(
+    monkeypatch, actor, triggering_actor
+):
+    from types import SimpleNamespace
+
+    monkeypatch.setenv("GITHUB_ACTOR", actor)
+    monkeypatch.setenv("GITHUB_TRIGGERING_ACTOR", triggering_actor)
+    monkeypatch.setattr(
+        button,
+        "verify",
+        lambda *args: pytest.fail("nonowner entered publication validation"),
+    )
+    with pytest.raises(button.ReleaseError, match="Only joshyorko"):
+        button.publish(SimpleNamespace(command="publish"))

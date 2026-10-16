@@ -4216,3 +4216,20 @@ even when the controller immediately refuses to rebuild on attempt2. The named
 must not invalidate recovery of a PyPI prefix or native draft already owned by
 the original bundle. The run-attempt API still must prove canonical workflow,
 community controller SHA, exact attempt number and successful conclusion.
+
+Only `joshyorko` may enter the publication writer: both the original actor and
+triggering actor (including reruns) must be Josh. A read-only preflight rejects
+another actor's publication request before checkout or credential loading; the
+writer job and Python command repeat the owner guard. Preparation and
+`operation=validate` remain available to authorized collaborators without any
+publication write. This enforces the owner's final-publish boundary without a
+new credential, environment approval rule or broader repository permission.
+
+Repeated private Template08 trials create separate RCC package stores and
+materializations. Check workspace capacity before another full trial. If RCC
+fails with `no space left on device`, preserve receipts, outputs, logs, installed
+wheel evidence and Git work; remove only identified disposable caches belonging
+to completed owned trials after checking process ownership. Do not clear the
+active shared toolchain or another writer's environment. The affected trial is
+failed until rerun successfully with adequate space; a cache cleanup is not a
+passing integration result.

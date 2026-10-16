@@ -739,6 +739,12 @@ def verify(args):
 
 
 def publish(args):
+    if args.command == "publish":
+        require(
+            os.environ.get("GITHUB_ACTOR") == "joshyorko"
+            and os.environ.get("GITHUB_TRIGGERING_ACTOR") == "joshyorko",
+            "Only joshyorko may authorize publication or rerun its writer",
+        )
     manifest = verify(args)
     release, tag = release_state(args.version)
     # Read-only tokens may not see private drafts (GitHub lists those only
