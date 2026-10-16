@@ -3991,3 +3991,10 @@ isolated consumer interpreter after its import-path guard and binds installed
 Runtime members to the selected wheel. Source execution on Linux does not
 qualify native Windows behavior; retain the Windows job and each final-wheel
 consumer result against the actual checkout and wheel digest.
+
+The assembled authorization inventory records concrete route class identities.
+Robot catalog/import/run routes now use `_BoundedRobotFormRoute` while retaining
+their protected-API classification. Update those exact entries when introducing
+this boundary; do not normalize every subclass to APIRoute or weaken the
+unknown-route rejection control. The multipart upload control verifies that the
+ordinary ZIP file field still reaches the importer through FastAPI parsing.

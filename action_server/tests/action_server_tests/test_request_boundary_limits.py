@@ -108,3 +108,24 @@ def test_bounded_urlencoded_form_reaches_importer(monkeypatch):
     assert response.status_code == 200
     assert response.json()["message"] == "controlled download"
     assert seen == ["https://example.invalid/a.zip?q=a+b"]
+
+
+def test_multipart_zip_still_reaches_upload_boundary(monkeypatch):
+    from actions.server import _api_robots
+
+    seen = []
+
+    async def save(file):
+        seen.append((file.filename, await file.read()))
+        raise _api_robots._RobotImportLimitError("controlled upload")
+
+    monkeypatch.setattr(_api_robots, "_save_uploaded_robot", save)
+    app = FastAPI()
+    app.include_router(robots_api_router)
+    response = TestClient(app).post(
+        "/api/robots/import",
+        files={"file": ("robot.zip", b"zip-control", "application/zip")},
+    )
+    assert response.status_code == 200
+    assert response.json()["message"] == "controlled upload"
+    assert seen == [("robot.zip", b"zip-control")]
