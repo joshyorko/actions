@@ -4202,3 +4202,9 @@ tree equals current community's workflow tree before publication. Preserve that
 condition for a retry; never add a PAT or weaken the source check as a workaround.
 These constraints come from the official
 [GitHub release API](https://docs.github.com/en/rest/releases/releases#list-releases).
+
+The preparation downloader verifies the complete downloaded ZIP against GitHub's
+`sha256:` artifact digest before extraction, then verifies each retained member
+against producer receipts. These are separate integrity checks. The native
+acceptance ZIP from the hosted producer was independently observed to match its
+GitHub digest; do not downgrade a mismatch to a warning or extract first.

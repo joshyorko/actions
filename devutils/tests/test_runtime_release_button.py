@@ -451,3 +451,37 @@ def test_source_binding_accepts_normal_merge_but_rejects_changed_workflow_tree(
     git("push", "--quiet", "origin", "community")
     with pytest.raises(button.ReleaseError, match="workflow files differ"):
         button.check_source(repo, source, qualified, "1.0.4")
+
+
+def test_download_verifies_github_archive_digest_before_extraction(
+    monkeypatch, tmp_path
+):
+    import zipfile
+
+    archive = tmp_path / "source.zip"
+    with zipfile.ZipFile(archive, "w") as z:
+        z.writestr("receipt.json", b"{}")
+    metadata = {
+        "id": 9,
+        "name": "proof",
+        "digest": "sha256:" + button.sha256(archive),
+        "size_in_bytes": archive.stat().st_size,
+        "expired": False,
+        "created_at": "synthetic",
+        "expires_at": "synthetic",
+    }
+    monkeypatch.setattr(button, "pages", lambda *args: [metadata])
+
+    def download(command, *, stdout, stderr):
+        from types import SimpleNamespace
+
+        stdout.write(archive.read_bytes())
+        return SimpleNamespace(returncode=0)
+
+    monkeypatch.setattr(button.subprocess, "run", download)
+    button.download({"id": 12}, "proof", tmp_path / "valid")
+    assert (tmp_path / "valid/receipt.json").read_bytes() == b"{}"
+    metadata["digest"] = "sha256:" + "0" * 64
+    with pytest.raises(button.ReleaseError, match="archive digest mismatch"):
+        button.download({"id": 12}, "proof", tmp_path / "bad")
+    assert not (tmp_path / "bad").exists()

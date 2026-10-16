@@ -274,6 +274,10 @@ def download(run, artifact_name, destination):
             stderr=subprocess.PIPE,
         )
     require(result.returncode == 0, "artifact download failed")
+    require(
+        artifact.get("digest") == "sha256:" + sha256(archive),
+        "GitHub artifact archive digest mismatch",
+    )
     extract_zip(archive, destination)
     archive.unlink()
     return {
