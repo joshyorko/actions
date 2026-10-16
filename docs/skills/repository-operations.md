@@ -4226,9 +4226,10 @@ branch, repository/head/attempt and artifact IDs/digests/sizes must all match.
 Each readiness check downloads both healthy raw archives, verifies actual ZIP
 size/digest, receipt identity, the original ZIP and unchanged manifest digests,
 and every nested member/inventory before counting a copy. An available API row
-alone does not prove readable recovery bytes. Missing copies fail closed;
-metadata/identity mismatches and corrupt or unreadable bytes are never downgraded
-to availability warnings. Recovery uses a registered backup run through the existing
+alone does not prove readable recovery bytes. Missing or expired copies do not count as healthy; validation and publication
+require at least two remaining healthy registered runs. Identity mismatches,
+corrupt bytes and download failures stop verification even when other registered
+copies remain. Recovery uses a registered backup run through the existing
 numeric `preparation_run_id` input, while release ownership remains bound to the
 original unchanged manifest. The controller still verifies current community,
 complete source/qualification/workflow trees, original successful preparation,
@@ -4273,3 +4274,14 @@ to completed owned trials after checking process ownership. Do not clear the
 active shared toolchain or another writer's environment. The affected trial is
 failed until rerun successfully with adequate space; a cache cleanup is not a
 passing integration result.
+
+A destructive recovery rehearsal must pin one freshly created disposable run and
+its creating controller receipt, permanently reject the protected owner run,
+verify both registered backup archives before the request, and recheck the
+original attempt/source immediately before the single rerun POST. Save an
+uncertain response before sending; never blindly repeat it. A later qualification
+may resume only read-only loss/retrieval checks after actual state is reconciled.
+Keep disposable registry rows on nonpublishing qualification/backup branches,
+never in the reviewed default publication registry. Compare tested code blobs to
+the repair commit, retain original owner snapshots before/after, and distinguish
+shared-verifier qualification from unrun default-button activation before merge.

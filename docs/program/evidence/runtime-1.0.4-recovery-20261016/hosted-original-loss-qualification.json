@@ -1,0 +1,198 @@
+{
+  "status": "PASS",
+  "purpose": "durable-release-recovery-qualification",
+  "dispatches": [],
+  "runs": [
+    {
+      "id": 38977611441,
+      "run_attempt": 2,
+      "head_sha": "d222f94edca26953c1506ab258adc458ded17c56",
+      "head_branch": "community",
+      "event": "workflow_dispatch",
+      "path": ".github/workflows/runtime-release-prepare.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/joshyorko/actions/actions/runs/38977611441",
+      "label": "disposable-preparation-rerun"
+    }
+  ],
+  "bundles": [],
+  "publication_performed": false,
+  "protected_owner_preparation": 38951733318,
+  "qualification_controller_run_id": 38981527410,
+  "qualification_controller_sha": "692d8a1954cedcce30af4288b3e72881cf6156ed",
+  "operation": "qualify-recovery",
+  "owner_before": {
+    "run_id": 38951733318,
+    "run_attempt": 1,
+    "artifact_id": 12069321636,
+    "artifact_digest": "sha256:bbe3d066fb082c1dc61a8916af549bf9a7b66369f36866a2b37a8256a95524e5",
+    "size_in_bytes": 271548672
+  },
+  "repair_source_sha": "221edc4e7357aca64fc654f8ab5805c484042f2c",
+  "tested_code_blobs": {
+    "action_server/scripts/runtime_release_button.py": "8c38bc14b31ce27503bb6be766b4c3652e5426f8",
+    "action_server/scripts/runtime_release_backup.py": "16ae7209972c968076b8b1332e872b024e61f9b1",
+    "action_server/scripts/runtime_release_backup_workflow.yml": "ea64b54a801729d81360e752010a05685acc3460"
+  },
+  "transport_validations": [
+    {
+      "label": "owner-original-or-backup",
+      "transport_run_id": 38951733318,
+      "preparation_run_id": 38951733318,
+      "manifest_sha256": "1a77f6c8e09869d6bd45df1b14e6a9ce3f908bcf09351b76cee26a209504878a",
+      "source_sha": "d222f94edca26953c1506ab258adc458ded17c56",
+      "verified_members": 34,
+      "source_artifact": {
+        "id": 12069321636,
+        "name": "runtime-release-bundle-38951733318-1",
+        "digest": "sha256:bbe3d066fb082c1dc61a8916af549bf9a7b66369f36866a2b37a8256a95524e5",
+        "size_in_bytes": 271548672,
+        "created_at": "2026-10-16T19:02:11Z",
+        "expires_at": "2026-11-15T19:02:03Z"
+      },
+      "result": "PASS",
+      "publication_performed": false
+    },
+    {
+      "label": "owner-original-or-backup",
+      "transport_run_id": 38977206416,
+      "preparation_run_id": 38951733318,
+      "manifest_sha256": "1a77f6c8e09869d6bd45df1b14e6a9ce3f908bcf09351b76cee26a209504878a",
+      "source_sha": "d222f94edca26953c1506ab258adc458ded17c56",
+      "verified_members": 34,
+      "source_artifact": {
+        "id": 12080016098,
+        "name": "runtime-release-bundle-38977206416-1",
+        "digest": "sha256:aba2d10da80f145c119136d624b6830cd5b68129a0cb29fcbe6b37b0efc79b90",
+        "size_in_bytes": 271548672,
+        "created_at": "2026-10-16T22:45:12Z",
+        "expires_at": "2027-01-14T22:41:07Z"
+      },
+      "result": "PASS",
+      "publication_performed": false
+    },
+    {
+      "label": "owner-original-or-backup",
+      "transport_run_id": 38977943959,
+      "preparation_run_id": 38951733318,
+      "manifest_sha256": "1a77f6c8e09869d6bd45df1b14e6a9ce3f908bcf09351b76cee26a209504878a",
+      "source_sha": "d222f94edca26953c1506ab258adc458ded17c56",
+      "verified_members": 34,
+      "source_artifact": {
+        "id": 12080011272,
+        "name": "runtime-release-bundle-38977943959-1",
+        "digest": "sha256:b5678cea68761c8a4a1c24de2c62fa6c1296cda3922196ae1b31b11950322bca",
+        "size_in_bytes": 271548672,
+        "created_at": "2026-10-16T22:49:21Z",
+        "expires_at": "2027-01-14T22:48:47Z"
+      },
+      "result": "PASS",
+      "publication_performed": false
+    },
+    {
+      "label": "disposable-recovered-after-original-loss",
+      "transport_run_id": 38978632251,
+      "preparation_run_id": 38977611441,
+      "manifest_sha256": "5f20a741b4aeac15efae65a6269769f2628ebfccf90a5b596d5da85fb92f08a4",
+      "source_sha": "d222f94edca26953c1506ab258adc458ded17c56",
+      "verified_members": 34,
+      "source_artifact": {
+        "id": 12079933054,
+        "name": "runtime-release-bundle-38978632251-1",
+        "digest": "sha256:90a5dabc0f265ca4ad43c223de8422b4979007c58fb151158f0143f48d3433c3",
+        "size_in_bytes": 271548673,
+        "created_at": "2026-10-16T22:56:48Z",
+        "expires_at": "2027-01-14T22:56:03Z"
+      },
+      "result": "PASS",
+      "publication_performed": false
+    },
+    {
+      "label": "disposable-recovered-after-original-loss",
+      "transport_run_id": 38978889937,
+      "preparation_run_id": 38977611441,
+      "manifest_sha256": "5f20a741b4aeac15efae65a6269769f2628ebfccf90a5b596d5da85fb92f08a4",
+      "source_sha": "d222f94edca26953c1506ab258adc458ded17c56",
+      "verified_members": 34,
+      "source_artifact": {
+        "id": 12079778744,
+        "name": "runtime-release-bundle-38978889937-1",
+        "digest": "sha256:f81967f8951676bc5b4c004a2df3eea24ae831279960f6e8c9c209e6d5cbf046",
+        "size_in_bytes": 271548673,
+        "created_at": "2026-10-16T22:59:38Z",
+        "expires_at": "2027-01-14T22:58:56Z"
+      },
+      "result": "PASS",
+      "publication_performed": false
+    }
+  ],
+  "destructive_operation": {
+    "target_run_id": 38977611441,
+    "expected_previous_attempt": 1,
+    "requested_attempt": 2,
+    "outcome": "original artifact absent; original attempt successful; both backups readable",
+    "verified_backup_runs": [
+      38978632251,
+      38978889937
+    ],
+    "original_artifact_id": 12080295206
+  },
+  "negative_controls": [
+    {
+      "label": "lost-original-artifact-refused",
+      "result": "PASS",
+      "refusal": "missing, duplicated, or expired artifact: runtime-release-bundle-38977611441-1"
+    },
+    {
+      "label": "wrong-manifest-digest",
+      "result": "PASS",
+      "refusal": "reviewed manifest digest mismatch"
+    },
+    {
+      "label": "wrong-source",
+      "result": "PASS",
+      "refusal": "reviewed preparation inputs mismatch"
+    },
+    {
+      "label": "wrong-version",
+      "result": "PASS",
+      "refusal": "reviewed preparation inputs mismatch"
+    },
+    {
+      "label": "unregistered-transport",
+      "result": "PASS",
+      "refusal": "bundle transport is not in the reviewed recovery registry"
+    },
+    {
+      "label": "wrong-registered-artifact",
+      "result": "PASS",
+      "refusal": "backup artifact metadata differs from recovery registry"
+    },
+    {
+      "label": "one-copy-cannot-authorize-publication",
+      "result": "PASS",
+      "refusal": "two independent healthy backups are required before validation/publication"
+    },
+    {
+      "label": "changed-member-same-size",
+      "result": "PASS",
+      "refusal": "bundle digest mismatch: pypi/actions_runtime-1.0.4-cp312-cp312-macosx_12_0_arm64.whl"
+    },
+    {
+      "label": "changed-original-manifest",
+      "result": "PASS",
+      "refusal": "reviewed manifest digest mismatch"
+    }
+  ],
+  "recovery_after_original_loss": "PASS",
+  "default_button_activation": "UNRUN until the reviewed repair is merged; no production controller guard was bypassed",
+  "owner_after": {
+    "run_id": 38951733318,
+    "run_attempt": 1,
+    "artifact_id": 12069321636,
+    "artifact_digest": "sha256:bbe3d066fb082c1dc61a8916af549bf9a7b66369f36866a2b37a8256a95524e5",
+    "size_in_bytes": 271548672
+  },
+  "protected_owner_unchanged": true
+}

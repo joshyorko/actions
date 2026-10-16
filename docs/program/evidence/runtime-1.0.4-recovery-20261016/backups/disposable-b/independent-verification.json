@@ -1,0 +1,45 @@
+{
+  "status": "PASS",
+  "observed_at": "2026-10-16T23:11:40.753091+00:00",
+  "run_id": 38978889937,
+  "head_sha": "b5cd14680a5b1ff1f3d6bfab3505fa5319270da1",
+  "preparation_run_id": 38977611441,
+  "source_sha": "d222f94edca26953c1506ab258adc458ded17c56",
+  "version": "1.0.4",
+  "manifest_sha256": "5f20a741b4aeac15efae65a6269769f2628ebfccf90a5b596d5da85fb92f08a4",
+  "original_archive_sha256": "b0ea696e523d5fd1ab59651258234bb26b658343ea0b5ae9edc8d1c65a77974e",
+  "verified_members": 34,
+  "publication_performed": false,
+  "backup": {
+    "run_id": 38978889937,
+    "head_sha": "b5cd14680a5b1ff1f3d6bfab3505fa5319270da1",
+    "bundle": {
+      "id": 12079778744,
+      "digest": "sha256:f81967f8951676bc5b4c004a2df3eea24ae831279960f6e8c9c209e6d5cbf046",
+      "size_in_bytes": 271548673
+    },
+    "archive": {
+      "id": 12079669346,
+      "digest": "sha256:2dcce66ddc4fa06d5ae5e645d7f56d20590735b3e75bcf9fee2b0387f12520e3",
+      "size_in_bytes": 271549980
+    }
+  },
+  "artifacts": [
+    {
+      "role": "bundle",
+      "id": 12079778744,
+      "name": "runtime-release-bundle-38978889937-1",
+      "digest": "sha256:f81967f8951676bc5b4c004a2df3eea24ae831279960f6e8c9c209e6d5cbf046",
+      "size_in_bytes": 271548673,
+      "expires_at": "2027-01-14T22:58:56Z"
+    },
+    {
+      "role": "archive",
+      "id": 12079669346,
+      "name": "runtime-release-archive-38978889937-1",
+      "digest": "sha256:2dcce66ddc4fa06d5ae5e645d7f56d20590735b3e75bcf9fee2b0387f12520e3",
+      "size_in_bytes": 271549980,
+      "expires_at": "2027-01-14T22:58:56Z"
+    }
+  ]
+}
