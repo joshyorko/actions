@@ -4295,3 +4295,12 @@ Keep disposable registry rows on nonpublishing qualification/backup branches,
 never in the reviewed default publication registry. Compare tested code blobs to
 the repair commit, retain original owner snapshots before/after, and distinguish
 shared-verifier qualification from unrun default-button activation before merge.
+
+After a controller repair merges, select current `community` for the production
+workflow and keep the original preparation's `source_sha`, version, preparation
+run and manifest digest as inputs. The new controller commit and original
+release source are separate identities. Record both in the validation receipt.
+A completed nonpublishing activation has a successful `validate` job, a skipped
+`publish` job and read-only Actions/Contents token permissions. Recheck the
+original artifact and both registered backup pairs after validation before
+handing the unchanged publish inputs to Josh.

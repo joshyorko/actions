@@ -1,0 +1,62 @@
+{
+  "status": "PASS",
+  "workflow_id": 387028148,
+  "workflow_url": "https://github.com/joshyorko/actions/actions/workflows/runtime-release-publish.yml",
+  "run_id": 39016104442,
+  "run_url": "https://github.com/joshyorko/actions/actions/runs/39016104442",
+  "run_attempt": 1,
+  "event": "workflow_dispatch",
+  "path": ".github/workflows/runtime-release-publish.yml",
+  "head_branch": "community",
+  "controller_sha": "0e80d41c6b4e5df9579675731e6cdbda733acd35",
+  "release_source_sha": "d222f94edca26953c1506ab258adc458ded17c56",
+  "preparation_run_id": 38951733318,
+  "artifact_id": 12069321636,
+  "artifact_sha256": "bbe3d066fb082c1dc61a8916af549bf9a7b66369f36866a2b37a8256a95524e5",
+  "manifest_sha256": "1a77f6c8e09869d6bd45df1b14e6a9ce3f908bcf09351b76cee26a209504878a",
+  "mode": "validate",
+  "token_permissions": {
+    "actions": "read",
+    "contents": "read",
+    "metadata": "read"
+  },
+  "jobs": [
+    {
+      "id": 117348421975,
+      "name": "validate",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 117348601789,
+      "name": "publish",
+      "status": "completed",
+      "conclusion": "skipped"
+    }
+  ],
+  "result": {
+    "missing_native": null,
+    "missing_pypi": [
+      "actions_runtime-1.0.4-cp312-cp312-macosx_12_0_arm64.whl",
+      "actions_runtime-1.0.4-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "actions_runtime-1.0.4-cp312-cp312-win_amd64.whl",
+      "actions_runtime-1.0.4-cp313-cp313-macosx_12_0_arm64.whl",
+      "actions_runtime-1.0.4-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "actions_runtime-1.0.4-cp313-cp313-win_amd64.whl",
+      "actions_runtime-1.0.4.tar.gz"
+    ],
+    "mode": "validate",
+    "ownership": "writer must verify private draft ownership before any write",
+    "source_sha": "d222f94edca26953c1506ab258adc458ded17c56"
+  },
+  "healthy_backup_runs": [
+    38977206416,
+    38977943959
+  ],
+  "all_original_members_verified": 34,
+  "publication_performed": false,
+  "protected_preparation_rerun_or_deleted": false,
+  "started_at": "2026-10-17T08:06:12Z",
+  "completed_status": "completed",
+  "conclusion": "success"
+}

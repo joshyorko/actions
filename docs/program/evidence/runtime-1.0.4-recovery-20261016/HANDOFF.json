@@ -49,8 +49,9 @@
     "protected_owner_unchanged": "PASS",
     "implementation_head_full_ci": "8of8 PASS",
     "repair_head_full_ci": "PASS;8workflows/26jobs at d3656450bf9ddddef29b9aab5c86a316e394024c",
-    "production_controller_validation": "UNRUN; requires approved merge325",
-    "final_publication": "UNRUN; Josh only; separate authorization"
+    "production_controller_validation": "PASS; run39016104442 at merged0e80d41c6b4e5df9579675731e6cdbda733acd35, validateSUCCESS/publishSKIPPED, actions/contentsREAD",
+    "final_publication": "UNRUN; Josh only; separate authorization",
+    "postmerge_ci": "PASS;5workflows/17jobs at merged0e80d41c6b4e5df9579675731e6cdbda733acd35"
   },
   "expected_failure": {
     "run_id": 38977611441,
@@ -58,7 +59,7 @@
     "reason": "never rerun preparation refusal; original artifact removed; attempt1 remains successful"
   },
   "historical_failure": "Intermediate3f78297 Windows post-cancel10-second read timeout; later identical Runtime implementation221ed and final repair headd365 full workflows passed unchanged. Underlying latency cause not claimed repaired.",
-  "remaining_decision": "Approve merging Draft325, then run read-only production validation with the exact original inputs; final publication remains Josh's separate action.",
+  "remaining_decision": "Josh chooses the final publication click using owner-publish-inputs.json on current community.",
   "production_validation_inputs": {
     "operation": "validate",
     "preparation_run_id": "38951733318",
@@ -66,11 +67,23 @@
     "expected_version": "1.0.4",
     "manifest_sha256": "1a77f6c8e09869d6bd45df1b14e6a9ce3f908bcf09351b76cee26a209504878a"
   },
-  "publication_or_merge_performed": false,
   "credentials_or_security_settings_changed": false,
   "frozen_1_0_3_branch_sha": "8b26cb60b1a6caf7011baded4a4005d6df663bb5",
   "superseded_draft": 324,
   "upstream_disposition": "Existing actions/upload-artifact#323 linked; no upstream mutation.",
-  "scope": "This recovery repair; earlier approved robot-fix integration remains separate history.",
-  "external_blockers": []
+  "scope": "Recovery repair plus specifically approved merge325 and read-only production validation; final publication remains Josh only.",
+  "external_blockers": [],
+  "merge_performed": true,
+  "merge_sha": "0e80d41c6b4e5df9579675731e6cdbda733acd35",
+  "publication_performed": false,
+  "production_validation_run_id": 39016104442,
+  "production_validation_run_url": "https://github.com/joshyorko/actions/actions/runs/39016104442",
+  "owner_publish_inputs": {
+    "operation": "publish",
+    "preparation_run_id": "38951733318",
+    "source_sha": "d222f94edca26953c1506ab258adc458ded17c56",
+    "expected_version": "1.0.4",
+    "manifest_sha256": "1a77f6c8e09869d6bd45df1b14e6a9ce3f908bcf09351b76cee26a209504878a"
+  },
+  "verified_workflow_url": "https://github.com/joshyorko/actions/actions/workflows/runtime-release-publish.yml"
 }

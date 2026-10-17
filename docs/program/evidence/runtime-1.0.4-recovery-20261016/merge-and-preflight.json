@@ -1,0 +1,31 @@
+{
+  "observed_at": "2026-10-17T08:07:26.239588+00:00",
+  "pr": 325,
+  "approved_head": "d3656450bf9ddddef29b9aab5c86a316e394024c",
+  "base_before": "d222f94edca26953c1506ab258adc458ded17c56",
+  "merge_sha": "0e80d41c6b4e5df9579675731e6cdbda733acd35",
+  "merge_tree": "dae99f9c71658fe8e266ccd36ec590ff8a15bf64",
+  "merge_parents": [
+    "d222f94edca26953c1506ab258adc458ded17c56",
+    "d3656450bf9ddddef29b9aab5c86a316e394024c"
+  ],
+  "merge_method": "merge",
+  "tested_tree_equals_merged_tree": true,
+  "production_workflow_tree": "907d7019a8188285a0ed2d42a159a1b51bde479f",
+  "production_workflow_tree_unchanged": true,
+  "github_reviews": [],
+  "unresolved_review_threads": [],
+  "independent_review": "PASS; immutable receipt at1e5aa5c272611ac7aa5b18428e486edc57bb5152",
+  "exact_head_ci_workflows": 8,
+  "exact_head_ci_jobs": 26,
+  "exact_head_ci_status": "PASS",
+  "fresh_premerge_devutils_tests": "249passed in17.89seconds",
+  "fresh_local_original_zip_sha256": "bbe3d066fb082c1dc61a8916af549bf9a7b66369f36866a2b37a8256a95524e5",
+  "protected_preparation_run_id": 38951733318,
+  "protected_artifact_id": 12069321636,
+  "publication_performed": false,
+  "workflow_url": "https://github.com/joshyorko/actions/actions/workflows/runtime-release-publish.yml",
+  "workflow_url_http_status": 200,
+  "workflow_id": 387028148,
+  "workflow_state": "active"
+}

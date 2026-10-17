@@ -18,20 +18,38 @@ This evidence contains metadata and hashes, no binaries, credentials or signed U
 - All nine negative controls passed: absent original, wrong manifest digest/source/version, unregistered transport, wrong registered artifact, one-copy publication refusal, same-size wheel corruption and changed original manifest.
 - Reseed [38981788683](https://github.com/joshyorko/actions/actions/runs/38981788683) at `9cd625d87bcc33092f39143f2a0b5b0b488ab879` used only disposable A's registered **raw archive**, after original loss. Its receipt says `source_kind=registered-raw-archive`; independent downloads verify the exact original ZIP/manifest/all 34 members. Backup B remained physically stored; only A was configured for this test.
 
-## Final CI and owner boundary
+## Approved activation and owner publish handoff
 
-Read-only follow-up [38982004911](https://github.com/joshyorko/actions/actions/runs/38982004911), head `32830e6e0e9b6a65e72d1ff0ac495bb310eb3603`, passed with actions:read. It verified owner original/A/B and disposable A/reseeded-C transports after original loss, all nine negative controls and unchanged owner snapshots. No second rerun or publication occurred.
+Josh approved merging PR #325 and the nonpublishing production validation. PR #325
+merged as `0e80d41c6b4e5df9579675731e6cdbda733acd35`. The merged tree equals tested
+PR head `d3656450bf9ddddef29b9aab5c86a316e394024c` exactly, including the unchanged
+production workflow tree. The eight PR workflows and all 26 jobs remain successful.
+Fresh local premerge Devutils verification passed 249 tests again. All five post-merge push workflows and all 17 jobs also passed, including native Linux/macOS/Windows and all six toolkit jobs. See `postmerge-ci.json`.
 
-Final repair source is `d3656450bf9ddddef29b9aab5c86a316e394024c`; its release-code blobs equal the qualified implementation at `221edc4e7357aca64fc654f8ab5805c484042f2c`. All eight workflows and all 26 jobs passed at final repair head `d3656450bf9ddddef29b9aab5c86a316e394024c`, including Linux/macOS/Windows Runtime integration, all three native builds and acceptance, all six toolkit jobs, package qualification, Core, HTTP Helper, coverage and audit. Implementation head221ed also passed all eight workflows. See `ci-current-head.json` and `implementation-head-ci.json`. An earlier intermediate head had one Windows post-cancellation10-second read timeout; its exact outcome is retained in `intermediate-ci-failure.json`, without changing tests or claiming a Runtime repair.
+Production validation [39016104442](https://github.com/joshyorko/actions/actions/runs/39016104442)
+ran the actual production workflow on `community` at that merged controller.
+It passed using original preparation `38951733318` and artifact `12069321636`,
+original release source `d222f94edca26953c1506ab258adc458ded17c56` and original
+manifest `1a77f6c8e09869d6bd45df1b14e6a9ce3f908bcf09351b76cee26a209504878a`.
+The `validate` job succeeded with Actions/Contents read permissions; `publish`
+was skipped. The original ZIP digest matched, the existing strict source/member/
+package checks passed and both registered raw backups passed fresh byte checks.
+The read-only result leaves private-draft ownership for the eventual writer to
+verify before any write.
 
-Production-controller activation remains **UNRUN until an approved merge of Draft PR325**. The branch qualification calls the unchanged shared verifier with exact code-blob binding; it does not bypass or pretend to exercise the production controller's current-community guard.
+`production-validation.json` records the exact run/jobs/permissions/output.
+`dispatch-receipt.json` records the single validate dispatch. `merge-and-preflight.json`
+records the approved head/base, merge identity, reviews, tests and exact tree match.
+`post-validation-preservation.json` confirms the protected owner and both backup
+pairs unchanged/unexpired, frozen 1.0.3 branch/tag/four native assets unchanged,
+and no 1.0.4 tag/native release/PyPI version after validation.
 
-After review/approval, merge PR325 while preserving the production workflow tree, then run **Publish Actions Runtime Release** on current community with `operation=validate`, `preparation_run_id=38951733318`, `source_sha=d222f94edca26953c1506ab258adc458ded17c56`, `expected_version=1.0.4`, `manifest_sha256=1a77f6c8e09869d6bd45df1b14e6a9ce3f908bcf09351b76cee26a209504878a`. A registered owner backup run may replace the transport ID only if needed; the other immutable inputs stay original.
+The owner workflow URL was verified active and returned HTTP 200:
+[Publish Actions Runtime Release](https://github.com/joshyorko/actions/actions/workflows/runtime-release-publish.yml).
+The copy-ready fields are in `owner-publish-inputs.json` and `OWNER-PUBLISH-HANDOFF.md`.
+The original release `source_sha` stays unchanged; the current community controller
+is the new merge commit. Final publication remains Josh's separate click.
 
-Do not rerun/delete the protected preparation or backup runs. Renew exact-byte copies before expiry and review the registry update; publication still requires two healthy registered runs. Final publication remains Josh's separate action. No merge, tag, package, native release, template, deployment, credential or security-setting mutation was performed by this repair campaign.
-
-Existing upstream platform report: [actions/upload-artifact#323](https://github.com/actions/upload-artifact/issues/323). No new upstream issue was filed.
-
-Final preservation check at 2026-10-17 00:12 UTC confirms the owner preparation/artifact unchanged; both owner backup pairs unexpired; frozen1.0.3branch/tag/four native assets unchanged; no1.0.4tag, native release or PyPI version exists. No external blocker remains for review. The exact remaining owner decision is approval to merge325, followed by read-only production validation. Final publication remains separately with Josh.
-
-`HANDOFF.json` contains the original317/318heads, all repair/qualification identities, passed/expected-failed/unrun gates and exact production validation inputs. `final-publication-and-preservation-state.json` records the live preservation/publication checks.
+Existing upstream platform report: [actions/upload-artifact#323](https://github.com/actions/upload-artifact/issues/323).
+No new upstream issue was filed. No package/tag/native release/template/deployment
+publication or credential/security-setting change was performed.
