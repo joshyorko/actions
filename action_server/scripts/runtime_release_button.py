@@ -16,6 +16,7 @@ import shutil
 import stat
 import subprocess
 import sys
+import tempfile
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -27,6 +28,9 @@ from publish_verified_runtime import verify_artifacts
 REPOSITORY = "joshyorko/actions"
 MANIFEST = "release-bundle.json"
 PREPARE_WORKFLOW = ".github/workflows/runtime-release-prepare.yml"
+BACKUP_WORKFLOW = ".github/workflows/runtime-release-backup.yml"
+BACKUP_BRANCH = "backup/runtime-release-bundles"
+RECOVERY_REGISTRY = "action_server/release-bundle-backups.json"
 REQUIRED = {
     "actions_runtime_tests.yml": 3,
     "actions_runtime_pypi_release.yml": 5,
@@ -46,6 +50,10 @@ PLATFORMS = {
 
 class ReleaseError(ValueError):
     """A release invariant failed; retain existing state for a reviewed retry."""
+
+
+class BackupUnavailable(ReleaseError):
+    """A reviewed copy is absent or expired; another copy may reseed it."""
 
 
 def require(condition, message):
@@ -253,7 +261,7 @@ def extract_zip(archive, destination):
         source.extractall(destination)
 
 
-def download(run, artifact_name, destination):
+def download(run, artifact_name, destination, *, retain_archive=False):
     artifacts = pages(
         f"repos/{REPOSITORY}/actions/runs/{run['id']}/artifacts", "artifacts"
     )
@@ -275,11 +283,16 @@ def download(run, artifact_name, destination):
         )
     require(result.returncode == 0, "artifact download failed")
     require(
+        archive.stat().st_size == artifact["size_in_bytes"],
+        "GitHub artifact archive size mismatch",
+    )
+    require(
         artifact.get("digest") == "sha256:" + sha256(archive),
         "GitHub artifact archive digest mismatch",
     )
     extract_zip(archive, destination)
-    archive.unlink()
+    if not retain_archive:
+        archive.unlink()
     return {
         key: artifact[key]
         for key in ("id", "name", "digest", "size_in_bytes", "created_at", "expires_at")
@@ -662,9 +675,213 @@ def prepare(args):
     )
 
 
+def recovery_record(root, digest, manifest, *, required=True):
+    path = root / RECOVERY_REGISTRY
+    if not path.exists() and not required:
+        return None
+    require(
+        path.is_file()
+        and not path.is_symlink()
+        and path.stat().st_nlink == 1
+        and path.stat().st_size <= 1024**2,
+        "reviewed recovery registry missing or unsafe",
+    )
+    registry = json.loads(path.read_text(encoding="utf-8"))
+    require(
+        registry.get("schema_version") == 1
+        and registry.get("repository") == REPOSITORY
+        and isinstance(registry.get("bundles"), list)
+        and len(registry["bundles"]) <= 100,
+        "invalid recovery registry schema/repository",
+    )
+    matches = [
+        entry for entry in registry["bundles"] if entry.get("manifest_sha256") == digest
+    ]
+    require(len(matches) <= 1, "ambiguous recovery registry manifest")
+    if not matches and not required:
+        return None
+    require(len(matches) == 1, "reviewed recovery registry has no exact manifest")
+    record = matches[0]
+    require(
+        record.get("source_sha") == manifest["source_sha"]
+        and record.get("version") == manifest["version"]
+        and record.get("preparation_run_id") == manifest["preparation_run_id"]
+        and re.fullmatch(r"[0-9a-f]{64}", record.get("original_archive_sha256", "")),
+        "recovery registry release identity mismatch",
+    )
+    backups = record.get("backups")
+    require(
+        isinstance(backups, list) and 1 <= len(backups) <= 6,
+        "recovery registry backup bound",
+    )
+    seen = set()
+    artifact_ids = set()
+    for backup in backups:
+        run_id = backup.get("run_id")
+        require(
+            isinstance(run_id, int)
+            and not isinstance(run_id, bool)
+            and run_id > 0
+            and run_id not in seen
+            and run_id != manifest["preparation_run_id"],
+            "recovery registry requires distinct backup runs",
+        )
+        seen.add(run_id)
+        require(
+            re.fullmatch(r"[0-9a-f]{40}", backup.get("head_sha", "")),
+            "recovery registry backup SHA",
+        )
+        for role in ("bundle", "archive"):
+            item = backup.get(role, {})
+            require(
+                isinstance(item.get("id"), int)
+                and not isinstance(item.get("id"), bool)
+                and item["id"] > 0
+                and item["id"] not in artifact_ids
+                and re.fullmatch(r"sha256:[0-9a-f]{64}", item.get("digest", ""))
+                and isinstance(item.get("size_in_bytes"), int)
+                and not isinstance(item.get("size_in_bytes"), bool)
+                and 0 < item["size_in_bytes"] <= 2 * 1024**3,
+                "recovery registry artifact identity/bound mismatch",
+            )
+            artifact_ids.add(item["id"])
+    return record
+
+
+def verify_backup(record, backup, *, archive_only=False):
+    run_id = backup["run_id"]
+    run = api(f"repos/{REPOSITORY}/actions/runs/{run_id}/attempts/1", missing=True)
+    if run is None:
+        raise BackupUnavailable(f"backup run{run_id} absent")
+    require(
+        run.get("id") == run_id
+        and run.get("run_attempt") == 1
+        and run.get("head_sha") == backup["head_sha"]
+        and run.get("path") == BACKUP_WORKFLOW
+        and run.get("head_branch") == BACKUP_BRANCH
+        and run.get("event") in {"push", "workflow_dispatch"}
+        and run.get("status") == "completed"
+        and run.get("conclusion") == "success"
+        and run.get("repository", {}).get("full_name") == REPOSITORY
+        and run.get("head_repository", {}).get("full_name") == REPOSITORY,
+        "backup run identity/state mismatch",
+    )
+    artifacts = pages(
+        f"repos/{REPOSITORY}/actions/runs/{run_id}/artifacts", "artifacts"
+    )
+    result = {}
+    for role in ("archive",) if archive_only else ("bundle", "archive"):
+        name = f"runtime-release-{role}-{run_id}-1"
+        matches = [item for item in artifacts if item["name"] == name]
+        require(len(matches) <= 1, "duplicate backup artifact")
+        if not matches or matches[0]["expired"]:
+            raise BackupUnavailable(f"backup artifact absent or expired: {name}")
+        item = matches[0]
+        require(
+            all(
+                item.get(key) == backup[role][key]
+                for key in ("id", "digest", "size_in_bytes")
+            )
+            and item.get("workflow_run", {}).get("id") == run_id,
+            "backup artifact metadata differs from recovery registry",
+        )
+        result[role] = item
+    if not archive_only:
+        verify_backup_bytes(record, backup, result["archive"])
+    return result
+
+
+def verify_backup_bytes(record, backup, artifact):
+    """An API row is insufficient: prove the retained original bytes are readable."""
+    with tempfile.TemporaryDirectory(prefix="runtime-release-recovery-") as temporary:
+        root = Path(temporary)
+        retained = root / "archive"
+        downloaded = download({"id": backup["run_id"]}, artifact["name"], retained)
+        require(
+            all(
+                downloaded[key] == artifact[key]
+                for key in ("id", "digest", "size_in_bytes")
+            ),
+            "backup archive changed during verification",
+        )
+        require(
+            {path.name for path in retained.iterdir()}
+            == {"original-bundle.zip", "backup-receipt.json"}
+            and all(
+                path.is_file() and not path.is_symlink() and path.stat().st_nlink == 1
+                for path in retained.iterdir()
+            ),
+            "backup raw archive inventory mismatch",
+        )
+        receipt_path = retained / "backup-receipt.json"
+        require(receipt_path.stat().st_size <= 1024**2, "backup receipt bound exceeded")
+        receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+        require(
+            isinstance(receipt, dict)
+            and receipt.get("schema_version") == 1
+            and receipt.get("repository") == REPOSITORY
+            and receipt.get("controller_sha") == backup["head_sha"]
+            and all(
+                receipt.get(key) == record[key]
+                for key in (
+                    "preparation_run_id",
+                    "source_sha",
+                    "version",
+                    "manifest_sha256",
+                    "original_archive_sha256",
+                )
+            ),
+            "backup raw receipt differs from reviewed release identity",
+        )
+        original = retained / "original-bundle.zip"
+        require(
+            sha256(original) == record["original_archive_sha256"],
+            "backup original ZIP digest mismatch",
+        )
+        bundle = root / "bundle"
+        extract_zip(original, bundle)
+        require(
+            sha256(bundle / MANIFEST) == record["manifest_sha256"],
+            "backup original manifest digest mismatch",
+        )
+        manifest = json.loads((bundle / MANIFEST).read_text(encoding="utf-8"))
+        verify_files(bundle, manifest)
+
+
+def verify_recovery(root, digest, manifest, transport_id):
+    record = recovery_record(root, digest, manifest)
+    require(
+        transport_id == manifest["preparation_run_id"]
+        or any(item["run_id"] == transport_id for item in record["backups"]),
+        "bundle transport is not in the reviewed recovery registry",
+    )
+    healthy = []
+    for backup in record["backups"]:
+        try:
+            verify_backup(record, backup)
+        except BackupUnavailable:
+            continue
+        healthy.append(backup["run_id"])
+    require(
+        len(healthy) >= 2,
+        "two independent healthy backups are required before validation/publication",
+    )
+    require(
+        transport_id == manifest["preparation_run_id"] or transport_id in healthy,
+        "selected registered backup is unavailable",
+    )
+    return record
+
+
 def verify(args):
     root = args.root.resolve()
     controller(root, ".github/workflows/runtime-release-publish.yml")
+    return verify_bundle(args)
+
+
+def verify_bundle(args, *, require_backups=True):
+    """Verify content/original identity; only the nonpublishing archiver may bootstrap copies."""
+    root = args.root.resolve()
     require(
         re.fullmatch(r"[0-9a-f]{64}", args.manifest_sha256),
         "reviewed manifest SHA-256 required",
@@ -679,7 +896,12 @@ def verify(args):
         "bundle schema/repository mismatch",
     )
     require(
-        manifest["preparation_run_id"] == args.preparation_run_id
+        isinstance(manifest["preparation_run_id"], int)
+        and not isinstance(manifest["preparation_run_id"], bool)
+        and manifest["preparation_run_id"] > 0
+        and isinstance(args.preparation_run_id, int)
+        and not isinstance(args.preparation_run_id, bool)
+        and args.preparation_run_id > 0
         and manifest["source_sha"] == args.source_sha
         and manifest["version"] == args.version,
         "reviewed preparation inputs mismatch",
@@ -698,7 +920,7 @@ def verify(args):
     # the run's latest status. Bind to the original successful attempt so it
     # cannot invalidate recovery of an already partially published bundle.
     run = api(
-        f"repos/{REPOSITORY}/actions/runs/{args.preparation_run_id}/attempts/"
+        f"repos/{REPOSITORY}/actions/runs/{manifest['preparation_run_id']}/attempts/"
         f"{manifest['preparation_run_attempt']}"
     )
     require(
@@ -735,6 +957,19 @@ def verify(args):
         ],
         check=True,
     )
+    if require_backups:
+        verify_recovery(root, args.manifest_sha256, manifest, args.preparation_run_id)
+    elif args.preparation_run_id != manifest["preparation_run_id"]:
+        record = recovery_record(root, args.manifest_sha256, manifest)
+        matches = [
+            item
+            for item in record["backups"]
+            if item["run_id"] == args.preparation_run_id
+        ]
+        require(
+            len(matches) == 1, "archive source is not in the reviewed recovery registry"
+        )
+        verify_backup(record, matches[0], archive_only=True)
     return manifest
 
 

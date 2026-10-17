@@ -497,7 +497,7 @@ def test_download_verifies_github_archive_digest_before_extraction(
 
 
 @pytest.mark.parametrize("original_conclusion", ["success", "failure"])
-def test_publication_keeps_original_success_after_an_accidental_preparation_rerun(
+def test_bundle_original_attempt_metadata_survives_a_preparation_rerun(
     monkeypatch, tmp_path, original_conclusion
 ):
     import hashlib
@@ -551,12 +551,12 @@ def test_publication_keeps_original_success_after_an_accidental_preparation_reru
 
     monkeypatch.setattr(button, "api", api)
     if original_conclusion == "success":
-        assert button.verify(args) == m
+        assert button.verify_bundle(args, require_backups=False) == m
     else:
         with pytest.raises(
             button.ReleaseError, match="preparation run identity/state mismatch"
         ):
-            button.verify(args)
+            button.verify_bundle(args, require_backups=False)
     assert requested == [f"repos/{button.REPOSITORY}/actions/runs/123/attempts/1"]
 
 

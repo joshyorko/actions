@@ -1,0 +1,14 @@
+{
+  "disposable_preparation_run_id": 38977611441,
+  "latest_attempt": 2,
+  "latest_conclusion": "failure",
+  "original_attempt": 1,
+  "original_conclusion": "success",
+  "original_artifacts": [],
+  "refusal_marker": "never rerun preparation; start a new preparation or resume publication from its original bundle",
+  "observed_by": "authenticated GitHub API and decoded hosted job117243739514 logs",
+  "protected_owner_artifact_id": 12069321636,
+  "protected_owner_artifact_digest": "sha256:bbe3d066fb082c1dc61a8916af549bf9a7b66369f36866a2b37a8256a95524e5",
+  "protected_owner_artifact_expired": false,
+  "publication_performed": false
+}

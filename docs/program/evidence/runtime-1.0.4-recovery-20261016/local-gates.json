@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "code_source_sha": "221edc4e7357aca64fc654f8ab5805c484042f2c",
+  "toolchain": "pinned RCC18.19.3 outer gateway and existing package-local Poetry environment; locks unchanged",
+  "complete_devutils_tests": 249,
+  "qualification_guard_tests": 10,
+  "static_checks": [
+    "full Devutils Ruff plus release scripts",
+    "configured isort",
+    "Ruff format",
+    "git diff --check"
+  ],
+  "regression_red_green": [
+    "recovery policy16failures/5passes ->21passes",
+    "archive module8failures ->29passes combined",
+    "actual ZIP size and template absent regressions failed then repaired",
+    "fresh readability guard failed then repaired; four nested corruption cases passed;36new recovery tests total"
+  ],
+  "test_command": "rcc task script -r /workspace/runtime104-release/developer/toolkit.yaml -- python /tmp/runtime104-package.py /workspace/runtime104-release devutils run pytest /workspace/runtime104-recovery/devutils/tests -q",
+  "publication_performed": false
+}

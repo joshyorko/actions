@@ -1,0 +1,25 @@
+{
+  "controller_sha": "c5dad9cd7fd67ded5f3a88e9c9b58977d32ca41b",
+  "manifest_sha256": "5f20a741b4aeac15efae65a6269769f2628ebfccf90a5b596d5da85fb92f08a4",
+  "original_archive_sha256": "b0ea696e523d5fd1ab59651258234bb26b658343ea0b5ae9edc8d1c65a77974e",
+  "preparation_run_attempt": 1,
+  "preparation_run_id": 38977611441,
+  "publication_performed": false,
+  "qualification_sha": "9e8cfd7caa602031db4eba75f545b1211f882561",
+  "repository": "joshyorko/actions",
+  "schema_version": 1,
+  "source_artifact": {
+    "created_at": "2026-10-16T22:47:02Z",
+    "digest": "sha256:b0ea696e523d5fd1ab59651258234bb26b658343ea0b5ae9edc8d1c65a77974e",
+    "expires_at": "2026-11-15T22:46:52Z",
+    "id": 12080295206,
+    "name": "runtime-release-bundle-38977611441-1",
+    "size_in_bytes": 271548673
+  },
+  "source_kind": "original-preparation",
+  "source_run_id": 38977611441,
+  "source_sha": "d222f94edca26953c1506ab258adc458ded17c56",
+  "tree": "c426aad8258a61da8dbf592696ea37a5499e5bb4",
+  "verified_members": 34,
+  "version": "1.0.4"
+}
