@@ -18,11 +18,11 @@ This evidence contains metadata and hashes, no binaries, credentials or signed U
 - All nine negative controls passed: absent original, wrong manifest digest/source/version, unregistered transport, wrong registered artifact, one-copy publication refusal, same-size wheel corruption and changed original manifest.
 - Reseed [38981788683](https://github.com/joshyorko/actions/actions/runs/38981788683) at `9cd625d87bcc33092f39143f2a0b5b0b488ab879` used only disposable A's registered **raw archive**, after original loss. Its receipt says `source_kind=registered-raw-archive`; independent downloads verify the exact original ZIP/manifest/all 34 members. Backup B remained physically stored; only A was configured for this test.
 
-## Remaining gates and owner boundary
+## Final CI and owner boundary
 
 Read-only follow-up [38982004911](https://github.com/joshyorko/actions/actions/runs/38982004911), head `32830e6e0e9b6a65e72d1ff0ac495bb310eb3603`, passed with actions:read. It verified owner original/A/B and disposable A/reseeded-C transports after original loss, all nine negative controls and unchanged owner snapshots. No second rerun or publication occurred.
 
-Final repair source is `d3656450bf9ddddef29b9aab5c86a316e394024c`; its release-code blobs equal the qualified implementation at `221edc4e7357aca64fc654f8ab5805c484042f2c`. All eight workflows at implementation head221ed passed, including full Windows integration. At final source head d3656450bf9ddddef29b9aab5c86a316e394024c, seven workflows and25of26jobs passed; Windows Runtime integration remains pending. Native acceptance passed on all three platforms. See ci-current-head.json and implementation-head-ci.json. An earlier intermediate head had one Windows post-cancellation10-second read timeout; its exact outcome is retained in `intermediate-ci-failure.json`, without changing tests or claiming a Runtime repair.
+Final repair source is `d3656450bf9ddddef29b9aab5c86a316e394024c`; its release-code blobs equal the qualified implementation at `221edc4e7357aca64fc654f8ab5805c484042f2c`. All eight workflows and all 26 jobs passed at final repair head `d3656450bf9ddddef29b9aab5c86a316e394024c`, including Linux/macOS/Windows Runtime integration, all three native builds and acceptance, all six toolkit jobs, package qualification, Core, HTTP Helper, coverage and audit. Implementation head221ed also passed all eight workflows. See `ci-current-head.json` and `implementation-head-ci.json`. An earlier intermediate head had one Windows post-cancellation10-second read timeout; its exact outcome is retained in `intermediate-ci-failure.json`, without changing tests or claiming a Runtime repair.
 
 Production-controller activation remains **UNRUN until an approved merge of Draft PR325**. The branch qualification calls the unchanged shared verifier with exact code-blob binding; it does not bypass or pretend to exercise the production controller's current-community guard.
 
@@ -31,3 +31,7 @@ After review/approval, merge PR325 while preserving the production workflow tree
 Do not rerun/delete the protected preparation or backup runs. Renew exact-byte copies before expiry and review the registry update; publication still requires two healthy registered runs. Final publication remains Josh's separate action. No merge, tag, package, native release, template, deployment, credential or security-setting mutation was performed by this repair campaign.
 
 Existing upstream platform report: [actions/upload-artifact#323](https://github.com/actions/upload-artifact/issues/323). No new upstream issue was filed.
+
+Final preservation check at 2026-10-17 00:12 UTC confirms the owner preparation/artifact unchanged; both owner backup pairs unexpired; frozen1.0.3branch/tag/four native assets unchanged; no1.0.4tag, native release or PyPI version exists. No external blocker remains for review. The exact remaining owner decision is approval to merge325, followed by read-only production validation. Final publication remains separately with Josh.
+
+`HANDOFF.json` contains the original317/318heads, all repair/qualification identities, passed/expected-failed/unrun gates and exact production validation inputs. `final-publication-and-preservation-state.json` records the live preservation/publication checks.

@@ -23,6 +23,6 @@
   "recovery_changes_do_not_modify_runtime_source_tests_tasks_or_locks": true,
   "underlying_latency_cause": "unresolved; no claim of reproduced or repaired Runtime behavior",
   "test_timeout_assertions_and_security_constraints_unchanged": true,
-  "latest_exact_head_full_ci": "25of26jobs PASS; Windows integration pending at d3656450bf9ddddef29b9aab5c86a316e394024c",
+  "latest_exact_head_full_ci": "PASS;8workflows/26jobs at d3656450bf9ddddef29b9aab5c86a316e394024c; no test or timeout changes",
   "later_identical_runtime_full_workflow": "PASS at implementation221edc4e7357aca64fc654f8ab5805c484042f2c/run38979593162 without test or timeout changes"
 }

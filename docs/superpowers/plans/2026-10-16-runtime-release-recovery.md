@@ -55,5 +55,5 @@
 - [x] Create a new disposable canonical preparation, archive it twice, and record both registered identities in the qualification branch.
 - [x] Deliberately rerun only that disposable preparation; verify original artifact loss and unchanged original-attempt success.
 - [x] Recover the original exact ZIP/manifest/member bytes through each backup; reject wrong digests/identities and insufficient copies; reseed from a surviving raw archive.
-- [ ] Recheck protected owner preparation/artifact unchanged. Run final exact-head hosted checks and independent review of source/qualification evidence.
-- [ ] Push final reviewable repair PR and qualified evidence. Report actual passed/failed/unrun gates and the exact merge/activation step still requiring approval; never publish.
+- [x] Recheck protected owner preparation/artifact unchanged. Run final exact-head hosted checks and independent review of source/qualification evidence.
+- [x] Push final reviewable repair PR and qualified evidence. Report actual passed/failed/unrun gates and the exact merge/activation step still requiring approval; never publish.

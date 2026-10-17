@@ -1,0 +1,76 @@
+{
+  "repository": "joshyorko/actions",
+  "repair_pr": 325,
+  "repair_head": "d3656450bf9ddddef29b9aab5c86a316e394024c",
+  "reviewed_implementation_head": "221edc4e7357aca64fc654f8ab5805c484042f2c",
+  "original_robot_pr_heads": {
+    "317": "dd5ccf3ae76451536012f15e3bf1b1adc728f9eb",
+    "318": "ffa6ed49726c4ece12c6648c021058e06927ddb8"
+  },
+  "original_release": {
+    "source_sha": "d222f94edca26953c1506ab258adc458ded17c56",
+    "qualification_sha": "9e8cfd7caa602031db4eba75f545b1211f882561",
+    "tree": "c426aad8258a61da8dbf592696ea37a5499e5bb4",
+    "version": "1.0.4",
+    "protected_preparation_run_id": 38951733318,
+    "protected_artifact_id": 12069321636,
+    "manifest_sha256": "1a77f6c8e09869d6bd45df1b14e6a9ce3f908bcf09351b76cee26a209504878a",
+    "original_archive_sha256": "bbe3d066fb082c1dc61a8916af549bf9a7b66369f36866a2b37a8256a95524e5"
+  },
+  "owner_backup_runs": [
+    38977206416,
+    38977943959
+  ],
+  "owner_backup_earliest_expiry": "2027-01-14T22:41:07Z",
+  "qualification_branch_head": "32830e6e0e9b6a65e72d1ff0ac495bb310eb3603",
+  "original_loss_qualification": {
+    "run_id": 38981527410,
+    "head_sha": "692d8a1954cedcce30af4288b3e72881cf6156ed",
+    "status": "PASS"
+  },
+  "raw_reseed": {
+    "run_id": 38981788683,
+    "head_sha": "9cd625d87bcc33092f39143f2a0b5b0b488ab879",
+    "status": "PASS"
+  },
+  "read_only_reseed_verification": {
+    "run_id": 38982004911,
+    "head_sha": "32830e6e0e9b6a65e72d1ff0ac495bb310eb3603",
+    "status": "PASS"
+  },
+  "gates": {
+    "complete_devutils_tests": "249 PASS",
+    "qualification_guard_tests": "10 PASS",
+    "configured_static_checks": "PASS",
+    "independent_review": "PASS; no findings",
+    "original_loss_and_both_backup_transports": "PASS",
+    "raw_reseed_and_reseeded_carrier": "PASS",
+    "nine_negative_controls": "PASS in both hosted qualification runs",
+    "protected_owner_unchanged": "PASS",
+    "implementation_head_full_ci": "8of8 PASS",
+    "repair_head_full_ci": "PASS;8workflows/26jobs at d3656450bf9ddddef29b9aab5c86a316e394024c",
+    "production_controller_validation": "UNRUN; requires approved merge325",
+    "final_publication": "UNRUN; Josh only; separate authorization"
+  },
+  "expected_failure": {
+    "run_id": 38977611441,
+    "attempt": 2,
+    "reason": "never rerun preparation refusal; original artifact removed; attempt1 remains successful"
+  },
+  "historical_failure": "Intermediate3f78297 Windows post-cancel10-second read timeout; later identical Runtime implementation221ed and final repair headd365 full workflows passed unchanged. Underlying latency cause not claimed repaired.",
+  "remaining_decision": "Approve merging Draft325, then run read-only production validation with the exact original inputs; final publication remains Josh's separate action.",
+  "production_validation_inputs": {
+    "operation": "validate",
+    "preparation_run_id": "38951733318",
+    "source_sha": "d222f94edca26953c1506ab258adc458ded17c56",
+    "expected_version": "1.0.4",
+    "manifest_sha256": "1a77f6c8e09869d6bd45df1b14e6a9ce3f908bcf09351b76cee26a209504878a"
+  },
+  "publication_or_merge_performed": false,
+  "credentials_or_security_settings_changed": false,
+  "frozen_1_0_3_branch_sha": "8b26cb60b1a6caf7011baded4a4005d6df663bb5",
+  "superseded_draft": 324,
+  "upstream_disposition": "Existing actions/upload-artifact#323 linked; no upstream mutation.",
+  "scope": "This recovery repair; earlier approved robot-fix integration remains separate history.",
+  "external_blockers": []
+}

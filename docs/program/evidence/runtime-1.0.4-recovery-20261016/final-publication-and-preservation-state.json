@@ -1,0 +1,88 @@
+{
+  "observed_at": "2026-10-17T00:12:23Z",
+  "protected_owner": {
+    "run_id": 38951733318,
+    "attempt": 1,
+    "conclusion": "success",
+    "artifact_id": 12069321636,
+    "digest": "sha256:bbe3d066fb082c1dc61a8916af549bf9a7b66369f36866a2b37a8256a95524e5",
+    "size_in_bytes": 271548672,
+    "expired": false,
+    "unchanged": true
+  },
+  "community_sha": "d222f94edca26953c1506ab258adc458ded17c56",
+  "frozen_1_0_3": {
+    "branch_sha": "8b26cb60b1a6caf7011baded4a4005d6df663bb5",
+    "tag_object": "f5b8b14abb8bf35c8abba4701ccb2007e5f6fbbe",
+    "assets": [
+      {
+        "name": "actions-runtime-1.0.3-linux64",
+        "digest": "sha256:8d07146f7e0ed3be8c7d9e7f7042907b86ad899a4c47d1a755edb98975dc6579",
+        "size": 82243466
+      },
+      {
+        "name": "actions-runtime-1.0.3-macos-arm64",
+        "digest": "sha256:720ed3da25311268234dec8bff5710dde21f16e5d2485e03018025d21d93731c",
+        "size": 62787554
+      },
+      {
+        "name": "actions-runtime-1.0.3-sha256.txt",
+        "digest": "sha256:481535421457f4dfa03f14013245dc086ad03bb81707f161d07088df14ca3953",
+        "size": 298
+      },
+      {
+        "name": "actions-runtime-1.0.3-windows64.exe",
+        "digest": "sha256:fa65aad9abb483d3e8005ffd5c93cbcf669e00e86d7d70e8030f74bc895cb331",
+        "size": 57877504
+      }
+    ],
+    "unchanged": true
+  },
+  "runtime_1_0_4": {
+    "tag_present": false,
+    "native_release_present": false,
+    "publication_performed_by_this_repair": false
+  },
+  "owner_backup_artifacts": [
+    [
+      {
+        "id": 12080016098,
+        "name": "runtime-release-bundle-38977206416-1",
+        "digest": "sha256:aba2d10da80f145c119136d624b6830cd5b68129a0cb29fcbe6b37b0efc79b90",
+        "size_in_bytes": 271548672,
+        "expired": false,
+        "expires_at": "2027-01-14T22:41:07Z"
+      },
+      {
+        "id": 12079238969,
+        "name": "runtime-release-archive-38977206416-1",
+        "digest": "sha256:2e928c89ebd86f2593466951ae4318e9ae5fc5a9e63e368972a19fb06a3f7611",
+        "size_in_bytes": 271549979,
+        "expired": false,
+        "expires_at": "2027-01-14T22:41:07Z"
+      }
+    ],
+    [
+      {
+        "id": 12080011272,
+        "name": "runtime-release-bundle-38977943959-1",
+        "digest": "sha256:b5678cea68761c8a4a1c24de2c62fa6c1296cda3922196ae1b31b11950322bca",
+        "size_in_bytes": 271548672,
+        "expired": false,
+        "expires_at": "2027-01-14T22:48:47Z"
+      },
+      {
+        "id": 12079936308,
+        "name": "runtime-release-archive-38977943959-1",
+        "digest": "sha256:6f6354374ae423891948de639779121bf3f619811bd9fef093f1d819646e2b94",
+        "size_in_bytes": 271549979,
+        "expired": false,
+        "expires_at": "2027-01-14T22:48:47Z"
+      }
+    ]
+  ],
+  "pypi": {
+    "observed_at": "2026-10-17T00:12:23.808665+00:00",
+    "version_1_0_4_present": false
+  }
+}
