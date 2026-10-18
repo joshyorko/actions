@@ -257,6 +257,28 @@ def _route_is_listed(client: httpx.Client, uri: str, *, template: bool) -> bool:
     return any(item.get("uri") == uri for item in resources)
 
 
+def _resource_handoff_is_published(client: httpx.Client) -> bool:
+    surface = _resource_surface(client)
+    assert "result" in surface["resources/list"]
+    assert "result" in surface["resources/templates/list"]
+    resources = surface["resources/list"]["result"].get("resources")
+    templates = surface["resources/templates/list"]["result"].get("resourceTemplates")
+    assert resources is not None and templates is not None
+    direct = {item["uri"] for item in resources}
+    templated = {item["uriTemplate"] for item in templates}
+    return all(
+        (
+            transition["old_uri"]
+            if transition["old_kind"] == "direct"
+            else _old_template(index)
+        )
+        not in (direct if transition["old_kind"] == "direct" else templated)
+        and transition["candidate_uri"]
+        in (templated if transition["candidate_kind"] == "template" else direct)
+        for index, transition in enumerate(_TRANSITIONS)
+    )
+
+
 def _read_text(client: httpx.Client, uri: str) -> str:
     result = _read(client, uri)
     assert "error" not in result, result
@@ -607,11 +629,8 @@ def test_cli_resource_owner_history_across_reload_and_restart(
                 package_b, _write_b_routes(phase="candidate"), managed=managed
             )
             for transition in _TRANSITIONS:
-                template = transition["candidate_kind"] == "template"
                 wait_for_condition(
-                    lambda transition=transition, template=template: _route_is_listed(
-                        client, transition["candidate_uri"], template=template
-                    ),
+                    lambda: _resource_handoff_is_published(client),
                     msg=f"Candidate route was not published: {transition['name']}",
                     timeout=30,
                     sleep=0.05,

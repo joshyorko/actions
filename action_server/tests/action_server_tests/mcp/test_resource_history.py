@@ -576,3 +576,123 @@ def test_concurrent_processes_retain_serialized_routing_history(
             if child.poll() is None:
                 child.kill()
                 child.communicate(timeout=10)
+
+
+def test_cross_package_handoff_waits_for_previous_declarations_to_disappear(
+    catalog, monkeypatch
+):
+    from action_server_tests import test_cli_mcp_resource_history as cli_history
+
+    from actions.server._models import Action
+
+    db, routes, request, invoked, insert = catalog
+    previous = []
+    candidates = []
+    for index, transition in enumerate(cli_history._TRANSITIONS):
+        previous.append(
+            insert(
+                "package_a",
+                f"claim_{index}",
+                action_id=f"owner-a-v2-{index}",
+                options={
+                    "kind": "resource",
+                    "uri": transition["old_uri"]
+                    if transition["old_kind"] == "direct"
+                    else cli_history._old_template(index),
+                },
+            )
+        )
+    control = insert(
+        "package_a",
+        "control",
+        options={"kind": "resource", "uri": "control://same/value"},
+    )
+    routes.register_actions()
+
+    # Publish B first while A retains its declarations: no watcher or sleeps.
+    for index, transition in enumerate(cli_history._TRANSITIONS):
+        candidates.append(
+            insert(
+                "package_b",
+                f"candidate_{index}",
+                options={"kind": "resource", "uri": transition["candidate_uri"]},
+            )
+        )
+    safe = insert(
+        "package_b", "safe", options={"kind": "resource", "uri": "safe://owner-b/value"}
+    )
+    routes.register_actions()
+
+    # Only the CLI transport is replaced; responses come from the real catalog RPCs.
+    monkeypatch.setattr(
+        cli_history,
+        "_resource_surface",
+        lambda client: {
+            "resources/list": {"result": request("resources/list")},
+            "resources/templates/list": {"result": request("resources/templates/list")},
+        },
+    )
+    assert all(
+        cli_history._route_is_listed(
+            None,
+            transition["candidate_uri"],
+            template=transition["candidate_kind"] == "template",
+        )
+        for transition in cli_history._TRANSITIONS
+    )
+    assert (
+        request("resources/read", {"uri": cli_history._TRANSITIONS[0]["old_uri"]})[
+            "contents"
+        ][0]["text"]
+        == previous[0].id
+    )
+    assert cli_history._resource_handoff_is_published(None) is False
+
+    with db.transaction():
+        for action in previous:
+            db.update_by_id(Action, action.id, {"enabled": False})
+        routes.register_actions()
+    assert cli_history._resource_handoff_is_published(None) is True
+    before = list(invoked)
+    for transition in cli_history._TRANSITIONS:
+        result = request("resources/read", {"uri": transition["old_uri"]}, error=True)
+        assert "conflicting historical owner" in result["error"]["message"]
+        assert invoked == before
+    for index, transition in enumerate(cli_history._TRANSITIONS):
+        if transition["other_candidate_uri"]:
+            assert (
+                request("resources/read", {"uri": transition["other_candidate_uri"]})[
+                    "contents"
+                ][0]["text"]
+                == candidates[index].id
+            )
+    assert (
+        request("resources/read", {"uri": "safe://owner-b/value"})["contents"][0][
+            "text"
+        ]
+        == safe.id
+    )
+    assert (
+        request("resources/read", {"uri": "control://same/value"})["contents"][0][
+            "text"
+        ]
+        == control.id
+    )
+    for action in previous:
+        with db.transaction():
+            db.update_by_id(Action, action.id, {"enabled": True})
+            routes.register_actions()
+        assert cli_history._resource_handoff_is_published(None) is False
+        with db.transaction():
+            db.update_by_id(Action, action.id, {"enabled": False})
+            routes.register_actions()
+        assert cli_history._resource_handoff_is_published(None) is True
+    for action in candidates:
+        with db.transaction():
+            db.update_by_id(Action, action.id, {"enabled": False})
+            routes.register_actions()
+        assert cli_history._resource_handoff_is_published(None) is False
+        with db.transaction():
+            db.update_by_id(Action, action.id, {"enabled": True})
+            routes.register_actions()
+        assert cli_history._resource_handoff_is_published(None) is True

@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import math
 import re
 import shlex
 import threading
@@ -14,6 +15,303 @@ NODES = {
 }
 
 
+class DeliveredObservations:
+    """Bounded categorical observations of existing completed-line callbacks."""
+
+    PROGRESS = re.compile(
+        r"^####\s+Progress:\s+(\d{1,3})/(\d{1,3})\s+v([0-9.]{1,20})\s+"
+        r"([\w.+-]{1,32})s(?:\s|$)"
+    )
+    ANSI = re.compile(r"\x1b\[[0-9;]*m")
+
+    def __init__(self, *, began, use_https=False, clock=time.monotonic):
+        self.began, self.clock = began, clock
+        scheme = "https" if use_https else "http"
+        self.ready = re.compile(
+            r"Local Action Server: " + scheme + r"://([\w.-]+):(\d+)"
+        )
+        self.lock = threading.Lock()
+        self.loss = threading.Event()
+        self.lock_loss = threading.Event()
+        self.probe_error = threading.Event()
+        self.count_overflow = threading.Event()
+        self.mark_cap = threading.Event()
+        self.counts = {"stdout_lines": 0, "stderr_lines": 0, "truncated_lines": 0}
+        self.marks = []
+        self.progress_channel = None
+        self.start_return_offset = None
+        self.start_return_instant = None
+        self.match_instants = {
+            channel: {"first": None, "last": None} for channel in ("stdout", "stderr")
+        }
+        self.port_positive = None
+        self.cleanup = {"status": "unavailable"}
+        self.readiness = {
+            channel: {
+                "literal_marker_count": 0,
+                "exact_match_count": 0,
+                "first_match_offset_seconds": None,
+                "last_match_offset_seconds": None,
+            }
+            for channel in ("stdout", "stderr")
+        }
+
+    def _record(self, function):
+        """Never block a pipe callback or expose probe exceptions to its logger."""
+        acquired = False
+        try:
+            acquired = self.lock.acquire(blocking=False)
+            if not acquired:
+                self.loss.set()
+                self.lock_loss.set()
+                return
+            function()
+        except BaseException:
+            self.loss.set()
+            self.probe_error.set()
+        finally:
+            if acquired:
+                try:
+                    self.lock.release()
+                except BaseException:
+                    self.loss.set()
+                    self.probe_error.set()
+
+    def _count(self, mapping, key, amount=1):
+        value = mapping[key] + amount
+        if value > 65535:
+            self.loss.set()
+            self.count_overflow.set()
+        mapping[key] = min(value, 65535)
+
+    def _instant(self):
+        instant = self.clock()
+        value = instant - self.began
+        if not math.isfinite(value) or not 0 <= value <= 3600:
+            raise ValueError("invalid observation clock")
+        return instant
+
+    def line(self, channel, line):
+        def record():
+            self._count(self.counts, channel + "_lines")
+            if len(line) > 8192:
+                self._count(self.counts, "truncated_lines")
+                self.loss.set()
+                return
+            instant = self._instant()
+            offset = round(instant - self.began, 3)
+            ready = self.readiness[channel]
+            self._count(
+                ready, "literal_marker_count", line.count("Local Action Server:")
+            )
+            matches = self.ready.findall(
+                line
+            )  # Exactly the starter's original matcher.
+            if matches:
+                self._count(ready, "exact_match_count", len(matches))
+                if ready["first_match_offset_seconds"] is None:
+                    ready["first_match_offset_seconds"] = offset
+                    self.match_instants[channel]["first"] = instant
+                ready["last_match_offset_seconds"] = offset
+                self.match_instants[channel]["last"] = instant
+            normalized = self.ANSI.sub("", line)
+            if not re.match(r"^####\s*Progress:", normalized):
+                return
+            match = self.PROGRESS.match(normalized)
+            if not match:
+                self.loss.set()
+                return
+            step, total, version, duration = match.groups()
+            step, total, duration = int(step), int(total), float(duration)
+            if (
+                not 0 <= step <= 15
+                or total != 15
+                or version != "18.19.3"
+                or not math.isfinite(duration)
+                or not 0 <= duration <= 3600
+            ):
+                self.loss.set()
+                return
+            if self.progress_channel is None:
+                self.progress_channel = channel
+            if step != len(self.marks) or channel != self.progress_channel:
+                self.loss.set()
+            if len(self.marks) == 32:
+                self.loss.set()
+                self.mark_cap.set()
+                return
+            self.marks.append(
+                {
+                    "step": step,
+                    "total": total,
+                    "version": "18.19.3",
+                    "since_previous_seconds": duration,
+                    "channel": channel,
+                    "arrival_offset_seconds": offset,
+                }
+            )
+
+        self._record(record)
+
+    def process_start_returned(self):
+        def record():
+            instant = self._instant()
+            self.start_return_instant = instant
+            self.start_return_offset = round(instant - self.began, 3)
+
+        self._record(record)
+
+    def start_finished(self, server):
+        self._record(lambda: setattr(self, "port_positive", server._port > 0))
+
+    def cleanup_returned(self, returned):
+        def record():
+            result, readers = returned
+            if result is None:
+                self.cleanup = {"status": "unavailable"}
+                return
+            flags = {
+                "wrapper_reaped": result.wrapper_reaped,
+                "execution_stopped": result.execution_stopped,
+                "descendant_snapshot_complete": result.descendant_snapshot_complete,
+                "descendant_reap_complete": result.descendant_reap_complete,
+            }
+            counts = {
+                "observed_live_child_count": len(result.live_descendant_pids),
+                "observed_zombie_child_count": len(result.zombie_descendant_pids),
+                "cleanup_error_count": len(result.errors),
+                "active_reader_count": len(readers),
+            }
+            if any(not isinstance(value, bool) for value in flags.values()) or any(
+                value > 65535 for value in counts.values()
+            ):
+                self.loss.set()
+                return
+            self.cleanup = {"status": "returned", **flags, **counts}
+
+        self._record(record)
+
+    def cleanup_raised(self):
+        self._record(lambda: setattr(self, "cleanup", {"status": "raised"}))
+
+    def summary(self):
+        report = {"status": "unavailable", "observation_loss": True}
+
+        def record():
+            ready = {
+                channel: dict(values) for channel, values in self.readiness.items()
+            }
+            for channel, values in ready.items():
+                for position in ("first", "last"):
+                    instant = self.match_instants[channel][position]
+                    values[position + "_match_before_deadline_lower_bound"] = (
+                        instant < self.start_return_instant + 90
+                        if instant is not None and self.start_return_instant is not None
+                        else None
+                    )
+            lost = self.loss.is_set()
+            report.update(
+                {
+                    "status": "observed",
+                    "observation_loss": lost,
+                    "lock_loss": self.lock_loss.is_set(),
+                    "probe_error": self.probe_error.is_set(),
+                    "count_overflow": self.count_overflow.is_set(),
+                    "mark_cap_reached": self.mark_cap.is_set(),
+                    "counts": dict(self.counts),
+                    "progress": {
+                        "marks": [dict(mark) for mark in self.marks],
+                        "interval_sum_seconds": round(
+                            sum(mark["since_previous_seconds"] for mark in self.marks),
+                            3,
+                        )
+                        if not lost and len(self.marks) == 16
+                        else None,
+                    },
+                    "readiness": ready,
+                    "process_start_return_offset_seconds": self.start_return_offset,
+                    "readiness_future": "unavailable_from_host",
+                    "port_positive_after_start": self.port_positive,
+                    "cleanup": dict(self.cleanup),
+                }
+            )
+
+        self._record(record)
+        if self.loss.is_set():
+            report["observation_loss"] = True
+            if "progress" in report:
+                report["progress"]["interval_sum_seconds"] = None
+        return report
+
+
+def observe_owned_start(monkeypatch, start, server, **kwargs):
+    """Observe only the already-owned Process; delegate every operation unchanged."""
+    from actions.server._robo_utils.process import Process
+
+    try:
+        probe = DeliveredObservations(
+            began=time.monotonic(), use_https=kwargs.get("use_https", False)
+        )
+    except BaseException:
+        return observe_start(start, server, **kwargs)
+    original_start = Process.start
+    original_cleanup = Process._stop_and_reap_until
+    registrations = []
+
+    def process_start(process, *args, **arguments):
+        if process is not server._process:
+            return original_start(process, *args, **arguments)
+        try:
+            for channel in ("stdout", "stderr"):
+
+                def callback(line, channel=channel):
+                    probe.line(channel, line)
+
+                owner = getattr(process, "on_" + channel)
+                owner.register(callback)
+                registrations.append((owner, callback))
+        except BaseException:
+            probe.loss.set()
+            probe.probe_error.set()
+        result = original_start(process, *args, **arguments)
+        probe.process_start_returned()
+        return result
+
+    def process_cleanup(process, deadline):
+        if process is not server._process:
+            return original_cleanup(process, deadline)
+        try:
+            result = original_cleanup(process, deadline)
+        except BaseException:
+            probe.cleanup_raised()
+            raise
+        probe.cleanup_returned(result)
+        return result
+
+    def unregister():
+        while registrations:
+            owner, callback = registrations.pop()
+            try:
+                owner.unregister(callback)
+            except BaseException:
+                probe.loss.set()
+                probe.probe_error.set()
+
+    def delegated(server, **arguments):
+        try:
+            return start(server, **arguments)
+        finally:
+            unregister()
+
+    try:
+        with monkeypatch.context() as context:
+            context.setattr(Process, "start", process_start)
+            context.setattr(Process, "_stop_and_reap_until", process_cleanup)
+            return observe_start(delegated, server, delivered=probe, **kwargs)
+    finally:
+        unregister()
+
+
 def enabled(nodeid, platform, environ):
     return (
         platform == "win32"
@@ -23,16 +321,21 @@ def enabled(nodeid, platform, environ):
     )
 
 
-def observe_start(start, server, *, snapshot, publish, offsets=(80.0, 88.0), **kwargs):
+def observe_start(
+    start, server, *, snapshot, publish, offsets=(80.0, 88.0), delivered=None, **kwargs
+):
     cancelled = threading.Event()
     began = time.monotonic()
 
     def emit(report):
         try:
+            if delivered is not None:
+                report["delivered_observations"] = delivered.summary()
             publish(report)
         except Exception:
             # A failed artifact write must not change startup or its cleanup.
-            pass
+            if delivered is not None:
+                delivered.loss.set()
 
     def sample():
         for offset in offsets:
@@ -59,6 +362,8 @@ def observe_start(start, server, *, snapshot, publish, offsets=(80.0, 88.0), **k
         # Delegated start has already performed its existing failure cleanup.
         cancelled.set()
         sampler.join(timeout=0.05)
+        if delivered is not None:
+            delivered.start_finished(server)
         emit(
             {
                 "outcome": outcome,
@@ -329,8 +634,8 @@ def install(monkeypatch, directory, nodeid, environ, config):
             publish({"identity": identity})
         except OSError:
             return original(server, **kwargs)
-        return observe_start(
-            original, server, snapshot=snapshot, publish=publish, **kwargs
+        return observe_owned_start(
+            monkeypatch, original, server, snapshot=snapshot, publish=publish, **kwargs
         )
 
     monkeypatch.setattr(ActionServerProcess, "start", start)

@@ -624,9 +624,9 @@ class Database:
             if in_transaction:
                 # Nested transactions are not supported, so, don't start a new one
                 # here, but we can still use savepoints.
-                self._tlocal.in_transaction += 1
                 savepoint_name = self._next_savepoint_name()
                 self.execute(f"savepoint {savepoint_name};")
+                self._tlocal.in_transaction += 1
                 try:
                     yield
                 except BaseException:

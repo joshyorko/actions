@@ -144,6 +144,26 @@ view/result lifecycle works, or a packaged Runtime release accepts it.
 
 ## Core and Runtime compatibility
 
+For nested database transactions, acquire the SAVEPOINT before incrementing
+the thread-local nesting count. If SAVEPOINT creation fails, the original
+database error must propagate, the nested body must not run, and outer cleanup
+must restore both the nesting count and connection state. Cover this admission
+failure with a real SQLite authorizer that denies `SQLITE_SAVEPOINT`/`BEGIN`,
+then verify the same connection can commit a later nested transaction. The
+existing successful nested rollback test does not exercise SAVEPOINT creation
+failure.
+
+Keep backend fault injection explicit: SQLite authorizer denial tests SAVEPOINT
+creation in an otherwise usable transaction. In PostgreSQL, a failed statement
+can leave an outer transaction aborted (SQLSTATE `22012` for division by zero);
+the next nested `Database.transaction()` attempts its SAVEPOINT and fails with
+`25P02`. Verify that the original SAVEPOINT `DBError` propagates, the nested body
+does not run, outer cleanup returns nesting to zero and the connection to IDLE,
+and the same connection later commits an outer row and a nested row while
+rolling back another nested row. Record both SQLSTATEs and the server/driver
+versions. This proves recovery from SAVEPOINT failure in an already-aborted
+transaction, not denial of SAVEPOINT in a healthy transaction.
+
 Actions Core pull requests run a non-publishing candidate-wheel gate on Ubuntu
 with the release-pinned Python 3.10 and Poetry 2.1.1 toolchain. It synchronizes
 the locked environment, builds the wheel and source archive, checks the exact
@@ -193,6 +213,15 @@ before the watched-reload assertions began. Keep the 90-second allowance
 limited to the initial native-executable startup; this reuses the existing
 native acceptance startup budget. Source-mode startup remains at 30 seconds,
 as do the watcher and restart deadlines.
+
+RCC environment creation reporting `SUCCESS` does not establish Runtime
+readiness. A successful `holotree variables` call can consume nearly the
+existing startup budget, leaving package collection and ready-port publication
+unfinished. Attribute the timeout to the initial context entry when it occurs
+before the test body; do not describe unreached catalog or database assertions
+as failed. Preserve the command duration, ready-port observation and owned
+cleanup outcome separately, and leave unavailable ownership observations
+unknown. Keep the startup and cleanup deadlines unchanged.
 
 For a native first-readiness timeout, bind the failed Runtime job separately
 from passing selected native UI jobs. A timeout in `process.start()` precedes
@@ -252,6 +281,47 @@ not that the sampler stopped. Check `sampler_alive` separately after its bounded
 50 ms join. A pending OS query may leave that daemon alive; late observations
 are discarded after cancellation. Neither field proves Runtime process or
 stream cleanup, which remains owned by the unchanged starter.
+
+Keep the complete terminal failure census separate from this two-node observer
+coverage and from reached semantic assertions. Active owned RCC CPU/I/O at the
+sample times does not identify a preparation cause. Bind each original tested
+merge and native artifact separately from a later source union; missing marks
+cannot borrow another run's interval timings, and later observations cannot fill
+historical cleanup fields.
+
+The test-owned delivered-line observation uses the existing stdout/stderr
+callbacks, without another pipe reader, flush, process action or readiness hook.
+It retains at most 32 RCC v18.19.3 marks from lines of at most 8192 characters,
+with bounded numeric fields and no suffix or exception text. Only one complete,
+ordered 0..15 sequence from a single channel can supply the sum of intervals
+since the previous mark. Any loss, lock contention, overflow, truncation, cap or
+invalid mark permanently makes that sum unavailable, including after later
+valid marks. Probe exceptions are suppressed inside the probe before the
+existing callback logger can expose their text; original delegated startup and
+cleanup exceptions still propagate unchanged.
+
+Readiness observations use the starter's exact HTTP/HTTPS regex on the original
+line and retain channel, match counts and arrival offsets only. A stdout match
+cannot satisfy its stderr Future. Process-start return plus 90 seconds is a
+lower bound for the ready-wait deadline, not the observer's start time; a late
+match does not establish predeadline delivery. Compare private, unrounded
+monotonic instants and round only displayed offsets: rounding before adding
+the budget can falsely classify an equal or later arrival as earlier. Exact
+equality is not before the lower bound. A positive comparison establishes only
+delivery before that conservative bound, not completion before the actual
+readiness deadline. Future state, native ready-log
+emission and RCC internal pipe/forwarding state remain unavailable. Interactive
+RCC forwarding does not explicitly flush, so absent delivered lines cannot
+identify an internal or propagation failure.
+
+The owned cleanup call's original deadline, returned tuple and exception are
+unchanged. Its measured wrapper reap, execution stop, snapshot/reap predicates
+and live/zombie/error/active-reader counts are summarized without raw errors,
+reader names or PID identities. A missing result or probe failure remains
+unavailable. These fields do not initiate or prove another cleanup attempt;
+the 90-second readiness, 20-second failure cleanup, 80/88-second samples and
+50 ms sampler join remain unchanged.
+
 These synthetic observer checks do not establish Windows native acceptance
 or fix the original failure. Compare the next exact-head reports before
 changing production code; do not warm caches, retry RCC, or enlarge deadlines
@@ -1073,6 +1143,16 @@ template read later hitting a new direct URI), and distinct patterns such as
 without treating a shadowed historical template as the winner of a direct URI.
 Unavailable current routes return errors; history never restores an old callback.
 Same-owner revisions invoke the current callback and remain permitted.
+
+For watched MCP ownership handoffs between independently refreshed packages, a new
+candidate route being listed does not prove the previous package has relinquished
+its declarations. An assembled-catalog control can publish the new template while
+the old direct route remains listed and still validly serves the old owner. Wait
+for all intended candidate declarations and the absence of every old declaration
+before asserting historical-owner rejection. Keep callback nonexecution and
+unrelated-URI success checks. The two resource-list RPCs are separate observations;
+this barrier is not an atomic catalog snapshot, nor proof of a hosted failure's
+actual update order. Preserve deadlines and the original failed execution tuple.
 
 Routing history joins the existing serialized admission transaction and rollback
 boundary. Fixed-size domain-separated digests identify full RFC 8785 canonical
