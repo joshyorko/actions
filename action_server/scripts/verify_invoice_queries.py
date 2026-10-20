@@ -30,6 +30,11 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--evidence-dir", type=Path, required=True)
     parser.add_argument(
+        "--browser",
+        action="store_true",
+        help="also prove the built Canvas using the isolated local browser host (not ChatGPT)",
+    )
+    parser.add_argument(
         "--image",
         default="postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81",
     )
@@ -60,6 +65,9 @@ def main():
         *ROOT.glob("action_server/tests/action_server_tests/test_invoice_*.py"),
         ROOT / "developer/toolkit.py",
         ROOT / "developer/toolkit.yaml",
+        ROOT / "action_server/src/actions/server/mcp/setup_mcp_server_v2.py",
+        ROOT / "action_server/src/actions/server/_server.py",
+        ROOT / "action_server/src/actions/server/_api_action_routes.py",
     ]
     receipt["inputs"] = {
         str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
@@ -114,14 +122,38 @@ def main():
         env["ACTIONS_REQUIRE_INVOICE_PROVIDERS"] = "1"
         env["OMP_NUM_THREADS"] = "1"
         env["PYTHONDONTWRITEBYTECODE"] = "1"
+        if args.browser:
+            resource = ROOT / "action_server/frontend/dist-canvas/index.html"
+            receipt["canvas_html_sha256"] = hashlib.sha256(
+                resource.read_bytes()
+            ).hexdigest()
+            env["ACTIONS_INVOICE_CANVAS_RESOURCE"] = str(resource)
+            env["ACTIONS_INVOICE_BROWSER_EVIDENCE_DIR"] = str(
+                evidence / "browser-details"
+            )
+            for p in [
+                *ROOT.glob("action_server/frontend/apps/canvas-view/src/**/*.ts*"),
+                ROOT
+                / "action_server/frontend/apps/canvas-view/invoice-runtime.spec.ts",
+                ROOT / "action_server/frontend/playwright.invoice.config.ts",
+                ROOT / "action_server/frontend/package-lock.json",
+            ]:
+                receipt["inputs"][str(p.relative_to(ROOT))] = hashlib.sha256(
+                    p.read_bytes()
+                ).hexdigest()
         suites = {
             "invoice": [
                 "tests/action_server_tests/test_invoice_providers.py",
                 "tests/action_server_tests/test_invoice_run_outputs.py",
                 "tests/action_server_tests/test_invoice_canvas.py",
+                "tests/action_server_tests/test_invoice_canvas_mcp.py",
                 "tests/action_server_tests/run_outputs",
             ]
         }
+        if args.browser:
+            suites["browser"] = [
+                "tests/action_server_tests/test_invoice_canvas_browser.py"
+            ]
         if args.full:
             suites["portable"] = ["tests", "-m", "not integration_test"]
         for label, paths in suites.items():
@@ -156,7 +188,7 @@ def main():
                 not cases
                 or counts["failures"]
                 or counts["errors"]
-                or (label == "invoice" and counts["skipped"])
+                or (label in ("invoice", "browser") and counts["skipped"])
             ):
                 raise RuntimeError("JUnit did not prove the required gate")
         receipt["status"] = "PASS"
@@ -184,8 +216,8 @@ def main():
                 receipt["status"] = "FAIL"
                 receipt["cleanup"] = type(exc).__name__
         receipt["artifacts"] = {
-            p.name: hashlib.sha256(p.read_bytes()).hexdigest()
-            for p in sorted(evidence.iterdir())
+            str(p.relative_to(evidence)): hashlib.sha256(p.read_bytes()).hexdigest()
+            for p in sorted(evidence.rglob("*"))
             if p.is_file()
         }
         (evidence / "receipt.json").write_text(json.dumps(receipt, indent=2) + "\n")

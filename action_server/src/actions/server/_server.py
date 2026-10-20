@@ -20,6 +20,7 @@ from ._protocols import ArgumentsNamespaceStart, IBeforeStartCallback
 if typing.TYPE_CHECKING:
     from asyncio.events import AbstractEventLoop
 
+    from .data_queries.canvas_mcp import InvoiceCanvasMcp
     from .run_outputs.transport import RunOutputTransport
 
 log = logging.getLogger(__name__)
@@ -471,6 +472,7 @@ def start_server(
     before_start: Sequence[IBeforeStartCallback],
     *,
     run_output_transport: "RunOutputTransport | None" = None,
+    invoice_canvas: "InvoiceCanvasMcp | None" = None,
 ) -> None:
     import threading
     from dataclasses import asdict
@@ -575,7 +577,22 @@ def start_server(
 
         install_run_output_transport(app, run_output_transport, endpoint_dependencies)
 
-    action_routes = _ActionRoutes(whitelist, endpoint_dependencies)
+    if invoice_canvas is not None and invoice_canvas.download_base_url is not None:
+        if (
+            run_output_transport is None
+            or run_output_transport.canvas_scope != invoice_canvas.facade.scope
+            or run_output_transport.service is not invoice_canvas.facade.queries.outputs
+        ):
+            raise ValueError(
+                "invoice download requires the same scoped output transport"
+            )
+
+    if invoice_canvas is None:
+        action_routes = _ActionRoutes(whitelist, endpoint_dependencies)
+    else:
+        action_routes = _ActionRoutes(
+            whitelist, endpoint_dependencies, invoice_canvas=invoice_canvas
+        )
     action_routes.setup_mcp_server(api_key)
     action_routes.register_actions()
 

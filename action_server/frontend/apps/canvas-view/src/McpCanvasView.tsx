@@ -10,9 +10,14 @@ import {
     type ArtifactHandle,
     type ArtifactStatus,
     type HostToolInput,
+    type HostToolResult,
     type QueryActionResult,
     type QueryResultsAdapter,
 } from "./query-results/QueryResultsView";
+import {
+    createInvoiceAdapter,
+    parseInvoicePage,
+} from "./query-results/invoice-bridge";
 
 const FIXTURE_QUERY_TOOL = "canvas_fixture_search";
 const FIXTURE_ARTIFACT_STATUS_TOOL = "canvas_fixture_artifact_status";
@@ -148,6 +153,8 @@ function displayContext(
 
 export function McpCanvasView() {
     const [hostInput, setHostInput] = useState<HostToolInput | null>(null);
+    const [hostResult, setHostResult] = useState<HostToolResult | null>(null);
+    const [invoiceMode, setInvoiceMode] = useState(false);
     const [hostInputState, setHostInputState] =
         useState<HostInputState>("none");
     const [hostResultState, setHostResultState] =
@@ -165,14 +172,47 @@ export function McpCanvasView() {
                 "toolinput",
                 ({ arguments: toolArguments }) => {
                     const query = parseHostQuery(toolArguments);
+                    setInvoiceMode(
+                        isRecord(toolArguments) &&
+                            typeof toolArguments.handle === "string" &&
+                            FIXTURE_HANDLE_PATTERN.test(toolArguments.handle),
+                    );
                     inputRevision.current += 1;
                     setHostInput({ revision: inputRevision.current, query });
                     setHostInputState(query === null ? "ignored" : "accepted");
                     setHostResultState("none");
+                    setHostResult(null);
                 },
             );
             createdApp.addEventListener("toolresult", (result) => {
-                setHostResultState(result.isError ? "error" : "success");
+                const invoicePage = result._meta?.["actions.invoicePage"];
+                if (invoicePage !== undefined) {
+                    setInvoiceMode(true);
+                    try {
+                        const parsed = parseInvoicePage(invoicePage);
+                        inputRevision.current += 1;
+                        setHostResult({
+                            revision: inputRevision.current,
+                            result: parsed,
+                        });
+                        setHostResultState(
+                            result.isError ? "error" : "success",
+                        );
+                    } catch {
+                        setHostResult({
+                            revision: ++inputRevision.current,
+                            result: null,
+                        });
+                        setHostResultState("error");
+                    }
+                } else {
+                    setHostResultState(result.isError ? "error" : "success");
+                    if (result.isError)
+                        setHostResult({
+                            revision: ++inputRevision.current,
+                            result: null,
+                        });
+                }
             });
             createdApp.addEventListener("hostcontextchanged", () => {
                 setHostContext(displayContext(createdApp.getHostContext()));
@@ -187,8 +227,13 @@ export function McpCanvasView() {
     }, [app, isConnected]);
 
     const adapter = useMemo(
-        () => (app && isConnected ? createFixtureAdapter(app) : null),
-        [app, isConnected],
+        () =>
+            app && isConnected
+                ? invoiceMode
+                    ? createInvoiceAdapter(app)
+                    : createFixtureAdapter(app)
+                : null,
+        [app, isConnected, invoiceMode],
     );
 
     return (
@@ -234,7 +279,12 @@ export function McpCanvasView() {
                 </dl>
             </section>
             {adapter ? (
-                <QueryResultsView adapter={adapter} hostInput={hostInput} />
+                <QueryResultsView
+                    adapter={adapter}
+                    hostInput={hostInput}
+                    hostResult={hostResult}
+                    readOnly={invoiceMode}
+                />
             ) : (
                 <main aria-labelledby="canvas-view-title">
                     <h1 id="canvas-view-title">Canvas View</h1>

@@ -1,5 +1,39 @@
 # Repository Operations
 
+## Invoice Canvas MCP qualification
+
+The release #327 candidate has a default-off, trusted-server invoice binding on
+the existing MCP server. It uses `InvoiceCanvasFacade`, the official MCP Apps
+bridge and the existing `QueryResultsView`; it does not create another renderer
+or execute a query when a published result opens. The credential verifier must
+return both an authenticated Actor and a verified model/app audience. MCP
+`visibility` metadata and caller-supplied app identifiers do not authenticate an
+app. Every page/export still resolves the pinned application/deployment and
+current persisted Actor grants through the existing output authority.
+
+`invoice_result` returns a bounded model summary; invoice rows belong in the
+UI-private `actions.invoicePage` result metadata. `invoice_result_page` and
+`invoice_result_export` require the verified app audience. The built HTML is
+served as a content-addressed `text/html;profile=mcp-app` resource. Export links
+require the same scoped authenticated output transport and a trusted HTTPS or
+loopback download origin. A handle alone grants no access.
+
+Build with the locked frontend environment using `npm run build:canvas`, then
+run the prepared toolkit Python on
+`action_server/scripts/verify_invoice_queries.py --browser --evidence-dir <absolute-owned-directory>`.
+The verifier owns its bounded PostgreSQL fixture and requires both real engines.
+The browser host simulation forwards tool calls to the actual Runtime socket,
+renders the actual resource, pages its handle, downloads through the authenticated
+output route and reopens the same result. This is local E2, never actual ChatGPT
+E1 or actual worker execution. Missing browser prerequisites fail this explicit
+gate. The ordinary optional Python/TypeScript roundtrip remains a separate gate.
+
+Rollback removes the trusted invoice configuration and restarts the Runtime;
+it does not delete published outputs or migrate queue state. Generated app
+activation/rollback, Work Item review/fencing, workers and ChatGPT acceptance
+remain separate release gates. Source snapshots must retain all changed inputs;
+an intermediate green run does not qualify later hardening edits.
+
 ## MCP Apps public metadata
 
 Catalog concurrency fixtures must distinguish process startup from contention.

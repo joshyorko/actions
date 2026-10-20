@@ -25,6 +25,7 @@ export interface QueryActionResult {
         code: "no_matches";
         message: "No records matched that query.";
     } | null;
+    pagination?: { offset: number; nextOffset: number | null };
 }
 
 export type ArtifactStatus = "ready" | "processing" | "unavailable";
@@ -39,6 +40,16 @@ export type ArtifactStatus = "ready" | "processing" | "unavailable";
 export interface QueryResultsAdapter {
     submitQuery(input: QueryInput): Promise<QueryActionResult>;
     getArtifactStatus(handle: ArtifactHandle): Promise<ArtifactStatus>;
+    pageResult?(
+        handle: ArtifactHandle,
+        offset: number,
+    ): Promise<QueryActionResult>;
+    exportResult?(handle: ArtifactHandle): Promise<void>;
+}
+
+export interface HostToolResult {
+    revision: number;
+    result: QueryActionResult | null;
 }
 
 export interface HostToolInput {
@@ -49,6 +60,8 @@ export interface HostToolInput {
 interface QueryResultsViewProps {
     adapter: QueryResultsAdapter;
     hostInput?: HostToolInput | null;
+    hostResult?: HostToolResult | null;
+    readOnly?: boolean;
 }
 
 const MAX_QUERY_CODE_POINTS = 64;
@@ -69,6 +82,8 @@ function queryValidationMessage(query: string): string | null {
 export function QueryResultsView({
     adapter,
     hostInput = null,
+    hostResult = null,
+    readOnly = false,
 }: QueryResultsViewProps) {
     const [query, setQuery] = useState("");
     const [validationError, setValidationError] = useState<string | null>(null);
@@ -113,6 +128,51 @@ export function QueryResultsView({
         setIsCheckingArtifact(false);
         setIsSearching(false);
     }, [hostInput, replaceResult]);
+
+    useEffect(() => {
+        if (!hostResult) return;
+        generationRef.current += 1;
+        replaceResult(hostResult.result);
+        setActionError(null);
+        setArtifactStatus(null);
+        setIsSearching(false);
+        setIsCheckingArtifact(false);
+    }, [hostResult, replaceResult]);
+
+    const readPinned = async (operation: "page" | "export") => {
+        const previous = currentResultRef.current;
+        const handle = previous?.artifact?.handle;
+        if (!handle) return;
+        const generation = ++generationRef.current;
+        setIsSearching(true);
+        setActionError(null);
+        try {
+            if (
+                operation === "page" &&
+                adapter.pageResult &&
+                previous.pagination?.nextOffset != null
+            ) {
+                const next = await adapter.pageResult(
+                    handle,
+                    previous.pagination.nextOffset,
+                );
+                if (mountedRef.current && generationRef.current === generation)
+                    replaceResult(next);
+            } else if (operation === "export" && adapter.exportResult) {
+                await adapter.exportResult(handle);
+            }
+        } catch {
+            if (mountedRef.current && generationRef.current === generation) {
+                replaceResult(null);
+                setActionError(
+                    "Result unavailable or access denied. Reopen the authorized result.",
+                );
+            }
+        } finally {
+            if (mountedRef.current && generationRef.current === generation)
+                setIsSearching(false);
+        }
+    };
 
     const submit = async (event: FormEvent) => {
         event.preventDefault();
@@ -195,69 +255,77 @@ export function QueryResultsView({
     return (
         <main className="query-view" aria-labelledby="query-view-title">
             <header className="query-view__header">
-                <p className="query-view__eyebrow">Canvas fixture</p>
-                <h1 id="query-view-title">Search records</h1>
+                <p className="query-view__eyebrow">
+                    {readOnly ? "Published result" : "Canvas fixture"}
+                </p>
+                <h1 id="query-view-title">
+                    {readOnly ? "Invoice results" : "Search records"}
+                </h1>
                 <p className="query-view__intro">
-                    Search the sample catalog and review its matching records.
+                    {readOnly
+                        ? "Review the pinned invoice result. Opening this view does not execute a query."
+                        : "Search the sample catalog and review its matching records."}
                 </p>
             </header>
 
-            <section
-                className="query-view__panel"
-                aria-labelledby="query-form-title"
-            >
-                <h2 id="query-form-title">Find records</h2>
-                <form
-                    className="query-view__form"
-                    noValidate
-                    aria-busy={isSearching}
-                    onSubmit={submit}
+            {!readOnly && (
+                <section
+                    className="query-view__panel"
+                    aria-labelledby="query-form-title"
                 >
-                    <label htmlFor="query-input">Search records</label>
-                    <input
-                        ref={inputRef}
-                        id="query-input"
-                        name="query"
-                        type="text"
-                        autoComplete="off"
-                        required
-                        maxLength={MAX_QUERY_CODE_POINTS * 2}
-                        aria-invalid={validationError ? true : undefined}
-                        aria-describedby={describedBy}
-                        value={query}
-                        disabled={isSearching}
-                        onChange={(event) => {
-                            generationRef.current += 1;
-                            setQuery(event.currentTarget.value);
-                            setValidationError(null);
-                            setActionError(null);
-                            replaceResult(null);
-                            setArtifactStatus(null);
-                            setIsCheckingArtifact(false);
-                        }}
-                    />
-                    <p id="query-help" className="query-view__hint">
-                        Enter up to 64 characters. Search terms stay within this
-                        local fixture.
-                    </p>
-                    {validationError && (
-                        <p
-                            id="query-error"
-                            className="query-view__error"
-                            role="alert"
-                        >
-                            {validationError}
-                        </p>
-                    )}
-                    <button
-                        className="query-view__button query-view__button--primary"
-                        type="submit"
-                        disabled={isSearching}
+                    <h2 id="query-form-title">Find records</h2>
+                    <form
+                        className="query-view__form"
+                        noValidate
+                        aria-busy={isSearching}
+                        onSubmit={submit}
                     >
-                        {isSearching ? "Searching…" : "Search"}
-                    </button>
-                </form>
-            </section>
+                        <label htmlFor="query-input">Search records</label>
+                        <input
+                            ref={inputRef}
+                            id="query-input"
+                            name="query"
+                            type="text"
+                            autoComplete="off"
+                            required
+                            maxLength={MAX_QUERY_CODE_POINTS * 2}
+                            aria-invalid={validationError ? true : undefined}
+                            aria-describedby={describedBy}
+                            value={query}
+                            disabled={isSearching}
+                            onChange={(event) => {
+                                generationRef.current += 1;
+                                setQuery(event.currentTarget.value);
+                                setValidationError(null);
+                                setActionError(null);
+                                replaceResult(null);
+                                setArtifactStatus(null);
+                                setIsCheckingArtifact(false);
+                            }}
+                        />
+                        <p id="query-help" className="query-view__hint">
+                            Enter up to 64 characters. Search terms stay within
+                            this local fixture.
+                        </p>
+                        {validationError && (
+                            <p
+                                id="query-error"
+                                className="query-view__error"
+                                role="alert"
+                            >
+                                {validationError}
+                            </p>
+                        )}
+                        <button
+                            className="query-view__button query-view__button--primary"
+                            type="submit"
+                            disabled={isSearching}
+                        >
+                            {isSearching ? "Searching…" : "Search"}
+                        </button>
+                    </form>
+                </section>
+            )}
 
             <section
                 className="query-view__panel query-view__results"
@@ -349,6 +417,27 @@ export function QueryResultsView({
                                 ? "Checking…"
                                 : "Check artifact status"}
                         </button>
+                        {adapter.exportResult && (
+                            <button
+                                className="query-view__button"
+                                type="button"
+                                disabled={isSearching}
+                                onClick={() => readPinned("export")}
+                            >
+                                Export invoices
+                            </button>
+                        )}
+                        {adapter.pageResult &&
+                            result.pagination?.nextOffset != null && (
+                                <button
+                                    className="query-view__button"
+                                    type="button"
+                                    disabled={isSearching}
+                                    onClick={() => readPinned("page")}
+                                >
+                                    Next page
+                                </button>
+                            )}
                     </div>
                 )}
                 {artifactStatus && (
