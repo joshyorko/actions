@@ -38,6 +38,10 @@ it does not provide authenticated management, review or cancellation APIs.
 
 SQLite schema 6 retains claim metadata through the existing migration path.
 Schema-5 clients reject that database rather than acting as unfenced writers.
+The installed public `actions-work-items==0.4.4` dependency was also tested
+against a candidate schema-6 queue: it rejected the open and the database hash
+remained unchanged. Candidate metadata still says 0.4.4; do not publish these
+new bytes under that version or infer Runtime integration from SDK tests.
 Before upgrading a real queue, retain its database and attachment root together;
 rollback to a schema-5 client requires that pre-upgrade backup. No production
 migration is authorized by the candidate tests. Existing queues without fenced
