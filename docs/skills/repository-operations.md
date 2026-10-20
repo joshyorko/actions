@@ -1,5 +1,18 @@
 # Repository Operations
 
+## Recovering a vanished release worktree
+
+Verify the registered worktrees, exact branch ref and destination absence before
+restoration. Archive the recovered files, patch and SHA manifest outside the
+checkout first, then require `git apply --check` against the exact base and
+verify every recovered file hash. A Git worktree lock prevents pruning, not
+direct filesystem deletion. Preserve unrelated dirty checkouts and processes.
+
+For a lost generated OAuth module, use the checked-in public generator with an
+outside-checkout destination. Restore only bytes matching the previously measured
+SHA; otherwise keep the original explicitly missing. Public generation is not
+permission to search for credentials or copy a private operator configuration.
+
 ## Invoice Canvas MCP qualification
 
 The release #327 candidate has a default-off, trusted-server invoice binding on
@@ -22,6 +35,11 @@ Build with the locked frontend environment using `npm run build:canvas`, then
 run the prepared toolkit Python on
 `action_server/scripts/verify_invoice_queries.py --browser --evidence-dir <absolute-owned-directory>`.
 The verifier owns its bounded PostgreSQL fixture and requires both real engines.
+The canonical RCC `InvoiceQueryTest` task accepts
+`ACTIONS_INVOICE_BROWSER=1` for this browser gate and
+`ACTIONS_INVOICE_FULL=1` for the portable Runtime suite. Both are opt-in;
+set `ACTIONS_INVOICE_EVIDENCE_DIR` to an absolute retained directory. Build
+the Canvas first; a missing resource, browser or service fails the explicit gate.
 The browser host simulation forwards tool calls to the actual Runtime socket,
 renders the actual resource, pages its handle, downloads through the authenticated
 output route and reopens the same result. This is local E2, never actual ChatGPT

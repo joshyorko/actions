@@ -218,6 +218,8 @@ def invoice_query_test() -> None:
         command.extend(["--image", image])
     if os.environ.get("ACTIONS_INVOICE_FULL") == "1":
         command.append("--full")
+    if os.environ.get("ACTIONS_INVOICE_BROWSER") == "1":
+        command.append("--browser")
     run(command)
 
 
