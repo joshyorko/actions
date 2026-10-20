@@ -5,10 +5,13 @@ This file is a reproducible source checkpoint for that issue, not a second
 backlog or execution graph. Existing child contracts and #101 remain intact.
 
 Current handoff: [draft PR #328](https://github.com/joshyorko/actions/pull/328).
-Implementation source: `f9aa2e7fa5873ad623042c24d84674c138e59188`.
-The [acceptance receipt](evidence/actions-next-327/acceptance.json) records
-current counts, failures, artifact hashes and unverified gates. **NOT READY** for
-the requested full release. Later checkpoint-only commits do not change code.
+Current implementation source: `65f1f40bec4e861d34259f695a447996ac57faf6`.
+The [research-resume receipt](evidence/actions-next-327/resume-20261020.json)
+records the new bounded results and verification limits. The
+[prior acceptance receipt](evidence/actions-next-327/acceptance.json) retains
+the earlier `f9aa2e7f` source, failed full gate and artifact identities. Those
+artifacts do not qualify the new Canvas scope code. **NOT READY** for the full
+requested release. Later checkpoint-only commits do not change implementation.
 
 ## Identity and limits
 
@@ -68,7 +71,7 @@ E4 proposal; E5 uncorroborated summary. Historical E2 is not a fresh pass.
 
 | Release area | Historical research and ledger references | Current source / PR #328 | Tested evidence versus missing acceptance |
 |---|---|---|---|
-| A: MCP v2, Canvas host and application revisions | Report sections 2, 7, 9–10; claims C2/C5; A5/A6, H1–H3. The fixture returns no artifact, and no ChatGPT session was observed. | `templates/canvas-query/canvas_query.py::canvas_fixture_search`, `acceptance-gates.json`; `run_outputs/service.py::resolve` and `data_queries/service.py::page` now implement private authorized output access. The fixture is still unconnected to that resolver. | E2 private query/output tests do not prove an app/revision-authorized bridge. Required: same renderer with bounded real query results and non-null authorized handle; actual tool/resource/MIME/bridge/reconnect E1; stable generated revision staging, activation, restart and rollback. Operator connection remains needed after engineering prerequisites. |
+| A: MCP v2, Canvas host and application revisions | Report sections 2, 7, 9–10; claims C2/C5; A5/A6, H1–H3. The fixture returns no artifact, and no ChatGPT session was observed. | `InvoiceCanvasFacade`, `CanvasResultScope`, `ExecutionSnapshot.canvas_application` and the existing `RunOutputTransport` now constrain private reads to the pinned deployment/application revision plus current Actor grants. The template remains unconnected. | E2 bounded app/revision substitution, revocation, legacy-fallback denial and actual assembled Runtime HTTP export passed. These do not prove rendering or an MCP bridge. Required: same renderer with bounded results/non-null handle; real tool/resource/MIME/bridge/reconnect E1; generated revision stage/activate/restart/rollback. Operator connection remains needed after engineering prerequisites. |
 | B: open Data Packages-style provider plane | Report sections 3, 7, 10; C4; A10/#131, S1–S5. Proprietary Data Server is excluded; immutable query source does not freeze mutable data. | `data_queries/invoices.py` and `InvoiceQueryService`; `ExecutionSnapshot.data_binding` pins provider/limits/source-version claim. DuckDB and PostgreSQL are real engines, not substitutes for each other. | E2 118 provider/common-output passes at `f9aa2e7f`; installed-wheel DuckDB smoke. `source_version` is explicitly an operator claim; DuckDB transaction label is not a retained source snapshot. Required: broader scoped discovery, retained materialized result/source identity, expiry/privacy negatives, cost policy, and one bounded knowledge ingest/search slice. No `sema4ai-data`, `x-data-context` or arbitrary SQL authority. |
 | C: business Work Items, review and real execution | Report sections 2, 4, 7, 10; C3/C5; A7–A9/A11 and #132/#83. Claim and finish/output authority are separate; approval must bind exact result/input revision. | Legacy `work-items/.../_sqlite.py::release_input` remains ID-only. Private `RunOutputService` fences Run Attempts, not Work Item claims. Existing RCC adapter remains the execution owner. | E2 Run/output negatives do not close C3. Required: Work Item owner/epoch/renew/conditional finish/output; revision-bound review, retry/dead-letter/cancel and effect-before-receipt ambiguity; same SQLite/service conformance; genuine pinned RCC worker success/failure/restart and lineage. No second queue or inferred producer/consumer mode. |
 | D: optional celld aggregate | Report section 5 and actor acceptance; C6–C8; D1–D6, M1/#246. Upstream v0.6.2 source `90b43017241f81189453d326d05948f388b34652` is beta evidence only. Durable Git is actual Git-hosting research, not merely coordination. | #326 remains authority; no celld adapter/lab is implemented. MemoryD, Git, other repositories and their active owners remain outside this implementation. | Required before opt-in adoption: proven SQL lifecycle baseline; one authoritative aggregate; own synthetic storage satisfying conditional writes/read-after-write/ranges; two nodes, lost ack, stale epoch, outage/restart/rollback and measured cost. Followers may hold acknowledged state not yet in the bucket. NO-GO is valid research but cannot silently remove requested release scope. |
@@ -83,8 +86,8 @@ The research's basic Run ORM observation is not an absence proof: current
 
 The baseline source column is the immutable community SHA above. `E2 component`
 means real local implementation with synthetic business data, not the complete
-invoice workflow. E1 means actual ChatGPT host; E3/E4 research/specification
-claims have no executable acceptance credit here. Every child listed below was
+invoice workflow. E1 means actual ChatGPT host; E3 is inspected implementation
+and E4 is a proposal. Neither is executable acceptance. Every child listed below was
 OPEN at the 2026-10-20 live read.
 
 | Contract | Current source/evidence | Release status and next dependency |
@@ -179,7 +182,7 @@ Those e3431778 artifacts precede the staging correction and remain superseded
 qualification evidence, not an approved release. New candidate hashes and final
 gate receipts must identify the corrected immutable source.
 
-## Final bounded checkpoint
+## Prior bounded checkpoint, retained
 
 - Corrected-source provider/common-output gate: **118 passed, zero skips**.
 - Btrfs staging contract suite: **29 passed, zero skips**. All original mutation
@@ -207,8 +210,9 @@ The reviewable local handoff is
 `/home/kdlocpanda/.cache/actions-release-327/candidate-f9aa2e7fa587/HANDOFF.md`,
 with retained distributions, source archive, receipts, consumer SBOM and
 `SHA256SUMS`. The original cold-build mismatch and all failed gates remain
-retained. A suite-generated `action_server/src/actions/server/_oauth2_config.py`
-remains untracked and is not included in the PR or used as build authority.
+retained. The pre-existing untracked
+`action_server/src/actions/server/_oauth2_config.py` is not included in the PR
+or used as build authority. Its owner is not established; preserve it.
 
 Next admitted steps: diagnose the exact SQLite concurrency failure after host
 capacity is suitable, then rerun the unchanged full gate; continue the E2
@@ -217,3 +221,50 @@ services. The canonical full command is RCC `run -r developer/toolkit.yaml
 --dev -t InvoiceQueryTest` with absolute `ACTIONS_INVOICE_EVIDENCE_DIR` and
 `ACTIONS_INVOICE_FULL=1`. Preserve the pinned RCC and isolated home. No public
 release, integration or infrastructure action is authorized by this checkpoint.
+
+## Research resume and next E2 result boundary
+
+Both exact research files above were consumed completely before this work.
+The original isolated lock case passed once. A controlled six-second contender
+startup delay then reproduced the same SQLite lock error: contender A's unchanged
+five-second busy wait elapsed while the parent still waited for B's readiness.
+The corrected fixture gates startup separately, requires both real catalog-write
+entries while the parent writer remains held, asserts empty reservations before
+release, and retains the original busy timeout and parent deadline. A second
+RED control exposed premature readiness-marker publication; atomic replacement
+now makes readiness visible only after the payload is complete. The historical
+host-I/O cause remains unproven; neither earlier failed run was relabeled green.
+
+The current bounded gate passed **31 tests, zero skips**: all 20 catalog-history
+tests, eight Canvas result-scope cases and three legacy controls. The eight
+Canvas cases were repeated under the strict provider-required flag and all
+passed; they are not eight additional distinct cases. Configured Runtime lint
+and type checks passed. One bounded read-only Luna review found no actionable
+scope defects and its canonical guidance proposal was integrated.
+
+The new E2 slice is an immutable, read-only invoice result facade backed by the
+existing Run admission, actor grants, fenced output publication and sealed
+bytes. Page/export reads match exact Workspace, Deployment revision, application
+ID and application revision before opening storage. The existing Runtime HTTP
+download enforces its server-held scope; a client application header cannot
+authorize a legacy handle. The absent optional application field is omitted
+from legacy canonical snapshots. This creates no renderer, registry, second
+state authority, public MCP tool, generated application or implicit query on mount.
+
+Host I/O pressure remained high, reaching over 80 percent in the observed
+ten-second full-stall average. No complete package/service gate or candidate
+rebuild was admitted in this resource interval. The previous failed/incomplete
+full gate remains a release blocker. The protected untracked OAuth module
+retained its original SHA-256
+`01915392abf96748592c518261074181f3238d40befb2f7b024378b93d9c1a6b`.
+
+Next: when resource-safe, run the strict canonical full gate against this new
+source, then connect the existing Canvas View and app-only MCP binding to the
+scoped result service. Follow with result/input-revision-bound Work Item review,
+claim epochs/conditional finish/output and real RCC worker recovery. Knowledge,
+generated revisions, actual ChatGPT E1, optional celld conformance and the full
+homelab retained-distribution/restore gates remain required. No scope waiver,
+merge, tag, publication, migration or deployment is authorized here.
+
+Upstream disposition: none. The demonstrated lock susceptibility was in the
+Actions test synchronization; production database/fencing policy was unchanged.
