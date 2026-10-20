@@ -1,0 +1,20 @@
+{
+  "source_sha": "f9aa2e7fa5873ad623042c24d84674c138e59188",
+  "status": "PASS",
+  "wheel_sha256": "a8cb07c01aa6b20947ef4483526fa1d6aa1bcb99abcd5235f04743cff1457e29",
+  "installed_module_hashes": {
+    "actions/server/data_queries/invoices.py": "6b1dea6ef33b4689ea098b91b4be1e0363656438084ce080e557e19a8bf6051b",
+    "actions/server/deployments/source_staging.py": "fb153888140814e2dacaf4ba28b982af20b8d279a4ee2500a4e59e8995787cb2"
+  },
+  "direct_url_archive_sha256": "a8cb07c01aa6b20947ef4483526fa1d6aa1bcb99abcd5235f04743cff1457e29",
+  "real_duckdb_rows": 1,
+  "versions": {
+    "actions-runtime": "1.0.4",
+    "actions-core": "1.0.3",
+    "actions-http-helper": "1.0.3",
+    "actions-work-items": "0.4.4",
+    "mcp": "2.0.0",
+    "duckdb": "1.4.1",
+    "psycopg": "3.3.6"
+  }
+}

@@ -4,6 +4,12 @@ Authority: [release issue #327](https://github.com/joshyorko/actions/issues/327)
 This file is a reproducible source checkpoint for that issue, not a second
 backlog or execution graph. Existing child contracts and #101 remain intact.
 
+Current handoff: [draft PR #328](https://github.com/joshyorko/actions/pull/328).
+Implementation source: `f9aa2e7fa5873ad623042c24d84674c138e59188`.
+The [acceptance receipt](evidence/actions-next-327/acceptance.json) records
+current counts, failures, artifact hashes and unverified gates. **NOT READY** for
+the requested full release. Later checkpoint-only commits do not change code.
+
 ## Identity and limits
 
 - Sole release owner: the local Dakota parent session. One bounded Luna
@@ -137,3 +143,42 @@ both wheel and sdist pairs byte-identical, with strict Twine metadata checks.
 Those e3431778 artifacts precede the staging correction and remain superseded
 qualification evidence, not an approved release. New candidate hashes and final
 gate receipts must identify the corrected immutable source.
+
+## Final bounded checkpoint
+
+- Corrected-source provider/common-output gate: **118 passed, zero skips**.
+- Btrfs staging contract suite: **29 passed, zero skips**. All original mutation
+  and cleanup controls remain; the new repeat-enumeration counterexample is green.
+- ToolkitTest: **179 passed**. Configured Runtime lint/typecheck, lock check and
+  whitespace checks passed; Markdown lint was unavailable and was not installed.
+- Corrected-source portable suite: **FAILED / INCOMPLETE**, with **209 passed,
+  6 skipped and 1 failure** recorded before an owner-controlled SIGINT.
+  `test_alias_history.py::test_concurrent_processes_serialize_empty_history_allocation[False]`
+  failed on `database is locked`. Its role in the severe observed host I/O
+  pressure remains unproven. Pytest also raised a teardown `KeyError` after the
+  interrupt. The fixture controller completed cleanup. Do not report this gate
+  green, increase deadlines or silently exclude its failure.
+- The six earlier Btrfs staging failures are retained separately from this
+  current SQLite contention failure. The first complete tmpfs pass is historical
+  evidence for its original inputs, not a substitute for the current RCC gate.
+- Corrected-source wheel/sdist pairs were byte-identical with verified RCC
+  preseeding and passed strict Twine metadata validation. A separate consumer
+  installed the exact wheel with public Core/Helper 1.0.3, Work Items 0.4.4 and
+  MCP 2.0.0, verified `direct_url.json`/wheel/module hashes, and ran a real
+  DuckDB query. The 68-component SBOM describes that consumer environment only.
+  Metadata remains 1.0.4; these artifacts are **not publishable** as the next release.
+
+The reviewable local handoff is
+`/home/kdlocpanda/.cache/actions-release-327/candidate-f9aa2e7fa587/HANDOFF.md`,
+with retained distributions, source archive, receipts, consumer SBOM and
+`SHA256SUMS`. The original cold-build mismatch and all failed gates remain
+retained. A suite-generated `action_server/src/actions/server/_oauth2_config.py`
+remains untracked and is not included in the PR or used as build authority.
+
+Next admitted steps: diagnose the exact SQLite concurrency failure after host
+capacity is suitable, then rerun the unchanged full gate; continue the E2
+Work Item/review/worker/Canvas connection using these existing Run/output
+services. The canonical full command is RCC `run -r developer/toolkit.yaml
+--dev -t InvoiceQueryTest` with absolute `ACTIONS_INVOICE_EVIDENCE_DIR` and
+`ACTIONS_INVOICE_FULL=1`. Preserve the pinned RCC and isolated home. No public
+release, integration or infrastructure action is authorized by this checkpoint.
