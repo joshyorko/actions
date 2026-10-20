@@ -19,6 +19,66 @@ silently ignored with `PytestConfigWarning`.
 
 ## Safety Invariants
 
+### PostgreSQL fenced coordination and guarded retry
+
+The #327 candidate adds private `PostgreSQLFencedQueue`, implementing the same
+`FencedQueue` ownership contract as SQLite. It is a JSON queue coordinator, not
+a legacy `ManagedAdapter`: no automatic adapter selection, attachments, management
+UI coverage or authenticated HTTP API is implied. Existing Redis, DocumentDB and
+Yorko ID-only adapters do not acquire these guarantees merely by being services.
+Install only through the locked `postgres` extra using the RCC gateway.
+
+PostgreSQL uses DB time, conditional owner/epoch transitions and row locks.
+Competing claims select the oldest unlocked row with `FOR UPDATE SKIP LOCKED`;
+ties use item ID. This is not strict global FIFO while an earlier row is locked.
+Completion and output insertion commit together, with a final expiry check.
+Provider errors suppress raw DSNs/SQL diagnostics. Worker tokens identify an
+already-trusted caller and do not authenticate a network request.
+
+Both coordinators have explicit `retry_fenced`. A trusted host-supplied receipt
+verifier runs outside the queue lock; the queue then rechecks ownership, epoch,
+expiry and the current decoded-payload fingerprint. Unknown effects, unverified
+receipts, business-failure retry requests, changed input and exhausted explicit
+claim budgets are rejected. A successful retry appends its receipt/context audit
+and releases the same item for a higher-epoch claim in one transaction. Terminal
+failed items do not automatically retry. The callback must resolve and authorize
+the actual retained receipt: a digest or caller-provided disposition is not proof.
+The queue does not execute external effects or guarantee exactly-once execution.
+Worker dispatch still needs idempotency/reconciliation before executing effects,
+including redelivery after lease loss; that integration is not closed by this API.
+
+#### Schema and version plan
+
+SQLite remains schema **6**; existing columns and import aliases are unchanged.
+Only an explicit guarded retry creates the append-only `actions_fenced_retry_v1`
+audit table, inside its transaction. It has no foreign key into SQLite's rebuilt
+item table and is retained by reopen. Unknown audit layouts fail rather than
+being adopted or migrated. The Work Item row remains business authority; the
+retry table is audit evidence. This additive candidate change is not permission
+to open or migrate a deployed user database.
+
+PostgreSQL starts a separate format **1**,
+`actions.work-items.fenced-postgresql/v1`, in an explicitly supplied, existing,
+role-owned empty schema. `initialize_empty_schema` neither creates a database or
+schema nor adopts existing Work Items. A compatible repeated initialization only
+validates; unknown/nonempty layouts, missing metadata and future versions fail
+closed. There is no SQLite-to-PostgreSQL migration or dual authoritative write.
+Any future format change requires a reviewed migration, pre-upgrade database and
+attachment/effect-receipt backup, restore proof and mixed-writer rejection gates.
+Current SDK metadata remains 0.4.4; these candidate bytes must not be published
+under that version. The eventual SDK version and Runtime dependency floor remain
+release-review decisions. No production migration has been performed.
+
+The canonical opt-in gate is RCC `FencedWorkItemsTest`, with an absolute
+`ACTIONS_FENCED_EVIDENCE_DIR`. It owns one digest-pinned PostgreSQL container,
+loopback-only ephemeral port, 256 MiB/one CPU/PID bounds and tmpfs test data.
+It pulls no image and never uses another service or DSN. Required shared SQLite
+and PostgreSQL cases must have zero skips. `ACTIONS_FENCED_FULL=1` also runs the
+SDK portable suite; its optional legacy service skips/expected failures remain
+separate. Retain receipt, input hashes, JUnit, failed attempts and cleanup state.
+The SDK tests use package-relative shared fixture imports under `tests/`.
+Collect before allocating a service when changing fixture registration.
+
 ### Fenced SQLite claims in the release #327 candidate
 
 `SQLiteAdapter.reserve_fenced`, `renew_fenced` and `finish_fenced` implement the

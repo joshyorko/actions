@@ -223,6 +223,18 @@ def invoice_query_test() -> None:
     run(command)
 
 
+def fenced_work_items_test() -> None:
+    """Required SQLite/PostgreSQL fence conformance using an owned local service."""
+    evidence = os.environ.get('ACTIONS_FENCED_EVIDENCE_DIR')
+    if not evidence or not Path(evidence).is_absolute():
+        raise SystemExit('ACTIONS_FENCED_EVIDENCE_DIR must be an absolute retained directory')
+    poetry('work-items','install','--extras','postgres')
+    command = [sys.executable,'work-items/scripts/verify_fenced_queues.py','--evidence-dir',evidence]
+    if os.environ.get('ACTIONS_FENCED_FULL') == '1':
+        command.append('--full')
+    run(command)
+
+
 def typecheck() -> None:
     package_task("typecheck")
 
@@ -287,6 +299,7 @@ COMMANDS = {
     "test": test,
     "toolkit-test": toolkit_test,
     "invoice-query-test": invoice_query_test,
+    "fenced-work-items-test": fenced_work_items_test,
     "lint": lint,
     "typecheck": typecheck,
     "docs": docs,

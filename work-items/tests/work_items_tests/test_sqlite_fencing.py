@@ -10,7 +10,7 @@ import pytest
 
 from actions.work_items._adapters._sqlite import SQLiteAdapter
 from actions.work_items._exceptions import EmptyQueue
-from actions.work_items._fencing import ClaimRejected
+from actions.work_items._fencing import ClaimRejected, RetryEvidence, payload_fingerprint
 from actions.work_items._types import State
 
 
@@ -215,3 +215,21 @@ def test_legacy_recovery_selection_cannot_overwrite_a_new_fenced_claim(tmp_path,
     monkeypatch.setattr(queue, "_get_conn", interleaved)
     assert queue.recover_orphaned_work_items() == []
     replacement.finish_fenced(current[0], State.DONE)
+
+
+def test_retry_refuses_unknown_existing_audit_table_without_migration(tmp_path):
+    queue = adapter(tmp_path)
+    item = queue.seed_input({})
+    claim = queue.reserve_fenced(str(uuid4()), lease_seconds=30)
+    with sqlite3.connect(queue._db_path) as conn:
+        conn.execute(
+            "CREATE TABLE actions_fenced_retry_v1(item_id TEXT,epoch INTEGER,record TEXT,format TEXT,created_at TEXT)"
+        )
+    evidence = RetryEvidence(
+        payload_fingerprint({}), "no_effect", "sha256:" + "a" * 64, "application"
+    )
+    with pytest.raises(ValueError, match="Unknown retry audit schema"):
+        queue.retry_fenced(claim, evidence=evidence, verify_receipt=lambda *_: True, max_claims=3)
+    assert queue.get_item(item)["state"] == State.IN_PROGRESS.value
+    with sqlite3.connect(queue._db_path) as conn:
+        assert conn.execute("SELECT COUNT(*) FROM actions_fenced_retry_v1").fetchone()[0] == 0

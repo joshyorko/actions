@@ -15,7 +15,16 @@ from pathlib import Path
 from typing import Any
 
 from .._exceptions import EmptyQueue
-from .._fencing import ClaimRejected, WorkItemClaim, validate_lease, validate_owner
+from .._fencing import (
+    ClaimRejected,
+    ReceiptVerifier,
+    RetryEvidence,
+    WorkItemClaim,
+    retry_record,
+    validate_lease,
+    validate_owner,
+    verify_retry,
+)
 from .._paths import resolve_attachment_path, resolve_item_directory
 from .._types import ExceptionType, JSONType, State
 from ._base import BaseAdapter
@@ -419,6 +428,74 @@ class SQLiteAdapter(BaseAdapter):
             )
             conn.commit()
         return ids
+
+    @staticmethod
+    def _retry_log_exists(conn: sqlite3.Connection) -> bool:
+        exists = conn.execute(
+            "SELECT 1 FROM sqlite_master WHERE type='table' AND name='actions_fenced_retry_v1'"
+        ).fetchone()
+        if exists:
+            columns = {
+                (row[1], row[2].upper(), row[3], row[5])
+                for row in conn.execute("PRAGMA table_info(actions_fenced_retry_v1)")
+            }
+            expected = {
+                ("item_id", "TEXT", 1, 1),
+                ("epoch", "INTEGER", 1, 2),
+                ("record", "TEXT", 1, 0),
+                ("format", "TEXT", 1, 0),
+                ("created_at", "TEXT", 1, 0),
+            }
+            if columns != expected:
+                raise ValueError("Unknown retry audit schema; no automatic migration")
+        return exists is not None
+
+    def retry_fenced(
+        self,
+        claim: WorkItemClaim,
+        *,
+        evidence: RetryEvidence,
+        verify_receipt: ReceiptVerifier,
+        max_claims: int,
+    ) -> None:
+        # Verification cannot hold a queue writer lock or renew a lost lease.
+        verify_retry(claim, evidence, verify_receipt)
+        with self._get_conn() as conn:
+            conn.execute("BEGIN IMMEDIATE")
+            self._require_claim(conn, claim)
+            payload = self._normalize_payload(
+                conn.execute(
+                    "SELECT payload FROM work_items WHERE id=?", (claim.item_id,)
+                ).fetchone()[0]
+            )
+            record = retry_record(claim, evidence, payload, max_claims)
+            if not self._retry_log_exists(conn):
+                conn.execute(
+                    "CREATE TABLE actions_fenced_retry_v1 (item_id TEXT NOT NULL, epoch INTEGER NOT NULL, record TEXT NOT NULL, format TEXT NOT NULL CHECK(format='actions.work-item-retry/v1'), created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(item_id,epoch))"
+                )
+            conn.execute(
+                "INSERT INTO actions_fenced_retry_v1(item_id,epoch,record,format) VALUES (?,?,?,?)",
+                (claim.item_id, claim.epoch, json.dumps(record), "actions.work-item-retry/v1"),
+            )
+            changed = conn.execute(
+                "UPDATE work_items SET state=?,claim_owner=NULL,claim_deadline_ms=NULL,updated_at=? WHERE id=? AND claim_deadline_ms>?",
+                (State.PENDING.value, self._now(), claim.item_id, self._clock_ms(conn)),
+            )
+            if changed.rowcount != 1:
+                raise ClaimRejected("Work Item claim expired before retry release")
+            conn.commit()
+
+    def retry_history(self, item_id: str) -> list[dict]:
+        with self._get_conn() as conn:
+            if not self._retry_log_exists(conn):
+                return []
+            rows = conn.execute(
+                "SELECT format,record FROM actions_fenced_retry_v1 WHERE item_id=? ORDER BY epoch LIMIT 100",
+                (item_id,),
+            ).fetchall()
+            if any(row["format"] != "actions.work-item-retry/v1" for row in rows):
+                raise ValueError("Unknown retry audit format")
+            return [json.loads(row["record"]) for row in rows]
 
     def reserve_input(self) -> str:
         """Reserve the next available input work item."""

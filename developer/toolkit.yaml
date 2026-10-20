@@ -32,6 +32,8 @@ devTasks:
     shell: python toolkit.py install-community
   InvoiceQueryTest:
     shell: python toolkit.py invoice-query-test
+  FencedWorkItemsTest:
+    shell: python toolkit.py fenced-work-items-test
 
 environmentConfigs:
   - setup_windows_amd64.yaml
