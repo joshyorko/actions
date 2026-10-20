@@ -115,7 +115,11 @@ def _snapshot(snapshot: ExecutionSnapshot) -> ExecutionSnapshot:
 
 
 def _admission(snapshot: ExecutionSnapshot) -> tuple[str, str]:
-    canonical = _canonical(snapshot.model_dump(mode="json"), MAX_INPUT_BYTES)
+    payload = snapshot.model_dump(mode="json")
+    # Preserve pre-data-binding snapshot bytes and their request fingerprints.
+    if snapshot.data_binding is None:
+        payload.pop("data_binding")
+    canonical = _canonical(payload, MAX_INPUT_BYTES)
     return _key(
         "actions.run-admission/v1",
         snapshot.workspace_id,
@@ -555,6 +559,21 @@ class RunOutputService:
                 [str(now + duration), str(now), fence.attempt_id],
             ):
                 raise FenceRejected("expired Attempt cannot renew")
+
+    def execution_context(
+        self, actor: Actor, fence: AttemptFence
+    ) -> tuple[ExecutionSnapshot, Any]:
+        """Trusted worker read of the pinned snapshot and input under a live fence.
+
+        This grants no ongoing write authority. Stage and publish recheck the
+        fence, cancellation and grants independently after provider execution.
+        """
+        with _transaction(self.db):
+            pin = self._fence(fence)
+            snapshot = self._pinned(pin)
+            self._authorize(actor, snapshot, "execute")
+            run = _one(self.db, Run, fence.run_id)
+            return snapshot, json.loads(run.inputs)
 
     def stage(
         self,

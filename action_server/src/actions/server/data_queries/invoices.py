@@ -9,9 +9,10 @@ from __future__ import annotations
 
 import threading
 import time
-from collections.abc import Callable, Iterator
+from collections.abc import Callable, Iterable, Iterator
 from contextlib import contextmanager
 from dataclasses import dataclass
+from itertools import chain
 from pathlib import Path
 from typing import Any
 
@@ -19,7 +20,10 @@ from pydantic import BaseModel, ConfigDict, Field
 
 OPERATION = "invoices.overdue/v1"
 COLUMNS = ("invoice_id", "customer", "amount_cents", "days_overdue")
-SELECT = "SELECT invoice_id, customer, amount_cents, days_overdue FROM invoices"
+SELECT = (
+    "SELECT substring(invoice_id, 1, 129) AS invoice_id, "
+    "substring(customer, 1, 1025) AS customer, amount_cents, days_overdue FROM invoices"
+)
 
 
 class _Value(BaseModel):
@@ -102,13 +106,12 @@ class _Budget:
                 raise QueryRejected("invoice query cancellation did not settle")
 
 
-def _rows(cursor: Any, limits: InvoiceLimits, budget: _Budget) -> Iterator[Invoice]:
+def _rows(
+    cursor: Any, limits: InvoiceLimits, budget: _Budget, prefetched: Iterable[Any] = ()
+) -> Iterator[Invoice]:
     count = size = 0
-    while True:
+    for row in chain(prefetched, iter(lambda: _call(cursor.fetchone), None)):
         budget.check()
-        row = _call(cursor.fetchone)
-        if row is None:
-            return
         count += 1
         if count > limits.max_rows:
             raise QueryRejected("invoice query row limit exceeded")
@@ -216,16 +219,21 @@ class PostgreSQLInvoices:
                         "SELECT txid_current_snapshot()::text"
                     ).fetchone()
                 )[0]
-                cursor = _call(
-                    lambda: conn.execute(
+                cursor = _call(lambda: conn.cursor(name="actions_invoices"))
+                _call(
+                    lambda: cursor.execute(
                         SELECT
                         + " WHERE days_overdue >= %s ORDER BY invoice_id LIMIT %s",
                         [query.min_days, limits.max_rows + 1],
                     )
                 )
+                # A server cursor exposes its schema after the first FETCH.
+                first = _call(lambda: cursor.fetchmany(1))
                 columns = tuple(column.name for column in cursor.description)
                 yield InvoiceResult(
-                    columns, "postgresql:" + source, _rows(cursor, limits, budget)
+                    columns,
+                    "postgresql:" + source,
+                    _rows(cursor, limits, budget, first),
                 )
         finally:
             _call(conn.close)

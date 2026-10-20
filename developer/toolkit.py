@@ -199,6 +199,28 @@ def lint() -> None:
     package_task("lint")
 
 
+def invoice_query_test() -> None:
+    """Run the opt-in local provider gate, never deployment/publication."""
+    evidence = os.environ.get("ACTIONS_INVOICE_EVIDENCE_DIR")
+    if not evidence or not Path(evidence).is_absolute():
+        raise SystemExit(
+            "ACTIONS_INVOICE_EVIDENCE_DIR must be an absolute retained directory"
+        )
+    poetry("action_server", "install", "--extras", "data-duckdb")
+    command = [
+        sys.executable,
+        "action_server/scripts/verify_invoice_queries.py",
+        "--evidence-dir",
+        evidence,
+    ]
+    image = os.environ.get("ACTIONS_INVOICE_POSTGRES_IMAGE")
+    if image:
+        command.extend(["--image", image])
+    if os.environ.get("ACTIONS_INVOICE_FULL") == "1":
+        command.append("--full")
+    run(command)
+
+
 def typecheck() -> None:
     package_task("typecheck")
 
@@ -262,6 +284,7 @@ COMMANDS = {
     "bootstrap": bootstrap,
     "test": test,
     "toolkit-test": toolkit_test,
+    "invoice-query-test": invoice_query_test,
     "lint": lint,
     "typecheck": typecheck,
     "docs": docs,

@@ -11,6 +11,7 @@ import json
 import subprocess
 import sys
 import time
+import xml.etree.ElementTree as ET
 from pathlib import Path
 from uuid import uuid4
 
@@ -46,18 +47,19 @@ def main():
         "attempt": attempt,
         "status": "FAIL",
         "head": command("git", "rev-parse", "HEAD", cwd=ROOT),
-        "image": command(
-            "docker", "image", "inspect", args.image, "--format", "{{.Id}}"
-        ),
+        "image_reference": args.image,
         "tests": {},
         "cleanup": "NOT_RUN",
     }
     files = [
         *ROOT.glob("action_server/src/actions/server/data_queries/*.py"),
+        *ROOT.glob("action_server/src/actions/server/run_outputs/*.py"),
         ROOT / "action_server/pyproject.toml",
         ROOT / "action_server/poetry.lock",
         Path(__file__).resolve(),
         *ROOT.glob("action_server/tests/action_server_tests/test_invoice_*.py"),
+        ROOT / "developer/toolkit.py",
+        ROOT / "developer/toolkit.yaml",
     ]
     receipt["inputs"] = {
         str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
@@ -65,6 +67,9 @@ def main():
     }
     container = None
     try:
+        receipt["image"] = command(
+            "docker", "image", "inspect", args.image, "--format", "{{.Id}}"
+        )
         container = command(
             "docker",
             "run",
@@ -109,7 +114,13 @@ def main():
         env["ACTIONS_REQUIRE_INVOICE_PROVIDERS"] = "1"
         env["OMP_NUM_THREADS"] = "1"
         env["PYTHONDONTWRITEBYTECODE"] = "1"
-        suites = {"invoice": ["tests/action_server_tests/test_invoice_providers.py"]}
+        suites = {
+            "invoice": [
+                "tests/action_server_tests/test_invoice_providers.py",
+                "tests/action_server_tests/test_invoice_run_outputs.py",
+                "tests/action_server_tests/run_outputs",
+            ]
+        }
         if args.full:
             suites["portable"] = ["tests", "-m", "not integration_test"]
         for label, paths in suites.items():
@@ -132,6 +143,21 @@ def main():
             receipt["tests"][label] = result.returncode
             if result.returncode:
                 raise RuntimeError("test gate failed: " + label)
+            cases = ET.parse(evidence / (label + ".xml")).findall(".//testcase")
+            counts = {
+                "tests": len(cases),
+                "skipped": sum(case.find("skipped") is not None for case in cases),
+                "failures": sum(case.find("failure") is not None for case in cases),
+                "errors": sum(case.find("error") is not None for case in cases),
+            }
+            receipt.setdefault("counts", {})[label] = counts
+            if (
+                not cases
+                or counts["failures"]
+                or counts["errors"]
+                or (label == "invoice" and counts["skipped"])
+            ):
+                raise RuntimeError("JUnit did not prove the required gate")
         receipt["status"] = "PASS"
     except Exception as exc:
         receipt["failure_type"] = type(exc).__name__
@@ -156,6 +182,11 @@ def main():
             except Exception as exc:
                 receipt["status"] = "FAIL"
                 receipt["cleanup"] = type(exc).__name__
+        receipt["artifacts"] = {
+            p.name: hashlib.sha256(p.read_bytes()).hexdigest()
+            for p in sorted(evidence.iterdir())
+            if p.is_file()
+        }
         (evidence / "receipt.json").write_text(json.dumps(receipt, indent=2) + "\n")
     print(json.dumps({"status": receipt["status"], "evidence": str(evidence)}))
     return 0 if receipt["status"] == "PASS" else 1

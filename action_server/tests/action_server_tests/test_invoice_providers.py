@@ -1,7 +1,10 @@
 """Same typed read operation against real local DuckDB and service PostgreSQL."""
 
+import csv
 import os
 import threading
+import time
+from uuid import uuid4
 
 import pytest
 from pydantic import ValidationError
@@ -18,6 +21,28 @@ from actions.server.data_queries.invoices import (
 ROWS = [("inv-001", "North", 12500, 42), ("inv-002", "South", 400, 3)]
 
 
+@pytest.fixture
+def postgresql_database():
+    import psycopg
+    from psycopg import sql
+    from psycopg.conninfo import make_conninfo
+
+    dsn = os.environ.get("ACTIONS_INVOICE_TEST_POSTGRES")
+    if not dsn:
+        if os.environ.get("ACTIONS_REQUIRE_INVOICE_PROVIDERS") == "1":
+            pytest.fail("invoice PostgreSQL fixture is required")
+        pytest.skip("isolated invoice PostgreSQL fixture not configured")
+    schema = "actions_invoice_test_" + uuid4().hex
+    with psycopg.connect(dsn, autocommit=True) as owner:
+        owner.execute(sql.SQL("CREATE SCHEMA {}").format(sql.Identifier(schema)))
+        try:
+            yield make_conninfo(dsn, options="-csearch_path=" + schema)
+        finally:
+            owner.execute(
+                sql.SQL("DROP SCHEMA {} CASCADE").format(sql.Identifier(schema))
+            )
+
+
 @pytest.fixture(params=["duckdb", "postgresql"])
 def provider(request, tmp_path):
     if request.param == "duckdb":
@@ -29,24 +54,25 @@ def provider(request, tmp_path):
             )
 
         path = tmp_path / "invoices.duckdb"
+        csv_path = tmp_path / "invoices.csv"
+        with csv_path.open("w", newline="") as stream:
+            writer = csv.writer(stream)
+            writer.writerow(("invoice_id", "customer", "amount_cents", "days_overdue"))
+            writer.writerows(ROWS)
         with duckdb.connect(str(path)) as conn:
             conn.execute(
-                "CREATE TABLE invoices(invoice_id VARCHAR, customer VARCHAR, "
-                "amount_cents BIGINT, days_overdue INTEGER)"
+                "CREATE TABLE invoices AS SELECT * FROM read_csv(?, "
+                "columns={'invoice_id': 'VARCHAR', 'customer': 'VARCHAR', "
+                "'amount_cents': 'BIGINT', 'days_overdue': 'INTEGER'}, header=true)",
+                [str(csv_path)],
             )
-            conn.executemany("INSERT INTO invoices VALUES (?, ?, ?, ?)", ROWS)
         yield DuckDBInvoices(path)
     else:
         import psycopg
 
-        dsn = os.environ.get("ACTIONS_INVOICE_TEST_POSTGRES")
-        if not dsn:
-            if os.environ.get("ACTIONS_REQUIRE_INVOICE_PROVIDERS") == "1":
-                pytest.fail("invoice PostgreSQL fixture is required")
-            pytest.skip("isolated invoice PostgreSQL fixture not configured")
-        # The verifier creates a dedicated disposable database container.
+        dsn = request.getfixturevalue("postgresql_database")
+        # No existing relation is replaced, even with a manually supplied DSN.
         with psycopg.connect(dsn) as conn:
-            conn.execute("DROP TABLE IF EXISTS invoices")
             conn.execute(
                 "CREATE TABLE invoices(invoice_id TEXT, customer TEXT, "
                 "amount_cents BIGINT, days_overdue INTEGER)"
@@ -54,6 +80,39 @@ def provider(request, tmp_path):
             with conn.cursor() as cursor:
                 cursor.executemany("INSERT INTO invoices VALUES (%s, %s, %s, %s)", ROWS)
         yield PostgreSQLInvoices(dsn)
+
+
+def test_postgres_transaction_modes_are_effective(postgresql_database):
+    import psycopg
+
+    with psycopg.connect(postgresql_database) as conn:
+        conn.execute(
+            "CREATE VIEW invoices AS SELECT 'mode'::text AS invoice_id, "
+            "current_setting('transaction_read_only') || ':' || "
+            "current_setting('transaction_isolation') AS customer, "
+            "1::bigint AS amount_cents, 1::integer AS days_overdue"
+        )
+    with PostgreSQLInvoices(postgresql_database).query(
+        InvoiceQuery(min_days=0), InvoiceLimits(), threading.Event()
+    ) as result:
+        assert list(result.rows)[0].customer == "on:repeatable read"
+
+
+def test_byte_limit_rejects_instead_of_truncating(provider):
+    with pytest.raises(QueryRejected, match="byte limit"):
+        with provider.query(
+            InvoiceQuery(min_days=0), InvoiceLimits(max_bytes=1), threading.Event()
+        ) as result:
+            list(result.rows)
+
+
+def test_deadline_covers_result_consumption(provider):
+    with pytest.raises(QueryRejected, match="deadline"):
+        with provider.query(
+            InvoiceQuery(min_days=0), InvoiceLimits(timeout_ms=100), threading.Event()
+        ) as result:
+            time.sleep(0.12)
+            list(result.rows)
 
 
 def test_named_read_has_typed_schema_and_parameterized_result(provider):

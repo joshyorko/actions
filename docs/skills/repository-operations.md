@@ -2105,7 +2105,7 @@ focused and package gates after the ordinary merge.
 
 ### RCC release acceptance pins
 
-The latest published stable release from `joshyorko/rcc` is `v18.19.3`,
+The repository's primary pinned RCC release is `v18.19.3`,
 published 2026-08-28, with tag target
 `4148c2b71705c9d2baf0e88b48d08a79cb7bda0f`; the GitHub release is neither a
 draft nor a prerelease. Direct downloads matched the publisher API digests:
@@ -3928,10 +3928,13 @@ file or PostgreSQL connection; callers cannot submit SQL or select credentials,
 files or drivers. DuckDB is the optional `data-duckdb` Poetry extra. This is a
 provider foundation, not Canvas, Work Item review or full #131 acceptance.
 
-After RCC Doctor, Bootstrap and ToolkitTest, use the RCC-prepared Python and
-Poetry environment to run `action_server/scripts/verify_invoice_queries.py
---evidence-dir /absolute/retained/path`. Install the locked `data-duckdb` extra
-through package-local Poetry first. The verifier uses an already-local,
+After RCC Doctor, Bootstrap and ToolkitTest, run the `InvoiceQueryTest` task
+in `developer/toolkit.yaml`. Set `ACTIONS_INVOICE_EVIDENCE_DIR` to an absolute
+retained directory. The task installs the locked `data-duckdb` extra through
+package-local Poetry and runs `action_server/scripts/verify_invoice_queries.py`.
+Set `ACTIONS_INVOICE_FULL=1` to include the complete portable Runtime suite;
+`ACTIONS_INVOICE_POSTGRES_IMAGE` selects an already-local alternative image.
+The verifier uses an already-local,
 digest-pinned PostgreSQL image, one resource-bounded loopback-only container,
 synthetic rows and tmpfs storage. It does not pull images or reuse existing
 services. Every invocation retains separate JUnit/logs, input hashes and cleanup
@@ -3940,11 +3943,34 @@ of skip. Ordinary package runs may skip the unconfigured optional provider cells
 those skips are not two-provider acceptance. `--full` also runs the complete
 portable Runtime suite; neither mode proves ChatGPT or a packaged release.
 
-Both providers use read-only transactions. PostgreSQL records its MVCC snapshot;
+The PostgreSQL test fixture creates a random owned schema and removes only that
+schema afterward. It never drops or replaces a pre-existing `invoices` table.
+Still supply only a dedicated test database; tests create synthetic data and
+schema objects. The verifier supplies its own disposable database automatically.
+
+Both providers use read-only transactions. A real PostgreSQL view regression
+checks `transaction_read_only=on` and `transaction_isolation=repeatable read`
+inside the provider's transaction. PostgreSQL records its MVCC snapshot;
 DuckDB currently records only a read-transaction label. Neither label guarantees
 that an operator's mutable source is an immutable version. Snapshot retention,
 scan-cost metering, broader schema discovery and source-ingest policy remain
 separate gates. Exact exported bytes require the Run output content digest.
+
+The private invoice service reads its typed binding, limits and input from the
+existing persisted Run admission under current actor authorization and Attempt
+fencing. Changing a binding requires another Deployment revision; removing its
+configured provider blocks the pinned Run instead of selecting a replacement.
+The optional `data_binding` field is omitted from legacy canonical admissions,
+preserving their stored request fingerprints. New data-bound admissions are
+unknown to older binaries and must fail closed there.
+
+NDJSON materialization uses the existing provisional/sealed/final Run-output
+service, including its current fence and grant checks. Paging resolves that
+authorized immutable output on every request; export uses the same resolver.
+Reconstructing a database connection and output provider can reopen the bytes
+without the old data connection. The slice installs no public query, Canvas or
+MCP route and supplies no Work Item business-state authority. A source service
+test or fresh connection is not an RCC worker/process-restart acceptance claim.
 
 Refreshing the common Run-output branch preserves its service and regression
 controls but creates a new source union requiring fresh CI. The retained Windows

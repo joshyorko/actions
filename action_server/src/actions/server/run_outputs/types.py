@@ -5,10 +5,12 @@ from __future__ import annotations
 import base64
 import re
 from dataclasses import dataclass
+from typing import Literal
 from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
+from actions.server.data_queries.invoices import InvoiceLimits
 from actions.server.deployments.ids import (
     CapabilityRef,
     DeploymentRevisionRef,
@@ -38,6 +40,24 @@ class Actor(_Value):
     _principal = field_validator("principal_id")(canonical_uuid)
 
 
+class InvoiceBinding(_Value):
+    """Trusted immutable deployment binding; source version is an operator claim."""
+
+    provider: ProviderProfileRevisionRef
+    source_version: str = Field(pattern=r"^sha256:[0-9a-f]{64}$")
+    operation: Literal["invoices.overdue/v1"] = "invoices.overdue/v1"
+    effect: Literal["read"] = "read"
+    limits: InvoiceLimits = Field(default_factory=InvoiceLimits)
+
+    @property
+    def key(self) -> str:
+        return (
+            str(self.provider.provider_profile_id.root)
+            + ":"
+            + self.provider.revision_id.root
+        )
+
+
 class ExecutionSnapshot(_Value):
     """Trusted control-plane registration; this type is not compiler admission."""
 
@@ -50,6 +70,7 @@ class ExecutionSnapshot(_Value):
     runtime_kind: str = Field(min_length=1, max_length=128)
     capability_schema_digest: str = Field(pattern=r"^sha256:[0-9a-f]{64}$")
     action_id: str = Field(min_length=1, max_length=128)
+    data_binding: InvoiceBinding | None = None
 
     @model_validator(mode="after")
     def consistent_scope(self):
@@ -67,6 +88,11 @@ class ExecutionSnapshot(_Value):
             raise ValueError("snapshot Workspace mismatch")
         if self.capability.package_revision != self.runtime_plan.package_revision:
             raise ValueError("snapshot Package Revision mismatch")
+        if (
+            self.data_binding is not None
+            and self.data_binding.provider.workspace_id != ws
+        ):
+            raise ValueError("data binding Workspace mismatch")
         return self
 
     @property

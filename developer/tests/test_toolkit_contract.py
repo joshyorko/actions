@@ -26,6 +26,7 @@ def test_manifest_defines_cross_platform_developer_tasks() -> None:
         "Coverage",
         "FrontendTest",
         "InstallCommunity",
+        "InvoiceQueryTest",
     }
     assert manifest["ignoreFiles"] == ["../.gitignore"]
     assert manifest["environmentConfigs"] == [
