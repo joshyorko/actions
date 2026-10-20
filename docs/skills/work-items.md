@@ -19,6 +19,40 @@ silently ignored with `PytestConfigWarning`.
 
 ## Safety Invariants
 
+### Fenced SQLite claims in the release #327 candidate
+
+`SQLiteAdapter.reserve_fenced`, `renew_fenced` and `finish_fenced` implement the
+private additive `FencedQueue` contract. Its immutable `WorkItemClaim` contains
+item, canonical owner UUID and monotonic epoch. These are trusted SDK identities,
+not a remote authentication protocol or a Run Attempt token. Claims and expiry
+use SQLite time under `BEGIN IMMEDIATE`; worker timestamps are audit fields only.
+Reclaiming an expired item increments its epoch, including after adapter restart.
+Completion and parent-linked JSON output insertion share one transaction. A
+stale, expired, wrong-queue or terminal claim cannot finish, output or renew.
+
+An item entering fenced mode permanently rejects legacy ID-only release,
+output creation, payload/file mutation and deletion. Checks hold the same write
+transaction as the mutation. Legacy reservation and timeout-based orphan reset
+exclude fenced items. This prevents old SDK methods from bypassing an epoch;
+it does not provide authenticated management, review or cancellation APIs.
+
+SQLite schema 6 retains claim metadata through the existing migration path.
+Schema-5 clients reject that database rather than acting as unfenced writers.
+Before upgrading a real queue, retain its database and attachment root together;
+rollback to a schema-5 client requires that pre-upgrade backup. No production
+migration is authorized by the candidate tests. Existing queues without fenced
+items retain their public method and import-alias behavior after migration.
+
+Run `poetry run pytest tests/work_items_tests/test_sqlite_fencing.py` in the
+prepared Work Items package environment. It covers competing processes,
+owner replacement/reopen, stale outputs, ID-only bypasses and injected SQL
+rollback. The portable suite does not qualify a service-backed implementation.
+Retry/dead-letter policy, exact-result review, effect deduplication, output files,
+Run linkage and real RCC worker execution remain release gates. Do not infer
+those guarantees from unique reservation or Run fencing.
+
+### Artifact and legacy queue boundaries
+
 Action Server filesystem artifacts use canonical, root-relative run keys. The
 resolved storage root must be an existing non-symlink directory; run and file
 keys reject aliases, dot segments, absolute paths, symlinks, and resolved
