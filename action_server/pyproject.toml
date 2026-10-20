@@ -53,6 +53,10 @@ aiosmtplib = "^3.0.0"
 # Redis for control-room-lite mode (bundled so it just works)
 redis = "^5.0.0"
 psycopg = { version = "^3.2.0", extras = ["binary"] }
+duckdb = { version = "1.4.1", optional = true }
+
+[tool.poetry.extras]
+data-duckdb = ["duckdb"]
 
 [tool.poetry.group.dev.dependencies]
 actions-http-helper = { path = "../actions-http-helper/", develop = true }

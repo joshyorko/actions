@@ -3919,6 +3919,33 @@ correctness failure. Controlled browser performance remains a separate proof.
 
 ## Common Run-output migration and verification
 
+### Bounded invoice data-provider proof
+
+The private `data_queries.invoices` module implements only the named read
+`invoices.overdue/v1`. It accepts strict typed parameters and bounded rows,
+bytes and execution time. Operator configuration supplies a read-only DuckDB
+file or PostgreSQL connection; callers cannot submit SQL or select credentials,
+files or drivers. DuckDB is the optional `data-duckdb` Poetry extra. This is a
+provider foundation, not Canvas, Work Item review or full #131 acceptance.
+
+After RCC Doctor, Bootstrap and ToolkitTest, use the RCC-prepared Python and
+Poetry environment to run `action_server/scripts/verify_invoice_queries.py
+--evidence-dir /absolute/retained/path`. Install the locked `data-duckdb` extra
+through package-local Poetry first. The verifier uses an already-local,
+digest-pinned PostgreSQL image, one resource-bounded loopback-only container,
+synthetic rows and tmpfs storage. It does not pull images or reuse existing
+services. Every invocation retains separate JUnit/logs, input hashes and cleanup
+status. `ACTIONS_REQUIRE_INVOICE_PROVIDERS=1` makes missing providers fail instead
+of skip. Ordinary package runs may skip the unconfigured optional provider cells;
+those skips are not two-provider acceptance. `--full` also runs the complete
+portable Runtime suite; neither mode proves ChatGPT or a packaged release.
+
+Both providers use read-only transactions. PostgreSQL records its MVCC snapshot;
+DuckDB currently records only a read-transaction label. Neither label guarantees
+that an operator's mutable source is an immutable version. Snapshot retention,
+scan-cost metering, broader schema discovery and source-ingest policy remain
+separate gates. Exact exported bytes require the Run output content digest.
+
 Refreshing the common Run-output branch preserves its service and regression
 controls but creates a new source union requiring fresh CI. The retained Windows
 failure at `9cb61c52` occurred on the resource catalog test's **first** native
