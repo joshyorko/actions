@@ -46,6 +46,41 @@ the requested full release. Later checkpoint-only commits do not change code.
 
 ## Acceptance matrix
 
+### Research-to-release traceability
+
+Both exact user inputs were read completely as `kdlocpanda` on 2026-10-20:
+
+| Local input, retained outside Git | Bytes | SHA-256 |
+|---|---:|---|
+| `actions-runtime-research-2026-10-20.md` | 32388 | `3d521ff0e79d29cd69b301b894085de09b66019cd3d0282e3f63042b9be6bd4c` |
+| `actions-runtime-evidence-ledger-2026-10-20.json` | 13158 | `b5b13d7da759f1cb98c8a10ed42fa241a1c9ee837f81dd7160d9bb279d8e0d82` |
+
+Their observation timestamp is 2026-10-20T16:49:21Z and Actions snapshot is
+`0e80d41c6b4e5df9579675731e6cdbda733acd35`. The JSON explicitly records
+`research_only`, no mutations and no new acceptance executions. Its `basis`
+hashes identify earlier supplied documents, not these two local files. This
+distilled crosswalk is not a copy of either research input. No other Downloads
+file was accessed.
+
+Evidence meanings follow the report section 1: E1 actual intended integration;
+E2 executed acceptance on identified inputs; E3 inspected implementation;
+E4 proposal; E5 uncorroborated summary. Historical E2 is not a fresh pass.
+
+| Release area | Historical research and ledger references | Current source / PR #328 | Tested evidence versus missing acceptance |
+|---|---|---|---|
+| A: MCP v2, Canvas host and application revisions | Report sections 2, 7, 9–10; claims C2/C5; A5/A6, H1–H3. The fixture returns no artifact, and no ChatGPT session was observed. | `templates/canvas-query/canvas_query.py::canvas_fixture_search`, `acceptance-gates.json`; `run_outputs/service.py::resolve` and `data_queries/service.py::page` now implement private authorized output access. The fixture is still unconnected to that resolver. | E2 private query/output tests do not prove an app/revision-authorized bridge. Required: same renderer with bounded real query results and non-null authorized handle; actual tool/resource/MIME/bridge/reconnect E1; stable generated revision staging, activation, restart and rollback. Operator connection remains needed after engineering prerequisites. |
+| B: open Data Packages-style provider plane | Report sections 3, 7, 10; C4; A10/#131, S1–S5. Proprietary Data Server is excluded; immutable query source does not freeze mutable data. | `data_queries/invoices.py` and `InvoiceQueryService`; `ExecutionSnapshot.data_binding` pins provider/limits/source-version claim. DuckDB and PostgreSQL are real engines, not substitutes for each other. | E2 118 provider/common-output passes at `f9aa2e7f`; installed-wheel DuckDB smoke. `source_version` is explicitly an operator claim; DuckDB transaction label is not a retained source snapshot. Required: broader scoped discovery, retained materialized result/source identity, expiry/privacy negatives, cost policy, and one bounded knowledge ingest/search slice. No `sema4ai-data`, `x-data-context` or arbitrary SQL authority. |
+| C: business Work Items, review and real execution | Report sections 2, 4, 7, 10; C3/C5; A7–A9/A11 and #132/#83. Claim and finish/output authority are separate; approval must bind exact result/input revision. | Legacy `work-items/.../_sqlite.py::release_input` remains ID-only. Private `RunOutputService` fences Run Attempts, not Work Item claims. Existing RCC adapter remains the execution owner. | E2 Run/output negatives do not close C3. Required: Work Item owner/epoch/renew/conditional finish/output; revision-bound review, retry/dead-letter/cancel and effect-before-receipt ambiguity; same SQLite/service conformance; genuine pinned RCC worker success/failure/restart and lineage. No second queue or inferred producer/consumer mode. |
+| D: optional celld aggregate | Report section 5 and actor acceptance; C6–C8; D1–D6, M1/#246. Upstream v0.6.2 source `90b43017241f81189453d326d05948f388b34652` is beta evidence only. Durable Git is actual Git-hosting research, not merely coordination. | #326 remains authority; no celld adapter/lab is implemented. MemoryD, Git, other repositories and their active owners remain outside this implementation. | Required before opt-in adoption: proven SQL lifecycle baseline; one authoritative aggregate; own synthetic storage satisfying conditional writes/read-after-write/ranges; two nodes, lost ack, stale epoch, outage/restart/rollback and measured cost. Followers may hold acknowledged state not yet in the bucket. NO-GO is valid research but cannot silently remove requested release scope. |
+| E: identity, auth/transport and homelab distribution | Report sections 1, 6, 8, 10; C1; A3/A4/A14/A15, H1–H3, P1–P3. Published source `d222f94e` differs from controller/community `0e80d41c`; publication is historical E2, not package readback. | PR #328 is draft; source `f9aa2e7f` has local wheel/sdist receipts, private actor/grant boundaries and default-off transport. Runtime metadata remains 1.0.4, not a new release. | Repeated local builds and exact-wheel smoke are E2 for those bytes only. Required: full corrected-source gates, mixed-version/auth/transport negatives, native/image and complete SBOM/provenance, configurable owned registry/object store, independent retention and restore/readback/rollback. Neither a checksum nor a retained blob proves authorization, restore, or a committed business transition. |
+
+Three corrections to the earlier checkpoint are explicit: a private Run resolver
+does not satisfy the Canvas application/revision boundary; Run fencing does not
+repair Work Item completion or revision-bound approvals; local artifacts and a
+consumer SBOM do not establish an independent retained release/restore path.
+The research's basic Run ORM observation is not an absence proof: current
+`run_outputs` extensions must be assessed separately. All requested gates remain.
+
 The baseline source column is the immutable community SHA above. `E2 component`
 means real local implementation with synthetic business data, not the complete
 invoice workflow. E1 means actual ChatGPT host; E3/E4 research/specification

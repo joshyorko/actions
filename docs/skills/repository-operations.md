@@ -2,6 +2,17 @@
 
 ## MCP Apps public metadata
 
+Catalog concurrency fixtures must distinguish process startup from contention.
+Keep the real SQLite writer held while both children initialize, then release a
+separate child-start gate. Require both children to enter the actual catalog
+writer statement and the reservation table to remain empty before committing
+the parent writer. An early child's five-second SQLite wait must not be spent
+waiting for another child's imports. The startup-skew regression delays one
+contender for six seconds while retaining the existing SQLite busy timeout and
+parent deadline. This proves a fixture synchronization correction, not a new
+database retry policy or a retrospective explanation of an old host-pressure
+failure. A targeted pass does not replace the complete release gate.
+
 ## Canvas query-results fixture interchange
 
 The merged PR267 renderer decision uses a thin Actions-owned React view with

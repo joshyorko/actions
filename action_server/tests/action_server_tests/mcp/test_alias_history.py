@@ -453,11 +453,34 @@ def generate(action_package, action, display_name, **kwargs):
         return action.id
     return execute, execute, {}
 _actions_run.generate_func_from_action = generate
-with load_db(sys.argv[1]):
-    Path(sys.argv[3]).write_text("ready")
+with load_db(sys.argv[1]) as db:
+    marker = Path(sys.argv[3])
+    with db.cursor() as cursor:
+        db.execute_query(cursor, "PRAGMA busy_timeout")
+        marker.write_text(str(cursor.fetchone()[0]))
+    if sys.stdin.buffer.read(3) != b"go\\n":
+        raise RuntimeError("missing parent contention gate")
+    original_execute = db.execute
+    def execute(sql, values=None):
+        if sql == "UPDATE mcp_catalog_name SET id=id WHERE 0":
+            Path(str(marker) + ".claim").write_text("entering")
+        return original_execute(sql, values)
+    db.execute = execute
     helper = _ActionRoutes(sys.argv[2], []).prepare_actions()[1]
     print(json.dumps({name: info.action.action_package_id for name, info in helper._tool_name_to_action_info.items()}))
 """
+
+
+def test_catalog_serialization_survives_slow_contender_startup(tmp_path, monkeypatch):
+    # Exceed SQLite's unchanged five-second busy timeout before contender B is
+    # ready. Startup skew must not consume contender A's lock-wait allowance.
+    delayed = _CHILD.replace(
+        "with load_db(sys.argv[1])",
+        "import time\nif sys.argv[2] == 'package2/do_it': time.sleep(6)\n"
+        "with load_db(sys.argv[1])",
+    )
+    monkeypatch.setitem(globals(), "_CHILD", delayed)
+    test_concurrent_processes_serialize_empty_history_allocation(tmp_path, False)
 
 
 @pytest.mark.parametrize("same_catalog", [True, False])
@@ -499,6 +522,7 @@ def test_concurrent_processes_serialize_empty_history_allocation(
                             str(marker),
                         ],
                         env=environment,
+                        stdin=subprocess.PIPE,
                         stdout=subprocess.PIPE,
                         stderr=subprocess.PIPE,
                         text=True,
@@ -542,6 +566,23 @@ def test_concurrent_processes_serialize_empty_history_allocation(
                         "readiness:\n" + "\n".join(diagnostics)
                     )
                 time.sleep(0.01)
+            for child in children:
+                assert Path(child.args[-1]).read_text() == "5000"
+                child.stdin.write("go\n")
+                child.stdin.flush()
+            while not all(
+                Path(str(child.args[-1]) + ".claim").exists() for child in children
+            ):
+                if time.monotonic() >= deadline:
+                    pytest.fail("catalog children did not reach the real writer gate")
+                if any(child.poll() is not None for child in children):
+                    pytest.fail("catalog child exited while the writer was held")
+                time.sleep(0.01)
+            assert all(child.poll() is None for child in children)
+            assert (
+                blocker.execute("SELECT COUNT(*) FROM mcp_catalog_name").fetchone()[0]
+                == 0
+            )
             blocker.commit()
         results = []
         for child in children:
