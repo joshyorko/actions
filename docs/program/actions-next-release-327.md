@@ -123,3 +123,17 @@ Upstream disposition: none. The bounded review found an Actions-owned fixture
 safety defect. A transaction-mode hypothesis was tested on the actual PostgreSQL
 fixture and rejected because READ ONLY and REPEATABLE READ were both active.
 The canonical operational delta belongs in `docs/skills/repository-operations.md`.
+
+The named RCC exact-head full gate then exposed six source-staging failures on
+Btrfs. The earlier prepared-Poetry full gate used tmpfs. A new repeated-listing
+counterexample failed before the correction; fresh descriptor-relative directory
+opens and live namespace test assertions passed all 29 staging cases on Btrfs.
+No mutation/cleanup assertion was removed. The complete RCC gate must be rerun
+after this separately reviewable source correction. Retain both original results.
+
+Cold repeated Poetry builds also failed byte equality because the first sdist
+preceded RCC acquisition. Verified RCC preseeding before either inventory made
+both wheel and sdist pairs byte-identical, with strict Twine metadata checks.
+Those e3431778 artifacts precede the staging correction and remain superseded
+qualification evidence, not an approved release. New candidate hashes and final
+gate receipts must identify the corrected immutable source.

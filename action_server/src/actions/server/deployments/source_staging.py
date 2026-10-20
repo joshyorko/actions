@@ -122,9 +122,8 @@ def stage_selected_files(
         ):
             raise ValueError("staging destination must be owner-private")
         try:
-            with os.scandir(owned_destination) as entries:
-                if next(entries, None) is not None:
-                    raise ValueError("staging destination must be empty")
+            if not _directory_entries_equal(owned_destination, set()):
+                raise ValueError("staging destination must be empty")
         except OSError as exc:
             raise ValueError(
                 "staging destination descriptor must permit directory listing"
@@ -587,13 +586,25 @@ def _verify_destination_identity(
 
 def _directory_entries_equal(fd: int, expected: set[str]) -> bool:
     found: set[str] = set()
-    with os.scandir(fd) as entries:
-        for entry in entries:
-            if entry.name not in expected or entry.name in found:
-                return False
-            found.add(entry.name)
-            if len(found) > source_manifest.MAX_ENTRIES:
-                return False
+    # dup() shares directory iteration state. Reopen the same directory by FD
+    # for every pass, so Btrfs sees entries created since the previous scan.
+    flags = (
+        os.O_RDONLY
+        | source_read._required_linux_flag("O_DIRECTORY")
+        | source_read._required_linux_flag("O_NOFOLLOW")
+        | source_read._required_linux_flag("O_CLOEXEC")
+    )
+    listing_fd = os.open(".", flags, dir_fd=fd)
+    try:
+        with os.scandir(listing_fd) as entries:
+            for entry in entries:
+                if entry.name not in expected or entry.name in found:
+                    return False
+                found.add(entry.name)
+                if len(found) > source_manifest.MAX_ENTRIES:
+                    return False
+    finally:
+        os.close(listing_fd)
     return found == expected
 
 

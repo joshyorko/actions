@@ -3227,6 +3227,15 @@ Revision API and does not modify the legacy Robot ZIP/import path. The bounded
 Linux contract suite exercises successful mode normalization, invalid and
 non-empty destinations, links/special files, source/staged-byte mutation, and
 failure cleanup; it does not establish an RCC consumer/import proof.
+Directory enumeration needs a fresh open file description for every pass.
+Reopen `.` relative to the trusted directory descriptor with directory,
+no-follow and close-on-exec flags; `dup()` still shares directory iteration
+state. On Dakota Btrfs, descriptors opened before a mutation can omit newly
+created entries even while the reported offset is zero. The regression checks
+new-entry visibility and preserves the borrowed cursor. Namespace assertions
+use a fresh fixture-path listing while separate assertions retain borrowed-FD
+identity/lifetime checks. Keep the Btrfs/RCC temporary-directory gate; moving it
+to tmpfs or skipping these controls would hide this boundary.
 The staged-byte regression matches the destination descriptor by device and
 inode and writes the same-sized poison before the underlying read. A positive
 baseline and mutation control with constant timestamp observations verify that
@@ -3971,6 +3980,19 @@ Reconstructing a database connection and output provider can reopen the bytes
 without the old data connection. The slice installs no public query, Canvas or
 MCP route and supplies no Work Item business-state authority. A source service
 test or fresh connection is not an RCC worker/process-restart acceptance claim.
+
+For reproducible local distributions, place the publisher-digest-verified pinned
+RCC file in `action_server/src/actions/server/bin` before Poetry inventories
+either format. A cold `poetry build` was observed to create an sdist without RCC,
+then download RCC during its wheel hook; the next sdist included it and wheel
+RECORD ordering changed. Preserve that failed attempt. After verified preseeding,
+the existing `ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD=1` flag disables only the
+redundant download. With `SOURCE_DATE_EPOCH` set to the source commit timestamp,
+two subsequent wheel/sdist pairs were byte-identical. Generate public OAuth
+configuration from the versioned repository inputs first; never borrow a test's
+generated module or private release state. This bounded Linux build observation
+does not prove an installed consumer, native/image/SBOM qualification or the
+entire independent release pipeline.
 
 Refreshing the common Run-output branch preserves its service and regression
 controls but creates a new source union requiring fresh CI. The retained Windows
