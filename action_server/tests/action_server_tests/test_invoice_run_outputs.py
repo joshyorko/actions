@@ -158,6 +158,7 @@ def test_legacy_admission_keeps_original_canonical_snapshot(store):
     db, _, outputs, snap, actor, *_ = store
     run = outputs.admit(actor, snap, {"query": "legacy"}, "legacy")
     assert "data_binding" not in json.loads(db.first(RunAdmission).snapshot_json)
+    assert "canvas_application" not in json.loads(db.first(RunAdmission).snapshot_json)
     assert outputs.claim(run.id, str(uuid4()), lease_seconds=30).epoch == 1
 
 

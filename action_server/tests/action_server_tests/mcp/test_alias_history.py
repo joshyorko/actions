@@ -457,7 +457,9 @@ with load_db(sys.argv[1]) as db:
     marker = Path(sys.argv[3])
     with db.cursor() as cursor:
         db.execute_query(cursor, "PRAGMA busy_timeout")
-        marker.write_text(str(cursor.fetchone()[0]))
+        ready = marker.with_suffix(".ready-tmp")
+        ready.write_text(str(cursor.fetchone()[0]))
+        ready.replace(marker)
     if sys.stdin.buffer.read(3) != b"go\\n":
         raise RuntimeError("missing parent contention gate")
     original_execute = db.execute
@@ -469,6 +471,30 @@ with load_db(sys.argv[1]) as db:
     helper = _ActionRoutes(sys.argv[2], []).prepare_actions()[1]
     print(json.dumps({name: info.action.action_package_id for name, info in helper._tool_name_to_action_info.items()}))
 """
+
+
+def test_catalog_readiness_is_published_after_its_payload_is_complete(
+    tmp_path, monkeypatch
+):
+    partial_write = """
+import time
+original_write_text = Path.write_text
+def write_text(path, content, *args, **kwargs):
+    if content == "5000":
+        with path.open("w") as stream:
+            time.sleep(0.5)
+            return stream.write(content)
+    return original_write_text(path, content, *args, **kwargs)
+Path.write_text = write_text
+"""
+    monkeypatch.setitem(
+        globals(),
+        "_CHILD",
+        _CHILD.replace(
+            "with load_db(sys.argv[1])", partial_write + "with load_db(sys.argv[1])"
+        ),
+    )
+    test_concurrent_processes_serialize_empty_history_allocation(tmp_path, False)
 
 
 def test_catalog_serialization_survives_slow_contender_startup(tmp_path, monkeypatch):

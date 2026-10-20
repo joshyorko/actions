@@ -12,6 +12,10 @@ contender for six seconds while retaining the existing SQLite busy timeout and
 parent deadline. This proves a fixture synchronization correction, not a new
 database retry policy or a retrospective explanation of an old host-pressure
 failure. A targeted pass does not replace the complete release gate.
+Publish the child's readiness payload by atomic replacement after writing it;
+existence of an open, empty marker is not readiness. The partial-write control
+delays the actual payload write and verifies that the parent never consumes an
+incomplete busy-timeout observation.
 
 ## Canvas query-results fixture interchange
 
@@ -3991,6 +3995,26 @@ Reconstructing a database connection and output provider can reopen the bytes
 without the old data connection. The slice installs no public query, Canvas or
 MCP route and supplies no Work Item business-state authority. A source service
 test or fresh connection is not an RCC worker/process-restart acceptance claim.
+
+The private `InvoiceCanvasFacade` now binds result paging/export to a trusted
+server `CanvasResultScope`: exact Workspace, Deployment revision, application
+ID and application revision. `ExecutionSnapshot.canvas_application` persists
+that subject in the existing Run admission, without another database or app
+registry. The common resolver checks both current actor grants and the expected
+subject before opening output bytes. Application IDs, revision digests and host
+visibility metadata grant no authority. An absent application pin cannot fall
+back when a Canvas-scoped reader requests an older result.
+
+The existing authenticated `RunOutputTransport` accepts the same optional
+server-held scope. It cannot be selected through request metadata or a client
+application-ID header. The assembled Runtime HTTP regression verifies real
+sealed NDJSON bytes and rejects a legacy handle before provider access. The
+facade is read-only: paging, remount or export creates no new Run or query.
+Legacy admissions omit the absent optional field, preserving their canonical
+fingerprints. This is a private result-binding seam, not a generated app,
+activated revision, general CanvasSpec, connected template, MCP bridge or E1
+claim. The existing Canvas template still intentionally returns no artifact
+until its public app/principal binding and tool routing are implemented.
 
 For reproducible local distributions, place the publisher-digest-verified pinned
 RCC file in `action_server/src/actions/server/bin` before Poetry inventories

@@ -8,11 +8,15 @@ from __future__ import annotations
 
 import threading
 from collections.abc import Iterator
-from contextlib import AbstractContextManager
+from contextlib import AbstractContextManager, contextmanager
 from typing import Any, Protocol
 
-from actions.server.run_outputs.service import AccessDenied, RunOutputService
-from actions.server.run_outputs.types import Actor, AttemptFence
+from actions.server.run_outputs.service import (
+    AccessDenied,
+    ResolvedOutput,
+    RunOutputService,
+)
+from actions.server.run_outputs.types import Actor, AttemptFence, CanvasResultScope
 
 from .invoices import (
     COLUMNS,
@@ -88,6 +92,7 @@ class InvoiceQueryService:
         *,
         offset: int,
         limit: int,
+        canvas_scope: CanvasResultScope | None = None,
     ) -> list[Invoice]:
         if (
             not isinstance(offset, int)
@@ -99,12 +104,9 @@ class InvoiceQueryService:
         ):
             raise ValueError("bounded integer page offset/limit required")
         page = []
-        with self.outputs.resolve(actor, workspace_id, handle) as output:
-            if (
-                output.media_type != "application/x-ndjson"
-                or output.name != "invoices.ndjson"
-            ):
-                raise QueryRejected("output is not an invoice result")
+        with self.export(
+            actor, workspace_id, handle, canvas_scope=canvas_scope
+        ) as output:
             pending = b""
             index = 0
             while chunk := output.read(8192):
@@ -127,3 +129,22 @@ class InvoiceQueryService:
             if pending:
                 raise QueryRejected("incomplete invoice result record")
         return page
+
+    @contextmanager
+    def export(
+        self,
+        actor: Actor,
+        workspace_id: str,
+        handle: str,
+        *,
+        canvas_scope: CanvasResultScope | None = None,
+    ) -> Iterator[ResolvedOutput]:
+        with self.outputs.resolve(
+            actor, workspace_id, handle, canvas_scope=canvas_scope
+        ) as output:
+            if (
+                output.media_type != "application/x-ndjson"
+                or output.name != "invoices.ndjson"
+            ):
+                raise QueryRejected("output is not an invoice result")
+            yield output

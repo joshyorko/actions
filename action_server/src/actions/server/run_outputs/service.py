@@ -30,6 +30,7 @@ from actions.server.run_outputs.models import (
 from actions.server.run_outputs.types import (
     Actor,
     AttemptFence,
+    CanvasResultScope,
     ExecutionSnapshot,
     OutputRef,
     SealReceipt,
@@ -116,9 +117,11 @@ def _snapshot(snapshot: ExecutionSnapshot) -> ExecutionSnapshot:
 
 def _admission(snapshot: ExecutionSnapshot) -> tuple[str, str]:
     payload = snapshot.model_dump(mode="json")
-    # Preserve pre-data-binding snapshot bytes and their request fingerprints.
+    # Preserve older snapshots' exact bytes and request fingerprints.
     if snapshot.data_binding is None:
         payload.pop("data_binding")
+    if snapshot.canvas_application is None:
+        payload.pop("canvas_application")
     canonical = _canonical(payload, MAX_INPUT_BYTES)
     return _key(
         "actions.run-admission/v1",
@@ -823,11 +826,18 @@ class RunOutputService:
 
     @contextmanager
     def resolve(
-        self, actor: Actor, workspace_id: str, handle: str
+        self,
+        actor: Actor,
+        workspace_id: str,
+        handle: str,
+        *,
+        canvas_scope: CanvasResultScope | None = None,
     ) -> Iterator[ResolvedOutput]:
         try:
             canonical_uuid(workspace_id)
             output_id = output_id_from_handle(handle)
+            if canvas_scope is not None:
+                canvas_scope = CanvasResultScope.model_validate(canvas_scope)
         except ValueError as exc:
             raise AccessDenied("Run/output unavailable or access denied") from exc
         with ExitStack() as owned:
@@ -842,6 +852,11 @@ class RunOutputService:
                     raise AccessDenied("Run/output unavailable or access denied")
                 snapshot = self._pinned(pin)
                 self._authorize(actor, snapshot, "read")
+                if canvas_scope is not None and (
+                    snapshot.deployment != canvas_scope.deployment
+                    or snapshot.canvas_application != canvas_scope.application
+                ):
+                    raise AccessDenied("Run/output unavailable or access denied")
                 run = _one(self.db, Run, output.run_id)
                 try:
                     attached = json.loads(run.result or "null")

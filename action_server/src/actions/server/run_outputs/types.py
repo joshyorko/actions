@@ -58,6 +58,28 @@ class InvoiceBinding(_Value):
         )
 
 
+class CanvasApplicationRef(_Value):
+    """Pinned application subject, not app registration or generation proof."""
+
+    workspace_id: str
+    app_id: str
+    revision_id: str = Field(pattern=r"^sha256:[0-9a-f]{64}$")
+    _ids = field_validator("workspace_id", "app_id")(canonical_uuid)
+
+
+class CanvasResultScope(_Value):
+    """Trusted server binding; knowing these references grants no access."""
+
+    deployment: DeploymentRevisionRef
+    application: CanvasApplicationRef
+
+    @model_validator(mode="after")
+    def consistent_workspace(self):
+        if self.application.workspace_id != str(self.deployment.workspace_id.root):
+            raise ValueError("Canvas result Workspace mismatch")
+        return self
+
+
 class ExecutionSnapshot(_Value):
     """Trusted control-plane registration; this type is not compiler admission."""
 
@@ -71,6 +93,7 @@ class ExecutionSnapshot(_Value):
     capability_schema_digest: str = Field(pattern=r"^sha256:[0-9a-f]{64}$")
     action_id: str = Field(min_length=1, max_length=128)
     data_binding: InvoiceBinding | None = None
+    canvas_application: CanvasApplicationRef | None = None
 
     @model_validator(mode="after")
     def consistent_scope(self):
@@ -93,6 +116,11 @@ class ExecutionSnapshot(_Value):
             and self.data_binding.provider.workspace_id != ws
         ):
             raise ValueError("data binding Workspace mismatch")
+        if (
+            self.canvas_application is not None
+            and self.canvas_application.workspace_id != str(ws.root)
+        ):
+            raise ValueError("Canvas application Workspace mismatch")
         return self
 
     @property

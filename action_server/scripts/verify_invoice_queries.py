@@ -118,6 +118,7 @@ def main():
             "invoice": [
                 "tests/action_server_tests/test_invoice_providers.py",
                 "tests/action_server_tests/test_invoice_run_outputs.py",
+                "tests/action_server_tests/test_invoice_canvas.py",
                 "tests/action_server_tests/run_outputs",
             ]
         }
