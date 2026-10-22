@@ -240,6 +240,8 @@ def test_migrate_archives_legacy_output_before_historical_migration_11(
         with db.transaction():
             # Backdating must also remove schema owned by later migrations.
             for table in (
+                "invoice_review",
+                "fenced_work_item",
                 "run_output",
                 "run_attempt",
                 "run_pin",

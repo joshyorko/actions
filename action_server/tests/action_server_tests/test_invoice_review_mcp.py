@@ -2,10 +2,10 @@
 
 import asyncio
 import sys
-import pytest
-from action_server_tests import test_invoice_review as fixtures
 
 import httpx2
+import pytest
+from action_server_tests import test_invoice_review as fixtures
 from mcp import ClientSession
 from mcp.client.streamable_http import streamable_http_client
 
@@ -15,7 +15,6 @@ from actions.server.data_queries.canvas_mcp import (
     InvoiceCanvasPrincipal,
 )
 from actions.server.mcp.setup_mcp_server_v2 import McpServerSetupHelper
-
 
 provider = fixtures.provider
 postgresql_database = fixtures.postgresql_database

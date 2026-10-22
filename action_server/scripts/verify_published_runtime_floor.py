@@ -84,7 +84,9 @@ def verify_selected_runtime_origin(wheel: Path, direct_url: dict) -> None:
         raise RuntimeError("Installed origin differs from the selected Runtime wheel")
 
 
-def validate_runtime_metadata(wheel: Path) -> None:
+def validate_runtime_metadata(
+    wheel: Path, *, expected_runtime: str = EXPECTED_RUNTIME
+) -> None:
     with zipfile.ZipFile(wheel) as archive:
         paths = [
             name for name in archive.namelist() if name.endswith(".dist-info/METADATA")
@@ -94,7 +96,7 @@ def validate_runtime_metadata(wheel: Path) -> None:
         metadata = BytesParser().parsebytes(archive.read(paths[0]))
     if metadata.get("Name") != "actions-runtime":
         raise ValueError(f"Unexpected distribution in {wheel.name}")
-    if metadata.get("Version") != EXPECTED_RUNTIME:
+    if metadata.get("Version") != expected_runtime:
         raise ValueError(f"Unexpected Runtime version in {wheel.name}")
 
 
@@ -417,9 +419,10 @@ def verify_installed_runtime_wheel(
     checkout: Path,
     *,
     core_wheel: Path | None = None,
+    expected_runtime: str = EXPECTED_RUNTIME,
 ) -> dict:
     """Bind every installed Runtime Python member to the selected wheel."""
-    validate_runtime_metadata(runtime_wheel)
+    validate_runtime_metadata(runtime_wheel, expected_runtime=expected_runtime)
     environment = isolated_environment()
     checkout = checkout.resolve()
     probe = (
@@ -435,7 +438,7 @@ import pathlib
 import sys
 import tempfile
 
-assert importlib.metadata.version("actions-runtime") == {EXPECTED_RUNTIME!r}
+assert importlib.metadata.version("actions-runtime") == {expected_runtime!r}
 environment_root = pathlib.Path(sys.prefix).resolve()
 checkout_root = pathlib.Path({str(checkout)!r}).resolve()
 for name in ("actions", "actions.mcp", "actions.work_items", "actions.server", "actions_http"):

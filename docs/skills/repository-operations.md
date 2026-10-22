@@ -10,6 +10,30 @@ in a migration-only lane. Push without force and verify each exact remote SHA.
 Cloud tasks consume those immutable remote SHAs and the authoritative issue's
 handoff, not local worktree paths or thread goal statuses as acceptance evidence.
 
+## Candidate wheels and historical migration fixtures
+
+Keep the public Runtime 1.0.4 floor canary separate from provisional candidate
+verification. `verify_published_runtime_floor.py` still defaults to exact 1.0.4;
+its reusable installed-wheel verifier accepts an explicitly named candidate
+version. A candidate check must pass the selected package metadata version,
+verify wheel/module origins and bytes, and admit the measured SDK dependency
+floor. Never infer candidate acceptance from the public-version canary.
+
+The clean-wheel contract test builds a Git-tracked source archive in its own
+fixture directory before running the public OAuth configuration generator. This
+prevents a test build from overwriting or admitting an existing untracked local
+OAuth module. Do not treat such a module in a working checkout as build authority.
+Retain generated public build inputs and their binding inside the owned fixture.
+
+When backdating a freshly created database to exercise an old migration, remove
+**all** tables/indexes owned by later migrations first, children before parents.
+For pre-15 fixtures, migration 16's `invoice_review` and `fenced_work_item` tables
+must be removed before Run/Workspace tables. Otherwise an existing index failure
+is a malformed historical fixture, not evidence that upgrading a real old schema
+is unsafe. Continue comparing the upgraded tables/indexes with a fresh schema
+and proving legacy rows survive; do not add `IF NOT EXISTS` to hide the fixture
+error or drop retained business data during migration.
+
 ## Recovering a vanished release worktree
 
 Verify the registered worktrees, exact branch ref and destination absence before

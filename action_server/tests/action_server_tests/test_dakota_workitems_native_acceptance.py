@@ -389,6 +389,10 @@ def test_packaged_runtime_executes_work_item_consumer_lifecycle(
             "expected_core_version": expected_core_version,
             "core_install_report": str(core_install_report),
             "core_install_proof": str(core_install_proof),
+            "expected_sdk_wheel": str(sdk_wheel),
+            "expected_sdk_wheel_sha256": sdk_hash,
+            "expected_sdk_version": sdk_version,
+            "sdk_install_proof": str(sdk_install_proof),
         },
     )
     failed = client.get_json(f"/api/work-items/{failure_id}")

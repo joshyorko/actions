@@ -220,6 +220,8 @@ def test_migrate(database_v0: Path, tmpdir) -> None:
                 "run_pin",
                 "run_attempt",
                 "run_output",
+                "invoice_review",
+                "fenced_work_item",
                 "schedule",
                 "schedule_execution",
                 "schedule_group",

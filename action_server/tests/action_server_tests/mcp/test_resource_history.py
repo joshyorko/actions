@@ -456,8 +456,10 @@ def test_v13_migration_preserves_exact_keys_but_starts_empty_routing_history(tmp
         with db.transaction():
             db.insert(McpCatalogName("old-key", "tool", "old", "owner", "read"))
             db.execute("DROP TABLE mcp_resource_routing")
-            # Restore the real pre-14 schema, including absence of migration 15.
+            # Restore the real pre-14 schema, including absence of migrations 15 and 16.
             for table in (
+                "invoice_review",
+                "fenced_work_item",
                 "run_output",
                 "run_attempt",
                 "run_pin",

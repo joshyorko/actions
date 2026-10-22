@@ -449,10 +449,30 @@ def test_active_guidance_and_ci_have_no_private_product_lane():
     assert not sorted_violations
 
 
-def test_runtime_metadata_uses_published_active_dependencies():
+def test_runtime_metadata_admits_installed_fenced_candidate_without_a_source_overlay():
     metadata = tomllib.loads((ROOT / "pyproject.toml").read_text())
     dependencies = metadata["tool"]["poetry"]["dependencies"]
-    assert dependencies["actions-work-items"] == "^0.4.4"
+    assert dependencies["actions-work-items"] == {
+        "version": ">=0.5.0a1,<0.6.0",
+        "allow-prereleases": True,
+    }
+    assert metadata["tool"]["poetry"]["group"]["dev"]["dependencies"][
+        "actions-work-items"
+    ] == {"path": "../work-items/", "develop": False}
+
+
+def test_candidate_version_does_not_change_the_published_runtime_floor(tmp_path):
+    candidate = tmp_path / "candidate.whl"
+    with zipfile.ZipFile(candidate, "w") as archive:
+        archive.writestr(
+            "actions_runtime-1.1.0a1.dist-info/METADATA",
+            "Metadata-Version: 2.1\nName: actions-runtime\nVersion: 1.1.0a1\n",
+        )
+    with pytest.raises(ValueError, match="Unexpected Runtime version"):
+        _WHEEL_VERIFIER.validate_runtime_metadata(candidate)
+    _WHEEL_VERIFIER.validate_runtime_metadata(candidate, expected_runtime="1.1.0a1")
+    with pytest.raises(ValueError, match="Unexpected Runtime version"):
+        _WHEEL_VERIFIER.validate_runtime_metadata(candidate, expected_runtime="1.1.0a2")
 
 
 def test_template_manifests_pin_supported_worker_core():
@@ -514,8 +534,18 @@ def test_template_sources_use_actions_core_without_module_name_collision():
 
 
 def _build_wheels(output: Path, python: Path) -> list[Path]:
+    # Only committed source belongs to this isolated build; public generation must
+    # never overwrite an existing operator/local OAuth module in the checkout.
+    source = output.parent / "wheel-build-source"
+    source.mkdir()
+    import io
+    import tarfile
+
+    archive = subprocess.check_output(["git", "archive", "HEAD"], cwd=REPO)
+    with tarfile.open(fileobj=io.BytesIO(archive)) as tree:
+        tree.extractall(source, filter="data")
     for name in ("actions", "actions-http-helper", "work-items", "action_server"):
-        package = REPO / name
+        package = source / name
         command = [
             "poetry",
             "build",
@@ -619,10 +649,19 @@ def _install_and_probe(python: Path, wheels: list[Path]) -> None:
     runtime_wheel = next(
         path for path in wheels if path.name.startswith("actions_runtime-")
     )
-    _WHEEL_VERIFIER.verify_oauth_input_binding(runtime_wheel, ROOT)
+    _WHEEL_VERIFIER.verify_oauth_input_binding(
+        runtime_wheel, wheelhouse.parent / "wheel-build-source" / "action_server"
+    )
     with tempfile.TemporaryDirectory(prefix="runtime-wheel-probe-") as directory:
         _WHEEL_VERIFIER.verify_installed_runtime_wheel(
-            python, runtime_wheel, Path(directory), REPO, core_wheel=core_wheel
+            python,
+            runtime_wheel,
+            Path(directory),
+            REPO,
+            core_wheel=core_wheel,
+            expected_runtime=tomllib.loads((ROOT / "pyproject.toml").read_text())[
+                "tool"
+            ]["poetry"]["version"],
         )
 
 
@@ -653,6 +692,10 @@ def test_runtime_clean_wheels_install_outside_checkout_in_both_uninstall_orders(
     )
     assert (
         "Requires-Dist: actions-http-helper (>=1.0.3,<2.0.0)"
+        in runtime_files[metadata_name]
+    )
+    assert (
+        "Requires-Dist: actions-work-items (>=0.5.0a1,<0.6.0)"
         in runtime_files[metadata_name]
     )
     record_name = next(name for name in runtime_files if name.endswith("/RECORD"))

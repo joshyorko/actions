@@ -1,8 +1,8 @@
 """Explicit exact-result review under one SQL authority, using both real providers."""
 
 import os
-import threading
 import sys
+import threading
 from uuid import uuid4
 
 import pytest
@@ -307,6 +307,7 @@ def test_reclaimed_review_work_item_rejects_stale_owner_and_outputs(reviewed):
 
 def test_parallel_duplicate_decisions_share_one_sql_commit(reviewed):
     from concurrent.futures import ThreadPoolExecutor
+
     from actions.server._database import Database
     from actions.server._models import get_all_model_classes
 
