@@ -174,6 +174,14 @@ operator home, credential or unrelated cache. Keep its original receipt and
 current task/source proofs; a cache hit is not acceptance. Mandatory worker
 input tests and the portable suite keep separate evidence and opt-in boundaries.
 
+The full invoice verifier repeats schema-heavy SQL cases after its focused gates.
+A measured 128 MiB PostgreSQL tmpfs exhausted `pg_wal` during that aggregate run,
+then produced recovery-mode fixture errors. Full mode therefore uses a bounded
+512 MiB data tmpfs and 768 MiB container memory; focused mode retains 128/256 MiB.
+CPU/PID limits, pinned image, loopback-only binding, `--pull=never`, SQL durability
+and cleanup remain unchanged. Keep the original failure; fixture recovery does
+not retroactively qualify its interrupted SQL cases.
+
 ## SDK static gate scope and baseline diagnostics
 
 The canonical toolkit dispatches Work Items lint as `poetry run ruff check src
@@ -211,6 +219,13 @@ Publish the child's readiness payload by atomic replacement after writing it;
 existence of an open, empty marker is not readiness. The partial-write control
 delays the actual payload write and verifies that the parent never consumes an
 incomplete busy-timeout observation.
+The separate start gate is a byte protocol: write `b"go\n"` through the pipe's
+binary buffer. Text-mode writes translate LF to CRLF on Windows, so a child
+reading three bytes sees `go\r` and exits before the held-writer assertion. A
+real subprocess/SQLite regression forces CRLF translation and verifies both
+children still reach the writer statement without changing deadlines or locks.
+When a child exits, retain its bounded stderr; do not infer a historical hosted
+cause when that stderr was not captured.
 
 ## Canvas query-results fixture interchange
 

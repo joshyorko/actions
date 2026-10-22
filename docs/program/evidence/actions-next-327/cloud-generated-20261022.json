@@ -1,0 +1,1778 @@
+{
+  "schema": "actions.release327.generated-checkpoint/v1",
+  "date": "2026-10-22",
+  "repository": "joshyorko/actions",
+  "branch": "release/327-invoice-vertical-20261020",
+  "issue": 327,
+  "draft_pr": 328,
+  "starting_remote": "227c12a64ae448e82123aba7be72b27cb2b9e5f9",
+  "implementation": "397da3df75459e8d1993b7c45c03c0c8280d483e",
+  "additional_regression_source": "4389cc09c7d40aab40925e571318fa4cdae95713",
+  "recovery_tested_source": "bf15fb83e44df3caafd1759f6676e00a9fbeb810",
+  "production_equivalence": {
+    "built_and_installed_source": "4389cc09c7d40aab40925e571318fa4cdae95713",
+    "recovery_source": "bf15fb83e44df3caafd1759f6676e00a9fbeb810",
+    "difference": [
+      "action_server/scripts/verify_invoice_queries.py"
+    ],
+    "production_package_bytes_unchanged": true,
+    "SDK_tree": "ef4da930f352633aac93f691b2aa319817b4a918",
+    "explicit_renderer": {
+      "path": "/workspace/actions-327/action_server/frontend/dist-canvas/index.html",
+      "sha256": "b3f939af2d7b61c95c99a5ab2a8db0e8852fbe4697ed014766e9ab070ac34e04",
+      "manifest": {
+        "schemaVersion": 1,
+        "artifact": "canvas-mcp-app",
+        "contentType": "text/html;profile=mcp-app",
+        "sourceMaps": false,
+        "files": [
+          {
+            "path": "index.html",
+            "bytes": 426816,
+            "sha256": "b3f939af2d7b61c95c99a5ab2a8db0e8852fbe4697ed014766e9ab070ac34e04"
+          }
+        ]
+      }
+    }
+  },
+  "status": "BOUNDED_PRIVATE_E2_QUALIFIED_FULL_RELEASE_NOT_READY",
+  "implemented": [
+    "Existing CanvasRevisionStore stage/validate/activate/pin/read/rollback with immutable existing renderer plus typed invoice inputs; no lifecycle/state authority added",
+    "Additive generated-query admission domain includes exact app subject; legacy admission keys unchanged",
+    "Current SQL read grant and active revision guard MCP/resource/review/dispatch/download entry; already admitted execution retains immutable lineage across activation",
+    "Explicit UI review approval remains the only Work Item admission; readonly manual execution-result check/download never dispatches",
+    "Existing Work Item/Run/Attempt worker executes actual RCC18.19.3 and returns scoped sealed artifact; restart uses existing SQL/filesystem authorities",
+    "Execution projection rejects another Run output even when valid JSON and same application"
+  ],
+  "commands": {
+    "gateway": "bash <owned run-prepared> ./devutils/bin/develop.sh Doctor; Bootstrap; ToolkitTest",
+    "strict_recovery": "ACTIONS_INVOICE_EVIDENCE_DIR=<owned>/generated/recovered ACTIONS_INVOICE_GENERATED=1 ACTIONS_INVOICE_BROWSER=1 ACTIONS_INVOICE_FULL=1 ACTIONS_INVOICE_WORKER_RUNTIME=<owned prior verified worker-runtime.json> bash <owned run-prepared> ./devutils/bin/develop.sh InvoiceQueryTest",
+    "fenced": "ACTIONS_FENCED_EVIDENCE_DIR=<owned>/generated/fenced ACTIONS_FENCED_FULL=1 bash <owned run-prepared> ./devutils/bin/develop.sh FencedWorkItemsTest",
+    "installed": "bash <owned run-prepared> python <owned>/generated/prove-installed.py; 210 cases via installed venv python -I, copied exact-source tests, real owned PostgreSQL, actual pinned RCC",
+    "wheel_floor": "ACTIONS_CANDIDATE_SOURCE_SHA=4389cc09c7d40aab40925e571318fa4cdae95713 <prepared python> <detached project>/scripts/verify_published_runtime_floor.py <a3 wheel directory> --candidate-sdk-wheelhouse <detached staged wheelhouse>",
+    "wheel_installed": "Same detached verifier --installed-wheel <exact a3 archive> --checkout-root <project-only mount> --candidate-sdk-wheelhouse <installed exact staged archive>",
+    "static": [
+      "Runtime poetry run inv lint; poetry run inv typecheck; poetry check --lock",
+      "SDK poetry run ruff check src tests; poetry run mypy; explicit four concrete modules mypy; poetry check --lock",
+      "Devutils poetry run pytest:261 passed; toolkit-required poetry run ruff check src tests",
+      "Frontend npm test280passed; npm run test:quality; Canvas tests15passed1optional cross-language skip; npm run build:canvas",
+      "Runtime poetry run inv docs: configured API output absent, documented skip; git diff --check"
+    ]
+  },
+  "gateway": {
+    "doctor": "PASS",
+    "bootstrap": "PASS",
+    "toolkit_tests": 179
+  },
+  "strict_recovery": {
+    "receipt": {
+      "path": "/workspace/actions-327-state/evidence/generated/recovered/051dc540-05c1-47fa-a9d0-bde3aca3939a/receipt.json",
+      "sha256": "e5e371adf7f56b41abefde930f8767768d955cd57d261830ff8d71433a76d7d1",
+      "bytes": 33173
+    },
+    "result": {
+      "attempt": "051dc540-05c1-47fa-a9d0-bde3aca3939a",
+      "status": "PASS",
+      "head": "bf15fb83e44df3caafd1759f6676e00a9fbeb810",
+      "image_reference": "postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81",
+      "tests": {
+        "components": 0,
+        "invoice": 0,
+        "browser": 0,
+        "generated": 0,
+        "portable": 0
+      },
+      "cleanup": "PASS",
+      "inputs": {
+        "action_server/poetry.lock": "e2c743d43d0608182e6c888cccd308821433b80f2adf4547e950e061723f3f7a",
+        "action_server/pyproject.toml": "af919ed882028a77d19c9c3ef3bcbc03be57147e362436d1dd61ce6dad820fb3",
+        "action_server/scripts/verify_invoice_queries.py": "686f0eb3ff8e26ed5abbb29d9f78af01b7a16ae97108865de8541694b458b3b6",
+        "action_server/src/actions/server/_api_action_routes.py": "65133ad7eb88a1e4a5c959db7f359ceaff2245878c058a8c77b94d42e8288860",
+        "action_server/src/actions/server/_models.py": "d7eee21eeaa10f8d36b40de57fbc6191fcc1dd33f91be0d267229cff0e3f12af",
+        "action_server/src/actions/server/_rcc_runtime_adapter.py": "7ae97d5e8f53cb1b809e02649395929cd1d9cd3a3fd386e9075e34e93ec17262",
+        "action_server/src/actions/server/_robot_inputs.py": "7cfbb5f1194b15928d9221d59840820dabde76db61d4e45d539ec80791ff875d",
+        "action_server/src/actions/server/_server.py": "085eae5a1a4a3e433288735f895687701513a1004656caf3b89368c6e36e2542",
+        "action_server/src/actions/server/canvas_lifecycle.py": "1e8a2ca082f962b76b0e311b1d5ee84e3b1b6a28ef057d6585d7b5b3dde5f2e6",
+        "action_server/src/actions/server/data_queries/__init__.py": "3a1a10897706f05daf2907f661bd42149c69e8ccf0a6f28e82a9d0195673b058",
+        "action_server/src/actions/server/data_queries/_invoice_task.py": "4f594ff26338d14f03e5f279248cb54394804fa0fec7cf38e9e500761a4b3990",
+        "action_server/src/actions/server/data_queries/canvas.py": "a92ad46abee119e6de3d49ecffd20b7d9178e236fee4a0a5cb82b3f779c50461",
+        "action_server/src/actions/server/data_queries/canvas_mcp.py": "9947aabbfa681cc5b11d1b511de4f27fdaad9f8329738dbd5de94e2c30800954",
+        "action_server/src/actions/server/data_queries/generated.py": "aa4b25f5e4ab4ea3911f9defeaf20a70bf3628299b695f344c9bddd01badfeed",
+        "action_server/src/actions/server/data_queries/invoice_worker.py": "f8a916dfd0725a2230c489dd6043eeaa6f3600aceabe5e87d84a1405e4651450",
+        "action_server/src/actions/server/data_queries/invoices.py": "6b1dea6ef33b4689ea098b91b4be1e0363656438084ce080e557e19a8bf6051b",
+        "action_server/src/actions/server/data_queries/knowledge.py": "f528fa8ffd22df290dab82e85ce7405bebe73fc407c226bf5784f9312b071411",
+        "action_server/src/actions/server/data_queries/review.py": "3453361ed990089bff5ace7aa68be58ccfebb374ba07ab35f9ca41ab14e3e2c2",
+        "action_server/src/actions/server/data_queries/review_models.py": "f06bbacaaf474e20edfdf0c4682a6fec45ca36909c0c70b13462340faf993a1a",
+        "action_server/src/actions/server/data_queries/service.py": "65d4d3eceafd579534fa3a17060be7c35ea468b5692635b647104f733433feea",
+        "action_server/src/actions/server/mcp/setup_mcp_server_v2.py": "195f8dd0c4247eeb39b1be5dae974f33d014f734e6429fae249760395d55b4ee",
+        "action_server/src/actions/server/migrations/__init__.py": "76f9ea7dc0087b7f3802c86e7b2f70e97f560265fcf0e6d084e858704e811cea",
+        "action_server/src/actions/server/migrations/migration_add_invoice_reviews.py": "40ec5952c106f21980d1572408c2fe00b8af81c30ca3c668295a95fd369d074e",
+        "action_server/src/actions/server/run_outputs/__init__.py": "4c29ad35ab314ea4472025d453703b124a08262cfa24a51baf3a1a2ffb58ae38",
+        "action_server/src/actions/server/run_outputs/filesystem.py": "db8daf79dc0d2a06ecec9a2c3ab67319d6df420c2a44578948d46f2b558c5606",
+        "action_server/src/actions/server/run_outputs/models.py": "c69318f6893484156fba1002f8372711fc83e32e56d0e29c54e985cc26196065",
+        "action_server/src/actions/server/run_outputs/service.py": "b23d29855082907b18d6f8158a657a9567e31601e92393b13f8bee1a10923eb2",
+        "action_server/src/actions/server/run_outputs/transport.py": "b5063cc57888b868615a2a89cf2e114b5ae0455239e8fe22843d36609ed9e376",
+        "action_server/src/actions/server/run_outputs/types.py": "1189364febdfcb5caf16d8429cc01945c297f566d38a109ad6bcef33de497b9d",
+        "action_server/tests/action_server_tests/test_candidate_work_items.py": "381fbfd0c2f44358ae068364e7dc1fc9b536acdfc08419cbdcc7b98a32f0ea91",
+        "action_server/tests/action_server_tests/test_canvas_lifecycle.py": "fc00995a81aa1ad9ac4e61077dce6aad21d03b9df1dabc4ec88e94f6645c288b",
+        "action_server/tests/action_server_tests/test_generated_invoice.py": "63cac25d9842ec8637472e9c82f39f6fdd34aa276a278ee10ee0688d626402cd",
+        "action_server/tests/action_server_tests/test_generated_invoice_browser.py": "7085d7a76c684848ff1a4bfe518d3bdadd9965aa537f6d397e357823516e8b86",
+        "action_server/tests/action_server_tests/test_invoice_canvas.py": "1a07665e11f4e6bc5dc81200fe1e8ad27fa86e4900528c873f3d75c8606ebd9f",
+        "action_server/tests/action_server_tests/test_invoice_canvas_browser.py": "94b4d995ec25cf0ee8682563ef0a5ecda980c01f60713e7091c5bf8e523f6375",
+        "action_server/tests/action_server_tests/test_invoice_canvas_mcp.py": "01c2968bbcc9338de5ff531a29f61c33d3043588af21152f4f52c56a760dad99",
+        "action_server/tests/action_server_tests/test_invoice_providers.py": "613f34c84bba089931dc53b334a472e430987249d8a0e29f8a53effa28c5d30e",
+        "action_server/tests/action_server_tests/test_invoice_review.py": "2ebfc60844c8b90bf51a501a97f8c73b82c47ec242eb3c4c32ee51aa12a7b5f9",
+        "action_server/tests/action_server_tests/test_invoice_review_mcp.py": "6c38878d02f74725da2c89600bf3fa81f16b58242b3e03beec5ca31e85bb25bd",
+        "action_server/tests/action_server_tests/test_invoice_run_outputs.py": "b92afe3965110b4d9e19473fcd953aaf401f1fd3fd1466b6351fcf7d4fc8889c",
+        "action_server/tests/action_server_tests/test_invoice_worker.py": "7d56d153c84dbbc3c236fd0d6a7e16dc4a82e75cce80cbe7c89f7befa3155d42",
+        "action_server/tests/action_server_tests/test_invoice_worker_mcp.py": "ff3f6eaed47e906a6e83a44c5803c882607d06435748b61ecd5a9c6534885c77",
+        "action_server/tests/action_server_tests/test_knowledge_collections.py": "28909792d6c68044950e3d321c127ecbdbbca526970fe94a77d166139d0bd452",
+        "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py": "101315710aff8e12dbb3b927ad94866ef7c9d290f6ec667c4493d833a9075950",
+        "action_server/tests/action_server_tests/test_robot_run_inputs.py": "0dbc3a30e03c5cc4a71f62298db45ef06e1968c8cfad47dcbcf411d2758020f8",
+        "developer/toolkit.py": "0eaf95234235b377cb8d9da2103bf61aa431db5991b1e3cc223d3cdf3bc54da5",
+        "developer/toolkit.yaml": "59bef472fce6bf6c9207550c170e97041e1bbb46ce6a4a90b0cd576f7c95734d",
+        "work-items/pyproject.toml": "76bb9b3ff8d866c0f5ee71e19fef42a2254d41d6fbf805bca389a5d4c5dc25df",
+        "work-items/src/actions/work_items/_adapters/_sql_review.py": "e23c017f0a165113032e5935e8f32b4abfdf28525a2613cb1dcd81bce745f7ae",
+        "action_server/frontend/apps/canvas-view/src/host-harness.ts": "403e8aad82e795e007658eebb57d5e69a850bcb58bf505c24c11487ec2d3035f",
+        "action_server/frontend/apps/canvas-view/src/main.tsx": "ce2fbd3700a1bf39a9ba37c687f93751acb8ae732cfcf85bf9a316b05ed726fc",
+        "action_server/frontend/apps/canvas-view/src/McpCanvasView.tsx": "1ce93a9725a977fae906c0aee45e5188ce9c9c937e02bcdd09efdaf5d0a510ff",
+        "action_server/frontend/apps/canvas-view/src/query-results/InvoiceReviewPanel.tsx": "95de834cd70a167461460e7e8c9d5d120207f123760f5b51f3ff885b23365d03",
+        "action_server/frontend/apps/canvas-view/src/query-results/QueryResultsView.test.tsx": "fb4eb92e36c89f3b943b27d2e2e58d881cefcd1df05019cd9bb80e7b505d9b0d",
+        "action_server/frontend/apps/canvas-view/src/query-results/QueryResultsView.tsx": "bea0532129a1dae633fe66f132d606baef61ecab4d60d77a4398d2c38a01b6e8",
+        "action_server/frontend/apps/canvas-view/src/query-results/invoice-bridge.ts": "e0226b4f48a94da142a4b1673cba5b7fdd307ad9ac7a2d9aeda3880acb6b8ad8",
+        "action_server/frontend/apps/canvas-view/src/query-results/CanvasContractRoundTrip.test.tsx": "00469d5731b5d9cf634dedb2538f6cb60774d67444d28ce74db67300d6609f50",
+        "action_server/frontend/apps/canvas-view/src/query-results/review-contract.ts": "d5f081a7c914fa8ec8a3c584f285f4881fd4e5f1f61986e10c6969825cc964dc",
+        "action_server/frontend/apps/canvas-view/src/query-results/InvoiceReviewPanel.test.tsx": "a7f648cf119ef5b74c19dc166094b1570037045a00196728da83aaeb4e489e56",
+        "action_server/frontend/apps/canvas-view/invoice-runtime.spec.ts": "4a83943c06f5b4f9afbbd027084265fc1a4f67e1adc79902ee90e057dd439c59",
+        "action_server/frontend/playwright.invoice.config.ts": "bfd2ae1cdf3863bd680151e64db0c25fdc6ec096995a30f33b06340ba8ba2129",
+        "action_server/frontend/package-lock.json": "30e50040438c67254859807343cb53c288508b4895fb69648732277e8184a12a"
+      },
+      "module_identity": {
+        "actions.server.canvas_lifecycle": {
+          "path": "/workspace/actions-327/action_server/src/actions/server/canvas_lifecycle.py",
+          "sha256": "1e8a2ca082f962b76b0e311b1d5ee84e3b1b6a28ef057d6585d7b5b3dde5f2e6"
+        },
+        "actions.server.data_queries.review": {
+          "path": "/workspace/actions-327/action_server/src/actions/server/data_queries/review.py",
+          "sha256": "3453361ed990089bff5ace7aa68be58ccfebb374ba07ab35f9ca41ab14e3e2c2"
+        },
+        "actions.server.data_queries.invoice_worker": {
+          "path": "/workspace/actions-327/action_server/src/actions/server/data_queries/invoice_worker.py",
+          "sha256": "f8a916dfd0725a2230c489dd6043eeaa6f3600aceabe5e87d84a1405e4651450"
+        },
+        "actions.server.data_queries.generated": {
+          "path": "/workspace/actions-327/action_server/src/actions/server/data_queries/generated.py",
+          "sha256": "aa4b25f5e4ab4ea3911f9defeaf20a70bf3628299b695f344c9bddd01badfeed"
+        },
+        "actions.server.data_queries.knowledge": {
+          "path": "/workspace/actions-327/action_server/src/actions/server/data_queries/knowledge.py",
+          "sha256": "f528fa8ffd22df290dab82e85ce7405bebe73fc407c226bf5784f9312b071411"
+        },
+        "actions.server.data_queries.invoices": {
+          "path": "/workspace/actions-327/action_server/src/actions/server/data_queries/invoices.py",
+          "sha256": "6b1dea6ef33b4689ea098b91b4be1e0363656438084ce080e557e19a8bf6051b"
+        },
+        "actions.server.run_outputs.service": {
+          "path": "/workspace/actions-327/action_server/src/actions/server/run_outputs/service.py",
+          "sha256": "b23d29855082907b18d6f8158a657a9567e31601e92393b13f8bee1a10923eb2"
+        },
+        "actions.work_items._adapters._sql_review": {
+          "path": "/workspace/actions-327/action_server/.venv/lib/python3.12/site-packages/actions/work_items/_adapters/_sql_review.py",
+          "sha256": "e23c017f0a165113032e5935e8f32b4abfdf28525a2613cb1dcd81bce745f7ae",
+          "version": "0.5.0a1"
+        }
+      },
+      "image": "sha256:319d040b5d68e3e5b98a238f0b5d375b4b4d9c5b3a6a9afb0308a8bcf0de72a5",
+      "canvas_html_sha256": "b3f939af2d7b61c95c99a5ab2a8db0e8852fbe4697ed014766e9ab070ac34e04",
+      "retained_worker_runtime": {
+        "path": "/workspace/actions-327-state/evidence/worker/final/1f4b9f44-d7ae-46c3-8103-c57d4f9f7275/worker-runtime.json",
+        "sha256": "ee63d1c28f6fe31207379db59ed9ca2f30ffe34576528639dc7f8179c66c1617",
+        "environment_sha256": "09d8f7b3c1c6cf732a5ff265e8f886c589d26a63ab1762ba229a0d6eed226b12"
+      },
+      "worker_runtime": {
+        "artifact_digest": "sha256:d791a3890527ad638c3446af42bb431a26c2915c8dde19e5e3dfa951478bd60c",
+        "sdk_wheel_sha256": "5788f4b346d1dd6c61ba9f68ad30ae2cc56bf9488d22e49bd808e1df49915cd0",
+        "rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+        "config": "/workspace/actions-327-state/evidence/generated/recovered/051dc540-05c1-47fa-a9d0-bde3aca3939a/worker-runtime.json"
+      },
+      "counts": {
+        "components": {
+          "tests": 105,
+          "skipped": 0,
+          "failures": 0,
+          "errors": 0
+        },
+        "invoice": {
+          "tests": 128,
+          "skipped": 0,
+          "failures": 0,
+          "errors": 0
+        },
+        "browser": {
+          "tests": 2,
+          "skipped": 0,
+          "failures": 0,
+          "errors": 0
+        },
+        "generated": {
+          "tests": 56,
+          "skipped": 0,
+          "failures": 0,
+          "errors": 0
+        },
+        "portable": {
+          "tests": 1824,
+          "skipped": 14,
+          "failures": 0,
+          "errors": 0
+        }
+      },
+      "artifacts": {
+        "browser-details/duckdb/browser-output/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+        "browser-details/duckdb/browser.log": "a9497e579e8e16e3a8d43ab65ca23c0359466c46798d31f565d42825d6610a1d",
+        "browser-details/duckdb/receipt.json": "dffaafb989ab32f40641d50b9445dc1f654ae655d89bf5b10bd02819a3329b89",
+        "browser-details/postgresql/browser-output/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+        "browser-details/postgresql/browser.log": "7560d7e4a2fc4b5dcd644d6d1b79770f5e0560d483074c76777610cf8243fecd",
+        "browser-details/postgresql/receipt.json": "dffaafb989ab32f40641d50b9445dc1f654ae655d89bf5b10bd02819a3329b89",
+        "browser-details/postgresql-duckdb/browser-output/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+        "browser-details/postgresql-duckdb/browser.log": "670fb2a518da075a7aa7d4f5200ecd95eb012ae17925d6623c280af2526f01d3",
+        "browser-details/postgresql-duckdb/receipt.json": "6f756a4148bf8747e147596285911558fde989061a0e6343f74f915e486438c4",
+        "browser-details/postgresql-postgresql/browser-output/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+        "browser-details/postgresql-postgresql/browser.log": "aecc5ab9bc0876e89bd41775c401d4916d16884b564df96199a6b39efa363a2f",
+        "browser-details/postgresql-postgresql/receipt.json": "dd45a713d2c86f17a1bc5daeea5ba3690bef286af0e24f30fbb85a1a58c83645",
+        "browser-details/sqlite-duckdb/browser-output/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+        "browser-details/sqlite-duckdb/browser.log": "655f88d16aa4ec822606dd886a926db2c68fa2742ddb94cc060fe0e8f743e938",
+        "browser-details/sqlite-duckdb/receipt.json": "dea8f123d3378a8cbffa612f4147896e78e2c36ec1ebbc31410ece26b7dc8419",
+        "browser-details/sqlite-postgresql/browser-output/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+        "browser-details/sqlite-postgresql/browser.log": "788878dde5c0f303dce75c36124cbf44f9ed7c50028481ef6194e1f619431ec7",
+        "browser-details/sqlite-postgresql/receipt.json": "5d57e359f1b363e45d464f404d5865422dc34c0a8e74e29919945e211ef0cfba",
+        "browser.log": "231c3b06c0d308c9554135f0332bf321d7408de8cb8a83d4ce5d295c7785ba9b",
+        "browser.xml": "189209005449e48efa5d6064f493ca9aee2a32ca36b74c3054519a41040f6e43",
+        "components.log": "ad4489a29e1a6e2aaac87debf4823c4c2ff24db36c4caa72b2f0669a050e22c0",
+        "components.xml": "baa908a3ba2647f8bb6326f6f1e2ca23131dddad6d9e56a93061ed463452f971",
+        "generated.log": "f42e6409d663157aa478d4d2c0f08ed25300a99cdea430a1ad1e764b28583209",
+        "generated.xml": "80d8543947473c4e73f994dae7788993aaa7f7b8beb8d51177dcbe3df6062bfa",
+        "invoice.log": "6dd3fe05ffb7e58a4c9820a5007d9fde7fa0185c205fa158f6df053a530e88a2",
+        "invoice.xml": "a6380aabb7d8b0631b416d94c9e186c3e77196ef3475dac23f79952d9a744a8f",
+        "portable.log": "0b1026a8b896cbf7c2176df282b66de6379656b79c8f9feeb0c91857848c2558",
+        "portable.xml": "b6440303299f3d81f46e397004a70ef2f8f3010c9527e2f335fe07f6d6e69f68",
+        "postgres.log": "ea807b3925bf5f2a11ad344dac739e216c9102cca0d9fc741ac9dd01c0d99339",
+        "rcc-acquire.json": "c131fca9a8ae885295c81a83dd31d203f19e2a8791e9d753bf0f156205ca605a",
+        "rcc-acquire.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+        "sdk-build.log": "e9b3c866c9ebbe1f10251f2447e7a22fd66f19691cd1c363f03cb08554062f06",
+        "sdk-wheels/actions_work_items-0.5.0a1-py3-none-any.whl": "5788f4b346d1dd6c61ba9f68ad30ae2cc56bf9488d22e49bd808e1df49915cd0",
+        "worker-cells/309af425b8499f9e/cell.json": "8aa192d9ba2bdca2f1a96eaba9fb5c6b61de1525a0e1f8b43503cfdd48aa0f0a",
+        "worker-cells/309af425b8499f9e/execution/420100de-2097-4f8a-82dd-7a1fc2d1af88/50180a79-a5ed-4567-a05a-ef7d8adf36fa/ef07d958-3ca1-4d43-ab32-30dfe19556a0/input.json": "c34412963c4214e944f040b636e3f386e4d1324ed5397b6844c2d5f5c2ab0b46",
+        "worker-cells/309af425b8499f9e/execution/420100de-2097-4f8a-82dd-7a1fc2d1af88/50180a79-a5ed-4567-a05a-ef7d8adf36fa/ef07d958-3ca1-4d43-ab32-30dfe19556a0/rcc.json": "d06be1f6b0ee67a8d569bc1c5499eba8f6a42b6ad06834db66513bdeec2c33b3",
+        "worker-cells/309af425b8499f9e/execution/420100de-2097-4f8a-82dd-7a1fc2d1af88/50180a79-a5ed-4567-a05a-ef7d8adf36fa/ef07d958-3ca1-4d43-ab32-30dfe19556a0/result.json": "3a5bb225a04387f652f40f94cb31263794080e3fe9ee4a3114e774b993efed24",
+        "worker-cells/309af425b8499f9e/execution/420100de-2097-4f8a-82dd-7a1fc2d1af88/50180a79-a5ed-4567-a05a-ef7d8adf36fa/ef07d958-3ca1-4d43-ab32-30dfe19556a0/source/_invoice_task.py": "4f594ff26338d14f03e5f279248cb54394804fa0fec7cf38e9e500761a4b3990",
+        "worker-cells/309af425b8499f9e/execution/420100de-2097-4f8a-82dd-7a1fc2d1af88/50180a79-a5ed-4567-a05a-ef7d8adf36fa/ef07d958-3ca1-4d43-ab32-30dfe19556a0/source/package.yaml": "09d8f7b3c1c6cf732a5ff265e8f886c589d26a63ab1762ba229a0d6eed226b12",
+        "worker-cells/309af425b8499f9e/execution/420100de-2097-4f8a-82dd-7a1fc2d1af88/50180a79-a5ed-4567-a05a-ef7d8adf36fa/ef07d958-3ca1-4d43-ab32-30dfe19556a0/stdout.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+        "worker-cells/309af425b8499f9e/objects/04bd77d6-976d-4f63-a4dd-ce4692278f44": "5b93ac97af00b5f3dd055777455a528a308bcbcc88c1b38901b42cedf4b4566f",
+        "worker-cells/309af425b8499f9e/objects/8557dece-d9ef-43d5-a0b4-5dbc51a8dcfd": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-cells/309af425b8499f9e/objects/b46a9bae-47aa-425b-b446-ebf9bb737ab2": "05d33812f00d6b6b8f527c40004293424c118fa85055449ff08452bb483f5497",
+        "worker-cells/309af425b8499f9e/objects/d32221fd-84fa-474f-acc2-44ec0bf1c134": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-cells/479513116b28a501/cell.json": "8929fadfc7f7a908caa32fe75112231605460961cddd04f770a42c7eb8fac68d",
+        "worker-cells/479513116b28a501/execution/2c9296e0-3fac-49d2-be8b-44c0eab69f0a/28d5d678-a7a3-4f08-98e8-cb3269b5008b/1a102696-2681-458b-ab3b-c66b3f0f6f54/input.json": "f383f7151ca28b590a24aba2ea614cb852bd008bbb5531fb2737337dd7d8b0ad",
+        "worker-cells/479513116b28a501/execution/2c9296e0-3fac-49d2-be8b-44c0eab69f0a/28d5d678-a7a3-4f08-98e8-cb3269b5008b/1a102696-2681-458b-ab3b-c66b3f0f6f54/rcc.json": "d9aae580fddaa3842140bcc0614a3c61d28e76ee2f09fe749fe61d17c1872cd9",
+        "worker-cells/479513116b28a501/execution/2c9296e0-3fac-49d2-be8b-44c0eab69f0a/28d5d678-a7a3-4f08-98e8-cb3269b5008b/1a102696-2681-458b-ab3b-c66b3f0f6f54/result.json": "fd0481a353e76ef57fcee0e0af4c67df8e63cb8efb26af106ca53bfa942d9510",
+        "worker-cells/479513116b28a501/execution/2c9296e0-3fac-49d2-be8b-44c0eab69f0a/28d5d678-a7a3-4f08-98e8-cb3269b5008b/1a102696-2681-458b-ab3b-c66b3f0f6f54/source/_invoice_task.py": "4f594ff26338d14f03e5f279248cb54394804fa0fec7cf38e9e500761a4b3990",
+        "worker-cells/479513116b28a501/execution/2c9296e0-3fac-49d2-be8b-44c0eab69f0a/28d5d678-a7a3-4f08-98e8-cb3269b5008b/1a102696-2681-458b-ab3b-c66b3f0f6f54/source/package.yaml": "09d8f7b3c1c6cf732a5ff265e8f886c589d26a63ab1762ba229a0d6eed226b12",
+        "worker-cells/479513116b28a501/execution/2c9296e0-3fac-49d2-be8b-44c0eab69f0a/28d5d678-a7a3-4f08-98e8-cb3269b5008b/1a102696-2681-458b-ab3b-c66b3f0f6f54/stdout.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+        "worker-cells/479513116b28a501/objects/5cbda433-930a-4f0d-8892-7753cb3afe7f": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-cells/479513116b28a501/objects/6cf6bc67-79ad-4542-be7c-188bffb9a130": "e779e73d4b26a5243d32623710b4e66fc668e70752f50eace1302db2559cfa17",
+        "worker-cells/479513116b28a501/objects/9ea44a87-470c-4756-a36d-2a0e69229f0b": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-cells/479513116b28a501/objects/b1b9da4c-d870-4a79-932b-ae5548c54ef7": "4c4a4410f16998eb614947587094431ae4b7b144d6e9c4580b44080272371087",
+        "worker-cells/abdf8456c22d2aac/cell.json": "d06ac6c7d6008da3df9a4521eba840f3a5585098ae08686c98107938a2a0a203",
+        "worker-cells/abdf8456c22d2aac/execution/f0f32a0c-03aa-4366-8acd-4c2bc87c2663/b617e59d-124d-4f07-9420-e49dcfbbe6b6/89dfdb6e-89ce-4112-b2dc-52d11dd71a30/input.json": "0733d62c93dc854097536995ccb646cff869064394033050f67173acf42c123f",
+        "worker-cells/abdf8456c22d2aac/execution/f0f32a0c-03aa-4366-8acd-4c2bc87c2663/b617e59d-124d-4f07-9420-e49dcfbbe6b6/89dfdb6e-89ce-4112-b2dc-52d11dd71a30/rcc.json": "eaa526eec155a3f301e11f2b358b443a46bbb8325b7312aa83acfe3cf59a9e83",
+        "worker-cells/abdf8456c22d2aac/execution/f0f32a0c-03aa-4366-8acd-4c2bc87c2663/b617e59d-124d-4f07-9420-e49dcfbbe6b6/89dfdb6e-89ce-4112-b2dc-52d11dd71a30/result.json": "adf03bb4fb43a86ee448fbdd76634ac48ce447307421ce5669b4db0a69cb090f",
+        "worker-cells/abdf8456c22d2aac/execution/f0f32a0c-03aa-4366-8acd-4c2bc87c2663/b617e59d-124d-4f07-9420-e49dcfbbe6b6/89dfdb6e-89ce-4112-b2dc-52d11dd71a30/source/_invoice_task.py": "4f594ff26338d14f03e5f279248cb54394804fa0fec7cf38e9e500761a4b3990",
+        "worker-cells/abdf8456c22d2aac/execution/f0f32a0c-03aa-4366-8acd-4c2bc87c2663/b617e59d-124d-4f07-9420-e49dcfbbe6b6/89dfdb6e-89ce-4112-b2dc-52d11dd71a30/source/package.yaml": "09d8f7b3c1c6cf732a5ff265e8f886c589d26a63ab1762ba229a0d6eed226b12",
+        "worker-cells/abdf8456c22d2aac/execution/f0f32a0c-03aa-4366-8acd-4c2bc87c2663/b617e59d-124d-4f07-9420-e49dcfbbe6b6/89dfdb6e-89ce-4112-b2dc-52d11dd71a30/stdout.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+        "worker-cells/abdf8456c22d2aac/objects/1500aeb0-4182-431c-9d48-352846fc5419": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-cells/abdf8456c22d2aac/objects/1861701c-fdc5-4d23-b414-9e742feecce8": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-cells/abdf8456c22d2aac/objects/34fb7ea0-62be-42ce-90ec-8410c42b2112": "5b93ac97af00b5f3dd055777455a528a308bcbcc88c1b38901b42cedf4b4566f",
+        "worker-cells/abdf8456c22d2aac/objects/bc278898-6017-4e24-a40c-2b004bf68527": "238f17e1d54c9e395a26bc1411ddec6af50789f14a4ad798a383962faabfb31d",
+        "worker-cells/b1a0816fcbb44678/cell.json": "d192565f92aa7966e38b28ce499f74a8b84e188a77f4b590a6b92f96647d81ff",
+        "worker-cells/b1a0816fcbb44678/execution/c28c973f-fdf2-4549-8cc4-fdffb54f41c7/da86ea6d-b23c-4222-ad58-e4f35b60de8f/71837df1-2db4-4847-abe7-07c3982e9a59/input.json": "2587bed926e2b402c41f64dab1e7702d10cf0ee5482eadf43b97e511aeaeebb1",
+        "worker-cells/b1a0816fcbb44678/execution/c28c973f-fdf2-4549-8cc4-fdffb54f41c7/da86ea6d-b23c-4222-ad58-e4f35b60de8f/71837df1-2db4-4847-abe7-07c3982e9a59/rcc.json": "e91129700595279548804b6dc1440efabc048b2bfd29782ec9360c8591582cbc",
+        "worker-cells/b1a0816fcbb44678/execution/c28c973f-fdf2-4549-8cc4-fdffb54f41c7/da86ea6d-b23c-4222-ad58-e4f35b60de8f/71837df1-2db4-4847-abe7-07c3982e9a59/result.json": "01486bb4fb0b1950f757b5e77f3d375b3b1f3ab523b5eb5cfba2c09ecb144991",
+        "worker-cells/b1a0816fcbb44678/execution/c28c973f-fdf2-4549-8cc4-fdffb54f41c7/da86ea6d-b23c-4222-ad58-e4f35b60de8f/71837df1-2db4-4847-abe7-07c3982e9a59/source/_invoice_task.py": "4f594ff26338d14f03e5f279248cb54394804fa0fec7cf38e9e500761a4b3990",
+        "worker-cells/b1a0816fcbb44678/execution/c28c973f-fdf2-4549-8cc4-fdffb54f41c7/da86ea6d-b23c-4222-ad58-e4f35b60de8f/71837df1-2db4-4847-abe7-07c3982e9a59/source/package.yaml": "09d8f7b3c1c6cf732a5ff265e8f886c589d26a63ab1762ba229a0d6eed226b12",
+        "worker-cells/b1a0816fcbb44678/execution/c28c973f-fdf2-4549-8cc4-fdffb54f41c7/da86ea6d-b23c-4222-ad58-e4f35b60de8f/71837df1-2db4-4847-abe7-07c3982e9a59/stdout.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+        "worker-cells/b1a0816fcbb44678/objects/2062e9ab-1d0a-4c22-9952-ca2e53f81be7": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-cells/b1a0816fcbb44678/objects/432667ea-120c-4325-8246-a37042698901": "8d7aa13b5a0864566c6d97471862a6cd404888a64726b2cc13c105414c0a4215",
+        "worker-cells/b1a0816fcbb44678/objects/a6ecd850-d444-424b-b575-9fa057a4b099": "4c4a4410f16998eb614947587094431ae4b7b144d6e9c4580b44080272371087",
+        "worker-cells/b1a0816fcbb44678/objects/aeace957-4ceb-404a-95ea-59980c61a1d8": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-cells/bd1faf9068059cd7/cell.json": "e8ee6999415ed6e31834817e65c4539c40d80436e588dd41d31d35769bf9b1fe",
+        "worker-cells/bd1faf9068059cd7/execution/6785000f-768b-4211-adbd-4fd0b8ac0707/de86ef69-cdb7-4b6e-aa19-33352a61cede/ad879c9d-bfd5-4ae7-b3af-2f837ce4e8f4/input.json": "e40b514dd32af2e8098eafcad6009b339bf06dec30eac1d33071a12052b3070b",
+        "worker-cells/bd1faf9068059cd7/execution/6785000f-768b-4211-adbd-4fd0b8ac0707/de86ef69-cdb7-4b6e-aa19-33352a61cede/ad879c9d-bfd5-4ae7-b3af-2f837ce4e8f4/rcc.json": "980e09a1cb2499f37fc0b88676c78957fa44538abd645fcc6064b2a708ba1216",
+        "worker-cells/bd1faf9068059cd7/execution/6785000f-768b-4211-adbd-4fd0b8ac0707/de86ef69-cdb7-4b6e-aa19-33352a61cede/ad879c9d-bfd5-4ae7-b3af-2f837ce4e8f4/result.json": "bf374e0277efcf00d6a95f4182aa2584dd371d1c2b2a8fd2b5fbc28370d5fe7b",
+        "worker-cells/bd1faf9068059cd7/execution/6785000f-768b-4211-adbd-4fd0b8ac0707/de86ef69-cdb7-4b6e-aa19-33352a61cede/ad879c9d-bfd5-4ae7-b3af-2f837ce4e8f4/source/_invoice_task.py": "4f594ff26338d14f03e5f279248cb54394804fa0fec7cf38e9e500761a4b3990",
+        "worker-cells/bd1faf9068059cd7/execution/6785000f-768b-4211-adbd-4fd0b8ac0707/de86ef69-cdb7-4b6e-aa19-33352a61cede/ad879c9d-bfd5-4ae7-b3af-2f837ce4e8f4/source/package.yaml": "09d8f7b3c1c6cf732a5ff265e8f886c589d26a63ab1762ba229a0d6eed226b12",
+        "worker-cells/bd1faf9068059cd7/execution/6785000f-768b-4211-adbd-4fd0b8ac0707/de86ef69-cdb7-4b6e-aa19-33352a61cede/ad879c9d-bfd5-4ae7-b3af-2f837ce4e8f4/stdout.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+        "worker-cells/bd1faf9068059cd7/objects/1e7c2e9a-b0b6-47bd-9b9f-5db7992b7dfc": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-cells/bd1faf9068059cd7/objects/b7d773b7-696a-4663-bfff-43e993cf2158": "ba09795e56efb4584ee648e712712e323cc6899f08f0c51439956add51e8a043",
+        "worker-cells/bd1faf9068059cd7/objects/c86a8433-c11c-4b15-b797-0ef921aa4239": "5b93ac97af00b5f3dd055777455a528a308bcbcc88c1b38901b42cedf4b4566f",
+        "worker-cells/bd1faf9068059cd7/objects/d119b88f-ae1b-45db-900d-1ca8bdd683ef": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-cells/d5a6ce8fa80ae0d1/cell.json": "b80a899591200fa8baf3a799b4107b3947248697e571ba29b712f0095c3a4258",
+        "worker-cells/d5a6ce8fa80ae0d1/execution/7cf83041-99cb-4280-ae9f-894246b6e2c8/18f2db88-6639-4353-9560-4ea4961b193e/92a75d73-4bcb-497b-8a88-f64e8945bc98/input.json": "cbb2eacb21acee7976497c3593205e3dc25aa66dc7c974b32308603acf772d50",
+        "worker-cells/d5a6ce8fa80ae0d1/execution/7cf83041-99cb-4280-ae9f-894246b6e2c8/18f2db88-6639-4353-9560-4ea4961b193e/92a75d73-4bcb-497b-8a88-f64e8945bc98/rcc.json": "f95edfe90ced9f726640894312d4405e9d3bf2df3059bbe738df5536f3b55b72",
+        "worker-cells/d5a6ce8fa80ae0d1/execution/7cf83041-99cb-4280-ae9f-894246b6e2c8/18f2db88-6639-4353-9560-4ea4961b193e/92a75d73-4bcb-497b-8a88-f64e8945bc98/result.json": "ce61e609545de9f638da0a0e09874ea56c3626fb467fe1b03042f2c28c6bbf5a",
+        "worker-cells/d5a6ce8fa80ae0d1/execution/7cf83041-99cb-4280-ae9f-894246b6e2c8/18f2db88-6639-4353-9560-4ea4961b193e/92a75d73-4bcb-497b-8a88-f64e8945bc98/source/_invoice_task.py": "4f594ff26338d14f03e5f279248cb54394804fa0fec7cf38e9e500761a4b3990",
+        "worker-cells/d5a6ce8fa80ae0d1/execution/7cf83041-99cb-4280-ae9f-894246b6e2c8/18f2db88-6639-4353-9560-4ea4961b193e/92a75d73-4bcb-497b-8a88-f64e8945bc98/source/package.yaml": "09d8f7b3c1c6cf732a5ff265e8f886c589d26a63ab1762ba229a0d6eed226b12",
+        "worker-cells/d5a6ce8fa80ae0d1/execution/7cf83041-99cb-4280-ae9f-894246b6e2c8/18f2db88-6639-4353-9560-4ea4961b193e/92a75d73-4bcb-497b-8a88-f64e8945bc98/stdout.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+        "worker-cells/d5a6ce8fa80ae0d1/objects/87fbb9a5-abd1-4e7f-8564-7b89d5b31b0e": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-cells/d5a6ce8fa80ae0d1/objects/bb35165f-d132-4959-b416-52a1d511d758": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-cells/d5a6ce8fa80ae0d1/objects/d1331102-cfcd-4917-ac1f-e7da80f8090e": "4c4a4410f16998eb614947587094431ae4b7b144d6e9c4580b44080272371087",
+        "worker-cells/d5a6ce8fa80ae0d1/objects/e4c3604d-8782-47b9-b3af-d6dfcd35908c": "43e1fa5e4d5d382bb49c4ffc766fa134eadcbb387cda93c1aa89bbd9b36978c9",
+        "worker-cells/d977ddbfc034f08d/cell.json": "1590b4ea45ae3a13d8d66a2539a704f8c8c48049cc15b7ebc8cccba60cb1cce0",
+        "worker-cells/d977ddbfc034f08d/execution/3b49981b-2c1d-40b7-a30b-0a49ff5cf7a4/195105f6-fe6f-4eeb-8036-446622715474/337f7129-fb59-4925-a4fe-cd8370a66600/input.json": "1c3a57aae9d9ccd1c238ea2f5f147f407168c2f4c11ded3a8815b608b9aa8338",
+        "worker-cells/d977ddbfc034f08d/execution/3b49981b-2c1d-40b7-a30b-0a49ff5cf7a4/195105f6-fe6f-4eeb-8036-446622715474/337f7129-fb59-4925-a4fe-cd8370a66600/rcc.json": "332d29913b371d55135d1971c4b583ac646f4c7d1480ba48e42746bda799fe77",
+        "worker-cells/d977ddbfc034f08d/execution/3b49981b-2c1d-40b7-a30b-0a49ff5cf7a4/195105f6-fe6f-4eeb-8036-446622715474/337f7129-fb59-4925-a4fe-cd8370a66600/result.json": "62c36376794da58c00dbde622908affed76c1034244fe88142d92d30ad070d16",
+        "worker-cells/d977ddbfc034f08d/execution/3b49981b-2c1d-40b7-a30b-0a49ff5cf7a4/195105f6-fe6f-4eeb-8036-446622715474/337f7129-fb59-4925-a4fe-cd8370a66600/source/_invoice_task.py": "4f594ff26338d14f03e5f279248cb54394804fa0fec7cf38e9e500761a4b3990",
+        "worker-cells/d977ddbfc034f08d/execution/3b49981b-2c1d-40b7-a30b-0a49ff5cf7a4/195105f6-fe6f-4eeb-8036-446622715474/337f7129-fb59-4925-a4fe-cd8370a66600/source/package.yaml": "09d8f7b3c1c6cf732a5ff265e8f886c589d26a63ab1762ba229a0d6eed226b12",
+        "worker-cells/d977ddbfc034f08d/execution/3b49981b-2c1d-40b7-a30b-0a49ff5cf7a4/195105f6-fe6f-4eeb-8036-446622715474/337f7129-fb59-4925-a4fe-cd8370a66600/stdout.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+        "worker-cells/d977ddbfc034f08d/objects/26bdfacf-ac43-49a7-9b58-21b1f953c4e5": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-cells/d977ddbfc034f08d/objects/5bc47eee-ac62-459a-8264-e9f78571ba2a": "1baa61959e3cdfb9171cefc42d481993ef6e9a103e9b888bcddac23bc937dfd5",
+        "worker-cells/d977ddbfc034f08d/objects/6c1f45be-ab7b-4374-9dab-65f0cb30aa3d": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-cells/d977ddbfc034f08d/objects/abfe37dd-1b1c-4f5e-ab7b-409e3f8f3964": "4c4a4410f16998eb614947587094431ae4b7b144d6e9c4580b44080272371087",
+        "worker-cells/e929a3970bf689f7/cell.json": "3e1d318fad40fb119f44e56fabfa4bca4c542369e9fd62519ff9fee0caac341d",
+        "worker-cells/e929a3970bf689f7/execution/3c723b9a-4dd3-4b8f-8a93-2037ff6e8963/60fc4f72-46b0-4d16-8f60-915c7e079541/edd8a150-1da6-445d-af2a-283e78c1d80f/input.json": "8ed79e88d93da40d4fd15b80c48dd33c9299fc1d29d92ac50bbdba7d13a222de",
+        "worker-cells/e929a3970bf689f7/execution/3c723b9a-4dd3-4b8f-8a93-2037ff6e8963/60fc4f72-46b0-4d16-8f60-915c7e079541/edd8a150-1da6-445d-af2a-283e78c1d80f/rcc.json": "52c19490f860cef956b83fe5bc4acc8a895d98a32ae263e00fc348282b2e8855",
+        "worker-cells/e929a3970bf689f7/execution/3c723b9a-4dd3-4b8f-8a93-2037ff6e8963/60fc4f72-46b0-4d16-8f60-915c7e079541/edd8a150-1da6-445d-af2a-283e78c1d80f/result.json": "43bafcd4be9110e6c0af729a389603df292af8efa382f8096dbdbb98825c22eb",
+        "worker-cells/e929a3970bf689f7/execution/3c723b9a-4dd3-4b8f-8a93-2037ff6e8963/60fc4f72-46b0-4d16-8f60-915c7e079541/edd8a150-1da6-445d-af2a-283e78c1d80f/source/_invoice_task.py": "4f594ff26338d14f03e5f279248cb54394804fa0fec7cf38e9e500761a4b3990",
+        "worker-cells/e929a3970bf689f7/execution/3c723b9a-4dd3-4b8f-8a93-2037ff6e8963/60fc4f72-46b0-4d16-8f60-915c7e079541/edd8a150-1da6-445d-af2a-283e78c1d80f/source/package.yaml": "09d8f7b3c1c6cf732a5ff265e8f886c589d26a63ab1762ba229a0d6eed226b12",
+        "worker-cells/e929a3970bf689f7/execution/3c723b9a-4dd3-4b8f-8a93-2037ff6e8963/60fc4f72-46b0-4d16-8f60-915c7e079541/edd8a150-1da6-445d-af2a-283e78c1d80f/stdout.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+        "worker-cells/e929a3970bf689f7/objects/20ca968b-570d-4fce-9dd7-4aaf554da873": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-cells/e929a3970bf689f7/objects/448436fe-9e61-4043-8525-411a1cb3d290": "5b93ac97af00b5f3dd055777455a528a308bcbcc88c1b38901b42cedf4b4566f",
+        "worker-cells/e929a3970bf689f7/objects/d2f71a4e-95ec-4810-b8e7-9b9d98e7d789": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-cells/e929a3970bf689f7/objects/d8cb0173-a876-4067-ad4e-972f75ef2e90": "894ae3fc962162cd08e78336cf5ad67838c82ca99c5db2ebe8268bbe77d7d1ba",
+        "worker-runtime.json": "ee63d1c28f6fe31207379db59ed9ca2f30ffe34576528639dc7f8179c66c1617"
+      }
+    },
+    "junit": {
+      "portable": {
+        "tests": 1824,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 14
+      },
+      "invoice": {
+        "tests": 128,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "browser": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "generated": {
+        "tests": 56,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "components": {
+        "tests": 105,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  },
+  "original_full_failure": {
+    "receipt": {
+      "path": "/workspace/actions-327-state/evidence/generated/final/d72556e7-7034-419b-8484-5249b5db22ca/receipt.json",
+      "sha256": "0243ade882d111639b2a1c219376c94cabbec71249317c773b0b701fc7ed0e2b",
+      "bytes": 33097
+    },
+    "result": {
+      "attempt": "d72556e7-7034-419b-8484-5249b5db22ca",
+      "status": "FAIL",
+      "head": "4389cc09c7d40aab40925e571318fa4cdae95713",
+      "image_reference": "postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81",
+      "tests": {
+        "components": 0,
+        "invoice": 0,
+        "browser": 0,
+        "generated": 0,
+        "portable": 1
+      },
+      "cleanup": "PASS",
+      "inputs": {
+        "action_server/poetry.lock": "e2c743d43d0608182e6c888cccd308821433b80f2adf4547e950e061723f3f7a",
+        "action_server/pyproject.toml": "af919ed882028a77d19c9c3ef3bcbc03be57147e362436d1dd61ce6dad820fb3",
+        "action_server/scripts/verify_invoice_queries.py": "a307b99e903b157b571d51848ed90b9547fcf56449114e67d5d6792489e75d49",
+        "action_server/src/actions/server/_api_action_routes.py": "65133ad7eb88a1e4a5c959db7f359ceaff2245878c058a8c77b94d42e8288860",
+        "action_server/src/actions/server/_models.py": "d7eee21eeaa10f8d36b40de57fbc6191fcc1dd33f91be0d267229cff0e3f12af",
+        "action_server/src/actions/server/_rcc_runtime_adapter.py": "7ae97d5e8f53cb1b809e02649395929cd1d9cd3a3fd386e9075e34e93ec17262",
+        "action_server/src/actions/server/_robot_inputs.py": "7cfbb5f1194b15928d9221d59840820dabde76db61d4e45d539ec80791ff875d",
+        "action_server/src/actions/server/_server.py": "085eae5a1a4a3e433288735f895687701513a1004656caf3b89368c6e36e2542",
+        "action_server/src/actions/server/canvas_lifecycle.py": "1e8a2ca082f962b76b0e311b1d5ee84e3b1b6a28ef057d6585d7b5b3dde5f2e6",
+        "action_server/src/actions/server/data_queries/__init__.py": "3a1a10897706f05daf2907f661bd42149c69e8ccf0a6f28e82a9d0195673b058",
+        "action_server/src/actions/server/data_queries/_invoice_task.py": "4f594ff26338d14f03e5f279248cb54394804fa0fec7cf38e9e500761a4b3990",
+        "action_server/src/actions/server/data_queries/canvas.py": "a92ad46abee119e6de3d49ecffd20b7d9178e236fee4a0a5cb82b3f779c50461",
+        "action_server/src/actions/server/data_queries/canvas_mcp.py": "9947aabbfa681cc5b11d1b511de4f27fdaad9f8329738dbd5de94e2c30800954",
+        "action_server/src/actions/server/data_queries/generated.py": "aa4b25f5e4ab4ea3911f9defeaf20a70bf3628299b695f344c9bddd01badfeed",
+        "action_server/src/actions/server/data_queries/invoice_worker.py": "f8a916dfd0725a2230c489dd6043eeaa6f3600aceabe5e87d84a1405e4651450",
+        "action_server/src/actions/server/data_queries/invoices.py": "6b1dea6ef33b4689ea098b91b4be1e0363656438084ce080e557e19a8bf6051b",
+        "action_server/src/actions/server/data_queries/knowledge.py": "f528fa8ffd22df290dab82e85ce7405bebe73fc407c226bf5784f9312b071411",
+        "action_server/src/actions/server/data_queries/review.py": "3453361ed990089bff5ace7aa68be58ccfebb374ba07ab35f9ca41ab14e3e2c2",
+        "action_server/src/actions/server/data_queries/review_models.py": "f06bbacaaf474e20edfdf0c4682a6fec45ca36909c0c70b13462340faf993a1a",
+        "action_server/src/actions/server/data_queries/service.py": "65d4d3eceafd579534fa3a17060be7c35ea468b5692635b647104f733433feea",
+        "action_server/src/actions/server/mcp/setup_mcp_server_v2.py": "195f8dd0c4247eeb39b1be5dae974f33d014f734e6429fae249760395d55b4ee",
+        "action_server/src/actions/server/migrations/__init__.py": "76f9ea7dc0087b7f3802c86e7b2f70e97f560265fcf0e6d084e858704e811cea",
+        "action_server/src/actions/server/migrations/migration_add_invoice_reviews.py": "40ec5952c106f21980d1572408c2fe00b8af81c30ca3c668295a95fd369d074e",
+        "action_server/src/actions/server/run_outputs/__init__.py": "4c29ad35ab314ea4472025d453703b124a08262cfa24a51baf3a1a2ffb58ae38",
+        "action_server/src/actions/server/run_outputs/filesystem.py": "db8daf79dc0d2a06ecec9a2c3ab67319d6df420c2a44578948d46f2b558c5606",
+        "action_server/src/actions/server/run_outputs/models.py": "c69318f6893484156fba1002f8372711fc83e32e56d0e29c54e985cc26196065",
+        "action_server/src/actions/server/run_outputs/service.py": "b23d29855082907b18d6f8158a657a9567e31601e92393b13f8bee1a10923eb2",
+        "action_server/src/actions/server/run_outputs/transport.py": "b5063cc57888b868615a2a89cf2e114b5ae0455239e8fe22843d36609ed9e376",
+        "action_server/src/actions/server/run_outputs/types.py": "1189364febdfcb5caf16d8429cc01945c297f566d38a109ad6bcef33de497b9d",
+        "action_server/tests/action_server_tests/test_candidate_work_items.py": "381fbfd0c2f44358ae068364e7dc1fc9b536acdfc08419cbdcc7b98a32f0ea91",
+        "action_server/tests/action_server_tests/test_canvas_lifecycle.py": "fc00995a81aa1ad9ac4e61077dce6aad21d03b9df1dabc4ec88e94f6645c288b",
+        "action_server/tests/action_server_tests/test_generated_invoice.py": "63cac25d9842ec8637472e9c82f39f6fdd34aa276a278ee10ee0688d626402cd",
+        "action_server/tests/action_server_tests/test_generated_invoice_browser.py": "7085d7a76c684848ff1a4bfe518d3bdadd9965aa537f6d397e357823516e8b86",
+        "action_server/tests/action_server_tests/test_invoice_canvas.py": "1a07665e11f4e6bc5dc81200fe1e8ad27fa86e4900528c873f3d75c8606ebd9f",
+        "action_server/tests/action_server_tests/test_invoice_canvas_browser.py": "94b4d995ec25cf0ee8682563ef0a5ecda980c01f60713e7091c5bf8e523f6375",
+        "action_server/tests/action_server_tests/test_invoice_canvas_mcp.py": "01c2968bbcc9338de5ff531a29f61c33d3043588af21152f4f52c56a760dad99",
+        "action_server/tests/action_server_tests/test_invoice_providers.py": "613f34c84bba089931dc53b334a472e430987249d8a0e29f8a53effa28c5d30e",
+        "action_server/tests/action_server_tests/test_invoice_review.py": "2ebfc60844c8b90bf51a501a97f8c73b82c47ec242eb3c4c32ee51aa12a7b5f9",
+        "action_server/tests/action_server_tests/test_invoice_review_mcp.py": "6c38878d02f74725da2c89600bf3fa81f16b58242b3e03beec5ca31e85bb25bd",
+        "action_server/tests/action_server_tests/test_invoice_run_outputs.py": "b92afe3965110b4d9e19473fcd953aaf401f1fd3fd1466b6351fcf7d4fc8889c",
+        "action_server/tests/action_server_tests/test_invoice_worker.py": "7d56d153c84dbbc3c236fd0d6a7e16dc4a82e75cce80cbe7c89f7befa3155d42",
+        "action_server/tests/action_server_tests/test_invoice_worker_mcp.py": "ff3f6eaed47e906a6e83a44c5803c882607d06435748b61ecd5a9c6534885c77",
+        "action_server/tests/action_server_tests/test_knowledge_collections.py": "28909792d6c68044950e3d321c127ecbdbbca526970fe94a77d166139d0bd452",
+        "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py": "101315710aff8e12dbb3b927ad94866ef7c9d290f6ec667c4493d833a9075950",
+        "action_server/tests/action_server_tests/test_robot_run_inputs.py": "0dbc3a30e03c5cc4a71f62298db45ef06e1968c8cfad47dcbcf411d2758020f8",
+        "developer/toolkit.py": "0eaf95234235b377cb8d9da2103bf61aa431db5991b1e3cc223d3cdf3bc54da5",
+        "developer/toolkit.yaml": "59bef472fce6bf6c9207550c170e97041e1bbb46ce6a4a90b0cd576f7c95734d",
+        "work-items/pyproject.toml": "76bb9b3ff8d866c0f5ee71e19fef42a2254d41d6fbf805bca389a5d4c5dc25df",
+        "work-items/src/actions/work_items/_adapters/_sql_review.py": "e23c017f0a165113032e5935e8f32b4abfdf28525a2613cb1dcd81bce745f7ae",
+        "action_server/frontend/apps/canvas-view/src/host-harness.ts": "403e8aad82e795e007658eebb57d5e69a850bcb58bf505c24c11487ec2d3035f",
+        "action_server/frontend/apps/canvas-view/src/main.tsx": "ce2fbd3700a1bf39a9ba37c687f93751acb8ae732cfcf85bf9a316b05ed726fc",
+        "action_server/frontend/apps/canvas-view/src/McpCanvasView.tsx": "1ce93a9725a977fae906c0aee45e5188ce9c9c937e02bcdd09efdaf5d0a510ff",
+        "action_server/frontend/apps/canvas-view/src/query-results/InvoiceReviewPanel.tsx": "95de834cd70a167461460e7e8c9d5d120207f123760f5b51f3ff885b23365d03",
+        "action_server/frontend/apps/canvas-view/src/query-results/QueryResultsView.test.tsx": "fb4eb92e36c89f3b943b27d2e2e58d881cefcd1df05019cd9bb80e7b505d9b0d",
+        "action_server/frontend/apps/canvas-view/src/query-results/QueryResultsView.tsx": "bea0532129a1dae633fe66f132d606baef61ecab4d60d77a4398d2c38a01b6e8",
+        "action_server/frontend/apps/canvas-view/src/query-results/invoice-bridge.ts": "e0226b4f48a94da142a4b1673cba5b7fdd307ad9ac7a2d9aeda3880acb6b8ad8",
+        "action_server/frontend/apps/canvas-view/src/query-results/CanvasContractRoundTrip.test.tsx": "00469d5731b5d9cf634dedb2538f6cb60774d67444d28ce74db67300d6609f50",
+        "action_server/frontend/apps/canvas-view/src/query-results/review-contract.ts": "d5f081a7c914fa8ec8a3c584f285f4881fd4e5f1f61986e10c6969825cc964dc",
+        "action_server/frontend/apps/canvas-view/src/query-results/InvoiceReviewPanel.test.tsx": "a7f648cf119ef5b74c19dc166094b1570037045a00196728da83aaeb4e489e56",
+        "action_server/frontend/apps/canvas-view/invoice-runtime.spec.ts": "4a83943c06f5b4f9afbbd027084265fc1a4f67e1adc79902ee90e057dd439c59",
+        "action_server/frontend/playwright.invoice.config.ts": "bfd2ae1cdf3863bd680151e64db0c25fdc6ec096995a30f33b06340ba8ba2129",
+        "action_server/frontend/package-lock.json": "30e50040438c67254859807343cb53c288508b4895fb69648732277e8184a12a"
+      },
+      "module_identity": {
+        "actions.server.canvas_lifecycle": {
+          "path": "/workspace/actions-327/action_server/src/actions/server/canvas_lifecycle.py",
+          "sha256": "1e8a2ca082f962b76b0e311b1d5ee84e3b1b6a28ef057d6585d7b5b3dde5f2e6"
+        },
+        "actions.server.data_queries.review": {
+          "path": "/workspace/actions-327/action_server/src/actions/server/data_queries/review.py",
+          "sha256": "3453361ed990089bff5ace7aa68be58ccfebb374ba07ab35f9ca41ab14e3e2c2"
+        },
+        "actions.server.data_queries.invoice_worker": {
+          "path": "/workspace/actions-327/action_server/src/actions/server/data_queries/invoice_worker.py",
+          "sha256": "f8a916dfd0725a2230c489dd6043eeaa6f3600aceabe5e87d84a1405e4651450"
+        },
+        "actions.server.data_queries.generated": {
+          "path": "/workspace/actions-327/action_server/src/actions/server/data_queries/generated.py",
+          "sha256": "aa4b25f5e4ab4ea3911f9defeaf20a70bf3628299b695f344c9bddd01badfeed"
+        },
+        "actions.server.data_queries.knowledge": {
+          "path": "/workspace/actions-327/action_server/src/actions/server/data_queries/knowledge.py",
+          "sha256": "f528fa8ffd22df290dab82e85ce7405bebe73fc407c226bf5784f9312b071411"
+        },
+        "actions.server.data_queries.invoices": {
+          "path": "/workspace/actions-327/action_server/src/actions/server/data_queries/invoices.py",
+          "sha256": "6b1dea6ef33b4689ea098b91b4be1e0363656438084ce080e557e19a8bf6051b"
+        },
+        "actions.server.run_outputs.service": {
+          "path": "/workspace/actions-327/action_server/src/actions/server/run_outputs/service.py",
+          "sha256": "b23d29855082907b18d6f8158a657a9567e31601e92393b13f8bee1a10923eb2"
+        },
+        "actions.work_items._adapters._sql_review": {
+          "path": "/workspace/actions-327/action_server/.venv/lib/python3.12/site-packages/actions/work_items/_adapters/_sql_review.py",
+          "sha256": "e23c017f0a165113032e5935e8f32b4abfdf28525a2613cb1dcd81bce745f7ae",
+          "version": "0.5.0a1"
+        }
+      },
+      "image": "sha256:319d040b5d68e3e5b98a238f0b5d375b4b4d9c5b3a6a9afb0308a8bcf0de72a5",
+      "canvas_html_sha256": "b3f939af2d7b61c95c99a5ab2a8db0e8852fbe4697ed014766e9ab070ac34e04",
+      "retained_worker_runtime": {
+        "path": "/workspace/actions-327-state/evidence/worker/final/1f4b9f44-d7ae-46c3-8103-c57d4f9f7275/worker-runtime.json",
+        "sha256": "ee63d1c28f6fe31207379db59ed9ca2f30ffe34576528639dc7f8179c66c1617",
+        "environment_sha256": "09d8f7b3c1c6cf732a5ff265e8f886c589d26a63ab1762ba229a0d6eed226b12"
+      },
+      "worker_runtime": {
+        "artifact_digest": "sha256:d791a3890527ad638c3446af42bb431a26c2915c8dde19e5e3dfa951478bd60c",
+        "sdk_wheel_sha256": "5788f4b346d1dd6c61ba9f68ad30ae2cc56bf9488d22e49bd808e1df49915cd0",
+        "rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+        "config": "/workspace/actions-327-state/evidence/generated/final/d72556e7-7034-419b-8484-5249b5db22ca/worker-runtime.json"
+      },
+      "counts": {
+        "components": {
+          "tests": 105,
+          "skipped": 0,
+          "failures": 0,
+          "errors": 0
+        },
+        "invoice": {
+          "tests": 128,
+          "skipped": 0,
+          "failures": 0,
+          "errors": 0
+        },
+        "browser": {
+          "tests": 2,
+          "skipped": 0,
+          "failures": 0,
+          "errors": 0
+        },
+        "generated": {
+          "tests": 56,
+          "skipped": 0,
+          "failures": 0,
+          "errors": 0
+        }
+      },
+      "failure_type": "RuntimeError",
+      "artifacts": {
+        "browser-details/duckdb/browser-output/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+        "browser-details/duckdb/browser.log": "14c99a1524b4194fecf77406eb1391bbfb43f288ba6fd1ed9bbe8a55da227b79",
+        "browser-details/duckdb/receipt.json": "dffaafb989ab32f40641d50b9445dc1f654ae655d89bf5b10bd02819a3329b89",
+        "browser-details/postgresql/browser-output/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+        "browser-details/postgresql/browser.log": "af3f2c0858e401b0b57e05f5616707e23cca819851c663edf65802da5f8283b2",
+        "browser-details/postgresql/receipt.json": "dffaafb989ab32f40641d50b9445dc1f654ae655d89bf5b10bd02819a3329b89",
+        "browser-details/postgresql-duckdb/browser-output/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+        "browser-details/postgresql-duckdb/browser.log": "2f8d206292f5964ae58738bcee3a267523e9c84936e05e554239acdcefa56905",
+        "browser-details/postgresql-duckdb/receipt.json": "65504be2e44d87ced0fb2139ab14ab2abc6ae5fe183456958f09ec834766e2b3",
+        "browser-details/postgresql-postgresql/browser-output/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+        "browser-details/postgresql-postgresql/browser.log": "7629fd7c70f26c3724ef443e24816f6c5c625255ee1385dea7f11e6e2ccff6b6",
+        "browser-details/postgresql-postgresql/receipt.json": "8ec76f0b721983883831911aa0e8364294ba977ea1622406b6b2824ac04dd676",
+        "browser-details/sqlite-duckdb/browser-output/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+        "browser-details/sqlite-duckdb/browser.log": "75b0e3d214c06e92bb7d8c4779d06b6766d9e8172640e54c0ef5451f4fd4a30b",
+        "browser-details/sqlite-duckdb/receipt.json": "e113acbc3364701100f0d3d047a5812ac2eda6fb5899f8c674fa611ec7466365",
+        "browser-details/sqlite-postgresql/browser-output/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+        "browser-details/sqlite-postgresql/browser.log": "75b0e3d214c06e92bb7d8c4779d06b6766d9e8172640e54c0ef5451f4fd4a30b",
+        "browser-details/sqlite-postgresql/receipt.json": "ae65bd603c952bb2a09328655f11feddb37de8dcfdbd391075d2c00c3ddac093",
+        "browser.log": "fec035ee034bfffd7e34a94d8ccf2037c2c9d39ee3b58256201f7fda97563236",
+        "browser.xml": "938faa490e3abdbc242dca63cd5fe80e63001fee5564db6823bf4f6d9ac0f91a",
+        "components.log": "63c1bee2bb383075dfc90602ac89b1ac86bc3831a65dd77b55e7adea587ccfe6",
+        "components.xml": "716883daa822ba442b76a76d589bfa734106c5de02521588cecf5cb260dbf0d4",
+        "generated.log": "ca238c335b4dd1caa35f796495fa84905e0b5f1aadedef5faee880f9bb3a5b69",
+        "generated.xml": "cc97752db01c00e19b43a99fa97bef5c6cebca4a47453645b7393fe6f950aeb3",
+        "invoice.log": "b0d9979e790a43cbd44465a9cf77c4e74d1a7dd91dc6dedb7aca98227d376a64",
+        "invoice.xml": "412cd91a86f895f309b3fc33c61cbdab9955df6d24641fd39ffe43b6566d78d7",
+        "portable.log": "fe7dc9259bef15ce733267c03662b23be7542d3d52b1b35dba4ff8c086b8b9ae",
+        "portable.xml": "05f1ea2181deec86555755a05c7b44a548885fac06b30a436e43f191d71ab487",
+        "postgres.log": "e100cb7c2d8c33b757cc635398121b98a2cceaf133039cbd72263e95eac16d6a",
+        "rcc-acquire.json": "9202b4560e0dee3dbc30cf2bc705ec9a29df38220863ae6cf8235bfe31adc04a",
+        "rcc-acquire.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+        "sdk-build.log": "e9b3c866c9ebbe1f10251f2447e7a22fd66f19691cd1c363f03cb08554062f06",
+        "sdk-wheels/actions_work_items-0.5.0a1-py3-none-any.whl": "5788f4b346d1dd6c61ba9f68ad30ae2cc56bf9488d22e49bd808e1df49915cd0",
+        "worker-cells/309af425b8499f9e/cell.json": "f5b53e05b9cd3a2844366508fa7c87f34fa1597dc608dabd5b0f0c3ccecb33f9",
+        "worker-cells/309af425b8499f9e/execution/a26c8b33-8a2d-4b94-928d-e04382346bb4/d6d6dae4-1692-42eb-bd70-23451dbf89ac/a0787b5e-d69c-4989-9c32-73589cf71bbd/input.json": "e4de06f7e62131d099baaf320c6f7a9da7aa93a6ae5c9fcffa88805d4108ecae",
+        "worker-cells/309af425b8499f9e/execution/a26c8b33-8a2d-4b94-928d-e04382346bb4/d6d6dae4-1692-42eb-bd70-23451dbf89ac/a0787b5e-d69c-4989-9c32-73589cf71bbd/rcc.json": "6138f3a9163eb9b5a87fd492b05e30fac623f26b63cb8d47a4fd3e29e94898b4",
+        "worker-cells/309af425b8499f9e/execution/a26c8b33-8a2d-4b94-928d-e04382346bb4/d6d6dae4-1692-42eb-bd70-23451dbf89ac/a0787b5e-d69c-4989-9c32-73589cf71bbd/result.json": "eb4c2642fed0ae9eb4ee858c7c3bdf9de1fa0d801130e6716982d77f68e1a395",
+        "worker-cells/309af425b8499f9e/execution/a26c8b33-8a2d-4b94-928d-e04382346bb4/d6d6dae4-1692-42eb-bd70-23451dbf89ac/a0787b5e-d69c-4989-9c32-73589cf71bbd/source/_invoice_task.py": "4f594ff26338d14f03e5f279248cb54394804fa0fec7cf38e9e500761a4b3990",
+        "worker-cells/309af425b8499f9e/execution/a26c8b33-8a2d-4b94-928d-e04382346bb4/d6d6dae4-1692-42eb-bd70-23451dbf89ac/a0787b5e-d69c-4989-9c32-73589cf71bbd/source/package.yaml": "09d8f7b3c1c6cf732a5ff265e8f886c589d26a63ab1762ba229a0d6eed226b12",
+        "worker-cells/309af425b8499f9e/execution/a26c8b33-8a2d-4b94-928d-e04382346bb4/d6d6dae4-1692-42eb-bd70-23451dbf89ac/a0787b5e-d69c-4989-9c32-73589cf71bbd/stdout.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+        "worker-cells/309af425b8499f9e/objects/0d963699-9e27-4d4a-a83e-d64e3724b346": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-cells/309af425b8499f9e/objects/5a7e002d-9af9-490a-a987-9ec274d49675": "dfa8f3c584dacb14617a385e8916a7005d1788650fee5d6cdff19b2ab8b9f1f3",
+        "worker-cells/309af425b8499f9e/objects/83863acc-b902-41b6-86e3-59c097bd075a": "5b93ac97af00b5f3dd055777455a528a308bcbcc88c1b38901b42cedf4b4566f",
+        "worker-cells/309af425b8499f9e/objects/a356935b-618c-41e6-b9bf-7ed7ad0a29ec": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-cells/479513116b28a501/cell.json": "5683bb2e1f83d411e98248fe3cfb556305ba8adeafe10e9e56c93ffe0a90437a",
+        "worker-cells/479513116b28a501/execution/5a4865f5-8058-40d5-a57a-5b7d3a61c6e7/bb60c2ef-e136-4741-9bc3-dfd473facfa9/e0a2f85e-f3ce-495f-bdb7-d68c562e1d77/input.json": "119b3d870fbca60a8d1caceb15f6dbe505eb945d14d48eb98e1bcb63f178f36e",
+        "worker-cells/479513116b28a501/execution/5a4865f5-8058-40d5-a57a-5b7d3a61c6e7/bb60c2ef-e136-4741-9bc3-dfd473facfa9/e0a2f85e-f3ce-495f-bdb7-d68c562e1d77/rcc.json": "c7b0ee10450669ca98e6e2afe10c419cae2df849f67c92f9f9ffe486ec8409c6",
+        "worker-cells/479513116b28a501/execution/5a4865f5-8058-40d5-a57a-5b7d3a61c6e7/bb60c2ef-e136-4741-9bc3-dfd473facfa9/e0a2f85e-f3ce-495f-bdb7-d68c562e1d77/result.json": "6b4b4549e7f492bc53112629e005a52267059b1d23794753e9f3f9dc67ff5bbe",
+        "worker-cells/479513116b28a501/execution/5a4865f5-8058-40d5-a57a-5b7d3a61c6e7/bb60c2ef-e136-4741-9bc3-dfd473facfa9/e0a2f85e-f3ce-495f-bdb7-d68c562e1d77/source/_invoice_task.py": "4f594ff26338d14f03e5f279248cb54394804fa0fec7cf38e9e500761a4b3990",
+        "worker-cells/479513116b28a501/execution/5a4865f5-8058-40d5-a57a-5b7d3a61c6e7/bb60c2ef-e136-4741-9bc3-dfd473facfa9/e0a2f85e-f3ce-495f-bdb7-d68c562e1d77/source/package.yaml": "09d8f7b3c1c6cf732a5ff265e8f886c589d26a63ab1762ba229a0d6eed226b12",
+        "worker-cells/479513116b28a501/execution/5a4865f5-8058-40d5-a57a-5b7d3a61c6e7/bb60c2ef-e136-4741-9bc3-dfd473facfa9/e0a2f85e-f3ce-495f-bdb7-d68c562e1d77/stdout.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+        "worker-cells/479513116b28a501/objects/58c8d082-6b4e-4fa0-8a7e-122636b97743": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-cells/479513116b28a501/objects/758cf188-93f2-4d11-baf8-d4d3547a4769": "f38c9a88c187f291ba9dced34e83a040ad8213302045a6fe9bac08bb82812e37",
+        "worker-cells/479513116b28a501/objects/a88289ad-1381-4b58-b229-283be434b035": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-cells/479513116b28a501/objects/e4b1ca05-4f03-46ba-8672-30e9522ace88": "4c4a4410f16998eb614947587094431ae4b7b144d6e9c4580b44080272371087",
+        "worker-cells/abdf8456c22d2aac/cell.json": "0ad493a582e6e3c8002d35bb58531dce903e65e4da413ef8be738f5a1b3d801c",
+        "worker-cells/abdf8456c22d2aac/execution/3996bc83-4ba8-4101-be5d-b3a38d639c10/e40949dd-456f-4a58-8c6a-50f0c473ab0c/cc6fd89a-69db-4a63-8cbe-b2b37340787b/input.json": "563d20d1a4680936d536796dff00ab61ebcb135607a5e3b1da8bd2c59736d465",
+        "worker-cells/abdf8456c22d2aac/execution/3996bc83-4ba8-4101-be5d-b3a38d639c10/e40949dd-456f-4a58-8c6a-50f0c473ab0c/cc6fd89a-69db-4a63-8cbe-b2b37340787b/rcc.json": "f1e18b07c7fbf16b266388941a843b2945566aee7eab2f6e9624a93100931166",
+        "worker-cells/abdf8456c22d2aac/execution/3996bc83-4ba8-4101-be5d-b3a38d639c10/e40949dd-456f-4a58-8c6a-50f0c473ab0c/cc6fd89a-69db-4a63-8cbe-b2b37340787b/result.json": "07f1c170b46ddc6bbecfa8470e253d832f89b42d91fedd182fd141bf2ce897ba",
+        "worker-cells/abdf8456c22d2aac/execution/3996bc83-4ba8-4101-be5d-b3a38d639c10/e40949dd-456f-4a58-8c6a-50f0c473ab0c/cc6fd89a-69db-4a63-8cbe-b2b37340787b/source/_invoice_task.py": "4f594ff26338d14f03e5f279248cb54394804fa0fec7cf38e9e500761a4b3990",
+        "worker-cells/abdf8456c22d2aac/execution/3996bc83-4ba8-4101-be5d-b3a38d639c10/e40949dd-456f-4a58-8c6a-50f0c473ab0c/cc6fd89a-69db-4a63-8cbe-b2b37340787b/source/package.yaml": "09d8f7b3c1c6cf732a5ff265e8f886c589d26a63ab1762ba229a0d6eed226b12",
+        "worker-cells/abdf8456c22d2aac/execution/3996bc83-4ba8-4101-be5d-b3a38d639c10/e40949dd-456f-4a58-8c6a-50f0c473ab0c/cc6fd89a-69db-4a63-8cbe-b2b37340787b/stdout.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+        "worker-cells/abdf8456c22d2aac/objects/4c11af98-3dd7-4a5d-94f0-ca976cc0c810": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-cells/abdf8456c22d2aac/objects/5c243e76-b8a6-452d-a3c3-a3708bda21f3": "5b93ac97af00b5f3dd055777455a528a308bcbcc88c1b38901b42cedf4b4566f",
+        "worker-cells/abdf8456c22d2aac/objects/cf0e4a0a-1253-4705-9c44-57171f2ec2fd": "33eee716162ef5ad34c168984c771c198d29133ede54a69739b7b1d46f3c88bd",
+        "worker-cells/abdf8456c22d2aac/objects/d19eef8a-2415-4d88-9cee-d0c64915d950": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-cells/b1a0816fcbb44678/cell.json": "99235ef064ec3d0259d783c0f5a71840f6f88d58a4c4a289e61fe02af461e709",
+        "worker-cells/b1a0816fcbb44678/execution/c9782a90-8c7d-4a23-9f53-b9c36aed1525/a66441f9-a718-4347-ba2e-bf2ab6419c45/ac48488c-6d05-439b-8302-a6aba01dfbfc/input.json": "92c5a1e1182e69ef85a1fb15a9a663e3194967fa01952318a1847a8b82aff5d1",
+        "worker-cells/b1a0816fcbb44678/execution/c9782a90-8c7d-4a23-9f53-b9c36aed1525/a66441f9-a718-4347-ba2e-bf2ab6419c45/ac48488c-6d05-439b-8302-a6aba01dfbfc/rcc.json": "da634d3de8af79934124555e31eb0b5f8aa7d7803f8a59a6c9ce68ac370837ab",
+        "worker-cells/b1a0816fcbb44678/execution/c9782a90-8c7d-4a23-9f53-b9c36aed1525/a66441f9-a718-4347-ba2e-bf2ab6419c45/ac48488c-6d05-439b-8302-a6aba01dfbfc/result.json": "439d7e52a1a256fe7305ae3d07f26d7de42d60a696879b9ac11b6e9ca26aecb2",
+        "worker-cells/b1a0816fcbb44678/execution/c9782a90-8c7d-4a23-9f53-b9c36aed1525/a66441f9-a718-4347-ba2e-bf2ab6419c45/ac48488c-6d05-439b-8302-a6aba01dfbfc/source/_invoice_task.py": "4f594ff26338d14f03e5f279248cb54394804fa0fec7cf38e9e500761a4b3990",
+        "worker-cells/b1a0816fcbb44678/execution/c9782a90-8c7d-4a23-9f53-b9c36aed1525/a66441f9-a718-4347-ba2e-bf2ab6419c45/ac48488c-6d05-439b-8302-a6aba01dfbfc/source/package.yaml": "09d8f7b3c1c6cf732a5ff265e8f886c589d26a63ab1762ba229a0d6eed226b12",
+        "worker-cells/b1a0816fcbb44678/execution/c9782a90-8c7d-4a23-9f53-b9c36aed1525/a66441f9-a718-4347-ba2e-bf2ab6419c45/ac48488c-6d05-439b-8302-a6aba01dfbfc/stdout.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+        "worker-cells/b1a0816fcbb44678/objects/b5c8cca1-bd4c-4e21-98a0-7bc74cb70e2c": "2091da6b3000afeaf29752ce80e1da3cf9d022a3dbb9128059ee44541e1c1814",
+        "worker-cells/b1a0816fcbb44678/objects/b94fe323-a883-440e-9e27-41721bd5d2c3": "4c4a4410f16998eb614947587094431ae4b7b144d6e9c4580b44080272371087",
+        "worker-cells/b1a0816fcbb44678/objects/c4154ab5-647d-4069-8ae8-176f270f1a4f": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-cells/b1a0816fcbb44678/objects/d0f9662e-1b73-48d9-9215-18c959a0b933": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-cells/bd1faf9068059cd7/cell.json": "746a7cc73a191227e111b3dc6f942daeb33c84f04436351ea07a5ccade390b3b",
+        "worker-cells/bd1faf9068059cd7/execution/35363244-b170-48d7-bba7-92e3ab520dcc/17133aa8-6ec2-4f5b-876e-659f5657ad58/0986db8d-140e-4691-887f-e8b3e8035d40/input.json": "98787646eed36dd01d49f200104e417352937fe3619b3a0ec331afb85fc84318",
+        "worker-cells/bd1faf9068059cd7/execution/35363244-b170-48d7-bba7-92e3ab520dcc/17133aa8-6ec2-4f5b-876e-659f5657ad58/0986db8d-140e-4691-887f-e8b3e8035d40/rcc.json": "439686c1446e194835738824a78ad31b232e2f48af03d501c31aa8fb146bdba7",
+        "worker-cells/bd1faf9068059cd7/execution/35363244-b170-48d7-bba7-92e3ab520dcc/17133aa8-6ec2-4f5b-876e-659f5657ad58/0986db8d-140e-4691-887f-e8b3e8035d40/result.json": "03e028095f3b3fb7bbeb54a0770cd02f77f064c5d0f981cb57739f971a369eb7",
+        "worker-cells/bd1faf9068059cd7/execution/35363244-b170-48d7-bba7-92e3ab520dcc/17133aa8-6ec2-4f5b-876e-659f5657ad58/0986db8d-140e-4691-887f-e8b3e8035d40/source/_invoice_task.py": "4f594ff26338d14f03e5f279248cb54394804fa0fec7cf38e9e500761a4b3990",
+        "worker-cells/bd1faf9068059cd7/execution/35363244-b170-48d7-bba7-92e3ab520dcc/17133aa8-6ec2-4f5b-876e-659f5657ad58/0986db8d-140e-4691-887f-e8b3e8035d40/source/package.yaml": "09d8f7b3c1c6cf732a5ff265e8f886c589d26a63ab1762ba229a0d6eed226b12",
+        "worker-cells/bd1faf9068059cd7/execution/35363244-b170-48d7-bba7-92e3ab520dcc/17133aa8-6ec2-4f5b-876e-659f5657ad58/0986db8d-140e-4691-887f-e8b3e8035d40/stdout.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+        "worker-cells/bd1faf9068059cd7/objects/11a61328-e648-46b3-afbf-497165e43c38": "5b93ac97af00b5f3dd055777455a528a308bcbcc88c1b38901b42cedf4b4566f",
+        "worker-cells/bd1faf9068059cd7/objects/370795bf-097f-46cc-a509-990b04f02f93": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-cells/bd1faf9068059cd7/objects/665f0f0f-2dfc-4758-9ecb-0dbd89555b56": "ccf3c60bf96bc276365bdb1be3df766c91d9c046b702c362a93758cd093a527a",
+        "worker-cells/bd1faf9068059cd7/objects/b0116049-bdd8-4d0e-b990-78daad26a3a5": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-cells/d5a6ce8fa80ae0d1/cell.json": "414236d6509c8780727008ab604af6bdbd3679a6bf8f272225730bfe004855a9",
+        "worker-cells/d5a6ce8fa80ae0d1/execution/e5e0b521-285e-42ed-82b1-ef4fc0f30552/149d7ccd-04f9-42e1-9191-cf6d25d828e5/42c33ed2-4b8e-465c-a369-05780ac8be6d/input.json": "22352f060b9c4a43cd1165ff5f71c9e08ff1e5d7cd02ad110d08703007ba0417",
+        "worker-cells/d5a6ce8fa80ae0d1/execution/e5e0b521-285e-42ed-82b1-ef4fc0f30552/149d7ccd-04f9-42e1-9191-cf6d25d828e5/42c33ed2-4b8e-465c-a369-05780ac8be6d/rcc.json": "b80e8ebf24c2a0ea5878a14e9d4b024fdc4f5dad6fd0ac0a775d0d1355d23a41",
+        "worker-cells/d5a6ce8fa80ae0d1/execution/e5e0b521-285e-42ed-82b1-ef4fc0f30552/149d7ccd-04f9-42e1-9191-cf6d25d828e5/42c33ed2-4b8e-465c-a369-05780ac8be6d/result.json": "47716361e7f750543429dc8eedb30ac25ef4be0ebe955d1095b4ea8030f08bd3",
+        "worker-cells/d5a6ce8fa80ae0d1/execution/e5e0b521-285e-42ed-82b1-ef4fc0f30552/149d7ccd-04f9-42e1-9191-cf6d25d828e5/42c33ed2-4b8e-465c-a369-05780ac8be6d/source/_invoice_task.py": "4f594ff26338d14f03e5f279248cb54394804fa0fec7cf38e9e500761a4b3990",
+        "worker-cells/d5a6ce8fa80ae0d1/execution/e5e0b521-285e-42ed-82b1-ef4fc0f30552/149d7ccd-04f9-42e1-9191-cf6d25d828e5/42c33ed2-4b8e-465c-a369-05780ac8be6d/source/package.yaml": "09d8f7b3c1c6cf732a5ff265e8f886c589d26a63ab1762ba229a0d6eed226b12",
+        "worker-cells/d5a6ce8fa80ae0d1/execution/e5e0b521-285e-42ed-82b1-ef4fc0f30552/149d7ccd-04f9-42e1-9191-cf6d25d828e5/42c33ed2-4b8e-465c-a369-05780ac8be6d/stdout.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+        "worker-cells/d5a6ce8fa80ae0d1/objects/4f1f64d6-f262-4e9e-8516-5b6a4c06b395": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-cells/d5a6ce8fa80ae0d1/objects/881f021d-0b29-4ee2-bcd9-e100c4fc382f": "4c4a4410f16998eb614947587094431ae4b7b144d6e9c4580b44080272371087",
+        "worker-cells/d5a6ce8fa80ae0d1/objects/d17f81fe-3a23-4d62-b9ed-3b1330defdf5": "477fc1d9e718f3ccc8d0a6bb8249beb865daecf7c3e3240ee6b7d6b7642bb6dd",
+        "worker-cells/d5a6ce8fa80ae0d1/objects/d7774f85-262d-4a90-aa0f-c44b838e112c": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-cells/d977ddbfc034f08d/cell.json": "94596c96418e600dcb2db529cfccfd7761997210e4a69e56605175d0b3e903a3",
+        "worker-cells/d977ddbfc034f08d/execution/9089972f-7330-4e46-a033-ae0f010ed86e/da4d4bee-a584-4a91-b620-59695edd3dae/5cca30e0-0e85-4720-aa0a-b066a1f1108a/input.json": "77e0b35f13386ff9598768a09f376dd5987dddccd2286518e39269ff54849241",
+        "worker-cells/d977ddbfc034f08d/execution/9089972f-7330-4e46-a033-ae0f010ed86e/da4d4bee-a584-4a91-b620-59695edd3dae/5cca30e0-0e85-4720-aa0a-b066a1f1108a/rcc.json": "72b26c08fe6ad3f869201b079c8caafaceade7685642dc890b41435679f08523",
+        "worker-cells/d977ddbfc034f08d/execution/9089972f-7330-4e46-a033-ae0f010ed86e/da4d4bee-a584-4a91-b620-59695edd3dae/5cca30e0-0e85-4720-aa0a-b066a1f1108a/result.json": "b84eb42164bfc79ef1943f7b71ff8f20bf371df95335f10a6d679b538c29a33c",
+        "worker-cells/d977ddbfc034f08d/execution/9089972f-7330-4e46-a033-ae0f010ed86e/da4d4bee-a584-4a91-b620-59695edd3dae/5cca30e0-0e85-4720-aa0a-b066a1f1108a/source/_invoice_task.py": "4f594ff26338d14f03e5f279248cb54394804fa0fec7cf38e9e500761a4b3990",
+        "worker-cells/d977ddbfc034f08d/execution/9089972f-7330-4e46-a033-ae0f010ed86e/da4d4bee-a584-4a91-b620-59695edd3dae/5cca30e0-0e85-4720-aa0a-b066a1f1108a/source/package.yaml": "09d8f7b3c1c6cf732a5ff265e8f886c589d26a63ab1762ba229a0d6eed226b12",
+        "worker-cells/d977ddbfc034f08d/execution/9089972f-7330-4e46-a033-ae0f010ed86e/da4d4bee-a584-4a91-b620-59695edd3dae/5cca30e0-0e85-4720-aa0a-b066a1f1108a/stdout.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+        "worker-cells/d977ddbfc034f08d/objects/2b6fd2c5-b80e-47dc-8d40-9db513375aab": "4c4a4410f16998eb614947587094431ae4b7b144d6e9c4580b44080272371087",
+        "worker-cells/d977ddbfc034f08d/objects/5f080044-dec5-47b4-ab5e-5deefdda53ab": "af6122fae7e6311d6dfdc728eb0e324a845d5a35440acdf9c3612128cca315b8",
+        "worker-cells/d977ddbfc034f08d/objects/6847db34-a325-4fa0-97d3-8fc8dd4b8bef": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-cells/d977ddbfc034f08d/objects/b6ae1a6a-fd6a-4114-b8fb-007cda7baad4": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-cells/e929a3970bf689f7/cell.json": "5b55f3cc07c2695d9205e000134be2a6a2e8e5fcb7e9e0e1973e06ef798c8b78",
+        "worker-cells/e929a3970bf689f7/execution/86998b9b-dd05-46c6-b0e4-472475525620/991eb9cb-e54a-474f-9288-ef537cf4d789/a22d6709-68f8-423c-884b-24c5dfbb4d92/input.json": "7ead097e502e4baa9a5fc7aa111b3e874ec073cd407b601fc9cd2a80db93bd89",
+        "worker-cells/e929a3970bf689f7/execution/86998b9b-dd05-46c6-b0e4-472475525620/991eb9cb-e54a-474f-9288-ef537cf4d789/a22d6709-68f8-423c-884b-24c5dfbb4d92/rcc.json": "20488f35a27b0265d12697aa751dd68801ba41cdb47853007aa0c0a76dcf9b19",
+        "worker-cells/e929a3970bf689f7/execution/86998b9b-dd05-46c6-b0e4-472475525620/991eb9cb-e54a-474f-9288-ef537cf4d789/a22d6709-68f8-423c-884b-24c5dfbb4d92/result.json": "b0d508f2a4f03511edf30f251e93f37ec57f2f9946bbde54285f9d51a2d44f97",
+        "worker-cells/e929a3970bf689f7/execution/86998b9b-dd05-46c6-b0e4-472475525620/991eb9cb-e54a-474f-9288-ef537cf4d789/a22d6709-68f8-423c-884b-24c5dfbb4d92/source/_invoice_task.py": "4f594ff26338d14f03e5f279248cb54394804fa0fec7cf38e9e500761a4b3990",
+        "worker-cells/e929a3970bf689f7/execution/86998b9b-dd05-46c6-b0e4-472475525620/991eb9cb-e54a-474f-9288-ef537cf4d789/a22d6709-68f8-423c-884b-24c5dfbb4d92/source/package.yaml": "09d8f7b3c1c6cf732a5ff265e8f886c589d26a63ab1762ba229a0d6eed226b12",
+        "worker-cells/e929a3970bf689f7/execution/86998b9b-dd05-46c6-b0e4-472475525620/991eb9cb-e54a-474f-9288-ef537cf4d789/a22d6709-68f8-423c-884b-24c5dfbb4d92/stdout.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+        "worker-cells/e929a3970bf689f7/objects/3eed655f-6ad4-4b96-9cca-f60ba10f62b0": "5b93ac97af00b5f3dd055777455a528a308bcbcc88c1b38901b42cedf4b4566f",
+        "worker-cells/e929a3970bf689f7/objects/5133a5f3-a82d-41f3-a6bb-db8dd7a501a3": "ccbbf760977e34d0dbd629d3b90ecce3ae47a8a35d9e677d94c34eb15bf9e8ea",
+        "worker-cells/e929a3970bf689f7/objects/69bd68a9-c36c-43ee-af66-8615f900db68": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-cells/e929a3970bf689f7/objects/d0ab3857-e84e-4103-8e31-f28ccc138b92": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+        "worker-runtime.json": "ee63d1c28f6fe31207379db59ed9ca2f30ffe34576528639dc7f8179c66c1617"
+      }
+    },
+    "junit": {
+      "portable": {
+        "tests": 1824,
+        "failures": 0,
+        "errors": 78,
+        "skipped": 14
+      },
+      "invoice": {
+        "tests": 128,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "browser": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "generated": {
+        "tests": 56,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "components": {
+        "tests": 105,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  },
+  "fenced": {
+    "receipt": {
+      "path": "/workspace/actions-327-state/evidence/generated/fenced/0c696782-0169-4b9d-a378-97817e9edd94/receipt.json",
+      "sha256": "b8da4e08d1a171c39fb96254c6f09973ef70b99ae682efbd18c17d38048728b8",
+      "bytes": 3285
+    },
+    "result": {
+      "head": "4389cc09c7d40aab40925e571318fa4cdae95713",
+      "attempt": "0c696782-0169-4b9d-a378-97817e9edd94",
+      "status": "PASS",
+      "cleanup": "PASS",
+      "tests": {
+        "conformance": 0,
+        "portable": 0
+      },
+      "inputs": {
+        "developer/toolkit.py": "0eaf95234235b377cb8d9da2103bf61aa431db5991b1e3cc223d3cdf3bc54da5",
+        "developer/toolkit.yaml": "59bef472fce6bf6c9207550c170e97041e1bbb46ce6a4a90b0cd576f7c95734d",
+        "work-items/poetry.lock": "11cf9a37d527e0089d124ed2f965dbdc16aed6dff546a342dc4ddd9ac9bd672e",
+        "work-items/pyproject.toml": "76bb9b3ff8d866c0f5ee71e19fef42a2254d41d6fbf805bca389a5d4c5dc25df",
+        "work-items/scripts/verify_fenced_queues.py": "13f18a32dae6b67e4395b1697f22d38e50e16ac5b19fa2235cdbbd16d1f08076",
+        "work-items/src/actions/work_items/_adapters/__init__.py": "866e54892d3d947d5adae7d7e4c00187bcc36823cda51d3f8729cad7871fa369",
+        "work-items/src/actions/work_items/_adapters/_base.py": "ef0e65e896d74185cfec0443cc1e997e83bf446d954a2dd3681336e845084d0c",
+        "work-items/src/actions/work_items/_adapters/_docdb.py": "5187557ff67d73e0cdaac34d9c58f62f325477209d4d15672624b2bb57cb65e4",
+        "work-items/src/actions/work_items/_adapters/_file.py": "b53c59b0eff5c4f28e6e1b506420e7b7632b5cd4473d18a34cc62e06cfaea3b6",
+        "work-items/src/actions/work_items/_adapters/_postgres_fenced.py": "13a3c563be1e75860d75831a13e45edd6bc262221b931d6f5ae4684909563c55",
+        "work-items/src/actions/work_items/_adapters/_redis.py": "18c8b388aa3310265404677ecc2f9b7e9363feaeeecaa56af2ef6327264cdeab",
+        "work-items/src/actions/work_items/_adapters/_sql_review.py": "e23c017f0a165113032e5935e8f32b4abfdf28525a2613cb1dcd81bce745f7ae",
+        "work-items/src/actions/work_items/_adapters/_sqlite.py": "619f93586529126be766f949d317c12c477cf41ae7133257b2994a6e625b3ec4",
+        "work-items/src/actions/work_items/_adapters/_yorko.py": "b3a4a5eae04f209481843c67a937933d72c91a0ee80553495841405762835dc8",
+        "work-items/src/actions/work_items/_fencing.py": "e9d6f7560c432ac9d82727c787a7da8eaf14797bd691572acd414f9822dbe560",
+        "work-items/tests/work_items_tests/test_fenced_queue_conformance.py": "54cb4345a8891223fae40d6a49cc53f85c8533e9618c4de00d94816e41ec14be",
+        "work-items/tests/work_items_tests/test_postgres_fenced_schema.py": "9364270fee927ab0da6a4e3de69edd174949e496d3049b4dfea17d71aa550051",
+        "work-items/tests/work_items_tests/test_sqlite_fencing.py": "a292fb0dc6e2262c5299472a824a1da99ad1e39161621b5c77f168ae5441b288"
+      },
+      "image": "sha256:319d040b5d68e3e5b98a238f0b5d375b4b4d9c5b3a6a9afb0308a8bcf0de72a5",
+      "postgres_version": "postgres (PostgreSQL) 15.19",
+      "counts": {
+        "conformance": {
+          "tests": 45,
+          "skipped": 0,
+          "failures": 0,
+          "errors": 0
+        },
+        "portable": {
+          "tests": 321,
+          "skipped": 38,
+          "failures": 0,
+          "errors": 0
+        }
+      },
+      "artifacts": {
+        "conformance.log": "9e051a28cbe5b0d9853d249d3395b904c3b1fa65f7654ec39828cbe51078aa73",
+        "conformance.xml": "cfedc422f6190555ae973156f2f32937e0cba78fa8f1536f6230ae91efe6ff8f",
+        "portable.log": "44c7912f79b3e824982c16d0ad55fbcd8668eb3260c5ec20094dedba43b2c604",
+        "portable.xml": "2d1582ef0093c263ce4f9906d5b04717d36e04ede3b3d22b0b37fd225a769742",
+        "postgres.log": "6e07d8b9e3948c5a59805a1bca7dd42a347ce4a382d7433aca43b8f704116e7e"
+      }
+    },
+    "junit": {
+      "portable": {
+        "tests": 321,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 38
+      },
+      "conformance": {
+        "tests": 45,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  },
+  "installed": {
+    "receipt": {
+      "status": "PASS",
+      "source": "4389cc09c7d40aab40925e571318fa4cdae95713",
+      "image": "postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81",
+      "cleanup": "PASS",
+      "test_source_sha256": "70d090a7a620a50a71237cff96bdb5eba82cafc248d27763ccd400baf0e2e23a",
+      "test_exit": 0,
+      "artifacts": {
+        "identity.json": "1c84bea1912298fdb4a6c611d332b73a09baf39a8bbc71b72a0eeb12dc66d724",
+        "tests.log": "7e450097b84efca5f02482ca8b1b96411063223a66a583f04ec02cf5cc18061f",
+        "tests.xml": "fd633149cae8b87038eba8948d7a89d73ab3d21b5fae894ad5910bca5b095957"
+      }
+    },
+    "receipt_file": {
+      "path": "/workspace/actions-327-state/evidence/generated/installed/receipt.json",
+      "sha256": "03097e9c0623845e6110ab157afe2b571099862676b7dd6ad017930705bf7e01",
+      "bytes": 585
+    },
+    "junit": {
+      "tests": 210,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "identity": {
+      "actions.server.data_queries.generated": {
+        "path": "/workspace/actions-327-state/generated-installed/venv/lib/python3.12/site-packages/actions/server/data_queries/generated.py",
+        "sha256": "aa4b25f5e4ab4ea3911f9defeaf20a70bf3628299b695f344c9bddd01badfeed"
+      },
+      "actions.server.data_queries.canvas_mcp": {
+        "path": "/workspace/actions-327-state/generated-installed/venv/lib/python3.12/site-packages/actions/server/data_queries/canvas_mcp.py",
+        "sha256": "9947aabbfa681cc5b11d1b511de4f27fdaad9f8329738dbd5de94e2c30800954"
+      },
+      "actions.server.data_queries.review": {
+        "path": "/workspace/actions-327-state/generated-installed/venv/lib/python3.12/site-packages/actions/server/data_queries/review.py",
+        "sha256": "3453361ed990089bff5ace7aa68be58ccfebb374ba07ab35f9ca41ab14e3e2c2"
+      },
+      "actions.server.data_queries.invoice_worker": {
+        "path": "/workspace/actions-327-state/generated-installed/venv/lib/python3.12/site-packages/actions/server/data_queries/invoice_worker.py",
+        "sha256": "f8a916dfd0725a2230c489dd6043eeaa6f3600aceabe5e87d84a1405e4651450"
+      },
+      "actions.server.data_queries._invoice_task": {
+        "path": "/workspace/actions-327-state/generated-installed/venv/lib/python3.12/site-packages/actions/server/data_queries/_invoice_task.py",
+        "sha256": "4f594ff26338d14f03e5f279248cb54394804fa0fec7cf38e9e500761a4b3990"
+      },
+      "actions.server.run_outputs.service": {
+        "path": "/workspace/actions-327-state/generated-installed/venv/lib/python3.12/site-packages/actions/server/run_outputs/service.py",
+        "sha256": "b23d29855082907b18d6f8158a657a9567e31601e92393b13f8bee1a10923eb2"
+      },
+      "actions-runtime": {
+        "version": "1.1.0a3",
+        "wheel_sha256": "551489a00bd441afdf973434b1392b956bebc10025163b731b61c4f3f5055b76",
+        "direct_url": {
+          "archive_info": {
+            "hash": "sha256=551489a00bd441afdf973434b1392b956bebc10025163b731b61c4f3f5055b76",
+            "hashes": {
+              "sha256": "551489a00bd441afdf973434b1392b956bebc10025163b731b61c4f3f5055b76"
+            }
+          },
+          "url": "file:///workspace/actions-327-state/generated-installed/wheels/actions_runtime-1.1.0a3-cp312-cp312-linux_x86_64.whl"
+        }
+      },
+      "actions.work_items": {
+        "path": "/workspace/actions-327-state/generated-installed/venv/lib/python3.12/site-packages/actions/work_items/__init__.py",
+        "sha256": "4259d502917f1b2b157d276bdaa0aa419f23e0772a94ab40b83fa0fa3a29dc01"
+      },
+      "actions.work_items._adapters._sql_review": {
+        "path": "/workspace/actions-327-state/generated-installed/venv/lib/python3.12/site-packages/actions/work_items/_adapters/_sql_review.py",
+        "sha256": "e23c017f0a165113032e5935e8f32b4abfdf28525a2613cb1dcd81bce745f7ae"
+      },
+      "actions-work-items": {
+        "version": "0.5.0a1",
+        "wheel_sha256": "5788f4b346d1dd6c61ba9f68ad30ae2cc56bf9488d22e49bd808e1df49915cd0",
+        "direct_url": {
+          "archive_info": {
+            "hash": "sha256=5788f4b346d1dd6c61ba9f68ad30ae2cc56bf9488d22e49bd808e1df49915cd0",
+            "hashes": {
+              "sha256": "5788f4b346d1dd6c61ba9f68ad30ae2cc56bf9488d22e49bd808e1df49915cd0"
+            }
+          },
+          "url": "file:///workspace/actions-327-state/evidence/generated/final/d72556e7-7034-419b-8484-5249b5db22ca/sdk-wheels/actions_work_items-0.5.0a1-py3-none-any.whl"
+        }
+      }
+    },
+    "identity_receipt": {
+      "path": "/workspace/actions-327-state/evidence/generated/installed/identity.json",
+      "sha256": "1c84bea1912298fdb4a6c611d332b73a09baf39a8bbc71b72a0eeb12dc66d724",
+      "bytes": 3268
+    }
+  },
+  "installed_scope_limit": "Installed Runtime/SDK tests use the explicitly built current Canvas HTML as an immutable staged input. This is not packaged-renderer/browser/native/image acceptance; fresh hosted distribution and resource packaging remain open.",
+  "candidate_build": {
+    "source": "4389cc09c7d40aab40925e571318fa4cdae95713",
+    "archive_sha256": "c1cd1f297b03e110072db5a7866d154a661d75482b446e4a802bf693c204e296",
+    "runtime": "1.1.0a3",
+    "sdk": "0.5.0a1",
+    "rcc_preseed": "/workspace/actions-327-state/generated-installed/source/action_server/src/actions/server/bin/rcc-18.19.3",
+    "rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "source_date_epoch": "1792692885",
+    "configuration": "generated from committed public fixture inputs, no working untracked OAuth module"
+  },
+  "runtime_wheel": {
+    "path": "/workspace/actions-327-state/generated-installed/wheels/actions_runtime-1.1.0a3-cp312-cp312-linux_x86_64.whl",
+    "sha256": "551489a00bd441afdf973434b1392b956bebc10025163b731b61c4f3f5055b76",
+    "bytes": 14478977
+  },
+  "producer_receipt": {
+    "schema": "actions.candidate-sdk-producer/v1",
+    "source_sha": "4389cc09c7d40aab40925e571318fa4cdae95713",
+    "runtime_pyproject_sha256": "af919ed882028a77d19c9c3ef3bcbc03be57147e362436d1dd61ce6dad820fb3",
+    "sdk_pyproject": "[project]\nname = \"actions-work-items\"\nversion = \"0.5.0a1\"\ndescription = \"Robocorp-compatible runtime and FileAdapter with managed local and distributed backends\"\nauthors = [{name = \"Community Contributors\"}]\nlicense = \"Apache-2.0\"\nreadme = \"README.md\"\nrequires-python = \">=3.10,<4.0\"\ndependencies = [\"typing-extensions>=4.6.0\"]\nkeywords = [\"automation\", \"work-items\", \"producer-consumer\", \"rpa\", \"workflow\"]\nclassifiers = [\n    \"Development Status :: 4 - Beta\",\n    \"Intended Audience :: Developers\",\n    \"License :: OSI Approved :: Apache Software License\",\n    \"Operating System :: OS Independent\",\n    \"Programming Language :: Python :: 3\",\n    \"Programming Language :: Python :: 3.10\",\n    \"Programming Language :: Python :: 3.11\",\n    \"Programming Language :: Python :: 3.12\",\n    \"Topic :: Software Development :: Libraries :: Python Modules\",\n]\n\n[project.urls]\nHomepage = \"https://github.com/joshyorko/actions\"\nRepository = \"https://github.com/joshyorko/actions\"\nDocumentation = \"https://github.com/joshyorko/actions/tree/community/work-items\"\nIssues = \"https://github.com/joshyorko/actions/issues\"\n\n[project.optional-dependencies]\npostgres = [\"psycopg[binary]>=3.2,<4\"]\nredis = [\"redis>=4.5.0\"]\ndocdb = [\"pymongo>=4.3.0\"]\ndocumentdb = [\"pymongo>=4.3.0\"]\nyorko = [\"requests>=2.31.0\"]\nall = [\"redis>=4.5.0\", \"pymongo>=4.3.0\", \"requests>=2.31.0\"]\n\n[tool.poetry]\npackages = [\n    {include = \"actions\", from = \"src\"},\n    {include = \"actions_work_items\", from = \"src\"},\n]\n\n[tool.poetry.group.dev.dependencies]\npytest = \"^7.0\"\npytest-asyncio = \"^0.21\"\nruff = \"^0.12.0\"\ntwine = \"^6.1.0\"\nmypy = \"1.17.1\"\npytest-cov = \"5.0.0\"\n\n[build-system]\nrequires = [\"poetry-core>=2.0.0,<3.0.0\"]\nbuild-backend = \"poetry.core.masonry.api\"\n\n[tool.pytest.ini_options]\ntestpaths = [\"tests\"]\npython_files = \"test_*.py\"\npython_functions = \"test_*\"\nasyncio_mode = \"auto\"\nmarkers = [\n    \"fenced_postgres_service: requires the owned PostgreSQL fenced coordination gate\",\n    \"redis: contract requiring the Redis backend\",\n    \"integration: backend integration contract\",\n    \"docdb: contract requiring MongoDB or DocumentDB\",\n    \"persistent_backend_service: requires repository-owned Redis and MongoDB services\",\n]\n\n[tool.ruff]\nline-length = 100\ntarget-version = \"py310\"\n\n[tool.ruff.lint]\nselect = [\"E\", \"F\", \"W\", \"I\", \"UP\", \"B\"]\nignore = [\"E501\"]\n\n[tool.mypy]\nfiles = [\"tests/typecheck/runtime_adapter_calls.py\"]\nmypy_path = \"src\"\nfollow_imports = \"silent\"\nwarn_unused_ignores = true\n",
+    "sdk_pyproject_sha256": "76bb9b3ff8d866c0f5ee71e19fef42a2254d41d6fbf805bca389a5d4c5dc25df",
+    "wheel": {
+      "filename": "actions_work_items-0.5.0a1-py3-none-any.whl",
+      "sha256": "5788f4b346d1dd6c61ba9f68ad30ae2cc56bf9488d22e49bd808e1df49915cd0"
+    }
+  },
+  "wheel_validation": {
+    "detached_clean_public_floor": "PASS unchanged public Core1.0.2/Helper1.0.3 version/URL/SHA; SDK exact staged wheel0.5.0a1; Runtime1.1.0a3",
+    "detached_installed": "PASS all Runtime Python members/origin and SDK RECORD/module/origin; request boundaries26PASS",
+    "publication": "NOT_RUN_PROHIBITED"
+  },
+  "failures_preserved": [
+    {
+      "log": "lifecycle-red.log",
+      "classification": "missing generated composition before implementation"
+    },
+    {
+      "log": "admission-red.log",
+      "classification": "existing immutable admission rejects same-capability new app revision"
+    },
+    {
+      "log": "resource-uri-red.log",
+      "classification": "resource URI lacks immutable bundle identity"
+    },
+    {
+      "log": "projection-red.log",
+      "classification": "missing readonly execution projection"
+    },
+    {
+      "log": "execution-tool-red-valid.log",
+      "classification": "missing app-only readonly result tool"
+    },
+    {
+      "log": "foreign-result-red.log",
+      "classification": "valid JSON output from foreign Run in same app was accepted before explicit Run binding"
+    },
+    {
+      "log": "two-subjects-red.log",
+      "classification": "removing additive app-subject key reproduces immutable admission conflict"
+    },
+    {
+      "log": "output-auth-red.log",
+      "classification": "expected current-entry denial escaped transport authenticator before fail-closed handling"
+    },
+    {
+      "log": "windows-gate-red-second.log",
+      "classification": "CRLF text-pipe control reproduces child exit; binary go newline restores original locking assertions"
+    },
+    {
+      "log": "producer-red.log",
+      "classification": "project-only layout and tampered producer controls fail before producer support"
+    },
+    {
+      "log": "help-version-red.log",
+      "classification": "missing exact-version normalization"
+    },
+    {
+      "log": "ui-execution-red.log",
+      "classification": "missing explicit execution-result UI"
+    },
+    {
+      "log": "browser-first.log",
+      "classification": "fixture setup error"
+    },
+    {
+      "log": "browser-second.log",
+      "classification": "fixture object-root collision; corrected to reuse same existing business authority"
+    },
+    {
+      "log": "frontend-quality-first.log",
+      "classification": "formatting failed before correction"
+    },
+    {
+      "log": "runtime-lint-first.log",
+      "classification": "one test formatting failure"
+    },
+    {
+      "log": "devutils-lint.log",
+      "classification": "inv lint is not a configured Devutils task; canonical toolkit Ruff gate subsequently passed"
+    },
+    {
+      "log": "cibw-installed.log",
+      "classification": "correct rejection: selected staged SDK archive path differed from installed direct_url; installed selected copy and repeated unchanged verifier successfully"
+    }
+  ],
+  "capacity_failure": {
+    "original": "1732 passed,14 skipped,197 deselected,78 errors; first psycopg.errors.DiskFull pg_wal/xlogtemp No space left on device; following recovery-mode fixture errors",
+    "scope": "owned disposable PostgreSQL data tmpfs128MiB, not host disk or production",
+    "repair": "Full mode data512MiB/memory768MiB; focused128/256 unchanged, CPU1/PID128/loopback/pinned image/pull-never and SQL durability unchanged",
+    "original_cleanup": "PASS"
+  },
+  "baseline_static": {
+    "SDK_tree": "ef4da930f352633aac93f691b2aa319817b4a918",
+    "baseline": "28fa0c1125f9b0b0a624660b9c0e891d9e030ab4",
+    "format": "FAIL27files, same baseline; generic Invoke config differs from SDK config",
+    "broad_mypy": "FAIL68errors16files59checked, same baseline; optional/source-port imports, protocol signatures, unused ignores",
+    "required": "PASS toolkit Ruff + declared one-file mypy + concrete four-module mypy",
+    "disposition": "Open diagnostics, no waiver, no unrelated reformat/type cleanup"
+  },
+  "hosted_227c": {
+    "native": "Parent verified run39819000297 all3OS consumer/browser/storage/historyPASS; Canvas candidate-source UbuntuPASS/WinMacSKIP",
+    "wheel": "39819000316 Ubuntu119964902566FAIL sibling /work-items/pyproject.toml absent; WinMaccancelled",
+    "standard": "39819000318: Mac1436pass336skip2errors; Win1416pass351skip5fail2errors; Ubuntu integration2fail131pass53skip; typecheckallPASS, Ubuntu published-Core CanvasPASS",
+    "repairs": "Linux-only FS fixture scope explicit, binary gate newline protocol, parsed wheel-path serialization, exact prerelease help normalization, dedicated browser selection vs strict acceptance, source/wheel-bound producer receipt",
+    "new_head": "PENDING parent monitors fresh hosted runs; no rerun requested"
+  },
+  "hosted_primary_evidence": [
+    {
+      "source": "227c12a64ae448e82123aba7be72b27cb2b9e5f9",
+      "evidence": {
+        "wheel": {
+          "primary_log_saved_in_tool_context": true,
+          "selected_lines": [
+            "2026-10-22T17:04:54.5530896Z FileNotFoundError: [Errno 2] No such file or directory: '/work-items/pyproject.toml'"
+          ]
+        },
+        "mac": {
+          "primary_log_saved_in_tool_context": true,
+          "selected_lines": [
+            "2026-10-22T17:04:33.8344750Z [gw2] [ 29%] ERROR action_server_tests/test_invoice_canvas_mcp.py::test_real_mcp_paging_is_private_scoped_and_revocation_aware[duckdb] ",
+            "2026-10-22T17:04:33.8744430Z         fd = os.open(root, os.O_RDONLY | getattr(os, \"O_DIRECTORY\"))",
+            "2026-10-22T17:04:33.8847580Z [gw2] [ 29%] ERROR action_server_tests/test_invoice_canvas_mcp.py::test_real_mcp_paging_is_private_scoped_and_revocation_aware[postgresql] ",
+            "2026-10-22T17:04:33.9604200Z >           raise RuntimeError(\"filesystem output provider is Linux-only\")",
+            "2026-10-22T17:04:33.9604730Z E           RuntimeError: filesystem output provider is Linux-only",
+            "2026-10-22T17:04:33.9610430Z         fd = os.open(root, os.O_RDONLY | getattr(os, \"O_DIRECTORY\"))",
+            "2026-10-22T17:04:33.9616340Z >           raise RuntimeError(\"filesystem output provider is Linux-only\")",
+            "2026-10-22T17:04:33.9616830Z E           RuntimeError: filesystem output provider is Linux-only",
+            "2026-10-22T17:06:56.6007580Z         fd = os.open(root, os.O_RDONLY | getattr(os, \"O_DIRECTORY\"))",
+            "2026-10-22T17:06:56.6012930Z >           raise RuntimeError(\"filesystem output provider is Linux-only\")",
+            "2026-10-22T17:06:56.6013470Z E           RuntimeError: filesystem output provider is Linux-only",
+            "2026-10-22T17:06:56.6018490Z         fd = os.open(root, os.O_RDONLY | getattr(os, \"O_DIRECTORY\"))",
+            "2026-10-22T17:06:56.6023600Z >           raise RuntimeError(\"filesystem output provider is Linux-only\")",
+            "2026-10-22T17:06:56.6024110Z E           RuntimeError: filesystem output provider is Linux-only",
+            "2026-10-22T17:06:56.6041890Z ERROR action_server_tests/test_invoice_canvas_mcp.py::test_real_mcp_paging_is_private_scoped_and_revocation_aware[duckdb] - RuntimeError: filesystem output provider is Linux-only",
+            "2026-10-22T17:06:56.6043290Z ERROR action_server_tests/test_invoice_canvas_mcp.py::test_real_mcp_paging_is_private_scoped_and_revocation_aware[postgresql] - RuntimeError: filesystem output provider is Linux-only",
+            "2026-10-22T17:06:56.6044230Z ===== 1436 passed, 336 skipped, 16 warnings, 2 errors in 172.87s (0:02:52) ====="
+          ]
+        },
+        "win": {
+          "primary_log_saved_in_tool_context": true,
+          "selected_lines": [
+            "2026-10-22T17:05:42.7811286Z >                       pytest.fail(\"catalog child exited while the writer was held\")\r",
+            "2026-10-22T17:05:42.7812160Z E                       Failed: catalog child exited while the writer was held\r",
+            "2026-10-22T17:05:42.7814363Z [gw0] [ 14%] FAILED action_server_tests\\mcp\\test_alias_history.py::test_catalog_readiness_is_published_after_its_payload_is_complete \r",
+            "2026-10-22T17:05:49.6304272Z >                       pytest.fail(\"catalog child exited while the writer was held\")\r",
+            "2026-10-22T17:05:49.6304840Z E                       Failed: catalog child exited while the writer was held\r",
+            "2026-10-22T17:05:49.6306117Z [gw0] [ 16%] FAILED action_server_tests\\mcp\\test_alias_history.py::test_catalog_serialization_survives_slow_contender_startup \r",
+            "2026-10-22T17:05:50.5023977Z >                       pytest.fail(\"catalog child exited while the writer was held\")\r",
+            "2026-10-22T17:05:50.5024428Z E                       Failed: catalog child exited while the writer was held\r",
+            "2026-10-22T17:05:50.5025553Z [gw0] [ 16%] FAILED action_server_tests\\mcp\\test_alias_history.py::test_concurrent_processes_serialize_empty_history_allocation[True] \r",
+            "2026-10-22T17:05:51.3064170Z >                       pytest.fail(\"catalog child exited while the writer was held\")\r",
+            "2026-10-22T17:05:51.3064630Z E                       Failed: catalog child exited while the writer was held\r",
+            "2026-10-22T17:05:51.3065812Z [gw0] [ 16%] FAILED action_server_tests\\mcp\\test_alias_history.py::test_concurrent_processes_serialize_empty_history_allocation[False] \r",
+            "2026-10-22T17:06:01.2426633Z >       assert str(sdk.resolve()) in package\r",
+            "2026-10-22T17:06:01.2427628Z E       AssertionError: Failed: assert str(sdk.resolve()) in package\r",
+            "2026-10-22T17:06:01.2429360Z E         str(sdk.resolve()) = 'C:\\\\Users\\\\runneradmin\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-runneradmin\\\\pytest-0\\\\popen-gw1\\\\test_candidate_package_install0\\\\actions_work_items-0.5.0a1-py3-none-any.whl'\r",
+            "2026-10-22T17:06:01.2438548Z [gw1] [ 31%] FAILED action_server_tests\\test_dakota_workitems_native_acceptance_harness.py::test_candidate_package_installs_the_exact_sdk_wheel \r",
+            "2026-10-22T17:06:11.4205333Z >       fd = os.open(root, os.O_RDONLY | getattr(os, \"O_DIRECTORY\"))\r",
+            "2026-10-22T17:06:11.4206979Z E       AttributeError: module 'os' has no attribute 'O_DIRECTORY'\r",
+            "2026-10-22T17:06:11.4208941Z [gw0] [ 39%] ERROR action_server_tests\\test_invoice_canvas_mcp.py::test_real_mcp_paging_is_private_scoped_and_revocation_aware[duckdb] \r",
+            "2026-10-22T17:06:11.4441432Z >       fd = os.open(root, os.O_RDONLY | getattr(os, \"O_DIRECTORY\"))\r",
+            "2026-10-22T17:06:11.4443357Z E       AttributeError: module 'os' has no attribute 'O_DIRECTORY'\r",
+            "2026-10-22T17:06:11.4444620Z [gw0] [ 40%] ERROR action_server_tests\\test_invoice_canvas_mcp.py::test_real_mcp_paging_is_private_scoped_and_revocation_aware[postgresql] \r",
+            "2026-10-22T17:10:35.0258484Z >       fd = os.open(root, os.O_RDONLY | getattr(os, \"O_DIRECTORY\"))\r",
+            "2026-10-22T17:10:35.0259540Z E       AttributeError: module 'os' has no attribute 'O_DIRECTORY'\r",
+            "2026-10-22T17:10:35.0264113Z >       fd = os.open(root, os.O_RDONLY | getattr(os, \"O_DIRECTORY\"))\r",
+            "2026-10-22T17:10:35.0265110Z E       AttributeError: module 'os' has no attribute 'O_DIRECTORY'\r",
+            "2026-10-22T17:10:35.0318547Z >                       pytest.fail(\"catalog child exited while the writer was held\")\r",
+            "2026-10-22T17:10:35.0318998Z E                       Failed: catalog child exited while the writer was held\r",
+            "2026-10-22T17:10:35.0396103Z >                       pytest.fail(\"catalog child exited while the writer was held\")\r",
+            "2026-10-22T17:10:35.0396567Z E                       Failed: catalog child exited while the writer was held\r",
+            "2026-10-22T17:10:35.0440697Z >                       pytest.fail(\"catalog child exited while the writer was held\")\r",
+            "2026-10-22T17:10:35.0441345Z E                       Failed: catalog child exited while the writer was held\r",
+            "2026-10-22T17:10:35.6538471Z >                       pytest.fail(\"catalog child exited while the writer was held\")\r",
+            "2026-10-22T17:10:35.6538948Z E                       Failed: catalog child exited while the writer was held\r",
+            "2026-10-22T17:10:35.6544307Z >       assert str(sdk.resolve()) in package\r",
+            "2026-10-22T17:10:35.6544895Z E       AssertionError: Failed: assert str(sdk.resolve()) in package\r",
+            "2026-10-22T17:10:35.6546011Z E         str(sdk.resolve()) = 'C:\\\\Users\\\\runneradmin\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-runneradmin\\\\pytest-0\\\\popen-gw1\\\\test_candidate_package_install0\\\\actions_work_items-0.5.0a1-py3-none-any.whl'\r",
+            "2026-10-22T17:10:35.6564330Z FAILED action_server_tests\\mcp\\test_alias_history.py::test_catalog_readiness_is_published_after_its_payload_is_complete - Failed: catalog child exited while the writer was held\r",
+            "2026-10-22T17:10:35.6565494Z FAILED action_server_tests\\mcp\\test_alias_history.py::test_catalog_serialization_survives_slow_contender_startup - Failed: catalog child exited while the writer was held\r",
+            "2026-10-22T17:10:35.6566651Z FAILED action_server_tests\\mcp\\test_alias_history.py::test_concurrent_processes_serialize_empty_history_allocation[True] - Failed: catalog child exited while the writer was held\r",
+            "2026-10-22T17:10:35.6567831Z FAILED action_server_tests\\mcp\\test_alias_history.py::test_concurrent_processes_serialize_empty_history_allocation[False] - Failed: catalog child exited while the writer was held\r",
+            "2026-10-22T17:10:35.6569104Z FAILED action_server_tests\\test_dakota_workitems_native_acceptance_harness.py::test_candidate_package_installs_the_exact_sdk_wheel - AssertionError: Failed: assert str(sdk.resolve()) in package\r",
+            "2026-10-22T17:10:35.6570602Z   str(sdk.resolve()) = 'C:\\\\Users\\\\runneradmin\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-runneradmin\\\\pytest-0\\\\popen-gw1\\\\test_candidate_package_install0\\\\actions_work_items-0.5.0a1-py3-none-any.whl'\r",
+            "2026-10-22T17:10:35.6576237Z ERROR action_server_tests\\test_invoice_canvas_mcp.py::test_real_mcp_paging_is_private_scoped_and_revocation_aware[duckdb] - AttributeError: module 'os' has no attribute 'O_DIRECTORY'\r",
+            "2026-10-22T17:10:35.6577466Z ERROR action_server_tests\\test_invoice_canvas_mcp.py::test_real_mcp_paging_is_private_scoped_and_revocation_aware[postgresql] - AttributeError: module 'os' has no attribute 'O_DIRECTORY'\r",
+            "2026-10-22T17:10:35.6578326Z = 5 failed, 1416 passed, 351 skipped, 15 warnings, 2 errors in 341.28s (0:05:41) =\r"
+          ]
+        }
+      }
+    },
+    {
+      "source": "227c12a64ae448e82123aba7be72b27cb2b9e5f9",
+      "job_url": "https://github.com/joshyorko/actions/actions/runs/39819000318/job/119964903121",
+      "selected_lines": [
+        "2026-10-22T17:05:41.2898516Z action_server_tests/test_robot_run_inputs.py::test_pinned_rcc_executes_selected_task_with_declared_inputs ",
+        "2026-10-22T17:05:41.2906592Z [gw0] [ 62%] SKIPPED action_server_tests/test_robot_run_inputs.py::test_pinned_rcc_executes_selected_task_with_declared_inputs ",
+        "2026-10-22T17:07:15.8378474Z ['/home/runner/.cache/pypoetry/virtualenvs/actions-runtime-2mfaTL5d-py3.12/bin/python', '-m', 'pytest', '-m', 'not integration_test', '-rfE', '-vv', '--force-regen', '-n', 'auto']",
+        "2026-10-22T17:07:15.8379936Z Calling:  /home/runner/.cache/pypoetry/virtualenvs/actions-runtime-2mfaTL5d-py3.12/bin/python -m pytest -m 'not integration_test' -rfE -vv --force-regen -n auto",
+        "2026-10-22T17:21:16.2723796Z E           Actions Runtime (1.1.0a2)",
+        "2026-10-22T17:21:16.2742512Z E           !! Actions Runtime (1.1.0a2)                                                                                          \tActions Runtime (<version>)                                                                                        ",
+        "2026-10-22T17:21:17.0428194Z E       Failed: Files differ and --force-regen set, regenerating file at:",
+        "2026-10-22T17:21:17.0435745Z >           pytest.fail(\"explicit built Canvas resource required; use verifier --browser\")",
+        "2026-10-22T17:21:17.0436396Z E           Failed: explicit built Canvas resource required; use verifier --browser",
+        "2026-10-22T17:21:17.0471853Z FAILED action_server_tests/test_cli.py::test_help[args0] - Failed: Files differ and --force-regen set, regenerating file at:",
+        "2026-10-22T17:21:17.0473871Z FAILED action_server_tests/test_invoice_canvas_browser.py::test_real_invoice_canvas_browser[duckdb] - Failed: explicit built Canvas resource required; use verifier --browser",
+        "2026-10-22T17:21:17.0474795Z ==== 2 failed, 131 passed, 53 skipped, 1777 deselected in 782.55s (0:13:02) ====",
+        "2026-10-22T17:21:17.5015062Z ['/home/runner/.cache/pypoetry/virtualenvs/actions-runtime-2mfaTL5d-py3.12/bin/python', '-m', 'pytest', '-m', 'integration_test and not native_artifact_test', '-rfE', '-vv', '--force-regen', '-n', '0']",
+        "2026-10-22T17:21:17.5016629Z Calling:  /home/runner/.cache/pypoetry/virtualenvs/actions-runtime-2mfaTL5d-py3.12/bin/python -m pytest -m 'integration_test and not native_artifact_test' -rfE -vv --force-regen -n 0",
+        "2026-10-22T17:21:17.5036069Z subprocess.CalledProcessError: Command '['/home/runner/.cache/pypoetry/virtualenvs/actions-runtime-2mfaTL5d-py3.12/bin/python', '-m', 'pytest', '-m', 'integration_test and not native_artifact_test', '-rfE', '-vv', '--force-regen', '-n', '0']' returned non-zero exit status 1."
+      ]
+    }
+  ],
+  "skip_classifications": {
+    "sdk": {
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "38",
+          "tests": "321",
+          "time": "12.212",
+          "timestamp": "2026-10-22T18:16:35.764848",
+          "hostname": "574b3bded1e6"
+        }
+      ],
+      "skips": [
+        {
+          "type": "pytest.xfail",
+          "reason": "task-4: custom-0.1.6.test_adapters.TestAdapterFactory.test_redis_adapter_requires_dependency",
+          "count": 1
+        },
+        {
+          "type": "pytest.xfail",
+          "reason": "task-4: custom-0.1.6.test_adapters.TestAdapterFactory.test_documentdb_adapter_requires_dependency",
+          "count": 1
+        },
+        {
+          "type": "pytest.xfail",
+          "reason": "task-4: custom-0.1.6.test_adapters.TestSQLiteAdapter.test_database_initialization",
+          "count": 1
+        },
+        {
+          "type": "pytest.xfail",
+          "reason": "task-4: custom-0.1.6.test_adapters.TestSQLiteAdapter.test_reserve_and_release_workflow",
+          "count": 1
+        },
+        {
+          "type": "pytest.xfail",
+          "reason": "task-4: custom-0.1.6.test_adapters.TestSQLiteAdapter.test_file_operations",
+          "count": 1
+        },
+        {
+          "type": "pytest.xfail",
+          "reason": "task-4: custom-0.1.6.test_adapters.TestSQLiteAdapter.test_producer_consumer_workflow",
+          "count": 1
+        },
+        {
+          "type": "pytest.xfail",
+          "reason": "task-4: custom-0.1.6.test_adapters.TestSQLiteAdapter.test_work_item_with_files",
+          "count": 1
+        },
+        {
+          "type": "pytest.xfail",
+          "reason": "task-4: custom-0.1.6.test_adapters.TestSQLiteAdapter.test_error_handling_file_already_exists",
+          "count": 1
+        },
+        {
+          "type": "pytest.xfail",
+          "reason": "task-4: custom-0.1.6.test_adapters.TestSQLiteAdapter.test_custom_output_queue_name",
+          "count": 1
+        },
+        {
+          "type": "pytest.xfail",
+          "reason": "task-4: custom-0.1.6.test_adapters.TestSQLiteAdapter.test_default_output_queue_name_backward_compatibility",
+          "count": 1
+        },
+        {
+          "type": "pytest.skip",
+          "reason": "Redis integration tests require RC_REDIS_URL or localhost:6379",
+          "count": 13
+        },
+        {
+          "type": "pytest.skip",
+          "reason": "DocumentDB integration tests require RC_MONGO_URL or localhost:27017",
+          "count": 15
+        }
+      ]
+    },
+    "runtime_failed": {
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "78",
+          "failures": "0",
+          "skipped": "14",
+          "tests": "1824",
+          "time": "312.788",
+          "timestamp": "2026-10-22T18:19:12.834919+00:00",
+          "hostname": "574b3bded1e6"
+        }
+      ],
+      "skips": [
+        {
+          "type": "pytest.skip",
+          "reason": "Windows only",
+          "count": 6
+        },
+        {
+          "type": "pytest.skip",
+          "reason": "Requires native Windows locking",
+          "count": 1
+        },
+        {
+          "type": "pytest.skip",
+          "reason": "native Windows path resolution",
+          "count": 1
+        },
+        {
+          "type": "pytest.skip",
+          "reason": "Skip package upload test",
+          "count": 3
+        },
+        {
+          "type": "pytest.skip",
+          "reason": "set ACTIONS_REAL_RCC_ARTIFACT_TEST=1",
+          "count": 1
+        },
+        {
+          "type": "pytest.skip",
+          "reason": "Filesystem cannot create this Unix socket fixture",
+          "count": 1
+        },
+        {
+          "type": "pytest.skip",
+          "reason": "set ACTIONS_ROBOT_INPUT_RCC to pinned RCC18.19.3 for actual task-input acceptance",
+          "count": 1
+        }
+      ]
+    },
+    "installed": {
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "210",
+          "time": "141.472",
+          "timestamp": "2026-10-22T18:22:26.531153+00:00",
+          "hostname": "574b3bded1e6"
+        }
+      ],
+      "skips": []
+    },
+    "runtime_recovered": {
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "14",
+          "tests": "1824",
+          "time": "336.705",
+          "timestamp": "2026-10-22T18:28:23.833687+00:00",
+          "hostname": "574b3bded1e6"
+        }
+      ],
+      "skips": [
+        {
+          "type": "pytest.skip",
+          "reason": "Windows only",
+          "count": 6
+        },
+        {
+          "type": "pytest.skip",
+          "reason": "Requires native Windows locking",
+          "count": 1
+        },
+        {
+          "type": "pytest.skip",
+          "reason": "native Windows path resolution",
+          "count": 1
+        },
+        {
+          "type": "pytest.skip",
+          "reason": "Skip package upload test",
+          "count": 3
+        },
+        {
+          "type": "pytest.skip",
+          "reason": "set ACTIONS_REAL_RCC_ARTIFACT_TEST=1",
+          "count": 1
+        },
+        {
+          "type": "pytest.skip",
+          "reason": "Filesystem cannot create this Unix socket fixture",
+          "count": 1
+        },
+        {
+          "type": "pytest.skip",
+          "reason": "set ACTIONS_ROBOT_INPUT_RCC to pinned RCC18.19.3 for actual task-input acceptance",
+          "count": 1
+        }
+      ]
+    }
+  },
+  "evidence_root": "/workspace/actions-327-state/evidence/generated",
+  "logs": {
+    "projection-ref-red.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/projection-ref-red.log",
+      "sha256": "6d67aab979b919c0c09022b3f096a1feed00fb4f0fffaae00f01e79b7415187b",
+      "bytes": 34437
+    },
+    "hosted-regressions-first.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/hosted-regressions-first.log",
+      "sha256": "16c88d7de6c94e4ced1e33b917f9c2820916556d817d859c619469b74dccf76c",
+      "bytes": 165
+    },
+    "entry-red.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/entry-red.log",
+      "sha256": "8858516d5245b06bc6079e9d9394fbe34888a524eed3fe5c434731d1af56a029",
+      "bytes": 12999
+    },
+    "sdk-concrete-typecheck.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/sdk-concrete-typecheck.log",
+      "sha256": "71144743c83babea384888a735db0c4daba3d4d7b7942b6839984bd5c21b52bb",
+      "bytes": 43
+    },
+    "projection-first.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/projection-first.log",
+      "sha256": "4b04226cdb242434a188bec0973a7c397ed54ed55d3c8f1a14647ec166676632",
+      "bytes": 178
+    },
+    "generate-workflows.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/generate-workflows.log",
+      "sha256": "4efb54cf5735c51ad6bcbc78c0c61832e795eb50a56baa7f772d4aed6644a002",
+      "bytes": 753
+    },
+    "admission-red.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/admission-red.log",
+      "sha256": "757d40dcdb49229f9b8e6c44c73bd84baeebfb2a2561c658a5d10ef928249820",
+      "bytes": 12999
+    },
+    "ruff-first.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/ruff-first.log",
+      "sha256": "272d725273490a15c34f167ce943ede909a5364336f6331cfb744c2b024297d9",
+      "bytes": 1802
+    },
+    "producer-red.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/producer-red.log",
+      "sha256": "1b44a47a12583ec164de81776d3d9a7b78c794e792898b9745f777c0510081a4",
+      "bytes": 18190
+    },
+    "runtime-lint-final.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/runtime-lint-final.log",
+      "sha256": "211518d51845ea3e4c991c099addf15480f70dbbedc01b1f0a060df05421c84f",
+      "bytes": 393
+    },
+    "devutils-lint.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/devutils-lint.log",
+      "sha256": "1e90322ffc46b8d8d5fcdd93f57c3115bfdb11ba83076dfb91522797fa5b30f5",
+      "bytes": 24
+    },
+    "output-auth-green.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/output-auth-green.log",
+      "sha256": "e79deea04f5705cc5aa9c442f9d7f4555f777fdce27b7224f3e34eef66a87773",
+      "bytes": 178
+    },
+    "focused-first.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/focused-first.log",
+      "sha256": "a55ee41299dd9553de6416f8f110b658d8cc373aba84b7370d251ddaaf52a6be",
+      "bytes": 159
+    },
+    "fenced.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/fenced.log",
+      "sha256": "8257b7a7acbbbe9c19b3fbfda2c46ca6f3f3a1618e670542dfe44499e175cd86",
+      "bytes": 13834
+    },
+    "windows-gate-red.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/windows-gate-red.log",
+      "sha256": "b3ba20d16614c7a47a4908d66bb4102f49258d08de94fe8ec25467a05899bca5",
+      "bytes": 6365
+    },
+    "recovered-gate.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/recovered-gate.log",
+      "sha256": "cb1599db3a790bd3140e1d1aa13158568ca2e8fc9376b05909f2c4c5852fb7c9",
+      "bytes": 15668
+    },
+    "rcc-first.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/rcc-first.log",
+      "sha256": "aaeecdcb361bd1d7f7445470bb3ffd253c86498a670ccf0537eaa55c2e0f5847",
+      "bytes": 178
+    },
+    "help-version-red.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/help-version-red.log",
+      "sha256": "faa450372b53502dabe8ac96e7d0e3c55b3550cdab9ea55776144823e614d9f6",
+      "bytes": 951
+    },
+    "canvas-build-first.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/canvas-build-first.log",
+      "sha256": "351c54bf5332a1d8b1c4b1e0167fe808eff1fc744e2956911adee99cba342d3c",
+      "bytes": 982
+    },
+    "runtime-docs.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/runtime-docs.log",
+      "sha256": "837e484d51ca9b4f1d693a0be1e3f6a354832e0c511f039d8b09c6d50de33abb",
+      "bytes": 45
+    },
+    "entry-first.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/entry-first.log",
+      "sha256": "13983e0c63c95fed3def316d20643590a59bac81c97eef82bd24abfc65b6b760",
+      "bytes": 177
+    },
+    "lifecycle-red.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/lifecycle-red.log",
+      "sha256": "8068425eebb6ab742d04d199008d368b633c59f96a6061e87c4efe01ef2776b9",
+      "bytes": 2084
+    },
+    "devutils-first.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/devutils-first.log",
+      "sha256": "2034abf8b582be2d8ea7db19d7ff65a6ea34c33794a31ed444978ac0f0daf01a",
+      "bytes": 341
+    },
+    "developer-lint.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/developer-lint.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    },
+    "sdk-required-lint.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/sdk-required-lint.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    },
+    "browser-second.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/browser-second.log",
+      "sha256": "cf1bb9971d3205cd14a48443ac6af80648f86654af80055fe5c551b0a48c625a",
+      "bytes": 159
+    },
+    "runtime-lint-second.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/runtime-lint-second.log",
+      "sha256": "211518d51845ea3e4c991c099addf15480f70dbbedc01b1f0a060df05421c84f",
+      "bytes": 393
+    },
+    "typecheck-first.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/typecheck-first.log",
+      "sha256": "4f8d0b332630d8978fb7e5eaa74df566ec70f3f78f53d8ca69df585dac1885a6",
+      "bytes": 1990
+    },
+    "frontend-quality-second.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/frontend-quality-second.log",
+      "sha256": "d653003ce838391875a917b8504529f8ca8c3c3119de279d1fb4d85089e9fa1b",
+      "bytes": 1267
+    },
+    "bootstrap.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/bootstrap.log",
+      "sha256": "2e5b5b5bc7f0ac877be6d8f84340b19f109b759bb060aecdec55923d5af866c8",
+      "bytes": 14136
+    },
+    "resource-uri-green.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/resource-uri-green.log",
+      "sha256": "37c5500cb504ea68fa427859fb20b8d710038dfb0ada296625d3d1d53d707851",
+      "bytes": 177
+    },
+    "cibw-installed-correct-origin.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/cibw-installed-correct-origin.log",
+      "sha256": "1d19715a6bba4ef0d21b92565f4f4609eacab308358982c74116cc346111826f",
+      "bytes": 70530
+    },
+    "devutils-required-lint.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/devutils-required-lint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "bootstrap-a3.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/bootstrap-a3.log",
+      "sha256": "a7a01ee02cb0dbc757939382b701d098c207a32f221ee6a8d7b12e3e79e0936d",
+      "bytes": 14136
+    },
+    "doctor.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/doctor.log",
+      "sha256": "82e07dc295b9b7540c339c44af27aaefc2161406b7aad2c3db57183a1061f06a",
+      "bytes": 13572
+    },
+    "frontend-full.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/frontend-full.log",
+      "sha256": "6561e412cced419988bbe008e5ca5842c1e5c007bbabf7f6cce7df7459244c9d",
+      "bytes": 312
+    },
+    "sdk-baseline-required-typecheck.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/sdk-baseline-required-typecheck.log",
+      "sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e",
+      "bytes": 42
+    },
+    "cibw-installed.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/cibw-installed.log",
+      "sha256": "042ca0af223b16b56dd8036b64a8372c2bc6c479b5477f07fab4a72d42a00797",
+      "bytes": 66882
+    },
+    "sdk-baseline-required-lint.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/sdk-baseline-required-lint.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    },
+    "sdk-baseline-broad-typecheck.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/sdk-baseline-broad-typecheck.log",
+      "sha256": "eda3daaf1eee68d35153d82bc2c7e3b462e0a1b015ca41ac0174a7521b0467c4",
+      "bytes": 17479
+    },
+    "toolkit.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/toolkit.log",
+      "sha256": "054596802a5d445d8397b0a4071025ba56511ff286970fe34a917845b5f210e7",
+      "bytes": 14596
+    },
+    "execution-tool-first.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/execution-tool-first.log",
+      "sha256": "87f84be26f89f8883a5cca1bdd2d965fabb6e268cb73f8145b2ba4ec57bb174d",
+      "bytes": 20713
+    },
+    "installed-gate.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/installed-gate.log",
+      "sha256": "1990ac3a63d4d795cb829bddd446bb9bbd117a82f593e91d25b7bcc012acb2ce",
+      "bytes": 553
+    },
+    "admission-first.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/admission-first.log",
+      "sha256": "cd2cbcd046550eaebc821f1236138ddce49cf4b9a4b3b06b4a12cdefcb23c2bf",
+      "bytes": 3721
+    },
+    "cibw-sdk-reinstall.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/cibw-sdk-reinstall.log",
+      "sha256": "7d27b9a958ef291e7e3e47feb17b841f4a7d68674fdc942dac4d778cec6e77fe",
+      "bytes": 887
+    },
+    "restart-negative-first.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/restart-negative-first.log",
+      "sha256": "89f14cb490e11d5a1a138605aa46d9f3ef3a344eaf1592b2566390dc63f0ac57",
+      "bytes": 179
+    },
+    "execution-tool-red-valid.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/execution-tool-red-valid.log",
+      "sha256": "ae5e86da899f027c27a0d0167d25072b8662dfd18efb040fcddb40095e41fc97",
+      "bytes": 19578
+    },
+    "foreign-result-red.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/foreign-result-red.log",
+      "sha256": "ede5cdc325e827412f087193299fe0b21e4c204853f9da2464c3c18a47b4ed37",
+      "bytes": 26145
+    },
+    "output-auth-red.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/output-auth-red.log",
+      "sha256": "288793a203afb2595b7027c7ee4a17f94f3fe6c4cf7506cdebfe9d9db41a5457",
+      "bytes": 6645
+    },
+    "runtime-types-final.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/runtime-types-final.log",
+      "sha256": "502fe8dbdb918fdc954fa8497bffb64e549d5842b9ed99e6c467d3f597706c60",
+      "bytes": 1990
+    },
+    "frontend-quality-first.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/frontend-quality-first.log",
+      "sha256": "ca79bec00ff0badb4a0dea1268388259126f4809d4db096c053d822c7530b1f6",
+      "bytes": 833
+    },
+    "projection-ref-green.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/projection-ref-green.log",
+      "sha256": "4c0ea17aa942c9c72ac0c5c04264ebda399cfcce74f8b7f666182ac13b22f00c",
+      "bytes": 178
+    },
+    "sdk-required-typecheck.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/sdk-required-typecheck.log",
+      "sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e",
+      "bytes": 42
+    },
+    "projection-red.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/projection-red.log",
+      "sha256": "b906f48c96d7483f7e559012cb6ad97574affc5d26704ff47796d2693ed80ebf",
+      "bytes": 1483
+    },
+    "toolkit-a3.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/toolkit-a3.log",
+      "sha256": "f904a4fa230be89d7d386f76b6e322c121fbc5d07b9cc0157d5c89c9d575120f",
+      "bytes": 14596
+    },
+    "cibw-clean-floor.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/cibw-clean-floor.log",
+      "sha256": "2c9795f2aa6b4d6b80eed67c71d7623789cbe913f1e99a60aef7c98a57b8abdb",
+      "bytes": 86190
+    },
+    "producer-first.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/producer-first.log",
+      "sha256": "317a5119454afd9ac980c9605af8df9fe774e9bddec30e904dcb3dd605887746",
+      "bytes": 99
+    },
+    "runtime-lint-first.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/runtime-lint-first.log",
+      "sha256": "511172ad8e5674cf7f9423f640dd28289e1bc8413fb7ea0f10849ac19ed48f58",
+      "bytes": 326
+    },
+    "resource-uri-red.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/resource-uri-red.log",
+      "sha256": "64cd0063afb3b964fdc0f47f5e2af9a82d51b89d3ca8ba0e7b1b2afa06552856",
+      "bytes": 1965
+    },
+    "sdk-lock.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/sdk-lock.log",
+      "sha256": "a2428ed4ae02d9dbfff2895449321f5a297182c3fd189cddfe630c6e0fa76747",
+      "bytes": 9
+    },
+    "windows-gate-red-second.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/windows-gate-red-second.log",
+      "sha256": "adac0d8862029b375227d21e8ae20a502055045d0eeafa30cc1eff96737158b1",
+      "bytes": 6391
+    },
+    "browser-third.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/browser-third.log",
+      "sha256": "ea7a3d3c1ee9667fd3ffc998701c9e93a2b2b3f1e4d3115a73ad0ca8e6a8aebe",
+      "bytes": 159
+    },
+    "execution-tool-green.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/execution-tool-green.log",
+      "sha256": "91887da51285bcd170af46a7facc62b87f7066d7f3249f8fcc983e450be7f27d",
+      "bytes": 178
+    },
+    "ui-execution-first.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/ui-execution-first.log",
+      "sha256": "a778849f74bfc84355fdd92294c7308224293c1569e3388f447e04dd7a424030",
+      "bytes": 250
+    },
+    "typecheck-second.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/typecheck-second.log",
+      "sha256": "502fe8dbdb918fdc954fa8497bffb64e549d5842b9ed99e6c467d3f597706c60",
+      "bytes": 1990
+    },
+    "candidate-build.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/candidate-build.log",
+      "sha256": "ed4151aa24d22407194ae604b69705913b30a994a4633067904aaf9887b8c637",
+      "bytes": 184
+    },
+    "ui-execution-download.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/ui-execution-download.log",
+      "sha256": "619cd3bf85567a18263b976b2f61225b227a2a594c8f504b24abcb8a3fb9c6f4",
+      "bytes": 250
+    },
+    "help-version-first.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/help-version-first.log",
+      "sha256": "2b100c3f45fd9447f28f2860e2e3ec21e121270d1baeaab5599cf78d39919ac1",
+      "bytes": 165
+    },
+    "two-subjects-red.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/two-subjects-red.log",
+      "sha256": "beb7c467ebd3f1b444f074466e4103d07f25ccd68029937ccaa427c9e07bece7",
+      "bytes": 5236
+    },
+    "browser-first.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/browser-first.log",
+      "sha256": "9ed30e7dbbb55291760fd0fe32234786fcc3fec8391ef6f99ed0bec033879c7b",
+      "bytes": 159
+    },
+    "runtime-lock.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/runtime-lock.log",
+      "sha256": "da2eb86f12b4dcc841bddc4e00a8fddb70012003765fb417eafb3f6acfe92a7f",
+      "bytes": 1505
+    },
+    "ui-execution-red.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/ui-execution-red.log",
+      "sha256": "7053456f69e69bae91c4c30b9d318d9b92ebb1ba4be7c44b92a87da65c5c8b70",
+      "bytes": 2827
+    },
+    "final-gate.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/final-gate.log",
+      "sha256": "30ec26f0d5f181914badbaf52b906302ab7e0f640a1ba63dc7be386efc2f12f6",
+      "bytes": 17172
+    },
+    "sdk-baseline-format.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/sdk-baseline-format.log",
+      "sha256": "564c3e6e07269b8d4f09520c417bb9961470bc6a4078d9c37e7f05fa2b7b8392",
+      "bytes": 1753
+    },
+    "execution-tool-red.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/execution-tool-red.log",
+      "sha256": "897ddffe3a2374bf3349dac1d6a73e4a116bac8bac3afad979215b72df7e76eb",
+      "bytes": 20703
+    },
+    "canvas-tests-first.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/canvas-tests-first.log",
+      "sha256": "4a099ffdcd80e9e8e65a33870843c9fe9ec4f2ffda9ad3e4ecc518d3ace05ec3",
+      "bytes": 457
+    },
+    "lifecycle-first.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/lifecycle-first.log",
+      "sha256": "8a48569575a15fe2ffb758c516db40e60d5c43ff999c54b47cf09b95c996626f",
+      "bytes": 4466
+    },
+    "two-subjects-green.log": {
+      "path": "/workspace/actions-327-state/evidence/generated/two-subjects-green.log",
+      "sha256": "a7f2fdb20b85ab54cc00657254aa35e575de604229c21df07354ef8633d7cb1f",
+      "bytes": 178
+    }
+  },
+  "retained_inventories": {
+    "installed-cells-inventory.json": {
+      "path": "/workspace/actions-327-state/evidence/generated/installed-cells-inventory.json",
+      "sha256": "6353dbe6ec6f6bfe3b327ffa699fbe042c8ae9bfb23f943c18155b2a8ad882bb",
+      "bytes": 53027
+    },
+    "source-equivalence.json": {
+      "path": "/workspace/actions-327-state/evidence/generated/source-equivalence.json",
+      "sha256": "738aa1b888dc212b8d2170b19adc2fe5905a2be7fd407e0b800878e1bfafa6a2",
+      "bytes": 875
+    },
+    "skip-classifications.json": {
+      "path": "/workspace/actions-327-state/evidence/generated/skip-classifications.json",
+      "sha256": "8834d23500081b4f693c113e787fd73bb05a1b4dbedcc6d019a9736f1236713a",
+      "bytes": 5146
+    },
+    "recovery-capacity.json": {
+      "path": "/workspace/actions-327-state/evidence/generated/recovery-capacity.json",
+      "sha256": "f5a86d843afdbe478072230efd9f6be6b6871578d71ab1f51f646b2c94778ed0",
+      "bytes": 301
+    },
+    "recovered-inventory.json": {
+      "path": "/workspace/actions-327-state/evidence/generated/recovered-inventory.json",
+      "sha256": "a71b328f8664262e8e00a6f94fde3e0529a663c82e4f64296b9762c27e455061"
+    }
+  },
+  "documentation_improvement": {
+    "files": [
+      "docs/skills/repository-operations.md",
+      "docs/skills/work-items.md",
+      "docs/program/actions-next-release-327.md"
+    ],
+    "delta": [
+      "Generated revision bundle/entry guard/admission key/restart and activation rollback contracts; no hidden dispatch",
+      "Readonly exact-Run execution projection and scoped artifact retention/downgrade boundaries",
+      "Cibuildwheel project-only producer metadata and exact expected source/wheel binding",
+      "Required SDK static gates versus reproduced unchanged diagnostic debt",
+      "Measured bounded PostgreSQL full-gate WAL capacity"
+    ],
+    "evidence": [
+      "56 strict generated SQL/RCC/browser cases,210 installed cases",
+      "producer43tests including tamper negatives, detached clean and installed actual wheel proofs",
+      "27/68diagnostics reproduced from unchanged baseline tree",
+      "Original DiskFull traceback and successful larger bounded fixture recovery"
+    ],
+    "stale_guidance_removed": "Next slice and provisional Runtimea2 claims replaced for current checkpoint; older historical receipts remain source-specific",
+    "remaining_uncertainty": "Full host/platform/distribution/restore/general-effects acceptance remains open"
+  },
+  "rollback": [
+    "Deactivate/restore existing immutable app pointer without erasing admitted SQL work or audit; old revision denies new entry until restored",
+    "Disable new dispatch; reconcile/cancel admitted worker states using current code and retain SQL, sealed objects and private journals together",
+    "No SQL migration added; old binaries cannot resume new runtime kinds/envelopes; database downgrade still requires coordinated pre-upgrade backup/restore proof",
+    "Worker artifact retention3600seconds; tests establish bounded retention only, not independent backup or long-term storage"
+  ],
+  "ordered_remaining": [
+    "Review this private generated composition and qualify fresh exact-head native/standard/wheel3OS outcomes; preserve Linux-only feature scope",
+    "Smallest implementation: explicit bounded retry/dead-letter and effect-receipt reconciliation for one synthetic owned effect at generated revision boundary, with duplicate/lost acknowledgement/crash controls",
+    "Authenticated actual ChatGPT E1 NEEDS_OPERATOR; E2 local host is not E1",
+    "Homelab-independent wheels/native/images, configurable registry/storage, SBOM/provenance/checksums, independent retained copies, backup/restore and coordinated rollback",
+    "Optional celld remains NO-GO at24fbd91c9ddd34bec54230e1c3b20e3225061079 pending pinned synthetic storage and upstream/two-node failure gates",
+    "Owner release approval before community merge/tag/publication/deployment/production actions"
+  ],
+  "upstream_disposition": "Existing RCC18.19.3 local-provider HTTP-carrier compatibility report remains draft only at upstream-rcc-local-carrier-draft.md; same-policy explicit filesystem carrier, no trust/security change and no external mutation",
+  "blockers": {
+    "pending": [
+      "Fresh hosted current-head acceptance; real authenticated E1 operator connection; all listed full-release gates"
+    ],
+    "denied": [],
+    "uncertain": [
+      "Original5e55 HTTP500 innerValueError cause unestablished; historical Windows job stderr did not establish its CRLF cause, local control reproduces protocol failure"
+    ]
+  },
+  "boundaries": "No community merge,tag,publication,deployment,production/backend/security/network/credential change, other repository mutation or duplicate writer. Existing untracked OAuth module preserved and excluded; build uses clean committed archive and public generator.",
+  "current_summary": {
+    "runtime_portable": "1810passed14skipped197deselected16warnings",
+    "strict": "105components+128invoice+2browser+56generated,allzeroSkip; overlap is not unique coverage",
+    "sdk": "45conformancezeroSkip;283portablepassed28skipped10xfailed3deselected",
+    "installed": "210passedzeroSkip1warning",
+    "frontend": "280runtimeunitpassed;15Canvaspassed1optionalcrosslanguageskip;qualityandbuildPASS",
+    "static": "Runtime351formatted390typedsources;SDKrequiredlint/1declared/4concretemypyPASS;DevutilsrequiredRuff/developerlintPASS;Devutils261testsPASS;locksdiffPASS",
+    "docs": "RuntimeAPIoutputnotconfigured,invdocsexplicitlyskipped;canonicalguidesandprogramreceiptupdated"
+  },
+  "cleanup_observation": {
+    "owned_labelled_containers": [],
+    "status": "PASS",
+    "PID1_zombies": "pre-existing separately classified; no universal reaping or unrelated process actions"
+  }
+}

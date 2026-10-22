@@ -12,9 +12,12 @@ and qualification. The [SDK/review receipt](evidence/actions-next-327/cloud-revi
 records the provisional installed-candidate admission and bounded exact-result
 review checkpoint. The [worker linkage receipt](evidence/actions-next-327/cloud-worker-20261022.json)
 records the subsequent fixed synthetic invoice task, SQL dispatch/reconciliation,
-actual RCC execution and candidate-SDK CI admission. Issue #327 remains the release authority. The full release
-is **NOT READY**; private component qualification does not establish the linked
-invoice workflow or register a generated app in the Runtime.
+actual RCC execution and candidate-SDK CI admission. The
+[generated revision receipt](evidence/actions-next-327/cloud-generated-20261022.json)
+records the bounded existing-lifecycle composition and current CI fixture repairs.
+Issue #327 remains the release authority. The full release is **NOT READY**; this
+private composition does not register a public application or establish actual
+authenticated host, general worker effects or full distribution acceptance.
 
 ## Ordered cloud continuation
 
@@ -25,22 +28,21 @@ invoice workflow or register a generated app in the Runtime.
 | 3 | Typed input and authorized immutable result | Qualify real DuckDB and PostgreSQL named operations, declared effects, retained source/result identity, limits, cancellation, paging/export and cross-workspace denial on the integrated source. Knowledge's two-provider service cells remain separate. |
 | 4 | Exact-result human review | The bounded SQL slice now binds the sealed result, original input/source and application/deployment revisions; explicit currently authorized approval inserts one fenced Work Item atomically and idempotently. Real SQL/provider, MCP, explicit-click browser and installed-wheel proofs are in the review receipt. Review, Work Item, Run and Attempt stay distinct. Worker retry/dead-letter policy and effect-receipt reconciliation remain open. |
 | 5 | Actual pinned execution and recovery | Bounded private composition now links one approved exact-result Work Item to an idempotent distinct Run/Attempt and executes the fixed invoice task through RCC18.19.3. Four real provider/SQL cells prove dual fencing, atomic completion/output, real controller crash/restart, cancellation, terminal replay and explicit no-launch/completed-private-result reconciliation. Missing/altered journals fail closed; generic effects, retry/dead-letter and arbitrary mid-effect crashes remain open. See the worker receipt for exact source, 130-case strict gate and installed contracts. |
-| 6 | Existing MCP Apps/Canvas and generated revision | Qualify the integrated immutable stage/validate/activate/invoke/restart/rollback path and artifact authorization through the existing renderer and bridge. Repeat the real-engine invoice UI paging/export/reopen and negative authorization cells against that exact union. E2 simulated host remains separate from E1. |
+| 6 | Existing MCP Apps/Canvas and generated revision | Bounded private composition stages and validates the existing renderer with typed invoice inputs, activates one immutable revision, invokes a revision-scoped result, requires explicit exact-result approval, and projects the existing private RCC worker result. Real SQL/provider/RCC and browser tests cover restart, changed activation, rollback, current/revoked actor and scoped artifact readback. It is a private E2 integration, not public app registration, a general compiler or authenticated ChatGPT E1. Exact acceptance and original failures remain in the generated receipt. |
 | 7 | Actual ChatGPT E1 | NEEDS_OPERATOR for an isolated authenticated host connection. Require actual tools/resource/MIME association, bridge/UI action and restart/reconnect receipts. No endpoint registration or host acceptance is implied by this iteration. |
 | 8 | Optional celld | `24fbd91c9ddd34bec54230e1c3b20e3225061079` remains NO-GO evidence only. Require pinned owned synthetic storage, upstream storage prerequisites and isolated two-node crash/takeover/outage/effect/recovery tests before an adapter is admitted. Keep disabled. An unmet gate requires an explicit owner scope decision before release. |
 | 9 | Compatibility and independent distribution | Qualify the complete source union, public aliases, mixed versions, SQLite and service/control-plane PostgreSQL boundaries, native/browser platforms and current package/static gates. Resolve SDK version/Runtime dependency floors; never publish changed bytes under 1.0.4/0.4.4. Produce homelab-independent reproducible wheels/native/images, configurable registry/storage, SBOM/provenance, retained checksums, restore and rollback evidence before owner publication approval. |
 
-The next smallest invoice slice connects the already measured review/worker
-composition to **one existing immutable generated application revision** through
-the current stage/validate/activate/invoke and MCP Apps/Canvas path. Keep explicit
-human approval, current actor authorization and exact result/input/source/app/
-deployment binding; a changed generated revision must invalidate the old decision.
-Prove activate/invoke/restart/rollback and scoped artifact readback against the
-same real providers and SQL authorities. The private worker is not installed as
-a public tool, automatic scheduler, new adapter or general retry engine by this
-checkpoint. Keep Review, Work Item, Run and Attempt distinct.
+The next smallest slice qualifies explicit worker retry/dead-letter and effect
+receipt reconciliation at this generated-revision boundary. Keep the existing SQL
+authorities and current actor/source/result/app/deployment pins; distinguish a
+verified private result journal from an arbitrary external effect. The current
+entry guard rejects stale new calls after activation changes while preserving
+already admitted work and audit. Rollback restores authorized readback of that
+immutable revision without creating another review, Work Item, Run or Attempt.
+No public scheduler or generic exactly-once external-effect claim is admitted.
 
-SDK `0.5.0a1` / Runtime `1.1.0a2` are provisional nonpublishing candidate
+SDK `0.5.0a1` / Runtime `1.1.0a3` are provisional nonpublishing candidate
 identifiers with Runtime dependency `>=0.5.0a1,<0.6.0`. The fixed worker environment
 installs the exact measured SDK wheel. PR wheel fixtures also stage that wheel
 before Runtime resolution; ordinary devinstall preserves its noneditable contract
@@ -57,8 +59,20 @@ were cancelled before any steps; no Mac acceptance or third retry is inferred.
 At that same28fa head, clean wheel run39801884186 failed resolving the unpublished
 SDK, and standard test run39801883728 failed its noneditable SDK assertion plus
 four missing DuckDB imports. The worker receipt preserves those primary logs and
-the local regression/installed-floor evidence for the fixes. Fresh3OS execution,
-standard CI and independent distribution remain required for the changed union.
+the local regression/installed-floor evidence for the fixes. At227c, native run
+39819000297 passed actual consumer/browser/storage/history gates on all three
+OSes; candidate-source Canvas passed only Ubuntu and intentionally skipped
+Windows/macOS. This closes that source's native Mac gap only. Standard run
+39819000318 failed: Mac1436passed/336skipped/2errors; Windows1416passed/351skipped/
+5failed/2errors; Ubuntu integration2failed/131passed/53skipped. Typecheck passed
+all three; Ubuntu published-Core Canvas acceptance passed. The new Linux-only
+filesystem feature remains unqualified on Windows/macOS. Wheel run39819000316
+failed resolving sibling producer metadata inside cibuildwheel's project-only
+mount; later platform wheel legs were cancelled. Current local repairs retain
+source/wheel provenance, parse serialized native wheel paths, use exact binary
+subprocess synchronization and normalize the actual prerelease version. Dedicated
+browser acceptance remains mandatory in its strict verifier and distinct from
+general CI selection. Current pushed-head hosted acceptance is still required.
 
 Remaining order after generated revision integration: generic worker/effect and
 retry/dead-letter recovery proofs; fresh platform/source/package acceptance;
