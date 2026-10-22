@@ -130,6 +130,14 @@ during a run. This Linux source gate does not qualify generated immutable app
 activation, Windows/macOS worker execution, authenticated ChatGPT E1 or release
 publication/restore.
 
+This worker composition adds no schema migration. Rollback requires disabling
+new dispatch first and reconciling or cancelling admitted executions with the
+current owner before switching code. Preserve SQL Review/Work Item/Run/Attempt
+records and their sealed objects/journals together. An older binary does not
+understand the private running `Run.result` dispatch envelope; never let it
+reinterpret or resume those Runs. Existing database-version rollback still
+requires the pre-upgrade database and attachment/evidence backup.
+
 ### PostgreSQL fenced coordination and guarded retry
 
 The #327 candidate adds private `PostgreSQLFencedQueue`, implementing the same
@@ -250,8 +258,9 @@ SQLite schema 6 retains claim metadata through the existing migration path.
 Schema-5 clients reject that database rather than acting as unfenced writers.
 The installed public `actions-work-items==0.4.4` dependency was also tested
 against a candidate schema-6 queue: it rejected the open and the database hash
-remained unchanged. Candidate metadata still says 0.4.4; do not publish these
-new bytes under that version or infer Runtime integration from SDK tests.
+remained unchanged. That historical SQLite checkpoint still used 0.4.4 metadata; its bytes must
+never be published under that identifier. The current provisional versions are
+listed above; the old compatibility receipt does not qualify current Runtime integration.
 Before upgrading a real queue, retain its database and attachment root together;
 rollback to a schema-5 client requires that pre-upgrade backup. No production
 migration is authorized by the candidate tests. Existing queues without fenced
@@ -261,9 +270,10 @@ Run `poetry run pytest tests/work_items_tests/test_sqlite_fencing.py` in the
 prepared Work Items package environment. It covers competing processes,
 owner replacement/reopen, stale outputs, ID-only bypasses and injected SQL
 rollback. The portable suite does not qualify a service-backed implementation.
-Retry/dead-letter policy, exact-result review, effect deduplication, output files,
-Run linkage and real RCC worker execution remain release gates. Do not infer
-those guarantees from unique reservation or Run fencing.
+These standalone queue tests do not qualify exact-result review, Run linkage,
+RCC execution or output files; use the separately measured bounded composition
+above for those claims. Generic retry/dead-letter policy, external-effect
+deduplication and the complete release workflow remain open gates.
 
 ### Artifact and legacy queue boundaries
 

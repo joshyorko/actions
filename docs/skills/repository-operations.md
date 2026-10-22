@@ -4607,7 +4607,8 @@ candidate with an editable import outside the environment prefix.
 The PR wheel fixture builds and stages the exact Work Items SDK alongside Core
 and HTTP Helper before cibuildwheel resolves Runtime dependencies. The explicit
 `--candidate-sdk-wheelhouse` verifier mode binds SDK/Runtime versions to the
-producer pyprojects, verifies the installed SDK's local archive origin, RECORD
+producer pyprojects (SDK `[project].version`, Runtime `[tool.poetry].version`),
+verifies the installed SDK's local archive origin, RECORD
 and Python bytes, and retains public Core/Helper version, URL and SHA checks.
 This flag is PR-only; the default published-floor verifier remains pinned to
 Runtime 1.0.4. Staging unpublished SDK 0.5.0a1 locally is a test prerequisite,

@@ -688,7 +688,11 @@ def select_candidate_sdk(directory: Path, project: Path) -> tuple[Path, str]:
         raise ValueError("Expected exactly one regular candidate SDK wheel")
     wheel = wheels[0]
     sdk_project = project.parent / "work-items" / "pyproject.toml"
-    sdk_version = tomllib.loads(sdk_project.read_text())["tool"]["poetry"]["version"]
+    sdk_contents = tomllib.loads(sdk_project.read_text())
+    sdk_version = (
+        sdk_contents.get("project", {}).get("version")
+        or sdk_contents["tool"]["poetry"]["version"]
+    )
     with zipfile.ZipFile(wheel) as archive:
         metadata = BytesParser().parsebytes(
             archive.read(

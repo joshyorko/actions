@@ -505,7 +505,7 @@ def test_candidate_sdk_version_is_bound_to_source_and_default_runtime_stays_stri
     (root / "work-items").mkdir()
     (project / "pyproject.toml").write_text('[tool.poetry]\nversion="1.1.0a2"\n')
     (root / "work-items" / "pyproject.toml").write_text(
-        '[tool.poetry]\nversion="0.5.0a1"\n'
+        '[project]\nversion="0.5.0a1"\n'
     )
     wheelhouse = tmp_path / "wheels"
     wheelhouse.mkdir()
