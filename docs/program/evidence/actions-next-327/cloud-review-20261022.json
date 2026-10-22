@@ -317,7 +317,8 @@
     "merge_checkout": "4614ab139c5c59627aadd6652c2a3f384cca9935",
     "tree_equals_head": "36e0b5a470d3eb4979d626e1f07707662c1b2a3a",
     "observed": "all3OS consumer2cases HTTP500 Unexpected error(ValueError); published worker SDK0.4.4 observed. Original inner cause not established. Local candidate-wheel native2pass does not retroactively diagnose that exception.",
-    "remaining": "fresh3OS hosted consumer and later skipped binary/browser/storage/history gates; Windows/macOS candidate-source Canvas skipped, Ubuntu passed"
+    "remaining": "fresh3OS hosted consumer and later skipped binary/browser/storage/history gates; Windows/macOS candidate-source Canvas skipped, Ubuntu passed",
+    "current_checkpoint_runs": "Read-only runs lookup for cff8c9e9 returned no new hosted run; fresh platform rerun remains required, not claimed queued or green."
   },
   "source_identity": {
     "committed_inputs": {
@@ -362,11 +363,35 @@
     "Link one approved Work Item to distinct pinned Run/Attempt and execute one synthetic invoice task through actual RCC18.19.3; durable artifact/result plus claim and source lineage.",
     "Prove restart/cancel/stale output, duplicate/lost acknowledgement reconciliation and explicit retry/dead-letter/effect receipt policy across Work Item and Run authorities.",
     "Connect reviewed generated immutable Canvas revision lifecycle to this invoice flow and qualify all authorization boundaries.",
-    "Fresh3OS hosted frozen/Go consumer, browser/storage/history and candidate-source platform acceptance; legacy published template SDK0.4.4 is not candidate-worker admission.",
+    "Fresh3OS hosted frozen/Go consumer, browser/storage/history and candidate-source platform acceptance; legacy published template SDK0.4.4 is not candidate-worker admission. Publication workflow still exercises the strict public1.0.4 canary; candidate release convergence and unpublished SDK acquisition are not waived.",
     "Actual authenticated ChatGPT E1 NEEDS_OPERATOR.",
     "celld24fbd91c9ddd34bec54230e1c3b20e3225061079 remains NO-GO until pinned owned synthetic storage and failure prerequisites; no adapter.",
     "Complete original source identity, homelab-independent distribution, reproducibility/SBOM/provenance, restore/rollback and owner publication gates."
   ],
   "upstream_disposition": "none; Actions-owned admission and test-fixture fixes, no confirmed upstream defect or external report",
-  "prohibited_actions": "No community merge, tag, publication, deployment, production/backend migration, credential manipulation or other repository changes."
+  "prohibited_actions": "No community merge, tag, publication, deployment, production/backend migration, credential manipulation or other repository changes.",
+  "post_validation_release_guard": {
+    "result": "Devutils full suite249passed; ruff passed",
+    "test_file": "devutils/tests/test_actions_runtime_release_line.py",
+    "test_sha256": "79c039d20771f8975ea2790db3bb5a0c6ec3887c42a57a45b823a0c55868ae81",
+    "change": "source identity assertion expects provisional1.1.0a1 while explicitly preserving public canary EXPECTED_RUNTIME1.0.4; no Runtime/SDK implementation byte change",
+    "receipts": [
+      {
+        "path": "/workspace/actions-327-state/evidence/review/devutils-full.log",
+        "sha256": "c706f157009a0d184f838a7a0aa1a103aef5f418220bbebcd814884f08300ed1"
+      },
+      {
+        "path": "/workspace/actions-327-state/evidence/review/devutils-lint.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "initial_failure": {
+      "receipt": {
+        "path": "/workspace/actions-327-state/evidence/review/registry-floor-regressions.log",
+        "sha256": "4a85a122f54c59d27316a291a42917d09abb14f12c60bf8ecfc4f2ec9a9576ee"
+      },
+      "result": "49passed,1failed: stale source metadata1.0.4 assertion"
+    },
+    "head_before_test_change": "cff8c9e9fab5879b9b6ebc1a7d874978469be0f1"
+  }
 }

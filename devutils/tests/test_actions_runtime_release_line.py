@@ -48,8 +48,11 @@ def test_runtime_distribution_and_embedded_rcc_identity_are_explicit():
     ).read_text()
 
     assert pyproject["name"] == "actions-runtime"
-    assert pyproject["version"] == "1.0.4"
-    assert '__version__ = "1.0.4"' in runtime_init
+    assert pyproject["version"] == "1.1.0a1"
+    assert '__version__ = "1.1.0a1"' in runtime_init
+    # Candidate source advances independently of the exact published floor.
+    floor = (ROOT / "action_server/scripts/verify_published_runtime_floor.py").read_text()
+    assert 'EXPECTED_RUNTIME = "1.0.4"' in floor
     assert 'RCC_VERSION = "18.19.3"' in rcc_download
     assert "joshyorko/rcc/releases/download/v{RCC_VERSION}" in rcc_download
 
