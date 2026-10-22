@@ -14,7 +14,10 @@ review checkpoint. The [worker linkage receipt](evidence/actions-next-327/cloud-
 records the subsequent fixed synthetic invoice task, SQL dispatch/reconciliation,
 actual RCC execution and candidate-SDK CI admission. The
 [generated revision receipt](evidence/actions-next-327/cloud-generated-20261022.json)
-records the bounded existing-lifecycle composition and current CI fixture repairs.
+records the bounded existing-lifecycle composition and its CI fixture repairs.
+The [runnable reconciliation receipt](evidence/actions-next-327/cloud-reconciliation-20261022.json)
+records the executed local example/export, bounded owned synthetic effects,
+current platform regressions, exact commands, installed provenance and remaining gates.
 Issue #327 remains the release authority. The full release is **NOT READY**; this
 private composition does not register a public application or establish actual
 authenticated host, general worker effects or full distribution acceptance.
@@ -52,23 +55,25 @@ matrix results do not qualify a new source or extend Linux-only filesystem suppo
 | 1 | Work Item PostgreSQL baseline | This iteration fixes the reproduced concrete-adapter mypy failure and extends owned real PostgreSQL coverage for foreign schema ownership, unknown version/format across operations, and expiry during output publication. Exact input hashes, failed controls and current commands belong to the linked receipt. No Runtime wiring or full release completion follows from SDK conformance. |
 | 2 | Reviewed sibling convergence | Coordinator handed off Canvas `22d9766079f2278350e924b3d44c7b4e00a608a7` and Knowledge `63d9ab6c12fc0158938e565cfca6edf7c2624d38`. Their five-file union was inspected and imported without unrelated history. The convergence receipt distinguishes original sibling tests from added authorization, snapshot and provenance regressions and full union gates. Worker environment failures remain historical failure receipts. |
 | 3 | Typed input and authorized immutable result | Qualify real DuckDB and PostgreSQL named operations, declared effects, retained source/result identity, limits, cancellation, paging/export and cross-workspace denial on the integrated source. Knowledge's two-provider service cells remain separate. |
-| 4 | Exact-result human review | The bounded SQL slice now binds the sealed result, original input/source and application/deployment revisions; explicit currently authorized approval inserts one fenced Work Item atomically and idempotently. Real SQL/provider, MCP, explicit-click browser and installed-wheel proofs are in the review receipt. Review, Work Item, Run and Attempt stay distinct. Worker retry/dead-letter policy and effect-receipt reconciliation remain open. |
+| 4 | Exact-result human review | The bounded SQL slice now binds the sealed result, original input/source and application/deployment revisions; explicit currently authorized approval inserts one fenced Work Item atomically and idempotently. Real SQL/provider, MCP, explicit-click browser and installed-wheel proofs are in the review receipt. Review, Work Item, Run and Attempt stay distinct. Owned synthetic retry/dead-letter/effect reconciliation is now separately qualified; generic target contracts and scheduling remain open. |
 | 5 | Actual pinned execution and recovery | Bounded private composition now links one approved exact-result Work Item to an idempotent distinct Run/Attempt and executes the fixed invoice task through RCC18.19.3. Four real provider/SQL cells prove dual fencing, atomic completion/output, real controller crash/restart, cancellation, terminal replay and explicit no-launch/completed-private-result reconciliation. Missing/altered journals fail closed; generic effects, retry/dead-letter and arbitrary mid-effect crashes remain open. See the worker receipt for exact source, 130-case strict gate and installed contracts. |
 | 6 | Existing MCP Apps/Canvas and generated revision | Bounded private composition stages and validates the existing renderer with typed invoice inputs, activates one immutable revision, invokes a revision-scoped result, requires explicit exact-result approval, and projects the existing private RCC worker result. Real SQL/provider/RCC and browser tests cover restart, changed activation, rollback, current/revoked actor and scoped artifact readback. It is a private E2 integration, not public app registration, a general compiler or authenticated ChatGPT E1. Exact acceptance and original failures remain in the generated receipt. |
 | 7 | Actual ChatGPT E1 | NEEDS_OPERATOR for an isolated authenticated host connection. Require actual tools/resource/MIME association, bridge/UI action and restart/reconnect receipts. No endpoint registration or host acceptance is implied by this iteration. |
 | 8 | Optional celld | `24fbd91c9ddd34bec54230e1c3b20e3225061079` remains NO-GO evidence only. Require pinned owned synthetic storage, upstream storage prerequisites and isolated two-node crash/takeover/outage/effect/recovery tests before an adapter is admitted. Keep disabled. An unmet gate requires an explicit owner scope decision before release. |
 | 9 | Compatibility and independent distribution | Qualify the complete source union, public aliases, mixed versions, SQLite and service/control-plane PostgreSQL boundaries, native/browser platforms and current package/static gates. Resolve SDK version/Runtime dependency floors; never publish changed bytes under 1.0.4/0.4.4. Produce homelab-independent reproducible wheels/native/images, configurable registry/storage, SBOM/provenance, retained checksums, restore and rollback evidence before owner publication approval. |
 
-The next smallest slice qualifies explicit worker retry/dead-letter and effect
-receipt reconciliation at this generated-revision boundary. Keep the existing SQL
-authorities and current actor/source/result/app/deployment pins; distinguish a
-verified private result journal from an arbitrary external effect. The current
+The owned synthetic retry/dead-letter slice is now qualified, including a durable
+target-close barrier before failure publication. The runnable local experiment
+and noneditable export execute real RCC after explicit exact-result approval.
+Next, review fresh hosted results and qualify the cold distribution/operator E1
+boundaries separately. Keep existing SQL authorities and actor/source/result/app/
+deployment pins; a verified private journal does not prove arbitrary effects. The current
 entry guard rejects stale new calls after activation changes while preserving
 already admitted work and audit. Rollback restores authorized readback of that
 immutable revision without creating another review, Work Item, Run or Attempt.
 No public scheduler or generic exactly-once external-effect claim is admitted.
 
-SDK `0.5.0a1` / Runtime `1.1.0a3` are provisional nonpublishing candidate
+SDK `0.5.0a1` / Runtime `1.1.0a4` are provisional nonpublishing candidate
 identifiers with Runtime dependency `>=0.5.0a1,<0.6.0`. The fixed worker environment
 installs the exact measured SDK wheel. PR wheel fixtures also stage that wheel
 before Runtime resolution; ordinary devinstall preserves its noneditable contract
