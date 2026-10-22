@@ -4050,6 +4050,72 @@ The optional `data_binding` field is omitted from legacy canonical admissions,
 preserving their stored request fingerprints. New data-bound admissions are
 unknown to older binaries and must fail closed there.
 
+### Bounded Knowledge collection provider proof
+
+`action_server/tests/action_server_tests/test_knowledge_collections.py` runs
+each provider-backed collection contract against both DuckDB and PostgreSQL.
+Its PostgreSQL fixture reads the dedicated test DSN from
+`ACTIONS_INVOICE_TEST_POSTGRES`, creates a unique `actions_knowledge_test_*`
+schema, points the provider connection's `search_path` at that schema, and drops
+only that owned schema afterward. Use a task-owned synthetic database; do not
+point this fixture at a shared or production database. Set
+`ACTIONS_REQUIRE_INVOICE_PROVIDERS=1` so a missing DSN fails instead of
+silently skipping the PostgreSQL parametrizations.
+
+After the RCC Doctor → Bootstrap → ToolkitTest sequence, run the focused suite
+from `action_server/`:
+
+```bash
+poetry run pytest tests/action_server_tests/test_knowledge_collections.py
+```
+
+The provider-backed
+cases exercise typed ingestion, source-version provenance, bounded search,
+persisted revocation, schema/type rejection, and fail-closed stale or missing
+ingest behavior. Separate tests cover cross-Workspace denial before provider
+access, path escape and direct symlink rejection, searchable terms, and strict
+pagination bounds. The revocation case creates a new collection service but
+reuses the provider object; it proves persisted database state across service
+reconstruction, not process restart or fresh-provider recovery. A provider
+skip is not conformance evidence, and the SQLite/control-plane PostgreSQL
+gates do not substitute for this real PostgreSQL provider contract.
+
+Ingestion requires both current read and management authority before reading
+source files or publishing provider state; read-only access does not authorize
+replacement of a collection. Source versions use a domain-separated,
+length-prefixed name/content encoding. NUL-delimited concatenation is ambiguous
+when document bytes contain separators, so it cannot establish file-boundary
+identity. Earlier unpublished candidate bindings need recomputed versions and
+explicit reingestion to use this encoding; no automatic migration is performed.
+
+Metadata validation and document selection must use one engine snapshot. DuckDB
+opens a read transaction; PostgreSQL uses a transaction-local REPEATABLE READ,
+READ ONLY transaction. The concurrent-reingestion regression schedules a real
+second writer connection between the metadata and document reads and requires
+the original complete result, rather than a falsely empty old-version result.
+This pins an already-open read; persisted revocation rejects later reads and
+does not recall an authorized in-flight snapshot. No mock engine or SQLite
+substitute qualifies this provider gate. File ingestion still reads each trusted
+operator-selected file before checking its aggregate byte budget; preallocation
+I/O bounds and crash/process-restart recovery remain separate work.
+
+Canonical RCC `InvoiceQueryTest` now runs both lifecycle/Knowledge component
+suites with zero allowed skips before its existing provider/output suite. The
+receipt records loaded module paths and hashes and rejects editable imports
+outside the selected checkout before starting PostgreSQL. Always bootstrap each
+exact-source worktree into its own package-local `.venv`; sharing the prepared
+RCC toolchain cache does not authorize reusing another checkout's editable
+package environment. Successful setup with the checked-in lock and pinned
+toolchain establishes this environment only; it does not diagnose a different
+worker's earlier Poetry failure from successful PyPI metadata requests alone.
+
+Isolate `ROBOTS_HOME` as well as `ACTIONS_HOME` and `ROBOCORP_HOME` for cloud CLI
+tests. Runtime's robot environment store uses the separate `ROBOTS_HOME` setting
+and otherwise creates `~/.robots`; the other two home settings do not redirect
+that path. On a read-only host home this can fail before project, packaging or
+redaction assertions run. Use a task-owned writable robot store, preserve the
+original failures, and rerun the actual CLI cases before calling setup fixed.
+
 NDJSON materialization uses the existing provisional/sealed/final Run-output
 service, including its current fence and grant checks. Paging resolves that
 authorized immutable output on every request; export uses the same resolver.
@@ -4077,6 +4143,26 @@ fingerprints. This is a private result-binding seam, not a generated app,
 activated revision, general CanvasSpec, connected template, MCP bridge or E1
 claim. The existing Canvas template still intentionally returns no artifact
 until its public app/principal binding and tool routing are implemented.
+
+`CanvasRevisionStore` is a separate private lifecycle primitive. Its
+`stage`, `activate`, `rollback` and `pin_active` calls require a server-derived
+`Actor`; do not restore actorless compatibility overloads. Each operation
+supplies the exact workspace, deployment revision and app scope to the server
+authorization callback. Staging checks authorization before validation or
+storage; activation and rollback check it before pointer mutation. `pin_active`
+first resolves the current pointer, then authorizes that exact revision before
+reading its files. Staging validates bounded relative paths and app contents,
+stores files under a content digest, then re-reads and hashes even an existing
+digest path. Activation uses a SQLite immediate transaction and
+expected-current compare-and-swap; rollback also checks the caller's expected
+active revision and separately authorizes the exact revision being restored
+before changing the pointer. Portable resource names and workspace path
+components reject drive-qualified paths before filesystem access. Tests should
+retain negative actor/workspace/deployment cases,
+pinned bytes across activation, restart/rollback, tamper rejection, and an
+unchanged active pointer after authorization or compare-and-swap rejection.
+These source-level lifecycle primitives do not themselves register a generated
+app, authorize an MCP host, or establish ChatGPT acceptance.
 
 For reproducible local distributions, place the publisher-digest-verified pinned
 RCC file in `action_server/src/actions/server/bin` before Poetry inventories

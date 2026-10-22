@@ -68,6 +68,9 @@ def main():
         ROOT / "action_server/src/actions/server/mcp/setup_mcp_server_v2.py",
         ROOT / "action_server/src/actions/server/_server.py",
         ROOT / "action_server/src/actions/server/_api_action_routes.py",
+        ROOT / "action_server/src/actions/server/canvas_lifecycle.py",
+        ROOT / "action_server/tests/action_server_tests/test_canvas_lifecycle.py",
+        ROOT / "action_server/tests/action_server_tests/test_knowledge_collections.py",
     ]
     receipt["inputs"] = {
         str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
@@ -75,6 +78,30 @@ def main():
     }
     container = None
     try:
+        # Editable environments belong to one exact checkout. Hashing this tree
+        # does not prove that Poetry imports it, so reject another checkout first.
+        probe = """
+import hashlib, importlib, json, sys
+from pathlib import Path
+source = Path(sys.argv[1]).resolve()
+identities = {}
+for name in ('actions.server.canvas_lifecycle', 'actions.server.data_queries.knowledge',
+             'actions.server.data_queries.invoices', 'actions.server.run_outputs.service'):
+    module = importlib.import_module(name)
+    path = Path(module.__file__).resolve()
+    if not path.is_relative_to(source):
+        raise RuntimeError('Runtime module belongs to another source checkout')
+    identities[name] = {'path': str(path), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()}
+print(json.dumps(identities))
+"""
+        receipt["module_identity"] = json.loads(
+            command(
+                "poetry", "run", "python", "-c", probe,
+                str(ROOT / "action_server/src"),
+                cwd=ROOT / "action_server",
+                env=package_environment(ROOT / "action_server"),
+            )
+        )
         receipt["image"] = command(
             "docker", "image", "inspect", args.image, "--format", "{{.Id}}"
         )
@@ -142,6 +169,10 @@ def main():
                     p.read_bytes()
                 ).hexdigest()
         suites = {
+            "components": [
+                "tests/action_server_tests/test_canvas_lifecycle.py",
+                "tests/action_server_tests/test_knowledge_collections.py",
+            ],
             "invoice": [
                 "tests/action_server_tests/test_invoice_providers.py",
                 "tests/action_server_tests/test_invoice_run_outputs.py",
@@ -188,7 +219,7 @@ def main():
                 not cases
                 or counts["failures"]
                 or counts["errors"]
-                or (label in ("invoice", "browser") and counts["skipped"])
+                or (label in ("components", "invoice", "browser") and counts["skipped"])
             ):
                 raise RuntimeError("JUnit did not prove the required gate")
         receipt["status"] = "PASS"
