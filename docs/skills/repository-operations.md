@@ -1,5 +1,15 @@
 # Repository Operations
 
+## Cloud source handoff
+
+Checkpoint each writer branch separately; never fold a worker's unreviewed source
+into the release branch during synchronization. Archive non-sensitive dirty files
+outside Git, preserve excluded private/generated files in place, and stage only
+the reviewed allowlist. Record failed and skipped checks without fixing features
+in a migration-only lane. Push without force and verify each exact remote SHA.
+Cloud tasks consume those immutable remote SHAs and the authoritative issue's
+handoff, not local worktree paths or thread goal statuses as acceptance evidence.
+
 ## Recovering a vanished release worktree
 
 Verify the registered worktrees, exact branch ref and destination absence before

@@ -31,6 +31,35 @@ from .._types import JSONType, State
 SCHEMA_VERSION = 1
 FORMAT = "actions.work-items.fenced-postgresql/v1"
 _CLOCK_MS = "floor(extract(epoch FROM clock_timestamp())*1000)::bigint"
+_COLUMN_TYPES = {
+    "fenced_queue_schema": {
+        "singleton": ("integer", "NO"),
+        "version": ("integer", "NO"),
+        "format": ("text", "NO"),
+    },
+    "work_items": {
+        "id": ("text", "NO"),
+        "queue_name": ("text", "NO"),
+        "parent_id": ("text", "YES"),
+        "state": ("text", "NO"),
+        "payload": ("jsonb", "YES"),
+        "error_message": ("text", "YES"),
+        "created_at": ("timestamp with time zone", "NO"),
+        "updated_at": ("timestamp with time zone", "NO"),
+        "reserved_at": ("timestamp with time zone", "YES"),
+        "released_at": ("timestamp with time zone", "YES"),
+        "claim_owner": ("text", "YES"),
+        "claim_epoch": ("bigint", "NO"),
+        "claim_deadline_ms": ("bigint", "YES"),
+    },
+    "actions_fenced_retry_v1": {
+        "item_id": ("text", "NO"),
+        "epoch": ("bigint", "NO"),
+        "record": ("jsonb", "NO"),
+        "format": ("text", "NO"),
+        "created_at": ("timestamp with time zone", "NO"),
+    },
+}
 
 
 class PostgreSQLFencedQueue:
@@ -90,9 +119,23 @@ class PostgreSQLFencedQueue:
         ).fetchone()
         if row is None or row["version"] != SCHEMA_VERSION or row["format"] != FORMAT:
             raise ValueError("Unsupported fenced PostgreSQL schema; no automatic migration")
-        present = conn.execute("SELECT to_regclass(%s) AS present", (self._retry_log,)).fetchone()
-        if present is None or present["present"] is None:
-            raise ValueError("Incomplete fenced PostgreSQL schema; no automatic migration")
+        # Prevent an ALTER/DROP between shape validation and the guarded write;
+        # ACCESS SHARE permits concurrent queue writers and row-level claims.
+        conn.execute(
+            f"LOCK TABLE {self._metadata},{self._table},{self._retry_log} IN ACCESS SHARE MODE"
+        )
+        rows = conn.execute(
+            "SELECT table_name,column_name,data_type,is_nullable FROM information_schema.columns WHERE table_schema=%s AND table_name=ANY(%s::text[])",
+            (self._schema, list(_COLUMN_TYPES)),
+        ).fetchall()
+        observed = {name: {} for name in _COLUMN_TYPES}
+        for column in rows:
+            observed[column["table_name"]][column["column_name"]] = (
+                column["data_type"],
+                column["is_nullable"],
+            )
+        if observed != _COLUMN_TYPES:
+            raise ValueError("Unsupported fenced PostgreSQL column layout; no automatic migration")
 
     def initialize_empty_schema(self) -> None:
         """Initialize only an empty schema owned by this connection's DB role.

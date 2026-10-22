@@ -79,3 +79,28 @@ def test_initialization_requires_existing_schema_and_is_repeatable(postgres_back
 def test_schema_identifier_rejects_sql_before_connecting():
     with pytest.raises(ValueError, match="canonical dedicated schema"):
         PostgreSQLFencedQueue("unusable-synthetic-dsn", schema="public; DROP TABLE work_items")
+
+
+def test_matching_version_does_not_adopt_unknown_column_layout(postgres_backend):
+    import psycopg
+    from psycopg import sql
+
+    queue = postgres_backend.queue
+    item = queue.seed_input({"retained": True})
+    with psycopg.connect(queue._dsn) as conn:
+        conn.execute(
+            sql.SQL("ALTER TABLE {}.work_items ADD COLUMN unreviewed TEXT").format(
+                sql.Identifier(queue._schema)
+            )
+        )
+    with pytest.raises(ValueError, match="column layout"):
+        queue.initialize_empty_schema()
+    with pytest.raises(ValueError, match="column layout"):
+        queue.reserve_fenced(str(uuid4()), lease_seconds=30)
+    with psycopg.connect(queue._dsn) as conn:
+        assert conn.execute(
+            sql.SQL("SELECT state,claim_epoch FROM {}.work_items WHERE id=%s").format(
+                sql.Identifier(queue._schema)
+            ),
+            (item,),
+        ).fetchone() == ("PENDING", 0)
