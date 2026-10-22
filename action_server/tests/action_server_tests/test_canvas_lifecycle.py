@@ -4,13 +4,13 @@ from pathlib import Path
 
 import pytest
 
-from actions.server.run_outputs.types import Actor
 from actions.server.canvas_lifecycle import (
     CanvasAuthorizationError,
     CanvasResourceGrant,
     CanvasRevisionError,
     CanvasRevisionStore,
 )
+from actions.server.run_outputs.types import Actor
 
 WORKSPACE = "workspace-a"
 DEPLOYMENT = "sha256:" + "d" * 64
@@ -60,15 +60,14 @@ def test_stage_activate_pin_restart_and_rollback(tmp_path):
     first = store.stage(
         ACTOR, WORKSPACE, DEPLOYMENT, APP_ID, {"app.json": b'{"version":1}'}
     )
-    assert validated == [
-        ("invoice-review", {"app.json": b'{"version":1}'})
-    ]
+    assert validated == [("invoice-review", {"app.json": b'{"version":1}'})]
     store.activate(
         ACTOR, WORKSPACE, DEPLOYMENT, APP_ID, first.revision_id, expected_current=None
     )
     pinned = store.pin_active(ACTOR, WORKSPACE, DEPLOYMENT, APP_ID)
 
     second = store.stage(
+        ACTOR,
         WORKSPACE,
         DEPLOYMENT,
         APP_ID,
@@ -158,7 +157,29 @@ def test_resource_read_requires_server_authorized_exact_revision(tmp_path):
     assert store.read_resource(grant(revision.revision_id), "view.html") == b"<p>ok</p>"
     with pytest.raises(CanvasAuthorizationError):
         store.read_resource(
+            CanvasResourceGrant(
+                actor=OTHER_ACTOR,
+                workspace_id=WORKSPACE,
+                deployment_revision_id=DEPLOYMENT,
+                app_id=APP_ID,
+                app_revision_id=revision.revision_id,
+            ),
+            "view.html",
+        )
+    with pytest.raises(CanvasAuthorizationError):
+        store.read_resource(
             grant(revision.revision_id, workspace="workspace-b"), "view.html"
+        )
+    with pytest.raises(CanvasAuthorizationError):
+        store.read_resource(
+            CanvasResourceGrant(
+                actor=ACTOR,
+                workspace_id=WORKSPACE,
+                deployment_revision_id="sha256:" + "e" * 64,
+                app_id=APP_ID,
+                app_revision_id=revision.revision_id,
+            ),
+            "view.html",
         )
     with pytest.raises(CanvasAuthorizationError):
         store.read_resource(grant(revision.revision_id), "missing.html")
@@ -168,21 +189,39 @@ def test_resource_read_requires_server_authorized_exact_revision(tmp_path):
 
 def test_revision_is_bound_to_exact_workspace_and_deployment(tmp_path):
     store, _, _ = make_store(tmp_path / "canvas")
-    revision = store.stage(WORKSPACE, DEPLOYMENT, APP_ID, {"app.json": b"one"})
-    store.activate(WORKSPACE, DEPLOYMENT, APP_ID, revision.revision_id, expected_current=None)
+    revision = store.stage(ACTOR, WORKSPACE, DEPLOYMENT, APP_ID, {"app.json": b"one"})
+    store.activate(
+        ACTOR,
+        WORKSPACE,
+        DEPLOYMENT,
+        APP_ID,
+        revision.revision_id,
+        expected_current=None,
+    )
     with pytest.raises(CanvasRevisionError, match="app has no active revision"):
-        store.pin_active("workspace-b", DEPLOYMENT, APP_ID)
+        store.pin_active(ACTOR, "workspace-b", DEPLOYMENT, APP_ID)
     with pytest.raises(CanvasRevisionError, match="app has no active revision"):
-        store.pin_active(WORKSPACE, "sha256:" + "e" * 64, APP_ID)
+        store.pin_active(ACTOR, WORKSPACE, "sha256:" + "e" * 64, APP_ID)
 
 
 def test_denied_stage_and_activation_leave_pointer_unchanged(tmp_path):
     store, _, _ = make_store(tmp_path / "canvas", allowed_workspace="workspace-b")
     with pytest.raises(CanvasAuthorizationError):
-        store.stage(WORKSPACE, DEPLOYMENT, APP_ID, {"app.json": b"denied"})
+        store.stage(ACTOR, WORKSPACE, DEPLOYMENT, APP_ID, {"app.json": b"denied"})
 
     allowed, _, _ = make_store(tmp_path / "canvas-allowed")
-    staged = allowed.stage(WORKSPACE, DEPLOYMENT, APP_ID, {"app.json": b"ok"})
+    first = allowed.stage(ACTOR, WORKSPACE, DEPLOYMENT, APP_ID, {"app.json": b"first"})
+    allowed.activate(
+        ACTOR,
+        WORKSPACE,
+        DEPLOYMENT,
+        APP_ID,
+        first.revision_id,
+        expected_current=None,
+    )
+    staged = allowed.stage(
+        ACTOR, WORKSPACE, DEPLOYMENT, APP_ID, {"app.json": b"second"}
+    )
     denied = CanvasRevisionStore(
         tmp_path / "canvas-allowed",
         validator=lambda app_id, files: None,
@@ -190,20 +229,32 @@ def test_denied_stage_and_activation_leave_pointer_unchanged(tmp_path):
     )
     with pytest.raises(CanvasAuthorizationError):
         denied.activate(
+            ACTOR,
             WORKSPACE,
             DEPLOYMENT,
             APP_ID,
             staged.revision_id,
-            expected_current=None,
+            expected_current=first.revision_id,
         )
-    with pytest.raises(CanvasRevisionError, match="app has no active revision"):
-        allowed.pin_active(WORKSPACE, DEPLOYMENT, APP_ID)
+    assert (
+        allowed.pin_active(ACTOR, WORKSPACE, DEPLOYMENT, APP_ID).revision_id
+        == first.revision_id
+    )
 
 
 def test_tampered_revision_is_rejected_on_pinned_invocation(tmp_path):
     store, _, _ = make_store(tmp_path / "canvas")
-    revision = store.stage(WORKSPACE, DEPLOYMENT, APP_ID, {"app.json": b"original"})
-    store.activate(WORKSPACE, DEPLOYMENT, APP_ID, revision.revision_id, expected_current=None)
+    revision = store.stage(
+        ACTOR, WORKSPACE, DEPLOYMENT, APP_ID, {"app.json": b"original"}
+    )
+    store.activate(
+        ACTOR,
+        WORKSPACE,
+        DEPLOYMENT,
+        APP_ID,
+        revision.revision_id,
+        expected_current=None,
+    )
     target = (
         tmp_path
         / "canvas"

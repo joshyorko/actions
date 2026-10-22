@@ -4068,6 +4068,23 @@ activated revision, general CanvasSpec, connected template, MCP bridge or E1
 claim. The existing Canvas template still intentionally returns no artifact
 until its public app/principal binding and tool routing are implemented.
 
+`CanvasRevisionStore` is a separate private lifecycle primitive. Its
+`stage`, `activate`, `rollback` and `pin_active` calls require a server-derived
+`Actor`; do not restore actorless compatibility overloads. Each operation
+supplies the exact workspace, deployment revision and app scope to the server
+authorization callback. Staging checks authorization before validation or
+storage; activation and rollback check it before pointer mutation. `pin_active`
+first resolves the current pointer, then authorizes that exact revision before
+reading its files. Staging validates bounded relative paths and app contents,
+stores files under a content digest, then re-reads and hashes even an existing
+digest path. Activation uses a SQLite immediate transaction and
+expected-current compare-and-swap; rollback also checks the caller's expected
+active revision. Tests should retain negative actor/workspace/deployment cases,
+pinned bytes across activation, restart/rollback, tamper rejection, and an
+unchanged active pointer after authorization or compare-and-swap rejection.
+These source-level lifecycle primitives do not themselves register a generated
+app, authorize an MCP host, or establish ChatGPT acceptance.
+
 For reproducible local distributions, place the publisher-digest-verified pinned
 RCC file in `action_server/src/actions/server/bin` before Poetry inventories
 either format. A cold `poetry build` was observed to create an sdist without RCC,

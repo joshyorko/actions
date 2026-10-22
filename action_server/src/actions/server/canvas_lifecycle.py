@@ -149,7 +149,7 @@ class CanvasRevisionStore:
             raise CanvasRevisionError("content-addressed revision mismatch")
         with closing(self._connect()) as connection:
             connection.execute(
-                "INSERT OR IGNORE INTO canvas_revision(" 
+                "INSERT OR IGNORE INTO canvas_revision("
                 "workspace_id, deployment_revision_id, app_id, revision_id, state) "
                 "VALUES (?, ?, ?, ?, 'staged')",
                 (workspace_id, deployment_revision_id, app_id, revision_id),
@@ -351,9 +351,7 @@ class CanvasRevisionStore:
         except OSError as exc:
             raise CanvasRevisionError("revision contents unavailable") from exc
         if not files or _revision_digest(files) != revision_id:
-            raise CanvasRevisionError(
-                "revision contents failed digest verification"
-            )
+            raise CanvasRevisionError("revision contents failed digest verification")
         return CanvasRevision(
             workspace_id, deployment_revision_id, app_id, revision_id, files
         )
