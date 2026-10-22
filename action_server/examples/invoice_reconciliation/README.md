@@ -1,6 +1,6 @@
 # Synthetic invoice reconciliation
 
-Version 0.1.0 is a Linux-local experiment using Actions Runtime **1.1.0a4**,
+Version 0.2.0 is a Linux-local experiment using Actions Runtime **1.1.0a5**,
 Work Items **0.5.0a1**, Python **3.12.15** and RCC **18.19.3**. These candidate
 packages are not assumed to exist on PyPI. The engine remains in Actions; this
 example composes its existing SQL, Canvas/MCP, review, worker and artifact APIs.
@@ -90,7 +90,7 @@ the source SHA and every file hash. Run it from a committed Actions checkout:
 ```bash
 python action_server/examples/invoice_reconciliation/export.py \
   --output /absolute/fresh/owned/export \
-  --runtime-wheel /absolute/owned/actions_runtime-1.1.0a4-cp312-cp312-linux_x86_64.whl \
+  --runtime-wheel /absolute/owned/actions_runtime-1.1.0a5-cp312-cp312-linux_x86_64.whl \
   --sdk-wheel /absolute/owned/actions_work_items-0.5.0a1-py3-none-any.whl \
   --canvas /absolute/owned/canvas.html
 ```
@@ -114,3 +114,42 @@ only your chosen demo/export/capture directories. They contain the coordinated
 SQL database, generated revisions, objects and RCC journals. Do not remove one
 part while retaining the others as a recoverable backup. No production restore
 or database downgrade is established by this experiment.
+
+## Fresh consumer and retained offline replay
+
+Export version 0.2.0 includes `prepare.py`, dependency constraints generated from
+Actions' Poetry lock, verified public Core/Helper floor pins, and allowed wheel
+hashes. Use Linux x86_64 with Python **3.12.15** from the pinned RCC gateway.
+A fresh consumer uses no existing project environment and imports Runtime/SDK
+only from its new prefix. Its first preparation downloads the pinned binary
+wheel closure from PyPI with pip caches disabled, verifies artifact hashes, and
+installs exclusively from that measured local wheelhouse. Existing proxy/TLS
+settings are preserved. No credentials are required by this synthetic example.
+
+```bash
+python /absolute/owned/export/prepare.py --root /absolute/fresh/owned/consumer
+python /absolute/owned/export/prepare.py --root /absolute/owned/consumer --launch
+```
+
+The first launch creates a **fresh** RCC home and SDK-only Artifact. It needs
+access to the configured conda-forge and PyPI endpoints, disk headroom and the
+native libraries required by RCC's platform compatibility receipt. The Runtime
+wheel carries RCC18.19.3. No Poetry, Node, source checkout or pre-existing Runtime
+installation is required inside the consumer. Browser automation additionally
+needs the prepared Actions Node20.19.3/Chromium QA environment; ordinary browser
+use does not.
+
+A second empty consumer can install the identical closure without an index:
+
+```bash
+python /absolute/owned/export/prepare.py --root /absolute/fresh/owned/offline-consumer \
+  --offline-wheelhouse /absolute/owned/consumer/wheelhouse
+```
+
+This proves offline **package installation**. It does not populate a new RCC
+Artifact store. Restarting the original consumer with its retained verified
+Artifact is a separate replay gate. Keep that distinction in receipts: a warm
+RCC home is not a cold or air-gapped host installation. Retain `consumer.json`,
+`identity.json`, install report, wheelhouse hashes and RCC verification/journals.
+Any source, renderer or wheel drift fails closed. Stop with Ctrl-C, retrieve the
+coordinated evidence, then remove only the chosen owned consumer directory.

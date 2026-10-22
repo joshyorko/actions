@@ -1,14 +1,14 @@
 {
   "schema": "actions.example-template/v1",
   "name": "synthetic-invoice-reconciliation",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "status": "candidate-local-experiment",
   "license": "Apache-2.0",
   "platform": "Linux x86_64, Python3.12",
   "pins": {
     "rcc": "18.19.3",
     "python": "3.12.15",
-    "actions-runtime": "1.1.0a4",
+    "actions-runtime": "1.1.0a5",
     "actions-work-items": "0.5.0a1"
   },
   "artifact_inputs": [

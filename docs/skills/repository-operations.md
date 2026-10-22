@@ -4774,3 +4774,21 @@ inferring transport limitations from metadata search. If the existing Executor
 transport cannot preserve the resource/audience contract, prepare a separate
 identity/transport configuration for approval; do not edit the working tunnel.
 Local E2 and discovery evidence cannot close this authenticated-host gate.
+
+The invoice reconciliation profile now travels as an optional typed app-audience
+page field, copied from the sealed result rather than parsed from a description.
+The existing renderer uses separate status, PO expected values, invoice actual
+values, variance and discrepancy columns. Legacy rows keep the generic records
+table. Client validation rejects unsafe integers and foreign invoice identity;
+UI formatting never recalculates the result or changes approval bindings.
+
+For example consumer qualification, `prepare.py` validates the exported file
+manifest, creates a fresh prefix and uses Python `-I` for installed-module probes
+and launch. The export derives public dependency constraints/hashes from the
+Poetry lock plus the existing public-floor verifier, not an existing venv freeze.
+A cache-disabled download freezes the binary wheel closure; installation and a
+second-prefix replay use `--no-index`. Keep package replay separate from fresh
+RCC Artifact preparation and from retained-Artifact execution. Neither an
+already prepared consumer nor a successful local replay proves a cold,
+network-isolated host install. Record the actual network and native-library
+requirements and retain failed preparation roots instead of adopting them.

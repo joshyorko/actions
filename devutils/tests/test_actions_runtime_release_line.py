@@ -48,8 +48,8 @@ def test_runtime_distribution_and_embedded_rcc_identity_are_explicit():
     ).read_text()
 
     assert pyproject["name"] == "actions-runtime"
-    assert pyproject["version"] == "1.1.0a4"
-    assert '__version__ = "1.1.0a4"' in runtime_init
+    assert pyproject["version"] == "1.1.0a5"
+    assert '__version__ = "1.1.0a5"' in runtime_init
     # Candidate source advances independently of the exact published floor.
     floor = (
         ROOT / "action_server/scripts/verify_published_runtime_floor.py"

@@ -1,6 +1,13 @@
 """Deterministic invoice/PO/ledger comparisons, shared with the pinned RCC task."""
 
+import sys
+
+import pytest
+from action_server_tests.run_outputs import test_service as run_fixtures
+
 from actions.server.data_queries import _invoice_task
+
+store = run_fixtures.store
 
 
 def test_real_duckdb_demo_materializes_all_source_ids_and_discrepancies(tmp_path):
@@ -85,3 +92,53 @@ def test_reconciliation_reports_matching_price_quantity_and_ledger_differences()
         "ledger_total",
     ]
     assert discrepant["source"] == changed
+
+
+# The output transport remains Linux-only; apply before constructing its fixture.
+
+
+@pytest.mark.skipif(sys.platform != "linux", reason="Linux-only sealed output provider")
+def test_mcp_page_preserves_exact_sealed_comparison_without_model_audience_data(
+    store, tmp_path
+):
+    import asyncio
+    import importlib.util
+    from pathlib import Path
+    from types import SimpleNamespace
+
+    from action_server_tests.test_invoice_canvas_mcp import binding
+
+    from actions.server.data_queries.canvas_mcp import (
+        InvoiceCanvasMcp,
+        InvoiceCanvasPrincipal,
+    )
+
+    path = (
+        Path(__file__).resolve().parents[2]
+        / "examples/invoice_reconciliation/source.py"
+    )
+    spec = importlib.util.spec_from_file_location("owned_reconciliation_mcp", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    source = module.create_source(tmp_path / "owned-source")
+    facade, handle, _ = binding(store, source)
+    actor = store[4]
+
+    async def authenticate(headers, cookies):
+        return InvoiceCanvasPrincipal(actor, "app")
+
+    config = InvoiceCanvasMcp(facade, authenticate, "<html>owned renderer</html>")
+    result = asyncio.run(
+        config.call(
+            SimpleNamespace(request=SimpleNamespace(headers={}, cookies={})),
+            "invoice_result",
+            {"handle": handle},
+        )
+    )
+    assert not result.is_error
+    page = result.meta["actions.invoicePage"]
+    sealed = facade.page(actor, handle, offset=0, limit=20)
+    assert [row["reconciliation"] for row in page["rows"]] == [
+        row["reconciliation"] for row in sealed["rows"]
+    ]
+    assert "reconciliation" not in str(result.structured_content)

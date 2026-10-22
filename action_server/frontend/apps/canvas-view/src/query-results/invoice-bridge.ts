@@ -1,5 +1,6 @@
 import type { App } from "@modelcontextprotocol/ext-apps/react";
 import { z } from "zod";
+import { reconciliationSchema } from "./invoice-reconciliation";
 import { parseInvoiceExecution, parseInvoiceReview } from "./review-contract";
 import type { InvoiceReviewAdapter } from "./review-contract";
 
@@ -19,6 +20,7 @@ const pageSchema = z.object({
                 id: z.string().max(256),
                 title: z.string().max(256),
                 category: z.string().max(2048),
+                reconciliation: reconciliationSchema.optional(),
             }),
         )
         .max(99),
@@ -30,6 +32,14 @@ const pageSchema = z.object({
 
 export function parseInvoicePage(value: unknown): QueryActionResult {
     const page = pageSchema.parse(value);
+    if (
+        page.rows.some(
+            (row) =>
+                row.reconciliation &&
+                row.reconciliation.source.invoice_id !== row.id,
+        )
+    )
+        throw new Error("Invoice comparison identity changed.");
     if (
         page.nextOffset !== null &&
         page.nextOffset !== page.offset + page.rows.length

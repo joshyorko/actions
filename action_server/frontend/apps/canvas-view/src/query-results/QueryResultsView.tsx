@@ -5,6 +5,10 @@ import type * as React from "react";
 import "./query-results.css";
 import { InvoiceReviewPanel } from "./InvoiceReviewPanel";
 import type { InvoiceReviewAdapter } from "./review-contract";
+import {
+    ReconciliationCells,
+    type InvoiceReconciliation,
+} from "./invoice-reconciliation";
 
 export type ArtifactHandle = string & {
     readonly __artifactHandle: unique symbol;
@@ -18,6 +22,7 @@ export interface QueryRow {
     id: string;
     title: string;
     category: string;
+    reconciliation?: InvoiceReconciliation;
 }
 
 export interface QueryActionResult {
@@ -101,6 +106,14 @@ export function QueryResultsView({
     const mountedRef = useRef(false);
     const currentResultRef = useRef<QueryActionResult | null>(null);
     const hostInputRevisionRef = useRef<number | null>(null);
+    const comparisons =
+        result?.rows.flatMap((row) =>
+            row.reconciliation
+                ? [{ title: row.title, value: row.reconciliation }]
+                : [],
+        ) ?? [];
+    const isReconciliation =
+        comparisons.length > 0 && comparisons.length === result?.rows.length;
 
     const replaceResult = useCallback(
         (nextResult: QueryActionResult | null) => {
@@ -339,11 +352,17 @@ export function QueryResultsView({
                 <div className="query-view__section-heading">
                     <div>
                         <p className="query-view__eyebrow">Results</p>
-                        <h2 id="results-title">Matching records</h2>
+                        <h2 id="results-title">
+                            {isReconciliation
+                                ? "Invoice reconciliation"
+                                : "Records"}
+                        </h2>
                     </div>
                     {result?.rows.length ? (
                         <span className="query-view__count">
-                            {result.rows.length} records
+                            {isReconciliation
+                                ? `${comparisons.filter((row) => row.value.status === "matched").length} matched · ${comparisons.filter((row) => row.value.status === "discrepant").length} discrepant`
+                                : `${result.rows.length} records`}
                         </span>
                     ) : null}
                 </div>
@@ -374,25 +393,63 @@ export function QueryResultsView({
                 )}
                 {result && !result.error && result.rows.length > 0 && (
                     <div className="query-view__table-wrap" tabIndex={0}>
-                        <table>
+                        <table
+                            className={
+                                isReconciliation
+                                    ? "query-view__reconciliation"
+                                    : undefined
+                            }
+                        >
                             <caption className="query-view__sr-only">
-                                Search results
+                                {isReconciliation
+                                    ? "Invoice reconciliation comparisons"
+                                    : "Search results"}
                             </caption>
                             <thead>
                                 <tr>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Category</th>
+                                    {isReconciliation ? (
+                                        [
+                                            "Invoice and sources",
+                                            "Status",
+                                            "Expected (PO)",
+                                            "Actual (invoice)",
+                                            "Variance",
+                                            "Discrepancies",
+                                        ].map((label) => (
+                                            <th scope="col" key={label}>
+                                                {label}
+                                            </th>
+                                        ))
+                                    ) : (
+                                        <>
+                                            <th scope="col">Title</th>
+                                            <th scope="col">Category</th>
+                                        </>
+                                    )}
                                 </tr>
                             </thead>
                             <tbody>
-                                {result.rows.map((row) => (
-                                    <tr key={row.id}>
-                                        <th scope="row">{row.title}</th>
-                                        <td style={{ whiteSpace: "pre-line" }}>
-                                            {row.category}
-                                        </td>
-                                    </tr>
-                                ))}
+                                {isReconciliation
+                                    ? comparisons.map((row) => (
+                                          <tr key={row.value.source.invoice_id}>
+                                              <ReconciliationCells
+                                                  title={row.title}
+                                                  value={row.value}
+                                              />
+                                          </tr>
+                                      ))
+                                    : result.rows.map((row) => (
+                                          <tr key={row.id}>
+                                              <th scope="row">{row.title}</th>
+                                              <td
+                                                  style={{
+                                                      whiteSpace: "pre-line",
+                                                  }}
+                                              >
+                                                  {row.category}
+                                              </td>
+                                          </tr>
+                                      ))}
                             </tbody>
                         </table>
                     </div>

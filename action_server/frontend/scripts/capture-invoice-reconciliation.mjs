@@ -50,6 +50,28 @@ try {
         "LED-3004",
     ])
         assert.ok((await frame.locator("table").innerText()).includes(source));
+    await frame
+        .getByRole("heading", { name: "Invoice reconciliation", exact: true })
+        .waitFor();
+    for (const label of [
+        "Status",
+        "Expected (PO)",
+        "Actual (invoice)",
+        "Variance",
+        "Discrepancies",
+    ])
+        await frame
+            .getByRole("columnheader", { name: label, exact: true })
+            .waitFor();
+    assert.equal(
+        await frame.getByText("Discrepant", { exact: true }).count(),
+        3,
+    );
+    assert.equal(await frame.getByText("Matched", { exact: true }).count(), 1);
+    assert.equal(
+        await frame.getByText("Matching records", { exact: true }).count(),
+        0,
+    );
     await page.screenshot({
         path: path.join(values.out, "before-review.png"),
         fullPage: true,

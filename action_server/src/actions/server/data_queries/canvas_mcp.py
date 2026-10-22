@@ -343,6 +343,11 @@ class InvoiceCanvasMcp:
                             "id": row["invoice_id"],
                             "title": row["customer"],
                             "category": self._row_description(row),
+                            **(
+                                {"reconciliation": row["reconciliation"]}
+                                if "reconciliation" in row
+                                else {}
+                            ),
                         }
                         for row in rows
                     ],
