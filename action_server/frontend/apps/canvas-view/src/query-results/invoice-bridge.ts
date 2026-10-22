@@ -1,5 +1,7 @@
 import type { App } from "@modelcontextprotocol/ext-apps/react";
 import { z } from "zod";
+import { parseInvoiceReview } from "./review-contract";
+import type { InvoiceReviewAdapter } from "./review-contract";
 
 import type {
     ArtifactHandle,
@@ -9,6 +11,7 @@ import type {
 
 const handleSchema = z.string().regex(/^art_[A-Za-z0-9_-]{22}$/u);
 const pageSchema = z.object({
+    reviewAvailable: z.boolean().optional(),
     schemaVersion: z.literal("actions.invoice-page/v1"),
     rows: z
         .array(
@@ -33,6 +36,7 @@ export function parseInvoicePage(value: unknown): QueryActionResult {
     )
         throw new Error("Invalid next page.");
     return {
+        reviewAvailable: page.reviewAvailable ?? false,
         rows: page.rows,
         // Branded only after validating the canonical opaque handle.
         artifact: { handle: page.artifact.handle as ArtifactHandle },
@@ -42,6 +46,48 @@ export function parseInvoicePage(value: unknown): QueryActionResult {
 }
 
 export function createInvoiceAdapter(app: App): QueryResultsAdapter {
+    const reviewCall = async (
+        name: string,
+        argumentsValue: Record<string, unknown>,
+        handle: string,
+    ) => {
+        const result = await app.callServerTool({
+            name,
+            arguments: argumentsValue,
+        });
+        if (result.isError) throw new Error("Review denied.");
+        const state = parseInvoiceReview(
+            result._meta?.["actions.invoiceReview"],
+        );
+        if (state.proposal.binding.handle !== handle)
+            throw new Error("Review identity changed.");
+        return state;
+    };
+    const review: InvoiceReviewAdapter = {
+        offer(handle) {
+            return reviewCall("invoice_review_offer", { handle }, handle);
+        },
+        async decide(proposal, decision) {
+            const state = await reviewCall(
+                "invoice_review_decide",
+                { proposal, decision },
+                proposal.binding.handle,
+            );
+            if (JSON.stringify(state.proposal) !== JSON.stringify(proposal))
+                throw new Error("Review proposal changed.");
+            return state;
+        },
+        async cancel(proposal) {
+            const state = await reviewCall(
+                "invoice_review_cancel",
+                { proposal },
+                proposal.binding.handle,
+            );
+            if (JSON.stringify(state.proposal) !== JSON.stringify(proposal))
+                throw new Error("Review proposal changed.");
+            return state;
+        },
+    };
     const exportDescriptor = async (handle: ArtifactHandle) => {
         const result = await app.callServerTool({
             name: "invoice_result_export",
@@ -62,6 +108,7 @@ export function createInvoiceAdapter(app: App): QueryResultsAdapter {
         return descriptor;
     };
     return {
+        review,
         async submitQuery() {
             throw new Error("Published results cannot execute queries.");
         },

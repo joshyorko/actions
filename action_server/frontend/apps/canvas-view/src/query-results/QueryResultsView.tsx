@@ -3,6 +3,8 @@ import type { FormEvent } from "react";
 import type * as React from "react";
 
 import "./query-results.css";
+import { InvoiceReviewPanel } from "./InvoiceReviewPanel";
+import type { InvoiceReviewAdapter } from "./review-contract";
 
 export type ArtifactHandle = string & {
     readonly __artifactHandle: unique symbol;
@@ -19,6 +21,7 @@ export interface QueryRow {
 }
 
 export interface QueryActionResult {
+    reviewAvailable?: boolean;
     rows: QueryRow[];
     artifact: { handle: ArtifactHandle } | null;
     error: {
@@ -38,6 +41,7 @@ export type ArtifactStatus = "ready" | "processing" | "unavailable";
  * server-owned authorization and dispatch policy.
  */
 export interface QueryResultsAdapter {
+    review?: InvoiceReviewAdapter;
     submitQuery(input: QueryInput): Promise<QueryActionResult>;
     getArtifactStatus(handle: ArtifactHandle): Promise<ArtifactStatus>;
     pageResult?(
@@ -446,6 +450,13 @@ export function QueryResultsView({
                     </p>
                 )}
             </section>
+            {result?.reviewAvailable && result.artifact && adapter.review && (
+                <InvoiceReviewPanel
+                    key={result.artifact.handle}
+                    handle={result.artifact.handle}
+                    adapter={adapter.review}
+                />
+            )}
         </main>
     );
 }

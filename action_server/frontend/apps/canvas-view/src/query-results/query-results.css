@@ -267,3 +267,13 @@
         transition-duration: 0.01ms !important;
     }
 }
+.invoice-review {
+    display: grid;
+    gap: 1rem;
+}
+.invoice-review code {
+    overflow-wrap: anywhere;
+}
+.invoice-review button {
+    justify-self: start;
+}

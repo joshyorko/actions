@@ -62,6 +62,8 @@ test("real invoice tool resource view paging export and reopen", async ({
                         name: z.enum([
                             "invoice_result_page",
                             "invoice_result_export",
+                            "invoice_review_offer",
+                            "invoice_review_decide",
                         ]),
                         arguments: z.record(z.string(), z.unknown()),
                     })
@@ -177,6 +179,33 @@ window.addEventListener('message', async event => {
             view.getByRole("rowheader", { name: "North" }),
         ).toBeVisible();
         expect(calls).toEqual(["invoice_result_page", "invoice_result_export"]);
+        await view
+            .getByRole("button", { name: "Review these results" })
+            .click();
+        await expect(
+            view.getByText(/including rows beyond this page/),
+        ).toBeVisible();
+        expect(calls).not.toContain("invoice_review_decide");
+        await view
+            .getByRole("button", { name: "Approve these results" })
+            .click();
+        await expect(
+            view.getByText("Approved. Work item created."),
+        ).toBeVisible();
+        await page.reload();
+        await view
+            .getByRole("button", { name: "Review these results" })
+            .click();
+        await expect(
+            view.getByText("Approved. Work item created."),
+        ).toBeVisible();
+        expect(calls).toEqual([
+            "invoice_result_page",
+            "invoice_result_export",
+            "invoice_review_offer",
+            "invoice_review_decide",
+            "invoice_review_offer",
+        ]);
         expect(external).toEqual([]);
         await writeFile(
             z.string().parse(process.env.CANVAS_INVOICE_BROWSER_RECEIPT),
@@ -193,6 +222,8 @@ window.addEventListener('message', async event => {
                     exportSize,
                     externalRequests: external,
                     reopenSameHandle: true,
+                    explicitExactResultReview: true,
+                    reopenApprovedReceipt: true,
                 },
                 null,
                 2,

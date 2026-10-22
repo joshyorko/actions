@@ -36,7 +36,11 @@ current persisted Actor grants through the existing output authority.
 
 `invoice_result` returns a bounded model summary; invoice rows belong in the
 UI-private `actions.invoicePage` result metadata. `invoice_result_page` and
-`invoice_result_export` require the verified app audience. The built HTML is
+`invoice_result_export` require the verified app audience. When the trusted
+configuration explicitly supplies `InvoiceReviewService`, app-only
+`invoice_review_offer`, `invoice_review_decide` and `invoice_review_cancel` expose
+the SQL review boundary described in [Work Items](work-items.md#exact-result-review-on-the-runtime-sql-connection).
+The model audience cannot call these tools and the UI sends no approval on mount. The built HTML is
 served as a content-addressed `text/html;profile=mcp-app` resource. Export links
 require the same scoped authenticated output transport and a trusted HTTPS or
 loopback download origin. A handle alone grants no access.

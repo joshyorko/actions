@@ -466,6 +466,13 @@ jobs:
           assert metadata.get("Version") == expected_version
           PY
 
+      - name: Build candidate Work Items SDK wheel for native acceptance
+        working-directory: ./work-items
+        shell: bash
+        run: >-
+          uv run --no-project --python 3.12 poetry build --format wheel
+          --output "${{ runner.temp }}/dakota-workitems-rcc-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}/sdk-wheels"
+
       - name: Verify Work Items consumer through frozen and Go runtimes
         timeout-minutes: 20
         env:

@@ -19,6 +19,55 @@ silently ignored with `PytestConfigWarning`.
 
 ## Safety Invariants
 
+### Exact-result review on the Runtime SQL connection
+
+`InvoiceReviewService` makes a pending proposal over an already sealed invoice
+result. Merely opening the Canvas or offering a proposal creates no Work Item.
+The app-only MCP tools require a trusted server-supplied Actor and scope;
+approval additionally requires the current `review` grant, separate from `read`.
+The binding retains result handle/digest, original input digest, source version,
+request fingerprint, and both application and deployment identities/revisions.
+The source version remains an operator assertion; approval does not requery a
+mutable source or establish an external snapshot transaction.
+
+Migration 16 adds `invoice_review` and `fenced_work_item` to the existing Runtime
+business database. It never approves or enqueues legacy results. Approval inserts
+one SDK Work Item and records its ID/explicit actor decision in the **same SQL
+transaction**. Counter -> Workspace lock order serializes concurrent duplicate
+delivery across connections. Matching terminal replay returns the retained
+receipt, including after result expiry, while rechecking current authority and
+binding; a new decision requires opening the unexpired sealed result. Rejection
+creates no Work Item. Cancellation retains the original decision audit, fences
+an active claim and cannot undo an already completed item.
+
+The private SDK `SQLReviewQueue` is a JSON-only bridge onto that host-owned
+transaction and migration, with format `actions.review-work-item/v1`. It creates
+no connection or second state store. It is **not** the standalone SQLite schema 6
+or PostgreSQL format 1 adapter, a legacy management adapter, or the complete
+retry/effect contract. DB time, owner/epoch/deadline conditions and atomic child
+publication apply to reserve/renew/finish. Unknown row formats fail closed.
+Review, Work Item, Run and Attempt remain distinct: approval starts no new Run,
+Attempt or RCC process. Worker linkage and external effect reconciliation require
+separate proof before admitting execution.
+
+Use RCC `InvoiceQueryTest` to exercise the real DuckDB/PostgreSQL providers and
+both SQL review stores, including simultaneous duplicate decisions, SQL-trigger
+rollback, cancellation, stale takeover and actual interpreter restart. Its
+preflight rejects a Work Items import outside the candidate environment or whose
+bytes differ from the selected SDK source. Runtime's dev dependency is deliberately
+noneditable (`develop=false`); after SDK source edits, rebuild/reinstall through
+Poetry before testing. A source overlay does not establish the installed SDK
+contract. Native acceptance additionally installs the exact measured SDK wheel
+in each RCC consumer and checks distribution ownership plus pip report URL/hash;
+passing source tests alone cannot close the frozen/Go consumer gate.
+
+Rollback requires coordinated review/Work Item SQL and output-object backups;
+downgrading Runtime before restoring a pre-migration database is not supported.
+Disable the trusted review binding to stop new admission while retaining audit
+and queued work. Never delete an approved Work Item to make a rollback appear
+clean. Restore, worker draining, effects and production migration remain separate
+release/operator gates.
+
 ### PostgreSQL fenced coordination and guarded retry
 
 The #327 candidate adds private `PostgreSQLFencedQueue`, implementing the same
@@ -65,9 +114,11 @@ validates; unknown/nonempty layouts, missing metadata and future versions fail
 closed. There is no SQLite-to-PostgreSQL migration or dual authoritative write.
 Any future format change requires a reviewed migration, pre-upgrade database and
 attachment/effect-receipt backup, restore proof and mixed-writer rejection gates.
-Current SDK metadata remains 0.4.4; these candidate bytes must not be published
-under that version. The eventual SDK version and Runtime dependency floor remain
-release-review decisions. No production migration has been performed.
+The integration candidate uses SDK `0.5.0a1` and Runtime `1.1.0a1`, with
+a Runtime floor of `>=0.5.0a1,<0.6.0` (prereleases admitted). These are
+provisional, nonpublishing identifiers; final versions remain release-review
+decisions. Published SDK 0.4.4 / Runtime 1.0.4 identifiers must never name
+changed bytes. No production migration has been performed.
 
 Initialization checks schema ownership against `current_user`, even for a
 superuser connection; an empty schema belonging to another role is refused.

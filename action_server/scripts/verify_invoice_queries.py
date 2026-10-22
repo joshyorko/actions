@@ -71,6 +71,13 @@ def main():
         ROOT / "action_server/src/actions/server/canvas_lifecycle.py",
         ROOT / "action_server/tests/action_server_tests/test_canvas_lifecycle.py",
         ROOT / "action_server/tests/action_server_tests/test_knowledge_collections.py",
+        ROOT / "action_server/tests/action_server_tests/test_candidate_work_items.py",
+        ROOT / "work-items/src/actions/work_items/_adapters/_sql_review.py",
+        ROOT / "work-items/pyproject.toml",
+        ROOT / "action_server/src/actions/server/_models.py",
+        ROOT / "action_server/src/actions/server/migrations/__init__.py",
+        ROOT
+        / "action_server/src/actions/server/migrations/migration_add_invoice_reviews.py",
     ]
     receipt["inputs"] = {
         str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
@@ -85,18 +92,30 @@ import hashlib, importlib, json, sys
 from pathlib import Path
 source = Path(sys.argv[1]).resolve()
 identities = {}
-for name in ('actions.server.canvas_lifecycle', 'actions.server.data_queries.knowledge',
+for name in ('actions.server.canvas_lifecycle', 'actions.server.data_queries.review', 'actions.server.data_queries.knowledge',
              'actions.server.data_queries.invoices', 'actions.server.run_outputs.service'):
     module = importlib.import_module(name)
     path = Path(module.__file__).resolve()
     if not path.is_relative_to(source):
         raise RuntimeError('Runtime module belongs to another source checkout')
     identities[name] = {'path': str(path), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()}
+from importlib.metadata import distribution
+sdk = distribution('actions-work-items')
+module = importlib.import_module('actions.work_items._adapters._sql_review')
+path = Path(module.__file__).resolve()
+expected = source.parent.parent / 'work-items/src/actions/work_items/_adapters/_sql_review.py'
+if sdk.version != '0.5.0a1' or not path.is_relative_to(Path(sys.prefix).resolve()) or path.read_bytes() != expected.read_bytes():
+    raise RuntimeError('installed candidate SDK differs from the selected source')
+identities['actions.work_items._adapters._sql_review'] = {'path':str(path),'sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'version':sdk.version}
 print(json.dumps(identities))
 """
         receipt["module_identity"] = json.loads(
             command(
-                "poetry", "run", "python", "-c", probe,
+                "poetry",
+                "run",
+                "python",
+                "-c",
+                probe,
                 str(ROOT / "action_server/src"),
                 cwd=ROOT / "action_server",
                 env=package_environment(ROOT / "action_server"),
@@ -170,6 +189,9 @@ print(json.dumps(identities))
                 ).hexdigest()
         suites = {
             "components": [
+                "tests/action_server_tests/test_invoice_review.py",
+                "tests/action_server_tests/test_invoice_review_mcp.py",
+                "tests/action_server_tests/test_candidate_work_items.py",
                 "tests/action_server_tests/test_canvas_lifecycle.py",
                 "tests/action_server_tests/test_knowledge_collections.py",
             ],
@@ -179,7 +201,7 @@ print(json.dumps(identities))
                 "tests/action_server_tests/test_invoice_canvas.py",
                 "tests/action_server_tests/test_invoice_canvas_mcp.py",
                 "tests/action_server_tests/run_outputs",
-            ]
+            ],
         }
         if args.browser:
             suites["browser"] = [

@@ -59,6 +59,10 @@ PROCESSOR_ACTION = (
         expected_core_version: str,
         core_install_report: str,
         core_install_proof: str,
+        expected_sdk_wheel: str,
+        expected_sdk_wheel_sha256: str,
+        expected_sdk_version: str,
+        sdk_install_proof: str,
     ) -> dict[str, str]:
         import hashlib
         import json
@@ -111,6 +115,22 @@ PROCESSOR_ACTION = (
             encoding="utf-8",
         )
 
+        import actions.work_items
+        sdk_distribution = distribution("actions-work-items")
+        sdk_wheel = Path(expected_sdk_wheel).resolve()
+        if sdk_distribution.version != expected_sdk_version or hashlib.sha256(sdk_wheel.read_bytes()).hexdigest() != expected_sdk_wheel_sha256:
+            raise AssertionError("candidate Work Items SDK version or wheel changed")
+        sdk_module = Path(actions.work_items.__file__).resolve()
+        if sdk_module not in {Path(sdk_distribution.locate_file(file)).resolve() for file in (sdk_distribution.files or [])}:
+            raise AssertionError("Work Items module is not owned by candidate distribution")
+        sdk_installs = [entry for entry in install_report.get("install", []) if entry.get("metadata", {}).get("name", "").lower().replace("_", "-") == "actions-work-items"]
+        if len(sdk_installs) != 1:
+            raise AssertionError("candidate Work Items SDK absent from install report")
+        sdk_source = sdk_installs[0].get("download_info", {})
+        if _local_wheel_path_from_file_url(sdk_source.get("url", "")) != sdk_wheel or sdk_source.get("archive_info", {}).get("hashes", {}).get("sha256") != expected_sdk_wheel_sha256:
+            raise AssertionError("installed SDK does not match measured candidate wheel")
+        Path(sdk_install_proof).write_text(json.dumps({"version":sdk_distribution.version,"wheel_sha256":expected_sdk_wheel_sha256,"module_owned":True,"install_source_matches_candidate":True,"pip_report_sha256":hashlib.sha256(Path(core_install_report).read_bytes()).hexdigest()}),encoding="utf-8")
+
         from actions.work_items import SQLiteAdapter, State
 
         adapter = SQLiteAdapter(db_path=db_path, files_dir=files_dir)
@@ -153,10 +173,13 @@ def _quote_shell_path(path: Path) -> str:
     return shlex.quote(str(path))
 
 
-def consumer_package_yaml(core_wheel: Path, install_report: Path) -> str:
+def consumer_package_yaml(
+    core_wheel: Path, install_report: Path, sdk_wheel: Path | None = None
+) -> str:
     """Render the RCC package contract used by the native Runtime test."""
     wheel_path = core_wheel.resolve()
     report_path = install_report.resolve()
+    sdk_argument = " " + _quote_shell_path(sdk_wheel.resolve()) if sdk_wheel else ""
     return f"""version: 1
 spec-version: v2
 dependencies:
@@ -166,7 +189,7 @@ dependencies:
   pypi:
     - actions-work-items=0.4.4
 post-install:
-  - python -m pip install --force-reinstall --report {_quote_shell_path(report_path)} {_quote_shell_path(wheel_path)}
+  - python -m pip install --force-reinstall --report {_quote_shell_path(report_path)} {_quote_shell_path(wheel_path)}{sdk_argument}
 """
 
 
@@ -240,6 +263,11 @@ def test_packaged_runtime_executes_work_item_consumer_lifecycle(
     assert core_wheel_value and expected_core_wheel_hash and expected_core_version
     core_wheel_hash = _sha256(Path(core_wheel_value))
     assert core_wheel_hash == expected_core_wheel_hash
+    sdk_wheel = Path(os.environ["DAKOTA_WORKITEMS_SDK_WHEEL"]).resolve()
+    sdk_hash = os.environ["DAKOTA_WORKITEMS_SDK_WHEEL_SHA256"]
+    sdk_version = os.environ["DAKOTA_WORKITEMS_SDK_VERSION"]
+    assert _sha256(sdk_wheel) == sdk_hash
+    sdk_proof_dir = Path(os.environ["DAKOTA_WORKITEMS_SDK_PROOF_DIR"])
 
     from actions.work_items import State
 
@@ -263,8 +291,9 @@ def test_packaged_runtime_executes_work_item_consumer_lifecycle(
     core_wheel = Path(core_wheel_value).resolve()
     core_install_report = project / "candidate-core-install-report.json"
     core_install_proof = project / "core-installation-proof.json"
+    sdk_install_proof = project / "sdk-installation-proof.json"
     (project / "package.yaml").write_text(
-        consumer_package_yaml(core_wheel, core_install_report),
+        consumer_package_yaml(core_wheel, core_install_report, sdk_wheel),
         encoding="utf-8",
     )
     (project / "dakota_workitems_processor.py").write_text(
@@ -298,6 +327,10 @@ def test_packaged_runtime_executes_work_item_consumer_lifecycle(
                 "expected_core_version": expected_core_version,
                 "core_install_report": str(core_install_report),
                 "core_install_proof": str(core_install_proof),
+                "expected_sdk_wheel": str(sdk_wheel),
+                "expected_sdk_wheel_sha256": sdk_hash,
+                "expected_sdk_version": sdk_version,
+                "sdk_install_proof": str(sdk_install_proof),
             },
         )
 
@@ -315,6 +348,13 @@ def test_packaged_runtime_executes_work_item_consumer_lifecycle(
         "pip_report_sha256": _sha256(core_install_report),
     }
     proof["actions_core_installation"] = installed_core_proof
+    sdk_proof = json.loads(sdk_install_proof.read_text(encoding="utf-8"))
+    assert sdk_proof["version"] == sdk_version and sdk_proof["wheel_sha256"] == sdk_hash
+    assert (
+        sdk_proof["module_owned"] is True
+        and sdk_proof["install_source_matches_candidate"] is True
+    )
+    _write_atomic_proof(sdk_proof_dir, runtime_kind, sdk_proof)
     success = client.get_json(f"/api/work-items/{success_id}")
     assert success["state"] == State.DONE.value
     success_output_id = success_run.json()["output_id"]

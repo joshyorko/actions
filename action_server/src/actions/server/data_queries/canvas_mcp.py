@@ -19,10 +19,21 @@ from pydantic import BaseModel, ConfigDict, Field
 from actions.server.run_outputs.types import Actor, output_id_from_handle
 
 from .canvas import InvoiceCanvasFacade
+from .review import InvoiceReviewService, ReviewProposal
 
 PAGE_KEY = "actions.invoicePage"
 TOOL_NAMES = frozenset(
-    {"invoice_result", "invoice_result_page", "invoice_result_export"}
+    {
+        "invoice_result",
+        "invoice_result_page",
+        "invoice_result_export",
+        "invoice_review_offer",
+        "invoice_review_decide",
+        "invoice_review_cancel",
+    }
+)
+REVIEW_TOOLS = frozenset(
+    {"invoice_review_offer", "invoice_review_decide", "invoice_review_cancel"}
 )
 
 
@@ -34,6 +45,15 @@ class ResultInput(BaseModel):
 class PageInput(ResultInput):
     offset: int = Field(ge=0, le=100000)
     limit: int = Field(ge=1, le=99)
+
+
+class ReviewInput(BaseModel):
+    model_config = ConfigDict(extra="forbid", strict=True)
+    proposal: ReviewProposal
+
+
+class DecisionInput(ReviewInput):
+    decision: Literal["approve", "reject"]
 
 
 @dataclass(frozen=True)
@@ -55,8 +75,11 @@ class InvoiceCanvasMcp:
     html: str
     download_base_url: str | None = None
     initial_page_size: int = 20
+    reviews: InvoiceReviewService | None = None
 
     def __post_init__(self) -> None:
+        if self.reviews is not None and self.reviews.queries is not self.facade.queries:
+            raise ValueError("review must use the same query/output authority")
         if (
             not isinstance(self.initial_page_size, int)
             or isinstance(self.initial_page_size, bool)
@@ -129,15 +152,29 @@ class InvoiceCanvasMcp:
         for name in sorted(TOOL_NAMES):
             if principal.audience == "model" and name != "invoice_result":
                 continue
-            schema = PageInput if name == "invoice_result_page" else ResultInput
+            if name in REVIEW_TOOLS and self.reviews is None:
+                continue
+            schema = (
+                DecisionInput
+                if name == "invoice_review_decide"
+                else ReviewInput
+                if name == "invoice_review_cancel"
+                else PageInput
+                if name == "invoice_result_page"
+                else ResultInput
+            )
             result.append(
                 Tool(
                     name=name,
-                    description="Read an already-published, authorized invoice result. No query execution.",
+                    description=(
+                        "Explicitly review this exact saved result. Approval creates one Work Item, without executing it."
+                        if name in REVIEW_TOOLS
+                        else "Read an already-published, authorized invoice result. No query execution."
+                    ),
                     input_schema=schema.model_json_schema(),
                     annotations=ToolAnnotations(
-                        read_only_hint=True,
-                        destructive_hint=False,
+                        read_only_hint=name not in REVIEW_TOOLS,
+                        destructive_hint=name == "invoice_review_cancel",
                         idempotent_hint=True,
                         open_world_hint=False,
                     ),
@@ -162,6 +199,50 @@ class InvoiceCanvasMcp:
                 name != "invoice_result" and principal.audience != "app"
             ):
                 raise PermissionError
+            if name in REVIEW_TOOLS:
+                if self.reviews is None:
+                    raise PermissionError
+                with self.facade.queries.outputs.db.connect():
+                    if name == "invoice_review_offer":
+                        request = ResultInput.model_validate(arguments)
+                        proposal = self.reviews.offer(
+                            principal.actor, self.facade.scope, request.handle
+                        )
+                        receipt = self.reviews.status(
+                            principal.actor, self.facade.scope, proposal
+                        )
+                    elif name == "invoice_review_decide":
+                        decision = DecisionInput.model_validate(arguments)
+                        proposal = decision.proposal
+                        receipt = self.reviews.decide(
+                            principal.actor,
+                            self.facade.scope,
+                            proposal,
+                            decision.decision,
+                        )
+                    else:
+                        request_cancel = ReviewInput.model_validate(arguments)
+                        proposal = request_cancel.proposal
+                        receipt = self.reviews.cancel(
+                            principal.actor, self.facade.scope, proposal
+                        )
+                    return CallToolResult(
+                        content=[
+                            TextContent(
+                                type="text", text="Explicit result review recorded."
+                            )
+                        ],
+                        structured_content={
+                            "schemaVersion": "actions.invoice-review/v1",
+                            "state": receipt.state,
+                        },
+                        _meta={
+                            "actions.invoiceReview": {
+                                "proposal": proposal.model_dump(mode="json"),
+                                "receipt": receipt.model_dump(mode="json"),
+                            }
+                        },
+                    )
             inputs = (
                 PageInput if name == "invoice_result_page" else ResultInput
             ).model_validate(arguments)
@@ -218,6 +299,8 @@ class InvoiceCanvasMcp:
                     "offset": offset,
                     "nextOffset": offset + limit if len(data["rows"]) > limit else None,
                 }
+                if self.reviews is not None:
+                    page["reviewAvailable"] = True
                 return CallToolResult(
                     content=[
                         TextContent(

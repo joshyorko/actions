@@ -42,7 +42,7 @@ from actions.server.run_outputs.types import (
 MAX_INPUT_BYTES = 256 * 1024
 MAX_RESULT_BYTES = 1024 * 1024
 MAX_OUTPUTS = 64
-OPERATIONS = frozenset({"execute", "read", "cancel"})
+OPERATIONS = frozenset({"execute", "read", "cancel", "review"})
 T = TypeVar("T")
 
 

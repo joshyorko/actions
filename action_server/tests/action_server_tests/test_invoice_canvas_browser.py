@@ -32,8 +32,14 @@ def test_real_invoice_canvas_browser(runtime, provider, tmp_path):
     resource = Path(resource_path).read_text()
     evidence = Path(os.environ["ACTIONS_INVOICE_BROWSER_EVIDENCE_DIR"]) / provider.kind
     evidence.mkdir(parents=True, exist_ok=False)
-    facade, handle, _ = invoices.binding(runtime.store, provider)
+    facade, handle, snapshot = invoices.binding(runtime.store, provider)
     actor = runtime.store[4]
+    runtime.store[1].grant(
+        actor, snapshot.deployment, {"read", "execute", "review", "cancel"}
+    )
+    from actions.server.data_queries.review import InvoiceReviewService
+
+    reviews = InvoiceReviewService(facade.queries)
 
     async def authenticate(headers, cookies):
         if headers.get("x-fixture-credential") == "app-secret":
@@ -49,6 +55,7 @@ def test_real_invoice_canvas_browser(runtime, provider, tmp_path):
             resource,
             download_base_url=origin,
             initial_page_size=1,
+            reviews=reviews,
         )
         output = RunOutputTransport(
             facade.queries.outputs,
@@ -99,6 +106,13 @@ def test_real_invoice_canvas_browser(runtime, provider, tmp_path):
                     timeout=90,
                 )
             assert result.returncode == 0, (evidence / "browser.log").read_text()
+            with reviews.db.connect():
+                items = reviews.queue(facade.scope).list_items()
+                assert len(items) == 1 and items[0]["state"] == "PENDING"
+                assert (
+                    reviews.queue(facade.scope).load_payload(items[0]["id"])["schema"]
+                    == "actions.invoice-review/v1"
+                )
         finally:
             server.should_exit = True
             thread.join(timeout=10)

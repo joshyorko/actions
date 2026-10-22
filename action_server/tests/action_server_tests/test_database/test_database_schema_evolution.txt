@@ -504,4 +504,51 @@ CREATE TABLE IF NOT EXISTS run_output(
 '''
 CREATE INDEX run_output_run_id_non_unique_index ON run_output(run_id);
 ''',
+
+
+'''
+CREATE TABLE IF NOT EXISTS fenced_work_item(
+    id TEXT NOT NULL PRIMARY KEY,
+    workspace_id TEXT NOT NULL,
+    queue_name TEXT NOT NULL,
+    parent_id TEXT NOT NULL,
+    state TEXT NOT NULL,
+    payload TEXT NOT NULL,
+    created_ms TEXT NOT NULL,
+    claim_owner TEXT NOT NULL,
+    claim_epoch INTEGER NOT NULL,
+    claim_deadline_ms TEXT NOT NULL,
+    cancel_requested INTEGER NOT NULL,
+    error_message TEXT NOT NULL,
+    format TEXT NOT NULL,
+    FOREIGN KEY (workspace_id) REFERENCES workspace(id)
+)
+''',
+
+
+'''
+CREATE INDEX fenced_work_item_queue_name_non_unique_index ON fenced_work_item(queue_name);
+''',
+
+
+'''
+CREATE TABLE IF NOT EXISTS invoice_review(
+    id TEXT NOT NULL PRIMARY KEY,
+    workspace_id TEXT NOT NULL,
+    run_id TEXT NOT NULL,
+    binding_id TEXT NOT NULL,
+    binding_json TEXT NOT NULL,
+    state TEXT NOT NULL,
+    work_item_id TEXT NOT NULL,
+    decision_json TEXT NOT NULL,
+    cancellation_json TEXT NOT NULL,
+    FOREIGN KEY (workspace_id) REFERENCES workspace(id),
+    FOREIGN KEY (run_id) REFERENCES run(id)
+)
+''',
+
+
+'''
+CREATE UNIQUE INDEX invoice_review_binding_id_index ON invoice_review(binding_id);
+''',
 ]
