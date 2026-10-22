@@ -4727,7 +4727,7 @@ binding merely because dependency installation succeeded.
 exact-result SQL review, fenced Work Item, distinct Run/Attempt, RCC 18.19.3 and
 scoped artifact transport. The versioned example and allowlisted local export
 live in `action_server/examples/invoice_reconciliation/`. Candidate Runtime
-1.1.0a4 and SDK 0.5.0a1 need verified local artifacts, not an assumed public-index
+1.1.0a5 and SDK 0.5.0a1 need verified local artifacts, not an assumed public-index
 release. The engine remains in the package; exports copy no engine source.
 
 Use a fresh absolute owned directory. The host binds only loopback, with a
