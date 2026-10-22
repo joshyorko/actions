@@ -105,7 +105,9 @@ lineage become a sealed `invoice-execution.json` output. Run publication and Wor
 Item completion/child output commit in one SQL transaction; expiry at the final
 Work Item write rolls back Run publication too. Failed publication may leave a
 provisional sealed object, which remains inaccessible and requires ordinary
-output reconciliation/retention rather than an unsafe file deletion.
+output reconciliation/retention rather than an unsafe file deletion. The private
+worker currently stages outputs with a 3,600-second retention period; process
+restart durability does not establish unbounded retention or restore acceptance.
 
 Recovery is explicit. An expired lease alone authorizes no retry. A SQL dispatch
 record with **no admitted launch** proves that this host never authorized
