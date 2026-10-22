@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:actions:canvas-spec:1",
+  "$comment": "The public validator also enforces unique node IDs, unique form field names and table column keys, binding references, maximum node depth 8, maximum 128 total nodes, maximum 32 binding IDs, and 64 KiB canonical UTF-8 serialization.",
+  "title": "CanvasSpec",
+  "description": "Declarative CanvasSpec v1. Logical binding IDs carry no authority.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "title", "visibility", "bindingIds", "root"],
+  "properties": {
+    "schemaVersion": { "const": "actions.canvas-spec/v1" },
+    "title": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "visibility": {
+      "type": "array",
+      "items": { "enum": ["model", "app"] },
+      "maxItems": 2,
+      "uniqueItems": true
+    },
+    "bindingIds": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/Identifier" },
+      "maxItems": 32,
+      "uniqueItems": true
+    },
+    "root": { "$ref": "#/$defs/CanvasNode" }
+  },
+  "$defs": {
+    "CanvasNode": {
+      "oneOf": [
+        { "$ref": "#/$defs/CanvasStack" },
+        { "$ref": "#/$defs/CanvasText" },
+        { "$ref": "#/$defs/CanvasForm" },
+        { "$ref": "#/$defs/CanvasTable" },
+        { "$ref": "#/$defs/CanvasStatus" },
+        { "$ref": "#/$defs/CanvasArtifact" }
+      ]
+    },
+    "CanvasStack": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "id", "children"],
+      "properties": {
+        "type": { "const": "stack" },
+        "id": { "$ref": "#/$defs/Identifier" },
+        "children": {
+          "type": "array",
+          "maxItems": 128,
+          "items": { "$ref": "#/$defs/CanvasNode" }
+        }
+      }
+    },
+    "CanvasText": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "id", "text"],
+      "properties": {
+        "type": { "const": "text" },
+        "id": { "$ref": "#/$defs/Identifier" },
+        "text": { "type": "string", "minLength": 1, "maxLength": 4096 }
+      }
+    },
+    "CanvasForm": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "id", "bindingId", "submitLabel", "fields"],
+      "properties": {
+        "type": { "const": "form" },
+        "id": { "$ref": "#/$defs/Identifier" },
+        "bindingId": { "$ref": "#/$defs/Identifier" },
+        "submitLabel": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "items": { "$ref": "#/$defs/CanvasFormField" }
+        }
+      }
+    },
+    "CanvasFormField": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "label", "type", "required"],
+      "properties": {
+        "name": { "$ref": "#/$defs/Identifier" },
+        "label": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "type": { "enum": ["text", "integer", "boolean"] },
+        "required": { "type": "boolean" }
+      }
+    },
+    "CanvasTable": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "id", "bindingId", "rowsKey", "columns"],
+      "properties": {
+        "type": { "const": "table" },
+        "id": { "$ref": "#/$defs/Identifier" },
+        "bindingId": { "$ref": "#/$defs/Identifier" },
+        "rowsKey": { "$ref": "#/$defs/Identifier" },
+        "columns": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 16,
+          "items": { "$ref": "#/$defs/CanvasTableColumn" }
+        }
+      }
+    },
+    "CanvasTableColumn": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["key", "label"],
+      "properties": {
+        "key": { "$ref": "#/$defs/Identifier" },
+        "label": { "type": "string", "minLength": 1, "maxLength": 256 }
+      }
+    },
+    "CanvasStatus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "id", "bindingId"],
+      "properties": {
+        "type": { "const": "status" },
+        "id": { "$ref": "#/$defs/Identifier" },
+        "bindingId": { "$ref": "#/$defs/Identifier" }
+      }
+    },
+    "CanvasArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "id", "bindingId", "label"],
+      "properties": {
+        "type": { "const": "artifact" },
+        "id": { "$ref": "#/$defs/Identifier" },
+        "bindingId": { "$ref": "#/$defs/Identifier" },
+        "label": { "type": "string", "minLength": 1, "maxLength": 256 }
+      }
+    },
+    "Identifier": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$"
+    }
+  }
+}
