@@ -4792,3 +4792,16 @@ RCC Artifact preparation and from retained-Artifact execution. Neither an
 already prepared consumer nor a successful local replay proves a cold,
 network-isolated host install. Record the actual network and native-library
 requirements and retain failed preparation roots instead of adopting them.
+
+
+Use `RCC_NO_BUILD=1` when qualifying retained-Artifact execution so missing
+materialization cannot silently trigger a build. A fresh package prefix alone
+has no RCC hololib/Artifact: no-build publication must fail closed and its partial
+owned preparation root must remain available for diagnosis. Test an actual new,
+explicitly approved Run against the retained Artifact separately from terminal
+receipt replay, which performs no task execution. Process-tree `connect` tracing
+can establish that a particular replay made only loopback connections; it does
+not enforce an air gap or qualify transferred-Artifact restore on a clean host.
+The Artifact compatibility receipt is authoritative for native prerequisites.
+For this Linux amd64 build it requires glibc >=2.36 and `libX11.so.6` alongside
+the normal glibc loader/libraries, even though the invoice task is headless.

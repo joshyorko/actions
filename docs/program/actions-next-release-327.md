@@ -18,6 +18,12 @@ records the bounded existing-lifecycle composition and its CI fixture repairs.
 The [runnable reconciliation receipt](evidence/actions-next-327/cloud-reconciliation-20261022.json)
 records the executed local example/export, bounded owned synthetic effects,
 current platform regressions, exact commands, installed provenance and remaining gates.
+The [cold example/UI receipt](evidence/actions-next-327/cloud-cold-demo-20261022.json)
+qualifies source `20f42170fb382cbf160fae2c356144c45fde4457`: typed comparison
+columns in the existing renderer, fresh wheel-only consumer and fresh RCC home,
+actual execution/negative probes/restart, offline package installation and a new
+no-build retained-Artifact execution with observed loopback-only connections.
+This is separate from bare-OS bootstrap, enforced air-gap or restore qualification.
 Issue #327 remains the release authority. The full release is **NOT READY**; this
 private composition does not register a public application or establish actual
 authenticated host, general worker effects or full distribution acceptance.
@@ -73,7 +79,7 @@ already admitted work and audit. Rollback restores authorized readback of that
 immutable revision without creating another review, Work Item, Run or Attempt.
 No public scheduler or generic exactly-once external-effect claim is admitted.
 
-SDK `0.5.0a1` / Runtime `1.1.0a4` are provisional nonpublishing candidate
+SDK `0.5.0a1` / Runtime `1.1.0a5` are provisional nonpublishing candidate
 identifiers with Runtime dependency `>=0.5.0a1,<0.6.0`. The fixed worker environment
 installs the exact measured SDK wheel. PR wheel fixtures also stage that wheel
 before Runtime resolution; ordinary devinstall preserves its noneditable contract
