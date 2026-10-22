@@ -17,6 +17,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable, Mapping
 
+from actions.server.run_outputs.types import Actor
+
 _APP_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]{0,127}$")
 _MAX_FILES = 256
 _MAX_FILE_BYTES = 2 * 1024 * 1024
@@ -33,6 +35,8 @@ class CanvasAuthorizationError(PermissionError):
 
 @dataclass(frozen=True)
 class CanvasRevision:
+    workspace_id: str
+    deployment_revision_id: str
     app_id: str
     revision_id: str
     files: Mapping[str, bytes]
@@ -42,6 +46,7 @@ class CanvasRevision:
 class CanvasResourceGrant:
     """Server-derived scope required to read one app revision resource."""
 
+    actor: Actor
     workspace_id: str
     deployment_revision_id: str
     app_id: str
@@ -56,11 +61,11 @@ class CanvasRevisionStore:
         root: Path,
         *,
         validator: Callable[[str, Mapping[str, bytes]], None],
-        authorize_resource: Callable[[CanvasResourceGrant], bool],
+        authorize: Callable[[CanvasResourceGrant, str], bool],
     ) -> None:
         self.root = Path(root)
         self.validator = validator
-        self.authorize_resource = authorize_resource
+        self.authorize = authorize
         self.blobs = self.root / "revisions"
         self.blobs.mkdir(parents=True, exist_ok=True, mode=0o700)
         os.chmod(self.root, 0o700)
@@ -70,27 +75,55 @@ class CanvasRevisionStore:
             connection.executescript(
                 """
                 CREATE TABLE IF NOT EXISTS canvas_revision (
+                    workspace_id TEXT NOT NULL,
+                    deployment_revision_id TEXT NOT NULL,
                     app_id TEXT NOT NULL,
                     revision_id TEXT NOT NULL,
                     state TEXT NOT NULL CHECK(state IN ('staged', 'active', 'retired')),
-                    PRIMARY KEY(app_id, revision_id)
+                    PRIMARY KEY(workspace_id, deployment_revision_id, app_id, revision_id)
                 );
                 CREATE TABLE IF NOT EXISTS canvas_app (
-                    app_id TEXT PRIMARY KEY,
+                    workspace_id TEXT NOT NULL,
+                    deployment_revision_id TEXT NOT NULL,
+                    app_id TEXT NOT NULL,
                     current_revision_id TEXT,
                     previous_revision_id TEXT,
-                    FOREIGN KEY(app_id, current_revision_id)
-                        REFERENCES canvas_revision(app_id, revision_id)
+                    PRIMARY KEY(workspace_id, deployment_revision_id, app_id),
+                    FOREIGN KEY(workspace_id, deployment_revision_id, app_id, current_revision_id)
+                        REFERENCES canvas_revision(workspace_id, deployment_revision_id, app_id, revision_id)
                 );
                 """
             )
 
-    def stage(self, app_id: str, files: Mapping[str, bytes]) -> CanvasRevision:
+    def stage(
+        self,
+        actor: Actor,
+        workspace_id: str,
+        deployment_revision_id: str,
+        app_id: str,
+        files: Mapping[str, bytes],
+    ) -> CanvasRevision:
+        _validate_scope_id(workspace_id, "workspace ID")
+        _validate_actor(actor)
+        _validate_deployment_revision(deployment_revision_id)
         _validate_app_id(app_id)
         normalized = _validated_files(files)
-        self.validator(app_id, normalized)
         revision_id = _revision_digest(normalized)
-        target = self.blobs / app_id / revision_id.removeprefix("sha256:")
+        _require_authorized(
+            self.authorize,
+            CanvasResourceGrant(
+                actor, workspace_id, deployment_revision_id, app_id, revision_id
+            ),
+            "stage",
+        )
+        self.validator(app_id, normalized)
+        target = (
+            self.blobs
+            / workspace_id
+            / deployment_revision_id.removeprefix("sha256:")
+            / app_id
+            / revision_id.removeprefix("sha256:")
+        )
         target.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
         if not target.exists():
             staging = Path(tempfile.mkdtemp(prefix=".canvas-stage-", dir=target.parent))
@@ -109,27 +142,48 @@ class CanvasRevisionStore:
                 if staging.exists():
                     _remove_tree(staging)
         # Verify an existing digest path too; never adopt tampered bytes.
-        revision = self._read_revision(app_id, revision_id)
+        revision = self._read_revision(
+            workspace_id, deployment_revision_id, app_id, revision_id
+        )
         if revision.files != normalized:
             raise CanvasRevisionError("content-addressed revision mismatch")
         with closing(self._connect()) as connection:
             connection.execute(
-                "INSERT OR IGNORE INTO canvas_revision(app_id, revision_id, state) "
-                "VALUES (?, ?, 'staged')",
-                (app_id, revision_id),
+                "INSERT OR IGNORE INTO canvas_revision(" 
+                "workspace_id, deployment_revision_id, app_id, revision_id, state) "
+                "VALUES (?, ?, ?, ?, 'staged')",
+                (workspace_id, deployment_revision_id, app_id, revision_id),
             )
         return revision
 
     def activate(
-        self, app_id: str, revision_id: str, *, expected_current: str | None
+        self,
+        actor: Actor,
+        workspace_id: str,
+        deployment_revision_id: str,
+        app_id: str,
+        revision_id: str,
+        *,
+        expected_current: str | None,
     ) -> None:
+        _validate_scope_id(workspace_id, "workspace ID")
+        _validate_actor(actor)
+        _validate_deployment_revision(deployment_revision_id)
         _validate_app_id(app_id)
-        self._read_revision(app_id, revision_id)
+        _require_authorized(
+            self.authorize,
+            CanvasResourceGrant(
+                actor, workspace_id, deployment_revision_id, app_id, revision_id
+            ),
+            "activate",
+        )
+        self._read_revision(workspace_id, deployment_revision_id, app_id, revision_id)
         with closing(self._connect()) as connection:
             connection.execute("BEGIN IMMEDIATE")
             row = connection.execute(
-                "SELECT current_revision_id FROM canvas_app WHERE app_id = ?",
-                (app_id,),
+                "SELECT current_revision_id FROM canvas_app "
+                "WHERE workspace_id=? AND deployment_revision_id=? AND app_id=?",
+                (workspace_id, deployment_revision_id, app_id),
             ).fetchone()
             current = row[0] if row else None
             if current != expected_current:
@@ -137,75 +191,128 @@ class CanvasRevisionStore:
                     "active revision changed; activation rejected"
                 )
             connection.execute(
-                "INSERT INTO canvas_app(app_id, current_revision_id, "
-                "previous_revision_id) "
-                "VALUES (?, ?, ?) ON CONFLICT(app_id) DO UPDATE SET "
+                "INSERT INTO canvas_app(workspace_id, deployment_revision_id, app_id, "
+                "current_revision_id, previous_revision_id) "
+                "VALUES (?, ?, ?, ?, ?) ON CONFLICT(workspace_id, deployment_revision_id, app_id) "
+                "DO UPDATE SET "
                 "previous_revision_id=canvas_app.current_revision_id, "
                 "current_revision_id=excluded.current_revision_id",
-                (app_id, revision_id, current),
+                (workspace_id, deployment_revision_id, app_id, revision_id, current),
             )
             connection.execute(
                 "UPDATE canvas_revision SET state='retired' "
-                "WHERE app_id=? AND state='active'",
-                (app_id,),
+                "WHERE workspace_id=? AND deployment_revision_id=? AND app_id=? "
+                "AND state='active'",
+                (workspace_id, deployment_revision_id, app_id),
             )
             connection.execute(
                 "UPDATE canvas_revision SET state='active' "
-                "WHERE app_id=? AND revision_id=?",
-                (app_id, revision_id),
+                "WHERE workspace_id=? AND deployment_revision_id=? AND app_id=? "
+                "AND revision_id=?",
+                (workspace_id, deployment_revision_id, app_id, revision_id),
             )
             connection.execute("COMMIT")
 
-    def rollback(self, app_id: str, *, expected_current: str) -> str:
+    def rollback(
+        self,
+        actor: Actor,
+        workspace_id: str,
+        deployment_revision_id: str,
+        app_id: str,
+        *,
+        expected_current: str,
+    ) -> str:
+        _validate_scope_id(workspace_id, "workspace ID")
+        _validate_actor(actor)
+        _validate_deployment_revision(deployment_revision_id)
         _validate_app_id(app_id)
+        _require_authorized(
+            self.authorize,
+            CanvasResourceGrant(
+                actor,
+                workspace_id,
+                deployment_revision_id,
+                app_id,
+                expected_current,
+            ),
+            "rollback",
+        )
         with closing(self._connect()) as connection:
             connection.execute("BEGIN IMMEDIATE")
             row = connection.execute(
                 "SELECT current_revision_id, previous_revision_id "
-                "FROM canvas_app WHERE app_id=?",
-                (app_id,),
+                "FROM canvas_app WHERE workspace_id=? AND deployment_revision_id=? "
+                "AND app_id=?",
+                (workspace_id, deployment_revision_id, app_id),
             ).fetchone()
             if row is None or row[0] != expected_current or row[1] is None:
                 raise CanvasRevisionError(
                     "rollback target unavailable or active revision changed"
                 )
             current, previous = row
-            self._read_revision(app_id, previous)
+            self._read_revision(workspace_id, deployment_revision_id, app_id, previous)
             connection.execute(
                 "UPDATE canvas_app SET current_revision_id=?, previous_revision_id=? "
-                "WHERE app_id=?",
-                (previous, current, app_id),
+                "WHERE workspace_id=? AND deployment_revision_id=? AND app_id=?",
+                (previous, current, workspace_id, deployment_revision_id, app_id),
             )
             connection.execute(
                 "UPDATE canvas_revision SET state='retired' "
-                "WHERE app_id=? AND revision_id=?",
-                (app_id, current),
+                "WHERE workspace_id=? AND deployment_revision_id=? AND app_id=? "
+                "AND revision_id=?",
+                (workspace_id, deployment_revision_id, app_id, current),
             )
             connection.execute(
                 "UPDATE canvas_revision SET state='active' "
-                "WHERE app_id=? AND revision_id=?",
-                (app_id, previous),
+                "WHERE workspace_id=? AND deployment_revision_id=? AND app_id=? "
+                "AND revision_id=?",
+                (workspace_id, deployment_revision_id, app_id, previous),
             )
             connection.execute("COMMIT")
             return previous
 
-    def pin_active(self, app_id: str) -> CanvasRevision:
+    def pin_active(
+        self,
+        actor: Actor,
+        workspace_id: str,
+        deployment_revision_id: str,
+        app_id: str,
+    ) -> CanvasRevision:
+        _validate_scope_id(workspace_id, "workspace ID")
+        _validate_actor(actor)
+        _validate_deployment_revision(deployment_revision_id)
         _validate_app_id(app_id)
         with closing(self._connect()) as connection:
             row = connection.execute(
-                "SELECT current_revision_id FROM canvas_app WHERE app_id=?", (app_id,)
+                "SELECT current_revision_id FROM canvas_app "
+                "WHERE workspace_id=? AND deployment_revision_id=? AND app_id=?",
+                (workspace_id, deployment_revision_id, app_id),
             ).fetchone()
         if row is None or row[0] is None:
             raise CanvasRevisionError("app has no active revision")
-        return self._read_revision(app_id, row[0])
+        _require_authorized(
+            self.authorize,
+            CanvasResourceGrant(
+                actor, workspace_id, deployment_revision_id, app_id, row[0]
+            ),
+            "invoke",
+        )
+        return self._read_revision(workspace_id, deployment_revision_id, app_id, row[0])
 
     def read_resource(self, grant: CanvasResourceGrant, resource_path: str) -> bytes:
         """Read an exact resource only when server authorization approves its scope."""
+        _validate_scope_id(grant.workspace_id, "workspace ID")
+        _validate_actor(grant.actor)
+        _validate_deployment_revision(grant.deployment_revision_id)
         _validate_app_id(grant.app_id)
         _validate_relative_path(resource_path)
-        if not self.authorize_resource(grant):
-            raise CanvasAuthorizationError("Canvas resource scope is not authorized")
-        revision = self._read_revision(grant.app_id, grant.app_revision_id)
+        _require_authorized(self.authorize, grant, "read_resource")
+        revision = self._read_revision(
+            grant.workspace_id,
+            grant.deployment_revision_id,
+            grant.app_id,
+            grant.app_revision_id,
+        )
         try:
             return revision.files[resource_path]
         except KeyError as exc:
@@ -213,10 +320,22 @@ class CanvasRevisionStore:
                 "resource is not part of authorized revision"
             ) from exc
 
-    def _read_revision(self, app_id: str, revision_id: str) -> CanvasRevision:
+    def _read_revision(
+        self,
+        workspace_id: str,
+        deployment_revision_id: str,
+        app_id: str,
+        revision_id: str,
+    ) -> CanvasRevision:
         if not re.fullmatch(r"sha256:[0-9a-f]{64}", revision_id):
             raise CanvasRevisionError("invalid revision digest")
-        directory = self.blobs / app_id / revision_id.removeprefix("sha256:")
+        directory = (
+            self.blobs
+            / workspace_id
+            / deployment_revision_id.removeprefix("sha256:")
+            / app_id
+            / revision_id.removeprefix("sha256:")
+        )
         files: dict[str, bytes] = {}
         try:
             for path in directory.rglob("*"):
@@ -235,7 +354,9 @@ class CanvasRevisionStore:
             raise CanvasRevisionError(
                 "revision contents failed digest verification"
             )
-        return CanvasRevision(app_id, revision_id, files)
+        return CanvasRevision(
+            workspace_id, deployment_revision_id, app_id, revision_id, files
+        )
 
     def _connect(self) -> sqlite3.Connection:
         connection = sqlite3.connect(self.database, isolation_level=None, timeout=5)
@@ -275,6 +396,37 @@ def _validate_relative_path(name: str) -> None:
 def _validate_app_id(app_id: str) -> None:
     if not isinstance(app_id, str) or not _APP_ID.fullmatch(app_id):
         raise CanvasRevisionError("invalid app ID")
+
+
+def _validate_scope_id(value: str, label: str) -> None:
+    if (
+        not isinstance(value, str)
+        or not value
+        or len(value) > 128
+        or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._:-]*", value)
+    ):
+        raise CanvasRevisionError(f"invalid {label}")
+
+
+def _validate_actor(actor: Actor) -> None:
+    if not isinstance(actor, Actor):
+        raise CanvasAuthorizationError("trusted authenticated actor required")
+
+
+def _validate_deployment_revision(value: str) -> None:
+    if not isinstance(value, str) or not re.fullmatch(r"sha256:[0-9a-f]{64}", value):
+        raise CanvasRevisionError("invalid deployment revision ID")
+
+
+def _require_authorized(
+    authorize: Callable[[CanvasResourceGrant, str], bool],
+    grant: CanvasResourceGrant,
+    operation: str,
+) -> None:
+    if not authorize(grant, operation):
+        raise CanvasAuthorizationError(
+            f"Canvas {operation} is not authorized for this revision scope"
+        )
 
 
 def _revision_digest(files: Mapping[str, bytes]) -> str:
