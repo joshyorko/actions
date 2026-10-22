@@ -10,6 +10,7 @@ import os
 import subprocess
 import sys
 import tempfile
+import tomllib
 import zipfile
 from email.parser import BytesParser
 from pathlib import Path
@@ -285,16 +286,18 @@ def _assert_installed_runtime_wheel_has_no_private_core_imports(
     return bound_members
 
 
-def select_runtime_wheel(directory: Path) -> Path:
+def select_runtime_wheel(
+    directory: Path, *, expected_runtime: str = EXPECTED_RUNTIME
+) -> Path:
     candidates = []
     for wheel in sorted(directory.glob("actions_runtime-*.whl")):
         if "-cp312-" not in wheel.name:
             continue
-        validate_runtime_metadata(wheel)
+        validate_runtime_metadata(wheel, expected_runtime=expected_runtime)
         candidates.append(wheel)
     if len(candidates) != 1:
         raise ValueError(
-            f"Expected exactly one cp312 actions-runtime {EXPECTED_RUNTIME} wheel in "
+            f"Expected exactly one cp312 actions-runtime {expected_runtime} wheel in "
             f"{directory}, found {len(candidates)}"
         )
     return candidates[0]
@@ -393,7 +396,9 @@ def verify_public_package_report(report_path: Path) -> dict[str, dict[str, str]]
     return observed
 
 
-def install_command(python: Path, wheel: Path, report: Path) -> list[str]:
+def install_command(
+    python: Path, wheel: Path, report: Path, *, candidate_sdk: Path | None = None
+) -> list[str]:
     return [
         str(python),
         "-m",
@@ -409,6 +414,7 @@ def install_command(python: Path, wheel: Path, report: Path) -> list[str]:
         str(wheel.resolve()),
         f"actions-core=={EXPECTED_CORE}",
         f"actions-http-helper=={EXPECTED_HELPER}",
+        *([str(candidate_sdk.resolve())] if candidate_sdk else []),
     ]
 
 
@@ -437,6 +443,7 @@ import json
 import pathlib
 import sys
 import tempfile
+import tomllib
 
 assert importlib.metadata.version("actions-runtime") == {expected_runtime!r}
 environment_root = pathlib.Path(sys.prefix).resolve()
@@ -674,16 +681,108 @@ print("RUNTIME_WHEEL_MEMBER_INVENTORY=" + json.dumps({{
     return inventory
 
 
+def select_candidate_sdk(directory: Path, project: Path) -> tuple[Path, str]:
+    """Admit only the SDK and Runtime versions declared by the producer checkout."""
+    wheels = sorted(directory.glob("*.whl"))
+    if len(wheels) != 1 or wheels[0].is_symlink():
+        raise ValueError("Expected exactly one regular candidate SDK wheel")
+    wheel = wheels[0]
+    sdk_project = project.parent / "work-items" / "pyproject.toml"
+    sdk_version = tomllib.loads(sdk_project.read_text())["tool"]["poetry"]["version"]
+    with zipfile.ZipFile(wheel) as archive:
+        metadata = BytesParser().parsebytes(
+            archive.read(
+                next(
+                    name
+                    for name in archive.namelist()
+                    if name.endswith(".dist-info/METADATA")
+                )
+            )
+        )
+    if metadata["Name"] != "actions-work-items" or metadata["Version"] != sdk_version:
+        raise ValueError("Candidate SDK version differs from producer checkout")
+    runtime_version = tomllib.loads((project / "pyproject.toml").read_text())["tool"][
+        "poetry"
+    ]["version"]
+    return wheel, runtime_version
+
+
+def verify_candidate_sdk(python: Path, wheel: Path, workdir: Path) -> None:
+    """Bind the noneditable installed SDK, RECORD members and origin to its wheel."""
+    probe = """
+import hashlib, importlib.metadata, json, pathlib, sys
+import actions.work_items
+package = importlib.metadata.distribution('actions-work-items')
+prefix = pathlib.Path(sys.prefix).resolve()
+assert pathlib.Path(actions.work_items.__file__).resolve().is_relative_to(prefix)
+assert callable(actions.work_items.SQLiteAdapter.reserve_fenced)
+modules = {}
+for member in package.files or ():
+    if str(member).endswith('.py'):
+        path = pathlib.Path(package.locate_file(member)).resolve()
+        assert path.is_relative_to(prefix), path
+        assert member.hash and member.hash.mode == 'sha256', member
+        import base64
+        assert base64.urlsafe_b64encode(hashlib.sha256(path.read_bytes()).digest()).rstrip(b'=').decode() == member.hash.value
+        modules[str(member)] = str(path)
+print(json.dumps({'version': package.version, 'origin': json.loads(package.read_text('direct_url.json') or '{}'), 'modules': modules}))
+"""
+    result = subprocess.run(
+        [str(python), "-I", "-c", probe],
+        check=True,
+        capture_output=True,
+        text=True,
+        cwd=workdir,
+        env=isolated_environment(),
+    )
+    inventory = json.loads(result.stdout)
+    verify_selected_runtime_origin(wheel, inventory["origin"])
+    with zipfile.ZipFile(wheel) as archive:
+        metadata = BytesParser().parsebytes(
+            archive.read(
+                next(
+                    name
+                    for name in archive.namelist()
+                    if name.endswith(".dist-info/METADATA")
+                )
+            )
+        )
+    assert inventory["version"] == metadata["Version"]
+    members = _assert_runtime_wheel_python_members_match(
+        wheel, {name: Path(path) for name, path in inventory["modules"].items()}
+    )
+    assert members, "candidate SDK has no installed Python members"
+    print(
+        "CANDIDATE_SDK_WHEEL="
+        + json.dumps(
+            {
+                "wheel": str(wheel.resolve()),
+                "sha256": hashlib.sha256(wheel.read_bytes()).hexdigest(),
+                **inventory,
+            },
+            sort_keys=True,
+        )
+    )
+
+
 def verify_installed(
-    python: Path, isolated_workdir: Path, report_path: Path, wheel: Path
+    python: Path,
+    isolated_workdir: Path,
+    report_path: Path,
+    wheel: Path,
+    *,
+    expected_runtime: str = EXPECTED_RUNTIME,
+    candidate_sdk: Path | None = None,
 ) -> None:
     public_packages = verify_public_package_report(report_path)
     oauth_hashes = verify_oauth_input_binding(
         wheel, Path(__file__).resolve().parents[1]
     )
     inventory = verify_installed_runtime_wheel(
-        python, wheel, isolated_workdir, REPO_ROOT
+        python, wheel, isolated_workdir, REPO_ROOT, expected_runtime=expected_runtime
     )
+    if candidate_sdk is not None:
+        verify_candidate_sdk(python, candidate_sdk, isolated_workdir)
     versions = inventory["installed_versions"]
     if (
         versions["actions-core"] != EXPECTED_CORE
@@ -710,19 +809,33 @@ def main(arguments: list[str] | None = None) -> None:
     parser.add_argument("wheel_directory", nargs="?", type=Path)
     parser.add_argument("--installed-wheel", type=Path)
     parser.add_argument("--checkout-root", type=Path)
+    parser.add_argument("--candidate-sdk-wheelhouse", type=Path)
     args = parser.parse_args(arguments)
+    expected_runtime = EXPECTED_RUNTIME
+    candidate_sdk = None
+    if args.candidate_sdk_wheelhouse is not None:
+        candidate_sdk, expected_runtime = select_candidate_sdk(
+            args.candidate_sdk_wheelhouse,
+            (args.checkout_root or Path(__file__).resolve().parents[1]).resolve(),
+        )
     if args.installed_wheel is not None:
         if args.wheel_directory is not None or args.checkout_root is None:
             parser.error("--installed-wheel requires --checkout-root and no directory")
         wheel = args.installed_wheel.resolve()
-        validate_runtime_metadata(wheel)
+        validate_runtime_metadata(wheel, expected_runtime=expected_runtime)
         project = args.checkout_root.resolve()
         oauth_hashes = verify_oauth_input_binding(wheel, project)
         with tempfile.TemporaryDirectory(prefix="runtime-installed-wheel-") as temp:
             workdir = Path(temp)
             verify_installed_runtime_wheel(
-                Path(sys.executable), wheel, workdir, source_checkout_root(project)
+                Path(sys.executable),
+                wheel,
+                workdir,
+                source_checkout_root(project),
+                expected_runtime=expected_runtime,
             )
+            if candidate_sdk is not None:
+                verify_candidate_sdk(Path(sys.executable), candidate_sdk, workdir)
             subprocess.run(
                 [sys.executable, "-m", "actions.server", "version"],
                 check=True,
@@ -735,7 +848,9 @@ def main(arguments: list[str] | None = None) -> None:
         parser.error(
             "provide a wheel directory or --installed-wheel with --checkout-root"
         )
-    wheel = select_runtime_wheel(args.wheel_directory)
+    wheel = select_runtime_wheel(
+        args.wheel_directory, expected_runtime=expected_runtime
+    )
     with tempfile.TemporaryDirectory(prefix="runtime-registry-floor-") as temp:
         workdir = Path(temp)
         env_dir = workdir / "venv"
@@ -747,12 +862,19 @@ def main(arguments: list[str] | None = None) -> None:
         python = env_dir / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
         report = workdir / "pip-install-report.json"
         subprocess.run(
-            install_command(python, wheel, report),
+            install_command(python, wheel, report, candidate_sdk=candidate_sdk),
             check=True,
             cwd=workdir,
             env=isolated_environment(),
         )
-        verify_installed(python, workdir, report, wheel)
+        verify_installed(
+            python,
+            workdir,
+            report,
+            wheel,
+            expected_runtime=expected_runtime,
+            candidate_sdk=candidate_sdk,
+        )
 
 
 if __name__ == "__main__":

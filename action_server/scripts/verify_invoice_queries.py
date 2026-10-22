@@ -43,6 +43,11 @@ def main():
         action="store_true",
         help="also run the complete portable Runtime suite",
     )
+    parser.add_argument(
+        "--worker",
+        action="store_true",
+        help="also prove the fixed invoice task with owned local RCC artifact and installed SDK",
+    )
     args = parser.parse_args()
     attempt = str(uuid4())
     evidence = args.evidence_dir.resolve() / attempt
@@ -75,6 +80,10 @@ def main():
         ROOT / "work-items/src/actions/work_items/_adapters/_sql_review.py",
         ROOT / "work-items/pyproject.toml",
         ROOT / "action_server/src/actions/server/_models.py",
+        ROOT / "action_server/src/actions/server/_rcc_runtime_adapter.py",
+        ROOT / "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
+        ROOT / "action_server/tests/action_server_tests/test_robot_run_inputs.py",
+        ROOT / "action_server/src/actions/server/_robot_inputs.py",
         ROOT / "action_server/src/actions/server/migrations/__init__.py",
         ROOT
         / "action_server/src/actions/server/migrations/migration_add_invoice_reviews.py",
@@ -92,7 +101,7 @@ import hashlib, importlib, json, sys
 from pathlib import Path
 source = Path(sys.argv[1]).resolve()
 identities = {}
-for name in ('actions.server.canvas_lifecycle', 'actions.server.data_queries.review', 'actions.server.data_queries.knowledge',
+for name in ('actions.server.canvas_lifecycle', 'actions.server.data_queries.review', 'actions.server.data_queries.invoice_worker', 'actions.server.data_queries.knowledge',
              'actions.server.data_queries.invoices', 'actions.server.run_outputs.service'):
     module = importlib.import_module(name)
     path = Path(module.__file__).resolve()
@@ -187,6 +196,132 @@ print(json.dumps(identities))
                 receipt["inputs"][str(p.relative_to(ROOT))] = hashlib.sha256(
                     p.read_bytes()
                 ).hexdigest()
+        if args.worker:
+            import platform
+
+            if platform.system() != "Linux":
+                raise RuntimeError(
+                    "invoice worker proof currently requires Linux owned filesystem provider"
+                )
+            wheels = evidence / "sdk-wheels"
+            build = subprocess.run(
+                ["poetry", "build", "-f", "wheel", "-o", str(wheels)],
+                cwd=ROOT / "work-items",
+                env=package_environment(ROOT / "work-items"),
+                capture_output=True,
+                text=True,
+                timeout=120,
+            )
+            (evidence / "sdk-build.log").write_text(build.stdout + build.stderr)
+            build.check_returncode()
+            entries = list(wheels.iterdir())
+            if (
+                len(entries) != 1
+                or entries[0].name != "actions_work_items-0.5.0a1-py3-none-any.whl"
+                or entries[0].is_symlink()
+            ):
+                raise RuntimeError("one exact candidate SDK wheel required")
+            wheel = entries[0]
+            wheel_hash = hashlib.sha256(wheel.read_bytes()).hexdigest()
+            fixture = evidence / "worker-environment"
+            fixture.mkdir()
+            environment = fixture / "package.yaml"
+            environment.write_text(
+                "version: 0.1\nspec-version: v2\ndependencies:\n  conda-forge:\n    - python=3.12.15\n  pypi:\n    - typing-extensions=4.16.0\npost-install:\n  - python -m pip install --no-deps --force-reinstall "
+                + str(wheel)
+                + "\n"
+            )
+            rcc = command(
+                "poetry",
+                "run",
+                "python",
+                "-c",
+                "from actions.server._rcc_runtime_adapter import get_rcc_location; print(get_rcc_location())",
+                cwd=ROOT / "action_server",
+                env=package_environment(ROOT / "action_server"),
+            )
+            rcc_home = evidence / "rcc-home"
+            worker_env = dict(
+                env, ROBOCORP_HOME=str(rcc_home), ACTIONS_HOME=str(rcc_home)
+            )
+            with (evidence / "rcc-prepare.log").open("w") as log:
+                prepared = subprocess.run(
+                    [
+                        rcc,
+                        "env",
+                        "publish",
+                        "--environment",
+                        str(environment),
+                        "--provider",
+                        "local",
+                        "--json",
+                    ],
+                    env=worker_env,
+                    text=True,
+                    stdout=subprocess.PIPE,
+                    stderr=log,
+                    timeout=900,
+                )
+            (evidence / "rcc-prepare.json").write_text(prepared.stdout)
+            prepared.check_returncode()
+            artifact = json.loads(prepared.stdout)["artifactDigest"]
+            # Preserve local provider and the existing permissive-local policy;
+            # RCC18.19.3 otherwise treats the 'local' alias as an HTTP carrier.
+            with (evidence / "rcc-acquire.log").open("w") as log:
+                acquired = subprocess.run(
+                    [
+                        rcc,
+                        "env",
+                        "acquire",
+                        "--artifact",
+                        artifact,
+                        "--provider",
+                        "local",
+                        "--trust-carrier",
+                        str(rcc_home / "artifacts/v1/trust"),
+                        "--trust-carrier-type",
+                        "filesystem",
+                        "--permissive-local",
+                        "--json",
+                    ],
+                    env=worker_env,
+                    text=True,
+                    stdout=subprocess.PIPE,
+                    stderr=log,
+                    timeout=120,
+                )
+            (evidence / "rcc-acquire.json").write_text(acquired.stdout)
+            acquired.check_returncode()
+            acquired_result = json.loads(acquired.stdout)
+            if (
+                acquired_result.get("artifactDigest") != artifact
+                or acquired_result.get("verification", {}).get("valid") is not True
+            ):
+                raise RuntimeError("worker artifact acquisition not verified")
+            config = evidence / "worker-runtime.json"
+            config.write_text(
+                json.dumps(
+                    {
+                        "artifact_digest": artifact,
+                        "environment": str(environment),
+                        "sdk_wheel_sha256": wheel_hash,
+                        "rcc": rcc,
+                        "rcc_home": str(rcc_home),
+                    }
+                )
+            )
+            env.update(
+                ACTIONS_INVOICE_WORKER_EVIDENCE_DIR=str(evidence / "worker-cells"),
+                ACTIONS_INVOICE_WORKER_ENVIRONMENT=str(config),
+                ACTIONS_REQUIRE_INVOICE_WORKER="1",
+                ACTIONS_ROBOT_INPUT_RCC=rcc,
+            )
+            receipt["worker_runtime"] = {
+                "artifact_digest": artifact,
+                "sdk_wheel_sha256": wheel_hash,
+                "rcc_sha256": hashlib.sha256(Path(rcc).read_bytes()).hexdigest(),
+                "config": str(config),
+            }
         suites = {
             "components": [
                 "tests/action_server_tests/test_invoice_review.py",
@@ -203,6 +338,14 @@ print(json.dumps(identities))
                 "tests/action_server_tests/run_outputs",
             ],
         }
+        if args.worker:
+            suites["worker"] = [
+                "tests/action_server_tests/test_invoice_worker.py",
+                "tests/action_server_tests/test_invoice_worker_mcp.py",
+                "tests/action_server_tests/test_robot_run_inputs.py",
+                "tests/action_server_tests/test_rcc_runtime_adapter.py::test_local_worker_carrier_keeps_provider_and_policy_explicit",
+                "tests/action_server_tests/test_rcc_runtime_adapter.py::test_local_carrier_cannot_replace_nonlocal_provider_trust",
+            ]
         if args.browser:
             suites["browser"] = [
                 "tests/action_server_tests/test_invoice_canvas_browser.py"
@@ -241,9 +384,17 @@ print(json.dumps(identities))
                 not cases
                 or counts["failures"]
                 or counts["errors"]
-                or (label in ("components", "invoice", "browser") and counts["skipped"])
+                or (
+                    label in ("components", "invoice", "browser", "worker")
+                    and counts["skipped"]
+                )
             ):
                 raise RuntimeError("JUnit did not prove the required gate")
+        for relative, expected in receipt["inputs"].items():
+            if hashlib.sha256((ROOT / relative).read_bytes()).hexdigest() != expected:
+                raise RuntimeError(
+                    "source input changed during verification: " + relative
+                )
         receipt["status"] = "PASS"
     except Exception as exc:
         receipt["failure_type"] = type(exc).__name__

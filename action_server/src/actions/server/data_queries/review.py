@@ -18,7 +18,7 @@ from pydantic import BaseModel, ConfigDict, Field, TypeAdapter
 
 from actions.server._database import Database
 from actions.server._models import RUN_ID_COUNTER, Run
-from actions.server.run_outputs.models import RunOutput
+from actions.server.run_outputs.models import RunOutput, RunPin
 from actions.server.run_outputs.service import (
     AccessDenied,
     _canonical,
@@ -289,6 +289,29 @@ class InvoiceReviewService:
                 raise ReviewConflict("review cannot be cancelled")
             if row.work_item_id and not self.queue(scope).cancel(row.work_item_id):
                 raise ReviewConflict("completed Work Item cannot be cancelled")
+            if row.work_item_id:
+                from .invoice_worker import WorkerInput, work_item_run_key
+
+                key = work_item_run_key(row.work_item_id)
+                idem = _key(
+                    "actions.workspace-run-idempotency/v1", row.workspace_id, key
+                )
+                pins = self.db.all(RunPin, where="idempotency_id=?", values=[idem])
+                if pins:
+                    linked = pins[0]
+                    worker_snapshot = self.outputs._pinned(linked)
+                    run = _one(self.db, Run, linked.run_id)
+                    inputs = WorkerInput.model_validate_json(run.inputs)
+                    if (
+                        linked.idempotency_key != key
+                        or worker_snapshot.deployment != scope.deployment
+                        or worker_snapshot.canvas_application != scope.application
+                        or inputs.proposal != proposal
+                        or inputs.initial_claim.item_id != row.work_item_id
+                    ):
+                        raise ReviewConflict("linked execution differs from review")
+                    if not self.outputs.cancel(actor, run.id):
+                        raise ReviewConflict("completed execution cannot be cancelled")
             _update(
                 self.db,
                 InvoiceReview,

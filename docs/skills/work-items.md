@@ -68,6 +68,68 @@ and queued work. Never delete an approved Work Item to make a rollback appear
 clean. Restore, worker draining, effects and production migration remain separate
 release/operator gates.
 
+### Approved invoice Work Item execution
+
+`InvoiceWorkerService` is a private trusted-host composition of the existing
+review, SQL Work Item, common Run/Attempt and output services. It registers no
+HTTP/MCP dispatcher or background worker and never approves a review. The host
+must explicitly supply the currently approved proposal, a live Work Item claim
+and a registered pinned `InvoiceWorkerPlan` before dispatch.
+
+One deterministic Work Item idempotency key admits one **distinct** worker Run.
+Immutable `Run.inputs` retain the approved binding and initial Work Item claim,
+RCC Artifact digest, source generation and exact candidate SDK wheel hash. Each
+Attempt binds its current Work Item owner **and epoch** in the running Run's
+dispatch record. Reusing the same owner UUID after Work Item takeover does not
+permit reusing the old Attempt. Current review authority, execution grants,
+application/deployment revision, input fingerprint, Action schema and source/plan
+identity are checked at their boundaries.
+
+Dispatch/launch evidence uses existing `Run.result` while the Run is RUNNING;
+this is not a completed result. Only the existing PASSED envelope and authorized
+RunOutput resolver grant access to a final artifact. No new state table, database
+or migration was added. Work Item, Review, Run and Attempt remain distinct.
+Review cancellation atomically fences the Work Item and requests cancellation
+on its linked Run. The worker stops/reaps its owned RCC wrapper when cancellation
+or either fence invalidates execution. A cancellation request alone is not a
+claim that arbitrary external effects were undone.
+
+The fixed synthetic task receives the sealed invoice rows through a bounded
+private input file and runs through the existing RCC adapter at 18.19.3. The
+Runtime Plan binds its source generation/environment and Artifact/SDK identities.
+The worker copies and verifies source in an owned Attempt directory, then records
+one launch intent before spawning. A duplicate launch cannot create another
+invocation. The task verifies its installed SDK distribution, module bytes and
+wheel-origin hash. Its completed RCC receipt, task result and measured source
+lineage become a sealed `invoice-execution.json` output. Run publication and Work
+Item completion/child output commit in one SQL transaction; expiry at the final
+Work Item write rolls back Run publication too. Failed publication may leave a
+provisional sealed object, which remains inaccessible and requires ordinary
+output reconciliation/retention rather than an unsafe file deletion.
+
+Recovery is explicit. An expired lease alone authorizes no retry. A SQL dispatch
+record with **no admitted launch** proves that this host never authorized
+execution and permits a new Attempt after reconciliation. A verified completed
+journal for this fixed private-result-file-only task permits publishing its
+retained result with a new owner/Attempt, preserving both executed and publication
+lineage, without running RCC again. Missing, altered or incomplete evidence stays
+blocked. Repeated terminal delivery returns the retained receipt. This is not an
+exactly-once external-effect protocol, generic retry/dead-letter policy or proof
+of arbitrary mid-effect crash safety.
+
+After the pinned Doctor/Bootstrap/ToolkitTest gateway, set
+`ACTIONS_INVOICE_WORKER=1` with an absolute `ACTIONS_INVOICE_EVIDENCE_DIR` and run
+`InvoiceQueryTest`. It builds the unchanged candidate SDK through Poetry, prepares
+and verifies a task-local RCC Artifact and owns the real PostgreSQL fixture.
+Mandatory cells cover both invoice providers and both SQL stores, real RCC task
+input delivery, MCP approval through execution, abrupt controller exit followed
+by completion in a new interpreter, cancellation of an actual owned RCC process,
+claim takeover and unknown-outcome refusal. Test artifacts/journals are copied
+to the retained gate evidence. The verifier rejects source inputs that change
+during a run. This Linux source gate does not qualify generated immutable app
+activation, Windows/macOS worker execution, authenticated ChatGPT E1 or release
+publication/restore.
+
 ### PostgreSQL fenced coordination and guarded retry
 
 The #327 candidate adds private `PostgreSQLFencedQueue`, implementing the same
@@ -114,7 +176,7 @@ validates; unknown/nonempty layouts, missing metadata and future versions fail
 closed. There is no SQLite-to-PostgreSQL migration or dual authoritative write.
 Any future format change requires a reviewed migration, pre-upgrade database and
 attachment/effect-receipt backup, restore proof and mixed-writer rejection gates.
-The integration candidate uses SDK `0.5.0a1` and Runtime `1.1.0a1`, with
+The integration candidate uses SDK `0.5.0a1` and Runtime `1.1.0a2`, with
 a Runtime floor of `>=0.5.0a1,<0.6.0` (prereleases admitted). These are
 provisional, nonpublishing identifiers; final versions remain release-review
 decisions. Published SDK 0.4.4 / Runtime 1.0.4 identifiers must never name

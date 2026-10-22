@@ -34,6 +34,30 @@ is unsafe. Continue comparing the upgraded tables/indexes with a fresh schema
 and proving legacy rows survive; do not add `IF NOT EXISTS` to hide the fixture
 error or drop retained business data during migration.
 
+## Explicit local RCC trust carrier for invoice fixtures
+
+Pinned RCC 18.19.3 accepts `--provider local`, but its automatic trust-carrier
+selection constructs an HTTP carrier for any nonempty provider string. In a
+fresh task-owned local Artifact fixture, publish succeeded while provider-bound
+acquire/exec failed with `artifact trust attachment verification failed`; the
+verification receipt recorded `trust attachment could not be decoded`.
+
+Keep the provider and policy. Supply the existing generated local carrier with
+`--trust-carrier <owned-rcc-home>/artifacts/v1/trust --trust-carrier-type filesystem`
+alongside the original `--provider local --permissive-local`. The measured
+verification policy digest was unchanged and verification then returned valid,
+including provenance/SBOM/revocation digests. No trust roots, signatures, signing
+keys, credentials or security configuration were changed. This applies only to
+owned unsigned local test artifacts, never a remote/production trust override.
+
+The existing adapter's optional `local_trust_carrier` argument preserves its
+provider binding and is rejected for provider-free, named and HTTP(S) providers.
+The fixed invoice worker passes its owned local carrier explicitly. Other
+callers are not silently redirected. This narrow Actions mitigation remains
+until a reviewed RCC pin fixes automatic local-alias carrier selection and the
+same acquire/exec negatives and positives pass without it. The upstream finding
+is draft-only under the task's reporting authority.
+
 ## Recovering a vanished release worktree
 
 Verify the registered worktrees, exact branch ref and destination absence before
@@ -4571,3 +4595,20 @@ Keep disposable registry rows on nonpublishing qualification/backup branches,
 never in the reviewed default publication registry. Compare tested code blobs to
 the repair commit, retain original owner snapshots before/after, and distinguish
 shared-verifier qualification from unrun default-button activation before merge.
+
+### Candidate dependencies in Runtime CI
+
+`build_common_tasks(..., install_extras=("data-duckdb",))` makes the Runtime's
+ordinary install and devinstall admit its provider test dependencies. The shared
+devinstall transformation preserves an explicit `develop = false` in either the
+main or group declaration; otherwise it can silently replace the fenced SDK
+candidate with an editable import outside the environment prefix.
+
+The PR wheel fixture builds and stages the exact Work Items SDK alongside Core
+and HTTP Helper before cibuildwheel resolves Runtime dependencies. The explicit
+`--candidate-sdk-wheelhouse` verifier mode binds SDK/Runtime versions to the
+producer pyprojects, verifies the installed SDK's local archive origin, RECORD
+and Python bytes, and retains public Core/Helper version, URL and SHA checks.
+This flag is PR-only; the default published-floor verifier remains pinned to
+Runtime 1.0.4. Staging unpublished SDK 0.5.0a1 locally is a test prerequisite,
+not permission to publish it or relax the Runtime dependency floor.

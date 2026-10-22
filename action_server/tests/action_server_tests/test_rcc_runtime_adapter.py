@@ -2068,3 +2068,47 @@ def test_bootstrap_rejects_non_string_pythonpath(
     monkeypatch.setattr("actions.server._rcc.get_rcc", lambda: InvalidEnvironmentRcc())
     with pytest.raises(ActionPackageError, match="PYTHONPATH must be a string"):
         ActionPackageHandler(str(package), tmp_path / "data").bootstrap_environment()
+
+
+def test_local_worker_carrier_keeps_provider_and_policy_explicit(tmp_path):
+    from actions.server._rcc_runtime_adapter import (
+        RccRuntimeDescriptor,
+        build_exec_command,
+    )
+
+    descriptor = RccRuntimeDescriptor(
+        artifact_digest="sha256:" + "c" * 64, provider_reference="local"
+    )
+    carrier = tmp_path / "trust"
+    args = build_exec_command(
+        Path("/owned/rcc"),
+        descriptor,
+        ["python", "task.py"],
+        receipt_file=tmp_path / "receipt.json",
+        local_trust_carrier=carrier,
+    )
+    assert args[args.index("--provider") + 1] == "local"
+    assert args[args.index("--trust-carrier") + 1] == str(carrier)
+    assert args[args.index("--trust-carrier-type") + 1] == "filesystem"
+    assert "--permissive-local" in args
+    assert args[-3:] == ["--", "python", "task.py"]
+
+
+@pytest.mark.parametrize("provider", [None, "https://cache.example", "named-profile"])
+def test_local_carrier_cannot_replace_nonlocal_provider_trust(tmp_path, provider):
+    from actions.server._rcc_runtime_adapter import (
+        RccRuntimeDescriptor,
+        RccRuntimeError,
+        build_exec_command,
+    )
+
+    with pytest.raises(RccRuntimeError, match="explicit local provider"):
+        build_exec_command(
+            Path("/owned/rcc"),
+            RccRuntimeDescriptor(
+                artifact_digest="sha256:" + "d" * 64, provider_reference=provider
+            ),
+            ["python", "task.py"],
+            receipt_file=tmp_path / "receipt.json",
+            local_trust_carrier=tmp_path / "trust",
+        )

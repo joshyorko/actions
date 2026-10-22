@@ -366,7 +366,9 @@ def test_cibuildwheel_checks_each_final_repaired_wheel():
     )
     assert build["env"]["CIBW_TEST_COMMAND"] == (
         'python "{project}/scripts/verify_published_runtime_floor.py" '
-        '--installed-wheel "{wheel}" --checkout-root "{project}"'
+        '--installed-wheel "{wheel}" --checkout-root "{project}" '
+        "${{ github.event_name == 'pull_request' && "
+        "'--candidate-sdk-wheelhouse {project}/candidate-sdk-wheelhouse' || '' }}"
     )
     assert set(build["env"]["CIBW_BUILD"].split()) == {
         f"cp{python}-*{platform}*{architecture}"
@@ -470,3 +472,46 @@ def test_installed_mode_keeps_isolated_package_boundary(tmp_path):
     assert checkout == project
     result = _run_child_path_guard(checkout, tmp_path)
     assert result.returncode == 0, result.stderr
+
+
+def test_candidate_sdk_install_is_explicit_and_preserves_public_core_helper_pins(
+    tmp_path,
+):
+    sdk = tmp_path / "actions_work_items-0.5.0a1-py3-none-any.whl"
+    with zipfile.ZipFile(sdk, "w") as wheel:
+        wheel.writestr(
+            "actions_work_items-0.5.0a1.dist-info/METADATA",
+            "Name: actions-work-items\nVersion: 0.5.0a1\n",
+        )
+    runtime = _wheel(tmp_path, "actions-runtime", "1.1.0a2")
+    command = module.install_command(
+        Path("/consumer/python"), runtime, tmp_path / "report.json", candidate_sdk=sdk
+    )
+    assert str(sdk.resolve()) in command
+    assert "actions-core==1.0.2" in command
+    assert "actions-http-helper==1.0.3" in command
+    assert "--no-deps" not in command
+    with pytest.raises(ValueError, match="Unexpected Runtime version"):
+        module.validate_runtime_metadata(runtime)
+    module.validate_runtime_metadata(runtime, expected_runtime="1.1.0a2")
+
+
+def test_candidate_sdk_version_is_bound_to_source_and_default_runtime_stays_strict(
+    tmp_path,
+):
+    root = tmp_path / "repo"
+    project = root / "action_server"
+    project.mkdir(parents=True)
+    (root / "work-items").mkdir()
+    (project / "pyproject.toml").write_text('[tool.poetry]\nversion="1.1.0a2"\n')
+    (root / "work-items" / "pyproject.toml").write_text(
+        '[tool.poetry]\nversion="0.5.0a1"\n'
+    )
+    wheelhouse = tmp_path / "wheels"
+    wheelhouse.mkdir()
+    sdk = _wheel(wheelhouse, "actions-work-items", "0.5.0a1")
+    assert module.select_candidate_sdk(wheelhouse, project) == (sdk, "1.1.0a2")
+    sdk.unlink()
+    _wheel(wheelhouse, "actions-work-items", "0.4.4")
+    with pytest.raises(ValueError, match="differs from producer"):
+        module.select_candidate_sdk(wheelhouse, project)

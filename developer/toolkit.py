@@ -220,6 +220,8 @@ def invoice_query_test() -> None:
         command.append("--full")
     if os.environ.get("ACTIONS_INVOICE_BROWSER") == "1":
         command.append("--browser")
+    if os.environ.get("ACTIONS_INVOICE_WORKER") == "1":
+        command.append("--worker")
     run(command)
 
 

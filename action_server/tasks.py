@@ -20,6 +20,7 @@ globals().update(
         ROOT,
         "actions.server",
         tag_prefix="actions-runtime",
+        install_extras=("data-duckdb",),
         ruff_format_arguments=r"--exclude=_static_contents.py,_oauth2_config.py",
     )
 )

@@ -2633,8 +2633,8 @@ rm src/actions/server/bin/rcc* -f
                 "CIBW_SKIP": "pp*",
                 "CIBW_BUILD": CIBW_BUILD,
                 "CIBW_BUILD_VERBOSITY": 1,
-                "CIBW_BEFORE_TEST": "${{ github.event_name == 'pull_request' && 'python {project}/scripts/install_candidate_core.py {project}/candidate-core-wheelhouse {project}/candidate-helper-wheelhouse' || '' }}",
-                "CIBW_TEST_COMMAND": 'python "{project}/scripts/verify_published_runtime_floor.py" --installed-wheel "{wheel}" --checkout-root "{project}"',
+                "CIBW_BEFORE_TEST": "${{ github.event_name == 'pull_request' && 'python {project}/scripts/install_candidate_core.py {project}/candidate-core-wheelhouse {project}/candidate-helper-wheelhouse {project}/candidate-sdk-wheelhouse' || '' }}",
+                "CIBW_TEST_COMMAND": 'python "{project}/scripts/verify_published_runtime_floor.py" --installed-wheel "{wheel}" --checkout-root "{project}" ${{ github.event_name == \'pull_request\' && \'--candidate-sdk-wheelhouse {project}/candidate-sdk-wheelhouse\' || \'\' }}',
             },
         }
 
@@ -2669,11 +2669,17 @@ rm src/actions/server/bin/rcc* -f
             "working-directory": "actions-http-helper",
             "run": f"{run_in_env}poetry build -f wheel -o ../action_server/candidate-helper-wheelhouse",
         })
+        steps.append({
+            "name": "Build candidate Work Items SDK wheel for PR compatibility tests",
+            "if": "github.event_name == 'pull_request'",
+            "working-directory": "work-items",
+            "run": f"{run_in_env}poetry build -f wheel -o ../action_server/candidate-sdk-wheelhouse",
+        })
         steps.append(self.build_manylinux_wheels())
         steps.append({
             "name": "Verify Runtime wheel with published Core and Helper",
             "if": "github.event_name == 'pull_request'",
-            "run": f"{run_in_env}python scripts/verify_published_runtime_floor.py wheelhouse",
+            "run": f"{run_in_env}python scripts/verify_published_runtime_floor.py wheelhouse --candidate-sdk-wheelhouse candidate-sdk-wheelhouse",
         })
         steps.append(self.upload_artifact_manylinux_wheels())
         steps.extend(self.build_source_receipt("wheelhouse", "${{ runner.os }}"))
