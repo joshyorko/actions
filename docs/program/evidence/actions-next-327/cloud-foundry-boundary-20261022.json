@@ -1,0 +1,304 @@
+{
+  "schema": "actions.release327.foundry-boundary/v1",
+  "tested_source": "6b468d829caa96b09557163723157dc0dac2b12f",
+  "runtime": "1.1.0a6",
+  "sdk": "0.5.0a1",
+  "status": "COMPONENT_PASS_NO_DOMAIN_ACCEPTANCE",
+  "protected_invoice_source": "e2408a6e3051cdb4c44aede47618c3791807eba5",
+  "scope": "Opt-in fixed native MCP adapter over a trusted domain port; no new DB, activation, compiler, queue or startup wiring",
+  "commands": [
+    {
+      "cwd": ".",
+      "command": "rcc run -r developer/toolkit.yaml --dev -t Doctor; then Bootstrap; then ToolkitTest",
+      "result": "Doctor/Bootstrap PASS; Toolkit179 PASS; exact logs retained; pinned18.19.3"
+    },
+    {
+      "cwd": "action_server",
+      "command": "poetry install --extras data-duckdb",
+      "result": "PASS using existing locked prepared gateway; current project1.1.0a6 installed"
+    },
+    {
+      "cwd": "action_server",
+      "command": "poetry run pytest tests/action_server_tests/mcp -m 'not integration_test' -q --junitxml=.../mcp-final.xml",
+      "result": "139 PASS,18 deselected"
+    },
+    {
+      "cwd": "action_server",
+      "command": "poetry run pytest tests -m 'not integration_test' -q --junitxml=.../runtime-frozen.xml",
+      "result": "1680 PASS,172 SKIP,262 deselected,16warnings;197.13s; committedHEAD6b468d82"
+    },
+    {
+      "cwd": "action_server",
+      "command": "poetry run inv lint typecheck",
+      "result": "Ruff/isort/format PASS; mypy399 PASS; Markdown lint executable absent warning retained"
+    },
+    {
+      "cwd": "devutils",
+      "command": "poetry run pytest tests/test_actions_runtime_release_line.py -q",
+      "result": "9 PASS"
+    },
+    {
+      "cwd": ".",
+      "command": "python action_server/scripts/verify_invoice_queries.py --evidence-dir .../invoice-preservation",
+      "result": "105 component +129 invoice PASS,0skip/0failure/0error; owned pinned real PostgreSQL and DuckDB; cleanupPASS"
+    },
+    {
+      "cwd": ".",
+      "command": "git diff --check",
+      "result": "PASS"
+    }
+  ],
+  "environment": {
+    "wrapper": "/workspace/actions-327-state/run-prepared",
+    "rcc": "18.19.3",
+    "rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "homes": "Owned /workspace/actions-327-state/rcc and robots; no inherited PYTHONPATH/VIRTUAL_ENV",
+    "fixture_image": "postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81"
+  },
+  "failures_retained": {
+    "mcp_red": "6FAIL missing module before implementation",
+    "direct_registration_red": "3FAIL tool/resource/template accepted via direct registration before guard;11 boundary cases green afterward",
+    "first_portable": "1FAIL1679PASS172SKIP262deselected. Dirty1.1.0a6 metadata versus correct gitarchiveHEAD1.1.0a5 wheel; committed source then rerun without weakening binding",
+    "administrative": "Initial gh api comment endpoint404 and wrong cwd reads corrected; gh pr edit GraphQL projectCards deprecation left PR unchanged, verified before REST PATCH succeeded; no uncertain mutation retried"
+  },
+  "artifacts": {
+    "mcp-red.xml": {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/mcp-red.xml",
+      "sha256": "8e50210b393d33648afb1abde48e6674a03072381d974a65e889df062c3ae745",
+      "bytes": 4096,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "6",
+          "skipped": "0",
+          "tests": "6",
+          "time": "1.133",
+          "timestamp": "2026-10-22T22:17:13.413554+00:00",
+          "hostname": "574b3bded1e6"
+        }
+      ],
+      "skips": {}
+    },
+    "direct-registration-red.xml": {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/direct-registration-red.xml",
+      "sha256": "29927b2f37535697251f1ca326d9b2dd582ab7dfe53a60a42d722b14d10ce749",
+      "bytes": 5511,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "3",
+          "skipped": "0",
+          "tests": "3",
+          "time": "0.250",
+          "timestamp": "2026-10-22T22:24:06.201242+00:00",
+          "hostname": "574b3bded1e6"
+        }
+      ],
+      "skips": {}
+    },
+    "runtime-portable.xml": {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/runtime-portable.xml",
+      "sha256": "8f9270ce5dd1142e1c66056fcd7cbf6e8fbb993c2057f1af7a769c5fa2eabf99",
+      "bytes": 353294,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "1",
+          "skipped": "172",
+          "tests": "1852",
+          "time": "181.484",
+          "timestamp": "2026-10-22T22:23:09.510211+00:00",
+          "hostname": "574b3bded1e6"
+        }
+      ],
+      "skips": {
+        "Windows only": 6,
+        "Requires native Windows locking": 1,
+        "native Windows path resolution": 1,
+        "isolated invoice PostgreSQL fixture not configured": 105,
+        "owned PostgreSQL control plane not configured": 46,
+        "isolated PostgreSQL fixture not configured": 8,
+        "Skip package upload test": 3,
+        "set ACTIONS_REAL_RCC_ARTIFACT_TEST=1": 1,
+        "set ACTIONS_ROBOT_INPUT_RCC to pinned RCC18.19.3 for actual task-input acceptance": 1
+      }
+    },
+    "mcp-final.xml": {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/mcp-final.xml",
+      "sha256": "c2cb9fa9334af47885a9665432897c0b177916531101293651ebf6ad52380000",
+      "bytes": 23379,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "139",
+          "time": "25.500",
+          "timestamp": "2026-10-22T22:26:52.975781+00:00",
+          "hostname": "574b3bded1e6"
+        }
+      ],
+      "skips": {}
+    },
+    "runtime-frozen.xml": {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/runtime-frozen.xml",
+      "sha256": "4732180673d9d6338cb592199d1879f2c2c1a44ae50ee0c36fd99ed46b049626",
+      "bytes": 348812,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "172",
+          "tests": "1852",
+          "time": "197.103",
+          "timestamp": "2026-10-22T22:27:48.775104+00:00",
+          "hostname": "574b3bded1e6"
+        }
+      ],
+      "skips": {
+        "Windows only": 6,
+        "Requires native Windows locking": 1,
+        "native Windows path resolution": 1,
+        "isolated invoice PostgreSQL fixture not configured": 105,
+        "owned PostgreSQL control plane not configured": 46,
+        "isolated PostgreSQL fixture not configured": 8,
+        "Skip package upload test": 3,
+        "set ACTIONS_REAL_RCC_ARTIFACT_TEST=1": 1,
+        "set ACTIONS_ROBOT_INPUT_RCC to pinned RCC18.19.3 for actual task-input acceptance": 1
+      }
+    },
+    "static-final.log": {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/static-final.log",
+      "sha256": "ca4872530df911c79c7c678dc24ae0f94406fda12da46d9a68987896fde2cbbe",
+      "bytes": 2383
+    },
+    "version-guard.log": {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/version-guard.log",
+      "sha256": "e32e51039d77db401f9c2063a32d60d3b279a66f389a98f35e3afce6249189a1",
+      "bytes": 98
+    },
+    "doctor.log": {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/doctor.log",
+      "sha256": "55cf35b262ccf297d3bebf4714ed794810eb3c028188ad83fc26c1b70a5c0832",
+      "bytes": 13660
+    },
+    "bootstrap.log": {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/bootstrap.log",
+      "sha256": "139aaaa49d10663c93433cad9524ac706c322ed1fd09ebd929692ddc5b80e67c",
+      "bytes": 14226
+    },
+    "toolkit-final.log": {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/toolkit-final.log",
+      "sha256": "544608f9f6cc9f834d892c22b0d6261c23e500233d8d75aec9bb18402165ebf0",
+      "bytes": 14683
+    },
+    "invoice-preservation/receipt.json": {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/invoice-preservation/954a1f95-4e6c-48da-b93d-1a76ee31144d/receipt.json",
+      "sha256": "0754adb2f113a2e77954864befd9782b4d43317038a83f0964f6ad62474d19b8",
+      "bytes": 12660
+    },
+    "invoice-preservation/components.xml": {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/invoice-preservation/954a1f95-4e6c-48da-b93d-1a76ee31144d/components.xml",
+      "sha256": "9e48e25f9f835a37fa8485296a808396ccdafc386d4b8cbfe36c45c47a1d794f",
+      "bytes": 17223,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "105",
+          "time": "26.708",
+          "timestamp": "2026-10-22T22:30:38.821733+00:00",
+          "hostname": "574b3bded1e6"
+        }
+      ],
+      "skips": {}
+    },
+    "invoice-preservation/invoice.xml": {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/invoice-preservation/954a1f95-4e6c-48da-b93d-1a76ee31144d/invoice.xml",
+      "sha256": "30844e7c142183b47d461a41d11b3ff2e78de0cf4c0ac64658eab4c2bee4e909",
+      "bytes": 28304,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "129",
+          "time": "14.175",
+          "timestamp": "2026-10-22T22:31:07.979081+00:00",
+          "hostname": "574b3bded1e6"
+        }
+      ],
+      "skips": {}
+    }
+  },
+  "clean_wheels": {
+    "actions_core-1.0.3-py3-none-any.whl": {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/wheels/actions_core-1.0.3-py3-none-any.whl",
+      "sha256": "8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265",
+      "bytes": 103809
+    },
+    "actions_http_helper-1.0.3-py3-none-any.whl": {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/wheels/actions_http_helper-1.0.3-py3-none-any.whl",
+      "sha256": "46ed7ce0e0d3e2e05456d937b5b24bc9dfa0d7d4b98f8119b9fdf00d4fa7e9f9",
+      "bytes": 14690
+    },
+    "actions_runtime-1.1.0a6-cp312-cp312-linux_x86_64.whl": {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/wheels/actions_runtime-1.1.0a6-cp312-cp312-linux_x86_64.whl",
+      "sha256": "291f25dde831420756bb92a57d8ad0bc3d18bdd6314ed574563cbbe1a336651c",
+      "bytes": 1428602
+    },
+    "actions_work_items-0.5.0a1-py3-none-any.whl": {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/wheels/actions_work_items-0.5.0a1-py3-none-any.whl",
+      "sha256": "5788f4b346d1dd6c61ba9f68ad30ae2cc56bf9488d22e49bd808e1df49915cd0",
+      "bytes": 73925
+    }
+  },
+  "source_inputs": {
+    "action_server/pyproject.toml": "cb4891f5a572514fdbe098de8b460bf790f8da5ff64106e9a5c0fd5edcf61a35",
+    "action_server/src/actions/server/__init__.py": "556c3c0faf06075d74218101da0fc10ee9441c05b785c62d323f2b5f6264e36d",
+    "action_server/src/actions/server/foundry/__init__.py": "94b0b0d98d582b61dee97d6889a9abb200313dcf5ca467e48110a6e6366666fd",
+    "action_server/src/actions/server/foundry/mcp.py": "4f2074367bd50321fdab718409e36040d56c465e7225a999635cdd1dc13407ec",
+    "action_server/src/actions/server/mcp/setup_mcp_server_v2.py": "a4f74b6ce33df4a49a2f004d930f34c2f340f17e349f5ea6f5cdc6748c6c4db8",
+    "action_server/tests/action_server_tests/mcp/test_foundry_mcp.py": "58a5d385f2912a33cc0d7ffc05f8636d1bce7c9b463829d7e35c047d4a82c7b7",
+    "action_server/tests/action_server_tests/test_candidate_work_items.py": "ec3a33415eb8829ffb2ab80b5c462e6f1b86772ff71d9bf51176f58a913c2130",
+    "devutils/tests/test_actions_runtime_release_line.py": "f499ce19efedf41afde2d80e120272521a8542239f3473338d97466a8fbdb2a6",
+    "docs/program/actions-next-foundry-71.md": "ae901f750c1a4dac775e7a53bd2229c36389f17e1adb2361bd8bb914bc07cc5e",
+    "docs/skills/repository-operations.md": "32433d854bb271a3310185f4932e7232940a1acf11e23abe2d041f07a070e907"
+  },
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "delta": "28lines: opt-in transport versus durable/domain acceptance; trusted audiences; dual catalog guards; private metadata; no automatic mutation retry/uncertain outcome reconciliation; HEAD-archive wheel acceptance",
+    "evidence": "Real ASGI MCP139;3red direct collisions then11green; frozen1680portable including installed wheel/member provenance and both namespace uninstall orders; owned SQL105+129; static399",
+    "remaining_uncertainty": "Domain services, SQL activation integration, real renderer bridge/firstboot and generated backend acceptance not wired"
+  },
+  "ordered_next": [
+    "Parent admit reserved #129/#71/#99-B127 file lanes; preserve shared migrations/central wiring ownership",
+    "Review exact #100 and #99 candidate contracts/tests and compiler handoff before integration; admit a distinct provisional Core version before building changed Core bytes, preserve public-floor checks and source/module provenance",
+    "Integrate shared common SQL publication/authorization/CAS and authoring port without competing Canvas active pointers",
+    "Join existing semantic renderer and readonly launcher; real firstboot composition/reopen/rollback/negative auth",
+    "Separately qualify generated Python common Package/Deployment through real pinned RCC Run/Attempt/artifact",
+    "Fresh hosted/installed/browser gates on resulting source; authenticated ChatGPT E1 NEEDS_OPERATOR; effects/retention/restore/distribution open; celld NO-GO"
+  ],
+  "rollback": "Opt-in boundary can be disabled/reverted without SQL migration. Preserve protected invoice proof, coordinated SQL/object/journal/audit data; no package publication. Future changed Runtime bytes need a new candidate identifier.",
+  "worker_status": "No worker commits integrated; read-only observed #10096e255c7 and #99ee542b74, not acceptance. Reviewed coordinator handoff pending.",
+  "blockers": [
+    {
+      "action": "Wire actual first-boot authoring/compiler/deployment services",
+      "target": "Existing #71/#129/#130/#135 graph and draft328",
+      "status": "pending",
+      "reason": "Exclusive worker receipts/contracts and shared SQL integration remain; no denial or infrastructure permission required for current component"
+    }
+  ],
+  "upstream_disposition": "Existing RCC local-carrier upstream report remains draft only; no new external report",
+  "controls": "No merge, tag, publication, deployment, production/backend, security/auth/credential/tunnel change or other repository mutation; only owned synthetic fixtures",
+  "evidence_root": "/workspace/actions-327-state/evidence/foundry-integration",
+  "all_local_validation_finished": true
+}

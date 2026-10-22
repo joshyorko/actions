@@ -24,6 +24,13 @@ columns in the existing renderer, fresh wheel-only consumer and fresh RCC home,
 actual execution/negative probes/restart, offline package installation and a new
 no-build retained-Artifact execution with observed loopback-only connections.
 This is separate from bare-OS bootstrap, enforced air-gap or restore qualification.
+The [foundry MCP boundary receipt](evidence/actions-next-327/cloud-foundry-boundary-20261022.json)
+qualifies committed source `6b468d829caa96b09557163723157dc0dac2b12f`:
+an opt-in fixed native catalog/resource over a trusted domain port, not a wired
+first-boot service. MCP139, portable Runtime1680, static399 and owned real
+PostgreSQL/DuckDB105+129 passed. Portable172 skips and all original failures
+remain explicit. Clean candidate wheel/member and namespace-uninstall contracts
+passed after committing source; the dirty-source/previous-HEAD mismatch is retained.
 Issue #327 remains the release authority. The full release is **NOT READY**; this
 private composition does not register a public application or establish actual
 authenticated host, general worker effects or full distribution acceptance.
@@ -56,6 +63,16 @@ matrix results do not qualify a new source or extend Linux-only filesystem suppo
 
 ## Ordered cloud continuation
 
+Josh confirmed parallel foundry implementation at21:59:51UTC on October22.
+General first-boot authoring and separately admitted generated Python through
+common immutable Package/Deployment are now implementation scope. The
+[exclusive lane/interface handoff](actions-next-foundry-71.md) reserves shared
+Runtime SQL/MCP/server/CLI ownership and records the parent's initial three-lane
+dispatch. No sibling candidate is integrated by the MCP boundary checkpoint.
+Next: reviewed spec/renderer/compiler contracts, shared SQL publication/CAS and
+authoring wiring, then real first-boot/browser/restart/rollback and separate
+generated-backend/RCC acceptance. Prior invoice E2 does not satisfy those gates.
+
 | Order | Gate | Current boundary and next required evidence |
 |---|---|---|
 | 1 | Work Item PostgreSQL baseline | This iteration fixes the reproduced concrete-adapter mypy failure and extends owned real PostgreSQL coverage for foreign schema ownership, unknown version/format across operations, and expiry during output publication. Exact input hashes, failed controls and current commands belong to the linked receipt. No Runtime wiring or full release completion follows from SDK conformance. |
@@ -79,8 +96,11 @@ already admitted work and audit. Rollback restores authorized readback of that
 immutable revision without creating another review, Work Item, Run or Attempt.
 No public scheduler or generic exactly-once external-effect claim is admitted.
 
-SDK `0.5.0a1` / Runtime `1.1.0a5` are provisional nonpublishing candidate
+SDK `0.5.0a1` / Runtime `1.1.0a6` are provisional nonpublishing candidate
 identifiers with Runtime dependency `>=0.5.0a1,<0.6.0`. The fixed worker environment
+and protected invoice export retain their measured `1.1.0a5` qualification;
+the new MCP source does not relabel those earlier artifacts or execution receipts.
+The worker environment
 installs the exact measured SDK wheel. PR wheel fixtures also stage that wheel
 before Runtime resolution; ordinary devinstall preserves its noneditable contract
 and installs the declared DuckDB test extra. Public Core/Helper floor versions,
