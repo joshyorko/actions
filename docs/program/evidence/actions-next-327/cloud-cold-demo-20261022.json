@@ -1,0 +1,30 @@
+{
+  "schema": "actions.release327.cold-demo/v1",
+  "tested_source": "20f42170fb382cbf160fae2c356144c45fde4457",
+  "runtime": "1.1.0a5",
+  "sdk": "0.5.0a1",
+  "example": "0.2.0",
+  "previous_receipt": "cloud-reconciliation-20261022.json retained unchanged",
+  "scope": "Existing renderer comparison presentation and fresh owned wheel-only consumer; no engine/authority rewrite",
+  "current_results": {
+    "gateway": "Doctor/Bootstrap/Toolkit179 PASS",
+    "frontend": "quality PASS;280 full frontend tests;Canvas18passed1optional skip",
+    "python": "3 reconciliation tests PASS, including sealed comparison/app-only MCP projection;Runtime lint/typecheck396 PASS",
+    "actual_ui": "PASS source-bound browser with explicit approval/RCC/scoped artifact, Run a0c6ae28-5490-474a-a18b-84c7b7598341; image visually inspected",
+    "fresh_consumer": "PASS: cache-disabled pinned download; hash-verified Poetry/public-floor closure; empty prefix installed with no-index; pipcheck and isolated module provenance PASS",
+    "affected_real_sql_browser": "components105 and invoice129 PASS; browser/generated still running",
+    "cold_rcc": "RUNNING: fresh consumer/default fresh Artifact path, no retained runtime configuration",
+    "offline_package_replay": "RUNNING: second empty consumer with no-index local closure"
+  },
+  "ui_capture": {
+    "path": "/workspace/actions-327-state/evidence/cold-demo/ui-first/executed-result.png",
+    "sha256": "784e387afd4b9124da649baa6da59ecf0e9e35ad54aa363674522719c4c2b6eb"
+  },
+  "network_requirements": "First preparation needs public PyPI; first RCC launch needs conda-forge/PyPI and supported native libraries. Existing proxy/TLS preserved; pip caches disabled. Python3.12.15 interpreter supplied by pinned RCC gateway is an explicit prerequisite, not a claim of bare-OS bootstrap.",
+  "failures": "UI2red; MCP missing-field red; initial test construction/command errors retained; no failures relabeled green",
+  "documentation_improvement": "repository-operations.md documents sealed typed comparison presentation, consumer isolation and distinction between offline package install, cold RCC preparation and retained-Artifact replay; new README documents concrete commands and requirements",
+  "remaining": "Fresh exact-head hosted review; authenticated ChatGPT E1 NEEDS_OPERATOR; template destination unapproved; general effects/retention/restore/distribution and celld NO-GO unchanged",
+  "upstream_disposition": "Existing RCC local-carrier report remains draft only; no new external report",
+  "controls": "No publication/merge/deploy/production/tunnel/credentials/other-repository mutation; owned synthetic fixtures only",
+  "evidence_root": "/workspace/actions-327-state/evidence/cold-demo"
+}
