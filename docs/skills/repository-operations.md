@@ -4040,6 +4040,36 @@ The optional `data_binding` field is omitted from legacy canonical admissions,
 preserving their stored request fingerprints. New data-bound admissions are
 unknown to older binaries and must fail closed there.
 
+### Bounded Knowledge collection provider proof
+
+`action_server/tests/action_server_tests/test_knowledge_collections.py` runs
+each provider-backed collection contract against both DuckDB and PostgreSQL.
+Its PostgreSQL fixture reads the dedicated test DSN from
+`ACTIONS_INVOICE_TEST_POSTGRES`, creates a unique `actions_knowledge_test_*`
+schema, points the provider connection's `search_path` at that schema, and drops
+only that owned schema afterward. Use a task-owned synthetic database; do not
+point this fixture at a shared or production database. Set
+`ACTIONS_REQUIRE_INVOICE_PROVIDERS=1` so a missing DSN fails instead of
+silently skipping the PostgreSQL parametrizations.
+
+After the RCC Doctor → Bootstrap → ToolkitTest sequence, run the focused suite
+from `action_server/`:
+
+```bash
+poetry run pytest tests/action_server_tests/test_knowledge_collections.py
+```
+
+The provider-backed
+cases exercise typed ingestion, source-version provenance, bounded search,
+persisted revocation, schema/type rejection, and fail-closed stale or missing
+ingest behavior. Separate tests cover cross-Workspace denial before provider
+access, path escape and direct symlink rejection, searchable terms, and strict
+pagination bounds. The revocation case creates a new collection service but
+reuses the provider object; it proves persisted database state across service
+reconstruction, not process restart or fresh-provider recovery. A provider
+skip is not conformance evidence, and the SQLite/control-plane PostgreSQL
+gates do not substitute for this real PostgreSQL provider contract.
+
 NDJSON materialization uses the existing provisional/sealed/final Run-output
 service, including its current fence and grant checks. Paging resolves that
 authorized immutable output on every request; export uses the same resolver.
