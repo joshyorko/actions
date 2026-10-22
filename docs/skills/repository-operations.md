@@ -4805,3 +4805,24 @@ not enforce an air gap or qualify transferred-Artifact restore on a clean host.
 The Artifact compatibility receipt is authoritative for native prerequisites.
 For this Linux amd64 build it requires glibc >=2.36 and `libX11.so.6` alongside
 the normal glibc loader/libraries, even though the invoice task is headless.
+
+### Foundry acceptance versus invoice composition
+
+At the protected invoice checkpoint, `GeneratedInvoiceApp` accepts exactly the
+existing renderer and `invoice.json`. Its successful E2 does not establish
+external-model CanvasSpec authoring, the public six-tool foundry facade,
+zero-user-package plugin boot, generated Python Package compilation, common
+Deployment resolution or authenticated ChatGPT E1. Reuse its revision,
+authorization, review, Run/Attempt and artifact boundaries as components. Keep
+existing-capability composition, generated-backend Package/Deployment activation,
+reference-template packaging and actual host acceptance as separate proofs.
+
+A strict Package/Deployment reference proves syntax and scope comparison, not
+object existence or authorization. `ProposedStagedInventory` proves selected
+bytes were copied and re-read, not complete source selection, atomic whole-tree
+snapshot, trust, compiler identity or an admitted Package Revision. A foundry
+integration must obtain those missing facts from the common compiler,
+Deployment and Run authorities rather than treating a typed reference or
+staging receipt as publication. The October amendments on #71/#99/#100/#127 and
+#129/#130 retain these criterion boundaries without requiring every umbrella or
+distributed feature to close before a local vertical can run.
