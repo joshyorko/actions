@@ -168,11 +168,15 @@ print(json.dumps(identities))
             name,
             "--label",
             "actions.release327.attempt=" + attempt,
-            "--memory=256m",
+            "--memory=768m" if args.full else "--memory=256m",
             "--cpus=1",
             "--pids-limit=128",
             "--tmpfs",
-            "/var/lib/postgresql/data:size=128m",
+            # The full package repeats schema-heavy SQL cases after the focused
+            # gates. PostgreSQL WAL exhausted 128 MiB before that run finished.
+            "/var/lib/postgresql/data:size=512m"
+            if args.full
+            else "/var/lib/postgresql/data:size=128m",
             "--publish",
             "127.0.0.1::5432",
             "--env",
