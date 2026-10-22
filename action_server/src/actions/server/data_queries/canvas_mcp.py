@@ -69,6 +69,14 @@ class InvoiceCanvasPrincipal:
 
 @dataclass(frozen=True)
 class InvoiceCanvasMcp:
+    @staticmethod
+    def _row_description(row: dict) -> str:
+        if row.get("reconciliation") is not None:
+            from .reconciliation import description
+
+            return description(row["reconciliation"])
+        return f'{row["amount_cents"]} cents; {row["days_overdue"]} days overdue'
+
     facade: InvoiceCanvasFacade
     authenticate: Callable[
         [dict[str, str], dict[str, str]], Awaitable[InvoiceCanvasPrincipal | None]
@@ -223,7 +231,7 @@ class InvoiceCanvasMcp:
                     )
                 payload = execution.model_dump(mode="json")
                 if (
-                    execution.phase == "completed"
+                    execution.phase in ("completed", "dead_letter")
                     and self.download_base_url is not None
                 ):
                     workspace = self.facade.scope.application.workspace_id
@@ -334,7 +342,7 @@ class InvoiceCanvasMcp:
                         {
                             "id": row["invoice_id"],
                             "title": row["customer"],
-                            "category": f'{row["amount_cents"]} cents; {row["days_overdue"]} days overdue',
+                            "category": self._row_description(row),
                         }
                         for row in rows
                     ],

@@ -20,7 +20,7 @@ from uuid import uuid4
 
 from actions.work_items import State
 from actions.work_items._fencing import WorkItemClaim
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_serializer
 
 from actions.server._models import Action, Run, RunStatus
 from actions.server._rcc_runtime_adapter import (
@@ -53,13 +53,26 @@ from actions.server.run_outputs.types import (
     OutputRef,
 )
 
+from .invoice_effects import SyntheticEffectPolicy, SyntheticEffectTarget
 from .invoices import Invoice
 from .review import InvoiceReviewService, ReviewConflict, ReviewProposal
 
 RUNTIME_KIND = "rcc/invoice-private-output/v1"
 
 
-def plan_digest(descriptor: RccRuntimeDescriptor, sdk_wheel_sha256: str) -> str:
+def plan_digest(
+    descriptor: RccRuntimeDescriptor,
+    sdk_wheel_sha256: str,
+    *,
+    effect_policy: SyntheticEffectPolicy | None = None,
+) -> str:
+    if effect_policy is not None:
+        return "sha256:" + _key(
+            "actions.invoice-worker-effect-plan/v1",
+            descriptor.to_json(),
+            sdk_wheel_sha256,
+            effect_policy.model_dump_json(),
+        )
     return "sha256:" + _key(
         "actions.invoice-worker-plan/v1", descriptor.to_json(), sdk_wheel_sha256
     )
@@ -95,6 +108,14 @@ class WorkerInput(BaseModel):
     artifact_digest: str = Field(pattern=r"^sha256:[0-9a-f]{64}$")
     source_generation: str = Field(pattern=r"^[0-9a-f]{64}$")
     sdk_wheel_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    effect_policy: SyntheticEffectPolicy | None = None
+
+    @model_serializer(mode="wrap")
+    def omit_absent_effect_policy(self, handler):
+        data = handler(self)
+        if self.effect_policy is None:
+            data.pop("effect_policy", None)
+        return data
 
 
 class WorkerTicket(BaseModel):
@@ -116,6 +137,7 @@ class InvoiceWorkerPlan:
     descriptor: RccRuntimeDescriptor
     source_directory: Path
     sdk_wheel_sha256: str
+    effect_policy: SyntheticEffectPolicy | None = None
 
     def validate(self) -> None:
         snapshot = ExecutionSnapshot.model_validate(self.snapshot)
@@ -136,7 +158,9 @@ class InvoiceWorkerPlan:
             or snapshot.capability.package_revision.revision_id.root
             != "sha256:" + generation
             or snapshot.runtime_plan.plan_digest.root
-            != plan_digest(descriptor, self.sdk_wheel_sha256)
+            != plan_digest(
+                descriptor, self.sdk_wheel_sha256, effect_policy=self.effect_policy
+            )
         ):
             raise AccessDenied("pinned invoice source/Runtime Plan differs")
         if (
@@ -151,6 +175,14 @@ class InvoiceWorkerPlan:
 
 
 class InvoiceWorkerService:
+    @property
+    def dispatch_version(self) -> str:
+        return (
+            "actions.invoice-dispatch/v2"
+            if self.plan.effect_policy is not None
+            else "actions.invoice-dispatch/v1"
+        )
+
     def __init__(
         self,
         reviews: InvoiceReviewService,
@@ -158,8 +190,11 @@ class InvoiceWorkerService:
         execution_root: Path,
         rcc: Path,
         rcc_home: Path,
+        *,
+        effect_target: SyntheticEffectTarget | None = None,
     ):
         self.reviews, self.plan = reviews, plan
+        self.effect_target = effect_target
         self.outputs, self.db = reviews.outputs, reviews.db
         self.execution_root, self.rcc, self.rcc_home = (
             execution_root.resolve(),
@@ -223,6 +258,7 @@ class InvoiceWorkerService:
             artifact_digest=self.plan.descriptor.artifact_digest,
             source_generation=self.plan.descriptor.source_generation,
             sdk_wheel_sha256=self.plan.sdk_wheel_sha256,
+            effect_policy=self.plan.effect_policy,
         )
 
     def _ticket(
@@ -247,7 +283,7 @@ class InvoiceWorkerService:
             owner_id=attempt.owner_id,
             epoch=attempt.epoch,
         )
-        if run.status == RunStatus.PASSED:
+        if run.status in (RunStatus.PASSED, RunStatus.FAILED):
             result = self._result(run)["result"]
             if (
                 result.get("work_item_claim") != ClaimValue.of(claim).model_dump()
@@ -261,7 +297,7 @@ class InvoiceWorkerService:
         record = json.loads(run.result or "null")
         if (
             not isinstance(record, dict)
-            or record.get("version") != "actions.invoice-dispatch/v1"
+            or record.get("version") != self.dispatch_version
             or record.get("claim") != ClaimValue.of(claim).model_dump()
             or record.get("fence") != fence.model_dump()
         ):
@@ -290,9 +326,9 @@ class InvoiceWorkerService:
                 key,
             )
             existing = self.db.all(RunPin, where="idempotency_id=?", values=[idem])
-            if (
-                existing
-                and _one(self.db, Run, existing[0].run_id).status == RunStatus.PASSED
+            if existing and _one(self.db, Run, existing[0].run_id).status in (
+                RunStatus.PASSED,
+                RunStatus.FAILED,
             ):
                 return self._ticket(proposal, claim, existing[0])
             queue._require(claim)
@@ -328,7 +364,7 @@ class InvoiceWorkerService:
                 run.id, claim.owner_id, lease_seconds=lease_seconds
             )
             record = {
-                "version": "actions.invoice-dispatch/v1",
+                "version": self.dispatch_version,
                 "claim": ClaimValue.of(claim).model_dump(),
                 "fence": fence.model_dump(),
                 "launch": None,
@@ -364,6 +400,14 @@ class InvoiceWorkerService:
             )
             self.outputs.heartbeat(ticket.fence, lease_seconds=lease_seconds)
 
+    def apply_effect(self, actor: Actor, ticket: WorkerTicket):
+        """Explicit trusted-host invocation of a pinned owned synthetic target."""
+        from .invoice_effects import InvoiceEffectController
+
+        if self.plan.effect_policy is None:
+            raise AccessDenied("pinned owned synthetic effect policy required")
+        return InvoiceEffectController(self).apply(actor, ticket)
+
     def _directory(self, ticket: WorkerTicket, launch: dict) -> Path:
         # launch ID is generated by this host and persisted before any directory/spawn.
         launch_id = launch["id"]
@@ -396,7 +440,11 @@ class InvoiceWorkerService:
         verify_rcc_version(self.rcc)
         with _transaction(self.db):
             record = self._active(actor, ticket)
-            if record["launch"] is not None or record.get("reconciled") is not None:
+            if (
+                record["launch"] is not None
+                or record.get("reconciled") is not None
+                or record.get("terminal_intent") is not None
+            ):
                 raise ReviewConflict(
                     "execution already admitted; reconcile retained evidence"
                 )
@@ -562,6 +610,8 @@ class InvoiceWorkerService:
         if receipt.get("status") != "completed" or receipt.get("exitCode") != 0:
             raise ReviewConflict("completed RCC receipt required; outcome is unknown")
         task = json.loads(self._read(directory / "result.json", 1024 * 1024))
+        from ._invoice_task import reconciliation_summary
+
         if (
             task.get("version") != "actions.invoice-task-result/v1"
             or task.get("effect_policy") != "private-result-file-only"
@@ -579,6 +629,7 @@ class InvoiceWorkerService:
             or task.get("invoice_count") != len(inputs["rows"])
             or task.get("total_cents")
             != sum(row["amount_cents"] for row in inputs["rows"])
+            or task.get("reconciliation") != reconciliation_summary(inputs["rows"])
         ):
             raise ReviewConflict("retained task result differs from exact execution")
         return {
@@ -594,8 +645,16 @@ class InvoiceWorkerService:
     def _terminal(self, actor: Actor, ticket: WorkerTicket) -> WorkerReceipt | None:
         self._approved(actor, ticket.proposal, ticket.claim.item_id)
         run = _one(self.db, Run, ticket.fence.run_id)
-        if run.status != RunStatus.PASSED:
+        if run.status not in (RunStatus.PASSED, RunStatus.FAILED):
             return None
+        disposition: Literal["completed", "dead_letter"] = (
+            "dead_letter" if run.status == RunStatus.FAILED else "completed"
+        )
+        if disposition == "dead_letter" and (
+            self.plan.effect_policy is None
+            or self._result(run).get("result", {}).get("disposition") != disposition
+        ):
+            raise ReviewConflict("failed execution lacks a bound dead-letter receipt")
         if (
             self._ticket(ticket.proposal, ticket.claim, _one(self.db, RunPin, run.id))
             != ticket
@@ -605,7 +664,10 @@ class InvoiceWorkerService:
 
         item = _one(self.db, FencedWorkItem, ticket.claim.item_id)
         if (
-            item.state != State.DONE.value
+            item.state
+            != (
+                State.FAILED.value if disposition == "dead_letter" else State.DONE.value
+            )
             or item.claim_epoch != ticket.claim.epoch
             or item.cancel_requested
         ):
@@ -617,6 +679,7 @@ class InvoiceWorkerService:
             attempt_id=ticket.fence.attempt_id,
             work_item_id=ticket.claim.item_id,
             handle=output.handle,
+            disposition=disposition,
         )
 
     def complete(self, actor: Actor, ticket: WorkerTicket) -> WorkerReceipt:
@@ -626,7 +689,23 @@ class InvoiceWorkerService:
             if terminal is not None:
                 return terminal
             record = self._active(actor, ticket)
+        if (
+            self.plan.effect_policy is not None
+            and record.get("terminal_intent") == "dead_letter"
+        ):
+            from .invoice_effects import InvoiceEffectController
+
+            return InvoiceEffectController(self)._dead_letter(actor, ticket, record)
         evidence, executed, input_digest = self._execution_evidence(ticket, record)
+        if self.plan.effect_policy is not None:
+            from .invoice_effects import InvoiceEffectController
+
+            evidence["effect_receipt"] = (
+                InvoiceEffectController(self)
+                .completed(ticket, record, evidence)
+                .model_dump(mode="json")
+            )
+            evidence["effect_observations"] = record.get("effect_observations", [])
         output = self.outputs.stage(
             ticket.fence,
             [_canonical(evidence, 2 * 1024 * 1024).encode()],
@@ -645,6 +724,8 @@ class InvoiceWorkerService:
             "execution_input_digest": input_digest,
             "reconciliations": record.get("reconciliations", []),
         }
+        if self.plan.effect_policy is not None:
+            result["effect_observations"] = record.get("effect_observations", [])
         with _transaction(self.db):
             self._active(actor, ticket)
             self.outputs.publish(actor, ticket.fence, [output], result)
@@ -711,6 +792,12 @@ class InvoiceWorkerService:
         Missing/altered/incomplete evidence leaves the Run blocked.
         """
         self.plan.validate()
+        if self.plan.effect_policy is not None:
+            from .invoice_effects import InvoiceEffectController
+
+            return InvoiceEffectController(self).reconcile(
+                actor, proposal, claim, lease_seconds=lease_seconds
+            )
         with _transaction(self.db):
             self._approved(actor, proposal, claim.item_id)
             key = work_item_run_key(claim.item_id)
@@ -837,3 +924,11 @@ class WorkerReceipt(BaseModel):
     attempt_id: str
     work_item_id: str
     handle: str
+    disposition: Literal["completed", "dead_letter"] = "completed"
+
+    @model_serializer(mode="wrap")
+    def omit_legacy_completed_disposition(self, handler):
+        data = handler(self)
+        if self.disposition == "completed":
+            data.pop("disposition", None)
+        return data

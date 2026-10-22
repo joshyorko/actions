@@ -86,7 +86,7 @@ application/deployment revision, input fingerprint, Action schema and source/pla
 identity are checked at their boundaries.
 
 Dispatch/launch evidence uses existing `Run.result` while the Run is RUNNING;
-this is not a completed result. Only the existing PASSED envelope and authorized
+this is not a completed result. Only a bound terminal envelope and the authorized
 RunOutput resolver grant access to a final artifact. No new state table, database
 or migration was added. Work Item, Review, Run and Attempt remain distinct.
 Review cancellation atomically fences the Work Item and requests cancellation
@@ -115,9 +115,9 @@ execution and permits a new Attempt after reconciliation. A verified completed
 journal for this fixed private-result-file-only task permits publishing its
 retained result with a new owner/Attempt, preserving both executed and publication
 lineage, without running RCC again. Missing, altered or incomplete evidence stays
-blocked. Repeated terminal delivery returns the retained receipt. This is not an
-exactly-once external-effect protocol, generic retry/dead-letter policy or proof
-of arbitrary mid-effect crash safety.
+blocked. Repeated terminal delivery returns the retained receipt. This default private-result task does not establish exactly-once external
+effects or arbitrary mid-effect crash safety. The optional owned synthetic-effect
+contract below adds bounded, explicit reconciliation without changing that claim.
 
 After the pinned Doctor/Bootstrap/ToolkitTest gateway, set
 `ACTIONS_INVOICE_WORKER=1` with an absolute `ACTIONS_INVOICE_EVIDENCE_DIR` and run
@@ -156,6 +156,44 @@ activation rollback preserves admitted SQL work and audit. See
 [generated revision composition](repository-operations.md#generated-invoice-revision-composition)
 for source, fixture, platform and downgrade boundaries. Generic effects/retries,
 E1, independent distribution and restore are still separate release gates.
+
+### Explicit owned synthetic effects and bounded failure
+
+The optional `SyntheticEffectPolicy` pins target identity, idempotency contract
+and execution budget into immutable worker inputs. Existing `Run.result`
+dispatch version 2 retains intent, observations and recovery history; there is no
+new queue, scheduler or SQL migration. Unknown formats fail closed. Default
+version-1 private-result input bytes remain unchanged.
+
+An explicit host call verifies the real RCC journal and both current fences,
+commits intent, then calls the owned synthetic target. Completion requires an
+observed receipt for the exact stable Work Item/proposal/plan key. Lost
+acknowledgements reconcile against that same key, never presumed absent. Applied
+receipts publish without redelivery; pre-effect retries require no admitted
+launch; absence after intent permits retry only under the pinned idempotency
+contract. Unknown observations and nonidempotent absence remain blocked for
+operator reconciliation. Lease expiry and app mounting never start retries.
+Cancellation fences publication but cannot undo an already admitted effect.
+
+Budget exhaustion uses a distinct publication Attempt without spending another
+execution. Prior effect intent requires a durable conditional target close
+barrier and observed `closed_absent` before dead-letter publication. Ordinary
+absence is insufficient: an old in-flight call could still arrive. A confirmed
+late effect instead completes successfully. Failure artifact, FAILED Run/Attempt
+and FAILED Work Item/child output commit together under both fences. Persisted
+terminal intent resumes after SQL rollback with the same finalizer. Scoped
+failure artifacts require their exact bound terminal Run envelope.
+
+Use `ACTIONS_INVOICE_EFFECTS=1` with `InvoiceQueryTest` after the pinned gateway.
+The strict matrix uses both real invoice providers and both SQL authorities,
+actual RCC, an owned durable SQLite *target fixture*, interpreter crash/restart,
+concurrent lost acknowledgements, late delivery, cancellation and SQL rollback.
+The target fixture is neither a business queue nor a substitute for PostgreSQL.
+No production or third-party effect is admitted. Generic target contracts,
+operator reconciliation UI, retry scheduling, retention and restore remain
+separate gates. Disable admission before rollback; retain SQL, target
+receipts/barriers, RCC journals and scoped objects together. Older workers must
+not interpret version-2 Runs.
 
 ### PostgreSQL fenced coordination and guarded retry
 

@@ -60,7 +60,7 @@ def retain_worker_cell(request, tmp_path):
         )
 
 
-def worker(reviewed, tmp_path, *, real=False):
+def worker(reviewed, tmp_path, *, real=False, effect_policy=None):
     from actions.server.data_queries import invoice_worker
 
     db, control, queries, reviews, actor, scope, handle, query_snapshot = reviewed
@@ -98,7 +98,7 @@ def worker(reviewed, tmp_path, *, real=False):
     package["revision_id"] = "sha256:" + generation
     payload["runtime_plan"]["package_revision"] = dict(package)
     payload["runtime_plan"]["plan_digest"] = invoice_worker.plan_digest(
-        descriptor, sdk_hash
+        descriptor, sdk_hash, effect_policy=effect_policy
     )
     payload["action_id"] = "worker-" + str(uuid4())
     payload["capability"]["capability_id"] = "invoice_task"
@@ -117,7 +117,9 @@ def worker(reviewed, tmp_path, *, real=False):
             {"input_schema": encoded, "file": "_invoice_task.py"},
         )
     control.register(snapshot)
-    plan = invoice_worker.InvoiceWorkerPlan(snapshot, descriptor, source, sdk_hash)
+    plan = invoice_worker.InvoiceWorkerPlan(
+        snapshot, descriptor, source, sdk_hash, effect_policy
+    )
     service = invoice_worker.InvoiceWorkerService(
         reviews,
         plan,

@@ -388,7 +388,9 @@ export function QueryResultsView({
                                 {result.rows.map((row) => (
                                     <tr key={row.id}>
                                         <th scope="row">{row.title}</th>
-                                        <td>{row.category}</td>
+                                        <td style={{ whiteSpace: "pre-line" }}>
+                                            {row.category}
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>

@@ -18,7 +18,7 @@ const pageSchema = z.object({
             z.object({
                 id: z.string().max(256),
                 title: z.string().max(256),
-                category: z.string().max(256),
+                category: z.string().max(2048),
             }),
         )
         .max(99),

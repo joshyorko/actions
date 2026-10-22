@@ -16,7 +16,9 @@ from itertools import chain
 from pathlib import Path
 from typing import Any
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_serializer, model_validator
+
+from .reconciliation import InvoiceReconciliation
 
 OPERATION = "invoices.overdue/v1"
 COLUMNS = ("invoice_id", "customer", "amount_cents", "days_overdue")
@@ -47,6 +49,23 @@ class Invoice(_Value):
     customer: str = Field(max_length=1024)
     amount_cents: int = Field(ge=0, le=9007199254740991)
     days_overdue: int = Field(ge=0, le=36500)
+    reconciliation: InvoiceReconciliation | None = None
+
+    @model_serializer(mode="wrap")
+    def omit_absent_reconciliation(self, handler):
+        data = handler(self)
+        if self.reconciliation is None:
+            data.pop("reconciliation", None)
+        return data
+
+    @model_validator(mode="after")
+    def matching_reconciliation(self):
+        if self.reconciliation is not None and (
+            self.reconciliation.source.invoice_id != self.invoice_id
+            or self.reconciliation.actual_total_cents != self.amount_cents
+        ):
+            raise ValueError("reconciliation belongs to a different invoice")
+        return self
 
 
 class QueryRejected(RuntimeError):

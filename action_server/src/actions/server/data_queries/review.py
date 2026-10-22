@@ -100,7 +100,9 @@ class _SQLStore:
 class ReviewExecutionPending(BaseModel):
     model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
     proposal: ReviewProposal
-    phase: Literal["pending", "rejected", "cancelled", "queued", "running", "failed"]
+    phase: Literal[
+        "pending", "rejected", "cancelled", "queued", "running", "failed", "blocked"
+    ]
 
 
 class ReviewExecutionArtifact(BaseModel):
@@ -114,7 +116,7 @@ class ReviewExecutionArtifact(BaseModel):
 class ReviewExecutionComplete(BaseModel):
     model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
     proposal: ReviewProposal
-    phase: Literal["completed"] = "completed"
+    phase: Literal["completed", "dead_letter"] = "completed"
     work_item_id: str
     run_id: str
     attempt_id: str
@@ -395,17 +397,32 @@ class InvoiceReviewService:
             ):
                 raise ReviewConflict("execution binding differs")
             self.outputs._authorize(actor, snapshot, "read")
-            if run.status != RunStatus.PASSED:
+            envelope = json.loads(run.result or "null")
+            dead_letter = (
+                run.status == RunStatus.FAILED
+                and isinstance(envelope, dict)
+                and envelope.get("result", {}).get("version")
+                == "actions.invoice-execution/v1"
+                and envelope["result"].get("disposition") == "dead_letter"
+                and inputs.effect_policy is not None
+            )
+            if run.status != RunStatus.PASSED and not dead_letter:
                 phase = {
                     RunStatus.NOT_RUN: "queued",
                     RunStatus.RUNNING: "running",
                     RunStatus.CANCELLED: "cancelled",
                     RunStatus.FAILED: "failed",
                 }.get(run.status)
+                if (
+                    run.status == RunStatus.RUNNING
+                    and inputs.effect_policy is not None
+                    and isinstance(envelope, dict)
+                    and envelope.get("effect", {}).get("state") == "blocked"
+                ):
+                    phase = "blocked"
                 return ReviewExecutionPending.model_validate(
                     {"proposal": proposal, "phase": phase}
                 )
-            envelope = json.loads(run.result or "null")
             result = envelope["result"]
             if (
                 result.get("version") != "actions.invoice-execution/v1"
@@ -415,7 +432,7 @@ class InvoiceReviewService:
                 != pin.current_attempt_id
                 or len(envelope["outputs"]) != 1
                 or _one(self.db, FencedWorkItem, row.work_item_id).state
-                != State.DONE.value
+                != (State.FAILED.value if dead_letter else State.DONE.value)
             ):
                 raise ReviewConflict("completed execution receipt differs")
             output = OutputRef.model_validate(envelope["outputs"][0])
@@ -430,6 +447,7 @@ class InvoiceReviewService:
                 if resolved.media_type != "application/json":
                     raise ReviewConflict("execution artifact type differs")
                 return ReviewExecutionComplete(
+                    phase="dead_letter" if dead_letter else "completed",
                     proposal=proposal,
                     work_item_id=row.work_item_id,
                     run_id=run.id,

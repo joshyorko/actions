@@ -744,8 +744,20 @@ class RunOutputService:
         return discardable
 
     def publish(
-        self, actor: Actor, fence: AttemptFence, outputs: list[OutputRef], result: Any
+        self,
+        actor: Actor,
+        fence: AttemptFence,
+        outputs: list[OutputRef],
+        result: Any,
+        *,
+        terminal_status: int = RunStatus.PASSED,
     ) -> Run:
+        if (
+            not isinstance(terminal_status, int)
+            or isinstance(terminal_status, bool)
+            or terminal_status not in (RunStatus.PASSED, RunStatus.FAILED)
+        ):
+            raise ValueError("successful or failed terminal publication required")
         if not 1 <= len(outputs) <= MAX_OUTPUTS or len(
             {o.output_id for o in outputs}
         ) != len(outputs):
@@ -765,9 +777,10 @@ class RunOutputService:
             self._authorize(actor, snapshot, "execute")
             run = _one(self.db, Run, fence.run_id)
             attempt = _one(self.db, RunAttempt, fence.attempt_id)
-            if run.status == RunStatus.PASSED:
+            if run.status in (RunStatus.PASSED, RunStatus.FAILED):
                 if (
-                    run.result == envelope
+                    run.status == terminal_status
+                    and run.result == envelope
                     and pin.current_attempt_id == fence.attempt_id
                     and pin.epoch == fence.epoch
                     and attempt.owner_id == fence.owner_id
@@ -812,7 +825,7 @@ class RunOutputService:
                 + _now_sql(self.db)
                 + ") RETURNING id",
                 [
-                    RunStatus.PASSED,
+                    terminal_status,
                     envelope,
                     run.id,
                     RunStatus.RUNNING,
@@ -824,7 +837,16 @@ class RunOutputService:
                 raise FenceRejected("publication lease expired")
             for ref in outputs:
                 _update(self.db, RunOutput, ref.output_id, {"state": "final"})
-            _update(self.db, RunAttempt, fence.attempt_id, {"state": "succeeded"})
+            _update(
+                self.db,
+                RunAttempt,
+                fence.attempt_id,
+                {
+                    "state": "succeeded"
+                    if terminal_status == RunStatus.PASSED
+                    else "failed"
+                },
+            )
             return _one(self.db, Run, run.id)
 
     def cancel(self, actor: Actor, run_id: str) -> bool:
@@ -877,7 +899,7 @@ class RunOutputService:
                         workspace_id=workspace_id, run_id=run.id, output_id=output.id
                     ).model_dump()
                     if (
-                        run.status != RunStatus.PASSED
+                        run.status not in (RunStatus.PASSED, RunStatus.FAILED)
                         or output.state != "final"
                         or int(output.expires_ms) <= _now(self.db)
                         or not isinstance(attached, dict)

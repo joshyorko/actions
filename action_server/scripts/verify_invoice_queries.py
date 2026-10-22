@@ -67,9 +67,16 @@ def main():
         type=Path,
         help="explicit retained task-owned SDK-only RCC artifact configuration",
     )
+    parser.add_argument(
+        "--effects",
+        action="store_true",
+        help="prove explicit owned synthetic-effect reconciliation and bounded dead letters",
+    )
     args = parser.parse_args()
-    if args.worker_runtime is not None and not (args.worker or args.generated):
-        parser.error("--worker-runtime requires --worker or --generated")
+    if args.worker_runtime is not None and not (
+        args.worker or args.generated or args.effects
+    ):
+        parser.error("--worker-runtime requires --worker, --generated or --effects")
     attempt = str(uuid4())
     evidence = args.evidence_dir.resolve() / attempt
     evidence.mkdir(parents=True, exist_ok=False)
@@ -85,6 +92,15 @@ def main():
     files = [
         *ROOT.glob("action_server/src/actions/server/data_queries/*.py"),
         *ROOT.glob("action_server/src/actions/server/run_outputs/*.py"),
+        *[
+            p
+            for p in ROOT.glob("action_server/examples/invoice_reconciliation/**/*")
+            if p.is_file() and "__pycache__" not in p.parts
+        ],
+        ROOT / "action_server/frontend/scripts/capture-invoice-reconciliation.mjs",
+        ROOT / "action_server/tests/action_server_tests/test_browser_gate_selection.py",
+        ROOT
+        / "action_server/tests/action_server_tests/test_browser_origin_acceptance.py",
         ROOT / "action_server/pyproject.toml",
         ROOT / "action_server/poetry.lock",
         Path(__file__).resolve(),
@@ -94,6 +110,7 @@ def main():
         ),
         ROOT / "action_server/src/actions/server/canvas_lifecycle.py",
         ROOT / "action_server/tests/action_server_tests/test_canvas_lifecycle.py",
+        ROOT / "action_server/tests/action_server_tests/invoice_effect_fixture.py",
         ROOT / "developer/toolkit.py",
         ROOT / "developer/toolkit.yaml",
         ROOT / "action_server/src/actions/server/mcp/setup_mcp_server_v2.py",
@@ -127,7 +144,7 @@ import hashlib, importlib, json, sys
 from pathlib import Path
 source = Path(sys.argv[1]).resolve()
 identities = {}
-for name in ('actions.server.canvas_lifecycle', 'actions.server.data_queries.review', 'actions.server.data_queries.invoice_worker', 'actions.server.data_queries.generated', 'actions.server.data_queries.knowledge',
+for name in ('actions.server.canvas_lifecycle', 'actions.server.data_queries.review', 'actions.server.data_queries.invoice_worker', 'actions.server.data_queries.generated', 'actions.server.data_queries.invoice_effects', 'actions.server.data_queries.knowledge',
              'actions.server.data_queries.invoices', 'actions.server.run_outputs.service'):
     module = importlib.import_module(name)
     path = Path(module.__file__).resolve()
@@ -226,7 +243,7 @@ print(json.dumps(identities))
                 receipt["inputs"][str(p.relative_to(ROOT))] = hashlib.sha256(
                     p.read_bytes()
                 ).hexdigest()
-        if args.worker or args.generated:
+        if args.worker or args.generated or args.effects:
             import platform
 
             if platform.system() != "Linux":
@@ -422,6 +439,8 @@ print(json.dumps(identities))
                 suites["generated"].append(
                     "tests/action_server_tests/test_generated_invoice_browser.py"
                 )
+        if args.effects:
+            suites["effects"] = ["tests/action_server_tests/test_invoice_effects.py"]
         if args.full:
             suites["portable"] = ["tests", "-m", "not integration_test"]
         for label, paths in suites.items():
@@ -457,7 +476,15 @@ print(json.dumps(identities))
                 or counts["failures"]
                 or counts["errors"]
                 or (
-                    label in ("components", "invoice", "browser", "worker", "generated")
+                    label
+                    in (
+                        "components",
+                        "invoice",
+                        "browser",
+                        "worker",
+                        "generated",
+                        "effects",
+                    )
                     and counts["skipped"]
                 )
             ):

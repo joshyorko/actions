@@ -22,7 +22,7 @@ store = invoices.store
 provider = invoices.provider
 postgresql_database = invoices.postgresql_database
 runtime = test_transport.runtime
-pytestmark = pytest.mark.integration_test
+pytestmark = [pytest.mark.integration_test, invoices.pytestmark]
 
 
 def test_real_invoice_canvas_browser(runtime, provider, tmp_path):

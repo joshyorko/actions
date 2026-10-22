@@ -19,6 +19,32 @@ Issue #327 remains the release authority. The full release is **NOT READY**; thi
 private composition does not register a public application or establish actual
 authenticated host, general worker effects or full distribution acceptance.
 
+## Runnable reconciliation milestone (candidate)
+
+The Actions-owned `action_server/examples/invoice_reconciliation/` experiment
+adds deterministic invoice/PO/ledger records and reuses the existing generated
+Canvas resource, explicit exact-result approval, SQL Work Item/Run/Attempt and
+actual pinned RCC worker. It stages an allowlisted local-wheel export; no
+external template destination or publication is approved. Local interactive E2
+and authenticated ChatGPT E1 are separate: Executor supports read/write actions,
+but invoice E1 remains NEEDS_OPERATOR. No working tunnel is modified.
+
+The optional owned synthetic-effect extension uses existing version-2 Run
+dispatch evidence for explicit retries, authoritative lost-ack reconciliation,
+conditional target closure and bounded dead-letter finalization. There is no
+second queue or scheduler, real third-party effect, or generic exactly-once
+claim. Preserve the earlier failures and per-source qualification receipts.
+
+Hosted acceptance at `7b9d00a650d0e079ed9de3dce0e8d2a4ae034d9d`: native
+39832664506 and wheel 39832664535 passed all three OSes; the successful wheel
+job named publish skipped credential/publish steps and only verified/uploaded
+CI artifacts. Standard 39832664598 passed Ubuntu and failed Windows/macOS.
+Unsupported invoice-browser fixture construction failed on both; macOS also
+exposed empty PID-file readiness. The current source repairs applicability before
+fixture construction and atomically publishes child PID readiness with a delayed
+partial-write regression. Those repairs require fresh hosted proof; historical
+matrix results do not qualify a new source or extend Linux-only filesystem support.
+
 ## Ordered cloud continuation
 
 | Order | Gate | Current boundary and next required evidence |

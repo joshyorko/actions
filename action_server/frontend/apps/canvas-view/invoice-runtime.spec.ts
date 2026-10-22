@@ -171,6 +171,31 @@ test("real invoice tool resource view paging export and reopen", async ({
                     expect(
                         result.task.binding.scope.application.revision_id,
                     ).toBe(generatedRevision);
+                    const effectTarget =
+                        process.env.CANVAS_INVOICE_EFFECT_TARGET;
+                    if (effectTarget) {
+                        const effect = z
+                            .object({
+                                effect_receipt: z.object({
+                                    request: z.object({
+                                        target_id: z.string().uuid(),
+                                        proposal: z.object({
+                                            binding: z.object({
+                                                handle: z.string(),
+                                            }),
+                                        }),
+                                    }),
+                                }),
+                            })
+                            .parse(JSON.parse(bytes.toString("utf8")));
+                        expect(effect.effect_receipt.request.target_id).toBe(
+                            effectTarget,
+                        );
+                        expect(
+                            effect.effect_receipt.request.proposal.binding
+                                .handle,
+                        ).toBe(handle);
+                    }
                 } else {
                     const lines = bytes
                         .toString("utf8")

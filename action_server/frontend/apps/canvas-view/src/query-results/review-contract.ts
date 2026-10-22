@@ -88,13 +88,14 @@ const executionSchema = z.discriminatedUnion("phase", [
                 "queued",
                 "running",
                 "failed",
+                "blocked",
             ]),
         })
         .strict(),
     z
         .object({
             proposal: proposalSchema,
-            phase: z.literal("completed"),
+            phase: z.enum(["completed", "dead_letter"]),
             work_item_id: z.string().uuid(),
             run_id: z.string().uuid(),
             attempt_id: z.string().uuid(),
@@ -114,7 +115,7 @@ const executionSchema = z.discriminatedUnion("phase", [
 export type InvoiceExecutionState = z.infer<typeof executionSchema>;
 export type InvoiceExecutionComplete = Extract<
     InvoiceExecutionState,
-    { phase: "completed" }
+    { phase: "completed" | "dead_letter" }
 >;
 export interface InvoiceExecutionAdapter {
     read(proposal: InvoiceReviewProposal): Promise<InvoiceExecutionState>;

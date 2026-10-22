@@ -82,6 +82,8 @@ export function InvoiceReviewPanel({
         running: "Work is running.",
         failed: "Work failed.",
         completed: "Execution result is ready.",
+        blocked: "Work is blocked. An operator must review the outcome.",
+        dead_letter: "Retry limit reached. Review the failure evidence.",
     };
     return (
         <section
@@ -179,13 +181,16 @@ export function InvoiceReviewPanel({
                     {execution && (
                         <p role="status">{phases[execution.phase]}</p>
                     )}
-                    {execution?.phase === "completed" && (
+                    {(execution?.phase === "completed" ||
+                        execution?.phase === "dead_letter") && (
                         <button
                             type="button"
                             disabled={busy}
                             onClick={() => void downloadExecution(execution)}
                         >
-                            Download execution result
+                            {execution.phase === "dead_letter"
+                                ? "Download failure evidence"
+                                : "Download execution result"}
                         </button>
                     )}
                     {executionError && (
@@ -200,7 +205,7 @@ export function InvoiceReviewPanel({
                 <p role="status">Cancelled.</p>
             )}
             {review &&
-                !["completed", "failed", "cancelled"].includes(
+                !["completed", "failed", "cancelled", "dead_letter"].includes(
                     execution?.phase ?? "",
                 ) &&
                 ["pending", "approved"].includes(review.receipt.state) && (

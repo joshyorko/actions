@@ -4719,3 +4719,44 @@ SDK wheel bytes before reading the staged SDK version. Host verification also
 checks the sibling source when present. Missing, changed or foreign producer
 metadata fails closed; do not hardcode the candidate version or omit this
 binding merely because dependency installation succeeded.
+
+
+### Runnable local invoice reconciliation example
+
+`InvoiceReconciliationDemo` composes existing generated revisions, Canvas/MCP,
+exact-result SQL review, fenced Work Item, distinct Run/Attempt, RCC 18.19.3 and
+scoped artifact transport. The versioned example and allowlisted local export
+live in `action_server/examples/invoice_reconciliation/`. Candidate Runtime
+1.1.0a4 and SDK 0.5.0a1 need verified local artifacts, not an assumed public-index
+release. The engine remains in the package; exports copy no engine source.
+
+Use a fresh absolute owned directory. The host binds only loopback, with a
+synthetic server-held actor, ephemeral cookie, exact Origin and CSRF checks. It
+changes no production identity or tunnel. The new DuckDB reconciliation profile
+verifies CSV/database hashes and shows invoice, PO and ledger IDs with
+expected/actual price, quantity and totals. Existing PostgreSQL qualification is
+separate from this DuckDB-only profile.
+
+Approval and execution are separate explicit actions. Restart uses `load_db`;
+`create_db` recreates indexes and is not a reopen API. Restart never regrants
+revoked authority or reactivates old revisions. Source/renderer fingerprints must
+remain exact; changed bytes need a fresh directory with old evidence retained.
+The capture script operates a real browser with actual MCP/RCC. `verify.py`
+checks revocation, origin, workspace, inactive revisions and rollback without
+erasing admitted work. The MCP proxy excludes absent optional typed wire fields
+(`exclude_none=True`) while preserving explicit nulls inside private result
+objects. Null optional TextContent annotations can prevent bridge tool delivery.
+
+This is interactive E2. Executor has read/write integration; this does not prove
+invoice discovery, actual ChatGPT render, model/app audience grants, review,
+artifact readback or reconnect. E1 remains NEEDS_OPERATOR. Persistent identity,
+tunnel or security changes need separate approval; never overwrite a working
+Executor transport to qualify this example.
+
+Unsupported-platform applicability marks must run before imported fixtures
+construct the Linux-only secure filesystem provider. Dedicated Linux browser
+verification still requires actual execution with zero skips. PID readiness
+requires complete contents: the browser deadline regression uses atomic rename
+and a delayed partial-write control while retaining descendant cleanup. These
+repairs do not extend filesystem support to Windows/macOS or turn skips into
+execution proof.

@@ -27,6 +27,7 @@ from .invoices import (
     InvoiceResult,
     QueryRejected,
 )
+from .reconciliation import OPERATION as RECONCILIATION_OPERATION
 
 
 class InvoiceProvider(Protocol):
@@ -53,10 +54,16 @@ class InvoiceQueryService:
         if binding is None or binding.key not in self.providers:
             raise AccessDenied("pinned invoice data binding unavailable")
         provider = self.providers[binding.key]
+        operation = getattr(provider, "operation", OPERATION)
+        if operation not in (OPERATION, RECONCILIATION_OPERATION):
+            raise QueryRejected("unknown versioned invoice operation")
+        columns = COLUMNS + (
+            ("reconciliation",) if operation == RECONCILIATION_OPERATION else ()
+        )
         query = InvoiceQuery.model_validate(inputs)
         receipt: dict[str, Any] = {
-            "operation": OPERATION,
-            "columns": list(COLUMNS),
+            "operation": operation,
+            "columns": list(columns),
             "provider_kind": provider.kind,
             "provider": binding.provider.model_dump(mode="json"),
             "source_version": binding.source_version,
@@ -67,7 +74,7 @@ class InvoiceQueryService:
 
         def chunks() -> Iterator[bytes]:
             with provider.query(query, binding.limits, cancelled) as result:
-                if result.columns != COLUMNS:
+                if result.columns != columns:
                     raise QueryRejected("invoice schema mismatch")
                 receipt["source_snapshot"] = result.source_snapshot
                 for row in result.rows:

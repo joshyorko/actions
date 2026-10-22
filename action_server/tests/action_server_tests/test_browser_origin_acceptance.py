@@ -33,7 +33,8 @@ def _run_browser_harness(command, input_data, *, process_owner, timeout_seconds,
 
 
 @pytest.mark.integration_test
-def test_browser_harness_deadline_reaps_owned_descendant(tmp_path):
+@pytest.mark.parametrize("pause_pid_write", [False, True])
+def test_browser_harness_deadline_reaps_owned_descendant(tmp_path, pause_pid_write):
     script = (
         Path(__file__).resolve().parents[2]
         / "scripts"
@@ -50,6 +51,7 @@ def test_browser_harness_deadline_reaps_owned_descendant(tmp_path):
         "runtime_origin": "http://127.0.0.1:1",
         "force_hang_after_browser_launch": True,
         "process_pid_file": str(child_pid_file),
+        "pause_pid_write": pause_pid_write,
     }
     frontend = Path(__file__).resolve().parents[2] / "frontend"
     started = time.monotonic()
@@ -116,7 +118,7 @@ _BROWSER_SCRIPT = textwrap.dedent(
     r"""
     import assert from "node:assert/strict";
     import { request as httpRequest } from "node:http";
-    import { readFileSync, writeFileSync } from "node:fs";
+    import { readFileSync, writeFileSync, openSync, writeSync, closeSync, renameSync } from "node:fs";
     import { chromium } from "@playwright/test";
 
     const input = JSON.parse(readFileSync(process.env.ACTIONS_BROWSER_ACCEPTANCE_INPUT, "utf8"));
@@ -164,7 +166,12 @@ _BROWSER_SCRIPT = textwrap.dedent(
             headless: true,
         });
         if (input.force_hang_after_browser_launch) {
-            writeFileSync(input.process_pid_file, String(process.pid));
+            const partial = `${input.process_pid_file}.${process.pid}.partial`;
+            const marker = openSync(partial, "wx");
+            if (input.pause_pid_write) await new Promise(resolve => setTimeout(resolve, 1000));
+            writeSync(marker, String(process.pid));
+            closeSync(marker);
+            renameSync(partial, input.process_pid_file);
             await new Promise(() => {});
         }
         const context = await browser.newContext();

@@ -54,8 +54,9 @@ retain_worker_cell = workers.retain_worker_cell
 pytestmark = [generated.pytestmark, pytest.mark.integration_test]
 
 
+@pytest.mark.parametrize("effect_mode", ["private", "owned-idempotent"])
 def test_generated_renderer_review_dispatch_download_and_activation_rollback(
-    runtime, reviewed, tmp_path, provider
+    runtime, reviewed, tmp_path, provider, effect_mode
 ):
     resource_path = os.environ.get("ACTIONS_INVOICE_CANVAS_RESOURCE")
     if not resource_path:
@@ -67,11 +68,27 @@ def test_generated_renderer_review_dispatch_download_and_activation_rollback(
         reviewed, tmp_path, html=resource.read_bytes()
     )
     handle = app.invoke(actor, "generated-browser", str(uuid4()), threading.Event())
-    worker, _, _, _ = workers.worker(
-        (*reviewed[:5], app.scope, handle, app.snapshot), tmp_path, real=True
+    from action_server_tests.invoice_effect_fixture import OwnedEffectTarget
+
+    from actions.server.data_queries.invoice_effects import SyntheticEffectPolicy
+
+    policy = (
+        SyntheticEffectPolicy(target_id=str(uuid4()), max_attempts=2, idempotent=True)
+        if effect_mode == "owned-idempotent"
+        else None
     )
+    worker, _, _, _ = workers.worker(
+        (*reviewed[:5], app.scope, handle, app.snapshot),
+        tmp_path,
+        real=True,
+        effect_policy=policy,
+    )
+    if policy is not None:
+        worker.effect_target = OwnedEffectTarget(
+            tmp_path / "target.db", policy.target_id
+        )
     evidence = Path(os.environ["ACTIONS_INVOICE_BROWSER_EVIDENCE_DIR"]) / (
-        reviewed[0].backend_name + "-" + provider.kind
+        reviewed[0].backend_name + "-" + provider.kind + "-" + effect_mode
     )
     evidence.mkdir(parents=True, exist_ok=False)
 
@@ -126,7 +143,12 @@ def test_generated_renderer_review_dispatch_download_and_activation_rollback(
                 )
                 ticket = app.dispatch(actor, worker, proposal, claim, lease_seconds=120)
                 worker.launch(actor, ticket, threading.Event(), lease_seconds=120)
-                return worker.complete(actor, ticket).model_dump(mode="json")
+                if policy is not None:
+                    worker.apply_effect(actor, ticket)
+                receipt = worker.complete(actor, ticket)
+                if policy is not None:
+                    assert worker.effect_target.counts() == (1, 1)
+                return receipt.model_dump(mode="json")
 
         server = uvicorn.Server(
             uvicorn.Config(client.app, log_level="warning", lifespan="on")
@@ -153,6 +175,8 @@ def test_generated_renderer_review_dispatch_download_and_activation_rollback(
                 + "/owned-generated-fixture/dispatch",
                 CANVAS_GENERATED_REVISION=app.scope.application.revision_id,
             )
+            if policy is not None:
+                env["CANVAS_INVOICE_EFFECT_TARGET"] = policy.target_id
             with (evidence / "browser.log").open("w") as log:
                 result = subprocess.run(
                     [
