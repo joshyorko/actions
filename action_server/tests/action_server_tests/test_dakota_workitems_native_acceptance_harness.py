@@ -46,8 +46,18 @@ def test_candidate_package_installs_the_exact_sdk_wheel(tmp_path):
     core = tmp_path / "actions_core-1.0.3-py3-none-any.whl"
     sdk = tmp_path / "actions_work_items-0.5.0a1-py3-none-any.whl"
     package = NATIVE_TEST.consumer_package_yaml(core, tmp_path / "report.json", sdk)
-    assert str(sdk.resolve()) in package
-    assert str(core.resolve()) in package
+    import yaml
+
+    command = yaml.safe_load(package)["post-install"][0]
+    tokens = shlex.split(command)
+    assert [Path(value).resolve() for value in tokens[-2:]] == [
+        core.resolve(),
+        sdk.resolve(),
+    ]
+    assert (
+        Path(tokens[tokens.index("--report") + 1]).resolve()
+        == (tmp_path / "report.json").resolve()
+    )
 
 
 def test_sdk_proof_must_bind_each_runtime_to_the_selected_wheel(tmp_path):

@@ -17,7 +17,7 @@ from actions.work_items._adapters._sql_review import SQLReviewQueue
 from pydantic import BaseModel, ConfigDict, Field, TypeAdapter
 
 from actions.server._database import Database
-from actions.server._models import RUN_ID_COUNTER, Run
+from actions.server._models import RUN_ID_COUNTER, Run, RunStatus
 from actions.server.run_outputs.models import RunOutput, RunPin
 from actions.server.run_outputs.service import (
     AccessDenied,
@@ -35,6 +35,7 @@ from actions.server.run_outputs.service import (
 from actions.server.run_outputs.types import (
     Actor,
     CanvasResultScope,
+    OutputRef,
     output_id_from_handle,
 )
 
@@ -94,6 +95,30 @@ class _SQLStore:
             else:
                 self.db.execute_update_returning(cursor, sql, values)
             return cursor.fetchall()
+
+
+class ReviewExecutionPending(BaseModel):
+    model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
+    proposal: ReviewProposal
+    phase: Literal["pending", "rejected", "cancelled", "queued", "running", "failed"]
+
+
+class ReviewExecutionArtifact(BaseModel):
+    model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
+    handle: str = Field(pattern=r"^art_[A-Za-z0-9_-]{22}$")
+    digest: str = Field(pattern=r"^sha256:[0-9a-f]{64}$")
+    size: int = Field(ge=0)
+    media_type: Literal["application/json"] = "application/json"
+
+
+class ReviewExecutionComplete(BaseModel):
+    model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
+    proposal: ReviewProposal
+    phase: Literal["completed"] = "completed"
+    work_item_id: str
+    run_id: str
+    attempt_id: str
+    artifact: ReviewExecutionArtifact
 
 
 class InvoiceReviewService:
@@ -324,3 +349,92 @@ class InvoiceReviewService:
                 },
             )
             return self._receipt(_one(self.db, InvoiceReview, row.id))
+
+    def execution(
+        self, actor: Actor, scope: CanvasResultScope, proposal: ReviewProposal
+    ) -> ReviewExecutionPending | ReviewExecutionComplete:
+        """Read the existing review/Run projection; never dispatch or authorize retry."""
+        import json
+
+        from actions.work_items import State
+
+        from .invoice_worker import WorkerInput, work_item_run_key
+        from .review_models import FencedWorkItem
+
+        with _transaction(self.db):
+            row = self._current(actor, scope, proposal, open_result=False)
+            if row.state != "approved":
+                return ReviewExecutionPending.model_validate(
+                    {"proposal": proposal, "phase": row.state}
+                )
+            key = work_item_run_key(row.work_item_id)
+            pins = self.db.all(
+                RunPin,
+                where="idempotency_id=?",
+                values=[
+                    _key(
+                        "actions.workspace-run-idempotency/v1",
+                        scope.application.workspace_id,
+                        key,
+                    )
+                ],
+            )
+            if not pins:
+                return ReviewExecutionPending(proposal=proposal, phase="queued")
+            if len(pins) != 1 or pins[0].idempotency_key != key:
+                raise ReviewConflict("execution identity differs")
+            pin = pins[0]
+            snapshot = self.outputs._pinned(pin)
+            run = _one(self.db, Run, pin.run_id)
+            inputs = WorkerInput.model_validate_json(run.inputs)
+            if (
+                snapshot.canvas_application != scope.application
+                or snapshot.deployment != scope.deployment
+                or inputs.proposal != proposal
+                or inputs.initial_claim.item_id != row.work_item_id
+            ):
+                raise ReviewConflict("execution binding differs")
+            self.outputs._authorize(actor, snapshot, "read")
+            if run.status != RunStatus.PASSED:
+                phase = {
+                    RunStatus.NOT_RUN: "queued",
+                    RunStatus.RUNNING: "running",
+                    RunStatus.CANCELLED: "cancelled",
+                    RunStatus.FAILED: "failed",
+                }.get(run.status)
+                return ReviewExecutionPending.model_validate(
+                    {"proposal": proposal, "phase": phase}
+                )
+            envelope = json.loads(run.result or "null")
+            result = envelope["result"]
+            if (
+                result.get("version") != "actions.invoice-execution/v1"
+                or result.get("review_id") != proposal.review_id
+                or result.get("work_item_claim", {}).get("item_id") != row.work_item_id
+                or result.get("publication_fence", {}).get("attempt_id")
+                != pin.current_attempt_id
+                or len(envelope["outputs"]) != 1
+                or _one(self.db, FencedWorkItem, row.work_item_id).state
+                != State.DONE.value
+            ):
+                raise ReviewConflict("completed execution receipt differs")
+            output = OutputRef.model_validate(envelope["outputs"][0])
+            if (
+                output.run_id != run.id
+                or output.workspace_id != scope.application.workspace_id
+            ):
+                raise ReviewConflict("execution output reference differs from its Run")
+            with self.outputs.resolve(
+                actor, scope.application.workspace_id, output.handle, canvas_scope=scope
+            ) as resolved:
+                if resolved.media_type != "application/json":
+                    raise ReviewConflict("execution artifact type differs")
+                return ReviewExecutionComplete(
+                    proposal=proposal,
+                    work_item_id=row.work_item_id,
+                    run_id=run.id,
+                    attempt_id=pin.current_attempt_id,
+                    artifact=ReviewExecutionArtifact(
+                        handle=output.handle, digest=resolved.digest, size=resolved.size
+                    ),
+                )

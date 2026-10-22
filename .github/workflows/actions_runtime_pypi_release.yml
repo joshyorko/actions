@@ -220,6 +220,10 @@ jobs:
       working-directory: work-items
       run: uv run --no-project --python ${{ matrix.python }} poetry build -f wheel
         -o ../action_server/candidate-sdk-wheelhouse
+    - name: Bind candidate SDK wheel to producer checkout
+      if: github.event_name == 'pull_request'
+      run: uv run --no-project --python ${{ matrix.python }} python scripts/write_candidate_sdk_producer.py
+        candidate-sdk-wheelhouse
     - name: Build and clean-test wheels
       run: uv run --no-project --python ${{ matrix.python }} python -m cibuildwheel
         --output-dir wheelhouse
@@ -228,6 +232,7 @@ jobs:
         CIBW_BUILD: cp312-*macos*arm64 cp313-*macos*arm64 cp312-*manylinux*x86_64
           cp313-*manylinux*x86_64 cp312-*win*amd64 cp313-*win*amd64
         CIBW_BUILD_VERBOSITY: 1
+        CIBW_ENVIRONMENT: ACTIONS_CANDIDATE_SOURCE_SHA=${{ github.sha }}
         CIBW_BEFORE_TEST: ${{ github.event_name == 'pull_request' && 'python {project}/scripts/install_candidate_core.py
           {project}/candidate-core-wheelhouse {project}/candidate-helper-wheelhouse
           {project}/candidate-sdk-wheelhouse' || '' }}

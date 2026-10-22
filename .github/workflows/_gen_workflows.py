@@ -2633,6 +2633,7 @@ rm src/actions/server/bin/rcc* -f
                 "CIBW_SKIP": "pp*",
                 "CIBW_BUILD": CIBW_BUILD,
                 "CIBW_BUILD_VERBOSITY": 1,
+                "CIBW_ENVIRONMENT": "ACTIONS_CANDIDATE_SOURCE_SHA=${{ github.sha }}",
                 "CIBW_BEFORE_TEST": "${{ github.event_name == 'pull_request' && 'python {project}/scripts/install_candidate_core.py {project}/candidate-core-wheelhouse {project}/candidate-helper-wheelhouse {project}/candidate-sdk-wheelhouse' || '' }}",
                 "CIBW_TEST_COMMAND": 'python "{project}/scripts/verify_published_runtime_floor.py" --installed-wheel "{wheel}" --checkout-root "{project}" ${{ github.event_name == \'pull_request\' && \'--candidate-sdk-wheelhouse {project}/candidate-sdk-wheelhouse\' || \'\' }}',
             },
@@ -2674,6 +2675,11 @@ rm src/actions/server/bin/rcc* -f
             "if": "github.event_name == 'pull_request'",
             "working-directory": "work-items",
             "run": f"{run_in_env}poetry build -f wheel -o ../action_server/candidate-sdk-wheelhouse",
+        })
+        steps.append({
+            "name": "Bind candidate SDK wheel to producer checkout",
+            "if": "github.event_name == 'pull_request'",
+            "run": f"{run_in_env}python scripts/write_candidate_sdk_producer.py candidate-sdk-wheelhouse",
         })
         steps.append(self.build_manylinux_wheels())
         steps.append({

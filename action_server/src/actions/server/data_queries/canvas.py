@@ -5,6 +5,7 @@ Actor. Nothing here registers or generates apps, executes on mount, defines a
 second CanvasSpec/renderer, or proves an MCP bridge or actual ChatGPT host.
 """
 
+from collections.abc import Callable
 from contextlib import AbstractContextManager
 from dataclasses import dataclass
 from typing import Any
@@ -19,6 +20,7 @@ from .service import InvoiceQueryService
 class InvoiceCanvasFacade:
     queries: InvoiceQueryService
     scope: CanvasResultScope
+    revision_guard: Callable[[Actor], None] | None = None
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "scope", CanvasResultScope.model_validate(self.scope))
@@ -26,6 +28,8 @@ class InvoiceCanvasFacade:
     def page(
         self, actor: Actor, handle: str, *, offset: int, limit: int
     ) -> dict[str, Any]:
+        if self.revision_guard is not None:
+            self.revision_guard(actor)
         rows = self.queries.page(
             actor,
             self.scope.application.workspace_id,
@@ -43,6 +47,8 @@ class InvoiceCanvasFacade:
     def export(
         self, actor: Actor, handle: str
     ) -> AbstractContextManager[ResolvedOutput]:
+        if self.revision_guard is not None:
+            self.revision_guard(actor)
         return self.queries.export(
             actor, self.scope.application.workspace_id, handle, canvas_scope=self.scope
         )

@@ -1,6 +1,6 @@
 import type { App } from "@modelcontextprotocol/ext-apps/react";
 import { z } from "zod";
-import { parseInvoiceReview } from "./review-contract";
+import { parseInvoiceExecution, parseInvoiceReview } from "./review-contract";
 import type { InvoiceReviewAdapter } from "./review-contract";
 
 import type {
@@ -64,6 +64,54 @@ export function createInvoiceAdapter(app: App): QueryResultsAdapter {
         return state;
     };
     const review: InvoiceReviewAdapter = {
+        execution: {
+            async read(proposal) {
+                const result = await app.callServerTool({
+                    name: "invoice_review_execution",
+                    arguments: { proposal },
+                });
+                if (result.isError) throw new Error("Execution result denied.");
+                const state = parseInvoiceExecution(
+                    result._meta?.["actions.invoiceExecution"],
+                );
+                if (JSON.stringify(state.proposal) !== JSON.stringify(proposal))
+                    throw new Error("Execution proposal changed.");
+                return state;
+            },
+            async download(result) {
+                if (!result.artifact.uri)
+                    throw new Error("Download transport is not configured.");
+                const uri = new globalThis.URL(result.artifact.uri);
+                const workspace =
+                    result.proposal.binding.scope.application.workspace_id;
+                if (
+                    !["https:", "http:"].includes(uri.protocol) ||
+                    uri.username ||
+                    uri.password ||
+                    uri.search ||
+                    uri.hash ||
+                    (uri.protocol === "http:" &&
+                        !["127.0.0.1", "localhost", "[::1]"].includes(
+                            uri.hostname,
+                        )) ||
+                    uri.pathname !==
+                        `/api/workspaces/${workspace}/outputs/${result.artifact.handle}`
+                )
+                    throw new Error("Invalid execution download route.");
+                const downloaded = await app.downloadFile({
+                    contents: [
+                        {
+                            type: "resource_link",
+                            uri: uri.href,
+                            name: "invoice-execution.json",
+                            mimeType: result.artifact.media_type,
+                        },
+                    ],
+                });
+                if (downloaded.isError)
+                    throw new Error("Host download denied.");
+            },
+        },
         offer(handle) {
             return reviewCall("invoice_review_offer", { handle }, handle);
         },

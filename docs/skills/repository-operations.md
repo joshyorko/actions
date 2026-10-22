@@ -114,6 +114,87 @@ activation/rollback, Work Item review/fencing, workers and ChatGPT acceptance
 remain separate release gates. Source snapshots must retain all changed inputs;
 an intermediate green run does not qualify later hardening edits.
 
+## Generated invoice revision composition
+
+`GeneratedInvoiceApp` privately connects the existing `CanvasRevisionStore` to
+SQL query/review/Work Item/Run/Attempt services. It creates no app registry,
+activation pointer, public lifecycle endpoint, renderer or scheduler. The narrow
+`actions.generated-invoice/v1` bundle contains the existing built `canvas.html`
+and typed `invoice.json` inputs/source binding with its renderer digest. Supply
+`validate_invoice_revision` as the existing store's validator and a trusted
+actor/workspace/deployment/app authorization callback. A revision identifier is
+not an authorization grant or a general CanvasSpec/compiler acceptance claim.
+
+The generated-query Runtime kind `invoice/generated-query/v1` has an additive
+Run-admission key domain containing its application subject. This admits two
+immutable app revisions under the same declared capability/deployment without
+changing existing admission IDs or interpreting an old Run differently. The
+existing SQL request fingerprint still binds the entire snapshot and inputs;
+workspace idempotency keys cannot be reused for different payloads. Register the
+trusted snapshot with the existing control plane before explicit invocation.
+Opening, paging, remounting, reviewing or checking an execution does not invoke
+a query or worker. Published query invocation replay returns its retained output.
+
+The binding re-reads the active revision and persisted actor grants on MCP and
+artifact entry. It verifies the complete bundle and declared source, and binds
+the MCP resource URI to both bundle revision and renderer digest. Stale views
+cannot read/review through an inactive revision. Activation is an entry-time
+pin boundary; it does not cancel or rewrite already admitted work. The private
+worker retains its original app/deployment/result/input/claim lineage and dual
+SQL fences. Activation rollback preserves review decisions, Work Items, Runs,
+Attempts and sealed outputs. An older binary cannot reconstruct the new
+admission-key domain: disable entry and drain/reconcile with current code before
+code downgrade, and retain SQL/object backups for restore.
+
+App-only `invoice_review_execution` reads the existing authorities. It projects
+pending/queued/running/failed/cancelled or completed state without dispatching or
+retrying. A completed response must bind its output reference to that exact Run,
+review and Work Item, then resolve it with current scoped output authorization.
+A valid JSON output from another Run in the same app is insufficient. The
+existing renderer's explicit execution check/download uses this projection and
+the existing authenticated output route. No read implies human approval or
+exactly-once external effects. Output retention remains bounded by the worker's
+existing 3,600-second policy; long-term retention and restore remain separate.
+
+The strict RCC `InvoiceQueryTest` gate accepts `ACTIONS_INVOICE_GENERATED=1`;
+add `ACTIONS_INVOICE_BROWSER=1` for the real Runtime socket/current renderer and
+bridge. These required cells have zero skips. General integration tests with no
+owned renderer/RCC fixture classify those dedicated cases as unverified skips;
+the explicit gate fails when prerequisites are missing. E2's test-operator
+trigger is fixture-only and separate from approval, not a shipped dispatch API
+or authenticated ChatGPT E1. Linux sealed-filesystem provider tests remain
+Linux-only; generic native success on other platforms does not qualify them.
+
+To avoid rebuilding an unchanged SDK-only RCC environment, the verifier accepts
+an explicit `ACTIONS_INVOICE_WORKER_RUNTIME` retained configuration from the same
+owned task. It rebuilds/hashes the current SDK wheel, requires the same pinned
+RCC path, records configuration/environment hashes, and reacquires/verifies the
+artifact with the existing policy before execution. This does not admit an
+operator home, credential or unrelated cache. Keep its original receipt and
+current task/source proofs; a cache hit is not acceptance. Mandatory worker
+input tests and the portable suite keep separate evidence and opt-in boundaries.
+
+## SDK static gate scope and baseline diagnostics
+
+The canonical toolkit dispatches Work Items lint as `poetry run ruff check src
+tests` and typecheck as configured `poetry run mypy`, whose declared target is
+`tests/typecheck/runtime_adapter_calls.py`. The explicit concrete fencing checks
+in the Work Items guide remain additional required proof for queue changes.
+The separate `.devcontainer/bin/verify-work-items` release gate checks lock,
+Ruff lint, full tests and distributions with owned Redis/MongoDB prerequisites;
+its absence is not supplied by a portable test run.
+
+Generic shared `inv lint` forces the Devutils formatter configuration rather
+than the SDK's own 100-column configuration. Neither that formatter nor broad
+`inv typecheck` is the toolkit's declared SDK gate. Direct SDK formatting still
+reports 27 files, and broad checking reports 68 errors in 16 files under the
+locked environment, including optional/source-port imports, signature conflicts
+and unused ignores. The identical Work Items Git tree at 28fa and 227c was
+archived and reproduced these exact diagnostics. Required lint and configured
+mypy passed in that baseline. Keep the diagnostics as unresolved baseline debt,
+not green results, and do not perform unrelated formatting/type cleanup or
+silently change release policy to erase them.
+
 ## MCP Apps public metadata
 
 Catalog concurrency fixtures must distinguish process startup from contention.
@@ -4613,3 +4694,13 @@ and Python bytes, and retains public Core/Helper version, URL and SHA checks.
 This flag is PR-only; the default published-floor verifier remains pinned to
 Runtime 1.0.4. Staging unpublished SDK 0.5.0a1 locally is a test prerequisite,
 not permission to publish it or relax the Runtime dependency floor.
+
+The cibuildwheel container mounts only `action_server` at `{project}`. A sibling
+`work-items/pyproject.toml` is unavailable there. The PR producer writes
+`candidate-sdk-wheelhouse/producer.json` with its actual Git SHA, exact SDK
+pyproject bytes/hash, Runtime pyproject hash and wheel filename/hash. Verification
+requires the expected CI source SHA plus matching mounted Runtime metadata and
+SDK wheel bytes before reading the staged SDK version. Host verification also
+checks the sibling source when present. Missing, changed or foreign producer
+metadata fails closed; do not hardcode the candidate version or omit this
+binding merely because dependency installation succeeded.

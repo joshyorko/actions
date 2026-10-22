@@ -30,6 +30,7 @@ TOOL_NAMES = frozenset(
         "invoice_review_offer",
         "invoice_review_decide",
         "invoice_review_cancel",
+        "invoice_review_execution",
     }
 )
 REVIEW_TOOLS = frozenset(
@@ -76,8 +77,14 @@ class InvoiceCanvasMcp:
     download_base_url: str | None = None
     initial_page_size: int = 20
     reviews: InvoiceReviewService | None = None
+    resource_revision: str | None = None
 
     def __post_init__(self) -> None:
+        if (
+            self.resource_revision is not None
+            and self.resource_revision != self.facade.scope.application.revision_id
+        ):
+            raise ValueError("resource revision differs from pinned application")
         if self.reviews is not None and self.reviews.queries is not self.facade.queries:
             raise ValueError("review must use the same query/output authority")
         if (
@@ -116,7 +123,12 @@ class InvoiceCanvasMcp:
     @property
     def uri(self) -> str:
         digest = sha256(self.html.encode()).hexdigest()
-        return f"ui://action-canvas/invoice/v1/{digest}.html"
+        revision = (
+            self.resource_revision.removeprefix("sha256:") + "/"
+            if self.resource_revision
+            else ""
+        )
+        return f"ui://action-canvas/invoice/v1/{revision}{digest}.html"
 
     @property
     def resource(self) -> Resource:
@@ -152,13 +164,15 @@ class InvoiceCanvasMcp:
         for name in sorted(TOOL_NAMES):
             if principal.audience == "model" and name != "invoice_result":
                 continue
-            if name in REVIEW_TOOLS and self.reviews is None:
+            if (
+                name in REVIEW_TOOLS or name == "invoice_review_execution"
+            ) and self.reviews is None:
                 continue
             schema = (
                 DecisionInput
                 if name == "invoice_review_decide"
                 else ReviewInput
-                if name == "invoice_review_cancel"
+                if name in ("invoice_review_cancel", "invoice_review_execution")
                 else PageInput
                 if name == "invoice_result_page"
                 else ResultInput
@@ -199,6 +213,36 @@ class InvoiceCanvasMcp:
                 name != "invoice_result" and principal.audience != "app"
             ):
                 raise PermissionError
+            if name == "invoice_review_execution":
+                if self.reviews is None:
+                    raise PermissionError
+                request_execution = ReviewInput.model_validate(arguments)
+                with self.facade.queries.outputs.db.connect():
+                    execution = self.reviews.execution(
+                        principal.actor, self.facade.scope, request_execution.proposal
+                    )
+                payload = execution.model_dump(mode="json")
+                if (
+                    execution.phase == "completed"
+                    and self.download_base_url is not None
+                ):
+                    workspace = self.facade.scope.application.workspace_id
+                    payload["artifact"][
+                        "uri"
+                    ] = f"{self.download_base_url}/api/workspaces/{workspace}/outputs/{execution.artifact.handle}"
+                return CallToolResult(
+                    content=[
+                        TextContent(
+                            type="text",
+                            text="Authorized execution status is available.",
+                        )
+                    ],
+                    structured_content={
+                        "schemaVersion": "actions.invoice-execution-status/v1",
+                        "phase": execution.phase,
+                    },
+                    _meta={"actions.invoiceExecution": payload},
+                )
             if name in REVIEW_TOOLS:
                 if self.reviews is None:
                     raise PermissionError

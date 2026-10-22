@@ -7,6 +7,7 @@ import ast
 import hashlib
 import json
 import os
+import re
 import subprocess
 import sys
 import tempfile
@@ -688,7 +689,50 @@ def select_candidate_sdk(directory: Path, project: Path) -> tuple[Path, str]:
         raise ValueError("Expected exactly one regular candidate SDK wheel")
     wheel = wheels[0]
     sdk_project = project.parent / "work-items" / "pyproject.toml"
-    sdk_contents = tomllib.loads(sdk_project.read_text())
+    producer_path = directory / "producer.json"
+    sdk_raw = (
+        sdk_project.read_bytes().decode("utf-8") if sdk_project.is_file() else None
+    )
+    if producer_path.is_file():
+        producer = json.loads(producer_path.read_text())
+        expected_source = os.environ.get("ACTIONS_CANDIDATE_SOURCE_SHA")
+        if expected_source is None and sdk_raw is not None:
+            expected_source = subprocess.check_output(
+                ["git", "rev-parse", "HEAD"], cwd=project, text=True
+            ).strip()
+        if (
+            not isinstance(expected_source, str)
+            or re.fullmatch(r"[0-9a-f]{40}", expected_source) is None
+            or producer.get("schema") != "actions.candidate-sdk-producer/v1"
+            or producer.get("source_sha") != expected_source
+            or producer.get("runtime_pyproject_sha256")
+            != hashlib.sha256((project / "pyproject.toml").read_bytes()).hexdigest()
+            or not isinstance(producer.get("sdk_pyproject"), str)
+            or hashlib.sha256(producer["sdk_pyproject"].encode()).hexdigest()
+            != producer.get("sdk_pyproject_sha256")
+            or producer.get("wheel")
+            != {
+                "filename": wheel.name,
+                "sha256": hashlib.sha256(wheel.read_bytes()).hexdigest(),
+            }
+            or (sdk_raw is not None and sdk_raw != producer["sdk_pyproject"])
+        ):
+            raise ValueError("Candidate SDK producer binding differs")
+        sdk_raw = producer["sdk_pyproject"]
+        print(
+            "CANDIDATE_SDK_PRODUCER="
+            + json.dumps(
+                {
+                    key: value
+                    for key, value in producer.items()
+                    if key != "sdk_pyproject"
+                },
+                sort_keys=True,
+            )
+        )
+    if sdk_raw is None:
+        raise ValueError("Candidate SDK producer metadata unavailable")
+    sdk_contents = tomllib.loads(sdk_raw)
     sdk_version = (
         sdk_contents.get("project", {}).get("version")
         or sdk_contents["tool"]["poetry"]["version"]

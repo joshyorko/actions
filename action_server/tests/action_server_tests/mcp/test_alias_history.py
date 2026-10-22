@@ -596,15 +596,25 @@ def test_concurrent_processes_serialize_empty_history_allocation(
                 time.sleep(0.01)
             for child in children:
                 assert Path(child.args[-1]).read_text() == "5000"
-                child.stdin.write("go\n")
-                child.stdin.flush()
+                child.stdin.buffer.write(b"go\n")
+                child.stdin.buffer.flush()
             while not all(
                 Path(str(child.args[-1]) + ".claim").exists() for child in children
             ):
                 if time.monotonic() >= deadline:
                     pytest.fail("catalog children did not reach the real writer gate")
-                if any(child.poll() is not None for child in children):
-                    pytest.fail("catalog child exited while the writer was held")
+                exited = [child for child in children if child.poll() is not None]
+                if exited:
+                    diagnostics = []
+                    for child in exited:
+                        stdout, stderr = child.communicate(timeout=5)
+                        diagnostics.append(
+                            f"returncode={child.returncode} stdout={stdout[-2000:]!r} stderr={stderr[-4000:]!r}"
+                        )
+                    pytest.fail(
+                        "catalog child exited while the writer was held: "
+                        + "\n".join(diagnostics)
+                    )
                 time.sleep(0.01)
             assert all(child.poll() is None for child in children)
             assert (
@@ -634,3 +644,19 @@ def test_concurrent_processes_serialize_empty_history_allocation(
             if child.poll() is None:
                 child.kill()
                 child.communicate(timeout=10)
+
+
+def test_catalog_gate_is_byte_exact_under_windows_text_newline(tmp_path, monkeypatch):
+    import io
+    import subprocess
+
+    real_popen = subprocess.Popen
+
+    def windows_pipe(*args, **kwargs):
+        process = real_popen(*args, **kwargs)
+        if isinstance(process.stdin, io.TextIOWrapper):
+            process.stdin.reconfigure(newline="\r\n")
+        return process
+
+    monkeypatch.setattr(subprocess, "Popen", windows_pipe)
+    test_concurrent_processes_serialize_empty_history_allocation(tmp_path, False)

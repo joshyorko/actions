@@ -2,6 +2,7 @@
 
 import asyncio
 import json
+import sys
 import threading
 from types import SimpleNamespace
 from uuid import uuid4
@@ -21,6 +22,11 @@ from actions.server.data_queries.canvas_mcp import (
 from actions.server.data_queries.service import InvoiceQueryService
 from actions.server.mcp.setup_mcp_server_v2 import McpServerSetupHelper
 from actions.server.run_outputs.types import CanvasResultScope, ExecutionSnapshot
+
+pytestmark = pytest.mark.skipif(
+    sys.platform != "linux",
+    reason="requires Linux-only sealed filesystem provider; no platform feature acceptance",
+)
 
 store = fixtures.store
 provider = fixtures.provider

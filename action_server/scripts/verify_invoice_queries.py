@@ -57,7 +57,19 @@ def main():
         action="store_true",
         help="also prove the fixed invoice task with owned local RCC artifact and installed SDK",
     )
+    parser.add_argument(
+        "--generated",
+        action="store_true",
+        help="prove existing generated revision through review, RCC and artifact readback",
+    )
+    parser.add_argument(
+        "--worker-runtime",
+        type=Path,
+        help="explicit retained task-owned SDK-only RCC artifact configuration",
+    )
     args = parser.parse_args()
+    if args.worker_runtime is not None and not (args.worker or args.generated):
+        parser.error("--worker-runtime requires --worker or --generated")
     attempt = str(uuid4())
     evidence = args.evidence_dir.resolve() / attempt
     evidence.mkdir(parents=True, exist_ok=False)
@@ -77,6 +89,11 @@ def main():
         ROOT / "action_server/poetry.lock",
         Path(__file__).resolve(),
         *ROOT.glob("action_server/tests/action_server_tests/test_invoice_*.py"),
+        *ROOT.glob(
+            "action_server/tests/action_server_tests/test_generated_invoice*.py"
+        ),
+        ROOT / "action_server/src/actions/server/canvas_lifecycle.py",
+        ROOT / "action_server/tests/action_server_tests/test_canvas_lifecycle.py",
         ROOT / "developer/toolkit.py",
         ROOT / "developer/toolkit.yaml",
         ROOT / "action_server/src/actions/server/mcp/setup_mcp_server_v2.py",
@@ -110,7 +127,7 @@ import hashlib, importlib, json, sys
 from pathlib import Path
 source = Path(sys.argv[1]).resolve()
 identities = {}
-for name in ('actions.server.canvas_lifecycle', 'actions.server.data_queries.review', 'actions.server.data_queries.invoice_worker', 'actions.server.data_queries.knowledge',
+for name in ('actions.server.canvas_lifecycle', 'actions.server.data_queries.review', 'actions.server.data_queries.invoice_worker', 'actions.server.data_queries.generated', 'actions.server.data_queries.knowledge',
              'actions.server.data_queries.invoices', 'actions.server.run_outputs.service'):
     module = importlib.import_module(name)
     path = Path(module.__file__).resolve()
@@ -186,7 +203,7 @@ print(json.dumps(identities))
         env["ACTIONS_REQUIRE_INVOICE_PROVIDERS"] = "1"
         env["OMP_NUM_THREADS"] = "1"
         env["PYTHONDONTWRITEBYTECODE"] = "1"
-        if args.browser:
+        if args.browser or args.generated:
             resource = ROOT / "action_server/frontend/dist-canvas/index.html"
             receipt["canvas_html_sha256"] = hashlib.sha256(
                 resource.read_bytes()
@@ -205,7 +222,7 @@ print(json.dumps(identities))
                 receipt["inputs"][str(p.relative_to(ROOT))] = hashlib.sha256(
                     p.read_bytes()
                 ).hexdigest()
-        if args.worker:
+        if args.worker or args.generated:
             import platform
 
             if platform.system() != "Linux":
@@ -232,14 +249,6 @@ print(json.dumps(identities))
                 raise RuntimeError("one exact candidate SDK wheel required")
             wheel = entries[0]
             wheel_hash = hashlib.sha256(wheel.read_bytes()).hexdigest()
-            fixture = evidence / "worker-environment"
-            fixture.mkdir()
-            environment = fixture / "package.yaml"
-            environment.write_text(
-                "version: 0.1\nspec-version: v2\ndependencies:\n  conda-forge:\n    - python=3.12.15\n  pypi:\n    - typing-extensions=4.16.0\npost-install:\n  - python -m pip install --no-deps --force-reinstall "
-                + str(wheel)
-                + "\n"
-            )
             rcc = command(
                 "poetry",
                 "run",
@@ -249,33 +258,74 @@ print(json.dumps(identities))
                 cwd=ROOT / "action_server",
                 env=package_environment(ROOT / "action_server"),
             )
-            rcc_home = evidence / "rcc-home"
-            worker_env = dict(
-                env, ROBOCORP_HOME=str(rcc_home), ACTIONS_HOME=str(rcc_home)
-            )
-            with (evidence / "rcc-prepare.log").open("w") as log:
-                prepared = subprocess.run(
-                    [
-                        rcc,
-                        "env",
-                        "publish",
-                        "--environment",
-                        str(environment),
-                        "--provider",
-                        "local",
-                        "--json",
-                    ],
-                    env=worker_env,
-                    text=True,
-                    stdout=subprocess.PIPE,
-                    stderr=log,
-                    timeout=900,
+            if args.worker_runtime is not None:
+                retained = json.loads(args.worker_runtime.read_text())
+                if set(retained) != {
+                    "artifact_digest",
+                    "environment",
+                    "sdk_wheel_sha256",
+                    "rcc",
+                    "rcc_home",
+                }:
+                    raise RuntimeError("unexpected retained runtime fields")
+                if (
+                    retained["sdk_wheel_sha256"] != wheel_hash
+                    or Path(retained["rcc"]).resolve() != Path(rcc).resolve()
+                ):
+                    raise RuntimeError(
+                        "retained runtime SDK/RCC differs from current source/toolchain"
+                    )
+                environment = Path(retained["environment"])
+                rcc_home = Path(retained["rcc_home"])
+                artifact = retained["artifact_digest"]
+                worker_env = dict(
+                    env, ROBOCORP_HOME=str(rcc_home), ACTIONS_HOME=str(rcc_home)
                 )
-            (evidence / "rcc-prepare.json").write_text(prepared.stdout)
-            prepared.check_returncode()
-            artifact = json.loads(prepared.stdout)["artifactDigest"]
-            # Preserve local provider and the existing permissive-local policy;
-            # RCC18.19.3 otherwise treats the 'local' alias as an HTTP carrier.
+                receipt["retained_worker_runtime"] = {
+                    "path": str(args.worker_runtime.resolve()),
+                    "sha256": hashlib.sha256(
+                        args.worker_runtime.read_bytes()
+                    ).hexdigest(),
+                    "environment_sha256": hashlib.sha256(
+                        environment.read_bytes()
+                    ).hexdigest(),
+                }
+            else:
+                fixture = evidence / "worker-environment"
+                fixture.mkdir()
+                environment = fixture / "package.yaml"
+                environment.write_text(
+                    "version: 0.1\nspec-version: v2\ndependencies:\n  conda-forge:\n    - python=3.12.15\n  pypi:\n    - typing-extensions=4.16.0\npost-install:\n  - python -m pip install --no-deps --force-reinstall "
+                    + str(wheel)
+                    + "\n"
+                )
+                rcc_home = evidence / "rcc-home"
+                worker_env = dict(
+                    env, ROBOCORP_HOME=str(rcc_home), ACTIONS_HOME=str(rcc_home)
+                )
+                with (evidence / "rcc-prepare.log").open("w") as log:
+                    prepared = subprocess.run(
+                        [
+                            rcc,
+                            "env",
+                            "publish",
+                            "--environment",
+                            str(environment),
+                            "--provider",
+                            "local",
+                            "--json",
+                        ],
+                        env=worker_env,
+                        text=True,
+                        stdout=subprocess.PIPE,
+                        stderr=log,
+                        timeout=900,
+                    )
+                (evidence / "rcc-prepare.json").write_text(prepared.stdout)
+                prepared.check_returncode()
+                artifact = json.loads(prepared.stdout)["artifactDigest"]
+                # Preserve local provider and the existing permissive-local policy;
+                # RCC18.19.3 otherwise treats the 'local' alias as an HTTP carrier.
             with (evidence / "rcc-acquire.log").open("w") as log:
                 acquired = subprocess.run(
                     [
@@ -323,8 +373,9 @@ print(json.dumps(identities))
                 ACTIONS_INVOICE_WORKER_EVIDENCE_DIR=str(evidence / "worker-cells"),
                 ACTIONS_INVOICE_WORKER_ENVIRONMENT=str(config),
                 ACTIONS_REQUIRE_INVOICE_WORKER="1",
-                ACTIONS_ROBOT_INPUT_RCC=rcc,
             )
+            if args.worker:
+                env["ACTIONS_ROBOT_INPUT_RCC"] = rcc
             receipt["worker_runtime"] = {
                 "artifact_digest": artifact,
                 "sdk_wheel_sha256": wheel_hash,
@@ -359,6 +410,14 @@ print(json.dumps(identities))
             suites["browser"] = [
                 "tests/action_server_tests/test_invoice_canvas_browser.py"
             ]
+        if args.generated:
+            suites["generated"] = [
+                "tests/action_server_tests/test_generated_invoice.py"
+            ]
+            if args.browser:
+                suites["generated"].append(
+                    "tests/action_server_tests/test_generated_invoice_browser.py"
+                )
         if args.full:
             suites["portable"] = ["tests", "-m", "not integration_test"]
         for label, paths in suites.items():
@@ -394,7 +453,7 @@ print(json.dumps(identities))
                 or counts["failures"]
                 or counts["errors"]
                 or (
-                    label in ("components", "invoice", "browser", "worker")
+                    label in ("components", "invoice", "browser", "worker", "generated")
                     and counts["skipped"]
                 )
             ):

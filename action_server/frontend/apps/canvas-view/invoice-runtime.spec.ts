@@ -20,8 +20,11 @@ const moduleSource = resourceHtml.match(
 )?.[1];
 if (!moduleSource) throw new Error("Missing built module.");
 const moduleHash = createHash("sha256").update(moduleSource).digest("base64");
+const dispatchUrl = process.env.CANVAS_INVOICE_DISPATCH_URL;
+const generatedRevision = process.env.CANVAS_GENERATED_REVISION;
 const headers = {
     Authorization: "Bearer installation-key",
+    "X-Fixture-Control": "synthetic-operator",
     "X-Fixture-Credential": "app-secret",
     "X-Test-Credential": "server-held-reader-secret",
 };
@@ -38,6 +41,12 @@ test("real invoice tool resource view paging export and reopen", async ({
     const external: string[] = [];
     let exportDigest: string | null = null;
     let exportSize: number | null = null;
+    let execution: {
+        handle: string;
+        digest: string;
+        size: number;
+        uri: string;
+    } | null = null;
     try {
         await client.connect(
             new StreamableHTTPClientTransport(new URL(runtimeUrl), {
@@ -64,6 +73,7 @@ test("real invoice tool resource view paging export and reopen", async ({
                             "invoice_result_export",
                             "invoice_review_offer",
                             "invoice_review_decide",
+                            "invoice_review_execution",
                         ]),
                         arguments: z.record(z.string(), z.unknown()),
                     })
@@ -76,6 +86,33 @@ test("real invoice tool resource view paging export and reopen", async ({
                         .parse(result._meta?.["actions.invoiceExport"]);
                     exportDigest = descriptor.digest;
                     exportSize = descriptor.size;
+                }
+                if (
+                    request.name === "invoice_review_execution" &&
+                    !result.isError
+                ) {
+                    const state = z
+                        .object({
+                            phase: z.string(),
+                            proposal: z.object({
+                                binding: z.object({ handle: z.string() }),
+                            }),
+                        })
+                        .parse(result._meta?.["actions.invoiceExecution"]);
+                    expect(state.proposal.binding.handle).toBe(handle);
+                    if (state.phase === "completed")
+                        execution = z
+                            .object({
+                                artifact: z.object({
+                                    handle: z.string(),
+                                    digest: z.string(),
+                                    size: z.number(),
+                                    uri: z.string().url(),
+                                }),
+                            })
+                            .parse(
+                                result._meta?.["actions.invoiceExecution"],
+                            ).artifact;
                 }
                 return result;
             },
@@ -92,31 +129,63 @@ test("real invoice tool resource view paging export and reopen", async ({
                     .parse(value);
                 const uri = new URL(request.contents[0].uri);
                 expect(uri.origin).toBe(new URL(runtimeUrl).origin);
+                const currentExecution = execution;
+                const isExecution =
+                    currentExecution !== null &&
+                    uri.href === currentExecution.uri;
+                const expectedHandle = isExecution
+                    ? currentExecution.handle
+                    : handle;
                 expect(uri.pathname).toMatch(
-                    new RegExp(`/outputs/${handle}$`, "u"),
+                    new RegExp(`/outputs/${expectedHandle}$`, "u"),
                 );
                 const response = await fetch(uri, { headers });
                 expect(response.status).toBe(200);
                 expect(response.headers.get("cache-control")).toBe("no-store");
                 const bytes = Buffer.from(await response.arrayBuffer());
-                expect(bytes.length).toBe(exportSize);
+                expect(bytes.length).toBe(
+                    isExecution ? currentExecution.size : exportSize,
+                );
                 expect(
                     "sha256:" +
                         createHash("sha256").update(bytes).digest("hex"),
-                ).toBe(exportDigest);
-                const lines = bytes
-                    .toString("utf8")
-                    .trim()
-                    .split("\n")
-                    .map((line) =>
-                        z
-                            .object({ invoice_id: z.string() })
-                            .parse(JSON.parse(line)),
-                    );
-                expect(lines.map((line) => line.invoice_id)).toEqual([
-                    "inv-001",
-                    "inv-002",
-                ]);
+                ).toBe(isExecution ? currentExecution.digest : exportDigest);
+                if (isExecution) {
+                    const result = z
+                        .object({
+                            task: z.object({
+                                invoice_count: z.literal(2),
+                                total_cents: z.literal(12900),
+                                binding: z.object({
+                                    handle: z.string(),
+                                    scope: z.object({
+                                        application: z.object({
+                                            revision_id: z.string(),
+                                        }),
+                                    }),
+                                }),
+                            }),
+                        })
+                        .parse(JSON.parse(bytes.toString("utf8")));
+                    expect(result.task.binding.handle).toBe(handle);
+                    expect(
+                        result.task.binding.scope.application.revision_id,
+                    ).toBe(generatedRevision);
+                } else {
+                    const lines = bytes
+                        .toString("utf8")
+                        .trim()
+                        .split("\n")
+                        .map((line) =>
+                            z
+                                .object({ invoice_id: z.string() })
+                                .parse(JSON.parse(line)),
+                        );
+                    expect(lines.map((line) => line.invoice_id)).toEqual([
+                        "inv-001",
+                        "inv-002",
+                    ]);
+                }
                 downloads.push(
                     createHash("sha256").update(bytes).digest("hex"),
                 );
@@ -206,6 +275,34 @@ window.addEventListener('message', async event => {
             "invoice_review_decide",
             "invoice_review_offer",
         ]);
+        if (dispatchUrl) {
+            expect(resourceUri).toContain(
+                generatedRevision?.replace("sha256:", ""),
+            );
+            await view
+                .getByRole("button", { name: "Check execution result" })
+                .click();
+            await expect(view.getByText("Work is queued.")).toBeVisible();
+            await expect(
+                view.getByRole("button", { name: "Download execution result" }),
+            ).toHaveCount(0);
+            const dispatched = await fetch(dispatchUrl, {
+                method: "POST",
+                headers,
+            });
+            expect(dispatched.status).toBe(200);
+            await view
+                .getByRole("button", { name: "Check execution result" })
+                .click();
+            await expect(
+                view.getByText("Execution result is ready."),
+            ).toBeVisible();
+            await view
+                .getByRole("button", { name: "Download execution result" })
+                .click();
+            await expect.poll(() => downloads.length).toBe(2);
+            expect(execution).not.toBeNull();
+        }
         expect(external).toEqual([]);
         await writeFile(
             z.string().parse(process.env.CANVAS_INVOICE_BROWSER_RECEIPT),
@@ -224,6 +321,9 @@ window.addEventListener('message', async event => {
                     reopenSameHandle: true,
                     explicitExactResultReview: true,
                     reopenApprovedReceipt: true,
+                    generatedRevision: generatedRevision ?? null,
+                    explicitOperatorDispatch: Boolean(dispatchUrl),
+                    executionArtifact: execution,
                 },
                 null,
                 2,

@@ -515,3 +515,45 @@ def test_candidate_sdk_version_is_bound_to_source_and_default_runtime_stays_stri
     _wheel(wheelhouse, "actions-work-items", "0.4.4")
     with pytest.raises(ValueError, match="differs from producer"):
         module.select_candidate_sdk(wheelhouse, project)
+
+
+@pytest.mark.parametrize("alter", [None, "source", "sdk", "wheel", "runtime"])
+def test_candidate_producer_receipt_survives_cibuildwheel_project_only_layout(
+    tmp_path, monkeypatch, alter
+):
+    import hashlib
+
+    project = tmp_path / "project"
+    project.mkdir()
+    raw = '[tool.poetry]\nversion="1.1.0a2"\n'
+    (project / "pyproject.toml").write_text(raw)
+    wheelhouse = project / "candidate-sdk-wheelhouse"
+    wheelhouse.mkdir()
+    wheel = _wheel(wheelhouse, "actions-work-items", "0.5.0a1")
+    sdk = '[project]\nname="actions-work-items"\nversion="0.5.0a1"\n'
+    receipt = {
+        "schema": "actions.candidate-sdk-producer/v1",
+        "source_sha": "a" * 40,
+        "runtime_pyproject_sha256": hashlib.sha256(raw.encode()).hexdigest(),
+        "sdk_pyproject": sdk,
+        "sdk_pyproject_sha256": hashlib.sha256(sdk.encode()).hexdigest(),
+        "wheel": {
+            "filename": wheel.name,
+            "sha256": hashlib.sha256(wheel.read_bytes()).hexdigest(),
+        },
+    }
+    if alter == "source":
+        receipt["source_sha"] = "b" * 40
+    if alter == "sdk":
+        receipt["sdk_pyproject"] += "# changed\n"
+    if alter == "wheel":
+        receipt["wheel"]["sha256"] = "0" * 64
+    if alter == "runtime":
+        receipt["runtime_pyproject_sha256"] = "0" * 64
+    (wheelhouse / "producer.json").write_text(json.dumps(receipt))
+    monkeypatch.setenv("ACTIONS_CANDIDATE_SOURCE_SHA", "a" * 40)
+    if alter:
+        with pytest.raises(ValueError, match="producer"):
+            module.select_candidate_sdk(wheelhouse, project)
+    else:
+        assert module.select_candidate_sdk(wheelhouse, project) == (wheel, "1.1.0a2")

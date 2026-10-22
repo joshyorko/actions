@@ -222,6 +222,11 @@ def invoice_query_test() -> None:
         command.append("--browser")
     if os.environ.get("ACTIONS_INVOICE_WORKER") == "1":
         command.append("--worker")
+    if os.environ.get("ACTIONS_INVOICE_GENERATED") == "1":
+        command.append("--generated")
+    runtime = os.environ.get("ACTIONS_INVOICE_WORKER_RUNTIME")
+    if runtime:
+        command.extend(["--worker-runtime", runtime])
     run(command)
 
 

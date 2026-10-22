@@ -146,6 +146,17 @@ understand the private running `Run.result` dispatch envelope; never let it
 reinterpret or resume those Runs. Existing database-version rollback still
 requires the pre-upgrade database and attachment/evidence backup.
 
+The generated-revision binding now composes this worker with the existing
+Canvas activation pointer and renderer/bridge. Its app-only execution projection
+and explicit result download read the exact retained Run output after approval;
+they create no Work Item, Run, Attempt or retry. A completed output reference
+must identify the worker Run, even if another authorized JSON output exists in
+the same app. Stale active revisions and revoked readers are denied at entry;
+activation rollback preserves admitted SQL work and audit. See
+[generated revision composition](repository-operations.md#generated-invoice-revision-composition)
+for source, fixture, platform and downgrade boundaries. Generic effects/retries,
+E1, independent distribution and restore are still separate release gates.
+
 ### PostgreSQL fenced coordination and guarded retry
 
 The #327 candidate adds private `PostgreSQLFencedQueue`, implementing the same
@@ -192,7 +203,7 @@ validates; unknown/nonempty layouts, missing metadata and future versions fail
 closed. There is no SQLite-to-PostgreSQL migration or dual authoritative write.
 Any future format change requires a reviewed migration, pre-upgrade database and
 attachment/effect-receipt backup, restore proof and mixed-writer rejection gates.
-The integration candidate uses SDK `0.5.0a1` and Runtime `1.1.0a2`, with
+The integration candidate uses SDK `0.5.0a1` and Runtime `1.1.0a3`, with
 a Runtime floor of `>=0.5.0a1,<0.6.0` (prereleases admitted). These are
 provisional, nonpublishing identifiers; final versions remain release-review
 decisions. Published SDK 0.4.4 / Runtime 1.0.4 identifiers must never name

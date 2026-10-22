@@ -123,6 +123,19 @@ def _admission(snapshot: ExecutionSnapshot) -> tuple[str, str]:
     if snapshot.canvas_application is None:
         payload.pop("canvas_application")
     canonical = _canonical(payload, MAX_INPUT_BYTES)
+    if snapshot.runtime_kind == "invoice/generated-query/v1":
+        if snapshot.canvas_application is None or snapshot.data_binding is None:
+            raise AccessDenied("generated query requires application and source pins")
+        return _key(
+            "actions.generated-invoice-admission/v1",
+            snapshot.workspace_id,
+            snapshot.deployment_id,
+            snapshot.deployment.revision_id.root,
+            _canonical(snapshot.capability.model_dump(mode="json"), MAX_INPUT_BYTES),
+            _canonical(
+                snapshot.canvas_application.model_dump(mode="json"), MAX_INPUT_BYTES
+            ),
+        ), canonical
     return _key(
         "actions.run-admission/v1",
         snapshot.workspace_id,

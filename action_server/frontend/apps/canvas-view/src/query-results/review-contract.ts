@@ -52,6 +52,7 @@ const stateSchema = z
 export type InvoiceReviewProposal = z.infer<typeof proposalSchema>;
 export type InvoiceReviewState = z.infer<typeof stateSchema>;
 export interface InvoiceReviewAdapter {
+    execution?: InvoiceExecutionAdapter;
     offer(handle: string): Promise<InvoiceReviewState>;
     decide(
         proposal: InvoiceReviewProposal,
@@ -73,5 +74,59 @@ export function parseInvoiceReview(value: unknown): InvoiceReviewState {
     ) {
         throw new Error("Review identity changed.");
     }
+    return result;
+}
+
+const executionSchema = z.discriminatedUnion("phase", [
+    z
+        .object({
+            proposal: proposalSchema,
+            phase: z.enum([
+                "pending",
+                "rejected",
+                "cancelled",
+                "queued",
+                "running",
+                "failed",
+            ]),
+        })
+        .strict(),
+    z
+        .object({
+            proposal: proposalSchema,
+            phase: z.literal("completed"),
+            work_item_id: z.string().uuid(),
+            run_id: z.string().uuid(),
+            attempt_id: z.string().uuid(),
+            artifact: z
+                .object({
+                    handle: z.string().regex(/^art_[A-Za-z0-9_-]{22}$/u),
+                    digest,
+                    size: z.number().int().nonnegative(),
+                    media_type: z.literal("application/json"),
+                    uri: z.string().url().optional(),
+                })
+                .strict(),
+        })
+        .strict(),
+]);
+
+export type InvoiceExecutionState = z.infer<typeof executionSchema>;
+export type InvoiceExecutionComplete = Extract<
+    InvoiceExecutionState,
+    { phase: "completed" }
+>;
+export interface InvoiceExecutionAdapter {
+    read(proposal: InvoiceReviewProposal): Promise<InvoiceExecutionState>;
+    download(result: InvoiceExecutionComplete): Promise<void>;
+}
+
+export function parseInvoiceExecution(value: unknown): InvoiceExecutionState {
+    const result = executionSchema.parse(value);
+    if (
+        result.proposal.binding.scope.application.workspace_id !==
+        result.proposal.binding.scope.deployment.workspace_id
+    )
+        throw new Error("Execution scope changed.");
     return result;
 }

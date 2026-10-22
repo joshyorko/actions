@@ -51,6 +51,10 @@ it("requires an explicit offer followed by an explicit approval", async () => {
             },
         }),
         cancel: vi.fn(),
+        execution: {
+            read: vi.fn().mockResolvedValue({ phase: "queued", proposal }),
+            download: vi.fn(),
+        },
     };
     render(
         <InvoiceReviewPanel
@@ -74,6 +78,39 @@ it("requires an explicit offer followed by an explicit approval", async () => {
     expect(
         await screen.findByText("Approved. Work item created."),
     ).toBeVisible();
+    expect(adapter.execution.read).not.toHaveBeenCalled();
+    await user.click(
+        screen.getByRole("button", { name: "Check execution result" }),
+    );
+    expect(await screen.findByText("Work is queued.")).toBeVisible();
+    expect(adapter.execution.read).toHaveBeenCalledWith(proposal);
+    expect(adapter.execution.download).not.toHaveBeenCalled();
+    const completed = {
+        phase: "completed",
+        proposal,
+        work_item_id: "60000000-0000-4000-8000-000000000006",
+        run_id: "70000000-0000-4000-8000-000000000007",
+        attempt_id: "80000000-0000-4000-8000-000000000008",
+        artifact: {
+            handle: "art_BBBBBBBBBBBBBBBBBBBBBB",
+            digest: `sha256:${"a".repeat(64)}`,
+            size: 100,
+            media_type: "application/json",
+        },
+    };
+    adapter.execution.read.mockResolvedValue(completed);
+    await user.click(
+        screen.getByRole("button", { name: "Check execution result" }),
+    );
+    expect(await screen.findByText("Execution result is ready.")).toBeVisible();
+    expect(adapter.execution.download).not.toHaveBeenCalled();
+    await user.click(
+        screen.getByRole("button", { name: "Download execution result" }),
+    );
+    expect(adapter.execution.download).toHaveBeenCalledWith(completed);
+    expect(
+        screen.queryByRole("button", { name: "Cancel work item" }),
+    ).not.toBeInTheDocument();
 });
 
 it("never treats a denied review as approval", async () => {
