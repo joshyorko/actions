@@ -26,6 +26,15 @@ def command(*args, **kwargs):
     ).stdout.strip()
 
 
+def suite_environment(label: str, environment: dict[str, str]) -> dict[str, str]:
+    result = dict(environment)
+    if label == "portable":
+        # Actual pinned task inputs already run with zero skips in worker.
+        # Do not rebuild the same multi-GB RCC fixture in the portable suite.
+        result.pop("ACTIONS_ROBOT_INPUT_RCC", None)
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--evidence-dir", type=Path, required=True)
@@ -364,7 +373,7 @@ print(json.dumps(identities))
                         "--junitxml=" + str(evidence / (label + ".xml")),
                     ],
                     cwd=ROOT / "action_server",
-                    env=env,
+                    env=suite_environment(label, env),
                     stdout=log,
                     stderr=subprocess.STDOUT,
                     timeout=1200,

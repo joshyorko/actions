@@ -126,7 +126,13 @@ input delivery, MCP approval through execution, abrupt controller exit followed
 by completion in a new interpreter, cancellation of an actual owned RCC process,
 claim takeover and unknown-outcome refusal. Test artifacts/journals are copied
 to the retained gate evidence. The verifier rejects source inputs that change
-during a run. This Linux source gate does not qualify generated immutable app
+during a run. Real RCC task-input execution belongs to the mandatory worker
+suite; the portable suite clears that dedicated opt-in instead of rebuilding its
+multi-GB environment. Retain the separate zero-skip worker receipt when reporting
+the portable opt-in skip. Run worker and full portable stages separately at the
+same frozen source when a disposable environment cannot hold both fixture trees;
+keep both receipts and verify implementation/input byte equivalence. Never delete
+active fixtures to hide an out-of-space failure. This Linux source gate does not qualify generated immutable app
 activation, Windows/macOS worker execution, authenticated ChatGPT E1 or release
 publication/restore.
 
