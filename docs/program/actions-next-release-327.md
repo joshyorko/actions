@@ -8,7 +8,9 @@ receipts. The [PostgreSQL continuation receipt](evidence/actions-next-327/cloud-
 records the first cloud iteration, committed as `93666a70460e36a75569a4bcff8fae7abf211ee6`.
 The [sibling convergence receipt](evidence/actions-next-327/cloud-convergence-20261022.json)
 records subsequent exact-source review, original failures, regression repairs
-and qualification. Issue #327 remains the release authority. The full release
+and qualification. The [SDK/review receipt](evidence/actions-next-327/cloud-review-20261022.json)
+records the provisional installed-candidate admission and bounded exact-result
+review checkpoint. Issue #327 remains the release authority. The full release
 is **NOT READY**; private component qualification does not establish the linked
 invoice workflow or register a generated app in the Runtime.
 
@@ -19,22 +21,33 @@ invoice workflow or register a generated app in the Runtime.
 | 1 | Work Item PostgreSQL baseline | This iteration fixes the reproduced concrete-adapter mypy failure and extends owned real PostgreSQL coverage for foreign schema ownership, unknown version/format across operations, and expiry during output publication. Exact input hashes, failed controls and current commands belong to the linked receipt. No Runtime wiring or full release completion follows from SDK conformance. |
 | 2 | Reviewed sibling convergence | Coordinator handed off Canvas `22d9766079f2278350e924b3d44c7b4e00a608a7` and Knowledge `63d9ab6c12fc0158938e565cfca6edf7c2624d38`. Their five-file union was inspected and imported without unrelated history. The convergence receipt distinguishes original sibling tests from added authorization, snapshot and provenance regressions and full union gates. Worker environment failures remain historical failure receipts. |
 | 3 | Typed input and authorized immutable result | Qualify real DuckDB and PostgreSQL named operations, declared effects, retained source/result identity, limits, cancellation, paging/export and cross-workspace denial on the integrated source. Knowledge's two-provider service cells remain separate. |
-| 4 | Exact-result human review | Persist explicit approval of the exact input/result and application/deployment revision with current actor authority. Prove revocation, changed-result rejection, cancellation, bounded retry/dead-letter policy and retained effect-receipt reconciliation. Keep SQL authoritative and Work Item lifecycle distinct from Run/Attempt. |
+| 4 | Exact-result human review | The bounded SQL slice now binds the sealed result, original input/source and application/deployment revisions; explicit currently authorized approval inserts one fenced Work Item atomically and idempotently. Real SQL/provider, MCP, explicit-click browser and installed-wheel proofs are in the review receipt. Review, Work Item, Run and Attempt stay distinct. Worker retry/dead-letter policy and effect-receipt reconciliation remain open. |
 | 5 | Actual pinned execution and recovery | Link a fenced Work Item to a distinct Run and Attempt under the selected Runtime Plan. Execute the invoice worker with actual RCC 18.19.3, retain success/failure artifacts, and prove process restart, stale completion/output rejection, duplicate delivery and lost-ack recovery without repeating unknown effects. Toolchain tests do not satisfy this gate. |
 | 6 | Existing MCP Apps/Canvas and generated revision | Qualify the integrated immutable stage/validate/activate/invoke/restart/rollback path and artifact authorization through the existing renderer and bridge. Repeat the real-engine invoice UI paging/export/reopen and negative authorization cells against that exact union. E2 simulated host remains separate from E1. |
 | 7 | Actual ChatGPT E1 | NEEDS_OPERATOR for an isolated authenticated host connection. Require actual tools/resource/MIME association, bridge/UI action and restart/reconnect receipts. No endpoint registration or host acceptance is implied by this iteration. |
 | 8 | Optional celld | `24fbd91c9ddd34bec54230e1c3b20e3225061079` remains NO-GO evidence only. Require pinned owned synthetic storage, upstream storage prerequisites and isolated two-node crash/takeover/outage/effect/recovery tests before an adapter is admitted. Keep disabled. An unmet gate requires an explicit owner scope decision before release. |
 | 9 | Compatibility and independent distribution | Qualify the complete source union, public aliases, mixed versions, SQLite and service/control-plane PostgreSQL boundaries, native/browser platforms and current package/static gates. Resolve SDK version/Runtime dependency floors; never publish changed bytes under 1.0.4/0.4.4. Produce homelab-independent reproducible wheels/native/images, configurable registry/storage, SBOM/provenance, retained checksums, restore and rollback evidence before owner publication approval. |
 
-The next smallest invoice slice is an explicit durable human-review decision
-over an already published authorized invoice result. Bind the decision to the
-exact input/result digest, application/deployment revision and current actor;
-use the existing SQL business authority to admit one fenced Work Item
-idempotently. Test both real provider inputs, denied/revoked actors, changed
-results or revisions and repeated review delivery. Opening the Canvas must not
-execute a new query. Distinct Run/Attempt admission and actual RCC execution,
-effect reconciliation and worker restart recovery follow that review boundary;
-the new private stores alone do not satisfy it.
+The next smallest invoice slice links **one approved review Work Item** to a
+distinct pinned Run and Attempt under the existing Runtime Plan and SQL authority.
+Before effects, revalidate the retained review/binding and current authority,
+record the Work Item claim owner/epoch and its separate Run/Attempt lineage, then
+execute one synthetic invoice action with actual RCC 18.19.3. Retain a durable
+artifact and effect/result receipt. Prove cancellation, process loss and restart,
+stale owner completion/output rejection, duplicate delivery, and lost-ack
+reconciliation without repeating unknown effects. An approval alone starts no
+Run/Attempt or worker. The JSON-only SQL review bridge has no retry/effect policy;
+keep those gates open rather than inferring them from standalone SDK conformance.
+
+SDK `0.5.0a1` / Runtime `1.1.0a1` are provisional nonpublishing candidate
+identifiers with Runtime dependency `>=0.5.0a1,<0.6.0`. The legacy published
+workflow template still pins SDK 0.4.4; it is not candidate-worker acceptance.
+Admit the exact measured candidate SDK wheel in the next worker package. The
+published 1.0.4 floor canary retains its exact public version defaults. Hosted
+run 39789703880's frozen/Go consumer failures on all three OSes remain retained,
+with their later skipped gates open until fresh platform evidence. Actual
+ChatGPT E1 is NEEDS_OPERATOR, celld remains NO-GO, and every original release,
+distribution, restore/rollback and production gate remains in force.
 
 Recovery completed on 2026-10-20 in the SAME branch and original worktree.
 All 14 successful edit operations and 16 recovered file hashes matched before
