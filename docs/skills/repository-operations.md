@@ -4826,3 +4826,31 @@ Deployment and Run authorities rather than treating a typed reference or
 staging receipt as publication. The October amendments on #71/#99/#100/#127 and
 #129/#130 retain these criterion boundaries without requiring every umbrella or
 distributed feature to close before a local vertical can run.
+
+The native foundry MCP projection is an opt-in adapter, not a first-boot service.
+`McpServerSetupHelper(canvas_foundry=...)` needs a trusted domain port and an
+authenticator that supplies actor, Workspace and model/app audience. Synthetic
+headers in its protocol tests are test inputs, not a public identity protocol.
+The fixed model catalog has six authoring tools plus `canvas_open`; app-only
+dispatch/status/cancel/artifact tools require the verified app audience. The
+launcher accepts exactly `{}`. Its read-only annotation does not prove that a
+domain implementation is effect-free; that requires service tests.
+
+Native tool and resource identities must be protected both when directly
+registering an action and when replacing a complete catalog. Reserve query/page
+names until a real authorized implementation exists; an absent projection must
+fail without a fallback call. Static renderer bytes and schema snapshots bind
+the catalog identity. Scoped application data travels in result `_meta`, while
+only deliberately selected authoring data belongs in model-visible content.
+
+The adapter bounds JSON arguments and replies, rejects non-finite JSON numbers
+and hides provider exception details. It does not retry mutations. A transport
+error after a domain call cannot establish whether the mutation committed:
+reconcile the same request identity through the domain authority before retry.
+Protocol tests with a fake domain port prove routing and audience separation,
+not durable authoring, revision authorization, activation, execution or E1.
+
+The clean-wheel contract archives committed `HEAD`; it deliberately does not
+build a dirty source overlay. Commit a candidate version/source checkpoint before
+running that acceptance. A wheel from the previous commit must fail the current
+version/member binding instead of being credited to uncommitted code.

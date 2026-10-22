@@ -136,10 +136,14 @@ arbitrary server tool/URL or persist authoritative business state.
 
 - [ ] Record reviewed owner contracts/fixtures and exact worker heads. Keep
   parent dispatch and the existing issue graph authoritative.
-- [ ] Add central stable MCP/resource registration tests before implementation:
+- [x] Add opt-in central stable MCP/resource registration tests before implementation:
   empty user-package catalog, fixed model names, app-only caller denial,
   read-only empty-input launcher, reserved-name/resource collisions, complete
   result metadata and useful unsupported-operation failures.
+  This qualifies the transport boundary with a synthetic domain port, not a
+  wired first-boot service or durable authoring. Native identities are protected
+  on direct registration and catalog replacement. Runtime source advances to
+  provisional `1.1.0a6`; the protected invoice bundle remains `1.1.0a5`.
 - [ ] Implement shared Runtime SQL/model wiring against reviewed compiler and
   deployment values. Test concurrent CAS, changed-input idempotency conflict,
   cross-Workspace/revision denial, SQL rollback and fresh-interpreter reopen.

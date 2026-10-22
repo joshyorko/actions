@@ -33,6 +33,7 @@ from .resource_routing import ResourceRoutingProjection, resource_template_match
 
 if TYPE_CHECKING:
     from actions.server.data_queries.canvas_mcp import InvoiceCanvasMcp
+    from actions.server.foundry.mcp import CanvasMcp
 
 log = logging.getLogger(__name__)
 CATALOG_REVISION_META_KEY = "actions.catalogRevision"
@@ -76,12 +77,18 @@ class McpResponseHandler:
 class McpServerSetupHelper:
     _catalog: _McpCatalog
 
-    def __init__(self, *, invoice_canvas: "InvoiceCanvasMcp | None" = None) -> None:
+    def __init__(
+        self,
+        *,
+        invoice_canvas: "InvoiceCanvasMcp | None" = None,
+        canvas_foundry: "CanvasMcp | None" = None,
+    ) -> None:
         from mcp.server import Server
         from mcp.server.transport_security import TransportSecuritySettings
 
         self._init_state()
         self._invoice_canvas = invoice_canvas
+        self._canvas_foundry = canvas_foundry
         self.transport_security = TransportSecuritySettings(
             enable_dns_rebinding_protection=True,
             allowed_hosts=["127.0.0.1:*", "localhost:*", "[::1]:*"],
@@ -200,11 +207,20 @@ class McpServerSetupHelper:
     async def _list_tools(self, _ctx: Any, _params: Any) -> ListToolsResult:
         catalog = self._catalog
         tools = list(catalog.tools)
+        if self._canvas_foundry is not None:
+            tools.extend(await self._canvas_foundry.tools(_ctx))
         if self._invoice_canvas is not None:
             tools.extend(await self._invoice_canvas.tools(_ctx))
         return ListToolsResult(tools=tools, **self._catalog_result_metadata(catalog))
 
     async def _call_tool(self, ctx: Any, params: Any):
+        if self._canvas_foundry is not None:
+            from actions.server.foundry.mcp import RESERVED_TOOLS
+
+            if params.name in RESERVED_TOOLS:
+                return await self._canvas_foundry.call(
+                    ctx, params.name, params.arguments or {}
+                )
         if self._invoice_canvas is not None:
             from actions.server.data_queries.canvas_mcp import TOOL_NAMES
 
@@ -261,6 +277,11 @@ class McpServerSetupHelper:
     async def _list_resources(self, _ctx: Any, _params: Any) -> ListResourcesResult:
         catalog = self._catalog
         resources = list(catalog.resources.values())
+        if (
+            self._canvas_foundry is not None
+            and await self._canvas_foundry.principal(_ctx) is not None
+        ):
+            resources.append(self._canvas_foundry.resource)
         if self._invoice_canvas is not None and await self._invoice_canvas.principal(
             _ctx
         ):
@@ -284,6 +305,23 @@ class McpServerSetupHelper:
     async def _read_resource(self, ctx: Any, params: Any) -> ReadResourceResult:
         catalog = self._catalog
         uri = str(params.uri)
+        if self._canvas_foundry is not None and uri == self._canvas_foundry.uri:
+            if await self._canvas_foundry.principal(ctx) is None:
+                raise MCPError(
+                    INVALID_PARAMS, "Canvas view unavailable or access denied"
+                )
+            foundry_resource = self._canvas_foundry.resource
+            return ReadResourceResult(
+                contents=[
+                    TextResourceContents(
+                        uri=uri,
+                        text=self._canvas_foundry.html,
+                        mime_type=foundry_resource.mime_type,
+                        _meta=foundry_resource.meta,
+                    )
+                ],
+                _meta=foundry_resource.meta,
+            )
         if self._invoice_canvas is not None and uri == self._invoice_canvas.uri:
             if await self._invoice_canvas.principal(ctx) is None:
                 raise MCPError(
@@ -374,6 +412,16 @@ class McpServerSetupHelper:
 
     def _bound_catalog_revision(self, catalog: _McpCatalog) -> str:
         revision = self._catalog_revision(catalog)
+        if self._canvas_foundry is not None:
+            revision = sha256(
+                json.dumps(
+                    {
+                        "catalog": revision,
+                        "canvas": self._canvas_foundry.catalog_identity,
+                    },
+                    sort_keys=True,
+                ).encode()
+            ).hexdigest()
         if self._invoice_canvas is None:
             return revision
         payload = {
@@ -522,6 +570,22 @@ class McpServerSetupHelper:
         if mcp_meta is not None and not isinstance(mcp_meta, dict):
             raise ValueError(f"MCP _meta for {action.name} must be an object")
         kind = options.get("kind", "action")
+        if self._canvas_foundry is not None:
+            from actions.server.foundry.mcp import RESERVED_TOOLS
+
+            uri = options.get("uri", "")
+            if (
+                kind not in ("resource", "prompt")
+                and (tool_name or action.name) in RESERVED_TOOLS
+            ) or (
+                kind == "resource"
+                and (
+                    uri == self._canvas_foundry.uri
+                    or resource_template_matches(uri, self._canvas_foundry.uri)
+                    is not None
+                )
+            ):
+                raise ValueError("foundry Canvas catalog identity collision")
         if kind == "resource":
             uri = options.get("uri")
             if not uri:
@@ -653,6 +717,19 @@ class McpServerSetupHelper:
         self.publish_validated_catalog(replacement)
 
     def _validate_bound_catalog(self, catalog: _McpCatalog) -> None:
+        if self._canvas_foundry is not None:
+            from actions.server.foundry.mcp import RESERVED_TOOLS
+
+            uri = self._canvas_foundry.uri
+            if (
+                RESERVED_TOOLS.intersection(catalog.tool_name_to_action_info)
+                or uri in catalog.resources
+                or any(
+                    resource_template_matches(template.uri_template, uri) is not None
+                    for template in catalog.resource_templates
+                )
+            ):
+                raise ValueError("foundry Canvas catalog identity collision")
         if self._invoice_canvas is None:
             return
         from actions.server.data_queries.canvas_mcp import TOOL_NAMES
