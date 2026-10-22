@@ -535,3 +535,49 @@ def test_generated_output_authentication_denies_revoked_actor_without_infrastruc
     assert asyncio.run(output.authenticate(SimpleNamespace())) == actor
     control.grant(actor, app.snapshot.deployment, {"execute"})
     assert asyncio.run(output.authenticate(SimpleNamespace())) is None
+
+
+def test_two_generated_revisions_keep_distinct_admissions_inputs_and_review_scope(
+    reviewed, tmp_path
+):
+    from actions.server.data_queries.generated import (
+        GeneratedInvoiceApp,
+        invoice_revision_files,
+    )
+    from actions.server.data_queries.invoices import InvoiceQuery
+
+    app, actor, reviews, control, _, _ = generated(reviewed, tmp_path)
+    original = app.invoke(actor, "first-revision", str(uuid4()), threading.Event())
+    proposal = reviews.offer(actor, app.scope, original)
+    revision = app.store.stage(
+        actor,
+        app.scope.application.workspace_id,
+        app.scope.deployment.revision_id.root,
+        app.scope.application.app_id,
+        invoice_revision_files(
+            app.renderer(actor).encode(),
+            app.snapshot.data_binding,
+            InvoiceQuery(min_days=30),
+        ),
+    )
+    app.store.activate(
+        actor,
+        revision.workspace_id,
+        revision.deployment_revision_id,
+        revision.app_id,
+        revision.revision_id,
+        expected_current=app.scope.application.revision_id,
+    )
+    payload = app.snapshot.model_dump(mode="json")
+    payload["canvas_application"]["revision_id"] = revision.revision_id
+    snapshot = ExecutionSnapshot.model_validate(payload)
+    control.register(snapshot)
+    updated = GeneratedInvoiceApp(app.store, app.queries, snapshot)
+    current = updated.invoke(actor, "second-revision", str(uuid4()), threading.Event())
+    assert current != original
+    assert len(updated.facade.page(actor, current, offset=0, limit=2)["rows"]) == 1
+    with pytest.raises(AccessDenied):
+        updated.facade.page(actor, original, offset=0, limit=2)
+    with pytest.raises(AccessDenied):
+        reviews.decide(actor, updated.scope, proposal, "approve")
+    assert reviews.queue(app.scope).list_items() == []
