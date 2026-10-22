@@ -1,5 +1,28 @@
 # Actions Next release checkpoint
 
+The October 22 cloud continuation uses the existing integration branch and
+draft #328. The authoritative [migration receipt](https://github.com/joshyorko/actions/issues/327#issuecomment-6341162893)
+pins its starting source to `1d4f7eb60b223716e498af82534acceb02aa3080`.
+The earlier Dakota paths, counts and ownership descriptions below are historical
+receipts. Cloud qualification and its remaining order are recorded in
+[the PostgreSQL continuation receipt](evidence/actions-next-327/cloud-postgres-20261022.json)
+and the following matrix. Issue #327 remains the release authority. The full
+release is **NOT READY**; no sibling worker source is integrated by this iteration.
+
+## Ordered cloud continuation
+
+| Order | Gate | Current boundary and next required evidence |
+|---|---|---|
+| 1 | Work Item PostgreSQL baseline | This iteration fixes the reproduced concrete-adapter mypy failure and extends owned real PostgreSQL coverage for foreign schema ownership, unknown version/format across operations, and expiry during output publication. Exact input hashes, failed controls and current commands belong to the linked receipt. No Runtime wiring or full release completion follows from SDK conformance. |
+| 2 | Reviewed sibling convergence | Wait for the coordinator's exact tested Canvas and Knowledge commits, review their deltas and documentation receipts, then integrate only the admitted source into #328. Repeat affected union gates. The migration's unreviewed worker heads are not acceptance. |
+| 3 | Typed input and authorized immutable result | Qualify real DuckDB and PostgreSQL named operations, declared effects, retained source/result identity, limits, cancellation, paging/export and cross-workspace denial on the integrated source. Knowledge's two-provider service cells remain separate. |
+| 4 | Exact-result human review | Persist explicit approval of the exact input/result and application/deployment revision with current actor authority. Prove revocation, changed-result rejection, cancellation, bounded retry/dead-letter policy and retained effect-receipt reconciliation. Keep SQL authoritative and Work Item lifecycle distinct from Run/Attempt. |
+| 5 | Actual pinned execution and recovery | Link a fenced Work Item to a distinct Run and Attempt under the selected Runtime Plan. Execute the invoice worker with actual RCC 18.19.3, retain success/failure artifacts, and prove process restart, stale completion/output rejection, duplicate delivery and lost-ack recovery without repeating unknown effects. Toolchain tests do not satisfy this gate. |
+| 6 | Existing MCP Apps/Canvas and generated revision | Qualify the integrated immutable stage/validate/activate/invoke/restart/rollback path and artifact authorization through the existing renderer and bridge. Repeat the real-engine invoice UI paging/export/reopen and negative authorization cells against that exact union. E2 simulated host remains separate from E1. |
+| 7 | Actual ChatGPT E1 | NEEDS_OPERATOR for an isolated authenticated host connection. Require actual tools/resource/MIME association, bridge/UI action and restart/reconnect receipts. No endpoint registration or host acceptance is implied by this iteration. |
+| 8 | Optional celld | `24fbd91c9ddd34bec54230e1c3b20e3225061079` remains NO-GO evidence only. Require pinned owned synthetic storage, upstream storage prerequisites and isolated two-node crash/takeover/outage/effect/recovery tests before an adapter is admitted. Keep disabled. An unmet gate requires an explicit owner scope decision before release. |
+| 9 | Compatibility and independent distribution | Qualify the complete source union, public aliases, mixed versions, SQLite and service/control-plane PostgreSQL boundaries, native/browser platforms and current package/static gates. Resolve SDK version/Runtime dependency floors; never publish changed bytes under 1.0.4/0.4.4. Produce homelab-independent reproducible wheels/native/images, configurable registry/storage, SBOM/provenance, retained checksums, restore and rollback evidence before owner publication approval. |
+
 Recovery completed on 2026-10-20 in the SAME branch and original worktree.
 All 14 successful edit operations and 16 recovered file hashes matched before
 application. The original recovery is retained outside Git in a read-only archive

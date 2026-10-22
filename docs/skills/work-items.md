@@ -69,6 +69,24 @@ Current SDK metadata remains 0.4.4; these candidate bytes must not be published
 under that version. The eventual SDK version and Runtime dependency floor remain
 release-review decisions. No production migration has been performed.
 
+Initialization checks schema ownership against `current_user`, even for a
+superuser connection; an empty schema belonging to another role is refused.
+Every ordinary queue transaction checks the format/version and exact column
+names, PostgreSQL types and nullability before reading or mutating items. A
+matching version alone does not admit an unknown layout. These checks do not
+validate every constraint, index, trigger or privilege, and ownership is an
+initialization requirement rather than network authentication. Keep the schema
+under a trusted operator. Unknown metadata must reject renew, finish/output and
+retry as well as new claims, without changing the current claim or retry audit.
+
+`test_expiry_during_output_insertion_rolls_back_completion_and_children` uses a
+real PostgreSQL trigger to expire the parent during child insertion, after the
+initial claim check. The final conditional completion must reject publication
+and roll back both the child and the parent's injected deadline change. Removing
+only that final expiry predicate makes this test fail. This covers expiry within
+one transaction without a timing sleep; takeover and restart remain separate
+shared-conformance cases.
+
 The canonical opt-in gate is RCC `FencedWorkItemsTest`, with an absolute
 `ACTIONS_FENCED_EVIDENCE_DIR`. It owns one digest-pinned PostgreSQL container,
 loopback-only ephemeral port, 256 MiB/one CPU/PID bounds and tmpfs test data.
@@ -78,6 +96,25 @@ SDK portable suite; its optional legacy service skips/expected failures remain
 separate. Retain receipt, input hashes, JUnit, failed attempts and cleanup state.
 The SDK tests use package-relative shared fixture imports under `tests/`.
 Collect before allocating a service when changing fixture registration.
+JUnit represents expected failures as `skipped` elements too; the verifier's
+aggregate skipped count therefore includes xfails. Retain the pytest summary
+to distinguish optional service skips from expected failures and report the
+portable suite's service deselections separately.
+
+The configured `poetry run mypy` checks only the runtime call-site contract.
+After the RCC bootstrap, install the locked PostgreSQL extra before explicitly
+checking the concrete queue implementations from `work-items/`:
+
+```bash
+poetry install --extras postgres
+poetry run mypy src/actions/work_items/_fencing.py \
+  src/actions/work_items/_adapters/_sqlite.py \
+  src/actions/work_items/_adapters/_postgres_fenced.py
+```
+
+Without that extra, missing psycopg imports are setup failures. The empty
+observed-column map needs an explicit nested dictionary value type; a successful
+configured call-site check alone does not detect its `var-annotated` failure.
 
 ### Fenced SQLite claims in the release #327 candidate
 

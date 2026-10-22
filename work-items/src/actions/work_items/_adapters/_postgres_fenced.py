@@ -128,7 +128,7 @@ class PostgreSQLFencedQueue:
             "SELECT table_name,column_name,data_type,is_nullable FROM information_schema.columns WHERE table_schema=%s AND table_name=ANY(%s::text[])",
             (self._schema, list(_COLUMN_TYPES)),
         ).fetchall()
-        observed = {name: {} for name in _COLUMN_TYPES}
+        observed: dict[str, dict[str, tuple[str, str]]] = {name: {} for name in _COLUMN_TYPES}
         for column in rows:
             observed[column["table_name"]][column["column_name"]] = (
                 column["data_type"],
