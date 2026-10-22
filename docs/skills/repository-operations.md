@@ -4760,3 +4760,17 @@ requires complete contents: the browser deadline regression uses atomic rename
 and a delayed partial-write control while retaining descendant cleanup. These
 repairs do not extend filesystem support to Windows/macOS or turn skips into
 execution proof.
+
+
+For authenticated invoice E1, an operator should first inspect the connected
+transport's actual tool list and resource MIME `text/html;profile=mcp-app`, then
+open the resource in ChatGPT and verify official UI-bridge initialization. Verify
+that the model cannot call app-audience review tools, that merely opening or
+reconnecting creates no approval, and that an explicit current actor decision
+binds the displayed result/revisions. Follow the authorized worker Run to scoped
+artifact readback, restart/reconnect with the same identity, and revoke authority
+to confirm denial. Record actual workspace/grant/error details rather than
+inferring transport limitations from metadata search. If the existing Executor
+transport cannot preserve the resource/audience contract, prepare a separate
+identity/transport configuration for approval; do not edit the working tunnel.
+Local E2 and discovery evidence cannot close this authenticated-host gate.
