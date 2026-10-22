@@ -3,8 +3,8 @@
 This directory owns reusable React primitives for rendering a validated
 CanvasSpec. It does not parse or define the serialized schema. The canonical
 schema, size/depth limits, node vocabulary, and malformed-spec validator belong
-to `src/canvas-contract/` (issue #100). The renderer will consume that contract
-when its committed interface is available.
+to `apps/canvas-view/src/canvas-contract/` (issue #100). The renderer will
+consume that contract when its committed interface is available.
 
 The current primitives provide:
 
