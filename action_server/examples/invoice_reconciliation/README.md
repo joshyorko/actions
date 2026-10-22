@@ -90,7 +90,7 @@ the source SHA and every file hash. Run it from a committed Actions checkout:
 ```bash
 python action_server/examples/invoice_reconciliation/export.py \
   --output /absolute/fresh/owned/export \
-  --runtime-wheel /absolute/owned/actions_runtime-1.1.0a4-py3-none-any.whl \
+  --runtime-wheel /absolute/owned/actions_runtime-1.1.0a4-cp312-cp312-linux_x86_64.whl \
   --sdk-wheel /absolute/owned/actions_work_items-0.5.0a1-py3-none-any.whl \
   --canvas /absolute/owned/canvas.html
 ```
