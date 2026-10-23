@@ -18,7 +18,7 @@ from action_server_tests import test_invoice_review as review_fixtures
 from actions.work_items import State
 from actions.work_items._fencing import ClaimRejected, WorkItemClaim
 
-from actions.server.data_queries.review_models import InvoiceReview
+from actions.server.data_queries.review_models import FencedWorkItem, InvoiceReview
 from actions.server.data_queries.invoices import (
     InvoiceLimits,
     InvoiceQuery,
@@ -42,7 +42,7 @@ from actions.server.managed_work_items.contracts import (
     Renew,
 )
 from actions.server.managed_work_items.sql_service import SQLManagedWorkItemsService
-from actions.server.foundry.models import FoundryRequest
+from actions.server.foundry.models import FoundryAudit, FoundryRequest
 from actions.server.run_outputs.service import AccessDenied
 from actions.server.run_outputs.models import RunOutput
 from actions.server.run_outputs.types import Actor
@@ -345,6 +345,329 @@ def test_claim_uses_server_worker_identity_and_cancel_fences_stale_claim(reviewe
             WorkItemClaim(claim["item_id"], worker_id, claim["epoch"]),
             State.DONE,
         )
+
+
+def test_claim_replay_rejects_expired_and_replaced_fences(reviewed):
+    db, _, _, reviews, actor, scope, handle, _ = reviewed
+    queue = _queue(reviews, scope)
+    policy = _Policy(queue.workspace_id.root)
+    policy.grant(actor, Permission.READ, Permission.REVIEW, Permission.CLAIM)
+    service = _service(reviewed, policy)
+    proposal = reviews.offer(actor, scope, handle)
+    service.call(
+        _caller(actor),
+        Decide(
+            operation="reviews.decide",
+            queue=queue,
+            idempotency_key="approve-before-claim-replay",
+            proposal=proposal,
+            decision="approve",
+        ),
+    )
+
+    old_worker, new_worker = str(uuid4()), str(uuid4())
+    old_claim_command = Claim(
+        operation="items.claim",
+        queue=queue,
+        idempotency_key="claim-replay-fence",
+        lease_seconds=120,
+    )
+    old_result = service.call(_caller(actor, old_worker), old_claim_command)
+    old_claim = old_result["claim"]
+    with db.transaction():
+        db.update_by_id(
+            FencedWorkItem,
+            old_claim["item_id"],
+            {"claim_deadline_ms": "0"},
+        )
+
+    with pytest.raises(ManagedError, match="stale_claim"):
+        service.call(_caller(actor, old_worker), old_claim_command)
+
+    new_result = service.call(
+        _caller(actor, new_worker),
+        Claim(
+            operation="items.claim",
+            queue=queue,
+            idempotency_key="claim-new-owner-after-expiry",
+            lease_seconds=120,
+        ),
+    )
+    new_claim = new_result["claim"]
+    assert new_claim["item_id"] == old_claim["item_id"]
+    assert new_claim["owner_id"] == new_worker
+    assert new_claim["epoch"] == old_claim["epoch"] + 1
+
+    with pytest.raises(ManagedError, match="stale_claim"):
+        service.call(_caller(actor, old_worker), old_claim_command)
+    current = db.select(
+        FencedWorkItem,
+        "SELECT * FROM fenced_work_item WHERE id=? AND workspace_id=? AND queue_name=?",
+        [old_claim["item_id"], str(queue.workspace_id.root), queue.queue_id],
+    )
+    assert len(current) == 1
+    assert current[0].claim_owner == new_worker
+    assert current[0].claim_epoch == new_claim["epoch"]
+
+
+def test_renew_replay_rejects_an_expired_lease(reviewed):
+    db, _, _, reviews, actor, scope, handle, _ = reviewed
+    queue = _queue(reviews, scope)
+    policy = _Policy(queue.workspace_id.root)
+    policy.grant(actor, Permission.READ, Permission.REVIEW, Permission.CLAIM)
+    service = _service(reviewed, policy)
+    proposal = reviews.offer(actor, scope, handle)
+    service.call(
+        _caller(actor),
+        Decide(
+            operation="reviews.decide",
+            queue=queue,
+            idempotency_key="approve-before-renew-replay",
+            proposal=proposal,
+            decision="approve",
+        ),
+    )
+    worker_id = str(uuid4())
+    claim = service.call(
+        _caller(actor, worker_id),
+        Claim(
+            operation="items.claim",
+            queue=queue,
+            idempotency_key="claim-before-renew-replay",
+            lease_seconds=120,
+        ),
+    )["claim"]
+    command = Renew(
+        operation="items.renew",
+        queue=queue,
+        idempotency_key="renew-replay-fence",
+        claim=claim,
+        lease_seconds=120,
+    )
+    service.call(_caller(actor, worker_id), command)
+    with db.transaction():
+        db.update_by_id(
+            FencedWorkItem,
+            claim["item_id"],
+            {"claim_deadline_ms": "0"},
+        )
+
+    with pytest.raises(ManagedError, match="stale_claim"):
+        service.call(_caller(actor, worker_id), command)
+    with pytest.raises(ManagedError, match="changed_input"):
+        service.call(
+            _caller(actor, worker_id), command.model_copy(update={"lease_seconds": 60})
+        )
+
+
+def test_claim_receipt_failure_rolls_back_the_queue_lease(reviewed, monkeypatch):
+    db, _, _, reviews, actor, scope, handle, _ = reviewed
+    queue = _queue(reviews, scope)
+    policy = _Policy(queue.workspace_id.root)
+    policy.grant(actor, Permission.READ, Permission.REVIEW, Permission.CLAIM)
+    service = _service(reviewed, policy)
+    proposal = reviews.offer(actor, scope, handle)
+    service.call(
+        _caller(actor),
+        Decide(
+            operation="reviews.decide",
+            queue=queue,
+            idempotency_key="approve-before-claim-rollback",
+            proposal=proposal,
+            decision="approve",
+        ),
+    )
+    command = Claim(
+        operation="items.claim",
+        queue=queue,
+        idempotency_key="claim-rollback-at-receipt",
+        lease_seconds=120,
+    )
+    worker_id = str(uuid4())
+    original_insert = db.insert
+
+    def fail_claim_receipt(record):
+        if (
+            isinstance(record, FoundryRequest)
+            and record.operation == "managed-work-items/v1/items.claim"
+        ):
+            raise RuntimeError("injected claim receipt failure")
+        return original_insert(record)
+
+    monkeypatch.setattr(db, "insert", fail_claim_receipt)
+    with pytest.raises(ManagedError, match="storage_unavailable"):
+        service.call(_caller(actor, worker_id), command)
+    row = db.select(
+        FencedWorkItem,
+        "SELECT * FROM fenced_work_item WHERE workspace_id=? AND queue_name=?",
+        [str(queue.workspace_id.root), queue.queue_id],
+    )
+    assert len(row) == 1
+    assert row[0].state == State.PENDING.value
+    assert row[0].claim_owner == ""
+    assert row[0].claim_epoch == 0
+    assert (
+        db.select(
+            FoundryRequest,
+            "SELECT * FROM foundry_request WHERE workspace_id=? AND principal_id=? AND operation=? AND idempotency_key=?",
+            [
+                str(queue.workspace_id.root),
+                actor.principal_id,
+                "managed-work-items/v1/items.claim",
+                command.idempotency_key,
+            ],
+        )
+        == []
+    )
+
+    monkeypatch.setattr(db, "insert", original_insert)
+    result = service.call(_caller(actor, worker_id), command)
+    assert result["claim"] is not None
+
+
+def test_claim_audit_failure_rolls_back_queue_and_receipt(reviewed, monkeypatch):
+    db, _, _, reviews, actor, scope, handle, _ = reviewed
+    queue = _queue(reviews, scope)
+    policy = _Policy(queue.workspace_id.root)
+    policy.grant(actor, Permission.READ, Permission.REVIEW, Permission.CLAIM)
+    service = _service(reviewed, policy)
+    proposal = reviews.offer(actor, scope, handle)
+    service.call(
+        _caller(actor),
+        Decide(
+            operation="reviews.decide",
+            queue=queue,
+            idempotency_key="approve-before-audit-rollback",
+            proposal=proposal,
+            decision="approve",
+        ),
+    )
+    command = Claim(
+        operation="items.claim",
+        queue=queue,
+        idempotency_key="claim-rollback-at-audit",
+        lease_seconds=120,
+    )
+    worker_id = str(uuid4())
+    original_insert = db.insert
+
+    def fail_claim_audit(record):
+        if (
+            isinstance(record, FoundryAudit)
+            and record.operation == "managed-work-items/v1/items.claim"
+        ):
+            raise RuntimeError("injected claim audit failure")
+        return original_insert(record)
+
+    monkeypatch.setattr(db, "insert", fail_claim_audit)
+    with pytest.raises(ManagedError, match="storage_unavailable"):
+        service.call(_caller(actor, worker_id), command)
+
+    row = db.select(
+        FencedWorkItem,
+        "SELECT * FROM fenced_work_item WHERE workspace_id=? AND queue_name=?",
+        [str(queue.workspace_id.root), queue.queue_id],
+    )
+    assert len(row) == 1
+    assert row[0].state == State.PENDING.value
+    assert row[0].claim_owner == ""
+    assert row[0].claim_epoch == 0
+    assert (
+        db.select(
+            FoundryRequest,
+            "SELECT * FROM foundry_request WHERE workspace_id=? AND principal_id=? AND operation=? AND idempotency_key=?",
+            [
+                str(queue.workspace_id.root),
+                actor.principal_id,
+                "managed-work-items/v1/items.claim",
+                command.idempotency_key,
+            ],
+        )
+        == []
+    )
+    assert (
+        db.select(
+            FoundryAudit,
+            "SELECT * FROM foundry_audit WHERE workspace_id=? AND deployment_id=? AND operation=?",
+            [
+                str(queue.workspace_id.root),
+                str(queue.deployment.deployment_id.root),
+                "managed-work-items/v1/items.claim",
+            ],
+        )
+        == []
+    )
+
+    monkeypatch.setattr(db, "insert", original_insert)
+    result = service.call(_caller(actor, worker_id), command)
+    assert result["claim"] is not None
+    replay = service.call(_caller(actor, worker_id), command)
+    assert replay["claim"] == result["claim"]
+    requests = db.select(
+        FoundryRequest,
+        "SELECT * FROM foundry_request WHERE workspace_id=? AND principal_id=? AND operation=? AND idempotency_key=?",
+        [
+            str(queue.workspace_id.root),
+            actor.principal_id,
+            "managed-work-items/v1/items.claim",
+            command.idempotency_key,
+        ],
+    )
+    audits = db.select(
+        FoundryAudit,
+        "SELECT * FROM foundry_audit WHERE foundry_request_id=?",
+        [requests[0].id],
+    )
+    assert len(requests) == 1
+    assert len(audits) == 1
+    assert audits[0].principal_id == actor.principal_id
+    assert audits[0].deployment_id == str(queue.deployment.deployment_id.root)
+    assert audits[0].from_revision_id == queue.deployment.revision_id.root
+    assert audits[0].to_revision_id == queue.deployment.revision_id.root
+
+
+def test_claim_replay_rechecks_current_permission(reviewed):
+    db, _, _, reviews, actor, scope, handle, _ = reviewed
+    queue = _queue(reviews, scope)
+    policy = _Policy(queue.workspace_id.root)
+    policy.grant(actor, Permission.READ, Permission.REVIEW, Permission.CLAIM)
+    service = _service(reviewed, policy)
+    proposal = reviews.offer(actor, scope, handle)
+    service.call(
+        _caller(actor),
+        Decide(
+            operation="reviews.decide",
+            queue=queue,
+            idempotency_key="approve-before-revoked-claim-replay",
+            proposal=proposal,
+            decision="approve",
+        ),
+    )
+    worker_id = str(uuid4())
+    command = Claim(
+        operation="items.claim",
+        queue=queue,
+        idempotency_key="claim-replay-after-revocation",
+        lease_seconds=120,
+    )
+    original = service.call(_caller(actor, worker_id), command)
+    policy.grant(actor, Permission.READ, Permission.REVIEW)
+
+    with pytest.raises(ManagedError, match="forbidden"):
+        service.call(_caller(actor, worker_id), command)
+
+    row = db.select(
+        FencedWorkItem,
+        "SELECT * FROM fenced_work_item WHERE id=? AND workspace_id=? AND queue_name=?",
+        [
+            original["claim"]["item_id"],
+            str(queue.workspace_id.root),
+            queue.queue_id,
+        ],
+    )
+    assert len(row) == 1
+    assert row[0].claim_owner == worker_id
+    assert row[0].claim_epoch == original["claim"]["epoch"]
 
 
 def test_revoked_run_grant_and_cross_workspace_are_denied(reviewed):

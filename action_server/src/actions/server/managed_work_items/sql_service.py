@@ -42,7 +42,7 @@ from actions.server.data_queries.review import (
 )
 from actions.server.data_queries.review_models import FencedWorkItem, InvoiceReview
 from actions.server.deployments.ids import WorkspaceId
-from actions.server.foundry.models import FoundryRequest
+from actions.server.foundry.models import FoundryAudit, FoundryRequest
 from actions.server.managed_work_items.api import ManagedError
 from actions.server.managed_work_items.contracts import (
     OPERATION_PERMISSION,
@@ -1014,6 +1014,7 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
             if prior is not None:
                 if prior.request_fingerprint != fingerprint:
                     raise ManagedError("changed_input")
+                self._validate_request_audit(caller, command, prior)
                 try:
                     receipt = json.loads(prior.result_json)
                     if (
@@ -1026,9 +1027,14 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
                     result = dict(receipt["result"])
                     if "replay" in result:
                         result["replay"] = True
-                    return self._result_model(operation).model_validate_json(
+                    replayed = self._result_model(operation).model_validate_json(
                         json.dumps(result, ensure_ascii=False, allow_nan=False)
                     )
+                    if isinstance(command, Claim):
+                        self._validate_claim_replay(caller, command, replayed, scope)
+                    elif isinstance(command, Renew):
+                        self._validate_renew_replay(caller, command, replayed, scope)
+                    return replayed
                 except ManagedError:
                     raise
                 except Exception:
@@ -1042,18 +1048,92 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
                 },
                 512 * 1024,
             )
+            request = FoundryRequest(
+                id=str(uuid4()),
+                workspace_id=str(workspace.root),
+                principal_id=caller.actor.principal_id,
+                operation="managed-work-items/v1/" + operation.value,
+                idempotency_key=command.idempotency_key,
+                request_fingerprint=fingerprint,
+                result_json=receipt,
+            )
+            self.db.insert(request)
+            deployment_revision = command.queue.deployment.revision_id.root
             self.db.insert(
-                FoundryRequest(
+                FoundryAudit(
                     id=str(uuid4()),
                     workspace_id=str(workspace.root),
+                    deployment_id=str(command.queue.deployment.deployment_id.root),
                     principal_id=caller.actor.principal_id,
-                    operation="managed-work-items/v1/" + operation.value,
-                    idempotency_key=command.idempotency_key,
-                    request_fingerprint=fingerprint,
-                    result_json=receipt,
+                    operation=request.operation,
+                    foundry_request_id=request.id,
+                    from_revision_id=deployment_revision,
+                    to_revision_id=deployment_revision,
+                    created_ms=str(_now(self.db)),
                 )
             )
             return result
+
+    def _validate_request_audit(
+        self, caller: ManagedCaller, command: Command, request: FoundryRequest
+    ) -> None:
+        rows = self.db.select(
+            FoundryAudit,
+            "SELECT * FROM foundry_audit WHERE foundry_request_id=? LIMIT 2",
+            [request.id],
+        )
+        revision_id = command.queue.deployment.revision_id.root
+        if len(rows) != 1:
+            raise ManagedError("storage_unavailable")
+        audit = rows[0]
+        if (
+            audit.workspace_id != str(command.queue.workspace_id.root)
+            or audit.deployment_id != str(command.queue.deployment.deployment_id.root)
+            or audit.principal_id != caller.actor.principal_id
+            or audit.operation != request.operation
+            or audit.from_revision_id != revision_id
+            or audit.to_revision_id != revision_id
+        ):
+            raise ManagedError("storage_unavailable")
+
+    def _validate_claim_replay(
+        self,
+        caller: ManagedCaller,
+        command: Claim,
+        result: ClaimResult,
+        scope: CanvasResultScope,
+    ) -> None:
+        claim = result.claim
+        if claim is None:
+            return
+        if (
+            claim.queue != command.queue
+            or result.item is None
+            or result.item.queue != command.queue
+        ):
+            raise ManagedError("storage_unavailable")
+        self._require_worker(claim.owner_id, caller.worker_id)
+        self._require_current_claim(command.queue, claim)
+        row = self._item_row(command.queue, claim.item_id)
+        self._review_for_item(caller, command.queue, scope, row)
+
+    def _validate_renew_replay(
+        self,
+        caller: ManagedCaller,
+        command: Renew,
+        result: ClaimResult,
+        scope: CanvasResultScope,
+    ) -> None:
+        if (
+            result.claim != command.claim
+            or result.item is None
+            or result.item.queue != command.queue
+        ):
+            raise ManagedError("storage_unavailable")
+        self._require_worker(command.claim.owner_id, caller.worker_id)
+        self._require_current_claim(command.queue, command.claim)
+        row = self._item_row(command.queue, command.claim.item_id)
+        self._review_for_item(caller, command.queue, scope, row)
 
     def _preflight_mutation(
         self,
@@ -1257,11 +1337,16 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
 
     def _require_current_claim(self, queue: QueueRef, claim: ClaimRef) -> None:
         row = self._item_row(queue, claim.item_id)
+        try:
+            lease_expired = int(row.claim_deadline_ms) <= _now(self.db)
+        except Exception:
+            raise ManagedError("storage_unavailable") from None
         if (
             row.state != State.IN_PROGRESS.value
             or row.claim_owner != claim.owner_id
             or row.claim_epoch != claim.epoch
             or row.cancel_requested
+            or lease_expired
         ):
             raise ManagedError("stale_claim")
 
