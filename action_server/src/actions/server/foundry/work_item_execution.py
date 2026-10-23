@@ -6,6 +6,7 @@ It accepts an already registered native Package snapshot and a real review.
 
 from __future__ import annotations
 
+import hashlib
 import json
 from typing import Any
 from uuid import uuid4
@@ -50,6 +51,37 @@ class GeneratedWorkItemTicket(BaseModel):
     proposal: ReviewProposal
     claim: ClaimValue
     fence: AttemptFence
+
+
+def require_reviewed_run_inputs(run: Run, proposal: ReviewProposal) -> None:
+    """Check an admitted input seal; this does not authorize or admit a Run.
+
+    The original source artifact is required at admission. Its expiry must not
+    erase the exact input already retained in an authorized Run. Callers must
+    still check live review, source/Package policy and both execution fences.
+    """
+    try:
+        if len(run.inputs.encode("utf-8")) > 256 * 1024:
+            raise ValueError("bounded retained input required")
+        inputs = json.loads(run.inputs)
+        if (
+            not isinstance(inputs, dict)
+            or set(inputs) != {"value"}
+            or not isinstance(inputs["value"], str)
+        ):
+            raise ValueError("closed retained input required")
+        raw = inputs["value"].encode("utf-8", errors="strict")
+        if (
+            len(raw) > 128 * 1024
+            or "sha256:" + hashlib.sha256(raw).hexdigest()
+            != proposal.binding.result_digest
+            or _canonical(inputs, 256 * 1024) != run.inputs
+        ):
+            raise ValueError("retained input seal differs")
+    except (ValueError, TypeError, UnicodeError):
+        raise FenceRejected(
+            "retained input differs from the exact approved result"
+        ) from None
 
 
 class ReviewedGeneratedRun:
@@ -150,9 +182,9 @@ class ReviewedGeneratedRun:
             or stored_fence != fence.model_dump()
             or fence.owner_id != claim.owner_id
             or self.base._pinned(pin) != self.snapshot
-            or run.inputs != _canonical(self._inputs(actor, proposal), 256 * 1024)
         ):
             raise FenceRejected("generated dispatch binding or claim differs")
+        require_reviewed_run_inputs(run, proposal)
         return GeneratedWorkItemTicket(
             proposal=proposal, claim=ClaimValue.of(claim), fence=fence
         )

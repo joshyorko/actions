@@ -27,7 +27,8 @@ from actions.server.deployments.source_manifest import SuppliedSourceEntry
 from actions.server.foundry.execution_port import PinnedReviewedRccRunner
 from actions.server.foundry.mcp import CanvasCaller, CanvasMcp
 from actions.server.mcp.setup_mcp_server_v2 import McpServerSetupHelper
-from actions.server.run_outputs.types import OutputRef
+from actions.server.run_outputs.models import RunOutput
+from actions.server.run_outputs.types import OutputRef, output_id_from_handle
 
 pytest_plugins = ["action_server_tests.foundry_fixtures"]
 provider = fixtures.provider
@@ -175,6 +176,14 @@ def test_active_app_executes_reviewed_python_and_replays_without_new_launch(
         canvas_scope=case.scope,
     ) as result:
         assert json.loads(json.loads(result.read())) == expected
+    # Query output retention is separate from the exact input already admitted
+    # to this completed Run. Replay must not reopen or resurrect that handle.
+    with case.db.transaction():
+        case.db.update_by_id(
+            RunOutput,
+            output_id_from_handle(case.proposal.binding.handle),
+            {"expires_ms": "0"},
+        )
     second = asyncio.run(call_with_sdk(canvas, operation, request(case)))
     assert not second.is_error and second.structured_content == first.structured_content
     assert len(case.db.all(Run)) == before + 1

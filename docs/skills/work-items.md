@@ -1122,6 +1122,15 @@ Check the item identified by the exact review/dispatch receipt rather than the
 first item returned by a queue listing. An older approved item may intentionally
 remain pending when exact-target dispatch completes another item. Assert its
 unchanged epoch as well as the selected item's SDK terminal state.
+
+An admitted generated Run retains its exact bounded UTF-8 input in the common
+Run row. `require_reviewed_run_inputs` checks the closed canonical `value: str`
+payload against the approved result digest; it confers no authority. Replay and
+every guarded write still reauthorize the review/source/Package and verify both
+fences. The original query artifact remains required for new admission, while
+its later expiry must not prevent authorized admitted work from completing or
+replaying. This does not extend the source artifact's TTL, restore revoked
+access, admit another Run or permit an uncertain launch to run again.
 The ordinary route mount remains unavailable without explicit trusted service
 and authentication dependencies; route presence alone is not managed readiness.
 Keep its schema/capabilities/operations routes explicitly classified in the

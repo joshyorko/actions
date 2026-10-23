@@ -107,6 +107,7 @@ def main():
         ROOT / "action_server/tests/action_server_tests/test_reviewed_exact_claim.py",
         ROOT / "action_server/tests/action_server_tests/test_activated_reviewed_execution.py",
         ROOT / "action_server/tests/action_server_tests/test_reviewed_canvas_execution.py",
+        ROOT / "action_server/tests/action_server_tests/test_reviewed_retained_inputs.py",
         ROOT / "action_server/tests/action_server_tests/mcp/test_scoped_foundry_caller.py",
         ROOT / "action_server/tests/contract_tests/test_activated_generated_rcc.py",
         ROOT / "action_server/tests/contract_tests/test_reviewed_generated_rcc.py",
@@ -475,6 +476,7 @@ print(json.dumps(identities))
                 "tests/action_server_tests/test_reviewed_exact_claim.py",
                 "tests/action_server_tests/test_activated_reviewed_execution.py",
                 "tests/action_server_tests/test_reviewed_canvas_execution.py",
+                "tests/action_server_tests/test_reviewed_retained_inputs.py",
             ],
             "components": [
                 "tests/action_server_tests/test_invoice_review.py",
