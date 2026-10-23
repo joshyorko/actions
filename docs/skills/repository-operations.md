@@ -4967,3 +4967,9 @@ UUID. Activation replay also binds the audited prior head and exact target.
 The native SDK protocol/SQL harness uses a synthetic authenticated context and
 static HTML sentinel: it proves tools/resource metadata and SQL orchestration,
 not installed transport, rendered official View, generated execution or E1.
+
+The boot lane's `templates/canvas-first-boot` directory is an isolated fixture.
+Its worker Core pin is checked alongside every other checked-in manifest, and
+contract tests separately require it to remain absent from both shipped
+catalogs. Adding a fixture must update the explicit inventory without silently
+admitting a new starter or weakening the existing dependency-pin checks.

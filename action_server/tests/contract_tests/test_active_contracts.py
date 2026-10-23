@@ -487,6 +487,7 @@ def test_template_manifests_pin_supported_worker_core():
         "advanced": "1.0.2",
         "basic": "1.0.2",
         "canvas-query": "1.0.3",
+        "canvas-first-boot": "1.0.3",
         "minimal": "1.0.2",
         "mcp-v2-showcase": "1.0.2",
         "workflow-producer-consumer": "1.0.2",
@@ -496,6 +497,12 @@ def test_template_manifests_pin_supported_worker_core():
         for manifest in sorted((REPO / "templates").glob("*/package.yaml"))
     }
     assert set(manifests) == set(expected_core_versions)
+    # This lane supplies an isolated fixture, not an admitted shipped starter.
+    for metadata in ("templates-prod.json", "templates-beta.json"):
+        catalog = json.loads((REPO / "templates/packaging" / metadata).read_text())
+        assert "canvas-first-boot" not in {
+            entry["id"] for entry in catalog["templates"]
+        }
 
     for template_name, manifest in manifests.items():
         dependencies = {
