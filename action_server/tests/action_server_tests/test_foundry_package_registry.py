@@ -62,7 +62,7 @@ def _compile(registry, refs, actor):
         workspace_id=refs.workspace,
         application_id=refs.deployment_id,
     )
-    assert result.evidence.ready
+    assert result.evidence.ready, result.evidence
     return result.compiled_package
 
 
