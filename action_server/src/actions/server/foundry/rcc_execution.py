@@ -121,12 +121,10 @@ class GeneratedRccExecution:
     ) -> Run:
         """Run the one admitted Action and publish its measured JSON result.
 
-        The host's zero-argument Work Item liveness callback is polled during
-        execution. It must renew and recheck the exact queue claim and return
-        true when that claim is cancelled or stale. It must use the same common
-        Runtime Database as ``RunOutputService``; the final callback invocation
-        and Run publication share one transaction. The common Run Attempt fence
-        is renewed independently here.
+        The host callback or event is polled during execution. In reviewed
+        Work Item dispatch, the injected RunOutputService implementation also
+        checks or renews the exact queue claim on heartbeat, stage and publish;
+        terminal publication keeps both fences in its shared SQL transaction.
         """
         actor = Actor.model_validate(actor)
         fence = AttemptFence.model_validate(fence)
@@ -136,6 +134,7 @@ class GeneratedRccExecution:
             or not 1 <= timeout_seconds <= _MAX_TIMEOUT_SECONDS
         ):
             raise ValueError("bounded execution deadline required")
+        is_cancelled = self._cancel_predicate(cancelled)
         verify_rcc_version(self.rcc)
 
         self.outputs.heartbeat(fence, lease_seconds=_LEASE_SECONDS)
@@ -149,13 +148,13 @@ class GeneratedRccExecution:
         journal = self._read_journal(fence)
         if journal["launch"] is not None:
             raise FenceRejected("prior RCC launch requires explicit reconciliation")
-        is_cancelled = self._cancel_predicate(cancelled)
         self._check_cancel(is_cancelled, actor, fence)
         launch_id = str(uuid4())
+        lineage = self._lineage(snapshot, journal["claim"], fence)
         launch = {
             "id": launch_id,
             "workItemClaim": journal["claim"],
-            "lineage": self._lineage(snapshot, journal["claim"], fence),
+            "lineage": lineage,
             "inputDigest": self._digest(input_bytes),
             "sourceArtifactDigest": compiled.source_artifact_digest,
             "packageRevision": compiled.package_revision_id.root,
@@ -343,8 +342,11 @@ class GeneratedRccExecution:
             "version": "actions.generated-rcc-execution/v1",
             "mode": "work-items",
             "claim": journal["claim"],
-            "lineage": launch["lineage"],
+            "lineage": lineage,
+            "publicationFence": fence.model_dump(),
             "sourceArtifactDigest": compiled.source_artifact_digest,
+            "packageRevision": compiled.package_revision_id.root,
+            "runtimePlanDigest": snapshot.runtime_plan.plan_digest.root,
             "rccSpecificationDigest": compiled.rcc_specification_digest,
             "rccArtifactDigest": compiled.rcc_artifact_digest,
             "execution": execution,
@@ -352,33 +354,17 @@ class GeneratedRccExecution:
             "actionResult": result_value,
         }
         self._check_cancel(is_cancelled, actor, fence)
-        publication_cancelled = False
-        published_run: Run | None = None
         with _transaction(self.outputs.db):
-            # The trusted callback renews the exact Work Item claim on this same
-            # Database. Its nested queue transaction stays open with this outer
-            # transaction through RunOutputService.publish.
-            if is_cancelled():
-                publication_cancelled = True
-            else:
-                self._assert_live_journal(
-                    actor, fence, launch, completed_execution=execution
-                )
-                published_run = self.outputs.publish(
-                    actor,
-                    fence,
-                    output_refs,
-                    result_receipt,
-                    terminal_status=RunStatus.PASSED,
-                )
-        if publication_cancelled:
-            self.outputs.cancel(actor, fence.run_id)
-            raise FenceRejected(
-                "generated Action Work Item claim is stale or cancelled"
+            self._assert_live_journal(
+                actor, fence, launch, completed_execution=execution
             )
-        if published_run is None:
-            raise RuntimeError("generated Action publication did not complete")
-        return published_run
+            return self.outputs.publish(
+                actor,
+                fence,
+                output_refs,
+                result_receipt,
+                terminal_status=RunStatus.PASSED,
+            )
 
     def _verified_selection(
         self, snapshot: ExecutionSnapshot
@@ -460,7 +446,10 @@ class GeneratedRccExecution:
     def _cancel_predicate(cancelled: Any) -> Callable[[], bool]:
         if callable(cancelled):
             return cancelled
-        raise TypeError("Work Item liveness callback required")
+        predicate = getattr(cancelled, "is_set", None)
+        if callable(predicate):
+            return predicate
+        raise TypeError("cancellation event or zero-argument callback required")
 
     def _check_cancel(
         self, cancelled: Callable[[], bool], actor: Actor, fence: AttemptFence
@@ -539,7 +528,7 @@ class GeneratedRccExecution:
         cancelled: Callable[[], bool],
         deadline: float,
     ) -> tuple[bytes, bytes, dict[str, Any], dict[str, Any]]:
-        """Drain both pipes while retaining only a bounded prefix of each."""
+        """Drain both RCC pipes while retaining only bounded prefixes."""
         if process.stdout is None or process.stderr is None:
             raise RuntimeError("RCC output pipes were not created")
         selector = selectors.DefaultSelector()
@@ -564,7 +553,6 @@ class GeneratedRccExecution:
                     elif now - process_exit_at >= _POST_EXIT_LOG_GRACE_SECONDS:
                         break
                 if now >= heartbeat_at:
-                    self._check_cancel(cancelled, actor, fence)
                     self._assert_live_journal(actor, fence, launch)
                     self.outputs.heartbeat(fence, lease_seconds=_LEASE_SECONDS)
                     heartbeat_at = time.monotonic() + _HEARTBEAT_SECONDS

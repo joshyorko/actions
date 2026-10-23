@@ -381,3 +381,39 @@ attempt and verify owned-process cleanup before retrying the fixture. A screensh
 of a real AppBridge/double-iframe render qualifies only the exact installed bytes
 and operations exercised; read-only rendering does not prove app-side dispatch,
 approval, artifact resolution or authenticated ChatGPT acceptance.
+
+`ReviewedGeneratedRun` is a trusted host adapter over the existing review queue
+and Run/output service. It requires an already registered native Package
+snapshot with the exact reviewed application/deployment pin. Its initial input
+policy passes the bounded sealed UTF-8 result as the Action's `value: str`;
+transport arguments cannot replace those bytes. Wider parameter mappings are
+not implied. This adapter does not select a Deployment, create a grant or mount
+a public execution endpoint.
+
+Its per-dispatch output adapter rechecks the explicit decision, reviewer's live
+read/review grants, current Package execution grant, exact inputs, Work Item
+claim and Run fence. Renewal extends both leases; final output publication and
+the Work Item terminal write share one SQL transaction. Provider sealing still
+happens outside that transaction and retains the existing abort/uncertain-seal
+rules. A live Run fence alone never authorizes a stale Work Item owner.
+
+Explicit no-launch recovery requires the same exact approved item, a new live
+Work Item claim and an expired Run Attempt. It uses the existing Run recovery
+admission and common request/audit to retain both old and new tickets. A prior
+launch marker blocks this path even if no result exists. Missing output is not
+proof of no effects. Reconstructing an adapter in one interpreter is not a
+fresh-process restart proof, and a fixture snapshot registration is not proof
+of the full active-Deployment resolver or public app dispatch.
+
+Dedicated RCC cases may materialize several copies of the same retained
+Artifact under distinct compiler workspaces. On a small task filesystem,
+prepare an explicitly owned RCC home and opt into serial view cleanup with
+the `.actions-owned-compiler-fixture` marker
+`actions.task-owned-compiler-fixture/v1`. The compiler verifier recognizes that
+marker; the dedicated fixture checks for active executables/cwds, saves view
+metadata and RCC dry-run/delete receipts, then uses pinned `rcc holotree delete`
+for recognized views. It preserves Artifact/catalog/package caches, source and
+build evidence. An unrecognized partial view is not removed by a fallback
+filesystem deletion. Missing admission, active processes or a failed supported
+cleanup remains a failed gate. Cleanup success does not establish the original
+compiler failure's cause.

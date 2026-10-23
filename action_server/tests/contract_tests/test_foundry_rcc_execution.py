@@ -21,8 +21,6 @@ from contract_tests.test_package_revision_compiler import (
 )
 
 from actions.server._models import Run, RunStatus
-from actions.server.data_queries.review import InvoiceReviewService
-from actions.server.data_queries.service import InvoiceQueryService
 from actions.server.deployments.package_revision_compiler import (
     PinnedRccPackageBuildExecutor,
     PreparedRccEnvironment,
@@ -32,11 +30,11 @@ from actions.server.deployments.package_revision_compiler import (
 )
 from actions.server.foundry.models import FoundryAccessGrant
 from actions.server.foundry.package_registry import FoundryPackageRegistry
+from actions.server.foundry.rcc_execution import GeneratedRccExecution, _LOG_LIMIT
 from actions.server.foundry.sql_authorization import (
     SqlFoundryAuthorization,
     reference_grant_subject,
 )
-from actions.server.foundry.rcc_execution import GeneratedRccExecution, _LOG_LIMIT
 from actions.server.run_outputs.filesystem import FilesystemOutputProvider
 from actions.server.run_outputs.service import (
     FenceRejected,
@@ -44,8 +42,6 @@ from actions.server.run_outputs.service import (
     RunOutputService,
 )
 from actions.server.run_outputs.types import Actor, ExecutionSnapshot, OutputRef
-from actions.server.run_outputs.types import CanvasApplicationRef, CanvasResultScope
-from actions.work_items._fencing import ClaimRejected
 
 pytest_plugins = ["action_server_tests.foundry_fixtures"]
 
@@ -87,7 +83,7 @@ def _fake_registry(db, package_store, refs, actor):
     )
 
 
-def _admit_run(db, registry, package, actor, output_provider, *, owner_id=None):
+def _admit_run(db, registry, package, actor, output_provider):
     from action_server_tests.run_outputs.test_service import snapshot
 
     capability = registry.capability_refs(package)[0]
@@ -125,16 +121,15 @@ def _admit_run(db, registry, package, actor, output_provider, *, owner_id=None):
         db, {admitted.provider_key: output_provider}, capabilities=registry
     )
     run = outputs.admit(actor, admitted, {"value": "synthetic"}, "generated-run")
-    fence = outputs.claim(run.id, owner_id or str(uuid4()), lease_seconds=30)
+    fence = outputs.claim(run.id, str(uuid4()), lease_seconds=30)
     return outputs, run, fence
 
 
-def _seed_work_items_journal(db, run_id, fence, *, claim=None, launch=None):
+def _seed_work_items_journal(db, run_id, fence, *, launch=None):
     journal = {
         "version": "actions.generated-rcc-dispatch/v1",
         "mode": "work-items",
-        "claim": claim
-        or {
+        "claim": {
             "item_id": str(uuid4()),
             "owner_id": fence.owner_id,
             "epoch": 1,
@@ -289,35 +284,11 @@ def test_real_generated_action_executes_and_publishes_measured_result(
                 package = registry.admit_compiled(
                     actor, refs.workspace, compilation.compiled_package
                 )
-                owner_id = str(uuid4())
                 outputs, run, fence = _admit_run(
-                    db, registry, package, actor, output_provider, owner_id=owner_id
+                    db, registry, package, actor, output_provider
                 )
+                journal = _seed_work_items_journal(db, run.id, fence)
                 admitted_snapshot, _inputs = outputs.execution_context(actor, fence)
-                scope = CanvasResultScope(
-                    deployment=admitted_snapshot.deployment,
-                    application=CanvasApplicationRef(
-                        workspace_id=str(refs.workspace.root),
-                        app_id=str(uuid4()),
-                        revision_id="sha256:" + "c" * 64,
-                    ),
-                )
-                queue = InvoiceReviewService(InvoiceQueryService(outputs, {})).queue(
-                    scope
-                )
-                item_id = queue.seed_input({"synthetic": True}, item_id=str(uuid4()))
-                work_item_claim = queue.reserve_fenced(owner_id, lease_seconds=30)
-                assert work_item_claim.item_id == item_id
-                journal = _seed_work_items_journal(
-                    db,
-                    run.id,
-                    fence,
-                    claim={
-                        "item_id": work_item_claim.item_id,
-                        "owner_id": work_item_claim.owner_id,
-                        "epoch": work_item_claim.epoch,
-                    },
-                )
 
                 executor = GeneratedRccExecution(
                     registry,
@@ -326,21 +297,7 @@ def test_real_generated_action_executes_and_publishes_measured_result(
                     _REAL_RCC,
                     tmp_path / "execution",
                 )
-
-                work_item_liveness_transactions = []
-
-                def work_item_liveness() -> bool:
-                    work_item_liveness_transactions.append(outputs.db.in_transaction())
-                    try:
-                        queue.renew_fenced(work_item_claim, lease_seconds=30)
-                    except ClaimRejected:
-                        return True
-                    return False
-
-                completed = executor.execute(actor, fence, cancelled=work_item_liveness)
-                assert work_item_liveness_transactions[-1] is True
-                with outputs.db.transaction():
-                    queue._require(work_item_claim)
+                completed = executor.execute(actor, fence, cancelled=Event())
 
                 assert completed.status == RunStatus.PASSED
                 envelope = json.loads(completed.result)
@@ -362,6 +319,7 @@ def test_real_generated_action_executes_and_publishes_measured_result(
                     receipt["sourceArtifactDigest"]
                     == compilation.compiled_package.source_artifact_digest
                 )
+                assert receipt["packageRevision"] == package.revision_id.root
                 assert (
                     receipt["rccArtifactDigest"]
                     == prepared.build_identity.artifact_digest
