@@ -137,6 +137,12 @@
         "kind": {
           "enum": ["action", "robot-task", "workflow", "dev-task"]
         },
+        "mode": {
+          "const": "none"
+        },
+        "allowOutputs": {
+          "const": false
+        },
         "inputSchemaDigest": {
           "$ref": "#/$defs/sha256"
         },

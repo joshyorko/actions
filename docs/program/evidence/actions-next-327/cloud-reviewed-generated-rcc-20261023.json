@@ -1,0 +1,154 @@
+{
+  "source": "b6a82488aa4a9b0091acea95ba63fa378f11dbaa",
+  "runtime_version": "1.1.0a18",
+  "imported_execution_lane": "PR33155988663b2003067476d764383a414a1855dd08f as6c748752; no log/lineage follow-on imported yet",
+  "status": "SOURCE_REAL_SQL_RCC_AND_PORTABLE_PASS",
+  "evidence": "/workspace/actions-327-state/evidence/reviewed-generated-rcc-final-20261023/2664b17c-0841-438b-a6b4-5dff26fb6a35",
+  "command": "bash /workspace/actions-327-state/run-prepared python action_server/scripts/verify_invoice_queries.py --full --compiler-receipt /workspace/actions-327-state/compiler-acceptance/3e744f96-749a-47e5-84b9-7e7f297bc8b9/prepared.json --evidence-dir /workspace/actions-327-state/evidence/reviewed-generated-rcc-final-20261023",
+  "counts": {
+    "foundry_storage": {
+      "tests": 133,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "components": {
+      "tests": 161,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "invoice": {
+      "tests": 129,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "package_compiler": {
+      "tests": 6,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "portable": {
+      "tests": 2077,
+      "skipped": 13,
+      "failures": 0,
+      "errors": 0
+    }
+  },
+  "portable": "2064 passed,13 skipped,270 deselected,16 warnings",
+  "static": "Configured lint/typecheck438PASS; Markdown lint unavailable",
+  "proof": [
+    "Only explicit exact-result approval supplies Work Item; source bytes determine generated value:str input.",
+    "Live reviewer/source/Package authorization and actual Work Item/Run fences on renewal, stage and atomic terminal publication.",
+    "Duplicate delivery, expired/replaced claim, revoked reviewer, queue cancellation and SQL rollback probes.",
+    "Explicit proven-no-admitted-launch recovery preserves old/new tickets in common request/audit; any launch marker blocks this route.",
+    "Genuine generated invoice summary computes2rows/12900cents through actual RCC18.19.3 in all4SQLite/PostgreSQL-control x DuckDB/PostgreSQL-data combinations.",
+    "Fresh -I interpreter reconstructs native Package/SQL/provider/dispatch and replays completed ticket plus authorized scoped artifact readback without re-execution."
+  ],
+  "retained_failure": {
+    "receipt": "/workspace/actions-327-state/evidence/reviewed-generated-rcc-frozen-20261023/3d998984-2f4a-4ee3-8def-6a646915fcba/receipt.json",
+    "facts": "SQL129/components161/invoice129 passed; RCC3passed3failed during compilation, diagnostics obscured by non-string assertion message; portable not run. Disk free471138304bytes. Original phase cause unestablished.",
+    "repair": "String diagnostic, explicit marked task-owned serial RCC view cleanup. Artifacts/catalog/evidence retained; unrecognized partial view not removed."
+  },
+  "cleanup_receipts": {
+    "/workspace/actions-327-state/evidence/reviewed-generated-rcc-final-20261023/2664b17c-0841-438b-a6b4-5dff26fb6a35/compiler-view-cleanup/3ee2cf6254fdb03c/receipt.json": "b06db7ac4e36966bf83c19f98aa84c1125332f31e7478897f5be1770319c9c1a",
+    "/workspace/actions-327-state/evidence/reviewed-generated-rcc-final-20261023/2664b17c-0841-438b-a6b4-5dff26fb6a35/compiler-view-cleanup/4dbff84e1f23dae8/receipt.json": "dcead7c42aa14b4dad39729628afee4c641f5ab968ed90f9adf3d59fae39baab",
+    "/workspace/actions-327-state/evidence/reviewed-generated-rcc-final-20261023/2664b17c-0841-438b-a6b4-5dff26fb6a35/compiler-view-cleanup/29919f6373cebe90/receipt.json": "0f3b05f0f5355daa5b2fb5ffe0f79c2adbfad8bc34af9196cc86cbbe4597f2c0",
+    "/workspace/actions-327-state/evidence/reviewed-generated-rcc-final-20261023/2664b17c-0841-438b-a6b4-5dff26fb6a35/compiler-view-cleanup/75959fbecb25ae2a/receipt.json": "1a93e0f134e64de9f6087bfa5ca3a3bd428252fbdde761fd842637b069f13a11",
+    "/workspace/actions-327-state/evidence/reviewed-generated-rcc-final-20261023/2664b17c-0841-438b-a6b4-5dff26fb6a35/compiler-view-cleanup/b0af49df183111e9/receipt.json": "b198eb4f3f57414938dd4c40737d93ad937979d4124fe638cba818a0f0e47ec2",
+    "/workspace/actions-327-state/evidence/reviewed-generated-rcc-final-20261023/2664b17c-0841-438b-a6b4-5dff26fb6a35/compiler-view-cleanup/32955201f54eb8db/receipt.json": "d9a396be22f5dd99954101a9ed6c9c9c406fa9f7333ffc139e012820b23a8ff4"
+  },
+  "limits": [
+    "Trusted host/private source proof; native snapshot registration in fixture is not full active-Deployment resolution or public API admission.",
+    "Normal startup/generated app operations and managed router/worker remain unjoined; semantic a17 host remains read-only.",
+    "Narrow value:str sealed-result mapping, not arbitrary parameter/effect execution.",
+    "Actual process crash-after-launch reconciliation is blocked, never auto-retried; broader effect/retry/dead-letter policy remains open.",
+    "RCC launch/structured logs/receipt follow-on pending on existing PR331 owner.",
+    "No a18 wheel built/installed yet; a17 installed MCP/Basic Host acceptance stays separately source-bound.",
+    "Codex401 no auth retry; E1 NEEDS_OPERATOR/Dakota STOP; celld NO-GO; all release matrix gates remain."
+  ],
+  "rollback": "No DDL. Preserve schema18 SQL/objects/source/Run result/recovery receipts together; never clear launch or migration/bootstrap markers to claim no effect.",
+  "documentation": {
+    "file": "docs/skills/provenance-observability.md",
+    "delta": "Exact reviewed input mapping, dual-fence/atomic publication/cancellation, explicit no-launch recovery and marked task-owned RCC view cleanup boundaries.",
+    "evidence": "New contract-first negative/rollback/recovery tests, strict SQL133 and actual6-case RCC+fresh-interpreter execution gate."
+  },
+  "upstream_disposition": "Existing RCC report remains draft only. Original new compiler failure cause unestablished, no confirmed new upstream defect.",
+  "communication_block": "PR331 tool comment rejected by automatic approval review as outside authorized327/328 destinations; no comment created or retry. Required interfaces delivered in assistant checkpoints.",
+  "full_receipt": {
+    "path": "/workspace/actions-327-state/evidence/reviewed-generated-rcc-final-20261023/2664b17c-0841-438b-a6b4-5dff26fb6a35/receipt.json",
+    "sha256": "59441bd357725194138b1a16dc567b426d16025ea899d36202a64ce231db8aab",
+    "cleanup": "PASS"
+  },
+  "retained_real_results": {
+    "records": [
+      {
+        "source": "/tmp/pytest-of-agent/pytest-142/test_reviewed_generated_summar3/execution/99e0a492-3bc9-46c4-b3c7-a1c8fb536216/a4ab6498-3007-46a9-b9df-c99f75ae3c0f/323bca7b-59d5-41af-a24a-c88b20b22205",
+        "retained": "/workspace/actions-327-state/evidence/foundry-integration/reviewed-generated-retained-results-20261023/pytest-142-test_reviewed_generated_summar3",
+        "run_id": "99e0a492-3bc9-46c4-b3c7-a1c8fb536216",
+        "attempt_id": "a4ab6498-3007-46a9-b9df-c99f75ae3c0f",
+        "launch_id": "323bca7b-59d5-41af-a24a-c88b20b22205",
+        "summary": {
+          "invoice_count": 2,
+          "total_cents": 12900
+        },
+        "files": {
+          "action-result.json": "3d347e29383eeda5988c1695feb8a85f560f226e1c408b82d76d77f37916cbd3",
+          "input.json": "38e6371a2634c89cfcdba5cb2b626d7d15c50e32e342c0ff68f44992456092ff",
+          "rcc-receipt.json": "543460cd637022275fe982c2a08e5da2820c7d6c71a3b064cff4f35df550abf3"
+        }
+      },
+      {
+        "source": "/tmp/pytest-of-agent/pytest-142/test_reviewed_generated_summar2/execution/6e646f2c-d0f5-47b1-931b-0e27d2d8e6c9/fd830283-02fa-4d0d-b17d-10ad6b99189e/ca784cf6-6ac0-44fb-9977-b44ef95f753e",
+        "retained": "/workspace/actions-327-state/evidence/foundry-integration/reviewed-generated-retained-results-20261023/pytest-142-test_reviewed_generated_summar2",
+        "run_id": "6e646f2c-d0f5-47b1-931b-0e27d2d8e6c9",
+        "attempt_id": "fd830283-02fa-4d0d-b17d-10ad6b99189e",
+        "launch_id": "ca784cf6-6ac0-44fb-9977-b44ef95f753e",
+        "summary": {
+          "invoice_count": 2,
+          "total_cents": 12900
+        },
+        "files": {
+          "action-result.json": "3d347e29383eeda5988c1695feb8a85f560f226e1c408b82d76d77f37916cbd3",
+          "input.json": "38e6371a2634c89cfcdba5cb2b626d7d15c50e32e342c0ff68f44992456092ff",
+          "rcc-receipt.json": "e2c5cc1940d17f9e435fac323095fa45bf5139dab2153abcb08983912f6bb0f4"
+        }
+      },
+      {
+        "source": "/tmp/pytest-of-agent/pytest-142/test_reviewed_generated_summar1/execution/eb19c398-688a-450a-8154-ad8d5f8d048e/8810da42-ee68-4174-ad72-c22e38fc3f61/c87f5e72-8482-4fea-911b-744b352fda2e",
+        "retained": "/workspace/actions-327-state/evidence/foundry-integration/reviewed-generated-retained-results-20261023/pytest-142-test_reviewed_generated_summar1",
+        "run_id": "eb19c398-688a-450a-8154-ad8d5f8d048e",
+        "attempt_id": "8810da42-ee68-4174-ad72-c22e38fc3f61",
+        "launch_id": "c87f5e72-8482-4fea-911b-744b352fda2e",
+        "summary": {
+          "invoice_count": 2,
+          "total_cents": 12900
+        },
+        "files": {
+          "action-result.json": "3d347e29383eeda5988c1695feb8a85f560f226e1c408b82d76d77f37916cbd3",
+          "input.json": "38e6371a2634c89cfcdba5cb2b626d7d15c50e32e342c0ff68f44992456092ff",
+          "rcc-receipt.json": "fc24ca1095fee91c55fdffd12e6a25146b4e7a5a13a398ce9acb98dfe2c189bd"
+        }
+      },
+      {
+        "source": "/tmp/pytest-of-agent/pytest-142/test_reviewed_generated_summar0/execution/361d49df-fac0-40f3-a9fe-aeed469152e9/54b85572-80dc-4f7b-a515-236cce767a48/5cdf5d22-9993-4efc-b25b-0e97c36207e0",
+        "retained": "/workspace/actions-327-state/evidence/foundry-integration/reviewed-generated-retained-results-20261023/pytest-142-test_reviewed_generated_summar0",
+        "run_id": "361d49df-fac0-40f3-a9fe-aeed469152e9",
+        "attempt_id": "54b85572-80dc-4f7b-a515-236cce767a48",
+        "launch_id": "5cdf5d22-9993-4efc-b25b-0e97c36207e0",
+        "summary": {
+          "invoice_count": 2,
+          "total_cents": 12900
+        },
+        "files": {
+          "action-result.json": "3d347e29383eeda5988c1695feb8a85f560f226e1c408b82d76d77f37916cbd3",
+          "input.json": "38e6371a2634c89cfcdba5cb2b626d7d15c50e32e342c0ff68f44992456092ff",
+          "rcc-receipt.json": "210e7efb6dc9f231cc9c6ced794177660a1aebabd2292ae929a9334b0256bee5"
+        }
+      }
+    ],
+    "limit": "Post-fixture capture of bounded task-owned RCC files. Control PostgreSQL schemas were already cleaned; no raw PG state dump claimed. Full final state and authorization were asserted by actual SQL tests and fresh child process."
+  }
+}

@@ -465,6 +465,8 @@ def _verify_compiled_package_revision(compiled: CompiledPackageRevision) -> None
 
     if (
         capability.get("kind") != "action"
+        or capability.get("mode") != "none"
+        or capability.get("allowOutputs") is not False
         or plan_without_digest.get("schemaVersion") != RUNTIME_PLAN_SCHEMA_VERSION
         or plan_without_digest.get("runtimeKind") != "rcc"
         or plan_without_digest.get("contractId") != RCC_CONTRACT_VERSION
@@ -1135,6 +1137,8 @@ def _assemble_compiled_package(
     capability = {
         "id": capability_id,
         "kind": "action",
+        "mode": "none",
+        "allowOutputs": False,
         "inputSchemaDigest": _schema_digest(
             input_schema, "actions.input-schema/v1-draft"
         ),
