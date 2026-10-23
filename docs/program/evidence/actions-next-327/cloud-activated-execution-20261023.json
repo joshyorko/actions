@@ -1,5 +1,5 @@
 {
-  "stage": "A19_NATIVE_AND_MANAGED_RCC_QUALIFIED_A20_RETAINED_INPUT_RECOVERY_IN_PROGRESS",
+  "stage": "A19_QUALIFIED_RETAINED_INPUT_CORRECTION_QUALIFIED_IN_A20_RECEIPT",
   "source": "b32ce72b0bc2792cf9b8eca5bef193f9b1724689",
   "qualified_prior_checkpoint": "3f726ef15130d07ddec45ee05423a5ebfec380d2",
   "versions": {
@@ -85,7 +85,7 @@
     "Mount explicit supported host execution profiles/default managed configuration and scoped app transport; current ordinary bootstrap does not enable generated execution.",
     "Actual official-host human review/dispatch/artifact/reconnect; present execution proof uses owned synthetic caller context, and ordinary installed View remains read-only.",
     "Existing PR331 execution_profiles.py and PR333 native_runs.py/log handoffs pending; no new heads observed. Managed enqueue/retry/logs/default profile/VSIX remain mandatory.",
-    "Retained generated ticket still reopens the source result on replay; source-expiry versus retained-input recovery needs an explicit regression and correction.",
+    "At a19 retained replay reopened an expired source; Runtime20 closes this bounded recovery defect. Full retention/restore remains open.",
     "General data/Knowledge, effects/retry/dead-letter, retention/restore, cross-platform/distribution and all existing release matrix rows remain unwaived.",
     "Codex token refresh401: no auth retry; ChatGPTE1 NEEDS_OPERATOR and Dakota remains STOP; publisher332 security review and celldNO-GO disposition remain separate."
   ],
@@ -352,16 +352,10 @@
     "source_hashes_match_qualification_source": true
   },
   "retained_input_recovery_followon": {
-    "working_source": "8eee94fed5c9c5734bfc1a73454c91cf64dfa5df",
+    "source": "8eee94fed5c9c5734bfc1a73454c91cf64dfa5df",
     "runtime": "1.1.0a20",
-    "stage": "STRICT_FULL_AND_RCC_GATE_RUNNING",
-    "red": "/workspace/actions-327-state/evidence/foundry-integration/activated-retained-input-expiry-red-20261023.log",
-    "source_red": "6failed2passed24skipped: two actual expiry replay failures and four mismatched error-class expectations; immutable admission already rejected those mutations",
-    "local_final": "24passed48unconfigured-provider skips; both immutable-admission and pure-seal tamper checks retained",
-    "gateway": "Doctor/Bootstrap/ToolkitTest179PASS",
-    "static": "configured lint/typecheck450PASS; Markdown linter unavailable",
-    "gate": "/workspace/actions-327-state/evidence/retained-input-a20-full-20261023/cd2113d5-1dbc-4338-af9f-cae10080e9b4",
-    "candidate20_not_built_yet": true
+    "status": "PASS",
+    "receipt": "cloud-retained-input-recovery-20261023.json"
   },
   "owned_cleanup": "/workspace/actions-327-state/evidence/foundry-integration/sdk2-owned-view-cleanup-c79c0d1f/receipt.json"
 }
