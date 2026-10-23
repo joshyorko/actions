@@ -151,17 +151,49 @@ class CompilationEvidence:
 class CompiledPackage(Protocol):
     """Structural view of #130's immutable compiler result, not its manifest."""
 
-    manifest_json: bytes
-    source_archive: bytes
-    source_inventory_digest: str
-    source_artifact_digest: str
-    package_revision_id: PackageRevisionId
-    runtime_plan_header: object
-    runtime_plan_payload: bytes
-    adapter_specification_payload: bytes
-    input_schema_payload: bytes
-    output_schema_payload: bytes
-    rcc_artifact_digest: str
+    @property
+    def manifest_json(self) -> bytes:
+        ...
+
+    @property
+    def source_archive(self) -> bytes:
+        ...
+
+    @property
+    def source_inventory_digest(self) -> str:
+        ...
+
+    @property
+    def source_artifact_digest(self) -> str:
+        ...
+
+    @property
+    def package_revision_id(self) -> PackageRevisionId:
+        ...
+
+    @property
+    def runtime_plan_header(self) -> object:
+        ...
+
+    @property
+    def runtime_plan_payload(self) -> bytes:
+        ...
+
+    @property
+    def adapter_specification_payload(self) -> bytes:
+        ...
+
+    @property
+    def input_schema_payload(self) -> bytes:
+        ...
+
+    @property
+    def output_schema_payload(self) -> bytes:
+        ...
+
+    @property
+    def rcc_artifact_digest(self) -> str:
+        ...
 
 
 @dataclass(frozen=True)

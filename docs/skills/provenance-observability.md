@@ -302,3 +302,32 @@ That focused comparison is not installed-binary upgrade/downgrade or mixed-serve
 acceptance. Refresh generated managed-client schemas when consuming the new
 optional snapshot field; no client may infer source authority from runtime_kind,
 Action names or imports.
+
+`foundry.package_registry.FoundryPackageRegistry` joins the existing compiler,
+Foundry SQL rows and private output provider. Its host-configured compiler
+requires explicit trusted-developer execution admission plus live
+`generate_backend` and Workspace `deploy` policy. Only the exact locally held
+compiler object can cross admission; a reconstructed object or client-supplied
+phase receipt grants nothing. Pending objects are a bounded local call bridge,
+not durable state. After admission, every load remeasures sealed source bytes
+and verifies the manifest, inventory, schemas, plan, adapter and build receipt.
+Fresh-process readback uses SQL and provider objects, not that memory bridge.
+
+Package admission serializes on the common Workspace lock. Package row,
+request, audit and newly created source-reference grants commit together.
+Duplicate builds preserve the first admitted bytes and never restore revoked
+reference grants. The derived Run Action identity does not create a legacy
+Action row. This proves Package/Run admission, not execution of a business job.
+Run/Attempt execution, explicit Work Items mode and external-effect recovery
+remain separately required.
+
+The source seal is created before SQL publication. If publication fails or its
+acknowledgement is uncertain, retain that owned seal until authoritative SQL
+reconciliation proves it unreferenced; never delete on a timeout assumption.
+Only a proven unused duplicate seal is discarded immediately. This adapter
+does not qualify general orphan retention/restore or automatic retry.
+`verify_invoice_queries.py --compiler-receipt <exact-prepared-receipt>` adds
+genuine RCC build/import/test-to-Package admission against both owned SQL
+providers. Its strict `package_compiler` selection rejects skipped cases.
+That receipt is a cache precondition, not a replacement for generated-code
+execution or a claim that RCC is a malicious-code sandbox.
