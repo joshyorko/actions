@@ -49,7 +49,7 @@ COMPILER_VERSION = "actions-package-compiler/v1"
 CANONICALIZER_VERSION = "actions-canonical-json/v1"
 RCC_ADAPTER_VERSION_RANGE = "==18.19.3"
 _PACKAGE_ID_RE = re.compile(r"^[a-z0-9][a-z0-9._-]{0,127}$")
-_IDENTIFIER_RE = re.compile(r"^[A-Za-z][A-Za-z0-9.-]{0,127}$")
+_CAPABILITY_ID_RE = re.compile(r"^[A-Za-z][A-Za-z0-9._:-]{0,127}$")
 _DIGEST_RE = re.compile(r"^sha256:[0-9a-f]{64}$")
 _DEPENDENCY_RE = re.compile(
     r"^(?P<name>[A-Za-z0-9][A-Za-z0-9_.-]*)(?P<version>==|=)(?P<pin>[0-9]+(?:\.[0-9]+)*(?:[A-Za-z][0-9A-Za-z]*(?:[.+_-][0-9A-Za-z]+)*)?)$"
@@ -732,9 +732,8 @@ def _deterministic_source_archive(snapshot: SourceByteSnapshot) -> bytes:
 
 
 def _capability_id(action_name: str) -> str:
-    normalized = re.sub(r"_+", "-", action_name.lower())
-    result = f"action.{normalized}"
-    if not _IDENTIFIER_RE.fullmatch(result):
+    result = f"action.{action_name}"
+    if not _CAPABILITY_ID_RE.fullmatch(result):
         raise ValueError("Action name cannot be represented by the Package schema")
     return result
 
