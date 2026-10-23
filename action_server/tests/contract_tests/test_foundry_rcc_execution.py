@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import stat
@@ -29,7 +30,7 @@ from actions.server.deployments.package_revision_compiler import (
 )
 from actions.server.foundry.models import FoundryAccessGrant
 from actions.server.foundry.package_registry import FoundryPackageRegistry
-from actions.server.foundry.rcc_execution import GeneratedRccExecution
+from actions.server.foundry.rcc_execution import GeneratedRccExecution, _LOG_LIMIT
 from actions.server.foundry.sql_authorization import (
     SqlFoundryAuthorization,
     reference_grant_subject,
@@ -264,8 +265,15 @@ def test_real_generated_action_executes_and_publishes_measured_result(
                     executor=PinnedRccPackageBuildExecutor(prepared),
                     admission=TrustedDeveloperExecutionAdmission.TRUSTED,
                 )
+                action_source = (
+                    b"from actions import action\n\n"
+                    b"@action\n"
+                    b"def generated_echo(value: str) -> str:\n"
+                    + ("    print('x' * " + str(_LOG_LIMIT + 4096) + ")\n").encode()
+                    + b"    return value\n"
+                )
                 compilation = registry.compile_trusted_source(
-                    _generated_action_entries(),
+                    _generated_action_entries(action_source),
                     logical_package_key="generated-fixture",
                     logical_name="Generated fixture",
                     trusted_actor=actor,
@@ -279,7 +287,8 @@ def test_real_generated_action_executes_and_publishes_measured_result(
                 outputs, run, fence = _admit_run(
                     db, registry, package, actor, output_provider
                 )
-                _seed_work_items_journal(db, run.id, fence)
+                journal = _seed_work_items_journal(db, run.id, fence)
+                admitted_snapshot, _inputs = outputs.execution_context(actor, fence)
 
                 executor = GeneratedRccExecution(
                     registry,
@@ -295,6 +304,17 @@ def test_real_generated_action_executes_and_publishes_measured_result(
                 receipt = envelope["result"]
                 assert receipt["mode"] == "work-items"
                 assert receipt["claim"]["owner_id"] == fence.owner_id
+                assert receipt["lineage"] == {
+                    "packageRevision": admitted_snapshot.capability.package_revision.model_dump(
+                        mode="json"
+                    ),
+                    "runtimePlan": admitted_snapshot.runtime_plan.model_dump(
+                        mode="json"
+                    ),
+                    "workItemClaim": journal["claim"],
+                    "runId": run.id,
+                    "attemptFence": fence.model_dump(),
+                }
                 assert (
                     receipt["sourceArtifactDigest"]
                     == compilation.compiled_package.source_artifact_digest
@@ -304,7 +324,37 @@ def test_real_generated_action_executes_and_publishes_measured_result(
                     receipt["rccArtifactDigest"]
                     == prepared.build_identity.artifact_digest
                 )
-                output = OutputRef.model_validate(envelope["outputs"][0])
+                assert len(envelope["outputs"]) == 4
+                output_receipts = {item["name"]: item for item in receipt["outputs"]}
+                assert set(output_receipts) == {
+                    "generated-action-result.json",
+                    "rcc-receipt.json",
+                    "rcc-stdout.log",
+                    "rcc-stderr.log",
+                }
+                stdout_receipt = receipt["execution"]["stdout"]
+                assert stdout_receipt["retainedBytes"] == _LOG_LIMIT
+                assert stdout_receipt["truncated"] is True
+                assert stdout_receipt["discardedObservedBytes"] > 0
+                for name, item in output_receipts.items():
+                    output_ref = OutputRef.model_validate(item["ref"])
+                    assert output_ref.model_dump() in envelope["outputs"]
+                    with outputs.resolve(
+                        actor, str(refs.workspace.root), output_ref.handle
+                    ) as resolved:
+                        payload = resolved.read()
+                    assert len(payload) == item["size"]
+                    assert (
+                        "sha256:" + hashlib.sha256(payload).hexdigest()
+                        == item["digest"]
+                    )
+                    if name == "rcc-stdout.log":
+                        assert len(payload) == _LOG_LIMIT
+                    elif name == "rcc-receipt.json":
+                        assert json.loads(payload)["status"] == "completed"
+                output = OutputRef.model_validate(
+                    output_receipts["generated-action-result.json"]["ref"]
+                )
                 with outputs.resolve(
                     actor, str(refs.workspace.root), output.handle
                 ) as resolved:
