@@ -4,6 +4,8 @@ The service validates scoped identities, canonical bytes and authorization.
 Registration and migrations belong to the common Database, never a side store.
 """
 
+from typing import Optional
+
 from pydantic.dataclasses import dataclass
 
 from actions.server._models import _db_rules
@@ -29,7 +31,7 @@ class FoundryDeploymentRevision:
     workspace_id: str
     deployment_id: str
     revision_id: str
-    foundry_package_revision_id: str
+    foundry_package_revision_id: Optional[str]
     selection_json: str
     snapshots_json: str
     _db_rules.foreign_keys.update(

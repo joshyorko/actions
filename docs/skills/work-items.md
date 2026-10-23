@@ -1075,3 +1075,17 @@ These checks cover four settled Chromium states, not all routes, transition fram
 manual keyboard/screen-reader behavior or other browsers. Preserve any earlier
 failure and its subject when a later audit passes; do not infer a product color fix
 from a timing-dependent result without identifying the failing element.
+
+## Managed client boundary
+
+Published Runtime1.0.4's `/api/work-items` is local SQLite CRUD, not authenticated
+Workspace/Deployment management. The candidate managed protocol is versioned at
+`/api/managed-work-items/v1`; its closed command/result schemas and exact
+permission/version handoff are in
+[the #132 consumer contract](../program/actions-next-managed-work-items-132.md).
+`create_router` requires a trusted authenticator and the real domain port; it
+never opens legacy storage or trusts caller-supplied actor/worker identity.
+A protocol factory or FileAdapter test does not prove a managed SQL server or
+installed VSIX. Negotiate actually implemented operations and explicit grants;
+never turn a managed denial into unscoped local CRUD. Review, queue ownership,
+business outcome, Run, Attempt and artifact authority remain distinct.

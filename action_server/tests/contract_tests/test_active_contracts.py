@@ -452,6 +452,13 @@ def test_active_guidance_and_ci_have_no_private_product_lane():
 def test_runtime_metadata_admits_installed_fenced_candidate_without_a_source_overlay():
     metadata = tomllib.loads((ROOT / "pyproject.toml").read_text())
     dependencies = metadata["tool"]["poetry"]["dependencies"]
+    assert dependencies["actions-core"] == {
+        "version": ">=1.1.0a2,<2.0.0",
+        "allow-prereleases": True,
+    }
+    assert metadata["tool"]["poetry"]["group"]["dev"]["dependencies"][
+        "actions-core"
+    ] == {"path": "../actions/", "develop": False}
     assert dependencies["actions-work-items"] == {
         "version": ">=0.5.0a1,<0.6.0",
         "allow-prereleases": True,
@@ -480,6 +487,7 @@ def test_template_manifests_pin_supported_worker_core():
         "advanced": "1.0.2",
         "basic": "1.0.2",
         "canvas-query": "1.0.3",
+        "canvas-first-boot": "1.0.3",
         "minimal": "1.0.2",
         "mcp-v2-showcase": "1.0.2",
         "workflow-producer-consumer": "1.0.2",
@@ -489,6 +497,12 @@ def test_template_manifests_pin_supported_worker_core():
         for manifest in sorted((REPO / "templates").glob("*/package.yaml"))
     }
     assert set(manifests) == set(expected_core_versions)
+    # This lane supplies an isolated fixture, not an admitted shipped starter.
+    for metadata in ("templates-prod.json", "templates-beta.json"):
+        catalog = json.loads((REPO / "templates/packaging" / metadata).read_text())
+        assert "canvas-first-boot" not in {
+            entry["id"] for entry in catalog["templates"]
+        }
 
     for template_name, manifest in manifests.items():
         dependencies = {
@@ -688,7 +702,7 @@ def test_runtime_clean_wheels_install_outside_checkout_in_both_uninstall_orders(
     runtime_files = _wheel_files(runtime_wheel)
     metadata_name = next(name for name in runtime_files if name.endswith("/METADATA"))
     assert (
-        "Requires-Dist: actions-core (>=1.0.2,<2.0.0)" in runtime_files[metadata_name]
+        "Requires-Dist: actions-core (>=1.1.0a2,<2.0.0)" in runtime_files[metadata_name]
     )
     assert (
         "Requires-Dist: actions-http-helper (>=1.0.3,<2.0.0)"

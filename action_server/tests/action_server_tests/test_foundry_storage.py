@@ -66,7 +66,7 @@ def test_upgrade_is_empty_and_shared_records_survive_a_fresh_interpreter(legacy)
     )
 
     location, workspace = legacy
-    assert CURRENT_VERSION == 17
+    assert CURRENT_VERSION == 18
     assert migrate_db(location)
     db = Database(location)
     with db.connect():

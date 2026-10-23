@@ -317,3 +317,32 @@ attach to unrelated existing services or publish a network listener/tunnel by
 default. MCP stdio stdout contains protocol only; diagnostics use stderr.
 The same services serve local/stdio and explicit authenticated standalone HTTP.
 No external plugin repo, live identity, credentials or tunnel change is included.
+
+
+### Package-less UI and deployment source contract
+
+The integration-owned forward schema18 makes
+`FoundryDeploymentRevision.foundry_package_revision_id: Optional[str]` nullable.
+It remains an actual FK for backend-bearing revisions. No synthetic Package,
+third manifest or sidecar database represents an empty Canvas.
+`DeploymentSpecification` now has `canvas_spec: CanvasSpec | None`,
+`canvas_application: CanvasApplicationRef | None` and
+`canvas_bindings: tuple[CanvasCapabilityBinding, ...]` alongside the existing
+Package/plan/provider selection. UI-only selections require the view and exact
+application source pin, empty Package/plan/binding sets and absent execution
+profiles. Backend selections retain the existing explicit requirements.
+
+Use `canvas_revision_digest(spec, bindings, packages)` for the immutable UI
+source identity. It hashes canonical alias-key spec plus ordered exact binding
+and Package references under `actions.canvas-application/v1`; it does not hash
+its own Deployment revision. `CanvasCapabilityBinding` has `binding_id` and
+`capability: CapabilityRef`. Every logical ID must match the spec and select a
+deployed capability. The Deployment owner must match the application owner.
+The common execution snapshot carries this exact application pin. These typed
+values do not grant actor permission, compiler admission or automatic activation.
+
+The SQL authoring adapter must stage full immutable Deployment revisions in
+`selection_json`, keep the latest edit separate from activation, and activate
+only through the one `FoundryDeploymentHead` CAS with receipt/audit. Staging is
+not execution authorization. No authoring SQL adapter or joined first-boot
+execution is claimed by the package-less storage/component tests alone.

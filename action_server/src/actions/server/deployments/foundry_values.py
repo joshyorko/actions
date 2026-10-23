@@ -7,11 +7,15 @@ manifest. Deployment records retain only scoped references and binding choices.
 
 from __future__ import annotations
 
+import hashlib
+import json
 from collections.abc import Sequence
 from typing import Literal, Protocol
 
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from actions.canvas_contract import CanvasSpec
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
+from actions.server.deployments.canonical import canonicalize_json
 from actions.server.deployments.ids import (
     BindingRequirementRef,
     CapabilityRef,
@@ -27,7 +31,11 @@ from actions.server.deployments.ids import (
     require_package_scope,
     require_workspace_scope,
 )
-from actions.server.run_outputs.types import Actor, ExecutionSnapshot
+from actions.server.run_outputs.types import (
+    Actor,
+    CanvasApplicationRef,
+    ExecutionSnapshot,
+)
 
 Permission = Literal["deploy", "execute"]
 PlanMode = Literal["locked", "default-among-allowed", "caller-may-choose"]
@@ -120,26 +128,124 @@ class CapabilityPlanPolicy(_FrozenValue):
         return self.default_plan
 
 
+class CanvasCapabilityBinding(_FrozenValue):
+    """A logical UI binding selects an exact admitted capability, never code."""
+
+    binding_id: str = Field(pattern=r"^[A-Za-z][A-Za-z0-9_-]{0,63}$")
+    capability: CapabilityRef
+
+
+def canvas_revision_digest(
+    spec: CanvasSpec,
+    bindings: Sequence[CanvasCapabilityBinding],
+    packages: Sequence[PackageRevisionRef],
+) -> str:
+    """Hash immutable UI source separately from its Deployment selection."""
+    value = {
+        "spec": spec.model_dump(mode="json", by_alias=True),
+        "bindings": sorted(
+            (binding.model_dump(mode="json") for binding in bindings),
+            key=lambda value: value["binding_id"],
+        ),
+        "packages": sorted(
+            (package.model_dump(mode="json") for package in packages),
+            key=lambda value: (
+                value["workspace_id"],
+                value["package_id"],
+                value["revision_id"],
+            ),
+        ),
+    }
+    encoded = canonicalize_json(
+        json.dumps(value, ensure_ascii=False, allow_nan=False).encode("utf-8")
+    )
+    return (
+        "sha256:"
+        + hashlib.sha256(b"actions.canvas-application/v1\x00" + encoded).hexdigest()
+    )
+
+
 class DeploymentSpecification(_FrozenValue):
     """Immutable binding and execution policy selected for new Runs."""
 
-    package_revisions: tuple[PackageRevisionRef, ...] = Field(min_length=1)
-    capability_plans: tuple[CapabilityPlanPolicy, ...] = Field(min_length=1)
+    package_revisions: tuple[PackageRevisionRef, ...] = ()
+    capability_plans: tuple[CapabilityPlanPolicy, ...] = ()
     bindings: tuple[BindingAssignment, ...] = ()
-    worker: WorkerProfileRevisionRef
-    policy: WorkspacePolicyRevisionRef
-    output_provider: ProviderProfileRevisionRef
+    worker: WorkerProfileRevisionRef | None = None
+    policy: WorkspacePolicyRevisionRef | None = None
+    output_provider: ProviderProfileRevisionRef | None = None
+    canvas_spec: CanvasSpec | None = None
+    canvas_application: CanvasApplicationRef | None = None
+    canvas_bindings: tuple[CanvasCapabilityBinding, ...] = ()
+
+    @field_validator("canvas_spec", mode="before")
+    @classmethod
+    def revalidate_canvas_wire_document(cls, value: object) -> object:
+        # Core deliberately accepts aliases at its public boundary. Serialize
+        # existing instances back to that wire grammar before deep validation.
+        if isinstance(value, CanvasSpec):
+            return json.loads(value.to_json())
+        return value
 
     @model_validator(mode="after")
     def validate_scoped_unique_references(self) -> DeploymentSpecification:
-        workspace_id = self.package_revisions[0].workspace_id
+        if (self.canvas_spec is None) != (self.canvas_application is None):
+            raise ValueError(
+                "CanvasSpec and application revision must be supplied together"
+            )
+        if self.canvas_spec is not None:
+            assert self.canvas_application is not None
+            if self.canvas_application.revision_id != canvas_revision_digest(
+                self.canvas_spec, self.canvas_bindings, self.package_revisions
+            ):
+                raise ValueError(
+                    "Canvas application revision differs from immutable source"
+                )
+            declared = set(self.canvas_spec.binding_ids)
+            actual = [binding.binding_id for binding in self.canvas_bindings]
+            if len(actual) != len(set(actual)) or set(actual) != declared:
+                raise ValueError(
+                    "Canvas logical bindings are missing, duplicated or undeclared"
+                )
+        elif self.canvas_bindings:
+            raise ValueError("Canvas bindings require a CanvasSpec")
+        profiles = (self.worker, self.policy, self.output_provider)
+        if not self.package_revisions:
+            if (
+                self.canvas_spec is None
+                or self.capability_plans
+                or self.bindings
+                or self.canvas_bindings
+                or any(ref is not None for ref in profiles)
+            ):
+                raise ValueError(
+                    "UI-only selection requires a CanvasSpec and no execution inputs"
+                )
+            return self
+        if not self.capability_plans or any(ref is None for ref in profiles):
+            raise ValueError(
+                "backend selection requires explicit plans and execution profiles"
+            )
+        workspace_id = self.workspace_id
         packages = set(self.package_revisions)
         if len(packages) != len(self.package_revisions):
             raise ValueError("Package Revisions must be unique")
         for package in self.package_revisions:
             require_workspace_scope(package, workspace_id)
-        for ref in (self.worker, self.policy, self.output_provider):
+        for ref in profiles:
+            assert ref is not None
             require_workspace_scope(ref, workspace_id)
+        if (
+            self.canvas_application is not None
+            and self.canvas_application.workspace_id != str(workspace_id.root)
+        ):
+            raise ValueError("Canvas application is outside the Deployment Workspace")
+        capabilities = {policy.capability for policy in self.capability_plans}
+        for canvas_binding in self.canvas_bindings:
+            if canvas_binding.capability not in capabilities:
+                raise ValueError(
+                    "Canvas binding capability is not selected for execution"
+                )
 
         policy_by_capability: set[CapabilityRef] = set()
         for plan_policy in self.capability_plans:
@@ -162,7 +268,11 @@ class DeploymentSpecification(_FrozenValue):
 
     @property
     def workspace_id(self) -> WorkspaceId:
-        return self.package_revisions[0].workspace_id
+        if self.package_revisions:
+            return self.package_revisions[0].workspace_id
+        if self.canvas_application is None:
+            raise ValueError("Deployment has no Workspace")
+        return WorkspaceId.model_validate(self.canvas_application.workspace_id)
 
 
 class DeploymentRevision(_FrozenValue):
@@ -188,9 +298,11 @@ class DeploymentRevision(_FrozenValue):
             raise ValueError("Deployment revision sequence and parent disagree")
         if (self.change_kind == "rollback") != (self.rollback_of is not None):
             raise ValueError("rollback target and change kind disagree")
-        require_workspace_scope(
-            self.specification.package_revisions[0], ref.workspace_id
-        )
+        if self.specification.workspace_id != ref.workspace_id:
+            raise ValueError("Deployment specification is outside its owner")
+        app = self.specification.canvas_application
+        if app is not None and app.app_id != str(ref.deployment_id.root):
+            raise ValueError("Canvas application does not match Deployment owner")
         return self
 
 

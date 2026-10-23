@@ -368,7 +368,8 @@ def test_cibuildwheel_checks_each_final_repaired_wheel():
         'python "{project}/scripts/verify_published_runtime_floor.py" '
         '--installed-wheel "{wheel}" --checkout-root "{project}" '
         "${{ github.event_name == 'pull_request' && "
-        "'--candidate-sdk-wheelhouse {project}/candidate-sdk-wheelhouse' || '' }}"
+        "'--candidate-sdk-wheelhouse {project}/candidate-sdk-wheelhouse "
+        "--candidate-core-wheelhouse {project}/candidate-core-wheelhouse' || '' }}"
     )
     assert set(build["env"]["CIBW_BUILD"].split()) == {
         f"cp{python}-*{platform}*{architecture}"
@@ -557,3 +558,109 @@ def test_candidate_producer_receipt_survives_cibuildwheel_project_only_layout(
             module.select_candidate_sdk(wheelhouse, project)
     else:
         assert module.select_candidate_sdk(wheelhouse, project) == (wheel, "1.1.0a2")
+
+
+def test_explicit_core_candidate_does_not_relax_published_helper_or_default_floor(
+    tmp_path,
+):
+    core = _wheel(tmp_path, "actions-core", "1.1.0a1")
+    runtime = _wheel(tmp_path, "actions-runtime", "1.1.0a8")
+    command = module.install_command(
+        Path("/consumer/python"), runtime, tmp_path / "report.json", candidate_core=core
+    )
+    assert str(core.resolve()) in command
+    assert "actions-core==1.0.2" not in command
+    assert "actions-http-helper==1.0.3" in command
+    assert module.EXPECTED_CORE == "1.0.2"
+    assert module.EXPECTED_RUNTIME == "1.0.4"
+    assert "actions-core==1.0.2" in module.install_command(
+        Path("/consumer/python"), runtime, tmp_path / "report.json"
+    )
+
+
+@pytest.mark.parametrize("alter", [None, "source", "core", "wheel", "runtime"])
+def test_core_candidate_producer_survives_project_only_mount(
+    tmp_path, monkeypatch, alter
+):
+    project = tmp_path / "project"
+    project.mkdir()
+    raw = '[tool.poetry]\nversion="1.1.0a8"\n'
+    (project / "pyproject.toml").write_text(raw)
+    wheelhouse = project / "candidate-core-wheelhouse"
+    wheelhouse.mkdir()
+    wheel = _wheel(wheelhouse, "actions-core", "1.1.0a1")
+    core = '[tool.poetry]\nname="actions-core"\nversion="1.1.0a1"\n'
+    receipt = {
+        "schema": "actions.candidate-core-producer/v1",
+        "source_sha": "a" * 40,
+        "runtime_pyproject_sha256": hashlib.sha256(raw.encode()).hexdigest(),
+        "core_pyproject": core,
+        "core_pyproject_sha256": hashlib.sha256(core.encode()).hexdigest(),
+        "wheel": {
+            "filename": wheel.name,
+            "sha256": hashlib.sha256(wheel.read_bytes()).hexdigest(),
+        },
+    }
+    if alter == "source":
+        receipt["source_sha"] = "b" * 40
+    if alter == "core":
+        receipt["core_pyproject"] += "# changed\n"
+    if alter == "wheel":
+        receipt["wheel"]["sha256"] = "0" * 64
+    if alter == "runtime":
+        receipt["runtime_pyproject_sha256"] = "0" * 64
+    (wheelhouse / "producer.json").write_text(json.dumps(receipt))
+    monkeypatch.setenv("ACTIONS_CANDIDATE_SOURCE_SHA", "a" * 40)
+    if alter:
+        with pytest.raises(ValueError, match="producer"):
+            module.select_candidate_core(wheelhouse, project)
+    else:
+        assert module.select_candidate_core(wheelhouse, project) == (wheel, "1.1.0a8")
+
+
+def test_candidate_core_report_requires_exact_local_bytes_and_keeps_helper_pin(
+    tmp_path,
+):
+    core = _wheel(tmp_path, "actions-core", "1.1.0a1")
+    helper = module.EXPECTED_PUBLIC_PACKAGES["actions-http-helper"]
+    payload = {
+        "install": [
+            {
+                "metadata": {"name": "actions-core", "version": "1.1.0a1"},
+                "download_info": {
+                    "url": core.resolve().as_uri(),
+                    "archive_info": {
+                        "hashes": {
+                            "sha256": hashlib.sha256(core.read_bytes()).hexdigest()
+                        }
+                    },
+                },
+            },
+            {
+                "metadata": {
+                    "name": "actions-http-helper",
+                    "version": helper["version"],
+                },
+                "download_info": {
+                    "url": helper["url"],
+                    "archive_info": {"hashes": {"sha256": helper["sha256"]}},
+                },
+            },
+        ]
+    }
+    report = tmp_path / "report.json"
+    report.write_text(json.dumps(payload))
+    assert (
+        module.verify_public_package_report(report, candidate_core=core)[
+            "actions-core"
+        ]["version"]
+        == "1.1.0a1"
+    )
+    with pytest.raises(RuntimeError, match="version"):
+        module.verify_public_package_report(report)
+    payload["install"][0]["download_info"]["archive_info"]["hashes"]["sha256"] = (
+        "0" * 64
+    )
+    report.write_text(json.dumps(payload))
+    with pytest.raises(RuntimeError, match="SHA-256"):
+        module.verify_public_package_report(report, candidate_core=core)

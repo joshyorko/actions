@@ -5,10 +5,17 @@ from __future__ import annotations
 import base64
 import re
 from dataclasses import dataclass
-from typing import Literal
+from typing import Literal, Protocol
 from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    field_validator,
+    model_serializer,
+    model_validator,
+)
 
 from actions.server.data_queries.invoices import InvoiceLimits
 from actions.server.deployments.ids import (
@@ -92,8 +99,16 @@ class ExecutionSnapshot(_Value):
     runtime_kind: str = Field(min_length=1, max_length=128)
     capability_schema_digest: str = Field(pattern=r"^sha256:[0-9a-f]{64}$")
     action_id: str = Field(min_length=1, max_length=128)
+    capability_authority: Literal["legacy-action", "package-revision"] = "legacy-action"
     data_binding: InvoiceBinding | None = None
     canvas_application: CanvasApplicationRef | None = None
+
+    @model_serializer(mode="wrap")
+    def legacy_compatible_wire(self, handler):
+        data = handler(self)
+        if self.capability_authority == "legacy-action":
+            data.pop("capability_authority", None)
+        return data
 
     @model_validator(mode="after")
     def consistent_scope(self):
@@ -189,3 +204,26 @@ class StagedSeal:
 
     receipt: SealReceipt
     ownership: object
+
+
+@dataclass(frozen=True)
+class AdmittedActionSchema:
+    """Read-only verified Package schema view; never another Action state store."""
+
+    action_id: str
+    capability: CapabilityRef
+    runtime_plan: RuntimePlanRef
+    input_schema: str
+    output_schema: str
+
+
+class CapabilitySchemaPort(Protocol):
+    """Trusted common Package adapter for explicitly native Run admissions."""
+
+    def schema_for(self, snapshot: ExecutionSnapshot) -> AdmittedActionSchema:
+        ...
+
+    def authorize(
+        self, actor: Actor, snapshot: ExecutionSnapshot, operation: str
+    ) -> None:
+        ...

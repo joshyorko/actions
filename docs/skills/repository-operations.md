@@ -4886,3 +4886,90 @@ neither those ZIP bytes nor their digest. The existing measure/stage/re-read
 helpers attest only the explicitly selected set, not selection completeness,
 source trust or a globally atomic snapshot. Compiler hash/admission rules in
 the handoff remain provisional until their own implementation gates pass.
+
+
+The semantic CanvasSpec Core contract is part of the installed dependency floor,
+not an editable source overlay. Runtime candidate metadata requires Core
+`>=1.1.0a2,<2.0.0`; package-local development installs Core noneditably. Its
+public wire keys are camelCase, `from_python` is the explicit Python-name
+constructor, and empty `visibility` means no audience. Numeric `version_info`
+uses the release tuple even for provisional versions. The Core suite and
+installed-candidate contracts cover these boundaries.
+
+Candidate wheel verification carries Core and SDK in separate wheelhouses.
+`write_candidate_sdk_producer.py --distribution actions-core` binds the exact
+Core project bytes, Runtime project hash, source SHA and wheel digest before
+project-only cibuildwheel tests. Pass `--candidate-core-wheelhouse` explicitly;
+the default published Core/Helper floor remains pinned and must not accept an
+unbound local candidate. Candidate origin, installed RECORD members, module
+prefix and selected wheel digest are checked independently of resolver success.
+
+The declared frontend `npm test` runs both Runtime and Canvas View suites.
+Canvas View's Vitest include covers every `src/**/*.test.tsx`, including the
+semantic renderer; the Runtime topology test guards that union. Quality/type
+checks, a Canvas build and the official bridge harness remain separate gates.
+The harness's optional real-Runtime case being skipped is not bridge-to-domain
+or authenticated-client acceptance. Inject domain dispatch/status/artifact
+adapters into the semantic renderer; its logical binding labels confer no
+Runtime capability or authorization.
+
+Runtime action import probes must parse the complete PEP 440 Core version and
+compare its numeric release tuple; splitting dotted components with `int`
+rejects provisional Core versions before action discovery. The existing
+vendored version parser handles alpha, release-candidate and dev/local suffixes
+and still rejects malformed probe output. Package metadata and no-managed-env
+import tests exercise the actual child interpreter boundary.
+
+
+Schema18 permits a null Package integrity anchor only to represent a UI-only
+Canvas selection. Its forward migration preserves schema17 rows and retains
+the real Package FK; nullable does not mean an unknown Package is admitted.
+SQLite rebuilds this one table transactionally; PostgreSQL drops only the
+column's NOT NULL constraint. Preserve a coordinated pre-upgrade backup for
+binary rollback: changing a migration marker does not reverse either schema.
+
+The Deployment selection carries the public CanvasSpec, exact logical
+capability bindings and an independently hashed Canvas application revision.
+That source digest is separate from the Deployment revision digest, avoiding
+self-referential hashing. Revalidate existing Core models through their alias
+wire grammar before embedding them; round-trip serialization uses aliases.
+Package-less selections require a view and prohibit plans, bindings and
+execution profiles. Backend selections require explicit plans/profiles and
+retain every Package check; the singular FK is only an integrity anchor.
+The service includes the Canvas application pin in each execution snapshot.
+Neither a CanvasSpec nor an empty snapshot map grants execution permission.
+
+Deployment mutation reauthorizes all selected references after acquiring the
+common Workspace lock, then atomically writes the immutable selection, observed
+head/lock-version CAS, actor-scoped request receipt and audit event. Replay
+reauthorizes and validates the original immutable receipt. Isolated Package
+port doubles qualify these consumer semantics, not genuine compiler admission
+or end-to-end Run execution. Those require their own combined gates.
+
+
+`SqlAuthoringAuthority` stages complete immutable Deployment revisions in the
+same SQL records. Bounded edit history is a linear revision sequence, not an
+active pointer. `canvas.create`/`canvas.apply` atomically persist edit CAS,
+actor-scoped receipt and audit without creating a Deployment head. Explicit
+release activates the exact latest candidate; rollback selects a retained exact
+revision through the same head CAS without erasing edits or audit. Even a
+persisted execution snapshot is unavailable to `resolve` until activation has
+an audit receipt. Backend authoring fails closed without the common Package
+build-evidence adapter; caller-supplied phase flags alone are insufficient.
+
+Foundry authorization reads live common SQL Workspace state and explicit
+FoundryAccessGrant operations. Exact typed reference grants remain separate
+from workspace/app permissions; Run/output permissions do not imply deployment
+or generated-source permission. Mutation rechecks policy under the Workspace
+lock. Idempotent staging compares the retained full selection/base as well as
+the request fingerprint; create excludes only its server-allocated application
+UUID. Activation replay also binds the audited prior head and exact target.
+The native SDK protocol/SQL harness uses a synthetic authenticated context and
+static HTML sentinel: it proves tools/resource metadata and SQL orchestration,
+not installed transport, rendered official View, generated execution or E1.
+
+The boot lane's `templates/canvas-first-boot` directory is an isolated fixture.
+Its worker Core pin is checked alongside every other checked-in manifest, and
+contract tests separately require it to remain absent from both shipped
+catalogs. Adding a fixture must update the explicit inventory without silently
+admitting a new starter or weakening the existing dependency-pin checks.
