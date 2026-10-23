@@ -33,3 +33,10 @@ backend authorization.
 The Python model is frozen and serializes to canonical UTF-8 JSON. Revisions
 are immutable bytes supplied to the owning lifecycle API; the CanvasSpec does
 not repeat Workspace, Deployment, or Package revision identities.
+
+Public document validation uses the schema's camelCase keys exactly:
+`CanvasSpec.from_json` and `validate_canvas_spec` reject Python field names such
+as `schema_version` and `binding_id`. Python callers that prefer field names
+can use `CanvasSpec.from_python`. An empty `visibility` list means no host
+audience and must remain empty; it is neither expanded to a default nor an
+authorization decision.
