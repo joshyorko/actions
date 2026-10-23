@@ -1034,11 +1034,15 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
                     if isinstance(command, Claim):
                         if not isinstance(replayed, ClaimResult):
                             raise ManagedError("storage_unavailable")
-                        self._validate_claim_replay(caller, command, replayed, scope)
+                        replayed = self._validate_claim_replay(
+                            caller, command, replayed, scope
+                        )
                     elif isinstance(command, Renew):
                         if not isinstance(replayed, ClaimResult):
                             raise ManagedError("storage_unavailable")
-                        self._validate_renew_replay(caller, command, replayed, scope)
+                        replayed = self._validate_renew_replay(
+                            caller, command, replayed, scope
+                        )
                     return replayed
                 except ManagedError:
                     raise
@@ -1107,20 +1111,24 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
         command: Claim,
         result: ClaimResult,
         scope: CanvasResultScope,
-    ) -> None:
+    ) -> ClaimResult:
         claim = result.claim
         if claim is None:
-            return
+            if result.item is not None:
+                raise ManagedError("storage_unavailable")
+            return ClaimResult(
+                item=None,
+                claim=None,
+                lease_deadline_ms=None,
+                server_time_ms=str(_now(self.db)),
+            )
         if (
             claim.queue != command.queue
             or result.item is None
             or result.item.queue != command.queue
         ):
             raise ManagedError("storage_unavailable")
-        self._require_worker(claim.owner_id, caller.worker_id)
-        self._require_current_claim(command.queue, claim)
-        row = self._item_row(command.queue, claim.item_id)
-        self._review_for_item(caller, command.queue, scope, row)
+        return self._current_claim_result(caller, command.queue, claim, scope)
 
     def _validate_renew_replay(
         self,
@@ -1128,17 +1136,41 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
         command: Renew,
         result: ClaimResult,
         scope: CanvasResultScope,
-    ) -> None:
+    ) -> ClaimResult:
         if (
             result.claim != command.claim
             or result.item is None
             or result.item.queue != command.queue
         ):
             raise ManagedError("storage_unavailable")
-        self._require_worker(command.claim.owner_id, caller.worker_id)
-        self._require_current_claim(command.queue, command.claim)
-        row = self._item_row(command.queue, command.claim.item_id)
-        self._review_for_item(caller, command.queue, scope, row)
+        return self._current_claim_result(caller, command.queue, command.claim, scope)
+
+    def _current_claim_result(
+        self,
+        caller: ManagedCaller,
+        queue: QueueRef,
+        claim: ClaimRef,
+        scope: CanvasResultScope,
+    ) -> ClaimResult:
+        self._require_worker(claim.owner_id, caller.worker_id)
+        row = self._require_current_claim(queue, claim)
+        item = self._item_view(caller, queue, scope, row)
+        if item.claim != claim or item.lease_deadline_ms is None:
+            raise ManagedError("stale_claim")
+        server_time_ms = _now(self.db)
+        try:
+            if int(item.lease_deadline_ms) <= server_time_ms:
+                raise ManagedError("stale_claim")
+        except ManagedError:
+            raise
+        except Exception:
+            raise ManagedError("storage_unavailable") from None
+        return ClaimResult(
+            item=item,
+            claim=claim,
+            lease_deadline_ms=item.lease_deadline_ms,
+            server_time_ms=str(server_time_ms),
+        )
 
     def _preflight_mutation(
         self,
@@ -1342,7 +1374,9 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
             raise ManagedError("unsupported_operation")
         raise ManagedError("unsupported_operation")
 
-    def _require_current_claim(self, queue: QueueRef, claim: ClaimRef) -> None:
+    def _require_current_claim(
+        self, queue: QueueRef, claim: ClaimRef
+    ) -> FencedWorkItem:
         row = self._item_row(queue, claim.item_id)
         try:
             lease_expired = int(row.claim_deadline_ms) <= _now(self.db)
@@ -1356,6 +1390,7 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
             or lease_expired
         ):
             raise ManagedError("stale_claim")
+        return row
 
     def _worker(self, scope: CanvasResultScope) -> InvoiceWorkerService | None:
         if self.worker_for is None:
