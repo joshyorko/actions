@@ -1,0 +1,74 @@
+{
+  "source": "b6a82488aa4a9b0091acea95ba63fa378f11dbaa",
+  "runtime_version": "1.1.0a18",
+  "imported_execution_lane": "PR33155988663b2003067476d764383a414a1855dd08f as6c748752; no log/lineage follow-on imported yet",
+  "status": "CRITICAL_REAL_SQL_RCC_GATES_PASS_PORTABLE_PENDING",
+  "evidence": "/workspace/actions-327-state/evidence/reviewed-generated-rcc-final-20261023/2664b17c-0841-438b-a6b4-5dff26fb6a35",
+  "command": "bash /workspace/actions-327-state/run-prepared python action_server/scripts/verify_invoice_queries.py --full --compiler-receipt /workspace/actions-327-state/compiler-acceptance/3e744f96-749a-47e5-84b9-7e7f297bc8b9/prepared.json --evidence-dir /workspace/actions-327-state/evidence/reviewed-generated-rcc-final-20261023",
+  "counts": {
+    "foundry_storage": {
+      "tests": 133,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "components": {
+      "tests": 161,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "invoice": {
+      "tests": 129,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "package_compiler": {
+      "tests": 6,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    }
+  },
+  "portable": "RUNNING; no result claimed",
+  "static": "Configured lint/typecheck438PASS; Markdown lint unavailable",
+  "proof": [
+    "Only explicit exact-result approval supplies Work Item; source bytes determine generated value:str input.",
+    "Live reviewer/source/Package authorization and actual Work Item/Run fences on renewal, stage and atomic terminal publication.",
+    "Duplicate delivery, expired/replaced claim, revoked reviewer, queue cancellation and SQL rollback probes.",
+    "Explicit proven-no-admitted-launch recovery preserves old/new tickets in common request/audit; any launch marker blocks this route.",
+    "Genuine generated invoice summary computes2rows/12900cents through actual RCC18.19.3 in all4SQLite/PostgreSQL-control x DuckDB/PostgreSQL-data combinations.",
+    "Fresh -I interpreter reconstructs native Package/SQL/provider/dispatch and replays completed ticket plus authorized scoped artifact readback without re-execution."
+  ],
+  "retained_failure": {
+    "receipt": "/workspace/actions-327-state/evidence/reviewed-generated-rcc-frozen-20261023/3d998984-2f4a-4ee3-8def-6a646915fcba/receipt.json",
+    "facts": "SQL129/components161/invoice129 passed; RCC3passed3failed during compilation, diagnostics obscured by non-string assertion message; portable not run. Disk free471138304bytes. Original phase cause unestablished.",
+    "repair": "String diagnostic, explicit marked task-owned serial RCC view cleanup. Artifacts/catalog/evidence retained; unrecognized partial view not removed."
+  },
+  "cleanup_receipts": {
+    "/workspace/actions-327-state/evidence/reviewed-generated-rcc-final-20261023/2664b17c-0841-438b-a6b4-5dff26fb6a35/compiler-view-cleanup/3ee2cf6254fdb03c/receipt.json": "b06db7ac4e36966bf83c19f98aa84c1125332f31e7478897f5be1770319c9c1a",
+    "/workspace/actions-327-state/evidence/reviewed-generated-rcc-final-20261023/2664b17c-0841-438b-a6b4-5dff26fb6a35/compiler-view-cleanup/4dbff84e1f23dae8/receipt.json": "dcead7c42aa14b4dad39729628afee4c641f5ab968ed90f9adf3d59fae39baab",
+    "/workspace/actions-327-state/evidence/reviewed-generated-rcc-final-20261023/2664b17c-0841-438b-a6b4-5dff26fb6a35/compiler-view-cleanup/29919f6373cebe90/receipt.json": "0f3b05f0f5355daa5b2fb5ffe0f79c2adbfad8bc34af9196cc86cbbe4597f2c0",
+    "/workspace/actions-327-state/evidence/reviewed-generated-rcc-final-20261023/2664b17c-0841-438b-a6b4-5dff26fb6a35/compiler-view-cleanup/75959fbecb25ae2a/receipt.json": "1a93e0f134e64de9f6087bfa5ca3a3bd428252fbdde761fd842637b069f13a11",
+    "/workspace/actions-327-state/evidence/reviewed-generated-rcc-final-20261023/2664b17c-0841-438b-a6b4-5dff26fb6a35/compiler-view-cleanup/b0af49df183111e9/receipt.json": "b198eb4f3f57414938dd4c40737d93ad937979d4124fe638cba818a0f0e47ec2",
+    "/workspace/actions-327-state/evidence/reviewed-generated-rcc-final-20261023/2664b17c-0841-438b-a6b4-5dff26fb6a35/compiler-view-cleanup/32955201f54eb8db/receipt.json": "d9a396be22f5dd99954101a9ed6c9c9c406fa9f7333ffc139e012820b23a8ff4"
+  },
+  "limits": [
+    "Trusted host/private source proof; native snapshot registration in fixture is not full active-Deployment resolution or public API admission.",
+    "Normal startup/generated app operations and managed router/worker remain unjoined; semantic a17 host remains read-only.",
+    "Narrow value:str sealed-result mapping, not arbitrary parameter/effect execution.",
+    "Actual process crash-after-launch reconciliation is blocked, never auto-retried; broader effect/retry/dead-letter policy remains open.",
+    "RCC launch/structured logs/receipt follow-on pending on existing PR331 owner.",
+    "No a18 wheel built/installed yet; a17 installed MCP/Basic Host acceptance stays separately source-bound.",
+    "Codex401 no auth retry; E1 NEEDS_OPERATOR/Dakota STOP; celld NO-GO; all release matrix gates remain."
+  ],
+  "rollback": "No DDL. Preserve schema18 SQL/objects/source/Run result/recovery receipts together; never clear launch or migration/bootstrap markers to claim no effect.",
+  "documentation": {
+    "file": "docs/skills/provenance-observability.md",
+    "delta": "Exact reviewed input mapping, dual-fence/atomic publication/cancellation, explicit no-launch recovery and marked task-owned RCC view cleanup boundaries.",
+    "evidence": "New contract-first negative/rollback/recovery tests, strict SQL133 and actual6-case RCC+fresh-interpreter execution gate."
+  },
+  "upstream_disposition": "Existing RCC report remains draft only. Original new compiler failure cause unestablished, no confirmed new upstream defect.",
+  "communication_block": "PR331 tool comment rejected by automatic approval review as outside authorized327/328 destinations; no comment created or retry. Required interfaces delivered in assistant checkpoints."
+}
