@@ -112,6 +112,17 @@ closed until the concrete Package evidence adapter is supplied. CLI/zero-touch
 wiring, model-facing typed execution, second Python-backed app and the complete
 installed cross-client milestone remain open.
 
+The [native Run authority receipt](evidence/actions-next-327/cloud-native-run-authority-20261023.json)
+qualifies source `6f519b5ec5b1546ba666f7dd3a250a68cc09cb21` (Runtime1.1.0a14).
+The existing Run service accepts an explicit trusted Package schema port and
+rechecks live source authorization; native snapshots cannot fall back to legacy
+Action rows. Legacy snapshot wire bytes remain unchanged and an actual old-source
+codec rejects the new explicit marker. Strict SQL78, components161 and invoice129
+passed without skips; portable2002 passed/14 skipped, static427 passed, owned
+cleanupPASS. These are source/port proofs: concrete Package admission, generated
+native business execution, installed native clients and mounted managed service
+are still pending. No new DDL or publication occurs at this checkpoint.
+
 Source keys (exact observed branch heads, not interchangeable acceptance):
 
 - **I**: qualified integration `9ca4551877f065e7355dcf48da0c0e3e37b0688a`, Runtime1.1.0a11,
