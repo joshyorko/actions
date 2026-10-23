@@ -143,6 +143,7 @@ def main():
         ROOT / "action_server/tests/action_server_tests/test_canvas_lifecycle.py",
         ROOT / "action_server/tests/action_server_tests/test_knowledge_collections.py",
         ROOT / "action_server/tests/action_server_tests/test_candidate_work_items.py",
+        ROOT / "action_server/tests/action_server_tests/test_auth_route_inventory.py",
         ROOT / "work-items/src/actions/work_items/_adapters/_sql_review.py",
         ROOT / "work-items/pyproject.toml",
         ROOT / "action_server/src/actions/server/_models.py",

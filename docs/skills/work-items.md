@@ -1100,3 +1100,11 @@ retaining the original request/audit. The managed wire uses `DONE` for SDK
 boundary and verify retained RCC evidence, not manufacture a client result.
 The ordinary route mount remains unavailable without explicit trusted service
 and authentication dependencies; route presence alone is not managed readiness.
+Keep its schema/capabilities/operations routes explicitly classified in the
+assembled authentication inventory. The managed identity category is distinct
+from public exceptions; the inventory must still reject every unknown route.
+When disk headroom is small, serialize full source and installed RCC acceptance.
+Per-case cleanup of recognized owned views does not bound simultaneous pytest,
+PostgreSQL and incomplete view allocations. Preserve failed receipts, check
+active processes and use RCC's supported exact-view cleanup; never remove
+unrecognized partial directories or immutable caches to force a green result.
