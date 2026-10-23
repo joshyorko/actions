@@ -1,28 +1,32 @@
 # Semantic Canvas renderer
 
-This directory owns reusable React primitives for rendering a validated
-CanvasSpec. It does not parse or define the serialized schema. The canonical
-schema, size/depth limits, node vocabulary, and malformed-spec validator belong
-to `apps/canvas-view/src/canvas-contract/` (issue #100). The renderer will
-consume that contract when its committed interface is available.
+This directory owns reusable React components for the canonical
+`actions.canvas-spec/v1` contract from PR #330 (`96e255c729becf63dec14937b8de33d2fb8e11ad`).
+`fixtures/canvas-spec-v1.fixture.json` is a byte-for-byte snapshot of PR #330's
+positive fixture so this isolated lane can test the consumer before the source
+contract is integrated. PR #330 remains the canonical schema and fixture
+owner; this snapshot is not a second schema definition.
 
-The current primitives provide:
+The pure `SemanticCanvasRenderer` consumes the validated document plus injected
+typed adapters. Logical `bindingId` values resolve only through those adapters;
+the document cannot select tools, URLs, files, credentials, or execution
+expressions. Workspace, Deployment, authorization, and official MCP Apps
+bridge authority remain host responsibilities. The host must provide a
+`scopeKey` containing the authorized app and binding scope, immutable revision,
+and node identity so a changed scope remounts forms and clears old input and
+results.
 
-- `SemanticCanvas` for title, revision, preview state, and audience filtering.
-- `SemanticForm` for typed text input, validation, a logical binding reference,
-  injected dispatch, and rendering a returned result.
-- `SemanticTable` for safe text cells, accessible headers, and empty states.
-- `SemanticStatus` for bounded status and error text.
-- `CapabilityRef` and `CapabilityDispatcher` as a compile-time typed adapter
-  surface. A reference names only a logical `bindingId`; it is not an authority
-  token. The host must resolve it against server-owned bindings before calling
-  an MCP Apps bridge.
+The renderer composes stack, text, form, table, status, and artifact nodes.
+Integer and boolean form fields are converted to JSON number and boolean
+values. Tables use their declared `rowsKey` and display cell data as plain
+text. Empty visibility hides the title, revision, and content with a generic
+notice. Visibility is an audience projection, not authorization. Preview mode
+does not dispatch forms, read live status, or open artifacts.
 
-Specs must not supply executable callbacks, tool names, URLs, file paths,
-credentials, or server authority. The renderer does not interpret text as HTML.
-The canonical validator remains responsible for rejecting unsupported schema
-versions/features and enforcing whole-document limits. Component-level checks
-here are defense in depth, not a replacement for that validator.
+Local structural checks protect the component boundary from malformed
+documents, but the central #100 validator remains responsible for canonical
+schema validation, cross-field rules, and document limits. `McpCanvasView.tsx`,
+`src/canvas-contract/**`, and official bridge wiring are integrator-owned.
 
 ## Tests
 
@@ -36,10 +40,8 @@ npx tsc --noEmit --strict --target ESNext --lib DOM,ESNext --module ESNext --jsx
 CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium npx playwright test --config apps/canvas-view/src/semantic-renderer/playwright.config.ts
 ```
 
-The Playwright check and `artifacts/component-harness.png` use a component
-harness with synthetic dispatch. They do not demonstrate a Runtime-hosted
-Canvas preview or authenticated ChatGPT E1. Bridge wiring remains at the
-integrator-owned Canvas View boundary and will be covered after the canonical
-contract and bridge adapter are allocated.
+Component and browser harness tests use test adapters with synthetic
+dispatch. They do not demonstrate the Runtime-hosted MCP Apps bridge or
+authenticated ChatGPT E1. The existing screenshot has the same limited scope.
 
-![Chromium component harness showing synthetic form dispatch and table result](./artifacts/component-harness.png)
+![Chromium component harness with synthetic form dispatch and result; not Runtime or ChatGPT E1](./artifacts/component-harness.png)

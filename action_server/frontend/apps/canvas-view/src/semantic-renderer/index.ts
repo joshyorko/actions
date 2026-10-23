@@ -1,21 +1,29 @@
 export {
     SemanticCanvas,
+    SemanticCanvasRenderer,
     SemanticForm,
     SemanticStatus,
     SemanticTable,
 } from "./components";
 export type {
     SemanticCanvasProps,
+    SemanticCanvasRendererProps,
     SemanticFormProps,
     SemanticStatusProps,
     SemanticTableProps,
 } from "./components";
 export { createCapabilityRef } from "./types";
 export type {
-    CanvasAudience,
+    CanvasNode,
+    CanvasSpecDocument,
+    CanvasVisibility,
     CanvasViewer,
     CapabilityDispatcher,
     CapabilityRef,
-    SemanticTextField,
-    TableColumn,
+    SemanticArtifactResult,
+    SemanticBindingStatus,
+    SemanticFieldType,
+    SemanticFormField,
+    SemanticFormInput,
+    SemanticRendererAdapters,
 } from "./types";
