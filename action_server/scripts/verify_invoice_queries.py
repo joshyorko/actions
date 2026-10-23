@@ -218,15 +218,14 @@ print(json.dumps(identities))
             name,
             "--label",
             "actions.release327.attempt=" + attempt,
-            "--memory=768m" if args.full else "--memory=256m",
+            "--memory=768m",
             "--cpus=1",
             "--pids-limit=128",
             "--tmpfs",
-            # The full package repeats schema-heavy SQL cases after the focused
-            # gates. PostgreSQL WAL exhausted 128 MiB before that run finished.
-            "/var/lib/postgresql/data:size=512m"
-            if args.full
-            else "/var/lib/postgresql/data:size=128m",
+            # Focused Foundry/managed gates are schema-heavy too. Their WAL
+            # exhausted the old 128 MiB mount before exact-claim tests started.
+            # Keep the same bounded storage and safety settings as the full gate.
+            "/var/lib/postgresql/data:size=512m",
             "--publish",
             "127.0.0.1::5432",
             "--env",

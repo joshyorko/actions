@@ -54,6 +54,11 @@ FIFO and compare afterward for an exact-result UI request: that already leases
 an unrelated approved result. Runtime1.1.0a19 admits the noneditable a2 SDK floor
 through its project/lock metadata; an older SDK must not substitute FIFO.
 No schema, row-format or second queue is introduced by this method.
+The focused Runtime verifier uses the same bounded PostgreSQL memory/tmpfs
+budget as its full selection: repeated Foundry/managed schemas exhausted the
+former 128 MiB focused mount's WAL before later cases could start. A fixture
+DiskFull and ensuing recovery/connection errors do not prove queue failures.
+Retain that failed receipt; do not disable WAL durability to fit the old budget.
 Review, Work Item, Run and Attempt remain distinct: approval starts no new Run,
 Attempt or RCC process. Worker linkage and external effect reconciliation require
 separate proof before admitting execution.
