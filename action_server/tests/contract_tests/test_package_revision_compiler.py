@@ -210,6 +210,7 @@ def test_compiler_emits_schema_conformant_immutable_package_and_plan() -> None:
     Draft202012Validator(json.loads(PACKAGE_SCHEMA.read_text())).validate(manifest)
     assert manifest["schemaVersion"] == "actions.package-revision/v1-draft"
     assert manifest["capabilities"][0]["kind"] == "action"
+    assert manifest["capabilities"][0]["id"] == "action.generated_echo"
     assert manifest["runtimePlans"][0]["runtimeKind"] == "rcc"
     assert manifest["sourceArtifact"]["mediaType"] == (
         "application/vnd.actions.package-source+zip"
