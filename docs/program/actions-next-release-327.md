@@ -99,7 +99,8 @@ provisional, unpublished candidates. Real SQL73, components161, invoice/output12
 and genuine RCC compiler27 passed. Full selection1982pass/14skip had one
 fixture-inventory failure; installed39pass had the same one failure. The
 explicit unbundled fixture inventory/pin correction passed5 focused cases;
-full/installed revalidation is pending. Configured static421 passed. No failed
+final revalidation at5c63ea271230de6f47ed442ab64fcede37577926 passed
+full1983/14skip and installed40; owned cleanupPASS. Configured static421 passed. No failed
 receipt is relabeled green.
 
 The genuine MCP SDK protocol harness now authors, stages, explicitly releases,
