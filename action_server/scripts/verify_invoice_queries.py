@@ -104,6 +104,7 @@ def main():
         ),
         ROOT / "action_server/tests/action_server_tests/test_native_run_authority.py",
         ROOT / "action_server/tests/action_server_tests/test_generated_work_item_execution.py",
+        ROOT / "action_server/tests/action_server_tests/test_reviewed_exact_claim.py",
         ROOT / "action_server/tests/contract_tests/test_reviewed_generated_rcc.py",
         ROOT / "action_server/tests/contract_tests/test_foundry_rcc_execution.py",
         ROOT / "action_server/tests/contract_tests/test_package_revision_compiler.py",
@@ -188,7 +189,7 @@ sdk = distribution('actions-work-items')
 module = importlib.import_module('actions.work_items._adapters._sql_review')
 path = Path(module.__file__).resolve()
 expected = source.parent.parent / 'work-items/src/actions/work_items/_adapters/_sql_review.py'
-if sdk.version != '0.5.0a1' or not path.is_relative_to(Path(sys.prefix).resolve()) or path.read_bytes() != expected.read_bytes():
+if sdk.version != '0.5.0a2' or not path.is_relative_to(Path(sys.prefix).resolve()) or path.read_bytes() != expected.read_bytes():
     raise RuntimeError('installed candidate SDK differs from the selected source')
 identities['actions.work_items._adapters._sql_review'] = {'path':str(path),'sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'version':sdk.version}
 print(json.dumps(identities))
@@ -311,7 +312,7 @@ print(json.dumps(identities))
             entries = list(wheels.iterdir())
             if (
                 len(entries) != 1
-                or entries[0].name != "actions_work_items-0.5.0a1-py3-none-any.whl"
+                or entries[0].name != "actions_work_items-0.5.0a2-py3-none-any.whl"
                 or entries[0].is_symlink()
             ):
                 raise RuntimeError("one exact candidate SDK wheel required")
@@ -468,6 +469,7 @@ print(json.dumps(identities))
                 "tests/action_server_tests/test_native_run_authority.py",
                 "tests/action_server_tests/test_foundry_package_registry.py",
                 "tests/action_server_tests/test_generated_work_item_execution.py",
+                "tests/action_server_tests/test_reviewed_exact_claim.py",
             ],
             "components": [
                 "tests/action_server_tests/test_invoice_review.py",

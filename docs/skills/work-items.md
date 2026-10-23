@@ -46,6 +46,14 @@ no connection or second state store. It is **not** the standalone SQLite schema 
 or PostgreSQL format 1 adapter, a legacy management adapter, or the complete
 retry/effect contract. DB time, owner/epoch/deadline conditions and atomic child
 publication apply to reserve/renew/finish. Unknown row formats fail closed.
+`reserve_item_fenced(item_id, owner_id, lease_seconds=...)` is the private
+SDK0.5.0a2 exact-target primitive. It conditionally claims only that item under
+the same Workspace/queue/format, cancellation and DB-time state predicates.
+Unclaimable targets never fall back to an older FIFO neighbor. Do not reserve
+FIFO and compare afterward for an exact-result UI request: that already leases
+an unrelated approved result. Runtime1.1.0a19 admits the noneditable a2 SDK floor
+through its project/lock metadata; an older SDK must not substitute FIFO.
+No schema, row-format or second queue is introduced by this method.
 Review, Work Item, Run and Attempt remain distinct: approval starts no new Run,
 Attempt or RCC process. Worker linkage and external effect reconciliation require
 separate proof before admitting execution.
@@ -60,6 +68,13 @@ Poetry before testing. A source overlay does not establish the installed SDK
 contract. Native acceptance additionally installs the exact measured SDK wheel
 in each RCC consumer and checks distribution ownership plus pip report URL/hash;
 passing source tests alone cannot close the frozen/Go consumer gate.
+
+The full SDK service tests import optional Redis/Mongo clients and destructively
+clear their configured test stores. Install the lock-declared extras through the
+pinned Poetry toolchain and supply explicit URLs for newly owned isolated
+services before running them. The canonical `.devcontainer/bin/verify-work-items`
+requires both URLs; its build/Twine/clean-consumer checks do not publish. Never
+use the test fixture's default ports as evidence that a service is task-owned.
 
 Rollback requires coordinated review/Work Item SQL and output-object backups;
 downgrading Runtime before restoring a pre-migration database is not supported.
