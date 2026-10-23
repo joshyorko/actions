@@ -64,6 +64,17 @@ def _object(value: object, limit: int) -> dict[str, JsonValue]:
     return _JSON.validate_json(canonicalize_json(encoded), strict=True)
 
 
+def _tool_description(name: str, schema: dict[str, JsonValue]) -> str:
+    if name == "canvas_open":
+        return "Open the app library without changing state."
+    description = schema.get("description")
+    return (
+        description
+        if isinstance(description, str) and description
+        else "Authorized native Canvas operation."
+    )
+
+
 @dataclass(frozen=True)
 class CanvasCaller:
     """Server-authenticated scope, never constructed from tool arguments."""
@@ -155,9 +166,7 @@ class CanvasMcp:
         return [
             Tool(
                 name=name,
-                description="Open the app library without changing state."
-                if name == "canvas_open"
-                else "Authorized native Canvas operation.",
+                description=_tool_description(name, schema),
                 input_schema=schema,
                 annotations=ToolAnnotations(
                     read_only_hint=name in _READ_ONLY,

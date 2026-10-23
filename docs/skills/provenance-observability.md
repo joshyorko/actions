@@ -331,3 +331,53 @@ genuine RCC build/import/test-to-Package admission against both owned SQL
 providers. Its strict `package_compiler` selection rejects skipped cases.
 That receipt is a cache precondition, not a replacement for generated-code
 execution or a claim that RCC is a malicious-code sandbox.
+
+Normal Runtime Canvas wiring passes the same facade through
+`start_server` -> `_ActionRoutes` -> `McpServerSetupHelper`; constructing the
+last helper only in a test host does not qualify the installed product. The
+canonical frontend producer embeds `canvas.html` beside the Runtime's
+`index.html`, including debug builds. Native bootstrap requires the MCP Apps
+artifact marker and the existing authenticated Runtime owner key; missing
+assets/auth or an unsupported private filesystem provider stay unavailable.
+Never substitute the admin HTML or a fixture to make discovery look healthy.
+
+The first authenticated native bootstrap records its nonsecret Actor/Workspace
+and initial owner policy in the common SQL request/audit/grant records under
+the existing installation lock. Restart reuses that receipt and never restores
+deleted grants. Exact bearer verification supplies the model audience; arbitrary
+audience/Workspace/principal headers and duplicate Authorization headers grant
+nothing. This owner-key mapping is not a multi-user identity adapter or an app
+audience grant. Generated execution profiles and app interactions still require
+their real, separately admitted services.
+
+Startup preserves Runs with common RunPin admission. The legacy blanket
+restart cancellation policy applies only to unfenced process Runs. A restart
+does not prove a native Attempt had no effects, and must not erase its retained
+claim, launch, result or reconciliation evidence.
+
+For an archive-based installed-consumer gate, supply read-only `GIT_DIR` and
+`GIT_WORK_TREE` only to the frontend producer so its timestamp comes from the
+exact archived commit. Remove those variables before Poetry builds the wheel:
+Poetry otherwise detects Git through that environment but constructs a missing
+archive-local `.git` path for its exclusion scan. Keep the failed attempt;
+this is a build-context error, not evidence of a dependency defect. Generate
+OAuth configuration only with the archived public producer and copy/measure the
+pinned RCC binary through the checked-in offline-build mechanism. Never include
+an existing checkout's local OAuth file.
+
+A clean noneditable consumer must assert imported modules reside under its own
+`sys.prefix`, compare Runtime wheel members to the archived producer bytes, and
+launch the normal CLI from an empty owned directory with separate state roots.
+An actual MCP SDK over a loopback socket can then qualify discovery, resource
+read, edits, explicit activation and process restart/reconnect/rollback. A build
+or ASGI transport test alone does not establish this installed route. This
+protocol proof still does not qualify an official browser host, generated
+business execution, authenticated ChatGPT, or offline replay of dependencies.
+
+An official browser host can keep an MCP HTTP stream open after tools/resources
+are ready. Use the discovered tool and the iframe's expected rendered content as
+readiness conditions, rather than browser `networkidle`. Preserve a timed-out
+attempt and verify owned-process cleanup before retrying the fixture. A screenshot
+of a real AppBridge/double-iframe render qualifies only the exact installed bytes
+and operations exercised; read-only rendering does not prove app-side dispatch,
+approval, artifact resolution or authenticated ChatGPT acceptance.

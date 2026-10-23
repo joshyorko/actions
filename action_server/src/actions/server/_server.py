@@ -21,6 +21,7 @@ if typing.TYPE_CHECKING:
     from asyncio.events import AbstractEventLoop
 
     from .data_queries.canvas_mcp import InvoiceCanvasMcp
+    from .foundry.mcp import CanvasMcp
     from .run_outputs.transport import RunOutputTransport
 
 log = logging.getLogger(__name__)
@@ -473,6 +474,7 @@ def start_server(
     *,
     run_output_transport: "RunOutputTransport | None" = None,
     invoice_canvas: "InvoiceCanvasMcp | None" = None,
+    canvas_foundry: "CanvasMcp | None" = None,
 ) -> None:
     import threading
     from dataclasses import asdict
@@ -587,7 +589,31 @@ def start_server(
                 "invoice download requires the same scoped output transport"
             )
 
-    if invoice_canvas is None:
+    if canvas_foundry is None and api_key:
+        from ._models import get_db
+        from .foundry.bootstrap import create_runtime_canvas
+
+        native_canvas = create_runtime_canvas(get_db(), settings.datadir, api_key)
+        if native_canvas is not None:
+            canvas_foundry = native_canvas.canvas
+
+            @asynccontextmanager
+            async def _native_canvas_lifespan(_main_app: FastAPI):
+                try:
+                    yield
+                finally:
+                    native_canvas.close()
+
+            app.custom_lifespan.register(_native_canvas_lifespan)
+
+    if canvas_foundry is not None:
+        action_routes = _ActionRoutes(
+            whitelist,
+            endpoint_dependencies,
+            invoice_canvas=invoice_canvas,
+            canvas_foundry=canvas_foundry,
+        )
+    elif invoice_canvas is None:
         action_routes = _ActionRoutes(whitelist, endpoint_dependencies)
     else:
         action_routes = _ActionRoutes(
