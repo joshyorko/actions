@@ -373,3 +373,11 @@ read, edits, explicit activation and process restart/reconnect/rollback. A build
 or ASGI transport test alone does not establish this installed route. This
 protocol proof still does not qualify an official browser host, generated
 business execution, authenticated ChatGPT, or offline replay of dependencies.
+
+An official browser host can keep an MCP HTTP stream open after tools/resources
+are ready. Use the discovered tool and the iframe's expected rendered content as
+readiness conditions, rather than browser `networkidle`. Preserve a timed-out
+attempt and verify owned-process cleanup before retrying the fixture. A screenshot
+of a real AppBridge/double-iframe render qualifies only the exact installed bytes
+and operations exercised; read-only rendering does not prove app-side dispatch,
+approval, artifact resolution or authenticated ChatGPT acceptance.
