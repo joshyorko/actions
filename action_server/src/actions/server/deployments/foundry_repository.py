@@ -407,7 +407,7 @@ class FoundryRepository:
         try:
             if canonicalize_json(raw) != raw:
                 raise ValueError("request result is not canonical")
-            receipt = DeploymentRevision.model_validate(parse_canonical_json(raw))
+            receipt = DeploymentRevision.model_validate_json(raw)
             ref = receipt.ref
             if ref.workspace_id != workspace_id or ref.deployment_id != deployment_id:
                 raise ValueError("request result has a different Deployment owner")
@@ -466,9 +466,7 @@ class FoundryRepository:
                 raise ValueError("Deployment selection is not canonical")
             if canonicalize_json(raw_snapshots) != raw_snapshots:
                 raise ValueError("Deployment snapshots are not canonical")
-            revision = DeploymentRevision.model_validate(
-                parse_canonical_json(raw_revision)
-            )
+            revision = DeploymentRevision.model_validate_json(raw_revision)
             if (
                 record.workspace_id != str(ref.workspace_id.root)
                 or record.deployment_id != str(ref.deployment_id.root)
@@ -494,7 +492,9 @@ class FoundryRepository:
                 raise ValueError("stored snapshot map must be an object")
             snapshots_list = []
             for key, value in snapshot_data.items():
-                entry = DeploymentExecutionSnapshot.model_validate(value)
+                entry = DeploymentExecutionSnapshot.model_validate_json(
+                    _canonical_object(value)
+                )
                 if key != _snapshot_key(entry):
                     raise ValueError("stored execution snapshot key mismatches")
                 snapshots_list.append(entry)

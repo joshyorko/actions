@@ -15,7 +15,9 @@ from actions.server._database import Database
 from actions.server._models import (
     Action,
     ActionPackage,
+    Counter,
     Run,
+    RUN_ID_COUNTER,
     get_all_model_classes,
     get_model_db_rules,
 )
@@ -238,6 +240,7 @@ def _runtime_database(
             db.create_tables(get_model_db_rules())
             db.insert(Migration(16, MIGRATION_ID_TO_NAME[16]))
             db.insert(Workspace(str(workspace_id.root), "active", 0))
+            db.insert(Counter(RUN_ID_COUNTER, 0))
 
     assert migrate_db(path)
     db = Database(path)
@@ -895,15 +898,16 @@ def test_active_pointer_to_missing_revision_is_reported_as_corruption(tmp_path):
             _spec(refs),
             idempotency_key="create-1",
         )
-        db.execute(
-            "UPDATE foundry_deployment_head SET active_revision_id=? "
-            "WHERE workspace_id=? AND deployment_id=?",
-            [
-                _digest("f"),
-                str(refs.workspace.root),
-                str(refs.deployment_id.root),
-            ],
-        )
+        with db.transaction():
+            db.execute(
+                "UPDATE foundry_deployment_head SET active_revision_id=? "
+                "WHERE workspace_id=? AND deployment_id=?",
+                [
+                    _digest("f"),
+                    str(refs.workspace.root),
+                    str(refs.deployment_id.root),
+                ],
+            )
         with pytest.raises(RepositoryCorruption, match="active Deployment revision"):
             FoundryRepository(db).current(refs.workspace, refs.deployment_id)
 
@@ -964,15 +968,16 @@ def test_empty_persisted_snapshot_map_grants_no_execution_authority(tmp_path):
             _spec(refs),
             idempotency_key="create-1",
         )
-        db.execute(
-            "UPDATE foundry_deployment_revision SET snapshots_json='{}' "
-            "WHERE workspace_id=? AND deployment_id=? AND revision_id=?",
-            [
-                str(refs.workspace.root),
-                str(refs.deployment_id.root),
-                created.ref.revision_id.root,
-            ],
-        )
+        with db.transaction():
+            db.execute(
+                "UPDATE foundry_deployment_revision SET snapshots_json='{}' "
+                "WHERE workspace_id=? AND deployment_id=? AND revision_id=?",
+                [
+                    str(refs.workspace.root),
+                    str(refs.deployment_id.root),
+                    created.ref.revision_id.root,
+                ],
+            )
         with pytest.raises(AccessDenied, match="Execution snapshot unavailable"):
             service.resolve(actor, refs.workspace, refs.deployment_id, refs.capability)
 
