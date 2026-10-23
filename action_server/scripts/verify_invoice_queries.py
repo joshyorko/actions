@@ -93,6 +93,8 @@ def main():
         *ROOT.glob("action_server/src/actions/server/data_queries/*.py"),
         *ROOT.glob("action_server/src/actions/server/run_outputs/*.py"),
         *ROOT.glob("action_server/src/actions/server/foundry/*.py"),
+        *ROOT.glob("action_server/src/actions/server/managed_work_items/*.py"),
+        *ROOT.glob("action_server/tests/action_server_tests/test_managed_work_items_*.py"),
         *ROOT.glob("action_server/src/actions/server/deployments/*.py"),
         ROOT / "action_server/tests/action_server_tests/foundry_fixtures.py",
         *ROOT.glob("action_server/tests/action_server_tests/test_foundry_*.py"),
