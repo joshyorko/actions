@@ -82,6 +82,17 @@ function isIdentifier(value: unknown): value is string {
     return typeof value === "string" && IDENTIFIER_PATTERN.test(value);
 }
 
+function isPackageLocalIdentifier(value: unknown): value is string {
+    return (
+        isBoundedText(value, 1, MAX_SPEC_BYTES) &&
+        value === value.normalize("NFC") &&
+        Array.from(value).every((character) => {
+            const point = character.codePointAt(0);
+            return point !== undefined && (point < 0xd800 || point > 0xdfff);
+        })
+    );
+}
+
 function parseField(value: unknown) {
     if (
         !isPlainRecord(value) ||
@@ -327,8 +338,7 @@ function parseBinding(value: unknown): CanvasBindingScope {
             "packageRevision",
         ]) ||
         !isIdentifier(value.bindingId) ||
-        typeof value.capabilityId !== "string" ||
-        !UUID_PATTERN.test(value.capabilityId) ||
+        !isPackageLocalIdentifier(value.capabilityId) ||
         !isPlainRecord(value.packageRevision) ||
         !hasExactKeys(value.packageRevision, [
             "workspace_id",

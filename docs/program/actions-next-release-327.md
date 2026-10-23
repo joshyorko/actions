@@ -1,5 +1,18 @@
 # Actions Next release checkpoint
 
+Runtime1.1.0a23 fixes a joined official-host rendering rejection: the generated
+compiler emits canonical package-local capability IDs such as
+`action.generated_echo`, while the View had required a UUID. The exact generated
+ID and a Unicode NFC ID failed the new regression before the parser correction;
+empty, non-NFC and lone-surrogate IDs remain rejected. Runtime280 and
+Canvas46passed/1skipped, frontend quality and Canvas build passed. The canonical
+identifier contract, authorization and immutable binding authority are
+unchanged. Installed/official-host qualification of these changed bytes is
+pending. The a22 actual host connected, read the resource and mounted the
+View, then displayed a metadata validation error; it is failed E2 evidence,
+not ChatGPT or client permission evidence. Both owned host/server processes
+stopped. No a22 artifact is rebuilt under its existing identifier.
+
 Runtime1.1.0a22 corrects a source-expired View reopen defect reproduced after
 genuine RCC completion for both generated applications. It reissues a View
 capability only for an existing exact approved review with an admitted native

@@ -104,6 +104,35 @@ function emitToolInput(argumentsValue: unknown) {
 }
 
 describe("official MCP Canvas bridge", () => {
+    it.each(["action.generated_echo", "action.résumé"])(
+        "renders canonical package-local capability %s without invoking it",
+        (capabilityId) => {
+            const metadata = {
+                ...activeCanvas,
+                bindings: [{ ...activeCanvas.bindings[0], capabilityId }],
+            };
+            const parsed = parseCanvasViewMetadata(metadata);
+            expect(parsed.preview).toBe(false);
+            render(<McpCanvasView />);
+            emitToolResult(metadata);
+            expect(
+                screen.getByRole("heading", { name: "Foundry app" }),
+            ).toBeVisible();
+            expect(host.callServerTool).not.toHaveBeenCalled();
+        },
+    );
+
+    it.each(["", "e\u0301", "\ud800"])(
+        "rejects invalid package-local capability %j",
+        (capabilityId) => {
+            expect(() =>
+                parseCanvasViewMetadata({
+                    ...activeCanvas,
+                    bindings: [{ ...activeCanvas.bindings[0], capabilityId }],
+                }),
+            ).toThrow();
+        },
+    );
     it("renders semantic state from tool-result metadata and stays read-only", () => {
         render(<McpCanvasView />);
 

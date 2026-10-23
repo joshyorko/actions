@@ -5052,3 +5052,12 @@ the shared resolver reauthorizes that plan and all three profile references.
 Unconfigured execution, unsupported bindings and unqualified artifacts fail
 before Work Item claim. Qualify an installed descriptor/ordinary CLI and the
 actual official View separately from source or SDK transport tests.
+
+Canvas binding metadata carries a canonical package-local `CapabilityId`, not
+a UUID. The generated compiler emits IDs such as `action.generated_echo`.
+The View accepts bounded nonempty NFC text without lone surrogates for this
+field, while Workspace and Package IDs retain their UUID validation. The
+identifier remains opaque metadata; it never becomes executable code or a
+client permission. A real official-host capture exposed the former UUID-only
+parser rejection even though the authored schema, SQL and MCP transport
+were valid. Keep a generated-ID renderer regression alongside UUID examples.
