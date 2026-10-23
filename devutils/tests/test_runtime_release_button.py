@@ -163,7 +163,10 @@ def test_successful_pr_run_requires_canonical_workflow_jobs_and_same_repo():
         ("path", "other"),
         ("conclusion", "failure"),
         ("event", "pull_request_target"),
+        ("repository", {"full_name": "fork/actions"}),
+        ("repository", {"full_name": "joshyorko/actions-lookalike"}),
         ("head_repository", {"full_name": "fork/actions"}),
+        ("head_repository", {"full_name": "joshyorko/actions-lookalike"}),
     ]:
         bad = dict(run, **{key: value})
         with pytest.raises(button.ReleaseError):
@@ -454,6 +457,15 @@ def test_source_binding_accepts_normal_merge_but_rejects_changed_workflow_tree(
     )
     with pytest.raises(button.ReleaseError, match="version mismatch"):
         button.check_source(repo, source, qualified, "1.0.5")
+    # A current-community commit with unchanged workflow code is still not the
+    # qualified source. Matching ancestry and version cannot replace tree identity.
+    (repo / "unchecked.py").write_text("UNREVIEWED = True\n")
+    git("add", ".")
+    git("commit", "--quiet", "-m", "unqualified application bytes")
+    unchecked = git("rev-parse", "HEAD")
+    git("push", "--quiet", "origin", "community")
+    with pytest.raises(button.ReleaseError, match="complete trees differ"):
+        button.check_source(repo, unchecked, qualified, "1.0.4")
     (repo / ".github/workflows/button.yml").write_text("name: changed\n")
     git("add", ".")
     git("commit", "--quiet", "-m", "controller workflow changed")

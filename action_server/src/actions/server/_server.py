@@ -22,6 +22,8 @@ if typing.TYPE_CHECKING:
 
     from .data_queries.canvas_mcp import InvoiceCanvasMcp
     from .foundry.mcp import CanvasMcp
+    from .managed_work_items.api import Authenticate as ManagedAuthenticate
+    from .managed_work_items.contracts import ManagedWorkItemsPort
     from .run_outputs.transport import RunOutputTransport
 
 log = logging.getLogger(__name__)
@@ -102,10 +104,13 @@ def _reload_action_generation(
 class _ConfiguredAPIKeyMiddleware:
     """Reject protected requests before FastAPI can parse their body."""
 
-    def __init__(self, app, api_key: str, browser_sessions=None):
+    def __init__(
+        self, app, api_key: str, browser_sessions=None, managed_authenticate=None
+    ):
         self.app = app
         self.api_key = api_key
         self.browser_sessions = browser_sessions
+        self.managed_authenticate = managed_authenticate
 
     @staticmethod
     def _is_public(path: str) -> bool:
@@ -132,6 +137,27 @@ class _ConfiguredAPIKeyMiddleware:
         )
         if protected and not self._is_public(path) and not is_cors_preflight:
             from ._api_action_routes import _get_bearer_token
+            from .managed_work_items.contracts import API_PREFIX, ManagedCaller
+
+            if self.managed_authenticate is not None and (
+                path == API_PREFIX or path.startswith(API_PREFIX + "/")
+            ):
+                from starlette.requests import Request
+
+                try:
+                    # No receive callback: authentication cannot consume an
+                    # unbounded body before the managed router's byte limit.
+                    identity = await self.managed_authenticate(Request(scope))
+                    managed_authorized = isinstance(identity, ManagedCaller)
+                except Exception:
+                    managed_authorized = False
+                if not managed_authorized:
+                    await PlainTextResponse(
+                        "Invalid or missing managed identity", status_code=401
+                    )(scope, receive, send)
+                    return
+                await self.app(scope, receive, send)
+                return
 
             authorized = (
                 self.browser_sessions.authorized(scope)
@@ -475,6 +501,8 @@ def start_server(
     run_output_transport: "RunOutputTransport | None" = None,
     invoice_canvas: "InvoiceCanvasMcp | None" = None,
     canvas_foundry: "CanvasMcp | None" = None,
+    managed_work_items: "ManagedWorkItemsPort | None" = None,
+    managed_authenticate: "ManagedAuthenticate | None" = None,
 ) -> None:
     import threading
     from dataclasses import asdict
@@ -545,6 +573,7 @@ def start_server(
             _ConfiguredAPIKeyMiddleware,
             api_key=api_key,
             browser_sessions=browser_sessions,
+            managed_authenticate=managed_authenticate,
         )
 
     from actions.server._artifact_storage import get_artifact_storage
@@ -640,6 +669,14 @@ def start_server(
             dependencies=endpoint_dependencies,
         )
 
+    from .managed_work_items.api import (
+        create_router as create_managed_work_items_router,
+    )
+
+    app.include_router(
+        create_managed_work_items_router(managed_work_items, managed_authenticate),
+        include_in_schema=settings.full_openapi_spec,
+    )
     app.include_router(
         run_api_router,
         include_in_schema=settings.full_openapi_spec,

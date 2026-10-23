@@ -46,6 +46,19 @@ no connection or second state store. It is **not** the standalone SQLite schema 
 or PostgreSQL format 1 adapter, a legacy management adapter, or the complete
 retry/effect contract. DB time, owner/epoch/deadline conditions and atomic child
 publication apply to reserve/renew/finish. Unknown row formats fail closed.
+`reserve_item_fenced(item_id, owner_id, lease_seconds=...)` is the private
+SDK0.5.0a2 exact-target primitive. It conditionally claims only that item under
+the same Workspace/queue/format, cancellation and DB-time state predicates.
+Unclaimable targets never fall back to an older FIFO neighbor. Do not reserve
+FIFO and compare afterward for an exact-result UI request: that already leases
+an unrelated approved result. Runtime1.1.0a19 admits the noneditable a2 SDK floor
+through its project/lock metadata; an older SDK must not substitute FIFO.
+No schema, row-format or second queue is introduced by this method.
+The focused Runtime verifier uses the same bounded PostgreSQL memory/tmpfs
+budget as its full selection: repeated Foundry/managed schemas exhausted the
+former 128 MiB focused mount's WAL before later cases could start. A fixture
+DiskFull and ensuing recovery/connection errors do not prove queue failures.
+Retain that failed receipt; do not disable WAL durability to fit the old budget.
 Review, Work Item, Run and Attempt remain distinct: approval starts no new Run,
 Attempt or RCC process. Worker linkage and external effect reconciliation require
 separate proof before admitting execution.
@@ -60,6 +73,13 @@ Poetry before testing. A source overlay does not establish the installed SDK
 contract. Native acceptance additionally installs the exact measured SDK wheel
 in each RCC consumer and checks distribution ownership plus pip report URL/hash;
 passing source tests alone cannot close the frozen/Go consumer gate.
+
+The full SDK service tests import optional Redis/Mongo clients and destructively
+clear their configured test stores. Install the lock-declared extras through the
+pinned Poetry toolchain and supply explicit URLs for newly owned isolated
+services before running them. The canonical `.devcontainer/bin/verify-work-items`
+requires both URLs; its build/Twine/clean-consumer checks do not publish. Never
+use the test fixture's default ports as evidence that a service is task-owned.
 
 Rollback requires coordinated review/Work Item SQL and output-object backups;
 downgrading Runtime before restoring a pre-migration database is not supported.
@@ -1089,3 +1109,35 @@ A protocol factory or FileAdapter test does not prove a managed SQL server or
 installed VSIX. Negotiate actually implemented operations and explicit grants;
 never turn a managed denial into unscoped local CRUD. Review, queue ownership,
 business outcome, Run, Attempt and artifact authority remain distinct.
+
+Managed SQL requests must enter `Database.connect()` on the executing HTTP
+worker thread; a connection in the client/fixture thread is insufficient.
+Test the real router with live SQL policy, including revoked/cross-workspace
+capability discovery and a server-held worker identity. Claim/renew replay must
+return the current DB-time deadline after validating the live fence, while
+retaining the original request/audit. The managed wire uses `DONE` for SDK
+`State.DONE.value == "COMPLETED"`; completion tests must cross that real terminal
+boundary and verify retained RCC evidence, not manufacture a client result.
+Check the item identified by the exact review/dispatch receipt rather than the
+first item returned by a queue listing. An older approved item may intentionally
+remain pending when exact-target dispatch completes another item. Assert its
+unchanged epoch as well as the selected item's SDK terminal state.
+
+An admitted generated Run retains its exact bounded UTF-8 input in the common
+Run row. `require_reviewed_run_inputs` checks the closed canonical `value: str`
+payload against the approved result digest; it confers no authority. Replay and
+every guarded write still reauthorize the review/source/Package and verify both
+fences. The original query artifact remains required for new admission, while
+its later expiry must not prevent authorized admitted work from completing or
+replaying. This does not extend the source artifact's TTL, restore revoked
+access, admit another Run or permit an uncertain launch to run again.
+The ordinary route mount remains unavailable without explicit trusted service
+and authentication dependencies; route presence alone is not managed readiness.
+Keep its schema/capabilities/operations routes explicitly classified in the
+assembled authentication inventory. The managed identity category is distinct
+from public exceptions; the inventory must still reject every unknown route.
+When disk headroom is small, serialize full source and installed RCC acceptance.
+Per-case cleanup of recognized owned views does not bound simultaneous pytest,
+PostgreSQL and incomplete view allocations. Preserve failed receipts, check
+active processes and use RCC's supported exact-view cleanup; never remove
+unrecognized partial directories or immutable caches to force a green result.

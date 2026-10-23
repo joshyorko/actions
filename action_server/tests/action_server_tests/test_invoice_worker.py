@@ -213,7 +213,7 @@ def test_real_rcc_executes_exact_reviewed_result_and_replays_without_dispatch(
     assert data["task"]["invoice_count"] == 2
     assert data["task"]["total_cents"] == 12900
     assert data["task"]["binding"] == proposal.binding.model_dump(mode="json")
-    assert data["task"]["sdk"]["version"] == "0.5.0a1"
+    assert data["task"]["sdk"]["version"] == "0.5.0a2"
     assert data["task"]["sdk"]["wheel_sha256"] == service.plan.sdk_wheel_sha256
     assert (
         data["rcc_receipt"]["artifactDigest"] == service.plan.descriptor.artifact_digest

@@ -59,6 +59,25 @@ Verify checkout bytes as well as Git blobs; do not normalize test inputs or rela
 the byte comparisons to hide checkout conversion. This is fixture preservation,
 not approval of a production Package Revision digest algorithm.
 
+### Publisher identity and live protection evidence
+
+Exact repository/head, qualified complete-tree, workflow, run, manifest and
+artifact checks remain necessary even for an authorized owner. A repository
+name that merely resembles the expected owner/name is not the same identity;
+an unqualified descendant with unchanged workflows is not qualified source.
+Exercise these negatives against the existing release-button validator before
+publication, without invoking its write path.
+
+An `environment: pypi` workflow declaration proves neither required reviewers
+nor branch restrictions. Read current environment protection, repository
+rulesets and branch metadata separately and retain the observation time. Actor
+and triggering-actor checks cannot distinguish an owner from someone using that
+owner's stolen credential. Record that residual risk and the actual publisher
+token scope; a secret's descriptive name does not establish its permissions.
+Changing reviewer rules, branch protection, identities or credential scope needs
+the applicable owner approval. Successful mocked/unit publisher tests do not
+establish those live settings or authorize a publication.
+
 ## Admission and execution receipt
 
 Run creation stores one immutable `AdmissionSnapshot` containing the schema

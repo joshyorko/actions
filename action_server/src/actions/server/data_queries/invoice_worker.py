@@ -622,7 +622,7 @@ class InvoiceWorkerService:
             or task.get("execution_input_digest") != launch["input_digest"]
             or task.get("sdk")
             != {
-                "version": "0.5.0a1",
+                "version": "0.5.0a2",
                 "wheel_sha256": self.plan.sdk_wheel_sha256,
                 "module_sha256": inputs["sdk_module_sha256"],
             }
