@@ -2,7 +2,7 @@
   "schema": "actions.cloud-managed-checkpoint/v1",
   "source": "4e0e2839a8621bb01eeb98d03b8e7e9cf240c790",
   "runtime": "1.1.0a18",
-  "candidate_built": false,
+  "candidate_built": true,
   "imported_heads": {
     "pr331": "042f27167ae0850c789883bd1fbb1dd26bf42d2f",
     "pr333": "1bd2e508def50943f1ea6eba36e9e4f71b6803cf"
@@ -11,8 +11,21 @@
     "managed_local": "25 passed, 35 skipped; PostgreSQL/provider cells unconfigured in this local command",
     "configured_static": "lint passed; mypy passed 442 files; Markdown lint unavailable",
     "actual_generated_rcc_launch_receipt": "1 passed, 3 deselected; final published launch identity retained",
-    "full_real_postgresql_worker_and_portable": "PENDING",
-    "installed_a18": "PENDING"
+    "full_real_postgresql_worker_and_portable": {
+      "receipt": "/workspace/actions-327-state/evidence/managed-joined-final-20261023/359c692f-412d-46c1-8afa-1a0830749eb2/receipt.json",
+      "managed": 56,
+      "sql": 133,
+      "components": 161,
+      "invoice": 129,
+      "worker": 134,
+      "generated_rcc": 6,
+      "strict_skipped": 0,
+      "portable": "2 failed, 2116 passed, 13 skipped, 274 deselected; both failures classify the three mounted managed routes as uncategorized",
+      "cleanup": "PASS",
+      "disposition": "Exact managed-identity inventory classification added; focused3 passed; full portable rerun pending."
+    },
+    "installed_a18": "MCP2 lifecycle and normal unconfigured route503 PASS. First owned installed worker run:24 passed,3 failed,1 setup error,0 skipped; observed disk exhaustion, first compiler import failure cause uncertain. Serialized retry running after supported idle-view cleanup.",
+    "gateway": "Doctor PASS; Bootstrap firstFAIL without underlying cause, supported verbose package installPASS, second BootstrapPASS; ToolkitTest179PASS."
   },
   "evidence_root": "/workspace/actions-327-state/evidence/foundry-integration",
   "logs": [
@@ -22,7 +35,10 @@
     "generated-published-launch-green-20261023.log",
     "managed-completion-first-20261023.log",
     "managed-completion-state-normalized-20261023.log",
-    "managed-runtime-completion-local-20261023.log"
+    "managed-runtime-completion-local-20261023.log",
+    "managed-auth-route-inventory-green-20261023.log",
+    "managed-joined-static-final-20261023.log",
+    "managed-a18-installed-worker-driver-20261023.log"
   ],
   "verified_changes": [
     "Managed public SQL methods own connections in the HTTP executing thread; live READ precedes capability discovery.",
@@ -45,5 +61,10 @@
     "contract": "docs/program/actions-next-managed-work-items-132.md now names the actual SQL service and trusted host seam, removes the obsolete unmounted-router and proposed reviewed.py claims, and distinguishes route presence from configured managed support."
   },
   "upstream_disposition": "none; observed completion and integration defects belong to Actions",
-  "publication": "none"
+  "publication": "none",
+  "qualification_source": "7d8586d13c6ecfafc37dd1669d2099eaed34b728",
+  "implementation_equivalence": "git diff 4e0e2839..7d8586d1 -- action_server/src actions/src work-items/src is empty; only auth route inventory, verifier hash coverage and documentation changed.",
+  "installed_root": "/tmp/actions-327-a18-4e0e2839",
+  "failed_installed_receipt": "/tmp/actions-327-a18-4e0e2839/qa-evidence-failed-1/receipt.json",
+  "owned_space_recovery": "/tmp/actions-327-owned-review-view-cleanup-20261023/receipt.json"
 }
