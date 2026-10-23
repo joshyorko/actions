@@ -240,6 +240,10 @@ class FoundryDeploymentService:
                 specification.policy,
                 specification.output_provider,
             ):
+                if ref is None:
+                    raise AccessDenied(
+                        "Execution profile unavailable or not authorized"
+                    )
                 self._authorization.require_reference(actor, ref, "execute")
             return ResolvedDeploymentExecution(
                 revision=revision_record,
@@ -271,7 +275,13 @@ class FoundryDeploymentService:
         if not isinstance(specification, DeploymentSpecification):
             raise TypeError("specification must be DeploymentSpecification")
         specification = DeploymentSpecification.model_validate(specification)
-        require_workspace_scope(specification.package_revisions[0], workspace_id)
+        if specification.workspace_id != workspace_id:
+            raise AccessDenied("Deployment unavailable or not authorized")
+        if (
+            specification.canvas_application is not None
+            and specification.canvas_application.app_id != str(deployment_id.root)
+        ):
+            raise AccessDenied("Canvas application unavailable or not authorized")
         self._authorization.require_deployment(
             actor, workspace_id, deployment_id, "deploy"
         )
@@ -361,13 +371,21 @@ class FoundryDeploymentService:
         action_id = self._execution.action_id_for(capability)
         if not isinstance(action_id, str) or not action_id or len(action_id) > 128:
             raise PackageContractError("Runtime capability identity is invalid")
+        specification = revision.specification
+        if (
+            specification.worker is None
+            or specification.policy is None
+            or specification.output_provider is None
+        ):
+            raise PackageContractError("UI-only revisions cannot admit execution")
         return ExecutionSnapshot(
             deployment=revision.ref,
             capability=capability,
             runtime_plan=runtime_plan,
-            worker=revision.specification.worker,
-            policy=revision.specification.policy,
-            output_provider=revision.specification.output_provider,
+            worker=specification.worker,
+            policy=specification.policy,
+            output_provider=specification.output_provider,
+            canvas_application=specification.canvas_application,
             runtime_kind=_valid_runtime_kind(plan_declaration.runtime_kind),
             capability_schema_digest=_valid_digest(
                 capability_declaration.schema_digest
@@ -391,7 +409,13 @@ class FoundryDeploymentService:
         refs.extend(binding.requirement for binding in specification.bindings)
         refs.extend(binding.provider for binding in specification.bindings)
         refs.extend(
-            (specification.worker, specification.policy, specification.output_provider)
+            ref
+            for ref in (
+                specification.worker,
+                specification.policy,
+                specification.output_provider,
+            )
+            if ref is not None
         )
         for ref in refs:
             try:

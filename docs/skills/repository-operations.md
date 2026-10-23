@@ -4919,3 +4919,29 @@ rejects provisional Core versions before action discovery. The existing
 vendored version parser handles alpha, release-candidate and dev/local suffixes
 and still rejects malformed probe output. Package metadata and no-managed-env
 import tests exercise the actual child interpreter boundary.
+
+
+Schema18 permits a null Package integrity anchor only to represent a UI-only
+Canvas selection. Its forward migration preserves schema17 rows and retains
+the real Package FK; nullable does not mean an unknown Package is admitted.
+SQLite rebuilds this one table transactionally; PostgreSQL drops only the
+column's NOT NULL constraint. Preserve a coordinated pre-upgrade backup for
+binary rollback: changing a migration marker does not reverse either schema.
+
+The Deployment selection carries the public CanvasSpec, exact logical
+capability bindings and an independently hashed Canvas application revision.
+That source digest is separate from the Deployment revision digest, avoiding
+self-referential hashing. Revalidate existing Core models through their alias
+wire grammar before embedding them; round-trip serialization uses aliases.
+Package-less selections require a view and prohibit plans, bindings and
+execution profiles. Backend selections require explicit plans/profiles and
+retain every Package check; the singular FK is only an integrity anchor.
+The service includes the Canvas application pin in each execution snapshot.
+Neither a CanvasSpec nor an empty snapshot map grants execution permission.
+
+Deployment mutation reauthorizes all selected references after acquiring the
+common Workspace lock, then atomically writes the immutable selection, observed
+head/lock-version CAS, actor-scoped request receipt and audit event. Replay
+reauthorizes and validates the original immutable receipt. Isolated Package
+port doubles qualify these consumer semantics, not genuine compiler admission
+or end-to-end Run execution. Those require their own combined gates.

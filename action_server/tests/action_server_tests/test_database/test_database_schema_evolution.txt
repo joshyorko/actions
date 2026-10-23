@@ -579,7 +579,7 @@ CREATE TABLE IF NOT EXISTS foundry_deployment_revision(
     workspace_id TEXT NOT NULL,
     deployment_id TEXT NOT NULL,
     revision_id TEXT NOT NULL,
-    foundry_package_revision_id TEXT NOT NULL,
+    foundry_package_revision_id TEXT,
     selection_json TEXT NOT NULL,
     snapshots_json TEXT NOT NULL,
     FOREIGN KEY (workspace_id) REFERENCES workspace(id),

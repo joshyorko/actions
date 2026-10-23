@@ -102,9 +102,10 @@ The latest observed unintegrated sources are P #331
 `f5e5916748a76aeec3653c7792c8849881a4ae30`, A #334
 `07ad74809c1c785f3dc525d8eb6f760e907c9daa` and boot #335
 `466d6f241fbbb621a6acc0698a9a9574386f45d2`. Their source and receipts need
-combined integration qualification. The current schema17 Package FK still
-prevents package-less UI deployments; a forward nullable-FK migration and
-common SQL authoring authority are implementation prerequisites, not complete.
+combined integration qualification. The local forward schema18 and typed UI-only selection remove the Package FK
+requirement for views; SQLite focused tests pass, with real PostgreSQL
+qualification still pending. Common SQL authoring and joined lifecycle remain
+implementation prerequisites.
 No fake Package or sidecar database may stand in for zero-package first boot.
 
 Source keys (exact observed branch heads, not interchangeable acceptance):
@@ -127,9 +128,10 @@ Source keys (exact observed branch heads, not interchangeable acceptance):
   manifest/archive/preimages and executable admission still require review.
 - **D**: #333 `feature/129-foundry-deployments-20261023`,
   `ae90b5dcfeaf32bc21fab211d47470b25f1ff23e`. Collection blocked there by missing
-  rfc8785. Its proposed deployment* SQL does not match I's registered Foundry*
-  records. Neither proposal is a second accepted authority: adapt this consumer
-  to I before integration, retaining its typed values and all semantic tests.
+  rfc8785. The subsequent f5e5916748a76aeec3653c7792c8849881a4ae30 consumer
+  passed19 isolated tests here and is imported into release staging against
+  common Foundry* records, with UI-only extension. Real PostgreSQL and combined
+  authoring/execution acceptance remain pending.
 - **V**: protected invoice checkpoint `e2408a6e3051cdb4c44aede47618c3791807eba5`,
   implementation/UI/cold-source `20f42170fb382cbf160fae2c356144c45fde4457`.
   Private example0.2, Runtime1.1.0a5/SDK0.5.0a1 bundle and screenshots remain

@@ -10,7 +10,7 @@ from contextlib import contextmanager
 from typing import Any, Iterator
 from uuid import uuid4
 
-from actions.server._database import DBError, Database
+from actions.server._database import Database, DBError
 from actions.server.foundry.models import (
     FoundryAudit,
     FoundryDeploymentHead,
@@ -68,7 +68,7 @@ def _canonical_object(value: Any) -> bytes:
 
 def canonical_specification(specification: DeploymentSpecification) -> bytes:
     """Serialize unordered Deployment selections in a stable order."""
-    value = specification.model_dump(mode="json")
+    value = specification.model_dump(mode="json", by_alias=True)
     value["package_revisions"].sort(
         key=lambda ref: (ref["workspace_id"], ref["package_id"], ref["revision_id"])
     )
@@ -101,7 +101,7 @@ def canonical_specification(specification: DeploymentSpecification) -> bytes:
 
 
 def _canonical_revision(revision: DeploymentRevision) -> bytes:
-    value = revision.model_dump(mode="json")
+    value = revision.model_dump(mode="json", by_alias=True)
     value["specification"] = parse_canonical_json(
         canonical_specification(revision.specification)
     )
@@ -139,7 +139,7 @@ def request_digest(
         "workspace_id": str(workspace_id.root),
         "deployment_id": str(deployment_id.root),
         "expected_revision": (
-            expected_revision.model_dump(mode="json")
+            expected_revision.model_dump(mode="json", by_alias=True)
             if expected_revision is not None
             else None
         ),
@@ -340,7 +340,9 @@ class FoundryRepository:
                     workspace_id=str(workspace_id.root),
                     deployment_id=str(deployment_id.root),
                     revision_id=revision.ref.revision_id.root,
-                    foundry_package_revision_id=anchor.id,
+                    foundry_package_revision_id=anchor.id
+                    if anchor is not None
+                    else None,
                     selection_json=_canonical_revision(revision).decode("utf-8"),
                     snapshots_json=_canonical_snapshots(
                         stored.execution_snapshots
@@ -504,7 +506,9 @@ class FoundryRepository:
                 execution_snapshots=snapshots,
             )
             anchor = self._package_anchor(revision.specification, corruption=True)
-            if record.foundry_package_revision_id != anchor.id:
+            if record.foundry_package_revision_id != (
+                anchor.id if anchor is not None else None
+            ):
                 raise ValueError("stored Package integrity anchor mismatches selection")
             self._require_lineage_revision(revision.previous_revision)
             self._require_lineage_revision(revision.rollback_of)
@@ -514,7 +518,7 @@ class FoundryRepository:
 
     def _package_anchor(
         self, specification: DeploymentSpecification, *, corruption: bool
-    ) -> FoundryPackageRevision:
+    ) -> FoundryPackageRevision | None:
         package_records: list[tuple[PackageRevisionRef, FoundryPackageRevision]] = []
         for package_ref in specification.package_revisions:
             rows = self._select(
@@ -541,7 +545,7 @@ class FoundryRepository:
                 pair[0].revision_id.root,
             )
         )
-        return package_records[0][1]
+        return package_records[0][1] if package_records else None
 
     def _require_lineage_revision(self, ref: DeploymentRevisionRef | None) -> None:
         if ref is None:
