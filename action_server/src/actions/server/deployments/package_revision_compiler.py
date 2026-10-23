@@ -14,6 +14,7 @@ import os
 import re
 import stat
 import subprocess
+import sys
 import tempfile
 import zipfile
 from collections.abc import Iterable
@@ -1049,6 +1050,17 @@ def _extract_json_object(
     return matches[0]
 
 
+def _parse_rcc_exec_result(output: bytes) -> dict[str, Any]:
+    """Parse RCC env-exec's single JSON result without scanning nested objects."""
+    try:
+        value = json.loads(output)
+    except (TypeError, ValueError, json.JSONDecodeError) as exc:
+        raise ValueError("RCC execution output is not one JSON result") from exc
+    if not isinstance(value, dict) or "artifactDigest" not in value:
+        raise ValueError("RCC execution output is not one artifact result")
+    return value
+
+
 def _canonical_digest(value: object) -> str:
     return "sha256:" + hashlib.sha256(_canonical_json(value)).hexdigest()
 
@@ -1375,7 +1387,7 @@ class PinnedRccPackageBuildExecutor:
             argv.insert(1, "--no-build")
         raw = self._run(argv, workspace, timeout=RCC_BUILD_TIMEOUT_SECONDS)
         try:
-            value = _extract_json_object(raw, required_keys=("artifactDigest",))
+            value = _parse_rcc_exec_result(raw)
         except (TypeError, ValueError, json.JSONDecodeError) as exc:
             raise RuntimeError("RCC execution returned invalid JSON") from exc
         if not isinstance(value, dict):
@@ -1420,9 +1432,13 @@ class PinnedRccPackageBuildExecutor:
     def _child_environment(self, workspace: Path) -> dict[str, str]:
         if self._rcc_home is None:
             raise RuntimeError("RCC home is unavailable")
+        path_entries = os.defpath.split(os.pathsep)
+        if sys.platform.startswith("linux"):
+            # RCC's Linux worker-capability probe resolves ldconfig through PATH.
+            path_entries = ["/usr/sbin", "/sbin", *path_entries]
         environment = {
             "HOME": str(workspace / "home"),
-            "PATH": os.defpath,
+            "PATH": os.pathsep.join(dict.fromkeys(path_entries)),
             "ROBOCORP_HOME": str(self._rcc_home),
             "ACTIONS_HOME": str(workspace / "actions-home"),
             "TMPDIR": str(workspace / "tmp"),
