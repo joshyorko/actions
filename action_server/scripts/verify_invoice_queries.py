@@ -95,6 +95,7 @@ def main():
         *ROOT.glob("action_server/src/actions/server/foundry/*.py"),
         *ROOT.glob("action_server/src/actions/server/managed_work_items/*.py"),
         *ROOT.glob("action_server/tests/action_server_tests/test_managed_work_items_*.py"),
+        ROOT / "action_server/tests/action_server_tests/test_native_run_authority.py",
         *ROOT.glob("action_server/src/actions/server/deployments/*.py"),
         ROOT / "action_server/tests/action_server_tests/foundry_fixtures.py",
         *ROOT.glob("action_server/tests/action_server_tests/test_foundry_*.py"),
@@ -421,6 +422,7 @@ print(json.dumps(identities))
                 "tests/action_server_tests/test_foundry_package_less_storage.py",
                 "tests/action_server_tests/test_foundry_deployments.py",
                 "tests/action_server_tests/test_foundry_sql_authoring.py",
+                "tests/action_server_tests/test_native_run_authority.py",
             ],
             "components": [
                 "tests/action_server_tests/test_invoice_review.py",

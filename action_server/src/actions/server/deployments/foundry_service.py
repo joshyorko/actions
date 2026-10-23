@@ -388,6 +388,9 @@ class FoundryDeploymentService:
             policy=specification.policy,
             output_provider=specification.output_provider,
             canvas_application=specification.canvas_application,
+            capability_authority=getattr(
+                capability_declaration, "capability_authority", "legacy-action"
+            ),
             runtime_kind=_valid_runtime_kind(plan_declaration.runtime_kind),
             capability_schema_digest=_valid_digest(
                 capability_declaration.schema_digest

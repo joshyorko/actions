@@ -282,3 +282,23 @@ immutable source need not acquire an invented `tests/__init__.py`. Successful
 build/cache publication alone is not generated import/test or Runtime Run
 execution evidence. Recompute every compiled preimage and require measured
 successful phase receipts before common Package admission.
+
+Native Package admission uses an explicit `ExecutionSnapshot.capability_authority`
+value of `package-revision`. The existing common Run control plane and service
+require an injected CapabilitySchemaPort for that value; absence never falls
+back to a matching legacy Action row. The verified schema view must bind the
+exact Action identity, Capability, Runtime Plan and input-schema byte digest.
+Live native source authorization is checked alongside the existing Run grants,
+including idempotent admission replay. This port is not a Package build receipt
+or another Run store: the concrete adapter must still verify admitted Package
+bytes and permissions. A schema-port fixture proves the boundary, not a genuine
+generated backend Run.
+
+Legacy snapshots retain their exact previous JSON encoding: the default
+`legacy-action` marker is omitted. The source-codec comparison against
+integration d28251090bc390b1c94a4724a0c286ea7f04ac45 verifies equal legacy wire
+bytes and rejection of an explicit native marker by that older strict codec.
+That focused comparison is not installed-binary upgrade/downgrade or mixed-server
+acceptance. Refresh generated managed-client schemas when consuming the new
+optional snapshot field; no client may infer source authority from runtime_kind,
+Action names or imports.
