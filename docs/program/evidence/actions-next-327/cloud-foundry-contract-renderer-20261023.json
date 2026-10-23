@@ -1,0 +1,113 @@
+{
+  "source_sha": "e4e381b664c13a9893a034d9676eab59f3d0c966",
+  "imported_sources": {
+    "contract": "d16ddbbeac090bd03b759fb890864610a6c052d2",
+    "renderer": "24a618b45c32a5ece427db81911a4791bcdd539e"
+  },
+  "candidates": {
+    "actions-runtime": "1.1.0a9",
+    "actions-core": "1.1.0a2",
+    "actions-work-items": "0.5.0a1"
+  },
+  "receipts": [
+    {
+      "receipt": "/workspace/actions-327-state/evidence/foundry-integration/core-a2-full-20261023.xml",
+      "sha256": "ceddf3498e2ce1a19675e1d40d78e3bff2d6bdd71554ab667b24c0a4cbdd2988",
+      "tests": 332,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "/workspace/actions-327-state/evidence/foundry-integration/core-a2-runtime-contract-20261023.xml",
+      "sha256": "4eadd88c3ee507f818242b10f07055fd90bc5999956e529457917c3818cb999c",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "/workspace/actions-327-state/evidence/foundry-integration/devutils-core-admission-20261023.xml",
+      "sha256": "988c32e576bbcb163faa3bbf04a54e1ca589b522bdf60b6650dce31d5d24824e",
+      "tests": 268,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "/workspace/actions-327-state/evidence/foundry-integration/core-floor-controls-20261023.xml",
+      "sha256": "0249693d4beb481af61d16d756a0ed07ea9af7c533cbf31c72b4f86811e4a156",
+      "tests": 57,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "/workspace/actions-327-state/evidence/foundry-integration/union-a9-installed-20261023.xml",
+      "sha256": "a788019df5826cc696ddc93d032d3e3ef1b563e985180bf683f450b976390cef",
+      "tests": 40,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "/workspace/actions-327-state/evidence/foundry-integration/frontend-declared-all-20261023.log",
+      "sha256": "8fd680cf2d335f21e8127a839f607efae544b698e18bd3267de83909017c68c9"
+    },
+    {
+      "receipt": "/workspace/actions-327-state/evidence/foundry-integration/frontend-union-quality-final-20261023.log",
+      "sha256": "f9f42d2f552ccbd001eb753073b7a0666751a7b495a8c434ecadc8a40be8c012"
+    },
+    {
+      "receipt": "/workspace/actions-327-state/evidence/foundry-integration/frontend-union-build-20261023.log",
+      "sha256": "4a5844ff31314834f5ff6781c8c85be466de465dcd768e6f97ad0b7793650243"
+    },
+    {
+      "receipt": "/workspace/actions-327-state/evidence/foundry-integration/frontend-union-browser-20261023.log",
+      "sha256": "58615c7e3529d10fefb0f42072adfd29ba2119cbd90097c80016976f90d52224"
+    },
+    {
+      "receipt": "/workspace/actions-327-state/evidence/foundry-integration/core-a2-static-20261023.log",
+      "sha256": "e0e07ea3e04cdc1e41ac351112b81db6278732abf8dd3921573737b13bdeb28f"
+    },
+    {
+      "receipt": "/workspace/actions-327-state/evidence/foundry-integration/union-a9-static-20261023.log",
+      "sha256": "80a3dce109951fede38cd96be6d1eb56e004194cc669c9ce6ebe8f33a69843f2"
+    },
+    {
+      "receipt": "/workspace/actions-327-state/evidence/foundry-integration/union-a9-floor-cli-20261023.log",
+      "sha256": "965553282515a2e132c72c23bc59c4f78710e3a18fb9b7f451dcb6629b02c502"
+    }
+  ],
+  "frontend": {
+    "runtime": 280,
+    "canvas_passed": 32,
+    "canvas_skipped": 1,
+    "official_bridge_passed": 1,
+    "official_bridge_skipped": 1
+  },
+  "floor_cli": "PASS: explicit source-bound local Core/SDK wheels, pinned public Helper; exact installed origins/RECORD/module prefixes; default published floor unchanged",
+  "runtime_portable": "running; do not credit until terminal receipt",
+  "original_failures": [
+    "Core prerelease version_info int parsing ValueError",
+    "mypy invalid Literal[SCHEMA_VERSION]",
+    "frontend declared test omitted Canvas View tests",
+    "original worker dependency/bootstrap/full-suite failure receipts remain retained"
+  ],
+  "remaining": [
+    "package-less schema/authoring SQL",
+    "compiler/deployment/authoring/boot integration and real SQL concurrency",
+    "installed SDK/Codex/basic-host joined full lifecycle",
+    "second Python-backed app",
+    "authenticated ChatGPT E1 NEEDS_OPERATOR, Dakota STOP",
+    "all other unified release gates; celld NO-GO"
+  ],
+  "rollback": "Revert candidate admission and reviewed C/R cherry-picks; no schema mutation in this checkpoint. Preserve schema16 backup for prior schema17 storage rollback. No production changes.",
+  "upstream_disposition": "Existing RCC carrier report remains draft only; no new external report",
+  "blocked_action": {
+    "target": "issue/PR101 comment",
+    "state": "denied by automatic approval review",
+    "reason": "reviewer classified destination101 as outside comment authorization; no comment created and no retry"
+  },
+  "authority": "No community/public release/production/other repository/credential changes without separate owner approval"
+}
