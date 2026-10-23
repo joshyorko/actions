@@ -551,4 +551,125 @@ CREATE TABLE IF NOT EXISTS invoice_review(
 '''
 CREATE UNIQUE INDEX invoice_review_binding_id_index ON invoice_review(binding_id);
 ''',
+
+
+'''
+CREATE TABLE IF NOT EXISTS foundry_package_revision(
+    id TEXT NOT NULL PRIMARY KEY,
+    workspace_id TEXT NOT NULL,
+    package_id TEXT NOT NULL,
+    revision_id TEXT NOT NULL,
+    manifest_json TEXT NOT NULL,
+    source_artifact_digest TEXT NOT NULL,
+    source_inventory_json TEXT NOT NULL,
+    build_evidence_json TEXT NOT NULL,
+    FOREIGN KEY (workspace_id) REFERENCES workspace(id)
+)
+''',
+
+
+'''
+CREATE INDEX foundry_package_revision_workspace_id_non_unique_index ON foundry_package_revision(workspace_id);
+''',
+
+
+'''
+CREATE TABLE IF NOT EXISTS foundry_deployment_revision(
+    id TEXT NOT NULL PRIMARY KEY,
+    workspace_id TEXT NOT NULL,
+    deployment_id TEXT NOT NULL,
+    revision_id TEXT NOT NULL,
+    foundry_package_revision_id TEXT NOT NULL,
+    selection_json TEXT NOT NULL,
+    snapshots_json TEXT NOT NULL,
+    FOREIGN KEY (workspace_id) REFERENCES workspace(id),
+    FOREIGN KEY (foundry_package_revision_id) REFERENCES foundry_package_revision(id)
+)
+''',
+
+
+'''
+CREATE INDEX foundry_deployment_revision_workspace_id_non_unique_index ON foundry_deployment_revision(workspace_id);
+''',
+
+
+'''
+CREATE TABLE IF NOT EXISTS foundry_deployment_head(
+    id TEXT NOT NULL PRIMARY KEY,
+    workspace_id TEXT NOT NULL,
+    deployment_id TEXT NOT NULL,
+    active_revision_id TEXT NOT NULL,
+    lock_version INTEGER NOT NULL,
+    FOREIGN KEY (workspace_id) REFERENCES workspace(id)
+)
+''',
+
+
+'''
+CREATE INDEX foundry_deployment_head_workspace_id_non_unique_index ON foundry_deployment_head(workspace_id);
+''',
+
+
+'''
+CREATE TABLE IF NOT EXISTS foundry_request(
+    id TEXT NOT NULL PRIMARY KEY,
+    workspace_id TEXT NOT NULL,
+    principal_id TEXT NOT NULL,
+    operation TEXT NOT NULL,
+    idempotency_key TEXT NOT NULL,
+    request_fingerprint TEXT NOT NULL,
+    result_json TEXT NOT NULL,
+    FOREIGN KEY (workspace_id) REFERENCES workspace(id)
+)
+''',
+
+
+'''
+CREATE INDEX foundry_request_workspace_id_non_unique_index ON foundry_request(workspace_id);
+''',
+
+
+'''
+CREATE TABLE IF NOT EXISTS foundry_audit(
+    id TEXT NOT NULL PRIMARY KEY,
+    workspace_id TEXT NOT NULL,
+    deployment_id TEXT NOT NULL,
+    principal_id TEXT NOT NULL,
+    operation TEXT NOT NULL,
+    foundry_request_id TEXT NOT NULL,
+    from_revision_id TEXT NOT NULL,
+    to_revision_id TEXT NOT NULL,
+    created_ms TEXT NOT NULL,
+    FOREIGN KEY (workspace_id) REFERENCES workspace(id),
+    FOREIGN KEY (foundry_request_id) REFERENCES foundry_request(id)
+)
+''',
+
+
+'''
+CREATE INDEX foundry_audit_workspace_id_non_unique_index ON foundry_audit(workspace_id);
+''',
+
+
+'''
+CREATE TABLE IF NOT EXISTS foundry_access_grant(
+    id TEXT NOT NULL PRIMARY KEY,
+    workspace_id TEXT NOT NULL,
+    principal_id TEXT NOT NULL,
+    subject_kind TEXT NOT NULL,
+    subject_id TEXT NOT NULL,
+    operations_json TEXT NOT NULL,
+    FOREIGN KEY (workspace_id) REFERENCES workspace(id)
+)
+''',
+
+
+'''
+CREATE INDEX foundry_access_grant_workspace_id_non_unique_index ON foundry_access_grant(workspace_id);
+''',
+
+
+'''
+CREATE INDEX foundry_access_grant_principal_id_non_unique_index ON foundry_access_grant(principal_id);
+''',
 ]

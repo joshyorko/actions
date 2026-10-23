@@ -456,7 +456,12 @@ def test_v13_migration_preserves_exact_keys_but_starts_empty_routing_history(tmp
         with db.transaction():
             db.insert(McpCatalogName("old-key", "tool", "old", "owner", "read"))
             db.execute("DROP TABLE mcp_resource_routing")
-            # Restore the real pre-14 schema, including absence of migrations 15 and 16.
+            from action_server_tests.fixtures import (
+                drop_foundry_records_for_backdated_fixture,
+            )
+
+            drop_foundry_records_for_backdated_fixture(db)
+            # Restore the real pre-14 schema, including absence of later records.
             for table in (
                 "invoice_review",
                 "fenced_work_item",

@@ -4854,3 +4854,35 @@ The clean-wheel contract archives committed `HEAD`; it deliberately does not
 build a dirty source overlay. Commit a candidate version/source checkpoint before
 running that acceptance. A wheel from the previous commit must fail the current
 version/member binding instead of being credited to uncommitted code.
+
+Foundry schema17 adds six empty records to the common Runtime database:
+Package/deployment revisions, deployment heads, mutation receipts, audit and
+explicit foundry grants. Registration composes the complete model list before
+`Database.initialize`; an initialized Database rejects a different class set.
+Services borrow that database and transaction rather than creating a Canvas
+side store. Raw ORM records do not validate portable manifests, authorize an
+actor or admit a compiler result; those remain service boundaries. In particular,
+a Run read/execute grant is not an install/bind/activate grant.
+
+The additive migration creates no grant, application activation, Review, Work
+Item, Run or Attempt. Its injected partial-DDL failure rolls back new tables and
+the migration marker on SQLite and real PostgreSQL. Storage rollback and fresh
+interpreter readback are separate from deployment-service CAS/idempotency and
+authorization acceptance. The owned invoice verifier includes a zero-skip
+`foundry_storage` gate and hashes the new model/migration inputs. For a binary
+rollback, preserve a coordinated schema16 SQL/object/journal backup; deleting
+the schema17 marker is not a downgrade or a safe way to reopen newer state with
+an older binary. No production migration is authorized by these fixture tests.
+When backdating a current test database, remove every newer schema object before
+changing the marker. The shared fixture helper drops foundry records in reverse
+registration order. Leaving schema17 indexes in a purported schema10/12/13
+fixture correctly causes duplicate-index rejection; do not relax migration
+checks to accommodate that invalid fixture.
+
+The experimental portable Package schema uses a logical package key; installed
+`PackageRevisionRef.package_id` is a scoped UUID. Keep that mapping outside
+portable bytes. Its sourceArtifact is a measured ZIP: source inventory JSON is
+neither those ZIP bytes nor their digest. The existing measure/stage/re-read
+helpers attest only the explicitly selected set, not selection completeness,
+source trust or a globally atomic snapshot. Compiler hash/admission rules in
+the handoff remain provisional until their own implementation gates pass.

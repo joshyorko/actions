@@ -92,6 +92,7 @@ def main():
     files = [
         *ROOT.glob("action_server/src/actions/server/data_queries/*.py"),
         *ROOT.glob("action_server/src/actions/server/run_outputs/*.py"),
+        *ROOT.glob("action_server/src/actions/server/foundry/*.py"),
         *[
             p
             for p in ROOT.glob("action_server/examples/invoice_reconciliation/**/*")
@@ -130,6 +131,9 @@ def main():
         ROOT / "action_server/src/actions/server/migrations/__init__.py",
         ROOT
         / "action_server/src/actions/server/migrations/migration_add_invoice_reviews.py",
+        ROOT
+        / "action_server/src/actions/server/migrations/migration_add_foundry_records.py",
+        ROOT / "action_server/tests/action_server_tests/test_foundry_storage.py",
     ]
     receipt["inputs"] = {
         str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
@@ -144,7 +148,7 @@ import hashlib, importlib, json, sys
 from pathlib import Path
 source = Path(sys.argv[1]).resolve()
 identities = {}
-for name in ('actions.server.canvas_lifecycle', 'actions.server.data_queries.review', 'actions.server.data_queries.invoice_worker', 'actions.server.data_queries.generated', 'actions.server.data_queries.invoice_effects', 'actions.server.data_queries.knowledge',
+for name in ('actions.server.foundry.models', 'actions.server.canvas_lifecycle', 'actions.server.data_queries.review', 'actions.server.data_queries.invoice_worker', 'actions.server.data_queries.generated', 'actions.server.data_queries.invoice_effects', 'actions.server.data_queries.knowledge',
              'actions.server.data_queries.invoices', 'actions.server.run_outputs.service'):
     module = importlib.import_module(name)
     path = Path(module.__file__).resolve()
@@ -404,6 +408,9 @@ print(json.dumps(identities))
                 "config": str(config),
             }
         suites = {
+            "foundry_storage": [
+                "tests/action_server_tests/test_foundry_storage.py",
+            ],
             "components": [
                 "tests/action_server_tests/test_invoice_review.py",
                 "tests/action_server_tests/test_invoice_review_mcp.py",
@@ -478,6 +485,7 @@ print(json.dumps(identities))
                 or (
                     label
                     in (
+                        "foundry_storage",
                         "components",
                         "invoice",
                         "browser",
