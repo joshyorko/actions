@@ -39,6 +39,11 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--evidence-dir", type=Path, required=True)
     parser.add_argument(
+        "--compiler-receipt",
+        type=Path,
+        help="also prove genuine generated RCC import/test and common SQL Package admission using an exact prepared-cache receipt",
+    )
+    parser.add_argument(
         "--browser",
         action="store_true",
         help="also prove the built Canvas using the isolated local browser host (not ChatGPT)",
@@ -92,6 +97,19 @@ def main():
     files = [
         *ROOT.glob("action_server/src/actions/server/data_queries/*.py"),
         *ROOT.glob("action_server/src/actions/server/run_outputs/*.py"),
+        *ROOT.glob("action_server/src/actions/server/foundry/*.py"),
+        *ROOT.glob("action_server/src/actions/server/managed_work_items/*.py"),
+        *ROOT.glob(
+            "action_server/tests/action_server_tests/test_managed_work_items_*.py"
+        ),
+        ROOT / "action_server/tests/action_server_tests/test_native_run_authority.py",
+        ROOT
+        / "action_server/tests/action_server_tests/test_foundry_package_registry.py",
+        ROOT
+        / "action_server/tests/contract_tests/test_foundry_package_registry_rcc.py",
+        *ROOT.glob("action_server/src/actions/server/deployments/*.py"),
+        ROOT / "action_server/tests/action_server_tests/foundry_fixtures.py",
+        *ROOT.glob("action_server/tests/action_server_tests/test_foundry_*.py"),
         *[
             p
             for p in ROOT.glob("action_server/examples/invoice_reconciliation/**/*")
@@ -130,6 +148,14 @@ def main():
         ROOT / "action_server/src/actions/server/migrations/__init__.py",
         ROOT
         / "action_server/src/actions/server/migrations/migration_add_invoice_reviews.py",
+        ROOT
+        / "action_server/src/actions/server/migrations/migration_add_foundry_records.py",
+        ROOT / "action_server/tests/action_server_tests/test_foundry_storage.py",
+        ROOT
+        / "action_server/src/actions/server/migrations/migration_allow_package_less_canvas.py",
+        ROOT
+        / "action_server/tests/action_server_tests/test_foundry_package_less_storage.py",
+        ROOT / "action_server/tests/action_server_tests/test_foundry_deployments.py",
     ]
     receipt["inputs"] = {
         str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
@@ -144,7 +170,7 @@ import hashlib, importlib, json, sys
 from pathlib import Path
 source = Path(sys.argv[1]).resolve()
 identities = {}
-for name in ('actions.server.canvas_lifecycle', 'actions.server.data_queries.review', 'actions.server.data_queries.invoice_worker', 'actions.server.data_queries.generated', 'actions.server.data_queries.invoice_effects', 'actions.server.data_queries.knowledge',
+for name in ('actions.server.foundry.package_registry', 'actions.server.foundry.sql_authoring', 'actions.server.foundry.sql_authorization', 'actions.server.foundry.authoring', 'actions.server.foundry.boot', 'actions.server.foundry.discovery', 'actions.server.deployments.package_revision_compiler', 'actions.server.deployments.foundry_repository', 'actions.server.deployments.foundry_service', 'actions.server.deployments.foundry_values', 'actions.server.foundry.models', 'actions.server.canvas_lifecycle', 'actions.server.data_queries.review', 'actions.server.data_queries.invoice_worker', 'actions.server.data_queries.generated', 'actions.server.data_queries.invoice_effects', 'actions.server.data_queries.knowledge',
              'actions.server.data_queries.invoices', 'actions.server.run_outputs.service'):
     module = importlib.import_module(name)
     path = Path(module.__file__).resolve()
@@ -222,6 +248,13 @@ print(json.dumps(identities))
             "ACTIONS_INVOICE_TEST_POSTGRES"
         ] = f"postgresql://postgres:synthetic-invoice-only@127.0.0.1:{port}/postgres"
         env["ACTIONS_REQUIRE_INVOICE_PROVIDERS"] = "1"
+        if args.compiler_receipt is not None:
+            env["ACTIONS_PACKAGE_COMPILER_PREPARED_RCC_RECEIPT"] = str(
+                args.compiler_receipt.resolve(strict=True)
+            )
+            receipt["compiler_receipt_sha256"] = hashlib.sha256(
+                args.compiler_receipt.read_bytes()
+            ).hexdigest()
         env["OMP_NUM_THREADS"] = "1"
         env["PYTHONDONTWRITEBYTECODE"] = "1"
         if args.browser or args.generated:
@@ -404,12 +437,24 @@ print(json.dumps(identities))
                 "config": str(config),
             }
         suites = {
+            "foundry_storage": [
+                "tests/action_server_tests/test_foundry_storage.py",
+                "tests/action_server_tests/test_foundry_package_less_storage.py",
+                "tests/action_server_tests/test_foundry_deployments.py",
+                "tests/action_server_tests/test_foundry_sql_authoring.py",
+                "tests/action_server_tests/test_native_run_authority.py",
+                "tests/action_server_tests/test_foundry_package_registry.py",
+            ],
             "components": [
                 "tests/action_server_tests/test_invoice_review.py",
                 "tests/action_server_tests/test_invoice_review_mcp.py",
                 "tests/action_server_tests/test_candidate_work_items.py",
                 "tests/action_server_tests/test_canvas_lifecycle.py",
                 "tests/action_server_tests/test_knowledge_collections.py",
+                "tests/action_server_tests/test_foundry_authoring.py",
+                "tests/action_server_tests/test_foundry_boot.py",
+                "tests/action_server_tests/test_foundry_discovery.py",
+                "tests/action_server_tests/mcp/test_foundry_mcp.py",
             ],
             "invoice": [
                 "tests/action_server_tests/test_invoice_providers.py",
@@ -426,6 +471,10 @@ print(json.dumps(identities))
                 "tests/action_server_tests/test_robot_run_inputs.py",
                 "tests/action_server_tests/test_rcc_runtime_adapter.py::test_local_worker_carrier_keeps_provider_and_policy_explicit",
                 "tests/action_server_tests/test_rcc_runtime_adapter.py::test_local_carrier_cannot_replace_nonlocal_provider_trust",
+            ]
+        if args.compiler_receipt is not None:
+            suites["package_compiler"] = [
+                "tests/contract_tests/test_foundry_package_registry_rcc.py"
             ]
         if args.browser:
             suites["browser"] = [
@@ -478,12 +527,14 @@ print(json.dumps(identities))
                 or (
                     label
                     in (
+                        "foundry_storage",
                         "components",
                         "invoice",
                         "browser",
                         "worker",
                         "generated",
                         "effects",
+                        "package_compiler",
                     )
                     and counts["skipped"]
                 )

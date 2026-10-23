@@ -2,13 +2,13 @@
 
 [[package]]
 name = "actions-core"
-version = "1.0.3"
+version = "1.1.0a2"
 description = "Actions Core"
 optional = false
 python-versions = "^3.10"
 groups = ["main", "dev"]
 files = []
-develop = true
+develop = false
 
 [package.dependencies]
 actions-http-helper = "^1.0.0"
@@ -4051,4 +4051,4 @@ data-duckdb = ["duckdb"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<3.14"
-content-hash = "6215ae5b5977ba7fe585f68107a97965095a0990bede96767ee9a1f428f3fc3c"
+content-hash = "5c23fee85d2a4023d1efac47d908c7d7995286f54d99a53cf4b1bf9ed5439d2c"

@@ -1,0 +1,112 @@
+{
+  "source_sha": "bb57129fdc3e4113aa9a73b2fa123d916cd9abbf",
+  "runtime_candidate": "1.1.0a15",
+  "core_candidate": "1.1.0a2",
+  "sdk_candidate": "0.5.0a1; unchanged SDK source",
+  "implemented": "Trusted host compiler object -> common immutable FoundryPackageRevision, source provider, request/audit/grants in one SQL transaction; verified reload/fresh interpreter; concurrent duplicate preservation/no regrant; exact native schemas and common Run admission without legacy Action mirror.",
+  "qualification": {
+    "status": "PASS",
+    "cleanup": "PASS",
+    "counts": {
+      "foundry_storage": {
+        "tests": 90,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "components": {
+        "tests": 161,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "invoice": {
+        "tests": 129,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "package_compiler": {
+        "tests": 2,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "portable": {
+        "tests": 2028,
+        "skipped": 13,
+        "failures": 0,
+        "errors": 0
+      }
+    },
+    "portable": "2015passed/13skipped/264deselected; XML tests2028 includes13skipped",
+    "static": "configured lint/typecheck430PASS; markdown linter absent, warning retained",
+    "genuine": "Dedicated2 cases executed actual pinned RCC18.19.3 build/import/test, Package admission and common Run admission on SQLite AND owned real PostgreSQL. This is not execution of a business Run. Compiler cache exact receipt hash is in raw verifier receipt.",
+    "overlap": "Selections overlap and are not a summed acceptance count",
+    "installed": "No a15 wheel/native/installed-client qualification yet",
+    "skip_reasons": {
+      "Windows only": 6,
+      "Requires native Windows locking": 1,
+      "native Windows path resolution": 1,
+      "Skip package upload test": 3,
+      "set ACTIONS_REAL_RCC_ARTIFACT_TEST=1": 1,
+      "set ACTIONS_ROBOT_INPUT_RCC to pinned RCC18.19.3 for actual task-input acceptance": 1
+    }
+  },
+  "failed_receipts": [
+    {
+      "path": "/workspace/actions-327-state/evidence/package-registry-frozen-20261023/e059f327-e1ba-4a1a-9400-03df79ffd7e9/receipt.json",
+      "sha256": "40ab560b0863c11fd47dbfd70fe29a6e0f241018eb2e5df8c908d66dbfee7d9c",
+      "result": "2failed/88passed SQL gate: missing provider import in fresh-interpreter test, repaired"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/package-registry-final-20261023/84ee596c-ddf8-4bfb-9682-e8325d305ab2/receipt.json",
+      "sha256": "b9be377ce4092ed795b6e3a63774c126be820151a5a0087e3272edd3b8bde592",
+      "result": "SQL90/components161/invoice129 passed; genuine RCC1passed/1failed before PG Package admission; portable did not run; original phase cause not established"
+    }
+  ],
+  "resource_recovery": "Exact task-owned materialized compiler views removed using pinned RCC holotree delete after no-active-process check, metadata/journal preservation and dryrun. Free bytes531365888 ->2377146368. Immutable catalog/artifacts/package caches and all receipts retained. Passing retry does not establish the original failure root cause. No denied worker cleanup was retried.",
+  "commands": [
+    "bash /workspace/actions-327-state/run-prepared python action_server/scripts/verify_invoice_queries.py --full --compiler-receipt /workspace/actions-327-state/compiler-acceptance/3e744f96-749a-47e5-84b9-7e7f297bc8b9/prepared.json --evidence-dir /workspace/actions-327-state/evidence/package-registry-recovered-20261023",
+    "bash /workspace/actions-327-state/run-package action_server poetry run invoke lint typecheck"
+  ],
+  "receipts": [
+    {
+      "path": "/workspace/actions-327-state/evidence/package-registry-recovered-20261023/e0286c60-77ff-4632-b368-a8cabb5e2cf3/receipt.json",
+      "sha256": "dd38d7cc1fdde3bc0f7bc66ccf98804afb97c15e1d0e94aa23d4f2dadcf19125"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/package-registry-recovered-20261023/e0286c60-77ff-4632-b368-a8cabb5e2cf3/foundry_storage.xml",
+      "sha256": "8337ec8bd8aa0992106d595bce2b235642afbe86da9aa37defb30394942ed153"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/package-registry-recovered-20261023/e0286c60-77ff-4632-b368-a8cabb5e2cf3/components.xml",
+      "sha256": "3e76f426ee9b5c072eb72c09c9c4fb5c9595d98c9fe26ab4e26b7e0f4d972699"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/package-registry-recovered-20261023/e0286c60-77ff-4632-b368-a8cabb5e2cf3/invoice.xml",
+      "sha256": "b650876a77590a2579727b69dfd0f39908d2ff92baa49ee1b43998acf4747ae5"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/package-registry-recovered-20261023/e0286c60-77ff-4632-b368-a8cabb5e2cf3/package_compiler.xml",
+      "sha256": "7fea8ae58549cd58cc563773253e2ae1b908165683bd4485607a108963d00750"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/package-registry-recovered-20261023/e0286c60-77ff-4632-b368-a8cabb5e2cf3/portable.xml",
+      "sha256": "54ab36c54dbee6c0a41a2cbfe534879ed0bdd9dad1933ac32406996435e2d2f7"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/package-registry-static-qualified-20261023.log",
+      "sha256": "ab31676c038c59d49a1e1bc2c83ca1e48a6d271b51df43ceb612d69cbe0ba869"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/foundry-integration/compiler-owned-space-cleanup-20261023/receipt.json",
+      "sha256": "e159775aece77ee5e42342779588ea265fd8e214d8a9a4591d0a38b6bcabba59"
+    }
+  ],
+  "canonical_documentation_delta": "docs/skills/provenance-observability.md now specifies the exact host-only compiler bridge, live generate_backend/deploy policy, SQL admission vs provider source storage, duplicate/no-regrant behavior, no legacy Action mirror, retention of uncertain seals and strict --compiler-receipt gate. Evidence: SQL90 including concurrent/revocation/rollback/fresh-interpreter cases, genuineRCC2 and exact preimage reloads.",
+  "rollback": "No new DDL. Before new native Package/Run rows are used, code may revert; afterward old strict codecs/Package adapters fail closed and coordinated SQL+object+RCC restore is required. Never delete uncertain source seals or schema markers as rollback.",
+  "pending": "P0 normal Runtime Canvas factory/route+official semantic View; concrete generated business Run adapter and declared Work Items mode; native model execution route; installed standard MCP/Codex/basic-host/second app; mounted managed SQL service/auth and installed VSIX; same release matrix retained.",
+  "upstream_disposition": "Existing RCC report remains draft only; current transient genuine failure not established as upstream defect",
+  "authority": "No community/public release/production/other repository/credential changes without separate approval; E1 NEEDS_OPERATOR after cloud readiness; celld NO-GO"
+}

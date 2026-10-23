@@ -29,8 +29,10 @@ from actions.server.run_outputs.models import (
 )
 from actions.server.run_outputs.types import (
     Actor,
+    AdmittedActionSchema,
     AttemptFence,
     CanvasResultScope,
+    CapabilitySchemaPort,
     ExecutionSnapshot,
     OutputRef,
     SealReceipt,
@@ -153,7 +155,25 @@ def _one(db: Database, cls: type[T], key: str) -> T:
     return rows[0]
 
 
-def _action_identity(db: Database, snapshot: ExecutionSnapshot) -> Action:
+def _action_identity(
+    db: Database,
+    snapshot: ExecutionSnapshot,
+    capabilities: CapabilitySchemaPort | None = None,
+) -> Action | AdmittedActionSchema:
+    if snapshot.capability_authority == "package-revision":
+        if capabilities is None:
+            raise AccessDenied("Package admission authority is unavailable")
+        schema = capabilities.schema_for(snapshot)
+        if not isinstance(schema, AdmittedActionSchema) or (
+            schema.action_id != snapshot.action_id
+            or schema.capability != snapshot.capability
+            or schema.runtime_plan != snapshot.runtime_plan
+            or "sha256:"
+            + hashlib.sha256(schema.input_schema.encode("utf-8")).hexdigest()
+            != snapshot.capability_schema_digest
+        ):
+            raise AccessDenied("Package schema differs from exact Run admission")
+        return schema
     action = _one(db, Action, snapshot.action_id)
     package_id = str(snapshot.capability.package_revision.package_id.root)
     package = _one(db, ActionPackage, package_id)
@@ -224,9 +244,12 @@ def _lease_duration(seconds: int) -> int:
 class RunOutputControlPlane:
     """Trusted admin operations; never installed as an Action/package API."""
 
-    def __init__(self, db: Database):
+    def __init__(
+        self, db: Database, *, capabilities: CapabilitySchemaPort | None = None
+    ):
         _private_diagnostics(db)
         self.db = db
+        self.capabilities = capabilities
 
     def register(self, snapshot: ExecutionSnapshot) -> str:
         snapshot = _snapshot(snapshot)
@@ -243,7 +266,7 @@ class RunOutputControlPlane:
             if not rows:
                 _insert(self.db, Workspace(snapshot.workspace_id, "active", 0))
             _lock_workspace(self.db, snapshot.workspace_id)
-            _action_identity(self.db, snapshot)
+            _action_identity(self.db, snapshot, self.capabilities)
             admissions = self.db.all(RunAdmission, where="id=?", values=[key])
             if admissions:
                 if (
@@ -327,10 +350,17 @@ class ResolvedOutput:
 
 
 class RunOutputService:
-    def __init__(self, db: Database, providers: dict[str, OutputProvider]):
+    def __init__(
+        self,
+        db: Database,
+        providers: dict[str, OutputProvider],
+        *,
+        capabilities: CapabilitySchemaPort | None = None,
+    ):
         _private_diagnostics(db)
         self.db = db
         self.providers = dict(providers)
+        self.capabilities = capabilities
 
     def _authorize(
         self, actor: Actor, snapshot: ExecutionSnapshot, operation: str
@@ -364,6 +394,10 @@ class RunOutputService:
                 raise ValueError("invalid or missing operation")
         except (ValueError, TypeError) as exc:
             raise AccessDenied("Run/output unavailable or access denied") from exc
+        if snapshot.capability_authority == "package-revision":
+            if self.capabilities is None:
+                raise AccessDenied("Package admission authority is unavailable")
+            self.capabilities.authorize(actor, snapshot, operation)
 
     def _pinned(self, pin: RunPin) -> ExecutionSnapshot:
         row = _one(self.db, RunAdmission, pin.run_admission_id)
@@ -424,7 +458,7 @@ class RunOutputService:
             ):
                 raise AccessDenied("Run/output unavailable or access denied")
             self._authorize(actor, snapshot, "execute")
-            action = _action_identity(self.db, snapshot)
+            action = _action_identity(self.db, snapshot, self.capabilities)
             from jsonschema import validate
             from jsonschema.exceptions import SchemaError, ValidationError
 

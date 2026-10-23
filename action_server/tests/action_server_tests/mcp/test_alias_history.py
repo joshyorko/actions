@@ -416,7 +416,12 @@ def test_v12_migration_creates_empty_history_matching_fresh_schema(tmp_path):
         expected_columns = db.list_table_and_columns()
         expected_indexes = db.list_indexes()
         with db.transaction():
-            # Restore the real pre-13 schema, including absence of migrations 15 and 16.
+            from action_server_tests.fixtures import (
+                drop_foundry_records_for_backdated_fixture,
+            )
+
+            drop_foundry_records_for_backdated_fixture(db)
+            # Restore the real pre-13 schema, including absence of later records.
             for table in (
                 "invoice_review",
                 "fenced_work_item",

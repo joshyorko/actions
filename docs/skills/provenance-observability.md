@@ -262,3 +262,72 @@ rejection; raw, encoded, multiline, child-output, argv, and provider
 diagnostic redaction; exporter failure; bounded metrics; and auditable adapter
 promotion/revocation. Equivalent logical executions must have equivalent
 receipt shape, with placement-specific evidence only where applicable.
+
+
+## Generated Package compiler preparation
+
+The compiler can consume a trusted-host-prepared RCC cache only when the exact
+staged `package.yaml` raw-byte digest matches its bounded local receipt. RCC
+publish/exec replay uses `--no-build`, rechecks specification/artifact identity
+and retains the actual worker compatibility check. The local cache path is
+preparation evidence, never portable manifest data or admission by itself.
+Trusted dependency preparation may use the existing proxy allowlist; generated
+Python receives the compiler's sanitized child environment without proxy,
+account or auth settings. Accurate Linux library detection requires trusted
+system executable directories `/usr/sbin` and `/sbin` for `ldconfig`; retaining
+that probe is different from bypassing compatibility. RCC18.19.3 exec JSON is
+one top-level result object, including nested repeated artifact identities.
+Generated unittest discovery uses the supplied `tests/` as its top level, so
+immutable source need not acquire an invented `tests/__init__.py`. Successful
+build/cache publication alone is not generated import/test or Runtime Run
+execution evidence. Recompute every compiled preimage and require measured
+successful phase receipts before common Package admission.
+
+Native Package admission uses an explicit `ExecutionSnapshot.capability_authority`
+value of `package-revision`. The existing common Run control plane and service
+require an injected CapabilitySchemaPort for that value; absence never falls
+back to a matching legacy Action row. The verified schema view must bind the
+exact Action identity, Capability, Runtime Plan and input-schema byte digest.
+Live native source authorization is checked alongside the existing Run grants,
+including idempotent admission replay. This port is not a Package build receipt
+or another Run store: the concrete adapter must still verify admitted Package
+bytes and permissions. A schema-port fixture proves the boundary, not a genuine
+generated backend Run.
+
+Legacy snapshots retain their exact previous JSON encoding: the default
+`legacy-action` marker is omitted. The source-codec comparison against
+integration d28251090bc390b1c94a4724a0c286ea7f04ac45 verifies equal legacy wire
+bytes and rejection of an explicit native marker by that older strict codec.
+That focused comparison is not installed-binary upgrade/downgrade or mixed-server
+acceptance. Refresh generated managed-client schemas when consuming the new
+optional snapshot field; no client may infer source authority from runtime_kind,
+Action names or imports.
+
+`foundry.package_registry.FoundryPackageRegistry` joins the existing compiler,
+Foundry SQL rows and private output provider. Its host-configured compiler
+requires explicit trusted-developer execution admission plus live
+`generate_backend` and Workspace `deploy` policy. Only the exact locally held
+compiler object can cross admission; a reconstructed object or client-supplied
+phase receipt grants nothing. Pending objects are a bounded local call bridge,
+not durable state. After admission, every load remeasures sealed source bytes
+and verifies the manifest, inventory, schemas, plan, adapter and build receipt.
+Fresh-process readback uses SQL and provider objects, not that memory bridge.
+
+Package admission serializes on the common Workspace lock. Package row,
+request, audit and newly created source-reference grants commit together.
+Duplicate builds preserve the first admitted bytes and never restore revoked
+reference grants. The derived Run Action identity does not create a legacy
+Action row. This proves Package/Run admission, not execution of a business job.
+Run/Attempt execution, explicit Work Items mode and external-effect recovery
+remain separately required.
+
+The source seal is created before SQL publication. If publication fails or its
+acknowledgement is uncertain, retain that owned seal until authoritative SQL
+reconciliation proves it unreferenced; never delete on a timeout assumption.
+Only a proven unused duplicate seal is discarded immediately. This adapter
+does not qualify general orphan retention/restore or automatic retry.
+`verify_invoice_queries.py --compiler-receipt <exact-prepared-receipt>` adds
+genuine RCC build/import/test-to-Package admission against both owned SQL
+providers. Its strict `package_compiler` selection rejects skipped cases.
+That receipt is a cache precondition, not a replacement for generated-code
+execution or a claim that RCC is a malicious-code sandbox.

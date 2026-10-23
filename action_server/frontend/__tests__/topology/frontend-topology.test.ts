@@ -80,5 +80,7 @@ describe('Actions frontend topology', () => {
     expect(manifest.scripts['test:quality']).not.toContain('||');
     expect(manifest.scripts['test:lint']).toContain('src/app');
     expect(manifest.scripts['test:lint']).not.toMatch(/\s\.\s*$/);
+    expect(manifest.scripts.test).toContain('test:canvas');
+    expect(manifest.scripts['test:canvas']).toContain('apps/canvas-view/vitest.config.ts');
   });
 });

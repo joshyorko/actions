@@ -3,7 +3,9 @@
   "description": "",
   "version": "0.0.1",
   "private": true,
-  "engines": { "node": ">=20.19.0" },
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "copyright": "Copyright 2024 Josh Yorko",
   "license": "Apache-2.0",
   "main": "index.js",
@@ -25,7 +27,7 @@
     "test:prettier": "prettier --end-of-line auto --check apps/runtime/src apps/canvas-view/src src/app",
     "prettier": "prettier --write ./src/**/*.{ts,tsx}",
     "fixlint": "eslint --fix --ext .tsx,.ts .",
-    "test": "vitest --run",
+    "test": "vitest --run && npm run test:canvas",
     "test:canvas-harness": "npm run build:canvas && playwright test --config playwright.canvas-harness.config.ts",
     "test:topology": "vitest --run --testNamePattern \"Actions frontend topology\"",
     "test:ui-system": "vitest --run __tests__/ui-system.test.ts",
@@ -34,7 +36,8 @@
     "validate:artifacts": "node scripts/validate-artifacts.mjs",
     "sbom:runtime": "cyclonedx-npm --package-lock-only --output-format json --output-reproducible --output-file dist/sbom.json",
     "sbom:canvas": "cyclonedx-npm --package-lock-only --output-format json --output-reproducible --output-file dist-canvas/sbom.json",
-    "sbom": "cyclonedx-npm --package-lock-only --output-format json --output-reproducible --output-file dist/sbom.json && cyclonedx-npm --package-lock-only --output-format json --output-reproducible --output-file dist-canvas/sbom.json"
+    "sbom": "cyclonedx-npm --package-lock-only --output-format json --output-reproducible --output-file dist/sbom.json && cyclonedx-npm --package-lock-only --output-format json --output-reproducible --output-file dist-canvas/sbom.json",
+    "test:canvas": "vitest --run --config apps/canvas-view/vitest.config.ts"
   },
   "dependencies": {
     "@codemirror/commands": "^6.6.0",
