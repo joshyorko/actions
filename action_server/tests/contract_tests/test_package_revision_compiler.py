@@ -70,7 +70,7 @@ def _generated_action_entries(action_source: bytes | None = None) -> list:
             b"from generated_actions import generated_echo\n\n"
             b"class GeneratedActionTest(unittest.TestCase):\n"
             b"    def test_echo(self):\n"
-            b"        self.assertEqual(generated_echo.run(value='synthetic'), 'synthetic')\n",
+            b"        self.assertEqual(generated_echo(value='synthetic'), 'synthetic')\n",
         ),
     ]
 

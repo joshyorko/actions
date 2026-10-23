@@ -1348,7 +1348,7 @@ class PinnedRccPackageBuildExecutor:
             "package_dir, tests_dir = sys.argv[1], sys.argv[2]\n"
             "sys.path.insert(0, package_dir)\n"
             "suite = unittest.defaultTestLoader.discover("
-            "tests_dir, pattern='test_*.py', top_level_dir=package_dir)\n"
+            "tests_dir, pattern='test_*.py', top_level_dir=tests_dir)\n"
             "runner = unittest.TextTestRunner(stream=io.StringIO(), verbosity=0)\n"
             "result = runner.run(suite)\n"
             "if result.testsRun == 0: raise SystemExit(74)\n"
