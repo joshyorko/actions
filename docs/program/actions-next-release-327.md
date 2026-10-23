@@ -154,6 +154,12 @@ semantic view through AppBridge and double iframe; screenshot Library ID
 is repaired at these exact candidates. The view remains read-only: generated
 execution/app interaction, actual model CLI and authenticated E1 are open.
 Failed version/schema/build/browser-fixture attempts remain in the receipt.
+Pinned Doctor/Bootstrap/ToolkitTest were refreshed on9e3c9bd0 and passed
+(Toolkit179). Private verification bundle Library
+`libfile_fc92b755fc34819193be1176811a9e5d` was extracted and actually rerun in
+another fresh consumer without checkout imports. It carries the three local
+candidate wheels, not the66 public dependency wheels; offline cold preparation
+remains unverified. It is an authoring verification artifact, not a release.
 
 Source keys (exact observed branch heads, not interchangeable acceptance):
 

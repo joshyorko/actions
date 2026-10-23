@@ -136,5 +136,49 @@
     "evidence": "Reproduced JSON Schema failure, real SQL full gate, measured wheel source members, isolated CLI/MCP lifecycle, actual official host screenshot and cleanup."
   },
   "rollback": "No new DDL; schema18 data/SQL+objects/source/journal coordinated restore remains required for downgrade. UI rollback changes active head without deleting admitted work/audit. Bootstrap receipt must not be deleted to restore revoked grants.",
-  "upstream_disposition": "Existing RCC report remains draft only; standalone host fixture setup failures are not established upstream defects."
+  "upstream_disposition": "Existing RCC report remains draft only; standalone host fixture setup failures are not established upstream defects.",
+  "refreshed_gateway": {
+    "source": "9e3c9bd0fc619739df9a112765649b58866b7860",
+    "pin": "RCC18.19.3",
+    "sequence": [
+      {
+        "task": "Doctor",
+        "command": "bash /workspace/actions-327-state/run-prepared rcc run -r developer/toolkit.yaml --dev -t Doctor",
+        "result": "PASS",
+        "log": "/workspace/actions-327-state/evidence/foundry-integration/joined-9e3c9bd0-doctor.log",
+        "sha256": "a014aa60f9843df3327800306c57b4bcbc3988f2e7dbaf5b296d75b96a803f22"
+      },
+      {
+        "task": "Bootstrap",
+        "command": "bash /workspace/actions-327-state/run-prepared rcc run -r developer/toolkit.yaml --dev -t Bootstrap",
+        "result": "PASS",
+        "log": "/workspace/actions-327-state/evidence/foundry-integration/joined-9e3c9bd0-bootstrap.log",
+        "sha256": "84f404ca1771e96566b220f3514bae0e300cefbcff72bd1528bca685a30b99de"
+      },
+      {
+        "task": "ToolkitTest",
+        "command": "bash /workspace/actions-327-state/run-prepared rcc run -r developer/toolkit.yaml --dev -t ToolkitTest",
+        "result": "PASS179",
+        "log": "/workspace/actions-327-state/evidence/foundry-integration/joined-9e3c9bd0-toolkit-test.log",
+        "sha256": "9614a8e0b9a14944ebae182fe39d55a8ee7a1acf6ba66253910594a8f8a44b8d"
+      }
+    ]
+  },
+  "private_verification_bundle": {
+    "library_file_id": "libfile_fc92b755fc34819193be1176811a9e5d",
+    "archive": "/tmp/actions-327-a17-private-authoring.zip",
+    "sha256": "7e893df7fb2ce6f701a04ee0fd729825216569a51a754712491f038dcebd472c",
+    "size_bytes": 14840251,
+    "contents": "Exact three measured candidate wheels,66 pinned public dependency requirements, source/wheel hash manifest, portable installed MCP verification script and README; no credentials/state/source checkout.",
+    "qa": "PASS: extract to new owned directory, verify manifest hashes, new consumer venv from pinned Python, install only local candidates plus public requirements, pip check, -I verify.py; normal Runtime socket/create/apply/activate/restart/rollback; both Runtime processes stopped.",
+    "qa_evidence": "/workspace/actions-327-state/evidence/foundry-integration/a17-extracted-private-bundle-qa",
+    "commands": [
+      "python3.12 -m venv consumer",
+      "consumer/bin/python -m pip install -r requirements.txt wheels/*.whl",
+      "consumer/bin/python -m pip check",
+      "consumer/bin/python -I verify.py"
+    ],
+    "network": "Public dependency wheels are not bundled; package-index access or an authorized preloaded cache is required. Offline cold preparation remains unverified.",
+    "limits": "Authoring/read-only semantic evidence only; not a generated execution or final release bundle."
+  }
 }
