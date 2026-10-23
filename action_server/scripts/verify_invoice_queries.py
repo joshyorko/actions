@@ -93,7 +93,9 @@ def main():
         *ROOT.glob("action_server/src/actions/server/data_queries/*.py"),
         *ROOT.glob("action_server/src/actions/server/run_outputs/*.py"),
         *ROOT.glob("action_server/src/actions/server/foundry/*.py"),
-        *ROOT.glob("action_server/src/actions/server/deployments/foundry_*.py"),
+        *ROOT.glob("action_server/src/actions/server/deployments/*.py"),
+        ROOT / "action_server/tests/action_server_tests/foundry_fixtures.py",
+        *ROOT.glob("action_server/tests/action_server_tests/test_foundry_*.py"),
         *[
             p
             for p in ROOT.glob("action_server/examples/invoice_reconciliation/**/*")
@@ -152,7 +154,7 @@ import hashlib, importlib, json, sys
 from pathlib import Path
 source = Path(sys.argv[1]).resolve()
 identities = {}
-for name in ('actions.server.deployments.foundry_repository', 'actions.server.deployments.foundry_service', 'actions.server.deployments.foundry_values', 'actions.server.foundry.models', 'actions.server.canvas_lifecycle', 'actions.server.data_queries.review', 'actions.server.data_queries.invoice_worker', 'actions.server.data_queries.generated', 'actions.server.data_queries.invoice_effects', 'actions.server.data_queries.knowledge',
+for name in ('actions.server.foundry.sql_authoring', 'actions.server.foundry.sql_authorization', 'actions.server.foundry.authoring', 'actions.server.foundry.boot', 'actions.server.foundry.discovery', 'actions.server.deployments.package_revision_compiler', 'actions.server.deployments.foundry_repository', 'actions.server.deployments.foundry_service', 'actions.server.deployments.foundry_values', 'actions.server.foundry.models', 'actions.server.canvas_lifecycle', 'actions.server.data_queries.review', 'actions.server.data_queries.invoice_worker', 'actions.server.data_queries.generated', 'actions.server.data_queries.invoice_effects', 'actions.server.data_queries.knowledge',
              'actions.server.data_queries.invoices', 'actions.server.run_outputs.service'):
     module = importlib.import_module(name)
     path = Path(module.__file__).resolve()
@@ -416,6 +418,7 @@ print(json.dumps(identities))
                 "tests/action_server_tests/test_foundry_storage.py",
                 "tests/action_server_tests/test_foundry_package_less_storage.py",
                 "tests/action_server_tests/test_foundry_deployments.py",
+                "tests/action_server_tests/test_foundry_sql_authoring.py",
             ],
             "components": [
                 "tests/action_server_tests/test_invoice_review.py",
@@ -423,6 +426,10 @@ print(json.dumps(identities))
                 "tests/action_server_tests/test_candidate_work_items.py",
                 "tests/action_server_tests/test_canvas_lifecycle.py",
                 "tests/action_server_tests/test_knowledge_collections.py",
+                "tests/action_server_tests/test_foundry_authoring.py",
+                "tests/action_server_tests/test_foundry_boot.py",
+                "tests/action_server_tests/test_foundry_discovery.py",
+                "tests/action_server_tests/mcp/test_foundry_mcp.py",
             ],
             "invoice": [
                 "tests/action_server_tests/test_invoice_providers.py",

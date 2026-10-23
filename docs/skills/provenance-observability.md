@@ -262,3 +262,23 @@ rejection; raw, encoded, multiline, child-output, argv, and provider
 diagnostic redaction; exporter failure; bounded metrics; and auditable adapter
 promotion/revocation. Equivalent logical executions must have equivalent
 receipt shape, with placement-specific evidence only where applicable.
+
+
+## Generated Package compiler preparation
+
+The compiler can consume a trusted-host-prepared RCC cache only when the exact
+staged `package.yaml` raw-byte digest matches its bounded local receipt. RCC
+publish/exec replay uses `--no-build`, rechecks specification/artifact identity
+and retains the actual worker compatibility check. The local cache path is
+preparation evidence, never portable manifest data or admission by itself.
+Trusted dependency preparation may use the existing proxy allowlist; generated
+Python receives the compiler's sanitized child environment without proxy,
+account or auth settings. Accurate Linux library detection requires trusted
+system executable directories `/usr/sbin` and `/sbin` for `ldconfig`; retaining
+that probe is different from bypassing compatibility. RCC18.19.3 exec JSON is
+one top-level result object, including nested repeated artifact identities.
+Generated unittest discovery uses the supplied `tests/` as its top level, so
+immutable source need not acquire an invented `tests/__init__.py`. Successful
+build/cache publication alone is not generated import/test or Runtime Run
+execution evidence. Recompute every compiled preimage and require measured
+successful phase receipts before common Package admission.

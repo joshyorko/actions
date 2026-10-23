@@ -20,8 +20,8 @@ from actions.server.foundry.discovery import (
     InstanceState,
     ServerInfo,
     read_server_info,
-    register_or_attach_server_info,
     reconcile_server_info,
+    register_or_attach_server_info,
     remove_server_info,
     write_server_info,
 )

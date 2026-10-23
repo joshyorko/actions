@@ -69,30 +69,7 @@ from actions.server.run_outputs.models import RunPin, Workspace
 from actions.server.run_outputs.service import RunOutputControlPlane, RunOutputService
 from actions.server.run_outputs.types import Actor
 
-
-@pytest.fixture(params=["sqlite", "postgresql"])
-def database_location(request, tmp_path):
-    if request.param == "sqlite":
-        yield tmp_path / "runtime.db"
-        return
-    base = os.environ.get("ACTIONS_INVOICE_TEST_POSTGRES")
-    if not base:
-        if os.environ.get("ACTIONS_REQUIRE_INVOICE_PROVIDERS") == "1":
-            pytest.fail("owned PostgreSQL deployment fixture required")
-        pytest.skip("owned PostgreSQL deployment fixture not configured")
-    import psycopg
-    from action_server_tests.test_database_shared import _postgresql_schema_url
-
-    schema = "foundry_deployment_" + uuid4().hex
-    owner = psycopg.connect(base, autocommit=True)
-    try:
-        owner.execute(f'CREATE SCHEMA "{schema}"')
-        yield _postgresql_schema_url(base, schema)
-    finally:
-        try:
-            owner.execute(f'DROP SCHEMA "{schema}" CASCADE')
-        finally:
-            owner.close()
+pytest_plugins = ["action_server_tests.foundry_fixtures"]
 
 
 def _uuid() -> str:
@@ -1337,3 +1314,52 @@ def test_backend_snapshot_pins_canvas_source_and_rejects_altered_spec(
         with pytest.raises(ValueError, match="differs from immutable source"):
             DeploymentSpecification.model_validate_json(json.dumps(values))
         assert len(db.all(FoundryDeploymentRevision)) == 1
+
+
+def test_staged_snapshot_is_not_execution_authority(database_location):
+    refs = _refs()
+    actor = Actor(principal_id=_uuid())
+    with _runtime_database(database_location, refs.workspace, (refs.package,)) as db:
+        service, _, _ = _service(db, refs)
+        repository = FoundryRepository(db)
+        staged = repository.stage(
+            refs.workspace,
+            refs.deployment_id,
+            None,
+            _spec(refs),
+            principal_id=actor.principal_id,
+            operation="canvas.create",
+            idempotency_key="stage",
+            input_digest=_digest("a"),
+            preflight=lambda: None,
+            snapshot_builder=service._execution_snapshots,
+        )
+        assert repository.get_revision(staged.ref).execution_snapshots
+        assert repository.current(refs.workspace, refs.deployment_id) is None
+        with pytest.raises(AccessDenied, match="not been explicitly activated"):
+            service.resolve(
+                actor,
+                refs.workspace,
+                refs.deployment_id,
+                refs.capability,
+                revision=staged.ref,
+            )
+        activated = repository.activate_existing(
+            staged.ref,
+            None,
+            principal_id=actor.principal_id,
+            operation="canvas.release",
+            idempotency_key="release",
+            input_digest=_digest("b"),
+            preflight=lambda revision: service._validate_package_contracts(
+                revision.specification
+            ),
+            snapshot_builder=service._execution_snapshots,
+        )
+        assert activated.ref == staged.ref
+        assert (
+            service.resolve(
+                actor, refs.workspace, refs.deployment_id, refs.capability
+            ).snapshot.deployment
+            == staged.ref
+        )

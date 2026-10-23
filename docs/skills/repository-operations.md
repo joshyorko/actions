@@ -4945,3 +4945,25 @@ head/lock-version CAS, actor-scoped request receipt and audit event. Replay
 reauthorizes and validates the original immutable receipt. Isolated Package
 port doubles qualify these consumer semantics, not genuine compiler admission
 or end-to-end Run execution. Those require their own combined gates.
+
+
+`SqlAuthoringAuthority` stages complete immutable Deployment revisions in the
+same SQL records. Bounded edit history is a linear revision sequence, not an
+active pointer. `canvas.create`/`canvas.apply` atomically persist edit CAS,
+actor-scoped receipt and audit without creating a Deployment head. Explicit
+release activates the exact latest candidate; rollback selects a retained exact
+revision through the same head CAS without erasing edits or audit. Even a
+persisted execution snapshot is unavailable to `resolve` until activation has
+an audit receipt. Backend authoring fails closed without the common Package
+build-evidence adapter; caller-supplied phase flags alone are insufficient.
+
+Foundry authorization reads live common SQL Workspace state and explicit
+FoundryAccessGrant operations. Exact typed reference grants remain separate
+from workspace/app permissions; Run/output permissions do not imply deployment
+or generated-source permission. Mutation rechecks policy under the Workspace
+lock. Idempotent staging compares the retained full selection/base as well as
+the request fingerprint; create excludes only its server-allocated application
+UUID. Activation replay also binds the audited prior head and exact target.
+The native SDK protocol/SQL harness uses a synthetic authenticated context and
+static HTML sentinel: it proves tools/resource metadata and SQL orchestration,
+not installed transport, rendered official View, generated execution or E1.

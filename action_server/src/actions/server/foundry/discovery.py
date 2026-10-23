@@ -190,7 +190,7 @@ class CanvasLibraryDiscovery:
             (app for app in visible_apps if app.app_id == snapshot.current_app_id),
             None,
         )
-        app_views: list[dict[str, JsonValue]] = [app.to_view() for app in visible_apps]
+        app_views: list[JsonValue] = [app.to_view() for app in visible_apps]
         empty = not visible_apps
         if empty:
             summary = (

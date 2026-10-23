@@ -16,6 +16,7 @@ from collections.abc import Mapping, Sequence
 
 from pydantic import JsonValue, TypeAdapter, ValidationError
 
+from actions.server.deployments.canonical import canonicalize_json
 from actions.server.deployments.ids import (
     CapabilityRef,
     DeploymentId,
@@ -24,9 +25,7 @@ from actions.server.deployments.ids import (
     PackageRevisionRef,
     WorkspaceId,
 )
-from actions.server.deployments.canonical import canonicalize_json
 from actions.server.deployments.source_manifest import validate_proposed_inventory
-from actions.server.foundry.mcp import CanvasCaller, CanvasPort, CanvasReply
 from actions.server.foundry.authoring_values import (
     AuthoringAccessDenied,
     AuthoringAppSummary,
@@ -50,6 +49,7 @@ from actions.server.foundry.authoring_values import (
     public_spec_document,
     public_spec_json,
 )
+from actions.server.foundry.mcp import CanvasCaller, CanvasPort, CanvasReply
 
 _JSON_OBJECT = TypeAdapter(dict[str, JsonValue])
 _ID = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")

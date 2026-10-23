@@ -558,19 +558,23 @@ class PackageBuildExecutor(Protocol):
     """Boundary for the three fixed, bounded RCC package phases."""
 
     @property
-    def rcc_version(self) -> str: ...
+    def rcc_version(self) -> str:
+        ...
 
     def build_environment(
         self, package_yaml: Path, workspace: Path
-    ) -> RccBuildIdentity: ...
+    ) -> RccBuildIdentity:
+        ...
 
     def import_action(
         self, build: RccBuildIdentity, package_dir: Path, workspace: Path
-    ) -> dict[str, Any]: ...
+    ) -> dict[str, Any]:
+        ...
 
     def run_tests(
         self, build: RccBuildIdentity, package_dir: Path, workspace: Path
-    ) -> None: ...
+    ) -> None:
+        ...
 
 
 def snapshot_source_entries(
@@ -1167,7 +1171,7 @@ def _assemble_compiled_package(
         "digest": plan_digest_text,
         **runtime_plan_without_digest,
     }
-    manifest_without_revision_digest = {
+    manifest_without_revision_digest: dict[str, Any] = {
         "schemaVersion": PACKAGE_SCHEMA_VERSION,
         "identity": {
             "packageId": policy.package_id,

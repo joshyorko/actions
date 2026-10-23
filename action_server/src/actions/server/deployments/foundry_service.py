@@ -168,6 +168,8 @@ class FoundryDeploymentService:
         if stored is None:
             raise AccessDenied("Deployment unavailable or not authorized")
         revision_record = stored.revision
+        if not self._repository.was_activated(revision_record.ref):
+            raise AccessDenied("Staged Deployment has not been explicitly activated")
         self._authorization.require_reference(actor, revision_record.ref, "execute")
         specification = revision_record.specification
         try:

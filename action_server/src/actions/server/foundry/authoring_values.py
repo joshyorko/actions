@@ -396,6 +396,7 @@ class FoundryAuthoringAuthorityPort(Protocol):
 def public_spec_json(spec: object) -> bytes:
     """Return bounded canonical UTF-8 bytes for a validated public CanvasSpec."""
     from actions.canvas_contract import CanvasSpec, validate_canvas_spec
+
     from actions.server.deployments.canonical import canonicalize_json
 
     try:
@@ -415,6 +416,7 @@ def public_spec_document(spec_json: bytes) -> dict[str, JsonValue]:
     import json
 
     from actions.canvas_contract import validate_canvas_spec
+
     from actions.server.deployments.canonical import canonicalize_json
 
     if not isinstance(spec_json, bytes) or len(spec_json) > 64 * 1024:

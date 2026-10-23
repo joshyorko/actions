@@ -11,6 +11,7 @@ import asyncio
 import hashlib
 import json
 from dataclasses import replace
+from typing import Literal
 from uuid import uuid4
 
 import pytest
@@ -73,11 +74,11 @@ def _spec(*, title: str = "Records", binding_ids: tuple[str, ...] = ()) -> dict:
 def _caller(
     workspace: WorkspaceId | None = None,
     *,
-    audience: str = "model",
+    audience: Literal["model", "app"] = "model",
 ) -> CanvasCaller:
     return CanvasCaller(
         actor=Actor(principal_id=_uuid()),
-        workspace_id=str((workspace or WorkspaceId(_uuid())).root),
+        workspace_id=str((workspace or WorkspaceId.model_validate(_uuid())).root),
         audience=audience,
     )
 
@@ -806,7 +807,7 @@ def test_release_is_explicit_failed_build_does_not_replace_active_and_rollback_r
 def test_revoked_and_cross_workspace_requests_fail_closed():
     service, _, authorization, _, _, _ = _service()
     caller = _caller()
-    foreign = WorkspaceId(_uuid())
+    foreign = WorkspaceId.model_validate(_uuid())
     package_revision = PackageRevisionRef(
         workspace_id=foreign,
         package_id=PackageId(_uuid()),

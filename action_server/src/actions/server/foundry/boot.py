@@ -16,7 +16,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Final
 
-
 MANAGED_DIRECTORY_NAMES: Final[tuple[str, ...]] = (
     "apps",
     "packages",

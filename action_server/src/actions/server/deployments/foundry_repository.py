@@ -281,6 +281,10 @@ class FoundryRepository:
                         raise StaleDeploymentRevision(
                             "Deployment already exists or create has an expected base"
                         )
+                    if self._history(workspace_id, deployment_id):
+                        raise StaleDeploymentRevision(
+                            "activate the existing staged edit explicitly"
+                        )
                     previous = None
                     sequence = 1
                 else:
@@ -297,8 +301,9 @@ class FoundryRepository:
                         raise RepositoryCorruption(
                             "active Deployment revision is missing"
                         )
-                    previous = expected_revision
-                    sequence = current.revision.sequence + 1
+                    history = self._history(workspace_id, deployment_id)
+                    previous = history[-1].revision.ref
+                    sequence = history[-1].revision.sequence + 1
 
                 if operation_kind == "rollback":
                     if rollback_of is None or self._revision(rollback_of) is None:
@@ -334,21 +339,7 @@ class FoundryRepository:
                     revision=revision,
                     execution_snapshots=tuple(snapshot_builder(revision)),
                 )
-                anchor = self._package_anchor(specification, corruption=False)
-                record = FoundryDeploymentRevision(
-                    id=str(uuid4()),
-                    workspace_id=str(workspace_id.root),
-                    deployment_id=str(deployment_id.root),
-                    revision_id=revision.ref.revision_id.root,
-                    foundry_package_revision_id=anchor.id
-                    if anchor is not None
-                    else None,
-                    selection_json=_canonical_revision(revision).decode("utf-8"),
-                    snapshots_json=_canonical_snapshots(
-                        stored.execution_snapshots
-                    ).decode("utf-8"),
-                )
-                self._db.insert(record)
+                self._insert_stored(stored)
 
                 if head is None:
                     head = FoundryDeploymentHead(
@@ -377,16 +368,325 @@ class FoundryRepository:
                     principal_id,
                     operation_kind,
                     request.id,
-                    previous,
+                    expected_revision,
                     revision.ref,
                 )
                 return revision
+
+    def history(
+        self, workspace_id: WorkspaceId, deployment_id: DeploymentId
+    ) -> tuple[StoredDeploymentRevision, ...]:
+        """Read bounded immutable edit history; this never chooses activation."""
+        with self._db.connect():
+            return self._history(workspace_id, deployment_id)
+
+    def _history(
+        self, workspace_id: WorkspaceId, deployment_id: DeploymentId
+    ) -> tuple[StoredDeploymentRevision, ...]:
+        rows = self._select(
+            FoundryDeploymentRevision,
+            "SELECT * FROM foundry_deployment_revision WHERE workspace_id=? AND deployment_id=? LIMIT 257",
+            [str(workspace_id.root), str(deployment_id.root)],
+        )
+        if len(rows) > 256:
+            raise RepositoryCorruption(
+                "Deployment history exceeds the bounded authoring limit"
+            )
+        result = []
+        for row in rows:
+            ref = DeploymentRevisionRef(
+                workspace_id=workspace_id,
+                deployment_id=deployment_id,
+                revision_id=DeploymentRevisionId(row.revision_id),
+            )
+            stored = self._revision(ref)
+            if stored is None:
+                raise RepositoryCorruption("immutable revision disappeared")
+            result.append(stored)
+        result.sort(key=lambda stored: stored.revision.sequence)
+        for index, stored in enumerate(result):
+            previous = result[index - 1].revision.ref if index else None
+            if (
+                stored.revision.sequence != index + 1
+                or stored.revision.previous_revision != previous
+            ):
+                raise RepositoryCorruption(
+                    "Deployment edit lineage is not one immutable sequence"
+                )
+        return tuple(result)
+
+    def lookup_authoring_request(
+        self,
+        workspace_id: WorkspaceId,
+        principal_id: str,
+        operation: str,
+        key: str,
+        fingerprint: str,
+    ) -> DeploymentRevision | None:
+        with self._db.connect():
+            prior = self._prior_request(workspace_id, principal_id, operation, key)
+            if prior is None:
+                return None
+            if prior.request_fingerprint != fingerprint:
+                raise IdempotencyConflict("authoring request input changed")
+            try:
+                receipt = DeploymentRevision.model_validate_json(prior.result_json)
+            except ValueError as exc:
+                raise RepositoryCorruption("invalid authoring receipt") from exc
+            return self._request_result(prior, workspace_id, receipt.ref.deployment_id)
+
+    def stage(
+        self,
+        workspace_id: WorkspaceId,
+        deployment_id: DeploymentId,
+        expected_base: DeploymentRevisionRef | None,
+        specification: DeploymentSpecification,
+        *,
+        principal_id: str,
+        operation: str,
+        idempotency_key: str,
+        input_digest: str,
+        preflight: Callable[[], None],
+        snapshot_builder: Callable[
+            [DeploymentRevision], Sequence[DeploymentExecutionSnapshot]
+        ],
+    ) -> DeploymentRevision:
+        """Stage one immutable edit with CAS/receipt/audit, without activation."""
+        if operation not in {"canvas.create", "canvas.apply"}:
+            raise ValueError("unknown authoring stage operation")
+        with self._db.connect():
+            with _transaction(self._db):
+                self._lock_workspace(workspace_id)
+                preflight()
+                prior = self._prior_request(
+                    workspace_id, principal_id, operation, idempotency_key
+                )
+                if prior is not None:
+                    if prior.request_fingerprint != input_digest:
+                        raise IdempotencyConflict("authoring request input changed")
+                    receipt = DeploymentRevision.model_validate_json(prior.result_json)
+                    owner = (
+                        receipt.ref.deployment_id
+                        if operation == "canvas.create"
+                        else deployment_id
+                    )
+                    original = self._request_result(prior, workspace_id, owner)
+                    supplied = parse_canonical_json(
+                        canonical_specification(specification)
+                    )
+                    retained = parse_canonical_json(
+                        canonical_specification(original.specification)
+                    )
+                    if operation == "canvas.create":
+                        # Concurrent create deliveries allocate different candidate
+                        # UUIDs before the SQL lock. Compare all authored input,
+                        # excluding only that server-owned allocation.
+                        for value in (supplied, retained):
+                            if isinstance(value, dict) and isinstance(
+                                value.get("canvas_application"), dict
+                            ):
+                                value["canvas_application"].pop("app_id", None)
+                    if (
+                        supplied != retained
+                        or original.previous_revision != expected_base
+                    ):
+                        raise IdempotencyConflict(
+                            "authoring receipt differs from supplied selection"
+                        )
+                    return original
+                history = self._history(workspace_id, deployment_id)
+                latest = history[-1].revision if history else None
+                if (latest.ref if latest else None) != expected_base:
+                    raise StaleDeploymentRevision("authoring edit base changed")
+                if operation == "canvas.create" and history:
+                    raise StaleDeploymentRevision("application already exists")
+                if operation == "canvas.apply" and not history:
+                    raise StaleDeploymentRevision("application is unavailable")
+                sequence = latest.sequence + 1 if latest else 1
+                specification_json = canonical_specification(specification)
+                revision = DeploymentRevision(
+                    ref=DeploymentRevisionRef(
+                        workspace_id=workspace_id,
+                        deployment_id=deployment_id,
+                        revision_id=_revision_digest(
+                            workspace_id,
+                            deployment_id,
+                            sequence,
+                            expected_base,
+                            None,
+                            "publish",
+                            specification_json,
+                        ),
+                    ),
+                    sequence=sequence,
+                    previous_revision=expected_base,
+                    rollback_of=None,
+                    change_kind="publish",
+                    specification=specification,
+                )
+                stored = StoredDeploymentRevision(
+                    revision=revision,
+                    execution_snapshots=tuple(snapshot_builder(revision)),
+                )
+                self._insert_stored(stored)
+                request = FoundryRequest(
+                    str(uuid4()),
+                    str(workspace_id.root),
+                    principal_id,
+                    operation,
+                    idempotency_key,
+                    input_digest,
+                    _canonical_revision(revision).decode("utf-8"),
+                )
+                self._db.insert(request)
+                self._append_audit(
+                    workspace_id,
+                    deployment_id,
+                    principal_id,
+                    operation,
+                    request.id,
+                    expected_base,
+                    revision.ref,
+                )
+                return revision
+
+    def activate_existing(
+        self,
+        target: DeploymentRevisionRef,
+        expected_active: DeploymentRevisionRef | None,
+        *,
+        principal_id: str,
+        operation: str,
+        idempotency_key: str,
+        input_digest: str,
+        preflight: Callable[[DeploymentRevision], None],
+        snapshot_builder: Callable[
+            [DeploymentRevision], Sequence[DeploymentExecutionSnapshot]
+        ],
+    ) -> DeploymentRevision:
+        """Activate an exact admitted edit; one head remains the sole pointer."""
+        if operation not in {"canvas.release", "canvas.rollback"}:
+            raise ValueError("unknown authoring activation operation")
+        workspace_id, deployment_id = target.workspace_id, target.deployment_id
+        self._validate_owner(workspace_id, deployment_id, expected_active)
+        with self._db.connect():
+            with _transaction(self._db):
+                self._lock_workspace(workspace_id)
+                stored = self._revision(target)
+                if stored is None:
+                    raise StaleDeploymentRevision("activation target is unavailable")
+                preflight(stored.revision)
+                prior = self._prior_request(
+                    workspace_id, principal_id, operation, idempotency_key
+                )
+                if prior is not None:
+                    if prior.request_fingerprint != input_digest:
+                        raise IdempotencyConflict("authoring request input changed")
+                    original = self._request_result(prior, workspace_id, deployment_id)
+                    audits = self._select(
+                        FoundryAudit,
+                        "SELECT * FROM foundry_audit WHERE foundry_request_id=?",
+                        [prior.id],
+                    )
+                    expected_id = (
+                        expected_active.revision_id.root if expected_active else ""
+                    )
+                    if (
+                        original.ref != target
+                        or len(audits) != 1
+                        or audits[0].from_revision_id != expected_id
+                        or audits[0].to_revision_id != target.revision_id.root
+                    ):
+                        raise IdempotencyConflict(
+                            "activation receipt differs from supplied target"
+                        )
+                    return original
+                history = self._history(workspace_id, deployment_id)
+                if operation == "canvas.release" and (
+                    not history or history[-1].revision.ref != target
+                ):
+                    raise StaleDeploymentRevision(
+                        "release candidate is no longer the latest edit"
+                    )
+                if _canonical_snapshots(
+                    tuple(snapshot_builder(stored.revision))
+                ) != _canonical_snapshots(stored.execution_snapshots):
+                    raise RepositoryCorruption(
+                        "staged execution snapshot no longer matches admission"
+                    )
+                heads = self._heads(workspace_id, deployment_id)
+                if len(heads) > 1:
+                    raise RepositoryCorruption("multiple active heads")
+                if heads:
+                    head = heads[0]
+                else:
+                    if expected_active is not None:
+                        raise StaleDeploymentRevision("active revision changed")
+                    head = FoundryDeploymentHead(
+                        str(uuid4()),
+                        str(workspace_id.root),
+                        str(deployment_id.root),
+                        "",
+                        0,
+                    )
+                    self._db.insert(head)
+                self._cas_activate(head, expected_active, target)
+                request = FoundryRequest(
+                    str(uuid4()),
+                    str(workspace_id.root),
+                    principal_id,
+                    operation,
+                    idempotency_key,
+                    input_digest,
+                    _canonical_revision(stored.revision).decode("utf-8"),
+                )
+                self._db.insert(request)
+                self._append_audit(
+                    workspace_id,
+                    deployment_id,
+                    principal_id,
+                    operation,
+                    request.id,
+                    expected_active,
+                    target,
+                )
+                return stored.revision
+
+    def was_activated(self, ref: DeploymentRevisionRef) -> bool:
+        with self._db.connect():
+            rows = self._select(
+                FoundryAudit,
+                "SELECT * FROM foundry_audit WHERE workspace_id=? AND deployment_id=? AND to_revision_id=? AND operation IN ('create','publish','rollback','canvas.release','canvas.rollback') LIMIT 1",
+                [
+                    str(ref.workspace_id.root),
+                    str(ref.deployment_id.root),
+                    ref.revision_id.root,
+                ],
+            )
+            return bool(rows)
+
+    def _insert_stored(self, stored: StoredDeploymentRevision) -> None:
+        revision = stored.revision
+        anchor = self._package_anchor(revision.specification, corruption=False)
+        self._db.insert(
+            FoundryDeploymentRevision(
+                id=str(uuid4()),
+                workspace_id=str(revision.ref.workspace_id.root),
+                deployment_id=str(revision.ref.deployment_id.root),
+                revision_id=revision.ref.revision_id.root,
+                foundry_package_revision_id=anchor.id if anchor else None,
+                selection_json=_canonical_revision(revision).decode("utf-8"),
+                snapshots_json=_canonical_snapshots(stored.execution_snapshots).decode(
+                    "utf-8"
+                ),
+            )
+        )
 
     def _prior_request(
         self,
         workspace_id: WorkspaceId,
         principal_id: str,
-        operation_kind: OperationKind,
+        operation_kind: str,
         idempotency_key: str,
     ) -> FoundryRequest | None:
         rows = self._select(
@@ -608,7 +908,7 @@ class FoundryRepository:
         workspace_id: WorkspaceId,
         deployment_id: DeploymentId,
         principal_id: str,
-        operation_kind: OperationKind,
+        operation_kind: str,
         request_id: str,
         previous: DeploymentRevisionRef | None,
         current: DeploymentRevisionRef,
