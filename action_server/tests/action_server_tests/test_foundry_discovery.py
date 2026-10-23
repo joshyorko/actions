@@ -125,9 +125,11 @@ def test_canvas_open_empty_library_is_read_only_and_has_text_fallback():
         "apps": [],
         "currentApp": None,
         "empty": True,
-        "emptyMessage": "No apps yet. Create one with canvas_create.",
+        "emptyMessage": (
+            "No apps are available to you yet. Create one with canvas_create."
+        ),
     }
-    assert "No apps exist yet" in reply.summary
+    assert "available to you" in reply.summary
     assert "canvas_create" in reply.summary
     assert "query" not in reply.summary.casefold()
 
