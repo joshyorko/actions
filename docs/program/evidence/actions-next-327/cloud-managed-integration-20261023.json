@@ -9,22 +9,117 @@
   },
   "results": {
     "managed_local": "25 passed, 35 skipped; PostgreSQL/provider cells unconfigured in this local command",
-    "configured_static": "lint passed; mypy passed 442 files; Markdown lint unavailable",
+    "configured_static": "Runtime invoke lint/typecheck PASS442; Markdown lint unavailable. Devutils has no invoke lint/typecheck tasks; direct declared Ruff check/format and isort on edited test PASS.",
     "actual_generated_rcc_launch_receipt": "1 passed, 3 deselected; final published launch identity retained",
     "full_real_postgresql_worker_and_portable": {
-      "receipt": "/workspace/actions-327-state/evidence/managed-joined-final-20261023/359c692f-412d-46c1-8afa-1a0830749eb2/receipt.json",
-      "managed": 56,
-      "sql": 133,
-      "components": 161,
-      "invoice": 129,
-      "worker": 134,
-      "generated_rcc": 6,
-      "strict_skipped": 0,
-      "portable": "2 failed, 2116 passed, 13 skipped, 274 deselected; both failures classify the three mounted managed routes as uncategorized",
+      "status": "PASS_WITH_SEPARATE_CRITICAL_AND_FINAL_PORTABLE_RECEIPTS",
+      "critical_receipt": "/workspace/actions-327-state/evidence/managed-joined-final-20261023/359c692f-412d-46c1-8afa-1a0830749eb2/receipt.json",
+      "critical_head": "f4e0556712b8eac2797847fd9259595d3cd031f3",
+      "critical_suite_counts": {
+        "managed": {
+          "tests": 56,
+          "skipped": 0,
+          "failures": 0,
+          "errors": 0
+        },
+        "foundry_storage": {
+          "tests": 133,
+          "skipped": 0,
+          "failures": 0,
+          "errors": 0
+        },
+        "components": {
+          "tests": 161,
+          "skipped": 0,
+          "failures": 0,
+          "errors": 0
+        },
+        "invoice": {
+          "tests": 129,
+          "skipped": 0,
+          "failures": 0,
+          "errors": 0
+        },
+        "worker": {
+          "tests": 134,
+          "skipped": 0,
+          "failures": 0,
+          "errors": 0
+        },
+        "package_compiler": {
+          "tests": 6,
+          "skipped": 0,
+          "failures": 0,
+          "errors": 0
+        }
+      },
+      "critical_overall_status": "FAIL: portable auth inventory2 failures, retained unchanged",
+      "final_receipt": "/workspace/actions-327-state/evidence/managed-portable-final-20261023/17538e60-afef-4c25-8ee1-870a8fae89a0/receipt.json",
+      "final_head": "97ef37442e07fa7b329466733380a28c07f55fe2",
+      "final_counts": {
+        "managed": {
+          "tests": 56,
+          "skipped": 0,
+          "failures": 0,
+          "errors": 0
+        },
+        "foundry_storage": {
+          "tests": 133,
+          "skipped": 0,
+          "failures": 0,
+          "errors": 0
+        },
+        "components": {
+          "tests": 161,
+          "skipped": 0,
+          "failures": 0,
+          "errors": 0
+        },
+        "invoice": {
+          "tests": 129,
+          "skipped": 0,
+          "failures": 0,
+          "errors": 0
+        },
+        "portable": {
+          "tests": 2131,
+          "skipped": 14,
+          "failures": 0,
+          "errors": 0
+        }
+      },
+      "portable": "2117 passed,14 skipped,274 deselected,16 warnings",
       "cleanup": "PASS",
-      "disposition": "Exact managed-identity inventory classification added; focused3 passed; full portable rerun pending."
+      "skip_inventory": "/workspace/actions-327-state/evidence/foundry-integration/managed-final-portable-skips-20261023.json",
+      "extra_skip_vs_critical": "Genuine compiler cache opt-in absent in final portable run; that same testcase passed in the earlier failed portable selection. Dedicated source RCC6 and installed native4 cases passed separately."
     },
-    "installed_a18": "MCP2 lifecycle and normal unconfigured route503 PASS. First owned installed worker run:24 passed,3 failed,1 setup error,0 skipped; observed disk exhaustion, first compiler import failure cause uncertain. Serialized retry running after supported idle-view cleanup.",
+    "installed_a18": {
+      "status": "PASS",
+      "receipt": "/tmp/actions-327-a18-4e0e2839/qa-evidence/receipt.json",
+      "counts": {
+        "passed": 28,
+        "skipped": 0,
+        "failed": 0,
+        "errors": 0
+      },
+      "scope": "20 real managed HTTP auth/concurrency cases,4 real invoice RCC completion cases,4 generated RCC dual-fence/fresh-interpreter artifact replay cases; both SQL stores and real DuckDB/PostgreSQL data",
+      "mcp": "Actual ordinary CLI MCP2 socket create/apply/replay/stale denial/activate/process restart/reopen/rollback PASS",
+      "normal_unconfigured_managed_route": "503 as intended; usable default profile remains missing",
+      "source_wheel_and_installed_python_modules": {
+        "runtime": 244,
+        "core": 50,
+        "sdk": 25
+      },
+      "wheel_sha256": "f15d000d4adfb3495670ddf21aa21f8be54fa59490dc9a399b7cb17cf76e9099",
+      "core_wheel_sha256": "ca512d59e1f94d687cb637255b2622980d715528de720ac5da8105836315c19f",
+      "sdk_wheel_sha256": "5788f4b346d1dd6c61ba9f68ad30ae2cc56bf9488d22e49bd808e1df49915cd0",
+      "pip_check": "PASS",
+      "fixture_cleanup": "PASS",
+      "warnings": "12 QA harness warnings: anyio assertion rewrite and unregistered imported PostgreSQL marker; zero skips/errors on successful execution",
+      "original_failed_receipt": "/tmp/actions-327-a18-4e0e2839/qa-evidence-failed-1/receipt.json",
+      "original_failed_counts": "24 passed,3 failed,1 error,0 skipped; observed DiskFull; first import-failure cause remains unestablished",
+      "offline_cold_portability": "Not established by this installed consumer; public dependency wheels and prepared RCC artifact were required."
+    },
     "gateway": "Doctor PASS; Bootstrap firstFAIL without underlying cause, supported verbose package installPASS, second BootstrapPASS; ToolkitTest179PASS."
   },
   "evidence_root": "/workspace/actions-327-state/evidence/foundry-integration",
@@ -38,7 +133,12 @@
     "managed-runtime-completion-local-20261023.log",
     "managed-auth-route-inventory-green-20261023.log",
     "managed-joined-static-final-20261023.log",
-    "managed-a18-installed-worker-driver-20261023.log"
+    "managed-a18-installed-worker-driver-20261023.log",
+    "managed-portable-final-driver-20261023.log",
+    "managed-a18-installed-worker-retry-driver-20261023.log",
+    "release-332-source-identity-regressions-20261023.log",
+    "release-332-devutils-full-20261023.log",
+    "release-332-devutils-static-20261023.log"
   ],
   "verified_changes": [
     "Managed public SQL methods own connections in the HTTP executing thread; live READ precedes capability discovery.",
@@ -58,13 +158,110 @@
   "documentation": {
     "canonical": "docs/skills/work-items.md",
     "delta": "Require executing-thread SQL ownership, live discovery authorization, current lease replay metadata and explicit SDK-to-wire terminal state projection, with real RCC completion evidence.",
-    "contract": "docs/program/actions-next-managed-work-items-132.md now names the actual SQL service and trusted host seam, removes the obsolete unmounted-router and proposed reviewed.py claims, and distinguishes route presence from configured managed support."
+    "contract": "docs/program/actions-next-managed-work-items-132.md now names the actual SQL service and trusted host seam, removes the obsolete unmounted-router and proposed reviewed.py claims, and distinguishes route presence from configured managed support.",
+    "additional_canonical": "docs/skills/provenance-observability.md: publisher owner identity is distinct from live environment/branch protection; exact repository and complete-tree checks; no inferred token scope or publication authority from a unit pass."
   },
-  "upstream_disposition": "none; observed completion and integration defects belong to Actions",
+  "upstream_disposition": "none; no new confirmed upstream defect. Existing RCC report remains draft only.",
   "publication": "none",
-  "qualification_source": "7d8586d13c6ecfafc37dd1669d2099eaed34b728",
-  "implementation_equivalence": "git diff 4e0e2839..7d8586d1 -- action_server/src actions/src work-items/src is empty; only auth route inventory, verifier hash coverage and documentation changed.",
+  "qualification_source": "97ef37442e07fa7b329466733380a28c07f55fe2",
+  "implementation_equivalence": "git diff 4e0e2839..5165e429 -- action_server/src actions/src work-items/src action_server/frontend mcp/src is empty. Runtime implementation/build source4e0e2839; final Runtime qualification97ef3744; devutils regression source5165e429.",
   "installed_root": "/tmp/actions-327-a18-4e0e2839",
   "failed_installed_receipt": "/tmp/actions-327-a18-4e0e2839/qa-evidence-failed-1/receipt.json",
-  "owned_space_recovery": "/tmp/actions-327-owned-review-view-cleanup-20261023/receipt.json"
+  "owned_space_recovery": "/tmp/actions-327-owned-review-view-cleanup-20261023/receipt.json",
+  "release_control_test_source": "5165e4290ae31351e870bc952b5eef761fe86acd",
+  "security332": {
+    "status": "PARTIAL_REGRESSIONS_VERIFIED_OWNER_SECURITY_REVIEW_PENDING",
+    "issue": "https://github.com/joshyorko/actions/issues/332",
+    "existing_negative_tests": 160,
+    "focused_after_added_missing_negatives": 34,
+    "full_affected_devutils_package": 268,
+    "new_cases": "Foreign source repository, source/head lookalike repository and unqualified complete source tree with unchanged workflow. Existing validators already reject them; no publisher behavior or settings changed.",
+    "metadata": {
+      "observed_at_utc": "2026-10-23 18:37:53 UTC",
+      "source": "97ef37442e07fa7b329466733380a28c07f55fe2",
+      "community": {
+        "url": "https://api.github.com/repos/joshyorko/actions/branches/community",
+        "head": "0e80d41c6b4e5df9579675731e6cdbda733acd35",
+        "protected": false,
+        "protection_enabled": false,
+        "required_status_checks": {
+          "enforcement_level": "off",
+          "contexts": [],
+          "checks": []
+        }
+      },
+      "rulesets": {
+        "url": "https://api.github.com/repos/joshyorko/actions/rulesets",
+        "items": []
+      },
+      "scope": "Read-only metadata. No source, settings, identity, credentials, workflow dispatch or publication changed."
+    },
+    "pypi_environment": {
+      "url": "https://api.github.com/repos/joshyorko/actions/environments/pypi",
+      "authentication": "anonymous; no token or existing credential accessed",
+      "method": "GET",
+      "status": 200,
+      "public_fields": [
+        "can_admins_bypass",
+        "created_at",
+        "deployment_branch_policy",
+        "html_url",
+        "id",
+        "name",
+        "node_id",
+        "protection_rules",
+        "updated_at",
+        "url"
+      ],
+      "protection_rules": [],
+      "deployment_branch_policy": null
+    },
+    "threat_note": "Owner/triggering-actor checks and exact source/artifact bindings remain. They do not distinguish an attacker using the sole owner credential. Observed unprotected community, no repository rulesets and empty pypi environment protection provide no independent reviewer barrier. Actual PyPI token scope is unknown; no credentials were accessed. This is not a compromise claim.",
+    "operator_boundary": "Any live branch/environment/identity/token change needs separate owner approval. No settings, credential, publication, tag or community mutation occurred.",
+    "least_disruptive_options_for_owner_review": [
+      "Keep the existing publish workflow/button and add an independently verified required environment reviewer with self-review/bypass policy explicitly reviewed; identify the reviewer before any identity/configuration change.",
+      "Consider short-lived PyPI trusted publishing to reduce long-lived secret exposure, while recognizing it does not independently stop a repository owner credential from changing trusted source/workflows.",
+      "No setting is changed by this receipt; owner must review the observed residual risk and nonsensitive actual token-scope evidence before final publication disposition."
+    ]
+  },
+  "commands": {
+    "gateway": "bash /workspace/actions-327-state/run-prepared rcc run -r developer/toolkit.yaml --dev -t Doctor (then Bootstrap, ToolkitTest)",
+    "critical": "bash /workspace/actions-327-state/run-prepared python action_server/scripts/verify_invoice_queries.py --full --worker --worker-runtime /workspace/actions-327-state/evidence/foundry-schema18-frozen-20261023/dac58091-e8db-440d-b190-3c7fb01611c3/worker-runtime.json --compiler-receipt /workspace/actions-327-state/compiler-acceptance/3e744f96-749a-47e5-84b9-7e7f297bc8b9/prepared.json --evidence-dir /workspace/actions-327-state/evidence/managed-joined-final-20261023",
+    "final_runtime": "bash /workspace/actions-327-state/run-prepared python action_server/scripts/verify_invoice_queries.py --full --evidence-dir /workspace/actions-327-state/evidence/managed-portable-final-20261023",
+    "installed": "bash /workspace/actions-327-state/run-prepared python /tmp/actions-327-a18-4e0e2839/run_owned_worker.py",
+    "installed_mcp": "/tmp/actions-327-a18-4e0e2839/consumer/bin/python -I /tmp/actions-327-a18-4e0e2839/verify_installed.py",
+    "devutils_full": "bash /workspace/actions-327-state/run-package devutils poetry run pytest -q"
+  },
+  "ordered_remaining": [
+    {
+      "order": 1,
+      "task": "Join existing activated Deployment resolver to the reviewed generated host adapter and typed app/model capability route; preserve old admitted pins and exact approval. Use the same SQL authority and explicit host execution profiles.",
+      "classification": "Engineering pending; not an operator permission hold."
+    },
+    {
+      "order": 2,
+      "task": "Connect authorized app dispatch/state/status/cancel/artifact and native managed Run projection, then prove a second independent Python-backed app through installed SDK/MCP and official Basic Host.",
+      "classification": "Engineering/client acceptance pending; current semantic adapters remain read-only."
+    },
+    {
+      "order": 3,
+      "task": "Complete mandatory managed producer enqueue, evidence-safe retry/dead-letter and bounded Run logs with the existing queue/Run/output primitives; configure usable managed host profile and execute installed VSIX acceptance.",
+      "classification": "Required this release; unsupported operations remain unadvertised."
+    },
+    {
+      "order": 4,
+      "task": "Finish the existing rich bounded semantic catalog, public data/Knowledge bindings including Parquet/retained source proof, distribution/compatibility/retention/restore and remaining durable execution/security gates.",
+      "classification": "Required existing matrix; no broad completion claim."
+    },
+    {
+      "order": 5,
+      "task": "Resolve authenticated model-client access through explicit operator authority; Codex401 is retained and not retried. Prepare Dakota/E1 only after minimum cloud prerequisites, then request explicit approval.",
+      "classification": "Identity-dependent action blocked; engineering continues. ChatGPT E1 NEEDS_OPERATOR."
+    },
+    {
+      "order": 6,
+      "task": "Review #332 live protection/token-scope residual risk and celld NO-GO disposition with the owner; independently verify final exact-head hosted acceptance before any separately approved merge/publication.",
+      "classification": "Owner/final release decision pending; no public/community/security configuration action authorized."
+    }
+  ]
 }

@@ -164,15 +164,35 @@ remains unverified. It is an authoring verification artifact, not a release.
 Source keys (exact observed branch heads, not interchangeable acceptance):
 
 The [managed integration checkpoint](evidence/actions-next-327/cloud-managed-integration-20261023.json)
-freezes source `4e0e2839a8621bb01eeb98d03b8e7e9cf240c790`. It imports PR331's
-launch/log lineage and PR333's current-lease replay/thread-boundary corrections,
-then joins explicit common-SQL policy, managed HTTP identity isolation and actual
-invoice RCC completion. Local managed25 passed/35 provider-control skips and
-configured static442 passed. The strict PostgreSQL/full worker/installed-a18
-gates are pending; a mounted but unconfigured route is not usable managed mode.
-Existing a17 installed authoring and b6a82488 full worker receipts remain bound
-to their original sources. Generic managed enqueue/retry/logs, generated app
-interaction and all broader release gates remain open.
+qualifies Runtime source `4e0e2839a8621bb01eeb98d03b8e7e9cf240c790` and final
+test source `97ef37442e07fa7b329466733380a28c07f55fe2`. PR331042f271 and
+PR3331bd2e508 join measured launch/log output, live SQL grants, executing-thread
+connections, lease replay and actual managed HTTP completion. Strict managed56,
+SQL133, components161, invoice129, worker134 and generated RCC6 passed without
+skips across both control stores and real data providers. The first combined
+run remains FAILED overall: portable2 auth-inventory failures/2116pass/13skip.
+Exact managed-route classification then passed3; final portable2117pass/14skip,
+configured static442 and cleanup passed. The extra skip is the compiler-cache
+opt-in, separately covered by the retained actual RCC cases. Counts overlap.
+
+A fresh noneditable Runtime1.1.0a18/Core1.1.0a2/SDK0.5.0a1 consumer passed28
+managed/generated-RCC cases with zero skips, including fresh-interpreter
+artifact replay, and actual ordinary CLI/MCP restart authoring. Runtime244,
+Core50 and SDK25 Python module bytes match their wheels and frozen source.
+Its first24pass/3fail/1error disk-exhaustion receipt remains retained; the first
+import failure's cause is uncertain. The serial retry and owned fixture cleanup
+passed. Normal unconfigured managed startup returns503; a usable default
+profile, general native managed projection, enqueue/retry/logs and installed
+VSIX remain open. Semantic View/app interactions and E1 are not implied.
+
+The same receipt records #332's existing160 negative tests, added source/head
+lookalike and unqualified-tree regressions, focused34 and full devutils268pass at
+`5165e4290ae31351e870bc952b5eef761fe86acd`. Runtime implementation bytes are
+unchanged across these test/documentation checkpoints. Read-only metadata at
+2026-10-23 18:37:53UTC showed community unprotected, no repository rulesets and
+no `pypi` environment protection/branch policy. Owner identity checks and exact
+artifact controls remain; stolen-owner credential risk and actual token scope
+need owner security review. No configuration or credentials were changed.
 
 The [reviewed generated RCC receipt](evidence/actions-next-327/cloud-reviewed-generated-rcc-20261023.json)
 qualifies source `b6a82488aa4a9b0091acea95ba63fa378f11dbaa`, Runtime1.1.0a18.
@@ -187,30 +207,36 @@ The first failed RCC attempt and its uncertain cause remain retained. No a18
 installed-wheel or official-host business-job proof is claimed; a17 authoring
 and read-only host acceptance above remains separately source-bound.
 
-- **I**: source-qualified integration `b6a82488aa4a9b0091acea95ba63fa378f11dbaa`, Runtime1.1.0a18,
-  Core1.1.0a2/SDK0.5.0a1. Source and actual reviewed RCC proof are in the receipt
-  above. Installed MCP/read-only host proof remains source76fb3afe/a17; full
-  generated app/managed/client integration is open. Earlier schema18/invoice
-  worker130 proof remains source-specific.
+- **I**: qualified Runtime test source `97ef37442e07fa7b329466733380a28c07f55fe2`,
+  implementation/build source4e0e2839, Runtime1.1.0a18/Core1.1.0a2/SDK0.5.0a1.
+  Actual reviewed/native RCC and installed28 proof are in the managed receipt.
+  Latest release-control tests5165e429 change no Runtime implementation bytes.
+  Official read-only host screenshot remains source76fb3afe/a17; current MCP
+  socket proof is a18. Generated app/managed/client integration remains open.
 - **C**: #330 `feature/100-semantic-canvas-contract-20261022`,
   `d16ddbbeac090bd03b759fb890864610a6c052d2`. Isolated-source16 tests passed;
   wider worker312pass/19fail and failed Bootstrap receipts remain unqualified.
 - **R**: #329 `feature/99-semantic-renderer-20261022`,
   `24a618b45c32a5ece427db81911a4791bcdd539e`. Isolated-source14 component tests
   passed against C's exact fixture; no combined Runtime/bridge/E1 acceptance.
-- **P**: #331 `aa6e37667f0707736475d5159f9a6c33d69a27aa`, imported into
+- **P**: compiler #331 `aa6e37667f0707736475d5159f9a6c33d69a27aa`, imported into
   `ea8f98d1`. This integration reran27 tests including fresh trusted-host RCC
   preparation and sanitized generated import/test/no-build replay. Earlier
   network/library/JSON/test-discovery/disk failures remain retained; the worker's
-  checkout caveat does not substitute for this committed-source rerun.
+  checkout caveat does not substitute for this committed-source rerun. Execution
+  follow-on042f271 is imported a1153da1, extended and qualified at I; existing
+  launch journal and bounded result/receipt/stdout/stderr artifacts remain authoritative.
 - **D**: #333 `f5e5916748a76aeec3653c7792c8849881a4ae30`, imported and extended
   for schema18/UI-only values. Isolated19passed; combined real SQL acceptance
-  is recorded above. Concrete common Package admission is qualified at I; generated business execution remains missing.
+  is recorded above. Managed follow-on1bd2e508 is imported14c3e380 and qualified
+  with live SQL policy/real PostgreSQL/RCC at I. Generic managed operations remain missing.
 - **A**: #334 `c9ea84e19b95bc448b6bbc8e9304a4ebd2fe3eda`, imported97cc2869
   with nested-schema/description repairs874187ad. Public authored specs and
   complete model schemas now pass common SQL and installed SDK/official-host proof.
 - **B**: #335 `466d6f241fbbb621a6acc0698a9a9574386f45d2`; helper modules and
-  isolated fixture imported. Central CLI/transport/renderer wiring remains open.
+  isolated fixture imported. Ordinary installed CLI/MCP/library/restart and the
+  read-only official bridge are qualified separately above; plugin/app execution
+  and remaining distribution wiring remain open.
 - **V**: protected invoice checkpoint `e2408a6e3051cdb4c44aede47618c3791807eba5`,
   implementation/UI/cold-source `20f42170fb382cbf160fae2c356144c45fde4457`.
   Private example0.2, Runtime1.1.0a5/SDK0.5.0a1 bundle and screenshots remain
@@ -237,9 +263,9 @@ baseline only; DRAFT_PR can include qualified components without full acceptance
 | Zero-touch plugin boot, launcher and discovery — DRAFT_PR (#71/#99-B) | Boot task01a168bd-45be-755e-9da9-1b7a4509a039 / feature/71-99-canvas-boot-20261023; central CLI/packaging integrator | I; combined ea8f98d1 (see exact source receipts above) | Boot/discovery helpers and isolated unbundled fixture imported; consumer tests pass. External writable roots, private atomic discovery and readonly library projection exist. Normal installed authenticated CLI/MCP startup, library and process restart are proven; complete plugin envelope/health/attach/stdio acceptance remains missing. | Fresh writable state outside immutable plugin, responsive startup/health/discovery, no initial package/manual per-app MCP registration; local no public listener and authenticated standalone HTTP. | Generated execution profiles, app authorization and final external plugin envelope remain. | Qualify installed stdio/plugin discovery/health and generated workflow over the same Runtime authority. | Ask before agent-skills/external repo mutation or persistent identity/configuration. |
 | Named open data / result plane — DRAFT_PR (#131) | Integrator, existing provider implementation; no new lane | I data_queries/invoices.py/service.py | Real typed parameterized invoice query on DuckDB and PG, bounds/cancel/schema/result handle/paging/export and scope tests. DuckDB reads a prepared DB; source_version is an operator claim, transaction label not retained source hash. | Unchanged immutable Package over owned DuckDB CSV AND Parquet and real PG; named bounded operations, discovery, retained snapshots/provenance, paging/export/cost/cancel/auth negatives. | General operation/binding compiler, explicit Parquet ingest and retained source proof missing. | Add bounded manifest-backed operation/Parquet fixture and retained source/snapshot lineage. | No proprietary Data Server, MindsDB, paid/cloud dependency required. |
 | Bounded Knowledge collections — DRAFT_PR (#131) | Existing Knowledge component, integration-owned convergence | I knowledge.py; 105 component gate includes owned provider tests | Bounded local documents/CSV ingest, collection binding, lexical search with provenance/paging/access/revocation; real DuckDB/PG providers. Not full semantic KB. | Expose bounded collection/ingest/search through shared binding/authority; restart/provenance/limits/access and durable long ingestion where used. | Public binding/lifecycle integration missing. Advanced vector/embedding/rerank, incremental reindex/delete, rich filters/provider discovery remain missing. | Bind existing service through common deployment and qualify bounded public path. | Advanced breadth stays explicitly listed; no mandatory vector service. |
-| Managed Runtime Work Items / installed VSIX — DRAFT_PR / BLOCKED (#132) | Integrator canonical Runtime/SDK; extension owns UI/LSP | 1520f348c31b68a8faf5a3f813bea6cf5146897b, Runtime1.1.0a13 | Versioned14-operation command/result schemas and authenticated bounded transport factory;14 protocol tests pass. No mounted real managed SQL service or installed VSIX acceptance yet. Published1.0.4 local CRUD is not managed mode. | Real synthetic server plus installed VSIX: denial/revocation/isolation/restart/claim/cancel/retry/dead-letter, exact review, Run/Attempt/log/result/artifact lineage; no direct DB/second queue. | Existing reviewed/common queue authority adapter and central authentication/bootstrap; full general queue semantics still required. | Parent owns the reserved sql_service.py/test_managed_work_items_sql_service.py lane; integrator retains schema/auth/SDK/Package/Run convergence. | No new permission hold for engineering; existing credential/production/publication boundaries apply. |
+| Managed Runtime Work Items / installed VSIX — DRAFT_PR / BLOCKED (#132) | Integrator canonical Runtime/SDK; extension owns UI/LSP | I; managed receipt | Versioned14-operation protocol, mounted fail-closed router, live common-SQL Workspace/exact-Deployment grants, server worker identity, review/claim/renew/cancel/Run/artifact subset and evidence-bound invoice RCC completion. Installed28 covers managed and generated proof; no usable default managed profile/VSIX claim. | Real installed consumer and VSIX across denial/revocation/isolation/restart, general enqueue/retry/dead-letter/logs and native Run lineage; no direct DB/second queue. | Default trusted host profile, generic native projection, remaining operations and VSIX acceptance. | Join the same native Run/output authority into the managed projection, configure explicit supported host policy, then implement missing primitives without bypass. | No engineering permission hold; live identity/credential/security changes still need approval. |
 | Fenced business Work Items — DRAFT_PR (#132) | SDK/common queue implementation + #328 | I; exact SDK0.5.0a1 wheel retained | DB-time owner/epoch/renew/conditional finish/output, SQLite/real PG parity, lineage and legacy fail-closed; private exact review/worker linkage. | Same queue conformance, denied/stale/duplicate/cancel/restart, atomic output authority; standalone no-Work-Item mode. | Generic scheduling/fairness/fanout/dead-letter policies and common generated capability admission not fully qualified. | Reuse existing queue adapter with explicit capability mode and common admission. | None; do not introduce another queue. |
-| Pinned Run/Attempt and real RCC worker — DRAFT_PR (#83/#90/#133/#134) | Integrator, existing runtime adapter/worker | I current130workerpass, RCC18.19.3 | Distinct Work Item/Run/Attempt, dual fences, actual task inputs/RCC/result, controller crash/restart/cancel and reconciliation. Fixed invoice worker, not general foundry execution. | Generated package source and selected plan execute through same Run authority; no fallback; independent process/replica observation/drain/recovery and exact artifact/evidence reuse. | Generic dispatch/worker linkage and ordinary Runtime service wiring. | Connect a verified generated capability to existing RCC worker/admission, preserving pins. | None for owned synthetic proof. |
+| Pinned Run/Attempt and real RCC worker — DRAFT_PR (#83/#90/#133/#134) | Integrator, existing adapter/worker | I; worker134/RCC6 plus installed28 | Distinct approved Work Item/Run/Attempt, dual fences, native Package Python through RCC18.19.3, atomic measured result/log publication and fresh-interpreter replay. Trusted host dispatch currently supplies the snapshot; View remains read-only. | Common activated Deployment/plan resolution, app/model typed execution, revision pinning and explicit recovery; no fallback or uncertain relaunch. | Active-Deployment/public interaction resolver, default execution profiles and common managed native Run projection. | Replace trusted fixture snapshot selection with the existing Deployment resolver and scoped typed operations; prove second independent Python app. | None for owned synthetic engineering. |
 | WorkflowNode / MCPTask / Adapter distinction — SPEC_ONLY gaps (#85/#141/#143) | Existing graph; no new workflow-designer lane | I Run/Attempt types; no claimed general Node/Task implementation | Protocol/queue/runtime concepts remain distinct; no evidence that Run or Work Item state implements WorkflowNode or MCPTask lifecycle. | Typed bounded long-job/projection and any required node lineage, cancellation/reconnect; never a second state authority or universal designer requirement by inference. | Required bounded Node/Task seam must be reconciled with existing issue acceptance. | Inventory existing task projection/admission and implement only the consumed bounded job path. | Escalate a concrete unsatisfied criterion rather than silently defer an entire named domain. |
 | Exact human approval and authorization negatives — DRAFT_PR | Integrator, existing review/Run/output authority | I current105+129+130; V actual interactive proof | Private approval binds exact sealed result/input/source/app/deployment; explicit click creates one fenced item; stale/revoked/cross-scope/altered/duplicate/cancel probes. | Carry identical invariants into generated app/deployment and all model/app routes; no hidden approval or authorizing by visibility/handle. | Foundry service/auth transport wiring. | Reuse review service and add generated-revision grant/race/substitution cases. | None locally; actual authenticated host below. |
 | Retry, effects and dead-letter reconciliation — DRAFT_PR bounded | Integrator, existing #83/#132 scopes | I implementation; earlier effect receipt at967090d33ae883c52f90ce5e7af5a82281c88191 | Owned synthetic target has explicit retry/lost-ack reconciliation/close barrier/dead-letter proof. Not generic exactly-once effects. | Separate safe pre-effect retry, proven idempotent retry and uncertain outcome blocked/reconciled; stale lease/cancel/restart/exhaustion/audit. | Generic capability effect contracts and broader retry policy remain open. | Reuse existing dispatch evidence and qualify generated capability effect policy. | Operator reconciliation only for genuinely uncertain external outcomes; no real effects in tests. |
@@ -251,7 +277,7 @@ baseline only; DRAFT_PR can include qualified components without full acceptance
 | Homelab-independent distribution and consumers — BLOCKED | Integrator #327/#127; parent hosted reviewer | I source; V measured bundle; old59cf13CIgreen | Local pinned gateway and owned PG/RCC work; exact local wheels/consumer/native receipts exist at earlier sources. I clean-wheel contract passed; not a complete final release inventory. | Reproducible wheels/native/images/locks/checksums/SBOM/provenance, actual installed final consumers, configurable registry/storage, local build/restore without mandatory GitHubCI/GHCR/vendor/Cloudflare/K8s. | Final combined source, new Core/Runtime floors, platform/browser/restore matrix and retained inventory. | Build and verify accepted combined candidate through existing local/CI mechanisms and clean consumers. | Publication credential availability may require owner setup; do not manipulate credentials. |
 | Controlled Codex/Devsy adapter path — SPEC_ONLY / unqualified | Existing #90/#143 path; no new migration campaign | No qualified new adapter SHA | Do not confuse external model authoring or old task activity with a verified controlled execution adapter. Full Devsy migration is not required. | Bounded authorized adapter/capability path through common admission/Run, scoped source/input/environment/result and explicit cancellation/recovery. | Inventory and selected existing adapter contract/evidence. | Trace existing interface, then qualify one owned synthetic invocation without live agent credentials. | Approval only if live identity/credential or other-repository change becomes necessary. |
 | Optional celld experiment — BLOCKED / NO-GO (#326) | Existing research scope, no implementation lane admitted | 24fbd91c9ddd34bec54230e1c3b20e3225061079 NO-GO evidence | No admitted adapter; no backend switch. SQL remains authority. MemoryD/Git migration excluded. | If admitted: pinned synthetic storage prerequisites, two nodes, epochs/failover/crash/outage/retry/lost-ack/overhead/rollback and one authority, disabled by default. | Pinned storage/failure prerequisites unproven; optional study cannot be advertised shipped. | Retain NO-GO and present the concrete optional inclusion/exclusion decision before final recommendation. | Owner explicitly decides release disposition if study remains unqualified; no silent scope drop. |
-| Publisher adversarial source/identity qualification — BLOCKED (#332) | Integrator release controls; existing #323/#325 | I publisher source, not yet qualified for #332 | Existing reviewed validate/publish split, owner gate, exact repo/head/workflow/run/manifest/digest and recovery controls; no compromise claim or replacement architecture. | Reuse existing tests; add only missing wrong repo/head/lookalike fork/workflow/unchecked commit/ZIP/manifest/run/expiry/caller negatives, inspect actual identities/permissions/environment and record sole-owner CLI-token residual risk. | Current publisher/environment permission evidence and missing-regression inventory. | Read current controls/tests and read-only permissions, execute bounded negative suite and short threat note; no dispatch/publication. | Any credential rotation, token-scope/environment-protection or identity change needs approval; inaccessible settings need operator readback. |
+| Publisher adversarial source/identity qualification — BLOCKED (#332) | Integrator, existing #323/#325 controls | 5165e429 tests; live metadata18:37:53UTC | Existing160 negatives and expanded full devutils268pass; exact repo/head/lookalike/source-tree/workflow/manifest/digest/run/caller controls retained. Public metadata reports unprotected community, empty rulesets and pypi protection/branch policy. No compromise claim. | Source-bound tests plus actual publisher identities/token scope and owner-reviewed stolen-credential residual risk before publication. | Actual PyPI token scope unknown; source owner gate is not independent approval. | Review bounded evidence/least-disruptive independent approval options; no automatic settings changes or publication. | Owner security disposition and any live environment/branch/token/identity change require separate approval. |
 | Final combined acceptance / merge / publication — BLOCKED | Sole integrator #328; parent final evidence reviewer | I plus future reviewed C/R/P/D union, not yet combined | Individual components and all13 old-head CI are not product/release acceptance. Final1.1 version remains provisional. | Every agreed row verified or explicit owner decision; source-bound local/CI/E1/homelab/distribution ledger and immutable publishable inventory. | All open rows above; parent evidence threshold. | Converge reviewed lanes in focused checkpoints, keep gates running and prepare exact-source release recommendation. | Conditional merge/publication authority exists; parent must confirm final threshold. No production deployment authority. |
 
 Primary issue bodies/amendments #71/#99/#100/#127/#129/#130/#131/#132,
