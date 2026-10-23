@@ -118,6 +118,7 @@ export type InvoiceExecutionComplete = Extract<
     { phase: "completed" | "dead_letter" }
 >;
 export interface InvoiceExecutionAdapter {
+    execute?(proposal: InvoiceReviewProposal): Promise<InvoiceExecutionState>;
     read(proposal: InvoiceReviewProposal): Promise<InvoiceExecutionState>;
     download(result: InvoiceExecutionComplete): Promise<void>;
 }

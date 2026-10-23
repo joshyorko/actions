@@ -24,6 +24,12 @@ import {
 } from "./semantic-renderer/mcp-bridge";
 import type { CanvasViewMetadata } from "./semantic-renderer/mcp-bridge";
 import { SemanticCanvasRenderer } from "./semantic-renderer";
+import {
+    createReviewedExecutionAdapter,
+    parseReviewedExecution,
+} from "./semantic-renderer/reviewed-execution";
+import type { ReviewedExecutionContext } from "./semantic-renderer/reviewed-execution";
+import { InvoiceReviewPanel } from "./query-results/InvoiceReviewPanel";
 
 const FIXTURE_QUERY_TOOL = "canvas_fixture_search";
 const FIXTURE_ARTIFACT_STATUS_TOOL = "canvas_fixture_artifact_status";
@@ -172,6 +178,8 @@ export function McpCanvasView() {
         null,
     );
     const [canvasViewError, setCanvasViewError] = useState(false);
+    const [reviewedExecution, setReviewedExecution] =
+        useState<ReviewedExecutionContext | null>(null);
     const inputRevision = useRef(0);
 
     const { app, isConnected, error } = useApp({
@@ -189,6 +197,7 @@ export function McpCanvasView() {
                     );
                     inputRevision.current += 1;
                     setCanvasView(null);
+                    setReviewedExecution(null);
                     setCanvasViewError(false);
                     setHostInput({ revision: inputRevision.current, query });
                     setHostInputState(query === null ? "ignored" : "accepted");
@@ -197,6 +206,7 @@ export function McpCanvasView() {
                 },
             );
             createdApp.addEventListener("toolresult", (result) => {
+                setReviewedExecution(null);
                 const invoicePage = result._meta?.["actions.invoicePage"];
                 if (invoicePage !== undefined) {
                     setCanvasView(null);
@@ -235,9 +245,24 @@ export function McpCanvasView() {
                             setCanvasViewError(true);
                         } else {
                             try {
-                                setCanvasView(
-                                    parseCanvasViewMetadata(metadata),
-                                );
+                                const parsed =
+                                    parseCanvasViewMetadata(metadata);
+                                setCanvasView(parsed);
+                                if (
+                                    !parsed.preview &&
+                                    (result._meta?.["actions.appSession"] !==
+                                        undefined ||
+                                        result._meta?.[
+                                            "actions.reviewedExecution"
+                                        ] !== undefined)
+                                ) {
+                                    setReviewedExecution(
+                                        parseReviewedExecution(
+                                            result._meta ?? {},
+                                            parsed,
+                                        ),
+                                    );
+                                }
                                 setCanvasViewError(false);
                             } catch {
                                 setCanvasView(null);
@@ -268,6 +293,7 @@ export function McpCanvasView() {
             setHostContext(displayContext(app.getHostContext()));
         } else {
             setCanvasView(null);
+            setReviewedExecution(null);
             setCanvasViewError(false);
         }
     }, [app, isConnected]);
@@ -280,6 +306,13 @@ export function McpCanvasView() {
                     : createFixtureAdapter(app)
                 : null,
         [app, isConnected, invoiceMode],
+    );
+    const reviewedAdapter = useMemo(
+        () =>
+            app && isConnected && reviewedExecution
+                ? createReviewedExecutionAdapter(app, reviewedExecution)
+                : null,
+        [app, isConnected, reviewedExecution],
     );
 
     return (
@@ -328,8 +361,9 @@ export function McpCanvasView() {
                 <section aria-label="Semantic Canvas app">
                     {canvasView.spec.visibility.includes("app") ? (
                         <p role="status">
-                            This app is displayed read-only; interactive actions
-                            are disabled.
+                            {reviewedAdapter
+                                ? "Semantic form bindings are read-only. Saved-result review and execution controls are available below."
+                                : "This app is displayed read-only; interactive actions are disabled."}
                         </p>
                     ) : null}
                     <SemanticCanvasRenderer
@@ -344,6 +378,13 @@ export function McpCanvasView() {
                         viewer="app"
                         adapters={readOnlyCanvasAdapters}
                     />
+                    {reviewedAdapter && reviewedExecution ? (
+                        <InvoiceReviewPanel
+                            key={reviewedExecution.token}
+                            adapter={reviewedAdapter}
+                            handle={reviewedExecution.handle}
+                        />
+                    ) : null}
                 </section>
             ) : canvasViewError ? (
                 <main aria-label="Canvas app unavailable">

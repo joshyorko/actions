@@ -1,5 +1,22 @@
 # Actions Next release checkpoint
 
+Runtime1.1.0a21 stages the ordinary trusted local RCC descriptor and ephemeral
+result/binding-scoped official View capability. Reviewed source from PR331
+`0eb4641f710ef8fb0e96e55cba8bb0de85e3c873` adds the shared locked/default-plan
+selector. The source MCP regression passed15; source real RCC executed both
+generated backends through separate offer/approval/dispatch and sealed artifact
+readback in two SQLite/DuckDB cases. Focused SQLite/profile negatives passed;
+their optional PostgreSQL skips are unverified until the strict owned fixture
+gate. Frontend Canvas40passed/1skipped and quality/build checks are separate
+from actual official-host interaction. Installed exact-candidate, strict full
+SQL/RCC and official View/reconnect qualification are pending for these changed
+bytes. Prior a20 counts below remain source-specific historical evidence.
+PR333 native managed inspection/log work is still a separate staged input.
+Managed enqueue/retry/logs/default provisioning, actual VSIX desktopQA and the
+full release matrix remain open; the extension2.20.10 CUA transport block is
+not a passed desktop test. ChatGPT E1, Codex401, Dakota STOP, celld NO-GO,
+publisher-security review and separate community/publication approval remain.
+
 The October 22 cloud continuation uses the existing integration branch and
 draft #328. The authoritative [migration receipt](https://github.com/joshyorko/actions/issues/327#issuecomment-6341162893)
 pins its starting source to `1d4f7eb60b223716e498af82534acceb02aa3080`.

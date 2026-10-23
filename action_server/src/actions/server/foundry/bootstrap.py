@@ -26,11 +26,13 @@ from actions.server.deployments.foundry_service import FoundryDeploymentService
 from actions.server.deployments.ids import WorkspaceId
 from actions.server.deployments.package_revision_compiler import (
     PinnedRccPackageBuildExecutor,
+    TrustedDeveloperExecutionAdmission,
+    load_prepared_rcc_environment,
 )
 from actions.server.foundry.authoring import FoundryAuthoring
 from actions.server.foundry.authoring_values import AuthoringError
 from actions.server.foundry.boot import prepare_boot_state
-from actions.server.foundry.mcp import CanvasCaller, CanvasMcp
+from actions.server.foundry.mcp import CanvasCaller, CanvasMcp, CanvasPort
 from actions.server.foundry.models import (
     FoundryAccessGrant,
     FoundryAudit,
@@ -39,6 +41,10 @@ from actions.server.foundry.models import (
 from actions.server.foundry.package_registry import FoundryPackageRegistry
 from actions.server.foundry.sql_authoring import SqlAuthoringAuthority
 from actions.server.foundry.sql_authorization import SqlFoundryAuthorization
+from actions.server.foundry.runtime_profile import (
+    read_runtime_profile,
+    RuntimeDeploymentSelection,
+)
 from actions.server.run_outputs.filesystem import FilesystemOutputProvider
 from actions.server.run_outputs.models import Workspace
 from actions.server.run_outputs.service import _now
@@ -191,17 +197,73 @@ def create_runtime_canvas(
     try:
         actor, workspace = _realm(db)
         auth = SqlFoundryAuthorization(db)
+        profile = read_runtime_profile(
+            os.environ.get("ACTIONS_FOUNDRY_EXECUTION_PROFILE")
+        )
+        if profile is not None and profile.worker.workspace_id != workspace:
+            raise ValueError("execution descriptor outside Runtime Workspace")
+        prepared = (
+            load_prepared_rcc_environment(Path(profile.prepared_receipt))
+            if profile is not None
+            else None
+        )
         registry = FoundryPackageRegistry(
-            db, provider, auth, executor=PinnedRccPackageBuildExecutor()
+            db,
+            provider,
+            auth,
+            executor=PinnedRccPackageBuildExecutor(prepared),
+            admission=TrustedDeveloperExecutionAdmission.TRUSTED
+            if profile is not None
+            else None,
+            execution_root=paths.cache_dir / "compile" if profile is not None else None,
         )
         repository = FoundryRepository(db)
         deployments = FoundryDeploymentService(repository, registry, auth, registry)
         authority = SqlAuthoringAuthority(
             repository, deployments, auth, package_evidence=registry.evidence
         )
-        port = FoundryAuthoring(
-            authority, auth, registry, registry, _ExecutionNotConfigured()
+        authoring = FoundryAuthoring(
+            authority,
+            auth,
+            registry,
+            registry,
+            RuntimeDeploymentSelection(registry, auth, profile)
+            if profile is not None
+            else _ExecutionNotConfigured(),
         )
+        port: CanvasPort = authoring
+        if profile is not None:
+            if prepared is None:
+                raise ValueError("verified prepared RCC environment required")
+            from actions.server.data_queries.review import InvoiceReviewService
+            from actions.server.data_queries.service import InvoiceQueryService
+            from actions.server.foundry.activated_execution import (
+                ActivatedReviewedExecution,
+            )
+            from actions.server.foundry.execution_port import (
+                PinnedReviewedRccRunner,
+                ReviewedCanvasExecution,
+            )
+            from actions.server.foundry.reviewed_view import ReviewedCanvasView
+            from actions.server.run_outputs.service import RunOutputService
+
+            outputs = RunOutputService(
+                db, {profile.provider_key: provider}, capabilities=registry
+            )
+            reviews = InvoiceReviewService(InvoiceQueryService(outputs, {}))
+            port = ReviewedCanvasView(
+                ReviewedCanvasExecution(
+                    authoring,
+                    ActivatedReviewedExecution(
+                        deployments, reviews, outputs, worker_id=profile.worker_id
+                    ),
+                    runner=PinnedReviewedRccRunner(
+                        prepared,
+                        Path(__file__).resolve().parents[1] / "bin" / "rcc-18.19.3",
+                        paths.cache_dir / "execution",
+                    ),
+                )
+            )
 
         async def authenticate(ctx):
             from actions.server._api_action_routes import _get_bearer_token

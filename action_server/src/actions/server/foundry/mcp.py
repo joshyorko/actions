@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import copy
 from collections.abc import Awaitable, Callable, Mapping
 from dataclasses import dataclass
 from typing import Literal, Protocol
@@ -86,6 +87,8 @@ class CanvasCaller:
     workspace_id: str
     audience: Literal["model", "app"]
     scope: CanvasResultScope | None = None
+    result_handle: str | None = None
+    binding_id: str | None = None
 
     def __post_init__(self):
         object.__setattr__(self, "actor", Actor.model_validate(self.actor))
@@ -102,6 +105,20 @@ class CanvasCaller:
                     "exact app context in the authenticated Workspace required"
                 )
             object.__setattr__(self, "scope", scope)
+        if self.result_handle is not None:
+            from actions.server.run_outputs.types import output_id_from_handle
+
+            if self.scope is None:
+                raise ValueError("result requires an exact app scope")
+            output_id_from_handle(self.result_handle)
+        if self.binding_id is not None:
+            import re
+
+            if (
+                self.result_handle is None
+                or re.fullmatch(r"[A-Za-z][A-Za-z0-9_-]{0,63}", self.binding_id) is None
+            ):
+                raise ValueError("result-bound logical binding required")
 
 
 @dataclass(frozen=True)
@@ -111,6 +128,13 @@ class CanvasReply:
     summary: str
     model_result: dict[str, JsonValue] | None = None
     view_state: dict[str, JsonValue] | None = None
+    app_scope: CanvasResultScope | None = None
+    interaction: dict[str, JsonValue] | None = None
+    app_result: str | None = None
+    review: dict[str, JsonValue] | None = None
+    execution: dict[str, JsonValue] | None = None
+    artifact: dict[str, JsonValue] | None = None
+    app_binding: str | None = None
 
 
 class CanvasPort(Protocol):
@@ -144,6 +168,9 @@ class CanvasMcp:
             raise ValueError("bounded static Canvas renderer required")
         schemas["canvas_open"] = _object(_EMPTY, 1024)
         self._schemas = schemas
+        from actions.server.foundry.app_sessions import AppSessions
+
+        self._sessions = AppSessions()
         self.port, self.authenticate, self.html = port, authenticate, html
         self.uri = URI
         self.resource = Resource(
@@ -181,7 +208,7 @@ class CanvasMcp:
             Tool(
                 name=name,
                 description=_tool_description(name, schema),
-                input_schema=schema,
+                input_schema=self._input_schema(name, schema),
                 annotations=ToolAnnotations(
                     read_only_hint=name in _READ_ONLY,
                     idempotent_hint=name in _READ_ONLY,
@@ -202,9 +229,32 @@ class CanvasMcp:
             or (name in CAPABILITY_TOOLS and caller.audience == "model")
         ]
 
+    @staticmethod
+    def _input_schema(name: str, schema: dict[str, JsonValue]) -> dict[str, JsonValue]:
+        if name not in APP_TOOLS:
+            return schema
+        schema = copy.deepcopy(schema)
+        properties = schema.setdefault("properties", {})
+        if not isinstance(properties, dict) or "appSession" in properties:
+            raise ValueError("reserved View session field")
+        properties["appSession"] = {"type": "string", "minLength": 43, "maxLength": 43}
+        return schema
+
     async def call(self, ctx: object, name: str, arguments: object) -> CallToolResult:
         caller = await self.principal(ctx)
         try:
+            inputs = _object(arguments, 1024 * 1024)
+            has_session = "appSession" in inputs
+            session = inputs.pop("appSession", None)
+            if has_session:
+                if caller is None or caller.scope is not None or name not in APP_TOOLS:
+                    raise ValueError("View session cannot confer model authority")
+                scope, handle, binding = self._sessions.resolve(
+                    caller.actor, caller.workspace_id, session
+                )
+                caller = CanvasCaller(
+                    caller.actor, caller.workspace_id, "app", scope, handle, binding
+                )
             if (
                 caller is None
                 or name not in self._schemas
@@ -213,7 +263,6 @@ class CanvasMcp:
                 or (name in CAPABILITY_TOOLS and caller.audience != "model")
             ):
                 raise ValueError("Canvas operation denied")
-            inputs = _object(arguments, 1024 * 1024)
             if name == "canvas_open" and inputs:
                 raise ValueError("empty launcher input required")
             # Domain authorization, exact app/revision/binding checks and request
@@ -235,10 +284,42 @@ class CanvasMcp:
                 if reply.view_state is not None
                 else None
             )
+            meta: dict[str, JsonValue] = {}
+            if view is not None:
+                meta["actions.canvas"] = view
+            if reply.interaction is not None:
+                meta["actions.reviewedExecution"] = _object(reply.interaction, 16384)
+            for key, value in (
+                ("actions.review", reply.review),
+                ("actions.execution", reply.execution),
+                ("actions.artifact", reply.artifact),
+            ):
+                if value is not None:
+                    meta[key] = _object(value, 256 * 1024)
+            if reply.app_scope is not None:
+                scope = CanvasResultScope.model_validate(reply.app_scope)
+                if scope.application.workspace_id != caller.workspace_id or (
+                    caller.scope is not None and scope != caller.scope
+                ):
+                    raise ValueError("View scope differs from authenticated caller")
+                CanvasCaller(
+                    caller.actor,
+                    caller.workspace_id,
+                    "app",
+                    scope,
+                    reply.app_result,
+                    reply.app_binding,
+                )
+                meta["actions.appSession"] = {
+                    "token": self._sessions.issue(
+                        caller.actor, scope, reply.app_result, reply.app_binding
+                    ),
+                    "scope": scope.model_dump(mode="json"),
+                }
             return CallToolResult(
                 content=[TextContent(type="text", text=reply.summary)],
                 structured_content=model,
-                _meta={"actions.canvas": view} if view is not None else None,
+                _meta=meta or None,
             )
         except Exception:
             # Do not expose provider exceptions, source paths or credentials.

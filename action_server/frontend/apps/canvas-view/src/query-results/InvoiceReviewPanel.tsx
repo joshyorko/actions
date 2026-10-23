@@ -44,12 +44,15 @@ export function InvoiceReviewPanel({
             if (mounted.current) setBusy(false);
         }
     };
-    const checkExecution = async () => {
+    const checkExecution = async (execute = false) => {
         if (!review || !executionAdapter) return;
         setBusy(true);
         setExecutionError(false);
         try {
-            const next = await executionAdapter.read(review.proposal);
+            const next =
+                execute && executionAdapter.execute
+                    ? await executionAdapter.execute(review.proposal)
+                    : await executionAdapter.read(review.proposal);
             if (
                 next.proposal.review_id !== review.proposal.review_id ||
                 next.proposal.binding.handle !== handle
@@ -171,6 +174,16 @@ export function InvoiceReviewPanel({
             )}
             {review?.receipt.state === "approved" && executionAdapter && (
                 <>
+                    {executionAdapter.execute &&
+                        (!execution || execution.phase === "queued") && (
+                            <button
+                                type="button"
+                                disabled={busy}
+                                onClick={() => void checkExecution(true)}
+                            >
+                                Execute approved result
+                            </button>
+                        )}
                     <button
                         type="button"
                         disabled={busy}
@@ -183,15 +196,23 @@ export function InvoiceReviewPanel({
                     )}
                     {(execution?.phase === "completed" ||
                         execution?.phase === "dead_letter") && (
-                        <button
-                            type="button"
-                            disabled={busy}
-                            onClick={() => void downloadExecution(execution)}
-                        >
-                            {execution.phase === "dead_letter"
-                                ? "Download failure evidence"
-                                : "Download execution result"}
-                        </button>
+                        <>
+                            <p>
+                                Run <code>{execution.run_id}</code>, Attempt{" "}
+                                <code>{execution.attempt_id}</code>
+                            </p>
+                            <button
+                                type="button"
+                                disabled={busy}
+                                onClick={() =>
+                                    void downloadExecution(execution)
+                                }
+                            >
+                                {execution.phase === "dead_letter"
+                                    ? "Download failure evidence"
+                                    : "Download execution result"}
+                            </button>
+                        </>
                     )}
                     {executionError && (
                         <p role="alert">Unable to access execution result.</p>
