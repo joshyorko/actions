@@ -1,76 +1,58 @@
-"""Transactional Deployment persistence on the shared Runtime Database.
-
-This repository consumes the integration-owned Deployment tables. It does not
-open a second database or install migrations. Its SQL contract is intentionally
-small and is listed in ``SHARED_DDL_CONTRACT`` for the integrator.
-"""
+"""Transactional Deployment persistence on the schema17 shared Runtime DB."""
 
 from __future__ import annotations
 
 import hashlib
 import json
+import time
+from collections.abc import Callable, Sequence
 from contextlib import contextmanager
 from typing import Any, Iterator
+from uuid import uuid4
 
 from actions.server._database import DBError, Database
+from actions.server.foundry.models import (
+    FoundryAudit,
+    FoundryDeploymentHead,
+    FoundryDeploymentRevision,
+    FoundryPackageRevision,
+    FoundryRequest,
+)
 
 from .canonical import canonicalize_json, parse_canonical_json
 from .foundry_values import (
+    AccessDenied,
     ChangeKind,
+    DeploymentExecutionSnapshot,
     DeploymentRevision,
     DeploymentSpecification,
     IdempotencyConflict,
     OperationKind,
     RepositoryCorruption,
     StaleDeploymentRevision,
+    StoredDeploymentRevision,
 )
 from .ids import (
     DeploymentId,
     DeploymentRevisionId,
     DeploymentRevisionRef,
+    PackageRevisionRef,
     WorkspaceId,
 )
 
 _REVISION_SCHEMA = "actions.deployment-revision/v1"
 
-# Integration must add specification_json to the proposed revision table and
-# deployment_revision_output_provider_ref. The existing composite-reference
-# tables remain the authority for relational scope. workspace_id references the
-# existing Runtime workspace(id) row created/owned by the common Run service.
-SHARED_DDL_CONTRACT = (
-    "deployment(workspace_id, deployment_id, current_revision_id, state)",
-    "deployment_revision(workspace_id, deployment_id, revision_id, sequence, "
-    "previous_revision_id, rollback_of_revision_id, change_kind, specification_json)",
-    "deployment_revision_package(workspace_id, deployment_id, revision_id, "
-    "package_id, package_revision_id)",
-    "deployment_revision_binding(workspace_id, deployment_id, revision_id, "
-    "package_id, package_revision_id, binding_requirement_id, provider_profile_id, "
-    "provider_profile_revision_id)",
-    "deployment_revision_worker_profile_ref(workspace_id, deployment_id, "
-    "revision_id, worker_profile_id, worker_profile_revision_id)",
-    "deployment_revision_policy_ref(workspace_id, deployment_id, revision_id, "
-    "policy_id, policy_revision_id)",
-    "deployment_revision_output_provider_ref(workspace_id, deployment_id, "
-    "revision_id, provider_profile_id, provider_profile_revision_id)",
-    "deployment_revision_request(workspace_id, idempotency_key, deployment_id, "
-    "operation_kind, request_digest, parent_revision_id, result_revision_id)",
-)
-
-
-def _private_diagnostics(db: Database) -> None:
-    if db.verbose:
-        raise ValueError("Deployment repository rejects raw SQL bind diagnostics")
-
 
 @contextmanager
 def _transaction(db: Database) -> Iterator[None]:
-    _private_diagnostics(db)
+    if db.verbose:
+        raise ValueError("Deployment repository rejects raw SQL bind diagnostics")
     with db.transaction():
         try:
             yield
         except DBError:
             raise DBError(
-                "Deployment SQL operation failed; bind values redacted"
+                "Foundry SQL operation failed; bind values redacted"
             ) from None
 
 
@@ -85,7 +67,7 @@ def _canonical_object(value: Any) -> bytes:
 
 
 def canonical_specification(specification: DeploymentSpecification) -> bytes:
-    """Serialize unordered Deployment sets in a stable order."""
+    """Serialize unordered Deployment selections in a stable order."""
     value = specification.model_dump(mode="json")
     value["package_revisions"].sort(
         key=lambda ref: (ref["workspace_id"], ref["package_id"], ref["revision_id"])
@@ -118,6 +100,31 @@ def canonical_specification(specification: DeploymentSpecification) -> bytes:
     return _canonical_object(value)
 
 
+def _canonical_revision(revision: DeploymentRevision) -> bytes:
+    value = revision.model_dump(mode="json")
+    value["specification"] = parse_canonical_json(
+        canonical_specification(revision.specification)
+    )
+    return _canonical_object(value)
+
+
+def _canonical_snapshots(
+    entries: Sequence[DeploymentExecutionSnapshot],
+) -> bytes:
+    value = {_snapshot_key(entry): entry.model_dump(mode="json") for entry in entries}
+    if len(value) != len(entries):
+        raise ValueError("duplicate Capability/Runtime Plan execution snapshot")
+    return _canonical_object(value)
+
+
+def _snapshot_key(entry: DeploymentExecutionSnapshot) -> str:
+    payload = {
+        "capability": entry.capability.model_dump(mode="json"),
+        "runtime_plan": entry.runtime_plan.model_dump(mode="json"),
+    }
+    return "sha256:" + hashlib.sha256(_canonical_object(payload)).hexdigest()
+
+
 def request_digest(
     workspace_id: WorkspaceId,
     deployment_id: DeploymentId,
@@ -126,7 +133,7 @@ def request_digest(
     operation_kind: OperationKind,
     rollback_of: DeploymentRevisionRef | None,
 ) -> str:
-    """Hash the complete request, including expected base and all input refs."""
+    """Hash complete mutation input, including expected base and selections."""
     payload = {
         "schema": "actions.deployment-request/v1",
         "workspace_id": str(workspace_id.root),
@@ -151,7 +158,7 @@ def _revision_digest(
     sequence: int,
     previous_revision: DeploymentRevisionRef | None,
     rollback_of: DeploymentRevisionRef | None,
-    change_kind: ChangeKind,
+    change_kind: str,
     specification_json: bytes,
 ) -> DeploymentRevisionId:
     payload = {
@@ -160,9 +167,7 @@ def _revision_digest(
         "deployment_id": str(deployment_id.root),
         "sequence": sequence,
         "previous_revision": (
-            previous_revision.revision_id.root
-            if previous_revision is not None
-            else None
+            previous_revision.revision_id.root if previous_revision else None
         ),
         "rollback_of": rollback_of.revision_id.root if rollback_of else None,
         "change_kind": change_kind,
@@ -174,38 +179,49 @@ def _revision_digest(
 
 
 class FoundryRepository:
-    """Persist immutable Deployment revisions and CAS the shared active pointer."""
+    """Use only schema17 Foundry records in the shared Runtime Database."""
 
     def __init__(self, db: Database):
-        _private_diagnostics(db)
+        if db.verbose:
+            raise ValueError("Deployment repository rejects raw SQL bind diagnostics")
         self._db = db
 
     def current(
         self, workspace_id: WorkspaceId, deployment_id: DeploymentId
-    ) -> DeploymentRevision | None:
-        _private_diagnostics(self._db)
+    ) -> StoredDeploymentRevision | None:
+        workspace_id = WorkspaceId.model_validate(workspace_id)
+        deployment_id = DeploymentId.model_validate(deployment_id)
         with self._db.connect():
-            row = self._one(
-                "SELECT current_revision_id FROM deployment "
+            heads = self._select(
+                FoundryDeploymentHead,
+                "SELECT * FROM foundry_deployment_head "
                 "WHERE workspace_id=? AND deployment_id=?",
                 [str(workspace_id.root), str(deployment_id.root)],
             )
-            if row is None or row[0] is None:
+            if not heads:
                 return None
-            ref = DeploymentRevisionRef(
-                workspace_id=workspace_id,
-                deployment_id=deployment_id,
-                revision_id=DeploymentRevisionId(row[0]),
-            )
-            revision = self._revision(ref)
-            if revision is None:
-                raise RepositoryCorruption(
-                    "active Deployment revision pointer is unavailable"
+            if len(heads) != 1:
+                raise RepositoryCorruption("Deployment has multiple active heads")
+            head = heads[0]
+            try:
+                ref = DeploymentRevisionRef(
+                    workspace_id=workspace_id,
+                    deployment_id=deployment_id,
+                    revision_id=DeploymentRevisionId(head.active_revision_id),
                 )
-            return revision
+            except (TypeError, ValueError) as exc:
+                raise RepositoryCorruption(
+                    "active Deployment revision is invalid"
+                ) from exc
+            stored = self._revision(ref)
+            if stored is None:
+                raise RepositoryCorruption("active Deployment revision is unavailable")
+            return stored
 
-    def get_revision(self, ref: DeploymentRevisionRef) -> DeploymentRevision | None:
-        _private_diagnostics(self._db)
+    def get_revision(
+        self, ref: DeploymentRevisionRef
+    ) -> StoredDeploymentRevision | None:
+        ref = DeploymentRevisionRef.model_validate(ref)
         with self._db.connect():
             return self._revision(ref)
 
@@ -216,110 +232,80 @@ class FoundryRepository:
         expected_revision: DeploymentRevisionRef | None,
         specification: DeploymentSpecification,
         *,
+        principal_id: str,
         idempotency_key: str,
         input_digest: str,
         operation_kind: OperationKind,
+        preflight: Callable[[], None],
+        snapshot_builder: Callable[
+            [DeploymentRevision], Sequence[DeploymentExecutionSnapshot]
+        ],
         rollback_of: DeploymentRevisionRef | None = None,
     ) -> DeploymentRevision:
-        """Insert one immutable revision and move the current pointer atomically."""
-        _private_diagnostics(self._db)
+        """Persist revision, request, audit and head CAS in one transaction."""
+        workspace_id = WorkspaceId.model_validate(workspace_id)
+        deployment_id = DeploymentId.model_validate(deployment_id)
+        specification = DeploymentSpecification.model_validate(specification)
         self._validate_owner(workspace_id, deployment_id, expected_revision)
-        if rollback_of is not None:
-            self._validate_owner(workspace_id, deployment_id, rollback_of)
+        self._validate_owner(workspace_id, deployment_id, rollback_of)
+        if not principal_id:
+            raise ValueError("trusted principal identity is required")
         specification_json = canonical_specification(specification)
         specification = DeploymentSpecification.model_validate_json(specification_json)
 
         with self._db.connect():
             with _transaction(self._db):
                 self._lock_workspace(workspace_id)
-                prior_request = self._one(
-                    "SELECT deployment_id, operation_kind, request_digest, "
-                    "parent_revision_id, result_revision_id "
-                    "FROM deployment_revision_request "
-                    "WHERE workspace_id=? AND idempotency_key=?",
-                    [str(workspace_id.root), idempotency_key],
+                # Recheck live authorization and every selected Package/reference
+                # after taking the common Workspace lock. This also applies to
+                # idempotent replay so a receipt never bypasses current grants.
+                preflight()
+                prior_request = self._prior_request(
+                    workspace_id, principal_id, operation_kind, idempotency_key
                 )
                 if prior_request is not None:
-                    if (
-                        prior_request[0] != str(deployment_id.root)
-                        or prior_request[1] != operation_kind
-                        or prior_request[2] != input_digest
-                        or prior_request[3]
-                        != (
-                            expected_revision.revision_id.root
-                            if expected_revision is not None
-                            else None
-                        )
-                    ):
+                    if prior_request.request_fingerprint != input_digest:
                         raise IdempotencyConflict(
                             "Deployment idempotency key conflicts with changed input"
                         )
-                    replay_ref = DeploymentRevisionRef(
-                        workspace_id=workspace_id,
-                        deployment_id=deployment_id,
-                        revision_id=DeploymentRevisionId(prior_request[4]),
+                    return self._request_result(
+                        prior_request, workspace_id, deployment_id
                     )
-                    replay = self._revision(replay_ref)
-                    if replay is None:
-                        raise RepositoryCorruption(
-                            "idempotent Deployment result is unavailable"
-                        )
-                    return replay
 
-                owner = self._one(
-                    "SELECT current_revision_id FROM deployment "
-                    "WHERE workspace_id=? AND deployment_id=?",
-                    [str(workspace_id.root), str(deployment_id.root)],
-                )
-                if owner is None:
-                    if expected_revision is not None or operation_kind != "create":
+                heads = self._heads(workspace_id, deployment_id)
+                if len(heads) > 1:
+                    raise RepositoryCorruption("Deployment has multiple active heads")
+                head = heads[0] if heads else None
+                if operation_kind == "create":
+                    if expected_revision is not None or head is not None:
+                        raise StaleDeploymentRevision(
+                            "Deployment already exists or create has an expected base"
+                        )
+                    previous = None
+                    sequence = 1
+                else:
+                    if expected_revision is None or head is None:
                         raise StaleDeploymentRevision(
                             "Deployment current revision does not match expected base"
                         )
-                    self._db.execute(
-                        "INSERT INTO deployment "
-                        "(workspace_id, deployment_id, current_revision_id, state) "
-                        "VALUES (?, ?, NULL, 'active')",
-                        [str(workspace_id.root), str(deployment_id.root)],
-                    )
-                    current_revision_id = None
-                else:
-                    if operation_kind == "create":
-                        raise StaleDeploymentRevision("Deployment already exists")
-                    current_revision_id = owner[0]
+                    if head.active_revision_id != expected_revision.revision_id.root:
+                        raise StaleDeploymentRevision(
+                            "Deployment current revision does not match expected base"
+                        )
+                    current = self._revision(expected_revision)
+                    if current is None:
+                        raise RepositoryCorruption(
+                            "active Deployment revision is missing"
+                        )
+                    previous = expected_revision
+                    sequence = current.revision.sequence + 1
 
-                expected_id = (
-                    expected_revision.revision_id.root
-                    if expected_revision is not None
-                    else None
-                )
-                if current_revision_id != expected_id:
-                    raise StaleDeploymentRevision(
-                        "Deployment current revision does not match expected base"
-                    )
-                if operation_kind == "create" and expected_revision is not None:
-                    raise StaleDeploymentRevision(
-                        "initial Deployment revision cannot have a parent"
-                    )
-                if operation_kind != "create" and expected_revision is None:
-                    raise StaleDeploymentRevision(
-                        "updated Deployment revision requires an expected parent"
-                    )
                 if operation_kind == "rollback":
                     if rollback_of is None or self._revision(rollback_of) is None:
                         raise StaleDeploymentRevision("rollback target is unavailable")
                 elif rollback_of is not None:
                     raise ValueError("only rollback revisions may name a target")
 
-                max_row = self._one(
-                    "SELECT COALESCE(MAX(sequence), 0) FROM deployment_revision "
-                    "WHERE workspace_id=? AND deployment_id=?",
-                    [str(workspace_id.root), str(deployment_id.root)],
-                )
-                if max_row is None:
-                    raise RepositoryCorruption("Deployment sequence is unavailable")
-                sequence = int(max_row[0]) + 1
-                previous = expected_revision
                 change_kind: ChangeKind = (
                     "rollback" if operation_kind == "rollback" else "publish"
                 )
@@ -332,42 +318,323 @@ class FoundryRepository:
                     change_kind,
                     specification_json,
                 )
-                ref = DeploymentRevisionRef(
-                    workspace_id=workspace_id,
-                    deployment_id=deployment_id,
-                    revision_id=revision_id,
-                )
                 revision = DeploymentRevision(
-                    ref=ref,
+                    ref=DeploymentRevisionRef(
+                        workspace_id=workspace_id,
+                        deployment_id=deployment_id,
+                        revision_id=revision_id,
+                    ),
                     sequence=sequence,
                     previous_revision=previous,
                     rollback_of=rollback_of,
                     change_kind=change_kind,
                     specification=specification,
                 )
-                self._insert_revision(revision, specification_json)
-                self._cas_activate(
-                    workspace_id, deployment_id, expected_id, revision_id
+                stored = StoredDeploymentRevision(
+                    revision=revision,
+                    execution_snapshots=tuple(snapshot_builder(revision)),
                 )
-                self._db.execute(
-                    "INSERT INTO deployment_revision_request "
-                    "(workspace_id, idempotency_key, deployment_id, operation_kind, "
-                    "request_digest, parent_revision_id, result_revision_id) "
-                    "VALUES (?, ?, ?, ?, ?, ?, ?)",
-                    [
-                        str(workspace_id.root),
-                        idempotency_key,
-                        str(deployment_id.root),
-                        operation_kind,
-                        input_digest,
-                        expected_id,
-                        revision_id.root,
-                    ],
+                anchor = self._package_anchor(specification, corruption=False)
+                record = FoundryDeploymentRevision(
+                    id=str(uuid4()),
+                    workspace_id=str(workspace_id.root),
+                    deployment_id=str(deployment_id.root),
+                    revision_id=revision.ref.revision_id.root,
+                    foundry_package_revision_id=anchor.id,
+                    selection_json=_canonical_revision(revision).decode("utf-8"),
+                    snapshots_json=_canonical_snapshots(
+                        stored.execution_snapshots
+                    ).decode("utf-8"),
+                )
+                self._db.insert(record)
+
+                if head is None:
+                    head = FoundryDeploymentHead(
+                        id=str(uuid4()),
+                        workspace_id=str(workspace_id.root),
+                        deployment_id=str(deployment_id.root),
+                        active_revision_id="",
+                        lock_version=0,
+                    )
+                    self._db.insert(head)
+                self._cas_activate(head, expected_revision, revision.ref)
+
+                request = FoundryRequest(
+                    id=str(uuid4()),
+                    workspace_id=str(workspace_id.root),
+                    principal_id=principal_id,
+                    operation=operation_kind,
+                    idempotency_key=idempotency_key,
+                    request_fingerprint=input_digest,
+                    result_json=_canonical_revision(revision).decode("utf-8"),
+                )
+                self._db.insert(request)
+                self._append_audit(
+                    workspace_id,
+                    deployment_id,
+                    principal_id,
+                    operation_kind,
+                    request.id,
+                    previous,
+                    revision.ref,
                 )
                 return revision
 
-    def _validate_owner(
+    def _prior_request(
         self,
+        workspace_id: WorkspaceId,
+        principal_id: str,
+        operation_kind: OperationKind,
+        idempotency_key: str,
+    ) -> FoundryRequest | None:
+        rows = self._select(
+            FoundryRequest,
+            "SELECT * FROM foundry_request WHERE workspace_id=? AND principal_id=? "
+            "AND operation=? AND idempotency_key=?",
+            [str(workspace_id.root), principal_id, operation_kind, idempotency_key],
+        )
+        if len(rows) > 1:
+            raise RepositoryCorruption("duplicate actor-scoped Foundry request")
+        return rows[0] if rows else None
+
+    def _request_result(
+        self,
+        request: FoundryRequest,
+        workspace_id: WorkspaceId,
+        deployment_id: DeploymentId,
+    ) -> DeploymentRevision:
+        raw = request.result_json.encode("utf-8")
+        try:
+            if canonicalize_json(raw) != raw:
+                raise ValueError("request result is not canonical")
+            receipt = DeploymentRevision.model_validate(parse_canonical_json(raw))
+            ref = receipt.ref
+            if ref.workspace_id != workspace_id or ref.deployment_id != deployment_id:
+                raise ValueError("request result has a different Deployment owner")
+            expected_digest = _revision_digest(
+                workspace_id,
+                deployment_id,
+                receipt.sequence,
+                receipt.previous_revision,
+                receipt.rollback_of,
+                receipt.change_kind,
+                canonical_specification(receipt.specification),
+            )
+            if expected_digest != ref.revision_id:
+                raise ValueError("request result revision digest mismatches")
+        except Exception as exc:
+            raise RepositoryCorruption(
+                "stored Foundry request result is invalid"
+            ) from exc
+        stored = self._revision(ref)
+        if stored is None:
+            raise RepositoryCorruption("idempotent Deployment result is unavailable")
+        if stored.revision != receipt:
+            raise RepositoryCorruption("idempotent Deployment receipt mismatches row")
+        return receipt
+
+    def _heads(
+        self, workspace_id: WorkspaceId, deployment_id: DeploymentId
+    ) -> list[FoundryDeploymentHead]:
+        return self._select(
+            FoundryDeploymentHead,
+            "SELECT * FROM foundry_deployment_head WHERE workspace_id=? "
+            "AND deployment_id=?",
+            [str(workspace_id.root), str(deployment_id.root)],
+        )
+
+    def _revision(self, ref: DeploymentRevisionRef) -> StoredDeploymentRevision | None:
+        rows = self._select(
+            FoundryDeploymentRevision,
+            "SELECT * FROM foundry_deployment_revision WHERE workspace_id=? "
+            "AND deployment_id=? AND revision_id=?",
+            [
+                str(ref.workspace_id.root),
+                str(ref.deployment_id.root),
+                ref.revision_id.root,
+            ],
+        )
+        if not rows:
+            return None
+        if len(rows) != 1:
+            raise RepositoryCorruption("duplicate immutable Deployment revision")
+        record = rows[0]
+        raw_revision = record.selection_json.encode("utf-8")
+        raw_snapshots = record.snapshots_json.encode("utf-8")
+        try:
+            if canonicalize_json(raw_revision) != raw_revision:
+                raise ValueError("Deployment selection is not canonical")
+            if canonicalize_json(raw_snapshots) != raw_snapshots:
+                raise ValueError("Deployment snapshots are not canonical")
+            revision = DeploymentRevision.model_validate(
+                parse_canonical_json(raw_revision)
+            )
+            if (
+                record.workspace_id != str(ref.workspace_id.root)
+                or record.deployment_id != str(ref.deployment_id.root)
+                or record.revision_id != ref.revision_id.root
+                or revision.ref != ref
+            ):
+                raise ValueError(
+                    "stored Deployment revision owner or identity mismatch"
+                )
+            expected_digest = _revision_digest(
+                ref.workspace_id,
+                ref.deployment_id,
+                revision.sequence,
+                revision.previous_revision,
+                revision.rollback_of,
+                revision.change_kind,
+                canonical_specification(revision.specification),
+            )
+            if expected_digest != ref.revision_id:
+                raise ValueError("stored Deployment revision digest mismatches")
+            snapshot_data = parse_canonical_json(raw_snapshots)
+            if not isinstance(snapshot_data, dict):
+                raise ValueError("stored snapshot map must be an object")
+            snapshots_list = []
+            for key, value in snapshot_data.items():
+                entry = DeploymentExecutionSnapshot.model_validate(value)
+                if key != _snapshot_key(entry):
+                    raise ValueError("stored execution snapshot key mismatches")
+                snapshots_list.append(entry)
+            snapshots = tuple(snapshots_list)
+            stored = StoredDeploymentRevision(
+                revision=revision,
+                execution_snapshots=snapshots,
+            )
+            anchor = self._package_anchor(revision.specification, corruption=True)
+            if record.foundry_package_revision_id != anchor.id:
+                raise ValueError("stored Package integrity anchor mismatches selection")
+            self._require_lineage_revision(revision.previous_revision)
+            self._require_lineage_revision(revision.rollback_of)
+        except Exception as exc:
+            raise RepositoryCorruption("stored Deployment revision is invalid") from exc
+        return stored
+
+    def _package_anchor(
+        self, specification: DeploymentSpecification, *, corruption: bool
+    ) -> FoundryPackageRevision:
+        package_records: list[tuple[PackageRevisionRef, FoundryPackageRevision]] = []
+        for package_ref in specification.package_revisions:
+            rows = self._select(
+                FoundryPackageRevision,
+                "SELECT * FROM foundry_package_revision WHERE workspace_id=? "
+                "AND package_id=? AND revision_id=?",
+                [
+                    str(package_ref.workspace_id.root),
+                    str(package_ref.package_id.root),
+                    package_ref.revision_id.root,
+                ],
+            )
+            if len(rows) != 1:
+                if corruption:
+                    raise RepositoryCorruption(
+                        "stored Deployment references a missing or duplicate Package"
+                    )
+                raise AccessDenied("Package Revision unavailable or not authorized")
+            package_records.append((package_ref, rows[0]))
+        package_records.sort(
+            key=lambda pair: (
+                str(pair[0].workspace_id.root),
+                str(pair[0].package_id.root),
+                pair[0].revision_id.root,
+            )
+        )
+        return package_records[0][1]
+
+    def _require_lineage_revision(self, ref: DeploymentRevisionRef | None) -> None:
+        if ref is None:
+            return
+        rows = self._select(
+            FoundryDeploymentRevision,
+            "SELECT * FROM foundry_deployment_revision WHERE workspace_id=? "
+            "AND deployment_id=? AND revision_id=?",
+            [
+                str(ref.workspace_id.root),
+                str(ref.deployment_id.root),
+                ref.revision_id.root,
+            ],
+        )
+        if len(rows) != 1:
+            raise ValueError("Deployment revision lineage target is unavailable")
+
+    def _lock_workspace(self, workspace_id: WorkspaceId) -> None:
+        rows = self._execute_returning(
+            "UPDATE workspace SET lock_version=lock_version WHERE id=? AND state='active' "
+            "RETURNING id",
+            [str(workspace_id.root)],
+        )
+        if len(rows) != 1:
+            raise StaleDeploymentRevision("Workspace is unavailable")
+
+    def _cas_activate(
+        self,
+        head: FoundryDeploymentHead,
+        expected_revision: DeploymentRevisionRef | None,
+        new_revision: DeploymentRevisionRef,
+    ) -> None:
+        expected_revision_id = (
+            expected_revision.revision_id.root if expected_revision is not None else ""
+        )
+        if head.active_revision_id != expected_revision_id:
+            raise StaleDeploymentRevision(
+                "Deployment current revision does not match expected base"
+            )
+        rows = self._execute_returning(
+            "UPDATE foundry_deployment_head SET active_revision_id=?, "
+            "lock_version=lock_version+1 WHERE id=? AND workspace_id=? AND deployment_id=? "
+            "AND active_revision_id=? AND lock_version=? RETURNING id",
+            [
+                new_revision.revision_id.root,
+                head.id,
+                head.workspace_id,
+                head.deployment_id,
+                expected_revision_id,
+                head.lock_version,
+            ],
+        )
+        if len(rows) != 1:
+            raise StaleDeploymentRevision(
+                "Deployment current revision does not match expected base"
+            )
+
+    def _append_audit(
+        self,
+        workspace_id: WorkspaceId,
+        deployment_id: DeploymentId,
+        principal_id: str,
+        operation_kind: OperationKind,
+        request_id: str,
+        previous: DeploymentRevisionRef | None,
+        current: DeploymentRevisionRef,
+    ) -> None:
+        self._db.insert(
+            FoundryAudit(
+                id=str(uuid4()),
+                workspace_id=str(workspace_id.root),
+                deployment_id=str(deployment_id.root),
+                principal_id=principal_id,
+                operation=operation_kind,
+                foundry_request_id=request_id,
+                from_revision_id=previous.revision_id.root if previous else "",
+                to_revision_id=current.revision_id.root,
+                created_ms=str(time.time_ns() // 1_000_000),
+            )
+        )
+
+    def _select(self, cls: type, sql: str, values: list[Any]) -> list[Any]:
+        with self._db.cursor() as cursor:
+            self._db.execute_query(cursor, sql, values)
+            return [cls(*row) for row in cursor.fetchall()]
+
+    def _execute_returning(self, sql: str, values: list[Any]) -> list[Any]:
+        with self._db.cursor() as cursor:
+            self._db.execute_update_returning(cursor, sql, values)
+            return cursor.fetchall()
+
+    @staticmethod
+    def _validate_owner(
         workspace_id: WorkspaceId,
         deployment_id: DeploymentId,
         ref: DeploymentRevisionRef | None,
@@ -376,207 +643,3 @@ class FoundryRepository:
             ref.workspace_id != workspace_id or ref.deployment_id != deployment_id
         ):
             raise ValueError("Deployment revision is outside the requested owner")
-
-    def _lock_workspace(self, workspace_id: WorkspaceId) -> None:
-        rows = self._execute_returning(
-            "UPDATE workspace SET lock_version=lock_version "
-            "WHERE id=? AND state='active' RETURNING id",
-            [str(workspace_id.root)],
-        )
-        if len(rows) != 1:
-            raise StaleDeploymentRevision("Workspace is unavailable")
-
-    def _cas_activate(
-        self,
-        workspace_id: WorkspaceId,
-        deployment_id: DeploymentId,
-        expected_revision_id: str | None,
-        new_revision_id: DeploymentRevisionId,
-    ) -> None:
-        sql = (
-            "UPDATE deployment SET current_revision_id=? "
-            "WHERE workspace_id=? AND deployment_id=? AND current_revision_id IS NULL "
-            "RETURNING deployment_id"
-        )
-        values = [
-            new_revision_id.root,
-            str(workspace_id.root),
-            str(deployment_id.root),
-        ]
-        if expected_revision_id is not None:
-            sql = (
-                "UPDATE deployment SET current_revision_id=? "
-                "WHERE workspace_id=? AND deployment_id=? AND current_revision_id=? "
-                "RETURNING deployment_id"
-            )
-            values.append(expected_revision_id)
-        if len(self._execute_returning(sql, values)) != 1:
-            raise StaleDeploymentRevision(
-                "Deployment current revision does not match expected base"
-            )
-
-    def _insert_revision(
-        self, revision: DeploymentRevision, specification_json: bytes
-    ) -> None:
-        ref = revision.ref
-        workspace = str(ref.workspace_id.root)
-        deployment = str(ref.deployment_id.root)
-        self._db.execute(
-            "INSERT INTO deployment_revision "
-            "(workspace_id, deployment_id, revision_id, sequence, "
-            "previous_revision_id, rollback_of_revision_id, change_kind, "
-            "specification_json) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-            [
-                workspace,
-                deployment,
-                ref.revision_id.root,
-                revision.sequence,
-                revision.previous_revision.revision_id.root
-                if revision.previous_revision
-                else None,
-                revision.rollback_of.revision_id.root if revision.rollback_of else None,
-                revision.change_kind,
-                specification_json.decode("utf-8"),
-            ],
-        )
-        for package in revision.specification.package_revisions:
-            self._db.execute(
-                "INSERT INTO deployment_revision_package "
-                "(workspace_id, deployment_id, revision_id, package_id, "
-                "package_revision_id) VALUES (?, ?, ?, ?, ?)",
-                [
-                    workspace,
-                    deployment,
-                    ref.revision_id.root,
-                    str(package.package_id.root),
-                    package.revision_id.root,
-                ],
-            )
-        for binding in revision.specification.bindings:
-            requirement = binding.requirement
-            self._db.execute(
-                "INSERT INTO deployment_revision_binding "
-                "(workspace_id, deployment_id, revision_id, package_id, "
-                "package_revision_id, binding_requirement_id, provider_profile_id, "
-                "provider_profile_revision_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-                [
-                    workspace,
-                    deployment,
-                    ref.revision_id.root,
-                    str(requirement.package_revision.package_id.root),
-                    requirement.package_revision.revision_id.root,
-                    requirement.requirement_id.root,
-                    str(binding.provider.provider_profile_id.root),
-                    binding.provider.revision_id.root,
-                ],
-            )
-        worker = revision.specification.worker
-        self._db.execute(
-            "INSERT INTO deployment_revision_worker_profile_ref "
-            "(workspace_id, deployment_id, revision_id, worker_profile_id, "
-            "worker_profile_revision_id) VALUES (?, ?, ?, ?, ?)",
-            [
-                workspace,
-                deployment,
-                ref.revision_id.root,
-                str(worker.worker_profile_id.root),
-                worker.revision_id.root,
-            ],
-        )
-        policy = revision.specification.policy
-        self._db.execute(
-            "INSERT INTO deployment_revision_policy_ref "
-            "(workspace_id, deployment_id, revision_id, policy_id, "
-            "policy_revision_id) VALUES (?, ?, ?, ?, ?)",
-            [
-                workspace,
-                deployment,
-                ref.revision_id.root,
-                str(policy.policy_id.root),
-                policy.revision_id.root,
-            ],
-        )
-        output_provider = revision.specification.output_provider
-        self._db.execute(
-            "INSERT INTO deployment_revision_output_provider_ref "
-            "(workspace_id, deployment_id, revision_id, provider_profile_id, "
-            "provider_profile_revision_id) VALUES (?, ?, ?, ?, ?)",
-            [
-                workspace,
-                deployment,
-                ref.revision_id.root,
-                str(output_provider.provider_profile_id.root),
-                output_provider.revision_id.root,
-            ],
-        )
-
-    def _revision(self, ref: DeploymentRevisionRef) -> DeploymentRevision | None:
-        row = self._one(
-            "SELECT sequence, previous_revision_id, rollback_of_revision_id, "
-            "change_kind, specification_json FROM deployment_revision "
-            "WHERE workspace_id=? AND deployment_id=? AND revision_id=?",
-            [
-                str(ref.workspace_id.root),
-                str(ref.deployment_id.root),
-                ref.revision_id.root,
-            ],
-        )
-        if row is None:
-            return None
-        specification_bytes = row[4].encode("utf-8")
-        try:
-            if canonicalize_json(specification_bytes) != specification_bytes:
-                raise ValueError("stored JSON is not canonical")
-            specification = DeploymentSpecification.model_validate_json(
-                specification_bytes
-            )
-            previous = (
-                DeploymentRevisionRef(
-                    workspace_id=ref.workspace_id,
-                    deployment_id=ref.deployment_id,
-                    revision_id=DeploymentRevisionId(row[1]),
-                )
-                if row[1]
-                else None
-            )
-            rollback_of = (
-                DeploymentRevisionRef(
-                    workspace_id=ref.workspace_id,
-                    deployment_id=ref.deployment_id,
-                    revision_id=DeploymentRevisionId(row[2]),
-                )
-                if row[2]
-                else None
-            )
-            revision = DeploymentRevision(
-                ref=ref,
-                sequence=int(row[0]),
-                previous_revision=previous,
-                rollback_of=rollback_of,
-                change_kind=row[3],
-                specification=specification,
-            )
-        except Exception as exc:
-            raise RepositoryCorruption("stored Deployment revision is invalid") from exc
-        expected = _revision_digest(
-            ref.workspace_id,
-            ref.deployment_id,
-            revision.sequence,
-            previous,
-            rollback_of,
-            revision.change_kind,
-            specification_bytes,
-        )
-        if expected != ref.revision_id:
-            raise RepositoryCorruption("stored Deployment revision digest mismatches")
-        return revision
-
-    def _one(self, sql: str, values: list[Any]) -> Any | None:
-        with self._db.cursor() as cursor:
-            self._db.execute_query(cursor, sql, values)
-            return cursor.fetchone()
-
-    def _execute_returning(self, sql: str, values: list[Any]) -> list[Any]:
-        with self._db.cursor() as cursor:
-            self._db.execute_update_returning(cursor, sql, values)
-            return cursor.fetchall()

@@ -194,6 +194,57 @@ class DeploymentRevision(_FrozenValue):
         return self
 
 
+class DeploymentExecutionSnapshot(_FrozenValue):
+    """One exact authorized Capability/Runtime Plan execution snapshot."""
+
+    capability: CapabilityRef
+    runtime_plan: RuntimePlanRef
+    snapshot: ExecutionSnapshot
+
+    @model_validator(mode="after")
+    def snapshot_matches_selection(self) -> DeploymentExecutionSnapshot:
+        if self.snapshot.capability != self.capability:
+            raise ValueError("execution snapshot Capability does not match its key")
+        if self.snapshot.runtime_plan != self.runtime_plan:
+            raise ValueError("execution snapshot Runtime Plan does not match its key")
+        if self.capability.package_revision != self.runtime_plan.package_revision:
+            raise ValueError("execution snapshot Package Revision mismatch")
+        if (
+            self.snapshot.deployment.workspace_id
+            != self.capability.package_revision.workspace_id
+        ):
+            raise ValueError("execution snapshot Workspace mismatch")
+        return self
+
+
+class StoredDeploymentRevision(_FrozenValue):
+    """Immutable Deployment revision plus its separately persisted snapshot map."""
+
+    revision: DeploymentRevision
+    execution_snapshots: tuple[DeploymentExecutionSnapshot, ...] = ()
+
+    @model_validator(mode="after")
+    def snapshots_match_revision(self) -> StoredDeploymentRevision:
+        pairs = {
+            (entry.capability, entry.runtime_plan) for entry in self.execution_snapshots
+        }
+        if len(pairs) != len(self.execution_snapshots):
+            raise ValueError("execution snapshot selections must be unique")
+        allowed = {
+            (policy.capability, plan)
+            for policy in self.revision.specification.capability_plans
+            for plan in policy.allowed_plans
+        }
+        if not pairs.issubset(allowed):
+            raise ValueError("execution snapshot is outside the Deployment selection")
+        if any(
+            entry.snapshot.deployment != self.revision.ref
+            for entry in self.execution_snapshots
+        ):
+            raise ValueError("execution snapshot does not pin this revision")
+        return self
+
+
 class ResolvedDeploymentExecution(_FrozenValue):
     """Exact Run snapshot plus bindings retained by its immutable revision ref."""
 
@@ -286,7 +337,8 @@ class WorkspaceAuthorizationPort(Protocol):
 
     def require_workspace(
         self, actor: Actor, workspace_id: WorkspaceId, permission: Permission
-    ) -> None: ...
+    ) -> None:
+        ...
 
     def require_deployment(
         self,

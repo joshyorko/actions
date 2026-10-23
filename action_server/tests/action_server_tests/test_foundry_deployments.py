@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from contextlib import contextmanager
 from pathlib import Path
 from types import SimpleNamespace
@@ -11,7 +12,13 @@ from uuid import uuid4
 import pytest
 
 from actions.server._database import Database
-from actions.server._models import Action, ActionPackage, Run, create_db
+from actions.server._models import (
+    Action,
+    ActionPackage,
+    Run,
+    get_all_model_classes,
+    get_model_db_rules,
+)
 from actions.server.deployments.foundry_repository import FoundryRepository
 from actions.server.deployments.foundry_service import FoundryDeploymentService
 from actions.server.deployments.foundry_values import (
@@ -22,6 +29,13 @@ from actions.server.deployments.foundry_values import (
     IdempotencyConflict,
     RepositoryCorruption,
     StaleDeploymentRevision,
+)
+from actions.server.foundry.models import (
+    FoundryAudit,
+    FoundryDeploymentHead,
+    FoundryDeploymentRevision,
+    FoundryPackageRevision,
+    FoundryRequest,
 )
 from actions.server.deployments.ids import (
     BindingRequirementRef,
@@ -44,8 +58,10 @@ from actions.server.deployments.ids import (
     WorkspacePolicyRevisionRef,
 )
 from actions.server.run_outputs.models import RunPin
+from actions.server.run_outputs.models import Workspace
 from actions.server.run_outputs.service import RunOutputControlPlane, RunOutputService
 from actions.server.run_outputs.types import Actor
+from actions.server.migrations import MIGRATION_ID_TO_NAME, Migration, migrate_db
 
 
 def _uuid() -> str:
@@ -139,6 +155,7 @@ class _PackagePort:
 
     def __init__(self, refs):
         self.refs = refs
+        self.package_refs = {refs.package}
         self.capabilities = {
             refs.capability: SimpleNamespace(
                 ref=refs.capability,
@@ -157,7 +174,7 @@ class _PackagePort:
         self.requirements = {refs.requirement: SimpleNamespace(ref=refs.requirement)}
 
     def require_revision(self, ref):
-        if ref != self.refs.package:
+        if ref not in self.package_refs:
             raise AccessDenied("Package Revision unavailable")
 
     def get_capability(self, ref):
@@ -175,6 +192,7 @@ class _AuthorizationPort:
 
     def __init__(self, workspace):
         self.allowed_workspaces = {workspace}
+        self.revoked_references = set()
         self.calls = []
 
     def require_workspace(self, actor, workspace_id, permission):
@@ -192,6 +210,8 @@ class _AuthorizationPort:
         if workspace_id is None and hasattr(ref, "package_revision"):
             workspace_id = ref.package_revision.workspace_id
         self.calls.append(("reference", ref, permission))
+        if ref in self.revoked_references:
+            raise AccessDenied("Reference unavailable or not authorized")
         if workspace_id not in self.allowed_workspaces:
             raise AccessDenied("Reference unavailable or not authorized")
 
@@ -202,50 +222,46 @@ class _ExecutionPort:
 
 
 @contextmanager
-def _runtime_database(path: Path, workspace_id: WorkspaceId) -> Iterator[Database]:
-    """Use the real Runtime schema plus test-only proposed Deployment tables."""
-    with create_db(path) as db:
-        with db.connect():
-            with db.transaction():
-                db.execute(
-                    "INSERT INTO workspace (id, state, lock_version) "
-                    "VALUES (?, 'active', 0)",
-                    [str(workspace_id.root)],
+def _runtime_database(
+    path: Path,
+    workspace_id: WorkspaceId,
+    package_refs: tuple[PackageRevisionRef, ...],
+) -> Iterator[Database]:
+    """Upgrade the actual Runtime schema16 fixture through shared migration17."""
+    db = Database(path)
+    legacy_classes = [
+        cls for cls in get_all_model_classes() if not cls.__name__.startswith("Foundry")
+    ]
+    with db.connect():
+        db.initialize(legacy_classes)
+        with db.transaction():
+            db.create_tables(get_model_db_rules())
+            db.insert(Migration(16, MIGRATION_ID_TO_NAME[16]))
+            db.insert(Workspace(str(workspace_id.root), "active", 0))
+
+    assert migrate_db(path)
+    db = Database(path)
+    with db.connect():
+        db.initialize(get_all_model_classes())
+        with db.transaction():
+            for package_ref in package_refs:
+                db.insert(
+                    FoundryPackageRevision(
+                        id=_uuid(),
+                        workspace_id=str(package_ref.workspace_id.root),
+                        package_id=str(package_ref.package_id.root),
+                        revision_id=package_ref.revision_id.root,
+                        manifest_json="{}",
+                        source_artifact_digest=_digest("f"),
+                        source_inventory_json="{}",
+                        build_evidence_json="{}",
+                    )
                 )
-                for statement in _TEST_DEPLOYMENT_DDL:
-                    db.execute(statement)
+        tables = set(db.list_table_names())
+        assert "foundry_deployment_revision" in tables
+        assert "foundry_deployment_head" in tables
+        assert "deployment_revision" not in tables
         yield db
-
-
-_TEST_DEPLOYMENT_DDL = (
-    "CREATE TABLE deployment (workspace_id TEXT NOT NULL, deployment_id TEXT NOT NULL, "
-    "current_revision_id TEXT, state TEXT NOT NULL, PRIMARY KEY(workspace_id, deployment_id))",
-    "CREATE TABLE deployment_revision (workspace_id TEXT NOT NULL, deployment_id TEXT NOT NULL, "
-    "revision_id TEXT NOT NULL, sequence INTEGER NOT NULL, previous_revision_id TEXT, "
-    "rollback_of_revision_id TEXT, change_kind TEXT NOT NULL, specification_json TEXT NOT NULL, "
-    "PRIMARY KEY(workspace_id, deployment_id, revision_id), "
-    "UNIQUE(workspace_id, deployment_id, sequence))",
-    "CREATE TABLE deployment_revision_package (workspace_id TEXT NOT NULL, deployment_id TEXT NOT NULL, "
-    "revision_id TEXT NOT NULL, package_id TEXT NOT NULL, package_revision_id TEXT NOT NULL, "
-    "PRIMARY KEY(workspace_id, deployment_id, revision_id, package_id))",
-    "CREATE TABLE deployment_revision_binding (workspace_id TEXT NOT NULL, deployment_id TEXT NOT NULL, "
-    "revision_id TEXT NOT NULL, package_id TEXT NOT NULL, package_revision_id TEXT NOT NULL, "
-    "binding_requirement_id TEXT NOT NULL, provider_profile_id TEXT NOT NULL, "
-    "provider_profile_revision_id TEXT NOT NULL, PRIMARY KEY(workspace_id, deployment_id, "
-    "revision_id, package_id, package_revision_id, binding_requirement_id))",
-    "CREATE TABLE deployment_revision_worker_profile_ref (workspace_id TEXT NOT NULL, "
-    "deployment_id TEXT NOT NULL, revision_id TEXT NOT NULL, worker_profile_id TEXT NOT NULL, "
-    "worker_profile_revision_id TEXT NOT NULL, PRIMARY KEY(workspace_id, deployment_id, revision_id))",
-    "CREATE TABLE deployment_revision_policy_ref (workspace_id TEXT NOT NULL, deployment_id TEXT NOT NULL, "
-    "revision_id TEXT NOT NULL, policy_id TEXT NOT NULL, policy_revision_id TEXT NOT NULL, "
-    "PRIMARY KEY(workspace_id, deployment_id, revision_id))",
-    "CREATE TABLE deployment_revision_output_provider_ref (workspace_id TEXT NOT NULL, "
-    "deployment_id TEXT NOT NULL, revision_id TEXT NOT NULL, provider_profile_id TEXT NOT NULL, "
-    "provider_profile_revision_id TEXT NOT NULL, PRIMARY KEY(workspace_id, deployment_id, revision_id))",
-    "CREATE TABLE deployment_revision_request (workspace_id TEXT NOT NULL, idempotency_key TEXT NOT NULL, "
-    "deployment_id TEXT NOT NULL, operation_kind TEXT NOT NULL, request_digest TEXT NOT NULL, "
-    "parent_revision_id TEXT, result_revision_id TEXT NOT NULL, PRIMARY KEY(workspace_id, idempotency_key))",
-)
 
 
 def _service(db, refs, packages=None):
@@ -292,7 +308,9 @@ def _action_and_grant(db, refs, snapshot, actor):
 def test_resolution_requires_the_declared_capability_and_binding_ports(tmp_path):
     refs = _refs()
     actor = Actor(principal_id=_uuid())
-    with _runtime_database(tmp_path / "runtime.db", refs.workspace) as db:
+    with _runtime_database(
+        tmp_path / "runtime.db", refs.workspace, (refs.package,)
+    ) as db:
         service, package_port, authorization = _service(db, refs)
         created = service.create(
             actor,
@@ -317,7 +335,9 @@ def test_resolution_requires_the_declared_capability_and_binding_ports(tmp_path)
 def test_cross_workspace_capability_is_denied_before_execution_resolution(tmp_path):
     refs = _refs()
     actor = Actor(principal_id=_uuid())
-    with _runtime_database(tmp_path / "runtime.db", refs.workspace) as db:
+    with _runtime_database(
+        tmp_path / "runtime.db", refs.workspace, (refs.package,)
+    ) as db:
         service, _, _ = _service(db, refs)
         service.create(
             actor,
@@ -342,6 +362,100 @@ def test_cross_workspace_capability_is_denied_before_execution_resolution(tmp_pa
                 refs.deployment_id,
                 foreign_capability,
             )
+
+
+def test_every_package_revision_needs_a_shared_store_anchor(tmp_path):
+    refs = _refs()
+    actor = Actor(principal_id=_uuid())
+    missing_package = PackageRevisionRef(
+        workspace_id=refs.workspace,
+        package_id=PackageId(_uuid()),
+        revision_id=PackageRevisionId(_digest("9")),
+    )
+    specification = _spec(refs).model_copy(
+        update={"package_revisions": (refs.package, missing_package)}
+    )
+    with _runtime_database(
+        tmp_path / "runtime.db", refs.workspace, (refs.package,)
+    ) as db:
+        package_port = _PackagePort(refs)
+        package_port.package_refs.add(missing_package)
+        service, _, _ = _service(db, refs, package_port)
+        with pytest.raises(AccessDenied, match="Package Revision unavailable"):
+            service.create(
+                actor,
+                refs.workspace,
+                refs.deployment_id,
+                specification,
+                idempotency_key="create-1",
+            )
+        assert db.all(FoundryDeploymentHead) == []
+
+
+def test_package_fk_anchor_does_not_choose_execution_or_drop_package_refs(tmp_path):
+    refs = _refs()
+    actor = Actor(principal_id=_uuid())
+    anchor_package = PackageRevisionRef(
+        workspace_id=refs.workspace,
+        package_id=PackageId("00000000-0000-0000-0000-000000000000"),
+        revision_id=PackageRevisionId(_digest("9")),
+    )
+    single_package_spec = _spec(refs)
+    specification = DeploymentSpecification(
+        package_revisions=(refs.package, anchor_package),
+        capability_plans=single_package_spec.capability_plans,
+        bindings=single_package_spec.bindings,
+        worker=refs.worker,
+        policy=refs.policy,
+        output_provider=refs.output_provider,
+    )
+    package_port = _PackagePort(refs)
+    package_port.package_refs.add(anchor_package)
+    with _runtime_database(
+        tmp_path / "runtime.db", refs.workspace, (refs.package, anchor_package)
+    ) as db:
+        service, _, authorization = _service(db, refs, package_port)
+        created = service.create(
+            actor,
+            refs.workspace,
+            refs.deployment_id,
+            specification,
+            idempotency_key="multi-package-create",
+        )
+        anchor = db.first(
+            FoundryPackageRevision,
+            "SELECT * FROM foundry_package_revision WHERE workspace_id=? "
+            "AND package_id=? AND revision_id=?",
+            [
+                str(refs.workspace.root),
+                str(anchor_package.package_id.root),
+                anchor_package.revision_id.root,
+            ],
+        )
+        revision_row = db.first(
+            FoundryDeploymentRevision,
+            "SELECT * FROM foundry_deployment_revision WHERE revision_id=?",
+            [created.ref.revision_id.root],
+        )
+        assert revision_row.foundry_package_revision_id == anchor.id
+        selection = json.loads(revision_row.selection_json)
+        assert selection["sequence"] == created.sequence
+        assert len(selection["specification"]["package_revisions"]) == 2
+        assert created.specification.package_revisions == (
+            anchor_package,
+            refs.package,
+        )
+        resolved = service.resolve(
+            actor, refs.workspace, refs.deployment_id, refs.capability
+        )
+        assert resolved.snapshot.capability == refs.capability
+        assert resolved.revision.specification.package_revisions == (
+            anchor_package,
+            refs.package,
+        )
+        authorization.revoked_references.add(anchor_package)
+        with pytest.raises(AccessDenied, match="Reference unavailable"):
+            service.resolve(actor, refs.workspace, refs.deployment_id, refs.capability)
 
 
 def test_resolution_returns_only_bindings_for_the_selected_capability(tmp_path):
@@ -397,7 +511,9 @@ def test_resolution_returns_only_bindings_for_the_selected_capability(tmp_path):
     package_port.requirements[second_requirement] = SimpleNamespace(
         ref=second_requirement
     )
-    with _runtime_database(tmp_path / "runtime.db", refs.workspace) as db:
+    with _runtime_database(
+        tmp_path / "runtime.db", refs.workspace, (refs.package,)
+    ) as db:
         service, _, authorization = _service(db, refs, package_port)
         service.create(
             actor,
@@ -423,7 +539,9 @@ def test_resolution_returns_only_bindings_for_the_selected_capability(tmp_path):
 def test_compare_and_swap_rejects_a_stale_revision(tmp_path):
     refs = _refs()
     actor = Actor(principal_id=_uuid())
-    with _runtime_database(tmp_path / "runtime.db", refs.workspace) as db:
+    with _runtime_database(
+        tmp_path / "runtime.db", refs.workspace, (refs.package,)
+    ) as db:
         service, _, _ = _service(db, refs)
         first = service.create(
             actor,
@@ -432,6 +550,13 @@ def test_compare_and_swap_rejects_a_stale_revision(tmp_path):
             _spec(refs),
             idempotency_key="create-1",
         )
+        first_head = db.first(
+            FoundryDeploymentHead,
+            "SELECT * FROM foundry_deployment_head WHERE workspace_id=? AND deployment_id=?",
+            [str(refs.workspace.root), str(refs.deployment_id.root)],
+        )
+        assert first_head.active_revision_id == first.ref.revision_id.root
+        assert first_head.lock_version == 1
         second = service.publish(
             actor,
             refs.workspace,
@@ -440,6 +565,13 @@ def test_compare_and_swap_rejects_a_stale_revision(tmp_path):
             _spec(refs, provider=refs.second_provider),
             idempotency_key="publish-2",
         )
+        second_head = db.first(
+            FoundryDeploymentHead,
+            "SELECT * FROM foundry_deployment_head WHERE workspace_id=? AND deployment_id=?",
+            [str(refs.workspace.root), str(refs.deployment_id.root)],
+        )
+        assert second_head.active_revision_id == second.ref.revision_id.root
+        assert second_head.lock_version == 2
         with pytest.raises(StaleDeploymentRevision):
             service.publish(
                 actor,
@@ -450,7 +582,9 @@ def test_compare_and_swap_rejects_a_stale_revision(tmp_path):
                 idempotency_key="stale-write",
             )
         assert (
-            FoundryRepository(db).current(refs.workspace, refs.deployment_id).ref
+            FoundryRepository(db)
+            .current(refs.workspace, refs.deployment_id)
+            .revision.ref
             == second.ref
         )
 
@@ -458,7 +592,9 @@ def test_compare_and_swap_rejects_a_stale_revision(tmp_path):
 def test_changed_input_under_same_idempotency_key_conflicts(tmp_path):
     refs = _refs()
     actor = Actor(principal_id=_uuid())
-    with _runtime_database(tmp_path / "runtime.db", refs.workspace) as db:
+    with _runtime_database(
+        tmp_path / "runtime.db", refs.workspace, (refs.package,)
+    ) as db:
         service, _, _ = _service(db, refs)
         first = service.create(
             actor,
@@ -485,6 +621,213 @@ def test_changed_input_under_same_idempotency_key_conflicts(tmp_path):
                 _spec(refs, provider=refs.second_provider),
                 idempotency_key="create-1",
             )
+        second = service.publish(
+            actor,
+            refs.workspace,
+            refs.deployment_id,
+            first.ref,
+            _spec(refs, provider=refs.second_provider),
+            idempotency_key="publish-after-replay",
+        )
+        assert (
+            service.create(
+                actor,
+                refs.workspace,
+                refs.deployment_id,
+                _spec(refs),
+                idempotency_key="create-1",
+            )
+            == first
+        )
+        assert (
+            FoundryRepository(db).current(refs.workspace, refs.deployment_id).revision
+            == second
+        )
+        request = db.first(
+            FoundryRequest,
+            "SELECT * FROM foundry_request WHERE workspace_id=? AND principal_id=? "
+            "AND idempotency_key=?",
+            [str(refs.workspace.root), str(actor.principal_id), "create-1"],
+        )
+        result = json.loads(request.result_json)
+        assert result["ref"]["revision_id"] == first.ref.revision_id.root
+        assert result["sequence"] == first.sequence
+        assert (
+            result["specification"]["bindings"][0]["provider"]
+            == json.loads(first.model_dump_json())["specification"]["bindings"][0][
+                "provider"
+            ]
+        )
+        audit = db.first(
+            FoundryAudit,
+            "SELECT * FROM foundry_audit WHERE deployment_id=?",
+            [str(refs.deployment_id.root)],
+        )
+        assert audit.foundry_request_id == request.id
+        assert (
+            len(
+                db.all(
+                    FoundryRequest,
+                    where="workspace_id=? AND principal_id=? AND idempotency_key=?",
+                    values=[
+                        str(refs.workspace.root),
+                        str(actor.principal_id),
+                        "create-1",
+                    ],
+                )
+            )
+            == 1
+        )
+        other_actor = Actor(principal_id=_uuid())
+        other_deployment = DeploymentId(_uuid())
+        service.create(
+            other_actor,
+            refs.workspace,
+            other_deployment,
+            _spec(refs),
+            idempotency_key="create-1",
+        )
+        assert (
+            len(
+                db.all(
+                    FoundryRequest,
+                    where="workspace_id=? AND idempotency_key=?",
+                    values=[str(refs.workspace.root), "create-1"],
+                )
+            )
+            == 2
+        )
+
+
+def test_publish_rechecks_revoked_references_after_workspace_lock(
+    tmp_path, monkeypatch
+):
+    refs = _refs()
+    actor = Actor(principal_id=_uuid())
+    with _runtime_database(
+        tmp_path / "runtime.db", refs.workspace, (refs.package,)
+    ) as db:
+        service, _, authorization = _service(db, refs)
+        first = service.create(
+            actor,
+            refs.workspace,
+            refs.deployment_id,
+            _spec(refs),
+            idempotency_key="create-1",
+        )
+        repository = service._repository
+        lock_workspace = repository._lock_workspace
+
+        def lock_then_revoke(workspace_id):
+            lock_workspace(workspace_id)
+            authorization.revoked_references.add(refs.second_provider)
+
+        monkeypatch.setattr(repository, "_lock_workspace", lock_then_revoke)
+        with pytest.raises(AccessDenied, match="Reference unavailable"):
+            service.publish(
+                actor,
+                refs.workspace,
+                refs.deployment_id,
+                first.ref,
+                _spec(refs, provider=refs.second_provider),
+                idempotency_key="publish-revoked-in-transaction",
+            )
+        assert (
+            FoundryRepository(db)
+            .current(refs.workspace, refs.deployment_id)
+            .revision.ref
+            == first.ref
+        )
+        assert len(db.all(FoundryDeploymentRevision)) == 1
+        assert len(db.all(FoundryRequest)) == 1
+        assert len(db.all(FoundryAudit)) == 1
+
+
+def test_idempotent_replay_rechecks_revoked_references_after_workspace_lock(
+    tmp_path, monkeypatch
+):
+    refs = _refs()
+    actor = Actor(principal_id=_uuid())
+    with _runtime_database(
+        tmp_path / "runtime.db", refs.workspace, (refs.package,)
+    ) as db:
+        service, _, authorization = _service(db, refs)
+        first = service.create(
+            actor,
+            refs.workspace,
+            refs.deployment_id,
+            _spec(refs),
+            idempotency_key="create-1",
+        )
+        repository = service._repository
+        lock_workspace = repository._lock_workspace
+
+        def lock_then_revoke(workspace_id):
+            lock_workspace(workspace_id)
+            authorization.revoked_references.add(refs.provider)
+
+        monkeypatch.setattr(repository, "_lock_workspace", lock_then_revoke)
+        with pytest.raises(AccessDenied, match="Reference unavailable"):
+            service.create(
+                actor,
+                refs.workspace,
+                refs.deployment_id,
+                _spec(refs),
+                idempotency_key="create-1",
+            )
+        assert (
+            FoundryRepository(db)
+            .current(refs.workspace, refs.deployment_id)
+            .revision.ref
+            == first.ref
+        )
+        assert len(db.all(FoundryDeploymentRevision)) == 1
+        assert len(db.all(FoundryRequest)) == 1
+        assert len(db.all(FoundryAudit)) == 1
+
+
+def test_publish_revalidates_admitted_packages_after_workspace_lock(
+    tmp_path, monkeypatch
+):
+    refs = _refs()
+    actor = Actor(principal_id=_uuid())
+    with _runtime_database(
+        tmp_path / "runtime.db", refs.workspace, (refs.package,)
+    ) as db:
+        service, package_port, _ = _service(db, refs)
+        first = service.create(
+            actor,
+            refs.workspace,
+            refs.deployment_id,
+            _spec(refs),
+            idempotency_key="create-1",
+        )
+        repository = service._repository
+        lock_workspace = repository._lock_workspace
+
+        def lock_then_remove_admission(workspace_id):
+            lock_workspace(workspace_id)
+            package_port.package_refs.clear()
+
+        monkeypatch.setattr(repository, "_lock_workspace", lock_then_remove_admission)
+        with pytest.raises(AccessDenied, match="Package Revision unavailable"):
+            service.publish(
+                actor,
+                refs.workspace,
+                refs.deployment_id,
+                first.ref,
+                _spec(refs, provider=refs.second_provider),
+                idempotency_key="publish-package-revoked-in-transaction",
+            )
+        assert (
+            FoundryRepository(db)
+            .current(refs.workspace, refs.deployment_id)
+            .revision.ref
+            == first.ref
+        )
+        assert len(db.all(FoundryDeploymentRevision)) == 1
+        assert len(db.all(FoundryRequest)) == 1
+        assert len(db.all(FoundryAudit)) == 1
 
 
 def test_failed_activation_rolls_back_all_rows_and_reopens_cleanly(
@@ -493,14 +836,14 @@ def test_failed_activation_rolls_back_all_rows_and_reopens_cleanly(
     refs = _refs()
     actor = Actor(principal_id=_uuid())
     path = tmp_path / "runtime.db"
-    with _runtime_database(path, refs.workspace) as db:
+    with _runtime_database(path, refs.workspace, (refs.package,)) as db:
         service, _, _ = _service(db, refs)
         repository = service._repository
 
-        def fail_after_revision_insert(*args, **kwargs):
+        def fail_after_head_update(*args, **kwargs):
             raise RuntimeError("injected activation failure")
 
-        monkeypatch.setattr(repository, "_cas_activate", fail_after_revision_insert)
+        monkeypatch.setattr(repository, "_append_audit", fail_after_head_update)
         with pytest.raises(RuntimeError, match="injected activation failure"):
             service.create(
                 actor,
@@ -509,13 +852,10 @@ def test_failed_activation_rolls_back_all_rows_and_reopens_cleanly(
                 _spec(refs),
                 idempotency_key="transaction-failure",
             )
-        with db.cursor() as cursor:
-            cursor.execute("SELECT COUNT(*) FROM deployment_revision")
-            assert cursor.fetchone()[0] == 0
-            cursor.execute("SELECT COUNT(*) FROM deployment_revision_request")
-            assert cursor.fetchone()[0] == 0
-            cursor.execute("SELECT COUNT(*) FROM deployment")
-            assert cursor.fetchone()[0] == 0
+        assert db.all(FoundryDeploymentRevision) == []
+        assert db.all(FoundryRequest) == []
+        assert db.all(FoundryDeploymentHead) == []
+        assert db.all(FoundryAudit) == []
 
     restarted = FoundryRepository(Database(path))
     assert restarted.current(refs.workspace, refs.deployment_id) is None
@@ -525,7 +865,7 @@ def test_restart_preserves_exact_revision_and_canonical_bindings(tmp_path):
     refs = _refs()
     actor = Actor(principal_id=_uuid())
     path = tmp_path / "runtime.db"
-    with _runtime_database(path, refs.workspace) as db:
+    with _runtime_database(path, refs.workspace, (refs.package,)) as db:
         service, _, _ = _service(db, refs)
         first = service.create(
             actor,
@@ -536,14 +876,17 @@ def test_restart_preserves_exact_revision_and_canonical_bindings(tmp_path):
         )
     restarted = FoundryRepository(Database(path))
     reloaded = restarted.get_revision(first.ref)
-    assert reloaded == first
-    assert reloaded.specification.bindings[0].provider == refs.provider
+    assert reloaded.revision == first
+    assert reloaded.revision.specification.bindings[0].provider == refs.provider
+    assert reloaded.execution_snapshots
 
 
 def test_active_pointer_to_missing_revision_is_reported_as_corruption(tmp_path):
     refs = _refs()
     actor = Actor(principal_id=_uuid())
-    with _runtime_database(tmp_path / "runtime.db", refs.workspace) as db:
+    with _runtime_database(
+        tmp_path / "runtime.db", refs.workspace, (refs.package,)
+    ) as db:
         service, _, _ = _service(db, refs)
         service.create(
             actor,
@@ -553,7 +896,7 @@ def test_active_pointer_to_missing_revision_is_reported_as_corruption(tmp_path):
             idempotency_key="create-1",
         )
         db.execute(
-            "UPDATE deployment SET current_revision_id=? "
+            "UPDATE foundry_deployment_head SET active_revision_id=? "
             "WHERE workspace_id=? AND deployment_id=?",
             [
                 _digest("f"),
@@ -565,10 +908,81 @@ def test_active_pointer_to_missing_revision_is_reported_as_corruption(tmp_path):
             FoundryRepository(db).current(refs.workspace, refs.deployment_id)
 
 
+def test_revoked_binding_reference_is_rechecked_before_run_resolution(tmp_path):
+    refs = _refs()
+    actor = Actor(principal_id=_uuid())
+    with _runtime_database(
+        tmp_path / "runtime.db", refs.workspace, (refs.package,)
+    ) as db:
+        service, _, authorization = _service(db, refs)
+        service.create(
+            actor,
+            refs.workspace,
+            refs.deployment_id,
+            _spec(refs),
+            idempotency_key="create-1",
+        )
+        authorization.revoked_references.add(refs.provider)
+        with pytest.raises(AccessDenied, match="Reference unavailable"):
+            service.resolve(actor, refs.workspace, refs.deployment_id, refs.capability)
+
+
+def test_runtime_plan_is_revalidated_before_snapshot_admission(tmp_path):
+    refs = _refs()
+    actor = Actor(principal_id=_uuid())
+    with _runtime_database(
+        tmp_path / "runtime.db", refs.workspace, (refs.package,)
+    ) as db:
+        service, package_port, _ = _service(db, refs)
+        service.create(
+            actor,
+            refs.workspace,
+            refs.deployment_id,
+            _spec(refs),
+            idempotency_key="create-1",
+        )
+        package_port.plans[refs.plan] = SimpleNamespace(
+            ref=refs.plan,
+            runtime_kind="test/changed-after-activation",
+            capabilities=(refs.capability,),
+        )
+        with pytest.raises(AccessDenied, match="Execution snapshot unavailable"):
+            service.resolve(actor, refs.workspace, refs.deployment_id, refs.capability)
+
+
+def test_empty_persisted_snapshot_map_grants_no_execution_authority(tmp_path):
+    refs = _refs()
+    actor = Actor(principal_id=_uuid())
+    with _runtime_database(
+        tmp_path / "runtime.db", refs.workspace, (refs.package,)
+    ) as db:
+        service, _, _ = _service(db, refs)
+        created = service.create(
+            actor,
+            refs.workspace,
+            refs.deployment_id,
+            _spec(refs),
+            idempotency_key="create-1",
+        )
+        db.execute(
+            "UPDATE foundry_deployment_revision SET snapshots_json='{}' "
+            "WHERE workspace_id=? AND deployment_id=? AND revision_id=?",
+            [
+                str(refs.workspace.root),
+                str(refs.deployment_id.root),
+                created.ref.revision_id.root,
+            ],
+        )
+        with pytest.raises(AccessDenied, match="Execution snapshot unavailable"):
+            service.resolve(actor, refs.workspace, refs.deployment_id, refs.capability)
+
+
 def test_rollback_publishes_a_new_revision_from_an_exact_retained_target(tmp_path):
     refs = _refs()
     actor = Actor(principal_id=_uuid())
-    with _runtime_database(tmp_path / "runtime.db", refs.workspace) as db:
+    with _runtime_database(
+        tmp_path / "runtime.db", refs.workspace, (refs.package,)
+    ) as db:
         service, _, _ = _service(db, refs)
         first = service.create(
             actor,
@@ -614,7 +1028,9 @@ def test_caller_selected_plan_has_no_implicit_default_fallback(tmp_path):
             )
         }
     )
-    with _runtime_database(tmp_path / "runtime.db", refs.workspace) as db:
+    with _runtime_database(
+        tmp_path / "runtime.db", refs.workspace, (refs.package,)
+    ) as db:
         service, _, _ = _service(db, refs)
         service.create(
             actor,
@@ -630,7 +1046,9 @@ def test_caller_selected_plan_has_no_implicit_default_fallback(tmp_path):
 def test_in_flight_run_keeps_its_exact_snapshot_and_binding_revision(tmp_path):
     refs = _refs()
     actor = Actor(principal_id=_uuid())
-    with _runtime_database(tmp_path / "runtime.db", refs.workspace) as db:
+    with _runtime_database(
+        tmp_path / "runtime.db", refs.workspace, (refs.package,)
+    ) as db:
         service, _, _ = _service(db, refs)
         first = service.create(
             actor,
@@ -662,7 +1080,9 @@ def test_in_flight_run_keeps_its_exact_snapshot_and_binding_revision(tmp_path):
 
         assert resolved_current.snapshot.deployment == second.ref
         assert pinned == resolved_first.snapshot
-        assert pinned_revision.specification.bindings[0].provider == refs.provider
+        assert (
+            pinned_revision.revision.specification.bindings[0].provider == refs.provider
+        )
         assert resolved_current.bindings[0].provider == refs.second_provider
         assert (
             db.first(Run, "SELECT * FROM run WHERE id=?", [run.id]).action_id
