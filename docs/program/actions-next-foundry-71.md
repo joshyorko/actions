@@ -6,9 +6,13 @@ existing Runtime, semantic View, common Package/Deployment and Run services.
 Authority: Josh confirmed parallel Actions foundry implementation on October 22
 at 21:59:51 UTC. The coordinator owns cloud dispatch; this lane is the sole
 writer of release/327-invoice-vertical-20261020 and draft #328. This supersedes
-the earlier read-only scope-choice hold. It grants no merge, external package or
-image publication, deployment, production, live credential/auth/tunnel change,
-or other-repository mutation.
+the earlier read-only scope-choice hold. On October23 Josh also authorized a
+community merge once every agreed requirement is verified; the parent retains
+final evidence-threshold confirmation, so this lane must not execute that merge
+until the parent confirms. Tags, package/image publication, deployment, spending,
+production, live credential/auth/tunnel changes and other-repository mutation
+remain unauthorized. Every accepted lane belongs to this same #327/#328 release;
+no requirement is silently parked in another release.
 
 Protected baseline: `e2408a6e3051cdb4c44aede47618c3791807eba5`. Its invoice proof,
 candidate bundle, source-specific receipts and failed/skip classifications stay
@@ -167,3 +171,63 @@ a boundary regression before its corresponding integration is accepted.
 Authenticated ChatGPT E1 remains a separate operator gate. Existing Executor
 read/write remains recognized and untouched. General effects, retention/restore,
 independent distribution and celld NO-GO remain visible in the release ledger.
+
+## Candidate compiler and persistence contract
+
+These decisions constrain the current #327/#328 release implementation. They
+are provisional contracts, not implemented admission or production syntax.
+The compiler and deployment lanes return tested source; integration owns shared
+models, registration, migrations and final service wiring.
+
+### Compiler manifest
+1. Extend the existing `docs/design/package-revision-v1.schema.json` boundary, keeping `actions.package-revision/v1-draft` explicitly provisional. Do not rename the existing draft into an approved public format. Retain its identity/sourceArtifact/compatibility/capabilities/logicalBindingRequirements/runtimePlans split. Portable packageId is a logical key; installation PackageId UUID and Workspace/Deployment references stay outside these bytes.
+2. Use Runtime's `deployments.canonical.canonicalize_json` (actions-canonical-json/v1) for protected bytes. Core CanvasSpec.to_json is serialization, not a replacement identity algorithm. Reject duplicate capability/requirement/plan IDs and dangling reciprocal capability/plan/requirement links. Sort known set-like lists (IDs/scopes/features; capabilities/requirements by id; plans by computed digest; environment requirements by kind/name/constraint); preserve ordered source/task semantics and JSON Schema arrays.
+3. Candidate hash domains: plan digest = sha256(canonical JSON of ["actions.runtime-plan/v1-draft", plan object WITHOUT its own digest]); Package revision = sha256(canonical JSON of ["actions.package-revision/v1-draft", manifest WITHOUT identity.revisionDigest]). Prefix stored digests with sha256:. The complete manifest includes computed plan digests and compilerNormalizationVersion=`actions-foundry-normalizer/v1-draft`. Source artifact, plan, schema/payload and Package revision digests are distinct. Do not substitute source inventory/Git SHA/RCC Artifact for them.
+4. sourceArtifact.digest/byteLength must measure the actual source ZIP required by the existing mediaType, not canonical inventory bytes. Bind the complete explicit selection and protected inputs through existing no-follow measure/stage/re-read helpers. If the current compiler snapshot only measures an inventory, preserve it as a proposal and report ZIP/admission missing. A caller can still omit selected files; staging alone does not attest selection completeness/trust or an atomic whole-tree snapshot.
+5. Carry the actual measured input/output schema and adapter payload bytes/evidence alongside their digests. Initial executable acceptance is only the existing RCC contract `rcc-runtime/v1`, positive plan schemaVersion1 and exact RCC18.19.3; declarations for other runtimes do not grant fallback or dynamic admission. Portable environment requirements/specification contain no resolved provider context, credentials or local process paths. Local preparation/trust-carrier receipts remain deployment/build evidence, outside the portable manifest.
+6. Compiler never inserts deployment rows, advances activation or starts a task merely by inspection. Declared source/schema facts stay distinguishable from verified build/adapter conformance. Long actual build/execution uses existing Run/Attempt evidence.
+
+### Shared SQL persistence target
+Use the borrowed Runtime Database and existing Workspace rows, not canvas.sqlite3 or another connection/store. Integration will own registered ORM rows and migration/unique-index changes. Deployment lane may implement against injected trusted row types, with local fixture row definitions in its exclusively owned test file, until the shared definitions land; do not edit shared model registration.
+- FoundryPackageRevision: immutable scoped package ref + canonical manifest/source/build evidence.
+- FoundryDeploymentRevision: immutable scoped deployment ref + exact protected selection/binding/profile input + verified per-capability ExecutionSnapshot map.
+- FoundryDeploymentHead: Workspace/deployment key, active revision and monotonic lock_version.
+- FoundryRequest: actor/Workspace/operation/idempotency-key identity, protected request fingerprint and original immutable result receipt.
+- FoundryAudit: append-only actor/Workspace/deployment/request/from/to revision event.
+- FoundryAccessGrant: explicit foundry operations on Workspace/subject, never inferred from a Run execute/read grant or MCP visibility. Authenticated Actor is injected by the trusted host.
+
+Package installation and deployment selection are scoped records over portable content. Deployment revision hashing must use protected selection inputs BEFORE filling its own revision into derived ExecutionSnapshots; do not create a self-referential digest. On resolution revalidate package/plan ownership, schema/compatibility and exact profile/binding refs; missing or changed admission fails closed.
+
+Authorization/revocation checks, immutable inserts, idempotency receipt, activation CAS and audit commit in ONE Runtime SQL transaction. CAS checks Workspace + deployment + expected active revision + lock_version, using conditional UPDATE/RETURNING, not only a Python lock. Same key/same fingerprint returns the original receipt without reactivating after later changes; changed fingerprint conflicts. Failed transaction publishes no partial head/receipt/audit. SQL bind diagnostics remain redacted as in run_outputs.service. Release/rollback never creates a Review/WorkItem/Run automatically, erases audit or rewrites existing Run pins.
+
+### Integration-owned row interface
+
+Repository/service code uses the borrowed initialized Runtime Database. It may
+accept these trusted ORM classes by injection until integration publishes them;
+tests can supply equivalent fixture-only classes. Never initialize a second
+class set on an already initialized Database.
+
+| Class | Columns (all text except `lock_version`) |
+| --- | --- |
+| FoundryPackageRevision | id, workspace_id, package_id, revision_id, manifest_json, source_artifact_digest, source_inventory_json, build_evidence_json |
+| FoundryDeploymentRevision | id, workspace_id, deployment_id, revision_id, foundry_package_revision_id, selection_json, snapshots_json |
+| FoundryDeploymentHead | id, workspace_id, deployment_id, active_revision_id, lock_version (integer) |
+| FoundryRequest | id, workspace_id, principal_id, operation, idempotency_key, request_fingerprint, result_json |
+| FoundryAudit | id, workspace_id, deployment_id, principal_id, operation, foundry_request_id, from_revision_id, to_revision_id, created_ms |
+| FoundryAccessGrant | id, workspace_id, principal_id, subject_kind, subject_id, operations_json |
+
+Every `workspace_id` references the existing Workspace row. Package/deployment
+row IDs are scoped identities derived from complete typed references; the
+revision digest alone is never a global row key. Deployment revision's
+`foundry_package_revision_id` and audit's `foundry_request_id` reference their
+immutable rows. `selection_json` holds protected deployment inputs;
+`snapshots_json` holds derived exact per-capability snapshots. JSON is bounded,
+validated and canonicalized by the service before persistence. No secret value,
+raw output bytes or credential belongs in these columns.
+
+The access-grant subject is explicit Workspace, application or deployment scope,
+with current principal and named foundry operations. Run read/execute grants do
+not grant install/bind/activate. Immutable requests/audit and mutable heads/grants
+remain distinct records in the same SQL authority. Shared model registration,
+constraints and migration tests are integration-owned; these names/columns are
+a handoff contract until those tests pass, not an applied schema claim.
