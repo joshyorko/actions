@@ -130,14 +130,23 @@ passed without skips on SQLite and owned PostgreSQL; portable2015 passed/13
 skipped/264 deselected, static430 passed, cleanupPASS. The two failed attempts,
 owned cache recovery and unestablished original RCC failure cause are retained.
 No a15 installed/client proof or generated business Run execution is claimed.
-The official host's earlier d9a80a17 empty catalog/missing resource diagnosis is
-an open central wiring defect, not a ChatGPT permission or client failure.
+The [Runtime/semantic bridge receipt](evidence/actions-next-327/cloud-runtime-canvas-wiring-20261023.json)
+qualifies Python source51572279 and the frontend-only continuation6d2f9ac3,
+Runtime1.1.0a16. SQL96/components161/invoice129 passed without skips;
+portable2020 passed/14 skipped, static432 passed, normal-server affected tests
+121 passed/3 skipped and Canvas39 passed/1 optional fixture skipped. The normal
+route now composes SQL Canvas and the official view renders authored specs
+read-only. The earlier d9a80a17 empty catalog/missing resource failure remains
+unclosed until an installed Runtime and official host rerun; this is not a
+ChatGPT permission failure. Generated interaction and app authorization remain
+separate open gates.
 
 Source keys (exact observed branch heads, not interchangeable acceptance):
 
-- **I**: qualified integration `bb57129fdc3e4113aa9a73b2fa123d916cd9abbf`, Runtime1.1.0a15,
-  Core1.1.0a2/SDK0.5.0a1. Current source qualification is in the Package registry
-  receipt above. Earlier schema18/invoice worker130 proof remains source-specific.
+- **I**: source-qualified integration `6d2f9ac36e0ca9418b7ae0f3306852c59e6dd4ff`, Runtime1.1.0a16,
+  Core1.1.0a2/SDK0.5.0a1. Current source/component qualification is in the Runtime
+  wiring receipt above; installed/official-host rerun is pending. Earlier
+  schema18/invoice worker130 proof remains source-specific.
 - **C**: #330 `feature/100-semantic-canvas-contract-20261022`,
   `d16ddbbeac090bd03b759fb890864610a6c052d2`. Isolated-source16 tests passed;
   wider worker312pass/19fail and failed Bootstrap receipts remain unqualified.
