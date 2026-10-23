@@ -1,5 +1,47 @@
 # Actions Next release checkpoint
 
+## Owner pause and saved handoff
+
+**PAUSED by owner at2026-10-23 21:32:43UTC. Full release is not ready.**
+All implementation is pushed on the existing release branch/draft #328 at
+`b548939259d28bafb11b458d51af4bad1fa594ad`, Runtime1.1.0a23. The
+[pause receipt](evidence/actions-next-327/cloud-view-profile-pause-20261023.json)
+records source/wheel identity, commands, captures, retained failures, cleanup,
+unintegrated dependencies and ordered restart gates. No new implementation or
+acceptance run is authorized until the owner resumes.
+
+The actual official Basic Host now passed the invoice-summary View flow on
+the clean noneditable candidate: inspect source, explicit human approval,
+separate real RCC execution, sealed artifact readback, actual CLI process
+restart, expired-source reopen and explicit duplicate dispatch. It retained
+one native Run `5d971f36-7f03-4014-952a-9bcc52891dc7`, one Attempt and one
+launch. All owned host/Runtime processes stopped. Captures are saved in
+Library, including `libfile_1255f1898030819198dec3e755c3b137` for execution.
+This is local E2 with synthetic auth, not authenticated ChatGPT E1 or full
+first-boot/model-authored/multi-app acceptance. The second official-host backend
+and full installed SQL/RCC suite were not started before the pause.
+
+Exact Runtime23 gateway179 and frontend Runtime280/Canvas46passed/1skipped,
+quality/build and clean payload integrity266/52/24 passed. Its source SQL run
+was deliberately interrupted on the stop directive after managed56 and190
+storage cases; the suite is incomplete. The raw verifier reports failure with
+KeyboardInterrupt and pytest teardown KeyError, and owned PostgreSQL cleanup
+passed. Components/invoice/worker/compiler/portable stages did not run. Prior
+Runtime21 worker133pass/1ENOSPC failure remains unwaived. No interrupted or
+historical count is current full-source acceptance.
+
+PR331 `0eb4641f710ef8fb0e96e55cba8bb0de85e3c873` selector/tests are integrated.
+PR333 `e3059bda389e0e57630c0d94f2d271d617e3fe09` is saved on its existing
+branch and unintegrated: its native projection equates independent Work Item
+and Attempt epochs. Correct that comparison with a valid claim2/Attempt1
+regression, then qualify real PostgreSQL/installed native logs/completion before
+convergence. The exact handoff is in #327 comment6374724099. Default provisioning,
+generic semantic interactions, managed enqueue/retry/logs/VSIX, full client,
+distribution/restore/upgrade/publisher gates and the full matrix remain open.
+Codex401 and E1 need operator action; Dakota remains STOP, celld NO-GO and
+extension2.20.10 desktopQA blocked by CUA. No community merge, tag, publication,
+production/tunnel/credential change or other repository mutation occurred.
+
 Runtime1.1.0a23 fixes a joined official-host rendering rejection: the generated
 compiler emits canonical package-local capability IDs such as
 `action.generated_echo`, while the View had required a UUID. The exact generated

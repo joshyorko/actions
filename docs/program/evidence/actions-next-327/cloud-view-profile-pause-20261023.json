@@ -1,0 +1,361 @@
+{
+  "schema": "actions.release-pause-receipt/v1",
+  "status": "PAUSED_BY_OWNER",
+  "release_ready": false,
+  "implementation_source": "b548939259d28bafb11b458d51af4bad1fa594ad",
+  "branch": "release/327-invoice-vertical-20261020",
+  "draft_pr": 328,
+  "issue": 327,
+  "owner_stop": "2026-10-23 21:32:43 UTC; stop new implementation/acceptance, save/push existing work, pause",
+  "versions": {
+    "runtime": "1.1.0a23",
+    "core": "1.1.0a2",
+    "sdk": "0.5.0a2",
+    "rcc": "18.19.3",
+    "publication": "private provisional candidates only; no publication commanded"
+  },
+  "installed_integrity": {
+    "source": "b548939259d28bafb11b458d51af4bad1fa594ad",
+    "status": "PASS",
+    "distributions": {
+      "actions-runtime": {
+        "version": "1.1.0a23",
+        "installed_payload_files": 266,
+        "wheel_sha256": "d46fb43fb09860384191abaf119776d510cdaf6f0fba702dbd80170f5e4546f8",
+        "noneditable": true
+      },
+      "actions-core": {
+        "version": "1.1.0a2",
+        "installed_payload_files": 52,
+        "wheel_sha256": "ca512d59e1f94d687cb637255b2622980d715528de720ac5da8105836315c19f",
+        "noneditable": true
+      },
+      "actions-work-items": {
+        "version": "0.5.0a2",
+        "installed_payload_files": 24,
+        "wheel_sha256": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb",
+        "noneditable": true
+      }
+    },
+    "modules": {
+      "actions.server": {
+        "path": "/tmp/actions-327-a23-b5489392/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+        "sha256": "7bfc8098601f4a217a54433d46f5ab1d837c83b5c2f581379985ab7602ae965c"
+      },
+      "actions.server.foundry.bootstrap": {
+        "path": "/tmp/actions-327-a23-b5489392/consumer/lib/python3.12/site-packages/actions/server/foundry/bootstrap.py",
+        "sha256": "acdbc3102d924baf43e8f382ee3f1a3b5d125f83bb8710640546c0a8728aa8f9"
+      },
+      "actions.server.foundry.reviewed_view": {
+        "path": "/tmp/actions-327-a23-b5489392/consumer/lib/python3.12/site-packages/actions/server/foundry/reviewed_view.py",
+        "sha256": "c7cf655ecab44da54fdaa132b95ea64f167819479e073c3edef745449dd59a43"
+      },
+      "actions.server.foundry.mcp": {
+        "path": "/tmp/actions-327-a23-b5489392/consumer/lib/python3.12/site-packages/actions/server/foundry/mcp.py",
+        "sha256": "89ed148763618770f7a706d0f777e128349cebb1f63c3601ffc7320606782efe"
+      },
+      "actions.work_items": {
+        "path": "/tmp/actions-327-a23-b5489392/consumer/lib/python3.12/site-packages/actions/work_items/__init__.py",
+        "sha256": "6610ea0307370edd9704d70551eb05fbab4b170ae54250a6c23eb77934c10de5"
+      },
+      "actions.canvas_contract": {
+        "path": "/tmp/actions-327-a23-b5489392/consumer/lib/python3.12/site-packages/actions/canvas_contract/__init__.py",
+        "sha256": "b5718082198731de6b67faa91519bb1e80fee9072bb819d031031f9cf9804cc5"
+      }
+    }
+  },
+  "build": {
+    "head": "b548939259d28bafb11b458d51af4bad1fa594ad",
+    "archive_sha256": "2bdec2e3f32ce8a8619b8c58808265c97bd6700aa35d8b510dc14f66547b1f5a",
+    "rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "assets": {
+      "index.html": "59a091e58a89ae6a09213fb6b22e9f41118eca6a8ec46d3c9e94f6261a970ae8",
+      "canvas.html": "3e06ad094fd794516628a93b42eb1a6f01089abfc90ef9c6a5cb2c3c8bc1122e"
+    },
+    "runtime_wheel_sha256": "d46fb43fb09860384191abaf119776d510cdaf6f0fba702dbd80170f5e4546f8",
+    "oauth2": "archived checked-in public-input producer; protected checkout file excluded"
+  },
+  "completed_current_source": {
+    "gateway": {
+      "commands": [
+        "rcc run -r developer/toolkit.yaml --dev -t Doctor",
+        "rcc run -r developer/toolkit.yaml --dev -t Bootstrap",
+        "rcc run -r developer/toolkit.yaml --dev -t ToolkitTest"
+      ],
+      "result": "PASS; ToolkitTest179",
+      "logs": "/workspace/actions-327-state/evidence/foundry-integration/a23-{Doctor,Bootstrap,ToolkitTest}-20261023.log"
+    },
+    "frontend": {
+      "command": "bash /workspace/actions-327-state/run-prepared npm test",
+      "runtime": "280 passed",
+      "canvas": "46 passed / 1 skipped",
+      "skip": "CanvasContractRoundTrip: required exported round-trip paths not supplied",
+      "quality": "PASS: lint/types/prettier/topology/UI-system",
+      "canvas_build": "PASS with SBOM",
+      "log": "/workspace/actions-327-state/evidence/foundry-integration/a23-frontend-full-20261023.log"
+    },
+    "official_host": {
+      "status": "PASS_LOCAL_E2_INVOICE_SUMMARY",
+      "host": "modelcontextprotocol/ext-apps@266a9e3b70dbd4a4f0546dda95da2a2c1a8be4b7",
+      "host_archive_sha256": "50771565149b0d6d097c03cb45d9d82dae521edd98467e2f9eddba8fa0bbfceb",
+      "transport": "ordinary installed Runtime CLI, MCP streamable HTTP, official AppBridge/PostMessageTransport and double iframe",
+      "auth": "owned synthetic bearer forwarded by Playwright only to task loopback Runtime; private ephemeral app capability for exact source/result/binding scope; no live credentials/tunnel",
+      "profile": "explicit trusted local descriptor; does not provision or restore grants",
+      "steps": [
+        "open exact active saved result",
+        "explicit offer",
+        "inspect sealed saved source",
+        "explicit approve creates one Work Item",
+        "separate execute click launches actual pinned RCC",
+        "read sealed result in View with visible Run/Attempt",
+        "stop Runtime process",
+        "expire only the owned source artifact",
+        "restart ordinary CLI",
+        "obtain new View capability",
+        "explicit duplicate dispatch and artifact readback"
+      ],
+      "run_id": "5d971f36-7f03-4014-952a-9bcc52891dc7",
+      "attempt_id": "5cca3b04-ec94-4824-8d90-ec5f3b179396",
+      "launch_id": "a8a1482b-78d8-42bf-8a39-ca7af7517102",
+      "run_envelope_sha256": "c1acbd2f05f22b2e53d516f0047e9579c52eade5b50445c1c7ed9773066acc97",
+      "displayed_artifact_sha256": "3d347e29383eeda5988c1695feb8a85f560f226e1c408b82d76d77f37916cbd3",
+      "distinct_native_runs": 1,
+      "distinct_attempts": 1,
+      "launches": 1,
+      "actual_process_restart": true,
+      "source_expired_reconnect": true,
+      "process_cleanup": [
+        {
+          "role": "runtime-first",
+          "pid": 175684,
+          "exit": -15,
+          "stopped": true
+        },
+        {
+          "role": "runtime-restarted",
+          "pid": 176092,
+          "exit": -15,
+          "stopped": true
+        },
+        {
+          "role": "official-host",
+          "pid": 175695,
+          "exit": -15,
+          "stopped": true
+        }
+      ],
+      "fixture_origin": "Retained immutable Package/query prepared with installed Runtime22; restored and executed with exact installed Runtime23. Not fresh model-generated authoring or cold portability acceptance.",
+      "receipt": "/tmp/actions-327-a23-b5489392/official-invoice-summary/evidence/receipt.json",
+      "captures": [
+        {
+          "file": "source-review.png",
+          "path": "/tmp/actions-327-a23-b5489392/official-invoice-summary/evidence/source-review.png",
+          "library_file_id": "libfile_737c382b5c948191acefaf806a3b2a05",
+          "sha256": "7846eff83856d9dd8763608bb9181f3d6a72eee12fb91d07ed1a140c868ccf84"
+        },
+        {
+          "file": "first-execution.png",
+          "path": "/tmp/actions-327-a23-b5489392/official-invoice-summary/evidence/first-execution.png",
+          "library_file_id": "libfile_1255f1898030819198dec3e755c3b137",
+          "sha256": "b32ef023742d5317b894175148387c1f0d57ee1cc7b4d591c4ee3554ce7c3494"
+        },
+        {
+          "file": "reconnect-execution.png",
+          "path": "/tmp/actions-327-a23-b5489392/official-invoice-summary/evidence/reconnect-execution.png",
+          "library_file_id": "libfile_36c9f1331ca08191b3db769d3614044c",
+          "sha256": "d64fcd5d838b6b15b111b37cf5e782e1be7dd8b7ec3017527c6dcdbf70c04ad0"
+        }
+      ],
+      "limits": [
+        "Generic semantic form bindings remain read-only; reviewed saved-result controls are interactive.",
+        "One official-host backend completed; NDJSON inspector official-host run was not started before pause.",
+        "Browser automation with synthetic auth is local E2; authenticated Codex/ChatGPT E1 and human connection setup are separate.",
+        "Optional host download was not exercised; sealed artifact was actually read and displayed in the View."
+      ]
+    },
+    "minimal_checkpoint_integrity": {
+      "result": "PASS",
+      "runtime_files": 266,
+      "core_files": 52,
+      "sdk_files": 24,
+      "noneditable": true,
+      "engine_imports": "all inspected modules under clean consumer sys.prefix; -I ordinary CLI; no source checkout overlay",
+      "receipt": "/tmp/actions-327-a23-b5489392/installed-checkpoint-integrity.json"
+    }
+  },
+  "interrupted_current_source": {
+    "command": "bash /workspace/actions-327-state/run-prepared python action_server/scripts/verify_invoice_queries.py --full --evidence-dir /workspace/actions-327-state/evidence/view-profile-a23-sql-portable-20261023",
+    "classification": "INTERRUPTED_BY_OWNER; NOT ACCEPTANCE",
+    "managed": "56 completed / zero failures/errors/skips",
+    "storage": "190 completed cases / zero failures/errors/skips in XML; suite incomplete",
+    "raw_verifier_status": "FAIL",
+    "raw_stage_returncodes": {
+      "managed": 0,
+      "foundry_storage": 1
+    },
+    "interruption": "SIGINT to owned pytest176481 under driver175699; pytest KeyboardInterrupt plus tmp_path teardown KeyError; verifier returned failure",
+    "not_run": [
+      "remaining storage cases",
+      "components",
+      "invoice/output",
+      "fixed worker",
+      "generated-package/compiler",
+      "portable Runtime",
+      "second official host app",
+      "full installed SQL/RCC suite"
+    ],
+    "fixture_cleanup": "PASS; owned PostgreSQL container removed",
+    "receipt": "/workspace/actions-327-state/evidence/view-profile-a23-sql-portable-20261023/7c33d5f5-47f5-4841-a072-85f0b5f6445b/receipt.json"
+  },
+  "prior_source_specific_evidence": [
+    {
+      "source": "4aea62849c769cd8d4261c4328f5358b918140bb",
+      "version": "1.1.0a21",
+      "result": "managed56/SQL285/components165/invoice129 passed, zero skips; fixed worker133 passed/1 failed ENOSPC; subsequent compiler/portable not run",
+      "receipt": "/workspace/actions-327-state/evidence/view-profile-a21-full-20261023/8fe28eee-0dea-4eb3-87d2-cb6bb6de48f0/receipt.json"
+    },
+    {
+      "source": "4aea62849c769cd8d4261c4328f5358b918140bb",
+      "version": "1.1.0a21",
+      "result": "fresh noneditable installed146 passed / zero skips;20 RCC cases explicitly deselected for cache serialization; ordinary installed CLI authoring/restart passed",
+      "receipt": "/tmp/actions-327-a21-4aea6284/qa-evidence/receipt.json"
+    },
+    {
+      "source": "a6179cc81bd1a3a74a6b125f3d87e31ad15ac408",
+      "version": "1.1.0a22",
+      "result": "two SQLite/DuckDB actual-RCC source-expired View reopen cases passed for both generated backends; configured Runtime lint/typecheck458 passed; prior defect red was two genuine RCC-completed reopen failures",
+      "evidence": "/workspace/actions-327-state/evidence/foundry-integration/view-expiry-green-20261023.xml",
+      "scope": "Does not close current-source full PostgreSQL/installed/official-host matrix"
+    },
+    {
+      "source": "a6179cc81bd1a3a74a6b125f3d87e31ad15ac408",
+      "version": "1.1.0a22",
+      "result": "official host connected/read resource/mounted View but failed metadata validation due UUID-only capability parser; both owned processes stopped",
+      "receipt": "/tmp/actions-327-a22-a6179cc8/official-invoice-summary/evidence/receipt.json"
+    },
+    {
+      "source": "b548939259d28bafb11b458d51af4bad1fa594ad",
+      "result": "no Runtime Python implementation delta from a617 except __version__; current exact-source Runtime lint/typecheck not newly run at owner pause",
+      "comparison": "git diff a6179cc8 b5489392 -- action_server/src/actions/server excluding __init__.py is empty"
+    }
+  ],
+  "retained_failures": [
+    {
+      "action": "initial Runtime21 wheel preparation",
+      "reason": "canonical Runtime-admin HTML absent; stopped before wheel; rebuilt canonical artifact",
+      "log": "/workspace/actions-327-state/evidence/foundry-integration/build-a21-4aea6284-20261023.log"
+    },
+    {
+      "action": "Runtime21 clean QA install",
+      "reason": "requested pytest8.3.4 absent from retained bundle, which contains8.4.2; retry used measured retained public/QA wheel set",
+      "log": "/workspace/actions-327-state/evidence/foundry-integration/build-a21-4aea6284-retry-20261023.log"
+    },
+    {
+      "action": "installed QA collection",
+      "reason": "httpx QA extra absent; no cases ran; owned PG cleanup passed; corrected from retained locked wheels",
+      "receipt": "/tmp/actions-327-a21-4aea6284/qa-evidence-first-missing-httpx/receipt.json"
+    },
+    {
+      "action": "initial source RCC View harness",
+      "reason": "catalog assertion assumed app-only tools appear in model catalog; cleanup evidence variable absent;2failed/2errors; corrected harness, not assertions on business effects",
+      "log": "/workspace/actions-327-state/evidence/foundry-integration/view-rcc-sqlite-20261023.log"
+    },
+    {
+      "action": "Runtime21 source fixed-task-input",
+      "reason": "no space left restoring full pinned developer toolchain into fresh owned home; failed home4.2GiB;133passed/1failed; no waiver",
+      "preservation": "/workspace/actions-327-state/evidence/foundry-integration/a21-failed-task-input-preservation/receipt.json",
+      "archive": "/tmp/actions-327-a21-preserved-failed-rcc-home.tar.gz",
+      "archive_sha256": "10a7c893a60f589f79395184d92e4b79e83091b039e199a91e3112e0a8b96adc",
+      "members_verified": 115086
+    },
+    {
+      "action": "failure preservation workspace pressure",
+      "reason": "archive filled workspace and temporarily prevented sandbox startup; verified inventory compressed to /tmp, then completed archive verified and moved to /tmp; no original fixture removal until115086 members verified; source work retained",
+      "remaining": "none for command access; scratch capacity still limits full task-input retry"
+    },
+    {
+      "action": "first expiry regression attempt",
+      "reason": "disk-full compiler/cleanup failures prevented intended behavior test; not counted as reproduction",
+      "log": "/workspace/actions-327-state/evidence/foundry-integration/view-expiry-red-20261023.log"
+    },
+    {
+      "action": "genuine expiry regression",
+      "reason": "2 failed after actual RCC completion at expired-source View reopen; fixed under new Runtime22 identifier",
+      "log": "/workspace/actions-327-state/evidence/foundry-integration/view-expiry-red-retry-20261023.log"
+    },
+    {
+      "action": "source inspection regression",
+      "reason": "private review read called without owning SQL transaction; reproduced DBError; fixed by canonical transaction/lock",
+      "log": "/workspace/actions-327-state/evidence/foundry-integration/a22-source-inspect-debug-20261023.log"
+    },
+    {
+      "action": "official host fixture startup",
+      "reason": "legacy typed-query metadata Action referenced absent placeholder path; launch failed closed; disabled only that unused metadata action in owned fixture; no fake package/code created",
+      "receipt": "/tmp/actions-327-a22-a6179cc8/official-invoice-summary/evidence-first-legacy-directory/receipt.json"
+    },
+    {
+      "action": "official View metadata",
+      "reason": "actual generated capability action.generated_echo rejected by UUID parser; captured failure; added generated/NFC regressions and invalid identifier negatives; fixed under Runtime23",
+      "log": "/workspace/actions-327-state/evidence/foundry-integration/a23-capability-id-red-20261023.log"
+    },
+    {
+      "action": "Runtime21 configured lint",
+      "reason": "8 import-sort failures; corrected under Runtime22; prior logs remain",
+      "log": "/workspace/actions-327-state/evidence/foundry-integration/app-profile-lint-20261023.log"
+    }
+  ],
+  "dependency_heads": {
+    "pr331": {
+      "branch": "feature/130-135-package-compiler-20261022",
+      "sha": "0eb4641f710ef8fb0e96e55cba8bb0de85e3c873",
+      "integration": "reviewed two-file selector/test diff integrated; import formatting adapted; no unrelated lane history merged"
+    },
+    "pr333": {
+      "branch": "feature/129-foundry-deployments-20261023",
+      "sha": "e3059bda389e0e57630c0d94f2d271d617e3fe09",
+      "integration": "NOT INTEGRATED; exact three-file delta pushed on existing branch",
+      "blocker": "native_runs.py incorrectly compares independent Work Item claim epoch and Run Attempt epoch; valid claim2/Attempt1 must be accepted while each current fence is checked independently",
+      "handoff": "https://github.com/joshyorko/actions/issues/327#issuecomment-6374724099",
+      "lane_report": "19passed/19PostgreSQLskipped; actualRCC4 skipped, not integration acceptance"
+    }
+  },
+  "pause_state": {
+    "local_processes": "all owned official host/Runtime processes stopped; owned source pytest interrupted and verifier finally completed; no local subagents",
+    "git": "all implementation committed/pushed; only protected local configuration remains untracked, untouched and excluded; do not read/stage/copy/delete it",
+    "fixtures": "synthetic completed invoice state, pending inspector fixture, candidate archives/wheels, output objects, all logs and failure archive retained; do not reset/discard",
+    "cleanup": "only recognized idle owned compiler views removed using pinned RCC dryrun/delete after no active view process; artifacts/cache/catalog/trust/source/evidence retained",
+    "cleanup_receipt": "/workspace/actions-327-state/evidence/foundry-integration/a23-idle-compiler-cleanup/receipt.json"
+  },
+  "restart_order_after_explicit_resume": [
+    "Re-read current327/328 and repository guides; verify integration remote before edits. Keep all source/library evidence and protected configuration untouched.",
+    "Existing PR333 owner corrects cross-counter equality with claim2/Attempt1 regression; integrate reviewed exact head only after real PostgreSQL/current-source/installed native Run and log tests.",
+    "Qualify second official-host generated backend and full clean installed Runtime23 SQL/RCC cases. Current inspector fixture source expires; create a new owned real-query fixture if expired, never extend TTL/forge approval/relaunch uncertain work.",
+    "Resume strict source full SQL/RCC/portable and task-input acceptance with enough owned scratch capacity. Runtime21 ENOSPC and owner-interrupted Runtime23 are not acceptance; keep failures/skips visible.",
+    "Complete normal default profile provisioning, generic semantic binding execution and managed enqueue/retry/logs/VSIX through existing authority; no second queue or scheduler.",
+    "Complete remaining327 matrix: first-boot model-authored UI/Python, second app, multiple real clients, authorization/audience/revocation negatives, retention/restore/distribution/upgrade-downgrade/publisher332. Codex401 and ChatGPT E1 need operator actions; no auth retry or Dakota/tunnel changes without approval. Celld remains NO-GO pending explicit scope decision.",
+    "Remain PAUSED until owner resumes. No community merge/tag/publication/deployment, credentials/security changes, spending or other repository mutation."
+  ],
+  "rollback": {
+    "schema": "no shared DDL/model migration in this iteration; earlier release schema/downgrade gates remain unqualified",
+    "runtime": "stop task processes and remove task-local execution-profile injection to return to ordinary unconfigured read-only execution startup; retain SQL review/WorkItem/Run/Attempt/audit/output state",
+    "replay": "ephemeral View capabilities die on restart; completed exact runs replay existing identity; uncertain launch intent remains blocked, no generic exactly-once effects promise"
+  },
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "delta": [
+      "Document actual bridge forwarding and scoped ephemeral capability lifetime, private metadata and live SQL checks",
+      "Document separate source inspection, approval, dispatch, result readback and source-expired admitted-Run reopen; no new admission/TTL/grant resurrection",
+      "Document explicit ordinary trusted local profile descriptor and locked/default-plan equality; no automatic grants/default provisioning/sandbox claim",
+      "Correct capability metadata contract from UUID to canonical bounded NFC package-local ID"
+    ],
+    "evidence": [
+      "MCP/session negatives and real SQL source gates at stated sources",
+      "genuine source red2/reopen green2 plus actual installed Runtime23 official-host process restart/expired-source readback",
+      "canonical deploy resolver/source profile tests and actual configured CLI execution",
+      "official Runtime22 failure capture, renderer red2 and full Runtime23 frontend280/46pass/1skip"
+    ],
+    "remaining_uncertainty": "full source/installed/platform/client/default provisioning and remaining release requirements still open"
+  },
+  "upstream_disposition": "none for this slice; prior RCC upstream draft remains draft-only, no external report created",
+  "controls": "No community merge, public tag/package/image publication, production/backend/deployment, live credential/tunnel/auth changes, other repository mutation or new worker/campaign. All data/identities/outputs are owned synthetic fixtures."
+}
