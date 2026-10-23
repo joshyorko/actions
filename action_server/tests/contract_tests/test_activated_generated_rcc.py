@@ -9,11 +9,15 @@ import json
 import os
 from pathlib import Path
 
+import httpx2
 import pytest
 from action_server_tests import test_activated_reviewed_execution as fixtures
 from action_server_tests.test_reviewed_canvas_execution import make_port, request
+from actions.work_items import State
 from contract_tests.test_package_revision_compiler import _generated_action_entries
 from contract_tests.test_reviewed_generated_rcc import verify_fresh_process
+from mcp import ClientSession
+from mcp.client.streamable_http import streamable_http_client
 
 from actions.server._models import Run, RunStatus
 from actions.server.deployments.package_revision_compiler import (
@@ -22,6 +26,7 @@ from actions.server.deployments.package_revision_compiler import (
 from actions.server.deployments.source_manifest import SuppliedSourceEntry
 from actions.server.foundry.execution_port import PinnedReviewedRccRunner
 from actions.server.foundry.mcp import CanvasCaller, CanvasMcp
+from actions.server.mcp.setup_mcp_server_v2 import McpServerSetupHelper
 from actions.server.run_outputs.types import OutputRef
 
 pytest_plugins = ["action_server_tests.foundry_fixtures"]
@@ -64,6 +69,34 @@ class InspectorTest(unittest.TestCase):
     return entries
 
 
+async def call_with_sdk(canvas, operation, arguments):
+    helper = McpServerSetupHelper(canvas_foundry=canvas)
+    app = helper.server.streamable_http_app(
+        streamable_http_path="/mcp",
+        json_response=True,
+        stateless_http=True,
+        transport_security=helper.transport_security,
+    )
+    async with app.router.lifespan_context(app):
+        async with httpx2.AsyncClient(
+            transport=httpx2.ASGITransport(app=app), base_url="http://127.0.0.1:8000"
+        ) as http:
+            async with streamable_http_client(
+                "http://127.0.0.1:8000/mcp", http_client=http
+            ) as streams:
+                async with ClientSession(streams[0], streams[1]) as session:
+                    await session.discover()
+                    tools = {tool.name for tool in (await session.list_tools()).tools}
+                    opposite = (
+                        "canvas_dispatch"
+                        if operation == "capability_invoke"
+                        else "capability_invoke"
+                    )
+                    assert operation in tools and opposite not in tools
+                    assert (await session.call_tool(opposite, arguments)).is_error
+                    return await session.call_tool(operation, arguments)
+
+
 @pytest.mark.parametrize("application", ["invoice-summary", "ndjson-inspector"])
 def test_active_app_executes_reviewed_python_and_replays_without_new_launch(
     reviewed, foundry_package_store, tmp_path, application
@@ -103,7 +136,7 @@ def test_active_app_executes_reviewed_python_and_replays_without_new_launch(
     )
     operation = "capability_invoke" if caller.audience == "model" else "canvas_dispatch"
     before = len(case.db.all(Run))
-    first = asyncio.run(canvas.call(None, operation, request(case)))
+    first = asyncio.run(call_with_sdk(canvas, operation, request(case)))
     assert not first.is_error, first.model_dump_json()
     execution = first.structured_content["execution"]
     assert execution["state"] == "completed"
@@ -112,10 +145,18 @@ def test_active_app_executes_reviewed_python_and_replays_without_new_launch(
     assert complete.status == RunStatus.PASSED
     envelope = json.loads(complete.result)
     assert envelope["result"]["launch"]["id"]
-    assert (
-        execution["workItemId"] == case.reviews.queue(case.scope).list_items()[0]["id"]
+    reviewed_item = case.reviews.status(
+        case.actor, case.scope, case.proposal
+    ).work_item_id
+    assert execution["workItemId"] == reviewed_item
+    items = {item["id"]: item for item in case.reviews.queue(case.scope).list_items()}
+    assert items[reviewed_item]["state"] == State.DONE.value
+    assert items[reviewed_item]["claim_epoch"] == 1
+    assert all(
+        item["state"] == State.PENDING.value and item["claim_epoch"] == 0
+        for item_id, item in items.items()
+        if item_id != reviewed_item
     )
-    assert case.reviews.queue(case.scope).list_items()[0]["state"] == "DONE"
     expected = {"invoice_count": 2, "total_cents": 12900}
     if application == "ndjson-inspector":
         source = json.loads(complete.inputs)["value"]
@@ -134,7 +175,7 @@ def test_active_app_executes_reviewed_python_and_replays_without_new_launch(
         canvas_scope=case.scope,
     ) as result:
         assert json.loads(json.loads(result.read())) == expected
-    second = asyncio.run(canvas.call(None, operation, request(case)))
+    second = asyncio.run(call_with_sdk(canvas, operation, request(case)))
     assert not second.is_error and second.structured_content == first.structured_content
     assert len(case.db.all(Run)) == before + 1
     ticket = fixtures.adapter(case).dispatch(

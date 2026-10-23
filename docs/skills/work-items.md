@@ -1118,6 +1118,10 @@ return the current DB-time deadline after validating the live fence, while
 retaining the original request/audit. The managed wire uses `DONE` for SDK
 `State.DONE.value == "COMPLETED"`; completion tests must cross that real terminal
 boundary and verify retained RCC evidence, not manufacture a client result.
+Check the item identified by the exact review/dispatch receipt rather than the
+first item returned by a queue listing. An older approved item may intentionally
+remain pending when exact-target dispatch completes another item. Assert its
+unchanged epoch as well as the selected item's SDK terminal state.
 The ordinary route mount remains unavailable without explicit trusted service
 and authentication dependencies; route presence alone is not managed readiness.
 Keep its schema/capabilities/operations routes explicitly classified in the

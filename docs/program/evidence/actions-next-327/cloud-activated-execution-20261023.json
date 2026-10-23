@@ -1,5 +1,5 @@
 {
-  "stage": "EXACT_TARGET_SDK_DEPENDENCY_QUALIFIED_SCOPED_EXECUTION_IN_PROGRESS",
+  "stage": "ACTIVATED_ADMISSION_QUALIFIED_REAL_RCC_TEST_BOUNDARY_CORRECTED_INSTALLED_REPLAY_PENDING",
   "source": "f3b0378fc067c5ebfcd67ed75a7073050b5e82b8",
   "qualified_prior_checkpoint": "3f726ef15130d07ddec45ee05423a5ebfec380d2",
   "versions": {
@@ -92,5 +92,49 @@
     "canonical": "docs/skills/work-items.md",
     "delta": "Item-specific claim cannot fall back to FIFO; a2 installed floor/no schema change; full SDK service fixtures require explicit owned URLs and lock-declared clients; schema-heavy focused PostgreSQL needs WAL-capable bounded storage."
   },
-  "upstream_disposition": "none; existing RCC report remains draft only"
+  "upstream_disposition": "none; existing RCC report remains draft only",
+  "activated_first": {
+    "source": "b32ce72b0bc2792cf9b8eca5bef193f9b1724689",
+    "input_hashes_match_committed_blobs": true,
+    "receipt": "/workspace/actions-327-state/evidence/activated-joined-full-20261023/82c67f4d-1c11-4e80-8316-d371eff6d4f5/receipt.json",
+    "status": "FAIL",
+    "counts": {
+      "managed": {
+        "tests": 56,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "foundry_storage": {
+        "tests": 211,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "components": {
+        "tests": 164,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "invoice": {
+        "tests": 129,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      }
+    },
+    "cleanup": "PASS",
+    "failure": "Eight new real-RCC cases executed/published then asserted managed DONE against SDK COMPLETED. Six existing RCC cases passed. Portable selection not run after required RCC gate failed. Exact item/SDK-state assertions corrected; fresh installed replay qualification pending.",
+    "read_only_outcome_check": "/workspace/actions-327-state/evidence/foundry-integration/activated-rcc-first-outcome-check-20261023.json"
+  },
+  "candidate_build": {
+    "source": "b32ce72b0bc2792cf9b8eca5bef193f9b1724689",
+    "runtime": "1.1.0a19",
+    "sdk": "0.5.0a2",
+    "root": "/tmp/actions-327-a19-b32ce72b",
+    "runtime_python_members": 246,
+    "noneditable_install": "PASS; pip check PASS",
+    "qualification": "PENDING; installation is not execution acceptance"
+  }
 }
