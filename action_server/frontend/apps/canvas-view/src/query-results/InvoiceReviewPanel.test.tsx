@@ -139,6 +139,43 @@ it("never treats a denied review as approval", async () => {
     ).not.toBeInTheDocument();
 });
 
+it("dispatches only after a separate approval and explicit execute click", async () => {
+    const approved = {
+        proposal,
+        receipt: {
+            review_id: proposal.review_id,
+            state: "approved" as const,
+            work_item_id: "60000000-0000-4000-8000-000000000006",
+        },
+    };
+    const adapter = {
+        offer: vi.fn().mockResolvedValue(approved),
+        decide: vi.fn(),
+        cancel: vi.fn(),
+        execution: {
+            execute: vi.fn().mockResolvedValue({ proposal, phase: "running" }),
+            read: vi.fn(),
+            download: vi.fn(),
+        },
+    };
+    render(
+        <InvoiceReviewPanel
+            adapter={adapter}
+            handle={proposal.binding.handle}
+        />,
+    );
+    expect(adapter.execution.execute).not.toHaveBeenCalled();
+    await userEvent.click(
+        screen.getByRole("button", { name: "Review these results" }),
+    );
+    expect(adapter.execution.execute).not.toHaveBeenCalled();
+    await userEvent.click(
+        await screen.findByRole("button", { name: "Execute approved result" }),
+    );
+    expect(adapter.execution.execute).toHaveBeenCalledExactlyOnceWith(proposal);
+    expect(await screen.findByText("Work is running.")).toBeVisible();
+});
+
 it("shows blocked outcomes and explicit terminal failure download without retrying", async () => {
     const blocked = parseInvoiceExecution({ proposal, phase: "blocked" });
     const dead = parseInvoiceExecution({

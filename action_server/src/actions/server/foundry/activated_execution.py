@@ -19,6 +19,9 @@ from actions.server.data_queries.review import (
     InvoiceReviewService,
     ReviewConflict,
     ReviewProposal,
+    ReviewExecutionPending,
+    ReviewExecutionComplete,
+    ReviewExecutionArtifact,
 )
 from actions.server.deployments.foundry_service import FoundryDeploymentService
 from actions.server.deployments.ids import DeploymentId, WorkspaceId
@@ -39,6 +42,7 @@ from actions.server.run_outputs.service import (
     _transaction,
 )
 from actions.server.run_outputs.types import Actor, CanvasResultScope, ExecutionSnapshot
+from actions.server.run_outputs.types import OutputRef
 
 
 class ActivatedReviewedExecution:
@@ -102,12 +106,12 @@ class ActivatedReviewedExecution:
         ]
         if len(bindings) != 1:
             raise AccessDenied("activated application binding unavailable")
-        resolved = self.deployments.resolve(
-            actor,
-            workspace,
-            application,
-            bindings[0].capability,
-            revision=scope.deployment,
+        from actions.server.foundry.execution_profiles import (
+            select_rcc_execution_profile,
+        )
+
+        resolved = select_rcc_execution_profile(
+            self.deployments, actor, scope.deployment, bindings[0].capability
         )
         snapshot = resolved.snapshot
         if (
@@ -216,3 +220,94 @@ class ActivatedReviewedExecution:
             if service._ticket(actor, ticket.proposal, claim, run) != ticket:
                 raise FenceRejected("retained claim or Attempt differs")
             return service
+
+    def read_execution(
+        self, actor: Actor, scope: CanvasResultScope, proposal: ReviewProposal
+    ):
+        """Inspect an admitted native Run without claiming, launching or retrying."""
+        with self._entry(scope):
+            review = self.reviews._current(actor, scope, proposal, open_result=False)
+            if review.state != "approved":
+                return ReviewExecutionPending.model_validate(
+                    {"proposal": proposal, "phase": review.state}
+                )
+            key = work_item_run_key(review.work_item_id)
+            pins = self.db.all(
+                RunPin,
+                where="idempotency_id=?",
+                values=[
+                    _key(
+                        "actions.workspace-run-idempotency/v1",
+                        scope.application.workspace_id,
+                        key,
+                    )
+                ],
+            )
+            if not pins:
+                return ReviewExecutionPending(proposal=proposal, phase="queued")
+            if len(pins) != 1 or pins[0].idempotency_key != key:
+                raise ReviewConflict("native execution identity differs")
+            pin = pins[0]
+            snapshot = self.outputs._pinned(pin)
+            if (
+                snapshot.deployment != scope.deployment
+                or snapshot.canvas_application != scope.application
+            ):
+                raise AccessDenied("native execution outside exact app scope")
+            self.outputs._authorize(actor, snapshot, "read")
+            run = _one(self.db, Run, pin.run_id)
+            envelope = json.loads(run.result or "null")
+            terminal = run.status in (RunStatus.PASSED, RunStatus.FAILED)
+            record = (
+                envelope.get("result")
+                if terminal and isinstance(envelope, dict)
+                else envelope
+            )
+            if not isinstance(record, dict):
+                raise ReviewConflict("retained native journal required")
+            claim = ClaimValue.model_validate(record.get("claim")).as_claim()
+            if claim.item_id != review.work_item_id:
+                raise ReviewConflict("native Work Item differs")
+            service = ReviewedGeneratedRun(self.reviews, scope, snapshot, self.outputs)
+            ticket = service._ticket(actor, proposal, claim, run)
+            self.resume(actor, ticket)
+            if run.status != RunStatus.PASSED:
+                return ReviewExecutionPending(
+                    proposal=proposal,
+                    phase="failed"
+                    if terminal
+                    else "blocked"
+                    if record.get("launch")
+                    else "running",
+                )
+            refs = [
+                OutputRef.model_validate(value) for value in envelope.get("outputs", [])
+            ]
+            results = [
+                value
+                for value in record.get("outputs", [])
+                if value.get("name") == "generated-action-result.json"
+            ]
+            if len(results) != 1:
+                raise ReviewConflict("native result receipt required")
+            ref = OutputRef.model_validate(results[0]["ref"])
+            if ref not in refs or ref.run_id != run.id:
+                raise ReviewConflict("native result outside published Run")
+            with self.outputs.resolve(
+                actor, scope.application.workspace_id, ref.handle, canvas_scope=scope
+            ) as resolved:
+                if (
+                    resolved.media_type != "application/json"
+                    or resolved.digest != results[0]["digest"]
+                    or resolved.size != results[0]["size"]
+                ):
+                    raise ReviewConflict("native result seal differs")
+                return ReviewExecutionComplete(
+                    proposal=proposal,
+                    work_item_id=review.work_item_id,
+                    run_id=run.id,
+                    attempt_id=ticket.fence.attempt_id,
+                    artifact=ReviewExecutionArtifact(
+                        handle=ref.handle, digest=resolved.digest, size=resolved.size
+                    ),
+                )

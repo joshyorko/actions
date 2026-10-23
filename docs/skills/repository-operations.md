@@ -5004,3 +5004,37 @@ metadata and caller-supplied audience or revision arguments cannot confer this
 authority. The ordinary owner-key bootstrap still authenticates a model context;
 adding this port does not install an app grant or enable generated execution in
 an unconfigured host.
+
+The official MCP Apps bridge can forward View calls over the authenticated
+model connection. A forwarded request therefore does not acquire app authority
+from visibility metadata or an audience header. `CanvasMcp` can attenuate that
+connection with a server-issued capability in private `actions.appSession`
+metadata. It binds the existing principal, Workspace, application/Deployment
+revisions, saved-result handle and logical binding. It lasts at most15minutes;
+the process holds at most256 outstanding capabilities. Restart invalidates them.
+An authenticated reopen issues a fresh capability; SQL still holds reviews,
+Work Items, Runs, Attempts and outputs. Treat these capabilities as transient
+secrets when retaining protocol diagnostics; never put them in model content,
+screenshots, repository receipts or persistent configuration.
+
+`ReviewedCanvasView` opens an active authored revision and saved result without
+offering, approving or running work. Separate View actions offer the exact
+result, record an explicit decision, then execute the approved result. Live
+SQL permissions and current revision still govern approval/admission; the
+capability cannot authorize another result/binding or model authoring. Status
+and artifact reads use the retained native Run and sealed output authority.
+The official View verifies the returned result digest/size before requesting
+an inline host download, so it needs no new public download endpoint.
+
+Ordinary Runtime startup remains read-only for execution unless the trusted
+local host explicitly supplies `ACTIONS_FOUNDRY_EXECUTION_PROFILE`, an absolute
+path to a bounded `actions.runtime-rcc-profile/v1` descriptor. It selects
+already-authorized immutable worker/policy/output-provider references, a stable
+worker identity, explicit trusted-developer admission and a measured RCC
+preparation receipt. It grants nothing and never restores revoked policy.
+Generated Python is trusted developer code, not an OS sandbox. The selected
+RCC capability must have exactly one locked allowed plan equal to its default;
+the shared resolver reauthorizes that plan and all three profile references.
+Unconfigured execution, unsupported bindings and unqualified artifacts fail
+before Work Item claim. Qualify an installed descriptor/ordinary CLI and the
+actual official View separately from source or SDK transport tests.

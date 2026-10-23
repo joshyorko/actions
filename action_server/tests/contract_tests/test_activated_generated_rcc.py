@@ -5,6 +5,7 @@ or an authenticated model session. RCC and both SQL/data providers are real.
 """
 
 import asyncio
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -42,6 +43,144 @@ pytestmark = [
         reason="exact task-owned pinned RCC preparation required",
     ),
 ]
+
+
+@pytest.mark.parametrize("application", ["invoice-summary", "ndjson-inspector"])
+def test_official_view_protocol_requires_review_then_real_execution(
+    reviewed, foundry_package_store, tmp_path, application
+):
+    from actions.server.foundry.reviewed_view import ReviewedCanvasView
+
+    case = fixtures.setup_activated(
+        reviewed,
+        foundry_package_store,
+        real=True,
+        backend_entries=inspector_entries()
+        if application == "ndjson-inspector"
+        else None,
+        logical_key=application,
+    )
+    fixtures.release(case)
+    prepared = load_prepared_rcc_environment(
+        Path(os.environ["ACTIONS_PACKAGE_COMPILER_PREPARED_RCC_RECEIPT"])
+    )
+    runner = PinnedReviewedRccRunner(
+        prepared,
+        Path(os.environ["ACTIONS_PACKAGE_COMPILER_RCC"]),
+        tmp_path / "view-execution",
+    )
+    port = ReviewedCanvasView(make_port(case, runner))
+    owner = CanvasCaller(case.actor, case.scope.application.workspace_id, "model")
+
+    async def authenticate(_):
+        return owner
+
+    canvas = CanvasMcp(
+        port,
+        authenticate,
+        "<html>SDK transport proof, not official host rendering</html>",
+    )
+
+    async def check():
+        result = await call_with_sdk(
+            canvas,
+            "canvas_get",
+            {
+                "appId": str(case.staged.application_id.root),
+                "revisionId": case.scope.deployment.revision_id.root,
+                "reviewResult": {
+                    "handle": case.proposal.binding.handle,
+                    "bindingId": "run",
+                },
+            },
+        )
+        assert not result.is_error, result.model_dump_json()
+        token = result.meta["actions.appSession"]["token"]
+        offered = await call_with_sdk(
+            canvas,
+            "canvas_dispatch",
+            {
+                "appSession": token,
+                "action": "offer",
+                "handle": case.proposal.binding.handle,
+            },
+        )
+        assert not offered.is_error, offered.model_dump_json()
+        proposal = offered.meta["actions.review"]["proposal"]
+        body = {
+            "appSession": token,
+            "action": "execute",
+            "bindingId": "run",
+            "proposal": proposal,
+        }
+        assert (await call_with_sdk(canvas, "canvas_dispatch", body)).is_error
+        approved = await call_with_sdk(
+            canvas,
+            "canvas_dispatch",
+            {
+                "appSession": token,
+                "action": "decide",
+                "proposal": proposal,
+                "decision": "approve",
+            },
+        )
+        assert not approved.is_error, approved.model_dump_json()
+        first = await call_with_sdk(canvas, "canvas_dispatch", body)
+        assert not first.is_error, first.model_dump_json()
+        before = len(case.db.all(Run))
+        assert not (await call_with_sdk(canvas, "canvas_dispatch", body)).is_error
+        assert len(case.db.all(Run)) == before
+        status = await call_with_sdk(
+            canvas,
+            "canvas_execution_status",
+            {"appSession": token, "proposal": proposal},
+        )
+        assert not status.is_error, status.model_dump_json()
+        complete = status.meta["actions.execution"]
+        assert complete["phase"] == "completed"
+        assert complete["run_id"] == first.structured_content["execution"]["runId"]
+        artifact = await call_with_sdk(
+            canvas, "canvas_artifact", {"appSession": token, "proposal": proposal}
+        )
+        assert not artifact.is_error, artifact.model_dump_json()
+        raw = artifact.meta["actions.artifact"]["content"].encode()
+        assert (
+            "sha256:" + hashlib.sha256(raw).hexdigest()
+            == complete["artifact"]["digest"]
+        )
+        assert len(raw) == complete["artifact"]["size"]
+        # Reconnect never reuses a process-local capability. Authorized reopen
+        # issues a new one while the immutable review and Run remain in SQL.
+        reopened = CanvasMcp(port, authenticate, canvas.html)
+        assert (
+            await call_with_sdk(
+                reopened,
+                "canvas_execution_status",
+                {"appSession": token, "proposal": proposal},
+            )
+        ).is_error
+        result = await call_with_sdk(
+            reopened,
+            "canvas_get",
+            {
+                "appId": str(case.staged.application_id.root),
+                "reviewResult": {
+                    "bindingId": "run",
+                    "handle": case.proposal.binding.handle,
+                },
+            },
+        )
+        assert not result.is_error
+        new_token = result.meta["actions.appSession"]["token"]
+        restored = await call_with_sdk(
+            reopened,
+            "canvas_execution_status",
+            {"appSession": new_token, "proposal": proposal},
+        )
+        assert not restored.is_error
+        assert restored.meta["actions.execution"] == complete
+
+    asyncio.run(check())
 
 
 def inspector_entries():
@@ -93,7 +232,13 @@ async def call_with_sdk(canvas, operation, arguments):
                         if operation == "capability_invoke"
                         else "capability_invoke"
                     )
-                    assert operation in tools and opposite not in tools
+                    if operation == "canvas_get":
+                        assert operation in tools
+                        opposite = "canvas_dispatch"
+                    elif "appSession" in arguments:
+                        assert operation not in tools and "capability_invoke" in tools
+                    else:
+                        assert operation in tools and opposite not in tools
                     assert (await session.call_tool(opposite, arguments)).is_error
                     return await session.call_tool(operation, arguments)
 
