@@ -87,7 +87,7 @@ def test_reviewed_generated_summary_executes_with_real_dual_fences(
         execute.execute(actor, ticket.fence, cancelled=Event())
 
 
-def verify_fresh_process(service, actor, ticket, output, tmp_path):
+def verify_fresh_process(service, actor, ticket, output, tmp_path, *, expected=None):
     import subprocess
     import sys
 
@@ -102,6 +102,11 @@ def verify_fresh_process(service, actor, ticket, output, tmp_path):
         OWNED_SCOPE=service.scope.model_dump_json(),
         OWNED_TICKET=ticket.model_dump_json(),
         OWNED_HANDLE=output.handle,
+        OWNED_EXPECTED=json.dumps(
+            expected
+            if expected is not None
+            else {"invoice_count": 2, "total_cents": 12900}
+        ),
     )
     result = subprocess.run(
         [
@@ -137,7 +142,7 @@ try:
   assert restored.dispatch(a,ticket.proposal,ticket.claim.as_claim(),lease_seconds=30)==ticket
   with outputs.resolve(a,scope.application.workspace_id,os.environ['OWNED_HANDLE'],canvas_scope=scope) as found:
    summary=json.loads(json.loads(found.read()))
-  assert summary=={'invoice_count':2,'total_cents':12900}
+  assert summary==json.loads(os.environ['OWNED_EXPECTED'])
   print(json.dumps({'run':ticket.fence.run_id,'summary':summary}))
 finally:
  for fd in fds:os.close(fd)
@@ -151,5 +156,7 @@ finally:
     assert result.returncode == 0, result.stderr
     assert json.loads(result.stdout) == {
         "run": ticket.fence.run_id,
-        "summary": {"invoice_count": 2, "total_cents": 12900},
+        "summary": expected
+        if expected is not None
+        else {"invoice_count": 2, "total_cents": 12900},
     }

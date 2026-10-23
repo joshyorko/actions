@@ -105,6 +105,10 @@ def main():
         ROOT / "action_server/tests/action_server_tests/test_native_run_authority.py",
         ROOT / "action_server/tests/action_server_tests/test_generated_work_item_execution.py",
         ROOT / "action_server/tests/action_server_tests/test_reviewed_exact_claim.py",
+        ROOT / "action_server/tests/action_server_tests/test_activated_reviewed_execution.py",
+        ROOT / "action_server/tests/action_server_tests/test_reviewed_canvas_execution.py",
+        ROOT / "action_server/tests/action_server_tests/mcp/test_scoped_foundry_caller.py",
+        ROOT / "action_server/tests/contract_tests/test_activated_generated_rcc.py",
         ROOT / "action_server/tests/contract_tests/test_reviewed_generated_rcc.py",
         ROOT / "action_server/tests/contract_tests/test_foundry_rcc_execution.py",
         ROOT / "action_server/tests/contract_tests/test_package_revision_compiler.py",
@@ -469,6 +473,8 @@ print(json.dumps(identities))
                 "tests/action_server_tests/test_foundry_package_registry.py",
                 "tests/action_server_tests/test_generated_work_item_execution.py",
                 "tests/action_server_tests/test_reviewed_exact_claim.py",
+                "tests/action_server_tests/test_activated_reviewed_execution.py",
+                "tests/action_server_tests/test_reviewed_canvas_execution.py",
             ],
             "components": [
                 "tests/action_server_tests/test_invoice_review.py",
@@ -480,6 +486,7 @@ print(json.dumps(identities))
                 "tests/action_server_tests/test_foundry_boot.py",
                 "tests/action_server_tests/test_foundry_discovery.py",
                 "tests/action_server_tests/mcp/test_foundry_mcp.py",
+                "tests/action_server_tests/mcp/test_scoped_foundry_caller.py",
             ],
             "invoice": [
                 "tests/action_server_tests/test_invoice_providers.py",
@@ -502,6 +509,7 @@ print(json.dumps(identities))
             suites["package_compiler"] = [
                 "tests/contract_tests/test_foundry_package_registry_rcc.py",
                 "tests/contract_tests/test_reviewed_generated_rcc.py",
+                "tests/contract_tests/test_activated_generated_rcc.py",
             ]
         if args.browser:
             suites["browser"] = [

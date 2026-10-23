@@ -69,7 +69,7 @@
     "runtime": "Configured lint/typecheck443PASS",
     "sdk_public_contract": "mypy configured no-argument public call contract PASS",
     "sdk_edited_bridge": "targeted SQLReviewQueue mypy PASS",
-    "sdk_broad_baseline": "Invoke format40 files on both3f726/current. Invoke typecheck68errors/16files without optional clients,72errors/15files with all extras, identical baseline/current. Not waived; required release static gates remain open."
+    "sdk_broad_baseline": "Declared Ruff100-column formatting:27files baseline/current. Invoke formatting (devutils88-column):40files baseline/current. Invoke typecheck68errors/16files without optional clients,72errors/15files with all extras, identical baseline/current. Not waived; required release static gates remain open."
   },
   "failures": [
     {

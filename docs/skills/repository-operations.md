@@ -4973,3 +4973,34 @@ Its worker Core pin is checked alongside every other checked-in manifest, and
 contract tests separately require it to remain absent from both shipped
 catalogs. Adding a fixture must update the explicit inventory without silently
 admitting a new starter or weakening the existing dependency-pin checks.
+
+`ActivatedReviewedExecution` joins a current common Deployment head to an
+already approved exact-result Work Item. Dispatch resolves the selected logical
+binding through the common Package/Plan policy, then claims that exact item;
+it never falls back to an older item in the queue. Counter → Workspace locking
+keeps selection, claim, Run admission and its audit in one SQL transaction.
+A failed admission rolls the claim back. Duplicate delivery reuses the retained
+claim, Run and Attempt; it does not create a new grant or launch RCC.
+
+A changed active revision blocks new dispatch from a stale app. An already
+admitted Run can still resume its exact historical activated selection after
+live authorization checks. An expired claim remains fenced and requires
+explicit reconciliation; neither dispatch replay nor restart reclaims it or
+automatically launches again. This adapter is a domain admission boundary,
+not proof that an MCP host has an authorized interactive execution session.
+
+The optional `ReviewedCanvasExecution` projection keeps `canvas_dispatch`
+app-only and exposes a fixed model `capability_invoke` route over the same
+admission service. Both accept only a logical binding and an exact proposal;
+neither accepts replacement inputs or records approval. A missing trusted RCC
+runner fails before claiming an item. A retained launch intent blocks replay
+execution; a completed Run returns its original identity. There is no background
+queue or second execution journal in this projection.
+
+For interactive app execution, `CanvasCaller.scope` must come from trusted
+authentication and match the exact application/Deployment revision. Such an
+app context cannot list or invoke model authoring/capability tools. Visibility
+metadata and caller-supplied audience or revision arguments cannot confer this
+authority. The ordinary owner-key bootstrap still authenticates a model context;
+adding this port does not install an app grant or enable generated execution in
+an unconfigured host.
