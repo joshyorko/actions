@@ -103,6 +103,10 @@ def main():
             "action_server/tests/action_server_tests/test_managed_work_items_*.py"
         ),
         ROOT / "action_server/tests/action_server_tests/test_native_run_authority.py",
+        ROOT / "action_server/tests/action_server_tests/test_generated_work_item_execution.py",
+        ROOT / "action_server/tests/contract_tests/test_reviewed_generated_rcc.py",
+        ROOT / "action_server/tests/contract_tests/test_foundry_rcc_execution.py",
+        ROOT / "action_server/tests/contract_tests/test_package_revision_compiler.py",
         ROOT
         / "action_server/tests/action_server_tests/test_foundry_package_registry.py",
         ROOT
@@ -250,6 +254,7 @@ print(json.dumps(identities))
         ] = f"postgresql://postgres:synthetic-invoice-only@127.0.0.1:{port}/postgres"
         env["ACTIONS_REQUIRE_INVOICE_PROVIDERS"] = "1"
         if args.compiler_receipt is not None:
+            env["ACTIONS_PACKAGE_COMPILER_RCC"] = command("which", "rcc")
             env["ACTIONS_PACKAGE_COMPILER_PREPARED_RCC_RECEIPT"] = str(
                 args.compiler_receipt.resolve(strict=True)
             )
@@ -447,6 +452,7 @@ print(json.dumps(identities))
                 "tests/action_server_tests/test_foundry_server_wiring.py",
                 "tests/action_server_tests/test_native_run_authority.py",
                 "tests/action_server_tests/test_foundry_package_registry.py",
+                "tests/action_server_tests/test_generated_work_item_execution.py",
             ],
             "components": [
                 "tests/action_server_tests/test_invoice_review.py",
@@ -477,7 +483,8 @@ print(json.dumps(identities))
             ]
         if args.compiler_receipt is not None:
             suites["package_compiler"] = [
-                "tests/contract_tests/test_foundry_package_registry_rcc.py"
+                "tests/contract_tests/test_foundry_package_registry_rcc.py",
+                "tests/contract_tests/test_reviewed_generated_rcc.py",
             ]
         if args.browser:
             suites["browser"] = [
