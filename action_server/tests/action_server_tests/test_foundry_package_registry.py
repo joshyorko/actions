@@ -173,6 +173,7 @@ from actions.server.deployments.ids import PackageRevisionRef
 from actions.server.foundry.package_registry import FoundryPackageRegistry
 from actions.server.foundry.sql_authorization import SqlFoundryAuthorization
 from actions.server.run_outputs.types import Actor
+from actions.server.run_outputs.filesystem import FilesystemOutputProvider
 ref=PackageRevisionRef.model_validate_json(os.environ['ACTIONS_OWNED_PACKAGE_REF'])
 actor=Actor.model_validate_json(os.environ['ACTIONS_OWNED_PACKAGE_ACTOR'])
 db=Database(os.environ['ACTIONS_OWNED_PACKAGE_DB'])
