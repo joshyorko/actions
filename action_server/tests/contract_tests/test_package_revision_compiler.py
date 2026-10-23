@@ -218,6 +218,8 @@ def test_compiler_emits_schema_conformant_immutable_package_and_plan() -> None:
     assert manifest["schemaVersion"] == "actions.package-revision/v1-draft"
     assert manifest["capabilities"][0]["kind"] == "action"
     assert manifest["capabilities"][0]["id"] == "action.generated_echo"
+    assert manifest["capabilities"][0]["mode"] == "none"
+    assert manifest["capabilities"][0]["allowOutputs"] is False
     assert manifest["runtimePlans"][0]["runtimeKind"] == "rcc"
     assert manifest["sourceArtifact"]["mediaType"] == (
         "application/vnd.actions.package-source+zip"
@@ -266,6 +268,44 @@ def test_compiler_emits_schema_conformant_immutable_package_and_plan() -> None:
     assert json.loads(compiled.input_schema_payload)["type"] == "object"
     assert json.loads(compiled.output_schema_payload)["type"] == "string"
     assert verify_compilation_outcome(outcome) is compiled
+
+
+def test_capability_execution_mode_and_output_policy_are_revision_preimage() -> None:
+    outcome, _executor = _compile_with_fake()
+    assert outcome.compiled_package is not None
+    compiled = outcome.compiled_package
+    baseline = json.loads(compiled.manifest_json)
+    expected = baseline["identity"].pop("revisionDigest")
+    assert expected == compiled.package_revision_id.root
+    assert expected == _canonical_digest(
+        ["actions.package-revision/v1-draft", baseline]
+    )
+
+    for field, replacement in (("mode", "automatic"), ("allowOutputs", True)):
+        changed = json.loads(compiled.manifest_json)
+        preimage = json.loads(compiled.manifest_json)
+        recorded = preimage["identity"].pop("revisionDigest")
+        changed["capabilities"][0][field] = replacement
+        changed_preimage = json.loads(
+            canonical.canonicalize_json(
+                json.dumps(changed, ensure_ascii=False, separators=(",", ":")).encode()
+            )
+        )
+        changed_digest = changed_preimage["identity"].pop("revisionDigest")
+        assert recorded == expected
+        assert (
+            _canonical_digest(["actions.package-revision/v1-draft", changed_preimage])
+            != expected
+        )
+        tampered = replace(
+            compiled,
+            manifest_json=canonical.canonicalize_json(
+                json.dumps(changed, ensure_ascii=False, separators=(",", ":")).encode()
+            ),
+        )
+        assert changed_digest == expected
+        with pytest.raises(ValueError, match="integrity check failed"):
+            verify_compiled_package_revision(tampered)
 
 
 def test_compiled_package_verifier_rejects_source_archive_tampering() -> None:
