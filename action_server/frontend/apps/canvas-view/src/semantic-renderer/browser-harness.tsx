@@ -45,37 +45,35 @@ function ComponentHarness() {
             <SemanticCanvas
                 title="Semantic Canvas components"
                 revision="component-harness"
-                preview
-                audience="both"
+                preview={false}
+                visibility={["app", "model"]}
                 viewer="app"
             >
                 <SemanticStatus
                     state="success"
                     message="Enter a search term to see the form and result roundtrip."
                 />
-                <SemanticForm
-                    title="Search synthetic records"
+                <SemanticForm<"search", SearchInput, SearchOutput>
+                    scopeKey="component-harness:search"
+                    submitLabel="Search synthetic records"
                     fields={[
                         {
                             name: "query",
                             label: "Search term",
-                            placeholder: "Try a sample phrase",
+                            type: "text",
                             required: true,
-                            maxLength: 80,
                         },
                     ]}
                     capability={capability}
-                    toInput={(values) => ({ query: values.query })}
+                    toInput={(values) => ({
+                        query: String(values.query ?? ""),
+                    })}
                     dispatch={dispatch}
                     renderResult={(result) => (
-                        <SemanticTable<{
-                            id: string;
-                            label: string;
-                        }>
+                        <SemanticTable
                             caption="Synthetic search results"
                             columns={[{ key: "label", label: "Result" }]}
                             rows={result.rows}
-                            rowKey={(row) => row.id}
                         />
                     )}
                 />
