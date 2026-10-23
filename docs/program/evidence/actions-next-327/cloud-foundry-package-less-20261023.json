@@ -7,9 +7,9 @@
   "results": {
     "storage_deployment": "57passed/0skipped; SQLite AND real PostgreSQL, bounded two-writer CAS/replay, actual fresh interpreter, nullable FK preservation and injected migration rollback",
     "components": "111passed/0skipped",
-    "invoice_output": "read final owned receipt when complete",
+    "invoice_output": "129passed/0skipped",
     "actual_RCC_worker": "130passed/0skipped, RCC18.19.3; fixed invoice task, not generated Python compiler",
-    "portable": "running; do not credit yet",
+    "portable": "1902passed/13skipped/262deselected; owned real providers, full portable Runtime selection",
     "installed_wheel_contracts": "40passed",
     "static": "configured lint/typecheck408PASS",
     "original_reds": [
@@ -38,7 +38,7 @@
     "repository_operations": "Forward nullable FK migration, alias-key Core embedding, separate Canvas source and Deployment digests, no UI execution profiles, preserved snapshot pin, atomic head/request/audit and reauthorization",
     "foundry_71": "Exact UI-only typed consumer interface and source hash function; authoring SQL adapter remains pending"
   },
-  "cleanup": "owned verifier still running; no cleanup success claimed yet",
+  "cleanup": "PASS",
   "rollback": "Preserve coordinated schema17 SQL/object/journal backup before migration18; marker deletion is not a downgrade. No production migration or backend change. Revert integration commits for code rollback, never reopen changed state with an older binary.",
   "remaining": [
     "shared SQL authoring staging/activation adapter",
@@ -49,5 +49,6 @@
     "all unified release matrix gates; celld NO-GO"
   ],
   "upstream_disposition": "Existing RCC local-carrier draft only; no upstream mutation",
-  "authority": "No community/public release/production/other repository/credential changes without separate approval"
+  "authority": "No community/public release/production/other repository/credential changes without separate approval",
+  "raw_receipt": "/workspace/actions-327-state/evidence/foundry-schema18-frozen-20261023/dac58091-e8db-440d-b190-3c7fb01611c3/receipt.json"
 }
