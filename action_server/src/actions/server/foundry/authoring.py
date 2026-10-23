@@ -14,6 +14,7 @@ import json
 import re
 from collections.abc import Mapping, Sequence
 
+from actions.canvas_contract import CanvasSpec
 from pydantic import JsonValue, TypeAdapter, ValidationError
 
 from actions.server.deployments.canonical import canonicalize_json
@@ -60,9 +61,12 @@ _IDEMPOTENCY_KEY = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$")
 def _schema(
     properties: Mapping[str, dict[str, JsonValue]],
     required: Sequence[str] = (),
+    *,
+    description: str,
 ) -> dict[str, JsonValue]:
     return {
         "type": "object",
+        "description": description,
         "properties": dict(properties),
         "required": list(required),
         "additionalProperties": False,
@@ -78,11 +82,20 @@ _IDEMPOTENCY: dict[str, JsonValue] = {
     "type": "string",
     "minLength": 1,
     "maxLength": 128,
+    "description": "Caller-chosen stable key for retrying this mutation with identical input.",
 }
-_SPEC: dict[str, JsonValue] = {"type": "object", "maxProperties": 16}
+_SPEC: dict[str, JsonValue] = CanvasSpec.model_json_schema(
+    by_alias=True, mode="validation"
+)
+_SPEC["description"] = (
+    "Complete declarative CanvasSpec for the app UI. Use schemaVersion, title, "
+    "visibility, bindingIds, and root. It contains logical binding labels only; "
+    "it never contains Package references, results, credentials, or executable code."
+)
 _BINDINGS: dict[str, JsonValue] = {
     "type": "array",
     "maxItems": 32,
+    "description": "Explicit logical binding targets. Provide only targets authorized for this app.",
     "items": {
         "type": "object",
         "properties": {
@@ -113,6 +126,7 @@ _BINDINGS: dict[str, JsonValue] = {
 }
 _BACKEND: dict[str, JsonValue] = {
     "type": "object",
+    "description": "Optional externally authored Python source files for a backend. The common Package compiler validates and admits them; source is never returned by Canvas tools.",
     "properties": {
         "logicalName": {"type": "string", "minLength": 1, "maxLength": 128},
         "files": {
@@ -136,39 +150,78 @@ _BACKEND: dict[str, JsonValue] = {
 }
 
 SCHEMAS: dict[str, dict[str, JsonValue]] = {
-    "canvas_open": _schema({}),
+    "canvas_open": _schema(
+        {},
+        description="List the caller-authorized Canvas apps. This is read-only and does not create or activate an app.",
+    ),
     "canvas_create": _schema(
         {
-            "title": {"type": "string", "minLength": 1, "maxLength": 128},
+            "title": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "description": "Optional title for a new unpublished Canvas. An empty title is rejected.",
+            },
             "idempotencyKey": _IDEMPOTENCY,
         },
         ("idempotencyKey",),
+        description="Create a useful, unpublished Canvas draft. The returned authored spec can be edited and applied; creation never activates it.",
     ),
-    "canvas_get": _schema({"appId": _APP_ID, "revisionId": _REVISION}, ("appId",)),
+    "canvas_get": _schema(
+        {
+            "appId": {**_APP_ID, "description": "Authorized Canvas application UUID."},
+            "revisionId": {
+                **_REVISION,
+                "description": "Optional exact immutable revision digest. Omit or pass null for the latest staged revision.",
+            },
+        },
+        ("appId",),
+        description="Read the authorized app's latest authored CanvasSpec or one exact revision. The response omits private binding targets and backend source.",
+    ),
     "canvas_apply": _schema(
         {
-            "appId": _APP_ID,
-            "expectedBase": _REVISION,
+            "appId": {**_APP_ID, "description": "Canvas application UUID to revise."},
+            "expectedBase": {
+                **_REVISION,
+                "description": "Latest revision digest used as the optimistic edit base; null is valid only before a first revision exists.",
+            },
             "spec": _SPEC,
             "bindings": _BINDINGS,
             "backend": _BACKEND,
             "idempotencyKey": _IDEMPOTENCY,
         },
         ("appId", "expectedBase", "spec", "bindings", "idempotencyKey"),
+        description="Stage a complete new CanvasSpec revision with explicit bindings and optional backend source. The base digest is compare-and-swap checked; applying never activates or executes the revision.",
     ),
     "canvas_preview": _schema(
-        {"spec": _SPEC, "bindings": _BINDINGS, "backend": _BACKEND}, ("spec",)
+        {"spec": _SPEC, "bindings": _BINDINGS, "backend": _BACKEND},
+        ("spec",),
+        description="Validate and preview a CanvasSpec, binding map, and optional backend input without compilation, persistence, activation, or Run admission.",
     ),
-    "canvas_inspect": _schema({"appId": _APP_ID}, ("appId",)),
+    "canvas_inspect": _schema(
+        {"appId": {**_APP_ID, "description": "Authorized Canvas application UUID."}},
+        ("appId",),
+        description="Inspect authorized immutable revision history and identify the active revision. Each returned revision includes its authored CanvasSpec, not private binding targets or source.",
+    ),
     "canvas_release": _schema(
         {
-            "appId": _APP_ID,
-            "candidateRevision": _REVISION,
-            "rollbackTo": _REVISION,
-            "expectedActive": _REVISION,
+            "appId": {**_APP_ID, "description": "Canvas application UUID to activate."},
+            "candidateRevision": {
+                **_REVISION,
+                "description": "Exact validated draft revision to activate; provide exactly one of candidateRevision or rollbackTo.",
+            },
+            "rollbackTo": {
+                **_REVISION,
+                "description": "Exact historical revision to restore; provide exactly one of candidateRevision or rollbackTo.",
+            },
+            "expectedActive": {
+                **_REVISION,
+                "description": "Current active revision digest for compare-and-swap activation; null only when no revision is active.",
+            },
             "idempotencyKey": _IDEMPOTENCY,
         },
         ("appId", "expectedActive", "idempotencyKey"),
+        description="Explicitly activate one validated draft revision or roll back to one historical revision, using the expected active digest for compare-and-swap. This does not create a Run.",
     ),
 }
 
@@ -266,6 +319,7 @@ def _revision_result(revision: AuthoringRevision, *, include_spec: bool) -> Canv
     if not isinstance(revision, AuthoringRevision):
         raise AuthoringError("Foundry authority returned an invalid revision")
     ref = revision.ref
+    authored_spec = public_spec_document(revision.spec_json)
     model: dict[str, JsonValue] = {
         "applicationId": str(revision.application_id.root),
         "revisionId": ref.revision_id.root,
@@ -284,11 +338,15 @@ def _revision_result(revision: AuthoringRevision, *, include_spec: bool) -> Canv
         if revision.compilation
         else "not-required",
     }
+    if include_spec:
+        # The authenticated model may revise this app's public semantic
+        # document. Private capability references and source stay in app state.
+        model["spec"] = authored_spec
     view: dict[str, JsonValue] = {
         "applicationId": str(revision.application_id.root),
         "revisionId": ref.revision_id.root,
         "active": revision.active,
-        "spec": public_spec_document(revision.spec_json),
+        "spec": authored_spec,
         "bindings": [
             {
                 "bindingId": binding.binding_id,
@@ -1097,6 +1155,7 @@ def _inspection_result(
         revisions.append(
             {
                 "revisionId": revision.ref.revision_id.root,
+                "spec": public_spec_document(revision.spec_json),
                 "active": revision.active,
                 "validationStatus": revision.validation_status,
                 "compilationStatus": (
