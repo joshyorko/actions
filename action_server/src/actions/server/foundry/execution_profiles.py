@@ -13,10 +13,7 @@ from actions.server.deployments.foundry_values import (
     AccessDenied,
     ResolvedDeploymentExecution,
 )
-from actions.server.deployments.ids import (
-    CapabilityRef,
-    DeploymentRevisionRef,
-)
+from actions.server.deployments.ids import CapabilityRef, DeploymentRevisionRef
 from actions.server.run_outputs.types import Actor
 
 

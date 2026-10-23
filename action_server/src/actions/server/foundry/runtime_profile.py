@@ -7,8 +7,8 @@ Generated Python remains trusted developer code, not a security sandbox.
 
 from __future__ import annotations
 
-from pathlib import Path
 from collections.abc import Sequence
+from pathlib import Path
 from typing import Literal
 
 from pydantic import BaseModel, ConfigDict

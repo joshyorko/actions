@@ -149,6 +149,15 @@ def test_official_view_protocol_requires_review_then_real_execution(
             == complete["artifact"]["digest"]
         )
         assert len(raw) == complete["artifact"]["size"]
+        from actions.server.run_outputs.service import _update
+
+        with case.db.transaction():
+            _update(
+                case.db,
+                RunOutput,
+                output_id_from_handle(case.proposal.binding.handle),
+                {"expires_ms": "0"},
+            )
         # Reconnect never reuses a process-local capability. Authorized reopen
         # issues a new one while the immutable review and Run remain in SQL.
         reopened = CanvasMcp(port, authenticate, canvas.html)

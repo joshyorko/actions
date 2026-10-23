@@ -21,6 +21,8 @@ export function InvoiceReviewPanel({
         null,
     );
     const [executionError, setExecutionError] = useState(false);
+    const [sourceText, setSourceText] = useState<string | null>(null);
+    const [resultText, setResultText] = useState<string | null>(null);
     const executionAdapter = adapter.execution;
     const mounted = useRef(false);
     useEffect(() => {
@@ -77,6 +79,32 @@ export function InvoiceReviewPanel({
             if (mounted.current) setBusy(false);
         }
     };
+    const inspectSource = async () => {
+        if (!review || !adapter.inspect) return;
+        setBusy(true);
+        setError(false);
+        try {
+            const text = await adapter.inspect(review.proposal);
+            if (mounted.current) setSourceText(text);
+        } catch {
+            if (mounted.current) setError(true);
+        } finally {
+            if (mounted.current) setBusy(false);
+        }
+    };
+    const inspectResult = async (result: InvoiceExecutionComplete) => {
+        if (!executionAdapter?.inspect) return;
+        setBusy(true);
+        setExecutionError(false);
+        try {
+            const text = await executionAdapter.inspect(result);
+            if (mounted.current) setResultText(text);
+        } catch {
+            if (mounted.current) setExecutionError(true);
+        } finally {
+            if (mounted.current) setBusy(false);
+        }
+    };
     const phases = {
         pending: "Review is pending.",
         rejected: "Review was rejected.",
@@ -110,6 +138,18 @@ export function InvoiceReviewPanel({
                         Approve the complete saved result, including rows beyond
                         this page. Export it to inspect every row.
                     </p>
+                    {adapter.inspect ? (
+                        <button
+                            type="button"
+                            disabled={busy}
+                            onClick={() => void inspectSource()}
+                        >
+                            Inspect complete saved result
+                        </button>
+                    ) : null}
+                    {sourceText !== null ? (
+                        <pre aria-label="Exact saved result">{sourceText}</pre>
+                    ) : null}
                     <details>
                         <summary>Result identity</summary>
                         <p>
@@ -201,6 +241,22 @@ export function InvoiceReviewPanel({
                                 Run <code>{execution.run_id}</code>, Attempt{" "}
                                 <code>{execution.attempt_id}</code>
                             </p>
+                            {executionAdapter.inspect ? (
+                                <button
+                                    type="button"
+                                    disabled={busy}
+                                    onClick={() =>
+                                        void inspectResult(execution)
+                                    }
+                                >
+                                    View execution result
+                                </button>
+                            ) : null}
+                            {resultText !== null ? (
+                                <pre aria-label="Sealed execution result">
+                                    {resultText}
+                                </pre>
+                            ) : null}
                             <button
                                 type="button"
                                 disabled={busy}

@@ -8,6 +8,45 @@ import { parseInvoiceExecution } from "./review-contract";
 
 afterEach(cleanup);
 
+it("reads saved bytes only on an explicit inspect action before approval", async () => {
+    const adapter = {
+        offer: vi.fn().mockResolvedValue({
+            proposal,
+            receipt: {
+                review_id: proposal.review_id,
+                state: "pending",
+                work_item_id: null,
+            },
+        }),
+        inspect: vi
+            .fn()
+            .mockResolvedValue(
+                '{"invoice_id":"synthetic-1","amount_cents":100}\n',
+            ),
+        decide: vi.fn(),
+        cancel: vi.fn(),
+    };
+    render(
+        <InvoiceReviewPanel
+            adapter={adapter}
+            handle={proposal.binding.handle}
+        />,
+    );
+    expect(adapter.inspect).not.toHaveBeenCalled();
+    await userEvent.click(
+        screen.getByRole("button", { name: "Review these results" }),
+    );
+    expect(adapter.inspect).not.toHaveBeenCalled();
+    await userEvent.click(
+        await screen.findByRole("button", {
+            name: "Inspect complete saved result",
+        }),
+    );
+    expect(adapter.inspect).toHaveBeenCalledExactlyOnceWith(proposal);
+    expect(await screen.findByText(/"invoice_id":"synthetic-1"/)).toBeVisible();
+    expect(adapter.decide).not.toHaveBeenCalled();
+});
+
 const proposal = {
     review_id: "10000000-0000-4000-8000-000000000001",
     binding: {

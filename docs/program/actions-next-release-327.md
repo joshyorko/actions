@@ -1,5 +1,31 @@
 # Actions Next release checkpoint
 
+Runtime1.1.0a22 corrects a source-expired View reopen defect reproduced after
+genuine RCC completion for both generated applications. It reissues a View
+capability only for an existing exact approved review with an admitted native
+Run, retaining all live policy and input-seal checks. It adds explicit bounded
+source/result inspection through the existing renderer and sealed resolver;
+inspection never approves or executes. Configured lint/typecheck458 passed
+before the final added negative tests; Canvas41passed/1skipped and frontend
+quality/build passed. Strict combined and installed/official-host qualification
+of the frozen a22 bytes is pending.
+
+The a21 strict gate on source `4aea62849c769cd8d4261c4328f5358b918140bb`
+passed managed56/SQL285/components165/invoice-output129, zero skips, then ended
+with worker133passed/1failed. RCC exhausted scratch capacity restoring the full
+toolkit in `test_pinned_rcc_executes_selected_task_with_declared_inputs`;
+generated-package and portable stages did not run. Its receipt and full failed
+fixture remain preserved, with the fixture archived only after115086 members
+were verified. Installed a21 independently passed146 SQL/transport/profile
+cases, zero skips, with20 RCC cases explicitly deselected for serialization;
+ordinary installed CLI/MCP restart passed. These are partial results. The
+first installed collection failed for missing QA-only httpx, then the retained
+locked public wheel bundle supplied it. The initial pytest pin mismatch,
+missing Runtime HTML, import-order and disk-full failures remain visible.
+PR333 `e3059bda` is under review and unintegrated because it equates independent
+Work Item claim and Run Attempt epochs; the existing owner has a precise
+correction request. No release gate is waived by this checkpoint.
+
 Runtime1.1.0a21 stages the ordinary trusted local RCC descriptor and ephemeral
 result/binding-scoped official View capability. Reviewed source from PR331
 `0eb4641f710ef8fb0e96e55cba8bb0de85e3c873` adds the shared locked/default-plan

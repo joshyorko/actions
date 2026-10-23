@@ -3,7 +3,6 @@ from __future__ import annotations
 from contextlib import contextmanager
 
 import pytest
-
 from action_server_tests.test_foundry_deployments import (
     _digest,
     _PackagePort,
@@ -13,12 +12,13 @@ from action_server_tests.test_foundry_deployments import (
     _spec,
     _uuid,
 )
+
+from actions.server.deployments.foundry_service import FoundryDeploymentService
 from actions.server.deployments.foundry_values import (
     AccessDenied,
     CapabilityPlanPolicy,
     ResolvedDeploymentExecution,
 )
-from actions.server.deployments.foundry_service import FoundryDeploymentService
 from actions.server.deployments.ids import (
     CapabilityRef,
     DeploymentId,
@@ -27,11 +27,11 @@ from actions.server.deployments.ids import (
     PolicyRevisionId,
     ProviderProfileId,
     ProviderProfileRevisionId,
+    ProviderProfileRevisionRef,
+    RuntimePlanRef,
     WorkerProfileId,
     WorkerProfileRevisionId,
     WorkerProfileRevisionRef,
-    ProviderProfileRevisionRef,
-    RuntimePlanRef,
     WorkspaceId,
     WorkspacePolicyRevisionRef,
 )

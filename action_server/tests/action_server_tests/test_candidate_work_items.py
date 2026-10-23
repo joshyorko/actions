@@ -20,7 +20,7 @@ def test_runtime_uses_installed_fenced_sdk_candidate():
 def test_runtime_prerelease_retains_numeric_release_tuple():
     from actions.server import __version__, version_info
 
-    assert __version__ == "1.1.0a21"
+    assert __version__ == "1.1.0a22"
     assert version_info == [1, 1, 0]
 
 

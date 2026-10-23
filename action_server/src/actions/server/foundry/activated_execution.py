@@ -18,10 +18,10 @@ from actions.server.data_queries.invoice_worker import ClaimValue, work_item_run
 from actions.server.data_queries.review import (
     InvoiceReviewService,
     ReviewConflict,
-    ReviewProposal,
-    ReviewExecutionPending,
-    ReviewExecutionComplete,
     ReviewExecutionArtifact,
+    ReviewExecutionComplete,
+    ReviewExecutionPending,
+    ReviewProposal,
 )
 from actions.server.deployments.foundry_service import FoundryDeploymentService
 from actions.server.deployments.ids import DeploymentId, WorkspaceId
@@ -41,8 +41,12 @@ from actions.server.run_outputs.service import (
     _returning,
     _transaction,
 )
-from actions.server.run_outputs.types import Actor, CanvasResultScope, ExecutionSnapshot
-from actions.server.run_outputs.types import OutputRef
+from actions.server.run_outputs.types import (
+    Actor,
+    CanvasResultScope,
+    ExecutionSnapshot,
+    OutputRef,
+)
 
 
 class ActivatedReviewedExecution:

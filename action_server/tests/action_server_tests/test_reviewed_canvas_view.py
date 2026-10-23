@@ -5,7 +5,6 @@ import json
 from uuid import uuid4
 
 import pytest
-
 from action_server_tests import test_activated_reviewed_execution as fixtures
 from action_server_tests.test_reviewed_canvas_execution import make_port
 
@@ -36,18 +35,6 @@ def test_forwarded_view_review_requires_separate_human_decision_and_dispatch(
     before = len(case.db.all(Run))
 
     async def check():
-        await port.call(
-            owner,
-            "canvas_get",
-            {
-                "appId": str(case.staged.application_id.root),
-                "revisionId": case.scope.deployment.revision_id.root,
-                "reviewResult": {
-                    "bindingId": "run",
-                    "handle": case.proposal.binding.handle,
-                },
-            },
-        )
         opened = await canvas.call(
             None,
             "canvas_get",
@@ -79,6 +66,18 @@ def test_forwarded_view_review_requires_separate_human_decision_and_dispatch(
         assert not offered.is_error
         review = offered.meta["actions.review"]
         assert review["receipt"]["state"] == "pending"
+        assert not case.reviews.queue(case.scope).list_items()
+        inspected = await canvas.call(
+            None,
+            "canvas_artifact",
+            {"appSession": token, "proposal": review["proposal"], "kind": "source"},
+        )
+        assert not inspected.is_error
+        assert (
+            inspected.meta["actions.artifact"]["digest"]
+            == case.proposal.binding.result_digest
+        )
+        assert inspected.meta["actions.artifact"]["mediaType"] == "application/x-ndjson"
         assert not case.reviews.queue(case.scope).list_items()
         assert (
             await canvas.call(
@@ -149,8 +148,8 @@ def test_forwarded_view_review_requires_separate_human_decision_and_dispatch(
 def test_view_grant_does_not_replace_live_sql_policy(
     reviewed, foundry_package_store, failure
 ):
-    from actions.server.foundry.reviewed_view import ReviewedCanvasView
     from actions.server.foundry.models import FoundryAccessGrant
+    from actions.server.foundry.reviewed_view import ReviewedCanvasView
 
     case = fixtures.setup_activated(reviewed, foundry_package_store)
     fixtures.release(case)
@@ -229,3 +228,45 @@ def test_view_grant_does_not_replace_live_sql_policy(
     with pytest.raises((PermissionError, ValueError)):
         asyncio.run(port.call(caller, "canvas_dispatch", body))
     assert not case.reviews.queue(case.scope).list_items()
+
+
+@pytest.mark.parametrize("approved", [False, True])
+def test_expired_result_without_admitted_run_cannot_gain_view_session(
+    reviewed, foundry_package_store, approved
+):
+    from actions.server.foundry.reviewed_view import ReviewedCanvasView
+    from actions.server.run_outputs.models import RunOutput
+    from actions.server.run_outputs.service import _update
+    from actions.server.run_outputs.types import output_id_from_handle
+
+    case = fixtures.setup_activated(reviewed, foundry_package_store)
+    fixtures.release(case)
+    if approved:
+        case.reviews.decide(case.actor, case.scope, case.proposal, "approve")
+    before = len(case.db.all(Run))
+    with case.db.transaction():
+        _update(
+            case.db,
+            RunOutput,
+            output_id_from_handle(case.proposal.binding.handle),
+            {"expires_ms": "0"},
+        )
+    caller = CanvasCaller(case.actor, case.scope.application.workspace_id, "model")
+    with pytest.raises(PermissionError):
+        asyncio.run(
+            ReviewedCanvasView(make_port(case)).call(
+                caller,
+                "canvas_get",
+                {
+                    "appId": str(case.staged.application_id.root),
+                    "reviewResult": {
+                        "bindingId": "run",
+                        "handle": case.proposal.binding.handle,
+                    },
+                },
+            )
+        )
+    assert len(case.db.all(Run)) == before
+    assert all(
+        item["claim_epoch"] == 0 for item in case.reviews.queue(case.scope).list_items()
+    )

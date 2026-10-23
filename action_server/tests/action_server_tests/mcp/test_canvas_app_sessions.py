@@ -51,6 +51,7 @@ def test_private_scope_capability_attenuates_forwarded_model_connection(monkeypa
         assert (
             await canvas.call(None, "canvas_create", {"appSession": token})
         ).is_error
+        assert (await canvas.call(None, "canvas_create", {"appSession": None})).is_error
         assert not any(
             tool.name == "canvas_dispatch" for tool in await canvas.tools(None)
         )

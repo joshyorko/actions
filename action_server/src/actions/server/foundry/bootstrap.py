@@ -39,12 +39,12 @@ from actions.server.foundry.models import (
     FoundryRequest,
 )
 from actions.server.foundry.package_registry import FoundryPackageRegistry
+from actions.server.foundry.runtime_profile import (
+    RuntimeDeploymentSelection,
+    read_runtime_profile,
+)
 from actions.server.foundry.sql_authoring import SqlAuthoringAuthority
 from actions.server.foundry.sql_authorization import SqlFoundryAuthorization
-from actions.server.foundry.runtime_profile import (
-    read_runtime_profile,
-    RuntimeDeploymentSelection,
-)
 from actions.server.run_outputs.filesystem import FilesystemOutputProvider
 from actions.server.run_outputs.models import Workspace
 from actions.server.run_outputs.service import _now

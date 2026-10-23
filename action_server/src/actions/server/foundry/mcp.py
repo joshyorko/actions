@@ -6,9 +6,9 @@ It is enabled only when the host supplies both the domain port and authenticator
 
 from __future__ import annotations
 
+import copy
 import hashlib
 import json
-import copy
 from collections.abc import Awaitable, Callable, Mapping
 from dataclasses import dataclass
 from typing import Literal, Protocol

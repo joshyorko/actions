@@ -5026,6 +5026,20 @@ and artifact reads use the retained native Run and sealed output authority.
 The official View verifies the returned result digest/size before requesting
 an inline host download, so it needs no new public download endpoint.
 
+The View also supports explicit inspection of the complete bounded saved source
+and sealed generated result as text. Those reads verify scope, media type and
+SHA256 against the exact proposal or published Run descriptor; displaying
+untrusted text never renders HTML. Reading an artifact does not depend on a
+host implementing the optional download request. Neither inspection happens
+on mount or approves a result.
+
+Reopening after source expiry is permitted only for an existing exact approved
+review with an admitted native Run. It checks the retained input seal and live
+policy, and reissues only the ephemeral View capability. The source's expiry
+does not change. A pending review or approved item without a Run cannot use
+this recovery path to admit new work. Recovering the review is a read operation;
+dispatch remains an explicit separate action, including duplicate delivery.
+
 Ordinary Runtime startup remains read-only for execution unless the trusted
 local host explicitly supplies `ACTIONS_FOUNDRY_EXECUTION_PROFILE`, an absolute
 path to a bounded `actions.runtime-rcc-profile/v1` descriptor. It selects

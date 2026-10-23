@@ -52,6 +52,7 @@ const stateSchema = z
 export type InvoiceReviewProposal = z.infer<typeof proposalSchema>;
 export type InvoiceReviewState = z.infer<typeof stateSchema>;
 export interface InvoiceReviewAdapter {
+    inspect?(proposal: InvoiceReviewProposal): Promise<string>;
     execution?: InvoiceExecutionAdapter;
     offer(handle: string): Promise<InvoiceReviewState>;
     decide(
@@ -118,6 +119,7 @@ export type InvoiceExecutionComplete = Extract<
     { phase: "completed" | "dead_letter" }
 >;
 export interface InvoiceExecutionAdapter {
+    inspect?(result: InvoiceExecutionComplete): Promise<string>;
     execute?(proposal: InvoiceReviewProposal): Promise<InvoiceExecutionState>;
     read(proposal: InvoiceReviewProposal): Promise<InvoiceExecutionState>;
     download(result: InvoiceExecutionComplete): Promise<void>;
