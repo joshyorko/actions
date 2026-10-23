@@ -163,6 +163,17 @@ remains unverified. It is an authoring verification artifact, not a release.
 
 Source keys (exact observed branch heads, not interchangeable acceptance):
 
+The [managed integration checkpoint](evidence/actions-next-327/cloud-managed-integration-20261023.json)
+freezes source `4e0e2839a8621bb01eeb98d03b8e7e9cf240c790`. It imports PR331's
+launch/log lineage and PR333's current-lease replay/thread-boundary corrections,
+then joins explicit common-SQL policy, managed HTTP identity isolation and actual
+invoice RCC completion. Local managed25 passed/35 provider-control skips and
+configured static442 passed. The strict PostgreSQL/full worker/installed-a18
+gates are pending; a mounted but unconfigured route is not usable managed mode.
+Existing a17 installed authoring and b6a82488 full worker receipts remain bound
+to their original sources. Generic managed enqueue/retry/logs, generated app
+interaction and all broader release gates remain open.
+
 The [reviewed generated RCC receipt](evidence/actions-next-327/cloud-reviewed-generated-rcc-20261023.json)
 qualifies source `b6a82488aa4a9b0091acea95ba63fa378f11dbaa`, Runtime1.1.0a18.
 SQL133/components161/invoice129 and genuine RCC6 passed without skips;

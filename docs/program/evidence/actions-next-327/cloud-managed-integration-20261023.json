@@ -1,0 +1,49 @@
+{
+  "schema": "actions.cloud-managed-checkpoint/v1",
+  "source": "4e0e2839a8621bb01eeb98d03b8e7e9cf240c790",
+  "runtime": "1.1.0a18",
+  "candidate_built": false,
+  "imported_heads": {
+    "pr331": "042f27167ae0850c789883bd1fbb1dd26bf42d2f",
+    "pr333": "1bd2e508def50943f1ea6eba36e9e4f71b6803cf"
+  },
+  "results": {
+    "managed_local": "25 passed, 35 skipped; PostgreSQL/provider cells unconfigured in this local command",
+    "configured_static": "lint passed; mypy passed 442 files; Markdown lint unavailable",
+    "actual_generated_rcc_launch_receipt": "1 passed, 3 deselected; final published launch identity retained",
+    "full_real_postgresql_worker_and_portable": "PENDING",
+    "installed_a18": "PENDING"
+  },
+  "evidence_root": "/workspace/actions-327-state/evidence/foundry-integration",
+  "logs": [
+    "managed-all-local-20261023.log",
+    "managed-integration-static-final-20261023.log",
+    "generated-published-launch-red-20261023.log",
+    "generated-published-launch-green-20261023.log",
+    "managed-completion-first-20261023.log",
+    "managed-completion-state-normalized-20261023.log",
+    "managed-runtime-completion-local-20261023.log"
+  ],
+  "verified_changes": [
+    "Managed public SQL methods own connections in the HTTP executing thread; live READ precedes capability discovery.",
+    "Workspace and exact Deployment work_items permissions use the existing SQL grants; server configuration supplies actor and worker identity.",
+    "The existing Runtime perimeter delegates only the managed prefix to that trusted identity; other APIs retain their existing authentication.",
+    "HTTP completion requires real retained RCC evidence and projects SDK COMPLETED as wire DONE; duplicate delivery does not relaunch.",
+    "Existing generated RCC output retains exact launch lineage plus bounded stdout/stderr and receipt artifacts."
+  ],
+  "remaining": [
+    "A normal unconfigured route returns unavailable; a usable default managed host profile and installed VSIX acceptance are not proved.",
+    "Generic enqueue, retry and Run logs remain unadvertised and required release work.",
+    "Generated active-Deployment resolver, authorized app interaction and second independent Python application remain open.",
+    "Actual Codex client is blocked by prior token refresh401, with no credential retry authorized; ChatGPT E1 NEEDS_OPERATOR; celld NO-GO.",
+    "All original distribution, retention/restore, compatibility, security332 and exact-head hosted gates remain separate."
+  ],
+  "rollback": "No new DDL. Disable dispatch before code rollback; retain coordinated SQL Review/WorkItem/Run/Attempt, launch journals, request/audit and sealed objects. Older binaries must not resume unknown native dispatch envelopes.",
+  "documentation": {
+    "canonical": "docs/skills/work-items.md",
+    "delta": "Require executing-thread SQL ownership, live discovery authorization, current lease replay metadata and explicit SDK-to-wire terminal state projection, with real RCC completion evidence.",
+    "contract": "docs/program/actions-next-managed-work-items-132.md now names the actual SQL service and trusted host seam, removes the obsolete unmounted-router and proposed reviewed.py claims, and distinguishes route presence from configured managed support."
+  },
+  "upstream_disposition": "none; observed completion and integration defects belong to Actions",
+  "publication": "none"
+}
