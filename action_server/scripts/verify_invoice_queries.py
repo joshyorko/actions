@@ -255,6 +255,13 @@ print(json.dumps(identities))
         env["ACTIONS_REQUIRE_INVOICE_PROVIDERS"] = "1"
         if args.compiler_receipt is not None:
             env["ACTIONS_PACKAGE_COMPILER_RCC"] = command("which", "rcc")
+            # The marker is created explicitly by the owner of this disposable
+            # prepared home. Never admit cleanup of an arbitrary/default home.
+            compiler_home = Path(json.loads(args.compiler_receipt.read_text())["robocorpHome"])
+            marker = compiler_home / ".actions-owned-compiler-fixture"
+            if marker.is_file() and not marker.is_symlink() and marker.read_text() == "actions.task-owned-compiler-fixture/v1\n":
+                env["ACTIONS_PACKAGE_COMPILER_OWNED_VIEW_CLEANUP"] = "1"
+                env["ACTIONS_PACKAGE_COMPILER_CLEANUP_EVIDENCE"] = str(evidence / "compiler-view-cleanup")
             env["ACTIONS_PACKAGE_COMPILER_PREPARED_RCC_RECEIPT"] = str(
                 args.compiler_receipt.resolve(strict=True)
             )

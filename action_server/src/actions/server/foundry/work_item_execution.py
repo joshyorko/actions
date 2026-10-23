@@ -21,7 +21,7 @@ from actions.server.data_queries.review import (
     ReviewConflict,
     ReviewProposal,
 )
-from actions.server.data_queries.review_models import FencedWorkItem
+from actions.server.data_queries.review_models import FencedWorkItem, InvoiceReview
 from actions.server.foundry.models import FoundryAudit, FoundryRequest
 from actions.server.run_outputs.models import RunAttempt, RunPin
 from actions.server.run_outputs.service import (
@@ -366,6 +366,42 @@ class _ReviewedOutputs(RunOutputService):
                 self.ticket.claim.as_claim(), lease_seconds=lease_seconds
             )
             super().heartbeat(fence, lease_seconds=lease_seconds)
+
+    def cancel(self, actor: Actor, run_id: str) -> bool:
+        if actor != self.actor or run_id != self.ticket.fence.run_id:
+            raise AccessDenied("different execution actor or Run")
+        with _transaction(self.db):
+            row = self.owner.reviews._current(
+                actor, self.owner.scope, self.ticket.proposal, open_result=False
+            )
+            if row.state == "cancelled":
+                self._authorize(actor, self.owner.snapshot, "cancel")
+                pin = _one(self.db, RunPin, run_id)
+                item = _one(self.db, FencedWorkItem, self.ticket.claim.item_id)
+                if (
+                    row.work_item_id != item.id
+                    or not pin.cancel_requested
+                    or not item.cancel_requested
+                ):
+                    raise FenceRejected("cancelled authorities differ")
+                return True
+            queue = self._check(self.ticket.fence)
+            if not super().cancel(actor, run_id):
+                return False
+            if not queue.cancel(self.ticket.claim.item_id):
+                raise FenceRejected("Work Item cannot be cancelled")
+            _update(
+                self.db,
+                InvoiceReview,
+                row.id,
+                {
+                    "state": "cancelled",
+                    "cancellation_json": _canonical(
+                        {"actor": actor.principal_id, "at_ms": _now(self.db)}, 4096
+                    ),
+                },
+            )
+            return True
 
     def publish(
         self,

@@ -404,3 +404,16 @@ launch marker blocks this path even if no result exists. Missing output is not
 proof of no effects. Reconstructing an adapter in one interpreter is not a
 fresh-process restart proof, and a fixture snapshot registration is not proof
 of the full active-Deployment resolver or public app dispatch.
+
+Dedicated RCC cases may materialize several copies of the same retained
+Artifact under distinct compiler workspaces. On a small task filesystem,
+prepare an explicitly owned RCC home and opt into serial view cleanup with
+the `.actions-owned-compiler-fixture` marker
+`actions.task-owned-compiler-fixture/v1`. The compiler verifier recognizes that
+marker; the dedicated fixture checks for active executables/cwds, saves view
+metadata and RCC dry-run/delete receipts, then uses pinned `rcc holotree delete`
+for recognized views. It preserves Artifact/catalog/package caches, source and
+build evidence. An unrecognized partial view is not removed by a fallback
+filesystem deletion. Missing admission, active processes or a failed supported
+cleanup remains a failed gate. Cleanup success does not establish the original
+compiler failure's cause.

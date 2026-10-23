@@ -79,7 +79,7 @@ class GeneratedActionTest(unittest.TestCase):
             workspace_id=refs.workspace,
             application_id=refs.deployment_id,
         )
-        assert outcome.evidence.ready, outcome.evidence
+        assert outcome.evidence.ready, str(outcome.evidence)
         package = registry.admit_compiled(
             actor, refs.workspace, outcome.compiled_package
         )
@@ -366,3 +366,36 @@ def test_prior_launch_intent_cannot_be_reclassified_as_no_effect(
     )
     with pytest.raises(FenceRejected, match="reconcil"):
         service.recover_no_launch(actor, old, claim, lease_seconds=30)
+
+
+def test_worker_cancel_fences_both_authorities_and_retains_explicit_decision(
+    reviewed, foundry_package_store
+):
+    from actions.server.data_queries.review_models import InvoiceReview
+    from actions.server.run_outputs.models import RunPin
+
+    service, actor, ticket = approved_ticket(reviewed, foundry_package_store)
+    outputs = service.outputs(actor, ticket)
+    assert outputs.cancel(actor, ticket.fence.run_id)
+    db = reviewed[0]
+    assert (
+        db.first(
+            RunPin, "SELECT * FROM run_pin WHERE run_id=?", [ticket.fence.run_id]
+        ).cancel_requested
+        == 1
+    )
+    item = db.first(
+        FencedWorkItem,
+        "SELECT * FROM fenced_work_item WHERE id=?",
+        [ticket.claim.item_id],
+    )
+    assert item.cancel_requested == 1
+    assert (
+        db.first(
+            InvoiceReview,
+            "SELECT * FROM invoice_review WHERE id=?",
+            [ticket.proposal.review_id],
+        ).state
+        == "cancelled"
+    )
+    assert outputs.cancel(actor, ticket.fence.run_id)
