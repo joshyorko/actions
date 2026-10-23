@@ -91,7 +91,7 @@ def build_frontend(
     install: bool = True,
     json_output: bool = False,
 ):
-    """Build the canonical Runtime frontend and embed its static entrypoint."""
+    """Build canonical Runtime/Canvas artifacts and embed both entrypoints."""
     import json as json_lib
     import os
     import sys
@@ -141,6 +141,7 @@ def build_frontend(
             
             if debug:
                 run(ctx, "npm", "run", "build:debug")
+                run(ctx, "npm", "run", "build:canvas")
             else:
                 run(ctx, "npm", "run", "build:artifacts")
         
@@ -151,7 +152,12 @@ def build_frontend(
             CURDIR / "src" / "actions" / "server" / "_static_contents.py"
         )
 
-        file_contents = {"index.html": index_src.read_bytes()}
+        canvas_src = CURDIR / "frontend" / "dist-canvas" / "index.html"
+        assert canvas_src.is_file(), f"Expected built Canvas artifact: {canvas_src}"
+        file_contents = {
+            "index.html": index_src.read_bytes(),
+            "canvas.html": canvas_src.read_bytes(),
+        }
 
         with open(dest_static_contents, "w", encoding="utf-8", newline="\n") as stream:
             if not json_output:
