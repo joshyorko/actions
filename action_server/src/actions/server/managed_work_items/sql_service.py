@@ -6,8 +6,9 @@ an identifier. Mutation receipts use the existing shared FoundryRequest rows;
 all queue, review, Run, Attempt and output mutations delegate to their existing
 Runtime services.
 
-Generic producer admission, client-supplied retry evidence and Run logs do not
-have canonical Runtime primitives yet. Those operations remain unadvertised.
+Generic producer admission and client-supplied retry evidence do not have
+canonical Runtime primitives yet. Native RCC Run logs are projected from final
+RunOutput records through the existing resolver.
 """
 
 from __future__ import annotations
@@ -62,6 +63,7 @@ from actions.server.managed_work_items.contracts import (
     ItemPage,
     ItemResult,
     ItemView,
+    LogPage,
     ManagedCaller,
     ManagedWorkItemsPort,
     Operation,
@@ -69,8 +71,8 @@ from actions.server.managed_work_items.contracts import (
     QueueAuthorizationPort,
     QueuePage,
     QueueRef,
-    Queues,
     QueueView,
+    Queues,
     Renew,
     ReviewPage,
     ReviewResult,
@@ -78,6 +80,7 @@ from actions.server.managed_work_items.contracts import (
     RunResult,
     RunView,
 )
+from actions.server.managed_work_items.native_runs import NativeRunProjection
 from actions.server.run_outputs.models import RunAttempt, RunOutput, RunPin
 from actions.server.run_outputs.service import (
     AccessDenied,
@@ -112,7 +115,7 @@ _RUN_STATE_ADAPTER: TypeAdapter[
 )
 _CURSOR_ID = re.compile(r"^[0-9a-f-]{36}$")
 _ARTIFACT_CURSOR = re.compile(r"^(?:0|[1-9][0-9]{0,7})$")
-_UNIMPLEMENTED = {Operation.ENQUEUE, Operation.RETRY, Operation.LOGS}
+_UNIMPLEMENTED = {Operation.ENQUEUE, Operation.RETRY}
 MutationCommand: TypeAlias = Claim | Renew | Complete | Intervention | Decide
 
 
@@ -151,6 +154,9 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
         self.db = reviews.db
         self.authorization = authorization
         self.worker_for = worker_for
+        self.native_runs = NativeRunProjection(
+            reviews, authorization, self._review_for_item
+        )
 
     def capabilities(
         self, caller: ManagedCaller, workspace_id: WorkspaceId
@@ -168,9 +174,9 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
                 operations = self._operations(
                     permissions, worker_available, caller.worker_id is not None
                 )
-                from actions.work_items import __version__ as sdk_version
-
                 from actions.server import __version__ as runtime_version
+
+                from actions.work_items import __version__ as sdk_version
 
                 return Capabilities(
                     runtime_version=runtime_version,
@@ -304,6 +310,7 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
                     Operation.LIST,
                     Operation.GET,
                     Operation.RUN,
+                    Operation.LOGS,
                 )
             )
         if Permission.READ in permissions and Permission.REVIEW in permissions:
@@ -513,7 +520,26 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
                     command.cursor,
                 )
             if operation == Operation.LOGS:
-                raise ManagedError("unsupported_operation")
+                native = self.native_runs.for_run(
+                    caller, command.queue, scope, command.run_id or ""
+                )
+                if native is not None:
+                    return self.native_runs.logs(
+                        caller,
+                        command.queue,
+                        scope,
+                        native,
+                        cursor=command.cursor,
+                        limit=command.limit,
+                    )
+                # Legacy/source Runs have no canonical retained RCC log objects.
+                # Still validate the exact Run scope and live read grant before
+                # returning an empty log page.
+                self._run_view(caller, command.queue, scope, command.run_id or "")
+                return LogPage(
+                    run_id=command.run_id or "",
+                    server_time_ms=str(_now(self.db)),
+                )
         raise ManagedError("unsupported_operation")
 
     def _items_page(
@@ -686,6 +712,7 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
         run = _one(self.db, Run, pin.run_id)
         snapshot = self.reviews.outputs._pinned(pin)
         try:
+            self.reviews.outputs._authorize(caller.actor, snapshot, "read")
             worker_input = WorkerInput.model_validate_json(run.inputs)
             if (
                 worker_input.proposal != proposal
@@ -695,10 +722,13 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
                 or snapshot.canvas_application != proposal.binding.scope.application
             ):
                 raise ValueError("worker Run differs from reviewed Work Item")
-            self.reviews.outputs._authorize(caller.actor, snapshot, "read")
         except AccessDenied:
             raise
         except Exception:
+            if snapshot.capability_authority == "package-revision":
+                # Native reviewed Runs use the same deterministic Work Item key;
+                # their retained inputs are validated by NativeRunProjection.
+                return None
             raise ManagedError("storage_unavailable") from None
         return pin, run, snapshot, worker_input
 
@@ -711,11 +741,21 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
     ) -> ItemView:
         review, proposal, payload = self._review_for_item(caller, queue, scope, row)
         snapshot = self._source_snapshot(caller, queue, proposal)
-        execution = self.reviews.execution(caller.actor, scope, proposal)
         run_ids: tuple[str, ...] = ()
         associated = self._worker_run(caller, queue, proposal, row.id)
+        native = self.native_runs.for_item(caller, queue, scope, row)
+        if associated is not None and native is not None:
+            raise ManagedError("storage_unavailable")
         if associated is not None:
             run_ids = (associated[1].id,)
+            execution = self.reviews.execution(caller.actor, scope, proposal)
+            execution_phase = getattr(execution, "phase", "unknown")
+        elif native is not None:
+            run_ids = (native.run.id,)
+            execution_phase = native.phase
+        else:
+            execution = self.reviews.execution(caller.actor, scope, proposal)
+            execution_phase = getattr(execution, "phase", "unknown")
         try:
             digest = payload_fingerprint(payload)
         except Exception:
@@ -748,7 +788,7 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
             queue_state=_QUEUE_STATE_ADAPTER.validate_python(
                 "DONE" if row.state == State.DONE.value else row.state
             ),
-            business_state=self._business_state(row, review, execution),
+            business_state=self._business_state(row, review, execution_phase),
             payload=payload,
             protected_input_digest=digest,
             snapshot=snapshot,
@@ -772,7 +812,7 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
             return "business_failed"
         if review.state == "cancelled":
             return "cancelled"
-        phase = getattr(execution, "phase", "unknown")
+        phase = getattr(execution, "phase", execution)
         if row.state == State.PENDING.value:
             return "ready"
         if row.state == State.IN_PROGRESS.value:
@@ -807,12 +847,16 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
         scope: CanvasResultScope,
         run_id: str,
     ) -> RunView:
-        if not self._run_belongs_to_scope(caller, queue, scope, run_id):
-            raise ManagedError("not_found")
-        pin = _one(self.db, RunPin, run_id)
-        snapshot = self.reviews.outputs._pinned(pin)
-        self.reviews.outputs._authorize(caller.actor, snapshot, "read")
-        run = _one(self.db, Run, run_id)
+        native = self.native_runs.for_run(caller, queue, scope, run_id)
+        if native is not None:
+            pin, snapshot, run = native.pin, native.snapshot, native.run
+        else:
+            if not self._run_belongs_to_scope(caller, queue, scope, run_id):
+                raise ManagedError("not_found")
+            pin = _one(self.db, RunPin, run_id)
+            snapshot = self.reviews.outputs._pinned(pin)
+            self.reviews.outputs._authorize(caller.actor, snapshot, "read")
+            run = _one(self.db, Run, run_id)
         state = {
             RunStatus.NOT_RUN: "pending",
             RunStatus.RUNNING: "running",
@@ -909,14 +953,16 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
             receipt = self.reviews.status(caller.actor, scope, proposal)
             run_ids.add(row.run_id)
             if receipt.work_item_id:
+                queue = self._queue_ref(scope)
+                item = self._item_row(queue, receipt.work_item_id)
                 associated = self._worker_run(
-                    caller,
-                    self._queue_ref(scope),
-                    proposal,
-                    receipt.work_item_id,
+                    caller, queue, proposal, receipt.work_item_id
                 )
                 if associated is not None:
                     run_ids.add(associated[1].id)
+                native = self.native_runs.for_item(caller, queue, scope, item)
+                if native is not None:
+                    run_ids.add(native.run.id)
         return run_ids
 
     def _run_artifacts(

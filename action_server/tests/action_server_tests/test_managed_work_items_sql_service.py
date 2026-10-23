@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import base64
 import sqlite3
+import sys
 from concurrent.futures import ThreadPoolExecutor
 from contextlib import contextmanager
 from pathlib import Path
@@ -20,6 +21,7 @@ from action_server_tests import test_invoice_review as review_fixtures
 from actions.work_items import State
 from actions.work_items._fencing import ClaimRejected, WorkItemClaim
 
+from actions.server.data_queries.review_models import FencedWorkItem, InvoiceReview
 from actions.server.data_queries.invoices import (
     InvoiceLimits,
     InvoiceQuery,
@@ -27,9 +29,7 @@ from actions.server.data_queries.invoices import (
     _Budget,
     _rows,
 )
-from actions.server.data_queries.review_models import FencedWorkItem, InvoiceReview
 from actions.server.deployments.ids import WorkspaceId
-from actions.server.foundry.models import FoundryAudit, FoundryRequest
 from actions.server.managed_work_items.api import ManagedError
 from actions.server.managed_work_items.contracts import (
     Capabilities,
@@ -45,12 +45,14 @@ from actions.server.managed_work_items.contracts import (
     Renew,
 )
 from actions.server.managed_work_items.sql_service import SQLManagedWorkItemsService
-from actions.server.run_outputs.models import RunOutput
+from actions.server.foundry.models import FoundryAudit, FoundryRequest
 from actions.server.run_outputs.service import AccessDenied
+from actions.server.run_outputs.models import RunOutput
 from actions.server.run_outputs.types import Actor
 
 pytestmark = review_fixtures.pytestmark
 reviewed = review_fixtures.reviewed
+pytest_plugins = ["action_server_tests.foundry_fixtures"]
 
 
 class _SQLiteInvoiceProvider:
@@ -187,7 +189,7 @@ def test_capabilities_only_advertise_implemented_operations(reviewed):
     assert Operation.QUEUES in capabilities.operations
     assert Operation.DECIDE in capabilities.operations
     assert Operation.ENQUEUE not in capabilities.operations
-    assert Operation.LOGS not in capabilities.operations
+    assert Operation.LOGS in capabilities.operations
     assert Operation.RETRY not in capabilities.operations
     assert Operation.CLAIM not in capabilities.operations
     assert Operation.COMPLETE not in capabilities.operations
@@ -253,6 +255,200 @@ def test_capabilities_require_read_before_scope_lookup(
     monkeypatch.setattr(service, "_known_scopes", unexpected_scope_lookup)
     with pytest.raises(ManagedError, match="forbidden"):
         service.capabilities(_caller(actor), requested_workspace)
+
+
+def test_native_work_item_run_projects_pinned_run_logs_and_artifacts(
+    reviewed, foundry_package_store
+):
+    import subprocess
+
+    from action_server_tests.test_activated_reviewed_execution import (
+        adapter,
+        release,
+        setup_activated,
+    )
+    from actions.server.run_outputs.types import output_id_from_handle
+
+    case = setup_activated(reviewed, foundry_package_store)
+    # Exercise the same package-aware Run resolver used by the production host.
+    # The generic invoice fixture intentionally has no package schema authority.
+    case.reviews.outputs = case.outputs
+    case.reviews.queries.outputs = case.outputs
+    release(case)
+    case.reviews.decide(case.actor, case.scope, case.proposal, "approve")
+    selected = adapter(case)
+    ticket = selected.dispatch(case.actor, case.scope, "run", case.proposal)
+    owner = selected.resume(case.actor, ticket)
+    db, reviews, actor = case.db, case.reviews, case.actor
+    queue = _queue(reviews, case.scope)
+    policy = _Policy(queue.workspace_id.root)
+    policy.grant(actor, Permission.READ)
+    service = _service(reviewed, policy)
+
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            "import sys; print('captured stdout'); print('captured stderr', file=sys.stderr)",
+        ],
+        check=True,
+        capture_output=True,
+    )
+    output_service = owner.outputs(actor, ticket)
+    artifact_names = [
+        "generated-action-result.json",
+        "rcc-stdout.log",
+        "rcc-stderr.log",
+    ]
+    artifacts = [
+        output_service.stage(
+            ticket.fence,
+            [b'{"ok":true}\n'],
+            name="generated-action-result.json",
+            media_type="application/json",
+            retention_seconds=300,
+        ),
+        output_service.stage(
+            ticket.fence,
+            [completed.stdout],
+            name="rcc-stdout.log",
+            media_type="application/octet-stream",
+            retention_seconds=300,
+        ),
+        output_service.stage(
+            ticket.fence,
+            [completed.stderr],
+            name="rcc-stderr.log",
+            media_type="application/octet-stream",
+            retention_seconds=300,
+        ),
+    ]
+    output_service.publish(
+        actor,
+        ticket.fence,
+        artifacts,
+        {
+            "version": "actions.generated-rcc-execution/v1",
+            "mode": "work-items",
+            "claim": ticket.claim.model_dump(),
+            "publicationFence": ticket.fence.model_dump(),
+        },
+    )
+    item = _run_in_worker_thread(
+        lambda: service.call(
+            _caller(actor),
+            Inspect(operation="items.get", queue=queue, item_id=ticket.claim.item_id),
+        )
+    )["item"]
+    assert item["run_ids"] == [ticket.fence.run_id]
+    assert item["business_state"] == "completed"
+
+    with db.transaction():
+        db.update_by_id(
+            RunOutput,
+            output_id_from_handle(ticket.proposal.binding.handle),
+            {"expires_ms": "0"},
+        )
+
+    run = service.call(
+        _caller(actor),
+        Inspect(operation="runs.get", queue=queue, run_id=ticket.fence.run_id),
+    )["run"]
+    assert run["id"] == ticket.fence.run_id
+    assert run["snapshot"]["deployment"] == queue.deployment.model_dump(mode="json")
+    assert run["state"] == "succeeded"
+    assert run["artifacts"] == []  # READ alone does not grant artifact access.
+
+    logs = _run_in_worker_thread(
+        lambda: service.call(
+            _caller(actor),
+            Inspect(
+                operation="runs.logs", queue=queue, run_id=ticket.fence.run_id, limit=1
+            ),
+        )
+    )
+    assert logs["lines"] == [{"offset": 0, "text": "[stdout] captured stdout"}]
+    assert logs["next_cursor"] == "1"
+    next_logs = service.call(
+        _caller(actor),
+        Inspect(
+            operation="runs.logs",
+            queue=queue,
+            run_id=ticket.fence.run_id,
+            cursor=logs["next_cursor"],
+            limit=1,
+        ),
+    )
+    assert next_logs["lines"] == [{"offset": 1, "text": "[stderr] captured stderr"}]
+    assert next_logs["next_cursor"] is None
+
+    artifact_policy = _Policy(queue.workspace_id.root)
+    artifact_policy.grant(actor, Permission.READ, Permission.ARTIFACT_READ)
+    artifact_service = _service(reviewed, artifact_policy)
+    artifact_run = artifact_service.call(
+        _caller(actor),
+        Inspect(operation="runs.get", queue=queue, run_id=ticket.fence.run_id),
+    )["run"]
+    assert {artifact["handle"] for artifact in artifact_run["artifacts"]} == {
+        artifact.handle for artifact in artifacts
+    }
+    result_ref = next(
+        artifact
+        for name, artifact in zip(artifact_names, artifacts, strict=True)
+        if name == "generated-action-result.json"
+    )
+    result_chunk = artifact_service.call(
+        _caller(actor),
+        Inspect(
+            operation="artifacts.read",
+            queue=queue,
+            artifact_handle=result_ref.handle,
+            limit=100,
+        ),
+    )
+    assert base64.b64decode(result_chunk["data_base64"]) == b'{"ok":true}\n'
+
+
+def test_native_run_read_revocation_precedes_retained_input_validation(
+    reviewed, foundry_package_store, monkeypatch
+):
+    from action_server_tests.test_activated_reviewed_execution import (
+        adapter,
+        release,
+        setup_activated,
+    )
+
+    from actions.server.run_outputs.service import RunOutputControlPlane
+
+    import actions.server.managed_work_items.native_runs as native_runs
+
+    case = setup_activated(reviewed, foundry_package_store)
+    case.reviews.outputs = case.outputs
+    case.reviews.queries.outputs = case.outputs
+    release(case)
+    case.reviews.decide(case.actor, case.scope, case.proposal, "approve")
+    ticket = adapter(case).dispatch(case.actor, case.scope, "run", case.proposal)
+    actor, reviews = case.actor, case.reviews
+    queue = _queue(reviews, case.scope)
+    policy = _Policy(queue.workspace_id.root)
+    policy.grant(actor, Permission.READ)
+    service = _service(reviewed, policy)
+    calls = []
+
+    def record_retained_input_check(run, proposal):
+        calls.append(run.id)
+
+    monkeypatch.setattr(
+        native_runs, "require_reviewed_run_inputs", record_retained_input_check
+    )
+    RunOutputControlPlane(case.db).revoke(actor, queue.deployment)
+
+    with pytest.raises(ManagedError, match="forbidden"):
+        service.call(
+            _caller(actor),
+            Inspect(operation="runs.get", queue=queue, run_id=ticket.fence.run_id),
+        )
+    assert calls == []
 
 
 def test_reviewed_sql_queue_listing_decision_and_restart_receipt(reviewed):
