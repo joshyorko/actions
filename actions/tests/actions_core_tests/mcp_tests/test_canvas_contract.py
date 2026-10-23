@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 
 import pytest
+from pydantic import ValidationError
 
 from actions.canvas_contract import (
     CanvasSpec,
@@ -18,6 +19,24 @@ SCHEMA_PATH = REPOSITORY_ROOT / "docs/contracts/canvas/canvas-spec-v1.schema.jso
 
 def _fixture(name: str) -> bytes:
     return (CONTRACT_DIR / name).read_bytes()
+
+
+def _to_snake_case_document(value: object) -> object:
+    aliases = {
+        "schemaVersion": "schema_version",
+        "bindingIds": "binding_ids",
+        "bindingId": "binding_id",
+        "submitLabel": "submit_label",
+        "rowsKey": "rows_key",
+    }
+    if isinstance(value, dict):
+        return {
+            aliases.get(key, key): _to_snake_case_document(child)
+            for key, child in value.items()
+        }
+    if isinstance(value, list):
+        return [_to_snake_case_document(child) for child in value]
+    return value
 
 
 def test_semantic_fixture_round_trips_as_immutable_canonical_json():
@@ -39,6 +58,45 @@ def test_semantic_fixture_round_trips_as_immutable_canonical_json():
         spec.title = "changed"
     with pytest.raises(AttributeError):
         spec.binding_ids.append("another")
+
+    python_document = _to_snake_case_document(json.loads(raw))
+    constructed = CanvasSpec.from_python(python_document)
+    assert constructed.title == "Search records"
+
+
+@pytest.mark.parametrize(
+    ("validator", "takes_json_text"),
+    [(CanvasSpec.from_json, True), (validate_canvas_spec, False)],
+)
+def test_public_validators_accept_camel_case_and_reject_snake_case_json(
+    validator, takes_json_text
+):
+    document = json.loads(_fixture("canvas-spec-v1.fixture.json"))
+    valid_input = json.dumps(document) if takes_json_text else document
+    assert validator(valid_input).title == "Search records"
+    assert CanvasSpec.model_validate(document).title == "Search records"
+
+    snake_case_document = _to_snake_case_document(document)
+    invalid_input = (
+        json.dumps(snake_case_document) if takes_json_text else snake_case_document
+    )
+    with pytest.raises(CanvasSpecValidationError):
+        validator(invalid_input)
+
+    with pytest.raises(ValidationError):
+        CanvasSpec.model_validate(snake_case_document)
+
+
+def test_empty_visibility_round_trips_without_defaulting_to_any_audience():
+    document = json.loads(_fixture("canvas-spec-v1.fixture.json"))
+    document["visibility"] = []
+
+    spec = CanvasSpec.from_json(json.dumps(document))
+    validated_spec = validate_canvas_spec(document)
+
+    assert spec.visibility == ()
+    assert validated_spec.visibility == ()
+    assert json.loads(spec.to_json())["visibility"] == []
 
 
 def test_checked_in_json_schema_declares_v1_semantics_and_bounds():

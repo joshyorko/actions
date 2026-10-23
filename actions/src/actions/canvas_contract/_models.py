@@ -26,9 +26,10 @@ class _CanvasModel(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
         frozen=True,
-        populate_by_name=True,
         revalidate_instances="always",
         strict=True,
+        validate_by_alias=True,
+        validate_by_name=False,
     )
 
 
@@ -135,9 +136,10 @@ class CanvasSpec(_CanvasModel):
         title="CanvasSpec",
         extra="forbid",
         frozen=True,
-        populate_by_name=True,
         revalidate_instances="always",
         strict=True,
+        validate_by_alias=True,
+        validate_by_name=False,
     )
 
     schema_version: Literal[SCHEMA_VERSION] = Field(alias="schemaVersion")
@@ -240,6 +242,16 @@ class CanvasSpec(_CanvasModel):
             raise CanvasSpecValidationError(f"invalid CanvasSpec JSON: {exc}") from exc
         return validate_canvas_spec(document)
 
+    @classmethod
+    def from_python(cls, values: object) -> CanvasSpec:
+        """Build from Python field names while keeping JSON validation alias-only."""
+        try:
+            return cls.model_validate(values, by_alias=False, by_name=True)
+        except (ValidationError, TypeError, ValueError, RecursionError) as exc:
+            raise CanvasSpecValidationError(
+                f"invalid CanvasSpec Python values: {exc}"
+            ) from exc
+
     def to_json(self) -> str:
         """Return canonical UTF-8 JSON bytes represented as a string."""
         return json.dumps(
@@ -252,9 +264,9 @@ class CanvasSpec(_CanvasModel):
 
 
 def validate_canvas_spec(document: object) -> CanvasSpec:
-    """Validate Python input using the same frozen v1 model as JSON input."""
+    """Validate a public CanvasSpec document using only its JSON property names."""
     try:
-        spec = CanvasSpec.model_validate(document)
+        spec = CanvasSpec.model_validate(document, by_alias=True, by_name=False)
     except (ValidationError, TypeError, ValueError, RecursionError) as exc:
         if isinstance(exc, CanvasSpecValidationError):
             raise
