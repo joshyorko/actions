@@ -331,3 +331,26 @@ genuine RCC build/import/test-to-Package admission against both owned SQL
 providers. Its strict `package_compiler` selection rejects skipped cases.
 That receipt is a cache precondition, not a replacement for generated-code
 execution or a claim that RCC is a malicious-code sandbox.
+
+Normal Runtime Canvas wiring passes the same facade through
+`start_server` -> `_ActionRoutes` -> `McpServerSetupHelper`; constructing the
+last helper only in a test host does not qualify the installed product. The
+canonical frontend producer embeds `canvas.html` beside the Runtime's
+`index.html`, including debug builds. Native bootstrap requires the MCP Apps
+artifact marker and the existing authenticated Runtime owner key; missing
+assets/auth or an unsupported private filesystem provider stay unavailable.
+Never substitute the admin HTML or a fixture to make discovery look healthy.
+
+The first authenticated native bootstrap records its nonsecret Actor/Workspace
+and initial owner policy in the common SQL request/audit/grant records under
+the existing installation lock. Restart reuses that receipt and never restores
+deleted grants. Exact bearer verification supplies the model audience; arbitrary
+audience/Workspace/principal headers and duplicate Authorization headers grant
+nothing. This owner-key mapping is not a multi-user identity adapter or an app
+audience grant. Generated execution profiles and app interactions still require
+their real, separately admitted services.
+
+Startup preserves Runs with common RunPin admission. The legacy blanket
+restart cancellation policy applies only to unfenced process Runs. A restart
+does not prove a native Attempt had no effects, and must not erase its retained
+claim, launch, result or reconciliation evidence.

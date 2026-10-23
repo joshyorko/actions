@@ -34,6 +34,17 @@ if typing.TYPE_CHECKING:
 log = logging.getLogger(__name__)
 
 
+def _unfinished_legacy_runs(db):
+    """Preserve admitted Runs for explicit fenced recovery after restart."""
+    from ._models import Run, RunStatus
+
+    return db.all(
+        Run,
+        where="status IN (?, ?) AND NOT EXISTS (SELECT 1 FROM run_pin p WHERE p.run_id=run.id)",
+        values=[RunStatus.NOT_RUN, RunStatus.RUNNING],
+    )
+
+
 def _add_skip_lint(parser, defaults):
     parser.add_argument(
         "--skip-lint",
@@ -945,7 +956,7 @@ def _command_requiring_datadir(
     )
     from actions.server.migrations import MigrationStatus
 
-    from ._models import Run, RunStatus, run_status_to_str
+    from ._models import RunStatus, run_status_to_str
     from ._runs_state_cache import use_runs_state_ctx
 
     settings: "Settings" = setup_info.settings
@@ -1080,15 +1091,10 @@ information from this datadir.
                     if code != 0:
                         return code
 
-                # Ok, we're starting the server. At this point, if there are any
-                # runs in the `not_run` state, or in the `running` state, we should
-                # mark them as cancelled.
-
-                runs_to_cancel = db.all(
-                    Run,
-                    where="status IN (?, ?)",
-                    values=[RunStatus.NOT_RUN, RunStatus.RUNNING],
-                )
+                # Legacy process runs retain their historical restart policy.
+                # Admitted Runs retain their Attempt, launch and effect evidence;
+                # a process restart proves neither cancellation nor no effect.
+                runs_to_cancel = _unfinished_legacy_runs(db)
                 if runs_to_cancel:
                     with db.transaction():
                         for run in runs_to_cancel:

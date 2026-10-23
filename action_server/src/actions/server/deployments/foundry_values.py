@@ -397,24 +397,45 @@ class ResolvedDeploymentExecution(_FrozenValue):
 class PackageCapabilityDeclaration(Protocol):
     """Read-only projection of one capability in a compiler-owned manifest."""
 
-    ref: CapabilityRef
-    schema_digest: str
-    runtime_plans: Sequence[RuntimePlanRef]
-    binding_requirements: Sequence[BindingRequirementRef]
+    @property
+    def ref(self) -> CapabilityRef:
+        ...
+
+    @property
+    def schema_digest(self) -> str:
+        ...
+
+    @property
+    def runtime_plans(self) -> Sequence[RuntimePlanRef]:
+        ...
+
+    @property
+    def binding_requirements(self) -> Sequence[BindingRequirementRef]:
+        ...
 
 
 class PackageRuntimePlanDeclaration(Protocol):
     """Read-only projection of a declared Package Runtime Plan."""
 
-    ref: RuntimePlanRef
-    runtime_kind: str
-    capabilities: Sequence[CapabilityRef]
+    @property
+    def ref(self) -> RuntimePlanRef:
+        ...
+
+    @property
+    def runtime_kind(self) -> str:
+        ...
+
+    @property
+    def capabilities(self) -> Sequence[CapabilityRef]:
+        ...
 
 
 class PackageBindingRequirementDeclaration(Protocol):
     """Read-only projection of a logical Package binding requirement."""
 
-    ref: BindingRequirementRef
+    @property
+    def ref(self) -> BindingRequirementRef:
+        ...
 
 
 class PackageRevisionPort(Protocol):
