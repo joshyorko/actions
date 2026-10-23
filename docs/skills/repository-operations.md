@@ -4912,3 +4912,10 @@ The harness's optional real-Runtime case being skipped is not bridge-to-domain
 or authenticated-client acceptance. Inject domain dispatch/status/artifact
 adapters into the semantic renderer; its logical binding labels confer no
 Runtime capability or authorization.
+
+Runtime action import probes must parse the complete PEP 440 Core version and
+compare its numeric release tuple; splitting dotted components with `int`
+rejects provisional Core versions before action discovery. The existing
+vendored version parser handles alpha, release-candidate and dev/local suffixes
+and still rejects malformed probe output. Package metadata and no-managed-env
+import tests exercise the actual child interpreter boundary.
