@@ -18,6 +18,12 @@ import {
     createInvoiceAdapter,
     parseInvoicePage,
 } from "./query-results/invoice-bridge";
+import {
+    parseCanvasViewMetadata,
+    readOnlyCanvasAdapters,
+} from "./semantic-renderer/mcp-bridge";
+import type { CanvasViewMetadata } from "./semantic-renderer/mcp-bridge";
+import { SemanticCanvasRenderer } from "./semantic-renderer";
 
 const FIXTURE_QUERY_TOOL = "canvas_fixture_search";
 const FIXTURE_ARTIFACT_STATUS_TOOL = "canvas_fixture_artifact_status";
@@ -162,6 +168,10 @@ export function McpCanvasView() {
     const [hostContext, setHostContext] = useState<DisplayHostContext | null>(
         null,
     );
+    const [canvasView, setCanvasView] = useState<CanvasViewMetadata | null>(
+        null,
+    );
+    const [canvasViewError, setCanvasViewError] = useState(false);
     const inputRevision = useRef(0);
 
     const { app, isConnected, error } = useApp({
@@ -178,6 +188,8 @@ export function McpCanvasView() {
                             FIXTURE_HANDLE_PATTERN.test(toolArguments.handle),
                     );
                     inputRevision.current += 1;
+                    setCanvasView(null);
+                    setCanvasViewError(false);
                     setHostInput({ revision: inputRevision.current, query });
                     setHostInputState(query === null ? "ignored" : "accepted");
                     setHostResultState("none");
@@ -187,6 +199,8 @@ export function McpCanvasView() {
             createdApp.addEventListener("toolresult", (result) => {
                 const invoicePage = result._meta?.["actions.invoicePage"];
                 if (invoicePage !== undefined) {
+                    setCanvasView(null);
+                    setCanvasViewError(false);
                     setInvoiceMode(true);
                     try {
                         const parsed = parseInvoicePage(invoicePage);
@@ -206,8 +220,37 @@ export function McpCanvasView() {
                         setHostResultState("error");
                     }
                 } else {
-                    setHostResultState(result.isError ? "error" : "success");
-                    if (result.isError)
+                    const metadata = result._meta?.["actions.canvas"];
+                    if (metadata !== undefined) {
+                        setInvoiceMode(false);
+                        setHostResultState(
+                            result.isError ? "error" : "success",
+                        );
+                        setHostResult({
+                            revision: ++inputRevision.current,
+                            result: null,
+                        });
+                        if (result.isError) {
+                            setCanvasView(null);
+                            setCanvasViewError(true);
+                        } else {
+                            try {
+                                setCanvasView(
+                                    parseCanvasViewMetadata(metadata),
+                                );
+                                setCanvasViewError(false);
+                            } catch {
+                                setCanvasView(null);
+                                setCanvasViewError(true);
+                                setHostResultState("error");
+                            }
+                        }
+                    } else {
+                        setHostResultState(
+                            result.isError ? "error" : "success",
+                        );
+                    }
+                    if (result.isError && metadata === undefined)
                         setHostResult({
                             revision: ++inputRevision.current,
                             result: null,
@@ -223,6 +266,9 @@ export function McpCanvasView() {
     useEffect(() => {
         if (isConnected && app) {
             setHostContext(displayContext(app.getHostContext()));
+        } else {
+            setCanvasView(null);
+            setCanvasViewError(false);
         }
     }, [app, isConnected]);
 
@@ -278,7 +324,32 @@ export function McpCanvasView() {
                     </div>
                 </dl>
             </section>
-            {adapter ? (
+            {canvasView ? (
+                <section aria-label="Semantic Canvas app">
+                    {canvasView.spec.visibility.includes("app") ? (
+                        <p role="status">
+                            This app is displayed read-only; interactive actions
+                            are disabled.
+                        </p>
+                    ) : null}
+                    <SemanticCanvasRenderer
+                        spec={canvasView.spec}
+                        revision={
+                            canvasView.preview
+                                ? canvasView.revision
+                                : canvasView.revisionId
+                        }
+                        scopeKey={canvasView.scopeKey}
+                        preview={canvasView.preview}
+                        viewer="app"
+                        adapters={readOnlyCanvasAdapters}
+                    />
+                </section>
+            ) : canvasViewError ? (
+                <main aria-label="Canvas app unavailable">
+                    <p role="alert">Canvas content could not be validated.</p>
+                </main>
+            ) : adapter ? (
                 <QueryResultsView
                     adapter={adapter}
                     hostInput={hostInput}

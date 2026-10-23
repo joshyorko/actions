@@ -346,3 +346,25 @@ The SQL authoring adapter must stage full immutable Deployment revisions in
 only through the one `FoundryDeploymentHead` CAS with receipt/audit. Staging is
 not execution authorization. No authoring SQL adapter or joined first-boot
 execution is claimed by the package-less storage/component tests alone.
+
+### Official bridge semantic projection
+
+The packaged Canvas view reads authored UI from the official App `toolresult`
+event's `_meta["actions.canvas"]`, not from the model-visible
+`structuredContent` summary. The closed app envelope carries application and
+revision identity, active status, the canonical spec and exact capability/Package
+bindings; a preview envelope carries only `spec` and `preview: true`. The view
+validates the v1 limits and binding scope before rendering through the existing
+`SemanticCanvasRenderer`. Changing the application, revision or binding scope
+remounts renderer state. Existing invoice and query projections remain separate
+supported envelopes on the same bridge.
+
+This adapter currently supplies read-only semantic adapters: opening a view or
+preview does not dispatch a capability, poll status or resolve an artifact. Forms
+are unavailable or disabled until trusted app operations are wired. App audience
+projection is enforced by the renderer; UI visibility never grants server access.
+The official tool-result notification has no correlation identifier in this
+adapter, so it cannot prove ordering of delayed host notifications. Do not enable
+mutating adapters on an assumed notification order. Bridge component tests prove
+metadata parsing, revision remount, audience filtering, no mount calls and legacy
+projection preservation; they do not establish installed-host or ChatGPT proof.
