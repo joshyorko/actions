@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "actions.canvas-spec/v2",
+  "title": "Search records",
+  "visibility": ["model", "app"],
+  "bindingIds": [],
+  "root": {
+    "type": "text",
+    "id": "intro",
+    "text": "Search the existing records."
+  }
+}

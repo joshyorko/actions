@@ -1,0 +1,196 @@
+{
+  "schema": "actions.cloud-retained-input-recovery/v1",
+  "stage": "SOURCE_AND_INSTALLED_QUALIFIED_DEFAULT_PROFILE_AND_OFFICIAL_VIEW_PENDING",
+  "source": "8eee94fed5c9c5734bfc1a73454c91cf64dfa5df",
+  "versions": {
+    "runtime": "1.1.0a20",
+    "core": "1.1.0a2",
+    "sdk": "0.5.0a2",
+    "rcc": "18.19.3"
+  },
+  "prior_qualified_checkpoint": "2d2aec5cf18b5f9b59fbf0acbb3d9d06919f55c6",
+  "change": "Admitted canonical bounded value:str input must match the exact approved result seal without reopening an expired query artifact. Live authorization, immutable admission and both fences remain required; new admission still reads the live sealed source.",
+  "reproduction": {
+    "installed_a19_clone_receipt": "/tmp/actions-327-owned-retained-input-98ed6739-1600-4e11-ba64-49a706c35a9d/receipt.json",
+    "original_fixture_unchanged": true,
+    "no_relaunch": true,
+    "raw_log": "/workspace/actions-327-state/evidence/foundry-integration/activated-retained-input-expiry-red-20261023.log",
+    "source_red": "6failed2passed24skipped; two actual expiry failures plus four overly specific error-class expectations",
+    "first_green_attempt": "4failed20passed48skipped; altered inputs were already AccessDenied by immutable admission. Corrected tests assert that guard and independently require FenceRejected from the seal helper.",
+    "local_final": "24passed48unconfigured-provider skips"
+  },
+  "gateway": "Doctor/Bootstrap/ToolkitTest179PASS",
+  "static": "Configured invoke lint/typecheck450PASS; Markdown linter unavailable",
+  "full_source": {
+    "receipt": "/workspace/actions-327-state/evidence/retained-input-a20-full-20261023/cd2113d5-1dbc-4338-af9f-cae10080e9b4/receipt.json",
+    "status": "PASS",
+    "counts": {
+      "managed": {
+        "tests": 56,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "foundry_storage": {
+        "tests": 243,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "components": {
+        "tests": 164,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "invoice": {
+        "tests": 129,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "worker": {
+        "tests": 134,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "package_compiler": {
+        "tests": 14,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "portable": {
+        "tests": 2244,
+        "skipped": 13,
+        "failures": 0,
+        "errors": 0
+      }
+    },
+    "portable": "2231passed13skipped282deselected16warnings",
+    "skips": [
+      {
+        "case": "tests.action_server_tests.common_tests.test_uris::test_normalize_uri",
+        "reason": "Windows only"
+      },
+      {
+        "case": "tests.action_server_tests.common_tests.test_uris::test_win_to_fs_path[file:///c:/far/boo-c:\\\\far\\\\boo]",
+        "reason": "Windows only"
+      },
+      {
+        "case": "tests.action_server_tests.common_tests.test_uris::test_win_to_fs_path[file:///C:/far/boo-c:\\\\far\\\\boo]",
+        "reason": "Windows only"
+      },
+      {
+        "case": "tests.action_server_tests.common_tests.test_uris::test_win_to_fs_path[file:///C:/far/space%20%3Fboo-c:\\\\far\\\\space ?boo]",
+        "reason": "Windows only"
+      },
+      {
+        "case": "tests.action_server_tests.common_tests.test_uris::test_win_from_fs_path[c:\\\\far\\\\boo-file:///c:/far/boo]",
+        "reason": "Windows only"
+      },
+      {
+        "case": "tests.action_server_tests.common_tests.test_uris::test_win_from_fs_path[C:\\\\far\\\\space ?boo-file:///c:/far/space%20%3Fboo]",
+        "reason": "Windows only"
+      },
+      {
+        "case": "tests.action_server_tests.test_artifact_binding_lock::test_windows_binding_does_not_import_fcntl",
+        "reason": "Requires native Windows locking"
+      },
+      {
+        "case": "tests.action_server_tests.test_artifact_storage::test_storage_handles_mixed_resolved_drive_prefixes",
+        "reason": "native Windows path resolution"
+      },
+      {
+        "case": "tests.action_server_tests.test_package::test_package_upload",
+        "reason": "Skip package upload test"
+      },
+      {
+        "case": "tests.action_server_tests.test_package::test_package_status",
+        "reason": "Skip package upload test"
+      },
+      {
+        "case": "tests.action_server_tests.test_package::test_package_set_changelog",
+        "reason": "Skip package upload test"
+      },
+      {
+        "case": "tests.action_server_tests.test_rcc_runtime_adapter::test_real_rcc_artifact_action_vertical",
+        "reason": "set ACTIONS_REAL_RCC_ARTIFACT_TEST=1"
+      },
+      {
+        "case": "tests.action_server_tests.test_robot_run_inputs::test_pinned_rcc_executes_selected_task_with_declared_inputs",
+        "reason": "set ACTIONS_ROBOT_INPUT_RCC to pinned RCC18.19.3 for actual task-input acceptance"
+      }
+    ],
+    "committed_input_hashes_match": true,
+    "cleanup": "PASS"
+  },
+  "artifact": {
+    "root": "/tmp/actions-327-a20-8eee94fe",
+    "payload": {
+      "actions_runtime": {
+        "wheel": "actions_runtime-1.1.0a20-cp312-cp312-linux_x86_64.whl",
+        "sha256": "ce78cf770df6d00ee8495d21f50af6d0a7b495820ef1b18ed2698b9353d362dd",
+        "installed_wheel_and_source_payload_matches": 262
+      },
+      "actions_core": {
+        "wheel": "actions_core-1.1.0a2-py3-none-any.whl",
+        "sha256": "ca512d59e1f94d687cb637255b2622980d715528de720ac5da8105836315c19f",
+        "installed_wheel_and_source_payload_matches": 52
+      },
+      "actions_work_items": {
+        "wheel": "actions_work_items-0.5.0a2-py3-none-any.whl",
+        "sha256": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb",
+        "installed_wheel_and_source_payload_matches": 24
+      }
+    },
+    "ordinary_cli_mcp_receipt": "/tmp/actions-327-a20-8eee94fe/acceptance/receipt.json",
+    "socket_replay_receipt": "/tmp/actions-327-a20-8eee94fe/socket-replay/receipt.json",
+    "socket_scope": "actual MCP2 HTTP clients with owned model/app authentication contexts replay an already-completed source-expired fixture across two real server processes. No new RCC launch or ordinary bootstrap grant is inferred.",
+    "installed115": {
+      "status": "PASS",
+      "receipt": "/tmp/actions-327-a20-8eee94fe/qa-evidence/receipt.json",
+      "counts": {
+        "tests": 115,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "cleanup": "PASS",
+      "warnings": "12 harness warnings: imported anyio rewrite and unregistered PostgreSQL marker; no skipped provider cases",
+      "scope": "40 activation +28 transport denials +3 scoped caller +8 real generated RCC +32 retained-input SQL +4 real installed managed completion"
+    },
+    "provenance": "fresh noneditable consumer; only test helpers added to sys.path; all engine modules under consumer prefix. 74 local wheels used; no public publication, clean-OS or air-gap proof."
+  },
+  "cleanup": [
+    "/workspace/actions-327-state/evidence/foundry-integration/sdk2-owned-view-cleanup-c79c0d1f/receipt.json",
+    "/workspace/actions-327-state/evidence/foundry-integration/a20-owned-task-input-view-cleanup/receipt.json"
+  ],
+  "commands": [
+    "bash /workspace/actions-327-state/run-prepared python action_server/scripts/verify_invoice_queries.py --worker --worker-runtime /tmp/actions-327-a19-sdk2-worker/c79c0d1f-6e5d-4594-bf9d-3a90a5961bf3/worker-runtime.json --compiler-receipt /workspace/actions-327-state/compiler-acceptance/3e744f96-749a-47e5-84b9-7e7f297bc8b9/prepared.json --full --evidence-dir /workspace/actions-327-state/evidence/retained-input-a20-full-20261023",
+    "bash /workspace/actions-327-state/run-prepared python /tmp/actions-327-a20-8eee94fe/run_owned_worker.py",
+    "bash /workspace/actions-327-state/run-prepared /tmp/actions-327-a20-8eee94fe/consumer/bin/python -I /tmp/actions-327-a20-8eee94fe/verify_installed.py",
+    "bash /workspace/actions-327-state/run-prepared /tmp/actions-327-a20-8eee94fe/consumer/bin/python -I /tmp/actions-327-a20-socket-replay.py"
+  ],
+  "remaining": [
+    "Mount supported explicit profiles and ordinary app-session scope; existing PR331 profile and PR333 native projection/log files remain reserved with unchanged remote heads.",
+    "Official View actual human review, dispatch, scoped artifact, reconnect and second full interactive app remain unqualified. SDK fixture execution is distinct.",
+    "Managed enqueue/retry/logs/default profile/VSIX remain mandatory current-release work, never inferred supported from unadvertised operations.",
+    "Full data/Knowledge/CSV-Parquet, rich renderer, long-job/task/effect/retention/restore/compatibility/distribution/security and exact-head hosted gates remain unwaived.",
+    "Codex prior token refresh401 no auth retry; ChatGPTE1 NEEDS_OPERATOR, Dakota STOP; celld NO-GO; publisher332 owner protection/token review pending."
+  ],
+  "rollback": "No DDL, queue-format or SDK change. Preserve admitted input/Review/WorkItem/Run/Attempt, journal, audit and objects. Disabling the optional projection allows code rollback, but a19 restores the expired-source replay failure. This fix does not resurrect source artifacts, grant access or relaunch uncertainty. Source20 changed bytes use a distinct unpublished candidate; a19 artifacts remain unchanged.",
+  "documentation": {
+    "canonical": "docs/skills/work-items.md",
+    "delta": "Distinguish source artifact lifetime from admitted input seal. Pure helper grants no authority; authorization/fences remain live, new admission still requires source, and uncertainty cannot relaunch.",
+    "evidence": "installed19 clone reproduction; real SQL243/RCC14/worker134/full2231; installed115 with zero skips and actual socket replay/restart"
+  },
+  "upstream_disposition": "none; local Runtime recovery defect. Existing RCC upstream report remains draft only.",
+  "retained_resources": {
+    "consumer": "/tmp/actions-327-a20-8eee94fe/consumer",
+    "sdk_worker_config": "/tmp/actions-327-a19-sdk2-worker/c79c0d1f-6e5d-4594-bf9d-3a90a5961bf3/worker-runtime.json",
+    "compiler_prepared": "/workspace/actions-327-state/compiler-acceptance/3e744f96-749a-47e5-84b9-7e7f297bc8b9/prepared.json",
+    "cleanup": "All owned servers/containers stopped; no active gate remains after final process check. Materialized fixture views cleaned only by supported exact RCC operations; immutable evidence/cache retained."
+  }
+}

@@ -10,9 +10,26 @@ import {
     type ArtifactHandle,
     type ArtifactStatus,
     type HostToolInput,
+    type HostToolResult,
     type QueryActionResult,
     type QueryResultsAdapter,
 } from "./query-results/QueryResultsView";
+import {
+    createInvoiceAdapter,
+    parseInvoicePage,
+} from "./query-results/invoice-bridge";
+import {
+    parseCanvasViewMetadata,
+    readOnlyCanvasAdapters,
+} from "./semantic-renderer/mcp-bridge";
+import type { CanvasViewMetadata } from "./semantic-renderer/mcp-bridge";
+import { SemanticCanvasRenderer } from "./semantic-renderer";
+import {
+    createReviewedExecutionAdapter,
+    parseReviewedExecution,
+} from "./semantic-renderer/reviewed-execution";
+import type { ReviewedExecutionContext } from "./semantic-renderer/reviewed-execution";
+import { InvoiceReviewPanel } from "./query-results/InvoiceReviewPanel";
 
 const FIXTURE_QUERY_TOOL = "canvas_fixture_search";
 const FIXTURE_ARTIFACT_STATUS_TOOL = "canvas_fixture_artifact_status";
@@ -148,6 +165,8 @@ function displayContext(
 
 export function McpCanvasView() {
     const [hostInput, setHostInput] = useState<HostToolInput | null>(null);
+    const [hostResult, setHostResult] = useState<HostToolResult | null>(null);
+    const [invoiceMode, setInvoiceMode] = useState(false);
     const [hostInputState, setHostInputState] =
         useState<HostInputState>("none");
     const [hostResultState, setHostResultState] =
@@ -155,6 +174,12 @@ export function McpCanvasView() {
     const [hostContext, setHostContext] = useState<DisplayHostContext | null>(
         null,
     );
+    const [canvasView, setCanvasView] = useState<CanvasViewMetadata | null>(
+        null,
+    );
+    const [canvasViewError, setCanvasViewError] = useState(false);
+    const [reviewedExecution, setReviewedExecution] =
+        useState<ReviewedExecutionContext | null>(null);
     const inputRevision = useRef(0);
 
     const { app, isConnected, error } = useApp({
@@ -165,14 +190,97 @@ export function McpCanvasView() {
                 "toolinput",
                 ({ arguments: toolArguments }) => {
                     const query = parseHostQuery(toolArguments);
+                    setInvoiceMode(
+                        isRecord(toolArguments) &&
+                            typeof toolArguments.handle === "string" &&
+                            FIXTURE_HANDLE_PATTERN.test(toolArguments.handle),
+                    );
                     inputRevision.current += 1;
+                    setCanvasView(null);
+                    setReviewedExecution(null);
+                    setCanvasViewError(false);
                     setHostInput({ revision: inputRevision.current, query });
                     setHostInputState(query === null ? "ignored" : "accepted");
                     setHostResultState("none");
+                    setHostResult(null);
                 },
             );
             createdApp.addEventListener("toolresult", (result) => {
-                setHostResultState(result.isError ? "error" : "success");
+                setReviewedExecution(null);
+                const invoicePage = result._meta?.["actions.invoicePage"];
+                if (invoicePage !== undefined) {
+                    setCanvasView(null);
+                    setCanvasViewError(false);
+                    setInvoiceMode(true);
+                    try {
+                        const parsed = parseInvoicePage(invoicePage);
+                        inputRevision.current += 1;
+                        setHostResult({
+                            revision: inputRevision.current,
+                            result: parsed,
+                        });
+                        setHostResultState(
+                            result.isError ? "error" : "success",
+                        );
+                    } catch {
+                        setHostResult({
+                            revision: ++inputRevision.current,
+                            result: null,
+                        });
+                        setHostResultState("error");
+                    }
+                } else {
+                    const metadata = result._meta?.["actions.canvas"];
+                    if (metadata !== undefined) {
+                        setInvoiceMode(false);
+                        setHostResultState(
+                            result.isError ? "error" : "success",
+                        );
+                        setHostResult({
+                            revision: ++inputRevision.current,
+                            result: null,
+                        });
+                        if (result.isError) {
+                            setCanvasView(null);
+                            setCanvasViewError(true);
+                        } else {
+                            try {
+                                const parsed =
+                                    parseCanvasViewMetadata(metadata);
+                                setCanvasView(parsed);
+                                if (
+                                    !parsed.preview &&
+                                    (result._meta?.["actions.appSession"] !==
+                                        undefined ||
+                                        result._meta?.[
+                                            "actions.reviewedExecution"
+                                        ] !== undefined)
+                                ) {
+                                    setReviewedExecution(
+                                        parseReviewedExecution(
+                                            result._meta ?? {},
+                                            parsed,
+                                        ),
+                                    );
+                                }
+                                setCanvasViewError(false);
+                            } catch {
+                                setCanvasView(null);
+                                setCanvasViewError(true);
+                                setHostResultState("error");
+                            }
+                        }
+                    } else {
+                        setHostResultState(
+                            result.isError ? "error" : "success",
+                        );
+                    }
+                    if (result.isError && metadata === undefined)
+                        setHostResult({
+                            revision: ++inputRevision.current,
+                            result: null,
+                        });
+                }
             });
             createdApp.addEventListener("hostcontextchanged", () => {
                 setHostContext(displayContext(createdApp.getHostContext()));
@@ -183,12 +291,28 @@ export function McpCanvasView() {
     useEffect(() => {
         if (isConnected && app) {
             setHostContext(displayContext(app.getHostContext()));
+        } else {
+            setCanvasView(null);
+            setReviewedExecution(null);
+            setCanvasViewError(false);
         }
     }, [app, isConnected]);
 
     const adapter = useMemo(
-        () => (app && isConnected ? createFixtureAdapter(app) : null),
-        [app, isConnected],
+        () =>
+            app && isConnected
+                ? invoiceMode
+                    ? createInvoiceAdapter(app)
+                    : createFixtureAdapter(app)
+                : null,
+        [app, isConnected, invoiceMode],
+    );
+    const reviewedAdapter = useMemo(
+        () =>
+            app && isConnected && reviewedExecution
+                ? createReviewedExecutionAdapter(app, reviewedExecution)
+                : null,
+        [app, isConnected, reviewedExecution],
     );
 
     return (
@@ -233,8 +357,46 @@ export function McpCanvasView() {
                     </div>
                 </dl>
             </section>
-            {adapter ? (
-                <QueryResultsView adapter={adapter} hostInput={hostInput} />
+            {canvasView ? (
+                <section aria-label="Semantic Canvas app">
+                    {canvasView.spec.visibility.includes("app") ? (
+                        <p role="status">
+                            {reviewedAdapter
+                                ? "Semantic form bindings are read-only. Saved-result review and execution controls are available below."
+                                : "This app is displayed read-only; interactive actions are disabled."}
+                        </p>
+                    ) : null}
+                    <SemanticCanvasRenderer
+                        spec={canvasView.spec}
+                        revision={
+                            canvasView.preview
+                                ? canvasView.revision
+                                : canvasView.revisionId
+                        }
+                        scopeKey={canvasView.scopeKey}
+                        preview={canvasView.preview}
+                        viewer="app"
+                        adapters={readOnlyCanvasAdapters}
+                    />
+                    {reviewedAdapter && reviewedExecution ? (
+                        <InvoiceReviewPanel
+                            key={reviewedExecution.token}
+                            adapter={reviewedAdapter}
+                            handle={reviewedExecution.handle}
+                        />
+                    ) : null}
+                </section>
+            ) : canvasViewError ? (
+                <main aria-label="Canvas app unavailable">
+                    <p role="alert">Canvas content could not be validated.</p>
+                </main>
+            ) : adapter ? (
+                <QueryResultsView
+                    adapter={adapter}
+                    hostInput={hostInput}
+                    hostResult={hostResult}
+                    readOnly={invoiceMode}
+                />
             ) : (
                 <main aria-labelledby="canvas-view-title">
                     <h1 id="canvas-view-title">Canvas View</h1>

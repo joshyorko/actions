@@ -1,0 +1,215 @@
+.semantic-canvas,
+.semantic-form,
+.semantic-table,
+.semantic-status,
+.semantic-artifact {
+    box-sizing: border-box;
+    color: #182230;
+    font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    line-height: 1.5;
+}
+
+.semantic-canvas {
+    display: grid;
+    gap: 1rem;
+    margin: 0 auto;
+    max-width: 64rem;
+    padding: clamp(1rem, 4vw, 2.5rem);
+}
+
+.semantic-canvas__header,
+.semantic-canvas__content,
+.semantic-form {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.semantic-canvas__header h1,
+.semantic-form h2,
+.semantic-canvas__header p {
+    margin: 0;
+}
+
+.semantic-canvas__eyebrow {
+    color: #536477;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.semantic-canvas__metadata {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    margin: 0;
+}
+
+.semantic-canvas__metadata div {
+    display: grid;
+    gap: 0.1rem;
+}
+
+.semantic-canvas__metadata dt {
+    color: #536477;
+    font-size: 0.75rem;
+    font-weight: 650;
+}
+
+.semantic-canvas__metadata dd {
+    margin: 0;
+}
+
+.semantic-canvas__preview {
+    width: fit-content;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    background: #fff4cc;
+    color: #604400;
+    font-size: 0.8125rem;
+    font-weight: 700;
+}
+
+.semantic-canvas__notice,
+.semantic-form,
+.semantic-form__result {
+    min-width: 0;
+    padding: 1rem;
+    border: 1px solid #d5dde7;
+    border-radius: 0.75rem;
+    background: #ffffff;
+}
+
+.semantic-form form {
+    display: grid;
+    gap: 1rem;
+    min-width: 0;
+}
+
+.semantic-form__field {
+    display: grid;
+    gap: 0.4rem;
+}
+
+.semantic-form__field label {
+    font-weight: 650;
+}
+
+.semantic-form__field input {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 2.75rem;
+    padding: 0.65rem 0.75rem;
+    border: 1px solid #718096;
+    border-radius: 0.4rem;
+    color: #182230;
+    background: #ffffff;
+    font: inherit;
+}
+
+.semantic-form input[aria-invalid="true"] {
+    border-color: #a61b1b;
+}
+
+.semantic-form button,
+.semantic-artifact button {
+    justify-self: start;
+    min-height: 2.65rem;
+    padding: 0.55rem 1rem;
+    border: 0;
+    border-radius: 0.4rem;
+    background: #1557a0;
+    color: #ffffff;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.semantic-artifact {
+    display: grid;
+    gap: 0.5rem;
+    justify-items: start;
+}
+
+.semantic-form button:disabled,
+.semantic-artifact button:disabled,
+.semantic-form input:disabled {
+    cursor: wait;
+    opacity: 0.65;
+}
+
+.semantic-form input:focus-visible,
+.semantic-form button:focus-visible,
+.semantic-artifact button:focus-visible,
+.semantic-table__scroll:focus-visible {
+    outline: 3px solid #165dce;
+    outline-offset: 3px;
+}
+
+.semantic-form__field-error,
+.semantic-form__error,
+.semantic-form [role="alert"],
+.semantic-table__error,
+.semantic-status--error {
+    color: #8a1717;
+}
+
+.semantic-form__result {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.semantic-table__scroll {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.semantic-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+}
+
+.semantic-table caption {
+    padding: 0.5rem;
+    font-weight: 700;
+    text-align: left;
+}
+
+.semantic-table th,
+.semantic-table td {
+    padding: 0.65rem 0.75rem;
+    border-bottom: 1px solid #d5dde7;
+    text-align: left;
+    overflow-wrap: anywhere;
+}
+
+.semantic-table thead th {
+    background: #eef3f8;
+}
+
+.semantic-table tbody tr:nth-child(even) {
+    background: #f8fafc;
+}
+
+.semantic-status {
+    margin: 0;
+    padding: 0.75rem 1rem;
+    border-radius: 0.4rem;
+    background: #eef3f8;
+}
+
+.semantic-status--error {
+    background: #fff1f1;
+}
+
+@media (max-width: 42rem) {
+    .semantic-form__field input {
+        min-width: 0;
+    }
+}

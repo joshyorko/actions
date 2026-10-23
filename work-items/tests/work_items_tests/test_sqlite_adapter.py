@@ -444,7 +444,7 @@ def test_migrates_historical_custom_schema_transactionally(tmp_path):
     assert item["updated_at"] is not None
     assert migrated.get_file("legacy-item", "report.txt") == b"legacy"
     with sqlite3.connect(db_path) as conn:
-        assert conn.execute("SELECT MAX(version) FROM schema_version").fetchone()[0] == 5
+        assert conn.execute("SELECT MAX(version) FROM schema_version").fetchone()[0] == 6
     SQLiteAdapter(str(db_path), "test_queue", files_dir=str(files_dir))
 
 
@@ -473,7 +473,7 @@ def test_migrates_current_unversioned_schema_without_losing_data(tmp_path):
     assert migrated.load_payload("existing") == [1, 2]
     assert migrated.reserve_input() == "existing"
     with sqlite3.connect(db_path) as conn:
-        assert conn.execute("SELECT MAX(version) FROM schema_version").fetchone()[0] == 5
+        assert conn.execute("SELECT MAX(version) FROM schema_version").fetchone()[0] == 6
 
 
 def test_recovery_uses_configured_orphan_timeout(tmp_path, monkeypatch):

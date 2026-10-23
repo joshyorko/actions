@@ -30,6 +30,13 @@ def test_legacy_migration_preserves_runs_and_creates_no_synthetic_pins(tmp_path)
             )
             assert cursor.fetchall() == before
         assert database.all(RunPin) == []
+        from actions.server.data_queries.review_models import (
+            FencedWorkItem,
+            InvoiceReview,
+        )
+
+        assert database.all(InvoiceReview) == []
+        assert database.all(FencedWorkItem) == []
         upgraded_schema = database.list_table_and_columns()
         upgraded_indexes = database.list_indexes()
     with create_db(tmp_path / "fresh.db") as fresh:

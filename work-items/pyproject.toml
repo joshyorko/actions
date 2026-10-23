@@ -1,6 +1,6 @@
 [project]
 name = "actions-work-items"
-version = "0.4.4"
+version = "0.5.0a2"
 description = "Robocorp-compatible runtime and FileAdapter with managed local and distributed backends"
 authors = [{name = "Community Contributors"}]
 license = "Apache-2.0"
@@ -27,6 +27,7 @@ Documentation = "https://github.com/joshyorko/actions/tree/community/work-items"
 Issues = "https://github.com/joshyorko/actions/issues"
 
 [project.optional-dependencies]
+postgres = ["psycopg[binary]>=3.2,<4"]
 redis = ["redis>=4.5.0"]
 docdb = ["pymongo>=4.3.0"]
 documentdb = ["pymongo>=4.3.0"]
@@ -57,6 +58,7 @@ python_files = "test_*.py"
 python_functions = "test_*"
 asyncio_mode = "auto"
 markers = [
+    "fenced_postgres_service: requires the owned PostgreSQL fenced coordination gate",
     "redis: contract requiring the Redis backend",
     "integration: backend integration contract",
     "docdb: contract requiring MongoDB or DocumentDB",

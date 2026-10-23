@@ -29,7 +29,10 @@ from actions.server.run_outputs.models import (
 )
 from actions.server.run_outputs.types import (
     Actor,
+    AdmittedActionSchema,
     AttemptFence,
+    CanvasResultScope,
+    CapabilitySchemaPort,
     ExecutionSnapshot,
     OutputRef,
     SealReceipt,
@@ -41,7 +44,7 @@ from actions.server.run_outputs.types import (
 MAX_INPUT_BYTES = 256 * 1024
 MAX_RESULT_BYTES = 1024 * 1024
 MAX_OUTPUTS = 64
-OPERATIONS = frozenset({"execute", "read", "cancel"})
+OPERATIONS = frozenset({"execute", "read", "cancel", "review"})
 T = TypeVar("T")
 
 
@@ -115,7 +118,26 @@ def _snapshot(snapshot: ExecutionSnapshot) -> ExecutionSnapshot:
 
 
 def _admission(snapshot: ExecutionSnapshot) -> tuple[str, str]:
-    canonical = _canonical(snapshot.model_dump(mode="json"), MAX_INPUT_BYTES)
+    payload = snapshot.model_dump(mode="json")
+    # Preserve older snapshots' exact bytes and request fingerprints.
+    if snapshot.data_binding is None:
+        payload.pop("data_binding")
+    if snapshot.canvas_application is None:
+        payload.pop("canvas_application")
+    canonical = _canonical(payload, MAX_INPUT_BYTES)
+    if snapshot.runtime_kind == "invoice/generated-query/v1":
+        if snapshot.canvas_application is None or snapshot.data_binding is None:
+            raise AccessDenied("generated query requires application and source pins")
+        return _key(
+            "actions.generated-invoice-admission/v1",
+            snapshot.workspace_id,
+            snapshot.deployment_id,
+            snapshot.deployment.revision_id.root,
+            _canonical(snapshot.capability.model_dump(mode="json"), MAX_INPUT_BYTES),
+            _canonical(
+                snapshot.canvas_application.model_dump(mode="json"), MAX_INPUT_BYTES
+            ),
+        ), canonical
     return _key(
         "actions.run-admission/v1",
         snapshot.workspace_id,
@@ -133,7 +155,25 @@ def _one(db: Database, cls: type[T], key: str) -> T:
     return rows[0]
 
 
-def _action_identity(db: Database, snapshot: ExecutionSnapshot) -> Action:
+def _action_identity(
+    db: Database,
+    snapshot: ExecutionSnapshot,
+    capabilities: CapabilitySchemaPort | None = None,
+) -> Action | AdmittedActionSchema:
+    if snapshot.capability_authority == "package-revision":
+        if capabilities is None:
+            raise AccessDenied("Package admission authority is unavailable")
+        schema = capabilities.schema_for(snapshot)
+        if not isinstance(schema, AdmittedActionSchema) or (
+            schema.action_id != snapshot.action_id
+            or schema.capability != snapshot.capability
+            or schema.runtime_plan != snapshot.runtime_plan
+            or "sha256:"
+            + hashlib.sha256(schema.input_schema.encode("utf-8")).hexdigest()
+            != snapshot.capability_schema_digest
+        ):
+            raise AccessDenied("Package schema differs from exact Run admission")
+        return schema
     action = _one(db, Action, snapshot.action_id)
     package_id = str(snapshot.capability.package_revision.package_id.root)
     package = _one(db, ActionPackage, package_id)
@@ -204,9 +244,12 @@ def _lease_duration(seconds: int) -> int:
 class RunOutputControlPlane:
     """Trusted admin operations; never installed as an Action/package API."""
 
-    def __init__(self, db: Database):
+    def __init__(
+        self, db: Database, *, capabilities: CapabilitySchemaPort | None = None
+    ):
         _private_diagnostics(db)
         self.db = db
+        self.capabilities = capabilities
 
     def register(self, snapshot: ExecutionSnapshot) -> str:
         snapshot = _snapshot(snapshot)
@@ -223,7 +266,7 @@ class RunOutputControlPlane:
             if not rows:
                 _insert(self.db, Workspace(snapshot.workspace_id, "active", 0))
             _lock_workspace(self.db, snapshot.workspace_id)
-            _action_identity(self.db, snapshot)
+            _action_identity(self.db, snapshot, self.capabilities)
             admissions = self.db.all(RunAdmission, where="id=?", values=[key])
             if admissions:
                 if (
@@ -307,10 +350,17 @@ class ResolvedOutput:
 
 
 class RunOutputService:
-    def __init__(self, db: Database, providers: dict[str, OutputProvider]):
+    def __init__(
+        self,
+        db: Database,
+        providers: dict[str, OutputProvider],
+        *,
+        capabilities: CapabilitySchemaPort | None = None,
+    ):
         _private_diagnostics(db)
         self.db = db
         self.providers = dict(providers)
+        self.capabilities = capabilities
 
     def _authorize(
         self, actor: Actor, snapshot: ExecutionSnapshot, operation: str
@@ -344,6 +394,10 @@ class RunOutputService:
                 raise ValueError("invalid or missing operation")
         except (ValueError, TypeError) as exc:
             raise AccessDenied("Run/output unavailable or access denied") from exc
+        if snapshot.capability_authority == "package-revision":
+            if self.capabilities is None:
+                raise AccessDenied("Package admission authority is unavailable")
+            self.capabilities.authorize(actor, snapshot, operation)
 
     def _pinned(self, pin: RunPin) -> ExecutionSnapshot:
         row = _one(self.db, RunAdmission, pin.run_admission_id)
@@ -404,7 +458,7 @@ class RunOutputService:
             ):
                 raise AccessDenied("Run/output unavailable or access denied")
             self._authorize(actor, snapshot, "execute")
-            action = _action_identity(self.db, snapshot)
+            action = _action_identity(self.db, snapshot, self.capabilities)
             from jsonschema import validate
             from jsonschema.exceptions import SchemaError, ValidationError
 
@@ -555,6 +609,21 @@ class RunOutputService:
                 [str(now + duration), str(now), fence.attempt_id],
             ):
                 raise FenceRejected("expired Attempt cannot renew")
+
+    def execution_context(
+        self, actor: Actor, fence: AttemptFence
+    ) -> tuple[ExecutionSnapshot, Any]:
+        """Trusted worker read of the pinned snapshot and input under a live fence.
+
+        This grants no ongoing write authority. Stage and publish recheck the
+        fence, cancellation and grants independently after provider execution.
+        """
+        with _transaction(self.db):
+            pin = self._fence(fence)
+            snapshot = self._pinned(pin)
+            self._authorize(actor, snapshot, "execute")
+            run = _one(self.db, Run, fence.run_id)
+            return snapshot, json.loads(run.inputs)
 
     def stage(
         self,
@@ -709,8 +778,20 @@ class RunOutputService:
         return discardable
 
     def publish(
-        self, actor: Actor, fence: AttemptFence, outputs: list[OutputRef], result: Any
+        self,
+        actor: Actor,
+        fence: AttemptFence,
+        outputs: list[OutputRef],
+        result: Any,
+        *,
+        terminal_status: int = RunStatus.PASSED,
     ) -> Run:
+        if (
+            not isinstance(terminal_status, int)
+            or isinstance(terminal_status, bool)
+            or terminal_status not in (RunStatus.PASSED, RunStatus.FAILED)
+        ):
+            raise ValueError("successful or failed terminal publication required")
         if not 1 <= len(outputs) <= MAX_OUTPUTS or len(
             {o.output_id for o in outputs}
         ) != len(outputs):
@@ -730,9 +811,10 @@ class RunOutputService:
             self._authorize(actor, snapshot, "execute")
             run = _one(self.db, Run, fence.run_id)
             attempt = _one(self.db, RunAttempt, fence.attempt_id)
-            if run.status == RunStatus.PASSED:
+            if run.status in (RunStatus.PASSED, RunStatus.FAILED):
                 if (
-                    run.result == envelope
+                    run.status == terminal_status
+                    and run.result == envelope
                     and pin.current_attempt_id == fence.attempt_id
                     and pin.epoch == fence.epoch
                     and attempt.owner_id == fence.owner_id
@@ -777,7 +859,7 @@ class RunOutputService:
                 + _now_sql(self.db)
                 + ") RETURNING id",
                 [
-                    RunStatus.PASSED,
+                    terminal_status,
                     envelope,
                     run.id,
                     RunStatus.RUNNING,
@@ -789,7 +871,16 @@ class RunOutputService:
                 raise FenceRejected("publication lease expired")
             for ref in outputs:
                 _update(self.db, RunOutput, ref.output_id, {"state": "final"})
-            _update(self.db, RunAttempt, fence.attempt_id, {"state": "succeeded"})
+            _update(
+                self.db,
+                RunAttempt,
+                fence.attempt_id,
+                {
+                    "state": "succeeded"
+                    if terminal_status == RunStatus.PASSED
+                    else "failed"
+                },
+            )
             return _one(self.db, Run, run.id)
 
     def cancel(self, actor: Actor, run_id: str) -> bool:
@@ -804,11 +895,18 @@ class RunOutputService:
 
     @contextmanager
     def resolve(
-        self, actor: Actor, workspace_id: str, handle: str
+        self,
+        actor: Actor,
+        workspace_id: str,
+        handle: str,
+        *,
+        canvas_scope: CanvasResultScope | None = None,
     ) -> Iterator[ResolvedOutput]:
         try:
             canonical_uuid(workspace_id)
             output_id = output_id_from_handle(handle)
+            if canvas_scope is not None:
+                canvas_scope = CanvasResultScope.model_validate(canvas_scope)
         except ValueError as exc:
             raise AccessDenied("Run/output unavailable or access denied") from exc
         with ExitStack() as owned:
@@ -823,6 +921,11 @@ class RunOutputService:
                     raise AccessDenied("Run/output unavailable or access denied")
                 snapshot = self._pinned(pin)
                 self._authorize(actor, snapshot, "read")
+                if canvas_scope is not None and (
+                    snapshot.deployment != canvas_scope.deployment
+                    or snapshot.canvas_application != canvas_scope.application
+                ):
+                    raise AccessDenied("Run/output unavailable or access denied")
                 run = _one(self.db, Run, output.run_id)
                 try:
                     attached = json.loads(run.result or "null")
@@ -830,7 +933,7 @@ class RunOutputService:
                         workspace_id=workspace_id, run_id=run.id, output_id=output.id
                     ).model_dump()
                     if (
-                        run.status != RunStatus.PASSED
+                        run.status not in (RunStatus.PASSED, RunStatus.FAILED)
                         or output.state != "final"
                         or int(output.expires_ms) <= _now(self.db)
                         or not isinstance(attached, dict)

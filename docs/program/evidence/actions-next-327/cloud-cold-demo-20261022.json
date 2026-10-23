@@ -1,0 +1,974 @@
+{
+  "schema": "actions.release327.cold-demo/v1",
+  "tested_source": "20f42170fb382cbf160fae2c356144c45fde4457",
+  "runtime": "1.1.0a5",
+  "sdk": "0.5.0a1",
+  "example": "0.2.0",
+  "previous_receipt": "cloud-reconciliation-20261022.json retained unchanged",
+  "scope": "Existing renderer comparison presentation and fresh owned wheel-only consumer; no engine/authority rewrite",
+  "current_results": {
+    "gateway": "Doctor/Bootstrap/Toolkit179 PASS",
+    "frontend": "quality PASS;280 full frontend tests;Canvas18passed1optional skip",
+    "python": "3 reconciliation tests PASS, including sealed comparison/app-only MCP projection;Runtime lint/typecheck396 PASS",
+    "actual_ui": "PASS source-bound browser with explicit approval/RCC/scoped artifact, Run a0c6ae28-5490-474a-a18b-84c7b7598341; image visually inspected",
+    "fresh_consumer": "PASS: cache-disabled pinned download; hash-verified Poetry/public-floor closure; empty prefix installed with no-index; pipcheck and isolated module provenance PASS",
+    "affected_real_sql_browser": "PASS105components129invoice/output2browser60generated; zero skips; cleanupPASS",
+    "cold_rcc": "PASS: empty consumer/new RCC home; default preparation from locked package specification; bundled RCC18.19.3; actual explicit approval/RCC execution/scoped artifact",
+    "offline_package_replay": "PASS: second empty prefix; identical67-wheels; no-index installation; no project env reused",
+    "fresh_artifact_replay": "PASS: new explicitly approved Work Item/Run through actual retained-Artifact RCC execution with RCC_NO_BUILD=1;0 external connect calls observed",
+    "restart": "PASS: same Run/Attempt counts with RCC_NO_BUILD=1;0 external connect calls observed",
+    "devutils": "Changed Runtime version/embedded RCC identity guard1passed; prior full261 retained source-specific"
+  },
+  "ui_capture": {
+    "path": "/workspace/actions-327-state/evidence/cold-demo/ui-first/executed-result.png",
+    "sha256": "784e387afd4b9124da649baa6da59ecf0e9e35ad54aa363674522719c4c2b6eb"
+  },
+  "network_requirements": "First preparation needs public PyPI; first RCC launch needs conda-forge/PyPI and supported native libraries. Existing proxy/TLS preserved; pip caches disabled. Python3.12.15 interpreter supplied by pinned RCC gateway is an explicit prerequisite, not a claim of bare-OS bootstrap.",
+  "failures": {
+    "ui_red": "2 failed before implementation: inaccurate heading/lost comparison and unsafe/foreign values accepted by stripped wire data",
+    "mcp_red": "Missing reconciliation field reproduced as KeyError after correcting initial test property/fixture construction failures;3green afterward",
+    "expected_offline_failure": "EXPECTED BLOCKED: RCC_NO_BUILD=1 env publish failed because no local hololib environment; exit1 retained. Offline package install alone is not offline cold RCC preparation. No retry or policy relaxation.",
+    "diagnostics": "Initial wrong working-directory commands/missing test path and test construction errors retained in logs; unscoped RCC help could not create /home/agent/.robocorp on read-only filesystem, corrected using owned gateway home without permission changes. No failed execution was labeled green."
+  },
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "delta": "Typed sealed app-page comparisons and legacy fallback; lock-derived fresh consumer and prefix/provenance checks; package offline versus empty-RCC refusal versus no-build retained-Artifact execution; observed network is not air-gap proof; native library requirement and coordinated cleanup.",
+    "evidence": "UI2red18green1optional skip; Python3green; real affected105/129/2/60 zero skip; fresh67-wheel consumer, fresh RCC Artifact and actual browser execution; second empty-prefix offline install; expected no-build empty store failure; actual retained-Artifact execution with0 external connects; seven denial/revision/rollback probes.",
+    "remaining_uncertainty": "Other OS/ABI, bare-OS interpreter bootstrap, enforced air gap, transferred RCC Artifact restore and release distribution remain unqualified; no new credential/tunnel/identity changes."
+  },
+  "remaining": "Fresh exact-head hosted review; authenticated ChatGPT E1 NEEDS_OPERATOR; template destination unapproved; general effects/retention/restore/distribution and celld NO-GO unchanged",
+  "upstream_disposition": "Existing RCC local-carrier report remains draft only; no new external report",
+  "controls": "No publication/merge/deploy/production/tunnel/credentials/other-repository mutation; owned synthetic fixtures only",
+  "evidence_root": "/workspace/actions-327-state/evidence/cold-demo",
+  "checkpoint_pushed": "3e76943779494b553f3a13db2fe76529da2b3ea9",
+  "status": "BOUNDED_COLD_CONSUMER_AND_UI_PASS",
+  "all_local_validation_finished": true,
+  "test_receipts": {
+    "components": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/affected/87ee8ae9-532a-4035-b922-c4f56e7b943c/components.xml",
+      "sha256": "c96c1a10aa2a4051ba5d9c872aa39e55403f58ad9d48015877554dd1a55e38f8",
+      "bytes": 17223,
+      "suites": [
+        {
+          "tests": "105",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "29.534"
+        }
+      ],
+      "skips": {}
+    },
+    "invoice": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/affected/87ee8ae9-532a-4035-b922-c4f56e7b943c/invoice.xml",
+      "sha256": "19e3f8ec4f536629d9ef07a8be80f60bbfb89e363e25c013eb2aebf11f3489a4",
+      "bytes": 28304,
+      "suites": [
+        {
+          "tests": "129",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "20.046"
+        }
+      ],
+      "skips": {}
+    },
+    "browser": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/affected/87ee8ae9-532a-4035-b922-c4f56e7b943c/browser.xml",
+      "sha256": "d0b954b691da3a9ad3b90049cd4f2810bdea72887f14d7de7b07a67dba908f3f",
+      "bytes": 697,
+      "suites": [
+        {
+          "tests": "2",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "10.536"
+        }
+      ],
+      "skips": {}
+    },
+    "generated": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/affected/87ee8ae9-532a-4035-b922-c4f56e7b943c/generated.xml",
+      "sha256": "d45a9f286f7feb5b2e540f80d60eed39a3f7fc4c4c4e281a3f0c29173fbeb7d5",
+      "bytes": 12494,
+      "suites": [
+        {
+          "tests": "60",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "93.431"
+        }
+      ],
+      "skips": {}
+    },
+    "reconciliation": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/reconciliation-green.xml",
+      "sha256": "d24d00df9e6c00afff3d41c27d3b876dc910abdcf91370f12f5ffa7b73550421",
+      "bytes": 761,
+      "suites": [
+        {
+          "tests": "3",
+          "failures": "0",
+          "errors": "0",
+          "skipped": "0",
+          "time": "0.903"
+        }
+      ],
+      "skips": {}
+    }
+  },
+  "affected_verifier": {
+    "attempt": "87ee8ae9-532a-4035-b922-c4f56e7b943c",
+    "status": "PASS",
+    "head": "20f42170fb382cbf160fae2c356144c45fde4457",
+    "image_reference": "postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81",
+    "tests": {
+      "components": 0,
+      "invoice": 0,
+      "browser": 0,
+      "generated": 0
+    },
+    "cleanup": "PASS",
+    "inputs": {
+      "action_server/examples/invoice_reconciliation/LICENSE": "5dd447f3a4dafdcf24b0b60cc4f130e778ed1edb4b1fe7994fe8e87ed6eb9497",
+      "action_server/examples/invoice_reconciliation/README.md": "282ec861befb33126ad32da86dec63a8d9aa511f5b724144f145b6b67dcbce41",
+      "action_server/examples/invoice_reconciliation/data/invoices.csv": "345539c3a3b79babf6d5f3744b889ee88e2fc229bb07086e8f0d09956f2b1d0e",
+      "action_server/examples/invoice_reconciliation/data/ledger.csv": "68a4d66f1a3d1154eddf96785f6015b803533f79e8d50d55efc2d9ded4ed3fe6",
+      "action_server/examples/invoice_reconciliation/data/purchase_orders.csv": "178eee5bbae6ca05f8730b0c5395836032a1add907fe5855f2df1b664a5e4870",
+      "action_server/examples/invoice_reconciliation/demo.py": "240248ba8493f02d9f771b2898d07a769b13fd317498e3c4dc0353cb9dc1b48e",
+      "action_server/examples/invoice_reconciliation/export.py": "1cda4cd73096326c26dcb5ce2435b398c930d96193ecac54c47d14cb2cd8bab3",
+      "action_server/examples/invoice_reconciliation/host.html": "c22e0ef79d59a6ba21b9be8b952da37bbf17732eb54eecc1f058d627336bd7c7",
+      "action_server/examples/invoice_reconciliation/prepare.py": "bf506db3901f7ec8b240c66b0b39ff0d36ca3954b0cdb19aad499c48d3080de7",
+      "action_server/examples/invoice_reconciliation/runtime.py": "e03f4ff11b8fb6ec0736c4f6de12067b112f26e0d640e6d2ccf2ccc16caa7652",
+      "action_server/examples/invoice_reconciliation/source.py": "5ab59277c268f6c13b2c70685ae74885d39c3d865a60b1f337aff077f5b4b5cd",
+      "action_server/examples/invoice_reconciliation/template.json": "a4ca737e8e56a33904d2d4e93d2253c2b4c03e8c11153258cc9d96b43093de6c",
+      "action_server/examples/invoice_reconciliation/verify.py": "274477b8f1891ab63331d962ea95f4c0d26d913b3c2951fdf017aa13fb0b9eab",
+      "action_server/frontend/scripts/capture-invoice-reconciliation.mjs": "bce6e0a1cb28667ef9ce6496f532248a9e5529cd86f9ef19f87d9d1287c53412",
+      "action_server/poetry.lock": "e2c743d43d0608182e6c888cccd308821433b80f2adf4547e950e061723f3f7a",
+      "action_server/pyproject.toml": "1a09a95e1908d6d27e734c885ce3f094fef420cad433ec1ba83e3e0e011495fb",
+      "action_server/scripts/verify_invoice_queries.py": "c080a3a1676afa5674591b060393aad3ba8820634791c73cbb9b155d5aca500e",
+      "action_server/src/actions/server/_api_action_routes.py": "65133ad7eb88a1e4a5c959db7f359ceaff2245878c058a8c77b94d42e8288860",
+      "action_server/src/actions/server/_models.py": "d7eee21eeaa10f8d36b40de57fbc6191fcc1dd33f91be0d267229cff0e3f12af",
+      "action_server/src/actions/server/_rcc_runtime_adapter.py": "7ae97d5e8f53cb1b809e02649395929cd1d9cd3a3fd386e9075e34e93ec17262",
+      "action_server/src/actions/server/_robot_inputs.py": "7cfbb5f1194b15928d9221d59840820dabde76db61d4e45d539ec80791ff875d",
+      "action_server/src/actions/server/_server.py": "085eae5a1a4a3e433288735f895687701513a1004656caf3b89368c6e36e2542",
+      "action_server/src/actions/server/canvas_lifecycle.py": "1e8a2ca082f962b76b0e311b1d5ee84e3b1b6a28ef057d6585d7b5b3dde5f2e6",
+      "action_server/src/actions/server/data_queries/__init__.py": "3a1a10897706f05daf2907f661bd42149c69e8ccf0a6f28e82a9d0195673b058",
+      "action_server/src/actions/server/data_queries/_invoice_task.py": "ef39830e372d11a5a1b48a993665193f21ecc4c6b70291ed565dfeb0487bf25f",
+      "action_server/src/actions/server/data_queries/canvas.py": "a92ad46abee119e6de3d49ecffd20b7d9178e236fee4a0a5cb82b3f779c50461",
+      "action_server/src/actions/server/data_queries/canvas_mcp.py": "1ffec43a7bb74b2387c3696d1c4d0f4f291d237e79b1d4729bb468c85dc9656d",
+      "action_server/src/actions/server/data_queries/generated.py": "aa4b25f5e4ab4ea3911f9defeaf20a70bf3628299b695f344c9bddd01badfeed",
+      "action_server/src/actions/server/data_queries/invoice_effects.py": "8ed3e30a494d37ef441e1d8e67a20fb089cb859a8c03d21e360ced1b0fa0d2a4",
+      "action_server/src/actions/server/data_queries/invoice_worker.py": "13d5e991d6c3a7f772bc435023cb1e6ca8daa73ba59979c035b5bd33abb413b5",
+      "action_server/src/actions/server/data_queries/invoices.py": "b9c52b7c918ce7ce7e41b422f0dce646a19848f725bdf1ed4a9a09e5888f1af8",
+      "action_server/src/actions/server/data_queries/knowledge.py": "f528fa8ffd22df290dab82e85ce7405bebe73fc407c226bf5784f9312b071411",
+      "action_server/src/actions/server/data_queries/reconciliation.py": "fc80daadd0e5c58fd36495b37ece5010a543c9d5ff5c96edf052f93a871ff325",
+      "action_server/src/actions/server/data_queries/review.py": "c2899b23b0ff8327d85f7fe948a36f7f53e4bfc17d217f97e27b8ce4d62d285f",
+      "action_server/src/actions/server/data_queries/review_models.py": "f06bbacaaf474e20edfdf0c4682a6fec45ca36909c0c70b13462340faf993a1a",
+      "action_server/src/actions/server/data_queries/service.py": "cc79a4b73dc497c2cadd7d2b70794ff600dab4716e6733132635f8cea714b9dc",
+      "action_server/src/actions/server/mcp/setup_mcp_server_v2.py": "195f8dd0c4247eeb39b1be5dae974f33d014f734e6429fae249760395d55b4ee",
+      "action_server/src/actions/server/migrations/__init__.py": "76f9ea7dc0087b7f3802c86e7b2f70e97f560265fcf0e6d084e858704e811cea",
+      "action_server/src/actions/server/migrations/migration_add_invoice_reviews.py": "40ec5952c106f21980d1572408c2fe00b8af81c30ca3c668295a95fd369d074e",
+      "action_server/src/actions/server/run_outputs/__init__.py": "4c29ad35ab314ea4472025d453703b124a08262cfa24a51baf3a1a2ffb58ae38",
+      "action_server/src/actions/server/run_outputs/filesystem.py": "db8daf79dc0d2a06ecec9a2c3ab67319d6df420c2a44578948d46f2b558c5606",
+      "action_server/src/actions/server/run_outputs/models.py": "c69318f6893484156fba1002f8372711fc83e32e56d0e29c54e985cc26196065",
+      "action_server/src/actions/server/run_outputs/service.py": "2f298d8487dacd490883058003b6cca43ded39aabdf45a4469ae62ba4e81f3ad",
+      "action_server/src/actions/server/run_outputs/transport.py": "b5063cc57888b868615a2a89cf2e114b5ae0455239e8fe22843d36609ed9e376",
+      "action_server/src/actions/server/run_outputs/types.py": "1189364febdfcb5caf16d8429cc01945c297f566d38a109ad6bcef33de497b9d",
+      "action_server/tests/action_server_tests/invoice_effect_fixture.py": "c879f4100cf2b7c26906cb3cae56c28c13b99f55def8be29acec9dfbbc870dbb",
+      "action_server/tests/action_server_tests/test_browser_gate_selection.py": "8940a5453b18e420c97cdf34da6eaf56ff8737767654df142ceb844ff6bcf1c4",
+      "action_server/tests/action_server_tests/test_browser_origin_acceptance.py": "48481085ee987f20714f85ca6c59653fcc98e381de5aea622d538e49ad207738",
+      "action_server/tests/action_server_tests/test_candidate_work_items.py": "fdb386c08128ca138162da37d2b12a66e3815862f58726f5b8bd9682af205e64",
+      "action_server/tests/action_server_tests/test_canvas_lifecycle.py": "fc00995a81aa1ad9ac4e61077dce6aad21d03b9df1dabc4ec88e94f6645c288b",
+      "action_server/tests/action_server_tests/test_generated_invoice.py": "63cac25d9842ec8637472e9c82f39f6fdd34aa276a278ee10ee0688d626402cd",
+      "action_server/tests/action_server_tests/test_generated_invoice_browser.py": "ed10385adf9de7d69bbad2e6e57a1d8ff8cb955284796db878d2e353387a9e77",
+      "action_server/tests/action_server_tests/test_invoice_canvas.py": "1a07665e11f4e6bc5dc81200fe1e8ad27fa86e4900528c873f3d75c8606ebd9f",
+      "action_server/tests/action_server_tests/test_invoice_canvas_browser.py": "3c5cd93c24b77b1056244b1b40b2afe9cf0e7262c61011607a4d9142c8076eda",
+      "action_server/tests/action_server_tests/test_invoice_canvas_mcp.py": "01c2968bbcc9338de5ff531a29f61c33d3043588af21152f4f52c56a760dad99",
+      "action_server/tests/action_server_tests/test_invoice_effects.py": "ee170ec1e3b676c64e3b5b2d24c389ac1aa0a40955c42d2b22891ca938caa36e",
+      "action_server/tests/action_server_tests/test_invoice_providers.py": "613f34c84bba089931dc53b334a472e430987249d8a0e29f8a53effa28c5d30e",
+      "action_server/tests/action_server_tests/test_invoice_reconciliation.py": "3356db14f7024ef1d6a5b18dbc9217e96535972cd69820682e817a13796ae11f",
+      "action_server/tests/action_server_tests/test_invoice_review.py": "2ebfc60844c8b90bf51a501a97f8c73b82c47ec242eb3c4c32ee51aa12a7b5f9",
+      "action_server/tests/action_server_tests/test_invoice_review_mcp.py": "6c38878d02f74725da2c89600bf3fa81f16b58242b3e03beec5ca31e85bb25bd",
+      "action_server/tests/action_server_tests/test_invoice_run_outputs.py": "b92afe3965110b4d9e19473fcd953aaf401f1fd3fd1466b6351fcf7d4fc8889c",
+      "action_server/tests/action_server_tests/test_invoice_worker.py": "14c48bea7bca40a5eca70c5bc1a3c80a54bf1ae12301e23c9965c9836927a0fb",
+      "action_server/tests/action_server_tests/test_invoice_worker_mcp.py": "ff3f6eaed47e906a6e83a44c5803c882607d06435748b61ecd5a9c6534885c77",
+      "action_server/tests/action_server_tests/test_knowledge_collections.py": "28909792d6c68044950e3d321c127ecbdbbca526970fe94a77d166139d0bd452",
+      "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py": "101315710aff8e12dbb3b927ad94866ef7c9d290f6ec667c4493d833a9075950",
+      "action_server/tests/action_server_tests/test_robot_run_inputs.py": "0dbc3a30e03c5cc4a71f62298db45ef06e1968c8cfad47dcbcf411d2758020f8",
+      "developer/toolkit.py": "88b6a96c5ce70dbedad1a4ab5945fb0684a7994453d4c331a9cef5d69b8b3086",
+      "developer/toolkit.yaml": "a763ee16415cb1124e28559b517fbc264db5add0cee07e93ee5db5dac6edd3aa",
+      "work-items/pyproject.toml": "76bb9b3ff8d866c0f5ee71e19fef42a2254d41d6fbf805bca389a5d4c5dc25df",
+      "work-items/src/actions/work_items/_adapters/_sql_review.py": "e23c017f0a165113032e5935e8f32b4abfdf28525a2613cb1dcd81bce745f7ae",
+      "action_server/frontend/apps/canvas-view/src/host-harness.ts": "403e8aad82e795e007658eebb57d5e69a850bcb58bf505c24c11487ec2d3035f",
+      "action_server/frontend/apps/canvas-view/src/main.tsx": "ce2fbd3700a1bf39a9ba37c687f93751acb8ae732cfcf85bf9a316b05ed726fc",
+      "action_server/frontend/apps/canvas-view/src/McpCanvasView.tsx": "1ce93a9725a977fae906c0aee45e5188ce9c9c937e02bcdd09efdaf5d0a510ff",
+      "action_server/frontend/apps/canvas-view/src/query-results/invoice-reconciliation.tsx": "2b748c86a2d26bea9cf6819f5d75011aff5047344394e1ac911d1e6446836350",
+      "action_server/frontend/apps/canvas-view/src/query-results/InvoiceReviewPanel.tsx": "32f5316dc0fddc51ce6c57834e9327276b705502402273e4a01183751ec846b5",
+      "action_server/frontend/apps/canvas-view/src/query-results/InvoiceReconciliation.test.tsx": "2e136979de7bd66a8f229918359f51657c436d88efdcbcb66b8bb837ca0dea2c",
+      "action_server/frontend/apps/canvas-view/src/query-results/QueryResultsView.test.tsx": "fb4eb92e36c89f3b943b27d2e2e58d881cefcd1df05019cd9bb80e7b505d9b0d",
+      "action_server/frontend/apps/canvas-view/src/query-results/QueryResultsView.tsx": "943dd9353cd161acc0b5200170f96291c4cac5c76439a5d764d0aa4afc06f87f",
+      "action_server/frontend/apps/canvas-view/src/query-results/invoice-bridge.ts": "bdd49534e88e0b33ba8db3709db7d6d0e0aad1684106e14dd31b66ac0977a990",
+      "action_server/frontend/apps/canvas-view/src/query-results/CanvasContractRoundTrip.test.tsx": "00469d5731b5d9cf634dedb2538f6cb60774d67444d28ce74db67300d6609f50",
+      "action_server/frontend/apps/canvas-view/src/query-results/review-contract.ts": "50881e02c67f974fceff50b0e230911aa7152f01a0fc3da4f46189637d81b24f",
+      "action_server/frontend/apps/canvas-view/src/query-results/InvoiceReviewPanel.test.tsx": "71f138ffbb7d82f7d3742f282f891c72b77a3a866109685f55f1b66b9fa07bd2",
+      "action_server/frontend/apps/canvas-view/invoice-runtime.spec.ts": "5d65aa48c9731774d7e1b7f9f58491855b66c35ce1f4d33bfff23787b4b6f190",
+      "action_server/frontend/playwright.invoice.config.ts": "bfd2ae1cdf3863bd680151e64db0c25fdc6ec096995a30f33b06340ba8ba2129",
+      "action_server/frontend/package-lock.json": "30e50040438c67254859807343cb53c288508b4895fb69648732277e8184a12a"
+    },
+    "module_identity": {
+      "actions.server.canvas_lifecycle": {
+        "path": "/workspace/actions-327/action_server/src/actions/server/canvas_lifecycle.py",
+        "sha256": "1e8a2ca082f962b76b0e311b1d5ee84e3b1b6a28ef057d6585d7b5b3dde5f2e6"
+      },
+      "actions.server.data_queries.review": {
+        "path": "/workspace/actions-327/action_server/src/actions/server/data_queries/review.py",
+        "sha256": "c2899b23b0ff8327d85f7fe948a36f7f53e4bfc17d217f97e27b8ce4d62d285f"
+      },
+      "actions.server.data_queries.invoice_worker": {
+        "path": "/workspace/actions-327/action_server/src/actions/server/data_queries/invoice_worker.py",
+        "sha256": "13d5e991d6c3a7f772bc435023cb1e6ca8daa73ba59979c035b5bd33abb413b5"
+      },
+      "actions.server.data_queries.generated": {
+        "path": "/workspace/actions-327/action_server/src/actions/server/data_queries/generated.py",
+        "sha256": "aa4b25f5e4ab4ea3911f9defeaf20a70bf3628299b695f344c9bddd01badfeed"
+      },
+      "actions.server.data_queries.invoice_effects": {
+        "path": "/workspace/actions-327/action_server/src/actions/server/data_queries/invoice_effects.py",
+        "sha256": "8ed3e30a494d37ef441e1d8e67a20fb089cb859a8c03d21e360ced1b0fa0d2a4"
+      },
+      "actions.server.data_queries.knowledge": {
+        "path": "/workspace/actions-327/action_server/src/actions/server/data_queries/knowledge.py",
+        "sha256": "f528fa8ffd22df290dab82e85ce7405bebe73fc407c226bf5784f9312b071411"
+      },
+      "actions.server.data_queries.invoices": {
+        "path": "/workspace/actions-327/action_server/src/actions/server/data_queries/invoices.py",
+        "sha256": "b9c52b7c918ce7ce7e41b422f0dce646a19848f725bdf1ed4a9a09e5888f1af8"
+      },
+      "actions.server.run_outputs.service": {
+        "path": "/workspace/actions-327/action_server/src/actions/server/run_outputs/service.py",
+        "sha256": "2f298d8487dacd490883058003b6cca43ded39aabdf45a4469ae62ba4e81f3ad"
+      },
+      "actions.work_items._adapters._sql_review": {
+        "path": "/workspace/actions-327/action_server/.venv/lib/python3.12/site-packages/actions/work_items/_adapters/_sql_review.py",
+        "sha256": "e23c017f0a165113032e5935e8f32b4abfdf28525a2613cb1dcd81bce745f7ae",
+        "version": "0.5.0a1"
+      }
+    },
+    "image": "sha256:319d040b5d68e3e5b98a238f0b5d375b4b4d9c5b3a6a9afb0308a8bcf0de72a5",
+    "canvas_html_sha256": "c4217b7ba078d89d58c92da90b09e78d163ae6ce9c2cffbcfc6b877191a2314f",
+    "retained_worker_runtime": {
+      "path": "/workspace/actions-327-state/evidence/worker/final/1f4b9f44-d7ae-46c3-8103-c57d4f9f7275/worker-runtime.json",
+      "sha256": "ee63d1c28f6fe31207379db59ed9ca2f30ffe34576528639dc7f8179c66c1617",
+      "environment_sha256": "09d8f7b3c1c6cf732a5ff265e8f886c589d26a63ab1762ba229a0d6eed226b12"
+    },
+    "worker_runtime": {
+      "artifact_digest": "sha256:d791a3890527ad638c3446af42bb431a26c2915c8dde19e5e3dfa951478bd60c",
+      "sdk_wheel_sha256": "5788f4b346d1dd6c61ba9f68ad30ae2cc56bf9488d22e49bd808e1df49915cd0",
+      "rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+      "config": "/workspace/actions-327-state/evidence/cold-demo/affected/87ee8ae9-532a-4035-b922-c4f56e7b943c/worker-runtime.json"
+    },
+    "counts": {
+      "components": {
+        "tests": 105,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "invoice": {
+        "tests": 129,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "browser": {
+        "tests": 2,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "generated": {
+        "tests": 60,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      }
+    },
+    "artifacts": {
+      "browser-details/duckdb/browser-output/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "browser-details/duckdb/browser.log": "14c99a1524b4194fecf77406eb1391bbfb43f288ba6fd1ed9bbe8a55da227b79",
+      "browser-details/duckdb/receipt.json": "1675628492a0a342e64cf2679dd657030073a573062985dbab7517911d68cdd4",
+      "browser-details/postgresql/browser-output/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "browser-details/postgresql/browser.log": "b821e928e584dcba87c4f2227bc9e4b2a478a9a611ce28675ceadde859af8511",
+      "browser-details/postgresql/receipt.json": "1675628492a0a342e64cf2679dd657030073a573062985dbab7517911d68cdd4",
+      "browser-details/postgresql-duckdb-owned-idempotent/browser-output/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "browser-details/postgresql-duckdb-owned-idempotent/browser.log": "a23e717797a676d71612499da6e9e7279f320b664221a579d72fefd493107dc2",
+      "browser-details/postgresql-duckdb-owned-idempotent/receipt.json": "3e1988067fd88df77cc8207dae4d9319baefa964537a87965fb07e1f0401e264",
+      "browser-details/postgresql-duckdb-private/browser-output/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "browser-details/postgresql-duckdb-private/browser.log": "a23e717797a676d71612499da6e9e7279f320b664221a579d72fefd493107dc2",
+      "browser-details/postgresql-duckdb-private/receipt.json": "982b4e2929d57c16e3bac9cae2e576e2b4a613a9aa030464eb23cb1c4153190c",
+      "browser-details/postgresql-postgresql-owned-idempotent/browser-output/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "browser-details/postgresql-postgresql-owned-idempotent/browser.log": "4e1fde093989a04b9b29777638f11636e960a7bd18b6e71498d443f8a8b386f4",
+      "browser-details/postgresql-postgresql-owned-idempotent/receipt.json": "9c9cb4bf38dbda178b60ca3b1949141cd601775f352b1f1060a279232a3fc4a7",
+      "browser-details/postgresql-postgresql-private/browser-output/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "browser-details/postgresql-postgresql-private/browser.log": "2f8d206292f5964ae58738bcee3a267523e9c84936e05e554239acdcefa56905",
+      "browser-details/postgresql-postgresql-private/receipt.json": "280db151bca45bdd8872ccbd2ff3e771ca7759e2156f97d7c8a085d92aa9c52c",
+      "browser-details/sqlite-duckdb-owned-idempotent/browser-output/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "browser-details/sqlite-duckdb-owned-idempotent/browser.log": "6a07e3b78e66e0f02f286db1c684860711ab09022428f34c1ecdc5674084de3d",
+      "browser-details/sqlite-duckdb-owned-idempotent/receipt.json": "34e45b923bc51d1f7131d29338e5a15185abe3a9f6c68d107368eb98131b13b9",
+      "browser-details/sqlite-duckdb-private/browser-output/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "browser-details/sqlite-duckdb-private/browser.log": "19ef40f9d9a30334df0ec8af8fe1f9f7ae88f6a7bdd41d9b78749739ced50b35",
+      "browser-details/sqlite-duckdb-private/receipt.json": "1a6315c87098ebbfea0d2217f86bb7c1b14a85b0df83cb0e70bf55e3b8ca3de4",
+      "browser-details/sqlite-postgresql-owned-idempotent/browser-output/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "browser-details/sqlite-postgresql-owned-idempotent/browser.log": "0898ae47d677582789f10e172aaab9ba9175c4391ba21df27b4d2b0cce128438",
+      "browser-details/sqlite-postgresql-owned-idempotent/receipt.json": "a0655f00e90efb9f651d98fa6471f20488e19ff79df6d2e254cf94e339df20fe",
+      "browser-details/sqlite-postgresql-private/browser-output/.last-run.json": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "browser-details/sqlite-postgresql-private/browser.log": "9fc9652137ec0884e595269d7e3320e83bda4dc4cb391efa3b011fa923762262",
+      "browser-details/sqlite-postgresql-private/receipt.json": "6a9e5a7f376fbf95518a53c732b3d22235478dbada7476d152e9e9435f35792f",
+      "browser.log": "41950517ec6e5756052c7a15f6a13d149b1677c586de278fe4b6d28d44a4fde9",
+      "browser.xml": "d0b954b691da3a9ad3b90049cd4f2810bdea72887f14d7de7b07a67dba908f3f",
+      "components.log": "62ed8f85163ea731950ec35b4b2d327610fafd150ef03070dd28549f299cd041",
+      "components.xml": "c96c1a10aa2a4051ba5d9c872aa39e55403f58ad9d48015877554dd1a55e38f8",
+      "generated.log": "8661d91c22be7c32a684676ddca43c9defddb14d1abd32e7d9f655f4fdd55a46",
+      "generated.xml": "d45a9f286f7feb5b2e540f80d60eed39a3f7fc4c4c4e281a3f0c29173fbeb7d5",
+      "invoice.log": "40301ad617b26d625e91250f02bb308875b2f0b3de3638ca70e7670307f40c7e",
+      "invoice.xml": "19e3f8ec4f536629d9ef07a8be80f60bbfb89e363e25c013eb2aebf11f3489a4",
+      "postgres.log": "403be5fef1c060b095baed1b0567631abb397cab7c8114359073db38bc6f4b36",
+      "rcc-acquire.json": "44abcdf58dc5b8eae184c496f5e73864a5968c45cbd0a089c08ddc1be304023a",
+      "rcc-acquire.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+      "sdk-build.log": "e9b3c866c9ebbe1f10251f2447e7a22fd66f19691cd1c363f03cb08554062f06",
+      "sdk-wheels/actions_work_items-0.5.0a1-py3-none-any.whl": "5788f4b346d1dd6c61ba9f68ad30ae2cc56bf9488d22e49bd808e1df49915cd0",
+      "worker-cells/03e1f10ba694de78/cell.json": "67c6b2cb60cfbb8da17077e1bd64de129a7cb2845804b54a0531ee77d6f53bfd",
+      "worker-cells/03e1f10ba694de78/execution/51d705dd-f9bb-40e8-97b1-03c5c47d0293/9dc8dbf8-fae1-4d96-b412-55b269712a38/3783585e-104d-411c-86ee-833c332a86af/input.json": "0d6ccde11b281d83d2398a8c4ffe287c90a422aa9c947b1d8562bcfa680d8d16",
+      "worker-cells/03e1f10ba694de78/execution/51d705dd-f9bb-40e8-97b1-03c5c47d0293/9dc8dbf8-fae1-4d96-b412-55b269712a38/3783585e-104d-411c-86ee-833c332a86af/rcc.json": "f035b2f81bd4006edae77ebb8b2279e161c38f4bc5f7fc142160aace97314846",
+      "worker-cells/03e1f10ba694de78/execution/51d705dd-f9bb-40e8-97b1-03c5c47d0293/9dc8dbf8-fae1-4d96-b412-55b269712a38/3783585e-104d-411c-86ee-833c332a86af/result.json": "a4f60aed7f87ebdbf1a0219cc8e2b65a41b63645a99c2753bfc2a378c180209c",
+      "worker-cells/03e1f10ba694de78/execution/51d705dd-f9bb-40e8-97b1-03c5c47d0293/9dc8dbf8-fae1-4d96-b412-55b269712a38/3783585e-104d-411c-86ee-833c332a86af/source/_invoice_task.py": "ef39830e372d11a5a1b48a993665193f21ecc4c6b70291ed565dfeb0487bf25f",
+      "worker-cells/03e1f10ba694de78/execution/51d705dd-f9bb-40e8-97b1-03c5c47d0293/9dc8dbf8-fae1-4d96-b412-55b269712a38/3783585e-104d-411c-86ee-833c332a86af/source/package.yaml": "09d8f7b3c1c6cf732a5ff265e8f886c589d26a63ab1762ba229a0d6eed226b12",
+      "worker-cells/03e1f10ba694de78/execution/51d705dd-f9bb-40e8-97b1-03c5c47d0293/9dc8dbf8-fae1-4d96-b412-55b269712a38/3783585e-104d-411c-86ee-833c332a86af/stdout.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+      "worker-cells/03e1f10ba694de78/objects/5327d464-ef4b-45b7-8b98-8bb4adc7939f": "5b93ac97af00b5f3dd055777455a528a308bcbcc88c1b38901b42cedf4b4566f",
+      "worker-cells/03e1f10ba694de78/objects/6b1f6f6c-2317-4e84-9653-f3e4c25ac571": "2774742f891a1b992d811be0a2f34bbcab1703452f407b670c7f8191ca7057a9",
+      "worker-cells/03e1f10ba694de78/objects/976951a9-b0f3-4221-956e-8641551ce1e1": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+      "worker-cells/03e1f10ba694de78/objects/b6dba755-3bd4-4522-85fe-9919425a8b9e": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+      "worker-cells/256537a486167d5b/cell.json": "87a12f3f3a5dba8aac208e1a22dd8206a41e0c650ee58631c5d824afaff7f81f",
+      "worker-cells/256537a486167d5b/execution/efcc321e-ae08-48da-859b-45c12e25bb48/6403c409-c923-4c48-a323-ce84a6a00da6/67b1d2b6-35a7-4307-914c-192fe988ac4e/input.json": "5a633827a15786889d978928371eae3eea2619b5f120987c0d7408cb8b3bc82f",
+      "worker-cells/256537a486167d5b/execution/efcc321e-ae08-48da-859b-45c12e25bb48/6403c409-c923-4c48-a323-ce84a6a00da6/67b1d2b6-35a7-4307-914c-192fe988ac4e/rcc.json": "167c9143226f7b6603de9c08185e48b5737ddcf3c61b06d64ed8854e499a4c0b",
+      "worker-cells/256537a486167d5b/execution/efcc321e-ae08-48da-859b-45c12e25bb48/6403c409-c923-4c48-a323-ce84a6a00da6/67b1d2b6-35a7-4307-914c-192fe988ac4e/result.json": "4db62ca822354cf224c7235ab7f2d0f103c1d1c3f891e9e0e9f3168db2430f7f",
+      "worker-cells/256537a486167d5b/execution/efcc321e-ae08-48da-859b-45c12e25bb48/6403c409-c923-4c48-a323-ce84a6a00da6/67b1d2b6-35a7-4307-914c-192fe988ac4e/source/_invoice_task.py": "ef39830e372d11a5a1b48a993665193f21ecc4c6b70291ed565dfeb0487bf25f",
+      "worker-cells/256537a486167d5b/execution/efcc321e-ae08-48da-859b-45c12e25bb48/6403c409-c923-4c48-a323-ce84a6a00da6/67b1d2b6-35a7-4307-914c-192fe988ac4e/source/package.yaml": "09d8f7b3c1c6cf732a5ff265e8f886c589d26a63ab1762ba229a0d6eed226b12",
+      "worker-cells/256537a486167d5b/execution/efcc321e-ae08-48da-859b-45c12e25bb48/6403c409-c923-4c48-a323-ce84a6a00da6/67b1d2b6-35a7-4307-914c-192fe988ac4e/stdout.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+      "worker-cells/256537a486167d5b/objects/3f1e87f4-6db9-4cd3-bf6d-1787cb5e9311": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+      "worker-cells/256537a486167d5b/objects/68a92578-b248-4295-9781-68b8d96ce564": "39937a48adae8a7e689b7b578fd3368e7ba43756f1e0a46d61f9a00cd4800923",
+      "worker-cells/256537a486167d5b/objects/bb428516-8fd6-41bf-a812-925fa463d88c": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+      "worker-cells/256537a486167d5b/objects/be03ffb1-6a7a-49d1-9278-e4287a2b9dc6": "5b93ac97af00b5f3dd055777455a528a308bcbcc88c1b38901b42cedf4b4566f",
+      "worker-cells/36913e6686d57b4f/cell.json": "9fdb2021115c2dc9384266407af8d261f42621fd75daf2641f6bcdf3a252eb6f",
+      "worker-cells/36913e6686d57b4f/execution/80badd37-d90e-4410-9957-48434e91b9fe/aa28732c-5570-4750-94cc-7c8d06d4cfb9/599c9c61-e9fa-45c5-af56-cb2c86a07f70/input.json": "82b2fd3af0173d34323d03e1e6c5803a54debe6a359a12fd46d1c7f805509081",
+      "worker-cells/36913e6686d57b4f/execution/80badd37-d90e-4410-9957-48434e91b9fe/aa28732c-5570-4750-94cc-7c8d06d4cfb9/599c9c61-e9fa-45c5-af56-cb2c86a07f70/rcc.json": "f127f6d09a277e4e00992d4095c19b8628b9146a7539a85ed99623fd84404e88",
+      "worker-cells/36913e6686d57b4f/execution/80badd37-d90e-4410-9957-48434e91b9fe/aa28732c-5570-4750-94cc-7c8d06d4cfb9/599c9c61-e9fa-45c5-af56-cb2c86a07f70/result.json": "c6fb9b58050dbc17b2fbb2548d0d36755113aceb5cb3e5b7f437fdce6433470e",
+      "worker-cells/36913e6686d57b4f/execution/80badd37-d90e-4410-9957-48434e91b9fe/aa28732c-5570-4750-94cc-7c8d06d4cfb9/599c9c61-e9fa-45c5-af56-cb2c86a07f70/source/_invoice_task.py": "ef39830e372d11a5a1b48a993665193f21ecc4c6b70291ed565dfeb0487bf25f",
+      "worker-cells/36913e6686d57b4f/execution/80badd37-d90e-4410-9957-48434e91b9fe/aa28732c-5570-4750-94cc-7c8d06d4cfb9/599c9c61-e9fa-45c5-af56-cb2c86a07f70/source/package.yaml": "09d8f7b3c1c6cf732a5ff265e8f886c589d26a63ab1762ba229a0d6eed226b12",
+      "worker-cells/36913e6686d57b4f/execution/80badd37-d90e-4410-9957-48434e91b9fe/aa28732c-5570-4750-94cc-7c8d06d4cfb9/599c9c61-e9fa-45c5-af56-cb2c86a07f70/stdout.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+      "worker-cells/36913e6686d57b4f/objects/0aa8920e-4b5b-4332-976b-031065b0dcce": "5b93ac97af00b5f3dd055777455a528a308bcbcc88c1b38901b42cedf4b4566f",
+      "worker-cells/36913e6686d57b4f/objects/b6f1fc2b-4c98-4967-bbda-184f0f709486": "e6a95cbe3dbd39940bfb7c9027880263c605f6875f0b04534e08f69f280b5574",
+      "worker-cells/36913e6686d57b4f/objects/e474d01c-49f7-4339-8c4f-8edf4b920375": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+      "worker-cells/36913e6686d57b4f/objects/ebd06d39-2c31-49db-a0d4-6464a09d0261": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+      "worker-cells/479513116b28a501/cell.json": "516edba5ddd9b1b56c735065c23db0452b7271a5af3fca33ff3fc728a812c021",
+      "worker-cells/479513116b28a501/execution/1a3c47b4-6e2d-4f62-9a32-5c91c7cc1297/86aa0cfe-6d18-4b6e-9b16-4b4619e7a8e6/d8f650ff-5190-4f4f-bd52-740951a69ff4/input.json": "9e5c20e6cb8173b32e99cffcd5c51d5e2093b39ea7b85a57ddb975b44e772656",
+      "worker-cells/479513116b28a501/execution/1a3c47b4-6e2d-4f62-9a32-5c91c7cc1297/86aa0cfe-6d18-4b6e-9b16-4b4619e7a8e6/d8f650ff-5190-4f4f-bd52-740951a69ff4/rcc.json": "c14b9cf5d694026a25b6e319ea34a3e6094c67d2e2aa83f2b058d79a36810e7a",
+      "worker-cells/479513116b28a501/execution/1a3c47b4-6e2d-4f62-9a32-5c91c7cc1297/86aa0cfe-6d18-4b6e-9b16-4b4619e7a8e6/d8f650ff-5190-4f4f-bd52-740951a69ff4/result.json": "1f92123337de25aee8c67de96175dd4620328f282691d13a35b87987eac590e2",
+      "worker-cells/479513116b28a501/execution/1a3c47b4-6e2d-4f62-9a32-5c91c7cc1297/86aa0cfe-6d18-4b6e-9b16-4b4619e7a8e6/d8f650ff-5190-4f4f-bd52-740951a69ff4/source/_invoice_task.py": "ef39830e372d11a5a1b48a993665193f21ecc4c6b70291ed565dfeb0487bf25f",
+      "worker-cells/479513116b28a501/execution/1a3c47b4-6e2d-4f62-9a32-5c91c7cc1297/86aa0cfe-6d18-4b6e-9b16-4b4619e7a8e6/d8f650ff-5190-4f4f-bd52-740951a69ff4/source/package.yaml": "09d8f7b3c1c6cf732a5ff265e8f886c589d26a63ab1762ba229a0d6eed226b12",
+      "worker-cells/479513116b28a501/execution/1a3c47b4-6e2d-4f62-9a32-5c91c7cc1297/86aa0cfe-6d18-4b6e-9b16-4b4619e7a8e6/d8f650ff-5190-4f4f-bd52-740951a69ff4/stdout.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+      "worker-cells/479513116b28a501/objects/4b13383b-3cf0-4538-a5d2-855060bdc944": "42c3259806d77d26d0daf057850a9f6aa861dda1f611534941d8ad9b65ed0272",
+      "worker-cells/479513116b28a501/objects/6ad5b953-db4f-4a83-8f9f-2a6de2974f89": "4c4a4410f16998eb614947587094431ae4b7b144d6e9c4580b44080272371087",
+      "worker-cells/479513116b28a501/objects/7014b49c-83a7-4537-9cd1-5348d6e7d654": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+      "worker-cells/479513116b28a501/objects/8e0029e4-b6ff-4cc7-a92f-ef89c4f78a72": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+      "worker-cells/9d4231c55fa18019/cell.json": "dfd6e970fc0e8b80e127ef741b28baebe71d95bcc9dd5dfd51b5e56d2f3bfcf4",
+      "worker-cells/9d4231c55fa18019/execution/3a61c422-a89c-405a-97b4-0e88c6d45669/4088ef71-bfa1-4c40-9078-91f5ee996357/351d70fc-3bee-4229-91a3-27d215f0009e/input.json": "13c9fe15b6e5acaa1f4cb5cc69ea8d7136694e4ca632d5bfb3764f4ff1acea1b",
+      "worker-cells/9d4231c55fa18019/execution/3a61c422-a89c-405a-97b4-0e88c6d45669/4088ef71-bfa1-4c40-9078-91f5ee996357/351d70fc-3bee-4229-91a3-27d215f0009e/rcc.json": "bb9cde95df21a62b19ef30444dd0fdf8c605e0e040bcb843cc1a694c1ed45c88",
+      "worker-cells/9d4231c55fa18019/execution/3a61c422-a89c-405a-97b4-0e88c6d45669/4088ef71-bfa1-4c40-9078-91f5ee996357/351d70fc-3bee-4229-91a3-27d215f0009e/result.json": "77892a6b49bd900c650788e891a4f1815ec4f499720a1a2526342ac409e86a65",
+      "worker-cells/9d4231c55fa18019/execution/3a61c422-a89c-405a-97b4-0e88c6d45669/4088ef71-bfa1-4c40-9078-91f5ee996357/351d70fc-3bee-4229-91a3-27d215f0009e/source/_invoice_task.py": "ef39830e372d11a5a1b48a993665193f21ecc4c6b70291ed565dfeb0487bf25f",
+      "worker-cells/9d4231c55fa18019/execution/3a61c422-a89c-405a-97b4-0e88c6d45669/4088ef71-bfa1-4c40-9078-91f5ee996357/351d70fc-3bee-4229-91a3-27d215f0009e/source/package.yaml": "09d8f7b3c1c6cf732a5ff265e8f886c589d26a63ab1762ba229a0d6eed226b12",
+      "worker-cells/9d4231c55fa18019/execution/3a61c422-a89c-405a-97b4-0e88c6d45669/4088ef71-bfa1-4c40-9078-91f5ee996357/351d70fc-3bee-4229-91a3-27d215f0009e/stdout.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+      "worker-cells/9d4231c55fa18019/objects/653a10ba-3b3a-4d69-930c-9b8224a6a11a": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+      "worker-cells/9d4231c55fa18019/objects/953bb5f5-402c-457f-b9f8-b6ecc6156b33": "b6c7b697326bf7c4f7a1718dfb8fd5299af90a2721e7ea9e6c0715f8ab5488aa",
+      "worker-cells/9d4231c55fa18019/objects/b524f6a4-f468-40a6-bf50-acfced883f78": "5b93ac97af00b5f3dd055777455a528a308bcbcc88c1b38901b42cedf4b4566f",
+      "worker-cells/9d4231c55fa18019/objects/f3507417-307c-4f22-b301-f9e3fc93f192": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+      "worker-cells/a6a7c9f37b746e07/cell.json": "03b92bfb43abf53bc2c9521fbef4bb9b59be002712304c6c95df7295635e5804",
+      "worker-cells/a6a7c9f37b746e07/execution/25d1b94f-9066-417d-948e-9272a39e399f/8b3928aa-f511-488d-bdb9-d601d4ca1fe2/89fc81b8-3b6e-484a-96cb-591adcb2d728/input.json": "649434b9452fe37f9b10be2942f16d057c084604e4907f7f619d08ed0b87f7df",
+      "worker-cells/a6a7c9f37b746e07/execution/25d1b94f-9066-417d-948e-9272a39e399f/8b3928aa-f511-488d-bdb9-d601d4ca1fe2/89fc81b8-3b6e-484a-96cb-591adcb2d728/rcc.json": "4930132f3ccf15daa3ca26900bd8f69f66d18d60871b1165e5bddf5383965c75",
+      "worker-cells/a6a7c9f37b746e07/execution/25d1b94f-9066-417d-948e-9272a39e399f/8b3928aa-f511-488d-bdb9-d601d4ca1fe2/89fc81b8-3b6e-484a-96cb-591adcb2d728/result.json": "f8a5d654c85adf4e814989e5e6dbd8d0fec6bdcebce22239a6f2b92141d696ae",
+      "worker-cells/a6a7c9f37b746e07/execution/25d1b94f-9066-417d-948e-9272a39e399f/8b3928aa-f511-488d-bdb9-d601d4ca1fe2/89fc81b8-3b6e-484a-96cb-591adcb2d728/source/_invoice_task.py": "ef39830e372d11a5a1b48a993665193f21ecc4c6b70291ed565dfeb0487bf25f",
+      "worker-cells/a6a7c9f37b746e07/execution/25d1b94f-9066-417d-948e-9272a39e399f/8b3928aa-f511-488d-bdb9-d601d4ca1fe2/89fc81b8-3b6e-484a-96cb-591adcb2d728/source/package.yaml": "09d8f7b3c1c6cf732a5ff265e8f886c589d26a63ab1762ba229a0d6eed226b12",
+      "worker-cells/a6a7c9f37b746e07/execution/25d1b94f-9066-417d-948e-9272a39e399f/8b3928aa-f511-488d-bdb9-d601d4ca1fe2/89fc81b8-3b6e-484a-96cb-591adcb2d728/stdout.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+      "worker-cells/a6a7c9f37b746e07/objects/068deedf-13ad-4393-8def-861a39c0fd04": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+      "worker-cells/a6a7c9f37b746e07/objects/23c0cc14-03ce-4400-85b9-2f6cc51cb2b8": "5b93ac97af00b5f3dd055777455a528a308bcbcc88c1b38901b42cedf4b4566f",
+      "worker-cells/a6a7c9f37b746e07/objects/319f4641-ca15-421a-8326-b20443252ae7": "3a5164084f9067bc3751bbda1031a9efe88a2546b4298df1e71bfb6bae69445d",
+      "worker-cells/a6a7c9f37b746e07/objects/b8536bf8-c9fe-43d9-a7b9-cdbea0634c2a": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+      "worker-cells/a8451c34518537df/cell.json": "ea231ba56409a3e91975b29109ef9c30622a2d483bc2dcc616ee70b8b2b5f333",
+      "worker-cells/a8451c34518537df/execution/5a778c83-2e92-4e57-a290-0d7f4e029ddf/15709446-2916-43ee-af4b-ccc025e350e8/e51485ab-5e2c-4221-9684-3d6a7d99f2e8/input.json": "73251d38b2495127c6ee78b07f58ad782a7d4a9c7da2e406105c69732b95ca1b",
+      "worker-cells/a8451c34518537df/execution/5a778c83-2e92-4e57-a290-0d7f4e029ddf/15709446-2916-43ee-af4b-ccc025e350e8/e51485ab-5e2c-4221-9684-3d6a7d99f2e8/rcc.json": "045cb87dd056bdd1fd4f25f875da156d4876dad39515eca3be3451d459a706de",
+      "worker-cells/a8451c34518537df/execution/5a778c83-2e92-4e57-a290-0d7f4e029ddf/15709446-2916-43ee-af4b-ccc025e350e8/e51485ab-5e2c-4221-9684-3d6a7d99f2e8/result.json": "540537b004a42b38c288cbdbad08d691c69ed1e78df278551067ff574c15a60e",
+      "worker-cells/a8451c34518537df/execution/5a778c83-2e92-4e57-a290-0d7f4e029ddf/15709446-2916-43ee-af4b-ccc025e350e8/e51485ab-5e2c-4221-9684-3d6a7d99f2e8/source/_invoice_task.py": "ef39830e372d11a5a1b48a993665193f21ecc4c6b70291ed565dfeb0487bf25f",
+      "worker-cells/a8451c34518537df/execution/5a778c83-2e92-4e57-a290-0d7f4e029ddf/15709446-2916-43ee-af4b-ccc025e350e8/e51485ab-5e2c-4221-9684-3d6a7d99f2e8/source/package.yaml": "09d8f7b3c1c6cf732a5ff265e8f886c589d26a63ab1762ba229a0d6eed226b12",
+      "worker-cells/a8451c34518537df/execution/5a778c83-2e92-4e57-a290-0d7f4e029ddf/15709446-2916-43ee-af4b-ccc025e350e8/e51485ab-5e2c-4221-9684-3d6a7d99f2e8/stdout.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+      "worker-cells/a8451c34518537df/objects/226ccc28-dd13-4222-a070-a79cbdf3f705": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+      "worker-cells/a8451c34518537df/objects/3aaa87bc-5b5c-48b9-83bb-7aaec033255c": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+      "worker-cells/a8451c34518537df/objects/7f663308-bd62-4f72-9037-e2de0c3072e6": "e750d0f29d74854e4988ee7117c6123b0443dcf3b9fa1c3d9bc006d41fc3cf2f",
+      "worker-cells/a8451c34518537df/objects/e2d59b24-a045-4a5f-a630-ab87107b042b": "5b93ac97af00b5f3dd055777455a528a308bcbcc88c1b38901b42cedf4b4566f",
+      "worker-cells/b1a0816fcbb44678/cell.json": "a420fd75335444a90fe2054a9abd77f91859053aa24da6b4610ff41e154aa705",
+      "worker-cells/b1a0816fcbb44678/execution/4f3568ae-789b-4c74-a93e-4d79167915cc/b211fbc7-7667-4fac-a1b6-b65e5c30e1e6/566cad91-c387-44f7-b23c-d89e5ff65ca3/input.json": "3ba9f0ec0ab684a15f747b03ede9ce3d68f46cf29ce3fb60567f248b58c56460",
+      "worker-cells/b1a0816fcbb44678/execution/4f3568ae-789b-4c74-a93e-4d79167915cc/b211fbc7-7667-4fac-a1b6-b65e5c30e1e6/566cad91-c387-44f7-b23c-d89e5ff65ca3/rcc.json": "a72825f0c795eb30b07f19a3ef0567d1e00595f0226fefda03def7c98c53cafe",
+      "worker-cells/b1a0816fcbb44678/execution/4f3568ae-789b-4c74-a93e-4d79167915cc/b211fbc7-7667-4fac-a1b6-b65e5c30e1e6/566cad91-c387-44f7-b23c-d89e5ff65ca3/result.json": "6f0dd813aa38e77e94a2651a525f465e0ae2185d193f9472b1c7922fe554432e",
+      "worker-cells/b1a0816fcbb44678/execution/4f3568ae-789b-4c74-a93e-4d79167915cc/b211fbc7-7667-4fac-a1b6-b65e5c30e1e6/566cad91-c387-44f7-b23c-d89e5ff65ca3/source/_invoice_task.py": "ef39830e372d11a5a1b48a993665193f21ecc4c6b70291ed565dfeb0487bf25f",
+      "worker-cells/b1a0816fcbb44678/execution/4f3568ae-789b-4c74-a93e-4d79167915cc/b211fbc7-7667-4fac-a1b6-b65e5c30e1e6/566cad91-c387-44f7-b23c-d89e5ff65ca3/source/package.yaml": "09d8f7b3c1c6cf732a5ff265e8f886c589d26a63ab1762ba229a0d6eed226b12",
+      "worker-cells/b1a0816fcbb44678/execution/4f3568ae-789b-4c74-a93e-4d79167915cc/b211fbc7-7667-4fac-a1b6-b65e5c30e1e6/566cad91-c387-44f7-b23c-d89e5ff65ca3/stdout.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+      "worker-cells/b1a0816fcbb44678/objects/0470f094-7c21-46a0-9b69-4aacf0e0c463": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+      "worker-cells/b1a0816fcbb44678/objects/0a2d7afb-2506-492f-919e-a553fbfdb15c": "4c4a4410f16998eb614947587094431ae4b7b144d6e9c4580b44080272371087",
+      "worker-cells/b1a0816fcbb44678/objects/0aee1937-f620-44dc-813f-48cbe4d66e23": "a54888eac1f8ffe9e3fbb08e7f69fe84b102d570c6a4688b518db39ebbf66e3d",
+      "worker-cells/b1a0816fcbb44678/objects/5fae06ab-dece-4f0e-bc50-66fd134e445d": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+      "worker-cells/d5a6ce8fa80ae0d1/cell.json": "53c0658e7dd9434e9b2081902c2ac6423f488393f0d1697ddddb4e2d6de71a20",
+      "worker-cells/d5a6ce8fa80ae0d1/execution/3d5919ff-a3a2-45ea-a065-862e1a2b7630/26ae188e-2851-4f15-bdd6-6189088b9581/2c8826ed-c8c6-4556-b7d2-e313268d1cdc/input.json": "e8e2609d92b62d680897853284dd928502c3bbbe037aa9976ae897517ae09bfb",
+      "worker-cells/d5a6ce8fa80ae0d1/execution/3d5919ff-a3a2-45ea-a065-862e1a2b7630/26ae188e-2851-4f15-bdd6-6189088b9581/2c8826ed-c8c6-4556-b7d2-e313268d1cdc/rcc.json": "098de8a4d5f92689e112161000d4d7cf6523afee2095bc8d3b76a3cfdfb7648d",
+      "worker-cells/d5a6ce8fa80ae0d1/execution/3d5919ff-a3a2-45ea-a065-862e1a2b7630/26ae188e-2851-4f15-bdd6-6189088b9581/2c8826ed-c8c6-4556-b7d2-e313268d1cdc/result.json": "e73ca75eab03280ca31ff15497efcb49078fd9328b6fe53ca0cbf047c944ea53",
+      "worker-cells/d5a6ce8fa80ae0d1/execution/3d5919ff-a3a2-45ea-a065-862e1a2b7630/26ae188e-2851-4f15-bdd6-6189088b9581/2c8826ed-c8c6-4556-b7d2-e313268d1cdc/source/_invoice_task.py": "ef39830e372d11a5a1b48a993665193f21ecc4c6b70291ed565dfeb0487bf25f",
+      "worker-cells/d5a6ce8fa80ae0d1/execution/3d5919ff-a3a2-45ea-a065-862e1a2b7630/26ae188e-2851-4f15-bdd6-6189088b9581/2c8826ed-c8c6-4556-b7d2-e313268d1cdc/source/package.yaml": "09d8f7b3c1c6cf732a5ff265e8f886c589d26a63ab1762ba229a0d6eed226b12",
+      "worker-cells/d5a6ce8fa80ae0d1/execution/3d5919ff-a3a2-45ea-a065-862e1a2b7630/26ae188e-2851-4f15-bdd6-6189088b9581/2c8826ed-c8c6-4556-b7d2-e313268d1cdc/stdout.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+      "worker-cells/d5a6ce8fa80ae0d1/objects/60a7e898-5fbf-43d2-bbab-8cc512011dfc": "4c4a4410f16998eb614947587094431ae4b7b144d6e9c4580b44080272371087",
+      "worker-cells/d5a6ce8fa80ae0d1/objects/a1c2501b-a255-4fe4-8367-9f73e3119284": "83f44f80afb68949dd380b4ae3cfca6f71bc4206c80160e294aed80317ce7726",
+      "worker-cells/d5a6ce8fa80ae0d1/objects/a9882437-881d-4d74-a0fe-7c2b11576aec": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+      "worker-cells/d5a6ce8fa80ae0d1/objects/fe87b9a5-f41b-46c7-860d-95151969541d": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+      "worker-cells/d8cec11cfbfa8640/cell.json": "1b407f04afe3ec382cc452b90e395e7e70097fd57c9af841e316f315f85967d8",
+      "worker-cells/d8cec11cfbfa8640/execution/c3736f18-50e3-4af3-8e5f-1584c5036485/6046699b-9759-4a3f-94b7-ce0e336f7d08/c90fa45e-6d10-46f9-98d0-ccc539607fcc/input.json": "d4ebdab789734ce544c1e4e7cc3814e6e5ece8afef1ce06710c3a54ff7d568c3",
+      "worker-cells/d8cec11cfbfa8640/execution/c3736f18-50e3-4af3-8e5f-1584c5036485/6046699b-9759-4a3f-94b7-ce0e336f7d08/c90fa45e-6d10-46f9-98d0-ccc539607fcc/rcc.json": "5e8d15bbefc4ad57f40cc1906c435626ead40756d10208b823f3933a415a43f2",
+      "worker-cells/d8cec11cfbfa8640/execution/c3736f18-50e3-4af3-8e5f-1584c5036485/6046699b-9759-4a3f-94b7-ce0e336f7d08/c90fa45e-6d10-46f9-98d0-ccc539607fcc/result.json": "ad404eb2e3b5c87d1ee55de4f6744a7d60038f34c6b37e5b69a2f133e1ddd0a7",
+      "worker-cells/d8cec11cfbfa8640/execution/c3736f18-50e3-4af3-8e5f-1584c5036485/6046699b-9759-4a3f-94b7-ce0e336f7d08/c90fa45e-6d10-46f9-98d0-ccc539607fcc/source/_invoice_task.py": "ef39830e372d11a5a1b48a993665193f21ecc4c6b70291ed565dfeb0487bf25f",
+      "worker-cells/d8cec11cfbfa8640/execution/c3736f18-50e3-4af3-8e5f-1584c5036485/6046699b-9759-4a3f-94b7-ce0e336f7d08/c90fa45e-6d10-46f9-98d0-ccc539607fcc/source/package.yaml": "09d8f7b3c1c6cf732a5ff265e8f886c589d26a63ab1762ba229a0d6eed226b12",
+      "worker-cells/d8cec11cfbfa8640/execution/c3736f18-50e3-4af3-8e5f-1584c5036485/6046699b-9759-4a3f-94b7-ce0e336f7d08/c90fa45e-6d10-46f9-98d0-ccc539607fcc/stdout.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+      "worker-cells/d8cec11cfbfa8640/objects/108a426e-d233-424f-853b-cd1453ad919b": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+      "worker-cells/d8cec11cfbfa8640/objects/763bf861-3354-4b8a-8e44-917ef1abe06c": "5b93ac97af00b5f3dd055777455a528a308bcbcc88c1b38901b42cedf4b4566f",
+      "worker-cells/d8cec11cfbfa8640/objects/99992149-06d2-40b1-9f18-33b85cad8a7c": "7916eff2a11b52e9547bebf0ef78a43753f4d508131ebe48944c319c04969dd9",
+      "worker-cells/d8cec11cfbfa8640/objects/a879a5b0-ec44-4e01-bc22-432bff565940": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+      "worker-cells/d977ddbfc034f08d/cell.json": "0b96ca77a4d6dc4dfbacd74066e46bc8e0c3e34e1a35989f99fe39eb329260f7",
+      "worker-cells/d977ddbfc034f08d/execution/f12b5ebc-5464-424e-b008-b41133cd064a/f3d87491-5285-423c-b4cd-1cc782723950/0e161efc-e7d6-4365-931b-9729f38acece/input.json": "17d20d678834d42555b80038b53c0c5566d8baae081c38997aef2dca876528d6",
+      "worker-cells/d977ddbfc034f08d/execution/f12b5ebc-5464-424e-b008-b41133cd064a/f3d87491-5285-423c-b4cd-1cc782723950/0e161efc-e7d6-4365-931b-9729f38acece/rcc.json": "06ba7dbb8394a14db4c68a58fb19a9e4270def980e5293494e30a3815373bf28",
+      "worker-cells/d977ddbfc034f08d/execution/f12b5ebc-5464-424e-b008-b41133cd064a/f3d87491-5285-423c-b4cd-1cc782723950/0e161efc-e7d6-4365-931b-9729f38acece/result.json": "c08c53f71479949f149d252442c33243e9f81311c58880205c5b8bb562b64306",
+      "worker-cells/d977ddbfc034f08d/execution/f12b5ebc-5464-424e-b008-b41133cd064a/f3d87491-5285-423c-b4cd-1cc782723950/0e161efc-e7d6-4365-931b-9729f38acece/source/_invoice_task.py": "ef39830e372d11a5a1b48a993665193f21ecc4c6b70291ed565dfeb0487bf25f",
+      "worker-cells/d977ddbfc034f08d/execution/f12b5ebc-5464-424e-b008-b41133cd064a/f3d87491-5285-423c-b4cd-1cc782723950/0e161efc-e7d6-4365-931b-9729f38acece/source/package.yaml": "09d8f7b3c1c6cf732a5ff265e8f886c589d26a63ab1762ba229a0d6eed226b12",
+      "worker-cells/d977ddbfc034f08d/execution/f12b5ebc-5464-424e-b008-b41133cd064a/f3d87491-5285-423c-b4cd-1cc782723950/0e161efc-e7d6-4365-931b-9729f38acece/stdout.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+      "worker-cells/d977ddbfc034f08d/objects/638a8f96-75ff-46ac-8455-ea025e082c14": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+      "worker-cells/d977ddbfc034f08d/objects/8f761411-bccc-4f30-86f2-94e60af41e46": "4c4a4410f16998eb614947587094431ae4b7b144d6e9c4580b44080272371087",
+      "worker-cells/d977ddbfc034f08d/objects/9e65be48-c7a1-4ede-bf0c-31465d6c6ddd": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+      "worker-cells/d977ddbfc034f08d/objects/c0d641f9-1c15-436e-8a93-b024b0cbf922": "a21158e38cb83b024fd059100571240bc43f152405f8ef49daca3ec6df4f6236",
+      "worker-cells/df579b45fb8149b3/cell.json": "903c47fc8de4cf35252d4d070a03807d4eee5d43f8d3bcbc2f9c9ca5814d441c",
+      "worker-cells/df579b45fb8149b3/execution/5beb0519-be17-4f32-a768-ea4830812c4e/ee52fb1f-5967-4cc7-ae35-e5f2dd629792/ccdba6d6-31ae-4acf-86a6-bdabe3264262/input.json": "ac63cfc642ea6f3cb02ae8ef8f96db1724a26b75b68c2fb1921788dc03379389",
+      "worker-cells/df579b45fb8149b3/execution/5beb0519-be17-4f32-a768-ea4830812c4e/ee52fb1f-5967-4cc7-ae35-e5f2dd629792/ccdba6d6-31ae-4acf-86a6-bdabe3264262/rcc.json": "ca73446c40df69afc99dd339709595e6c4d189fee55b319d654f3ea653825399",
+      "worker-cells/df579b45fb8149b3/execution/5beb0519-be17-4f32-a768-ea4830812c4e/ee52fb1f-5967-4cc7-ae35-e5f2dd629792/ccdba6d6-31ae-4acf-86a6-bdabe3264262/result.json": "b85f62698634d1309d8c37ac852dad719c109f738fb8289648d6ae1030339c7e",
+      "worker-cells/df579b45fb8149b3/execution/5beb0519-be17-4f32-a768-ea4830812c4e/ee52fb1f-5967-4cc7-ae35-e5f2dd629792/ccdba6d6-31ae-4acf-86a6-bdabe3264262/source/_invoice_task.py": "ef39830e372d11a5a1b48a993665193f21ecc4c6b70291ed565dfeb0487bf25f",
+      "worker-cells/df579b45fb8149b3/execution/5beb0519-be17-4f32-a768-ea4830812c4e/ee52fb1f-5967-4cc7-ae35-e5f2dd629792/ccdba6d6-31ae-4acf-86a6-bdabe3264262/source/package.yaml": "09d8f7b3c1c6cf732a5ff265e8f886c589d26a63ab1762ba229a0d6eed226b12",
+      "worker-cells/df579b45fb8149b3/execution/5beb0519-be17-4f32-a768-ea4830812c4e/ee52fb1f-5967-4cc7-ae35-e5f2dd629792/ccdba6d6-31ae-4acf-86a6-bdabe3264262/stdout.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+      "worker-cells/df579b45fb8149b3/objects/34bf81ea-b401-4138-a68c-8c48c77f04f8": "5b93ac97af00b5f3dd055777455a528a308bcbcc88c1b38901b42cedf4b4566f",
+      "worker-cells/df579b45fb8149b3/objects/74e06d6c-74b0-418f-8c92-e31085ae8a1d": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+      "worker-cells/df579b45fb8149b3/objects/e8c396d9-496a-4091-98cb-c36fbc568843": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+      "worker-cells/df579b45fb8149b3/objects/fdbb7af6-07ee-4b0d-9d30-1b710b22b9c1": "de51611fe6ef282dfa2d5116955090b2487d69c619a03e0c0ec4d9dc3147f1a0",
+      "worker-runtime.json": "ee63d1c28f6fe31207379db59ed9ca2f30ffe34576528639dc7f8179c66c1617"
+    }
+  },
+  "cold_provenance": {
+    "source": {
+      "source": "20f42170fb382cbf160fae2c356144c45fde4457",
+      "archive_sha256": "ed2a40e5a1e9ed4aa10b9474d23b4d93ccc0918db4aa845580adf76230f1954b",
+      "runtime": "1.1.0a5",
+      "sdk": "0.5.0a1",
+      "rcc_preseed": "/workspace/actions-327-state/cold-installed/source/action_server/src/actions/server/bin/rcc-18.19.3",
+      "rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+      "source_date_epoch": "1792701966",
+      "configuration": "generated from committed public fixture inputs, no working untracked OAuth module"
+    },
+    "manifest": {
+      "path": "/workspace/actions-327-state/invoice-export-20f42170/manifest.json",
+      "sha256": "176beb0b447d122359d3f80b7ea6697cfd9abf6543ac13c7f7fc84cc3bec93be",
+      "bytes": 1824
+    },
+    "consumer": {
+      "path": "/workspace/actions-327-state/invoice-cold-20f42170/consumer.json",
+      "sha256": "07c4c5184e93ce1354055ab9bbecafc3c220a520c7f608ae5815309e3c783d8c",
+      "bytes": 8723
+    },
+    "identity": {
+      "path": "/workspace/actions-327-state/invoice-cold-20f42170/identity.json",
+      "sha256": "bfe2035caa2a41f1b6f37f0cd3b7c1aadce93f0efc17a1752490fd9f887d586a",
+      "bytes": 2378
+    },
+    "install_report": {
+      "path": "/workspace/actions-327-state/invoice-cold-20f42170/install-report.json",
+      "sha256": "832112bee2f2fc554569133dce26fdcfb9457207f3d9b88e9b4724885902e3b2",
+      "bytes": 833949
+    },
+    "dependency_lock": {
+      "path": "/workspace/actions-327-state/invoice-export-20f42170/dependency-hashes.json",
+      "sha256": "b3a22744d10e416185653b42cd8e77dee5255e27ffc19a197cfad8b7c40d943c",
+      "bytes": 223738
+    },
+    "constraints": {
+      "path": "/workspace/actions-327-state/invoice-export-20f42170/dependencies.constraints",
+      "sha256": "1fa9dd4ff8f97c3985c10b6abc6bcc0f59ea4b4d7044d1e35563992e7bc0256a",
+      "bytes": 1284
+    },
+    "wheelhouse_count": 67,
+    "wheelhouse_manifest": {
+      "path": "/workspace/actions-327-state/invoice-cold-20f42170/wheelhouse/wheelhouse.json",
+      "sha256": "79412eb0536cda87d8b58df017c6bf637beb1e6292737e38ae4f508080138fab",
+      "bytes": 8441
+    },
+    "offline_consumer": {
+      "path": "/workspace/actions-327-state/invoice-offline-20f42170/consumer.json",
+      "sha256": "e8aa76bc10be68883a902e038185762a12b6e96107c0b7d16ea2d162fff5eb44",
+      "bytes": 8711
+    },
+    "offline_identity": {
+      "path": "/workspace/actions-327-state/invoice-offline-20f42170/identity.json",
+      "sha256": "630108e73306efc1abecd179468d1ef1f802b3c8b6661f8f2aa506e1def9576e",
+      "bytes": 2402
+    },
+    "runtime": {
+      "artifact_digest": "sha256:f09b875f9619616cf6e80054332deefe09a3362ba2f43fbb21e05ceffbde1948",
+      "environment": "/workspace/actions-327-state/invoice-cold-20f42170/demo/package.yaml",
+      "sdk_wheel_sha256": "5788f4b346d1dd6c61ba9f68ad30ae2cc56bf9488d22e49bd808e1df49915cd0",
+      "rcc": "/workspace/actions-327-state/invoice-cold-20f42170/venv/lib/python3.12/site-packages/actions/server/bin/rcc-18.19.3",
+      "rcc_home": "/workspace/actions-327-state/invoice-cold-20f42170/demo/rcc-home"
+    },
+    "rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "rcc_prepare": {
+      "path": "/workspace/actions-327-state/invoice-cold-20f42170/demo/rcc-prepare.json",
+      "sha256": "e14067ba1736e5fbb75147695b0785c3b55a96c5c0d812b58a124fce75bb2533",
+      "bytes": 289
+    },
+    "rcc_prepare_log": {
+      "path": "/workspace/actions-327-state/invoice-cold-20f42170/demo/rcc-prepare.log",
+      "sha256": "7e729e9ad6eedeb8cb116831533a788ba017c3b8772295a5c61820e5b9afe807",
+      "bytes": 2814
+    },
+    "rcc_acquire": {
+      "path": "/workspace/actions-327-state/invoice-cold-20f42170/demo/rcc-acquire.json",
+      "sha256": "aa2d27b7dd1afe86388a0dbddce55e0d0b5182ef198abd2a11c2fd24ce70eb59",
+      "bytes": 55216
+    },
+    "compatibility": {
+      "cpu": {
+        "architecture": "amd64",
+        "requiredFeatures": [
+          "sse2"
+        ]
+      },
+      "filesystem": {
+        "caseSensitive": true,
+        "junctions": false,
+        "longPaths": false,
+        "minimumMaxPath": 219,
+        "symlinks": true
+      },
+      "os": {
+        "family": "linux",
+        "kernelMinimum": "3.15",
+        "libc": "glibc",
+        "libcMinimum": "2.36",
+        "minimumVersion": "1",
+        "nativeArchitecture": "amd64",
+        "requiredLibraries": [
+          "ld-linux-x86-64.so.2",
+          "libX11.so.6",
+          "libc.so.6",
+          "libdl.so.2",
+          "libm.so.6",
+          "libpthread.so.0",
+          "librt.so.1",
+          "libutil.so.1"
+        ],
+        "runtime": "linux",
+        "translationPolicy": "native-only"
+      },
+      "python": {
+        "abi": "cpython-312-x86_64-linux-gnu",
+        "implementation": "cpython",
+        "version": "3.12.15"
+      },
+      "relocationVersion": "holotree-v12-path-rewrite-v1",
+      "schemaVersion": 1,
+      "systemRequirementsOverridden": false
+    },
+    "no_project_environment": "Fresh venv from pinned Python3.12.15; isolated sys.path contains only that interpreter standard library and new prefix/site-packages; Runtime/SDK/DuckDB paths and wheel archive hashes verified. Poetry absent. Existing outer RCC interpreter is an explicit prerequisite, not bare-OS bootstrap proof."
+  },
+  "browser_runs": {
+    "ui-first": {
+      "receipt": {
+        "path": "/workspace/actions-327-state/evidence/cold-demo/ui-first/receipt.json",
+        "sha256": "32cf3836cc35dafa5501f051dcff70a79e4ac761ce1f66ea4b11245aaa58adaa",
+        "bytes": 94241
+      },
+      "state": {
+        "worker_run_id": "a0c6ae28-5490-474a-a18b-84c7b7598341",
+        "query_run_id": "7b6b6dd5-a3e3-4338-9fe6-5c7efbbdd22e",
+        "run_count": 2,
+        "attempt_count": 2,
+        "application_revision": "sha256:e9d6959425b2c9032a23f852fc8875952cf3ecdb54d65f906bb6bdf380bd28a8",
+        "source_version": "sha256:6ebec198a00b70f17279e348d283ce7d166c71ced2bc9f45bf92dbdf8450d9b3",
+        "runtime_version": "1.1.0a5",
+        "sdk_version": "0.5.0a1"
+      },
+      "artifact_sha256": "06771ffb1c8ccc8f7cd4a04951e548b01bf30dfcb4ca1cecdc55e0c5616fbe7e",
+      "matched": 1,
+      "discrepant": 3,
+      "external_browser_requests": [],
+      "browser_errors": []
+    },
+    "cold-first": {
+      "receipt": {
+        "path": "/workspace/actions-327-state/evidence/cold-demo/cold-first/receipt.json",
+        "sha256": "f68f121dcb0b895ff011d5c85b7dcf20551138d12cbb9c54994f842dc653bb37",
+        "bytes": 95027
+      },
+      "state": {
+        "worker_run_id": "2d37f930-7bd7-4d3d-9354-9b1c66932d95",
+        "query_run_id": "3f15e4ba-9842-4a95-83c5-0497f5b267d8",
+        "run_count": 2,
+        "attempt_count": 2,
+        "application_revision": "sha256:88c363a22fac9b94fe16b7efdaa7ada13ec1358e36ec582d9a3db45ff2567c4b",
+        "source_version": "sha256:6ebec198a00b70f17279e348d283ce7d166c71ced2bc9f45bf92dbdf8450d9b3",
+        "runtime_version": "1.1.0a5",
+        "sdk_version": "0.5.0a1"
+      },
+      "artifact_sha256": "0e1c1d75ee720174a28329206b5f032d7a17933bbbba63409142d1e5c1f95657",
+      "matched": 1,
+      "discrepant": 3,
+      "external_browser_requests": [],
+      "browser_errors": []
+    },
+    "cold-restarted": {
+      "receipt": {
+        "path": "/workspace/actions-327-state/evidence/cold-demo/cold-restarted/receipt.json",
+        "sha256": "eab0cf8e7cd73619e2d6ff4cb30e033a50591048f79ca7fc6555784ba6ebe64b",
+        "bytes": 95054
+      },
+      "state": {
+        "worker_run_id": "2d37f930-7bd7-4d3d-9354-9b1c66932d95",
+        "query_run_id": "3f15e4ba-9842-4a95-83c5-0497f5b267d8",
+        "run_count": 2,
+        "attempt_count": 2,
+        "application_revision": "sha256:88c363a22fac9b94fe16b7efdaa7ada13ec1358e36ec582d9a3db45ff2567c4b",
+        "source_version": "sha256:6ebec198a00b70f17279e348d283ce7d166c71ced2bc9f45bf92dbdf8450d9b3",
+        "runtime_version": "1.1.0a5",
+        "sdk_version": "0.5.0a1"
+      },
+      "artifact_sha256": "0e1c1d75ee720174a28329206b5f032d7a17933bbbba63409142d1e5c1f95657",
+      "matched": 1,
+      "discrepant": 3,
+      "external_browser_requests": [],
+      "browser_errors": []
+    },
+    "artifact-replay-first": {
+      "receipt": {
+        "path": "/workspace/actions-327-state/evidence/cold-demo/artifact-replay-first/receipt.json",
+        "sha256": "8a773bc145dad717fc08c4d2af61ff81087b0df3d21876abfb55707361ee3e60",
+        "bytes": 95027
+      },
+      "state": {
+        "worker_run_id": "eb5bd271-295f-4387-99b0-bcae2087cc10",
+        "query_run_id": "7918d481-0156-43df-8448-ee5a02ae9656",
+        "run_count": 2,
+        "attempt_count": 2,
+        "application_revision": "sha256:1edb7029cbd03c544696d78e7f9a55bff79c752871d3f26e7c78685bce0e96a0",
+        "source_version": "sha256:6ebec198a00b70f17279e348d283ce7d166c71ced2bc9f45bf92dbdf8450d9b3",
+        "runtime_version": "1.1.0a5",
+        "sdk_version": "0.5.0a1"
+      },
+      "artifact_sha256": "3b84b3d7ec125703db3257fb2d8f4a2519bc81fb7281c1e7a61fe5498604eb11",
+      "matched": 1,
+      "discrepant": 3,
+      "external_browser_requests": [],
+      "browser_errors": []
+    }
+  },
+  "cold_negative": {
+    "path": "/workspace/actions-327-state/evidence/cold-demo/cold-negative.json",
+    "sha256": "8ce837b8aa5bd095e45223d38d933b697c7688cc18532143c74f74349b17e55d",
+    "bytes": 3986,
+    "checks": {
+      "anonymous_denied": true,
+      "foreign_origin_denied": true,
+      "persisted_revocation_denied": true,
+      "inactive_revision_artifact_denied": true,
+      "rollback_restores_same_artifact": true,
+      "foreign_workspace_denied": true,
+      "business_run_audit_unchanged": true
+    }
+  },
+  "network_observation": {
+    "restart": {
+      "connect_calls": 5,
+      "external_connect_calls": 0,
+      "external_lines": [],
+      "method": "strace -f -e trace=connect; RCC_NO_BUILD=1; no network settings changed; observation, not an enforced air gap"
+    },
+    "artifact-replay": {
+      "connect_calls": 6,
+      "external_connect_calls": 0,
+      "external_lines": [],
+      "method": "strace -f -e trace=connect; RCC_NO_BUILD=1; no network settings changed; observation, not an enforced air gap"
+    }
+  },
+  "offline_limit": {
+    "empty_rcc_store": "EXPECTED BLOCKED: RCC_NO_BUILD=1 env publish failed because no local hololib environment; exit1 retained. Offline package install alone is not offline cold RCC preparation. No retry or policy relaxation.",
+    "negative_log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/offline-empty-rcc-negative.log",
+      "sha256": "33d9d7213c16ec56b44ad88d86e4073f70a1712eba3a2208484a83563739990a",
+      "bytes": 1001
+    },
+    "rcc_reason": {
+      "path": "/workspace/actions-327-state/invoice-offline-20f42170/demo/rcc-prepare.log",
+      "sha256": "0e7a1448cdd32a1066780f683159c7b5221acb3686198651f485ded88176f2ec",
+      "bytes": 1631
+    },
+    "replay_scope": "No-build retained-Artifact restart and fresh explicit Run actual RCC execution succeeded with zero external connect calls in strace -f. Network was observed, not disabled; this is not an enforced-air-gap or clean-host restore qualification.",
+    "future_cold_resolution": "RCC freezes its actual built Artifact and compatibility/provenance receipt; fresh resolution of conda transitive artifacts at a later date is not promised byte-identical. Retain the accepted Artifact for exact replay.",
+    "package_install_report": "All67 installed artifacts use local file:// URLs; no-index/only-binary/version-check-disabled install; package hashes match first consumer closure."
+  },
+  "capture": {
+    "path": "/workspace/actions-327-state/evidence/cold-demo/cold-first/executed-result.png",
+    "sha256": "129d58caaa8c18c10c8ffbb1817ad8c22f6d6e21b8436301d994789a95cc5e24",
+    "bytes": 213113,
+    "library_file_id": "libfile_3bb947075bb88191acb13ba08d7a1051",
+    "file_id": "file_000000007b04820cacdd0ca7a9c766c9",
+    "version": 0
+  },
+  "commands": {
+    "stage": "python action_server/examples/invoice_reconciliation/export.py --output /workspace/actions-327-state/invoice-export-20f42170 --runtime-wheel /workspace/actions-327-state/cold-installed/wheels/actions_runtime-1.1.0a5-cp312-cp312-linux_x86_64.whl --sdk-wheel /workspace/actions-327-state/demo-ui-20f42170/sdk-wheels/actions_work_items-0.5.0a1-py3-none-any.whl --canvas /workspace/actions-327/action_server/frontend/dist-canvas/index.html",
+    "cold_prepare": "<pinnedPython3.12.15> <bundle>/prepare.py --root <fresh-owned-consumer>",
+    "cold_launch": "<pinnedPython3.12.15> <bundle>/prepare.py --root <owned-consumer> --launch --port 0 (no retained-runtime override; fresh RCC Artifact)",
+    "qa": "node scripts/capture-invoice-reconciliation.mjs --url <printed-loopback-URL> --out <fresh-owned-capture>; <consumer>/venv/bin/python -I <bundle>/verify.py --state <consumer>/demo --url <URL> --out <negative-receipt>",
+    "restart": "Ctrl-C; RCC_NO_BUILD=1 strace -f -e trace=connect -o <trace> <pinnedPython> <bundle>/prepare.py --root <consumer> --launch --port 0; capture helper --resume",
+    "offline_install": "<pinnedPython> <bundle>/prepare.py --root <second-fresh-owned-consumer> --offline-wheelhouse <first-consumer>/wheelhouse",
+    "retained_artifact_execution": "RCC_NO_BUILD=1 ACTIONS_INVOICE_SDK_WHEEL=<bundle>/wheels/actions_work_items-0.5.0a1-py3-none-any.whl ACTIONS_INVOICE_CANVAS_RESOURCE=<bundle>/canvas.html ROBOCORP_HOME=<first-consumer>/outer-rcc ACTIONS_HOME=<first-consumer>/outer-rcc ROBOTS_HOME=<owned-replay-robots> strace -f -e trace=connect -o <trace> <first-consumer>/venv/bin/python -I <bundle>/demo.py --state <fresh-replay-state> --runtime <first-consumer>/demo/runtime.json --port 0; fresh browser explicit review and Run action",
+    "affected_gate": "ACTIONS_INVOICE_EVIDENCE_DIR=<cold-demo/affected> ACTIONS_INVOICE_GENERATED=1 ACTIONS_INVOICE_BROWSER=1 ACTIONS_INVOICE_WORKER_RUNTIME=<measured-task-owned-SDK-only-fixture> ./devutils/bin/develop.sh InvoiceQueryTest via run-prepared",
+    "cleanup": "Ctrl-C or SIGINT only after verifying owned ready.json PID/UID/exact command. Retrieve evidence, then remove only chosen consumer/bundle/capture directories as coordinated units; no unrelated cache cleanup."
+  },
+  "requirements": {
+    "platform": "Linux amd64/native,SSE2;glibc>=2.36;Python3.12.15;case-sensitive filesystem with symlinks;RCC receipt lists exact native libraries including libX11.so.6 even for this headless task",
+    "network": "First package download requires configured PyPI metadata/wheel hosts; first RCC Artifact build requires configured conda-forge/PyPI endpoints. Existing proxy/TLS preserved. No credentials, new identity, tunnel or security settings. Package downloads constrained to Poetry/public-floor versions and verified allowed wheel hashes; installs use no-index.",
+    "qa": "Prepared Node20.19.3 and Chromium only for automation; app launch requires no Node/Poetry or source checkout."
+  },
+  "log_inventory": {
+    "affected.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/affected.log",
+      "sha256": "244899c7ded8a0cd45776c66d9d5c13afb9de7f5b3c2831e902fefa1343222b1",
+      "bytes": 16409
+    },
+    "artifact-replay-launch.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/artifact-replay-launch.log",
+      "sha256": "9e09ef440e7d6309da78f0eeab9aa876dd592c46c0d81d62951038834c1dead9",
+      "bytes": 29
+    },
+    "bootstrap.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/bootstrap.log",
+      "sha256": "5986a8d536739f4d2ff0601ac1baf56dfc4f4c2336bab612e5b296eafba94a6c",
+      "bytes": 14224
+    },
+    "build-candidate.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/build-candidate.log",
+      "sha256": "8882b46cadd6c875abc4e1526074f68242b4e6d873eb371a8775ef2d02ff780f",
+      "bytes": 179
+    },
+    "canvas-build-final.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/canvas-build-final.log",
+      "sha256": "6c22c8ad9d3e568ae822aec2b41f5e2768303c5154ea90db13669853cda7844d",
+      "bytes": 982
+    },
+    "canvas-build.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/canvas-build.log",
+      "sha256": "6cb408d30ae54871d560561d0e3229e6049f7f3578c04044ecf9ac4c160045da",
+      "bytes": 982
+    },
+    "canvas-tests.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/canvas-tests.log",
+      "sha256": "6f689f2e694189342de5e6816cfb7b3957f5e51c2515d5157fa405120f1610b7",
+      "bytes": 457
+    },
+    "capture-format.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/capture-format.log",
+      "sha256": "aee1f84106d1621649537c0845b4e219e573851d786142edfbb09befdfd4f0d5",
+      "bytes": 49
+    },
+    "cold-first.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/cold-first.log",
+      "sha256": "1a0daf2b7e8f7e986e2802b8fd057ba763cd14e389d7c9004d3e016df5aea54b",
+      "bytes": 138
+    },
+    "cold-launch.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/cold-launch.log",
+      "sha256": "234ba61d575f6abd6cb1f396fa0f074183c644513942a5bc912fd1de573dbce6",
+      "bytes": 29
+    },
+    "cold-negative.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/cold-negative.log",
+      "sha256": "8f78348fe13b6ffeddc5b37a439b12e944894056d344a82e4804d405ce9f64a4",
+      "bytes": 281
+    },
+    "cold-prepare.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/cold-prepare.log",
+      "sha256": "c6ddd37c0f8241c0c33617bbb4651ea1b731bf1542e87e350f5adf2892b347bb",
+      "bytes": 254
+    },
+    "cold-restart.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/cold-restart.log",
+      "sha256": "96495ba88000db2f6db8d8b8613b9c2d074befbedff7db76d76decdb2c3f093e",
+      "bytes": 29
+    },
+    "devutils-lock.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/devutils-lock.log",
+      "sha256": "3df98ec007a311d67d0696d6cf4da2168939c66bd105f2566d2d8313bf733a42",
+      "bytes": 924
+    },
+    "devutils-version.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/devutils-version.log",
+      "sha256": "f4c77b58e2280613a49ba18da1c4a02d440e862c49a6c8fe5daaf277333ff99d",
+      "bytes": 98
+    },
+    "doctor.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/doctor.log",
+      "sha256": "6ac2c714c792dcffdd5f5563ce69f57bc20a04636d83e3bb8a1a230cbc98a421",
+      "bytes": 13660
+    },
+    "frontend-full.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/frontend-full.log",
+      "sha256": "d33902dc6f60fadc648671b5d202ab02a91a1a869d1b433d802629420bcf1922",
+      "bytes": 312
+    },
+    "frontend-quality.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/frontend-quality.log",
+      "sha256": "d74844771c7e8400bb0a650fcee71dc641fc21e3f3a47deccf609d221df3cf3b",
+      "bytes": 1267
+    },
+    "mcp-red-corrected.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/mcp-red-corrected.log",
+      "sha256": "189c70daae701c6bc976781a97d321d44668a8cb9c7ceeee1901800dfac9b5dd",
+      "bytes": 4626
+    },
+    "mcp-red-final.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/mcp-red-final.log",
+      "sha256": "d6fc9d19df9666592d51cbdc1e47d0097b8da2c1688e88d585d4c77b248974d4",
+      "bytes": 3089
+    },
+    "mcp-red.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/mcp-red.log",
+      "sha256": "515eccfe15ac82cf48be4a3561ebef26e46a484a430be8414747f6d0c12738d3",
+      "bytes": 86
+    },
+    "offline-empty-rcc-negative.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/offline-empty-rcc-negative.log",
+      "sha256": "33d9d7213c16ec56b44ad88d86e4073f70a1712eba3a2208484a83563739990a",
+      "bytes": 1001
+    },
+    "offline-prepare.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/offline-prepare.log",
+      "sha256": "1cd3ff6e07ad663d2c2258434b6de74a75ff0e1d49fe383ed24cca51c2868f60",
+      "bytes": 257
+    },
+    "python-format.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/python-format.log",
+      "sha256": "9bb8dedadad695b3bd78410fca53e51158c1fad77670e8e34058294e5d48f73f",
+      "bytes": 297
+    },
+    "python-lint-corrected.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/python-lint-corrected.log",
+      "sha256": "b48c4474063548bd17582eec13a7f507a82fe0a65318719ce5a3fde2487c6f4a",
+      "bytes": 44
+    },
+    "python-lint-second.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/python-lint-second.log",
+      "sha256": "d2e1ac8e8a98819237e018d75126ff41ad92fb2e063168bfd86b2277fc6d9833",
+      "bytes": 258
+    },
+    "reconciliation-green.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/reconciliation-green.log",
+      "sha256": "f52bc94c3ee860fc3f16ab3d9aa4147d62ee38604c74dc71c2597abb86d0cad4",
+      "bytes": 260
+    },
+    "reconciliation.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/reconciliation.log",
+      "sha256": "0c1f2031c576853fe4f8896c355c59a2d2014146e9b178ed902c7b01a10e47c3",
+      "bytes": 2011
+    },
+    "runtime-static.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/runtime-static.log",
+      "sha256": "96eb6c957587fb9b5dc27e39989787bba20ab6b9f597a7e534f1fbf27a961464",
+      "bytes": 2383
+    },
+    "toolkit.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/toolkit.log",
+      "sha256": "5ac24d323cc238f838790545733c1c32299118cf18132e8b5ca2ad5118251275",
+      "bytes": 14684
+    },
+    "ui-first.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/ui-first.log",
+      "sha256": "9caa2651bcc5998f3467e7a7488732127c5bc9346606febcea6ab2153fc48fa4",
+      "bytes": 136
+    },
+    "ui-format.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/ui-format.log",
+      "sha256": "507c465bf3945c09b13cde8b315bc7ca10afbac47dcf04b3d0bb4071b67bd84f",
+      "bytes": 316
+    },
+    "ui-launch.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/ui-launch.log",
+      "sha256": "40d8d360f1d9023c180a9baf7ec38d843c088ff1028b57ac7dfae8db7f591968",
+      "bytes": 14935
+    },
+    "ui-red-corrected.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/ui-red-corrected.log",
+      "sha256": "69502e57204761fb6c5f982a2be27d4dbd9c22b779ba7e76087d78f9369a9231",
+      "bytes": 9566
+    },
+    "ui-red.log": {
+      "path": "/workspace/actions-327-state/evidence/cold-demo/ui-red.log",
+      "sha256": "2d5fe34f00146c2e0cd2702064338129adfb7d17189ebbe90f914cb47b245ee6",
+      "bytes": 278
+    }
+  },
+  "scope_notes": [
+    "Reconciliation/approval integer-cent engine unchanged; only additive typed app-page metadata and existing React/CSS renderer changed. Legacy pages retain generic table; old UI can ignore additive metadata.",
+    "Current source20f affected gates qualify this UI/consumer slice. Previous3048 full Runtime1826/installed284/effects72 receipts retained unchanged at their exact earlier sources; not relabeled current full acceptance.",
+    "Runtime1.1.0a5 built once from clean Git archive/public generator; SDK0.5.0a1 unchanged wheel bytes. No changed bytes built under a4/published1.0.4/0.4.4.",
+    "Template0.2.0 remains Actions-owned private staged export; catalog/repository destination/visibility UNAPPROVED; no other repository mutation/publication.",
+    "E2 only; authenticated invoice ChatGPT E1 NEEDS_OPERATOR; working Executor read/write recognized and untouched. Generic effects/retention/restore, celld NO-GO and release gates remain separate."
+  ],
+  "cleanup": {
+    "ports_closed": [
+      53203,
+      38025,
+      51055,
+      45379
+    ],
+    "controllers": "All owned source/cold/restart/replay controllers stopped with exit0; expected empty-RCC launch exited1; no running validation.",
+    "containers": [],
+    "evidence": "All owned SQL/objects/revisions/Artifact/journals/wheelhouse/negative roots retained; no unrelated deletion"
+  },
+  "private_candidate_bundle": {
+    "path": "/workspace/actions-327-state/evidence/cold-demo/synthetic-invoice-reconciliation-0.2.0-20f42170.tar.gz",
+    "sha256": "ee824e3aa42fbd52edc8002fa342b54b7f152a0c560e744bf868752223bfd5fb",
+    "bytes": 14751848,
+    "source": "20f42170fb382cbf160fae2c356144c45fde4457",
+    "manifest": {
+      "path": "/workspace/actions-327-state/invoice-export-20f42170/manifest.json",
+      "sha256": "176beb0b447d122359d3f80b7ea6697cfd9abf6543ac13c7f7fc84cc3bec93be",
+      "bytes": 1824
+    },
+    "engine_source_copy": false,
+    "publication": false,
+    "dependencies": "Online constrained acquisition required;67-wheel offline closure remains separately retained under first consumer/wheelhouse, not included in this input bundle",
+    "library_file_id": "libfile_7222d27c02988191b1326f1051f5c46c",
+    "file_id": "file_000000007e1c8230ada121e3a2de308c",
+    "version": 0
+  }
+}

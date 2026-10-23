@@ -238,8 +238,15 @@ def test_migrate_archives_legacy_output_before_historical_migration_11(
     db_path = tmp_path / "migration-v10-populated.db"
     with create_db(db_path) as db:
         with db.transaction():
+            from action_server_tests.fixtures import (
+                drop_foundry_records_for_backdated_fixture,
+            )
+
+            drop_foundry_records_for_backdated_fixture(db)
             # Backdating must also remove schema owned by later migrations.
             for table in (
+                "invoice_review",
+                "fenced_work_item",
                 "run_output",
                 "run_attempt",
                 "run_pin",

@@ -1,0 +1,181 @@
+{
+  "schema": "actions.next.bounded-qualification/v1",
+  "date_utc": "2026-10-22",
+  "authority": "https://github.com/joshyorko/actions/issues/327",
+  "migration_receipt": "https://github.com/joshyorko/actions/issues/327#issuecomment-6341162893",
+  "pull_request": 328,
+  "branch": "release/327-invoice-vertical-20261020",
+  "starting_source_sha": "1d4f7eb60b223716e498af82534acceb02aa3080",
+  "source_binding": "Precommit qualification binds the following exact bytes. The completion comment records the committed-source rerun and remote SHA. This receipt makes no clean-commit claim for its precommit run.",
+  "changed_input_sha256": {
+    "work-items/src/actions/work_items/_adapters/_postgres_fenced.py": "13a3c563be1e75860d75831a13e45edd6bc262221b931d6f5ae4684909563c55",
+    "work-items/tests/work_items_tests/test_postgres_fenced_schema.py": "9364270fee927ab0da6a4e3de69edd174949e496d3049b4dfea17d71aa550051",
+    "docs/skills/work-items.md": "c4c35f27a5c54fddf039701b8de032f70a659c8c277d86e0946a75916da918f5",
+    "docs/program/actions-next-release-327.md": "1e5eea6cea60e6a129134dcd3260c3bc44b82c322736161bc7fdc4fc1ed20aeb"
+  },
+  "qualification_inputs": {
+    "developer/toolkit.py": "7e10b5227400efdb9bbe58520b63e847dfae32c2d3c687c6735dcefb490fec9a",
+    "developer/toolkit.yaml": "59bef472fce6bf6c9207550c170e97041e1bbb46ce6a4a90b0cd576f7c95734d",
+    "work-items/poetry.lock": "11cf9a37d527e0089d124ed2f965dbdc16aed6dff546a342dc4ddd9ac9bd672e",
+    "work-items/pyproject.toml": "c44ed47495bf28d94c343220580c7824ba0b004e77a006bb313a31043168371c",
+    "work-items/scripts/verify_fenced_queues.py": "13f18a32dae6b67e4395b1697f22d38e50e16ac5b19fa2235cdbbd16d1f08076",
+    "work-items/src/actions/work_items/_adapters/__init__.py": "866e54892d3d947d5adae7d7e4c00187bcc36823cda51d3f8729cad7871fa369",
+    "work-items/src/actions/work_items/_adapters/_base.py": "ef0e65e896d74185cfec0443cc1e997e83bf446d954a2dd3681336e845084d0c",
+    "work-items/src/actions/work_items/_adapters/_docdb.py": "5187557ff67d73e0cdaac34d9c58f62f325477209d4d15672624b2bb57cb65e4",
+    "work-items/src/actions/work_items/_adapters/_file.py": "b53c59b0eff5c4f28e6e1b506420e7b7632b5cd4473d18a34cc62e06cfaea3b6",
+    "work-items/src/actions/work_items/_adapters/_postgres_fenced.py": "13a3c563be1e75860d75831a13e45edd6bc262221b931d6f5ae4684909563c55",
+    "work-items/src/actions/work_items/_adapters/_redis.py": "18c8b388aa3310265404677ecc2f9b7e9363feaeeecaa56af2ef6327264cdeab",
+    "work-items/src/actions/work_items/_adapters/_sqlite.py": "619f93586529126be766f949d317c12c477cf41ae7133257b2994a6e625b3ec4",
+    "work-items/src/actions/work_items/_adapters/_yorko.py": "b3a4a5eae04f209481843c67a937933d72c91a0ee80553495841405762835dc8",
+    "work-items/src/actions/work_items/_fencing.py": "e9d6f7560c432ac9d82727c787a7da8eaf14797bd691572acd414f9822dbe560",
+    "work-items/tests/work_items_tests/test_fenced_queue_conformance.py": "54cb4345a8891223fae40d6a49cc53f85c8533e9618c4de00d94816e41ec14be",
+    "work-items/tests/work_items_tests/test_postgres_fenced_schema.py": "9364270fee927ab0da6a4e3de69edd174949e496d3049b4dfea17d71aa550051",
+    "work-items/tests/work_items_tests/test_sqlite_fencing.py": "a292fb0dc6e2262c5299472a824a1da99ad1e39161621b5c77f168ae5441b288"
+  },
+  "toolchain": {
+    "rcc": "18.19.3",
+    "python": "3.12.15",
+    "poetry": "2.1.1",
+    "psycopg": "3.3.6",
+    "gateway": "./devutils/bin/develop.sh",
+    "isolated_home": "/workspace/actions-327-state/rcc",
+    "environment_wrapper": "/workspace/actions-327-state/run-prepared",
+    "doctor": {
+      "exit": 0
+    },
+    "bootstrap": {
+      "exit": 0
+    },
+    "toolkit_test": {
+      "exit": 0,
+      "passed": 179
+    },
+    "commands": [
+      "./devutils/bin/develop.sh Doctor",
+      "./devutils/bin/develop.sh Bootstrap",
+      "./devutils/bin/develop.sh ToolkitTest"
+    ]
+  },
+  "static_gates": {
+    "cwd": "work-items",
+    "commands": [
+      "poetry install --extras postgres",
+      "poetry run ruff check src tests",
+      "poetry run mypy",
+      "poetry run mypy src/actions/work_items/_fencing.py src/actions/work_items/_adapters/_sqlite.py src/actions/work_items/_adapters/_postgres_fenced.py",
+      "poetry check --lock",
+      "git diff --check"
+    ],
+    "exit": 0
+  },
+  "postgres_fixture": {
+    "acquisition": "docker pull postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81",
+    "image_id": "sha256:319d040b5d68e3e5b98a238f0b5d375b4b4d9c5b3a6a9afb0308a8bcf0de72a5",
+    "version": "postgres (PostgreSQL) 15.19",
+    "verifier_pull_policy": "never",
+    "real_service": true,
+    "binding": "loopback only, ephemeral port",
+    "memory_mib": 256,
+    "cpus": 1,
+    "pids": 128,
+    "storage": "128 MiB tmpfs, synthetic data only",
+    "cleanup": "PASS"
+  },
+  "sql_gate": {
+    "command": "ACTIONS_FENCED_EVIDENCE_DIR=/workspace/actions-327-state/evidence/precommit ACTIONS_FENCED_FULL=1 ./devutils/bin/develop.sh FencedWorkItemsTest",
+    "status": "PASS",
+    "evidence": "/workspace/actions-327-state/evidence/precommit/3fbd02c6-aed5-4885-9458-7d8fa64133cb",
+    "receipt_sha256": "d504fd15ff03048f29c23475b3310628c0ef146604b7a900e9e2967b913eec99",
+    "conformance": {
+      "passed": 45,
+      "failed": 0,
+      "skipped": 0
+    },
+    "portable": {
+      "passed": 283,
+      "failed": 0,
+      "skipped": 28,
+      "xfailed": 10,
+      "deselected": 3
+    },
+    "overlap": "Conformance cases also occur in the portable suite. Do not add their totals.",
+    "junit_note": "Verifier portable skipped=38 includes 10 pytest.xfail elements; pytest reports 28 ordinary skips separately.",
+    "artifacts_sha256": {
+      "conformance.log": "5493263e8e09e6c812e285970fe35266c09b7442d1e0f54698bbc5f41608be5e",
+      "conformance.xml": "66f56182d1f5dccaedc9405eed8a92d0d9ed5c6cc275a08e216c79d0e11f4b63",
+      "portable.log": "f7ce75a835922d4d9f69437f2e6b06ff8419b81228097a103c30d462c59e948b",
+      "portable.xml": "b4ed82e1ac20e3ba16074cd775ea42c71261db8e9c5dab3d26198633e345874a",
+      "postgres.log": "eac7f894a077abb8a4eb611c5d81f8cf840dad46a3acc7f6d82b3ff05731a203"
+    }
+  },
+  "failure_receipts": [
+    {
+      "evidence": "mypy-baseline.log",
+      "exit": 1,
+      "result": "3 errors: psycopg and psycopg.rows absent before locked postgres extra, plus observed var-annotated"
+    },
+    {
+      "evidence": "mypy-red.log",
+      "exit": 1,
+      "result": "1 var-annotated error at _postgres_fenced.py:131 after installing the locked extra; reproduced before annotation fix"
+    },
+    {
+      "evidence": "/workspace/actions-327-state/evidence/final-expiry-control/5bd1d7f8-7892-463c-81cb-4ba672737b1a",
+      "status": "FAIL",
+      "cleanup": "PASS",
+      "result": "Expected negative control, 1 failed and 44 passed after removing only finish final expiry predicate. New test failed DID NOT RAISE ClaimRejected. Original source bytes restored.",
+      "artifacts_sha256": {
+        "conformance.log": "49c5bf378b1cd6a4aea50c87a65f976cb48312c81759fb95f2578b67e0fdd216",
+        "conformance.xml": "014e8f6e5c8f159f5087d6644a8a5ab26851a6e1947011315003b12b325fd24a",
+        "postgres.log": "d2b12423a5cd2b1013aaabe5c37bcdf843f615b2a79705612e7ce76d75bcd00f"
+      }
+    },
+    {
+      "evidence": "lock.log",
+      "exit": 127,
+      "result": "Initial shell environment assignment applied only to mypy; following Poetry command unavailable. Corrected prepared command passed in lock-prepared.log."
+    }
+  ],
+  "published_sdk": {
+    "command": "cd work-items && poetry run python /workspace/actions-327-state/check-published-sdk.py",
+    "status": "PASS",
+    "candidate_schema": 6,
+    "installed_sdk_version": "0.4.4",
+    "installed_schema_version": 5,
+    "installed_module_sha256": "e14521f024243aa5a0fcb7b1947e1513d6a548abaccb1fe9a13cbc11cf7ef238",
+    "provenance": "Registry dependency already installed by canonical Bootstrap in Runtime Poetry environment; no editable direct_url; child interpreter isolated with -I; module contained in that venv.",
+    "result": "Rejected schema 6; complete database and attachment file inventories unchanged",
+    "before_sha256": {
+      "files/9dd6ff1c-a93c-459f-9e85-602d4a33bc94/receipt.txt": "019dd5f1692d0ae6bd8913b504a30c4706ef8c8c53cf75462156e2b5029943de",
+      "queue.db": "e09a737a0511b80e52be3ff4c8c0ce843c9fd031cbe74e1ab683dbe3fa8216f7"
+    },
+    "after_sha256": {
+      "files/9dd6ff1c-a93c-459f-9e85-602d4a33bc94/receipt.txt": "019dd5f1692d0ae6bd8913b504a30c4706ef8c8c53cf75462156e2b5029943de",
+      "queue.db": "e09a737a0511b80e52be3ff4c8c0ce843c9fd031cbe74e1ab683dbe3fa8216f7"
+    },
+    "evidence": "/workspace/actions-327-state/evidence/published-sdk.json"
+  },
+  "not_qualified": [
+    "The 3 persistent_backend_service cases are deselected; 28 ported legacy service cases skip; 10 known compatibility gaps xfail.",
+    "No Runtime/frontend/native/full-release union gates or actual invoice worker execution run in this SDK-only iteration.",
+    "Canvas and Knowledge sibling source remains unreviewed and unintegrated pending coordinator handoff.",
+    "Actual authenticated ChatGPT E1 remains NEEDS_OPERATOR; E2 host simulation cannot satisfy it.",
+    "celld 24fbd91c9ddd34bec54230e1c3b20e3225061079 remains NO-GO evidence only; no adapter admitted.",
+    "No homelab build/distribution/retention/restore acceptance or production migration established."
+  ],
+  "rollback": "The production-code delta is a type annotation only. No schema/runtime behavior or version changed. Reverting the commit needs no data migration. Existing candidate SQLite schema 6 still requires a pre-upgrade database plus attachment backup for schema-5 rollback. PostgreSQL format 1 remains separate and opt-in, with no cross-backend migration.",
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/work-items.md",
+    "delta": [
+      "Document initialization-only ownership versus per-transaction format/column checks and the unvalidated constraints/index/trigger/privilege boundary.",
+      "Document the real-trigger expiry-during-output rollback counterexample and its failing predicate-removal control.",
+      "Give explicit locked-extra plus concrete-adapter mypy command, separate from configured call-site typing.",
+      "Explain JUnit xfails in aggregate skipped counts and retain service deselections separately."
+    ],
+    "evidence": "45 real SQL conformance cases, the failed final-expiry negative control, mypy red/green, configured mypy scope, verifier JUnit and pytest summaries.",
+    "stale_or_ambiguous_guidance_removed": "Clarified that configured mypy alone does not check concrete adapters, and aggregate JUnit skipped does not equal optional service skips.",
+    "remaining_uncertainty": "Full release, network authentication, complete schema invariants, and Runtime worker integration remain separate gates."
+  },
+  "upstream_disposition": "none",
+  "release_status": "DRAFT_PR, full release NOT READY"
+}

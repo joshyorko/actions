@@ -1,6 +1,231 @@
 # Repository Operations
 
+## Cloud source handoff
+
+Checkpoint each writer branch separately; never fold a worker's unreviewed source
+into the release branch during synchronization. Archive non-sensitive dirty files
+outside Git, preserve excluded private/generated files in place, and stage only
+the reviewed allowlist. Record failed and skipped checks without fixing features
+in a migration-only lane. Push without force and verify each exact remote SHA.
+Cloud tasks consume those immutable remote SHAs and the authoritative issue's
+handoff, not local worktree paths or thread goal statuses as acceptance evidence.
+
+## Candidate wheels and historical migration fixtures
+
+Keep the public Runtime 1.0.4 floor canary separate from provisional candidate
+verification. `verify_published_runtime_floor.py` still defaults to exact 1.0.4;
+its reusable installed-wheel verifier accepts an explicitly named candidate
+version. A candidate check must pass the selected package metadata version,
+verify wheel/module origins and bytes, and admit the measured SDK dependency
+floor. Never infer candidate acceptance from the public-version canary.
+
+The clean-wheel contract test builds a Git-tracked source archive in its own
+fixture directory before running the public OAuth configuration generator. This
+prevents a test build from overwriting or admitting an existing untracked local
+OAuth module. Do not treat such a module in a working checkout as build authority.
+Retain generated public build inputs and their binding inside the owned fixture.
+
+When backdating a freshly created database to exercise an old migration, remove
+**all** tables/indexes owned by later migrations first, children before parents.
+For pre-15 fixtures, migration 16's `invoice_review` and `fenced_work_item` tables
+must be removed before Run/Workspace tables. Otherwise an existing index failure
+is a malformed historical fixture, not evidence that upgrading a real old schema
+is unsafe. Continue comparing the upgraded tables/indexes with a fresh schema
+and proving legacy rows survive; do not add `IF NOT EXISTS` to hide the fixture
+error or drop retained business data during migration.
+
+## Explicit local RCC trust carrier for invoice fixtures
+
+Pinned RCC 18.19.3 accepts `--provider local`, but its automatic trust-carrier
+selection constructs an HTTP carrier for any nonempty provider string. In a
+fresh task-owned local Artifact fixture, publish succeeded while provider-bound
+acquire/exec failed with `artifact trust attachment verification failed`; the
+verification receipt recorded `trust attachment could not be decoded`.
+
+Keep the provider and policy. Supply the existing generated local carrier with
+`--trust-carrier <owned-rcc-home>/artifacts/v1/trust --trust-carrier-type filesystem`
+alongside the original `--provider local --permissive-local`. The measured
+verification policy digest was unchanged and verification then returned valid,
+including provenance/SBOM/revocation digests. No trust roots, signatures, signing
+keys, credentials or security configuration were changed. This applies only to
+owned unsigned local test artifacts, never a remote/production trust override.
+
+The existing adapter's optional `local_trust_carrier` argument preserves its
+provider binding and is rejected for provider-free, named and HTTP(S) providers.
+The fixed invoice worker passes its owned local carrier explicitly. Other
+callers are not silently redirected. This narrow Actions mitigation remains
+until a reviewed RCC pin fixes automatic local-alias carrier selection and the
+same acquire/exec negatives and positives pass without it. The upstream finding
+is draft-only under the task's reporting authority.
+
+## Recovering a vanished release worktree
+
+Verify the registered worktrees, exact branch ref and destination absence before
+restoration. Archive the recovered files, patch and SHA manifest outside the
+checkout first, then require `git apply --check` against the exact base and
+verify every recovered file hash. A Git worktree lock prevents pruning, not
+direct filesystem deletion. Preserve unrelated dirty checkouts and processes.
+
+For a lost generated OAuth module, use the checked-in public generator with an
+outside-checkout destination. Restore only bytes matching the previously measured
+SHA; otherwise keep the original explicitly missing. Public generation is not
+permission to search for credentials or copy a private operator configuration.
+
+## Invoice Canvas MCP qualification
+
+The release #327 candidate has a default-off, trusted-server invoice binding on
+the existing MCP server. It uses `InvoiceCanvasFacade`, the official MCP Apps
+bridge and the existing `QueryResultsView`; it does not create another renderer
+or execute a query when a published result opens. The credential verifier must
+return both an authenticated Actor and a verified model/app audience. MCP
+`visibility` metadata and caller-supplied app identifiers do not authenticate an
+app. Every page/export still resolves the pinned application/deployment and
+current persisted Actor grants through the existing output authority.
+
+`invoice_result` returns a bounded model summary; invoice rows belong in the
+UI-private `actions.invoicePage` result metadata. `invoice_result_page` and
+`invoice_result_export` require the verified app audience. When the trusted
+configuration explicitly supplies `InvoiceReviewService`, app-only
+`invoice_review_offer`, `invoice_review_decide` and `invoice_review_cancel` expose
+the SQL review boundary described in [Work Items](work-items.md#exact-result-review-on-the-runtime-sql-connection).
+The model audience cannot call these tools and the UI sends no approval on mount. The built HTML is
+served as a content-addressed `text/html;profile=mcp-app` resource. Export links
+require the same scoped authenticated output transport and a trusted HTTPS or
+loopback download origin. A handle alone grants no access.
+
+Build with the locked frontend environment using `npm run build:canvas`, then
+run the prepared toolkit Python on
+`action_server/scripts/verify_invoice_queries.py --browser --evidence-dir <absolute-owned-directory>`.
+The verifier owns its bounded PostgreSQL fixture and requires both real engines.
+The canonical RCC `InvoiceQueryTest` task accepts
+`ACTIONS_INVOICE_BROWSER=1` for this browser gate and
+`ACTIONS_INVOICE_FULL=1` for the portable Runtime suite. Both are opt-in;
+set `ACTIONS_INVOICE_EVIDENCE_DIR` to an absolute retained directory. Build
+the Canvas first; a missing resource, browser or service fails the explicit gate.
+The browser host simulation forwards tool calls to the actual Runtime socket,
+renders the actual resource, pages its handle, downloads through the authenticated
+output route and reopens the same result. This is local E2, never actual ChatGPT
+E1 or actual worker execution. Missing browser prerequisites fail this explicit
+gate. The ordinary optional Python/TypeScript roundtrip remains a separate gate.
+
+Rollback removes the trusted invoice configuration and restarts the Runtime;
+it does not delete published outputs or migrate queue state. Generated app
+activation/rollback, Work Item review/fencing, workers and ChatGPT acceptance
+remain separate release gates. Source snapshots must retain all changed inputs;
+an intermediate green run does not qualify later hardening edits.
+
+## Generated invoice revision composition
+
+`GeneratedInvoiceApp` privately connects the existing `CanvasRevisionStore` to
+SQL query/review/Work Item/Run/Attempt services. It creates no app registry,
+activation pointer, public lifecycle endpoint, renderer or scheduler. The narrow
+`actions.generated-invoice/v1` bundle contains the existing built `canvas.html`
+and typed `invoice.json` inputs/source binding with its renderer digest. Supply
+`validate_invoice_revision` as the existing store's validator and a trusted
+actor/workspace/deployment/app authorization callback. A revision identifier is
+not an authorization grant or a general CanvasSpec/compiler acceptance claim.
+
+The generated-query Runtime kind `invoice/generated-query/v1` has an additive
+Run-admission key domain containing its application subject. This admits two
+immutable app revisions under the same declared capability/deployment without
+changing existing admission IDs or interpreting an old Run differently. The
+existing SQL request fingerprint still binds the entire snapshot and inputs;
+workspace idempotency keys cannot be reused for different payloads. Register the
+trusted snapshot with the existing control plane before explicit invocation.
+Opening, paging, remounting, reviewing or checking an execution does not invoke
+a query or worker. Published query invocation replay returns its retained output.
+
+The binding re-reads the active revision and persisted actor grants on MCP and
+artifact entry. It verifies the complete bundle and declared source, and binds
+the MCP resource URI to both bundle revision and renderer digest. Stale views
+cannot read/review through an inactive revision. Activation is an entry-time
+pin boundary; it does not cancel or rewrite already admitted work. The private
+worker retains its original app/deployment/result/input/claim lineage and dual
+SQL fences. Activation rollback preserves review decisions, Work Items, Runs,
+Attempts and sealed outputs. An older binary cannot reconstruct the new
+admission-key domain: disable entry and drain/reconcile with current code before
+code downgrade, and retain SQL/object backups for restore.
+
+App-only `invoice_review_execution` reads the existing authorities. It projects
+pending/queued/running/failed/cancelled or completed state without dispatching or
+retrying. A completed response must bind its output reference to that exact Run,
+review and Work Item, then resolve it with current scoped output authorization.
+A valid JSON output from another Run in the same app is insufficient. The
+existing renderer's explicit execution check/download uses this projection and
+the existing authenticated output route. No read implies human approval or
+exactly-once external effects. Output retention remains bounded by the worker's
+existing 3,600-second policy; long-term retention and restore remain separate.
+
+The strict RCC `InvoiceQueryTest` gate accepts `ACTIONS_INVOICE_GENERATED=1`;
+add `ACTIONS_INVOICE_BROWSER=1` for the real Runtime socket/current renderer and
+bridge. These required cells have zero skips. General integration tests with no
+owned renderer/RCC fixture classify those dedicated cases as unverified skips;
+the explicit gate fails when prerequisites are missing. E2's test-operator
+trigger is fixture-only and separate from approval, not a shipped dispatch API
+or authenticated ChatGPT E1. Linux sealed-filesystem provider tests remain
+Linux-only; generic native success on other platforms does not qualify them.
+
+To avoid rebuilding an unchanged SDK-only RCC environment, the verifier accepts
+an explicit `ACTIONS_INVOICE_WORKER_RUNTIME` retained configuration from the same
+owned task. It rebuilds/hashes the current SDK wheel, requires the same pinned
+RCC path, records configuration/environment hashes, and reacquires/verifies the
+artifact with the existing policy before execution. This does not admit an
+operator home, credential or unrelated cache. Keep its original receipt and
+current task/source proofs; a cache hit is not acceptance. Mandatory worker
+input tests and the portable suite keep separate evidence and opt-in boundaries.
+
+The full invoice verifier repeats schema-heavy SQL cases after its focused gates.
+A measured 128 MiB PostgreSQL tmpfs exhausted `pg_wal` during that aggregate run,
+then produced recovery-mode fixture errors. Full mode therefore uses a bounded
+512 MiB data tmpfs and 768 MiB container memory; focused mode retains 128/256 MiB.
+CPU/PID limits, pinned image, loopback-only binding, `--pull=never`, SQL durability
+and cleanup remain unchanged. Keep the original failure; fixture recovery does
+not retroactively qualify its interrupted SQL cases.
+
+## SDK static gate scope and baseline diagnostics
+
+The canonical toolkit dispatches Work Items lint as `poetry run ruff check src
+tests` and typecheck as configured `poetry run mypy`, whose declared target is
+`tests/typecheck/runtime_adapter_calls.py`. The explicit concrete fencing checks
+in the Work Items guide remain additional required proof for queue changes.
+The separate `.devcontainer/bin/verify-work-items` release gate checks lock,
+Ruff lint, full tests and distributions with owned Redis/MongoDB prerequisites;
+its absence is not supplied by a portable test run.
+
+Generic shared `inv lint` forces the Devutils formatter configuration rather
+than the SDK's own 100-column configuration. Neither that formatter nor broad
+`inv typecheck` is the toolkit's declared SDK gate. Direct SDK formatting still
+reports 27 files, and broad checking reports 68 errors in 16 files under the
+locked environment, including optional/source-port imports, signature conflicts
+and unused ignores. The identical Work Items Git tree at 28fa and 227c was
+archived and reproduced these exact diagnostics. Required lint and configured
+mypy passed in that baseline. Keep the diagnostics as unresolved baseline debt,
+not green results, and do not perform unrelated formatting/type cleanup or
+silently change release policy to erase them.
+
 ## MCP Apps public metadata
+
+Catalog concurrency fixtures must distinguish process startup from contention.
+Keep the real SQLite writer held while both children initialize, then release a
+separate child-start gate. Require both children to enter the actual catalog
+writer statement and the reservation table to remain empty before committing
+the parent writer. An early child's five-second SQLite wait must not be spent
+waiting for another child's imports. The startup-skew regression delays one
+contender for six seconds while retaining the existing SQLite busy timeout and
+parent deadline. This proves a fixture synchronization correction, not a new
+database retry policy or a retrospective explanation of an old host-pressure
+failure. A targeted pass does not replace the complete release gate.
+Publish the child's readiness payload by atomic replacement after writing it;
+existence of an open, empty marker is not readiness. The partial-write control
+delays the actual payload write and verifies that the parent never consumes an
+incomplete busy-timeout observation.
+The separate start gate is a byte protocol: write `b"go\n"` through the pipe's
+binary buffer. Text-mode writes translate LF to CRLF on Windows, so a child
+reading three bytes sees `go\r` and exits before the held-writer assertion. A
+real subprocess/SQLite regression forces CRLF translation and verifies both
+children still reach the writer statement without changing deadlines or locks.
+When a child exits, retain its bounded stderr; do not infer a historical hosted
+cause when that stderr was not captured.
 
 ## Canvas query-results fixture interchange
 
@@ -2105,7 +2330,7 @@ focused and package gates after the ordinary merge.
 
 ### RCC release acceptance pins
 
-The latest published stable release from `joshyorko/rcc` is `v18.19.3`,
+The repository's primary pinned RCC release is `v18.19.3`,
 published 2026-08-28, with tag target
 `4148c2b71705c9d2baf0e88b48d08a79cb7bda0f`; the GitHub release is neither a
 draft nor a prerelease. Direct downloads matched the publisher API digests:
@@ -3227,6 +3452,15 @@ Revision API and does not modify the legacy Robot ZIP/import path. The bounded
 Linux contract suite exercises successful mode normalization, invalid and
 non-empty destinations, links/special files, source/staged-byte mutation, and
 failure cleanup; it does not establish an RCC consumer/import proof.
+Directory enumeration needs a fresh open file description for every pass.
+Reopen `.` relative to the trusted directory descriptor with directory,
+no-follow and close-on-exec flags; `dup()` still shares directory iteration
+state. On Dakota Btrfs, descriptors opened before a mutation can omit newly
+created entries even while the reported offset is zero. The regression checks
+new-entry visibility and preserves the borrowed cursor. Namespace assertions
+use a fresh fixture-path listing while separate assertions retain borrowed-FD
+identity/lifetime checks. Keep the Btrfs/RCC temporary-directory gate; moving it
+to tmpfs or skipping these controls would hide this boundary.
 The staged-byte regression matches the destination descriptor by device and
 inode and writes the same-sized poison before the underlying read. A positive
 baseline and mutation control with constant timestamp observations verify that
@@ -3919,6 +4153,178 @@ correctness failure. Controlled browser performance remains a separate proof.
 
 ## Common Run-output migration and verification
 
+### Bounded invoice data-provider proof
+
+The private `data_queries.invoices` module implements only the named read
+`invoices.overdue/v1`. It accepts strict typed parameters and bounded rows,
+bytes and execution time. Operator configuration supplies a read-only DuckDB
+file or PostgreSQL connection; callers cannot submit SQL or select credentials,
+files or drivers. DuckDB is the optional `data-duckdb` Poetry extra. This is a
+provider foundation, not Canvas, Work Item review or full #131 acceptance.
+
+After RCC Doctor, Bootstrap and ToolkitTest, run the `InvoiceQueryTest` task
+in `developer/toolkit.yaml`. Set `ACTIONS_INVOICE_EVIDENCE_DIR` to an absolute
+retained directory. The task installs the locked `data-duckdb` extra through
+package-local Poetry and runs `action_server/scripts/verify_invoice_queries.py`.
+Set `ACTIONS_INVOICE_FULL=1` to include the complete portable Runtime suite;
+`ACTIONS_INVOICE_POSTGRES_IMAGE` selects an already-local alternative image.
+The verifier uses an already-local,
+digest-pinned PostgreSQL image, one resource-bounded loopback-only container,
+synthetic rows and tmpfs storage. It does not pull images or reuse existing
+services. Every invocation retains separate JUnit/logs, input hashes and cleanup
+status. `ACTIONS_REQUIRE_INVOICE_PROVIDERS=1` makes missing providers fail instead
+of skip. Ordinary package runs may skip the unconfigured optional provider cells;
+those skips are not two-provider acceptance. `--full` also runs the complete
+portable Runtime suite; neither mode proves ChatGPT or a packaged release.
+
+The PostgreSQL test fixture creates a random owned schema and removes only that
+schema afterward. It never drops or replaces a pre-existing `invoices` table.
+Still supply only a dedicated test database; tests create synthetic data and
+schema objects. The verifier supplies its own disposable database automatically.
+
+Both providers use read-only transactions. A real PostgreSQL view regression
+checks `transaction_read_only=on` and `transaction_isolation=repeatable read`
+inside the provider's transaction. PostgreSQL records its MVCC snapshot;
+DuckDB currently records only a read-transaction label. Neither label guarantees
+that an operator's mutable source is an immutable version. Snapshot retention,
+scan-cost metering, broader schema discovery and source-ingest policy remain
+separate gates. Exact exported bytes require the Run output content digest.
+
+The private invoice service reads its typed binding, limits and input from the
+existing persisted Run admission under current actor authorization and Attempt
+fencing. Changing a binding requires another Deployment revision; removing its
+configured provider blocks the pinned Run instead of selecting a replacement.
+The optional `data_binding` field is omitted from legacy canonical admissions,
+preserving their stored request fingerprints. New data-bound admissions are
+unknown to older binaries and must fail closed there.
+
+### Bounded Knowledge collection provider proof
+
+`action_server/tests/action_server_tests/test_knowledge_collections.py` runs
+each provider-backed collection contract against both DuckDB and PostgreSQL.
+Its PostgreSQL fixture reads the dedicated test DSN from
+`ACTIONS_INVOICE_TEST_POSTGRES`, creates a unique `actions_knowledge_test_*`
+schema, points the provider connection's `search_path` at that schema, and drops
+only that owned schema afterward. Use a task-owned synthetic database; do not
+point this fixture at a shared or production database. Set
+`ACTIONS_REQUIRE_INVOICE_PROVIDERS=1` so a missing DSN fails instead of
+silently skipping the PostgreSQL parametrizations.
+
+After the RCC Doctor → Bootstrap → ToolkitTest sequence, run the focused suite
+from `action_server/`:
+
+```bash
+poetry run pytest tests/action_server_tests/test_knowledge_collections.py
+```
+
+The provider-backed
+cases exercise typed ingestion, source-version provenance, bounded search,
+persisted revocation, schema/type rejection, and fail-closed stale or missing
+ingest behavior. Separate tests cover cross-Workspace denial before provider
+access, path escape and direct symlink rejection, searchable terms, and strict
+pagination bounds. The revocation case creates a new collection service but
+reuses the provider object; it proves persisted database state across service
+reconstruction, not process restart or fresh-provider recovery. A provider
+skip is not conformance evidence, and the SQLite/control-plane PostgreSQL
+gates do not substitute for this real PostgreSQL provider contract.
+
+Ingestion requires both current read and management authority before reading
+source files or publishing provider state; read-only access does not authorize
+replacement of a collection. Source versions use a domain-separated,
+length-prefixed name/content encoding. NUL-delimited concatenation is ambiguous
+when document bytes contain separators, so it cannot establish file-boundary
+identity. Earlier unpublished candidate bindings need recomputed versions and
+explicit reingestion to use this encoding; no automatic migration is performed.
+
+Metadata validation and document selection must use one engine snapshot. DuckDB
+opens a read transaction; PostgreSQL uses a transaction-local REPEATABLE READ,
+READ ONLY transaction. The concurrent-reingestion regression schedules a real
+second writer connection between the metadata and document reads and requires
+the original complete result, rather than a falsely empty old-version result.
+This pins an already-open read; persisted revocation rejects later reads and
+does not recall an authorized in-flight snapshot. No mock engine or SQLite
+substitute qualifies this provider gate. File ingestion still reads each trusted
+operator-selected file before checking its aggregate byte budget; preallocation
+I/O bounds and crash/process-restart recovery remain separate work.
+
+Canonical RCC `InvoiceQueryTest` now runs both lifecycle/Knowledge component
+suites with zero allowed skips before its existing provider/output suite. The
+receipt records loaded module paths and hashes and rejects editable imports
+outside the selected checkout before starting PostgreSQL. Always bootstrap each
+exact-source worktree into its own package-local `.venv`; sharing the prepared
+RCC toolchain cache does not authorize reusing another checkout's editable
+package environment. Successful setup with the checked-in lock and pinned
+toolchain establishes this environment only; it does not diagnose a different
+worker's earlier Poetry failure from successful PyPI metadata requests alone.
+
+Isolate `ROBOTS_HOME` as well as `ACTIONS_HOME` and `ROBOCORP_HOME` for cloud CLI
+tests. Runtime's robot environment store uses the separate `ROBOTS_HOME` setting
+and otherwise creates `~/.robots`; the other two home settings do not redirect
+that path. On a read-only host home this can fail before project, packaging or
+redaction assertions run. Use a task-owned writable robot store, preserve the
+original failures, and rerun the actual CLI cases before calling setup fixed.
+
+NDJSON materialization uses the existing provisional/sealed/final Run-output
+service, including its current fence and grant checks. Paging resolves that
+authorized immutable output on every request; export uses the same resolver.
+Reconstructing a database connection and output provider can reopen the bytes
+without the old data connection. The slice installs no public query, Canvas or
+MCP route and supplies no Work Item business-state authority. A source service
+test or fresh connection is not an RCC worker/process-restart acceptance claim.
+
+The private `InvoiceCanvasFacade` now binds result paging/export to a trusted
+server `CanvasResultScope`: exact Workspace, Deployment revision, application
+ID and application revision. `ExecutionSnapshot.canvas_application` persists
+that subject in the existing Run admission, without another database or app
+registry. The common resolver checks both current actor grants and the expected
+subject before opening output bytes. Application IDs, revision digests and host
+visibility metadata grant no authority. An absent application pin cannot fall
+back when a Canvas-scoped reader requests an older result.
+
+The existing authenticated `RunOutputTransport` accepts the same optional
+server-held scope. It cannot be selected through request metadata or a client
+application-ID header. The assembled Runtime HTTP regression verifies real
+sealed NDJSON bytes and rejects a legacy handle before provider access. The
+facade is read-only: paging, remount or export creates no new Run or query.
+Legacy admissions omit the absent optional field, preserving their canonical
+fingerprints. This is a private result-binding seam, not a generated app,
+activated revision, general CanvasSpec, connected template, MCP bridge or E1
+claim. The existing Canvas template still intentionally returns no artifact
+until its public app/principal binding and tool routing are implemented.
+
+`CanvasRevisionStore` is a separate private lifecycle primitive. Its
+`stage`, `activate`, `rollback` and `pin_active` calls require a server-derived
+`Actor`; do not restore actorless compatibility overloads. Each operation
+supplies the exact workspace, deployment revision and app scope to the server
+authorization callback. Staging checks authorization before validation or
+storage; activation and rollback check it before pointer mutation. `pin_active`
+first resolves the current pointer, then authorizes that exact revision before
+reading its files. Staging validates bounded relative paths and app contents,
+stores files under a content digest, then re-reads and hashes even an existing
+digest path. Activation uses a SQLite immediate transaction and
+expected-current compare-and-swap; rollback also checks the caller's expected
+active revision and separately authorizes the exact revision being restored
+before changing the pointer. Portable resource names and workspace path
+components reject drive-qualified paths before filesystem access. Tests should
+retain negative actor/workspace/deployment cases,
+pinned bytes across activation, restart/rollback, tamper rejection, and an
+unchanged active pointer after authorization or compare-and-swap rejection.
+These source-level lifecycle primitives do not themselves register a generated
+app, authorize an MCP host, or establish ChatGPT acceptance.
+
+For reproducible local distributions, place the publisher-digest-verified pinned
+RCC file in `action_server/src/actions/server/bin` before Poetry inventories
+either format. A cold `poetry build` was observed to create an sdist without RCC,
+then download RCC during its wheel hook; the next sdist included it and wheel
+RECORD ordering changed. Preserve that failed attempt. After verified preseeding,
+the existing `ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD=1` flag disables only the
+redundant download. With `SOURCE_DATE_EPOCH` set to the source commit timestamp,
+two subsequent wheel/sdist pairs were byte-identical. Generate public OAuth
+configuration from the versioned repository inputs first; never borrow a test's
+generated module or private release state. This bounded Linux build observation
+does not prove an installed consumer, native/image/SBOM qualification or the
+entire independent release pipeline.
+
 Refreshing the common Run-output branch preserves its service and regression
 controls but creates a new source union requiring fresh CI. The retained Windows
 failure at `9cb61c52` occurred on the resource catalog test's **first** native
@@ -4285,3 +4691,373 @@ Keep disposable registry rows on nonpublishing qualification/backup branches,
 never in the reviewed default publication registry. Compare tested code blobs to
 the repair commit, retain original owner snapshots before/after, and distinguish
 shared-verifier qualification from unrun default-button activation before merge.
+
+### Candidate dependencies in Runtime CI
+
+`build_common_tasks(..., install_extras=("data-duckdb",))` makes the Runtime's
+ordinary install and devinstall admit its provider test dependencies. The shared
+devinstall transformation preserves an explicit `develop = false` in either the
+main or group declaration; otherwise it can silently replace the fenced SDK
+candidate with an editable import outside the environment prefix.
+
+The PR wheel fixture builds and stages the exact Work Items SDK alongside Core
+and HTTP Helper before cibuildwheel resolves Runtime dependencies. The explicit
+`--candidate-sdk-wheelhouse` verifier mode binds SDK/Runtime versions to the
+producer pyprojects (SDK `[project].version`, Runtime `[tool.poetry].version`),
+verifies the installed SDK's local archive origin, RECORD
+and Python bytes, and retains public Core/Helper version, URL and SHA checks.
+This flag is PR-only; the default published-floor verifier remains pinned to
+Runtime 1.0.4. Staging unpublished SDK 0.5.0a1 locally is a test prerequisite,
+not permission to publish it or relax the Runtime dependency floor.
+
+The cibuildwheel container mounts only `action_server` at `{project}`. A sibling
+`work-items/pyproject.toml` is unavailable there. The PR producer writes
+`candidate-sdk-wheelhouse/producer.json` with its actual Git SHA, exact SDK
+pyproject bytes/hash, Runtime pyproject hash and wheel filename/hash. Verification
+requires the expected CI source SHA plus matching mounted Runtime metadata and
+SDK wheel bytes before reading the staged SDK version. Host verification also
+checks the sibling source when present. Missing, changed or foreign producer
+metadata fails closed; do not hardcode the candidate version or omit this
+binding merely because dependency installation succeeded.
+
+
+### Runnable local invoice reconciliation example
+
+`InvoiceReconciliationDemo` composes existing generated revisions, Canvas/MCP,
+exact-result SQL review, fenced Work Item, distinct Run/Attempt, RCC 18.19.3 and
+scoped artifact transport. The versioned example and allowlisted local export
+live in `action_server/examples/invoice_reconciliation/`. Candidate Runtime
+1.1.0a5 and SDK 0.5.0a1 need verified local artifacts, not an assumed public-index
+release. The engine remains in the package; exports copy no engine source.
+
+Use a fresh absolute owned directory. The host binds only loopback, with a
+synthetic server-held actor, ephemeral cookie, exact Origin and CSRF checks. It
+changes no production identity or tunnel. The new DuckDB reconciliation profile
+verifies CSV/database hashes and shows invoice, PO and ledger IDs with
+expected/actual price, quantity and totals. Existing PostgreSQL qualification is
+separate from this DuckDB-only profile.
+
+Approval and execution are separate explicit actions. Restart uses `load_db`;
+`create_db` recreates indexes and is not a reopen API. Restart never regrants
+revoked authority or reactivates old revisions. Source/renderer fingerprints must
+remain exact; changed bytes need a fresh directory with old evidence retained.
+The capture script operates a real browser with actual MCP/RCC. `verify.py`
+checks revocation, origin, workspace, inactive revisions and rollback without
+erasing admitted work. The MCP proxy excludes absent optional typed wire fields
+(`exclude_none=True`) while preserving explicit nulls inside private result
+objects. Null optional TextContent annotations can prevent bridge tool delivery.
+
+This is interactive E2. Executor has read/write integration; this does not prove
+invoice discovery, actual ChatGPT render, model/app audience grants, review,
+artifact readback or reconnect. E1 remains NEEDS_OPERATOR. Persistent identity,
+tunnel or security changes need separate approval; never overwrite a working
+Executor transport to qualify this example.
+
+Unsupported-platform applicability marks must run before imported fixtures
+construct the Linux-only secure filesystem provider. Dedicated Linux browser
+verification still requires actual execution with zero skips. PID readiness
+requires complete contents: the browser deadline regression uses atomic rename
+and a delayed partial-write control while retaining descendant cleanup. These
+repairs do not extend filesystem support to Windows/macOS or turn skips into
+execution proof.
+
+
+For authenticated invoice E1, an operator should first inspect the connected
+transport's actual tool list and resource MIME `text/html;profile=mcp-app`, then
+open the resource in ChatGPT and verify official UI-bridge initialization. Verify
+that the model cannot call app-audience review tools, that merely opening or
+reconnecting creates no approval, and that an explicit current actor decision
+binds the displayed result/revisions. Follow the authorized worker Run to scoped
+artifact readback, restart/reconnect with the same identity, and revoke authority
+to confirm denial. Record actual workspace/grant/error details rather than
+inferring transport limitations from metadata search. If the existing Executor
+transport cannot preserve the resource/audience contract, prepare a separate
+identity/transport configuration for approval; do not edit the working tunnel.
+Local E2 and discovery evidence cannot close this authenticated-host gate.
+
+The invoice reconciliation profile now travels as an optional typed app-audience
+page field, copied from the sealed result rather than parsed from a description.
+The existing renderer uses separate status, PO expected values, invoice actual
+values, variance and discrepancy columns. Legacy rows keep the generic records
+table. Client validation rejects unsafe integers and foreign invoice identity;
+UI formatting never recalculates the result or changes approval bindings.
+
+For example consumer qualification, `prepare.py` validates the exported file
+manifest, creates a fresh prefix and uses Python `-I` for installed-module probes
+and launch. The export derives public dependency constraints/hashes from the
+Poetry lock plus the existing public-floor verifier, not an existing venv freeze.
+A cache-disabled download freezes the binary wheel closure; installation and a
+second-prefix replay use `--no-index`. Keep package replay separate from fresh
+RCC Artifact preparation and from retained-Artifact execution. Neither an
+already prepared consumer nor a successful local replay proves a cold,
+network-isolated host install. Record the actual network and native-library
+requirements and retain failed preparation roots instead of adopting them.
+
+
+Use `RCC_NO_BUILD=1` when qualifying retained-Artifact execution so missing
+materialization cannot silently trigger a build. A fresh package prefix alone
+has no RCC hololib/Artifact: no-build publication must fail closed and its partial
+owned preparation root must remain available for diagnosis. Test an actual new,
+explicitly approved Run against the retained Artifact separately from terminal
+receipt replay, which performs no task execution. Process-tree `connect` tracing
+can establish that a particular replay made only loopback connections; it does
+not enforce an air gap or qualify transferred-Artifact restore on a clean host.
+The Artifact compatibility receipt is authoritative for native prerequisites.
+For this Linux amd64 build it requires glibc >=2.36 and `libX11.so.6` alongside
+the normal glibc loader/libraries, even though the invoice task is headless.
+
+### Foundry acceptance versus invoice composition
+
+At the protected invoice checkpoint, `GeneratedInvoiceApp` accepts exactly the
+existing renderer and `invoice.json`. Its successful E2 does not establish
+external-model CanvasSpec authoring, the public six-tool foundry facade,
+zero-user-package plugin boot, generated Python Package compilation, common
+Deployment resolution or authenticated ChatGPT E1. Reuse its revision,
+authorization, review, Run/Attempt and artifact boundaries as components. Keep
+existing-capability composition, generated-backend Package/Deployment activation,
+reference-template packaging and actual host acceptance as separate proofs.
+
+A strict Package/Deployment reference proves syntax and scope comparison, not
+object existence or authorization. `ProposedStagedInventory` proves selected
+bytes were copied and re-read, not complete source selection, atomic whole-tree
+snapshot, trust, compiler identity or an admitted Package Revision. A foundry
+integration must obtain those missing facts from the common compiler,
+Deployment and Run authorities rather than treating a typed reference or
+staging receipt as publication. The October amendments on #71/#99/#100/#127 and
+#129/#130 retain these criterion boundaries without requiring every umbrella or
+distributed feature to close before a local vertical can run.
+
+The native foundry MCP projection is an opt-in adapter, not a first-boot service.
+`McpServerSetupHelper(canvas_foundry=...)` needs a trusted domain port and an
+authenticator that supplies actor, Workspace and model/app audience. Synthetic
+headers in its protocol tests are test inputs, not a public identity protocol.
+The fixed model catalog has six authoring tools plus `canvas_open`; app-only
+dispatch/status/cancel/artifact tools require the verified app audience. The
+launcher accepts exactly `{}`. Its read-only annotation does not prove that a
+domain implementation is effect-free; that requires service tests.
+
+Native tool and resource identities must be protected both when directly
+registering an action and when replacing a complete catalog. Reserve query/page
+names until a real authorized implementation exists; an absent projection must
+fail without a fallback call. Static renderer bytes and schema snapshots bind
+the catalog identity. Scoped application data travels in result `_meta`, while
+only deliberately selected authoring data belongs in model-visible content.
+
+The adapter bounds JSON arguments and replies, rejects non-finite JSON numbers
+and hides provider exception details. It does not retry mutations. A transport
+error after a domain call cannot establish whether the mutation committed:
+reconcile the same request identity through the domain authority before retry.
+Protocol tests with a fake domain port prove routing and audience separation,
+not durable authoring, revision authorization, activation, execution or E1.
+
+The clean-wheel contract archives committed `HEAD`; it deliberately does not
+build a dirty source overlay. Commit a candidate version/source checkpoint before
+running that acceptance. A wheel from the previous commit must fail the current
+version/member binding instead of being credited to uncommitted code.
+
+Foundry schema17 adds six empty records to the common Runtime database:
+Package/deployment revisions, deployment heads, mutation receipts, audit and
+explicit foundry grants. Registration composes the complete model list before
+`Database.initialize`; an initialized Database rejects a different class set.
+Services borrow that database and transaction rather than creating a Canvas
+side store. Raw ORM records do not validate portable manifests, authorize an
+actor or admit a compiler result; those remain service boundaries. In particular,
+a Run read/execute grant is not an install/bind/activate grant.
+
+The additive migration creates no grant, application activation, Review, Work
+Item, Run or Attempt. Its injected partial-DDL failure rolls back new tables and
+the migration marker on SQLite and real PostgreSQL. Storage rollback and fresh
+interpreter readback are separate from deployment-service CAS/idempotency and
+authorization acceptance. The owned invoice verifier includes a zero-skip
+`foundry_storage` gate and hashes the new model/migration inputs. For a binary
+rollback, preserve a coordinated schema16 SQL/object/journal backup; deleting
+the schema17 marker is not a downgrade or a safe way to reopen newer state with
+an older binary. No production migration is authorized by these fixture tests.
+When backdating a current test database, remove every newer schema object before
+changing the marker. The shared fixture helper drops foundry records in reverse
+registration order. Leaving schema17 indexes in a purported schema10/12/13
+fixture correctly causes duplicate-index rejection; do not relax migration
+checks to accommodate that invalid fixture.
+
+The experimental portable Package schema uses a logical package key; installed
+`PackageRevisionRef.package_id` is a scoped UUID. Keep that mapping outside
+portable bytes. Its sourceArtifact is a measured ZIP: source inventory JSON is
+neither those ZIP bytes nor their digest. The existing measure/stage/re-read
+helpers attest only the explicitly selected set, not selection completeness,
+source trust or a globally atomic snapshot. Compiler hash/admission rules in
+the handoff remain provisional until their own implementation gates pass.
+
+
+The semantic CanvasSpec Core contract is part of the installed dependency floor,
+not an editable source overlay. Runtime candidate metadata requires Core
+`>=1.1.0a2,<2.0.0`; package-local development installs Core noneditably. Its
+public wire keys are camelCase, `from_python` is the explicit Python-name
+constructor, and empty `visibility` means no audience. Numeric `version_info`
+uses the release tuple even for provisional versions. The Core suite and
+installed-candidate contracts cover these boundaries.
+
+Candidate wheel verification carries Core and SDK in separate wheelhouses.
+`write_candidate_sdk_producer.py --distribution actions-core` binds the exact
+Core project bytes, Runtime project hash, source SHA and wheel digest before
+project-only cibuildwheel tests. Pass `--candidate-core-wheelhouse` explicitly;
+the default published Core/Helper floor remains pinned and must not accept an
+unbound local candidate. Candidate origin, installed RECORD members, module
+prefix and selected wheel digest are checked independently of resolver success.
+
+The declared frontend `npm test` runs both Runtime and Canvas View suites.
+Canvas View's Vitest include covers every `src/**/*.test.tsx`, including the
+semantic renderer; the Runtime topology test guards that union. Quality/type
+checks, a Canvas build and the official bridge harness remain separate gates.
+The harness's optional real-Runtime case being skipped is not bridge-to-domain
+or authenticated-client acceptance. Inject domain dispatch/status/artifact
+adapters into the semantic renderer; its logical binding labels confer no
+Runtime capability or authorization.
+
+Runtime action import probes must parse the complete PEP 440 Core version and
+compare its numeric release tuple; splitting dotted components with `int`
+rejects provisional Core versions before action discovery. The existing
+vendored version parser handles alpha, release-candidate and dev/local suffixes
+and still rejects malformed probe output. Package metadata and no-managed-env
+import tests exercise the actual child interpreter boundary.
+
+
+Schema18 permits a null Package integrity anchor only to represent a UI-only
+Canvas selection. Its forward migration preserves schema17 rows and retains
+the real Package FK; nullable does not mean an unknown Package is admitted.
+SQLite rebuilds this one table transactionally; PostgreSQL drops only the
+column's NOT NULL constraint. Preserve a coordinated pre-upgrade backup for
+binary rollback: changing a migration marker does not reverse either schema.
+
+The Deployment selection carries the public CanvasSpec, exact logical
+capability bindings and an independently hashed Canvas application revision.
+That source digest is separate from the Deployment revision digest, avoiding
+self-referential hashing. Revalidate existing Core models through their alias
+wire grammar before embedding them; round-trip serialization uses aliases.
+Package-less selections require a view and prohibit plans, bindings and
+execution profiles. Backend selections require explicit plans/profiles and
+retain every Package check; the singular FK is only an integrity anchor.
+The service includes the Canvas application pin in each execution snapshot.
+Neither a CanvasSpec nor an empty snapshot map grants execution permission.
+
+Deployment mutation reauthorizes all selected references after acquiring the
+common Workspace lock, then atomically writes the immutable selection, observed
+head/lock-version CAS, actor-scoped request receipt and audit event. Replay
+reauthorizes and validates the original immutable receipt. Isolated Package
+port doubles qualify these consumer semantics, not genuine compiler admission
+or end-to-end Run execution. Those require their own combined gates.
+
+
+`SqlAuthoringAuthority` stages complete immutable Deployment revisions in the
+same SQL records. Bounded edit history is a linear revision sequence, not an
+active pointer. `canvas.create`/`canvas.apply` atomically persist edit CAS,
+actor-scoped receipt and audit without creating a Deployment head. Explicit
+release activates the exact latest candidate; rollback selects a retained exact
+revision through the same head CAS without erasing edits or audit. Even a
+persisted execution snapshot is unavailable to `resolve` until activation has
+an audit receipt. Backend authoring fails closed without the common Package
+build-evidence adapter; caller-supplied phase flags alone are insufficient.
+
+Foundry authorization reads live common SQL Workspace state and explicit
+FoundryAccessGrant operations. Exact typed reference grants remain separate
+from workspace/app permissions; Run/output permissions do not imply deployment
+or generated-source permission. Mutation rechecks policy under the Workspace
+lock. Idempotent staging compares the retained full selection/base as well as
+the request fingerprint; create excludes only its server-allocated application
+UUID. Activation replay also binds the audited prior head and exact target.
+The native SDK protocol/SQL harness uses a synthetic authenticated context and
+static HTML sentinel: it proves tools/resource metadata and SQL orchestration,
+not installed transport, rendered official View, generated execution or E1.
+
+The boot lane's `templates/canvas-first-boot` directory is an isolated fixture.
+Its worker Core pin is checked alongside every other checked-in manifest, and
+contract tests separately require it to remain absent from both shipped
+catalogs. Adding a fixture must update the explicit inventory without silently
+admitting a new starter or weakening the existing dependency-pin checks.
+
+`ActivatedReviewedExecution` joins a current common Deployment head to an
+already approved exact-result Work Item. Dispatch resolves the selected logical
+binding through the common Package/Plan policy, then claims that exact item;
+it never falls back to an older item in the queue. Counter → Workspace locking
+keeps selection, claim, Run admission and its audit in one SQL transaction.
+A failed admission rolls the claim back. Duplicate delivery reuses the retained
+claim, Run and Attempt; it does not create a new grant or launch RCC.
+
+A changed active revision blocks new dispatch from a stale app. An already
+admitted Run can still resume its exact historical activated selection after
+live authorization checks. An expired claim remains fenced and requires
+explicit reconciliation; neither dispatch replay nor restart reclaims it or
+automatically launches again. This adapter is a domain admission boundary,
+not proof that an MCP host has an authorized interactive execution session.
+
+The optional `ReviewedCanvasExecution` projection keeps `canvas_dispatch`
+app-only and exposes a fixed model `capability_invoke` route over the same
+admission service. Both accept only a logical binding and an exact proposal;
+neither accepts replacement inputs or records approval. A missing trusted RCC
+runner fails before claiming an item. A retained launch intent blocks replay
+execution; a completed Run returns its original identity. There is no background
+queue or second execution journal in this projection.
+
+For interactive app execution, `CanvasCaller.scope` must come from trusted
+authentication and match the exact application/Deployment revision. Such an
+app context cannot list or invoke model authoring/capability tools. Visibility
+metadata and caller-supplied audience or revision arguments cannot confer this
+authority. The ordinary owner-key bootstrap still authenticates a model context;
+adding this port does not install an app grant or enable generated execution in
+an unconfigured host.
+
+The official MCP Apps bridge can forward View calls over the authenticated
+model connection. A forwarded request therefore does not acquire app authority
+from visibility metadata or an audience header. `CanvasMcp` can attenuate that
+connection with a server-issued capability in private `actions.appSession`
+metadata. It binds the existing principal, Workspace, application/Deployment
+revisions, saved-result handle and logical binding. It lasts at most15minutes;
+the process holds at most256 outstanding capabilities. Restart invalidates them.
+An authenticated reopen issues a fresh capability; SQL still holds reviews,
+Work Items, Runs, Attempts and outputs. Treat these capabilities as transient
+secrets when retaining protocol diagnostics; never put them in model content,
+screenshots, repository receipts or persistent configuration.
+
+`ReviewedCanvasView` opens an active authored revision and saved result without
+offering, approving or running work. Separate View actions offer the exact
+result, record an explicit decision, then execute the approved result. Live
+SQL permissions and current revision still govern approval/admission; the
+capability cannot authorize another result/binding or model authoring. Status
+and artifact reads use the retained native Run and sealed output authority.
+The official View verifies the returned result digest/size before requesting
+an inline host download, so it needs no new public download endpoint.
+
+The View also supports explicit inspection of the complete bounded saved source
+and sealed generated result as text. Those reads verify scope, media type and
+SHA256 against the exact proposal or published Run descriptor; displaying
+untrusted text never renders HTML. Reading an artifact does not depend on a
+host implementing the optional download request. Neither inspection happens
+on mount or approves a result.
+
+Reopening after source expiry is permitted only for an existing exact approved
+review with an admitted native Run. It checks the retained input seal and live
+policy, and reissues only the ephemeral View capability. The source's expiry
+does not change. A pending review or approved item without a Run cannot use
+this recovery path to admit new work. Recovering the review is a read operation;
+dispatch remains an explicit separate action, including duplicate delivery.
+
+Ordinary Runtime startup remains read-only for execution unless the trusted
+local host explicitly supplies `ACTIONS_FOUNDRY_EXECUTION_PROFILE`, an absolute
+path to a bounded `actions.runtime-rcc-profile/v1` descriptor. It selects
+already-authorized immutable worker/policy/output-provider references, a stable
+worker identity, explicit trusted-developer admission and a measured RCC
+preparation receipt. It grants nothing and never restores revoked policy.
+Generated Python is trusted developer code, not an OS sandbox. The selected
+RCC capability must have exactly one locked allowed plan equal to its default;
+the shared resolver reauthorizes that plan and all three profile references.
+Unconfigured execution, unsupported bindings and unqualified artifacts fail
+before Work Item claim. Qualify an installed descriptor/ordinary CLI and the
+actual official View separately from source or SDK transport tests.
+
+Canvas binding metadata carries a canonical package-local `CapabilityId`, not
+a UUID. The generated compiler emits IDs such as `action.generated_echo`.
+The View accepts bounded nonempty NFC text without lone surrogates for this
+field, while Workspace and Package IDs retain their UUID validation. The
+identifier remains opaque metadata; it never becomes executable code or a
+client permission. A real official-host capture exposed the former UUID-only
+parser rejection even though the authored schema, SQL and MCP transport
+were valid. Keep a generated-ID renderer regression alongside UUID examples.

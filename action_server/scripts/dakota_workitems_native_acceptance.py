@@ -189,7 +189,7 @@ def fresh_proof_workspace(parent: Path) -> Iterator[Path]:
         yield Path(path)
 
 
-def inspect_core_wheel(wheel_dir: Path) -> tuple[Path, str]:
+def _inspect_candidate_wheel(wheel_dir: Path, name: str) -> tuple[Path, str]:
     """Select one task-local Core wheel and read its version from wheel metadata."""
     try:
         entries = list(wheel_dir.iterdir())
@@ -221,12 +221,44 @@ def inspect_core_wheel(wheel_dir: Path) -> tuple[Path, str]:
 
     version = metadata.get("Version")
     if (
-        metadata.get("Name", "").lower().replace("_", "-") != "actions-core"
+        metadata.get("Name", "").lower().replace("_", "-") != name
         or not version
-        or wheel.name != f"actions_core-{version}-py3-none-any.whl"
+        or wheel.name != f"{name.replace('-', '_')}-{version}-py3-none-any.whl"
     ):
         raise AcceptanceFailure("core_wheel_identity_invalid")
     return wheel, version
+
+
+def inspect_core_wheel(wheel_dir: Path) -> tuple[Path, str]:
+    return _inspect_candidate_wheel(wheel_dir, "actions-core")
+
+
+def validate_sdk_proofs(proof_dir: Path, version: str, wheel_hash: str) -> dict:
+    if {path.name for path in proof_dir.iterdir()} != {
+        kind + ".json" for kind in CASE_ENV
+    }:
+        raise AcceptanceFailure("SDK proof set incomplete")
+    result = {}
+    for kind in CASE_ENV:
+        proof = json.loads((proof_dir / (kind + ".json")).read_text(encoding="utf-8"))
+        if (
+            set(proof)
+            != {
+                "version",
+                "wheel_sha256",
+                "module_owned",
+                "install_source_matches_candidate",
+                "pip_report_sha256",
+            }
+            or proof["version"] != version
+            or proof["wheel_sha256"] != wheel_hash
+            or proof["module_owned"] is not True
+            or proof["install_source_matches_candidate"] is not True
+            or not re.fullmatch(r"[0-9a-f]{64}", proof["pip_report_sha256"])
+        ):
+            raise AcceptanceFailure("SDK candidate installation proof differs")
+        result[kind] = proof
+    return result
 
 
 def _validate_proof_shape(proof: object, kind: str, core_version: str) -> dict:
@@ -339,7 +371,7 @@ def initial_receipt(
         "recovery_fixture_limit": "stale persisted reservation seeded by harness; process crash not simulated",
         "worker_dependencies": {
             "actions-core": f"{core_version} candidate wheel installed by post-install",
-            "actions-work-items": "0.4.4",
+            "actions-work-items": "uninspected candidate wheel",
         },
         "checks": [
             "consumer_action_reserves_input_and_releases_completed_with_parent_linked_output",
@@ -411,6 +443,14 @@ def main() -> int:
         ] = f"{core_version} candidate wheel installed by post-install"
         wheel_hash = sha256(core_wheel)
         receipt["actions_core_wheel_sha256"] = wheel_hash
+        sdk_wheel, sdk_version = _inspect_candidate_wheel(
+            args.rcc_home / "sdk-wheels", "actions-work-items"
+        )
+        sdk_hash = sha256(sdk_wheel)
+        receipt["worker_dependencies"]["actions-work-items"] = (
+            sdk_version + " measured candidate wheel"
+        )
+        receipt["sdk_wheel_sha256"] = sdk_hash
 
         executables = {
             kind: Path(getattr(args, kind.replace("-", "_"))) for kind in CASE_ENV
@@ -448,6 +488,9 @@ def main() -> int:
         os.environ["DAKOTA_WORKITEMS_CORE_WHEEL"] = str(core_wheel.resolve())
         os.environ["DAKOTA_WORKITEMS_CORE_WHEEL_SHA256"] = wheel_hash
         os.environ["DAKOTA_WORKITEMS_CORE_VERSION"] = core_version
+        os.environ["DAKOTA_WORKITEMS_SDK_WHEEL"] = str(sdk_wheel.resolve())
+        os.environ["DAKOTA_WORKITEMS_SDK_WHEEL_SHA256"] = sdk_hash
+        os.environ["DAKOTA_WORKITEMS_SDK_VERSION"] = sdk_version
         os.environ["ACTIONS_HOME"] = str(args.rcc_home.resolve())
         os.environ["ROBOCORP_HOME"] = str(args.rcc_home.resolve())
         for kind, executable in executables.items():
@@ -460,8 +503,11 @@ def main() -> int:
         import pytest
 
         collector = PytestCaseCollector()
-        with fresh_proof_workspace(args.receipt.parent) as proof_dir:
+        with fresh_proof_workspace(
+            args.receipt.parent
+        ) as proof_dir, fresh_proof_workspace(args.receipt.parent) as sdk_proof_dir:
             os.environ["DAKOTA_WORKITEMS_PROOF_DIR"] = str(proof_dir)
+            os.environ["DAKOTA_WORKITEMS_SDK_PROOF_DIR"] = str(sdk_proof_dir)
             result = pytest.main(
                 ["-q", "-m", "integration_test", str(TEST)],
                 plugins=[collector],
@@ -473,6 +519,11 @@ def main() -> int:
                     )
             if sha256(core_wheel) != wheel_hash:
                 raise AcceptanceFailure("core_wheel_changed_during_acceptance")
+            if sha256(sdk_wheel) != sdk_hash:
+                raise AcceptanceFailure("sdk_wheel_changed_during_acceptance")
+            receipt["sdk_installations"] = validate_sdk_proofs(
+                sdk_proof_dir, sdk_version, sdk_hash
+            )
             finalize_success(
                 receipt,
                 int(result),

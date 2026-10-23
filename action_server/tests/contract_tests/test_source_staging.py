@@ -42,6 +42,19 @@ def _stager():
     return source_staging
 
 
+def test_directory_verification_preserves_borrowed_cursor_and_sees_new_entries(
+    destination,
+):
+    path, fd = destination
+    (path / "first").write_bytes(b"one")
+    before = os.lseek(fd, 0, os.SEEK_CUR)
+    assert _stager()._directory_entries_equal(fd, {"first"})
+    assert os.lseek(fd, 0, os.SEEK_CUR) == before
+    (path / "second").write_bytes(b"two")
+    assert _stager()._directory_entries_equal(fd, {"first", "second"})
+    assert os.lseek(fd, 0, os.SEEK_CUR) == before
+
+
 def test_stages_exact_measured_bytes_with_portable_modes_and_borrowed_fds(
     tmp_path, root_fd, destination
 ):
@@ -73,7 +86,7 @@ def test_stages_exact_measured_bytes_with_portable_modes_and_borrowed_fds(
     assert (destination_path / "src" / "main.py").stat().st_mode & 0o777 == 0o755
     assert os.fstat(root_fd).st_ino == before_root.st_ino
     assert os.fstat(destination_fd).st_ino == before_destination.st_ino
-    assert set(os.listdir(destination_fd)) == {"src", "package.yaml"}
+    assert set(os.listdir(destination_path)) == {"src", "package.yaml"}
 
 
 def test_empty_selection_stages_empty_inventory_without_touching_destination(
@@ -84,7 +97,7 @@ def test_empty_selection_stages_empty_inventory_without_touching_destination(
         root_fd, destination_fd, [], protected_input_names=[]
     )
     assert result.inventory.entries == ()
-    assert os.listdir(destination_fd) == []
+    assert os.listdir(destination_path) == []
     assert list(destination_path.iterdir()) == []
 
 
@@ -253,7 +266,7 @@ def test_unsafe_source_objects_are_rejected_without_stage_entries(
         _stager().stage_selected_files(
             root_fd, destination_fd, [path], protected_input_names=[]
         )
-    assert os.listdir(destination_fd) == []
+    assert os.listdir(destination_path) == []
     assert target.read_bytes() == b"private"
     assert list(destination_path.iterdir()) == []
 
@@ -309,7 +322,7 @@ def test_copy_failure_removes_only_task_created_entries(
             root_fd, destination_fd, ["src/input"], protected_input_names=[]
         )
     assert list(destination_path.iterdir()) == []
-    assert os.listdir(destination_fd) == []
+    assert os.listdir(destination_path) == []
     assert os.fstat(root_fd).st_ino
     assert os.fstat(destination_fd).st_ino
 
@@ -340,7 +353,7 @@ def test_cleanup_preserves_unowned_entry_added_during_failure(
         )
     assert (destination_path / "foreign").read_bytes() == b"leave"
     assert not (destination_path / "src" / "input").exists()
-    assert set(os.listdir(destination_fd)) == {"foreign"}
+    assert set(os.listdir(destination_path)) == {"foreign"}
 
 
 def test_source_growth_during_staging_is_rejected_and_cleaned(

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "actions-runtime"
-version = "1.0.4"
+version = "1.1.0a23"
 description = "Actions Runtime — serve Python actions through HTTP and MCP"
 authors = ["Joshua Yorko"]
 maintainers = ["Joshua Yorko"]
@@ -36,7 +36,7 @@ pydantic = "^2.12.4"
 pyyaml = "^6.0.3"
 python = ">=3.12,<3.14"
 requests = "^2"
-actions-core = "^1.0.2"
+actions-core = { version = ">=1.1.0a2,<2.0.0", allow-prereleases = true }
 actions-http-helper = "^1.0.3"
 termcolor = "^3.2.0"
 uvicorn = "^0.38.0"
@@ -45,7 +45,7 @@ cryptography = "^46.0.3"
 requests_oauthlib = "^2.0"
 watchfiles = "^1.1.1"
 mcp = "^2.0.0"
-actions-work-items = "^0.4.4"
+actions-work-items = { version = ">=0.5.0a2,<0.6.0", allow-prereleases = true }
 # Scheduling dependencies
 croniter = "^2.0.0"
 pytz = "^2024.1"
@@ -53,12 +53,18 @@ aiosmtplib = "^3.0.0"
 # Redis for control-room-lite mode (bundled so it just works)
 redis = "^5.0.0"
 psycopg = { version = "^3.2.0", extras = ["binary"] }
+duckdb = { version = "1.4.1", optional = true }
+
+[tool.poetry.extras]
+data-duckdb = ["duckdb"]
 
 [tool.poetry.group.dev.dependencies]
 actions-http-helper = { path = "../actions-http-helper/", develop = true }
 # Resolve the unpublished monorepo candidate for development; wheel metadata
-# retains the production version floor above and never embeds this source path.
-actions-core = { path = "../actions/", develop = true }
+# retains the explicit candidate version floor above and never embeds this source path.
+actions-core = { path = "../actions/", develop = false }
+# Install a real candidate distribution; do not overlay the SDK source at import time.
+actions-work-items = { path = "../work-items/", develop = false }
 actions-local-devutils = { path = "../devutils/", develop = true }
 httpx = "^0.28.1"
 types-requests = "^2"

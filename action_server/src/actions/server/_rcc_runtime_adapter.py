@@ -579,6 +579,7 @@ def build_exec_command(
     *,
     receipt_file: Path | None,
     json_output: bool = True,
+    local_trust_carrier: Path | None = None,
 ) -> list[str]:
     if not descriptor.provider_context_bound:
         raise RccRuntimeError(
@@ -594,6 +595,19 @@ def build_exec_command(
     ]
     if descriptor.provider_reference:
         args.extend(["--provider", descriptor.provider_reference])
+    if local_trust_carrier is not None:
+        if descriptor.provider_reference != "local":
+            raise RccRuntimeError(
+                "exec", "filesystem carrier requires explicit local provider"
+            )
+        args.extend(
+            [
+                "--trust-carrier",
+                str(local_trust_carrier),
+                "--trust-carrier-type",
+                "filesystem",
+            ]
+        )
     if receipt_file is None and json_output:
         args.append("--json")
     elif receipt_file is not None:

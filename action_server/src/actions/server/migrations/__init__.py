@@ -48,6 +48,9 @@ MIGRATION_ID_TO_NAME: Dict[int, str] = {
     13: "add_mcp_catalog_names",
     14: "add_mcp_resource_routing",
     15: "add_run_outputs",
+    16: "add_invoice_reviews",
+    17: "add_foundry_records",
+    18: "allow_package_less_canvas",
 }
 
 CURRENT_VERSION: int = max(MIGRATION_ID_TO_NAME.keys())
