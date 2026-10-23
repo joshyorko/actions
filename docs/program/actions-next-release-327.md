@@ -163,10 +163,24 @@ remains unverified. It is an authoring verification artifact, not a release.
 
 Source keys (exact observed branch heads, not interchangeable acceptance):
 
-- **I**: qualified integration `76fb3afe6e4a3806804d6164f9727efa121551d7`, Runtime1.1.0a17,
-  Core1.1.0a2/SDK0.5.0a1. Source, installed MCP lifecycle and read-only official
-  browser host qualification are in the installed authoring receipt above. Earlier
-  schema18/invoice worker130 proof remains source-specific.
+The [reviewed generated RCC receipt](evidence/actions-next-327/cloud-reviewed-generated-rcc-20261023.json)
+qualifies source `b6a82488aa4a9b0091acea95ba63fa378f11dbaa`, Runtime1.1.0a18.
+SQL133/components161/invoice129 and genuine RCC6 passed without skips;
+portable2064 passed/13 skipped/270 deselected, configured static438 passed and
+fixture cleanupPASS. Four generated summaries use actual approved Work Items,
+dual SQL fences, pinned RCC and atomic result publication across both control
+stores and both data providers. Fresh interpreters replay/read exact completed
+artifacts without re-execution. This is a trusted host adapter with a narrow
+sealed `value: str` policy, not the active-Deployment resolver/public app path.
+The first failed RCC attempt and its uncertain cause remain retained. No a18
+installed-wheel or official-host business-job proof is claimed; a17 authoring
+and read-only host acceptance above remains separately source-bound.
+
+- **I**: source-qualified integration `b6a82488aa4a9b0091acea95ba63fa378f11dbaa`, Runtime1.1.0a18,
+  Core1.1.0a2/SDK0.5.0a1. Source and actual reviewed RCC proof are in the receipt
+  above. Installed MCP/read-only host proof remains source76fb3afe/a17; full
+  generated app/managed/client integration is open. Earlier schema18/invoice
+  worker130 proof remains source-specific.
 - **C**: #330 `feature/100-semantic-canvas-contract-20261022`,
   `d16ddbbeac090bd03b759fb890864610a6c052d2`. Isolated-source16 tests passed;
   wider worker312pass/19fail and failed Bootstrap receipts remain unqualified.
