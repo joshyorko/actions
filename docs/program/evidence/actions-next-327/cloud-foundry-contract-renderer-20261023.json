@@ -77,6 +77,30 @@
     {
       "receipt": "/workspace/actions-327-state/evidence/foundry-integration/union-a9-floor-cli-20261023.log",
       "sha256": "965553282515a2e132c72c23bc59c4f78710e3a18fb9b7f451dcb6629b02c502"
+    },
+    {
+      "receipt": "/workspace/actions-327-state/evidence/foundry-integration/union-a10-portable-20261023.xml",
+      "sha256": "a81075b5e6b6dc5d5b8564a7119cfa59b57f959d57e41e4dd7c91fba3a6ad22a"
+    },
+    {
+      "receipt": "/workspace/actions-327-state/evidence/foundry-integration/union-a10-installed-20261023.xml",
+      "sha256": "70f9605c50c3e507b832ce394ddf6de100d4181df973472636ead56b8039ac2a"
+    },
+    {
+      "receipt": "/workspace/actions-327-state/evidence/foundry-integration/import-version-red-20261023.xml",
+      "sha256": "e20d0eeb4aa0d42ad65838315dfd223a204452e8561e2c01e36a49e2cd988074"
+    },
+    {
+      "receipt": "/workspace/actions-327-state/evidence/foundry-integration/import-version-green-20261023.xml",
+      "sha256": "320094ad980df22c57cb1094f2a1e3203501dd7f84c79bb7f7ab6bd138e7ca69"
+    },
+    {
+      "receipt": "/workspace/actions-327-state/evidence/foundry-integration/union-a10-static-final-20261023.log",
+      "sha256": "80a3dce109951fede38cd96be6d1eb56e004194cc669c9ce6ebe8f33a69843f2"
+    },
+    {
+      "receipt": "/workspace/actions-327-state/evidence/foundry-integration/union-a10-version-20261023.log",
+      "sha256": "b6c0dc4a99248cfd9e5fd675fc5706f2fcb5706cc9b7546944b1873378fe5ae0"
     }
   ],
   "frontend": {
@@ -87,7 +111,7 @@
     "official_bridge_skipped": 1
   },
   "floor_cli": "PASS: explicit source-bound local Core/SDK wheels, pinned public Helper; exact installed origins/RECORD/module prefixes; default published floor unchanged",
-  "runtime_portable": "running; do not credit until terminal receipt",
+  "runtime_portable": "Superseded by follow_on: a9 failures retained, a10 portable PASS with explicit174skips",
   "original_failures": [
     "Core prerelease version_info int parsing ValueError",
     "mypy invalid Literal[SCHEMA_VERSION]",
@@ -109,5 +133,19 @@
     "state": "denied by automatic approval review",
     "reason": "reviewer classified destination101 as outside comment authorization; no comment created and no retry"
   },
-  "authority": "No community/public release/production/other repository/credential changes without separate owner approval"
+  "authority": "No community/public release/production/other repository/credential changes without separate owner approval",
+  "follow_on": {
+    "source_sha": "b3692434f7b340b31c15002f2ec3d6dc0625055f",
+    "runtime_candidate": "1.1.0a10",
+    "reproduced_failure": "a9 portable:5failed/1307passed/174skipped/262deselected; all failures reject Core1.1.0a2 in _get_actions_version",
+    "regression_red": "3failed/5passed: alpha,rc,dev+local probes",
+    "fix": "Use existing vendored PEP440 parser release tuple; invalid versions remain rejected",
+    "portable": "1317passed/174skipped/262deselected",
+    "installed": "40passed",
+    "focused": "26passed/3skipped/33deselected",
+    "static": "configured lint/typecheck402PASS; initial new-test isort ordering failure fixed",
+    "version_guards": "9passed",
+    "skip_scope": "Unconfigured service/integration/native/package-upload/platform cases remain unverified; prior zero-skip SQL/RCC source9ff remains separate",
+    "mcp_probe": "No tests ran from legacy mcp/docs-only directory; actual MCP library tests are included in Core332 suite"
+  }
 }

@@ -1,10 +1,10 @@
 """Runtime development must consume an installed candidate, not an import overlay."""
 
 import sys
-
-import pytest
 from importlib.metadata import distribution
 from pathlib import Path
+
+import pytest
 
 
 def test_runtime_uses_installed_fenced_sdk_candidate():
