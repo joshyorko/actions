@@ -9,8 +9,10 @@ from __future__ import annotations
 
 import base64
 import sqlite3
+from concurrent.futures import ThreadPoolExecutor
 from contextlib import contextmanager
 from pathlib import Path
+from threading import get_ident
 from uuid import uuid4
 
 import pytest
@@ -153,6 +155,14 @@ def _service(reviewed, policy, workers=None):
     )
 
 
+def _run_in_worker_thread(call):
+    caller_thread = get_ident()
+    with ThreadPoolExecutor(max_workers=1) as executor:
+        worker_thread, result = executor.submit(lambda: (get_ident(), call())).result()
+    assert worker_thread != caller_thread
+    return result
+
+
 def test_capabilities_only_advertise_implemented_operations(reviewed):
     _, _, _, reviews, actor, scope, _, _ = reviewed
     queue = _queue(reviews, scope)
@@ -189,6 +199,60 @@ def test_capabilities_only_advertise_implemented_operations(reviewed):
     assert Operation.CLAIM in worker_capabilities.operations
     assert Operation.RENEW in worker_capabilities.operations
     assert Operation.COMPLETE not in worker_capabilities.operations
+
+
+def test_capabilities_open_database_in_worker_thread(reviewed):
+    _, _, _, reviews, actor, scope, _, _ = reviewed
+    queue = _queue(reviews, scope)
+    policy = _Policy(queue.workspace_id.root)
+    policy.grant(actor, Permission.READ)
+    service = _service(reviewed, policy)
+
+    capabilities = _run_in_worker_thread(
+        lambda: service.capabilities(_caller(actor), queue.workspace_id)
+    )
+
+    assert capabilities.workspace_id == queue.workspace_id
+    assert Operation.QUEUES in capabilities.operations
+
+
+def test_call_opens_database_in_worker_thread(reviewed):
+    _, _, _, reviews, actor, scope, handle, _ = reviewed
+    queue = _queue(reviews, scope)
+    policy = _Policy(queue.workspace_id.root)
+    policy.grant(actor, Permission.READ)
+    service = _service(reviewed, policy)
+    reviews.offer(actor, scope, handle)
+    command = Queues(operation="queues.list", workspace_id=queue.workspace_id, limit=50)
+
+    result = _run_in_worker_thread(lambda: service.call(_caller(actor), command))
+
+    assert [entry["queue"]["queue_id"] for entry in result["queues"]] == [
+        queue.queue_id
+    ]
+
+
+@pytest.mark.parametrize("request_kind", ["foreign", "revoked"])
+def test_capabilities_require_read_before_scope_lookup(
+    reviewed, monkeypatch, request_kind
+):
+    _, _, _, reviews, actor, scope, _, _ = reviewed
+    queue = _queue(reviews, scope)
+    policy = _Policy(queue.workspace_id.root)
+    if request_kind == "foreign":
+        policy.grant(actor, Permission.READ)
+        requested_workspace = WorkspaceId.model_validate(str(uuid4()))
+    else:
+        policy.grant(actor)
+        requested_workspace = queue.workspace_id
+    service = _service(reviewed, policy)
+
+    def unexpected_scope_lookup(workspace_id):
+        raise AssertionError("capabilities were looked up without READ authority")
+
+    monkeypatch.setattr(service, "_known_scopes", unexpected_scope_lookup)
+    with pytest.raises(ManagedError, match="forbidden"):
+        service.capabilities(_caller(actor), requested_workspace)
 
 
 def test_reviewed_sql_queue_listing_decision_and_restart_receipt(reviewed):

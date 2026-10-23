@@ -148,29 +148,35 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
         self, caller: ManagedCaller, workspace_id: WorkspaceId
     ) -> Capabilities:
         try:
-            caller = ManagedCaller.model_validate(caller)
-            workspace_id = WorkspaceId.model_validate(workspace_id)
-            permissions = self._workspace_permissions(caller, workspace_id)
-            scopes = self._known_scopes(workspace_id)
-            worker_available = self._worker_available(scopes)
-            operations = self._operations(
-                permissions, worker_available, caller.worker_id is not None
-            )
-            from actions.server import __version__ as runtime_version
+            with self.db.connect():
+                caller = ManagedCaller.model_validate(caller)
+                workspace_id = WorkspaceId.model_validate(workspace_id)
+                self._require_workspace(caller, workspace_id, Permission.READ)
+                permissions = self._workspace_permissions(caller, workspace_id)
+                if Permission.READ not in permissions:
+                    raise ManagedError("forbidden")
+                scopes = self._known_scopes(workspace_id)
+                worker_available = self._worker_available(scopes)
+                operations = self._operations(
+                    permissions, worker_available, caller.worker_id is not None
+                )
+                from actions.server import __version__ as runtime_version
 
-            from actions.work_items import __version__ as sdk_version
+                from actions.work_items import __version__ as sdk_version
 
-            return Capabilities(
-                runtime_version=runtime_version,
-                sdk_version=sdk_version,
-                workspace_id=workspace_id,
-                operations=operations,
-                permissions=tuple(
-                    permission for permission in Permission if permission in permissions
-                ),
-                backend=self._backend(),
-                modes=("reviewed",),
-            )
+                return Capabilities(
+                    runtime_version=runtime_version,
+                    sdk_version=sdk_version,
+                    workspace_id=workspace_id,
+                    operations=operations,
+                    permissions=tuple(
+                        permission
+                        for permission in Permission
+                        if permission in permissions
+                    ),
+                    backend=self._backend(),
+                    modes=("reviewed",),
+                )
         except ManagedError:
             raise
         except AccessDenied:
@@ -182,55 +188,56 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
 
     def call(self, caller: ManagedCaller, command: Command) -> dict[str, Any]:
         try:
-            caller = ManagedCaller.model_validate(caller)
-            command = _COMMAND_ADAPTER.validate_python(command)
-            operation = Operation(command.operation)
-            workspace_id = self._workspace_for(command)
-            permission = OPERATION_PERMISSION[operation]
-            self._require_workspace(caller, workspace_id, permission)
-            if isinstance(command, Queues):
-                return self._queues_page(caller, command).model_dump(mode="json")
+            with self.db.connect():
+                caller = ManagedCaller.model_validate(caller)
+                command = _COMMAND_ADAPTER.validate_python(command)
+                operation = Operation(command.operation)
+                workspace_id = self._workspace_for(command)
+                permission = OPERATION_PERMISSION[operation]
+                self._require_workspace(caller, workspace_id, permission)
+                if isinstance(command, Queues):
+                    return self._queues_page(caller, command).model_dump(mode="json")
 
-            queue = command.queue
-            self._require_queue(caller, queue, permission)
-            if operation in _UNIMPLEMENTED:
-                raise ManagedError("unsupported_operation")
-            if operation == Operation.ARTIFACT:
-                self._require_workspace(caller, workspace_id, Permission.READ)
-                self._require_queue(caller, queue, Permission.READ)
-            if operation in {
-                Operation.LIST,
-                Operation.GET,
-                Operation.CLAIM,
-                Operation.RENEW,
-                Operation.COMPLETE,
-                Operation.CANCEL,
-                Operation.REVIEWS,
-                Operation.DECIDE,
-                Operation.RUN,
-                Operation.ARTIFACT,
-            }:
-                self._require_workspace(caller, workspace_id, Permission.READ)
-                self._require_queue(caller, queue, Permission.READ)
+                queue = command.queue
+                self._require_queue(caller, queue, permission)
+                if operation in _UNIMPLEMENTED:
+                    raise ManagedError("unsupported_operation")
+                if operation == Operation.ARTIFACT:
+                    self._require_workspace(caller, workspace_id, Permission.READ)
+                    self._require_queue(caller, queue, Permission.READ)
+                if operation in {
+                    Operation.LIST,
+                    Operation.GET,
+                    Operation.CLAIM,
+                    Operation.RENEW,
+                    Operation.COMPLETE,
+                    Operation.CANCEL,
+                    Operation.REVIEWS,
+                    Operation.DECIDE,
+                    Operation.RUN,
+                    Operation.ARTIFACT,
+                }:
+                    self._require_workspace(caller, workspace_id, Permission.READ)
+                    self._require_queue(caller, queue, Permission.READ)
 
-            if (
-                isinstance(command, (Claim, Renew, Complete))
-                and caller.worker_id is None
-            ):
-                raise ManagedError("forbidden")
+                if (
+                    isinstance(command, (Claim, Renew, Complete))
+                    and caller.worker_id is None
+                ):
+                    raise ManagedError("forbidden")
 
-            scope = self._scope_for_queue(queue)
-            operation_set = self._operations(
-                self._workspace_permissions(caller, workspace_id),
-                self._worker_available(self._known_scopes(workspace_id)),
-                caller.worker_id is not None,
-            )
-            if operation not in operation_set:
-                raise ManagedError("unsupported_operation")
+                scope = self._scope_for_queue(queue)
+                operation_set = self._operations(
+                    self._workspace_permissions(caller, workspace_id),
+                    self._worker_available(self._known_scopes(workspace_id)),
+                    caller.worker_id is not None,
+                )
+                if operation not in operation_set:
+                    raise ManagedError("unsupported_operation")
 
-            if self._is_mutation(command):
-                return self._mutate(caller, command, scope).model_dump(mode="json")
-            return self._read(caller, command, scope).model_dump(mode="json")
+                if self._is_mutation(command):
+                    return self._mutate(caller, command, scope).model_dump(mode="json")
+                return self._read(caller, command, scope).model_dump(mode="json")
         except ManagedError:
             raise
         except AccessDenied:
