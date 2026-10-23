@@ -1,0 +1,96 @@
+{
+  "stage": "EXACT_TARGET_SDK_DEPENDENCY_QUALIFIED_SCOPED_EXECUTION_IN_PROGRESS",
+  "source": "f3b0378fc067c5ebfcd67ed75a7073050b5e82b8",
+  "qualified_prior_checkpoint": "3f726ef15130d07ddec45ee05423a5ebfec380d2",
+  "versions": {
+    "runtime": "1.1.0a19",
+    "sdk": "0.5.0a2",
+    "core": "1.1.0a2"
+  },
+  "gateway": "Doctor/Bootstrap/ToolkitTest179PASS",
+  "runtime_focused": {
+    "receipt": "/workspace/actions-327-state/evidence/activated-exact-claim-final-20261023/c53fa3ee-d91c-42e7-a48a-edb55f8e718f/receipt.json",
+    "status": "PASS",
+    "counts": {
+      "managed": {
+        "tests": 56,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "foundry_storage": {
+        "tests": 143,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "components": {
+        "tests": 161,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "invoice": {
+        "tests": 129,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      }
+    },
+    "cleanup": "PASS"
+  },
+  "sdk_fenced": {
+    "receipt": "/workspace/actions-327-state/evidence/activated-sdk-a2-fenced-20261023/ea7364f2-0406-4107-9cc1-d2bfac63030b/receipt.json",
+    "status": "PASS",
+    "counts": {
+      "conformance": {
+        "tests": 45,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "portable": {
+        "tests": 321,
+        "skipped": 38,
+        "failures": 0,
+        "errors": 0
+      }
+    },
+    "cleanup": "PASS",
+    "source": "bcd25576d07a96c17e46e2ff72d143c0503a790d"
+  },
+  "sdk_owned_services": {
+    "receipt": "/tmp/actions-327-sdk-a2-cacb3d98-bb06-4904-b43c-1e22f5c70195/receipt.json",
+    "full": "268 passed,46 skipped,10 xfailed",
+    "wheel_sdist_twine_clean_consumer": "PASS",
+    "cleanup": "PASS"
+  },
+  "static": {
+    "runtime": "Configured lint/typecheck443PASS",
+    "sdk_public_contract": "mypy configured no-argument public call contract PASS",
+    "sdk_edited_bridge": "targeted SQLReviewQueue mypy PASS",
+    "sdk_broad_baseline": "Invoke format40 files on both3f726/current. Invoke typecheck68errors/16files without optional clients,72errors/15files with all extras, identical baseline/current. Not waived; required release static gates remain open."
+  },
+  "failures": [
+    {
+      "receipt": "/workspace/actions-327-state/evidence/activated-exact-claim-frozen-20261023/44ad8bc7-af1e-43aa-ae25-bb9ef35cd37b/receipt.json",
+      "disposition": "Focused128MiBPostgreSQL tmpfs WAL exhausted:4failed130passed10errors. Host filesystem had space. Same512MiBbounded fixture as full selection repaired gate; no durability/security setting changed."
+    },
+    {
+      "log": "/workspace/actions-327-state/evidence/foundry-integration/activated-sdk-a2-full-20261023.log",
+      "disposition": "Bare SDK default install:265passed46skip10xfail3missingoptional-client errors. Lock-declared all-extras install plus explicitly owned pinned Redis/Mongo fixture allowed canonical full SDK release gate to run. Existing/default services were not used."
+    }
+  ],
+  "remaining": [
+    "Activated Deployment/profile selection and scoped model/app execution in progress.",
+    "Second independent generated Python app and actual official-host interaction pending.",
+    "Actual a19/a2 RCC worker environment and fresh installed combined consumer not yet qualified. Prior a18/a1 installed/RCC receipts remain source-bound.",
+    "Managed native projection/logs assigned to existing PR333; profiles to existing PR331. Enqueue/retry/default managed profile/VSIX remain mandatory.",
+    "Full existing release matrix remains open; no readiness, merge, publication or E1 claim."
+  ],
+  "documentation": {
+    "canonical": "docs/skills/work-items.md",
+    "delta": "Item-specific claim cannot fall back to FIFO; a2 installed floor/no schema change; full SDK service fixtures require explicit owned URLs and lock-declared clients; schema-heavy focused PostgreSQL needs WAL-capable bounded storage."
+  },
+  "upstream_disposition": "none; existing RCC report remains draft only"
+}
