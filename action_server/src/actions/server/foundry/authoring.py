@@ -85,7 +85,11 @@ _IDEMPOTENCY: dict[str, JsonValue] = {
     "description": "Caller-chosen stable key for retrying this mutation with identical input.",
 }
 _SPEC: dict[str, JsonValue] = CanvasSpec.model_json_schema(
-    by_alias=True, mode="validation"
+    by_alias=True,
+    mode="validation",
+    # JSON Schema fragment references resolve from the whole tool document.
+    # This spec is nested under properties.spec, including recursive node defs.
+    ref_template="#/properties/spec/$defs/{model}",
 )
 _SPEC["description"] = (
     "Complete declarative CanvasSpec for the app UI. Use schemaVersion, title, "

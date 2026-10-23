@@ -354,3 +354,22 @@ Startup preserves Runs with common RunPin admission. The legacy blanket
 restart cancellation policy applies only to unfenced process Runs. A restart
 does not prove a native Attempt had no effects, and must not erase its retained
 claim, launch, result or reconciliation evidence.
+
+For an archive-based installed-consumer gate, supply read-only `GIT_DIR` and
+`GIT_WORK_TREE` only to the frontend producer so its timestamp comes from the
+exact archived commit. Remove those variables before Poetry builds the wheel:
+Poetry otherwise detects Git through that environment but constructs a missing
+archive-local `.git` path for its exclusion scan. Keep the failed attempt;
+this is a build-context error, not evidence of a dependency defect. Generate
+OAuth configuration only with the archived public producer and copy/measure the
+pinned RCC binary through the checked-in offline-build mechanism. Never include
+an existing checkout's local OAuth file.
+
+A clean noneditable consumer must assert imported modules reside under its own
+`sys.prefix`, compare Runtime wheel members to the archived producer bytes, and
+launch the normal CLI from an empty owned directory with separate state roots.
+An actual MCP SDK over a loopback socket can then qualify discovery, resource
+read, edits, explicit activation and process restart/reconnect/rollback. A build
+or ASGI transport test alone does not establish this installed route. This
+protocol proof still does not qualify an official browser host, generated
+business execution, authenticated ChatGPT, or offline replay of dependencies.

@@ -443,6 +443,7 @@ print(json.dumps(identities))
                 "tests/action_server_tests/test_foundry_package_less_storage.py",
                 "tests/action_server_tests/test_foundry_deployments.py",
                 "tests/action_server_tests/test_foundry_sql_authoring.py",
+                "tests/action_server_tests/test_foundry_authoring_model_contract.py",
                 "tests/action_server_tests/test_foundry_server_wiring.py",
                 "tests/action_server_tests/test_native_run_authority.py",
                 "tests/action_server_tests/test_foundry_package_registry.py",

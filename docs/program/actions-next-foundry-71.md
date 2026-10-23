@@ -368,3 +368,14 @@ adapter, so it cannot prove ordering of delayed host notifications. Do not enabl
 mutating adapters on an assumed notification order. Bridge component tests prove
 metadata parsing, revision remount, audience filtering, no mount calls and legacy
 projection preservation; they do not establish installed-host or ChatGPT proof.
+
+Model tool discovery must expose the complete CanvasSpec schema and each
+authoring operation's root description. Embedding Pydantic's standalone spec
+schema unchanged under a tool's `properties.spec` breaks its root-relative
+`#/$defs` references. Generate references as
+`#/properties/spec/$defs/{model}` and validate the complete tool document with
+a JSON Schema validator, including a recursive stack and a rejected unknown
+node. Schema equality on the nested object alone does not prove usable discovery.
+Authorized model results include the public authored spec for create/apply/get,
+inspection and activation/rollback; concrete capability bindings and backend
+source remain private. Spec data enables revision, never actor authorization.

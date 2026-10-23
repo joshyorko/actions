@@ -6,6 +6,7 @@ import asyncio
 import json
 from uuid import uuid4
 
+import pytest
 from action_server_tests.test_foundry_deployments import (
     _ExecutionPort,
     _PackagePort,
@@ -14,6 +15,7 @@ from action_server_tests.test_foundry_deployments import (
 )
 from action_server_tests.test_foundry_sql_authoring import _grant
 from actions.canvas_contract import CanvasSpec
+from jsonschema import Draft202012Validator, ValidationError
 
 from actions.server.deployments.foundry_repository import FoundryRepository
 from actions.server.deployments.foundry_service import FoundryDeploymentService
@@ -29,6 +31,35 @@ pytest_plugins = ["action_server_tests.foundry_fixtures"]
 class _BackendUnavailable:
     def __getattr__(self, name):
         raise AssertionError(f"UI-only authoring unexpectedly used {name}")
+
+
+def test_model_tool_schema_resolves_nested_canvas_references():
+    from actions.server.foundry.authoring import SCHEMAS
+
+    spec = {
+        "schemaVersion": "actions.canvas-spec/v1",
+        "title": "Owned nested spec",
+        "visibility": ["app"],
+        "bindingIds": [],
+        "root": {
+            "type": "stack",
+            "id": "main",
+            "children": [{"type": "text", "id": "hello", "text": "World"}],
+        },
+    }
+    for name in ("canvas_apply", "canvas_preview"):
+        validator = Draft202012Validator(SCHEMAS[name])
+        arguments = {"spec": spec}
+        if name == "canvas_apply":
+            arguments.update(
+                appId=str(uuid4()),
+                expectedBase=None,
+                bindings=[],
+                idempotencyKey="schema",
+            )
+        validator.validate(arguments)
+        with pytest.raises(ValidationError):
+            validator.validate(dict(arguments, spec=dict(spec, root={"type": "shell"})))
 
 
 def _canvas(db, refs):
@@ -66,10 +97,15 @@ def test_real_adapter_exposes_typed_spec_and_round_trips_authored_structure(
         assert set(tools) == MODEL_TOOLS
         apply_schema = tools["canvas_apply"].input_schema
         spec_schema = apply_schema["properties"]["spec"]
-        canonical = CanvasSpec.model_json_schema(by_alias=True, mode="validation")
+        canonical = CanvasSpec.model_json_schema(
+            by_alias=True,
+            mode="validation",
+            ref_template="#/properties/spec/$defs/{model}",
+        )
         canonical["description"] = spec_schema["description"]
         assert spec_schema == canonical
         assert "complete new CanvasSpec revision" in apply_schema["description"]
+        assert tools["canvas_apply"].description == apply_schema["description"]
         assert (
             "private binding targets" in tools["canvas_get"].input_schema["description"]
         )
