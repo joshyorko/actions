@@ -140,8 +140,6 @@ def create_router(
             name = Operation(command.operation)
             if OPERATION_PERMISSION[name] not in available.permissions:
                 return _error("forbidden", 403)
-            if name not in available.operations:
-                return _error("unsupported_operation", 409)
             if isinstance(command, (Claim, Renew, Complete)):
                 if identity.worker_id is None:
                     return _error("forbidden", 403)
@@ -150,6 +148,8 @@ def create_router(
                     and command.claim.owner_id != identity.worker_id
                 ):
                     return _error("forbidden", 403)
+            if name not in available.operations:
+                return _error("unsupported_operation", 409)
             result = await run_in_threadpool(service.call, identity, command)
             if inspect.isawaitable(result):
                 raise TypeError("managed port must be synchronous")

@@ -104,6 +104,12 @@ def main():
         ),
         ROOT / "action_server/tests/action_server_tests/test_native_run_authority.py",
         ROOT / "action_server/tests/action_server_tests/test_generated_work_item_execution.py",
+        ROOT / "action_server/tests/action_server_tests/test_reviewed_exact_claim.py",
+        ROOT / "action_server/tests/action_server_tests/test_activated_reviewed_execution.py",
+        ROOT / "action_server/tests/action_server_tests/test_reviewed_canvas_execution.py",
+        ROOT / "action_server/tests/action_server_tests/test_reviewed_retained_inputs.py",
+        ROOT / "action_server/tests/action_server_tests/mcp/test_scoped_foundry_caller.py",
+        ROOT / "action_server/tests/contract_tests/test_activated_generated_rcc.py",
         ROOT / "action_server/tests/contract_tests/test_reviewed_generated_rcc.py",
         ROOT / "action_server/tests/contract_tests/test_foundry_rcc_execution.py",
         ROOT / "action_server/tests/contract_tests/test_package_revision_compiler.py",
@@ -143,6 +149,7 @@ def main():
         ROOT / "action_server/tests/action_server_tests/test_canvas_lifecycle.py",
         ROOT / "action_server/tests/action_server_tests/test_knowledge_collections.py",
         ROOT / "action_server/tests/action_server_tests/test_candidate_work_items.py",
+        ROOT / "action_server/tests/action_server_tests/test_auth_route_inventory.py",
         ROOT / "work-items/src/actions/work_items/_adapters/_sql_review.py",
         ROOT / "work-items/pyproject.toml",
         ROOT / "action_server/src/actions/server/_models.py",
@@ -187,7 +194,7 @@ sdk = distribution('actions-work-items')
 module = importlib.import_module('actions.work_items._adapters._sql_review')
 path = Path(module.__file__).resolve()
 expected = source.parent.parent / 'work-items/src/actions/work_items/_adapters/_sql_review.py'
-if sdk.version != '0.5.0a1' or not path.is_relative_to(Path(sys.prefix).resolve()) or path.read_bytes() != expected.read_bytes():
+if sdk.version != '0.5.0a2' or not path.is_relative_to(Path(sys.prefix).resolve()) or path.read_bytes() != expected.read_bytes():
     raise RuntimeError('installed candidate SDK differs from the selected source')
 identities['actions.work_items._adapters._sql_review'] = {'path':str(path),'sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'version':sdk.version}
 print(json.dumps(identities))
@@ -216,15 +223,14 @@ print(json.dumps(identities))
             name,
             "--label",
             "actions.release327.attempt=" + attempt,
-            "--memory=768m" if args.full else "--memory=256m",
+            "--memory=768m",
             "--cpus=1",
             "--pids-limit=128",
             "--tmpfs",
-            # The full package repeats schema-heavy SQL cases after the focused
-            # gates. PostgreSQL WAL exhausted 128 MiB before that run finished.
-            "/var/lib/postgresql/data:size=512m"
-            if args.full
-            else "/var/lib/postgresql/data:size=128m",
+            # Focused Foundry/managed gates are schema-heavy too. Their WAL
+            # exhausted the old 128 MiB mount before exact-claim tests started.
+            # Keep the same bounded storage and safety settings as the full gate.
+            "/var/lib/postgresql/data:size=512m",
             "--publish",
             "127.0.0.1::5432",
             "--env",
@@ -310,7 +316,7 @@ print(json.dumps(identities))
             entries = list(wheels.iterdir())
             if (
                 len(entries) != 1
-                or entries[0].name != "actions_work_items-0.5.0a1-py3-none-any.whl"
+                or entries[0].name != "actions_work_items-0.5.0a2-py3-none-any.whl"
                 or entries[0].is_symlink()
             ):
                 raise RuntimeError("one exact candidate SDK wheel required")
@@ -450,6 +456,13 @@ print(json.dumps(identities))
                 "config": str(config),
             }
         suites = {
+            "managed": [
+                "tests/action_server_tests/test_managed_work_items_api.py",
+                "tests/action_server_tests/test_managed_work_items_sql_service.py",
+                "tests/action_server_tests/test_managed_work_items_runtime.py",
+                "-m",
+                "not integration_test",
+            ],
             "foundry_storage": [
                 "tests/action_server_tests/test_foundry_storage.py",
                 "tests/action_server_tests/test_foundry_package_less_storage.py",
@@ -460,6 +473,10 @@ print(json.dumps(identities))
                 "tests/action_server_tests/test_native_run_authority.py",
                 "tests/action_server_tests/test_foundry_package_registry.py",
                 "tests/action_server_tests/test_generated_work_item_execution.py",
+                "tests/action_server_tests/test_reviewed_exact_claim.py",
+                "tests/action_server_tests/test_activated_reviewed_execution.py",
+                "tests/action_server_tests/test_reviewed_canvas_execution.py",
+                "tests/action_server_tests/test_reviewed_retained_inputs.py",
             ],
             "components": [
                 "tests/action_server_tests/test_invoice_review.py",
@@ -471,6 +488,7 @@ print(json.dumps(identities))
                 "tests/action_server_tests/test_foundry_boot.py",
                 "tests/action_server_tests/test_foundry_discovery.py",
                 "tests/action_server_tests/mcp/test_foundry_mcp.py",
+                "tests/action_server_tests/mcp/test_scoped_foundry_caller.py",
             ],
             "invoice": [
                 "tests/action_server_tests/test_invoice_providers.py",
@@ -482,6 +500,7 @@ print(json.dumps(identities))
         }
         if args.worker:
             suites["worker"] = [
+                "tests/action_server_tests/test_managed_work_items_runtime.py::test_real_managed_completion_uses_retained_rcc_evidence",
                 "tests/action_server_tests/test_invoice_worker.py",
                 "tests/action_server_tests/test_invoice_worker_mcp.py",
                 "tests/action_server_tests/test_robot_run_inputs.py",
@@ -492,6 +511,7 @@ print(json.dumps(identities))
             suites["package_compiler"] = [
                 "tests/contract_tests/test_foundry_package_registry_rcc.py",
                 "tests/contract_tests/test_reviewed_generated_rcc.py",
+                "tests/contract_tests/test_activated_generated_rcc.py",
             ]
         if args.browser:
             suites["browser"] = [
@@ -545,6 +565,7 @@ print(json.dumps(identities))
                     label
                     in (
                         "foundry_storage",
+                        "managed",
                         "components",
                         "invoice",
                         "browser",

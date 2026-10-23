@@ -19,7 +19,14 @@ pytestmark = review_fixtures.pytestmark
 pytest_plugins = ["action_server_tests.foundry_fixtures"]
 
 
-def setup_generated(reviewed, foundry_package_store, *, real=False):
+def setup_generated(
+    reviewed,
+    foundry_package_store,
+    *,
+    real=False,
+    backend_entries=None,
+    logical_key="reviewed-summary",
+):
     from actions.server.foundry.work_item_execution import ReviewedGeneratedRun
 
     db, _, _, reviews, actor, scope, handle, query_snapshot = reviewed
@@ -72,9 +79,9 @@ class GeneratedActionTest(unittest.TestCase):
             0o644,
         )
         outcome = registry.compile_trusted_source(
-            entries,
-            logical_package_key="reviewed-summary",
-            logical_name="Reviewed summary",
+            entries if backend_entries is None else backend_entries,
+            logical_package_key=logical_key,
+            logical_name=logical_key,
             trusted_actor=actor,
             workspace_id=refs.workspace,
             application_id=refs.deployment_id,

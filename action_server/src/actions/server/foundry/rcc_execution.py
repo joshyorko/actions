@@ -10,6 +10,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import selectors
 import shutil
 import stat
 import subprocess
@@ -53,6 +54,9 @@ _JOURNAL_LIMIT = 64 * 1024
 _INPUT_LIMIT = 256 * 1024
 _RESULT_LIMIT = 512 * 1024
 _RECEIPT_LIMIT = 1024 * 1024
+_LOG_LIMIT = 256 * 1024
+_LOG_READ_BYTES = 64 * 1024
+_POST_EXIT_LOG_GRACE_SECONDS = 0.5
 _OUTPUT_RETENTION_SECONDS = 3600
 _LEASE_SECONDS = 30
 _HEARTBEAT_SECONDS = 8
@@ -117,10 +121,10 @@ class GeneratedRccExecution:
     ) -> Run:
         """Run the one admitted Action and publish its measured JSON result.
 
-        The host callback or event is polled during execution. The caller
-        remains responsible for renewing the Work Item lease and should set
-        cancellation when that claim is lost or cancelled; this adapter renews
-        only the common Run Attempt fence.
+        The host callback or event is polled during execution. In reviewed
+        Work Item dispatch, the injected RunOutputService implementation also
+        checks or renews the exact queue claim on heartbeat, stage and publish;
+        terminal publication keeps both fences in its shared SQL transaction.
         """
         actor = Actor.model_validate(actor)
         fence = AttemptFence.model_validate(fence)
@@ -146,9 +150,11 @@ class GeneratedRccExecution:
             raise FenceRejected("prior RCC launch requires explicit reconciliation")
         self._check_cancel(is_cancelled, actor, fence)
         launch_id = str(uuid4())
+        lineage = self._lineage(snapshot, journal["claim"], fence)
         launch = {
             "id": launch_id,
             "workItemClaim": journal["claim"],
+            "lineage": lineage,
             "inputDigest": self._digest(input_bytes),
             "sourceArtifactDigest": compiled.source_artifact_digest,
             "packageRevision": compiled.package_revision_id.root,
@@ -176,6 +182,10 @@ class GeneratedRccExecution:
         result_file = directory / "action-result.json"
 
         with _transaction(self.outputs.db):
+            # Reviewed output guards acquire Counter/Workspace before Run reads.
+            # Establish the writer before inspecting a journal to avoid a
+            # SQLite read-to-write upgrade racing another queue writer.
+            self.outputs._fence(fence)
             current = self._read_journal(fence)
             if current != journal or current["launch"] is not None:
                 raise FenceRejected("Work Items dispatch changed before launch")
@@ -218,6 +228,10 @@ class GeneratedRccExecution:
         command.insert(1, "--no-build")
         environment = self._child_environment(directory)
         handle: RccProcessHandle | None = None
+        stdout_bytes = b""
+        stderr_bytes = b""
+        stdout_capture: dict[str, Any] = {}
+        stderr_capture: dict[str, Any] = {}
         completed = False
         try:
             process = subprocess.Popen(
@@ -225,28 +239,30 @@ class GeneratedRccExecution:
                 cwd=source,
                 env=environment,
                 stdin=subprocess.DEVNULL,
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.STDOUT,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
                 shell=False,
                 close_fds=True,
             )
             handle = RccProcessHandle(process, receipt_file)
             deadline = time.monotonic() + timeout_seconds
-            heartbeat_at = time.monotonic() + _HEARTBEAT_SECONDS
-            while process.poll() is None:
-                if is_cancelled():
-                    self.outputs.cancel(actor, fence.run_id)
-                    raise FenceRejected("generated Action execution cancelled")
-                if time.monotonic() >= deadline:
-                    raise TimeoutError("generated Action RCC deadline")
-                if time.monotonic() >= heartbeat_at:
-                    self._assert_live_journal(actor, fence, launch)
-                    self.outputs.heartbeat(fence, lease_seconds=_LEASE_SECONDS)
-                    heartbeat_at = time.monotonic() + _HEARTBEAT_SECONDS
-                try:
-                    process.wait(timeout=0.2)
-                except subprocess.TimeoutExpired:
-                    pass
+            (
+                stdout_bytes,
+                stderr_bytes,
+                stdout_capture,
+                stderr_capture,
+            ) = self._capture_process(
+                process,
+                actor,
+                fence,
+                launch,
+                is_cancelled,
+                deadline,
+            )
+            try:
+                process.wait(timeout=max(0.0, deadline - time.monotonic()))
+            except subprocess.TimeoutExpired:
+                raise TimeoutError("generated Action RCC deadline") from None
             if process.returncode != 0:
                 raise RuntimeError(
                     "RCC Action did not complete; retained launch requires reconciliation"
@@ -282,8 +298,11 @@ class GeneratedRccExecution:
             "resultDigest": self._digest(result_bytes),
             "receiptDigest": receipt_digest,
             "artifactDigest": compiled.rcc_artifact_digest,
+            "stdout": self._capture_receipt(stdout_bytes, stdout_capture),
+            "stderr": self._capture_receipt(stderr_bytes, stderr_capture),
         }
         with _transaction(self.outputs.db):
+            self.outputs._fence(fence)
             current = self._read_journal(fence)
             if current.get("launch") != launch or current.get("execution") is not None:
                 raise FenceRejected("RCC execution journal changed before publication")
@@ -297,17 +316,39 @@ class GeneratedRccExecution:
                 {"result": _canonical(current, _JOURNAL_LIMIT)},
             )
 
-        output_ref = self.outputs.stage(
-            fence,
-            [result_bytes],
-            name="generated-action-result.json",
-            media_type="application/json",
-            retention_seconds=_OUTPUT_RETENTION_SECONDS,
+        output_payloads = (
+            ("generated-action-result.json", "application/json", result_bytes),
+            ("rcc-receipt.json", "application/json", receipt_bytes),
+            ("rcc-stdout.log", "application/octet-stream", stdout_bytes),
+            ("rcc-stderr.log", "application/octet-stream", stderr_bytes),
         )
+        output_refs = []
+        output_receipts = []
+        for name, media_type, payload in output_payloads:
+            self._check_cancel(is_cancelled, actor, fence)
+            output_refs.append(
+                self.outputs.stage(
+                    fence,
+                    self._chunks(payload),
+                    name=name,
+                    media_type=media_type,
+                    retention_seconds=_OUTPUT_RETENTION_SECONDS,
+                )
+            )
+            output_receipts.append(
+                {
+                    "name": name,
+                    "ref": output_refs[-1].model_dump(mode="json"),
+                    "digest": self._digest(payload),
+                    "size": len(payload),
+                }
+            )
         result_receipt = {
             "version": "actions.generated-rcc-execution/v1",
             "mode": "work-items",
             "claim": journal["claim"],
+            "lineage": lineage,
+            "launch": launch,
             "publicationFence": fence.model_dump(),
             "sourceArtifactDigest": compiled.source_artifact_digest,
             "packageRevision": compiled.package_revision_id.root,
@@ -315,8 +356,10 @@ class GeneratedRccExecution:
             "rccSpecificationDigest": compiled.rcc_specification_digest,
             "rccArtifactDigest": compiled.rcc_artifact_digest,
             "execution": execution,
+            "outputs": output_receipts,
             "actionResult": result_value,
         }
+        self._check_cancel(is_cancelled, actor, fence)
         with _transaction(self.outputs.db):
             self._assert_live_journal(
                 actor, fence, launch, completed_execution=execution
@@ -324,7 +367,7 @@ class GeneratedRccExecution:
             return self.outputs.publish(
                 actor,
                 fence,
-                [output_ref],
+                output_refs,
                 result_receipt,
                 terminal_status=RunStatus.PASSED,
             )
@@ -456,14 +499,118 @@ class GeneratedRccExecution:
         *,
         completed_execution: dict | None = None,
     ) -> None:
-        self.outputs.execution_context(actor, fence)
+        snapshot, _inputs = self.outputs.execution_context(actor, fence)
         journal = self._read_journal(fence)
+        lineage = self._lineage(snapshot, journal["claim"], fence)
         if (
             journal.get("launch") != launch
             or journal.get("claim") != launch.get("workItemClaim")
+            or launch.get("lineage") != lineage
             or journal.get("execution") != completed_execution
         ):
             raise FenceRejected("current RCC launch intent changed")
+
+    @staticmethod
+    def _lineage(snapshot: ExecutionSnapshot, claim: dict, fence: AttemptFence) -> dict:
+        """Return the exact admitted Package, Plan, Work Item, Run and Attempt."""
+        package = snapshot.capability.package_revision.model_dump(mode="json")
+        plan = snapshot.runtime_plan.model_dump(mode="json")
+        if plan.get("package_revision") != package:
+            raise AccessDenied("Runtime Plan and Package revision differ")
+        return {
+            "packageRevision": package,
+            "runtimePlan": plan,
+            "workItemClaim": claim,
+            "runId": fence.run_id,
+            "attemptFence": fence.model_dump(),
+        }
+
+    def _capture_process(
+        self,
+        process: subprocess.Popen,
+        actor: Actor,
+        fence: AttemptFence,
+        launch: dict,
+        cancelled: Callable[[], bool],
+        deadline: float,
+    ) -> tuple[bytes, bytes, dict[str, Any], dict[str, Any]]:
+        """Drain both RCC pipes while retaining only bounded prefixes."""
+        if process.stdout is None or process.stderr is None:
+            raise RuntimeError("RCC output pipes were not created")
+        selector = selectors.DefaultSelector()
+        retained = {"stdout": bytearray(), "stderr": bytearray()}
+        observed = {"stdout": 0, "stderr": 0}
+        complete = {"stdout": False, "stderr": False}
+        streams = {"stdout": process.stdout, "stderr": process.stderr}
+        for name, stream in streams.items():
+            selector.register(stream, selectors.EVENT_READ, name)
+        heartbeat_at = time.monotonic() + _HEARTBEAT_SECONDS
+        process_exit_at: float | None = None
+        try:
+            while selector.get_map():
+                now = time.monotonic()
+                if now >= deadline:
+                    raise TimeoutError("generated Action RCC deadline")
+                if cancelled():
+                    self.outputs.cancel(actor, fence.run_id)
+                    raise FenceRejected("generated Action execution cancelled")
+                if process.poll() is not None:
+                    if process_exit_at is None:
+                        process_exit_at = now
+                    elif now - process_exit_at >= _POST_EXIT_LOG_GRACE_SECONDS:
+                        break
+                if now >= heartbeat_at:
+                    self._assert_live_journal(actor, fence, launch)
+                    self.outputs.heartbeat(fence, lease_seconds=_LEASE_SECONDS)
+                    heartbeat_at = time.monotonic() + _HEARTBEAT_SECONDS
+                for key, _mask in selector.select(timeout=0.2):
+                    name = key.data
+                    chunk = os.read(key.fd, _LOG_READ_BYTES)
+                    if not chunk:
+                        selector.unregister(key.fileobj)
+                        streams[name].close()
+                        complete[name] = True
+                        continue
+                    observed[name] += len(chunk)
+                    room = _LOG_LIMIT - len(retained[name])
+                    if room > 0:
+                        retained[name].extend(chunk[:room])
+        finally:
+            for key in list(selector.get_map().values()):
+                selector.unregister(key.fileobj)
+                streams[key.data].close()
+            selector.close()
+        values = {name: bytes(value) for name, value in retained.items()}
+        receipts = {
+            name: {
+                "observedBytes": observed[name],
+                "retainedBytes": len(values[name]),
+                "discardedObservedBytes": observed[name] - len(values[name]),
+                "streamComplete": complete[name],
+                "truncated": observed[name] > len(values[name]) or not complete[name],
+            }
+            for name in retained
+        }
+        return (
+            values["stdout"],
+            values["stderr"],
+            receipts["stdout"],
+            receipts["stderr"],
+        )
+
+    def _capture_receipt(
+        self, payload: bytes, receipt: dict[str, Any]
+    ) -> dict[str, Any]:
+        return {
+            **receipt,
+            "digest": self._digest(payload),
+            "retainedBytes": len(payload),
+        }
+
+    @staticmethod
+    def _chunks(payload: bytes):
+        for offset in range(0, len(payload), _LOG_READ_BYTES):
+            yield payload[offset : offset + _LOG_READ_BYTES]
 
     @staticmethod
     def _valid_claim(claim: dict, fence: AttemptFence) -> bool:

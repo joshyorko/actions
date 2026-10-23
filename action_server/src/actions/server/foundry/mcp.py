@@ -16,7 +16,7 @@ from mcp.types import CallToolResult, Resource, TextContent, Tool, ToolAnnotatio
 from pydantic import JsonValue, TypeAdapter
 
 from actions.server.deployments.canonical import canonicalize_json
-from actions.server.run_outputs.types import Actor, canonical_uuid
+from actions.server.run_outputs.types import Actor, CanvasResultScope, canonical_uuid
 
 URI = "ui://action-canvas/v1/canvas.html"
 MODEL_TOOLS = frozenset(
@@ -40,7 +40,10 @@ APP_TOOLS = frozenset(
         "canvas_artifact",
     }
 )
-RESERVED_TOOLS = MODEL_TOOLS | APP_TOOLS | {"canvas_query", "canvas_page"}
+CAPABILITY_TOOLS = frozenset({"capability_invoke"})
+RESERVED_TOOLS = (
+    MODEL_TOOLS | APP_TOOLS | CAPABILITY_TOOLS | {"canvas_query", "canvas_page"}
+)
 _READ_ONLY = frozenset(
     {
         "canvas_open",
@@ -82,12 +85,23 @@ class CanvasCaller:
     actor: Actor
     workspace_id: str
     audience: Literal["model", "app"]
+    scope: CanvasResultScope | None = None
 
     def __post_init__(self):
         object.__setattr__(self, "actor", Actor.model_validate(self.actor))
         canonical_uuid(self.workspace_id)
         if self.audience not in ("model", "app"):
             raise ValueError("known Canvas audience required")
+        if self.scope is not None:
+            scope = CanvasResultScope.model_validate(self.scope)
+            if (
+                self.audience != "app"
+                or scope.application.workspace_id != self.workspace_id
+            ):
+                raise ValueError(
+                    "exact app context in the authenticated Workspace required"
+                )
+            object.__setattr__(self, "scope", scope)
 
 
 @dataclass(frozen=True)
@@ -116,7 +130,7 @@ class CanvasMcp:
         html: str,
     ):
         schemas = {name: _object(value, 65536) for name, value in port.schemas.items()}
-        if set(schemas) - (MODEL_TOOLS | APP_TOOLS):
+        if set(schemas) - (MODEL_TOOLS | APP_TOOLS | CAPABILITY_TOOLS):
             raise ValueError("unknown Canvas operation")
         if not MODEL_TOOLS <= set(schemas):
             raise ValueError("complete model-visible Canvas facade required")
@@ -176,14 +190,16 @@ class CanvasMcp:
                 _meta={
                     "ui": {
                         "resourceUri": URI,
-                        "visibility": ["model", "app"]
-                        if name in MODEL_TOOLS
-                        else ["app"],
+                        "visibility": ["model"]
+                        if name in CAPABILITY_TOOLS
+                        else (["model", "app"] if name in MODEL_TOOLS else ["app"]),
                     }
                 },
             )
             for name, schema in sorted(self._schemas.items())
-            if name in MODEL_TOOLS or caller.audience == "app"
+            if (name in MODEL_TOOLS and caller.scope is None)
+            or (name in APP_TOOLS and caller.audience == "app")
+            or (name in CAPABILITY_TOOLS and caller.audience == "model")
         ]
 
     async def call(self, ctx: object, name: str, arguments: object) -> CallToolResult:
@@ -193,6 +209,8 @@ class CanvasMcp:
                 caller is None
                 or name not in self._schemas
                 or (name in APP_TOOLS and caller.audience != "app")
+                or (name in MODEL_TOOLS and caller.scope is not None)
+                or (name in CAPABILITY_TOOLS and caller.audience != "model")
             ):
                 raise ValueError("Canvas operation denied")
             inputs = _object(arguments, 1024 * 1024)

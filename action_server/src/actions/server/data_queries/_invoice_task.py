@@ -99,7 +99,7 @@ def main():
     module_digest = hashlib.sha256(module.read_bytes()).hexdigest()
     wheel_digest = origin.get("archive_info", {}).get("hashes", {}).get("sha256")
     if (
-        sdk.version != "0.5.0a1"
+        sdk.version != "0.5.0a2"
         or module not in owned
         or not module.is_relative_to(Path(sys.prefix).resolve())
         or module_digest != data["sdk_module_sha256"]

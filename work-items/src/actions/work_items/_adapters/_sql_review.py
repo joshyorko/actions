@@ -103,6 +103,45 @@ class SQLReviewQueue:
             )
             return WorkItemClaim(changed[0][0], owner_id, changed[0][1])
 
+    def reserve_item_fenced(
+        self, item_id: str, owner_id: str, *, lease_seconds: int
+    ) -> WorkItemClaim:
+        """Claim only the selected host-admitted item, with no FIFO fallback.
+
+        A live owner, cancellation, terminal item or different scope is not an
+        invitation to lease another result. Expired takeover increments the
+        same canonical epoch and uses the database's current clock.
+        """
+        validate_owner(item_id)
+        validate_owner(owner_id)
+        validate_lease(lease_seconds)
+        with self.store.transaction():
+            self._check_format()
+            changed = self.store.execute(
+                "UPDATE fenced_work_item SET state=?,claim_owner=?,"
+                "claim_epoch=claim_epoch+1,claim_deadline_ms="
+                + self.clock
+                + "+? WHERE workspace_id=? AND queue_name=? AND id=? AND format=? "
+                "AND cancel_requested=0 AND (state=? OR "
+                "(state=? AND CAST(claim_deadline_ms AS BIGINT)<="
+                + self.clock
+                + ")) RETURNING id,claim_epoch",
+                [
+                    State.IN_PROGRESS.value,
+                    owner_id,
+                    lease_seconds * 1000,
+                    self.workspace_id,
+                    self.queue_name,
+                    item_id,
+                    FORMAT,
+                    State.PENDING.value,
+                    State.IN_PROGRESS.value,
+                ],
+            )
+            if not changed:
+                raise EmptyQueue("Selected review Work Item is not claimable")
+            return WorkItemClaim(changed[0][0], owner_id, changed[0][1])
+
     def _require(self, claim: WorkItemClaim) -> None:
         if not isinstance(claim, WorkItemClaim):
             raise ClaimRejected("typed Work Item claim required")

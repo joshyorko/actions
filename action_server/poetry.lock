@@ -75,7 +75,7 @@ url = "../devutils"
 
 [[package]]
 name = "actions-work-items"
-version = "0.5.0a1"
+version = "0.5.0a2"
 description = "Robocorp-compatible runtime and FileAdapter with managed local and distributed backends"
 optional = false
 python-versions = ">=3.10,<4.0"
@@ -4051,4 +4051,4 @@ data-duckdb = ["duckdb"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<3.14"
-content-hash = "5c23fee85d2a4023d1efac47d908c7d7995286f54d99a53cf4b1bf9ed5439d2c"
+content-hash = "c8e40ccd91b91fe4975ecffa7d330497af115cd2a4940da7652d5b32e14a4498"

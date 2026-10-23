@@ -60,6 +60,7 @@ def retain_and_release_owned_compiler_views(request):
     selected = request.node.path.name in {
         "test_foundry_package_registry_rcc.py",
         "test_reviewed_generated_rcc.py",
+        "test_activated_generated_rcc.py",
     }
     yield
     if not enabled or not selected:

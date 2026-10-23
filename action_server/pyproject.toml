@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "actions-runtime"
-version = "1.1.0a18"
+version = "1.1.0a20"
 description = "Actions Runtime — serve Python actions through HTTP and MCP"
 authors = ["Joshua Yorko"]
 maintainers = ["Joshua Yorko"]
@@ -45,7 +45,7 @@ cryptography = "^46.0.3"
 requests_oauthlib = "^2.0"
 watchfiles = "^1.1.1"
 mcp = "^2.0.0"
-actions-work-items = { version = ">=0.5.0a1,<0.6.0", allow-prereleases = true }
+actions-work-items = { version = ">=0.5.0a2,<0.6.0", allow-prereleases = true }
 # Scheduling dependencies
 croniter = "^2.0.0"
 pytz = "^2024.1"

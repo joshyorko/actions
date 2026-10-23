@@ -460,7 +460,7 @@ def test_runtime_metadata_admits_installed_fenced_candidate_without_a_source_ove
         "actions-core"
     ] == {"path": "../actions/", "develop": False}
     assert dependencies["actions-work-items"] == {
-        "version": ">=0.5.0a1,<0.6.0",
+        "version": ">=0.5.0a2,<0.6.0",
         "allow-prereleases": True,
     }
     assert metadata["tool"]["poetry"]["group"]["dev"]["dependencies"][
@@ -709,7 +709,7 @@ def test_runtime_clean_wheels_install_outside_checkout_in_both_uninstall_orders(
         in runtime_files[metadata_name]
     )
     assert (
-        "Requires-Dist: actions-work-items (>=0.5.0a1,<0.6.0)"
+        "Requires-Dist: actions-work-items (>=0.5.0a2,<0.6.0)"
         in runtime_files[metadata_name]
     )
     record_name = next(name for name in runtime_files if name.endswith("/RECORD"))
