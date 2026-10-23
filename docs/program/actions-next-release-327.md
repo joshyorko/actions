@@ -61,35 +61,104 @@ fixture construction and atomically publishes child PID readiness with a delayed
 partial-write regression. Those repairs require fresh hosted proof; historical
 matrix results do not qualify a new source or extend Linux-only filesystem support.
 
-## Ordered cloud continuation
+## Unified current release matrix — October23
 
-Josh confirmed parallel foundry implementation at21:59:51UTC on October22.
-General first-boot authoring and separately admitted generated Python through
-common immutable Package/Deployment are now implementation scope. The
-[exclusive lane/interface handoff](actions-next-foundry-71.md) reserves shared
-Runtime SQL/MCP/server/CLI ownership and records the parent's initial three-lane
-dispatch. No sibling candidate is integrated by the MCP boundary checkpoint.
-Next: reviewed spec/renderer/compiler contracts, shared SQL publication/CAS and
-authoring wiring, then real first-boot/browser/restart/rollback and separate
-generated-backend/RCC acceptance. Prior invoice E2 does not satisfy those gates.
+This is the single current acceptance matrix for #327 and draft #328. Every
+accepted lane stages into `release/327-invoice-vertical-20261020`; its branch/PR
+is an integration boundary, not another release or an orphan experiment. The
+October23 owner contract includes fresh install -> empty Canvas -> external
+model-authored semantic UI **and generated Python backend** -> validate/activate
+-> explicit interaction and real bounded job -> durable result/artifact ->
+revise/rollback/restart/reopen. Private invoice composition and six minimal
+semantic nodes do not complete this product contract.
 
-| Order | Gate | Current boundary and next required evidence |
-|---|---|---|
-| 1 | Work Item PostgreSQL baseline | This iteration fixes the reproduced concrete-adapter mypy failure and extends owned real PostgreSQL coverage for foreign schema ownership, unknown version/format across operations, and expiry during output publication. Exact input hashes, failed controls and current commands belong to the linked receipt. No Runtime wiring or full release completion follows from SDK conformance. |
-| 2 | Reviewed sibling convergence | Coordinator handed off Canvas `22d9766079f2278350e924b3d44c7b4e00a608a7` and Knowledge `63d9ab6c12fc0158938e565cfca6edf7c2624d38`. Their five-file union was inspected and imported without unrelated history. The convergence receipt distinguishes original sibling tests from added authorization, snapshot and provenance regressions and full union gates. Worker environment failures remain historical failure receipts. |
-| 3 | Typed input and authorized immutable result | Qualify real DuckDB and PostgreSQL named operations, declared effects, retained source/result identity, limits, cancellation, paging/export and cross-workspace denial on the integrated source. Knowledge's two-provider service cells remain separate. |
-| 4 | Exact-result human review | The bounded SQL slice now binds the sealed result, original input/source and application/deployment revisions; explicit currently authorized approval inserts one fenced Work Item atomically and idempotently. Real SQL/provider, MCP, explicit-click browser and installed-wheel proofs are in the review receipt. Review, Work Item, Run and Attempt stay distinct. Owned synthetic retry/dead-letter/effect reconciliation is now separately qualified; generic target contracts and scheduling remain open. |
-| 5 | Actual pinned execution and recovery | Bounded private composition now links one approved exact-result Work Item to an idempotent distinct Run/Attempt and executes the fixed invoice task through RCC18.19.3. Four real provider/SQL cells prove dual fencing, atomic completion/output, real controller crash/restart, cancellation, terminal replay and explicit no-launch/completed-private-result reconciliation. Missing/altered journals fail closed; generic effects, retry/dead-letter and arbitrary mid-effect crashes remain open. See the worker receipt for exact source, 130-case strict gate and installed contracts. |
-| 6 | Existing MCP Apps/Canvas and generated revision | Bounded private composition stages and validates the existing renderer with typed invoice inputs, activates one immutable revision, invokes a revision-scoped result, requires explicit exact-result approval, and projects the existing private RCC worker result. Real SQL/provider/RCC and browser tests cover restart, changed activation, rollback, current/revoked actor and scoped artifact readback. It is a private E2 integration, not public app registration, a general compiler or authenticated ChatGPT E1. Exact acceptance and original failures remain in the generated receipt. |
-| 7 | Actual ChatGPT E1 | NEEDS_OPERATOR for an isolated authenticated host connection. Require actual tools/resource/MIME association, bridge/UI action and restart/reconnect receipts. No endpoint registration or host acceptance is implied by this iteration. |
-| 8 | Optional celld | `24fbd91c9ddd34bec54230e1c3b20e3225061079` remains NO-GO evidence only. Require pinned owned synthetic storage, upstream storage prerequisites and isolated two-node crash/takeover/outage/effect/recovery tests before an adapter is admitted. Keep disabled. An unmet gate requires an explicit owner scope decision before release. |
-| 9 | Compatibility and independent distribution | Qualify the complete source union, public aliases, mixed versions, SQLite and service/control-plane PostgreSQL boundaries, native/browser platforms and current package/static gates. Resolve SDK version/Runtime dependency floors; never publish changed bytes under 1.0.4/0.4.4. Produce homelab-independent reproducible wheels/native/images, configurable registry/storage, SBOM/provenance, retained checksums, restore and rollback evidence before owner publication approval. |
+Conditional owner authority now includes merge and Runtime/PyPI publication
+only after all agreed requirements pass. The parent must independently confirm
+the final exact-source evidence threshold and publication disposition. This
+lane must not merge or publish ahead of that review. Production deployment,
+live credentials/auth/tunnel/security changes, spending and other-repository
+mutation remain unauthorized. Engineering schema/API decisions belong to the
+integration owner, not an owner-permission queue.
+
+Source keys (exact observed branch heads, not interchangeable acceptance):
+
+- **I**: integration `9ff0061d64e1edf8b644e01a3fe56c77f0b83ce7`, Runtime1.1.0a7,
+  SDK0.5.0a1. Frozen owned gate: storage4, components105, invoice/output129,
+  worker130 all zero skips; portable1843 passed/13 skipped/262 deselected.
+  Actual RCC18.19.3 ran. CleanupPASS. Lint/typecheck402 and version guards9 passed.
+- **C**: #330 `feature/100-semantic-canvas-contract-20261022`,
+  `d16ddbbeac090bd03b759fb890864610a6c052d2`. Isolated-source16 tests passed;
+  wider worker312pass/19fail and failed Bootstrap receipts remain unqualified.
+- **R**: #329 `feature/99-semantic-renderer-20261022`,
+  `24a618b45c32a5ece427db81911a4791bcdd539e`. Isolated-source14 component tests
+  passed against C's exact fixture; no combined Runtime/bridge/E1 acceptance.
+- **P**: #331 `feature/130-135-package-compiler-20261022`,
+  `6f67fbecf8b5029303c45f0c6ec958c3994c48c0`. Owner reports20pass/1skip;
+  genuine RCC build blocked by that lane's child-network environment. Earlier
+  source-snapshot component `c88c6a29d5a6121fe16a4f8a12ecece47fb27889` passed10
+  isolated-source tests here after exact pinned RCC fixture preseeding. P's
+  manifest/archive/preimages and executable admission still require review.
+- **D**: #333 `feature/129-foundry-deployments-20261023`,
+  `ae90b5dcfeaf32bc21fab211d47470b25f1ff23e`. Collection blocked there by missing
+  rfc8785. Its proposed deployment* SQL does not match I's registered Foundry*
+  records. Neither proposal is a second accepted authority: adapt this consumer
+  to I before integration, retaining its typed values and all semantic tests.
+- **V**: protected invoice checkpoint `e2408a6e3051cdb4c44aede47618c3791807eba5`,
+  implementation/UI/cold-source `20f42170fb382cbf160fae2c356144c45fde4457`.
+  Private example0.2, Runtime1.1.0a5/SDK0.5.0a1 bundle and screenshots remain
+  source-specific evidence. No changed bytes reuse those artifact identities.
+
+No C/R/P/D source is integrated into I yet. Parent-reported all13 hosted
+workflows green at `59cf1a83151f79e877e9c2b0623ced1f1f9a6a62` are historical
+exact-head CI, not I or the future union. Source review, local E2, hosted CI,
+authenticated E1, live homelab acceptance and publication remain separate.
+No row is VERIFIED_IN_CHATGPT. SHIPPED below means an actually published
+baseline only; DRAFT_PR can include qualified components without full acceptance.
+
+| Feature / state | Owner, branch / PR | Exact source | Implemented versus missing | Required acceptance | Dependency / blocker | Smallest next task | Genuine owner intervention |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Published compatibility baseline — SHIPPED | Existing community/public distribution | Runtime1.0.4 source d222f94edca26953c1506ab258adc458ded17c56; community checkpoint0e80d41c6b4e5df9579675731e6cdbda733acd35 | Published baseline exists; current next candidate is not that release. | Preserve public aliases, CLI/API/current packages; qualify actual installed1.0.4 upgrade and safe downgrade/restore. | Candidate schema/version changes; final semver remains provisional. | Run installed old/new compatibility over owned coordinated state. | None for engineering; final merge/publication threshold belongs to parent. |
+| Existing Runtime capability control plane — DRAFT_PR | Integrator / #328 | I; baseline community above | Existing multi-package actions, MCPv2, selective catalog/resources, HTTP/CLI and process execution retained. New native Canvas port is opt-in. | Combined current suites, stateless MCPv2/routing, collisions, old aliases and no model catalog growth per app. | New services are not wired into first boot. | Preserve existing registrations while joining the fixed native facade. | None. |
+| Public MCP Apps authoring and CanvasSpec — DRAFT_PR (#100) | Contract owner / #330; integrator owns exports/versions/locks | C; public metadata foundation already in integration | Closed six-node grammar, aliases, bounds, frozen values and empty-visibility semantics; source16pass. Missing combined validator/parity and installed next-Core admission. | Python/TS fixture parity, malformed/alias/depth/reference/visibility negatives, real resource metadata and public authored consumer. | Core version/floor admission before any changed Core wheel; worker wider failures retained. | Admit distinct provisional Core candidate, then integrate exact reviewed C. | None. |
+| Semantic renderer and official bridge — DRAFT_PR (#99-A) | Renderer owner / #329; shared entrypoint/validator integrator | R consumes C fixture | Typed forms including integer/boolean, rowsKey, status/artifact adapters, safe own-property state, scoped remount and hide-all;14componentpass. Missing Runtime/bridge union. | Same official MCP Apps View/bridge and Runtime preview; real backend roundtrip, CSP/offline/artifact, unsupported host and scoped negatives. | Central validator and domain dispatch/authoring. | Join validated spec to existing Canvas entrypoint and official bridge. | None for local E2; actual host separately below. |
+| Responsive accessible design baseline — DRAFT_PR / SPEC_ONLY gaps | Existing #71/#99 scopes; no new lane admitted | R + I existing renderer | Owned primitives/styles and selected accessibility/state tests exist. Rich themes, charts/cards, approval/log/inspector surfaces and complete responsive coverage are missing. | Credible bounded component catalog/themes; keyboard/focus/contrast/overflow/loading/error/empty and text fallback on packaged UI. No arbitrary JS/HTML/CSS or mount effects. | Six minimal nodes alone are insufficient; universal workflow designer/all future archetypes are not presumed mandatory. | Inventory/reuse existing components, extend the canonical bounded catalog and real browser fixture. | Only concrete scope ambiguity escalates; no cosmetic redesign permission hold. |
+| First-boot six-tool authoring lifecycle — SPEC_ONLY beyond port (#71) | Authoring task01a168bb-b1fa-71df-8c46-4dea107a900c / feature/71-native-authoring-20261023; integrator central wiring | I port + staged C/R/P/D | Seven fixed model names including readonly launcher and reserved app names; no real create/get/apply/preview/inspect/release service yet. | Fresh no-user-package runtime: external model creates useful app, one atomic revision, validate/activate, revise, fail safely, rollback/restart/reopen; bounded model catalog. | Authoring lane now admitted after parent matrix delivery; no implementation receipt yet. Earlier failed creation remains historical. | Implement reserved authoring files over agreed compiler/deployment/persistence ports; no private store. | None for implementation; parent retains exclusive dispatch. |
+| Generated Python / immutable Package and RuntimePlan — DRAFT_PR (#130/#135) | Compiler owner / #331; integrator admission adapter | P; earlier snapshot C88 source10pass only | P emits archive/manifest/plan candidate evidence. It is not yet trusted installed build/import/execution acceptance; V generates fixed renderer+invoice JSON, not new Python. | Deterministic source/deps/tests and separate source/plan/revision identities; bounded staging; actual RCC prepare and out-of-process import/tests; no source-provided adapter authority; execute pinned generated capability. | P preimage/schema review, working-environment RCC qualification and trusted PackageRevisionPort. | Review P hashes, build under pinned gateway, persist only verified compiled receipts in common Package authority. | Original #130/#135 non-RCC fixture criteria need explicit release interpretation if not met; RCC-first is not a silent waiver. |
+| Workspace binding/deployment/activation resolver — BLOCKED (#129) | Deployment owner / #333, task01a16897-47e8-7472-82b6-668a25afa006 | D targeting I shared rows | Typed multi-package/plan/binding values and repository/service candidate. Proposed deployment* tables are not installed by I. | Authorized immutable selection, complete package/plan/profile validation, same-transaction revocation/idempotency/CAS/audit, N inflight pins under N+1, rollback/restart/replica/mixed-version negatives. | Physical schema mismatch and unexecuted owner tests; no competing schema accepted. | Adapt repository persistence to Foundry* contract; retain semantic assertions and full package set; run against shared migrated DB. | None: integration engineering decision, not owner scope hold. |
+| Common control SQL / schema migration — DRAFT_PR (#84/#129) | Integrator / #328 | I | Schema17 six empty Foundry* records, full registration, SQLite/PG DDL rollback and fresh-process storage proofs. Raw rows do not grant compiler admission or authorization. | Legacy preservation, fresh/upgraded parity, transactional failure and current common SQL gates; no Canvas side database activation authority. | Domain service acceptance remains separate from storage4pass. | Join D to these records and rerun combined SQL/concurrency gates. | No production migration allowed by fixture success. |
+| Zero-touch plugin boot, launcher and discovery — SPEC_ONLY (#71/#99-B) | Boot task01a168bd-45be-755e-9da9-1b7a4509a039 / feature/71-99-canvas-boot-20261023; central CLI/packaging integrator | I default-off port; no boot-lane SHA | Existing standalone Runtime and private demo launch; no native canvas stdio/plugin boot, automatic empty Canvas or attach/discovery implementation. | Fresh writable state outside immutable plugin, responsive startup/health/discovery, no initial package/manual per-app MCP registration; local no public listener and authenticated standalone HTTP. | Boot lane now admitted, no implementation receipt yet; prepare external plugin envelope only after runtime contract. | Implement Actions-owned CLI/stdio boot and instance discovery around same services. | Ask before agent-skills/external repo mutation or persistent identity/configuration. |
+| Named open data / result plane — DRAFT_PR (#131) | Integrator, existing provider implementation; no new lane | I data_queries/invoices.py/service.py | Real typed parameterized invoice query on DuckDB and PG, bounds/cancel/schema/result handle/paging/export and scope tests. DuckDB reads a prepared DB; source_version is an operator claim, transaction label not retained source hash. | Unchanged immutable Package over owned DuckDB CSV AND Parquet and real PG; named bounded operations, discovery, retained snapshots/provenance, paging/export/cost/cancel/auth negatives. | General operation/binding compiler, explicit Parquet ingest and retained source proof missing. | Add bounded manifest-backed operation/Parquet fixture and retained source/snapshot lineage. | No proprietary Data Server, MindsDB, paid/cloud dependency required. |
+| Bounded Knowledge collections — DRAFT_PR (#131) | Existing Knowledge component, integration-owned convergence | I knowledge.py; 105 component gate includes owned provider tests | Bounded local documents/CSV ingest, collection binding, lexical search with provenance/paging/access/revocation; real DuckDB/PG providers. Not full semantic KB. | Expose bounded collection/ingest/search through shared binding/authority; restart/provenance/limits/access and durable long ingestion where used. | Public binding/lifecycle integration missing. Advanced vector/embedding/rerank, incremental reindex/delete, rich filters/provider discovery remain missing. | Bind existing service through common deployment and qualify bounded public path. | Advanced breadth stays explicitly listed; no mandatory vector service. |
+| Fenced business Work Items — DRAFT_PR (#132) | SDK/common queue implementation + #328 | I; exact SDK0.5.0a1 wheel retained | DB-time owner/epoch/renew/conditional finish/output, SQLite/real PG parity, lineage and legacy fail-closed; private exact review/worker linkage. | Same queue conformance, denied/stale/duplicate/cancel/restart, atomic output authority; standalone no-Work-Item mode. | Generic scheduling/fairness/fanout/dead-letter policies and common generated capability admission not fully qualified. | Reuse existing queue adapter with explicit capability mode and common admission. | None; do not introduce another queue. |
+| Pinned Run/Attempt and real RCC worker — DRAFT_PR (#83/#90/#133/#134) | Integrator, existing runtime adapter/worker | I current130workerpass, RCC18.19.3 | Distinct Work Item/Run/Attempt, dual fences, actual task inputs/RCC/result, controller crash/restart/cancel and reconciliation. Fixed invoice worker, not general foundry execution. | Generated package source and selected plan execute through same Run authority; no fallback; independent process/replica observation/drain/recovery and exact artifact/evidence reuse. | Compiler/deployment admission and generic dispatch linkage. | Connect a verified generated capability to existing RCC worker/admission, preserving pins. | None for owned synthetic proof. |
+| WorkflowNode / MCPTask / Adapter distinction — SPEC_ONLY gaps (#85/#141/#143) | Existing graph; no new workflow-designer lane | I Run/Attempt types; no claimed general Node/Task implementation | Protocol/queue/runtime concepts remain distinct; no evidence that Run or Work Item state implements WorkflowNode or MCPTask lifecycle. | Typed bounded long-job/projection and any required node lineage, cancellation/reconnect; never a second state authority or universal designer requirement by inference. | Required bounded Node/Task seam must be reconciled with existing issue acceptance. | Inventory existing task projection/admission and implement only the consumed bounded job path. | Escalate a concrete unsatisfied criterion rather than silently defer an entire named domain. |
+| Exact human approval and authorization negatives — DRAFT_PR | Integrator, existing review/Run/output authority | I current105+129+130; V actual interactive proof | Private approval binds exact sealed result/input/source/app/deployment; explicit click creates one fenced item; stale/revoked/cross-scope/altered/duplicate/cancel probes. | Carry identical invariants into generated app/deployment and all model/app routes; no hidden approval or authorizing by visibility/handle. | Foundry service/auth transport wiring. | Reuse review service and add generated-revision grant/race/substitution cases. | None locally; actual authenticated host below. |
+| Retry, effects and dead-letter reconciliation — DRAFT_PR bounded | Integrator, existing #83/#132 scopes | I implementation; earlier effect receipt at967090d33ae883c52f90ce5e7af5a82281c88191 | Owned synthetic target has explicit retry/lost-ack reconciliation/close barrier/dead-letter proof. Not generic exactly-once effects. | Separate safe pre-effect retry, proven idempotent retry and uncertain outcome blocked/reconciled; stale lease/cancel/restart/exhaustion/audit. | Generic capability effect contracts and broader retry policy remain open. | Reuse existing dispatch evidence and qualify generated capability effect policy. | Operator reconciliation only for genuinely uncertain external outcomes; no real effects in tests. |
+| Scoped durable artifacts/results — DRAFT_PR (#86) | Integrator, existing output provider/HTTP/MCP | I; current provider/output and worker proofs | Immutable scoped sealed bytes with fencing/readback and fresh process restart; secure new filesystem provider is Linux-only. | Distinct source/runtime/output/data planes; expiry/retention/privacy and all relevant routes; another Runtime reads without producer routing. | Cross-host/shared-object provider, full platform applicability and restore remain unqualified. | Prove authorized replica readback/expiry against owned shared fixture; keep unsupported-platform cases honest. | No live object store or new credentials needed for local proof. |
+| Retention, restore, upgrade/downgrade — BLOCKED | Integrator #83/#84/#86/#327 | I schema17; V cold package/no-build replay | Additive migration and documented coordinated backups; retained same-host RCC Artifact replay. No complete coordinated clean-host restore or installed1.0.4 downgrade proof. | Restore SQL+objects+journals/source/runtime artifacts together; preserve Run/effect/audit lineage, GC references and old-version fail-closed behavior. | Restore fixtures and explicit state-format/semver compatibility. | Run owned old/new install and coordinated restore/replay with measured retained inputs. | Only destructive/live restore would require approval; current owned fixtures do not. |
+| Reusable invoice template/export — DRAFT_PR (#127) | Actions-owned example; boot/template lane queued | V example0.2 + I preserved source; catalog destination unapproved | Actual local interactive invoice/PO/ledger mismatch UI, explicit approval/RCC/scoped Run artifact; private67-wheel consumer/export. Existing canvas-query omits authorized artifact resolution. | Credential-free runtime-consuming template, exact package/RCC/Canvas pins, deterministic creation/build, smoke/QA/text/errors/artifacts/retry/restart. No copied engine. | Current foundry/bridge/next candidate bundle; external destination separate from Actions-owned implementation. | Converge one canonical example and verify fresh owned consumer of final candidate wheels. | Approve robot-templates versus dedicated repository/visibility before external changes; not a blocker to local example work. |
+| All-route auth and safe sharing — BLOCKED (#71/#327) | Integrator security/transport seams | I private trusted-caller boundaries; no whole-app acceptance claimed | Scoped services and default-off private projection exist. Full ASGI/HTTP/WebSocket/OAuth/secret/robot/schedule/trigger/artifact boundary not qualified by those tests. | Enumerate exact public exceptions and negative-auth/SSRF/path/archive/environment cases across every relevant route before remote sharing. | Transport auth, generated-worker environment and live host configuration are separate. | Build source-bound route/grant negative matrix using owned local services. | New live auth/tunnel/security/identity changes require approval; never overwrite working Executor. |
+| Actual authenticated ChatGPT E1 — BLOCKED / NEEDS_OPERATOR | Owner-operated host; integrator supplies cloud-ready exact candidate | None VERIFIED_IN_CHATGPT for invoice/foundry | Existing Executor read AND write is positive integration evidence. Local component/browser E2 is not actual invoice/foundry MCP App render. | Actual tool/resource MIME/bridge/render, audience grants, explicit exact review, scoped artifact and restart/reconnect with same identity; preserve denied details. | No authorized authenticated host/UI session is available to this task. | Provide exact candidate and operator checklist; inspect existing compatible transport without changing it. | Per #327 comment6364844599: no Dakota task yet; after cloud readiness report READY FOR DAKOTA CHATGPT TEST and stop that local action for explicit approval; verify actual ChatGPT client, not Codex/Executor/Inspector/PWA. |
+| Homelab-independent distribution and consumers — BLOCKED | Integrator #327/#127; parent hosted reviewer | I source; V measured bundle; old59cf13CIgreen | Local pinned gateway and owned PG/RCC work; exact local wheels/consumer/native receipts exist at earlier sources. I clean-wheel contract passed; not a complete final release inventory. | Reproducible wheels/native/images/locks/checksums/SBOM/provenance, actual installed final consumers, configurable registry/storage, local build/restore without mandatory GitHubCI/GHCR/vendor/Cloudflare/K8s. | Final combined source, new Core/Runtime floors, platform/browser/restore matrix and retained inventory. | Build and verify accepted combined candidate through existing local/CI mechanisms and clean consumers. | Publication credential availability may require owner setup; do not manipulate credentials. |
+| Controlled Codex/Devsy adapter path — SPEC_ONLY / unqualified | Existing #90/#143 path; no new migration campaign | No qualified new adapter SHA | Do not confuse external model authoring or old task activity with a verified controlled execution adapter. Full Devsy migration is not required. | Bounded authorized adapter/capability path through common admission/Run, scoped source/input/environment/result and explicit cancellation/recovery. | Inventory and selected existing adapter contract/evidence. | Trace existing interface, then qualify one owned synthetic invocation without live agent credentials. | Approval only if live identity/credential or other-repository change becomes necessary. |
+| Optional celld experiment — BLOCKED / NO-GO (#326) | Existing research scope, no implementation lane admitted | 24fbd91c9ddd34bec54230e1c3b20e3225061079 NO-GO evidence | No admitted adapter; no backend switch. SQL remains authority. MemoryD/Git migration excluded. | If admitted: pinned synthetic storage prerequisites, two nodes, epochs/failover/crash/outage/retry/lost-ack/overhead/rollback and one authority, disabled by default. | Pinned storage/failure prerequisites unproven; optional study cannot be advertised shipped. | Retain NO-GO and present the concrete optional inclusion/exclusion decision before final recommendation. | Owner explicitly decides release disposition if study remains unqualified; no silent scope drop. |
+| Publisher adversarial source/identity qualification — BLOCKED (#332) | Integrator release controls; existing #323/#325 | I publisher source, not yet qualified for #332 | Existing reviewed validate/publish split, owner gate, exact repo/head/workflow/run/manifest/digest and recovery controls; no compromise claim or replacement architecture. | Reuse existing tests; add only missing wrong repo/head/lookalike fork/workflow/unchecked commit/ZIP/manifest/run/expiry/caller negatives, inspect actual identities/permissions/environment and record sole-owner CLI-token residual risk. | Current publisher/environment permission evidence and missing-regression inventory. | Read current controls/tests and read-only permissions, execute bounded negative suite and short threat note; no dispatch/publication. | Any credential rotation, token-scope/environment-protection or identity change needs approval; inaccessible settings need operator readback. |
+| Final combined acceptance / merge / publication — BLOCKED | Sole integrator #328; parent final evidence reviewer | I plus future reviewed C/R/P/D union, not yet combined | Individual components and all13 old-head CI are not product/release acceptance. Final1.1 version remains provisional. | Every agreed row verified or explicit owner decision; source-bound local/CI/E1/homelab/distribution ledger and immutable publishable inventory. | All open rows above; parent evidence threshold. | Converge reviewed lanes in focused checkpoints, keep gates running and prepare exact-source release recommendation. | Conditional merge/publication authority exists; parent must confirm final threshold. No production deployment authority. |
+
+Primary issue bodies/amendments #71/#99/#100/#127/#129/#130/#131/#132,
+#83/#84/#85/#86/#90/#135/#326/#327 were re-read for this reconciliation.
+The October23 owner contract is the current release direction; older narrow
+invoice-only boundaries below are retained source history, not a scope waiver.
+The parent delivered its owner-facing reconciliation and then admitted authoring
+and boot lanes above. This canonical matrix preserves the same release boundary,
+records those new admissions, and requires actual consumed contracts rather than
+waiting for umbrella closure.
 
 The owned synthetic retry/dead-letter slice is now qualified, including a durable
 target-close barrier before failure publication. The runnable local experiment
 and noneditable export execute real RCC after explicit exact-result approval.
-Next, review fresh hosted results and qualify the cold distribution/operator E1
-boundaries separately. Keep existing SQL authorities and actor/source/result/app/
+The unified matrix above retains the remaining full foundry, provider,
+distribution and operator E1 gates; this earlier bounded success does not close them. Keep existing SQL authorities and actor/source/result/app/
 deployment pins; a verified private journal does not prove arbitrary effects. The current
 entry guard rejects stale new calls after activation changes while preserving
 already admitted work and audit. Rollback restores authorized readback of that
@@ -207,7 +276,7 @@ requested release. Later checkpoint-only commits do not change implementation.
 6. HELD: owner approval for integration/publication/deployment. This checkpoint
    does not qualify the full release or waive any requested feature.
 
-## Acceptance matrix
+## Historical October20 acceptance mapping (not the current release matrix)
 
 ### Research-to-release traceability
 
@@ -250,7 +319,7 @@ invoice workflow. E1 means actual ChatGPT host; E3 is inspected implementation
 and E4 is a proposal. Neither is executable acceptance. Every child listed below was
 OPEN at the 2026-10-20 live read.
 
-| Contract | Current source/evidence | Release status and next dependency |
+| Historical contract | October20 source/evidence | Historical release status and next dependency |
 |---|---|---|
 | #71 generated Canvas | Existing MCP Apps path and one renderer; no foundry activation/persist/rollback proof | SPEC_ONLY for requested generated revision; build on common revisions, not another renderer |
 | #99 renderer and host | Existing `frontend/apps/canvas-view`; previous harness claims are historical | BLOCKED full acceptance; rerun packaged view against the real invoice result; E1 NEEDS_OPERATOR |
@@ -271,7 +340,7 @@ OPEN at the 2026-10-20 live read.
 | #326 celld | Public v0.6.2, source `90b43017241f81189453d326d05948f388b34652`; versioned guarantees/security read | BLOCKED requested optional feature, disabled and unimplemented; SQL Work Item baseline must pass before lab admission |
 | #327 homelab release | Local verifier needs only prepared RCC/Poetry, Docker and a preloaded PostgreSQL image | BLOCKED full wheels/native/image reproducibility, configurable registry/object store, SBOM/provenance, retained artifacts and rollback acceptance |
 
-## Current slice and evidence
+## Historical October20 slice and evidence
 
 ### Canvas/MCP recovery and qualification
 
@@ -486,3 +555,19 @@ A controlled stale legacy-reconciler selection reproduced an overwrite of a
 new fenced claim. Its conditional UPDATE now checks epoch zero and current
 legacy state before resetting; only actually changed rows are reported. This
 is distinct from the historical catalog lock diagnosis. Red evidence is retained.
+
+
+## Host-specific E1 readiness gate (current)
+
+Owner decision: [#327 comment6364844599](https://github.com/joshyorko/actions/issues/327#issuecomment-6364844599).
+Prepare cloud evidence first: exact PR328 source and invoice candidate, actual
+MCP tools/resource MIME/official bridge, current scope/denials and real basic-host
+browser E2. Supply an isolated endpoint/tunnel plan preserving the working
+Executor, a launch/reconnect capture checklist, and a way for the operator to
+verify the actual supported ChatGPT client on Dakota Bluefin Linux. A Codex MCP
+configuration, Executor, Inspector or browser PWA is not ChatGPT Desktop E1.
+When these prerequisites exist, report **READY FOR DAKOTA CHATGPT TEST** and
+stop only the local/identity-dependent action pending explicit approval.
+Cloud engineering continues; this handoff does not wait for celld or full release.
+No Dakota task, installation, live credentials, remote configuration or new
+identity/tunnel is authorized before that approval.

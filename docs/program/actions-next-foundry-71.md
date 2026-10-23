@@ -7,9 +7,9 @@ Authority: Josh confirmed parallel Actions foundry implementation on October 22
 at 21:59:51 UTC. The coordinator owns cloud dispatch; this lane is the sole
 writer of release/327-invoice-vertical-20261020 and draft #328. This supersedes
 the earlier read-only scope-choice hold. On October23 Josh also authorized a
-community merge once every agreed requirement is verified; the parent retains
-final evidence-threshold confirmation, so this lane must not execute that merge
-until the parent confirms. Tags, package/image publication, deployment, spending,
+community merge and later Runtime/PyPI publication once every agreed requirement
+is verified; the parent retains final exact-source/inventory confirmation. This
+lane must not merge, tag or publish ahead of that confirmation. Deployment, spending,
 production, live credential/auth/tunnel changes and other-repository mutation
 remain unauthorized. Every accepted lane belongs to this same #327/#328 release;
 no requirement is silently parked in another release.
@@ -231,3 +231,89 @@ not grant install/bind/activate. Immutable requests/audit and mutable heads/gran
 remain distinct records in the same SQL authority. Shared model registration,
 constraints and migration tests are integration-owned; these names/columns are
 a handoff contract until those tests pass, not an applied schema claim.
+
+### PR333 consumer adaptation — one persistence authority
+
+Decision: keep schema17's registered `Foundry*` records in the common Runtime
+Database. Task01a16897-47e8-7472-82b6-668a25afa006 adapts only its reserved
+`foundry_repository.py`, `foundry_service.py`, `foundry_values.py` and tests.
+Do not create any `deployment*` side schema, view alias or private database.
+Retain the typed #333 DeploymentSpecification/Revision and all existing semantic
+assertions. The physical mapping changes; Workspace/Package/plan identities do not.
+
+| Existing #333 operation | Accepted consumer adaptation |
+| --- | --- |
+| `current(workspace_id, deployment_id)` | Compute the scoped head row key; read FoundryDeploymentHead with both explicit scope columns; resolve its active revision. |
+| `_insert_revision` / `_revision` | Store/read the complete canonical DeploymentRevision envelope in `selection_json`, including sequence, previous/rollback lineage and full specification. Revalidate canonical bytes, scope and computed revision digest on every read. Related package/binding/worker/policy/output-provider tables are replaced by this one protected document. |
+| Package references | Validate every package against admitted FoundryPackageRevision rows in the same Workspace. The FK anchors the first package in canonical ref order for SQL integrity only; it never chooses execution or narrows the complete package set. Keep all packages and per-capability policies in the protected specification. |
+| `activate` | Add a trusted Actor and authorization/preflight callback; after acquiring the shared Workspace SQL lock, recheck current grants and all references inside the publication transaction. Outer prechecks alone are insufficient for revocation races. |
+| Request/replay | Use FoundryRequest keyed by Workspace/principal/operation/idempotency key and a fingerprint including deployment, expected base and complete specification. Store the original canonical revision receipt in result_json. Same request returns that receipt without changing a later head; altered input conflicts. |
+| `_cas_activate` | Conditional UPDATE on FoundryDeploymentHead with Workspace, deployment, expected active_revision_id and observed lock_version; increment lock_version and require exactly one RETURNING row. Initial empty head uses explicit empty-string revision; no NULL/empty equivalence. |
+| Audit | Append FoundryAudit referencing the same FoundryRequest before transaction commit. Store actor/from/to/operation lineage without secret values. |
+| Resolved execution | `snapshots_json={}` explicitly means no execution snapshot admitted. Never interpret it as authorization/readiness. The resolver revalidates the protected specification and selected exact plan, then uses the existing common Run admission. Admission never selects a first/default package by storage anchor. |
+
+Package admission is integration-owned. The repository must not manufacture a
+Package row to satisfy its FK. Owner tests may seed explicit fixture-only admitted
+Package rows, but must label fake compiler/execution/authorization ports as component
+fixtures, preserve multi-package tests and add common migrated SQLite/real-PG proof.
+Any additional columns truly needed are returned to integration before changing
+shared models; do not reinstate the parallel normalized schema.
+
+### Accepted compiler/deployment adapter seams
+
+Consume PR331 `CompilationOutcome(compiled_package, receipt)` and its existing
+`compile_generated_python_action(entries, policy, *, protected_input_names,
+admission, executor, execution_root)`. Only the trusted host supplies policy,
+execution root, executor and `TrustedDeveloperExecutionAdmission.TRUSTED`.
+Those are not model/tool authority. Failed/not-run build/import/test phases do
+not admit a Package. Verify all compiled manifest/archive/plan/schema/payload
+preimages and real build/import/test evidence before storing the scoped Package.
+
+Implement PR333's existing PackageRevisionPort as a read-only adapter over that
+admitted registry: `require_revision`, `get_capability`, `get_runtime_plan`,
+`get_binding_requirement`. Return exact scoped CapabilityRef/RuntimePlanRef and
+binding requirements from verified compiler bytes. Keep CapabilityExecutionPort
+`action_id_for` and WorkspaceAuthorizationPort separate. Never treat a caller's
+CompiledPackageRevision dataclass, inventory digest or reference syntax as a grant.
+
+### Authoring and boot injection boundary
+
+Authoring task01a168bb-b1fa-71df-8c46-4dea107a900c owns its pure values and service
+in `authoring_values.py`/`authoring.py`. Consume the public CanvasSpec validator,
+PR331 compiler outcome, PR333 deployment service and injected common persistence.
+Create/get/apply/preview/inspect/release must never open canvas.sqlite3 or another
+store. Return a precise repository-port/value contract for integration-owned SQL
+wiring; immutable source/spec staging may precede publication but grants no access.
+Release uses only a successfully verified compile and expected-base activation.
+Preview is nonexecuting; a build/job is distinct Run/Attempt evidence, not an
+unbounded synchronous MCP call or another queue. Existing-capability composition
+can omit generated Python, but cannot claim the generated-backend acceptance.
+
+The authoring facade can implement the existing CanvasPort `schemas` and async
+`call(CanvasCaller, name, arguments) -> CanvasReply` through a thin transport
+adapter. Trusted caller supplies Actor/Workspace/audience. Return deliberate model
+summary/data separately from app-private state. Do not repeat validation, grant
+resolution or revision ownership independently in the MCP layer.
+
+Boot task01a168bd-45be-755e-9da9-1b7a4509a039 owns only `boot.py`, `discovery.py`,
+its dedicated tests and isolated example files. It receives a real CanvasPort,
+a trusted authenticator and checked renderer bytes by injection and constructs
+the existing CanvasMcp/McpServerSetupHelper. No fake default port may make boot
+look successful. Integration owns existing CLI/MCP/template manifest wiring.
+
+Boot must register the stable facade before user-package discovery, create only
+owned apps/packages/blobs/cache/logs roots outside the immutable plugin root,
+and initialize the same common SQL authority idempotently. `canvas_open({})`
+only reads the app library/current state; mount/remount causes no creation,
+apply/release/query/review or execution. Initialization state writes are separate
+from user approval or application execution.
+
+Discovery is bounded, atomically replaced, owner-private process metadata, not
+business authority or a credential store. Include schema/instance/process-start
+identity, transport/endpoints and starting/ready/failed/stopping health. Recheck
+process identity rather than trusting a reused PID or partial PID file. An owned
+root admits one runtime instance and idempotent attach/restart behavior. Never
+attach to unrelated existing services or publish a network listener/tunnel by
+default. MCP stdio stdout contains protocol only; diagnostics use stderr.
+The same services serve local/stdio and explicit authenticated standalone HTTP.
+No external plugin repo, live identity, credentials or tunnel change is included.
