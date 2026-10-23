@@ -1,6 +1,6 @@
 {
-  "stage": "ACTIVATED_ADMISSION_QUALIFIED_REAL_RCC_TEST_BOUNDARY_CORRECTED_INSTALLED_REPLAY_PENDING",
-  "source": "f3b0378fc067c5ebfcd67ed75a7073050b5e82b8",
+  "stage": "ACTIVATED_NATIVE_RCC_INSTALLED_AND_PORTABLE_QUALIFIED_DEFAULT_HOST_AND_VIEW_PENDING",
+  "source": "b32ce72b0bc2792cf9b8eca5bef193f9b1724689",
   "qualified_prior_checkpoint": "3f726ef15130d07ddec45ee05423a5ebfec380d2",
   "versions": {
     "runtime": "1.1.0a19",
@@ -66,7 +66,7 @@
     "cleanup": "PASS"
   },
   "static": {
-    "runtime": "Configured lint/typecheck443PASS",
+    "runtime": "Configured invoke lint/typecheck449PASS; Markdown linter unavailable",
     "sdk_public_contract": "mypy configured no-argument public call contract PASS",
     "sdk_edited_bridge": "targeted SQLReviewQueue mypy PASS",
     "sdk_broad_baseline": "Declared Ruff100-column formatting:27files baseline/current. Invoke formatting (devutils88-column):40files baseline/current. Invoke typecheck68errors/16files without optional clients,72errors/15files with all extras, identical baseline/current. Not waived; required release static gates remain open."
@@ -82,15 +82,21 @@
     }
   ],
   "remaining": [
-    "Activated Deployment/profile selection and scoped model/app execution in progress.",
-    "Second independent generated Python app and actual official-host interaction pending.",
-    "Actual a19/a2 RCC worker environment and fresh installed combined consumer not yet qualified. Prior a18/a1 installed/RCC receipts remain source-bound.",
-    "Managed native projection/logs assigned to existing PR333; profiles to existing PR331. Enqueue/retry/default managed profile/VSIX remain mandatory.",
-    "Full existing release matrix remains open; no readiness, merge, publication or E1 claim."
+    "Mount explicit supported host execution profiles/default managed configuration and scoped app transport; current ordinary bootstrap does not enable generated execution.",
+    "Actual official-host human review/dispatch/artifact/reconnect; present execution proof uses owned synthetic caller context, and ordinary installed View remains read-only.",
+    "Existing PR331 execution_profiles.py and PR333 native_runs.py/log handoffs pending; no new heads observed. Managed enqueue/retry/logs/default profile/VSIX remain mandatory.",
+    "Fresh Runtimea19/SDKa2 fixed invoice worker environment has not been rebuilt; a18/a1 worker receipt remains source-bound. Generated RCC proof uses source-pinned Core artifact and installed a19/a2 parent.",
+    "Retained generated ticket still reopens the source result on replay; source-expiry versus retained-input recovery needs an explicit regression and correction.",
+    "General data/Knowledge, effects/retry/dead-letter, retention/restore, cross-platform/distribution and all existing release matrix rows remain unwaived.",
+    "Codex token refresh401: no auth retry; ChatGPTE1 NEEDS_OPERATOR and Dakota remains STOP; publisher332 security review and celldNO-GO disposition remain separate."
   ],
   "documentation": {
-    "canonical": "docs/skills/work-items.md",
-    "delta": "Item-specific claim cannot fall back to FIFO; a2 installed floor/no schema change; full SDK service fixtures require explicit owned URLs and lock-declared clients; schema-heavy focused PostgreSQL needs WAL-capable bounded storage."
+    "canonical": [
+      "docs/skills/work-items.md",
+      "docs/skills/repository-operations.md"
+    ],
+    "delta": "Exact-target admission/rollback and historical activated pin authorization; scoped app versus model capability projection/no implicit grant; exact reviewed item and SDK terminal values rather than queue order/managed wire spelling.",
+    "evidence": "real SQL211 + installed79 + portable2198; retained first RCC eight assertion failures and read-only journal inspection"
   },
   "upstream_disposition": "none; existing RCC report remains draft only",
   "activated_first": {
@@ -136,5 +142,163 @@
     "runtime_python_members": 246,
     "noneditable_install": "PASS; pip check PASS",
     "qualification": "PENDING; installation is not execution acceptance"
-  }
+  },
+  "qualification_source": "1ee453490be9a4f127fdc8984c65def83ad7f349",
+  "exact_target_sdk_source": "f3b0378fc067c5ebfcd67ed75a7073050b5e82b8",
+  "final_source": {
+    "receipt": "/workspace/actions-327-state/evidence/activated-portable-final-20261023/9eed414b-cf8d-4b47-bfdf-99d77c1d8f64/receipt.json",
+    "status": "PASS",
+    "counts": {
+      "managed": {
+        "tests": 56,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "foundry_storage": {
+        "tests": 211,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "components": {
+        "tests": 164,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "invoice": {
+        "tests": 129,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "portable": {
+        "tests": 2212,
+        "skipped": 14,
+        "failures": 0,
+        "errors": 0
+      }
+    },
+    "portable": "2198passed14skipped282deselected16warnings",
+    "skips": [
+      {
+        "test": "tests.action_server_tests.common_tests.test_uris::test_normalize_uri",
+        "reason": "Windows only"
+      },
+      {
+        "test": "tests.action_server_tests.common_tests.test_uris::test_win_to_fs_path[file:///c:/far/boo-c:\\\\far\\\\boo]",
+        "reason": "Windows only"
+      },
+      {
+        "test": "tests.action_server_tests.common_tests.test_uris::test_win_to_fs_path[file:///C:/far/boo-c:\\\\far\\\\boo]",
+        "reason": "Windows only"
+      },
+      {
+        "test": "tests.action_server_tests.common_tests.test_uris::test_win_to_fs_path[file:///C:/far/space%20%3Fboo-c:\\\\far\\\\space ?boo]",
+        "reason": "Windows only"
+      },
+      {
+        "test": "tests.action_server_tests.common_tests.test_uris::test_win_from_fs_path[c:\\\\far\\\\boo-file:///c:/far/boo]",
+        "reason": "Windows only"
+      },
+      {
+        "test": "tests.action_server_tests.common_tests.test_uris::test_win_from_fs_path[C:\\\\far\\\\space ?boo-file:///c:/far/space%20%3Fboo]",
+        "reason": "Windows only"
+      },
+      {
+        "test": "tests.action_server_tests.test_artifact_binding_lock::test_windows_binding_does_not_import_fcntl",
+        "reason": "Requires native Windows locking"
+      },
+      {
+        "test": "tests.action_server_tests.test_artifact_storage::test_storage_handles_mixed_resolved_drive_prefixes",
+        "reason": "native Windows path resolution"
+      },
+      {
+        "test": "tests.action_server_tests.test_package::test_package_upload",
+        "reason": "Skip package upload test"
+      },
+      {
+        "test": "tests.action_server_tests.test_package::test_package_status",
+        "reason": "Skip package upload test"
+      },
+      {
+        "test": "tests.action_server_tests.test_package::test_package_set_changelog",
+        "reason": "Skip package upload test"
+      },
+      {
+        "test": "tests.action_server_tests.test_rcc_runtime_adapter::test_real_rcc_artifact_action_vertical",
+        "reason": "set ACTIONS_REAL_RCC_ARTIFACT_TEST=1"
+      },
+      {
+        "test": "tests.action_server_tests.test_robot_run_inputs::test_pinned_rcc_executes_selected_task_with_declared_inputs",
+        "reason": "set ACTIONS_ROBOT_INPUT_RCC to pinned RCC18.19.3 for actual task-input acceptance"
+      },
+      {
+        "test": "tests.contract_tests.test_package_revision_compiler::test_genuine_generated_action_rcc_build_import_and_test",
+        "reason": "set ACTIONS_PACKAGE_COMPILER_PREPARED_RCC_RECEIPT to an exact-manifest trusted-host cache receipt for the pinned RCC proof"
+      }
+    ],
+    "cleanup": "PASS",
+    "input_hashes_match_committed_blobs": true
+  },
+  "installed_a19": {
+    "root": "/tmp/actions-327-a19-b32ce72b",
+    "receipt": "/tmp/actions-327-a19-b32ce72b/qa-evidence/receipt.json",
+    "status": "PASS",
+    "counts": {
+      "tests": 79,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "cleanup": "PASS",
+    "runtime_artifact_source": "b32ce72b0bc2792cf9b8eca5bef193f9b1724689",
+    "test_source": "1ee453490be9a4f127fdc8984c65def83ad7f349",
+    "client": {
+      "name": "MCP Python SDK",
+      "version": "2.0.0",
+      "execution_transport": "StreamableHTTP over owned ASGI adapter; synthetic caller contexts",
+      "ordinary_cli_transport": "real loopback StreamableHTTP socket, process stop/restart"
+    },
+    "ordinary_cli_receipt": "/tmp/actions-327-a19-b32ce72b/acceptance/receipt.json",
+    "payload": {
+      "actions_runtime": {
+        "wheel": "actions_runtime-1.1.0a19-cp312-cp312-linux_x86_64.whl",
+        "sha256": "363daf5e4fd05710d0d75ef569e01bebb5fcb5c79feef6c1d5087156339f7bb9",
+        "installed_payload_matches_wheel": 262,
+        "source_corresponding_files_match": 262,
+        "generated_or_compiled_not_direct_source_members": []
+      },
+      "actions_core": {
+        "wheel": "actions_core-1.1.0a2-py3-none-any.whl",
+        "sha256": "ca512d59e1f94d687cb637255b2622980d715528de720ac5da8105836315c19f",
+        "installed_payload_matches_wheel": 52,
+        "source_corresponding_files_match": 52,
+        "generated_or_compiled_not_direct_source_members": []
+      },
+      "actions_work_items": {
+        "wheel": "actions_work_items-0.5.0a2-py3-none-any.whl",
+        "sha256": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb",
+        "installed_payload_matches_wheel": 24,
+        "source_corresponding_files_match": 24,
+        "generated_or_compiled_not_direct_source_members": []
+      }
+    },
+    "independent_backend": "NDJSON record/column inspector has independent source and Package; input in this bounded proof still uses existing typed invoice query output",
+    "limits": [
+      "No authenticated external model author or official-host interactive click proved.",
+      "A normal host is still unconfigured for generated execution; no default app-audience grant is created.",
+      "Offline wheel installation used a prepared 74-wheel bundle; bare-host bootstrap, RCC artifact distribution and enforced air-gap not qualified."
+    ]
+  },
+  "commands": [
+    "bash /workspace/actions-327-state/run-prepared python action_server/scripts/verify_invoice_queries.py --compiler-receipt /workspace/actions-327-state/compiler-acceptance/3e744f96-749a-47e5-84b9-7e7f297bc8b9/prepared.json --full --evidence-dir /workspace/actions-327-state/evidence/activated-joined-full-20261023 (FAIL: retained SDK-state test error)",
+    "bash /workspace/actions-327-state/run-prepared python action_server/scripts/verify_invoice_queries.py --full --evidence-dir /workspace/actions-327-state/evidence/activated-portable-final-20261023 (PASS)",
+    "bash /workspace/actions-327-state/run-prepared python /tmp/actions-327-a19-b32ce72b/run_owned_worker.py (PASS79)",
+    "bash /workspace/actions-327-state/run-prepared /tmp/actions-327-a19-b32ce72b/consumer/bin/python -I /tmp/actions-327-a19-b32ce72b/verify_installed.py (PASS ordinary CLI/MCP)",
+    "bash /workspace/actions-327-state/run-package action_server poetry run inv lint; poetry run inv typecheck (PASS449)"
+  ],
+  "rollback": "No new DDL or queue format. Disable the optional execution projection before rollback; preserve Review/WorkItem/Run/Attempt, old claims, launch intent, request/audit and sealed objects. Do not let older workers process unknown native selections. Runtimea19 requires installed SDK>=0.5.0a2; neither changed Runtime nor SDK bytes reuse published1.0.4/0.4.4. Runtimes built next with changed implementation need a distinct candidate.",
+  "worker_sdk2": "RUNNING: fresh owned worker preparation and managed completion; evidence root /tmp/actions-327-a19-sdk2-worker"
 }
