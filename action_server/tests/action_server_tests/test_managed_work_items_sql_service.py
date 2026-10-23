@@ -410,6 +410,98 @@ def test_claim_replay_rejects_expired_and_replaced_fences(reviewed):
     assert current[0].claim_epoch == new_claim["epoch"]
 
 
+def test_claim_replay_refreshes_current_deadline_without_rewriting_receipt(reviewed):
+    db, _, _, reviews, actor, scope, handle, _ = reviewed
+    queue = _queue(reviews, scope)
+    policy = _Policy(queue.workspace_id.root)
+    policy.grant(actor, Permission.READ, Permission.REVIEW, Permission.CLAIM)
+    service = _service(reviewed, policy)
+    proposal = reviews.offer(actor, scope, handle)
+    service.call(
+        _caller(actor),
+        Decide(
+            operation="reviews.decide",
+            queue=queue,
+            idempotency_key="approve-before-live-claim-replay",
+            proposal=proposal,
+            decision="approve",
+        ),
+    )
+
+    worker_id = str(uuid4())
+    claim_command = Claim(
+        operation="items.claim",
+        queue=queue,
+        idempotency_key="claim-before-short-renewal",
+        lease_seconds=120,
+    )
+    original = service.call(_caller(actor, worker_id), claim_command)
+    request_filter = [
+        str(queue.workspace_id.root),
+        actor.principal_id,
+        "managed-work-items/v1/items.claim",
+        claim_command.idempotency_key,
+    ]
+    claim_requests = db.select(
+        FoundryRequest,
+        "SELECT * FROM foundry_request WHERE workspace_id=? AND principal_id=? AND operation=? AND idempotency_key=?",
+        request_filter,
+    )
+    assert len(claim_requests) == 1
+    original_request = claim_requests[0]
+    original_audits = db.select(
+        FoundryAudit,
+        "SELECT * FROM foundry_audit WHERE foundry_request_id=?",
+        [original_request.id],
+    )
+    assert len(original_audits) == 1
+
+    renewal = service.call(
+        _caller(actor, worker_id),
+        Renew(
+            operation="items.renew",
+            queue=queue,
+            idempotency_key="shorten-claim-lease",
+            claim=original["claim"],
+            lease_seconds=30,
+        ),
+    )
+    assert renewal["claim"] == original["claim"]
+    assert int(renewal["lease_deadline_ms"]) < int(original["lease_deadline_ms"])
+
+    replay = service.call(_caller(actor, worker_id), claim_command)
+    current = db.select(
+        FencedWorkItem,
+        "SELECT * FROM fenced_work_item WHERE id=? AND workspace_id=? AND queue_name=?",
+        [
+            original["claim"]["item_id"],
+            str(queue.workspace_id.root),
+            queue.queue_id,
+        ],
+    )
+    assert len(current) == 1
+    current_deadline = str(current[0].claim_deadline_ms)
+    assert replay["claim"] == original["claim"] == renewal["claim"]
+    assert replay["lease_deadline_ms"] == current_deadline
+    assert replay["item"]["lease_deadline_ms"] == current_deadline
+    assert replay["lease_deadline_ms"] == renewal["lease_deadline_ms"]
+    assert int(replay["server_time_ms"]) >= int(renewal["server_time_ms"])
+
+    current_requests = db.select(
+        FoundryRequest,
+        "SELECT * FROM foundry_request WHERE workspace_id=? AND principal_id=? AND operation=? AND idempotency_key=?",
+        request_filter,
+    )
+    current_audits = db.select(
+        FoundryAudit,
+        "SELECT * FROM foundry_audit WHERE foundry_request_id=?",
+        [original_request.id],
+    )
+    assert len(current_requests) == 1
+    assert current_requests[0].result_json == original_request.result_json
+    assert current_audits == original_audits
+
+
 def test_renew_replay_rejects_an_expired_lease(reviewed):
     db, _, _, reviews, actor, scope, handle, _ = reviewed
     queue = _queue(reviews, scope)
@@ -444,7 +536,19 @@ def test_renew_replay_rejects_an_expired_lease(reviewed):
         claim=claim,
         lease_seconds=120,
     )
-    service.call(_caller(actor, worker_id), command)
+    original_renewal = service.call(_caller(actor, worker_id), command)
+    shorter_renewal = service.call(
+        _caller(actor, worker_id),
+        command.model_copy(
+            update={"idempotency_key": "renew-shorter-lease", "lease_seconds": 30}
+        ),
+    )
+    replayed_renewal = service.call(_caller(actor, worker_id), command)
+    assert replayed_renewal["claim"] == original_renewal["claim"] == claim
+    assert replayed_renewal["lease_deadline_ms"] == shorter_renewal["lease_deadline_ms"]
+    assert int(replayed_renewal["server_time_ms"]) >= int(
+        shorter_renewal["server_time_ms"]
+    )
     with db.transaction():
         db.update_by_id(
             FencedWorkItem,
