@@ -29,3 +29,21 @@ def database_location(request, tmp_path):
             owner.execute(f'DROP SCHEMA "{schema}" CASCADE')
         finally:
             owner.close()
+
+
+@pytest.fixture
+def foundry_package_store(tmp_path):
+    import sys
+
+    from actions.server.run_outputs.filesystem import FilesystemOutputProvider
+
+    if sys.platform != "linux":
+        pytest.skip("private filesystem Package storage is Linux-only")
+    root = tmp_path / "package-objects"
+    root.mkdir()
+    fd = os.open(root, os.O_RDONLY | os.O_DIRECTORY)
+    try:
+        with FilesystemOutputProvider(fd) as provider:
+            yield provider
+    finally:
+        os.close(fd)
