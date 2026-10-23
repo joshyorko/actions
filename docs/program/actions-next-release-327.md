@@ -72,13 +72,40 @@ model-authored semantic UI **and generated Python backend** -> validate/activate
 revise/rollback/restart/reopen. Private invoice composition and six minimal
 semantic nodes do not complete this product contract.
 
-Conditional owner authority now includes merge and Runtime/PyPI publication
-only after all agreed requirements pass. The parent must independently confirm
-the final exact-source evidence threshold and publication disposition. This
-lane must not merge or publish ahead of that review. Production deployment,
-live credentials/auth/tunnel/security changes, spending and other-repository
-mutation remain unauthorized. Engineering schema/API decisions belong to the
-integration owner, not an owner-permission queue.
+The October23 12:48 owner boundary keeps community, public releases,
+production deployments, third-party repositories and existing credentials
+unchanged until separate approval. Earlier conditional merge/publication
+language is superseded. Branch integration and owned synthetic acceptance
+continue. Engineering schema/API decisions belong to the integration owner.
+
+Mandatory cloud acceptance uses installed exact artifacts with a genuine MCP
+SDK client, then an actual fresh Codex CLI session and the official MCP Apps
+basic host. It must include blank authoring, semantic UI plus generated Python,
+activation, typed authorized execution, Work Item/Run/Attempt and scoped
+artifact inspection, revision pinning, rollback and process restart/reconnect,
+plus audience/revocation/cross-workspace/stale/duplicate/failed-build negatives.
+A second independent Python-backed app is required. Codex CLI0.159.0-alpha.3
+is available; OpenCode and Claude Code are unavailable on PATH. No client
+session is credited from availability or direct Python tests. Dakota remains
+STOP until cloud prerequisites support READY FOR DAKOTA CHATGPT TEST and Josh
+explicitly approves local/identity-dependent actions (#327 comment6364844599).
+
+Current reviewed C/R union stages the public contract and renderer, with
+Core1.1.0a2 and Runtime1.1.0a9 provisional candidates. Core332, Runtime focused14,
+Devutils268, candidate-floor57 and frontend Runtime280 plus Canvas32 passed;
+one existing optional Canvas case remains skipped. Quality/build passed;
+official bridge harness1 passed/1 optional real-Runtime case skipped. These
+are component/admission results, not joined first-boot execution or E1.
+
+The latest observed unintegrated sources are P #331
+`fc50a2e62a3751fdf016012835a9e398580f551a`, D #333
+`f5e5916748a76aeec3653c7792c8849881a4ae30`, A #334
+`07ad74809c1c785f3dc525d8eb6f760e907c9daa` and boot #335
+`466d6f241fbbb621a6acc0698a9a9574386f45d2`. Their source and receipts need
+combined integration qualification. The current schema17 Package FK still
+prevents package-less UI deployments; a forward nullable-FK migration and
+common SQL authoring authority are implementation prerequisites, not complete.
+No fake Package or sidecar database may stand in for zero-package first boot.
 
 Source keys (exact observed branch heads, not interchangeable acceptance):
 

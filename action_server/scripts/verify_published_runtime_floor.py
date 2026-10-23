@@ -372,33 +372,50 @@ if offenders:
 """
 
 
-def verify_public_package_report(report_path: Path) -> dict[str, dict[str, str]]:
+def verify_public_package_report(
+    report_path: Path, *, candidate_core: Path | None = None
+) -> dict[str, dict[str, str]]:
     report = json.loads(report_path.read_text(encoding="utf-8"))
     observed: dict[str, dict[str, str]] = {}
+    expected_packages = dict(EXPECTED_PUBLIC_PACKAGES)
+    if candidate_core is not None:
+        expected_packages["actions-core"] = {
+            "version": _distribution_version(candidate_core, "actions-core"),
+            "url": candidate_core.resolve().as_uri(),
+            "sha256": hashlib.sha256(candidate_core.read_bytes()).hexdigest(),
+        }
     for item in report.get("install", []):
         metadata = item.get("metadata", {})
         name = metadata.get("name", "").lower().replace("_", "-")
-        if name not in EXPECTED_PUBLIC_PACKAGES:
+        if name not in expected_packages:
             continue
-        expected = EXPECTED_PUBLIC_PACKAGES[name]
+        expected = expected_packages[name]
         if metadata.get("version") != expected["version"]:
             raise RuntimeError(f"Unexpected {name} version in pip report")
         download = item.get("download_info", {})
         url = download.get("url", "")
-        if url != expected["url"] or urlsplit(url).hostname != "files.pythonhosted.org":
+        if url != expected["url"] or (
+            not (candidate_core is not None and name == "actions-core")
+            and urlsplit(url).hostname != "files.pythonhosted.org"
+        ):
             raise RuntimeError(f"Unexpected {name} public PyPI wheel URL")
         sha256 = download.get("archive_info", {}).get("hashes", {}).get("sha256")
         if sha256 != expected["sha256"]:
             raise RuntimeError(f"Unexpected {name} PyPI artifact SHA-256")
         observed[name] = {"version": expected["version"], "url": url, "sha256": sha256}
-    if set(observed) != set(EXPECTED_PUBLIC_PACKAGES):
-        missing = sorted(set(EXPECTED_PUBLIC_PACKAGES) - set(observed))
+    if set(observed) != set(expected_packages):
+        missing = sorted(set(expected_packages) - set(observed))
         raise RuntimeError(f"Pip report omits required public packages: {missing}")
     return observed
 
 
 def install_command(
-    python: Path, wheel: Path, report: Path, *, candidate_sdk: Path | None = None
+    python: Path,
+    wheel: Path,
+    report: Path,
+    *,
+    candidate_sdk: Path | None = None,
+    candidate_core: Path | None = None,
 ) -> list[str]:
     return [
         str(python),
@@ -413,7 +430,9 @@ def install_command(
         "--report",
         str(report),
         str(wheel.resolve()),
-        f"actions-core=={EXPECTED_CORE}",
+        str(candidate_core.resolve())
+        if candidate_core is not None
+        else f"actions-core=={EXPECTED_CORE}",
         f"actions-http-helper=={EXPECTED_HELPER}",
         *([str(candidate_sdk.resolve())] if candidate_sdk else []),
     ]
@@ -682,60 +701,75 @@ print("RUNTIME_WHEEL_MEMBER_INVENTORY=" + json.dumps({{
     return inventory
 
 
-def select_candidate_sdk(directory: Path, project: Path) -> tuple[Path, str]:
-    """Admit only the SDK and Runtime versions declared by the producer checkout."""
+def _select_candidate_dependency(
+    directory: Path,
+    project: Path,
+    *,
+    distribution: str,
+    source_directory: str,
+    field_prefix: str,
+    label: str,
+) -> tuple[Path, str]:
+    """Bind an explicit dependency wheel to producer source and project-only mounts."""
     wheels = sorted(directory.glob("*.whl"))
     if len(wheels) != 1 or wheels[0].is_symlink():
-        raise ValueError("Expected exactly one regular candidate SDK wheel")
+        raise ValueError(f"Expected exactly one regular candidate {label} wheel")
     wheel = wheels[0]
-    sdk_project = project.parent / "work-items" / "pyproject.toml"
+    package_project = project.parent / source_directory / "pyproject.toml"
     producer_path = directory / "producer.json"
-    sdk_raw = (
-        sdk_project.read_bytes().decode("utf-8") if sdk_project.is_file() else None
+    package_raw = (
+        package_project.read_bytes().decode("utf-8")
+        if package_project.is_file()
+        else None
     )
     if producer_path.is_file():
         producer = json.loads(producer_path.read_text())
         expected_source = os.environ.get("ACTIONS_CANDIDATE_SOURCE_SHA")
-        if expected_source is None and sdk_raw is not None:
+        if expected_source is None and package_raw is not None:
             expected_source = subprocess.check_output(
                 ["git", "rev-parse", "HEAD"], cwd=project, text=True
             ).strip()
         if (
             not isinstance(expected_source, str)
             or re.fullmatch(r"[0-9a-f]{40}", expected_source) is None
-            or producer.get("schema") != "actions.candidate-sdk-producer/v1"
+            or producer.get("schema") != f"actions.candidate-{field_prefix}-producer/v1"
             or producer.get("source_sha") != expected_source
             or producer.get("runtime_pyproject_sha256")
             != hashlib.sha256((project / "pyproject.toml").read_bytes()).hexdigest()
-            or not isinstance(producer.get("sdk_pyproject"), str)
-            or hashlib.sha256(producer["sdk_pyproject"].encode()).hexdigest()
-            != producer.get("sdk_pyproject_sha256")
+            or not isinstance(producer.get(f"{field_prefix}_pyproject"), str)
+            or hashlib.sha256(
+                producer[f"{field_prefix}_pyproject"].encode()
+            ).hexdigest()
+            != producer.get(f"{field_prefix}_pyproject_sha256")
             or producer.get("wheel")
             != {
                 "filename": wheel.name,
                 "sha256": hashlib.sha256(wheel.read_bytes()).hexdigest(),
             }
-            or (sdk_raw is not None and sdk_raw != producer["sdk_pyproject"])
+            or (
+                package_raw is not None
+                and package_raw != producer[f"{field_prefix}_pyproject"]
+            )
         ):
-            raise ValueError("Candidate SDK producer binding differs")
-        sdk_raw = producer["sdk_pyproject"]
+            raise ValueError(f"Candidate {label} producer binding differs")
+        package_raw = producer[f"{field_prefix}_pyproject"]
         print(
-            "CANDIDATE_SDK_PRODUCER="
+            f"CANDIDATE_{field_prefix.upper()}_PRODUCER="
             + json.dumps(
                 {
                     key: value
                     for key, value in producer.items()
-                    if key != "sdk_pyproject"
+                    if key != f"{field_prefix}_pyproject"
                 },
                 sort_keys=True,
             )
         )
-    if sdk_raw is None:
-        raise ValueError("Candidate SDK producer metadata unavailable")
-    sdk_contents = tomllib.loads(sdk_raw)
-    sdk_version = (
-        sdk_contents.get("project", {}).get("version")
-        or sdk_contents["tool"]["poetry"]["version"]
+    if package_raw is None:
+        raise ValueError(f"Candidate {label} producer metadata unavailable")
+    package_contents = tomllib.loads(package_raw)
+    package_version = (
+        package_contents.get("project", {}).get("version")
+        or package_contents["tool"]["poetry"]["version"]
     )
     with zipfile.ZipFile(wheel) as archive:
         metadata = BytesParser().parsebytes(
@@ -747,23 +781,73 @@ def select_candidate_sdk(directory: Path, project: Path) -> tuple[Path, str]:
                 )
             )
         )
-    if metadata["Name"] != "actions-work-items" or metadata["Version"] != sdk_version:
-        raise ValueError("Candidate SDK version differs from producer checkout")
+    if metadata["Name"] != distribution or metadata["Version"] != package_version:
+        raise ValueError(f"Candidate {label} version differs from producer checkout")
     runtime_version = tomllib.loads((project / "pyproject.toml").read_text())["tool"][
         "poetry"
     ]["version"]
     return wheel, runtime_version
 
 
-def verify_candidate_sdk(python: Path, wheel: Path, workdir: Path) -> None:
+def select_candidate_sdk(directory: Path, project: Path) -> tuple[Path, str]:
+    return _select_candidate_dependency(
+        directory,
+        project,
+        distribution="actions-work-items",
+        source_directory="work-items",
+        field_prefix="sdk",
+        label="SDK",
+    )
+
+
+def select_candidate_core(directory: Path, project: Path) -> tuple[Path, str]:
+    return _select_candidate_dependency(
+        directory,
+        project,
+        distribution="actions-core",
+        source_directory="actions",
+        field_prefix="core",
+        label="Core",
+    )
+
+
+def _distribution_version(wheel: Path, distribution: str) -> str:
+    with zipfile.ZipFile(wheel) as archive:
+        paths = [
+            name for name in archive.namelist() if name.endswith(".dist-info/METADATA")
+        ]
+        if len(paths) != 1:
+            raise ValueError("Expected one candidate distribution METADATA")
+        metadata = BytesParser().parsebytes(archive.read(paths[0]))
+    if metadata["Name"] != distribution or not metadata["Version"]:
+        raise ValueError("Candidate distribution identity differs")
+    return metadata["Version"]
+
+
+def _verify_candidate_distribution(
+    python: Path,
+    wheel: Path,
+    workdir: Path,
+    *,
+    distribution: str,
+    import_name: str,
+    label: str,
+) -> None:
     """Bind the noneditable installed SDK, RECORD members and origin to its wheel."""
-    probe = """
+    probe = (
+        f"import {import_name}\n"
+        + """
 import hashlib, importlib.metadata, json, pathlib, sys
-import actions.work_items
-package = importlib.metadata.distribution('actions-work-items')
+import importlib
+module = importlib.import_module(sys.argv[1])
+package = importlib.metadata.distribution(sys.argv[2])
 prefix = pathlib.Path(sys.prefix).resolve()
-assert pathlib.Path(actions.work_items.__file__).resolve().is_relative_to(prefix)
-assert callable(actions.work_items.SQLiteAdapter.reserve_fenced)
+assert pathlib.Path(module.__file__).resolve().is_relative_to(prefix)
+assert sys.argv[2] in {'actions-core', 'actions-work-items'}
+if sys.argv[2] == 'actions-core':
+    assert callable(module.validate_canvas_spec)
+else:
+    assert callable(module.SQLiteAdapter.reserve_fenced)
 modules = {}
 for member in package.files or ():
     if str(member).endswith('.py'):
@@ -775,8 +859,9 @@ for member in package.files or ():
         modules[str(member)] = str(path)
 print(json.dumps({'version': package.version, 'origin': json.loads(package.read_text('direct_url.json') or '{}'), 'modules': modules}))
 """
+    )
     result = subprocess.run(
-        [str(python), "-I", "-c", probe],
+        [str(python), "-I", "-c", probe, import_name, distribution],
         check=True,
         capture_output=True,
         text=True,
@@ -799,9 +884,9 @@ print(json.dumps({'version': package.version, 'origin': json.loads(package.read_
     members = _assert_runtime_wheel_python_members_match(
         wheel, {name: Path(path) for name, path in inventory["modules"].items()}
     )
-    assert members, "candidate SDK has no installed Python members"
+    assert members, f"candidate {label} has no installed Python members"
     print(
-        "CANDIDATE_SDK_WHEEL="
+        f"CANDIDATE_{label.upper()}_WHEEL="
         + json.dumps(
             {
                 "wheel": str(wheel.resolve()),
@@ -813,6 +898,28 @@ print(json.dumps({'version': package.version, 'origin': json.loads(package.read_
     )
 
 
+def verify_candidate_sdk(python: Path, wheel: Path, workdir: Path) -> None:
+    _verify_candidate_distribution(
+        python,
+        wheel,
+        workdir,
+        distribution="actions-work-items",
+        import_name="actions.work_items",
+        label="SDK",
+    )
+
+
+def verify_candidate_core(python: Path, wheel: Path, workdir: Path) -> None:
+    _verify_candidate_distribution(
+        python,
+        wheel,
+        workdir,
+        distribution="actions-core",
+        import_name="actions.canvas_contract",
+        label="CORE",
+    )
+
+
 def verify_installed(
     python: Path,
     isolated_workdir: Path,
@@ -821,8 +928,11 @@ def verify_installed(
     *,
     expected_runtime: str = EXPECTED_RUNTIME,
     candidate_sdk: Path | None = None,
+    candidate_core: Path | None = None,
 ) -> None:
-    public_packages = verify_public_package_report(report_path)
+    public_packages = verify_public_package_report(
+        report_path, candidate_core=candidate_core
+    )
     oauth_hashes = verify_oauth_input_binding(
         wheel, Path(__file__).resolve().parents[1]
     )
@@ -831,9 +941,16 @@ def verify_installed(
     )
     if candidate_sdk is not None:
         verify_candidate_sdk(python, candidate_sdk, isolated_workdir)
+    if candidate_core is not None:
+        verify_candidate_core(python, candidate_core, isolated_workdir)
     versions = inventory["installed_versions"]
+    expected_core = (
+        _distribution_version(candidate_core, "actions-core")
+        if candidate_core is not None
+        else EXPECTED_CORE
+    )
     if (
-        versions["actions-core"] != EXPECTED_CORE
+        versions["actions-core"] != expected_core
         or versions["actions-http-helper"] != EXPECTED_HELPER
     ):
         raise RuntimeError(
@@ -858,14 +975,24 @@ def main(arguments: list[str] | None = None) -> None:
     parser.add_argument("--installed-wheel", type=Path)
     parser.add_argument("--checkout-root", type=Path)
     parser.add_argument("--candidate-sdk-wheelhouse", type=Path)
+    parser.add_argument("--candidate-core-wheelhouse", type=Path)
     args = parser.parse_args(arguments)
     expected_runtime = EXPECTED_RUNTIME
     candidate_sdk = None
+    candidate_core = None
     if args.candidate_sdk_wheelhouse is not None:
         candidate_sdk, expected_runtime = select_candidate_sdk(
             args.candidate_sdk_wheelhouse,
             (args.checkout_root or Path(__file__).resolve().parents[1]).resolve(),
         )
+    if args.candidate_core_wheelhouse is not None:
+        candidate_core, core_runtime = select_candidate_core(
+            args.candidate_core_wheelhouse,
+            (args.checkout_root or Path(__file__).resolve().parents[1]).resolve(),
+        )
+        if candidate_sdk is not None and core_runtime != expected_runtime:
+            raise ValueError("Candidate Core/SDK producer Runtime versions differ")
+        expected_runtime = core_runtime
     if args.installed_wheel is not None:
         if args.wheel_directory is not None or args.checkout_root is None:
             parser.error("--installed-wheel requires --checkout-root and no directory")
@@ -884,6 +1011,8 @@ def main(arguments: list[str] | None = None) -> None:
             )
             if candidate_sdk is not None:
                 verify_candidate_sdk(Path(sys.executable), candidate_sdk, workdir)
+            if candidate_core is not None:
+                verify_candidate_core(Path(sys.executable), candidate_core, workdir)
             subprocess.run(
                 [sys.executable, "-m", "actions.server", "version"],
                 check=True,
@@ -910,7 +1039,13 @@ def main(arguments: list[str] | None = None) -> None:
         python = env_dir / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
         report = workdir / "pip-install-report.json"
         subprocess.run(
-            install_command(python, wheel, report, candidate_sdk=candidate_sdk),
+            install_command(
+                python,
+                wheel,
+                report,
+                candidate_sdk=candidate_sdk,
+                candidate_core=candidate_core,
+            ),
             check=True,
             cwd=workdir,
             env=isolated_environment(),
@@ -922,6 +1057,7 @@ def main(arguments: list[str] | None = None) -> None:
             wheel,
             expected_runtime=expected_runtime,
             candidate_sdk=candidate_sdk,
+            candidate_core=candidate_core,
         )
 
 

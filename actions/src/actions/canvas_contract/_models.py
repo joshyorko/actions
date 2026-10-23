@@ -142,7 +142,7 @@ class CanvasSpec(_CanvasModel):
         validate_by_name=False,
     )
 
-    schema_version: Literal[SCHEMA_VERSION] = Field(alias="schemaVersion")
+    schema_version: Literal["actions.canvas-spec/v1"] = Field(alias="schemaVersion")
     title: Annotated[str, Field(min_length=1, max_length=128, strict=True)]
     visibility: Annotated[
         tuple[Literal["model", "app"], ...], Field(max_length=2, strict=False)

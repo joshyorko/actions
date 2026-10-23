@@ -4886,3 +4886,29 @@ neither those ZIP bytes nor their digest. The existing measure/stage/re-read
 helpers attest only the explicitly selected set, not selection completeness,
 source trust or a globally atomic snapshot. Compiler hash/admission rules in
 the handoff remain provisional until their own implementation gates pass.
+
+
+The semantic CanvasSpec Core contract is part of the installed dependency floor,
+not an editable source overlay. Runtime candidate metadata requires Core
+`>=1.1.0a2,<2.0.0`; package-local development installs Core noneditably. Its
+public wire keys are camelCase, `from_python` is the explicit Python-name
+constructor, and empty `visibility` means no audience. Numeric `version_info`
+uses the release tuple even for provisional versions. The Core suite and
+installed-candidate contracts cover these boundaries.
+
+Candidate wheel verification carries Core and SDK in separate wheelhouses.
+`write_candidate_sdk_producer.py --distribution actions-core` binds the exact
+Core project bytes, Runtime project hash, source SHA and wheel digest before
+project-only cibuildwheel tests. Pass `--candidate-core-wheelhouse` explicitly;
+the default published Core/Helper floor remains pinned and must not accept an
+unbound local candidate. Candidate origin, installed RECORD members, module
+prefix and selected wheel digest are checked independently of resolver success.
+
+The declared frontend `npm test` runs both Runtime and Canvas View suites.
+Canvas View's Vitest include covers every `src/**/*.test.tsx`, including the
+semantic renderer; the Runtime topology test guards that union. Quality/type
+checks, a Canvas build and the official bridge harness remain separate gates.
+The harness's optional real-Runtime case being skipped is not bridge-to-domain
+or authenticated-client acceptance. Inject domain dispatch/status/artifact
+adapters into the semantic renderer; its logical binding labels confer no
+Runtime capability or authorization.

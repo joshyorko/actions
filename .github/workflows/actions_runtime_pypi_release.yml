@@ -220,6 +220,10 @@ jobs:
       working-directory: work-items
       run: uv run --no-project --python ${{ matrix.python }} poetry build -f wheel
         -o ../action_server/candidate-sdk-wheelhouse
+    - name: Bind candidate Core wheel to producer checkout
+      if: github.event_name == 'pull_request'
+      run: uv run --no-project --python ${{ matrix.python }} python scripts/write_candidate_sdk_producer.py
+        candidate-core-wheelhouse --distribution actions-core
     - name: Bind candidate SDK wheel to producer checkout
       if: github.event_name == 'pull_request'
       run: uv run --no-project --python ${{ matrix.python }} python scripts/write_candidate_sdk_producer.py
@@ -238,12 +242,13 @@ jobs:
           {project}/candidate-sdk-wheelhouse' || '' }}
         CIBW_TEST_COMMAND: python "{project}/scripts/verify_published_runtime_floor.py"
           --installed-wheel "{wheel}" --checkout-root "{project}" ${{ github.event_name
-          == 'pull_request' && '--candidate-sdk-wheelhouse {project}/candidate-sdk-wheelhouse'
-          || '' }}
+          == 'pull_request' && '--candidate-sdk-wheelhouse {project}/candidate-sdk-wheelhouse
+          --candidate-core-wheelhouse {project}/candidate-core-wheelhouse' || '' }}
     - name: Verify Runtime wheel with published Core and Helper
       if: github.event_name == 'pull_request'
       run: uv run --no-project --python ${{ matrix.python }} python scripts/verify_published_runtime_floor.py
-        wheelhouse --candidate-sdk-wheelhouse candidate-sdk-wheelhouse
+        wheelhouse --candidate-sdk-wheelhouse candidate-sdk-wheelhouse --candidate-core-wheelhouse
+        candidate-core-wheelhouse
     - name: 'Upload artifact: action_server/wheelhouse/*'
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
       with:
