@@ -15,7 +15,7 @@ from __future__ import annotations
 import base64
 import json
 import re
-from typing import Any, Callable
+from typing import Any, Callable, TypeAlias, TypeGuard
 from uuid import uuid4
 
 from actions.work_items import EmptyQueue, State
@@ -25,7 +25,7 @@ from actions.work_items._fencing import (
     WorkItemClaim,
     payload_fingerprint,
 )
-from pydantic import TypeAdapter
+from pydantic import BaseModel, TypeAdapter
 
 from actions.server._database import Database
 from actions.server._models import RUN_ID_COUNTER, Run, RunStatus
@@ -105,6 +105,7 @@ _COMMAND_ADAPTER: TypeAdapter[Command] = TypeAdapter(Command)
 _CURSOR_ID = re.compile(r"^[0-9a-f-]{36}$")
 _ARTIFACT_CURSOR = re.compile(r"^(?:0|[1-9][0-9]{0,7})$")
 _UNIMPLEMENTED = {Operation.ENQUEUE, Operation.RETRY, Operation.LOGS}
+MutationCommand: TypeAlias = Claim | Renew | Complete | Intervention | Decide
 
 
 class SQLManagedWorkItemsService(ManagedWorkItemsPort):
@@ -250,7 +251,7 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
         return command.queue.workspace_id
 
     @staticmethod
-    def _is_mutation(command: Command) -> bool:
+    def _is_mutation(command: Command) -> TypeGuard[MutationCommand]:
         return isinstance(command, (Claim, Renew, Complete, Intervention, Decide))
 
     def _backend(self) -> str:
@@ -998,7 +999,7 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
     def _mutate(
         self,
         caller: ManagedCaller,
-        command: Command,
+        command: MutationCommand,
         scope: CanvasResultScope,
     ):
         workspace = self._workspace_for(command)
@@ -1014,7 +1015,7 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
             if prior is not None:
                 if prior.request_fingerprint != fingerprint:
                     raise ManagedError("changed_input")
-                self._validate_request_audit(caller, command, prior)
+                self._validate_request_audit(caller, command.queue, prior)
                 try:
                     receipt = json.loads(prior.result_json)
                     if (
@@ -1031,8 +1032,12 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
                         json.dumps(result, ensure_ascii=False, allow_nan=False)
                     )
                     if isinstance(command, Claim):
+                        if not isinstance(replayed, ClaimResult):
+                            raise ManagedError("storage_unavailable")
                         self._validate_claim_replay(caller, command, replayed, scope)
                     elif isinstance(command, Renew):
+                        if not isinstance(replayed, ClaimResult):
+                            raise ManagedError("storage_unavailable")
                         self._validate_renew_replay(caller, command, replayed, scope)
                     return replayed
                 except ManagedError:
@@ -1075,20 +1080,20 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
             return result
 
     def _validate_request_audit(
-        self, caller: ManagedCaller, command: Command, request: FoundryRequest
+        self, caller: ManagedCaller, queue: QueueRef, request: FoundryRequest
     ) -> None:
         rows = self.db.select(
             FoundryAudit,
             "SELECT * FROM foundry_audit WHERE foundry_request_id=? LIMIT 2",
             [request.id],
         )
-        revision_id = command.queue.deployment.revision_id.root
+        revision_id = queue.deployment.revision_id.root
         if len(rows) != 1:
             raise ManagedError("storage_unavailable")
         audit = rows[0]
         if (
-            audit.workspace_id != str(command.queue.workspace_id.root)
-            or audit.deployment_id != str(command.queue.deployment.deployment_id.root)
+            audit.workspace_id != str(queue.workspace_id.root)
+            or audit.deployment_id != str(queue.deployment.deployment_id.root)
             or audit.principal_id != caller.actor.principal_id
             or audit.operation != request.operation
             or audit.from_revision_id != revision_id
@@ -1138,7 +1143,7 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
     def _preflight_mutation(
         self,
         caller: ManagedCaller,
-        command: Command,
+        command: MutationCommand,
         scope: CanvasResultScope,
     ) -> None:
         if isinstance(command, Decide):
@@ -1190,7 +1195,9 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
             raise ManagedError("storage_unavailable")
         _lock_workspace(self.db, str(workspace_id.root))
 
-    def _request_fingerprint(self, caller: ManagedCaller, command: Command) -> str:
+    def _request_fingerprint(
+        self, caller: ManagedCaller, command: MutationCommand
+    ) -> str:
         return _key(
             "actions.managed-work-items-request/v1",
             caller.actor.principal_id,
@@ -1199,7 +1206,7 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
         )
 
     def _prior_request(
-        self, caller: ManagedCaller, command: Command
+        self, caller: ManagedCaller, command: MutationCommand
     ) -> FoundryRequest | None:
         rows = self.db.select(
             FoundryRequest,
@@ -1216,7 +1223,7 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
         return rows[0] if rows else None
 
     @staticmethod
-    def _result_model(operation: Operation) -> type:
+    def _result_model(operation: Operation) -> type[BaseModel]:
         from actions.server.managed_work_items.contracts import RESULT_MODELS
 
         return RESULT_MODELS[operation]
@@ -1224,7 +1231,7 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
     def _apply_mutation(
         self,
         caller: ManagedCaller,
-        command: Command,
+        command: MutationCommand,
         scope: CanvasResultScope,
     ):
         if isinstance(command, Decide):
