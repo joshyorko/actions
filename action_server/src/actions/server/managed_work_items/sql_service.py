@@ -15,7 +15,7 @@ from __future__ import annotations
 import base64
 import json
 import re
-from typing import Any, Callable, TypeAlias, TypeGuard
+from typing import Any, Callable, Literal, TypeAlias, TypeGuard
 from uuid import uuid4
 
 from actions.work_items import EmptyQueue, State
@@ -46,6 +46,10 @@ from actions.server.foundry.models import FoundryAudit, FoundryRequest
 from actions.server.managed_work_items.api import ManagedError
 from actions.server.managed_work_items.contracts import (
     OPERATION_PERMISSION,
+    ArtifactChunk,
+    ArtifactRef,
+    AttemptView,
+    BusinessState,
     Capabilities,
     Claim,
     ClaimRef,
@@ -62,19 +66,17 @@ from actions.server.managed_work_items.contracts import (
     ManagedWorkItemsPort,
     Operation,
     Permission,
+    QueueAuthorizationPort,
     QueuePage,
     QueueRef,
-    QueueView,
     Queues,
+    QueueView,
     Renew,
     ReviewPage,
     ReviewResult,
     ReviewView,
     RunResult,
     RunView,
-    AttemptView,
-    ArtifactRef,
-    ArtifactChunk,
 )
 from actions.server.run_outputs.models import RunAttempt, RunOutput, RunPin
 from actions.server.run_outputs.service import (
@@ -84,9 +86,9 @@ from actions.server.run_outputs.service import (
     _key,
     _lock_workspace,
     _now,
+    _one,
     _returning,
     _transaction,
-    _one,
 )
 from actions.server.run_outputs.types import (
     Actor,
@@ -95,13 +97,19 @@ from actions.server.run_outputs.types import (
     OutputRef,
     output_id_from_handle,
 )
-from actions.server.managed_work_items.contracts import QueueAuthorizationPort
-
 
 MAX_DISCOVERED_REVIEWS = 512
 MAX_ATTEMPTS = 100
 ARTIFACT_CHUNK_BYTES = 64 * 1024
 _COMMAND_ADAPTER: TypeAdapter[Command] = TypeAdapter(Command)
+_QUEUE_STATE_ADAPTER: TypeAdapter[
+    Literal["PENDING", "IN_PROGRESS", "DONE", "FAILED"]
+] = TypeAdapter(Literal["PENDING", "IN_PROGRESS", "DONE", "FAILED"])
+_RUN_STATE_ADAPTER: TypeAdapter[
+    Literal["pending", "running", "succeeded", "failed", "cancelled", "blocked"]
+] = TypeAdapter(
+    Literal["pending", "running", "succeeded", "failed", "cancelled", "blocked"]
+)
 _CURSOR_ID = re.compile(r"^[0-9a-f-]{36}$")
 _ARTIFACT_CURSOR = re.compile(r"^(?:0|[1-9][0-9]{0,7})$")
 _UNIMPLEMENTED = {Operation.ENQUEUE, Operation.RETRY, Operation.LOGS}
@@ -160,9 +168,9 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
                 operations = self._operations(
                     permissions, worker_available, caller.worker_id is not None
                 )
-                from actions.server import __version__ as runtime_version
-
                 from actions.work_items import __version__ as sdk_version
+
+                from actions.server import __version__ as runtime_version
 
                 return Capabilities(
                     runtime_version=runtime_version,
@@ -261,10 +269,10 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
     def _is_mutation(command: Command) -> TypeGuard[MutationCommand]:
         return isinstance(command, (Claim, Renew, Complete, Intervention, Decide))
 
-    def _backend(self) -> str:
+    def _backend(self) -> Literal["sqlite", "postgresql"]:
         if self.db.backend_name not in ("sqlite", "postgresql"):
             raise ManagedError("unconfigured")
-        return self.db.backend_name
+        return "postgresql" if self.db.backend_name == "postgresql" else "sqlite"
 
     def _workspace_permissions(
         self, caller: ManagedCaller, workspace_id: WorkspaceId
@@ -737,7 +745,9 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
             queue=queue,
             id=row.id,
             parent_id=row.parent_id or None,
-            queue_state=row.state,
+            queue_state=_QUEUE_STATE_ADAPTER.validate_python(
+                "DONE" if row.state == State.DONE.value else row.state
+            ),
             business_state=self._business_state(row, review, execution),
             payload=payload,
             protected_input_digest=digest,
@@ -755,7 +765,7 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
     @staticmethod
     def _business_state(
         row: FencedWorkItem, review: InvoiceReview, execution: Any
-    ) -> str:
+    ) -> BusinessState:
         if review.state == "pending":
             return "needs_review"
         if review.state == "rejected":
@@ -849,7 +859,7 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
         return RunView(
             id=run.id,
             snapshot=snapshot,
-            state=state,
+            state=_RUN_STATE_ADAPTER.validate_python(state),
             attempts=attempt_views,
             artifacts=artifacts,
             result=result_value,
@@ -1366,8 +1376,10 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
                 command.claim.epoch,
             )
             ticket = worker._ticket(proposal, claim, pin)
-            receipt = worker.complete(caller.actor, WorkerTicket.model_validate(ticket))
-            if receipt.work_item_id != command.claim.item_id:
+            worker_receipt = worker.complete(
+                caller.actor, WorkerTicket.model_validate(ticket)
+            )
+            if worker_receipt.work_item_id != command.claim.item_id:
                 raise ManagedError("storage_unavailable")
             updated = self._item_row(command.queue, command.claim.item_id)
             return ItemResult(

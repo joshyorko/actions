@@ -1089,3 +1089,14 @@ A protocol factory or FileAdapter test does not prove a managed SQL server or
 installed VSIX. Negotiate actually implemented operations and explicit grants;
 never turn a managed denial into unscoped local CRUD. Review, queue ownership,
 business outcome, Run, Attempt and artifact authority remain distinct.
+
+Managed SQL requests must enter `Database.connect()` on the executing HTTP
+worker thread; a connection in the client/fixture thread is insufficient.
+Test the real router with live SQL policy, including revoked/cross-workspace
+capability discovery and a server-held worker identity. Claim/renew replay must
+return the current DB-time deadline after validating the live fence, while
+retaining the original request/audit. The managed wire uses `DONE` for SDK
+`State.DONE.value == "COMPLETED"`; completion tests must cross that real terminal
+boundary and verify retained RCC evidence, not manufacture a client result.
+The ordinary route mount remains unavailable without explicit trusted service
+and authentication dependencies; route presence alone is not managed readiness.

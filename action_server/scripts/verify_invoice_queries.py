@@ -450,6 +450,13 @@ print(json.dumps(identities))
                 "config": str(config),
             }
         suites = {
+            "managed": [
+                "tests/action_server_tests/test_managed_work_items_api.py",
+                "tests/action_server_tests/test_managed_work_items_sql_service.py",
+                "tests/action_server_tests/test_managed_work_items_runtime.py",
+                "-m",
+                "not integration_test",
+            ],
             "foundry_storage": [
                 "tests/action_server_tests/test_foundry_storage.py",
                 "tests/action_server_tests/test_foundry_package_less_storage.py",
@@ -482,6 +489,7 @@ print(json.dumps(identities))
         }
         if args.worker:
             suites["worker"] = [
+                "tests/action_server_tests/test_managed_work_items_runtime.py::test_real_managed_completion_uses_retained_rcc_evidence",
                 "tests/action_server_tests/test_invoice_worker.py",
                 "tests/action_server_tests/test_invoice_worker_mcp.py",
                 "tests/action_server_tests/test_robot_run_inputs.py",
@@ -545,6 +553,7 @@ print(json.dumps(identities))
                     label
                     in (
                         "foundry_storage",
+                        "managed",
                         "components",
                         "invoice",
                         "browser",

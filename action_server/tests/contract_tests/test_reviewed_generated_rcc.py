@@ -60,6 +60,7 @@ def test_reviewed_generated_summary_executes_with_real_dual_fences(
     )
     assert approved.work_item_id == ticket.claim.item_id
     envelope = json.loads(complete.result)
+    assert envelope["result"]["launch"]["id"]
     assert json.loads(envelope["result"]["actionResult"]) == {
         "invoice_count": 2,
         "total_cents": 12900,

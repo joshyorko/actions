@@ -115,7 +115,7 @@ class SqlFoundryAuthorization:
             ) from exc
 
     def require_workspace(
-        self, actor: Actor, workspace_id: WorkspaceId, permission: Permission
+        self, actor: Actor, workspace_id: WorkspaceId, permission: str
     ) -> None:
         self._require_operation(actor, workspace_id, permission)
 
@@ -129,7 +129,7 @@ class SqlFoundryAuthorization:
         self._require_operation(actor, workspace_id, permission, deployment_id)
 
     def require_reference(
-        self, actor: Actor, reference: WorkspaceScopedRef, permission: Permission
+        self, actor: Actor, reference: WorkspaceScopedRef, permission: str
     ) -> None:
         workspace_id = getattr(reference, "workspace_id", None)
         if workspace_id is None:

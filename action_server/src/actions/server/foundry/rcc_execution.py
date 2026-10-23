@@ -182,6 +182,10 @@ class GeneratedRccExecution:
         result_file = directory / "action-result.json"
 
         with _transaction(self.outputs.db):
+            # Reviewed output guards acquire Counter/Workspace before Run reads.
+            # Establish the writer before inspecting a journal to avoid a
+            # SQLite read-to-write upgrade racing another queue writer.
+            self.outputs._fence(fence)
             current = self._read_journal(fence)
             if current != journal or current["launch"] is not None:
                 raise FenceRejected("Work Items dispatch changed before launch")
@@ -298,6 +302,7 @@ class GeneratedRccExecution:
             "stderr": self._capture_receipt(stderr_bytes, stderr_capture),
         }
         with _transaction(self.outputs.db):
+            self.outputs._fence(fence)
             current = self._read_journal(fence)
             if current.get("launch") != launch or current.get("execution") is not None:
                 raise FenceRejected("RCC execution journal changed before publication")
@@ -343,6 +348,7 @@ class GeneratedRccExecution:
             "mode": "work-items",
             "claim": journal["claim"],
             "lineage": lineage,
+            "launch": launch,
             "publicationFence": fence.model_dump(),
             "sourceArtifactDigest": compiled.source_artifact_digest,
             "packageRevision": compiled.package_revision_id.root,
@@ -535,7 +541,8 @@ class GeneratedRccExecution:
         retained = {"stdout": bytearray(), "stderr": bytearray()}
         observed = {"stdout": 0, "stderr": 0}
         complete = {"stdout": False, "stderr": False}
-        for name, stream in (("stdout", process.stdout), ("stderr", process.stderr)):
+        streams = {"stdout": process.stdout, "stderr": process.stderr}
+        for name, stream in streams.items():
             selector.register(stream, selectors.EVENT_READ, name)
         heartbeat_at = time.monotonic() + _HEARTBEAT_SECONDS
         process_exit_at: float | None = None
@@ -561,7 +568,7 @@ class GeneratedRccExecution:
                     chunk = os.read(key.fd, _LOG_READ_BYTES)
                     if not chunk:
                         selector.unregister(key.fileobj)
-                        key.fileobj.close()
+                        streams[name].close()
                         complete[name] = True
                         continue
                     observed[name] += len(chunk)
@@ -571,7 +578,7 @@ class GeneratedRccExecution:
         finally:
             for key in list(selector.get_map().values()):
                 selector.unregister(key.fileobj)
-                key.fileobj.close()
+                streams[key.data].close()
             selector.close()
         values = {name: bytes(value) for name, value in retained.items()}
         receipts = {

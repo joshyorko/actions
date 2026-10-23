@@ -20,13 +20,12 @@ unpublished candidate versions. The floor may advance with further changed SDK
 bytes; every changed built package needs a distinct candidate identity.
 
 Implemented here: closed commands and response models, version/permission
-negotiation, bounded authenticated router factory and exported schema.
-`create_router(service, authenticate)` is not automatically mounted on ordinary
-Runtime startup. Missing either trusted dependency means unavailable; it never
-opens legacy storage or invents an actor. Real SQL service/bootstrap integration
-and the installed VSIX acceptance are still required. Transport-port fixture
-tests do not complete managed mode. All accepted functionality remains required
-for this same release.
+negotiation, bounded authenticated routes and a review-backed common-SQL service.
+Ordinary Runtime startup mounts the managed router, but it returns unavailable
+unless the host supplies both the real service and trusted authenticator.
+Mounting the route does not configure a usable managed profile or grant access.
+Default-profile configuration, installed consumer and VSIX acceptance remain
+required. No denial falls back to legacy local CRUD.
 
 ## HTTP and wire schema
 
@@ -101,25 +100,42 @@ Errors are bounded codes:401 unauthenticated,403 forbidden,404 not found,
 Provider SQL, paths and exception details never appear in responses. Command
 and response bounds are512KiB; item/log pages and output lists are bounded.
 
-## Disjoint existing-worker seam (parent dispatch only)
+## SQL service and trusted host integration
 
-The integrator owns `contracts.py`, `api.py`, authorization, all shared models,
-DDL/migrations, SDK versions and central bootstrap. A reusable idle lane can
-own only new `managed_work_items/reviewed.py` and
-`tests/action_server_tests/test_managed_work_items_reviewed.py` for the first
-real reviewed-queue adapter and its tests. This is a proposal, not a claim that
-another task has been dispatched.
-
-Accepted constructor seam:
-`ReviewedManagedPort(reviews: InvoiceReviewService,
+The implemented constructor is
+`SQLManagedWorkItemsService(reviews: InvoiceReviewService,
 authorization: QueueAuthorizationPort,
 worker_for: Callable[[CanvasResultScope], InvoiceWorkerService | None])`.
-It implements ManagedWorkItemsPort. Derive queue references from validated
+The optional worker lookup is keyword-only. It implements ManagedWorkItemsPort
+in `managed_work_items/sql_service.py`. Derive queue references from validated
 existing InvoiceReview binding scopes and
 `reviews.queue(scope).queue_name`; never enumerate/open arbitrary files or
 create a queue database. Use the existing common SQL FencedWorkItem, Review,
 Run/Attempt and output services. The authorizer is integration-owned and live;
 worker selection is trusted host configuration, never command JSON.
+
+Public service calls own `Database.connect()` in their executing thread. An
+ambient connection in the caller's thread does not cover FastAPI's synchronous
+worker thread and otherwise produces a bounded storage-unavailable response.
+Capabilities require live READ before looking up workspace scopes. Claim/renew
+replay rechecks authorization, owner/epoch/state/cancellation and DB-time expiry,
+then returns the current deadline/server time; it preserves the original stored
+request, claim identity and single audit record.
+
+`SqlQueueAuthorization` requires explicit `work_items.*` grants in the common
+SQL authority for both Workspace and exact Deployment reference. These do not
+replace the source review/Run/output grants. `bearer_authenticator` maps an
+explicit host credential to one server-configured Actor/worker pair; headers
+cannot choose either identity. The Runtime perimeter delegates only this exact
+managed prefix to that authenticator and continues protecting other APIs with
+their existing policy. This adapter does not create credentials or grants.
+
+Evidence-bound completion delegates to the existing invoice worker after actual
+RCC execution. The wire `queue_state` is `DONE` when the SDK's persisted state is
+`COMPLETED`; do not change the SDK/storage representation to match a transport
+label. Repeated completion returns the retained item and replay flag, without
+another execution. Client-provided output payloads and Run IDs are not execution
+evidence.
 
 First prove real queue/item/review/claim/lease/Run/artifact inspection,
 review/cancel delegation and denial/revocation/isolation/restart. Delegate

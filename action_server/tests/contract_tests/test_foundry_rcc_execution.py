@@ -30,7 +30,7 @@ from actions.server.deployments.package_revision_compiler import (
 )
 from actions.server.foundry.models import FoundryAccessGrant
 from actions.server.foundry.package_registry import FoundryPackageRegistry
-from actions.server.foundry.rcc_execution import GeneratedRccExecution, _LOG_LIMIT
+from actions.server.foundry.rcc_execution import _LOG_LIMIT, GeneratedRccExecution
 from actions.server.foundry.sql_authorization import (
     SqlFoundryAuthorization,
     reference_grant_subject,
