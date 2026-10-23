@@ -6,6 +6,7 @@ import hashlib
 import json
 import os
 import sys
+from dataclasses import replace
 from pathlib import Path
 
 import pytest
@@ -14,12 +15,17 @@ from jsonschema import Draft202012Validator
 from actions.server.deployments import canonical, source_manifest
 from actions.server.deployments.package_revision_compiler import (
     PackageCompilationPolicy,
+    PreparedRccEnvironment,
+    PinnedRccPackageBuildExecutor,
     RccBuildIdentity,
     TrustedDeveloperExecutionAdmission,
     _extract_json_object,
     compile_generated_python_action,
+    load_prepared_rcc_environment,
     snapshot_source_entries,
     stage_source_snapshot,
+    verify_compilation_outcome,
+    verify_compiled_package_revision,
 )
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
@@ -258,6 +264,91 @@ def test_compiler_emits_schema_conformant_immutable_package_and_plan() -> None:
     )
     assert json.loads(compiled.input_schema_payload)["type"] == "object"
     assert json.loads(compiled.output_schema_payload)["type"] == "string"
+    assert verify_compilation_outcome(outcome) is compiled
+
+
+def test_compiled_package_verifier_rejects_source_archive_tampering() -> None:
+    outcome, _executor = _compile_with_fake()
+    assert outcome.compiled_package is not None
+
+    tampered = replace(
+        outcome.compiled_package,
+        source_archive=outcome.compiled_package.source_archive + b"tampered",
+    )
+    with pytest.raises(ValueError, match="integrity check failed"):
+        verify_compiled_package_revision(tampered)
+
+
+def test_compiled_package_verifier_rejects_runtime_plan_payload_tampering() -> None:
+    outcome, _executor = _compile_with_fake()
+    assert outcome.compiled_package is not None
+
+    tampered = replace(
+        outcome.compiled_package,
+        runtime_plan_payload=outcome.compiled_package.runtime_plan_payload + b" ",
+    )
+    with pytest.raises(ValueError, match="integrity check failed"):
+        verify_compiled_package_revision(tampered)
+
+
+def test_compilation_outcome_verifier_requires_all_success_phases() -> None:
+    outcome, _executor = _compile_with_fake()
+    assert outcome.compiled_package is not None
+    incomplete = replace(
+        outcome,
+        receipt=replace(outcome.receipt, test_status="not-run"),
+    )
+
+    with pytest.raises(ValueError, match="all compiler phases"):
+        verify_compilation_outcome(incomplete)
+
+
+def test_prepared_rcc_receipt_round_trips_and_binds_exact_manifest(
+    tmp_path: Path,
+) -> None:
+    package_yaml = _generated_action_entries()[0].content
+    prepared = PreparedRccEnvironment(
+        robocorp_home=tmp_path / "prepared-home",
+        package_yaml_digest="sha256:" + hashlib.sha256(package_yaml).hexdigest(),
+        build_identity=RccBuildIdentity(
+            specification_digest="sha256:" + "a" * 64,
+            artifact_digest="sha256:" + "b" * 64,
+        ),
+    )
+    receipt_path = tmp_path / "prepared-rcc.json"
+    receipt_path.write_bytes(prepared.to_receipt_bytes())
+
+    assert load_prepared_rcc_environment(receipt_path) == prepared
+
+    changed_yaml = tmp_path / "changed-package.yaml"
+    changed_yaml.write_bytes(package_yaml + b"# changed\n")
+    with pytest.raises(RuntimeError, match="manifest identity mismatch"):
+        PinnedRccPackageBuildExecutor(prepared).build_environment(
+            changed_yaml, tmp_path / "workspace"
+        )
+
+
+def test_prepared_rcc_child_environment_stays_sanitized(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv("HTTPS_PROXY", "http://proxy.example.invalid:8080")
+    monkeypatch.setenv("RCC_ACCOUNT", "synthetic-account")
+    prepared = PreparedRccEnvironment(
+        robocorp_home=tmp_path / "prepared-home",
+        package_yaml_digest="sha256:" + "c" * 64,
+        build_identity=RccBuildIdentity(
+            specification_digest="sha256:" + "a" * 64,
+            artifact_digest="sha256:" + "b" * 64,
+        ),
+    )
+    executor = PinnedRccPackageBuildExecutor(prepared)
+    executor._rcc_home = prepared.robocorp_home
+
+    child_environment = executor._child_environment(tmp_path)
+
+    assert child_environment["RCC_NO_BUILD"] == "1"
+    assert not any("proxy" in name.casefold() for name in child_environment)
+    assert not any("account" in name.casefold() for name in child_environment)
 
 
 def test_compiler_outputs_are_idempotent_and_changed_source_changes_identity() -> None:
@@ -305,6 +396,16 @@ def test_compiler_failures_emit_deterministic_sanitized_receipts(
     assert first.compiled_package is None
     assert first.receipt.failure_code == failure_code
     assert first.receipt.to_bytes() == replay.receipt.to_bytes()
+    expected_phases = {
+        "build": ("failed", "not-run", "not-run"),
+        "import": ("passed", "failed", "not-run"),
+        "test": ("passed", "passed", "failed"),
+    }
+    assert (
+        first.receipt.build_status,
+        first.receipt.import_status,
+        first.receipt.test_status,
+    ) == expected_phases[phase]
     assert b"/private/worktree" not in first.receipt.to_bytes()
     assert b"timestamp" not in first.receipt.to_bytes()
 
@@ -404,23 +505,31 @@ def test_rcc_json_parser_ignores_progress_text_around_result() -> None:
 
 
 @pytest.mark.skipif(
-    os.environ.get("ACTIONS_PACKAGE_COMPILER_RCC_PROOF") != "1",
-    reason="set ACTIONS_PACKAGE_COMPILER_RCC_PROOF=1 for the pinned local RCC proof",
+    not os.environ.get("ACTIONS_PACKAGE_COMPILER_PREPARED_RCC_RECEIPT"),
+    reason=(
+        "set ACTIONS_PACKAGE_COMPILER_PREPARED_RCC_RECEIPT to an exact-manifest "
+        "trusted-host cache receipt for the pinned RCC proof"
+    ),
 )
 def test_genuine_generated_action_rcc_build_import_and_test(tmp_path: Path) -> None:
+    prepared = load_prepared_rcc_environment(
+        Path(os.environ["ACTIONS_PACKAGE_COMPILER_PREPARED_RCC_RECEIPT"])
+    )
     outcome = compile_generated_python_action(
         _generated_action_entries(),
         _compilation_policy(),
         protected_input_names=["package.yaml"],
         admission=TrustedDeveloperExecutionAdmission.TRUSTED,
+        executor=PinnedRccPackageBuildExecutor(prepared),
         execution_root=tmp_path,
     )
 
-    assert outcome.compiled_package is not None, outcome.receipt.to_bytes()
+    assert outcome.compiled_package is not None, repr(outcome.receipt)
     manifest = json.loads(outcome.compiled_package.manifest_json)
     Draft202012Validator(json.loads(PACKAGE_SCHEMA.read_text())).validate(manifest)
     assert outcome.receipt.status == "succeeded"
     assert outcome.receipt.failure_code is None
+    assert verify_compilation_outcome(outcome) is outcome.compiled_package
 
 
 @pytest.mark.skipif(sys.platform != "linux", reason="confined staging requires Linux")

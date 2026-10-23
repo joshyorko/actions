@@ -129,6 +129,97 @@ class RccBuildIdentity:
 
 
 @dataclass(frozen=True)
+class PreparedRccEnvironment:
+    """Trusted-host RCC cache prepared for one exact package.yaml byte string.
+
+    The cache home is local process evidence and is never copied into a Package
+    manifest or compilation receipt. The generated-code child receives only
+    the cache path and RCC's no-build flag; it receives no proxy or account
+    settings.
+    """
+
+    robocorp_home: Path
+    package_yaml_digest: str
+    build_identity: RccBuildIdentity
+    rcc_version: str = RCC_VERSION
+
+    def __post_init__(self) -> None:
+        if (
+            not isinstance(self.robocorp_home, Path)
+            or not self.robocorp_home.is_absolute()
+        ):
+            raise ValueError("prepared RCC home must be an absolute local path")
+        if not isinstance(self.package_yaml_digest, str) or not _DIGEST_RE.fullmatch(
+            self.package_yaml_digest
+        ):
+            raise ValueError("prepared RCC manifest identity must be a sha256 digest")
+        if self.rcc_version != RCC_VERSION:
+            raise ValueError("prepared RCC cache must use pinned RCC 18.19.3")
+
+    def to_receipt_bytes(self) -> bytes:
+        """Serialize the local preparation evidence without timestamps."""
+        return _canonical_json(
+            {
+                "schemaVersion": "actions.prepared-rcc-cache/v1",
+                "rccVersion": self.rcc_version,
+                "packageYamlDigest": self.package_yaml_digest,
+                "specificationDigest": self.build_identity.specification_digest,
+                "artifactDigest": self.build_identity.artifact_digest,
+                "robocorpHome": str(self.robocorp_home),
+            }
+        )
+
+
+def load_prepared_rcc_environment(receipt_file: Path) -> PreparedRccEnvironment:
+    """Read a bounded local receipt from trusted-host RCC preparation."""
+    flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0)
+    try:
+        fd = os.open(receipt_file, flags)
+    except OSError as exc:
+        raise ValueError("prepared RCC receipt is unavailable") from exc
+    try:
+        if not stat.S_ISREG(os.fstat(fd).st_mode):
+            raise ValueError("prepared RCC receipt must be a regular file")
+        with os.fdopen(fd, "rb", closefd=False) as stream:
+            raw = stream.read(8 * 1024 + 1)
+    finally:
+        os.close(fd)
+    if len(raw) > 8 * 1024:
+        raise ValueError("prepared RCC receipt exceeds its size limit")
+    try:
+        value = json.loads(raw)
+    except (TypeError, ValueError, json.JSONDecodeError) as exc:
+        raise ValueError("prepared RCC receipt is invalid JSON") from exc
+    if not isinstance(value, dict) or set(value) != {
+        "schemaVersion",
+        "rccVersion",
+        "packageYamlDigest",
+        "specificationDigest",
+        "artifactDigest",
+        "robocorpHome",
+    }:
+        raise ValueError("prepared RCC receipt has an unsupported shape")
+    if value["schemaVersion"] != "actions.prepared-rcc-cache/v1":
+        raise ValueError("prepared RCC receipt version is unsupported")
+    if _canonical_json(value) != raw:
+        raise ValueError("prepared RCC receipt bytes are not canonical")
+    if not isinstance(value["robocorpHome"], str) or len(value["robocorpHome"]) > 4096:
+        raise ValueError("prepared RCC home path is invalid")
+    try:
+        return PreparedRccEnvironment(
+            robocorp_home=Path(value["robocorpHome"]),
+            package_yaml_digest=value["packageYamlDigest"],
+            build_identity=RccBuildIdentity(
+                specification_digest=value["specificationDigest"],
+                artifact_digest=value["artifactDigest"],
+            ),
+            rcc_version=value["rccVersion"],
+        )
+    except (TypeError, ValueError) as exc:
+        raise ValueError("prepared RCC receipt contains invalid identities") from exc
+
+
+@dataclass(frozen=True)
 class RuntimePlanHeader:
     """Portable #129-compatible header for the one declared RCC plan."""
 
@@ -155,6 +246,7 @@ class CompiledPackageRevision:
     adapter_specification_payload: bytes
     input_schema_payload: bytes
     output_schema_payload: bytes
+    rcc_specification_digest: str
     rcc_artifact_digest: str
 
 
@@ -171,6 +263,8 @@ class CompilationReceipt:
     failure_code: str | None = None
     package_revision_digest: str | None = None
     runtime_plan_digest: str | None = None
+    rcc_specification_digest: str | None = None
+    rcc_artifact_digest: str | None = None
 
     def to_bytes(self) -> bytes:
         value = {
@@ -188,6 +282,8 @@ class CompilationReceipt:
             "failureCode": self.failure_code,
             "packageRevisionDigest": self.package_revision_digest,
             "runtimePlanDigest": self.runtime_plan_digest,
+            "rccSpecificationDigest": self.rcc_specification_digest,
+            "rccArtifactDigest": self.rcc_artifact_digest,
         }
         return canonical.canonicalize_json(
             json.dumps(value, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
@@ -200,27 +296,280 @@ class CompilationOutcome:
     receipt: CompilationReceipt
 
 
+def verify_compilation_outcome(outcome: CompilationOutcome) -> CompiledPackageRevision:
+    """Verify successful phase evidence and every portable compiled preimage.
+
+    This is an integrity check over compiler output, not caller authorization.
+    A trusted host must still admit the selected source and persist the verified
+    bytes through the common Package registry.
+    """
+    if (
+        not isinstance(outcome, CompilationOutcome)
+        or not isinstance(outcome.receipt, CompilationReceipt)
+        or outcome.compiled_package is None
+    ):
+        raise ValueError("successful compiler output is required")
+    receipt = outcome.receipt
+    if (
+        receipt.status != "succeeded"
+        or (receipt.build_status, receipt.import_status, receipt.test_status)
+        != ("passed", "passed", "passed")
+        or receipt.failure_code is not None
+    ):
+        raise ValueError("all compiler phases must have passed")
+    compiled = outcome.compiled_package
+    verify_compiled_package_revision(compiled)
+    if (
+        receipt.source_inventory_digest != compiled.source_inventory_digest
+        or receipt.source_artifact_digest != compiled.source_artifact_digest
+        or receipt.package_revision_digest != compiled.package_revision_id.root
+        or receipt.runtime_plan_digest != compiled.runtime_plan_header.plan_digest.root
+        or receipt.rcc_specification_digest != compiled.rcc_specification_digest
+        or receipt.rcc_artifact_digest != compiled.rcc_artifact_digest
+    ):
+        raise ValueError("compiler receipt does not match compiled package identities")
+    return compiled
+
+
+def verify_compiled_package_revision(compiled: CompiledPackageRevision) -> None:
+    """Recompute archive, manifest, plan, schema and adapter payload identities."""
+    try:
+        _verify_compiled_package_revision(compiled)
+    except Exception as exc:
+        if (
+            isinstance(exc, ValueError)
+            and str(exc) == "compiled package integrity check failed"
+        ):
+            raise
+        raise ValueError("compiled package integrity check failed") from None
+
+
+def _verify_compiled_package_revision(compiled: CompiledPackageRevision) -> None:
+    if not isinstance(compiled, CompiledPackageRevision):
+        raise ValueError("compiled package has the wrong type")
+    if not _DIGEST_RE.fullmatch(compiled.source_inventory_digest):
+        raise ValueError("source inventory identity is invalid")
+    if not _DIGEST_RE.fullmatch(
+        compiled.rcc_specification_digest
+    ) or not _DIGEST_RE.fullmatch(compiled.rcc_artifact_digest):
+        raise ValueError("RCC build identities are invalid")
+    if len(compiled.source_archive) > MAX_COMPILER_SOURCE_TOTAL_BYTES + 64 * 1024:
+        raise ValueError("source archive exceeds its size limit")
+
+    from io import BytesIO
+
+    with zipfile.ZipFile(BytesIO(compiled.source_archive), "r") as archive:
+        infos = archive.infolist()
+        if not infos or len(infos) > MAX_COMPILER_SOURCE_FILES:
+            raise ValueError("source archive entry count is invalid")
+        supplied: list[source_manifest.SuppliedSourceEntry] = []
+        seen_names: set[str] = set()
+        for info in infos:
+            mode_with_type = info.external_attr >> 16
+            if (
+                info.filename in seen_names
+                or info.is_dir()
+                or info.compress_type != zipfile.ZIP_STORED
+                or info.file_size > MAX_COMPILER_SOURCE_FILE_BYTES
+                or info.compress_size != info.file_size
+                or not stat.S_ISREG(mode_with_type)
+                or info.flag_bits & 1
+            ):
+                raise ValueError("source archive entry is not canonical")
+            seen_names.add(info.filename)
+            content = archive.read(info)
+            if len(content) != info.file_size:
+                raise ValueError("source archive entry length is invalid")
+            supplied.append(
+                source_manifest.SuppliedSourceEntry(
+                    info.filename,
+                    "file",
+                    content,
+                    stat.S_IMODE(mode_with_type),
+                )
+            )
+    snapshot = snapshot_source_entries(supplied, protected_input_names=[])
+    if (
+        snapshot.digest != compiled.source_inventory_digest
+        or _deterministic_source_archive(snapshot) != compiled.source_archive
+        or _sha256_digest(compiled.source_archive) != compiled.source_artifact_digest
+    ):
+        raise ValueError("source archive preimage does not match")
+
+    manifest = _canonical_object(compiled.manifest_json, MAX_COMPILER_METADATA_BYTES)
+    if (
+        set(manifest)
+        != {
+            "schemaVersion",
+            "identity",
+            "sourceArtifact",
+            "compatibility",
+            "capabilities",
+            "logicalBindingRequirements",
+            "runtimePlans",
+        }
+        or manifest["schemaVersion"] != PACKAGE_SCHEMA_VERSION
+    ):
+        raise ValueError("Package manifest shape is invalid")
+    if _canonical_json(manifest) != compiled.manifest_json:
+        raise ValueError("Package manifest bytes are not canonical")
+
+    source_artifact = manifest["sourceArtifact"]
+    if source_artifact != {
+        "digest": compiled.source_artifact_digest,
+        "mediaType": "application/vnd.actions.package-source+zip",
+        "byteLength": len(compiled.source_archive),
+    }:
+        raise ValueError("Package source artifact does not match")
+
+    identity = manifest["identity"]
+    if not isinstance(identity, dict) or set(identity) != {
+        "packageId",
+        "logicalName",
+        "compilerNormalizationVersion",
+        "revisionDigest",
+    }:
+        raise ValueError("Package identity shape is invalid")
+    manifest_without_digest = json.loads(compiled.manifest_json)
+    package_digest = manifest_without_digest["identity"].pop("revisionDigest")
+    if (
+        not isinstance(package_digest, str)
+        or package_digest
+        != _canonical_digest([PACKAGE_SCHEMA_VERSION, manifest_without_digest])
+        or compiled.package_revision_id.root != package_digest
+        or identity["compilerNormalizationVersion"] != COMPILER_NORMALIZATION_VERSION
+    ):
+        raise ValueError("Package revision preimage does not match")
+
+    capabilities = manifest["capabilities"]
+    plans = manifest["runtimePlans"]
+    if not isinstance(capabilities, list) or len(capabilities) != 1:
+        raise ValueError("Package must contain exactly one capability")
+    if not isinstance(plans, list) or len(plans) != 1:
+        raise ValueError("Package must contain exactly one Runtime Plan")
+    capability = capabilities[0]
+    plan = plans[0]
+    if not isinstance(capability, dict) or not isinstance(plan, dict):
+        raise ValueError("Package capability and Runtime Plan must be objects")
+    plan_without_digest = dict(plan)
+    plan_digest = plan_without_digest.pop("digest")
+    if (
+        not isinstance(plan_digest, str)
+        or plan_digest
+        != _canonical_digest(["actions.runtime-plan/v1-draft", plan_without_digest])
+        or compiled.runtime_plan_header.plan_digest.root != plan_digest
+        or compiled.runtime_plan_payload != _canonical_json(plan_without_digest)
+    ):
+        raise ValueError("Runtime Plan preimage does not match")
+
+    if (
+        capability.get("kind") != "action"
+        or plan_without_digest.get("schemaVersion") != RUNTIME_PLAN_SCHEMA_VERSION
+        or plan_without_digest.get("runtimeKind") != "rcc"
+        or plan_without_digest.get("contractId") != RCC_CONTRACT_VERSION
+        or capability.get("compatiblePlanDigests") != [plan_digest]
+        or plan_without_digest.get("compatibleCapabilityIds") != [capability.get("id")]
+    ):
+        raise ValueError("Package capability and Runtime Plan do not agree")
+    header = compiled.runtime_plan_header
+    if (
+        header.runtime_kind != plan_without_digest["runtimeKind"]
+        or header.plan_schema_version != plan_without_digest["schemaVersion"]
+        or header.contract_id != plan_without_digest["contractId"]
+        or header.adapter_version_range != plan_without_digest["adapterVersionRange"]
+        or header.required_features != tuple(plan_without_digest["requiredFeatures"])
+    ):
+        raise ValueError("Runtime Plan header does not match its payload")
+    expected_header_digest = _canonical_digest(
+        {
+            "domain": "actions.runtime-plan-compatibility/v1-draft",
+            "canonicalizer_version": CANONICALIZER_VERSION,
+            "plan_schema_version": header.plan_schema_version,
+            "runtime_kind": header.runtime_kind,
+            "contract_id": header.contract_id,
+            "adapter_version_range": header.adapter_version_range,
+            "required_features": list(header.required_features),
+        }
+    )
+    if header.compatibility_identity_digest != expected_header_digest:
+        raise ValueError("Runtime Plan compatibility identity does not match")
+
+    input_schema = _canonical_object(
+        compiled.input_schema_payload, MAX_COMPILER_METADATA_BYTES
+    )
+    output_schema = _canonical_object(
+        compiled.output_schema_payload, MAX_COMPILER_METADATA_BYTES
+    )
+    if (
+        _canonical_json(input_schema) != compiled.input_schema_payload
+        or _canonical_json(output_schema) != compiled.output_schema_payload
+        or capability.get("inputSchemaDigest")
+        != _schema_digest(input_schema, "actions.input-schema/v1-draft")
+        or capability.get("outputSchemaDigest")
+        != _schema_digest(output_schema, "actions.output-schema/v1-draft")
+    ):
+        raise ValueError("Action schema payload does not match its identity")
+
+    adapter = _canonical_object(
+        compiled.adapter_specification_payload, MAX_COMPILER_METADATA_BYTES
+    )
+    adapter_specification = plan_without_digest["adapterSpecification"]
+    if (
+        _canonical_json(adapter) != compiled.adapter_specification_payload
+        or adapter_specification
+        != {
+            "schemaId": RUNTIME_PLAN_ADAPTER_SCHEMA_ID,
+            "schemaVersion": RUNTIME_PLAN_ADAPTER_SCHEMA_VERSION,
+            "payloadDigest": _sha256_digest(compiled.adapter_specification_payload),
+        }
+        or adapter.get("schemaVersion") != RUNTIME_PLAN_ADAPTER_SCHEMA_VERSION
+        or not _DIGEST_RE.fullmatch(adapter.get("specificationDigest", ""))
+        or adapter.get("environmentRequirements")
+        != plan_without_digest.get("environmentRequirements")
+    ):
+        raise ValueError("Runtime Plan adapter payload does not match")
+    entrypoint = adapter.get("entrypoint")
+    if (
+        not isinstance(entrypoint, dict)
+        or set(entrypoint) != {"module", "actionName"}
+        or not isinstance(entrypoint["module"], str)
+        or not isinstance(entrypoint["actionName"], str)
+        or capability.get("id") != _capability_id(entrypoint["actionName"])
+    ):
+        raise ValueError("Action adapter entrypoint does not match")
+    if adapter["specificationDigest"] != compiled.rcc_specification_digest:
+        raise ValueError("RCC specification identity does not match")
+
+
+def _canonical_object(payload: bytes, limit: int) -> dict[str, Any]:
+    if not isinstance(payload, bytes) or len(payload) > limit:
+        raise ValueError("canonical payload exceeds its size limit")
+    try:
+        value = json.loads(payload)
+    except (TypeError, ValueError, json.JSONDecodeError) as exc:
+        raise ValueError("canonical payload is invalid JSON") from exc
+    if not isinstance(value, dict):
+        raise ValueError("canonical payload must be an object")
+    return value
+
+
 class PackageBuildExecutor(Protocol):
     """Boundary for the three fixed, bounded RCC package phases."""
 
     @property
-    def rcc_version(self) -> str:
-        ...
+    def rcc_version(self) -> str: ...
 
     def build_environment(
         self, package_yaml: Path, workspace: Path
-    ) -> RccBuildIdentity:
-        ...
+    ) -> RccBuildIdentity: ...
 
     def import_action(
         self, build: RccBuildIdentity, package_dir: Path, workspace: Path
-    ) -> dict[str, Any]:
-        ...
+    ) -> dict[str, Any]: ...
 
     def run_tests(
         self, build: RccBuildIdentity, package_dir: Path, workspace: Path
-    ) -> None:
-        ...
+    ) -> None: ...
 
 
 def snapshot_source_entries(
@@ -466,6 +815,8 @@ def compile_generated_python_action(
                 test_status="passed",
                 package_revision_digest=compiled.package_revision_id.root,
                 runtime_plan_digest=compiled.runtime_plan_header.plan_digest.root,
+                rcc_specification_digest=compiled.rcc_specification_digest,
+                rcc_artifact_digest=compiled.rcc_artifact_digest,
             )
             return CompilationOutcome(compiled, receipt)
     except (OSError, ValueError):
@@ -862,6 +1213,7 @@ def _assemble_compiled_package(
         adapter_specification_payload=adapter_payload_bytes,
         input_schema_payload=input_schema_payload,
         output_schema_payload=output_schema_payload,
+        rcc_specification_digest=build.specification_digest,
         rcc_artifact_digest=build.artifact_digest,
     )
 
@@ -874,9 +1226,12 @@ class PinnedRccPackageBuildExecutor:
     source and time inputs, not operating-system isolation.
     """
 
-    def __init__(self) -> None:
+    def __init__(
+        self, prepared_environment: PreparedRccEnvironment | None = None
+    ) -> None:
         self._rcc_binary = Path(__file__).resolve().parents[1] / "bin" / "rcc-18.19.3"
         self._rcc_home: Path | None = None
+        self._prepared_environment = prepared_environment
 
     @property
     def rcc_version(self) -> str:
@@ -885,8 +1240,20 @@ class PinnedRccPackageBuildExecutor:
     def build_environment(
         self, package_yaml: Path, workspace: Path
     ) -> RccBuildIdentity:
-        self._rcc_home = workspace / "robocorp-home"
-        self._rcc_home.mkdir(mode=0o700)
+        prepared = self._prepared_environment
+        if prepared is None:
+            self._rcc_home = workspace / "robocorp-home"
+            self._rcc_home.mkdir(mode=0o700)
+        else:
+            try:
+                package_yaml_digest = _sha256_digest(package_yaml.read_bytes())
+            except OSError as exc:
+                raise RuntimeError("prepared RCC manifest is unavailable") from exc
+            if package_yaml_digest != prepared.package_yaml_digest:
+                raise RuntimeError("prepared RCC manifest identity mismatch")
+            if not prepared.robocorp_home.is_dir():
+                raise RuntimeError("prepared RCC cache is unavailable")
+            self._rcc_home = prepared.robocorp_home
         self._create_execution_dirs(workspace)
         version = self._run([str(self._rcc_binary), "--version"], workspace, timeout=15)
         try:
@@ -895,9 +1262,11 @@ class PinnedRccPackageBuildExecutor:
             raise RuntimeError("bundled RCC version output is not ASCII") from exc
         if reported_version != RCC_VERSION:
             raise RuntimeError("bundled RCC version mismatch")
-        raw = self._run(
+        publish_command = [str(self._rcc_binary)]
+        if prepared is not None:
+            publish_command.append("--no-build")
+        publish_command.extend(
             [
-                str(self._rcc_binary),
                 "env",
                 "publish",
                 "--environment",
@@ -905,7 +1274,10 @@ class PinnedRccPackageBuildExecutor:
                 "--json",
                 "--provider",
                 "local",
-            ],
+            ]
+        )
+        raw = self._run(
+            publish_command,
             workspace,
             timeout=RCC_BUILD_TIMEOUT_SECONDS,
         )
@@ -918,10 +1290,13 @@ class PinnedRccPackageBuildExecutor:
             raise RuntimeError(
                 "RCC did not return stable package build identities"
             ) from exc
-        return RccBuildIdentity(
+        build = RccBuildIdentity(
             specification_digest=published.specification_digest,
             artifact_digest=published.artifact_digest,
         )
+        if prepared is not None and build != prepared.build_identity:
+            raise RuntimeError("prepared RCC cache identity mismatch")
+        return build
 
     def import_action(
         self, build: RccBuildIdentity, package_dir: Path, workspace: Path
@@ -996,6 +1371,8 @@ class PinnedRccPackageBuildExecutor:
             receipt_file=None,
             local_trust_carrier=trust_carrier,
         )
+        if self._prepared_environment is not None:
+            argv.insert(1, "--no-build")
         raw = self._run(argv, workspace, timeout=RCC_BUILD_TIMEOUT_SECONDS)
         try:
             value = _extract_json_object(raw, required_keys=("artifactDigest",))
@@ -1043,7 +1420,7 @@ class PinnedRccPackageBuildExecutor:
     def _child_environment(self, workspace: Path) -> dict[str, str]:
         if self._rcc_home is None:
             raise RuntimeError("RCC home is unavailable")
-        return {
+        environment = {
             "HOME": str(workspace / "home"),
             "PATH": os.defpath,
             "ROBOCORP_HOME": str(self._rcc_home),
@@ -1052,3 +1429,6 @@ class PinnedRccPackageBuildExecutor:
             "LANG": "C.UTF-8",
             "LC_ALL": "C.UTF-8",
         }
+        if self._prepared_environment is not None:
+            environment["RCC_NO_BUILD"] = "1"
+        return environment
