@@ -20,6 +20,7 @@ from actions.server.deployments.package_revision_compiler import (
     RccBuildIdentity,
     TrustedDeveloperExecutionAdmission,
     _extract_json_object,
+    _parse_rcc_exec_result,
     compile_generated_python_action,
     load_prepared_rcc_environment,
     snapshot_source_entries,
@@ -347,6 +348,10 @@ def test_prepared_rcc_child_environment_stays_sanitized(
     child_environment = executor._child_environment(tmp_path)
 
     assert child_environment["RCC_NO_BUILD"] == "1"
+    if sys.platform.startswith("linux"):
+        child_path = child_environment["PATH"].split(os.pathsep)
+        assert "/usr/sbin" in child_path
+        assert "/sbin" in child_path
     assert not any("proxy" in name.casefold() for name in child_environment)
     assert not any("account" in name.casefold() for name in child_environment)
 
@@ -502,6 +507,16 @@ def test_rcc_json_parser_ignores_progress_text_around_result() -> None:
         )
         == payload
     )
+
+
+def test_rcc_exec_parser_accepts_one_result_with_nested_artifact_identity() -> None:
+    payload = {
+        "artifactDigest": "sha256:" + "a" * 64,
+        "exitCode": 0,
+        "verification": {"artifactDigest": "sha256:" + "a" * 64},
+    }
+
+    assert _parse_rcc_exec_result(json.dumps(payload).encode()) == payload
 
 
 @pytest.mark.skipif(
