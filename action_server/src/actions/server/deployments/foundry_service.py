@@ -24,6 +24,7 @@ from .foundry_values import (
     AccessDenied,
     CapabilityExecutionPort,
     CapabilityPlanPolicy,
+    DeploymentExecutionSnapshot,
     DeploymentRevision,
     DeploymentSpecification,
     OperationKind,
@@ -123,14 +124,14 @@ class FoundryDeploymentService:
         if target is None:
             raise AccessDenied("Deployment unavailable or not authorized")
         self._authorize_specification(
-            actor, workspace_id, target.specification, "deploy"
+            actor, workspace_id, target.revision.specification, "deploy"
         )
-        self._validate_package_contracts(target.specification)
+        self._validate_package_contracts(target.revision.specification)
         return self._activate(
             actor,
             workspace_id,
             deployment_id,
-            target.specification,
+            target.revision.specification,
             expected_revision=expected_revision,
             idempotency_key=idempotency_key,
             operation_kind="rollback",
@@ -166,8 +167,9 @@ class FoundryDeploymentService:
             stored = self._repository.get_revision(revision)
         if stored is None:
             raise AccessDenied("Deployment unavailable or not authorized")
-        self._authorization.require_reference(actor, stored.ref, "execute")
-        specification = stored.specification
+        revision_record = stored.revision
+        self._authorization.require_reference(actor, revision_record.ref, "execute")
+        specification = revision_record.specification
         try:
             require_workspace_scope(capability, workspace_id)
             if capability.package_revision not in specification.package_revisions:
@@ -176,7 +178,9 @@ class FoundryDeploymentService:
                 actor, capability.package_revision, "execute"
             )
             self._authorization.require_reference(actor, capability, "execute")
-            self._packages.require_revision(capability.package_revision)
+            for package_ref in specification.package_revisions:
+                self._authorization.require_reference(actor, package_ref, "execute")
+                self._packages.require_revision(package_ref)
             declaration = self._capability(capability)
             plan_policy = self._plan_policy(specification, capability)
             selected_ref = plan_policy.select(runtime_plan)
@@ -188,6 +192,22 @@ class FoundryDeploymentService:
             self._authorization.require_reference(actor, selected_ref, "execute")
             plan = self._plan(selected_ref)
             self._validate_runtime_plan(plan, selected_ref, capability)
+            persisted_snapshot = next(
+                (
+                    entry.snapshot
+                    for entry in stored.execution_snapshots
+                    if entry.capability == capability
+                    and entry.runtime_plan == selected_ref
+                ),
+                None,
+            )
+            if persisted_snapshot is None:
+                raise AccessDenied("Execution snapshot unavailable or not authorized")
+            current_snapshot = self._execution_snapshot(
+                revision_record, capability, selected_ref, declaration, plan
+            )
+            if current_snapshot != persisted_snapshot:
+                raise AccessDenied("Execution snapshot unavailable or not authorized")
             binding_requirements = self._validated_package_refs(
                 declaration.binding_requirements,
                 capability.package_revision,
@@ -221,24 +241,9 @@ class FoundryDeploymentService:
                 specification.output_provider,
             ):
                 self._authorization.require_reference(actor, ref, "execute")
-            schema_digest = _valid_digest(declaration.schema_digest)
-            action_id = self._execution.action_id_for(capability)
-            if not isinstance(action_id, str) or not action_id or len(action_id) > 128:
-                raise PackageContractError("Runtime capability identity is invalid")
-            snapshot = ExecutionSnapshot(
-                deployment=stored.ref,
-                capability=capability,
-                runtime_plan=selected_ref,
-                worker=specification.worker,
-                policy=specification.policy,
-                output_provider=specification.output_provider,
-                runtime_kind=_valid_runtime_kind(plan.runtime_kind),
-                capability_schema_digest=schema_digest,
-                action_id=action_id,
-            )
             return ResolvedDeploymentExecution(
-                revision=stored,
-                snapshot=snapshot,
+                revision=revision_record,
+                snapshot=persisted_snapshot,
                 binding_requirements=binding_requirements,
                 bindings=bindings,
             )
@@ -267,19 +272,36 @@ class FoundryDeploymentService:
             raise TypeError("specification must be DeploymentSpecification")
         specification = DeploymentSpecification.model_validate(specification)
         require_workspace_scope(specification.package_revisions[0], workspace_id)
+        self._authorization.require_deployment(
+            actor, workspace_id, deployment_id, "deploy"
+        )
         if expected_revision is not None:
             expected_revision = DeploymentRevisionRef.model_validate(expected_revision)
             self._require_owner_ref(workspace_id, deployment_id, expected_revision)
-            self._authorization.require_deployment(
-                actor, workspace_id, deployment_id, "deploy"
-            )
             self._authorization.require_reference(actor, expected_revision, "deploy")
         if rollback_of is not None:
             rollback_of = DeploymentRevisionRef.model_validate(rollback_of)
             self._require_owner_ref(workspace_id, deployment_id, rollback_of)
+            self._authorization.require_reference(actor, rollback_of, "deploy")
         _validate_idempotency_key(idempotency_key)
         self._authorize_specification(actor, workspace_id, specification, "deploy")
         self._validate_package_contracts(specification)
+
+        def preflight() -> None:
+            """Recheck authorization and package contracts under the Workspace lock."""
+            self._require_workspace(actor, workspace_id, "deploy")
+            self._authorization.require_deployment(
+                actor, workspace_id, deployment_id, "deploy"
+            )
+            if expected_revision is not None:
+                self._authorization.require_reference(
+                    actor, expected_revision, "deploy"
+                )
+            if rollback_of is not None:
+                self._authorization.require_reference(actor, rollback_of, "deploy")
+            self._authorize_specification(actor, workspace_id, specification, "deploy")
+            self._validate_package_contracts(specification)
+
         digest = request_digest(
             workspace_id,
             deployment_id,
@@ -296,7 +318,61 @@ class FoundryDeploymentService:
             idempotency_key=idempotency_key,
             input_digest=digest,
             operation_kind=operation_kind,
+            principal_id=str(actor.principal_id),
+            preflight=preflight,
+            snapshot_builder=self._execution_snapshots,
             rollback_of=rollback_of,
+        )
+
+    def _execution_snapshots(
+        self, revision: DeploymentRevision
+    ) -> tuple[DeploymentExecutionSnapshot, ...]:
+        """Snapshot each explicitly allowed Capability/Plan pair at activation."""
+        self._validate_package_contracts(revision.specification)
+        snapshots: list[DeploymentExecutionSnapshot] = []
+        for policy in revision.specification.capability_plans:
+            declaration = self._capability(policy.capability)
+            for plan_ref in policy.allowed_plans:
+                plan = self._plan(plan_ref)
+                self._validate_runtime_plan(plan, plan_ref, policy.capability)
+                snapshots.append(
+                    DeploymentExecutionSnapshot(
+                        capability=policy.capability,
+                        runtime_plan=plan_ref,
+                        snapshot=self._execution_snapshot(
+                            revision,
+                            policy.capability,
+                            plan_ref,
+                            declaration,
+                            plan,
+                        ),
+                    )
+                )
+        return tuple(snapshots)
+
+    def _execution_snapshot(
+        self,
+        revision: DeploymentRevision,
+        capability: CapabilityRef,
+        runtime_plan: RuntimePlanRef,
+        capability_declaration: Any,
+        plan_declaration: Any,
+    ) -> ExecutionSnapshot:
+        action_id = self._execution.action_id_for(capability)
+        if not isinstance(action_id, str) or not action_id or len(action_id) > 128:
+            raise PackageContractError("Runtime capability identity is invalid")
+        return ExecutionSnapshot(
+            deployment=revision.ref,
+            capability=capability,
+            runtime_plan=runtime_plan,
+            worker=revision.specification.worker,
+            policy=revision.specification.policy,
+            output_provider=revision.specification.output_provider,
+            runtime_kind=_valid_runtime_kind(plan_declaration.runtime_kind),
+            capability_schema_digest=_valid_digest(
+                capability_declaration.schema_digest
+            ),
+            action_id=action_id,
         )
 
     def _authorize_specification(
