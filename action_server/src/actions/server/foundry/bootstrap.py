@@ -45,6 +45,13 @@ from actions.server.foundry.runtime_profile import (
 )
 from actions.server.foundry.sql_authoring import SqlAuthoringAuthority
 from actions.server.foundry.sql_authorization import SqlFoundryAuthorization
+from actions.server.managed_work_items.api import Authenticate as ManagedAuthenticate
+from actions.server.managed_work_items.authorization import (
+    SqlQueueAuthorization,
+    bearer_authenticator,
+)
+from actions.server.managed_work_items.contracts import ManagedCaller
+from actions.server.managed_work_items.sql_service import SQLManagedWorkItemsService
 from actions.server.run_outputs.filesystem import FilesystemOutputProvider
 from actions.server.run_outputs.models import Workspace
 from actions.server.run_outputs.service import _now
@@ -151,6 +158,8 @@ class RuntimeCanvas:
     actor: Actor
     workspace: WorkspaceId
     source_provider: FilesystemOutputProvider
+    managed_work_items: SQLManagedWorkItemsService
+    managed_authenticate: ManagedAuthenticate
 
     def close(self) -> None:
         self.source_provider.close()
@@ -231,12 +240,27 @@ def create_runtime_canvas(
             if profile is not None
             else _ExecutionNotConfigured(),
         )
+        from actions.server.data_queries.review import InvoiceReviewService
+        from actions.server.data_queries.service import InvoiceQueryService
+        from actions.server.run_outputs.service import RunOutputService
+
+        outputs = RunOutputService(
+            db,
+            {profile.provider_key: provider} if profile is not None else {},
+            capabilities=registry,
+        )
+        reviews = InvoiceReviewService(InvoiceQueryService(outputs, {}))
+        managed = SQLManagedWorkItemsService(reviews, SqlQueueAuthorization(db))
+        managed_authenticate = bearer_authenticator(
+            api_key,
+            ManagedCaller(
+                actor=actor, worker_id=profile.worker_id if profile else None
+            ),
+        )
         port: CanvasPort = authoring
         if profile is not None:
             if prepared is None:
                 raise ValueError("verified prepared RCC environment required")
-            from actions.server.data_queries.review import InvoiceReviewService
-            from actions.server.data_queries.service import InvoiceQueryService
             from actions.server.foundry.activated_execution import (
                 ActivatedReviewedExecution,
             )
@@ -245,12 +269,7 @@ def create_runtime_canvas(
                 ReviewedCanvasExecution,
             )
             from actions.server.foundry.reviewed_view import ReviewedCanvasView
-            from actions.server.run_outputs.service import RunOutputService
 
-            outputs = RunOutputService(
-                db, {profile.provider_key: provider}, capabilities=registry
-            )
-            reviews = InvoiceReviewService(InvoiceQueryService(outputs, {}))
             port = ReviewedCanvasView(
                 ReviewedCanvasExecution(
                     authoring,
@@ -291,7 +310,12 @@ def create_runtime_canvas(
             return caller
 
         return RuntimeCanvas(
-            CanvasMcp(port, authenticate, html), actor, workspace, provider
+            CanvasMcp(port, authenticate, html),
+            actor,
+            workspace,
+            provider,
+            managed,
+            managed_authenticate,
         )
     except BaseException:
         provider.close()

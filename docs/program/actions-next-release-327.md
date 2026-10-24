@@ -1,5 +1,21 @@
 # Actions Next release checkpoint
 
+## Resumed release convergence — October24
+
+The owner resumed the full existing release on October24. The preserved branch
+was verified at `968a5689136825ffcbcde1f9ec05cfae84340baa`; the pause below is a
+historical receipt. Runtime1.1.0a24 is the next provisional candidate for changed
+bytes, not a published release. The first resumed gate corrects PR333 native
+inspection across independent Work Item claim and Run Attempt epochs. Managed
+producer/retry/default-profile and full original acceptance remain required.
+Public/community changes, credentials, tunnels and production remain held.
+The [resume receipt](evidence/actions-next-327/cloud-resume-20261024.json)
+records actual mixed-epoch red/green tests, owned SQLite/PostgreSQL managed
+90passed/4RCCskipped, joined bootstrap14passed, subsequent admission/HTTP56passed/
+4RCCskipped, configured lint and typecheck462. Native logs are admitted with
+independent fences. The reviewed admission delegates are tested but not yet wired
+to enqueue/retry; no full managed or installed-candidate acceptance is claimed.
+
 ## Owner pause and saved handoff
 
 **PAUSED by owner at2026-10-23 21:32:43UTC. Full release is not ready.**
@@ -7,8 +23,8 @@ All implementation is pushed on the existing release branch/draft #328 at
 `b548939259d28bafb11b458d51af4bad1fa594ad`, Runtime1.1.0a23. The
 [pause receipt](evidence/actions-next-327/cloud-view-profile-pause-20261023.json)
 records source/wheel identity, commands, captures, retained failures, cleanup,
-unintegrated dependencies and ordered restart gates. No new implementation or
-acceptance run is authorized until the owner resumes.
+unintegrated dependencies and ordered restart gates. That stop was superseded by the October24 owner resume; its interrupted
+results remain incomplete.
 
 The actual official Basic Host now passed the invoice-summary View flow on
 the clean noneditable candidate: inspect source, explicit human approval,

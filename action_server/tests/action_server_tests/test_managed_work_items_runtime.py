@@ -326,3 +326,13 @@ def test_real_managed_completion_uses_retained_rcc_evidence(reviewed, tmp_path):
     assert result["task"]["invoice_count"] == 2
     assert result["task"]["total_cents"] == 12900
     assert result["rcc_receipt"]["status"] == "completed"
+
+
+def test_source_run_without_native_log_outputs_returns_an_empty_page(reviewed):
+    client, _, queue, proposal = configured(reviewed)
+    response = call(client, "runs.logs", queue, run_id=proposal.binding.run_id)
+    assert response.status_code == 200, response.text
+    result = response.json()["result"]
+    assert result["run_id"] == proposal.binding.run_id
+    assert result["lines"] == []
+    assert result["next_cursor"] is None

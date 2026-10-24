@@ -21,9 +21,12 @@ bytes; every changed built package needs a distinct candidate identity.
 
 Implemented here: closed commands and response models, version/permission
 negotiation, bounded authenticated routes and a review-backed common-SQL service.
-Ordinary Runtime startup mounts the managed router, but it returns unavailable
-unless the host supplies both the real service and trusted authenticator.
-Mounting the route does not configure a usable managed profile or grant access.
+Ordinary Linux Runtime startup with a native Canvas artifact joins the managed
+router to its existing common SQL and owner identity. Other unsupported or
+unconfigured hosts remain unavailable unless explicit dependencies are supplied.
+The joined service creates no grants: schema discovery can succeed while live
+Workspace capability discovery returns403. Mounting does not authorize a queue
+or configure a complete managed execution profile.
 Default-profile configuration, installed consumer and VSIX acceptance remain
 required. No denial falls back to legacy local CRUD.
 
@@ -147,3 +150,15 @@ This bounded adapter is not full #132 completion: general queue modes,
 not-before/fairness/fan-out, remaining retry/review semantics and actual installed
 VSIX acceptance stay explicit current-release work. No side store or second
 scheduler is authorized.
+
+## Native generated Run inspection
+
+Native reviewed Work Items project their existing Run/Attempt and final bounded
+RCC stdout/stderr outputs through the same managed read routes and output
+resolver. Log pages contain at most100 bounded lines from finalized attached
+objects, with deterministic stdout/stderr ordering; artifact byte reads keep
+their separate permission. No raw local-file fallback exists. Claim epochs and
+Attempt epochs are independently validated against their canonical rows. A
+reclaimed Work Item can legitimately have claim2 and first Attempt1. Cancelled
+or lease-lost native projection currently fails closed; inspectable recovery
+status and general producer/retry semantics remain release gaps.

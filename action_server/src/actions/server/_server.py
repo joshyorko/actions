@@ -565,6 +565,26 @@ def start_server(
     log.debug(f"Starting server. Settings:\n{settings_str}")
 
     app = get_app()
+    if canvas_foundry is None and api_key:
+        from ._models import get_db
+        from .foundry.bootstrap import create_runtime_canvas
+
+        native_canvas = create_runtime_canvas(get_db(), settings.datadir, api_key)
+        if native_canvas is not None:
+            canvas_foundry = native_canvas.canvas
+            if managed_work_items is None and managed_authenticate is None:
+                managed_work_items = native_canvas.managed_work_items
+                managed_authenticate = native_canvas.managed_authenticate
+
+            @asynccontextmanager
+            async def _native_canvas_lifespan(_main_app: FastAPI):
+                try:
+                    yield
+                finally:
+                    native_canvas.close()
+
+            app.custom_lifespan.register(_native_canvas_lifespan)
+
     from ._browser_session import install_browser_sessions
 
     browser_sessions = install_browser_sessions(app, api_key)
@@ -617,23 +637,6 @@ def start_server(
             raise ValueError(
                 "invoice download requires the same scoped output transport"
             )
-
-    if canvas_foundry is None and api_key:
-        from ._models import get_db
-        from .foundry.bootstrap import create_runtime_canvas
-
-        native_canvas = create_runtime_canvas(get_db(), settings.datadir, api_key)
-        if native_canvas is not None:
-            canvas_foundry = native_canvas.canvas
-
-            @asynccontextmanager
-            async def _native_canvas_lifespan(_main_app: FastAPI):
-                try:
-                    yield
-                finally:
-                    native_canvas.close()
-
-            app.custom_lifespan.register(_native_canvas_lifespan)
 
     if canvas_foundry is not None:
         action_routes = _ActionRoutes(

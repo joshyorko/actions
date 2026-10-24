@@ -1110,6 +1110,14 @@ installed VSIX. Negotiate actually implemented operations and explicit grants;
 never turn a managed denial into unscoped local CRUD. Review, queue ownership,
 business outcome, Run, Attempt and artifact authority remain distinct.
 
+Work Item claim epochs and Run Attempt epochs are independent counters. A claim
+can expire before any Run is admitted, so the next claim can have epoch2 while
+its first Attempt has epoch1. Native managed projection compares each retained
+epoch with its own canonical Work Item, RunPin and RunAttempt rows, then checks
+current owner, lease, cancellation and scope. Equality between the counters is
+not a fence. Cover live and finalized log/artifact paths and independently
+reject stale Work Item, Attempt and RunPin epochs.
+
 Managed SQL requests must enter `Database.connect()` on the executing HTTP
 worker thread; a connection in the client/fixture thread is insufficient.
 Test the real router with live SQL policy, including revoked/cross-workspace
@@ -1141,3 +1149,14 @@ Per-case cleanup of recognized owned views does not bound simultaneous pytest,
 PostgreSQL and incomplete view allocations. Preserve failed receipts, check
 active processes and use RCC's supported exact-view cleanup; never remove
 unrecognized partial directories or immutable caches to force a green result.
+
+Ordinary Linux Runtime startup now joins the native Canvas and managed service
+to the same Database and package-aware output resolver. It maps the existing
+owner key to the existing actor; a worker identity is supplied only by the
+explicit trusted RCC descriptor. This assembly occurs before the HTTP perimeter
+is installed, so managed identity validation uses the same configured mapping.
+It creates no Work Items grants. Schema discovery can succeed while capability
+discovery returns403 for missing live permissions; that is distinct from an
+unconfigured503. Hosts injecting their own services retain explicit ownership.
+Source Runs without canonical captured log objects return an authorized empty
+log page, not a fabricated stream or a validation error.

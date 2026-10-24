@@ -1,0 +1,84 @@
+{
+  "schema": "actions.release327.resume/v1",
+  "base": "968a5689136825ffcbcde1f9ec05cfae84340baa",
+  "imported_pr333": "e3059bda389e0e57630c0d94f2d271d617e3fe09",
+  "runtime_candidate": "1.1.0a24",
+  "evidence_root": "/workspace/actions-327-state/evidence/resume-20261024",
+  "source_files": {
+    "action_server/pyproject.toml": "3c1bfef184f9a1d970855c9fc0f674101f49d89d41b24a76cf0a477d7c2e5a94",
+    "action_server/src/actions/server/__init__.py": "347edecbeed1ba28041513276b3cc8441d9a2d989246fe25717cad27f4b3bda4",
+    "action_server/src/actions/server/_server.py": "1686588ae37c565ba22f712a5486243d0213e4498223cd23c1732f96afacd06f",
+    "action_server/src/actions/server/foundry/bootstrap.py": "a07463c24e3fdf8e68b94906907bd8bf0a126d6d27715a134cff52ffd7055b68",
+    "action_server/src/actions/server/managed_work_items/sql_service.py": "6f789c52f75e5bf274953ea6304a163be464a0f9a80820064520b842ac45d8cc",
+    "action_server/tests/action_server_tests/test_candidate_work_items.py": "ca51a65588b05a9851c7e89c68ace5172fea624f389dd89522cbc2f661271a9e",
+    "action_server/tests/action_server_tests/test_managed_work_items_runtime.py": "abadfd7341d0bece45dbfaa920b88067ebf47dd141bfdf66645087ed127f7deb",
+    "action_server/tests/action_server_tests/test_managed_work_items_sql_service.py": "95ef3531554b4c7cb7e459ae626e7ced316f58e92d5287786491850ae947f287",
+    "action_server/src/actions/server/managed_work_items/native_runs.py": "14dce993ea440ed9c01dc211892f755eba907cd548360aaa4cb4bc8e38f32cdd",
+    "action_server/src/actions/server/managed_work_items/admission.py": "a2e4e4b1f6e45b5ffa6a6fa8ac0863707317390831f9beae2f5e23e73077cc20",
+    "action_server/tests/action_server_tests/test_runtime_managed_bootstrap.py": "18a7c9275a7e3d52b6652e02eea17ed75a4b686974fc39feb01eec1afadaa355",
+    "action_server/tests/action_server_tests/test_managed_work_items_admission.py": "39636532323cf341eef652fcfa66f31df894e35b5bd954530d7f2cbb0ab04a1b"
+  },
+  "gateway": {
+    "Doctor": "PASS",
+    "Bootstrap": "PASS",
+    "ToolkitTest": "179 PASS"
+  },
+  "gates": {
+    "pg-8da13a6a46434b569fc11bac80bf60cf": {
+      "tests": 94,
+      "failures": 0,
+      "errors": 0,
+      "skipped": [
+        "test_real_managed_completion_uses_retained_rcc_evidence[sqlite-duckdb]",
+        "test_real_managed_completion_uses_retained_rcc_evidence[sqlite-postgresql]",
+        "test_real_managed_completion_uses_retained_rcc_evidence[postgresql-duckdb]",
+        "test_real_managed_completion_uses_retained_rcc_evidence[postgresql-postgresql]"
+      ],
+      "cleanup": "PASS"
+    },
+    "pg-4970a06cacc5416b9323eddb8d607ceb": {
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": [],
+      "cleanup": "PASS"
+    },
+    "pg-c719242f137240ada44162bd17d31e08": {
+      "tests": 60,
+      "failures": 0,
+      "errors": 0,
+      "skipped": [
+        "test_real_managed_completion_uses_retained_rcc_evidence[sqlite-duckdb]",
+        "test_real_managed_completion_uses_retained_rcc_evidence[sqlite-postgresql]",
+        "test_real_managed_completion_uses_retained_rcc_evidence[postgresql-duckdb]",
+        "test_real_managed_completion_uses_retained_rcc_evidence[postgresql-postgresql]"
+      ],
+      "cleanup": "PASS"
+    }
+  },
+  "static": {
+    "configured_lint": "PASS; optional Markdown lint unavailable",
+    "configured_typecheck": "PASS 462 source files"
+  },
+  "retained_failures": [
+    "native claim2/Attempt1 rejected as stale_claim before fix",
+    "ordinary bootstrap missing managed service before assembly",
+    "source Run empty log response invalid_request before lines=() fix",
+    "first configured lint/typecheck exposed imported native local-name collision, empty LogPage constructor, admission JSON narrowing and format/import errors; all corrected"
+  ],
+  "not_acceptance": [
+    "RCC-dependent four managed completion cases skipped; fixture not yet restored",
+    "No exact a24 wheel has been built or installed",
+    "Full portable/static cross-package/SQL/RCC/client/distribution matrix remains open",
+    "Reviewed admission delegates tested but not yet wired as managed enqueue/retry operations",
+    "Generic producer/queue policy and default permissions not implemented",
+    "Native cancelled/lost-lease projection fails closed rather than exposing inspectable states",
+    "Actual Codex401 and ChatGPTE1 remain operator gates; Dakota STOP, celld NO-GO"
+  ],
+  "documentation": {
+    "docs/skills/work-items.md": "Independent claim/Attempt counters, joined bootstrap no-grant semantics and canonical empty log pages",
+    "docs/program/actions-next-managed-work-items-132.md": "Joined Linux Runtime identity/SQL and bounded finalized native logs with explicit limits"
+  },
+  "upstream_disposition": "none; local Actions defects; prior RCC report remains draft only",
+  "rollback": "Revert branch commits before release; no schema migration or production resource change. Existing immutable Run/Attempt/output records are retained. Candidate a24 has not been built; published 1.0.4/0.4.4 unchanged."
+}

@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import base64
 import sqlite3
+import sys
 from concurrent.futures import ThreadPoolExecutor
 from contextlib import contextmanager
 from pathlib import Path
@@ -51,6 +52,7 @@ from actions.server.run_outputs.types import Actor
 
 pytestmark = review_fixtures.pytestmark
 reviewed = review_fixtures.reviewed
+pytest_plugins = ["action_server_tests.foundry_fixtures"]
 
 
 class _SQLiteInvoiceProvider:
@@ -187,7 +189,7 @@ def test_capabilities_only_advertise_implemented_operations(reviewed):
     assert Operation.QUEUES in capabilities.operations
     assert Operation.DECIDE in capabilities.operations
     assert Operation.ENQUEUE not in capabilities.operations
-    assert Operation.LOGS not in capabilities.operations
+    assert Operation.LOGS in capabilities.operations
     assert Operation.RETRY not in capabilities.operations
     assert Operation.CLAIM not in capabilities.operations
     assert Operation.COMPLETE not in capabilities.operations
@@ -253,6 +255,296 @@ def test_capabilities_require_read_before_scope_lookup(
     monkeypatch.setattr(service, "_known_scopes", unexpected_scope_lookup)
     with pytest.raises(ManagedError, match="forbidden"):
         service.capabilities(_caller(actor), requested_workspace)
+
+
+@pytest.mark.parametrize("expired_claim_before_admission", [False, True])
+def test_native_work_item_run_projects_pinned_run_logs_and_artifacts(
+    reviewed, foundry_package_store, expired_claim_before_admission
+):
+    import subprocess
+
+    from action_server_tests.test_activated_reviewed_execution import (
+        adapter,
+        release,
+        setup_activated,
+    )
+
+    from actions.server.run_outputs.types import output_id_from_handle
+
+    case = setup_activated(reviewed, foundry_package_store)
+    # Exercise the same package-aware Run resolver used by the production host.
+    # The generic invoice fixture intentionally has no package schema authority.
+    case.reviews.outputs = case.outputs
+    case.reviews.queries.outputs = case.outputs
+    release(case)
+    approved = case.reviews.decide(case.actor, case.scope, case.proposal, "approve")
+    if expired_claim_before_admission:
+        first_claim = case.reviews.queue(case.scope).reserve_item_fenced(
+            approved.work_item_id, str(uuid4()), lease_seconds=30
+        )
+        with case.db.transaction():
+            case.db.update_by_id(
+                FencedWorkItem, first_claim.item_id, {"claim_deadline_ms": "0"}
+            )
+    selected = adapter(case)
+    ticket = selected.dispatch(case.actor, case.scope, "run", case.proposal)
+    assert ticket.claim.epoch == (2 if expired_claim_before_admission else 1)
+    assert ticket.fence.epoch == 1
+    owner = selected.resume(case.actor, ticket)
+    db, reviews, actor = case.db, case.reviews, case.actor
+    queue = _queue(reviews, case.scope)
+    policy = _Policy(queue.workspace_id.root)
+    policy.grant(actor, Permission.READ)
+    service = _service(reviewed, policy)
+
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            "import sys; print('captured stdout'); print('captured stderr', file=sys.stderr)",
+        ],
+        check=True,
+        capture_output=True,
+    )
+    output_service = owner.outputs(actor, ticket)
+    artifact_names = [
+        "generated-action-result.json",
+        "rcc-stdout.log",
+        "rcc-stderr.log",
+    ]
+    artifacts = [
+        output_service.stage(
+            ticket.fence,
+            [b'{"ok":true}\n'],
+            name="generated-action-result.json",
+            media_type="application/json",
+            retention_seconds=300,
+        ),
+        output_service.stage(
+            ticket.fence,
+            [completed.stdout],
+            name="rcc-stdout.log",
+            media_type="application/octet-stream",
+            retention_seconds=300,
+        ),
+        output_service.stage(
+            ticket.fence,
+            [completed.stderr],
+            name="rcc-stderr.log",
+            media_type="application/octet-stream",
+            retention_seconds=300,
+        ),
+    ]
+    output_service.publish(
+        actor,
+        ticket.fence,
+        artifacts,
+        {
+            "version": "actions.generated-rcc-execution/v1",
+            "mode": "work-items",
+            "claim": ticket.claim.model_dump(),
+            "publicationFence": ticket.fence.model_dump(),
+        },
+    )
+    item = _run_in_worker_thread(
+        lambda: service.call(
+            _caller(actor),
+            Inspect(operation="items.get", queue=queue, item_id=ticket.claim.item_id),
+        )
+    )["item"]
+    assert item["run_ids"] == [ticket.fence.run_id]
+    assert item["business_state"] == "completed"
+
+    with db.transaction():
+        db.update_by_id(
+            RunOutput,
+            output_id_from_handle(ticket.proposal.binding.handle),
+            {"expires_ms": "0"},
+        )
+
+    run = service.call(
+        _caller(actor),
+        Inspect(operation="runs.get", queue=queue, run_id=ticket.fence.run_id),
+    )["run"]
+    assert run["id"] == ticket.fence.run_id
+    assert run["snapshot"]["deployment"] == queue.deployment.model_dump(mode="json")
+    assert run["state"] == "succeeded"
+    assert run["artifacts"] == []  # READ alone does not grant artifact access.
+
+    logs = _run_in_worker_thread(
+        lambda: service.call(
+            _caller(actor),
+            Inspect(
+                operation="runs.logs", queue=queue, run_id=ticket.fence.run_id, limit=1
+            ),
+        )
+    )
+    assert logs["lines"] == [{"offset": 0, "text": "[stdout] captured stdout"}]
+    assert logs["next_cursor"] == "1"
+    next_logs = service.call(
+        _caller(actor),
+        Inspect(
+            operation="runs.logs",
+            queue=queue,
+            run_id=ticket.fence.run_id,
+            cursor=logs["next_cursor"],
+            limit=1,
+        ),
+    )
+    assert next_logs["lines"] == [{"offset": 1, "text": "[stderr] captured stderr"}]
+    assert next_logs["next_cursor"] is None
+
+    artifact_policy = _Policy(queue.workspace_id.root)
+    artifact_policy.grant(actor, Permission.READ, Permission.ARTIFACT_READ)
+    artifact_service = _service(reviewed, artifact_policy)
+    artifact_run = artifact_service.call(
+        _caller(actor),
+        Inspect(operation="runs.get", queue=queue, run_id=ticket.fence.run_id),
+    )["run"]
+    assert {artifact["handle"] for artifact in artifact_run["artifacts"]} == {
+        artifact.handle for artifact in artifacts
+    }
+    result_ref = next(
+        artifact
+        for name, artifact in zip(artifact_names, artifacts, strict=True)
+        if name == "generated-action-result.json"
+    )
+    result_chunk = artifact_service.call(
+        _caller(actor),
+        Inspect(
+            operation="artifacts.read",
+            queue=queue,
+            artifact_handle=result_ref.handle,
+            limit=100,
+        ),
+    )
+    assert base64.b64decode(result_chunk["data_base64"]) == b'{"ok":true}\n'
+
+
+@pytest.mark.parametrize(
+    "changed_fence",
+    [
+        None,
+        "work_item_epoch",
+        "attempt_epoch",
+        "run_pin_epoch",
+        "work_item_owner",
+        "work_item_cancel",
+        "attempt_expiry",
+        "work_item_expiry",
+    ],
+)
+def test_native_projection_checks_independent_claim_and_attempt_fences(
+    reviewed, foundry_package_store, changed_fence
+):
+    from action_server_tests.test_activated_reviewed_execution import (
+        adapter,
+        release,
+        setup_activated,
+    )
+
+    from actions.server.run_outputs.models import RunAttempt, RunPin
+
+    case = setup_activated(reviewed, foundry_package_store)
+    case.reviews.outputs = case.outputs
+    case.reviews.queries.outputs = case.outputs
+    release(case)
+    approved = case.reviews.decide(case.actor, case.scope, case.proposal, "approve")
+    first_claim = case.reviews.queue(case.scope).reserve_item_fenced(
+        approved.work_item_id, str(uuid4()), lease_seconds=30
+    )
+    # A claimant can expire before it admits any Run. The next Work Item
+    # claim is epoch 2 while its first native Run Attempt is still epoch 1.
+    with case.db.transaction():
+        case.db.update_by_id(
+            FencedWorkItem, first_claim.item_id, {"claim_deadline_ms": "0"}
+        )
+    ticket = adapter(case).dispatch(case.actor, case.scope, "run", case.proposal)
+    assert ticket.claim.epoch == first_claim.epoch + 1 == 2
+    assert ticket.fence.epoch == 1
+    queue = _queue(case.reviews, case.scope)
+    policy = _Policy(queue.workspace_id.root)
+    policy.grant(case.actor, Permission.READ)
+    service = _service(reviewed, policy)
+    command = Inspect(operation="runs.get", queue=queue, run_id=ticket.fence.run_id)
+    before = service.call(_caller(case.actor), command)["run"]
+    assert before["id"] == ticket.fence.run_id
+    assert before["state"] == "running"
+    assert before["attempts"][0]["epoch"] == ticket.fence.epoch
+    if changed_fence is None:
+        return
+
+    changes = {
+        "work_item_epoch": (FencedWorkItem, ticket.claim.item_id, {"claim_epoch": 3}),
+        "attempt_epoch": (RunAttempt, ticket.fence.attempt_id, {"epoch": 2}),
+        "run_pin_epoch": (RunPin, ticket.fence.run_id, {"epoch": 2}),
+        "work_item_owner": (
+            FencedWorkItem,
+            ticket.claim.item_id,
+            {"claim_owner": str(uuid4())},
+        ),
+        "work_item_cancel": (
+            FencedWorkItem,
+            ticket.claim.item_id,
+            {"cancel_requested": 1},
+        ),
+        "attempt_expiry": (
+            RunAttempt,
+            ticket.fence.attempt_id,
+            {"lease_deadline_ms": "0"},
+        ),
+        "work_item_expiry": (
+            FencedWorkItem,
+            ticket.claim.item_id,
+            {"claim_deadline_ms": "0"},
+        ),
+    }
+    model, identity, values = changes[changed_fence]
+    with case.db.transaction():
+        case.db.update_by_id(model, identity, values)
+    with pytest.raises(ManagedError, match="stale_claim"):
+        service.call(_caller(case.actor), command)
+
+
+def test_native_run_read_revocation_precedes_retained_input_validation(
+    reviewed, foundry_package_store, monkeypatch
+):
+    from action_server_tests.test_activated_reviewed_execution import (
+        adapter,
+        release,
+        setup_activated,
+    )
+
+    import actions.server.managed_work_items.native_runs as native_runs
+    from actions.server.run_outputs.service import RunOutputControlPlane
+
+    case = setup_activated(reviewed, foundry_package_store)
+    case.reviews.outputs = case.outputs
+    case.reviews.queries.outputs = case.outputs
+    release(case)
+    case.reviews.decide(case.actor, case.scope, case.proposal, "approve")
+    ticket = adapter(case).dispatch(case.actor, case.scope, "run", case.proposal)
+    actor, reviews = case.actor, case.reviews
+    queue = _queue(reviews, case.scope)
+    policy = _Policy(queue.workspace_id.root)
+    policy.grant(actor, Permission.READ)
+    service = _service(reviewed, policy)
+    calls = []
+
+    def record_retained_input_check(run, proposal):
+        calls.append(run.id)
+
+    monkeypatch.setattr(
+        native_runs, "require_reviewed_run_inputs", record_retained_input_check
+    )
+    RunOutputControlPlane(case.db).revoke(actor, queue.deployment)
+
+    with pytest.raises(ManagedError, match="forbidden"):
+        service.call(
+            _caller(actor),
+            Inspect(operation="runs.get", queue=queue, run_id=ticket.fence.run_id),
+        )
+    assert calls == []
 
 
 def test_reviewed_sql_queue_listing_decision_and_restart_receipt(reviewed):
