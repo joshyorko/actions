@@ -23,12 +23,12 @@ def checker():
     return module
 
 
-def wheel_fixture(tmp_path, mutation=None):
+def wheel_fixture(tmp_path, mutation=None, body=b"VALUE = 1\n"):
     prefix = "actions_runtime-1.1.0a38.dist-info/"
     members = {
         prefix
         + "METADATA": b"Name: actions-runtime\nVersion: 1.1.0a38\nRequires-Dist: sample>=1\n",
-        "actions/server/example.py": b"VALUE = 1\n",
+        "actions/server/example.py": body,
     }
     rows = []
     for name, body in members.items():
@@ -73,6 +73,40 @@ def test_exact_wheel_inventory_and_dependency_declarations(checker, tmp_path):
         checker.qualify(wheel, "0" * 64, "1.1.0a38")
     with pytest.raises(ValueError, match="identity"):
         checker.qualify(wheel, digest, "1.0.4")
+
+
+def test_path_replacement_cannot_mix_digest_and_inventory(
+    checker, tmp_path, monkeypatch
+):
+    wheel, digest = wheel_fixture(tmp_path)
+    replacement_dir = tmp_path / "replacement"
+    replacement_dir.mkdir()
+    replacement, replacement_digest = wheel_fixture(
+        replacement_dir, body=b"VALUE = 2\n"
+    )
+    assert digest != replacement_digest
+    replacement_bytes = replacement.read_bytes()
+    read_bytes = Path.read_bytes
+    swapped = []
+
+    def replace_after_read(path):
+        captured = read_bytes(path)
+        if path == wheel and not swapped:
+            wheel.write_bytes(replacement_bytes)
+            swapped.append(True)
+        return captured
+
+    monkeypatch.setattr(Path, "read_bytes", replace_after_read)
+    result = checker.qualify(wheel, digest, "1.1.0a38")
+    assert swapped == [True]
+    assert hashlib.sha256(read_bytes(wheel)).hexdigest() == replacement_digest
+    member = next(
+        item
+        for item in result["inventory"]
+        if item["path"] == "actions/server/example.py"
+    )
+    assert result["wheel_sha256"] == digest
+    assert member["sha256"] == hashlib.sha256(b"VALUE = 1\n").hexdigest()
 
 
 @pytest.mark.parametrize(

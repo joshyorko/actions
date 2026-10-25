@@ -13,10 +13,12 @@ from pathlib import Path, PurePosixPath
 
 
 def qualify(wheel, expected_sha256, expected_version):
-    digest = hashlib.sha256(wheel.read_bytes()).hexdigest()
+    wheel_bytes = wheel.read_bytes()
+    digest = hashlib.sha256(wheel_bytes).hexdigest()
     if digest != expected_sha256:
         raise ValueError("selected wheel digest mismatch")
-    with zipfile.ZipFile(wheel) as archive:
+    # Hash and parse the same captured bytes, never reopen a mutable path.
+    with zipfile.ZipFile(io.BytesIO(wheel_bytes)) as archive:
         members = archive.infolist()
         if len(members) > 100_000 or sum(m.file_size for m in members) > 1024**3:
             raise ValueError("wheel inventory exceeds bounds")
