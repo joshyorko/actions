@@ -18,6 +18,13 @@ from actions.server._local_provider_setup import verify_committed_catalog
 from actions.server.data_queries.sealed_duckdb import DuckDBSealedScan
 from actions.server.data_queries.sealed_postgres import PostgreSQLSealedScan
 from actions.server.deployments.ids import ProviderProfileRevisionRef
+from actions.server.foundry.knowledge_host import (
+    KNOWLEDGE_HOSTS,
+    KnowledgeHostSelection,
+    require_definition,
+    versions_store,
+)
+from actions.server.foundry.knowledge_models import KnowledgeCollectionRevision
 from actions.server.foundry.models import FoundryAudit, FoundryRequest
 from actions.server.foundry.provider_catalog import (
     PrivateProviderStore,
@@ -162,6 +169,16 @@ class ConfiguredProviderExecution:
                 or len(set(operations)) != len(operations)
             ):
                 raise ValueError("bounded selected operations required")
+            if isinstance(config.host, KNOWLEDGE_HOSTS):
+                if entry.descriptor.kind != "knowledge" or any(
+                    name not in {op.name for op in entry.descriptor.operations}
+                    for name in operations
+                ):
+                    raise ValueError("selected Knowledge operation unavailable")
+                importlib.import_module(
+                    "duckdb" if config.host.adapter.startswith("duckdb.") else "psycopg"
+                )
+                return
             if isinstance(config.host, DuckDBHost):
                 modules = {"duckdb"}
             elif isinstance(config.host, PostgreSQLHost):
@@ -204,30 +221,58 @@ class ConfiguredProviderExecution:
                 raise ValueError("private provider catalog identity changed")
 
     def pin_sql(
-        self, actor: Actor, reference: ProviderProfileRevisionRef
+        self,
+        actor: Actor,
+        reference: ProviderProfileRevisionRef,
+        *,
+        manage: bool = False,
     ) -> tuple[SQLRecordPin, ...]:
         entry = self.entry(reference)
         self.authorization.require_reference(actor, reference, "provider.inspect")
-        self.authorization.require_reference(actor, reference, "data.read")
+        knowledge_pins: tuple[SQLRecordPin, ...] = ()
+        if entry.descriptor.kind == "knowledge":
+            _, definition = require_definition(
+                self.db, self.registry, actor, self.configs[reference], manage=manage
+            )
+            knowledge_pins = (
+                SQLRecordPin.capture(
+                    self.db, KnowledgeCollectionRevision, "id=?", (definition.id,)
+                ),
+                SQLRecordPin.capture(
+                    self.db, FoundryRequest, "id=?", (definition.foundry_request_id,)
+                ),
+                SQLRecordPin.capture(
+                    self.db,
+                    FoundryAudit,
+                    "foundry_request_id=?",
+                    (definition.foundry_request_id,),
+                ),
+            )
+        else:
+            self.authorization.require_reference(actor, reference, "data.read")
         descriptor, state = self.registry._read(reference)
         if descriptor != entry.descriptor or not state.enabled:
             raise ValueError("selected provider unavailable")
         provider_rows = self.db.all(
             FoundryProviderRevision, where="id=?", values=[_ref_id(reference)]
         )
-        return self.provenance + (
-            SQLRecordPin.capture(
-                self.db, FoundryProviderRevision, "id=?", (_ref_id(reference),)
-            ),
-            SQLRecordPin.capture(
-                self.db,
-                FoundrySourceRevision,
-                "id=?",
-                (provider_rows[0].foundry_source_revision_id,),
-            ),
-            SQLRecordPin.capture(
-                self.db, FoundryProviderAvailability, "id=?", (_ref_id(reference),)
-            ),
+        return (
+            self.provenance
+            + knowledge_pins
+            + (
+                SQLRecordPin.capture(
+                    self.db, FoundryProviderRevision, "id=?", (_ref_id(reference),)
+                ),
+                SQLRecordPin.capture(
+                    self.db,
+                    FoundrySourceRevision,
+                    "id=?",
+                    (provider_rows[0].foundry_source_revision_id,),
+                ),
+                SQLRecordPin.capture(
+                    self.db, FoundryProviderAvailability, "id=?", (_ref_id(reference),)
+                ),
+            )
         )
 
     def recheck_sql(
@@ -235,12 +280,57 @@ class ConfiguredProviderExecution:
         actor: Actor,
         reference: ProviderProfileRevisionRef,
         pins: tuple[SQLRecordPin, ...],
+        *,
+        manage: bool = False,
     ) -> None:
         """No filesystem, engine, catalog reconstruction or secret lookup."""
         for pin in pins:
             pin.recheck(self.db)
         self.authorization.require_reference(actor, reference, "provider.inspect")
-        self.authorization.require_reference(actor, reference, "data.read")
+        if self.entry(reference).descriptor.kind == "knowledge":
+            require_definition(
+                self.db, self.registry, actor, self.configs[reference], manage=manage
+            )
+        else:
+            self.authorization.require_reference(actor, reference, "data.read")
+
+    @contextmanager
+    def open_knowledge(
+        self, actor: Actor, reference: ProviderProfileRevisionRef, *, manage=False
+    ):
+        self.check_current()
+        entry = self.entry(reference)
+        if entry.descriptor.kind != "knowledge":
+            raise ValueError("selected provider is not Knowledge")
+        with self.db.connect(), PrivateProviderStore(
+            self.datadir, self.owner, self.workspace
+        ) as store:
+            pins = self.pin_sql(actor, reference, manage=manage)
+            config = store.config(entry.config_digest)
+            if config != self.configs[reference]:
+                raise ValueError("selected private configuration changed")
+            authority, _ = require_definition(
+                self.db, self.registry, actor, config, manage=manage
+            )
+            secrets = (
+                _SelectedSecrets(store, config.host)
+                if hasattr(config.host, "password")
+                else None
+            )
+            with versions_store(
+                self.datadir, config, secrets, manage=manage
+            ) as versions:
+                yield KnowledgeHostSelection(
+                    config.host.revision,
+                    reference,
+                    entry.source,
+                    self.blobs,
+                    {item.seal.digest: item.seal for item in entry.seals},
+                    versions,
+                    authority,
+                )
+            self.recheck_sql(actor, reference, pins, manage=manage)
+            self.check_current()
 
     @contextmanager
     def open_provider(

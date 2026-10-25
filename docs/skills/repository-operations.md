@@ -5267,15 +5267,60 @@ SQL transaction; local audit failure rolls back both, and exact replay rechecks
 current source/collection authority. Changed payloads cannot reuse a request ID.
 The command returns `metadata-only`: it creates no host configuration, ingestion
 Run, Task, provider database, scheduler, or search readiness. Raw Knowledge source
-seals are retained metadata; executable `CatalogEntry` and the source/v2 decoder
-gate still reject them. Data source/v1 remains refused by local import.
+seals remain rejected by Data `CatalogEntry` and its source/v2 decoder gate;
+Knowledge hosts use a separate `KnowledgeCatalogEntry`. Data source/v1 remains
+refused by local import.
 
 These operations retain the existing stopped-Runtime mutex, private-file and
 saved-owner restrictions and refuse a shared PostgreSQL control plane. The two
 new optional request fields are omitted when absent, preserving serialized v1
 requests and fingerprints for every existing operation. Fresh-process CLI tests
 prove retained definition setup, not installed ingestion or generated search
-consumption; ordinary host selection and typed Task/logical joins remain gates.
+consumption. Host selection has its own operator boundary below; typed Task/logical
+joins and installed acceptance still require separate evidence.
+
+
+After definition registration, configure an ordinary Knowledge versions host with
+`configure-host` and `config.schema_version="actions.local-provider-config/v2"`.
+The host adapter is exactly `duckdb.knowledge-versions/v1` or
+`postgresql.knowledge-versions/v1`, with `host.revision` equal to the registered
+`KnowledgeRevisionRef`. The top-level provider and source revision must match that
+definition's canonical source-provider identity. Knowledge entries require catalog
+v2; Data-only v1 configuration/catalog serialization, digests, and old local request
+fingerprints remain unchanged. Knowledge configure/recovery require current
+collection read/manage, source-provider knowledge.read and provider.inspect, plus
+provider.manage. No grants are inferred from successful registration.
+
+Configuration returns `configured-not-probed`. To create the version tables,
+submit a separate `provision-knowledge-host` request with the exact committed
+`config`. Dry-run checks metadata and live grants without opening an engine;
+apply provisions idempotently and records local Request/Audit after SQL pin and
+grant rechecks. `provisioned-not-ingested` means table provisioning completed,
+not a successful ingestion Run or search readiness. Provider DDL precedes its local
+receipt: an audit/publication failure can leave provisioned tables. Retry the same
+request under current authority; do not claim cross-provider rollback.
+
+DuckDB files are derived from Workspace, provider profile and collection identities
+under the private Runtime datadir's `provider-state/knowledge-versions`; no request,
+Package or query selects a filesystem path. Non-provisioning use refuses absent
+files, symlinks, hard links and nonprivate state. PostgreSQL uses exact pinned
+password/CA versions and verify-full TLS, rejects ambient libpq settings, and
+connects only on explicit store use. It uses the provider's public schema, never
+common control-plane tables; schema/role grants remain the operator's prerequisite.
+Read selections open read-only engine sessions, while ingestion needs collection
+knowledge.manage. Neither startup nor dependency readiness creates directories,
+tables, ingestions, grants, or connections.
+
+`ConfiguredProviderExecution.open_knowledge(actor, provider, manage=False)` yields
+the exact revision, source provider/manifest, digest-keyed retained seals, blob
+provider, version store and canonical definition authority. The ordinary worker
+must derive its Run snapshot separately. Import-only dependency readiness runs
+before admission; SQL pins include provider/source/availability, canonical Knowledge
+definition, and its registration Request/Audit. Final SQL publication rechecks
+those rows and live grants without catalog, blob, engine or secret I/O. The focused
+`test_knowledge_host.py` and `test_knowledge_host_postgres.py` cases prove this host
+boundary using actual DuckDB and owned verify-full PostgreSQL; they do not replace
+installed Task, generated-Python, or full Run publication acceptance.
 
 Configuration commits metadata authorization before CAS pointer publication. The SQL receipt means publication-authorized; only successful pointer publication returns configured-not-probed. Explicit recovery requires current manage permission and rejects absent SQL provenance, changed targets or stale generations. Immutable file writes stage and fsync complete bytes before publication, preserving existing targets; interrupted staging can retry, and cleanup checks its owned inode. These guarantees require the canonical local mutex and exclusion of concurrent same-user filesystem mutation; they are not an adversarial-filesystem claim.
 
@@ -5781,9 +5826,38 @@ binding reconstruction in the ordinary host before those public joins qualify.
 The declaration permits up to 128 source files but the source manifest remains
 limited to 16; this is not evidence of 128-file ingestion. Existing synchronous
 Knowledge adapters remain destructive and are not made immutable by these stores.
-Public Knowledge still requires ordinary host/operator selection and Task wiring,
-input-mapped generated Python consumption, installed paging/export and two-provider
-lifecycle proof. Split provider service and advanced Knowledge remain distinct
+`KnowledgeExecution.prepare_ingestion` factors provider normalization/write and
+provisional output staging from terminal completion. Its frozen issued
+`PreparedKnowledgeIngestion` carries the actual actor/binding/Attempt fence,
+output reference, corpus digest/size, operation ID/name, ReadBudget, immutable
+receipt bytes, and SQL availability/output pins. The `receipt` property decodes
+a fresh dictionary. Keep the preparation alive through publication; issuance is
+process-local and weakly retained, not a durable job or completion record.
+
+Default preparation requires empty actual admitted inputs, uses the Run ID as
+the provider idempotency key and `knowledge-corpus.json` as output name. The
+standalone execute wrapper delegates preparation and preserves its v1 receipt.
+A trusted generated host may pass exactly `mapped_inputs={}` only after verifying
+its artifact-bound empty ingestion mapping; nonempty values and dict subclasses
+are refused. This projection permits unrelated admitted Action inputs but never
+replaces the Run snapshot, fence, or immutable admission payload. Generated hosts
+must supply stable distinct operation IDs and bounded output names per declared
+ingestion to prevent collisions; malformed IDs/names fail before provider write.
+
+`recheck_prepared_ingestion` accepts only the issuing service's same preparation,
+actor and fence. Inside the caller's canonical publication transaction it rechecks
+live Run authority, Knowledge read/manage, source read/inspect, retained definition
+metadata, provider availability and provisional output SQL identity/expiry, and
+cancellation/deadline. It does not call provider describe/read, engines or blob
+I/O; PostgreSQL grant and pinned rows are locked during this check. Preparation
+and recheck never complete the Run. A provider version/provisional output remains
+unsearchable until canonical terminal publication. `_published` still accepts
+only the existing standalone receipt; generated RCC receipt/Task integration
+requires its separate complete validator and is not established by this factor.
+
+Ordinary Knowledge host/operator selection is covered by the separate host tests;
+public Knowledge still requires Task wiring, input-mapped generated Python
+consumption, installed paging/export and two-provider lifecycle proof. Split provider service and advanced Knowledge remain distinct
 outstanding gates. Migration 22 has no downmigration;
 the frozen version 21 status reader reports TOO_NEW, so downgrade requires a
 qualified older snapshot rather than opening the upgraded database.

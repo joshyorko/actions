@@ -108,19 +108,49 @@ class CatalogEntry(_Value):
         return self
 
 
+class KnowledgeCatalogEntry(_Value):
+    kind: Literal["knowledge"] = "knowledge"
+    descriptor: ProviderDescriptor
+    source: SourceManifest
+    seals: tuple[CatalogSeal, ...] = Field(min_length=1, max_length=16)
+    config_digest: str = Field(pattern=r"^sha256:[0-9a-f]{64}$")
+
+    @model_validator(mode="after")
+    def identities(self):
+        require_retained_source(self.source)
+        if (
+            self.source.kind != "knowledge"
+            or self.descriptor.kind != "knowledge"
+            or self.descriptor.source_revision != self.source.revision_id
+        ):
+            raise ValueError("Knowledge catalog source identity differs")
+        expected = {obj.name: (obj.digest, obj.size) for obj in self.source.objects}
+        actual = {item.name: (item.seal.digest, item.seal.size) for item in self.seals}
+        if len(actual) != len(self.seals) or expected != actual:
+            raise ValueError("Knowledge catalog source evidence differs")
+        object.__setattr__(
+            self, "seals", tuple(sorted(self.seals, key=lambda item: item.name))
+        )
+        return self
+
+
 class ProviderCatalog(_Value):
     schema_version: Literal[
-        "actions.local-provider-catalog/v1"
+        "actions.local-provider-catalog/v1", "actions.local-provider-catalog/v2"
     ] = "actions.local-provider-catalog/v1"
     owner: Actor
     workspace: WorkspaceId
     generation: str
     parent_digest: str | None = Field(default=None, pattern=r"^sha256:[0-9a-f]{64}$")
-    entries: tuple[CatalogEntry, ...] = Field(max_length=32)
+    entries: tuple[CatalogEntry | KnowledgeCatalogEntry, ...] = Field(max_length=32)
     _generation = field_validator("generation")(_uuid)
 
     @model_validator(mode="after")
     def identities(self):
+        if self.schema_version == "actions.local-provider-catalog/v1" and any(
+            isinstance(entry, KnowledgeCatalogEntry) for entry in self.entries
+        ):
+            raise ValueError("Knowledge entries require catalog v2")
         keys = [entry.descriptor.reference.model_dump_json() for entry in self.entries]
         if len(set(keys)) != len(keys) or any(
             entry.descriptor.workspace_id != self.workspace for entry in self.entries
@@ -143,7 +173,7 @@ class ProviderCatalog(_Value):
         return (
             "sha256:"
             + hashlib.sha256(
-                b"actions.local-provider-catalog/v1\n" + _bytes(self)
+                (self.schema_version + "\n").encode() + _bytes(self)
             ).hexdigest()
         )
 
@@ -439,6 +469,8 @@ class PrivateProviderStore:
             if (
                 config.provider != entry.descriptor.reference
                 or config.source_revision != entry.source.revision_id
+                or (config.schema_version.endswith("/v2"))
+                != isinstance(entry, KnowledgeCatalogEntry)
             ):
                 raise ValueError("catalog config identity mismatch")
             for item in entry.seals:

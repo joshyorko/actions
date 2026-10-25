@@ -1,0 +1,31 @@
+{
+  "red": {
+    "selected": 112,
+    "passed": 76,
+    "failed": 36,
+    "errors": 0,
+    "skipped": 0
+  },
+  "first": {
+    "selected": 112,
+    "passed": 112,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "final": {
+    "selected": 132,
+    "passed": 124,
+    "failed": 8,
+    "errors": 0,
+    "skipped": 0
+  },
+  "final-fixed": {
+    "selected": 132,
+    "passed": 132,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "overlapping_runs": true
+}

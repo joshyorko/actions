@@ -35,6 +35,11 @@ from actions.server.deployments.provider_registry import (
     digest,
 )
 from actions.server.foundry.knowledge_authority import KnowledgeRevisionAuthority
+from actions.server.foundry.knowledge_host import (
+    KNOWLEDGE_HOSTS,
+    require_definition,
+    versions_store,
+)
 from actions.server.foundry.models import (
     FoundryAccessGrant,
     FoundryAudit,
@@ -45,6 +50,7 @@ from actions.server.foundry.provider_catalog import (
     CatalogIntent,
     CatalogPointer,
     CatalogSeal,
+    KnowledgeCatalogEntry,
     PrivateProviderStore,
     ProviderCatalog,
     SourceSealRecord,
@@ -92,6 +98,7 @@ class LocalProviderRequest(_Value):
         "recover-intent",
         "set-enabled",
         "register-knowledge-definition",
+        "provision-knowledge-host",
     ]
     request_id: str = Field(min_length=1, max_length=128)
     workspace_id: WorkspaceId
@@ -152,6 +159,7 @@ class LocalProviderRequest(_Value):
             "import-source": {"source", "files"},
             "register-revision": {"descriptor"},
             "configure-host": {"config", "secrets", "expected_catalog"},
+            "provision-knowledge-host": {"config"},
             "recover-intent": {"intent_id"},
             "set-enabled": {"provider", "expected_generation", "enabled"},
             "register-knowledge-definition": {"provider", "knowledge_definition"},
@@ -197,7 +205,10 @@ class LocalProviderRequest(_Value):
             raise ValueError("exact source and private imports required")
         if self.operation == "register-revision" and self.descriptor is None:
             raise ValueError("exact descriptor required")
-        if self.operation == "configure-host" and self.config is None:
+        if (
+            self.operation in ("configure-host", "provision-knowledge-host")
+            and self.config is None
+        ):
             raise ValueError("exact private configuration required")
         if self.operation == "recover-intent" and self.intent_id is None:
             raise ValueError("explicit intent identity required")
@@ -548,6 +559,27 @@ def _import_source(
     return record
 
 
+def _catalog_entry(config, descriptor, source):
+    cls = (
+        KnowledgeCatalogEntry
+        if isinstance(config.host, KNOWLEDGE_HOSTS)
+        else CatalogEntry
+    )
+    return cls(
+        descriptor=descriptor,
+        source=source.source,
+        seals=source.seals,
+        config_digest=config.config_digest,
+    )
+
+
+def _knowledge_configuration(db, auth, actor, config, evidence):
+    if isinstance(config.host, KNOWLEDGE_HOSTS):
+        require_definition(
+            db, SqlProviderRegistry(db, auth, evidence), actor, config, manage=True
+        )
+
+
 def _validate_intent_target(
     db: Database,
     store: PrivateProviderStore,
@@ -570,14 +602,7 @@ def _validate_intent_target(
     old = list(store.catalog(intent.expected).entries) if intent.expected else []
     expected = [entry for entry in old if entry.descriptor.reference != config.provider]
     source = store.source(config.source_revision)
-    expected.append(
-        CatalogEntry(
-            descriptor=_metadata(db, config.provider),
-            source=source.source,
-            seals=source.seals,
-            config_digest=config.config_digest,
-        )
-    )
+    expected.append(_catalog_entry(config, _metadata(db, config.provider), source))
     target = store.catalog(intent.target)
     if target.parent_digest != (
         intent.expected.digest if intent.expected else None
@@ -606,6 +631,7 @@ def _configured_intent(
         raise ValueError("configuration source identity differs")
     record = store.source(config.source_revision)
     evidence = _evidence(record, blobs)
+    _knowledge_configuration(db, auth, actor, config, evidence)
     operation_id = _key(actor, workspace, request.request_id)
     if dry_run:
         current = store.current()
@@ -637,18 +663,14 @@ def _configured_intent(
                 store.import_secret(
                     secret.reference, b"".join(_stream(Path(secret.path), 65536))
                 )
-        key = store.stage_config(config)
+        store.stage_config(config)
         entries = list(store.catalog(current).entries) if current else []
         entries = [entry for entry in entries if entry.descriptor.reference != ref]
-        entries.append(
-            CatalogEntry(
-                descriptor=descriptor,
-                source=record.source,
-                seals=record.seals,
-                config_digest=key,
-            )
-        )
+        entries.append(_catalog_entry(config, descriptor, record))
         catalog = ProviderCatalog(
+            schema_version="actions.local-provider-catalog/v2"
+            if any(isinstance(entry, KnowledgeCatalogEntry) for entry in entries)
+            else "actions.local-provider-catalog/v1",
             owner=actor,
             workspace=workspace,
             generation=operation_id,
@@ -687,6 +709,7 @@ def _configured_intent(
     }
     with db.transaction():
         auth.require_reference(actor, ref, "provider.manage")
+        _knowledge_configuration(db, auth, actor, config, evidence)
         prior = _receipt(db, actor, workspace, request)
         if prior is None:
             _record(
@@ -700,6 +723,7 @@ def _configured_intent(
     # SQL commit precedes pointer publication. Replay cannot republish over a newer pointer.
     verify_committed_catalog(db, store, intent.target)
     auth.require_reference(actor, ref, "provider.manage")
+    _knowledge_configuration(db, auth, actor, config, evidence)
     store.publish(intent)
     return result
 
@@ -796,12 +820,19 @@ def _recover(
     auth.require_reference(actor, ref, "provider.manage")
     catalog, evidence = store.reconstruct(intent.target, blobs)
     registry = SqlProviderRegistry(db, auth, evidence)
+    selected_config = next(
+        store.config(entry.config_digest)
+        for entry in catalog.entries
+        if entry.descriptor.reference == ref
+    )
+    _knowledge_configuration(db, auth, actor, selected_config, evidence)
     for entry in catalog.entries:
         if registry._read(entry.descriptor.reference)[0] != entry.descriptor:
             raise ValueError("catalog retained target differs")
     if not dry_run:
         with db.transaction():
             auth.require_reference(actor, ref, "provider.manage")
+            _knowledge_configuration(db, auth, actor, selected_config, evidence)
             if _receipt(db, actor, workspace, request) is None:
                 _record(
                     db,
@@ -816,6 +847,7 @@ def _recover(
                     ref.revision_id.root,
                 )
         auth.require_reference(actor, ref, "provider.manage")
+        _knowledge_configuration(db, auth, actor, selected_config, evidence)
         store.publish(intent)
     return {
         "operation": "recover-intent",
@@ -824,6 +856,55 @@ def _recover(
         if dry_run
         else "configured-not-probed",
     }
+
+
+def _provision_knowledge(db, root, blobs, actor, workspace, request, auth, dry_run):
+    # Imported only at execution to keep the ordinary metadata loader acyclic.
+    from actions.server.foundry.provider_execution import (
+        ConfiguredProviderExecution,
+        _SelectedSecrets,
+    )
+
+    config = request.config
+    if config is None or not isinstance(config.host, KNOWLEDGE_HOSTS):
+        raise ValueError("explicit Knowledge configuration required")
+    execution = ConfiguredProviderExecution(db, root, blobs)
+    if execution.configs.get(config.provider) != config:
+        raise ValueError("provisioning requires exact committed configuration")
+    auth.require_reference(actor, config.provider, "provider.manage")
+    pins = execution.pin_sql(actor, config.provider, manage=True)
+    result = {
+        "operation": request.operation,
+        "provider": config.provider.model_dump(mode="json"),
+        "revision": config.host.revision.model_dump(mode="json"),
+        "readiness": "not-probed" if dry_run else "provisioned-not-ingested",
+    }
+    if dry_run:
+        return result
+    _receipt(db, actor, workspace, request)
+    # Provider DDL is explicit, idempotent and outside the common SQL transaction.
+    # Failure after DDL may leave tables; retry rechecks all grants and provisions
+    # the same host. It never claims ingestion or distributed rollback.
+    with PrivateProviderStore(root, actor, workspace) as store:
+        secrets = (
+            _SelectedSecrets(store, config.host)
+            if hasattr(config.host, "password")
+            else None
+        )
+        with versions_store(root, config, secrets, provision=True) as versions:
+            versions.provision()
+    execution.check_current()
+    with db.transaction():
+        execution.recheck_sql(actor, config.provider, pins, manage=True)
+        auth.require_reference(actor, config.provider, "provider.manage")
+        prior = _receipt(db, actor, workspace, request)
+        if prior is None:
+            _record(
+                db, actor, workspace, request, result, config.host.revision.revision_id
+            )
+        elif json.loads(prior.result_json) != result:
+            raise ValueError("Knowledge provisioning receipt differs")
+    return result
 
 
 def run_local_provider_setup(
@@ -1078,6 +1159,10 @@ def run_local_provider_setup(
                                     reference.revision_id,
                                 )
                             return knowledge_result
+                    if request.operation == "provision-knowledge-host":
+                        return _provision_knowledge(
+                            db, root, blobs, actor, workspace, request, auth, dry_run
+                        )
                     if request.operation == "configure-host":
                         return _configured_intent(
                             db, store, blobs, actor, workspace, request, auth, dry_run

@@ -11,6 +11,7 @@ import json
 import threading
 from dataclasses import dataclass
 from typing import Literal, Mapping, Protocol
+from weakref import WeakValueDictionary
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -30,12 +31,17 @@ from actions.server.data_queries.sealed_sources import (
 from actions.server.deployments.ids import ProviderProfileRevisionRef
 from actions.server.deployments.provider_registry import SourceManifest
 from actions.server.foundry.knowledge_authority import KnowledgeRevisionAuthority
+from actions.server.foundry.models import FoundryAccessGrant
+from actions.server.foundry.provider_execution import SQLRecordPin
+from actions.server.foundry.provider_models import FoundryProviderAvailability
+from actions.server.foundry.provider_registry import _ref_id
 from actions.server.run_outputs.filesystem import FilesystemOutputProvider
 from actions.server.run_outputs.models import RunAttempt, RunOutput, RunPin
 from actions.server.run_outputs.service import (
     AccessDenied,
     RunOutputService,
     _lock_workspace,
+    _now,
     _one,
     _transaction,
 )
@@ -43,6 +49,7 @@ from actions.server.run_outputs.types import (
     Actor,
     AttemptFence,
     ExecutionSnapshot,
+    OutputRef,
     SealReceipt,
     output_id_from_handle,
 )
@@ -90,6 +97,33 @@ class KnowledgeExecutionBinding:
     operation: Literal["ingest", "search"]
 
 
+@dataclass(frozen=True, eq=False)
+class PreparedKnowledgeIngestion:
+    """Issued nonterminal staging; only canonical publication confers readiness.
+
+    Receipt bytes are immutable; the receipt property returns a fresh dict.
+    Keep this value alive until publication/rejection. No durable job is created.
+    """
+
+    actor: Actor
+    binding: KnowledgeExecutionBinding
+    fence: AttemptFence
+    output: OutputRef
+    corpus_digest: str
+    corpus_size: int
+    operation_id: str
+    output_name: str
+    input_mapping_applied: bool
+    budget: ReadBudget
+    receipt_json: bytes
+    provider_pin: SQLRecordPin
+    output_pin: SQLRecordPin
+
+    @property
+    def receipt(self) -> dict:
+        return json.loads(self.receipt_json)
+
+
 class KnowledgeExecution:
     def __init__(
         self,
@@ -100,6 +134,9 @@ class KnowledgeExecution:
         if outputs.db is not authority.db:
             raise TypeError("Knowledge and Run authority must share common SQL")
         self.outputs, self.authority, self.db = outputs, authority, outputs.db
+        self._prepared: WeakValueDictionary[
+            int, PreparedKnowledgeIngestion
+        ] = WeakValueDictionary()
         self.bindings: dict[str, KnowledgeExecutionBinding] = {}
         for binding in bindings:
             key = snapshot_key(binding.snapshot)
@@ -170,17 +207,75 @@ class KnowledgeExecution:
                 publication_budget.check()
                 self.outputs.publish(actor, fence, [output], result)
             return output.handle
-        if inputs != {}:
+        prepared = self.prepare_ingestion(actor, fence, cancelled)
+        with _transaction(self.db):
+            self.recheck_prepared_ingestion(actor, fence, prepared)
+            self.outputs.publish(actor, fence, [prepared.output], prepared.receipt)
+        return prepared.output.handle
+
+    def prepare_ingestion(
+        self,
+        actor: Actor,
+        fence: AttemptFence,
+        cancelled: threading.Event,
+        *,
+        operation_id: str | None = None,
+        output_name: str = "knowledge-corpus.json",
+        mapped_inputs: dict | None = None,
+    ) -> PreparedKnowledgeIngestion:
+        """Stage provider/output bytes under an existing admission, never complete it.
+
+        Generated hosts must choose stable distinct operation IDs/output names
+        for each declared ingestion. Defaults preserve standalone v1 behavior.
+        mapped_inputs={} is a trusted host seam only after artifact-verified
+        projection; it does not replace the actual admitted snapshot or fence.
+        """
+        actor, fence = Actor.model_validate(actor), AttemptFence.model_validate(fence)
+        operation_id = fence.run_id if operation_id is None else operation_id
+        if (
+            type(operation_id) is not str  # noqa: E721 -- reject behavior-overriding subclasses
+            or not 1 <= len(operation_id) <= 128
+            or not operation_id.isascii()
+            or not all(c.isalnum() or c in "_-" for c in operation_id)
+        ):
+            raise SealedReadRejected("invalid Knowledge operation identity")
+        if (
+            type(output_name) is not str  # noqa: E721 -- reject behavior-overriding subclasses
+            or not 1 <= len(output_name.encode("utf-8")) <= 255
+            or any(c in output_name for c in ("/", "\\", "\x00"))
+            or output_name in {".", ".."}
+        ):
+            raise SealedReadRejected("portable output display name required")
+        snapshot, inputs = self.outputs.execution_context(actor, fence)
+        binding = self._selected(snapshot)
+        if binding.operation != "ingest":
+            raise AccessDenied("Knowledge ingestion binding required")
+        if mapped_inputs is not None:
+            if type(mapped_inputs) is not dict or mapped_inputs:  # noqa: E721 -- exact trusted empty projection only
+                raise SealedReadRejected("exact empty mapped ingestion inputs required")
+        elif inputs != {}:
             raise SealedReadRejected(
                 "Knowledge ingestion accepts no caller source inputs"
             )
         spec = self._authorize(actor, binding, manage=True)
+        with _transaction(self.db):
+            state = _one(
+                self.db, FoundryProviderAvailability, _ref_id(binding.source_provider)
+            )
+            if not state.enabled:
+                raise AccessDenied("Knowledge provider disabled")
+            provider_pin = SQLRecordPin.capture(
+                self.db,
+                FoundryProviderAvailability,
+                "id=?",
+                (_ref_id(binding.source_provider),),
+            )
         budget = ReadBudget(spec.timeout_ms, cancelled)
         corpus = normalize_knowledge(
             spec, binding.source, binding.blobs, binding.seals, budget
         )
         if (
-            binding.versions.put(corpus, operation_id=fence.run_id, budget=budget)
+            binding.versions.put(corpus, operation_id=operation_id, budget=budget)
             != binding.revision
         ):
             raise SealedReadRejected("Knowledge provider returned a different revision")
@@ -188,17 +283,92 @@ class KnowledgeExecution:
         output = self.outputs.stage(
             fence,
             [corpus.raw],
-            name="knowledge-corpus.json",
+            name=output_name,
             media_type="application/json",
             retention_seconds=86400,
         )
-        receipt = self._receipt(binding, fence, output.handle, corpus.digest)
+        budget.check()
         with _transaction(self.db):
-            _lock_workspace(self.db, snapshot.workspace_id)
-            self._authorize(actor, binding, manage=True)
-            budget.check()
-            self.outputs.publish(actor, fence, [output], receipt)
-        return output.handle
+            output_pin = SQLRecordPin.capture(
+                self.db, RunOutput, "id=?", (output.output_id,)
+            )
+        prepared = PreparedKnowledgeIngestion(
+            actor,
+            binding,
+            fence,
+            output,
+            corpus.digest,
+            len(corpus.raw),
+            operation_id,
+            output_name,
+            mapped_inputs is not None,
+            budget,
+            json_bytes(self._receipt(binding, fence, output.handle, corpus.digest)),
+            provider_pin,
+            output_pin,
+        )
+        self._prepared[id(prepared)] = prepared
+        return prepared
+
+    def recheck_prepared_ingestion(
+        self, actor: Actor, fence: AttemptFence, prepared: PreparedKnowledgeIngestion
+    ) -> None:
+        """SQL-only final check; caller owns the encompassing publication transaction.
+
+        Never call providers.describe/_read here: they verify retained blob bytes.
+        Current grants, immutable definition SQL and issued availability/output
+        pins replace provider/file I/O at the final canonical publication boundary.
+        """
+        if (
+            type(prepared) is not PreparedKnowledgeIngestion
+            or self._prepared.get(id(prepared)) is not prepared
+            or actor != prepared.actor
+            or fence != prepared.fence
+        ):
+            raise SealedReadRejected("unissued or mismatched Knowledge preparation")
+        prepared.budget.check()
+        with _transaction(self.db):
+            _lock_workspace(self.db, prepared.binding.snapshot.workspace_id)
+            if self.db.backend_name == "postgresql":
+                self.db.select(
+                    FoundryAccessGrant,
+                    "SELECT * FROM foundry_access_grant WHERE workspace_id=? AND principal_id=? ORDER BY id LIMIT 129 FOR SHARE",
+                    [prepared.binding.snapshot.workspace_id, actor.principal_id],
+                )
+            snapshot, inputs = self.outputs.execution_context(actor, fence)
+            if self._selected(snapshot) is not prepared.binding or (
+                not prepared.input_mapping_applied and inputs != {}
+            ):
+                raise AccessDenied("Knowledge prepared admission changed")
+            self.authority.require_revision(
+                actor, prepared.binding.revision, "knowledge.read"
+            )
+            self.authority.require_revision(
+                actor, prepared.binding.revision, "knowledge.manage"
+            )
+            for permission in ("knowledge.read", "provider.inspect"):
+                self.authority.authorization.require_reference(
+                    actor, prepared.binding.source_provider, permission
+                )
+            prepared.provider_pin.recheck(self.db)
+            prepared.output_pin.recheck(self.db)
+            output = _one(self.db, RunOutput, prepared.output.output_id)
+            if (
+                output.run_id != fence.run_id
+                or output.run_attempt_id != fence.attempt_id
+                or output.epoch != fence.epoch
+                or output.state != "provisional"
+                or output.workspace_id != snapshot.workspace_id
+                or output.provider_key != snapshot.provider_key
+                or output.digest != prepared.corpus_digest
+                or output.size != prepared.corpus_size
+                or not 1 <= output.size <= MAX_CORPUS_BYTES
+                or output.name != prepared.output_name
+                or output.media_type != "application/json"
+                or int(output.expires_ms) <= _now(self.db)
+            ):
+                raise SealedReadRejected("prepared Knowledge output differs")
+            prepared.budget.check()
 
     @staticmethod
     def _receipt(binding, fence, handle, digest):
