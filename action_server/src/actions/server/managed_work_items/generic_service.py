@@ -25,9 +25,8 @@ from actions.server.foundry.generic_work_item_execution import (
     GenericWorkItemExecution,
 )
 from actions.server.foundry.logical_receipts import (
-    requirement_ids,
     validate_bound_record,
-    versions_for,
+    versions_for_selection,
 )
 from actions.server.foundry.models import FoundryAudit, FoundryRequest
 from actions.server.managed_work_items.api import ManagedError
@@ -547,9 +546,9 @@ class GenericManagedWorkItemsService:
             or envelope["version"] != 1
             or not isinstance(envelope.get("result"), dict)
             or envelope["result"].get("version")
-            != versions_for(
-                requirement_ids(self.execution.registry, self.execution.snapshot)
-            )[1]
+            != versions_for_selection(self.execution.registry, self.execution.snapshot)[
+                1
+            ]
         ):
             raise ManagedError("storage_unavailable")
         validate_bound_record(
@@ -706,9 +705,13 @@ class GenericManagedWorkItemsService:
             "rcc-stdout.log": "application/octet-stream",
             "rcc-stderr.log": "application/octet-stream",
         }
+        from actions.server.foundry.logical_receipts import generated_output_names
+
+        for name in generated_output_names(json.loads(run.result)["result"]):
+            expected.setdefault(name, "application/json")
         if (
-            len(refs) != 4
-            or len(records) != 4
+            len(refs) != len(expected)
+            or len(records) != len(expected)
             or {r["name"] for r in records} != set(expected)
         ):
             raise ManagedError("storage_unavailable")

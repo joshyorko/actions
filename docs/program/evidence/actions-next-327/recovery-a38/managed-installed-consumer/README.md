@@ -89,3 +89,12 @@ separate canonical installed setup and evidence; the managed protocol's generic
 operation names alone are insufficient.
 
 Upstream disposition: none. No external issue, publication, or repository change.
+
+## Host-local compiler prerequisite
+
+The cloud compiler path is not a portable dependency. Use the
+[trusted host preparation recipe](compiler-preparation.md) and exact companion
+package.yaml to build and verify a local compiler. A rebuilt artifact must keep
+its observed identity; matching package bytes do not guarantee identical RCC
+artifact bytes. Explicit path/artifact overrides in qualify.py preserve this
+distinction. No private cache or credential transfer is required.

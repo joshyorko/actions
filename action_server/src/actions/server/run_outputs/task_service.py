@@ -14,9 +14,8 @@ from typing import Any, Literal, Protocol
 
 from actions.server._models import RunStatus
 from actions.server.foundry.logical_receipts import (
-    requirement_ids,
     validate_bound_record,
-    versions_for,
+    versions_for_selection,
 )
 from actions.server.foundry.rcc_execution import GeneratedRccExecution
 from actions.server.run_outputs.detached import DetachedActions
@@ -343,9 +342,9 @@ class TaskService:
                     or record.get("claim") is not None
                     or record.get("version")
                     != (
-                        versions_for(
-                            requirement_ids(self.outputs.capabilities, snapshot)
-                        )[1 if terminal else 0]
+                        versions_for_selection(self.outputs.capabilities, snapshot)[
+                            1 if terminal else 0
+                        ]
                     )
                     or AttemptFence.model_validate(
                         record.get("publicationFence" if terminal else "fence")
@@ -549,12 +548,9 @@ class TaskService:
                         raise ValueError("sealed publication differs")
                     handles.append({"handle": ref.handle})
         by_name = {item["name"]: item for item in declared}
-        expected_names = {
-            "generated-action-result.json",
-            "rcc-receipt.json",
-            "rcc-stdout.log",
-            "rcc-stderr.log",
-        }
+        from actions.server.foundry.logical_receipts import generated_output_names
+
+        expected_names = generated_output_names(record)
         execution = record.get("execution")
         if (
             set(by_name) != expected_names

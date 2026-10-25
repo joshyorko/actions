@@ -236,8 +236,12 @@ class FoundryPackageRegistry:
             PackageCompilationPolicy(
                 logical_package_key,
                 logical_name,
-                ">=1.1.0a15,<2.0.0",
-                ">=1.0.2,<2.0.0",
+                ">=1.1.0a39,<2.0.0"
+                if any(req.invocations is not None for req in logical_requirements)
+                else ">=1.1.0a15,<2.0.0",
+                ">=1.1.0a4,<2.0.0"
+                if any(req.invocations is not None for req in logical_requirements)
+                else ">=1.0.2,<2.0.0",
                 work_items=work_items,
                 logical_requirements=logical_requirements,
             ),

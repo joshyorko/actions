@@ -209,13 +209,10 @@ class DetachedActions:
                     raise FenceRejected(
                         "retained launch requires explicit reconciliation"
                     )
-            from actions.server.foundry.logical_receipts import (
-                requirement_ids,
-                versions_for,
-            )
+            from actions.server.foundry.logical_receipts import versions_for_selection
 
-            dispatch_version = versions_for(
-                requirement_ids(service.registry, service.snapshot)
+            dispatch_version = versions_for_selection(
+                service.registry, service.snapshot
             )[0]
             fence = self.outputs.claim(
                 run.id, caller.worker_id, lease_seconds=lease_seconds

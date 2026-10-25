@@ -414,14 +414,18 @@ class GenericCanvasExecution(CanvasPort):
                 from actions.server.foundry.logical_receipts import (
                     requirement_ids,
                     validate_bound_record,
-                    validate_generated_version,
+                    versions_for_selection,
                 )
 
                 record = attached.get("result")
                 if not isinstance(record, dict):
                     raise ValueError("generated result receipt unavailable")
                 ids = requirement_ids(service.registry, service.snapshot)
-                validate_generated_version(record, requirement_ids=ids, terminal=True)
+                if (
+                    record.get("version")
+                    != versions_for_selection(service.registry, service.snapshot)[1]
+                ):
+                    raise ValueError("generated receipt version differs")
                 if ids:
                     pin = _one(service.db, RunPin, run.id)
                     attempt = _one(service.db, RunAttempt, pin.current_attempt_id)

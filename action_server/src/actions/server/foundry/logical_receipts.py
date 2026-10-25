@@ -21,6 +21,9 @@ from pydantic import (
     model_validator,
 )
 
+from actions.server.data_queries.knowledge_values import KnowledgeRevisionRef
+from actions.server.run_outputs.types import AttemptFence
+
 if TYPE_CHECKING:
     from actions.server.foundry.logical_execution import PreparedLogicalReads
 
@@ -28,6 +31,8 @@ DISPATCH_V1 = "actions.generated-rcc-dispatch/v1"
 DISPATCH_V2 = "actions.generated-rcc-dispatch/v2"
 EXECUTION_V1 = "actions.generated-rcc-execution/v1"
 EXECUTION_V2 = "actions.generated-rcc-execution/v2"
+DISPATCH_V3 = "actions.generated-rcc-dispatch/v3"
+EXECUTION_V3 = "actions.generated-rcc-execution/v3"
 MAX_OPERATIONS = 32
 MAX_SUMMARY_BYTES = 64 * 1024
 _ID = re.compile(r"[a-z][a-z0-9_-]{0,63}")
@@ -123,6 +128,59 @@ class LogicalReadSummary(_Value):
         return self
 
 
+class LogicalOperationV2Identity(LogicalOperationIdentity):
+    kind: Literal["data", "knowledge"]
+
+    @field_validator("operation")
+    @classmethod
+    def exact_scan(cls, value):
+        return _matches(
+            value, re.compile(r"[a-z][a-z0-9_-]{0,58}\.(scan|ingest|search)/v1")
+        )
+
+    @model_validator(mode="after")
+    def operation_kind(self):
+        if self.operation.endswith(".scan/v1") != (self.kind == "data"):
+            raise ValueError("logical operation kind differs")
+        return self
+
+
+class KnowledgeOperationEvidence(_Value):
+    # The retained definition is host-selected; no credentials/config bytes.
+    revision: "KnowledgeRevisionRef"
+    corpus_handle: str = Field(alias="corpusHandle", pattern=r"^art_[A-Za-z0-9_-]{22}$")
+    corpus_digest: str = Field(alias="corpusDigest", pattern=r"^sha256:[0-9a-f]{64}$")
+    corpus_output: str = Field(
+        alias="corpusOutput", pattern=r"^knowledge-[0-9a-f]{64}\.json$"
+    )
+    source_fence: "AttemptFence" = Field(alias="sourceFence")
+
+
+class LogicalOperationV2Receipt(LogicalOperationV2Identity):
+    result_digest: str = Field(alias="resultDigest", pattern=r"^sha256:[0-9a-f]{64}$")
+    row_count: int = Field(alias="rowCount", ge=0, le=100000)
+    parameters_digest: str = Field(
+        alias="parametersDigest", pattern=r"^sha256:[0-9a-f]{64}$"
+    )
+    knowledge: KnowledgeOperationEvidence | None
+
+    @model_validator(mode="after")
+    def evidence_kind(self):
+        if (self.knowledge is not None) != (self.kind == "knowledge"):
+            raise ValueError("exact Knowledge operation evidence required")
+        return self
+
+
+class LogicalSummaryV2(LogicalReadSummary):
+    version: Literal["actions.logical-receipt/v2"]  # type: ignore[assignment]
+    operations: tuple[LogicalOperationV2Receipt, ...] = Field(  # type: ignore[assignment]
+        min_length=1, max_length=MAX_OPERATIONS
+    )
+
+
+KnowledgeOperationEvidence.model_rebuild()
+
+
 def _canonical(value):
     return json.dumps(
         value,
@@ -147,7 +205,7 @@ def _no_constant(value):
 
 
 def _bounded(value, depth=0):
-    if depth > 5:
+    if depth > 8:
         raise ValueError("receipt nesting unsupported")
     if isinstance(value, str):
         if len(value) > 256:
@@ -169,7 +227,7 @@ def _bounded(value, depth=0):
         raise ValueError("receipt value unsupported")
 
 
-def _parse(value) -> LogicalReadSummary:
+def _parse(value) -> LogicalReadSummary | LogicalSummaryV2:
     if isinstance(value, bytes):
         if not 1 <= len(value) <= MAX_SUMMARY_BYTES:
             raise ValueError("receipt exceeds bound")
@@ -187,7 +245,12 @@ def _parse(value) -> LogicalReadSummary:
         raise ValueError("receipt object or canonical bytes required")
     if len(raw) > MAX_SUMMARY_BYTES:
         raise ValueError("receipt exceeds bound")
-    return LogicalReadSummary.model_validate_json(raw)
+    model = (
+        LogicalSummaryV2
+        if json.loads(raw).get("version") == "actions.logical-receipt/v2"
+        else LogicalReadSummary
+    )
+    return model.model_validate_json(raw)
 
 
 def _requirements(requirement_ids: tuple[str, ...]) -> tuple[str, ...]:
@@ -200,22 +263,29 @@ def _requirements(requirement_ids: tuple[str, ...]) -> tuple[str, ...]:
     return requirement_ids
 
 
-def versions_for(requirement_ids: tuple[str, ...]) -> tuple[str, str]:
+def versions_for(
+    requirement_ids: tuple[str, ...], *, knowledge: bool = False
+) -> tuple[str, str]:
     """Select only from trusted artifact-verified capability requirement IDs."""
-    return (
-        (DISPATCH_V2, EXECUTION_V2)
-        if _requirements(requirement_ids)
-        else (DISPATCH_V1, EXECUTION_V1)
-    )
+    ids = _requirements(requirement_ids)
+    if not isinstance(knowledge, bool) or (knowledge and not ids):
+        raise ValueError("verified Knowledge selection requires bindings")
+    if knowledge:
+        return DISPATCH_V3, EXECUTION_V3
+    return (DISPATCH_V2, EXECUTION_V2) if ids else (DISPATCH_V1, EXECUTION_V1)
 
 
 def validate_generated_version(
-    record: dict, *, requirement_ids: tuple[str, ...], terminal: bool
+    record: dict,
+    *,
+    requirement_ids: tuple[str, ...],
+    terminal: bool,
+    knowledge: bool = False,
 ) -> None:
     """Partial check ONLY: does not validate any envelope fields or authorize it."""
     if not isinstance(terminal, bool) or not isinstance(record, dict):
         raise ValueError("generated receipt version unavailable")
-    expected = versions_for(requirement_ids)[int(terminal)]
+    expected = versions_for(requirement_ids, knowledge=knowledge)[int(terminal)]
     if record.get("version") != expected:
         raise ValueError(
             "generated receipt version differs from capability requirements"
@@ -240,9 +310,14 @@ def derive_summary(prepared: PreparedLogicalReads) -> LogicalReadSummary:
             or any(type(row) is not LogicalReadReceipt for row in prepared.receipts)
         ):
             raise ValueError("prepared logical value required")
+        version2 = (
+            json.loads(prepared.context).get("version") == "actions.logical-context/v2"
+        )
         return _parse(
             {
-                "version": "actions.logical-read-receipt/v1",
+                "version": "actions.logical-receipt/v2"
+                if version2
+                else "actions.logical-read-receipt/v1",
                 "contextDigest": prepared.context_digest,
                 "operations": [
                     {
@@ -252,6 +327,18 @@ def derive_summary(prepared: PreparedLogicalReads) -> LogicalReadSummary:
                         "contractDigest": row.contract_digest,
                         "resultDigest": row.result_digest,
                         "rowCount": row.row_count,
+                        **(
+                            {
+                                "kind": row.kind,
+                                "parametersDigest": row.parameters_digest
+                                or "sha256:" + hashlib.sha256(b"{}").hexdigest(),
+                                "knowledge": row.knowledge.model_dump(mode="json")
+                                if row.knowledge is not None
+                                else None,
+                            }
+                            if version2
+                            else {}
+                        ),
                     }
                     for row in prepared.receipts
                 ],
@@ -264,7 +351,7 @@ def derive_summary(prepared: PreparedLogicalReads) -> LogicalReadSummary:
 def validate_summary(value, *, expected: LogicalReadSummary) -> LogicalReadSummary:
     """Exact publication comparison; expected must come from trusted preparation."""
     try:
-        if type(expected) is not LogicalReadSummary:
+        if type(expected) not in (LogicalReadSummary, LogicalSummaryV2):
             raise ValueError("trusted expected summary required")
         # Re-parse even a model_copy-created object: frozen DTOs are not authority.
         trusted = _parse(expected.model_dump(mode="json"))
@@ -296,14 +383,13 @@ def validate_summary_identities(
             type(expected_operations) is not tuple
             or not 1 <= len(expected_operations) <= MAX_OPERATIONS
             or any(
-                type(op) is not LogicalOperationIdentity for op in expected_operations
+                type(op) not in (LogicalOperationIdentity, LogicalOperationV2Identity)
+                for op in expected_operations
             )
         ):
             raise ValueError("trusted operation identity tuple required")
         expected = tuple(
-            LogicalOperationIdentity.model_validate_json(
-                _canonical(op.model_dump(mode="json"))
-            )
+            type(op).model_validate_json(_canonical(op.model_dump(mode="json")))
             for op in expected_operations
         )
         keys = [(op.requirement_id, op.operation) for op in expected]
@@ -312,12 +398,24 @@ def validate_summary_identities(
         ):
             raise ValueError("expected operation coverage differs")
         parsed = _parse(value)
+        identity_type = (
+            LogicalOperationV2Identity
+            if type(parsed) is LogicalSummaryV2
+            else LogicalOperationIdentity
+        )
+        if any(type(op) is not identity_type for op in expected):
+            raise ValueError("logical summary version differs from verified operations")
         actual = tuple(
-            LogicalOperationIdentity(
+            identity_type(
                 requirementId=op.requirement_id,
                 operation=op.operation,
                 sourceRevision=op.source_revision,
                 contractDigest=op.contract_digest,
+                **(
+                    {"kind": op.kind}
+                    if isinstance(op, LogicalOperationV2Receipt)
+                    else {}
+                ),
             )
             for op in parsed.operations
         )
@@ -338,7 +436,38 @@ def requirement_ids(registry, snapshot) -> tuple[str, ...]:
     return tuple(ref.requirement_id.root for ref in declaration.binding_requirements)
 
 
-def _retained_projection(db, registry, snapshot):
+def has_knowledge(registry, snapshot) -> bool:
+    """Determine the new protocol from immutable verified declarations only."""
+    declaration = registry.get_capability(snapshot.capability)
+    if declaration is None:
+        raise ValueError("immutable capability unavailable")
+    found = False
+    for reference in declaration.binding_requirements:
+        projected = registry.get_binding_requirement(reference)
+        if projected is None or projected.ref != reference:
+            raise ValueError("immutable logical requirement unavailable")
+        if projected.contract.kind == "knowledge":
+            if projected.contract.invocations is None:
+                raise ValueError("explicit Knowledge invocation mapping required")
+            found = True
+        elif projected.contract.kind != "data":
+            raise ValueError("supported logical requirement required")
+    return found
+
+
+def versions_for_selection(registry, snapshot, *, projection=None) -> tuple[str, str]:
+    if projection is not None:
+        if projection.snapshot != snapshot:
+            raise ValueError("retained version selection differs")
+        return versions_for(projection.requirement_ids, knowledge=projection.knowledge)
+    return versions_for(
+        requirement_ids(registry, snapshot), knowledge=has_knowledge(registry, snapshot)
+    )
+
+
+def _retained_projection(
+    db, registry, snapshot, *, run=None, _visited=(), _budget=None
+):
     """Validate public summary against immutable SQL metadata; no source reads.
 
     This deliberately does not call SqlProviderRegistry._read, which verifies
@@ -351,6 +480,8 @@ def _retained_projection(db, registry, snapshot):
         SourceManifest,
         canonical,
     )
+    from actions.server.foundry.models import FoundryPackageRevision
+    from actions.server.foundry.provider_execution import SQLRecordPin
     from actions.server.foundry.provider_models import (
         FoundryProviderRevision,
         FoundrySourceRevision,
@@ -358,11 +489,17 @@ def _retained_projection(db, registry, snapshot):
     from actions.server.foundry.provider_registry import _id, _ref_id
     from actions.server.run_outputs.service import _one
 
+    if _budget is None:
+        _budget = [64]
+    _budget[0] -= 1
+    if _budget[0] < 0 or len(_visited) > 8 or (run is not None and run.id in _visited):
+        raise ValueError("bounded acyclic Knowledge source history required")
     declaration = registry.get_capability(snapshot.capability)
     stored = FoundryRepository(db).get_revision(snapshot.deployment)
     if declaration is None or stored is None:
         raise ValueError("immutable logical selection unavailable")
-    expected, limits = [], {}
+    knowledge = has_knowledge(registry, snapshot)
+    expected, limits, requirements, providers, metadata_pins = [], {}, [], [], []
     for ref in declaration.binding_requirements:
         bindings = [
             b for b in stored.revision.specification.bindings if b.requirement == ref
@@ -371,8 +508,10 @@ def _retained_projection(db, registry, snapshot):
             raise ValueError("exact logical binding required")
         binding = bindings[0]
         projected = registry.get_binding_requirement(ref)
-        if projected is None or projected.contract.kind != "data":
+        if projected is None or projected.contract.kind not in ("data", "knowledge"):
             raise ValueError("artifact-verified data requirement required")
+        requirements.append(projected.contract)
+        providers.append((projected.contract.id, binding.provider))
         row = _one(db, FoundryProviderRevision, _ref_id(binding.provider))
         if len(row.descriptor_json) > 128 * 1024:
             raise ValueError("provider descriptor exceeds bound")
@@ -390,20 +529,49 @@ def _retained_projection(db, registry, snapshot):
             or source_row.revision_id != source.revision_id
             or source.revision_id != descriptor.source_revision
             or source.kind != descriptor.kind
-            or source.schema_version != "actions.logical-source/v2"
+            or descriptor.kind != projected.contract.kind
+            or source.schema_version
+            != (
+                "actions.logical-source/v1"
+                if descriptor.kind == "knowledge"
+                else "actions.logical-source/v2"
+            )
             or canonical(source) != source_row.manifest_json
             or source_row.id != _id(workspace + source.revision_id)
         ):
             raise ValueError("retained provider/source identity differs")
+        metadata_pins.extend(
+            (
+                SQLRecordPin.capture(db, FoundryProviderRevision, "id=?", (row.id,)),
+                SQLRecordPin.capture(
+                    db, FoundrySourceRevision, "id=?", (source_row.id,)
+                ),
+            )
+        )
         for operation in projected.contract.operations:
-            supported, _ = scan_contract(descriptor, source, operation.name)
+            if projected.contract.kind == "knowledge":
+                from actions.server.data_queries.knowledge_operations import (
+                    knowledge_contract,
+                )
+
+                knowledge_contract(operation)
+                matches = [
+                    op for op in descriptor.operations if op.name == operation.name
+                ]
+                supported = matches[0] if len(matches) == 1 else None
+            else:
+                supported, _ = scan_contract(descriptor, source, operation.name)
             if supported != operation:
                 raise ValueError("retained operation contract differs")
-            identity = LogicalOperationIdentity(
+            identity_type = (
+                LogicalOperationV2Identity if knowledge else LogicalOperationIdentity
+            )
+            identity = identity_type(
                 requirementId=ref.requirement_id.root,
                 operation=operation.name,
                 sourceRevision=source.revision_id,
                 contractDigest=operation.contract_digest,
+                **({"kind": projected.contract.kind} if knowledge else {}),
             )
             expected.append(identity)
             limits[(identity.requirement_id, identity.operation)] = operation.max_rows
@@ -417,12 +585,81 @@ def _retained_projection(db, registry, snapshot):
         rccSpecificationDigest=compiled.rcc_specification_digest,
         rccArtifactDigest=compiled.rcc_artifact_digest,
     )
+    for package in stored.revision.specification.package_revisions:
+        metadata_pins.append(
+            SQLRecordPin.capture(
+                db,
+                FoundryPackageRevision,
+                "workspace_id=? AND package_id=? AND revision_id=?",
+                (
+                    str(package.workspace_id.root),
+                    str(package.package_id.root),
+                    package.revision_id.root,
+                ),
+            )
+        )
+    schema = registry.schema_for(snapshot)
+    search_projections = []
+    if knowledge and run is not None:
+        from actions.server._models import Run
+        from actions.server.deployments.logical_bindings import mapped_parameters
+        from actions.server.run_outputs.models import RunOutput, RunPin
+        from actions.server.run_outputs.service import RunOutputService
+        from actions.server.run_outputs.types import output_id_from_handle
+
+        seen_handles = set()
+        for requirement in requirements:
+            if requirement.kind != "knowledge":
+                continue
+            for operation in requirement.operations:
+                if not operation.name.endswith(".search/v1"):
+                    continue
+                parameters = mapped_parameters(
+                    requirement,
+                    operation.name,
+                    json.loads(schema.input_schema),
+                    json.loads(run.inputs),
+                )
+                handle = parameters["ingestion_handle"]
+                if handle in seen_handles:
+                    continue
+                seen_handles.add(handle)
+                output = _one(db, RunOutput, output_id_from_handle(handle))
+                source_run = _one(db, Run, output.run_id)
+                source_pin = _one(db, RunPin, source_run.id)
+                source_snapshot = RunOutputService(
+                    db, {}, capabilities=registry
+                )._pinned(source_pin)
+                if source_snapshot.workspace_id != snapshot.workspace_id:
+                    raise ValueError("Knowledge source Workspace differs")
+                search_projections.append(
+                    (
+                        handle,
+                        _retained_projection(
+                            db,
+                            registry,
+                            source_snapshot,
+                            run=source_run,
+                            _visited=(*_visited, run.id),
+                            _budget=_budget,
+                        ),
+                    )
+                )
     return _RetainedProjection(
         snapshot,
         tuple(expected),
         tuple(limits.items()),
         tuple(fixed.items()),
         tuple(ref.requirement_id.root for ref in declaration.binding_requirements),
+        knowledge,
+        tuple(requirements),
+        tuple(providers),
+        schema.input_schema,
+        declaration,
+        stored,
+        schema.output_schema,
+        tuple(metadata_pins),
+        tuple(search_projections),
     )
 
 
@@ -433,6 +670,15 @@ class _RetainedProjection:
     limits: tuple
     fixed: tuple
     requirement_ids: tuple[str, ...]
+    knowledge: bool = False
+    requirements: tuple = ()
+    providers: tuple = ()
+    input_schema: str = ""
+    declaration: object = None
+    deployment: object = None
+    output_schema: str = ""
+    metadata_pins: tuple = ()
+    search_projections: tuple = ()
 
 
 def _projected_summary(projection, value):
@@ -484,7 +730,13 @@ def validate_bound_record(
         if _projection is not None
         else requirement_ids(registry, snapshot)
     )
-    validate_generated_version(record, requirement_ids=ids, terminal=terminal)
+    expected_version = versions_for_selection(
+        registry, snapshot, projection=_projection
+    )[int(terminal)]
+    if not isinstance(record, dict) or record.get("version") != expected_version:
+        raise ValueError(
+            "generated receipt version differs from capability requirements"
+        )
     if not ids:
         return
     if not isinstance(_allow_expired_terminal, bool) or (
@@ -559,10 +811,12 @@ def validate_bound_record(
     projection = (
         _projection
         if _projection is not None
-        else _retained_projection(db, registry, snapshot)
+        else _retained_projection(db, registry, snapshot, run=run)
     )
     if projection.snapshot != snapshot:
         raise ValueError("retained projection selection differs")
+    for metadata_pin in projection.metadata_pins:
+        metadata_pin.recheck(db)
     fixed = dict(projection.fixed)
     lineage = dict(
         packageRevision=snapshot.capability.package_revision.model_dump(mode="json"),
@@ -591,6 +845,19 @@ def validate_bound_record(
     ):
         raise ValueError("logical launch lineage differs")
     summary = _projected_summary(projection, launch["logicalReads"])
+    corpus_inventory = (
+        _knowledge_inventory(
+            db,
+            registry,
+            projection,
+            summary,
+            run,
+            fence,
+            allow_expired=_allow_expired_terminal,
+        )
+        if projection.knowledge
+        else {}
+    )
     if record.get("execution") is not None:
         _execution_shape(record["execution"], fixed["rccArtifactDigest"])
     if not terminal:
@@ -602,9 +869,9 @@ def validate_bound_record(
         raise ValueError("logical terminal lineage differs")
     if (
         not isinstance(outputs, (list, tuple))
-        or len(outputs) != 4
+        or len(outputs) != 4 + len(corpus_inventory)
         or not isinstance(record["outputs"], list)
-        or len(record["outputs"]) != 4
+        or len(record["outputs"]) != 4 + len(corpus_inventory)
     ):
         raise ValueError("complete bound output inventory required")
     inventory = {}
@@ -647,6 +914,10 @@ def validate_bound_record(
             or row.name in inventory
         ):
             raise ValueError("bound output seal differs")
+        if row.name in corpus_inventory and (
+            row.media_type != "application/json" or not 1 <= row.size <= 8 * 1024 * 1024
+        ):
+            raise ValueError("Knowledge corpus output type or bounds differ")
         inventory[row.name] = evidence
     names = {
         "generated-action-result.json",
@@ -654,6 +925,15 @@ def validate_bound_record(
         "rcc-stdout.log",
         "rcc-stderr.log",
     }
+    names.update(corpus_inventory)
+    for name, evidence in corpus_inventory.items():
+        if (
+            name not in inventory
+            or inventory[name]["digest"] != evidence.corpus_digest
+            or OutputRef.model_validate(inventory[name]["ref"]).handle
+            != evidence.corpus_handle
+        ):
+            raise ValueError("Knowledge corpus inventory differs")
     execution = record["execution"]
     if (
         set(inventory) != names
@@ -718,6 +998,149 @@ def validate_bound_record(
             raise ValueError("stream measurement differs")
 
 
+def _knowledge_inventory(
+    db, registry, projection, summary, run, fence, *, allow_expired=False
+):
+    """Reconstruct mapped parameters and definition identities from immutable SQL."""
+    from actions.server.data_queries.knowledge_values import canonical
+    from actions.server.deployments.logical_bindings import mapped_parameters
+    from actions.server.foundry.knowledge_authority import (
+        KnowledgeRevisionAuthority,
+        _id,
+    )
+    from actions.server.foundry.knowledge_models import KnowledgeCollectionRevision
+    from actions.server.foundry.provider_registry import SqlProviderRegistry
+    from actions.server.foundry.sql_authorization import SqlFoundryAuthorization
+    from actions.server.run_outputs.service import _one
+
+    requirements = {item.id: item for item in projection.requirements}
+    providers = dict(projection.providers)
+    schema, inputs = json.loads(projection.input_schema), json.loads(run.inputs)
+    inventory = {}
+    for operation in summary.operations:
+        requirement = requirements[operation.requirement_id]
+        parameters = (
+            mapped_parameters(requirement, operation.operation, schema, inputs)
+            if operation.kind == "knowledge"
+            else {}
+        )
+        if (
+            operation.parameters_digest
+            != "sha256:" + hashlib.sha256(_canonical(parameters)).hexdigest()
+        ):
+            raise ValueError("logical mapped parameters differ")
+        if operation.kind != "knowledge":
+            continue
+        evidence = operation.knowledge
+        # _load validates canonical retained definition, provider/source and registration audit SQL.
+        provider_registry = SqlProviderRegistry(db, SqlFoundryAuthorization(db), None)
+        authority = KnowledgeRevisionAuthority(db, provider_registry)
+        spec = authority._load(evidence.revision)
+        definition = _one(
+            db, KnowledgeCollectionRevision, _id(canonical(evidence.revision))
+        )
+        if (
+            spec.source_revision != operation.source_revision
+            or definition.source_provider_json
+            != providers[operation.requirement_id].model_dump_json()
+            or str(evidence.revision.workspace_id.root)
+            != projection.snapshot.workspace_id
+        ):
+            raise ValueError("Knowledge definition selection differs")
+        if operation.operation.endswith(".ingest/v1"):
+            from actions.server.foundry.generated_knowledge import operation_key
+
+            name = (
+                "knowledge-"
+                + operation_key(
+                    fence.run_id, operation.requirement_id, operation.operation
+                )
+                + ".json"
+            )
+            if (
+                evidence.source_fence != fence
+                or evidence.corpus_output != name
+                or name in inventory
+            ):
+                raise ValueError("Knowledge ingestion fence or identity differs")
+            inventory[name] = evidence
+        else:
+            if evidence.corpus_handle != parameters["ingestion_handle"]:
+                raise ValueError("Knowledge search source differs from admitted input")
+            source_projection = dict(projection.search_projections).get(
+                evidence.corpus_handle
+            )
+            if source_projection is None:
+                raise ValueError("verified Knowledge source projection required")
+            _validate_search_source(
+                db, registry, source_projection, evidence, allow_expired=allow_expired
+            )
+    return inventory
+
+
+def _validate_search_source(db, registry, projection, evidence, *, allow_expired):
+    from actions.server._models import Run, RunStatus
+    from actions.server.run_outputs.models import RunAttempt, RunOutput, RunPin
+    from actions.server.run_outputs.service import _now, _one
+    from actions.server.run_outputs.types import output_id_from_handle
+
+    output = _one(db, RunOutput, output_id_from_handle(evidence.corpus_handle))
+    source_run = _one(db, Run, output.run_id)
+    pin = _one(db, RunPin, source_run.id)
+    attempt = _one(db, RunAttempt, pin.current_attempt_id)
+    actual_fence = AttemptFence(
+        run_id=source_run.id,
+        attempt_id=attempt.id,
+        owner_id=attempt.owner_id,
+        epoch=pin.epoch,
+    )
+    if (
+        source_run.status != RunStatus.PASSED
+        or attempt.state != "succeeded"
+        or attempt.run_id != source_run.id
+        or attempt.epoch != pin.epoch
+        or actual_fence != evidence.source_fence
+        or (not allow_expired and int(output.expires_ms) <= _now(db))
+        or attempt.workspace_id != projection.snapshot.workspace_id
+        or (output.name, output.digest)
+        != (evidence.corpus_output, evidence.corpus_digest)
+    ):
+        raise ValueError("Knowledge source publication fence or corpus differs")
+    outer = json.loads(source_run.result)
+    if (
+        not isinstance(outer, dict)
+        or set(outer) != {"version", "result", "outputs"}
+        or not isinstance(outer.get("result"), dict)
+        or not isinstance(outer.get("outputs"), list)
+    ):
+        raise ValueError("closed Knowledge source publication required")
+    record = outer["result"]
+    validate_bound_record(
+        db,
+        registry,
+        projection.snapshot,
+        source_run,
+        actual_fence,
+        record,
+        claim=record.get("claim"),
+        terminal=True,
+        outputs=outer["outputs"],
+        _projection=projection,
+        _allow_expired_terminal=True,
+    )
+    source_summary = _parse(record["logicalReads"])
+    matches = [
+        op
+        for op in source_summary.operations
+        if isinstance(op, LogicalOperationV2Receipt)
+        and op.kind == "knowledge"
+        and op.operation.endswith(".ingest/v1")
+        and op.knowledge == evidence
+    ]
+    if len(matches) != 1:
+        raise ValueError("exact successful generated Knowledge ingestion required")
+
+
 def _execution_shape(execution, artifact_digest):
     if (
         not isinstance(execution, dict)
@@ -775,10 +1198,12 @@ class LogicalPublicationGuard:
     def bind_logical_execution(self, execution, prepared, *, publication_check=None):
         from contextlib import contextmanager
 
+        from actions.server._models import Run
         from actions.server.foundry.logical_execution import (
             LogicalExecution,
             PreparedLogicalReads,
         )
+        from actions.server.run_outputs.service import _one
 
         @contextmanager
         def bind():
@@ -797,7 +1222,10 @@ class LogicalPublicationGuard:
             ):
                 raise ValueError("exact invocation logical binding required")
             projection = _retained_projection(
-                self.db, self.owner.registry, self.owner.snapshot
+                self.db,
+                self.owner.registry,
+                self.owner.snapshot,
+                run=_one(execution.db, Run, prepared.fence.run_id),
             )
             self._logical_binding = (
                 execution,
@@ -858,3 +1286,23 @@ class LogicalPublicationGuard:
             if check is not None and check() is not None:
                 raise ValueError("publication check must return None or raise")
         return super().publish(actor, fence, outputs, result, **kwargs)
+
+
+def generated_output_names(record):
+    """Output names after validate_bound_record; this helper grants no authority."""
+    names = {
+        "generated-action-result.json",
+        "rcc-receipt.json",
+        "rcc-stdout.log",
+        "rcc-stderr.log",
+    }
+    if record.get("version") == EXECUTION_V3:
+        summary = _parse(record["logicalReads"])
+        if type(summary) is not LogicalSummaryV2:
+            raise ValueError("Knowledge summary required")
+        names.update(
+            op.knowledge.corpus_output
+            for op in summary.operations
+            if op.kind == "knowledge" and op.operation.endswith(".ingest/v1")
+        )
+    return names

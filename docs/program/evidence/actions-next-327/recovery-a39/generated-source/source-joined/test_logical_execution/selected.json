@@ -1,0 +1,18 @@
+[
+  "tests/action_server_tests/test_logical_execution.py::test_real_preparation_context_and_sql_only_recheck",
+  "tests/action_server_tests/test_logical_execution.py::test_forged_context_or_fence_refused",
+  "tests/action_server_tests/test_logical_execution.py::test_total_deadline_and_cancellation_before_engine",
+  "tests/action_server_tests/test_logical_execution.py::test_current_change_refused",
+  "tests/action_server_tests/test_logical_execution.py::test_declared_aggregate_rejected_before_engine[300000]",
+  "tests/action_server_tests/test_logical_execution.py::test_sql_only_recheck_refuses_changed_authority[grant]",
+  "tests/action_server_tests/test_logical_execution.py::test_sql_only_recheck_refuses_changed_authority[availability]",
+  "tests/action_server_tests/test_logical_execution.py::test_sql_only_recheck_refuses_changed_authority[package]",
+  "tests/action_server_tests/test_logical_execution.py::test_sql_only_recheck_refuses_changed_authority[provenance]",
+  "tests/action_server_tests/test_logical_execution.py::test_sql_only_recheck_refuses_changed_authority[source]",
+  "tests/action_server_tests/test_logical_execution.py::test_total_deadline_during_engine",
+  "tests/action_server_tests/test_logical_execution.py::test_factory_construction_does_not_resolve_secrets",
+  "tests/action_server_tests/test_logical_execution.py::test_real_tls_engine_through_catalog_factory",
+  "tests/action_server_tests/test_logical_execution.py::test_common_postgresql_authority_with_real_duckdb",
+  "tests/action_server_tests/test_logical_execution.py::test_operation_count_bound_before_engine",
+  "tests/action_server_tests/test_logical_execution.py::test_changed_result_receipt_rejected"
+]

@@ -8,10 +8,10 @@ into the release branch. No lane may push the integration branch.
 
 | Lane / cloud task | Exclusive current scope | Integration boundary |
 | --- | --- | --- |
-| A Canvas UI `01a17333-692f-77d5-84da-f5df7ded1009` | Frontend src and dedicated UI tests; mandatory Canvas P0 | Excludes package/lock/version, shared schemas and MCP |
+| A Canvas UI `01a17333-692f-77d5-84da-f5df7ded1009` | `action_server/frontend/apps/canvas-view/src/semantic-renderer/{components.tsx,semantic-renderer.css}` and dedicated component/browser tests; responsive keyboard-accessible table/result states | Excludes package/lock/version, shared schemas and MCP |
 | B Knowledge installed `01a17333-8aa1-75e1-9e41-dd7df8fb3002` | New dedicated acceptance scripts/tests until v3 checkpoint | Reuse retained Knowledge implementation; no duplicate production writer |
-| C Robot execution `01a17333-ae42-77f4-b9b6-1671c4290037` | New Robot/native/direct execution tests | Reuse ordinary installed managed-consumer setup below; propose isolated production changes |
-| D Release/security `01a17333-cc0f-7734-9775-2e3bc2c5b024` | New dedicated qualification scripts/tests | Shared configs/auth/migrations remain integrator-owned |
+| C Robot execution `01a17333-ae42-77f4-b9b6-1671c4290037` | New Robot/native/direct tests; isolated `foundry/robot_execution.py` adapter and `contract_tests/test_robot_execution.py` | Reuse ordinary installed managed-consumer setup below; propose isolated production changes |
+| D Release/security `01a17333-cc0f-7734-9775-2e3bc2c5b024` | New dedicated qualification scripts/tests and `devutils/tests/test_actions_runtime_release_line.py`; coordinator may allocate exact migration test files excluding shared fixtures | Shared configs/auth/migrations remain integrator-owned |
 
 Integrator reservations: current generated Knowledge preparation/receipt and RCC
 joins, compiler/Package registry/authoring contracts, shared Run/Task/managed
@@ -24,7 +24,7 @@ Existing helpers are preserved rather than duplicated: `knowledge_review`
 completed its isolated source boundary tests (20 passed after a bounded-error
 correction); `knowledge_host` completed the ordinary installed a38 consumer
 recipe. Their tested patches/receipts feed the integrator and B/C. Unqualified
-v3 source remains distinct from installed a38 evidence.
+v3 source remains distinct from installed a38 evidence. C now owns the process-only Robot adapter: existing actor/fence/snapshot types, immutable direct/RCC selection DTOs, injected host lifecycle checks/heartbeat/launch intent/output staging, and typed staged evidence. No SQL authority, admission, terminal publication or scheduler duplication; shared persisted `actions.robot-dispatch/v1` routing remains reserved.
 
 ### Compact B/C and extension-tester handoff
 
@@ -49,8 +49,7 @@ claiming generated Knowledge installed acceptance; C can use this a38 recipe now
 
 Checkpoint da928b69 adds explicit owned Knowledge hosts and nonterminal staging;
 [joined source receipts](evidence/actions-next-327/recovery-a39/host-preparation/README.md)
-record144 passed/0 skipped. Generated Knowledge RCC/Task joins and installed a39
-remain under integration. [Extension2.20.16 parent report](evidence/actions-next-327/recovery-a39/extension-parent-report.json)
+record144 passed/0 skipped. The new generated Knowledge source checkpoint joins mapped ingestion/search, retained corpus publication, source provenance and fenced SQL-only final publication: 563 selected Runtime cases and 411 Core cases passed, zero skips; focused post-format checks passed20. Compiler qualification separately passed65 with one explicit prepared-RCC skip. These overlapping source counts do not qualify installed a39, which remains pending. [Extension2.20.16 parent report](evidence/actions-next-327/recovery-a39/extension-parent-report.json)
 closes its fixture-backed claim/renew/cancel/read/save cases, not ordinary managed
 Action/Robot execution, completion/retry or same-state restart. A canonical
 installed setup for those consumer cases remains a dependency.
@@ -67,8 +66,7 @@ Celld and unfinished a39 are not used as reasons to pause independent work.
 [Explicit mappings and Core context](evidence/actions-next-327/recovery-a39/knowledge-context/README.md)
 preserve prior wire formats and add the separate candidate contract: root mapping10,
 Core context79 and owned-PostgreSQL binding50 cases passed; helper full Core411
-passed with zero skips. Counts overlap. Ordinary generated Knowledge publication
-and installed a39 remain open. The [independent desktop Codex probe](evidence/actions-next-327/recovery-a38/codex-client-blocker/README.md)
+passed with zero skips. Counts overlap. Generated Knowledge publication now has synthetic source qualification above; actual installed a39 remains open. The [independent desktop Codex probe](evidence/actions-next-327/recovery-a38/codex-client-blocker/README.md)
 initialized but failed existing model transport (90seconds, exit124), with no
 model answer or MCP calls. Genuine model acceptance remains blocked.
 

@@ -23,8 +23,8 @@ ROOT = Path(os.environ['ACTIONS_ACCEPTANCE_DIR']).resolve()
 ROOT.mkdir(mode=0o700, parents=True, exist_ok=False)
 import shutil
 assert shutil.disk_usage(ROOT).free >= 5 * 1024**3, '5 GiB disk preflight required'
-BASE = Path('/workspace/actions-327-a38/installed-fixed')
-PREPARED = Path('/workspace/actions-327-a38/compiler/prepared.json')
+BASE = Path(os.environ.get('ACTIONS_ACCEPTANCE_BASE', '/workspace/actions-327-a38/installed-fixed')).resolve()
+PREPARED = Path(os.environ.get('ACTIONS_ACCEPTANCE_PREPARED', '/workspace/actions-327-a38/compiler/prepared.json')).resolve()
 OUT = ROOT / 'evidence'
 OUT.mkdir(exist_ok=False)
 EMPTY = ROOT / 'empty'; EMPTY.mkdir(exist_ok=True)
@@ -217,7 +217,7 @@ pair=None
 try:
     assert RECEIPT['source']=='f332a8284e78844abcf6700a600d2891d742b682'
     prepared=json.loads(PREPARED.read_text())
-    assert prepared['artifactDigest']=='sha256:23094fc1820262a768fd601f4964d633417fc2641f349666a5be55ab524f7598'
+    assert prepared['artifactDigest']==os.environ.get('ACTIONS_ACCEPTANCE_EXPECTED_ARTIFACT', 'sha256:23094fc1820262a768fd601f4964d633417fc2641f349666a5be55ab524f7598')
     assert 'sha256:'+hashlib.sha256(PREPARED.with_name('package.yaml').read_bytes()).hexdigest()==prepared['packageYamlDigest']
     pair=start('initial')
     app,first,spec=asyncio.run(connect(lambda s:create(s,'consumer')))

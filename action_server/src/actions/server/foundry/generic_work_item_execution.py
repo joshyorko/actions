@@ -31,7 +31,7 @@ from actions.server.foundry.logical_receipts import (
     LogicalPublicationGuard,
     requirement_ids,
     validate_bound_record,
-    versions_for,
+    versions_for_selection,
 )
 from actions.server.foundry.models import FoundryAudit, FoundryRequest
 from actions.server.foundry.package_registry import FoundryPackageRegistry
@@ -79,6 +79,43 @@ class GenericTicket(BaseModel):
 
 def _digest(inputs: Any) -> str:
     return "sha256:" + hashlib.sha256(_canonical(inputs, 262144).encode()).hexdigest()
+
+
+def _bound_current(owner, caller, projection):
+    """Use issued immutable projection plus current SQL authority, never artifacts.
+
+    The surrounding LogicalPublicationGuard owns projection issuance and performs
+    the final prepared Package/provider/definition pins before base publication.
+    Repeating current/ticket/fence checks must not re-project source files.
+    """
+    snapshot = owner.snapshot
+    repository = owner.deployments._repository
+    stored = repository.get_revision(snapshot.deployment)
+    declaration = projection.declaration
+    if (
+        projection.snapshot != snapshot
+        or stored is None
+        or stored != projection.deployment
+        or not repository.was_activated(snapshot.deployment)
+        or snapshot not in tuple(entry.snapshot for entry in stored.execution_snapshots)
+        or declaration.ref != snapshot.capability
+    ):
+        raise AccessDenied("retained bound execution selection differs")
+    auth = owner.deployments._authorization
+    for package in stored.revision.specification.package_revisions:
+        auth.require_reference(caller.actor, package, "execute")
+    for requirement in declaration.binding_requirements:
+        bindings = [
+            binding
+            for binding in stored.revision.specification.bindings
+            if binding.requirement == requirement
+        ]
+        if len(bindings) != 1:
+            raise AccessDenied("retained bound requirement differs")
+        auth.require_reference(caller.actor, requirement, "execute")
+        auth.require_reference(caller.actor, bindings[0].provider, "execute")
+    owner.base._authorize(caller.actor, snapshot, "execute")
+    return declaration
 
 
 class GenericWorkItemExecution:
@@ -164,9 +201,22 @@ class GenericWorkItemExecution:
         self.authorization.require_workspace(caller, queue.workspace_id, permission)
         self.authorization.require_queue(caller, queue, permission)
 
-    def _current(self, caller: ManagedCaller) -> WorkItemDeclaration:
+    def _current(
+        self, caller: ManagedCaller, *, _projection=None
+    ) -> WorkItemDeclaration:
         caller = ManagedCaller.model_validate(caller)
         snapshot = self.snapshot
+        if _projection is not None:
+            declaration = _bound_current(self, caller, _projection)
+            if tuple(
+                p
+                for p in _projection.deployment.revision.specification.work_item_policies
+                if p.capability == snapshot.capability
+            ) != (self.policy,):
+                raise AccessDenied("immutable bound Work Item policy differs")
+            work_items = WorkItemDeclaration.model_validate(declaration.work_items)
+            self.policy.require_declaration(work_items)
+            return work_items
         resolved = self.deployments.resolve(
             caller.actor,
             snapshot.deployment.workspace_id,
@@ -189,15 +239,20 @@ class GenericWorkItemExecution:
         self.base._authorize(caller.actor, snapshot, "execute")
         return work_items
 
-    def _inputs(self, inputs: Any) -> dict:
+    def _inputs(self, inputs: Any, *, _projection=None) -> dict:
         from jsonschema import validate
 
         raw = _canonical(inputs, self.policy.max_input_bytes)
         normalized = json.loads(raw)
         if not isinstance(normalized, dict):
             raise ValueError("normalized Action input object required")
-        schema = self.registry.schema_for(self.snapshot)
-        validate(normalized, json.loads(schema.input_schema))
+        if _projection is not None:
+            if _projection.snapshot != self.snapshot:
+                raise AccessDenied("bound input selection differs")
+            input_schema = _projection.input_schema
+        else:
+            input_schema = self.registry.schema_for(self.snapshot).input_schema
+        validate(normalized, json.loads(input_schema))
         return normalized
 
     def _read_current(self, caller: ManagedCaller) -> None:
@@ -302,7 +357,7 @@ class GenericWorkItemExecution:
             ticket = self._ticket(caller, claim, run, require_owner=False)
             return run, _one(self.db, RunAttempt, ticket.fence.attempt_id), ticket
 
-    def _envelope(self, item_id: str) -> GenericInput:
+    def _envelope(self, item_id: str, *, _projection=None) -> GenericInput:
         if self.policy.input_queue is None:
             raise AccessDenied("capability has no input queue")
         payload = self.queue(self.policy.input_queue).load_payload(item_id)
@@ -313,7 +368,7 @@ class GenericWorkItemExecution:
             or envelope.input_digest != _digest(envelope.inputs)
         ):
             raise FenceRejected("protected Work Item input changed")
-        self._inputs(envelope.inputs)
+        self._inputs(envelope.inputs, _projection=_projection)
         return envelope
 
     def enqueue(self, caller: ManagedCaller, inputs: Any, idempotency_key: str) -> str:
@@ -463,9 +518,9 @@ class GenericWorkItemExecution:
             {
                 "result": _canonical(
                     {
-                        "version": versions_for(
-                            requirement_ids(self.registry, self.snapshot)
-                        )[0],
+                        "version": versions_for_selection(self.registry, self.snapshot)[
+                            0
+                        ],
                         "mode": "work-items" if claim else "standalone",
                         "claim": ClaimValue.of(claim).model_dump() if claim else None,
                         "fence": fence.model_dump(),
@@ -503,19 +558,15 @@ class GenericWorkItemExecution:
             if (
                 not isinstance(record, dict)
                 or record.get("version")
-                != versions_for(
-                    _projection.requirement_ids
-                    if _projection is not None
-                    else requirement_ids(self.registry, self.snapshot)
+                != versions_for_selection(
+                    self.registry, self.snapshot, projection=_projection
                 )[1]
             ):
                 raise FenceRejected("retained generic execution version differs")
         elif (
             record.get("version")
-            != versions_for(
-                _projection.requirement_ids
-                if _projection is not None
-                else requirement_ids(self.registry, self.snapshot)
+            != versions_for_selection(
+                self.registry, self.snapshot, projection=_projection
             )[0]
         ):
             raise FenceRejected("retained generic dispatch version differs")
@@ -543,8 +594,11 @@ class GenericWorkItemExecution:
             or self.base._pinned(pin) != self.snapshot
         ):
             raise FenceRejected("retained generic dispatch or owner differs")
-        inputs = self._inputs(json.loads(run.inputs))
-        if claim and self._envelope(claim.item_id).inputs != inputs:
+        inputs = self._inputs(json.loads(run.inputs), _projection=_projection)
+        if (
+            claim
+            and self._envelope(claim.item_id, _projection=_projection).inputs != inputs
+        ):
             raise FenceRejected("Run input differs from retained Work Item")
         return GenericTicket(
             claim=stored_claim, fence=fence, input_digest=_digest(inputs)
@@ -571,7 +625,7 @@ class _GenericOutputs(LogicalPublicationGuard, RunOutputService):
     def _check(self, fence, *, terminal=False):
         if fence != self.ticket.fence:
             raise FenceRejected("different generic Attempt")
-        self.owner._current(self.caller)
+        self.owner._current(self.caller, _projection=self._logical_projection())
         claim = self.ticket.claim.as_claim() if self.ticket.claim else None
         run = _one(self.db, Run, fence.run_id)
         if (
@@ -604,7 +658,9 @@ class _GenericOutputs(LogicalPublicationGuard, RunOutputService):
             raise AccessDenied("different generic RCC snapshot")
         with self.owner._transaction():
             self._check(self.ticket.fence)
-            declaration = self.owner._current(self.caller)
+            declaration = self.owner._current(
+                self.caller, _projection=self._logical_projection()
+            )
             if (
                 capability.get("mode") != declaration.mode
                 or capability.get("allowOutputs") is not declaration.allow_outputs
@@ -653,7 +709,12 @@ class _GenericOutputs(LogicalPublicationGuard, RunOutputService):
             queue = self._check(fence, terminal=terminal)
             if (
                 not isinstance(result, dict)
-                or result.get("version") != versions_for(self._logical_requirements)[1]
+                or result.get("version")
+                != versions_for_selection(
+                    self.owner.registry,
+                    self.owner.snapshot,
+                    projection=self._logical_projection(),
+                )[1]
                 or result.get("publicationFence") != fence.model_dump()
                 or result.get("claim")
                 != (self.ticket.claim.model_dump() if self.ticket.claim else None)
@@ -669,13 +730,19 @@ class _GenericOutputs(LogicalPublicationGuard, RunOutputService):
                 ):
                     raise FenceRejected("completed RCC journal required")
             self._logical_publication(actor, fence, outputs, result, run)
-            declaration = self.owner._current(self.caller)
+            declaration = self.owner._current(
+                self.caller, _projection=self._logical_projection()
+            )
             from jsonschema import validate
 
             validate(
                 result.get("actionResult"),
                 json.loads(
-                    self.owner.registry.schema_for(self.owner.snapshot).output_schema
+                    self._logical_projection().output_schema
+                    if self._logical_projection() is not None
+                    else self.owner.registry.schema_for(
+                        self.owner.snapshot
+                    ).output_schema
                 ),
             )
             children = []

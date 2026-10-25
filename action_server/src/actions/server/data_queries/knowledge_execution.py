@@ -222,6 +222,7 @@ class KnowledgeExecution:
         operation_id: str | None = None,
         output_name: str = "knowledge-corpus.json",
         mapped_inputs: dict | None = None,
+        timeout_ms: int | None = None,
     ) -> PreparedKnowledgeIngestion:
         """Stage provider/output bytes under an existing admission, never complete it.
 
@@ -270,7 +271,18 @@ class KnowledgeExecution:
                 "id=?",
                 (_ref_id(binding.source_provider),),
             )
-        budget = ReadBudget(spec.timeout_ms, cancelled)
+        if timeout_ms is not None and (
+            not isinstance(timeout_ms, int)
+            or isinstance(timeout_ms, bool)
+            or not 1 <= timeout_ms <= 30000
+        ):
+            raise SealedReadRejected("bounded Knowledge preparation timeout required")
+        budget = ReadBudget(
+            min(spec.timeout_ms, timeout_ms)
+            if timeout_ms is not None
+            else spec.timeout_ms,
+            cancelled,
+        )
         corpus = normalize_knowledge(
             spec, binding.source, binding.blobs, binding.seals, budget
         )
@@ -311,7 +323,12 @@ class KnowledgeExecution:
         return prepared
 
     def recheck_prepared_ingestion(
-        self, actor: Actor, fence: AttemptFence, prepared: PreparedKnowledgeIngestion
+        self,
+        actor: Actor,
+        fence: AttemptFence,
+        prepared: PreparedKnowledgeIngestion,
+        *,
+        preparation_complete: bool = False,
     ) -> None:
         """SQL-only final check; caller owns the encompassing publication transaction.
 
@@ -326,7 +343,17 @@ class KnowledgeExecution:
             or fence != prepared.fence
         ):
             raise SealedReadRejected("unissued or mismatched Knowledge preparation")
-        prepared.budget.check()
+
+        def check_budget():
+            if not isinstance(preparation_complete, bool):
+                raise ValueError("explicit preparation phase required")
+            if preparation_complete:
+                if prepared.budget.cancelled.is_set():
+                    raise SealedReadRejected("Knowledge publication cancelled")
+            else:
+                prepared.budget.check()
+
+        check_budget()
         with _transaction(self.db):
             _lock_workspace(self.db, prepared.binding.snapshot.workspace_id)
             if self.db.backend_name == "postgresql":
@@ -368,7 +395,7 @@ class KnowledgeExecution:
                 or int(output.expires_ms) <= _now(self.db)
             ):
                 raise SealedReadRejected("prepared Knowledge output differs")
-            prepared.budget.check()
+            check_budget()
 
     @staticmethod
     def _receipt(binding, fence, handle, digest):

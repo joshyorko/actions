@@ -4786,6 +4786,29 @@ transport cannot preserve the resource/audience contract, prepare a separate
 identity/transport configuration for approval; do not edit the working tunnel.
 Local E2 and discovery evidence cannot close this authenticated-host gate.
 
+
+Actual ChatGPT Desktop acceptance must pin the installed Runtime artifact as well
+as the host product/version and account capability. A newer repository evidence
+commit does not change the source identity of an older tested wheel. The a38
+Linux CPython 3.12 wheel is not native Windows/macOS qualification. Verify local
+artifact bytes and noneditable import origins before reusing cloud receipts.
+A public `/mcp` route and a supported authentication mechanism are independent
+prerequisites: the a38 SDK proof uses a fresh Bearer API key, which does not prove
+that a given ChatGPT connection UI supports it. Loopback is not automatically
+reachable by remote ChatGPT. Do not adapt the existing Executor tunnel or weaken
+host/origin/auth checks to make an unsupported connection work.
+
+A temporary host-test connection needs an exact ownership ledger and a before/after
+inventory. Remove only the connection ID, process/datadir and task-scoped authority
+created for that test; never overwrite whole user configuration during cleanup.
+Record unsupported Desktop rendering or tool/Tasks capabilities separately from
+successful SDK/reference-host proof. Cloud client initialization/network failures
+remain blocked until an actual model/tool interaction succeeds; a proposed narrow
+host test does not silently waive the owner's prerequisite matrix. The
+[reviewed a38 local-agent draft](../program/evidence/actions-next-327/recovery-a38/dakota-host-draft/agent-prompt.md)
+provides the pinned artifacts, public setup boundary, screenshot inventory and
+cleanup contract. It is a draft, not permission to dispatch a Dakota test.
+
 The invoice reconciliation profile now travels as an optional typed app-audience
 page field, copied from the sealed result rather than parsed from a description.
 The existing renderer uses separate status, PO expected values, invoice actual
@@ -5415,9 +5438,11 @@ preparation. Ordinary bootstrap constructs the shared port only with an explicit
 RCC profile and committed provider configuration, and supplies it to generic and
 Task runners. Startup does not query engines, resolve secrets or grant authority.
 Preparation resolves exact retained Deployment bindings and artifact-verified
-requirements, supports only selected parameterless data `.scan/v1` reads, and
-refuses declared aggregate output above 256 KiB or more than 32 operations before
-engine calls. Child context version `actions.logical-read-context/v1` contains
+requirements, supports selected parameterless Data `.scan/v1` reads and explicit
+artifact-mapped Knowledge ingest/search operations, and refuses declared aggregate
+output above 256 KiB or more than 32 operations before engine calls. Data-only
+child context remains `actions.logical-read-context/v1`; Knowledge-bearing
+selections use the separate `actions.logical-context/v2` contract. Both contain
 logical lookups only. Provider/config/catalog pins remain host-private; public
 summaries contain operation identities, immutable source/contract digests,
 context/result hashes and row counts. Only issued preparations can authorize
@@ -5439,6 +5464,20 @@ publication transaction alongside independent queue/Run guards. Binding entry
 caches immutable artifact expectations before that transaction; the new guard
 performs no artifact/provider/filesystem I/O inside it.
 
+
+Verify the entire bound publication wrapper, not only `_logical_publication`.
+Repeated `current`, ticket/fence and generic input-envelope checks, plus output
+schema validation, can reopen Package artifacts through `resolve`/`schema_for`
+even when the inner guard is SQL-only. Capture the verified capability declaration,
+input/output schemas and exact stored Deployment before entering final publication.
+Bound wrapper checks use that issued projection plus current SQL identity,
+activation and live grants; unbound paths retain ordinary projection behavior.
+Regression tests must call full standalone and generic `publish` after binding,
+with provider `open`, `load_verified`, `schema_for` and Deployment `resolve`
+trapped. Include Data/Knowledge success, queue completion and SQL grant/Package
+mutation rejection. Synthetic completion proves this transaction boundary, not
+actual RCC or installed client execution.
+
 Private CURRENT exclusion depends on normal Runtime holding action_server.lock;
 providers-local takes that same lock and refuses a running Runtime. Direct
 in-process factory/bootstrap callers do not automatically acquire it. Arbitrary
@@ -5450,8 +5489,8 @@ operator provisioning, Knowledge and full Data acceptance remain separate gates.
 
 GeneratedRccExecution refuses nonempty bindingRequirementIds without the explicit
 shared logical port and supported domain publication wrapper. Unsupported
-Knowledge requirements remain refused before launch; metadata compatibility
-does not bypass this gate.
+legacy/unmapped Knowledge requirements remain refused before launch; metadata
+compatibility does not bypass the closed mapped-operation and configured-host gates.
 
 
 ### Generated Action logical lookup SDK
@@ -5467,6 +5506,27 @@ rejects boolean-as-integer, subclasses and nonportable numeric values. An omitte
 selection. This draft requires the Core a4 / Runtime a39 candidate ranges and
 exact Core a4 source pin; accepting the source contract is not installed candidate
 qualification or permission to execute unsupported Knowledge operations.
+
+For every requirement with explicit `invocations`, both compiler build and
+retained artifact verification also call the closed `knowledge_contract` validator
+for every operation. Mapping validity alone is insufficient: wrong effects,
+missing search parameters, alternate/optional result fields and unsupported
+operation shapes are refused even when a modified manifest has a correct new
+revision digest. Search compilation fixtures must declare all four required
+parameters (ingestion_handle/query strings and offset/limit integers), map them
+to corresponding required Action input-schema fields, and declare the required
+`result_json` string. Generic requirement DTO tests may still model unsupported
+metadata; requirements without invocations retain the v1/v2 validation path and
+byte identities. Passing fake-executor compiler tests does not replace the
+separately gated exact-prepared-receipt RCC build/import/test proof.
+
+Dispatch-refusal fixtures must reach the intended domain gate: their registry
+must expose `selection_for(capability, runtime_plan)` with the same Package,
+capability and Runtime Plan identities, and the snapshot must include the exact
+compiled plan digest. A stale load-only registry or absent runtime_plan fails
+selection first and cannot prove the later unsupported Work Item output refusal.
+Update the fixture to the canonical selection contract while retaining that
+refusal assertion; do not weaken execution selection to satisfy old mocks.
 
 `actions.data.scan(requirement_id, operation)` reads one declared eager logical
 lookup and returns a fresh list of flat row dictionaries. It performs no query,
@@ -5826,6 +5886,36 @@ binding reconstruction in the ordinary host before those public joins qualify.
 The declaration permits up to 128 source files but the source manifest remains
 limited to 16; this is not evidence of 128-file ingestion. Existing synchronous
 Knowledge adapters remain destructive and are not made immutable by these stores.
+Generated Knowledge operation validation uses an explicit primitive result
+contract, not a change to `BindingField`: exactly one required string field named
+`result_json`. `knowledge_operations.knowledge_contract` independently checks
+`<name>.ingest/v1` (write, no parameters) or `<name>.search/v1` (read, required
+string ingestion_handle/query and integer offset/limit), with a lowercase
+alphanumeric/underscore/hyphen prefix beginning in a letter and at most 57
+characters. Existing DTO serialization and Data contracts are unchanged; callers
+must select this validator only for the explicit generated Knowledge contract.
+
+`encode_result` validates the inner envelope before encoding it as canonical
+UTF-8 JSON in `{"result_json": "..."}`. Ingestion permits only version
+`actions.knowledge-ingestion-staged/v1`, revision, corpusHandle, corpusDigest and
+status=`staged`; it cannot substitute a completed ingestion receipt. Search uses
+the existing `actions.knowledge-search/v1` fields and normalized hit shape
+(id/source/ordinal/text/values), unique ordered hit identities and exact page
+cardinality. Query/offset/limit/total retain the known version's 512/100000/100/
+10000 bounds. References, handles and digests must be canonical. Nested values
+remain lossless JSON, bounded to depth 8 from the envelope root, 64 object members
+and 10,000 array items, with finite portable numbers and no scalar subclasses or
+negative floating zero. Parent Runtime still owns corpus schema/provenance and
+live authorization; envelope validation is not execution authority.
+
+The operation byte limit measures the entire outer result object, including JSON
+escaping of the inner JSON string. Measuring only inner bytes undercounts it.
+Ingestion counts as one metadata row; search counts returned hits against
+max_rows. Generated Python explicitly decodes `result_json`; the Core SDK sees a
+string and cannot enforce the inner envelope's shape or depth, so the host encoder
+must run before publishing prepared context. This helper alone does not establish
+RCC, Task, or installed Knowledge acceptance.
+
 `KnowledgeExecution.prepare_ingestion` factors provider normalization/write and
 provisional output staging from terminal completion. Its frozen issued
 `PreparedKnowledgeIngestion` carries the actual actor/binding/Attempt fence,
@@ -5856,8 +5946,9 @@ only the existing standalone receipt; generated RCC receipt/Task integration
 requires its separate complete validator and is not established by this factor.
 
 Ordinary Knowledge host/operator selection is covered by the separate host tests;
-public Knowledge still requires Task wiring, input-mapped generated Python
-consumption, installed paging/export and two-provider lifecycle proof. Split provider service and advanced Knowledge remain distinct
+generated Knowledge has source-level Task/publication and mapped-Python joins,
+but installed real-RCC consumption, paging/export and two-provider lifecycle
+qualification remain open. Split provider service and advanced Knowledge remain distinct
 outstanding gates. Migration 22 has no downmigration;
 the frozen version 21 status reader reports TOO_NEW, so downgrade requires a
 qualified older snapshot rather than opening the upgraded database.
@@ -5935,3 +6026,103 @@ model transport an extra prerequisite once the owner separates those gates.
 Independently verify the exact installed client, reachable endpoint, supported
 authentication and owned-resource cleanup plan; protocol/reference-host proof
 does not establish those host-specific prerequisites or permit changes to Executor.
+
+
+### Generated Knowledge publication and retained source validation
+
+Mapped Knowledge selects generated dispatch/execution v3 from artifact-verified
+capability requirements. No-binding v1 and Data-only v2 retain their wire formats.
+The v2 logical summary records kind, exact mapped-parameter digest, operation and
+source/contract identity, result/context digests, row count and closed Knowledge
+revision/corpus/fence evidence. Launch and terminal summaries must match the same
+issued preparation. Every ingestion adds its exact sealed corpus to the four RCC
+outputs; missing, extra, renamed or mismatched inventory is refused. Managed/Task
+readback uses the shared validator rather than accepting a nested standalone
+Knowledge receipt as completion authority.
+
+Generated ingest operation IDs and corpus names derive from Run ID, requirement
+ID and operation, so multiple ingestions in one Run do not collide. Provider put
+and staging remain provisional until actual generated execution succeeds and the
+existing canonical Run/Attempt publication transaction completes. No scheduler,
+control database, grant or automatic retry is introduced. Synthetic receipt tests
+prove these joins and refusal boundaries, not actual RCC or installed acceptance.
+
+Generated search validates the complete successful source ingestion envelope,
+current Attempt, exact corpus seal, immutable definition/provider identity and
+actual mapped handle before reading retained provider bytes. Final publication
+pins source Run/RunPin/Attempt/output SQL and rechecks independent source Run read,
+collection/source authority, corpus expiry and global cancellation/deadline.
+Retained search receipt validation independently joins source fence/digest/name
+back to that successful ingestion; matching mutations in launch and terminal
+summaries do not authorize a fabricated source. Source projections are bounded
+to an acyclic history of eight ancestor levels and64 projections and cached before
+publication; final validation performs SQL only. Expired source RCC logs do not
+invalidate an otherwise live corpus, but their sealed metadata must still match.
+Expired terminal acknowledgement does not fabricate available result bytes.
+
+The operation timeout bounds normalization/provider work, not subsequent RCC
+execution. After successful preparation, the trusted generated join calls the
+issued ingestion recheck with `preparation_complete=True`; independent SQL grant,
+fence, seal and expiry checks remain mandatory. Cancellation uses the shared
+absolute execution deadline/event. Standalone callers retain the original
+preparation budget by default. Full wrapper publication, including cached schema,
+input and current-deployment checks, must be tested with file/provider projection
+I/O trapped after binding, rather than checking only the inner guard.
+
+
+### Reviewed parallel acceptance boundaries
+
+Wide Canvas table checks must verify readable column layout as well as viewport
+containment: a table can avoid page overflow while wrapping every word one
+character per line. Test keyboard focus and horizontal scrolling of the named
+result region at narrow widths. Component-harness screenshots use Playwright
+output paths and synthetic adapters; they do not establish installed Runtime or
+authenticated-host acceptance.
+
+Generated Knowledge exposes the search envelope inside the required `result_json`
+string. Page-artifact completeness checkers consume that inner envelope, not the
+Task/Run carrier or outer binding-result object. Record the extraction or generated
+artifact-writing step and preserve its exact bytes for restart comparison;
+separately prove expected revision, corpus digest and ingestion handle from
+authorized execution evidence. Synthetic page checks do not qualify installed execution.
+
+`qualify_installed_restore_327.py` qualifies only the private offline SQLite helper
+from a trusted wheel. Verify installed import origin and wheel-member bytes,
+attachment relocation, unchanged source database and tamper refusal before target
+creation. This does not qualify full Runtime dependencies, CLI restore, Windows,
+active jobs or reproducibility across hosts.
+
+When Poetry reports that all attempts to connect failed, retain a `-vvv`
+diagnostic before attributing the failure to networking. HTTP 200 followed by
+`OSError(30, 'Read-only file system')` indicates a local filesystem failure.
+Set `POETRY_CACHE_DIR` and `XDG_CACHE_HOME` to task-owned writable directories
+for package commands as well as bootstrap; do not change HOME, install host
+dependencies or relax network/security policy. Repeat the failed gate and keep
+both receipts. Matching repeated wheel hashes qualify only the measured
+toolchain/input scope, not untested platforms or globally reproducible builds.
+
+`test_robot_real_execution.py` separates genuine development Robot execution
+from opt-in legacy Robot API/RCC execution. Both inspect Robot 7.4.2 XML for the
+exact selected task and status, preserve failure diagnostics, and verify retained
+payloads after removing the mutable source. Direct cases use real subprocesses
+and the production artifact collector; RCC cases use the pinned binary and reopen
+the legacy Run database. These do not qualify immutable Robot Package admission,
+canonical RunAttempt leases, independent worker restart, Task protocol, or
+uncertain-effect recovery. An unset `ACTIONS_ROBOT_REAL_RCC` explicitly skips RCC
+cases; opting in requires an absolute `ACTIONS_RUNTIME_RCC_BINARY` pointing to
+Josh RCC18.19.3 and an owned writable `ROBOTS_HOME`, and missing or invalid
+prerequisites must fail. Disable optional HTML reports/tracing while retaining
+stdout and XML. Robot fixtures comparing exact UTF-8 bytes must encode explicitly
+and use `Create Binary File`; `OperatingSystem.Create File` converts LF to CRLF on
+Windows. Stream direct child stdout to the retained receipt while execution runs
+so a timeout does not discard diagnostics. This direct timeout evidence does not
+qualify legacy RCC timeout recovery. Windows execution remains unverified.
+
+Target: docs/skills/repository-operations.md, source qualification guidance.
+
+When tests run from a dirty checkout, a recorded HEAD commit and HEAD tree identify only the base. Record exact selected test inventories and per-file source hashes, distinguish execution-time hashes from a later checkpoint snapshot, and retain failed attempts alongside corrected receipts. Do not describe the base tree as the tested immutable source. Repeat subset runs and helper runs overlap; report each inventory without adding their pass counts into a unique campaign total. Installed qualification must pin the subsequently committed candidate independently.
+
+Verified basis: source-joined runner captures git HEAD/tree while root source is dirty; selected module hashes and final checkpoint file hashes have different capture times. This addition prevents false immutable-source attribution without discarding historical evidence.
+
+
+Portable RCC preparation receipts must be generated from observed local publish output and reference only the new host’s owned cache. An unchanged manifest and package version do not establish identical transitive artifacts; verify the Core wheel bytes and retain the actual artifact digest. Never stamp an old digest onto rebuilt state.

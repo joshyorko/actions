@@ -5,12 +5,15 @@ import hashlib
 import json
 
 from actions.server._models import Run, RunStatus
-from actions.server.foundry.generic_work_item_execution import GenericTicket
+from actions.server.foundry.generic_work_item_execution import (
+    GenericTicket,
+    _bound_current,
+)
 from actions.server.foundry.logical_receipts import (
     LogicalPublicationGuard,
     requirement_ids,
     validate_bound_record,
-    versions_for,
+    versions_for_selection,
 )
 from actions.server.foundry.package_registry import FoundryPackageRegistry
 from actions.server.run_outputs.models import RunAttempt, RunExecutionIntent, RunPin
@@ -36,7 +39,15 @@ class StandaloneActionExecution:
         self.deployments, self.base, self.snapshot = deployments, outputs, snapshot
         self.db, self.registry = outputs.db, outputs.capabilities
 
-    def current(self, caller):
+    def current(self, caller, *, _projection=None):
+        if _projection is not None:
+            declaration = _bound_current(self, caller, _projection)
+            if (
+                declaration.work_items.mode != "none"
+                or declaration.work_items.allow_outputs
+            ):
+                raise AccessDenied("ordinary bound no-Work-Item declaration required")
+            return
         s = self.snapshot
         resolved = self.deployments.resolve(
             caller.actor,
@@ -57,7 +68,7 @@ class StandaloneActionExecution:
         self.base._authorize(caller.actor, s, "execute")
 
     def ticket(self, caller, run, *, _projection=None):
-        self.current(caller)
+        self.current(caller, _projection=_projection)
         pin = _one(self.db, RunPin, run.id)
         attempt = _one(self.db, RunAttempt, pin.current_attempt_id)
         fence = AttemptFence(
@@ -83,10 +94,8 @@ class StandaloneActionExecution:
             not isinstance(record, dict)
             or record.get("version")
             != (
-                versions_for(
-                    _projection.requirement_ids
-                    if _projection is not None
-                    else requirement_ids(self.registry, self.snapshot)
+                versions_for_selection(
+                    self.registry, self.snapshot, projection=_projection
                 )[1 if terminal else 0]
             )
             or record.get("claim") is not None
@@ -145,8 +154,8 @@ class StandaloneActionExecution:
                     {
                         "result": _canonical(
                             {
-                                "version": versions_for(
-                                    requirement_ids(self.registry, self.snapshot)
+                                "version": versions_for_selection(
+                                    self.registry, self.snapshot
                                 )[0],
                                 "mode": "standalone",
                                 "claim": None,
@@ -189,7 +198,7 @@ class _StandaloneOutputs(LogicalPublicationGuard, RunOutputService):
         if actor != self.caller.actor or terminal_status != RunStatus.PASSED:
             raise AccessDenied("ordinary success-only RCC publication required")
         with _transaction(self.db):
-            self.owner.current(self.caller)
+            self.owner.current(self.caller, _projection=self._logical_projection())
             run = _one(self.db, Run, fence.run_id)
             if (
                 self.owner.ticket(
@@ -201,7 +210,12 @@ class _StandaloneOutputs(LogicalPublicationGuard, RunOutputService):
                 raise FenceRejected("ordinary retained ticket differs")
             if (
                 not isinstance(result, dict)
-                or result.get("version") != versions_for(self._logical_requirements)[1]
+                or result.get("version")
+                != versions_for_selection(
+                    self.owner.registry,
+                    self.owner.snapshot,
+                    projection=self._logical_projection(),
+                )[1]
                 or result.get("claim") is not None
                 or result.get("publicationFence") != fence.model_dump()
             ):
@@ -221,7 +235,11 @@ class _StandaloneOutputs(LogicalPublicationGuard, RunOutputService):
             validate(
                 result.get("actionResult"),
                 json.loads(
-                    self.owner.registry.schema_for(self.owner.snapshot).output_schema
+                    self._logical_projection().output_schema
+                    if self._logical_projection() is not None
+                    else self.owner.registry.schema_for(
+                        self.owner.snapshot
+                    ).output_schema
                 ),
             )
             return super().publish(

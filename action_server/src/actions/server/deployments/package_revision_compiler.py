@@ -75,6 +75,12 @@ def _package_schema(requirements):
 def _validate_invocation_compatibility(requirements, compatibility, environment):
     if _package_schema(requirements) != PACKAGE_INVOCATIONS_SCHEMA_VERSION:
         return
+    from actions.server.data_queries.knowledge_operations import knowledge_contract
+
+    for requirement in requirements:
+        if requirement.invocations is not None:
+            for operation in requirement.operations:
+                knowledge_contract(operation)
     # This new draft requires the exact private Core candidate contract.
     # Do not silently bless an older SDK or an unqualified future context reader.
     core = [

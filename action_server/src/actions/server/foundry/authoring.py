@@ -850,8 +850,18 @@ class FoundryAuthoring(CanvasPort):
                                 PackageCompilationPolicy(
                                     "canvas-" + str(application_id.root),
                                     backend.logical_name,
-                                    ">=1.1.0a38,<2.0.0",
-                                    ">=1.1.0a3,<2.0.0",
+                                    ">=1.1.0a39,<2.0.0"
+                                    if any(
+                                        req.invocations is not None
+                                        for req in declaration.logical_requirements
+                                    )
+                                    else ">=1.1.0a38,<2.0.0",
+                                    ">=1.1.0a4,<2.0.0"
+                                    if any(
+                                        req.invocations is not None
+                                        for req in declaration.logical_requirements
+                                    )
+                                    else ">=1.1.0a3,<2.0.0",
                                     work_items=declaration.work_items,
                                     logical_requirements=declaration.logical_requirements,
                                 ),

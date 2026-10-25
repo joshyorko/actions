@@ -277,7 +277,7 @@ class GeneratedRccExecution:
         )
         from actions.server.foundry.logical_receipts import (
             requirement_ids,
-            versions_for,
+            versions_for_selection,
         )
 
         requirements = requirement_ids(self.registry, snapshot)
@@ -517,6 +517,22 @@ class GeneratedRccExecution:
         )
         output_refs = []
         output_receipts = []
+        if bound:
+            for prepared_knowledge in logical_state["prepared"].knowledge:
+                pending = prepared_knowledge.ingestion
+                if pending is not None:
+                    self.logical_execution.recheck(
+                        actor, fence, logical_state["prepared"]
+                    )
+                    output_refs.append(pending.output)
+                    output_receipts.append(
+                        {
+                            "name": pending.output_name,
+                            "ref": pending.output.model_dump(mode="json"),
+                            "digest": pending.corpus_digest,
+                            "size": pending.corpus_size,
+                        }
+                    )
         for name, media_type, payload in output_payloads:
             if bound:
                 self._check_deadline(deadline)
@@ -541,7 +557,7 @@ class GeneratedRccExecution:
                 }
             )
         result_receipt = {
-            "version": versions_for(requirements)[1],
+            "version": versions_for_selection(self.registry, snapshot)[1],
             "mode": journal["mode"],
             "claim": journal["claim"],
             "lineage": lineage,
@@ -615,7 +631,10 @@ class GeneratedRccExecution:
                 raise AccessDenied("logical requirement declaration unavailable")
             for ref in declaration.binding_requirements:
                 requirement = self.registry.get_binding_requirement(ref)
-                if requirement is None or requirement.contract.kind != "data":
+                if requirement is None or requirement.contract.kind not in (
+                    "data",
+                    "knowledge",
+                ):
                     raise AccessDenied("logical requirement runtime is unsupported")
             self.logical_execution.require_selected_adapters(snapshot)
         if (
@@ -711,8 +730,7 @@ class GeneratedRccExecution:
             snapshot = None
             if actor is not None:
                 from actions.server.foundry.logical_receipts import (
-                    requirement_ids,
-                    versions_for,
+                    versions_for_selection,
                 )
 
                 snapshot, _ = self.outputs.execution_context(actor, fence)
@@ -721,10 +739,8 @@ class GeneratedRccExecution:
                     if isinstance(self.outputs, (_GenericOutputs, _StandaloneOutputs))
                     else None
                 )
-                expected_version = versions_for(
-                    projection.requirement_ids
-                    if projection is not None
-                    else requirement_ids(self.registry, snapshot)
+                expected_version = versions_for_selection(
+                    self.registry, snapshot, projection=projection
                 )[0]
             standalone = (
                 isinstance(self.outputs, (_GenericOutputs, _StandaloneOutputs))

@@ -11,6 +11,11 @@ import math
 import threading
 import time
 from dataclasses import dataclass
+from typing import TYPE_CHECKING, Any
+
+if TYPE_CHECKING:
+    from actions.server.foundry.logical_receipts import KnowledgeOperationEvidence
+    from actions.server.foundry.generated_knowledge import KnowledgePreparation
 
 from actions.server.data_queries.sealed_duckdb import scan_contract
 from actions.server.deployments.foundry_repository import FoundryRepository
@@ -73,6 +78,9 @@ class LogicalReadReceipt:
     contract_digest: str
     result_digest: str
     row_count: int
+    kind: str = "data"
+    parameters_digest: str | None = None
+    knowledge: KnowledgeOperationEvidence | None = None
 
 
 @dataclass(frozen=True, eq=False)
@@ -90,6 +98,8 @@ class PreparedLogicalReads:
     provider_pins: tuple[
         tuple[ProviderProfileRevisionRef, tuple[SQLRecordPin, ...]], ...
     ]
+
+    knowledge: tuple[KnowledgePreparation, ...] = ()
 
 
 class LogicalExecution:
@@ -144,9 +154,18 @@ class LogicalExecution:
             if (
                 len(bindings) != 1
                 or requirement is None
-                or requirement.contract.kind != "data"
+                or requirement.contract.kind not in ("data", "knowledge")
             ):
                 raise LogicalReadRejected("exact selected data binding required")
+            if requirement.contract.kind == "knowledge":
+                from actions.server.data_queries.knowledge_operations import (
+                    knowledge_contract,
+                )
+
+                if requirement.contract.invocations is None:
+                    raise LogicalReadRejected("explicit Knowledge mappings required")
+                for operation in requirement.contract.operations:
+                    knowledge_contract(operation)
             self.configured.require_adapter_available(
                 bindings[0].provider,
                 tuple(operation.name for operation in requirement.contract.operations),
@@ -175,7 +194,7 @@ class LogicalExecution:
         self._check(event)
         try:
             with self.db.connect():
-                snapshot, _ = self.outputs.execution_context(actor, fence)
+                snapshot, inputs = self.outputs.execution_context(actor, fence)
                 resolved = self.deployments.resolve(
                     actor,
                     snapshot.deployment.workspace_id,
@@ -191,6 +210,9 @@ class LogicalExecution:
                     raise LogicalReadRejected("retained Deployment unavailable")
                 self.configured.check_current()
                 selections = []
+                input_schema = json.loads(
+                    self.registry.schema_for(snapshot).input_schema
+                )
                 for binding in resolved.bindings:
                     projected = self.registry.get_binding_requirement(
                         binding.requirement
@@ -198,41 +220,132 @@ class LogicalExecution:
                     if (
                         projected is None
                         or projected.ref != binding.requirement
-                        or projected.contract.kind != "data"
+                        or projected.contract.kind not in ("data", "knowledge")
                     ):
                         raise LogicalReadRejected(
                             "supported artifact-verified data requirement required"
                         )
                     entry = self.configured.entry(binding.provider)
                     for operation in projected.contract.operations:
-                        matched, _ = scan_contract(
-                            entry.descriptor, entry.source, operation.name
-                        )
+                        if projected.contract.kind == "knowledge":
+                            from actions.server.data_queries.knowledge_operations import (
+                                knowledge_contract,
+                            )
+
+                            knowledge_contract(operation)
+                            matches = [
+                                op
+                                for op in entry.descriptor.operations
+                                if op.name == operation.name
+                            ]
+                            matched = matches[0] if len(matches) == 1 else None
+                        else:
+                            matched, _ = scan_contract(
+                                entry.descriptor, entry.source, operation.name
+                            )
                         if matched != operation:
                             raise LogicalReadRejected(
                                 "provider operation contract differs"
                             )
-                        selections.append((binding, projected.contract.id, operation))
-                selections.sort(key=lambda item: (item[1], item[2].name))
-                keys = [(name, operation.name) for _, name, operation in selections]
+                        selections.append((binding, projected.contract, operation))
+                selections.sort(key=lambda item: (item[1].id, item[2].name))
+                keys = [
+                    (requirement.id, operation.name)
+                    for _, requirement, operation in selections
+                ]
                 if len(keys) != len(set(keys)) or len(keys) > MAX_OPERATIONS:
                     raise LogicalReadRejected(
                         "bounded unambiguous logical operations required"
                     )
-                lookups = [
-                    dict(requirementId=name, operation=operation.name, rows=[])
-                    for _, name, operation in selections
+                from actions.server.deployments.logical_bindings import (
+                    mapped_parameters,
+                )
+
+                version2 = any(
+                    requirement.kind == "knowledge" for _, requirement, _ in selections
+                )
+                parameters = [
+                    mapped_parameters(requirement, operation.name, input_schema, inputs)
+                    if requirement.kind == "knowledge"
+                    else {}
+                    for _, requirement, operation in selections
                 ]
-                declared = len(_bytes(dict(version=VERSION, lookups=lookups))) + sum(
+                version = "actions.logical-context/v2" if version2 else VERSION
+                lookups: list[dict[str, Any]] = [
+                    dict(
+                        requirementId=requirement.id,
+                        operation=operation.name,
+                        kind=requirement.kind,
+                        parameters=parameters[index],
+                        result=[] if requirement.kind == "data" else {},
+                    )
+                    if version2
+                    else dict(
+                        requirementId=requirement.id, operation=operation.name, rows=[]
+                    )
+                    for index, (_, requirement, operation) in enumerate(selections)
+                ]
+                declared = len(_bytes(dict(version=version, lookups=lookups))) + sum(
                     max(0, op.max_bytes - 2) for _, _, op in selections
                 )
                 if declared > MAX_BYTES:
                     raise LogicalReadRejected(
                         "declared aggregate logical context exceeds bound"
                     )
-                receipts, pins = [], []
-                for index, (binding, name, operation) in enumerate(selections):
+                receipts, pins, knowledge = [], [], []
+                for index, (binding, requirement, operation) in enumerate(selections):
+                    name = requirement.id
                     self._check(event)
+                    if requirement.kind == "knowledge":
+                        from actions.server.foundry.generated_knowledge import (
+                            prepare_knowledge,
+                        )
+
+                        prepared_knowledge = prepare_knowledge(
+                            self,
+                            actor,
+                            fence,
+                            snapshot,
+                            binding,
+                            requirement,
+                            operation,
+                            parameters[index],
+                            event,
+                        )
+                        knowledge.append(prepared_knowledge)
+                        result_value = json.loads(prepared_knowledge.result)
+                        lookups[index]["result"] = result_value
+                        inner = json.loads(result_value["result_json"])
+                        row_count = len(inner["hits"]) if "hits" in inner else 1
+                        receipts.append(
+                            LogicalReadReceipt(
+                                name,
+                                operation.name,
+                                binding.provider,
+                                self.configured.entry(
+                                    binding.provider
+                                ).source.revision_id,
+                                self.configured.entry(binding.provider).config_digest,
+                                self.configured.pointer.digest,
+                                operation.contract_digest,
+                                _digest(prepared_knowledge.result),
+                                row_count,
+                                "knowledge",
+                                _digest(prepared_knowledge.parameters),
+                                prepared_knowledge.evidence,
+                            )
+                        )
+                        pins.append(
+                            (
+                                binding.provider,
+                                self.configured.pin_sql(
+                                    actor,
+                                    binding.provider,
+                                    manage=prepared_knowledge.ingestion is not None,
+                                ),
+                            )
+                        )
+                        continue
                     with self.configured.open_provider(
                         actor, binding.provider
                     ) as engine:
@@ -258,7 +371,7 @@ class LogicalExecution:
                         raise LogicalReadRejected(
                             "logical result bounds or canonical bytes differ"
                         )
-                    lookups[index]["rows"] = rows
+                    lookups[index]["result" if version2 else "rows"] = rows
                     receipts.append(
                         LogicalReadReceipt(
                             name,
@@ -278,7 +391,7 @@ class LogicalExecution:
                             self.configured.pin_sql(actor, binding.provider),
                         )
                     )
-                context = _bytes(dict(version=VERSION, lookups=lookups))
+                context = _bytes(dict(version=version, lookups=lookups))
                 if len(context) > MAX_BYTES:
                     raise LogicalReadRejected("actual logical context exceeds bound")
                 self.configured.check_current()
@@ -306,6 +419,7 @@ class LogicalExecution:
                         for ref in stored.revision.specification.package_revisions
                     ),
                     tuple(pins),
+                    tuple(knowledge),
                 )
                 self._issued[id(prepared)] = prepared
                 try:
@@ -365,7 +479,14 @@ class LogicalExecution:
                 for package_pin in prepared.package_pins:
                     package_pin.recheck(self.db)
                 for reference, pins in prepared.provider_pins:
-                    self.configured.recheck_sql(actor, reference, pins)
+                    manage = any(
+                        item.ingestion is not None
+                        and item.ingestion.binding.source_provider == reference
+                        for item in prepared.knowledge
+                    )
+                    self.configured.recheck_sql(actor, reference, pins, manage=manage)
+                for item in prepared.knowledge:
+                    item.recheck(actor, fence)
         except LogicalReadRejected:
             raise
         except Exception:

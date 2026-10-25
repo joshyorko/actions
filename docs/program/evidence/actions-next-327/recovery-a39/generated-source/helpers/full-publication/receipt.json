@@ -1,0 +1,62 @@
+{
+  "copied_wip_base_sha256": {
+    "action_server/src/actions/server/foundry/generic_work_item_execution.py": "4b8f04a59c2691ab142fdebfe67ce5934f2741aa812c16593c7344fa5299cca1",
+    "action_server/src/actions/server/foundry/standalone_execution.py": "38f8dd602613b7f1ae16def595c849de05dd9338b75fae189d0c55b8af3d6cc7"
+  },
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "evidence": "3 reproduced regressions;9 new success/negative cases plus38 domain and37 legacy cases",
+    "learning": "Trap I/O around full wrapper.publish, not only leaf _logical_publication; cache exact verified declaration/schemas/deployment while retaining SQL grants/pins",
+    "remaining_uncertainty": "Parent union/RCC/installed acceptance",
+    "removed_ambiguity": "SQL-only leaf guard does not establish SQL-only outer transaction"
+  },
+  "external_mutations": "none; no root edits/commit/push",
+  "final_source_sha256": {
+    "action_server/src/actions/server/foundry/generic_work_item_execution.py": "058ff371dc1f44e75ce3babd4c124cd31e73ce35c381b69bf59da14a0a121b43",
+    "action_server/src/actions/server/foundry/standalone_execution.py": "b6957a07fcd30b358b7dbbf39213964cc619f588ffe07c14b220a1bef6c242bd",
+    "action_server/tests/action_server_tests/test_logical_full_publication.py": "30d16a85eb0aa22c6d4ae94ecba6303d2accb01bbda5f9ae7a500ca8b518a441"
+  },
+  "gates": {
+    "diff_check": "passed; original git apply --check against root succeeded before parent application",
+    "full_wrapper_and_logical_domain": {
+      "failed": 0,
+      "log": "combined.log",
+      "note": "same combined invocation then had43 missing-RCC fixture setup errors in legacy module; those were rerun separately",
+      "passed": 47,
+      "skipped": 0
+    },
+    "legacy_generic": {
+      "deselected": 6,
+      "deselection": "actual RCC cases retained as parent gate",
+      "failed": 0,
+      "log": "legacy.log",
+      "passed": 37,
+      "skipped": 0
+    },
+    "quality": "ruff check/format/isort3 files; configured mypy2 productionfiles passed"
+  },
+  "logs": {
+    "check.log": "a8e599256a5fb6452b74233e880c20ad5ce4917a68c0a30ea5029eb0d212b2f7",
+    "combined.log": "8af47b9bfeeeb7b597b9b32aa7a578c3a9df6c622078b117776dfbed3218840f",
+    "first-green.log": "25e9457df1a2ce4fe8e66a3f85420726c0d9e65e618093cb687df2074a4f50b1",
+    "legacy-cleanup.json": "e16457be96f367a212dc4a4082758e256973e72ba87258f7d1bc68617ebd6042",
+    "legacy.log": "c1de2dc0daab80eccd0bef1bb94741b07b29f45c6b5a39d09e8ce23a58b643a0",
+    "red-confirmed.log": "066619ffc5e95f0b8fec6210dc99f85a706ac9c843b017dda501abf2cad400a5",
+    "red.log": "19b42363eb6d6d316b5d4d5177bfb708066a7d754e4122eccc88557a3c022da9"
+  },
+  "parent_files_match_delivered_bytes": {
+    "action_server/src/actions/server/foundry/generic_work_item_execution.py": true,
+    "action_server/src/actions/server/foundry/standalone_execution.py": true,
+    "action_server/tests/action_server_tests/test_logical_full_publication.py": true
+  },
+  "patch_sha256": "ee4bbde88a65db17a94b64ac58e817d5fdca4eff11cf1196299f78ef98b0ff92",
+  "prior_failures": {
+    "combined.log": "47 passed;43 legacy setup errors due missing pinned RCC in isolated scratch. Corrected by copying existing pinned binary; no install or source behavior bypass",
+    "first-green.log": "4 passed;1 test assertion expected DONE instead of wire value COMPLETED; product publish succeeded",
+    "red-confirmed.log": "3 full wrapper regressions fail on baseline Deployment.resolve with I/O trap",
+    "red.log": "scratch overlay missing committed Knowledge host fixture; collectionerror retained"
+  },
+  "proof_boundary": "Full bound standalone Data/Knowledge and generic queue publication through SQL authority; Data on SQLite/owned verify-full PostgreSQL; Knowledge on SQLite. Synthetic RCC receipts, no real RCC or installed acceptance claim. Legacy generic SQLite/PostgreSQL37 passed.",
+  "schema": "actions.full-publication-lane/v1",
+  "upstream_disposition": "none"
+}

@@ -299,3 +299,119 @@ def test_alias_collision_and_private_metadata_rejected():
     raw["operations"][0]["row_count"] = 1
     with pytest.raises(ValueError):
         validate_summary(raw, expected=expected())
+
+
+def test_knowledge_version_requires_verified_mapping_and_cached_selection():
+    from actions.server.foundry.logical_receipts import (
+        _RetainedProjection,
+        versions_for_selection,
+    )
+
+    ref = SimpleNamespace(requirement_id=SimpleNamespace(root="documents"))
+    snapshot = SimpleNamespace(capability="capability")
+    contract = SimpleNamespace(kind="knowledge", invocations=())
+    registry = SimpleNamespace(
+        get_capability=lambda _: SimpleNamespace(binding_requirements=(ref,)),
+        get_binding_requirement=lambda _: SimpleNamespace(ref=ref, contract=contract),
+    )
+    expected = (
+        "actions.generated-rcc-dispatch/v3",
+        "actions.generated-rcc-execution/v3",
+    )
+    assert versions_for_selection(registry, snapshot) == expected
+    for terminal in (False, True):
+        validate_generated_version(
+            {"version": expected[int(terminal)]},
+            requirement_ids=("documents",),
+            terminal=terminal,
+            knowledge=True,
+        )
+        with pytest.raises(ValueError):
+            validate_generated_version(
+                {"version": expected[int(terminal)]},
+                requirement_ids=("documents",),
+                terminal=terminal,
+            )
+    contract.invocations = None
+    with pytest.raises(ValueError, match="mapping"):
+        versions_for_selection(registry, snapshot)
+    contract.kind = "data"
+    assert versions_for_selection(registry, snapshot) == versions_for(("documents",))
+    projection = _RetainedProjection(snapshot, (), (), (), ("documents",), True)
+    # Final publication uses its already verified immutable projection, not I/O.
+    assert versions_for_selection(None, snapshot, projection=projection) == expected
+    with pytest.raises(ValueError):
+        versions_for_selection(None, object(), projection=projection)
+    for ids, knowledge in [((), True), (("documents",), 1)]:
+        with pytest.raises(ValueError):
+            versions_for(ids, knowledge=knowledge)
+
+
+def test_v2_summary_keeps_knowledge_evidence_closed_and_separate():
+    import json
+    from uuid import uuid4
+
+    from actions.server.foundry.logical_receipts import (
+        LogicalOperationV2Identity,
+        LogicalSummaryV2,
+    )
+    from actions.server.run_outputs.types import AttemptFence
+
+    operation = {
+        **identity(operation="documents.scan/v1").model_dump(mode="json"),
+        "operation": "documents.ingest/v1",
+        "kind": "knowledge",
+    }
+    obj = {
+        "version": "actions.logical-receipt/v2",
+        "contextDigest": "sha256:" + "c" * 64,
+        "operations": [
+            {
+                **operation,
+                "resultDigest": "sha256:" + "d" * 64,
+                "parametersDigest": "sha256:" + "e" * 64,
+                "rowCount": 1,
+                "knowledge": {
+                    "revision": {
+                        "workspace_id": str(uuid4()),
+                        "collection_id": str(uuid4()),
+                        "revision_id": "sha256:" + "a" * 64,
+                    },
+                    "corpusHandle": "art_" + "a" * 22,
+                    "corpusDigest": "sha256:" + "b" * 64,
+                    "corpusOutput": "knowledge-" + "f" * 64 + ".json",
+                    "sourceFence": AttemptFence(
+                        run_id=str(uuid4()),
+                        attempt_id=str(uuid4()),
+                        owner_id=str(uuid4()),
+                        epoch=1,
+                    ).model_dump(mode="json"),
+                },
+            }
+        ],
+    }
+    expected_v2 = LogicalSummaryV2.model_validate_json(json.dumps(obj))
+    assert validate_summary(obj, expected=expected_v2) == expected_v2
+    assert (
+        validate_summary_identities(
+            obj,
+            expected_operations=(LogicalOperationV2Identity(**operation),),
+            requirement_ids=("records",),
+        )
+        == expected_v2
+    )
+    with pytest.raises(ValueError):
+        validate_summary(obj, expected=expected())
+    for path, value in [
+        (("operations", 0, "kind"), "data"),
+        (("operations", 0, "knowledge"), None),
+        (("operations", 0, "parametersDigest"), "bad"),
+        (("operations", 0, "knowledge", "extra"), "denied"),
+    ]:
+        bad = copy.deepcopy(obj)
+        target = bad
+        for key in path[:-1]:
+            target = target[key]
+        target[path[-1]] = value
+        with pytest.raises(ValueError):
+            validate_summary(bad, expected=expected_v2)

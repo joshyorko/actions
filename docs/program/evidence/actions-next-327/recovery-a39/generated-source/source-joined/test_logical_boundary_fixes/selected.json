@@ -1,0 +1,6 @@
+[
+  "tests/action_server_tests/test_logical_boundary_fixes.py::test_terminal_task_ack_survives_expiry_but_get_refuses",
+  "tests/action_server_tests/test_logical_boundary_fixes.py::test_expiry_exception_cannot_authorize_pending_publication",
+  "tests/action_server_tests/test_logical_boundary_fixes.py::test_final_budget_gate_runs_after_domain_validation[deadline]",
+  "tests/action_server_tests/test_logical_boundary_fixes.py::test_final_budget_gate_runs_after_domain_validation[cancel]"
+]

@@ -680,23 +680,34 @@ def test_explicit_work_item_declaration_changes_immutable_manifest(mode, outputs
     )
     assert compiled.source_archive == baseline.compiled_package.source_archive
 
-    # Compiling a declaration never turns the current none-only RCC port into
-    # a queue worker. No execution or synthetic Work Item is admitted here.
+    # A declaration cannot turn a runner without canonical Work Item outputs
+    # into a queue worker. No execution or synthetic Work Item is admitted here.
     from types import SimpleNamespace
 
     from actions.server.foundry.rcc_execution import GeneratedRccExecution
     from actions.server.run_outputs.service import AccessDenied
 
     runner = object.__new__(GeneratedRccExecution)
-    runner.registry = SimpleNamespace(
-        load=lambda ref: compiled, evidence=lambda ref: SimpleNamespace(ready=True)
-    )
+    package = object()
     snapshot = SimpleNamespace(
         capability_authority="package-revision",
         capability=SimpleNamespace(
-            package_revision=object(),
+            package_revision=package,
             capability_id=SimpleNamespace(root=manifest["capabilities"][0]["id"]),
         ),
+        runtime_plan=SimpleNamespace(
+            package_revision=package,
+            plan_digest=compiled.runtime_plan_header.plan_digest,
+        ),
+    )
+    runner.registry = SimpleNamespace(
+        selection_for=lambda capability, runtime_plan: SimpleNamespace(
+            package_revision=package,
+            capability=capability,
+            runtime_plan=runtime_plan,
+            compiled=compiled,
+        ),
+        evidence=lambda ref: SimpleNamespace(ready=True),
     )
     with pytest.raises(AccessDenied, match="not executable"):
         runner._verified_selection(snapshot)
