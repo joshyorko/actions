@@ -1167,3 +1167,11 @@ The a35 correction passes42 gateway/candidate cases and two official SDK request
 through the actual gateway on both SQL backends; installed corrected completion
 and restart still require their own receipt. Original harness/preparation-format
 failures are preserved alongside the actual gateway defect.
+
+[Clean installed a35 current Task lifecycle](evidence/actions-next-327/recovery-a35/installed/README.md)
+now passes ordinary CLI/public setup, genuine generated RCC execution, current
+MCP acknowledgement/reconnect replay, sealed completion and real process restart
+with one exact Run/Attempt. All four Runtime processes shut down gracefully.
+This closes that bounded current Task path; broader legacy/interactions/Robot/
+Work Item Tasks, public artifact-byte reading and the complete owner gates remain
+open. No Dakota readiness is inferred.

@@ -1,0 +1,234 @@
+
+  ⚡️ Starting Action Server... v1.1.0a35
+
+Using user-specified datadir: /workspace/actions-recovery-327/ordinary-task-a35/datadir
+Logs may be found at: /workspace/actions-recovery-327/ordinary-task-a35/datadir/server_log.txt.
+Checking migration status for database backend: sqlite
+Operating mode: standard
+/workspace/actions-recovery-327/installed-a35/consumer/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py:1540: TypedDictExtraConfigWarning: TypedDict class 'RequestParamsMeta' allows extra items, but 'extra' configuration is set to `'forbid'`. The 'extra' configuration value will be ignored.
+  warnings.warn(
+StreamableHTTP session manager started
+Initializing scheduler engine...
+Scheduler engine started (check_interval=10.0s, max_concurrent=10)
+  ⏰ Scheduler started (check interval: 10.0s)
+
+  ⚡️ Local MCP endpoint: http://127.0.0.1:33919/mcp
+
+  ⚡️ Local Action Server: http://127.0.0.1:33919
+     Public access: use --expose to expose (OpenAPI only)
+API key authentication enabled. Sign in with your configured key.
+2026-10-25 05:38:24: GET /api/managed-work-items/v1/schema 200 OK
+2026-10-25 05:38:24: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:24: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:24: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:24: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:25: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:25: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:25: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:25: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:25: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:25: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:25: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:26: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:26: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:26: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:26: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:26: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:26: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:26: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:26: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:27: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:27: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:27: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:27: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:27: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:27: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:28: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:28: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:28: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:28: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:28: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:28: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:28: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:28: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:29: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:29: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:29: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:29: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:29: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:29: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:30: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:30: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:30: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:30: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:30: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:30: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:30: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:30: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:31: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:31: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:31: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:31: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:31: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:31: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:32: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:32: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:32: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:32: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:32: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:32: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:33: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:33: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:33: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:33: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:33: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:33: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:33: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:33: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:34: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:34: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:34: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:34: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:34: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:34: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:35: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:35: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:35: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:35: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:35: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:35: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:35: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:35: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:36: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:36: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:36: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:36: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:36: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:36: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:37: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:37: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:37: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:37: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:37: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:37: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:37: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:37: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:38: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:38: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:38: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:38: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:38: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:38: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:39: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:39: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:39: POST /mcp 200 OK
+MCP request
+2026-10-25 05:38:39: POST /mcp 200 OK
+MCP request
+Stopping scheduler...
+Scheduler engine stopped
+Stopping action server...
+StreamableHTTP session manager shutting down
