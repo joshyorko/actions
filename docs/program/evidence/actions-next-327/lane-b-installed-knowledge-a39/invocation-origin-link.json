@@ -1,0 +1,51 @@
+{
+  "captured_at": "2026-10-25T14:19:47.875442+00:00",
+  "invocation": {
+    "file": "ingestion-invocation.json",
+    "provenance": "retained original request bytes; no redaction required after field review",
+    "raw_sha256": "188e04ac92f6853c6b61119ad1501095e8a694e5c95781e14ec47eda862e3811",
+    "canonical_sha256": "bf51967bdc449cb1a648f01b1458105c42b3fa4b645d1048f3ce6d8cbd45300c",
+    "canonicalization": "UTF-8 json.dumps(sort_keys=True,separators=(comma,colon),ensure_ascii=False)"
+  },
+  "historical_installed_origin": "NOT_RETAINED; recipes called origin(), but omitted result from compact receipts",
+  "later_installed_origin": {
+    "prefix": "/workspace/lane-b-state/installed-a39-producer/consumer",
+    "versions": {
+      "actions-runtime": "1.1.0a39",
+      "actions-core": "1.1.0a4"
+    },
+    "origins": {
+      "actions.server": "/workspace/lane-b-state/installed-a39-producer/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+      "actions": "/workspace/lane-b-state/installed-a39-producer/consumer/lib/python3.12/site-packages/actions/__init__.py"
+    }
+  },
+  "later_origin_scope": "fresh isolated -I read-only check of same retained consumer; not a historical reconstruction",
+  "bindings": [
+    {
+      "file": "ingestion-task-receipt.json",
+      "raw_sha256": "ce2ade67db20666ae416502660964db56d76aa089022543e24f6c31e9faee51e"
+    },
+    {
+      "file": "restart-replay-receipt.json",
+      "raw_sha256": "5b6d66605cf7d6944606130e781c3c969e6ca526cc33ca7c1219517d93bd67b0"
+    },
+    {
+      "file": "ingestion-task-terminal.json",
+      "raw_sha256": "d80f1d0c696efe48d3341495398ac994d571740d31217abd471ce53f5b1a4991"
+    },
+    {
+      "file": "authoring-corrected-request.json",
+      "raw_sha256": "73b4cfc5f3ab31cbd8fa02e091a49a47b3e3b39a7d0ad6ca6347bfd239e9e28d"
+    },
+    {
+      "file": "authoring-corrected-response.json",
+      "raw_sha256": "c2329a7568a30b02a8cd36d9a68c511c3cc03b6246765ca9b6235813a3457b1f"
+    },
+    {
+      "file": "build-receipt.json",
+      "raw_sha256": "d077a09c1fbf14f5cbe20ca8c29e74115c3aa4758490c99213aba7a0619eb15c"
+    }
+  ],
+  "http": "NOT_RUN",
+  "task_id": "dda9a652-7e86-462f-bd32-d59c6ebc0225"
+}

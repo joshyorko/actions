@@ -1,0 +1,53 @@
+{
+  "mode": "detached",
+  "snapshot": {
+    "action_id": "17367865-ff62-566f-ac33-76279471f077",
+    "canvas_application": {
+      "app_id": "34689c94-3d90-4d64-9f3a-2c2b0befd051",
+      "revision_id": "sha256:8499e15e2f07890593c8ca4a1541d539fe2011cf61ea3854d6c679cc5648cc4b",
+      "workspace_id": "779510b1-c759-4ea6-baa3-13ebe78f25dc"
+    },
+    "capability": {
+      "capability_id": "action.ingest_documents",
+      "package_revision": {
+        "package_id": "67b3235d-c01f-5fa4-b9e8-645f51d32ae0",
+        "revision_id": "sha256:b0a07a54e06e23d75ae6aaeda0fd5ca6d49faa6d6af45edeacb2cbb45cdacaaf",
+        "workspace_id": "779510b1-c759-4ea6-baa3-13ebe78f25dc"
+      }
+    },
+    "capability_authority": "package-revision",
+    "capability_schema_digest": "sha256:6ccd3391483137c7754e42ded20ca0da9193dc1b4ec265c65310e95aafa14b46",
+    "data_binding": null,
+    "deployment": {
+      "deployment_id": "34689c94-3d90-4d64-9f3a-2c2b0befd051",
+      "revision_id": "sha256:5725ed315c38ea92c34ec863f3da6a26e3f4391d49e95d193d75b166f48b5193",
+      "workspace_id": "779510b1-c759-4ea6-baa3-13ebe78f25dc"
+    },
+    "output_provider": {
+      "provider_profile_id": "566231ae-0f73-4518-9d93-f90854404d7a",
+      "revision_id": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+      "workspace_id": "779510b1-c759-4ea6-baa3-13ebe78f25dc"
+    },
+    "policy": {
+      "policy_id": "d77429e2-e12b-4e7e-b8dc-cbcadb9140db",
+      "revision_id": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "workspace_id": "779510b1-c759-4ea6-baa3-13ebe78f25dc"
+    },
+    "runtime_kind": "rcc",
+    "runtime_plan": {
+      "package_revision": {
+        "package_id": "67b3235d-c01f-5fa4-b9e8-645f51d32ae0",
+        "revision_id": "sha256:b0a07a54e06e23d75ae6aaeda0fd5ca6d49faa6d6af45edeacb2cbb45cdacaaf",
+        "workspace_id": "779510b1-c759-4ea6-baa3-13ebe78f25dc"
+      },
+      "plan_digest": "sha256:a750762644b39e4ba603b5430816e471b5f1df18e4f51fe590f2afd49138090f"
+    },
+    "worker": {
+      "revision_id": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "worker_profile_id": "977e77ab-6e9f-4628-b2e1-8f062897e01c",
+      "workspace_id": "779510b1-c759-4ea6-baa3-13ebe78f25dc"
+    }
+  },
+  "inputs": {},
+  "idempotencyKey": "lane-b-a39-ingestion-before-route"
+}

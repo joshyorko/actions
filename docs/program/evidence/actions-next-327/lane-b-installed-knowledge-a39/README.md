@@ -94,3 +94,31 @@ route wiring and remaining lifecycle matrix. Rollback removes only the new
 fixture helper/evidence; this slice changes no production state/schema code.
 
 Upstream disposition: none.
+
+## Retained invocation and origin linkage follow-up
+
+`ingestion-invocation.json` is the retained original public request, reviewed to
+contain only public snapshot identities, empty inputs and the owned idempotency
+key. It was not reconstructed. `invocation-origin-link.json` binds its raw and
+canonical SHA-256 to the original before/replay receipts, Task terminal, corrected
+Canvas request/response and build receipt. The historical compact receipts omitted
+`runner.receipt['installed']`; that lost result is not retroactively asserted.
+The link instead includes a clearly dated fresh `Lifecycle.origin()` check of the
+same retained consumer using its installed interpreter with `-I`. This check
+passed for Runtime 1.1.0a39 / Core 1.1.0a4. Original receipts remain unchanged.
+
+Exact proposed addition to `docs/skills/repository-operations.md`:
+
+> For detached installed acceptance, retain the original sanitized
+> capability_invoke request (snapshot, inputs and idempotencyKey), its canonical
+> digest, terminal Task/Run/Attempt identity, and the actual isolated interpreter
+> origin/version result in the same evidence chain. Link restart replay receipts
+> to those digests. If a historical origin result was not retained, mark it
+> missing and label any later verification separately; do not reconstruct it as
+> contemporaneous evidence.
+
+Evidence: retained original invocation bytes, immutable prior receipts, and fresh
+isolated origin output in `invocation-origin-link.json`. This removes ambiguity
+between historical and later origin checks. Remaining uncertainty: ordinary HTTP
+readback and complete Knowledge lifecycle are still NOT_RUN. Upstream disposition:
+none.
