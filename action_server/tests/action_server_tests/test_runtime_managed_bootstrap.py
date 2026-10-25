@@ -61,3 +61,46 @@ def test_native_bootstrap_joins_managed_identity_and_live_sql(
             assert denied.json()["error"]["code"] == "forbidden"
         finally:
             native.close()
+
+
+def test_configured_native_completion_joins_same_sql_without_retry_or_grants(
+    database_location, tmp_path, monkeypatch
+):
+    from types import SimpleNamespace
+    from uuid import uuid4
+
+    from actions.server.foundry import bootstrap
+    from actions.server.foundry.models import FoundryAccessGrant
+    from actions.server.managed_work_items.contracts import Operation, Permission
+
+    refs = _refs()
+    with _runtime_database(database_location, refs.workspace, ()) as db:
+        initial = create_runtime_canvas(db, tmp_path / "native", "owned-key", html=HTML)
+        workspace = initial.workspace
+        initial.close()
+        before = db.all(FoundryAccessGrant)
+        # Wiring-only fixture: no descriptor validation or RCC execution claim.
+        profile = SimpleNamespace(
+            worker=SimpleNamespace(workspace_id=workspace),
+            worker_id=str(uuid4()),
+            prepared_receipt="/tmp/owned-unused",
+            provider_key="owned-output-provider",
+        )
+        monkeypatch.setattr(bootstrap, "read_runtime_profile", lambda path: profile)
+        monkeypatch.setattr(
+            bootstrap, "load_prepared_rcc_environment", lambda path: object()
+        )
+        configured = create_runtime_canvas(
+            db, tmp_path / "native", "owned-key", html=HTML
+        )
+        try:
+            service = configured.managed_work_items
+            assert service.native_completion.db is db
+            assert service.native_completion.execution.worker_id == profile.worker_id
+            assert service.worker_for is None
+            operations = service._operations(set(Permission), False, True)
+            assert Operation.COMPLETE in operations
+            assert Operation.RETRY not in operations
+            assert db.all(FoundryAccessGrant) == before
+        finally:
+            configured.close()

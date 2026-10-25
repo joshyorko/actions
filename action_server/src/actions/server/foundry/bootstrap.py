@@ -269,13 +269,23 @@ def create_runtime_canvas(
                 ReviewedCanvasExecution,
             )
             from actions.server.foundry.reviewed_view import ReviewedCanvasView
+            from actions.server.managed_work_items.native_completion import (
+                NativeTerminalCompletion,
+            )
+
+            execution = ActivatedReviewedExecution(
+                deployments, reviews, outputs, worker_id=profile.worker_id
+            )
+            managed = SQLManagedWorkItemsService(
+                reviews,
+                SqlQueueAuthorization(db),
+                native_completion=NativeTerminalCompletion(execution),
+            )
 
             port = ReviewedCanvasView(
                 ReviewedCanvasExecution(
                     authoring,
-                    ActivatedReviewedExecution(
-                        deployments, reviews, outputs, worker_id=profile.worker_id
-                    ),
+                    execution,
                     runner=PinnedReviewedRccRunner(
                         prepared,
                         Path(__file__).resolve().parents[1] / "bin" / "rcc-18.19.3",

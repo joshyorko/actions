@@ -29,13 +29,21 @@ queue names, including `all`, are sent unchanged, and successful creation select
 the response's `queue_name`. This legacy navigation does not enumerate or grant
 access to managed Workspace queues.
 
-Ordinary startup supplies the managed actor and, when configured, worker identity,
-but does not supply `SQLManagedWorkItemsService.worker_for`. Its capability response
-therefore omits `items.complete` and `items.retry`, including when native Canvas RCC
-execution is configured. Tests that explicitly inject an invoice worker qualify
-that injected service only. Client readiness must inspect live capabilities from
-the installed ordinary process; descriptor presence and schema discovery do not
-prove managed mutation availability.
+Ordinary startup supplies the managed actor and, when configured, worker identity.
+Configured native startup also supplies a separate terminal-completion adapter over
+the same activated execution authority. Managed `items.complete` for a published
+native Run validates the retained historical ClaimRef, independent Work Item and
+Attempt fences, current review/Package/Deployment authorization, and all four
+sealed outputs. It returns the completed item and records a managed receipt and
+audit; it never executes RCC or finishes the queue again. Replays revalidate
+current authority. Expired source-input artifacts do not prevent retained
+completion, but missing, altered, or expired completion outputs fail closed.
+
+This adapter does not advertise native retry: uncertain launch remains blocked.
+Invoice `worker_for` retains its separate execution/reconciliation contract.
+Tests that inject an invoice worker qualify that injected service only. Client
+readiness must inspect live capabilities from the installed ordinary process;
+descriptor presence and schema discovery do not prove mutation availability.
 
 ## Safety Invariants
 
@@ -100,6 +108,20 @@ pinned Poetry toolchain and supply explicit URLs for newly owned isolated
 services before running them. The canonical `.devcontainer/bin/verify-work-items`
 requires both URLs; its build/Twine/clean-consumer checks do not publish. Never
 use the test fixture's default ports as evidence that a service is task-owned.
+
+Relocating a coordinated offline local datadir requires rebasing legacy SQLite
+attachment metadata because the SDK validates stored absolute paths against the
+configured attachment root. The private `_datadir_restore` helper copies a pinned
+backup to an absent target and rebases only validated `work_item_files` paths; it
+does not weaken SDK containment or migrate the database schema. Pin the manifest
+before tampering or restore, including the original datadir separately from the
+backup location. Stop all writers, reject SQLite sidecars, and use an exclusively
+controlled caller-owned target parent without group/world write permission.
+Manifest verification detects changed backup members; it does not prove writer
+quiescence or protect path-based target writes from an adversarial same-user
+process. Other absolute references and external stores require separate
+qualification. Unit and SDK readback evidence does not establish installed
+whole-Runtime recovery.
 
 Rollback requires coordinated review/Work Item SQL and output-object backups;
 downgrading Runtime before restoring a pre-migration database is not supported.

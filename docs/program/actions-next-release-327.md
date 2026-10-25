@@ -41,6 +41,23 @@ and explicit optional celld disposition remain separate gates. Dakota stays
 STOP. No community merge, public tag/publication, production, credentials,
 tunnel, spending or other repository mutation is authorized by this recovery.
 
+## a26 source completion and offline restore slice
+
+Runtime1.1.0a26 introduces the newly reconstructed private offline restore helper
+and native terminal-completion readback. The helper requires an offline pinned
+backup and private target; it copies and verifies members, then rebases only
+legacy local Work Item attachment paths in the target SQLite database. It is
+not a complete Runtime backup/restore or migration command. Native completion
+validates retained historical fences, live grants and all sealed outputs,
+records the managed request/audit, and never executes or finishes the queue
+again. It does not enable uncertain-launch retry.
+
+The integrated slice passed138 tests with zero skips on SQLite and owned
+PostgreSQL. Full Runtime typecheck468 and configured Python lint passed after
+test import ordering correction. The [receipt](evidence/actions-next-327/recovery-a26/receipt.json)
+identifies pre-format tested bytes and post-format-only changes. Full package,
+actual RCC completion readback, installed a26 and complete restore remain open.
+
 ## Resumed release convergence — October24
 
 The owner resumed the full existing release on October24. The preserved branch

@@ -135,8 +135,11 @@ cannot choose either identity. The Runtime perimeter delegates only this exact
 managed prefix to that authenticator and continues protecting other APIs with
 their existing policy. This adapter does not create credentials or grants.
 
-Evidence-bound completion delegates to the existing invoice worker after actual
-RCC execution. The wire `queue_state` is `DONE` when the SDK's persisted state is
+Evidence-bound invoice completion delegates to the existing invoice worker after
+actual RCC execution. The native adapter instead validates an already published
+Run and its four sealed outputs under current authorization, without executing
+or finishing the queue again. Its source qualification does not establish an
+installed-consumer or VSIX pass. The wire `queue_state` is `DONE` when the SDK's persisted state is
 `COMPLETED`; do not change the SDK/storage representation to match a transport
 label. Repeated completion returns the retained item and replay flag, without
 another execution. Client-provided output payloads and Run IDs are not execution

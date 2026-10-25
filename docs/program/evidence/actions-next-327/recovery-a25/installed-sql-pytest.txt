@@ -1,0 +1,10 @@
+.............................................                            [100%]
+=============================== warnings summary ===============================
+../../consumer/lib/python3.12/site-packages/starlette/testclient.py:45
+  /workspace/actions-recovery-327/installed-a25/consumer/lib/python3.12/site-packages/starlette/testclient.py:45: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /workspace/actions-recovery-327/evidence/a25-installed-sql/tests.xml -
+45 passed, 1 warning in 5.96s
+Log (html): /workspace/actions-recovery-327/evidence/a25-installed-sql/log/log.html

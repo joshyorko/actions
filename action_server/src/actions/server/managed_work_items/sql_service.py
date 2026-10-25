@@ -82,6 +82,7 @@ from actions.server.managed_work_items.contracts import (
     RunResult,
     RunView,
 )
+from actions.server.managed_work_items.native_completion import NativeCompletionPort
 from actions.server.managed_work_items.native_runs import NativeRunProjection
 from actions.server.run_outputs.models import RunAttempt, RunOutput, RunPin
 from actions.server.run_outputs.service import (
@@ -144,6 +145,7 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
         *,
         worker_for: Callable[[CanvasResultScope], InvoiceWorkerService | None]
         | None = None,
+        native_completion: NativeCompletionPort | None = None,
     ) -> None:
         if reviews is None or authorization is None:
             raise ManagedError("unconfigured")
@@ -155,6 +157,9 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
         self.db = reviews.db
         self.authorization = authorization
         self.worker_for = worker_for
+        if native_completion is not None and native_completion.db is not self.db:
+            raise ManagedError("unconfigured")
+        self.native_completion = native_completion
         self.admission = ReviewedManagedAdmission(reviews)
         self.native_runs = NativeRunProjection(
             reviews, authorization, self._review_for_item
@@ -339,7 +344,7 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
         if (
             Permission.READ in permissions
             and Permission.COMPLETE in permissions
-            and worker_available
+            and (worker_available or self.native_completion is not None)
             and worker_identity_available
         ):
             operations.append(Operation.COMPLETE)
@@ -1308,6 +1313,8 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
             return
         if isinstance(command, Complete):
             self._require_worker(command.claim.owner_id, caller.worker_id)
+            if self._native_completed(caller, command, scope):
+                return
             row = self._item_row(command.queue, command.claim.item_id)
             _, proposal, _ = self._review_for_item(caller, command.queue, scope, row)
             self._authorize_review(caller.actor, scope, proposal, "review")
@@ -1456,6 +1463,12 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
             if command.outcome != "done" or command.output_payloads or command.run_ids:
                 raise ManagedError("unsupported_operation")
             self._require_worker(command.claim.owner_id, caller.worker_id)
+            if self._native_completed(caller, command, scope):
+                row = self._item_row(command.queue, command.claim.item_id)
+                return ItemResult(
+                    item=self._item_view(caller, command.queue, scope, row),
+                    server_time_ms=str(_now(self.db)),
+                )
             self._require_current_claim(command.queue, command.claim)
             row = self._item_row(command.queue, command.claim.item_id)
             _, proposal, _ = self._review_for_item(caller, command.queue, scope, row)
@@ -1498,6 +1511,18 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
                 server_time_ms=str(_now(self.db)),
             )
         raise ManagedError("unsupported_operation")
+
+    def _native_completed(
+        self, caller: ManagedCaller, command: Complete, scope: CanvasResultScope
+    ) -> bool:
+        if self.native_completion is None:
+            return False
+        row = self._item_row(command.queue, command.claim.item_id)
+        native = self.native_runs.for_item(caller, command.queue, scope, row)
+        if native is None:
+            return False
+        self.native_completion.completed(caller, scope, command, native)
+        return True
 
     def _require_current_claim(
         self, queue: QueueRef, claim: ClaimRef

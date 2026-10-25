@@ -1,0 +1,59 @@
+{
+  "base_sha": "5d950150b7b5886d1e54246ac216ff41aa4b9f1e",
+  "scope": "private native terminal completion readback; no retry, launch, queue finish, grants or generic-policy changes",
+  "patch_sha256": "4717526d3f943bacc3faa9ff4d1094c128014c04c9c92d3bebdccda4d58de5d9",
+  "files": {
+    "action_server/src/actions/server/managed_work_items/native_completion.py": "3f5c8e29ffdd60badc19ca50b4f48aab032ea4be627c0fd67526df90abe56f63",
+    "action_server/src/actions/server/managed_work_items/sql_service.py": "05feb94e812e4b2786cdc43b6464f870d1d2a2747a6b0f85f0e7ffddf04d7cf9",
+    "action_server/src/actions/server/foundry/bootstrap.py": "928c70f3513faac48376d7904d0d726cbac103514e92c9711659b3ff275c51cc",
+    "action_server/tests/action_server_tests/test_managed_native_completion.py": "568a564a9919c6210315171fc9a11f3362c537078c6a0b0c12cfed422c9fab58",
+    "action_server/tests/action_server_tests/test_runtime_managed_bootstrap.py": "07f83816e290347626153f0d1f17c0b4fde7e75c01441aff21085e8ace4be93d"
+  },
+  "final_tests": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "54",
+    "time": "107.207",
+    "timestamp": "2026-10-25T01:24:10.469178+00:00",
+    "hostname": "8b6f8f848e44"
+  },
+  "validation": "RCC toolkit package_environment; prepared Runtime interpreter; explicit scratch PYTHONPATH overlay; isolated pytest logs; source evidence only",
+  "static": "Ruff check and configured format5files PASS; mypy3sourcefiles PASS",
+  "retained_failures": [
+    {
+      "log": "red.log",
+      "reason": "regression-first missing native_completion module"
+    },
+    {
+      "log": "green.log",
+      "reason": "archive omitted ignored bundled RCC required by test fixture; copied verified exact pinned binary into scratch only"
+    },
+    {
+      "log": "green2.log",
+      "reason": "20pass/2fail: changed output seal surfaced ValueError instead of bounded ManagedError; fixed adapter error conversion"
+    },
+    {
+      "log": "mypy.log",
+      "reason": "one Optional[str] Run.result JSON-load error; normalized absent value fail closed"
+    }
+  ],
+  "intermediate_pass": "final.log:50passed before final Optional[str] normalization/import ordering; superseded by final2 exact54pass",
+  "postgresql": {
+    "image": "postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81",
+    "owned_container_id": "955fdc1343d25d35b62695265db9e2a5c4e2eeebbd3ee4390259981335dc3b2a",
+    "loopback_port": 32770,
+    "memory_limit": "768m",
+    "tmpfs": "512m",
+    "cleanup": "stopped exit0 then removed exact owned container; no inherited service borrowed"
+  },
+  "limits": [
+    "synthetic native publication and package fixture; no actual RCC execution claimed",
+    "no installed consumer, VSIX or ChatGPT proof",
+    "no full Runtime package gate",
+    "output retention/seals required; source artifact expiry independently allowed",
+    "uncertain native launch/retry stays blocked"
+  ],
+  "upstream_disposition": "none"
+}

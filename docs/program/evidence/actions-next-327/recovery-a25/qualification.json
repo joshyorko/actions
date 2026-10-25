@@ -48,10 +48,11 @@
   },
   "upstream_disposition": "none",
   "files": {
+    "installed-generated-pytest.txt": "f5d41af78b040284fdeb8043ac0fef57361f0609f4cd2c9d3ef26877a60f5af7",
     "installed-sql-receipt.json": "26ebc1c5e06bdc25c5e569d587fdde273d7e1957d51d0b7edd0136fde12fbc0b",
     "installed-generated-tests.xml": "3534933464576cf047135f5f53a11c68c99a0b2f130249ee3db73465a1e8cc1b",
     "installed-browser.mjs": "7933d44b0f1bfc56233e15551530e3aedb74a1114fab9757992b3dca97251897",
-    "installed-generated-pytest.log": "f5d41af78b040284fdeb8043ac0fef57361f0609f4cd2c9d3ef26877a60f5af7",
+    "installed-sql-pytest.txt": "a44d3f08c665a1913eae623c491489e2709eef3216d907ca83a3743a607a883f",
     "consumer-provenance.json": "ab32cafbd01a9c73cbdd0c5ea706dd05ac1581cb8bab39f3930f307aa26f3d2f",
     "verify-consumer.py": "f19d55bf509df093d0b52c54eecbc84137afe760c61abf225b738317b92a7120",
     "installed-browser.py": "4fc89c5f714e6c787cc55a2dd18998ea2a0d27ad9d1e84faeb8c35faaf87520f",
@@ -64,18 +65,17 @@
     "consumer_guard.py": "d9cc217a560d2ed74e4057c051d6819714f2e9752cf57eb9bf426a9a5be5ffc9",
     "installed-sql-tests.xml": "27420021ce7ba88200f009cf00d87119470ee04f66cb7a3f7181eca70f536d1e",
     "custom-queue-after-restart.png": "74c06b73d9c30a7dc3666fa6616f4b29d81356e0e5d27d7e8374042254ef8180",
-    "installed-sql-pytest.log": "a44d3f08c665a1913eae623c491489e2709eef3216d907ca83a3743a607a883f",
-    "source/components.log": "a9814fc54ccd191c4699b2042ff07c7b1959efe14f95c5c759896da131cdd829",
+    "source/invoice.txt": "7ea32c9a69dec4fa16e23e23dbec3025cef8821ab943d4cbdd0de9f75596a275",
     "source/package_compiler.xml": "e50c082e0aa6665ffdc5cff0e86a001b78fab2c7ad88e9062b248f09241987c3",
     "source/foundry_storage.xml": "cad72ecb34322209208755ce509a75ad5b259bafe0f9e01c3d4fbc4e19c15c92",
     "source/managed.xml": "619a9835076a1a02fcfcffc36ba8b31bd11595d328472088f239c58262f56b91",
-    "source/managed.log": "22b377e9411b1ab8832f20da32f7053a11f41823af5935b20c74870ed7bfc2dd",
-    "source/foundry_storage.log": "96eb4c184345010831feba442217e1fd1be650a162a3bcf66f4b5779c1a6b4c5",
+    "source/package_compiler.txt": "853da36079e4162c658311ad68962a569a11b8384a6f4d068de32698382270c3",
+    "source/managed.txt": "22b377e9411b1ab8832f20da32f7053a11f41823af5935b20c74870ed7bfc2dd",
     "source/invoice.xml": "f8685d5ab12295972132d837f7faf5d2127f399a1bb3788dc2153c02394b50e4",
-    "source/package_compiler.log": "853da36079e4162c658311ad68962a569a11b8384a6f4d068de32698382270c3",
-    "source/postgres.log": "cac167dc1d0114502040f08f35986475a50ba41c086db156e1f0575e22e81031",
     "source/components.xml": "210a27577c847918e36fc651bcd3475bb3b48803e3317bce45226bee0f00caeb",
     "source/receipt.json": "5c2a3b472fe7d48839fe855b7ef589ab763b2e2b192c907437629618734842bd",
-    "source/invoice.log": "7ea32c9a69dec4fa16e23e23dbec3025cef8821ab943d4cbdd0de9f75596a275"
+    "source/foundry_storage.txt": "96eb4c184345010831feba442217e1fd1be650a162a3bcf66f4b5779c1a6b4c5",
+    "source/components.txt": "a9814fc54ccd191c4699b2042ff07c7b1959efe14f95c5c759896da131cdd829",
+    "source/postgres.txt": "cac167dc1d0114502040f08f35986475a50ba41c086db156e1f0575e22e81031"
   }
 }
