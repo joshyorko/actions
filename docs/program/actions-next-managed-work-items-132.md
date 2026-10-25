@@ -175,3 +175,19 @@ Attempt epochs are independently validated against their canonical rows. A
 reclaimed Work Item can legitimately have claim2 and first Attempt1. Cancelled
 or lease-lost native projection currently fails closed; inspectable recovery
 status and general producer/retry semantics remain release gaps.
+
+## Installed a38 completion and retry boundary
+
+The ordinary generated consumer queue completes RCC execution through
+`capability_invoke`; managed `items.complete` verifies its retained successful
+Run/Attempt and four output records. Completion is not an execution launcher.
+The same completion idempotency key can replay after restarting the unchanged
+Runtime datadir/profile, preserving Run and Attempt identity. See the bounded
+[installed consumer recipe](evidence/actions-next-327/recovery-a38/managed-installed-consumer/README.md).
+
+Generic a38 queues do not advertise retry. Reviewed retry additionally requires
+an available native worker callback; ordinary a38 bootstrap supplies native
+completion but no `worker_for`, so adding a grant does not enable retry. Neither
+managed completion nor this Action recipe proves Robot execution, retry, an
+in-flight restart, or extension UI acceptance. Discover actual per-queue
+capabilities before presenting controls.

@@ -1,3 +1,67 @@
+## Adaptive engineering ownership — 2026-10-25
+
+Josh superseded the earlier two-helper limit. Five cloud tasks now share this
+existing #327/#328 ledger; the release integrator remains the exclusive writer
+to `release/327-invoice-vertical-20261020`. Engineering lanes use their own
+parent-allocated `feature/327-…-20261025` branches and may deliver one draft PR
+into the release branch. No lane may push the integration branch.
+
+| Lane / cloud task | Exclusive current scope | Integration boundary |
+| --- | --- | --- |
+| A Canvas UI `01a17333-692f-77d5-84da-f5df7ded1009` | Frontend src and dedicated UI tests; mandatory Canvas P0 | Excludes package/lock/version, shared schemas and MCP |
+| B Knowledge installed `01a17333-8aa1-75e1-9e41-dd7df8fb3002` | New dedicated acceptance scripts/tests until v3 checkpoint | Reuse retained Knowledge implementation; no duplicate production writer |
+| C Robot execution `01a17333-ae42-77f4-b9b6-1671c4290037` | New Robot/native/direct execution tests | Reuse ordinary installed managed-consumer setup below; propose isolated production changes |
+| D Release/security `01a17333-cc0f-7734-9775-2e3bc2c5b024` | New dedicated qualification scripts/tests | Shared configs/auth/migrations remain integrator-owned |
+
+Integrator reservations: current generated Knowledge preparation/receipt and RCC
+joins, compiler/Package registry/authoring contracts, shared Run/Task/managed
+adapters, schema/migrations/MCP routing/auth, versions/locks/artifact identity,
+release matrix and canonical-guide merges. Concrete independent production
+proposals can receive explicit nonoverlapping ownership; these reservations are
+not a requirement to route all implementation through the integrator.
+
+Existing helpers are preserved rather than duplicated: `knowledge_review`
+completed its isolated source boundary tests (20 passed after a bounded-error
+correction); `knowledge_host` completed the ordinary installed a38 consumer
+recipe. Their tested patches/receipts feed the integrator and B/C. Unqualified
+v3 source remains distinct from installed a38 evidence.
+
+### Compact B/C and extension-tester handoff
+
+[Ordinary installed managed consumer](evidence/actions-next-327/recovery-a38/managed-installed-consumer/README.md)
+and its `qualify.py`/`receipt.json` are the reusable canonical setup. Exact a38
+source `f332a8284e78844abcf6700a600d2891d742b682`, Runtime wheel SHA256
+`103c53cf3b960fe173d6fa53485e097267a071684bc464214739b660a4c33203`.
+Public CLI + authorize-local + Canvas MCP + real RCC + managed HTTP passed;
+completion replay after same-state restart retained the exact Run/Attempt and
+counts. All four ordinary server lifecycles stopped cleanly. No SQL authority
+seeding, transferred credentials or extension-repo edits.
+
+Completion verifies an already successful RCC Run; it does not launch work.
+Generic retry is not advertised, ordinary reviewed bootstrap does not supply
+`worker_for`, and this Action proof is not Robot or extension UI acceptance.
+Fresh hosts must provision their own synthetic auth/state and obtain/rebuild and
+qualify compatible exact-source artifacts. Old private datadirs or credentials
+must not be copied. B must wait for the tested v3 source checkpoint before
+claiming generated Knowledge installed acceptance; C can use this a38 recipe now.
+
+## Current Knowledge and consumer continuation
+
+Checkpoint da928b69 adds explicit owned Knowledge hosts and nonterminal staging;
+[joined source receipts](evidence/actions-next-327/recovery-a39/host-preparation/README.md)
+record144 passed/0 skipped. Generated Knowledge RCC/Task joins and installed a39
+remain under integration. [Extension2.20.16 parent report](evidence/actions-next-327/recovery-a39/extension-parent-report.json)
+closes its fixture-backed claim/renew/cancel/read/save cases, not ordinary managed
+Action/Robot execution, completion/retry or same-state restart. A canonical
+installed setup for those consumer cases remains a dependency.
+
+The [Dakota agent prompt](evidence/actions-next-327/recovery-a38/dakota-host-draft/agent-prompt.md)
+is prepared but not dispatched. No READY declaration: actual Desktop support, exact compatible artifacts and
+a separately authorized reachable/authenticated endpoint remain unresolved.
+Owner clarification: genuine Codex acceptance remains a full-release gate but
+is not a prerequisite for the separate owner-launched ChatGPT test.
+Celld and unfinished a39 are not used as reasons to pause independent work.
+
 ## Knowledge continuation: source foundation only
 
 [Explicit mappings and Core context](evidence/actions-next-327/recovery-a39/knowledge-context/README.md)

@@ -5917,3 +5917,21 @@ authorize that exact Deployment revision before execution. A successful Run
 without the node is not a failed artifact provider. Official-host browser
 acceptance should click the authored control and verify returned bytes rather
 than infer it from terminal status alone.
+
+
+For independent release engineering lanes, record exact task IDs, exclusive paths
+and shared-contract reservations in the existing release ledger. Keep one
+integration-branch writer; isolated lanes deliver reviewed patches or draft PRs,
+not competing writes. Reuse a completed acceptance fixture before creating a new
+authority. The installed a38 managed-consumer recipe uses ordinary CLI, public
+local authorization and real RCC; managed completion validates an existing Run
+and its artifacts rather than launching it. Same-datadir restart/replay is separate
+from restart-during-execution, retry, Robot and extension UI qualification. A
+fixture that recreates state or lacks retry cannot close those gates. The exact
+recipe and observed limitations are retained under recovery-a38/managed-installed-consumer.
+
+For the owner-launched ChatGPT host test, do not make an unavailable cloud Codex
+model transport an extra prerequisite once the owner separates those gates.
+Independently verify the exact installed client, reachable endpoint, supported
+authentication and owned-resource cleanup plan; protocol/reference-host proof
+does not establish those host-specific prerequisites or permit changes to Executor.

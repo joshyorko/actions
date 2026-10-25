@@ -1,0 +1,135 @@
+{
+  "status": "PASS_INSTALLED_ACTION_COMPLETION_RESTART",
+  "runtime_version": "1.1.0a38",
+  "engine_origin": "/workspace/actions-327-a38/installed-fixed/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+  "source": "f332a8284e78844abcf6700a600d2891d742b682",
+  "installed_versions": {
+    "mcp": "2.3.0",
+    "mcp-types": "2.3.0",
+    "actions-core": "1.1.0a3"
+  },
+  "synthetic_owned_auth": true,
+  "processes": [
+    {
+      "pid": 42238,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.2140540880000117,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 42249,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.21408395199978258,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 42392,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.21413348599980964,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 42493,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.21627119000004313,
+      "lifespan_shutdown_complete": true
+    }
+  ],
+  "calls": [
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_inspect",
+      "is_error": false
+    },
+    {
+      "tool": "capability_invoke",
+      "is_error": false
+    }
+  ],
+  "actual_generated_execution": "PASS real RCC consumer Action",
+  "workspace": "c53b83bb-f997-42b6-8c14-5d89acfd86a8",
+  "profile_setup": "explicit public offline owner authorization; no SQL writes or source/result/review/admission seeding",
+  "managed_calls": [
+    "items.enqueue",
+    "items.claim",
+    "items.complete",
+    "runs.get",
+    "items.complete",
+    "runs.get"
+  ],
+  "queue": {
+    "workspace_id": "c53b83bb-f997-42b6-8c14-5d89acfd86a8",
+    "deployment": {
+      "deployment_id": "bbb259df-c541-40d9-81ee-3e7137502ae2",
+      "revision_id": "sha256:1cb8d323bdf1ea5f8d06963b431f0b5a2784fb78e5609b5bcbdea43d688929dd",
+      "workspace_id": "c53b83bb-f997-42b6-8c14-5d89acfd86a8"
+    },
+    "queue_id": "input"
+  },
+  "execution": {
+    "attemptEpoch": 1,
+    "attemptId": "5e908f03-cbe9-49b0-becd-2488fdf771f1",
+    "attemptState": "succeeded",
+    "outputs": [
+      {
+        "handle": "art_gIt3axUTQ_ukiApueP4q2Q",
+        "mediaType": "application/json",
+        "name": "generated-action-result.json",
+        "size": 106
+      },
+      {
+        "handle": "art_oMdodRueTpy7iu3Whgn3cw",
+        "mediaType": "application/json",
+        "name": "rcc-receipt.json",
+        "size": 55307
+      },
+      {
+        "handle": "art_y8Pm074eQCeR5to9zk0_UQ",
+        "mediaType": "application/octet-stream",
+        "name": "rcc-stdout.log",
+        "size": 0
+      },
+      {
+        "handle": "art_0Stx02erSP6aiJzn7OjVJw",
+        "mediaType": "application/octet-stream",
+        "name": "rcc-stderr.log",
+        "size": 103
+      }
+    ],
+    "runId": "f8bc75bb-e811-41cd-9b80-8d2a293c7b91",
+    "runStatus": 2,
+    "state": "completed",
+    "workItemEpoch": 1,
+    "workItemId": "0d4e1bf6-ba44-434f-a73d-ddea1f9d6375",
+    "workItemState": "COMPLETED"
+  },
+  "retry": "NOT_SUPPORTED_GENERIC_QUEUE",
+  "robot": "NOT_TESTED",
+  "extension": "NOT_TESTED",
+  "prepared_artifact": "sha256:23094fc1820262a768fd601f4964d633417fc2641f349666a5be55ab524f7598",
+  "fixture_bytes": 847195,
+  "log_bytes": 4900
+}

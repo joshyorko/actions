@@ -1,0 +1,28 @@
+{
+  "artifact_bytes_locally_or_on_dakota_verified": false,
+  "artifact_hashes_verified_against_committed_manifest": {
+    "wheels/action_server/actions_runtime-1.1.0a38-cp312-cp312-linux_x86_64.whl": "103c53cf3b960fe173d6fa53485e097267a071684bc464214739b660a4c33203",
+    "wheels/actions/actions_core-1.1.0a3-py3-none-any.whl": "4147cdeb2a593e54194b4d2fcd2c92f0b029fb802d1d298e35c912a1fef03167",
+    "wheels/work-items/actions_work_items-0.5.0a2-py3-none-any.whl": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb"
+  },
+  "candidate_source": "f332a8284e78844abcf6700a600d2891d742b682",
+  "committed_evidence_sha256": {
+    "codex-client-blocker/README.md": "89f14dcfdc59b836f3d34fcfc0dfbc40feea33fa4b68f2b9e5c6cf3a7071d989",
+    "codex-client-blocker/desktop-parent-report.json": "8b014d4daa16c05039718456f6a8e2021d5f960e72cada14df0e4a4fdd574389",
+    "installed-qualified/README.md": "af48cd9687ac5d933b5916d9a915be6a865d090306b0448a6808e4011e3ed1c0",
+    "installed-qualified/build-inputs.json": "4db5535ed3f0725be260374f7132caeccb31be23c9d17c7944d244bd3d9d21a2",
+    "installed-qualified/client-continuation/receipt.json": "1b80cbc96204d65861bebde6ab5f6bfd3564c8ceb1713f4bcb257c13ae18e34a",
+    "installed-qualified/client-fixed/receipt.json": "d1dd96cd4ee8327cc0c7a188565b358d418e2d1482778013cae96c3fc2efbb87",
+    "installed-qualified/wheels.json": "b5ae6c37e266460c6eb5499e90725dba4bd43dab22373f42b6470a8af1d2f63b",
+    "official-host/README.md": "ab744d55a9263598cc579d67a0af52beb1c530e4548dd6891f4c0b00cfb65bb6",
+    "official-host/browser-revised/receipt.json": "c8eee5a6bd35117ea026445f3ef976fa5f17049564a593d30b1d599863dff7a7",
+    "official-host/source-identity.json": "e98b8a1f858720221be3a80a5a947cbadb2cfd88debf2c8f73556f7252373d4a"
+  },
+  "external_mutations": "none",
+  "host_gate_scope": "May be proposed separately from celld/a39; root decides. No READY declaration. Mandatory fresh Codex prerequisite remains blocked under committed owner matrix. Desktop capability, route/auth and platform/artifacts unresolved.",
+  "local_acceptance": "not started",
+  "review_commit": "ec514752ae52be847427e8a4302d675100b8c990",
+  "schema": "actions.dakota-host-draft-review/v1",
+  "status": "DRAFT_NOT_DISPATCHED",
+  "upstream_disposition": "none"
+}
