@@ -381,7 +381,7 @@ function SemanticFormInstance<Id extends string, Input, Output>({
                 {isSubmitting
                     ? `${submitLabel}: working…`
                     : result !== null
-                      ? `${submitLabel}: results ready.`
+                      ? `${submitLabel}: response received.`
                       : ""}
             </p>
             {actionError ? (

@@ -1,4 +1,10 @@
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import {
+    render,
+    screen,
+    fireEvent,
+    waitFor,
+    within,
+} from "@testing-library/react";
 import { expect, it, vi } from "vitest";
 import type { App } from "@modelcontextprotocol/ext-apps/react";
 import { GenericSemanticView } from "./generic-view";
@@ -80,3 +86,51 @@ it("semantic form explicitly submits and shows persistent Run status without mou
         screen.queryByRole("button", { name: "Request cancellation" }),
     ).toBeNull();
 });
+
+it.each(["failed", "running", "cancel_requested"])(
+    "announces a response without claiming results for a %s Run",
+    async (executionState) => {
+        const call = vi.fn(async (req: { arguments: { action: string } }) => ({
+            _meta: {
+                "actions.execution": {
+                    bindingId: "run",
+                    runId: id,
+                    attemptId: id,
+                    state:
+                        req.arguments.action === "submit"
+                            ? "ready"
+                            : executionState,
+                    cancelRequested: executionState === "cancel_requested",
+                },
+            },
+        }));
+        render(
+            <GenericSemanticView
+                app={{ callServerTool: call } as unknown as App}
+                canvas={canvas}
+                context={context}
+            />,
+        );
+        expect(call).not.toHaveBeenCalled();
+        fireEvent.change(screen.getByLabelText("Value"), {
+            target: { value: "hello" },
+        });
+        fireEvent.click(screen.getByRole("button", { name: "Run job" }));
+        const form = screen.getByRole("region", {
+            name: "Run job",
+        });
+        await waitFor(() =>
+            expect(within(form).getByRole("status").textContent).toBe(
+                "Run job: response received.",
+            ),
+        );
+        expect(call).toHaveBeenCalledTimes(2);
+        expect(screen.queryByText(/results ready/i)).toBeNull();
+        const execution = screen.getByRole("region", { name: "Execution run" });
+        expect(
+            within(execution).getByRole(
+                executionState === "failed" ? "alert" : "status",
+            ).textContent,
+        ).toBe(executionState.replaceAll("_", " "));
+    },
+);

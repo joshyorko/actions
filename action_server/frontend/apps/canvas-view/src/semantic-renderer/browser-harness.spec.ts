@@ -78,7 +78,7 @@ for (const width of [320, 1280]) {
     });
 }
 
-test("announces pending work and completion without dispatch on mount", async ({
+test("announces pending work and a response without dispatch on mount", async ({
     page,
 }, testInfo) => {
     await page.goto(
@@ -110,7 +110,7 @@ test("announces pending work and completion without dispatch on mount", async ({
         .click();
     await expect(form.locator("form")).toHaveAttribute("aria-busy", "false");
     await expect(form.getByRole("status")).toHaveText(
-        "Search synthetic records: results ready.",
+        "Search synthetic records: response received.",
     );
     await expect(form.getByRole("cell")).toContainText("pending");
 });
