@@ -1,0 +1,84 @@
+{
+  "schema_version": "actions.managed-work-items/v1",
+  "operation": "items.enqueue",
+  "runtime_version": "1.1.0a30",
+  "result": {
+    "item": {
+      "queue": {
+        "workspace_id": "f9af169c-8a0f-49c5-99dd-d53956f680a4",
+        "deployment": {
+          "workspace_id": "f9af169c-8a0f-49c5-99dd-d53956f680a4",
+          "deployment_id": "787ea531-56ee-4730-a854-7c67e03bdbc2",
+          "revision_id": "sha256:e755a53a9669c136a5788f63037087dbaa90d115171e4a4af757a88f217829f1"
+        },
+        "queue_id": "input"
+      },
+      "id": "9871330f-fe90-49c5-ac22-e3f672eac680",
+      "parent_id": null,
+      "queue_state": "PENDING",
+      "business_state": "ready",
+      "payload": {
+        "value": "{\"city\":\"Denver\",\"amount\":12}\n{\"city\":\"Seattle\",\"amount\":7}"
+      },
+      "protected_input_digest": "sha256:09f6ed21f3ed0f48c6fc210aefdc7cdacc7278361ae790489c471b3aab9102d5",
+      "snapshot": {
+        "deployment": {
+          "workspace_id": "f9af169c-8a0f-49c5-99dd-d53956f680a4",
+          "deployment_id": "787ea531-56ee-4730-a854-7c67e03bdbc2",
+          "revision_id": "sha256:e755a53a9669c136a5788f63037087dbaa90d115171e4a4af757a88f217829f1"
+        },
+        "capability": {
+          "package_revision": {
+            "workspace_id": "f9af169c-8a0f-49c5-99dd-d53956f680a4",
+            "package_id": "101606fc-7917-5902-9b8f-4ad721801ea4",
+            "revision_id": "sha256:4b53b97247f5bb6873e2f3304f6d38b865fff7bc3ec37fa4fdf9b55f3bb3013a"
+          },
+          "capability_id": "action.inspect_records"
+        },
+        "runtime_plan": {
+          "package_revision": {
+            "workspace_id": "f9af169c-8a0f-49c5-99dd-d53956f680a4",
+            "package_id": "101606fc-7917-5902-9b8f-4ad721801ea4",
+            "revision_id": "sha256:4b53b97247f5bb6873e2f3304f6d38b865fff7bc3ec37fa4fdf9b55f3bb3013a"
+          },
+          "plan_digest": "sha256:0701e5e13d670cade23d3f79ce1bfd9d50da55a45e2d5743652f509cba15ac8d"
+        },
+        "worker": {
+          "workspace_id": "f9af169c-8a0f-49c5-99dd-d53956f680a4",
+          "worker_profile_id": "a2ae332d-59ba-44bf-a299-3aea0696108a",
+          "revision_id": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        },
+        "policy": {
+          "workspace_id": "f9af169c-8a0f-49c5-99dd-d53956f680a4",
+          "policy_id": "ba4a82f0-d62b-4f10-890d-203d9692f991",
+          "revision_id": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+        },
+        "output_provider": {
+          "workspace_id": "f9af169c-8a0f-49c5-99dd-d53956f680a4",
+          "provider_profile_id": "6dc2bf49-950c-4cf6-ae73-ab2aa700dd71",
+          "revision_id": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+        },
+        "runtime_kind": "rcc",
+        "capability_schema_digest": "sha256:cdc6f7fa3a3a8ce5d800b65dc02d27fffa3e48b8fdb7cae960dff6baadbb6600",
+        "action_id": "1be9cc96-f2e8-5f27-9cbb-287232a9e559",
+        "capability_authority": "package-revision",
+        "data_binding": null,
+        "canvas_application": {
+          "workspace_id": "f9af169c-8a0f-49c5-99dd-d53956f680a4",
+          "app_id": "787ea531-56ee-4730-a854-7c67e03bdbc2",
+          "revision_id": "sha256:edab230ece5a00c74f8772d85a651b3617ff751b2469d453d850ea935919c305"
+        }
+      },
+      "delivery_count": 0,
+      "claim": null,
+      "lease_deadline_ms": null,
+      "available_after_ms": "1792900177778",
+      "created_ms": "1792900177778",
+      "run_ids": [],
+      "child_ids": [],
+      "review_id": null
+    },
+    "replay": false,
+    "server_time_ms": "1792900177834"
+  }
+}
