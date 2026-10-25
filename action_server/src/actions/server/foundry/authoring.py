@@ -50,6 +50,7 @@ from actions.server.foundry.authoring_values import (
     CompiledPackage,
     DeploymentSelectionPort,
     FoundryAuthoringAuthorityPort,
+    GeneratedActionDeclaration,
     GeneratedBackend,
     PackageAdmissionPort,
     PackageCompilerPort,
@@ -146,6 +147,13 @@ _BACKEND: dict[str, JsonValue] = {
     "description": "Optional externally authored Python source files for a backend. The common Package compiler validates and admits them; source is never returned by Canvas tools.",
     "properties": {
         "logicalName": {"type": "string", "minLength": 1, "maxLength": 128},
+        "actions": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 8,
+            "description": "Explicit complete Python Action declarations. Use per-Action policies only; do not combine with global workItems or logicalRequirements.",
+            "items": public_schema(GeneratedActionDeclaration),
+        },
         "workItems": WorkItemDeclaration.model_json_schema(),
         "logicalRequirements": {
             "type": "array",
@@ -815,16 +823,50 @@ class FoundryAuthoring(CanvasPort):
                     ] = backend.logical_requirements
                 if backend.work_items is not None:
                     compiler_options["work_items"] = backend.work_items
-                result = await asyncio.to_thread(
-                    self.compiler.compile_trusted_source,
-                    backend.entries(),
-                    logical_package_key="canvas-" + str(application_id.root),
-                    logical_name=backend.logical_name,
-                    trusted_actor=actor,
-                    workspace_id=workspace_id,
-                    application_id=application_id,
-                    **compiler_options,
-                )
+                if backend.actions is None:
+                    result = await asyncio.to_thread(
+                        self.compiler.compile_trusted_source,
+                        backend.entries(),
+                        logical_package_key="canvas-" + str(application_id.root),
+                        logical_name=backend.logical_name,
+                        trusted_actor=actor,
+                        workspace_id=workspace_id,
+                        application_id=application_id,
+                        **compiler_options,
+                    )
+                else:
+                    from actions.server.deployments.capability_bundle_compiler import (
+                        BundleCompilationPolicy,
+                        PythonCapabilityPolicy,
+                    )
+                    from actions.server.deployments.package_revision_compiler import (
+                        PackageCompilationPolicy,
+                    )
+
+                    policy = BundleCompilationPolicy(
+                        tuple(
+                            PythonCapabilityPolicy(
+                                declaration.action_name,
+                                PackageCompilationPolicy(
+                                    "canvas-" + str(application_id.root),
+                                    backend.logical_name,
+                                    ">=1.1.0a38,<2.0.0",
+                                    ">=1.1.0a3,<2.0.0",
+                                    work_items=declaration.work_items,
+                                    logical_requirements=declaration.logical_requirements,
+                                ),
+                            )
+                            for declaration in backend.actions
+                        )
+                    )
+                    result = await asyncio.to_thread(
+                        self.compiler.compile_trusted_bundle,
+                        backend.entries(),
+                        policy=policy,
+                        trusted_actor=actor,
+                        workspace_id=workspace_id,
+                        application_id=application_id,
+                    )
                 if not isinstance(result, CompilationResult):
                     raise AuthoringError("Package compiler returned an invalid result")
                 compilation = result.evidence

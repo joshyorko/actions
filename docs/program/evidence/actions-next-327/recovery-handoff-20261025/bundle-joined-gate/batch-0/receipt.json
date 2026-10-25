@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "cleanup": "PASS",
+  "scope": "joined source non-native RCC; PostgreSQL and SQLite strict fixtures",
+  "batch": 0,
+  "container": "ad722dc470ac214402ea600723750f496edb7ad11a08254e066c67235d0cb0a0",
+  "fixture_name": "actions327-bundle-cfbe40ee45",
+  "command": [
+    "/workspace/actions-recovery-327/run-prepared",
+    "python",
+    "/workspace/actions-cloud/package-command.py",
+    "action_server",
+    "run",
+    "python",
+    "/workspace/actions-recovery-327/execute-collected-batch-guarded.py",
+    "tests/contract_tests/test_capability_bundle.py",
+    "tests/contract_tests/test_execution_selection.py",
+    "tests/contract_tests/test_backend_action_declarations.py",
+    "tests/action_server_tests/test_bundle_package_registry.py",
+    "tests/action_server_tests/test_foundry_package_registry.py",
+    "-k",
+    "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+    "-p",
+    "no:robocorp_log_pytest",
+    "-q",
+    "--junitxml=/workspace/actions-recovery-327/bundle-joined-gate/batch-0/tests.xml",
+    "--basetemp=/workspace/actions-recovery-327/bundle-joined-gate/batch-0/fixtures"
+  ],
+  "exit_code": 0,
+  "minimum_free_bytes": 1001902080,
+  "counts": {
+    "failure": 0,
+    "error": 0,
+    "skipped": 0,
+    "tests": 98
+  },
+  "all_cases_accounted": true
+}

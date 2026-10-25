@@ -1,0 +1,55 @@
+{
+  "status": "PASS",
+  "bundle_revision": "sha256:2d759b9c5d6b6fbbf80629a93588241fd39ee968295cc050d26fa667b7e5cb7d",
+  "selections": {
+    "action.add_counts": {
+      "input": {
+        "properties": {
+          "left": {
+            "description": "First count.",
+            "title": "Left",
+            "type": "integer"
+          },
+          "right": {
+            "description": "Second count.",
+            "title": "Right",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "left",
+          "right"
+        ],
+        "type": "object"
+      },
+      "output": {
+        "description": "Sum of counts.",
+        "type": "integer"
+      },
+      "plan": "sha256:19b0fe6cac2285db7593e7d99c9135869165ebcdaceef5ebaa766eaab3655c57"
+    },
+    "action.normalize_words": {
+      "input": {
+        "properties": {
+          "text": {
+            "description": "Text to normalize.",
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "type": "object"
+      },
+      "output": {
+        "description": "Normalized text.",
+        "type": "string"
+      },
+      "plan": "sha256:df0ea49096c4f02e1d6a77bc0241bb9344b5dfdda722ce38b2bd864fc07a99db"
+    }
+  },
+  "source_absent_during_compile": true,
+  "phases": 6,
+  "prepared_sha256": "d3125f1534d6d67d427c087531a3b7b0e86390ca69ec8f4fe6a3e250f3bca560"
+}

@@ -407,10 +407,12 @@ def _retained_projection(db, registry, snapshot):
             )
             expected.append(identity)
             limits[(identity.requirement_id, identity.operation)] = operation.max_rows
-    compiled = registry.load(snapshot.capability.package_revision)
+    from actions.server.foundry.execution_selection import compiled_for_snapshot
+
+    compiled = compiled_for_snapshot(registry, snapshot)
     fixed = dict(
         sourceArtifactDigest=compiled.source_artifact_digest,
-        packageRevision=compiled.package_revision_id.root,
+        packageRevision=snapshot.capability.package_revision.revision_id.root,
         runtimePlanDigest=snapshot.runtime_plan.plan_digest.root,
         rccSpecificationDigest=compiled.rcc_specification_digest,
         rccArtifactDigest=compiled.rcc_artifact_digest,

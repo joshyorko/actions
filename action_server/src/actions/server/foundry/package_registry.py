@@ -15,10 +15,23 @@ from collections.abc import Sequence
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from threading import RLock
+from typing import Any
 from uuid import uuid4, uuid5
 
 from actions.server._database import Database
 from actions.server.deployments.canonical import canonicalize_json
+from actions.server.deployments.capability_bundle import (
+    CompiledCapabilityBundle,
+    decode_bundle,
+    select_capability,
+    verify_bundle,
+)
+from actions.server.deployments.capability_bundle_compiler import (
+    BundleCompilationOutcome,
+    BundleCompilationPolicy,
+    compile_generated_python_bundle,
+    verify_bundle_compilation_outcome,
+)
 from actions.server.deployments.foundry_repository import (
     FoundryRepository,
     _transaction,
@@ -76,6 +89,36 @@ from actions.server.run_outputs.types import (
 )
 
 _SCHEMA = "actions.local-package-admission/v1"
+_BUNDLE_SCHEMA = "actions.local-capability-bundle-admission/v1-draft"
+
+
+@dataclass(frozen=True)
+class RegistryCapabilitySelection:
+    package_revision: PackageRevisionRef
+    capability: CapabilityRef
+    runtime_plan: RuntimePlanRef
+    compiled: CompiledPackageRevision
+
+
+def _verified_members(
+    value: CompiledPackageRevision | CompiledCapabilityBundle,
+) -> tuple[CompiledPackageRevision, ...]:
+    members = (
+        verify_bundle(value)
+        if isinstance(value, CompiledCapabilityBundle)
+        else (value,)
+    )
+    seen: set[str] = set()
+    for member in members:
+        for requirement in json.loads(member.manifest_json)[
+            "logicalBindingRequirements"
+        ]:
+            if requirement["id"] in seen:
+                raise AccessDenied(
+                    "Logical requirement IDs must be unique across bundle members"
+                )
+            seen.add(requirement["id"])
+    return members
 
 
 def _json(value: object) -> str:
@@ -91,7 +134,7 @@ class _Pending:
     actor: Actor
     workspace: WorkspaceId
     application: DeploymentId
-    outcome: CompilationOutcome
+    outcome: CompilationOutcome | BundleCompilationOutcome
     inventory_json: str
 
 
@@ -222,6 +265,77 @@ class FoundryPackageRegistry:
             outcome.compiled_package, self._evidence(outcome.receipt)
         )
 
+    def compile_trusted_bundle(
+        self,
+        entries: Sequence[SuppliedSourceEntry],
+        *,
+        policy: BundleCompilationPolicy,
+        trusted_actor: Actor,
+        workspace_id: WorkspaceId,
+        application_id: DeploymentId,
+    ) -> CompilationResult:
+        actor = Actor.model_validate(trusted_actor)
+        workspace = WorkspaceId.model_validate(workspace_id)
+        application = DeploymentId.model_validate(application_id)
+        self._require(actor, workspace, application)
+        seen: set[str] = set()
+        for item in policy.capabilities:
+            for requirement in item.policy.logical_requirements:
+                if requirement.id in seen:
+                    raise AccessDenied(
+                        "Logical requirement IDs must be unique across bundle members"
+                    )
+                seen.add(requirement.id)
+        snapshot = snapshot_source_entries(
+            entries, protected_input_names=["package.yaml"]
+        )
+        result = compile_generated_python_bundle(
+            entries,
+            policy,
+            protected_input_names=["package.yaml"],
+            admission=self._admission,
+            executor=self._executor,
+            execution_root=self._execution_root,
+        )
+        if result.bundle is not None:
+            bundle = verify_bundle_compilation_outcome(result)
+            members = _verified_members(bundle)
+            if members[0].source_inventory_digest != snapshot.digest:
+                raise AccessDenied("Compiled source identity changed")
+            self._require(actor, workspace, application)
+            with self._lock:
+                if len(self._pending) >= 32:
+                    self._pending.popitem(last=False)
+                self._pending[id(bundle)] = _Pending(
+                    actor,
+                    workspace,
+                    application,
+                    result,
+                    snapshot.inventory.canonical_json.decode(),
+                )
+        return CompilationResult(result.bundle, self._bundle_evidence(result))
+
+    @staticmethod
+    def _bundle_evidence(outcome: BundleCompilationOutcome) -> CompilationEvidence:
+        if outcome.bundle is not None:
+            verify_bundle_compilation_outcome(outcome)
+        last = outcome.receipts[-1]
+        return CompilationEvidence(
+            "succeeded" if outcome.bundle is not None else "failed",
+            last.build_status,
+            last.import_status,
+            last.test_status,
+            outcome.failure_code,
+            outcome.bundle.package_revision_id if outcome.bundle is not None else None,
+            _json(
+                {
+                    "schemaVersion": _BUNDLE_SCHEMA,
+                    "receipts": [asdict(value) for value in outcome.receipts],
+                    "failureCode": outcome.failure_code,
+                }
+            ).encode(),
+        )
+
     @staticmethod
     def _evidence(receipt: CompilationReceipt) -> CompilationEvidence:
         from actions.server.deployments.ids import PackageRevisionId
@@ -240,9 +354,10 @@ class FoundryPackageRegistry:
 
     @staticmethod
     def _ref(
-        workspace: WorkspaceId, compiled: CompiledPackageRevision
+        workspace: WorkspaceId,
+        compiled: CompiledPackageRevision | CompiledCapabilityBundle,
     ) -> PackageRevisionRef:
-        manifest = json.loads(compiled.manifest_json)
+        manifest = json.loads(_verified_members(compiled)[0].manifest_json)
         return PackageRevisionRef(
             workspace_id=workspace,
             package_id=PackageId(
@@ -266,7 +381,10 @@ class FoundryPackageRegistry:
         )
 
     def admit_compiled(
-        self, actor: Actor, workspace_id: WorkspaceId, compiled: CompiledPackage
+        self,
+        actor: Actor,
+        workspace_id: WorkspaceId,
+        compiled: CompiledPackage | CompiledCapabilityBundle,
     ) -> PackageRevisionRef:
         actor, workspace_id = (
             Actor.model_validate(actor),
@@ -276,7 +394,12 @@ class FoundryPackageRegistry:
             pending = self._pending.get(id(compiled))
         if (
             pending is None
-            or pending.outcome.compiled_package is not compiled
+            or (
+                pending.outcome.bundle
+                if isinstance(pending.outcome, BundleCompilationOutcome)
+                else pending.outcome.compiled_package
+            )
+            is not compiled
             or pending.actor != actor
             or pending.workspace != workspace_id
         ):
@@ -284,13 +407,19 @@ class FoundryPackageRegistry:
                 "Package requires this host's exact authorized compiler outcome"
             )
         self._require(actor, workspace_id, pending.application)
-        verified = verify_compilation_outcome(pending.outcome)
+        verified = (
+            verify_bundle_compilation_outcome(pending.outcome)
+            if isinstance(pending.outcome, BundleCompilationOutcome)
+            else verify_compilation_outcome(pending.outcome)
+        )
+        members = _verified_members(verified)
+        source_artifact_digest = members[0].source_artifact_digest
         ref = self._ref(workspace_id, verified)
         with self._db.connect():
             existing = self._rows(ref)
         if existing:
             self._authorization.require_reference(actor, ref, "deploy")
-            self.load(ref)
+            self.load_verified(ref)
             return ref
 
         staged = self._provider.stage(
@@ -300,31 +429,40 @@ class FoundryPackageRegistry:
         # If SQL commit fails or its acknowledgement is lost, retain the sealed
         # object: it may be referenced. Only proven unreferenced duplicate stages
         # are discarded below; recovery/retention must reconcile other orphans.
-        evidence = {
-            "schemaVersion": _SCHEMA,
-            "source": staged.receipt.model_dump(mode="json"),
-            "receipt": asdict(pending.outcome.receipt),
-            "header": {
-                **asdict(verified.runtime_plan_header),
-                "plan_digest": verified.runtime_plan_header.plan_digest.root,
-            },
-            **{
-                name: getattr(verified, name).decode()
-                for name in (
-                    "runtime_plan_payload",
-                    "adapter_specification_payload",
-                    "input_schema_payload",
-                    "output_schema_payload",
-                )
-            },
-        }
+        evidence: dict[str, Any]
+        if isinstance(pending.outcome, BundleCompilationOutcome):
+            evidence = {
+                "schemaVersion": _BUNDLE_SCHEMA,
+                "source": staged.receipt.model_dump(mode="json"),
+                "receipts": [asdict(receipt) for receipt in pending.outcome.receipts],
+            }
+        else:
+            assert isinstance(verified, CompiledPackageRevision)
+            evidence = {
+                "schemaVersion": _SCHEMA,
+                "source": staged.receipt.model_dump(mode="json"),
+                "receipt": asdict(pending.outcome.receipt),
+                "header": {
+                    **asdict(verified.runtime_plan_header),
+                    "plan_digest": verified.runtime_plan_header.plan_digest.root,
+                },
+                **{
+                    name: getattr(verified, name).decode()
+                    for name in (
+                        "runtime_plan_payload",
+                        "adapter_specification_payload",
+                        "input_schema_payload",
+                        "output_schema_payload",
+                    )
+                },
+            }
         inserted = False
         with self._db.connect(), _transaction(self._db):
             FoundryRepository(self._db)._lock_workspace(workspace_id)
             self._require(actor, workspace_id, pending.application)
             if self._rows(ref):
                 self._authorization.require_reference(actor, ref, "deploy")
-                self.load(ref)
+                self.load_verified(ref)
             else:
                 self._db.insert(
                     FoundryPackageRevision(
@@ -333,7 +471,7 @@ class FoundryPackageRegistry:
                         str(ref.package_id.root),
                         ref.revision_id.root,
                         verified.manifest_json.decode(),
-                        verified.source_artifact_digest,
+                        source_artifact_digest,
                         pending.inventory_json,
                         _json(evidence),
                     )
@@ -367,12 +505,13 @@ class FoundryPackageRegistry:
                 references: tuple[WorkspaceScopedRef, ...] = (
                     ref,
                     *self.capability_refs(ref),
-                    self._plan_ref(ref, verified),
+                    *(self._plan_ref(ref, member) for member in members),
                     *(
                         BindingRequirementRef(
                             package_revision=ref, requirement_id=value["id"]
                         )
-                        for value in json.loads(verified.manifest_json)[
+                        for member in members
+                        for value in json.loads(member.manifest_json)[
                             "logicalBindingRequirements"
                         ]
                     ),
@@ -459,69 +598,173 @@ class FoundryPackageRegistry:
                 "Package unavailable or integrity verification failed"
             ) from None
 
+    def load_verified(
+        self, ref: PackageRevisionRef
+    ) -> CompiledPackageRevision | CompiledCapabilityBundle:
+        ref = PackageRevisionRef.model_validate(ref)
+        try:
+            with self._db.connect():
+                rows = self._rows(ref)
+            if len(rows) != 1:
+                raise ValueError("missing Package")
+            row = rows[0]
+            if any(
+                len(value.encode()) > 512 * 1024
+                for value in (
+                    row.build_evidence_json,
+                    row.manifest_json,
+                    row.source_inventory_json,
+                )
+            ):
+                raise ValueError("Package metadata bound exceeded")
+            data = json.loads(row.build_evidence_json)
+            if data.get("schemaVersion") == _SCHEMA:
+                return self.load(ref)
+            if (
+                data.get("schemaVersion") != _BUNDLE_SCHEMA
+                or set(data) != {"schemaVersion", "source", "receipts"}
+                or _json(data) != row.build_evidence_json
+            ):
+                raise ValueError("unsupported bundle admission evidence")
+            seal = SealReceipt.model_validate(data["source"])
+            if seal.size > 2 * 1024 * 1024 + 65536:
+                raise ValueError("source bound exceeded")
+            with self._provider.open(seal.object_ref, seal.digest, seal.size) as reader:
+                source = reader.read(seal.size + 1)
+            if (
+                len(source) != seal.size
+                or _hash(source) != seal.digest
+                or seal.digest != row.source_artifact_digest
+            ):
+                raise ValueError("source identity changed")
+            bundle = decode_bundle(row.manifest_json.encode(), source)
+            members = _verified_members(bundle)
+            if not isinstance(data["receipts"], list) or len(data["receipts"]) != len(
+                members
+            ):
+                raise ValueError("invalid receipts")
+            verify_bundle_compilation_outcome(
+                BundleCompilationOutcome(
+                    bundle,
+                    tuple(CompilationReceipt(**value) for value in data["receipts"]),
+                    None,
+                )
+            )
+            if (
+                members[0].source_inventory_digest
+                != _hash(row.source_inventory_json.encode())
+                or self._ref(ref.workspace_id, bundle) != ref
+            ):
+                raise ValueError("scoped source identity changed")
+            return bundle
+        except Exception:
+            raise AccessDenied(
+                "Package unavailable or integrity verification failed"
+            ) from None
+
+    def selection_for(
+        self, capability: CapabilityRef, plan: RuntimePlanRef
+    ) -> RegistryCapabilitySelection:
+        capability = CapabilityRef.model_validate(capability)
+        plan = RuntimePlanRef.model_validate(plan)
+        ref = capability.package_revision
+        if plan.package_revision != ref:
+            raise AccessDenied("Package selection scopes differ")
+        loaded = self.load_verified(ref)
+        if isinstance(loaded, CompiledCapabilityBundle):
+            try:
+                member = select_capability(
+                    loaded,
+                    ref.revision_id,
+                    capability.capability_id.root,
+                    plan.plan_digest,
+                ).compiled
+            except ValueError:
+                raise AccessDenied("Undeclared Package selection") from None
+        else:
+            member = loaded
+            if capability not in self.capability_refs(ref) or plan != self._plan_ref(
+                ref, member
+            ):
+                raise AccessDenied("Undeclared Package selection")
+        return RegistryCapabilitySelection(ref, capability, plan, member)
+
     def require_revision(self, ref: PackageRevisionRef) -> None:
-        self.load(ref)
+        self.load_verified(ref)
 
     def evidence(self, ref: PackageRevisionRef) -> CompilationEvidence:
-        self.load(ref)
+        loaded = self.load_verified(ref)
         with self._db.connect():
             data = json.loads(self._rows(ref)[0].build_evidence_json)
+        if isinstance(loaded, CompiledCapabilityBundle):
+            return self._bundle_evidence(
+                BundleCompilationOutcome(
+                    loaded,
+                    tuple(CompilationReceipt(**value) for value in data["receipts"]),
+                    None,
+                )
+            )
         return self._evidence(CompilationReceipt(**data["receipt"]))
 
     def capability_refs(self, ref: PackageRevisionRef) -> tuple[CapabilityRef, ...]:
-        compiled = self.load(ref)
         return tuple(
             CapabilityRef(package_revision=ref, capability_id=entry["id"])
-            for entry in json.loads(compiled.manifest_json)["capabilities"]
+            for member in _verified_members(self.load_verified(ref))
+            for entry in json.loads(member.manifest_json)["capabilities"]
         )
 
     def get_capability(self, ref: CapabilityRef) -> PackageCapability | None:
         ref = CapabilityRef.model_validate(ref)
-        compiled = self.load(ref.package_revision)
-        if ref not in self.capability_refs(ref.package_revision):
-            return None
-        return PackageCapability(
-            ref,
-            _hash(compiled.input_schema_payload),
-            (self._plan_ref(ref.package_revision, compiled),),
-            binding_requirements=tuple(
-                BindingRequirementRef(
-                    package_revision=ref.package_revision, requirement_id=value
-                )
-                for value in json.loads(compiled.manifest_json)["capabilities"][0][
-                    "bindingRequirementIds"
-                ]
-            ),
-            work_items=WorkItemDeclaration(
-                mode=json.loads(compiled.manifest_json)["capabilities"][0]["mode"],
-                allow_outputs=json.loads(compiled.manifest_json)["capabilities"][0][
-                    "allowOutputs"
-                ],
-            ),
-        )
+        for member in _verified_members(self.load_verified(ref.package_revision)):
+            entry = json.loads(member.manifest_json)["capabilities"][0]
+            if entry["id"] != ref.capability_id.root:
+                continue
+            return PackageCapability(
+                ref,
+                _hash(member.input_schema_payload),
+                (self._plan_ref(ref.package_revision, member),),
+                binding_requirements=tuple(
+                    BindingRequirementRef(
+                        package_revision=ref.package_revision, requirement_id=value
+                    )
+                    for value in entry["bindingRequirementIds"]
+                ),
+                work_items=WorkItemDeclaration(
+                    mode=entry["mode"], allow_outputs=entry["allowOutputs"]
+                ),
+            )
+        return None
 
     def get_runtime_plan(self, ref: RuntimePlanRef) -> PackagePlan | None:
         ref = RuntimePlanRef.model_validate(ref)
-        compiled = self.load(ref.package_revision)
-        if ref != self._plan_ref(ref.package_revision, compiled):
-            return None
-        return PackagePlan(
-            ref,
-            compiled.runtime_plan_header.runtime_kind,
-            self.capability_refs(ref.package_revision),
-        )
+        for member in _verified_members(self.load_verified(ref.package_revision)):
+            if ref == self._plan_ref(ref.package_revision, member):
+                entry = json.loads(member.manifest_json)["capabilities"][0]
+                return PackagePlan(
+                    ref,
+                    member.runtime_plan_header.runtime_kind,
+                    (
+                        CapabilityRef(
+                            package_revision=ref.package_revision,
+                            capability_id=entry["id"],
+                        ),
+                    ),
+                )
+        return None
 
     def get_binding_requirement(
         self, ref: BindingRequirementRef
     ) -> PackageBindingRequirement | None:
         ref = BindingRequirementRef.model_validate(ref)
-        compiled = self.load(ref.package_revision)
-        for value in json.loads(compiled.manifest_json)["logicalBindingRequirements"]:
-            if value["id"] == ref.requirement_id.root:
-                return PackageBindingRequirement(
-                    ref,
-                    LogicalBindingRequirement.model_validate_json(json.dumps(value)),
-                )
+        for member in _verified_members(self.load_verified(ref.package_revision)):
+            for value in json.loads(member.manifest_json)["logicalBindingRequirements"]:
+                if value["id"] == ref.requirement_id.root:
+                    return PackageBindingRequirement(
+                        ref,
+                        LogicalBindingRequirement.model_validate_json(
+                            json.dumps(value)
+                        ),
+                    )
         return None
 
     def resolve_capability(
@@ -545,12 +788,9 @@ class FoundryPackageRegistry:
 
     def schema_for(self, snapshot: ExecutionSnapshot) -> AdmittedActionSchema:
         try:
-            compiled = self.load(snapshot.capability.package_revision)
-            if (
-                self.get_capability(snapshot.capability) is None
-                or self.get_runtime_plan(snapshot.runtime_plan) is None
-            ):
-                raise AccessDenied("Undeclared Package selection")
+            compiled = self.selection_for(
+                snapshot.capability, snapshot.runtime_plan
+            ).compiled
             return AdmittedActionSchema(
                 self.action_id_for(snapshot.capability),
                 snapshot.capability,

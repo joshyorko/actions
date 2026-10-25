@@ -1200,3 +1200,17 @@ MCP Apps/client acceptance and final artifacts/upgrade/downgrade/restore/shared-
 platform/distribution gates remain open. Celld326 is NO-GO pending exact owner
 decision. Authenticated Codex and Library each returned401; no credential bypass,
 Library upload ID or Dakota READY is claimed. Existing PR328 is updated to a37.
+
+
+## Owner-directed fresh-container handoff
+
+[Recoverable source and scoped drafts](evidence/actions-next-327/recovery-handoff-20261025/README.md)
+are explicitly WORK IN PROGRESS. Multi-capability compiler/registry/authoring and
+outer-revision runner changes are saved, with partial joinedSQL receipts and disk
+interruptions preserved. Knowledge foundation/codec patches remain unapplied,
+PostgreSQL provider storage unverified. Helpers stopped; sole integration ownership
+is released after this checkpoint and requires explicit parent transfer. This is
+not installed a38 or full acceptance. The independent extension handoff includes
+actual a37 schema, verified artifact identities and a synthetic loopback subset
+fixture; client schema drift is confirmed and2.20.14 correctly refuses. Existing extension
+owner is reviewing adaptation with negative tests; no equality bypass.

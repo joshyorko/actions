@@ -1,0 +1,11 @@
+{
+  "root_head_at_freeze": "595cf5119dbf2f858bcc28109b34de31bdc50f86",
+  "base_registry_sha256": "b6c5d0d623852b124aff47060d779a59b0133d55fe15e6e321969f6256eeae5c",
+  "patch_sha256": "dd9eb6c30b5ed7e46643cd57f799509a72e4aad7dbf7ebce959052013b021cf4",
+  "dependency_bundle_patch_sha256": "609ec189a7c49bc283f4a9e915f8183ca8a1ff9dfbb9800b6a4a5be446bf012c",
+  "dependency_authoring_values_sha256": "55cb27e4413088769776be66218b7abe5add3a379a60974d9a1f573a5afc899e",
+  "files": {
+    "action_server/src/actions/server/foundry/package_registry.py": "6e1cc4dd86a3d27d22b9ff7eb0e424a62beeaa0a8b5fa493fae2a0649f779b4b",
+    "action_server/tests/action_server_tests/test_bundle_package_registry.py": "a3a485be4592e781324c12e28633ad6bccab8d314504d18b401a578db60706a0"
+  }
+}

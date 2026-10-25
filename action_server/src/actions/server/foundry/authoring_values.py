@@ -39,6 +39,9 @@ from actions.server.foundry.mcp import CanvasCaller
 from actions.server.run_outputs.types import Actor
 
 if TYPE_CHECKING:
+    from actions.server.deployments.capability_bundle_compiler import (
+        BundleCompilationPolicy,
+    )
     from actions.server.deployments.foundry_values import DeploymentSpecification
 
 
@@ -87,6 +90,29 @@ class GeneratedSourceFile(_StrictValue):
         return self
 
 
+class GeneratedActionDeclaration(_StrictValue):
+    """One explicit Python Action's independent immutable policies."""
+
+    action_name: str = Field(
+        alias="actionName", pattern=r"^[A-Za-z_][A-Za-z0-9_]{0,119}$"
+    )
+    work_items: WorkItemDeclaration = Field(
+        default=WorkItemDeclaration(), alias="workItems"
+    )
+    logical_requirements: tuple[LogicalBindingRequirement, ...] = Field(
+        default=(), alias="logicalRequirements", max_length=16
+    )
+
+    @model_validator(mode="after")
+    def normalized_requirements(self) -> GeneratedActionDeclaration:
+        object.__setattr__(
+            self,
+            "logical_requirements",
+            normalize_requirements(self.logical_requirements),
+        )
+        return self
+
+
 class GeneratedBackend(_StrictValue):
     """Explicit source request; it is never inferred from a CanvasSpec."""
 
@@ -97,9 +123,15 @@ class GeneratedBackend(_StrictValue):
         default=(), alias="logicalRequirements", max_length=16
     )
 
+    actions: tuple[GeneratedActionDeclaration, ...] | None = Field(
+        default=None, min_length=1, max_length=8
+    )
+
     @model_serializer(mode="wrap")
     def preserve_legacy_backend(self, handler):
         value = handler(self)
+        if self.actions is None:
+            value.pop("actions", None)
         if self.work_items is None:
             value.pop("workItems", None)
             value.pop("work_items", None)
@@ -110,6 +142,22 @@ class GeneratedBackend(_StrictValue):
 
     @model_validator(mode="after")
     def unique_bounded_files(self) -> GeneratedBackend:
+        if "actions" in self.model_fields_set and (
+            self.actions is None
+            or self.model_fields_set.intersection(
+                {"work_items", "logical_requirements"}
+            )
+        ):
+            raise ValueError("explicit Actions require only per-Action policies")
+        if self.actions is not None:
+            names = [item.action_name for item in self.actions]
+            if len(set(names)) != len(names):
+                raise ValueError("duplicate Action declaration")
+            object.__setattr__(
+                self,
+                "actions",
+                tuple(sorted(self.actions, key=lambda item: item.action_name)),
+            )
         object.__setattr__(
             self,
             "logical_requirements",
@@ -181,7 +229,7 @@ class CompilationEvidence:
 
 
 class CompiledPackage(Protocol):
-    """Structural view of #130's immutable compiler result, not its manifest."""
+    """Common immutable compiler carrier; no invented singleton execution plan."""
 
     @property
     def manifest_json(self) -> bytes:
@@ -192,39 +240,7 @@ class CompiledPackage(Protocol):
         ...
 
     @property
-    def source_inventory_digest(self) -> str:
-        ...
-
-    @property
-    def source_artifact_digest(self) -> str:
-        ...
-
-    @property
     def package_revision_id(self) -> PackageRevisionId:
-        ...
-
-    @property
-    def runtime_plan_header(self) -> object:
-        ...
-
-    @property
-    def runtime_plan_payload(self) -> bytes:
-        ...
-
-    @property
-    def adapter_specification_payload(self) -> bytes:
-        ...
-
-    @property
-    def input_schema_payload(self) -> bytes:
-        ...
-
-    @property
-    def output_schema_payload(self) -> bytes:
-        ...
-
-    @property
-    def rcc_artifact_digest(self) -> str:
         ...
 
 
@@ -238,6 +254,17 @@ class CompilationResult:
 
 class PackageCompilerPort(Protocol):
     """Adapter to the common #130 compiler with explicit trusted admission."""
+
+    def compile_trusted_bundle(
+        self,
+        entries: Sequence[SuppliedSourceEntry],
+        *,
+        policy: BundleCompilationPolicy,
+        trusted_actor: Actor,
+        workspace_id: WorkspaceId,
+        application_id: DeploymentId,
+    ) -> CompilationResult:
+        """Compile every explicitly declared Action with independent policies."""
 
     def compile_trusted_source(
         self,

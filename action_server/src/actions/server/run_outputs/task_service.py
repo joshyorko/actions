@@ -470,11 +470,13 @@ class TaskService:
             _allow_expired_terminal=not resolve,
         )
         lineage = GeneratedRccExecution._lineage(snapshot, None, fence)
-        compiled = self.outputs.capabilities.load(snapshot.capability.package_revision)
+        from actions.server.foundry.execution_selection import compiled_for_snapshot
+
+        compiled = compiled_for_snapshot(self.outputs.capabilities, snapshot)
         launch = record.get("launch")
         fixed = {
             "sourceArtifactDigest": compiled.source_artifact_digest,
-            "packageRevision": compiled.package_revision_id.root,
+            "packageRevision": snapshot.capability.package_revision.revision_id.root,
             "runtimePlanDigest": snapshot.runtime_plan.plan_digest.root,
             "rccSpecificationDigest": compiled.rcc_specification_digest,
             "rccArtifactDigest": compiled.rcc_artifact_digest,

@@ -5633,3 +5633,14 @@ prove historical revision reopening or durable ingestion. Public Knowledge still
 requires retained immutable collection revisions, independent live read/manage
 authority, canonical ingestion/reconciliation, and sealed paging/export. Split
 provider-service and advanced Knowledge remain distinct outstanding gates.
+
+
+Fresh-container handoffs preserve unfinished source as explicitly incomplete,
+include exact scoped patches/receipts and release sole integration ownership before
+the replacement writer starts. Do not infer a new environment contains old local
+artifacts. Compare remote API checkpoint trees and record differing commit metadata.
+Joined SQL tests may start nested owned PostgreSQL fixtures in addition to the
+harness database; budget each observed allocation before launching. A launcher
+interruption without final capture is not a passing batch. Runtime version floors
+do not establish managed-client schema equality: compare the actual authenticated
+schema with the client's exact canonicalization and refuse mismatches, never bypass.

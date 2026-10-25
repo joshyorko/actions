@@ -1,0 +1,14 @@
+{
+  "home": "/workspace/actions-recovery-327/compiler/robocorp",
+  "spaces": [
+    "34c61aa_5a1fac3_56e3fd24",
+    "34c61aa_5a1fac3_9fcd2534"
+  ],
+  "active_processes": [],
+  "before_free_bytes": 984346624,
+  "retained": "immutable artifacts/catalog/source/build receipts/package caches",
+  "dryrun_returncode": 0,
+  "delete_returncode": 0,
+  "after_free_bytes": 1393029120,
+  "remaining_selected_spaces": []
+}

@@ -37,7 +37,6 @@ from actions.server.deployments.package_revision_compiler import (
     MAX_COMPILER_SOURCE_FILES,
     MAX_COMPILER_SOURCE_TOTAL_BYTES,
     PreparedRccEnvironment,
-    verify_compiled_package_revision,
 )
 from actions.server.foundry.package_registry import FoundryPackageRegistry
 from actions.server.run_outputs.service import (
@@ -304,7 +303,7 @@ class GeneratedRccExecution:
             "lineage": lineage,
             "inputDigest": self._digest(input_bytes),
             "sourceArtifactDigest": compiled.source_artifact_digest,
-            "packageRevision": compiled.package_revision_id.root,
+            "packageRevision": snapshot.capability.package_revision.revision_id.root,
             "runtimePlanDigest": snapshot.runtime_plan.plan_digest.root,
             "rccSpecificationDigest": compiled.rcc_specification_digest,
             "rccArtifactDigest": compiled.rcc_artifact_digest,
@@ -549,7 +548,7 @@ class GeneratedRccExecution:
             "launch": launch,
             "publicationFence": fence.model_dump(),
             "sourceArtifactDigest": compiled.source_artifact_digest,
-            "packageRevision": compiled.package_revision_id.root,
+            "packageRevision": snapshot.capability.package_revision.revision_id.root,
             "runtimePlanDigest": snapshot.runtime_plan.plan_digest.root,
             "rccSpecificationDigest": compiled.rcc_specification_digest,
             "rccArtifactDigest": compiled.rcc_artifact_digest,
@@ -581,8 +580,9 @@ class GeneratedRccExecution:
             != "package-revision"
         ):
             raise AccessDenied("immutable Package capability required")
-        compiled = self.registry.load(snapshot.capability.package_revision)
-        verify_compiled_package_revision(compiled)
+        from actions.server.foundry.execution_selection import compiled_for_snapshot
+
+        compiled = compiled_for_snapshot(self.registry, snapshot)
         evidence = self.registry.evidence(snapshot.capability.package_revision)
         if not evidence.ready:
             raise AccessDenied(

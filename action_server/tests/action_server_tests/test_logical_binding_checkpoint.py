@@ -617,7 +617,12 @@ def test_requirement_bearing_package_cannot_enter_unconfigured_rcc_dispatch():
     runner = object.__new__(GeneratedRccExecution)
     runner.logical_execution = None
     runner.registry = SimpleNamespace(
-        load=lambda ref: compiled,
+        selection_for=lambda capability, plan: SimpleNamespace(
+            package_revision=capability.package_revision,
+            capability=capability,
+            runtime_plan=plan,
+            compiled=compiled,
+        ),
         evidence=lambda ref: SimpleNamespace(ready=True),
     )
     snapshot = SimpleNamespace(
@@ -626,6 +631,10 @@ def test_requirement_bearing_package_cannot_enter_unconfigured_rcc_dispatch():
             package_revision=object(),
             capability_id=SimpleNamespace(root=manifest["capabilities"][0]["id"]),
         ),
+    )
+    snapshot.runtime_plan = SimpleNamespace(
+        package_revision=snapshot.capability.package_revision,
+        plan_digest=compiled.runtime_plan_header.plan_digest,
     )
     with pytest.raises(AccessDenied, match="logical execution runtime"):
         runner._verified_selection(snapshot)
