@@ -614,6 +614,43 @@ describe("semantic Canvas components", () => {
         previewView.unmount();
     });
 
+    it("names the keyboard-accessible results region from its table caption", async () => {
+        render(
+            createElement(renderer.SemanticTable, {
+                caption: "Retained records",
+                columns: [{ key: "name", label: "Name" }],
+                rows: [{ name: "First record" }],
+            }),
+        );
+        const region = screen.getByRole("region", { name: "Retained records" });
+        expect(
+            within(region).getByRole("table", { name: "Retained records" }),
+        ).toBeVisible();
+        await userEvent.tab();
+        expect(region).toHaveFocus();
+    });
+
+    it("names results without a caption and announces empty results", () => {
+        const view = render(
+            createElement(renderer.SemanticTable, {
+                columns: [{ key: "name", label: "Name" }],
+                rows: [{ name: "First record" }],
+            }),
+        );
+        expect(screen.getByRole("region", { name: "Results" })).toBeVisible();
+        view.rerender(
+            createElement(renderer.SemanticTable, {
+                caption: "Retained records",
+                columns: [{ key: "name", label: "Name" }],
+                rows: [],
+            }),
+        );
+        expect(
+            screen.getByRole("status", { name: "Retained records" }),
+        ).toHaveTextContent("No results to display.");
+        expect(screen.queryByRole("region")).toBeNull();
+    });
+
     it("treats table row and column data as own-property text", () => {
         const row = Object.create({ name: "inherited value" }) as Record<
             string,

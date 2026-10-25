@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="73" failures="0" errors="0" time="4.388759417">
+    <testsuite name="src/query-results/CanvasContractRoundTrip.test.tsx" timestamp="2026-10-25T13:24:35.945Z" hostname="71cd163cf8ad" tests="2" failures="0" errors="0" skipped="1" time="0.00625361">
+        <testcase classname="src/query-results/CanvasContractRoundTrip.test.tsx" name="Canvas query-results JSON Schema interchange &gt; validates the one shared fixture and rejects dynamic binding changes" time="0.003757513">
+        </testcase>
+        <testcase classname="src/query-results/CanvasContractRoundTrip.test.tsx" name="Canvas query-results JSON Schema interchange &gt; validates Python JSON and writes its typed TypeScript round trip" time="0">
+            <skipped/>
+        </testcase>
+    </testsuite>
+    <testsuite name="src/query-results/InvoiceReconciliation.test.tsx" timestamp="2026-10-25T13:24:35.947Z" hostname="71cd163cf8ad" tests="2" failures="0" errors="0" skipped="0" time="0.240720368">
+        <testcase classname="src/query-results/InvoiceReconciliation.test.tsx" name="shows accurate reconciliation labels and separate integer-cent comparisons" time="0.232368107">
+        </testcase>
+        <testcase classname="src/query-results/InvoiceReconciliation.test.tsx" name="rejects unsafe comparison values and foreign invoice identity at the wire boundary" time="0.003447284">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/query-results/InvoiceReviewPanel.test.tsx" timestamp="2026-10-25T13:24:35.948Z" hostname="71cd163cf8ad" tests="5" failures="0" errors="0" skipped="0" time="0.471309087">
+        <testcase classname="src/query-results/InvoiceReviewPanel.test.tsx" name="reads saved bytes only on an explicit inspect action before approval" time="0.172228929">
+        </testcase>
+        <testcase classname="src/query-results/InvoiceReviewPanel.test.tsx" name="requires an explicit offer followed by an explicit approval" time="0.106120288">
+        </testcase>
+        <testcase classname="src/query-results/InvoiceReviewPanel.test.tsx" name="never treats a denied review as approval" time="0.030854531">
+        </testcase>
+        <testcase classname="src/query-results/InvoiceReviewPanel.test.tsx" name="dispatches only after a separate approval and explicit execute click" time="0.057932167">
+        </testcase>
+        <testcase classname="src/query-results/InvoiceReviewPanel.test.tsx" name="shows blocked outcomes and explicit terminal failure download without retrying" time="0.100804103">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/query-results/QueryResultsView.test.tsx" timestamp="2026-10-25T13:24:35.949Z" hostname="71cd163cf8ad" tests="12" failures="0" errors="0" skipped="0" time="1.395564131">
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; renders a host result without execution and pages only its pinned handle" time="0.179901397">
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; renders a labelled idle form without accessibility violations" time="0.146726919">
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; rejects blank input locally and submits only the fixed query shape" time="0.167460807">
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; uses the injected status method with the opaque handle" time="0.105906696">
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; ignores a stale status success and finalizer after the query changes" time="0.178634936">
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; ignores a stale status rejection while the new result is checking" time="0.149781131">
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; ignores a stale status rejection after the view is reopened" time="0.111119612">
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; re-enables search when host input is replaced while a search is pending" time="0.079523736">
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; re-enables search when host input is cleared while a search is pending" time="0.108639764">
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; announces loading and then the empty state" time="0.067633706">
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; renders the fixed domain error message without accepting its free text" time="0.07056055">
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; hides adapter exception details and exposes a bounded failure" time="0.024808788">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/generic-execution.test.tsx" timestamp="2026-10-25T13:24:35.952Z" hostname="71cd163cf8ad" tests="4" failures="0" errors="0" skipped="0" time="0.068117233">
+        <testcase classname="src/semantic-renderer/generic-execution.test.tsx" name="generic official bridge adapter &gt; never runs on mount; submit returns identity before execute and allows cancellation" time="0.061043097">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-execution.test.tsx" name="generic official bridge adapter &gt; retains submission identity after uncertainty and rejects replacement input" time="0.00257962">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-execution.test.tsx" name="generic official bridge adapter &gt; rejects foreign binding in response" time="0.000544096">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-execution.test.tsx" name="reopens retained state without admission and continues only unlaunched Run" time="0.001344338">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/generic-input.test.tsx" timestamp="2026-10-25T13:24:35.953Z" hostname="71cd163cf8ad" tests="6" failures="0" errors="0" skipped="0" time="0.253125112">
+        <testcase classname="src/semantic-renderer/generic-input.test.tsx" name="lists then claims exact selected input without autoexecution or payload replacement" time="0.007695693">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-input.test.tsx" name="retains uncertain selection identity and rejects changed item or response" time="0.002508344">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-input.test.tsx" name="rejects a selected-item response before accepting its Run" time="0.001085955">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-input.test.tsx" name="renders explicit queue selection and claim controls with no launch" time="0.237310539">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-input.test.tsx" name="allows a second explicit selected item after terminal execute" time="0.001819729">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-input.test.tsx" name="allows a second explicit selected item after terminal refresh" time="0.000884135">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/generic-layout.test.tsx" timestamp="2026-10-25T13:24:35.954Z" hostname="71cd163cf8ad" tests="7" failures="0" errors="0" skipped="0" time="0.260992827">
+        <testcase classname="src/semantic-renderer/generic-layout.test.tsx" name="renders declared consumer controls and results within the authored canvas without replacement fields" time="0.147151066">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-layout.test.tsx" name="suppresses trusted private slots for model" time="0.00727733">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-layout.test.tsx" name="suppresses trusted private slots for preview" time="0.021703151">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-layout.test.tsx" name="suppresses trusted private slots for undeclared" time="0.007841058">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-layout.test.tsx" name="suppresses trusted private slots for invisible" time="0.004142251">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-layout.test.tsx" name="keeps inspected artifact within the canvas and preserves authored input node identity" time="0.064910863">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-layout.test.tsx" name="does not move a declared private form into an undeclared authored binding" time="0.004812249">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/generic-output.test.tsx" timestamp="2026-10-25T13:24:35.956Z" hostname="71cd163cf8ad" tests="6" failures="0" errors="0" skipped="0" time="0.258892482">
+        <testcase classname="src/semantic-renderer/generic-output.test.tsx" name="loads only explicit associated Run children without claim or adoption" time="0.01935081">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-output.test.tsx" name="rejects changed output run identity" time="0.003010518">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-output.test.tsx" name="rejects changed output attempt identity" time="0.000507463">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-output.test.tsx" name="rejects changed output queue identity" time="0.000537501">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-output.test.tsx" name="renders read-only produced items with explicit load and no adoption controls" time="0.232618134">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-output.test.tsx" name="drops the cached child page when a later authorized read is denied" time="0.000689588">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/generic-view.test.tsx" timestamp="2026-10-25T13:24:35.957Z" hostname="71cd163cf8ad" tests="1" failures="0" errors="0" skipped="0" time="0.135273502">
+        <testcase classname="src/semantic-renderer/generic-view.test.tsx" name="semantic form explicitly submits and shows persistent Run status without mount execution" time="0.131984463">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/mcp-bridge.test.tsx" timestamp="2026-10-25T13:24:35.958Z" hostname="71cd163cf8ad" tests="12" failures="0" errors="0" skipped="0" time="0.326780459">
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; renders canonical package-local capability action.generated_echo without invoking it" time="0.104041068">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; renders canonical package-local capability action.résumé without invoking it" time="0.028077059">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; rejects invalid package-local capability &quot;&quot;" time="0.001167797">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; rejects invalid package-local capability &quot;é&quot;" time="0.000731015">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; rejects invalid package-local capability &quot;\ud800&quot;" time="0.000447895">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; renders semantic state from tool-result metadata and stays read-only" time="0.040255314">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; renders a preview reply without enabling its form" time="0.029922077">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; remounts view state when the immutable app revision changes" time="0.024807734">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; respects the app audience projection without exposing hidden details" time="0.014414541">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; preserves the query fixture adapter and explicit query submission" time="0.056047984">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; preserves invoice metadata rendering without querying on open" time="0.020632516">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; rejects malformed schema and binding scope before rendering" time="0.002019148">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/semantic-components.test.tsx" timestamp="2026-10-25T13:24:35.960Z" hostname="71cd163cf8ad" tests="16" failures="0" errors="0" skipped="0" time="0.971730606">
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; exports semantic components and the renderer" time="0.004829823">
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; renders the canonical PR330 fixture through injected adapters" time="0.170405321">
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; renders the title and revision as text, not markup" time="0.025048344">
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; hides every detail, including title and revision, for empty visibility" time="0.005931541">
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; does not expose app-only content to the model viewer" time="0.004885195">
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; treats an untouched required constructor field as empty and never dispatches" time="0.161224159">
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; treats an untouched required toString field as empty and never dispatches" time="0.10230853">
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; dispatches fixture integer and boolean fields as number and boolean" time="0.143125715">
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; validates required booleans and rejects non-integer input" time="0.089042677">
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; resets inputs and ignores a deferred response when capability scope changes" time="0.158630248">
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; rejects malformed specs and duplicate form fields before rendering controls" time="0.010206107">
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; does not resolve any binding when the spec hides all audiences" time="0.011698248">
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; projects status, opens artifacts through the typed adapter, and keeps preview inert" time="0.04153071">
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; names the keyboard-accessible results region from its table caption" time="0.014797042">
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; names results without a caption and announces empty results" time="0.007906717">
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; treats table row and column data as own-property text" time="0.010561132">
+        </testcase>
+    </testsuite>
+</testsuites>
