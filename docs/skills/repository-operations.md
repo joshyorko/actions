@@ -5247,7 +5247,35 @@ Cancellation rechecks the retained Run's independent live cancel authority. Revo
 
 Bounded worker scans validate immutable intent and unclaimed execution evidence before evaluating current execution eligibility. Revoked or ineligible candidates are skipped within the same bounded page; corruption is not treated as permission denial. A queued Run carrying a launch/result journal is rejected without erasing that evidence. Scan continuation uses the canonical monotonic Run numbered_id ordinal, not the last denied Run UUID; cursor continuation cannot expose a skipped Run identifier. The ordinal is an internal worker cursor, not MCP Task identity.
 
-Explicit `providers-local` setup now provides a saved-owner, stopped-local-SQLite path for named provider grants, pinned source imports, immutable metadata registration and private host configuration. Grants remain separate: workspace provider.register; exact-reference provider.inspect/provider.manage/deploy/execute/data.read/data.manage. The existing bootstrap permission set/fingerprint is unchanged. Private immutable source/config/catalog files reconstruct retained evidence on restart; ordinary injection occurs only when CURRENT has matching committed operator Request/Audit provenance and an exact private request/catalog binding. Absent configuration remains None. Startup never imports, resolves secret/CA values, grants, probes or recovers intents.
+Explicit `providers-local` setup now provides a saved-owner, stopped-local-SQLite path for named provider grants, pinned source imports, immutable metadata registration and private host configuration. Grants remain separate: workspace provider.register; exact-reference provider.inspect/provider.manage/deploy/execute/data.read/data.manage and source-provider knowledge.read/knowledge.manage. The existing bootstrap permission set/fingerprint is unchanged. Private immutable source/config/catalog files reconstruct retained evidence on restart; ordinary injection occurs only when CURRENT has matching committed operator Request/Audit provenance and an exact private request/catalog binding. Absent configuration remains None. Startup never imports, resolves secret/CA values, grants, probes or recovers intents.
+
+`providers-local` also supports explicit `knowledge_collection` targets for
+`grant-owner`, `revoke-owner`, and `inspect`. Collection targets accept only
+`knowledge.read` and `knowledge.manage`; source-provider `knowledge.read` and
+`provider.inspect` remain independent exact-reference grants. Supply the current
+`expected_grants_digest` obtained from dry-run before applying each grant change.
+A replayed grant request returns its historical receipt and does not restore a
+subsequently revoked permission. Do not treat that receipt as current authority.
+
+For retained Knowledge definition setup, import an exact raw
+`actions.logical-source/v1` manifest with `kind="knowledge"`, register its provider
+revision, grant the source and collection permissions explicitly, then submit
+`register-knowledge-definition` with exact `provider` and `knowledge_definition`.
+Dry-run rechecks live grants and sealed source identity without recording a
+definition. Apply records the canonical definition and local Request/Audit in one
+SQL transaction; local audit failure rolls back both, and exact replay rechecks
+current source/collection authority. Changed payloads cannot reuse a request ID.
+The command returns `metadata-only`: it creates no host configuration, ingestion
+Run, Task, provider database, scheduler, or search readiness. Raw Knowledge source
+seals are retained metadata; executable `CatalogEntry` and the source/v2 decoder
+gate still reject them. Data source/v1 remains refused by local import.
+
+These operations retain the existing stopped-Runtime mutex, private-file and
+saved-owner restrictions and refuse a shared PostgreSQL control plane. The two
+new optional request fields are omitted when absent, preserving serialized v1
+requests and fingerprints for every existing operation. Fresh-process CLI tests
+prove retained definition setup, not installed ingestion or generated search
+consumption; ordinary host selection and typed Task/logical joins remain gates.
 
 Configuration commits metadata authorization before CAS pointer publication. The SQL receipt means publication-authorized; only successful pointer publication returns configured-not-probed. Explicit recovery requires current manage permission and rejects absent SQL provenance, changed targets or stale generations. Immutable file writes stage and fsync complete bytes before publication, preserving existing targets; interrupted staging can retry, and cleanup checks its owned inode. These guarantees require the canonical local mutex and exclusion of concurrent same-user filesystem mutation; they are not an adversarial-filesystem claim.
 
@@ -5750,3 +5778,11 @@ and reactivation, then read artifacts with a fresh AppSession after restart.
 AppSession tokens are process-memory-only: rejection of the old token and
 successful newly authorized reads are separate assertions. Never persist the
 raw token in receipts, including failure diagnostics.
+
+For exact evidence hashes, hash Git-stored text after its newline normalization,
+or retain original diagnostic bytes as base64 with a decoded-byte checksum.
+A working-tree CRLF checksum is not the checksum of a normalized committed file.
+When selecting an installed consumer interpreter, invoke its absolute Python from
+the prepared environment or a subprocess wrapper; RCC `task script` may resolve
+a supplied Python executable to the toolchain Python. Always assert import origin
+before crediting installed acceptance.

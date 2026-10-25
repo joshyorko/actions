@@ -51,6 +51,17 @@ class CatalogSeal(_Value):
     seal: SealReceipt
 
 
+def require_retained_source(source: SourceManifest) -> SourceManifest:
+    """Permit sealed Knowledge metadata without widening executable catalogs."""
+    source = SourceManifest.model_validate(source)
+    if (
+        source.kind == "knowledge"
+        and source.schema_version == "actions.logical-source/v1"
+    ):
+        return source
+    return require_executable_source(source)
+
+
 class SourceSealRecord(_Value):
     schema_version: Literal[
         "actions.local-source-seals/v1"
@@ -62,7 +73,7 @@ class SourceSealRecord(_Value):
 
     @model_validator(mode="after")
     def identities(self):
-        require_executable_source(self.source)
+        require_retained_source(self.source)
         expected = {obj.name: (obj.digest, obj.size) for obj in self.source.objects}
         actual = {item.name: (item.seal.digest, item.seal.size) for item in self.seals}
         if len(actual) != len(self.seals) or expected != actual:

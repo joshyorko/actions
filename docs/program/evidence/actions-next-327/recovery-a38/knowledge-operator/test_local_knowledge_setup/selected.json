@@ -1,0 +1,16 @@
+[
+  "tests/action_server_tests/test_local_knowledge_setup.py::test_definition_dryrun_reopen_replay_metadata_only",
+  "tests/action_server_tests/test_local_knowledge_setup.py::test_registration_needs_independent_collection_grants[permissions0]",
+  "tests/action_server_tests/test_local_knowledge_setup.py::test_registration_needs_independent_collection_grants[permissions1]",
+  "tests/action_server_tests/test_local_knowledge_setup.py::test_registration_needs_independent_collection_grants[permissions2]",
+  "tests/action_server_tests/test_local_knowledge_setup.py::test_revoke_and_old_grant_replay_do_not_restore_authority",
+  "tests/action_server_tests/test_local_knowledge_setup.py::test_collection_cas_and_changed_definition_id_fail",
+  "tests/action_server_tests/test_local_knowledge_setup.py::test_local_audit_failure_rolls_back_definition_and_replay_is_safe",
+  "tests/action_server_tests/test_local_knowledge_setup.py::test_closed_collection_target_and_workspace",
+  "tests/action_server_tests/test_local_knowledge_setup.py::test_registration_rechecks_source_permission",
+  "tests/action_server_tests/test_local_knowledge_setup.py::test_old_request_serialization_and_fingerprints_stay_exact",
+  "tests/action_server_tests/test_local_knowledge_setup.py::test_definition_through_fresh_public_cli",
+  "tests/action_server_tests/test_local_knowledge_setup.py::test_raw_knowledge_is_retained_metadata_not_executable_catalog",
+  "tests/action_server_tests/test_local_knowledge_setup.py::test_definition_source_corruption_fails_on_replay",
+  "tests/action_server_tests/test_local_knowledge_setup.py::test_definition_refuses_shared_control_plane_and_running_runtime"
+]

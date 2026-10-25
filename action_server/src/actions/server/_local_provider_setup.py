@@ -15,12 +15,17 @@ from pathlib import Path
 from typing import Literal
 from uuid import NAMESPACE_URL, uuid5
 
-from pydantic import Field, model_validator
+from pydantic import Field, model_serializer, model_validator
 
 from actions.server._common.app_mutex import obtain_app_mutex
 from actions.server._database import Database
 from actions.server._local_authorization import _operations, _owned, _owner
 from actions.server._models import get_all_model_classes
+from actions.server.data_queries.knowledge_values import (
+    KnowledgeCollectionRef,
+    KnowledgeRevisionSpec,
+    knowledge_grant_subject,
+)
 from actions.server.deployments.ids import ProviderProfileRevisionRef, WorkspaceId
 from actions.server.deployments.logical_bindings import _Value
 from actions.server.deployments.provider_registry import (
@@ -28,8 +33,8 @@ from actions.server.deployments.provider_registry import (
     SourceManifest,
     canonical,
     digest,
-    require_executable_source,
 )
+from actions.server.foundry.knowledge_authority import KnowledgeRevisionAuthority
 from actions.server.foundry.models import (
     FoundryAccessGrant,
     FoundryAudit,
@@ -43,6 +48,7 @@ from actions.server.foundry.provider_catalog import (
     PrivateProviderStore,
     ProviderCatalog,
     SourceSealRecord,
+    require_retained_source,
 )
 from actions.server.foundry.provider_config import ProviderHostConfig, SecretVersion
 from actions.server.foundry.provider_models import (
@@ -85,6 +91,7 @@ class LocalProviderRequest(_Value):
         "configure-host",
         "recover-intent",
         "set-enabled",
+        "register-knowledge-definition",
     ]
     request_id: str = Field(min_length=1, max_length=128)
     workspace_id: WorkspaceId
@@ -98,6 +105,8 @@ class LocalProviderRequest(_Value):
             "execute",
             "data.read",
             "data.manage",
+            "knowledge.read",
+            "knowledge.manage",
         ],
         ...,
     ] = ()
@@ -113,18 +122,39 @@ class LocalProviderRequest(_Value):
     intent_id: str | None = None
     expected_generation: int | None = Field(default=None, ge=0)
     enabled: bool | None = None
+    knowledge_collection: KnowledgeCollectionRef | None = None
+    knowledge_definition: KnowledgeRevisionSpec | None = None
+
+    @model_serializer(mode="wrap")
+    def preserve_v1_fingerprints(self, handler):
+        value = handler(self)
+        for field in ("knowledge_collection", "knowledge_definition"):
+            if value.get(field) is None:
+                value.pop(field, None)
+        return value
 
     @model_validator(mode="after")
     def shape(self):
         allowed = {
-            "inspect": {"provider"},
-            "grant-owner": {"provider", "permissions", "expected_grants_digest"},
-            "revoke-owner": {"provider", "permissions", "expected_grants_digest"},
+            "inspect": {"provider", "knowledge_collection"},
+            "grant-owner": {
+                "provider",
+                "knowledge_collection",
+                "permissions",
+                "expected_grants_digest",
+            },
+            "revoke-owner": {
+                "provider",
+                "knowledge_collection",
+                "permissions",
+                "expected_grants_digest",
+            },
             "import-source": {"source", "files"},
             "register-revision": {"descriptor"},
             "configure-host": {"config", "secrets", "expected_catalog"},
             "recover-intent": {"intent_id"},
             "set-enabled": {"provider", "expected_generation", "enabled"},
+            "register-knowledge-definition": {"provider", "knowledge_definition"},
         }[self.operation]
         common = {"schema_version", "operation", "request_id", "workspace_id"}
         if any(
@@ -134,21 +164,33 @@ class LocalProviderRequest(_Value):
             raise ValueError("fields outside selected provider operation")
         if len(set(self.permissions)) != len(self.permissions):
             raise ValueError("unique named permissions required")
+        if self.provider is not None and self.knowledge_collection is not None:
+            raise ValueError("choose one exact grant target")
         if self.operation in ("grant-owner", "revoke-owner"):
             if (
                 not self.permissions
                 or (
                     self.provider is None
+                    and self.knowledge_collection is None
                     and set(self.permissions) != {"provider.register"}
                 )
                 or (
-                    self.provider is not None
+                    (self.provider is not None or self.knowledge_collection is not None)
                     and "provider.register" in self.permissions
                 )
             ):
                 raise ValueError(
                     "workspace register or exact-reference permissions required"
                 )
+        if self.knowledge_collection is not None and not set(self.permissions) <= {
+            "knowledge.read",
+            "knowledge.manage",
+        }:
+            raise ValueError("Knowledge collection permissions required")
+        if self.operation == "register-knowledge-definition" and (
+            self.provider is None or self.knowledge_definition is None
+        ):
+            raise ValueError("exact Knowledge definition and source provider required")
         if self.operation == "import-source" and (
             self.source is None or not self.files
         ):
@@ -282,12 +324,15 @@ def _grant_state(
     actor: Actor,
     workspace: WorkspaceId,
     ref: ProviderProfileRevisionRef | None,
+    collection: KnowledgeCollectionRef | None = None,
 ):
     kind, subject = (
         ("reference", reference_grant_subject(ref))
         if ref is not None
         else ("workspace", str(workspace.root))
     )
+    if collection is not None:
+        kind, subject = "knowledge-collection", knowledge_grant_subject(collection)
     identity = _key(actor, workspace, "grant:" + kind + ":" + subject)
     rows = db.all(FoundryAccessGrant, where="id=?", values=[identity])
     row = rows[0] if rows else None
@@ -315,7 +360,7 @@ def _grant(
     if request.provider is not None:
         _metadata(db, request.provider)
     identity, kind, subject, row, state = _grant_state(
-        db, actor, workspace, request.provider
+        db, actor, workspace, request.provider, request.knowledge_collection
     )
     result = {
         "operation": request.operation,
@@ -325,6 +370,10 @@ def _grant(
         "expected_grants_digest": state,
         "permissions": list(request.permissions),
     }
+    if request.knowledge_collection is not None:
+        result["knowledge_collection"] = request.knowledge_collection.model_dump(
+            mode="json"
+        )
     if dry_run:
         return result
     prior = _receipt(db, actor, workspace, request)
@@ -461,7 +510,7 @@ def _import_source(
     dry_run: bool,
 ) -> SourceSealRecord | None:
     assert request.source is not None
-    source = require_executable_source(request.source)
+    source = require_retained_source(request.source)
     files = {item.name: item.path for item in request.files}
     if len(files) != len(request.files) or set(files) != {
         obj.name for obj in source.objects
@@ -822,6 +871,8 @@ def run_local_provider_setup(
                 request.provider,
                 request.descriptor.reference if request.descriptor else None,
                 request.config.provider if request.config else None,
+                request.knowledge_collection,
+                request.knowledge_definition,
             ):
                 if ref is not None and ref.workspace_id != workspace:
                     raise ValueError("provider outside saved owner Workspace")
@@ -852,7 +903,9 @@ def run_local_provider_setup(
                 else:
                     descriptor = None
                     availability = None
-                _, _, _, _, state = _grant_state(db, actor, workspace, request.provider)
+                _, _, _, _, state = _grant_state(
+                    db, actor, workspace, request.provider, request.knowledge_collection
+                )
                 return {
                     "operation": "inspect",
                     "provider": descriptor.model_dump(mode="json")
@@ -861,6 +914,15 @@ def run_local_provider_setup(
                     "expected_grants_digest": state,
                     "availability": availability,
                     "readiness": "not-probed",
+                    **(
+                        {
+                            "knowledge_collection": request.knowledge_collection.model_dump(
+                                mode="json"
+                            )
+                        }
+                        if request.knowledge_collection
+                        else {}
+                    ),
                 }
             if request.operation in ("import-source", "register-revision"):
                 auth.require_workspace(actor, workspace, "provider.register")
@@ -963,6 +1025,59 @@ def run_local_provider_setup(
                             "provider": ref.model_dump(mode="json"),
                             "readiness": "metadata-only",
                         }
+                    if request.operation == "register-knowledge-definition":
+                        assert request.provider is not None
+                        assert request.knowledge_definition is not None
+                        spec = request.knowledge_definition
+                        record = store.source(spec.source_revision)
+                        registry = SqlProviderRegistry(
+                            db, auth, _evidence(record, blobs)
+                        )
+                        authority = KnowledgeRevisionAuthority(db, registry)
+                        with db.transaction():
+                            # Dry-run enforces the same current authority and retained
+                            # source boundary without creating definition or receipts.
+                            auth.require_knowledge(
+                                actor, spec.reference, "knowledge.read"
+                            )
+                            auth.require_knowledge(
+                                actor, spec.reference, "knowledge.manage"
+                            )
+                            auth.require_reference(
+                                actor, request.provider, "knowledge.read"
+                            )
+                            registry.describe(actor, request.provider)
+                            authority._source_metadata(spec, request.provider)
+                            knowledge_result = {
+                                "operation": request.operation,
+                                "revision": spec.reference.model_dump(mode="json"),
+                                "provider": request.provider.model_dump(mode="json"),
+                                "readiness": "metadata-only",
+                            }
+                            if dry_run:
+                                return knowledge_result
+                            prior = _receipt(db, actor, workspace, request)
+                            reference = authority.register_definition(
+                                actor,
+                                spec,
+                                source_provider=request.provider,
+                                idempotency_key=_key(
+                                    actor, workspace, "knowledge:" + request.request_id
+                                ),
+                            )
+                            if prior is not None:
+                                if json.loads(prior.result_json) != knowledge_result:
+                                    raise ValueError("Knowledge local receipt differs")
+                            else:
+                                _record(
+                                    db,
+                                    actor,
+                                    workspace,
+                                    request,
+                                    knowledge_result,
+                                    reference.revision_id,
+                                )
+                            return knowledge_result
                     if request.operation == "configure-host":
                         return _configured_intent(
                             db, store, blobs, actor, workspace, request, auth, dry_run
