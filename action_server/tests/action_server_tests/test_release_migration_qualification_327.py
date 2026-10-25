@@ -67,10 +67,40 @@ def test_index_observer_detects_same_name_definition_changes(tmp_path, changed):
     assert observed != original
 
 
+def test_database_indexes_report_real_tables_and_ordered_columns(tmp_path):
+    path = tmp_path / "enumeration.db"
+    with closing(sqlite3.connect(path)) as connection:
+        connection.execute("CREATE TABLE alpha(a INTEGER, b INTEGER)")
+        connection.execute("CREATE TABLE beta(c INTEGER)")
+        connection.execute("CREATE UNIQUE INDEX alpha_idx ON alpha(b, a, b)")
+        connection.execute("CREATE INDEX beta_idx ON beta(c) WHERE c > 0")
+    db = Database(path)
+    with db.connect():
+        rows = db.list_indexes()
+    assert rows == [
+        ("alpha", "alpha_idx", "b", 0, 0, 1, 0, 0, 0),
+        ("alpha", "alpha_idx", "a", 0, 0, 1, 0, 1, 1),
+        ("alpha", "alpha_idx", "b", 0, 0, 1, 0, 2, 2),
+        ("beta", "beta_idx", "c", 0, 1, 0, 1, 0, 0),
+    ]
+
+
+def test_database_index_metadata_ignores_creation_order(tmp_path):
+    observed = []
+    for number, indexes in enumerate((("a", "b"), ("b", "a"))):
+        path = tmp_path / f"order-{number}.db"
+        with closing(sqlite3.connect(path)) as connection:
+            connection.execute("CREATE TABLE t(a INTEGER, b INTEGER)")
+            for column in indexes:
+                connection.execute(f"CREATE INDEX idx_{column} ON t({column})")
+        db = Database(path)
+        with db.connect():
+            observed.append(db.list_indexes())
+    assert observed[0] and observed[0] == observed[1]
+
+
 @pytest.mark.parametrize("intermediate", [None, 15, 19, 21])
-def test_historical_database_reaches_current_release(
-    tmp_path, intermediate, record_property
-):
+def test_historical_database_reaches_current_release(tmp_path, intermediate, request):
     path = database_v0.__wrapped__(tmp_path)
     db = Database(path)
 
@@ -97,5 +127,7 @@ def test_historical_database_reaches_current_release(
     upgraded_definitions = sqlite_index_definitions(path)
     fresh_definitions = sqlite_index_definitions(tmp_path / "fresh.db")
     assert upgraded_definitions and fresh_definitions
-    record_property("sqlite_index_definition_count", len(upgraded_definitions))
+    request.node.user_properties.append(
+        ("sqlite_index_definition_count", len(upgraded_definitions))
+    )
     assert upgraded_definitions == fresh_definitions
