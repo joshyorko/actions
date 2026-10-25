@@ -2,14 +2,20 @@
   "status": "REVIEWED_DRAFTS_NOT_INTEGRATED_NOT_RELEASE_QUALIFIED",
   "purpose": "recoverable bounded next-source proposals while frozen a27 full gate runs",
   "source_base": "fdc38d7090c4ac470171c499e77eab636fd452e6",
-  "dependencies": "app proposal requires separate generic dispatch registration from discovery proposal; bootstrap/version wiring not yet applied",
-  "remaining": "none-mode model followup, actual/installed/browser integration, explicit local operator provisioning, full original campaign gates",
+  "dependencies": "none-model-join requires model-discovery and generic-bound-app; operator is independent; all remain unintegrated draft artifacts",
+  "remaining": "Root bootstrap/version wiring, joined source tests, installed CLI/operator/host/browser qualification, input-linked app forms, full original campaign gates",
   "files": {
     "model-discovery.patch": "4e48f2d0302e6b92c27f9ce2c26aa5cae25e1e7220c8020be419df46ff9f54ff",
     "model-discovery-receipt.md": "3f8c2e9c64c4a62bb20dc6160bcc3f789f1128a20f201462484e31ea7cb580ee",
     "generic-bound-app.patch": "ab3767521b2c0f9815774f4865a826b4f00198b25214b0b793dde5b32161753c",
     "generic-bound-app-receipt.md": "6c07aad46b000d76fa1243b7edeef72dcd027e16ca3d9793f1e31ee0c020ae8d",
-    "generic-bound-app-guide.md": "0aa9fabcc61bfff03339ddc28c40a563a18228102e590d2662687d0aad9866e6"
+    "generic-bound-app-guide.md": "0aa9fabcc61bfff03339ddc28c40a563a18228102e590d2662687d0aad9866e6",
+    "none-model-join.patch": "4fb3f9e5f445e31cf4c4fc2bdf98207f62d97a62a476c20b01cda0235501f74f",
+    "none-model-receipt.md": "9b73bfe3dce603b1e0993b8d5cae17c2101d435a25f95a49973342c8b1db2a26",
+    "none-model-guide.md": "aac6da9d1a4484707dc1275a742f0b00b1d6e8ca0d1df1b9d3e9f513bf233323",
+    "operator-provisioning.patch": "d58eda961d331572e92626e878b695a4e512556427424b37d4904a3b7e5c1084",
+    "operator-provisioning-receipt.md": "b1a98cf029efae5b5ea8e75f1fdc21e758194456dc6585aea3f165ccc14cc199",
+    "operator-provisioning-schema.json": "d477f11fefc4ab212af3f799e5b1b490f6abf1a6ce8ff42d09c7ce0839fa6b11"
   },
   "upstream_disposition": "none"
 }
