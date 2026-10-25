@@ -88,3 +88,18 @@ def test_cyclonedx_components_must_match_actual_consumer(checker, mutation):
     else:
         with pytest.raises(ValueError):
             checker.compare_cyclonedx(sbom, {"example": "1"})
+
+
+@pytest.mark.parametrize("vendor", ["Sema4AI_HTTP_Helper", "sema4ai.common"])
+@pytest.mark.parametrize("location", ["installed", "inactive_dependency"])
+def test_replaced_vendor_packages_cannot_return(checker, vendor, location):
+    installed, lock = evidence()
+    if location == "installed":
+        installed["installed"].append({"metadata": {"name": vendor, "version": "1"}})
+        lock["package"].append({"name": vendor, "version": "1"})
+    else:
+        installed["installed"][0]["metadata"]["requires_dist"].append(
+            f'{vendor}>=1; extra == "not-selected"'
+        )
+    with pytest.raises(ValueError, match="replaced vendor"):
+        checker.qualify(installed, lock, "1.1.0a38", ["data"])

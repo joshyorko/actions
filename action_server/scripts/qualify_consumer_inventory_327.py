@@ -12,12 +12,22 @@ from pathlib import Path
 from packaging.requirements import Requirement
 from packaging.utils import canonicalize_name
 
+REPLACED_VENDOR_DISTRIBUTIONS = {"sema4ai-http-helper", "sema4ai-common"}
+
 
 def qualify(inspect, lock, expected_runtime, extras):
     installed = {}
     for item in inspect["installed"]:
         metadata = item["metadata"]
         name = canonicalize_name(metadata["name"])
+        if name in REPLACED_VENDOR_DISTRIBUTIONS:
+            raise ValueError(f"replaced vendor distribution installed: {name}")
+        for raw in metadata.get("requires_dist", []):
+            dependency = canonicalize_name(Requirement(raw).name)
+            if dependency in REPLACED_VENDOR_DISTRIBUTIONS:
+                raise ValueError(
+                    f"replaced vendor dependency declared: {name} -> {dependency}"
+                )
         if name in installed:
             raise ValueError("duplicate installed distribution")
         installed[name] = metadata
