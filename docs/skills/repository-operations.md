@@ -6607,3 +6607,9 @@ execution under one unchanged deployment/capability snapshot reuses its admissio
 Installed/UI qualification should check Run and Attempt counts separately, verify
 RunPin admission associations, and compare the retained typed snapshot to the exact
 authorized deployment. Never demand one admission per repeated execution.
+
+Before frozen-source qualification, reconcile tracked generated frontend inputs with
+the canonical build of the selected source. Verify relevant source files have not
+changed, retain before/after hashes, and commit the regenerated input before the
+clean-worktree preflight. A later build mutating stale generated files invalidates
+the frozen-source gate even when the product source itself was unchanged.

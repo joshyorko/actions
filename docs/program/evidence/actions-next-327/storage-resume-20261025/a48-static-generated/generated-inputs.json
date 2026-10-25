@@ -1,0 +1,14 @@
+{
+  "source": "45e8c2c1f1e6e9b72c5e48e01d735243185e015b",
+  "inputs": {
+    "action_server/src/actions/server/_static_contents.py": {
+      "before": "7ab60d5db242bd3a5fab099dff0e2c8ee92413349be182ff084cac10304a52c5",
+      "after": "6e633b0fed4e721b3b8470822fc0c4c45a0c75fcb6af4c35ffa0d15d57446e67"
+    },
+    "action_server/src/actions/server/_oauth2_config.py": {
+      "before": "01915392abf96748592c518261074181f3238d40befb2f7b024378b93d9c1a6b",
+      "after": "01915392abf96748592c518261074181f3238d40befb2f7b024378b93d9c1a6b"
+    }
+  },
+  "scope": "canonical archived a48 frontend/public OAuth build; relevant source unchanged"
+}
