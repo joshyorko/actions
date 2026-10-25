@@ -39,3 +39,11 @@ def test_dispatchable_workflows_cannot_call_retired_cdn_task():
         assert "build-frontend-cdn" not in path.read_text(), path.name
     owned = (ROOT / ".github/workflows/actions_runtime_binary_release.yml").read_text()
     assert "inv build-frontend" in owned
+
+
+def test_no_automatic_vendor_template_publisher():
+    workflows = ROOT / ".github/workflows"
+    for path in workflows.glob("*.yml"):
+        content = path.read_text()
+        assert "role/github-action-action-templates" not in content, path.name
+        assert "AWS_S3_BUCKET_NAME: downloads.robocorp.com" not in content, path.name

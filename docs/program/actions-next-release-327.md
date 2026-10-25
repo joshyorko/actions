@@ -1,3 +1,18 @@
+## Current convergence and remaining blockers — a41 continuation
+
+Full release remains **NO-GO**. The frozen first combined a39 pass remains valid at its exact source; it does not become a41 or full release proof. Latest saved evidence is `a565b004b8fc02c86020ac534dba9720e6ae9dab`.
+
+- `f905c3888ecb448dbce80ce57a9b59ff041eb148` joined reviewed Canvas v2 renderer/theme with generated projection authority. Source qualification passed422 Python cases and172 Canvas cases with1 explicit interchange skip. Its clean installed v2 attempt passed public create/apply/build/import/tests/activate,406 wheel-member checks and official reference-host mount, then **FAILED** first RCC execution. [Retained failure and screenshot](evidence/actions-next-327/recovery-a41/installed-v2-first/README.md): exact helper reproduction proves raw Pydantic-model JSON serialization fails; original stderr was discarded and Run/Attempt remained running. No v2 generated result/artifact/restart/revocation PASS.
+- `64f00bfc99f93158e7a3c16da67d23100e384f00` adds measured Robot Package admission and prebound selection,96 joined SQLite/PostgreSQL cases passed0skip. Source identity is not execution qualification. Ordinary Robot authoring/dispatch/Task/Work Item breadth and installed recovery remain open.
+- `2db7e6b5c159d78dc7b2ed7e59e370cb1d17f3c2` retires upstream executable frontend extraction and its two CDN workflows;11 focused/release-line cases passed. This is not complete dependency sovereignty.
+- `ca74833659d3fa80b40aac6ffbaa7cd9984ac508` integrates D's bounded SBOM/native/owned-consumer tooling and exact historical evidence;324 joined devutils cases passed0skip. Raw declaration SBOM and active graph stay separate, original strict-active failure retained. The installeda41 consumer **FAILED** current lock qualification (MCP2.3.0 vs lock2.0.0; additional version differences require fresh lock-consistent installation). Historical20639810 Linux native Action/restart does not prove current Canvas or Windows/macOS.
+
+The owner-launched [Dakota ChatGPT handoff](evidence/actions-next-327/recovery-a39/dakota-handoff/agent-prompt.md) is READY only at pinned a39 scope: exact three tested wheels delivered as Library `libfile_1141c898e8248191be6ac4a95cb69734`, archive SHA256 `2a138243181a80a748842b3c7ae88b186856a421da1c5aea1ee4542b2c002745`; installed missing/wrong bearer and foreign Host/Origin denials passed. No local dispatch, tunnel or live credential changes. Actual ChatGPT and genuine Codex acceptance remain unproved; Codex cloud network failure is not a prerequisite blocking this separate host test.
+
+B's installeda40 evidence publication is denied pending precise owner approval; do not bypass or count unpublished receipts as independently reviewed. Parent coordinates extension and fresh dependency audits. HTTP helper is owned `actions-http-helper1.0.3`; Common was absorbed into Runtime, not a missing standalone distribution. Core logging/redaction and truststore replacements, implicit optional services/scaffolds and all remaining matrix requirements remain explicit work; no vendor-independent claim. Celld326 remains NO-GO pending owner decision. Public release/merge/signing/production/spending remain gated.
+
+Current integrator helper boundaries: `knowledge_host` owns isolated generated serialization/failure receipt changes in rcc_execution/logical_receipts/standalone_execution/generic_work_item_execution plus dedicatedtests; `knowledge_review` supplies new standalone Robot runner/tests only; `robot_authoring` supplies new Robot authoring/validation modules/tests and proposed shared patches. Registry/shared authoring/bootstrap/router/schema/version/lock and branch writes remain integrator-owned. No second branch writer.
+
 ## Fresh uninstrumented first combined acceptance
 
 [Clean end-to-end receipts and screenshots](evidence/actions-next-327/recovery-a39/clean-e2e/README.md)
@@ -9,7 +24,7 @@ This fresh run uses no diagnostic admission. Original failed second-app apply
 remains retained with unknown cause; no historical gate was relabeled.
 Installed source/wheels are frozen independently of later v2 or index corrections.
 Actual ChatGPT/Codex model, Knowledge/Robot breadth, security/platform/distribution
-and other full-matrix gates remain open. No public release or Dakota READY claim.
+and other full-matrix gates remain open. This historical checkpoint did not declare Dakota READY; the separate a39 handoff below now does. No public release is authorized.
 
 ## First parallel integration checkpoint — installed protocol and reference-host execution passed
 
@@ -79,8 +94,7 @@ Action/Robot execution, completion/retry or same-state restart. A canonical
 installed setup for those consumer cases remains a dependency.
 
 The [Dakota agent prompt](evidence/actions-next-327/recovery-a38/dakota-host-draft/agent-prompt.md)
-is prepared but not dispatched. No READY declaration: actual Desktop support, exact compatible artifacts and
-a separately authorized reachable/authenticated endpoint remain unresolved.
+is the historical draft, superseded by the [pinned a39 handoff](evidence/actions-next-327/recovery-a39/dakota-handoff/agent-prompt.md). Exact wheels have been delivered through Library and installed loopback/auth/Host/Origin denials passed. READY applies only to the owner-launched loopback host test; actual Desktop/platform support and temporary connection preflight remain local operator checks, with no remote/tunnel fallback authorized.
 Owner clarification: genuine Codex acceptance remains a full-release gate but
 is not a prerequisite for the separate owner-launched ChatGPT test.
 Celld and unfinished a39 are not used as reasons to pause independent work.

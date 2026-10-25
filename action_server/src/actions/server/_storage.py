@@ -17,8 +17,6 @@ KEY_FILE_PERMISSIONS = 0o600
 
 AES_KEY_LEN = 32
 
-DEFAULT_CR_HOSTNAME = "https://us1.robocorp.com"
-
 
 class StorageEncryptedValue(BaseModel):
     value: str
@@ -173,17 +171,16 @@ def get_access_credentials() -> typing.Optional[str]:
 
 
 def get_hostname() -> str:
-    from actions.server.vendored_deps.termcolors import bold_red
+    """Return an explicitly stored compatibility endpoint; never select a vendor."""
+    from actions.server._errors_action_server import ActionServerValidationError
 
-    try:
-        storage = load_storage()
-        if not storage:
-            return DEFAULT_CR_HOSTNAME
-        hostname = storage.cloud.hostname
-    except Exception as e:
-        log.error(bold_red(f"Failed to get stored hostname\n{e}"))
-
-    return hostname if hostname else DEFAULT_CR_HOSTNAME
+    storage = load_storage()
+    if storage is None or not storage.cloud.hostname.strip():
+        raise ActionServerValidationError(
+            "An explicit cloud hostname is required. Provide --hostname or "
+            "configure it with cloud login; no hosted service is selected by default."
+        )
+    return storage.cloud.hostname
 
 
 def store(access_credentials: str, hostname: str) -> None:
