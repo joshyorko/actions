@@ -73,3 +73,73 @@ def test_build_preflight_failure_retains_receipt_without_installing(tmp_path):
     assert receipt["status"] == "FAIL"
     assert receipt["commands"] == []
     assert not (destination / "consumer").exists()
+
+
+@pytest.mark.parametrize(
+    "mode", ["valid", "missing", "different_terminal", "different_snapshot"]
+)
+def test_retained_ingestion_never_replaces_missing_or_changed_task(
+    tmp_path, monkeypatch, mode
+):
+    scripts = Path(__file__).parents[2] / "scripts"
+    monkeypatch.syspath_prepend(str(scripts))
+    spec = importlib.util.spec_from_file_location(
+        "lane_b_resume", scripts / "lane_b_installed_knowledge_lifecycle.py"
+    )
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    invocation = {
+        "mode": "detached",
+        "snapshot": {"deployment": "original"},
+        "inputs": {},
+        "idempotencyKey": "retained-key",
+    }
+    terminal = {"taskId": "retained-task", "status": "completed"}
+    invocation_file, terminal_file = (
+        tmp_path / "invocation.json",
+        tmp_path / "terminal.json",
+    )
+    invocation_file.write_text(json.dumps(invocation))
+    terminal_file.write_text(json.dumps(terminal))
+    runner = object.__new__(module.Lifecycle)
+    runner.m = {
+        "retained_ingestion": {
+            "invocation_file": str(invocation_file),
+            "terminal_file": str(terminal_file),
+        }
+    }
+    calls = []
+
+    async def connect(callback):
+        return await callback(None)
+
+    async def request(session, *, task_id):
+        calls.append(("read", task_id))
+        if mode == "missing":
+            raise ValueError("Task unavailable")
+        return (
+            terminal
+            if mode != "different_terminal"
+            else {**terminal, "taskId": "other"}
+        )
+
+    async def invoke(session, args):
+        calls.append(("invoke", args))
+        return terminal
+
+    runner.connect, runner.request, runner.invoke = connect, request, invoke
+    snapshot = (
+        invocation["snapshot"]
+        if mode != "different_snapshot"
+        else {"deployment": "other"}
+    )
+    if mode == "valid":
+        assert asyncio.run(runner.retained_ingestion(snapshot)) == (
+            invocation,
+            terminal,
+        )
+        assert calls == [("read", "retained-task"), ("invoke", invocation)]
+    else:
+        with pytest.raises(ValueError):
+            asyncio.run(runner.retained_ingestion(snapshot))
+        assert not any(call[0] == "invoke" for call in calls)

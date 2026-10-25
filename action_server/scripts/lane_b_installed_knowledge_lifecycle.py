@@ -7,11 +7,17 @@ binding_id), query, page_limit, expected_hits, and output_root. Apps, generated
 Packages, provider stores, exact grants and semantic artifact controls must already
 exist in the owned stopped datadir. This runner does not provision or authorize them.
 No installed execution has been qualified merely by compiling this draft.
+
+Optional retained_ingestion supplies invocation_file and terminal_file from a
+completed Task. Continuation checks the live snapshot and exact terminal before
+downloading outputs; it never creates a replacement ingestion on mismatch/expiry.
+Optional output_http_probes enables ordinary authenticated readback/denial probes.
 """
 from __future__ import annotations
 
 import argparse
 import asyncio
+import hashlib
 import json
 import os
 import re
@@ -59,6 +65,7 @@ class Lifecycle:
         self.empty.mkdir()
         self.key = secrets.token_urlsafe(32)
         self.process = self.drain = None
+        self.app_sessions = {}
         self.receipt = {
             "status": "RUNNING",
             "scope": "preprovisioned installed lifecycle",
@@ -68,6 +75,8 @@ class Lifecycle:
             "stages": dict.fromkeys(STAGES, "NOT_RUN"),
             "tasks": [],
             "negative_authorization_cancel": "NOT_RUN",
+            "grant_revocation": "NOT_RUN",
+            "product_export_operation": "NOT_AVAILABLE; downloaded pages are not a dedicated export API",
         }
         self.env = {
             k: v
@@ -271,6 +280,9 @@ class Lifecycle:
             snapshots[role] = matches[0]["snapshot"]
             opened = await session.call_tool("canvas_get", {"appId": app["app_id"]})
             require(not opened.is_error)
+            session = opened.meta.get("actions.appSession", {})
+            if session.get("token"):
+                self.app_sessions[role] = session["token"]
             spec = opened.meta["actions.canvas"]["spec"]
             require(
                 any(
@@ -321,7 +333,9 @@ class Lifecycle:
         import httpx2
 
         values = []
-        async with httpx2.AsyncClient(headers=self.headers(), timeout=30) as client:
+        async with httpx2.AsyncClient(
+            headers=self.headers(), timeout=30, trust_env=False, follow_redirects=False
+        ) as client:
             for output in terminal["result"]["structuredContent"]["outputs"]:
                 handle = output["handle"]
                 require(re.fullmatch(r"art_[A-Za-z0-9_-]{22}", handle))
@@ -343,7 +357,48 @@ class Lifecycle:
                 except (ValueError, UnicodeDecodeError):
                     continue
                 values.append((bytes(raw), decoded))
+                if self.m.get("output_http_probes") and any(
+                    obj.get("version")
+                    in ("actions.knowledge-ingestion/v1", "actions.knowledge-search/v1")
+                    for obj in objects(decoded)
+                ):
+                    from lane_b_installed_output_http import (
+                        OutputHttpFailure,
+                        OutputHttpProbe,
+                    )
+
+                    probe = OutputHttpProbe(
+                        self.url,
+                        self.key,
+                        self.m["workspace_id"],
+                        handle,
+                        bytes(raw),
+                        app_session=self.app_sessions.get("search"),
+                    )
+                    try:
+                        receipt = await probe.qualify()
+                    except OutputHttpFailure as exc:
+                        self.receipt.setdefault("output_denials", []).append(
+                            exc.receipt
+                        )
+                        raise
+                    self.receipt.setdefault("output_denials", []).append(receipt)
         return values
+
+    async def retained_ingestion(self, snapshot):
+        retained = self.m["retained_ingestion"]
+        args = json.loads(Path(retained["invocation_file"]).read_bytes())
+        terminal = json.loads(Path(retained["terminal_file"]).read_bytes())
+        require(args["mode"] == "detached" and args["snapshot"] == snapshot)
+        require(args["inputs"] == {} and bool(args["idempotencyKey"]))
+        # Read first: a missing/expired Task must not silently become a new Run.
+        current = await self.connect(
+            lambda session: self.request(session, task_id=terminal["taskId"])
+        )
+        require(current == terminal)
+        replay = await self.connect(lambda session: self.invoke(session, args))
+        require(replay == terminal)
+        return args, terminal
 
     async def run(self):
         stage = "installed_origin"
@@ -363,7 +418,18 @@ class Lifecycle:
                     inputs=inputs,
                     idempotencyKey="lane-b-" + self.root.name + "-" + key,
                 )
+                raw = json.dumps(args, sort_keys=True, separators=(",", ":")).encode()
+                (self.root / (key + "-invocation.json")).write_bytes(raw)
+                self.receipt.setdefault("invocations", []).append(
+                    {
+                        "file": key + "-invocation.json",
+                        "sha256": hashlib.sha256(raw).hexdigest(),
+                    }
+                )
                 terminal = await self.connect(lambda s: self.invoke(s, args))
+                (self.root / (key + "-terminal.json")).write_text(
+                    json.dumps(terminal, indent=2)
+                )
                 calls.append((args, terminal))
                 result = terminal["result"]["structuredContent"]
                 self.receipt["tasks"].append(
@@ -372,7 +438,13 @@ class Lifecycle:
                 return await self.artifacts(terminal)
 
             stage = "ingestion"
-            outputs = await execute("ingestion", {}, "ingest")
+            if self.m.get("retained_ingestion"):
+                args, terminal = await self.retained_ingestion(snapshots["ingestion"])
+                calls.append((args, terminal))
+                self.receipt["retained_ingestion"] = "EXACT_REPLAY"
+                outputs = await self.artifacts(terminal)
+            else:
+                outputs = await execute("ingestion", {}, "ingest")
             ingestions = [
                 o
                 for _, value in outputs
