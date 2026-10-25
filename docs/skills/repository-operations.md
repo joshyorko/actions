@@ -5487,3 +5487,11 @@ Archive only completed task-owned traces after checking regular single-link
 files, no open handles and unchanged identity. Retain readable HTML and receipts;
 verify decompressed SHA256 before replacing raw files with gzip, and record both
 hashes and paths. Compression does not make local evidence remotely durable.
+
+For independent HTTP Task qualification, retain the complete JSON-RPC response
+and HTTP status before asserting the expected status. An expired Task TTL is
+a separate negative case; reusing it cannot establish successful restart/get.
+The ordinary authenticated transport returns403 for missing authorization in
+the qualified installed configuration. A corrected test continuation must replay
+the same idempotency key, retain the original failed receipt and compare counts
+across both attempts rather than silently creating another Run.
