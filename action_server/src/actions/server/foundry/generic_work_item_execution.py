@@ -11,6 +11,7 @@ from __future__ import annotations
 import hashlib
 import json
 from contextlib import contextmanager
+from dataclasses import dataclass
 from typing import Any, Literal
 from uuid import uuid4
 
@@ -59,6 +60,12 @@ from actions.server.run_outputs.service import (
     _update,
 )
 from actions.server.run_outputs.types import AttemptFence, ExecutionSnapshot
+
+
+@dataclass(frozen=True)
+class _EnqueueResult:
+    item_id: str
+    replay: bool
 
 
 class GenericInput(BaseModel):
@@ -382,6 +389,12 @@ class GenericWorkItemExecution:
         return envelope
 
     def enqueue(self, caller: ManagedCaller, inputs: Any, idempotency_key: str) -> str:
+        return self._enqueue_result(caller, inputs, idempotency_key).item_id
+
+    def _enqueue_result(
+        self, caller: ManagedCaller, inputs: Any, idempotency_key: str
+    ) -> _EnqueueResult:
+        """Return replay state from the existing atomic request/audit decision."""
         if (
             not isinstance(idempotency_key, str)
             or not 1 <= len(idempotency_key.encode()) <= 128
@@ -438,7 +451,7 @@ class GenericWorkItemExecution:
                     or audits[0].principal_id != caller.actor.principal_id
                 ):
                     raise FenceRejected("enqueue audit unavailable")
-                return item_id
+                return _EnqueueResult(item_id, replay=True)
             item_id = self.queue(name).seed_input(payload, item_id=str(uuid4()))
             self.db.insert(
                 FoundryRequest(
@@ -464,7 +477,7 @@ class GenericWorkItemExecution:
                     str(_now(self.db)),
                 )
             )
-            return item_id
+            return _EnqueueResult(item_id, replay=False)
 
     def dispatch(
         self, caller: ManagedCaller, claim: WorkItemClaim, *, lease_seconds: int

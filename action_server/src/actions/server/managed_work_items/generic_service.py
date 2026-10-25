@@ -297,11 +297,12 @@ class GenericManagedWorkItemsService:
                             or command.review is not None
                         ):
                             raise ManagedError("changed_input")
-                        item_id = self.execution.enqueue(
+                        admitted = self.execution._enqueue_result(
                             caller, command.payload, command.idempotency_key
                         )
                         result = ItemResult(
-                            item=self._item(caller, self._row(caller, item_id)),
+                            item=self._item(caller, self._row(caller, admitted.item_id)),
+                            replay=admitted.replay,
                             server_time_ms=str(_now(self.db)),
                         )
                     elif isinstance(command, (Claim, Renew, Complete)):

@@ -1398,3 +1398,18 @@ Apache-labelled manifest. Reconcile that provenance before attributing a new ful
 custom-source fixture; this does not authorize changing existing legal attribution.
 
 Default-none Robot declarations remain omitted from immutable manifests to preserve existing revision preimages. Retained terminal receipts validate claim provenance without requiring an unexpired lease; artifact permission remains a separate live check. A contender signalled immediately before cancellation proves outcome consistency, not that it reached a database lock wait; describe race-test coverage accordingly.
+
+
+Generic managed enqueue responses derive their replay marker from the same atomic
+domain request/audit decision that owns item creation. Do not infer replay with a
+separate preflight read: concurrent admission can make that stale. The internal
+result carries item identity plus replay status; the legacy enqueue API continues
+to return the item ID. Both first admission and replay return the current authorized
+item projection and server time without adding a second request/audit owner.
+
+Canvas artifact access requires an actor/binding/Run submission association, not
+merely a snapshot containing canvas_application. Direct capability_invoke runs use
+their authorized managed HTTP artifact surface. To qualify Canvas, start with a fresh
+pending item and use submit_input followed by execute; never adopt an already claimed
+or completed direct Run to bypass the association check. Preserve a denied direct
+Canvas read as an expected boundary rather than weakening authorization.
