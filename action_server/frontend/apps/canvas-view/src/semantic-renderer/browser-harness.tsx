@@ -77,6 +77,21 @@ function ComponentHarness() {
                         />
                     )}
                 />
+                <SemanticTable
+                    caption="Synthetic operations records"
+                    columns={Array.from({ length: 16 }, (_, index) => ({
+                        key: `field${index}`,
+                        label: `Field ${index + 1}`,
+                    }))}
+                    rows={[
+                        Object.fromEntries(
+                            Array.from({ length: 16 }, (_, index) => [
+                                `field${index}`,
+                                `Record ${index + 1}`,
+                            ]),
+                        ),
+                    ]}
+                />
             </SemanticCanvas>
         </>
     );

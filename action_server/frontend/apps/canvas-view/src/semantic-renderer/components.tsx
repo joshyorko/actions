@@ -441,14 +441,23 @@ export function SemanticTable({
 
     if (rows.length === 0) {
         return (
-            <p role="status" className="semantic-table__empty">
+            <p
+                role="status"
+                aria-label={caption || "Results"}
+                className="semantic-table__empty"
+            >
                 {emptyMessage}
             </p>
         );
     }
 
     return (
-        <div className="semantic-table__scroll" tabIndex={0}>
+        <div
+            className="semantic-table__scroll"
+            role="region"
+            aria-label={caption || "Results"}
+            tabIndex={0}
+        >
             <table className="semantic-table">
                 {caption ? <caption>{caption}</caption> : null}
                 <thead>

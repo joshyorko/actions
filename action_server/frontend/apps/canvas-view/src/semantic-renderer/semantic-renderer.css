@@ -193,6 +193,7 @@
 
 .semantic-table th,
 .semantic-table td {
+    min-width: 8rem;
     padding: 0.65rem 0.75rem;
     border-bottom: 1px solid #d5dde7;
     text-align: left;

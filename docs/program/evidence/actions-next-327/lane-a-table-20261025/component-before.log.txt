@@ -1,0 +1,324 @@
+"/workspace/lane-a/developer/toolkit.yaml" as robot.yaml is:
+# Repository developer toolkit.
+#
+# RCC owns the reproducible toolchain and task boundary. Poetry remains the
+# dependency and package-release authority inside each package.
+
+tasks:
+  Doctor:
+    shell: python toolkit.py doctor
+
+devTasks:
+  Doctor:
+    shell: python toolkit.py doctor
+  Bootstrap:
+    shell: python toolkit.py bootstrap
+  Test:
+    shell: python toolkit.py test
+  ToolkitTest:
+    shell: python toolkit.py toolkit-test
+  Lint:
+    shell: python toolkit.py lint
+  Typecheck:
+    shell: python toolkit.py typecheck
+  Docs:
+    shell: python toolkit.py docs
+  CheckAll:
+    shell: python toolkit.py check-all
+  Coverage:
+    shell: python toolkit.py coverage
+  FrontendTest:
+    shell: python toolkit.py frontend-test
+  InstallCommunity:
+    shell: python toolkit.py install-community
+  InvoiceQueryTest:
+    shell: python toolkit.py invoice-query-test
+  InvoiceReconciliationDemo:
+    shell: python toolkit.py invoice-reconciliation-demo
+  FencedWorkItemsTest:
+    shell: python toolkit.py fenced-work-items-test
+
+environmentConfigs:
+  - setup_windows_amd64.yaml
+  - setup.yaml
+
+artifactsDir: tmp
+
+PATH:
+  - .
+PYTHONPATH:
+  - .
+ignoreFiles:
+  - ../.gitignore
+
+Note! For now, resolved effective environment configuration file is "/workspace/lane-a/developer/setup.yaml".
+####  Progress: 00/15  v18.19.3     0.019s  Context: "" <agent@71cd163cf8ad> [linux_amd64/Debian GNU/Linux 13 (trixie) [id=debian; version=13]].
+####  Progress: 01/15  v18.19.3     0.001s  Fresh [private mode] holotree environment 9a080d0f-3bcf-90aa-16c6-25dc61b0ece5. (parent/pid: 3748/3751)
+####  Progress: 02/15  v18.19.3     0.001s  Holotree blueprint is "318089d9095ad813" [linux_amd64 with 4 workers on 5 CPUs from "setup.yaml"].
+FINAL unified conda environment descriptor:
+---
+channels:
+- conda-forge
+dependencies:
+- python=3.12
+- git=2.46.0
+- nodejs=20.19.3
+- go=1.23.6
+- jq=1.7.1
+- uv=0.9.26
+- pip=25.0
+- pip:
+  - invoke==2.2.0
+  - poetry==2.1.1
+  - pyyaml==6.0.2
+  - pytest==8.3.4
+  - ruff==0.8.6
+---
+####  Progress: 14/15  v18.19.3     0.456s  Restore space from library [with 4 workers on 5 CPUs; with compression: true].
+Installation plan is: /workspace/lane-a-state/rcc/holotree/c2fd1aa_5a1fac3_9fcd2534/rcc_plan.log
+Environment configuration descriptor is: /workspace/lane-a-state/rcc/holotree/c2fd1aa_5a1fac3_9fcd2534/identity.yaml
+####  Progress: 15/15  v18.19.3     0.730s  Fresh holotree done [with 4 workers on 5 CPUs].
+Note: [Before run] Artifact dir "/workspace/lane-a/developer/tmp" already has "environment_linux_amd64_freeze.yaml" in it.
+Note: [Before run] Artifact dir "/workspace/lane-a/developer/tmp" already has "stderr.log" in it.
+Note: [Before run] Artifact dir "/workspace/lane-a/developer/tmp" already has "stdout.log" in it.
+Above notes mean, that there were files present in directory that was supposed to be empty!
+In robot development phase, it might be ok to have these files while building robot.
+In production robot/assistant, this might be a mistake, where development files were
+left inside robot.zip file. Report these to developer who made this robot/assistant.
+
+ RUN  v4.1.10 /workspace/lane-a/action_server/frontend/apps/canvas-view
+
+ ↓ src/semantic-renderer/generic-input.test.tsx (6 tests | 6 skipped)
+Browserslist: browsers data (caniuse-lite) is 10 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+ ❯ src/semantic-renderer/semantic-components.test.tsx (16 tests | 2 failed | 14 skipped) 155ms
+     ↓ exports semantic components and the renderer
+     ↓ renders the canonical PR330 fixture through injected adapters
+     ↓ renders the title and revision as text, not markup
+     ↓ hides every detail, including title and revision, for empty visibility
+     ↓ does not expose app-only content to the model viewer
+     ↓ treats an untouched required constructor field as empty and never dispatches
+     ↓ treats an untouched required toString field as empty and never dispatches
+     ↓ dispatches fixture integer and boolean fields as number and boolean
+     ↓ validates required booleans and rejects non-integer input
+     ↓ resets inputs and ignores a deferred response when capability scope changes
+     ↓ rejects malformed specs and duplicate form fields before rendering controls
+     ↓ does not resolve any binding when the spec hides all audiences
+     ↓ projects status, opens artifacts through the typed adapter, and keeps preview inert
+     × names the keyboard-accessible results region from its table caption 125ms
+     × names results without a caption and announces empty results 25ms
+     ↓ treats table row and column data as own-property text
+ ↓ src/semantic-renderer/mcp-bridge.test.tsx (12 tests | 12 skipped)
+ ↓ src/semantic-renderer/generic-layout.test.tsx (7 tests | 7 skipped)
+ ↓ src/semantic-renderer/generic-execution.test.tsx (4 tests | 4 skipped)
+ ↓ src/semantic-renderer/generic-output.test.tsx (6 tests | 6 skipped)
+ ↓ src/semantic-renderer/generic-view.test.tsx (1 test | 1 skipped)
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/semantic-renderer/semantic-components.test.tsx > semantic Canvas components > names the keyboard-accessible results region from its table caption
+TestingLibraryElementError: Unable to find an accessible element with the role "region" and name "Retained records"
+
+Here are the accessible roles:
+
+  table:
+
+  Name "Retained records":
+  [36m<table[39m
+    [33mclass[39m=[32m"semantic-table"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  caption:
+
+  Name "Retained records":
+  [36m<caption />[39m
+
+  --------------------------------------------------
+  rowgroup:
+
+  Name "":
+  [36m<thead />[39m
+
+  Name "":
+  [36m<tbody />[39m
+
+  --------------------------------------------------
+  row:
+
+  Name "Name":
+  [36m<tr />[39m
+
+  Name "First record":
+  [36m<tr />[39m
+
+  --------------------------------------------------
+  columnheader:
+
+  Name "Name":
+  [36m<th[39m
+    [33mscope[39m=[32m"col"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  cell:
+
+  Name "First record":
+  [36m<td />[39m
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"semantic-table__scroll"[39m
+      [33mtabindex[39m=[32m"0"[39m
+    [36m>[39m
+      [36m<table[39m
+        [33mclass[39m=[32m"semantic-table"[39m
+      [36m>[39m
+        [36m<caption>[39m
+          [0mRetained records[0m
+        [36m</caption>[39m
+        [36m<thead>[39m
+          [36m<tr>[39m
+            [36m<th[39m
+              [33mscope[39m=[32m"col"[39m
+            [36m>[39m
+              [0mName[0m
+            [36m</th>[39m
+          [36m</tr>[39m
+        [36m</thead>[39m
+        [36m<tbody>[39m
+          [36m<tr>[39m
+            [36m<td>[39m
+              [0mFirst record[0m
+            [36m</td>[39m
+          [36m</tr>[39m
+        [36m</tbody>[39m
+      [36m</table>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ Object.getElementError ../../node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/semantic-renderer/semantic-components.test.tsx:625:31
+
+ Test Files  1 failed | 6 skipped (7)
+      Tests  2 failed | 50 skipped (52)
+   Start at  13:23:31
+   Duration  3.90s (transform 989ms, setup 1.62s, import 2.39s, tests 155ms, environment 3.64s)
+
+    623|             }),
+    624|         );
+    625|         const region = screen.getByRole("region", { name: "Retained re…
+       |                               ^
+    626|         expect(within(region).getByRole("table", { name: "Retained rec…
+    627|         await userEvent.tab();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/semantic-renderer/semantic-components.test.tsx > semantic Canvas components > names results without a caption and announces empty results
+TestingLibraryElementError: Unable to find an accessible element with the role "region" and name "Results"
+
+Here are the accessible roles:
+
+  table:
+
+  Name "":
+  [36m<table[39m
+    [33mclass[39m=[32m"semantic-table"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  rowgroup:
+
+  Name "":
+  [36m<thead />[39m
+
+  Name "":
+  [36m<tbody />[39m
+
+  --------------------------------------------------
+  row:
+
+  Name "Name":
+  [36m<tr />[39m
+
+  Name "First record":
+  [36m<tr />[39m
+
+  --------------------------------------------------
+  columnheader:
+
+  Name "Name":
+  [36m<th[39m
+    [33mscope[39m=[32m"col"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  cell:
+
+  Name "First record":
+  [36m<td />[39m
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"semantic-table__scroll"[39m
+      [33mtabindex[39m=[32m"0"[39m
+    [36m>[39m
+      [36m<table[39m
+        [33mclass[39m=[32m"semantic-table"[39m
+      [36m>[39m
+        [36m<thead>[39m
+          [36m<tr>[39m
+            [36m<th[39m
+              [33mscope[39m=[32m"col"[39m
+            [36m>[39m
+              [0mName[0m
+            [36m</th>[39m
+          [36m</tr>[39m
+        [36m</thead>[39m
+        [36m<tbody>[39m
+          [36m<tr>[39m
+            [36m<td>[39m
+              [0mFirst record[0m
+            [36m</td>[39m
+          [36m</tr>[39m
+        [36m</tbody>[39m
+      [36m</table>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ Object.getElementError ../../node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../../node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/semantic-renderer/semantic-components.test.tsx:638:23
+    636|             }),
+    637|         );
+    638|         expect(screen.getByRole("region", { name: "Results" })).toBeVi…
+       |                       ^
+    639|         view.rerender(
+    640|             createElement(renderer.SemanticTable, {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+JUNIT report written to /workspace/lane-a-state/receipts/table-red.xml
+Process 3761: exit status 1, command: /usr/bin/bash [-c cd /workspace/lane-a/action_server/frontend && npx --no-install vitest --run --config apps/canvas-view/src/semantic-renderer/vitest.config.ts --testNamePattern "names.*results" --reporter=default --reporter=junit --outputFile=/workspace/lane-a-state/receipts/table-red.xml] [v18.19.3/3751]
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@  From rcc "v18.19.3" (controller: "user") point of view, "actual main robot run" was FAILURE, reason: "exit status 1". See details above.  @@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  |  "Build/Pre-run"  relative time allocation ratio:  1:0
+  |  "Setup/Run"  relative time allocation ratio:  4:21
+Note: Now running rcc v18.19.3. There is newer rcc version v18.19.7 available, released at 15.10.2026.
+Error: exit status 1 (robot run exit)
+[rcc] exit status will be: 10!

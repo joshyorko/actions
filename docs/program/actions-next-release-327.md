@@ -1,3 +1,15 @@
+## First parallel integration checkpoint — source saved, installed proof pending
+
+Reviewed A82bbaef (Canvas tables/results), B1ae3805 (Knowledge page checker),
+C75fe3ca (real Robot test coverage), and D69fefd9/5e959aa/4bd5fdb
+(release admission/offline restore/repeat-build evidence) are integrated on the
+9e42a8f3 generated Knowledge backend. Original commits and review limits are in
+[the integration map](evidence/actions-next-327/recovery-a39/first-integration/integration-map.json).
+New B/D checks ran against the combined working source; retained lane results do
+not substitute for combined installed acceptance. Clean wheel build and mandatory
+Canvas/generated backend acceptance are the immediate next gate. Robot production
+bridge and remaining full campaign requirements remain open.
+
 ## Adaptive engineering ownership — 2026-10-25
 
 Josh superseded the earlier two-helper limit. Five cloud tasks now share this
