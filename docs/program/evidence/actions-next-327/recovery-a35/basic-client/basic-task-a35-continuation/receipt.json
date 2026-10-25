@@ -1,0 +1,81 @@
+{
+  "status": "PASS",
+  "runtime_version": "1.1.0a35",
+  "engine_origin": "/workspace/actions-recovery-327/installed-a35/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+  "source": "6cf0ee25eed23c1814a5b0589047545b57ca5e33",
+  "installed_versions": {
+    "mcp": "2.3.0",
+    "mcp-types": "2.3.0",
+    "actions-core": "1.1.0a3"
+  },
+  "synthetic_owned_auth": true,
+  "processes": [
+    {
+      "pid": 174431,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.21465536699906806,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 174511,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.16423111699987203,
+      "lifespan_shutdown_complete": true
+    }
+  ],
+  "calls": [
+    {
+      "method": "server/discover",
+      "status": 200
+    },
+    {
+      "method": "tasks/get",
+      "status": 400
+    },
+    {
+      "method": "tools/call",
+      "status": 200
+    },
+    {
+      "method": "tasks/get",
+      "status": 200
+    },
+    {
+      "method": "tasks/update",
+      "status": 200
+    },
+    {
+      "method": "tools/call",
+      "status": 200
+    },
+    {
+      "method": "tasks/get",
+      "status": 400
+    },
+    {
+      "method": "tasks/get",
+      "status": 400
+    },
+    {
+      "method": "tasks/get",
+      "status": 403
+    },
+    {
+      "method": "tasks/get",
+      "status": 200
+    },
+    {
+      "method": "tools/call",
+      "status": 200
+    }
+  ],
+  "actual_generated_execution": "PASS",
+  "continuation_of": "basic-task-a35-new: actual execution completed; unauthenticated transport correctly returned403 instead of assumed401",
+  "client": "stdlib urllib/json; no MCP client SDK",
+  "task_id": "448802d8-c4c0-46d4-b291-327e936e1fd7",
+  "scope": "current raw HTTP discover/create/get/update/replay/restart, actual RCC completion, TTL expiry and routing/authentication negatives; no public artifact-byte read, Codex or ChatGPT claim"
+}

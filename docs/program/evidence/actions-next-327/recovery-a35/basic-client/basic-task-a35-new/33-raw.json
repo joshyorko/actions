@@ -1,0 +1,17 @@
+{
+  "method": "tasks/update",
+  "status": 200,
+  "response": {
+    "jsonrpc": "2.0",
+    "id": 34,
+    "result": {
+      "resultType": "complete",
+      "_meta": {
+        "io.modelcontextprotocol/serverInfo": {
+          "name": "Action Server",
+          "version": ""
+        }
+      }
+    }
+  }
+}
