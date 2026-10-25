@@ -6426,3 +6426,9 @@ A pinned reference checkout in release verification is a build-time availability
 dependency; any offline replacement must retain independent provenance assurance.
 Historical data directories, explicit compatibility aliases and legal attribution
 are not removable dependency edges.
+
+Inspected artifact content and its success notice are scoped to a binding's current
+execution generation and AppSession context. Clear both when a new operation starts,
+and reject late replies unless generation, Run, Attempt, state and handle still match.
+Keep failure diagnostics readable when the current authorized Run provides them.
+Remount artifact status only, preserving form inputs and unrelated binding results.

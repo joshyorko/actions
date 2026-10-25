@@ -1154,7 +1154,7 @@ function SemanticCanvasRendererInstance({
                         : undefined;
                 return (
                     <SemanticArtifact
-                        key={node.id}
+                        key={`${node.id}:${adapters.artifactScopeKey?.(node.bindingId) ?? ""}`}
                         label={node.label}
                         capability={capability}
                         openArtifact={adapters.openArtifact}

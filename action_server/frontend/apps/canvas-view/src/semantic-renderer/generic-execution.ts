@@ -205,7 +205,18 @@ export function createGenericExecutionAdapter(
     );
     const projection = createGeneratedProjectionController(changed);
     const generations = new Map<string, string>();
-    const projected = async (
+    const inspectedArtifacts = new Map<string, string>();
+    const artifactGenerations = new Map<string, number>();
+    const artifactBusy = new Map<string, number>();
+    const artifactScope = globalThis.crypto.randomUUID();
+    const invalidateArtifact = (id: string) => {
+        const generation = (artifactGenerations.get(id) ?? 0) + 1;
+        artifactGenerations.set(id, generation);
+        inspectedArtifacts.delete(id);
+        changed();
+        return generation;
+    };
+    const projectedOperation = async (
         id: string,
         operation: () => Promise<GenericExecutionState>,
     ): Promise<GenericExecutionState> => {
@@ -245,6 +256,19 @@ export function createGenericExecutionAdapter(
         } catch (error) {
             projection.fail(id, requestId);
             throw error;
+        }
+    };
+    const projected = async (
+        id: string,
+        operation: () => Promise<GenericExecutionState>,
+    ): Promise<GenericExecutionState> => {
+        const generation = invalidateArtifact(id);
+        artifactBusy.set(id, generation);
+        try {
+            return await projectedOperation(id, operation);
+        } finally {
+            if (artifactBusy.get(id) === generation) artifactBusy.delete(id);
+            changed();
         }
     };
     const outputPages = new Map<string, z.infer<typeof outputPage>>();
@@ -381,14 +405,18 @@ export function createGenericExecutionAdapter(
         },
         resolveArtifactBinding: (id) =>
             allowed(id) ? createCapabilityRef(id) : undefined,
+        artifactScopeKey: (id) =>
+            `${artifactScope}:${artifactGenerations.get(id) ?? 0}`,
         openArtifact: async (capability) => {
             const state = states.get(capability.bindingId);
             const handle = state?.outputs?.[0]?.handle;
-            if (!state || !handle)
+            if (!state || !handle || artifactBusy.has(capability.bindingId))
                 return {
                     state: "unavailable",
                     message: "No authorized result artifact is available.",
                 };
+            const generation =
+                artifactGenerations.get(capability.bindingId) ?? 0;
             const meta = await call("canvas_artifact", {
                 bindingId: capability.bindingId,
                 runId: state.runId,
@@ -409,7 +437,20 @@ export function createGenericExecutionAdapter(
                 artifact.handle !== handle
             )
                 throw new Error("Artifact identity differs.");
+            const current = states.get(capability.bindingId);
+            if (
+                (artifactGenerations.get(capability.bindingId) ?? 0) !==
+                    generation ||
+                artifactBusy.has(capability.bindingId) ||
+                current?.runId !== state.runId ||
+                current.attemptId !== state.attemptId ||
+                current.state !== state.state ||
+                current.outputs?.[0]?.handle !== handle
+            )
+                throw new Error("Artifact execution was superseded.");
+            inspectedArtifacts.set(capability.bindingId, artifact.text);
             inspect(artifact.text, capability.bindingId);
+            changed();
             return {
                 state: "ready",
                 message: "Authorized result inspected below.",
@@ -418,6 +459,7 @@ export function createGenericExecutionAdapter(
     };
     return {
         adapters,
+        inspectedArtifacts,
         states,
         inputPages,
         outputPages,

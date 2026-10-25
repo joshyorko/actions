@@ -186,6 +186,8 @@ export interface SemanticRendererAdapters {
     resolveArtifactBinding: (
         bindingId: string,
     ) => CapabilityRef<string, void, SemanticArtifactResult> | undefined;
+    /** Changes when previously inspected artifact UI must be discarded. */
+    artifactScopeKey?: (bindingId: string) => string;
     openArtifact: CapabilityDispatcher<string, void, SemanticArtifactResult>;
 }
 
