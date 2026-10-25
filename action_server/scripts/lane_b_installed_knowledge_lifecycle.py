@@ -281,6 +281,7 @@ class Lifecycle:
             opened = await session.call_tool("canvas_get", {"appId": app["app_id"]})
             require(not opened.is_error)
             app_session = opened.meta.get("actions.appSession", {})
+            self.app_sessions.pop(role, None)
             if app_session.get("token"):
                 self.app_sessions[role] = app_session["token"]
             spec = opened.meta["actions.canvas"]["spec"]

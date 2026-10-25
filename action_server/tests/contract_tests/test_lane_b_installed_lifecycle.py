@@ -204,3 +204,11 @@ def test_canvas_keeps_mcp_session_for_both_roles(
         if with_app_session
         else {}
     )
+    # A new Canvas session after restart may omit previously issued authority.
+    # The HTTP probe must then receive None and record AppSession NOT_RUN.
+    with_app_session = False
+    assert asyncio.run(runner.canvas(session)) == {
+        "ingestion": {"role": "ingestion"},
+        "search": {"role": "search"},
+    }
+    assert runner.app_sessions == {}

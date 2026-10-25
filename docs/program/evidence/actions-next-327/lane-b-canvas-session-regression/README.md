@@ -37,3 +37,23 @@ cover orchestration. Remaining uncertainty: genuine installed HTTP execution.
 Upstream disposition: none.
 
 Published failure stdout/XML have trailing whitespace normalized for the repository gate; original bytes remain in /workspace/lane-b-state/canvas-session-before.log and canvas-session-before.xml.
+
+## Missing metadata after restart
+
+A second review identified stale AppSession reuse when a later canvas_get omitted
+metadata. The same two-role regression now repeats discovery with metadata
+absent. Before the fix, the previously populated case failed (1 failed, 1 passed,
+6 deselected); after popping each role before storing a newly issued token, all
+47 focused tests pass. Retained stale-session-before/after stdout/XML use the
+same commands above with corresponding receipt names. These tests use synthetic
+strings only; no real AppSession token is published. Raw failure files remain
+under /workspace/lane-b-state; published trailing whitespace is normalized.
+
+Additional exact canonical-guide delta:
+
+> Clear cached per-role AppSession tokens when refreshed Canvas metadata omits
+> them. A post-restart denial probe must use a freshly supplied token, or report
+> AppSession NOT_RUN; denial of an obsolete token is not fresh-session evidence.
+
+Evidence: repeated discovery regression and retained before/after receipts.
+Remaining uncertainty: installed HTTP execution. Upstream disposition: none.

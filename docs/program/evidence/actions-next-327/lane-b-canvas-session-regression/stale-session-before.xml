@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="2" time="1.086" timestamp="2026-10-25T14:28:48.201783+00:00" hostname="24f4e4db41bc"><testcase classname="tests.contract_tests.test_lane_b_installed_lifecycle" name="test_canvas_keeps_mcp_session_for_both_roles[True]" time="1.029"><failure message="AssertionError: assert {'ingestion':...thetic-token'} == {}&#10;  &#10;  Left contains 2 more items:&#10;  {'ingestion': 'ingestion-synthetic-token', 'search': 'search-synthetic-token'}&#10;  Use -v to get more diff">tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-18/test_canvas_keeps_mcp_session_0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7fc7a2af7e00&gt;
+with_app_session = False
+
+    @pytest.mark.parametrize("with_app_session", [True, False])
+    def test_canvas_keeps_mcp_session_for_both_roles(
+        tmp_path, monkeypatch, with_app_session
+    ):
+        scripts = Path(__file__).parents[2] / "scripts"
+        monkeypatch.syspath_prepend(str(scripts))
+        spec = importlib.util.spec_from_file_location(
+            "lane_b_canvas", scripts / "lane_b_installed_knowledge_lifecycle.py"
+        )
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        runner = object.__new__(module.Lifecycle)
+        runner.m = {
+            role: {"app_id": role + "-app", "binding_id": role + "-binding"}
+            for role in ("ingestion", "search")
+        }
+        runner.app_sessions = {}
+        calls = []
+
+        class Session:
+            async def call_tool(self, name, arguments):
+                calls.append((self, name, arguments))
+                role = arguments["appId"].removesuffix("-app")
+                if name == "canvas_inspect":
+                    return SimpleNamespace(
+                        is_error=False,
+                        structured_content={
+                            "invocationDescriptors": [
+                                {"bindingId": role + "-binding", "snapshot": {"role": role}}
+                            ]
+                        },
+                    )
+                assert name == "canvas_get"
+                meta = {
+                    "actions.canvas": {
+                        "spec": {
+                            "nodes": [{"type": "artifact", "bindingId": role + "-binding"}]
+                        }
+                    }
+                }
+                if with_app_session:
+                    meta["actions.appSession"] = {"token": role + "-synthetic-token"}
+                return SimpleNamespace(is_error=False, meta=meta)
+
+        session = Session()
+        assert asyncio.run(runner.canvas(session)) == {
+            "ingestion": {"role": "ingestion"},
+            "search": {"role": "search"},
+        }
+        assert calls == [
+            (session, name, {"appId": role + "-app"})
+            for role in ("ingestion", "search")
+            for name in ("canvas_inspect", "canvas_get")
+        ]
+        assert runner.app_sessions == (
+            {role: role + "-synthetic-token" for role in ("ingestion", "search")}
+            if with_app_session
+            else {}
+        )
+        # A new Canvas session after restart may omit previously issued authority.
+        # The HTTP probe must then receive None and record AppSession NOT_RUN.
+        with_app_session = False
+        assert asyncio.run(runner.canvas(session)) == {
+            'ingestion': {'role': 'ingestion'}, 'search': {'role': 'search'}
+        }
+&gt;       assert runner.app_sessions == {}
+E       AssertionError: assert {'ingestion':...thetic-token'} == {}
+E
+E         Left contains 2 more items:
+E         {'ingestion': 'ingestion-synthetic-token', 'search': 'search-synthetic-token'}
+E         Use -v to get more diff
+
+tests/contract_tests/test_lane_b_installed_lifecycle.py:213: AssertionError</failure></testcase><testcase classname="tests.contract_tests.test_lane_b_installed_lifecycle" name="test_canvas_keeps_mcp_session_for_both_roles[False]" time="0.002" /></testsuite></testsuites>
