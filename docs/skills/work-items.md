@@ -1318,3 +1318,9 @@ Evidence scripts must stop the commit/push sequence when a redaction or content
 scan fails. Use a checked subprocess sequence or shell `set -e`; a newline
 between a Python scan and `git add` does not enforce success. Sanitize AppSession
 tokens before copying JSON even when the disposable server has already stopped.
+
+When a source suite must remain frozen, qualify an isolated installed correction
+from an archived base plus a digest-pinned patch and explicit version delta.
+Record these inputs separately from a Git source SHA, compare wheel/source/import
+bytes, and later verify the integrated files match that candidate. Do not label
+an isolated wheel as the unchanged base commit or as already integrated source.

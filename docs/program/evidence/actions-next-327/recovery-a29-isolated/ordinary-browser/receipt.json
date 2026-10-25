@@ -1,0 +1,63 @@
+{
+  "source_delta": {
+    "base": "087c86c8e81844f8e9013460b3ca6a8bbca748c7",
+    "patch_sha256": "158c6b887f3e26077630df79653a2893bae3f34ac03248065569da607ec8b107",
+    "patch": "/workspace/actions-recovery-327/reopen-artifact-evidence/reopen-artifacts.patch",
+    "version_bump": "1.1.0a28 to1.1.0a29 in three version files",
+    "status": "isolated candidate, root source unchanged during full a28 suite"
+  },
+  "status": "PASS_ORDINARY_INSTALLED_OFFICIAL_HOST",
+  "runtime_version": "1.1.0a29",
+  "engine_origin": "/workspace/actions-recovery-327/installed-a29/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+  "source": "087c86c8e81844f8e9013460b3ca6a8bbca748c7",
+  "synthetic_owned_auth": true,
+  "processes": [
+    {
+      "pid": 77844,
+      "returncode": -15,
+      "stopped": true
+    },
+    {
+      "pid": 78125,
+      "returncode": -15,
+      "stopped": true
+    },
+    {
+      "pid": 79446,
+      "returncode": -15,
+      "stopped": true
+    },
+    {
+      "pid": 80244,
+      "returncode": -15,
+      "stopped": true
+    }
+  ],
+  "calls": [
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    }
+  ],
+  "actual_generated_execution": "PASS app form through official bridge",
+  "workspace": "a260d292-5620-456d-a5e0-0805c80f85f8",
+  "profile_setup": "explicit public offline owner authorization; no SQL writes or source/result/review/admission seeding",
+  "application": "b8186336-fa3b-4bbc-8f1f-b9880aaabc36",
+  "revision": "sha256:886567b29d610bf9dd2a1627707352069f31239371772345285375add3094c4d",
+  "ordinary_cli": true,
+  "fixture_SQL_mutations": false,
+  "host_source": "ext-apps v2.0.3 82221c0c8ce7661efa6771c9d461511b1650495f",
+  "E1": false
+}

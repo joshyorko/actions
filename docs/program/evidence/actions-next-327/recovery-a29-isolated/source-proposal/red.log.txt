@@ -1,0 +1,81 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+__ test_reopen_resolves_handles_and_artifact_without_relaunch[sqlite-duckdb] ___
+
+case = namespace(db=<actions.server._database.Database object at 0x7fc885751040>, actor=Actor(principal_id='83866cf1-3b1f-485...t_handle=None, binding_id=None), port=<actions.server.foundry.generic_view.GenericCanvasView object at 0x7fc884db76e0>)
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fc8886c8b60>
+
+    def test_reopen_resolves_handles_and_artifact_without_relaunch(case,monkeypatch):
+        c=case
+        done=complete(c)
+        calls=[]
+        original=c.outputs.resolve
+        def resolve(actor,workspace,handle):
+            calls.append(handle)
+            return original(actor,workspace,handle)
+        monkeypatch.setattr(c.outputs,"resolve",resolve)
+        reopened=app_tests.call(c,"canvas_get",{},c.model).generic_interaction["executions"][0]
+>       assert reopened["outputs"]==done["outputs"] and calls
+               ^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'outputs'
+
+action_server/tests/action_server_tests/test_generic_reopen_artifacts.py:36: KeyError
+----------------------------- Captured stderr call -----------------------------
+TEST PROCESS: 2026-10-25 03:02:40,400 - asyncio - DEBUG - Using selector: EpollSelector
+TEST PROCESS: 2026-10-25 03:02:40,573 - asyncio - DEBUG - Using selector: EpollSelector
+TEST PROCESS: 2026-10-25 03:02:40,920 - asyncio - DEBUG - Using selector: EpollSelector
+------------------------------ Captured log call -------------------------------
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+_ test_reopen_omits_handles_when_output_queue_artifact_grant_revoked[sqlite-duckdb] _
+
+case = namespace(db=<actions.server._database.Database object at 0x7fc888630800>, actor=Actor(principal_id='7b51d89f-3854-435...t_handle=None, binding_id=None), port=<actions.server.foundry.generic_view.GenericCanvasView object at 0x7fc888562f60>)
+
+    def test_reopen_omits_handles_when_output_queue_artifact_grant_revoked(case):
+        c=case
+        app_tests.test_explicit_generic_policy_uses_same_app_path(c,"producer")
+        opened=app_tests.call(c,"canvas_get",{},c.model).generic_interaction["executions"][0]
+>       assert opened["outputs"]
+               ^^^^^^^^^^^^^^^^^
+E       KeyError: 'outputs'
+
+action_server/tests/action_server_tests/test_generic_reopen_artifacts.py:45: KeyError
+----------------------------- Captured stderr call -----------------------------
+TEST PROCESS: 2026-10-25 03:02:42,786 - asyncio - DEBUG - Using selector: EpollSelector
+TEST PROCESS: 2026-10-25 03:02:42,939 - asyncio - DEBUG - Using selector: EpollSelector
+TEST PROCESS: 2026-10-25 03:02:43,378 - asyncio - DEBUG - Using selector: EpollSelector
+------------------------------ Captured log call -------------------------------
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+____________ test_reopen_rejects_mixed_run_inventory[sqlite-duckdb] ____________
+
+case = namespace(db=<actions.server._database.Database object at 0x7fc884dcc9e0>, actor=Actor(principal_id='49e44abe-3714-472...t_handle=None, binding_id=None), port=<actions.server.foundry.generic_view.GenericCanvasView object at 0x7fc884e469c0>)
+
+    def test_reopen_rejects_mixed_run_inventory(case):
+        c=case
+        done=complete(c)
+        row=_one(c.db,Run,done["runId"])
+        result=json.loads(row.result)
+        result["outputs"].append(dict(result["outputs"][0],run_id=str(uuid4())))
+        with c.db.transaction():_update(c.db,Run,row.id,{"result":_canonical(result,524288)})
+>       with pytest.raises(FenceRejected):app_tests.call(c,"canvas_get",{},c.model)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'actions.server.run_outputs.service.FenceRejected'>
+
+action_server/tests/action_server_tests/test_generic_reopen_artifacts.py:62: Failed
+----------------------------- Captured stderr call -----------------------------
+TEST PROCESS: 2026-10-25 03:02:44,421 - asyncio - DEBUG - Using selector: EpollSelector
+TEST PROCESS: 2026-10-25 03:02:44,564 - asyncio - DEBUG - Using selector: EpollSelector
+TEST PROCESS: 2026-10-25 03:02:44,893 - asyncio - DEBUG - Using selector: EpollSelector
+------------------------------ Captured log call -------------------------------
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+=========================== short test summary info ============================
+FAILED action_server/tests/action_server_tests/test_generic_reopen_artifacts.py::test_reopen_resolves_handles_and_artifact_without_relaunch[sqlite-duckdb]
+FAILED action_server/tests/action_server_tests/test_generic_reopen_artifacts.py::test_reopen_omits_handles_when_output_queue_artifact_grant_revoked[sqlite-duckdb]
+FAILED action_server/tests/action_server_tests/test_generic_reopen_artifacts.py::test_reopen_rejects_mixed_run_inventory[sqlite-duckdb]
+3 failed, 9 deselected in 8.47s
+Log (html): /workspace/actions-recovery-327/reopen-artifact-draft/output/log.html

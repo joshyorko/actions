@@ -1068,3 +1068,12 @@ completed-state screenshot is not full restart acceptance. The next correction
 is pending; Library delivery remains HTTP401. The stopped synthetic AppSession
 fields accidentally included in the first evidence checkpoint were redacted in
 a follow-up; evidence-redaction.json records that handling defect and correction.
+
+## Isolated a29 restart-artifact correction
+
+[Exact isolated candidate](evidence/actions-next-327/recovery-a29-isolated/README.md)
+passes the previously failing ordinary installed reference-host restart artifact
+inspection, with actual RCC and one retained Run. Base+patch+version provenance,
+source negatives and real screenshots are saved. It is not yet integrated into
+root source, which remains frozen for full a28 verification. All broader owner
+product gates, Library authentication and optional #326 decision remain explicit.
