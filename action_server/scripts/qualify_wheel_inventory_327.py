@@ -11,9 +11,14 @@ import zipfile
 from email.parser import BytesParser
 from pathlib import Path, PurePosixPath
 
+MAX_ARCHIVE_BYTES = 256 * 1024**2
+
 
 def qualify(wheel, expected_sha256, expected_version):
-    wheel_bytes = wheel.read_bytes()
+    with wheel.open("rb") as stream:
+        wheel_bytes = stream.read(MAX_ARCHIVE_BYTES + 1)
+    if len(wheel_bytes) > MAX_ARCHIVE_BYTES:
+        raise ValueError("wheel archive exceeds byte bound")
     digest = hashlib.sha256(wheel_bytes).hexdigest()
     if digest != expected_sha256:
         raise ValueError("selected wheel digest mismatch")

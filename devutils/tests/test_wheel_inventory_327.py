@@ -6,7 +6,9 @@ import hashlib
 import importlib.util
 import io
 import zipfile
+from contextlib import contextmanager
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -75,8 +77,9 @@ def test_exact_wheel_inventory_and_dependency_declarations(checker, tmp_path):
         checker.qualify(wheel, digest, "1.0.4")
 
 
+@pytest.mark.parametrize("change", ["replace", "in-place"])
 def test_path_replacement_cannot_mix_digest_and_inventory(
-    checker, tmp_path, monkeypatch
+    checker, tmp_path, monkeypatch, change
 ):
     wheel, digest = wheel_fixture(tmp_path)
     replacement_dir = tmp_path / "replacement"
@@ -86,20 +89,33 @@ def test_path_replacement_cannot_mix_digest_and_inventory(
     )
     assert digest != replacement_digest
     replacement_bytes = replacement.read_bytes()
-    read_bytes = Path.read_bytes
+    original_open = Path.open
     swapped = []
 
-    def replace_after_read(path):
-        captured = read_bytes(path)
-        if path == wheel and not swapped:
-            wheel.write_bytes(replacement_bytes)
-            swapped.append(True)
-        return captured
+    @contextmanager
+    def replace_after_read(path, *args, **kwargs):
+        with original_open(path, *args, **kwargs) as stream:
+            if path != wheel or swapped:
+                yield stream
+                return
 
-    monkeypatch.setattr(Path, "read_bytes", replace_after_read)
+            def read(size):
+                assert size == checker.MAX_ARCHIVE_BYTES + 1
+                captured = stream.read(size)
+                if change == "replace":
+                    replacement.replace(wheel)
+                else:
+                    with original_open(wheel, "wb") as output:
+                        output.write(replacement_bytes)
+                swapped.append(True)
+                return captured
+
+            yield SimpleNamespace(read=read)
+
+    monkeypatch.setattr(Path, "open", replace_after_read)
     result = checker.qualify(wheel, digest, "1.1.0a38")
     assert swapped == [True]
-    assert hashlib.sha256(read_bytes(wheel)).hexdigest() == replacement_digest
+    assert hashlib.sha256(wheel.read_bytes()).hexdigest() == replacement_digest
     member = next(
         item
         for item in result["inventory"]
@@ -107,6 +123,18 @@ def test_path_replacement_cannot_mix_digest_and_inventory(
     )
     assert result["wheel_sha256"] == digest
     assert member["sha256"] == hashlib.sha256(b"VALUE = 1\n").hexdigest()
+
+
+def test_archive_byte_bound_precedes_zip_parsing(checker, tmp_path, monkeypatch):
+    wheel, digest = wheel_fixture(tmp_path)
+    monkeypatch.setattr(checker, "MAX_ARCHIVE_BYTES", 32)
+
+    def forbidden_parse(*args, **kwargs):
+        pytest.fail("Oversized archives must be rejected before ZIP parsing")
+
+    monkeypatch.setattr(checker.zipfile, "ZipFile", forbidden_parse)
+    with pytest.raises(ValueError, match="archive exceeds byte bound"):
+        checker.qualify(wheel, digest, "1.1.0a38")
 
 
 @pytest.mark.parametrize(
