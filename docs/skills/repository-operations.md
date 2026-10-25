@@ -6573,3 +6573,15 @@ authority. A completed model Run does not establish a Canvas Request/Audit assoc
 Qualify each surface with fresh items: model output reads through authorized managed
 HTTP, and Canvas submit_input/execute reads through its own association. Preserve
 expected cross-surface denial rather than adopting an already completed Run.
+
+Broad Runtime qualification compares selected source, imported module and installed
+distribution versions before creating services. Reject dirty sources and recheck HEAD,
+worktree and source/test fingerprint after execution. Persist sanitized phase outcomes
+incrementally and require successful pytest session_finish before PASS. Route external
+termination through bounded child shutdown and exact owned-container cleanup. Resource
+aborts remain distinct from test failures; preserve both and serialize heavy builds.
+
+Advance each acceptance row only from its exact terminal receipt. Keep protocol/build/UI,
+provider-specific execution, source regressions, static checks and full-suite gates
+separate. Claimed execution does not close claimed Tasks, output modes or multiple
+principals. Replace stale RUNNING/WIP text while preserving failed and aborted receipts.

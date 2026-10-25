@@ -1,22 +1,39 @@
-# Combined acceptance checkpoint
+# Release #327 / PR #328 acceptance matrix after installed a47
 
-The immutable a44 installed candidate is available independently of subsequent source work. Source d0c87a38a937cc339e8e661ac453c7a62ed41fa6; Library libfile_b8db0ef755208191bd204e83f0d5a04d; 15,679,946 bytes; SHA256 37ab0cf8bf66132c0112e5b65c7528a1092f4665ac7f7d32a022ec2ee77d18b0. Exact local bundle bytes were reverified after handoff.
+Installed candidate: Runtime **1.1.0a47**, Core **1.1.0a7**, frozen source **06845ba906b86c5329c6f63f9a3ca20cfee16d4c**. Owned-reference closure is **1f4a946989f290a63ea2632be5207ccb8fce1f0c**; installed/static evidence committed at **c0c78d326fa6937d87bf16e229d3b5fc1462011a**. This is the existing campaign. Release acceptance remains OPEN; claimed Robot integration is no longer merely WIP.
 
-| Gate | Status and boundary |
-| --- | --- |
-| Original a41 installed Canvas | FAILED, preserved |
-| a44 clean wheel consumer | PASS, exact payload/dependency identity |
-| a44 public generated Python and RCC | PASS, actual success/failure, authorized results, restart and rollback |
-| a44 public Robot and detached Tasks | PASS, RCC success/failure and direct execution, artifacts and restart |
-| a44 official MCP Apps browser host | BLOCKED / NOT RUN; supported sandbox environment required |
-| Actual ChatGPT/Dakota | NOT RUN; owner-launched only |
-| a45 owned Core dependency closure | Core suite and clean wheel payload PASS; installed RCC execution still pending |
-| a45 official Node SDK full client | Original FAILED harness auth classifier preserved; new corrected complete protocol run PASS, including idempotent draft and authentication denial |
-| Runtime broad suite | Earlier 5 failures/771 passes/13 skips preserved; repair checkpoint 22ff684d under further qualification |
-| Native frozen/Go distribution | Diagnostic build PASS; exact source-bound native acceptance OPEN |
-| Claimed Robot Work Items | Isolated WIP, not integrated: declaration tests and SQLite/PostgreSQL runner tests PASS; installed RCC, concurrent races and terminal corruption gates OPEN |
-| Full universal Canvas/Data/Knowledge/recovery breadth | OPEN; invoice and component gates do not substitute |
+| Original acceptance area | Exact accepted proof | Remaining gate |
+|---|---|---|
+| Universal blank Canvas → generated Python → activate | a44/Core a6 source d0c87a38a937cc339e8e661ac453c7a62ed41fa6 public authoring/build/activation, real RCC success/failure, authorized results and rollback/restart PASS. a46 Knowledge extends installed generated authoring/execution; a47 adds app-associated claimed Robot submit/execute. | Actual universal blank UI authoring/edit/revise flow and current-candidate coverage remain open. Invoice reference does not substitute for universal behavior. |
+| Semantic v2 renderer / official MCP Apps host | Official host adapter built with preserved renderer/AppBridge, loopback transport, memory-only bearer input and redacted logging; protocol projection/resource evidence retained. | Parent is **executing the a44 independent public-input rebuild** in its authorized namespace. Native import and actual UI/screenshots/visual review are **NOT PASSED**. No new environment request or local Dakota dispatch is warranted. Stock host, adapted official host, and strict sandbox proof remain distinct. |
+| Data / DuckDB / PostgreSQL | Historical recovery-a36 installed provider evidence and newer joined source/provider/fence regressions retained. DuckDB provision is used by the installed a46 Knowledge proof. | Current-candidate public Data two-provider execution with authorized outputs, denial/cancellation and recovery still needs an exact installed receipt. Knowledge's DuckDB use does not qualify PostgreSQL Data or all provider behavior. Reuse existing lanes/harnesses. |
+| Mapped Knowledge | **a46/Core a7 PASS**, source d77d26a4c377cb0f69453621fe5fd1a86815b98b: public generated ingest, committed corpus handle, mapped search, real child failure, authorized artifacts and byte-identical restart reads; missing/wrong key/Host/Origin denials; four graceful shutdowns. | Scope remains that a46 candidate and explicit DuckDB-backed synthetic corpus. PostgreSQL Knowledge, broader corpus/provider cases, rollback and multi-principal authorization are not established by this receipt. Earlier failed attempts remain failed. |
+| Durable Work Item / Run / Attempt / Task | **Installed a47 claimed Robot PASS**: public enqueue/replay and claim, model invocation plus Canvas submit_input/execute, each with real success/failure. Four cases end with exact Run/queue completed/DONE or failed/FAILED, four authorized artifacts each, retained claim/receipt unchanged after restart. a44 standalone detached Task proof retained. | Claimed Task execution, producer/child Robot outputs and multi-principal isolation remain open. Do not transfer standalone Task proof to claimed Tasks or mistake a single persisted Actor for isolation. |
+| Robots / RCC / failure lifecycle | a47/Core a7, Robot environment artifact sha256:763f5ae5fb9a34ffcc921de2528e86b09bfbbef4249f3c392bad71f7a1d8f785: actual RCC exit 0/1 on both model and Canvas surfaces. Four graceful Runtime stops; outer supervisor exit 0 with no cleanup errors/live descendants. | Broader resource/platform/escaping-process containment and remaining Robot modes still separate. Original a41 installed execution failure and a46 public replay-marker failure stay FAILED; a47 supersedes only the repaired route. |
+| Auth / review / artifacts | a47 denies wrong/missing credentials; public authorized artifact reads PASS. Model-only Runs intentionally cannot use Canvas artifact authority; app-associated Canvas Runs can. a46 Knowledge and a44 protocol denial/restart/stale/revoked-read gates retained. | Multi-principal security, complete review workflow, cross-provider/cross-app authority breadth and current-candidate remaining routes are open. Artifact existence does not grant read/review authority. |
+| Installed distribution / native / recovery | Exact-source a47 clean wheel/consumer claimed execution; a46 installed Knowledge; older exact-byte/namespace and Node consumer proofs retained. | Frozen/Go native artifact qualification, platform matrix and clean uninstall/upgrade/restore remain open. Diagnostic native artifact is not release proof. Restart/rollback is narrower than upgrade/restore. |
+| Owned dependency independence | Owned logging/viewer/redaction and official truststore retained. **1f4a946** removes routine Robocorp checkout via 17 original licensed files authenticated to pinned Git objects, preserving semantic authority and mandatory owned custom Git root. Work Items available suite 285 passed. | Custom pinned MIT/Apache metadata inconsistency remains; no new custom source bundle or attribution. Windows/macOS TLS and final candidate inventory/platform breadth remain separate. Legal notices/explicit compatibility options stay preserved. |
+| Independent clients / actual hosts | Python MCP installed generated/Knowledge/claimed Robot paths have scoped PASS receipts. Official Node SDK2 a45 initialization/catalog/MIME/annotations/replay/denials PASS; original Node classifier failure retained. | Node execution, actual browser/AppBridge, parent visual acceptance, ChatGPT/Dakota and Codex host gates remain distinct and open. Historical Celld NO-GO is not superseded. |
+| Regression / static release checks | a47 affected SQLite+PostgreSQL regression **93 passed, 6 skipped** (66.47s); no JUnit failures/errors. Initial static formatting failure preserved; corrected `invoke lint typecheck` now **PASS**, including 642 source files. | Full applicable Runtime suite remains **PENDING**, not implied by regression totals. a46 broad run was **ABORTED_RESOURCE_FLOOR** at 10 GiB reserve, had an observed failure and no final JUnit. A terminal full run is required. |
 
-Next a44 host gate: provision a non-root browser-only environment with supported Chromium namespace sandbox; keep Playwright1.62.1/revision1234 and run bundled browser-preflight.mjs with chromiumSandbox:true. Then materialize/verify the bundle, recreate target-local RCC preparation, and execute browser/qualify.py with the pinned official host. See browser-handoff/environment-repair.md. No security alterations attempted or approval denied; provisioning remains pending. Newer source suite completion is not a prerequisite for this bounded a44 host gate.
+## Exact exclusions and preserved failures
 
-Upstream disposition: none. No publication, production deployment or Dakota dispatch.
+The six a47 regression skips are `test_real_generic_rcc` for consumer, producer and optional modes, each on SQLite and PostgreSQL: **“explicit owned prepared RCC gate required.”** They were not executed. Separate installed claimed Robot proof does not silently qualify all six. No database-provider cases were deselected in that 99-case regression receipt.
+
+Work Items closure qualification retains 46 skips (18 PostgreSQL fenced, 13 Redis, 15 MongoDB), 3 persistent-backend service deselections and 10 existing expected-red gaps; none are passes. Original a41 failure, prior broad failures, the a46 aborted suite/replay failure and initial a47 formatting failure remain in the evidence ledger. The recheck completed during this read-only update; it is no longer RUNNING.
+
+## Next exact engineering gates
+
+1. Root finishes the full applicable Runtime suite on the frozen integration state with a terminal JUnit/supervisor result; keep memory/disk limits and serialize bounded service workloads. Preserve every skip and investigate actual failures before release qualification.
+2. Parent completes its already authorized independent public-input a44 rebuild, fresh target trust/import and actual managed UI run; require the six captures and parent visual review. The denied Library archive PUT remains denied; an independently built public-input artifact is separate provenance. No UI pass is recorded yet.
+3. Reuse the pushed Data/provider lane to run the smallest missing current-candidate installed public DuckDB+PostgreSQL join, with exact provider authority, real RCC outputs, rejection/cancellation and restart reads. Then reconcile remaining claimed Tasks/output modes, multi-principal review/security, independent hosts and native/platform/upgrade gates. No duplicate campaign or implementation.
+
+## Receipt anchors
+
+- a47 claimed: `a47-claimed-robot-public/evidence/receipt.json`, SHA256 **68853a7ed966287a171f9709c2e96496a2f9571a5c54316cc15b989daf435f94**; supervisor `a47-claimed-supervisor/receipt.json` PASS, zero descendants.
+- a46 Knowledge: `a46-knowledge-public-3/evidence/receipt.json`, SHA256 **298b4d063101750f4a34516eb94cc7441851ac92d597ea6c3d590f704f5f3642**; supervisor `a46-knowledge-supervisor-3/receipt.json` PASS.
+- Regression: `a47-replay-regression.xml` and `.log`; initial static `a47-static.log`, formatting `a47-format-fix.log`, final `a47-static-recheck.log`.
+- Full-suite limitation: `runtime-applicable-a46-abort.json`; no later full-suite terminal proof reviewed here.
+- Prior immutable scope and receipts: `release-remaining-a46.md`. Historical facts retained only to their recorded candidate; no fresh GitHub issue-state audit was performed.
+
+Upstream disposition: none. No external mutation or publication.
