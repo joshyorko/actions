@@ -391,3 +391,24 @@ RFC8785 contract (at most65536 UTF-8 bytes). Clear prior data on resubmit, error
 or authorization denial and ignore stale responses. The host's changed callback
 triggers rendering. The TypeScript interface alone implements no encoder,
 Runtime wire contract, validation or authorization.
+
+## Robot launch journal ownership
+
+RobotJournal uses the existing Run.result and current Run/Attempt transaction;
+its admission owner must first create the closed actions.robot-dispatch/v1
+launch:null envelope. The journal acquires the Run fence before reading so two
+SQLite connections cannot both pass an absent-intent check. It persists the full
+versioned selection preimage, compares it with a host-derived SQL-validated
+selection and canonical Run inputs, and refuses every existing launch, including
+an identical replay. A lost acknowledgement leaves the intent for reconciliation,
+never permission to spawn again. Work Item outputs expose the canonical ticket
+claim, whose epoch is independent from the Attempt epoch; the host callback
+rechecks that claim's live SQL authority. No artifact/provider/filesystem reads
+belong in this callback or journal transaction. This port neither initializes nor
+resets journals and does not publish, terminalize, schedule or retry execution.
+
+Recording a Robot launch must own the outermost Database transaction. Nested
+transactions are savepoints, so a returned intent inside an outer transaction
+can disappear on rollback. RobotJournal rejects an existing transaction before
+mutation via Database.in_transaction(); a successful record acknowledgement
+therefore follows its own durable commit and subsequent validated read.
