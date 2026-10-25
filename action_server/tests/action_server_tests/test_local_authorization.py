@@ -630,3 +630,19 @@ def test_cli_validation_with_closed_logging_stream(local, capsys, caplog):
         logging.raiseExceptions = previous
         _cli_impl.log.removeHandler(handler)
         handler.close()
+
+
+def test_deployment_authorization_enters_verified_package_loader(deployed, monkeypatch):
+    """Offline authorization supports both single and multi-capability packages."""
+    registry = deployed.owner.registry
+    calls = []
+    for name in ("load", "load_verified"):
+        original = getattr(registry, name)
+
+        def record(ref, *, _name=name, _original=original):
+            calls.append(_name)
+            return _original(ref)
+
+        monkeypatch.setattr(registry, name, record)
+    native_apply(deployed)
+    assert calls[0] == "load_verified"

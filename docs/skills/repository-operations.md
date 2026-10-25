@@ -5733,3 +5733,11 @@ Canonical Run result `outputs` are serialized OutputRef values; derive their
 public handle through OutputRef rather than assuming a serialized handle field.
 Output resolution requires both Run-read and application-read authority: an
 execution grant or reference grant does not replace application authorization.
+
+Offline exact-Deployment authorization must enter Package registry
+`load_verified`, which verifies both retained single-capability and bundle
+formats. Calling the legacy single-capability `load` directly rejects valid
+multi-Action Packages after successful authoring and activation. Exercise the
+ordinary stopped-local authorization command in installed multi-Action tests;
+direct source execution with manually provisioned grants cannot cover this join.
+Canvas numeric form fields use the contract discriminator `integer`, not `number`.

@@ -268,7 +268,7 @@ def apply_local_authorization(
                 raise ValueError("verified native Package registry required")
             if request.operation != "revoke":
                 for package in spec.package_revisions:
-                    registry.load(package)
+                    registry.load_verified(package)
             selected_refs: list[WorkspaceScopedRef] = [
                 ref,
                 *refs,
