@@ -2,6 +2,7 @@ import type { App } from "@modelcontextprotocol/ext-apps/react";
 import { z } from "zod";
 import type { CanvasAppMetadata } from "./mcp-bridge";
 import { createCapabilityRef } from "./types";
+import { createGeneratedProjectionController } from "./generated-projection";
 import type { SemanticRendererAdapters, SemanticFormInput } from "./types";
 
 const binding = z.string().regex(/^[A-Za-z][A-Za-z0-9_-]{0,63}$/u);
@@ -197,10 +198,55 @@ export function createGenericExecutionAdapter(
     context: GenericExecutionContext,
     changed: () => void,
     inspect: (text: string, bindingId: string) => void,
+    projectionEnabled = false,
 ) {
     const states = new Map<string, GenericExecutionState>(
         (context.executions ?? []).map((item) => [item.bindingId, item]),
     );
+    const projection = createGeneratedProjectionController(changed);
+    const generations = new Map<string, string>();
+    const projected = async (
+        id: string,
+        operation: () => Promise<GenericExecutionState>,
+    ): Promise<GenericExecutionState> => {
+        if (!projectionEnabled) return operation();
+        const requestId = projection.begin(id);
+        generations.set(id, requestId);
+        try {
+            const result = await operation();
+            if (generations.get(id) !== requestId) return result;
+            if (result.state !== "completed") {
+                if (result.state !== "ready" && result.state !== "running")
+                    projection.fail(id, requestId);
+                return result;
+            }
+            await projection.load(
+                id,
+                requestId,
+                { runId: result.runId, attemptId: result.attemptId },
+                async () => {
+                    const meta = await call("canvas_projection", {
+                        bindingId: id,
+                        runId: result.runId,
+                    });
+                    const current = states.get(id);
+                    if (
+                        current?.runId !== result.runId ||
+                        current.attemptId !== result.attemptId ||
+                        current.state !== "completed"
+                    )
+                        throw new Error(
+                            "Current execution changed during projection.",
+                        );
+                    return meta["actions.projection"];
+                },
+            );
+            return result;
+        } catch (error) {
+            projection.fail(id, requestId);
+            throw error;
+        }
+    };
     const outputPages = new Map<string, z.infer<typeof outputPage>>();
     const inputPages = new Map<string, z.infer<typeof inputPage>>();
     const selectedInput = (id: string) =>
@@ -208,15 +254,29 @@ export function createGenericExecutionAdapter(
     const pending = new Map<string, { key: string; input: string }>();
     const allowed = (id: string) => context.bindingIds.includes(id);
     const call = async (name: string, args: Record<string, unknown>) => {
-        const reply = await app.callServerTool({
-            name,
-            arguments: { ...args, mode: "generic", appSession: context.token },
-        });
-        if (reply.isError)
-            throw new Error(
-                "App request denied or unavailable; inspect state before retrying.",
-            );
-        return reply._meta ?? {};
+        const id =
+            typeof args.bindingId === "string" ? args.bindingId : undefined;
+        const requestId = id ? generations.get(id) : undefined;
+        try {
+            const reply = await app.callServerTool({
+                name,
+                arguments: {
+                    ...args,
+                    mode: "generic",
+                    appSession: context.token,
+                },
+            });
+            if (reply.isError)
+                throw new Error(
+                    "App request denied or unavailable; inspect state before retrying.",
+                );
+            if (id && requestId && generations.get(id) !== requestId)
+                throw new Error("Superseded app request.");
+            return reply._meta ?? {};
+        } catch (error) {
+            if (id && requestId) projection.fail(id, requestId);
+            throw error;
+        }
     };
     const accept = (
         id: string,
@@ -246,13 +306,16 @@ export function createGenericExecutionAdapter(
         const current = states.get(id);
         if (!allowed(id) || !current)
             throw new Error("No retained execution selected.");
-        return accept(
-            id,
-            await call(name, { bindingId: id, runId: current.runId }),
-            current.runId,
+        return projected(id, async () =>
+            accept(
+                id,
+                await call(name, { bindingId: id, runId: current.runId }),
+                current.runId,
+            ),
         );
     };
     const adapters: SemanticRendererAdapters = {
+        getProjection: projection.getProjection,
         resolveFormBinding: (id) =>
             allowed(id) && !selectedInput(id)
                 ? createCapabilityRef<string, SemanticFormInput, unknown>(id)
@@ -260,41 +323,43 @@ export function createGenericExecutionAdapter(
         dispatch: async (capability, input) => {
             const id = capability.bindingId;
             if (!allowed(id)) throw new Error("Binding is unavailable.");
-            const encoded = JSON.stringify(input);
-            const prior = pending.get(id);
-            if (prior && prior.input !== encoded)
-                throw new Error(
-                    "An uncertain submission exists; inspect it before changing input.",
+            return projected(id, async () => {
+                const encoded = JSON.stringify(input);
+                const prior = pending.get(id);
+                if (prior && prior.input !== encoded)
+                    throw new Error(
+                        "An uncertain submission exists; inspect it before changing input.",
+                    );
+                const request = prior ?? {
+                    key: globalThis.crypto.randomUUID(),
+                    input: encoded,
+                };
+                pending.set(id, request);
+                const admitted = accept(
+                    id,
+                    await call("canvas_dispatch", {
+                        action: "submit",
+                        bindingId: id,
+                        inputs: input,
+                        idempotencyKey: request.key,
+                    }),
                 );
-            const request = prior ?? {
-                key: globalThis.crypto.randomUUID(),
-                input: encoded,
-            };
-            pending.set(id, request);
-            const admitted = accept(
-                id,
-                await call("canvas_dispatch", {
-                    action: "submit",
-                    bindingId: id,
-                    inputs: input,
-                    idempotencyKey: request.key,
-                }),
-            );
-            const result =
-                admitted.state === "ready"
-                    ? accept(
-                          id,
-                          await call("canvas_dispatch", {
-                              action: "execute",
-                              bindingId: id,
-                              runId: admitted.runId,
-                          }),
-                          admitted.runId,
-                      )
-                    : admitted;
-            if (result.state === "completed" || result.state === "failed")
-                pending.delete(id);
-            return result;
+                const result =
+                    admitted.state === "ready"
+                        ? accept(
+                              id,
+                              await call("canvas_dispatch", {
+                                  action: "execute",
+                                  bindingId: id,
+                                  runId: admitted.runId,
+                              }),
+                              admitted.runId,
+                          )
+                        : admitted;
+                if (result.state === "completed" || result.state === "failed")
+                    pending.delete(id);
+                return result;
+            });
         },
         resolveStatusBinding: (id) =>
             allowed(id) ? createCapabilityRef(id) : undefined,
@@ -418,48 +483,55 @@ export function createGenericExecutionAdapter(
                     )
             )
                 throw new Error("Select an available exact input item.");
-            const encoded = JSON.stringify({ queue: selected.queue, itemId });
-            const prior = pending.get(id);
-            if (prior && prior.input !== encoded)
-                throw new Error(
-                    "An uncertain input selection exists; inspect it before changing selection.",
-                );
-            const request = prior ?? {
-                key: globalThis.crypto.randomUUID(),
-                input: encoded,
-            };
-            pending.set(id, request);
-            const result = accept(
-                id,
-                await call("canvas_dispatch", {
-                    action: "submit_input",
-                    bindingId: id,
+            return projected(id, async () => {
+                const encoded = JSON.stringify({
                     queue: selected.queue,
                     itemId,
-                    idempotencyKey: request.key,
-                }),
-                undefined,
-                itemId,
-            );
-            if (result.workItemId !== itemId)
-                throw new Error("Selected input identity changed.");
-            inputPages.delete(id);
-            if (result.state === "completed" || result.state === "failed")
-                pending.delete(id);
-            return result;
+                });
+                const prior = pending.get(id);
+                if (prior && prior.input !== encoded)
+                    throw new Error(
+                        "An uncertain input selection exists; inspect it before changing selection.",
+                    );
+                const request = prior ?? {
+                    key: globalThis.crypto.randomUUID(),
+                    input: encoded,
+                };
+                pending.set(id, request);
+                const result = accept(
+                    id,
+                    await call("canvas_dispatch", {
+                        action: "submit_input",
+                        bindingId: id,
+                        queue: selected.queue,
+                        itemId,
+                        idempotencyKey: request.key,
+                    }),
+                    undefined,
+                    itemId,
+                );
+                if (result.workItemId !== itemId)
+                    throw new Error("Selected input identity changed.");
+                inputPages.delete(id);
+                if (result.state === "completed" || result.state === "failed")
+                    pending.delete(id);
+                return result;
+            });
         },
         execute: async (id: string) => {
             const state = states.get(id);
             if (!allowed(id) || state?.state !== "ready")
                 throw new Error("No unlaunched execution selected.");
-            return accept(
-                id,
-                await call("canvas_dispatch", {
-                    action: "execute",
-                    bindingId: id,
-                    runId: state.runId,
-                }),
-                state.runId,
+            return projected(id, async () =>
+                accept(
+                    id,
+                    await call("canvas_dispatch", {
+                        action: "execute",
+                        bindingId: id,
+                        runId: state.runId,
+                    }),
+                    state.runId,
+                ),
             );
         },
         refresh: (id: string) => read(id, "canvas_execution_status"),

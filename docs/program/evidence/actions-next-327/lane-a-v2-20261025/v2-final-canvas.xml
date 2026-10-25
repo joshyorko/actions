@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="141" failures="8" errors="0" time="7.117039355">
+    <testsuite name="src/query-results/CanvasContractRoundTrip.test.tsx" timestamp="2026-10-25T14:28:47.249Z" hostname="71cd163cf8ad" tests="2" failures="0" errors="0" skipped="1" time="0.007652414">
+        <testcase classname="src/query-results/CanvasContractRoundTrip.test.tsx" name="Canvas query-results JSON Schema interchange &gt; validates the one shared fixture and rejects dynamic binding changes" time="0.005054418">
+        </testcase>
+        <testcase classname="src/query-results/CanvasContractRoundTrip.test.tsx" name="Canvas query-results JSON Schema interchange &gt; validates Python JSON and writes its typed TypeScript round trip" time="0">
+            <skipped/>
+        </testcase>
+    </testsuite>
+    <testsuite name="src/query-results/InvoiceReconciliation.test.tsx" timestamp="2026-10-25T14:28:47.251Z" hostname="71cd163cf8ad" tests="2" failures="0" errors="0" skipped="0" time="0.168723703">
+        <testcase classname="src/query-results/InvoiceReconciliation.test.tsx" name="shows accurate reconciliation labels and separate integer-cent comparisons" time="0.163342274">
+        </testcase>
+        <testcase classname="src/query-results/InvoiceReconciliation.test.tsx" name="rejects unsafe comparison values and foreign invoice identity at the wire boundary" time="0.00245375">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/query-results/InvoiceReviewPanel.test.tsx" timestamp="2026-10-25T14:28:47.256Z" hostname="71cd163cf8ad" tests="5" failures="0" errors="0" skipped="0" time="0.492656951">
+        <testcase classname="src/query-results/InvoiceReviewPanel.test.tsx" name="reads saved bytes only on an explicit inspect action before approval" time="0.199582766">
+        </testcase>
+        <testcase classname="src/query-results/InvoiceReviewPanel.test.tsx" name="requires an explicit offer followed by an explicit approval" time="0.13411968">
+        </testcase>
+        <testcase classname="src/query-results/InvoiceReviewPanel.test.tsx" name="never treats a denied review as approval" time="0.027535599">
+        </testcase>
+        <testcase classname="src/query-results/InvoiceReviewPanel.test.tsx" name="dispatches only after a separate approval and explicit execute click" time="0.045098343">
+        </testcase>
+        <testcase classname="src/query-results/InvoiceReviewPanel.test.tsx" name="shows blocked outcomes and explicit terminal failure download without retrying" time="0.082831465">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/query-results/QueryResultsView.test.tsx" timestamp="2026-10-25T14:28:47.257Z" hostname="71cd163cf8ad" tests="12" failures="0" errors="0" skipped="0" time="1.915249593">
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; renders a host result without execution and pages only its pinned handle" time="0.272410223">
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; renders a labelled idle form without accessibility violations" time="0.179053029">
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; rejects blank input locally and submits only the fixed query shape" time="0.221182224">
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; uses the injected status method with the opaque handle" time="0.141980255">
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; ignores a stale status success and finalizer after the query changes" time="0.253910082">
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; ignores a stale status rejection while the new result is checking" time="0.261827474">
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; ignores a stale status rejection after the view is reopened" time="0.131118129">
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; re-enables search when host input is replaced while a search is pending" time="0.087078969">
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; re-enables search when host input is cleared while a search is pending" time="0.147777476">
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; announces loading and then the empty state" time="0.08196085">
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; renders the fixed domain error message without accepting its free text" time="0.077345269">
+        </testcase>
+        <testcase classname="src/query-results/QueryResultsView.test.tsx" name="QueryResultsView fixture renderer &gt; hides adapter exception details and exposes a bounded failure" time="0.055405871">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/generic-execution.test.tsx" timestamp="2026-10-25T14:28:47.260Z" hostname="71cd163cf8ad" tests="4" failures="0" errors="0" skipped="0" time="0.064989525">
+        <testcase classname="src/semantic-renderer/generic-execution.test.tsx" name="generic official bridge adapter &gt; never runs on mount; submit returns identity before execute and allows cancellation" time="0.057341839">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-execution.test.tsx" name="generic official bridge adapter &gt; retains submission identity after uncertainty and rejects replacement input" time="0.002536907">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-execution.test.tsx" name="generic official bridge adapter &gt; rejects foreign binding in response" time="0.000509336">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-execution.test.tsx" name="reopens retained state without admission and continues only unlaunched Run" time="0.00266775">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/generic-input.test.tsx" timestamp="2026-10-25T14:28:47.261Z" hostname="71cd163cf8ad" tests="6" failures="0" errors="0" skipped="0" time="0.280053173">
+        <testcase classname="src/semantic-renderer/generic-input.test.tsx" name="lists then claims exact selected input without autoexecution or payload replacement" time="0.0088207">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-input.test.tsx" name="retains uncertain selection identity and rejects changed item or response" time="0.009200875">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-input.test.tsx" name="rejects a selected-item response before accepting its Run" time="0.001212271">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-input.test.tsx" name="renders explicit queue selection and claim controls with no launch" time="0.256483653">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-input.test.tsx" name="allows a second explicit selected item after terminal execute" time="0.001408647">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-input.test.tsx" name="allows a second explicit selected item after terminal refresh" time="0.00097527">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/generic-layout.test.tsx" timestamp="2026-10-25T14:28:47.262Z" hostname="71cd163cf8ad" tests="7" failures="0" errors="0" skipped="0" time="0.266989593">
+        <testcase classname="src/semantic-renderer/generic-layout.test.tsx" name="renders declared consumer controls and results within the authored canvas without replacement fields" time="0.151423803">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-layout.test.tsx" name="suppresses trusted private slots for model" time="0.008659909">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-layout.test.tsx" name="suppresses trusted private slots for preview" time="0.028008783">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-layout.test.tsx" name="suppresses trusted private slots for undeclared" time="0.003741927">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-layout.test.tsx" name="suppresses trusted private slots for invisible" time="0.003631882">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-layout.test.tsx" name="keeps inspected artifact within the canvas and preserves authored input node identity" time="0.062607928">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-layout.test.tsx" name="does not move a declared private form into an undeclared authored binding" time="0.004691942">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/generic-output.test.tsx" timestamp="2026-10-25T14:28:47.264Z" hostname="71cd163cf8ad" tests="6" failures="0" errors="0" skipped="0" time="0.263486923">
+        <testcase classname="src/semantic-renderer/generic-output.test.tsx" name="loads only explicit associated Run children without claim or adoption" time="0.009517236">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-output.test.tsx" name="rejects changed output run identity" time="0.003289241">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-output.test.tsx" name="rejects changed output attempt identity" time="0.000800351">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-output.test.tsx" name="rejects changed output queue identity" time="0.000732515">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-output.test.tsx" name="renders read-only produced items with explicit load and no adoption controls" time="0.245793981">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-output.test.tsx" name="drops the cached child page when a later authorized read is denied" time="0.001127709">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/generic-view.test.tsx" timestamp="2026-10-25T14:28:47.265Z" hostname="71cd163cf8ad" tests="4" failures="0" errors="0" skipped="0" time="0.303361554">
+        <testcase classname="src/semantic-renderer/generic-view.test.tsx" name="semantic form explicitly submits and shows persistent Run status without mount execution" time="0.163647456">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-view.test.tsx" name="announces a response without claiming results for a failed Run" time="0.05449976">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-view.test.tsx" name="announces a response without claiming results for a running Run" time="0.042912264">
+        </testcase>
+        <testcase classname="src/semantic-renderer/generic-view.test.tsx" name="announces a response without claiming results for a cancel_requested Run" time="0.037853">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/mcp-bridge-v2.test.tsx" timestamp="2026-10-25T14:28:47.266Z" hostname="71cd163cf8ad" tests="22" failures="0" errors="0" skipped="0" time="0.033554856">
+        <testcase classname="src/semantic-renderer/mcp-bridge-v2.test.tsx" name="explicit Canvas semantic v2 foundation &gt; round trips all four nodes and preserves v1 shape/order" time="0.00806603">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge-v2.test.tsx" name="explicit Canvas semantic v2 foundation &gt; refuses unknown version actions.canvas-spec/v0" time="0.001579993">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge-v2.test.tsx" name="explicit Canvas semantic v2 foundation &gt; refuses unknown version actions.canvas-spec/v3" time="0.000542704">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge-v2.test.tsx" name="explicit Canvas semantic v2 foundation &gt; refuses unknown version null" time="0.000466979">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge-v2.test.tsx" name="explicit Canvas semantic v2 foundation &gt; refuses unknown version 1" time="0.000455536">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge-v2.test.tsx" name="explicit Canvas semantic v2 foundation &gt; rejects v1" time="0.001045658">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge-v2.test.tsx" name="explicit Canvas semantic v2 foundation &gt; rejects extra" time="0.000663782">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge-v2.test.tsx" name="explicit Canvas semantic v2 foundation &gt; rejects duplicate-id" time="0.000826333">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge-v2.test.tsx" name="explicit Canvas semantic v2 foundation &gt; rejects duplicate-field" time="0.000858875">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge-v2.test.tsx" name="explicit Canvas semantic v2 foundation &gt; rejects unknown-binding" time="0.000808792">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge-v2.test.tsx" name="explicit Canvas semantic v2 foundation &gt; rejects unused-binding" time="0.00078445">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge-v2.test.tsx" name="explicit Canvas semantic v2 foundation &gt; rejects title" time="0.000601147">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge-v2.test.tsx" name="explicit Canvas semantic v2 foundation &gt; rejects empty-fields" time="0.000743058">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge-v2.test.tsx" name="explicit Canvas semantic v2 foundation &gt; rejects fields17" time="0.001061792">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge-v2.test.tsx" name="explicit Canvas semantic v2 foundation &gt; rejects path" time="0.000777586">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge-v2.test.tsx" name="explicit Canvas semantic v2 foundation &gt; rejects surrogate" time="0.000477965">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge-v2.test.tsx" name="explicit Canvas semantic v2 foundation &gt; rejects symbol" time="0.000520216">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge-v2.test.tsx" name="explicit Canvas semantic v2 foundation &gt; rejects getter" time="0.000580824">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge-v2.test.tsx" name="explicit Canvas semantic v2 foundation &gt; rejects inherited" time="0.000422667">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge-v2.test.tsx" name="explicit Canvas semantic v2 foundation &gt; rejects array-hole" time="0.000609956">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge-v2.test.tsx" name="explicit Canvas semantic v2 foundation &gt; rejects array-getter" time="0.0004516">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge-v2.test.tsx" name="explicit Canvas semantic v2 foundation &gt; enforces exact depth/count/field/text limits through cards" time="0.007840757">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/mcp-bridge.test.tsx" timestamp="2026-10-25T14:28:47.270Z" hostname="71cd163cf8ad" tests="12" failures="8" errors="0" skipped="0" time="0.079067851">
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; renders canonical package-local capability action.generated_echo without invoking it" time="0.038612314">
+            <failure message="[vitest] No &quot;useHostStyleVariables&quot; export is defined on the &quot;@modelcontextprotocol/ext-apps/react&quot; mock. Did you forget to return it from &quot;vi.mock&quot;?
+If you need to partially mock a module, you can use &quot;importOriginal&quot; helper inside:
+" type="Error">
+Error: [vitest] No &quot;useHostStyleVariables&quot; export is defined on the &quot;@modelcontextprotocol/ext-apps/react&quot; mock. Did you forget to return it from &quot;vi.mock&quot;?
+If you need to partially mock a module, you can use &quot;importOriginal&quot; helper inside:
+
+vi.mock(import(&quot;@modelcontextprotocol/ext-apps/react&quot;), async (importOriginal) =&gt; {
+  const actual = await importOriginal()
+  return {
+    ...actual,
+    // your mocked methods
+  }
+})
+
+ ❯ McpCanvasView src/McpCanvasView.tsx:317:5
+ ❯ Object.react_stack_bottom_frame ../../node_modules/react-dom/cjs/react-dom-client.development.js:25904:20
+ ❯ renderWithHooks ../../node_modules/react-dom/cjs/react-dom-client.development.js:7662:22
+ ❯ updateFunctionComponent ../../node_modules/react-dom/cjs/react-dom-client.development.js:10166:19
+ ❯ beginWork ../../node_modules/react-dom/cjs/react-dom-client.development.js:11778:18
+ ❯ runWithFiberInDEV ../../node_modules/react-dom/cjs/react-dom-client.development.js:874:13
+ ❯ performUnitOfWork ../../node_modules/react-dom/cjs/react-dom-client.development.js:17641:22
+ ❯ workLoopSync ../../node_modules/react-dom/cjs/react-dom-client.development.js:17469:41
+            </failure>
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; renders canonical package-local capability action.résumé without invoking it" time="0.004877623">
+            <failure message="[vitest] No &quot;useHostStyleVariables&quot; export is defined on the &quot;@modelcontextprotocol/ext-apps/react&quot; mock. Did you forget to return it from &quot;vi.mock&quot;?
+If you need to partially mock a module, you can use &quot;importOriginal&quot; helper inside:
+" type="Error">
+Error: [vitest] No &quot;useHostStyleVariables&quot; export is defined on the &quot;@modelcontextprotocol/ext-apps/react&quot; mock. Did you forget to return it from &quot;vi.mock&quot;?
+If you need to partially mock a module, you can use &quot;importOriginal&quot; helper inside:
+
+vi.mock(import(&quot;@modelcontextprotocol/ext-apps/react&quot;), async (importOriginal) =&gt; {
+  const actual = await importOriginal()
+  return {
+    ...actual,
+    // your mocked methods
+  }
+})
+
+ ❯ McpCanvasView src/McpCanvasView.tsx:317:5
+ ❯ Object.react_stack_bottom_frame ../../node_modules/react-dom/cjs/react-dom-client.development.js:25904:20
+ ❯ renderWithHooks ../../node_modules/react-dom/cjs/react-dom-client.development.js:7662:22
+ ❯ updateFunctionComponent ../../node_modules/react-dom/cjs/react-dom-client.development.js:10166:19
+ ❯ beginWork ../../node_modules/react-dom/cjs/react-dom-client.development.js:11778:18
+ ❯ runWithFiberInDEV ../../node_modules/react-dom/cjs/react-dom-client.development.js:874:13
+ ❯ performUnitOfWork ../../node_modules/react-dom/cjs/react-dom-client.development.js:17641:22
+ ❯ workLoopSync ../../node_modules/react-dom/cjs/react-dom-client.development.js:17469:41
+            </failure>
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; rejects invalid package-local capability &quot;&quot;" time="0.002382814">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; rejects invalid package-local capability &quot;é&quot;" time="0.000992472">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; rejects invalid package-local capability &quot;\ud800&quot;" time="0.000798831">
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; renders semantic state from tool-result metadata and stays read-only" time="0.003910796">
+            <failure message="[vitest] No &quot;useHostStyleVariables&quot; export is defined on the &quot;@modelcontextprotocol/ext-apps/react&quot; mock. Did you forget to return it from &quot;vi.mock&quot;?
+If you need to partially mock a module, you can use &quot;importOriginal&quot; helper inside:
+" type="Error">
+Error: [vitest] No &quot;useHostStyleVariables&quot; export is defined on the &quot;@modelcontextprotocol/ext-apps/react&quot; mock. Did you forget to return it from &quot;vi.mock&quot;?
+If you need to partially mock a module, you can use &quot;importOriginal&quot; helper inside:
+
+vi.mock(import(&quot;@modelcontextprotocol/ext-apps/react&quot;), async (importOriginal) =&gt; {
+  const actual = await importOriginal()
+  return {
+    ...actual,
+    // your mocked methods
+  }
+})
+
+ ❯ McpCanvasView src/McpCanvasView.tsx:317:5
+ ❯ Object.react_stack_bottom_frame ../../node_modules/react-dom/cjs/react-dom-client.development.js:25904:20
+ ❯ renderWithHooks ../../node_modules/react-dom/cjs/react-dom-client.development.js:7662:22
+ ❯ updateFunctionComponent ../../node_modules/react-dom/cjs/react-dom-client.development.js:10166:19
+ ❯ beginWork ../../node_modules/react-dom/cjs/react-dom-client.development.js:11778:18
+ ❯ runWithFiberInDEV ../../node_modules/react-dom/cjs/react-dom-client.development.js:874:13
+ ❯ performUnitOfWork ../../node_modules/react-dom/cjs/react-dom-client.development.js:17641:22
+ ❯ workLoopSync ../../node_modules/react-dom/cjs/react-dom-client.development.js:17469:41
+            </failure>
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; renders a preview reply without enabling its form" time="0.003319281">
+            <failure message="[vitest] No &quot;useHostStyleVariables&quot; export is defined on the &quot;@modelcontextprotocol/ext-apps/react&quot; mock. Did you forget to return it from &quot;vi.mock&quot;?
+If you need to partially mock a module, you can use &quot;importOriginal&quot; helper inside:
+" type="Error">
+Error: [vitest] No &quot;useHostStyleVariables&quot; export is defined on the &quot;@modelcontextprotocol/ext-apps/react&quot; mock. Did you forget to return it from &quot;vi.mock&quot;?
+If you need to partially mock a module, you can use &quot;importOriginal&quot; helper inside:
+
+vi.mock(import(&quot;@modelcontextprotocol/ext-apps/react&quot;), async (importOriginal) =&gt; {
+  const actual = await importOriginal()
+  return {
+    ...actual,
+    // your mocked methods
+  }
+})
+
+ ❯ McpCanvasView src/McpCanvasView.tsx:317:5
+ ❯ Object.react_stack_bottom_frame ../../node_modules/react-dom/cjs/react-dom-client.development.js:25904:20
+ ❯ renderWithHooks ../../node_modules/react-dom/cjs/react-dom-client.development.js:7662:22
+ ❯ updateFunctionComponent ../../node_modules/react-dom/cjs/react-dom-client.development.js:10166:19
+ ❯ beginWork ../../node_modules/react-dom/cjs/react-dom-client.development.js:11778:18
+ ❯ runWithFiberInDEV ../../node_modules/react-dom/cjs/react-dom-client.development.js:874:13
+ ❯ performUnitOfWork ../../node_modules/react-dom/cjs/react-dom-client.development.js:17641:22
+ ❯ workLoopSync ../../node_modules/react-dom/cjs/react-dom-client.development.js:17469:41
+            </failure>
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; remounts view state when the immutable app revision changes" time="0.003265393">
+            <failure message="[vitest] No &quot;useHostStyleVariables&quot; export is defined on the &quot;@modelcontextprotocol/ext-apps/react&quot; mock. Did you forget to return it from &quot;vi.mock&quot;?
+If you need to partially mock a module, you can use &quot;importOriginal&quot; helper inside:
+" type="Error">
+Error: [vitest] No &quot;useHostStyleVariables&quot; export is defined on the &quot;@modelcontextprotocol/ext-apps/react&quot; mock. Did you forget to return it from &quot;vi.mock&quot;?
+If you need to partially mock a module, you can use &quot;importOriginal&quot; helper inside:
+
+vi.mock(import(&quot;@modelcontextprotocol/ext-apps/react&quot;), async (importOriginal) =&gt; {
+  const actual = await importOriginal()
+  return {
+    ...actual,
+    // your mocked methods
+  }
+})
+
+ ❯ McpCanvasView src/McpCanvasView.tsx:317:5
+ ❯ Object.react_stack_bottom_frame ../../node_modules/react-dom/cjs/react-dom-client.development.js:25904:20
+ ❯ renderWithHooks ../../node_modules/react-dom/cjs/react-dom-client.development.js:7662:22
+ ❯ updateFunctionComponent ../../node_modules/react-dom/cjs/react-dom-client.development.js:10166:19
+ ❯ beginWork ../../node_modules/react-dom/cjs/react-dom-client.development.js:11778:18
+ ❯ runWithFiberInDEV ../../node_modules/react-dom/cjs/react-dom-client.development.js:874:13
+ ❯ performUnitOfWork ../../node_modules/react-dom/cjs/react-dom-client.development.js:17641:22
+ ❯ workLoopSync ../../node_modules/react-dom/cjs/react-dom-client.development.js:17469:41
+            </failure>
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; respects the app audience projection without exposing hidden details" time="0.00462905">
+            <failure message="[vitest] No &quot;useHostStyleVariables&quot; export is defined on the &quot;@modelcontextprotocol/ext-apps/react&quot; mock. Did you forget to return it from &quot;vi.mock&quot;?
+If you need to partially mock a module, you can use &quot;importOriginal&quot; helper inside:
+" type="Error">
+Error: [vitest] No &quot;useHostStyleVariables&quot; export is defined on the &quot;@modelcontextprotocol/ext-apps/react&quot; mock. Did you forget to return it from &quot;vi.mock&quot;?
+If you need to partially mock a module, you can use &quot;importOriginal&quot; helper inside:
+
+vi.mock(import(&quot;@modelcontextprotocol/ext-apps/react&quot;), async (importOriginal) =&gt; {
+  const actual = await importOriginal()
+  return {
+    ...actual,
+    // your mocked methods
+  }
+})
+
+ ❯ McpCanvasView src/McpCanvasView.tsx:317:5
+ ❯ Object.react_stack_bottom_frame ../../node_modules/react-dom/cjs/react-dom-client.development.js:25904:20
+ ❯ renderWithHooks ../../node_modules/react-dom/cjs/react-dom-client.development.js:7662:22
+ ❯ updateFunctionComponent ../../node_modules/react-dom/cjs/react-dom-client.development.js:10166:19
+ ❯ beginWork ../../node_modules/react-dom/cjs/react-dom-client.development.js:11778:18
+ ❯ runWithFiberInDEV ../../node_modules/react-dom/cjs/react-dom-client.development.js:874:13
+ ❯ performUnitOfWork ../../node_modules/react-dom/cjs/react-dom-client.development.js:17641:22
+ ❯ workLoopSync ../../node_modules/react-dom/cjs/react-dom-client.development.js:17469:41
+            </failure>
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; preserves the query fixture adapter and explicit query submission" time="0.006692676">
+            <failure message="[vitest] No &quot;useHostStyleVariables&quot; export is defined on the &quot;@modelcontextprotocol/ext-apps/react&quot; mock. Did you forget to return it from &quot;vi.mock&quot;?
+If you need to partially mock a module, you can use &quot;importOriginal&quot; helper inside:
+" type="Error">
+Error: [vitest] No &quot;useHostStyleVariables&quot; export is defined on the &quot;@modelcontextprotocol/ext-apps/react&quot; mock. Did you forget to return it from &quot;vi.mock&quot;?
+If you need to partially mock a module, you can use &quot;importOriginal&quot; helper inside:
+
+vi.mock(import(&quot;@modelcontextprotocol/ext-apps/react&quot;), async (importOriginal) =&gt; {
+  const actual = await importOriginal()
+  return {
+    ...actual,
+    // your mocked methods
+  }
+})
+
+ ❯ McpCanvasView src/McpCanvasView.tsx:317:5
+ ❯ Object.react_stack_bottom_frame ../../node_modules/react-dom/cjs/react-dom-client.development.js:25904:20
+ ❯ renderWithHooks ../../node_modules/react-dom/cjs/react-dom-client.development.js:7662:22
+ ❯ updateFunctionComponent ../../node_modules/react-dom/cjs/react-dom-client.development.js:10166:19
+ ❯ beginWork ../../node_modules/react-dom/cjs/react-dom-client.development.js:11778:18
+ ❯ runWithFiberInDEV ../../node_modules/react-dom/cjs/react-dom-client.development.js:874:13
+ ❯ performUnitOfWork ../../node_modules/react-dom/cjs/react-dom-client.development.js:17641:22
+ ❯ workLoopSync ../../node_modules/react-dom/cjs/react-dom-client.development.js:17469:41
+            </failure>
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; preserves invoice metadata rendering without querying on open" time="0.002816705">
+            <failure message="[vitest] No &quot;useHostStyleVariables&quot; export is defined on the &quot;@modelcontextprotocol/ext-apps/react&quot; mock. Did you forget to return it from &quot;vi.mock&quot;?
+If you need to partially mock a module, you can use &quot;importOriginal&quot; helper inside:
+" type="Error">
+Error: [vitest] No &quot;useHostStyleVariables&quot; export is defined on the &quot;@modelcontextprotocol/ext-apps/react&quot; mock. Did you forget to return it from &quot;vi.mock&quot;?
+If you need to partially mock a module, you can use &quot;importOriginal&quot; helper inside:
+
+vi.mock(import(&quot;@modelcontextprotocol/ext-apps/react&quot;), async (importOriginal) =&gt; {
+  const actual = await importOriginal()
+  return {
+    ...actual,
+    // your mocked methods
+  }
+})
+
+ ❯ McpCanvasView src/McpCanvasView.tsx:317:5
+ ❯ Object.react_stack_bottom_frame ../../node_modules/react-dom/cjs/react-dom-client.development.js:25904:20
+ ❯ renderWithHooks ../../node_modules/react-dom/cjs/react-dom-client.development.js:7662:22
+ ❯ updateFunctionComponent ../../node_modules/react-dom/cjs/react-dom-client.development.js:10166:19
+ ❯ beginWork ../../node_modules/react-dom/cjs/react-dom-client.development.js:11778:18
+ ❯ runWithFiberInDEV ../../node_modules/react-dom/cjs/react-dom-client.development.js:874:13
+ ❯ performUnitOfWork ../../node_modules/react-dom/cjs/react-dom-client.development.js:17641:22
+ ❯ workLoopSync ../../node_modules/react-dom/cjs/react-dom-client.development.js:17469:41
+            </failure>
+        </testcase>
+        <testcase classname="src/semantic-renderer/mcp-bridge.test.tsx" name="official MCP Canvas bridge &gt; rejects malformed schema and binding scope before rendering" time="0.002085857">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/semantic-components.test.tsx" timestamp="2026-10-25T14:28:47.278Z" hostname="71cd163cf8ad" tests="16" failures="0" errors="0" skipped="0" time="1.733236858">
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; exports semantic components and the renderer" time="0.001932612">
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; renders the canonical PR330 fixture through injected adapters" time="0.196502008">
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; renders the title and revision as text, not markup" time="0.048560862">
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; hides every detail, including title and revision, for empty visibility" time="0.006593937">
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; does not expose app-only content to the model viewer" time="0.006194663">
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; treats an untouched required constructor field as empty and never dispatches" time="0.379612682">
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; treats an untouched required toString field as empty and never dispatches" time="0.299140717">
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; dispatches fixture integer and boolean fields as number and boolean" time="0.350998479">
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; validates required booleans and rejects non-integer input" time="0.14523404">
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; resets inputs and ignores a deferred response when capability scope changes" time="0.183605478">
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; rejects malformed specs and duplicate form fields before rendering controls" time="0.019904644">
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; does not resolve any binding when the spec hides all audiences" time="0.00982727">
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; projects status, opens artifacts through the typed adapter, and keeps preview inert" time="0.035484693">
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; names the keyboard-accessible results region from its table caption" time="0.01482068">
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; names results without a caption and announces empty results" time="0.006044858">
+        </testcase>
+        <testcase classname="src/semantic-renderer/semantic-components.test.tsx" name="semantic Canvas components &gt; treats table row and column data as own-property text" time="0.025160621">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/v2-presentations.test.tsx" timestamp="2026-10-25T14:28:47.280Z" hostname="71cd163cf8ad" tests="7" failures="0" errors="0" skipped="0" time="0.201942861">
+        <testcase classname="src/semantic-renderer/v2-presentations.test.tsx" name="renders a bar chart with equivalent accessible values" time="0.122309634">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-presentations.test.tsx" name="renders a line chart with equivalent accessible values" time="0.039485406">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-presentations.test.tsx" name="does not silently truncate an oversized chart" time="0.005815893">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-presentations.test.tsx" name="renders log snapshots in source order as plain text without a live history" time="0.013150898">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-presentations.test.tsx" name="rejects oversized log snapshots instead of showing a partial history" time="0.004909194">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-presentations.test.tsx" name="preserves scalar inspector values without interpreting markup" time="0.009309746">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-presentations.test.tsx" name="refuses oversized inspector projections" time="0.003971068">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/v2-projections.test.tsx" timestamp="2026-10-25T14:28:47.281Z" hostname="71cd163cf8ad" tests="34" failures="0" errors="0" skipped="0" time="1.174733892">
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="renders all data nodes from a current projection without dispatch or artifact effects" time="0.187775067">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="distinguishes the { state: &apos;not-run&apos;, bindingId: &apos;data&apos; } snapshot from successful output" time="0.017803212">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="distinguishes the { state: &apos;loading&apos;, bindingId: &apos;data&apos;, requestId: &apos;request-current&apos; } snapshot from successful output" time="0.02612388">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="distinguishes the { state: &apos;error&apos;, bindingId: &apos;data&apos;, message: &apos;Unavailable&apos;, requestId: &apos;request-current&apos; } snapshot from successful output" time="0.010557702">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="shows admitted empty output distinctly from missing or loading output" time="0.010644146">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="does not inspect private projections in the preview view" time="0.011736673">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="does not inspect private projections in the model view" time="0.005797357">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="drops prior rendered data when the host replaces its current request snapshot" time="0.073026791">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="fails closed when the local projection getter refuses access" time="0.018100922">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="shows unavailable results when the host has no projection getter" time="0.009401194">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="reads bounded canonical output rather than a divergent parsed-data property" time="0.027960241">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses malformed or unsupported chart values without a partial chart: {&quot;rows&quot;:[{&quot;label&quot;:&quot;value&quot;,&quot;value&quot;:9007199254740992}]}" time="0.043847962">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses malformed or unsupported chart values without a partial chart: {&quot;rows&quot;:[{&quot;label&quot;:&quot;value&quot;,&quot;value&quot;:1e309}]}" time="0.014598988">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses malformed or unsupported chart values without a partial chart: {&quot;rows&quot;:[{&quot;label&quot;:&quot;value&quot;,&quot;value&quot;:-0}]}" time="0.006542838">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses malformed or unsupported chart values without a partial chart: {&quot;rows&quot;:[{&quot;label&quot;:&quot;e\u0301&quot;,&quot;value&quot;:1}]}" time="0.008201831">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses malformed or unsupported chart values without a partial chart: {&quot;rows&quot;:[{&quot;label&quot;:&quot;\ud800&quot;,&quot;value&quot;:1}]}" time="0.00735915">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses malformed or unsupported chart values without a partial chart: {&quot;rows&quot;:[{&quot;value&quot;:1}]}" time="0.00464072">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses malformed or unsupported chart values without a partial chart: {&quot;rows&quot;:[{&quot;label&quot;:&quot;value&quot;,&quot;value&quot;:null}]}" time="0.007371735">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses malformed or unsupported chart values without a partial chart: {&quot;rows&quot;:{}}" time="0.005228532">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses malformed or unsupported chart values without a partial chart: {invalid-json" time="0.028951216">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="enforces the 200-row chart boundary without truncation" time="0.265187453">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="enforces the 201-row chart boundary without truncation" time="0.005921027">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="bounds chart labels by Unicode code points at 256" time="0.014619291">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="bounds chart labels by Unicode code points at 257" time="0.004041268">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="enforces the 500-entry log boundary" time="0.272002255">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="enforces the 501-entry log boundary" time="0.009541745">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="enforces the 1024-code-point log message boundary" time="0.005165755">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="enforces the 1025-code-point log message boundary" time="0.02379063">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="bounds inspector scalar text at 4096 code points" time="0.011063364">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="bounds inspector scalar text at 4097 code points" time="0.005276231">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses absent or nonscalar declared inspector fields: {&quot;details&quot;:{}}" time="0.010084548">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="refuses absent or nonscalar declared inspector fields: {&quot;details&quot;:{&quot;name&quot;:{&quot;nested&quot;:&quot;unsupported&quot;}}}" time="0.007802657">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="measures the exact canonical UTF-8 byte budget at 65536 bytes" time="0.006546694">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-projections.test.tsx" name="measures the exact canonical UTF-8 byte budget at 65537 bytes" time="0.004253014">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/semantic-renderer/v2-structure.test.tsx" timestamp="2026-10-25T14:28:47.287Z" hostname="71cd163cf8ad" tests="2" failures="0" errors="0" skipped="0" time="0.131339608">
+        <testcase classname="src/semantic-renderer/v2-structure.test.tsx" name="composes a v2 card with existing nodes without invoking adapters" time="0.10623498">
+        </testcase>
+        <testcase classname="src/semantic-renderer/v2-structure.test.tsx" name="keeps admitted data nodes visible with an explicit unavailable state before the host projection join" time="0.021497192">
+        </testcase>
+    </testsuite>
+</testsuites>

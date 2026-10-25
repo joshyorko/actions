@@ -1,0 +1,14 @@
+{
+  "scope": "source unit/controller only; root adapter/routing and installed browser acceptance pending",
+  "passed": 25,
+  "failed": 0,
+  "skipped": 0,
+  "checks": [
+    "ESLint",
+    "strict tsc",
+    "Prettier"
+  ],
+  "cross_language": "4 exact Python canonicalize_json fixture pairs verified against installed a39",
+  "prior_failures": "first test launcher config import unresolved (no tests run); initial ESLint TextEncoder global no-undef corrected to globalThis.TextEncoder; prior logs retained",
+  "upstream_disposition": "none"
+}

@@ -1377,3 +1377,10 @@ Sole integration writer remains the fresh-container owner on the existing releas
 D's dual SBOM evidence contract preserves and validates the raw declaration graph separately from the active selected-profile graph, explains all inactive edges and retains the strict-active failure. It does not claim runtime reachability, signing or publication. New D source slices still require root integration and exact combined-source qualification. B's installed Knowledge continuation and A's v2 renderer remain distinct lanes; no full gate is inferred from their partial receipts.
 
 The pinned Dakota prompt is under recovery-a39/dakota-handoff. Authenticated loopback is the conditional preferred path; local actual-client/platform/secret-delivery/Executor isolation checks remain operator preflight. Remote tunnel/OAuth is unqualified. No local task was dispatched and no READY announcement, celld approval, public release or full campaign completion is claimed.
+
+
+### a41 source convergence: Canvas v2 and authorized generated data
+
+A's reviewed v2 renderer/theme pair9063b271+107db623 is joined with the shared explicit v2 contract and root app-only projection wiring. Root gates:422selected Python tests across app routes/input/output/projection on SQLite and ownedPostgreSQL, allpass;172Canvaspass/1explicitinterchangeskip; frontendquality/TypeScript and scopedPythonmypy/lintpass. Original projection receipt-race failures and correction are preserved. Runtime declaration advances toa41, Core staysa5. This source checkpoint is not yet clean installed/browser acceptance.
+
+The pending next gate uses exact newly built wheels plusCorea5 compilerbyteproof, publicfreshCanvas authoring, actualRCC/rendereddata/artifact and same-state restart. Earliera39installedproof and Dakota handoff stay pinned; they are not reclassified as this candidate. Robotadmission/helperpatch, canonicalRobotexecution, BKnowledgecontinuation, DSBOM/native/owneddependencyclosure and fullowner gates remain open. No scope is dropped.

@@ -38,6 +38,7 @@ APP_TOOLS = frozenset(
         "canvas_get_state",
         "canvas_execution_status",
         "canvas_cancel",
+        "canvas_projection",
         "canvas_artifact",
     }
 )
@@ -55,6 +56,7 @@ _READ_ONLY = frozenset(
         "canvas_get_state",
         "canvas_execution_status",
         "canvas_artifact",
+        "canvas_projection",
     }
 )
 _JSON = TypeAdapter(dict[str, JsonValue])
@@ -136,6 +138,7 @@ class CanvasReply:
     artifact: dict[str, JsonValue] | None = None
     app_binding: str | None = None
     generic_interaction: dict[str, JsonValue] | None = None
+    projection: dict[str, JsonValue] | None = None
 
 
 class CanvasPort(Protocol):
@@ -314,6 +317,7 @@ class CanvasMcp:
                 ("actions.genericExecution", reply.generic_interaction),
                 ("actions.execution", reply.execution),
                 ("actions.artifact", reply.artifact),
+                ("actions.projection", reply.projection),
             ):
                 if value is not None:
                     meta[key] = _object(value, 256 * 1024)

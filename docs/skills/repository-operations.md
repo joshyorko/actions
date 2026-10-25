@@ -6166,3 +6166,11 @@ Wheel inventory qualification hashes and parses one bounded immutable byte snaps
 Candidate consistency tests compare installed Runtime/Core distributions with their authoritative pyproject declarations rather than stale alpha literals; retain explicit release-line, numeric tuple and installed-origin assertions. The Work Items candidate and frozen published-floor/RCC controls remain independently pinned. A source bump without refreshed installed dependencies must still fail these checks.
 
 For the frozen a39 ordinary installed MCP endpoint, missing/wrong bearer returns403, authenticated foreignHost421 and authenticated foreignOrigin403; correct bearer initializes successfully. Assert denial, not a guessed401 status. Validate Host/Origin with a valid bearer so an earlier auth rejection cannot make those checks vacuous. Exact installed-wheel member checks and graceful owned-server cleanup accompany the retained Dakota gate.
+
+### Current generated-result projections
+
+Canvas v2 data views use app-only `canvas_projection`, selecting the unique sealed generated-action-result.json attached to the successful current Run/Attempt and its generated receipt. Apply existing actions-canonical-json/v1 portability rules and bound both raw and canonical UTF-8 to65,536bytes. Execution metadata, logs/XML and arbitrary first outputs are not generated data. Card is structural; chart/log/inspector consume the authorized projection.
+
+Capture the complete terminal SQL preimage inside the same transaction that validates the generated receipt; compare it before and after sealed-result reading. A new snapshot taken after validation leaves a gap. The callback rechecks active app/binding, association and existing read/artifact grants using SQL only. The existing output resolver's provider acquisition under its grant lock is unchanged; stream reads occur outside.
+
+Capture frontend request generation before awaiting each call and invalidate only that captured generation. New submission/current denial clears data; late success or denial cannot overwrite newer state. Only completed execution loads separate projection data, and construction/getters are inert. Source/controller tests and synthetic renderer screenshots do not establish clean installed-host acceptance.

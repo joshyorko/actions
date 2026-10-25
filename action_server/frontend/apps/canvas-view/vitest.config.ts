@@ -11,7 +11,7 @@ export default defineConfig({
     test: {
         environment: "jsdom",
         globals: true,
-        include: ["src/**/*.test.tsx"],
+        include: ["src/**/*.test.tsx", "src/**/*.test.ts"],
         setupFiles: [path.join(frontendRoot, "__tests__/a11y/setup.ts")],
     },
 });

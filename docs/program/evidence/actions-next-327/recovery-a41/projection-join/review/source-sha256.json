@@ -1,0 +1,10 @@
+{
+  "action_server/src/actions/server/foundry/generic_projection.py": "df2a98225fa62d02e45836c9d021185889ab834834ca0965f2b09a04c2559596",
+  "action_server/src/actions/server/foundry/generic_view.py": "defb32e3d078dcdd5e23c1e545d5e2ef5c19250801099513a35b50ee0b428d4f",
+  "action_server/src/actions/server/foundry/mcp.py": "9410f44a24d836e9edc350e625c699b2375194c4a0ef8ca8ed90d2b2e81ae49f",
+  "action_server/frontend/apps/canvas-view/src/semantic-renderer/generic-execution.ts": "35e3611ec387426c34ed49c75dc16d3f91d9ed76619fb7c11c13b197e3a8ac0d",
+  "action_server/frontend/apps/canvas-view/src/semantic-renderer/generic-view.tsx": "37f9ca892be37926c825b0d8abb860990147d6083f7a1c7c6df0bf1afc0858b7",
+  "action_server/frontend/apps/canvas-view/src/semantic-renderer/generated-projection.ts": "ff728748869d3249397691e91f96f1c529d14934c78ffdd95270194257f3aa9e",
+  "action_server/frontend/apps/canvas-view/src/semantic-renderer/generic-projection-join.test.ts": "72b9173e149584f6d9004cf2499a583bb94c91c0c24c5f516cc6765f4c99c1fc",
+  "action_server/tests/action_server_tests/test_generic_projection_route.py": "2f6aa3406c690413563078e66dea0afe633867a4fa7f79637aefa0a45f91e403"
+}

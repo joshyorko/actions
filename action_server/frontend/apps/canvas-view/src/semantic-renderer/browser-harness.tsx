@@ -10,6 +10,15 @@ import {
     SemanticTable,
 } from "./index";
 import type { CapabilityDispatcher } from "./index";
+import type { CanvasNode } from "./types";
+import { parseCanvasSpec, readOnlyCanvasAdapters } from "./mcp-bridge";
+import {
+    SemanticCard,
+    SemanticChart,
+    SemanticLog,
+    SemanticInspector,
+    SemanticCanvasRenderer,
+} from "./components";
 
 interface SearchInput {
     query: string;
@@ -29,6 +38,100 @@ const scenario = new window.URLSearchParams(window.location.search).get(
 function ComponentHarness() {
     const completePending = useRef<(() => void) | undefined>(undefined);
     const [dispatchCount, setDispatchCount] = useState(0);
+    if (scenario === "v2-nesting") {
+        let root: CanvasNode = {
+            type: "text",
+            id: "leaf",
+            text: "Deepest content remains readable.",
+        };
+        for (let level = 7; level >= 1; level -= 1) {
+            root = {
+                type: "card",
+                id: `card${level}`,
+                title: `Level ${level} ${"X".repeat(128)}`,
+                children: [root],
+            };
+        }
+        const spec = parseCanvasSpec({
+            schemaVersion: "actions.canvas-spec/v2",
+            title: "Nested cards",
+            visibility: ["app"],
+            bindingIds: [],
+            root,
+        });
+        return (
+            <SemanticCanvasRenderer
+                spec={spec}
+                revision="nesting-harness"
+                scopeKey="synthetic:nesting"
+                viewer="app"
+                preview
+                adapters={readOnlyCanvasAdapters}
+            />
+        );
+    }
+    if (scenario === "v2-presentation") {
+        return (
+            <>
+                <p className="semantic-harness-label">
+                    Component harness · admitted synthetic values · not
+                    Runtime-hosted or ChatGPT E1
+                </p>
+                <SemanticCanvas
+                    title="Operations overview"
+                    revision="v2-presentation-harness"
+                    visibility={["app"]}
+                    viewer="app"
+                    preview={false}
+                >
+                    <SemanticCard title="Daily activity">
+                        <SemanticChart
+                            title="Processed items"
+                            chartType="bar"
+                            points={[
+                                { label: "Monday", value: 12 },
+                                { label: "Tuesday", value: 24 },
+                                { label: "Wednesday", value: 18 },
+                            ]}
+                        />
+                        <SemanticChart
+                            title="Queue changes"
+                            chartType="line"
+                            points={[
+                                { label: "Monday", value: 4 },
+                                { label: "Tuesday", value: -2 },
+                                { label: "Wednesday", value: 0 },
+                            ]}
+                        />
+                        <SemanticLog
+                            title="Run messages"
+                            messages={Array.from(
+                                { length: 40 },
+                                (_, index) =>
+                                    `Message ${index + 1}: synthetic retained event`,
+                            )}
+                        />
+                        <SemanticInspector
+                            title="Selected record"
+                            fields={[
+                                {
+                                    key: "id",
+                                    label: "Identifier",
+                                    value: "record-" + "a".repeat(120),
+                                },
+                                {
+                                    key: "enabled",
+                                    label: "Enabled",
+                                    value: false,
+                                },
+                                { key: "count", label: "Count", value: 0 },
+                            ]}
+                        />
+                    </SemanticCard>
+                </SemanticCanvas>
+            </>
+        );
+    }
     const dispatch: CapabilityDispatcher<
         "search",
         SearchInput,

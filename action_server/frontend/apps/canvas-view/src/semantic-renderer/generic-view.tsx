@@ -32,8 +32,9 @@ export function GenericSemanticView({
                 context,
                 () => update((n) => n + 1),
                 (text, bindingId) => setArtifact({ text, bindingId }),
+                canvas.spec.schemaVersion === "actions.canvas-spec/v2",
             ),
-        [app, context],
+        [app, context, canvas.spec.schemaVersion],
     );
     const act = async (
         id: string,

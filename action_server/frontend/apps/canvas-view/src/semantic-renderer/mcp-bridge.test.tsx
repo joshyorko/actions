@@ -17,6 +17,7 @@ vi.mock("@modelcontextprotocol/ext-apps/react", () => {
     };
 
     return {
+        useHostStyleVariables: vi.fn(),
         useApp: (options: { onAppCreated: (app: unknown) => void }) => {
             options.onAppCreated(app);
             return { app, isConnected: true, error: null };

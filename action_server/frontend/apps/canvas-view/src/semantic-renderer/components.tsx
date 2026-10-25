@@ -3,6 +3,7 @@ import type { FormEvent, ReactNode } from "react";
 
 import "./semantic-renderer.css";
 import { createCapabilityRef } from "./types";
+import { parseCanvasSpec } from "./mcp-bridge";
 import type {
     CanvasNode,
     CanvasSpecDocument,
@@ -15,6 +16,10 @@ import type {
     SemanticFormField,
     SemanticFormInput,
     SemanticRendererAdapters,
+    SemanticChartNode,
+    SemanticLogNode,
+    SemanticInspectorNode,
+    SemanticProjectionState,
 } from "./types";
 
 const SAFE_STATUS_MESSAGE_CODE_POINTS = 500;
@@ -570,63 +575,381 @@ function SemanticArtifact({
     );
 }
 
-function isSupportedNode(node: unknown): node is CanvasNode {
-    if (!isRecord(node) || typeof node.id !== "string") return false;
-    switch (node.type) {
-        case "stack":
-            return (
-                Array.isArray(node.children) &&
-                node.children.every(isSupportedNode)
-            );
-        case "text":
-            return typeof node.text === "string";
-        case "form":
-            return (
-                typeof node.bindingId === "string" &&
-                typeof node.submitLabel === "string" &&
-                Array.isArray(node.fields) &&
-                node.fields.every(isValidField)
-            );
-        case "table":
-            return (
-                typeof node.bindingId === "string" &&
-                typeof node.rowsKey === "string" &&
-                Array.isArray(node.columns) &&
-                node.columns.length > 0 &&
-                node.columns.every(
-                    (column) =>
-                        isRecord(column) &&
-                        typeof column.key === "string" &&
-                        column.key.length > 0 &&
-                        typeof column.label === "string" &&
-                        column.label.length > 0,
-                )
-            );
-        case "status":
-            return typeof node.bindingId === "string";
-        case "artifact":
-            return (
-                typeof node.bindingId === "string" &&
-                typeof node.label === "string"
-            );
-        default:
-            return false;
+function isRenderableSpec(spec: unknown): spec is CanvasSpecDocument {
+    try {
+        parseCanvasSpec(spec);
+        return true;
+    } catch {
+        return false;
     }
 }
 
-function isRenderableSpec(spec: unknown): spec is CanvasSpecDocument {
+export function SemanticCard({
+    title,
+    children,
+}: {
+    title: string;
+    children: ReactNode;
+}) {
+    const titleId = useId();
     return (
-        isRecord(spec) &&
-        spec.schemaVersion === "actions.canvas-spec/v1" &&
-        typeof spec.title === "string" &&
-        Array.isArray(spec.visibility) &&
-        spec.visibility.every(
-            (audience) => audience === "app" || audience === "model",
-        ) &&
-        Array.isArray(spec.bindingIds) &&
-        spec.bindingIds.every((bindingId) => typeof bindingId === "string") &&
-        isSupportedNode(spec.root)
+        <section
+            className="semantic-panel semantic-card"
+            aria-labelledby={titleId}
+        >
+            <h2 id={titleId}>{title}</h2>
+            <div className="semantic-stack">{children}</div>
+        </section>
     );
+}
+
+/** Presentation only: the host projection boundary admits and scopes these values. */
+export function SemanticChart({
+    title,
+    chartType,
+    points,
+}: {
+    title: string;
+    chartType: SemanticChartNode["chartType"];
+    points: readonly { label: string; value: number }[];
+}) {
+    const titleId = useId();
+    const descriptionId = useId();
+    if (points.length > 200)
+        return (
+            <SemanticCard title={title}>
+                <SemanticStatus
+                    state="error"
+                    message="This chart exceeds the display limit."
+                />
+            </SemanticCard>
+        );
+    if (points.length === 0)
+        return (
+            <SemanticCard title={title}>
+                <SemanticStatus state="empty" message="No chart data." />
+            </SemanticCard>
+        );
+    // Normalize before subtracting: finite values near opposite numeric limits
+    // must not overflow the axis range to Infinity.
+    const magnitude = Math.max(
+        1,
+        ...points.map((point) => Math.abs(point.value)),
+    );
+    const values = points.map((point) => point.value / magnitude);
+    const lower = Math.min(0, ...values);
+    const upper = Math.max(0, ...values);
+    const range = upper - lower || 1;
+    const x = (index: number) => 40 + (index + 0.5) * (560 / points.length);
+    const y = (value: number) => 200 - ((value - lower) / range) * 160;
+    const baseline = y(0);
+    return (
+        <section
+            className="semantic-panel semantic-chart"
+            aria-labelledby={titleId}
+        >
+            <h2 id={titleId}>{title}</h2>
+            <svg
+                viewBox="0 0 640 240"
+                role="img"
+                aria-labelledby={titleId}
+                aria-describedby={descriptionId}
+            >
+                <desc id={descriptionId}>
+                    {chartType === "bar" ? "Bar" : "Line"} chart. All values and
+                    labels are available in the table below.
+                </desc>
+                <line
+                    x1="40"
+                    x2="600"
+                    y1={baseline}
+                    y2={baseline}
+                    className="semantic-chart__axis"
+                />
+                {chartType === "bar" ? (
+                    values.map((value, index) => (
+                        <rect
+                            key={index}
+                            x={
+                                x(index) -
+                                Math.max(1, 560 / points.length - 4) / 2
+                            }
+                            y={Math.min(y(value), baseline)}
+                            width={Math.max(1, 560 / points.length - 4)}
+                            height={Math.abs(y(value) - baseline)}
+                        />
+                    ))
+                ) : (
+                    <>
+                        <polyline
+                            points={values
+                                .map(
+                                    (value, index) => `${x(index)},${y(value)}`,
+                                )
+                                .join(" ")}
+                            className="semantic-chart__line"
+                        />
+                        {values.map((value, index) => (
+                            <circle
+                                key={index}
+                                cx={x(index)}
+                                cy={y(value)}
+                                r="3"
+                            />
+                        ))}
+                    </>
+                )}
+            </svg>
+            <SemanticTable
+                caption={`${title} data`}
+                columns={[
+                    { key: "label", label: "Label" },
+                    { key: "value", label: "Value" },
+                ]}
+                rows={points.map((point) => ({
+                    label: point.label,
+                    value: point.value,
+                }))}
+            />
+        </section>
+    );
+}
+
+/** A bounded snapshot, not a streaming subscription or live log announcement. */
+export function SemanticLog({
+    title,
+    messages,
+}: {
+    title: string;
+    messages: readonly string[];
+}) {
+    const titleId = useId();
+    if (messages.length > 500)
+        return (
+            <SemanticCard title={title}>
+                <SemanticStatus
+                    state="error"
+                    message="This log exceeds the display limit."
+                />
+            </SemanticCard>
+        );
+    return (
+        <section
+            className="semantic-panel semantic-log"
+            aria-labelledby={titleId}
+        >
+            <h2 id={titleId}>{title}</h2>
+            {messages.length === 0 ? (
+                <SemanticStatus state="empty" message="No log entries." />
+            ) : (
+                <div
+                    className="semantic-log__scroll"
+                    role="region"
+                    aria-label={`${title} entries`}
+                    tabIndex={0}
+                >
+                    <ol>
+                        {messages.map((message, index) => (
+                            <li key={index}>{message}</li>
+                        ))}
+                    </ol>
+                </div>
+            )}
+        </section>
+    );
+}
+
+/** Receives only fields explicitly selected by the host's validated projection. */
+export function SemanticInspector({
+    title,
+    fields,
+}: {
+    title: string;
+    fields: readonly {
+        key: string;
+        label: string;
+        value: string | number | boolean | null;
+    }[];
+}) {
+    const titleId = useId();
+    if (fields.length > 16)
+        return (
+            <SemanticCard title={title}>
+                <SemanticStatus
+                    state="error"
+                    message="This inspector exceeds the display limit."
+                />
+            </SemanticCard>
+        );
+    return (
+        <section
+            className="semantic-panel semantic-inspector"
+            aria-labelledby={titleId}
+        >
+            <h2 id={titleId}>{title}</h2>
+            {fields.length === 0 ? (
+                <SemanticStatus state="empty" message="No fields to inspect." />
+            ) : (
+                <dl>
+                    {fields.map((field) => (
+                        <div key={field.key}>
+                            <dt>{field.label}</dt>
+                            <dd>
+                                {field.value === null
+                                    ? "null"
+                                    : field.value === ""
+                                      ? '""'
+                                      : String(field.value)}
+                            </dd>
+                        </div>
+                    ))}
+                </dl>
+            )}
+        </section>
+    );
+}
+
+type ProjectedNode =
+    | SemanticChartNode
+    | SemanticLogNode
+    | SemanticInspectorNode;
+
+function isProjectionText(value: unknown, limit: number): value is string {
+    return (
+        typeof value === "string" &&
+        value === value.normalize("NFC") &&
+        Array.from(value).length <= limit &&
+        !Array.from(value).some((character) => {
+            const code = character.codePointAt(0)!;
+            return code >= 0xd800 && code <= 0xdfff;
+        })
+    );
+}
+
+function isProjectionNumber(value: unknown): value is number {
+    return (
+        typeof value === "number" &&
+        Number.isFinite(value) &&
+        (!Number.isInteger(value) || Number.isSafeInteger(value)) &&
+        !Object.is(value, -0)
+    );
+}
+
+function isProjectionRecord(value: unknown): value is Record<string, unknown> {
+    return (
+        isRecord(value) &&
+        (Object.getPrototypeOf(value) === Object.prototype ||
+            Object.getPrototypeOf(value) === null)
+    );
+}
+
+/** Consume only the trusted host's current projection; dispatch replies are never data. */
+function SemanticProjectedResult({
+    node,
+    projection,
+}: {
+    node: ProjectedNode;
+    projection: SemanticProjectionState | undefined;
+}) {
+    const notice = (state: SemanticBindingStatus["state"], message: string) => (
+        <SemanticCard title={node.title}>
+            <SemanticStatus state={state} message={message} />
+        </SemanticCard>
+    );
+    if (!projection) return notice("error", "Result data is unavailable.");
+    if (projection.state === "not-run")
+        return notice("empty", "Run this action to load results.");
+    if (projection.state === "loading")
+        return notice("loading", "Loading results…");
+    if (projection.state === "error")
+        return notice(
+            "error",
+            "Results are unavailable. Refresh execution status before retrying.",
+        );
+    // The host owns canonical serialization and binding/Run/Attempt authorization.
+    // Enforce the exact admitted byte budget without inventing another serializer.
+    if (
+        typeof projection.canonicalJson !== "string" ||
+        new globalThis.TextEncoder().encode(projection.canonicalJson)
+            .byteLength >
+            64 * 1024
+    ) {
+        return notice("error", "The result exceeds the display limit.");
+    }
+    if (projection.state === "empty") return notice("empty", "No results.");
+    if (projection.state !== "ready")
+        return notice("error", "This result cannot be displayed.");
+    let data: unknown;
+    try {
+        data = JSON.parse(projection.canonicalJson);
+    } catch {
+        return notice("error", "This result cannot be displayed.");
+    }
+    if (!isProjectionRecord(data))
+        return notice("error", "This result cannot be displayed.");
+    const invalid = () => notice("error", "This result cannot be displayed.");
+    if (node.type === "chart") {
+        const rows = hasOwn(data, node.rowsKey)
+            ? data[node.rowsKey]
+            : undefined;
+        if (!Array.isArray(rows) || rows.length > 200) return invalid();
+        const points: { label: string; value: number }[] = [];
+        for (const row of rows) {
+            if (
+                !isProjectionRecord(row) ||
+                !hasOwn(row, node.labelKey) ||
+                !hasOwn(row, node.valueKey)
+            )
+                return invalid();
+            const label = row[node.labelKey];
+            const value = row[node.valueKey];
+            if (!isProjectionText(label, 256) || !isProjectionNumber(value))
+                return invalid();
+            points.push({ label, value });
+        }
+        return (
+            <SemanticChart
+                title={node.title}
+                chartType={node.chartType}
+                points={points}
+            />
+        );
+    }
+    if (node.type === "log") {
+        const rows = hasOwn(data, node.rowsKey)
+            ? data[node.rowsKey]
+            : undefined;
+        if (!Array.isArray(rows) || rows.length > 500) return invalid();
+        const messages: string[] = [];
+        for (const row of rows) {
+            if (!isProjectionRecord(row) || !hasOwn(row, node.messageKey))
+                return invalid();
+            const message = row[node.messageKey];
+            if (!isProjectionText(message, 1024)) return invalid();
+            messages.push(message);
+        }
+        return <SemanticLog title={node.title} messages={messages} />;
+    }
+    const value = hasOwn(data, node.valueKey) ? data[node.valueKey] : undefined;
+    if (!isProjectionRecord(value)) return invalid();
+    const fields: {
+        key: string;
+        label: string;
+        value: string | number | boolean | null;
+    }[] = [];
+    for (const field of node.fields) {
+        if (!hasOwn(value, field.key)) return invalid();
+        const entry = value[field.key];
+        if (
+            entry !== null &&
+            typeof entry !== "boolean" &&
+            !isProjectionText(entry, 4096) &&
+            !isProjectionNumber(entry)
+        )
+            return invalid();
+        fields.push({ key: field.key, label: field.label, value: entry });
+    }
+    return <SemanticInspector title={node.title} fields={fields} />;
 }
 
 export interface SemanticCanvasRendererProps {
@@ -688,6 +1011,31 @@ function SemanticCanvasRendererInstance({
 
     const renderNode = (node: CanvasNode): ReactNode => {
         switch (node.type) {
+            case "card":
+                return (
+                    <SemanticCard key={node.id} title={node.title}>
+                        {node.children.map((child) => renderNode(child))}
+                    </SemanticCard>
+                );
+            case "chart":
+            case "log":
+            case "inspector": {
+                let projection: SemanticProjectionState | undefined;
+                if (privateSlotsVisible && bindings.has(node.bindingId)) {
+                    try {
+                        projection = adapters.getProjection?.(node.bindingId);
+                    } catch {
+                        /* Fail closed without exposing host error details. */
+                    }
+                }
+                return (
+                    <SemanticProjectedResult
+                        key={node.id}
+                        node={node}
+                        projection={projection}
+                    />
+                );
+            }
             case "stack":
                 return (
                     <div className="semantic-stack" key={node.id}>

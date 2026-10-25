@@ -97,6 +97,7 @@ class GenericCanvasView(CanvasPort):
             self.schemas[name] = TypeAdapter(
                 ProposalInput | AppRunRequest
             ).json_schema()
+        self.schemas["canvas_projection"] = AppRunRequest.model_json_schema()
         self.schemas["canvas_get_state"] = TypeAdapter(
             ProposalInput | AppRunRequest | InputList | OutputList
         ).json_schema()
@@ -109,6 +110,7 @@ class GenericCanvasView(CanvasPort):
             "canvas_execution_status",
             "canvas_cancel",
             "canvas_artifact",
+            "canvas_projection",
         ):
             self.schemas[name]["type"] = "object"
 
@@ -126,6 +128,7 @@ class GenericCanvasView(CanvasPort):
                 "canvas_execution_status",
                 "canvas_cancel",
                 "canvas_artifact",
+                "canvas_projection",
             }
             and arguments.get("mode") == "generic"
         ):
@@ -589,6 +592,14 @@ class GenericCanvasView(CanvasPort):
                         caller.scope,
                     )
                 state["bindingId"] = request.binding_id
+                if name == "canvas_projection":
+                    from actions.server.foundry.generic_projection import (
+                        terminal_preimage,
+                    )
+
+                    validated_terminal = terminal_preimage(
+                        service.base, run.id, ticket.fence.attempt_id
+                    )
                 if isinstance(request, OutputList):
                     return CanvasReply(
                         "Authorized produced children.",
@@ -608,6 +619,53 @@ class GenericCanvasView(CanvasPort):
                         service, managed, run.id, request.binding_id, caller.scope
                     )
                     state["bindingId"] = request.binding_id
+            if name == "canvas_projection":
+                from actions.server.foundry.generic_projection import (
+                    project_generated_result,
+                )
+
+                def require_current():
+                    if (
+                        terminal_preimage(service.base, run.id, ticket.fence.attempt_id)
+                        != validated_terminal
+                    ):
+                        raise AccessDenied("validated terminal identity changed")
+                    scope = caller.scope
+                    current = self.execution.deployments._repository.current(
+                        scope.deployment.workspace_id, scope.deployment.deployment_id
+                    )
+                    if (
+                        current is None
+                        or current.revision.ref != scope.deployment
+                        or current.revision.specification.canvas_application
+                        != scope.application
+                    ):
+                        raise AccessDenied("active app changed")
+                    bindings = [
+                        b
+                        for b in current.revision.specification.canvas_bindings
+                        if b.binding_id == request.binding_id
+                    ]
+                    if (
+                        len(bindings) != 1
+                        or bindings[0].capability != service.snapshot.capability
+                    ):
+                        raise AccessDenied("active binding changed")
+                    self._association(managed, scope, request.binding_id, run.id)
+                    self._artifact_permission(service, managed)
+
+                projection = project_generated_result(
+                    service.base,
+                    caller.actor,
+                    snapshot=service.snapshot,
+                    binding_id=request.binding_id,
+                    run_id=run.id,
+                    attempt_id=ticket.fence.attempt_id,
+                    require_current=require_current,
+                )
+                return CanvasReply(
+                    "Authorized generated projection.", projection=projection.as_dict()
+                )
             if name == "canvas_artifact":
                 handle = request.handle
                 if run.status not in (RunStatus.PASSED, RunStatus.FAILED):
