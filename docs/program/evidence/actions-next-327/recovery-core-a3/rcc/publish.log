@@ -1,0 +1,35 @@
+####  Progress: 00/15  v18.19.3     0.800s  Context: "" <agent@8b6f8f848e44> [linux_amd64/Debian GNU/Linux 13 (trixie) [id=debian; version=13]].
+####  Progress: 01/15  v18.19.3     0.001s  Fresh [private mode] holotree environment 710ac72d-c051-77ba-1b8c-1387fa9c7896. (parent/pid: 149757/149760)
+####  Progress: 02/15  v18.19.3     0.000s  Holotree blueprint is "2280c7119f8bf9c1" [linux_amd64 with 4 workers on 5 CPUs from "package.yaml"].
+FINAL unified conda environment descriptor:
+---
+channels:
+- conda-forge
+dependencies:
+- python=3.12
+- pip:
+  - actions-core==1.1.0a3
+---
+####  Progress: 03/15  v18.19.3     0.000s  Fill hololib from RCC_REMOTE_ORIGIN skipped. RCC_REMOTE_ORIGIN was not defined.
+####  Progress: 04/15  v18.19.3     0.000s  Cleanup holotree stage for fresh install.
+####  Progress: 05/15  v18.19.3     0.000s  Build environment into holotree stage "/workspace/actions-recovery-327/compiler-core-a3/robocorp/holotree/hc2fd1aa_493f813dad24d3t".
+####  Progress: 06/15  v18.19.3     0.000s  Restore partial environment into holotree stage "/workspace/actions-recovery-327/compiler-core-a3/robocorp/holotree/hc2fd1aa_493f813dad24d3t".
+Note: Extracting micromamba binary from inside rcc.
+####  Progress: 07/15  v18.19.3     0.138s  Running micromamba phase. (micromamba v2.5.0) [layer: 05bce139c5c902c0]
+WARNING: The directory '/home/agent/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+####  Progress: 08/15  v18.19.3    19.779s  Running pip install phase. (pip v26.2.2) [layer: 2280c7119f8bf9c1]
+####  Progress: 09/15  v18.19.3     6.643s  Post install scripts phase skipped -- no scripts.
+####  Progress: 10/15  v18.19.3     0.000s  Activate environment started phase.
+Note: Now running rcc v18.19.3. There is newer rcc version v18.19.7 available, released at 15.10.2026.
+Note: Now running rcc v18.19.3. There is newer rcc version v18.19.7 available, released at 15.10.2026.
+WARNING: The directory '/home/agent/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+WARNING: The directory '/home/agent/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+####  Progress: 11/15  v18.19.3     1.299s  Pip check skipped.
+####  Progress: 12/15  v18.19.3     0.000s  Update installation plan.
+####  Progress: 13/15  v18.19.3     0.001s  Record holotree stage to hololib [with 4 workers on 5 CPUs].
+####  Progress: 14/15  v18.19.3     0.730s  Restoring space skipped.
+####  Progress: 15/15  v18.19.3     0.075s  Fresh holotree done [with 4 workers on 5 CPUs].
+Installation plan is: /workspace/actions-recovery-327/compiler-core-a3/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/rcc_plan.log
+Environment configuration descriptor is: /workspace/actions-recovery-327/compiler-core-a3/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/identity.yaml
+{"artifactDigest":"sha256:a8464ce6d65b33577b262f740c6a4cd4a0e3e8d958a44c3685224e4c7548f21a","specificationDigest":"sha256:185139c8765f507b913240020978796013b6d1a67d2de001815b8325397d7854","legacyBlueprintKey":"2280c7119f8bf9c1","objectCount":5450,"uploadedBytes":77320036,"reusedBytes":0}
+Note: Now running rcc v18.19.3. There is newer rcc version v18.19.7 available, released at 15.10.2026.

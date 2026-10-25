@@ -5402,3 +5402,12 @@ measured private actions-core wheel and portable exact-version dependency pin;
 a source-path overlay or older public SDK preparation is not installed proof.
 Runtime/bootstrap/publication integration and unchanged-Package two-provider
 acceptance remain separate, alongside broader Data/Knowledge owner gates.
+
+A private exact-version Core dependency can be prepared without embedding a local
+wheel path in package.yaml: stage the measured wheel under the isolated RCC
+ROBOCORP_HOME/wheels, publish the environment with the portable exact version,
+then verify every installed Python member against that wheel through actual
+RCC env exec and Python -I. Preserve the adapter's explicit local filesystem
+trust carrier; --permissive-local alone did not locate the local attachment in
+the qualified fresh environment. Do not infer installed-wheel identity merely
+from a matching version or successful environment publication.
