@@ -6295,3 +6295,32 @@ withhold protected output; distinguish the observed denial from a harness that
 assumed a token always exists. For synthetic CLI keys, pass `--api-key=value` so
 a valid randomly generated leading dash is not parsed as a new option. Startup
 failure accounting must preserve the original error when no server log exists.
+
+### Installed browser and owned dependency qualification
+
+A Playwright command exiting zero does not prove a browser passed when its harness
+records failures. Inspect each launch receipt. The 2026-10-25 environment's system
+Chromium and both locked Playwright revision 1234 binaries failed before page
+creation with a sandbox error. Historical host screenshots do not establish a
+supported sandbox in a replacement environment. Keep `chromiumSandbox: true` and
+use an environment with a working supported sandbox; do not change helper ownership,
+security policy or launch flags to bypass the prerequisite. Browser-only handoffs
+must preserve exact candidate/official-host hashes, recreate local compiler trust,
+and distinguish protocol success from actual AppBridge/UI execution.
+
+Distribution metadata and `pip check` do not detect shared import-path overwrites.
+`robocorp-truststore` and official `truststore` both install `truststore/*`; the
+frozen a41 consumer reported official 0.10.4 while all six Python files matched
+fork 0.9.1. Require one namespace provider and verify installed files against its
+RECORD. Qualify replacement in a clean consumer with native CA loading, trusted
+local TLS success, untrusted CA rejection and hostname rejection. Do not infer
+repair from an in-place uninstall; preserve per-context verification and avoid
+global TLS injection. Linux evidence does not establish Windows/macOS behavior.
+
+Retained Robot package kind must select its dispatch and terminal receipt protocol.
+A public Robot dry-run/activation can succeed while execution still fails if the
+shared standalone admission seeds a Python receipt. Reproduce through public
+admission rather than manually seeding Robot journals in every fixture. Retained
+receipt checks must use SQL metadata only; execution and authorized artifact reads
+still verify source/output bytes separately. A validation receipt proves dry-run
+validation, not actual task execution or Work Item support.
