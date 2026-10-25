@@ -48,6 +48,7 @@ from actions.server.run_outputs.models import RunAttempt, RunPin
 from actions.server.run_outputs.service import (
     AccessDenied,
     FenceRejected,
+    RunAdmissionOutcome,
     RunOutputControlPlane,
     RunOutputService,
     _canonical,
@@ -479,21 +480,43 @@ class GenericWorkItemExecution:
             )
             return _EnqueueResult(item_id, replay=False)
 
+    def _claimed_envelope(self, caller: ManagedCaller, claim: WorkItemClaim):
+        self._current(caller)
+        name = self.policy.input_queue
+        if (
+            name is None
+            or self.policy.input_mode == "none"
+            or caller.worker_id is None
+            or caller.worker_id != claim.owner_id
+        ):
+            raise AccessDenied("exact authenticated input claim required")
+        for permission in (Permission.READ, Permission.CLAIM):
+            self._permission(caller, name, permission)
+        return self._envelope(claim.item_id)
+
+    def admit_claimed(
+        self, caller: ManagedCaller, claim: WorkItemClaim
+    ) -> RunAdmissionOutcome:
+        """Admit canonical queued inputs under a live claim, without an Attempt.
+
+        The caller owns any surrounding intent/receipt transaction. A replay
+        outcome is not permission to adopt an existing synchronous Run.
+        """
+        with self._transaction():
+            envelope = self._claimed_envelope(caller, claim)
+            name = self.policy.input_queue
+            if name is None:
+                raise AccessDenied("claimed input queue required")
+            self.queue(name)._require(claim)
+            return self._admit(
+                caller, envelope.inputs, work_item_run_key(claim.item_id)
+            )
+
     def dispatch(
         self, caller: ManagedCaller, claim: WorkItemClaim, *, lease_seconds: int
     ) -> GenericTicket:
         with self._transaction():
-            self._current(caller)
-            name = self.policy.input_queue
-            if (
-                name is None
-                or self.policy.input_mode == "none"
-                or caller.worker_id != claim.owner_id
-            ):
-                raise AccessDenied("exact authenticated input claim required")
-            for permission in (Permission.READ, Permission.CLAIM):
-                self._permission(caller, name, permission)
-            envelope = self._envelope(claim.item_id)
+            envelope = self._claimed_envelope(caller, claim)
             return self._dispatch(
                 caller,
                 envelope.inputs,
@@ -518,7 +541,7 @@ class GenericWorkItemExecution:
                 caller, self._inputs(inputs), idempotency_key, None, lease_seconds
             )
 
-    def _dispatch(self, caller, inputs, key, claim, lease_seconds):
+    def _admit(self, caller, inputs, key) -> RunAdmissionOutcome:
         if caller.worker_id is None:
             raise AccessDenied("server-held worker identity required")
         # The public entry already resolved and authorized this exact immutable
@@ -527,7 +550,10 @@ class GenericWorkItemExecution:
         RunOutputControlPlane(self.db, capabilities=self.registry).register(
             self.snapshot
         )
-        run = self.base.admit(caller.actor, self.snapshot, inputs, key)
+        return self.base.admit_outcome(caller.actor, self.snapshot, inputs, key)
+
+    def _dispatch(self, caller, inputs, key, claim, lease_seconds):
+        run = self._admit(caller, inputs, key).run
         pin = _one(self.db, RunPin, run.id)
         if claim and run.status not in (RunStatus.PASSED, RunStatus.FAILED):
             self.queue(self.policy.input_queue)._require(claim)

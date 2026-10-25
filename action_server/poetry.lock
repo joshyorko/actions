@@ -2,7 +2,7 @@
 
 [[package]]
 name = "actions-core"
-version = "1.1.0a7"
+version = "1.1.0a8"
 description = "Actions Core"
 optional = false
 python-versions = "^3.10"
@@ -3942,4 +3942,4 @@ data-duckdb = ["duckdb"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<3.14"
-content-hash = "14ed9ce3679b05875d81498409cca1f3c926082c80ec6f96f9447d88766a9455"
+content-hash = "0ec844044d4764f8a9e08bab15d12b9e5432375cb682b2e491278d3a68840380"

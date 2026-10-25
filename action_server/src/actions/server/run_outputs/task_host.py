@@ -228,6 +228,44 @@ class DetachedTaskHost:
         ):
             raise TaskHostUnavailable("Task host unavailable")
 
+    def require_claimed_scope(self, actor, snapshot, claim) -> None:
+        """Recheck host identity without database, archive or provider access."""
+        self._check_running()
+        if (
+            actor != self.actor
+            or snapshot.worker != self.profile
+            or snapshot.workspace_id != str(self.profile.workspace_id.root)
+            or self._worker.caller.actor != actor
+            or self._worker.caller.worker_id is None
+            or self._worker.caller.worker_id != claim.owner_id
+            or claim.queue.deployment != snapshot.deployment
+            or str(claim.queue.workspace_id.root) != snapshot.workspace_id
+            or self.capability_runner is None
+        ):
+            raise TaskHostUnavailable("claimed Task host scope unavailable")
+
+    def require_claimed_ready(self, actor, snapshot, claim) -> None:
+        self.require_claimed_scope(actor, snapshot, claim)
+        if self.authority.db.in_transaction():
+            raise TaskHostUnavailable(
+                "claimed readiness requires transaction-free host"
+            )
+        with self.authority.db.connect():
+            service = self.authority.claimed_service(snapshot)
+            service._current(self._worker.caller)
+            name = service.policy.input_queue
+            if name is None:
+                raise TaskHostUnavailable("claimed input queue required")
+            if claim.queue != service.queue_ref(name):
+                raise TaskHostUnavailable("claimed Task queue differs")
+            robot = self.capability_runner.robot_for(
+                self.authority.outputs.capabilities, snapshot
+            )
+            if robot is None:
+                raise TaskHostUnavailable("claimed Robot host unavailable")
+            robot.require_ready(service)
+        self.require_claimed_scope(actor, snapshot, claim)
+
     def require_ready(self, actor: Actor, snapshot: ExecutionSnapshot) -> None:
         self._check_running()
         if (
@@ -280,6 +318,7 @@ class DetachedTaskHost:
                     str(self.profile.workspace_id.root),
                     self.profile,
                     limit=1,
+                    worker_id=self._worker.caller.worker_id,
                 )
                 if self._stop.is_set():
                     return

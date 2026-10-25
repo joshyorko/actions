@@ -436,3 +436,12 @@ build evidence. An unrecognized partial view is not removed by a fallback
 filesystem deletion. Missing admission, active processes or a failed supported
 cleanup remains a failed gate. Cleanup success does not establish the original
 compiler failure's cause.
+
+Runtime consumes logging through the public `actions.server_integration` exports.
+The bridge preserves the owned logger objects and secret-redaction behavior.
+Resolve optional child trace logging only when requested: older owned Core
+without the bridge can execute ordinary actions, but a trace request must fail
+with a clear upgrade requirement. Legacy fallback requires the selected Core
+distribution's explicit logging dependency; failures inside an available bridge
+propagate. Simulated compatibility tests do not prove retained-wheel execution.
+Runtime's own viewer imports require Core 1.1.0a8 or later.

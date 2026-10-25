@@ -1,0 +1,9 @@
+{
+  "actions/src/actions/server_integration.py": "fd7d106b3f22ece4355f3110ac9013e0951fc26d5cab9b26c6f53da9ab104463",
+  "actions/tests/actions_core_tests/test_server_integration_contract.py": "3e23983f467311fad3b392825718964852fdebbf6972d50296d351e5cab5bda0",
+  "action_server/src/actions/server/_api_run.py": "b79d82b5dc045a80b61e87ae2a59e06b39dec35d4c83fa64d4d379b72c27fa3b",
+  "action_server/src/actions/server/_server.py": "d8ee30a9730273c306b561e5c673b9ff4a89d6380d502099ea71328de7874150",
+  "action_server/src/actions/server/_preload_actions/preload_actions.py": "ed266098d6fa59fb88ecdc7733fc1d0f14056a2eb8fe48f7bbddfea8801d2879",
+  "action_server/tests/contract_tests/test_preload_logging_compatibility_327.py": "b4d0f5a3daba1dd5c139d26456cae3f366d2e5b9513c80c62d16361e87e79701",
+  "bridge.patch": "b61d73a13848afe9c0d7d5a1c1bfd348be669a54a31624b4359e1288ffb82378"
+}

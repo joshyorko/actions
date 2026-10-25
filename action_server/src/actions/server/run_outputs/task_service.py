@@ -13,13 +13,22 @@ from collections.abc import Callable, Mapping
 from dataclasses import dataclass
 from typing import Any, Literal, Protocol
 
-from actions.server._models import RunStatus
+from actions.work_items._fencing import ClaimRejected, WorkItemClaim
+
+from actions.server._models import Run, RunStatus
 from actions.server.foundry.logical_receipts import (
     FAILURE_V1,
     validate_bound_record,
     versions_for_selection,
 )
 from actions.server.foundry.rcc_execution import GeneratedRccExecution
+from actions.server.managed_work_items.contracts import (
+    ClaimRef,
+    ManagedCaller,
+    Permission,
+)
+from actions.server.run_outputs.claimed_intent import ClaimedTaskIntent
+from actions.server.run_outputs.claimed_task_state import validate_claimed_cancellation
 from actions.server.run_outputs.detached import DetachedActions
 from actions.server.run_outputs.models import (
     RunAttempt,
@@ -30,6 +39,7 @@ from actions.server.run_outputs.models import (
 from actions.server.run_outputs.service import (
     AccessDenied,
     FenceRejected,
+    _advance_lifecycle,
     _canonical,
     _insert,
     _key,
@@ -38,6 +48,7 @@ from actions.server.run_outputs.service import (
     _now,
     _one,
     _transaction,
+    _update,
 )
 from actions.server.run_outputs.types import (
     Actor,
@@ -48,6 +59,7 @@ from actions.server.run_outputs.types import (
 )
 
 RECEIPT_VERSION = "actions.run-task-receipt/v1"
+CLAIMED_RECEIPT_VERSION = "actions.run-task-receipt/claimed-v1"
 RESULT_CONTRACT = "actions.detached-invocation-result/v1"
 _MAX_MS = 9223372036854775807
 
@@ -141,7 +153,19 @@ class TaskService:
             raise TaskHostUnavailable("Task host unavailable") from None
 
     @staticmethod
-    def _fingerprint(pin, policy_id, ttl_ms):
+    def _fingerprint(pin, policy_id, ttl_ms, intent: ClaimedTaskIntent | None = None):
+        if intent is not None:
+            return _key(
+                "actions.task-invocation/claimed-v1",
+                pin.request_fingerprint,
+                CLAIMED_RECEIPT_VERSION,
+                "tools/call",
+                "capability_invoke",
+                RESULT_CONTRACT,
+                policy_id,
+                str(ttl_ms),
+                hashlib.sha256(intent.canonical().encode()).hexdigest(),
+            )
         return _key(
             "actions.task-invocation/v1",
             pin.request_fingerprint,
@@ -171,44 +195,84 @@ class TaskService:
             outcome = self.detached.admit_outcome(
                 actor, snapshot, inputs, idempotency_key
             )
-            run = outcome.run
-            pin = _one(self.db, RunPin, run.id)
-            receipts = self.db.all(RunTaskReceipt, where="id=?", values=[run.id])
-            if outcome.created:
-                if receipts:
-                    raise TaskUnavailable("Task unavailable")
-                created = _milliseconds(pin.state_updated_ms)
-                if created + self.policy.ttl_ms > _MAX_MS:
-                    raise TaskUnavailable("Task unavailable")
-                _insert(
-                    self.db,
-                    RunTaskReceipt(
-                        run.id,
-                        run.id,
-                        workspace_id,
-                        actor.principal_id,
-                        RECEIPT_VERSION,
-                        "tools/call",
-                        "capability_invoke",
-                        RESULT_CONTRACT,
-                        self._fingerprint(
-                            pin, self.policy.policy_id, self.policy.ttl_ms
-                        ),
-                        str(created),
-                        str(self.policy.ttl_ms),
-                        self.policy.policy_id,
-                    ),
-                )
-            elif (
-                len(receipts) != 1
-                or receipts[0].ttl_policy_id != self.policy.policy_id
-                or receipts[0].ttl_ms != str(self.policy.ttl_ms)
-            ):
-                raise TaskUnavailable("Task unavailable")
             self._require_ready(actor, snapshot)
-            # Creation/replay is authorized by execute; do not add a read requirement.
-            loaded = self._load(actor, workspace_id, run.id, "execute")
-            return self._project(actor, loaded, include_result=False)
+            return self._record_admission(actor, workspace_id, outcome)
+
+    def _require_claimed_ready(self, actor, snapshot, claim, *, scope_only=False):
+        try:
+            check = getattr(
+                self.readiness,
+                "require_claimed_scope" if scope_only else "require_claimed_ready",
+                None,
+            )
+            if not callable(check):
+                raise ValueError("claimed readiness unavailable")
+            if check(actor, snapshot, claim) is not None:
+                raise ValueError("claimed readiness contract differs")
+        except Exception:
+            raise TaskHostUnavailable("Task host unavailable") from None
+
+    def create_claimed(self, actor, workspace_id, snapshot, claim: ClaimRef):
+        try:
+            return self._create_claimed(actor, workspace_id, snapshot, claim)
+        except ClaimRejected:
+            raise TaskUnavailable("Task unavailable") from None
+
+    def _create_claimed(self, actor, workspace_id, snapshot, claim: ClaimRef):
+        actor = Actor.model_validate(actor)
+        snapshot = ExecutionSnapshot.model_validate(snapshot)
+        claim = ClaimRef.model_validate(claim)
+        if workspace_id != snapshot.workspace_id:
+            raise TaskUnavailable("Task unavailable")
+        self._require_claimed_ready(actor, snapshot, claim)
+        service = self.detached.claimed_service(snapshot)
+        # Match the existing Generic lock order before any Run row lock.
+        with service._transaction():
+            self._require_claimed_ready(actor, snapshot, claim, scope_only=True)
+            outcome = self.detached.admit_claimed(
+                ManagedCaller(actor=actor, worker_id=claim.owner_id), snapshot, claim
+            )
+            self._require_claimed_ready(actor, snapshot, claim, scope_only=True)
+            return self._record_admission(actor, workspace_id, outcome)
+
+    def _record_admission(self, actor, workspace_id, outcome):
+        run = outcome.run
+        intent = self.detached.claimed(run.id)
+        pin = _one(self.db, RunPin, run.id)
+        receipts = self.db.all(RunTaskReceipt, where="id=?", values=[run.id])
+        if outcome.created:
+            if receipts:
+                raise TaskUnavailable("Task unavailable")
+            created = _milliseconds(pin.state_updated_ms)
+            if created + self.policy.ttl_ms > _MAX_MS:
+                raise TaskUnavailable("Task unavailable")
+            _insert(
+                self.db,
+                RunTaskReceipt(
+                    run.id,
+                    run.id,
+                    workspace_id,
+                    actor.principal_id,
+                    CLAIMED_RECEIPT_VERSION if intent is not None else RECEIPT_VERSION,
+                    "tools/call",
+                    "capability_invoke",
+                    RESULT_CONTRACT,
+                    self._fingerprint(
+                        pin, self.policy.policy_id, self.policy.ttl_ms, intent
+                    ),
+                    str(created),
+                    str(self.policy.ttl_ms),
+                    self.policy.policy_id,
+                ),
+            )
+        elif (
+            len(receipts) != 1
+            or receipts[0].ttl_policy_id != self.policy.policy_id
+            or receipts[0].ttl_ms != str(self.policy.ttl_ms)
+        ):
+            raise TaskUnavailable("Task unavailable")
+        loaded = self._load(actor, workspace_id, run.id, "execute")
+        return self._project(actor, loaded, include_result=False)
 
     def _load(self, actor, workspace_id, task_id, permission):
         try:
@@ -219,6 +283,11 @@ class TaskService:
             receipt = _one(self.db, RunTaskReceipt, task_id)
             snapshot, run, checked = self.detached._integrity(actor, task_id)
             self.outputs._authorize(actor, snapshot, permission)
+            intent = self.detached.claimed(task_id)
+            if intent is not None and permission == "read":
+                self.detached.claimed_service(snapshot).authorize(
+                    ManagedCaller(actor=actor), Permission.READ
+                )
             if pin.cancel_requested not in (0, 1):
                 raise ValueError("cancellation flag differs")
             if pin != checked or (
@@ -235,7 +304,7 @@ class TaskService:
                 task_id,
                 workspace_id,
                 actor.principal_id,
-                RECEIPT_VERSION,
+                CLAIMED_RECEIPT_VERSION if intent is not None else RECEIPT_VERSION,
                 "tools/call",
                 "capability_invoke",
                 RESULT_CONTRACT,
@@ -267,7 +336,7 @@ class TaskService:
                 or updated < created
                 or _now(self.db) >= created + ttl
                 or receipt.invocation_fingerprint
-                != self._fingerprint(pin, receipt.ttl_policy_id, ttl)
+                != self._fingerprint(pin, receipt.ttl_policy_id, ttl, intent)
             ):
                 raise ValueError("receipt lifetime or invocation differs")
             return receipt, snapshot, run, pin
@@ -281,9 +350,85 @@ class TaskService:
             )
 
     def cancel(self, actor: Actor, workspace_id: str, task_id: str) -> None:
+        intent = self.detached.claimed(task_id)
+        if intent is not None:
+            return self._cancel_claimed(actor, workspace_id, task_id, intent)
         with _transaction(self.db):
             self._load(actor, workspace_id, task_id, "cancel")
             self.detached.cancel(actor, task_id)
+
+    def _cancel_claimed(self, actor, workspace_id, task_id, intent):
+        try:
+            return self._cancel_claimed_checked(actor, workspace_id, task_id, intent)
+        except ClaimRejected:
+            raise TaskUnavailable("Task unavailable") from None
+
+    def _cancel_claimed_checked(self, actor, workspace_id, task_id, intent):
+        service = self.detached.claimed_service(intent.snapshot)
+        caller = ManagedCaller(actor=actor, worker_id=intent.claim.owner_id)
+        with service._transaction():
+            _, snapshot, run, pin = self._load(actor, workspace_id, task_id, "cancel")
+            queue_name = service.policy.input_queue
+            if queue_name is None:
+                raise TaskUnavailable("Task unavailable")
+            service._permission(caller, queue_name, Permission.CANCEL)
+            if pin.cancel_requested:
+                fence = None
+                if pin.current_attempt_id:
+                    attempt = _one(self.db, RunAttempt, pin.current_attempt_id)
+                    fence = AttemptFence(
+                        run_id=run.id,
+                        attempt_id=attempt.id,
+                        owner_id=attempt.owner_id,
+                        epoch=attempt.epoch,
+                    )
+                validate_claimed_cancellation(service, intent, run, pin, fence)
+                return
+            if run.status in (RunStatus.PASSED, RunStatus.FAILED):
+                self._project(
+                    actor,
+                    self._load(actor, workspace_id, task_id, "cancel"),
+                    include_result=False,
+                )
+                return
+            claim = WorkItemClaim(
+                intent.claim.item_id, intent.claim.owner_id, intent.claim.epoch
+            )
+            queue = service.queue(queue_name)
+            # The owner transaction shares the canonical queue workspace lock.
+            queue._require(claim)
+            fence = None
+            if pin.current_attempt_id:
+                attempt = _one(self.db, RunAttempt, pin.current_attempt_id)
+                fence = AttemptFence(
+                    run_id=run.id,
+                    attempt_id=attempt.id,
+                    owner_id=attempt.owner_id,
+                    epoch=attempt.epoch,
+                )
+                self.outputs._fence(fence)
+            elif run.status != RunStatus.NOT_RUN or run.result is not None:
+                raise FenceRejected("claimed pending cancellation differs")
+            if not self.outputs.cancel(actor, run.id) or not queue.cancel(
+                claim.item_id
+            ):
+                raise FenceRejected("claimed cancellation changed")
+            if fence is None:
+                _update(self.db, Run, run.id, {"status": RunStatus.CANCELLED})
+                _advance_lifecycle(self.db, run.id)
+            # Validate all retained facts before committing either SQL mutation.
+            # Failure rolls back both owners; this grants no execution authority.
+            outcome = validate_claimed_cancellation(
+                service,
+                intent,
+                _one(self.db, Run, run.id),
+                _one(self.db, RunPin, run.id),
+                fence,
+            )
+            if outcome != (
+                "pending_cancelled" if fence is None else "active_unconfirmed"
+            ):
+                raise FenceRejected("claimed cancellation evidence differs")
 
     def update(
         self,
@@ -304,6 +449,41 @@ class TaskService:
         receipt, snapshot, run, pin = loaded
         status, message, result = "working", "Queued for configured worker.", None
         try:
+            intent = self.detached.claimed(run.id)
+            claim = (
+                {
+                    "item_id": intent.claim.item_id,
+                    "owner_id": intent.claim.owner_id,
+                    "epoch": intent.claim.epoch,
+                }
+                if intent is not None
+                else None
+            )
+            if intent is not None and pin.cancel_requested:
+                fence = None
+                if pin.current_attempt_id:
+                    attempt = _one(self.db, RunAttempt, pin.current_attempt_id)
+                    fence = AttemptFence(
+                        run_id=run.id,
+                        attempt_id=attempt.id,
+                        owner_id=attempt.owner_id,
+                        epoch=attempt.epoch,
+                    )
+                cancellation = validate_claimed_cancellation(
+                    self.detached.claimed_service(snapshot), intent, run, pin, fence
+                )
+                return TaskSnapshot(
+                    run.id,
+                    "cancelled" if cancellation == "pending_cancelled" else "working",
+                    int(receipt.created_ms),
+                    int(pin.state_updated_ms),
+                    int(receipt.ttl_ms),
+                    self.policy.poll_interval_ms,
+                    "Cancelled before execution."
+                    if cancellation == "pending_cancelled"
+                    else "Cancellation requested; outcome not confirmed.",
+                    None,
+                )
             if not pin.current_attempt_id:
                 if run.status == RunStatus.CANCELLED and pin.cancel_requested == 1:
                     status, message = "cancelled", "Cancelled before execution."
@@ -340,8 +520,9 @@ class TaskService:
                 )
                 if (
                     not isinstance(record, dict)
-                    or record.get("mode") != "standalone"
-                    or record.get("claim") is not None
+                    or record.get("mode")
+                    != ("work-items" if claim is not None else "standalone")
+                    or record.get("claim") != claim
                     or (
                         record.get("version")
                         != (
@@ -367,7 +548,7 @@ class TaskService:
                     run,
                     fence,
                     record,
-                    claim=None,
+                    claim=claim,
                     terminal=terminal,
                     outputs=outer.get("outputs") if terminal else None,
                     _allow_expired_terminal=terminal and not include_result,
@@ -390,6 +571,7 @@ class TaskService:
                         outer,
                         record,
                         resolve=include_result,
+                        claim=claim,
                     )
                     if include_result:
                         result = verified_result
@@ -467,7 +649,9 @@ class TaskService:
         ):
             raise TaskUnavailable("Task unavailable") from None
 
-    def _result(self, actor, snapshot, run, fence, outer, record, *, resolve=True):
+    def _result(
+        self, actor, snapshot, run, fence, outer, record, *, resolve=True, claim=None
+    ):
         validate_bound_record(
             self.db,
             self.outputs.capabilities,
@@ -475,7 +659,7 @@ class TaskService:
             run,
             fence,
             record,
-            claim=None,
+            claim=claim,
             terminal=True,
             outputs=outer.get("outputs"),
             _allow_expired_terminal=not resolve,
@@ -498,6 +682,8 @@ class TaskService:
                             raise ValueError("resolved Robot output differs")
                         handles.append({"handle": ref.handle})
             return self._result_payload(run, fence, handles)
+        if claim is not None:
+            raise ValueError("claimed Task requires Robot terminal evidence")
         lineage = GeneratedRccExecution._lineage(snapshot, None, fence)
         from actions.server.foundry.execution_selection import compiled_for_snapshot
 

@@ -10,18 +10,35 @@ import json
 from dataclasses import dataclass
 from pathlib import Path
 
+from actions.work_items._fencing import WorkItemClaim
+
 from actions.server._models import Run, RunStatus
+from actions.server.data_queries.invoice_worker import work_item_run_key
+from actions.server.foundry.generic_work_item_execution import (
+    GenericInput,
+    GenericWorkItemExecution,
+)
 from actions.server.foundry.rcc_execution import GeneratedRccExecution
+from actions.server.foundry.robot_retained_projection import retained_robot_projection
 from actions.server.foundry.standalone_execution import StandaloneActionExecution
-from actions.server.managed_work_items.contracts import ManagedCaller
-from actions.server.run_outputs.models import RunAttempt, RunExecutionIntent, RunPin
+from actions.server.managed_work_items.contracts import ClaimRef, ManagedCaller
+from actions.server.run_outputs.claimed_intent import ClaimedTaskIntent, claimed_intent
+from actions.server.run_outputs.claimed_task_state import validate_claimed_cancellation
+from actions.server.run_outputs.models import (
+    RunAttempt,
+    RunExecutionIntent,
+    RunPin,
+    RunTaskReceipt,
+)
 from actions.server.run_outputs.service import (
     AccessDenied,
     FenceRejected,
+    RunAdmissionOutcome,
     RunOutputControlPlane,
     _advance_lifecycle,
     _canonical,
     _insert,
+    _key,
     _lock_run,
     _one,
     _transaction,
@@ -37,8 +54,116 @@ class PendingActions:
 
 
 class DetachedActions:
-    def __init__(self, deployments, outputs):
+    def __init__(self, deployments, outputs, queue_authorization=None):
         self.deployments, self.outputs, self.db = deployments, outputs, outputs.db
+        self.queue_authorization = queue_authorization
+
+    def claimed(self, run_id) -> ClaimedTaskIntent | None:
+        return claimed_intent(_one(self.db, RunExecutionIntent, run_id).envelope_json)
+
+    def claimed_service(self, snapshot) -> GenericWorkItemExecution:
+        projection = retained_robot_projection(self.db, snapshot)
+        stored = self.deployments._repository.get_revision(snapshot.deployment)
+        if (
+            projection.work_items.mode != "consumer"
+            or projection.work_items.allow_outputs
+            or stored is None
+        ):
+            raise AccessDenied("claimed consumer Robot required")
+        policies = [
+            p
+            for p in stored.revision.specification.work_item_policies
+            if p.capability == snapshot.capability
+        ]
+        if len(policies) != 1 or policies[0].input_mode != "claim":
+            raise AccessDenied("exact claimed policy required")
+        return GenericWorkItemExecution(
+            self.deployments,
+            self.outputs,
+            snapshot,
+            policies[0],
+            self.queue_authorization,
+        )
+
+    def admit_claimed(
+        self, caller: ManagedCaller, snapshot, claim: ClaimRef
+    ) -> RunAdmissionOutcome:
+        service = self.claimed_service(snapshot)
+        with service._transaction():
+            service._current(caller)
+            name = service.policy.input_queue
+            if name is None:
+                raise AccessDenied("claimed input queue required")
+            if caller.worker_id != claim.owner_id or claim.queue != service.queue_ref(
+                name
+            ):
+                raise AccessDenied("claimed Task owner or queue differs")
+            identity = _key(
+                "actions.workspace-run-idempotency/v1",
+                snapshot.workspace_id,
+                work_item_run_key(claim.item_id),
+            )
+            pins = self.db.all(RunPin, where="idempotency_id=?", values=[identity])
+            if pins:
+                if len(pins) != 1:
+                    raise FenceRejected("claimed Task admission differs")
+                run_id = pins[0].run_id
+                retained = self.claimed(run_id)
+                snapshot0, run, pin = self._integrity(caller.actor, run_id)
+                if (
+                    retained is None
+                    or retained.claim != claim
+                    or snapshot0 != snapshot
+                    or len(self.db.all(RunTaskReceipt, where="id=?", values=[run_id]))
+                    != 1
+                ):
+                    raise FenceRejected("existing Run is not this claimed Task")
+                if pin.cancel_requested:
+                    from actions.server.run_outputs.types import AttemptFence
+
+                    fence = None
+                    if pin.current_attempt_id:
+                        attempt = _one(self.db, RunAttempt, pin.current_attempt_id)
+                        fence = AttemptFence(
+                            run_id=run.id,
+                            attempt_id=attempt.id,
+                            owner_id=attempt.owner_id,
+                            epoch=attempt.epoch,
+                        )
+                    state = validate_claimed_cancellation(
+                        service, retained, run, pin, fence
+                    )
+                    expected = "active_unconfirmed" if fence else "pending_cancelled"
+                    if state != expected:
+                        raise FenceRejected("claimed cancellation replay differs")
+                    return RunAdmissionOutcome(run, False)
+                if run.status in (RunStatus.PASSED, RunStatus.FAILED):
+                    return RunAdmissionOutcome(run, False)
+            outcome = service.admit_claimed(
+                caller,
+                WorkItemClaim(
+                    item_id=claim.item_id, owner_id=claim.owner_id, epoch=claim.epoch
+                ),
+            )
+            expected = ClaimedTaskIntent.create(
+                snapshot, claim, json.loads(outcome.run.inputs)
+            ).canonical()
+            if outcome.created:
+                _insert(
+                    self.db,
+                    RunExecutionIntent(
+                        outcome.run.id,
+                        snapshot.workspace_id,
+                        caller.actor.principal_id,
+                        expected,
+                    ),
+                )
+            elif (
+                _one(self.db, RunExecutionIntent, outcome.run.id).envelope_json
+                != expected
+            ):
+                raise FenceRejected("claimed Task intent differs")
+            return outcome
 
     def _service(self, actor, snapshot):
         service = StandaloneActionExecution(self.deployments, self.outputs, snapshot)
@@ -116,9 +241,34 @@ class DetachedActions:
             raise AccessDenied("detached principal unavailable")
         snapshot = self.outputs._pinned(pin)
         run = _one(self.db, Run, run_id)
+        claimed = claimed_intent(intent.envelope_json)
+        expected = (
+            ClaimedTaskIntent.create(
+                snapshot, claimed.claim, json.loads(run.inputs)
+            ).canonical()
+            if claimed is not None
+            else self._envelope(snapshot, json.loads(run.inputs))
+        )
+        if claimed is not None:
+            service = self.claimed_service(snapshot)
+            envelope = GenericInput.model_validate(
+                service.queue(service.policy.input_queue).load_payload(
+                    claimed.claim.item_id
+                )
+            )
+            if (
+                claimed.snapshot != snapshot
+                or envelope.snapshot != snapshot
+                or envelope.policy != service.policy
+                or envelope.input_digest != claimed.input_digest
+                or claimed.claim.queue != service.queue_ref(service.policy.input_queue)
+                or _canonical(envelope.inputs, 262144)
+                != _canonical(json.loads(run.inputs), 262144)
+            ):
+                raise FenceRejected("claimed Task payload differs")
         if (
             intent.workspace_id != snapshot.workspace_id
-            or intent.envelope_json != self._envelope(snapshot, json.loads(run.inputs))
+            or intent.envelope_json != expected
         ):
             raise FenceRejected("detached immutable metadata differs")
         if not pin.current_attempt_id and (
@@ -131,9 +281,26 @@ class DetachedActions:
 
     def _load(self, actor, run_id):
         snapshot, run, pin = self._integrity(actor, run_id)
-        return self._service(actor, snapshot), run, pin
+        return (
+            (
+                self.claimed_service(snapshot)
+                if self.claimed(run_id) is not None
+                else self._service(actor, snapshot)
+            ),
+            run,
+            pin,
+        )
 
-    def pending(self, actor, workspace_id, worker_profile, *, limit=20, after=None):
+    def pending(
+        self,
+        actor,
+        workspace_id,
+        worker_profile,
+        *,
+        limit=20,
+        after=None,
+        worker_id=None,
+    ):
         if (
             isinstance(limit, bool)
             or not isinstance(limit, int)
@@ -172,7 +339,14 @@ class DetachedActions:
             # corrupted metadata must not be hidden as an ordinary denied row.
             snapshot, _, _ = self._integrity(actor, row[0])
             try:
-                service = self._service(actor, snapshot)
+                intent = self.claimed(row[0])
+                if intent is not None:
+                    if worker_id is None or intent.claim.owner_id != worker_id:
+                        continue
+                    service = self.claimed_service(snapshot)
+                    service._current(ManagedCaller(actor=actor, worker_id=worker_id))
+                else:
+                    service = self._service(actor, snapshot)
             except PermissionError:
                 continue
             if service.snapshot.worker == worker_profile:
@@ -184,6 +358,27 @@ class DetachedActions:
     def claim(self, caller, run_id, worker_profile, *, lease_seconds=60):
         if caller.worker_id is None:
             raise AccessDenied("trusted worker identity required")
+        intent = self.claimed(run_id)
+        if intent is not None:
+            service = self.claimed_service(intent.snapshot)
+            with service._transaction():
+                snapshot, run, _ = self._integrity(caller.actor, run_id)
+                if run.status not in (RunStatus.NOT_RUN, RunStatus.RUNNING):
+                    raise FenceRejected("claimed Task Run is terminal")
+                if (
+                    snapshot.worker != worker_profile
+                    or caller.worker_id != intent.claim.owner_id
+                ):
+                    raise AccessDenied("claimed Task worker differs")
+                return service.dispatch(
+                    caller,
+                    WorkItemClaim(
+                        item_id=intent.claim.item_id,
+                        owner_id=intent.claim.owner_id,
+                        epoch=intent.claim.epoch,
+                    ),
+                    lease_seconds=lease_seconds,
+                )
         with _transaction(self.db):
             _lock_run(self.db, run_id)
             service, run, pin = self._load(caller.actor, run_id)
@@ -288,6 +483,7 @@ class DetachedActionWorker:
             str(self.profile.workspace_id.root),
             self.profile,
             after=after,
+            worker_id=self.caller.worker_id,
         )
         if not page.run_ids:
             return None, page.next_cursor
@@ -304,6 +500,32 @@ class DetachedActionWorker:
     def cancelled(self, ticket):
         if self._stop_requested is not None and self._stop_requested():
             return True
+        intent = self.authority.claimed(ticket.fence.run_id)
+        if intent is not None:
+            service = self.authority.claimed_service(intent.snapshot)
+            with service._transaction():
+                snapshot, run, pin = self.authority._integrity(
+                    self.caller.actor, ticket.fence.run_id
+                )
+                if (
+                    snapshot.worker != self.profile
+                    or intent.claim.owner_id != self.caller.worker_id
+                ):
+                    raise FenceRejected("claimed worker binding differs")
+                if pin.cancel_requested:
+                    validate_claimed_cancellation(
+                        service, intent, run, pin, ticket.fence
+                    )
+                    return True
+                claim = WorkItemClaim(
+                    item_id=intent.claim.item_id,
+                    owner_id=intent.claim.owner_id,
+                    epoch=intent.claim.epoch,
+                )
+                if service._ticket(self.caller, claim, run) != ticket:
+                    raise FenceRejected("claimed worker ticket differs")
+                service.outputs(self.caller, ticket)._fence(ticket.fence)
+                return False
         with _transaction(self.authority.db):
             service, run, pin = self.authority._load(
                 self.caller.actor, ticket.fence.run_id

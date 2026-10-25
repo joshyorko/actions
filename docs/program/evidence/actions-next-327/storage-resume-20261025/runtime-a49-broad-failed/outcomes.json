@@ -1,0 +1,65 @@
+{
+  "failures": [
+    {
+      "class": "tests.action_server_tests.test_server",
+      "name": "test_server_full_openapi_flag",
+      "message": "AssertionError: FILES DIFFER:\n/workspace/recovery327/runtime-applicable-a49-v3/tmp/test_server_full_openapi_flag0/test_server/test_server_full_openapi_flag.yml\n/workspace/recovery327/runtime-applicable-a49-v3/tmp/test_server_full_openapi_flag0/test_server/test_server_full_openapi_flag.obtained.yml\nH"
+    },
+    {
+      "class": "tests.action_server_tests.test_server_async",
+      "name": "test_server_async_api_requests_while_waiting_for_action_to_complete",
+      "message": "assert 0 == 1"
+    },
+    {
+      "class": "tests.contract_tests.test_active_contracts",
+      "name": "test_runtime_imports_core_only_through_public_modules",
+      "message": "AssertionError: Runtime imports Core-private modules:\n  action_server/src/actions/server/_api_run.py:267\n  action_server/src/actions/server/_preload_actions/preload_actions.py:20\n  action_server/src/actions/server/_server.py:845\nassert not ['action_server/src/actions/server/_api_run.py:267', 'action"
+    },
+    {
+      "class": "tests.contract_tests.test_active_contracts",
+      "name": "test_template_package_script_is_executable_for_direct_workflow_invocation",
+      "message": "FileNotFoundError: [Errno 2] No such file or directory: '/workspace/actions/.github/workflows/deploy-beta-templates.yml'"
+    },
+    {
+      "class": "tests.contract_tests.test_active_contracts",
+      "name": "test_runtime_metadata_admits_installed_fenced_candidate_without_a_source_overlay",
+      "message": "AssertionError: assert {'allow-prere...1.0a7,<2.0.0'} == {'allow-prere...1.0a3,<2.0.0'}\n  \n  Omitting 1 identical items, use -vv to show\n  Differing items:\n  {'version': '>=1.1.0a7,<2.0.0'} != {'version': '>=1.1.0a3,<2.0.0'}\n  Use -v to get more diff"
+    }
+  ],
+  "skip_reasons": {
+    "Windows only": 6,
+    "Set ACTIONS_CANVAS_TEMPLATE_CANDIDATE_ACCEPTANCE=1 for the candidate-source Runtime/browser gate.": 1,
+    "Set ACTIONS_CANVAS_TEMPLATE_ACCEPTANCE=1 for the Runtime/browser gate.": 1,
+    "Set ACTIONS_CANVAS_RUNTIME_ACCEPTANCE=1 to run the RCC/browser acceptance.": 1,
+    "Requires native Windows locking": 1,
+    "native Windows path resolution": 1,
+    "set ACTIONS_REAL_RCC_ARTIFACT_TEST=1 for current-candidate RCC proof": 1,
+    "set ACTIONS_REAL_RCC_ACCEPTANCE=1 for the live local proof": 1,
+    "ACTIONS_TEST_DATABASE_URL is not configured": 13,
+    "exclusive prepared detached RCC cache required": 4,
+    "exclusive prepared Task host RCC fixture required": 12,
+    "dedicated generated-app real RCC gate not configured": 4,
+    "dedicated generated browser gate not configured": 8,
+    "exclusive prepared RCC home required": 2,
+    "exclusive prepared input/output RCC cache required": 8,
+    "exclusive prepared ordinary RCC cache required": 4,
+    "explicit owned prepared RCC gate required": 6,
+    "dedicated InvoiceQueryTest --browser not configured; browser gate remains required": 2,
+    "owned RCC invoice runtime not configured": 96,
+    "Skip package upload test": 3,
+    "set ACTIONS_REAL_RCC_ARTIFACT_TEST=1": 1,
+    "set ACTIONS_ROBOT_REAL_RCC=1 with pinned binary and owned home": 2,
+    "set ACTIONS_ROBOT_INPUT_RCC to pinned RCC18.19.3 for actual task-input acceptance": 1,
+    "set ACTIONS_REAL_RCC_ARTIFACT_TEST=1 for RCC publication proof": 1,
+    "set ACTIONS_REAL_RCC_ARTIFACT_TEST=1 for staged RCC proof": 1,
+    "exact task-owned pinned RCC preparation required": 16
+  },
+  "cleanup": {
+    "not_present_pids": {
+      "148713": true,
+      "149060": true,
+      "149293": true
+    },
+    "owned_postgres_stopped_removed": true
+  }
+}

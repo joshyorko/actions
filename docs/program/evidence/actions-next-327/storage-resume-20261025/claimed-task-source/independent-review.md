@@ -1,0 +1,50 @@
+# Claimed Task integration review
+
+Disposition: no blocking defect found in inspected isolated source. This is source review, not installed execution or PostgreSQL qualification. No source edits, services or tests run by reviewer. Root reported 31 SQLite passes / 81 deselections in task-sqlite-second.log; that result remains root-owned evidence.
+
+Authority: the strict detached-claimed wire shape accepts only snapshot and ClaimRef. Task adapter authenticates model audience/no AppSession scope and current Tasks extension before parsing. Host require_claimed_scope binds owner to the actual configured worker and Actor/profile/workspace, before TaskService constructs ManagedCaller. Full readiness runs outside transaction; scope-only checks bracket admission. Claimed service requires retained consumer Robot declaration, no producer outputs, exact claim policy. Execute, read and cancel retain separate Run/queue checks. Receipt identity binds principal, snapshot-derived request fingerprint, canonical claimed intent, TTL and contract version; arbitrary synchronous Run adoption is rejected.
+
+Atomicity/replay: Generic transaction acquires counter then workspace before Run locks; Task creation joins admission, intent and Task receipt. Fault-injected receipt insertion rolls admission back. Existing dispatch terminal replay is unchanged. Claimed replay requires exact retained claim and existing Task receipt; cancellation replay validates retained SQL cancellation facts rather than reacquiring a dead claim. New terminal replay still reaches Task projection/receipt validators before returning data.
+
+Cancellation: pending path requires original live claim and no Attempt, cancels queue+Run atomically and confirms cancelled. Active path uses fenced Generic outputs cancel; retained validator requires original epoch, cancelled queue row and unchanged active Run/Attempt/journal/launch, returning working with outcome unconfirmed. It never creates terminal execution authority or output grants. Old Task cannot cancel a replacement claim epoch. Cancellation validator checks no provider IO, requires transaction, and does not weaken the normal Robot terminal receipt validator.
+
+Wire compatibility: original detached invocation retained; additive detached-claimed strict union, setup routing recognizes both. Schema local definitions are renamed recursively to avoid collisions. Existing Tasks extension negotiation and generic error mapping remain intact. Existing standalone Task result handling remains separate; claimed terminal payload requires Robot evidence.
+
+Coverage limits: new service tests use synthetic readiness and reserve/claim without actual Robot execution. Before release, verify real configured host rejects wrong worker/profile and unavailable preparation; current Tasks wire acceptance/schema and incompatible extension denial for claimed mode; revoked queue/Run read and cancel; receipt/intent corruption; actual claimed Robot terminal success/failure, restart, and live cancellation cleanup. PostgreSQL lock ordering/concurrency remains a separate root gate. No implementation change requested by this review.
+
+Documentation improvement:
+- Canonical file proposed: docs/skills/work-items.md.
+- Exact delta: “Claimed consumer Robot Tasks use the exact immutable queue ClaimRef as their input identity. Admission validates the configured host worker, current policy and live claim, then records Run admission, claimed intent and Task receipt in one counter→workspace transaction without creating an Attempt. A replay or synchronous Run is not permission to attach a Task receipt. Pending cancellation may confirm cancelled only before Attempt admission; active cancellation preserves working/outcome unconfirmed until independent execution-stop evidence exists. Reading cancelled Task facts never grants execution or artifact access.”
+- Durable learning: separate immutable claim identity, Task receipt ownership and cancellation observation from execution authority.
+- Evidence: inspected source hashes in integration-hashes.json; six added service regressions and pure cancellation validator.
+- Stale guidance removed: replace standalone-only statement only after this integration is committed and qualified; retain installed/live cancellation gates explicitly pending.
+- Remaining uncertainty: real host/wire and installed execution plus PostgreSQL concurrency, as above.
+
+Upstream disposition: none. No external mutation performed or needed.
+
+## Cancel-only follow-up review
+
+Root's new authorization regression invalidates any inference that cancellation rights were already independent: Generic.authorize(CANCEL) reaches _current/execute, and Generic outputs cancel additionally borrows execution/read/claim guards. Earlier review did not catch this; root preserved the failing regression.
+
+Task-only correction is appropriate if it retains these checks in one Generic counter→workspace transaction: _load(cancel) for principal/receipt/intent/Run cancel; direct _permission(CANCEL) for workspace and exact input queue; live original queue claim; active current ticket's claim/Run/Attempt/journal/launch; base RunOutputService._fence before setting cancellation; then base outputs.cancel AND queue.cancel, requiring both success or rollback. Do not use the overridden Generic output fence that performs execution authorization. Pending path retains no-Attempt requirement; repeated cancellation uses pure retained evidence; terminal no-op verifies terminal evidence without changing queue.
+
+Provider boundary remains an explicit check: _ticket without a retained projection calls registry.schema_for through _inputs while in SQL. Reuse validated retained Robot projection/SQL parsing where supported; do not remove launch/input validation to avoid that IO. Live Attempt or queue expiration must reject initial cancellation rather than acquire a replacement epoch.
+
+Queue READ revocation test proposal: create under normal grants, remove only queue READ while retaining Run read, assert Task get unavailable; then remove execute/read/claim while retaining independent Run cancel plus workspace/queue CANCEL and assert cancellation succeeds. Cover active as well as pending; assert no new Attempt and atomic original queue/Run change. Separately remove CANCEL and prove no mutation. All authority writes in these source tests are fixture setup only, not a public installed proof.
+
+Task execution failure semantics confirmed: TaskSnapshot permits working/completed/cancelled; completed Run FAILED maps Task completed with result.isError=true. It does not create a Task failed status. Canonical addition: “Task completion describes completion of execution, not success of its result; a completed Task may return isError=true. Run and queue cancellation permissions must be checked independently of execute/read/claim permissions.”
+
+Correction not yet reviewed or qualified here. Upstream disposition: none; local authorization integration defect.
+
+Accepted design refinement: avoid _ticket entirely for this cancellation path. After exact queue._require, derive fence from locked current Pin/Attempt, invoke base _fence, set Run cancellation and queue cancellation in the same transaction, then call the pure cancellation validator with freshly reread Run/Pin/fence and require the exact expected state. This is valid fail-closed validation because all preceding effects are rollbackable SQL and no provider/external operation occurs. The pure validator retains original owner/epoch, input/policy, closed journal and launch checks. Pending cancellation similarly validates after its SQL lifecycle update. Required regressions: corrupt retained launch/journal must roll back both cancellation changes; false queue.cancel must roll back Run cancellation; independent cancel-only grants must pass both pending and active cases. This accepts the proposed design, not unseen final implementation or live termination.
+
+
+## Final cancellation implementation review
+
+No remaining blocker found in inspected final cancellation path. Refreshed exact hashes: cancel-final-hashes.json. Direct queue permission checks workspace and queue CANCEL; _load enforces independent Run CANCEL, principal, intent, receipt and TTL. First cancellation requires original live queue claim. Active path uses base output Attempt fence, with no Generic execution guard or registry schema resolution, then both SQL cancellations and fresh strict cancellation validation before commit. Pending path validates confirmed no-Attempt cancellation. Retained cancellation replay uses read-only validator. No provider IO was found in this changed cancellation path.
+
+New regressions cover pending/active independent Run grants; queue READ/CLAIM/execute revocation with cancel retained; malformed journal rollback preserving both owners; queue.cancel false rollback; original epoch rejection. Root task-sqlite-fifth.log now has terminal `39 passed, 89 deselected, 1 warning in 21.69s`. Reviewer did not run these tests. SQLite evidence does not qualify PostgreSQL concurrency or real child termination.
+
+Canonical exact addition to docs/skills/work-items.md: “Claimed Task cancellation checks Run cancel and exact queue cancel independently of execute, read and claim. Initial active cancellation requires both the original live queue claim and current Attempt fence. Queue and Run cancellation changes remain one SQL transaction; validate retained claim/journal/launch facts before commit and roll back both changes on failure. An active cancellation remains outcome unconfirmed and grants no artifact access.”
+
+Durable learning: cancellation is its own authority, with atomic post-mutation validation safe only for rollbackable SQL and no external effects. Stale guidance removed: earlier implicit reliance on Generic execution authorization for cancellation. Remaining uncertainty: PostgreSQL race tests, real host protocol and actual installed cancellation cleanup. Upstream disposition: none; local correction reviewed.

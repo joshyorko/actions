@@ -1,0 +1,22 @@
+{
+  "qualification_kind": "installed-claimed-task/v1",
+  "execution_authorized": false,
+  "source_sha": "REQUIRED_VERIFIED_NEW_CANDIDATE_SOURCE_SHA",
+  "runtime_version": "REQUIRED_NEW_RUNTIME_VERSION",
+  "core_version": "1.1.0a7",
+  "installed_base": "/REQUIRED/clean-installed-candidate",
+  "fixture_root": "/REQUIRED/fresh-claimed-task-fixture",
+  "prepared_receipt": "/REQUIRED/target-local/prepared.json",
+  "prepared_receipt_sha256": "REQUIRED_SHA256",
+  "core_proof": "/REQUIRED/target-local/core-proof.json",
+  "core_proof_sha256": "REQUIRED_SHA256",
+  "artifact_digest": "sha256:763f5ae5fb9a34ffcc921de2528e86b09bfbbef4249f3c392bad71f7a1d8f785",
+  "harness_sha256": "296b6809dc7b3bfee2e91a882d49dae02ac9fb92264657b0b8d3a9eedcde5eea",
+  "wheels": {
+    "wheels/action_server/REQUIRED_NEW_RUNTIME_WHEEL.whl": "REQUIRED_SHA256",
+    "wheels/actions/actions_core-1.1.0a7-py3-none-any.whl": "9e8a1e687bbce5e444f2dfdd5890d30176ab84ae68384b5ef6af9c3e86dcea74",
+    "wheels/work-items/actions_work_items-0.5.0a2-py3-none-any.whl": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb"
+  },
+  "supervisor_path": "/workspace/recovery327/installed-harness-review/supervise.py",
+  "supervisor_sha256": "5e34bd6d3c84679c5b9da5d25f3255fb92727910403842132113d68c31d7fd0b"
+}

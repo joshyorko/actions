@@ -354,7 +354,7 @@ def test_runtime_import_scan_decodes_utf8_source(tmp_path: Path):
     assert _private_core_imports_in_file(source) == []
 
 
-def test_template_package_script_is_executable_for_direct_workflow_invocation():
+def test_template_package_script_is_executable_for_local_packaging():
     script = REPO / "templates/packaging/create-templates-package.sh"
     relative_script = script.relative_to(REPO).as_posix()
     tracked_mode = subprocess.run(
@@ -372,8 +372,10 @@ def test_template_package_script_is_executable_for_direct_workflow_invocation():
         ("deploy-beta-templates.yml", "templates-beta.json"),
         ("deploy-templates.yml", "templates-prod.json"),
     ):
-        workflow = (REPO / ".github/workflows" / workflow_name).read_text()
-        assert f"./create-templates-package.sh {config_name}" in workflow
+        # Publishing workflows were deliberately retired; the local deterministic
+        # packaging entrypoint and both local configurations remain supported.
+        assert not (REPO / ".github/workflows" / workflow_name).exists()
+        assert (REPO / "templates/packaging" / config_name).is_file()
 
 
 def test_removed_product_paths_do_not_exist():
@@ -453,7 +455,7 @@ def test_runtime_metadata_admits_installed_fenced_candidate_without_a_source_ove
     metadata = tomllib.loads((ROOT / "pyproject.toml").read_text())
     dependencies = metadata["tool"]["poetry"]["dependencies"]
     assert dependencies["actions-core"] == {
-        "version": ">=1.1.0a3,<2.0.0",
+        "version": ">=1.1.0a8,<2.0.0",
         "allow-prereleases": True,
     }
     assert metadata["tool"]["poetry"]["group"]["dev"]["dependencies"][
@@ -485,7 +487,7 @@ def test_candidate_version_does_not_change_the_published_runtime_floor(tmp_path)
 def test_template_manifests_pin_supported_worker_core():
     expected_core_versions = {
         "advanced": "1.0.2",
-        "basic": "1.0.2",
+        "basic": "1.1.0a8",
         "canvas-query": "1.0.3",
         "canvas-first-boot": "1.0.3",
         "minimal": "1.0.2",
@@ -702,7 +704,7 @@ def test_runtime_clean_wheels_install_outside_checkout_in_both_uninstall_orders(
     runtime_files = _wheel_files(runtime_wheel)
     metadata_name = next(name for name in runtime_files if name.endswith("/METADATA"))
     assert (
-        "Requires-Dist: actions-core (>=1.1.0a3,<2.0.0)" in runtime_files[metadata_name]
+        "Requires-Dist: actions-core (>=1.1.0a8,<2.0.0)" in runtime_files[metadata_name]
     )
     assert (
         "Requires-Dist: actions-http-helper (>=1.0.3,<2.0.0)"

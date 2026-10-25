@@ -6649,11 +6649,74 @@ immutable artifact provenance and unique failure evidence.
 
 A Work Item claim and detached worker Attempt claim are different authorities.
 Standalone Task and synchronous claimed Robot proofs do not establish their join.
-The current detached Task wire, worker admission and terminal validation are
-standalone-only; claimed Tasks require explicit authority integration and a new
-candidate, rather than attaching Task receipts to completed Runs.
+The additive claimed consumer Robot Task join uses strict claim identity and
+atomic admission/intent/Task receipts; it never attaches receipts to existing
+synchronous Runs. Its source tests remain separate from installed claimed Task
+execution, restart and cancellation qualification against a new candidate.
 
 A repaired subset's green receipt does not supersede a failed full-suite receipt.
 Record the exact frozen source and selected files for combined provider checks,
 verify terminal session completion and owned service removal, and keep the full
 applicable gate open until its own complete result is available.
+
+
+Claimed Task cancellation tests must remove execution/read/claim authority while
+retaining Run and queue cancellation rights. Reusing a generic execution guard can
+accidentally require those unrelated permissions. Verify pending and active cases,
+stale claim epochs, queue-cancel failure and post-validation rollback. Retained
+cancellation validation is observational and must never be reused as execution
+authority or proof of process termination. Keep the initial failing permission
+regression and the corrected result as separate evidence.
+
+Independent-client evidence is operation-specific: Node catalog/authoring passes
+do not prove Node execution, and Python-executed Runs cannot close that row. Reuse
+the exact locked transport and public fixture, recording which client submitted
+each Run and retaining candidate/SDK/result identity through reconnect. Rebind
+prepared native controllers to the selected immutable candidate. Distinguish
+restart, source migration tests, private offline attachment-copy proof and full
+installed upgrade/restore; these cover different state and authority boundaries.
+
+A source-bound managed official-host browser pass may support an owner-launched
+bounded ChatGPT evaluation without waiting for all release gates. Preserve the
+actual evidence method: visual greying plus installed disabled-guard source does
+not establish a direct DOM or duplicate-click behavioral test. Generated word-count
+acceptance does not qualify invoice review/reconciliation. Actual client/platform,
+supported authenticated route, isolated configuration and owned cleanup remain
+operator prerequisites; never substitute Executor or reference-host proof for E1.
+
+When rebuilding a candidate with reused dependencies, verify exact expected
+Work Items/Core wheel names and hashes before copying or installing, and pin the
+RCC binary before using it as a build input. Recording a hash afterward does not
+prove it was the intended input. Pip check and import/version checks are not
+installed-byte proof: compare every wheel payload member in the clean consumer
+and explicitly handle relocated data rather than silently omitting it.
+
+RCC holotree delete dry-run support does not establish atomic lease protection.
+Reclaim only proven owned, reconstructible materializations after all producers
+are quiescent and fresh process/lease checks show no use; preserve artifact,
+catalog, trust, receipts and unique evidence. Do not relocate an existing compiler
+cache identity to change its backing filesystem. A new storage-backed preparation
+requires its own capacity, import and target-local identity proof.
+
+Compiler setup is candidate-bound: update exact Runtime source/wheel verification
+when changing a post-release candidate, deliver the package fixture and verifier
+together, and generate trust and prepared receipts on the consuming target. A
+standalone controller must route SIGTERM/SIGINT through bounded owned-child cleanup,
+retain repeated stop requests during cleanup, and refuse a subsequent phase.
+Allocate failure-prone monitoring resources before spawning a child or protect the
+child immediately. Python try/finally alone does not handle default SIGTERM.
+
+When a public Core integration surface changes, build the newly versioned Core
+wheel from the same immutable source archive as Runtime. Reuse an older immutable
+wheel only when its source is unchanged. Verify archived metadata, wheel identity
+and installed payload/version; an earlier compiler artifact does not prove changed
+Core bytes. Regenerate a target-local compiler environment and bind its successful
+Core execution receipt to the measured prepared artifact. Terminal Task execution
+and live cancellation need separate fixtures: active cancellation remains
+working/outcome-unconfirmed until durable terminal evidence exists.
+
+The clean-wheel contract test builds `git archive HEAD`, not the dirty working
+tree. Run it after committing the exact reviewed version and dependency-floor
+changes; otherwise package metadata and test expectations can refer to different
+sources. Keep the failed mixed-source attempt separate from the committed-source
+recheck. Update explicit starter-template pins alongside regenerated bundles.

@@ -842,7 +842,7 @@ def start_server(
         return payload
 
     async def serve_log_html(request: Request):
-        from actions._logging import get_log_viewer_html
+        from actions.server_integration import get_log_viewer_html
 
         return HTMLResponse(get_log_viewer_html())
 

@@ -1369,8 +1369,8 @@ the existing generic adapter renews both leases. Terminal Run/Attempt/output
 publication and completion of the exact input claim share one transaction after
 COMPLETE authorization. Queue-finish failure rolls back terminal publication.
 Claim epoch and Attempt epoch are independent. Optional no-claim execution requires
-its immutable declaration; producer and child outputs and claimed Robot Tasks remain
-unsupported. SQLite and PostgreSQL regression fixtures qualify this join with a
+its immutable declaration; producer and child outputs remain unsupported.
+Claimed consumer Robot Tasks use the separate strict Task join described below. SQLite and PostgreSQL regression fixtures qualify this join with a
 synthetic runner; actual installed RCC acceptance remains a separate gate.
 
 Robot input admission uses one canonical ASCII JSON encoder with a 65536-byte limit
@@ -1413,3 +1413,35 @@ their authorized managed HTTP artifact surface. To qualify Canvas, start with a 
 pending item and use submit_input followed by execute; never adopt an already claimed
 or completed direct Run to bypass the association check. Preserve a denied direct
 Canvas read as an expected boundary rather than weakening authorization.
+
+
+### Claimed consumer Robot Tasks
+
+The additive `detached-claimed` invocation accepts an immutable snapshot and exact
+`ClaimRef`; it rejects replacement inputs and caller-chosen idempotency keys. The
+configured Task host binds the claim owner to its server-held worker. Preparation
+readiness runs outside SQL; scope-only rechecks bracket admission. Canonical queued
+inputs, Run admission, retained claimed intent and Task receipt share one
+counter→workspace transaction without creating an Attempt. An existing synchronous
+Run cannot be adopted into a Task. The worker later claims that same Run.
+
+Task reads require current Run read and queue read permission. Cancellation requires
+independent Run and queue cancellation rights, not execution, read or claim rights.
+It checks the original live claim and, for active execution, the live Attempt fence.
+Run and queue cancellation are SQL-only changes in one transaction; strict retained
+input, policy, journal and launch validation must succeed before commit. Validation
+or queue failure rolls back both changes. Pending cancellation may report cancelled
+only before Attempt admission. Active cancellation remains working with an
+unconfirmed outcome; this is not evidence that a child process has stopped.
+
+A completed Robot invocation with a failed execution returns a completed MCP Task
+whose result has `isError: true`. Keep Task protocol state distinct from Run outcome.
+Synthetic SQL/host/wire tests do not establish installed execution, restart, live
+cancellation cleanup or PostgreSQL concurrency; qualify these separately against
+the exact installed candidate.
+
+Installed claimed Task replay qualification must verify unchanged Attempt identity
+and lifecycle counts, not only Task ID. Model Tasks do not gain Canvas submission
+authority; read their artifacts through the independently authorized public surface.
+A harness PASS requires separately matched supervisor identity and cleanup evidence.
+Actual live cancellation remains distinct from terminal success/failure and restart.

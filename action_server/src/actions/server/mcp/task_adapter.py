@@ -8,8 +8,9 @@ import anyio
 from mcp import MCPError
 
 from actions.server.mcp.task_wire import (
+    DETACHED_INVOCATION,
     TASK_EXTENSION,
-    DetachedInvocation,
+    ClaimedDetachedInvocation,
     TaskParams,
     TaskUpdateParams,
     require_current_tasks,
@@ -59,17 +60,26 @@ class TaskMcpAdapter:
         if getattr(params, "task", None) is not None:
             raise MCPError(-32602, "Legacy task parameters are unavailable")
         try:
-            invocation = DetachedInvocation.model_validate(params.arguments)
+            invocation = DETACHED_INVOCATION.validate_python(params.arguments)
         except ValueError:
             raise MCPError(-32602, "Invalid detached invocation") from None
-        snapshot = await self._run(
-            self.service.create,
-            caller.actor,
-            caller.workspace_id,
-            invocation.snapshot,
-            invocation.inputs,
-            invocation.idempotency_key,
-        )
+        if isinstance(invocation, ClaimedDetachedInvocation):
+            snapshot = await self._run(
+                self.service.create_claimed,
+                caller.actor,
+                caller.workspace_id,
+                invocation.snapshot,
+                invocation.claim,
+            )
+        else:
+            snapshot = await self._run(
+                self.service.create,
+                caller.actor,
+                caller.workspace_id,
+                invocation.snapshot,
+                invocation.inputs,
+                invocation.idempotency_key,
+            )
         return task_result(snapshot, creation=True)
 
     async def get(self, ctx, params: TaskParams):
@@ -108,7 +118,7 @@ class TaskMcpAdapter:
                 result.append(tool)
                 continue
             original = copy.deepcopy(tool.input_schema)
-            detached = DetachedInvocation.model_json_schema(by_alias=True)
+            detached = DETACHED_INVOCATION.json_schema(by_alias=True)
 
             # Namespace local references before sharing the two root schemas.
             def rename(value: Any):

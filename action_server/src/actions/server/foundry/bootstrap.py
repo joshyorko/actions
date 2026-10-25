@@ -418,7 +418,9 @@ def create_runtime_canvas(
                 from actions.server.run_outputs.task_service import TaskService
 
                 policy = load_task_policy(Path(task_policy_path))
-                detached = DetachedActions(deployments, outputs)
+                detached = DetachedActions(
+                    deployments, outputs, queue_authorization=SqlQueueAuthorization(db)
+                )
                 task_host = DetachedTaskHost(
                     detached,
                     actor=actor,

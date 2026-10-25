@@ -228,7 +228,7 @@ class McpServerSetupHelper:
         if (
             params.name == "capability_invoke"
             and isinstance(params.arguments, dict)
-            and params.arguments.get("mode") == "detached"
+            and params.arguments.get("mode") in ("detached", "detached-claimed")
         ):
             if self._task_adapter is None:
                 raise MCPError(-32603, "Task host unavailable")

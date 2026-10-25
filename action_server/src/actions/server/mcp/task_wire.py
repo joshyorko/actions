@@ -13,10 +13,12 @@ from pydantic import (
     ConfigDict,
     Field,
     JsonValue,
+    TypeAdapter,
     field_validator,
     model_validator,
 )
 
+from actions.server.managed_work_items.contracts import ClaimRef
 from actions.server.run_outputs.service import _canonical
 from actions.server.run_outputs.types import ExecutionSnapshot, canonical_uuid
 
@@ -37,6 +39,18 @@ class DetachedInvocation(BaseModel):
             raise ValueError("bounded idempotency key required")
         _canonical(self.inputs, 262144)
         return self
+
+
+class ClaimedDetachedInvocation(BaseModel):
+    model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
+    mode: Literal["detached-claimed"]
+    snapshot: ExecutionSnapshot
+    claim: ClaimRef
+
+
+DETACHED_INVOCATION: TypeAdapter[
+    DetachedInvocation | ClaimedDetachedInvocation
+] = TypeAdapter(DetachedInvocation | ClaimedDetachedInvocation)
 
 
 class TaskParams(RequestParams):
