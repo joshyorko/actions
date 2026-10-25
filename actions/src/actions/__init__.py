@@ -46,7 +46,7 @@ from ._response import ActionError, Response
 from ._secret import OAuth2Secret, Secret, SecretSpec
 from ._table import Row, RowValue, Table
 
-__version__ = "1.1.0a4"
+__version__ = "1.1.0a5"
 version_info = [int(x) for x in _re.findall(r"\d+", __version__)[:3]]
 
 if TYPE_CHECKING:

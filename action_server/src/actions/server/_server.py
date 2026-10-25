@@ -574,6 +574,12 @@ def start_server(
         if native_canvas is not None:
             canvas_foundry = native_canvas.canvas
             task_service = native_canvas.task_service
+            if (
+                task_service is not None
+                and run_output_transport is None
+                and invoice_canvas is None
+            ):
+                run_output_transport = native_canvas.run_output_transport
             if managed_work_items is None and managed_authenticate is None:
                 managed_work_items = native_canvas.managed_work_items
                 managed_authenticate = native_canvas.managed_authenticate

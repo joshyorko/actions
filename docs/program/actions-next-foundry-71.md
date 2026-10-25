@@ -379,3 +379,15 @@ node. Schema equality on the nested object alone does not prove usable discovery
 Authorized model results include the public authored spec for create/apply/get,
 inspection and activation/rollback; concrete capability bindings and backend
 source remain private. Spec data enables revision, never actor authorization.
+
+## Local semantic projection interface
+
+SemanticRendererAdapters may expose a pure local getProjection(bindingId) getter
+returning SemanticProjectionState. This does not fetch, authorize, or accept
+arbitrary dispatch metadata. A trusted adapter generation identifies each
+request; ready/empty states require the current Run/Attempt, canonical JSON and
+parsed data from the same authorized output under the existing restricted
+RFC8785 contract (at most65536 UTF-8 bytes). Clear prior data on resubmit, error
+or authorization denial and ignore stale responses. The host's changed callback
+triggers rendering. The TypeScript interface alone implements no encoder,
+Runtime wire contract, validation or authorization.

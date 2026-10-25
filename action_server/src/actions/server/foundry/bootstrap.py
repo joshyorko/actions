@@ -63,6 +63,7 @@ if TYPE_CHECKING:
     from actions.server.foundry.logical_execution import LogicalExecution
     from actions.server.run_outputs.task_host import DetachedTaskHost
     from actions.server.run_outputs.task_service import TaskService
+    from actions.server.run_outputs.transport import RunOutputTransport
 
 log = logging.getLogger(__name__)
 _ROOT_REQUEST = str(uuid5(NAMESPACE_URL, "actions.native-runtime-bootstrap/v1"))
@@ -170,6 +171,7 @@ class RuntimeCanvas:
     task_host: DetachedTaskHost | None = None
     task_service: TaskService | None = None
     logical_execution: LogicalExecution | None = None
+    run_output_transport: RunOutputTransport | None = None
 
     def start(self) -> None:
         if self.task_host is not None:
@@ -409,6 +411,16 @@ def create_runtime_canvas(
                 return None
             return caller
 
+        output_transport = None
+        if task_service is not None:
+            from actions.server.foundry.run_output_transport import (
+                create_run_output_transport,
+            )
+
+            output_transport = create_run_output_transport(
+                outputs, managed_authenticate
+            )
+
         return RuntimeCanvas(
             CanvasMcp(port, authenticate, html),
             actor,
@@ -419,6 +431,7 @@ def create_runtime_canvas(
             task_host,
             task_service,
             logical_execution,
+            run_output_transport=output_transport,
         )
     except BaseException:
         provider.close()

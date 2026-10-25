@@ -1,0 +1,6 @@
+[
+  "tests/action_server_tests/test_runtime_managed_bootstrap.py::test_native_bootstrap_joins_managed_identity_and_live_sql[sqlite]",
+  "tests/action_server_tests/test_runtime_managed_bootstrap.py::test_native_bootstrap_joins_managed_identity_and_live_sql[postgresql]",
+  "tests/action_server_tests/test_runtime_managed_bootstrap.py::test_configured_native_completion_joins_same_sql_without_retry_or_grants[sqlite]",
+  "tests/action_server_tests/test_runtime_managed_bootstrap.py::test_configured_native_completion_joins_same_sql_without_retry_or_grants[postgresql]"
+]
