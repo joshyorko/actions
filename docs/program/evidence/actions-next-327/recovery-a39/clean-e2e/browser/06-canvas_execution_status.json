@@ -1,0 +1,40 @@
+{
+  "_meta": {
+    "actions.execution": {
+      "attemptId": "5f1f22c8-6870-447f-8e0a-8f94b7bd4283",
+      "bindingId": "count",
+      "cancelRequested": false,
+      "outputs": [
+        {
+          "handle": "art_hCnf-fK0Qz-TYarXp9ajLA"
+        },
+        {
+          "handle": "art_Hk0JiZa4T8OFidaGRl4UHA"
+        },
+        {
+          "handle": "art_Wln9Ih59Qj-y3Lv5F4ujzg"
+        },
+        {
+          "handle": "art_PejkO8KVRHu_cqh_EDkviA"
+        }
+      ],
+      "runId": "7a1266fd-520b-4062-9ab1-7c18f8d68e42",
+      "state": "completed"
+    },
+    "io.modelcontextprotocol/serverInfo": {
+      "name": "Action Server",
+      "version": ""
+    }
+  },
+  "content": [
+    {
+      "type": "text",
+      "text": "Bound app execution state.",
+      "annotations": null,
+      "_meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false,
+  "resultType": "complete"
+}

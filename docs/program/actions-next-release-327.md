@@ -1,3 +1,16 @@
+## Fresh uninstrumented first combined acceptance
+
+[Clean end-to-end receipts and screenshots](evidence/actions-next-327/recovery-a39/clean-e2e/README.md)
+now prove exact a5eaa1cb0be6dcde2d509f2babbb486d9195ccc1 from public blank Canvas
+creation through generated Package compilation, activation, real reference-host
+rendering/RCC execution/artifact3 and same-state restart. The first app also
+proves two Actions/two detached Tasks, app executions and rollback/reactivation.
+This fresh run uses no diagnostic admission. Original failed second-app apply
+remains retained with unknown cause; no historical gate was relabeled.
+Installed source/wheels are frozen independently of later v2 or index corrections.
+Actual ChatGPT/Codex model, Knowledge/Robot breadth, security/platform/distribution
+and other full-matrix gates remain open. No public release or Dakota READY claim.
+
 ## First parallel integration checkpoint — installed protocol and reference-host execution passed
 
 Reviewed A82bbaef (Canvas tables/results), B1ae3805 (Knowledge page checker),
