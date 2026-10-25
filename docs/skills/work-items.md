@@ -648,20 +648,21 @@ diagnostics. That digest is mutable repository data and is not immutable source
 authority. After reviewing an intentional local baseline or port change,
 regenerate it with `--write` using the package's supported Python environment.
 
-The authoritative form requires explicit Git roots:
+The authoritative verifier supports either two explicit pinned Git roots or the checked-in, authenticated Robocorp reference plus the pinned owned custom Git root:
 
 ```bash
 python work-items/scripts/check_contract_port_provenance.py \
-  --robocorp-root /path/to/robocorp-at-631f560 \
+  --robocorp-reference work-items/contracts/references/robocorp-1.5.0 \
   --custom-root /path/to/custom-at-c56c701
 ```
 
-It first requires each root's `HEAD` to equal its ledger SHA, then derives the
-selected nodes, bodies, decorators, assertions, fixture interfaces, exclusions,
-and public symbols/signatures from those trees. It compares stored source nodes,
-adapted ports under import/name-only AST normalization, and the compatibility
-ledger. The Work Items release workflow checks out both exact commits and runs
-this form before the package gate. The official Robocorp Control Room HTTP
+`--robocorp-root /path/to/robocorp-at-631f560` remains an alternative to `--robocorp-reference`; the two flags are mutually exclusive and both modes require `--custom-root`. Authority modes reject `--write`. The mutable offline diagnostic mode described above remains separate.
+
+The owned reference authenticates17 unchanged upstream source/license files through Git blob and complete ancestor-tree objects to the existing commit pin. It includes all package Python files, complete selected test suites, fixture sources and original Apache-2.0 license, preserving excluded nodes for coverage checks. Extra/missing payloads, symlinks, unsafe paths, disconnected/corrupt objects and inventory changes fail validation. Sources are parsed, never imported or executed. The unsigned upstream commit proves commit-addressed identity, not author-signature attestation.
+
+Both source modes then run the same selected-node AST, decorator, fixture-interface, exclusion, public-export and signature comparisons. The custom root still requires its exact HEAD. The release workflow reads the owned Robocorp reference without an upstream checkout and retains the pinned custom checkout. No custom source bundle or new custom license attribution is introduced; its conflicting pinned metadata requires separate reconciliation.
+
+The official Robocorp Control Room HTTP
 adapter and Fizzy orchestration remain explicit exclusions. Yorko is a separate
 experimental optional adapter whose mocked contract does not establish live
 service behavior. Public Yorko symbols remain importable without the `yorko`
@@ -1389,11 +1390,9 @@ public terminal Work Item/Run reads and authorized artifacts after a process res
 A passed dryrun is not execution qualification.
 
 
-The source-authority contract gate still requires both pinned Git roots; offline
-digest verification alone is not a substitute. An owned reference can replace
-upstream availability only when original source and license bytes are authenticated
-through Git blob/tree/commit objects to the existing immutable pin and the same
-semantic checks still run. The pinned custom reference currently declares MIT in
+The source-authority gate now accepts the authenticated owned Robocorp reference
+plus the pinned custom Git root, as described above. Mutable offline digest
+verification alone remains insufficient. The pinned custom reference currently declares MIT in
 pyproject.toml, links a missing LICENSE in README, and conflicts with the local
 Apache-labelled manifest. Reconcile that provenance before attributing a new full
 custom-source fixture; this does not authorize changing existing legal attribution.
