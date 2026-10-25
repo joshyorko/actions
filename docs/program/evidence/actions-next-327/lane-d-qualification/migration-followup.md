@@ -1,5 +1,12 @@
 # Bounded current-schema migration qualification
 
+Correction after independent review: the original checks below establish retained
+rows and table/column/index names, not full schema or index-definition parity.
+SQLite `Database.list_indexes()` filters on the literal `YOUR TABLENAME HERE`
+and returns empty for these fixtures; its equality assertion was vacuous.
+`list_table_and_columns()` compares names, not constraints or definitions.
+See `index-observer.md` for independent, nonempty index-definition qualification.
+
 Source production tree remains the PR328 candidate da928b69. No migrations,
 schemas, existing tests, version metadata, or build configuration changed.
 
@@ -21,7 +28,8 @@ A dedicated test, `test_release_migration_qualification_327.py`, reuses the
 canonical `database_v0` fixture and real SQLite migration functions. It covers
 direct upgrade and paths through 15, 19 and 21 to `CURRENT_VERSION`, verifies the
 persisted migration number, retains original Run ID/status/input/result rows,
-and compares all tables/columns/indexes with a fresh current database.
+and compares reported table/column/index names with a fresh current database.
+Its original `list_indexes()` comparison supplies no index-definition evidence.
 
 ```bash
 poetry run pytest -p no:robocorp_log_pytest \
@@ -64,7 +72,7 @@ Append to `docs/skills/repository-operations.md`, under historical migration fix
 > DDL or weaken migration safeguards to repair a stale parity target.
 
 Evidence: four reproduced original failures and four current-target passes with
-retained Run rows and schema/index equality. Removed ambiguity: fixed historical
+retained Run rows and table/column/index-name equality only. Removed ambiguity: fixed historical
 endpoint implies parity with an advancing fresh schema. Uncertainty: independent
 v20 golden-fixture correction, other backends and installed-binary qualification.
 Upstream disposition: none for this slice (local test contract).

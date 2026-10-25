@@ -1,12 +1,19 @@
 # Allocated CI test corrections
 
+Qualification correction: the retained SQLite index comparison was vacuous due
+to `Database.list_indexes()` filtering the literal `YOUR TABLENAME HERE`.
+The companion table/column observer compares names only. Thus the green receipts
+below do not establish full schema or index-definition parity. Production
+`_database.py` remains unchanged; see `index-observer.md` for the independent gate.
+
 Only the three allocated existing test files changed. Production migrations,
 version metadata, shared/golden fixtures and `test_candidate_work_items.py` are
 unchanged. Earlier failure receipts are retained alongside these green receipts.
 
 - `test_detached_migration.py` and `test_task_clock_migration.py` now run their
   existing invariant checks after migration 21, then repeat them after migration
-  to `CURRENT_VERSION`. Final full schema/index parity assertions are unchanged.
+  to `CURRENT_VERSION`. Existing name/index-list assertions are unchanged;
+  the latter supplied no actual SQLite index-definition proof.
   The independently archived v20 schema/source identity remains unchanged.
 - `test_actions_runtime_release_line.py` reads authoritative package version
   metadata, loads the Runtime's actual lightweight module declaration and numeric
@@ -64,7 +71,7 @@ fresh-schema parity and repeat legacy-row invariants. Add:
 
 Durable learning: historical parity and candidate identity assertions can remain
 strict without stale endpoint/alpha literals. Evidence: original red receipts,
-current green XML and unchanged explicit parity/floor/pin assertions. Removed
+current green XML and unchanged name-comparison/floor/pin assertions. Removed
 ambiguity: current-schema parity can stop at an intermediate migration; every
 candidate assertion must repeat an alpha literal. Uncertainty: PostgreSQL, full
 Runtime/platform gates and integration-owned fourth-file correction.
