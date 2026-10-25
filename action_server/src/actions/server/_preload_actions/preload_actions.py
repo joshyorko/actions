@@ -1,3 +1,4 @@
+import importlib.util
 import os
 
 # This has to be imported once and we're done.
@@ -10,7 +11,13 @@ try:
 except ImportError:
     from . import preload_actions_teardown  # noqa
 
-from robocorp.log import html
+# This module runs inside the selected action package environment, which may
+# retain an older Core. Only absence of the owned module selects its legacy
+# logger; failures inside an available owned logger must propagate unchanged.
+if importlib.util.find_spec("actions._logging") is None:
+    from robocorp.log import html  # type: ignore[import-not-found]
+else:
+    from actions._logging import html
 
 X_ACTION_TRACE = os.environ.get("X_ACTION_TRACE", "")
 

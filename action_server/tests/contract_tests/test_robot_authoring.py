@@ -5,6 +5,8 @@ from pathlib import Path
 from uuid import uuid4
 
 import pytest
+from jsonschema import Draft202012Validator
+
 from actions.server.deployments.ids import DeploymentId, PackageRevisionRef, WorkspaceId
 from actions.server.foundry.authoring_values import (
     AuthoringAccessDenied,
@@ -25,7 +27,6 @@ from actions.server.foundry.robot_package_admission import (
 )
 from actions.server.foundry.robot_package_builder import build_robot_package
 from actions.server.run_outputs.types import Actor
-from jsonschema import Draft202012Validator
 
 
 def request(**updates):

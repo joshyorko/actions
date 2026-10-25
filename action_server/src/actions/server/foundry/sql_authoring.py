@@ -6,6 +6,7 @@ from collections.abc import Callable
 from uuid import uuid4
 
 from actions.canvas_contract import parse_canvas_spec
+
 from actions.server.deployments.foundry_repository import FoundryRepository
 from actions.server.deployments.foundry_service import FoundryDeploymentService
 from actions.server.deployments.foundry_values import (

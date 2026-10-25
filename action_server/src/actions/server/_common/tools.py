@@ -11,6 +11,7 @@ log = logging.getLogger(__name__)
 class BaseTool:
     mutex_name: str
     base_url: str
+    download_retired: bool = False
     executable_name: str
     version_command: tuple[str, ...] = ("--version",)
     available_in_mac_os_arm64: bool = True
@@ -34,14 +35,19 @@ class BaseTool:
 
         i.e.:
 
-        action_server_executable = ActionServerTool.get_executable_path(
-            version="0.1.0", download=True
+        executable = RccTool.get_default_executable(
+            version="v18.19.3", download=True
         )
 
-        Then the `action_server_executable` will be a Path to the executable and will be
+        Then the `executable` will be a Path to the executable and will be
         downloaded if `download` is True (otherwise it will be checked if the executable
         exists and is executable).
         """
+        if download and cls.download_retired:
+            raise RuntimeError(
+                "Automatic vendor tool downloads are retired; supply an explicitly managed local executable."
+            )
+
         from actions.server._common.locations import get_default_executable_path
 
         target_location = get_default_executable_path(
@@ -64,6 +70,10 @@ class BaseTool:
         self._tool_version = tool_version
 
     def download(self) -> None:
+        if self.download_retired:
+            raise RuntimeError(
+                "Automatic vendor tool downloads are retired; supply an explicitly managed local executable."
+            )
         _download_tool(self, self._target_location, self._tool_version)
 
     def verify(self) -> bool:
@@ -192,7 +202,7 @@ def _download_tool(
     force: bool = False,
 ) -> None:
     """
-    Downloads the given Sema4.ai tool to the specified location. Note that it doesn't overwrite it if it
+    Downloads the explicitly configured tool to the specified location. Note that it doesn't overwrite it if it
     already exists (unless force == True).
 
     Args:
@@ -261,6 +271,8 @@ def _download_tool(
 
 
 class ActionServerTool(BaseTool):
+    # Compatibility for explicitly managed local binaries; no vendor acquisition.
+    download_retired = True
     mutex_name = "sema4ai-get-action-server"
     base_url = "https://cdn.sema4.ai/action-server/releases"
     executable_name = "action-server"
@@ -273,6 +285,8 @@ class ActionServerTool(BaseTool):
 
 
 class AgentCliTool(BaseTool):
+    # Compatibility for explicitly managed local binaries; no vendor acquisition.
+    download_retired = True
     mutex_name = "sema4ai-get-agent-cli"
     base_url = "https://cdn.sema4.ai/agent-cli/releases"
     executable_name = "agent-cli"

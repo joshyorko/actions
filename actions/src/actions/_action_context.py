@@ -49,7 +49,7 @@ def _decrypt(key: bytes, iv: bytes, ciphertext: bytes, tag: bytes) -> bytes:
     return decryptor.update(ciphertext) + decryptor.finalize()
 
 
-def _is_robocorp_log_available():
+def _is_logging_available():
     # When frozen it can't really be used.
     import sys
 
@@ -228,8 +228,8 @@ class BaseContext:
             raise RuntimeError("Expected data to be encrypted if it reached here!")
 
         ctx: Any
-        if _is_robocorp_log_available():
-            from robocorp import log
+        if _is_logging_available():
+            from actions import _logging as log
 
             ctx = log.suppress()
         else:
@@ -279,8 +279,8 @@ class ActionContext(BaseContext):
     def _hide_secrets(self):
         secrets = self._raw_data.get("secrets")
         if secrets and isinstance(secrets, dict):
-            if _is_robocorp_log_available():
-                from robocorp import log
+            if _is_logging_available():
+                from actions import _logging as log
 
                 for secret_value in secrets.values():
                     if isinstance(secret_value, str):

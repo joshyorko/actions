@@ -43,11 +43,18 @@ class DetachedActions:
     def _service(self, actor, snapshot):
         service = StandaloneActionExecution(self.deployments, self.outputs, snapshot)
         service.current(ManagedCaller(actor=actor))
-        if (
-            snapshot.runtime_kind != "rcc"
-            or snapshot.capability_authority != "package-revision"
-        ):
-            raise AccessDenied("verified ordinary RCC Action required")
+        if snapshot.capability_authority != "package-revision":
+            raise AccessDenied("verified ordinary Package capability required")
+        if snapshot.runtime_kind != "rcc":
+            from actions.server.foundry.robot_retained_projection import (
+                robot_projection_if_present,
+            )
+
+            if (
+                snapshot.runtime_kind != "direct"
+                or robot_projection_if_present(self.db, snapshot) is None
+            ):
+                raise AccessDenied("verified RCC or direct Robot capability required")
         return service
 
     def _envelope(self, snapshot, inputs):
@@ -263,11 +270,13 @@ class DetachedActionWorker:
         *,
         stop_requested=None,
         logical_execution=None,
+        capability_runner=None,
     ):
         canonical_uuid(worker_id)
         if stop_requested is not None and not callable(stop_requested):
             raise ValueError("trusted stop callback required")
         self.logical_execution = logical_execution
+        self.capability_runner = capability_runner
         self._stop_requested = stop_requested
         self.authority, self.profile = authority, profile
         self.caller = ManagedCaller(actor=actor, worker_id=worker_id)
@@ -315,6 +324,16 @@ class DetachedActionWorker:
         if self.cancelled(ticket):
             raise FenceRejected("detached cancellation requested")
         service, _, _ = self.authority._load(self.caller.actor, ticket.fence.run_id)
+        if self.capability_runner is not None:
+            robot = self.capability_runner.robot_for(service.registry, service.snapshot)
+            if robot is not None:
+                return robot.execute(
+                    self.caller,
+                    ticket,
+                    service,
+                    cancelled=lambda: self.cancelled(ticket),
+                    publication_cancelled=self._stop_requested,
+                )
         return GeneratedRccExecution(
             service.registry,
             service.outputs(self.caller, ticket),

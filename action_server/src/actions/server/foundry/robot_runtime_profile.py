@@ -8,7 +8,10 @@ from typing import TYPE_CHECKING, Literal, Protocol
 
 from pydantic import BaseModel, ConfigDict, model_validator
 
-from actions.server.foundry.package_registry import RegistryCapabilitySelection, RegistryRobotSelection
+from actions.server.foundry.package_registry import (
+    RegistryCapabilitySelection,
+    RegistryRobotSelection,
+)
 from actions.server.foundry.robot_execution import (
     DirectRobotPreparation,
     RccRobotPreparation,
@@ -105,17 +108,37 @@ class RuntimeCapabilityRunner:
     direct_robot: PinnedRobotRunner | None = None
     rcc_robot: PinnedRobotRunner | None = None
 
-    def execute(self, caller, ticket, service):
-        selected = service.registry.selection_for(
-            service.snapshot.capability, service.snapshot.runtime_plan
-        )
+    def robot_for(self, registry, snapshot):
+        """Select configured Robot preparation from artifact-verified package kind."""
+        selected = registry.selection_for(snapshot.capability, snapshot.runtime_plan)
         if isinstance(selected, RegistryCapabilitySelection):
-            return self.python.execute(caller, ticket, service)
+            return None
         if not isinstance(selected, RegistryRobotSelection):
             raise AccessDenied("unsupported retained Package selection")
+        plan = selected.robot.robot.plan
         runner = {"direct": self.direct_robot, "rcc": self.rcc_robot}.get(
-            selected.robot.robot.plan.runtime_kind
+            plan.runtime_kind
         )
         if runner is None:
             raise AccessDenied("retained Robot runtime is not configured")
+        preparation = runner.preparation
+        if plan.runtime_kind == "rcc":
+            if not isinstance(preparation, RccRobotPreparation):
+                raise AccessDenied("Robot preparation kind differs")
+            retained = preparation.environment
+            if (
+                retained.build_identity.specification_digest
+                != plan.specification_digest
+                or retained.build_identity.artifact_digest != plan.artifact_digest
+                or retained.package_yaml_digest != plan.package_yaml_digest
+            ):
+                raise AccessDenied("Robot prepared environment differs")
+        elif not isinstance(preparation, DirectRobotPreparation):
+            raise AccessDenied("Robot preparation kind differs")
+        return runner
+
+    def execute(self, caller, ticket, service):
+        runner = self.robot_for(service.registry, service.snapshot)
+        if runner is None:
+            return self.python.execute(caller, ticket, service)
         return runner.execute(caller, ticket, service)

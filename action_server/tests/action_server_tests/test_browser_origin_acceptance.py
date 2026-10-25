@@ -164,6 +164,7 @@ _BROWSER_SCRIPT = textwrap.dedent(
     try {
         browser = await chromium.launch({
             headless: true,
+            chromiumSandbox: true,
         });
         if (input.force_hang_after_browser_launch) {
             const partial = `${input.process_pid_file}.${process.pid}.partial`;

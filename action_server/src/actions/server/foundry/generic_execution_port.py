@@ -413,7 +413,7 @@ class GenericCanvasExecution(CanvasPort):
                 ):
                     raise AccessDenied("bounded sealed outputs unavailable")
                 from actions.server.foundry.logical_receipts import (
-                    requirement_ids,
+                    FAILURE_V1,
                     validate_bound_record,
                     versions_for_selection,
                 )
@@ -421,32 +421,32 @@ class GenericCanvasExecution(CanvasPort):
                 record = attached.get("result")
                 if not isinstance(record, dict):
                     raise ValueError("generated result receipt unavailable")
-                ids = requirement_ids(service.registry, service.snapshot)
-                if (
-                    record.get("version")
-                    != versions_for_selection(service.registry, service.snapshot)[1]
+                if record.get("version") != versions_for_selection(
+                    service.registry, service.snapshot
+                )[1] and not (
+                    run.status == RunStatus.FAILED
+                    and record.get("version") == FAILURE_V1
                 ):
                     raise ValueError("generated receipt version differs")
-                if ids:
-                    pin = _one(service.db, RunPin, run.id)
-                    attempt = _one(service.db, RunAttempt, pin.current_attempt_id)
-                    fence = AttemptFence(
-                        run_id=run.id,
-                        attempt_id=attempt.id,
-                        owner_id=attempt.owner_id,
-                        epoch=attempt.epoch,
-                    )
-                    validate_bound_record(
-                        service.db,
-                        service.registry,
-                        service.snapshot,
-                        run,
-                        fence,
-                        record,
-                        claim=record.get("claim"),
-                        terminal=True,
-                        outputs=attached["outputs"],
-                    )
+                pin = _one(service.db, RunPin, run.id)
+                attempt = _one(service.db, RunAttempt, pin.current_attempt_id)
+                fence = AttemptFence(
+                    run_id=run.id,
+                    attempt_id=attempt.id,
+                    owner_id=attempt.owner_id,
+                    epoch=attempt.epoch,
+                )
+                validate_bound_record(
+                    service.db,
+                    service.registry,
+                    service.snapshot,
+                    run,
+                    fence,
+                    record,
+                    claim=record.get("claim"),
+                    terminal=True,
+                    outputs=attached["outputs"],
+                )
                 handles: list[JsonValue] = []
                 for raw in attached["outputs"]:
                     ref = OutputRef.model_validate(raw)

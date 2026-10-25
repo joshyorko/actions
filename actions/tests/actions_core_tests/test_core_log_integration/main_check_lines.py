@@ -1,5 +1,4 @@
-from robocorp import log
-
+from actions import _logging as log
 from actions import action
 
 

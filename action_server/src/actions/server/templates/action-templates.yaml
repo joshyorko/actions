@@ -1,9 +1,9 @@
 {
-  "hash": "c051c3e1db4f43393cb260c3a4066645c6793217f797a42bcab774887db1f03e",
+  "hash": "fe721d8209089fe468b58f3b0b5b040e7762045ddd0119d5222c7fe7461dbc0e",
   "schema": 1,
   "templates": {
     "advanced": "Advanced - An example showcasing more advanced configuration features of Actions.",
-    "basic": "Basic - Simple example showcasing some basic configuration.",
+    "basic": "Basic - Offline word-count action using Actions Core.",
     "canvas-query": "Canvas Query - A local typed Action rendered in the Canvas MCP App View.",
     "mcp-v2-showcase": "MCP v2 Showcase - A local example of the stateless core MCP protocol.",
     "minimal": "Minimal - A bare bone starting template.",

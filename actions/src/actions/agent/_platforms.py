@@ -341,8 +341,8 @@ class ReductoPlatformParameters(BaseModel):
     )
 
     reducto_api_url: str = Field(
-        default="https://backend.sema4ai.dev/reducto",
-        description="The Reducto API URL.",
+        pattern=r"\S",
+        description="Explicit owner-supplied Reducto API URL; no service default is provided.",
     )
 
     reducto_api_key: str | None = Field(

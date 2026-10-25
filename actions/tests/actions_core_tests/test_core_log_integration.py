@@ -9,7 +9,7 @@ from devutils.fixtures import actions_run
 def test_core_log_integration_error_in_import(datadir, str_regression):
     import re
 
-    from robocorp.log._log_formatting import pretty_format_logs_from_log_html
+    from actions._logging._log_formatting import pretty_format_logs_from_log_html
 
     result = actions_run(
         ["run", "main_with_error_in_import.py"], returncode=1, cwd=str(datadir)
@@ -42,8 +42,8 @@ def test_core_log_integration_error_in_import(datadir, str_regression):
 
 
 def test_core_log_integration_config_log(datadir, str_regression):
-    from robocorp.log import verify_log_messages_from_log_html
-    from robocorp.log._log_formatting import pretty_format_logs_from_log_html
+    from actions._logging import verify_log_messages_from_log_html
+    from actions._logging._log_formatting import pretty_format_logs_from_log_html
 
     result = actions_run(["run", "simple.py"], returncode=0, cwd=str(datadir))
 
@@ -79,7 +79,7 @@ def test_core_log_integration_empty_pyproject(datadir) -> None:
 default_library_filter_kind = "exclude"
 """
     )
-    from robocorp.log import verify_log_messages_from_log_html
+    from actions._logging import verify_log_messages_from_log_html
 
     result = actions_run(["run", "simple.py"], returncode=0, cwd=str(datadir))
 
@@ -99,7 +99,7 @@ default_library_filter_kind = "exclude"
 
 
 def test_core_log_integration_lines(datadir, str_regression) -> None:
-    from robocorp.log._log_formatting import pretty_format_logs_from_log_html
+    from actions._logging._log_formatting import pretty_format_logs_from_log_html
 
     result = actions_run(["run", "main_check_lines.py"], returncode=0, cwd=str(datadir))
 
@@ -126,7 +126,7 @@ def test_core_log_integration_lines(datadir, str_regression) -> None:
 def test_core_log_integration_console_messages(datadir, str_regression, mode) -> None:
     pyproject: Path = datadir / "pyproject.toml"
     pyproject.write_text("")
-    from robocorp.log import verify_log_messages_from_log_html
+    from actions._logging import verify_log_messages_from_log_html
 
     result = actions_run(
         ["run", f"--console-colors={mode}", "simple.py"], returncode=0, cwd=str(datadir)
@@ -163,7 +163,7 @@ def test_core_log_integration_console_messages(datadir, str_regression, mode) ->
 def test_no_status_rc(datadir, no_error_rc) -> None:
     pyproject: Path = datadir / "pyproject.toml"
     pyproject.write_text("")
-    from robocorp.log import verify_log_messages_from_log_html
+    from actions._logging import verify_log_messages_from_log_html
 
     result = actions_run(
         ["run"]
@@ -232,7 +232,7 @@ def server_socket():
     "env_name", ["ROBOCORP_TASKS_LOG_LISTENER_PORT", "S4_ACTIONS_LOG_LISTENER_PORT"]
 )
 def test_receive_at_socket(datadir, server_socket, env_name) -> None:
-    from robocorp.log import verify_log_messages_from_stream
+    from actions._logging import verify_log_messages_from_stream
 
     pyproject: Path = datadir / "pyproject.toml"
     pyproject.write_text("")

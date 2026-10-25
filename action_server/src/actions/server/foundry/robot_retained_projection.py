@@ -11,6 +11,8 @@ from dataclasses import asdict, dataclass
 from pathlib import PurePosixPath
 from uuid import uuid5
 
+from jsonschema.exceptions import SchemaError
+
 from actions.server._portable_paths import portable_path_collision_key
 from actions.server.deployments.source_manifest import _validated_parts
 from actions.server.foundry.models import FoundryPackageRevision
@@ -31,7 +33,6 @@ from actions.server.foundry.robot_package_builder import (
 )
 from actions.server.run_outputs.service import FenceRejected
 from actions.server.run_outputs.types import ExecutionSnapshot, SealReceipt
-from jsonschema.exceptions import SchemaError
 
 
 def _load(raw, *, canonical_bytes=False):
@@ -59,6 +60,74 @@ def _integer(value, lower, upper):
         or not lower <= value <= upper
     ):
         raise ValueError("bounded integer required")
+
+
+def _validation_metadata(carrier, identity):
+    """Decode closed receipt/seal metadata without verifying unread blob bytes.
+
+    Identity comes from the already validated retained Package, never the
+    carrier. Artifact loading must still verify XML/RCC bytes outside SQL.
+    """
+    fields = {
+        "stdout": ("stdoutDigest", 256 * 1024),
+        "stderr": ("stderrDigest", 256 * 1024),
+        "output_xml": ("outputXmlDigest", 1024 * 1024),
+        "rcc_receipt": ("rccReceiptDigest", 1024 * 1024),
+    }
+    _closed(carrier, {"schemaVersion", "receipt", "validation", *fields})
+    if (
+        carrier["schemaVersion"] != "actions.robot-validation-storage/v1"
+        or carrier["validation"] not in ("passed", "failed")
+        or not isinstance(carrier["receipt"], str)
+        or len(carrier["receipt"].encode()) > 16384
+    ):
+        raise ValueError("closed bounded Robot validation carrier required")
+    try:
+        receipt = _load(carrier["receipt"], canonical_bytes=True)
+    except FenceRejected:
+        raise ValueError("duplicate Robot validation receipt key") from None
+    _closed(
+        receipt,
+        {
+            *identity,
+            "schemaVersion",
+            "validationKind",
+            "validation",
+            "execution",
+            "exitCode",
+            *(field for field, _ in fields.values()),
+        },
+    )
+    # Ordinary equality treats bool/int/float as equivalent. Retained receipts
+    # must preserve the exact scalar types of their immutable identity.
+    expected = dict(
+        identity,
+        schemaVersion="actions.robot-dryrun-validation/v1",
+        validationKind="robot-dryrun",
+        validation=carrier["validation"],
+        execution="not-qualified",
+        exitCode=0 if carrier["validation"] == "passed" else 1,
+    )
+    if any(_json(receipt[key]) != _json(value) for key, value in expected.items()):
+        raise ValueError("Robot validation receipt identity differs")
+    seals = {}
+    for name, (field, limit) in fields.items():
+        value = carrier[name]
+        if name == "rcc_receipt" and identity["runtimeKind"] == "direct":
+            if value is not None or receipt[field] is not None:
+                raise ValueError("direct Robot validation has RCC evidence")
+            seals[name] = None
+            continue
+        seal = SealReceipt.model_validate(value)
+        if (
+            _json(seal.model_dump(mode="json")) != _json(value)
+            or seal.size > limit
+            or (name in ("output_xml", "rcc_receipt") and seal.size == 0)
+            or seal.digest != receipt[field]
+        ):
+            raise ValueError("Robot validation diagnostic seal differs")
+        seals[name] = seal
+    return receipt, seals
 
 
 @dataclass(frozen=True)
@@ -250,7 +319,12 @@ def _project(row, manifest, snapshot):
     ):
         raise ValueError("Robot source selection differs")
     admission = _load(row.build_evidence_json, canonical_bytes=True)
-    _closed(admission, {"schemaVersion", "source"})
+    _closed(
+        admission,
+        {"schemaVersion", "source", "validation"}
+        if isinstance(admission, dict) and "validation" in admission
+        else {"schemaVersion", "source"},
+    )
     if admission["schemaVersion"] != ADMISSION_SCHEMA:
         raise ValueError("Robot admission version differs")
     seal = SealReceipt.model_validate(admission["source"])
@@ -300,6 +374,22 @@ def _project(row, manifest, snapshot):
         or expected["inputSchemaDigest"] != snapshot.capability_schema_digest
     ):
         raise ValueError("Robot source/schema/plan preimages differ")
+    if "validation" in admission:
+        _validation_metadata(
+            admission["validation"],
+            dict(
+                packageRevisionId=ref.revision_id.root,
+                sourceDigest=row.source_artifact_digest,
+                planDigest=expected["planDigest"],
+                runtimeKind=plan.runtime_kind,
+                suitePath=builder["suitePath"],
+                suiteName=builder["suiteName"],
+                taskName=builder["taskName"],
+                robotVersion=plan.robot_version,
+                pythonVersion=list(plan.python_version),
+                platformTag=plan.platform_tag,
+            ),
+        )
     return RetainedRobotProjection(
         snapshot,
         builder["suitePath"],

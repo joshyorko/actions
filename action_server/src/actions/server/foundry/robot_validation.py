@@ -19,6 +19,7 @@ from uuid import uuid4
 from xml.etree import ElementTree
 
 import psutil
+
 from actions.server._common.process import snapshot_process_descendants
 from actions.server._rcc_runtime_adapter import (
     RccRuntimeDescriptor,
@@ -37,7 +38,10 @@ from actions.server.foundry.robot_package_admission import (
     decode_robot_admission,
     digest,
 )
-from actions.server.foundry.robot_package_builder import verify_robot_package
+from actions.server.foundry.robot_package_builder import (
+    RccRobotPlan,
+    verify_robot_package,
+)
 
 SCHEMA = "actions.robot-dryrun-validation/v1"
 LOG_LIMIT = 256 * 1024
@@ -166,6 +170,8 @@ def verify_robot_validation(
     ):
         raise ValueError("Robot dry-run contains import or validation errors")
     if result.rcc_receipt is not None:
+        if not isinstance(package.robot.plan, RccRobotPlan):
+            raise ValueError("RCC receipt requires RCC Robot plan")
         value = json.loads(result.rcc_receipt)
         if (
             not isinstance(value, dict)
@@ -260,6 +266,8 @@ class RobotValidator:
             command = [str(self.preparation.python), *arguments]
         else:
             prep = self.preparation
+            if not isinstance(prep, RccRobotPreparation):
+                raise ValueError("RCC Robot preparation required")
             environment.update(
                 ROBOCORP_HOME=str(prep.environment.robocorp_home), RCC_NO_BUILD="1"
             )
@@ -380,7 +388,7 @@ class RobotValidator:
         finally:
             if selector is not None:
                 selector.close()
-            cleanup = RobotExecution._cleanup(process, descendants)
+            cleanup = RobotExecution._cleanup(process, descendants, owns_session=True)
             for stream in (process.stdout, process.stderr):
                 if stream is not None:
                     stream.close()

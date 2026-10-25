@@ -2,8 +2,8 @@
 # ruff: noqa: F811
 """Synthetic adapter, real Package/Deployment/Run authority and provider barriers."""
 import hashlib
-import os
 import json
+import os
 from dataclasses import replace
 from threading import Event, Thread
 from types import SimpleNamespace
@@ -48,7 +48,9 @@ from actions.server.run_outputs.service import (
 )
 
 pytest_plugins = ["action_server_tests.foundry_fixtures"]
-pytestmark = pytest.mark.skipif(not hasattr(os, "O_PATH"), reason="Linux descriptor provider")
+pytestmark = pytest.mark.skipif(
+    not hasattr(os, "O_PATH"), reason="Linux descriptor provider"
+)
 
 
 class SyntheticAdapter:

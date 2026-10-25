@@ -53,11 +53,12 @@ class RobotAdapter(Protocol):
 
 
 class _RobotOutputs(RunOutputService):
-    def __init__(self, service, caller, ticket, prepared):
+    def __init__(self, service, caller, ticket, prepared, publication_cancelled=None):
         super().__init__(
             service.db, service.base.providers, capabilities=service.registry
         )
         self.caller, self.ticket, self.prepared = caller, ticket, prepared
+        self.publication_cancelled = publication_cancelled
 
     def _fence(self, fence):
         pin = super()._fence(fence)
@@ -176,6 +177,8 @@ class _RobotOutputs(RunOutputService):
                     "status": result.status,
                 },
             }
+            if self.publication_cancelled is not None and self.publication_cancelled():
+                raise FenceRejected("Robot publication cancelled")
             # Base publication performs fresh authority/fence checks and the atomic
             # terminal Run/Attempt/output transition under the same transaction.
             return super().publish(
@@ -200,13 +203,36 @@ class PinnedRobotRunner:
         [Path, DirectRobotPreparation | RccRobotPreparation], RobotAdapter
     ] = RobotExecution
 
+    def require_ready(self, service):
+        declaration = service.registry.get_capability(service.snapshot.capability)
+        if (
+            declaration is None
+            or declaration.work_items.mode != "none"
+            or declaration.work_items.allow_outputs
+            or declaration.binding_requirements
+        ):
+            raise AccessDenied("standalone Robot declaration required")
+        repository = service.deployments._repository
+        with _transaction(service.db):
+            retained = repository.current(
+                service.snapshot.deployment.workspace_id,
+                service.snapshot.deployment.deployment_id,
+            )
+            if (
+                retained is None
+                or retained.revision.ref != service.snapshot.deployment
+                or not repository.was_activated(service.snapshot.deployment)
+            ):
+                raise AccessDenied("current activated Robot Deployment required")
+
     def execute(
         self,
         caller: ManagedCaller,
         ticket: GenericTicket,
         service: StandaloneActionExecution,
         *,
-        cancelled: Event | None = None,
+        cancelled: Event | Callable[[], bool] | None = None,
+        publication_cancelled: Callable[[], bool] | None = None,
     ) -> Run:
         caller, ticket = (
             ManagedCaller.model_validate(caller),
@@ -292,7 +318,9 @@ class PinnedRobotRunner:
             ticket.fence,
             require_current=require_current,
         )
-        outputs = _RobotOutputs(service, caller, ticket, prepared)
+        outputs = _RobotOutputs(
+            service, caller, ticket, prepared, publication_cancelled
+        )
 
         def selected(actor, fence):
             snapshot, inputs = service.base.execution_context(actor, fence)
@@ -309,8 +337,10 @@ class PinnedRobotRunner:
         # Existing intent must reject before adapter construction or process work.
         if lifecycle.launch_intent(caller.actor, ticket.fence) is not None:
             raise FenceRejected("existing Robot launch requires reconciliation")
-        event = cancelled if cancelled is not None else Event()
-        if event.is_set():
+        is_cancelled = (
+            cancelled if callable(cancelled) else (cancelled or Event()).is_set
+        )
+        if is_cancelled():
             raise FenceRejected("Robot execution cancelled")
         result = self.adapter_factory(self.execution_root, self.preparation).execute(
             caller.actor,
@@ -318,10 +348,10 @@ class PinnedRobotRunner:
             selection=prepared.selection,
             source_archive=prepared.source_archive,
             lifecycle=lifecycle,
-            cancelled=event.is_set,
+            cancelled=is_cancelled,
             timeout_seconds=self.timeout_seconds,
         )
-        if event.is_set():
+        if is_cancelled():
             raise FenceRejected("Robot execution cancelled before publication")
         lifecycle.check_live(caller.actor, ticket.fence, prepared.selection)
         return outputs.publish_robot(result, journal)

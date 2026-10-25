@@ -1,6 +1,6 @@
 """Real direct dry-run and retained SQL/provider boundaries; no installed claim."""
-import platform
 import json
+import platform
 import sys
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import replace
@@ -12,6 +12,7 @@ import pytest
 from action_server_tests.test_foundry_deployments import _refs, _runtime_database
 from action_server_tests.test_foundry_package_registry import _grant, _registry
 from action_server_tests.test_robot_package_admission import request_for
+
 from actions.server._database import Database
 from actions.server._models import get_all_model_classes
 from actions.server.deployments.foundry_values import AccessDenied
@@ -20,7 +21,12 @@ from actions.server.foundry.robot_execution import DirectRobotPreparation
 from actions.server.run_outputs.types import Actor
 
 pytest_plugins = ["action_server_tests.foundry_fixtures"]
-pytestmark = pytest.mark.skipif(sys.platform != "linux" or platform.machine().lower() != "x86_64" or sys.version_info[:2] != (3, 12), reason="Pinned Robot Linux x86_64/Python3.12")
+pytestmark = pytest.mark.skipif(
+    sys.platform != "linux"
+    or platform.machine().lower() != "x86_64"
+    or sys.version_info[:2] != (3, 12),
+    reason="Pinned Robot Linux x86_64/Python3.12",
+)
 
 
 def prepare(registry, refs, actor, request=None):

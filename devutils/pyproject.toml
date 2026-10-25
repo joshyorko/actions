@@ -17,11 +17,14 @@ mypy = "^1.1.1"
 pytest = "^8.0"
 pytest-xdist = "^3.2.1"
 pytest-regressions = "1.0.6"
-pydocstyle = { git = "https://github.com/robocorp/pydocstyle" }
+pydocstyle = "6.3.0"
 isort = { version = "^5.12.0", python = "^3.8" }
 types-invoke = "^2.0"
 invoke = "^2.2.0"  # keep in sync with requirements.txt
-lazydocs = { git = "https://github.com/robocorp/lazydocs.git" }
+mdformat-gfm = [
+    { version = "0.3.6", python = ">=3.8,<3.10" },
+    { version = "1.0.0", python = ">=3.10" },
+]
 tomlkit = "^0.11.8"  # keep in sync with requirements.txt
 semver = "^3.0.0"  # keep in sync with requirements.txt
 pylint = "^2.17.4"

@@ -9,7 +9,7 @@ from contextlib import contextmanager
 from threading import Event, Thread
 from typing import Callable
 
-from robocorp import log
+from actions import _logging as log
 
 
 def is_current_thread_main_thread():

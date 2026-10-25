@@ -6,6 +6,7 @@ from dataclasses import replace
 from pathlib import Path
 
 import pytest
+
 from actions.server.deployments.package_revision_compiler import (
     PreparedRccEnvironment,
     RccBuildIdentity,

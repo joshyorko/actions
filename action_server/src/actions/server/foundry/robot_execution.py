@@ -16,6 +16,7 @@ import os
 import platform
 import re
 import selectors
+import signal
 import stat
 import subprocess
 import sys
@@ -514,7 +515,7 @@ class RobotExecution:
                     selector.close()
             except BaseException as exc:
                 error = error or exc
-            cleanup = self._cleanup(process, descendants)
+            cleanup = self._cleanup(process, descendants, owns_session=True)
             for stream in (process.stdout, process.stderr):
                 try:
                     if stream is not None:
@@ -648,14 +649,29 @@ class RobotExecution:
         )
 
     @staticmethod
-    def _cleanup(process, descendants):
+    def _cleanup(process, descendants, *, owns_session=False):
         # A process may orphan a child between descendant samples. All ordinary
         # descendants inherit our new session's process group; inspect it even
         # after the wrapper exits. Deliberate session escape is outside this
         # trusted-code adapter (not an OS sandbox).
         deadline = time.monotonic() + 5
         try:
+            if owns_session is not True or os.name != "posix":
+                raise ValueError("owned POSIX session required")
+            try:
+                if os.getpgid(process.pid) != process.pid:
+                    raise ValueError("wrapper does not own its process group")
+            except ProcessLookupError:
+                # A reaped wrapper can leave members of its trusted owned group.
+                pass
             while True:
+                # Popen above created this owned session. Stop its kernel-owned
+                # group before sampling: a sampled member could otherwise fork
+                # and exit before status inspection, hiding a live descendant.
+                try:
+                    os.killpg(process.pid, signal.SIGKILL)
+                except ProcessLookupError:
+                    pass
                 for candidate in psutil.process_iter():
                     try:
                         if (

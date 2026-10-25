@@ -842,9 +842,9 @@ def start_server(
         return payload
 
     async def serve_log_html(request: Request):
-        from robocorp.log import _index_v3 as index
+        from actions._logging import get_log_viewer_html
 
-        return HTMLResponse(index.FILE_CONTENTS["index.html"])
+        return HTMLResponse(get_log_viewer_html())
 
     IN_DEV = (
         False  # Set to True to auto-reload the action server UI on each new request.

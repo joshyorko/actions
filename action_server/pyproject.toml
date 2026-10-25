@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "actions-runtime"
-version = "1.1.0a42"
+version = "1.1.0a43"
 description = "Actions Runtime — serve Python actions through HTTP and MCP"
 authors = ["Joshua Yorko"]
 maintainers = ["Joshua Yorko"]
@@ -36,7 +36,7 @@ pydantic = "^2.12.4"
 pyyaml = "^6.0.3"
 python = ">=3.12,<3.14"
 requests = "^2"
-actions-core = { version = ">=1.1.0a5,<2.0.0", allow-prereleases = true }
+actions-core = { version = ">=1.1.0a6,<2.0.0", allow-prereleases = true }
 actions-http-helper = "^1.0.3"
 termcolor = "^3.2.0"
 uvicorn = "^0.38.0"
@@ -69,7 +69,6 @@ actions-local-devutils = { path = "../devutils/", develop = true }
 httpx = "^0.28.1"
 types-requests = "^2"
 types-PyYAML = "^6"
-robocorp-log-pytest = "^0.0.5"
 types-psutil = "^7"
 types-jsonschema = "^4.22.0"
 pyinstaller = "6.16.0"

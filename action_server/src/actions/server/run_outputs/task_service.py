@@ -413,6 +413,10 @@ class TaskService:
                     if launch is None:
                         if record.get("execution") is not None:
                             raise ValueError("execution without launch")
+                    elif record["version"] == "actions.robot-dispatch/v1":
+                        # Strict Robot launch/selection equality was checked above
+                        # against retained SQL metadata, not Python lineage fields.
+                        pass
                     elif (
                         not isinstance(launch, dict)
                         or _canonical(launch.get("lineage"), 16384)
@@ -476,6 +480,24 @@ class TaskService:
             outputs=outer.get("outputs"),
             _allow_expired_terminal=not resolve,
         )
+        if record["version"] == "actions.robot-execution/v1":
+            handles = []
+            if resolve:
+                for evidence in record["outputs"]:
+                    ref = OutputRef.model_validate(evidence["ref"])
+                    with self.outputs.resolve(
+                        actor, snapshot.workspace_id, ref.handle
+                    ) as sealed:
+                        row = _one(self.db, RunOutput, ref.output_id)
+                        if (
+                            (sealed.run_id, sealed.digest, sealed.size)
+                            != (run.id, evidence["digest"], evidence["size"])
+                            or row.run_attempt_id != fence.attempt_id
+                            or row.epoch != fence.epoch
+                        ):
+                            raise ValueError("resolved Robot output differs")
+                        handles.append({"handle": ref.handle})
+            return self._result_payload(run, fence, handles)
         lineage = GeneratedRccExecution._lineage(snapshot, None, fence)
         from actions.server.foundry.execution_selection import compiled_for_snapshot
 
@@ -583,6 +605,10 @@ class TaskService:
                 measured.get("retainedBytes"),
             ) != (evidence["digest"], evidence["size"]):
                 raise ValueError("stream publication differs")
+        return self._result_payload(run, fence, handles)
+
+    @staticmethod
+    def _result_payload(run, fence, handles):
         receipt = {
             "version": RESULT_CONTRACT,
             "runId": run.id,

@@ -4,7 +4,10 @@ from pathlib import Path
 
 import pytest
 
-from actions.server.foundry.robot_runtime_profile import RobotRuntimeProfile, read_robot_profile
+from actions.server.foundry.robot_runtime_profile import (
+    RobotRuntimeProfile,
+    read_robot_profile,
+)
 
 
 def test_unconfigured_robot_remains_absent():

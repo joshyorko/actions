@@ -11,6 +11,7 @@ from action_server_tests.test_robot_package_admission import (
     disable_feedback as disable_feedback,
 )
 from action_server_tests.test_robot_runtime_runner import case as case
+
 from actions.server._models import Run
 from actions.server.foundry.models import FoundryPackageRevision
 from actions.server.foundry.robot_receipts import (
@@ -280,6 +281,7 @@ def test_retained_rcc_projection_never_reads_source(admitted, tmp_path, monkeypa
     from pathlib import Path
 
     from action_server_tests.test_robot_package_admission import request_for
+
     from actions.server.deployments.package_revision_compiler import (
         PreparedRccEnvironment,
         RccBuildIdentity,

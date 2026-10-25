@@ -6324,3 +6324,71 @@ admission rather than manually seeding Robot journals in every fixture. Retained
 receipt checks must use SQL metadata only; execution and authorized artifact reads
 still verify source/output bytes separately. A validation receipt proves dry-run
 validation, not actual task execution or Work Item support.
+
+Core owns logging at `actions._logging`. Encoder, decoder, embedded viewer and AST
+rewrite hooks move together; Runtime obtains the matching viewer through
+`get_log_viewer_html()`. Preserve provenance/license notices and legacy configuration
+keys independently from package dependency removal. Namespace changes require a
+distinct rewritten-bytecode cache tag. Mandatory exclusions protect secret
+constructors and ActionContext decryption from argument capture before redaction
+registration, including when user filters request those modules. `suppress()`
+protects automatic tracing, not explicit `log.info()`. Decode emitted HTML events
+and inspect raw `.robolog` records with synthetic raw/repr, OAuth and encrypted
+context canaries; functional Secret tests alone do not prove redaction. Clean
+installed execution without the upstream distribution remains a separate gate.
+
+Robot process cleanup needs the same kernel-level group-stop boundary as generated
+execution. An empty final enumeration alone can miss a child forked by a sampled
+process before that process exits. Require explicit ownership from the local
+`start_new_session` launch, verify a live wrapper's group identity, stop that group
+before each enumeration, and fail closed on signaling/inspection failures. This
+supervises trusted nonescaping descendants; it does not create an OS sandbox.
+Task readiness must check Robot's current activated Deployment and exact configured
+preparation. Worker shutdown also needs a pure stop predicate immediately before
+fenced terminal publication; the SQL-backed cancellation predicate serves execution
+checks and must not be substituted into a metadata-only publication boundary.
+
+The basic scaffold is an offline `count_words` action using owned Core and stdlib.
+Its tests exercise Response outputs without browser or service dependencies.
+Common ActionServerTool and AgentCliTool retain explicit local compatibility paths
+and verification, but automatic acquisition rejects before filesystem, process or
+network effects. Tests use synthetic fixtures. RCC acquisition tests assert the
+owned GitHub release URL without downloading or executing binaries.
+
+GalleryActionPackages requires explicit metadata or keyword-only `metadata_url`;
+unconfigured list/extract fails before network. ReductoPlatformParameters requires
+a nonblank `reducto_api_url`, preserving explicit compatibility endpoints and
+serialized fields. Raw platform dictionaries forwarded by `prompt_generate` are
+not locally validated by this model; removing the model default does not establish
+validation of those separate inputs.
+
+Owned documentation generation runs through `python -m devutils.owned_docs` with
+official pydocstyle and mdformat-gfm. Root and `__all__` exports are preserved;
+module-generation errors raise rather than producing a successful empty overview.
+Validate mode creates no output and invokes no shell. Generator and validation
+rule notices and immutable provenance remain beside the implementation. Compare
+expected Markdown inventory and actual exported API content with a baseline, and
+check D420/D421 behavior separately. Stock lazydocs 0.4.8 on Python 3.12 returned
+success while obsolete discovery omitted ten module files; fixing only discovery
+still omitted the root API and re-exported classes. Active package locks now use
+the owned adapter and official checker; orphan locks in retired common, mcp and
+build_common directories have no pyproject or active toolkit package and remain
+historical evidence, not active dependencies.
+
+A Runtime preload can run inside an explicitly selected older Core package. Prefer
+`actions._logging` whenever its module spec exists; import errors inside that owned
+module must propagate. Only an absent owned module in the legacy child environment
+uses its already-declared `robocorp.log` implementation. This compatibility path
+adds no vendor dependency to the current Runtime/Core consumer. Verify both a
+current Core run with upstream imports blocked and a retained older child executing
+real MCP tools. Universal Canvas also adds its UI resource to model resource
+catalogs: assert the exact combined inventory and select custom resources by URI,
+not by registration order.
+
+Validate retained Robot terminal receipts and generated failure receipts before
+resolving model-facing artifact handles even when a capability has no logical
+requirements. Select the validator from retained package kind. Accept the
+generated-failure version only for an actually failed Run at terminal read
+boundaries. Receipt validation does not grant read authority: preserve Deployment
+and queue permission checks and authorized provider resolution. This does not
+imply stronger validation for legacy zero-requirement Python success receipts.

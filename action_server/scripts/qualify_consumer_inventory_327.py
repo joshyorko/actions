@@ -12,7 +12,12 @@ from pathlib import Path
 from packaging.requirements import Requirement
 from packaging.utils import canonicalize_name
 
-REPLACED_VENDOR_DISTRIBUTIONS = {"sema4ai-http-helper", "sema4ai-common"}
+REPLACED_VENDOR_DISTRIBUTIONS = {
+    "sema4ai-http-helper",
+    "sema4ai-common",
+    "robocorp-log",
+    "robocorp-truststore",
+}
 
 
 def qualify(inspect, lock, expected_runtime, extras):

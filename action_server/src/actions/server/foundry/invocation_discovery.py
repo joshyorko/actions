@@ -18,7 +18,10 @@ from actions.server.deployments.foundry_service import FoundryDeploymentService
 from actions.server.deployments.ids import DeploymentId, WorkspaceId
 from actions.server.foundry.generic_work_item_execution import GenericWorkItemExecution
 from actions.server.foundry.mcp import CanvasCaller, CanvasReply
-from actions.server.foundry.package_registry import FoundryPackageRegistry
+from actions.server.foundry.package_registry import (
+    FoundryPackageRegistry,
+    RegistryRobotSelection,
+)
 from actions.server.foundry.standalone_execution import StandaloneActionExecution
 from actions.server.managed_work_items.contracts import (
     ManagedCaller,
@@ -179,13 +182,20 @@ class GenericInvocationDiscovery:
                                 runtime_plan=plan,
                             )
                             snapshot = resolved.snapshot
-                            if (
-                                snapshot.runtime_kind != "rcc"
-                                or snapshot.provider_key not in self.outputs.providers
-                            ):
+                            if snapshot.provider_key not in self.outputs.providers:
                                 continue
                             registry = self.outputs.capabilities
                             if not isinstance(registry, FoundryPackageRegistry):
+                                continue
+                            if snapshot.runtime_kind != "rcc" and (
+                                snapshot.runtime_kind != "direct"
+                                or not isinstance(
+                                    registry.selection_for(
+                                        snapshot.capability, snapshot.runtime_plan
+                                    ),
+                                    RegistryRobotSelection,
+                                )
+                            ):
                                 continue
                             capability = registry.get_capability(snapshot.capability)
                             if (

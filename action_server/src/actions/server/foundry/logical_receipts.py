@@ -457,6 +457,19 @@ def has_knowledge(registry, snapshot) -> bool:
 
 
 def versions_for_selection(registry, snapshot, *, projection=None) -> tuple[str, str]:
+    # Retained package kind selects the protocol, never an untrusted journal tag.
+    # This path reads only SQL metadata; artifact verification remains with execution.
+    db = getattr(registry, "_db", None)
+    if db is not None:
+        from actions.server.foundry.robot_retained_projection import (
+            robot_projection_if_present,
+        )
+
+        if robot_projection_if_present(db, snapshot) is not None:
+            from actions.server.foundry.robot_execution import DISCRIMINATOR
+            from actions.server.foundry.robot_runtime_runner import TERMINAL_VERSION
+
+            return DISCRIMINATOR, TERMINAL_VERSION
     if projection is not None:
         if projection.snapshot != snapshot:
             raise ValueError("retained version selection differs")
@@ -722,10 +735,28 @@ def validate_bound_record(
     required. Output SQL seals, exact lineage and logical equality are checked here.
     """
     from actions.server._models import RunStatus
+    from actions.server.foundry.robot_retained_projection import (
+        robot_projection_if_present,
+    )
     from actions.server.run_outputs.models import RunOutput
     from actions.server.run_outputs.service import _canonical, _now, _one
     from actions.server.run_outputs.types import OutputRef, canonical_uuid
 
+    if robot_projection_if_present(db, snapshot) is not None:
+        from actions.server.foundry.robot_receipts import validate_robot_record
+
+        return validate_robot_record(
+            db,
+            registry,
+            snapshot,
+            run,
+            fence,
+            record,
+            claim=claim,
+            terminal=terminal,
+            outputs=outputs,
+            _allow_expired_terminal=_allow_expired_terminal,
+        )
     if terminal and isinstance(record, dict) and record.get("version") == FAILURE_V1:
         return validate_failed_record(
             db,
@@ -1362,6 +1393,12 @@ class LogicalPublicationGuard:
 
 def generated_output_names(record):
     """Output names after validate_bound_record; this helper grants no authority."""
+    from actions.server.foundry.robot_runtime_runner import TERMINAL_VERSION
+
+    if record.get("version") == TERMINAL_VERSION:
+        from actions.server.foundry.robot_receipts import robot_output_names
+
+        return robot_output_names(record)
     if record.get("version") == FAILURE_V1:
         return {"rcc-receipt.json", "rcc-stdout.log", "rcc-stderr.log"}
     names = {

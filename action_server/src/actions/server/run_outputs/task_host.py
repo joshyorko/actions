@@ -20,6 +20,7 @@ from actions.server.foundry.rcc_execution import (
     LogicalPreparationCleanupIncomplete,
     RccCleanupIncomplete,
 )
+from actions.server.foundry.robot_execution import RobotCleanupIncomplete
 from actions.server.run_outputs.detached import DetachedActions, DetachedActionWorker
 from actions.server.run_outputs.task_service import TaskHostUnavailable, TaskPolicy
 from actions.server.run_outputs.types import Actor, ExecutionSnapshot
@@ -147,6 +148,7 @@ class DetachedTaskHost:
         execution_root: Path,
         policy: TaskPolicy,
         logical_execution=None,
+        capability_runner=None,
     ):
         if not isinstance(policy, TaskPolicy) or not isinstance(
             prepared, PreparedRccEnvironment
@@ -165,6 +167,7 @@ class DetachedTaskHost:
             policy,
         )
         self.logical_execution = logical_execution
+        self.capability_runner = capability_runner
         self._preparation_cleanup: list[LogicalPreparationOwner] = []
         self._stop = threading.Event()
         self._ready = threading.Event()
@@ -180,6 +183,7 @@ class DetachedTaskHost:
             profile,
             stop_requested=self._stop.is_set,
             logical_execution=logical_execution,
+            capability_runner=capability_runner,
         )
 
     @property
@@ -230,13 +234,21 @@ class DetachedTaskHost:
             actor != self.actor
             or snapshot.worker != self.profile
             or snapshot.workspace_id != str(self.profile.workspace_id.root)
-            or snapshot.runtime_kind != "rcc"
+            or snapshot.runtime_kind not in ("rcc", "direct")
         ):
             raise TaskHostUnavailable("Task host scope unavailable")
         with self.authority.db.connect():
             # Read-only live authorization and immutable selection. No grant,
             # common admission registration, compilation or queue mutation.
-            self.authority._service(actor, snapshot)
+            service = self.authority._service(actor, snapshot)
+            if self.capability_runner is not None:
+                robot = self.capability_runner.robot_for(
+                    self.authority.outputs.capabilities, snapshot
+                )
+                if robot is not None:
+                    robot.require_ready(service)
+                    self._check_running()
+                    return
             compiled, _, _, _ = self._runtime()._verified_selection(snapshot)
             if (
                 compiled.rcc_specification_digest
@@ -285,7 +297,7 @@ class DetachedTaskHost:
         except LogicalPreparationCleanupIncomplete as exc:
             self._preparation_cleanup.append(exc.owner)
             self._failed.set()
-        except RccCleanupIncomplete:
+        except (RccCleanupIncomplete, RobotCleanupIncomplete):
             self._cleanup_uncertain.set()
             self._failed.set()
         except Exception:

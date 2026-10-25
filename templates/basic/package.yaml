@@ -14,13 +14,11 @@ dependencies:
     - python=3.12.12
     - uv=0.8.17
   pypi:
-    - actions-core=1.0.2
-    - robocorp-browser=2.3.5
+    - actions-core=1.1.0a6
 
 dev-dependencies:
   conda-forge:
     - pytest=8.4.2
-    - types-requests=2.32.4.20250913
     - ruff=0.14.3
     - mypy=1.18.2
 

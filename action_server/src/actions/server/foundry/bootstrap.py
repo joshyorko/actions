@@ -429,6 +429,7 @@ def create_runtime_canvas(
                     execution_root=execution_root,
                     policy=policy,
                     logical_execution=logical_execution,
+                    capability_runner=capability_runner,
                 )
                 task_service = TaskService(detached, readiness=task_host, policy=policy)
                 # ASGI lifespan starts consumption only after route construction.

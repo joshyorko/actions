@@ -15,6 +15,8 @@ import re
 from collections.abc import Mapping, Sequence
 from typing import Any
 
+from pydantic import JsonValue, TypeAdapter, ValidationError
+
 from actions.server.deployments.canonical import canonicalize_json
 from actions.server.deployments.foundry_values import (
     CanvasSpecDocument,
@@ -75,7 +77,6 @@ from actions.server.foundry.robot_authoring import (
     robot_backend_schema,
 )
 from actions.server.foundry.robot_package_builder import RobotPackageRequest
-from pydantic import JsonValue, TypeAdapter, ValidationError
 
 _JSON_OBJECT = TypeAdapter(dict[str, JsonValue])
 _ID = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
@@ -836,13 +837,16 @@ class FoundryAuthoring(CanvasPort):
                     raise AuthoringAccessDenied(
                         "Robot authoring host is not configured"
                     )
-                result = await asyncio.to_thread(
+                robot_result = await asyncio.to_thread(
                     self.robot_authoring.prepare_and_admit,
                     backend,
                     caller=caller,
                     application_id=application_id,
                 )
-                package_ref, compilation = result.package_revision, result.evidence
+                package_ref, compilation = (
+                    robot_result.package_revision,
+                    robot_result.evidence,
+                )
             elif backend is not None:
                 await asyncio.to_thread(
                     self.authorization.require,

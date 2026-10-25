@@ -211,10 +211,19 @@ async def check_mcp_server(
             resources_list = await session.list_resources()
             resources = resources_list.resources
             uris = [str(resource.uri) for resource in resources]
-            assert ["custom://my/resource/simple"] == uris
+            assert sorted(uris) == [
+                "custom://my/resource/simple",
+                "ui://action-canvas/v1/canvas.html",
+            ]
 
             # Read (simple) resource.
-            resource = await session.read_resource(resources[0].uri)
+            resource = await session.read_resource(
+                next(
+                    resource.uri
+                    for resource in resources
+                    if str(resource.uri) == "custom://my/resource/simple"
+                )
+            )
             assert isinstance(resource, ReadResourceResult)
             resource_content = resource.contents[0]
             assert isinstance(resource_content, TextResourceContents)
