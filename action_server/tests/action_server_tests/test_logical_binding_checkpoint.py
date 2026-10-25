@@ -606,3 +606,25 @@ def test_live_provider_execute_revocation_blocks_retained_resolution(bound):
             g.capability,
             revision=revision.ref,
         )
+
+
+def test_requirement_bearing_package_cannot_enter_unconfigured_rcc_dispatch():
+    from actions.server.foundry.rcc_execution import GeneratedRccExecution
+    from actions.server.run_outputs.service import AccessDenied
+
+    compiled = compile_fixture((requirement(),)).compiled_package
+    manifest = json.loads(compiled.manifest_json)
+    runner = object.__new__(GeneratedRccExecution)
+    runner.registry = SimpleNamespace(
+        load=lambda ref: compiled,
+        evidence=lambda ref: SimpleNamespace(ready=True),
+    )
+    snapshot = SimpleNamespace(
+        capability_authority="package-revision",
+        capability=SimpleNamespace(
+            package_revision=object(),
+            capability_id=SimpleNamespace(root=manifest["capabilities"][0]["id"]),
+        ),
+    )
+    with pytest.raises(AccessDenied, match="logical execution runtime"):
+        runner._verified_selection(snapshot)

@@ -5335,3 +5335,41 @@ Receipt TTL is creation-relative and immutable; replay, polling and ignored unkn
 The explicit MCP Task adapter pins released ext-tasks2026-07-28 (b3d28aceaa6d49f5f92258e3d06b61ad6f111e84). Creation is flat resultType=task with ttlMs/pollIntervalMs; get is flat resultType=complete and completed original results include their own resultType=complete. Current get/update/cancel require model audience, per-request extension capability and exact HTTP Mcp-Name/taskId routing. The official SDK custom Request.name_param seam supplies extension routing. Missing routing returns a bounded -32602 HTTP400 response; acknowledgements may carry SDK serverInfo metadata but never imply cancellation completion. Unknown interaction answers are bounded no-ops, not implemented interaction/resume support.
 
 Configured adapters expose a closed detached capability_invoke variant only to declaring current clients; legacy/synchronous schemas remain unchanged. The default server has no Task advertisement or handlers. An explicitly injected service is transport qualification only until ordinary bootstrap installs and verifies a real worker. Schema/SQL/ASGI tests do not qualify installed execution, process loss, legacy Task compatibility, Robot/Work Item Tasks or automatic escalation. Keep those gates separate.
+
+
+`ConfiguredProviderExecution` and `LogicalExecution` qualify an explicit eager
+preparation component. They do not yet wire ordinary bootstrap, generated RCC,
+SDK logical lookup or output publication. Preparation resolves exact retained
+Deployment bindings and artifact-verified requirements, supports only selected
+parameterless data `.scan/v1` reads, and refuses declared aggregate output above
+256 KiB or more than 32 operations before engine calls. Child context version
+`actions.logical-read-context/v1` contains logical lookups only. Run/Attempt,
+provider/source/config/catalog identities and context digest remain host-only.
+Only an issued preparation object may be rechecked; callers must release it on
+completion/abort. Serialized context is not a restart authority or a grant.
+
+The factory reconstructs committed private catalog/config/seal identity without
+startup secrets or network I/O. Each execution owns a read-only private store;
+only the selected PostgreSQL password/CA versions may resolve during execution.
+A shared absolute deadline and cancellation view covers all eager operations;
+there is no new scheduler or lease-renewal owner. Engine-specific OS-blocking
+limits remain and a late result is refused.
+
+Publication recheck is SQL-only: existing Run/Workspace fencing, live grants,
+retained Package/Deployment and provider/source/provenance identity, and current
+availability. PostgreSQL grant/metadata row locks prevent a concurrent revoke or
+disable from committing between the recheck and outer transaction completion.
+It must be integrated inside the existing domain output publication transaction,
+alongside independent queue/Run guards, not called as a substitute transaction.
+
+Private CURRENT exclusion depends on normal Runtime holding action_server.lock;
+providers-local takes that same lock and refuses a running Runtime. Direct
+in-process factory/bootstrap callers do not automatically acquire it. Arbitrary
+same-user file mutations are outside this cooperating-writer guarantee. No
+filesystem/secret/provider I/O belongs inside the publication transaction.
+Real SQLite/PostgreSQL control-plane and both engine tests qualify this component;
+ordinary installed generated-package consumption across two providers, SDK and
+runner wiring, shared-PG operator provisioning, Knowledge and full Data gates
+remain unqualified.
+
+Until a supported logical port is joined, GeneratedRccExecution refuses any selected capability with nonempty bindingRequirementIds before native launch. Artifact metadata compatibility does not bypass this dispatch gate.

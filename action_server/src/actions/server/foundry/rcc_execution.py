@@ -401,6 +401,8 @@ class GeneratedRccExecution:
         )
         if not isinstance(capability, dict) or capability.get("kind") != "action":
             raise AccessDenied("compiled Action capability is not executable")
+        if capability.get("bindingRequirementIds"):
+            raise AccessDenied("logical execution runtime is not configured")
         if (
             capability.get("mode") != "none"
             or capability.get("allowOutputs") is not False
