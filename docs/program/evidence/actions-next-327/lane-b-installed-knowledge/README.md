@@ -179,3 +179,21 @@ existing authorized search hook under the same fence, bounding aggregate bytes
 and documents, enforcing stable revision/corpus identity, and returning
 deterministic complete-result bytes. Typed operation declarations and final
 publication integration remain reserved to the integrator.
+
+Baseline builder execution at `6835828e3a650f828606f59df693a04e9ad0a58e` failed
+in `invoke build-frontend` / `npm ci --no-audit --no-fund`: the recipe omitted
+npm's task-local cache and npm attempted the read-only home cache. The RCC version
+probe also attempted its default home. Original failure receipt and logs remain
+retained. The builder now explicitly supplies `npm_config_cache`, `XDG_CACHE_HOME`
+and `ROBOCORP_HOME` under the owned destination, alongside pip/Poetry caches; the
+RCC version probe receives that environment. This is a local harness correction,
+not evidence of an upstream package defect. No host dependency fallback or pin
+change was used.
+
+Additional exact canonical delta proposed:
+
+> A clean installed-build harness must pass task-local npm and RCC cache/home
+> settings to every subprocess, including the RCC version probe, as well as pip
+> and Poetry caches. In read-only-home cloud environments, omitted npm cache
+> settings can produce repeated tarball warnings followed by cache-path ENOENT;
+> inspect the final path/error before classifying dependency corruption.

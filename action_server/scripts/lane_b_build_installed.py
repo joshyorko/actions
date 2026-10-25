@@ -37,6 +37,9 @@ def build(args):
     environment = dict(os.environ)
     environment["PIP_CACHE_DIR"] = str(destination / "pip-cache")
     environment["POETRY_CACHE_DIR"] = str(destination / "poetry-cache")
+    environment["npm_config_cache"] = str(destination / "npm-cache")
+    environment["XDG_CACHE_HOME"] = str(destination / "cache")
+    environment["ROBOCORP_HOME"] = str(destination / "rcc-home")
 
     def save():
         (destination / "receipt.json").write_text(json.dumps(receipt, indent=2) + "\n")
@@ -80,7 +83,9 @@ def build(args):
         )
         rcc = root / "action_server/src/actions/server/bin/rcc-18.19.3"
         if (
-            subprocess.check_output([str(rcc), "version"], text=True).strip()
+            subprocess.check_output(
+                [str(rcc), "version"], text=True, env=environment
+            ).strip()
             != "v18.19.3"
         ):
             raise ValueError("Josh RCC 18.19.3 required")

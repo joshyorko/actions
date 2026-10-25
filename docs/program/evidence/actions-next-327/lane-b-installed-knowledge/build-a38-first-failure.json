@@ -1,0 +1,104 @@
+{
+  "expected_source": "6835828e3a650f828606f59df693a04e9ad0a58e",
+  "python": "/workspace/lane-b-actions/action_server/.venv/bin/python",
+  "poetry": "/workspace/lane-b-state/rcc/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/poetry",
+  "status": "FAIL",
+  "execution": "NOT_QUALIFIED",
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "archive",
+        "6835828e3a650f828606f59df693a04e9ad0a58e"
+      ],
+      "cwd": "/workspace/lane-b-actions",
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "init",
+        "--bare",
+        "/workspace/lane-b-state/installed-a38-baseline/source-git.git"
+      ],
+      "cwd": "/workspace/lane-b-actions",
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "--git-dir=/workspace/lane-b-state/installed-a38-baseline/source-git.git",
+        "fetch",
+        "/workspace/lane-b-actions",
+        "6835828e3a650f828606f59df693a04e9ad0a58e"
+      ],
+      "cwd": "/workspace/lane-b-actions",
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "--git-dir=/workspace/lane-b-state/installed-a38-baseline/source-git.git",
+        "update-ref",
+        "--no-deref",
+        "HEAD",
+        "6835828e3a650f828606f59df693a04e9ad0a58e"
+      ],
+      "cwd": "/workspace/lane-b-actions",
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "--git-dir=/workspace/lane-b-state/installed-a38-baseline/source-git.git",
+        "read-tree",
+        "6835828e3a650f828606f59df693a04e9ad0a58e"
+      ],
+      "cwd": "/workspace/lane-b-actions",
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "--git-dir=/workspace/lane-b-state/installed-a38-baseline/source-git.git",
+        "config",
+        "core.bare",
+        "false"
+      ],
+      "cwd": "/workspace/lane-b-actions",
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "--git-dir=/workspace/lane-b-state/installed-a38-baseline/source-git.git",
+        "config",
+        "core.worktree",
+        "/workspace/lane-b-state/installed-a38-baseline/source"
+      ],
+      "cwd": "/workspace/lane-b-actions",
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "argv": [
+        "/workspace/lane-b-actions/action_server/.venv/bin/python",
+        "-m",
+        "invoke",
+        "build-frontend"
+      ],
+      "cwd": "/workspace/lane-b-state/installed-a38-baseline/source/action_server",
+      "status": "FAIL",
+      "exit": 1
+    }
+  ],
+  "wheels": {},
+  "source": "6835828e3a650f828606f59df693a04e9ad0a58e",
+  "error_type": "CalledProcessError"
+}
