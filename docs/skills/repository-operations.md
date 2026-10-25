@@ -5741,3 +5741,12 @@ multi-Action Packages after successful authoring and activation. Exercise the
 ordinary stopped-local authorization command in installed multi-Action tests;
 direct source execution with manually provisioned grants cannot cover this join.
 Canvas numeric form fields use the contract discriminator `integer`, not `number`.
+
+For the public Canvas lifecycle, activate a new staged revision with
+`candidateRevision`; restore an already activated historical revision with
+`rollbackTo`, retaining the exact `expectedActive` CAS in both cases. Installed
+acceptance should retain completed Task/Run/Attempt identities across rollback
+and reactivation, then read artifacts with a fresh AppSession after restart.
+AppSession tokens are process-memory-only: rejection of the old token and
+successful newly authorized reads are separate assertions. Never persist the
+raw token in receipts, including failure diagnostics.

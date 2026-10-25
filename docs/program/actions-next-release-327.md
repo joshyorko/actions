@@ -5,8 +5,13 @@ real RCC two-Action/one-Package execution **2 passed, 0 skipped** across both
 control SQL backends; selection denial regression **8 passed**; integrated
 canonical Knowledge ingestion/publication/search service **76 passed, 0 skipped**
 across both control SQL and corpus engines. Prior failed runs remain recorded.
-Clean installed a38 and ordinary Knowledge host/Task/generated consumption remain
-open; this source checkpoint does not change the release NO-GO or owner gates.
+[Clean installed a38](evidence/actions-next-327/recovery-a38/installed-qualified/README.md)
+now proves blank Canvas authoring, two generated Actions in one Package, two real
+RCC-backed MCP Tasks, two App executions with public artifact bytes, exact
+restart replay, rollback/reactivation and stale AppSession rejection. Candidate
+source f332a828; failed prior wheels and harness steps remain recorded. Ordinary
+Knowledge host/Task/generated consumption and the remaining full matrix are
+open; this does not change the release NO-GO or owner gates.
 
 # Actions Next release checkpoint
 
