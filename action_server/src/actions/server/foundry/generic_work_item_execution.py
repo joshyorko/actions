@@ -5,6 +5,7 @@ must delegate, not wrap enqueue in another request identity. Connections and
 server-held caller identities belong to the host. No scheduler, grants, queue
 backend or external-effect retry is created here.
 """
+
 from __future__ import annotations
 
 import hashlib
@@ -28,6 +29,7 @@ from actions.server.deployments.foundry_values import (
     WorkItemDeclaration,
 )
 from actions.server.foundry.logical_receipts import (
+    FAILURE_V1,
     LogicalPublicationGuard,
     requirement_ids,
     validate_bound_record,
@@ -555,12 +557,15 @@ class GenericWorkItemExecution:
             ):
                 raise FenceRejected("retained generic output envelope version differs")
             record = record.get("result")
-            if (
-                not isinstance(record, dict)
-                or record.get("version")
+            if not isinstance(record, dict) or (
+                record.get("version")
                 != versions_for_selection(
                     self.registry, self.snapshot, projection=_projection
                 )[1]
+                and not (
+                    run.status == RunStatus.FAILED
+                    and record.get("version") == FAILURE_V1
+                )
             ):
                 raise FenceRejected("retained generic execution version differs")
         elif (
@@ -697,10 +702,31 @@ class _GenericOutputs(LogicalPublicationGuard, RunOutputService):
     def publish(
         self, actor, fence, outputs, result, *, terminal_status=RunStatus.PASSED
     ):
+        if terminal_status == RunStatus.FAILED:
+            if actor != self.caller.actor:
+                raise AccessDenied("different failure actor")
+            with self.owner._transaction():
+                run = _one(self.db, Run, fence.run_id)
+                terminal = run.status in (RunStatus.PASSED, RunStatus.FAILED)
+                queue = self._check(fence, terminal=terminal)
+                self._failed_publication(actor, fence, outputs, result, run)
+                if queue:
+                    self.owner._permission(
+                        self.caller, self.owner.policy.input_queue, Permission.COMPLETE
+                    )
+                finished = super().publish(
+                    actor, fence, outputs, result, terminal_status=terminal_status
+                )
+                if queue and not terminal:
+                    queue.finish_fenced(
+                        self.ticket.claim.as_claim(),
+                        State.FAILED,
+                        outputs=(),
+                        message="generated execution failed",
+                    )
+                return finished
         if terminal_status != RunStatus.PASSED:
-            raise FenceRejected(
-                "RCC failure requires explicit retained-launch reconciliation"
-            )
+            raise FenceRejected("unsupported generated terminal status")
         if actor != self.caller.actor:
             raise AccessDenied("different generic execution actor")
         with self.owner._transaction():

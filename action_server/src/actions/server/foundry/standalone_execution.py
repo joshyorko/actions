@@ -1,4 +1,5 @@
 """Ordinary mode=none admission on the existing Run journal, without a Work Item."""
+
 from __future__ import annotations
 
 import hashlib
@@ -10,6 +11,7 @@ from actions.server.foundry.generic_work_item_execution import (
     _bound_current,
 )
 from actions.server.foundry.logical_receipts import (
+    FAILURE_V1,
     LogicalPublicationGuard,
     requirement_ids,
     validate_bound_record,
@@ -92,11 +94,17 @@ class StandaloneActionExecution:
             record = outer
         if (
             not isinstance(record, dict)
-            or record.get("version")
-            != (
-                versions_for_selection(
-                    self.registry, self.snapshot, projection=_projection
-                )[1 if terminal else 0]
+            or (
+                record.get("version")
+                != (
+                    versions_for_selection(
+                        self.registry, self.snapshot, projection=_projection
+                    )[1 if terminal else 0]
+                )
+                and not (
+                    run.status == RunStatus.FAILED
+                    and record.get("version") == FAILURE_V1
+                )
             )
             or record.get("claim") is not None
             or record.get("publicationFence" if terminal else "fence")
@@ -195,6 +203,24 @@ class _StandaloneOutputs(LogicalPublicationGuard, RunOutputService):
     def publish(
         self, actor, fence, outputs, result, *, terminal_status=RunStatus.PASSED
     ):
+        if terminal_status == RunStatus.FAILED:
+            if actor != self.caller.actor:
+                raise AccessDenied("different failure actor")
+            with _transaction(self.db):
+                self.owner.current(self.caller, _projection=self._logical_projection())
+                run = _one(self.db, Run, fence.run_id)
+                if (
+                    self.owner.ticket(
+                        self.caller, run, _projection=self._logical_projection()
+                    )
+                    != self.ticket
+                    or fence != self.ticket.fence
+                ):
+                    raise FenceRejected("ordinary failed ticket differs")
+                self._failed_publication(actor, fence, outputs, result, run)
+                return super().publish(
+                    actor, fence, outputs, result, terminal_status=terminal_status
+                )
         if actor != self.caller.actor or terminal_status != RunStatus.PASSED:
             raise AccessDenied("ordinary success-only RCC publication required")
         with _transaction(self.db):

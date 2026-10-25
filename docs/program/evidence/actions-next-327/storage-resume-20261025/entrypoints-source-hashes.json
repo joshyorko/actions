@@ -1,0 +1,12 @@
+{
+  "source_base": "072db7f1af5b11d7c28c234c80d7159e7f00655a",
+  "files": {
+    "action_server/tasks_cdn.py": "085b764bc3b6d771d2d23932804fbd06f96800469c90b7e34333ca2abb337894",
+    "action_server/tests/build_system_tests/test_retired_vendor_entrypoints.py": "03709394cdca5a4cfcfa8a365fe56570729a52f36f3bb7cac257b61113c1c843"
+  },
+  "deleted": [
+    ".github/workflows/action_server_update_downloads.yml"
+  ],
+  "original_workflow_sha256": "b96ea3507a48cbad6bccd8cb99114552b170c59bfd6e03ac3a8c4e97d41ef771",
+  "upstream_disposition": "none"
+}

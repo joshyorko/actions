@@ -12,6 +12,7 @@ import json
 import os
 import selectors
 import shutil
+import signal
 import stat
 import subprocess
 import sys
@@ -26,7 +27,6 @@ from uuid import uuid4
 from actions.server._models import Run, RunStatus
 from actions.server._rcc_runtime_adapter import (
     RCC_VERSION,
-    RccProcessHandle,
     RccRuntimeDescriptor,
     build_exec_command,
     read_receipt,
@@ -75,6 +75,93 @@ class LogicalPreparationCleanupIncomplete(RccCleanupIncomplete):
     def __init__(self, owner):
         super().__init__("logical preparation cleanup incomplete")
         self.owner = owner
+
+
+class _OwnedProcessCapture:
+    """Own an explicitly created POSIX group for trusted, nonescaping code.
+
+    Historical descendant samples cannot prove cleanup after wrapper exit.
+    Group enumeration and a post-termination rescan cover ordinary late forks.
+    This is not containment for code that deliberately starts another session.
+    """
+
+    def __init__(self, process, *, owns_session=False):
+        self.process = process
+        self.owned = {}
+        self.complete = False
+        self.failed = False
+        self._cleanup_result = None
+        self.owns_session = owns_session and os.name == "posix"
+        self.capture()
+
+    def capture(self):
+        import psutil
+
+        self.complete = False
+        if not self.owns_session:
+            self.failed = True
+            return
+        try:
+            for child in psutil.process_iter():
+                try:
+                    if (
+                        child.pid != self.process.pid
+                        and os.getpgid(child.pid) == self.process.pid
+                    ):
+                        self.owned[(child.pid, child.create_time())] = child
+                except (ProcessLookupError, psutil.NoSuchProcess):
+                    continue
+            self.complete = True
+        except Exception:
+            self.failed = True
+
+    def cleanup(self):
+        if self._cleanup_result is not None:
+            return self._cleanup_result
+        from dataclasses import replace
+
+        import psutil
+
+        from actions.server._common.process import force_kill_process_tree_until
+
+        deadline = time.monotonic() + 10
+        while True:
+            # Kill the kernel-owned group before taking the final PID snapshot.
+            # Otherwise a sampled survivor could fork and exit between the
+            # enumeration and status check, leaving an unobserved live child.
+            if self.owns_session:
+                try:
+                    os.killpg(self.process.pid, signal.SIGKILL)
+                except ProcessLookupError:
+                    pass
+                except OSError:
+                    self.failed = True
+            self.capture()
+            result = force_kill_process_tree_until(
+                self.process,
+                list(self.owned.values()),
+                deadline,
+                snapshot_complete_before_call=self.complete and not self.failed,
+            )
+            self.capture()
+            live = []
+            for child in self.owned.values():
+                try:
+                    if child.is_running() and child.status() != psutil.STATUS_ZOMBIE:
+                        live.append(child.pid)
+                except psutil.NoSuchProcess:
+                    continue
+                except Exception:
+                    self.failed = True
+            if not live or time.monotonic() >= deadline:
+                result = replace(
+                    result,
+                    live_descendant_pids=tuple(sorted(set(live))),
+                    descendant_snapshot_complete=self.complete and not self.failed,
+                )
+                if result.execution_stopped:
+                    self._cleanup_result = result
+                return result
 
 
 class GeneratedRccExecution:
@@ -412,7 +499,7 @@ class GeneratedRccExecution:
         )
         command.insert(1, "--no-build")
         environment = self._child_environment(directory)
-        handle: RccProcessHandle | None = None
+        ownership: _OwnedProcessCapture | None = None
         stdout_bytes = b""
         stderr_bytes = b""
         stdout_capture: dict[str, Any] = {}
@@ -429,8 +516,10 @@ class GeneratedRccExecution:
                 stderr=subprocess.PIPE,
                 shell=False,
                 close_fds=True,
+                start_new_session=os.name == "posix",
             )
-            handle = RccProcessHandle(process, receipt_file)
+            ownership = _OwnedProcessCapture(process, owns_session=os.name == "posix")
+            setattr(process, "_actions_capture_owned", ownership.capture)
             if not bound:
                 deadline = time.monotonic() + timeout_seconds
             assert deadline is not None
@@ -452,8 +541,25 @@ class GeneratedRccExecution:
             except subprocess.TimeoutExpired:
                 raise TimeoutError("generated Action RCC deadline") from None
             if process.returncode != 0:
-                raise RuntimeError(
-                    "RCC Action did not complete; retained launch requires reconciliation"
+                receipt_bytes, cleanup = self._confirmed_failed_receipt(
+                    process, ownership, receipt_file, compiled.rcc_artifact_digest
+                )
+                self._verify_snapshot_unchanged(source, compiled.source_archive)
+                self._check_cancel(is_cancelled, actor, fence)
+                return self._publish_failed(
+                    actor,
+                    fence,
+                    snapshot,
+                    compiled,
+                    journal,
+                    launch,
+                    receipt_bytes,
+                    process.returncode,
+                    cleanup,
+                    stdout_bytes,
+                    stderr_bytes,
+                    stdout_capture,
+                    stderr_capture,
                 )
             receipt_bytes = self._read_regular(receipt_file, _RECEIPT_LIMIT)
             receipt = read_receipt(receipt_file, compiled.rcc_artifact_digest)
@@ -472,9 +578,10 @@ class GeneratedRccExecution:
             self._verify_snapshot_unchanged(source, compiled.source_archive)
             completed = True
         finally:
-            if handle is not None and handle.process.poll() is None:
-                handle.capture_owned_processes()
-                cleanup = handle.force_kill_until(time.monotonic() + 10)
+            if ownership is not None and (
+                ownership.owns_session or ownership.process.poll() != 0
+            ):
+                cleanup = ownership.cleanup()
                 if not cleanup.execution_stopped:
                     raise RccCleanupIncomplete("RCC process cleanup incomplete")
 
@@ -822,6 +929,108 @@ class GeneratedRccExecution:
             "attemptFence": fence.model_dump(),
         }
 
+    def _confirmed_failed_receipt(
+        self, process, ownership, receipt_file, artifact_digest
+    ):
+        cleanup = ownership.cleanup()
+        if not cleanup.execution_stopped:
+            raise RccCleanupIncomplete("failed RCC child cleanup incomplete")
+        receipt_bytes = self._read_regular(receipt_file, _RECEIPT_LIMIT)
+        receipt = read_receipt(receipt_file, artifact_digest)
+        if (
+            process.returncode is None
+            or process.returncode == 0
+            or receipt.get("status") != "failed"
+            or (
+                not isinstance(receipt.get("exitCode"), int)
+                or isinstance(receipt.get("exitCode"), bool)
+            )
+            or receipt["exitCode"] != process.returncode
+        ):
+            raise RuntimeError("RCC child failure lacks matching measured receipt")
+        return receipt_bytes, cleanup
+
+    def _publish_failed(
+        self,
+        actor,
+        fence,
+        snapshot,
+        compiled,
+        journal,
+        launch,
+        receipt_bytes,
+        exit_code,
+        cleanup,
+        stdout_bytes,
+        stderr_bytes,
+        stdout_capture,
+        stderr_capture,
+    ):
+        """Publish only observed child exit plus complete owned cleanup, never a result."""
+        from actions.server.foundry.logical_receipts import FAILURE_V1
+
+        binder = getattr(self.outputs, "bind_generated_failure", None)
+        if not callable(binder) or not cleanup.execution_stopped:
+            raise RuntimeError("failed launch requires explicit reconciliation")
+        self._assert_live_journal(actor, fence, launch)
+        self.outputs.heartbeat(fence, lease_seconds=_LEASE_SECONDS)
+        execution = {
+            "status": "failed",
+            "exitCode": exit_code,
+            "artifactDigest": compiled.rcc_artifact_digest,
+            "receiptDigest": self._digest(receipt_bytes),
+            "cleanup": {
+                "wrapperReaped": cleanup.wrapper_reaped,
+                "descendantSnapshotComplete": cleanup.descendant_snapshot_complete,
+                "executionStopped": cleanup.execution_stopped,
+            },
+            "stdout": self._capture_receipt(stdout_bytes, stdout_capture),
+            "stderr": self._capture_receipt(stderr_bytes, stderr_capture),
+        }
+        refs, records = [], []
+        for name, media, payload in (
+            ("rcc-receipt.json", "application/json", receipt_bytes),
+            ("rcc-stdout.log", "application/octet-stream", stdout_bytes),
+            ("rcc-stderr.log", "application/octet-stream", stderr_bytes),
+        ):
+            ref = self.outputs.stage(
+                fence,
+                self._chunks(payload),
+                name=name,
+                media_type=media,
+                retention_seconds=_OUTPUT_RETENTION_SECONDS,
+            )
+            refs.append(ref)
+            records.append(
+                {
+                    "name": name,
+                    "ref": ref.model_dump(mode="json"),
+                    "digest": self._digest(payload),
+                    "size": len(payload),
+                }
+            )
+        record = {
+            "version": FAILURE_V1,
+            "mode": journal["mode"],
+            "claim": journal["claim"],
+            "lineage": self._lineage(snapshot, journal["claim"], fence),
+            "launch": launch,
+            "publicationFence": fence.model_dump(),
+            "sourceArtifactDigest": compiled.source_artifact_digest,
+            "packageRevision": snapshot.capability.package_revision.revision_id.root,
+            "runtimePlanDigest": snapshot.runtime_plan.plan_digest.root,
+            "rccSpecificationDigest": compiled.rcc_specification_digest,
+            "rccArtifactDigest": compiled.rcc_artifact_digest,
+            "execution": execution,
+            "outputs": records,
+        }
+        with binder(record), _transaction(self.outputs.db):
+            self.outputs._fence(fence)
+            self._assert_live_journal(actor, fence, launch)
+            return self.outputs.publish(
+                actor, fence, refs, record, terminal_status=RunStatus.FAILED
+            )
+
     def _capture_process(
         self,
         process: subprocess.Popen,
@@ -845,6 +1054,9 @@ class GeneratedRccExecution:
         process_exit_at: float | None = None
         try:
             while selector.get_map():
+                observer = getattr(process, "_actions_capture_owned", None)
+                if observer is not None:
+                    observer()
                 now = time.monotonic()
                 if now >= deadline:
                     raise TimeoutError("generated Action RCC deadline")

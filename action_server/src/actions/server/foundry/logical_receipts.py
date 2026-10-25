@@ -4,6 +4,7 @@ Full-summary comparison is for a trusted publication expectation. Identity-only
 comparison is for retained readers: it cannot authenticate result/context hashes
 or counts. Callers still own issuance, launch equality, fences, grants and seals.
 """
+
 from __future__ import annotations
 
 import hashlib
@@ -725,6 +726,19 @@ def validate_bound_record(
     from actions.server.run_outputs.service import _canonical, _now, _one
     from actions.server.run_outputs.types import OutputRef, canonical_uuid
 
+    if terminal and isinstance(record, dict) and record.get("version") == FAILURE_V1:
+        return validate_failed_record(
+            db,
+            registry,
+            snapshot,
+            run,
+            fence,
+            record,
+            claim=claim,
+            outputs=outputs,
+            _projection=_projection,
+            _allow_expired_terminal=_allow_expired_terminal,
+        )
     ids = (
         _projection.requirement_ids
         if _projection is not None
@@ -1243,7 +1257,65 @@ class LogicalPublicationGuard:
 
     def _logical_projection(self):
         binding = getattr(self, "_logical_binding", None)
-        return binding[3] if binding is not None else None
+        failed = getattr(self, "_failed_binding", None)
+        return (
+            binding[3]
+            if binding is not None
+            else (failed[0] if failed is not None else None)
+        )
+
+    def bind_generated_failure(self, record):
+        """Cache immutable selection outside SQL; only trusted host supplies receipt."""
+        from contextlib import contextmanager
+
+        from actions.server._models import Run
+        from actions.server.run_outputs.service import _canonical, _one
+
+        @contextmanager
+        def bind():
+            if (
+                self.db.in_transaction()
+                or getattr(self, "_failed_binding", None) is not None
+            ):
+                raise ValueError("owned failure binding outside transaction required")
+            projection = self._logical_projection() or _retained_projection(
+                self.db,
+                self.owner.registry,
+                self.owner.snapshot,
+                run=_one(self.db, Run, self.ticket.fence.run_id),
+            )
+            self._failed_binding = (projection, _canonical(record, 2 * 1024 * 1024))
+            try:
+                yield
+            finally:
+                self._failed_binding = None
+
+        return bind()
+
+    def _failed_publication(self, actor, fence, outputs, result, run):
+        from actions.server.run_outputs.service import FenceRejected, _canonical
+
+        binding = getattr(self, "_failed_binding", None)
+        if binding is None or _canonical(result, 2 * 1024 * 1024) != binding[1]:
+            raise FenceRejected(
+                "issued failed execution binding required; reconciliation pending"
+            )
+        logical = getattr(self, "_logical_binding", None)
+        if logical is not None:
+            execution, prepared, expected, _projection, _check = logical
+            execution.recheck(actor, fence, prepared)
+            validate_summary(result["launch"]["logicalReads"], expected=expected)
+        validate_failed_record(
+            self.db,
+            self.owner.registry,
+            self.owner.snapshot,
+            run,
+            fence,
+            result,
+            claim=self.ticket.claim.model_dump() if self.ticket.claim else None,
+            outputs=outputs,
+            _projection=binding[0],
+        )
 
     def _logical_publication(self, actor, fence, outputs, result, run):
         ids = self._logical_requirements
@@ -1290,6 +1362,8 @@ class LogicalPublicationGuard:
 
 def generated_output_names(record):
     """Output names after validate_bound_record; this helper grants no authority."""
+    if record.get("version") == FAILURE_V1:
+        return {"rcc-receipt.json", "rcc-stdout.log", "rcc-stderr.log"}
     names = {
         "generated-action-result.json",
         "rcc-receipt.json",
@@ -1306,3 +1380,252 @@ def generated_output_names(record):
             if op.kind == "knowledge" and op.operation.endswith(".ingest/v1")
         )
     return names
+
+
+FAILURE_V1 = "actions.generated-rcc-failure/v1"
+
+
+def validate_failed_record(
+    db,
+    registry,
+    snapshot,
+    run,
+    fence,
+    record,
+    *,
+    claim,
+    outputs,
+    _projection=None,
+    _allow_expired_terminal=False,
+):
+    """Closed failed-child receipt; SQL seals only, never a result or domain commit."""
+    from actions.server._models import RunStatus
+    from actions.server.run_outputs.models import RunOutput
+    from actions.server.run_outputs.service import _canonical, _now, _one
+    from actions.server.run_outputs.types import OutputRef, canonical_uuid
+
+    projection = _projection or _retained_projection(db, registry, snapshot, run=run)
+    if projection.snapshot != snapshot:
+        raise ValueError("failed selection differs")
+    for pin in projection.metadata_pins:
+        pin.recheck(db)
+    fixed = dict(projection.fixed)
+    keys = {
+        "version",
+        "mode",
+        "claim",
+        "lineage",
+        "launch",
+        "publicationFence",
+        "execution",
+        "outputs",
+    } | set(fixed)
+    if (
+        not isinstance(record, dict)
+        or set(record) != keys
+        or record["version"] != FAILURE_V1
+    ):
+        raise ValueError("closed generated failure required")
+    if (
+        run.id != fence.run_id
+        or run.status == RunStatus.PASSED
+        or not isinstance(_allow_expired_terminal, bool)
+        or (_allow_expired_terminal and run.status != RunStatus.FAILED)
+    ):
+        raise ValueError("failed terminal state differs")
+    from actions.server.run_outputs.models import RunAttempt, RunPin
+
+    attempt = _one(db, RunAttempt, fence.attempt_id)
+    pin = _one(db, RunPin, run.id)
+    if (
+        attempt.run_id != run.id
+        or attempt.workspace_id != snapshot.workspace_id
+        or attempt.owner_id != fence.owner_id
+        or attempt.epoch != fence.epoch
+        or pin.current_attempt_id != fence.attempt_id
+        or pin.epoch != fence.epoch
+        or attempt.state != ("failed" if run.status == RunStatus.FAILED else "running")
+    ):
+        raise ValueError("failed current Attempt differs")
+    lineage = dict(
+        packageRevision=snapshot.capability.package_revision.model_dump(mode="json"),
+        runtimePlan=snapshot.runtime_plan.model_dump(mode="json"),
+        workItemClaim=claim,
+        runId=fence.run_id,
+        attemptFence=fence.model_dump(),
+    )
+    launch = record["launch"]
+    launch_keys = {"id", "workItemClaim", "lineage", "inputDigest"} | set(fixed)
+    if projection.requirement_ids:
+        launch_keys.add("logicalReads")
+    if not isinstance(launch, dict) or set(launch) != launch_keys:
+        raise ValueError("closed failed launch required")
+    canonical_uuid(launch["id"])
+    if (
+        record["mode"] != ("work-items" if claim else "standalone")
+        or _canonical(record["claim"], 4096) != _canonical(claim, 4096)
+        or _canonical(launch["workItemClaim"], 4096) != _canonical(claim, 4096)
+        or _canonical(record["publicationFence"], 4096)
+        != _canonical(fence.model_dump(), 4096)
+        or _canonical(record["lineage"], 16384) != _canonical(lineage, 16384)
+        or _canonical(launch["lineage"], 16384) != _canonical(lineage, 16384)
+        or launch["inputDigest"]
+        != "sha256:"
+        + hashlib.sha256(
+            _canonical(json.loads(run.inputs), 262144).encode()
+        ).hexdigest()
+        or any(record[k] != v or launch[k] != v for k, v in fixed.items())
+    ):
+        raise ValueError("failed immutable lineage differs")
+    if projection.requirement_ids:
+        _projected_summary(projection, launch["logicalReads"])
+    carrier = json.loads(
+        run.result, object_pairs_hook=_pairs, parse_constant=_no_constant
+    )
+    if _canonical(carrier, 2 * 1024 * 1024) != run.result:
+        raise ValueError("canonical failure carrier required")
+    if run.status == RunStatus.FAILED:
+        if (
+            not isinstance(carrier, dict)
+            or set(carrier) != {"version", "result", "outputs"}
+            or (
+                not isinstance(carrier["version"], int)
+                or isinstance(carrier["version"], bool)
+            )
+            or carrier["version"] != 1
+            or _canonical(carrier["result"], 2 * 1024 * 1024)
+            != _canonical(record, 2 * 1024 * 1024)
+        ):
+            raise ValueError("failed terminal carrier differs")
+    elif (
+        not isinstance(carrier, dict)
+        or set(carrier)
+        not in (
+            {"version", "mode", "claim", "fence", "launch"},
+            {"version", "mode", "claim", "fence", "launch", "execution"},
+        )
+        or carrier.get("version")
+        != versions_for_selection(registry, snapshot, projection=projection)[0]
+        or carrier.get("execution") is not None
+        or carrier.get("mode") != record["mode"]
+        or carrier.get("launch") != launch
+        or carrier.get("claim") != claim
+        or carrier.get("fence") != fence.model_dump()
+    ):
+        raise ValueError("failed publication launch changed")
+    execution = record["execution"]
+    if (
+        not isinstance(execution, dict)
+        or set(execution)
+        != {
+            "status",
+            "exitCode",
+            "receiptDigest",
+            "artifactDigest",
+            "cleanup",
+            "stdout",
+            "stderr",
+        }
+        or execution["status"] != "failed"
+        or (
+            not isinstance(execution["exitCode"], int)
+            or isinstance(execution["exitCode"], bool)
+        )
+        or execution["exitCode"] == 0
+        or not -2147483648 <= execution["exitCode"] <= 2147483647
+        or execution["artifactDigest"] != fixed["rccArtifactDigest"]
+        or execution["cleanup"]
+        != {
+            "wrapperReaped": True,
+            "descendantSnapshotComplete": True,
+            "executionStopped": True,
+        }
+        or any(not isinstance(v, bool) for v in execution["cleanup"].values())
+    ):
+        raise ValueError("proven child failure and complete cleanup required")
+    _matches(execution["receiptDigest"], _DIGEST)
+    for stream in ("stdout", "stderr"):
+        measured = execution[stream]
+        if not isinstance(measured, dict) or set(measured) != {
+            "observedBytes",
+            "retainedBytes",
+            "discardedObservedBytes",
+            "streamComplete",
+            "truncated",
+            "digest",
+        }:
+            raise ValueError("closed failed stream measurement required")
+        _matches(measured["digest"], _DIGEST)
+        if (
+            any(
+                (not isinstance(measured[k], int) or isinstance(measured[k], bool))
+                or not 0 <= measured[k] <= 2**53 - 1
+                for k in ("observedBytes", "retainedBytes", "discardedObservedBytes")
+            )
+            or any(
+                not isinstance(measured[k], bool)
+                for k in ("streamComplete", "truncated")
+            )
+            or measured["observedBytes"]
+            != measured["retainedBytes"] + measured["discardedObservedBytes"]
+            or measured["truncated"]
+            != (
+                measured["discardedObservedBytes"] > 0 or not measured["streamComplete"]
+            )
+        ):
+            raise ValueError("failed stream measurement differs")
+    if (
+        not isinstance(outputs, (list, tuple))
+        or len(outputs) != 3
+        or not isinstance(record["outputs"], list)
+        or len(record["outputs"]) != 3
+    ):
+        raise ValueError("exact failure diagnostic inventory required")
+    inventory = {}
+    for raw, evidence in zip(outputs, record["outputs"]):
+        ref = raw if isinstance(raw, OutputRef) else OutputRef.model_validate(raw)
+        row = _one(db, RunOutput, ref.output_id)
+        if (
+            not isinstance(evidence, dict)
+            or set(evidence) != {"name", "ref", "digest", "size"}
+            or ref.run_id != run.id
+            or ref.workspace_id != snapshot.workspace_id
+            or evidence["ref"] != ref.model_dump(mode="json")
+            or row.run_id != run.id
+            or row.workspace_id != snapshot.workspace_id
+            or row.run_attempt_id != fence.attempt_id
+            or row.epoch != fence.epoch
+            or row.provider_key != snapshot.provider_key
+            or row.state
+            != ("final" if run.status == RunStatus.FAILED else "provisional")
+            or (not _allow_expired_terminal and int(row.expires_ms) <= _now(db))
+            or (
+                not isinstance(evidence["size"], int)
+                or isinstance(evidence["size"], bool)
+            )
+            or evidence["size"] < 0
+            or (evidence["name"], evidence["digest"], evidence["size"])
+            != (row.name, row.digest, row.size)
+            or row.name in inventory
+        ):
+            raise ValueError("failed diagnostic seal differs")
+        limit = 1024 * 1024 if row.name == "rcc-receipt.json" else 256 * 1024
+        media = (
+            "application/json"
+            if row.name == "rcc-receipt.json"
+            else "application/octet-stream"
+        )
+        if row.size > limit or row.media_type != media:
+            raise ValueError("bounded typed diagnostic required")
+        inventory[row.name] = evidence
+    if (
+        set(inventory) != {"rcc-receipt.json", "rcc-stdout.log", "rcc-stderr.log"}
+        or execution["receiptDigest"] != inventory["rcc-receipt.json"]["digest"]
+    ):
+        raise ValueError("failed diagnostic inventory differs")
+    for stream in ("stdout", "stderr"):
+        if (execution[stream]["digest"], execution[stream]["retainedBytes"]) != (
+            inventory[f"rcc-{stream}.log"]["digest"],
+            inventory[f"rcc-{stream}.log"]["size"],
+        ):
+            raise ValueError("failed stream measurement differs")

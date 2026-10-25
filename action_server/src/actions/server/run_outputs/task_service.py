@@ -3,6 +3,7 @@
 No scheduler, transport advertisement, interaction store or worker bootstrap.
 Hosts supply readiness and explicit policy; model callers cannot supply either.
 """
+
 from __future__ import annotations
 
 import datetime
@@ -14,6 +15,7 @@ from typing import Any, Literal, Protocol
 
 from actions.server._models import RunStatus
 from actions.server.foundry.logical_receipts import (
+    FAILURE_V1,
     validate_bound_record,
     versions_for_selection,
 )
@@ -340,11 +342,17 @@ class TaskService:
                     not isinstance(record, dict)
                     or record.get("mode") != "standalone"
                     or record.get("claim") is not None
-                    or record.get("version")
-                    != (
-                        versions_for_selection(self.outputs.capabilities, snapshot)[
-                            1 if terminal else 0
-                        ]
+                    or (
+                        record.get("version")
+                        != (
+                            versions_for_selection(self.outputs.capabilities, snapshot)[
+                                1 if terminal else 0
+                            ]
+                        )
+                        and not (
+                            run.status == RunStatus.FAILED
+                            and record.get("version") == FAILURE_V1
+                        )
                     )
                     or AttemptFence.model_validate(
                         record.get("publicationFence" if terminal else "fence")
@@ -556,10 +564,14 @@ class TaskService:
             set(by_name) != expected_names
             or len(declared) != len(expected_names)
             or not isinstance(execution, dict)
-            or execution.get("status") != "completed"
+            or execution.get("status")
+            != ("failed" if record.get("version") == FAILURE_V1 else "completed")
             or execution.get("artifactDigest") != compiled.rcc_artifact_digest
-            or execution.get("resultDigest")
-            != by_name["generated-action-result.json"]["digest"]
+            or (
+                record.get("version") != FAILURE_V1
+                and execution.get("resultDigest")
+                != by_name["generated-action-result.json"]["digest"]
+            )
             or execution.get("receiptDigest") != by_name["rcc-receipt.json"]["digest"]
         ):
             raise ValueError("complete measured execution evidence required")

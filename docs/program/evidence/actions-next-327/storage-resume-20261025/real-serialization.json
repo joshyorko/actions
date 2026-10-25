@@ -1,0 +1,19 @@
+{
+  "scope": "real pinned RCC helper execution, not installed public Canvas lifecycle",
+  "results": [
+    {
+      "case": "frozen",
+      "exit_code": 1,
+      "rcc_status": "failed",
+      "helper_sha256": "0977aa872e6355ce1679bd5636aec0126a3a2e59669bc43162d53f108e439755",
+      "artifact_digest": "sha256:651c79e99dc9f684dceb4dea55de5b6156cb626aaba717c05897adf3173ed5d3"
+    },
+    {
+      "case": "corrected",
+      "exit_code": 0,
+      "rcc_status": "completed",
+      "helper_sha256": "3244882f85d4d3748b6a1ee748d7f75a3cf71501164054e26acedb493fecfd95",
+      "artifact_digest": "sha256:651c79e99dc9f684dceb4dea55de5b6156cb626aaba717c05897adf3173ed5d3"
+    }
+  ]
+}

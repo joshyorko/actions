@@ -6244,4 +6244,47 @@ vendor-independence or an independently generated SBOM dependency graph.
 
 Freeze all writers before transferring the sole integration role. Save exact source and selected test inventories separately from immutable installed artifacts; record partial and resource-interrupted runs as such. A SQL-only Robot receipt projection proves retained metadata identity, not provider bytes or execution authority. Do not call registry selection/provider reads from ticket or Task SQL transactions. Reconcile its closed admission envelope with retained validation metadata before activating receipt hooks. Direct dry-run readiness and synthetic adapter authority tests do not prove ordinary installed Robot execution.
 
-A process cleanup review must cover descendants created after an earlier empty snapshot and reparented when their wrapper exits. An early complete snapshot is not proof that later descendants are absent. Keep unresolved cleanup patches unapplied until a real process-barrier regression and review establish the guarantee. See the storage-handoff-20261025 receipt for the held patch and exact test boundaries.
+A process cleanup review must cover descendants created after an earlier empty snapshot and reparented when their wrapper exits. The deterministic regression must hold a wrapper before child creation, capture an empty snapshot, release creation, and wait for wrapper exit before cleanup. Assert the late child is absent or cleanup remains uncertain; a previously successful empty sample must never establish terminal-failure eligibility. The storage-resume-20261025 barrier reproduced the held patch reporting stopped while that child remained live. A process-group correction must verify actual RCC env-exec inheritance and cover timeout/shutdown as well as failure publication; synthetic process containment alone does not establish that boundary. An early complete snapshot is not proof that later descendants are absent. Keep unresolved cleanup patches unapplied until a real process-barrier regression and review establish the guarantee. See the storage-handoff-20261025 receipt for the held patch and exact test boundaries.
+
+Generated Python failure publication requires the measured failed RCC receipt to
+match the launched artifact and exit code, current source identity, live Attempt
+fence and authorization, and confirmed process cleanup. It publishes only the
+three sealed RCC diagnostics; no result or prepared logical ingestion becomes
+successful. Work Item failure and Run/Attempt failure share the metadata
+transaction. Failed Task reads validate the same immutable receipt and seals.
+
+For trusted, nonescaping POSIX workloads, create a new session at launch and
+terminate its kernel-owned process group before descendant enumeration. A final
+PID scan alone is insufficient: a surviving member can fork and exit between
+that scan and its status check. Rescan and reap within the same deadline, retain
+inspection errors as uncertainty, and cache successful cleanup so `finally`
+cannot signal a reused group after publication. Use the same ownership for
+normal exit, failed exit and cancellation/timeout cleanup. This is not an OS
+sandbox; deliberate session escape and non-POSIX containment are separate gates.
+The storage-resume-20261025 evidence retains both counterexamples and a real
+RCC child/grandchild cleanup probe.
+
+An official-host browser gate must preserve required browser sandboxing. In an
+executor with a misconfigured Chromium SUID helper, a sandboxed launch may abort
+before opening a page. Record that environment failure separately and continue
+independent protocol tests; do not convert a `--no-sandbox` run into compliance
+with a no-security-overrides constraint or treat MCP-only evidence as UI proof.
+
+Publication success tests that stage several diagnostic/corpus outputs should
+set an explicit test budget rather than accidentally inherit a short shared
+preparation-fixture deadline. Keep a separate deterministic expired-budget test
+that advances only the test clock after preparation and asserts a running Run
+and provisional outputs after rejection. A passing rerun does not identify a
+previously suppressed exception; preserve the failed receipt and distinguish a
+reproduced failure mechanism from an unconfirmed original cause.
+
+Both the default frontend CDN task and the alternate `tasks_cdn` Invoke
+collection reject retired upstream-executable extraction before external work,
+including default and explicitly pinned versions. Cover actual alternate
+collection/Program dispatch. Template and downloads-index vendor publishers are
+retired separately; assert vendor role/bucket targets are absent across
+workflows while retaining the owned source-build release workflow. Historical
+index-generation code and compatibility names do not authorize publication or
+establish full dependency independence. Logging replacement still must preserve
+raw/repr secret hiding, OAuth suppression and decrypted-context redaction before
+removing `robocorp-log`.
