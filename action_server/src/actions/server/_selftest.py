@@ -124,6 +124,7 @@ class ActionServerProcess:
         else:
             base_args = [
                 sys.executable,
+                "-P",
                 "-m",
                 "actions.server",
             ]
@@ -504,7 +505,7 @@ def run_python_module(
     capture_output=True,
 ) -> CompletedProcess:
     return run_command_line(
-        [sys.executable, "-m", python_module] + cmdline,
+        [sys.executable, "-P", "-m", python_module] + cmdline,
         returncode=returncode,
         cwd=cwd,
         additional_env=additional_env,

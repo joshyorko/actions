@@ -6446,3 +6446,14 @@ Use an owner-provisioned separate non-root browser environment with supported us
 namespace sandboxing and the candidate's locked Playwright version. A successful
 sandboxed page preflight is required before host acceptance; never treat the
 presence of managed Chromium binaries as evidence that sandbox launch works.
+
+When freezing the Runtime, filter optional MCP CLI modules before PyInstaller
+recurses into packages: importing `mcp.cli` can exit when the optional Typer
+dependency is absent. Preserve MCP client/server runtime collection. Source-mode
+self-tests launched from action projects must use Python's safe-path flag (`-P`)
+so a project `actions.py` cannot shadow the installed namespace. Keep source-mode
+API results distinct from explicitly selected, source-bound native artifact gates;
+a successful diagnostic build from a dirty checkout does not qualify a candidate.
+The safe-path flag does not remove caller-supplied `PYTHONPATH` and is not a
+sandbox. Generate the public OAuth catalog through the canonical build task and
+keep it ignored; it must not replace an operator's private registration.
