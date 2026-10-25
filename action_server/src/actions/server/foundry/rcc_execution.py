@@ -617,6 +617,7 @@ class GeneratedRccExecution:
                 requirement = self.registry.get_binding_requirement(ref)
                 if requirement is None or requirement.contract.kind != "data":
                     raise AccessDenied("logical requirement runtime is unsupported")
+            self.logical_execution.require_selected_adapters(snapshot)
         if (
             capability.get("mode") != "none"
             or capability.get("allowOutputs") is not False

@@ -134,6 +134,51 @@ class ConfiguredProviderExecution:
             raise ValueError("exact configured provider revision unavailable")
         return matches[0]
 
+    def require_adapter_available(
+        self, reference: ProviderProfileRevisionRef, operations: tuple[str, ...]
+    ) -> None:
+        """Selected local dependency imports only; no engine/secret/network probe.
+
+        Called at execution readiness, never construction/startup. PostgreSQL
+        Parquet scans also require the shared DuckDB decoder; CSV scans do not.
+        """
+        import importlib
+
+        from actions.server.data_queries.sealed_duckdb import scan_contract
+        from actions.server.deployments.provider_registry import ParquetSourceCodec
+
+        try:
+            entry = self.entry(reference)
+            config = self.configs[reference]
+            if (
+                config.provider != reference
+                or config.source_revision != entry.source.revision_id
+            ):
+                raise ValueError("selected configuration identity differs")
+            if (
+                not isinstance(operations, tuple)
+                or not operations
+                or len(operations) > 32
+                or len(set(operations)) != len(operations)
+            ):
+                raise ValueError("bounded selected operations required")
+            if isinstance(config.host, DuckDBHost):
+                modules = {"duckdb"}
+            elif isinstance(config.host, PostgreSQLHost):
+                modules = {"psycopg"}
+            else:
+                raise ValueError("selected adapter unavailable")
+            for name in operations:
+                _, source_object = scan_contract(entry.descriptor, entry.source, name)
+                if isinstance(source_object.codec, ParquetSourceCodec):
+                    modules.add("duckdb")
+            for name in sorted(modules):
+                importlib.import_module(name)
+        except Exception:
+            raise ValueError(
+                "selected logical adapter dependency unavailable"
+            ) from None
+
     def check_current(self) -> None:
         """Filesystem/provenance validation; never call inside publication."""
         try:

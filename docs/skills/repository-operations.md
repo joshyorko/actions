@@ -5580,3 +5580,21 @@ establish the cause of a connection-refused cascade. Archive inactive fixtures
 with file hashes plus symlink/hard-link/FIFO metadata; verify gzip sequentially
 to avoid repeated decompression for each member. Never publish private fixture
 archive payloads merely because their inputs are synthetic.
+
+Selected bound execution readiness verifies local adapter dependencies before
+Task admission. `GeneratedRccExecution._verified_selection` delegates to the
+logical port only for capabilities with nonempty immutable requirements. The
+port finds their exact retained Deployment bindings and the configured factory
+imports only modules needed by those selected operations. It creates no engine,
+connection, source-materialization job, secret resolution, grants, Run or Attempt.
+This check is not called by factory construction or ordinary startup, and an
+unused provider's missing optional dependency cannot reject another selection.
+
+DuckDB sealed scans require the declared Runtime `data-duckdb` extra (currently
+DuckDB1.4.1). PostgreSQL CSV scans require psycopg; selected PostgreSQL Parquet
+scans additionally require DuckDB because the retained Parquet decoder uses it.
+Installing a base Runtime wheel does not imply every optional adapter exists.
+Missing or unloadable selected modules return a bounded unavailable error before
+Task admission. Successful module import is dependency readiness only, not
+connection, credentials, source-byte, privilege or execution qualification. Live
+execution authorization and actual engine validation remain unchanged.

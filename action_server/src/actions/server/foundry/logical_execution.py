@@ -123,6 +123,35 @@ class LogicalExecution:
 
         self._preparations = LogicalPreparationSupervisor(self)
 
+    def require_selected_adapters(self, snapshot: ExecutionSnapshot) -> None:
+        """Read immutable selection and import its adapters before admission.
+
+        This is dependency readiness, not a grant or a connection/source probe.
+        Existing callers retain responsibility for live execution authorization.
+        """
+        snapshot = ExecutionSnapshot.model_validate(snapshot)
+        declaration = self.registry.get_capability(snapshot.capability)
+        stored = self.repository.get_revision(snapshot.deployment)
+        if declaration is None or stored is None:
+            raise LogicalReadRejected("selected logical metadata unavailable")
+        for reference in declaration.binding_requirements:
+            bindings = [
+                binding
+                for binding in stored.revision.specification.bindings
+                if binding.requirement == reference
+            ]
+            requirement = self.registry.get_binding_requirement(reference)
+            if (
+                len(bindings) != 1
+                or requirement is None
+                or requirement.contract.kind != "data"
+            ):
+                raise LogicalReadRejected("exact selected data binding required")
+            self.configured.require_adapter_available(
+                bindings[0].provider,
+                tuple(operation.name for operation in requirement.contract.operations),
+            )
+
     def _check(self, event):
         if event.is_set():
             raise LogicalReadRejected("logical read cancelled or deadline exceeded")
