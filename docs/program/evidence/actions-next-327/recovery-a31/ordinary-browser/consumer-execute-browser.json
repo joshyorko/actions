@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "mode": "consumer",
+  "phase": "execute",
+  "screenshots": [
+    "consumer-execute-mounted.png",
+    "consumer-execute-selected.png",
+    "consumer-execute-completed.png"
+  ],
+  "producedText": "Produced Work Items\n\nRead-only output items from this Run. Queue: input_output\n\nLoad produced items\n\n1df6b00f-ed41-4531-82a1-df22efbbbcd8 — PENDING\n\nParent input: cd60df12-95d0-4d4e-8194-005ada4cb53a\n\n{\"fieldNames\": [\"amount\", \"city\"], \"recordCount\": 2}",
+  "artifactText": "{\"result\":{\"fieldNames\":[\"amount\",\"city\"],\"recordCount\":2},\"workItems\":[{\"fieldNames\":[\"amount\",\"city\"],\"recordCount\":2}]}"
+}
