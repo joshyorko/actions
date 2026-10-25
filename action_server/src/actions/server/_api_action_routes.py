@@ -12,6 +12,7 @@ from actions.server._app import _CustomFastAPI
 if TYPE_CHECKING:
     from actions.server.data_queries.canvas_mcp import InvoiceCanvasMcp
     from actions.server.foundry.mcp import CanvasMcp
+    from actions.server.run_outputs.task_service import TaskService
 
 log = logging.getLogger(__name__)
 
@@ -112,6 +113,7 @@ class _ActionRoutes:
         *,
         invoice_canvas: "InvoiceCanvasMcp | None" = None,
         canvas_foundry: "CanvasMcp | None" = None,
+        task_service: "TaskService | None" = None,
     ):
         """
         Args:
@@ -134,7 +136,9 @@ class _ActionRoutes:
         # token before registering the replacement handlers.
         self._process_pool_generation = 0
         self.mcp_server_setup_helper: McpServerSetupHelper = McpServerSetupHelper(
-            invoice_canvas=invoice_canvas, canvas_foundry=canvas_foundry
+            invoice_canvas=invoice_canvas,
+            canvas_foundry=canvas_foundry,
+            task_service=task_service,
         )
 
     def setup_mcp_server(self, api_key: str | None) -> None:

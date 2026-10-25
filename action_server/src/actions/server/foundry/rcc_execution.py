@@ -64,6 +64,10 @@ _HEARTBEAT_SECONDS = 8
 _MAX_TIMEOUT_SECONDS = 600
 
 
+class RccCleanupIncomplete(RuntimeError):
+    """Owned process termination is unconfirmed; retain host resources."""
+
+
 class GeneratedRccExecution:
     """Execute one pre-admitted Run under its existing AttemptFence.
 
@@ -290,7 +294,7 @@ class GeneratedRccExecution:
                 handle.capture_owned_processes()
                 cleanup = handle.force_kill_until(time.monotonic() + 10)
                 if not cleanup.execution_stopped:
-                    raise RuntimeError("RCC process cleanup incomplete")
+                    raise RccCleanupIncomplete("RCC process cleanup incomplete")
 
         if not completed:
             raise RuntimeError("generated Action execution did not complete")

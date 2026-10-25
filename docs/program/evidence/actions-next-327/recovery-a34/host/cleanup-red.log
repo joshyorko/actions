@@ -1,0 +1,17 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_ test_unconfirmed_child_cleanup_retains_resources_after_thread_exit[sqlite-duckdb] _
+
+case = namespace(db=<actions.server._database.Database object at 0x7f00fd2a8c20>, actor=Actor(principal_id='9e245cce-1bba-458...t_handle=None, binding_id=None), port=<actions.server.foundry.generic_view.GenericCanvasView object at 0x7f00fc13ec00>)
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-211/test_unconfirmed_child_cleanup0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f00fbd22120>
+
+    def test_unconfirmed_child_cleanup_retains_resources_after_thread_exit(case,tmp_path,monkeypatch):
+>       from actions.server.foundry.rcc_execution import RccCleanupIncomplete
+E       ImportError: cannot import name 'RccCleanupIncomplete' from 'actions.server.foundry.rcc_execution' (/workspace/actions-recovery-327/task-host-draft/action_server/src/actions/server/foundry/rcc_execution.py)
+
+tests/action_server_tests/test_task_host.py:385: ImportError
+=========================== short test summary info ============================
+FAILED tests/action_server_tests/test_task_host.py::test_unconfirmed_child_cleanup_retains_resources_after_thread_exit[sqlite-duckdb]
+1 failed, 45 deselected in 1.58s
+Log (html): /workspace/actions-recovery-327/task-host-draft/action_server/output/log.html

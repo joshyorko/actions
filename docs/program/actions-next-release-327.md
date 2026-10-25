@@ -1102,3 +1102,56 @@ Provider metadata registry migration19, explicit stopped-local-SQLite providers-
 Integration review reproduced and corrected configure-replay provenance validation and misleading dry-run readiness, plus an end-of-page worker cursor that could skip unconsumed candidates. Exact source and real-RCC receipts follow in recovery-a32; completed scoped tests do not replace full final-source verification.
 
 [Installed a32 qualification](evidence/actions-next-327/recovery-a32/ordinary-browser/README.md) now passes explicit public provider metadata/source/config setup, ordinary startup/restart, genuine consumer/producer execution, child/artifact views and the stale-input-selection correction. The first asynchronous browser-assertion failure is retained. This establishes configured-not-probed provider persistence, not engine execution or Task/Robot readiness.
+
+## a33 source prerequisites and private Core a3
+
+[Run clock and sealed-engine receipts](evidence/actions-next-327/recovery-a33/README.md)
+qualify the common lifecycle timestamp, immutable Task receipt migration21 and
+bounded eager DuckDB/PostgreSQL source reads. Historical migration fixtures now
+use frozen installed-wheel DDL. The frozen a30 portable run recorded3125passes,
+34classified skips,290deselections and one archive-Git-index harness failure;
+a corrected index rerun passed all40 contract tests. The original failed full
+receipt remains authoritative; no single all-green full run is claimed.
+
+[Current Task protocol prerequisite](evidence/actions-next-327/recovery-task-prerequisite/README.md)
+qualifies common durable admission/replay, Task projection and the released
+2026-07-28 extension with exact HTTP routing. The joined source gate passed112,
+and corrected MCP tests passed143, with redundant dimensions reported separately.
+Ordinary worker startup, installed Task execution/restart and broader Task
+compatibility/interaction/Robot/Work Item gates remain open at this checkpoint.
+
+[Eager logical preparation](evidence/actions-next-327/recovery-logical-preparation/README.md)
+passed62 across both SQL backends and the owned TLS engine fixture. Its issued
+preparation object and SQL-only publication recheck are explicit components;
+generated RCC dispatch still refuses requirement-bearing capabilities until the
+complete runner/domain publication integration is qualified.
+
+[Private Core1.1.0a3](evidence/actions-next-327/recovery-core-a3/README.md) passed375
+Core tests and configured lint/types. [Actual RCC qualification](evidence/actions-next-327/recovery-core-a3/rcc/README.md)
+verified all52 installed Python members against the measured private wheel and
+executed isolated SDK context checks in a newly sealed RCC environment. This
+clears the private-SDK preparation prerequisite, not generated Data integration,
+unchanged-Package two-provider execution or durable Knowledge.
+
+The [AppSession assessment](evidence/actions-next-327/recovery-a28/session-assessment/README.md)
+records the affected historical commit/path, in-memory registry loss and actual
+installed refusal across restart; no reusable signing/session state or live
+credential change was involved. Current evidence publication uses the tested
+fail-closed scanner/commit/push wrapper. Screenshots and non-JSON content remain
+explicit-review obligations. Library still returns HTTP401 with no upload IDs;
+real synthetic browser captures remain committed under recovery-a32. Celld326
+is NO-GO pending owner decision, and authenticated Codex/ChatGPT qualification,
+full final-source/release/restore and the complete owner product matrix remain
+open. No READY FOR DAKOTA CHATGPT TEST claim is made.
+
+
+## Private a34 explicit Task host source checkpoint
+
+[Source receipts](evidence/actions-next-327/recovery-a34/README.md) pass161 joined
+SQLite/PostgreSQL cases with zero skips, eight candidate checks and configured
+lint/type checks. Ordinary ASGI lifespan now starts a Task consumer only with
+an explicit RCC profile and private Task policy. The independent actual RCC
+host matrix passes six completion/stop cases across both SQL backends; uncertain
+shutdown never fabricates a terminal Run. Installed current-MCP execution and
+process restart remain the next qualification, not implied by these source tests.
+Runtime1.1.0a34 uses Core1.1.0a3. The broader owner matrix remains open.

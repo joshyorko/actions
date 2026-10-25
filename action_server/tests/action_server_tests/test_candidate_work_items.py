@@ -20,13 +20,13 @@ def test_runtime_uses_installed_fenced_sdk_candidate():
 def test_runtime_prerelease_retains_numeric_release_tuple():
     from actions.server import __version__, version_info
 
-    assert __version__ == "1.1.0a33"
+    assert __version__ == "1.1.0a34"
     assert version_info == [1, 1, 0]
 
 
 def test_runtime_uses_installed_canvas_core_candidate():
     package = distribution("actions-core")
-    assert package.version == "1.1.0a2"
+    assert package.version == "1.1.0a3"
     import actions.canvas_contract
     from actions.canvas_contract import validate_canvas_spec
 

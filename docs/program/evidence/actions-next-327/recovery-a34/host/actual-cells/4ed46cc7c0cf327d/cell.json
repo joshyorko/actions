@@ -1,0 +1,13 @@
+{
+  "nodeid": "tests/action_server_tests/test_detached_task_host_rcc.py::test_actual_task_host_consumes_and_stops[sqlite-duckdb-True-False]",
+  "sha256": {
+    "execution/339a6d1d-8bcf-466d-b009-06ae009a0f4f/40497e9a-7a2a-495e-9323-5c67c5d708ab/94c25219-93e5-4e65-8bfc-c4a1964aff09/rcc-receipt.json": "0de6798fb3377a41d0e56f98817cca2b6c305bc5773682e44393973af69f0bde",
+    "execution/339a6d1d-8bcf-466d-b009-06ae009a0f4f/40497e9a-7a2a-495e-9323-5c67c5d708ab/94c25219-93e5-4e65-8bfc-c4a1964aff09/input.json": "84fc2d0b0366e31fc254dac31aab91edf9028b3e9e050bda71f87c09dc729e03",
+    "execution/339a6d1d-8bcf-466d-b009-06ae009a0f4f/40497e9a-7a2a-495e-9323-5c67c5d708ab/94c25219-93e5-4e65-8bfc-c4a1964aff09/tmp/task-host-entered": "0acb8ce4d172d2c8f5067ef0074f0d3a2d37423a6b5b628068d206cd4b3bf449",
+    "execution/339a6d1d-8bcf-466d-b009-06ae009a0f4f/40497e9a-7a2a-495e-9323-5c67c5d708ab/94c25219-93e5-4e65-8bfc-c4a1964aff09/source/package.yaml": "5dcc9dadd6157278933f036532bcf26643b6c1e100d87fa176e6736f4e8e3bf8",
+    "execution/339a6d1d-8bcf-466d-b009-06ae009a0f4f/40497e9a-7a2a-495e-9323-5c67c5d708ab/94c25219-93e5-4e65-8bfc-c4a1964aff09/source/generated_actions.py": "567829756f5a729da00cca4a3913fb96edfd8c64c17b57ee4585c7077739768b",
+    "execution/339a6d1d-8bcf-466d-b009-06ae009a0f4f/40497e9a-7a2a-495e-9323-5c67c5d708ab/94c25219-93e5-4e65-8bfc-c4a1964aff09/source/tests/test_generated_action.py": "159484c561e6cc5dc007a0bd41f2e350d9b1b698570f3eae90c36428b45c272e",
+    "objects/6e22b49a-bed2-48d6-8adc-931e3240ab25": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700",
+    "objects/c195ff47-a4ae-4988-8cdf-f2f2972bf1d0": "75033fa027af24f73d0fd0779ade6500785010477fce4596c30b6139a5cee700"
+  }
+}

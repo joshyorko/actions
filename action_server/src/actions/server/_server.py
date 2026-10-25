@@ -565,6 +565,7 @@ def start_server(
     log.debug(f"Starting server. Settings:\n{settings_str}")
 
     app = get_app()
+    task_service = None
     if canvas_foundry is None and api_key:
         from ._models import get_db
         from .foundry.bootstrap import create_runtime_canvas
@@ -572,6 +573,7 @@ def start_server(
         native_canvas = create_runtime_canvas(get_db(), settings.datadir, api_key)
         if native_canvas is not None:
             canvas_foundry = native_canvas.canvas
+            task_service = native_canvas.task_service
             if managed_work_items is None and managed_authenticate is None:
                 managed_work_items = native_canvas.managed_work_items
                 managed_authenticate = native_canvas.managed_authenticate
@@ -579,6 +581,7 @@ def start_server(
             @asynccontextmanager
             async def _native_canvas_lifespan(_main_app: FastAPI):
                 try:
+                    native_canvas.start()
                     yield
                 finally:
                     native_canvas.close()
@@ -644,6 +647,7 @@ def start_server(
             endpoint_dependencies,
             invoice_canvas=invoice_canvas,
             canvas_foundry=canvas_foundry,
+            task_service=task_service,
         )
     elif invoice_canvas is None:
         action_routes = _ActionRoutes(whitelist, endpoint_dependencies)

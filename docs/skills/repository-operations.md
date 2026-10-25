@@ -5334,7 +5334,7 @@ Receipt TTL is creation-relative and immutable; replay, polling and ignored unkn
 
 The explicit MCP Task adapter pins released ext-tasks2026-07-28 (b3d28aceaa6d49f5f92258e3d06b61ad6f111e84). Creation is flat resultType=task with ttlMs/pollIntervalMs; get is flat resultType=complete and completed original results include their own resultType=complete. Current get/update/cancel require model audience, per-request extension capability and exact HTTP Mcp-Name/taskId routing. The official SDK custom Request.name_param seam supplies extension routing. Missing routing returns a bounded -32602 HTTP400 response; acknowledgements may carry SDK serverInfo metadata but never imply cancellation completion. Unknown interaction answers are bounded no-ops, not implemented interaction/resume support.
 
-Configured adapters expose a closed detached capability_invoke variant only to declaring current clients; legacy/synchronous schemas remain unchanged. The default server has no Task advertisement or handlers. An explicitly injected service is transport qualification only until ordinary bootstrap installs and verifies a real worker. Schema/SQL/ASGI tests do not qualify installed execution, process loss, legacy Task compatibility, Robot/Work Item Tasks or automatic escalation. Keep those gates separate.
+Configured adapters expose a closed detached capability_invoke variant only to declaring current clients; legacy/synchronous schemas remain unchanged. The default server has no Task advertisement or handlers. Ordinary bootstrap enables the Task service only with both an explicit RCC execution profile and ACTIONS_FOUNDRY_TASK_POLICY pointing to a private bounded actions.runtime-task-policy/v1 file. ASGI lifespan starts its single canonical detached consumer before requests and stops it before provider closure. Constructor/route construction does not launch work. Source host qualification does not establish installed execution/restart, legacy Task compatibility, interactions, Robot/Work Item Tasks or automatic escalation. Keep those gates separate.
 
 
 `ConfiguredProviderExecution` and `LogicalExecution` qualify an explicit eager
@@ -5411,3 +5411,30 @@ RCC env exec and Python -I. Preserve the adapter's explicit local filesystem
 trust carrier; --permissive-local alone did not locate the local attachment in
 the qualified fresh environment. Do not infer installed-wheel identity merely
 from a matching version or successful environment publication.
+
+
+### Explicit local Task host lifecycle
+
+The policy file has exactly schema_version, policy_id, ttl_ms and
+poll_interval_ms. It must be an absolute owner-only regular single-link file,
+without symlink ancestry; the loader bounds bytes, validates duplicate fields
+and compares descriptor identity/stat before and after reading. It performs no
+configuration mutation. Worker identity/profile and prepared RCC identity come
+from the separate trusted execution profile, never a model request.
+
+Readiness checks the actual worker-thread SQL connection, pinned RCC version,
+live admission authority and exact compiled manifest/specification/artifact.
+It does not mint grants, compile code or register a Run. A fatal worker failure
+stops future creation; retained Task reads and explicit cancellation remain
+separate service operations. Pending Runs are the existing detached authority,
+not another queue or scheduler. Recreating the host does not resume an already
+claimed uncertain Run.
+
+Local stop is cooperative execution cancellation. With a live cancel grant,
+the existing executor records cancel_requested; without it, authorization is
+refused but the executor's finally still terminates owned RCC processes. Neither
+case fabricates a terminal Run or permits automatic relaunch. Real SQLite and
+PostgreSQL host tests cover completion and both local-stop permission cases.
+RccCleanupIncomplete preserves unconfirmed termination explicitly: host close
+returns false even after its thread exits, and Runtime retains its provider.
+A simple thread join is not proof that child-process cleanup succeeded.

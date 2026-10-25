@@ -249,8 +249,11 @@ class DetachedActions:
 class DetachedActionWorker:
     """Trusted host object; never constructed from request worker/profile fields."""
 
-    def __init__(self, authority, actor, worker_id, profile):
+    def __init__(self, authority, actor, worker_id, profile, *, stop_requested=None):
         canonical_uuid(worker_id)
+        if stop_requested is not None and not callable(stop_requested):
+            raise ValueError("trusted stop callback required")
+        self._stop_requested = stop_requested
         self.authority, self.profile = authority, profile
         self.caller = ManagedCaller(actor=actor, worker_id=worker_id)
 
@@ -275,6 +278,8 @@ class DetachedActionWorker:
         )
 
     def cancelled(self, ticket):
+        if self._stop_requested is not None and self._stop_requested():
+            return True
         with _transaction(self.authority.db):
             service, run, pin = self.authority._load(
                 self.caller.actor, ticket.fence.run_id

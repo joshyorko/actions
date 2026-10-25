@@ -14,6 +14,7 @@ import secrets
 import sys
 from dataclasses import dataclass
 from pathlib import Path
+from typing import TYPE_CHECKING
 from uuid import NAMESPACE_URL, uuid4, uuid5
 
 from actions.server._database import Database
@@ -57,6 +58,10 @@ from actions.server.run_outputs.filesystem import FilesystemOutputProvider
 from actions.server.run_outputs.models import Workspace
 from actions.server.run_outputs.service import _now
 from actions.server.run_outputs.types import Actor
+
+if TYPE_CHECKING:
+    from actions.server.run_outputs.task_host import DetachedTaskHost
+    from actions.server.run_outputs.task_service import TaskService
 
 log = logging.getLogger(__name__)
 _ROOT_REQUEST = str(uuid5(NAMESPACE_URL, "actions.native-runtime-bootstrap/v1"))
@@ -161,8 +166,16 @@ class RuntimeCanvas:
     source_provider: FilesystemOutputProvider
     managed_work_items: SQLManagedWorkItemsService | CompositeManagedWorkItemsService
     managed_authenticate: ManagedAuthenticate
+    task_host: DetachedTaskHost | None = None
+    task_service: TaskService | None = None
+
+    def start(self) -> None:
+        if self.task_host is not None:
+            self.task_host.start()
 
     def close(self) -> None:
+        if self.task_host is not None and not self.task_host.close():
+            raise RuntimeError("Task worker shutdown incomplete; providers retained")
         self.source_provider.close()
 
 
@@ -210,6 +223,9 @@ def create_runtime_canvas(
         profile = read_runtime_profile(
             os.environ.get("ACTIONS_FOUNDRY_EXECUTION_PROFILE")
         )
+        task_policy_path = os.environ.get("ACTIONS_FOUNDRY_TASK_POLICY")
+        if task_policy_path is not None and profile is None:
+            raise ValueError("Task policy requires an explicit RCC execution profile")
         if profile is not None and profile.worker.workspace_id != workspace:
             raise ValueError("execution descriptor outside Runtime Workspace")
         prepared = (
@@ -267,6 +283,8 @@ def create_runtime_canvas(
                 actor=actor, worker_id=profile.worker_id if profile else None
             ),
         )
+        task_host = None
+        task_service = None
         port: CanvasPort = authoring
         if profile is not None:
             if prepared is None:
@@ -317,6 +335,28 @@ def create_runtime_canvas(
             )
 
             port = GenericCanvasView(generic_execution)
+            if task_policy_path is not None:
+                from actions.server.run_outputs.detached import DetachedActions
+                from actions.server.run_outputs.task_host import (
+                    DetachedTaskHost,
+                    load_task_policy,
+                )
+                from actions.server.run_outputs.task_service import TaskService
+
+                policy = load_task_policy(Path(task_policy_path))
+                detached = DetachedActions(deployments, outputs)
+                task_host = DetachedTaskHost(
+                    detached,
+                    actor=actor,
+                    worker_id=profile.worker_id,
+                    profile=profile.worker,
+                    prepared=prepared,
+                    rcc=rcc,
+                    execution_root=execution_root,
+                    policy=policy,
+                )
+                task_service = TaskService(detached, readiness=task_host, policy=policy)
+                # ASGI lifespan starts consumption only after route construction.
 
         async def authenticate(ctx):
             from actions.server._api_action_routes import _get_bearer_token
@@ -350,6 +390,8 @@ def create_runtime_canvas(
             provider,
             managed,
             managed_authenticate,
+            task_host,
+            task_service,
         )
     except BaseException:
         provider.close()
