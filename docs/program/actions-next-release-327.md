@@ -16,6 +16,18 @@ records actual mixed-epoch red/green tests, owned SQLite/PostgreSQL managed
 independent fences. The reviewed admission delegates are tested but not yet wired
 to enqueue/retry; no full managed or installed-candidate acceptance is claimed.
 
+The [managed mutation receipt](evidence/actions-next-327/cloud-managed-mutations-20261025.json)
+records reviewed enqueue and trusted explicit reconciliation through HTTP and the
+existing SQL transaction/audit authority:158passed acrossSQLite/PostgreSQL,
+4RCCcompletion variants stillskipped. Concurrent duplicates, write-failure
+rollback, revoked/altered/stale inputs and service reconstruction pass. General
+producer/queue/default policy, native uncertain-effect reconciliation and full
+installed/client/release proof remain open. SDKservice/release gate passed314,
+10expected-redXFAIL, zeroskips, with actual ownedRedis/Mongo/PostgreSQL; wheel
+payload remains exactly0.5.0a2. Publisher existing160+newmanual-controller16 pass,
+but live protection/token-scope disposition remains an owner security gate.
+All preceding red/failed/skip receipts remain linked; no full readiness claim.
+
 ## Owner pause and saved handoff
 
 **PAUSED by owner at2026-10-23 21:32:43UTC. Full release is not ready.**

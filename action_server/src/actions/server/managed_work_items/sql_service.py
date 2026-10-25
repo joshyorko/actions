@@ -6,9 +6,9 @@ an identifier. Mutation receipts use the existing shared FoundryRequest rows;
 all queue, review, Run, Attempt and output mutations delegate to their existing
 Runtime services.
 
-Generic producer admission and client-supplied retry evidence do not have
-canonical Runtime primitives yet. Native RCC Run logs are projected from final
-RunOutput records through the existing resolver.
+Reviewed enqueue returns the item created by an explicit decision. Retry delegates
+only a trusted configured private worker reconciliation. Generic producer and
+native launch retries remain unsupported. Native RCC logs use final RunOutputs.
 """
 
 from __future__ import annotations
@@ -44,6 +44,7 @@ from actions.server.data_queries.review import (
 from actions.server.data_queries.review_models import FencedWorkItem, InvoiceReview
 from actions.server.deployments.ids import WorkspaceId
 from actions.server.foundry.models import FoundryAudit, FoundryRequest
+from actions.server.managed_work_items.admission import ReviewedManagedAdmission
 from actions.server.managed_work_items.api import ManagedError
 from actions.server.managed_work_items.contracts import (
     OPERATION_PERMISSION,
@@ -58,6 +59,7 @@ from actions.server.managed_work_items.contracts import (
     Command,
     Complete,
     Decide,
+    Enqueue,
     Inspect,
     Intervention,
     ItemPage,
@@ -115,8 +117,7 @@ _RUN_STATE_ADAPTER: TypeAdapter[
 )
 _CURSOR_ID = re.compile(r"^[0-9a-f-]{36}$")
 _ARTIFACT_CURSOR = re.compile(r"^(?:0|[1-9][0-9]{0,7})$")
-_UNIMPLEMENTED = {Operation.ENQUEUE, Operation.RETRY}
-MutationCommand: TypeAlias = Claim | Renew | Complete | Intervention | Decide
+MutationCommand: TypeAlias = Claim | Renew | Complete | Intervention | Decide | Enqueue
 
 
 class SQLManagedWorkItemsService(ManagedWorkItemsPort):
@@ -154,6 +155,7 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
         self.db = reviews.db
         self.authorization = authorization
         self.worker_for = worker_for
+        self.admission = ReviewedManagedAdmission(reviews)
         self.native_runs = NativeRunProjection(
             reviews, authorization, self._review_for_item
         )
@@ -214,14 +216,14 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
 
                 queue = command.queue
                 self._require_queue(caller, queue, permission)
-                if operation in _UNIMPLEMENTED:
-                    raise ManagedError("unsupported_operation")
                 if operation == Operation.ARTIFACT:
                     self._require_workspace(caller, workspace_id, Permission.READ)
                     self._require_queue(caller, queue, Permission.READ)
                 if operation in {
                     Operation.LIST,
                     Operation.GET,
+                    Operation.ENQUEUE,
+                    Operation.RETRY,
                     Operation.CLAIM,
                     Operation.RENEW,
                     Operation.COMPLETE,
@@ -273,7 +275,9 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
 
     @staticmethod
     def _is_mutation(command: Command) -> TypeGuard[MutationCommand]:
-        return isinstance(command, (Claim, Renew, Complete, Intervention, Decide))
+        return isinstance(
+            command, (Claim, Renew, Complete, Intervention, Decide, Enqueue)
+        )
 
     def _backend(self) -> Literal["sqlite", "postgresql"]:
         if self.db.backend_name not in ("sqlite", "postgresql"):
@@ -313,6 +317,15 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
                     Operation.LOGS,
                 )
             )
+        if Permission.READ in permissions and Permission.ENQUEUE in permissions:
+            operations.append(Operation.ENQUEUE)
+        if (
+            Permission.READ in permissions
+            and Permission.RETRY in permissions
+            and worker_available
+            and worker_identity_available
+        ):
+            operations.append(Operation.RETRY)
         if Permission.READ in permissions and Permission.REVIEW in permissions:
             operations.extend((Operation.REVIEWS, Operation.DECIDE))
         if (
@@ -1242,6 +1255,35 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
         command: MutationCommand,
         scope: CanvasResultScope,
     ) -> None:
+        if isinstance(command, Enqueue):
+            self.admission.enqueue(caller.actor, scope, command)
+            return
+        if (
+            isinstance(command, Intervention)
+            and command.operation == Operation.RETRY.value
+        ):
+            if caller.worker_id is None:
+                raise ManagedError("forbidden")
+            if command.reconciliation_receipt is not None:
+                raise ManagedError("blocked_uncertain_effect")
+            row = self._item_row(command.queue, command.item_id)
+            if (
+                row.claim_epoch != command.expected_epoch
+                or row.claim_owner != caller.worker_id
+            ):
+                raise ManagedError("stale_claim")
+            self._queue(scope)._require(
+                WorkItemClaim(row.id, caller.worker_id, row.claim_epoch)
+            )
+            _, proposal, _ = self._review_for_item(caller, command.queue, scope, row)
+            self._authorize_review(caller.actor, scope, proposal, "review")
+            worker = self._worker(scope)
+            if worker is None:
+                raise ManagedError("unsupported_operation")
+            self.reviews.outputs._authorize(
+                caller.actor, worker.plan.snapshot, "execute"
+            )
+            return
         if isinstance(command, Decide):
             self._authorize_review(caller.actor, scope, command.proposal, "review")
             return
@@ -1330,6 +1372,13 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
         command: MutationCommand,
         scope: CanvasResultScope,
     ):
+        if isinstance(command, Enqueue):
+            item_id = self.admission.enqueue(caller.actor, scope, command)
+            row = self._item_row(command.queue, item_id)
+            return ItemResult(
+                item=self._item_view(caller, command.queue, scope, row),
+                server_time_ms=str(_now(self.db)),
+            )
         if isinstance(command, Decide):
             receipt = self.reviews.decide(
                 caller.actor, scope, command.proposal, command.decision
@@ -1437,7 +1486,17 @@ class SQLManagedWorkItemsService(ManagedWorkItemsPort):
             isinstance(command, Intervention)
             and command.operation == Operation.RETRY.value
         ):
-            raise ManagedError("unsupported_operation")
+            worker = self._worker(scope)
+            if worker is None or caller.worker_id is None:
+                raise ManagedError("unsupported_operation")
+            self.admission.reconcile(
+                caller.actor, scope, command, worker=worker, worker_id=caller.worker_id
+            )
+            row = self._item_row(command.queue, command.item_id)
+            return ItemResult(
+                item=self._item_view(caller, command.queue, scope, row),
+                server_time_ms=str(_now(self.db)),
+            )
         raise ManagedError("unsupported_operation")
 
     def _require_current_claim(

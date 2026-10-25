@@ -5061,3 +5061,12 @@ identifier remains opaque metadata; it never becomes executable code or a
 client permission. A real official-host capture exposed the former UUID-only
 parser rejection even though the authored schema, SQL and MCP transport
 were valid. Keep a generated-ID renderer regression alongside UUID examples.
+
+Manual Runtime publisher identity tests use an owned local bare Git remote to
+exercise both preparation and publication controllers. Wrong repository, branch,
+workflow reference, workflow SHA and a checkout ahead of or behind current
+`origin/community` must fail; a declared matching SHA cannot admit an unpushed
+controller. Keep these checks distinct from producer/backup-run validation. The
+owner actor guard is not independent approval against a stolen owner credential.
+Review live branch/environment protection and actual package-token scope before
+publication; code tests cannot establish that security disposition.

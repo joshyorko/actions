@@ -195,6 +195,10 @@ class NativeRunProjection:
         pin = pins[0]
         run = _one(self.db, Run, pin.run_id)
         snapshot = self.reviews.outputs._pinned(pin)
+        if snapshot.capability_authority != "package-revision":
+            # Source/action-backed worker Runs use the separate existing worker
+            # projection, which validates their own snapshot and live grants.
+            return None
         if not self._same_scope(snapshot, queue, scope):
             raise ManagedError("storage_unavailable")
         self.reviews.outputs._authorize(caller.actor, snapshot, "read")

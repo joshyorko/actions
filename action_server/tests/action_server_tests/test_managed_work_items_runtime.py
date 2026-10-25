@@ -24,7 +24,9 @@ reviewed = fixtures.reviewed
 pytestmark = fixtures.pytestmark
 
 
-def configured(reviewed, *, worker=True, perimeter=False, executor=None):
+def configured(
+    reviewed, *, worker=True, perimeter=False, executor=None, worker_id=None
+):
     from actions.server.managed_work_items.authorization import (
         SqlQueueAuthorization,
         bearer_authenticator,
@@ -48,7 +50,9 @@ def configured(reviewed, *, worker=True, perimeter=False, executor=None):
                     json.dumps(operations),
                 )
             )
-    identity = ManagedCaller(actor=actor, worker_id=str(uuid4()) if worker else None)
+    identity = ManagedCaller(
+        actor=actor, worker_id=(worker_id or str(uuid4())) if worker else None
+    )
     service = SQLManagedWorkItemsService(
         reviews,
         SqlQueueAuthorization(db),

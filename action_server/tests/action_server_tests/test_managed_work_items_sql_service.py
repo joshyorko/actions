@@ -188,7 +188,8 @@ def test_capabilities_only_advertise_implemented_operations(reviewed):
     assert capabilities.backend in {"sqlite", "postgresql"}
     assert Operation.QUEUES in capabilities.operations
     assert Operation.DECIDE in capabilities.operations
-    assert Operation.ENQUEUE not in capabilities.operations
+    assert Operation.ENQUEUE in capabilities.operations
+    assert capabilities.modes == ("reviewed",)
     assert Operation.LOGS in capabilities.operations
     assert Operation.RETRY not in capabilities.operations
     assert Operation.CLAIM not in capabilities.operations

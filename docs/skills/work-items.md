@@ -8,10 +8,15 @@ The community Action Server management API currently owns SQLite storage under i
 
 SQLite is the release-critical local/server backend. FileAdapter is intended for local, single-process workflows. Redis 7 and MongoDB 7 have mandatory repository-owned service gates covering competing and FIFO claims, orphan recovery, attachment storage and cleanup, duplicate rejection, output routing, and backend cleanup. AWS DocumentDB-specific production support remains experimental until a production-compatible service gate establishes it.
 
-The default local attachment directory is `./work_item_files` (overridable with
-`RC_WORKITEM_FILES_DIR`). Repository-root package tests may therefore create
-`work-items/work_item_files/<uuid>/`; this runtime output is ignored and must not be
-committed.
+The SQLite constructor's default attachment argument is `./work_item_files`.
+It takes precedence over `RC_WORKITEM_FILES_DIR`; select that environment value
+with an explicit empty `files_dir`, or supply the owned absolute path directly.
+A test setting only the environment variable still writes to the default path.
+Fixtures must pass their temporary attachment path explicitly and assert it is
+selected. Runtime output under `work-items/work_item_files/<uuid>/` is ignored
+and must never be committed. This is separate from physical capacity failures;
+a transient `ENOSPC` does not establish persistent exhaustion after the fixture
+ends. Preserve its receipt before a controlled diagnosis or rerun.
 
 The locked pytest-asyncio 0.21 runtime supports `asyncio_mode = "auto"` but not
 `asyncio_default_fixture_loop_scope`; do not add unsupported pytest options that are
@@ -1160,3 +1165,18 @@ discovery returns403 for missing live permissions; that is distinct from an
 unconfigured503. Hosts injecting their own services retain explicit ownership.
 Source Runs without canonical captured log objects return an authorized empty
 log page, not a fabricated stream or a validation error.
+
+Reviewed-mode managed enqueue validates the exact proposal, source snapshot and
+protected payload, then returns only the Work Item already created by an
+explicit approved decision. It neither approves nor seeds another item. Retry
+is an explicit reconciliation of a live authenticated claim through a trusted
+server-selected worker. Client proof strings and unknown launch outcomes stay
+blocked; there is no automatic reclaim, reset or relaunch. This subset does not
+admit general producer capabilities or arbitrary queues.
+
+Managed mutations commit their canonical Review/Work Item/Run/Attempt changes
+with one actor-scoped FoundryRequest and matching FoundryAudit transaction. A
+receipt or audit write failure must roll back all of them. Concurrent duplicates
+and service reconstruction retain that receipt without another mutation; every
+replay still checks live queue policy, exact input and the applicable fences.
+Service reconstruction is not a fresh-interpreter or installed-client proof.

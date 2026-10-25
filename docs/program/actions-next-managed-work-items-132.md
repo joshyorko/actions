@@ -146,6 +146,14 @@ supported mutations to existing SDK/review/worker methods, retain their
 transactions and exact receipts, and advertise only proven operations.
 Do not invent completion output, retry absence or dead-letter evidence. Leave
 unimplemented operations unadvertised and report exact missing dependencies.
+Reviewed enqueue is now implemented as exact validation/readback of the item
+already created by explicit approval. Configured private worker retry delegates
+canonical evidence reconciliation under the current authenticated claim; it
+never accepts client no-effect evidence or automatically launches a task.
+Mutations, actor-scoped requests and audit commit atomically and replay remains
+subject to live authorization. Generic producer policy, native uncertain-launch
+reconciliation and ordinary full default-profile provisioning remain missing.
+
 This bounded adapter is not full #132 completion: general queue modes,
 not-before/fairness/fan-out, remaining retry/review semantics and actual installed
 VSIX acceptance stay explicit current-release work. No side store or second
