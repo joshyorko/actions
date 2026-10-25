@@ -172,4 +172,6 @@ process-cleanup helpers are unchanged from this lane's base. Shared compiler and
 generated RCC execution gained Knowledge integration; the source-extraction helper
 used here is unchanged. This is inspection, not qualification of the combined head.
 The integrator must run combined-source acceptance after cherry-pick. Full-suite
-interruption and remaining package lint failure logs are attached verbatim.
+interruption and remaining package lint failure logs are attached as text. Git
+normalizes CRLF in the lint text; the receipt inventory hashes refer to the
+original retained local bytes.
