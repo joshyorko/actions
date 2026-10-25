@@ -445,3 +445,10 @@ with a clear upgrade requirement. Legacy fallback requires the selected Core
 distribution's explicit logging dependency; failures inside an available bridge
 propagate. Simulated compatibility tests do not prove retained-wheel execution.
 Runtime's own viewer imports require Core 1.1.0a8 or later.
+
+For asynchronous transport ExceptionGroups, retain bounded nested exception
+classes and frame locations. Exclude arbitrary messages, locals and structured
+error payloads. Outer-group-only diagnostics can conceal the failing operation.
+A reviewed source correction requires a new installed candidate; keep the earlier
+failed receipt unchanged. Identical Core bytes can retain their existing
+same-target compiler proof without transferring trust.

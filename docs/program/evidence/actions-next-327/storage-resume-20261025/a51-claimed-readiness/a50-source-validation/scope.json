@@ -1,0 +1,15 @@
+{
+  "source_sha": "72c8a13e90a4e5bfb6e0ea24e818f7589e75c96b",
+  "combined_provider_selection": [
+    "test_claimed_task_service.py",
+    "test_task_service.py",
+    "test_claimed_task_host.py",
+    "test_claimed_task_wire.py",
+    "test_claimed_task_state.py",
+    "test_generic_claimed_admission.py"
+  ],
+  "provider_result": "240 passed,0 skipped,0 failures;121.527s;sourcefingerprint unchanged and exact PGremoved",
+  "warning": "Inherited excluded_gates field does not enumerate all unselected files; this is six-file qualification, not full Runtime",
+  "contracts": "49 passed,53.09s; bothcleanwheeluninstallorders andserverfixtures",
+  "full_runtime": "a49 FAILED unchanged; a50 full NOT RUN"
+}

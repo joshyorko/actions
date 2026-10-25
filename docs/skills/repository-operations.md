@@ -6720,3 +6720,22 @@ tree. Run it after committing the exact reviewed version and dependency-floor
 changes; otherwise package metadata and test expectations can refer to different
 sources. Keep the failed mixed-source attempt separate from the committed-source
 recheck. Update explicit starter-template pins alongside regenerated bundles.
+
+For inactive passing test fixtures, lossless local compaction can preserve evidence
+while recovering capacity. Exclude failed or unidentified fixture families and
+database sidecars. Verify each compressed file by streaming decompression against
+the original hash, persist its restore manifest before removing the unchanged
+original, and restore before opening it as a database. Measure actual free space:
+overlay allocations do not predict reclaimed bytes. Public repodata indexes are
+separate from package archives, prepared artifacts, catalogs and trust.
+
+Treat RCC materialization cleanup as a serial operation under exclusive ownership.
+Bind exact view IDs to retained receipts, verify producers have stopped, and use
+the pinned CLI's exact selection. A dry run is not an atomic lease guarantee.
+Retain compiler proof views and artifact/catalog/trust state. Repeated receipts
+using one view prove that reuse only, not automatic reclamation.
+
+Manifest compatibility does not establish client-protocol support. Record whether
+an independent client exercised synchronous invocation or Task lifecycle methods.
+An official SDK that rejects an extension method before transport remains an
+unqualified client for that method; Python results cannot substitute for it.

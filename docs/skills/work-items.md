@@ -1445,3 +1445,9 @@ and lifecycle counts, not only Task ID. Model Tasks do not gain Canvas submissio
 authority; read their artifacts through the independently authorized public surface.
 A harness PASS requires separately matched supervisor identity and cleanup evidence.
 Actual live cancellation remains distinct from terminal success/failure and restart.
+
+Claimed Task readiness must call the consumer-specific readiness path of the
+actual selected runner. Standalone eligibility must continue rejecting Work Item
+consumers. Preserve claim-policy/declaration agreement, no-output restrictions,
+current activation, host identity and preparation checks. Synthetic readiness
+stubs prove sequencing only; include the actual runner in admission regressions.

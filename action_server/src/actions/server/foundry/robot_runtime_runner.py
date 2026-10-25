@@ -247,14 +247,32 @@ class PinnedRobotRunner:
     ] = RobotExecution
 
     def require_ready(self, service):
+        self._require_ready_declaration(service, "none")
+
+    def require_claimed_ready(self, service):
+        if (
+            not isinstance(service, GenericWorkItemExecution)
+            or service.policy.input_mode != "claim"
+            or service.policy.input_queue is None
+        ):
+            raise AccessDenied("claimed consumer Robot policy required")
+        self._require_ready_declaration(service, "consumer")
+
+    def _require_ready_declaration(self, service, mode):
         declaration = service.registry.get_capability(service.snapshot.capability)
         if (
             declaration is None
-            or declaration.work_items.mode != "none"
+            or declaration.work_items.mode != mode
             or declaration.work_items.allow_outputs
             or declaration.binding_requirements
         ):
-            raise AccessDenied("standalone Robot declaration required")
+            raise AccessDenied(
+                "standalone Robot declaration required"
+                if mode == "none"
+                else "claimed consumer Robot declaration required"
+            )
+        if mode == "consumer":
+            service.policy.require_declaration(declaration.work_items)
         repository = service.deployments._repository
         with _transaction(service.db):
             retained = repository.current(

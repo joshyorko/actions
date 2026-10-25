@@ -263,7 +263,7 @@ class DetachedTaskHost:
             )
             if robot is None:
                 raise TaskHostUnavailable("claimed Robot host unavailable")
-            robot.require_ready(service)
+            robot.require_claimed_ready(service)
         self.require_claimed_scope(actor, snapshot, claim)
 
     def require_ready(self, actor: Actor, snapshot: ExecutionSnapshot) -> None:

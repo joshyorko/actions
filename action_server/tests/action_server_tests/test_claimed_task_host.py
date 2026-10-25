@@ -31,7 +31,7 @@ def host_for(c, tmp_path):
     phases = []
 
     class Robot:
-        def require_ready(self, service):
+        def require_claimed_ready(self, service):
             assert not c.db.in_transaction()
             assert service.snapshot == c.owner.snapshot
             phases.append("provider-readiness")
@@ -133,7 +133,7 @@ def test_claimed_readiness_rechecks_host_after_provider(claimed, tmp_path):
     host, ref, phases = host_for(c, tmp_path)
 
     class Robot:
-        def require_ready(self, service):
+        def require_claimed_ready(self, service):
             assert not c.db.in_transaction()
             phases.append("provider-readiness")
             host._stop.set()
@@ -142,3 +142,45 @@ def test_claimed_readiness_rechecks_host_after_provider(claimed, tmp_path):
     with pytest.raises(TaskHostUnavailable):
         host.require_claimed_ready(c.caller.actor, c.owner.snapshot, ref)
     assert phases == ["provider-readiness"]
+
+
+def test_real_robot_runner_claimed_readiness_preserves_standalone_guard(
+    claimed, tmp_path
+):
+    from actions.server.run_outputs.service import AccessDenied
+
+    c = claimed()
+    host, ref, _ = host_for(c, tmp_path)
+    host.capability_runner = SimpleNamespace(
+        robot_for=lambda registry, snapshot: c.runner
+    )
+    # Exercise the actual runner, not the synthetic sequencing probe above.
+    with pytest.raises(AccessDenied, match="standalone Robot declaration required"):
+        c.runner.require_ready(c.owner)
+    host.require_claimed_ready(c.caller.actor, c.owner.snapshot, ref)
+
+
+@pytest.mark.parametrize(
+    "damage", ["none", "optional", "producer", "outputs", "inactive"]
+)
+def test_real_claimed_runner_readiness_rejects_changed_declaration_or_activation(
+    claimed, monkeypatch, damage
+):
+    from dataclasses import replace
+
+    from actions.server.run_outputs.service import AccessDenied
+
+    c = claimed()
+    if damage == "inactive":
+        monkeypatch.setattr(
+            c.owner.deployments._repository, "was_activated", lambda ref: False
+        )
+    else:
+        declaration = c.owner.registry.get_capability(c.owner.snapshot.capability)
+        updates = {"allow_outputs": True} if damage == "outputs" else {"mode": damage}
+        changed = replace(
+            declaration, work_items=declaration.work_items.model_copy(update=updates)
+        )
+        monkeypatch.setattr(c.owner.registry, "get_capability", lambda ref: changed)
+    with pytest.raises(AccessDenied):
+        c.runner.require_claimed_ready(c.owner)
