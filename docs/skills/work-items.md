@@ -22,6 +22,21 @@ The locked pytest-asyncio 0.21 runtime supports `asyncio_mode = "auto"` but not
 `asyncio_default_fixture_loop_scope`; do not add unsupported pytest options that are
 silently ignored with `PytestConfigWarning`.
 
+The legacy `/api/work-items` list and statistics routes select the Runtime default
+queue when `queue_name` is omitted; omission is not an all-queue query. Queue
+navigation must remain available for empty and state-filtered responses. Explicit
+queue names, including `all`, are sent unchanged, and successful creation selects
+the response's `queue_name`. This legacy navigation does not enumerate or grant
+access to managed Workspace queues.
+
+Ordinary startup supplies the managed actor and, when configured, worker identity,
+but does not supply `SQLManagedWorkItemsService.worker_for`. Its capability response
+therefore omits `items.complete` and `items.retry`, including when native Canvas RCC
+execution is configured. Tests that explicitly inject an invoice worker qualify
+that injected service only. Client readiness must inspect live capabilities from
+the installed ordinary process; descriptor presence and schema discovery do not
+prove managed mutation availability.
+
 ## Safety Invariants
 
 ### Exact-result review on the Runtime SQL connection

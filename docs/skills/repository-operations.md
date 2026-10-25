@@ -827,6 +827,17 @@ Python 3.12. The contract failed with the unpinned host interpreter and passed
 with RCC Python 3.12. Record that interpreter's version in the receipt; do not
 install host tooling or falsify version discovery to make this boundary pass.
 
+A saved cloud workspace can retain a single-branch fetch refspec and dependency
+environments from its snapshot while the active release branch has moved. Check
+`remote.origin.fetch` before treating an ordinary fetch as release refresh; fetch
+the existing release ref explicitly when it is outside that refspec, then verify
+its full SHA. RCC Doctor verifies the outer toolkit, not the current Python or
+frontend dependency closure. Bootstrap synchronizes package-local Poetry locks;
+frontend `npm ci` is still needed when the restored `node_modules` predates the
+current manifest. Preserve missing-import failures before rerunning after the
+lockfile install. Neither restored directories nor historical test receipts
+qualify the replacement environment.
+
 Verify prepared package environments through each package's Poetry process,
 binding `sys.prefix` to its own `.venv` and a file-backed module to its checkout's
 `src`. A namespace package can have `__file__ = None`; this leaves its file

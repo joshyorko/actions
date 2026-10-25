@@ -13,8 +13,10 @@ provide this authenticated Workspace/Deployment/fence/review protocol.
 Published SDK0.4.4 is not the managed fencing floor. Do not call local CRUD a
 managed service or fall back to it after a managed authorization failure.
 
-The provisional protocol floor is Runtime1.1.0a13 with installed fenced
-SDK0.5.0a1. Neither is a new public release. Exact candidate wheels and producer
+The historical protocol floor is Runtime1.1.0a13 with installed fenced
+SDK0.5.0a1. Current independent-epoch and exact-target claims require the
+qualified Runtime1.1.0a24 / Core1.1.0a2 / SDK0.5.0a2 source and exact
+artifacts, or a separately qualified successor. Neither floor is a public release. Exact candidate wheels and producer
 receipts are required for installed acceptance; the public index cannot resolve
 unpublished candidate versions. The floor may advance with further changed SDK
 bytes; every changed built package needs a distinct candidate identity.
