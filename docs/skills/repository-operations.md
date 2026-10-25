@@ -6652,3 +6652,8 @@ Standalone Task and synchronous claimed Robot proofs do not establish their join
 The current detached Task wire, worker admission and terminal validation are
 standalone-only; claimed Tasks require explicit authority integration and a new
 candidate, rather than attaching Task receipts to completed Runs.
+
+A repaired subset's green receipt does not supersede a failed full-suite receipt.
+Record the exact frozen source and selected files for combined provider checks,
+verify terminal session completion and owned service removal, and keep the full
+applicable gate open until its own complete result is available.

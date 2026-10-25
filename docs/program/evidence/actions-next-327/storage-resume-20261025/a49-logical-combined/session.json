@@ -1,0 +1,50 @@
+{
+  "abort_reason": null,
+  "budget": {
+    "heavy_concurrency": "prohibited",
+    "postgres_abort_percent": 90,
+    "postgres_memory_bytes": 3221225472,
+    "postgres_sample_seconds": 60,
+    "postgres_tmpfs_bytes": 2147483648,
+    "workspace_floor_bytes": 10737418240,
+    "workspace_initial_bytes": 13958643712
+  },
+  "excluded_gates": [
+    "all other Runtime files",
+    "browser_origin_acceptance",
+    "native_artifact_test"
+  ],
+  "final_postgres_capacity_reason": null,
+  "initial_free_bytes": 15662833664,
+  "owned_postgres_id": "424b2b97e74c158e02837995c860ef25805b4b8392ca1553dfbfd465a60e5b88",
+  "owned_postgres_stopped_removed": true,
+  "phase_counts": {
+    "call:passed": 21,
+    "setup:passed": 21,
+    "teardown:passed": 21
+  },
+  "pytest_returncode": 0,
+  "pytest_session_finish": {
+    "counts": {
+      "call:passed": 21,
+      "setup:passed": 21,
+      "teardown:passed": 21
+    },
+    "event": "session_finish",
+    "exitstatus": 0,
+    "time": 1792965133.2356968
+  },
+  "scope": "focused logical readiness/runner/join on SQLite and PostgreSQL; not full Runtime",
+  "source_after": {
+    "source_sha": "e216c4b181fbb8f9ef67a87e6ce3d6fd36deae9d",
+    "source_tests_fingerprint": "d77d653088e02848af999d9f86bcb86c0ae1a1c83c68bd3f308072975c498dec",
+    "worktree_clean": true
+  },
+  "source_before": {
+    "source_sha": "e216c4b181fbb8f9ef67a87e6ce3d6fd36deae9d",
+    "source_tests_fingerprint": "d77d653088e02848af999d9f86bcb86c0ae1a1c83c68bd3f308072975c498dec",
+    "worktree_clean": true
+  },
+  "source_sha": "e216c4b181fbb8f9ef67a87e6ce3d6fd36deae9d",
+  "status": "PASS"
+}
