@@ -5100,3 +5100,14 @@ output with a complete hash-verified relocation receipt before reclaiming its
 workspace location. A pinned full-toolkit task-input fixture can require several
 GiB beyond the SDK-only worker; serialize heavy gates, retain failed receipts,
 and preserve verification/trust policy when diagnosing capacity.
+
+### Bound owned RCC verification caches
+
+Real compiler/execution fixtures can materialize many large RCC views even when
+they reuse an immutable artifact. Measure free disk before long serial gates.
+The Foundry fixture supports `ACTIONS_PACKAGE_COMPILER_OWNED_VIEW_CLEANUP=1` only
+with its exact task-owned marker and cleanup evidence directory. It retains
+metadata and invokes pinned RCC deletion after checking for active processes.
+Never prune a home shared with another running gate. Keep artifacts, catalog,
+source/build receipts and test evidence; serialized cache cleanup is not a
+consumer restore test. Enable the fixture before the process starts.

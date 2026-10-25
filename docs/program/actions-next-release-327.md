@@ -1,5 +1,46 @@
 # Actions Next release checkpoint
 
+## Replacement cloud recovery — October25
+
+The sole replacement integrator fetched and verified release head
+`58e8f353e84bc1931e3c177e90604e158ea03190`; old-owner write ownership was
+explicitly released in #327 comment6391710007. The replacement saved environment
+contains the older `/workspace/actions` snapshot, not the old executor's local
+`actions-327-state` directory. No old unpushed bytes or uncertain session results
+are represented as recovered. Existing release branch and draft #328 remain the
+only campaign integration target.
+
+Newly reconstructed legacy queue navigation is pushed at
+`5d950150b7b5886d1e54246ac216ff41aa4b9f1e`, Runtime1.1.0a25. Empty/default
+queues retain explicit queue controls; creation follows the returned queue;
+omitted queue remains Runtime default and literal `all` remains explicit.
+Fresh Doctor/Bootstrap/ToolkitTest179 passed. After retaining stale-snapshot
+frontend import failures and installing the committed npm lock, Runtime287 and
+Canvas46/1optional skip plus configured quality passed. Clean noneditable a25
+browser sign-in, explicit queue navigation, UI creation, actual CLI restart and
+persistent readback passed. Screenshots and source/installed byte provenance
+are retained in [recovery-a25](evidence/actions-next-327/recovery-a25/).
+Installed SQLite/PostgreSQL authoring/managed-route/Knowledge45 passed with
+zero skips; this is bounded service qualification, not a full first-boot app flow.
+
+At source5d950, the five-stage verifier passed managed158, storage295,
+components165, invoice129 and package compiler22, all zero skips. Installed a25
+real generated execution passed20 cases across invoice-summary and
+ndjson-inspector, actual RCC, SQLite/PostgreSQL and DuckDB/PostgreSQL providers.
+Genuine MCP SDK/replay proof is not browser-host or authenticated ChatGPT proof.
+The [qualification receipt](evidence/actions-next-327/recovery-a25/qualification.json)
+retains exact commands, JUnit and wheel/import provenance. Library screenshot
+saving is blocked by HTTP401 before upload; no Library IDs were returned.
+
+The earlier a24 source receipts remain source-specific. Actual official
+second-host application, generic immutable
+queue/input policy and execution, native uncertain-launch reconciliation,
+complete distribution/upgrade/restore and full owner matrix remain open.
+Codex authentication, authenticated ChatGPT E1, publisher-security disposition
+and explicit optional celld disposition remain separate gates. Dakota stays
+STOP. No community merge, public tag/publication, production, credentials,
+tunnel, spending or other repository mutation is authorized by this recovery.
+
 ## Resumed release convergence — October24
 
 The owner resumed the full existing release on October24. The preserved branch
@@ -470,7 +511,7 @@ baseline only; DRAFT_PR can include qualified components without full acceptance
 | Controlled Codex/Devsy adapter path — SPEC_ONLY / unqualified | Existing #90/#143 path; no new migration campaign | No qualified new adapter SHA | Do not confuse external model authoring or old task activity with a verified controlled execution adapter. Full Devsy migration is not required. | Bounded authorized adapter/capability path through common admission/Run, scoped source/input/environment/result and explicit cancellation/recovery. | Inventory and selected existing adapter contract/evidence. | Trace existing interface, then qualify one owned synthetic invocation without live agent credentials. | Approval only if live identity/credential or other-repository change becomes necessary. |
 | Optional celld experiment — BLOCKED / NO-GO (#326) | Existing research scope, no implementation lane admitted | 24fbd91c9ddd34bec54230e1c3b20e3225061079 NO-GO evidence | No admitted adapter; no backend switch. SQL remains authority. MemoryD/Git migration excluded. | If admitted: pinned synthetic storage prerequisites, two nodes, epochs/failover/crash/outage/retry/lost-ack/overhead/rollback and one authority, disabled by default. | Pinned storage/failure prerequisites unproven; optional study cannot be advertised shipped. | Retain NO-GO and present the concrete optional inclusion/exclusion decision before final recommendation. | Owner explicitly decides release disposition if study remains unqualified; no silent scope drop. |
 | Publisher adversarial source/identity qualification — BLOCKED (#332) | Integrator, existing #323/#325 controls | 5165e429 tests; live metadata18:37:53UTC | Existing160 negatives and expanded full devutils268pass; exact repo/head/lookalike/source-tree/workflow/manifest/digest/run/caller controls retained. Public metadata reports unprotected community, empty rulesets and pypi protection/branch policy. No compromise claim. | Source-bound tests plus actual publisher identities/token scope and owner-reviewed stolen-credential residual risk before publication. | Actual PyPI token scope unknown; source owner gate is not independent approval. | Review bounded evidence/least-disruptive independent approval options; no automatic settings changes or publication. | Owner security disposition and any live environment/branch/token/identity change require separate approval. |
-| Final combined acceptance / merge / publication — BLOCKED | Sole integrator #328; parent final evidence reviewer | I plus future reviewed C/R/P/D union, not yet combined | Individual components and all13 old-head CI are not product/release acceptance. Final1.1 version remains provisional. | Every agreed row verified or explicit owner decision; source-bound local/CI/E1/homelab/distribution ledger and immutable publishable inventory. | All open rows above; parent evidence threshold. | Converge reviewed lanes in focused checkpoints, keep gates running and prepare exact-source release recommendation. | Conditional merge/publication authority exists; parent must confirm final threshold. No production deployment authority. |
+| Final combined acceptance / merge / publication — BLOCKED | Sole integrator #328; parent final evidence reviewer | I plus future reviewed C/R/P/D union, not yet combined | Individual components and all13 old-head CI are not product/release acceptance. Final1.1 version remains provisional. | Every agreed row verified or explicit owner decision; source-bound local/CI/E1/homelab/distribution ledger and immutable publishable inventory. | All open rows above; parent evidence threshold. | Converge reviewed lanes in focused checkpoints, keep gates running and prepare exact-source release recommendation. | Separate explicit owner approval is required for community merge/publication; current engineering authority does not include production deployment. |
 
 Primary issue bodies/amendments #71/#99/#100/#127/#129/#130/#131/#132,
 #83/#84/#85/#86/#90/#135/#326/#327 were re-read for this reconciliation.
