@@ -208,6 +208,10 @@ export function createGenericExecutionAdapter(
     const inspectedArtifacts = new Map<string, string>();
     const artifactGenerations = new Map<string, number>();
     const artifactBusy = new Map<string, number>();
+    const activeOperations = new Map<
+        string,
+        { identity: string; task: Promise<GenericExecutionState> }
+    >();
     const artifactScope = globalThis.crypto.randomUUID();
     const invalidateArtifact = (id: string) => {
         const generation = (artifactGenerations.get(id) ?? 0) + 1;
@@ -219,12 +223,14 @@ export function createGenericExecutionAdapter(
     const projectedOperation = async (
         id: string,
         operation: () => Promise<GenericExecutionState>,
+        executionSettled: (state: GenericExecutionState) => void,
     ): Promise<GenericExecutionState> => {
         if (!projectionEnabled) return operation();
         const requestId = projection.begin(id);
         generations.set(id, requestId);
         try {
             const result = await operation();
+            executionSettled(result);
             if (generations.get(id) !== requestId) return result;
             if (result.state !== "completed") {
                 if (result.state !== "ready" && result.state !== "running")
@@ -258,18 +264,48 @@ export function createGenericExecutionAdapter(
             throw error;
         }
     };
-    const projected = async (
+    const projected = (
         id: string,
         operation: () => Promise<GenericExecutionState>,
+        identity: string,
+        singleFlight = true,
     ): Promise<GenericExecutionState> => {
+        const current = activeOperations.get(id);
+        if (singleFlight && current) {
+            if (current.identity !== identity)
+                throw new Error(
+                    "A different binding operation is in progress.",
+                );
+            return current.task;
+        }
         const generation = invalidateArtifact(id);
         artifactBusy.set(id, generation);
-        try {
-            return await projectedOperation(id, operation);
-        } finally {
-            if (artifactBusy.get(id) === generation) artifactBusy.delete(id);
+        const task: Promise<GenericExecutionState> = Promise.resolve().then(
+            async () => {
+                try {
+                    return await projectedOperation(id, operation, (state) => {
+                        if (
+                            (state.state === "completed" ||
+                                state.state === "failed") &&
+                            activeOperations.get(id)?.task === task
+                        ) {
+                            activeOperations.delete(id);
+                            changed();
+                        }
+                    });
+                } finally {
+                    if (artifactBusy.get(id) === generation)
+                        artifactBusy.delete(id);
+                }
+            },
+        );
+        if (singleFlight) activeOperations.set(id, { identity, task });
+        changed();
+        return task.finally(() => {
+            if (activeOperations.get(id)?.task === task)
+                activeOperations.delete(id);
             changed();
-        }
+        });
     };
     const outputPages = new Map<string, z.infer<typeof outputPage>>();
     const inputPages = new Map<string, z.infer<typeof inputPage>>();
@@ -330,12 +366,18 @@ export function createGenericExecutionAdapter(
         const current = states.get(id);
         if (!allowed(id) || !current)
             throw new Error("No retained execution selected.");
-        return projected(id, async () =>
-            accept(
-                id,
-                await call(name, { bindingId: id, runId: current.runId }),
-                current.runId,
-            ),
+        const active = activeOperations.get(id);
+        if (name === "canvas_execution_status" && active) return active.task;
+        return projected(
+            id,
+            async () =>
+                accept(
+                    id,
+                    await call(name, { bindingId: id, runId: current.runId }),
+                    current.runId,
+                ),
+            `${name}:${current.runId}:${current.attemptId}`,
+            name !== "canvas_cancel",
         );
     };
     const adapters: SemanticRendererAdapters = {
@@ -347,43 +389,50 @@ export function createGenericExecutionAdapter(
         dispatch: async (capability, input) => {
             const id = capability.bindingId;
             if (!allowed(id)) throw new Error("Binding is unavailable.");
-            return projected(id, async () => {
-                const encoded = JSON.stringify(input);
-                const prior = pending.get(id);
-                if (prior && prior.input !== encoded)
-                    throw new Error(
-                        "An uncertain submission exists; inspect it before changing input.",
+            return projected(
+                id,
+                async () => {
+                    const encoded = JSON.stringify(input);
+                    const prior = pending.get(id);
+                    if (prior && prior.input !== encoded)
+                        throw new Error(
+                            "An uncertain submission exists; inspect it before changing input.",
+                        );
+                    const request = prior ?? {
+                        key: globalThis.crypto.randomUUID(),
+                        input: encoded,
+                    };
+                    pending.set(id, request);
+                    const admitted = accept(
+                        id,
+                        await call("canvas_dispatch", {
+                            action: "submit",
+                            bindingId: id,
+                            inputs: input,
+                            idempotencyKey: request.key,
+                        }),
                     );
-                const request = prior ?? {
-                    key: globalThis.crypto.randomUUID(),
-                    input: encoded,
-                };
-                pending.set(id, request);
-                const admitted = accept(
-                    id,
-                    await call("canvas_dispatch", {
-                        action: "submit",
-                        bindingId: id,
-                        inputs: input,
-                        idempotencyKey: request.key,
-                    }),
-                );
-                const result =
-                    admitted.state === "ready"
-                        ? accept(
-                              id,
-                              await call("canvas_dispatch", {
-                                  action: "execute",
-                                  bindingId: id,
-                                  runId: admitted.runId,
-                              }),
-                              admitted.runId,
-                          )
-                        : admitted;
-                if (result.state === "completed" || result.state === "failed")
-                    pending.delete(id);
-                return result;
-            });
+                    const result =
+                        admitted.state === "ready"
+                            ? accept(
+                                  id,
+                                  await call("canvas_dispatch", {
+                                      action: "execute",
+                                      bindingId: id,
+                                      runId: admitted.runId,
+                                  }),
+                                  admitted.runId,
+                              )
+                            : admitted;
+                    if (
+                        result.state === "completed" ||
+                        result.state === "failed"
+                    )
+                        pending.delete(id);
+                    return result;
+                },
+                `submit:${JSON.stringify(input)}`,
+            );
         },
         resolveStatusBinding: (id) =>
             allowed(id) ? createCapabilityRef(id) : undefined,
@@ -410,7 +459,12 @@ export function createGenericExecutionAdapter(
         openArtifact: async (capability) => {
             const state = states.get(capability.bindingId);
             const handle = state?.outputs?.[0]?.handle;
-            if (!state || !handle || artifactBusy.has(capability.bindingId))
+            if (
+                !state ||
+                !handle ||
+                artifactBusy.has(capability.bindingId) ||
+                activeOperations.has(capability.bindingId)
+            )
                 return {
                     state: "unavailable",
                     message: "No authorized result artifact is available.",
@@ -442,6 +496,7 @@ export function createGenericExecutionAdapter(
                 (artifactGenerations.get(capability.bindingId) ?? 0) !==
                     generation ||
                 artifactBusy.has(capability.bindingId) ||
+                activeOperations.has(capability.bindingId) ||
                 current?.runId !== state.runId ||
                 current.attemptId !== state.attemptId ||
                 current.state !== state.state ||
@@ -525,55 +580,75 @@ export function createGenericExecutionAdapter(
                     )
             )
                 throw new Error("Select an available exact input item.");
-            return projected(id, async () => {
-                const encoded = JSON.stringify({
-                    queue: selected.queue,
-                    itemId,
-                });
-                const prior = pending.get(id);
-                if (prior && prior.input !== encoded)
-                    throw new Error(
-                        "An uncertain input selection exists; inspect it before changing selection.",
-                    );
-                const request = prior ?? {
-                    key: globalThis.crypto.randomUUID(),
-                    input: encoded,
-                };
-                pending.set(id, request);
-                const result = accept(
-                    id,
-                    await call("canvas_dispatch", {
-                        action: "submit_input",
-                        bindingId: id,
+            return projected(
+                id,
+                async () => {
+                    const encoded = JSON.stringify({
                         queue: selected.queue,
                         itemId,
-                        idempotencyKey: request.key,
-                    }),
-                    undefined,
-                    itemId,
-                );
-                if (result.workItemId !== itemId)
-                    throw new Error("Selected input identity changed.");
-                inputPages.delete(id);
-                if (result.state === "completed" || result.state === "failed")
-                    pending.delete(id);
-                return result;
-            });
+                    });
+                    const prior = pending.get(id);
+                    if (prior && prior.input !== encoded)
+                        throw new Error(
+                            "An uncertain input selection exists; inspect it before changing selection.",
+                        );
+                    const request = prior ?? {
+                        key: globalThis.crypto.randomUUID(),
+                        input: encoded,
+                    };
+                    pending.set(id, request);
+                    const result = accept(
+                        id,
+                        await call("canvas_dispatch", {
+                            action: "submit_input",
+                            bindingId: id,
+                            queue: selected.queue,
+                            itemId,
+                            idempotencyKey: request.key,
+                        }),
+                        undefined,
+                        itemId,
+                    );
+                    if (result.workItemId !== itemId)
+                        throw new Error("Selected input identity changed.");
+                    inputPages.delete(id);
+                    if (
+                        result.state === "completed" ||
+                        result.state === "failed"
+                    )
+                        pending.delete(id);
+                    return result;
+                },
+                `submit_input:${JSON.stringify({ queue: selected.queue, itemId })}`,
+            );
         },
+        isBusy: (id: string) => activeOperations.has(id),
         execute: async (id: string) => {
+            const active = activeOperations.get(id);
+            if (active) {
+                if (
+                    active.identity.startsWith("submit:") ||
+                    active.identity.startsWith("execute:")
+                )
+                    return active.task;
+                throw new Error("Another binding operation is in progress.");
+            }
             const state = states.get(id);
             if (!allowed(id) || state?.state !== "ready")
                 throw new Error("No unlaunched execution selected.");
-            return projected(id, async () =>
-                accept(
-                    id,
-                    await call("canvas_dispatch", {
-                        action: "execute",
-                        bindingId: id,
-                        runId: state.runId,
-                    }),
-                    state.runId,
-                ),
+            return projected(
+                id,
+                async () =>
+                    accept(
+                        id,
+                        await call("canvas_dispatch", {
+                            action: "execute",
+                            bindingId: id,
+                            runId: state.runId,
+                        }),
+                        state.runId,
+                    ),
+                `execute:${state.runId}:${state.attemptId}`,
             );
         },
         refresh: (id: string) => read(id, "canvas_execution_status"),

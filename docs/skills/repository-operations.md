@@ -6432,3 +6432,10 @@ execution generation and AppSession context. Clear both when a new operation sta
 and reject late replies unless generation, Run, Attempt, state and handle still match.
 Keep failure diagnostics readable when the current authorized Run provides them.
 Remount artifact status only, preserving form inputs and unrelated binding results.
+
+A generic form's submit and automatic execute are one operation. Do not expose
+a second usable Continue/Refresh control while that chain is active. Deduplicate
+only the same binding and operation identity; reject changed inputs or incompatible
+actions, and preserve cancellation. Release only the active operation's own slot.
+Retain genuine request errors rather than clearing feedback to hide a control race.
+Verify with a deferred automatic execute and an actual rendered control click.
