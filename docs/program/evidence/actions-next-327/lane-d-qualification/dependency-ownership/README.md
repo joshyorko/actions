@@ -133,3 +133,38 @@ run_in_thread.py is BYTE-IDENTICAL between vendor0.1.0 wheel and current owned
 Runtime internal file, including run_in_thread and run_in_thread_asyncio. This
 supports reusing that implementation; it does not assert equality of every Common
 module or compatibility of all HTTP call sites.
+
+## Revised consumer decision after extension-owner correction
+
+The parent reports the extension owner replaced its sole production Common use
+(run_in_thread in Ruff linting) with standard ThreadPoolExecutor while preserving
+concurrency. That implementation is not independently qualified by this lane yet.
+It removes the reason to create standalone Common for this extension. The earlier
+extraction proposal is therefore superseded: do NOT create actions-common solely
+for this eliminated dependency.
+
+Current Actions production import scan at aa388093 finds 16 Python files using
+Common, all inside action_server/src/actions/server (including Common's own
+internal imports). No other owned package pyproject declares actions-common or
+sema4ai-common. Consumers include action import/CLI, RCC download/adapter, local
+authorization/provider setup, Robot execution and managed Work Items contracts;
+these already consume the Runtime-owned bundled implementation. No independently
+distributed consumer requiring standalone Common was identified in these two
+repositories. This is a bounded audit, not a claim about every external project.
+
+Resulting target graph:
+
+- Extension production -> actions-http-helper -> truststore/urllib3/PyYAML/types.
+- Extension Ruff concurrency -> Python standard-library ThreadPoolExecutor.
+- Runtime -> its own bundled actions.server._common; no vendor Common distribution.
+- Core and Runtime -> owned actions-http-helper.
+- Extension dev closure still needs review: historical sema4ai-actions pulls
+  sema4ai-http-helper. A main-only closure pass must not mask that dev graph.
+
+Ownership independence means no replaced vendor package in the actual fresh
+installed closure, not creating a package for code with no separate consumer.
+If a genuine external Common consumer appears later, allocate one canonical owned
+source and release identity then, without copying Runtime utilities into a second
+implementation. Namespace/version/lock/release decisions remain integrator-owned.
+Fresh extension bootstrap and installed replacement VSIX remain the outstanding
+acceptance gate with its owner; this lane's helper wheel pass is not a substitute.
