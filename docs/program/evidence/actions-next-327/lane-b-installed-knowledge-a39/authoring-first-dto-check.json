@@ -1,0 +1,22 @@
+[
+  {
+    "check": "canvas_spec",
+    "status": "PASS"
+  },
+  {
+    "check": "backend",
+    "status": "PASS"
+  },
+  {
+    "check": "source_inventory",
+    "status": "PASS"
+  },
+  {
+    "check": "binding_map",
+    "status": "PASS"
+  },
+  {
+    "check": "data_bindings",
+    "status": "PASS"
+  }
+]

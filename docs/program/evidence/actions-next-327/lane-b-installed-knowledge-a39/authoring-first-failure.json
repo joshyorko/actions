@@ -1,0 +1,228 @@
+{
+  "status": "FAIL",
+  "stage": "authoring",
+  "commands": [
+    {
+      "command": "authorize-local",
+      "operation": "authorize-generated-source",
+      "dry_run": true,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "authorize-local",
+      "operation": "authorize-generated-source",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "authorize-local",
+      "operation": "authorize-generated-source",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "grant-owner",
+      "dry_run": true,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "grant-owner",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "grant-owner",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "import-source",
+      "dry_run": true,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "import-source",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "import-source",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "register-revision",
+      "dry_run": true,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "register-revision",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "register-revision",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "grant-owner",
+      "dry_run": true,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "grant-owner",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "grant-owner",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "grant-owner",
+      "dry_run": true,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "grant-owner",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "grant-owner",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "register-knowledge-definition",
+      "dry_run": true,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "register-knowledge-definition",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "register-knowledge-definition",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "configure-host",
+      "dry_run": true,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "configure-host",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "configure-host",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "provision-knowledge-host",
+      "dry_run": true,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "provision-knowledge-host",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "provision-knowledge-host",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    }
+  ],
+  "calls": [
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": true
+    }
+  ],
+  "execution": "NOT_RUN",
+  "versions": {
+    "actions-runtime": "1.1.0a39",
+    "actions-core": "1.1.0a4"
+  },
+  "source_checkpoint": "0fb4999e52c2ed92f3585d088910c276d8dc72ed",
+  "shutdowns": [
+    {
+      "returncode": -15,
+      "forced": false,
+      "lifecycle_complete": true
+    },
+    {
+      "returncode": -15,
+      "forced": false,
+      "lifecycle_complete": true
+    }
+  ],
+  "error_type": "ExceptionGroup"
+}

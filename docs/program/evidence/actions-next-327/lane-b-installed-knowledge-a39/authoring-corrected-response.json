@@ -1,0 +1,225 @@
+{
+  "_meta": {
+    "actions.canvas": {
+      "active": false,
+      "applicationId": "34689c94-3d90-4d64-9f3a-2c2b0befd051",
+      "bindings": [
+        {
+          "bindingId": "ingestion",
+          "capabilityId": "action.ingest_documents",
+          "packageRevision": {
+            "package_id": "67b3235d-c01f-5fa4-b9e8-645f51d32ae0",
+            "revision_id": "sha256:b0a07a54e06e23d75ae6aaeda0fd5ca6d49faa6d6af45edeacb2cbb45cdacaaf",
+            "workspace_id": "779510b1-c759-4ea6-baa3-13ebe78f25dc"
+          }
+        },
+        {
+          "bindingId": "search",
+          "capabilityId": "action.search_documents",
+          "packageRevision": {
+            "package_id": "67b3235d-c01f-5fa4-b9e8-645f51d32ae0",
+            "revision_id": "sha256:b0a07a54e06e23d75ae6aaeda0fd5ca6d49faa6d6af45edeacb2cbb45cdacaaf",
+            "workspace_id": "779510b1-c759-4ea6-baa3-13ebe78f25dc"
+          }
+        }
+      ],
+      "revisionId": "sha256:5725ed315c38ea92c34ec863f3da6a26e3f4391d49e95d193d75b166f48b5193",
+      "spec": {
+        "bindingIds": [
+          "ingestion",
+          "search"
+        ],
+        "root": {
+          "children": [
+            {
+              "bindingId": "ingestion",
+              "fields": [
+                {
+                  "label": "note",
+                  "name": "note",
+                  "required": false,
+                  "type": "text"
+                }
+              ],
+              "id": "ingestion_form",
+              "submitLabel": "Run ingestion",
+              "type": "form"
+            },
+            {
+              "bindingId": "ingestion",
+              "id": "ingestion_status",
+              "type": "status"
+            },
+            {
+              "bindingId": "ingestion",
+              "id": "ingestion_artifact",
+              "label": "Inspect ingestion",
+              "type": "artifact"
+            },
+            {
+              "bindingId": "search",
+              "fields": [
+                {
+                  "label": "ingestion handle",
+                  "name": "ingestion_handle",
+                  "required": true,
+                  "type": "text"
+                },
+                {
+                  "label": "query",
+                  "name": "query",
+                  "required": true,
+                  "type": "text"
+                },
+                {
+                  "label": "offset",
+                  "name": "offset",
+                  "required": true,
+                  "type": "integer"
+                },
+                {
+                  "label": "limit",
+                  "name": "limit",
+                  "required": true,
+                  "type": "integer"
+                }
+              ],
+              "id": "search_form",
+              "submitLabel": "Run search",
+              "type": "form"
+            },
+            {
+              "bindingId": "search",
+              "id": "search_status",
+              "type": "status"
+            },
+            {
+              "bindingId": "search",
+              "id": "search_artifact",
+              "label": "Inspect search",
+              "type": "artifact"
+            }
+          ],
+          "id": "main",
+          "type": "stack"
+        },
+        "schemaVersion": "actions.canvas-spec/v1",
+        "title": "Installed Knowledge lifecycle",
+        "visibility": [
+          "model",
+          "app"
+        ]
+      }
+    },
+    "io.modelcontextprotocol/serverInfo": {
+      "name": "Action Server",
+      "version": ""
+    }
+  },
+  "content": [
+    {
+      "type": "text",
+      "text": "Canvas revision loaded.",
+      "annotations": null,
+      "_meta": null
+    }
+  ],
+  "structuredContent": {
+    "active": false,
+    "applicationId": "34689c94-3d90-4d64-9f3a-2c2b0befd051",
+    "buildStatus": "passed",
+    "compilationStatus": "succeeded",
+    "importStatus": "passed",
+    "revisionId": "sha256:5725ed315c38ea92c34ec863f3da6a26e3f4391d49e95d193d75b166f48b5193",
+    "spec": {
+      "bindingIds": [
+        "ingestion",
+        "search"
+      ],
+      "root": {
+        "children": [
+          {
+            "bindingId": "ingestion",
+            "fields": [
+              {
+                "label": "note",
+                "name": "note",
+                "required": false,
+                "type": "text"
+              }
+            ],
+            "id": "ingestion_form",
+            "submitLabel": "Run ingestion",
+            "type": "form"
+          },
+          {
+            "bindingId": "ingestion",
+            "id": "ingestion_status",
+            "type": "status"
+          },
+          {
+            "bindingId": "ingestion",
+            "id": "ingestion_artifact",
+            "label": "Inspect ingestion",
+            "type": "artifact"
+          },
+          {
+            "bindingId": "search",
+            "fields": [
+              {
+                "label": "ingestion handle",
+                "name": "ingestion_handle",
+                "required": true,
+                "type": "text"
+              },
+              {
+                "label": "query",
+                "name": "query",
+                "required": true,
+                "type": "text"
+              },
+              {
+                "label": "offset",
+                "name": "offset",
+                "required": true,
+                "type": "integer"
+              },
+              {
+                "label": "limit",
+                "name": "limit",
+                "required": true,
+                "type": "integer"
+              }
+            ],
+            "id": "search_form",
+            "submitLabel": "Run search",
+            "type": "form"
+          },
+          {
+            "bindingId": "search",
+            "id": "search_status",
+            "type": "status"
+          },
+          {
+            "bindingId": "search",
+            "id": "search_artifact",
+            "label": "Inspect search",
+            "type": "artifact"
+          }
+        ],
+        "id": "main",
+        "type": "stack"
+      },
+      "schemaVersion": "actions.canvas-spec/v1",
+      "title": "Installed Knowledge lifecycle",
+      "visibility": [
+        "model",
+        "app"
+      ]
+    },
+    "testStatus": "passed",
+    "validationStatus": "passed"
+  },
+  "isError": false,
+  "resultType": "complete"
+}

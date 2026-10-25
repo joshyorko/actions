@@ -1,0 +1,254 @@
+{
+  "status": "PASS",
+  "stage": "prepared",
+  "commands": [
+    {
+      "command": "authorize-local",
+      "operation": "authorize-generated-source",
+      "dry_run": true,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "authorize-local",
+      "operation": "authorize-generated-source",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "authorize-local",
+      "operation": "authorize-generated-source",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "grant-owner",
+      "dry_run": true,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "grant-owner",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "grant-owner",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "import-source",
+      "dry_run": true,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "import-source",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "import-source",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "register-revision",
+      "dry_run": true,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "register-revision",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "register-revision",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "grant-owner",
+      "dry_run": true,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "grant-owner",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "grant-owner",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "grant-owner",
+      "dry_run": true,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "grant-owner",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "grant-owner",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "register-knowledge-definition",
+      "dry_run": true,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "register-knowledge-definition",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "register-knowledge-definition",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "configure-host",
+      "dry_run": true,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "configure-host",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "configure-host",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "provision-knowledge-host",
+      "dry_run": true,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "provision-knowledge-host",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "providers-local",
+      "operation": "provision-knowledge-host",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "authorize-local",
+      "operation": "authorize-exact-deployment",
+      "dry_run": true,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "authorize-local",
+      "operation": "authorize-exact-deployment",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "command": "authorize-local",
+      "operation": "authorize-exact-deployment",
+      "dry_run": false,
+      "status": "PASS",
+      "exit": 0
+    }
+  ],
+  "calls": [
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    }
+  ],
+  "execution": "NOT_RUN",
+  "versions": {
+    "actions-runtime": "1.1.0a39",
+    "actions-core": "1.1.0a4"
+  },
+  "source_checkpoint": "0fb4999e52c2ed92f3585d088910c276d8dc72ed",
+  "shutdowns": [
+    {
+      "returncode": -15,
+      "forced": false,
+      "lifecycle_complete": true
+    },
+    {
+      "returncode": -15,
+      "forced": false,
+      "lifecycle_complete": true
+    }
+  ],
+  "application_id": "34689c94-3d90-4d64-9f3a-2c2b0befd051",
+  "revision_id": "sha256:5725ed315c38ea92c34ec863f3da6a26e3f4391d49e95d193d75b166f48b5193"
+}

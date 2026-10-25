@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "stage": "completed",
+  "http": "NOT_RUN",
+  "source": "0fb4999e52c2ed92f3585d088910c276d8dc72ed",
+  "task_id": "dda9a652-7e86-462f-bd32-d59c6ebc0225",
+  "attempt_id": "c24c7321-99a4-4d49-a0f0-2ab15287f3ca",
+  "exact_terminal_equal": true,
+  "shutdowns": [
+    {
+      "returncode": -15,
+      "forced": false,
+      "lifespan_complete": true,
+      "lifespan_failed": false
+    }
+  ]
+}

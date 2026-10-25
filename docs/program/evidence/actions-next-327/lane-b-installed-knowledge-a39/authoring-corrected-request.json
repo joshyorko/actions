@@ -1,0 +1,245 @@
+{
+  "tool": "canvas_apply",
+  "arguments": {
+    "appId": "34689c94-3d90-4d64-9f3a-2c2b0befd051",
+    "expectedBase": "sha256:8619d66f3202b797b658ed28e18ec077b4dc8abf08415ef2e2c925e5564c7c6c",
+    "spec": {
+      "bindingIds": [
+        "ingestion",
+        "search"
+      ],
+      "root": {
+        "type": "stack",
+        "id": "main",
+        "children": [
+          {
+            "type": "form",
+            "id": "ingestion_form",
+            "bindingId": "ingestion",
+            "submitLabel": "Run ingestion",
+            "fields": [
+              {
+                "name": "note",
+                "label": "note",
+                "type": "text",
+                "required": false
+              }
+            ]
+          },
+          {
+            "type": "status",
+            "id": "ingestion_status",
+            "bindingId": "ingestion"
+          },
+          {
+            "type": "artifact",
+            "id": "ingestion_artifact",
+            "bindingId": "ingestion",
+            "label": "Inspect ingestion"
+          },
+          {
+            "type": "form",
+            "id": "search_form",
+            "bindingId": "search",
+            "submitLabel": "Run search",
+            "fields": [
+              {
+                "name": "ingestion_handle",
+                "label": "ingestion handle",
+                "type": "text",
+                "required": true
+              },
+              {
+                "name": "query",
+                "label": "query",
+                "type": "text",
+                "required": true
+              },
+              {
+                "name": "offset",
+                "label": "offset",
+                "type": "integer",
+                "required": true
+              },
+              {
+                "name": "limit",
+                "label": "limit",
+                "type": "integer",
+                "required": true
+              }
+            ]
+          },
+          {
+            "type": "status",
+            "id": "search_status",
+            "bindingId": "search"
+          },
+          {
+            "type": "artifact",
+            "id": "search_artifact",
+            "bindingId": "search",
+            "label": "Inspect search"
+          }
+        ]
+      },
+      "schemaVersion": "actions.canvas-spec/v1",
+      "title": "Installed Knowledge lifecycle",
+      "visibility": [
+        "model",
+        "app"
+      ]
+    },
+    "bindings": [
+      {
+        "bindingId": "ingestion",
+        "capabilityId": "action.ingest_documents"
+      },
+      {
+        "bindingId": "search",
+        "capabilityId": "action.search_documents"
+      }
+    ],
+    "backend": {
+      "logicalName": "Installed Knowledge actions",
+      "actions": [
+        {
+          "actionName": "ingest_documents",
+          "logicalRequirements": [
+            {
+              "id": "ingestion_documents",
+              "kind": "knowledge",
+              "operations": [
+                {
+                  "name": "documents.ingest/v1",
+                  "effect": "write",
+                  "parameters": [],
+                  "result": [
+                    {
+                      "name": "result_json",
+                      "kind": "string",
+                      "required": true
+                    }
+                  ],
+                  "max_rows": 20,
+                  "max_bytes": 65536,
+                  "timeout_ms": 30000
+                }
+              ],
+              "invocations": [
+                {
+                  "operation": "documents.ingest/v1",
+                  "inputs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "actionName": "search_documents",
+          "logicalRequirements": [
+            {
+              "id": "search_documents",
+              "kind": "knowledge",
+              "operations": [
+                {
+                  "name": "documents.search/v1",
+                  "effect": "read",
+                  "parameters": [
+                    {
+                      "name": "ingestion_handle",
+                      "kind": "string",
+                      "required": true
+                    },
+                    {
+                      "name": "limit",
+                      "kind": "integer",
+                      "required": true
+                    },
+                    {
+                      "name": "offset",
+                      "kind": "integer",
+                      "required": true
+                    },
+                    {
+                      "name": "query",
+                      "kind": "string",
+                      "required": true
+                    }
+                  ],
+                  "result": [
+                    {
+                      "name": "result_json",
+                      "kind": "string",
+                      "required": true
+                    }
+                  ],
+                  "max_rows": 20,
+                  "max_bytes": 65536,
+                  "timeout_ms": 30000
+                }
+              ],
+              "invocations": [
+                {
+                  "operation": "documents.search/v1",
+                  "inputs": [
+                    {
+                      "parameter": "ingestion_handle",
+                      "input": "ingestion_handle"
+                    },
+                    {
+                      "parameter": "limit",
+                      "input": "limit"
+                    },
+                    {
+                      "parameter": "offset",
+                      "input": "offset"
+                    },
+                    {
+                      "parameter": "query",
+                      "input": "query"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "path": "package.yaml",
+          "content": "name: generated-fixture\ndescription: One synthetic generated Action\ndependencies:\n  conda-forge:\n    - python=3.12\n  pypi:\n    - actions-core=1.1.0a4\n"
+        },
+        {
+          "path": "generated_actions.py",
+          "content": "from actions import action, knowledge\n\n@action\ndef ingest_documents(note: str = \"owned fixture\") -> dict:\n    \"\"\"Ingest the explicitly bound owned document collection.\"\"\"\n    return knowledge.ingest(\"ingestion_documents\", \"documents.ingest/v1\")\n\n@action\ndef search_documents(ingestion_handle: str, query: str, offset: int, limit: int) -> dict:\n    \"\"\"Search a canonically published ingestion with bounded explicit paging.\"\"\"\n    return knowledge.search(\"search_documents\", \"documents.search/v1\", ingestion_handle=ingestion_handle, query=query, offset=offset, limit=limit)\n"
+        },
+        {
+          "path": "tests/test_actions.py",
+          "content": "import unittest\nfrom generated_actions import ingest_documents, search_documents\nclass TestEntrypoints(unittest.TestCase):\n    def test_entrypoints(self):\n        self.assertTrue(callable(ingest_documents))\n        self.assertTrue(callable(search_documents))\n"
+        }
+      ]
+    },
+    "dataBindings": [
+      {
+        "bindingId": "ingestion",
+        "requirementId": "ingestion_documents",
+        "provider": {
+          "workspace_id": "779510b1-c759-4ea6-baa3-13ebe78f25dc",
+          "provider_profile_id": "d1615ca6-92bb-43b5-a8bc-58d315ddd327",
+          "revision_id": "sha256:37a73e22790eb29f7c45928fa06d0d717db7ec711d3aad3cca679143e1b8e31a"
+        }
+      },
+      {
+        "bindingId": "search",
+        "requirementId": "search_documents",
+        "provider": {
+          "workspace_id": "779510b1-c759-4ea6-baa3-13ebe78f25dc",
+          "provider_profile_id": "d1615ca6-92bb-43b5-a8bc-58d315ddd327",
+          "revision_id": "sha256:37a73e22790eb29f7c45928fa06d0d717db7ec711d3aad3cca679143e1b8e31a"
+        }
+      }
+    ],
+    "idempotencyKey": "lane-b-knowledge-apply"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "core_version": "1.1.0a4",
+  "python_members_verified": 53,
+  "wheel_sha256": "fe8fb01f5924837ebd221bb559cc4c36482a581921f81beba1d4c2a6c8e4b371",
+  "interpreter": "/workspace/lane-b-state/compiler-a39/robocorp/holotree/c2fd1aa_5a1fac3_72f803f5/bin/python3.12",
+  "isolated": true,
+  "scan_context_isolated": true
+}
