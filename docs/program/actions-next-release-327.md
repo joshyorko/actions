@@ -11,8 +11,19 @@ skips and eight explicit actual-RCC deselections. Exact source, commands,
 inventories, XML and cleanup are retained in the
 [fresh recovery receipt](evidence/actions-next-327/fresh-recovery-20261025/README.md).
 This is source/service qualification, not installed a38 or full release readiness.
-Knowledge drafts remain unapplied at this checkpoint; all other open matrix and
-owner gates remain in force. Earlier failures and interruptions remain retained.
+Knowledge drafts were unapplied at that checkpoint; the subsequent foundation
+integration is recorded below. All other open matrix and owner gates remain in
+force. Earlier failures and interruptions remain retained.
+
+The [integrated Knowledge foundations](evidence/actions-next-327/knowledge-foundations-integrated/README.md)
+now qualify immutable definition authority on both common SQL backends and
+retained normalized corpus versions on real DuckDB/PostgreSQL. Composed coverage
+is158passing/zero skips, including migration/fresh-schema and shared-database
+gates; full Runtime typecheck564 and configured Python lint passed. Initial
+format/import/schema-baseline failures remain retained. No canonical ingestion,
+search readiness or installed a38 qualification is claimed. The extension
+handoff builder also now emits the `tasks` mapping required by pinned RCC18.19.3;
+its corrected developer gate passed190 after retaining the missing-tasks failure.
 
 ## Replacement cloud recovery — October25
 

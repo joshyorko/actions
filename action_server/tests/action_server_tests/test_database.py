@@ -235,6 +235,8 @@ def test_migrate(database_v0: Path, tmpdir) -> None:
                 # Migrations 20/21 add associations, not another Run authority.
                 "run_execution_intent",
                 "run_task_receipt",
+                # Migration 22 adds immutable Knowledge definition metadata.
+                "knowledge_collection_revision",
                 "schedule",
                 "schedule_execution",
                 "schedule_group",

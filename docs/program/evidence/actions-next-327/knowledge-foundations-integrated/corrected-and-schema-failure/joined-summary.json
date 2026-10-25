@@ -1,0 +1,117 @@
+{
+  "source": "ab09e19dab3381a914a4cc78e17870f1a85f1e65",
+  "tree": "ecc4473167c363b3aa0e7f33380af579ac8eb590",
+  "container": "08f121f89244d7a18c5f3a9bcae2339865fd2822a4c74758a0eeaa7fc45f7baa",
+  "image": "postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81",
+  "batches": [
+    {
+      "module": "test_knowledge_foundation",
+      "command": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "/workspace/actions-cloud/package-command.py",
+        "action_server",
+        "run",
+        "python",
+        "/workspace/actions-327-recovery-evidence/selected-pytest.py",
+        "tests/action_server_tests/test_knowledge_foundation.py",
+        "-k",
+        "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+        "-p",
+        "no:robocorp_log_pytest",
+        "-q",
+        "--tb=short",
+        "--junitxml=/workspace/actions-327-knowledge-corrected/test_knowledge_foundation/tests.xml",
+        "--basetemp=/workspace/actions-327-knowledge-corrected/test_knowledge_foundation/fixtures"
+      ],
+      "exit_code": 0,
+      "minimum_free_bytes": 29107470336,
+      "stop_reason": null,
+      "source_sha256": "cb2ec42ecac896d953a604d13d368c783d2308dba69ca5af94a00110d6ef161a",
+      "counts": {
+        "tests": 50,
+        "failure": 0,
+        "error": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "module": "test_knowledge_postgres",
+      "command": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "/workspace/actions-cloud/package-command.py",
+        "action_server",
+        "run",
+        "python",
+        "/workspace/actions-327-recovery-evidence/selected-pytest.py",
+        "tests/action_server_tests/test_knowledge_postgres.py",
+        "-k",
+        "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+        "-p",
+        "no:robocorp_log_pytest",
+        "-q",
+        "--tb=short",
+        "--junitxml=/workspace/actions-327-knowledge-corrected/test_knowledge_postgres/tests.xml",
+        "--basetemp=/workspace/actions-327-knowledge-corrected/test_knowledge_postgres/fixtures"
+      ],
+      "exit_code": 0,
+      "minimum_free_bytes": 29107314688,
+      "stop_reason": null,
+      "source_sha256": "bd905c723a3b4e91cbee87f7b88bef447a845d916e9630cdf0417a6906f4fca2",
+      "counts": {
+        "tests": 6,
+        "failure": 0,
+        "error": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "module": "test_database",
+      "command": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "/workspace/actions-cloud/package-command.py",
+        "action_server",
+        "run",
+        "python",
+        "/workspace/actions-327-recovery-evidence/selected-pytest.py",
+        "tests/action_server_tests/test_database.py",
+        "-k",
+        "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+        "-p",
+        "no:robocorp_log_pytest",
+        "-q",
+        "--tb=short",
+        "--junitxml=/workspace/actions-327-knowledge-corrected/test_database/tests.xml",
+        "--basetemp=/workspace/actions-327-knowledge-corrected/test_database/fixtures"
+      ],
+      "exit_code": 10,
+      "minimum_free_bytes": 29104177152,
+      "stop_reason": null,
+      "source_sha256": "e601e9f40727a32f9c534d73e8e36cdb9f28ddb78ffbc63e1a64417c3518e048",
+      "counts": {
+        "tests": 15,
+        "failure": 2,
+        "error": 0,
+        "skipped": 0
+      }
+    }
+  ],
+  "cleanup_exit": 0
+}

@@ -1,0 +1,36 @@
+{
+  "module": "test_database",
+  "command": [
+    "rcc",
+    "task",
+    "script",
+    "-r",
+    "developer/toolkit.yaml",
+    "--",
+    "python",
+    "/workspace/actions-cloud/package-command.py",
+    "action_server",
+    "run",
+    "python",
+    "/workspace/actions-327-recovery-evidence/selected-pytest.py",
+    "tests/action_server_tests/test_database.py",
+    "-k",
+    "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+    "-p",
+    "no:robocorp_log_pytest",
+    "-q",
+    "--tb=short",
+    "--junitxml=/workspace/actions-327-knowledge-corrected/test_database/tests.xml",
+    "--basetemp=/workspace/actions-327-knowledge-corrected/test_database/fixtures"
+  ],
+  "exit_code": 10,
+  "minimum_free_bytes": 29104177152,
+  "stop_reason": null,
+  "source_sha256": "e601e9f40727a32f9c534d73e8e36cdb9f28ddb78ffbc63e1a64417c3518e048",
+  "counts": {
+    "tests": 15,
+    "failure": 2,
+    "error": 0,
+    "skipped": 0
+  }
+}

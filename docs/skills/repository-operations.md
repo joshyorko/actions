@@ -5637,13 +5637,57 @@ failed original run as passing because targeted corrections later pass. A test
 using object.__new__ must initialize constructor-owned fields relevant to its
 boundary; production default configuration must still be verified separately.
 
-Ordinary Data execution does not establish Knowledge integration. Existing
-Knowledge components use injected bindings/authorization, synchronous ingestion,
-and replacement of the previous provider version. Open-read snapshots do not
-prove historical revision reopening or durable ingestion. Public Knowledge still
-requires retained immutable collection revisions, independent live read/manage
-authority, canonical ingestion/reconciliation, and sealed paging/export. Split
-provider-service and advanced Knowledge remain distinct outstanding gates.
+Ordinary Data execution does not establish Knowledge integration. Migration 22
+adds immutable Knowledge definition metadata to common SQL, not a runnable
+collection or publication. The revision digest binds collection, retained source,
+normalizer declaration, typed document schema and limits; it contains no provider
+credentials, locator or engine. Registration requires independent live collection
+(or exact revision) knowledge.read and knowledge.manage plus exact retained
+Knowledge source knowledge.read and provider.inspect. Collection grants cover
+retained and future revisions; revision grants cover only that revision. Neither
+reference possession nor Data/Workspace grants imply these permissions. Request
+and audit replay reauthorize and validate retained identities; no grants are minted.
+
+Definitions admit existing sealed raw Knowledge source/v1 metadata only; Data
+sources are refused. Separate host-only normalization supports strict UTF8 object
+documents and typed CSV with exact ordered headers, required scalar fields, no
+null marker, and portable numeric ranges. Empty string is allowed only as a
+string; NUL, BOM, malformed UTF8, duplicate/extra headers and ambiguous framing
+are refused. Source budgets precede reads; document/row/corpus overflow rejects
+the whole result. Deterministic canonical corpus bytes bind the definition and
+source revision and are input to the existing blob authority, not a new seal or
+permission. The corpus validator checks representation, not issuance or grants.
+
+Explicitly provisioned provider version stores use exact Workspace/collection/
+revision/document identities and operation receipts. They insert new versions
+without replacing prior ones, validate exact replay, roll back interrupted writes
+and verify retained bytes on read. DuckDB and owned PostgreSQL component tests
+cover fresh-process reopening. PostgreSQL additionally qualifies independent
+connection concurrency, conflicting operation IDs and cancellation during a
+provider lock, with no partial version or operation publication.
+Private connection factories belong to the host; provisioning is not startup,
+read, or search authority. These provider tables are corpus storage, not a second
+scheduler or grants database. No legacy destructive importer is reused.
+
+Qualify common-SQL definition authority and provider storage separately. A
+configured PostgreSQL URL does not exercise a fixture hardcoded to SQLite, and
+DuckDB replay tests do not qualify PostgreSQL locking or cancellation. Run the
+definition matrix on both common SQL backends and provider tests on both engines.
+Definition reads authorize metadata only; corpus validation and provider receipts
+supply neither live source/Knowledge grants nor canonical Run publication
+authority. Require those checks explicitly at the consuming boundary.
+
+The definition authority's require_search_ready still always refuses. No canonical
+Run ingestion/publication or issued receipt joins these components yet. The
+declaration permits up to 128 source files but the source manifest remains limited
+to 16; this is not evidence of 128-file ingestion. Existing synchronous Knowledge
+adapters remain destructive and are not made immutable by these separate stores.
+Public Knowledge still requires canonical Run/Task ingestion and reconciliation,
+authorized provider selection, input-mapped search/generated Python consumption,
+sealed paging/export, and installed two-provider lifecycle proof. Split provider
+service and advanced Knowledge remain distinct outstanding gates. Migration 22 has no downmigration;
+the frozen version 21 status reader reports TOO_NEW, so downgrade requires a
+qualified older snapshot rather than opening the upgraded database.
 
 
 Fresh-container handoffs preserve unfinished source as explicitly incomplete,

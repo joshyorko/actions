@@ -1,0 +1,7 @@
+{
+  "path": "/workspace",
+  "required_free_bytes": 5368709120,
+  "available_bytes": 29730402304,
+  "status": "PASS",
+  "scope": "point-in-time preflight; concurrent writers still require monitoring"
+}

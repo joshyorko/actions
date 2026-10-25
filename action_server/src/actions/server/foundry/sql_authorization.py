@@ -5,6 +5,14 @@ from __future__ import annotations
 import hashlib
 import json
 from collections.abc import Sequence
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from actions.server.data_queries.knowledge_values import (
+        KnowledgeCollectionRef,
+        KnowledgeRevisionRef,
+        KnowledgePermission,
+    )
 
 from actions.server._database import Database
 from actions.server.deployments.canonical import canonicalize_json
@@ -113,6 +121,51 @@ class SqlFoundryAuthorization:
             raise AuthoringAccessDenied(
                 "Canvas operation unavailable or not authorized"
             ) from exc
+
+    def require_knowledge(
+        self,
+        actor: Actor,
+        reference: KnowledgeCollectionRef | KnowledgeRevisionRef,
+        permission: KnowledgePermission,
+    ) -> None:
+        """Explicit collection or exact revision grants; no Data/Workspace fallback.
+
+        Collection grants cover retained and future revisions of that collection.
+        Existing permission readers ignore these distinct subject kinds.
+        """
+        from actions.server.data_queries.knowledge_values import (
+            KnowledgeCollectionRef,
+            KnowledgeRevisionRef,
+            knowledge_grant_subject,
+        )
+
+        if permission not in ("knowledge.read", "knowledge.manage"):
+            raise AccessDenied("unknown Knowledge permission")
+        if type(reference) is KnowledgeRevisionRef:
+            reference = KnowledgeRevisionRef.model_validate_json(
+                reference.model_dump_json()
+            )
+            collection = reference.collection
+        elif type(reference) is KnowledgeCollectionRef:
+            reference = KnowledgeCollectionRef.model_validate_json(
+                reference.model_dump_json()
+            )
+            collection = reference
+        else:
+            raise AccessDenied("typed Knowledge reference required")
+        grants = self._grants(actor, reference.workspace_id)
+        if self._allows(
+            grants,
+            "knowledge-collection",
+            knowledge_grant_subject(collection),
+            permission,
+        ):
+            return
+        if type(reference) is KnowledgeRevisionRef and self._allows(
+            grants, "knowledge-revision", knowledge_grant_subject(reference), permission
+        ):
+            return
+        raise AccessDenied("Knowledge collection unavailable or not authorized")
 
     def require_workspace(
         self, actor: Actor, workspace_id: WorkspaceId, permission: str

@@ -453,6 +453,9 @@ def run_status_to_str(run_status: int) -> str:
 
 def get_all_model_classes():
     from actions.server.data_queries.review_models import MODEL_CLASSES as REVIEW_MODELS
+    from actions.server.foundry.knowledge_models import (
+        MODEL_CLASSES as KNOWLEDGE_MODELS,
+    )
     from actions.server.foundry.models import MODEL_CLASSES as FOUNDRY_MODELS
     from actions.server.foundry.provider_models import MODEL_CLASSES as PROVIDER_MODELS
     from actions.server.migrations import Migration
@@ -479,6 +482,7 @@ def get_all_model_classes():
         *REVIEW_MODELS,
         *FOUNDRY_MODELS,
         *PROVIDER_MODELS,
+        *KNOWLEDGE_MODELS,
     ]
 
 

@@ -753,4 +753,31 @@ CREATE TABLE IF NOT EXISTS foundry_provider_availability(
     FOREIGN KEY (foundry_provider_revision_id) REFERENCES foundry_provider_revision(id)
 )
 ''',
+
+
+'''
+CREATE TABLE IF NOT EXISTS knowledge_collection_revision(
+    id TEXT NOT NULL PRIMARY KEY,
+    workspace_id TEXT NOT NULL,
+    collection_id TEXT NOT NULL,
+    revision_id TEXT NOT NULL,
+    specification_json TEXT NOT NULL,
+    foundry_source_revision_id TEXT NOT NULL,
+    source_provider_json TEXT NOT NULL,
+    foundry_request_id TEXT NOT NULL,
+    FOREIGN KEY (workspace_id) REFERENCES workspace(id),
+    FOREIGN KEY (foundry_source_revision_id) REFERENCES foundry_source_revision(id),
+    FOREIGN KEY (foundry_request_id) REFERENCES foundry_request(id)
+)
+''',
+
+
+'''
+CREATE INDEX knowledge_collection_revision_workspace_id_non_unique_index ON knowledge_collection_revision(workspace_id);
+''',
+
+
+'''
+CREATE INDEX knowledge_collection_revision_collection_id_non_unique_index ON knowledge_collection_revision(collection_id);
+''',
 ]
