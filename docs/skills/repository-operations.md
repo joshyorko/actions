@@ -6438,3 +6438,11 @@ with mocked process execution without credentials or live signing.
 Qualify optional Agent endpoint boundaries in the complete Core suite with the
 isolated official truststore selector, followed by configured lint and typecheck.
 Source-suite results remain separate from frozen installed candidate acceptance.
+
+A malformed Chromium setuid helper is not always repairable by ownership alone.
+Inspect helper ownership/mode, its mount flags and inherited NoNewPrivs before
+proposing a repair. A read-only/nosuid mount plus NoNewPrivs makes chown insufficient.
+Use an owner-provisioned separate non-root browser environment with supported user
+namespace sandboxing and the candidate's locked Playwright version. A successful
+sandboxed page preflight is required before host acceptance; never treat the
+presence of managed Chromium binaries as evidence that sandbox launch works.
