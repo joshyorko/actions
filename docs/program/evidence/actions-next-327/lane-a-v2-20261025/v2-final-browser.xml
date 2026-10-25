@@ -1,0 +1,22 @@
+<testsuites id="" name="" tests="9" failures="0" skipped="0" errors="0" time="9.784637">
+<testsuite name="browser-harness.spec.ts" timestamp="2026-10-25T14:30:41.088Z" hostname="" tests="9" failures="0" skipped="0" time="6.207" errors="0">
+<testcase name="renders and dispatches a synthetic component form in a browser" classname="browser-harness.spec.ts" time="0.753">
+</testcase>
+<testcase name="keeps wide results within the page at 320px" classname="browser-harness.spec.ts" time="0.767">
+</testcase>
+<testcase name="keeps wide results within the page at 1280px" classname="browser-harness.spec.ts" time="0.836">
+</testcase>
+<testcase name="keeps long titles and maximum-depth cards within a narrow viewport" classname="browser-harness.spec.ts" time="0.577">
+</testcase>
+<testcase name="announces pending work and a response without dispatch on mount" classname="browser-harness.spec.ts" time="0.705">
+</testcase>
+<testcase name="shows truthful error results and permits retry" classname="browser-harness.spec.ts" time="0.599">
+</testcase>
+<testcase name="shows truthful empty results and permits retry" classname="browser-harness.spec.ts" time="0.635">
+</testcase>
+<testcase name="v2 presentations remain readable and keyboard accessible at 320px" classname="browser-harness.spec.ts" time="0.689">
+</testcase>
+<testcase name="v2 presentations remain readable and keyboard accessible at 1280px" classname="browser-harness.spec.ts" time="0.646">
+</testcase>
+</testsuite>
+</testsuites>

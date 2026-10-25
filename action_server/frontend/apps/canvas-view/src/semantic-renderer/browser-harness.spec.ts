@@ -78,6 +78,26 @@ for (const width of [320, 1280]) {
     });
 }
 
+test("keeps long titles and maximum-depth cards within a narrow viewport", async ({
+    page,
+}, testInfo) => {
+    await page.setViewportSize({ width: 320, height: 900 });
+    await page.goto(
+        "/src/semantic-renderer/browser-harness.html?scenario=v2-nesting",
+    );
+    await expect(
+        page.getByText("Deepest content remains readable."),
+    ).toBeVisible();
+    await expect(page.getByRole("heading", { level: 2 })).toHaveCount(7);
+    expect(
+        await page.evaluate(() => document.documentElement.scrollWidth),
+    ).toBe(320);
+    await page.screenshot({
+        path: testInfo.outputPath("v2-nested-cards-320.png"),
+        fullPage: true,
+    });
+});
+
 test("announces pending work and a response without dispatch on mount", async ({
     page,
 }, testInfo) => {
@@ -149,6 +169,49 @@ for (const scenario of ["error", "empty"]) {
         await expect(form.getByRole("button")).toBeEnabled();
         await page.screenshot({
             path: testInfo.outputPath(`form-${scenario}.png`),
+            fullPage: true,
+        });
+    });
+}
+
+for (const width of [320, 1280]) {
+    test(`v2 presentations remain readable and keyboard accessible at ${width}px`, async ({
+        page,
+    }, testInfo) => {
+        await page.setViewportSize({ width, height: 900 });
+        await page.goto(
+            "/src/semantic-renderer/browser-harness.html?scenario=v2-presentation",
+        );
+        await expect(
+            page.getByRole("heading", { name: "Daily activity" }),
+        ).toBeVisible();
+        await expect(
+            page.getByRole("img", { name: "Processed items" }),
+        ).toBeVisible();
+        await expect(
+            page.getByRole("table", { name: "Processed items data" }),
+        ).toBeVisible();
+        await expect(
+            page.getByRole("img", { name: "Queue changes" }),
+        ).toBeVisible();
+        await expect(
+            page.getByRole("table", { name: "Queue changes data" }),
+        ).toBeVisible();
+        expect(
+            await page.evaluate(() => document.documentElement.scrollWidth),
+        ).toBe(width);
+        const log = page.getByRole("region", { name: "Run messages entries" });
+        await log.focus();
+        await expect(log).toBeFocused();
+        await page.keyboard.press("ArrowDown");
+        await expect
+            .poll(() => log.evaluate((element) => element.scrollTop))
+            .toBeGreaterThan(0);
+        await expect(
+            page.getByRole("region", { name: "Selected record" }),
+        ).toContainText("false");
+        await page.screenshot({
+            path: testInfo.outputPath(`v2-presentation-${width}.png`),
             fullPage: true,
         });
     });

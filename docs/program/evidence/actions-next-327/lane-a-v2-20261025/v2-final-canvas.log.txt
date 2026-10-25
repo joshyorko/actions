@@ -1,0 +1,181 @@
+"/workspace/lane-a/developer/toolkit.yaml" as robot.yaml is:
+# Repository developer toolkit.
+#
+# RCC owns the reproducible toolchain and task boundary. Poetry remains the
+# dependency and package-release authority inside each package.
+
+tasks:
+  Doctor:
+    shell: python toolkit.py doctor
+
+devTasks:
+  Doctor:
+    shell: python toolkit.py doctor
+  Bootstrap:
+    shell: python toolkit.py bootstrap
+  Test:
+    shell: python toolkit.py test
+  ToolkitTest:
+    shell: python toolkit.py toolkit-test
+  Lint:
+    shell: python toolkit.py lint
+  Typecheck:
+    shell: python toolkit.py typecheck
+  Docs:
+    shell: python toolkit.py docs
+  CheckAll:
+    shell: python toolkit.py check-all
+  Coverage:
+    shell: python toolkit.py coverage
+  FrontendTest:
+    shell: python toolkit.py frontend-test
+  InstallCommunity:
+    shell: python toolkit.py install-community
+  InvoiceQueryTest:
+    shell: python toolkit.py invoice-query-test
+  InvoiceReconciliationDemo:
+    shell: python toolkit.py invoice-reconciliation-demo
+  FencedWorkItemsTest:
+    shell: python toolkit.py fenced-work-items-test
+
+environmentConfigs:
+  - setup_windows_amd64.yaml
+  - setup.yaml
+
+artifactsDir: tmp
+
+PATH:
+  - .
+PYTHONPATH:
+  - .
+ignoreFiles:
+  - ../.gitignore
+
+Note! For now, resolved effective environment configuration file is "/workspace/lane-a/developer/setup.yaml".
+####  Progress: 00/15  v18.19.3     0.042s  Context: "" <agent@71cd163cf8ad> [linux_amd64/Debian GNU/Linux 13 (trixie) [id=debian; version=13]].
+####  Progress: 01/15  v18.19.3     0.001s  Fresh [private mode] holotree environment 9a080d0f-3bcf-90aa-16c6-25dc61b0ece5. (parent/pid: 17701/17704)
+####  Progress: 02/15  v18.19.3     0.001s  Holotree blueprint is "318089d9095ad813" [linux_amd64 with 4 workers on 5 CPUs from "setup.yaml"].
+FINAL unified conda environment descriptor:
+---
+channels:
+- conda-forge
+dependencies:
+- python=3.12
+- git=2.46.0
+- nodejs=20.19.3
+- go=1.23.6
+- jq=1.7.1
+- uv=0.9.26
+- pip=25.0
+- pip:
+  - invoke==2.2.0
+  - poetry==2.1.1
+  - pyyaml==6.0.2
+  - pytest==8.3.4
+  - ruff==0.8.6
+---
+####  Progress: 14/15  v18.19.3     0.430s  Restore space from library [with 4 workers on 5 CPUs; with compression: true].
+Installation plan is: /workspace/lane-a-state/rcc/holotree/c2fd1aa_5a1fac3_9fcd2534/rcc_plan.log
+Environment configuration descriptor is: /workspace/lane-a-state/rcc/holotree/c2fd1aa_5a1fac3_9fcd2534/identity.yaml
+####  Progress: 15/15  v18.19.3     0.793s  Fresh holotree done [with 4 workers on 5 CPUs].
+Note: [Before run] Artifact dir "/workspace/lane-a/developer/tmp" already has "environment_linux_amd64_freeze.yaml" in it.
+Note: [Before run] Artifact dir "/workspace/lane-a/developer/tmp" already has "stderr.log" in it.
+Note: [Before run] Artifact dir "/workspace/lane-a/developer/tmp" already has "stdout.log" in it.
+Above notes mean, that there were files present in directory that was supposed to be empty!
+In robot development phase, it might be ok to have these files while building robot.
+In production robot/assistant, this might be a mistake, where development files were
+left inside robot.zip file. Report these to developer who made this robot/assistant.
+
+> actions-runtime-frontend@0.0.1 test:canvas
+> vitest --run --config apps/canvas-view/vitest.config.ts --reporter=default --reporter=junit --outputFile=/workspace/lane-a-state/receipts/v2-final-canvas.xml
+
+
+ RUN  v4.1.10 /workspace/lane-a/action_server/frontend/apps/canvas-view
+
+Browserslist: browsers data (caniuse-lite) is 10 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+ ✓ src/semantic-renderer/v2-projections.test.tsx (34 tests) 1175ms
+ ✓ src/semantic-renderer/semantic-components.test.tsx (16 tests) 1733ms
+     ✓ treats an untouched required constructor field as empty and never dispatches  380ms
+     ✓ dispatches fixture integer and boolean fields as number and boolean  351ms
+ ✓ src/query-results/QueryResultsView.test.tsx (12 tests) 1915ms
+ ✓ src/query-results/InvoiceReviewPanel.test.tsx (5 tests) 493ms
+ ❯ src/semantic-renderer/mcp-bridge.test.tsx (12 tests | 8 failed) 79ms
+     × renders canonical package-local capability action.generated_echo without invoking it 39ms
+     × renders canonical package-local capability action.résumé without invoking it 5ms
+     ✓ rejects invalid package-local capability "" 2ms
+     ✓ rejects invalid package-local capability "é" 1ms
+     ✓ rejects invalid package-local capability "\ud800" 1ms
+     × renders semantic state from tool-result metadata and stays read-only 4ms
+     × renders a preview reply without enabling its form 3ms
+     × remounts view state when the immutable app revision changes 3ms
+     × respects the app audience projection without exposing hidden details 5ms
+     × preserves the query fixture adapter and explicit query submission 7ms
+     × preserves invoice metadata rendering without querying on open 3ms
+     ✓ rejects malformed schema and binding scope before rendering 2ms
+ ✓ src/semantic-renderer/generic-output.test.tsx (6 tests) 263ms
+ ✓ src/semantic-renderer/v2-presentations.test.tsx (7 tests) 202ms
+ ✓ src/semantic-renderer/generic-input.test.tsx (6 tests) 280ms
+ ✓ src/semantic-renderer/generic-view.test.tsx (4 tests) 303ms
+ ✓ src/semantic-renderer/generic-layout.test.tsx (7 tests) 267ms
+ ✓ src/query-results/InvoiceReconciliation.test.tsx (2 tests) 169ms
+ ✓ src/semantic-renderer/v2-structure.test.tsx (2 tests) 131ms
+ ✓ src/semantic-renderer/generic-execution.test.tsx (4 tests) 65ms
+ ✓ src/semantic-renderer/mcp-bridge-v2.test.tsx (22 tests) 34ms
+ ✓ src/query-results/CanvasContractRoundTrip.test.tsx (2 tests | 1 skipped) 8ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 8 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/semantic-renderer/mcp-bridge.test.tsx > official MCP Canvas bridge > renders canonical package-local capability action.generated_echo without invoking it
+ FAIL  src/semantic-renderer/mcp-bridge.test.tsx > official MCP Canvas bridge > renders canonical package-local capability action.résumé without invoking it
+ FAIL  src/semantic-renderer/mcp-bridge.test.tsx > official MCP Canvas bridge > renders semantic state from tool-result metadata and stays read-only
+ FAIL  src/semantic-renderer/mcp-bridge.test.tsx > official MCP Canvas bridge > renders a preview reply without enabling its form
+ FAIL  src/semantic-renderer/mcp-bridge.test.tsx > official MCP Canvas bridge > remounts view state when the immutable app revision changes
+ FAIL  src/semantic-renderer/mcp-bridge.test.tsx > official MCP Canvas bridge > respects the app audience projection without exposing hidden details
+ FAIL  src/semantic-renderer/mcp-bridge.test.tsx > official MCP Canvas bridge > preserves the query fixture adapter and explicit query submission
+ FAIL  src/semantic-renderer/mcp-bridge.test.tsx > official MCP Canvas bridge > preserves invoice metadata rendering without querying on open
+Error: [vitest] No "useHostStyleVariables" export is defined on the "@modelcontextprotocol/ext-apps/react" mock. Did you forget to return it from "vi.mock"?
+If you need to partially mock a module, you can use "importOriginal" helper inside:
+
+vi.mock(import("@modelcontextprotocol/ext-apps/react"), async (importOriginal) => {
+  const actual = await importOriginal()
+  return {
+    ...actual,
+    // your mocked methods
+  }
+})
+
+ ❯ McpCanvasView src/McpCanvasView.tsx:317:5
+    315|     });
+    316|
+    317|     useHostStyleVariables(app, app?.getHostContext());
+       |     ^
+    318|
+    319|     useEffect(() => {
+ ❯ Object.react_stack_bottom_frame ../../node_modules/react-dom/cjs/react-dom-client.development.js:25904:20
+ ❯ renderWithHooks ../../node_modules/react-dom/cjs/react-dom-client.development.js:7662:22
+ ❯ updateFunctionComponent ../../node_modules/react-dom/cjs/react-dom-client.development.js:10166:19
+ ❯ beginWork ../../node_modules/react-dom/cjs/react-dom-client.development.js:11778:18
+ ❯ runWithFiberInDEV ../../node_modules/react-dom/cjs/react-dom-client.development.js:874:13
+ ❯ performUnitOfWork ../../node_modules/react-dom/cjs/react-dom-client.development.js:17641:22
+ ❯ workLoopSync ../../node_modules/react-dom/cjs/react-dom-client.development.js:17469:41
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/8]⎯
+
+
+ Test Files  1 failed | 14 passed (15)
+      Tests  8 failed | 132 passed | 1 skipped (141)
+   Start at  14:28:36
+   Duration  10.74s (transform 1.14s, setup 3.75s, import 4.34s, tests 7.12s, environment 9.51s)
+
+JUNIT report written to /workspace/lane-a-state/receipts/v2-final-canvas.xml
+Process 17720: exit status 1, command: /usr/bin/bash [-c cd /workspace/lane-a/action_server/frontend && npm run test:canvas -- --reporter=default --reporter=junit --outputFile=/workspace/lane-a-state/receipts/v2-final-canvas.xml] [v18.19.3/17704]
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@  From rcc "v18.19.3" (controller: "user") point of view, "actual main robot run" was FAILURE, reason: "exit status 1". See details above.  @@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  |  "Build/Pre-run"  relative time allocation ratio:  1:0
+  |  "Setup/Run"  relative time allocation ratio:  13:128
+Note: Now running rcc v18.19.3. There is newer rcc version v18.19.7 available, released at 15.10.2026.
+Error: exit status 1 (robot run exit)
+[rcc] exit status will be: 10!

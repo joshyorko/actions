@@ -4,6 +4,7 @@ import type { GenericExecutionContext } from "./semantic-renderer/generic-execut
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
     useApp,
+    useHostStyleVariables,
     type App,
     type McpUiHostContext,
 } from "@modelcontextprotocol/ext-apps/react";
@@ -312,6 +313,8 @@ export function McpCanvasView() {
             });
         },
     });
+
+    useHostStyleVariables(app, app?.getHostContext());
 
     useEffect(() => {
         if (isConnected && app) {
