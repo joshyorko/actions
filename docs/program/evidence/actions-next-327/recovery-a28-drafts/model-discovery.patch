@@ -1,0 +1,806 @@
+--- /dev/null
++++ b/action_server/src/actions/server/foundry/invocation_discovery.py
+@@ -0,0 +1,244 @@
++"""Authorized model projection of existing immutable generic invocation inputs.
++
++No app metadata, source, results, tokens, credentials or worker identity is copied.
++This reader neither registers admission nor grants permission; dispatch owns
++registration after reauthorization. DTO references themselves confer no authority.
++"""
++from __future__ import annotations
++
++import hashlib
++import json
++from dataclasses import replace
++from typing import Literal
++
++from actions.canvas_contract._models import MAX_BINDING_COUNT
++from pydantic import BaseModel, ConfigDict, Field, JsonValue
++
++from actions.server.deployments.foundry_service import FoundryDeploymentService
++from actions.server.deployments.ids import DeploymentId, WorkspaceId
++from actions.server.foundry.generic_work_item_execution import GenericWorkItemExecution
++from actions.server.foundry.mcp import CanvasCaller, CanvasReply
++from actions.server.managed_work_items.contracts import (
++    ManagedCaller,
++    Permission,
++    QueueAuthorizationPort,
++    QueueRef,
++)
++from actions.server.run_outputs.service import (
++    AccessDenied,
++    RunOutputService,
++    _canonical,
++    _transaction,
++)
++from actions.server.run_outputs.types import ExecutionSnapshot
++
++
++class GenericInvocationDescriptor(BaseModel):
++    model_config = ConfigDict(frozen=True, strict=True, extra="forbid")
++    binding_id: str = Field(alias="bindingId", pattern=r"^[A-Za-z][A-Za-z0-9_-]{0,63}$")
++    mode: Literal["generic"] = "generic"
++    snapshot: ExecutionSnapshot
++    input_mode: Literal["none", "optional", "required", "claim"] = Field(
++        alias="inputMode"
++    )
++    input_queue: QueueRef | None = Field(alias="inputQueue")
++    standalone_allowed: bool = Field(alias="standaloneAllowed")
++    input_schema: dict[str, JsonValue] = Field(alias="inputSchema")
++
++
++def _input_schema(registry, snapshot: ExecutionSnapshot) -> dict[str, JsonValue]:
++    schema = registry.schema_for(snapshot)
++    capability = registry.get_capability(snapshot.capability)
++    if (
++        capability is None
++        or schema.capability != snapshot.capability
++        or schema.runtime_plan != snapshot.runtime_plan
++        or capability.schema_digest
++        != "sha256:" + hashlib.sha256(schema.input_schema.encode()).hexdigest()
++    ):
++        raise AccessDenied("immutable capability schema differs")
++    parsed = json.loads(schema.input_schema)
++    if not isinstance(parsed, dict):
++        raise AccessDenied("object input schema required")
++    try:
++        _canonical(parsed, 32 * 1024)
++    except ValueError:
++        raise AccessDenied("input schema exceeds discovery bound") from None
++
++    def project(value):
++        if not isinstance(value, dict):
++            return value
++        result = {}
++        for key, child in value.items():
++            if key in {"default", "examples", "example"}:
++                continue
++            if key in {
++                "properties",
++                "patternProperties",
++                "$defs",
++                "definitions",
++                "dependentSchemas",
++            } and isinstance(child, dict):
++                result[key] = {name: project(spec) for name, spec in child.items()}
++            elif key in {"allOf", "anyOf", "oneOf", "prefixItems"} and isinstance(
++                child, list
++            ):
++                result[key] = [project(spec) for spec in child]
++            elif key in {
++                "items",
++                "additionalProperties",
++                "unevaluatedProperties",
++                "contains",
++                "not",
++                "if",
++                "then",
++                "else",
++                "propertyNames",
++            }:
++                result[key] = project(child)
++            else:
++                result[key] = child
++        return result
++
++    return project(parsed)
++
++
++class GenericInvocationDiscovery:
++    def __init__(
++        self,
++        deployments: FoundryDeploymentService,
++        outputs: RunOutputService,
++        authorization: QueueAuthorizationPort,
++    ):
++        if deployments._repository._db is not outputs.db:
++            raise ValueError("one canonical SQL authority required")
++        self.deployments, self.outputs, self.authorization = (
++            deployments,
++            outputs,
++            authorization,
++        )
++        self.db = outputs.db
++
++    def describe(
++        self,
++        caller: CanvasCaller,
++        name: str,
++        arguments: dict[str, JsonValue],
++        reply: CanvasReply,
++    ) -> CanvasReply:
++        if caller.audience != "model" or caller.scope is not None:
++            return reply
++        if name not in ("canvas_get", "canvas_inspect") or not isinstance(
++            reply.model_result, dict
++        ):
++            return reply
++        descriptors: list[JsonValue] = []
++        workspace = WorkspaceId.model_validate(caller.workspace_id)
++        application = DeploymentId.model_validate(arguments.get("appId"))
++        if reply.model_result.get("applicationId") != str(application.root):
++            raise AccessDenied("application projection differs")
++        reported = reply.model_result.get(
++            "revisionId" if name == "canvas_get" else "activeRevisionId"
++        )
++        with self.db.connect(), _transaction(self.db):
++            current = self.deployments._repository.current(workspace, application)
++            if (
++                current is not None
++                and current.revision.ref.revision_id.root == reported
++            ):
++                selection = current.revision.specification
++                if selection.canvas_application is not None:
++                    if selection.canvas_application.app_id != str(application.root):
++                        raise AccessDenied("immutable Canvas application differs")
++                    policies = {p.capability: p for p in selection.work_item_policies}
++                    plans = {
++                        p.capability: p.default_plan for p in selection.capability_plans
++                    }
++                    for binding in selection.canvas_bindings:
++                        policy = policies.get(binding.capability)
++                        plan = plans.get(binding.capability)
++                        # No invented policy/default. None-mode execution has a
++                        # separate adapter and is not advertised by this slice.
++                        if policy is None or plan is None:
++                            continue
++                        if (
++                            policy.input_queue is not None
++                            and policy.output_queue
++                            not in (None, policy.input_queue + "_output")
++                        ):
++                            continue
++                        try:
++                            resolved = self.deployments.resolve(
++                                caller.actor,
++                                workspace,
++                                application,
++                                binding.capability,
++                                revision=current.revision.ref,
++                                runtime_plan=plan,
++                            )
++                            snapshot = resolved.snapshot
++                            if (
++                                snapshot.runtime_kind != "rcc"
++                                or snapshot.provider_key not in self.outputs.providers
++                            ):
++                                continue
++                            service = GenericWorkItemExecution(
++                                self.deployments,
++                                self.outputs,
++                                snapshot,
++                                policy,
++                                self.authorization,
++                            )
++                            managed = ManagedCaller(actor=caller.actor)
++                            # Includes exact resolved policy and live Run execute
++                            # and Package/profile grants, not merely deploy/read.
++                            declaration = service._current(managed)
++                            if policy.input_queue is not None:
++                                service._permission(
++                                    managed, policy.input_queue, Permission.READ
++                                )
++                                if policy.input_mode in ("required", "claim"):
++                                    service._permission(
++                                        managed, policy.input_queue, Permission.CLAIM
++                                    )
++                            if policy.output_queue is not None:
++                                for permission in (Permission.READ, Permission.ENQUEUE):
++                                    service._permission(
++                                        managed, policy.output_queue, permission
++                                    )
++                            schema = _input_schema(service.registry, snapshot)
++                            descriptor = GenericInvocationDescriptor(
++                                bindingId=binding.binding_id,
++                                inputSchema=schema,
++                                snapshot=snapshot,
++                                inputMode=policy.input_mode,
++                                inputQueue=service.queue_ref(policy.input_queue)
++                                if policy.input_queue
++                                else None,
++                                standaloneAllowed=declaration.mode
++                                in ("optional", "producer"),
++                            )
++                            descriptors.append(
++                                descriptor.model_dump(mode="json", by_alias=True)
++                            )
++                        except PermissionError:
++                            # Do not disclose which private reference or grant
++                            # is absent to an otherwise authorized UI reader.
++                            continue
++        if len(descriptors) > MAX_BINDING_COUNT:
++            raise ValueError("bounded binding discovery required")
++        omission = None
++        try:
++            _canonical(descriptors, 128 * 1024)
++        except ValueError:
++            descriptors = []
++            omission = "aggregate-size-limit"
++        model = dict(
++            reply.model_result,
++            invocationDescriptors=descriptors,
++            invocationAvailability="authorized" if descriptors else "unavailable",
++            invocationReadiness="not-checked",
++        )
++        if omission is not None:
++            model["invocationOmission"] = omission
++        return replace(reply, model_result=model)
+--- a/action_server/src/actions/server/foundry/generic_execution_port.py
++++ b/action_server/src/actions/server/foundry/generic_execution_port.py
+@@ -151,12 +151,47 @@
+             runner,
+         )
+         self.schemas = dict(reviewed.schemas, capability_invoke=_SCHEMA)
++        boundary = (
++            " Authorized immutable execution references and input schemas may appear "
++            "for the active binding. References are not grants; availability indicates "
++            "authority, not execution readiness. Backend source, connection secrets, "
++            "and app-session metadata remain omitted."
++        )
++        for name, purpose in (
++            (
++                "canvas_get",
++                "Read the authorized app's latest authored CanvasSpec or one exact revision.",
++            ),
++            (
++                "canvas_inspect",
++                "Inspect authorized immutable revision history and identify the active revision; each revision includes its authored CanvasSpec.",
++            ),
++        ):
++            if name in self.schemas:
++                self.schemas[name] = dict(
++                    self.schemas[name], description=purpose + boundary
++                )
+ 
+     async def call(
+         self, caller: CanvasCaller, name: str, arguments: dict[str, JsonValue]
+     ) -> CanvasReply:
+         if name != "capability_invoke" or "mode" not in arguments:
+-            return await self.reviewed.call(caller, name, arguments)
++            reply = await self.reviewed.call(caller, name, arguments)
++            if name in {"canvas_get", "canvas_inspect"}:
++                from actions.server.foundry.invocation_discovery import (
++                    GenericInvocationDiscovery,
++                )
++
++                return await asyncio.to_thread(
++                    GenericInvocationDiscovery(
++                        self.deployments, self.outputs, self.authorization
++                    ).describe,
++                    caller,
++                    name,
++                    arguments,
++                    reply,
++                )
++            return reply
+         if caller.audience != "model" or caller.scope is not None:
+             raise AccessDenied(
+                 "generic invocation requires authenticated model context"
+--- a/action_server/src/actions/server/foundry/generic_work_item_execution.py
++++ b/action_server/src/actions/server/foundry/generic_work_item_execution.py
+@@ -39,6 +39,7 @@
+ from actions.server.run_outputs.service import (
+     AccessDenied,
+     FenceRejected,
++    RunOutputControlPlane,
+     RunOutputService,
+     _canonical,
+     _key,
+@@ -436,6 +437,12 @@
+     def _dispatch(self, caller, inputs, key, claim, lease_seconds):
+         if caller.worker_id is None:
+             raise AccessDenied("server-held worker identity required")
++        # The public entry already resolved and authorized this exact immutable
++        # snapshot. Join canonical admission here, never at startup/discovery,
++        # and never create an execution grant as a side effect.
++        RunOutputControlPlane(self.db, capabilities=self.registry).register(
++            self.snapshot
++        )
+         run = self.base.admit(caller.actor, self.snapshot, inputs, key)
+         pin = _one(self.db, RunPin, run.id)
+         if claim and run.status not in (RunStatus.PASSED, RunStatus.FAILED):
+--- /dev/null
++++ b/action_server/tests/action_server_tests/test_generic_invocation_discovery.py
+@@ -0,0 +1,482 @@
++"""Model-safe discovery over real canonical SQL; synthetic runner only."""
++import asyncio
++import json
++from uuid import uuid4
++
++import pytest
++from action_server_tests import test_generic_work_item_execution as fixtures
++from action_server_tests.test_generic_execution_port import SyntheticRunner
++from actions.canvas_contract import validate_canvas_spec
++
++from actions.server._models import Run
++from actions.server.deployments.foundry_values import (
++    CanvasCapabilityBinding,
++    DeploymentSpecification,
++    canvas_revision_digest,
++)
++from actions.server.deployments.ids import DeploymentId
++from actions.server.foundry.generic_execution_port import GenericCanvasExecution
++from actions.server.foundry.generic_work_item_execution import GenericWorkItemExecution
++from actions.server.foundry.mcp import CanvasCaller, CanvasReply
++from actions.server.foundry.models import FoundryAccessGrant
++from actions.server.foundry.sql_authorization import reference_grant_subject
++from actions.server.managed_work_items.contracts import Permission
++from actions.server.run_outputs.models import RunAdmission
++from actions.server.run_outputs.service import (
++    AccessDenied,
++    RunOutputControlPlane,
++    _update,
++)
++from actions.server.run_outputs.types import CanvasApplicationRef
++
++pytest_plugins = ["action_server_tests.foundry_fixtures"]
++
++
++@pytest.fixture
++def bound(database_location, foundry_package_store, request):
++    fixture = fixtures.generic.__wrapped__(database_location, foundry_package_store)
++    setup = next(fixture)
++    try:
++        g = setup("optional")
++        old = g.owner.snapshot
++        app = DeploymentId(uuid4())
++        binding_ids = (
++            ["echo"]
++            if getattr(request, "param", 1) == 1
++            else [f"echo{i}" for i in range(request.param)]
++        )
++        spec = validate_canvas_spec(
++            {
++                "schemaVersion": "actions.canvas-spec/v1",
++                "title": "Discovery",
++                "visibility": ["model", "app"],
++                "bindingIds": binding_ids,
++                "root": {
++                    "type": "stack",
++                    "id": "root",
++                    "children": [
++                        {"type": "status", "id": f"output{i}", "bindingId": binding}
++                        for i, binding in enumerate(binding_ids)
++                    ],
++                },
++            }
++        )
++        bindings = tuple(
++            CanvasCapabilityBinding(binding_id=name, capability=old.capability)
++            for name in binding_ids
++        )
++        current = g.owner.deployments._repository.current(
++            old.deployment.workspace_id, old.deployment.deployment_id
++        )
++        values = current.revision.specification.model_dump(mode="json")
++        values.update(
++            canvas_spec=spec.model_dump(mode="json", by_alias=True),
++            canvas_bindings=[binding.model_dump(mode="json") for binding in bindings],
++            canvas_application=CanvasApplicationRef(
++                workspace_id=old.workspace_id,
++                app_id=str(app.root),
++                revision_id=canvas_revision_digest(
++                    spec, bindings, current.revision.specification.package_revisions
++                ),
++            ).model_dump(mode="json"),
++        )
++        selection = DeploymentSpecification.model_validate_json(json.dumps(values))
++        revision = g.owner.deployments.create(
++            g.caller.actor,
++            old.deployment.workspace_id,
++            app,
++            selection,
++            idempotency_key="bound-app",
++        )
++        grant = fixtures.grant(
++            g.db,
++            g.caller.actor,
++            old.deployment.workspace_id,
++            "reference",
++            reference_grant_subject(revision.ref),
++            ["deploy", "execute", "read_application", *[p.value for p in Permission]],
++        )
++        snapshot = g.owner.deployments.resolve(
++            g.caller.actor, old.deployment.workspace_id, app, old.capability
++        ).snapshot
++        RunOutputControlPlane(g.db, capabilities=g.owner.registry).grant(
++            g.caller.actor, snapshot.deployment, {"execute", "read"}
++        )
++        g.owner = GenericWorkItemExecution(
++            g.owner.deployments,
++            g.owner.base,
++            snapshot,
++            g.owner.policy,
++            g.owner.authorization,
++        )
++        g.grant = grant
++        g.caller_model = CanvasCaller(g.caller.actor, snapshot.workspace_id, "model")
++        yield g
++    finally:
++        try:
++            next(fixture)
++        except StopIteration:
++            pass
++
++
++class View:
++    schemas = {
++        "canvas_dispatch": {},
++        "capability_invoke": {},
++        "canvas_get": {},
++        "canvas_inspect": {},
++    }
++
++    def __init__(self, g):
++        self.g = g
++
++    async def call(self, caller, name, args):
++        snapshot = self.g.owner.snapshot
++        return CanvasReply(
++            summary="authorized app",
++            model_result={
++                "applicationId": snapshot.deployment_id,
++                "revisionId": snapshot.deployment.revision_id.root,
++                "activeRevisionId": snapshot.deployment.revision_id.root,
++            },
++            view_state={
++                "private-result": "must-not-leak",
++                "private-token": "not-a-model-descriptor",
++                "connection-secret": "synthetic-connection-secret",
++                "backend-source": "synthetic-backend-source",
++            },
++        )
++
++
++def port(g):
++    return GenericCanvasExecution(
++        View(g),
++        g.owner.deployments,
++        g.owner.base,
++        g.owner.authorization,
++        worker_id=g.caller.worker_id,
++        runner=SyntheticRunner(),
++    )
++
++
++def get(g, name="canvas_get"):
++    return asyncio.run(
++        port(g).call(g.caller_model, name, {"appId": g.owner.snapshot.deployment_id})
++    )
++
++
++def test_descriptor_exact_model_shape_without_admission_or_mutation(bound):
++    g = bound
++    before = (len(g.db.all(RunAdmission)), len(g.db.all(FoundryAccessGrant)))
++    result = get(g)
++    descriptors = result.model_result["invocationDescriptors"]
++    assert len(descriptors) == 1
++    descriptor = descriptors[0]
++    assert descriptor["snapshot"] == g.owner.snapshot.model_dump(mode="json")
++    assert descriptor["bindingId"] == "echo" and descriptor["standaloneAllowed"]
++    assert descriptor["inputQueue"] == g.owner.queue_ref(
++        g.owner.policy.input_queue
++    ).model_dump(mode="json")
++    for private in (
++        "private-result",
++        "private-token",
++        "not-a-model-descriptor",
++        "synthetic-connection-secret",
++        "synthetic-backend-source",
++    ):
++        assert private not in json.dumps(descriptor)
++    assert "private-result" not in json.dumps(result.model_result)
++    assert (len(g.db.all(RunAdmission)), len(g.db.all(FoundryAccessGrant))) == before
++    assert not g.db.all(Run)
++    assert get(g, "canvas_inspect").model_result["invocationDescriptors"] == descriptors
++
++
++@pytest.mark.parametrize("revoke", ["run", "foundry"])
++def test_descriptor_revocation_exposes_no_private_reference(bound, revoke):
++    g = bound
++    if revoke == "run":
++        RunOutputControlPlane(g.db).revoke(g.caller.actor, g.owner.snapshot.deployment)
++    else:
++        with g.db.transaction():
++            _update(
++                g.db,
++                FoundryAccessGrant,
++                g.grant.id,
++                {"operations_json": '["read_application"]'},
++            )
++    reply = get(g)
++    assert reply.model_result["invocationDescriptors"] == []
++    assert reply.model_result["invocationAvailability"] == "unavailable"
++    assert "package_id" not in json.dumps(reply.model_result)
++
++
++def test_discovered_descriptor_invokes_and_registers_only_on_dispatch(bound):
++    g = bound
++    descriptor = get(g).model_result["invocationDescriptors"][0]
++    before = len(g.db.all(RunAdmission))
++    reply = asyncio.run(
++        port(g).call(
++            g.caller_model,
++            "capability_invoke",
++            {
++                "mode": "generic",
++                "snapshot": descriptor["snapshot"],
++                "inputs": {"value": "from descriptor"},
++                "idempotencyKey": "invoke-discovered",
++            },
++        )
++    )
++    assert reply.model_result["execution"]["state"] == "completed"
++    assert len(g.db.all(RunAdmission)) == before + 1 and len(g.db.all(Run)) == 1
++
++
++def test_denied_dispatch_does_not_register(bound):
++    g = bound
++    RunOutputControlPlane(g.db).revoke(g.caller.actor, g.owner.snapshot.deployment)
++    before = len(g.db.all(RunAdmission))
++    with pytest.raises(AccessDenied):
++        g.owner.dispatch_standalone(
++            g.caller, {"value": "denied"}, "denied", lease_seconds=30
++        )
++    assert len(g.db.all(RunAdmission)) == before and not g.db.all(Run)
++
++
++def test_app_audience_never_receives_model_descriptor(bound):
++    g = bound
++    caller = CanvasCaller(g.caller.actor, g.owner.snapshot.workspace_id, "app")
++    reply = asyncio.run(
++        port(g).call(caller, "canvas_get", {"appId": g.owner.snapshot.deployment_id})
++    )
++    assert "invocationDescriptors" not in reply.model_result
++
++
++def test_nonactive_reported_revision_and_unconfigured_provider_omit_descriptor(bound):
++    g = bound
++    p = port(g)
++    original = p.reviewed.call
++
++    async def stale(caller, name, args):
++        from dataclasses import replace
++
++        reply = await original(caller, name, args)
++        return replace(
++            reply,
++            model_result=dict(reply.model_result, revisionId="sha256:" + "f" * 64),
++        )
++
++    p.reviewed.call = stale
++    reply = asyncio.run(
++        p.call(g.caller_model, "canvas_get", {"appId": g.owner.snapshot.deployment_id})
++    )
++    assert reply.model_result["invocationDescriptors"] == []
++    g.owner.base.providers = {}
++    assert get(g).model_result["invocationDescriptors"] == []
++
++
++def test_registration_rolls_back_with_failed_admission(bound, monkeypatch):
++    g = bound
++    before = len(g.db.all(RunAdmission))
++    grants = g.db.all(FoundryAccessGrant)
++
++    def fail(*args, **kwargs):
++        raise RuntimeError("synthetic claim failure")
++
++    monkeypatch.setattr(g.owner.base, "claim", fail)
++    with pytest.raises(RuntimeError, match="synthetic"):
++        g.owner.dispatch_standalone(
++            g.caller, {"value": "valid"}, "rollback", lease_seconds=30
++        )
++    assert len(g.db.all(RunAdmission)) == before
++    assert not g.db.all(Run) and g.db.all(FoundryAccessGrant) == grants
++
++
++def test_registration_is_idempotent_and_never_grants(bound):
++    g = bound
++    grants = g.db.all(FoundryAccessGrant)
++    before = len(g.db.all(RunAdmission))
++    one = g.owner.dispatch_standalone(
++        g.caller, {"value": "valid"}, "same", lease_seconds=30
++    )
++    two = g.owner.dispatch_standalone(
++        g.caller, {"value": "valid"}, "same", lease_seconds=30
++    )
++    assert one == two and len(g.db.all(RunAdmission)) == before + 1
++    assert len(g.db.all(Run)) == 1 and g.db.all(FoundryAccessGrant) == grants
++
++
++def test_large_existing_history_preserved_and_readiness_not_claimed(bound):
++    g = bound
++    p = port(g)
++    original = p.reviewed.call
++    history = [{"summary": "x" * 1024} for _ in range(150)]
++
++    async def large(caller, name, args):
++        from dataclasses import replace
++
++        reply = await original(caller, name, args)
++        return replace(reply, model_result=dict(reply.model_result, history=history))
++
++    p.reviewed.call = large
++    reply = asyncio.run(
++        p.call(
++            g.caller_model, "canvas_inspect", {"appId": g.owner.snapshot.deployment_id}
++        )
++    )
++    assert reply.model_result["history"] == history
++    assert reply.model_result["invocationAvailability"] == "authorized"
++    assert reply.model_result["invocationReadiness"] == "not-checked"
++
++
++def test_unsupported_output_routing_omitted_before_constructor(bound, monkeypatch):
++    import actions.server.foundry.invocation_discovery as discovery
++
++    g = bound
++    repository = g.owner.deployments._repository
++    original = repository.current
++
++    def unsupported(*args, **kwargs):
++        current = original(*args, **kwargs)
++        spec = current.revision.specification
++        policy = spec.work_item_policies[0].model_copy(
++            update={"output_queue": "different-output"}
++        )
++        changed = spec.model_copy(update={"work_item_policies": (policy,)})
++        return current.model_copy(
++            update={
++                "revision": current.revision.model_copy(
++                    update={"specification": changed}
++                )
++            }
++        )
++
++    monkeypatch.setattr(repository, "current", unsupported)
++
++    def forbidden(*args, **kwargs):
++        raise AssertionError("unsupported adapter must not be constructed")
++
++    monkeypatch.setattr(discovery, "GenericWorkItemExecution", forbidden)
++    assert get(g).model_result["invocationDescriptors"] == []
++
++
++def test_schema_is_exact_registry_projection(bound):
++    g = bound
++    descriptor = get(g).model_result["invocationDescriptors"][0]
++    assert descriptor["inputSchema"] == json.loads(
++        g.owner.registry.schema_for(g.owner.snapshot).input_schema
++    )
++    assert "input_schema" not in descriptor
++
++
++@pytest.mark.parametrize("mutation", ["digest", "capability"])
++def test_schema_identity_tamper_omits_descriptor(bound, monkeypatch, mutation):
++    from dataclasses import replace
++
++    g = bound
++    registry = g.owner.registry
++    original = registry.schema_for
++
++    def changed(snapshot):
++        schema = original(snapshot)
++        if mutation == "digest":
++            return replace(schema, input_schema='{"type":"object","properties":{}}')
++        capability = schema.capability.model_copy(update={"capability_id": "wrong"})
++        return replace(schema, capability=capability)
++
++    monkeypatch.setattr(registry, "schema_for", changed)
++    assert get(g).model_result["invocationDescriptors"] == []
++
++
++def test_schema_projection_preserves_property_alias_and_bounds_size(bound, monkeypatch):
++    import hashlib
++    from dataclasses import replace
++
++    from actions.server.foundry.invocation_discovery import _input_schema
++
++    g = bound
++    registry = g.owner.registry
++    original_schema = registry.schema_for(g.owner.snapshot)
++    original_capability = registry.get_capability(g.owner.snapshot.capability)
++    raw = json.dumps(
++        {
++            "type": "object",
++            "properties": {
++                "default": {
++                    "type": "string",
++                    "default": "private-default",
++                    "examples": ["private-example"],
++                }
++            },
++            "required": ["default"],
++        }
++    )
++    monkeypatch.setattr(
++        registry,
++        "schema_for",
++        lambda snapshot: replace(original_schema, input_schema=raw),
++    )
++    monkeypatch.setattr(
++        registry,
++        "get_capability",
++        lambda capability: replace(
++            original_capability,
++            schema_digest="sha256:" + hashlib.sha256(raw.encode()).hexdigest(),
++        ),
++    )
++    projected = _input_schema(registry, g.owner.snapshot)
++    assert projected["properties"] == {"default": {"type": "string"}}
++    assert projected["required"] == ["default"]
++    raw = json.dumps({"type": "object", "description": "x" * 32768})
++    with pytest.raises(AccessDenied, match="discovery bound"):
++        _input_schema(registry, g.owner.snapshot)
++
++
++def test_stored_package_schema_tamper_fails_closed(bound):
++    g = bound
++    with g.db.transaction():
++        g.db.execute(
++            "UPDATE foundry_package_revision SET manifest_json='{}' WHERE revision_id=?",
++            [g.owner.snapshot.capability.package_revision.revision_id.root],
++        )
++    assert get(g).model_result["invocationDescriptors"] == []
++
++
++def test_configured_descriptions_preserve_base_and_explain_reference_boundary(bound):
++    p = port(bound)
++    for name in ("canvas_get", "canvas_inspect"):
++        assert "description" not in p.reviewed.schemas[name]
++        assert p.schemas[name] is not p.reviewed.schemas[name]
++        description = p.schemas[name]["description"]
++        assert "References are not grants" in description
++        assert "execution references and input schemas" in description
++        assert (
++            "Backend source, connection secrets, and app-session metadata remain omitted"
++            in description
++        )
++        assert "not execution readiness" in description
++
++
++@pytest.mark.parametrize("bound", [32], indirect=True)
++def test_valid_multi_binding_aggregate_overflow_preserves_canvas_reply(
++    bound, monkeypatch
++):
++    import actions.server.foundry.invocation_discovery as discovery
++    from actions.server.run_outputs.service import _canonical
++
++    g = bound
++    schema = {"type": "object", "description": "x" * 8192}
++    assert len(_canonical(schema, 32 * 1024)) < 32 * 1024
++    monkeypatch.setattr(discovery, "_input_schema", lambda registry, snapshot: schema)
++    original = asyncio.run(
++        port(g).reviewed.call(
++            g.caller_model, "canvas_get", {"appId": g.owner.snapshot.deployment_id}
++        )
++    )
++    reply = get(g)
++    assert all(
++        reply.model_result[key] == value for key, value in original.model_result.items()
++    )
++    assert reply.view_state == original.view_state
++    assert reply.model_result["invocationDescriptors"] == []
++    assert reply.model_result["invocationAvailability"] == "unavailable"
++    assert reply.model_result["invocationOmission"] == "aggregate-size-limit"
++    assert len(_canonical(reply.model_result, 128 * 1024)) < 128 * 1024

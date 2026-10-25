@@ -1,0 +1,2192 @@
+diff --git a/action_server/src/actions/server/foundry/generic_view.py b/action_server/src/actions/server/foundry/generic_view.py
+new file mode 100644
+--- /dev/null
++++ b/action_server/src/actions/server/foundry/generic_view.py
+@@ -0,0 +1,554 @@
++"""Explicit semantic app interaction using existing ephemeral View sessions.
++
++Submit admits an ordinary Run; execute launches that exact retained admission.
++The two calls let the UI retain a Run id while execution is in flight. No task
++queue, background scheduler, grant or app-owned business state is introduced.
++"""
++from __future__ import annotations
++
++import asyncio
++import copy
++import json
++from contextlib import contextmanager
++from dataclasses import replace
++from typing import Literal
++from uuid import uuid4
++
++from pydantic import BaseModel, ConfigDict, Field, JsonValue, TypeAdapter
++
++from actions.server._models import RUN_ID_COUNTER, Run, RunStatus
++from actions.server.deployments.ids import DeploymentId, WorkspaceId
++from actions.server.foundry.execution_profiles import select_rcc_execution_profile
++from actions.server.foundry.generic_work_item_execution import GenericWorkItemExecution
++from actions.server.foundry.mcp import CanvasCaller, CanvasPort, CanvasReply
++from actions.server.foundry.models import FoundryAudit, FoundryRequest
++from actions.server.foundry.reviewed_view import (
++    ArtifactInput,
++    ProposalInput,
++    ViewAction,
++)
++from actions.server.foundry.standalone_execution import StandaloneActionExecution
++from actions.server.managed_work_items.contracts import ManagedCaller, Permission
++from actions.server.run_outputs.models import RunAttempt, RunPin
++from actions.server.run_outputs.service import (
++    AccessDenied,
++    FenceRejected,
++    _canonical,
++    _key,
++    _lock_workspace,
++    _now,
++    _one,
++    _returning,
++    _transaction,
++)
++from actions.server.run_outputs.types import (
++    CanvasResultScope,
++    OutputRef,
++    canonical_uuid,
++)
++
++
++class AppRunRequest(BaseModel):
++    model_config = ConfigDict(extra="forbid", strict=True)
++    mode: Literal["generic"]
++    binding_id: str = Field(alias="bindingId", pattern=r"^[A-Za-z][A-Za-z0-9_-]{0,63}$")
++    run_id: str = Field(alias="runId", pattern=r"^[0-9a-f-]{36}$")
++
++
++class AppSubmitRequest(BaseModel):
++    model_config = ConfigDict(extra="forbid", strict=True)
++    mode: Literal["generic"]
++    action: Literal["submit"]
++    binding_id: str = Field(alias="bindingId", pattern=r"^[A-Za-z][A-Za-z0-9_-]{0,63}$")
++    inputs: dict[str, JsonValue]
++    idempotency_key: str = Field(alias="idempotencyKey", min_length=1, max_length=128)
++
++
++class AppExecuteRequest(AppRunRequest):
++    action: Literal["execute"]
++
++
++class AppArtifactRequest(AppRunRequest):
++    handle: str = Field(pattern=r"^art_[A-Za-z0-9_-]{22}$")
++
++
++class GenericCanvasView(CanvasPort):
++    def __init__(self, execution):
++        self.execution = execution
++        self.db = execution.outputs.db
++        self.schemas = copy.deepcopy(execution.schemas)
++        self.schemas["canvas_dispatch"] = TypeAdapter(
++            ViewAction | AppSubmitRequest | AppExecuteRequest
++        ).json_schema()
++        for name in ("canvas_get_state", "canvas_execution_status", "canvas_cancel"):
++            self.schemas[name] = TypeAdapter(
++                ProposalInput | AppRunRequest
++            ).json_schema()
++        self.schemas["canvas_artifact"] = TypeAdapter(
++            ArtifactInput | AppArtifactRequest
++        ).json_schema()
++        for name in (
++            "canvas_dispatch",
++            "canvas_get_state",
++            "canvas_execution_status",
++            "canvas_cancel",
++            "canvas_artifact",
++        ):
++            self.schemas[name]["type"] = "object"
++
++    async def call(
++        self, caller: CanvasCaller, name: str, arguments: dict[str, JsonValue]
++    ) -> CanvasReply:
++        if name == "canvas_get" and "reviewResult" not in arguments:
++            reply = await self.execution.call(caller, name, arguments)
++            return await asyncio.to_thread(self._open, caller, reply)
++        if (
++            name
++            in {
++                "canvas_dispatch",
++                "canvas_get_state",
++                "canvas_execution_status",
++                "canvas_cancel",
++                "canvas_artifact",
++            }
++            and arguments.get("mode") == "generic"
++        ):
++            return await asyncio.to_thread(self._app, caller, name, arguments)
++        return await self.execution.call(caller, name, arguments)
++
++    @contextmanager
++    def _entry(self, scope):
++        with _transaction(self.db):
++            if not _returning(
++                self.db,
++                "UPDATE counter SET value=value WHERE id=? RETURNING id",
++                [RUN_ID_COUNTER],
++            ):
++                raise RuntimeError("Run counter unavailable")
++            _lock_workspace(self.db, scope.application.workspace_id)
++            yield
++
++    def _selected(self, caller, binding_id):
++        scope = caller.scope
++        if (
++            caller.audience != "app"
++            or scope is None
++            or caller.workspace_id != scope.application.workspace_id
++            or caller.workspace_id != str(scope.deployment.workspace_id.root)
++            or caller.result_handle is not None
++        ):
++            raise AccessDenied("generic server-bound app scope required")
++        current = self.execution.deployments._repository.current(
++            scope.deployment.workspace_id, scope.deployment.deployment_id
++        )
++        if (
++            current is None
++            or current.revision.ref != scope.deployment
++            or current.revision.specification.canvas_application != scope.application
++        ):
++            raise AccessDenied("active app changed; reopen before interaction")
++        bindings = [
++            b
++            for b in current.revision.specification.canvas_bindings
++            if b.binding_id == binding_id
++        ]
++        if len(bindings) != 1:
++            raise AccessDenied("exact active binding required")
++        selected = select_rcc_execution_profile(
++            self.execution.deployments,
++            caller.actor,
++            scope.deployment,
++            bindings[0].capability,
++        )
++        snapshot = selected.snapshot
++        if snapshot.canvas_application != scope.application:
++            raise AccessDenied("bound app snapshot differs")
++        managed = ManagedCaller(actor=caller.actor, worker_id=self.execution.worker_id)
++        declaration = self.execution.outputs.capabilities.get_capability(
++            snapshot.capability
++        ).work_items
++        if declaration.mode == "none" and not declaration.allow_outputs:
++            return StandaloneActionExecution(
++                self.execution.deployments, self.execution.outputs, snapshot
++            ), managed
++        policies = [
++            p
++            for p in current.revision.specification.work_item_policies
++            if p.capability == snapshot.capability
++        ]
++        if len(policies) != 1 or declaration.mode not in ("optional", "producer"):
++            raise AccessDenied("binding requires an explicit input claim")
++        return GenericWorkItemExecution(
++            self.execution.deployments,
++            self.execution.outputs,
++            snapshot,
++            policies[0],
++            self.execution.authorization,
++        ), managed
++
++    def _open(self, caller, reply):
++        if (
++            caller.audience != "model"
++            or caller.scope is not None
++            or reply.view_state is None
++        ):
++            return reply
++        view = reply.view_state
++        with self.db.connect(), _transaction(self.db):
++            stored = self.execution.deployments._repository.current(
++                WorkspaceId(caller.workspace_id), DeploymentId(view["applicationId"])
++            )
++            if (
++                stored is None
++                or stored.revision.ref.revision_id.root != view["revisionId"]
++                or stored.revision.specification.canvas_application is None
++            ):
++                return reply
++            scope = CanvasResultScope(
++                deployment=stored.revision.ref,
++                application=stored.revision.specification.canvas_application,
++            )
++            app = CanvasCaller(caller.actor, caller.workspace_id, "app", scope)
++            names = []
++            for binding in stored.revision.specification.canvas_bindings:
++                try:
++                    service, managed = self._selected(app, binding.binding_id)
++                    if isinstance(service, StandaloneActionExecution):
++                        service.current(managed)
++                    else:
++                        service._current(managed)
++                    service.base._authorize(caller.actor, service.snapshot, "read")
++                except AccessDenied:
++                    continue
++                names.append(binding.binding_id)
++            if not names:
++                return reply
++            return replace(
++                reply,
++                app_scope=scope,
++                generic_interaction={
++                    "version": "actions.generic-app/v1",
++                    "bindingIds": names,
++                    "executions": self._recent(app, names),
++                },
++            )
++
++    def _recent(self, caller, names):
++        # A bounded projection of existing app receipts, never a launch or claim.
++        rows = self.db.select(
++            FoundryAudit,
++            "SELECT * FROM foundry_audit WHERE workspace_id=? AND principal_id=? "
++            "AND operation=? AND deployment_id=? AND to_revision_id=? "
++            "ORDER BY created_ms DESC, id DESC LIMIT 256",
++            [
++                caller.workspace_id,
++                caller.actor.principal_id,
++                "generic-app.submit",
++                str(caller.scope.deployment.deployment_id.root),
++                caller.scope.deployment.revision_id.root,
++            ],
++        )
++        selected = {}
++        for audit in rows:
++            receipt = _one(self.db, FoundryRequest, audit.foundry_request_id)
++            payload = json.loads(receipt.result_json)
++            binding = payload.get("bindingId")
++            if binding not in names:
++                continue
++            service, managed = self._selected(caller, binding)
++            run, _, state = self._read(
++                service, managed, payload["runId"], binding, caller.scope
++            )
++            previous = selected.get(binding)
++            if previous is None or run.numbered_id > previous[0]:
++                state["bindingId"] = binding
++                selected[binding] = (run.numbered_id, state)
++        return [selected[name][1] for name in names if name in selected]
++
++    def _ticket(self, service, managed, run):
++        return (
++            service.ticket(managed, run)
++            if isinstance(service, StandaloneActionExecution)
++            else service._ticket(managed, None, run)
++        )
++
++    def _association_payload(self, scope, binding_id, run_id):
++        return _canonical(
++            {
++                "scope": scope.model_dump(mode="json"),
++                "bindingId": binding_id,
++                "runId": run_id,
++            },
++            16384,
++        )
++
++    def _association(self, managed, scope, binding_id, run_id, key=None):
++        identity = _key(
++            "actions.generic-app-run/v1", scope.application.workspace_id, run_id
++        )
++        rows = self.db.all(FoundryRequest, where="id=?", values=[identity])
++        payload = self._association_payload(scope, binding_id, run_id)
++        if len(rows) != 1:
++            raise AccessDenied("trusted app submission receipt unavailable")
++        row = rows[0]
++        if (
++            row.workspace_id != scope.application.workspace_id
++            or row.principal_id != managed.actor.principal_id
++            or row.operation != "generic-app.submit"
++            or row.result_json != payload
++            or row.request_fingerprint
++            != _key("actions.generic-app-receipt/v1", payload, row.idempotency_key)
++            or (key is not None and key != row.idempotency_key)
++        ):
++            raise AccessDenied("app submission receipt differs")
++        audits = self.db.all(
++            FoundryAudit, where="foundry_request_id=?", values=[identity]
++        )
++        if len(audits) != 1:
++            raise AccessDenied("app submission audit unavailable")
++        audit = audits[0]
++        if (
++            audit.workspace_id != scope.application.workspace_id
++            or audit.deployment_id != str(scope.deployment.deployment_id.root)
++            or audit.principal_id != managed.actor.principal_id
++            or audit.operation != row.operation
++            or audit.from_revision_id != scope.deployment.revision_id.root
++            or audit.to_revision_id != scope.deployment.revision_id.root
++        ):
++            raise AccessDenied("app submission audit differs")
++        return row
++
++    def _record_association(self, managed, scope, binding_id, run_id, key):
++        identity = _key(
++            "actions.generic-app-run/v1", scope.application.workspace_id, run_id
++        )
++        if self.db.all(FoundryRequest, where="id=?", values=[identity]):
++            return self._association(managed, scope, binding_id, run_id, key)
++        payload = self._association_payload(scope, binding_id, run_id)
++        self.db.insert(
++            FoundryRequest(
++                identity,
++                scope.application.workspace_id,
++                managed.actor.principal_id,
++                "generic-app.submit",
++                key,
++                _key("actions.generic-app-receipt/v1", payload, key),
++                payload,
++            )
++        )
++        self.db.insert(
++            FoundryAudit(
++                str(uuid4()),
++                scope.application.workspace_id,
++                str(scope.deployment.deployment_id.root),
++                managed.actor.principal_id,
++                "generic-app.submit",
++                identity,
++                scope.deployment.revision_id.root,
++                scope.deployment.revision_id.root,
++                str(_now(self.db)),
++            )
++        )
++
++    def _read(self, service, managed, run_id, binding_id, scope):
++        canonical_uuid(run_id)
++        self._association(managed, scope, binding_id, run_id)
++        pin = _one(self.db, RunPin, run_id)
++        if (
++            service.base._pinned(pin) != service.snapshot
++            or pin.admission_principal_id != managed.actor.principal_id
++        ):
++            raise AccessDenied("Run is outside exact app binding and actor")
++        service.base._authorize(managed.actor, service.snapshot, "read")
++        run = _one(self.db, Run, run_id)
++        ticket = self._ticket(service, managed, run)
++        attempt = _one(self.db, RunAttempt, ticket.fence.attempt_id)
++        expected = {
++            RunStatus.RUNNING: "running",
++            RunStatus.PASSED: "succeeded",
++            RunStatus.FAILED: "failed",
++        }.get(run.status)
++        if (
++            expected is None
++            or attempt.state != expected
++            or (
++                run.status in (RunStatus.PASSED, RunStatus.FAILED)
++                and pin.cancel_requested
++            )
++        ):
++            raise FenceRejected("Run/Attempt state differs")
++        record = json.loads(run.result)
++        state = (
++            "completed"
++            if run.status == RunStatus.PASSED
++            else "failed"
++            if run.status == RunStatus.FAILED
++            else "cancel_requested"
++            if pin.cancel_requested
++            else "running"
++            if record.get("launch") and int(attempt.lease_deadline_ms) > _now(self.db)
++            else "reconciliation_required"
++            if record.get("launch")
++            else "expired"
++            if int(attempt.lease_deadline_ms) <= _now(self.db)
++            else "ready"
++        )
++        return (
++            run,
++            ticket,
++            {
++                "runId": run.id,
++                "attemptId": attempt.id,
++                "state": state,
++                "cancelRequested": bool(pin.cancel_requested),
++            },
++        )
++
++    def _app(self, caller, name, arguments):
++        if (
++            caller.audience != "app"
++            or caller.scope is None
++            or caller.workspace_id != caller.scope.application.workspace_id
++            or caller.workspace_id != str(caller.scope.deployment.workspace_id.root)
++            or caller.result_handle is not None
++        ):
++            raise AccessDenied("generic server-bound app context required")
++        if name == "canvas_dispatch":
++            request = TypeAdapter(AppSubmitRequest | AppExecuteRequest).validate_json(
++                _canonical(arguments, 524288)
++            )
++        else:
++            request = (
++                AppArtifactRequest if name == "canvas_artifact" else AppRunRequest
++            ).model_validate_json(_canonical(arguments, 8192))
++        with self.db.connect():
++            with self._entry(caller.scope):
++                service, managed = self._selected(caller, request.binding_id)
++                if isinstance(request, AppSubmitRequest):
++                    if len(request.idempotency_key.encode()) > 128:
++                        raise ValueError("bounded submission key required")
++                    key = _key(
++                        "actions.generic-app-submit/v1",
++                        caller.actor.principal_id,
++                        json.dumps(
++                            caller.scope.model_dump(mode="json"), sort_keys=True
++                        ),
++                        request.binding_id,
++                        request.idempotency_key,
++                    )
++                    prior = self.db.all(
++                        RunPin,
++                        where="idempotency_id=?",
++                        values=[
++                            _key(
++                                "actions.workspace-run-idempotency/v1",
++                                caller.workspace_id,
++                                key,
++                            )
++                        ],
++                    )
++                    if prior:
++                        self._association(
++                            managed,
++                            caller.scope,
++                            request.binding_id,
++                            prior[0].run_id,
++                            request.idempotency_key,
++                        )
++                    ticket = service.dispatch_standalone(
++                        managed, request.inputs, key, lease_seconds=60
++                    )
++                    self._record_association(
++                        managed,
++                        caller.scope,
++                        request.binding_id,
++                        ticket.fence.run_id,
++                        request.idempotency_key,
++                    )
++                    run, ticket, state = self._read(
++                        service,
++                        managed,
++                        ticket.fence.run_id,
++                        request.binding_id,
++                        caller.scope,
++                    )
++                else:
++                    run, ticket, state = self._read(
++                        service,
++                        managed,
++                        request.run_id,
++                        request.binding_id,
++                        caller.scope,
++                    )
++                state["bindingId"] = request.binding_id
++                if name == "canvas_cancel":
++                    service.base.cancel(caller.actor, run.id)
++                    run, ticket, state = self._read(
++                        service, managed, run.id, request.binding_id, caller.scope
++                    )
++                    state["bindingId"] = request.binding_id
++            if isinstance(request, AppExecuteRequest) and state["state"] == "ready":
++                self.execution.runner.execute(managed, ticket, service)
++                with _transaction(self.db):
++                    self._selected(caller, request.binding_id)
++                    run, ticket, state = self._read(
++                        service, managed, run.id, request.binding_id, caller.scope
++                    )
++                    state["bindingId"] = request.binding_id
++            if name == "canvas_artifact":
++                handle = request.handle
++                if run.status not in (RunStatus.PASSED, RunStatus.FAILED):
++                    raise AccessDenied("terminal artifact required")
++                self._artifact_permission(service, managed)
++                references = self._references(caller, run)
++                if not any(ref.handle == handle for ref in references):
++                    raise AccessDenied("artifact is outside exact Run")
++                with service.base.resolve(
++                    caller.actor, caller.workspace_id, handle
++                ) as output:
++                    data = output.read(65537)
++                    if len(data) > 65536:
++                        raise ValueError("artifact exceeds bounded text inspection")
++                    text = data.decode("utf-8")
++                return CanvasReply(
++                    "Bound artifact inspected.",
++                    artifact={
++                        "bindingId": request.binding_id,
++                        "runId": run.id,
++                        "handle": handle,
++                        "text": text,
++                    },
++                )
++            if run.status in (RunStatus.PASSED, RunStatus.FAILED):
++                try:
++                    self._artifact_permission(service, managed)
++                except AccessDenied:
++                    pass
++                else:
++                    refs = self._references(caller, run)
++                    state["outputs"] = []
++                    for ref in refs:
++                        with service.base.resolve(
++                            caller.actor, caller.workspace_id, ref.handle
++                        ):
++                            state["outputs"].append({"handle": ref.handle})
++            return CanvasReply("Bound app execution state.", execution=state)
++
++    def _references(self, caller, run):
++        raw = json.loads(run.result).get("outputs", [])
++        if not isinstance(raw, list) or len(raw) > 64:
++            raise FenceRejected("bounded output inventory required")
++        refs = [OutputRef.model_validate(value) for value in raw]
++        if len({ref.handle for ref in refs}) != len(refs) or any(
++            ref.run_id != run.id or ref.workspace_id != caller.workspace_id
++            for ref in refs
++        ):
++            raise FenceRejected("output outside exact app Run")
++        return refs
++
++    def _artifact_permission(self, service, managed):
++        service.base._authorize(managed.actor, service.snapshot, "read")
++        if isinstance(service, GenericWorkItemExecution):
++            queue = service.policy.input_queue or service.policy.output_queue
++            for permission in (Permission.READ, Permission.ARTIFACT_READ):
++                service._permission(managed, queue, permission)
+diff --git a/action_server/src/actions/server/foundry/standalone_execution.py b/action_server/src/actions/server/foundry/standalone_execution.py
+new file mode 100644
+--- /dev/null
++++ b/action_server/src/actions/server/foundry/standalone_execution.py
+@@ -0,0 +1,196 @@
++"""Ordinary mode=none admission on the existing Run journal, without a Work Item."""
++from __future__ import annotations
++
++import hashlib
++import json
++
++from actions.server._models import Run, RunStatus
++from actions.server.foundry.generic_work_item_execution import GenericTicket
++from actions.server.foundry.package_registry import FoundryPackageRegistry
++from actions.server.run_outputs.models import RunAttempt, RunPin
++from actions.server.run_outputs.service import (
++    AccessDenied,
++    FenceRejected,
++    RunOutputControlPlane,
++    RunOutputService,
++    _canonical,
++    _one,
++    _transaction,
++    _update,
++)
++from actions.server.run_outputs.types import AttemptFence
++
++
++class StandaloneActionExecution:
++    def __init__(self, deployments, outputs, snapshot):
++        if deployments._repository._db is not outputs.db or not isinstance(
++            outputs.capabilities, FoundryPackageRegistry
++        ):
++            raise ValueError("common Package/Deployment/Run authority required")
++        self.deployments, self.base, self.snapshot = deployments, outputs, snapshot
++        self.db, self.registry = outputs.db, outputs.capabilities
++
++    def current(self, caller):
++        s = self.snapshot
++        resolved = self.deployments.resolve(
++            caller.actor,
++            s.deployment.workspace_id,
++            s.deployment.deployment_id,
++            s.capability,
++            revision=s.deployment,
++            runtime_plan=s.runtime_plan,
++        )
++        declaration = self.registry.get_capability(s.capability)
++        if (
++            resolved.snapshot != s
++            or declaration is None
++            or declaration.work_items.mode != "none"
++            or declaration.work_items.allow_outputs
++        ):
++            raise AccessDenied("ordinary no-Work-Item declaration required")
++        self.base._authorize(caller.actor, s, "execute")
++
++    def ticket(self, caller, run):
++        self.current(caller)
++        pin = _one(self.db, RunPin, run.id)
++        attempt = _one(self.db, RunAttempt, pin.current_attempt_id)
++        fence = AttemptFence(
++            run_id=run.id,
++            attempt_id=attempt.id,
++            owner_id=attempt.owner_id,
++            epoch=attempt.epoch,
++        )
++        outer = json.loads(run.result or "null")
++        terminal = run.status in (RunStatus.PASSED, RunStatus.FAILED)
++        if terminal:
++            if (
++                not isinstance(outer, dict)
++                or not isinstance(outer.get("version"), int)
++                or isinstance(outer.get("version"), bool)
++                or outer.get("version") != 1
++            ):
++                raise FenceRejected("ordinary output version differs")
++            record = outer.get("result")
++        else:
++            record = outer
++        if (
++            not isinstance(record, dict)
++            or record.get("version")
++            != (
++                "actions.generated-rcc-execution/v1"
++                if terminal
++                else "actions.generated-rcc-dispatch/v1"
++            )
++            or record.get("claim") is not None
++            or record.get("publicationFence" if terminal else "fence")
++            != fence.model_dump()
++            or pin.epoch != fence.epoch
++            or caller.worker_id != fence.owner_id
++            or self.base._pinned(pin) != self.snapshot
++            or attempt.run_id != run.id
++            or attempt.workspace_id != str(self.snapshot.deployment.workspace_id.root)
++            or pin.workspace_id != attempt.workspace_id
++            or (not terminal and record.get("mode") != "standalone")
++        ):
++            raise FenceRejected("ordinary retained dispatch differs")
++        return GenericTicket(
++            claim=None,
++            fence=fence,
++            input_digest="sha256:"
++            + hashlib.sha256(
++                _canonical(json.loads(run.inputs), 262144).encode()
++            ).hexdigest(),
++        )
++
++    def dispatch_standalone(self, caller, inputs, key, *, lease_seconds=60):
++        with _transaction(self.db):
++            self.current(caller)
++            if caller.worker_id is None:
++                raise AccessDenied("trusted worker required")
++            RunOutputControlPlane(self.db, capabilities=self.registry).register(
++                self.snapshot
++            )
++            run = self.base.admit(caller.actor, self.snapshot, inputs, key)
++            pin = _one(self.db, RunPin, run.id)
++            if not pin.current_attempt_id:
++                fence = self.base.claim(
++                    run.id, caller.worker_id, lease_seconds=lease_seconds
++                )
++                _update(
++                    self.db,
++                    Run,
++                    run.id,
++                    {
++                        "result": _canonical(
++                            {
++                                "version": "actions.generated-rcc-dispatch/v1",
++                                "mode": "standalone",
++                                "claim": None,
++                                "fence": fence.model_dump(),
++                                "launch": None,
++                            },
++                            65536,
++                        )
++                    },
++                )
++                run = _one(self.db, Run, run.id)
++            return self.ticket(caller, run)
++
++    def outputs(self, caller, ticket):
++        return _StandaloneOutputs(self, caller, ticket)
++
++
++class _StandaloneOutputs(RunOutputService):
++    def __init__(self, owner, caller, ticket):
++        super().__init__(owner.db, owner.base.providers, capabilities=owner.registry)
++        self.owner, self.caller, self.ticket = owner, caller, ticket
++
++    def _fence(self, fence):
++        if (
++            fence != self.ticket.fence
++            or self.owner.ticket(self.caller, _one(self.db, Run, fence.run_id))
++            != self.ticket
++        ):
++            raise FenceRejected("ordinary Run ticket differs")
++        return super()._fence(fence)
++
++    def publish(
++        self, actor, fence, outputs, result, *, terminal_status=RunStatus.PASSED
++    ):
++        if actor != self.caller.actor or terminal_status != RunStatus.PASSED:
++            raise AccessDenied("ordinary success-only RCC publication required")
++        with _transaction(self.db):
++            self.owner.current(self.caller)
++            run = _one(self.db, Run, fence.run_id)
++            if (
++                self.owner.ticket(self.caller, run) != self.ticket
++                or fence != self.ticket.fence
++            ):
++                raise FenceRejected("ordinary retained ticket differs")
++            if (
++                not isinstance(result, dict)
++                or result.get("version") != "actions.generated-rcc-execution/v1"
++                or result.get("claim") is not None
++                or result.get("publicationFence") != fence.model_dump()
++            ):
++                raise FenceRejected("ordinary RCC lineage required")
++            if run.status != RunStatus.PASSED:
++                journal = json.loads(run.result)
++                if (
++                    not journal.get("launch")
++                    or not journal.get("execution")
++                    or result.get("launch") != journal["launch"]
++                    or result.get("execution") != journal["execution"]
++                ):
++                    raise FenceRejected("completed ordinary RCC journal required")
++            from jsonschema import validate
++
++            validate(
++                result.get("actionResult"),
++                json.loads(
++                    self.owner.registry.schema_for(self.owner.snapshot).output_schema
++                ),
++            )
++            return super().publish(
++                actor, fence, outputs, result, terminal_status=terminal_status
++            )
+diff --git a/action_server/src/actions/server/foundry/rcc_execution.py b/action_server/src/actions/server/foundry/rcc_execution.py
+--- a/action_server/src/actions/server/foundry/rcc_execution.py
++++ b/action_server/src/actions/server/foundry/rcc_execution.py
+@@ -485,9 +485,10 @@
+             from actions.server.foundry.generic_work_item_execution import (
+                 _GenericOutputs,
+             )
++            from actions.server.foundry.standalone_execution import _StandaloneOutputs
+ 
+             standalone = (
+-                isinstance(self.outputs, _GenericOutputs)
++                isinstance(self.outputs, (_GenericOutputs, _StandaloneOutputs))
+                 and self.outputs.ticket.claim is None
+                 and isinstance(journal, dict)
+                 and journal.get("mode") == "standalone"
+diff --git a/action_server/src/actions/server/foundry/mcp.py b/action_server/src/actions/server/foundry/mcp.py
+--- a/action_server/src/actions/server/foundry/mcp.py
++++ b/action_server/src/actions/server/foundry/mcp.py
+@@ -135,6 +135,7 @@
+     execution: dict[str, JsonValue] | None = None
+     artifact: dict[str, JsonValue] | None = None
+     app_binding: str | None = None
++    generic_interaction: dict[str, JsonValue] | None = None
+ 
+ 
+ class CanvasPort(Protocol):
+@@ -234,10 +235,29 @@
+         if name not in APP_TOOLS:
+             return schema
+         schema = copy.deepcopy(schema)
+-        properties = schema.setdefault("properties", {})
+-        if not isinstance(properties, dict) or "appSession" in properties:
+-            raise ValueError("reserved View session field")
+-        properties["appSession"] = {"type": "string", "minLength": 43, "maxLength": 43}
++
++        def session_branch(branch):
++            reference = branch.get("$ref")
++            if reference is not None:
++                if not reference.startswith("#/$defs/"):
++                    raise ValueError("local View schema reference required")
++                session_branch(schema["$defs"][reference.removeprefix("#/$defs/")])
++                return
++            alternatives = branch.get("anyOf", branch.get("oneOf"))
++            if alternatives is not None:
++                for alternative in alternatives:
++                    session_branch(alternative)
++                return
++            properties = branch.setdefault("properties", {})
++            if not isinstance(properties, dict) or "appSession" in properties:
++                raise ValueError("reserved View session field")
++            properties["appSession"] = {
++                "type": "string",
++                "minLength": 43,
++                "maxLength": 43,
++            }
++
++        session_branch(schema)
+         return schema
+ 
+     async def call(self, ctx: object, name: str, arguments: object) -> CallToolResult:
+@@ -291,6 +311,7 @@
+                 meta["actions.reviewedExecution"] = _object(reply.interaction, 16384)
+             for key, value in (
+                 ("actions.review", reply.review),
++                ("actions.genericExecution", reply.generic_interaction),
+                 ("actions.execution", reply.execution),
+                 ("actions.artifact", reply.artifact),
+             ):
+diff --git a/action_server/tests/action_server_tests/test_generic_canvas_view.py b/action_server/tests/action_server_tests/test_generic_canvas_view.py
+new file mode 100644
+--- /dev/null
++++ b/action_server/tests/action_server_tests/test_generic_canvas_view.py
+@@ -0,0 +1,628 @@
++"""Bound app uses common SQL; fake runner does not claim actual RCC/host proof."""
++import asyncio
++import json
++from types import SimpleNamespace
++from uuid import uuid4
++
++import pytest
++from action_server_tests import test_activated_reviewed_execution as fixtures
++from action_server_tests.test_generic_work_item_execution import (
++    grant,
++    synthetic_completion,
++)
++
++from actions.server._models import Run
++from actions.server.data_queries.review_models import FencedWorkItem
++from actions.server.foundry.generic_view import GenericCanvasView
++from actions.server.foundry.mcp import CanvasCaller, CanvasReply
++from actions.server.foundry.models import FoundryAccessGrant
++from actions.server.managed_work_items.authorization import SqlQueueAuthorization
++from actions.server.run_outputs.service import AccessDenied, _one, _update
++
++pytest_plugins = ["action_server_tests.foundry_fixtures"]
++provider = fixtures.provider
++postgresql_database = fixtures.postgresql_database
++reviewed = fixtures.reviewed
++pytestmark = fixtures.pytestmark
++
++
++class Runner:
++    calls = 0
++
++    def execute(self, caller, ticket, service):
++        self.calls += 1
++        g = SimpleNamespace(owner=service, caller=caller, db=service.db)
++        guarded, output, result = synthetic_completion(g, ticket, "hello")
++        return guarded.publish(caller.actor, ticket.fence, [output], result)
++
++
++@pytest.fixture
++def case(reviewed, foundry_package_store):
++    c = fixtures.setup_activated(reviewed, foundry_package_store)
++    fixtures.release(c)
++    grant(
++        c.db,
++        c.actor,
++        c.scope.deployment.workspace_id,
++        "workspace",
++        c.scope.application.workspace_id,
++        ["cancel_execution"],
++    )
++    c.worker = str(uuid4())
++    c.runner = Runner()
++    c.model = CanvasCaller(c.actor, c.scope.application.workspace_id, "model")
++    c.app = CanvasCaller(c.actor, c.scope.application.workspace_id, "app", c.scope)
++
++    class Port:
++        schemas = {
++            "canvas_get": {"type": "object", "properties": {}},
++            "canvas_dispatch": {},
++            "canvas_get_state": {},
++            "canvas_execution_status": {},
++            "canvas_cancel": {},
++            "canvas_artifact": {},
++        }
++        deployments = c.deployments
++        outputs = c.outputs
++        worker_id = c.worker
++        runner = c.runner
++        authorization = SqlQueueAuthorization(c.db)
++
++        async def call(self, caller, name, args):
++            return CanvasReply(
++                "canonical view fixture",
++                view_state={
++                    "applicationId": str(c.scope.deployment.deployment_id.root),
++                    "revisionId": c.scope.deployment.revision_id.root,
++                },
++            )
++
++    c.port = GenericCanvasView(Port())
++    return c
++
++
++def call(c, name, args, caller=None):
++    return asyncio.run(c.port.call(caller or c.app, name, args))
++
++
++def submit(c, key="form"):
++    return call(
++        c,
++        "canvas_dispatch",
++        {
++            "mode": "generic",
++            "action": "submit",
++            "bindingId": "run",
++            "inputs": {"value": "hello"},
++            "idempotencyKey": key,
++        },
++    ).execution
++
++
++def request(state, **extra):
++    return {"mode": "generic", "bindingId": "run", "runId": state["runId"], **extra}
++
++
++def test_none_form_admits_without_work_item_and_executes_once(case):
++    c = case
++    before = len(c.db.all(FencedWorkItem))
++    opened = call(c, "canvas_get", {}, c.model)
++    assert opened.app_scope == c.scope and opened.generic_interaction["bindingIds"] == [
++        "run"
++    ]
++    state = submit(c)
++    assert state["state"] == "ready" and c.runner.calls == 0
++    assert len(c.db.all(FencedWorkItem)) == before
++    done = call(c, "canvas_dispatch", request(state, action="execute")).execution
++    assert done["state"] == "completed" and c.runner.calls == 1
++    assert (
++        call(c, "canvas_dispatch", request(state, action="execute")).execution == done
++    )
++    assert submit(c)["runId"] == done["runId"]
++    artifact = call(
++        c, "canvas_artifact", request(state, handle=done["outputs"][0]["handle"])
++    ).artifact
++    assert artifact["text"] == "owned"
++    assert c.runner.calls == 1
++
++
++def test_app_scope_binding_and_model_denials(case):
++    c = case
++    args = {
++        "mode": "generic",
++        "action": "submit",
++        "bindingId": "run",
++        "inputs": {"value": "hello"},
++        "idempotencyKey": "form",
++    }
++    with pytest.raises(AccessDenied):
++        call(c, "canvas_dispatch", args, c.model)
++    with pytest.raises(AccessDenied):
++        call(c, "canvas_dispatch", dict(args, bindingId="foreign"))
++    with pytest.raises(Exception):
++        call(c, "canvas_dispatch", dict(args, snapshot={}))
++    opened = call(c, "canvas_get", {}, c.model)
++    assert opened.app_scope == c.scope
++
++
++def test_cancel_is_requested_without_false_process_stopped_claim(case):
++    c = case
++    state = submit(c)
++    result = call(c, "canvas_cancel", request(state)).execution
++    assert result["cancelRequested"] and result["state"] == "cancel_requested"
++    assert (
++        call(c, "canvas_dispatch", request(state, action="execute")).execution["state"]
++        == "cancel_requested"
++    )
++    assert c.runner.calls == 0
++
++
++def test_changed_submission_and_foreign_run_fail_closed(case):
++    c = case
++    submit(c)
++    with pytest.raises(ValueError):
++        call(
++            c,
++            "canvas_dispatch",
++            {
++                "mode": "generic",
++                "action": "submit",
++                "bindingId": "run",
++                "inputs": {"value": "different"},
++                "idempotencyKey": "form",
++            },
++        )
++    with pytest.raises(Exception):
++        call(c, "canvas_execution_status", request({"runId": str(uuid4())}))
++    assert c.runner.calls == 0
++
++
++def test_new_activation_blocks_old_app_session(case):
++    from actions.server.foundry.authoring_values import CanvasBinding
++
++    c = case
++    state = submit(c)
++    revised = dict(c.spec, title="New active app")
++    next_revision = c.authority.apply(
++        c.actor,
++        c.staged.ref.workspace_id,
++        c.staged.application_id,
++        c.staged.ref,
++        json.dumps(revised).encode(),
++        (CanvasBinding("run", c.selection.capability_plans[0].capability),),
++        c.staged.package_revisions,
++        c.selection,
++        c.staged.compilation,
++        fixtures.fingerprint("revised"),
++        idempotency_key="revised",
++    )
++    c.authority.release(
++        c.actor,
++        c.staged.ref.workspace_id,
++        c.staged.application_id,
++        next_revision.ref,
++        c.staged.ref,
++        fixtures.fingerprint("release-next"),
++        idempotency_key="release-next",
++    )
++    with pytest.raises(AccessDenied):
++        call(c, "canvas_dispatch", request(state, action="execute"))
++    with pytest.raises(AccessDenied):
++        call(c, "canvas_execution_status", request(state))
++    assert c.runner.calls == 0
++
++
++def test_none_admission_registers_without_minting_grants(case):
++    from actions.server.foundry.rcc_execution import GeneratedRccExecution
++    from actions.server.run_outputs.models import RunAccessGrant, RunAdmission
++
++    c = case
++    grants = len(c.db.all(FoundryAccessGrant)) + len(c.db.all(RunAccessGrant))
++    admissions = len(c.db.all(RunAdmission))
++    state = submit(c)
++    assert len(c.db.all(RunAdmission)) == admissions + 1
++    assert len(c.db.all(FoundryAccessGrant)) + len(c.db.all(RunAccessGrant)) == grants
++    with c.db.connect():
++        service, managed = c.port._selected(c.app, "run")
++        row, ticket, _ = c.port._read(service, managed, state["runId"], "run", c.scope)
++        runner = object.__new__(GeneratedRccExecution)
++        runner.outputs = service.outputs(managed, ticket)
++        assert runner._read_journal(ticket.fence)["mode"] == "standalone"
++        runner.outputs = service.base
++        with pytest.raises(Exception):
++            runner._read_journal(ticket.fence)
++
++
++def test_inflight_status_and_cancellation_keep_actual_stop_unclaimed(case):
++    from concurrent.futures import ThreadPoolExecutor
++    from threading import Event
++
++    from actions.server.run_outputs.service import _canonical
++
++    c = case
++    entered, finish = Event(), Event()
++
++    class BlockingRunner:
++        def execute(self, caller, ticket, service):
++            row = _one(service.db, Run, ticket.fence.run_id)
++            journal = json.loads(row.result)
++            journal["launch"] = {"id": "controlled-owned-fixture"}
++            with service.db.transaction():
++                _update(service.db, Run, row.id, {"result": _canonical(journal, 65536)})
++            entered.set()
++            assert finish.wait(10)
++            raise RuntimeError("owned fixture stopped without terminal proof")
++
++    c.port.execution.runner = BlockingRunner()
++    state = submit(c)
++    with ThreadPoolExecutor(1) as pool:
++        future = pool.submit(
++            call, c, "canvas_dispatch", request(state, action="execute")
++        )
++        try:
++            assert entered.wait(10)
++            assert (
++                call(c, "canvas_execution_status", request(state)).execution["state"]
++                == "running"
++            )
++            assert (
++                call(c, "canvas_cancel", request(state)).execution["state"]
++                == "cancel_requested"
++            )
++        finally:
++            finish.set()
++        with pytest.raises(RuntimeError):
++            future.result()
++    assert (
++        call(c, "canvas_execution_status", request(state)).execution["state"]
++        == "cancel_requested"
++    )
++
++
++@pytest.mark.parametrize("mode", ["optional", "producer"])
++def test_explicit_generic_policy_uses_same_app_path(case, mode):
++    from action_server_tests.test_generic_work_item_execution import OutputExecutor
++    from contract_tests.test_package_revision_compiler import _generated_action_entries
++
++    from actions.server.deployments.foundry_values import (
++        CapabilityPlanPolicy,
++        CapabilityWorkItemPolicy,
++        DeploymentSpecification,
++        WorkItemDeclaration,
++    )
++    from actions.server.foundry.authoring_values import CanvasBinding
++    from actions.server.foundry.sql_authorization import reference_grant_subject
++    from actions.server.managed_work_items.contracts import Permission
++    from actions.server.run_outputs.service import RunOutputControlPlane
++    from actions.server.run_outputs.types import CanvasResultScope
++
++    c = case
++    registry = c.outputs.capabilities
++    if mode == "producer":
++        registry._executor = OutputExecutor()
++    compiled = registry.compile_trusted_source(
++        _generated_action_entries(),
++        logical_package_key="app-" + mode,
++        logical_name="App " + mode,
++        trusted_actor=c.actor,
++        workspace_id=c.scope.deployment.workspace_id,
++        application_id=c.scope.deployment.deployment_id,
++        work_items=WorkItemDeclaration(mode=mode, allow_outputs=mode == "producer"),
++    )
++    package = registry.admit_compiled(
++        c.actor, c.scope.deployment.workspace_id, compiled.compiled_package
++    )
++    capability = registry.capability_refs(package)[0]
++    plan = registry.get_capability(capability).runtime_plans[0]
++    policy = CapabilityWorkItemPolicy(
++        capability=capability,
++        input_mode="none" if mode == "producer" else "optional",
++        input_queue=None if mode == "producer" else "input",
++        output_queue="output" if mode == "producer" else None,
++        max_output_items=2 if mode == "producer" else 0,
++        max_output_bytes=1024 if mode == "producer" else 0,
++    )
++    selection = DeploymentSpecification(
++        package_revisions=(package,),
++        capability_plans=(
++            CapabilityPlanPolicy(
++                capability=capability,
++                mode="locked",
++                allowed_plans=(plan,),
++                default_plan=plan,
++            ),
++        ),
++        worker=c.selection.worker,
++        policy=c.selection.policy,
++        output_provider=c.selection.output_provider,
++        work_item_policies=(policy,),
++    )
++    revised = c.authority.apply(
++        c.actor,
++        c.staged.ref.workspace_id,
++        c.staged.application_id,
++        c.staged.ref,
++        json.dumps(c.spec).encode(),
++        (CanvasBinding("run", capability),),
++        (package,),
++        selection,
++        registry.evidence(package),
++        fixtures.fingerprint(mode),
++        idempotency_key=mode,
++    )
++    c.authority.release(
++        c.actor,
++        c.staged.ref.workspace_id,
++        c.staged.application_id,
++        revised.ref,
++        c.staged.ref,
++        fixtures.fingerprint(mode + "-release"),
++        idempotency_key=mode + "-release",
++    )
++    stored = c.repository.get_revision(revised.ref)
++    c.scope = CanvasResultScope(
++        deployment=revised.ref,
++        application=stored.revision.specification.canvas_application,
++    )
++    c.app = CanvasCaller(c.actor, c.scope.application.workspace_id, "app", c.scope)
++    grant(
++        c.db,
++        c.actor,
++        c.scope.deployment.workspace_id,
++        "workspace",
++        c.scope.application.workspace_id,
++        [p.value for p in Permission],
++    )
++    grant(
++        c.db,
++        c.actor,
++        c.scope.deployment.workspace_id,
++        "reference",
++        reference_grant_subject(revised.ref),
++        ["execute", *[p.value for p in Permission]],
++    )
++    RunOutputControlPlane(c.db, capabilities=registry).grant(
++        c.actor, revised.ref, {"execute", "read", "cancel"}
++    )
++
++    class PolicyRunner:
++        def execute(self, caller, ticket, service):
++            value = (
++                {"result": "hello", "workItems": [{"value": "child"}]}
++                if mode == "producer"
++                else "hello"
++            )
++            guarded, output, result = synthetic_completion(
++                SimpleNamespace(owner=service, caller=caller, db=c.db), ticket, value
++            )
++            return guarded.publish(caller.actor, ticket.fence, [output], result)
++
++    c.port.execution.runner = PolicyRunner()
++    state = submit(c)
++    assert (
++        call(c, "canvas_dispatch", request(state, action="execute")).execution["state"]
++        == "completed"
++    )
++
++
++def test_model_run_cannot_spoof_app_receipt(case):
++    from actions.server.run_outputs.service import _key
++
++    c = case
++    service, managed = c.port._selected(c.app, "run")
++    key = _key(
++        "actions.generic-app-submit/v1",
++        c.actor.principal_id,
++        json.dumps(c.scope.model_dump(mode="json"), sort_keys=True),
++        "run",
++        "form",
++    )
++    ticket = service.dispatch_standalone(managed, {"value": "hello"}, key)
++    with pytest.raises(AccessDenied, match="receipt"):
++        submit(c)
++    with pytest.raises(AccessDenied, match="receipt"):
++        call(c, "canvas_execution_status", request({"runId": ticket.fence.run_id}))
++
++
++def test_receipt_binding_and_audit_are_required(case):
++    from actions.server.foundry.models import FoundryAudit, FoundryRequest
++
++    c = case
++    state = submit(c)
++    service, managed = c.port._selected(c.app, "run")
++    with pytest.raises(AccessDenied, match="receipt differs"):
++        c.port._association(managed, c.scope, "alias", state["runId"])
++    row = c.db.all(FoundryRequest, where="operation=?", values=["generic-app.submit"])[
++        0
++    ]
++    audit = c.db.all(FoundryAudit, where="foundry_request_id=?", values=[row.id])[0]
++    with c.db.transaction():
++        _update(c.db, FoundryAudit, audit.id, {"principal_id": str(uuid4())})
++    with pytest.raises(AccessDenied, match="audit differs"):
++        call(c, "canvas_execution_status", request(state))
++
++
++def test_app_receipt_failure_rolls_back_common_admission(case, monkeypatch):
++    c = case
++    before = len(c.db.all(Run))
++
++    def fail(*args):
++        raise RuntimeError("receipt persistence fault")
++
++    monkeypatch.setattr(c.port, "_record_association", fail)
++    with pytest.raises(RuntimeError, match="persistence fault"):
++        submit(c)
++    assert len(c.db.all(Run)) == before
++
++
++def test_advertised_closed_union_accepts_transport_session(case):
++    import jsonschema
++
++    from actions.server.foundry.mcp import CanvasMcp
++
++    schema = CanvasMcp._input_schema(
++        "canvas_dispatch", case.port.schemas["canvas_dispatch"]
++    )
++    args = dict(
++        mode="generic",
++        action="submit",
++        bindingId="run",
++        inputs={"value": "hello"},
++        idempotencyKey="form",
++        appSession="a" * 43,
++    )
++    jsonschema.validate(args, schema)
++    with pytest.raises(jsonschema.ValidationError):
++        jsonschema.validate(dict(args, snapshot={}), schema)
++
++
++def test_official_facade_keeps_app_session_private_and_actor_bound(case):
++    from actions.server.foundry.mcp import MODEL_TOOLS, CanvasMcp
++    from actions.server.run_outputs.types import Actor
++
++    c = case
++    for name in MODEL_TOOLS:
++        c.port.schemas.setdefault(name, {"type": "object", "properties": {}})
++
++    async def authenticate(ctx):
++        return ctx
++
++    transport = CanvasMcp(c.port, authenticate, "<html>fixture</html>")
++    opened = asyncio.run(transport.call(c.model, "canvas_get", {}))
++    assert not opened.is_error
++    assert opened.structured_content is None
++    token = opened.meta["actions.appSession"]["token"]
++    assert token not in opened.content[0].text
++    args = dict(
++        mode="generic",
++        action="submit",
++        bindingId="run",
++        inputs={"value": "hello"},
++        idempotencyKey="official",
++    )
++    assert asyncio.run(transport.call(c.model, "canvas_dispatch", args)).is_error
++    result = asyncio.run(
++        transport.call(c.model, "canvas_dispatch", dict(args, appSession=token))
++    )
++    assert not result.is_error and result.meta["actions.execution"]["state"] == "ready"
++    assert result.structured_content is None
++    stranger = CanvasCaller(
++        Actor(principal_id=str(uuid4())), c.model.workspace_id, "model"
++    )
++    assert asyncio.run(
++        transport.call(stranger, "canvas_dispatch", dict(args, appSession=token))
++    ).is_error
++
++
++def test_reopen_recovers_existing_app_receipt_without_launch(case):
++    c = case
++    state = submit(c)
++    reopened = call(c, "canvas_get", {}, c.model)
++    assert reopened.generic_interaction["executions"] == [state]
++    assert c.runner.calls == 0
++    call(c, "canvas_dispatch", request(state, action="execute"))
++    c.port = GenericCanvasView(c.port.execution)
++    reopened = call(c, "canvas_get", {}, c.model)
++    recovered = reopened.generic_interaction["executions"][0]
++    assert recovered["runId"] == state["runId"] and recovered["state"] == "completed"
++    assert c.runner.calls == 1
++
++
++def test_alias_binding_resolving_same_snapshot_cannot_read_app_run(case, monkeypatch):
++    c = case
++    state = submit(c)
++    original = c.port._selected
++
++    def same_snapshot(caller, binding):
++        return original(caller, "run" if binding == "alias" else binding)
++
++    monkeypatch.setattr(c.port, "_selected", same_snapshot)
++    with pytest.raises(AccessDenied, match="receipt differs"):
++        call(c, "canvas_execution_status", dict(request(state), bindingId="alias"))
++    with pytest.raises(AccessDenied, match="receipt differs"):
++        call(c, "canvas_cancel", dict(request(state), bindingId="alias"))
++
++
++def test_caller_workspace_must_match_bound_scope(case):
++    from dataclasses import replace
++
++    c = case
++    with pytest.raises(ValueError):
++        replace(c.app, workspace_id=str(uuid4()))
++    foreign = replace(c.app)
++    object.__setattr__(foreign, "workspace_id", str(uuid4()))
++    with pytest.raises(AccessDenied):
++        c.port._selected(foreign, "run")
++    with pytest.raises(AccessDenied):
++        call(
++            c,
++            "canvas_dispatch",
++            dict(
++                mode="generic",
++                action="submit",
++                bindingId="run",
++                inputs={"value": "hello"},
++                idempotencyKey="x",
++            ),
++            foreign,
++        )
++
++
++@pytest.mark.parametrize(
++    "corruption",
++    [
++        "attempt-workspace",
++        "mode",
++        "epoch",
++        "attempt-state",
++        "cancel-terminal",
++        "foreign-output",
++    ],
++)
++def test_corrupt_retained_state_fails_closed(case, corruption):
++    from actions.server.run_outputs.models import RunAttempt, RunPin
++    from actions.server.run_outputs.service import _canonical
++
++    c = case
++    state = submit(c)
++    terminal = corruption in ("cancel-terminal", "foreign-output")
++    if terminal:
++        call(c, "canvas_dispatch", request(state, action="execute"))
++    with c.db.transaction():
++        row = _one(c.db, Run, state["runId"])
++        pin = _one(c.db, RunPin, row.id)
++        if corruption == "attempt-workspace":
++            from actions.server.run_outputs.models import Workspace
++
++            workspace = str(uuid4())
++            c.db.insert(Workspace(workspace, "active", 0))
++            _update(c.db, RunAttempt, state["attemptId"], {"workspace_id": workspace})
++        elif corruption == "attempt-state":
++            _update(c.db, RunAttempt, state["attemptId"], {"state": "failed"})
++        elif corruption == "epoch":
++            _update(c.db, RunPin, pin.id, {"epoch": pin.epoch + 1})
++        elif corruption == "cancel-terminal":
++            _update(c.db, RunPin, pin.id, {"cancel_requested": 1})
++        else:
++            value = json.loads(row.result)
++            if corruption == "mode":
++                value["mode"] = "consumer"
++            else:
++                value["outputs"].append(dict(value["outputs"][0], run_id=str(uuid4())))
++            _update(c.db, Run, row.id, {"result": _canonical(value, 524288)})
++    with pytest.raises((AccessDenied, ValueError, RuntimeError)):
++        call(c, "canvas_execution_status", request(state))
++
++
++def test_read_only_actor_is_not_advertised_runnable_binding(case, monkeypatch):
++    c = case
++    original = c.outputs._authorize
++
++    def authorize(actor, snapshot, permission):
++        if permission == "execute":
++            raise AccessDenied("execution grant revoked")
++        return original(actor, snapshot, permission)
++
++    monkeypatch.setattr(c.outputs, "_authorize", authorize)
++    opened = call(c, "canvas_get", {}, c.model)
++    assert opened.generic_interaction is None and opened.app_scope is None
+diff --git a/action_server/frontend/apps/canvas-view/src/McpCanvasView.tsx b/action_server/frontend/apps/canvas-view/src/McpCanvasView.tsx
+--- a/action_server/frontend/apps/canvas-view/src/McpCanvasView.tsx
++++ b/action_server/frontend/apps/canvas-view/src/McpCanvasView.tsx
+@@ -1,3 +1,6 @@
++import { GenericSemanticView } from "./semantic-renderer/generic-view";
++import { parseGenericExecution } from "./semantic-renderer/generic-execution";
++import type { GenericExecutionContext } from "./semantic-renderer/generic-execution";
+ import { useEffect, useMemo, useRef, useState } from "react";
+ import {
+     useApp,
+@@ -178,6 +181,8 @@
+         null,
+     );
+     const [canvasViewError, setCanvasViewError] = useState(false);
++    const [genericExecution, setGenericExecution] =
++        useState<GenericExecutionContext | null>(null);
+     const [reviewedExecution, setReviewedExecution] =
+         useState<ReviewedExecutionContext | null>(null);
+     const inputRevision = useRef(0);
+@@ -198,6 +203,7 @@
+                     inputRevision.current += 1;
+                     setCanvasView(null);
+                     setReviewedExecution(null);
++                    setGenericExecution(null);
+                     setCanvasViewError(false);
+                     setHostInput({ revision: inputRevision.current, query });
+                     setHostInputState(query === null ? "ignored" : "accepted");
+@@ -207,6 +213,7 @@
+             );
+             createdApp.addEventListener("toolresult", (result) => {
+                 setReviewedExecution(null);
++                setGenericExecution(null);
+                 const invoicePage = result._meta?.["actions.invoicePage"];
+                 if (invoicePage !== undefined) {
+                     setCanvasView(null);
+@@ -248,8 +255,26 @@
+                                 const parsed =
+                                     parseCanvasViewMetadata(metadata);
+                                 setCanvasView(parsed);
++                                setGenericExecution(null);
++                                setReviewedExecution(null);
+                                 if (
+                                     !parsed.preview &&
++                                    result._meta?.[
++                                        "actions.genericExecution"
++                                    ] !== undefined
++                                ) {
++                                    setGenericExecution(
++                                        parseGenericExecution(
++                                            result._meta ?? {},
++                                            parsed,
++                                        ),
++                                    );
++                                }
++                                if (
++                                    !parsed.preview &&
++                                    result._meta?.[
++                                        "actions.genericExecution"
++                                    ] === undefined &&
+                                     (result._meta?.["actions.appSession"] !==
+                                         undefined ||
+                                         result._meta?.[
+@@ -294,6 +319,7 @@
+         } else {
+             setCanvasView(null);
+             setReviewedExecution(null);
++            setGenericExecution(null);
+             setCanvasViewError(false);
+         }
+     }, [app, isConnected]);
+@@ -359,25 +385,36 @@
+             </section>
+             {canvasView ? (
+                 <section aria-label="Semantic Canvas app">
+-                    {canvasView.spec.visibility.includes("app") ? (
+-                        <p role="status">
+-                            {reviewedAdapter
+-                                ? "Semantic form bindings are read-only. Saved-result review and execution controls are available below."
+-                                : "This app is displayed read-only; interactive actions are disabled."}
+-                        </p>
+-                    ) : null}
+-                    <SemanticCanvasRenderer
+-                        spec={canvasView.spec}
+-                        revision={
+-                            canvasView.preview
+-                                ? canvasView.revision
+-                                : canvasView.revisionId
+-                        }
+-                        scopeKey={canvasView.scopeKey}
+-                        preview={canvasView.preview}
+-                        viewer="app"
+-                        adapters={readOnlyCanvasAdapters}
+-                    />
++                    {genericExecution && app && !canvasView.preview ? (
++                        <GenericSemanticView
++                            key={genericExecution.token}
++                            app={app}
++                            canvas={canvasView}
++                            context={genericExecution}
++                        />
++                    ) : (
++                        <>
++                            {canvasView.spec.visibility.includes("app") ? (
++                                <p role="status">
++                                    {reviewedAdapter
++                                        ? "Semantic form bindings are read-only. Saved-result review and execution controls are available below."
++                                        : "This app is displayed read-only; interactive actions are disabled."}
++                                </p>
++                            ) : null}
++                            <SemanticCanvasRenderer
++                                spec={canvasView.spec}
++                                revision={
++                                    canvasView.preview
++                                        ? canvasView.revision
++                                        : canvasView.revisionId
++                                }
++                                scopeKey={canvasView.scopeKey}
++                                preview={canvasView.preview}
++                                viewer="app"
++                                adapters={readOnlyCanvasAdapters}
++                            />
++                        </>
++                    )}
+                     {reviewedAdapter && reviewedExecution ? (
+                         <InvoiceReviewPanel
+                             key={reviewedExecution.token}
+diff --git a/action_server/frontend/apps/canvas-view/src/semantic-renderer/generic-execution.ts b/action_server/frontend/apps/canvas-view/src/semantic-renderer/generic-execution.ts
+new file mode 100644
+--- /dev/null
++++ b/action_server/frontend/apps/canvas-view/src/semantic-renderer/generic-execution.ts
+@@ -0,0 +1,262 @@
++import type { App } from "@modelcontextprotocol/ext-apps/react";
++import { z } from "zod";
++import type { CanvasAppMetadata } from "./mcp-bridge";
++import { createCapabilityRef } from "./types";
++import type { SemanticRendererAdapters, SemanticFormInput } from "./types";
++
++const binding = z.string().regex(/^[A-Za-z][A-Za-z0-9_-]{0,63}$/u);
++const ref = z.object({
++    workspace_id: z.string().uuid(),
++    revision_id: z.string().regex(/^sha256:[0-9a-f]{64}$/u),
++});
++const session = z
++    .object({
++        token: z.string().regex(/^[A-Za-z0-9_-]{43}$/u),
++        scope: z
++            .object({
++                application: ref.extend({ app_id: z.string().uuid() }).strict(),
++                deployment: ref
++                    .extend({ deployment_id: z.string().uuid() })
++                    .strict(),
++            })
++            .strict(),
++    })
++    .strict();
++const execution = z
++    .object({
++        bindingId: binding,
++        runId: z.string().uuid(),
++        attemptId: z.string().uuid(),
++        state: z.enum([
++            "ready",
++            "completed",
++            "failed",
++            "cancel_requested",
++            "reconciliation_required",
++            "running",
++            "expired",
++        ]),
++        cancelRequested: z.boolean(),
++        outputs: z
++            .array(
++                z
++                    .object({
++                        handle: z.string().regex(/^art_[A-Za-z0-9_-]{22}$/u),
++                    })
++                    .strict(),
++            )
++            .max(64)
++            .optional(),
++    })
++    .strict();
++const contextSchema = z
++    .object({
++        version: z.literal("actions.generic-app/v1"),
++        bindingIds: z.array(binding).min(1).max(32),
++        executions: z.array(execution).max(32).default([]),
++    })
++    .strict();
++export type GenericExecutionState = z.infer<typeof execution>;
++export function parseGenericExecution(
++    meta: Record<string, unknown>,
++    canvas: CanvasAppMetadata,
++) {
++    const scope = session.parse(meta["actions.appSession"]);
++    const value = contextSchema.parse(meta["actions.genericExecution"]);
++    if (
++        !canvas.active ||
++        scope.scope.deployment.deployment_id !== canvas.applicationId ||
++        scope.scope.deployment.revision_id !== canvas.revisionId ||
++        scope.scope.application.app_id !== canvas.applicationId ||
++        scope.scope.application.workspace_id !==
++            scope.scope.deployment.workspace_id ||
++        new Set(value.bindingIds).size !== value.bindingIds.length ||
++        new Set(value.executions.map((item) => item.bindingId)).size !==
++            value.executions.length ||
++        value.executions.some(
++            (item) => !value.bindingIds.includes(item.bindingId),
++        ) ||
++        value.bindingIds.some(
++            (id) =>
++                !canvas.bindings.some(
++                    (b) =>
++                        b.bindingId === id &&
++                        b.packageRevision.workspace_id ===
++                            scope.scope.deployment.workspace_id,
++                ),
++        )
++    )
++        throw new Error("Generic View differs from active app scope.");
++    return { ...scope, ...value };
++}
++export type GenericExecutionContext = ReturnType<typeof parseGenericExecution>;
++export function createGenericExecutionAdapter(
++    app: App,
++    context: GenericExecutionContext,
++    changed: () => void,
++    inspect: (text: string) => void,
++) {
++    const states = new Map<string, GenericExecutionState>(
++        (context.executions ?? []).map((item) => [item.bindingId, item]),
++    );
++    const pending = new Map<string, { key: string; input: string }>();
++    const allowed = (id: string) => context.bindingIds.includes(id);
++    const call = async (name: string, args: Record<string, unknown>) => {
++        const reply = await app.callServerTool({
++            name,
++            arguments: { ...args, mode: "generic", appSession: context.token },
++        });
++        if (reply.isError)
++            throw new Error(
++                "App request denied or unavailable; inspect state before retrying.",
++            );
++        return reply._meta ?? {};
++    };
++    const accept = (
++        id: string,
++        meta: Record<string, unknown>,
++        expectedRun?: string,
++    ) => {
++        const result = execution.parse(meta["actions.execution"]);
++        if (
++            result.bindingId !== id ||
++            (expectedRun !== undefined && result.runId !== expectedRun)
++        )
++            throw new Error("App execution identity changed.");
++        states.set(id, result);
++        changed();
++        return result;
++    };
++    const read = async (
++        id: string,
++        name: "canvas_execution_status" | "canvas_cancel",
++    ) => {
++        const current = states.get(id);
++        if (!allowed(id) || !current)
++            throw new Error("No retained execution selected.");
++        return accept(
++            id,
++            await call(name, { bindingId: id, runId: current.runId }),
++            current.runId,
++        );
++    };
++    const adapters: SemanticRendererAdapters = {
++        resolveFormBinding: (id) =>
++            allowed(id)
++                ? createCapabilityRef<string, SemanticFormInput, unknown>(id)
++                : undefined,
++        dispatch: async (capability, input) => {
++            const id = capability.bindingId;
++            if (!allowed(id)) throw new Error("Binding is unavailable.");
++            const encoded = JSON.stringify(input);
++            const prior = pending.get(id);
++            if (prior && prior.input !== encoded)
++                throw new Error(
++                    "An uncertain submission exists; inspect it before changing input.",
++                );
++            const request = prior ?? {
++                key: globalThis.crypto.randomUUID(),
++                input: encoded,
++            };
++            pending.set(id, request);
++            const admitted = accept(
++                id,
++                await call("canvas_dispatch", {
++                    action: "submit",
++                    bindingId: id,
++                    inputs: input,
++                    idempotencyKey: request.key,
++                }),
++            );
++            const result =
++                admitted.state === "ready"
++                    ? accept(
++                          id,
++                          await call("canvas_dispatch", {
++                              action: "execute",
++                              bindingId: id,
++                              runId: admitted.runId,
++                          }),
++                          admitted.runId,
++                      )
++                    : admitted;
++            if (result.state === "completed" || result.state === "failed")
++                pending.delete(id);
++            return result;
++        },
++        resolveStatusBinding: (id) =>
++            allowed(id) ? createCapabilityRef(id) : undefined,
++        getStatus: (capability) => {
++            const state = states.get(capability.bindingId);
++            return {
++                state:
++                    state?.state === "completed"
++                        ? "success"
++                        : state?.state === "failed"
++                          ? "error"
++                          : state
++                            ? "loading"
++                            : "empty",
++                message: state
++                    ? `Execution ${state.state.replaceAll("_", " ")}.`
++                    : "No execution submitted.",
++            };
++        },
++        resolveArtifactBinding: (id) =>
++            allowed(id) ? createCapabilityRef(id) : undefined,
++        openArtifact: async (capability) => {
++            const state = states.get(capability.bindingId);
++            const handle = state?.outputs?.[0]?.handle;
++            if (!state || !handle)
++                return {
++                    state: "unavailable",
++                    message: "No authorized result artifact is available.",
++                };
++            const meta = await call("canvas_artifact", {
++                bindingId: capability.bindingId,
++                runId: state.runId,
++                handle,
++            });
++            const artifact = z
++                .object({
++                    bindingId: binding,
++                    runId: z.string().uuid(),
++                    handle: z.string(),
++                    text: z.string().max(65536),
++                })
++                .strict()
++                .parse(meta["actions.artifact"]);
++            if (
++                artifact.bindingId !== capability.bindingId ||
++                artifact.runId !== state.runId ||
++                artifact.handle !== handle
++            )
++                throw new Error("Artifact identity differs.");
++            inspect(artifact.text);
++            return {
++                state: "ready",
++                message: "Authorized result inspected below.",
++            };
++        },
++    };
++    return {
++        adapters,
++        states,
++        execute: async (id: string) => {
++            const state = states.get(id);
++            if (!allowed(id) || state?.state !== "ready")
++                throw new Error("No unlaunched execution selected.");
++            return accept(
++                id,
++                await call("canvas_dispatch", {
++                    action: "execute",
++                    bindingId: id,
++                    runId: state.runId,
++                }),
++                state.runId,
++            );
++        },
++        refresh: (id: string) => read(id, "canvas_execution_status"),
++        cancel: (id: string) => read(id, "canvas_cancel"),
++    };
++}
+diff --git a/action_server/frontend/apps/canvas-view/src/semantic-renderer/generic-execution.test.tsx b/action_server/frontend/apps/canvas-view/src/semantic-renderer/generic-execution.test.tsx
+new file mode 100644
+--- /dev/null
++++ b/action_server/frontend/apps/canvas-view/src/semantic-renderer/generic-execution.test.tsx
+@@ -0,0 +1,150 @@
++import { describe, expect, it, vi } from "vitest";
++import type { App } from "@modelcontextprotocol/ext-apps/react";
++import { createGenericExecutionAdapter } from "./generic-execution";
++import type { GenericExecutionContext } from "./generic-execution";
++const id = "11111111-1111-4111-8111-111111111111";
++const context = {
++    token: "a".repeat(43),
++    version: "actions.generic-app/v1",
++    bindingIds: ["run"],
++    scope: {
++        application: {
++            app_id: id,
++            workspace_id: id,
++            revision_id: `sha256:${"1".repeat(64)}`,
++        },
++        deployment: {
++            deployment_id: id,
++            workspace_id: id,
++            revision_id: `sha256:${"2".repeat(64)}`,
++        },
++    },
++} as GenericExecutionContext;
++const state = (value: string) => ({
++    bindingId: "run",
++    runId: id,
++    attemptId: id,
++    state: value,
++    cancelRequested: value === "cancel_requested",
++});
++describe("generic official bridge adapter", () => {
++    it("never runs on mount; submit returns identity before execute and allows cancellation", async () => {
++        let resolve!: (v: unknown) => void;
++        const executing = new Promise((r) => {
++            resolve = r;
++        });
++        const call = vi.fn(
++            async (request: {
++                name: string;
++                arguments: Record<string, unknown>;
++            }) => {
++                expect(request.arguments.appSession).toBe(context.token);
++                expect(request.arguments.snapshot).toBeUndefined();
++                if (request.arguments.action === "submit")
++                    return { _meta: { "actions.execution": state("ready") } };
++                if (request.arguments.action === "execute") return executing;
++                return {
++                    _meta: { "actions.execution": state("cancel_requested") },
++                };
++            },
++        );
++        const controller = createGenericExecutionAdapter(
++            { callServerTool: call } as unknown as App,
++            context,
++            vi.fn(),
++            vi.fn(),
++        );
++        expect(call).not.toHaveBeenCalled();
++        const capability = controller.adapters.resolveFormBinding("run")!;
++        const pending = controller.adapters.dispatch(capability, {
++            value: "hello",
++        });
++        await vi.waitFor(() =>
++            expect(controller.states.get("run")?.runId).toBe(id),
++        );
++        await controller.cancel("run");
++        expect(controller.states.get("run")?.state).toBe("cancel_requested");
++        resolve({ _meta: { "actions.execution": state("cancel_requested") } });
++        await pending;
++        expect(call.mock.calls.map(([v]) => v.name)).toEqual([
++            "canvas_dispatch",
++            "canvas_dispatch",
++            "canvas_cancel",
++        ]);
++    });
++    it("retains submission identity after uncertainty and rejects replacement input", async () => {
++        const call = vi.fn(async () => {
++            throw new Error("lost reply");
++        });
++        const controller = createGenericExecutionAdapter(
++            { callServerTool: call } as unknown as App,
++            context,
++            vi.fn(),
++            vi.fn(),
++        );
++        const capability = controller.adapters.resolveFormBinding("run")!;
++        await expect(
++            controller.adapters.dispatch(capability, { value: "hello" }),
++        ).rejects.toThrow();
++        await expect(
++            controller.adapters.dispatch(capability, { value: "changed" }),
++        ).rejects.toThrow("uncertain");
++        await expect(
++            controller.adapters.dispatch(capability, { value: "hello" }),
++        ).rejects.toThrow();
++        const calls = call.mock.calls as unknown as [
++            { arguments: { idempotencyKey: string } },
++        ][];
++        expect(calls[0][0].arguments.idempotencyKey).toBe(
++            calls[1][0].arguments.idempotencyKey,
++        );
++    });
++    it("rejects foreign binding in response", async () => {
++        const app = {
++            callServerTool: async () => ({
++                _meta: {
++                    "actions.execution": {
++                        ...state("ready"),
++                        bindingId: "foreign",
++                    },
++                },
++            }),
++        } as unknown as App;
++        const controller = createGenericExecutionAdapter(
++            app,
++            context,
++            vi.fn(),
++            vi.fn(),
++        );
++        await expect(
++            controller.adapters.dispatch(
++                controller.adapters.resolveFormBinding("run")!,
++                { value: "hello" },
++            ),
++        ).rejects.toThrow("identity");
++        expect(
++            controller.adapters.resolveFormBinding("foreign"),
++        ).toBeUndefined();
++    });
++});
++
++it("reopens retained state without admission and continues only unlaunched Run", async () => {
++    const call = vi.fn(async () => ({
++        _meta: { "actions.execution": state("completed") },
++    }));
++    const retained = {
++        ...context,
++        executions: [state("ready")],
++    } as GenericExecutionContext;
++    const controller = createGenericExecutionAdapter(
++        { callServerTool: call } as unknown as App,
++        retained,
++        vi.fn(),
++        vi.fn(),
++    );
++    expect(call).not.toHaveBeenCalled();
++    expect(controller.states.get("run")?.runId).toBe(id);
++    await controller.execute("run");
++    expect(call.mock.calls).toHaveLength(1);
++    await expect(controller.execute("run")).rejects.toThrow("unlaunched");
++});
+diff --git a/action_server/frontend/apps/canvas-view/src/semantic-renderer/generic-view.tsx b/action_server/frontend/apps/canvas-view/src/semantic-renderer/generic-view.tsx
+new file mode 100644
+--- /dev/null
++++ b/action_server/frontend/apps/canvas-view/src/semantic-renderer/generic-view.tsx
+@@ -0,0 +1,91 @@
++import { useMemo, useState } from "react";
++import type { App } from "@modelcontextprotocol/ext-apps/react";
++import { SemanticCanvasRenderer } from "./components";
++import type { CanvasAppMetadata } from "./mcp-bridge";
++import { createGenericExecutionAdapter } from "./generic-execution";
++import type { GenericExecutionContext } from "./generic-execution";
++
++export function GenericSemanticView({
++    app,
++    canvas,
++    context,
++}: {
++    app: App;
++    canvas: CanvasAppMetadata;
++    context: GenericExecutionContext;
++}) {
++    const [, update] = useState(0);
++    const [artifact, setArtifact] = useState<string | null>(null);
++    const [error, setError] = useState<string | null>(null);
++    const controller = useMemo(
++        () =>
++            createGenericExecutionAdapter(
++                app,
++                context,
++                () => update((n) => n + 1),
++                setArtifact,
++            ),
++        [app, context],
++    );
++    const act = async (
++        id: string,
++        action: "cancel" | "refresh" | "execute",
++    ) => {
++        try {
++            setError(null);
++            await controller[action](id);
++        } catch {
++            setError(
++                "Execution state unavailable; reopen the app before continuing.",
++            );
++        }
++    };
++    return (
++        <>
++            <SemanticCanvasRenderer
++                spec={canvas.spec}
++                revision={canvas.revisionId}
++                scopeKey={canvas.scopeKey}
++                preview={false}
++                viewer="app"
++                adapters={controller.adapters}
++            />
++            {[...controller.states.values()].map((state) => (
++                <section
++                    key={state.bindingId}
++                    aria-label={`Execution ${state.bindingId}`}
++                >
++                    <p role="status">{state.state.replaceAll("_", " ")}</p>
++                    <button
++                        type="button"
++                        onClick={() => void act(state.bindingId, "refresh")}
++                    >
++                        Refresh status
++                    </button>
++                    {state.state === "ready" ? (
++                        <button
++                            type="button"
++                            onClick={() => void act(state.bindingId, "execute")}
++                        >
++                            Continue execution
++                        </button>
++                    ) : null}
++                    {state.state !== "completed" && state.state !== "failed" ? (
++                        <button
++                            type="button"
++                            onClick={() => void act(state.bindingId, "cancel")}
++                        >
++                            Request cancellation
++                        </button>
++                    ) : null}
++                </section>
++            ))}
++            {error ? <p role="alert">{error}</p> : null}
++            {artifact !== null ? (
++                <section aria-label="Authorized result artifact">
++                    <pre>{artifact}</pre>
++                </section>
++            ) : null}
++        </>
++    );
++}
+diff --git a/action_server/frontend/apps/canvas-view/src/semantic-renderer/generic-view.test.tsx b/action_server/frontend/apps/canvas-view/src/semantic-renderer/generic-view.test.tsx
+new file mode 100644
+--- /dev/null
++++ b/action_server/frontend/apps/canvas-view/src/semantic-renderer/generic-view.test.tsx
+@@ -0,0 +1,82 @@
++import { render, screen, fireEvent, waitFor } from "@testing-library/react";
++import { expect, it, vi } from "vitest";
++import type { App } from "@modelcontextprotocol/ext-apps/react";
++import { GenericSemanticView } from "./generic-view";
++import type { CanvasAppMetadata } from "./mcp-bridge";
++import type { GenericExecutionContext } from "./generic-execution";
++const id = "11111111-1111-4111-8111-111111111111";
++const context = {
++    token: "a".repeat(43),
++    version: "actions.generic-app/v1",
++    bindingIds: ["run"],
++    scope: {
++        application: {
++            app_id: id,
++            workspace_id: id,
++            revision_id: `sha256:${"1".repeat(64)}`,
++        },
++        deployment: {
++            deployment_id: id,
++            workspace_id: id,
++            revision_id: `sha256:${"2".repeat(64)}`,
++        },
++    },
++} as GenericExecutionContext;
++const canvas = {
++    applicationId: id,
++    revisionId: `sha256:${"2".repeat(64)}`,
++    active: true,
++    preview: false,
++    scopeKey: "owned",
++    bindings: [],
++    spec: {
++        schemaVersion: "actions.canvas-spec/v1",
++        title: "Generic job",
++        visibility: ["app", "model"],
++        bindingIds: ["run"],
++        root: {
++            type: "form",
++            id: "input",
++            bindingId: "run",
++            submitLabel: "Run job",
++            fields: [
++                { name: "value", label: "Value", type: "text", required: true },
++            ],
++        },
++    },
++} as CanvasAppMetadata;
++it("semantic form explicitly submits and shows persistent Run status without mount execution", async () => {
++    const call = vi.fn(async (req: { arguments: { action: string } }) => ({
++        _meta: {
++            "actions.execution": {
++                bindingId: "run",
++                runId: id,
++                attemptId: id,
++                state:
++                    req.arguments.action === "submit" ? "ready" : "completed",
++                cancelRequested: false,
++            },
++        },
++    }));
++    render(
++        <GenericSemanticView
++            app={{ callServerTool: call } as unknown as App}
++            canvas={canvas}
++            context={context}
++        />,
++    );
++    expect(call).not.toHaveBeenCalled();
++    fireEvent.change(screen.getByLabelText("Value"), {
++        target: { value: "hello" },
++    });
++    fireEvent.click(screen.getByRole("button", { name: "Run job" }));
++    await waitFor(() => expect(call).toHaveBeenCalledTimes(2));
++    expect(
++        (
++            await screen.findByRole("button", { name: "Refresh status" })
++        ).hasAttribute("disabled"),
++    ).toBe(false);
++    expect(
++        screen.queryByRole("button", { name: "Request cancellation" }),
++    ).toBeNull();
++});

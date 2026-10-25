@@ -1,0 +1,15 @@
+{
+  "status": "REVIEWED_DRAFTS_NOT_INTEGRATED_NOT_RELEASE_QUALIFIED",
+  "purpose": "recoverable bounded next-source proposals while frozen a27 full gate runs",
+  "source_base": "fdc38d7090c4ac470171c499e77eab636fd452e6",
+  "dependencies": "app proposal requires separate generic dispatch registration from discovery proposal; bootstrap/version wiring not yet applied",
+  "remaining": "none-mode model followup, actual/installed/browser integration, explicit local operator provisioning, full original campaign gates",
+  "files": {
+    "model-discovery.patch": "4e48f2d0302e6b92c27f9ce2c26aa5cae25e1e7220c8020be419df46ff9f54ff",
+    "model-discovery-receipt.md": "3f8c2e9c64c4a62bb20dc6160bcc3f789f1128a20f201462484e31ea7cb580ee",
+    "generic-bound-app.patch": "ab3767521b2c0f9815774f4865a826b4f00198b25214b0b793dde5b32161753c",
+    "generic-bound-app-receipt.md": "6c07aad46b000d76fa1243b7edeef72dcd027e16ca3d9793f1e31ee0c020ae8d",
+    "generic-bound-app-guide.md": "0aa9fabcc61bfff03339ddc28c40a563a18228102e590d2662687d0aad9866e6"
+  },
+  "upstream_disposition": "none"
+}
