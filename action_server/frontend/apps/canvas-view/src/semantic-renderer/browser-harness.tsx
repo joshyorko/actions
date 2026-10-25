@@ -1,4 +1,5 @@
 import { createRoot } from "react-dom/client";
+import { useRef, useState } from "react";
 
 import "./browser-harness.css";
 import {
@@ -22,26 +23,57 @@ const capability = createCapabilityRef<"search", SearchInput, SearchOutput>(
     "search",
 );
 
-const dispatch: CapabilityDispatcher<
-    "search",
-    SearchInput,
-    SearchOutput
-> = async (_reference, input) => ({
-    rows: [
-        {
-            id: "synthetic-record-1",
-            label: `Synthetic result for “${input.query}”`,
-        },
-    ],
-});
-
+const scenario = new window.URLSearchParams(window.location.search).get(
+    "scenario",
+);
 function ComponentHarness() {
+    const completePending = useRef<(() => void) | undefined>(undefined);
+    const [dispatchCount, setDispatchCount] = useState(0);
+    const dispatch: CapabilityDispatcher<
+        "search",
+        SearchInput,
+        SearchOutput
+    > = async (_reference, input) => {
+        setDispatchCount((count) => count + 1);
+        if (scenario === "error") throw new Error("Synthetic backend failure");
+        if (scenario === "empty") return { rows: [] };
+        const result = {
+            rows: [
+                {
+                    id: "synthetic-record-1",
+                    label: `Synthetic result for “${input.query}”`,
+                },
+            ],
+        };
+        if (scenario === "loading") {
+            return new Promise((resolve) => {
+                completePending.current = () => resolve(result);
+            });
+        }
+        return result;
+    };
     return (
         <>
             <p className="semantic-harness-label">
                 Component harness · synthetic data · not Runtime-hosted or
                 ChatGPT E1
             </p>
+            {scenario === "loading" ? (
+                <button
+                    type="button"
+                    onClick={() => completePending.current?.()}
+                >
+                    Complete synthetic request
+                </button>
+            ) : null}
+            {scenario ? (
+                <p>
+                    Synthetic dispatches:{" "}
+                    <span data-testid="synthetic-dispatch-count">
+                        {dispatchCount}
+                    </span>
+                </p>
+            ) : null}
             <SemanticCanvas
                 title="Semantic Canvas components"
                 revision="component-harness"
