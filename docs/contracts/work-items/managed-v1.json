@@ -6011,7 +6011,8 @@
                 "reviewed",
                 "producer",
                 "consumer",
-                "optional"
+                "optional",
+                "required-input"
               ],
               "title": "Mode",
               "type": "string"

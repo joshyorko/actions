@@ -6,7 +6,14 @@
     "passed": 162,
     "skipped": 0
   },
-  "final_followup": "RUNNING; no pass claimed",
+  "final_followup": {
+    "status": "PASS",
+    "tests": 126,
+    "skipped": 0,
+    "failure": 0,
+    "error": 0,
+    "receipt": "final-followup/receipt.json"
+  },
   "actual_helper_RCC": {
     "generic_modes": 3,
     "model_wrapper": 1,
@@ -41,5 +48,11 @@
     "a27-typecheck-final2.txt": "1029f8f6cca14c64f4f9e6820e08ce04f384661b532c9240521652ad6f3ffb3d",
     "a27-wiring.txt": "f4cd5d74f33a89e1397bf74246dac5d484e3fa542bca9413b1bdf71a1a4dc6ce",
     "generic-real-rcc-final.txt": "840feed0a5ce28fe9eb8b1f6985ebf53adef9e3d4eb1d43acb6f0fd0631b231c"
+  },
+  "first_boot": {
+    "red": 3,
+    "green": 11,
+    "source": "fdc38d7090c4ac470171c499e77eab636fd452e6",
+    "ordinary_a26": "compiler_workspace_failed before execution; UI lifecycle passed"
   }
 }

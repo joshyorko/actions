@@ -1,0 +1,9 @@
+{
+  "source": "fdc38d7090c4ac470171c499e77eab636fd452e6",
+  "passed": 157,
+  "failed": 1,
+  "deselected": 4,
+  "failure": "QueueView.mode missing required-input",
+  "raw_junit_sha256": "6fc3807174c10a190941d9984c4e4da94c022f02bee4ad188cc494d770726265",
+  "committed_junit": "bounded failure text; raw schema dumps omitted"
+}

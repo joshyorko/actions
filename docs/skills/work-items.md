@@ -1271,3 +1271,8 @@ an unbounded queue-scale claim.
 The wrapper resolves the exact retained Deployment, Runtime Plan and unique capability Work Item policy before dispatch. A terminal invocation returns its retained Run/Attempt/item state without another launch. An existing launch returns `reconciliation_required`, including after an earlier uncertain runner failure; invocation never retries that launch. Projection rechecks independent Work Item and Run Attempt identities. Artifact handles are returned only for attached final outputs that resolve under live common Run/package read and queue READ/ARTIFACT_READ grants. Execute permission alone does not expose output handles, bytes, generated source or credentials; revocation applies again on replay.
 
 `test_generic_execution_port.py` distinguishes synthetic runner boundary tests from its explicit `ACTIONS_GENERIC_WRAPPER_REAL_RCC=1` test. The actual test compiles and invokes a generated optional-input Action through the model wrapper, validates four sealed output handles, and repeats the invocation without relaunch. It requires exclusive ownership of the exact prepared RCC home. This is source-level wrapper evidence, not installed-consumer, startup wiring, authenticated ChatGPT, generic bound-app UI or failed-process reconciliation qualification.
+
+When adding a managed queue mode, update both the command and result schemas in
+`docs/contracts/work-items/managed-v1.json`. The canonical comparison is
+`test_checked_in_export_matches_the_actual_wire_contract`; an enqueue schema
+update alone misses `queues.list` QueueView mode negotiation.

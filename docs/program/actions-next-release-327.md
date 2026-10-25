@@ -85,7 +85,9 @@ include three actual generic RCC modes and one actual model-wrapper invocation,
 with zero skips; separate SQLite/PostgreSQL corruption tests enforce the final
 guards. Runtime typecheck480 and Python lint passed. The source wiring iteration
 passed22/23classified skips without service configuration; its strict joined
-follow-up and full frozen-source gate are pending at this checkpoint. These
+follow-up passed126 with zero skips. The full frozen-source gate caught a stale
+exported queue-mode enum (required-input omitted); its first stage was157pass/1fail,
+so broader stages remain pending. These
 counts overlap and are not additive. See [bounded receipts](evidence/actions-next-327/recovery-a27/qualification.json).
 
 The managed contract remains `actions.managed-work-items/v1` on
