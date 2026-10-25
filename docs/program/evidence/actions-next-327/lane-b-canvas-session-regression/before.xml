@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="1.156" timestamp="2026-10-25T14:26:31.392258+00:00" hostname="24f4e4db41bc"><testcase classname="tests.contract_tests.test_lane_b_installed_lifecycle" name="test_canvas_keeps_mcp_session_for_both_roles[True]" time="1.030"><failure message="AttributeError: 'dict' object has no attribute 'call_tool'">tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-16/test_canvas_keeps_mcp_session_0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7f9cffea7fe0&gt;
+with_app_session = True
+
+    @pytest.mark.parametrize('with_app_session', [True, False])
+    def test_canvas_keeps_mcp_session_for_both_roles(tmp_path, monkeypatch, with_app_session):
+        scripts = Path(__file__).parents[2] / 'scripts'
+        monkeypatch.syspath_prepend(str(scripts))
+        spec = importlib.util.spec_from_file_location('lane_b_canvas', scripts / 'lane_b_installed_knowledge_lifecycle.py')
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        runner = object.__new__(module.Lifecycle)
+        runner.m = {role: {'app_id': role + '-app', 'binding_id': role + '-binding'} for role in ('ingestion', 'search')}
+        runner.app_sessions = {}
+        calls = []
+
+        class Session:
+            async def call_tool(self, name, arguments):
+                calls.append((self, name, arguments))
+                role = arguments['appId'].removesuffix('-app')
+                if name == 'canvas_inspect':
+                    return SimpleNamespace(is_error=False, structured_content={'invocationDescriptors': [{'bindingId': role + '-binding', 'snapshot': {'role': role}}]})
+                assert name == 'canvas_get'
+                meta = {'actions.canvas': {'spec': {'nodes': [{'type': 'artifact', 'bindingId': role + '-binding'}]}}}
+                if with_app_session:
+                    meta['actions.appSession'] = {'token': role + '-synthetic-token'}
+                return SimpleNamespace(is_error=False, meta=meta)
+
+        session = Session()
+&gt;       assert asyncio.run(runner.canvas(session)) == {'ingestion': {'role': 'ingestion'}, 'search': {'role': 'search'}}
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/contract_tests/test_lane_b_installed_lifecycle.py:173:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+../../lane-b-state/rcc/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/asyncio/runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+../../lane-b-state/rcc/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/asyncio/runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../lane-b-state/rcc/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/asyncio/base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;lane_b_canvas.Lifecycle object at 0x7f9cffeb8f80&gt;
+session = {'token': 'ingestion-synthetic-token'}
+
+    async def canvas(self, session):
+        snapshots = {}
+        for role in ("ingestion", "search"):
+            app = self.m[role]
+&gt;           reply = await session.call_tool("canvas_inspect", {"appId": app["app_id"]})
+                          ^^^^^^^^^^^^^^^^^
+E           AttributeError: 'dict' object has no attribute 'call_tool'
+
+scripts/lane_b_installed_knowledge_lifecycle.py:272: AttributeError</failure></testcase><testcase classname="tests.contract_tests.test_lane_b_installed_lifecycle" name="test_canvas_keeps_mcp_session_for_both_roles[False]" time="0.002"><failure message="AttributeError: 'dict' object has no attribute 'call_tool'">tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-16/test_canvas_keeps_mcp_session_1')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7f9cffeba300&gt;
+with_app_session = False
+
+    @pytest.mark.parametrize('with_app_session', [True, False])
+    def test_canvas_keeps_mcp_session_for_both_roles(tmp_path, monkeypatch, with_app_session):
+        scripts = Path(__file__).parents[2] / 'scripts'
+        monkeypatch.syspath_prepend(str(scripts))
+        spec = importlib.util.spec_from_file_location('lane_b_canvas', scripts / 'lane_b_installed_knowledge_lifecycle.py')
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        runner = object.__new__(module.Lifecycle)
+        runner.m = {role: {'app_id': role + '-app', 'binding_id': role + '-binding'} for role in ('ingestion', 'search')}
+        runner.app_sessions = {}
+        calls = []
+
+        class Session:
+            async def call_tool(self, name, arguments):
+                calls.append((self, name, arguments))
+                role = arguments['appId'].removesuffix('-app')
+                if name == 'canvas_inspect':
+                    return SimpleNamespace(is_error=False, structured_content={'invocationDescriptors': [{'bindingId': role + '-binding', 'snapshot': {'role': role}}]})
+                assert name == 'canvas_get'
+                meta = {'actions.canvas': {'spec': {'nodes': [{'type': 'artifact', 'bindingId': role + '-binding'}]}}}
+                if with_app_session:
+                    meta['actions.appSession'] = {'token': role + '-synthetic-token'}
+                return SimpleNamespace(is_error=False, meta=meta)
+
+        session = Session()
+&gt;       assert asyncio.run(runner.canvas(session)) == {'ingestion': {'role': 'ingestion'}, 'search': {'role': 'search'}}
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/contract_tests/test_lane_b_installed_lifecycle.py:173:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+../../lane-b-state/rcc/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/asyncio/runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+../../lane-b-state/rcc/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/asyncio/runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../lane-b-state/rcc/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/asyncio/base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;lane_b_canvas.Lifecycle object at 0x7f9cffebaa20&gt;, session = {}
+
+    async def canvas(self, session):
+        snapshots = {}
+        for role in ("ingestion", "search"):
+            app = self.m[role]
+&gt;           reply = await session.call_tool("canvas_inspect", {"appId": app["app_id"]})
+                          ^^^^^^^^^^^^^^^^^
+E           AttributeError: 'dict' object has no attribute 'call_tool'
+
+scripts/lane_b_installed_knowledge_lifecycle.py:272: AttributeError</failure></testcase></testsuite></testsuites>

@@ -143,3 +143,64 @@ def test_retained_ingestion_never_replaces_missing_or_changed_task(
         with pytest.raises(ValueError):
             asyncio.run(runner.retained_ingestion(snapshot))
         assert not any(call[0] == "invoke" for call in calls)
+
+
+@pytest.mark.parametrize("with_app_session", [True, False])
+def test_canvas_keeps_mcp_session_for_both_roles(
+    tmp_path, monkeypatch, with_app_session
+):
+    scripts = Path(__file__).parents[2] / "scripts"
+    monkeypatch.syspath_prepend(str(scripts))
+    spec = importlib.util.spec_from_file_location(
+        "lane_b_canvas", scripts / "lane_b_installed_knowledge_lifecycle.py"
+    )
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    runner = object.__new__(module.Lifecycle)
+    runner.m = {
+        role: {"app_id": role + "-app", "binding_id": role + "-binding"}
+        for role in ("ingestion", "search")
+    }
+    runner.app_sessions = {}
+    calls = []
+
+    class Session:
+        async def call_tool(self, name, arguments):
+            calls.append((self, name, arguments))
+            role = arguments["appId"].removesuffix("-app")
+            if name == "canvas_inspect":
+                return SimpleNamespace(
+                    is_error=False,
+                    structured_content={
+                        "invocationDescriptors": [
+                            {"bindingId": role + "-binding", "snapshot": {"role": role}}
+                        ]
+                    },
+                )
+            assert name == "canvas_get"
+            meta = {
+                "actions.canvas": {
+                    "spec": {
+                        "nodes": [{"type": "artifact", "bindingId": role + "-binding"}]
+                    }
+                }
+            }
+            if with_app_session:
+                meta["actions.appSession"] = {"token": role + "-synthetic-token"}
+            return SimpleNamespace(is_error=False, meta=meta)
+
+    session = Session()
+    assert asyncio.run(runner.canvas(session)) == {
+        "ingestion": {"role": "ingestion"},
+        "search": {"role": "search"},
+    }
+    assert calls == [
+        (session, name, {"appId": role + "-app"})
+        for role in ("ingestion", "search")
+        for name in ("canvas_inspect", "canvas_get")
+    ]
+    assert runner.app_sessions == (
+        {role: role + "-synthetic-token" for role in ("ingestion", "search")}
+        if with_app_session
+        else {}
+    )

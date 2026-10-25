@@ -1,0 +1,140 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0
+rootdir: /workspace/lane-b-actions/action_server
+configfile: pyproject.toml
+plugins: regressions-1.0.6, xdist-3.8.0, anyio-4.14.2, cov-5.0.0, datadir-1.8.0
+collected 8 items / 6 deselected / 2 selected
+
+tests/contract_tests/test_lane_b_installed_lifecycle.py FF               [100%]
+
+=================================== FAILURES ===================================
+______________ test_canvas_keeps_mcp_session_for_both_roles[True] ______________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-16/test_canvas_keeps_mcp_session_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f9cffea7fe0>
+with_app_session = True
+
+    @pytest.mark.parametrize('with_app_session', [True, False])
+    def test_canvas_keeps_mcp_session_for_both_roles(tmp_path, monkeypatch, with_app_session):
+        scripts = Path(__file__).parents[2] / 'scripts'
+        monkeypatch.syspath_prepend(str(scripts))
+        spec = importlib.util.spec_from_file_location('lane_b_canvas', scripts / 'lane_b_installed_knowledge_lifecycle.py')
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        runner = object.__new__(module.Lifecycle)
+        runner.m = {role: {'app_id': role + '-app', 'binding_id': role + '-binding'} for role in ('ingestion', 'search')}
+        runner.app_sessions = {}
+        calls = []
+
+        class Session:
+            async def call_tool(self, name, arguments):
+                calls.append((self, name, arguments))
+                role = arguments['appId'].removesuffix('-app')
+                if name == 'canvas_inspect':
+                    return SimpleNamespace(is_error=False, structured_content={'invocationDescriptors': [{'bindingId': role + '-binding', 'snapshot': {'role': role}}]})
+                assert name == 'canvas_get'
+                meta = {'actions.canvas': {'spec': {'nodes': [{'type': 'artifact', 'bindingId': role + '-binding'}]}}}
+                if with_app_session:
+                    meta['actions.appSession'] = {'token': role + '-synthetic-token'}
+                return SimpleNamespace(is_error=False, meta=meta)
+
+        session = Session()
+>       assert asyncio.run(runner.canvas(session)) == {'ingestion': {'role': 'ingestion'}, 'search': {'role': 'search'}}
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/contract_tests/test_lane_b_installed_lifecycle.py:173:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+../../lane-b-state/rcc/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/asyncio/runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+../../lane-b-state/rcc/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/asyncio/runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../lane-b-state/rcc/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/asyncio/base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <lane_b_canvas.Lifecycle object at 0x7f9cffeb8f80>
+session = {'token': 'ingestion-synthetic-token'}
+
+    async def canvas(self, session):
+        snapshots = {}
+        for role in ("ingestion", "search"):
+            app = self.m[role]
+>           reply = await session.call_tool("canvas_inspect", {"appId": app["app_id"]})
+                          ^^^^^^^^^^^^^^^^^
+E           AttributeError: 'dict' object has no attribute 'call_tool'
+
+scripts/lane_b_installed_knowledge_lifecycle.py:272: AttributeError
+----------------------------- Captured stderr call -----------------------------
+TEST PROCESS: 2026-10-25 14:26:32,450 - asyncio - DEBUG - Using selector: EpollSelector
+------------------------------ Captured log call -------------------------------
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+_____________ test_canvas_keeps_mcp_session_for_both_roles[False] ______________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-16/test_canvas_keeps_mcp_session_1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f9cffeba300>
+with_app_session = False
+
+    @pytest.mark.parametrize('with_app_session', [True, False])
+    def test_canvas_keeps_mcp_session_for_both_roles(tmp_path, monkeypatch, with_app_session):
+        scripts = Path(__file__).parents[2] / 'scripts'
+        monkeypatch.syspath_prepend(str(scripts))
+        spec = importlib.util.spec_from_file_location('lane_b_canvas', scripts / 'lane_b_installed_knowledge_lifecycle.py')
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        runner = object.__new__(module.Lifecycle)
+        runner.m = {role: {'app_id': role + '-app', 'binding_id': role + '-binding'} for role in ('ingestion', 'search')}
+        runner.app_sessions = {}
+        calls = []
+
+        class Session:
+            async def call_tool(self, name, arguments):
+                calls.append((self, name, arguments))
+                role = arguments['appId'].removesuffix('-app')
+                if name == 'canvas_inspect':
+                    return SimpleNamespace(is_error=False, structured_content={'invocationDescriptors': [{'bindingId': role + '-binding', 'snapshot': {'role': role}}]})
+                assert name == 'canvas_get'
+                meta = {'actions.canvas': {'spec': {'nodes': [{'type': 'artifact', 'bindingId': role + '-binding'}]}}}
+                if with_app_session:
+                    meta['actions.appSession'] = {'token': role + '-synthetic-token'}
+                return SimpleNamespace(is_error=False, meta=meta)
+
+        session = Session()
+>       assert asyncio.run(runner.canvas(session)) == {'ingestion': {'role': 'ingestion'}, 'search': {'role': 'search'}}
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/contract_tests/test_lane_b_installed_lifecycle.py:173:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+../../lane-b-state/rcc/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/asyncio/runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+../../lane-b-state/rcc/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/asyncio/runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../lane-b-state/rcc/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/asyncio/base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <lane_b_canvas.Lifecycle object at 0x7f9cffebaa20>, session = {}
+
+    async def canvas(self, session):
+        snapshots = {}
+        for role in ("ingestion", "search"):
+            app = self.m[role]
+>           reply = await session.call_tool("canvas_inspect", {"appId": app["app_id"]})
+                          ^^^^^^^^^^^^^^^^^
+E           AttributeError: 'dict' object has no attribute 'call_tool'
+
+scripts/lane_b_installed_knowledge_lifecycle.py:272: AttributeError
+----------------------------- Captured stderr call -----------------------------
+TEST PROCESS: 2026-10-25 14:26:32,514 - asyncio - DEBUG - Using selector: EpollSelector
+------------------------------ Captured log call -------------------------------
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+---- generated xml file: /workspace/lane-b-state/canvas-session-before.xml -----
+=========================== short test summary info ============================
+FAILED tests/contract_tests/test_lane_b_installed_lifecycle.py::test_canvas_keeps_mcp_session_for_both_roles[True]
+FAILED tests/contract_tests/test_lane_b_installed_lifecycle.py::test_canvas_keeps_mcp_session_for_both_roles[False]
+======================= 2 failed, 6 deselected in 1.15s ========================

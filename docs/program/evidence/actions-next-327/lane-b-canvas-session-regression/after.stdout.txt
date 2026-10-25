@@ -1,0 +1,15 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0
+rootdir: /workspace/lane-b-actions/action_server
+configfile: pyproject.toml
+plugins: regressions-1.0.6, xdist-3.8.0, anyio-4.14.2, cov-5.0.0, datadir-1.8.0
+collected 47 items
+
+tests/contract_tests/test_lane_b_installed_lifecycle.py ........         [ 17%]
+tests/contract_tests/test_lane_b_installed_output_http.py .............. [ 46%]
+.......                                                                  [ 61%]
+tests/contract_tests/test_lane_b_installed_knowledge.py ................ [ 95%]
+..                                                                       [100%]
+
+----- generated xml file: /workspace/lane-b-state/canvas-session-after.xml -----
+============================== 47 passed in 8.56s ==============================

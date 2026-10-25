@@ -280,9 +280,9 @@ class Lifecycle:
             snapshots[role] = matches[0]["snapshot"]
             opened = await session.call_tool("canvas_get", {"appId": app["app_id"]})
             require(not opened.is_error)
-            session = opened.meta.get("actions.appSession", {})
-            if session.get("token"):
-                self.app_sessions[role] = session["token"]
+            app_session = opened.meta.get("actions.appSession", {})
+            if app_session.get("token"):
+                self.app_sessions[role] = app_session["token"]
             spec = opened.meta["actions.canvas"]["spec"]
             require(
                 any(
