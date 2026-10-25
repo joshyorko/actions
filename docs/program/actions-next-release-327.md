@@ -1,3 +1,13 @@
+## Knowledge continuation: source foundation only
+
+[Explicit mappings and Core context](evidence/actions-next-327/recovery-a39/knowledge-context/README.md)
+preserve prior wire formats and add the separate candidate contract: root mapping10,
+Core context79 and owned-PostgreSQL binding50 cases passed; helper full Core411
+passed with zero skips. Counts overlap. Ordinary generated Knowledge publication
+and installed a39 remain open. The [independent desktop Codex probe](evidence/actions-next-327/recovery-a38/codex-client-blocker/README.md)
+initialized but failed existing model transport (90seconds, exit124), with no
+model answer or MCP calls. Genuine model acceptance remains blocked.
+
 ## Fresh a38 canonical execution checkpoint
 
 [Exact receipts](evidence/actions-next-327/recovery-a38/canonical/README.md):

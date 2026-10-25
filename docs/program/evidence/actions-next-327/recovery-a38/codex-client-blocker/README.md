@@ -22,3 +22,16 @@ state. Independent product work continues; no environment rebuild is requested.
 
 Upstream disposition: none. Exact root cause is not established; no external
 issue or credential action is authorized or attempted.
+
+## Independent desktop probe reported by parent
+
+The parent reports actual `/opt/codex/bin/codex`0.163.0 started a thread/turn
+in fresh task-local scratch, avoiding this coding container's startup EROFS.
+It produced no model answer: the existing Responses WebSocket failed with
+ECONNREFUSED/ENETUNREACH and the client's own HTTPS fallback also failed;
+a bounded90second probe exited124. No MCP attachment or tool calls occurred.
+No login, auth copying, network/security changes or alternate route was attempted.
+This is a separate environment-specific **BLOCKED** receipt, not a passing
+client or proof that this container's write restriction is solved. The parent
+retains sanitized exact command/events; `desktop-parent-report.json` records
+only the relayed facts. Independent engineering continues.

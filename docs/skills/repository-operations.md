@@ -5411,6 +5411,18 @@ does not bypass this gate.
 
 ### Generated Action logical lookup SDK
 
+Mapped Knowledge requirements use the separate Package
+`actions.package-revision/v3-invocations-draft` contract. Every declared operation
+has exactly one invocation mapping covering all its parameters. Mappings select
+required, exactly typed top-level Action inputs only; they do not infer ambient
+keys, evaluate expressions or traverse paths. Build and artifact verification
+both validate mappings against the retained Action input schema. Runtime mapping
+rejects boolean-as-integer, subclasses and nonportable numeric values. An omitted
+`invocations` field preserves existing requirement serialization and Package v1/v2
+selection. This draft requires the Core a4 / Runtime a39 candidate ranges and
+exact Core a4 source pin; accepting the source contract is not installed candidate
+qualification or permission to execute unsupported Knowledge operations.
+
 `actions.data.scan(requirement_id, operation)` reads one declared eager logical
 lookup and returns a fresh list of flat row dictionaries. It performs no query,
 file/environment lookup or provider selection. The trusted Runtime must enter
@@ -5429,6 +5441,42 @@ zero must use the Runtime's canonical positive0.0 form. Only exact parameterless
 bound limits that source-object prefix to59characters. No strings are narrowed
 below the already bounded context policy. Each call decodes immutable retained
 row bytes anew, so action mutation cannot change later lookups.
+
+Context `actions.logical-context/v2` is a separate closed envelope with the same
+256 KiB and 32-lookup aggregate limits. Each lookup has exactly `requirementId`,
+`operation`, `kind`, `parameters`, and `result`. Data lookups require empty
+parameters and the existing flat scan-row contract; `actions.data.scan` works in
+both versions without changing the v1 wire schema. Knowledge lookups permit only
+`<name>.ingest/v1` and `<name>.search/v1`, with a name prefix of at most 57
+characters. Namespace/operation mismatches and duplicate lookup identities fail.
+
+`actions.knowledge.ingest(requirement_id, operation)` selects an empty-parameter
+prepared result; it does not publish a corpus or prove completion. The search
+API takes keyword-only `ingestion_handle`, `query`, `offset=0`, and `limit=20` and
+compares all four canonical parameters to the prepared invocation. Strings must
+be built-in strings, offset/limit built-in portable integers (not booleans or
+coerced floats), offset nonnegative and limit positive. Defaults become explicit
+0/20 before comparison. Different parameters cannot execute another query.
+Runtime admission still owns handle authorization, query/provider-specific bounds,
+result schemas, and canonical ingestion/publication authority.
+
+Knowledge results are JSON objects and may contain nested objects, arrays and
+nulls. The SDK bounds nesting to depth 8 (result root depth 0), object members to
+64 and array items to 10,000, within the aggregate byte limit; all numbers retain
+the existing finite/portable canonical rules. Every call decodes immutable bytes
+into a fresh result, so nested mutations cannot affect another lookup. Context
+validation/installation and the SDK perform no provider, filesystem, credential
+or network access. Source SDK tests do not establish installed RCC execution or
+Knowledge Task/publication integration; the Runtime must supply the versioned
+context through the actual generated execution path.
+
+For isolated Core package tests, assert the imported SDK source location and
+propagate that source path to subprocesses, but remove the external runner's
+own directory from `sys.path` when test fixtures live below it. The action
+collector derives module roots from import paths: exposing the fixture ancestor
+can change collected module identities and duplicate package entry discovery.
+Keep the original failed receipt when correcting this harness contamination;
+re-run the affected collection tests before repeating the selected full inventory.
 
 The SDK source API alone does not qualify ordinary generated Data execution.
 Compile/run with a genuinely rebuilt prepared RCC artifact containing the

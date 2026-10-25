@@ -48,6 +48,9 @@ MAX_RCC_OUTPUT_BYTES = 1024 * 1024
 RCC_BUILD_TIMEOUT_SECONDS = 600
 PACKAGE_SCHEMA_VERSION = "actions.package-revision/v1-draft"
 PACKAGE_BINDINGS_SCHEMA_VERSION = "actions.package-revision/v2-bindings-draft"
+PACKAGE_INVOCATIONS_SCHEMA_VERSION = "actions.package-revision/v3-invocations-draft"
+KNOWLEDGE_CORE_RANGE = ">=1.1.0a4,<2.0.0"
+KNOWLEDGE_RUNTIME_RANGE = ">=1.1.0a39,<2.0.0"
 RUNTIME_PLAN_SCHEMA_VERSION = 1
 RUNTIME_PLAN_ADAPTER_SCHEMA_ID = "actions.rcc-environment-specification"
 RUNTIME_PLAN_ADAPTER_SCHEMA_VERSION = "v1-draft"
@@ -61,6 +64,31 @@ _DIGEST_RE = re.compile(r"^sha256:[0-9a-f]{64}$")
 _DEPENDENCY_RE = re.compile(
     r"^(?P<name>[A-Za-z0-9][A-Za-z0-9_.-]*)(?P<version>==|=)(?P<pin>[0-9]+(?:\.[0-9]+)*(?:[A-Za-z][0-9A-Za-z]*(?:[.+_-][0-9A-Za-z]+)*)?)$"
 )
+
+
+def _package_schema(requirements):
+    if any(requirement.invocations is not None for requirement in requirements):
+        return PACKAGE_INVOCATIONS_SCHEMA_VERSION
+    return PACKAGE_BINDINGS_SCHEMA_VERSION if requirements else PACKAGE_SCHEMA_VERSION
+
+
+def _validate_invocation_compatibility(requirements, compatibility, environment):
+    if _package_schema(requirements) != PACKAGE_INVOCATIONS_SCHEMA_VERSION:
+        return
+    # This new draft requires the exact private Core candidate contract.
+    # Do not silently bless an older SDK or an unqualified future context reader.
+    core = [
+        item["constraint"]
+        for item in environment
+        if item["kind"] == "python-package" and item["name"] == "actions-core"
+    ]
+    if core != ["==1.1.0a4"] or compatibility != {
+        "actionsCoreRange": KNOWLEDGE_CORE_RANGE,
+        "actionsRuntimeRange": KNOWLEDGE_RUNTIME_RANGE,
+    }:
+        raise ValueError(
+            "mapped Knowledge requires the Core a4 and Runtime a39 candidate contract"
+        )
 
 
 @dataclass(frozen=True)
@@ -425,6 +453,7 @@ def _verify_compiled_package_revision(compiled: CompiledPackageRevision) -> None
     } or manifest["schemaVersion"] not in (
         PACKAGE_SCHEMA_VERSION,
         PACKAGE_BINDINGS_SCHEMA_VERSION,
+        PACKAGE_INVOCATIONS_SCHEMA_VERSION,
     ):
         raise ValueError("Package manifest shape is invalid")
     if _canonical_json(manifest) != compiled.manifest_json:
@@ -476,9 +505,7 @@ def _verify_compiled_package_revision(compiled: CompiledPackageRevision) -> None
             for value in raw_requirements
         )
     )
-    expected_schema = (
-        PACKAGE_BINDINGS_SCHEMA_VERSION if requirements else PACKAGE_SCHEMA_VERSION
-    )
+    expected_schema = _package_schema(requirements)
     if manifest["schemaVersion"] != expected_schema:
         raise ValueError("Package schema and logical requirement presence differ")
     if raw_requirements != [
@@ -539,6 +566,13 @@ def _verify_compiled_package_revision(compiled: CompiledPackageRevision) -> None
     input_schema = _canonical_object(
         compiled.input_schema_payload, MAX_COMPILER_METADATA_BYTES
     )
+    from actions.server.deployments.logical_bindings import validate_invocation_inputs
+
+    validate_invocation_inputs(requirements, input_schema)
+    if expected_schema == PACKAGE_INVOCATIONS_SCHEMA_VERSION:
+        _validate_invocation_compatibility(
+            requirements, manifest["compatibility"], _validate_package_inputs(snapshot)
+        )
     output_schema = _canonical_object(
         compiled.output_schema_payload, MAX_COMPILER_METADATA_BYTES
     )
@@ -1216,11 +1250,13 @@ def _assemble_compiled_package(
         "digest": plan_digest_text,
         **runtime_plan_without_digest,
     }
-    package_schema = (
-        PACKAGE_BINDINGS_SCHEMA_VERSION
-        if policy.logical_requirements
-        else PACKAGE_SCHEMA_VERSION
+    from actions.server.deployments.logical_bindings import validate_invocation_inputs
+
+    validate_invocation_inputs(policy.logical_requirements, input_schema)
+    _validate_invocation_compatibility(
+        policy.logical_requirements, compatibility, environment_requirements
     )
+    package_schema = _package_schema(policy.logical_requirements)
     manifest_without_revision_digest: dict[str, Any] = {
         "schemaVersion": package_schema,
         "identity": {

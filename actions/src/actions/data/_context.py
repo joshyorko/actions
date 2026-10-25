@@ -12,20 +12,33 @@ import math
 import re
 from contextlib import contextmanager
 from contextvars import ContextVar
+from dataclasses import dataclass
 from types import MappingProxyType
 from typing import Iterator, Mapping, Union
 
 Scalar = Union[str, int, float, bool]
 _VERSION = "actions.logical-read-context/v1"
+_VERSION_V2 = "actions.logical-context/v2"
 _MAX_BYTES = 256 * 1024
 _MAX_OPERATIONS = 32
 _SAFE_INTEGER = 2**53 - 1
 _REQUIREMENT = re.compile(r"[a-z][a-z0-9_-]{0,63}")
 # The '.scan' suffix counts toward BindingOperation's 64-character name bound.
 _OPERATION = re.compile(r"[a-z][a-z0-9_-]{0,58}\.scan/v1")
+_INGEST = re.compile(r"[a-z][a-z0-9_-]{0,56}\.ingest/v1")
+_SEARCH = re.compile(r"[a-z][a-z0-9_-]{0,56}\.search/v1")
 _FIELD = re.compile(r"[a-z][a-z0-9_]{0,63}")
 _DIGEST = re.compile(r"sha256:[0-9a-f]{64}")
-_CURRENT: ContextVar[Mapping[tuple[str, str], bytes] | None] = ContextVar(
+
+
+@dataclass(frozen=True)
+class _Lookup:
+    kind: str
+    parameters: bytes
+    result: bytes
+
+
+_CURRENT: ContextVar[Mapping[tuple[str, str], _Lookup] | None] = ContextVar(
     "actions_logical_read_context", default=None
 )
 
@@ -75,7 +88,9 @@ def _name(value: object, pattern: re.Pattern[str]) -> bool:
     return type(value) is str and pattern.fullmatch(value) is not None  # noqa: E721 -- reject behavior-overriding subclasses
 
 
-def _validate(payload: bytes, expected_digest: str) -> Mapping[tuple[str, str], bytes]:
+def _validate(
+    payload: bytes, expected_digest: str
+) -> Mapping[tuple[str, str], _Lookup]:
     if (
         type(payload) is not bytes  # noqa: E721 -- immutable built-in bytes only
         or not 1 <= len(payload) <= _MAX_BYTES
@@ -93,13 +108,15 @@ def _validate(payload: bytes, expected_digest: str) -> Mapping[tuple[str, str], 
     if (
         not isinstance(value, dict)
         or set(value) != {"version", "lookups"}
-        or value["version"] != _VERSION
+        or value["version"] not in (_VERSION, _VERSION_V2)
         or not isinstance(value["lookups"], list)
         or len(value["lookups"]) > _MAX_OPERATIONS
         or _canonical(value) != payload
     ):
         raise ValueError("logical context schema rejected")
-    lookups: dict[tuple[str, str], bytes] = {}
+    if value["version"] == _VERSION_V2:
+        return _validate_v2(value["lookups"])
+    lookups: dict[tuple[str, str], _Lookup] = {}
     for lookup in value["lookups"]:
         if (
             not isinstance(lookup, dict)
@@ -129,8 +146,119 @@ def _validate(payload: bytes, expected_digest: str) -> Mapping[tuple[str, str], 
                 kinds[name] = type(scalar)
             if len(kinds) > 32:
                 raise ValueError("logical result column bound exceeded")
-        lookups[key] = _canonical(lookup["rows"])
+        lookups[key] = _Lookup("data", b"{}", _canonical(lookup["rows"]))
     return MappingProxyType(lookups)
+
+
+def _search_parameters(value: object) -> bytes:
+    if (
+        not isinstance(value, dict)
+        or set(value) != {"ingestion_handle", "query", "offset", "limit"}
+        or type(value["ingestion_handle"]) is not str  # noqa: E721 -- reject bool/coercion and behavior-overriding subclasses
+        or type(value["query"]) is not str  # noqa: E721 -- reject bool/coercion and behavior-overriding subclasses
+        or type(value["offset"]) is not int  # noqa: E721 -- reject bool/coercion and behavior-overriding subclasses
+        or type(value["limit"]) is not int  # noqa: E721 -- reject bool/coercion and behavior-overriding subclasses
+        or not 0 <= value["offset"] <= _SAFE_INTEGER
+        or not 1 <= value["limit"] <= _SAFE_INTEGER
+    ):
+        raise ValueError("prepared Knowledge parameters differ")
+    return _canonical(value)
+
+
+def _json_result(value: object, depth: int = 0) -> None:
+    if depth > 8:
+        raise ValueError("prepared result depth exceeded")
+    if isinstance(value, dict):
+        if len(value) > 64:
+            raise ValueError("prepared result object exceeded")
+        for key, item in value.items():
+            if not isinstance(key, str):
+                raise ValueError("prepared result key rejected")
+            _json_result(item, depth + 1)
+    elif isinstance(value, list):
+        if len(value) > 10000:
+            raise ValueError("prepared result array exceeded")
+        for item in value:
+            _json_result(item, depth + 1)
+    elif value is not None and type(value) not in (str, int, float, bool):
+        raise ValueError("prepared result scalar rejected")
+    # JSON parsing/canonical comparison already enforces portable finite numbers
+    # and UTF-8. This function is only called with that parsed representation.
+
+
+def _validate_v2(values: list) -> Mapping[tuple[str, str], _Lookup]:
+    lookups: dict[tuple[str, str], _Lookup] = {}
+    for value in values:
+        if (
+            not isinstance(value, dict)
+            or set(value)
+            != {"requirementId", "operation", "kind", "parameters", "result"}
+            or not _name(value["requirementId"], _REQUIREMENT)
+        ):
+            raise ValueError("logical v2 lookup schema rejected")
+        key = value["requirementId"], value["operation"]
+        if not isinstance(key[1], str) or key in lookups:
+            raise ValueError("ambiguous logical v2 lookup")
+        if value["kind"] == "data":
+            if value["parameters"] != {}:
+                raise ValueError("prepared Data parameters rejected")
+            legacy = _canonical(
+                {
+                    "version": _VERSION,
+                    "lookups": [
+                        {
+                            "requirementId": key[0],
+                            "operation": key[1],
+                            "rows": value["result"],
+                        }
+                    ],
+                }
+            )
+            checked = _validate(legacy, "sha256:" + hashlib.sha256(legacy).hexdigest())
+            lookups[key] = checked[key]
+        elif value["kind"] == "knowledge":
+            if _name(key[1], _INGEST):
+                if value["parameters"] != {}:
+                    raise ValueError("prepared ingestion parameters rejected")
+                parameters = b"{}"
+            elif _name(key[1], _SEARCH):
+                parameters = _search_parameters(value["parameters"])
+            else:
+                raise ValueError("prepared Knowledge operation rejected")
+            if not isinstance(value["result"], dict):
+                raise ValueError("prepared Knowledge result object required")
+            _json_result(value["result"])
+            lookups[key] = _Lookup("knowledge", parameters, _canonical(value["result"]))
+        else:
+            raise ValueError("prepared logical namespace rejected")
+    return MappingProxyType(lookups)
+
+
+def _knowledge_result(
+    requirement_id: str, operation: str, parameters: dict, *, ingest: bool
+) -> dict:
+    """Private SDK selection hook; never prepare, authorize or execute a query."""
+    if not _name(requirement_id, _REQUIREMENT) or not _name(
+        operation, _INGEST if ingest else _SEARCH
+    ):
+        raise ValueError("prepared Knowledge result unavailable")
+    try:
+        expected = (
+            b"{}" if ingest and parameters == {} else _search_parameters(parameters)
+        )
+        current = _CURRENT.get()
+        lookup = (
+            current.get((requirement_id, operation)) if current is not None else None
+        )
+        if (
+            lookup is None
+            or lookup.kind != "knowledge"
+            or lookup.parameters != expected
+        ):
+            raise ValueError("prepared Knowledge result unavailable")
+        return json.loads(lookup.result)
+    except (ValueError, TypeError, UnicodeError, RecursionError, OverflowError):
+        raise ValueError("prepared Knowledge result unavailable") from None
 
 
 @contextmanager
@@ -161,6 +289,6 @@ def scan(requirement_id: str, operation: str) -> list[dict[str, Scalar]]:
         raise ValueError("logical scan unavailable")
     current = _CURRENT.get()
     rows = current.get((requirement_id, operation)) if current is not None else None
-    if rows is None:
+    if rows is None or rows.kind != "data":
         raise ValueError("logical scan unavailable")
-    return json.loads(rows)
+    return json.loads(rows.result)
