@@ -1,0 +1,12 @@
+{
+  "base": "327ef6dd9002cfe7285f8aaffde9ec7f6ac18193",
+  "core_version": "1.1.0a3",
+  "wheel_sha256": "4147cdeb2a593e54194b4d2fcd2c92f0b029fb802d1d298e35c912a1fef03167",
+  "patch_sha256": "9cf1d2eb41df1bf7eb42148d2b306fe454a600e4efe20718e3a5df6012d3e206",
+  "stored_patch_sha256": "38eb3a59b3f2dc2e22c5139a2df1c2a85e9e9f40f8ea80757b96997bf95a8b95",
+  "full_suite": {
+    "passed": 375,
+    "warnings": 4,
+    "seconds": 52.26
+  }
+}

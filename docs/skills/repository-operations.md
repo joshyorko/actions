@@ -5373,3 +5373,32 @@ runner wiring, shared-PG operator provisioning, Knowledge and full Data gates
 remain unqualified.
 
 Until a supported logical port is joined, GeneratedRccExecution refuses any selected capability with nonempty bindingRequirementIds before native launch. Artifact metadata compatibility does not bypass this dispatch gate.
+
+
+### Generated Action logical lookup SDK
+
+`actions.data.scan(requirement_id, operation)` reads one declared eager logical
+lookup and returns a fresh list of flat row dictionaries. It performs no query,
+file/environment lookup or provider selection. The trusted Runtime must enter
+`actions.data._context.install_context(payload, expected_digest=...)` explicitly.
+ContextVar state is installed only after validation and restored in finally;
+nested contexts, concurrent async executions and separate threads remain isolated.
+The digest binds trusted host-supplied bytes; it is not authentication or a
+sandbox against hostile generated Python.
+
+Context version actions.logical-read-context/v1 is closed, canonical UTF-8 JSON,
+bounded to256KiB/32operations. Duplicate keys/lookups, nonfinite numbers, unsafe
+integers or integral floats, nested/null values, unknown fields/versions and
+undeclared lookup names are refused. Optional null fields are omitted. Numeric
+zero must use the Runtime's canonical positive0.0 form. Only exact parameterless
+<source-object>.scan/v1 operations are supported; the BindingOperation name
+bound limits that source-object prefix to59characters. No strings are narrowed
+below the already bounded context policy. Each call decodes immutable retained
+row bytes anew, so action mutation cannot change later lookups.
+
+The SDK source API alone does not qualify ordinary generated Data execution.
+Compile/run with a genuinely rebuilt prepared RCC artifact containing the
+measured private actions-core wheel and portable exact-version dependency pin;
+a source-path overlay or older public SDK preparation is not installed proof.
+Runtime/bootstrap/publication integration and unchanged-Package two-provider
+acceptance remain separate, alongside broader Data/Knowledge owner gates.
