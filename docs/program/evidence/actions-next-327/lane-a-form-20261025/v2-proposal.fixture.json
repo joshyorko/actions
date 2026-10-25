@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "actions.canvas-spec/v2",
+  "title": "Proposal only",
+  "visibility": [
+    "app"
+  ],
+  "bindingIds": [
+    "result"
+  ],
+  "root": {
+    "type": "card",
+    "id": "summary",
+    "title": "Result",
+    "children": [
+      {
+        "type": "chart",
+        "id": "chart",
+        "title": "Values",
+        "bindingId": "result",
+        "rowsKey": "rows",
+        "chartType": "bar",
+        "labelKey": "label",
+        "valueKey": "value"
+      },
+      {
+        "type": "log",
+        "id": "log",
+        "title": "Messages",
+        "bindingId": "result",
+        "rowsKey": "logs",
+        "messageKey": "message"
+      },
+      {
+        "type": "inspector",
+        "id": "inspector",
+        "title": "Details",
+        "bindingId": "result",
+        "valueKey": "details",
+        "fields": [
+          {
+            "key": "value",
+            "label": "Value"
+          }
+        ]
+      }
+    ]
+  }
+}

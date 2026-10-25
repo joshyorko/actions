@@ -77,3 +77,79 @@ for (const width of [320, 1280]) {
         });
     });
 }
+
+test("announces pending work and a response without dispatch on mount", async ({
+    page,
+}, testInfo) => {
+    await page.goto(
+        "/src/semantic-renderer/browser-harness.html?scenario=loading",
+    );
+    const form = page.getByRole("region", {
+        name: "Search synthetic records",
+        exact: true,
+    });
+    await expect(form.getByRole("button")).toHaveText(
+        "Search synthetic records",
+    );
+    await expect(page.getByTestId("synthetic-dispatch-count")).toHaveText("0");
+    await form.getByRole("textbox").fill("pending");
+    await form.getByRole("button").click();
+    await expect(page.getByTestId("synthetic-dispatch-count")).toHaveText("1");
+    await page.screenshot({
+        path: testInfo.outputPath("form-loading.png"),
+        fullPage: true,
+    });
+    await expect(form.locator("form")).toHaveAttribute("aria-busy", "true");
+    await expect(form.getByRole("status")).toHaveText(
+        "Search synthetic records: working…",
+    );
+    await expect(form.getByRole("textbox")).toBeDisabled();
+    await expect(form.getByRole("button")).toBeDisabled();
+    await page
+        .getByRole("button", { name: "Complete synthetic request" })
+        .click();
+    await expect(form.locator("form")).toHaveAttribute("aria-busy", "false");
+    await expect(form.getByRole("status")).toHaveText(
+        "Search synthetic records: response received.",
+    );
+    await expect(form.getByRole("cell")).toContainText("pending");
+});
+
+for (const scenario of ["error", "empty"]) {
+    test(`shows truthful ${scenario} results and permits retry`, async ({
+        page,
+    }, testInfo) => {
+        await page.goto(
+            `/src/semantic-renderer/browser-harness.html?scenario=${scenario}`,
+        );
+        const form = page.getByRole("region", {
+            name: "Search synthetic records",
+            exact: true,
+        });
+        await form.getByRole("textbox").fill("example");
+        await form.getByRole("button").click();
+        if (scenario === "error") {
+            await expect(form.getByRole("alert")).toHaveText(
+                "Unable to complete this action. Try again.",
+            );
+            await expect(form.getByRole("status")).toHaveText("");
+        } else {
+            await expect(
+                form.getByRole("status", { name: "Synthetic search results" }),
+            ).toHaveText("No results to display.");
+        }
+        await expect(form.getByRole("button")).toBeEnabled();
+        await expect(page.getByTestId("synthetic-dispatch-count")).toHaveText(
+            "1",
+        );
+        await form.getByRole("button").click();
+        await expect(page.getByTestId("synthetic-dispatch-count")).toHaveText(
+            "2",
+        );
+        await expect(form.getByRole("button")).toBeEnabled();
+        await page.screenshot({
+            path: testInfo.outputPath(`form-${scenario}.png`),
+            fullPage: true,
+        });
+    });
+}

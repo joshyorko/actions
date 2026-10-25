@@ -1,0 +1,21 @@
+{
+  "artifactSha256": "8f86dbb0c9e6d298e4c112aaace99fa05911a00a087084affe72cafcfa8b7967",
+  "sdkVersion": "2.0.3",
+  "boundary": "built Canvas in local fixture host using actual SDK bridge; not authenticated ChatGPT",
+  "before": {
+    "theme": null,
+    "backgroundVariable": "",
+    "textVariable": "",
+    "canvasColor": "rgb(24, 34, 48)",
+    "formBackground": "rgb(255, 255, 255)",
+    "reportedTheme": "light"
+  },
+  "after": {
+    "theme": null,
+    "backgroundVariable": "",
+    "textVariable": "",
+    "canvasColor": "rgb(24, 34, 48)",
+    "formBackground": "rgb(255, 255, 255)",
+    "reportedTheme": "dark"
+  }
+}

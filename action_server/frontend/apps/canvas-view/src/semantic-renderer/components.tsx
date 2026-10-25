@@ -308,7 +308,7 @@ function SemanticFormInstance<Id extends string, Input, Output>({
     return (
         <section className="semantic-form" aria-label={submitLabel}>
             <h2 className="semantic-form__title">{submitLabel}</h2>
-            <form noValidate onSubmit={submit}>
+            <form noValidate onSubmit={submit} aria-busy={isSubmitting}>
                 {fields.map((field, index) => {
                     const inputId = `${formId}-field-${index}`;
                     const errorId = `${inputId}-error`;
@@ -377,6 +377,13 @@ function SemanticFormInstance<Id extends string, Input, Output>({
                     {isSubmitting ? "Working…" : submitLabel}
                 </button>
             </form>
+            <p role="status" aria-atomic="true">
+                {isSubmitting
+                    ? `${submitLabel}: working…`
+                    : result !== null
+                      ? `${submitLabel}: response received.`
+                      : ""}
+            </p>
             {actionError ? (
                 <p role="alert" className="semantic-form__error">
                     {actionError}
