@@ -13,6 +13,7 @@ import hashlib
 import json
 import re
 from collections.abc import Mapping, Sequence
+from typing import Any
 
 from actions.canvas_contract import CanvasSpec
 from pydantic import JsonValue, TypeAdapter, ValidationError
@@ -27,7 +28,13 @@ from actions.server.deployments.ids import (
     PackageRevisionRef,
     WorkspaceId,
 )
+from actions.server.deployments.logical_bindings import LogicalBindingRequirement
 from actions.server.deployments.source_manifest import validate_proposed_inventory
+from actions.server.foundry.authoring_bindings import (
+    DataBindingChoice,
+    parse_data_bindings,
+    public_schema,
+)
 from actions.server.foundry.authoring_values import (
     AuthoringAccessDenied,
     AuthoringAppSummary,
@@ -140,6 +147,11 @@ _BACKEND: dict[str, JsonValue] = {
     "properties": {
         "logicalName": {"type": "string", "minLength": 1, "maxLength": 128},
         "workItems": WorkItemDeclaration.model_json_schema(),
+        "logicalRequirements": {
+            "type": "array",
+            "maxItems": 16,
+            "items": public_schema(LogicalBindingRequirement),
+        },
         "files": {
             "type": "array",
             "minItems": 1,
@@ -206,6 +218,11 @@ SCHEMAS: dict[str, dict[str, JsonValue]] = {
             "bindings": _BINDINGS,
             "backend": _BACKEND,
             "queuePolicies": _QUEUE_POLICIES,
+            "dataBindings": {
+                "type": "array",
+                "maxItems": 64,
+                "items": public_schema(DataBindingChoice),
+            },
             "idempotencyKey": _IDEMPOTENCY,
         },
         ("appId", "expectedBase", "spec", "bindings", "idempotencyKey"),
@@ -217,6 +234,11 @@ SCHEMAS: dict[str, dict[str, JsonValue]] = {
             "bindings": _BINDINGS,
             "backend": _BACKEND,
             "queuePolicies": _QUEUE_POLICIES,
+            "dataBindings": {
+                "type": "array",
+                "maxItems": 64,
+                "items": public_schema(DataBindingChoice),
+            },
         },
         ("spec",),
         description="Validate and preview a CanvasSpec, binding map, and optional backend input without compilation, persistence, activation, or Run admission.",
@@ -587,6 +609,16 @@ class FoundryAuthoring(CanvasPort):
                 _parse_backend(backend_value) if backend_value is not None else None
             )
             _validate_preview_bindings(document, targets, backend, workspace_id)
+            data_bindings = parse_data_bindings(
+                inputs.get("dataBindings", []),
+                tuple(target.binding_id for target in targets),
+            )
+            if any(
+                choice.provider.workspace_id != workspace_id for choice in data_bindings
+            ):
+                raise AuthoringAccessDenied(
+                    "Data binding provider is outside the caller Workspace"
+                )
             queue_policies = parse_queue_policies(
                 inputs.get("queuePolicies", []),
                 tuple(target.binding_id for target in targets),
@@ -627,12 +659,30 @@ class FoundryAuthoring(CanvasPort):
             binding_ids = document.get("bindingIds")
             if not isinstance(title, str) or not isinstance(binding_ids, list):
                 raise AuthoringValidationError("CanvasSpec summary fields are invalid")
+            logical_preview = bool(
+                data_bindings or (backend and backend.logical_requirements)
+            )
             return CanvasReply(
-                summary="Canvas preview validated without changing Runtime state.",
+                summary=(
+                    "Canvas and logical-binding syntax validated; provider compatibility and readiness were not checked."
+                    if logical_preview
+                    else "Canvas preview validated without changing Runtime state."
+                ),
                 model_result={
                     "title": title,
                     "bindingCount": len(binding_ids),
                     "backendRequested": backend is not None,
+                    **(
+                        {
+                            "dataBindingValidation": {
+                                "syntax": "passed",
+                                "compatibility": "not-checked",
+                                "readiness": "not-checked",
+                            }
+                        }
+                        if logical_preview
+                        else {}
+                    ),
                     "effects": [],
                 },
                 view_state={"spec": document, "preview": True},
@@ -653,6 +703,16 @@ class FoundryAuthoring(CanvasPort):
                 _parse_backend(backend_value) if backend_value is not None else None
             )
             _validate_preview_bindings(document, targets, backend, workspace_id)
+            data_bindings = parse_data_bindings(
+                inputs.get("dataBindings", []),
+                tuple(target.binding_id for target in targets),
+            )
+            if any(
+                choice.provider.workspace_id != workspace_id for choice in data_bindings
+            ):
+                raise AuthoringAccessDenied(
+                    "Data binding provider is outside the caller Workspace"
+                )
             queue_policies = parse_queue_policies(
                 inputs.get("queuePolicies", []),
                 tuple(target.binding_id for target in targets),
@@ -676,6 +736,16 @@ class FoundryAuthoring(CanvasPort):
                             ]
                         }
                         if queue_policies
+                        else {}
+                    ),
+                    **(
+                        {
+                            "dataBindings": [
+                                choice.model_dump(mode="json", by_alias=True)
+                                for choice in data_bindings
+                            ]
+                        }
+                        if data_bindings
                         else {}
                     ),
                     "operation": "apply",
@@ -738,6 +808,13 @@ class FoundryAuthoring(CanvasPort):
                     "execute_generated_source",
                     application_id=application_id,
                 )
+                compiler_options: dict[str, Any] = {}
+                if backend.logical_requirements:
+                    compiler_options[
+                        "logical_requirements"
+                    ] = backend.logical_requirements
+                if backend.work_items is not None:
+                    compiler_options["work_items"] = backend.work_items
                 result = await asyncio.to_thread(
                     self.compiler.compile_trusted_source,
                     backend.entries(),
@@ -746,11 +823,7 @@ class FoundryAuthoring(CanvasPort):
                     trusted_actor=actor,
                     workspace_id=workspace_id,
                     application_id=application_id,
-                    **(
-                        {"work_items": backend.work_items}
-                        if backend.work_items is not None
-                        else {}
-                    ),
+                    **compiler_options,
                 )
                 if not isinstance(result, CompilationResult):
                     raise AuthoringError("Package compiler returned an invalid result")
@@ -821,13 +894,37 @@ class FoundryAuthoring(CanvasPort):
             )
             selection = None
             if package_revisions:
-                selection = await asyncio.to_thread(
-                    self.deployment_selection.select_specification,
-                    actor,
-                    workspace_id,
-                    application_id,
-                    package_revisions,
-                    bindings,
+                if data_bindings:
+                    selector = getattr(
+                        self.deployment_selection,
+                        "select_specification_with_bindings",
+                        None,
+                    )
+                    if not callable(selector):
+                        raise AuthoringValidationError(
+                            "explicit logical binding selection unavailable"
+                        )
+                    selection = await asyncio.to_thread(
+                        selector,
+                        actor,
+                        workspace_id,
+                        application_id,
+                        package_revisions,
+                        bindings,
+                        data_bindings,
+                    )
+                else:
+                    selection = await asyncio.to_thread(
+                        self.deployment_selection.select_specification,
+                        actor,
+                        workspace_id,
+                        application_id,
+                        package_revisions,
+                        bindings,
+                    )
+            elif data_bindings:
+                raise AuthoringValidationError(
+                    "logical bindings require an executable Package"
                 )
             if queue_policies:
                 if selection is None:

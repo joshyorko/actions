@@ -35,6 +35,7 @@ from actions.server.deployments.ids import (
     WorkspaceId,
     WorkspaceScopedRef,
 )
+from actions.server.deployments.logical_bindings import LogicalBindingRequirement
 from actions.server.deployments.package_revision_compiler import (
     CompilationOutcome,
     CompilationReceipt,
@@ -111,6 +112,12 @@ class PackagePlan:
     capabilities: tuple[CapabilityRef, ...]
 
 
+@dataclass(frozen=True)
+class PackageBindingRequirement:
+    ref: BindingRequirementRef
+    contract: LogicalBindingRequirement
+
+
 class FoundryPackageRegistry:
     """One compiler/Package/Run adapter; no mirrored Action or independent DB.
 
@@ -170,6 +177,7 @@ class FoundryPackageRegistry:
         workspace_id: WorkspaceId,
         application_id: DeploymentId,
         work_items: WorkItemDeclaration = WorkItemDeclaration(),
+        logical_requirements: tuple[LogicalBindingRequirement, ...] = (),
     ) -> CompilationResult:
         trusted_actor = Actor.model_validate(trusted_actor)
         workspace_id, application_id = (
@@ -188,6 +196,7 @@ class FoundryPackageRegistry:
                 ">=1.1.0a15,<2.0.0",
                 ">=1.0.2,<2.0.0",
                 work_items=work_items,
+                logical_requirements=logical_requirements,
             ),
             protected_input_names=["package.yaml"],
             admission=self._admission,
@@ -359,6 +368,14 @@ class FoundryPackageRegistry:
                     ref,
                     *self.capability_refs(ref),
                     self._plan_ref(ref, verified),
+                    *(
+                        BindingRequirementRef(
+                            package_revision=ref, requirement_id=value["id"]
+                        )
+                        for value in json.loads(verified.manifest_json)[
+                            "logicalBindingRequirements"
+                        ]
+                    ),
                 )
                 for reference in references:
                     self._db.insert(
@@ -467,6 +484,14 @@ class FoundryPackageRegistry:
             ref,
             _hash(compiled.input_schema_payload),
             (self._plan_ref(ref.package_revision, compiled),),
+            binding_requirements=tuple(
+                BindingRequirementRef(
+                    package_revision=ref.package_revision, requirement_id=value
+                )
+                for value in json.loads(compiled.manifest_json)["capabilities"][0][
+                    "bindingRequirementIds"
+                ]
+            ),
             work_items=WorkItemDeclaration(
                 mode=json.loads(compiled.manifest_json)["capabilities"][0]["mode"],
                 allow_outputs=json.loads(compiled.manifest_json)["capabilities"][0][
@@ -486,9 +511,18 @@ class FoundryPackageRegistry:
             self.capability_refs(ref.package_revision),
         )
 
-    def get_binding_requirement(self, ref: BindingRequirementRef) -> None:
-        self.load(ref.package_revision)
-        return None  # This compiler declares no logical requirements.
+    def get_binding_requirement(
+        self, ref: BindingRequirementRef
+    ) -> PackageBindingRequirement | None:
+        ref = BindingRequirementRef.model_validate(ref)
+        compiled = self.load(ref.package_revision)
+        for value in json.loads(compiled.manifest_json)["logicalBindingRequirements"]:
+            if value["id"] == ref.requirement_id.root:
+                return PackageBindingRequirement(
+                    ref,
+                    LogicalBindingRequirement.model_validate_json(json.dumps(value)),
+                )
+        return None
 
     def resolve_capability(
         self, actor: Actor, workspace_id: WorkspaceId, capability: CapabilityRef

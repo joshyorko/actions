@@ -14,6 +14,7 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict
 
 from actions.server.deployments.foundry_values import (
+    BindingAssignment,
     CapabilityPlanPolicy,
     DeploymentSpecification,
 )
@@ -26,6 +27,11 @@ from actions.server.deployments.ids import (
     WorkspacePolicyRevisionRef,
     require_workspace_scope,
 )
+from actions.server.deployments.logical_bindings import (
+    BindingOperation,
+    ProviderCompatibilityPort,
+)
+from actions.server.foundry.authoring_bindings import DataBindingChoice
 from actions.server.foundry.authoring_values import CanvasBinding
 from actions.server.foundry.package_registry import FoundryPackageRegistry
 from actions.server.foundry.sql_authorization import SqlFoundryAuthorization
@@ -76,7 +82,9 @@ class RuntimeDeploymentSelection:
         registry: FoundryPackageRegistry,
         authorization: SqlFoundryAuthorization,
         profile: RuntimeExecutionProfile,
+        provider_compatibility: ProviderCompatibilityPort | None = None,
     ):
+        self.provider_compatibility = provider_compatibility
         self.registry, self.authorization, self.profile = (
             registry,
             authorization,
@@ -91,6 +99,19 @@ class RuntimeDeploymentSelection:
         package_revisions: Sequence[PackageRevisionRef],
         bindings: Sequence[CanvasBinding],
     ) -> DeploymentSpecification:
+        return self.select_specification_with_bindings(
+            actor, workspace_id, application_id, package_revisions, bindings, ()
+        )
+
+    def select_specification_with_bindings(
+        self,
+        actor: Actor,
+        workspace_id: WorkspaceId,
+        application_id: DeploymentId,
+        package_revisions: Sequence[PackageRevisionRef],
+        bindings: Sequence[CanvasBinding],
+        choices: Sequence[DataBindingChoice],
+    ) -> DeploymentSpecification:
         self.authorization.require_workspace(actor, workspace_id, "deploy")
         for ref in (
             self.profile.worker,
@@ -100,20 +121,20 @@ class RuntimeDeploymentSelection:
             require_workspace_scope(ref, workspace_id)
             self.authorization.require_reference(actor, ref, "deploy")
         policies = []
+        declared = {}
         for package in package_revisions:
             require_workspace_scope(package, workspace_id)
             self.authorization.require_reference(actor, package, "deploy")
             for capability in self.registry.capability_refs(package):
                 self.authorization.require_reference(actor, capability, "deploy")
                 declaration = self.registry.get_capability(capability)
-                if (
-                    declaration is None
-                    or len(declaration.runtime_plans) != 1
-                    or declaration.binding_requirements
-                ):
-                    raise ValueError(
-                        "one declared RCC plan without provider bindings required"
-                    )
+                if declaration is None or len(declaration.runtime_plans) != 1:
+                    raise ValueError("one declared RCC plan required")
+                for requirement in declaration.binding_requirements:
+                    projected = self.registry.get_binding_requirement(requirement)
+                    if projected is None or projected.ref != requirement:
+                        raise ValueError("artifact-verified requirement unavailable")
+                    declared[requirement] = projected.contract
                 plan = declaration.runtime_plans[0]
                 self.authorization.require_reference(actor, plan, "deploy")
                 runtime = self.registry.get_runtime_plan(plan)
@@ -132,8 +153,69 @@ class RuntimeDeploymentSelection:
             for binding in bindings
         ):
             raise ValueError("declared generated Package binding required")
+        capability_by_binding = {
+            binding.binding_id: binding.capability for binding in bindings
+        }
+        if len(capability_by_binding) != len(bindings):
+            raise ValueError("ambiguous Canvas binding identity")
+        assigned = {}
+        for choice in choices:
+            selected_capability = capability_by_binding.get(choice.binding_id)
+            if selected_capability is None:
+                raise ValueError("data choice outside selected Canvas binding")
+            declaration = self.registry.get_capability(selected_capability)
+            candidates = (
+                [
+                    ref
+                    for ref in declaration.binding_requirements
+                    if ref.requirement_id.root == choice.requirement_id
+                ]
+                if declaration
+                else []
+            )
+            if (
+                len(candidates) != 1
+                or candidates[0] not in declared
+                or candidates[0] in assigned
+            ):
+                raise ValueError(
+                    "missing, extra or colliding logical binding selection"
+                )
+            requirement = candidates[0]
+            require_workspace_scope(choice.provider, workspace_id)
+            self.authorization.require_reference(actor, requirement, "deploy")
+            self.authorization.require_reference(actor, choice.provider, "deploy")
+            if self.provider_compatibility is None:
+                raise ValueError(
+                    "explicit provider compatibility authority unavailable"
+                )
+            supported = tuple(
+                BindingOperation.model_validate(operation)
+                for operation in self.provider_compatibility.operations(
+                    actor, choice.provider, declared[requirement].kind
+                )
+            )
+            if len(supported) > 32 or len(
+                {operation.name for operation in supported}
+            ) != len(supported):
+                raise ValueError("bounded unambiguous provider operations required")
+            by_name = {operation.name: operation for operation in supported}
+            if any(
+                by_name.get(operation.name) != operation
+                for operation in declared[requirement].operations
+            ):
+                raise ValueError("provider operation schema/effect/bounds differ")
+            assigned[requirement] = BindingAssignment(
+                requirement=requirement, provider=choice.provider
+            )
+        if set(assigned) != set(declared):
+            raise ValueError("every logical requirement needs one explicit provider")
         return DeploymentSpecification(
             package_revisions=tuple(package_revisions),
+            bindings=tuple(
+                assigned[ref]
+                for ref in sorted(assigned, key=lambda value: value.model_dump_json())
+            ),
             capability_plans=tuple(policies),
             worker=self.profile.worker,
             policy=self.profile.policy,

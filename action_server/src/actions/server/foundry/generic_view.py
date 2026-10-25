@@ -17,8 +17,21 @@ from uuid import uuid4
 from pydantic import BaseModel, ConfigDict, Field, JsonValue, TypeAdapter
 
 from actions.server._models import RUN_ID_COUNTER, Run, RunStatus
+from actions.server.data_queries.invoice_worker import ClaimValue
+from actions.server.data_queries.review_models import FencedWorkItem
 from actions.server.deployments.ids import DeploymentId, WorkspaceId
 from actions.server.foundry.execution_profiles import select_rcc_execution_profile
+from actions.server.foundry.generic_input_view import (
+    InputList,
+    InputSubmit,
+    list_inputs,
+    submit_input,
+)
+from actions.server.foundry.generic_output_view import (
+    OutputList,
+    authorize_outputs,
+    list_outputs,
+)
 from actions.server.foundry.generic_work_item_execution import GenericWorkItemExecution
 from actions.server.foundry.mcp import CanvasCaller, CanvasPort, CanvasReply
 from actions.server.foundry.models import FoundryAudit, FoundryRequest
@@ -78,12 +91,15 @@ class GenericCanvasView(CanvasPort):
         self.db = execution.outputs.db
         self.schemas = copy.deepcopy(execution.schemas)
         self.schemas["canvas_dispatch"] = TypeAdapter(
-            ViewAction | AppSubmitRequest | AppExecuteRequest
+            ViewAction | AppSubmitRequest | AppExecuteRequest | InputSubmit
         ).json_schema()
         for name in ("canvas_get_state", "canvas_execution_status", "canvas_cancel"):
             self.schemas[name] = TypeAdapter(
                 ProposalInput | AppRunRequest
             ).json_schema()
+        self.schemas["canvas_get_state"] = TypeAdapter(
+            ProposalInput | AppRunRequest | InputList | OutputList
+        ).json_schema()
         self.schemas["canvas_artifact"] = TypeAdapter(
             ArtifactInput | AppArtifactRequest
         ).json_schema()
@@ -176,7 +192,12 @@ class GenericCanvasView(CanvasPort):
             for p in current.revision.specification.work_item_policies
             if p.capability == snapshot.capability
         ]
-        if len(policies) != 1 or declaration.mode not in ("optional", "producer"):
+        if len(policies) != 1 or declaration.mode not in (
+            "optional",
+            "producer",
+            "required-input",
+            "consumer",
+        ):
             raise AccessDenied("binding requires an explicit input claim")
         return GenericWorkItemExecution(
             self.execution.deployments,
@@ -210,6 +231,8 @@ class GenericCanvasView(CanvasPort):
             )
             app = CanvasCaller(caller.actor, caller.workspace_id, "app", scope)
             names = []
+            input_bindings = []
+            output_bindings = []
             for binding in stored.revision.specification.canvas_bindings:
                 try:
                     service, managed = self._selected(app, binding.binding_id)
@@ -217,10 +240,40 @@ class GenericCanvasView(CanvasPort):
                         service.current(managed)
                     else:
                         service._current(managed)
+                        if service.policy.input_mode in ("required", "claim"):
+                            service.authorize(managed, Permission.READ)
+                            service.authorize(managed, Permission.CLAIM)
                     service.base._authorize(caller.actor, service.snapshot, "read")
                 except AccessDenied:
                     continue
                 names.append(binding.binding_id)
+                if isinstance(
+                    service, GenericWorkItemExecution
+                ) and service.policy.input_mode in ("required", "claim"):
+                    input_bindings.append(
+                        {
+                            "bindingId": binding.binding_id,
+                            "queue": service.queue_ref(
+                                service.policy.input_queue
+                            ).model_dump(mode="json"),
+                            "inputMode": service.policy.input_mode,
+                        }
+                    )
+                if (
+                    isinstance(service, GenericWorkItemExecution)
+                    and service.policy.output_queue is not None
+                ):
+                    try:
+                        queue = authorize_outputs(service, managed)
+                    except AccessDenied:
+                        pass
+                    else:
+                        output_bindings.append(
+                            {
+                                "bindingId": binding.binding_id,
+                                "queue": queue.model_dump(mode="json"),
+                            }
+                        )
             if not names:
                 return reply
             return replace(
@@ -230,6 +283,8 @@ class GenericCanvasView(CanvasPort):
                     "version": "actions.generic-app/v1",
                     "bindingIds": names,
                     "executions": self._recent(app, names),
+                    "inputBindings": input_bindings,
+                    "outputBindings": output_bindings,
                 },
             )
 
@@ -262,15 +317,40 @@ class GenericCanvasView(CanvasPort):
             previous = selected.get(binding)
             if previous is None or run.numbered_id > previous[0]:
                 state["bindingId"] = binding
-                selected[binding] = (run.numbered_id, state)
-        return [selected[name][1] for name in names if name in selected]
+                selected[binding] = (run.numbered_id, run, state, service, managed)
+        results = []
+        for name in names:
+            if name in selected:
+                _, run, state, service, managed = selected[name]
+                self._project_outputs(caller, service, managed, run, state)
+                results.append(state)
+        return results
 
     def _ticket(self, service, managed, run):
-        return (
-            service.ticket(managed, run)
-            if isinstance(service, StandaloneActionExecution)
-            else service._ticket(managed, None, run)
-        )
+        if isinstance(service, StandaloneActionExecution):
+            return service.ticket(managed, run)
+        record = json.loads(run.result or "null")
+        if run.status in (RunStatus.PASSED, RunStatus.FAILED):
+            record = record.get("result") if isinstance(record, dict) else None
+        if not isinstance(record, dict):
+            raise FenceRejected("retained input journal unavailable")
+        if record.get("claim") is None:
+            return service._ticket(managed, None, run)
+        claim = ClaimValue.model_validate(record["claim"])
+        service._current(managed)
+        service.authorize(managed, Permission.CLAIM)
+        retained, _, ticket = service.read_execution(managed, claim.item_id)
+        item = _one(self.db, FencedWorkItem, claim.item_id)
+        if (
+            retained.id != run.id
+            or ticket.fence.owner_id != managed.worker_id
+            or (
+                run.status in (RunStatus.PASSED, RunStatus.FAILED)
+                and (item.claim_owner or item.cancel_requested)
+            )
+        ):
+            raise FenceRejected("retained input claim differs")
+        return ticket
 
     def _association_payload(self, scope, binding_id, run_id):
         return _canonical(
@@ -377,6 +457,13 @@ class GenericCanvasView(CanvasPort):
             )
         ):
             raise FenceRejected("Run/Attempt state differs")
+        deadline = int(attempt.lease_deadline_ms)
+        cancel_requested = bool(pin.cancel_requested)
+        if ticket.claim:
+            item = _one(self.db, FencedWorkItem, ticket.claim.item_id)
+            deadline = min(deadline, int(item.claim_deadline_ms))
+            cancel_requested = cancel_requested or bool(item.cancel_requested)
+        now = _now(self.db)
         record = json.loads(run.result)
         state = (
             "completed"
@@ -384,13 +471,13 @@ class GenericCanvasView(CanvasPort):
             else "failed"
             if run.status == RunStatus.FAILED
             else "cancel_requested"
-            if pin.cancel_requested
+            if cancel_requested
             else "running"
-            if record.get("launch") and int(attempt.lease_deadline_ms) > _now(self.db)
+            if record.get("launch") and deadline > now
             else "reconciliation_required"
             if record.get("launch")
             else "expired"
-            if int(attempt.lease_deadline_ms) <= _now(self.db)
+            if deadline <= now
             else "ready"
         )
         return (
@@ -400,7 +487,15 @@ class GenericCanvasView(CanvasPort):
                 "runId": run.id,
                 "attemptId": attempt.id,
                 "state": state,
-                "cancelRequested": bool(pin.cancel_requested),
+                "cancelRequested": cancel_requested,
+                **(
+                    {
+                        "workItemId": ticket.claim.item_id,
+                        "workItemEpoch": ticket.claim.epoch,
+                    }
+                    if ticket.claim
+                    else {}
+                ),
             },
         )
 
@@ -414,9 +509,13 @@ class GenericCanvasView(CanvasPort):
         ):
             raise AccessDenied("generic server-bound app context required")
         if name == "canvas_dispatch":
-            request = TypeAdapter(AppSubmitRequest | AppExecuteRequest).validate_json(
-                _canonical(arguments, 524288)
-            )
+            request = TypeAdapter(
+                AppSubmitRequest | AppExecuteRequest | InputSubmit
+            ).validate_json(_canonical(arguments, 524288))
+        elif name == "canvas_get_state" and arguments.get("action") == "outputs":
+            request = OutputList.model_validate_json(_canonical(arguments, 8192))
+        elif name == "canvas_get_state" and arguments.get("action") == "inputs":
+            request = InputList.model_validate_json(_canonical(arguments, 8192))
         else:
             request = (
                 AppArtifactRequest if name == "canvas_artifact" else AppRunRequest
@@ -424,7 +523,16 @@ class GenericCanvasView(CanvasPort):
         with self.db.connect():
             with self._entry(caller.scope):
                 service, managed = self._selected(caller, request.binding_id)
-                if isinstance(request, AppSubmitRequest):
+                if isinstance(request, InputList):
+                    return CanvasReply(
+                        "Explicit input selection.",
+                        execution=list_inputs(service, managed, request),
+                    )
+                if isinstance(request, InputSubmit):
+                    run, ticket, state = submit_input(
+                        self, caller, service, managed, request
+                    )
+                elif isinstance(request, AppSubmitRequest):
                     if len(request.idempotency_key.encode()) > 128:
                         raise ValueError("bounded submission key required")
                     key = _key(
@@ -481,6 +589,11 @@ class GenericCanvasView(CanvasPort):
                         caller.scope,
                     )
                 state["bindingId"] = request.binding_id
+                if isinstance(request, OutputList):
+                    return CanvasReply(
+                        "Authorized produced children.",
+                        execution=list_outputs(service, managed, run, ticket, request),
+                    )
                 if name == "canvas_cancel":
                     service.base.cancel(caller.actor, run.id)
                     run, ticket, state = self._read(
@@ -519,20 +632,23 @@ class GenericCanvasView(CanvasPort):
                         "text": text,
                     },
                 )
-            if run.status in (RunStatus.PASSED, RunStatus.FAILED):
-                try:
-                    self._artifact_permission(service, managed)
-                except AccessDenied:
-                    pass
-                else:
-                    refs = self._references(caller, run)
-                    state["outputs"] = []
-                    for ref in refs:
-                        with service.base.resolve(
-                            caller.actor, caller.workspace_id, ref.handle
-                        ):
-                            state["outputs"].append({"handle": ref.handle})
+            self._project_outputs(caller, service, managed, run, state)
             return CanvasReply("Bound app execution state.", execution=state)
+
+    def _project_outputs(self, caller, service, managed, run, state):
+        if run.status not in (RunStatus.PASSED, RunStatus.FAILED):
+            return
+        try:
+            self._artifact_permission(service, managed)
+        except AccessDenied:
+            return
+        refs = self._references(caller, run)
+        handles = []
+        for ref in refs:
+            with service.base.resolve(caller.actor, caller.workspace_id, ref.handle):
+                handles.append({"handle": ref.handle})
+        # Publish the whole validated inventory only after every handle resolves.
+        state["outputs"] = handles
 
     def _references(self, caller, run):
         raw = json.loads(run.result).get("outputs", [])

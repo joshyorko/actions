@@ -34,6 +34,10 @@ from actions.server._rcc_runtime_adapter import (
 )
 from actions.server.deployments import canonical, ids, source_manifest, source_staging
 from actions.server.deployments.foundry_values import WorkItemDeclaration
+from actions.server.deployments.logical_bindings import (
+    LogicalBindingRequirement,
+    normalize_requirements,
+)
 
 MAX_COMPILER_SOURCE_ENTRIES = 32
 MAX_COMPILER_SOURCE_FILES = 16
@@ -43,6 +47,7 @@ MAX_COMPILER_METADATA_BYTES = 512 * 1024
 MAX_RCC_OUTPUT_BYTES = 1024 * 1024
 RCC_BUILD_TIMEOUT_SECONDS = 600
 PACKAGE_SCHEMA_VERSION = "actions.package-revision/v1-draft"
+PACKAGE_BINDINGS_SCHEMA_VERSION = "actions.package-revision/v2-bindings-draft"
 RUNTIME_PLAN_SCHEMA_VERSION = 1
 RUNTIME_PLAN_ADAPTER_SCHEMA_ID = "actions.rcc-environment-specification"
 RUNTIME_PLAN_ADAPTER_SCHEMA_VERSION = "v1-draft"
@@ -97,11 +102,17 @@ class PackageCompilationPolicy:
     compiler_normalization_version: str = COMPILER_NORMALIZATION_VERSION
     rcc_adapter_version_range: str = RCC_ADAPTER_VERSION_RANGE
     work_items: WorkItemDeclaration = WorkItemDeclaration()
+    logical_requirements: tuple[LogicalBindingRequirement, ...] = ()
 
     def __post_init__(self) -> None:
         if not isinstance(self.work_items, WorkItemDeclaration):
             raise ValueError("typed Work Item declaration required")
         WorkItemDeclaration.model_validate(self.work_items)
+        object.__setattr__(
+            self,
+            "logical_requirements",
+            normalize_requirements(self.logical_requirements),
+        )
         if not isinstance(self.package_id, str) or not _PACKAGE_ID_RE.fullmatch(
             self.package_id
         ):
@@ -403,18 +414,17 @@ def _verify_compiled_package_revision(compiled: CompiledPackageRevision) -> None
         raise ValueError("source archive preimage does not match")
 
     manifest = _canonical_object(compiled.manifest_json, MAX_COMPILER_METADATA_BYTES)
-    if (
-        set(manifest)
-        != {
-            "schemaVersion",
-            "identity",
-            "sourceArtifact",
-            "compatibility",
-            "capabilities",
-            "logicalBindingRequirements",
-            "runtimePlans",
-        }
-        or manifest["schemaVersion"] != PACKAGE_SCHEMA_VERSION
+    if set(manifest) != {
+        "schemaVersion",
+        "identity",
+        "sourceArtifact",
+        "compatibility",
+        "capabilities",
+        "logicalBindingRequirements",
+        "runtimePlans",
+    } or manifest["schemaVersion"] not in (
+        PACKAGE_SCHEMA_VERSION,
+        PACKAGE_BINDINGS_SCHEMA_VERSION,
     ):
         raise ValueError("Package manifest shape is invalid")
     if _canonical_json(manifest) != compiled.manifest_json:
@@ -441,7 +451,7 @@ def _verify_compiled_package_revision(compiled: CompiledPackageRevision) -> None
     if (
         not isinstance(package_digest, str)
         or package_digest
-        != _canonical_digest([PACKAGE_SCHEMA_VERSION, manifest_without_digest])
+        != _canonical_digest([manifest["schemaVersion"], manifest_without_digest])
         or compiled.package_revision_id.root != package_digest
         or identity["compilerNormalizationVersion"] != COMPILER_NORMALIZATION_VERSION
     ):
@@ -457,6 +467,26 @@ def _verify_compiled_package_revision(compiled: CompiledPackageRevision) -> None
     plan = plans[0]
     if not isinstance(capability, dict) or not isinstance(plan, dict):
         raise ValueError("Package capability and Runtime Plan must be objects")
+    raw_requirements = manifest["logicalBindingRequirements"]
+    if not isinstance(raw_requirements, list):
+        raise ValueError("logical requirement list required")
+    requirements = normalize_requirements(
+        tuple(
+            LogicalBindingRequirement.model_validate_json(json.dumps(value))
+            for value in raw_requirements
+        )
+    )
+    expected_schema = (
+        PACKAGE_BINDINGS_SCHEMA_VERSION if requirements else PACKAGE_SCHEMA_VERSION
+    )
+    if manifest["schemaVersion"] != expected_schema:
+        raise ValueError("Package schema and logical requirement presence differ")
+    if raw_requirements != [
+        value.model_dump(mode="json") for value in requirements
+    ] or capability.get("bindingRequirementIds") != [
+        value.id for value in requirements
+    ]:
+        raise ValueError("capability logical requirement identity differs")
     plan_without_digest = dict(plan)
     plan_digest = plan_without_digest.pop("digest")
     if (
@@ -1155,7 +1185,9 @@ def _assemble_compiled_package(
             output_schema, "actions.output-schema/v1-draft"
         ),
         "compatiblePlanDigests": [],
-        "bindingRequirementIds": [],
+        "bindingRequirementIds": [
+            requirement.id for requirement in policy.logical_requirements
+        ],
     }
     adapter_specification = {
         "schemaId": RUNTIME_PLAN_ADAPTER_SCHEMA_ID,
@@ -1184,8 +1216,13 @@ def _assemble_compiled_package(
         "digest": plan_digest_text,
         **runtime_plan_without_digest,
     }
+    package_schema = (
+        PACKAGE_BINDINGS_SCHEMA_VERSION
+        if policy.logical_requirements
+        else PACKAGE_SCHEMA_VERSION
+    )
     manifest_without_revision_digest: dict[str, Any] = {
-        "schemaVersion": PACKAGE_SCHEMA_VERSION,
+        "schemaVersion": package_schema,
         "identity": {
             "packageId": policy.package_id,
             "logicalName": policy.logical_name,
@@ -1198,11 +1235,14 @@ def _assemble_compiled_package(
         },
         "compatibility": compatibility,
         "capabilities": [capability],
-        "logicalBindingRequirements": [],
+        "logicalBindingRequirements": [
+            requirement.model_dump(mode="json")
+            for requirement in policy.logical_requirements
+        ],
         "runtimePlans": [runtime_plan],
     }
     package_revision_id_text = _canonical_digest(
-        ["actions.package-revision/v1-draft", manifest_without_revision_digest]
+        [package_schema, manifest_without_revision_digest]
     )
     manifest = {
         **manifest_without_revision_digest,

@@ -30,6 +30,10 @@ from actions.server.deployments.ids import (
     PackageRevisionRef,
     WorkspaceId,
 )
+from actions.server.deployments.logical_bindings import (
+    LogicalBindingRequirement,
+    normalize_requirements,
+)
 from actions.server.deployments.source_manifest import SuppliedSourceEntry
 from actions.server.foundry.mcp import CanvasCaller
 from actions.server.run_outputs.types import Actor
@@ -89,6 +93,9 @@ class GeneratedBackend(_StrictValue):
     logical_name: str = Field(min_length=1, max_length=128, alias="logicalName")
     files: tuple[GeneratedSourceFile, ...] = Field(min_length=1, max_length=16)
     work_items: WorkItemDeclaration | None = Field(default=None, alias="workItems")
+    logical_requirements: tuple[LogicalBindingRequirement, ...] = Field(
+        default=(), alias="logicalRequirements", max_length=16
+    )
 
     @model_serializer(mode="wrap")
     def preserve_legacy_backend(self, handler):
@@ -96,10 +103,18 @@ class GeneratedBackend(_StrictValue):
         if self.work_items is None:
             value.pop("workItems", None)
             value.pop("work_items", None)
+        if not self.logical_requirements:
+            value.pop("logicalRequirements", None)
+            value.pop("logical_requirements", None)
         return value
 
     @model_validator(mode="after")
     def unique_bounded_files(self) -> GeneratedBackend:
+        object.__setattr__(
+            self,
+            "logical_requirements",
+            normalize_requirements(self.logical_requirements),
+        )
         paths = tuple(file.path for file in self.files)
         if len(set(paths)) != len(paths):
             raise ValueError("generated source paths must be unique")
@@ -234,6 +249,7 @@ class PackageCompilerPort(Protocol):
         workspace_id: WorkspaceId,
         application_id: DeploymentId,
         work_items: WorkItemDeclaration = WorkItemDeclaration(),
+        logical_requirements: tuple[LogicalBindingRequirement, ...] = (),
     ) -> CompilationResult:
         """Compile bounded source; no install or deployment mutation occurs."""
 

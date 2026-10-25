@@ -37,6 +37,8 @@ const execution = z
             "expired",
         ]),
         cancelRequested: z.boolean(),
+        workItemId: z.string().uuid().optional(),
+        workItemEpoch: z.number().int().positive().optional(),
         outputs: z
             .array(
                 z
@@ -49,11 +51,93 @@ const execution = z
             .optional(),
     })
     .strict();
+const inputQueue = z
+    .object({
+        workspace_id: z.string().uuid(),
+        deployment: ref.extend({ deployment_id: z.string().uuid() }).strict(),
+        queue_id: z.string().min(1).max(256),
+    })
+    .strict();
+const sameDeployment = (
+    a: z.infer<typeof inputQueue>["deployment"],
+    b: z.infer<typeof inputQueue>["deployment"],
+) =>
+    a.workspace_id === b.workspace_id &&
+    a.deployment_id === b.deployment_id &&
+    a.revision_id === b.revision_id;
+const sameQueue = (
+    a: z.infer<typeof inputQueue>,
+    b: z.infer<typeof inputQueue>,
+) =>
+    a.workspace_id === b.workspace_id &&
+    a.queue_id === b.queue_id &&
+    sameDeployment(a.deployment, b.deployment);
+const inputBinding = z
+    .object({
+        bindingId: binding,
+        queue: inputQueue,
+        inputMode: z.enum(["required", "claim"]),
+    })
+    .strict();
+const inputPage = z
+    .object({
+        bindingId: binding,
+        queue: inputQueue,
+        items: z
+            .array(
+                z
+                    .object({
+                        itemId: z.string().uuid(),
+                        state: z.string(),
+                        inputDigest: z.string().regex(/^sha256:[0-9a-f]{64}$/u),
+                        preview: z.string().max(2048),
+                        previewTruncated: z.boolean().default(false),
+                        selectable: z.boolean(),
+                    })
+                    .strict(),
+            )
+            .max(20),
+        nextCursor: z.string().uuid().nullable(),
+    })
+    .strict();
+const outputBinding = z
+    .object({ bindingId: binding, queue: inputQueue })
+    .strict();
+const outputPage = z
+    .object({
+        bindingId: binding,
+        runId: z.string().uuid(),
+        attemptId: z.string().uuid(),
+        queue: inputQueue,
+        items: z
+            .array(
+                z
+                    .object({
+                        itemId: z.string().uuid(),
+                        parentId: z.string().uuid().nullable(),
+                        queueState: z.enum([
+                            "PENDING",
+                            "IN_PROGRESS",
+                            "COMPLETED",
+                            "FAILED",
+                        ]),
+                        cancelRequested: z.boolean(),
+                        preview: z.string().max(2048),
+                        previewTruncated: z.boolean(),
+                    })
+                    .strict(),
+            )
+            .max(20),
+        nextCursor: z.string().uuid().nullable(),
+    })
+    .strict();
 const contextSchema = z
     .object({
         version: z.literal("actions.generic-app/v1"),
         bindingIds: z.array(binding).min(1).max(32),
         executions: z.array(execution).max(32).default([]),
+        inputBindings: z.array(inputBinding).max(32).default([]),
+        outputBindings: z.array(outputBinding).max(32).default([]),
     })
     .strict();
 export type GenericExecutionState = z.infer<typeof execution>;
@@ -65,6 +149,24 @@ export function parseGenericExecution(
     const value = contextSchema.parse(meta["actions.genericExecution"]);
     if (
         !canvas.active ||
+        new Set(value.outputBindings.map((item) => item.bindingId)).size !==
+            value.outputBindings.length ||
+        value.outputBindings.some(
+            (item) =>
+                !value.bindingIds.includes(item.bindingId) ||
+                item.queue.workspace_id !==
+                    scope.scope.deployment.workspace_id ||
+                !sameDeployment(item.queue.deployment, scope.scope.deployment),
+        ) ||
+        new Set(value.inputBindings.map((item) => item.bindingId)).size !==
+            value.inputBindings.length ||
+        value.inputBindings.some(
+            (item) =>
+                !value.bindingIds.includes(item.bindingId) ||
+                item.queue.workspace_id !==
+                    scope.scope.deployment.workspace_id ||
+                !sameDeployment(item.queue.deployment, scope.scope.deployment),
+        ) ||
         scope.scope.deployment.deployment_id !== canvas.applicationId ||
         scope.scope.deployment.revision_id !== canvas.revisionId ||
         scope.scope.application.app_id !== canvas.applicationId ||
@@ -99,6 +201,10 @@ export function createGenericExecutionAdapter(
     const states = new Map<string, GenericExecutionState>(
         (context.executions ?? []).map((item) => [item.bindingId, item]),
     );
+    const outputPages = new Map<string, z.infer<typeof outputPage>>();
+    const inputPages = new Map<string, z.infer<typeof inputPage>>();
+    const selectedInput = (id: string) =>
+        (context.inputBindings ?? []).find((entry) => entry.bindingId === id);
     const pending = new Map<string, { key: string; input: string }>();
     const allowed = (id: string) => context.bindingIds.includes(id);
     const call = async (name: string, args: Record<string, unknown>) => {
@@ -116,14 +222,20 @@ export function createGenericExecutionAdapter(
         id: string,
         meta: Record<string, unknown>,
         expectedRun?: string,
+        expectedItem?: string,
     ) => {
         const result = execution.parse(meta["actions.execution"]);
         if (
             result.bindingId !== id ||
+            (expectedItem !== undefined &&
+                result.workItemId !== expectedItem) ||
             (expectedRun !== undefined && result.runId !== expectedRun)
         )
             throw new Error("App execution identity changed.");
+        if (states.get(id)?.runId !== result.runId) outputPages.delete(id);
         states.set(id, result);
+        if (result.state === "completed" || result.state === "failed")
+            pending.delete(id);
         changed();
         return result;
     };
@@ -142,7 +254,7 @@ export function createGenericExecutionAdapter(
     };
     const adapters: SemanticRendererAdapters = {
         resolveFormBinding: (id) =>
-            allowed(id)
+            allowed(id) && !selectedInput(id)
                 ? createCapabilityRef<string, SemanticFormInput, unknown>(id)
                 : undefined,
         dispatch: async (capability, input) => {
@@ -242,6 +354,99 @@ export function createGenericExecutionAdapter(
     return {
         adapters,
         states,
+        inputPages,
+        outputPages,
+        loadOutputs: async (id: string, cursor: string | null = null) => {
+            const selected = (context.outputBindings ?? []).find(
+                (entry) => entry.bindingId === id,
+            );
+            const current = states.get(id);
+            if (!selected || current?.state !== "completed")
+                throw new Error("No successful producing Run selected.");
+            outputPages.delete(id);
+            changed();
+            const page = outputPage.parse(
+                (
+                    await call("canvas_get_state", {
+                        action: "outputs",
+                        bindingId: id,
+                        runId: current.runId,
+                        cursor,
+                    })
+                )["actions.execution"],
+            );
+            if (
+                page.bindingId !== id ||
+                page.runId !== current.runId ||
+                page.attemptId !== current.attemptId ||
+                !sameQueue(page.queue, selected.queue) ||
+                states.get(id)?.runId !== current.runId ||
+                states.get(id)?.attemptId !== current.attemptId
+            )
+                throw new Error("Producing Run identity changed.");
+            outputPages.set(id, page);
+            changed();
+            return page;
+        },
+        loadInputs: async (id: string, cursor: string | null = null) => {
+            const selected = selectedInput(id);
+            if (!selected) throw new Error("No explicit input queue binding.");
+            const page = inputPage.parse(
+                (
+                    await call("canvas_get_state", {
+                        action: "inputs",
+                        bindingId: id,
+                        queue: selected.queue,
+                        cursor,
+                    })
+                )["actions.execution"],
+            );
+            if (page.bindingId !== id || !sameQueue(page.queue, selected.queue))
+                throw new Error("Input queue identity changed.");
+            inputPages.set(id, page);
+            changed();
+            return page;
+        },
+        submitInput: async (id: string, itemId: string) => {
+            const selected = selectedInput(id);
+            if (
+                !selected ||
+                !inputPages
+                    .get(id)
+                    ?.items.some(
+                        (item) => item.itemId === itemId && item.selectable,
+                    )
+            )
+                throw new Error("Select an available exact input item.");
+            const encoded = JSON.stringify({ queue: selected.queue, itemId });
+            const prior = pending.get(id);
+            if (prior && prior.input !== encoded)
+                throw new Error(
+                    "An uncertain input selection exists; inspect it before changing selection.",
+                );
+            const request = prior ?? {
+                key: globalThis.crypto.randomUUID(),
+                input: encoded,
+            };
+            pending.set(id, request);
+            const result = accept(
+                id,
+                await call("canvas_dispatch", {
+                    action: "submit_input",
+                    bindingId: id,
+                    queue: selected.queue,
+                    itemId,
+                    idempotencyKey: request.key,
+                }),
+                undefined,
+                itemId,
+            );
+            if (result.workItemId !== itemId)
+                throw new Error("Selected input identity changed.");
+            if (result.state === "completed" || result.state === "failed")
+                pending.delete(id);
+            return result;
+        },
         execute: async (id: string) => {
             const state = states.get(id);
             if (!allowed(id) || state?.state !== "ready")

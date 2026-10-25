@@ -1048,8 +1048,8 @@ opt-ins run separately. It composes authorized model invocation descriptors,
 generic bound-app forms for none/optional/producer, common standalone Runs and
 an explicit offline owner authorization CLI. It never grants from startup or
 discovery. Runtime typecheck489, configured lint, frontend types/lint/build and
-Canvas51/1 conditional skip pass. Installed operator/discovery/browser/restart
-and full a28 package checks remain pending. Input-linked forms, public
+Canvas51/1 conditional skip pass. Subsequent installed and full-suite results
+are recorded below. Public
 Data/Knowledge and the full original product matrix remain open; #326 NO-GO
 awaits owner decision. Library remains HTTP401 before upload, with no IDs.
 
@@ -1059,13 +1059,15 @@ awaits owner decision. Library remains HTTP401 before upload, with no IDs.
 passes explicit public owner authorization, model discovery, two real RCC Runs,
 restart, completion/artifact replay and rollback without fixture SQL mutations
 or pre-registration. [Actual source RCC](evidence/actions-next-327/recovery-a28/actual-rcc/receipt.json)
-passes12 with zero skips. Full portable a28 remains running separately.
+passes12 with zero skips. Full portable a28 completed with2823pass/26skip and
+one closed-logging-stream refusal failure; the failed receipt and focused fix
+are retained in recovery-a28/full-portable.
 
 [Real installed reference-host evidence](evidence/actions-next-327/recovery-a28/ordinary-browser/README.md)
 passes initial semantic form execution and artifact inspection, but restart
 artifact inspection fails because the reopened app omits output handles. A
-completed-state screenshot is not full restart acceptance. The next correction
-is pending; Library delivery remains HTTP401. The stopped synthetic AppSession
+completed-state screenshot is not full restart acceptance. The isolated a29
+correction passed below; Library delivery remains HTTP401. The stopped synthetic AppSession
 fields accidentally included in the first evidence checkpoint were redacted in
 a follow-up; evidence-redaction.json records that handling defect and correction.
 
@@ -1074,6 +1076,12 @@ a follow-up; evidence-redaction.json records that handling defect and correction
 [Exact isolated candidate](evidence/actions-next-327/recovery-a29-isolated/README.md)
 passes the previously failing ordinary installed reference-host restart artifact
 inspection, with actual RCC and one retained Run. Base+patch+version provenance,
-source negatives and real screenshots are saved. It is not yet integrated into
-root source, which remains frozen for full a28 verification. All broader owner
+source negatives and real screenshots are saved. The correction is now included
+in the provisional a30 source checkpoint below. All broader owner
 product gates, Library authentication and optional #326 decision remain explicit.
+
+## Private a30 input/output and logical-binding source checkpoint
+
+[Exact source receipt](evidence/actions-next-327/recovery-a30/README.md):372 joined,126 logical and66 output/reopen tests pass with zero skips, including both SQL backends. Canvas63/1 conditional skip, frontend quality/build and Runtime lint/typecheck499 pass. Exact-item claim/explicit execution and separate lineage-verified produced-child browsing now exist. Logical binding declarations/selection remain a prerequisite; no ordinary provider setup or Data/Knowledge execution is inferred.
+
+Actual RCC draft qualification remains running with a known canonical COMPLETED versus wire DONE test assertion error; no complete pass is claimed. Installed a30/NDJSON browser/restart and final package/release qualification remain pending. Provider metadata registry/private operator and detached Action/Task work are recoverable disjoint drafts, not integrated release claims. Existing Automation managed-v1 API contract is unchanged; its other repository remains untouched. #326 NO-GO/owner decision and LibraryHTTP401/no upload IDs remain explicit.

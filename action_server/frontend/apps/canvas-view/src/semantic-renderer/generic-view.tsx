@@ -1,5 +1,7 @@
 import { useMemo, useState } from "react";
 import type { App } from "@modelcontextprotocol/ext-apps/react";
+import { GenericOutputPanel } from "./generic-output-panel";
+import { GenericInputForm } from "./generic-input-form";
 import { SemanticCanvasRenderer } from "./components";
 import type { CanvasAppMetadata } from "./mcp-bridge";
 import { createGenericExecutionAdapter } from "./generic-execution";
@@ -50,6 +52,13 @@ export function GenericSemanticView({
                 viewer="app"
                 adapters={controller.adapters}
             />
+            {(context.inputBindings ?? []).map((entry) => (
+                <GenericInputForm
+                    key={entry.bindingId}
+                    binding={entry}
+                    controller={controller}
+                />
+            ))}
             {[...controller.states.values()].map((state) => (
                 <section
                     key={state.bindingId}
@@ -80,6 +89,19 @@ export function GenericSemanticView({
                     ) : null}
                 </section>
             ))}
+            {(context.outputBindings ?? [])
+                .filter(
+                    (entry) =>
+                        controller.states.get(entry.bindingId)?.state ===
+                        "completed",
+                )
+                .map((entry) => (
+                    <GenericOutputPanel
+                        key={controller.states.get(entry.bindingId)!.runId}
+                        binding={entry}
+                        controller={controller}
+                    />
+                ))}
             {error ? <p role="alert">{error}</p> : null}
             {artifact !== null ? (
                 <section aria-label="Authorized result artifact">

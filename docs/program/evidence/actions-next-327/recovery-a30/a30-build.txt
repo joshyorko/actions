@@ -1,0 +1,67 @@
++ poetry run invoke build-frontend --no-install (in /workspace/actions/action_server)
+[BUILD] Building Runtime frontend
+[TIME] Using SOURCE_DATE_EPOCH: 1792899067
+[BUILD] Building frontend...
+[1;37mnpm run build:artifacts[0m
+
+> actions-runtime-frontend@0.0.1 build:artifacts
+> npm run build:runtime && npm run build:canvas
+
+
+> actions-runtime-frontend@0.0.1 build:runtime
+> vite build --mode runtime --minify=esbuild && node scripts/inline-runtime-assets.mjs && node scripts/write-artifact-manifest.mjs dist runtime-admin text/html && npm run sbom:runtime
+
+vite v8.2.1 building client environment for runtime...
+[2K
+transforming (90) ../../node_modules/@radix-ui/react-focus-scope/dist/index.mjs[2K
+transforming (378) ../../node_modules/use-sidecar/dist/es2015/renderProp.jsBrowserslist: browsers data (caniuse-lite) is 10 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+[2K
+transforming (1102) ../../src/index.css[2K
+✓ 1102 modules transformed.
+[2K
+rendering chunks (1)...[2K
+computing gzip size...
+[2K
+dist/index.html                   0.47 kB │ gzip:   0.29 kB
+dist/assets/index-DPaEwF_e.css   41.56 kB │ gzip:   8.26 kB
+dist/assets/index-BvJsVZwB.js   946.00 kB │ gzip: 269.76 kB
+
+✓ built in 2.46s
+[2K[1G[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+
+> actions-runtime-frontend@0.0.1 sbom:runtime
+> cyclonedx-npm --package-lock-only --output-format json --output-reproducible --output-file dist/sbom.json
+
+
+> actions-runtime-frontend@0.0.1 build:canvas
+> vite build --mode canvas --minify=esbuild && node scripts/inline-canvas-assets.mjs && node scripts/write-artifact-manifest.mjs dist-canvas canvas-mcp-app "text/html;profile=mcp-app" && npm run sbom:canvas
+
+vite v8.2.1 building client environment for canvas...
+[2K
+transforming (105) ../../node_modules/zod/v4/locales/sl.jsBrowserslist: browsers data (caniuse-lite) is 10 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+[2K
+transforming (167) src/semantic-renderer/semantic-renderer.css[2K
+✓ 168 modules transformed.
+[2K
+rendering chunks (1)...[2K
+computing gzip size...
+[2K
+dist-canvas/index.html                   0.48 kB │ gzip:   0.30 kB
+dist-canvas/assets/index-YftFDsK5.css    7.80 kB │ gzip:   2.02 kB
+dist-canvas/assets/index-CQzespCA.js   461.44 kB │ gzip: 131.44 kB
+
+✓ built in 1.17s
+
+> actions-runtime-frontend@0.0.1 sbom:canvas
+> cyclonedx-npm --package-lock-only --output-format json --output-reproducible --output-file dist-canvas/sbom.json
+
+[WRITE] Writing static contents to: /workspace/actions/action_server/src/actions/server/_static_contents.py
+[SUCCESS] Runtime frontend built successfully
