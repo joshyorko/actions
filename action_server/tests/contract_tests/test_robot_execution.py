@@ -525,3 +525,73 @@ def test_workload_cannot_change_retained_source_before_staging(case):
     with pytest.raises(RobotExecutionError, match="source changed"):
         _execute(case)
     assert not case[-1].staged
+
+
+def test_real_input_file_preserves_typed_literal_bytes(case, tmp_path):
+    runner, selection, _, actor, fence, _ = case
+    marker = tmp_path / "must-not-exist"
+    payload = {
+        "count": 7,
+        "enabled": True,
+        "nested": {"rows": [None, 1.25, "雪 café"]},
+        "literal": f"$(touch {marker}) `touch {marker}` ${{CURDIR}} ; & |",
+    }
+    inputs = _json(payload)
+    library = (
+        "from pathlib import Path\n"
+        "import json\n"
+        "def verify_input(path):\n"
+        f"    expected = {inputs!r}\n"
+        "    actual = Path(path).read_bytes()\n"
+        "    assert actual == expected\n"
+        "    value = json.loads(actual)\n"
+        "    assert type(value['count']) is int\n"
+        "    assert value['enabled'] is True\n"
+        "    assert value['nested']['rows'] == [None, 1.25, '雪 café']\n"
+    ).encode()
+    archive = _archive(
+        "*** Settings ***\nLibrary    Verify.py\n*** Tasks ***\nSelected\n"
+        "    Verify Input    ${INPUT_FILE}\n",
+        {"Verify.py": library},
+    )
+    selection = replace(
+        selection,
+        source_digest="sha256:" + hashlib.sha256(archive).hexdigest(),
+        input_schema=_json({"type": "object", "required": list(payload)}),
+        inputs=inputs,
+    )
+    host = Host(selection)
+    result = _execute((runner, selection, archive, actor, fence, host))
+    assert result.status == "PASS" and result.cleanup.execution_stopped
+    retained = list((tmp_path / "executions").rglob("input.json"))
+    assert len(retained) == 1 and retained[0].read_bytes() == inputs
+    assert host.intent.selection.inputs == inputs
+    assert host.intent.selection.source_digest == selection.source_digest
+    assert not marker.exists()
+
+
+@pytest.mark.parametrize("inputs", [b'{"count":true}', b'{"count":"7"}'])
+def test_input_schema_rejects_non_integer_before_launch(case, inputs):
+    from jsonschema.exceptions import ValidationError
+
+    with pytest.raises(ValidationError):
+        replace(
+            case[1],
+            input_schema=_json(
+                {
+                    "type": "object",
+                    "properties": {"count": {"type": "integer"}},
+                    "required": ["count"],
+                    "additionalProperties": False,
+                }
+            ),
+            inputs=inputs,
+        )
+    assert case[-1].intent is None and case[-1].staged == []
+
+
+@pytest.mark.parametrize("inputs", [b'{ "count":7}', b"[]", b"{broken"])
+def test_input_encoding_rejected_before_launch(case, inputs):
+    with pytest.raises(ValueError):
+        replace(case[1], inputs=inputs)
+    assert case[-1].intent is None and case[-1].staged == []
