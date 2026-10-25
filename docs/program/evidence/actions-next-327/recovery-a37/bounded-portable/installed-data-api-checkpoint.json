@@ -1,0 +1,9 @@
+{
+  "local_commit": "4f437a10bebfb41299c18170eaf3014cdca2e3cb",
+  "remote_commit": "ca77f7898be566c0afe9f7667a02c543d3c2b265",
+  "exact_tree": "8f070e892100b5d6fae630334e386e0a83115a89",
+  "expected_parent": "f1b11838674494cd6a34d343b97404cbb1537004",
+  "force": false,
+  "verified_remote_head": true,
+  "identity_difference": "API commit metadata and mapped remote parent; identical full tree"
+}

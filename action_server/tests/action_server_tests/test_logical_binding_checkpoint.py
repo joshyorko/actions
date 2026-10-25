@@ -615,6 +615,7 @@ def test_requirement_bearing_package_cannot_enter_unconfigured_rcc_dispatch():
     compiled = compile_fixture((requirement(),)).compiled_package
     manifest = json.loads(compiled.manifest_json)
     runner = object.__new__(GeneratedRccExecution)
+    runner.logical_execution = None
     runner.registry = SimpleNamespace(
         load=lambda ref: compiled,
         evidence=lambda ref: SimpleNamespace(ready=True),

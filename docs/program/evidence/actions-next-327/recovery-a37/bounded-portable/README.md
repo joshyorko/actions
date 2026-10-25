@@ -1,0 +1,9 @@
+# Bounded portable qualification of a37
+
+Frozen source b23df406f1e32e508e9a951f2469c6f57fa8c703 is tree-identical to remote f1b11838674494cd6a34d343b97404cbb1537004. All3744 selected nodes (290 integration-marked deselected) were accounted for exactly once across32 original batches. Original outcome:3686pass,50classified skips,8fail,0errors. The original run remains FAIL. Per-batch private fixture archives, hashes, logs, XML and owned PostgreSQL state are retained locally; no private datadir/archive payload is published.
+
+Seven failures arose because the custom pytest entrypoint executed at import during multiprocessing spawn. The guarded entrypoint reran the entire original120-case batch against unchanged frozen source:118pass,2native-Windows skips. The other failure was an object.__new__ test fixture missing logical_execution=None, which the production constructor already sets. That one-line test correction reran the whole46-case module with owned PostgreSQL:46pass,0skip. No production implementation change was needed. The corrected coverage composition therefore has3694passing and50classified skipped cases; this is composed qualification, not a claim that the original run passed. Full integration/platform and final release gates remain separate.
+
+Preflight required1GiB per batch,1.5GiB for wheel cases; runtime floor768MiB. Every batch retained its own result and owned PostgreSQL cleanup, then losslessly archived fixtures with content/link/metadata verification. No unchanged full-suite restart was used. An initial guarded-controller invocation in the outer Python lacked psutil and stopped before creating a batch; canonical package execution corrected that invocation without installing dependencies.
+
+Upstream disposition:none. These were repository-owned harness/fixture defects.

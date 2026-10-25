@@ -1,0 +1,367 @@
+{
+  "status": "FAIL",
+  "source": "b23df406f1e32e508e9a951f2469c6f57fa8c703",
+  "remote_equivalent_source": "f1b11838674494cd6a34d343b97404cbb1537004",
+  "complete_exact_selection": true,
+  "counts": {
+    "failure": 8,
+    "error": 0,
+    "skipped": 50,
+    "tests": 3744
+  },
+  "passed": 3686,
+  "batches": [
+    {
+      "batch": 0,
+      "status": "PASS_WITH_CLASSIFIED_SKIPS",
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 6,
+        "tests": 120
+      },
+      "receipt_sha256": "2df652268f429a5bc3cbe5659ad718ec026121454b30178d1b55472743d9aaf4"
+    },
+    {
+      "batch": 1,
+      "status": "PASS",
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 0,
+        "tests": 120
+      },
+      "receipt_sha256": "190eb1de9cbcedd44dd50f502966de9267bc8eac767ae2a223e267308f956c48"
+    },
+    {
+      "batch": 2,
+      "status": "PASS",
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 0,
+        "tests": 120
+      },
+      "receipt_sha256": "325d2dbab5d9df6bcc28531b3e6467940fcb63807873c8d58a1ca0e4bdedcf9c"
+    },
+    {
+      "batch": 3,
+      "status": "FAIL",
+      "counts": {
+        "failure": 7,
+        "error": 0,
+        "skipped": 2,
+        "tests": 120
+      },
+      "receipt_sha256": "d61ffc38591b0d702049a41fe340a9e7914f29b16fe53d210a05c1d986f394ad"
+    },
+    {
+      "batch": 4,
+      "status": "PASS",
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 0,
+        "tests": 120
+      },
+      "receipt_sha256": "b7eea44148871c5f5f140746db6e265e7b6cfadc71683ad10cb195a7f655ea00"
+    },
+    {
+      "batch": 5,
+      "status": "PASS",
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 0,
+        "tests": 120
+      },
+      "receipt_sha256": "7605c2b45cfc48de20b98b5c6933484bd857d8799ec09a5680b6ebfcacb6bd6b"
+    },
+    {
+      "batch": 6,
+      "status": "PASS",
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 0,
+        "tests": 120
+      },
+      "receipt_sha256": "62b1beb8b24111b5c7be36b8172b1413b168ea6673dd0990294939ea4090568c"
+    },
+    {
+      "batch": 7,
+      "status": "PASS_WITH_CLASSIFIED_SKIPS",
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 14,
+        "tests": 120
+      },
+      "receipt_sha256": "e1a8356fe73479f235aa631ac2163cb87ddbae9aa439e77b7532e280e188cdcb"
+    },
+    {
+      "batch": 8,
+      "status": "PASS_WITH_CLASSIFIED_SKIPS",
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 2,
+        "tests": 120
+      },
+      "receipt_sha256": "9c93e483ae096fab9eaf29b44fafbfae928cd01f75ca5f0d7a48db5ed500ae66"
+    },
+    {
+      "batch": 9,
+      "status": "PASS",
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 0,
+        "tests": 120
+      },
+      "receipt_sha256": "81287cedaed54dff874d9fad36412d2e3cfcfe60026e2438e6f2b5b23f2414c3"
+    },
+    {
+      "batch": 10,
+      "status": "PASS_WITH_CLASSIFIED_SKIPS",
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 2,
+        "tests": 120
+      },
+      "receipt_sha256": "f802777fcb8776efadb4dc0dc918947e20994352662fcb5de4650f26ac603b5b"
+    },
+    {
+      "batch": 11,
+      "status": "PASS",
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 0,
+        "tests": 120
+      },
+      "receipt_sha256": "81e905ea57aaf1eb8c7ab32d3b77370f91db78fdfcc0fd80143e042fa636a5b4"
+    },
+    {
+      "batch": 12,
+      "status": "PASS_WITH_CLASSIFIED_SKIPS",
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 8,
+        "tests": 120
+      },
+      "receipt_sha256": "f3068593a8081285c413b29013b66e0e3df1b1950735438bb58a25732cf8f1e7"
+    },
+    {
+      "batch": 13,
+      "status": "PASS_WITH_CLASSIFIED_SKIPS",
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 4,
+        "tests": 120
+      },
+      "receipt_sha256": "cd354206d64f78a6edd7ce0a4972e06bf416bff1c43f52937b1a5eb599492ffc"
+    },
+    {
+      "batch": 14,
+      "status": "PASS_WITH_CLASSIFIED_SKIPS",
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 6,
+        "tests": 120
+      },
+      "receipt_sha256": "c50c23ad51c44993071c3e039f82007de14af8328778dc16fb2ed5e257008c74"
+    },
+    {
+      "batch": 15,
+      "status": "PASS",
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 0,
+        "tests": 120
+      },
+      "receipt_sha256": "9e2c775cb305c55099bf5fc23a4aa4adf0de5dbbf30e7433cab9024fc32bb127"
+    },
+    {
+      "batch": 16,
+      "status": "PASS",
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 0,
+        "tests": 120
+      },
+      "receipt_sha256": "3f3c7a590809847c9796e0572a692e2fdb2fae24d30f82343afbbe94d6f45847"
+    },
+    {
+      "batch": 17,
+      "status": "FAIL",
+      "counts": {
+        "failure": 1,
+        "error": 0,
+        "skipped": 0,
+        "tests": 120
+      },
+      "receipt_sha256": "fdc14caaa8e4f3c427eb895e6103109b6be592510808ae8c40f520afbc64eb45"
+    },
+    {
+      "batch": 18,
+      "status": "PASS",
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 0,
+        "tests": 120
+      },
+      "receipt_sha256": "cbe5829b7ff84ce3090db5796fe0ee244e6aaa689655d03070f86fc33c54b372"
+    },
+    {
+      "batch": 19,
+      "status": "PASS",
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 0,
+        "tests": 120
+      },
+      "receipt_sha256": "d9c9dd9ea3b3e0c2d8b2eec580055821146f6e1e2a88279e4d82617b7e3cab3d"
+    },
+    {
+      "batch": 20,
+      "status": "PASS_WITH_CLASSIFIED_SKIPS",
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 3,
+        "tests": 120
+      },
+      "receipt_sha256": "12ff84c9d1520e828b378f5f6fe4f71806412efd55c03d820ce59e61eddf0da7"
+    },
+    {
+      "batch": 21,
+      "status": "PASS_WITH_CLASSIFIED_SKIPS",
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 1,
+        "tests": 120
+      },
+      "receipt_sha256": "8c412167604ad8927a7e50d5f8204cb7e811ef6ea72e418339d19747a13b431e"
+    },
+    {
+      "batch": 22,
+      "status": "PASS",
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 0,
+        "tests": 120
+      },
+      "receipt_sha256": "e96bb9fad366c19aad97f11e88e3a17f0c21d233ed979ce37cc134c1af8399c4"
+    },
+    {
+      "batch": 23,
+      "status": "PASS_WITH_CLASSIFIED_SKIPS",
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 2,
+        "tests": 120
+      },
+      "receipt_sha256": "fbfdfb7398ac348fcd063d9779f254cd93b6d8864cdd0fc0261c4ab04298e949"
+    },
+    {
+      "batch": 24,
+      "status": "PASS",
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 0,
+        "tests": 120
+      },
+      "receipt_sha256": "72f8c39de13b7a70e1026c98b6e3ab5b0ff43da7f46ec59fc41467c6db0bb91d"
+    },
+    {
+      "batch": 25,
+      "status": "PASS",
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 0,
+        "tests": 120
+      },
+      "receipt_sha256": "056dd76b33e00433e9d5298539c568bf2bbcfe16fdf58b639833678885e465bb"
+    },
+    {
+      "batch": 26,
+      "status": "PASS",
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 0,
+        "tests": 120
+      },
+      "receipt_sha256": "74e6e76d6cf2098fef235661146c0d4d93d89f1d687fa5dcad505d1869d6c5fc"
+    },
+    {
+      "batch": 27,
+      "status": "PASS",
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 0,
+        "tests": 120
+      },
+      "receipt_sha256": "6261530dac76936eae3e45acd0c307940bc3e28f65772815d19642fd3f5ae1fd"
+    },
+    {
+      "batch": 28,
+      "status": "PASS",
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 0,
+        "tests": 120
+      },
+      "receipt_sha256": "125acd0b77920182ded330186ac5b2e903363d436e245dad59be75c8d6756301"
+    },
+    {
+      "batch": 29,
+      "status": "PASS",
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 0,
+        "tests": 120
+      },
+      "receipt_sha256": "47bd2e9625683fc5db5cee7a134fb2f408e11320d2f678115a92fc06990efd37"
+    },
+    {
+      "batch": 30,
+      "status": "PASS",
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 0,
+        "tests": 120
+      },
+      "receipt_sha256": "296a652bf0d0c73b868c64ad9fea810ee3377d54060d57d2bd51543454dba800"
+    },
+    {
+      "batch": 31,
+      "status": "PASS",
+      "counts": {
+        "failure": 0,
+        "error": 0,
+        "skipped": 0,
+        "tests": 24
+      },
+      "receipt_sha256": "74d704dbeae6bdbe6290fdc88c19022652a97cfda2fa3f61664842dcec568c76"
+    }
+  ]
+}

@@ -1,0 +1,853 @@
+[
+  {
+    "number": 0,
+    "status": "PASS_WITH_CLASSIFIED_SKIPS",
+    "selected": 120,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 0,
+      "error": 0,
+      "skipped": 6,
+      "tests": 120
+    },
+    "skips": [
+      {
+        "test": "test_normalize_uri",
+        "reason": "Windows only"
+      },
+      {
+        "test": "test_win_to_fs_path[file:///c:/far/boo-c:\\\\far\\\\boo]",
+        "reason": "Windows only"
+      },
+      {
+        "test": "test_win_to_fs_path[file:///C:/far/boo-c:\\\\far\\\\boo]",
+        "reason": "Windows only"
+      },
+      {
+        "test": "test_win_to_fs_path[file:///C:/far/space%20%3Fboo-c:\\\\far\\\\space ?boo]",
+        "reason": "Windows only"
+      },
+      {
+        "test": "test_win_from_fs_path[c:\\\\far\\\\boo-file:///c:/far/boo]",
+        "reason": "Windows only"
+      },
+      {
+        "test": "test_win_from_fs_path[C:\\\\far\\\\space ?boo-file:///c:/far/space%20%3Fboo]",
+        "reason": "Windows only"
+      }
+    ],
+    "minimum_free_bytes": 868532224,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 183,
+      "archive_bytes": 140643670,
+      "archive_sha256": "07f771ac17f4c3eef0d64e0b1724afbb1af4fedbc394573dc0434d6d49137c65"
+    }
+  },
+  {
+    "number": 1,
+    "status": "PASS",
+    "selected": 120,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "tests": 120
+    },
+    "skips": [],
+    "minimum_free_bytes": 1663602688,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 255,
+      "archive_bytes": 435322,
+      "archive_sha256": "73105a5f9c5800b556848bf68b7c3c8a3c57cb044382008a75c83b7008c83ea3"
+    }
+  },
+  {
+    "number": 2,
+    "status": "PASS",
+    "selected": 120,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "tests": 120
+    },
+    "skips": [],
+    "minimum_free_bytes": 1630130176,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 864,
+      "archive_bytes": 4021355,
+      "archive_sha256": "1ef30f75368f20100d5f0341b8c23ddfa39413aa7eab4d33568c67f6457b9097"
+    }
+  },
+  {
+    "number": 3,
+    "status": "FAIL",
+    "selected": 120,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 7,
+      "error": 0,
+      "skipped": 2,
+      "tests": 120
+    },
+    "skips": [
+      {
+        "test": "test_windows_binding_does_not_import_fcntl",
+        "reason": "Requires native Windows locking"
+      },
+      {
+        "test": "test_storage_handles_mixed_resolved_drive_prefixes",
+        "reason": "native Windows path resolution"
+      }
+    ],
+    "minimum_free_bytes": 1602293760,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 2755,
+      "archive_bytes": 1481701,
+      "archive_sha256": "7d148ee756c36e21fc3b4ad480df3c6f40261c33cde1db63581cd71049bd8864"
+    }
+  },
+  {
+    "number": 4,
+    "status": "PASS",
+    "selected": 120,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "tests": 120
+    },
+    "skips": [],
+    "minimum_free_bytes": 1651126272,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 842,
+      "archive_bytes": 664836,
+      "archive_sha256": "07f77edfadffaebf46fad00c54d4cb2bdc14fcaf1a628a133412f67571429f5d"
+    }
+  },
+  {
+    "number": 5,
+    "status": "PASS",
+    "selected": 120,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "tests": 120
+    },
+    "skips": [],
+    "minimum_free_bytes": 1667055616,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 365,
+      "archive_bytes": 374574,
+      "archive_sha256": "675cda3e6aca24272b91af8d7e2e4c811a19fcc3a8ccc10832bf8356c780222e"
+    }
+  },
+  {
+    "number": 6,
+    "status": "PASS",
+    "selected": 120,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "tests": 120
+    },
+    "skips": [],
+    "minimum_free_bytes": 1663451136,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 439,
+      "archive_bytes": 122433,
+      "archive_sha256": "0c302560818deb4bcf4c5203e8f4992858fac2c9c38cef1bf106225f845a37fd"
+    }
+  },
+  {
+    "number": 7,
+    "status": "PASS_WITH_CLASSIFIED_SKIPS",
+    "selected": 120,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 0,
+      "error": 0,
+      "skipped": 14,
+      "tests": 120
+    },
+    "skips": [
+      {
+        "test": "test_actual_detached_action[sqlite-duckdb]",
+        "reason": "exclusive prepared detached RCC cache required"
+      },
+      {
+        "test": "test_actual_detached_action[sqlite-postgresql]",
+        "reason": "exclusive prepared detached RCC cache required"
+      },
+      {
+        "test": "test_actual_detached_action[postgresql-duckdb]",
+        "reason": "exclusive prepared detached RCC cache required"
+      },
+      {
+        "test": "test_actual_detached_action[postgresql-postgresql]",
+        "reason": "exclusive prepared detached RCC cache required"
+      },
+      {
+        "test": "test_actual_task_host_consumes_and_stops[sqlite-duckdb-False-True]",
+        "reason": "exclusive prepared Task host RCC fixture required"
+      },
+      {
+        "test": "test_actual_task_host_consumes_and_stops[sqlite-duckdb-True-True]",
+        "reason": "exclusive prepared Task host RCC fixture required"
+      },
+      {
+        "test": "test_actual_task_host_consumes_and_stops[sqlite-duckdb-True-False]",
+        "reason": "exclusive prepared Task host RCC fixture required"
+      },
+      {
+        "test": "test_actual_task_host_consumes_and_stops[sqlite-postgresql-False-True]",
+        "reason": "exclusive prepared Task host RCC fixture required"
+      },
+      {
+        "test": "test_actual_task_host_consumes_and_stops[sqlite-postgresql-True-True]",
+        "reason": "exclusive prepared Task host RCC fixture required"
+      },
+      {
+        "test": "test_actual_task_host_consumes_and_stops[sqlite-postgresql-True-False]",
+        "reason": "exclusive prepared Task host RCC fixture required"
+      },
+      {
+        "test": "test_actual_task_host_consumes_and_stops[postgresql-duckdb-False-True]",
+        "reason": "exclusive prepared Task host RCC fixture required"
+      },
+      {
+        "test": "test_actual_task_host_consumes_and_stops[postgresql-duckdb-True-True]",
+        "reason": "exclusive prepared Task host RCC fixture required"
+      },
+      {
+        "test": "test_actual_task_host_consumes_and_stops[postgresql-duckdb-True-False]",
+        "reason": "exclusive prepared Task host RCC fixture required"
+      },
+      {
+        "test": "test_actual_task_host_consumes_and_stops[postgresql-postgresql-False-True]",
+        "reason": "exclusive prepared Task host RCC fixture required"
+      }
+    ],
+    "minimum_free_bytes": 1610141696,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 743,
+      "archive_bytes": 1189974,
+      "archive_sha256": "f8bd36a6232b64a7d35440a8ed025610550b7acf719e8343fd04ec7b69ff8edd"
+    }
+  },
+  {
+    "number": 8,
+    "status": "PASS_WITH_CLASSIFIED_SKIPS",
+    "selected": 120,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 0,
+      "error": 0,
+      "skipped": 2,
+      "tests": 120
+    },
+    "skips": [
+      {
+        "test": "test_actual_task_host_consumes_and_stops[postgresql-postgresql-True-True]",
+        "reason": "exclusive prepared Task host RCC fixture required"
+      },
+      {
+        "test": "test_actual_task_host_consumes_and_stops[postgresql-postgresql-True-False]",
+        "reason": "exclusive prepared Task host RCC fixture required"
+      }
+    ],
+    "minimum_free_bytes": 1637421056,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 343,
+      "archive_bytes": 614918,
+      "archive_sha256": "3d5334947f7e4996ea1e0d5b33b40b47c045766dbac7bb978078c8066c6abc92"
+    }
+  },
+  {
+    "number": 9,
+    "status": "PASS",
+    "selected": 120,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "tests": 120
+    },
+    "skips": [],
+    "minimum_free_bytes": 1604722688,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 1090,
+      "archive_bytes": 1053681,
+      "archive_sha256": "4fb527ea5fe00fc2dea1aabe14aa848584974310771f6bb6ce17d993541da7a3"
+    }
+  },
+  {
+    "number": 10,
+    "status": "PASS_WITH_CLASSIFIED_SKIPS",
+    "selected": 120,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 0,
+      "error": 0,
+      "skipped": 2,
+      "tests": 120
+    },
+    "skips": [
+      {
+        "test": "test_optin_actual_rcc_model_wrapper[sqlite]",
+        "reason": "exclusive prepared RCC home required"
+      },
+      {
+        "test": "test_optin_actual_rcc_model_wrapper[postgresql]",
+        "reason": "exclusive prepared RCC home required"
+      }
+    ],
+    "minimum_free_bytes": 1598308352,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 899,
+      "archive_bytes": 1487653,
+      "archive_sha256": "65f14ec598d00865ee50b994c445313ffc79f33cf35722e90edcfa598010e481"
+    }
+  },
+  {
+    "number": 11,
+    "status": "PASS",
+    "selected": 120,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "tests": 120
+    },
+    "skips": [],
+    "minimum_free_bytes": 1593663488,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 1043,
+      "archive_bytes": 1774637,
+      "archive_sha256": "af2a5f59496e44c5582d9971e8caace1ef87e18d48b352a3c3f2afe5ea287546"
+    }
+  },
+  {
+    "number": 12,
+    "status": "PASS_WITH_CLASSIFIED_SKIPS",
+    "selected": 120,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 0,
+      "error": 0,
+      "skipped": 8,
+      "tests": 120
+    },
+    "skips": [
+      {
+        "test": "test_actual_input_output_app[sqlite-duckdb-consumer]",
+        "reason": "exclusive prepared input/output RCC cache required"
+      },
+      {
+        "test": "test_actual_input_output_app[sqlite-duckdb-producer]",
+        "reason": "exclusive prepared input/output RCC cache required"
+      },
+      {
+        "test": "test_actual_input_output_app[sqlite-postgresql-consumer]",
+        "reason": "exclusive prepared input/output RCC cache required"
+      },
+      {
+        "test": "test_actual_input_output_app[sqlite-postgresql-producer]",
+        "reason": "exclusive prepared input/output RCC cache required"
+      },
+      {
+        "test": "test_actual_input_output_app[postgresql-duckdb-consumer]",
+        "reason": "exclusive prepared input/output RCC cache required"
+      },
+      {
+        "test": "test_actual_input_output_app[postgresql-duckdb-producer]",
+        "reason": "exclusive prepared input/output RCC cache required"
+      },
+      {
+        "test": "test_actual_input_output_app[postgresql-postgresql-consumer]",
+        "reason": "exclusive prepared input/output RCC cache required"
+      },
+      {
+        "test": "test_actual_input_output_app[postgresql-postgresql-producer]",
+        "reason": "exclusive prepared input/output RCC cache required"
+      }
+    ],
+    "minimum_free_bytes": 1603256320,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 720,
+      "archive_bytes": 1514852,
+      "archive_sha256": "0e301011ad22dde75e432811e47864a50e73ecfdb03bc5e60676f0d6ee9d6610"
+    }
+  },
+  {
+    "number": 13,
+    "status": "PASS_WITH_CLASSIFIED_SKIPS",
+    "selected": 120,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 0,
+      "error": 0,
+      "skipped": 4,
+      "tests": 120
+    },
+    "skips": [
+      {
+        "test": "test_actual_none_app_submit_execute_replay[sqlite-duckdb]",
+        "reason": "exclusive prepared ordinary RCC cache required"
+      },
+      {
+        "test": "test_actual_none_app_submit_execute_replay[sqlite-postgresql]",
+        "reason": "exclusive prepared ordinary RCC cache required"
+      },
+      {
+        "test": "test_actual_none_app_submit_execute_replay[postgresql-duckdb]",
+        "reason": "exclusive prepared ordinary RCC cache required"
+      },
+      {
+        "test": "test_actual_none_app_submit_execute_replay[postgresql-postgresql]",
+        "reason": "exclusive prepared ordinary RCC cache required"
+      }
+    ],
+    "minimum_free_bytes": 1587445760,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 1128,
+      "archive_bytes": 1718292,
+      "archive_sha256": "bda6231c83715a728f4e61b48150658620f5ee6045a88e5e72fb567894cab32e"
+    }
+  },
+  {
+    "number": 14,
+    "status": "PASS_WITH_CLASSIFIED_SKIPS",
+    "selected": 120,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 0,
+      "error": 0,
+      "skipped": 6,
+      "tests": 120
+    },
+    "skips": [
+      {
+        "test": "test_real_generic_rcc[sqlite-consumer]",
+        "reason": "explicit owned prepared RCC gate required"
+      },
+      {
+        "test": "test_real_generic_rcc[sqlite-producer]",
+        "reason": "explicit owned prepared RCC gate required"
+      },
+      {
+        "test": "test_real_generic_rcc[sqlite-optional]",
+        "reason": "explicit owned prepared RCC gate required"
+      },
+      {
+        "test": "test_real_generic_rcc[postgresql-consumer]",
+        "reason": "explicit owned prepared RCC gate required"
+      },
+      {
+        "test": "test_real_generic_rcc[postgresql-producer]",
+        "reason": "explicit owned prepared RCC gate required"
+      },
+      {
+        "test": "test_real_generic_rcc[postgresql-optional]",
+        "reason": "explicit owned prepared RCC gate required"
+      }
+    ],
+    "minimum_free_bytes": 1586417664,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 831,
+      "archive_bytes": 1465898,
+      "archive_sha256": "d25b5a7b9678ac3c66055d19fd9e0a435e03510e13526b17002dfffcdeb7e8d0"
+    }
+  },
+  {
+    "number": 15,
+    "status": "PASS",
+    "selected": 120,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "tests": 120
+    },
+    "skips": [],
+    "minimum_free_bytes": 1591693312,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 600,
+      "archive_bytes": 899087,
+      "archive_sha256": "1a9c3e02016515d2e34df229bea7e21bcabc523e1365973b2fab9210062204db"
+    }
+  },
+  {
+    "number": 16,
+    "status": "PASS",
+    "selected": 120,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "tests": 120
+    },
+    "skips": [],
+    "minimum_free_bytes": 1594253312,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 969,
+      "archive_bytes": 1047659,
+      "archive_sha256": "2110bd0d217dc5a17fc2eca86fbbb3708702ba0935c30b2d8a3f31505f79dff9"
+    }
+  },
+  {
+    "number": 17,
+    "status": "FAIL",
+    "selected": 120,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 1,
+      "error": 0,
+      "skipped": 0,
+      "tests": 120
+    },
+    "skips": [],
+    "minimum_free_bytes": 999718912,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 1678,
+      "archive_bytes": 1732325,
+      "archive_sha256": "f8c7362d7f04eb1a98fd663288fc808b05a1c3ff159965910f52e34d01085caf"
+    }
+  },
+  {
+    "number": 18,
+    "status": "PASS",
+    "selected": 120,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "tests": 120
+    },
+    "skips": [],
+    "minimum_free_bytes": 1035329536,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 959,
+      "archive_bytes": 1018469,
+      "archive_sha256": "9bf9922080350357d822745bc76c732bd2c6e1821626c8817e467c127a70ea0d"
+    }
+  },
+  {
+    "number": 19,
+    "status": "PASS",
+    "selected": 120,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "tests": 120
+    },
+    "skips": [],
+    "minimum_free_bytes": 1610493952,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 670,
+      "archive_bytes": 912901,
+      "archive_sha256": "6531d844b79233b5c5c8074a31e5de7a99758db9d4da089ec7a6df6a9cd71920"
+    }
+  },
+  {
+    "number": 20,
+    "status": "PASS_WITH_CLASSIFIED_SKIPS",
+    "selected": 120,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 0,
+      "error": 0,
+      "skipped": 3,
+      "tests": 120
+    },
+    "skips": [
+      {
+        "test": "test_package_upload",
+        "reason": "Skip package upload test"
+      },
+      {
+        "test": "test_package_status",
+        "reason": "Skip package upload test"
+      },
+      {
+        "test": "test_package_set_changelog",
+        "reason": "Skip package upload test"
+      }
+    ],
+    "minimum_free_bytes": 1618669568,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 1225,
+      "archive_bytes": 591479,
+      "archive_sha256": "f8ec263de79721523a2871f6db9b0239609f04a6b7a417811180ff953217cb4c"
+    }
+  },
+  {
+    "number": 21,
+    "status": "PASS_WITH_CLASSIFIED_SKIPS",
+    "selected": 120,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 0,
+      "error": 0,
+      "skipped": 1,
+      "tests": 120
+    },
+    "skips": [
+      {
+        "test": "test_real_rcc_artifact_action_vertical",
+        "reason": "set ACTIONS_REAL_RCC_ARTIFACT_TEST=1"
+      }
+    ],
+    "minimum_free_bytes": 1632628736,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 338,
+      "archive_bytes": 227151,
+      "archive_sha256": "9519e7c82b49f63965aa1f3158decb0b88d5a3d8f660595fe9862636ea55eb73"
+    }
+  },
+  {
+    "number": 22,
+    "status": "PASS",
+    "selected": 120,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "tests": 120
+    },
+    "skips": [],
+    "minimum_free_bytes": 1589710848,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 850,
+      "archive_bytes": 1063979,
+      "archive_sha256": "b4a183879cc41a7c74faa691b087529f410d20977b421608019f0d5c5d5a7d51"
+    }
+  },
+  {
+    "number": 23,
+    "status": "PASS_WITH_CLASSIFIED_SKIPS",
+    "selected": 120,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 0,
+      "error": 0,
+      "skipped": 2,
+      "tests": 120
+    },
+    "skips": [
+      {
+        "test": "test_rejects_socket_entries",
+        "reason": "Filesystem cannot create this Unix socket fixture"
+      },
+      {
+        "test": "test_pinned_rcc_executes_selected_task_with_declared_inputs",
+        "reason": "set ACTIONS_ROBOT_INPUT_RCC to pinned RCC18.19.3 for actual task-input acceptance"
+      }
+    ],
+    "minimum_free_bytes": 1633734656,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 841,
+      "archive_bytes": 120578,
+      "archive_sha256": "a22f82b4060ef9ac3da8d0ad21a09c6c4287b6c9e7fa920a557026c7d4da82d4"
+    }
+  },
+  {
+    "number": 24,
+    "status": "PASS",
+    "selected": 120,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "tests": 120
+    },
+    "skips": [],
+    "minimum_free_bytes": 1021460480,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 711,
+      "archive_bytes": 1502501,
+      "archive_sha256": "559f8c083e8731da63adb532bf7e4907eb1db67799adf45e05e2e9bdf6fc6674"
+    }
+  },
+  {
+    "number": 25,
+    "status": "PASS",
+    "selected": 120,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "tests": 120
+    },
+    "skips": [],
+    "minimum_free_bytes": 1613754368,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 447,
+      "archive_bytes": 512445,
+      "archive_sha256": "85c3fd095c1e33dc030282e58a3e7faf93d703ea9610c6279560ce5ff775d790"
+    }
+  },
+  {
+    "number": 26,
+    "status": "PASS",
+    "selected": 120,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "tests": 120
+    },
+    "skips": [],
+    "minimum_free_bytes": 1570140160,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 1165,
+      "archive_bytes": 1506706,
+      "archive_sha256": "19705b337ea9cd32b969dfb76ecf2538104f8a1f08e3c49f64b78848e623eeb1"
+    }
+  },
+  {
+    "number": 27,
+    "status": "PASS",
+    "selected": 120,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "tests": 120
+    },
+    "skips": [],
+    "minimum_free_bytes": 1631444992,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 337,
+      "archive_bytes": 1208457,
+      "archive_sha256": "f07a5c55441cd46d0630293a4c711b84baca7365a27282b509cb8ed88edf1a6b"
+    }
+  },
+  {
+    "number": 28,
+    "status": "PASS",
+    "selected": 120,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "tests": 120
+    },
+    "skips": [],
+    "minimum_free_bytes": 1289863168,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 18712,
+      "archive_bytes": 90200942,
+      "archive_sha256": "784c70eb5ef074103fbcc506695ee96a21996b04e099f6304abfd2681755c554"
+    }
+  },
+  {
+    "number": 29,
+    "status": "PASS",
+    "selected": 120,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "tests": 120
+    },
+    "skips": [],
+    "minimum_free_bytes": 1119567872,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 1613,
+      "archive_bytes": 364182,
+      "archive_sha256": "6aa294d3875bb64089de48da15efee165da76fd237d42482fb3a0475092364d5"
+    }
+  },
+  {
+    "number": 30,
+    "status": "PASS",
+    "selected": 120,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "tests": 120
+    },
+    "skips": [],
+    "minimum_free_bytes": 1123721216,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 409,
+      "archive_bytes": 36049,
+      "archive_sha256": "99b0b8e30468d6aa03828bbcab892d206167f0baf15399d135fcada6024a50d1"
+    }
+  },
+  {
+    "number": 31,
+    "status": "PASS",
+    "selected": 24,
+    "all_cases_accounted": true,
+    "counts": {
+      "failure": 0,
+      "error": 0,
+      "skipped": 0,
+      "tests": 24
+    },
+    "skips": [],
+    "minimum_free_bytes": 1125093376,
+    "cleanup": "PASS",
+    "fixture_archive": {
+      "entries": 131,
+      "archive_bytes": 6732,
+      "archive_sha256": "0c213de0828f92294602309f643e1ddcdfacb87ffdbfbbf510279f2cb978cca7"
+    }
+  }
+]

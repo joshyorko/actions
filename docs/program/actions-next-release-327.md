@@ -1175,3 +1175,28 @@ with one exact Run/Attempt. All four Runtime processes shut down gracefully.
 This closes that bounded current Task path; broader legacy/interactions/Robot/
 Work Item Tasks, public artifact-byte reading and the complete owner gates remain
 open. No Dakota readiness is inferred.
+
+
+## a36/a37 installed Data and bounded portable qualification
+
+The current installed Data checkpoint is ca77f7898be566c0afe9f7667a02c543d3c2b265.
+[Installed Data](evidence/actions-next-327/recovery-a36/installed-data/README.md)
+qualifies actual generated RCC execution over real DuckDB and owned TLS PostgreSQL
+with the same immutable Package, sealed output resolution and restart/replay.
+[Installed readiness](evidence/actions-next-327/recovery-a37/installed-readiness/README.md)
+qualifies missing-extra refusal before Run/Attempt admission, then successful
+execution of the same request after installing the declared extra. These supersede
+older pending Data statements only for those exact bounded paths.
+
+[Portable batch receipts](evidence/actions-next-327/recovery-a37/bounded-portable/README.md)
+account for3744selected cases: original3686pass/50skip/8fail; preserved corrections
+pass118+2native-Windows skips and46+0skip. Composed coverage is3694pass/50skip,
+not an original-run PASS or final release acceptance. No second campaign or suite
+restart was created. Existing frozen failures remain evidence.
+
+Knowledge/durable ingest/search, integrated generic multi-capability and genuine
+Robot/direct plans, broader Tasks/Work Items/interactions/effect recovery, full
+MCP Apps/client acceptance and final artifacts/upgrade/downgrade/restore/shared-PG/
+platform/distribution gates remain open. Celld326 is NO-GO pending exact owner
+decision. Authenticated Codex and Library each returned401; no credential bypass,
+Library upload ID or Dakota READY is claimed. Existing PR328 is updated to a37.

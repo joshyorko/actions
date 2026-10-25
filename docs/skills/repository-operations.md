@@ -5614,3 +5614,22 @@ the complete request, including Deployment revision; use a distinct idempotency
 key for a different revision. An activated revision without its explicit exact
 Deployment grants can refuse inspection/execution. Preserve failed setup receipts
 and finish the explicit stopped-local authorization, rather than weakening guards.
+
+
+Custom pytest entrypoints used with multiprocessing-spawn tests must guard
+pytest.main with `if __name__ == "__main__"`; otherwise child import recursively
+starts the suite before process bootstrap completes. Keep the original failed
+receipt, correct the launcher, and rerun the affected complete batch. Collect an
+exact ordered node manifest, verify every batch's collected nodes and terminal
+reports, and verify union/uniqueness before composing coverage. Do not describe a
+failed original run as passing because targeted corrections later pass. A test
+using object.__new__ must initialize constructor-owned fields relevant to its
+boundary; production default configuration must still be verified separately.
+
+Ordinary Data execution does not establish Knowledge integration. Existing
+Knowledge components use injected bindings/authorization, synchronous ingestion,
+and replacement of the previous provider version. Open-read snapshots do not
+prove historical revision reopening or durable ingestion. Public Knowledge still
+requires retained immutable collection revisions, independent live read/manage
+authority, canonical ingestion/reconciliation, and sealed paging/export. Split
+provider-service and advanced Knowledge remain distinct outstanding gates.
