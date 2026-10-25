@@ -14,6 +14,10 @@
   "installed_a41": "FAILED",
   "new_compiler_artifact": "sha256:651c79e99dc9f684dceb4dea55de5b6156cb626aaba717c05897adf3173ed5d3",
   "original_failure_patch": "REJECTED counterexamples; corrected source reviewed separately",
-  "corrected_lifecycle": "source candidate, installed gate pending",
-  "runtime_candidate": "1.1.0a42"
+  "corrected_lifecycle": "PASS:114 joined cases; installed public MCP lifecycle PASS",
+  "runtime_candidate": "1.1.0a42",
+  "runtime_candidate_source": "730f277ce13bd3a123c854c85c1c9fc2c185096c",
+  "runtime_wheel_sha256": "90117fa669bc1f9f11b792ba18b2f1b9598aa2711471c6464ae95fe34bff2342",
+  "browser_gate": "BLOCKED: executor Chromium sandbox helper ownership",
+  "actual_chatgpt": "NOT_RUN"
 }

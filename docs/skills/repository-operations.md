@@ -6288,3 +6288,10 @@ index-generation code and compatibility names do not authorize publication or
 establish full dependency independence. Logging replacement still must preserve
 raw/repr secret hiding, OAuth suppression and decrypted-context redaction before
 removing `robocorp-log`.
+
+A revoked read permission may prevent `canvas_get` from issuing a new AppSession
+instead of issuing a session whose later projection call fails. Both paths must
+withhold protected output; distinguish the observed denial from a harness that
+assumed a token always exists. For synthetic CLI keys, pass `--api-key=value` so
+a valid randomly generated leading dash is not parsed as a new option. Startup
+failure accounting must preserve the original error when no server log exists.
