@@ -167,6 +167,12 @@ export interface SemanticArtifactResult {
 }
 
 export interface SemanticRendererAdapters {
+    /**
+     * Pure local lookup; no fetch or authority is granted by this getter.
+     * The host's changed callback rerenders consumers after state updates.
+     * Arbitrary dispatch metadata is not an authorized projection.
+     */
+    getProjection?: (bindingId: string) => SemanticProjectionState;
     resolveFormBinding: (
         bindingId: string,
     ) => CapabilityRef<string, SemanticFormInput, unknown> | undefined;
@@ -182,3 +188,49 @@ export interface SemanticRendererAdapters {
     ) => CapabilityRef<string, void, SemanticArtifactResult> | undefined;
     openArtifact: CapabilityDispatcher<string, void, SemanticArtifactResult>;
 }
+
+/** Portable JSON shape; runtime canonicalization validates numbers and bounds. */
+export type SemanticProjectionValue =
+    | null
+    | boolean
+    | number
+    | string
+    | readonly SemanticProjectionValue[]
+    | { readonly [key: string]: SemanticProjectionValue };
+
+export interface SemanticProjectionExecution {
+    runId: string;
+    attemptId: string;
+}
+
+/**
+ * requestId is a trusted adapter generation, not caller-supplied authority.
+ * Readiness belongs only to the same current request and Run/Attempt pair.
+ * canonicalJson and data derive from the same authorized output under the
+ * existing restricted RFC 8785 contract, bounded to 65536 UTF-8 bytes.
+ * Clear retained data on resubmit, error or authorization denial; ignore stale
+ * responses. These types alone neither validate nor authorize projection bytes.
+ */
+export type SemanticProjectionState =
+    | { state: "not-run"; bindingId: string }
+    | {
+          state: "loading";
+          bindingId: string;
+          requestId: string;
+          execution?: SemanticProjectionExecution;
+      }
+    | {
+          state: "error";
+          bindingId: string;
+          requestId: string;
+          execution?: SemanticProjectionExecution;
+          message: string;
+      }
+    | {
+          state: "empty" | "ready";
+          bindingId: string;
+          requestId: string;
+          execution: SemanticProjectionExecution;
+          canonicalJson: string;
+          data: SemanticProjectionValue;
+      };
