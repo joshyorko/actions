@@ -1,0 +1,52 @@
+{
+  "result": "pass",
+  "scope": "installed Python consumer only",
+  "producer_version": "7.5.0",
+  "consumer_prefix": "/workspace/recovery327/a44/consumer",
+  "producer_prefix": "/workspace/actions/devutils/.venv",
+  "consumer_trust": "trusted interpreter and site/.pth execution required",
+  "wheel_sha256": "1502214a6a6319521984d554244aca502659fc919d5a31bac94727d3e534104c",
+  "runtime_version": "1.1.0a44",
+  "runtime-lock.toml_sha256": "278c14c7438c1874ceb36fab1959902f14f494f869f1aed422cddebbffd0b1f3",
+  "producer-lock.toml_sha256": "a64d58d50b4ed3eb6f19c36212af6996e0643e40d5266843307f51d703c20200",
+  "inspect_sha256": "1d7676b6238ce9d2aee06bfdcdfb98521b04c2cd816ff0706ec026d4f5fae651",
+  "selected_extras": {
+    "actions-runtime": [
+      "data-duckdb"
+    ],
+    "psycopg": [
+      "binary"
+    ],
+    "pyjwt": [
+      "crypto"
+    ]
+  },
+  "producer_command": [
+    "/workspace/actions/devutils/.venv/bin/python",
+    "-m",
+    "cyclonedx_py",
+    "environment",
+    "/workspace/recovery327/a44/consumer/bin/python",
+    "--spec-version",
+    "1.6",
+    "--output-format",
+    "JSON",
+    "--output-reproducible",
+    "--validate",
+    "--output-file",
+    "-"
+  ],
+  "sbom_sha256": "6094663762f83f33121385fef2cfa78db0a7455c566078f03cac6202ddb07ef1",
+  "sbom_dependencies": "DECLARED",
+  "qualification_scope": "dependency inventory and provenance evidence only",
+  "active_graph_evidence": "resolved-graph.json",
+  "strict_active_graph": {
+    "result": "failed",
+    "error": "CycloneDX graph differs from active resolved dependencies"
+  },
+  "explained_inactive_edges": 29,
+  "evidence_sha256": {
+    "resolved-graph.json": "ccc79c6c3afc7d14248343517fd1ef2370020b867cfee389247460e36a65f637",
+    "declaration-reconciliation.json": "95ce55244df833d36e2b64395fbd1d59631e3a9175526533d859a497e3eef0ac"
+  }
+}

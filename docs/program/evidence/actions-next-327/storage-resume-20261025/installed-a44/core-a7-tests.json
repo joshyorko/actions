@@ -1,0 +1,15 @@
+{
+  "receipt_sha256": "490487d5963ebef27544e8105a4d7d56014bd159fbee663df85554d13d6726c7",
+  "suites": [
+    {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "453",
+      "time": "103.478",
+      "timestamp": "2026-10-25T18:08:07.331910+00:00",
+      "hostname": "2c8e4f4795f6"
+    }
+  ]
+}

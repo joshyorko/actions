@@ -6426,3 +6426,15 @@ A pinned reference checkout in release verification is a build-time availability
 dependency; any offline replacement must retain independent provenance assurance.
 Historical data directories, explicit compatibility aliases and legal attribution
 are not removable dependency edges.
+
+Agent helpers require explicit `ACTIONS_AGENTS_SERVICE_URL`, or the explicit
+legacy `SEMA4AI_AGENTS_SERVICE_URL` alias when the owned setting is absent. Empty
+or unreachable owned configuration does not fall back to another service or
+legacy Studio PID discovery. Test absence before filesystem/network effects and
+preserve the selected endpoint's existing API payload contract. Windows signing
+uses the owned project homepage as description metadata; test command assembly
+with mocked process execution without credentials or live signing.
+
+Qualify optional Agent endpoint boundaries in the complete Core suite with the
+isolated official truststore selector, followed by configured lint and typecheck.
+Source-suite results remain separate from frozen installed candidate acceptance.

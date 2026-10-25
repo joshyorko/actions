@@ -31,30 +31,21 @@ class _AgentAPIClient:
         log.info(f"API URL: {self.api_url}")
 
     def _get_api_url(self) -> str:
-        """Determine the correct API URL by checking environment variable or agent-server.pid file
-        and testing API availability.
-
-        Returns:
-            str: The working API URL
-
-        Raises:
-            AgentApiClientException: If no API server is responding
-        """
-        # Try to get URL from environment variable first
+        """Select an explicitly configured service without implicit PID discovery."""
         api_url = self._try_get_url_from_environment()
         if api_url:
             return api_url
-
-        # Try to get URL from PID file as fallback
-        api_url = self._try_get_url_from_pid_file()
-        if api_url:
-            return api_url
-
-        # No working API server found
-        raise AgentApiClientException("Could not connect to agent server")
+        raise AgentApiClientException(
+            "Configure ACTIONS_AGENTS_SERVICE_URL (or explicit legacy "
+            "SEMA4AI_AGENTS_SERVICE_URL) with a reachable agent service"
+        )
 
     def _try_get_url_from_environment(self) -> str | None:
-        env_url = os.getenv("SEMA4AI_AGENTS_SERVICE_URL")
+        # Presence establishes precedence; a failed/empty owned setting must not
+        # silently select a different service through compatibility discovery.
+        env_url = os.getenv("ACTIONS_AGENTS_SERVICE_URL")
+        if env_url is None:
+            env_url = os.getenv("SEMA4AI_AGENTS_SERVICE_URL")
         if not env_url:
             return None
 
