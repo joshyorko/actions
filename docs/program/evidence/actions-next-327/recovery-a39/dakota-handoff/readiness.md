@@ -1,6 +1,6 @@
 # Dakota host-gate readiness assessment
 
-Status: DRAFT / HOST PREFLIGHT REQUIRED, not READY. Frozen a39 cloud product
+Status: READY FOR OWNER-LAUNCHED DAKOTA CHATGPT TEST, with local host preflight required. Frozen a39 cloud product
 prerequisites for a bounded independent host evaluation are evidenced. Completing
 Robot/v2/SBOM/celld is not required to assess this specific frozen host lane;
 none of those gates is waived or declared complete.
@@ -38,3 +38,5 @@ Earlier public second-app apply failure remains unknown; clean fresh a39 run
 passed independently. No unsupported inference about its cause. No network,
 credentials, tunnels, host config, external repo or production state changed.
 Upstream disposition:none.
+
+Cloud handoff completion: exact three-wheel bundle saved to Library as libfile_1141c898e8248191be6ac4a95cb69734, archiveSHA2562a138243181a80a748842b3c7ae88b186856a421da1c5aea1ee4542b2c002745. Frozen installed denial observations: correct bearer200, missing/wrongbearer403, foreignHost421, foreignOrigin403; all400 nonmetadata installed files match wheel bytes. Both owned servers shut down cleanly. The first harness's incorrect401 expectation remains failed, with remaining cases run separately. See ../dakota-denials/README.md. This closes cloud prerequisites only; operator preflight and actual host acceptance remain as above. No remote fallback or replacement-extension acceptance is implied.

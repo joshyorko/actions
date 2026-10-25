@@ -1,7 +1,6 @@
-# Draft Dakota agent prompt — frozen a39 host gate, not release READY
+# Owner-launched Dakota agent prompt — frozen a39 host gate
 
-Use only after Josh starts this local task and the parent supplies its approved
-scope. This draft performs no dispatch. Goal: test actual ChatGPT Desktop tools
+Use only after Josh starts this local task within the approved scope. This draft performs no dispatch. Goal: test actual ChatGPT Desktop tools
 and MCP Apps UI against one isolated synthetic Actions Runtime, then remove only
 that temporary connection. Preserve the existing Executor and all unrelated
 configuration, processes, credentials, tunnels, security controls and repositories.
@@ -9,6 +8,7 @@ configuration, processes, credentials, tunnels, security controls and repositori
 ## Source and artifact identity
 
 Use source a5eaa1cb0be6dcde2d509f2babbb486d9195ccc1, not the changing branch tip.
+Obtain the exact tested archive from Library file libfile_1141c898e8248191be6ac4a95cb69734 (SHA2562a138243181a80a748842b3c7ae88b186856a421da1c5aea1ee4542b2c002745), then verify its manifest and wheel hashes.
 Cloud installed receipts were committed in55dab2e9 under
 `docs/program/evidence/actions-next-327/recovery-a39/clean-e2e/`.
 Require actual hashes, platform and imports to match before describing exact
