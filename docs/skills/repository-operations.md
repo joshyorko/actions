@@ -6457,3 +6457,11 @@ a successful diagnostic build from a dirty checkout does not qualify a candidate
 The safe-path flag does not remove caller-supplied `PYTHONPATH` and is not a
 sandbox. Generate the public OAuth catalog through the canonical build task and
 keep it ignored; it must not replace an operator's private registration.
+
+For the locked Node MCP SDK, classify HTTP authentication rejection from
+`SdkHttpError.status`/`data.status`, not the SDK error-code string or message text.
+Retain HTTP status separately from sanitized SDK metadata; timeouts do not prove
+authentication denial. Preserve the transport AbortSignal when adding deadlines,
+and write terminal supervisor failure state on subprocess exceptions before
+cleanup. A focused auth follow-up does not change an earlier full-client FAILED
+receipt.

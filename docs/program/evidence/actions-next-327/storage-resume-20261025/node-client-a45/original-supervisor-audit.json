@@ -1,0 +1,8 @@
+{
+  "original_client_status": "FAILED",
+  "original_client_receipt_sha256": "a4e232320f583b70944e4132523de8dcabbbc44a6dde6d14078a5a695955134c",
+  "original_supervisor_status": "RUNNING",
+  "interpretation": "stale supervisor status; client wrote FAILED and supervisor recorded server_exit=-15; no claim of running work",
+  "followup": "a45-auth-only/authentication-receipt.json",
+  "followup_scope": "read-only auth only; does not convert original full client gate to PASS"
+}
