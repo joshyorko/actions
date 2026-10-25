@@ -15,7 +15,7 @@ from collections.abc import Sequence
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from threading import RLock
-from typing import Any
+from typing import TYPE_CHECKING, Any
 from uuid import uuid4, uuid5
 
 from actions.server._database import Database
@@ -39,6 +39,7 @@ from actions.server.deployments.foundry_repository import (
 from actions.server.deployments.foundry_values import AccessDenied, WorkItemDeclaration
 from actions.server.deployments.ids import (
     BindingRequirementRef,
+    CapabilityId,
     CapabilityRef,
     DeploymentId,
     PackageId,
@@ -88,6 +89,23 @@ from actions.server.run_outputs.types import (
     SealReceipt,
 )
 
+if TYPE_CHECKING:
+    from actions.server.foundry.robot_execution import (
+        DirectRobotPreparation,
+        RccRobotPreparation,
+    )
+    from actions.server.foundry.robot_package_admission import (
+        ADMISSION_SCHEMA as _ROBOT_SCHEMA,
+    )
+    from actions.server.foundry.robot_package_admission import (
+        AdmittedRobotPackage,
+        RobotAdmissionEvidence,
+    )
+    from actions.server.foundry.robot_package_builder import RobotPackageRequest
+
+_ROBOT_SCHEMA = "actions.local-robot-package-admission/v1"
+
+
 _SCHEMA = "actions.local-package-admission/v1"
 _BUNDLE_SCHEMA = "actions.local-capability-bundle-admission/v1-draft"
 
@@ -98,6 +116,14 @@ class RegistryCapabilitySelection:
     capability: CapabilityRef
     runtime_plan: RuntimePlanRef
     compiled: CompiledPackageRevision
+
+
+@dataclass(frozen=True)
+class RegistryRobotSelection:
+    package_revision: PackageRevisionRef
+    capability: CapabilityRef
+    runtime_plan: RuntimePlanRef
+    robot: AdmittedRobotPackage
 
 
 def _verified_members(
@@ -194,6 +220,7 @@ class FoundryPackageRegistry:
         )
         self._pending: OrderedDict[int, _Pending] = OrderedDict()
         self._lock = RLock()
+        self._robot_pending: OrderedDict[int, tuple] = OrderedDict()
 
     def _require(
         self, actor: Actor, workspace: WorkspaceId, application: DeploymentId
@@ -209,6 +236,217 @@ class FoundryPackageRegistry:
                 "Package compilation unavailable or not authorized"
             ) from None
         self._authorization.require_workspace(actor, workspace, "deploy")
+
+    def prepare_trusted_robot(
+        self,
+        request: RobotPackageRequest,
+        *,
+        logical_package_key: str,
+        trusted_actor: Actor,
+        workspace_id: WorkspaceId,
+        application_id: DeploymentId,
+        preparation: DirectRobotPreparation | RccRobotPreparation,
+    ) -> RobotAdmissionEvidence:
+        from actions.server.foundry.robot_package_admission import (
+            RobotAdmissionEvidence,
+            assemble_robot_admission,
+            decode_robot_admission,
+        )
+        from actions.server.foundry.robot_package_builder import build_robot_package
+
+        if self._db.in_transaction():
+            raise AccessDenied(
+                "Robot preparation requires independent transaction boundary"
+            )
+        actor = Actor.model_validate(trusted_actor)
+        workspace = WorkspaceId.model_validate(workspace_id)
+        application = DeploymentId.model_validate(application_id)
+        self._require(actor, workspace, application)
+        if self._admission is not TrustedDeveloperExecutionAdmission.TRUSTED:
+            raise AccessDenied("explicit trusted developer admission required")
+        measured = build_robot_package(request, preparation=preparation)
+        package = assemble_robot_admission(measured, logical_package_key)
+        if (
+            decode_robot_admission(package.manifest_json, package.source_archive)
+            != package
+        ):
+            raise AccessDenied("Robot evidence reconstruction differs")
+        evidence = RobotAdmissionEvidence(package)
+        self._require(actor, workspace, application)
+        with self._lock:
+            if len(self._robot_pending) >= 32:
+                self._robot_pending.popitem(last=False)
+            self._robot_pending[id(evidence)] = (
+                evidence,
+                actor,
+                workspace,
+                application,
+                preparation,
+                package.manifest_json,
+                _hash(package.source_archive),
+            )
+        return evidence
+
+    def admit_robot(
+        self, actor: Actor, workspace_id: WorkspaceId, evidence: RobotAdmissionEvidence
+    ) -> PackageRevisionRef:
+        from actions.server.foundry.robot_package_admission import (
+            decode_robot_admission,
+        )
+        from actions.server.foundry.robot_package_builder import verify_robot_package
+
+        if self._db.in_transaction():
+            raise AccessDenied("Robot admission requires independent commit authority")
+        actor, workspace = (
+            Actor.model_validate(actor),
+            WorkspaceId.model_validate(workspace_id),
+        )
+        with self._lock:
+            pending = self._robot_pending.get(id(evidence))
+        if (
+            pending is None
+            or pending[0] is not evidence
+            or pending[1:3] != (actor, workspace)
+        ):
+            raise AccessDenied("Robot Package requires exact authorized host outcome")
+        _, _, _, application, preparation, manifest, source_digest = pending
+        self._require(actor, workspace, application)
+        package = evidence.package
+        if (
+            package.manifest_json != manifest
+            or _hash(package.source_archive) != source_digest
+            or evidence.verification != "source-and-plan-verified"
+            or evidence.execution != "not-qualified"
+        ):
+            raise AccessDenied("issued Robot evidence changed")
+        verify_robot_package(package.robot, preparation=preparation)
+        if decode_robot_admission(manifest, package.source_archive) != package:
+            raise AccessDenied("Robot evidence reconstruction differs")
+        ref = self._ref(workspace, package)
+        with self._db.connect():
+            existing = self._rows(ref)
+        if existing:
+            self._authorization.require_reference(actor, ref, "deploy")
+            self.load_verified(ref)
+            return ref
+        staged = self._provider.stage(
+            package.source_archive[i : i + 65536]
+            for i in range(0, len(package.source_archive), 65536)
+        )
+        if staged.receipt.digest != source_digest or staged.receipt.size != len(
+            package.source_archive
+        ):
+            raise AccessDenied("Robot source stage differs")
+        inserted = False
+        with self._db.connect(), _transaction(self._db):
+            FoundryRepository(self._db)._lock_workspace(workspace)
+            self._require(actor, workspace, application)
+            if self._rows(ref):
+                self._authorization.require_reference(actor, ref, "deploy")
+                self.load_verified(ref)
+            else:
+                self._db.insert(
+                    FoundryPackageRevision(
+                        str(uuid5(ref.package_id.root, ref.revision_id.root)),
+                        str(workspace.root),
+                        str(ref.package_id.root),
+                        ref.revision_id.root,
+                        manifest.decode(),
+                        source_digest,
+                        package.robot.source.inventory.canonical_json.decode(),
+                        _json(
+                            {
+                                "schemaVersion": _ROBOT_SCHEMA,
+                                "source": staged.receipt.model_dump(mode="json"),
+                            }
+                        ),
+                    )
+                )
+                request = FoundryRequest(
+                    str(uuid4()),
+                    str(workspace.root),
+                    actor.principal_id,
+                    "package.admit",
+                    ref.revision_id.root,
+                    _hash(manifest),
+                    ref.model_dump_json(),
+                )
+                self._db.insert(request)
+                self._db.insert(
+                    FoundryAudit(
+                        str(uuid4()),
+                        str(workspace.root),
+                        str(application.root),
+                        actor.principal_id,
+                        "package.admit",
+                        request.id,
+                        "",
+                        ref.revision_id.root,
+                        str(time.time_ns() // 1000000),
+                    )
+                )
+                for reference in (
+                    ref,
+                    CapabilityRef(
+                        package_revision=ref,
+                        capability_id=CapabilityId(package.capability_id),
+                    ),
+                    self._plan_ref(ref, package),
+                ):
+                    self._db.insert(
+                        FoundryAccessGrant(
+                            str(uuid4()),
+                            str(workspace.root),
+                            actor.principal_id,
+                            "reference",
+                            reference_grant_subject(reference),
+                            '["deploy","execute"]',
+                        )
+                    )
+                inserted = True
+        if not inserted:
+            self._provider.discard(staged)
+        return ref
+
+    def _load_robot_row(self, ref, row, data) -> AdmittedRobotPackage:
+        from actions.server.foundry.robot_package_admission import (
+            MAX_ARCHIVE,
+            decode_robot_admission,
+        )
+
+        if (
+            set(data) != {"schemaVersion", "source"}
+            or _json(data) != row.build_evidence_json
+        ):
+            raise ValueError("closed Robot admission evidence required")
+        seal = SealReceipt.model_validate(data["source"])
+        if seal.size > MAX_ARCHIVE or seal.digest != row.source_artifact_digest:
+            raise ValueError("Robot source bound or identity differs")
+        with self._provider.open(seal.object_ref, seal.digest, seal.size) as reader:
+            source = reader.read(seal.size + 1)
+        if len(source) != seal.size or _hash(source) != seal.digest:
+            raise ValueError("Robot source identity differs")
+        package = decode_robot_admission(row.manifest_json.encode(), source)
+        if (
+            self._ref(ref.workspace_id, package) != ref
+            or package.robot.source.inventory.canonical_json.decode()
+            != row.source_inventory_json
+        ):
+            raise ValueError("Robot scoped source inventory differs")
+        return package
+
+    def robot_admission_evidence(
+        self, ref: PackageRevisionRef
+    ) -> RobotAdmissionEvidence:
+        from actions.server.foundry.robot_package_admission import (
+            AdmittedRobotPackage,
+            RobotAdmissionEvidence,
+        )
+
+        loaded = self.load_verified(ref)
+        if not isinstance(loaded, AdmittedRobotPackage):
+            raise AccessDenied("Robot admission unavailable")
+        return RobotAdmissionEvidence(loaded)
 
     def compile_trusted_source(
         self,
@@ -359,9 +597,17 @@ class FoundryPackageRegistry:
     @staticmethod
     def _ref(
         workspace: WorkspaceId,
-        compiled: CompiledPackageRevision | CompiledCapabilityBundle,
+        compiled: CompiledPackageRevision
+        | CompiledCapabilityBundle
+        | AdmittedRobotPackage,
     ) -> PackageRevisionRef:
-        manifest = json.loads(_verified_members(compiled)[0].manifest_json)
+        from actions.server.foundry.robot_package_admission import AdmittedRobotPackage
+
+        manifest = json.loads(
+            compiled.manifest_json
+            if isinstance(compiled, AdmittedRobotPackage)
+            else _verified_members(compiled)[0].manifest_json
+        )
         return PackageRevisionRef(
             workspace_id=workspace,
             package_id=PackageId(
@@ -538,10 +784,16 @@ class FoundryPackageRegistry:
 
     @staticmethod
     def _plan_ref(
-        ref: PackageRevisionRef, compiled: CompiledPackageRevision
+        ref: PackageRevisionRef,
+        compiled: CompiledPackageRevision | AdmittedRobotPackage,
     ) -> RuntimePlanRef:
+        from actions.server.foundry.robot_package_admission import AdmittedRobotPackage
+
         return RuntimePlanRef(
-            package_revision=ref, plan_digest=compiled.runtime_plan_header.plan_digest
+            package_revision=ref,
+            plan_digest=PlanDigest(compiled.robot.plan_digest)
+            if isinstance(compiled, AdmittedRobotPackage)
+            else compiled.runtime_plan_header.plan_digest,
         )
 
     def load(self, ref: PackageRevisionRef) -> CompiledPackageRevision:
@@ -604,7 +856,7 @@ class FoundryPackageRegistry:
 
     def load_verified(
         self, ref: PackageRevisionRef
-    ) -> CompiledPackageRevision | CompiledCapabilityBundle:
+    ) -> CompiledPackageRevision | CompiledCapabilityBundle | AdmittedRobotPackage:
         ref = PackageRevisionRef.model_validate(ref)
         try:
             with self._db.connect():
@@ -622,6 +874,8 @@ class FoundryPackageRegistry:
             ):
                 raise ValueError("Package metadata bound exceeded")
             data = json.loads(row.build_evidence_json)
+            if data.get("schemaVersion") == _ROBOT_SCHEMA:
+                return self._load_robot_row(ref, row, data)
             if data.get("schemaVersion") == _SCHEMA:
                 return self.load(ref)
             if (
@@ -668,13 +922,22 @@ class FoundryPackageRegistry:
 
     def selection_for(
         self, capability: CapabilityRef, plan: RuntimePlanRef
-    ) -> RegistryCapabilitySelection:
+    ) -> RegistryCapabilitySelection | RegistryRobotSelection:
+        from actions.server.foundry.robot_package_admission import AdmittedRobotPackage
+
         capability = CapabilityRef.model_validate(capability)
         plan = RuntimePlanRef.model_validate(plan)
         ref = capability.package_revision
         if plan.package_revision != ref:
             raise AccessDenied("Package selection scopes differ")
         loaded = self.load_verified(ref)
+        if isinstance(loaded, AdmittedRobotPackage):
+            if (
+                capability.capability_id.root != loaded.capability_id
+                or plan != self._plan_ref(ref, loaded)
+            ):
+                raise AccessDenied("Undeclared Robot Package selection")
+            return RegistryRobotSelection(ref, capability, plan, loaded)
         if isinstance(loaded, CompiledCapabilityBundle):
             try:
                 member = select_capability(
@@ -697,7 +960,13 @@ class FoundryPackageRegistry:
         self.load_verified(ref)
 
     def evidence(self, ref: PackageRevisionRef) -> CompilationEvidence:
+        from actions.server.foundry.robot_package_admission import AdmittedRobotPackage
+
         loaded = self.load_verified(ref)
+        if isinstance(loaded, AdmittedRobotPackage):
+            raise AccessDenied(
+                "Robot measured evidence is not Python compilation readiness"
+            )
         with self._db.connect():
             data = json.loads(self._rows(ref)[0].build_evidence_json)
         if isinstance(loaded, CompiledCapabilityBundle):
@@ -711,15 +980,36 @@ class FoundryPackageRegistry:
         return self._evidence(CompilationReceipt(**data["receipt"]))
 
     def capability_refs(self, ref: PackageRevisionRef) -> tuple[CapabilityRef, ...]:
+        from actions.server.foundry.robot_package_admission import AdmittedRobotPackage
+
+        loaded = self.load_verified(ref)
+        if isinstance(loaded, AdmittedRobotPackage):
+            return (
+                CapabilityRef(
+                    package_revision=ref,
+                    capability_id=CapabilityId(loaded.capability_id),
+                ),
+            )
         return tuple(
             CapabilityRef(package_revision=ref, capability_id=entry["id"])
-            for member in _verified_members(self.load_verified(ref))
+            for member in _verified_members(loaded)
             for entry in json.loads(member.manifest_json)["capabilities"]
         )
 
     def get_capability(self, ref: CapabilityRef) -> PackageCapability | None:
+        from actions.server.foundry.robot_package_admission import AdmittedRobotPackage
+
         ref = CapabilityRef.model_validate(ref)
-        for member in _verified_members(self.load_verified(ref.package_revision)):
+        loaded = self.load_verified(ref.package_revision)
+        if isinstance(loaded, AdmittedRobotPackage):
+            if ref.capability_id.root != loaded.capability_id:
+                return None
+            return PackageCapability(
+                ref,
+                _hash(loaded.robot.input_schema),
+                (self._plan_ref(ref.package_revision, loaded),),
+            )
+        for member in _verified_members(loaded):
             entry = json.loads(member.manifest_json)["capabilities"][0]
             if entry["id"] != ref.capability_id.root:
                 continue
@@ -740,8 +1030,24 @@ class FoundryPackageRegistry:
         return None
 
     def get_runtime_plan(self, ref: RuntimePlanRef) -> PackagePlan | None:
+        from actions.server.foundry.robot_package_admission import AdmittedRobotPackage
+
         ref = RuntimePlanRef.model_validate(ref)
-        for member in _verified_members(self.load_verified(ref.package_revision)):
+        loaded = self.load_verified(ref.package_revision)
+        if isinstance(loaded, AdmittedRobotPackage):
+            if ref != self._plan_ref(ref.package_revision, loaded):
+                return None
+            return PackagePlan(
+                ref,
+                loaded.robot.plan.runtime_kind,
+                (
+                    CapabilityRef(
+                        package_revision=ref.package_revision,
+                        capability_id=CapabilityId(loaded.capability_id),
+                    ),
+                ),
+            )
+        for member in _verified_members(loaded):
             if ref == self._plan_ref(ref.package_revision, member):
                 entry = json.loads(member.manifest_json)["capabilities"][0]
                 return PackagePlan(
@@ -759,8 +1065,13 @@ class FoundryPackageRegistry:
     def get_binding_requirement(
         self, ref: BindingRequirementRef
     ) -> PackageBindingRequirement | None:
+        from actions.server.foundry.robot_package_admission import AdmittedRobotPackage
+
         ref = BindingRequirementRef.model_validate(ref)
-        for member in _verified_members(self.load_verified(ref.package_revision)):
+        loaded = self.load_verified(ref.package_revision)
+        if isinstance(loaded, AdmittedRobotPackage):
+            return None
+        for member in _verified_members(loaded):
             for value in json.loads(member.manifest_json)["logicalBindingRequirements"]:
                 if value["id"] == ref.requirement_id.root:
                     return PackageBindingRequirement(
@@ -792,9 +1103,16 @@ class FoundryPackageRegistry:
 
     def schema_for(self, snapshot: ExecutionSnapshot) -> AdmittedActionSchema:
         try:
-            compiled = self.selection_for(
-                snapshot.capability, snapshot.runtime_plan
-            ).compiled
+            selected = self.selection_for(snapshot.capability, snapshot.runtime_plan)
+            if isinstance(selected, RegistryRobotSelection):
+                return AdmittedActionSchema(
+                    self.action_id_for(snapshot.capability),
+                    snapshot.capability,
+                    snapshot.runtime_plan,
+                    selected.robot.robot.input_schema.decode(),
+                    selected.robot.robot.output_schema.decode(),
+                )
+            compiled = selected.compiled
             return AdmittedActionSchema(
                 self.action_id_for(snapshot.capability),
                 snapshot.capability,

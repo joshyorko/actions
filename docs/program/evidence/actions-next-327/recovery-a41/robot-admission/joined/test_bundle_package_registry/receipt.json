@@ -1,0 +1,36 @@
+{
+  "module": "test_bundle_package_registry",
+  "command": [
+    "rcc",
+    "task",
+    "script",
+    "-r",
+    "developer/toolkit.yaml",
+    "--",
+    "python",
+    "/workspace/actions-cloud/package-command.py",
+    "action_server",
+    "run",
+    "python",
+    "/workspace/actions-327-a41/robot-admission-joined/selected-pytest.py",
+    "tests/action_server_tests/test_bundle_package_registry.py",
+    "-k",
+    "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+    "-p",
+    "no:robocorp_log_pytest",
+    "-q",
+    "--tb=short",
+    "--junitxml=/workspace/actions-327-a41/robot-admission-joined/test_bundle_package_registry/tests.xml",
+    "--basetemp=/workspace/actions-327-a41/robot-admission-joined/test_bundle_package_registry/fixtures"
+  ],
+  "exit_code": 0,
+  "minimum_free_bytes": 9117917184,
+  "stop_reason": null,
+  "source_sha256": "a3a485be4592e781324c12e28633ad6bccab8d314504d18b401a578db60706a0",
+  "counts": {
+    "tests": 38,
+    "failure": 0,
+    "error": 0,
+    "skipped": 0
+  }
+}

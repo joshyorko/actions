@@ -1,0 +1,16 @@
+[
+  "tests/action_server_tests/test_robot_execution_selection.py::test_prebound_callback_is_sql_only_and_python_path_refuses_robot[sqlite]",
+  "tests/action_server_tests/test_robot_execution_selection.py::test_prebound_callback_is_sql_only_and_python_path_refuses_robot[postgresql]",
+  "tests/action_server_tests/test_robot_execution_selection.py::test_live_changes_deny_bound_selection[sqlite-source]",
+  "tests/action_server_tests/test_robot_execution_selection.py::test_live_changes_deny_bound_selection[sqlite-grant]",
+  "tests/action_server_tests/test_robot_execution_selection.py::test_live_changes_deny_bound_selection[sqlite-cancel]",
+  "tests/action_server_tests/test_robot_execution_selection.py::test_live_changes_deny_bound_selection[sqlite-epoch]",
+  "tests/action_server_tests/test_robot_execution_selection.py::test_live_changes_deny_bound_selection[sqlite-callback]",
+  "tests/action_server_tests/test_robot_execution_selection.py::test_live_changes_deny_bound_selection[postgresql-source]",
+  "tests/action_server_tests/test_robot_execution_selection.py::test_live_changes_deny_bound_selection[postgresql-grant]",
+  "tests/action_server_tests/test_robot_execution_selection.py::test_live_changes_deny_bound_selection[postgresql-cancel]",
+  "tests/action_server_tests/test_robot_execution_selection.py::test_live_changes_deny_bound_selection[postgresql-epoch]",
+  "tests/action_server_tests/test_robot_execution_selection.py::test_live_changes_deny_bound_selection[postgresql-callback]",
+  "tests/action_server_tests/test_robot_execution_selection.py::test_preparation_refuses_outer_transaction[sqlite]",
+  "tests/action_server_tests/test_robot_execution_selection.py::test_preparation_refuses_outer_transaction[postgresql]"
+]
