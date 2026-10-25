@@ -301,7 +301,9 @@ class GenericManagedWorkItemsService:
                             caller, command.payload, command.idempotency_key
                         )
                         result = ItemResult(
-                            item=self._item(caller, self._row(caller, admitted.item_id)),
+                            item=self._item(
+                                caller, self._row(caller, admitted.item_id)
+                            ),
                             replay=admitted.replay,
                             server_time_ms=str(_now(self.db)),
                         )

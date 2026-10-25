@@ -6567,3 +6567,9 @@ export, then derive archive pins from that new output. Targets verify the export
 catalog/library boundary and create their own trust. Public Python METADATA equality
 is not wheel-payload equality; sampled capacity guards and source review are not
 completed build or transfer evidence.
+
+Model capability invocation and Canvas app-associated execution have distinct artifact
+authority. A completed model Run does not establish a Canvas Request/Audit association.
+Qualify each surface with fresh items: model output reads through authorized managed
+HTTP, and Canvas submit_input/execute reads through its own association. Preserve
+expected cross-surface denial rather than adopting an already completed Run.
