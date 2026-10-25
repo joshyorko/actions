@@ -6,6 +6,7 @@ import json
 import os
 import stat
 import threading
+import time
 import zipfile
 from io import BytesIO
 from pathlib import Path
@@ -13,8 +14,10 @@ from pathlib import Path
 from actions.server._rcc_runtime_adapter import verify_rcc_version
 from actions.server.deployments.ids import WorkerProfileRevisionRef
 from actions.server.deployments.package_revision_compiler import PreparedRccEnvironment
+from actions.server.foundry.logical_preparation import LogicalPreparationOwner
 from actions.server.foundry.rcc_execution import (
     GeneratedRccExecution,
+    LogicalPreparationCleanupIncomplete,
     RccCleanupIncomplete,
 )
 from actions.server.run_outputs.detached import DetachedActions, DetachedActionWorker
@@ -143,6 +146,7 @@ class DetachedTaskHost:
         rcc: Path,
         execution_root: Path,
         policy: TaskPolicy,
+        logical_execution=None,
     ):
         if not isinstance(policy, TaskPolicy) or not isinstance(
             prepared, PreparedRccEnvironment
@@ -160,6 +164,8 @@ class DetachedTaskHost:
             execution_root,
             policy,
         )
+        self.logical_execution = logical_execution
+        self._preparation_cleanup: list[LogicalPreparationOwner] = []
         self._stop = threading.Event()
         self._ready = threading.Event()
         self._startup_done = threading.Event()
@@ -168,7 +174,12 @@ class DetachedTaskHost:
         self._lock = threading.Lock()
         self._thread: threading.Thread | None = None
         self._worker = DetachedActionWorker(
-            authority, self.actor, worker_id, profile, stop_requested=self._stop.is_set
+            authority,
+            self.actor,
+            worker_id,
+            profile,
+            stop_requested=self._stop.is_set,
+            logical_execution=logical_execution,
         )
 
     @property
@@ -182,6 +193,11 @@ class DetachedTaskHost:
             self.prepared,
             self.rcc,
             self.execution_root,
+            **(
+                {"logical_execution": self.logical_execution}
+                if self.logical_execution is not None
+                else {}
+            ),
         )
 
     def start(self, timeout_seconds: float = 10) -> None:
@@ -266,6 +282,9 @@ class DetachedTaskHost:
                         after=cursor,
                     )
                     self._stop.wait(self.policy.poll_interval_ms / 1000)
+        except LogicalPreparationCleanupIncomplete as exc:
+            self._preparation_cleanup.append(exc.owner)
+            self._failed.set()
         except RccCleanupIncomplete:
             self._cleanup_uncertain.set()
             self._failed.set()
@@ -288,5 +307,13 @@ class DetachedTaskHost:
             return True
         if thread is threading.current_thread():
             return False
+        deadline = time.monotonic() + timeout_seconds
         thread.join(timeout_seconds)
-        return not thread.is_alive() and not self._cleanup_uncertain.is_set()
+        if thread.is_alive() or self._cleanup_uncertain.is_set():
+            return False
+        self._preparation_cleanup = [
+            owner
+            for owner in self._preparation_cleanup
+            if not owner.settle(max(0, deadline - time.monotonic()))
+        ]
+        return not self._preparation_cleanup

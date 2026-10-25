@@ -27,6 +27,12 @@ from actions.server.deployments.foundry_values import (
     CapabilityWorkItemPolicy,
     WorkItemDeclaration,
 )
+from actions.server.foundry.logical_receipts import (
+    LogicalPublicationGuard,
+    requirement_ids,
+    validate_bound_record,
+    versions_for,
+)
 from actions.server.foundry.models import FoundryAudit, FoundryRequest
 from actions.server.foundry.package_registry import FoundryPackageRegistry
 from actions.server.managed_work_items.contracts import (
@@ -457,7 +463,9 @@ class GenericWorkItemExecution:
             {
                 "result": _canonical(
                     {
-                        "version": "actions.generated-rcc-dispatch/v1",
+                        "version": versions_for(
+                            requirement_ids(self.registry, self.snapshot)
+                        )[0],
                         "mode": "work-items" if claim else "standalone",
                         "claim": ClaimValue.of(claim).model_dump() if claim else None,
                         "fence": fence.model_dump(),
@@ -469,7 +477,9 @@ class GenericWorkItemExecution:
         )
         return self._ticket(caller, claim, _one(self.db, Run, run.id))
 
-    def _ticket(self, caller, claim, run, *, require_owner=True) -> GenericTicket:
+    def _ticket(
+        self, caller, claim, run, *, require_owner=True, _projection=None
+    ) -> GenericTicket:
         pin = _one(self.db, RunPin, run.id)
         attempt = _one(self.db, RunAttempt, pin.current_attempt_id)
         fence = AttemptFence(
@@ -492,11 +502,35 @@ class GenericWorkItemExecution:
             record = record.get("result")
             if (
                 not isinstance(record, dict)
-                or record.get("version") != "actions.generated-rcc-execution/v1"
+                or record.get("version")
+                != versions_for(
+                    _projection.requirement_ids
+                    if _projection is not None
+                    else requirement_ids(self.registry, self.snapshot)
+                )[1]
             ):
                 raise FenceRejected("retained generic execution version differs")
-        elif record.get("version") != "actions.generated-rcc-dispatch/v1":
+        elif (
+            record.get("version")
+            != versions_for(
+                _projection.requirement_ids
+                if _projection is not None
+                else requirement_ids(self.registry, self.snapshot)
+            )[0]
+        ):
             raise FenceRejected("retained generic dispatch version differs")
+        validate_bound_record(
+            self.db,
+            self.registry,
+            self.snapshot,
+            run,
+            fence,
+            record,
+            claim=ClaimValue.of(claim).model_dump() if claim else None,
+            terminal=terminal,
+            outputs=json.loads(run.result).get("outputs") if terminal else None,
+            _projection=_projection,
+        )
         stored_claim = ClaimValue.of(claim) if claim else None
         if (
             not isinstance(record, dict)
@@ -524,7 +558,7 @@ class GenericWorkItemExecution:
         )
 
 
-class _GenericOutputs(RunOutputService):
+class _GenericOutputs(LogicalPublicationGuard, RunOutputService):
     """Trusted RCC output adapter; no transport may manufacture a result receipt."""
 
     def __init__(self, owner, caller, ticket):
@@ -532,6 +566,7 @@ class _GenericOutputs(RunOutputService):
             owner.db, owner.base.providers, capabilities=owner.base.capabilities
         )
         self.owner, self.caller, self.ticket = owner, caller, ticket
+        self._logical_requirements = requirement_ids(owner.registry, owner.snapshot)
 
     def _check(self, fence, *, terminal=False):
         if fence != self.ticket.fence:
@@ -539,7 +574,12 @@ class _GenericOutputs(RunOutputService):
         self.owner._current(self.caller)
         claim = self.ticket.claim.as_claim() if self.ticket.claim else None
         run = _one(self.db, Run, fence.run_id)
-        if self.owner._ticket(self.caller, claim, run) != self.ticket:
+        if (
+            self.owner._ticket(
+                self.caller, claim, run, _projection=self._logical_projection()
+            )
+            != self.ticket
+        ):
             raise FenceRejected("generic admission changed")
         if claim:
             name = self.owner.policy.input_queue
@@ -613,7 +653,7 @@ class _GenericOutputs(RunOutputService):
             queue = self._check(fence, terminal=terminal)
             if (
                 not isinstance(result, dict)
-                or result.get("version") != "actions.generated-rcc-execution/v1"
+                or result.get("version") != versions_for(self._logical_requirements)[1]
                 or result.get("publicationFence") != fence.model_dump()
                 or result.get("claim")
                 != (self.ticket.claim.model_dump() if self.ticket.claim else None)
@@ -628,6 +668,7 @@ class _GenericOutputs(RunOutputService):
                     or result.get("execution") != journal["execution"]
                 ):
                     raise FenceRejected("completed RCC journal required")
+            self._logical_publication(actor, fence, outputs, result, run)
             declaration = self.owner._current(self.caller)
             from jsonschema import validate
 

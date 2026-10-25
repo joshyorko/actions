@@ -1,0 +1,56 @@
+{
+  "status": "PASS_WITH_CLASSIFIED_SKIPS",
+  "group": "logical-join-corrected",
+  "base_source": "d4093af079ac311223326e68b1869a58ff2b3b0a",
+  "runtime": "1.1.0a36",
+  "scope": "working source logical integration; source diff retained separately",
+  "synthetic_auth": true,
+  "engine": "prepared source Runtime",
+  "renderer": "not exercised",
+  "cleanup": "PASS",
+  "command": [
+    "/workspace/actions-recovery-327/run-prepared",
+    "python",
+    "/workspace/actions-cloud/package-command.py",
+    "action_server",
+    "run",
+    "pytest",
+    "tests/action_server_tests/test_logical_receipts.py",
+    "tests/action_server_tests/test_logical_publication_deadline.py",
+    "tests/action_server_tests/test_logical_boundary_fixes.py",
+    "tests/action_server_tests/test_logical_domain.py",
+    "tests/action_server_tests/test_logical_preparation.py",
+    "tests/action_server_tests/test_logical_runner.py",
+    "tests/action_server_tests/test_logical_runner_join.py",
+    "tests/action_server_tests/test_runtime_task_bootstrap.py",
+    "tests/action_server_tests/test_task_service.py",
+    "tests/action_server_tests/test_generic_managed_service.py",
+    "tests/action_server_tests/test_generic_execution_port.py",
+    "tests/action_server_tests/test_task_host.py",
+    "tests/action_server_tests/test_candidate_work_items.py",
+    "-p",
+    "no:robocorp_log_pytest",
+    "-m",
+    "not real_rcc",
+    "-q",
+    "--junitxml=/workspace/actions-recovery-327/evidence/a36-logical-join-corrected/tests.xml",
+    "--basetemp=/workspace/actions-recovery-327/evidence/a36-logical-join-corrected/fixtures"
+  ],
+  "exit_code": 0,
+  "counts": {
+    "skipped": 2,
+    "failure": 0,
+    "error": 0,
+    "tests": 347
+  },
+  "skips": [
+    {
+      "test": "test_optin_actual_rcc_model_wrapper[sqlite]",
+      "reason": "exclusive prepared RCC home required"
+    },
+    {
+      "test": "test_optin_actual_rcc_model_wrapper[postgresql]",
+      "reason": "exclusive prepared RCC home required"
+    }
+  ]
+}

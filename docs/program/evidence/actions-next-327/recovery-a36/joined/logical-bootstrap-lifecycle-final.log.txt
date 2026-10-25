@@ -1,0 +1,4 @@
++ poetry run pytest tests/action_server_tests/test_runtime_task_bootstrap.py -k shutdown -q -p no:robocorp_log_pytest --junitxml=/workspace/actions-recovery-327/evidence/logical-bootstrap-lifecycle-final.xml (in /workspace/actions/action_server)
+..                                                                       [100%]
+- generated xml file: /workspace/actions-recovery-327/evidence/logical-bootstrap-lifecycle-final.xml -
+2 passed, 2 deselected in 1.50s

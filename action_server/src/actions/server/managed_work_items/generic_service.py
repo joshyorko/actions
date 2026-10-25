@@ -24,6 +24,11 @@ from actions.server.foundry.generic_work_item_execution import (
     GenericInput,
     GenericWorkItemExecution,
 )
+from actions.server.foundry.logical_receipts import (
+    requirement_ids,
+    validate_bound_record,
+    versions_for,
+)
 from actions.server.foundry.models import FoundryAudit, FoundryRequest
 from actions.server.managed_work_items.api import ManagedError
 from actions.server.managed_work_items.contracts import (
@@ -541,9 +546,23 @@ class GenericManagedWorkItemsService:
             or not isinstance(envelope.get("version"), int)
             or envelope["version"] != 1
             or not isinstance(envelope.get("result"), dict)
-            or envelope["result"].get("version") != "actions.generated-rcc-execution/v1"
+            or envelope["result"].get("version")
+            != versions_for(
+                requirement_ids(self.execution.registry, self.execution.snapshot)
+            )[1]
         ):
             raise ManagedError("storage_unavailable")
+        validate_bound_record(
+            self.db,
+            self.execution.registry,
+            self.execution.snapshot,
+            run,
+            ticket.fence,
+            envelope["result"],
+            claim=ticket.claim.model_dump() if ticket.claim else None,
+            terminal=True,
+            outputs=envelope["outputs"],
+        )
         refs = tuple(OutputRef.model_validate(raw) for raw in envelope["outputs"])
         if len(refs) > 64 or len({r.output_id for r in refs}) != len(refs):
             raise ManagedError("storage_unavailable")

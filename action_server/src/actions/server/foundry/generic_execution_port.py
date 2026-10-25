@@ -10,7 +10,7 @@ import json
 from dataclasses import dataclass
 from pathlib import Path
 from threading import Event
-from typing import Literal
+from typing import Any, Literal
 
 from actions.work_items import State
 from actions.work_items._fencing import WorkItemClaim
@@ -53,6 +53,7 @@ from actions.server.run_outputs.service import (
 )
 from actions.server.run_outputs.types import (
     Actor,
+    AttemptFence,
     ExecutionSnapshot,
     OutputRef,
     canonical_uuid,
@@ -101,6 +102,7 @@ class PinnedGenericRccRunner:
     prepared: PreparedRccEnvironment
     rcc: Path
     execution_root: Path
+    logical_execution: Any = None
 
     def execute(
         self,
@@ -114,6 +116,11 @@ class PinnedGenericRccRunner:
             self.prepared,
             self.rcc,
             self.execution_root,
+            **(
+                {"logical_execution": self.logical_execution}
+                if self.logical_execution is not None
+                else {}
+            ),
         ).execute(caller.actor, ticket.fence, cancelled=Event())
 
 
@@ -404,6 +411,37 @@ class GenericCanvasExecution(CanvasPort):
                     or len(attached["outputs"]) > 64
                 ):
                     raise AccessDenied("bounded sealed outputs unavailable")
+                from actions.server.foundry.logical_receipts import (
+                    requirement_ids,
+                    validate_bound_record,
+                    validate_generated_version,
+                )
+
+                record = attached.get("result")
+                if not isinstance(record, dict):
+                    raise ValueError("generated result receipt unavailable")
+                ids = requirement_ids(service.registry, service.snapshot)
+                validate_generated_version(record, requirement_ids=ids, terminal=True)
+                if ids:
+                    pin = _one(service.db, RunPin, run.id)
+                    attempt = _one(service.db, RunAttempt, pin.current_attempt_id)
+                    fence = AttemptFence(
+                        run_id=run.id,
+                        attempt_id=attempt.id,
+                        owner_id=attempt.owner_id,
+                        epoch=attempt.epoch,
+                    )
+                    validate_bound_record(
+                        service.db,
+                        service.registry,
+                        service.snapshot,
+                        run,
+                        fence,
+                        record,
+                        claim=record.get("claim"),
+                        terminal=True,
+                        outputs=attached["outputs"],
+                    )
                 handles: list[JsonValue] = []
                 for raw in attached["outputs"]:
                     ref = OutputRef.model_validate(raw)

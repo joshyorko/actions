@@ -5201,7 +5201,7 @@ The generated compiler/registry and explicit authoring binding selection now for
 
 RuntimeDeploymentSelection accepts an explicitly injected ProviderCompatibilityPort and matches each named operation's typed schema, effect and bounds exactly. Its default None never provisions or infers a provider; requirement-bearing selection without explicit assignments and this authority fails closed. The common-SQL SqlProviderRegistry is a separately injected metadata prerequisite: migration19 adds immutable engine-neutral provider/source records and CAS availability, but no grants. Exact-reference provider.inspect/provider.manage and explicit Workspace provider.register remain independent of deploy/execute and data read/manage permissions. Registration and availability changes use existing FoundryRequest/Audit transactions; replay reauthorizes and never restores an old availability state. Startup owner operations and their saved provenance fingerprint remain unchanged.
 
-Only bounded sealed-files source manifests are currently eligible. The trusted host supplies a Workspace-scoped seal catalog backed by FilesystemOutputProvider; registration and compatibility reads verify retained object identities and bytes, and missing/tampered evidence fails closed. Public descriptors accept no locator, engine, DSN, path or credential. The registry alone proves retained sealed bytes, not source-format parsing, adapter behavior, connection readiness or immutable versions of a mutable database/Knowledge collection. The separately configured exact-scan components below qualify a bounded execution subset. Disable can revoke availability without opening missing blobs; enabling requires current retained evidence. Explicit local provider configuration can now reconstruct and inject the registry/evidence catalog as described below; ordinary startup still supplies no worker logical-operation port or Knowledge collection service. Source-owned requirement grants follow only existing explicit new-Package compilation admission; provider grants are never created by selection or replay. SQLite/PostgreSQL tests qualify common SQL metadata authority and native compatibility selection, not Data-engine I/O, installed discovery or actual Package/provider execution. The stopped-local-SQLite provider operator below supplies durable private configuration; shared PostgreSQL administrative coordination and model-facing Data discovery remain separate gates.
+Only bounded sealed-files source manifests are currently eligible. The trusted host supplies a Workspace-scoped seal catalog backed by FilesystemOutputProvider; registration and compatibility reads verify retained object identities and bytes, and missing/tampered evidence fails closed. Public descriptors accept no locator, engine, DSN, path or credential. The registry alone proves retained sealed bytes, not source-format parsing, adapter behavior, connection readiness or immutable versions of a mutable database/Knowledge collection. The separately configured exact-scan components below qualify a bounded execution subset. Disable can revoke availability without opening missing blobs; enabling requires current retained evidence. Explicit local provider configuration can now reconstruct and inject the registry/evidence catalog as described below; ordinary startup can supply the bounded Data port described below when an explicit execution profile and committed provider catalog are both present; no Knowledge collection service is supplied. Source-owned requirement grants follow only existing explicit new-Package compilation admission; provider grants are never created by selection or replay. SQLite/PostgreSQL tests qualify common SQL metadata authority and native compatibility selection, not Data-engine I/O, installed discovery or actual Package/provider execution. The stopped-local-SQLite provider operator below supplies durable private configuration; shared PostgreSQL administrative coordination and model-facing Data discovery remain separate gates.
 
 Empty-requirement Packages preserve exact `actions.package-revision/v1-draft` bytes and identity domain. Nonempty requirements use `actions.package-revision/v2-bindings-draft`; the verifier enforces schema/presence correspondence, canonical declarations and the matching digest domain. An archived c97e verifier accepts legacy bytes and rejects the new schema before native projection/admission. This is format-refusal evidence, not installed downgrade/restore qualification or worker readiness. A later worker/provider join still needs an enforced runtime capability gate. Fixed flat typed fields and exact compatibility are intentional bounded grammar; richer schemas or coercions require an explicit versioned extension.
 
@@ -5337,16 +5337,18 @@ The explicit MCP Task adapter pins released ext-tasks2026-07-28 (b3d28aceaa6d49f
 Configured adapters expose a closed detached capability_invoke variant only to declaring current clients; legacy/synchronous schemas remain unchanged. The default server has no Task advertisement or handlers. Ordinary bootstrap enables the Task service only with both an explicit RCC execution profile and ACTIONS_FOUNDRY_TASK_POLICY pointing to a private bounded actions.runtime-task-policy/v1 file. ASGI lifespan starts its single canonical detached consumer before requests and stops it before provider closure. Constructor/route construction does not launch work. Source host qualification does not establish installed execution/restart, legacy Task compatibility, interactions, Robot/Work Item Tasks or automatic escalation. Keep those gates separate.
 
 
-`ConfiguredProviderExecution` and `LogicalExecution` qualify an explicit eager
-preparation component. They do not yet wire ordinary bootstrap, generated RCC,
-SDK logical lookup or output publication. Preparation resolves exact retained
-Deployment bindings and artifact-verified requirements, supports only selected
-parameterless data `.scan/v1` reads, and refuses declared aggregate output above
-256 KiB or more than 32 operations before engine calls. Child context version
-`actions.logical-read-context/v1` contains logical lookups only. Run/Attempt,
-provider/source/config/catalog identities and context digest remain host-only.
-Only an issued preparation object may be rechecked; callers must release it on
-completion/abort. Serialized context is not a restart authority or a grant.
+`ConfiguredProviderExecution` and `LogicalExecution` provide bounded eager logical
+preparation. Ordinary bootstrap constructs the shared port only with an explicit
+RCC profile and committed provider configuration, and supplies it to generic and
+Task runners. Startup does not query engines, resolve secrets or grant authority.
+Preparation resolves exact retained Deployment bindings and artifact-verified
+requirements, supports only selected parameterless data `.scan/v1` reads, and
+refuses declared aggregate output above 256 KiB or more than 32 operations before
+engine calls. Child context version `actions.logical-read-context/v1` contains
+logical lookups only. Provider/config/catalog pins remain host-private; public
+summaries contain operation identities, immutable source/contract digests,
+context/result hashes and row counts. Only issued preparations can authorize
+publication. Serialized context or summary is neither restart authority nor grant.
 
 The factory reconstructs committed private catalog/config/seal identity without
 startup secrets or network I/O. Each execution owns a read-only private store;
@@ -5359,8 +5361,10 @@ Publication recheck is SQL-only: existing Run/Workspace fencing, live grants,
 retained Package/Deployment and provider/source/provenance identity, and current
 availability. PostgreSQL grant/metadata row locks prevent a concurrent revoke or
 disable from committing between the recheck and outer transaction completion.
-It must be integrated inside the existing domain output publication transaction,
-alongside independent queue/Run guards, not called as a substitute transaction.
+Standalone and generic Work Item wrappers perform this recheck in their existing
+publication transaction alongside independent queue/Run guards. Binding entry
+caches immutable artifact expectations before that transaction; the new guard
+performs no artifact/provider/filesystem I/O inside it.
 
 Private CURRENT exclusion depends on normal Runtime holding action_server.lock;
 providers-local takes that same lock and refuses a running Runtime. Direct
@@ -5368,11 +5372,13 @@ in-process factory/bootstrap callers do not automatically acquire it. Arbitrary
 same-user file mutations are outside this cooperating-writer guarantee. No
 filesystem/secret/provider I/O belongs inside the publication transaction.
 Real SQLite/PostgreSQL control-plane and both engine tests qualify this component;
-ordinary installed generated-package consumption across two providers, SDK and
-runner wiring, shared-PG operator provisioning, Knowledge and full Data gates
-remain unqualified.
+ordinary installed generated-package consumption across two providers, shared-PG
+operator provisioning, Knowledge and full Data acceptance remain separate gates.
 
-Until a supported logical port is joined, GeneratedRccExecution refuses any selected capability with nonempty bindingRequirementIds before native launch. Artifact metadata compatibility does not bypass this dispatch gate.
+GeneratedRccExecution refuses nonempty bindingRequirementIds without the explicit
+shared logical port and supported domain publication wrapper. Unsupported
+Knowledge requirements remain refused before launch; metadata compatibility
+does not bypass this gate.
 
 
 ### Generated Action logical lookup SDK
@@ -5495,3 +5501,72 @@ The ordinary authenticated transport returns403 for missing authorization in
 the qualified installed configuration. A corrected test continuation must replay
 the same idempotency key, retain the original failed receipt and compare counts
 across both attempts rather than silently creating another Run.
+
+### Bound generated execution receipt boundary
+
+Version selection comes from artifact-verified capability requirement IDs.
+Zero-requirement dispatch and terminal records keep v1 bytes and behavior; a
+bound dispatch uses v2. V2 launch and terminal records carry `logicalReads`;
+the dispatch top level has no such field. Launch-less v2 is only a pending
+seed, never evidence of execution. Publication requires exact equality with the
+issued preparation summary, matching retained launch/execution, independent
+Run/Attempt and optional Work Item fences, and the measured four-output inventory.
+Missing binding or a cloned/unissued preparation fails closed. This checkpoint
+does not allow direct bound terminal publication replay without fresh issuance;
+existing read-only terminal APIs perform retained validation instead.
+
+Retained standalone, managed generic and Task reads validate closed canonical
+v2 carriers, versions, operation coverage, immutable Deployment/provider/source
+identities, declared operation row limits, launch/terminal summary equality,
+lineage, stream measurements and canonical SQL output seals. Retained projections
+read artifact-verified Package metadata and common SQL metadata, never source
+seals, private catalog/config, engines or secrets. Existing read authorization
+and actual sealed-byte resolution remain necessary. Identity validation cannot
+recompute historical logical result/context hashes from a public summary and
+must not be described as cryptographic proof of issuance. Exact alias-key
+prevalidation remains required by the retained Pydantic regression.
+
+
+### Logical runner lifetime
+
+Requirement-bearing generated Actions use one absolute monotonic deadline across eager logical preparation and RCC execution. The runner owns cancellation checks and domain heartbeats; a preparation thread opens its own Database connection and receives an Event, never a callback that reads another thread's SQL connection. The ordinary generic heartbeat renews both the Work Item claim and Run Attempt. A shared LogicalExecution supervisor admits at most four concurrent outstanding preparations, including transferred preparations still in use by RCC. It refuses new preparation once closing starts.
+
+Shutdown must retain every unsettled preparation owner. An unclaimed late result can be released exactly once after its preparation thread joins. A transferred preparation must remain issued until its runner confirms cleanup and explicitly releases it; supervisor close returns false rather than stealing that ownership. TaskHost may confirm a previously unsettled preparation on a later close call, but remains failed and cannot accept new work. Unconfirmed RCC process cleanup remains latched separately. Provider teardown is forbidden while either owner reports incomplete cleanup. These rules do not recover or fabricate a terminal Run.
+
+Zero-requirement execution preserves its existing helper and v1 wire bytes. Logical requirements choose strict v2 journals from the immutable capability, with a safe logicalReads summary in launch and terminal records. The prepared context stays in a private bounded file and is installed only around the Action call through the private Core SDK context API. It is not an input parameter or output artifact. The runner retains the issued publication binding through output staging and atomic publication, then clears it before releasing the preparation. Retained-launch replay refuses to prepare or execute again.
+
+Qualify ownership with deterministic preparation barriers and real SQLite/PostgreSQL fences; qualify the context helper's bounds, digest rejection and context reset separately. Synthetic RCC results can prove the SQL publication join but do not prove native RCC or an installed consumer. Enabling logical Tasks additionally requires v2 Task/read projections and ordinary bootstrap wiring; these are separate gates.
+
+V2 Task acknowledgement and result retrieval use distinct retention checks. A
+terminal creation/replay acknowledgement without a result may validate expired
+final-output metadata. Both Task projection and its no-result formatter pass
+this private terminal-only mode; it never authorizes pending publication.
+Immutable operation identities, lineage, final SQL seals, inventory and canonical
+retention timestamps remain checked. A corrupt seal or malformed timestamp is
+unavailable even for acknowledgement. Result get, publication and ordinary
+validator defaults still enforce current output retention. Do not make Task
+acknowledgement depend on retaining readable artifact bytes indefinitely.
+
+The logical invocation binding accepts a trusted `publication_check` callback.
+The mixin invokes it inside the existing transaction immediately before canonical
+base publication, after domain schema and child-output validation. It returns
+None or raises, and may inspect only monotonic time and in-memory cancellation;
+it must not query SQL, providers, files or secrets. Durable cancellation remains
+the canonical base fence's responsibility. The native runner supplies this
+callback explicitly to close the wait/validation interval after its earlier
+deadline check. A callback failure rolls back publication and leaves provisional
+outputs and Run/queue authority uncompleted. This gate is not a promise that
+native SQL operations have hard real-time completion bounds.
+
+
+Runtime shutdown requests both worker and logical-preparation settlement and
+retains the source provider if either remains unsettled. A transferred prepared
+context is not released merely because its preparation thread has exited.
+
+When advancing migrations or a private candidate dependency floor, update the
+independent test expectations alongside the contract. Keep an explicit migration
+table list and fresh-versus-migrated column/index comparison; do not derive the
+expected list from current models. Keep source metadata and emitted wheel floor
+assertions aligned without changing unrelated SDK floors or negative cases.
+Root help snapshots include explicitly registered offline commands. Existing
+wheel metadata inspection does not replace clean install/uninstall qualification.

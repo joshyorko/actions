@@ -13,6 +13,11 @@ from dataclasses import dataclass
 from typing import Any, Literal, Protocol
 
 from actions.server._models import RunStatus
+from actions.server.foundry.logical_receipts import (
+    requirement_ids,
+    validate_bound_record,
+    versions_for,
+)
 from actions.server.foundry.rcc_execution import GeneratedRccExecution
 from actions.server.run_outputs.detached import DetachedActions
 from actions.server.run_outputs.models import (
@@ -338,9 +343,9 @@ class TaskService:
                     or record.get("claim") is not None
                     or record.get("version")
                     != (
-                        "actions.generated-rcc-execution/v1"
-                        if terminal
-                        else "actions.generated-rcc-dispatch/v1"
+                        versions_for(
+                            requirement_ids(self.outputs.capabilities, snapshot)
+                        )[1 if terminal else 0]
                     )
                     or AttemptFence.model_validate(
                         record.get("publicationFence" if terminal else "fence")
@@ -348,6 +353,18 @@ class TaskService:
                     != fence
                 ):
                     raise ValueError("journal differs")
+                validate_bound_record(
+                    self.db,
+                    self.outputs.capabilities,
+                    snapshot,
+                    run,
+                    fence,
+                    record,
+                    claim=None,
+                    terminal=terminal,
+                    outputs=outer.get("outputs") if terminal else None,
+                    _allow_expired_terminal=terminal and not include_result,
+                )
                 if terminal:
                     if (
                         pin.cancel_requested
@@ -440,6 +457,18 @@ class TaskService:
             raise TaskUnavailable("Task unavailable") from None
 
     def _result(self, actor, snapshot, run, fence, outer, record, *, resolve=True):
+        validate_bound_record(
+            self.db,
+            self.outputs.capabilities,
+            snapshot,
+            run,
+            fence,
+            record,
+            claim=None,
+            terminal=True,
+            outputs=outer.get("outputs"),
+            _allow_expired_terminal=not resolve,
+        )
         lineage = GeneratedRccExecution._lineage(snapshot, None, fence)
         compiled = self.outputs.capabilities.load(snapshot.capability.package_revision)
         launch = record.get("launch")

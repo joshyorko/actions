@@ -228,6 +228,13 @@ def test_migrate(database_v0: Path, tmpdir) -> None:
                 "foundry_request",
                 "foundry_audit",
                 "foundry_access_grant",
+                # Migration 19 adds immutable provider/source metadata.
+                "foundry_source_revision",
+                "foundry_provider_revision",
+                "foundry_provider_availability",
+                # Migrations 20/21 add associations, not another Run authority.
+                "run_execution_intent",
+                "run_task_receipt",
                 "schedule",
                 "schedule_execution",
                 "schedule_group",

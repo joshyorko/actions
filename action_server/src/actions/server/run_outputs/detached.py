@@ -209,6 +209,14 @@ class DetachedActions:
                     raise FenceRejected(
                         "retained launch requires explicit reconciliation"
                     )
+            from actions.server.foundry.logical_receipts import (
+                requirement_ids,
+                versions_for,
+            )
+
+            dispatch_version = versions_for(
+                requirement_ids(service.registry, service.snapshot)
+            )[0]
             fence = self.outputs.claim(
                 run.id, caller.worker_id, lease_seconds=lease_seconds
             )
@@ -219,7 +227,7 @@ class DetachedActions:
                 {
                     "result": _canonical(
                         {
-                            "version": "actions.generated-rcc-dispatch/v1",
+                            "version": dispatch_version,
                             "mode": "standalone",
                             "claim": None,
                             "fence": fence.model_dump(),
@@ -249,10 +257,20 @@ class DetachedActions:
 class DetachedActionWorker:
     """Trusted host object; never constructed from request worker/profile fields."""
 
-    def __init__(self, authority, actor, worker_id, profile, *, stop_requested=None):
+    def __init__(
+        self,
+        authority,
+        actor,
+        worker_id,
+        profile,
+        *,
+        stop_requested=None,
+        logical_execution=None,
+    ):
         canonical_uuid(worker_id)
         if stop_requested is not None and not callable(stop_requested):
             raise ValueError("trusted stop callback required")
+        self.logical_execution = logical_execution
         self._stop_requested = stop_requested
         self.authority, self.profile = authority, profile
         self.caller = ManagedCaller(actor=actor, worker_id=worker_id)
@@ -295,6 +313,8 @@ class DetachedActionWorker:
             return False
 
     def execute(self, ticket, *, prepared, rcc: Path, execution_root: Path):
+        from actions.server.foundry.logical_receipts import requirement_ids
+
         if self.cancelled(ticket):
             raise FenceRejected("detached cancellation requested")
         service, _, _ = self.authority._load(self.caller.actor, ticket.fence.run_id)
@@ -304,6 +324,20 @@ class DetachedActionWorker:
             prepared,
             rcc,
             execution_root,
+            **(
+                {"logical_execution": self.logical_execution}
+                if self.logical_execution is not None
+                else {}
+            ),
         ).execute(
-            self.caller.actor, ticket.fence, cancelled=lambda: self.cancelled(ticket)
+            self.caller.actor,
+            ticket.fence,
+            cancelled=lambda: self.cancelled(ticket),
+            **(
+                {"publication_cancelled": self._stop_requested}
+                if self.logical_execution is not None
+                and self._stop_requested is not None
+                and requirement_ids(service.registry, service.snapshot)
+                else {}
+            ),
         )

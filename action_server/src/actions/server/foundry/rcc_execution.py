@@ -17,8 +17,10 @@ import subprocess
 import sys
 import time
 import zipfile
+from contextlib import ExitStack
 from pathlib import Path, PurePosixPath
-from typing import Any, Callable
+from threading import Event
+from typing import Any, Callable, cast
 from uuid import uuid4
 
 from actions.server._models import Run, RunStatus
@@ -68,6 +70,14 @@ class RccCleanupIncomplete(RuntimeError):
     """Owned process termination is unconfirmed; retain host resources."""
 
 
+class LogicalPreparationCleanupIncomplete(RccCleanupIncomplete):
+    """Reachable untransferred preparation may be settled by the host later."""
+
+    def __init__(self, owner):
+        super().__init__("logical preparation cleanup incomplete")
+        self.owner = owner
+
+
 class GeneratedRccExecution:
     """Execute one pre-admitted Run under its existing AttemptFence.
 
@@ -92,6 +102,8 @@ class GeneratedRccExecution:
         prepared: PreparedRccEnvironment,
         rcc: Path,
         execution_root: Path,
+        *,
+        logical_execution=None,
     ) -> None:
         if not isinstance(prepared, PreparedRccEnvironment):
             raise TypeError("exact retained PreparedRccEnvironment required")
@@ -112,17 +124,129 @@ class GeneratedRccExecution:
             raise ValueError("exact prepared RCC home is unavailable")
         self.registry = registry
         self.outputs = outputs
+        if logical_execution is not None and (
+            logical_execution.db is not outputs.db
+            or logical_execution.registry is not registry
+        ):
+            raise TypeError("shared canonical logical execution required")
+        self.logical_execution = logical_execution
         self.prepared = prepared
         self.rcc = rcc
         self.execution_root = execution_root.resolve()
 
     def execute(
         self,
+        actor,
+        fence,
+        *,
+        cancelled,
+        timeout_seconds=120,
+        publication_cancelled=None,
+    ):
+        """Optional publication cancellation must be a trusted pure local predicate."""
+        started = time.monotonic()
+        state = {"owner": None, "prepared": None, "stack": ExitStack()}
+        uncertain = False
+        try:
+            return self._execute(
+                actor,
+                fence,
+                cancelled=cancelled,
+                timeout_seconds=timeout_seconds,
+                started=started,
+                logical_state=state,
+                publication_cancelled=publication_cancelled,
+            )
+        except RccCleanupIncomplete:
+            uncertain = True
+            raise
+        finally:
+            owner = state["owner"]
+            if owner is not None:
+                owner.stop()
+                if owner.thread.is_alive() and not owner.settle(10):
+                    state["stack"].close()
+                    raise LogicalPreparationCleanupIncomplete(owner)
+            state["stack"].close()
+            if owner is not None and not uncertain:
+                if state["prepared"] is not None:
+                    self.logical_execution.release_preparation(owner, state["prepared"])
+                else:
+                    owner.settle(0)
+
+    def _prepare_logical(
+        self,
+        actor,
+        fence,
+        cancelled,
+        deadline,
+        journal,
+        state,
+        *,
+        publication_cancelled=None,
+    ):
+        stop = Event()
+        owner = self.logical_execution.begin_preparation(
+            actor, fence, cancelled=stop, deadline=deadline
+        )
+        state["owner"] = owner
+        heartbeat_at = time.monotonic() + _HEARTBEAT_SECONDS
+        while not owner.done.wait(0.05):
+            self._check_deadline(deadline)
+            self._check_cancel(cancelled, actor, fence)
+            if time.monotonic() >= heartbeat_at:
+                if self._read_journal(fence, actor=actor) != journal:
+                    raise FenceRejected("logical preparation journal changed")
+                self.outputs.heartbeat(fence, lease_seconds=_LEASE_SECONDS)
+                heartbeat_at = time.monotonic() + _HEARTBEAT_SECONDS
+        self._check_deadline(deadline)
+        self._check_cancel(cancelled, actor, fence)
+        prepared = owner.take_result()
+        state["prepared"] = prepared
+        self.logical_execution.configured.check_current()
+        if prepared.actor != actor or prepared.fence != fence:
+            raise FenceRejected("logical preparation scope changed")
+        self.logical_execution.recheck(actor, fence, prepared)
+
+        def publication_check():
+            # Runs after SQL lock acquisition. Never call the SQL-reading
+            # cancellation callback or mutate cancellation authority here.
+            self._check_deadline(deadline)
+            if owner.cancelled.is_set() or (
+                publication_cancelled is not None and publication_cancelled()
+            ):
+                raise FenceRejected("generated Action publication cancelled")
+
+        state["stack"].enter_context(
+            self.outputs.bind_logical_execution(
+                self.logical_execution, prepared, publication_check=publication_check
+            )
+        )
+        return prepared
+
+    @staticmethod
+    def _publication_cancel_predicate(cancelled, explicit):
+        if explicit is not None:
+            return GeneratedRccExecution._cancel_predicate(explicit)
+        # Detached cancellation callbacks query SQL. Only an actual local Event
+        # is automatically safe inside the publication transaction.
+        return cancelled.is_set if isinstance(cancelled, Event) else lambda: False
+
+    @staticmethod
+    def _check_deadline(deadline):
+        if deadline is not None and time.monotonic() >= deadline:
+            raise TimeoutError("generated Action total deadline")
+
+    def _execute(
+        self,
         actor: Actor,
         fence: AttemptFence,
         *,
         cancelled: Any,
         timeout_seconds: int = 120,
+        started=None,
+        logical_state=None,
+        publication_cancelled=None,
     ) -> Run:
         """Run the one admitted Action and publish its measured JSON result.
 
@@ -139,7 +263,12 @@ class GeneratedRccExecution:
             or not 1 <= timeout_seconds <= _MAX_TIMEOUT_SECONDS
         ):
             raise ValueError("bounded execution deadline required")
-        is_cancelled = self._cancel_predicate(cancelled)
+        original_cancel = self._cancel_predicate(cancelled)
+
+        def is_cancelled():
+            owner = logical_state["owner"]
+            return original_cancel() or (owner is not None and owner.cancelled.is_set())
+
         verify_rcc_version(self.rcc)
 
         self.outputs.heartbeat(fence, lease_seconds=_LEASE_SECONDS)
@@ -147,10 +276,23 @@ class GeneratedRccExecution:
         compiled, action, input_schema, output_schema = self._verified_selection(
             snapshot
         )
+        from actions.server.foundry.logical_receipts import (
+            requirement_ids,
+            versions_for,
+        )
+
+        requirements = requirement_ids(self.registry, snapshot)
+        bound = bool(requirements)
+        if bound and not callable(
+            getattr(self.outputs, "bind_logical_execution", None)
+        ):
+            raise AccessDenied("logical domain publication required")
+        deadline = started + timeout_seconds if bound else None
+        self._check_deadline(deadline)
         input_bytes = _canonical(inputs, _INPUT_LIMIT).encode("utf-8")
         self._validate_json(input_bytes, input_schema, "Run inputs")
 
-        journal = self._read_journal(fence)
+        journal = self._read_journal(fence, actor=actor)
         if journal["launch"] is not None:
             raise FenceRejected("prior RCC launch requires explicit reconciliation")
         self._check_cancel(is_cancelled, actor, fence)
@@ -182,6 +324,33 @@ class GeneratedRccExecution:
             raise AccessDenied(
                 "prepared RCC artifact differs from immutable Runtime Plan"
             )
+        logical_summary = None
+        if bound:
+            from actions.server.foundry.logical_receipts import derive_summary
+
+            self._check_deadline(deadline)
+            prepared_reads = self._prepare_logical(
+                actor,
+                fence,
+                is_cancelled,
+                deadline,
+                journal,
+                logical_state,
+                publication_cancelled=self._publication_cancel_predicate(
+                    cancelled, publication_cancelled
+                ),
+            )
+            logical_summary = derive_summary(prepared_reads).model_dump(mode="json")
+            launch["logicalReads"] = logical_summary
+            if (
+                len(prepared_reads.context) > 256 * 1024
+                or self._digest(prepared_reads.context) != prepared_reads.context_digest
+            ):
+                raise AccessDenied("logical context differs")
+            self._write_private(
+                directory / "logical-context.json", prepared_reads.context
+            )
+        self._check_deadline(deadline)
         self._write_private(directory / "input.json", input_bytes)
         receipt_file = directory / "rcc-receipt.json"
         result_file = directory / "action-result.json"
@@ -191,7 +360,7 @@ class GeneratedRccExecution:
             # Establish the writer before inspecting a journal to avoid a
             # SQLite read-to-write upgrade racing another queue writer.
             self.outputs._fence(fence)
-            current = self._read_journal(fence)
+            current = self._read_journal(fence, actor=actor)
             if current != journal or current["launch"] is not None:
                 raise FenceRejected("Work Items dispatch changed before launch")
             self.outputs._fence(fence)
@@ -206,12 +375,22 @@ class GeneratedRccExecution:
         # A read-after-write catches lost or conflicting journal updates before
         # any generated code is started. If the commit acknowledgement is
         # uncertain, this call does not spawn and a later call remains blocked.
-        if self._read_journal(fence) != {**journal, "launch": launch}:
+        if self._read_journal(fence, actor=actor) != {**journal, "launch": launch}:
             raise FenceRejected("RCC launch intent could not be confirmed")
         self.outputs.heartbeat(fence, lease_seconds=_LEASE_SECONDS)
         self._check_cancel(is_cancelled, actor, fence)
 
-        helper = self._execution_helper(action)
+        self._check_deadline(deadline)
+        helper = (
+            self._bound_execution_helper(action)
+            if bound
+            else self._execution_helper(action)
+        )
+        logical_args = (
+            [str(directory / "logical-context.json"), logical_summary["contextDigest"]]
+            if logical_summary is not None
+            else []
+        )
         command = build_exec_command(
             self.rcc,
             RccRuntimeDescriptor(
@@ -227,6 +406,7 @@ class GeneratedRccExecution:
                 str(source),
                 str(directory / "input.json"),
                 str(result_file),
+                *logical_args,
             ],
             receipt_file=receipt_file,
             local_trust_carrier=self.prepared.robocorp_home / "artifacts/v1/trust",
@@ -240,6 +420,7 @@ class GeneratedRccExecution:
         stderr_capture: dict[str, Any] = {}
         completed = False
         try:
+            self._check_deadline(deadline)
             process = subprocess.Popen(
                 command,
                 cwd=source,
@@ -251,7 +432,9 @@ class GeneratedRccExecution:
                 close_fds=True,
             )
             handle = RccProcessHandle(process, receipt_file)
-            deadline = time.monotonic() + timeout_seconds
+            if not bound:
+                deadline = time.monotonic() + timeout_seconds
+            assert deadline is not None
             (
                 stdout_bytes,
                 stderr_bytes,
@@ -298,6 +481,10 @@ class GeneratedRccExecution:
 
         if not completed:
             raise RuntimeError("generated Action execution did not complete")
+        if bound:
+            self._check_deadline(deadline)
+            self.logical_execution.configured.check_current()
+            self.logical_execution.recheck(actor, fence, logical_state["prepared"])
         receipt_digest = self._digest(receipt_bytes)
         execution = {
             "status": "completed",
@@ -309,7 +496,7 @@ class GeneratedRccExecution:
         }
         with _transaction(self.outputs.db):
             self.outputs._fence(fence)
-            current = self._read_journal(fence)
+            current = self._read_journal(fence, actor=actor)
             if current.get("launch") != launch or current.get("execution") is not None:
                 raise FenceRejected("RCC execution journal changed before publication")
             self.outputs._fence(fence)
@@ -332,6 +519,10 @@ class GeneratedRccExecution:
         output_refs = []
         output_receipts = []
         for name, media_type, payload in output_payloads:
+            if bound:
+                self._check_deadline(deadline)
+                self.logical_execution.configured.check_current()
+                self.logical_execution.recheck(actor, fence, logical_state["prepared"])
             self._check_cancel(is_cancelled, actor, fence)
             output_refs.append(
                 self.outputs.stage(
@@ -351,7 +542,7 @@ class GeneratedRccExecution:
                 }
             )
         result_receipt = {
-            "version": "actions.generated-rcc-execution/v1",
+            "version": versions_for(requirements)[1],
             "mode": journal["mode"],
             "claim": journal["claim"],
             "lineage": lineage,
@@ -366,6 +557,9 @@ class GeneratedRccExecution:
             "outputs": output_receipts,
             "actionResult": result_value,
         }
+        if bound:
+            result_receipt["logicalReads"] = logical_summary
+            self._check_deadline(deadline)
         self._check_cancel(is_cancelled, actor, fence)
         with _transaction(self.outputs.db):
             self._assert_live_journal(
@@ -406,7 +600,23 @@ class GeneratedRccExecution:
         if not isinstance(capability, dict) or capability.get("kind") != "action":
             raise AccessDenied("compiled Action capability is not executable")
         if capability.get("bindingRequirementIds"):
-            raise AccessDenied("logical execution runtime is not configured")
+            from actions.server.foundry.generic_work_item_execution import (
+                _GenericOutputs,
+            )
+            from actions.server.foundry.standalone_execution import _StandaloneOutputs
+
+            if self.logical_execution is None or not (
+                type(self.outputs) is RunOutputService
+                or isinstance(self.outputs, (_GenericOutputs, _StandaloneOutputs))
+            ):
+                raise AccessDenied("logical execution runtime is not configured")
+            declaration = self.registry.get_capability(snapshot.capability)
+            if declaration is None or not declaration.binding_requirements:
+                raise AccessDenied("logical requirement declaration unavailable")
+            for ref in declaration.binding_requirements:
+                requirement = self.registry.get_binding_requirement(ref)
+                if requirement is None or requirement.contract.kind != "data":
+                    raise AccessDenied("logical requirement runtime is unsupported")
         if (
             capability.get("mode") != "none"
             or capability.get("allowOutputs") is not False
@@ -480,7 +690,7 @@ class GeneratedRccExecution:
             self.outputs.cancel(actor, fence.run_id)
             raise FenceRejected("generated Action execution cancelled")
 
-    def _read_journal(self, fence: AttemptFence) -> dict:
+    def _read_journal(self, fence: AttemptFence, *, actor=None) -> dict:
         with _transaction(self.outputs.db):
             run = _one(self.outputs.db, Run, fence.run_id)
             if run.result is None:
@@ -496,6 +706,25 @@ class GeneratedRccExecution:
             )
             from actions.server.foundry.standalone_execution import _StandaloneOutputs
 
+            expected_version = _JOURNAL_VERSION
+            snapshot = None
+            if actor is not None:
+                from actions.server.foundry.logical_receipts import (
+                    requirement_ids,
+                    versions_for,
+                )
+
+                snapshot, _ = self.outputs.execution_context(actor, fence)
+                projection = (
+                    self.outputs._logical_projection()
+                    if isinstance(self.outputs, (_GenericOutputs, _StandaloneOutputs))
+                    else None
+                )
+                expected_version = versions_for(
+                    projection.requirement_ids
+                    if projection is not None
+                    else requirement_ids(self.registry, snapshot)
+                )[0]
             standalone = (
                 isinstance(self.outputs, (_GenericOutputs, _StandaloneOutputs))
                 and self.outputs.ticket.claim is None
@@ -505,7 +734,7 @@ class GeneratedRccExecution:
             )
             if (
                 not isinstance(journal, dict)
-                or journal.get("version") != _JOURNAL_VERSION
+                or journal.get("version") != expected_version
                 or journal.get("fence") != fence.model_dump()
                 or (
                     not standalone
@@ -522,6 +751,22 @@ class GeneratedRccExecution:
             required = {"version", "mode", "claim", "fence", "launch"}
             if set(journal) not in (required, required | {"execution"}):
                 raise FenceRejected("unsupported Work Items execution journal")
+            if expected_version != _JOURNAL_VERSION:
+                from actions.server.foundry.logical_receipts import (
+                    validate_bound_record,
+                )
+
+                validate_bound_record(
+                    self.outputs.db,
+                    self.registry,
+                    snapshot,
+                    run,
+                    fence,
+                    journal,
+                    claim=journal["claim"],
+                    terminal=False,
+                    _projection=cast(Any, self.outputs)._logical_projection(),
+                )
             return journal
 
     def _assert_live_journal(
@@ -533,7 +778,7 @@ class GeneratedRccExecution:
         completed_execution: dict | None = None,
     ) -> None:
         snapshot, _inputs = self.outputs.execution_context(actor, fence)
-        journal = self._read_journal(fence)
+        journal = self._read_journal(fence, actor=actor)
         lineage = self._lineage(snapshot, journal["claim"], fence)
         if (
             journal.get("launch") != launch
@@ -807,6 +1052,29 @@ class GeneratedRccExecution:
             f"module=importlib.import_module({entrypoint['module']!r})\n"
             f"action=getattr(module,{entrypoint['actionName']!r})\n"
             "value=action(**inputs)\n"
+            "payload=json.dumps(value,ensure_ascii=False,allow_nan=False,separators=(',',':')).encode('utf-8')\n"
+            f"if len(payload)>{_RESULT_LIMIT}: raise SystemExit(86)\n"
+            "fd=os.open(result_file,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600)\n"
+            "with os.fdopen(fd,'wb') as stream: stream.write(payload)\n"
+        )
+
+    @staticmethod
+    def _bound_execution_helper(entrypoint: dict) -> str:
+        return (
+            "import importlib,json,os,stat,sys\n"
+            "source,input_file,result_file,context_file,context_digest=sys.argv[1:6]\n"
+            "with open(input_file,'rb') as stream: inputs=json.load(stream)\n"
+            "fd=os.open(context_file,os.O_RDONLY|os.O_NOFOLLOW)\n"
+            "with os.fdopen(fd,'rb') as stream:\n"
+            " status=os.fstat(stream.fileno())\n"
+            " if not stat.S_ISREG(status.st_mode) or not 0<status.st_size<=262144: raise SystemExit(87)\n"
+            " raw=stream.read(262145)\n"
+            " if len(raw)!=status.st_size: raise SystemExit(87)\n"
+            "from actions.data._context import install_context\n"
+            "sys.path.insert(0,source)\n"
+            f"module=importlib.import_module({entrypoint['module']!r})\n"
+            f"action=getattr(module,{entrypoint['actionName']!r})\n"
+            "with install_context(raw,expected_digest=context_digest): value=action(**inputs)\n"
             "payload=json.dumps(value,ensure_ascii=False,allow_nan=False,separators=(',',':')).encode('utf-8')\n"
             f"if len(payload)>{_RESULT_LIMIT}: raise SystemExit(86)\n"
             "fd=os.open(result_file,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600)\n"

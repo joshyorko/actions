@@ -61,3 +61,39 @@ def test_default_off_and_policy_without_runtime_fails(
         )
         with pytest.raises(ValueError, match="Task policy requires"):
             create_runtime_canvas(db, tmp_path / "native", "owned-key", html=HTML)
+
+
+def test_logical_shutdown_retains_provider_and_settles_after_worker():
+    calls = []
+
+    class Resource:
+        def __init__(self, name):
+            self.name = name
+            self.joined = False
+
+        def close(self):
+            calls.append(self.name)
+            return self.joined
+
+    host = Resource("worker")
+    logical = Resource("logical")
+    native = RuntimeCanvas(
+        None,
+        None,
+        None,
+        SimpleNamespace(close=lambda: calls.append("provider")),
+        None,
+        None,
+        task_host=host,
+        logical_execution=logical,
+    )
+    with pytest.raises(RuntimeError, match="worker shutdown"):
+        native.close()
+    assert calls == ["worker", "logical"]
+    host.joined = True
+    with pytest.raises(RuntimeError, match="Logical preparation shutdown"):
+        native.close()
+    assert calls == ["worker", "logical", "worker", "logical"]
+    logical.joined = True
+    native.close()
+    assert calls[-3:] == ["worker", "logical", "provider"]

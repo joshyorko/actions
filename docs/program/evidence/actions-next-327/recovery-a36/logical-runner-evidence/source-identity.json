@@ -1,0 +1,29 @@
+{
+  "base": "c7d94ca647395856e662de335353974ca01f89ff",
+  "patch_sha256": "6491a09be86b56db57cdcf89969d25337040885200d14d5c1d0b7b9602ad3b1c",
+  "domain_dependency_patch_sha256": "818a3b312b8eb314b886cb152445dad8624c801a9df8e9b7eec1ee83c22fa49b",
+  "owned_files": {
+    "action_server/src/actions/server/foundry/rcc_execution.py": "1e50a1a1657b335151301e02e8ba7d6587a230b6d5f6dfb7e2a5b9d2f141fe5a",
+    "action_server/src/actions/server/foundry/logical_execution.py": "b44fe50cdedf4be1849c5bb90c0aadd03c48b2a6c6201924e4eb4f72b65ecc4a",
+    "action_server/src/actions/server/foundry/logical_preparation.py": "2f09f40e3ebd85bf27f35209d39071ac2133feec30240ee0afd2d1e34c6df076",
+    "action_server/src/actions/server/foundry/generic_execution_port.py": "45a356461a7cd99cd71309358d6e04c6e0b2c1a8de83d4108ac4ee10949bff60",
+    "action_server/src/actions/server/run_outputs/detached.py": "d1347368de4fc7afb06341bcc76bd591326e33d90feaec37e37ae5dfdb11f0e7",
+    "action_server/src/actions/server/run_outputs/task_host.py": "be57174373a22ebf94a2ed2cebae8aeafb6824cf616b0fca19d8d3a3b6ccca99",
+    "action_server/tests/action_server_tests/test_logical_preparation.py": "4196df66e73b09374f5989643f48fedc367c79131a378739b0fd29819e6695ce",
+    "action_server/tests/action_server_tests/test_logical_runner.py": "0ad1fa9827142406a6e19aaa42b3cfc48a5e0a84de573e8dd71d8405ef61cdcd",
+    "action_server/tests/action_server_tests/test_logical_runner_join.py": "a1c7ae909ff0e2796252cfffe34c57433a1e3d8ef22d1a2238c8c64475dfe73b"
+  },
+  "copied_dependency_files": {
+    "action_server/src/actions/server/foundry/logical_receipts.py": "62c050918a1784180f5ed3ab8934da212fde2f2d3e64c98e7e57c3dd8e688513",
+    "action_server/src/actions/server/foundry/standalone_execution.py": "b9ce12596d6c4d5013b15db5a46c838fc5070f8c2e02c8deb3a417fbc8afa693",
+    "action_server/src/actions/server/foundry/generic_work_item_execution.py": "a7262b8801b7a7336802af4fcaabcf0637c77213261aed10cc20a7d3b19db857",
+    "action_server/tests/action_server_tests/test_logical_domain.py": "97a224afc6bb27757e7e8175b9ac58381c3ba82b730a410402d23a7852ebd156"
+  },
+  "qualification_overlay": {
+    "path": "action_server/tests/action_server_tests/conftest.py",
+    "sha256": "40bf55b00bb8acc7ac3cc5d96ebee5e819983c4c0e528314cf15622dcfce3d7d",
+    "purpose": "Disable feedback RCC and substitute /usr/bin/true constructor path for existing synthetic host tests; excluded from patch"
+  },
+  "native_rcc": "NOT_RUN",
+  "installed": "NOT_RUN"
+}

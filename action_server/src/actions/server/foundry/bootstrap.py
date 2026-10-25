@@ -60,6 +60,7 @@ from actions.server.run_outputs.service import _now
 from actions.server.run_outputs.types import Actor
 
 if TYPE_CHECKING:
+    from actions.server.foundry.logical_execution import LogicalExecution
     from actions.server.run_outputs.task_host import DetachedTaskHost
     from actions.server.run_outputs.task_service import TaskService
 
@@ -168,14 +169,23 @@ class RuntimeCanvas:
     managed_authenticate: ManagedAuthenticate
     task_host: DetachedTaskHost | None = None
     task_service: TaskService | None = None
+    logical_execution: LogicalExecution | None = None
 
     def start(self) -> None:
         if self.task_host is not None:
             self.task_host.start()
 
     def close(self) -> None:
-        if self.task_host is not None and not self.task_host.close():
+        worker_settled = self.task_host is None or self.task_host.close()
+        logical_settled = (
+            self.logical_execution is None or self.logical_execution.close()
+        )
+        if not worker_settled:
             raise RuntimeError("Task worker shutdown incomplete; providers retained")
+        if not logical_settled:
+            raise RuntimeError(
+                "Logical preparation shutdown incomplete; providers retained"
+            )
         self.source_provider.close()
 
 
@@ -283,6 +293,19 @@ def create_runtime_canvas(
                 actor=actor, worker_id=profile.worker_id if profile else None
             ),
         )
+        logical_execution = None
+        if profile is not None and provider_compatibility is not None:
+            from actions.server.foundry.logical_execution import LogicalExecution
+            from actions.server.foundry.provider_execution import (
+                ConfiguredProviderExecution,
+            )
+
+            logical_execution = LogicalExecution(
+                deployments,
+                registry,
+                outputs,
+                ConfiguredProviderExecution(db, paths.data_dir, provider),
+            )
         task_host = None
         task_service = None
         port: CanvasPort = authoring
@@ -331,7 +354,9 @@ def create_runtime_canvas(
                 outputs,
                 SqlQueueAuthorization(db),
                 worker_id=profile.worker_id,
-                runner=PinnedGenericRccRunner(prepared, rcc, execution_root),
+                runner=PinnedGenericRccRunner(
+                    prepared, rcc, execution_root, logical_execution=logical_execution
+                ),
             )
 
             port = GenericCanvasView(generic_execution)
@@ -354,6 +379,7 @@ def create_runtime_canvas(
                     rcc=rcc,
                     execution_root=execution_root,
                     policy=policy,
+                    logical_execution=logical_execution,
                 )
                 task_service = TaskService(detached, readiness=task_host, policy=policy)
                 # ASGI lifespan starts consumption only after route construction.
@@ -392,6 +418,7 @@ def create_runtime_canvas(
             managed_authenticate,
             task_host,
             task_service,
+            logical_execution,
         )
     except BaseException:
         provider.close()

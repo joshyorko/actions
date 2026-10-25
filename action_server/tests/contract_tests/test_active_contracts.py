@@ -453,7 +453,7 @@ def test_runtime_metadata_admits_installed_fenced_candidate_without_a_source_ove
     metadata = tomllib.loads((ROOT / "pyproject.toml").read_text())
     dependencies = metadata["tool"]["poetry"]["dependencies"]
     assert dependencies["actions-core"] == {
-        "version": ">=1.1.0a2,<2.0.0",
+        "version": ">=1.1.0a3,<2.0.0",
         "allow-prereleases": True,
     }
     assert metadata["tool"]["poetry"]["group"]["dev"]["dependencies"][
@@ -702,7 +702,7 @@ def test_runtime_clean_wheels_install_outside_checkout_in_both_uninstall_orders(
     runtime_files = _wheel_files(runtime_wheel)
     metadata_name = next(name for name in runtime_files if name.endswith("/METADATA"))
     assert (
-        "Requires-Dist: actions-core (>=1.1.0a2,<2.0.0)" in runtime_files[metadata_name]
+        "Requires-Dist: actions-core (>=1.1.0a3,<2.0.0)" in runtime_files[metadata_name]
     )
     assert (
         "Requires-Dist: actions-http-helper (>=1.0.3,<2.0.0)"

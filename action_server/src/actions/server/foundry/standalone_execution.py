@@ -6,6 +6,12 @@ import json
 
 from actions.server._models import Run, RunStatus
 from actions.server.foundry.generic_work_item_execution import GenericTicket
+from actions.server.foundry.logical_receipts import (
+    LogicalPublicationGuard,
+    requirement_ids,
+    validate_bound_record,
+    versions_for,
+)
 from actions.server.foundry.package_registry import FoundryPackageRegistry
 from actions.server.run_outputs.models import RunAttempt, RunExecutionIntent, RunPin
 from actions.server.run_outputs.service import (
@@ -50,7 +56,7 @@ class StandaloneActionExecution:
             raise AccessDenied("ordinary no-Work-Item declaration required")
         self.base._authorize(caller.actor, s, "execute")
 
-    def ticket(self, caller, run):
+    def ticket(self, caller, run, *, _projection=None):
         self.current(caller)
         pin = _one(self.db, RunPin, run.id)
         attempt = _one(self.db, RunAttempt, pin.current_attempt_id)
@@ -77,9 +83,11 @@ class StandaloneActionExecution:
             not isinstance(record, dict)
             or record.get("version")
             != (
-                "actions.generated-rcc-execution/v1"
-                if terminal
-                else "actions.generated-rcc-dispatch/v1"
+                versions_for(
+                    _projection.requirement_ids
+                    if _projection is not None
+                    else requirement_ids(self.registry, self.snapshot)
+                )[1 if terminal else 0]
             )
             or record.get("claim") is not None
             or record.get("publicationFence" if terminal else "fence")
@@ -93,6 +101,18 @@ class StandaloneActionExecution:
             or (not terminal and record.get("mode") != "standalone")
         ):
             raise FenceRejected("ordinary retained dispatch differs")
+        validate_bound_record(
+            self.db,
+            self.registry,
+            self.snapshot,
+            run,
+            fence,
+            record,
+            claim=None,
+            terminal=terminal,
+            outputs=outer.get("outputs") if terminal else None,
+            _projection=_projection,
+        )
         return GenericTicket(
             claim=None,
             fence=fence,
@@ -125,7 +145,9 @@ class StandaloneActionExecution:
                     {
                         "result": _canonical(
                             {
-                                "version": "actions.generated-rcc-dispatch/v1",
+                                "version": versions_for(
+                                    requirement_ids(self.registry, self.snapshot)
+                                )[0],
                                 "mode": "standalone",
                                 "claim": None,
                                 "fence": fence.model_dump(),
@@ -142,15 +164,20 @@ class StandaloneActionExecution:
         return _StandaloneOutputs(self, caller, ticket)
 
 
-class _StandaloneOutputs(RunOutputService):
+class _StandaloneOutputs(LogicalPublicationGuard, RunOutputService):
     def __init__(self, owner, caller, ticket):
         super().__init__(owner.db, owner.base.providers, capabilities=owner.registry)
         self.owner, self.caller, self.ticket = owner, caller, ticket
+        self._logical_requirements = requirement_ids(owner.registry, owner.snapshot)
 
     def _fence(self, fence):
         if (
             fence != self.ticket.fence
-            or self.owner.ticket(self.caller, _one(self.db, Run, fence.run_id))
+            or self.owner.ticket(
+                self.caller,
+                _one(self.db, Run, fence.run_id),
+                _projection=self._logical_projection(),
+            )
             != self.ticket
         ):
             raise FenceRejected("ordinary Run ticket differs")
@@ -165,13 +192,16 @@ class _StandaloneOutputs(RunOutputService):
             self.owner.current(self.caller)
             run = _one(self.db, Run, fence.run_id)
             if (
-                self.owner.ticket(self.caller, run) != self.ticket
+                self.owner.ticket(
+                    self.caller, run, _projection=self._logical_projection()
+                )
+                != self.ticket
                 or fence != self.ticket.fence
             ):
                 raise FenceRejected("ordinary retained ticket differs")
             if (
                 not isinstance(result, dict)
-                or result.get("version") != "actions.generated-rcc-execution/v1"
+                or result.get("version") != versions_for(self._logical_requirements)[1]
                 or result.get("claim") is not None
                 or result.get("publicationFence") != fence.model_dump()
             ):
@@ -185,6 +215,7 @@ class _StandaloneOutputs(RunOutputService):
                     or result.get("execution") != journal["execution"]
                 ):
                     raise FenceRejected("completed ordinary RCC journal required")
+            self._logical_publication(actor, fence, outputs, result, run)
             from jsonschema import validate
 
             validate(

@@ -117,6 +117,11 @@ class LogicalExecution:
         self.authorization = SqlFoundryAuthorization(self.db)
         self.repository = FoundryRepository(self.db)
         self._issued: dict[int, PreparedLogicalReads] = {}
+        from actions.server.foundry.logical_preparation import (
+            LogicalPreparationSupervisor,
+        )
+
+        self._preparations = LogicalPreparationSupervisor(self)
 
     def _check(self, event):
         if event.is_set():
@@ -343,3 +348,15 @@ class LogicalExecution:
         """Host lifecycle owner must release after completion/abort; no SQL mutation."""
         if self._issued.get(id(prepared)) is prepared:
             del self._issued[id(prepared)]
+
+    def begin_preparation(self, actor, fence, *, cancelled, deadline):
+        return self._preparations.begin(
+            actor, fence, cancelled=cancelled, deadline=deadline
+        )
+
+    def release_preparation(self, owner, prepared):
+        self._preparations.release(owner, prepared)
+
+    def close(self, timeout_seconds=15):
+        """Stop/settle owned preparation; false forbids provider teardown."""
+        return self._preparations.close(timeout_seconds) and not self._issued
