@@ -4,7 +4,7 @@ from pathlib import Path
 
 from actions.server._database import Database
 from actions.server._models import create_db, get_all_model_classes
-from actions.server.migrations import migrate_db
+from actions.server.migrations import CURRENT_VERSION, migrate_db
 from actions.server.run_outputs.models import RunPin, RunTaskReceipt
 
 pytest_plugins = ["action_server_tests.foundry_fixtures"]
@@ -36,19 +36,21 @@ def test_v20_pinned_run_upgrade(database_location, tmp_path):
         with db.cursor() as cursor:
             db.execute_query(cursor, "SELECT * FROM run_pin")
             assert "state_updated_ms" not in [x[0] for x in cursor.description]
-    assert migrate_db(database_location, 21, database=db)
-    with db.connect():
-        db.initialize(get_all_model_classes())
-        assert db.all(RunTaskReceipt) == []
-        assert db.all(RunPin)[0].state_updated_ms == ""
-        for table in ["run", "run_pin", "run_admission", "run_access_grant"]:
-            data = golden["data"][table]
-            with db.cursor() as cursor:
-                db.execute_query(
-                    cursor, f"SELECT {','.join(data['columns'])} FROM {table}"
-                )
-                assert [list(row) for row in cursor.fetchall()] == data["rows"]
-        upgraded = db.list_table_and_columns(), db.list_indexes()
+    # Prove the historical step before comparing the fully upgraded schema.
+    for version in (21, CURRENT_VERSION):
+        assert migrate_db(database_location, version, database=db)
+        with db.connect():
+            db.initialize(get_all_model_classes())
+            assert db.all(RunTaskReceipt) == []
+            assert db.all(RunPin)[0].state_updated_ms == ""
+            for table in ["run", "run_pin", "run_admission", "run_access_grant"]:
+                data = golden["data"][table]
+                with db.cursor() as cursor:
+                    db.execute_query(
+                        cursor, f"SELECT {','.join(data['columns'])} FROM {table}"
+                    )
+                    assert [list(row) for row in cursor.fetchall()] == data["rows"]
+            upgraded = db.list_table_and_columns(), db.list_indexes()
     # SQLite parity also covers default/column handling; PG parity uses SQL model DDL.
     if db.backend_name == "sqlite":
         with create_db(tmp_path / "fresh.db") as fresh:
