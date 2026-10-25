@@ -6138,3 +6138,5 @@ Syntax admission does not admit dynamic result data or qualify renderer executio
 
 
 A clean create-to-use Canvas gate must start from a fresh owned datadir, provision authorization through public operator commands, compile and activate through public Canvas calls, drive actual reference-host controls, inspect authorized bytes, and restart the same state without adding a Run. Finish compiler preparation/byte verification before the serial host run. Diagnostic admission and later clean continuation are separate evidence; retain initial failures even when a new fully uninstrumented run passes. Reference-host success is not actual ChatGPT acceptance.
+
+SQLite index enumeration must cover real tables and preserve each ordered index column, including repeats. Index-list sequence reflects creation order and is not schema identity. The corrected helper exposes index-column metadata; independent SQL/pragma observations with mutation controls establish expression/predicate definitions. Historical empty-list comparisons remain insufficient, and column-name checks do not establish complete table DDL or PostgreSQL definition parity.

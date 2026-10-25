@@ -1,0 +1,5 @@
+# Reviewed SQLite index-helper integration
+
+Applied exact reviewed D commits 72b23d67, be716ebc853e8c2956c8bf664bc61e74854ea622, 8df64a9b22c1b64a236153584efbf5556d39ef69, 21e3d4b60a270644d9474a5dcc9477ae7421d1b2, 7b4764d28a214944210626fb8d117380783b45ea onto f5a01918 source, then ran the retained exact75 selected consumer/index/migration tests:75passed,zero failures/errors/skips. The source changes were queued while the frozen a5 installed gate ran; they are not present in that artifact. Canvas v2 foundation was subsequently committed separately. No full Runtime/platform/index-HTTP claim.
+
+Independent observer captures81SQLite index definitions acrossfour upgrade paths and mutation negatives for changedcolumns/uniqueness/predicates. The production helper retains its nine-field shape and enumerates ordered key-column metadata, including repeated columns; it is not a full expression/predicate/collation/DDL observer. Historical empty-list comparisons remain insufficient. Owned PostgreSQL historical migration evidence remains separately scoped and its README has been narrowed accordingly. No production migration changed. Upstream disposition:none; local defect.
