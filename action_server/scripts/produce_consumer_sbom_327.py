@@ -1,7 +1,7 @@
 """Pinned CycloneDX producer for an explicit owned installed Runtime consumer.
 
-No publication or signing. Raw output and failures are retained; graph mismatch
-is a failed qualification, never repaired by rewriting the producer's document.
+No publication or signing. Raw declared dependencies and selected-profile graph
+remain separate. Strict active-graph failures are retained, never rewritten away.
 """
 
 import argparse
@@ -15,6 +15,7 @@ import tomllib
 from pathlib import Path
 
 from qualify_consumer_inventory_327 import compare_cyclonedx_graph, qualify
+from qualify_declared_graph_327 import explain_declaration_graph
 from qualify_wheel_inventory_327 import qualify as qualify_wheel
 
 PRODUCER_VERSION = "7.5.0"
@@ -146,7 +147,26 @@ def produce(args):
         document = json.loads(sbom)
         if document.get("specVersion") != "1.6":
             raise ValueError("unexpected SBOM schema version")
-        compare_cyclonedx_graph(document, qualification)
+        reconciliation = explain_declaration_graph(document, inspection, qualification)
+        (output / "declaration-reconciliation.json").write_text(
+            json.dumps(reconciliation, indent=2) + "\n"
+        )
+        receipt["sbom_dependencies"] = "DECLARED"
+        receipt[
+            "qualification_scope"
+        ] = "dependency inventory and provenance evidence only"
+        receipt["active_graph_evidence"] = "resolved-graph.json"
+        try:
+            compare_cyclonedx_graph(document, qualification)
+        except ValueError as error:
+            receipt["strict_active_graph"] = {"result": "failed", "error": str(error)}
+        else:
+            receipt["strict_active_graph"] = {"result": "pass"}
+        receipt["explained_inactive_edges"] = len(reconciliation["differences"])
+        receipt["evidence_sha256"] = {
+            name: hashlib.sha256((output / name).read_bytes()).hexdigest()
+            for name in ("resolved-graph.json", "declaration-reconciliation.json")
+        }
         receipt["result"] = "pass"
     except BaseException as error:
         receipt["result"] = "failed"
