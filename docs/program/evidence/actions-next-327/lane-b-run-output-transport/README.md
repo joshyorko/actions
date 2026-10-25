@@ -85,3 +85,33 @@ Ambiguity removed: factory creation versus route mounting/installed acceptance.
 Uncertainty: forthcoming generated checkpoint and integrator host wiring.
 
 Upstream disposition: none.
+
+## Independent-review test corrections
+
+The original wrong-audience test used an unknown handle, which could hide removal
+of the ManagedCaller guard. The corrected test publishes a real output, proves
+the ordinary managed owner reads its exact bytes, then checks the app-audience
+callback returns no Actor, HTTP returns the exact unavailable response, and the
+provider is never opened. An in-memory test-only factory mutation removing that
+guard causes this case to fail. Its expected-failure receipt is retained; no
+production source bytes were mutated. Original focused corrected run:12passed.
+
+The dedicated test module now carries the same Linux-only skip as its imported
+FilesystemOutputProvider fixture's original modules. Imported fixtures do not
+inherit module-level marks. Native non-Linux behavior remains unqualified;
+unsupported platforms skip explicitly rather than failing at O_DIRECTORY.
+
+Ordinary HTTP downloads must pass both the installation endpoint gate and the
+trusted managed identity callback. The middleware's managed-credential bypass is
+limited to `/api/managed-work-items/v1`; it does not cover this output route.
+These tests do not authorize arbitrary managed tokens through the outer gate.
+
+Additional exact canonical delta proposed:
+
+> Cross-module pytest fixture imports do not transfer module-level platform marks.
+> Tests reusing the Linux filesystem output fixture must declare its Linux skip
+> explicitly. For identity-denial tests, use a real otherwise-readable output and
+> assert no provider access; an unknown handle can hide a removed identity guard.
+
+Evidence: independent review, published-output positive control and retained
+guard-removal mutation failure. Source factory commit5db85b8b remains unchanged.
