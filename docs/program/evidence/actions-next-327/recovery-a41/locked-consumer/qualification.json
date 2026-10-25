@@ -1,0 +1,36 @@
+{
+  "scope": "dependency closure and installed identity/basic MCP compatibility; not vendor-independent or full Canvas acceptance",
+  "source_revision": "f905c3888ecb448dbce80ce57a9b59ff041eb148",
+  "expected_runtime": "1.1.0a41",
+  "selected_runtime_extras": [],
+  "qualifier_sha256": "ab5da82fdacd91a930b4245ebdc5cc2cfa1322643bafc1b002c79a9a136fc6e4",
+  "checks": {
+    "dependency_closure": {
+      "status": "passed",
+      "resolved_count": 66,
+      "extras": []
+    },
+    "cli-version": {
+      "status": "passed",
+      "exit_code": 0,
+      "command": "action-server version",
+      "output": "1.1.0a41",
+      "log": "cli-version-subcommand.log"
+    },
+    "installed-probe": {
+      "status": "passed",
+      "exit_code": 0,
+      "reason": null
+    }
+  },
+  "elapsed_seconds": 2.755,
+  "diagnostic_attempts": [
+    {
+      "command": "action-server --version",
+      "exit_code": 2,
+      "result": "unsupported CLI option; version is a subcommand",
+      "log": "cli-version.log"
+    }
+  ],
+  "status": "passed"
+}

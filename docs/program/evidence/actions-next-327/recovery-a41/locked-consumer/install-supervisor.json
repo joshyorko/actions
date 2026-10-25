@@ -1,0 +1,45 @@
+{
+  "status": "passed",
+  "reason": null,
+  "commands": [
+    [
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12",
+      "-m",
+      "venv",
+      "/workspace/actions-327-a41/locked-consumer"
+    ],
+    [
+      "/workspace/actions-327-a41/locked-consumer/bin/python",
+      "-m",
+      "pip",
+      "install",
+      "--no-cache-dir",
+      "-c",
+      "/workspace/actions-327-a41/next-consumer-constraints.txt",
+      "--report",
+      "/workspace/actions-327-a41/locked-consumer-evidence/install-report.json",
+      "/workspace/actions-327-a41/installed-v2/wheels/work-items/actions_work_items-0.5.0a2-py3-none-any.whl",
+      "/workspace/actions-327-a41/installed-v2/wheels/actions/actions_core-1.1.0a5-py3-none-any.whl",
+      "/workspace/actions-327-a41/installed-v2/wheels/action_server/actions_runtime-1.1.0a41-cp312-cp312-linux_x86_64.whl"
+    ],
+    [
+      "/workspace/actions-327-a41/locked-consumer/bin/python",
+      "-m",
+      "pip",
+      "check"
+    ],
+    [
+      "/workspace/actions-327-a41/locked-consumer/bin/python",
+      "-m",
+      "pip",
+      "inspect",
+      "--local"
+    ]
+  ],
+  "toolkit_python": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12",
+  "initial_free_bytes": 7785250816,
+  "minimum_free_bytes": 7608123392,
+  "final_free_bytes": 7630815232,
+  "elapsed_seconds": 58.306,
+  "last_exit": 0
+}
