@@ -10,7 +10,7 @@ native Windows/macOS acceptance. No production edits/shared tests changed.
 Reuses managed package manifest contract from existing
 `test_cli_successful_generation_drain.py::_write_generation`: RCC Python3.12,
 uv0.9.26, published owned actions-core1.0.2. This exercises that explicit existing
-fixture version, not current Core1.1.0a3 candidate semantics. `probe_action.py`
+fixture version, not source20639810 Core1.1.0a5 candidate semantics. `probe_action.py`
 returns synthetic doubled input plus actual worker Python/Core origin/version.
 
 Actual native authenticated legacy Action endpoint:
