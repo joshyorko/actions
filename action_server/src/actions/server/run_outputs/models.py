@@ -87,4 +87,23 @@ class RunOutput:
     _db_rules.indexes.add("RunOutput.run_id")
 
 
-MODEL_CLASSES = [Workspace, RunAdmission, RunAccessGrant, RunPin, RunAttempt, RunOutput]
+@dataclass
+class RunExecutionIntent:
+    """Immutable dispatch metadata; Run/Attempt remain lifecycle authority."""
+
+    id: str
+    workspace_id: str
+    actor_id: str
+    envelope_json: str
+    _db_rules.foreign_keys.add("RunExecutionIntent.workspace_id")
+
+
+MODEL_CLASSES = [
+    Workspace,
+    RunAdmission,
+    RunAccessGrant,
+    RunPin,
+    RunAttempt,
+    RunOutput,
+    RunExecutionIntent,
+]

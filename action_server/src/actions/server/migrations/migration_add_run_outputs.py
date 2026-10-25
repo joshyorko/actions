@@ -6,10 +6,18 @@ from actions.server.migrations import MIGRATION_ID_TO_NAME, Migration
 
 def migrate(db: Database) -> None:
     from actions.server._models import get_model_db_rules
-    from actions.server.run_outputs.models import MODEL_CLASSES
+    from actions.server.run_outputs.models import (
+        RunAccessGrant,
+        RunAdmission,
+        RunAttempt,
+        RunOutput,
+        RunPin,
+        Workspace,
+    )
 
     rules = get_model_db_rules()
-    for cls in MODEL_CLASSES:
+    # Freeze the v15 schema: later common models belong to later migrations.
+    for cls in (Workspace, RunAdmission, RunAccessGrant, RunPin, RunAttempt, RunOutput):
         db.execute(db.create_table_sql(cls, rules))
         for sql in db.create_unique_indexes_sql(
             cls, rules

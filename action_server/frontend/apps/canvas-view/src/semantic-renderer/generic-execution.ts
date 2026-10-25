@@ -443,6 +443,7 @@ export function createGenericExecutionAdapter(
             );
             if (result.workItemId !== itemId)
                 throw new Error("Selected input identity changed.");
+            inputPages.delete(id);
             if (result.state === "completed" || result.state === "failed")
                 pending.delete(id);
             return result;

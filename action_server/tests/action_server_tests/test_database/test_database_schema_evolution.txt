@@ -507,6 +507,17 @@ CREATE INDEX run_output_run_id_non_unique_index ON run_output(run_id);
 
 
 '''
+CREATE TABLE IF NOT EXISTS run_execution_intent(
+    id TEXT NOT NULL PRIMARY KEY,
+    workspace_id TEXT NOT NULL,
+    actor_id TEXT NOT NULL,
+    envelope_json TEXT NOT NULL,
+    FOREIGN KEY (workspace_id) REFERENCES workspace(id)
+)
+''',
+
+
+'''
 CREATE TABLE IF NOT EXISTS fenced_work_item(
     id TEXT NOT NULL PRIMARY KEY,
     workspace_id TEXT NOT NULL,
@@ -671,5 +682,49 @@ CREATE INDEX foundry_access_grant_workspace_id_non_unique_index ON foundry_acces
 
 '''
 CREATE INDEX foundry_access_grant_principal_id_non_unique_index ON foundry_access_grant(principal_id);
+''',
+
+
+'''
+CREATE TABLE IF NOT EXISTS foundry_source_revision(
+    id TEXT NOT NULL PRIMARY KEY,
+    workspace_id TEXT NOT NULL,
+    revision_id TEXT NOT NULL,
+    manifest_json TEXT NOT NULL,
+    FOREIGN KEY (workspace_id) REFERENCES workspace(id)
+)
+''',
+
+
+'''
+CREATE INDEX foundry_source_revision_workspace_id_non_unique_index ON foundry_source_revision(workspace_id);
+''',
+
+
+'''
+CREATE TABLE IF NOT EXISTS foundry_provider_revision(
+    id TEXT NOT NULL PRIMARY KEY,
+    workspace_id TEXT NOT NULL,
+    descriptor_json TEXT NOT NULL,
+    foundry_source_revision_id TEXT NOT NULL,
+    FOREIGN KEY (workspace_id) REFERENCES workspace(id),
+    FOREIGN KEY (foundry_source_revision_id) REFERENCES foundry_source_revision(id)
+)
+''',
+
+
+'''
+CREATE INDEX foundry_provider_revision_workspace_id_non_unique_index ON foundry_provider_revision(workspace_id);
+''',
+
+
+'''
+CREATE TABLE IF NOT EXISTS foundry_provider_availability(
+    id TEXT NOT NULL PRIMARY KEY,
+    foundry_provider_revision_id TEXT NOT NULL,
+    generation INTEGER NOT NULL,
+    enabled INTEGER CHECK(enabled IN (0, 1)) NOT NULL,
+    FOREIGN KEY (foundry_provider_revision_id) REFERENCES foundry_provider_revision(id)
+)
 ''',
 ]

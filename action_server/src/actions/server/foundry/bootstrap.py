@@ -232,12 +232,19 @@ def create_runtime_canvas(
         authority = SqlAuthoringAuthority(
             repository, deployments, auth, package_evidence=registry.evidence
         )
+        from actions.server.foundry.provider_bootstrap import (
+            load_configured_provider_registry,
+        )
+
+        provider_compatibility = load_configured_provider_registry(
+            db, paths.data_dir, provider
+        )
         authoring = FoundryAuthoring(
             authority,
             auth,
             registry,
             registry,
-            RuntimeDeploymentSelection(registry, auth, profile)
+            RuntimeDeploymentSelection(registry, auth, profile, provider_compatibility)
             if profile is not None
             else _ExecutionNotConfigured(),
         )

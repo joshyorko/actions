@@ -244,6 +244,24 @@ it("renders explicit queue selection and claim controls with no launch", async (
     await waitFor(() =>
         expect(controller.states.get("run")?.state).toBe("ready"),
     );
+    await waitFor(() => {
+        expect(controller.inputPages.has("run")).toBe(false);
+        expect(
+            (
+                screen.getByLabelText("Input item for run") as unknown as {
+                    value: string;
+                }
+            ).value,
+        ).toBe("");
+        expect(
+            (
+                screen.getByRole("button", {
+                    name: "Claim selected input",
+                }) as HTMLButtonElement
+            ).disabled,
+        ).toBe(true);
+    });
+    expect(screen.queryByText(`${id} — PENDING`)).toBeNull();
     expect(call).toHaveBeenCalledTimes(2);
     expect(screen.getByText(/Choose Continue execution/u)).toBeTruthy();
 });
@@ -304,7 +322,9 @@ it.each(["execute", "refresh"] as const)(
             controller.inputPages.get("run")?.items[0].previewTruncated,
         ).toBe(true);
         await controller.submitInput("run", id);
+        expect(controller.inputPages.has("run")).toBe(false);
         await controller[method]("run");
+        await controller.loadInputs("run");
         await controller.submitInput("run", second);
         expect(controller.states.get("run")?.workItemId).toBe(second);
     },

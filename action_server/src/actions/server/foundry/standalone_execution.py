@@ -7,7 +7,7 @@ import json
 from actions.server._models import Run, RunStatus
 from actions.server.foundry.generic_work_item_execution import GenericTicket
 from actions.server.foundry.package_registry import FoundryPackageRegistry
-from actions.server.run_outputs.models import RunAttempt, RunPin
+from actions.server.run_outputs.models import RunAttempt, RunExecutionIntent, RunPin
 from actions.server.run_outputs.service import (
     AccessDenied,
     FenceRejected,
@@ -111,6 +111,8 @@ class StandaloneActionExecution:
                 self.snapshot
             )
             run = self.base.admit(caller.actor, self.snapshot, inputs, key)
+            if self.db.all(RunExecutionIntent, where="id=?", values=[run.id]):
+                raise FenceRejected("detached Run requires its trusted worker")
             pin = _one(self.db, RunPin, run.id)
             if not pin.current_attempt_id:
                 fence = self.base.claim(

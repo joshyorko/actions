@@ -544,6 +544,28 @@ def _create_parser():
         help="Print strict request JSON schema without opening state",
     )
 
+    local_provider = command_subparser.add_parser(
+        "providers-local",
+        help="Explicit offline saved-owner provider setup for local SQLite",
+        description="Stop Runtime first. Import sealed sources, register immutable metadata, grant named permissions and configure private host state explicitly. No probes, queries or automatic grants; shared PostgreSQL control planes are refused.",
+    )
+    local_provider.add_argument(
+        "--datadir", help="Existing private absolute Runtime datadir"
+    )
+    local_provider.add_argument(
+        "--request", help="Private absolute JSON request; use --schema"
+    )
+    local_provider.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Validate and show exact scope/CAS without mutation or probing",
+    )
+    local_provider.add_argument(
+        "--schema",
+        action="store_true",
+        help="Print strict request schema without opening state",
+    )
+
     # Import
     _add_import_command(command_subparser, defaults)
 
@@ -792,6 +814,36 @@ def _main_retcode(
     if not command:
         parser.print_help()
         return 0
+
+    if command == "providers-local":
+        import json
+
+        from actions.server._local_provider_setup import (
+            LocalProviderRequest,
+            run_local_provider_setup,
+        )
+
+        local_args = typing.cast(argparse.Namespace, base_args)
+        try:
+            if local_args.schema:
+                print(
+                    json.dumps(LocalProviderRequest.model_json_schema(), sort_keys=True)
+                )
+                return 0
+            if not local_args.datadir or not local_args.request:
+                raise ValueError("datadir and request required")
+            result = run_local_provider_setup(
+                local_args.datadir, local_args.request, dry_run=local_args.dry_run
+            )
+        except Exception:
+            # Private source/config validation can include secrets. Leave the
+            # handler before logging, including when a logging stream is broken.
+            refusal = "Local provider setup refused; check private request and stopped local Runtime"
+        else:
+            print(json.dumps(result, sort_keys=True))
+            return 0
+        log.critical("%s", refusal)
+        return 1
 
     if command == "authorize-local":
         import json

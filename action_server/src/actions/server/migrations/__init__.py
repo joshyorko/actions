@@ -51,6 +51,8 @@ MIGRATION_ID_TO_NAME: Dict[int, str] = {
     16: "add_invoice_reviews",
     17: "add_foundry_records",
     18: "allow_package_less_canvas",
+    19: "add_provider_registry",
+    20: "add_run_execution_intent",
 }
 
 CURRENT_VERSION: int = max(MIGRATION_ID_TO_NAME.keys())

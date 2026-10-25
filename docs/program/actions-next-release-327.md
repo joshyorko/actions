@@ -1084,8 +1084,19 @@ product gates, Library authentication and optional #326 decision remain explicit
 
 [Exact source receipt](evidence/actions-next-327/recovery-a30/README.md):372 joined,126 logical and66 output/reopen tests pass with zero skips, including both SQL backends. Canvas63/1 conditional skip, frontend quality/build and Runtime lint/typecheck499 pass. Exact-item claim/explicit execution and separate lineage-verified produced-child browsing now exist. Logical binding declarations/selection remain a prerequisite; no ordinary provider setup or Data/Knowledge execution is inferred.
 
-Actual RCC draft qualification remains running with a known canonical COMPLETED versus wire DONE test assertion error; no complete pass is claimed. Installed a30/NDJSON browser/restart and final package/release qualification remain pending. Provider metadata registry/private operator and detached Action/Task work are recoverable disjoint drafts, not integrated release claims. Existing Automation managed-v1 API contract is unchanged; its other repository remains untouched. #326 NO-GO/owner decision and LibraryHTTP401/no upload IDs remain explicit.
+The corrected actual-RCC and installed a30/NDJSON browser/restart results are recorded below; the original assertion failure remains retained. Final package/release qualification remains pending. Provider and detached prerequisites advance in the a32 section; Task protocol readiness remains unimplemented. Existing Automation managed-v1 API contract is unchanged; its other repository remains untouched. #326 NO-GO/owner decision and LibraryHTTP401/no upload IDs remain explicit.
 
 ## a30 actual input/output and installed browser checkpoint
 
 Corrected complete actual-RCC input/output harness passes8/zero skips; initial4failed/16passed assertion run is retained and existing12 unchanged actual-RCC cases passed there. Ordinary clean installed consumer/producer NDJSON apps now pass public setup, official host selection/execution, output-child/artifact inspection and real process restart without extra Runs. [Receipts and screenshots](evidence/actions-next-327/recovery-a30/ordinary-browser/README.md) explicitly retain the initial multiline text-field fixture failure and the remaining misleading consumer slot/unstyled layout defect. This functional pass is not UI readiness or E1. Full Data/Knowledge/Task/Robot/non-RCC and release/recovery gates remain open; #326 remains NO-GO pending owner decision.
+
+
+## Private a31 installed semantic layout
+
+[Installed a31 receipts and screenshots](evidence/actions-next-327/recovery-a31/ordinary-browser/README.md) pass real consumer/producer execution, child/artifact inspection and actual Runtime process restart. The authored consumer slot now contains the working controls; execution/artifact panels stay inside the styled canvas. A stale successful-input cache was observed in the real screenshot and corrected separately in a32 with no automatic input loading or execution. Library remains HTTP401, no upload IDs; committed synthetic screenshots are the accessible fallback.
+
+## Private a32 provider setup and detached prerequisites
+
+Provider metadata registry migration19, explicit stopped-local-SQLite providers-local provisioning, immutable source/config catalogs and verified startup injection are integrated with detached ordinary RCC Action admission migration20. Canonical Run/Attempt remains execution authority. No default worker, Task advertisement, grants, engine probe or second scheduler/database is created. Shared PostgreSQL operator coordination, actual Data/Knowledge operations, installed provider qualification, current Tasks, true Robot/non-RCC and the full owner release/recovery matrix remain open. Celld326 remains NO-GO pending explicit owner decision.
+
+Integration review reproduced and corrected configure-replay provenance validation and misleading dry-run readiness, plus an end-of-page worker cursor that could skip unconsumed candidates. Exact source and real-RCC receipts follow in recovery-a32; completed scoped tests do not replace full final-source verification.

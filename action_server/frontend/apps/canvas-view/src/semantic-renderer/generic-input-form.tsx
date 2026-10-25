@@ -38,9 +38,10 @@ export function GenericInputForm({
             aria-label={`Work Item input for ${binding.bindingId}`}
             onSubmit={(event) => {
                 event.preventDefault();
-                void act(() =>
-                    controller.submitInput(binding.bindingId, selected),
-                );
+                void act(async () => {
+                    await controller.submitInput(binding.bindingId, selected);
+                    setSelected("");
+                });
             }}
         >
             <h3>Input for {binding.bindingId}</h3>

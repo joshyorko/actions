@@ -1,0 +1,4 @@
++ poetry run pytest tests/action_server_tests/test_detached_action.py -k run_once_cursor and sqlite and duckdb -q --robocorp-log-output=/workspace/actions-recovery-327/evidence/a32-cursor-final-log (in /workspace/actions/action_server)
+.                                                                        [100%]
+1 passed, 79 deselected in 4.11s
+Log (html): /workspace/actions-recovery-327/evidence/a32-cursor-final-log/log.html
