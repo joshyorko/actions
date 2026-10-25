@@ -12,7 +12,7 @@ import json
 from collections.abc import Sequence
 from typing import Annotated, Literal, Protocol
 
-from actions.canvas_contract import CanvasSpec
+from actions.canvas_contract import CanvasSpec, CanvasSpecV2
 from pydantic import (
     BaseModel,
     ConfigDict,
@@ -209,8 +209,13 @@ class CanvasCapabilityBinding(_FrozenValue):
     capability: CapabilityRef
 
 
+CanvasSpecDocument = Annotated[
+    CanvasSpec | CanvasSpecV2, Field(discriminator="schema_version")
+]
+
+
 def canvas_revision_digest(
-    spec: CanvasSpec,
+    spec: CanvasSpecDocument,
     bindings: Sequence[CanvasCapabilityBinding],
     packages: Sequence[PackageRevisionRef],
 ) -> str:
@@ -248,7 +253,7 @@ class DeploymentSpecification(_FrozenValue):
     worker: WorkerProfileRevisionRef | None = None
     policy: WorkspacePolicyRevisionRef | None = None
     output_provider: ProviderProfileRevisionRef | None = None
-    canvas_spec: CanvasSpec | None = None
+    canvas_spec: CanvasSpecDocument | None = None
     canvas_application: CanvasApplicationRef | None = None
     canvas_bindings: tuple[CanvasCapabilityBinding, ...] = ()
     work_item_policies: tuple[CapabilityWorkItemPolicy, ...] = ()
@@ -265,7 +270,7 @@ class DeploymentSpecification(_FrozenValue):
     def revalidate_canvas_wire_document(cls, value: object) -> object:
         # Core deliberately accepts aliases at its public boundary. Serialize
         # existing instances back to that wire grammar before deep validation.
-        if isinstance(value, CanvasSpec):
+        if isinstance(value, (CanvasSpec, CanvasSpecV2)):
             return json.loads(value.to_json())
         return value
 

@@ -15,11 +15,13 @@ import re
 from collections.abc import Mapping, Sequence
 from typing import Any
 
-from actions.canvas_contract import CanvasSpec
 from pydantic import JsonValue, TypeAdapter, ValidationError
 
 from actions.server.deployments.canonical import canonicalize_json
-from actions.server.deployments.foundry_values import WorkItemDeclaration
+from actions.server.deployments.foundry_values import (
+    CanvasSpecDocument,
+    WorkItemDeclaration,
+)
 from actions.server.deployments.ids import (
     CapabilityRef,
     DeploymentId,
@@ -98,7 +100,7 @@ _IDEMPOTENCY: dict[str, JsonValue] = {
     "maxLength": 128,
     "description": "Caller-chosen stable key for retrying this mutation with identical input.",
 }
-_SPEC: dict[str, JsonValue] = CanvasSpec.model_json_schema(
+_SPEC: dict[str, JsonValue] = TypeAdapter(CanvasSpecDocument).json_schema(
     by_alias=True,
     mode="validation",
     # JSON Schema fragment references resolve from the whole tool document.

@@ -5,7 +5,7 @@ from __future__ import annotations
 from collections.abc import Callable
 from uuid import uuid4
 
-from actions.canvas_contract import CanvasSpec
+from actions.canvas_contract import parse_canvas_spec
 
 from actions.server.deployments.foundry_repository import FoundryRepository
 from actions.server.deployments.foundry_service import FoundryDeploymentService
@@ -312,7 +312,7 @@ class SqlAuthoringAuthority:
         permission = "create_application" if operation == "create" else "apply_revision"
         if expected_base is not None:
             self._owner(workspace_id, application_id, expected_base)
-        spec = CanvasSpec.from_json(spec_json)
+        spec = parse_canvas_spec(spec_json)
         selected_bindings = tuple(
             CanvasCapabilityBinding(
                 binding_id=binding.binding_id, capability=binding.capability

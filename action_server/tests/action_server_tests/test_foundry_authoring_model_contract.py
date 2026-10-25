@@ -16,9 +16,11 @@ from action_server_tests.test_foundry_deployments import (
 from action_server_tests.test_foundry_sql_authoring import _grant
 from actions.canvas_contract import CanvasSpec
 from jsonschema import Draft202012Validator, ValidationError
+from pydantic import TypeAdapter
 
 from actions.server.deployments.foundry_repository import FoundryRepository
 from actions.server.deployments.foundry_service import FoundryDeploymentService
+from actions.server.deployments.foundry_values import CanvasSpecDocument
 from actions.server.foundry.authoring import FoundryAuthoring
 from actions.server.foundry.mcp import MODEL_TOOLS, CanvasCaller, CanvasMcp
 from actions.server.foundry.sql_authoring import SqlAuthoringAuthority
@@ -97,7 +99,7 @@ def test_real_adapter_exposes_typed_spec_and_round_trips_authored_structure(
         assert set(tools) == MODEL_TOOLS
         apply_schema = tools["canvas_apply"].input_schema
         spec_schema = apply_schema["properties"]["spec"]
-        canonical = CanvasSpec.model_json_schema(
+        canonical = TypeAdapter(CanvasSpecDocument).json_schema(
             by_alias=True,
             mode="validation",
             ref_template="#/properties/spec/$defs/{model}",

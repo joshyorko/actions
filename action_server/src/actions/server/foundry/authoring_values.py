@@ -488,7 +488,7 @@ class FoundryAuthoringAuthorityPort(Protocol):
 
 def public_spec_json(spec: object) -> bytes:
     """Return bounded canonical UTF-8 bytes for a validated public CanvasSpec."""
-    from actions.canvas_contract import CanvasSpec, validate_canvas_spec
+    from actions.canvas_contract import CanvasSpec, CanvasSpecV2, validate_canvas_spec
 
     from actions.server.deployments.canonical import canonicalize_json
 
@@ -496,7 +496,7 @@ def public_spec_json(spec: object) -> bytes:
         value = validate_canvas_spec(spec)
     except (TypeError, ValueError, RecursionError) as exc:
         raise AuthoringValidationError("CanvasSpec is invalid") from exc
-    if not isinstance(value, CanvasSpec):
+    if not isinstance(value, (CanvasSpec, CanvasSpecV2)):
         raise AuthoringValidationError("CanvasSpec validator returned an invalid value")
     encoded = canonicalize_json(value.to_json().encode("utf-8"))
     if len(encoded) > 64 * 1024:
