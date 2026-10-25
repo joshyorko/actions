@@ -86,6 +86,7 @@ export function GenericSemanticView({
                             <div className="semantic-actions">
                                 <button
                                     type="button"
+                                    disabled={controller.isBusy(bindingId)}
                                     onClick={() =>
                                         void act(bindingId, "refresh")
                                     }
@@ -95,6 +96,7 @@ export function GenericSemanticView({
                                 {state.state === "ready" ? (
                                     <button
                                         type="button"
+                                        disabled={controller.isBusy(bindingId)}
                                         onClick={() =>
                                             void act(bindingId, "execute")
                                         }

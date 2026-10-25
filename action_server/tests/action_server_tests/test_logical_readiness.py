@@ -45,6 +45,7 @@ def task_host(g, snapshot):
 
     host = object.__new__(DetachedTaskHost)
     host.actor, host.profile = g.actor, snapshot.worker
+    host.capability_runner = None
     host.authority = DetachedActions(g.execution.deployments, g.outputs)
     # Only background-thread state is synthetic; real require_ready, selected
     # immutable Package verification and TaskService admission are exercised.
@@ -73,9 +74,11 @@ def test_missing_selected_dependency_blocks_task_admission(logical, monkeypatch)
     )
     before = (len(g.db.all(Run)), len(g.db.all(RunAttempt)))
     original = importlib.import_module
+    selected_dependency_checks = []
 
     def missing(name, *args, **kwargs):
         if name == "duckdb":
+            selected_dependency_checks.append(name)
             raise ImportError("synthetic private dependency detail")
         return original(name, *args, **kwargs)
 
@@ -88,6 +91,7 @@ def test_missing_selected_dependency_blocks_task_admission(logical, monkeypatch)
             {"value": "fixture"},
             "dependency-absent",
         )
+    assert selected_dependency_checks == ["duckdb"]
     assert "synthetic private" not in str(error.value)
     assert before == (len(g.db.all(Run)), len(g.db.all(RunAttempt)))
 
@@ -101,7 +105,7 @@ def test_selected_installed_dependency_and_no_engine_probe(logical, monkeypatch)
 
     monkeypatch.setattr(g.factory, "open_provider", forbidden)
     monkeypatch.setattr(g.factory, "check_current", forbidden)
-    runtime(g)._verified_selection(snapshot)
+    task_host(g, snapshot).require_ready(g.actor, snapshot)
 
 
 def test_selected_postgres_csv_does_not_require_unused_duckdb(logical, monkeypatch):

@@ -1,0 +1,8 @@
+{
+  "source": "46488e59f419d6bb55ab594031a0f227b4e0d817",
+  "tree": "b0ade86a2b1c379f9825ca209645ef734cc34c7d",
+  "version": "1.1.0a44.post2",
+  "adapter_sha256": "e17e442fcfeaa942e86a99e19ef9af036b2f98af7e93e6f08958d25bca51f5f9",
+  "original_qualifier_sha256": "44b13d438b5a12171edd4492b1b4bfc8c00ceeb593d9c575c43a74ac388b9770",
+  "change_scope": "two candidate identity constants only relative to post1 v1 adapter; original admission invariant correction preserved; host/auth/ports unchanged"
+}

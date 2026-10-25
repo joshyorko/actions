@@ -152,3 +152,75 @@ it("preserves authorized diagnostic artifact inspection on the current failed Ru
         "run",
     );
 });
+
+it("coalesces identical submissions but rejects changed input before deferred admission", async () => {
+    let finish!: (value: unknown) => void;
+    const response = new Promise((resolve) => {
+        finish = resolve;
+    });
+    const call = vi.fn(async () => response);
+    const c = createGenericExecutionAdapter(
+        { callServerTool: call } as unknown as App,
+        context,
+        vi.fn(),
+        vi.fn(),
+        false,
+    );
+    const cap = c.adapters.resolveFormBinding("run")!;
+    const original = c.adapters.dispatch(cap, { value: "one" });
+    const duplicate = c.adapters.dispatch(cap, { value: "one" });
+    await expect(c.adapters.dispatch(cap, { value: "two" })).rejects.toThrow(
+        "different binding operation",
+    );
+    await Promise.resolve();
+    expect(call).toHaveBeenCalledTimes(1);
+    finish({ _meta: { "actions.execution": state(second, "failed") } });
+    await Promise.all([original, duplicate]);
+    expect(c.isBusy("run")).toBe(false);
+});
+
+it("keeps cancellation callable and operation busy until automatic execute settles", async () => {
+    let finish!: (value: unknown) => void;
+    const response = new Promise((resolve) => {
+        finish = resolve;
+    });
+    const call = vi.fn(
+        async ({
+            name,
+            arguments: args,
+        }: {
+            name: string;
+            arguments: Record<string, unknown>;
+        }) => {
+            if (name === "canvas_cancel")
+                return {
+                    _meta: {
+                        "actions.execution": state(first, "cancel_requested"),
+                    },
+                };
+            if (args.action === "submit")
+                return {
+                    _meta: { "actions.execution": state(first, "ready") },
+                };
+            return response;
+        },
+    );
+    const c = createGenericExecutionAdapter(
+        { callServerTool: call } as unknown as App,
+        context,
+        vi.fn(),
+        vi.fn(),
+        false,
+    );
+    const operation = c.adapters.dispatch(
+        c.adapters.resolveFormBinding("run")!,
+        {},
+    );
+    await vi.waitFor(() => expect(call).toHaveBeenCalledTimes(2));
+    await c.cancel("run");
+    expect(call).toHaveBeenCalledTimes(3);
+    expect(c.isBusy("run")).toBe(true);
+    finish({ _meta: { "actions.execution": state(first, "failed") } });
+    await operation;
+    expect(c.isBusy("run")).toBe(false);
+});

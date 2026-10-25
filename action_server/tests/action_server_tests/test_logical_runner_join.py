@@ -31,11 +31,14 @@ def disable_feedback():
     yield
 
 
-@pytest.mark.parametrize("fault", ["none", "before-spawn", "stage"])
+@pytest.mark.parametrize("fault", ["none", "before-spawn", "stage", "cleanup"])
 def test_bound_runner_synthetic_completion_and_release(
     domain, tmp_path, monkeypatch, fault
 ):
     from actions.server.foundry import rcc_execution as module
+
+    if fault == "cleanup" and module.os.name != "posix":
+        pytest.skip("synthetic owned process-session cleanup is POSIX-only")
 
     g = domain
     service, caller, wrapper, seed = domain_fixture.setup(g)
@@ -92,16 +95,34 @@ def test_bound_runner_synthetic_completion_and_release(
         return Process()
 
     monkeypatch.setattr(module.subprocess, "Popen", popen)
-    monkeypatch.setattr(
-        module,
-        "RccProcessHandle",
-        lambda process, receipt: SimpleNamespace(process=process),
-    )
+    ownership_events = []
+    ownership_handles = []
+
+    class Ownership:
+        def __init__(self, process, *, owns_session):
+            self.process = process
+            self.termination_confirmed = fault != "cleanup"
+            ownership_handles.append(self)
+            self.owns_session = owns_session
+            assert owns_session is (module.os.name == "posix")
+            ownership_events.append("created")
+
+        def capture(self):
+            ownership_events.append("capture")
+
+        def cleanup(self):
+            ownership_events.append("cleanup")
+            return SimpleNamespace(execution_stopped=self.termination_confirmed)
+
+    # Synthetic Popen has no real PID/group. Replace its ownership boundary,
+    # not the removed adapter handle, and verify cleanup gates publication.
+    monkeypatch.setattr(module, "_OwnedProcessCapture", Ownership)
     monkeypatch.setattr(
         module, "read_receipt", lambda *args: {"status": "completed", "exitCode": 0}
     )
 
     def capture(*args):
+        args[0]._actions_capture_owned()
         deadlines.append(args[-1])
         measured = dict(
             observedBytes=0,
@@ -115,10 +136,22 @@ def test_bound_runner_synthetic_completion_and_release(
     monkeypatch.setattr(runner, "_capture_process", capture)
     original = g.execution.prepare
     observed = []
+    preparations = []
+    owners = []
+    original_begin = g.execution.begin_preparation
+
+    def begin(*args, **kwargs):
+        owner = original_begin(*args, **kwargs)
+        owners.append(owner)
+        return owner
+
+    monkeypatch.setattr(g.execution, "begin_preparation", begin)
 
     def prepare(*args, deadline, **kwargs):
         observed.append(deadline)
-        return original(*args, deadline=deadline, **kwargs)
+        prepared = original(*args, deadline=deadline, **kwargs)
+        preparations.append(prepared)
+        return prepared
 
     monkeypatch.setattr(g.execution, "prepare", prepare)
     if fault == "stage":
@@ -142,12 +175,20 @@ def test_bound_runner_synthetic_completion_and_release(
             assert len(outer["outputs"]) == 4
             assert deadlines == observed
         else:
-            with pytest.raises(RuntimeError, match="synthetic"):
+            expected = "cleanup incomplete" if fault == "cleanup" else "synthetic"
+            with pytest.raises(RuntimeError, match=expected):
                 runner.execute(
                     g.actor, g.fence, cancelled=threading.Event(), timeout_seconds=30
                 )
             assert _one(g.db, Run, g.fence.run_id).status == RunStatus.RUNNING
         assert len(spawned) == (0 if fault == "before-spawn" else 1)
+        if fault == "before-spawn":
+            assert ownership_events == []
+        else:
+            expected_events = ["created", "capture"]
+            if module.os.name == "posix":
+                expected_events.append("cleanup")
+            assert ownership_events == expected_events
         if fault != "none":
             from actions.server.run_outputs.service import FenceRejected
 
@@ -157,7 +198,25 @@ def test_bound_runner_synthetic_completion_and_release(
                 )
             assert len(observed) == 1
             assert len(spawned) == (0 if fault == "before-spawn" else 1)
-        assert not g.execution._issued
-        assert g.execution.close(0)
+        if fault == "cleanup":
+            assert len(owners) == len(preparations) == 1
+            assert g.execution._issued == {id(preparations[0]): preparations[0]}
+            assert not owners[0].thread.is_alive()
+            assert not g.execution.close(0)
+            assert g.execution._issued == {id(preparations[0]): preparations[0]}
+        else:
+            assert not g.execution._issued
+            assert g.execution.close(0)
     finally:
+        if fault == "cleanup" and preparations:
+            # Only this synthetic process owner can resolve its simulated hold.
+            # No real process was launched; require the fake's terminal state,
+            # then exercise the exact owner/result release API (not dict edits).
+            assert len(ownership_handles) == len(owners) == len(preparations) == 1
+            handle = ownership_handles[0]
+            assert handle.process.wait(timeout=0) == 0
+            handle.termination_confirmed = True
+            assert handle.cleanup().execution_stopped
+            g.execution.release_preparation(owners[0], preparations[0])
+            assert not g.execution._issued
         assert g.execution.close(2)

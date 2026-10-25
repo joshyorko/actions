@@ -6624,3 +6624,31 @@ separate evidence. Own exact container identity before fixture yield. Automatic
 removal can outlast stop: after recognized removal-in-progress, use a bounded
 read-only absence poll with each daemon call bounded by the remaining deadline.
 Do not repeat mutations or treat unknown cleanup errors as success.
+
+Ready admission may render before automatic execution finishes. Disable or coalesce
+duplicate launch/status controls by binding and operation identity while preserving
+cancellation and rejecting changed inputs. Release only the execution's own fence
+when its terminal response arrives, independently of a delayed projection; stale
+projection generations must remain rejected. Keep genuine request failures visible
+rather than clearing them on unrelated state refresh.
+
+Synthetic lifecycle tests must replace the current process-ownership boundary,
+never send fake PIDs into real group enumeration or disable cleanup guards. An
+unconfirmed process stop retains transferred logical preparations even after their
+preparation thread exits; close must report that hold. Test teardown may release an
+exact synthetic owner/result only after explicitly resolving its simulated process.
+Fixtures bypassing constructors must supply current constructor defaults and assert
+the intended readiness check actually runs; generic unavailable errors can mask an
+incidental AttributeError.
+
+Artifact cache hits do not prove expanded environment reuse. Track materialization
+identity/path, allocated storage, leases and process lifetime separately. Bound
+retained disk as well as concurrent workers. Confirm exact-version supported reuse
+and release semantics before changing execution identity or reclaiming views; keep
+immutable artifact provenance and unique failure evidence.
+
+A Work Item claim and detached worker Attempt claim are different authorities.
+Standalone Task and synchronous claimed Robot proofs do not establish their join.
+The current detached Task wire, worker admission and terminal validation are
+standalone-only; claimed Tasks require explicit authority integration and a new
+candidate, rather than attaching Task receipts to completed Runs.

@@ -382,3 +382,114 @@ it("discards an old session's delayed artifact and keeps the replacement session
     fireEvent.click(screen.getByRole("button", { name: "Inspect result" }));
     expect(await screen.findByText("New session result")).toBeTruthy();
 });
+
+it("reproduces request error retained after same Run continuation succeeds", async () => {
+    const { fireEvent, waitFor } = await import("@testing-library/react");
+    let executionCalls = 0;
+    const call = vi.fn(
+        async ({ arguments: args }: { arguments: Record<string, unknown> }) => {
+            if (args.action === "execute" && ++executionCalls === 1)
+                throw new Error("synthetic initial transport failure");
+            return {
+                _meta: {
+                    "actions.execution": {
+                        ...context.executions![0],
+                        state: args.action === "submit" ? "ready" : "completed",
+                    },
+                },
+            };
+        },
+    );
+    render(
+        <GenericSemanticView
+            app={{ callServerTool: call } as unknown as App}
+            canvas={canvas}
+            context={{
+                ...context,
+                executions: [],
+                inputBindings: [],
+                outputBindings: [],
+            }}
+        />,
+    );
+    fireEvent.change(screen.getByLabelText("Replacement value"), {
+        target: { value: "alpha beta" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Run" }));
+    expect(
+        await screen.findByText("Unable to complete this action. Try again."),
+    ).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: "Continue execution" }));
+    await waitFor(() =>
+        expect(
+            screen.queryByRole("button", { name: "Continue execution" }),
+        ).toBeNull(),
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Refresh status" }));
+    await waitFor(() => expect(call).toHaveBeenCalledTimes(4));
+    expect(
+        screen.getByText("Unable to complete this action. Try again."),
+    ).toBeTruthy();
+    expect(
+        (screen.getByLabelText("Replacement value") as unknown as { value: string }).value,
+    ).toBe("alpha beta");
+});
+
+it("disables exposed Continue while automatic execute owns the operation", async () => {
+    const { fireEvent, waitFor, act } = await import("@testing-library/react");
+    let automatic!: (value: unknown) => void;
+    const pendingAutomatic = new Promise((resolve) => {
+        automatic = resolve;
+    });
+    let executes = 0;
+    const state = (status: string) => ({
+        _meta: {
+            "actions.execution": { ...context.executions![0], state: status },
+        },
+    });
+    const call = vi.fn(
+        async ({ arguments: args }: { arguments: Record<string, unknown> }) => {
+            if (args.action === "submit") return state("ready");
+            if (args.action === "execute" && ++executes === 1)
+                return pendingAutomatic;
+            return state("running");
+        },
+    );
+    render(
+        <GenericSemanticView
+            app={{ callServerTool: call } as unknown as App}
+            canvas={
+                {
+                    ...canvas,
+                    spec: {
+                        ...canvas.spec,
+                        schemaVersion: "actions.canvas-spec/v2",
+                    },
+                } as CanvasAppMetadata
+            }
+            context={{
+                ...context,
+                executions: [],
+                inputBindings: [],
+                outputBindings: [],
+            }}
+        />,
+    );
+    fireEvent.change(screen.getByLabelText("Replacement value"), {
+        target: { value: "alpha beta" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Run" }));
+    const button = await screen.findByRole("button", {
+        name: "Continue execution",
+    });
+    expect((button as HTMLButtonElement).disabled).toBe(true);
+    fireEvent.click(button);
+    await waitFor(() => expect(executes).toBe(1));
+    await act(async () => {
+        automatic(state("running"));
+        await Promise.resolve();
+    });
+    expect(
+        screen.queryByText("Unable to complete this action. Try again."),
+    ).toBeNull();
+});
