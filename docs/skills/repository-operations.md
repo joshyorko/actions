@@ -6559,3 +6559,11 @@ dedicated subreaper supervisor. Stopping only the Runtime PID does not prove cle
 of RCC descendants that start separate sessions. Track only owned descendants with
 process birth identities, independently attempt termination/reap/stream closure and
 record remaining children; never kill sibling qualification workloads.
+
+An authorized independent public rebuild must have no input path to a denied artifact.
+Recreate the environment in a fresh owned root with standard preparation, verify
+declared public dependency identities and exact owned wheel payloads before supported
+export, then derive archive pins from that new output. Targets verify the exported
+catalog/library boundary and create their own trust. Public Python METADATA equality
+is not wheel-payload equality; sampled capacity guards and source review are not
+completed build or transfer evidence.
