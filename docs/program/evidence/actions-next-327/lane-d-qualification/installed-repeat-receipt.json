@@ -1,0 +1,41 @@
+{
+  "wheel": "/workspace/lane-d/wheels-owned-cache/actions_runtime-1.1.0a38-cp312-cp312-linux_x86_64.whl",
+  "wheel_sha256": "34f5b7c1db29d4def4ba84214d225f6b82d037fa39e3b819eab6fe1ff15898ce",
+  "scope": "installed private offline SQLite restore helper",
+  "result": "pass",
+  "steps": [
+    {
+      "command": [
+        "/workspace/lane-d/repo/action_server/.venv/bin/python",
+        "-m",
+        "venv",
+        "/workspace/lane-d/installed-restore-repeat/venv"
+      ],
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/workspace/lane-d/installed-restore-repeat/venv/bin/python",
+        "-I",
+        "-m",
+        "pip",
+        "install",
+        "--no-index",
+        "--no-deps",
+        "/workspace/lane-d/wheels-owned-cache/actions_runtime-1.1.0a38-cp312-cp312-linux_x86_64.whl"
+      ],
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/workspace/lane-d/installed-restore-repeat/venv/bin/python",
+        "-I",
+        "-c",
+        "\nimport hashlib\nimport importlib.metadata\nimport json\nimport sqlite3\nimport sys\nimport zipfile\nfrom pathlib import Path\nfrom actions.server import _datadir_restore as restore\n\nwheel, root = map(Path, sys.argv[1:])\norigin = Path(restore.__file__).resolve()\nassert origin.is_relative_to(Path(sys.prefix).resolve()), origin\nwith zipfile.ZipFile(wheel) as archive:\n    member = archive.read(\"actions/server/_datadir_restore.py\")\nassert origin.read_bytes() == member\nsource = root / \"source\"\nsource.mkdir()\nattachment = source / \"work_item_files\" / \"item-1\" / \"report.txt\"\nattachment.parent.mkdir(parents=True)\nattachment.write_bytes(b\"retained report\")\nwith sqlite3.connect(source / \"workitems.db\") as db:\n    db.execute(\"CREATE TABLE work_items (id TEXT PRIMARY KEY)\")\n    db.execute(\"INSERT INTO work_items VALUES ('item-1')\")\n    db.execute(\"CREATE TABLE work_item_files (id TEXT PRIMARY KEY, work_item_id TEXT, \"\n               \"name TEXT, original_name TEXT, file_path TEXT, created_at TEXT)\")\n    db.execute(\"INSERT INTO work_item_files VALUES (?, ?, ?, ?, ?, ?)\",\n               (\"file-1\", \"item-1\", \"report.txt\", \"report.txt\", str(attachment), \"now\"))\noriginal = (source / \"workitems.db\").read_bytes()\nmanifest = restore.capture_offline_manifest(source, offline=True)\ntarget = root / \"relocated\"\nreceipt = restore.restore_offline(manifest, target, offline=True)\nwith sqlite3.connect(target / \"workitems.db\") as db:\n    path = Path(db.execute(\"SELECT file_path FROM work_item_files\").fetchone()[0])\nassert path == target / \"work_item_files/item-1/report.txt\"\nassert path.read_bytes() == b\"retained report\"\nassert (source / \"workitems.db\").read_bytes() == original\nassert receipt.rebased_attachments == 1\nattachment.write_bytes(b\"tampered\")\ntry:\n    restore.restore_offline(manifest, root / \"refused\", offline=True)\nexcept ValueError:\n    pass\nelse:\n    raise AssertionError(\"Changed retained bytes were admitted\")\nassert not (root / \"refused\").exists()\nprint(json.dumps({\"version\": importlib.metadata.version(\"actions-runtime\"),\n                  \"origin\": str(origin), \"helper_sha256\": hashlib.sha256(member).hexdigest(),\n                  \"relocation\": \"pass\", \"source_preservation\": \"pass\",\n                  \"tamper_rejection\": \"pass\"}, sort_keys=True))\n",
+        "/workspace/lane-d/wheels-owned-cache/actions_runtime-1.1.0a38-cp312-cp312-linux_x86_64.whl",
+        "/workspace/lane-d/installed-restore-repeat"
+      ],
+      "returncode": 0
+    }
+  ]
+}

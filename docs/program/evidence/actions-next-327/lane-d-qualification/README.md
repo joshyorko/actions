@@ -82,8 +82,8 @@ Stale/ambiguous claim removed: environment naming or generic green checks imply
 approval/platform qualification. Uncertainty: credentials, policy changes after
 inspection, and platform results beyond the cited jobs.
 
-Upstream disposition: none. These findings concern repository configuration,
-fixtures or unresolved local contracts; no upstream defect is established.
+Initial upstream disposition: none. The subsequent cache diagnostic candidate
+and draft-only disposition are recorded in [cache-followup.md](cache-followup.md).
 Rollback: remove the dedicated test and this evidence directory; no production
 state, migrations, dependencies or release controls change.
 
@@ -91,7 +91,9 @@ state, migrations, dependencies or release controls change.
 
 All commands used Josh RCC 18.19.3 (SHA256
 `7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428`) and
-its prepared Poetry 2.1.1, with task-local RCC/Poetry caches. Initial disk budget
+its prepared Poetry 2.1.1. Doctor/Bootstrap used task-local RCC/Poetry caches;
+the initial wheel commands omitted cache overrides, corrected in the follow-up.
+Initial disk budget
 was 30 GiB free; 25 GiB remained after bootstrap/build. No optional Python
 Robocorp tracing was enabled for Runtime tests; stdout and JUnit were retained.
 
@@ -124,6 +126,10 @@ against the combined source; this wheel does not qualify later commits.
 Follow-on reproducibility attempt: a second `poetry build -f wheel -o
 /workspace/lane-d/wheels-repeat` failed with `All attempts to connect to pypi.org
 failed`, before producing a wheel. The original successful wheel remains intact;
-byte-for-byte build reproducibility is **unverified**, not passed. Failure stdout
+byte-for-byte build reproducibility was initially **unverified**, not passed. Failure stdout
 is retained in `wheel-repeat.log.gz`. No host dependency fallback or network
 policy change was attempted.
+
+Resolved follow-up: [cache-followup.md](cache-followup.md) establishes the wrapped
+read-only-cache error, successful supported cache override and matching repeated
+wheel hashes. Wider cross-host/platform reproducibility remains unverified.
