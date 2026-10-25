@@ -1,4 +1,4 @@
-## First parallel integration checkpoint — source saved, installed proof pending
+## First parallel integration checkpoint — installed protocol passed, browser proof pending
 
 Reviewed A82bbaef (Canvas tables/results), B1ae3805 (Knowledge page checker),
 C75fe3ca (real Robot test coverage), and D69fefd9/5e959aa/4bd5fdb
@@ -6,8 +6,7 @@ C75fe3ca (real Robot test coverage), and D69fefd9/5e959aa/4bd5fdb
 9e42a8f3 generated Knowledge backend. Original commits and review limits are in
 [the integration map](evidence/actions-next-327/recovery-a39/first-integration/integration-map.json).
 New B/D checks ran against the combined working source; retained lane results do
-not substitute for combined installed acceptance. Clean wheel build and mandatory
-Canvas/generated backend acceptance are the immediate next gate. Robot production
+not substitute for combined installed acceptance. Clean wheel build and installed MCP/CLI Canvas/generated backend checks now pass at exact a5eaa1cb; [new receipts](evidence/actions-next-327/recovery-a39/combined-installed/README.md) retain two Tasks, two app executions, restart and rollback. The separate browser second-app setup failed before host launch and remains under diagnosis; new combined screenshots are still required. Robot production
 bridge and remaining full campaign requirements remain open.
 
 ## Adaptive engineering ownership — 2026-10-25
@@ -1347,3 +1346,7 @@ not installed a38 or full acceptance. The independent extension handoff includes
 actual a37 schema, verified artifact identities and a synthetic loopback subset
 fixture; client schema drift is confirmed and2.20.14 correctly refuses. Existing extension
 owner is reviewing adaptation with negative tests; no equality bypass.
+
+### Current follow-on ownership and qualification gaps
+
+D owns allocated release-version and historical migration tests plus only `_database.py::list_indexes` correction. Existing empty index comparisons do not qualify index parity. B owns the isolated `foundry/run_output_transport.py` factory and dedicated tests; startup/bootstrap/auth/MCP wiring remains integrator-only. A owns semantic v2 renderer/CSS/tests; bounded contract helper owns Python/schema and TypeScript types/bridge foundation. V1 remains unchanged and strict. All follow-ons stay outside the frozen a5eaa1cb installed artifact until reviewed and separately qualified. Lane A 7eb6075 is held for truthful nonterminal/failure announcements.

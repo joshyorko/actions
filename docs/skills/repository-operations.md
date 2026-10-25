@@ -6126,3 +6126,5 @@ Verified basis: source-joined runner captures git HEAD/tree while root source is
 
 
 Portable RCC preparation receipts must be generated from observed local publish output and reference only the new host’s owned cache. An unchanged manifest and package version do not establish identical transitive artifacts; verify the Core wheel bytes and retain the actual artifact digest. Never stamp an old digest onto rebuilt state.
+
+For manual prepared-artifact checks, use the same explicit filesystem trust carrier and no-build invocation as `build_exec_command`. The local provider name alone does not select the prepared cache’s trust attachments. Preserve verification errors and compare command/environment resolution; do not alter trust policy or invent attachments. The combined a39 probe passed with the adapter invocation after the bare manual call failed.

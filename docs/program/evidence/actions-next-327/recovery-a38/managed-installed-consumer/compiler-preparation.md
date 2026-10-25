@@ -46,11 +46,16 @@ bytes inside the resulting artifact before using that compiler:
 ```sh
 artifact=$("$runtime_python" -I -c 'import json,sys; print(json.load(open(sys.argv[1]))["artifactDigest"])' "$compiler/prepared.json")
 "$rcc" env exec --artifact "$artifact" --provider local --permissive-local \
+  --trust-carrier "$compiler/robocorp/artifacts/v1/trust" \
+  --trust-carrier-type filesystem --no-build \
   --inherit-streams --receipt-file "$compiler/core-exec.json" -- \
   python -I "$recipe/verify-core.py" "$compiler"
 ```
 
-The explicit permissive-local option is scoped to this owned synthetic unsigned
+Use the explicit local trust carrier created by this host’s publish step, as the
+Runtime adapter does. Omitting it caused `artifact trust attachment verification
+failed` in the combined a39 manual probe; do not weaken trust policy or fabricate
+attachments to fix that failure. The explicit permissive-local option is scoped to this owned synthetic unsigned
 artifact. It does not change a trust store. verify-core.py compares every wheel
 Python member with the artifact's installed files and tests isolated Data scan
 context. The original cloud proof passed 52 members. Stop on mismatch; do not

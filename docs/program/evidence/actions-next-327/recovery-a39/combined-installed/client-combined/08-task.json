@@ -1,0 +1,19 @@
+{
+  "method": "tasks/get",
+  "result": {
+    "resultType": "complete",
+    "taskId": "9d66d120-c538-4075-8132-4cd70ad4a26e",
+    "status": "working",
+    "createdAt": "2026-10-25T13:39:58.499Z",
+    "lastUpdatedAt": "2026-10-25T13:39:59.002Z",
+    "ttlMs": 600000,
+    "pollIntervalMs": 50,
+    "statusMessage": "Worker claim recorded; outcome not confirmed.",
+    "_meta": {
+      "io.modelcontextprotocol/serverInfo": {
+        "name": "Action Server",
+        "version": ""
+      }
+    }
+  }
+}
