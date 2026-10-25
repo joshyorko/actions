@@ -6591,3 +6591,13 @@ execution generation and AppSession context. Clear both when a new operation sta
 and reject late replies unless generation, Run, Attempt, state and handle still match.
 Keep failure diagnostics readable when the current authorized Run provides them.
 Remount artifact status only, preserving form inputs and unrelated binding results.
+
+Track PostgreSQL filesystem capacity separately from workspace free space. Preserve
+container DiskFull failures, sample bounded numeric database/WAL/schema telemetry, and
+use explicit memory/tmpfs budgets. A sampled preventive threshold is not a quota;
+telemetry failures must not prevent cleanup of the exact owned container.
+
+A narrow UI retest may retain an earlier candidate's Core/RCC inputs only with a
+separately versioned Runtime, exact committed source provenance and byte verification.
+It does not inherit later backend acceptance. Preserve failed browser receipts and
+change candidate identity assertions without relaxing host or authorization checks.
