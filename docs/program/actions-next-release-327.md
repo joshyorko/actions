@@ -1,5 +1,19 @@
 # Actions Next release checkpoint
 
+## Fresh executor ownership handoff and joined continuation
+
+The owner-approved saved WIP tree is committed at
+`332e0bd4a9fb8ee06652c63d7f2c11b3b423150b` on the existing release branch.
+The sole replacement integrator verified the exact tree and parent after a
+non-force expected-head update. Fresh pinned toolchain checks passed, including
+ToolkitTest189. The remaining eight joined modules passed239 cases with zero
+skips and eight explicit actual-RCC deselections. Exact source, commands,
+inventories, XML and cleanup are retained in the
+[fresh recovery receipt](evidence/actions-next-327/fresh-recovery-20261025/README.md).
+This is source/service qualification, not installed a38 or full release readiness.
+Knowledge drafts remain unapplied at this checkpoint; all other open matrix and
+owner gates remain in force. Earlier failures and interruptions remain retained.
+
 ## Replacement cloud recovery — October25
 
 The sole replacement integrator fetched and verified release head

@@ -5477,6 +5477,17 @@ remove routing headers to work around a gateway mismatch.
 
 ### Bounded local test storage
 
+Fresh cloud snapshots may contain an older checkout and a different `rcc` on
+PATH. Verify checkout HEAD separately from the fetched campaign head and verify
+the selected RCC executable before onboarding. In the prepared Actions cloud
+environment, source `/workspace/actions-cloud/activate.sh`: it selects Josh's
+RCC and a writable `ROBOCORP_HOME`. The unactivated `/usr/bin/rcc` can resolve to
+Qt's resource compiler, while invoking the prepared binary without its home
+configuration can fail against a read-only default home. Neither failure proves
+that the pinned RCC toolchain is unavailable. Run Doctor, Bootstrap and
+ToolkitTest after selecting the prepared environment; inherited snapshot receipts
+do not qualify the fetched source.
+
 Before starting a long local gate, run scripts/check_test_disk_budget.py with
 an explicit --path and positive --required-free-bytes budget; use a unique
 --report path and require exit zero before starting fixtures or pytest. Exit2

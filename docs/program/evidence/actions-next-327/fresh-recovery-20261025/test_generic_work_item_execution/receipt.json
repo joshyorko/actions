@@ -1,0 +1,36 @@
+{
+  "module": "test_generic_work_item_execution",
+  "command": [
+    "rcc",
+    "task",
+    "script",
+    "-r",
+    "developer/toolkit.yaml",
+    "--",
+    "python",
+    "/workspace/actions-cloud/package-command.py",
+    "action_server",
+    "run",
+    "python",
+    "/workspace/actions-327-recovery-evidence/selected-pytest.py",
+    "tests/action_server_tests/test_generic_work_item_execution.py",
+    "-k",
+    "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+    "-p",
+    "no:robocorp_log_pytest",
+    "-q",
+    "--tb=short",
+    "--junitxml=/workspace/actions-327-recovery-evidence/test_generic_work_item_execution/tests.xml",
+    "--basetemp=/workspace/actions-327-recovery-evidence/test_generic_work_item_execution/fixtures"
+  ],
+  "exit_code": 0,
+  "minimum_free_bytes": 29243543552,
+  "stop_reason": null,
+  "source_sha256": "bd467fcb40e22a31c2dd162cf78c1390256d0d99978127c6876942063891e7bf",
+  "counts": {
+    "tests": 37,
+    "failure": 0,
+    "error": 0,
+    "skipped": 0
+  }
+}
