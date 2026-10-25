@@ -17,10 +17,6 @@ export function GenericSemanticView({
     context: GenericExecutionContext;
 }) {
     const [, update] = useState(0);
-    const [artifact, setArtifact] = useState<{
-        bindingId: string;
-        text: string;
-    } | null>(null);
     const [error, setError] = useState<{
         bindingId: string;
         message: string;
@@ -31,7 +27,7 @@ export function GenericSemanticView({
                 app,
                 context,
                 () => update((n) => n + 1),
-                (text, bindingId) => setArtifact({ text, bindingId }),
+                () => {},
                 canvas.spec.schemaVersion === "actions.canvas-spec/v2",
             ),
         [app, context, canvas.spec.schemaVersion],
@@ -67,6 +63,7 @@ export function GenericSemanticView({
     const panels = new Map(
         context.bindingIds.map((bindingId) => {
             const state = controller.states.get(bindingId);
+            const artifact = controller.inspectedArtifacts.get(bindingId);
             const output = context.outputBindings?.find(
                 (entry) => entry.bindingId === bindingId,
             );
@@ -129,13 +126,13 @@ export function GenericSemanticView({
                     {error?.bindingId === bindingId ? (
                         <p role="alert">{error.message}</p>
                     ) : null}
-                    {artifact?.bindingId === bindingId ? (
+                    {artifact !== undefined ? (
                         <section
                             className="semantic-panel"
                             aria-label="Authorized result artifact"
                         >
                             <h3>Result artifact</h3>
-                            <pre>{artifact.text}</pre>
+                            <pre>{artifact}</pre>
                         </section>
                     ) : null}
                 </div>,

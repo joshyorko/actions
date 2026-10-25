@@ -6585,3 +6585,9 @@ Advance each acceptance row only from its exact terminal receipt. Keep protocol/
 provider-specific execution, source regressions, static checks and full-suite gates
 separate. Claimed execution does not close claimed Tasks, output modes or multiple
 principals. Replace stale RUNNING/WIP text while preserving failed and aborted receipts.
+
+Inspected artifact content and its success notice are scoped to a binding's current
+execution generation and AppSession context. Clear both when a new operation starts,
+and reject late replies unless generation, Run, Attempt, state and handle still match.
+Keep failure diagnostics readable when the current authorized Run provides them.
+Remount artifact status only, preserving form inputs and unrelated binding results.

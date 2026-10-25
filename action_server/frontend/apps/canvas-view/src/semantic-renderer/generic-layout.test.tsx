@@ -198,3 +198,187 @@ it("does not move a declared private form into an undeclared authored binding", 
     expect(screen.queryByRole("button", { name: "Refresh status" })).toBeNull();
     expect(call).not.toHaveBeenCalled();
 });
+
+it("clears inspected JSON and its success notice before a new failed submission returns", async () => {
+    const { fireEvent, waitFor, act } = await import("@testing-library/react");
+    const handle = `art_${"A".repeat(22)}`;
+    const payload = '{"text":"gamma delta epsilon","count":3}';
+    let submissions = 0;
+    let fail!: (value: unknown) => void;
+    const failure = new Promise((resolve) => {
+        fail = resolve;
+    });
+    const call = vi.fn(async ({ name }: { name: string }) => {
+        if (name === "canvas_artifact")
+            return {
+                _meta: {
+                    "actions.artifact": {
+                        bindingId: "run",
+                        runId: id,
+                        handle,
+                        text: payload,
+                    },
+                },
+            };
+        submissions++;
+        if (submissions === 3) return failure;
+        return {
+            _meta: {
+                "actions.execution": {
+                    ...context.executions![0],
+                    outputs: [{ handle }],
+                },
+            },
+        };
+    });
+    render(
+        <GenericSemanticView
+            app={{ callServerTool: call } as unknown as App}
+            context={{
+                ...context,
+                executions: [],
+                inputBindings: [],
+                outputBindings: [],
+            }}
+            canvas={{
+                ...canvas,
+                spec: {
+                    ...canvas.spec,
+                    root: {
+                        type: "stack",
+                        id: "layout",
+                        children: [
+                            canvas.spec.root,
+                            {
+                                type: "artifact",
+                                id: "result",
+                                bindingId: "run",
+                                label: "Inspect result",
+                            },
+                        ],
+                    },
+                },
+            }}
+        />,
+    );
+    for (const value of ["alpha beta", "gamma delta epsilon"]) {
+        fireEvent.change(screen.getByLabelText("Replacement value"), {
+            target: { value },
+        });
+        fireEvent.click(screen.getByRole("button", { name: "Run" }));
+        await waitFor(() =>
+            expect(
+                (
+                    screen.getByRole("button", {
+                        name: "Run",
+                    }) as HTMLButtonElement
+                ).disabled,
+            ).toBe(false),
+        );
+    }
+    fireEvent.click(screen.getByRole("button", { name: "Inspect result" }));
+    expect(await screen.findByText(payload)).toBeTruthy();
+    expect(
+        await screen.findByText("Authorized result inspected below."),
+    ).toBeTruthy();
+    fireEvent.change(screen.getByLabelText("Replacement value"), {
+        target: { value: "deliberate failure" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Run" }));
+    await waitFor(() => {
+        expect(screen.queryByText(payload)).toBeNull();
+        expect(
+            screen.queryByText("Authorized result inspected below."),
+        ).toBeNull();
+    });
+    await act(async () => {
+        fail({
+            _meta: {
+                "actions.execution": {
+                    ...context.executions![0],
+                    state: "failed",
+                },
+            },
+        });
+    });
+    expect(await screen.findByText("failed")).toBeTruthy();
+    expect(screen.queryByText(payload)).toBeNull();
+    expect(screen.queryByText("Authorized result inspected below.")).toBeNull();
+});
+it("discards an old session's delayed artifact and keeps the replacement session usable", async () => {
+    const { fireEvent, act } = await import("@testing-library/react");
+    const handle = `art_${"A".repeat(22)}`;
+    let finish!: (value: unknown) => void;
+    const delayed = new Promise((resolve) => {
+        finish = resolve;
+    });
+    const call = vi.fn(
+        async ({ arguments: args }: { arguments: Record<string, unknown> }) =>
+            args.appSession === context.token
+                ? delayed
+                : {
+                      _meta: {
+                          "actions.artifact": {
+                              bindingId: "run",
+                              runId: id,
+                              handle,
+                              text: "New session result",
+                          },
+                      },
+                  },
+    );
+    const app = { callServerTool: call } as unknown as App;
+    const active = {
+        ...context,
+        executions: context.executions!.map((state) => ({
+            ...state,
+            outputs: [{ handle }],
+        })),
+    };
+    const selected = {
+        ...canvas,
+        spec: {
+            ...canvas.spec,
+            root: {
+                type: "stack" as const,
+                id: "layout",
+                children: [
+                    canvas.spec.root,
+                    {
+                        type: "artifact" as const,
+                        id: "result",
+                        bindingId: "run",
+                        label: "Inspect result",
+                    },
+                ],
+            },
+        },
+    };
+    const view = render(
+        <GenericSemanticView app={app} context={active} canvas={selected} />,
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Inspect result" }));
+    view.rerender(
+        <GenericSemanticView
+            app={app}
+            context={{ ...active, token: "b".repeat(43) }}
+            canvas={selected}
+        />,
+    );
+    await act(async () => {
+        finish({
+            _meta: {
+                "actions.artifact": {
+                    bindingId: "run",
+                    runId: id,
+                    handle,
+                    text: "Old session result",
+                },
+            },
+        });
+    });
+    expect(screen.queryByText("Old session result")).toBeNull();
+    expect(screen.queryByText("Authorized result inspected below.")).toBeNull();
+    fireEvent.click(screen.getByRole("button", { name: "Inspect result" }));
+    expect(await screen.findByText("New session result")).toBeTruthy();
+});
