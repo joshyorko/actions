@@ -57,6 +57,18 @@ wheels with those constraints, then run pip check; no editable/source overlay
 qualifies as installed-binary acceptance. Base managed UI does not require the
 optional DuckDB extra. Data execution separately requires its declared extra.
 
+Pinned RCC18.19.3 requires a top-level `tasks` mapping even when invoking
+`--dev`; a descriptor containing only `devTasks` is rejected. The wrapper now
+declares the identical Build command in both mappings and an explicit temporary
+`artifactsDir`, preserving the exact `developer/setup.yaml` and `--inside-rcc`
+source boundary. Its descriptor regression preserves the initial missing-tasks
+failure; this correction alone is not a completed wheel-build receipt.
+
+Use a task-owned writable `POETRY_CACHE_DIR` in fresh testers. The desktop tester
+reported that a read-only inherited cache appeared as PyPI connectivity failure;
+setting a writable cache resolved Bootstrap through the pinned gateway. Inspect
+the underlying filesystem error before changing dependency pins or network setup.
+
 ## Small runnable queue/review/Run/artifact fixture
 
 After Bootstrap, use the prepared package interpreter:

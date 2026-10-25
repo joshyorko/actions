@@ -1,0 +1,10 @@
+{
+  "scope": "descriptor regression and full developer gateway tests; not an actual wheel build",
+  "source_base": "ab09e19d",
+  "initial": "1 failed: missing tasks mapping",
+  "corrected": "190 ToolkitTest cases passed",
+  "hashes": {
+    "extension-wrapper-red.log": "0f701e7d7eead79049eed1f2918fb9f584a2a62c3047c27a58053afe2171e7e0",
+    "toolkit-wrapper-final.log": "1b1bee14092b5eb3fe941b9c947d934884ce24d0f2d7bb3a2104fd313591d53e"
+  }
+}

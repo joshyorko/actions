@@ -17,7 +17,7 @@ def main():
         with tempfile.TemporaryDirectory(prefix='actions-a37-build-') as temp:
             robot=Path(temp)/'robot.json'
             command=shlex.join(['python',str(Path(__file__).resolve()),'--source',str(root),'--output',str(out),'--inside-rcc'])
-            robot.write_text(json.dumps({'devTasks':{'Build':{'shell':command}},'environmentConfigs':[str(root/'developer/setup.yaml')]}))
+            robot.write_text(json.dumps({'tasks':{'Build':{'shell':command}},'devTasks':{'Build':{'shell':command}},'artifactsDir':str(Path(temp)/'artifacts'),'environmentConfigs':[str(root/'developer/setup.yaml')]}))
             subprocess.run(['rcc','run','-r',str(robot),'--dev','-t','Build'],cwd=root,check=True)
         return
     spec=importlib.util.spec_from_file_location('actions_toolkit',root/'developer/toolkit.py');toolkit=importlib.util.module_from_spec(spec);spec.loader.exec_module(toolkit)
