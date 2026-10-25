@@ -32,8 +32,14 @@ The [qualification receipt](evidence/actions-next-327/recovery-a25/qualification
 retains exact commands, JUnit and wheel/import provenance. Library screenshot
 saving is blocked by HTTP401 before upload; no Library IDs were returned.
 
-The earlier a24 source receipts remain source-specific. Actual official
-second-host application, generic immutable
+The installed a25 official reference-host flow passed both invoice-summary and
+ndjson-inspector through actual review, approval, RCC and sealed-result browser
+readback. [Captures and host qualification](evidence/actions-next-327/recovery-a25/official-host/qualification.json)
+record exact host source/dependencies and synthetic authenticated composition.
+This is not ordinary CLI authoring or ChatGPT E1; six provider variants were
+explicitly deselected after the separate20-case installed RCC matrix.
+
+The earlier a24 source receipts remain source-specific. Generic immutable
 queue/input policy and execution, native uncertain-launch reconciliation,
 complete distribution/upgrade/restore and full owner matrix remain open.
 Codex authentication, authenticated ChatGPT E1, publisher-security disposition

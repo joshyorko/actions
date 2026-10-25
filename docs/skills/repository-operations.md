@@ -5111,3 +5111,17 @@ metadata and invokes pinned RCC deletion after checking for active processes.
 Never prune a home shared with another running gate. Keep artifacts, catalog,
 source/build receipts and test evidence; serialized cache cleanup is not a
 consumer restore test. Enable the fixture before the process starts.
+
+Installed-engine MCP Apps browser qualification must record the reference-host
+source revision, dependency install and build, browser executable, and whether
+the server is an ordinary CLI or a synthetic authenticated service composition.
+Capture the inner App frame to avoid exposing host metadata/session tokens.
+A successful actual bridge/RCC/result flow does not establish blank-authoring,
+CLI restart, authenticated Codex, or ChatGPT E1 acceptance.
+
+Qualify upgrade and downgrade with exact installed old/new consumers in fresh
+interpreters, retaining origins and wheel hashes. Relocate disposable legacy
+attachment fixtures before downgrade readback so absolute paths cannot silently
+read the original datadir. Successful legacy queue readback is format-specific;
+a nonzero exit alone is not safe-refusal evidence. Common SQL, object storage,
+journals, Run/effect lineage and caches need separate coordinated restore gates.
