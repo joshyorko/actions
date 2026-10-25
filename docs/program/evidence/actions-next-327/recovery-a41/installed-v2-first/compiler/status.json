@@ -1,0 +1,10 @@
+{
+  "compiler": "PASS",
+  "source": "f905c3888ecb448dbce80ce57a9b59ff041eb148",
+  "installed_harness": "NOT_STARTED_PREFLIGHT_STOPPED",
+  "free_gib_observed": 7.151573181152344,
+  "required_start_gib": 7.25,
+  "cleanup": "a39 only preserved originals present; no eligible derived space; no deletions",
+  "initial_failure": "fresh launcher omitted existing network proxy/CA variables; corrected invocation preserved existing environment without modifying settings",
+  "upstream_disposition": "none"
+}

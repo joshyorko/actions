@@ -1,0 +1,198 @@
+{
+  "_meta": {
+    "actions.canvas": {
+      "active": false,
+      "applicationId": "ab7f86ab-1b11-4881-901d-842b07f3caf1",
+      "bindings": [
+        {
+          "bindingId": "report",
+          "capabilityId": "action.report",
+          "packageRevision": {
+            "package_id": "c049a7d8-16d7-5964-af9d-53de24ed68e9",
+            "revision_id": "sha256:e85f6bae102b813da4ace93dacf92ce21fc4157191d288b8f64fa745bf56c322",
+            "workspace_id": "0ec16083-4989-41d1-a5b8-b074a2cbb180"
+          }
+        }
+      ],
+      "revisionId": "sha256:e62b81d09accde8887708a29313b39dfc6fe7420582cb243016594d52f1cb62c",
+      "spec": {
+        "bindingIds": [
+          "report"
+        ],
+        "root": {
+          "children": [
+            {
+              "bindingId": "report",
+              "fields": [
+                {
+                  "label": "Report text",
+                  "name": "text",
+                  "required": true,
+                  "type": "text"
+                }
+              ],
+              "id": "report-form",
+              "submitLabel": "Generate report",
+              "type": "form"
+            },
+            {
+              "bindingId": "report",
+              "id": "report-status",
+              "type": "status"
+            },
+            {
+              "bindingId": "report",
+              "chartType": "bar",
+              "id": "chart",
+              "labelKey": "label",
+              "rowsKey": "rows",
+              "title": "Word counts",
+              "type": "chart",
+              "valueKey": "value"
+            },
+            {
+              "bindingId": "report",
+              "id": "log",
+              "messageKey": "message",
+              "rowsKey": "logs",
+              "title": "Processing log",
+              "type": "log"
+            },
+            {
+              "bindingId": "report",
+              "fields": [
+                {
+                  "key": "name",
+                  "label": "Name"
+                },
+                {
+                  "key": "count",
+                  "label": "Count"
+                }
+              ],
+              "id": "inspector",
+              "title": "Report details",
+              "type": "inspector",
+              "valueKey": "details"
+            },
+            {
+              "bindingId": "report",
+              "id": "artifact",
+              "label": "Inspect report artifact",
+              "type": "artifact"
+            }
+          ],
+          "id": "report-card",
+          "title": "Generated report",
+          "type": "card"
+        },
+        "schemaVersion": "actions.canvas-spec/v2",
+        "title": "Installed generated v2 report",
+        "visibility": [
+          "app"
+        ]
+      }
+    },
+    "io.modelcontextprotocol/serverInfo": {
+      "name": "Action Server",
+      "version": ""
+    }
+  },
+  "content": [
+    {
+      "type": "text",
+      "text": "Canvas revision loaded.",
+      "annotations": null,
+      "_meta": null
+    }
+  ],
+  "structuredContent": {
+    "active": false,
+    "applicationId": "ab7f86ab-1b11-4881-901d-842b07f3caf1",
+    "buildStatus": "passed",
+    "compilationStatus": "succeeded",
+    "importStatus": "passed",
+    "revisionId": "sha256:e62b81d09accde8887708a29313b39dfc6fe7420582cb243016594d52f1cb62c",
+    "spec": {
+      "bindingIds": [
+        "report"
+      ],
+      "root": {
+        "children": [
+          {
+            "bindingId": "report",
+            "fields": [
+              {
+                "label": "Report text",
+                "name": "text",
+                "required": true,
+                "type": "text"
+              }
+            ],
+            "id": "report-form",
+            "submitLabel": "Generate report",
+            "type": "form"
+          },
+          {
+            "bindingId": "report",
+            "id": "report-status",
+            "type": "status"
+          },
+          {
+            "bindingId": "report",
+            "chartType": "bar",
+            "id": "chart",
+            "labelKey": "label",
+            "rowsKey": "rows",
+            "title": "Word counts",
+            "type": "chart",
+            "valueKey": "value"
+          },
+          {
+            "bindingId": "report",
+            "id": "log",
+            "messageKey": "message",
+            "rowsKey": "logs",
+            "title": "Processing log",
+            "type": "log"
+          },
+          {
+            "bindingId": "report",
+            "fields": [
+              {
+                "key": "name",
+                "label": "Name"
+              },
+              {
+                "key": "count",
+                "label": "Count"
+              }
+            ],
+            "id": "inspector",
+            "title": "Report details",
+            "type": "inspector",
+            "valueKey": "details"
+          },
+          {
+            "bindingId": "report",
+            "id": "artifact",
+            "label": "Inspect report artifact",
+            "type": "artifact"
+          }
+        ],
+        "id": "report-card",
+        "title": "Generated report",
+        "type": "card"
+      },
+      "schemaVersion": "actions.canvas-spec/v2",
+      "title": "Installed generated v2 report",
+      "visibility": [
+        "app"
+      ]
+    },
+    "testStatus": "passed",
+    "validationStatus": "passed"
+  },
+  "isError": false,
+  "resultType": "complete"
+}
