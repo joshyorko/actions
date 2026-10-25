@@ -1,0 +1,73 @@
+{
+  "status": "FAIL",
+  "runtime_version": "1.1.0a32",
+  "engine_origin": "/workspace/actions-recovery-327/installed-a32/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+  "source": "ba3aba9e8f623ccd0a17803d29b3cc8b85f65cf2",
+  "synthetic_owned_auth": true,
+  "processes": [
+    {
+      "pid": 120316,
+      "returncode": -15,
+      "stopped": true
+    },
+    {
+      "pid": 120362,
+      "returncode": -15,
+      "stopped": true
+    },
+    {
+      "pid": 120849,
+      "returncode": -15,
+      "stopped": true
+    }
+  ],
+  "calls": [
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_inspect",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_inspect",
+      "is_error": false
+    }
+  ],
+  "actual_generated_execution": "NOT_PROVEN",
+  "workspace": "59c79112-f143-4792-9b2f-1d717c3b1323",
+  "profile_setup": "explicit public offline owner authorization; no SQL writes or source/result/review/admission seeding",
+  "managed_calls": [
+    "items.enqueue"
+  ],
+  "failure_type": "CalledProcessError"
+}
