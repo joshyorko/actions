@@ -1,0 +1,18 @@
+{
+  "base": "2db7e6b5c159d78dc7b2ed7e59e370cb1d17f3c2",
+  "patch_sha256": "008bdcd8d8f8451fd3393311b7a536a4b9385148f59e3effe137085ace511f61",
+  "devutils": {
+    "passed": 324,
+    "failed": 0,
+    "skipped": 0
+  },
+  "installed_a41_closure": {
+    "result": "failed",
+    "reason": "mcp installed2.3.0 differs Runtime lock2.0.0",
+    "consumer_source": "f905c3888ecb448dbce80ce57a9b59ff041eb148",
+    "raw_inspection_sha256": "e0bae70f29d79912ab3bf99c5ae451efecde125e6a5bc82f26a8197cc4be994a",
+    "recipe": "historical handoff constraints, not full Runtime lock",
+    "current_sbom": "not run"
+  },
+  "historical_native": "source20639810 only, not current Canvas/v2/platform proof"
+}

@@ -1,0 +1,7 @@
+Target: docs/skills/repository-operations.md, after wheel/installed consumer qualification guidance.
+
+A pinned environment SBOM can describe installed dependency declarations that are inactive for the selected consumer profile. Preserve its raw bytes, the independently resolved active graph and explicit marker/extra explanations as separate evidence. An explained inactive edge does not turn strict active-graph comparison failure into a pass or establish release admission. Optional SBOM tooling must target a distinct explicitly trusted consumer interpreter, verify its actual prefix and measured wheel payload, bound retained subprocess streams/time, and compare installed metadata before and after production. This execution is not a sandbox for interpreter or site/.pth code.
+
+Owned-consumer dependency guards must inspect normalized installed distribution names and every Requires-Dist target before evaluating markers or extras; an inactive declaration can still reintroduce a replaced vendor package in another profile. Preserve source/candidate identity in native evidence, including older fixture Core versions, rather than attributing that result to a newer campaign candidate.
+
+Verified basis: exact D336 source sequence806dcf5→630b6f1, independent33-case tooling run, raw declared/active/reconciliation evidence retaining strict-active failure and29 explained inactive edges, plus lock comparison preserving existing name/version entries. Current installed release and platform breadth remain independent gates. Upstream disposition: none.

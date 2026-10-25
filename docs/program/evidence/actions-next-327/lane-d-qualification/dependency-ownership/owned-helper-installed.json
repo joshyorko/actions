@@ -1,0 +1,11 @@
+{
+  "distributions": {
+    "types-PyYAML": "6.0.12.20260724",
+    "urllib3": "2.7.0",
+    "PyYAML": "6.0.3",
+    "actions-http-helper": "1.0.3",
+    "truststore": "0.10.4",
+    "pip": "25.0.1"
+  },
+  "origin": "/workspace/lane-d/helper-owned-clean/lib/python3.12/site-packages/actions_http/__init__.py"
+}

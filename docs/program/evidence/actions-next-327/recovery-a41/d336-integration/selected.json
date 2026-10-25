@@ -1,0 +1,134 @@
+[
+  {
+    "classname": "tests.test_consumer_inventory_327",
+    "name": "test_selected_optional_dependency_closure"
+  },
+  {
+    "classname": "tests.test_consumer_inventory_327",
+    "name": "test_resolved_inventory_failures[missing]"
+  },
+  {
+    "classname": "tests.test_consumer_inventory_327",
+    "name": "test_resolved_inventory_failures[unlocked]"
+  },
+  {
+    "classname": "tests.test_consumer_inventory_327",
+    "name": "test_resolved_inventory_failures[duplicate]"
+  },
+  {
+    "classname": "tests.test_consumer_inventory_327",
+    "name": "test_cyclonedx_components_must_match_actual_consumer[None]"
+  },
+  {
+    "classname": "tests.test_consumer_inventory_327",
+    "name": "test_cyclonedx_components_must_match_actual_consumer[missing]"
+  },
+  {
+    "classname": "tests.test_consumer_inventory_327",
+    "name": "test_cyclonedx_components_must_match_actual_consumer[stale]"
+  },
+  {
+    "classname": "tests.test_consumer_inventory_327",
+    "name": "test_cyclonedx_components_must_match_actual_consumer[duplicate]"
+  },
+  {
+    "classname": "tests.test_consumer_inventory_327",
+    "name": "test_replaced_vendor_packages_cannot_return[installed-Sema4AI_HTTP_Helper]"
+  },
+  {
+    "classname": "tests.test_consumer_inventory_327",
+    "name": "test_replaced_vendor_packages_cannot_return[installed-sema4ai.common]"
+  },
+  {
+    "classname": "tests.test_consumer_inventory_327",
+    "name": "test_replaced_vendor_packages_cannot_return[inactive_dependency-Sema4AI_HTTP_Helper]"
+  },
+  {
+    "classname": "tests.test_consumer_inventory_327",
+    "name": "test_replaced_vendor_packages_cannot_return[inactive_dependency-sema4ai.common]"
+  },
+  {
+    "classname": "tests.test_consumer_sbom_graph_327",
+    "name": "test_complete_synthetic_graph_matches_captured_consumer"
+  },
+  {
+    "classname": "tests.test_consumer_sbom_graph_327",
+    "name": "test_incomplete_or_changed_graph_rejected[missing-extra-edge]"
+  },
+  {
+    "classname": "tests.test_consumer_sbom_graph_327",
+    "name": "test_incomplete_or_changed_graph_rejected[extra-edge]"
+  },
+  {
+    "classname": "tests.test_consumer_sbom_graph_327",
+    "name": "test_incomplete_or_changed_graph_rejected[dangling]"
+  },
+  {
+    "classname": "tests.test_consumer_sbom_graph_327",
+    "name": "test_incomplete_or_changed_graph_rejected[duplicate-ref]"
+  },
+  {
+    "classname": "tests.test_consumer_sbom_graph_327",
+    "name": "test_incomplete_or_changed_graph_rejected[missing-node]"
+  },
+  {
+    "classname": "tests.test_consumer_sbom_graph_327",
+    "name": "test_incomplete_or_changed_graph_rejected[duplicate-node]"
+  },
+  {
+    "classname": "tests.test_consumer_sbom_producer_327",
+    "name": "test_explicit_target_and_validated_reproducible_format"
+  },
+  {
+    "classname": "tests.test_consumer_sbom_producer_327",
+    "name": "test_existing_output_is_never_overwritten"
+  },
+  {
+    "classname": "tests.test_consumer_sbom_producer_327",
+    "name": "test_wrong_producer_version_retains_failure_before_execution"
+  },
+  {
+    "classname": "tests.test_consumer_sbom_producer_327",
+    "name": "test_stream_limit_retains_bounded_output"
+  },
+  {
+    "classname": "tests.test_consumer_sbom_producer_327",
+    "name": "test_timeout_retains_partial_output"
+  },
+  {
+    "classname": "tests.test_consumer_sbom_producer_327",
+    "name": "test_actual_prefix_rejects_same_environment_alternate_spelling"
+  },
+  {
+    "classname": "tests.test_declared_graph_327",
+    "name": "test_actual_export_explained_without_mutation_or_admission"
+  },
+  {
+    "classname": "tests.test_declared_graph_327",
+    "name": "test_mutations_fail_closed[extra]"
+  },
+  {
+    "classname": "tests.test_declared_graph_327",
+    "name": "test_mutations_fail_closed[missing]"
+  },
+  {
+    "classname": "tests.test_declared_graph_327",
+    "name": "test_mutations_fail_closed[dangling]"
+  },
+  {
+    "classname": "tests.test_declared_graph_327",
+    "name": "test_mutations_fail_closed[duplicate]"
+  },
+  {
+    "classname": "tests.test_declared_graph_327",
+    "name": "test_mutations_fail_closed[version]"
+  },
+  {
+    "classname": "tests.test_declared_graph_327",
+    "name": "test_mutations_fail_closed[extra_activation]"
+  },
+  {
+    "classname": "tests.test_declared_graph_327",
+    "name": "test_mutations_fail_closed[python_marker]"
+  }
+]

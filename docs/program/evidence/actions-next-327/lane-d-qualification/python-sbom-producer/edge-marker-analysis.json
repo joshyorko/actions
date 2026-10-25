@@ -1,0 +1,616 @@
+{
+  "environment": {
+    "implementation_name": "cpython",
+    "implementation_version": "3.12.15",
+    "os_name": "posix",
+    "platform_machine": "x86_64",
+    "platform_release": "6.18.55",
+    "platform_system": "Linux",
+    "platform_version": "#1 SMP Wed Oct 14 19:45:18 UTC 2026",
+    "python_full_version": "3.12.15",
+    "platform_python_implementation": "CPython",
+    "python_version": "3.12",
+    "sys_platform": "linux"
+  },
+  "node_count": 15,
+  "edge_count": 29,
+  "edges": [
+    {
+      "source": "actions-work-items",
+      "target": "psycopg",
+      "installed_version": "3.3.4",
+      "source_selected_extras": [],
+      "requirements": [
+        {
+          "requires_dist": "psycopg[binary] (>=3.2,<4) ; extra == \"postgres\"",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "postgres"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        }
+      ]
+    },
+    {
+      "source": "actions-work-items",
+      "target": "redis",
+      "installed_version": "5.3.1",
+      "source_selected_extras": [],
+      "requirements": [
+        {
+          "requires_dist": "redis (>=4.5.0) ; extra == \"all\"",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "all"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        },
+        {
+          "requires_dist": "redis (>=4.5.0) ; extra == \"redis\"",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "redis"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        }
+      ]
+    },
+    {
+      "source": "actions-work-items",
+      "target": "requests",
+      "installed_version": "2.34.2",
+      "source_selected_extras": [],
+      "requirements": [
+        {
+          "requires_dist": "requests (>=2.31.0) ; extra == \"all\"",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "all"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        },
+        {
+          "requires_dist": "requests (>=2.31.0) ; extra == \"yorko\"",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "yorko"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        }
+      ]
+    },
+    {
+      "source": "cryptography",
+      "target": "certifi",
+      "installed_version": "2026.7.22",
+      "source_selected_extras": [],
+      "requirements": [
+        {
+          "requires_dist": "certifi>=2024 ; extra == 'test'",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "test"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        }
+      ]
+    },
+    {
+      "source": "cryptography",
+      "target": "click",
+      "installed_version": "8.4.2",
+      "source_selected_extras": [],
+      "requirements": [
+        {
+          "requires_dist": "click>=8.0.1 ; extra == 'pep8test'",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "pep8test"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        }
+      ]
+    },
+    {
+      "source": "cryptography",
+      "target": "typing-extensions",
+      "installed_version": "4.16.0",
+      "source_selected_extras": [],
+      "requirements": [
+        {
+          "requires_dist": "typing-extensions>=4.13.2 ; python_full_version < '3.11'",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        }
+      ]
+    },
+    {
+      "source": "fastapi-slim",
+      "target": "python-multipart",
+      "installed_version": "0.0.32",
+      "source_selected_extras": [],
+      "requirements": [
+        {
+          "requires_dist": "python-multipart>=0.0.18; extra == \"standard\"",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "standard"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        },
+        {
+          "requires_dist": "python-multipart>=0.0.18; extra == \"standard-no-fastapi-cloud-cli\"",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "standard-no-fastapi-cloud-cli"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        },
+        {
+          "requires_dist": "python-multipart>=0.0.18; extra == \"all\"",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "all"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        }
+      ]
+    },
+    {
+      "source": "fastapi-slim",
+      "target": "pyyaml",
+      "installed_version": "6.0.3",
+      "source_selected_extras": [],
+      "requirements": [
+        {
+          "requires_dist": "pyyaml>=5.3.1; extra == \"all\"",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "all"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        }
+      ]
+    },
+    {
+      "source": "fastapi-slim",
+      "target": "uvicorn",
+      "installed_version": "0.38.0",
+      "source_selected_extras": [],
+      "requirements": [
+        {
+          "requires_dist": "uvicorn[standard]>=0.12.0; extra == \"standard\"",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "standard"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        },
+        {
+          "requires_dist": "uvicorn[standard]>=0.12.0; extra == \"standard-no-fastapi-cloud-cli\"",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "standard-no-fastapi-cloud-cli"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        },
+        {
+          "requires_dist": "uvicorn[standard]>=0.12.0; extra == \"all\"",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "all"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        }
+      ]
+    },
+    {
+      "source": "httpcore2",
+      "target": "anyio",
+      "installed_version": "4.14.2",
+      "source_selected_extras": [],
+      "requirements": [
+        {
+          "requires_dist": "anyio<5.0,>=4.5.0; extra == 'asyncio'",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "asyncio"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        }
+      ]
+    },
+    {
+      "source": "httpx2",
+      "target": "click",
+      "installed_version": "8.4.2",
+      "source_selected_extras": [],
+      "requirements": [
+        {
+          "requires_dist": "click>=8.4.2; extra == 'cli'",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "cli"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        }
+      ]
+    },
+    {
+      "source": "jsonschema",
+      "target": "idna",
+      "installed_version": "3.18",
+      "source_selected_extras": [],
+      "requirements": [
+        {
+          "requires_dist": "idna; extra == 'format'",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "format"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        },
+        {
+          "requires_dist": "idna; extra == 'format-nongpl'",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "format-nongpl"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        }
+      ]
+    },
+    {
+      "source": "msgspec",
+      "target": "attrs",
+      "installed_version": "26.1.0",
+      "source_selected_extras": [],
+      "requirements": [
+        {
+          "requires_dist": "attrs; extra == \"test\"",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "test"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        },
+        {
+          "requires_dist": "attrs; extra == \"dev\"",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "dev"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        }
+      ]
+    },
+    {
+      "source": "msgspec",
+      "target": "pyyaml",
+      "installed_version": "6.0.3",
+      "source_selected_extras": [],
+      "requirements": [
+        {
+          "requires_dist": "pyyaml; extra == \"yaml\"",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "yaml"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        },
+        {
+          "requires_dist": "pyyaml; extra == \"test\"",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "test"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        },
+        {
+          "requires_dist": "pyyaml; extra == \"dev\"",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "dev"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        }
+      ]
+    },
+    {
+      "source": "multidict",
+      "target": "typing-extensions",
+      "installed_version": "4.16.0",
+      "source_selected_extras": [],
+      "requirements": [
+        {
+          "requires_dist": "typing-extensions>=4.1.0; python_version < \"3.11\"",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        }
+      ]
+    },
+    {
+      "source": "oauthlib",
+      "target": "cryptography",
+      "installed_version": "46.0.7",
+      "source_selected_extras": [],
+      "requirements": [
+        {
+          "requires_dist": "cryptography>=3.0.0; extra == \"rsa\"",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "rsa"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        },
+        {
+          "requires_dist": "cryptography>=3.0.0; extra == \"signedtoken\"",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "signedtoken"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        }
+      ]
+    },
+    {
+      "source": "oauthlib",
+      "target": "pyjwt",
+      "installed_version": "2.13.0",
+      "source_selected_extras": [],
+      "requirements": [
+        {
+          "requires_dist": "pyjwt<3,>=2.0.0; extra == \"signedtoken\"",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "signedtoken"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        }
+      ]
+    },
+    {
+      "source": "psycopg",
+      "target": "anyio",
+      "installed_version": "4.14.2",
+      "source_selected_extras": [
+        "binary"
+      ],
+      "requirements": [
+        {
+          "requires_dist": "anyio>=4.0; extra == \"test\"",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "test"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        }
+      ]
+    },
+    {
+      "source": "pyjwt",
+      "target": "typing-extensions",
+      "installed_version": "4.16.0",
+      "source_selected_extras": [
+        "crypto"
+      ],
+      "requirements": [
+        {
+          "requires_dist": "typing_extensions>=4.0; python_version < \"3.11\"",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        }
+      ]
+    },
+    {
+      "source": "redis",
+      "target": "cryptography",
+      "installed_version": "46.0.7",
+      "source_selected_extras": [],
+      "requirements": [
+        {
+          "requires_dist": "cryptography>=36.0.1; extra == \"ocsp\"",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "ocsp"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        }
+      ]
+    },
+    {
+      "source": "redis",
+      "target": "requests",
+      "installed_version": "2.34.2",
+      "source_selected_extras": [],
+      "requirements": [
+        {
+          "requires_dist": "requests>=2.31.0; extra == \"ocsp\"",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "ocsp"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        }
+      ]
+    },
+    {
+      "source": "sse-starlette",
+      "target": "pydantic",
+      "installed_version": "2.13.4",
+      "source_selected_extras": [],
+      "requirements": [
+        {
+          "requires_dist": "pydantic>=2; extra == \"examples\"",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "examples"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        }
+      ]
+    },
+    {
+      "source": "sse-starlette",
+      "target": "uvicorn",
+      "installed_version": "0.38.0",
+      "source_selected_extras": [],
+      "requirements": [
+        {
+          "requires_dist": "uvicorn>=0.34.0; extra == \"examples\"",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "examples"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        },
+        {
+          "requires_dist": "uvicorn>=0.34.0; extra == \"uvicorn\"",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "uvicorn"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        }
+      ]
+    },
+    {
+      "source": "starlette",
+      "target": "python-multipart",
+      "installed_version": "0.0.32",
+      "source_selected_extras": [],
+      "requirements": [
+        {
+          "requires_dist": "python-multipart>=0.0.18; extra == 'full'",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "full"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        }
+      ]
+    },
+    {
+      "source": "starlette",
+      "target": "pyyaml",
+      "installed_version": "6.0.3",
+      "source_selected_extras": [],
+      "requirements": [
+        {
+          "requires_dist": "pyyaml; extra == 'full'",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "full"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        }
+      ]
+    },
+    {
+      "source": "uvicorn",
+      "target": "pyyaml",
+      "installed_version": "6.0.3",
+      "source_selected_extras": [],
+      "requirements": [
+        {
+          "requires_dist": "pyyaml>=5.1; extra == 'standard'",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "standard"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        }
+      ]
+    },
+    {
+      "source": "uvicorn",
+      "target": "typing-extensions",
+      "installed_version": "4.16.0",
+      "source_selected_extras": [],
+      "requirements": [
+        {
+          "requires_dist": "typing-extensions>=4.0; python_version < '3.11'",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        }
+      ]
+    },
+    {
+      "source": "uvicorn",
+      "target": "watchfiles",
+      "installed_version": "1.2.0",
+      "source_selected_extras": [],
+      "requirements": [
+        {
+          "requires_dist": "watchfiles>=0.13; extra == 'standard'",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "standard"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        }
+      ]
+    },
+    {
+      "source": "uvicorn",
+      "target": "websockets",
+      "installed_version": "15.0.1",
+      "source_selected_extras": [],
+      "requirements": [
+        {
+          "requires_dist": "websockets>=10.4; extra == 'standard'",
+          "active_for_selected_extras": false,
+          "activating_declared_extras_in_this_environment": [
+            "standard"
+          ],
+          "base_marker_active": false,
+          "installed_version_satisfies_specifier": true
+        }
+      ]
+    }
+  ]
+}

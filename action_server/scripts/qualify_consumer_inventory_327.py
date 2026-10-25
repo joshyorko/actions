@@ -12,12 +12,22 @@ from pathlib import Path
 from packaging.requirements import Requirement
 from packaging.utils import canonicalize_name
 
+REPLACED_VENDOR_DISTRIBUTIONS = {"sema4ai-http-helper", "sema4ai-common"}
+
 
 def qualify(inspect, lock, expected_runtime, extras):
     installed = {}
     for item in inspect["installed"]:
         metadata = item["metadata"]
         name = canonicalize_name(metadata["name"])
+        if name in REPLACED_VENDOR_DISTRIBUTIONS:
+            raise ValueError(f"replaced vendor distribution installed: {name}")
+        for raw in metadata.get("requires_dist", []):
+            dependency = canonicalize_name(Requirement(raw).name)
+            if dependency in REPLACED_VENDOR_DISTRIBUTIONS:
+                raise ValueError(
+                    f"replaced vendor dependency declared: {name} -> {dependency}"
+                )
         if name in installed:
             raise ValueError("duplicate installed distribution")
         installed[name] = metadata
@@ -92,6 +102,44 @@ def compare_cyclonedx(sbom, resolved):
         raise ValueError("CycloneDX components do not match resolved consumer")
 
 
+def compare_cyclonedx_graph(sbom, qualification):
+    """Require explicit package graph nodes and exact active dependency edges."""
+    compare_cyclonedx(sbom, qualification["resolved"])
+    references = {}
+    for component in sbom["components"]:
+        reference = component.get("bom-ref")
+        if not isinstance(reference, str) or not reference or reference in references:
+            raise ValueError("missing or duplicate component reference")
+        references[reference] = canonicalize_name(component["name"])
+    root = sbom.get("metadata", {}).get("component", {}).get("bom-ref")
+    if root in references:
+        raise ValueError("duplicate root/component reference")
+    known = set(references) | ({root} if root else set())
+    nodes = {}
+    for node in sbom.get("dependencies", []):
+        reference = node["ref"]
+        dependencies = node.get("dependsOn", [])
+        if reference not in known or reference in nodes:
+            raise ValueError("unknown or duplicate dependency node")
+        if (
+            len(set(dependencies)) != len(dependencies)
+            or not set(dependencies) <= known
+        ):
+            raise ValueError("duplicate or dangling dependency edge")
+        nodes[reference] = dependencies
+    observed = {}
+    for reference, name in references.items():
+        if name == "pip":
+            continue
+        if reference not in nodes:
+            raise ValueError("missing explicit dependency node")
+        if any(target == root for target in nodes[reference]):
+            raise ValueError("package dependency points to application root")
+        observed[name] = sorted(references[target] for target in nodes[reference])
+    if observed != qualification["dependencies"]:
+        raise ValueError("CycloneDX graph differs from active resolved dependencies")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--inspect", type=Path, required=True)
@@ -108,8 +156,10 @@ def main():
         args.extra,
     )
     try:
-        compare_cyclonedx(json.loads(args.sbom.read_text()), result["resolved"])
-        result["sbom_comparison"] = "component inventory matches; graph not qualified"
+        compare_cyclonedx_graph(json.loads(args.sbom.read_text()), result)
+        result[
+            "sbom_comparison"
+        ] = "component inventory and active dependency graph match"
     except ValueError as error:
         result["sbom_comparison"] = "rejected: " + str(error)
     with args.output.open("x") as stream:
