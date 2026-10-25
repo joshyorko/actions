@@ -6469,3 +6469,17 @@ Audit an unpublished Canvas client fixture by its single idempotent
 `canvas.create` request and absence of active Deployment heads; the draft itself
 legitimately creates a Deployment revision. Preserve failed run receipts
 separately from subsequent corrected complete runs.
+
+Candidate transfer verification must compare embedded qualifier assertions with
+the candidate configuration, not merely verify a manifest of internally
+consistent bytes. Retain a defective immutable bundle and publish a separately
+hashed, reviewed recipe correction without mutating product wheels. Inspect
+qualification scripts statically during preparation: module import may create
+credentials or fixture state. Source preparation, managed-browser UI acceptance
+and a strict sandbox-attested browser gate require distinct receipts.
+
+Do not infer shared loopback from a shared hostname: a managed desktop/native
+terminal and an execution tool may use different network namespaces. Confirm
+reachability through the supported route without changing security settings.
+Storage planning must distinguish sampled peak, retained allocation, enforced
+cap and required free reserve, and must not sum free space on shared filesystems.
