@@ -5570,3 +5570,13 @@ expected list from current models. Keep source metadata and emitted wheel floor
 assertions aligned without changing unrelated SDK floors or negative cases.
 Root help snapshots include explicitly registered offline commands. Existing
 wheel metadata inspection does not replace clean install/uninstall qualification.
+
+For a bounded full gate, collect the complete intended node set first, partition
+it into disjoint batches and verify their union and uniqueness. Retain failures,
+skips and unexecuted cases; an unnamed JUnit testcase after interruption is not a
+pass. Use fresh bounded owned database fixtures per batch and retain container
+health/state/logs before cleanup. A stopped container without its logs cannot
+establish the cause of a connection-refused cascade. Archive inactive fixtures
+with file hashes plus symlink/hard-link/FIFO metadata; verify gzip sequentially
+to avoid repeated decompression for each member. Never publish private fixture
+archive payloads merely because their inputs are synthetic.
