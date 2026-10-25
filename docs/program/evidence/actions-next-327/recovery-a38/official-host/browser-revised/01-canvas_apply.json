@@ -1,0 +1,128 @@
+{
+  "_meta": {
+    "actions.canvas": {
+      "active": false,
+      "applicationId": "1367bf67-f70e-4cda-b24e-9b4a1913e3ac",
+      "bindings": [
+        {
+          "bindingId": "count",
+          "capabilityId": "action.count_words",
+          "packageRevision": {
+            "package_id": "f77c5da5-768e-5ad2-80dc-8bed8cf319e2",
+            "revision_id": "sha256:6e09a60fd4f250b09c2f5c3d1a7933776ef4c378db660fcb8ea7e229f318483c",
+            "workspace_id": "b1b51ebf-2f51-4997-a173-01b4feddb42f"
+          }
+        }
+      ],
+      "revisionId": "sha256:02e86d34eb9c51181b5651f006c1486733fa53c5b4d5f6d2034362ac2dde5e83",
+      "spec": {
+        "bindingIds": [
+          "count"
+        ],
+        "root": {
+          "children": [
+            {
+              "bindingId": "count",
+              "fields": [
+                {
+                  "label": "Text to count",
+                  "name": "text",
+                  "required": true,
+                  "type": "text"
+                }
+              ],
+              "id": "counter-form",
+              "submitLabel": "Count words",
+              "type": "form"
+            },
+            {
+              "bindingId": "count",
+              "id": "counter-status",
+              "type": "status"
+            },
+            {
+              "bindingId": "count",
+              "id": "counter-artifact",
+              "label": "Inspect result",
+              "type": "artifact"
+            }
+          ],
+          "id": "main",
+          "type": "stack"
+        },
+        "schemaVersion": "actions.canvas-spec/v1",
+        "title": "Independent generated word counter",
+        "visibility": [
+          "model",
+          "app"
+        ]
+      }
+    },
+    "io.modelcontextprotocol/serverInfo": {
+      "name": "Action Server",
+      "version": ""
+    }
+  },
+  "content": [
+    {
+      "type": "text",
+      "text": "Canvas revision loaded.",
+      "annotations": null,
+      "_meta": null
+    }
+  ],
+  "structuredContent": {
+    "active": false,
+    "applicationId": "1367bf67-f70e-4cda-b24e-9b4a1913e3ac",
+    "buildStatus": "passed",
+    "compilationStatus": "succeeded",
+    "importStatus": "passed",
+    "revisionId": "sha256:02e86d34eb9c51181b5651f006c1486733fa53c5b4d5f6d2034362ac2dde5e83",
+    "spec": {
+      "bindingIds": [
+        "count"
+      ],
+      "root": {
+        "children": [
+          {
+            "bindingId": "count",
+            "fields": [
+              {
+                "label": "Text to count",
+                "name": "text",
+                "required": true,
+                "type": "text"
+              }
+            ],
+            "id": "counter-form",
+            "submitLabel": "Count words",
+            "type": "form"
+          },
+          {
+            "bindingId": "count",
+            "id": "counter-status",
+            "type": "status"
+          },
+          {
+            "bindingId": "count",
+            "id": "counter-artifact",
+            "label": "Inspect result",
+            "type": "artifact"
+          }
+        ],
+        "id": "main",
+        "type": "stack"
+      },
+      "schemaVersion": "actions.canvas-spec/v1",
+      "title": "Independent generated word counter",
+      "visibility": [
+        "model",
+        "app"
+      ]
+    },
+    "testStatus": "passed",
+    "validationStatus": "passed"
+  },
+  "isError": false,
+  "resultType": "complete"
+}

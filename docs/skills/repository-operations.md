@@ -5786,3 +5786,12 @@ When selecting an installed consumer interpreter, invoke its absolute Python fro
 the prepared environment or a subprocess wrapper; RCC `task script` may resolve
 a supplied Python executable to the toolchain Python. Always assert import origin
 before crediting installed acceptance.
+
+A generated Canvas form/status does not imply an artifact inspection control.
+Author an explicit `artifact` semantic node with the exact bindingId and label
+when the UI must expose produced bytes. Revise the public semantic spec while
+retaining explicit Package bindings, activate the new revision, and separately
+authorize that exact Deployment revision before execution. A successful Run
+without the node is not a failed artifact provider. Official-host browser
+acceptance should click the authored control and verify returned bytes rather
+than infer it from terminal status alone.

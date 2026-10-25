@@ -13,6 +13,15 @@ source f332a828; failed prior wheels and harness steps remain recorded. Ordinary
 Knowledge host/Task/generated consumption and the remaining full matrix are
 open; this does not change the release NO-GO or owner gates.
 
+[Official reference-host acceptance](evidence/actions-next-327/recovery-a38/official-host/README.md)
+also passes for a second independent generated word-counter app: real rendered
+click -> RCC -> public scoped artifact3, with explicit UI revision and wide/narrow
+captures. This is installed f332a828 proof, not authenticated ChatGPT. The subsequent
+[Knowledge operator slice](evidence/actions-next-327/recovery-a38/knowledge-operator/README.md)
+passes56 source cases with no skips and preserves old request fingerprints; it
+adds explicit owner grants/definition setup, not ordinary Knowledge consumption.
+
+
 # Actions Next release checkpoint
 
 ## Fresh executor ownership handoff and joined continuation
