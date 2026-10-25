@@ -5168,3 +5168,9 @@ does not include filesystem artifacts. Exclude connection contexts and database
 dumps from public evidence; retain digests and bounded readback receipts. This
 same-version service-composition test does not establish ordinary CLI PostgreSQL
 configuration, active-effect recovery, cache-loss recovery or schema downgrade.
+
+The full invoice verifier also runs the portable Runtime suite, whose JUnit
+count includes skipped cases. Report passed cases separately from total cases
+and classify each skip by reason. Its generic RCC opt-ins remain disabled even
+when worker/compiler/generated switches are enabled; cite a separate exact-source
+actual generic run rather than treating those skips as covered implicitly.

@@ -1029,3 +1029,13 @@ unchanged and the owned database container was removed. This is synthetic
 common-service composition, not ordinary CLI PostgreSQL configuration. Active
 job/effect recovery, cache-loss recovery and cross-version common downgrade
 remain open. Optional celld #326 remains NO-GO pending explicit owner decision.
+
+## Frozen a27 full source verification
+
+[Exact full-source receipt](evidence/actions-next-327/recovery-a27/full-source/receipt.json)
+passes all eight required stages with zero skips (158/299/168/129/134/22/52/72).
+Portable Runtime passes2634 with21 classified skips and290 deselected. Eight
+skipped generic RCC cases passed separately; the worker stage covers the pinned
+task-input skip. Windows/publication and the explicit artifact vertical remain
+classified separately. This receipt belongs to source4ef00f0a, not the subsequent
+unintegrated a28 proposals. Full owner product and operator gates remain open.
