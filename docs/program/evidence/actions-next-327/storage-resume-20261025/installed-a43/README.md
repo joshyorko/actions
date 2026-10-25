@@ -23,3 +23,5 @@ CycloneDX7.5.0 validated SBOM generation and declared-edge reconciliation pass. 
 All helper canonical documentation proposals are integrated: repository-operations.md adds installed logging probe requirements, optional SBOM group and typed owned docs guidance; work-items.md records the measured SQL/provider boundary and explicitly leaves claimed Robot unimplemented. Upstream disposition: none.
 
 Corrected direct Canvas selector is reviewed and passes38 SQLite/PostgreSQL regressions without skips. Original forged-profile test used an invalid missing profile and failed its expected-error assertion; corrected fixture uses a valid differently pinned profile. Runtime configured typecheck passes630files. Corrected installed acceptance requires a44, not mutation of a43.
+
+Configured Runtime lint now passes559files after applying package Isort to the test imports; the prior Ruff-only ordering failure is retained. Runtime typecheck passes630files. These static gates do not replace the pending full suite or installed a44 gate.
