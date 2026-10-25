@@ -1018,3 +1018,14 @@ stop only the local/identity-dependent action pending explicit approval.
 Cloud engineering continues; this handoff does not wait for celld or full release.
 No Dakota task, installation, live credentials, remote configuration or new
 identity/tunnel is authorized before that approval.
+
+## Installed common PostgreSQL restore
+
+The [a27 PostgreSQL restore receipt](evidence/actions-next-327/recovery-a27/common-postgres-restore/receipt.json)
+passes one actual generated RCC consumer, quiescent SQL snapshot plus immutable
+filesystem-object restore, and two fresh installed-consumer readbacks of exact
+snapshot/claim/Run/Attempt and four artifact bytes/digests. Original objects are
+unchanged and the owned database container was removed. This is synthetic
+common-service composition, not ordinary CLI PostgreSQL configuration. Active
+job/effect recovery, cache-loss recovery and cross-version common downgrade
+remain open. Optional celld #326 remains NO-GO pending explicit owner decision.

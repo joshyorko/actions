@@ -5158,3 +5158,13 @@ attachment fixtures before downgrade readback so absolute paths cannot silently
 read the original datadir. Successful legacy queue readback is format-specific;
 a nonzero exit alone is not safe-refusal evidence. Common SQL, object storage,
 journals, Run/effect lineage and caches need separate coordinated restore gates.
+
+For common PostgreSQL restore qualification, quiesce owned writers and pin both
+the SQL schema dump and the separate immutable object inventory before copying.
+Restore into an isolated database and verify exact execution snapshots,
+historical claims, Run/Attempt lineage and artifact bytes from fresh installed
+consumer processes. Verify original object bytes are unchanged. A SQL dump alone
+does not include filesystem artifacts. Exclude connection contexts and database
+dumps from public evidence; retain digests and bounded readback receipts. This
+same-version service-composition test does not establish ordinary CLI PostgreSQL
+configuration, active-effect recovery, cache-loss recovery or schema downgrade.
