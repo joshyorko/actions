@@ -6739,3 +6739,16 @@ Manifest compatibility does not establish client-protocol support. Record whethe
 an independent client exercised synchronous invocation or Task lifecycle methods.
 An official SDK that rejects an extension method before transport remains an
 unqualified client for that method; Python results cannot substitute for it.
+
+A delegated artifact-only Runtime build returns a wheel without claiming installed
+qualification. Build from a detached exact source/tree with repository tasks and
+an already prepared target toolchain; bind generated frontend, OAuth and RCC
+inputs to the wheel. Reuse unchanged Core and Work Items bytes at the integration
+owner instead of rebuilding immutable versions. Return a supported Library object
+identity and actual byte hashes; target-local paths, caches and trust do not transfer.
+
+A client phase receipt written after client.close is execution evidence, not
+process-lifetime proof. Require the supervised child to exit successfully before
+restart or aggregate acceptance. Diagnose residual resources with type/count-only
+instrumentation, preserve timeouts as failures, and close only resources owned by
+the adapter; never force a successful exit to conceal unknown handles.

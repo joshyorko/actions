@@ -1,0 +1,9 @@
+{
+  "status": "SOURCE_REVIEW_CLEAR",
+  "execution_by_reviewer": "NOT_RUN",
+  "harness_sha256": "31346584e411451798f198d0fc68eebeaa01e66c8ab981fcc05d031aa5d34303",
+  "candidate_sha256": "6592d68b18d7a520f1f8ec096d8145a755d444e0b2f92471b187bd00942018b1",
+  "compiler_python_sha256_verified": "877c9e50cbb4cfd4a03aa7859224d7ff3876ff163a1e344a46dfd7a549e99cce",
+  "inert_test_log_sha256": "44825f24cdbd1bcc73113cc0e880161c602c66296af8171cc29ead1360391377",
+  "reported_inert_tests": "4 passed; reviewer read retained log, did not rerun"
+}

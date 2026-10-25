@@ -477,8 +477,18 @@ async def _community_expose_lifespan(
             log.exception("Error listing subprocesses.")
 
         for child in children_processes:
+            try:
+                child_name = child.name()
+            except psutil.NoSuchProcess:
+                # Do not recapture a disappeared child's numeric PID for killing.
+                continue
+            except Exception:
+                log.exception("Error reading subprocess metadata: %s", child.pid)
+                continue
             log.info(
-                f"Killing sub-process when exiting action server: {child.name()} (pid: {child.pid})"
+                "Killing sub-process when exiting action server: %s (pid: %s)",
+                child_name,
+                child.pid,
             )
             try:
                 kill_process_and_subprocesses(child.pid)

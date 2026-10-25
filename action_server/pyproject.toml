@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "actions-runtime"
-version = "1.1.0a51"
+version = "1.1.0a52"
 description = "Actions Runtime — serve Python actions through HTTP and MCP"
 authors = ["Joshua Yorko"]
 maintainers = ["Joshua Yorko"]

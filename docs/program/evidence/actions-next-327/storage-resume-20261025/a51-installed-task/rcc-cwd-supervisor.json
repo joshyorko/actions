@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "supervisor_pid": 194716,
+  "child_exit_code": 0,
+  "deadline_exceeded": false,
+  "cleanup_errors": [],
+  "live_descendants": [],
+  "log_path": "/workspace/recovery327/a51-rcc-observer-probe/supervisor/supervisor.jsonl",
+  "stdout_bytes": 0,
+  "stderr_bytes": 0,
+  "output_policy": "Child output discarded; lifecycle metadata only",
+  "limits": {
+    "seconds": 1800,
+    "free_bytes": 10737418240,
+    "combined_child_output_bytes": 16777216,
+    "outer_log_bytes": 16777216
+  },
+  "termination_requested": false,
+  "elapsed_seconds": 12.693
+}

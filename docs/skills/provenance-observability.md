@@ -452,3 +452,17 @@ error payloads. Outer-group-only diagnostics can conceal the failing operation.
 A reviewed source correction requires a new installed candidate; keep the earlier
 failed receipt unchanged. Identical Core bytes can retain their existing
 same-target compiler proof without transferring trust.
+
+Treat disappearing child metadata during shutdown as an expected enumeration
+race: skip the vanished captured child without recapturing its numeric PID for
+signaling, continue other owned children, and preserve unexpected metadata and
+watcher errors. This narrow logging-race correction does not turn best-effort
+legacy process cleanup into proof of descendant termination.
+
+RCC wrapper and Python child working directories can differ: the wrapper uses
+the source directory while the execution Python uses its holotree materialization.
+A cancellation observer must bind the exact child program and arguments, source,
+ancestry, process group and executable bytes; source-cwd equality alone can miss
+a live execution. A failed observer before cancellation is not a cancellation
+result. Prove early child termination while Runtime remains alive, with a
+bounded deadline shorter than the fixture's natural completion.

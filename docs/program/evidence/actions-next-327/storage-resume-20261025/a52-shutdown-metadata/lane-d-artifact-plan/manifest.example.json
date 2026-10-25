@@ -1,0 +1,13 @@
+{
+  "schema": "actions.runtime-artifact-build/v1",
+  "execution_authorized": false,
+  "source_sha": "REQUIRED_PUSHED_A52_COMMIT",
+  "source_tree": "REQUIRED_EXACT_TREE",
+  "runtime_version": "1.1.0a52",
+  "checkout": "REQUIRED_TARGET_CHECKOUT",
+  "output_root": "REQUIRED_FRESH_TARGET_OUTPUT",
+  "prepared_python": "REQUIRED_EXISTING_TARGET_TOOLCHAIN_PYTHON",
+  "rcc": "REQUIRED_VERIFIED_TARGET_RCC",
+  "rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+  "scope": "Runtime wheel artifact only; installed qualification NOT_RUN"
+}

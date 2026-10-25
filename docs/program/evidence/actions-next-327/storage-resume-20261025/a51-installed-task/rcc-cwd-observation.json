@@ -1,0 +1,29 @@
+{
+  "source": "/workspace/recovery327/a51-rcc-observer-probe/source",
+  "wrapper_pid": 194718,
+  "returncode": 0,
+  "observed": [
+    {
+      "pid": 194718,
+      "birth": 1792971396.79,
+      "exe": "/workspace/recovery327/a51/consumer/lib/python3.12/site-packages/actions/server/bin/rcc-18.19.3",
+      "cwd": "/workspace/recovery327/a51-rcc-observer-probe/source",
+      "pgid": 194718
+    },
+    {
+      "pid": 194741,
+      "birth": 1792971404.05,
+      "exe": "/workspace/recovery327/robot-compiler-a8/robocorp/holotree/c2fd1aa_5a1fac3_c374f410/bin/python3.12",
+      "cwd": "/workspace/recovery327/robot-compiler-a8/robocorp/holotree/c2fd1aa_5a1fac3_c374f410",
+      "pgid": 194718
+    },
+    {
+      "pid": 194744,
+      "birth": 1792971404.21,
+      "exe": "/workspace/recovery327/robot-compiler-a8/robocorp/holotree/c2fd1aa_5a1fac3_c374f410/bin/python3.12",
+      "cwd": "/workspace/recovery327/robot-compiler-a8/robocorp/holotree/c2fd1aa_5a1fac3_c374f410",
+      "pgid": 194718
+    }
+  ],
+  "scope": "bounded RCC-only observation probe, not Task/cancellation acceptance"
+}
