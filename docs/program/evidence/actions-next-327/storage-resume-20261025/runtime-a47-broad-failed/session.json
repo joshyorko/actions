@@ -1,0 +1,44 @@
+{
+  "abort_reason": null,
+  "excluded_gates": [
+    "browser_origin_acceptance",
+    "native_artifact_test"
+  ],
+  "initial_free_bytes": 14122590208,
+  "owned_postgres_id": "54dc99f4c21c72a1b41dfebdfd298abae33fb381ede953620d653b76aaa07aff",
+  "owned_postgres_stopped_removed": true,
+  "phase_counts": {
+    "call:passed": 2136,
+    "call:skipped": 157,
+    "setup:failed": 5,
+    "setup:passed": 2293,
+    "setup:skipped": 11,
+    "teardown:passed": 2309
+  },
+  "pytest_returncode": 10,
+  "pytest_session_finish": {
+    "counts": {
+      "call:passed": 2136,
+      "call:skipped": 157,
+      "setup:failed": 5,
+      "setup:passed": 2293,
+      "setup:skipped": 11,
+      "teardown:passed": 2309
+    },
+    "event": "session_finish",
+    "exitstatus": 1,
+    "time": 1792961374.2747161
+  },
+  "source_after": {
+    "source_sha": "c9b0860011483bb50354f3b31239d69b0c845fa2",
+    "source_tests_fingerprint": "38fb235413615c206e24cb37f55bc11dd46bcaf081cd06cc291536ffb4a86ed4",
+    "worktree_clean": true
+  },
+  "source_before": {
+    "source_sha": "c9b0860011483bb50354f3b31239d69b0c845fa2",
+    "source_tests_fingerprint": "38fb235413615c206e24cb37f55bc11dd46bcaf081cd06cc291536ffb4a86ed4",
+    "worktree_clean": true
+  },
+  "source_sha": "c9b0860011483bb50354f3b31239d69b0c845fa2",
+  "status": "FAILED"
+}

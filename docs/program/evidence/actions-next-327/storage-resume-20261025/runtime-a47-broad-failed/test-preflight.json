@@ -1,0 +1,19 @@
+{
+  "source_sha": "c9b0860011483bb50354f3b31239d69b0c845fa2",
+  "expected_source_sha": "c9b0860011483bb50354f3b31239d69b0c845fa2",
+  "pyproject_version": "1.1.0a47",
+  "module_version": "1.1.0a47",
+  "versions": {
+    "actions-runtime": "1.1.0a47",
+    "actions-core": "1.1.0a7",
+    "actions-work-items": "0.5.0a2",
+    "pytest": "8.4.2",
+    "mcp": "2.0.0"
+  },
+  "runtime_origin": "/workspace/actions/action_server/src/actions/server/__init__.py",
+  "python": "/workspace/actions/action_server/.venv/bin/python",
+  "source_tests_fingerprint": "38fb235413615c206e24cb37f55bc11dd46bcaf081cd06cc291536ffb4a86ed4",
+  "worktree_clean": true,
+  "status": "PASS",
+  "plugin_sha256": "cb8c4bc2bea1e3cb4a3850d44ecef77b0ecf95bb8b8b982f80b2d01a591e819c"
+}
