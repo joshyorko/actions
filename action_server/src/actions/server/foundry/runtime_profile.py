@@ -83,7 +83,10 @@ class RuntimeDeploymentSelection:
         authorization: SqlFoundryAuthorization,
         profile: RuntimeExecutionProfile,
         provider_compatibility: ProviderCompatibilityPort | None = None,
+        *,
+        allow_direct_robot: bool = False,
     ):
+        self.allow_direct_robot = allow_direct_robot
         self.provider_compatibility = provider_compatibility
         self.registry, self.authorization, self.profile = (
             registry,
@@ -138,8 +141,22 @@ class RuntimeDeploymentSelection:
                 plan = declaration.runtime_plans[0]
                 self.authorization.require_reference(actor, plan, "deploy")
                 runtime = self.registry.get_runtime_plan(plan)
-                if runtime is None or runtime.runtime_kind != "rcc":
-                    raise ValueError("pinned native RCC plan required")
+                if runtime is None:
+                    raise ValueError("declared runtime plan required")
+                if runtime.runtime_kind != "rcc":
+                    from actions.server.foundry.package_registry import (
+                        RegistryRobotSelection,
+                    )
+
+                    if not (
+                        self.allow_direct_robot
+                        and runtime.runtime_kind == "direct"
+                        and isinstance(
+                            self.registry.selection_for(capability, plan),
+                            RegistryRobotSelection,
+                        )
+                    ):
+                        raise ValueError("explicit configured runtime plan required")
                 policies.append(
                     CapabilityPlanPolicy(
                         capability=capability,

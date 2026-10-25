@@ -90,6 +90,7 @@ from actions.server.run_outputs.types import (
 )
 
 if TYPE_CHECKING:
+    from actions.server.foundry.robot_authoring import RobotAuthoringEvidence
     from actions.server.foundry.robot_execution import (
         DirectRobotPreparation,
         RccRobotPreparation,
@@ -102,6 +103,7 @@ if TYPE_CHECKING:
         RobotAdmissionEvidence,
     )
     from actions.server.foundry.robot_package_builder import RobotPackageRequest
+    from actions.server.foundry.robot_validation import RobotValidationResult
 
 _ROBOT_SCHEMA = "actions.local-robot-package-admission/v1"
 
@@ -205,6 +207,7 @@ class FoundryPackageRegistry:
         executor: PackageBuildExecutor,
         admission: TrustedDeveloperExecutionAdmission | None = None,
         execution_root: Path | None = None,
+        robot_validation_root: Path | None = None,
     ):
         if db.verbose:
             raise ValueError("Package registry rejects raw SQL bind diagnostics")
@@ -221,6 +224,7 @@ class FoundryPackageRegistry:
         self._pending: OrderedDict[int, _Pending] = OrderedDict()
         self._lock = RLock()
         self._robot_pending: OrderedDict[int, tuple] = OrderedDict()
+        self._robot_validation_root = robot_validation_root
 
     def _require(
         self, actor: Actor, workspace: WorkspaceId, application: DeploymentId
@@ -271,6 +275,18 @@ class FoundryPackageRegistry:
             != package
         ):
             raise AccessDenied("Robot evidence reconstruction differs")
+        validation = None
+        validation_preimage = None
+        if self._robot_validation_root is not None:
+            from actions.server.foundry.robot_validation import RobotValidator
+            from actions.server.foundry.robot_validation_store import preimage
+
+            validation = RobotValidator(
+                self._robot_validation_root, preparation
+            ).validate(
+                package, check_live=lambda: self._require(actor, workspace, application)
+            )
+            validation_preimage = preimage(validation)
         evidence = RobotAdmissionEvidence(package)
         self._require(actor, workspace, application)
         with self._lock:
@@ -284,6 +300,8 @@ class FoundryPackageRegistry:
                 preparation,
                 package.manifest_json,
                 _hash(package.source_archive),
+                validation,
+                validation_preimage,
             )
         return evidence
 
@@ -309,7 +327,27 @@ class FoundryPackageRegistry:
             or pending[1:3] != (actor, workspace)
         ):
             raise AccessDenied("Robot Package requires exact authorized host outcome")
-        _, _, _, application, preparation, manifest, source_digest = pending
+        (
+            _,
+            _,
+            _,
+            application,
+            preparation,
+            manifest,
+            source_digest,
+            validation,
+            validation_preimage,
+        ) = pending
+        from actions.server.foundry.robot_validation import verify_robot_validation
+        from actions.server.foundry.robot_validation_store import (
+            preimage,
+            stage_validation,
+        )
+
+        if validation is not None:
+            if preimage(validation) != validation_preimage:
+                raise AccessDenied("issued Robot validation changed")
+            verify_robot_validation(evidence.package, validation)
         self._require(actor, workspace, application)
         package = evidence.package
         if (
@@ -327,7 +365,9 @@ class FoundryPackageRegistry:
             existing = self._rows(ref)
         if existing:
             self._authorization.require_reference(actor, ref, "deploy")
-            self.load_verified(ref)
+            self._check_robot_replay(ref, validation)
+            self._require(actor, workspace, application)
+            self._authorization.require_reference(actor, ref, "deploy")
             return ref
         staged = self._provider.stage(
             package.source_archive[i : i + 65536]
@@ -337,75 +377,99 @@ class FoundryPackageRegistry:
             package.source_archive
         ):
             raise AccessDenied("Robot source stage differs")
+        validation_carrier, diagnostic_stages = None, []
+        if validation is not None:
+            try:
+                validation_carrier, diagnostic_stages = stage_validation(
+                    self._provider, package, validation
+                )
+            except BaseException:
+                self._provider.discard(staged)
+                raise
+        data = {
+            "schemaVersion": _ROBOT_SCHEMA,
+            "source": staged.receipt.model_dump(mode="json"),
+        }
+        if validation_carrier is not None:
+            data["validation"] = validation_carrier
         inserted = False
-        with self._db.connect(), _transaction(self._db):
-            FoundryRepository(self._db)._lock_workspace(workspace)
-            self._require(actor, workspace, application)
-            if self._rows(ref):
-                self._authorization.require_reference(actor, ref, "deploy")
-                self.load_verified(ref)
-            else:
-                self._db.insert(
-                    FoundryPackageRevision(
-                        str(uuid5(ref.package_id.root, ref.revision_id.root)),
-                        str(workspace.root),
-                        str(ref.package_id.root),
-                        ref.revision_id.root,
-                        manifest.decode(),
-                        source_digest,
-                        package.robot.source.inventory.canonical_json.decode(),
-                        _json(
-                            {
-                                "schemaVersion": _ROBOT_SCHEMA,
-                                "source": staged.receipt.model_dump(mode="json"),
-                            }
-                        ),
-                    )
-                )
-                request = FoundryRequest(
-                    str(uuid4()),
-                    str(workspace.root),
-                    actor.principal_id,
-                    "package.admit",
-                    ref.revision_id.root,
-                    _hash(manifest),
-                    ref.model_dump_json(),
-                )
-                self._db.insert(request)
-                self._db.insert(
-                    FoundryAudit(
-                        str(uuid4()),
-                        str(workspace.root),
-                        str(application.root),
-                        actor.principal_id,
-                        "package.admit",
-                        request.id,
-                        "",
-                        ref.revision_id.root,
-                        str(time.time_ns() // 1000000),
-                    )
-                )
-                for reference in (
-                    ref,
-                    CapabilityRef(
-                        package_revision=ref,
-                        capability_id=CapabilityId(package.capability_id),
-                    ),
-                    self._plan_ref(ref, package),
+        committed = False
+        try:
+            with self._db.connect(), _transaction(self._db):
+                FoundryRepository(self._db)._lock_workspace(workspace)
+                self._require(actor, workspace, application)
+                if (
+                    validation is not None
+                    and preimage(validation) != validation_preimage
                 ):
+                    raise AccessDenied("issued Robot validation changed")
+                if self._rows(ref):
+                    self._authorization.require_reference(actor, ref, "deploy")
+                    # Validate retained bytes after releasing the SQL lock.
+                else:
                     self._db.insert(
-                        FoundryAccessGrant(
-                            str(uuid4()),
+                        FoundryPackageRevision(
+                            str(uuid5(ref.package_id.root, ref.revision_id.root)),
                             str(workspace.root),
-                            actor.principal_id,
-                            "reference",
-                            reference_grant_subject(reference),
-                            '["deploy","execute"]',
+                            str(ref.package_id.root),
+                            ref.revision_id.root,
+                            manifest.decode(),
+                            source_digest,
+                            package.robot.source.inventory.canonical_json.decode(),
+                            _json(data),
                         )
                     )
-                inserted = True
+                    request = FoundryRequest(
+                        str(uuid4()),
+                        str(workspace.root),
+                        actor.principal_id,
+                        "package.admit",
+                        ref.revision_id.root,
+                        _hash(manifest),
+                        ref.model_dump_json(),
+                    )
+                    self._db.insert(request)
+                    self._db.insert(
+                        FoundryAudit(
+                            str(uuid4()),
+                            str(workspace.root),
+                            str(application.root),
+                            actor.principal_id,
+                            "package.admit",
+                            request.id,
+                            "",
+                            ref.revision_id.root,
+                            str(time.time_ns() // 1000000),
+                        )
+                    )
+                    for reference in (
+                        ref,
+                        CapabilityRef(
+                            package_revision=ref,
+                            capability_id=CapabilityId(package.capability_id),
+                        ),
+                        self._plan_ref(ref, package),
+                    ):
+                        self._db.insert(
+                            FoundryAccessGrant(
+                                str(uuid4()),
+                                str(workspace.root),
+                                actor.principal_id,
+                                "reference",
+                                reference_grant_subject(reference),
+                                '["deploy","execute"]',
+                            )
+                        )
+                    inserted = True
+            committed = True
+        finally:
+            if not inserted or not committed:
+                for item in [staged, *diagnostic_stages]:
+                    self._provider.discard(item)
         if not inserted:
-            self._provider.discard(staged)
+            self._check_robot_replay(ref, validation)
+            self._require(actor, workspace, application)
+            self._authorization.require_reference(actor, ref, "deploy")
         return ref
 
     def _load_robot_row(self, ref, row, data) -> AdmittedRobotPackage:
@@ -415,7 +479,11 @@ class FoundryPackageRegistry:
         )
 
         if (
-            set(data) != {"schemaVersion", "source"}
+            set(data)
+            not in (
+                {"schemaVersion", "source"},
+                {"schemaVersion", "source", "validation"},
+            )
             or _json(data) != row.build_evidence_json
         ):
             raise ValueError("closed Robot admission evidence required")
@@ -433,7 +501,61 @@ class FoundryPackageRegistry:
             != row.source_inventory_json
         ):
             raise ValueError("Robot scoped source inventory differs")
+        if "validation" in data:
+            from actions.server.foundry.robot_validation_store import load_validation
+
+            load_validation(self._provider, package, data["validation"])
         return package
+
+    def _check_robot_replay(self, ref, validation):
+        from actions.server.foundry.robot_validation_store import preimage
+
+        retained = self.robot_validation_evidence(ref)
+        if (retained is None) != (validation is None) or (
+            retained is not None
+            and preimage(retained) != preimage(validation)
+            and not (retained.ready and validation.ready)
+        ):
+            raise AccessDenied("Robot validation differs; new source revision required")
+
+    def robot_validation_evidence(
+        self, ref: PackageRevisionRef
+    ) -> RobotValidationResult | None:
+        from actions.server.foundry.robot_validation_store import load_validation
+
+        ref = PackageRevisionRef.model_validate(ref)
+        try:
+            with self._db.connect():
+                rows = self._rows(ref)
+            if len(rows) != 1:
+                raise ValueError("missing Robot Package")
+            row = rows[0]
+            if any(
+                len(value.encode()) > 512 * 1024
+                for value in (
+                    row.build_evidence_json,
+                    row.manifest_json,
+                    row.source_inventory_json,
+                )
+            ):
+                raise ValueError("Robot metadata bound exceeded")
+            data = json.loads(row.build_evidence_json)
+            if data.get("schemaVersion") != _ROBOT_SCHEMA:
+                raise ValueError("not a Robot Package")
+            package = self._load_robot_row(ref, row, data)
+            result = (
+                load_validation(self._provider, package, data["validation"])
+                if "validation" in data
+                else None
+            )
+            with self._db.connect():
+                if self._rows(ref) != rows:
+                    raise ValueError("Robot retained metadata changed")
+            return result
+        except Exception:
+            raise AccessDenied(
+                "Robot validation unavailable or integrity verification failed"
+            ) from None
 
     def robot_admission_evidence(
         self, ref: PackageRevisionRef
@@ -959,13 +1081,22 @@ class FoundryPackageRegistry:
     def require_revision(self, ref: PackageRevisionRef) -> None:
         self.load_verified(ref)
 
-    def evidence(self, ref: PackageRevisionRef) -> CompilationEvidence:
+    def evidence(
+        self, ref: PackageRevisionRef
+    ) -> CompilationEvidence | RobotAuthoringEvidence:
         from actions.server.foundry.robot_package_admission import AdmittedRobotPackage
 
         loaded = self.load_verified(ref)
         if isinstance(loaded, AdmittedRobotPackage):
-            raise AccessDenied(
-                "Robot measured evidence is not Python compilation readiness"
+            from actions.server.foundry.robot_authoring import project_robot_evidence
+            from actions.server.foundry.robot_package_admission import (
+                RobotAdmissionEvidence,
+            )
+
+            return project_robot_evidence(
+                RobotAdmissionEvidence(loaded),
+                ref,
+                self.robot_validation_evidence(ref),
             )
         with self._db.connect():
             data = json.loads(self._rows(ref)[0].build_evidence_json)

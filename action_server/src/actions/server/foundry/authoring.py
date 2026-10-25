@@ -15,8 +15,6 @@ import re
 from collections.abc import Mapping, Sequence
 from typing import Any
 
-from pydantic import JsonValue, TypeAdapter, ValidationError
-
 from actions.server.deployments.canonical import canonicalize_json
 from actions.server.deployments.foundry_values import (
     CanvasSpecDocument,
@@ -31,7 +29,10 @@ from actions.server.deployments.ids import (
     WorkspaceId,
 )
 from actions.server.deployments.logical_bindings import LogicalBindingRequirement
-from actions.server.deployments.source_manifest import validate_proposed_inventory
+from actions.server.deployments.source_manifest import (
+    SuppliedSourceEntry,
+    validate_proposed_inventory,
+)
 from actions.server.foundry.authoring_bindings import (
     DataBindingChoice,
     parse_data_bindings,
@@ -67,6 +68,14 @@ from actions.server.foundry.authoring_work_items import (
     select_queue_policies,
 )
 from actions.server.foundry.mcp import CanvasCaller, CanvasPort, CanvasReply
+from actions.server.foundry.robot_authoring import (
+    RobotAuthoringAdapter,
+    RobotAuthoringEvidence,
+    parse_robot_backend,
+    robot_backend_schema,
+)
+from actions.server.foundry.robot_package_builder import RobotPackageRequest
+from pydantic import JsonValue, TypeAdapter, ValidationError
 
 _JSON_OBJECT = TypeAdapter(dict[str, JsonValue])
 _ID = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
@@ -181,6 +190,8 @@ _BACKEND: dict[str, JsonValue] = {
     "required": ["logicalName", "files"],
     "additionalProperties": False,
 }
+
+_BACKEND = {"oneOf": [_BACKEND, robot_backend_schema()]}
 
 _QUEUE_POLICIES: dict[str, JsonValue] = {
     "type": "array",
@@ -370,6 +381,19 @@ def _request_fingerprint(value: Mapping[str, JsonValue]) -> str:
     return "sha256:" + hashlib.sha256(domain).hexdigest()
 
 
+def _backend_evidence_result(
+    evidence: CompilationEvidence | RobotAuthoringEvidence | None,
+) -> dict[str, JsonValue]:
+    if isinstance(evidence, RobotAuthoringEvidence):
+        return evidence.public_result()
+    return {
+        "compilationStatus": evidence.status if evidence else "not-required",
+        "buildStatus": evidence.build_status if evidence else "not-required",
+        "importStatus": evidence.import_status if evidence else "not-required",
+        "testStatus": evidence.test_status if evidence else "not-required",
+    }
+
+
 def _revision_result(revision: AuthoringRevision, *, include_spec: bool) -> CanvasReply:
     if not isinstance(revision, AuthoringRevision):
         raise AuthoringError("Foundry authority returned an invalid revision")
@@ -380,18 +404,7 @@ def _revision_result(revision: AuthoringRevision, *, include_spec: bool) -> Canv
         "revisionId": ref.revision_id.root,
         "active": revision.active,
         "validationStatus": revision.validation_status,
-        "compilationStatus": revision.compilation.status
-        if revision.compilation
-        else "not-required",
-        "buildStatus": revision.compilation.build_status
-        if revision.compilation
-        else "not-required",
-        "importStatus": revision.compilation.import_status
-        if revision.compilation
-        else "not-required",
-        "testStatus": revision.compilation.test_status
-        if revision.compilation
-        else "not-required",
+        **_backend_evidence_result(revision.compilation),
     }
     if include_spec:
         # The authenticated model may revise this app's public semantic
@@ -452,6 +465,8 @@ class FoundryAuthoring(CanvasPort):
         compiler: PackageCompilerPort,
         packages: PackageAdmissionPort,
         deployment_selection: DeploymentSelectionPort,
+        *,
+        robot_authoring: RobotAuthoringAdapter | None = None,
     ) -> None:
         if any(
             port is None
@@ -469,6 +484,7 @@ class FoundryAuthoring(CanvasPort):
         self.compiler = compiler
         self.packages = packages
         self.deployment_selection = deployment_selection
+        self.robot_authoring = robot_authoring
 
     async def call(
         self, caller: CanvasCaller, name: str, arguments: dict[str, JsonValue]
@@ -670,7 +686,11 @@ class FoundryAuthoring(CanvasPort):
             if not isinstance(title, str) or not isinstance(binding_ids, list):
                 raise AuthoringValidationError("CanvasSpec summary fields are invalid")
             logical_preview = bool(
-                data_bindings or (backend and backend.logical_requirements)
+                data_bindings
+                or (
+                    isinstance(backend, GeneratedBackend)
+                    and backend.logical_requirements
+                )
             )
             return CanvasReply(
                 summary=(
@@ -809,9 +829,21 @@ class FoundryAuthoring(CanvasPort):
                 raise AuthoringConflict("Canvas edit base revision is stale")
 
             compiled_package: CompiledPackage | None = None
-            compilation: CompilationEvidence | None = None
+            compilation: CompilationEvidence | RobotAuthoringEvidence | None = None
             package_ref: PackageRevisionRef | None = None
-            if backend is not None:
+            if isinstance(backend, RobotPackageRequest):
+                if self.robot_authoring is None:
+                    raise AuthoringAccessDenied(
+                        "Robot authoring host is not configured"
+                    )
+                result = await asyncio.to_thread(
+                    self.robot_authoring.prepare_and_admit,
+                    backend,
+                    caller=caller,
+                    application_id=application_id,
+                )
+                package_ref, compilation = result.package_revision, result.evidence
+            elif backend is not None:
                 await asyncio.to_thread(
                     self.authorization.require,
                     caller,
@@ -1244,7 +1276,9 @@ class FoundryAuthoring(CanvasPort):
         return accepted
 
 
-def _parse_backend(value: object) -> GeneratedBackend:
+def _parse_backend(value: object) -> GeneratedBackend | RobotPackageRequest:
+    if isinstance(value, dict) and value.get("kind") == "robot":
+        return parse_robot_backend(value)
     try:
         encoded = json.dumps(
             value,
@@ -1257,11 +1291,18 @@ def _parse_backend(value: object) -> GeneratedBackend:
         raise AuthoringValidationError("Generated backend source is invalid") from exc
 
 
-def _validate_source_entries(backend: GeneratedBackend) -> None:
+def _validate_source_entries(backend: GeneratedBackend | RobotPackageRequest) -> None:
     """Apply the common portable-path/inventory policy to explicit source bytes."""
     try:
         validate_proposed_inventory(
-            backend.entries(),
+            (
+                tuple(
+                    SuppliedSourceEntry(f.path, "file", f.content.encode(), 0o600)
+                    for f in backend.files
+                )
+                if isinstance(backend, RobotPackageRequest)
+                else backend.entries()
+            ),
             protected_input_names=(),
         )
     except (TypeError, ValueError) as exc:
@@ -1273,7 +1314,7 @@ def _validate_source_entries(backend: GeneratedBackend) -> None:
 def _validate_preview_bindings(
     document: Mapping[str, JsonValue],
     targets: Sequence[BindingTarget],
-    backend: GeneratedBackend | None,
+    backend: GeneratedBackend | RobotPackageRequest | None,
     workspace_id: WorkspaceId,
 ) -> None:
     declared = document.get("bindingIds")
@@ -1361,26 +1402,7 @@ def _inspection_result(
                 "spec": public_spec_document(revision.spec_json),
                 "active": revision.active,
                 "validationStatus": revision.validation_status,
-                "compilationStatus": (
-                    revision.compilation.status
-                    if revision.compilation
-                    else "not-required"
-                ),
-                "buildStatus": (
-                    revision.compilation.build_status
-                    if revision.compilation
-                    else "not-required"
-                ),
-                "importStatus": (
-                    revision.compilation.import_status
-                    if revision.compilation
-                    else "not-required"
-                ),
-                "testStatus": (
-                    revision.compilation.test_status
-                    if revision.compilation
-                    else "not-required"
-                ),
+                **_backend_evidence_result(revision.compilation),
             }
         )
     model: dict[str, JsonValue] = {

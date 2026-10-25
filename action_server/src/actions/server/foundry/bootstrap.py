@@ -235,6 +235,25 @@ def create_runtime_canvas(
         profile = read_runtime_profile(
             os.environ.get("ACTIONS_FOUNDRY_EXECUTION_PROFILE")
         )
+        from actions.server.foundry.robot_runtime_profile import (
+            RuntimeCapabilityRunner,
+            prepare_robot_runtimes,
+            read_robot_profile,
+        )
+
+        robot_profile = read_robot_profile(
+            os.environ.get("ACTIONS_FOUNDRY_ROBOT_PROFILE")
+        )
+        if robot_profile is not None and profile is None:
+            raise ValueError(
+                "Robot profile requires the existing authorized execution profile"
+            )
+        robot_direct = robot_rcc = None
+        if robot_profile is not None:
+            robot_direct, robot_rcc = prepare_robot_runtimes(
+                robot_profile,
+                Path(__file__).resolve().parents[1] / "bin" / "rcc-18.19.3",
+            )
         task_policy_path = os.environ.get("ACTIONS_FOUNDRY_TASK_POLICY")
         if task_policy_path is not None and profile is None:
             raise ValueError("Task policy requires an explicit RCC execution profile")
@@ -254,6 +273,9 @@ def create_runtime_canvas(
             if profile is not None
             else None,
             execution_root=paths.cache_dir / "compile" if profile is not None else None,
+            robot_validation_root=paths.cache_dir / "robot-validation"
+            if robot_profile is not None
+            else None,
         )
         repository = FoundryRepository(db)
         deployments = FoundryDeploymentService(repository, registry, auth, registry)
@@ -267,14 +289,28 @@ def create_runtime_canvas(
         provider_compatibility = load_configured_provider_registry(
             db, paths.data_dir, provider
         )
+        from actions.server.foundry.robot_authoring import RobotAuthoringAdapter
+
+        robot_authoring = (
+            RobotAuthoringAdapter(registry, auth, direct=robot_direct, rcc=robot_rcc)
+            if robot_profile is not None
+            else None
+        )
         authoring = FoundryAuthoring(
             authority,
             auth,
             registry,
             registry,
-            RuntimeDeploymentSelection(registry, auth, profile, provider_compatibility)
+            RuntimeDeploymentSelection(
+                registry,
+                auth,
+                profile,
+                provider_compatibility,
+                allow_direct_robot=robot_direct is not None,
+            )
             if profile is not None
             else _ExecutionNotConfigured(),
+            robot_authoring=robot_authoring,
         )
         from actions.server.data_queries.review import InvoiceReviewService
         from actions.server.data_queries.service import InvoiceQueryService
@@ -350,15 +386,26 @@ def create_runtime_canvas(
                 execution,
                 runner=PinnedReviewedRccRunner(prepared, rcc, execution_root),
             )
+            from actions.server.foundry.robot_runtime_runner import PinnedRobotRunner
+
+            capability_runner = RuntimeCapabilityRunner(
+                PinnedGenericRccRunner(
+                    prepared, rcc, execution_root, logical_execution=logical_execution
+                ),
+                PinnedRobotRunner(robot_direct, execution_root / "robot-direct")
+                if robot_direct is not None
+                else None,
+                PinnedRobotRunner(robot_rcc, execution_root / "robot-rcc")
+                if robot_rcc is not None
+                else None,
+            )
             generic_execution = GenericCanvasExecution(
                 ReviewedCanvasView(reviewed_execution),
                 deployments,
                 outputs,
                 SqlQueueAuthorization(db),
                 worker_id=profile.worker_id,
-                runner=PinnedGenericRccRunner(
-                    prepared, rcc, execution_root, logical_execution=logical_execution
-                ),
+                runner=capability_runner,
             )
 
             port = GenericCanvasView(generic_execution)

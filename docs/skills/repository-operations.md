@@ -6239,3 +6239,9 @@ basic SDK/Runtime compatibility without launching jobs, but does not qualify a
 Canvas flow, selected execution provider, current Task protocol, or installed
 recovery. Dependency closure and this smoke check do not establish full
 vendor-independence or an independently generated SBOM dependency graph.
+
+### Storage handoff of partially integrated Robot execution
+
+Freeze all writers before transferring the sole integration role. Save exact source and selected test inventories separately from immutable installed artifacts; record partial and resource-interrupted runs as such. A SQL-only Robot receipt projection proves retained metadata identity, not provider bytes or execution authority. Do not call registry selection/provider reads from ticket or Task SQL transactions. Reconcile its closed admission envelope with retained validation metadata before activating receipt hooks. Direct dry-run readiness and synthetic adapter authority tests do not prove ordinary installed Robot execution.
+
+A process cleanup review must cover descendants created after an earlier empty snapshot and reparented when their wrapper exits. An early complete snapshot is not proof that later descendants are absent. Keep unresolved cleanup patches unapplied until a real process-barrier regression and review establish the guarantee. See the storage-handoff-20261025 receipt for the held patch and exact test boundaries.

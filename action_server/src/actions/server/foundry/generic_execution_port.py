@@ -35,6 +35,7 @@ from actions.server.foundry.generic_work_item_execution import (
 from actions.server.foundry.mcp import CanvasCaller, CanvasPort, CanvasReply
 from actions.server.foundry.package_registry import FoundryPackageRegistry
 from actions.server.foundry.rcc_execution import GeneratedRccExecution
+from actions.server.foundry.robot_runtime_profile import CapabilityRunner
 from actions.server.foundry.standalone_execution import StandaloneActionExecution
 from actions.server.managed_work_items.contracts import (
     ClaimRef,
@@ -133,7 +134,7 @@ class GenericCanvasExecution(CanvasPort):
         authorization: QueueAuthorizationPort,
         *,
         worker_id: str,
-        runner: PinnedGenericRccRunner,
+        runner: CapabilityRunner,
     ):
         if any(
             value is None

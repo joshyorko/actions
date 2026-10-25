@@ -6,7 +6,6 @@ from collections.abc import Callable
 from uuid import uuid4
 
 from actions.canvas_contract import parse_canvas_spec
-
 from actions.server.deployments.foundry_repository import FoundryRepository
 from actions.server.deployments.foundry_service import FoundryDeploymentService
 from actions.server.deployments.foundry_values import (
@@ -36,6 +35,7 @@ from actions.server.foundry.authoring_values import (
     public_spec_document,
 )
 from actions.server.foundry.mcp import CanvasCaller
+from actions.server.foundry.robot_authoring import RobotAuthoringEvidence
 from actions.server.run_outputs.types import Actor, CanvasApplicationRef
 
 
@@ -52,7 +52,9 @@ class SqlAuthoringAuthority:
         deployments: FoundryDeploymentService,
         authorization: AuthoringAuthorizationPort,
         *,
-        package_evidence: Callable[[PackageRevisionRef], CompilationEvidence]
+        package_evidence: Callable[
+            [PackageRevisionRef], CompilationEvidence | RobotAuthoringEvidence
+        ]
         | None = None,
     ):
         self.repository, self.deployments, self.authorization = (
@@ -86,8 +88,8 @@ class SqlAuthoringAuthority:
             raise AuthoringAccessDenied("Canvas revision is outside the application")
 
     def _compilation(
-        self, specification: DeploymentSpecification
-    ) -> CompilationEvidence | None:
+        self, specification: DeploymentSpecification, *, require_ready: bool = False
+    ) -> CompilationEvidence | RobotAuthoringEvidence | None:
         evidence = None
         for package in specification.package_revisions:
             if self.package_evidence is None:
@@ -96,12 +98,22 @@ class SqlAuthoringAuthority:
                 )
             value = self.package_evidence(package)
             if (
-                not isinstance(value, CompilationEvidence)
-                or not value.ready
+                not isinstance(value, (CompilationEvidence, RobotAuthoringEvidence))
+                or not (
+                    value.admission_ready
+                    if isinstance(value, RobotAuthoringEvidence)
+                    else value.ready
+                )
                 or value.package_revision_id != package.revision_id
             ):
                 raise AuthoringError("common Package evidence is not admitted")
-            evidence = value
+            if require_ready and not value.ready:
+                raise AuthoringError(
+                    "Robot backend requires retained dry-run validation before activation"
+                )
+            # An unqualified Package cannot be hidden by a later qualified one.
+            if evidence is None or evidence.ready or not value.ready:
+                evidence = value
         return evidence
 
     def _project(self, revision: DeploymentRevision) -> AuthoringRevision:
@@ -274,7 +286,7 @@ class SqlAuthoringAuthority:
         bindings: tuple[CanvasBinding, ...],
         package_revisions: tuple[PackageRevisionRef, ...],
         selection: DeploymentSpecification | None,
-        compilation: CompilationEvidence | None,
+        compilation: CompilationEvidence | RobotAuthoringEvidence | None,
         request_fingerprint: str,
         *,
         idempotency_key: str,
@@ -454,7 +466,7 @@ class SqlAuthoringAuthority:
                 actor, workspace_id, revision.specification, "deploy"
             )
             self.deployments._validate_package_contracts(revision.specification)
-            self._compilation(revision.specification)
+            self._compilation(revision.specification, require_ready=True)
 
         try:
             revision = self.repository.activate_existing(

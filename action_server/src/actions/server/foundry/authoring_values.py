@@ -11,15 +11,6 @@ from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Literal, Protocol
 
-from pydantic import (
-    BaseModel,
-    ConfigDict,
-    Field,
-    JsonValue,
-    model_serializer,
-    model_validator,
-)
-
 from actions.server.deployments.foundry_values import WorkItemDeclaration
 from actions.server.deployments.ids import (
     CapabilityId,
@@ -37,12 +28,21 @@ from actions.server.deployments.logical_bindings import (
 from actions.server.deployments.source_manifest import SuppliedSourceEntry
 from actions.server.foundry.mcp import CanvasCaller
 from actions.server.run_outputs.types import Actor
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    JsonValue,
+    model_serializer,
+    model_validator,
+)
 
 if TYPE_CHECKING:
     from actions.server.deployments.capability_bundle_compiler import (
         BundleCompilationPolicy,
     )
     from actions.server.deployments.foundry_values import DeploymentSpecification
+    from actions.server.foundry.robot_authoring import RobotAuthoringEvidence
 
 
 class AuthoringError(RuntimeError):
@@ -325,7 +325,7 @@ class AuthoringRevision:
     bindings: tuple[CanvasBinding, ...]
     package_revisions: tuple[PackageRevisionRef, ...]
     validation_status: Literal["passed", "failed"]
-    compilation: CompilationEvidence | None
+    compilation: CompilationEvidence | RobotAuthoringEvidence | None
     active: bool
 
     @property
@@ -444,7 +444,7 @@ class FoundryAuthoringAuthorityPort(Protocol):
         bindings: tuple[CanvasBinding, ...],
         package_revisions: tuple[PackageRevisionRef, ...],
         selection: DeploymentSpecification | None,
-        compilation: CompilationEvidence | None,
+        compilation: CompilationEvidence | RobotAuthoringEvidence | None,
         request_fingerprint: str,
         *,
         idempotency_key: str,
@@ -489,7 +489,6 @@ class FoundryAuthoringAuthorityPort(Protocol):
 def public_spec_json(spec: object) -> bytes:
     """Return bounded canonical UTF-8 bytes for a validated public CanvasSpec."""
     from actions.canvas_contract import CanvasSpec, CanvasSpecV2, validate_canvas_spec
-
     from actions.server.deployments.canonical import canonicalize_json
 
     try:
@@ -509,7 +508,6 @@ def public_spec_document(spec_json: bytes) -> dict[str, JsonValue]:
     import json
 
     from actions.canvas_contract import validate_canvas_spec
-
     from actions.server.deployments.canonical import canonicalize_json
 
     if not isinstance(spec_json, bytes) or len(spec_json) > 64 * 1024:

@@ -1,3 +1,5 @@
+> Storage handoff 2026-10-25: latest source is explicitly WIP, not a qualified installed release. See [frozen handoff and critical path](evidence/actions-next-327/storage-handoff-20261025/README.md). All helpers freeze before sole integration ownership transfers. No further heavyweight build in the old container.
+
 ## Current convergence and remaining blockers — a41 continuation
 
 Full release remains **NO-GO**. The frozen first combined a39 pass remains valid at its exact source; it does not become a41 or full release proof. Latest saved evidence is `a565b004b8fc02c86020ac534dba9720e6ae9dab`.

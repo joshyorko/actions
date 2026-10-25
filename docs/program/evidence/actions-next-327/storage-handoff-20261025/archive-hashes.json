@@ -1,0 +1,18 @@
+{
+  "robot-receipts": {
+    "sha256_tar_gz": "ce4a92272bba0c3771f4118a0f4a0c84920f52fdccd8129694ddb9165e5972c3",
+    "bytes": 27257
+  },
+  "registry-validation": {
+    "sha256_tar_gz": "69be3246d29c8efef10c896b499a0a92eb55205a001b325fa8a9d7f80b3a4dd6",
+    "bytes": 45482
+  },
+  "robot-runner": {
+    "sha256_tar_gz": "e8fa4e5711718163e6edc4617e1db6d47462a631daa82491b967759410059bf7",
+    "bytes": 31860
+  },
+  "failure-HOLD": {
+    "sha256_tar_gz": "a6f61778155deccec7eaf9aec70bad0e731f11b4a678972286a5a213dffc0e07",
+    "bytes": 67776
+  }
+}

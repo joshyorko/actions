@@ -10,7 +10,6 @@ from uuid import uuid4
 import pytest
 from action_server_tests.test_foundry_deployments import _refs, _runtime_database
 from action_server_tests.test_foundry_package_registry import _grant, _registry
-
 from actions.server._database import Database
 from actions.server._models import get_all_model_classes
 from actions.server.deployments.foundry_values import AccessDenied
@@ -98,8 +97,10 @@ def test_admission_reload_exact_refs_and_no_compilation_claim(admitted):
     assert selected.robot == evidence.package
     assert registry.get_runtime_plan(plan).runtime_kind == "direct"
     assert "artifact_digest" not in json.loads(selected.robot.robot.plan_payload)
-    with pytest.raises(AccessDenied):
-        registry.evidence(ref)
+    projected = registry.evidence(ref)
+    assert projected.admission_ready and not projected.ready
+    assert projected.execution == "not-qualified"
+    assert not hasattr(projected, "build_status")
     with pytest.raises(AccessDenied):
         registry.admit_robot(actor, refs.workspace, replace(evidence))
     reopened = Database(db.db_path)
