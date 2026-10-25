@@ -248,6 +248,14 @@ class GenericWorkItemExecution:
         normalized = json.loads(raw)
         if not isinstance(normalized, dict):
             raise ValueError("normalized Action input object required")
+        if isinstance(self.registry, FoundryPackageRegistry):
+            from actions.server.foundry.robot_execution import encode_robot_inputs
+            from actions.server.foundry.robot_retained_projection import (
+                robot_projection_if_present,
+            )
+
+            if robot_projection_if_present(self.db, self.snapshot) is not None:
+                encode_robot_inputs(normalized)
         if _projection is not None:
             if _projection.snapshot != self.snapshot:
                 raise AccessDenied("bound input selection differs")
@@ -627,15 +635,51 @@ class _GenericOutputs(LogicalPublicationGuard, RunOutputService):
         self.owner, self.caller, self.ticket = owner, caller, ticket
         self._logical_requirements = requirement_ids(owner.registry, owner.snapshot)
 
+    def bind_execution_authority(self, authority):
+        """Bind a host-issued Robot selection without re-reading provider bytes."""
+        from contextlib import contextmanager
+
+        from actions.server.foundry.robot_work_item_authority import (
+            RobotWorkItemAuthority,
+        )
+
+        @contextmanager
+        def bind():
+            if (
+                self.db.in_transaction()
+                or type(authority) is not RobotWorkItemAuthority
+                or getattr(self, "_robot_authority", None) is not None
+                or getattr(self, "_logical_binding", None) is not None
+                or getattr(self, "_failed_binding", None) is not None
+            ):
+                raise AccessDenied(
+                    "exclusive transaction-free Robot authority binding required"
+                )
+            authority.recheck(self.owner, self.caller, self.ticket)
+            self._robot_authority = authority
+            try:
+                yield
+            finally:
+                self._robot_authority = None
+
+        return bind()
+
+    def _authority_projection(self):
+        authority = getattr(self, "_robot_authority", None)
+        if authority is not None:
+            authority.recheck(self.owner, self.caller, self.ticket)
+            return authority
+        return self._logical_projection()
+
     def _check(self, fence, *, terminal=False):
         if fence != self.ticket.fence:
             raise FenceRejected("different generic Attempt")
-        self.owner._current(self.caller, _projection=self._logical_projection())
+        self.owner._current(self.caller, _projection=self._authority_projection())
         claim = self.ticket.claim.as_claim() if self.ticket.claim else None
         run = _one(self.db, Run, fence.run_id)
         if (
             self.owner._ticket(
-                self.caller, claim, run, _projection=self._logical_projection()
+                self.caller, claim, run, _projection=self._authority_projection()
             )
             != self.ticket
         ):
@@ -664,7 +708,7 @@ class _GenericOutputs(LogicalPublicationGuard, RunOutputService):
         with self.owner._transaction():
             self._check(self.ticket.fence)
             declaration = self.owner._current(
-                self.caller, _projection=self._logical_projection()
+                self.caller, _projection=self._authority_projection()
             )
             if (
                 capability.get("mode") != declaration.mode
@@ -757,7 +801,7 @@ class _GenericOutputs(LogicalPublicationGuard, RunOutputService):
                     raise FenceRejected("completed RCC journal required")
             self._logical_publication(actor, fence, outputs, result, run)
             declaration = self.owner._current(
-                self.caller, _projection=self._logical_projection()
+                self.caller, _projection=self._authority_projection()
             )
             from jsonschema import validate
 

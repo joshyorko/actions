@@ -11,8 +11,9 @@ from dataclasses import dataclass
 from pathlib import PurePosixPath
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field, JsonValue
+from pydantic import BaseModel, ConfigDict, Field, JsonValue, model_validator
 
+from actions.server.deployments.foundry_values import WorkItemDeclaration
 from actions.server.deployments.package_revision_compiler import (
     SourceByteSnapshot,
     _deterministic_source_archive,
@@ -57,6 +58,30 @@ class RobotPackageRequest(BaseModel):
     task_name: str = Field(alias="taskName", min_length=1, max_length=256)
     input_schema: dict[str, JsonValue] = Field(alias="inputSchema")
     runtime_kind: Literal["direct", "rcc"] = Field(alias="runtimeKind")
+    work_items: WorkItemDeclaration = Field(
+        default=WorkItemDeclaration(), alias="workItems"
+    )
+
+    @model_validator(mode="after")
+    def supported_work_items(self):
+        if self.work_items.mode == "producer" or self.work_items.allow_outputs:
+            raise ValueError("Robot producer and Work Item outputs are unsupported")
+        return self
+
+
+def decode_robot_work_items(manifest: dict) -> WorkItemDeclaration:
+    """Read an exact optional declaration without changing legacy none preimages."""
+    if "workItems" not in manifest:
+        return WorkItemDeclaration()
+    raw = manifest["workItems"]
+    if not isinstance(raw, dict) or set(raw) != {"mode", "allow_outputs"}:
+        raise ValueError("closed Robot Work Item declaration required")
+    result = WorkItemDeclaration.model_validate(raw)
+    if result.mode in ("none", "producer") or result.allow_outputs:
+        raise ValueError("unsupported or redundant Robot Work Item declaration")
+    if _json(raw) != _json(result.model_dump()):
+        raise ValueError("canonical Robot Work Item declaration required")
+    return result
 
 
 @dataclass(frozen=True)
@@ -99,6 +124,7 @@ class VerifiedRobotPackage:
     plan_digest: str
     manifest: bytes
     package_digest: str
+    work_items: WorkItemDeclaration = WorkItemDeclaration()
 
 
 def build_robot_package(
@@ -171,6 +197,11 @@ def build_robot_package(
     manifest = _json(
         {
             "kind": "robot",
+            **(
+                {"workItems": request.work_items.model_dump()}
+                if request.work_items.mode != "none"
+                else {}
+            ),
             "logicalName": request.logical_name,
             "sourceInventoryDigest": source.digest,
             "sourceDigest": _digest(archive),
@@ -198,6 +229,7 @@ def build_robot_package(
         _digest(plan_payload),
         manifest,
         _digest(manifest),
+        request.work_items,
     )
 
 
@@ -221,6 +253,7 @@ def verify_robot_package(
                 "taskName": package.task_name,
                 "inputSchema": json.loads(package.input_schema),
                 "runtimeKind": package.plan.runtime_kind,
+                "workItems": package.work_items.model_dump(),
             }
         )
     )

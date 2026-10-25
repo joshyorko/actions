@@ -1,4 +1,4 @@
-"""Strict retained standalone Robot metadata reads; caller owns live authorization.
+"""Strict retained Robot metadata reads; caller owns live authorization.
 
 No provider or registry reader is invoked. SQL metadata integrity is not a claim
 that source/output bytes have been read, nor permission to execute or read them.
@@ -103,14 +103,29 @@ def validate_robot_record(
 
     try:
         if (
-            claim is not None
-            or not isinstance(terminal, bool)
+            not isinstance(terminal, bool)
             or not isinstance(_allow_expired_terminal, bool)
             or (_allow_expired_terminal and not terminal)
         ):
-            raise ValueError("standalone Robot mode and explicit read scope required")
+            raise ValueError("explicit Robot read scope required")
         snapshot = ExecutionSnapshot.model_validate(snapshot)
         fence = AttemptFence.model_validate(fence)
+        if claim is not None:
+            from uuid import UUID
+
+            from actions.server.data_queries.invoice_worker import ClaimValue
+
+            parsed_claim = ClaimValue.model_validate(claim)
+            if (
+                not _same(parsed_claim.model_dump(), claim)
+                or parsed_claim.epoch > 2_147_483_647
+                or parsed_claim.owner_id != fence.owner_id
+                or any(
+                    str(UUID(value)) != value
+                    for value in (parsed_claim.item_id, parsed_claim.owner_id)
+                )
+            ):
+                raise ValueError("canonical independent Robot claim required")
         outer = _read(run.result, MAX_RESULT_BYTES)
         if terminal:
             if (
@@ -151,11 +166,11 @@ def validate_robot_record(
         if (
             set(record) != expected
             or record["version"] != (TERMINAL_VERSION if terminal else DISCRIMINATOR)
-            or record["mode"] != "standalone"
-            or record["claim"] is not None
+            or record["mode"] != ("work-items" if claim is not None else "standalone")
+            or not _same(record["claim"], claim)
             or not _same(record[fence_key], fence.model_dump(mode="json"))
         ):
-            raise ValueError("closed standalone Robot record required")
+            raise ValueError("closed Robot claim/record required")
         # The existing Run/workspace lock serializes authoritative Run/Attempt,
         # package and output writers. Nested use retains the caller's boundary.
         with _transaction(db):
@@ -208,6 +223,74 @@ def validate_robot_record(
             if _canonical(inputs, MAX_INPUT_BYTES) != run.inputs:
                 raise ValueError("Robot inputs changed from canonical admission")
             projected = retained_robot_projection(db, snapshot)
+            declaration = projected.work_items
+            if (
+                declaration.allow_outputs
+                or declaration.mode == "producer"
+                or (claim is None and declaration.mode not in ("none", "optional"))
+                or (
+                    claim is not None
+                    and declaration.mode
+                    not in ("optional", "required-input", "consumer")
+                )
+            ):
+                raise ValueError(
+                    "Robot claim differs from immutable Work Item declaration"
+                )
+            if claim is not None:
+                from actions.work_items import State
+
+                from actions.server.data_queries.invoice_worker import work_item_run_key
+                from actions.server.data_queries.review_models import FencedWorkItem
+                from actions.server.deployments.foundry_repository import (
+                    FoundryRepository,
+                )
+                from actions.server.foundry.generic_work_item_execution import (
+                    GenericInput,
+                    _digest,
+                )
+
+                stored = FoundryRepository(db).get_revision(snapshot.deployment)
+                item = _one(db, FencedWorkItem, parsed_claim.item_id)
+                envelope = GenericInput.model_validate_json(item.payload)
+                if (
+                    item.workspace_id != snapshot.workspace_id
+                    or item.queue_name != envelope.policy.input_queue
+                    or item.claim_epoch != parsed_claim.epoch
+                    or envelope.snapshot != snapshot
+                    or envelope.policy.capability != snapshot.capability
+                    or not _same(envelope.inputs, inputs)
+                    or envelope.input_digest != _digest(inputs)
+                    or pin.idempotency_key != work_item_run_key(parsed_claim.item_id)
+                    or stored is None
+                    or tuple(
+                        policy
+                        for policy in stored.revision.specification.work_item_policies
+                        if policy.capability == snapshot.capability
+                    )
+                    != (envelope.policy,)
+                ):
+                    raise ValueError("Robot Work Item scope/input/epoch differs")
+                envelope.policy.require_declaration(declaration)
+                if terminal:
+                    if (
+                        item.state
+                        != (
+                            State.DONE.value
+                            if run.status == RunStatus.PASSED
+                            else State.FAILED.value
+                        )
+                        or item.claim_owner
+                    ):
+                        raise ValueError("Robot Work Item terminal state differs")
+                elif run.status == RunStatus.RUNNING:
+                    if (
+                        item.state != State.IN_PROGRESS.value
+                        or item.claim_owner != parsed_claim.owner_id
+                        or item.cancel_requested
+                        or int(item.claim_deadline_ms) <= _now(db)
+                    ):
+                        raise ValueError("Robot Work Item current claim differs")
             launch = record["launch"]
             if launch is None:
                 if terminal:
@@ -232,6 +315,8 @@ def validate_robot_record(
                 if isinstance(plan, RccRobotPlan)
                 else {}
             )
+            from actions.server.foundry.robot_execution import encode_robot_inputs
+
             expected_selection = RobotSelection(
                 snapshot,
                 plan.runtime_kind,
@@ -241,7 +326,7 @@ def validate_robot_record(
                 projected.source_digest,
                 projected.input_schema,
                 projected.output_schema,
-                _encoded(inputs).encode(),
+                encode_robot_inputs(inputs),
                 adapter_version=plan.adapter_version,
                 robot_version=plan.robot_version,
                 python_version=plan.python_version,

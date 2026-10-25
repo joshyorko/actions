@@ -1361,5 +1361,41 @@ current-capability path verifies package artifacts and can read the provider ins
 the transaction; a SQLite diagnostic observed this in `_GenericOutputs._check`.
 Prepare artifact-backed selection outside SQL and recheck exact declaration,
 Deployment, queue and Attempt authority inside SQL. A receipt-kind switch alone
-does not supply that binding. Claimed Robot integration remains unimplemented
-until these checks and atomic queue/Run completion are qualified together.
+does not supply that binding. Claimed Robot execution now binds host-issued immutable
+Work Item authority prepared outside SQL, tied to the exact service, caller and
+ticket. SQL callbacks recheck retained package pins and live queue/Attempt authority;
+the existing generic adapter renews both leases. Terminal Run/Attempt/output
+publication and completion of the exact input claim share one transaction after
+COMPLETE authorization. Queue-finish failure rolls back terminal publication.
+Claim epoch and Attempt epoch are independent. Optional no-claim execution requires
+its immutable declaration; producer and child outputs and claimed Robot Tasks remain
+unsupported. SQLite and PostgreSQL regression fixtures qualify this join with a
+synthetic runner; actual installed RCC acceptance remains a separate gate.
+
+Robot input admission uses one canonical ASCII JSON encoder with a 65536-byte limit
+before enqueue or Run admission, including Unicode escape expansion. A queue's
+larger generic byte limit does not override this carrier bound. Retained receipt
+validation uses the same encoder. Terminal receipt reopening rechecks exact claim,
+queue terminal state and cleared ownership; metadata validity never grants artifact
+access. Keep corruption, lease expiry, cancellation and publication races in both
+SQL-provider suites.
+
+Installed claimed Robot acceptance uses public managed HTTP items.enqueue/items.claim
+and MCP capability_invoke with the descriptor's exact snapshot/queue and returned
+claim. These HTTP operations are not MCP tools. The standard synthetic bootstrap maps
+one credential to one persisted Actor and a server-held worker; this does not qualify
+multi-principal isolation. Require actual Robot PASS and deliberate FAIL output.xml,
+public terminal Work Item/Run reads and authorized artifacts after a process restart.
+A passed dryrun is not execution qualification.
+
+
+The source-authority contract gate still requires both pinned Git roots; offline
+digest verification alone is not a substitute. An owned reference can replace
+upstream availability only when original source and license bytes are authenticated
+through Git blob/tree/commit objects to the existing immutable pin and the same
+semantic checks still run. The pinned custom reference currently declares MIT in
+pyproject.toml, links a missing LICENSE in README, and conflicts with the local
+Apache-labelled manifest. Reconcile that provenance before attributing a new full
+custom-source fixture; this does not authorize changing existing legal attribution.
+
+Default-none Robot declarations remain omitted from immutable manifests to preserve existing revision preimages. Retained terminal receipts validate claim provenance without requiring an unexpired lease; artifact permission remains a separate live check. A contender signalled immediately before cancellation proves outcome consistency, not that it reached a database lock wait; describe race-test coverage accordingly.

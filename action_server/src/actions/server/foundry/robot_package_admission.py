@@ -24,6 +24,7 @@ from actions.server.foundry.robot_package_builder import (
     RobotPackageRequest,
     VerifiedRobotPackage,
     _json,
+    decode_robot_work_items,
 )
 
 SCHEMA = "actions.robot-package/v1"
@@ -132,8 +133,10 @@ def decode_robot_admission(raw: bytes, archive_bytes: bytes) -> AdmittedRobotPac
         "outputSchemaDigest",
         "planDigest",
         "discriminator",
+        *({"workItems"} if "workItems" in manifest else set()),
     }:
         raise ValueError("closed Robot builder manifest required")
+    work_items = decode_robot_work_items(manifest)
     if not isinstance(plan_value, dict):
         raise ValueError("closed Robot plan required")
     if plan_value.get("runtime_kind") == "direct":
@@ -198,6 +201,7 @@ def decode_robot_admission(raw: bytes, archive_bytes: bytes) -> AdmittedRobotPac
                 "taskName": manifest["taskName"],
                 "inputSchema": json.loads(value["inputSchema"]),
                 "runtimeKind": plan.runtime_kind,
+                "workItems": work_items.model_dump(),
             }
         )
     )
@@ -233,6 +237,11 @@ def decode_robot_admission(raw: bytes, archive_bytes: bytes) -> AdmittedRobotPac
     expected = _json(
         {
             "kind": "robot",
+            **(
+                {"workItems": work_items.model_dump()}
+                if work_items.mode != "none"
+                else {}
+            ),
             "logicalName": request.logical_name,
             "sourceInventoryDigest": source.digest,
             "sourceDigest": digest(archive_bytes),
@@ -265,6 +274,7 @@ def decode_robot_admission(raw: bytes, archive_bytes: bytes) -> AdmittedRobotPac
         digest(value["plan"].encode()),
         expected,
         digest(expected),
+        work_items,
     )
     measured = assemble_robot_admission(robot, identity["packageId"])
     if measured.manifest_json != raw:

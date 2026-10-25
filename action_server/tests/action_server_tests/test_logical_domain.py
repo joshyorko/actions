@@ -161,13 +161,23 @@ def test_bound_publication_requires_issued_guard_and_cleanup(domain):
     run = _one(g.db, Run, g.fence.run_id)
     assert run.status == RunStatus.PASSED
     assert owner.ticket(caller, run) == wrapper.ticket
-    from types import SimpleNamespace
-
-    from actions.server.run_outputs.task_service import TaskService
+    from actions.server.run_outputs.detached import DetachedActions
+    from actions.server.run_outputs.task_service import TaskPolicy, TaskService
 
     outer = json.loads(run.result)
-    readback = TaskService._result(
-        SimpleNamespace(db=g.db, outputs=g.outputs),
+
+    class ReadOnlyReadiness:
+        def require_ready(self, actor, snapshot):
+            raise AssertionError("Retained-result fixture must not dispatch work")
+
+    task_service = TaskService(
+        DetachedActions(owner.deployments, g.outputs),
+        readiness=ReadOnlyReadiness(),
+        policy=TaskPolicy(
+            "retained-result-fixture", ttl_ms=60000, poll_interval_ms=1000
+        ),
+    )
+    readback = task_service._result(
         g.actor,
         owner.snapshot,
         run,

@@ -53,6 +53,7 @@ from actions.server.run_outputs.types import (
 DISCRIMINATOR = "actions.robot-dispatch/v1"
 ADAPTER_VERSION = "1"
 ROBOT_VERSION = "7.4.2"
+ROBOT_INPUT_LIMIT = 65536
 _LOG_LIMIT = 256 * 1024
 _XML_LIMIT = 1024 * 1024
 _HEARTBEAT_SECONDS = 1.0
@@ -75,6 +76,15 @@ def _json(content: bytes, limit: int):
     ):
         raise ValueError("canonical JSON bytes required")
     return value
+
+
+def encode_robot_inputs(inputs: object) -> bytes:
+    """Use the execution carrier's exact canonical encoding and byte budget."""
+    content = json.dumps(
+        inputs, sort_keys=True, separators=(",", ":"), allow_nan=False
+    ).encode()
+    _json(content, ROBOT_INPUT_LIMIT)
+    return content
 
 
 def _schema(content: bytes):
@@ -203,7 +213,7 @@ class RobotSelection:
                 raise ValueError("RCC plan requires retained identities")
         else:
             raise ValueError("unsupported Robot plan")
-        inputs = _json(self.inputs, 65536)
+        inputs = _json(self.inputs, ROBOT_INPUT_LIMIT)
         if not isinstance(inputs, dict):
             raise ValueError("Robot inputs must be an object")
         Draft202012Validator(_schema(self.input_schema)).validate(inputs)

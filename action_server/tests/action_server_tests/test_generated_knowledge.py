@@ -286,11 +286,11 @@ def publish_generated(g, prepared):
 
 def test_generated_publication_and_retained_source_join(generated_knowledge):
     import copy
-    from types import SimpleNamespace
 
     from actions.server.foundry.generated_knowledge import _ingestion_source
     from actions.server.foundry.logical_receipts import validate_bound_record
-    from actions.server.run_outputs.task_service import TaskService
+    from actions.server.run_outputs.detached import DetachedActions
+    from actions.server.run_outputs.task_service import TaskPolicy, TaskService
 
     g = generated_knowledge
     prepared = g.execution.prepare(
@@ -331,8 +331,19 @@ def test_generated_publication_and_retained_source_join(generated_knowledge):
     assert run.status == RunStatus.PASSED
     assert owner.ticket(caller, run) == wrapper.ticket
     outer = json.loads(run.result)
-    TaskService._result(
-        SimpleNamespace(db=g.db, outputs=g.outputs),
+
+    class ReadOnlyReadiness:
+        def require_ready(self, actor, snapshot):
+            raise AssertionError("Retained-result fixture must not dispatch work")
+
+    task_service = TaskService(
+        DetachedActions(owner.deployments, g.outputs),
+        readiness=ReadOnlyReadiness(),
+        policy=TaskPolicy(
+            "retained-result-fixture", ttl_ms=60000, poll_interval_ms=1000
+        ),
+    )
+    task_service._result(
         g.actor,
         owner.snapshot,
         run,

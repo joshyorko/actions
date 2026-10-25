@@ -12,7 +12,7 @@ from actions.server.foundry.package_registry import (
     RegistryRobotSelection,
 )
 from actions.server.foundry.provider_execution import SQLRecordPin
-from actions.server.foundry.robot_execution import RobotSelection
+from actions.server.foundry.robot_execution import RobotSelection, encode_robot_inputs
 from actions.server.foundry.robot_package_builder import RccRobotPlan
 from actions.server.run_outputs.service import (
     FenceRejected,
@@ -134,9 +134,7 @@ def prepare_robot_selection(
         robot.source_digest,
         robot.input_schema,
         robot.output_schema,
-        json.dumps(
-            inputs, sort_keys=True, separators=(",", ":"), allow_nan=False
-        ).encode(),
+        encode_robot_inputs(inputs),
         adapter_version=plan.adapter_version,
         robot_version=plan.robot_version,
         python_version=plan.python_version,

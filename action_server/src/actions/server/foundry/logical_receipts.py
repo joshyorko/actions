@@ -1254,6 +1254,7 @@ class LogicalPublicationGuard:
         def bind():
             if (
                 getattr(self, "_logical_binding", None) is not None
+                or getattr(self, "_robot_authority", None) is not None
                 or type(execution) is not LogicalExecution
                 or type(prepared) is not PreparedLogicalReads
                 or (publication_check is not None and not callable(publication_check))
@@ -1307,6 +1308,7 @@ class LogicalPublicationGuard:
             if (
                 self.db.in_transaction()
                 or getattr(self, "_failed_binding", None) is not None
+                or getattr(self, "_robot_authority", None) is not None
             ):
                 raise ValueError("owned failure binding outside transaction required")
             projection = self._logical_projection() or _retained_projection(

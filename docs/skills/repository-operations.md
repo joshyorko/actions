@@ -5256,7 +5256,7 @@ Canvas preview validates logical-binding syntax and rejects cross-Workspace prov
 For a frozen qualification run concurrent with later integration, archive the exact source SHA and install its committed package lock through the prepared toolkit into a separate Poetry environment. Verify imported module origins inside that archive. A PYTHONPATH-only overlay of a shared editable environment is insufficient: fresh-interpreter tests may clear PYTHONPATH and import the later working tree. Keep the frozen run’s compiler fixture exclusive until it exits.
 
 
-Detached ordinary Action admission is an explicit host service, not default bootstrap or MCP Task support. RunExecutionIntent in migration20 stores only immutable dispatch metadata tied to canonical Run identity; RunPin/RunAttempt remain the queue, lease, cancellation and publication authority. Hosts supply an exact WorkerProfile and authenticated admission actor, manage database connections, and consume bounded pages. No worker, grants, daemon or scheduler is created by the constructor. The initial service accepts only verified package-revision RCC Actions with mode none and no Work Item outputs; consumer/review/Robot/non-RCC paths remain unsupported.
+Detached ordinary Action admission is an explicit host service, not default bootstrap or MCP Task support. RunExecutionIntent in migration20 stores only immutable dispatch metadata tied to canonical Run identity; RunPin/RunAttempt remain the queue, lease, cancellation and publication authority. Hosts supply an exact WorkerProfile and authenticated admission actor, manage database connections, and consume bounded pages. No worker, grants, daemon or scheduler is created by the constructor. The initial service accepted only verified package-revision RCC Actions with mode none and no Work Item outputs. Current routing also supports ordinary standalone Robot execution and MCP Tasks through the verified Robot runner; claimed Robot Tasks, consumer/review detached paths and non-RCC paths remain unsupported.
 
 Admission acknowledgement can be retried without claiming an Attempt. Synchronous and detached paths reject adoption of each other's existing idempotency keys. Worker claim reauthorizes the retained immutable revision and exact profile; later activation changes do not retarget a Run. Queued cancellation is terminal only when no Attempt or launch journal exists. Running cancellation remains durable intent; the SQL guard and common output authority stop renewal/publication, but this prerequisite does not certify stopped external effects.
 
@@ -6507,3 +6507,24 @@ Keep disposable browser bearer state in memory and send it through the standard
 transport header. Drop inherited tool/result/bridge log payloads, which may carry
 AppSession capability tokens. Separate operator attestation, backend validation
 and visual review; PNG-shaped files alone are not browser proof.
+
+
+Mapped Knowledge compilation and retained verification explicitly accept Core a4 and
+a7 with unchanged a4/a39 compatibility metadata; a5, a6 and unknown future candidates
+remain unqualified. Keep both historical and current pins in contract coverage,
+including exact mappings and retained-manifest tampering. Mocked authoring and
+compiler passes do not qualify installed Knowledge execution.
+
+Task result regression fixtures must construct the real TaskService with an explicit
+policy and a readiness guard that rejects unexpected dispatch. Calling an unbound
+method on a partial namespace can fail when valid internal delegation changes.
+Historical generated-helper golden hashes retain the old byte contract after removing
+only the asserted, reviewed model_dump(mode="json") serializer addition; supplement
+that narrow delta with execution tests for JSON model values, finite numbers, byte
+bounds and private output creation. Do not blindly replace the historical digest.
+
+Static qualification of an isolated integration must record absolute target files,
+use its package configuration and explicit source/type-search paths, and verify
+BuildSource origins. A shared prepared interpreter supplies tools and third-party
+dependencies, not an implicit alternative Runtime source. Retain exact shared
+formatter configuration when the isolated copy lacks it and run check-only formatting.

@@ -14,6 +14,7 @@ from uuid import uuid5
 from jsonschema.exceptions import SchemaError
 
 from actions.server._portable_paths import portable_path_collision_key
+from actions.server.deployments.foundry_values import WorkItemDeclaration
 from actions.server.deployments.source_manifest import _validated_parts
 from actions.server.foundry.models import FoundryPackageRevision
 from actions.server.foundry.robot_execution import _schema
@@ -30,6 +31,7 @@ from actions.server.foundry.robot_package_builder import (
     DirectRobotPlan,
     RccRobotPlan,
     _json,
+    decode_robot_work_items,
 )
 from actions.server.run_outputs.service import FenceRejected
 from actions.server.run_outputs.types import ExecutionSnapshot, SealReceipt
@@ -140,6 +142,7 @@ class RetainedRobotProjection:
     input_schema: bytes
     output_schema: bytes
     plan: DirectRobotPlan | RccRobotPlan
+    work_items: WorkItemDeclaration = WorkItemDeclaration()
 
 
 def robot_projection_if_present(db, snapshot):
@@ -247,8 +250,10 @@ def _project(row, manifest, snapshot):
             "outputSchemaDigest",
             "planDigest",
             "discriminator",
+            *({"workItems"} if "workItems" in builder else set()),
         },
     )
+    work_items = decode_robot_work_items(builder)
     plan_value = _load(manifest["plan"])
     if not isinstance(plan_value, dict):
         raise ValueError("Robot plan object required")
@@ -356,6 +361,7 @@ def _project(row, manifest, snapshot):
     )
     expected = {
         "kind": "robot",
+        **({"workItems": work_items.model_dump()} if work_items.mode != "none" else {}),
         "logicalName": identity["logicalName"],
         "sourceInventoryDigest": digest(row.source_inventory_json.encode()),
         "sourceDigest": row.source_artifact_digest,
@@ -399,4 +405,5 @@ def _project(row, manifest, snapshot):
         input_schema,
         output_schema,
         plan,
+        work_items,
     )

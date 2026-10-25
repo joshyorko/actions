@@ -144,6 +144,13 @@ class StandaloneActionExecution:
             self.current(caller)
             if caller.worker_id is None:
                 raise AccessDenied("trusted worker required")
+            from actions.server.foundry.robot_execution import encode_robot_inputs
+            from actions.server.foundry.robot_retained_projection import (
+                robot_projection_if_present,
+            )
+
+            if robot_projection_if_present(self.db, self.snapshot) is not None:
+                encode_robot_inputs(inputs)
             RunOutputControlPlane(self.db, capabilities=self.registry).register(
                 self.snapshot
             )

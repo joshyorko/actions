@@ -1,15 +1,21 @@
-"""Canonical standalone Robot runner; no admission, retry or scheduling authority."""
+"""Canonical Robot runner; no admission, retry or scheduling authority."""
 from __future__ import annotations
 
 import hashlib
 import json
+from contextlib import nullcontext
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from threading import Event
 from typing import Callable, Protocol
 
+from actions.work_items import State
+
 from actions.server._models import Run, RunStatus
-from actions.server.foundry.generic_work_item_execution import GenericTicket
+from actions.server.foundry.generic_work_item_execution import (
+    GenericTicket,
+    GenericWorkItemExecution,
+)
 from actions.server.foundry.robot_execution import (
     DISCRIMINATOR,
     DirectRobotPreparation,
@@ -21,8 +27,11 @@ from actions.server.foundry.robot_execution import (
 from actions.server.foundry.robot_execution_selection import prepare_robot_selection
 from actions.server.foundry.robot_journal import RobotJournal, _launch
 from actions.server.foundry.robot_lifecycle import VerifiedRobotLifecycle
+from actions.server.foundry.robot_work_item_authority import (
+    prepare_robot_work_item_authority,
+)
 from actions.server.foundry.standalone_execution import StandaloneActionExecution
-from actions.server.managed_work_items.contracts import ManagedCaller
+from actions.server.managed_work_items.contracts import ManagedCaller, Permission
 from actions.server.run_outputs.models import RunOutput
 from actions.server.run_outputs.service import (
     AccessDenied,
@@ -53,14 +62,19 @@ class RobotAdapter(Protocol):
 
 
 class _RobotOutputs(RunOutputService):
-    def __init__(self, service, caller, ticket, prepared, publication_cancelled=None):
+    def __init__(
+        self, service, caller, ticket, prepared, publication_cancelled=None, domain=None
+    ):
         super().__init__(
             service.db, service.base.providers, capabilities=service.registry
         )
         self.caller, self.ticket, self.prepared = caller, ticket, prepared
         self.publication_cancelled = publication_cancelled
+        self.service, self.domain = service, domain
 
     def _fence(self, fence):
+        if self.domain is not None:
+            self.domain._check(fence)
         pin = super()._fence(fence)
         if fence != self.ticket.fence:
             raise FenceRejected("different Robot Attempt")
@@ -69,6 +83,13 @@ class _RobotOutputs(RunOutputService):
         )
         self.prepared(self.caller.actor, fence, snapshot, inputs)
         return pin
+
+    def heartbeat(self, fence, *, lease_seconds):
+        if self.domain is None:
+            return super().heartbeat(fence, lease_seconds=lease_seconds)
+        with self.service._transaction():
+            self._fence(fence)
+            return self.domain.heartbeat(fence, lease_seconds=lease_seconds)
 
     def stage(self, fence, chunks, **kwargs):
         # Lifecycle bounds whole payloads; filesystem providers bound each chunk.
@@ -84,8 +105,17 @@ class _RobotOutputs(RunOutputService):
 
     def publish_robot(self, result: RobotExecutionResult, journal: RobotJournal) -> Run:
         actor, fence = self.caller.actor, self.ticket.fence
-        with _transaction(self.db):
+        with (
+            self.service._transaction()
+            if self.domain is not None
+            else _transaction(self.db)
+        ):
             self._fence(fence)
+            queue = self.domain._check(fence) if self.domain is not None else None
+            if queue is not None:
+                self.service._permission(
+                    self.caller, self.service.policy.input_queue, Permission.COMPLETE
+                )
             if (
                 type(result) is not RobotExecutionResult
                 or result.discriminator != DISCRIMINATOR
@@ -158,8 +188,10 @@ class _RobotOutputs(RunOutputService):
                 )
             receipt = {
                 "version": TERMINAL_VERSION,
-                "mode": "standalone",
-                "claim": None,
+                "mode": "work-items" if self.ticket.claim is not None else "standalone",
+                "claim": self.ticket.claim.model_dump(mode="json")
+                if self.ticket.claim is not None
+                else None,
                 "launch": _launch(result.launch),
                 "publicationFence": fence.model_dump(mode="json"),
                 "packageRevision": selection.snapshot.capability.package_revision.model_dump(
@@ -181,7 +213,7 @@ class _RobotOutputs(RunOutputService):
                 raise FenceRejected("Robot publication cancelled")
             # Base publication performs fresh authority/fence checks and the atomic
             # terminal Run/Attempt/output transition under the same transaction.
-            return super().publish(
+            finished = super().publish(
                 actor,
                 fence,
                 [value.ref for value in result.outputs],
@@ -190,6 +222,17 @@ class _RobotOutputs(RunOutputService):
                 if result.status == "PASS"
                 else RunStatus.FAILED,
             )
+
+            if queue is not None:
+                queue.finish_fenced(
+                    self.ticket.claim.as_claim(),
+                    State.DONE if result.status == "PASS" else State.FAILED,
+                    outputs=(),
+                    message="Robot execution completed"
+                    if result.status == "PASS"
+                    else "Robot execution failed",
+                )
+            return finished
 
 
 @dataclass(frozen=True)
@@ -229,8 +272,38 @@ class PinnedRobotRunner:
         self,
         caller: ManagedCaller,
         ticket: GenericTicket,
-        service: StandaloneActionExecution,
+        service: StandaloneActionExecution | GenericWorkItemExecution,
         *,
+        cancelled: Event | Callable[[], bool] | None = None,
+        publication_cancelled: Callable[[], bool] | None = None,
+    ) -> Run:
+        caller = ManagedCaller.model_validate(caller)
+        ticket = GenericTicket.model_validate(ticket)
+        if caller.worker_id != ticket.fence.owner_id:
+            raise AccessDenied("exact Robot worker required")
+        domain = None
+        binding = nullcontext()
+        if isinstance(service, GenericWorkItemExecution):
+            authority = prepare_robot_work_item_authority(service, caller, ticket)
+            domain = service.outputs(caller, ticket)
+            binding = domain.bind_execution_authority(authority)
+        with binding:
+            return self._execute(
+                caller,
+                ticket,
+                service,
+                cancelled=cancelled,
+                publication_cancelled=publication_cancelled,
+                domain=domain,
+            )
+
+    def _execute(
+        self,
+        caller: ManagedCaller,
+        ticket: GenericTicket,
+        service: StandaloneActionExecution | GenericWorkItemExecution,
+        *,
+        domain=None,
         cancelled: Event | Callable[[], bool] | None = None,
         publication_cancelled: Callable[[], bool] | None = None,
     ) -> Run:
@@ -238,25 +311,36 @@ class PinnedRobotRunner:
             ManagedCaller.model_validate(caller),
             GenericTicket.model_validate(ticket),
         )
+        if domain is None and ticket.claim is not None:
+            raise AccessDenied("claimed Robot unsupported by standalone admission")
         if (
-            not isinstance(service, StandaloneActionExecution)
-            or ticket.claim is not None
+            not isinstance(
+                service, (StandaloneActionExecution, GenericWorkItemExecution)
+            )
             or caller.worker_id != ticket.fence.owner_id
         ):
-            raise AccessDenied(
-                "retained standalone Robot admission required; claimed Robot unsupported"
-            )
+            raise AccessDenied("retained Robot admission and exact worker required")
         if service.db.in_transaction():
             raise FenceRejected("Robot execution requires independent journal commit")
         declaration = service.registry.get_capability(service.snapshot.capability)
         if (
             declaration is None
-            or declaration.work_items.mode != "none"
+            or declaration.work_items.mode
+            not in (
+                ("none",)
+                if domain is None
+                else ("optional", "required-input", "consumer")
+            )
+            or (
+                domain is not None
+                and ticket.claim is None
+                and declaration.work_items.mode != "optional"
+            )
             or declaration.work_items.allow_outputs
             or declaration.binding_requirements
         ):
             raise AccessDenied(
-                "Robot v1 only admits standalone without logical or queue outputs"
+                "Robot requires an admitted input mode without logical or queue outputs"
             )
         resolved = service.deployments.resolve(
             caller.actor,
@@ -282,6 +366,8 @@ class PinnedRobotRunner:
                 raise AccessDenied("current activated Robot Deployment required")
 
         def require_current(actor, fence, snapshot):
+            if domain is not None:
+                domain._check(fence)
             current = repository.current(
                 snapshot.deployment.workspace_id, snapshot.deployment.deployment_id
             )
@@ -319,7 +405,7 @@ class PinnedRobotRunner:
             require_current=require_current,
         )
         outputs = _RobotOutputs(
-            service, caller, ticket, prepared, publication_cancelled
+            service, caller, ticket, prepared, publication_cancelled, domain
         )
 
         def selected(actor, fence):

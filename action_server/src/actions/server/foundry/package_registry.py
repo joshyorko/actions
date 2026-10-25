@@ -1139,6 +1139,7 @@ class FoundryPackageRegistry:
                 ref,
                 _hash(loaded.robot.input_schema),
                 (self._plan_ref(ref.package_revision, loaded),),
+                work_items=loaded.robot.work_items,
             )
         for member in _verified_members(loaded):
             entry = json.loads(member.manifest_json)["capabilities"][0]

@@ -81,19 +81,19 @@ def _validate_invocation_compatibility(requirements, compatibility, environment)
         if requirement.invocations is not None:
             for operation in requirement.operations:
                 knowledge_contract(operation)
-    # This new draft requires the exact private Core candidate contract.
+    # Retain the original draft pin and the qualified owned Core replacement.
     # Do not silently bless an older SDK or an unqualified future context reader.
     core = [
         item["constraint"]
         for item in environment
         if item["kind"] == "python-package" and item["name"] == "actions-core"
     ]
-    if core != ["==1.1.0a4"] or compatibility != {
+    if core not in (["==1.1.0a4"], ["==1.1.0a7"]) or compatibility != {
         "actionsCoreRange": KNOWLEDGE_CORE_RANGE,
         "actionsRuntimeRange": KNOWLEDGE_RUNTIME_RANGE,
     }:
         raise ValueError(
-            "mapped Knowledge requires the Core a4 and Runtime a39 candidate contract"
+            "mapped Knowledge requires a qualified Core a4/a7 pin and Runtime a39 contract"
         )
 
 

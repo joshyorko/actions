@@ -102,6 +102,7 @@ def test_detached_passes_only_explicit_local_stop_for_bound_execution(
     from actions.server.run_outputs import detached as module
 
     worker = object.__new__(module.DetachedActionWorker)
+    worker.capability_runner = None
     worker.logical_execution = None if mode == "absent" else object()
     stop = threading.Event()
     worker._stop_requested = stop.is_set
