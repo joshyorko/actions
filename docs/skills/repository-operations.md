@@ -6601,3 +6601,9 @@ A narrow UI retest may retain an earlier candidate's Core/RCC inputs only with a
 separately versioned Runtime, exact committed source provenance and byte verification.
 It does not inherit later backend acceptance. Preserve failed browser receipts and
 change candidate identity assertions without relaxing host or authorization checks.
+
+RunAdmission records canonical execution snapshots, not individual Runs. A repeated
+execution under one unchanged deployment/capability snapshot reuses its admission.
+Installed/UI qualification should check Run and Attempt counts separately, verify
+RunPin admission associations, and compare the retained typed snapshot to the exact
+authorized deployment. Never demand one admission per repeated execution.
