@@ -28,6 +28,19 @@ payload remains exactly0.5.0a2. Publisher existing160+newmanual-controller16 pas
 but live protection/token-scope disposition remains an owner security gate.
 All preceding red/failed/skip receipts remain linked; no full readiness claim.
 
+The [frozen source receipt](evidence/actions-next-327/cloud-frozen-acceptance-20261025.json)
+qualifies3037e4fccb66a41835dbea8de7406d1281ad5dda / Runtime1.1.0a24:
+managed158,SQL295,components165,invoice129,worker134,compiler22,generated52,
+effects72 allpassed withzeroskips; portable2390passed/13skipped/290deselected.
+Corefull332/static126 passed. The exact cleanRuntime24 wheel is
+`144ede90db937ca5ba8a54dc78030d26f4a352f13e8eb04962ccc9900804a647`;
+cleanMCPauthoring/activation/restart/rollback and schema/auth passed. The actual
+installedlegacyUI still failscustomqueue navigation; its positivepersistence and
+negativeUI receipts are retained. InstalledRCC/secondhost/genericqueue/default
+policy and fullmatrix remain open. The portable realartifact-provider opt-in is
+unrun; pinnedtaskinput separately passed inworker134. No skipped/inherited cell
+is silently accepted. This source is an engineeringcheckpoint, not fullreadiness.
+
 ## Owner pause and saved handoff
 
 **PAUSED by owner at2026-10-23 21:32:43UTC. Full release is not ready.**

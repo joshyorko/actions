@@ -5070,3 +5070,22 @@ controller. Keep these checks distinct from producer/backup-run validation. The
 owner actor guard is not independent approval against a stolen owner credential.
 Review live branch/environment protection and actual package-token scope before
 publication; code tests cannot establish that security disposition.
+
+Frozen-source Core validation uses the full package pytest selection without
+`--force-regen`: `invoke test` otherwise permits rewriting golden snapshots.
+Run the configured lint and typecheck separately and distinguish an absent
+optional Markdown tool from their Python results. A source import inventory
+does not replace wheel-member and clean-consumer origin verification.
+
+An unconfigured installed Canvas exposes the six authoring tools, including
+preview, plus the read-only launcher. Do not substitute `capability_invoke` for
+preview in a client harness: execution is conditional on a configured trusted
+profile and policy. A catalog/resource/authoring/restart proof does not prove
+app-only interactions, generated execution or authenticated ChatGPT rendering.
+
+Use pytest's supported `--robocorp-log-output` option to put owned diagnostic
+output on a volume with measured headroom during large RCC gates. Preserve old
+output with a complete hash-verified relocation receipt before reclaiming its
+workspace location. A pinned full-toolkit task-input fixture can require several
+GiB beyond the SDK-only worker; serialize heavy gates, retain failed receipts,
+and preserve verification/trust policy when diagnosing capacity.

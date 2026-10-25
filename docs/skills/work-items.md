@@ -1180,3 +1180,9 @@ receipt or audit write failure must roll back all of them. Concurrent duplicates
 and service reconstruction retain that receipt without another mutation; every
 replay still checks live queue policy, exact input and the applicable fences.
 Service reconstruction is not a fresh-interpreter or installed-client proof.
+
+Keep the actual pinned task-input test in its dedicated worker gate even when
+the portable suite removes its RCC opt-in. A portable skip is covered only by
+a named successful dedicated case on the same source and SDK bytes. Other
+opt-in RCC adapter/provider tests remain separate; generated-package or invoice
+worker success does not automatically qualify every RCC provider path.
