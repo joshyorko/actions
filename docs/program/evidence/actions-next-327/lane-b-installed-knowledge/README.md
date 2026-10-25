@@ -115,3 +115,67 @@ lane-specific test. It would consume already authorized pages only. A new typed
 backend export operation crosses reserved contracts and remains integrator-owned.
 
 Upstream disposition: none.
+
+## Prepared installed orchestration (not executed)
+
+The second slice adds `lane_b_build_installed.py`, which parameterizes the retained
+a38 committed-source build recipe: clean expected SHA, 8 GiB disk admission,
+pinned bundled RCC, archived frontend/public OAuth generation, three wheels,
+declared DuckDB extra, retained install constraints, pip check, and isolated
+installed version/origin checks. It does not change candidate versions. Linux
+paths are explicit; this is not cross-platform distribution qualification.
+Build execution awaits the producer checkpoint; py_compile and scoped static
+checks plus a genuine dirty-checkout refusal test are its validation so far.
+Peer review caught preflight failures occurring before receipt initialization;
+the builder now preserves those failures, refuses existing destinations without
+overwriting them, constrains the tracked constraints path, and records tool paths.
+
+`lane_b_installed_knowledge_lifecycle.py` consumes a private manifest containing
+installed interpreter/prefix/versions, source checkpoint, preprovisioned stopped
+datadir/profile/Task policy, Workspace, ingestion/search app and binding IDs,
+query/page limit and independently expected document objects. It starts only an
+owned loopback server, discovers snapshots and semantic artifact nodes, invokes
+real detached Tasks, downloads authenticated output artifacts, restarts and
+replays retained Task identities and bytes. It has no SQL/provider fallback.
+Operator setup, source authoring, negative grant/cancellation tests and full
+browser acceptance are explicit remaining gates. The checkpoint field is an
+operator assertion, not independent proof of wheel/source equivalence.
+
+A genuine subprocess refusal test uses the package's editable interpreter and
+verifies that installed-origin validation fails before any server or Task starts.
+Result: 1 passed, zero skipped; retained stdout/XML below. This is refusal
+evidence, not successful installed execution. The runner requires 1 GiB free disk,
+records artifact HTTP status without credentials, and retains failed/unexecuted
+stages. Optional tracing was disabled for this test.
+The subsequent joined refusal inventory passes 2 cases, zero skipped, including
+the builder's preflight failure receipt. Original and later receipts are retained;
+these overlapping counts are not summed. The helper's attempted Black check was
+unavailable; configured Ruff format and Isort were used successfully instead.
+
+At the base checkpoint, ordinary startup does not construct RunOutputTransport;
+the optional `_server` route is supplied by the invoice-generated integration.
+The runner's detached-Task HTTP download can therefore fail even when a Task
+completes. This is a source-observed route dependency, not an observed installed
+failure yet. A direct service read or an app-associated Canvas artifact call
+does not qualify that particular detached HTTP gate. The integrator owns the
+startup/auth/transport decision; this lane will not wire a new shared route.
+
+Exact additional canonical delta proposed after the previous paragraph:
+
+> A completed detached Task does not establish HTTP artifact-download acceptance.
+> Qualify the ordinary installed host's authenticated output route separately.
+> Preserve an unavailable route as a failed gate instead of substituting direct
+> RunOutputService access. A lifecycle runner using preprovisioned applications
+> also leaves operator provisioning and authoring as separate prerequisites.
+
+Evidence: `_server.py` optional `run_output_transport`, the only constructor in
+`data_queries/generated.py`, and the new runner's explicit HTTP route. Remaining
+uncertainty: recheck ordinary wiring in the incoming generated-Knowledge checkpoint.
+
+Production feature proposed for allocation (not implemented):
+`data_queries/knowledge_export.py` and `test_knowledge_export.py`, with
+`export_for_execution(service, actor, fence, request, cancelled)` consuming the
+existing authorized search hook under the same fence, bounding aggregate bytes
+and documents, enforcing stable revision/corpus identity, and returning
+deterministic complete-result bytes. Typed operation declarations and final
+publication integration remain reserved to the integrator.
