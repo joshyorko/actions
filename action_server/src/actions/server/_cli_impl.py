@@ -826,11 +826,13 @@ def _main_retcode(
             )
             return 0
         except ValidationError:
-            log.critical("Invalid local authorization request or profile; use --schema")
-            return 1
+            refusal = "Invalid local authorization request or profile; use --schema"
         except (ValueError, PermissionError, OSError) as exc:
-            log.critical("Local authorization refused: %s", exc)
-            return 1
+            refusal = f"Local authorization refused: {exc}"
+        # A failing logging handler can print the active exception context.
+        # Leave the handler before logging so rejected validation input stays private.
+        log.critical("%s", refusal)
+        return 1
 
     if command == "version":
         print(__version__)

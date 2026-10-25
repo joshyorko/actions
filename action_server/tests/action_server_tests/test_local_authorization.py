@@ -610,3 +610,23 @@ def test_root_help_snapshot_includes_explicit_offline_command(capsys):
         output
         == (Path(__file__).parent / "test_cli" / "test_help_-h.txt").read_text().strip()
     )
+
+
+def test_cli_validation_with_closed_logging_stream(local, capsys, caplog):
+    import io
+    import logging
+
+    from actions.server import _cli_impl
+
+    stream = io.StringIO()
+    handler = logging.StreamHandler(stream)
+    stream.close()
+    _cli_impl.log.addHandler(handler)
+    previous = logging.raiseExceptions
+    logging.raiseExceptions = True
+    try:
+        test_cli_validation_does_not_echo_rejected_secret(local, capsys, caplog)
+    finally:
+        logging.raiseExceptions = previous
+        _cli_impl.log.removeHandler(handler)
+        handler.close()
