@@ -59,6 +59,31 @@ def test_prepare_boot_state_is_idempotent_and_does_not_seed_a_package(tmp_path: 
     assert not any(first.packages_dir.iterdir())
 
 
+def test_fresh_boot_prepares_compiler_workspace_parent(tmp_path: Path):
+    import tempfile
+
+    paths = prepare_boot_state(tmp_path / "state", tmp_path / "installed")
+    # The compiler uses TemporaryDirectory(dir=...) on the first generated apply.
+    with tempfile.TemporaryDirectory(dir=paths.cache_dir / "compile") as workspace:
+        assert Path(workspace).parent == paths.cache_dir / "compile"
+    assert prepare_boot_state(paths.data_dir, tmp_path / "installed") == paths
+
+
+@pytest.mark.parametrize("kind", ["symlink", "file"])
+def test_compiler_workspace_parent_rejects_non_directory(tmp_path: Path, kind: str):
+    cache = tmp_path / "state" / "cache"
+    cache.mkdir(parents=True)
+    outside = tmp_path / "outside"
+    outside.mkdir()
+    if kind == "symlink":
+        (cache / "compile").symlink_to(outside, target_is_directory=True)
+    else:
+        (cache / "compile").write_text("preserve", encoding="utf-8")
+    with pytest.raises(BootStateError):
+        prepare_boot_state(cache.parent, tmp_path / "installed")
+    assert not any(outside.iterdir())
+
+
 @pytest.mark.parametrize("relative", [".", "", "child/state"])
 def test_state_root_cannot_be_the_installed_root_or_inside_it(
     tmp_path: Path, relative: str

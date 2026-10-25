@@ -1,0 +1,37 @@
+{
+  "status": "PASS",
+  "group": "final-followup",
+  "base_source": "55b7b8f015e7c4566ba5374d42eb1d168457e80d",
+  "runtime": "1.1.0a27",
+  "scope": "working-tree integration; source hashes recorded separately",
+  "synthetic_auth": true,
+  "engine": "prepared source Runtime",
+  "renderer": "not exercised",
+  "cleanup": "PASS",
+  "command": [
+    "/workspace/actions-recovery-327/run-prepared",
+    "python",
+    "/workspace/actions-cloud/package-command.py",
+    "action_server",
+    "run",
+    "pytest",
+    "tests/action_server_tests/test_generic_execution_port.py",
+    "tests/action_server_tests/test_generic_work_item_execution.py",
+    "tests/action_server_tests/test_generic_managed_service.py",
+    "tests/action_server_tests/test_runtime_managed_bootstrap.py",
+    "tests/action_server_tests/test_managed_generic_composite.py",
+    "-k",
+    "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+    "-q",
+    "--junitxml=/workspace/actions-recovery-327/evidence/a27-source-final-followup/tests.xml",
+    "--robocorp-log-output=/workspace/actions-recovery-327/evidence/a27-source-final-followup/log",
+    "--basetemp=/workspace/actions-recovery-327/evidence/a27-source-final-followup/fixtures"
+  ],
+  "exit_code": 0,
+  "counts": {
+    "skipped": 0,
+    "failure": 0,
+    "error": 0,
+    "tests": 126
+  }
+}

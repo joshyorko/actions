@@ -1,0 +1,5 @@
+{
+  "outcome": "CompilationOutcome(compiled_package=None, receipt=CompilationReceipt(source_inventory_digest='sha256:57b99aabb860c0f386fa1ff1d85473e1a911a791795b5cd34b0ea315272caee8', source_artifact_digest='sha256:97eb775322bb203e96494d74f1bc1385d29cddd126653f0fb9133d2e15908559', status='failed', build_status='not-run', import_status='not-run', test_status='not-run', failure_code='compiler_workspace_failed', package_revision_digest=None, runtime_plan_digest=None, rcc_specification_digest=None, rcc_artifact_digest=None))",
+  "executor_calls": 0,
+  "parent_exists": false
+}

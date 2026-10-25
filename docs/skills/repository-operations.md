@@ -5101,6 +5101,23 @@ workspace location. A pinned full-toolkit task-input fixture can require several
 GiB beyond the SDK-only worker; serialize heavy gates, retain failed receipts,
 and preserve verification/trust policy when diagnosing capacity.
 
+### Qualify fresh ordinary compiler startup
+
+Start ordinary CLI qualification from an absent owned datadir. Use the supported
+`ROBOTS_HOME` setting when the platform home is read-only. Boot preparation must
+create and validate `cache/compile` before the compiler's first temporary
+workspace: pre-creating it in a fixture conceals first-use failure. The boot
+regression checks fresh creation, repeat startup, and rejection of file/symlink
+parents; installed a26 failed before executor invocation when this parent was
+absent. Keep UI lifecycle, compiler build/import/tests, and actual admitted
+execution evidence separate.
+
+A trusted execution descriptor is not an authorization grant. Record synthetic
+`execute_generated_source` and exact profile grants separately from default
+provisioning. A reviewed dispatch additionally requires a genuine scoped source
+result and explicit decision; never manufacture an invoice approval to complete
+an ordinary-host gate.
+
 ### Bound owned RCC verification caches
 
 Real compiler/execution fixtures can materialize many large RCC views even when

@@ -65,6 +65,12 @@
     "consumer_guard.py": "d9cc217a560d2ed74e4057c051d6819714f2e9752cf57eb9bf426a9a5be5ffc9",
     "installed-sql-tests.xml": "27420021ce7ba88200f009cf00d87119470ee04f66cb7a3f7181eca70f536d1e",
     "custom-queue-after-restart.png": "74c06b73d9c30a7dc3666fa6616f4b29d81356e0e5d27d7e8374042254ef8180",
+    "official-host/tests.xml": "48d556a09c96a42f91332b454054a5353ccc8346185aee1437c45d956ea23bca",
+    "official-host/qualification.json": "9d19bca5a6b2d93ed4261fd21b0121513f9bd8e9794eb80cc96dfcef67be4c78",
+    "official-host/pytest.txt": "2eb981c7ef95c1bf2241efe457e0145d83d860147697752fdd1e09bf1420a27b",
+    "official-host/browser.mjs": "65ed9f3ae931d66143dcb8544256916c9fae1f7b867ec5aa032a5f7f495a4fc0",
+    "official-host/receipt.json": "4f42e0bd0fcc643b9c78da4a23131bc1c4037f41f36fcee0095019f079eed1c3",
+    "official-host/test_reference_host.py": "eaf6ccde15d46552f30879054712aba2f4a5a4b80cca844405b90c43141bdd7c",
     "source/invoice.txt": "7ea32c9a69dec4fa16e23e23dbec3025cef8821ab943d4cbdd0de9f75596a275",
     "source/package_compiler.xml": "e50c082e0aa6665ffdc5cff0e86a001b78fab2c7ad88e9062b248f09241987c3",
     "source/foundry_storage.xml": "cad72ecb34322209208755ce509a75ad5b259bafe0f9e01c3d4fbc4e19c15c92",
@@ -76,6 +82,16 @@
     "source/receipt.json": "5c2a3b472fe7d48839fe855b7ef589ab763b2e2b192c907437629618734842bd",
     "source/foundry_storage.txt": "96eb4c184345010831feba442217e1fd1be650a162a3bcf66f4b5779c1a6b4c5",
     "source/components.txt": "a9814fc54ccd191c4699b2042ff07c7b1959efe14f95c5c759896da131cdd829",
-    "source/postgres.txt": "cac167dc1d0114502040f08f35986475a50ba41c086db156e1f0575e22e81031"
+    "source/postgres.txt": "cac167dc1d0114502040f08f35986475a50ba41c086db156e1f0575e22e81031",
+    "official-host/invoice-summary/invoice-summary-browser.json": "6f9e4f0c26a60d081d6a8f920e47e0705f70d4abed5a0677d952679560e8058b",
+    "official-host/invoice-summary/invoice-summary-review.png": "4325b68ef824697d1fd1de1fda3eb36e9c23a6aac258084675cce19389c84c13",
+    "official-host/invoice-summary/invoice-summary-mounted.png": "b5dba8ff9dacce0cf71369fd719b57183ac4125bfcd349fb0207f3dcd749d67e",
+    "official-host/invoice-summary/receipt.json": "fa2202d9604490348aa17e16abd08b1ac9879ebb273d9c7a0f73bbfe9e3c8f63",
+    "official-host/invoice-summary/invoice-summary-executed.png": "7002d3f69f43f5d817fd35650bd7fb3b6d894b4ad80dfd3c90f8c7f15bc31427",
+    "official-host/ndjson-inspector/ndjson-inspector-browser.json": "14c4dfa457ad1fb073de77ba8e9bd4cb3b395cdc712f8d4fa7c27d15f0fe8f2c",
+    "official-host/ndjson-inspector/receipt.json": "1a0ddafa9dad49ade90b107644e9e6cfca17eb8954d318126e57aba41f56fe66",
+    "official-host/ndjson-inspector/ndjson-inspector-review.png": "ef7204995c85283d1b28df6147dd69dca88471a6c7ac31553abccdda41d5daf4",
+    "official-host/ndjson-inspector/ndjson-inspector-executed.png": "eae73bbad1c82237523bc85b5f2cb628a101d64d16216f03e1eb48b170e6cafa",
+    "official-host/ndjson-inspector/ndjson-inspector-mounted.png": "ae420fdd5cbcb4b5d99f0943b521d530f8fbc8977371f84ec445f38247c448c4"
   }
 }

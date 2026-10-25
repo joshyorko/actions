@@ -167,6 +167,10 @@ def prepare_boot_state(
         _ensure_directory(path, root, name)
         children[name] = path
 
+    # The compiler creates an isolated temporary workspace beneath this parent
+    # on the first generated apply, including on a completely fresh datadir.
+    _ensure_directory(children["cache"] / "compile", root, "compiler cache")
+
     database_file = root / database_filename
     server_info_file = root / "server-info.json"
     for file_path, label in (
