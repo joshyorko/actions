@@ -1,0 +1,237 @@
+{
+  "status": "PASS",
+  "runtime_version": "1.1.0a37",
+  "engine_origin": "/workspace/actions-recovery-327/installed-a37/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+  "source": "b23df406f1e32e508e9a951f2469c6f57fa8c703",
+  "installed_versions": {
+    "mcp": "2.3.0",
+    "mcp-types": "2.3.0",
+    "actions-core": "1.1.0a3"
+  },
+  "synthetic_owned_auth": true,
+  "processes": [
+    {
+      "pid": 188346,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.21421703300075023,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 188396,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.21412974399936502,
+      "lifespan_shutdown_complete": true
+    }
+  ],
+  "calls": [
+    {
+      "method": "tools/call",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "completed",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tasks/get",
+      "status": "completed",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    },
+    {
+      "method": "tools/call",
+      "status": "completed",
+      "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d"
+    }
+  ],
+  "actual_generated_execution": "PASS",
+  "workspace": "75f3b569-f670-4632-bd05-aeaa02707733",
+  "task_id": "a03c5921-40b5-455a-9846-fb724c57de4d",
+  "one_run_one_attempt": true,
+  "scope": "installed a37: previously refused identical Task key succeeds only after declared optional extra installation/restart, actual RCC logical value, public Task restart/replay; no source/recompile/grant changes"
+}

@@ -1,0 +1,41 @@
+{
+  "status": "PASS",
+  "runtime_version": "1.1.0a36",
+  "engine_origin": "/workspace/actions-recovery-327/installed-a36/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+  "source": "fbde9bc3947804212c930aa65c2884714eb9df2e",
+  "installed_versions": {
+    "mcp": "2.3.0",
+    "mcp-types": "2.3.0",
+    "actions-core": "1.1.0a3"
+  },
+  "synthetic_owned_auth": true,
+  "processes": [
+    {
+      "pid": 185484,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.2145534929986752,
+      "lifespan_shutdown_complete": true
+    }
+  ],
+  "calls": [
+    {
+      "method": "tasks/get",
+      "status": "completed",
+      "taskId": "f4f65253-9f06-4fa7-b3c6-e4b506e86d38"
+    },
+    {
+      "method": "tools/call",
+      "status": "completed",
+      "taskId": "f4f65253-9f06-4fa7-b3c6-e4b506e86d38"
+    }
+  ],
+  "actual_generated_execution": "PASS",
+  "workspace": "8e509cf3-dd48-4931-81ef-3c370c21a31a",
+  "task_id": "f4f65253-9f06-4fa7-b3c6-e4b506e86d38",
+  "one_run_one_attempt": true,
+  "restart_preserved": true,
+  "scope": "installed public MCP compile/activate/current Task actual RCC with declared DuckDB extra; authorized local sealed-output value read and public Task restart/replay; no public artifact-byte route claim",
+  "continuation": "original flow completed RCC then verifier omitted Package registry; original failed receipt retained"
+}

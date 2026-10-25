@@ -1,0 +1,10 @@
+{
+  "intent_id": "4d24b959-3c99-5496-8b1e-f5a0e829e47f",
+  "operation": "configure-host",
+  "provider": {
+    "provider_profile_id": "cc8c981d-bf57-4faf-ae12-651fc4c6acdb",
+    "revision_id": "sha256:a917b1f441e73cf1b1f0ed4fd2edc104926b41aa2e4cb7803d5cb2d599ac999c",
+    "workspace_id": "8e509cf3-dd48-4931-81ef-3c370c21a31a"
+  },
+  "readiness": "configured-not-probed"
+}

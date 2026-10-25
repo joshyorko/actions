@@ -13,7 +13,9 @@ WRAPPER = Path(__file__).resolve().parents[2] / "scripts/publish_evidence.sh"
 
 
 class EvidencePublicationTests(unittest.TestCase):
-    def run_pipeline(self, payload, *, commit_exit=0, working_copy=None, raw_json=None):
+    def run_pipeline(
+        self, payload, *, commit_exit=0, working_copy=None, raw_json=None, mode=None
+    ):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             real_git = shutil.which("git")
@@ -49,7 +51,8 @@ class EvidencePublicationTests(unittest.TestCase):
                 TEST_COMMIT_EXIT=str(commit_exit),
             )
             result = subprocess.run(
-                ["bash", str(WRAPPER), "existing-test-branch", "test evidence"],
+                ["bash", str(WRAPPER), "existing-test-branch", "test evidence"]
+                + ([mode] if mode is not None else []),
                 cwd=root,
                 env=environment,
                 text=True,
@@ -94,6 +97,21 @@ class EvidencePublicationTests(unittest.TestCase):
         result, calls = self.run_pipeline({"token": "[redacted-stopped-session]"})
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         self.assertEqual(calls, ["commit", "push"])
+
+    def test_commit_only_still_scans_and_never_pushes(self):
+        result, calls = self.run_pipeline({"token": "[redacted]"}, mode="--commit-only")
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertEqual(calls, ["commit"])
+        result, calls = self.run_pipeline(
+            {"token": "synthetic-secret"}, mode="--commit-only"
+        )
+        self.assertNotEqual(result.returncode, 0)
+        self.assertEqual(calls, [])
+
+    def test_unknown_mode_cannot_fall_through_to_push(self):
+        result, calls = self.run_pipeline({}, mode="--unknown")
+        self.assertEqual(result.returncode, 2)
+        self.assertEqual(calls, [])
 
 
 if __name__ == "__main__":

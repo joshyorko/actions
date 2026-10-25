@@ -1,0 +1,16 @@
+{
+  "expected_grants_digest": "sha256:eb248b48a795f037ab601bca88d822b0bf47d0f4e999ffd6cdfa0f5882659494",
+  "operation": "grant-owner",
+  "ownedGrant": {
+    "id": "12d0f0d9-1624-5f8d-ac1b-225d4cbf2bf5",
+    "operations_json": "[\"provider.register\"]",
+    "principal_id": "54801a2f-fb56-4cf6-9489-9d413218be14",
+    "subject_id": "75f3b569-f670-4632-bd05-aeaa02707733",
+    "subject_kind": "workspace",
+    "workspace_id": "75f3b569-f670-4632-bd05-aeaa02707733"
+  },
+  "permissions": [
+    "provider.register"
+  ],
+  "provider": null
+}

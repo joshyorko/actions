@@ -5598,3 +5598,19 @@ Missing or unloadable selected modules return a bounded unavailable error before
 Task admission. Successful module import is dependency readiness only, not
 connection, credentials, source-byte, privilege or execution qualification. Live
 execution authorization and actual engine validation remain unchanged.
+
+For an explicitly authorized supported Git-data-API checkpoint, use
+`publish_evidence.sh <existing-branch> <message> --commit-only` to enforce the
+same staged scan, whitespace and commit gates without retrying unavailable Git
+transport. Unknown modes fail closed. Upload only that immutable reviewed tree,
+verify blob/tree identity, and update the existing branch with the expected head
+and force=false. Stop on denied connector writes or a lease mismatch. Preserve
+the original local commit; report metadata-only remote commit identity changes
+and do not force divergent local ancestry onto the shared branch.
+
+Installed provider replacement needs configure-host dry-run's exact current
+catalog pointer, not an assumed empty catalog. Authorization request IDs bind
+the complete request, including Deployment revision; use a distinct idempotency
+key for a different revision. An activated revision without its explicit exact
+Deployment grants can refuse inspection/execution. Preserve failed setup receipts
+and finish the explicit stopped-local authorization, rather than weakening guards.

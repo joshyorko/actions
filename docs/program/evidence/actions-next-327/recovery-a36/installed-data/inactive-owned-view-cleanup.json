@@ -1,0 +1,18 @@
+{
+  "home": "/workspace/actions-recovery-327/compiler-core-a3/robocorp",
+  "spaces": [
+    "2c7fb06_5a1fac3_e88aa8b7",
+    "2d42ae4_5a1fac3_9fcd2534",
+    "2d42ae4_5a1fac3_e88aa8b7",
+    "92b0a93_5a1fac3_9fcd2534",
+    "92b0a93_5a1fac3_e88aa8b7",
+    "e13cf6f_5a1fac3_e88aa8b7"
+  ],
+  "active_processes": [],
+  "before_free_bytes": 1686499328,
+  "retained": "immutable artifacts/catalog/source/build receipts/package caches",
+  "dryrun_returncode": 0,
+  "delete_returncode": 0,
+  "after_free_bytes": 2913005568,
+  "remaining_selected_spaces": []
+}

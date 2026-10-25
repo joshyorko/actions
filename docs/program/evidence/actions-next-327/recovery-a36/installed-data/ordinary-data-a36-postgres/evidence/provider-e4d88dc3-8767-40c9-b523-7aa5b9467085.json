@@ -1,0 +1,9 @@
+{
+  "operation": "register-revision",
+  "provider": {
+    "provider_profile_id": "82fabcf7-867e-4ccd-9f5b-014189239bc6",
+    "revision_id": "sha256:9b1632224eb20fc37469b824ccae3977708e654770c135c01c17c68cad7aa3c1",
+    "workspace_id": "8e509cf3-dd48-4931-81ef-3c370c21a31a"
+  },
+  "readiness": "metadata-only"
+}

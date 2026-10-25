@@ -1,0 +1,65 @@
+{
+  "status": "PASS",
+  "runtime_version": "1.1.0a37",
+  "engine_origin": "/workspace/actions-recovery-327/installed-a37/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+  "source": "b23df406f1e32e508e9a951f2469c6f57fa8c703",
+  "installed_versions": {
+    "mcp": "2.3.0",
+    "mcp-types": "2.3.0",
+    "actions-core": "1.1.0a3"
+  },
+  "synthetic_owned_auth": true,
+  "processes": [
+    {
+      "pid": 187346,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.16417533999992884,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 187365,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.2141703300003428,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 187465,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.21424385600039386,
+      "lifespan_shutdown_complete": true
+    }
+  ],
+  "calls": [
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_inspect",
+      "is_error": false
+    }
+  ],
+  "actual_generated_execution": "NOT_ATTEMPTED",
+  "workspace": "75f3b569-f670-4632-bd05-aeaa02707733",
+  "profile_setup": "explicit public offline owner authorization; no SQL writes or source/result/review/admission seeding",
+  "logical_provider": "explicit offline CLI, sealed CSV, DuckDB; no SQL seeding",
+  "scope": "clean installed a37 basewheel with declared optional DuckDB absent; selected Data Task rejected before any Run/Attempt; public compile/activate succeeds; no engine probe"
+}
