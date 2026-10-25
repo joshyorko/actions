@@ -10,10 +10,17 @@ from __future__ import annotations
 import hashlib
 import json
 from collections.abc import Sequence
-from typing import Literal, Protocol
+from typing import Annotated, Literal, Protocol
 
 from actions.canvas_contract import CanvasSpec
-from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    field_validator,
+    model_serializer,
+    model_validator,
+)
 
 from actions.server.deployments.canonical import canonicalize_json
 from actions.server.deployments.ids import (
@@ -74,6 +81,73 @@ class _FrozenValue(BaseModel):
         strict=True,
         revalidate_instances="always",
     )
+
+
+class WorkItemDeclaration(_FrozenValue):
+    """Compiler-owned capability declaration; never an execution grant.
+
+    Optional accepts zero or one explicit input context; required-input requires
+    an exact input; consumer permits queue claim; producer has no input context
+    and may create outputs. None never manufactures a synthetic input.
+    """
+
+    mode: Literal["none", "optional", "required-input", "consumer", "producer"] = "none"
+    allow_outputs: bool = False
+
+    @model_validator(mode="after")
+    def consistent_outputs(self):
+        if self.mode == "none" and self.allow_outputs:
+            raise ValueError("none mode cannot publish Work Item outputs")
+        if self.mode == "producer" and not self.allow_outputs:
+            raise ValueError("producer mode requires explicit output permission")
+        return self
+
+
+QueueName = Annotated[str, Field(pattern=r"^[A-Za-z0-9][A-Za-z0-9._:-]{0,255}$")]
+
+
+class CapabilityWorkItemPolicy(_FrozenValue):
+    """Immutable host selection for normalized whole-payload capability input.
+
+    Queue IDs are logical names within the exact Deployment Workspace, never
+    backend addresses. Bounds narrow admission; they do not enable a worker.
+    Output mapping and publication require a separately supported execution port.
+    """
+
+    capability: CapabilityRef
+    input_mode: Literal["none", "optional", "required", "claim"]
+    input_queue: QueueName | None = None
+    output_queue: QueueName | None = None
+    max_input_bytes: int = Field(default=262144, ge=1, le=262144)
+    max_output_items: int = Field(default=0, ge=0, le=64)
+    max_output_bytes: int = Field(default=0, ge=0, le=262144)
+
+    @model_validator(mode="after")
+    def explicit_queue_selection(self):
+        if (self.input_mode == "none") != (self.input_queue is None):
+            raise ValueError("input mode requires an exact matching queue selection")
+        if self.output_queue is None:
+            if self.max_output_items or self.max_output_bytes:
+                raise ValueError("output bounds require an explicit output queue")
+        elif not self.max_output_items or not self.max_output_bytes:
+            raise ValueError("output queue requires positive bounded output limits")
+        return self
+
+    def require_declaration(self, declaration: WorkItemDeclaration) -> None:
+        declaration = WorkItemDeclaration.model_validate(declaration)
+        expected = {
+            "none": "none",
+            "optional": "optional",
+            "required-input": "required",
+            "consumer": "claim",
+            "producer": "none",
+        }[declaration.mode]
+        if declaration.mode == "none" or self.input_mode != expected:
+            raise ValueError("queue input policy differs from capability declaration")
+        if self.output_queue is not None and not declaration.allow_outputs:
+            raise ValueError("capability does not allow Work Item output creation")
+        if declaration.mode == "producer" and self.output_queue is None:
+            raise ValueError("producer requires an explicit output queue")
 
 
 class BindingAssignment(_FrozenValue):
@@ -177,6 +251,14 @@ class DeploymentSpecification(_FrozenValue):
     canvas_spec: CanvasSpec | None = None
     canvas_application: CanvasApplicationRef | None = None
     canvas_bindings: tuple[CanvasCapabilityBinding, ...] = ()
+    work_item_policies: tuple[CapabilityWorkItemPolicy, ...] = ()
+
+    @model_serializer(mode="wrap")
+    def preserve_legacy_serialization(self, handler):
+        value = handler(self)
+        if not self.work_item_policies:
+            value.pop("work_item_policies", None)
+        return value
 
     @field_validator("canvas_spec", mode="before")
     @classmethod
@@ -216,6 +298,7 @@ class DeploymentSpecification(_FrozenValue):
                 or self.capability_plans
                 or self.bindings
                 or self.canvas_bindings
+                or self.work_item_policies
                 or any(ref is not None for ref in profiles)
             ):
                 raise ValueError(
@@ -255,6 +338,14 @@ class DeploymentSpecification(_FrozenValue):
             if plan_policy.capability in policy_by_capability:
                 raise ValueError("capability Runtime Plan policy is duplicated")
             policy_by_capability.add(plan_policy.capability)
+
+        queue_capabilities: set[CapabilityRef] = set()
+        for queue_policy in self.work_item_policies:
+            if queue_policy.capability not in capabilities:
+                raise ValueError("Work Item policy capability is not deployed")
+            if queue_policy.capability in queue_capabilities:
+                raise ValueError("Work Item policy capability is duplicated")
+            queue_capabilities.add(queue_policy.capability)
 
         binding_ids: set[BindingRequirementRef] = set()
         for binding in self.bindings:
@@ -403,6 +494,10 @@ class PackageCapabilityDeclaration(Protocol):
 
     @property
     def schema_digest(self) -> str:
+        ...
+
+    @property
+    def work_items(self) -> WorkItemDeclaration:
         ...
 
     @property

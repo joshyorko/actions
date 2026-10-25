@@ -1,0 +1,19 @@
+{
+  "command": [
+    "/workspace/actions-recovery-327/legacy-1.0.4/consumer/bin/python",
+    "-I",
+    "-B",
+    "/workspace/actions-recovery-327/restore-installed-draft/qualify.py",
+    "--operation",
+    "read",
+    "--version",
+    "1.0.4",
+    "--datadir",
+    "/workspace/actions-recovery-327/evidence/a26-installed-legacy-restore-qualified/downgrade-relocated",
+    "--item",
+    "7b9b57fd-1517-44db-b00e-1e76258ac716"
+  ],
+  "returncode": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/workspace/actions-recovery-327/restore-installed-draft/qualify.py\", line 149, in <module>\n    worker(args)\n  File \"/workspace/actions-recovery-327/restore-installed-draft/qualify.py\", line 67, in worker\n    adapter = adapter_type(db_path=str(root / 'workitems.db'),\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/actions-recovery-327/legacy-1.0.4/consumer/lib/python3.12/site-packages/actions/work_items/_adapters/_sqlite.py\", line 70, in __init__\n    self._init_db()\n  File \"/workspace/actions-recovery-327/legacy-1.0.4/consumer/lib/python3.12/site-packages/actions/work_items/_adapters/_sqlite.py\", line 90, in _init_db\n    raise ValueError(\nValueError: Database schema version 6 is newer than supported version 5\n"
+}

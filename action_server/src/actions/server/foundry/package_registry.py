@@ -23,7 +23,7 @@ from actions.server.deployments.foundry_repository import (
     FoundryRepository,
     _transaction,
 )
-from actions.server.deployments.foundry_values import AccessDenied
+from actions.server.deployments.foundry_values import AccessDenied, WorkItemDeclaration
 from actions.server.deployments.ids import (
     BindingRequirementRef,
     CapabilityRef,
@@ -101,6 +101,7 @@ class PackageCapability:
     runtime_plans: tuple[RuntimePlanRef, ...]
     binding_requirements: tuple[BindingRequirementRef, ...] = ()
     capability_authority: str = "package-revision"
+    work_items: WorkItemDeclaration = WorkItemDeclaration()
 
 
 @dataclass(frozen=True)
@@ -168,6 +169,7 @@ class FoundryPackageRegistry:
         trusted_actor: Actor,
         workspace_id: WorkspaceId,
         application_id: DeploymentId,
+        work_items: WorkItemDeclaration = WorkItemDeclaration(),
     ) -> CompilationResult:
         trusted_actor = Actor.model_validate(trusted_actor)
         workspace_id, application_id = (
@@ -185,6 +187,7 @@ class FoundryPackageRegistry:
                 logical_name,
                 ">=1.1.0a15,<2.0.0",
                 ">=1.0.2,<2.0.0",
+                work_items=work_items,
             ),
             protected_input_names=["package.yaml"],
             admission=self._admission,
@@ -464,6 +467,12 @@ class FoundryPackageRegistry:
             ref,
             _hash(compiled.input_schema_payload),
             (self._plan_ref(ref.package_revision, compiled),),
+            work_items=WorkItemDeclaration(
+                mode=json.loads(compiled.manifest_json)["capabilities"][0]["mode"],
+                allow_outputs=json.loads(compiled.manifest_json)["capabilities"][0][
+                    "allowOutputs"
+                ],
+            ),
         )
 
     def get_runtime_plan(self, ref: RuntimePlanRef) -> PackagePlan | None:

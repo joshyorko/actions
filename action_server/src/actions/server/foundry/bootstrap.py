@@ -50,6 +50,7 @@ from actions.server.managed_work_items.authorization import (
     SqlQueueAuthorization,
     bearer_authenticator,
 )
+from actions.server.managed_work_items.composite import CompositeManagedWorkItemsService
 from actions.server.managed_work_items.contracts import ManagedCaller
 from actions.server.managed_work_items.sql_service import SQLManagedWorkItemsService
 from actions.server.run_outputs.filesystem import FilesystemOutputProvider
@@ -158,7 +159,7 @@ class RuntimeCanvas:
     actor: Actor
     workspace: WorkspaceId
     source_provider: FilesystemOutputProvider
-    managed_work_items: SQLManagedWorkItemsService
+    managed_work_items: SQLManagedWorkItemsService | CompositeManagedWorkItemsService
     managed_authenticate: ManagedAuthenticate
 
     def close(self) -> None:
@@ -250,7 +251,9 @@ def create_runtime_canvas(
             capabilities=registry,
         )
         reviews = InvoiceReviewService(InvoiceQueryService(outputs, {}))
-        managed = SQLManagedWorkItemsService(reviews, SqlQueueAuthorization(db))
+        managed: SQLManagedWorkItemsService | CompositeManagedWorkItemsService = (
+            SQLManagedWorkItemsService(reviews, SqlQueueAuthorization(db))
+        )
         managed_authenticate = bearer_authenticator(
             api_key,
             ManagedCaller(
@@ -282,16 +285,27 @@ def create_runtime_canvas(
                 native_completion=NativeTerminalCompletion(execution),
             )
 
-            port = ReviewedCanvasView(
-                ReviewedCanvasExecution(
-                    authoring,
-                    execution,
-                    runner=PinnedReviewedRccRunner(
-                        prepared,
-                        Path(__file__).resolve().parents[1] / "bin" / "rcc-18.19.3",
-                        paths.cache_dir / "execution",
-                    ),
-                )
+            managed = CompositeManagedWorkItemsService(managed, deployments, outputs)
+
+            from actions.server.foundry.generic_execution_port import (
+                GenericCanvasExecution,
+                PinnedGenericRccRunner,
+            )
+
+            rcc = Path(__file__).resolve().parents[1] / "bin" / "rcc-18.19.3"
+            execution_root = paths.cache_dir / "execution"
+            reviewed_execution = ReviewedCanvasExecution(
+                authoring,
+                execution,
+                runner=PinnedReviewedRccRunner(prepared, rcc, execution_root),
+            )
+            port = GenericCanvasExecution(
+                ReviewedCanvasView(reviewed_execution),
+                deployments,
+                outputs,
+                SqlQueueAuthorization(db),
+                worker_id=profile.worker_id,
+                runner=PinnedGenericRccRunner(prepared, rcc, execution_root),
             )
 
         async def authenticate(ctx):

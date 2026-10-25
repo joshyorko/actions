@@ -18,6 +18,7 @@ from actions.canvas_contract import CanvasSpec
 from pydantic import JsonValue, TypeAdapter, ValidationError
 
 from actions.server.deployments.canonical import canonicalize_json
+from actions.server.deployments.foundry_values import WorkItemDeclaration
 from actions.server.deployments.ids import (
     CapabilityRef,
     DeploymentId,
@@ -49,6 +50,11 @@ from actions.server.foundry.authoring_values import (
     capability_bindings,
     public_spec_document,
     public_spec_json,
+)
+from actions.server.foundry.authoring_work_items import (
+    QueuePolicyRequest,
+    parse_queue_policies,
+    select_queue_policies,
 )
 from actions.server.foundry.mcp import CanvasCaller, CanvasPort, CanvasReply
 
@@ -133,6 +139,7 @@ _BACKEND: dict[str, JsonValue] = {
     "description": "Optional externally authored Python source files for a backend. The common Package compiler validates and admits them; source is never returned by Canvas tools.",
     "properties": {
         "logicalName": {"type": "string", "minLength": 1, "maxLength": 128},
+        "workItems": WorkItemDeclaration.model_json_schema(),
         "files": {
             "type": "array",
             "minItems": 1,
@@ -151,6 +158,12 @@ _BACKEND: dict[str, JsonValue] = {
     },
     "required": ["logicalName", "files"],
     "additionalProperties": False,
+}
+
+_QUEUE_POLICIES: dict[str, JsonValue] = {
+    "type": "array",
+    "maxItems": 64,
+    "items": QueuePolicyRequest.model_json_schema(),
 }
 
 SCHEMAS: dict[str, dict[str, JsonValue]] = {
@@ -192,13 +205,19 @@ SCHEMAS: dict[str, dict[str, JsonValue]] = {
             "spec": _SPEC,
             "bindings": _BINDINGS,
             "backend": _BACKEND,
+            "queuePolicies": _QUEUE_POLICIES,
             "idempotencyKey": _IDEMPOTENCY,
         },
         ("appId", "expectedBase", "spec", "bindings", "idempotencyKey"),
         description="Stage a complete new CanvasSpec revision with explicit bindings and optional backend source. The base digest is compare-and-swap checked; applying never activates or executes the revision.",
     ),
     "canvas_preview": _schema(
-        {"spec": _SPEC, "bindings": _BINDINGS, "backend": _BACKEND},
+        {
+            "spec": _SPEC,
+            "bindings": _BINDINGS,
+            "backend": _BACKEND,
+            "queuePolicies": _QUEUE_POLICIES,
+        },
         ("spec",),
         description="Validate and preview a CanvasSpec, binding map, and optional backend input without compilation, persistence, activation, or Run admission.",
     ),
@@ -568,6 +587,10 @@ class FoundryAuthoring(CanvasPort):
                 _parse_backend(backend_value) if backend_value is not None else None
             )
             _validate_preview_bindings(document, targets, backend, workspace_id)
+            queue_policies = parse_queue_policies(
+                inputs.get("queuePolicies", []),
+                tuple(target.binding_id for target in targets),
+            )
             if backend is not None:
                 _validate_source_entries(backend)
             refs = tuple(
@@ -630,6 +653,10 @@ class FoundryAuthoring(CanvasPort):
                 _parse_backend(backend_value) if backend_value is not None else None
             )
             _validate_preview_bindings(document, targets, backend, workspace_id)
+            queue_policies = parse_queue_policies(
+                inputs.get("queuePolicies", []),
+                tuple(target.binding_id for target in targets),
+            )
             if backend is not None:
                 _validate_source_entries(backend)
             await asyncio.to_thread(
@@ -641,6 +668,16 @@ class FoundryAuthoring(CanvasPort):
             key = _idempotency(inputs.get("idempotencyKey"))
             request_fingerprint = _request_fingerprint(
                 {
+                    **(
+                        {
+                            "queuePolicies": [
+                                policy.model_dump(mode="json", by_alias=True)
+                                for policy in queue_policies
+                            ]
+                        }
+                        if queue_policies
+                        else {}
+                    ),
                     "operation": "apply",
                     "applicationId": str(application_id.root),
                     "expectedBase": expected_base_id,
@@ -709,6 +746,11 @@ class FoundryAuthoring(CanvasPort):
                     trusted_actor=actor,
                     workspace_id=workspace_id,
                     application_id=application_id,
+                    **(
+                        {"work_items": backend.work_items}
+                        if backend.work_items is not None
+                        else {}
+                    ),
                 )
                 if not isinstance(result, CompilationResult):
                     raise AuthoringError("Package compiler returned an invalid result")
@@ -787,6 +829,12 @@ class FoundryAuthoring(CanvasPort):
                     package_revisions,
                     bindings,
                 )
+            if queue_policies:
+                if selection is None:
+                    raise AuthoringValidationError(
+                        "Queue policy requires an executable Deployment"
+                    )
+                selection = select_queue_policies(selection, bindings, queue_policies)
             revision = await asyncio.to_thread(
                 self.authority.apply,
                 actor,

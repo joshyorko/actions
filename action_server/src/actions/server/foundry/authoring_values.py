@@ -11,8 +11,16 @@ from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Literal, Protocol
 
-from pydantic import BaseModel, ConfigDict, Field, JsonValue, model_validator
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    JsonValue,
+    model_serializer,
+    model_validator,
+)
 
+from actions.server.deployments.foundry_values import WorkItemDeclaration
 from actions.server.deployments.ids import (
     CapabilityId,
     CapabilityRef,
@@ -80,6 +88,15 @@ class GeneratedBackend(_StrictValue):
 
     logical_name: str = Field(min_length=1, max_length=128, alias="logicalName")
     files: tuple[GeneratedSourceFile, ...] = Field(min_length=1, max_length=16)
+    work_items: WorkItemDeclaration | None = Field(default=None, alias="workItems")
+
+    @model_serializer(mode="wrap")
+    def preserve_legacy_backend(self, handler):
+        value = handler(self)
+        if self.work_items is None:
+            value.pop("workItems", None)
+            value.pop("work_items", None)
+        return value
 
     @model_validator(mode="after")
     def unique_bounded_files(self) -> GeneratedBackend:
@@ -216,6 +233,7 @@ class PackageCompilerPort(Protocol):
         trusted_actor: Actor,
         workspace_id: WorkspaceId,
         application_id: DeploymentId,
+        work_items: WorkItemDeclaration = WorkItemDeclaration(),
     ) -> CompilationResult:
         """Compile bounded source; no install or deployment mutation occurs."""
 

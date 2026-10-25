@@ -122,6 +122,24 @@
     "capability": {
       "type": "object",
       "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {"properties": {"mode": {"enum": ["optional", "required-input", "consumer", "producer"]}}, "required": ["mode"]},
+          "then": {"required": ["allowOutputs"]}
+        },
+        {
+          "if": {"properties": {"allowOutputs": {"const": true}}, "required": ["allowOutputs"]},
+          "then": {"required": ["mode"]}
+        },
+        {
+          "if": {"properties": {"mode": {"const": "none"}}, "required": ["mode"]},
+          "then": {"properties": {"allowOutputs": {"const": false}}}
+        },
+        {
+          "if": {"properties": {"mode": {"const": "producer"}}, "required": ["mode"]},
+          "then": {"properties": {"allowOutputs": {"const": true}}, "required": ["allowOutputs"]}
+        }
+      ],
       "required": [
         "id",
         "kind",
@@ -138,10 +156,10 @@
           "enum": ["action", "robot-task", "workflow", "dev-task"]
         },
         "mode": {
-          "const": "none"
+          "enum": ["none", "optional", "required-input", "consumer", "producer"]
         },
         "allowOutputs": {
-          "const": false
+          "type": "boolean"
         },
         "inputSchemaDigest": {
           "$ref": "#/$defs/sha256"

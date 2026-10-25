@@ -1,0 +1,27 @@
+{
+  "archive_root": "/workspace/actions-recovery-327/generic-contract-draft",
+  "base": "5d950150b7b5886d1e54246ac216ff41aa4b9f1e",
+  "dependencies": [
+    "generic-contract.patch",
+    "generic-domain.patch",
+    "generic-domain-version.patch"
+  ],
+  "patch_sha256": "549dee7d4a2e1fda41bd11f64cedf858ef03ddc3fdf586a658fd0db4712e48f9",
+  "files": {
+    "action_server/src/actions/server/foundry/generic_execution_port.py": "d6fa22c68bad53718ddc95a303fd8bf78b44d563ea2420c97cce76b8ec397250",
+    "action_server/tests/action_server_tests/test_generic_execution_port.py": "6de06489bf6a25de5dba7aee3903ce87d197618ab082a7a52163b27bf390a764"
+  },
+  "classification": "source wrapper only; no startup or app dispatch changes",
+  "gates": {
+    "source": "21passed2actualdeselected SQLite+PostgreSQL30.88s",
+    "actual": "1passed18deselectedSQLite30.10s",
+    "mypy": "one source file pass",
+    "schema_final": "2passed21deselected2.91s SQLite+PostgreSQL; top-level MCP object schema",
+    "ruff": "two files pass",
+    "apply_check": "git apply --check shared checkout pass",
+    "corruption_followup": "51passed2actualRCCdeselected104.90s combined SQLite+PostgreSQL domain markers and wrapper suite"
+  },
+  "documentation_proposal": "/workspace/actions-recovery-327/generic-wrapper-guide-proposal.md",
+  "upstream_disposition": "none",
+  "cleanup": "owned PostgreSQL stopped; compiler home released with supported exact-view cleanup receipt"
+}

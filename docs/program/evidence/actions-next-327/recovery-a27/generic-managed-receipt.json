@@ -1,0 +1,72 @@
+{
+  "status": "PASS_COMPOSED_TARGETED_RECEIPTS",
+  "base": "57d851fd17a881f25bb22c2f4ec830415cc52172",
+  "scope": "two new managed service/test files only",
+  "files": {
+    "action_server/src/actions/server/managed_work_items/generic_service.py": "287849284e8400e0bba24bc702e04f5c49a9464c6889c6403197a3a3a088e789",
+    "action_server/tests/action_server_tests/test_generic_managed_service.py": "e21228a5265cee3f44fdc3962544bff1f8d93fe336f6c6f6fcbe91d27548c09d",
+    "action_server/src/actions/server/foundry/generic_work_item_execution.py": "01e587894c6a30aff45a822550ce2d9e5b3982037e70d3104162bcc9cc2c9bf0",
+    "action_server/src/actions/server/managed_work_items/contracts.py": "d8a1fdcff6c155b19648b39d500a03ab4a0a5f0edd880afb6956715df92c792d"
+  },
+  "patch_sha256": "68d1487b2ab07d6d9cd3a239eea3e184844dcac39de585410d3312e7db30f14f",
+  "interpreter": "/workspace/actions/action_server/.venv/bin/python",
+  "environment": "RCC-prepared Runtime package interpreter, explicit scratch source/test overlay; no RCC workloads",
+  "postgresql": {
+    "owned_id": "bd97c6f049b6725c5d37c282985107271a71d860eaba5c66802d5ef16e1275b9",
+    "image": "postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81",
+    "loopback_port": 32776,
+    "memory": "768m",
+    "tmpfs": "512m",
+    "cleanup": "stopped and removed exact owned container"
+  },
+  "prior": "36passed SQLite+PostgreSQL zero skips; earlier16SQLite pass/16PG skips superseded",
+  "source_only": true,
+  "limits": [
+    "no actual RCC execution in this lane",
+    "no installed candidate or independent client proof",
+    "producer output queues and output children unadvertised",
+    "no uncertain retry or failed publication support",
+    "bounded physical scan16MiB/10000rows"
+  ],
+  "upstream_disposition": "none",
+  "verification": {
+    "final2": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "2",
+      "skipped": "0",
+      "tests": "40",
+      "time": "200.956",
+      "timestamp": "2026-10-25T01:43:59.863244+00:00",
+      "hostname": "8b6f8f848e44"
+    },
+    "router": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "2",
+      "time": "5.788",
+      "timestamp": "2026-10-25T01:47:44.416438+00:00",
+      "hostname": "8b6f8f848e44"
+    },
+    "version": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "10",
+      "time": "98.365",
+      "timestamp": "2026-10-25T01:48:17.946344+00:00",
+      "hostname": "8b6f8f848e44"
+    }
+  },
+  "verification_note": "Frozen initial source38pass2fail only HTTP test envelope assertion; corrected2cases pass; follow-up version guard6negative+4positive cases pass both backends. No claim a single final46case full run.",
+  "patch_chain": [
+    "generic-managed.patch:68d1487b2ab07d6d9cd3a239eea3e184844dcac39de585410d3312e7db30f14f",
+    "envelope-test-fix.patch",
+    "retained-version-check.patch:136aa01ec90c6ce476ad98eeccc3caee06e48825b75adee4c187205617ec8d96"
+  ],
+  "full_final_patch_sha256": "6a1a405184bb756dcd15dc0c835ccd7f3fc4c0ae838b494140001bf61291ebf2",
+  "static": "Ruff check/format,isort,mypy source pass"
+}

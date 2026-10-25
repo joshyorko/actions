@@ -62,7 +62,44 @@ The integrated slice passed138 tests with zero skips on SQLite and owned
 PostgreSQL. Full Runtime typecheck468 and configured Python lint passed after
 test import ordering correction. The [receipt](evidence/actions-next-327/recovery-a26/receipt.json)
 identifies pre-format tested bytes and post-format-only changes. Full package,
-actual RCC completion readback, installed a26 and complete restore remain open.
+actual RCC completion readback, broader installed a26 and complete Runtime restore
+remain open. The [installed legacy restore qualification](evidence/actions-next-327/recovery-a26/installed-restore/qualification.json)
+passed exact1.0.4-to-a26 queue/attachment upgrade and restart, pinned relocated
+restore, schema6-versus5 downgrade refusal without mutation, and old-version
+rollback/read/restart from the pre-upgrade backup. It does not qualify common SQL,
+Run/effect lineage, external object providers or execution-cache restoration.
+
+## a27 generic execution integration
+
+Runtime1.1.0a27 adds explicit immutable capability declarations and Deployment
+input/output policy, generic consumer/producer/optional execution on the existing
+SQL/Run authority, selected-policy managed HTTP, and model-only generic invocation.
+Model authoring accepts explicit declarations and binding-keyed queue policies.
+The ordinary configured startup composes those services with the reviewed View;
+it creates no queue or execution grants. Existing reviewed App dispatch remains
+unchanged. Generic App dispatch and producer output browsing remain open.
+
+The joined source slice passed162 tests across SQLite/PostgreSQL, zero skips,
+before the final receipt/state guards and wrapper startup wiring. Helper proofs
+include three actual generic RCC modes and one actual model-wrapper invocation,
+with zero skips; separate SQLite/PostgreSQL corruption tests enforce the final
+guards. Runtime typecheck480 and Python lint passed. The source wiring iteration
+passed22/23classified skips without service configuration; its strict joined
+follow-up and full frozen-source gate are pending at this checkpoint. These
+counts overlap and are not additive. See [bounded receipts](evidence/actions-next-327/recovery-a27/qualification.json).
+
+The managed contract remains `actions.managed-work-items/v1` on
+`/api/managed-work-items/v1`; SDK0.5.0a2 is unchanged. Clients must negotiate live
+operations/modes and use the exact QueueRef and server-returned claim. The new
+`required-input` mode is explicit. Generic enqueue uses snapshot/payload without
+a review; reviewed enqueue retains its exact ReviewProposal contract. No legacy
+API fallback, native uncertain-launch retry, automatic stale claim takeover or
+producer-output UI support is advertised. Extension2.20.14 coordinated testing
+still requires the installed candidate and actual client validation; this
+repository does not mutate that client.
+
+Full installed a27, ordinary generated execution, full Runtime restore,
+provider/client/owner gates and original campaign scope remain required.
 
 ## Resumed release convergence — October24
 

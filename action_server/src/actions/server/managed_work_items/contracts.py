@@ -130,7 +130,12 @@ class Capabilities(_Value):
     time_authority: Literal["database"] = "database"
     # Private invoice/review support is not silently advertised as a complete
     # general Work Items policy. Implementations declare the actual modes.
-    modes: tuple[Literal["reviewed", "producer", "consumer", "optional", "none"], ...]
+    modes: tuple[
+        Literal[
+            "reviewed", "producer", "consumer", "optional", "required-input", "none"
+        ],
+        ...,
+    ]
 
     @model_validator(mode="after")
     def operations_are_authorized(self):
@@ -418,7 +423,7 @@ class ItemView(_Value):
 class QueueView(_Value):
     queue: QueueRef
     label: str = Field(min_length=1, max_length=256)
-    mode: Literal["reviewed", "producer", "consumer", "optional"]
+    mode: Literal["reviewed", "producer", "consumer", "optional", "required-input"]
     counts: dict[str, Annotated[int, Field(ge=0)]]
     permissions: tuple[Permission, ...]
 

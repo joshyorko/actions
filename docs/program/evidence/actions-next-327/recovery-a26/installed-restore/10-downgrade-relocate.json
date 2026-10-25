@@ -1,0 +1,19 @@
+{
+  "command": [
+    "/workspace/actions-recovery-327/installed-a26/consumer/bin/python",
+    "-I",
+    "-B",
+    "/workspace/actions-recovery-327/restore-installed-draft/qualify.py",
+    "--operation",
+    "restore",
+    "--version",
+    "1.1.0a26",
+    "--datadir",
+    "/workspace/actions-recovery-327/evidence/a26-installed-legacy-restore-qualified/downgrade-relocated",
+    "--manifest",
+    "/workspace/actions-recovery-327/evidence/a26-installed-legacy-restore-qualified/downgrade-manifest.json"
+  ],
+  "returncode": 0,
+  "stdout": "{\"manifest_sha256\": \"106ec6d6ffef8097f0a3c925e7b51c84a6a7a32da555ea852301e46c6801e057\", \"target\": \"/workspace/actions-recovery-327/evidence/a26-installed-legacy-restore-qualified/downgrade-relocated\", \"rebased_attachments\": 1}\n",
+  "stderr": ""
+}

@@ -94,7 +94,12 @@ def test_configured_native_completion_joins_same_sql_without_retry_or_grants(
             db, tmp_path / "native", "owned-key", html=HTML
         )
         try:
-            service = configured.managed_work_items
+            schema = configured.canvas.port.schemas
+            assert schema["capability_invoke"]["type"] == "object"
+            assert "GenericStandaloneInvocation" in schema["capability_invoke"]["$defs"]
+            assert "action" in schema["canvas_dispatch"]["properties"]
+            assert configured.managed_work_items.db is db
+            service = configured.managed_work_items.reviewed
             assert service.native_completion.db is db
             assert service.native_completion.execution.worker_id == profile.worker_id
             assert service.worker_for is None

@@ -1,0 +1,54 @@
+{
+  "prefix": "/workspace/actions-recovery-327/installed-a26/consumer",
+  "packages": {
+    "actions-runtime": {
+      "version": "1.1.0a26",
+      "wheel": "actions_runtime-1.1.0a26-cp312-cp312-linux_x86_64.whl",
+      "sha256": "46f00179334dd686455e557905db35e414983ff7e3fdabe554502ed310e80665",
+      "python_members": 254,
+      "all_source_and_installed_bytes_match": true,
+      "direct_url": {
+        "archive_info": {
+          "hash": "sha256=46f00179334dd686455e557905db35e414983ff7e3fdabe554502ed310e80665",
+          "hashes": {
+            "sha256": "46f00179334dd686455e557905db35e414983ff7e3fdabe554502ed310e80665"
+          }
+        },
+        "url": "file:///workspace/actions-recovery-327/installed-a26/source/action_server/dist/actions_runtime-1.1.0a26-cp312-cp312-linux_x86_64.whl"
+      }
+    },
+    "actions-core": {
+      "version": "1.1.0a2",
+      "wheel": "actions_core-1.1.0a2-py3-none-any.whl",
+      "sha256": "ca512d59e1f94d687cb637255b2622980d715528de720ac5da8105836315c19f",
+      "python_members": 50,
+      "all_source_and_installed_bytes_match": true,
+      "direct_url": {
+        "archive_info": {
+          "hash": "sha256=ca512d59e1f94d687cb637255b2622980d715528de720ac5da8105836315c19f",
+          "hashes": {
+            "sha256": "ca512d59e1f94d687cb637255b2622980d715528de720ac5da8105836315c19f"
+          }
+        },
+        "url": "file:///workspace/actions-recovery-327/installed-a25/core-wheels/actions_core-1.1.0a2-py3-none-any.whl"
+      }
+    },
+    "actions-work-items": {
+      "version": "0.5.0a2",
+      "wheel": "actions_work_items-0.5.0a2-py3-none-any.whl",
+      "sha256": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb",
+      "python_members": 25,
+      "all_source_and_installed_bytes_match": true,
+      "direct_url": {
+        "archive_info": {
+          "hash": "sha256=72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb",
+          "hashes": {
+            "sha256": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb"
+          }
+        },
+        "url": "file:///workspace/actions-recovery-327/installed-a25/sdk-wheels/actions_work_items-0.5.0a2-py3-none-any.whl"
+      }
+    }
+  },
+  "status": "PASS"
+}

@@ -1,0 +1,681 @@
+FFFFFFFFFFFFFFF                                                          [100%]
+=================================== FAILURES ===================================
+______ test_retained_journal_version_is_required[sqlite-dispatch-missing] ______
+
+generic = <function generic.<locals>.setup at 0x7f9ef561a2a0>
+marker = 'missing', phase = 'dispatch'
+
+    @pytest.mark.parametrize("marker", ["missing", "unknown", "wrong_type"])
+    @pytest.mark.parametrize("phase", ["dispatch", "terminal_outer", "terminal_result"])
+    def test_retained_journal_version_is_required(generic, marker, phase):
+        g = generic()
+        ticket, claim = dispatch(g)
+        if phase != "dispatch":
+            guarded, output, result = synthetic_completion(g, ticket, "hello")
+            guarded.publish(g.caller.actor, ticket.fence, [output], result)
+        row = _one(g.db, Run, ticket.fence.run_id)
+        journal = json.loads(row.result)
+        target = journal["result"] if phase == "terminal_result" else journal
+        if marker == "missing":
+            target.pop("version")
+        else:
+            target["version"] = True if marker == "wrong_type" else "unknown/v99"
+        with g.db.transaction():
+            _update(g.db, Run, row.id, {"result": _canonical(journal, 65536)})
+>       with pytest.raises(FenceRejected, match="version"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'actions.server.run_outputs.service.FenceRejected'>
+
+action_server/tests/action_server_tests/test_generic_journal_versions.py:36: Failed
+---------------------------- Captured stderr setup -----------------------------
+TEST PROCESS: 2026-10-25 01:49:12,742 - actions.server.migrations - INFO - Checking migration status for database backend: sqlite
+TEST PROCESS: 2026-10-25 01:49:12,742 - actions.server._database - DEBUG - sqlite version: 3.53.4
+TEST PROCESS: 2026-10-25 01:49:12,743 - actions.server.migrations - INFO - Preparing to migrate database at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_0/runtime.db
+TEST PROCESS: 2026-10-25 01:49:12,744 - actions.server.migrations - INFO - Creating backup at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_0/runtime.db-pre-migration-18-1792892952.7439811.bak
+TEST PROCESS: 2026-10-25 01:49:12,746 - actions.server.migrations - INFO - Will migrate to version: 17 (add_foundry_records)
+TEST PROCESS: 2026-10-25 01:49:12,756 - actions.server.migrations - INFO - Will migrate to version: 18 (allow_package_less_canvas)
+------------------------------ Captured log setup ------------------------------
+INFO     actions.server.migrations:__init__.py:225 Checking migration status for database backend: sqlite
+DEBUG    actions.server._database:_database.py:455 sqlite version: 3.53.4
+INFO     actions.server.migrations:__init__.py:106 Preparing to migrate database at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_0/runtime.db
+INFO     actions.server.migrations:__init__.py:113 Creating backup at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_0/runtime.db-pre-migration-18-1792892952.7439811.bak
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 17 (add_foundry_records)
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 18 (allow_package_less_canvas)
+______ test_retained_journal_version_is_required[sqlite-dispatch-unknown] ______
+
+generic = <function generic.<locals>.setup at 0x7f9ef5463920>
+marker = 'unknown', phase = 'dispatch'
+
+    @pytest.mark.parametrize("marker", ["missing", "unknown", "wrong_type"])
+    @pytest.mark.parametrize("phase", ["dispatch", "terminal_outer", "terminal_result"])
+    def test_retained_journal_version_is_required(generic, marker, phase):
+        g = generic()
+        ticket, claim = dispatch(g)
+        if phase != "dispatch":
+            guarded, output, result = synthetic_completion(g, ticket, "hello")
+            guarded.publish(g.caller.actor, ticket.fence, [output], result)
+        row = _one(g.db, Run, ticket.fence.run_id)
+        journal = json.loads(row.result)
+        target = journal["result"] if phase == "terminal_result" else journal
+        if marker == "missing":
+            target.pop("version")
+        else:
+            target["version"] = True if marker == "wrong_type" else "unknown/v99"
+        with g.db.transaction():
+            _update(g.db, Run, row.id, {"result": _canonical(journal, 65536)})
+>       with pytest.raises(FenceRejected, match="version"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'actions.server.run_outputs.service.FenceRejected'>
+
+action_server/tests/action_server_tests/test_generic_journal_versions.py:36: Failed
+---------------------------- Captured stderr setup -----------------------------
+TEST PROCESS: 2026-10-25 01:49:14,373 - actions.server.migrations - INFO - Checking migration status for database backend: sqlite
+TEST PROCESS: 2026-10-25 01:49:14,374 - actions.server._database - DEBUG - sqlite version: 3.53.4
+TEST PROCESS: 2026-10-25 01:49:14,376 - actions.server.migrations - INFO - Preparing to migrate database at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_1/runtime.db
+TEST PROCESS: 2026-10-25 01:49:14,376 - actions.server.migrations - INFO - Creating backup at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_1/runtime.db-pre-migration-18-1792892954.3762157.bak
+TEST PROCESS: 2026-10-25 01:49:14,380 - actions.server.migrations - INFO - Will migrate to version: 17 (add_foundry_records)
+TEST PROCESS: 2026-10-25 01:49:14,395 - actions.server.migrations - INFO - Will migrate to version: 18 (allow_package_less_canvas)
+------------------------------ Captured log setup ------------------------------
+INFO     actions.server.migrations:__init__.py:225 Checking migration status for database backend: sqlite
+DEBUG    actions.server._database:_database.py:455 sqlite version: 3.53.4
+INFO     actions.server.migrations:__init__.py:106 Preparing to migrate database at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_1/runtime.db
+INFO     actions.server.migrations:__init__.py:113 Creating backup at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_1/runtime.db-pre-migration-18-1792892954.3762157.bak
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 17 (add_foundry_records)
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 18 (allow_package_less_canvas)
+____ test_retained_journal_version_is_required[sqlite-dispatch-wrong_type] _____
+
+generic = <function generic.<locals>.setup at 0x7f9ef5463f60>
+marker = 'wrong_type', phase = 'dispatch'
+
+    @pytest.mark.parametrize("marker", ["missing", "unknown", "wrong_type"])
+    @pytest.mark.parametrize("phase", ["dispatch", "terminal_outer", "terminal_result"])
+    def test_retained_journal_version_is_required(generic, marker, phase):
+        g = generic()
+        ticket, claim = dispatch(g)
+        if phase != "dispatch":
+            guarded, output, result = synthetic_completion(g, ticket, "hello")
+            guarded.publish(g.caller.actor, ticket.fence, [output], result)
+        row = _one(g.db, Run, ticket.fence.run_id)
+        journal = json.loads(row.result)
+        target = journal["result"] if phase == "terminal_result" else journal
+        if marker == "missing":
+            target.pop("version")
+        else:
+            target["version"] = True if marker == "wrong_type" else "unknown/v99"
+        with g.db.transaction():
+            _update(g.db, Run, row.id, {"result": _canonical(journal, 65536)})
+>       with pytest.raises(FenceRejected, match="version"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'actions.server.run_outputs.service.FenceRejected'>
+
+action_server/tests/action_server_tests/test_generic_journal_versions.py:36: Failed
+---------------------------- Captured stderr setup -----------------------------
+TEST PROCESS: 2026-10-25 01:49:15,940 - actions.server.migrations - INFO - Checking migration status for database backend: sqlite
+TEST PROCESS: 2026-10-25 01:49:15,940 - actions.server._database - DEBUG - sqlite version: 3.53.4
+TEST PROCESS: 2026-10-25 01:49:15,942 - actions.server.migrations - INFO - Preparing to migrate database at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_2/runtime.db
+TEST PROCESS: 2026-10-25 01:49:15,942 - actions.server.migrations - INFO - Creating backup at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_2/runtime.db-pre-migration-18-1792892955.942284.bak
+TEST PROCESS: 2026-10-25 01:49:15,944 - actions.server.migrations - INFO - Will migrate to version: 17 (add_foundry_records)
+TEST PROCESS: 2026-10-25 01:49:15,953 - actions.server.migrations - INFO - Will migrate to version: 18 (allow_package_less_canvas)
+------------------------------ Captured log setup ------------------------------
+INFO     actions.server.migrations:__init__.py:225 Checking migration status for database backend: sqlite
+DEBUG    actions.server._database:_database.py:455 sqlite version: 3.53.4
+INFO     actions.server.migrations:__init__.py:106 Preparing to migrate database at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_2/runtime.db
+INFO     actions.server.migrations:__init__.py:113 Creating backup at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_2/runtime.db-pre-migration-18-1792892955.942284.bak
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 17 (add_foundry_records)
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 18 (allow_package_less_canvas)
+___ test_retained_journal_version_is_required[sqlite-terminal_outer-missing] ___
+
+generic = <function generic.<locals>.setup at 0x7f9ef5490900>
+marker = 'missing', phase = 'terminal_outer'
+
+    @pytest.mark.parametrize("marker", ["missing", "unknown", "wrong_type"])
+    @pytest.mark.parametrize("phase", ["dispatch", "terminal_outer", "terminal_result"])
+    def test_retained_journal_version_is_required(generic, marker, phase):
+        g = generic()
+        ticket, claim = dispatch(g)
+        if phase != "dispatch":
+            guarded, output, result = synthetic_completion(g, ticket, "hello")
+            guarded.publish(g.caller.actor, ticket.fence, [output], result)
+        row = _one(g.db, Run, ticket.fence.run_id)
+        journal = json.loads(row.result)
+        target = journal["result"] if phase == "terminal_result" else journal
+        if marker == "missing":
+            target.pop("version")
+        else:
+            target["version"] = True if marker == "wrong_type" else "unknown/v99"
+        with g.db.transaction():
+            _update(g.db, Run, row.id, {"result": _canonical(journal, 65536)})
+>       with pytest.raises(FenceRejected, match="version"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'actions.server.run_outputs.service.FenceRejected'>
+
+action_server/tests/action_server_tests/test_generic_journal_versions.py:36: Failed
+---------------------------- Captured stderr setup -----------------------------
+TEST PROCESS: 2026-10-25 01:49:17,368 - actions.server.migrations - INFO - Checking migration status for database backend: sqlite
+TEST PROCESS: 2026-10-25 01:49:17,369 - actions.server._database - DEBUG - sqlite version: 3.53.4
+TEST PROCESS: 2026-10-25 01:49:17,370 - actions.server.migrations - INFO - Preparing to migrate database at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_3/runtime.db
+TEST PROCESS: 2026-10-25 01:49:17,370 - actions.server.migrations - INFO - Creating backup at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_3/runtime.db-pre-migration-18-1792892957.3703763.bak
+TEST PROCESS: 2026-10-25 01:49:17,372 - actions.server.migrations - INFO - Will migrate to version: 17 (add_foundry_records)
+TEST PROCESS: 2026-10-25 01:49:17,381 - actions.server.migrations - INFO - Will migrate to version: 18 (allow_package_less_canvas)
+------------------------------ Captured log setup ------------------------------
+INFO     actions.server.migrations:__init__.py:225 Checking migration status for database backend: sqlite
+DEBUG    actions.server._database:_database.py:455 sqlite version: 3.53.4
+INFO     actions.server.migrations:__init__.py:106 Preparing to migrate database at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_3/runtime.db
+INFO     actions.server.migrations:__init__.py:113 Creating backup at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_3/runtime.db-pre-migration-18-1792892957.3703763.bak
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 17 (add_foundry_records)
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 18 (allow_package_less_canvas)
+___ test_retained_journal_version_is_required[sqlite-terminal_outer-unknown] ___
+
+generic = <function generic.<locals>.setup at 0x7f9ef5491080>
+marker = 'unknown', phase = 'terminal_outer'
+
+    @pytest.mark.parametrize("marker", ["missing", "unknown", "wrong_type"])
+    @pytest.mark.parametrize("phase", ["dispatch", "terminal_outer", "terminal_result"])
+    def test_retained_journal_version_is_required(generic, marker, phase):
+        g = generic()
+        ticket, claim = dispatch(g)
+        if phase != "dispatch":
+            guarded, output, result = synthetic_completion(g, ticket, "hello")
+            guarded.publish(g.caller.actor, ticket.fence, [output], result)
+        row = _one(g.db, Run, ticket.fence.run_id)
+        journal = json.loads(row.result)
+        target = journal["result"] if phase == "terminal_result" else journal
+        if marker == "missing":
+            target.pop("version")
+        else:
+            target["version"] = True if marker == "wrong_type" else "unknown/v99"
+        with g.db.transaction():
+            _update(g.db, Run, row.id, {"result": _canonical(journal, 65536)})
+>       with pytest.raises(FenceRejected, match="version"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'actions.server.run_outputs.service.FenceRejected'>
+
+action_server/tests/action_server_tests/test_generic_journal_versions.py:36: Failed
+---------------------------- Captured stderr setup -----------------------------
+TEST PROCESS: 2026-10-25 01:49:20,291 - actions.server.migrations - INFO - Checking migration status for database backend: sqlite
+TEST PROCESS: 2026-10-25 01:49:20,292 - actions.server._database - DEBUG - sqlite version: 3.53.4
+TEST PROCESS: 2026-10-25 01:49:20,293 - actions.server.migrations - INFO - Preparing to migrate database at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_4/runtime.db
+TEST PROCESS: 2026-10-25 01:49:20,293 - actions.server.migrations - INFO - Creating backup at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_4/runtime.db-pre-migration-18-1792892960.2932317.bak
+TEST PROCESS: 2026-10-25 01:49:20,295 - actions.server.migrations - INFO - Will migrate to version: 17 (add_foundry_records)
+TEST PROCESS: 2026-10-25 01:49:20,304 - actions.server.migrations - INFO - Will migrate to version: 18 (allow_package_less_canvas)
+------------------------------ Captured log setup ------------------------------
+INFO     actions.server.migrations:__init__.py:225 Checking migration status for database backend: sqlite
+DEBUG    actions.server._database:_database.py:455 sqlite version: 3.53.4
+INFO     actions.server.migrations:__init__.py:106 Preparing to migrate database at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_4/runtime.db
+INFO     actions.server.migrations:__init__.py:113 Creating backup at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_4/runtime.db-pre-migration-18-1792892960.2932317.bak
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 17 (add_foundry_records)
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 18 (allow_package_less_canvas)
+_ test_retained_journal_version_is_required[sqlite-terminal_outer-wrong_type] __
+
+generic = <function generic.<locals>.setup at 0x7f9ef5491a80>
+marker = 'wrong_type', phase = 'terminal_outer'
+
+    @pytest.mark.parametrize("marker", ["missing", "unknown", "wrong_type"])
+    @pytest.mark.parametrize("phase", ["dispatch", "terminal_outer", "terminal_result"])
+    def test_retained_journal_version_is_required(generic, marker, phase):
+        g = generic()
+        ticket, claim = dispatch(g)
+        if phase != "dispatch":
+            guarded, output, result = synthetic_completion(g, ticket, "hello")
+            guarded.publish(g.caller.actor, ticket.fence, [output], result)
+        row = _one(g.db, Run, ticket.fence.run_id)
+        journal = json.loads(row.result)
+        target = journal["result"] if phase == "terminal_result" else journal
+        if marker == "missing":
+            target.pop("version")
+        else:
+            target["version"] = True if marker == "wrong_type" else "unknown/v99"
+        with g.db.transaction():
+            _update(g.db, Run, row.id, {"result": _canonical(journal, 65536)})
+>       with pytest.raises(FenceRejected, match="version"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'actions.server.run_outputs.service.FenceRejected'>
+
+action_server/tests/action_server_tests/test_generic_journal_versions.py:36: Failed
+---------------------------- Captured stderr setup -----------------------------
+TEST PROCESS: 2026-10-25 01:49:23,551 - actions.server.migrations - INFO - Checking migration status for database backend: sqlite
+TEST PROCESS: 2026-10-25 01:49:23,551 - actions.server._database - DEBUG - sqlite version: 3.53.4
+TEST PROCESS: 2026-10-25 01:49:23,553 - actions.server.migrations - INFO - Preparing to migrate database at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_5/runtime.db
+TEST PROCESS: 2026-10-25 01:49:23,553 - actions.server.migrations - INFO - Creating backup at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_5/runtime.db-pre-migration-18-1792892963.5534618.bak
+TEST PROCESS: 2026-10-25 01:49:23,556 - actions.server.migrations - INFO - Will migrate to version: 17 (add_foundry_records)
+TEST PROCESS: 2026-10-25 01:49:23,565 - actions.server.migrations - INFO - Will migrate to version: 18 (allow_package_less_canvas)
+------------------------------ Captured log setup ------------------------------
+INFO     actions.server.migrations:__init__.py:225 Checking migration status for database backend: sqlite
+DEBUG    actions.server._database:_database.py:455 sqlite version: 3.53.4
+INFO     actions.server.migrations:__init__.py:106 Preparing to migrate database at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_5/runtime.db
+INFO     actions.server.migrations:__init__.py:113 Creating backup at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_5/runtime.db-pre-migration-18-1792892963.5534618.bak
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 17 (add_foundry_records)
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 18 (allow_package_less_canvas)
+__ test_retained_journal_version_is_required[sqlite-terminal_result-missing] ___
+
+generic = <function generic.<locals>.setup at 0x7f9ef54920c0>
+marker = 'missing', phase = 'terminal_result'
+
+    @pytest.mark.parametrize("marker", ["missing", "unknown", "wrong_type"])
+    @pytest.mark.parametrize("phase", ["dispatch", "terminal_outer", "terminal_result"])
+    def test_retained_journal_version_is_required(generic, marker, phase):
+        g = generic()
+        ticket, claim = dispatch(g)
+        if phase != "dispatch":
+            guarded, output, result = synthetic_completion(g, ticket, "hello")
+            guarded.publish(g.caller.actor, ticket.fence, [output], result)
+        row = _one(g.db, Run, ticket.fence.run_id)
+        journal = json.loads(row.result)
+        target = journal["result"] if phase == "terminal_result" else journal
+        if marker == "missing":
+            target.pop("version")
+        else:
+            target["version"] = True if marker == "wrong_type" else "unknown/v99"
+        with g.db.transaction():
+            _update(g.db, Run, row.id, {"result": _canonical(journal, 65536)})
+>       with pytest.raises(FenceRejected, match="version"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'actions.server.run_outputs.service.FenceRejected'>
+
+action_server/tests/action_server_tests/test_generic_journal_versions.py:36: Failed
+---------------------------- Captured stderr setup -----------------------------
+TEST PROCESS: 2026-10-25 01:49:26,599 - actions.server.migrations - INFO - Checking migration status for database backend: sqlite
+TEST PROCESS: 2026-10-25 01:49:26,599 - actions.server._database - DEBUG - sqlite version: 3.53.4
+TEST PROCESS: 2026-10-25 01:49:26,601 - actions.server.migrations - INFO - Preparing to migrate database at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_6/runtime.db
+TEST PROCESS: 2026-10-25 01:49:26,601 - actions.server.migrations - INFO - Creating backup at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_6/runtime.db-pre-migration-18-1792892966.601364.bak
+TEST PROCESS: 2026-10-25 01:49:26,605 - actions.server.migrations - INFO - Will migrate to version: 17 (add_foundry_records)
+TEST PROCESS: 2026-10-25 01:49:26,620 - actions.server.migrations - INFO - Will migrate to version: 18 (allow_package_less_canvas)
+------------------------------ Captured log setup ------------------------------
+INFO     actions.server.migrations:__init__.py:225 Checking migration status for database backend: sqlite
+DEBUG    actions.server._database:_database.py:455 sqlite version: 3.53.4
+INFO     actions.server.migrations:__init__.py:106 Preparing to migrate database at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_6/runtime.db
+INFO     actions.server.migrations:__init__.py:113 Creating backup at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_6/runtime.db-pre-migration-18-1792892966.601364.bak
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 17 (add_foundry_records)
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 18 (allow_package_less_canvas)
+__ test_retained_journal_version_is_required[sqlite-terminal_result-unknown] ___
+
+generic = <function generic.<locals>.setup at 0x7f9ef5492c00>
+marker = 'unknown', phase = 'terminal_result'
+
+    @pytest.mark.parametrize("marker", ["missing", "unknown", "wrong_type"])
+    @pytest.mark.parametrize("phase", ["dispatch", "terminal_outer", "terminal_result"])
+    def test_retained_journal_version_is_required(generic, marker, phase):
+        g = generic()
+        ticket, claim = dispatch(g)
+        if phase != "dispatch":
+            guarded, output, result = synthetic_completion(g, ticket, "hello")
+            guarded.publish(g.caller.actor, ticket.fence, [output], result)
+        row = _one(g.db, Run, ticket.fence.run_id)
+        journal = json.loads(row.result)
+        target = journal["result"] if phase == "terminal_result" else journal
+        if marker == "missing":
+            target.pop("version")
+        else:
+            target["version"] = True if marker == "wrong_type" else "unknown/v99"
+        with g.db.transaction():
+            _update(g.db, Run, row.id, {"result": _canonical(journal, 65536)})
+>       with pytest.raises(FenceRejected, match="version"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'actions.server.run_outputs.service.FenceRejected'>
+
+action_server/tests/action_server_tests/test_generic_journal_versions.py:36: Failed
+---------------------------- Captured stderr setup -----------------------------
+TEST PROCESS: 2026-10-25 01:49:29,690 - actions.server.migrations - INFO - Checking migration status for database backend: sqlite
+TEST PROCESS: 2026-10-25 01:49:29,690 - actions.server._database - DEBUG - sqlite version: 3.53.4
+TEST PROCESS: 2026-10-25 01:49:29,691 - actions.server.migrations - INFO - Preparing to migrate database at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_7/runtime.db
+TEST PROCESS: 2026-10-25 01:49:29,691 - actions.server.migrations - INFO - Creating backup at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_7/runtime.db-pre-migration-18-1792892969.6916792.bak
+TEST PROCESS: 2026-10-25 01:49:29,694 - actions.server.migrations - INFO - Will migrate to version: 17 (add_foundry_records)
+TEST PROCESS: 2026-10-25 01:49:29,703 - actions.server.migrations - INFO - Will migrate to version: 18 (allow_package_less_canvas)
+------------------------------ Captured log setup ------------------------------
+INFO     actions.server.migrations:__init__.py:225 Checking migration status for database backend: sqlite
+DEBUG    actions.server._database:_database.py:455 sqlite version: 3.53.4
+INFO     actions.server.migrations:__init__.py:106 Preparing to migrate database at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_7/runtime.db
+INFO     actions.server.migrations:__init__.py:113 Creating backup at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_7/runtime.db-pre-migration-18-1792892969.6916792.bak
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 17 (add_foundry_records)
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 18 (allow_package_less_canvas)
+_ test_retained_journal_version_is_required[sqlite-terminal_result-wrong_type] _
+
+generic = <function generic.<locals>.setup at 0x7f9ef54931a0>
+marker = 'wrong_type', phase = 'terminal_result'
+
+    @pytest.mark.parametrize("marker", ["missing", "unknown", "wrong_type"])
+    @pytest.mark.parametrize("phase", ["dispatch", "terminal_outer", "terminal_result"])
+    def test_retained_journal_version_is_required(generic, marker, phase):
+        g = generic()
+        ticket, claim = dispatch(g)
+        if phase != "dispatch":
+            guarded, output, result = synthetic_completion(g, ticket, "hello")
+            guarded.publish(g.caller.actor, ticket.fence, [output], result)
+        row = _one(g.db, Run, ticket.fence.run_id)
+        journal = json.loads(row.result)
+        target = journal["result"] if phase == "terminal_result" else journal
+        if marker == "missing":
+            target.pop("version")
+        else:
+            target["version"] = True if marker == "wrong_type" else "unknown/v99"
+        with g.db.transaction():
+            _update(g.db, Run, row.id, {"result": _canonical(journal, 65536)})
+>       with pytest.raises(FenceRejected, match="version"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'actions.server.run_outputs.service.FenceRejected'>
+
+action_server/tests/action_server_tests/test_generic_journal_versions.py:36: Failed
+---------------------------- Captured stderr setup -----------------------------
+TEST PROCESS: 2026-10-25 01:49:32,761 - actions.server.migrations - INFO - Checking migration status for database backend: sqlite
+TEST PROCESS: 2026-10-25 01:49:32,761 - actions.server._database - DEBUG - sqlite version: 3.53.4
+TEST PROCESS: 2026-10-25 01:49:32,763 - actions.server.migrations - INFO - Preparing to migrate database at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_8/runtime.db
+TEST PROCESS: 2026-10-25 01:49:32,763 - actions.server.migrations - INFO - Creating backup at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_8/runtime.db-pre-migration-18-1792892972.7631495.bak
+TEST PROCESS: 2026-10-25 01:49:32,765 - actions.server.migrations - INFO - Will migrate to version: 17 (add_foundry_records)
+TEST PROCESS: 2026-10-25 01:49:32,775 - actions.server.migrations - INFO - Will migrate to version: 18 (allow_package_less_canvas)
+------------------------------ Captured log setup ------------------------------
+INFO     actions.server.migrations:__init__.py:225 Checking migration status for database backend: sqlite
+DEBUG    actions.server._database:_database.py:455 sqlite version: 3.53.4
+INFO     actions.server.migrations:__init__.py:106 Preparing to migrate database at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_8/runtime.db
+INFO     actions.server.migrations:__init__.py:113 Creating backup at: /tmp/pytest-of-agent/pytest-41/test_retained_journal_version_8/runtime.db-pre-migration-18-1792892972.7631495.bak
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 17 (add_foundry_records)
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 18 (allow_package_less_canvas)
+______ test_terminal_projection_rejects_state_corruption[sqlite-attempt] _______
+
+generic = <function generic.<locals>.setup at 0x7f9ef5493a60>
+corruption = 'attempt'
+
+    @pytest.mark.parametrize("corruption", ["attempt", "item_owner", "item_cancel", "pin_cancel"])
+    def test_terminal_projection_rejects_state_corruption(generic, corruption):
+        from actions.server.data_queries.review_models import FencedWorkItem
+        from actions.server.run_outputs.models import RunAttempt, RunPin
+        from actions.server.run_outputs.service import FenceRejected
+    
+        g = generic()
+        item = g.owner.enqueue(g.caller, {"value": "hello"}, "input")
+        claim = g.owner.queue(g.owner.policy.input_queue).reserve_item_fenced(item, g.caller.worker_id, lease_seconds=60)
+        request = {"mode": "generic", "snapshot": g.owner.snapshot.model_dump(mode="json"), "claim": ClaimRef(queue=g.owner.queue_ref(g.owner.policy.input_queue), item_id=item, owner_id=claim.owner_id, epoch=claim.epoch).model_dump(mode="json")}
+        port, caller, runner, _ = wrapper(g)
+        execution = invoke(port, caller, request).model_result["execution"]
+        with g.db.transaction():
+            if corruption == "attempt":
+                _update(g.db, RunAttempt, execution["attemptId"], {"state": "running"})
+            elif corruption == "item_owner":
+                _update(g.db, FencedWorkItem, item, {"claim_owner": g.caller.worker_id})
+            elif corruption == "item_cancel":
+                _update(g.db, FencedWorkItem, item, {"cancel_requested": 1})
+            else:
+                _update(g.db, RunPin, execution["runId"], {"cancel_requested": 1})
+>       with pytest.raises(FenceRejected):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'actions.server.run_outputs.service.FenceRejected'>
+
+action_server/tests/action_server_tests/test_generic_execution_port.py:343: Failed
+---------------------------- Captured stderr setup -----------------------------
+TEST PROCESS: 2026-10-25 01:49:35,996 - actions.server.migrations - INFO - Checking migration status for database backend: sqlite
+TEST PROCESS: 2026-10-25 01:49:35,996 - actions.server._database - DEBUG - sqlite version: 3.53.4
+TEST PROCESS: 2026-10-25 01:49:35,997 - actions.server.migrations - INFO - Preparing to migrate database at: /tmp/pytest-of-agent/pytest-41/test_terminal_projection_rejec0/runtime.db
+TEST PROCESS: 2026-10-25 01:49:35,997 - actions.server.migrations - INFO - Creating backup at: /tmp/pytest-of-agent/pytest-41/test_terminal_projection_rejec0/runtime.db-pre-migration-18-1792892975.9978848.bak
+TEST PROCESS: 2026-10-25 01:49:36,000 - actions.server.migrations - INFO - Will migrate to version: 17 (add_foundry_records)
+TEST PROCESS: 2026-10-25 01:49:36,010 - actions.server.migrations - INFO - Will migrate to version: 18 (allow_package_less_canvas)
+------------------------------ Captured log setup ------------------------------
+INFO     actions.server.migrations:__init__.py:225 Checking migration status for database backend: sqlite
+DEBUG    actions.server._database:_database.py:455 sqlite version: 3.53.4
+INFO     actions.server.migrations:__init__.py:106 Preparing to migrate database at: /tmp/pytest-of-agent/pytest-41/test_terminal_projection_rejec0/runtime.db
+INFO     actions.server.migrations:__init__.py:113 Creating backup at: /tmp/pytest-of-agent/pytest-41/test_terminal_projection_rejec0/runtime.db-pre-migration-18-1792892975.9978848.bak
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 17 (add_foundry_records)
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 18 (allow_package_less_canvas)
+----------------------------- Captured stderr call -----------------------------
+TEST PROCESS: 2026-10-25 01:49:36,741 - asyncio - DEBUG - Using selector: EpollSelector
+TEST PROCESS: 2026-10-25 01:49:37,255 - asyncio - DEBUG - Using selector: EpollSelector
+------------------------------ Captured log call -------------------------------
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+_____ test_terminal_projection_rejects_state_corruption[sqlite-item_owner] _____
+
+generic = <function generic.<locals>.setup at 0x7f9ef53a8400>
+corruption = 'item_owner'
+
+    @pytest.mark.parametrize("corruption", ["attempt", "item_owner", "item_cancel", "pin_cancel"])
+    def test_terminal_projection_rejects_state_corruption(generic, corruption):
+        from actions.server.data_queries.review_models import FencedWorkItem
+        from actions.server.run_outputs.models import RunAttempt, RunPin
+        from actions.server.run_outputs.service import FenceRejected
+    
+        g = generic()
+        item = g.owner.enqueue(g.caller, {"value": "hello"}, "input")
+        claim = g.owner.queue(g.owner.policy.input_queue).reserve_item_fenced(item, g.caller.worker_id, lease_seconds=60)
+        request = {"mode": "generic", "snapshot": g.owner.snapshot.model_dump(mode="json"), "claim": ClaimRef(queue=g.owner.queue_ref(g.owner.policy.input_queue), item_id=item, owner_id=claim.owner_id, epoch=claim.epoch).model_dump(mode="json")}
+        port, caller, runner, _ = wrapper(g)
+        execution = invoke(port, caller, request).model_result["execution"]
+        with g.db.transaction():
+            if corruption == "attempt":
+                _update(g.db, RunAttempt, execution["attemptId"], {"state": "running"})
+            elif corruption == "item_owner":
+                _update(g.db, FencedWorkItem, item, {"claim_owner": g.caller.worker_id})
+            elif corruption == "item_cancel":
+                _update(g.db, FencedWorkItem, item, {"cancel_requested": 1})
+            else:
+                _update(g.db, RunPin, execution["runId"], {"cancel_requested": 1})
+>       with pytest.raises(FenceRejected):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'actions.server.run_outputs.service.FenceRejected'>
+
+action_server/tests/action_server_tests/test_generic_execution_port.py:343: Failed
+---------------------------- Captured stderr setup -----------------------------
+TEST PROCESS: 2026-10-25 01:49:37,537 - actions.server.migrations - INFO - Checking migration status for database backend: sqlite
+TEST PROCESS: 2026-10-25 01:49:37,537 - actions.server._database - DEBUG - sqlite version: 3.53.4
+TEST PROCESS: 2026-10-25 01:49:37,538 - actions.server.migrations - INFO - Preparing to migrate database at: /tmp/pytest-of-agent/pytest-41/test_terminal_projection_rejec1/runtime.db
+TEST PROCESS: 2026-10-25 01:49:37,539 - actions.server.migrations - INFO - Creating backup at: /tmp/pytest-of-agent/pytest-41/test_terminal_projection_rejec1/runtime.db-pre-migration-18-1792892977.5389616.bak
+TEST PROCESS: 2026-10-25 01:49:37,541 - actions.server.migrations - INFO - Will migrate to version: 17 (add_foundry_records)
+TEST PROCESS: 2026-10-25 01:49:37,551 - actions.server.migrations - INFO - Will migrate to version: 18 (allow_package_less_canvas)
+------------------------------ Captured log setup ------------------------------
+INFO     actions.server.migrations:__init__.py:225 Checking migration status for database backend: sqlite
+DEBUG    actions.server._database:_database.py:455 sqlite version: 3.53.4
+INFO     actions.server.migrations:__init__.py:106 Preparing to migrate database at: /tmp/pytest-of-agent/pytest-41/test_terminal_projection_rejec1/runtime.db
+INFO     actions.server.migrations:__init__.py:113 Creating backup at: /tmp/pytest-of-agent/pytest-41/test_terminal_projection_rejec1/runtime.db-pre-migration-18-1792892977.5389616.bak
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 17 (add_foundry_records)
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 18 (allow_package_less_canvas)
+----------------------------- Captured stderr call -----------------------------
+TEST PROCESS: 2026-10-25 01:49:38,354 - asyncio - DEBUG - Using selector: EpollSelector
+TEST PROCESS: 2026-10-25 01:49:38,956 - asyncio - DEBUG - Using selector: EpollSelector
+------------------------------ Captured log call -------------------------------
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+____ test_terminal_projection_rejects_state_corruption[sqlite-item_cancel] _____
+
+generic = <function generic.<locals>.setup at 0x7f9ef53a8b80>
+corruption = 'item_cancel'
+
+    @pytest.mark.parametrize("corruption", ["attempt", "item_owner", "item_cancel", "pin_cancel"])
+    def test_terminal_projection_rejects_state_corruption(generic, corruption):
+        from actions.server.data_queries.review_models import FencedWorkItem
+        from actions.server.run_outputs.models import RunAttempt, RunPin
+        from actions.server.run_outputs.service import FenceRejected
+    
+        g = generic()
+        item = g.owner.enqueue(g.caller, {"value": "hello"}, "input")
+        claim = g.owner.queue(g.owner.policy.input_queue).reserve_item_fenced(item, g.caller.worker_id, lease_seconds=60)
+        request = {"mode": "generic", "snapshot": g.owner.snapshot.model_dump(mode="json"), "claim": ClaimRef(queue=g.owner.queue_ref(g.owner.policy.input_queue), item_id=item, owner_id=claim.owner_id, epoch=claim.epoch).model_dump(mode="json")}
+        port, caller, runner, _ = wrapper(g)
+        execution = invoke(port, caller, request).model_result["execution"]
+        with g.db.transaction():
+            if corruption == "attempt":
+                _update(g.db, RunAttempt, execution["attemptId"], {"state": "running"})
+            elif corruption == "item_owner":
+                _update(g.db, FencedWorkItem, item, {"claim_owner": g.caller.worker_id})
+            elif corruption == "item_cancel":
+                _update(g.db, FencedWorkItem, item, {"cancel_requested": 1})
+            else:
+                _update(g.db, RunPin, execution["runId"], {"cancel_requested": 1})
+>       with pytest.raises(FenceRejected):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'actions.server.run_outputs.service.FenceRejected'>
+
+action_server/tests/action_server_tests/test_generic_execution_port.py:343: Failed
+---------------------------- Captured stderr setup -----------------------------
+TEST PROCESS: 2026-10-25 01:49:39,190 - actions.server.migrations - INFO - Checking migration status for database backend: sqlite
+TEST PROCESS: 2026-10-25 01:49:39,190 - actions.server._database - DEBUG - sqlite version: 3.53.4
+TEST PROCESS: 2026-10-25 01:49:39,191 - actions.server.migrations - INFO - Preparing to migrate database at: /tmp/pytest-of-agent/pytest-41/test_terminal_projection_rejec2/runtime.db
+TEST PROCESS: 2026-10-25 01:49:39,191 - actions.server.migrations - INFO - Creating backup at: /tmp/pytest-of-agent/pytest-41/test_terminal_projection_rejec2/runtime.db-pre-migration-18-1792892979.1917844.bak
+TEST PROCESS: 2026-10-25 01:49:39,194 - actions.server.migrations - INFO - Will migrate to version: 17 (add_foundry_records)
+TEST PROCESS: 2026-10-25 01:49:39,204 - actions.server.migrations - INFO - Will migrate to version: 18 (allow_package_less_canvas)
+------------------------------ Captured log setup ------------------------------
+INFO     actions.server.migrations:__init__.py:225 Checking migration status for database backend: sqlite
+DEBUG    actions.server._database:_database.py:455 sqlite version: 3.53.4
+INFO     actions.server.migrations:__init__.py:106 Preparing to migrate database at: /tmp/pytest-of-agent/pytest-41/test_terminal_projection_rejec2/runtime.db
+INFO     actions.server.migrations:__init__.py:113 Creating backup at: /tmp/pytest-of-agent/pytest-41/test_terminal_projection_rejec2/runtime.db-pre-migration-18-1792892979.1917844.bak
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 17 (add_foundry_records)
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 18 (allow_package_less_canvas)
+----------------------------- Captured stderr call -----------------------------
+TEST PROCESS: 2026-10-25 01:49:39,916 - asyncio - DEBUG - Using selector: EpollSelector
+TEST PROCESS: 2026-10-25 01:49:40,411 - asyncio - DEBUG - Using selector: EpollSelector
+------------------------------ Captured log call -------------------------------
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+_____ test_terminal_projection_rejects_state_corruption[sqlite-pin_cancel] _____
+
+generic = <function generic.<locals>.setup at 0x7f9ef53a8400>
+corruption = 'pin_cancel'
+
+    @pytest.mark.parametrize("corruption", ["attempt", "item_owner", "item_cancel", "pin_cancel"])
+    def test_terminal_projection_rejects_state_corruption(generic, corruption):
+        from actions.server.data_queries.review_models import FencedWorkItem
+        from actions.server.run_outputs.models import RunAttempt, RunPin
+        from actions.server.run_outputs.service import FenceRejected
+    
+        g = generic()
+        item = g.owner.enqueue(g.caller, {"value": "hello"}, "input")
+        claim = g.owner.queue(g.owner.policy.input_queue).reserve_item_fenced(item, g.caller.worker_id, lease_seconds=60)
+        request = {"mode": "generic", "snapshot": g.owner.snapshot.model_dump(mode="json"), "claim": ClaimRef(queue=g.owner.queue_ref(g.owner.policy.input_queue), item_id=item, owner_id=claim.owner_id, epoch=claim.epoch).model_dump(mode="json")}
+        port, caller, runner, _ = wrapper(g)
+        execution = invoke(port, caller, request).model_result["execution"]
+        with g.db.transaction():
+            if corruption == "attempt":
+                _update(g.db, RunAttempt, execution["attemptId"], {"state": "running"})
+            elif corruption == "item_owner":
+                _update(g.db, FencedWorkItem, item, {"claim_owner": g.caller.worker_id})
+            elif corruption == "item_cancel":
+                _update(g.db, FencedWorkItem, item, {"cancel_requested": 1})
+            else:
+                _update(g.db, RunPin, execution["runId"], {"cancel_requested": 1})
+>       with pytest.raises(FenceRejected):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'actions.server.run_outputs.service.FenceRejected'>
+
+action_server/tests/action_server_tests/test_generic_execution_port.py:343: Failed
+---------------------------- Captured stderr setup -----------------------------
+TEST PROCESS: 2026-10-25 01:49:40,639 - actions.server.migrations - INFO - Checking migration status for database backend: sqlite
+TEST PROCESS: 2026-10-25 01:49:40,639 - actions.server._database - DEBUG - sqlite version: 3.53.4
+TEST PROCESS: 2026-10-25 01:49:40,640 - actions.server.migrations - INFO - Preparing to migrate database at: /tmp/pytest-of-agent/pytest-41/test_terminal_projection_rejec3/runtime.db
+TEST PROCESS: 2026-10-25 01:49:40,640 - actions.server.migrations - INFO - Creating backup at: /tmp/pytest-of-agent/pytest-41/test_terminal_projection_rejec3/runtime.db-pre-migration-18-1792892980.6408277.bak
+TEST PROCESS: 2026-10-25 01:49:40,644 - actions.server.migrations - INFO - Will migrate to version: 17 (add_foundry_records)
+TEST PROCESS: 2026-10-25 01:49:40,654 - actions.server.migrations - INFO - Will migrate to version: 18 (allow_package_less_canvas)
+------------------------------ Captured log setup ------------------------------
+INFO     actions.server.migrations:__init__.py:225 Checking migration status for database backend: sqlite
+DEBUG    actions.server._database:_database.py:455 sqlite version: 3.53.4
+INFO     actions.server.migrations:__init__.py:106 Preparing to migrate database at: /tmp/pytest-of-agent/pytest-41/test_terminal_projection_rejec3/runtime.db
+INFO     actions.server.migrations:__init__.py:113 Creating backup at: /tmp/pytest-of-agent/pytest-41/test_terminal_projection_rejec3/runtime.db-pre-migration-18-1792892980.6408277.bak
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 17 (add_foundry_records)
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 18 (allow_package_less_canvas)
+----------------------------- Captured stderr call -----------------------------
+TEST PROCESS: 2026-10-25 01:49:41,312 - asyncio - DEBUG - Using selector: EpollSelector
+TEST PROCESS: 2026-10-25 01:49:41,889 - asyncio - DEBUG - Using selector: EpollSelector
+------------------------------ Captured log call -------------------------------
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+__ test_uncertain_running_projection_rejects_state_corruption[sqlite-attempt] __
+
+generic = <function generic.<locals>.setup at 0x7f9ef53a9800>
+corruption = 'attempt'
+
+    @pytest.mark.parametrize("corruption", ["attempt", "pin_cancel"])
+    def test_uncertain_running_projection_rejects_state_corruption(generic, corruption):
+        from actions.server.run_outputs.models import RunAttempt, RunPin
+        from actions.server.run_outputs.service import FenceRejected
+    
+        g = generic("optional")
+        ticket = g.owner.dispatch_standalone(g.caller, {"value": "hello"}, "model-call", lease_seconds=60)
+        row = _one(g.db, Run, ticket.fence.run_id)
+        record = json.loads(row.result); record["launch"] = {"id": "uncertain"}
+        with g.db.transaction():
+            _update(g.db, Run, row.id, {"result": _canonical(record, 65536)})
+            if corruption == "attempt":
+                _update(g.db, RunAttempt, ticket.fence.attempt_id, {"state": "succeeded"})
+            else:
+                _update(g.db, RunPin, row.id, {"cancel_requested": 1})
+        port, caller, runner, _ = wrapper(g)
+>       with pytest.raises(FenceRejected): invoke(port, caller, standalone(g))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'actions.server.run_outputs.service.FenceRejected'>
+
+action_server/tests/action_server_tests/test_generic_execution_port.py:364: Failed
+---------------------------- Captured stderr setup -----------------------------
+TEST PROCESS: 2026-10-25 01:49:42,130 - actions.server.migrations - INFO - Checking migration status for database backend: sqlite
+TEST PROCESS: 2026-10-25 01:49:42,131 - actions.server._database - DEBUG - sqlite version: 3.53.4
+TEST PROCESS: 2026-10-25 01:49:42,132 - actions.server.migrations - INFO - Preparing to migrate database at: /tmp/pytest-of-agent/pytest-41/test_uncertain_running_project0/runtime.db
+TEST PROCESS: 2026-10-25 01:49:42,132 - actions.server.migrations - INFO - Creating backup at: /tmp/pytest-of-agent/pytest-41/test_uncertain_running_project0/runtime.db-pre-migration-18-1792892982.1323888.bak
+TEST PROCESS: 2026-10-25 01:49:42,134 - actions.server.migrations - INFO - Will migrate to version: 17 (add_foundry_records)
+TEST PROCESS: 2026-10-25 01:49:42,144 - actions.server.migrations - INFO - Will migrate to version: 18 (allow_package_less_canvas)
+------------------------------ Captured log setup ------------------------------
+INFO     actions.server.migrations:__init__.py:225 Checking migration status for database backend: sqlite
+DEBUG    actions.server._database:_database.py:455 sqlite version: 3.53.4
+INFO     actions.server.migrations:__init__.py:106 Preparing to migrate database at: /tmp/pytest-of-agent/pytest-41/test_uncertain_running_project0/runtime.db
+INFO     actions.server.migrations:__init__.py:113 Creating backup at: /tmp/pytest-of-agent/pytest-41/test_uncertain_running_project0/runtime.db-pre-migration-18-1792892982.1323888.bak
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 17 (add_foundry_records)
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 18 (allow_package_less_canvas)
+----------------------------- Captured stderr call -----------------------------
+TEST PROCESS: 2026-10-25 01:49:42,922 - asyncio - DEBUG - Using selector: EpollSelector
+------------------------------ Captured log call -------------------------------
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+_ test_uncertain_running_projection_rejects_state_corruption[sqlite-pin_cancel] _
+
+generic = <function generic.<locals>.setup at 0x7f9ef53aaac0>
+corruption = 'pin_cancel'
+
+    @pytest.mark.parametrize("corruption", ["attempt", "pin_cancel"])
+    def test_uncertain_running_projection_rejects_state_corruption(generic, corruption):
+        from actions.server.run_outputs.models import RunAttempt, RunPin
+        from actions.server.run_outputs.service import FenceRejected
+    
+        g = generic("optional")
+        ticket = g.owner.dispatch_standalone(g.caller, {"value": "hello"}, "model-call", lease_seconds=60)
+        row = _one(g.db, Run, ticket.fence.run_id)
+        record = json.loads(row.result); record["launch"] = {"id": "uncertain"}
+        with g.db.transaction():
+            _update(g.db, Run, row.id, {"result": _canonical(record, 65536)})
+            if corruption == "attempt":
+                _update(g.db, RunAttempt, ticket.fence.attempt_id, {"state": "succeeded"})
+            else:
+                _update(g.db, RunPin, row.id, {"cancel_requested": 1})
+        port, caller, runner, _ = wrapper(g)
+>       with pytest.raises(FenceRejected): invoke(port, caller, standalone(g))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'actions.server.run_outputs.service.FenceRejected'>
+
+action_server/tests/action_server_tests/test_generic_execution_port.py:364: Failed
+---------------------------- Captured stderr setup -----------------------------
+TEST PROCESS: 2026-10-25 01:49:43,170 - actions.server.migrations - INFO - Checking migration status for database backend: sqlite
+TEST PROCESS: 2026-10-25 01:49:43,170 - actions.server._database - DEBUG - sqlite version: 3.53.4
+TEST PROCESS: 2026-10-25 01:49:43,172 - actions.server.migrations - INFO - Preparing to migrate database at: /tmp/pytest-of-agent/pytest-41/test_uncertain_running_project1/runtime.db
+TEST PROCESS: 2026-10-25 01:49:43,172 - actions.server.migrations - INFO - Creating backup at: /tmp/pytest-of-agent/pytest-41/test_uncertain_running_project1/runtime.db-pre-migration-18-1792892983.1725595.bak
+TEST PROCESS: 2026-10-25 01:49:43,176 - actions.server.migrations - INFO - Will migrate to version: 17 (add_foundry_records)
+TEST PROCESS: 2026-10-25 01:49:43,188 - actions.server.migrations - INFO - Will migrate to version: 18 (allow_package_less_canvas)
+------------------------------ Captured log setup ------------------------------
+INFO     actions.server.migrations:__init__.py:225 Checking migration status for database backend: sqlite
+DEBUG    actions.server._database:_database.py:455 sqlite version: 3.53.4
+INFO     actions.server.migrations:__init__.py:106 Preparing to migrate database at: /tmp/pytest-of-agent/pytest-41/test_uncertain_running_project1/runtime.db
+INFO     actions.server.migrations:__init__.py:113 Creating backup at: /tmp/pytest-of-agent/pytest-41/test_uncertain_running_project1/runtime.db-pre-migration-18-1792892983.1725595.bak
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 17 (add_foundry_records)
+INFO     actions.server.migrations:__init__.py:161 Will migrate to version: 18 (allow_package_less_canvas)
+----------------------------- Captured stderr call -----------------------------
+TEST PROCESS: 2026-10-25 01:49:44,052 - asyncio - DEBUG - Using selector: EpollSelector
+------------------------------ Captured log call -------------------------------
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+=========================== short test summary info ============================
+FAILED action_server/tests/action_server_tests/test_generic_journal_versions.py::test_retained_journal_version_is_required[sqlite-dispatch-missing]
+FAILED action_server/tests/action_server_tests/test_generic_journal_versions.py::test_retained_journal_version_is_required[sqlite-dispatch-unknown]
+FAILED action_server/tests/action_server_tests/test_generic_journal_versions.py::test_retained_journal_version_is_required[sqlite-dispatch-wrong_type]
+FAILED action_server/tests/action_server_tests/test_generic_journal_versions.py::test_retained_journal_version_is_required[sqlite-terminal_outer-missing]
+FAILED action_server/tests/action_server_tests/test_generic_journal_versions.py::test_retained_journal_version_is_required[sqlite-terminal_outer-unknown]
+FAILED action_server/tests/action_server_tests/test_generic_journal_versions.py::test_retained_journal_version_is_required[sqlite-terminal_outer-wrong_type]
+FAILED action_server/tests/action_server_tests/test_generic_journal_versions.py::test_retained_journal_version_is_required[sqlite-terminal_result-missing]
+FAILED action_server/tests/action_server_tests/test_generic_journal_versions.py::test_retained_journal_version_is_required[sqlite-terminal_result-unknown]
+FAILED action_server/tests/action_server_tests/test_generic_journal_versions.py::test_retained_journal_version_is_required[sqlite-terminal_result-wrong_type]
+FAILED action_server/tests/action_server_tests/test_generic_execution_port.py::test_terminal_projection_rejects_state_corruption[sqlite-attempt]
+FAILED action_server/tests/action_server_tests/test_generic_execution_port.py::test_terminal_projection_rejects_state_corruption[sqlite-item_owner]
+FAILED action_server/tests/action_server_tests/test_generic_execution_port.py::test_terminal_projection_rejects_state_corruption[sqlite-item_cancel]
+FAILED action_server/tests/action_server_tests/test_generic_execution_port.py::test_terminal_projection_rejects_state_corruption[sqlite-pin_cancel]
+FAILED action_server/tests/action_server_tests/test_generic_execution_port.py::test_uncertain_running_projection_rejects_state_corruption[sqlite-attempt]
+FAILED action_server/tests/action_server_tests/test_generic_execution_port.py::test_uncertain_running_projection_rejects_state_corruption[sqlite-pin_cancel]
+15 failed, 38 deselected in 33.62s
+Log (html): /workspace/actions-recovery-327/generic-contract-draft/output/log.html

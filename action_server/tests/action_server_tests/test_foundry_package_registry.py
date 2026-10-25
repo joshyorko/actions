@@ -333,3 +333,29 @@ def test_package_request_audit_and_grants_rollback_together(
         ref = registry.admit_compiled(actor, refs.workspace, compiled)
         assert registry.load(ref) == compiled
         assert len(db.all(FoundryRequest)) == len(db.all(FoundryAudit)) == 1
+
+
+def test_explicit_work_item_declaration_survives_registry_restart(
+    database_location, foundry_package_store
+):
+    from actions.server.deployments.foundry_values import WorkItemDeclaration
+
+    refs, actor = _refs(), Actor(principal_id=str(uuid4()))
+    declaration = WorkItemDeclaration(mode="producer", allow_outputs=True)
+    with _runtime_database(database_location, refs.workspace, ()) as db:
+        _grant(db, refs, actor)
+        registry = _registry(db, foundry_package_store)
+        result = registry.compile_trusted_source(
+            _generated_action_entries(),
+            logical_package_key="declared-producer",
+            logical_name="Explicit producer",
+            trusted_actor=actor,
+            workspace_id=refs.workspace,
+            application_id=refs.deployment_id,
+            work_items=declaration,
+        )
+        assert result.evidence.ready
+        ref = registry.admit_compiled(actor, refs.workspace, result.compiled_package)
+        restarted = _registry(db, foundry_package_store)
+        capability = restarted.capability_refs(ref)[0]
+        assert restarted.get_capability(capability).work_items == declaration

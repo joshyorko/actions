@@ -1,0 +1,14 @@
+{
+  "prior_domain_patch": "5efd5ba2e54fa740931a8d8608a5230ddf08c87951b0db131a4019671873bd0b",
+  "patch_sha256": "ea8c9bf16be7dc90ed78b61193dbc007b4f902a9ef86265668242ee308242c98",
+  "source_before_sha256": "01e587894c6a30aff45a822550ce2d9e5b3982037e70d3104162bcc9cc2c9bf0",
+  "source_after_sha256": "32e27b7cead9d4e3e481beaa8ea4cb1c0704a31778f1fde43b1f44bd53e5fca4",
+  "test_sha256": "685c6bbde5e5c60c134684acf2ebad8062b7eb46bae8ecf44d965011ffbb8e0d",
+  "red": "15corruption negatives failed before validators",
+  "green": "51passed2actualRCCdeselected104.90s combined SQLite+PostgreSQL domain markers and wrapper suite",
+  "upstream_disposition": "none",
+  "mypy": "2source files pass",
+  "ruff": "4files pass",
+  "cleanup": "owned PostgreSQL stopped; RCC not used",
+  "documentation_proposal": "/workspace/actions-recovery-327/generic-wrapper-guide-proposal.md"
+}

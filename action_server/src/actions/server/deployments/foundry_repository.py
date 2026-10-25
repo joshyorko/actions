@@ -97,6 +97,15 @@ def canonical_specification(specification: DeploymentSpecification) -> bytes:
             binding["requirement"]["requirement_id"],
         )
     )
+    if "work_item_policies" in value:
+        value["work_item_policies"].sort(
+            key=lambda policy: (
+                policy["capability"]["package_revision"]["workspace_id"],
+                policy["capability"]["package_revision"]["package_id"],
+                policy["capability"]["package_revision"]["revision_id"],
+                policy["capability"]["capability_id"],
+            )
+        )
     return _canonical_object(value)
 
 

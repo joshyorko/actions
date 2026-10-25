@@ -1223,3 +1223,52 @@ the portable suite removes its RCC opt-in. A portable skip is covered only by
 a named successful dedicated case on the same source and SDK bytes. Other
 opt-in RCC adapter/provider tests remain separate; generated-package or invoice
 worker success does not automatically qualify every RCC provider path.
+
+
+### Explicit generic Work Item policies
+
+The generic Work Item domain adapter binds the exact immutable Package declaration and per-capability Deployment policy; it does not infer consumer behavior from an Action name, import, invoice adapter or queue contents. A non-`none` declaration requires an explicit `allowOutputs` field. Empty Deployment Work Item policies remain omitted from canonical serialization so legacy revisions keep their identity. Declaration support alone does not grant managed or model-facing service support: bare RCC execution still rejects these modes without the trusted generic output adapter.
+
+Generic admission normalizes inputs against the compiled Action schema and retains their digest, exact execution snapshot and policy in a closed input envelope. Enqueue requires live execute, queue READ and ENQUEUE authority; the domain operation owns its one atomic FoundryRequest/Audit/item insert. Managed callers must delegate that operation without wrapping it in another enqueue idempotency authority. Input-linked dispatch uses the stable Work Item Run key, while the Work Item claim epoch and Run Attempt epoch remain independent. Optional no-input and producer dispatch admit an ordinary Run without a synthetic input item.
+
+For output-enabled capabilities the measured Action result is exactly `{ "result": <ordinary JSON>, "workItems": [<object>, ...] }`, subject to both the Action output schema and Deployment item/byte limits. The complete envelope remains in the ordinary Run result. Input-linked output routing is restricted to the existing SDK `<input_queue>_output` queue. Child input envelopes are not interchangeable with output envelopes: outputs carry server-validated producing snapshot, Run/Attempt fence, input digest and optional parent identity, and do not confer another execution admission. Unsupported mappings fail closed. Terminal child creation and Run publication share the existing SQL transaction; replay returns the retained admission and must not relaunch the Action.
+
+Use the source contract suite `test_generic_work_item_execution.py` against SQLite and an owned PostgreSQL fixture for authorization, independent stale fences, cancellation, atomic rollback and replay. Synthetic completion fixtures prove only these domain boundaries. Actual execution additionally requires the opt-in `ACTIONS_GENERIC_REAL_RCC=1` cases with the exact prepared RCC receipt/binary and an exclusively owned compiler home. They exercise actual generated consumer, standalone producer and optional no-input execution; they do not establish managed HTTP/model routes, installed-consumer acceptance or authenticated ChatGPT proof.
+
+
+The model-facing `canvas_apply` and `canvas_preview` schemas accept an explicit
+`backend.workItems` declaration and `queuePolicies` keyed by declared binding ID.
+Those requests become Package metadata and exact capability Deployment policy;
+they do not create queue grants or admit Runs. An omitted declaration/policy
+preserves legacy request serialization. Changed queue policy participates in the
+authoring idempotency fingerprint. Existing source entries and bindings retain
+their bounds and authorization checks. Policy validation does not imply every
+declared routing mode has an execution or UI adapter.
+
+A separately composed generic managed service binds one immutable input policy
+to common SQL queues. Physical queue names are only Workspace-scoped: discovery,
+counts, item reads and claims filter exact protected input snapshot and policy.
+Historical revisions sharing a name are not interchangeable. Generic enqueue
+keeps its domain-owned request/audit transaction; claim, renewal and completion
+use their own managed receipt namespace. Claims select only fresh admitted items
+until recovery is qualified. Dispatched renewal extends both Work Item and Run
+Attempt fences. Terminal completion validates retained sealed evidence and never
+executes or finishes a queue again. Output-child and standalone producer queues
+remain unadvertised until a typed lineage reader is qualified.
+
+Catalog eligibility is narrower than declaration validity. A caller-selected
+Runtime Plan without a default does not acquire an inferred selection; an
+unsupported output mapping must not disable unrelated queues. Reject ambiguous
+capabilities sharing an exact QueueRef and physical collisions with reviewed
+queues. Pagination rebuilds authorized visibility before checking its digest.
+Metadata scans use 64-row batches and fail closed above 10000 rows or 16 MiB of
+payload bytes; they never fall back to unscoped rows. This bounded scan is not
+an unbounded queue-scale claim.
+
+
+`GenericCanvasExecution` adds a closed model-facing `capability_invoke` variant with `mode: "generic"`. Every invocation selects an exact immutable execution snapshot and either an exact existing `ClaimRef`, or standalone typed inputs plus a bounded idempotency key. Claim invocations cannot replace input or choose another Run identity. The host supplies the worker UUID, common SQL/queue authorities, prepared RCC receipt and execution directory; no request supplies them. The existing reviewed invocation variant and `canvas_dispatch` remain delegated unchanged. This wrapper does not add generic app-audience dispatch or establish a bound-app session.
+
+The wrapper resolves the exact retained Deployment, Runtime Plan and unique capability Work Item policy before dispatch. A terminal invocation returns its retained Run/Attempt/item state without another launch. An existing launch returns `reconciliation_required`, including after an earlier uncertain runner failure; invocation never retries that launch. Projection rechecks independent Work Item and Run Attempt identities. Artifact handles are returned only for attached final outputs that resolve under live common Run/package read and queue READ/ARTIFACT_READ grants. Execute permission alone does not expose output handles, bytes, generated source or credentials; revocation applies again on replay.
+
+`test_generic_execution_port.py` distinguishes synthetic runner boundary tests from its explicit `ACTIONS_GENERIC_WRAPPER_REAL_RCC=1` test. The actual test compiles and invokes a generated optional-input Action through the model wrapper, validates four sealed output handles, and repeats the invocation without relaunch. It requires exclusive ownership of the exact prepared RCC home. This is source-level wrapper evidence, not installed-consumer, startup wiring, authenticated ChatGPT, generic bound-app UI or failed-process reconciliation qualification.
+

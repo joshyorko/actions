@@ -345,7 +345,7 @@ class GeneratedRccExecution:
             )
         result_receipt = {
             "version": "actions.generated-rcc-execution/v1",
-            "mode": "work-items",
+            "mode": journal["mode"],
             "claim": journal["claim"],
             "lineage": lineage,
             "launch": launch,
@@ -396,13 +396,20 @@ class GeneratedRccExecution:
             ),
             None,
         )
+        if not isinstance(capability, dict) or capability.get("kind") != "action":
+            raise AccessDenied("compiled Action capability is not executable")
         if (
-            not isinstance(capability, dict)
-            or capability.get("kind") != "action"
-            or capability.get("mode") != "none"
+            capability.get("mode") != "none"
             or capability.get("allowOutputs") is not False
         ):
-            raise AccessDenied("compiled Action capability is not executable")
+            from actions.server.foundry.generic_work_item_execution import (
+                _GenericOutputs,
+            )
+
+            generic_outputs = getattr(self, "outputs", None)
+            if not isinstance(generic_outputs, _GenericOutputs):
+                raise AccessDenied("compiled Action capability is not executable")
+            generic_outputs.require_rcc_selection(snapshot, capability)
         if snapshot.runtime_plan.plan_digest.root not in capability.get(
             "compatiblePlanDigests", []
         ):
@@ -475,13 +482,29 @@ class GeneratedRccExecution:
                 raise FenceRejected(
                     "explicit Work Items execution journal required"
                 ) from None
+            from actions.server.foundry.generic_work_item_execution import (
+                _GenericOutputs,
+            )
+
+            standalone = (
+                isinstance(self.outputs, _GenericOutputs)
+                and self.outputs.ticket.claim is None
+                and isinstance(journal, dict)
+                and journal.get("mode") == "standalone"
+                and journal.get("claim") is None
+            )
             if (
                 not isinstance(journal, dict)
                 or journal.get("version") != _JOURNAL_VERSION
-                or journal.get("mode") != "work-items"
-                or not isinstance(journal.get("claim"), dict)
                 or journal.get("fence") != fence.model_dump()
-                or not self._valid_claim(journal["claim"], fence)
+                or (
+                    not standalone
+                    and (
+                        journal.get("mode") != "work-items"
+                        or not isinstance(journal.get("claim"), dict)
+                        or not self._valid_claim(journal["claim"], fence)
+                    )
+                )
             ):
                 raise FenceRejected(
                     "explicit Work Items mode and current claim required"
@@ -511,7 +534,9 @@ class GeneratedRccExecution:
             raise FenceRejected("current RCC launch intent changed")
 
     @staticmethod
-    def _lineage(snapshot: ExecutionSnapshot, claim: dict, fence: AttemptFence) -> dict:
+    def _lineage(
+        snapshot: ExecutionSnapshot, claim: dict | None, fence: AttemptFence
+    ) -> dict:
         """Return the exact admitted Package, Plan, Work Item, Run and Attempt."""
         package = snapshot.capability.package_revision.model_dump(mode="json")
         plan = snapshot.runtime_plan.model_dump(mode="json")

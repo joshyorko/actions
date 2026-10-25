@@ -642,3 +642,103 @@ def test_staged_source_snapshot_rejects_bytes_that_differ_from_the_input(
     finally:
         os.close(source_fd)
         os.close(destination_fd)
+
+
+@pytest.mark.parametrize(
+    "mode,outputs",
+    [
+        ("optional", False),
+        ("required-input", False),
+        ("consumer", True),
+        ("producer", True),
+    ],
+)
+def test_explicit_work_item_declaration_changes_immutable_manifest(mode, outputs):
+    from actions.server.deployments.foundry_values import WorkItemDeclaration
+
+    baseline, _ = _compile_with_fake()
+    outcome = compile_generated_python_action(
+        _generated_action_entries(),
+        replace(
+            _compilation_policy(),
+            work_items=WorkItemDeclaration(mode=mode, allow_outputs=outputs),
+        ),
+        protected_input_names=["package.yaml"],
+        admission=TrustedDeveloperExecutionAdmission.TRUSTED,
+        executor=_FakeCompilerExecutor(),
+    )
+    compiled = outcome.compiled_package
+    assert compiled is not None and baseline.compiled_package is not None
+    manifest = json.loads(compiled.manifest_json)
+    Draft202012Validator(json.loads(PACKAGE_SCHEMA.read_text())).validate(manifest)
+    assert manifest["capabilities"][0]["mode"] == mode
+    assert manifest["capabilities"][0]["allowOutputs"] is outputs
+    verify_compiled_package_revision(compiled)
+    assert compiled.package_revision_id != baseline.compiled_package.package_revision_id
+    assert (
+        compiled.runtime_plan_payload == baseline.compiled_package.runtime_plan_payload
+    )
+    assert compiled.source_archive == baseline.compiled_package.source_archive
+
+    # Compiling a declaration never turns the current none-only RCC port into
+    # a queue worker. No execution or synthetic Work Item is admitted here.
+    from types import SimpleNamespace
+
+    from actions.server.foundry.rcc_execution import GeneratedRccExecution
+    from actions.server.run_outputs.service import AccessDenied
+
+    runner = object.__new__(GeneratedRccExecution)
+    runner.registry = SimpleNamespace(
+        load=lambda ref: compiled, evidence=lambda ref: SimpleNamespace(ready=True)
+    )
+    snapshot = SimpleNamespace(
+        capability_authority="package-revision",
+        capability=SimpleNamespace(
+            package_revision=object(),
+            capability_id=SimpleNamespace(root=manifest["capabilities"][0]["id"]),
+        ),
+    )
+    with pytest.raises(AccessDenied, match="not executable"):
+        runner._verified_selection(snapshot)
+
+
+def test_default_work_item_declaration_preserves_manifest_golden():
+    import hashlib
+
+    compiled = _compile_with_fake()[0].compiled_package
+    assert compiled is not None
+    assert (
+        hashlib.sha256(compiled.manifest_json).hexdigest()
+        == "b69feea6cdb57315b9ea490bd7610371ceeeb05ec9096f101e1b50d08b3215bd"
+    )
+
+
+@pytest.mark.parametrize(
+    "mode,outputs",
+    [("none", True), ("producer", False), ("automatic", False), (None, True)],
+)
+def test_package_schema_rejects_contradictory_work_item_declaration(mode, outputs):
+    from jsonschema.exceptions import ValidationError
+
+    compiled = _compile_with_fake()[0].compiled_package
+    manifest = json.loads(compiled.manifest_json)
+    capability = manifest["capabilities"][0]
+    if mode is None:
+        capability.pop("mode")
+    else:
+        capability["mode"] = mode
+    capability["allowOutputs"] = outputs
+    with pytest.raises(ValidationError):
+        Draft202012Validator(json.loads(PACKAGE_SCHEMA.read_text())).validate(manifest)
+
+
+@pytest.mark.parametrize("mode", ["optional", "required-input", "consumer", "producer"])
+def test_non_none_schema_requires_explicit_output_declaration(mode):
+    from jsonschema.exceptions import ValidationError
+
+    compiled = _compile_with_fake()[0].compiled_package
+    manifest = json.loads(compiled.manifest_json)
+    manifest["capabilities"][0]["mode"] = mode
+    manifest["capabilities"][0].pop("allowOutputs")
+    with pytest.raises(ValidationError):
+        Draft202012Validator(json.loads(PACKAGE_SCHEMA.read_text())).validate(manifest)

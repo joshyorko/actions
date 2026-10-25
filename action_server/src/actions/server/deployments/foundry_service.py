@@ -32,6 +32,7 @@ from .foundry_values import (
     PackageRevisionPort,
     Permission,
     ResolvedDeploymentExecution,
+    WorkItemDeclaration,
     WorkspaceAuthorizationPort,
 )
 
@@ -440,6 +441,26 @@ class FoundryDeploymentService:
             policy.capability: self._capability(policy.capability)
             for policy in specification.capability_plans
         }
+        queue_policies = {
+            policy.capability: policy for policy in specification.work_item_policies
+        }
+        for capability, declaration in declared_capabilities.items():
+            work_items = WorkItemDeclaration.model_validate(
+                getattr(declaration, "work_items", WorkItemDeclaration())
+            )
+            queue_policy = queue_policies.get(capability)
+            if queue_policy is None:
+                if work_items.mode != "none":
+                    raise PackageContractError(
+                        "Work Item capability requires an explicit Deployment policy"
+                    )
+            else:
+                try:
+                    queue_policy.require_declaration(work_items)
+                except ValueError as exc:
+                    raise PackageContractError(
+                        "Work Item policy differs from Package declaration"
+                    ) from exc
         for policy in specification.capability_plans:
             declaration = declared_capabilities[policy.capability]
             _valid_digest(declaration.schema_digest)

@@ -33,6 +33,7 @@ from actions.server._rcc_runtime_adapter import (
     parse_published_artifact_details,
 )
 from actions.server.deployments import canonical, ids, source_manifest, source_staging
+from actions.server.deployments.foundry_values import WorkItemDeclaration
 
 MAX_COMPILER_SOURCE_ENTRIES = 32
 MAX_COMPILER_SOURCE_FILES = 16
@@ -95,8 +96,12 @@ class PackageCompilationPolicy:
     actions_core_range: str
     compiler_normalization_version: str = COMPILER_NORMALIZATION_VERSION
     rcc_adapter_version_range: str = RCC_ADAPTER_VERSION_RANGE
+    work_items: WorkItemDeclaration = WorkItemDeclaration()
 
     def __post_init__(self) -> None:
+        if not isinstance(self.work_items, WorkItemDeclaration):
+            raise ValueError("typed Work Item declaration required")
+        WorkItemDeclaration.model_validate(self.work_items)
         if not isinstance(self.package_id, str) or not _PACKAGE_ID_RE.fullmatch(
             self.package_id
         ):
@@ -463,10 +468,14 @@ def _verify_compiled_package_revision(compiled: CompiledPackageRevision) -> None
     ):
         raise ValueError("Runtime Plan preimage does not match")
 
+    WorkItemDeclaration.model_validate(
+        {
+            "mode": capability.get("mode"),
+            "allow_outputs": capability.get("allowOutputs"),
+        }
+    )
     if (
         capability.get("kind") != "action"
-        or capability.get("mode") != "none"
-        or capability.get("allowOutputs") is not False
         or plan_without_digest.get("schemaVersion") != RUNTIME_PLAN_SCHEMA_VERSION
         or plan_without_digest.get("runtimeKind") != "rcc"
         or plan_without_digest.get("contractId") != RCC_CONTRACT_VERSION
@@ -1137,8 +1146,8 @@ def _assemble_compiled_package(
     capability = {
         "id": capability_id,
         "kind": "action",
-        "mode": "none",
-        "allowOutputs": False,
+        "mode": policy.work_items.mode,
+        "allowOutputs": policy.work_items.allow_outputs,
         "inputSchemaDigest": _schema_digest(
             input_schema, "actions.input-schema/v1-draft"
         ),
