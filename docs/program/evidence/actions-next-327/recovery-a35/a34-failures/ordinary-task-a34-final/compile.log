@@ -1,0 +1,32 @@
+
+  ⚡️ Starting Action Server... v1.1.0a34
+
+Using user-specified datadir: /workspace/actions-recovery-327/ordinary-task-a34-final/datadir
+Logs may be found at: /workspace/actions-recovery-327/ordinary-task-a34-final/datadir/server_log.txt.
+Checking migration status for database backend: sqlite
+Operating mode: standard
+/workspace/actions-recovery-327/installed-a34/consumer/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py:1540: TypedDictExtraConfigWarning: TypedDict class 'RequestParamsMeta' allows extra items, but 'extra' configuration is set to `'forbid'`. The 'extra' configuration value will be ignored.
+  warnings.warn(
+StreamableHTTP session manager started
+Initializing scheduler engine...
+Scheduler engine started (check_interval=10.0s, max_concurrent=10)
+  ⏰ Scheduler started (check interval: 10.0s)
+
+  ⚡️ Local MCP endpoint: http://127.0.0.1:42671/mcp
+
+  ⚡️ Local Action Server: http://127.0.0.1:42671
+     Public access: use --expose to expose (OpenAPI only)
+API key authentication enabled. Sign in with your configured key.
+2026-10-25 05:31:17: GET /api/managed-work-items/v1/schema 200 OK
+2026-10-25 05:31:18: POST /mcp 200 OK
+MCP request
+2026-10-25 05:31:32: POST /mcp 200 OK
+MCP request
+2026-10-25 05:31:32: POST /mcp 200 OK
+MCP request
+2026-10-25 05:31:32: POST /mcp 200 OK
+MCP request
+Stopping scheduler...
+Scheduler engine stopped
+Stopping action server...
+StreamableHTTP session manager shutting down

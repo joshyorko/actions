@@ -1,0 +1,35 @@
++ poetry run pytest tests/action_server_tests/mcp/test_mcp_gateway_metadata.py -q -k current_task --robocorp-log-output=/workspace/actions-recovery-327/evidence/task-gateway-red-html (in /workspace/actions/action_server)
+F                                                                        [100%]
+=================================== FAILURES ===================================
+________ test_current_task_routing_binds_task_id_and_redacts_telemetry _________
+
+    def test_current_task_routing_binds_task_id_and_redacts_telemetry():
+        task_id = str(uuid.uuid4())
+        for method in ('tasks/get', 'tasks/cancel', 'tasks/update'):
+            body = {'jsonrpc': '2.0', 'id': 1, 'method': method, 'params': {'taskId': task_id}}
+            seen, sent = asyncio.run(_run(body, {MCP_METHOD_HEADER: method, MCP_NAME_HEADER: task_id}))
+>           assert sent[0]['status'] == 204
+
+E           AssertionError: Failed: assert sent[0]['status'] == 204
+E           Variables:
+E             sent[0]['status'] = 400
+
+tests/action_server_tests/mcp/test_mcp_gateway_metadata.py:957: AssertionError
+----------------------------- Captured stderr call -----------------------------
+TEST PROCESS: 2026-10-25 05:34:52,049 - asyncio - DEBUG - Using selector: EpollSelector
+------------------------------ Captured log call -------------------------------
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+=========================== short test summary info ============================
+FAILED tests/action_server_tests/mcp/test_mcp_gateway_metadata.py::test_current_task_routing_binds_task_id_and_redacts_telemetry
+1 failed, 33 deselected in 1.22s
+Log (html): /workspace/actions-recovery-327/evidence/task-gateway-red-html/log.html
+Traceback (most recent call last):
+  File "/workspace/actions-cloud/package-command.py", line 13, in <module>
+    toolkit.poetry(package, *arguments)
+  File "/workspace/actions/developer/toolkit.py", line 76, in poetry
+    run(["poetry", *arguments], REPOSITORY_ROOT / package)
+  File "/workspace/actions/developer/toolkit.py", line 72, in run
+    subprocess.run(command, cwd=cwd, env=environment, check=True)
+  File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['poetry', 'run', 'pytest', 'tests/action_server_tests/mcp/test_mcp_gateway_metadata.py', '-q', '-k', 'current_task', '--robocorp-log-output=/workspace/actions-recovery-327/evidence/task-gateway-red-html']' returned non-zero exit status 1.

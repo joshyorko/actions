@@ -5438,3 +5438,33 @@ PostgreSQL host tests cover completion and both local-stop permission cases.
 RccCleanupIncomplete preserves unconfirmed termination explicitly: host close
 returns false even after its thread exits, and Runtime retains its provider.
 A simple thread join is not proof that child-process cleanup succeeded.
+
+Installed detached Task qualification must distinguish nonterminal acknowledgement,
+reconnect replay, sealed completion, process restart and graceful worker shutdown.
+Compare the returned Task ID with exact retained Run/Attempt/intent/receipt
+identities as well as aggregate row counts. Assert extension negotiation with
+the actual installed MCP SDK; preserve creation time/TTL across replay. Task get
+validates sealed inventory, but a public artifact-read/value claim additionally
+requires reading through the authorized interface.
+
+Do not equate graceful shutdown with exit code zero: qualified Uvicorn0.38
+capture_signals re-raises SIGTERM after shutdown, producing -15. The normal
+console filter hides its success messages; the filtered datadir server_log.txt
+retains them. Require no forced kill, application shutdown complete and finished
+server process for the exact PID in that process's log segment, and no shutdown
+failure. A force-killed process is cleanup evidence, not a graceful lifecycle
+pass. Set PASS only after the final required shutdown succeeds and preserve the
+original timeout/failure receipt without re-admitting an uncertain Run.
+
+Serialize trusted prepared RCC receipts with PreparedRccEnvironment.to_receipt_bytes
+and immediately round-trip load_prepared_rcc_environment before using them in a
+Runtime profile. Ordinary json.dumps spacing or an appended newline changes the
+canonical receipt bytes and is refused before compilation, even when artifact
+and specification digests are correct. Successful raw RCC env exec alone does
+not validate the Runtime preparation-receipt loader.
+
+Task transport qualification must include the ordinary HTTP metadata gateway;
+direct SDK adapter tests do not exercise its method/name inference. Current
+Task get/cancel/update bind Mcp-Name to params.taskId. Keep exact mismatch and
+duplicate-header rejection, bounded identifiers and telemetry redaction; do not
+remove routing headers to work around a gateway mismatch.

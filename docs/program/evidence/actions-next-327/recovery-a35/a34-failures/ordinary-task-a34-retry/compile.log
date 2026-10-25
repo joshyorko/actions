@@ -1,0 +1,28 @@
+
+  ⚡️ Starting Action Server... v1.1.0a34
+
+Using user-specified datadir: /workspace/actions-recovery-327/ordinary-task-a34-retry/datadir
+Logs may be found at: /workspace/actions-recovery-327/ordinary-task-a34-retry/datadir/server_log.txt.
+Checking migration status for database backend: sqlite
+Operating mode: standard
+Killing processes: rcc-18.19.3 (x.pid)
+Traceback (most recent call last):
+  File "/workspace/actions-recovery-327/installed-a34/consumer/bin/action-server", line 8, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/workspace/actions-recovery-327/installed-a34/consumer/lib/python3.12/site-packages/actions/server/cli.py", line 62, in main
+    retcode = _main_retcode(args)
+              ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/actions-recovery-327/installed-a34/consumer/lib/python3.12/site-packages/actions/server/_cli_impl.py", line 1014, in _main_retcode
+    return _command_requiring_datadir(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/actions-recovery-327/installed-a34/consumer/lib/python3.12/site-packages/actions/server/_cli_impl.py", line 1239, in _command_requiring_datadir
+    start_server(
+  File "/workspace/actions-recovery-327/installed-a34/consumer/lib/python3.12/site-packages/actions/server/_server.py", line 573, in start_server
+    native_canvas = create_runtime_canvas(get_db(), settings.datadir, api_key)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/actions-recovery-327/installed-a34/consumer/lib/python3.12/site-packages/actions/server/foundry/bootstrap.py", line 232, in create_runtime_canvas
+    load_prepared_rcc_environment(Path(profile.prepared_receipt))
+  File "/workspace/actions-recovery-327/installed-a34/consumer/lib/python3.12/site-packages/actions/server/deployments/package_revision_compiler.py", line 222, in load_prepared_rcc_environment
+    raise ValueError("prepared RCC receipt bytes are not canonical")
+ValueError: prepared RCC receipt bytes are not canonical

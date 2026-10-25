@@ -168,6 +168,9 @@ async def test_official_sdk_current_extension_and_raw_http_routing(case):
     class NamedTaskRequest(Request):
         name_param = "taskId"
 
+    from actions.server.mcp.gateway_metadata import McpRequestMetadataMiddleware
+
+    gateway = McpRequestMetadataMiddleware(app)
     captured = []
 
     async def capture(request):
@@ -179,7 +182,7 @@ async def test_official_sdk_current_extension_and_raw_http_routing(case):
     async with app.router.lifespan_context(app):
         async with httpx2.AsyncClient(
             event_hooks={"request": [capture]},
-            transport=httpx2.ASGITransport(app=app),
+            transport=httpx2.ASGITransport(app=gateway),
             base_url="http://127.0.0.1:8000",
             headers={"authorization": "Bearer owned-fixture-only"},
         ) as http:

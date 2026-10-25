@@ -1155,3 +1155,15 @@ host matrix passes six completion/stop cases across both SQL backends; uncertain
 shutdown never fabricates a terminal Run. Installed current-MCP execution and
 process restart remain the next qualification, not implied by these source tests.
 Runtime1.1.0a34 uses Core1.1.0a3. The broader owner matrix remains open.
+
+## a35 ordinary Task gateway correction
+
+[Preserved installed findings and source correction](evidence/actions-next-327/recovery-a35/README.md)
+record clean a34 installation and genuine public compilation/activation, followed
+by Task acknowledgement/reconnect replay. Task get failed in the ordinary
+metadata gateway before the adapter because taskId was not recognized as its
+routing name. The Run remains explicitly uncertain/nonterminal after shutdown.
+The a35 correction passes42 gateway/candidate cases and two official SDK requests
+through the actual gateway on both SQL backends; installed corrected completion
+and restart still require their own receipt. Original harness/preparation-format
+failures are preserved alongside the actual gateway defect.

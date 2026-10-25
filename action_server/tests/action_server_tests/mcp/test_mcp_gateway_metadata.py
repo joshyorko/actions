@@ -947,3 +947,31 @@ def test_cors_exposes_the_canonical_mcp_request_id(tmp_path, monkeypatch):
         assert "X-Request-ID" in cors.kwargs["expose_headers"]
     finally:
         get_app.cache_clear()
+
+
+def test_current_task_routing_binds_task_id_and_redacts_telemetry():
+    task_id = str(uuid.uuid4())
+    for method in ("tasks/get", "tasks/cancel", "tasks/update"):
+        body = {
+            "jsonrpc": "2.0",
+            "id": 1,
+            "method": method,
+            "params": {"taskId": task_id},
+        }
+        seen, sent = asyncio.run(
+            _run(body, {MCP_METHOD_HEADER: method, MCP_NAME_HEADER: task_id})
+        )
+        assert sent[0]["status"] == 204
+        metadata = seen["state"][MCP_REQUEST_STATE_KEY]
+        assert metadata.method == method and metadata.name == "<redacted>"
+        assert task_id not in str(metadata.telemetry_attributes)
+        for headers in (
+            [(MCP_METHOD_HEADER, method), (MCP_NAME_HEADER, str(uuid.uuid4()))],
+            [
+                (MCP_METHOD_HEADER, method),
+                (MCP_NAME_HEADER, task_id),
+                (MCP_NAME_HEADER, task_id),
+            ],
+        ):
+            rejected, responses = asyncio.run(_run(body, headers))
+            assert responses[0]["status"] == 400 and not rejected.get("app_called")
