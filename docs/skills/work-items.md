@@ -1354,3 +1354,12 @@ Host connection diagnostics may be collapsed into a secondary details disclosure
 After a successful validated selected-input admission, invalidate only that binding’s cached input page and clear its form selection. Otherwise a completed Run can still display a cached PENDING item with an enabled claim button. Require explicit Load inputs to obtain fresh state; do not automatically load, claim or execute. An uncertain or rejected response must retain the pending selection/idempotency identity for safe retry. A later explicit load and selection may admit another Run after terminal state.
 
 Installed-browser admission assertions must wait for the asynchronous response and React state update, rather than reading the selection immediately after click resolves. Await the empty selection and disabled claim control before continuing explicit execution. A premature assertion failure is harness evidence; retain its receipt and use a fresh synthetic fixture rather than automatically relaunching an uncertain prior Run.
+
+Do not compose the generic output adapter's default claim checks into a SQL-only
+execution callback without a verified metadata authority binding. The unbound
+current-capability path verifies package artifacts and can read the provider inside
+the transaction; a SQLite diagnostic observed this in `_GenericOutputs._check`.
+Prepare artifact-backed selection outside SQL and recheck exact declaration,
+Deployment, queue and Attempt authority inside SQL. A receipt-kind switch alone
+does not supply that binding. Claimed Robot integration remains unimplemented
+until these checks and atomic queue/Run completion are qualified together.

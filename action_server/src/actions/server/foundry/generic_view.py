@@ -20,7 +20,7 @@ from actions.server._models import RUN_ID_COUNTER, Run, RunStatus
 from actions.server.data_queries.invoice_worker import ClaimValue
 from actions.server.data_queries.review_models import FencedWorkItem
 from actions.server.deployments.ids import DeploymentId, WorkspaceId
-from actions.server.foundry.execution_profiles import select_rcc_execution_profile
+from actions.server.foundry.execution_profiles import select_canvas_execution_profile
 from actions.server.foundry.generic_input_view import (
     InputList,
     InputSubmit,
@@ -173,11 +173,12 @@ class GenericCanvasView(CanvasPort):
         ]
         if len(bindings) != 1:
             raise AccessDenied("exact active binding required")
-        selected = select_rcc_execution_profile(
+        selected = select_canvas_execution_profile(
             self.execution.deployments,
             caller.actor,
             scope.deployment,
             bindings[0].capability,
+            registry=self.execution.outputs.capabilities,
         )
         snapshot = selected.snapshot
         if snapshot.canvas_application != scope.application:

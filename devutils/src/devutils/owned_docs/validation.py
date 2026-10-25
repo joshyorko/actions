@@ -15,7 +15,7 @@ _ORDER = ("Example", "Args", "Returns", "Yields", "Raises", "Note")
 
 def section_errors(source: str) -> list[tuple[str, int]]:
     """Return custom section-order and inline-description violations."""
-    from pydocstyle.checker import ConventionChecker
+    from pydocstyle.checker import ConventionChecker  # type: ignore[import-untyped]
 
     errors = []
     for node in ast.walk(ast.parse(source)):
@@ -51,7 +51,7 @@ def section_errors(source: str) -> list[tuple[str, int]]:
 
 def validate_path(target: str) -> list[str]:
     """Validate a file, directory or import path without invoking a shell."""
-    import pydocstyle
+    import pydocstyle  # type: ignore[import-untyped]
 
     path = Path(target)
     if not path.exists():

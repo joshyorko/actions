@@ -6392,3 +6392,37 @@ generated-failure version only for an actually failed Run at terminal read
 boundaries. Receipt validation does not grant read authority: preserve Deployment
 and queue permission checks and authorized provider resolution. This does not
 imply stronger validation for legacy zero-requirement Python success receipts.
+
+The optional SBOM toolchain is not installed by a default Poetry sync. On Python
+3.9 or later within the declared range, use the prepared RCC package gateway with
+`devutils sync --with sbom` before invoking the pinned producer. Supplementary
+devutils mypy uses `-p devutils` to retain canonical module identity. Official
+pydocstyle is untyped; only its import boundary is annotated while the owned
+generator and validator remain type-checked. Preserve Markdown parity when
+correcting inherited generator typing.
+
+Installed logging acceptance must assert consumer module origin and version,
+block upstream imports, and exercise actual AST rewriting with raw/repr Secret,
+OAuth and encrypted-context canaries. RCC's `ROBOT_ROOT` can exclude a scratch
+probe from default instrumentation: explicitly select its `full_log` filter and
+require method, argument and return events. Redirect rewritten caches outside the
+frozen consumer before imports; check reuse in a second isolated process and
+compare installed wheel payload bytes afterward. Decoded HTML events verify
+stored data, not browser rendering.
+
+Canvas profile selection must distinguish verified direct Robot packages from
+ordinary generated Python. Direct Robot admission and model discovery can pass
+while Canvas open fails if its shared selector still requires RCC. Keep generated
+Python's selector RCC-only. The Canvas selector may accept direct only from the
+same canonical registry authority, with verified Robot carrier, exact package,
+capability and plan references, and an actual retained direct plan. Preserve
+resolver authorization, sole locked default plan and all profile identity checks.
+
+Dependency/default audits distinguish runtime acquisition, implicit local service
+discovery, signing metadata and pinned provenance verification. Legacy PID-file
+service discovery is active coupling even without a cloud hostname. Signing
+homepage metadata affects artifact identity without being a network destination.
+A pinned reference checkout in release verification is a build-time availability
+dependency; any offline replacement must retain independent provenance assurance.
+Historical data directories, explicit compatibility aliases and legal attribution
+are not removable dependency edges.

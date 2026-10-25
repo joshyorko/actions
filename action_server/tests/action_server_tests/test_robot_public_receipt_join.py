@@ -3,9 +3,6 @@
 import json
 
 import pytest
-from action_server_tests.test_robot_package_admission import admitted, disable_feedback
-from action_server_tests.test_robot_runtime_runner import case
-
 from actions.server._models import Run
 from actions.server.foundry.logical_receipts import (
     generated_output_names,
@@ -13,6 +10,9 @@ from actions.server.foundry.logical_receipts import (
     versions_for_selection,
 )
 from actions.server.run_outputs.service import FenceRejected, _one
+
+from action_server_tests.test_robot_package_admission import admitted, disable_feedback
+from action_server_tests.test_robot_runtime_runner import case
 
 pytest_plugins = ["action_server_tests.foundry_fixtures"]
 
@@ -240,3 +240,105 @@ def test_model_handles_validate_zero_requirement_robot_receipt(case):
         c.db.update_by_id(Run, run.id, {"result": json.dumps(outer)})
     with pytest.raises(FenceRejected):
         port._handles(c.caller, c.service, _one(c.db, Run, run.id))
+
+
+def test_canvas_profile_accepts_only_verified_direct_robot(case, monkeypatch):
+    from actions.server.deployments.foundry_values import AccessDenied
+    from actions.server.foundry.execution_profiles import (
+        select_canvas_execution_profile,
+        select_rcc_execution_profile,
+    )
+
+    c = case
+    snapshot = c.service.snapshot
+    assert snapshot.runtime_kind == "direct"
+    with pytest.raises(AccessDenied, match="Pinned RCC Runtime"):
+        select_rcc_execution_profile(
+            c.service.deployments, c.actor, snapshot.deployment, snapshot.capability
+        )
+    result = select_canvas_execution_profile(
+        c.service.deployments,
+        c.actor,
+        snapshot.deployment,
+        snapshot.capability,
+        registry=c.registry,
+    )
+    assert result.snapshot == snapshot
+    monkeypatch.setattr(c.registry, "selection_for", lambda *args: object())
+    with pytest.raises(AccessDenied, match="verified direct Robot"):
+        select_canvas_execution_profile(
+            c.service.deployments,
+            c.actor,
+            snapshot.deployment,
+            snapshot.capability,
+            registry=c.registry,
+        )
+
+
+def test_direct_canvas_profile_keeps_registry_and_profile_authority(case, monkeypatch):
+    import copy
+
+    from actions.server.deployments.foundry_values import AccessDenied
+    from actions.server.foundry.execution_profiles import (
+        select_canvas_execution_profile,
+    )
+
+    c = case
+    snapshot = c.service.snapshot
+    args = (c.service.deployments, c.actor, snapshot.deployment, snapshot.capability)
+    with pytest.raises(AccessDenied, match="verified direct Robot"):
+        select_canvas_execution_profile(*args, registry=copy.copy(c.registry))
+    resolved = c.service.deployments.resolve(
+        c.actor,
+        snapshot.deployment.workspace_id,
+        snapshot.deployment.deployment_id,
+        snapshot.capability,
+        revision=snapshot.deployment,
+    )
+    forged = resolved.model_copy(
+        update={
+            "snapshot": resolved.snapshot.model_copy(
+                update={
+                    "worker": snapshot.worker.model_copy(
+                        update={
+                            "revision_id": type(snapshot.worker.revision_id)(
+                                "sha256:" + "9" * 64
+                            )
+                        }
+                    )
+                }
+            )
+        }
+    )
+    monkeypatch.setattr(c.service.deployments, "resolve", lambda *a, **kw: forged)
+    with pytest.raises(AccessDenied, match="profile identity differs"):
+        select_canvas_execution_profile(*args, registry=c.registry)
+
+
+def test_direct_canvas_profile_rejects_retained_plan_kind_mismatch(case, monkeypatch):
+    from dataclasses import replace
+
+    from actions.server.deployments.foundry_values import AccessDenied
+    from actions.server.foundry.execution_profiles import (
+        select_canvas_execution_profile,
+    )
+
+    c = case
+    snapshot = c.service.snapshot
+    selected = c.registry.selection_for(snapshot.capability, snapshot.runtime_plan)
+    wrong_plan = replace(selected.robot.robot.plan, runtime_kind="rcc")
+    wrong = replace(
+        selected,
+        robot=replace(
+            selected.robot, robot=replace(selected.robot.robot, plan=wrong_plan)
+        ),
+    )
+    monkeypatch.setattr(c.registry, "selection_for", lambda *args: wrong)
+    with pytest.raises(AccessDenied, match="verified direct Robot"):
+        select_canvas_execution_profile(
+            c.service.deployments,
+            c.actor,
+            snapshot.deployment,
+            snapshot.capability,
+            registry=c.registry,
+        )

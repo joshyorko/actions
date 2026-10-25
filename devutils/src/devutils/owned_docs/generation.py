@@ -169,7 +169,10 @@ def _get_function_signature(
     name = ".".join(name_parts)
 
     if isclass:
-        function = getattr(function, "__init__", None)
+        initializer = getattr(function, "__init__", None)
+        if not callable(initializer):
+            raise TypeError("Class initializer is not callable")
+        function = initializer
 
     arguments = []
     return_type = ""
@@ -294,9 +297,9 @@ def _get_class_that_defined_method(meth: Any) -> Any:
         method_name = meth.__qualname__.split(".<locals>", 1)[0].rsplit(".", 1)[0]
         # If the method was defined elsewhere (i.e.: dataclasses), it'll not
         # be available in the mod.
-        cls = getattr(mod, method_name, None)
-        if isinstance(cls, type):
-            return cls
+        owner = getattr(mod, method_name, None)
+        if isinstance(owner, type):
+            return owner
     return getattr(meth, "__objclass__", None)  # handle special descriptor objects
 
 
@@ -478,7 +481,7 @@ def _doc2md(obj: Any) -> str:
     return content
 
 
-def get_module(loader, module_name: str) -> Optional[Any]:
+def get_module(loader, module_name: str) -> types.ModuleType:
     """Safely load a module using find_spec instead of deprecated find_module."""
     spec = loader.find_spec(module_name)
     if spec is None:
@@ -854,7 +857,7 @@ class MarkdownGenerator(object):
 
         functions: List[str] = []
         index = []
-        for name, obj in inspect.getmembers(module, inspect.isfunction):
+        for name, function_obj in inspect.getmembers(module, inspect.isfunction):
             found.append(name)
             if name.startswith("_"):
                 continue
@@ -862,16 +865,16 @@ class MarkdownGenerator(object):
                 continue
             if (
                 exported is None
-                and hasattr(obj, "__module__")
-                and obj.__module__ != modname
+                and hasattr(function_obj, "__module__")
+                and function_obj.__module__ != modname
             ):
                 continue
 
-            function_md = self.func2md(obj, depth=depth + 1)
+            function_md = self.func2md(function_obj, depth=depth + 1)
             if function_md:
                 functions.append(_SEPARATOR + function_md)
                 if exported is None:
-                    index.append(_get_line_no(obj) or 0)
+                    index.append(_get_line_no(function_obj) or 0)
                 else:
                     index.append(exported.index(name))
 

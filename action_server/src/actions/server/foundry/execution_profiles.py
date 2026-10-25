@@ -1,8 +1,8 @@
-"""Select an authorized RCC execution profile from a pinned Deployment revision.
+"""Select authorized execution profiles from a pinned Deployment revision.
 
 The Deployment service remains the authority for workspace grants, references,
 and default Runtime Plan selection. This module adds the narrower host contract
-for the installed RCC consumer and returns the existing resolved value unchanged.
+for RCC and verified direct Robot consumers, returning the resolved value unchanged.
 It creates no profile records, schema, or fallback selection.
 """
 
@@ -23,7 +23,33 @@ def select_rcc_execution_profile(
     revision: DeploymentRevisionRef,
     capability: CapabilityRef,
 ) -> ResolvedDeploymentExecution:
-    """Resolve one authorized RCC profile and its sole locked default plan.
+    """Select the authorized RCC-only profile used by generated execution."""
+    return _select_execution_profile(deployments, actor, revision, capability)
+
+
+def select_canvas_execution_profile(
+    deployments: FoundryDeploymentService,
+    actor: Actor,
+    revision: DeploymentRevisionRef,
+    capability: CapabilityRef,
+    *,
+    registry: object,
+) -> ResolvedDeploymentExecution:
+    """Permit direct execution only for the canonical verified Robot selection."""
+    return _select_execution_profile(
+        deployments, actor, revision, capability, robot_registry=registry
+    )
+
+
+def _select_execution_profile(
+    deployments: FoundryDeploymentService,
+    actor: Actor,
+    revision: DeploymentRevisionRef,
+    capability: CapabilityRef,
+    *,
+    robot_registry: object = None,
+) -> ResolvedDeploymentExecution:
+    """Resolve one authorized profile and its sole locked default plan.
 
     The exact activated revision is mandatory. No caller-selected Runtime Plan
     or profile identifiers are accepted: the common resolver authorizes and
@@ -61,7 +87,28 @@ def select_rcc_execution_profile(
     ):
         raise AccessDenied("Resolved execution identity differs from the request")
     if snapshot.runtime_kind != "rcc":
-        raise AccessDenied("Pinned RCC Runtime identity required")
+        if robot_registry is None:
+            raise AccessDenied("Pinned RCC Runtime identity required")
+        from actions.server.foundry.package_registry import (
+            FoundryPackageRegistry,
+            RegistryRobotSelection,
+        )
+
+        if (
+            snapshot.runtime_kind != "direct"
+            or not isinstance(robot_registry, FoundryPackageRegistry)
+            or robot_registry is not deployments._packages
+        ):
+            raise AccessDenied("Canonical verified direct Robot required")
+        selection = robot_registry.selection_for(capability, snapshot.runtime_plan)
+        if (
+            not isinstance(selection, RegistryRobotSelection)
+            or selection.package_revision != capability.package_revision
+            or selection.capability != capability
+            or selection.runtime_plan != snapshot.runtime_plan
+            or selection.robot.robot.plan.runtime_kind != "direct"
+        ):
+            raise AccessDenied("Canonical verified direct Robot required")
 
     policies = tuple(
         item for item in specification.capability_plans if item.capability == capability

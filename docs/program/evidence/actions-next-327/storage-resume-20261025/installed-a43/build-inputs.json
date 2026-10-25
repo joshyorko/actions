@@ -1,0 +1,11 @@
+{
+  "source": "ce98de6963bb6d20325db5a3687b14a8e238d7d9",
+  "inputs": {
+    "action_server/src/actions/server/bin/rcc-18.19.3": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "action_server/src/actions/server/_static_contents.py": "990812702a02730dba9b28ea50a96b9ae514171436262e5fb1a0d3b3e99c5dc9",
+    "action_server/src/actions/server/_oauth2_config.py": "01915392abf96748592c518261074181f3238d40befb2f7b024378b93d9c1a6b",
+    "action_server/frontend/package-lock.json": "30e50040438c67254859807343cb53c288508b4895fb69648732277e8184a12a"
+  },
+  "frontend": "npm ci from committed lock; both entrypoints rebuilt",
+  "oauth": "public archived catalog only"
+}
