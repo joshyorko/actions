@@ -1,0 +1,507 @@
+{
+  "status": "PASS",
+  "scope": "installed operator provisioning only",
+  "generated_ingestion": "NOT_RUN",
+  "search": "NOT_RUN",
+  "tasks": "NOT_RUN",
+  "commands": [
+    {
+      "operation": "grant-owner",
+      "dry_run": true,
+      "argv": [
+        "/workspace/lane-b-state/installed-a38-corrected/consumer/bin/python",
+        "-I",
+        "-m",
+        "actions.server",
+        "providers-local",
+        "--datadir",
+        "/workspace/lane-b-state/installed-operator-corrected/datadir",
+        "--request",
+        "/workspace/lane-b-state/installed-operator-corrected/request-00.json",
+        "--dry-run"
+      ],
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "operation": "grant-owner",
+      "dry_run": false,
+      "argv": [
+        "/workspace/lane-b-state/installed-a38-corrected/consumer/bin/python",
+        "-I",
+        "-m",
+        "actions.server",
+        "providers-local",
+        "--datadir",
+        "/workspace/lane-b-state/installed-operator-corrected/datadir",
+        "--request",
+        "/workspace/lane-b-state/installed-operator-corrected/request-01.json"
+      ],
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "operation": "grant-owner",
+      "dry_run": false,
+      "argv": [
+        "/workspace/lane-b-state/installed-a38-corrected/consumer/bin/python",
+        "-I",
+        "-m",
+        "actions.server",
+        "providers-local",
+        "--datadir",
+        "/workspace/lane-b-state/installed-operator-corrected/datadir",
+        "--request",
+        "/workspace/lane-b-state/installed-operator-corrected/request-02.json"
+      ],
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "operation": "import-source",
+      "dry_run": true,
+      "argv": [
+        "/workspace/lane-b-state/installed-a38-corrected/consumer/bin/python",
+        "-I",
+        "-m",
+        "actions.server",
+        "providers-local",
+        "--datadir",
+        "/workspace/lane-b-state/installed-operator-corrected/datadir",
+        "--request",
+        "/workspace/lane-b-state/installed-operator-corrected/request-03.json",
+        "--dry-run"
+      ],
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "operation": "import-source",
+      "dry_run": false,
+      "argv": [
+        "/workspace/lane-b-state/installed-a38-corrected/consumer/bin/python",
+        "-I",
+        "-m",
+        "actions.server",
+        "providers-local",
+        "--datadir",
+        "/workspace/lane-b-state/installed-operator-corrected/datadir",
+        "--request",
+        "/workspace/lane-b-state/installed-operator-corrected/request-04.json"
+      ],
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "operation": "import-source",
+      "dry_run": false,
+      "argv": [
+        "/workspace/lane-b-state/installed-a38-corrected/consumer/bin/python",
+        "-I",
+        "-m",
+        "actions.server",
+        "providers-local",
+        "--datadir",
+        "/workspace/lane-b-state/installed-operator-corrected/datadir",
+        "--request",
+        "/workspace/lane-b-state/installed-operator-corrected/request-05.json"
+      ],
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "operation": "register-revision",
+      "dry_run": true,
+      "argv": [
+        "/workspace/lane-b-state/installed-a38-corrected/consumer/bin/python",
+        "-I",
+        "-m",
+        "actions.server",
+        "providers-local",
+        "--datadir",
+        "/workspace/lane-b-state/installed-operator-corrected/datadir",
+        "--request",
+        "/workspace/lane-b-state/installed-operator-corrected/request-06.json",
+        "--dry-run"
+      ],
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "operation": "register-revision",
+      "dry_run": false,
+      "argv": [
+        "/workspace/lane-b-state/installed-a38-corrected/consumer/bin/python",
+        "-I",
+        "-m",
+        "actions.server",
+        "providers-local",
+        "--datadir",
+        "/workspace/lane-b-state/installed-operator-corrected/datadir",
+        "--request",
+        "/workspace/lane-b-state/installed-operator-corrected/request-07.json"
+      ],
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "operation": "register-revision",
+      "dry_run": false,
+      "argv": [
+        "/workspace/lane-b-state/installed-a38-corrected/consumer/bin/python",
+        "-I",
+        "-m",
+        "actions.server",
+        "providers-local",
+        "--datadir",
+        "/workspace/lane-b-state/installed-operator-corrected/datadir",
+        "--request",
+        "/workspace/lane-b-state/installed-operator-corrected/request-08.json"
+      ],
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "operation": "grant-owner",
+      "dry_run": true,
+      "argv": [
+        "/workspace/lane-b-state/installed-a38-corrected/consumer/bin/python",
+        "-I",
+        "-m",
+        "actions.server",
+        "providers-local",
+        "--datadir",
+        "/workspace/lane-b-state/installed-operator-corrected/datadir",
+        "--request",
+        "/workspace/lane-b-state/installed-operator-corrected/request-09.json",
+        "--dry-run"
+      ],
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "operation": "grant-owner",
+      "dry_run": false,
+      "argv": [
+        "/workspace/lane-b-state/installed-a38-corrected/consumer/bin/python",
+        "-I",
+        "-m",
+        "actions.server",
+        "providers-local",
+        "--datadir",
+        "/workspace/lane-b-state/installed-operator-corrected/datadir",
+        "--request",
+        "/workspace/lane-b-state/installed-operator-corrected/request-10.json"
+      ],
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "operation": "grant-owner",
+      "dry_run": false,
+      "argv": [
+        "/workspace/lane-b-state/installed-a38-corrected/consumer/bin/python",
+        "-I",
+        "-m",
+        "actions.server",
+        "providers-local",
+        "--datadir",
+        "/workspace/lane-b-state/installed-operator-corrected/datadir",
+        "--request",
+        "/workspace/lane-b-state/installed-operator-corrected/request-11.json"
+      ],
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "operation": "grant-owner",
+      "dry_run": true,
+      "argv": [
+        "/workspace/lane-b-state/installed-a38-corrected/consumer/bin/python",
+        "-I",
+        "-m",
+        "actions.server",
+        "providers-local",
+        "--datadir",
+        "/workspace/lane-b-state/installed-operator-corrected/datadir",
+        "--request",
+        "/workspace/lane-b-state/installed-operator-corrected/request-12.json",
+        "--dry-run"
+      ],
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "operation": "grant-owner",
+      "dry_run": false,
+      "argv": [
+        "/workspace/lane-b-state/installed-a38-corrected/consumer/bin/python",
+        "-I",
+        "-m",
+        "actions.server",
+        "providers-local",
+        "--datadir",
+        "/workspace/lane-b-state/installed-operator-corrected/datadir",
+        "--request",
+        "/workspace/lane-b-state/installed-operator-corrected/request-13.json"
+      ],
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "operation": "grant-owner",
+      "dry_run": false,
+      "argv": [
+        "/workspace/lane-b-state/installed-a38-corrected/consumer/bin/python",
+        "-I",
+        "-m",
+        "actions.server",
+        "providers-local",
+        "--datadir",
+        "/workspace/lane-b-state/installed-operator-corrected/datadir",
+        "--request",
+        "/workspace/lane-b-state/installed-operator-corrected/request-14.json"
+      ],
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "operation": "register-knowledge-definition",
+      "dry_run": true,
+      "argv": [
+        "/workspace/lane-b-state/installed-a38-corrected/consumer/bin/python",
+        "-I",
+        "-m",
+        "actions.server",
+        "providers-local",
+        "--datadir",
+        "/workspace/lane-b-state/installed-operator-corrected/datadir",
+        "--request",
+        "/workspace/lane-b-state/installed-operator-corrected/request-15.json",
+        "--dry-run"
+      ],
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "operation": "register-knowledge-definition",
+      "dry_run": false,
+      "argv": [
+        "/workspace/lane-b-state/installed-a38-corrected/consumer/bin/python",
+        "-I",
+        "-m",
+        "actions.server",
+        "providers-local",
+        "--datadir",
+        "/workspace/lane-b-state/installed-operator-corrected/datadir",
+        "--request",
+        "/workspace/lane-b-state/installed-operator-corrected/request-16.json"
+      ],
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "operation": "register-knowledge-definition",
+      "dry_run": false,
+      "argv": [
+        "/workspace/lane-b-state/installed-a38-corrected/consumer/bin/python",
+        "-I",
+        "-m",
+        "actions.server",
+        "providers-local",
+        "--datadir",
+        "/workspace/lane-b-state/installed-operator-corrected/datadir",
+        "--request",
+        "/workspace/lane-b-state/installed-operator-corrected/request-17.json"
+      ],
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "operation": "configure-host",
+      "dry_run": true,
+      "argv": [
+        "/workspace/lane-b-state/installed-a38-corrected/consumer/bin/python",
+        "-I",
+        "-m",
+        "actions.server",
+        "providers-local",
+        "--datadir",
+        "/workspace/lane-b-state/installed-operator-corrected/datadir",
+        "--request",
+        "/workspace/lane-b-state/installed-operator-corrected/request-18.json",
+        "--dry-run"
+      ],
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "operation": "configure-host",
+      "dry_run": false,
+      "argv": [
+        "/workspace/lane-b-state/installed-a38-corrected/consumer/bin/python",
+        "-I",
+        "-m",
+        "actions.server",
+        "providers-local",
+        "--datadir",
+        "/workspace/lane-b-state/installed-operator-corrected/datadir",
+        "--request",
+        "/workspace/lane-b-state/installed-operator-corrected/request-19.json"
+      ],
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "operation": "configure-host",
+      "dry_run": false,
+      "argv": [
+        "/workspace/lane-b-state/installed-a38-corrected/consumer/bin/python",
+        "-I",
+        "-m",
+        "actions.server",
+        "providers-local",
+        "--datadir",
+        "/workspace/lane-b-state/installed-operator-corrected/datadir",
+        "--request",
+        "/workspace/lane-b-state/installed-operator-corrected/request-20.json"
+      ],
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "operation": "provision-knowledge-host",
+      "dry_run": true,
+      "argv": [
+        "/workspace/lane-b-state/installed-a38-corrected/consumer/bin/python",
+        "-I",
+        "-m",
+        "actions.server",
+        "providers-local",
+        "--datadir",
+        "/workspace/lane-b-state/installed-operator-corrected/datadir",
+        "--request",
+        "/workspace/lane-b-state/installed-operator-corrected/request-21.json",
+        "--dry-run"
+      ],
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "operation": "provision-knowledge-host",
+      "dry_run": false,
+      "argv": [
+        "/workspace/lane-b-state/installed-a38-corrected/consumer/bin/python",
+        "-I",
+        "-m",
+        "actions.server",
+        "providers-local",
+        "--datadir",
+        "/workspace/lane-b-state/installed-operator-corrected/datadir",
+        "--request",
+        "/workspace/lane-b-state/installed-operator-corrected/request-22.json"
+      ],
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "operation": "provision-knowledge-host",
+      "dry_run": false,
+      "argv": [
+        "/workspace/lane-b-state/installed-a38-corrected/consumer/bin/python",
+        "-I",
+        "-m",
+        "actions.server",
+        "providers-local",
+        "--datadir",
+        "/workspace/lane-b-state/installed-operator-corrected/datadir",
+        "--request",
+        "/workspace/lane-b-state/installed-operator-corrected/request-23.json"
+      ],
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "operation": "register-knowledge-definition",
+      "dry_run": false,
+      "argv": [
+        "/workspace/lane-b-state/installed-a38-corrected/consumer/bin/python",
+        "-I",
+        "-m",
+        "actions.server",
+        "providers-local",
+        "--datadir",
+        "/workspace/lane-b-state/installed-operator-corrected/datadir",
+        "--request",
+        "/workspace/lane-b-state/installed-operator-corrected/request-24.json"
+      ],
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "operation": "provision-knowledge-host",
+      "dry_run": false,
+      "argv": [
+        "/workspace/lane-b-state/installed-a38-corrected/consumer/bin/python",
+        "-I",
+        "-m",
+        "actions.server",
+        "providers-local",
+        "--datadir",
+        "/workspace/lane-b-state/installed-operator-corrected/datadir",
+        "--request",
+        "/workspace/lane-b-state/installed-operator-corrected/request-25.json"
+      ],
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "operation": "inspect",
+      "dry_run": false,
+      "argv": [
+        "/workspace/lane-b-state/installed-a38-corrected/consumer/bin/python",
+        "-I",
+        "-m",
+        "actions.server",
+        "providers-local",
+        "--datadir",
+        "/workspace/lane-b-state/installed-operator-corrected/datadir",
+        "--request",
+        "/workspace/lane-b-state/installed-operator-corrected/request-26.json"
+      ],
+      "status": "PASS",
+      "exit": 0
+    }
+  ],
+  "stage": "complete",
+  "disk_free_bytes": 25508573184,
+  "versions": {
+    "actions-runtime": "1.1.0a38",
+    "actions-core": "1.1.0a3"
+  },
+  "origins": {
+    "runtime": "/workspace/lane-b-state/installed-a38-corrected/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+    "core": "/workspace/lane-b-state/installed-a38-corrected/consumer/lib/python3.12/site-packages/actions/__init__.py"
+  },
+  "application_id": "5af5c550-9147-4528-8d53-61473f8830d7",
+  "output_route_diagnostic": {
+    "method": "POST",
+    "path_template": "/api/workspaces/{workspace_id}/outputs/{handle}",
+    "scope": "route registration diagnostic only; not artifact authorization or download",
+    "http_status": 404
+  },
+  "shutdown": {
+    "complete": true,
+    "failed": false,
+    "returncode": -15,
+    "forced": false
+  },
+  "workspace_id": "d96e497e-9f73-45c3-8961-f1cb898cde9d",
+  "readiness": "provisioned-not-ingested",
+  "source_revision": "sha256:50b2201c82d1b36abb518dfcd7c840b4c7a2a7aad5001bc2326eee0247f82ef7",
+  "knowledge_revision": {
+    "workspace_id": "d96e497e-9f73-45c3-8961-f1cb898cde9d",
+    "collection_id": "7022bf22-8b09-4eeb-87a3-7609a5635a84",
+    "revision_id": "sha256:629979f63b9440832740cd5f0023f388f380f0453b6dd794804edebd0b576ba1"
+  }
+}

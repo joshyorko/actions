@@ -9,6 +9,7 @@ spec = importlib.util.spec_from_file_location(
     "lane_b_checker",
     Path(__file__).parents[2] / "scripts" / "qualify_lane_b_installed_knowledge.py",
 )
+assert spec is not None and spec.loader is not None
 checker = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(checker)
 

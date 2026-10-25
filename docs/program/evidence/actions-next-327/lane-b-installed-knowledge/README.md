@@ -197,3 +197,50 @@ Additional exact canonical delta proposed:
 > and Poetry caches. In read-only-home cloud environments, omitted npm cache
 > settings can produce repeated tarball warnings followed by cache-path ENOENT;
 > inspect the final path/error before classifying dependency corruption.
+
+The corrected clean build at `01c6a65c9def777c4dd011cddca8d1e01ea975ef` passed:
+Runtime 1.1.0a38, Core 1.1.0a3, Work Items 0.5.0a2. Both frontend entrypoints
+were rebuilt from the archived lockfile, public OAuth inputs generated, exact
+three wheels hashed and installed with the retained constraints and declared
+DuckDB extra. `pip check` and isolated `-I` version/module-origin probes passed.
+The receipt contains commands, source SHA, build-input/wheel hashes and cache
+paths; this is installed build readiness, not generated Knowledge execution.
+No version was relabeled as a39/a4.
+
+Installed operator execution subsequently passed 27/27 public CLI subprocesses:
+three owned UTF8 sources, provider and collection grants, retained definition,
+DuckDB host configuration/provisioning, exact replay and fresh-process inspection.
+Runtime/Core imports came from the isolated consumer's site-packages. The sole
+SQL access discovered the saved Workspace with a read-only connection; no SQL
+seeding/private service calls were used. Generated ingestion/search/Tasks remain
+NOT_RUN. Exact command:
+
+```bash
+/workspace/lane-b-state/installed-a38-corrected/consumer/bin/python -I \
+  /workspace/lane-b-actions/action_server/scripts/lane_b_installed_knowledge_operator.py \
+  --root /workspace/lane-b-state/installed-operator-corrected \
+  --expected-prefix /workspace/lane-b-state/installed-a38-corrected/consumer
+```
+
+Authenticated POST to the expected GET-only output path returned 404. This is an
+installed route-registration diagnostic (a mounted GET-only path would answer
+405), not artifact authorization or successful download evidence.
+
+The initial operator receipt remains FAIL: its stdout-only shutdown assertion
+missed Uvicorn's completion in `datadir/server_log.txt`. The corrected operator
+and lifecycle runner inspect that owned log as well; the lifecycle runner limits
+its read to the current process interval and 4 MiB. Exact additional canonical
+delta for the integrator:
+
+> Installed Runtime shutdown verification must inspect the owned datadir's
+> server_log.txt; Uvicorn's completion marker may be absent from captured stdout.
+> Preserve a failed stdout-only assertion and rerun after correcting the harness.
+> Knowledge host provisioning readiness is provisioned-not-ingested, including
+> successful replay; it establishes neither canonical publication nor Task/search
+> acceptance.
+
+The first configured package typecheck found three optional ModuleSpec/loader
+typing errors in the checker test's dynamic import. An explicit non-null guard
+corrects the fixture. Both failed and corrected configured typecheck output are
+retained; corrected run passed 578 checked files. This does not imply the full
+package test suite ran.

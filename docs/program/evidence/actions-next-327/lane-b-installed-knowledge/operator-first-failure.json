@@ -1,0 +1,26 @@
+{
+  "status": "FAIL",
+  "scope": "installed operator provisioning only",
+  "generated_ingestion": "NOT_RUN",
+  "search": "NOT_RUN",
+  "tasks": "NOT_RUN",
+  "commands": [],
+  "stage": "bootstrap",
+  "disk_free_bytes": 25509183488,
+  "versions": {
+    "actions-runtime": "1.1.0a38",
+    "actions-core": "1.1.0a3"
+  },
+  "origins": {
+    "runtime": "/workspace/lane-b-state/installed-a38-corrected/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+    "core": "/workspace/lane-b-state/installed-a38-corrected/consumer/lib/python3.12/site-packages/actions/__init__.py"
+  },
+  "application_id": "ca89d0d1-a58f-4f37-9d20-d577a03e8673",
+  "shutdown": {
+    "complete": false,
+    "failed": false,
+    "returncode": -15,
+    "forced": false
+  },
+  "error_type": "ValueError"
+}

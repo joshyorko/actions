@@ -137,6 +137,10 @@ class Lifecycle:
 
     async def start(self, label):
         self.shutdown_complete = self.shutdown_failed = False
+        self.server_log = Path(self.m["datadir"]) / "server_log.txt"
+        self.server_log_offset = (
+            self.server_log.stat().st_size if self.server_log.exists() else 0
+        )
         with socket.socket() as sock:
             sock.bind(("127.0.0.1", 0))
             port = sock.getsockname()[1]
@@ -205,6 +209,13 @@ class Lifecycle:
                     process.kill()
                     await process.wait()
             await drain
+            if self.server_log.exists():
+                with self.server_log.open("rb") as stream:
+                    stream.seek(self.server_log_offset)
+                    lifecycle = stream.read(4 * 1024 * 1024 + 1)
+                require(len(lifecycle) <= 4 * 1024 * 1024)
+                self.shutdown_complete |= b"Application shutdown complete." in lifecycle
+                self.shutdown_failed |= b"Application shutdown failed." in lifecycle
             require(
                 not forced
                 and process.returncode in (0, -15)

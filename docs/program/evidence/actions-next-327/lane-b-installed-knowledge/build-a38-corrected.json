@@ -1,0 +1,216 @@
+{
+  "expected_source": "01c6a65c9def777c4dd011cddca8d1e01ea975ef",
+  "python": "/workspace/lane-b-actions/action_server/.venv/bin/python",
+  "poetry": "/workspace/lane-b-state/rcc/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/poetry",
+  "status": "PASS",
+  "execution": "NOT_QUALIFIED",
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "archive",
+        "01c6a65c9def777c4dd011cddca8d1e01ea975ef"
+      ],
+      "cwd": "/workspace/lane-b-actions",
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "init",
+        "--bare",
+        "/workspace/lane-b-state/installed-a38-corrected/source-git.git"
+      ],
+      "cwd": "/workspace/lane-b-actions",
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "--git-dir=/workspace/lane-b-state/installed-a38-corrected/source-git.git",
+        "fetch",
+        "/workspace/lane-b-actions",
+        "01c6a65c9def777c4dd011cddca8d1e01ea975ef"
+      ],
+      "cwd": "/workspace/lane-b-actions",
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "--git-dir=/workspace/lane-b-state/installed-a38-corrected/source-git.git",
+        "update-ref",
+        "--no-deref",
+        "HEAD",
+        "01c6a65c9def777c4dd011cddca8d1e01ea975ef"
+      ],
+      "cwd": "/workspace/lane-b-actions",
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "--git-dir=/workspace/lane-b-state/installed-a38-corrected/source-git.git",
+        "read-tree",
+        "01c6a65c9def777c4dd011cddca8d1e01ea975ef"
+      ],
+      "cwd": "/workspace/lane-b-actions",
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "--git-dir=/workspace/lane-b-state/installed-a38-corrected/source-git.git",
+        "config",
+        "core.bare",
+        "false"
+      ],
+      "cwd": "/workspace/lane-b-actions",
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "argv": [
+        "git",
+        "--git-dir=/workspace/lane-b-state/installed-a38-corrected/source-git.git",
+        "config",
+        "core.worktree",
+        "/workspace/lane-b-state/installed-a38-corrected/source"
+      ],
+      "cwd": "/workspace/lane-b-actions",
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "argv": [
+        "/workspace/lane-b-actions/action_server/.venv/bin/python",
+        "-m",
+        "invoke",
+        "build-frontend"
+      ],
+      "cwd": "/workspace/lane-b-state/installed-a38-corrected/source/action_server",
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "argv": [
+        "/workspace/lane-b-actions/action_server/.venv/bin/python",
+        "/workspace/lane-b-state/installed-a38-corrected/source/action_server/scripts/build_oauth2_config.py"
+      ],
+      "cwd": "/workspace/lane-b-state/installed-a38-corrected/source/action_server",
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "argv": [
+        "poetry",
+        "build",
+        "--format",
+        "wheel",
+        "--output",
+        "/workspace/lane-b-state/installed-a38-corrected/wheels/actions"
+      ],
+      "cwd": "/workspace/lane-b-state/installed-a38-corrected/source/actions",
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "argv": [
+        "poetry",
+        "build",
+        "--format",
+        "wheel",
+        "--output",
+        "/workspace/lane-b-state/installed-a38-corrected/wheels/work-items"
+      ],
+      "cwd": "/workspace/lane-b-state/installed-a38-corrected/source/work-items",
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "argv": [
+        "poetry",
+        "build",
+        "--format",
+        "wheel",
+        "--output",
+        "/workspace/lane-b-state/installed-a38-corrected/wheels/action_server"
+      ],
+      "cwd": "/workspace/lane-b-state/installed-a38-corrected/source/action_server",
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "argv": [
+        "/workspace/lane-b-actions/action_server/.venv/bin/python",
+        "-m",
+        "venv",
+        "/workspace/lane-b-state/installed-a38-corrected/consumer"
+      ],
+      "cwd": "/workspace/lane-b-actions",
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "argv": [
+        "/workspace/lane-b-state/installed-a38-corrected/consumer/bin/python",
+        "-m",
+        "pip",
+        "install",
+        "-c",
+        "/workspace/lane-b-state/installed-a38-corrected/source/docs/program/evidence/actions-next-327/recovery-handoff-20261025/extension-handoff/dependency-constraints.txt",
+        "--report",
+        "/workspace/lane-b-state/installed-a38-corrected/install.json",
+        "/workspace/lane-b-state/installed-a38-corrected/wheels/action_server/actions_runtime-1.1.0a38-cp312-cp312-linux_x86_64.whl[data-duckdb]",
+        "/workspace/lane-b-state/installed-a38-corrected/wheels/actions/actions_core-1.1.0a3-py3-none-any.whl",
+        "/workspace/lane-b-state/installed-a38-corrected/wheels/work-items/actions_work_items-0.5.0a2-py3-none-any.whl"
+      ],
+      "cwd": "/workspace/lane-b-actions",
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "argv": [
+        "/workspace/lane-b-state/installed-a38-corrected/consumer/bin/python",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "cwd": "/workspace/lane-b-actions",
+      "status": "PASS",
+      "exit": 0
+    },
+    {
+      "argv": [
+        "/workspace/lane-b-state/installed-a38-corrected/consumer/bin/python",
+        "-I",
+        "-c",
+        "import importlib.metadata as m,pathlib,sys,actions.server,actions;assert m.version('actions-runtime')==sys.argv[1];assert m.version('actions-core')==sys.argv[2];assert pathlib.Path(actions.server.__file__).resolve().is_relative_to(pathlib.Path(sys.argv[3]));assert pathlib.Path(actions.__file__).resolve().is_relative_to(pathlib.Path(sys.argv[3]));print('installed distribution versions and origins PASS')",
+        "1.1.0a38",
+        "1.1.0a3",
+        "/workspace/lane-b-state/installed-a38-corrected/consumer"
+      ],
+      "cwd": "/workspace/lane-b-state/installed-a38-corrected",
+      "status": "PASS",
+      "exit": 0
+    }
+  ],
+  "wheels": {
+    "wheels/action_server/actions_runtime-1.1.0a38-cp312-cp312-linux_x86_64.whl": "a290d235e21d7b85adf853d7191b07405c8b029c5e18c99be6e563be26f5f257",
+    "wheels/actions/actions_core-1.1.0a3-py3-none-any.whl": "90cca390a3ea34f05b845f5ea25b9a0de6562723a0390bc11bf33432ff5e4b7d",
+    "wheels/work-items/actions_work_items-0.5.0a2-py3-none-any.whl": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb"
+  },
+  "source": "01c6a65c9def777c4dd011cddca8d1e01ea975ef",
+  "build_inputs": {
+    "action_server/src/actions/server/bin/rcc-18.19.3": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "action_server/src/actions/server/_static_contents.py": "29a63d9a0196d1cf00d7d357d263deafcda2d135569af63b803c68326578c1c6",
+    "action_server/src/actions/server/_oauth2_config.py": "01915392abf96748592c518261074181f3238d40befb2f7b024378b93d9c1a6b",
+    "action_server/frontend/package-lock.json": "30e50040438c67254859807343cb53c288508b4895fb69648732277e8184a12a"
+  },
+  "constraints_sha256": "bae7330cbf91604bbfe034891abdfb4f3f920b4fff878ccdebf263b4d67d813c"
+}
