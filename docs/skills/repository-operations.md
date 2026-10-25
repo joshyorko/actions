@@ -5227,3 +5227,5 @@ value without logging it. Do not infer this behavior for other token types, or
 rewrite history/change live credentials as an automatic evidence cleanup.
 
 Canvas preview validates logical-binding syntax and rejects cross-Workspace provider references without provider I/O. It explicitly reports provider compatibility and readiness as not-checked. A passed preview is not permission, provider compatibility, availability, or Run admission; actual selection revalidates the exact declaration/provider contract and live grants.
+
+For a frozen qualification run concurrent with later integration, archive the exact source SHA and install its committed package lock through the prepared toolkit into a separate Poetry environment. Verify imported module origins inside that archive. A PYTHONPATH-only overlay of a shared editable environment is insufficient: fresh-interpreter tests may clear PYTHONPATH and import the later working tree. Keep the frozen run’s compiler fixture exclusive until it exits.

@@ -621,6 +621,9 @@ export interface SemanticCanvasRendererProps {
     preview: boolean;
     viewer: CanvasViewer;
     adapters: SemanticRendererAdapters;
+    /** Trusted host-only slots; never populated from serialized CanvasSpec. */
+    appFormOverrides?: ReadonlyMap<string, ReactNode>;
+    appPanels?: ReadonlyMap<string, ReactNode>;
 }
 
 export function SemanticCanvasRenderer(props: SemanticCanvasRendererProps) {
@@ -635,6 +638,8 @@ function SemanticCanvasRendererInstance({
     preview,
     viewer,
     adapters,
+    appFormOverrides,
+    appPanels,
 }: SemanticCanvasRendererProps) {
     const [results, setResults] =
         useState<Record<string, unknown>>(emptyRecord);
@@ -660,6 +665,8 @@ function SemanticCanvasRendererInstance({
         );
     }
 
+    const privateSlotsVisible = viewer === "app" && !preview;
+
     const resolveResult = (bindingId: string): unknown =>
         ownValue(results, bindingId);
 
@@ -674,6 +681,17 @@ function SemanticCanvasRendererInstance({
             case "text":
                 return <p key={node.id}>{node.text}</p>;
             case "form": {
+                if (
+                    privateSlotsVisible &&
+                    bindings.has(node.bindingId) &&
+                    appFormOverrides?.has(node.bindingId)
+                ) {
+                    return (
+                        <div key={node.id} data-semantic-node-id={node.id}>
+                            {appFormOverrides.get(node.bindingId)}
+                        </div>
+                    );
+                }
                 const capability = preview
                     ? createCapabilityRef<string, SemanticFormInput, unknown>(
                           node.bindingId,
@@ -792,6 +810,18 @@ function SemanticCanvasRendererInstance({
             viewer={viewer}
         >
             {renderNode(spec.root)}
+            {privateSlotsVisible && appPanels
+                ? [...appPanels]
+                      .filter(([bindingId]) => bindings.has(bindingId))
+                      .map(([bindingId, panel]) => (
+                          <div
+                              className="semantic-stack"
+                              key={`app-panel:${bindingId}`}
+                          >
+                              {panel}
+                          </div>
+                      ))
+                : null}
         </SemanticCanvas>
     );
 }

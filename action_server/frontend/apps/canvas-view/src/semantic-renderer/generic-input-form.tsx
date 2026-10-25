@@ -34,6 +34,7 @@ export function GenericInputForm({
         });
     return (
         <form
+            className="semantic-form"
             aria-label={`Work Item input for ${binding.bindingId}`}
             onSubmit={(event) => {
                 event.preventDefault();
@@ -51,7 +52,7 @@ export function GenericInputForm({
             <button type="button" disabled={busy} onClick={() => void load()}>
                 Load inputs
             </button>
-            <label>
+            <label className="semantic-form__field">
                 Input item
                 <select
                     aria-label={`Input item for ${binding.bindingId}`}

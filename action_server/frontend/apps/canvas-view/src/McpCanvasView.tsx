@@ -343,10 +343,11 @@ export function McpCanvasView() {
 
     return (
         <>
-            <section
+            <details
                 aria-label="MCP Apps connection"
                 className="mcp-connection"
             >
+                <summary>Host connection details</summary>
                 {error ? (
                     <p role="alert">Could not connect to the MCP host.</p>
                 ) : (
@@ -382,7 +383,7 @@ export function McpCanvasView() {
                         </dd>
                     </div>
                 </dl>
-            </section>
+            </details>
             {canvasView ? (
                 <section aria-label="Semantic Canvas app">
                     {genericExecution && app && !canvasView.preview ? (

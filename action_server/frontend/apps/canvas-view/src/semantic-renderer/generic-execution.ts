@@ -196,7 +196,7 @@ export function createGenericExecutionAdapter(
     app: App,
     context: GenericExecutionContext,
     changed: () => void,
-    inspect: (text: string) => void,
+    inspect: (text: string, bindingId: string) => void,
 ) {
     const states = new Map<string, GenericExecutionState>(
         (context.executions ?? []).map((item) => [item.bindingId, item]),
@@ -344,7 +344,7 @@ export function createGenericExecutionAdapter(
                 artifact.handle !== handle
             )
                 throw new Error("Artifact identity differs.");
-            inspect(artifact.text);
+            inspect(artifact.text, capability.bindingId);
             return {
                 state: "ready",
                 message: "Authorized result inspected below.",

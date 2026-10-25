@@ -27,7 +27,10 @@ export function GenericOutputPanel({
         }
     };
     return (
-        <section aria-label={`Produced Work Items for ${binding.bindingId}`}>
+        <section
+            className="semantic-panel"
+            aria-label={`Produced Work Items for ${binding.bindingId}`}
+        >
             <h3>Produced Work Items</h3>
             <p>
                 Read-only output items from this Run. Queue:{" "}

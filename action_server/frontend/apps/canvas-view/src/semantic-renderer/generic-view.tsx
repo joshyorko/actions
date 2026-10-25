@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import type { App } from "@modelcontextprotocol/ext-apps/react";
 import { GenericOutputPanel } from "./generic-output-panel";
 import { GenericInputForm } from "./generic-input-form";
-import { SemanticCanvasRenderer } from "./components";
+import { SemanticCanvasRenderer, SemanticStatus } from "./components";
 import type { CanvasAppMetadata } from "./mcp-bridge";
 import { createGenericExecutionAdapter } from "./generic-execution";
 import type { GenericExecutionContext } from "./generic-execution";
@@ -17,15 +17,21 @@ export function GenericSemanticView({
     context: GenericExecutionContext;
 }) {
     const [, update] = useState(0);
-    const [artifact, setArtifact] = useState<string | null>(null);
-    const [error, setError] = useState<string | null>(null);
+    const [artifact, setArtifact] = useState<{
+        bindingId: string;
+        text: string;
+    } | null>(null);
+    const [error, setError] = useState<{
+        bindingId: string;
+        message: string;
+    } | null>(null);
     const controller = useMemo(
         () =>
             createGenericExecutionAdapter(
                 app,
                 context,
                 () => update((n) => n + 1),
-                setArtifact,
+                (text, bindingId) => setArtifact({ text, bindingId }),
             ),
         [app, context],
     );
@@ -37,77 +43,114 @@ export function GenericSemanticView({
             setError(null);
             await controller[action](id);
         } catch {
-            setError(
-                "Execution state unavailable; reopen the app before continuing.",
-            );
+            setError({
+                bindingId: id,
+                message:
+                    "Execution state unavailable; reopen the app before continuing.",
+            });
         }
     };
-    return (
-        <>
-            <SemanticCanvasRenderer
-                spec={canvas.spec}
-                revision={canvas.revisionId}
-                scopeKey={canvas.scopeKey}
-                preview={false}
-                viewer="app"
-                adapters={controller.adapters}
-            />
-            {(context.inputBindings ?? []).map((entry) => (
+    const authorized = new Set(context.bindingIds);
+    const forms = new Map(
+        (context.inputBindings ?? [])
+            .filter((entry) => authorized.has(entry.bindingId))
+            .map((entry) => [
+                entry.bindingId,
                 <GenericInputForm
                     key={entry.bindingId}
                     binding={entry}
                     controller={controller}
-                />
-            ))}
-            {[...controller.states.values()].map((state) => (
-                <section
-                    key={state.bindingId}
-                    aria-label={`Execution ${state.bindingId}`}
-                >
-                    <p role="status">{state.state.replaceAll("_", " ")}</p>
-                    <button
-                        type="button"
-                        onClick={() => void act(state.bindingId, "refresh")}
-                    >
-                        Refresh status
-                    </button>
-                    {state.state === "ready" ? (
-                        <button
-                            type="button"
-                            onClick={() => void act(state.bindingId, "execute")}
+                />,
+            ]),
+    );
+    const panels = new Map(
+        context.bindingIds.map((bindingId) => {
+            const state = controller.states.get(bindingId);
+            const output = context.outputBindings?.find(
+                (entry) => entry.bindingId === bindingId,
+            );
+            return [
+                bindingId,
+                <div className="semantic-stack" key={bindingId}>
+                    {state ? (
+                        <section
+                            className="semantic-panel"
+                            aria-label={`Execution ${bindingId}`}
                         >
-                            Continue execution
-                        </button>
+                            <SemanticStatus
+                                state={
+                                    state.state === "failed"
+                                        ? "error"
+                                        : "success"
+                                }
+                                message={state.state.replaceAll("_", " ")}
+                            />
+                            <div className="semantic-actions">
+                                <button
+                                    type="button"
+                                    onClick={() =>
+                                        void act(bindingId, "refresh")
+                                    }
+                                >
+                                    Refresh status
+                                </button>
+                                {state.state === "ready" ? (
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            void act(bindingId, "execute")
+                                        }
+                                    >
+                                        Continue execution
+                                    </button>
+                                ) : null}
+                                {state.state !== "completed" &&
+                                state.state !== "failed" ? (
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            void act(bindingId, "cancel")
+                                        }
+                                    >
+                                        Request cancellation
+                                    </button>
+                                ) : null}
+                            </div>
+                        </section>
                     ) : null}
-                    {state.state !== "completed" && state.state !== "failed" ? (
-                        <button
-                            type="button"
-                            onClick={() => void act(state.bindingId, "cancel")}
+                    {output && state?.state === "completed" ? (
+                        <GenericOutputPanel
+                            key={state.runId}
+                            binding={output}
+                            controller={controller}
+                        />
+                    ) : null}
+                    {error?.bindingId === bindingId ? (
+                        <p role="alert">{error.message}</p>
+                    ) : null}
+                    {artifact?.bindingId === bindingId ? (
+                        <section
+                            className="semantic-panel"
+                            aria-label="Authorized result artifact"
                         >
-                            Request cancellation
-                        </button>
+                            <h3>Result artifact</h3>
+                            <pre>{artifact.text}</pre>
+                        </section>
                     ) : null}
-                </section>
-            ))}
-            {(context.outputBindings ?? [])
-                .filter(
-                    (entry) =>
-                        controller.states.get(entry.bindingId)?.state ===
-                        "completed",
-                )
-                .map((entry) => (
-                    <GenericOutputPanel
-                        key={controller.states.get(entry.bindingId)!.runId}
-                        binding={entry}
-                        controller={controller}
-                    />
-                ))}
-            {error ? <p role="alert">{error}</p> : null}
-            {artifact !== null ? (
-                <section aria-label="Authorized result artifact">
-                    <pre>{artifact}</pre>
-                </section>
-            ) : null}
-        </>
+                </div>,
+            ];
+        }),
+    );
+    return (
+        <SemanticCanvasRenderer
+            spec={canvas.spec}
+            revision={canvas.revisionId}
+            scopeKey={canvas.scopeKey}
+            preview={canvas.preview}
+            viewer="app"
+            adapters={controller.adapters}
+            appFormOverrides={forms}
+            appPanels={panels}
+        />
     );
 }
