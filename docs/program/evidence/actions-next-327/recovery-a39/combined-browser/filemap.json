@@ -1,0 +1,150 @@
+[
+  {
+    "file": "browser-diagnostic/diagnose.py",
+    "decoded_sha256": "6fb0b041e08307d32069267b693588de7504dd1d7d39289970936f085b2a9e0c"
+  },
+  {
+    "file": "browser-diagnostic/driver-verify.log.b64",
+    "decoded_sha256": "4af6274c5b9b7af682d9d1e6464e7e9de36c3c750d73eb962475ca7ff9bc0eea"
+  },
+  {
+    "file": "browser-diagnostic/guide-delta.md",
+    "decoded_sha256": "38d82bcab05c2c3d0dc0fd3801e2e9de55b3f970a2ba704886c10c2ff4ba404b"
+  },
+  {
+    "file": "browser-diagnostic/driver.log.b64",
+    "decoded_sha256": "16596119a247f2bf4c693bf78e8049e18997f19e9e1290556b98001bdda9e4f9"
+  },
+  {
+    "file": "browser-diagnostic/diagnosis.json",
+    "decoded_sha256": "af17d76192fd1f18c46cd719a954d3de696846ff3ed8e8cc909699d77a3478a9"
+  },
+  {
+    "file": "browser-diagnostic/diagnose-verify.py",
+    "decoded_sha256": "ac1978f6ad120acca7a76beac267383745a470eba071c81ee1292b495b129cea"
+  },
+  {
+    "file": "browser-diagnostic/receipt-verify.json",
+    "decoded_sha256": "93d0bbeb95b5fe9e9cf87466d8b67f6b30f28fdeeabd8569d81de6e96c4398f5"
+  },
+  {
+    "file": "browser-diagnostic/driver-second.log.b64",
+    "decoded_sha256": "82fd236f4f4f4944b8f1762e3c5452fcb8b9a147fb5538545f5fc09ba916dc7a"
+  },
+  {
+    "file": "browser-diagnostic/recovery-PREPARED-NOT-AUTHORIZED.py",
+    "decoded_sha256": "6b72999bc60cfa4d180d45698c7e8f233b5386ae1e9aaff5b1a2df594b13e54d"
+  },
+  {
+    "file": "browser-diagnostic/receipt.json",
+    "decoded_sha256": "93d0bbeb95b5fe9e9cf87466d8b67f6b30f28fdeeabd8569d81de6e96c4398f5"
+  },
+  {
+    "file": "browser-live-diagnostic/diagnose.py",
+    "decoded_sha256": "a5cd8ec1e2724143e7155d88b2164cc6c11bcdf7247614675e24e09c3e11b702"
+  },
+  {
+    "file": "browser-live-diagnostic/guide-delta.md",
+    "decoded_sha256": "f75e7c4d52bf70cc4c72ab33426e9def41da81be8b7ed8ad9691cf18af68983a"
+  },
+  {
+    "file": "browser-live-diagnostic/driver.log.b64",
+    "decoded_sha256": "9b667f6b82972c757c260f6a6fbdba9d0db1370370424ac000615ecb9dd0dea7"
+  },
+  {
+    "file": "browser-live-diagnostic/launch.py",
+    "decoded_sha256": "3870a93626c2b7defa85b89c81ffcb91e07b467bc8f619a046f1fb30c9778f77"
+  },
+  {
+    "file": "browser-live-diagnostic/phases.jsonl",
+    "decoded_sha256": "e42e3f805dcfd61e582882474bc18741b8c6aa64b6e48d05c4176474a82cab38"
+  },
+  {
+    "file": "browser-live-diagnostic/evidence/00-canvas_get.json",
+    "decoded_sha256": "a9030ead57c89c764093eeff3f2be94a896826b646faa2240d06c7997b6016a6"
+  },
+  {
+    "file": "browser-live-diagnostic/evidence/compile-counter.log.b64",
+    "decoded_sha256": "96847984161a960c1b283edd031fb304dd5265c084977286ed117e4d7f4bbfce"
+  },
+  {
+    "file": "browser-live-diagnostic/evidence/01-canvas_apply.json",
+    "decoded_sha256": "63a7daaa2d67b3d91ce28749c78f87439a6285cc939a85fe64c7b3afec605651"
+  },
+  {
+    "file": "browser-live-diagnostic/evidence/receipt.json",
+    "decoded_sha256": "c4afb197410ce582963d37cd65d6d3f154fa7e79b7cbeb8eb18e40abf2dc7f07"
+  },
+  {
+    "file": "browser-continuation/driver.log.b64",
+    "decoded_sha256": "9b667f6b82972c757c260f6a6fbdba9d0db1370370424ac000615ecb9dd0dea7"
+  },
+  {
+    "file": "browser-continuation/qualify.py",
+    "decoded_sha256": "707ee8a24ead99d6d6d498143cf275dd15187ea681befb19065125264c182974"
+  },
+  {
+    "file": "browser-continuation/README.md",
+    "decoded_sha256": "79ce18a6237e6fb2e8822e2a3ee5a4d8a9ba9d79b042961ced4e394a06673770"
+  },
+  {
+    "file": "browser-continuation/evidence/after-browser.json",
+    "decoded_sha256": "60e3522c373ff71daaa2fd16dd2c841d37e00fa5b1575697db4e07b3fa54ec4e"
+  },
+  {
+    "file": "browser-continuation/evidence/deployment-848ee675-913a-4388-b862-635deeb61ce3-8e99aa63-authorization.json",
+    "decoded_sha256": "96626932495ee771bc1a1a1c648e29bbce88f6547b10044099148d46888a4cc0"
+  },
+  {
+    "file": "browser-continuation/evidence/before-browser.json",
+    "decoded_sha256": "4e0d8b8f373644988bb88d0523905978e011ae2cd41d1918326a0fe3b57a917c"
+  },
+  {
+    "file": "browser-continuation/evidence/01-canvas_release.json",
+    "decoded_sha256": "a93435152522fc110934c93fe644823d02427f3f66c0fda302072397779ec0a3"
+  },
+  {
+    "file": "browser-continuation/evidence/browser-input.json",
+    "decoded_sha256": "494b87bf25d229e92e0a7463cd91f9cbba057e67ca10826116ad65fdc23b6c49"
+  },
+  {
+    "file": "browser-continuation/evidence/word-counter-completed.png",
+    "decoded_sha256": "8a6c9529de1d655d54d8b6e5cfe0eb66870235db229fa61fa38f5fa1697c9d23"
+  },
+  {
+    "file": "browser-continuation/evidence/word-counter-mounted.png",
+    "decoded_sha256": "957fb5a0fc5aa0cac8ab3776ee3b48bf474ae388dfe10d2a505ed6bc2589f2bf"
+  },
+  {
+    "file": "browser-continuation/evidence/word-counter-narrow.png",
+    "decoded_sha256": "0725f2278b8791920f62048a0e6d0e4a69439173a90f2e9f3a738b436d1a1219"
+  },
+  {
+    "file": "browser-continuation/evidence/host.log.b64",
+    "decoded_sha256": "74c87e3315635b3f0754034695259000dd11b0613664bae62159a9b1fc5b48e7"
+  },
+  {
+    "file": "browser-continuation/evidence/00-canvas_inspect.json",
+    "decoded_sha256": "456a05c106863eaa051beb0c618c807e7c31c4a09fb4be91976eee6d6b42bbe9"
+  },
+  {
+    "file": "browser-continuation/evidence/browser-runtime.log.b64",
+    "decoded_sha256": "5129e137649d4cbf7d0af7ed2e0b141952c705662a3b6ddf12c81d1732e6d4b7"
+  },
+  {
+    "file": "browser-continuation/evidence/browser.log.b64",
+    "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "file": "browser-continuation/evidence/receipt.json",
+    "decoded_sha256": "7349ccd2b67a1f545666ad84d6e765e2ea846ae1dfac391b3d36e16865e7290d"
+  },
+  {
+    "file": "browser-continuation/evidence/browser.json",
+    "decoded_sha256": "8a78acca3fcbbc9d8141dc5a4b5e7943eb500429b4d1d3472625ed7916ebf85d"
+  },
+  {
+    "file": "browser-continuation/evidence/activate-retained-candidate.log.b64",
+    "decoded_sha256": "16d39e904679c9c0ea60b163e10ad0cb2e92618e546adc615c9d2278e5c29e03"
+  }
+]

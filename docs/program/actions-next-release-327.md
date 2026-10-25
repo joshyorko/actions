@@ -1,4 +1,4 @@
-## First parallel integration checkpoint — installed protocol passed, browser proof pending
+## First parallel integration checkpoint — installed protocol and reference-host execution passed
 
 Reviewed A82bbaef (Canvas tables/results), B1ae3805 (Knowledge page checker),
 C75fe3ca (real Robot test coverage), and D69fefd9/5e959aa/4bd5fdb
@@ -6,7 +6,7 @@ C75fe3ca (real Robot test coverage), and D69fefd9/5e959aa/4bd5fdb
 9e42a8f3 generated Knowledge backend. Original commits and review limits are in
 [the integration map](evidence/actions-next-327/recovery-a39/first-integration/integration-map.json).
 New B/D checks ran against the combined working source; retained lane results do
-not substitute for combined installed acceptance. Clean wheel build and installed MCP/CLI Canvas/generated backend checks now pass at exact a5eaa1cb; [new receipts](evidence/actions-next-327/recovery-a39/combined-installed/README.md) retain two Tasks, two app executions, restart and rollback. The separate browser second-app setup failed before host launch and remains under diagnosis; new combined screenshots are still required. Robot production
+not substitute for combined installed acceptance. Clean wheel build and installed MCP/CLI Canvas/generated backend checks now pass at exact a5eaa1cb; [new receipts](evidence/actions-next-327/recovery-a39/combined-installed/README.md) retain two Tasks, two app executions, restart and rollback. The separate second-app setup initially failed before host launch; unchanged request succeeded during logging-only diagnostic admission. [Clean browser continuation](evidence/actions-next-327/recovery-a39/combined-browser/README.md) then passed against the unmodified installed server, with real RCC execution, artifact value3, and reviewed wide/narrow screenshots. The initial apply failure remains unresolved; this does not prove actual ChatGPT or fresh uninstrumented second-app admission. Robot production
 bridge and remaining full campaign requirements remain open.
 
 ## Adaptive engineering ownership — 2026-10-25

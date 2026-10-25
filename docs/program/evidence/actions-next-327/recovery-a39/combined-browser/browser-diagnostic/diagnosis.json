@@ -1,0 +1,21 @@
+{
+  "status": "DIAGNOSTIC_COMPILE_AND_INTEGRITY_PASS_ROOT_CAUSE_UNRESOLVED",
+  "original_public_apply": "FAIL preserved",
+  "diagnostics": [
+    "receipt.json",
+    "receipt-verify.json",
+    "driver-verify.log"
+  ],
+  "ruled_out": [
+    "same single-action source build/import/tests",
+    "compiler immutable-integrity verification",
+    "old Runtime/Core range at compiler stage"
+  ],
+  "not_proven": [
+    "exact failure inside live host compiler/registry/admission",
+    "artifact-control causality"
+  ],
+  "state_changes": "No SQL admission, public app replay, authorization change, or production edit",
+  "recovery_driver": "Prepared only; same retained second app, asserts unchanged blank revision, no product workaround",
+  "upstream": "none"
+}
