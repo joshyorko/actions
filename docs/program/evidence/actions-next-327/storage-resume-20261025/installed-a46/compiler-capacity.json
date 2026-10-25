@@ -1,0 +1,30 @@
+{
+  "scope": "sampled allocations; not proof of an unsampled peak",
+  "sample_interval_seconds": 0.2,
+  "phases": [
+    {
+      "phase": "version",
+      "returncode": 0,
+      "retained_allocated_bytes": 507904,
+      "sampled_peak_allocated_bytes": 507904,
+      "minimum_free_bytes": 15532916736,
+      "cleanup_errors": []
+    },
+    {
+      "phase": "publish",
+      "returncode": 0,
+      "retained_allocated_bytes": 1642799104,
+      "sampled_peak_allocated_bytes": 1642799104,
+      "minimum_free_bytes": 13800443904,
+      "cleanup_errors": []
+    },
+    {
+      "phase": "proof",
+      "returncode": 0,
+      "retained_allocated_bytes": 1955495936,
+      "sampled_peak_allocated_bytes": 1955852288,
+      "minimum_free_bytes": 13422739456,
+      "cleanup_errors": []
+    }
+  ]
+}

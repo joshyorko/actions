@@ -1,0 +1,10 @@
+{
+  "filename": "actions-327-a44-offline-public-cache.zip",
+  "size": 77542114,
+  "sha256": "437cfc05a0b2ca7bcbcce5e7e9b95375f664d7e59aba37cb595f4bde51957100",
+  "library_status": "PREPARED_TRANSFER_FORBIDDEN_NOT_FINALIZED",
+  "reason": "Parent-authorized official prepared tool succeeded after helper tool-list HTTP401. Bundled transfer helper PUT returned Forbidden; observed zero bytes, owned transfer stopped. No finalize, new session or alternative route attempted.",
+  "native_target_execution": "PENDING",
+  "upload_session_id": "file_00000000ccb481fdb36af3b6351d55d1",
+  "library_file_created": false
+}

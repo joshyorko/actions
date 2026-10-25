@@ -6528,3 +6528,34 @@ use its package configuration and explicit source/type-search paths, and verify
 BuildSource origins. A shared prepared interpreter supplies tools and third-party
 dependencies, not an implicit alternative Runtime source. Retain exact shared
 formatter configuration when the isolated copy lacks it and run check-only formatting.
+
+
+Pinned RCC18.19.3 legacy catalogs retain their absolute build base. Strict import
+followed by local publish can restore into that producer base even when subsequent
+execution uses a target-local interpreter. A fixed-path offline cache can avoid this
+specific relocation defect only when producer and fresh target use the exact same
+canonical owned root and every compressed catalog path is verified before import.
+Transfer only the hash-pinned public catalog/library export, never producer trust or
+prepared receipts. Target publish creates fresh local trust and must repeat the full
+Core payload proof; verify actual publish paths as well as execution paths. This is
+not general relocatable artifact qualification. Preserve the failed cross-base case
+and keep external RCC changes owner-gated.
+
+Offline qualification scripts explicitly reject optimized Python: assert-dependent
+checks and setup must remain active. Their exact archive, path and capacity profile
+are qualification inputs; sampled allocation measurements are not filesystem quotas.
+
+
+Installed generated Knowledge qualification explicitly provisions the local host
+through providers-local; authoring does not implicitly provision or ingest it. Use
+public logicalRequirements and dataBindings, obtain the ingestion handle from an
+authorized completed Action result (including its declared result_json envelope),
+then map each search parameter to immutable inputs. Require actual child rejection
+of undeclared/changed-parameter lookups, real success/failure receipts and authorized
+artifact rereads after process restart. Keep compiler checks separate from execution.
+
+Installed acceptance harnesses bound offline operator CLI calls and run under a
+dedicated subreaper supervisor. Stopping only the Runtime PID does not prove cleanup
+of RCC descendants that start separate sessions. Track only owned descendants with
+process birth identities, independently attempt termination/reap/stream closure and
+record remaining children; never kill sibling qualification workloads.
