@@ -120,3 +120,10 @@ Cherry-pick the lane commit; do not copy task caches, virtualenvs or wheels.
 The script requires a new absent evidence directory on each invocation and
 retains failed subprocess output. Rebuild the wheel after integration and rerun
 against the combined source; this wheel does not qualify later commits.
+
+Follow-on reproducibility attempt: a second `poetry build -f wheel -o
+/workspace/lane-d/wheels-repeat` failed with `All attempts to connect to pypi.org
+failed`, before producing a wheel. The original successful wheel remains intact;
+byte-for-byte build reproducibility is **unverified**, not passed. Failure stdout
+is retained in `wheel-repeat.log.gz`. No host dependency fallback or network
+policy change was attempted.
