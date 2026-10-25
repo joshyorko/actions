@@ -5200,3 +5200,22 @@ These are provider-component contracts, not the ordinary public #131 Data/Knowle
 Knowledge ingestion/search currently use an injected authorizer and in-process binding map. Search returns inline hits; ingestion is synchronous and replaces the provider collection's sole version. It is not a common Run-backed durable ingest/Task or a retained historical collection-version contract. Opening one engine snapshot during concurrent reingestion protects that open read; it does not make a later old-pinned Run able to reopen an overwritten collection version. File preallocation/streaming bounds remain separate from post-read aggregate checks.
 >
 To claim public integration, qualify explicit operator provisioning and live read/manage grants, artifact-verified logical requirements, exact Deployment assignment, actual Package execution against two compatible providers without Package mutation, sealed handle-first results across real Runtime restarts/replicas, and durable ingestion/reconciliation under client and worker loss. Source-version claims, PostgreSQL engine connectivity, metadata Task method names and injected fixture ports are not respectively retained source proof, split provider-service proof, Task execution or ordinary public setup. Advanced vector/embedding/rerank, incremental reindex/delete, rich filters and provider discovery remain explicitly tracked; a bounded lexical slice does not erase them or waive other campaign gates.
+
+### Fail-closed evidence publication
+
+Stage only the reviewed checkpoint, then use
+`bash scripts/publish_evidence.sh release/327-invoice-vertical-20261020 "<message>"`
+for this campaign. The wrapper uses strict shell failure propagation and runs
+`scan_staged_evidence.py` against the Git index before diff-check, commit and
+push. A scan or commit failure prevents all later operations. Redacting only a
+working copy is insufficient when the index still holds the earlier bytes.
+Duplicate-key or invalid JSON evidence is refused. The JSON field scan is a
+bounded publishing guard, not general secret detection or screenshot review.
+
+AppSession incidents require checking the actual storage/resolve implementation,
+not assuming process termination revokes persistent or signed credentials. The
+current Canvas implementation stores random tokens only as hashes in an ephemeral
+per-CanvasMcp map with a900-second monotonic deadline, no signing key or reload
+path. Confirm issuer termination and fresh installed rejection for the affected
+value without logging it. Do not infer this behavior for other token types, or
+rewrite history/change live credentials as an automatic evidence cleanup.

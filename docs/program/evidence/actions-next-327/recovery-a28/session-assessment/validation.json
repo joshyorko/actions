@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "toolkit_passed": 185,
+  "shell_regressions_passed": 6,
+  "raw_log_sha256": {
+    "evidence-pipeline-toolkit-final.txt": "a53878003e147acc21d9f8d969bfbd53e4df148eaad8aadd3c21ac342cdefc7b",
+    "evidence-pipeline-regression-final.txt": "3ed2f9bf4be0d78f6931ff8ff8aa8b7e58644707bc4e5624e096d8a81f981d1b"
+  },
+  "push_policy": "first subsequent evidence checkpoint must use fail-closed wrapper"
+}
