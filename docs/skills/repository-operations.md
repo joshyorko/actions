@@ -5112,6 +5112,22 @@ parents; installed a26 failed before executor invocation when this parent was
 absent. Keep UI lifecycle, compiler build/import/tests, and actual admitted
 execution evidence separate.
 
+Record authoring, model invocation, bound-app interaction, installed startup and
+coordinated restore as separate acceptance cells. Preseeded official-host
+execution does not establish blank authoring; model execution does not establish
+app-audience dispatch; legacy attachment restore does not establish common
+Runtime recovery. Promote each cell only from its exact source/artifact receipt.
+
+For relocated common SQLite restore, stop every owned writer, pin the complete
+datadir manifest before copying, and preserve the configured external artifact
+dependencies separately. Qualify actual installed restart, immutable revision
+readback, terminal Run/Attempt and managed-completion replay, sealed artifact
+byte/digest reads, and unchanged original bytes. A completed item's old
+`items.claim` request must still fail instead of issuing a live claim; terminal
+readback uses the retained historical claim. Same-version local SQLite success
+does not establish PostgreSQL restore, reconstruction after RCC cache loss, or
+cross-version common-schema downgrade.
+
 A trusted execution descriptor is not an authorization grant. Record synthetic
 `execute_generated_source` and exact profile grants separately from default
 provisioning. A reviewed dispatch additionally requires a genuine scoped source

@@ -1,0 +1,109 @@
+{
+  "status": "PASS_BOUNDED_COMMON_SQLITE_RESTORE",
+  "runtime_version": "1.1.0a27",
+  "engine_origin": "/workspace/actions-recovery-327/installed-a27/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+  "source": "fdc38d7090c4ac470171c499e77eab636fd452e6",
+  "synthetic_owned_auth": true,
+  "processes": [
+    {
+      "pid": 36044,
+      "returncode": -15,
+      "stopped": true
+    },
+    {
+      "pid": 36163,
+      "returncode": -15,
+      "stopped": true
+    }
+  ],
+  "calls": [
+    {
+      "tool": "canvas_inspect",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_inspect",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "tool": "capability_invoke",
+      "is_error": false
+    },
+    {
+      "tool": "capability_invoke",
+      "is_error": false
+    },
+    {
+      "tool": "capability_invoke",
+      "is_error": false
+    },
+    {
+      "tool": "capability_invoke",
+      "is_error": false
+    },
+    {
+      "tool": "capability_invoke",
+      "is_error": false
+    },
+    {
+      "tool": "capability_invoke",
+      "is_error": false
+    }
+  ],
+  "actual_generated_execution": "NOT_PROVEN",
+  "managed_calls": [
+    "items.enqueue",
+    "items.complete",
+    "items.complete",
+    "runs.get",
+    "artifacts.read",
+    "artifacts.read",
+    "artifacts.read",
+    "artifacts.read",
+    "runs.logs",
+    "items.enqueue",
+    "items.complete",
+    "items.complete",
+    "runs.get",
+    "artifacts.read",
+    "artifacts.read",
+    "artifacts.read",
+    "artifacts.read",
+    "runs.logs"
+  ],
+  "restore": {
+    "manifest_sha256": "138eff0ce771d0d3d8eea34b2a4b66105e7fceabca23fd50721afe27e12a56bd",
+    "target": "/workspace/actions-recovery-327/restore-common-a27/datadir",
+    "rebased_attachments": 0
+  },
+  "counts": {
+    "run": 2,
+    "run_attempt": 2,
+    "foundry_package_revision": 2,
+    "foundry_deployment_revision": 4
+  },
+  "original_source": "fdc38d7090c4ac470171c499e77eab636fd452e6",
+  "scope": "same installed a27 binary, quiesced common SQLite+blobs+Package/Deployment/Run/Attempt/managed request/audit data; relocated root and second restart; original grants retained, none seeded",
+  "limits": [
+    "external PostgreSQL restore not tested",
+    "RCC immutable environment remains separately available; cache-loss reconstruction not tested",
+    "cross-version common schema downgrade not qualified",
+    "offline acknowledgement is operator assertion, not automatic writer lock"
+  ]
+}

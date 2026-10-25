@@ -1,0 +1,48 @@
+{
+  "deployment": {
+    "workspace_id": "fedf9773-9838-44b9-8fbf-47cd2d46af31",
+    "deployment_id": "4dc27f42-910a-423e-ab09-320bcd124fb7",
+    "revision_id": "sha256:823b733421f735b830a441d74733e958847998afccd8311956d9b3cb4348992f"
+  },
+  "capability": {
+    "package_revision": {
+      "workspace_id": "fedf9773-9838-44b9-8fbf-47cd2d46af31",
+      "package_id": "977cb3c7-bea2-5312-a005-32ea87f0d672",
+      "revision_id": "sha256:feaeb52127cc23d0fea7961b49089e73afb15b420a294cb81721d7a7f1275396"
+    },
+    "capability_id": "action.generated_echo"
+  },
+  "runtime_plan": {
+    "package_revision": {
+      "workspace_id": "fedf9773-9838-44b9-8fbf-47cd2d46af31",
+      "package_id": "977cb3c7-bea2-5312-a005-32ea87f0d672",
+      "revision_id": "sha256:feaeb52127cc23d0fea7961b49089e73afb15b420a294cb81721d7a7f1275396"
+    },
+    "plan_digest": "sha256:133e1fc2d881405af4cfb846f77587302eca3a18c5cb58521623c99054d78a62"
+  },
+  "worker": {
+    "workspace_id": "fedf9773-9838-44b9-8fbf-47cd2d46af31",
+    "worker_profile_id": "f0d20a86-d8d1-4ba0-b28c-f582dcdb0197",
+    "revision_id": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+  },
+  "policy": {
+    "workspace_id": "fedf9773-9838-44b9-8fbf-47cd2d46af31",
+    "policy_id": "535e4fdf-1b4e-4178-b645-ade7eb2c7d8c",
+    "revision_id": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+  },
+  "output_provider": {
+    "workspace_id": "fedf9773-9838-44b9-8fbf-47cd2d46af31",
+    "provider_profile_id": "edc02039-89d9-4b9b-a63a-2f37e07abe1a",
+    "revision_id": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+  },
+  "runtime_kind": "rcc",
+  "capability_schema_digest": "sha256:cdc6f7fa3a3a8ce5d800b65dc02d27fffa3e48b8fdb7cae960dff6baadbb6600",
+  "action_id": "f66dae08-07c9-5b01-9bf0-a2fee0eca880",
+  "capability_authority": "package-revision",
+  "data_binding": null,
+  "canvas_application": {
+    "workspace_id": "fedf9773-9838-44b9-8fbf-47cd2d46af31",
+    "app_id": "4dc27f42-910a-423e-ab09-320bcd124fb7",
+    "revision_id": "sha256:046eddcb9cf6db1c9fdd3dca27360ac493af7c6a4dab7944b61273f236955a08"
+  }
+}

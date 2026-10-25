@@ -1,0 +1,17 @@
+{
+  "schema_version": "actions.managed-work-items/v1",
+  "operation": "artifacts.read",
+  "runtime_version": "1.1.0a27",
+  "result": {
+    "artifact": {
+      "handle": "art_GKgX3eQFSQuDQvnibNYXsg",
+      "run_id": "eecadfcb-23cb-4ee7-9d04-f543fd973bc4",
+      "digest": "sha256:5a954ce98196bab4199b4de7030f3610a22ac9b307f6670aebd95f825a65c323",
+      "size": 30
+    },
+    "offset": 0,
+    "data_base64": "Im9yZGluYXJ5IHJlcXVpcmVkIGFjdHVhbCBSQ0Mi",
+    "eof": true,
+    "next_cursor": null
+  }
+}

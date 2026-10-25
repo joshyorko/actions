@@ -1,0 +1,57 @@
+{
+  "_meta": {
+    "io.modelcontextprotocol/serverInfo": {
+      "name": "Action Server",
+      "version": ""
+    }
+  },
+  "content": [
+    {
+      "type": "text",
+      "text": "Generic execution completed.",
+      "annotations": null,
+      "_meta": null
+    }
+  ],
+  "structuredContent": {
+    "execution": {
+      "attemptEpoch": 1,
+      "attemptId": "921a491d-0e48-4c5f-befc-3b5d5c407677",
+      "attemptState": "succeeded",
+      "outputs": [
+        {
+          "handle": "art_mtpD9ZYKRIaVUm50o030sQ",
+          "mediaType": "application/json",
+          "name": "generated-action-result.json",
+          "size": 30
+        },
+        {
+          "handle": "art_tvrH4eAIR2i6JV21hvCXTg",
+          "mediaType": "application/json",
+          "name": "rcc-receipt.json",
+          "size": 55326
+        },
+        {
+          "handle": "art_2u8Fy9xySpCYXTNxtggXgw",
+          "mediaType": "application/octet-stream",
+          "name": "rcc-stdout.log",
+          "size": 0
+        },
+        {
+          "handle": "art_rhtriSXFRxaJTkBkwS7ASw",
+          "mediaType": "application/octet-stream",
+          "name": "rcc-stderr.log",
+          "size": 103
+        }
+      ],
+      "runId": "aa57d2b9-fae9-49c4-b6b7-78140da35348",
+      "runStatus": 2,
+      "state": "completed",
+      "workItemEpoch": null,
+      "workItemId": null,
+      "workItemState": null
+    }
+  },
+  "isError": false,
+  "resultType": "complete"
+}

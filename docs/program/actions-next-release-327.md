@@ -100,8 +100,25 @@ producer-output UI support is advertised. Extension2.20.14 coordinated testing
 still requires the installed candidate and actual client validation; this
 repository does not mutate that client.
 
-Full installed a27, ordinary generated execution, full Runtime restore,
+Full installed end-to-end app acceptance, complete Runtime restore,
 provider/client/owner gates and original campaign scope remain required.
+
+The subsequent [ordinary installed a27 receipt](evidence/actions-next-327/recovery-a27/ordinary-installed/README.md)
+qualifies actual fresh CLI/MCP generated build/import/tests, optional execution,
+required-input enqueue/claim/RCC/completion, Run/Attempt/artifact/log readback,
+restart replay and rollback. Both examples use echo code with different queue
+modes, so this does not close the distinct useful-app/browser acceptance.
+Snapshot discovery and RunAdmission/grants were explicit trusted fixture setup;
+autonomous discovery and public operator provisioning remain open. The Runtime
+wheel SHA256 is `812d8b742b81d74f94ef3ed39132b25bcc59a25727851f0f35d8d7e8798e9147`,
+from source `fdc38d7090c4ac470171c499e77eab636fd452e6`.
+
+The same artifact passed [common SQLite relocation](evidence/actions-next-327/recovery-a27/common-sqlite-restore/README.md):
+pinned stopped datadir copy, original-byte preservation, two Package revisions,
+four Deployment revisions, two Runs/Attempts, terminal replay and sealed-output
+byte reads through two real process starts. Completed claim reissue correctly
+remains denied. This is not external PostgreSQL restore, cache-loss reconstruction,
+active-job reconciliation, or cross-version common-schema downgrade.
 
 ## Resumed release convergence — October24
 

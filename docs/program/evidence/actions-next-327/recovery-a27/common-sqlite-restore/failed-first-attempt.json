@@ -1,0 +1,5 @@
+{
+  "status": "FAIL_TEST_EXPECTATION",
+  "reason": "test attempted items.claim replay after item completion; route correctly returned409; final test checksrefusal and uses retained historicalclaim for terminalreadback",
+  "raw_harness_sha256": "3b0eaf799723a0a2c1971ae96b50a7652923867106127518391fc69424daa699"
+}

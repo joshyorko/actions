@@ -54,5 +54,19 @@
     "green": 11,
     "source": "fdc38d7090c4ac470171c499e77eab636fd452e6",
     "ordinary_a26": "compiler_workspace_failed before execution; UI lifecycle passed"
+  },
+  "ordinary_installed": {
+    "status": "PASS_BOUNDED_ROUTES",
+    "receipt": "ordinary-installed/receipt.json",
+    "fixture_provisioning": true,
+    "autonomous_discovery": false,
+    "browser": false
+  },
+  "common_sqlite_restore": {
+    "status": "PASS_BOUNDED_SAME_VERSION_RELOCATION",
+    "receipt": "common-sqlite-restore/receipt.json",
+    "postgresql": false,
+    "cache_loss": false,
+    "cross_version": false
   }
 }
