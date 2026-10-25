@@ -68,5 +68,12 @@
     "postgresql": false,
     "cache_loss": false,
     "cross_version": false
+  },
+  "final_generic_RCC": {
+    "status": "PASS",
+    "tests": 8,
+    "skipped": 0,
+    "receipt": "final-rcc/receipt.json",
+    "installed": false
   }
 }

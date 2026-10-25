@@ -1276,3 +1276,12 @@ When adding a managed queue mode, update both the command and result schemas in
 `docs/contracts/work-items/managed-v1.json`. The canonical comparison is
 `test_checked_in_export_matches_the_actual_wire_contract`; an enqueue schema
 update alone misses `queues.list` QueueView mode negotiation.
+
+The invoice verifier's `--worker --generated --effects --full` switches do not
+enable the generic domain/model RCC opt-ins. Qualify those separately with
+`ACTIONS_GENERIC_REAL_RCC=1` and `ACTIONS_GENERIC_WRAPPER_REAL_RCC=1`, the exact
+prepared receipt, and required PostgreSQL provider configuration. The selected
+consumer/producer/optional and model-wrapper cases total eight across SQLite and
+PostgreSQL. Require zero skips; portable-suite skips are not substitutes for this
+execution gate. Concurrent RCC gates require separate owned homes, including
+separate cleanup ownership.
