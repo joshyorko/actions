@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "scope": "managed-cua-official-host-with-test-auth-adapter",
+  "generatedRuns": 3,
+  "screenshots": {
+    "mounted": "managed-mounted.png",
+    "first-result": "managed-first-result.png",
+    "resubmitted": "managed-resubmitted.png",
+    "authorized-artifact": "managed-authorized-artifact.png",
+    "narrow": "managed-narrow.png",
+    "failed-cleared": "managed-failed-cleared.png"
+  }
+}

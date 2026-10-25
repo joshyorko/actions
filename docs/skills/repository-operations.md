@@ -6483,3 +6483,27 @@ terminal and an execution tool may use different network namespaces. Confirm
 reachability through the supported route without changing security settings.
 Storage planning must distinguish sampled peak, retained allocation, enforced
 cap and required free reserve, and must not sum free space on shared filesystems.
+
+For a resource-constrained managed-browser test, retain the original strict recipe
+and qualify a named resource profile separately. Measure fresh compiler
+publication/proof and actual installed execution before choosing lower caps;
+report sampled peaks separately from enforcement limits. Require initial free
+bytes after host/consumer preparation, track compiler and fixture allocations on
+the same filesystem, and abort through cleanup on reserve/cap violations. An
+async monitor's interval is nominal when synchronous startup/shutdown can block
+its event loop. UI-only qualification can omit redundant direct executions only
+when that exclusion and the separate candidate-bound protocol evidence are explicit.
+
+Portable compiler handoffs must include parameterized target-side publication
+and Core payload proof scripts. Verify bundled RCC/wheel bytes, create a fresh
+local home/trust, derive preparation from observed output, and verify the exact
+Core payload through that materialized interpreter before exporting configuration.
+Keep standard system-tool paths available for RCC's loader inspection; a missing
+`ldconfig` discovery path is a failed preparation, not permission to bypass it.
+
+Reference-host auth adaptations must bind both listeners to loopback, validate
+one configured loopback Runtime, and retain renderer/bridge/sandbox behavior.
+Keep disposable browser bearer state in memory and send it through the standard
+transport header. Drop inherited tool/result/bridge log payloads, which may carry
+AppSession capability tokens. Separate operator attestation, backend validation
+and visual review; PNG-shaped files alone are not browser proof.
