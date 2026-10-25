@@ -1306,3 +1306,15 @@ Run `test_generic_canvas_view.py` with `ACTIONS_REQUIRE_INVOICE_PROVIDERS=1` and
 The official bridge's new generic `canvas_get` result contains a live AppSession token only in private `_meta`. Sanitize recorded MCP responses and host captures before saving or committing evidence: replace tokens and synthetic API keys with presence markers/digests, preserving semantic metadata. Never copy session tokens into model-facing structuredContent, logs or screenshots.
 
 `test_generic_none_rcc.py` requires `ACTIONS_GENERIC_NONE_REAL_RCC=1`, pinned prepared RCC receipt and binary, the owned-cache marker, `ACTIONS_PACKAGE_COMPILER_OWNED_VIEW_CLEANUP=1`, and a unique `ACTIONS_PACKAGE_COMPILER_CLEANUP_EVIDENCE` directory. It compiles an ordinary echo package and executes app and model routes on SQLite and PostgreSQL, checking sealed outputs, succeeded Attempt state, no Work Item and no extra launch on terminal replay. Its synthetic authentication and prepared execution directory do not prove ordinary installed startup, browser or restart. Run serially in an exclusively assigned RCC home.
+
+Installed app restart qualification must click the artifact action after reopening,
+not merely observe a completed Run label. The initial execution reply can include
+authorized output handles that the recent-execution projection omits. Reopening
+must use the same live authorization and inventory validation as terminal status
+projection. The a28 installed browser exposed this gap; its initial execution
+pass is not a restart-artifact pass.
+
+Evidence scripts must stop the commit/push sequence when a redaction or content
+scan fails. Use a checked subprocess sequence or shell `set -e`; a newline
+between a Python scan and `git add` does not enforce success. Sanitize AppSession
+tokens before copying JSON even when the disposable server has already stopped.

@@ -1,0 +1,5 @@
+# Ordinary installed a28 CLI/MCP
+
+PASS on noneditable Runtime wheel f05d5133837d136d62230dfbf93c1d5853cff2c2050cb95aa315e9264d2eee69, source dfe2b06bebea553680d194b89297e594aead030b. Public offline owner authorize-local dry-run/CAS/replay and public canvas_inspect descriptors replace a27 fixture SQL grants/snapshot injection/RunAdmission registration. After authorization and discovery, Run/Attempt/admission counts were all zero.
+
+Two actual generated optional/required-input RCC Runs passed through ordinary CLI and genuine MCP SDK, including restart, duplicate/terminal completion replay, four sealed artifact bytes/digests, logs, reopen and rollback. Explicit synthetic operator execution profile and local API key remain trusted configuration. No SQL mutation or fake source/review/result/admission was used. This is not authenticated Codex/ChatGPT or distinct useful two-app acceptance; both packages are echo fixtures. AppSession fields are redacted; see evidence-redaction.json for the corrected checkpoint handling.

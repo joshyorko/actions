@@ -1052,3 +1052,19 @@ Canvas51/1 conditional skip pass. Installed operator/discovery/browser/restart
 and full a28 package checks remain pending. Input-linked forms, public
 Data/Knowledge and the full original product matrix remain open; #326 NO-GO
 awaits owner decision. Library remains HTTP401 before upload, with no IDs.
+
+## a28 installed public setup and real-browser finding
+
+[Ordinary installed qualification](evidence/actions-next-327/recovery-a28/ordinary-installed/README.md)
+passes explicit public owner authorization, model discovery, two real RCC Runs,
+restart, completion/artifact replay and rollback without fixture SQL mutations
+or pre-registration. [Actual source RCC](evidence/actions-next-327/recovery-a28/actual-rcc/receipt.json)
+passes12 with zero skips. Full portable a28 remains running separately.
+
+[Real installed reference-host evidence](evidence/actions-next-327/recovery-a28/ordinary-browser/README.md)
+passes initial semantic form execution and artifact inspection, but restart
+artifact inspection fails because the reopened app omits output handles. A
+completed-state screenshot is not full restart acceptance. The next correction
+is pending; Library delivery remains HTTP401. The stopped synthetic AppSession
+fields accidentally included in the first evidence checkpoint were redacted in
+a follow-up; evidence-redaction.json records that handling defect and correction.
