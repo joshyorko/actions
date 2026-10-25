@@ -6613,3 +6613,14 @@ the canonical build of the selected source. Verify relevant source files have no
 changed, retain before/after hashes, and commit the regenerated input before the
 clean-worktree preflight. A later build mutating stale generated files invalidates
 the frozen-source gate even when the product source itself was unchanged.
+
+For installed Data qualification, retain one immutable Package while changing
+provider-bound Deployment revisions through public CAS and authorization. An
+AppSession is scoped to the full active Deployment: prove old artifact reads before
+rebind, then require denial under the new session. Replay keys only under their
+original active snapshot. Record provider execution, restart, descendant cleanup
+and owned TLS cleanup as separate gates; cancellation and multiple principals need
+separate evidence. Own exact container identity before fixture yield. Automatic
+removal can outlast stop: after recognized removal-in-progress, use a bounded
+read-only absence poll with each daemon call bounded by the remaining deadline.
+Do not repeat mutations or treat unknown cleanup errors as success.

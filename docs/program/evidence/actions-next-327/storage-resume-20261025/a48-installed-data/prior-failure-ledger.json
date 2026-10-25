@@ -1,0 +1,60 @@
+[
+  {
+    "trial": "a47 initial discovery",
+    "interpretation": "FAILED before execution: app-only visibility and discovery before exact Deployment authorization. Initial cleanup type-only error remains unproven.",
+    "receipts": [
+      {
+        "path": "a47-data-public/evidence/receipt.json",
+        "sha256": "37dc658307dc832252e6abb58f9a9a07a58573be2488941e9e67b8f815178b8b",
+        "status": "FAILED"
+      },
+      {
+        "path": "a47-data-controller/controller-receipt.json",
+        "sha256": "8aaa7b37e62a79e62eb6789057141d61a0815ee4ec3e7880a69e2eea841ee5ef",
+        "status": "FAILED"
+      },
+      {
+        "path": "a47-data-controller/supervisor/receipt.json",
+        "sha256": "2bc970cd1d6be50797f11c746064086061261bb3d0083af7309742e42aa06ad0",
+        "status": "FAIL"
+      }
+    ]
+  },
+  {
+    "trial": "a48 initial preflight",
+    "interpretation": "FAILED preflight: inherited a47 Runtime wheel assertion; corrected to actual a48 wheel. No backend PASS receipt.",
+    "receipts": [
+      {
+        "path": "a48-data-controller/controller-receipt.json",
+        "sha256": "687bb4d99b53faf7faeed1832970432b340c1c64849842e95af732c70769fdde",
+        "status": "FAILED"
+      },
+      {
+        "path": "a48-data-controller/supervisor/receipt.json",
+        "sha256": "18c136f7d48c8212365369e4a1abb8f211352c2cae5aa60e2af085e97e23a598",
+        "status": "FAIL"
+      }
+    ]
+  },
+  {
+    "trial": "a48 Data03",
+    "interpretation": "Backend PASS; controller FAILED: removal in progress and immediate final inspection still found container. Later absence does not rewrite failure; bounded poll added for Data04.",
+    "receipts": [
+      {
+        "path": "a48-data-public-03/evidence/receipt.json",
+        "sha256": "560137ea1f6171131aaac7f46be0248a27d9d7494d18fcf6bb393a4dccda619c",
+        "status": "PASS"
+      },
+      {
+        "path": "a48-data-controller-03/controller-receipt.json",
+        "sha256": "a34b7b47daf7f1fbb3a9ddeba574adcea9d7ef25e019bb8a250bacf0cbefe8f7",
+        "status": "FAILED"
+      },
+      {
+        "path": "a48-data-controller-03/supervisor/receipt.json",
+        "sha256": "c0d6e4c42d48fc27718dcef57a0e01171972be1cd4e30c77cda371e62c7b0bdd",
+        "status": "PASS"
+      }
+    ]
+  }
+]
