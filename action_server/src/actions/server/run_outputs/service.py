@@ -200,6 +200,14 @@ def _now(db: Database) -> int:
         return int(cursor.fetchone()[0])
 
 
+def _advance_lifecycle(db: Database, run_id: str, *, now: int | None = None) -> None:
+    """Advance durable lifecycle evidence inside the caller's locked transaction."""
+    pin = _one(db, RunPin, run_id)
+    previous = int(pin.state_updated_ms) if pin.state_updated_ms else 0
+    sampled = _now(db) if now is None else now
+    _update(db, RunPin, run_id, {"state_updated_ms": str(max(previous, sampled))})
+
+
 def _returning(db: Database, sql: str, values: list) -> list:
     _private_diagnostics(db)
     with db.cursor() as cursor:
@@ -328,12 +336,14 @@ class RunOutputControlPlane:
                 self.db
             ):
                 raise FenceRejected("recovery must identify an expired current epoch")
-            _update(
-                self.db,
-                RunPin,
-                run_id,
-                {"recovery_epoch": expired_epoch, "recovery_receipt": receipt},
-            )
+            if pin.recovery_epoch != expired_epoch or pin.recovery_receipt != receipt:
+                _update(
+                    self.db,
+                    RunPin,
+                    run_id,
+                    {"recovery_epoch": expired_epoch, "recovery_receipt": receipt},
+                )
+                _advance_lifecycle(self.db, run_id)
 
 
 class ResolvedOutput:
@@ -487,12 +497,13 @@ class RunOutputService:
             )
             if len(numbered) != 1:
                 raise RuntimeError("Run counter unavailable")
+            created_ms = _now(self.db)
             run = Run(
                 id=run_id,
                 status=RunStatus.NOT_RUN,
                 action_id=snapshot.action_id,
                 start_time=datetime.datetime.fromtimestamp(
-                    _now(self.db) / 1000, datetime.timezone.utc
+                    created_ms / 1000, datetime.timezone.utc
                 ).isoformat(),
                 run_time=None,
                 inputs=input_json,
@@ -519,6 +530,7 @@ class RunOutputService:
                     0,
                     -1,
                     "",
+                    str(created_ms),
                 ),
             )
             return run
@@ -589,6 +601,7 @@ class RunOutputService:
                 },
             )
             _update(self.db, Run, run_id, {"status": RunStatus.RUNNING})
+            _advance_lifecycle(self.db, run_id, now=now)
             return AttemptFence(
                 run_id=run_id,
                 attempt_id=attempt.id,
@@ -881,6 +894,7 @@ class RunOutputService:
                     else "failed"
                 },
             )
+            _advance_lifecycle(self.db, run.id)
             return _one(self.db, Run, run.id)
 
     def cancel(self, actor: Actor, run_id: str) -> bool:
@@ -890,7 +904,9 @@ class RunOutputService:
             run = _one(self.db, Run, run_id)
             if run.status not in (RunStatus.NOT_RUN, RunStatus.RUNNING):
                 return False
-            _update(self.db, RunPin, run_id, {"cancel_requested": 1})
+            if not pin.cancel_requested:
+                _update(self.db, RunPin, run_id, {"cancel_requested": 1})
+                _advance_lifecycle(self.db, run_id)
             return True
 
     @contextmanager

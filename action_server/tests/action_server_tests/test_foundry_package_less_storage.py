@@ -6,12 +6,12 @@ from uuid import uuid4
 import pytest
 
 from actions.server._database import Database, DBError
-from actions.server._models import get_all_model_classes, get_model_db_rules
+from actions.server._models import get_all_model_classes
 from actions.server.foundry.models import (
     FoundryDeploymentRevision,
     FoundryPackageRevision,
 )
-from actions.server.migrations import CURRENT_VERSION, Migration, migrate_db
+from actions.server.migrations import Migration, migrate_db
 from actions.server.run_outputs.models import Workspace
 
 
@@ -37,23 +37,12 @@ def schema17(request, tmp_path):
     try:
         with db.connect():
             db.initialize(get_all_model_classes())
-            rules = get_model_db_rules()
             with db.transaction():
-                # Freeze the historical NOT NULL contract even after the current
-                # model admits package-less UI. This is an actual forward upgrade.
-                for cls in get_all_model_classes():
-                    sql = db.create_table_sql(cls, rules)
-                    if cls is FoundryDeploymentRevision:
-                        sql = sql.replace(
-                            "foundry_package_revision_id TEXT,",
-                            "foundry_package_revision_id TEXT NOT NULL,",
-                        )
-                        assert "foundry_package_revision_id TEXT NOT NULL," in sql
-                    db.execute(sql)
-                    for statement in db.create_unique_indexes_sql(
-                        cls, rules
-                    ) + db.create_non_unique_indexes_sql(cls, rules):
-                        db.execute(statement)
+                from action_server_tests.foundry_historical import (
+                    create_historical_schema,
+                )
+
+                create_historical_schema(db, 17)
                 db.insert(Migration(17, "add_foundry_records"))
                 db.insert(Workspace("owned-workspace", "active", 7))
                 db.insert(
@@ -103,8 +92,7 @@ def _nullable(db):
 
 
 def test_forward_upgrade_preserves_backend_and_allows_no_fake_package(schema17):
-    assert CURRENT_VERSION == 18
-    assert migrate_db(schema17)
+    assert migrate_db(schema17, to_version=18)
     db = Database(schema17)
     with db.connect():
         db.initialize(get_all_model_classes())
@@ -141,13 +129,15 @@ def test_forward_upgrade_preserves_backend_and_allows_no_fake_package(schema17):
 def test_interrupted_nullable_upgrade_restores_schema_rows_and_marker(
     schema17, monkeypatch
 ):
+    from action_server_tests.foundry_historical import historical_rows
+
     from actions.server.migrations import migration_allow_package_less_canvas
 
     db = Database(schema17)
     with db.connect():
         db.initialize(get_all_model_classes())
         assert not _nullable(db)
-        before = db.list_whole_db()
+        before = historical_rows(db, 17)
         insert = db.insert
 
         def interrupt(record):
@@ -160,4 +150,4 @@ def test_interrupted_nullable_upgrade_restores_schema_rows_and_marker(
             with db.transaction():
                 migration_allow_package_less_canvas.migrate(db)
         assert not _nullable(db)
-        assert db.list_whole_db() == before
+        assert historical_rows(db, 17) == before

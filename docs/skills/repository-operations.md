@@ -5201,7 +5201,7 @@ The generated compiler/registry and explicit authoring binding selection now for
 
 RuntimeDeploymentSelection accepts an explicitly injected ProviderCompatibilityPort and matches each named operation's typed schema, effect and bounds exactly. Its default None never provisions or infers a provider; requirement-bearing selection without explicit assignments and this authority fails closed. The common-SQL SqlProviderRegistry is a separately injected metadata prerequisite: migration19 adds immutable engine-neutral provider/source records and CAS availability, but no grants. Exact-reference provider.inspect/provider.manage and explicit Workspace provider.register remain independent of deploy/execute and data read/manage permissions. Registration and availability changes use existing FoundryRequest/Audit transactions; replay reauthorizes and never restores an old availability state. Startup owner operations and their saved provenance fingerprint remain unchanged.
 
-Only bounded sealed-files source manifests are currently eligible. The trusted host supplies a Workspace-scoped seal catalog backed by FilesystemOutputProvider; registration and compatibility reads verify retained object identities and bytes, and missing/tampered evidence fails closed. Public descriptors accept no locator, engine, DSN, path or credential. This proves retained sealed bytes, not source-format parsing, actual adapter behavior, connection readiness or immutable versions of a mutable database/Knowledge collection. Disable can revoke availability without opening missing blobs; enabling requires current retained evidence. Explicit local provider configuration can now reconstruct and inject the registry/evidence catalog as described below; ordinary startup still supplies no worker logical-operation port or Knowledge collection service. Source-owned requirement grants follow only existing explicit new-Package compilation admission; provider grants are never created by selection or replay. SQLite/PostgreSQL tests qualify common SQL metadata authority and native compatibility selection, not Data-engine I/O, installed discovery or actual Package/provider execution. The stopped-local-SQLite provider operator below supplies durable private configuration; shared PostgreSQL administrative coordination and model-facing Data discovery remain separate gates.
+Only bounded sealed-files source manifests are currently eligible. The trusted host supplies a Workspace-scoped seal catalog backed by FilesystemOutputProvider; registration and compatibility reads verify retained object identities and bytes, and missing/tampered evidence fails closed. Public descriptors accept no locator, engine, DSN, path or credential. The registry alone proves retained sealed bytes, not source-format parsing, adapter behavior, connection readiness or immutable versions of a mutable database/Knowledge collection. The separately configured exact-scan components below qualify a bounded execution subset. Disable can revoke availability without opening missing blobs; enabling requires current retained evidence. Explicit local provider configuration can now reconstruct and inject the registry/evidence catalog as described below; ordinary startup still supplies no worker logical-operation port or Knowledge collection service. Source-owned requirement grants follow only existing explicit new-Package compilation admission; provider grants are never created by selection or replay. SQLite/PostgreSQL tests qualify common SQL metadata authority and native compatibility selection, not Data-engine I/O, installed discovery or actual Package/provider execution. The stopped-local-SQLite provider operator below supplies durable private configuration; shared PostgreSQL administrative coordination and model-facing Data discovery remain separate gates.
 
 Empty-requirement Packages preserve exact `actions.package-revision/v1-draft` bytes and identity domain. Nonempty requirements use `actions.package-revision/v2-bindings-draft`; the verifier enforces schema/presence correspondence, canonical declarations and the matching digest domain. An archived c97e verifier accepts legacy bytes and rejects the new schema before native projection/admission. This is format-refusal evidence, not installed downgrade/restore qualification or worker readiness. A later worker/provider join still needs an enforced runtime capability gate. Fixed flat typed fields and exact compatibility are intentional bounded grammar; richer schemas or coercions require an explicit versioned extension.
 
@@ -5258,3 +5258,67 @@ Every provider catalog publication path, including configure-host replay after a
 A bounded worker that consumes only the first eligible Run in a scanned page must return the consumed Run’s canonical ordinal, not the end-of-page cursor. Advancing past unconsumed eligible candidates silently skips them. Empty eligible pages may advance through the scan cursor; nonempty pages advance only through the Run actually consumed. Test more candidates than the bounded page and consecutive run_once calls.
 
 The pinned development Robot Framework runner can be qualified with real .robot tasks through canonical Poetry, but direct runner success alone does not establish non-RCC Package/Run acceptance. That gate additionally requires versioned portable plan bytes with no RCC-only fields, exact capability/schema projection, trusted installed adapter selection, canonical Attempt/output authority and execution after removing the original mutable source. Preserve this distinction in receipts.
+
+Common Run lifecycle time is persisted in RunPin.state_updated_ms using the database clock. New admission initializes it; successful claim/replacement, changed recovery authorization, first cancellation request, queued cancellation confirmation, retained RCC launch/execution evidence and terminal publication update it in their existing transactions. Heartbeat, read, exact replay, output staging/GC and lease expiry do not create lifecycle timestamps. Queued cancellation and its first cancel flag share one sample; later confirmation of a prior flag records the new terminal transition. Same-millisecond transitions may share a timestamp; backwards clock samples do not invent future ticks. Migration21 preserves preexisting rows with unknown (empty) lifecycle history and does not create Task receipts or adopt legacy Runs. Freeze the historical RunPin field definition in migration15; freezing only its model list does not freeze its DDL. RunTaskReceipt is immutable association/TTL metadata, not execution state, and this prerequisite does not advertise Tasks or install a detached worker.
+
+
+### Strict retained-source DuckDB scan component
+
+`DuckDBSealedScan` is an explicitly configured component, not an ordinary worker
+transport or public data endpoint. It requires live provider metadata inspection
+and separate `data.read` authority before execution and again before returning
+bytes. It accepts only declared read operations named exactly
+`<source-object-name>.scan/v1`, with no parameters and an explicit projection
+whose scalar types and requiredness match the immutable source codec. Other
+operation grammars fail closed; callers cannot supply SQL, paths, or connection
+configuration. Source/v1 remains metadata-only for this execution adapter.
+
+Source/v2 CSV uses exact ordered headers, strict UTF-8, explicit JSON-style
+numeric/boolean values, and literal `\N` nulls. Nullable projected values are
+omitted from result objects; required nulls are rejected. Numeric zero normalizes
+to `0.0`. Flat uncompressed Parquet supports the bounded primitive subset
+implemented by `parquet_gate.py`; its compact-protocol footer is checked before
+native import, including rejection of external column paths, nested schemas,
+encryption, unsupported encodings, and metadata beyond declared bounds.
+Unsupported valid Parquet features are refused rather than inferred.
+
+Sealed bytes, source identity, row/column/field/decoded-byte bounds and projected
+output bounds are checked before scan-table materialization. Source order is
+retained. Any source or result overflow rejects the entire result; there is no
+successful truncation. DuckDB runs in memory with one thread, a 64 MiB engine
+limit, no extension installation/autoloading, locked configuration and disabled
+external access; the Parquet decoder allows only its exact private retained
+copy. Cancellation/deadline checks surround parsing and interrupt native work.
+These controls are not hostile-native-process isolation or a total Python RSS
+limit, and blocked filesystem I/O is not a hard wall-clock guarantee.
+
+This component does not establish ordinary model/worker Data access, durable Knowledge ingestion, Task integration, installed
+consumer qualification, or completion of the public Data/Knowledge owner gate.
+Those joins remain separately required.
+
+`PostgreSQLSealedScan` implements the same declared, parameterless exact-object
+`.scan/v1` subset using fixed typed VALUES batches in one READ ONLY transaction.
+It does not create temporary tables or read mutable provider tables. Source
+seals/codecs and whole-result limits are checked before connection; output order,
+null omission and typed canonical bytes match the DuckDB adapter. Internal bytea
+parameters preserve UTF-8 strings including NUL without changing logical types.
+
+The trusted private resolver loads exact password and pinned CA versions only
+per execution. Construction/startup performs no secret lookup or network probe.
+The adapter requires verify-full TLS, rejects ambient PG-prefixed environment
+configuration, and uses private absent credential/client-certificate paths to
+prevent fallback. Provider inspection and data.read remain separate live checks.
+A restricted role needs CONNECT only; CREATE/TEMP/table privileges are unused.
+The operator must provision temp_file_limit=0; other values are refused. Fixed
+work_mem, remaining statement/lock deadlines and cancellation bound the scan,
+but do not establish total process memory isolation or a hard deadline during
+DNS/connect. No partial or silently truncated result is returned.
+
+Actual owned TLS fixture qualification covers cross-engine CSV/Parquet output,
+batch order, denied credentials/CA, native cancellation, authority revocation,
+and restricted-role semantics. This component does not complete ordinary worker
+Data access, installed/public provider flow, broader operation grammars, durable
+Knowledge ingestion, Task integration, or coordinated shared-PostgreSQL operator
+provisioning. Keep those product gates explicit.
+
+Historical migration tests must freeze DDL as well as migration model definitions. Capture pre-change SQL/index statements from a pinned installed wheel for each supported SQL dialect, then migrate that schema forward. Snapshot historical rows from its actual tables and columns; current model registries can contain future tables and must not determine old-schema DDL or rollback snapshots. Keep targeted migration18 tests pinned to18 while shared Runtime fixtures upgrade through the current version.

@@ -1,0 +1,695 @@
+{
+  "source": "ba3aba9e8f623ccd0a17803d29b3cc8b85f65cf2",
+  "run_id": "da1f932c-110d-4712-90ad-cb6c6ea24f35",
+  "schema": {
+    "sqlite": [
+      "\nCREATE TABLE IF NOT EXISTS migration(\n    id INTEGER NOT NULL PRIMARY KEY,\n    name TEXT NOT NULL\n)\n        ",
+      "\nCREATE TABLE IF NOT EXISTS action_package(\n    id TEXT NOT NULL PRIMARY KEY,\n    name TEXT NOT NULL,\n    directory TEXT NOT NULL,\n    conda_hash TEXT NOT NULL,\n    env_json TEXT NOT NULL\n)\n        ",
+      "\nCREATE UNIQUE INDEX action_package_id_index ON action_package(id);\n",
+      "\nCREATE UNIQUE INDEX action_package_name_index ON action_package(name);\n",
+      "\nCREATE TABLE IF NOT EXISTS action(\n    id TEXT NOT NULL PRIMARY KEY,\n    action_package_id TEXT NOT NULL,\n    name TEXT NOT NULL,\n    docs TEXT NOT NULL,\n    file TEXT NOT NULL,\n    lineno INTEGER NOT NULL,\n    input_schema TEXT NOT NULL,\n    output_schema TEXT NOT NULL,\n    enabled INTEGER CHECK(enabled IN (0, 1)) NOT NULL DEFAULT 1,\n    is_consequential INTEGER,\n    managed_params_schema TEXT DEFAULT NULL,\n    options TEXT NOT NULL DEFAULT '',\n    FOREIGN KEY (action_package_id) REFERENCES action_package(id)\n)\n        ",
+      "\nCREATE UNIQUE INDEX action_id_index ON action(id);\n",
+      "\nCREATE INDEX action_action_package_id_non_unique_index ON action(action_package_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS mcp_catalog_name(\n    id TEXT NOT NULL PRIMARY KEY,\n    namespace TEXT NOT NULL,\n    name TEXT NOT NULL,\n    package_name TEXT NOT NULL,\n    action_name TEXT NOT NULL\n)\n        ",
+      "\nCREATE UNIQUE INDEX mcp_catalog_name_id_index ON mcp_catalog_name(id);\n",
+      "\nCREATE TABLE IF NOT EXISTS mcp_resource_routing(\n    id TEXT NOT NULL PRIMARY KEY,\n    routing_json TEXT NOT NULL\n)\n        ",
+      "\nCREATE UNIQUE INDEX mcp_resource_routing_id_index ON mcp_resource_routing(id);\n",
+      "\nCREATE TABLE IF NOT EXISTS run(\n    id TEXT NOT NULL PRIMARY KEY,\n    status INTEGER NOT NULL,\n    action_id TEXT NOT NULL,\n    start_time TEXT NOT NULL,\n    run_time REAL,\n    inputs TEXT NOT NULL,\n    result TEXT,\n    error_message TEXT,\n    relative_artifacts_dir TEXT NOT NULL,\n    numbered_id INTEGER NOT NULL,\n    request_id TEXT NOT NULL DEFAULT '',\n    run_type TEXT NOT NULL DEFAULT 'action',\n    robot_package_path TEXT DEFAULT NULL,\n    robot_task_name TEXT DEFAULT NULL,\n    robot_env_hash TEXT DEFAULT NULL\n)\n        ",
+      "\nCREATE UNIQUE INDEX run_id_index ON run(id);\n",
+      "\nCREATE UNIQUE INDEX run_numbered_id_index ON run(numbered_id);\n",
+      "\nCREATE INDEX run_status_non_unique_index ON run(status);\n",
+      "\nCREATE INDEX run_action_id_non_unique_index ON run(action_id);\n",
+      "\nCREATE INDEX run_request_id_non_unique_index ON run(request_id);\n",
+      "\nCREATE INDEX run_run_type_non_unique_index ON run(run_type);\n",
+      "\nCREATE TABLE IF NOT EXISTS counter(\n    id TEXT NOT NULL PRIMARY KEY,\n    value INTEGER NOT NULL\n)\n        ",
+      "\nCREATE UNIQUE INDEX counter_id_index ON counter(id);\n",
+      "\nCREATE TABLE IF NOT EXISTS user_session(\n    id TEXT NOT NULL PRIMARY KEY,\n    created_at TEXT NOT NULL,\n    accessed_at TEXT NOT NULL,\n    external INTEGER CHECK(external IN (0, 1)) NOT NULL\n)\n        ",
+      "\nCREATE UNIQUE INDEX user_session_id_index ON user_session(id);\n",
+      "\nCREATE INDEX user_session_external_non_unique_index ON user_session(external);\n",
+      "\nCREATE TABLE IF NOT EXISTS temp_user_session_data(\n    user_session_id TEXT NOT NULL,\n    key TEXT NOT NULL,\n    data TEXT NOT NULL,\n    expires_at TEXT NOT NULL,\n    FOREIGN KEY (user_session_id) REFERENCES user_session(id)\n)\n        ",
+      "\nCREATE INDEX temp_user_session_data_user_session_id_non_unique_index ON temp_user_session_data(user_session_id);\n",
+      "\nCREATE INDEX temp_user_session_data_key_non_unique_index ON temp_user_session_data(key);\n",
+      "\nCREATE TABLE IF NOT EXISTS o_auth2_user_data(\n    user_session_id TEXT NOT NULL,\n    provider TEXT NOT NULL,\n    refresh_token TEXT NOT NULL,\n    access_token TEXT NOT NULL,\n    expires_at TEXT NOT NULL,\n    token_type TEXT NOT NULL,\n    scopes TEXT NOT NULL,\n    metadata TEXT NOT NULL DEFAULT '',\n    code_verifier TEXT NOT NULL DEFAULT ''\n)\n        ",
+      "\nCREATE TABLE IF NOT EXISTS schedule_group(\n    id TEXT NOT NULL PRIMARY KEY,\n    name TEXT NOT NULL,\n    description TEXT,\n    parent_id TEXT,\n    color TEXT,\n    created_at TEXT NOT NULL\n)\n        ",
+      "\nCREATE UNIQUE INDEX schedule_group_id_index ON schedule_group(id);\n",
+      "\nCREATE INDEX schedule_group_parent_id_non_unique_index ON schedule_group(parent_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS schedule(\n    id TEXT NOT NULL PRIMARY KEY,\n    name TEXT NOT NULL,\n    description TEXT,\n    action_id TEXT,\n    execution_mode TEXT NOT NULL,\n    work_item_queue TEXT,\n    inputs_json TEXT NOT NULL,\n    schedule_type TEXT NOT NULL,\n    cron_expression TEXT,\n    interval_seconds INTEGER,\n    weekday_config_json TEXT,\n    once_at TEXT,\n    timezone TEXT NOT NULL,\n    enabled INTEGER CHECK(enabled IN (0, 1)) NOT NULL DEFAULT 1,\n    created_at TEXT NOT NULL DEFAULT '',\n    updated_at TEXT NOT NULL DEFAULT '',\n    last_run_at TEXT DEFAULT NULL,\n    next_run_at TEXT DEFAULT NULL,\n    skip_if_running INTEGER CHECK(skip_if_running IN (0, 1)) NOT NULL DEFAULT 0,\n    max_concurrent INTEGER NOT NULL,\n    timeout_seconds INTEGER NOT NULL,\n    retry_enabled INTEGER CHECK(retry_enabled IN (0, 1)) NOT NULL DEFAULT 0,\n    retry_max_attempts INTEGER NOT NULL,\n    retry_delay_seconds INTEGER NOT NULL,\n    retry_backoff_multiplier REAL NOT NULL,\n    rate_limit_enabled INTEGER CHECK(rate_limit_enabled IN (0, 1)) NOT NULL DEFAULT 0,\n    rate_limit_max_per_hour INTEGER,\n    rate_limit_max_per_day INTEGER,\n    depends_on_schedule_id TEXT DEFAULT NULL,\n    dependency_mode TEXT NOT NULL DEFAULT 'after_success',\n    notify_on_failure INTEGER CHECK(notify_on_failure IN (0, 1)) NOT NULL DEFAULT 0,\n    notify_on_success INTEGER CHECK(notify_on_success IN (0, 1)) NOT NULL DEFAULT 0,\n    notification_webhook_url TEXT DEFAULT NULL,\n    notification_email TEXT DEFAULT NULL,\n    group_id TEXT DEFAULT NULL,\n    tags_json TEXT NOT NULL DEFAULT '[]',\n    priority INTEGER NOT NULL\n)\n        ",
+      "\nCREATE UNIQUE INDEX schedule_id_index ON schedule(id);\n",
+      "\nCREATE INDEX schedule_action_id_non_unique_index ON schedule(action_id);\n",
+      "\nCREATE INDEX schedule_depends_on_schedule_id_non_unique_index ON schedule(depends_on_schedule_id);\n",
+      "\nCREATE INDEX schedule_group_id_non_unique_index ON schedule(group_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS schedule_execution(\n    id TEXT NOT NULL PRIMARY KEY,\n    schedule_id TEXT NOT NULL,\n    run_id TEXT,\n    work_item_id TEXT,\n    scheduled_time TEXT NOT NULL,\n    actual_start_time TEXT NOT NULL,\n    actual_end_time TEXT,\n    duration_ms INTEGER,\n    status TEXT NOT NULL,\n    attempt_number INTEGER NOT NULL,\n    error_message TEXT DEFAULT NULL,\n    error_code TEXT DEFAULT NULL,\n    skip_reason TEXT DEFAULT NULL,\n    result_json TEXT DEFAULT NULL,\n    notification_sent INTEGER CHECK(notification_sent IN (0, 1)) NOT NULL DEFAULT 0,\n    notification_error TEXT DEFAULT NULL\n)\n        ",
+      "\nCREATE UNIQUE INDEX schedule_execution_id_index ON schedule_execution(id);\n",
+      "\nCREATE INDEX schedule_execution_schedule_id_non_unique_index ON schedule_execution(schedule_id);\n",
+      "\nCREATE INDEX schedule_execution_status_non_unique_index ON schedule_execution(status);\n",
+      "\nCREATE TABLE IF NOT EXISTS trigger(\n    id TEXT NOT NULL PRIMARY KEY,\n    name TEXT NOT NULL,\n    description TEXT,\n    action_id TEXT,\n    execution_mode TEXT NOT NULL,\n    work_item_queue TEXT,\n    inputs_template_json TEXT NOT NULL,\n    trigger_type TEXT NOT NULL,\n    webhook_secret TEXT,\n    webhook_method TEXT NOT NULL,\n    enabled INTEGER CHECK(enabled IN (0, 1)) NOT NULL DEFAULT 1,\n    created_at TEXT NOT NULL DEFAULT '',\n    updated_at TEXT NOT NULL DEFAULT '',\n    last_triggered_at TEXT DEFAULT NULL,\n    trigger_count INTEGER NOT NULL,\n    rate_limit_enabled INTEGER CHECK(rate_limit_enabled IN (0, 1)) NOT NULL DEFAULT 0,\n    rate_limit_max_per_minute INTEGER NOT NULL\n)\n        ",
+      "\nCREATE UNIQUE INDEX trigger_id_index ON trigger(id);\n",
+      "\nCREATE INDEX trigger_action_id_non_unique_index ON trigger(action_id);\n",
+      "\nCREATE INDEX trigger_trigger_type_non_unique_index ON trigger(trigger_type);\n",
+      "\nCREATE TABLE IF NOT EXISTS trigger_invocation(\n    id TEXT NOT NULL PRIMARY KEY,\n    trigger_id TEXT NOT NULL,\n    invoked_at TEXT NOT NULL,\n    source_ip TEXT,\n    payload_json TEXT,\n    headers_json TEXT,\n    status TEXT NOT NULL,\n    run_id TEXT,\n    work_item_id TEXT,\n    error_message TEXT\n)\n        ",
+      "\nCREATE UNIQUE INDEX trigger_invocation_id_index ON trigger_invocation(id);\n",
+      "\nCREATE INDEX trigger_invocation_trigger_id_non_unique_index ON trigger_invocation(trigger_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS workspace(\n    id TEXT NOT NULL PRIMARY KEY,\n    state TEXT NOT NULL,\n    lock_version INTEGER NOT NULL\n)\n        ",
+      "\nCREATE TABLE IF NOT EXISTS run_admission(\n    id TEXT NOT NULL PRIMARY KEY,\n    workspace_id TEXT NOT NULL,\n    deployment_id TEXT NOT NULL,\n    snapshot_json TEXT NOT NULL,\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id)\n)\n        ",
+      "\nCREATE TABLE IF NOT EXISTS run_access_grant(\n    id TEXT NOT NULL PRIMARY KEY,\n    workspace_id TEXT NOT NULL,\n    deployment_id TEXT NOT NULL,\n    principal_id TEXT NOT NULL,\n    operations_json TEXT NOT NULL,\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id)\n)\n        ",
+      "\nCREATE TABLE IF NOT EXISTS run_pin(\n    id TEXT NOT NULL PRIMARY KEY,\n    run_id TEXT NOT NULL,\n    workspace_id TEXT NOT NULL,\n    run_admission_id TEXT NOT NULL,\n    admission_principal_id TEXT NOT NULL,\n    request_fingerprint TEXT NOT NULL,\n    idempotency_id TEXT NOT NULL,\n    idempotency_key TEXT NOT NULL,\n    current_attempt_id TEXT NOT NULL,\n    epoch INTEGER NOT NULL,\n    cancel_requested INTEGER NOT NULL,\n    recovery_epoch INTEGER NOT NULL,\n    recovery_receipt TEXT NOT NULL,\n    FOREIGN KEY (run_id) REFERENCES run(id),\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id),\n    FOREIGN KEY (run_admission_id) REFERENCES run_admission(id)\n)\n        ",
+      "\nCREATE UNIQUE INDEX run_pin_run_id_index ON run_pin(run_id);\n",
+      "\nCREATE UNIQUE INDEX run_pin_idempotency_id_index ON run_pin(idempotency_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS run_attempt(\n    id TEXT NOT NULL PRIMARY KEY,\n    run_id TEXT NOT NULL,\n    workspace_id TEXT NOT NULL,\n    owner_id TEXT NOT NULL,\n    epoch INTEGER NOT NULL,\n    lease_deadline_ms TEXT NOT NULL,\n    heartbeat_ms TEXT NOT NULL,\n    state TEXT NOT NULL,\n    FOREIGN KEY (run_id) REFERENCES run(id),\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id)\n)\n        ",
+      "\nCREATE INDEX run_attempt_run_id_non_unique_index ON run_attempt(run_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS run_output(\n    id TEXT NOT NULL PRIMARY KEY,\n    run_id TEXT NOT NULL,\n    workspace_id TEXT NOT NULL,\n    run_attempt_id TEXT NOT NULL,\n    epoch INTEGER NOT NULL,\n    provider_key TEXT NOT NULL,\n    object_ref TEXT NOT NULL,\n    digest TEXT NOT NULL,\n    size INTEGER NOT NULL,\n    name TEXT NOT NULL,\n    media_type TEXT NOT NULL,\n    state TEXT NOT NULL,\n    expires_ms TEXT NOT NULL,\n    FOREIGN KEY (run_id) REFERENCES run(id),\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id),\n    FOREIGN KEY (run_attempt_id) REFERENCES run_attempt(id)\n)\n        ",
+      "\nCREATE INDEX run_output_run_id_non_unique_index ON run_output(run_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS run_execution_intent(\n    id TEXT NOT NULL PRIMARY KEY,\n    workspace_id TEXT NOT NULL,\n    actor_id TEXT NOT NULL,\n    envelope_json TEXT NOT NULL,\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id)\n)\n        ",
+      "\nCREATE TABLE IF NOT EXISTS fenced_work_item(\n    id TEXT NOT NULL PRIMARY KEY,\n    workspace_id TEXT NOT NULL,\n    queue_name TEXT NOT NULL,\n    parent_id TEXT NOT NULL,\n    state TEXT NOT NULL,\n    payload TEXT NOT NULL,\n    created_ms TEXT NOT NULL,\n    claim_owner TEXT NOT NULL,\n    claim_epoch INTEGER NOT NULL,\n    claim_deadline_ms TEXT NOT NULL,\n    cancel_requested INTEGER NOT NULL,\n    error_message TEXT NOT NULL,\n    format TEXT NOT NULL,\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id)\n)\n        ",
+      "\nCREATE INDEX fenced_work_item_queue_name_non_unique_index ON fenced_work_item(queue_name);\n",
+      "\nCREATE TABLE IF NOT EXISTS invoice_review(\n    id TEXT NOT NULL PRIMARY KEY,\n    workspace_id TEXT NOT NULL,\n    run_id TEXT NOT NULL,\n    binding_id TEXT NOT NULL,\n    binding_json TEXT NOT NULL,\n    state TEXT NOT NULL,\n    work_item_id TEXT NOT NULL,\n    decision_json TEXT NOT NULL,\n    cancellation_json TEXT NOT NULL,\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id),\n    FOREIGN KEY (run_id) REFERENCES run(id)\n)\n        ",
+      "\nCREATE UNIQUE INDEX invoice_review_binding_id_index ON invoice_review(binding_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS foundry_package_revision(\n    id TEXT NOT NULL PRIMARY KEY,\n    workspace_id TEXT NOT NULL,\n    package_id TEXT NOT NULL,\n    revision_id TEXT NOT NULL,\n    manifest_json TEXT NOT NULL,\n    source_artifact_digest TEXT NOT NULL,\n    source_inventory_json TEXT NOT NULL,\n    build_evidence_json TEXT NOT NULL,\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id)\n)\n        ",
+      "\nCREATE INDEX foundry_package_revision_workspace_id_non_unique_index ON foundry_package_revision(workspace_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS foundry_deployment_revision(\n    id TEXT NOT NULL PRIMARY KEY,\n    workspace_id TEXT NOT NULL,\n    deployment_id TEXT NOT NULL,\n    revision_id TEXT NOT NULL,\n    foundry_package_revision_id TEXT,\n    selection_json TEXT NOT NULL,\n    snapshots_json TEXT NOT NULL,\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id),\n    FOREIGN KEY (foundry_package_revision_id) REFERENCES foundry_package_revision(id)\n)\n        ",
+      "\nCREATE INDEX foundry_deployment_revision_workspace_id_non_unique_index ON foundry_deployment_revision(workspace_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS foundry_deployment_head(\n    id TEXT NOT NULL PRIMARY KEY,\n    workspace_id TEXT NOT NULL,\n    deployment_id TEXT NOT NULL,\n    active_revision_id TEXT NOT NULL,\n    lock_version INTEGER NOT NULL,\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id)\n)\n        ",
+      "\nCREATE INDEX foundry_deployment_head_workspace_id_non_unique_index ON foundry_deployment_head(workspace_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS foundry_request(\n    id TEXT NOT NULL PRIMARY KEY,\n    workspace_id TEXT NOT NULL,\n    principal_id TEXT NOT NULL,\n    operation TEXT NOT NULL,\n    idempotency_key TEXT NOT NULL,\n    request_fingerprint TEXT NOT NULL,\n    result_json TEXT NOT NULL,\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id)\n)\n        ",
+      "\nCREATE INDEX foundry_request_workspace_id_non_unique_index ON foundry_request(workspace_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS foundry_audit(\n    id TEXT NOT NULL PRIMARY KEY,\n    workspace_id TEXT NOT NULL,\n    deployment_id TEXT NOT NULL,\n    principal_id TEXT NOT NULL,\n    operation TEXT NOT NULL,\n    foundry_request_id TEXT NOT NULL,\n    from_revision_id TEXT NOT NULL,\n    to_revision_id TEXT NOT NULL,\n    created_ms TEXT NOT NULL,\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id),\n    FOREIGN KEY (foundry_request_id) REFERENCES foundry_request(id)\n)\n        ",
+      "\nCREATE INDEX foundry_audit_workspace_id_non_unique_index ON foundry_audit(workspace_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS foundry_access_grant(\n    id TEXT NOT NULL PRIMARY KEY,\n    workspace_id TEXT NOT NULL,\n    principal_id TEXT NOT NULL,\n    subject_kind TEXT NOT NULL,\n    subject_id TEXT NOT NULL,\n    operations_json TEXT NOT NULL,\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id)\n)\n        ",
+      "\nCREATE INDEX foundry_access_grant_workspace_id_non_unique_index ON foundry_access_grant(workspace_id);\n",
+      "\nCREATE INDEX foundry_access_grant_principal_id_non_unique_index ON foundry_access_grant(principal_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS foundry_source_revision(\n    id TEXT NOT NULL PRIMARY KEY,\n    workspace_id TEXT NOT NULL,\n    revision_id TEXT NOT NULL,\n    manifest_json TEXT NOT NULL,\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id)\n)\n        ",
+      "\nCREATE INDEX foundry_source_revision_workspace_id_non_unique_index ON foundry_source_revision(workspace_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS foundry_provider_revision(\n    id TEXT NOT NULL PRIMARY KEY,\n    workspace_id TEXT NOT NULL,\n    descriptor_json TEXT NOT NULL,\n    foundry_source_revision_id TEXT NOT NULL,\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id),\n    FOREIGN KEY (foundry_source_revision_id) REFERENCES foundry_source_revision(id)\n)\n        ",
+      "\nCREATE INDEX foundry_provider_revision_workspace_id_non_unique_index ON foundry_provider_revision(workspace_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS foundry_provider_availability(\n    id TEXT NOT NULL PRIMARY KEY,\n    foundry_provider_revision_id TEXT NOT NULL,\n    generation INTEGER NOT NULL,\n    enabled INTEGER CHECK(enabled IN (0, 1)) NOT NULL,\n    FOREIGN KEY (foundry_provider_revision_id) REFERENCES foundry_provider_revision(id)\n)\n        "
+    ],
+    "postgresql": [
+      "\nCREATE TABLE IF NOT EXISTS migration(\n    id INTEGER NOT NULL PRIMARY KEY,\n    name TEXT NOT NULL\n)\n        ",
+      "\nCREATE TABLE IF NOT EXISTS action_package(\n    id TEXT NOT NULL PRIMARY KEY,\n    name TEXT NOT NULL,\n    directory TEXT NOT NULL,\n    conda_hash TEXT NOT NULL,\n    env_json TEXT NOT NULL\n)\n        ",
+      "\nCREATE UNIQUE INDEX action_package_id_index ON action_package(id);\n",
+      "\nCREATE UNIQUE INDEX action_package_name_index ON action_package(name);\n",
+      "\nCREATE TABLE IF NOT EXISTS action(\n    id TEXT NOT NULL PRIMARY KEY,\n    action_package_id TEXT NOT NULL,\n    name TEXT NOT NULL,\n    docs TEXT NOT NULL,\n    file TEXT NOT NULL,\n    lineno INTEGER NOT NULL,\n    input_schema TEXT NOT NULL,\n    output_schema TEXT NOT NULL,\n    enabled BOOLEAN NOT NULL DEFAULT TRUE,\n    is_consequential BOOLEAN,\n    managed_params_schema TEXT DEFAULT NULL,\n    options TEXT NOT NULL DEFAULT '',\n    FOREIGN KEY (action_package_id) REFERENCES action_package(id)\n)\n        ",
+      "\nCREATE UNIQUE INDEX action_id_index ON action(id);\n",
+      "\nCREATE INDEX action_action_package_id_non_unique_index ON action(action_package_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS mcp_catalog_name(\n    id TEXT NOT NULL PRIMARY KEY,\n    namespace TEXT NOT NULL,\n    name TEXT NOT NULL,\n    package_name TEXT NOT NULL,\n    action_name TEXT NOT NULL\n)\n        ",
+      "\nCREATE UNIQUE INDEX mcp_catalog_name_id_index ON mcp_catalog_name(id);\n",
+      "\nCREATE TABLE IF NOT EXISTS mcp_resource_routing(\n    id TEXT NOT NULL PRIMARY KEY,\n    routing_json TEXT NOT NULL\n)\n        ",
+      "\nCREATE UNIQUE INDEX mcp_resource_routing_id_index ON mcp_resource_routing(id);\n",
+      "\nCREATE TABLE IF NOT EXISTS run(\n    id TEXT NOT NULL PRIMARY KEY,\n    status INTEGER NOT NULL,\n    action_id TEXT NOT NULL,\n    start_time TEXT NOT NULL,\n    run_time REAL,\n    inputs TEXT NOT NULL,\n    result TEXT,\n    error_message TEXT,\n    relative_artifacts_dir TEXT NOT NULL,\n    numbered_id INTEGER NOT NULL,\n    request_id TEXT NOT NULL DEFAULT '',\n    run_type TEXT NOT NULL DEFAULT 'action',\n    robot_package_path TEXT DEFAULT NULL,\n    robot_task_name TEXT DEFAULT NULL,\n    robot_env_hash TEXT DEFAULT NULL\n)\n        ",
+      "\nCREATE UNIQUE INDEX run_id_index ON run(id);\n",
+      "\nCREATE UNIQUE INDEX run_numbered_id_index ON run(numbered_id);\n",
+      "\nCREATE INDEX run_status_non_unique_index ON run(status);\n",
+      "\nCREATE INDEX run_action_id_non_unique_index ON run(action_id);\n",
+      "\nCREATE INDEX run_request_id_non_unique_index ON run(request_id);\n",
+      "\nCREATE INDEX run_run_type_non_unique_index ON run(run_type);\n",
+      "\nCREATE TABLE IF NOT EXISTS counter(\n    id TEXT NOT NULL PRIMARY KEY,\n    value INTEGER NOT NULL\n)\n        ",
+      "\nCREATE UNIQUE INDEX counter_id_index ON counter(id);\n",
+      "\nCREATE TABLE IF NOT EXISTS user_session(\n    id TEXT NOT NULL PRIMARY KEY,\n    created_at TEXT NOT NULL,\n    accessed_at TEXT NOT NULL,\n    external BOOLEAN NOT NULL\n)\n        ",
+      "\nCREATE UNIQUE INDEX user_session_id_index ON user_session(id);\n",
+      "\nCREATE INDEX user_session_external_non_unique_index ON user_session(external);\n",
+      "\nCREATE TABLE IF NOT EXISTS temp_user_session_data(\n    user_session_id TEXT NOT NULL,\n    key TEXT NOT NULL,\n    data TEXT NOT NULL,\n    expires_at TEXT NOT NULL,\n    FOREIGN KEY (user_session_id) REFERENCES user_session(id)\n)\n        ",
+      "\nCREATE INDEX temp_user_session_data_user_session_id_non_unique_index ON temp_user_session_data(user_session_id);\n",
+      "\nCREATE INDEX temp_user_session_data_key_non_unique_index ON temp_user_session_data(key);\n",
+      "\nCREATE TABLE IF NOT EXISTS o_auth2_user_data(\n    user_session_id TEXT NOT NULL,\n    provider TEXT NOT NULL,\n    refresh_token TEXT NOT NULL,\n    access_token TEXT NOT NULL,\n    expires_at TEXT NOT NULL,\n    token_type TEXT NOT NULL,\n    scopes TEXT NOT NULL,\n    metadata TEXT NOT NULL DEFAULT '',\n    code_verifier TEXT NOT NULL DEFAULT ''\n)\n        ",
+      "\nCREATE TABLE IF NOT EXISTS schedule_group(\n    id TEXT NOT NULL PRIMARY KEY,\n    name TEXT NOT NULL,\n    description TEXT,\n    parent_id TEXT,\n    color TEXT,\n    created_at TEXT NOT NULL\n)\n        ",
+      "\nCREATE UNIQUE INDEX schedule_group_id_index ON schedule_group(id);\n",
+      "\nCREATE INDEX schedule_group_parent_id_non_unique_index ON schedule_group(parent_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS schedule(\n    id TEXT NOT NULL PRIMARY KEY,\n    name TEXT NOT NULL,\n    description TEXT,\n    action_id TEXT,\n    execution_mode TEXT NOT NULL,\n    work_item_queue TEXT,\n    inputs_json TEXT NOT NULL,\n    schedule_type TEXT NOT NULL,\n    cron_expression TEXT,\n    interval_seconds INTEGER,\n    weekday_config_json TEXT,\n    once_at TEXT,\n    timezone TEXT NOT NULL,\n    enabled BOOLEAN NOT NULL DEFAULT TRUE,\n    created_at TEXT NOT NULL DEFAULT '',\n    updated_at TEXT NOT NULL DEFAULT '',\n    last_run_at TEXT DEFAULT NULL,\n    next_run_at TEXT DEFAULT NULL,\n    skip_if_running BOOLEAN NOT NULL DEFAULT FALSE,\n    max_concurrent INTEGER NOT NULL,\n    timeout_seconds INTEGER NOT NULL,\n    retry_enabled BOOLEAN NOT NULL DEFAULT FALSE,\n    retry_max_attempts INTEGER NOT NULL,\n    retry_delay_seconds INTEGER NOT NULL,\n    retry_backoff_multiplier REAL NOT NULL,\n    rate_limit_enabled BOOLEAN NOT NULL DEFAULT FALSE,\n    rate_limit_max_per_hour INTEGER,\n    rate_limit_max_per_day INTEGER,\n    depends_on_schedule_id TEXT DEFAULT NULL,\n    dependency_mode TEXT NOT NULL DEFAULT 'after_success',\n    notify_on_failure BOOLEAN NOT NULL DEFAULT FALSE,\n    notify_on_success BOOLEAN NOT NULL DEFAULT FALSE,\n    notification_webhook_url TEXT DEFAULT NULL,\n    notification_email TEXT DEFAULT NULL,\n    group_id TEXT DEFAULT NULL,\n    tags_json TEXT NOT NULL DEFAULT '[]',\n    priority INTEGER NOT NULL\n)\n        ",
+      "\nCREATE UNIQUE INDEX schedule_id_index ON schedule(id);\n",
+      "\nCREATE INDEX schedule_action_id_non_unique_index ON schedule(action_id);\n",
+      "\nCREATE INDEX schedule_depends_on_schedule_id_non_unique_index ON schedule(depends_on_schedule_id);\n",
+      "\nCREATE INDEX schedule_group_id_non_unique_index ON schedule(group_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS schedule_execution(\n    id TEXT NOT NULL PRIMARY KEY,\n    schedule_id TEXT NOT NULL,\n    run_id TEXT,\n    work_item_id TEXT,\n    scheduled_time TEXT NOT NULL,\n    actual_start_time TEXT NOT NULL,\n    actual_end_time TEXT,\n    duration_ms INTEGER,\n    status TEXT NOT NULL,\n    attempt_number INTEGER NOT NULL,\n    error_message TEXT DEFAULT NULL,\n    error_code TEXT DEFAULT NULL,\n    skip_reason TEXT DEFAULT NULL,\n    result_json TEXT DEFAULT NULL,\n    notification_sent BOOLEAN NOT NULL DEFAULT FALSE,\n    notification_error TEXT DEFAULT NULL\n)\n        ",
+      "\nCREATE UNIQUE INDEX schedule_execution_id_index ON schedule_execution(id);\n",
+      "\nCREATE INDEX schedule_execution_schedule_id_non_unique_index ON schedule_execution(schedule_id);\n",
+      "\nCREATE INDEX schedule_execution_status_non_unique_index ON schedule_execution(status);\n",
+      "\nCREATE TABLE IF NOT EXISTS trigger(\n    id TEXT NOT NULL PRIMARY KEY,\n    name TEXT NOT NULL,\n    description TEXT,\n    action_id TEXT,\n    execution_mode TEXT NOT NULL,\n    work_item_queue TEXT,\n    inputs_template_json TEXT NOT NULL,\n    trigger_type TEXT NOT NULL,\n    webhook_secret TEXT,\n    webhook_method TEXT NOT NULL,\n    enabled BOOLEAN NOT NULL DEFAULT TRUE,\n    created_at TEXT NOT NULL DEFAULT '',\n    updated_at TEXT NOT NULL DEFAULT '',\n    last_triggered_at TEXT DEFAULT NULL,\n    trigger_count INTEGER NOT NULL,\n    rate_limit_enabled BOOLEAN NOT NULL DEFAULT FALSE,\n    rate_limit_max_per_minute INTEGER NOT NULL\n)\n        ",
+      "\nCREATE UNIQUE INDEX trigger_id_index ON trigger(id);\n",
+      "\nCREATE INDEX trigger_action_id_non_unique_index ON trigger(action_id);\n",
+      "\nCREATE INDEX trigger_trigger_type_non_unique_index ON trigger(trigger_type);\n",
+      "\nCREATE TABLE IF NOT EXISTS trigger_invocation(\n    id TEXT NOT NULL PRIMARY KEY,\n    trigger_id TEXT NOT NULL,\n    invoked_at TEXT NOT NULL,\n    source_ip TEXT,\n    payload_json TEXT,\n    headers_json TEXT,\n    status TEXT NOT NULL,\n    run_id TEXT,\n    work_item_id TEXT,\n    error_message TEXT\n)\n        ",
+      "\nCREATE UNIQUE INDEX trigger_invocation_id_index ON trigger_invocation(id);\n",
+      "\nCREATE INDEX trigger_invocation_trigger_id_non_unique_index ON trigger_invocation(trigger_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS workspace(\n    id TEXT NOT NULL PRIMARY KEY,\n    state TEXT NOT NULL,\n    lock_version INTEGER NOT NULL\n)\n        ",
+      "\nCREATE TABLE IF NOT EXISTS run_admission(\n    id TEXT NOT NULL PRIMARY KEY,\n    workspace_id TEXT NOT NULL,\n    deployment_id TEXT NOT NULL,\n    snapshot_json TEXT NOT NULL,\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id)\n)\n        ",
+      "\nCREATE TABLE IF NOT EXISTS run_access_grant(\n    id TEXT NOT NULL PRIMARY KEY,\n    workspace_id TEXT NOT NULL,\n    deployment_id TEXT NOT NULL,\n    principal_id TEXT NOT NULL,\n    operations_json TEXT NOT NULL,\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id)\n)\n        ",
+      "\nCREATE TABLE IF NOT EXISTS run_pin(\n    id TEXT NOT NULL PRIMARY KEY,\n    run_id TEXT NOT NULL,\n    workspace_id TEXT NOT NULL,\n    run_admission_id TEXT NOT NULL,\n    admission_principal_id TEXT NOT NULL,\n    request_fingerprint TEXT NOT NULL,\n    idempotency_id TEXT NOT NULL,\n    idempotency_key TEXT NOT NULL,\n    current_attempt_id TEXT NOT NULL,\n    epoch INTEGER NOT NULL,\n    cancel_requested INTEGER NOT NULL,\n    recovery_epoch INTEGER NOT NULL,\n    recovery_receipt TEXT NOT NULL,\n    FOREIGN KEY (run_id) REFERENCES run(id),\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id),\n    FOREIGN KEY (run_admission_id) REFERENCES run_admission(id)\n)\n        ",
+      "\nCREATE UNIQUE INDEX run_pin_run_id_index ON run_pin(run_id);\n",
+      "\nCREATE UNIQUE INDEX run_pin_idempotency_id_index ON run_pin(idempotency_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS run_attempt(\n    id TEXT NOT NULL PRIMARY KEY,\n    run_id TEXT NOT NULL,\n    workspace_id TEXT NOT NULL,\n    owner_id TEXT NOT NULL,\n    epoch INTEGER NOT NULL,\n    lease_deadline_ms TEXT NOT NULL,\n    heartbeat_ms TEXT NOT NULL,\n    state TEXT NOT NULL,\n    FOREIGN KEY (run_id) REFERENCES run(id),\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id)\n)\n        ",
+      "\nCREATE INDEX run_attempt_run_id_non_unique_index ON run_attempt(run_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS run_output(\n    id TEXT NOT NULL PRIMARY KEY,\n    run_id TEXT NOT NULL,\n    workspace_id TEXT NOT NULL,\n    run_attempt_id TEXT NOT NULL,\n    epoch INTEGER NOT NULL,\n    provider_key TEXT NOT NULL,\n    object_ref TEXT NOT NULL,\n    digest TEXT NOT NULL,\n    size INTEGER NOT NULL,\n    name TEXT NOT NULL,\n    media_type TEXT NOT NULL,\n    state TEXT NOT NULL,\n    expires_ms TEXT NOT NULL,\n    FOREIGN KEY (run_id) REFERENCES run(id),\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id),\n    FOREIGN KEY (run_attempt_id) REFERENCES run_attempt(id)\n)\n        ",
+      "\nCREATE INDEX run_output_run_id_non_unique_index ON run_output(run_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS run_execution_intent(\n    id TEXT NOT NULL PRIMARY KEY,\n    workspace_id TEXT NOT NULL,\n    actor_id TEXT NOT NULL,\n    envelope_json TEXT NOT NULL,\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id)\n)\n        ",
+      "\nCREATE TABLE IF NOT EXISTS fenced_work_item(\n    id TEXT NOT NULL PRIMARY KEY,\n    workspace_id TEXT NOT NULL,\n    queue_name TEXT NOT NULL,\n    parent_id TEXT NOT NULL,\n    state TEXT NOT NULL,\n    payload TEXT NOT NULL,\n    created_ms TEXT NOT NULL,\n    claim_owner TEXT NOT NULL,\n    claim_epoch INTEGER NOT NULL,\n    claim_deadline_ms TEXT NOT NULL,\n    cancel_requested INTEGER NOT NULL,\n    error_message TEXT NOT NULL,\n    format TEXT NOT NULL,\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id)\n)\n        ",
+      "\nCREATE INDEX fenced_work_item_queue_name_non_unique_index ON fenced_work_item(queue_name);\n",
+      "\nCREATE TABLE IF NOT EXISTS invoice_review(\n    id TEXT NOT NULL PRIMARY KEY,\n    workspace_id TEXT NOT NULL,\n    run_id TEXT NOT NULL,\n    binding_id TEXT NOT NULL,\n    binding_json TEXT NOT NULL,\n    state TEXT NOT NULL,\n    work_item_id TEXT NOT NULL,\n    decision_json TEXT NOT NULL,\n    cancellation_json TEXT NOT NULL,\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id),\n    FOREIGN KEY (run_id) REFERENCES run(id)\n)\n        ",
+      "\nCREATE UNIQUE INDEX invoice_review_binding_id_index ON invoice_review(binding_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS foundry_package_revision(\n    id TEXT NOT NULL PRIMARY KEY,\n    workspace_id TEXT NOT NULL,\n    package_id TEXT NOT NULL,\n    revision_id TEXT NOT NULL,\n    manifest_json TEXT NOT NULL,\n    source_artifact_digest TEXT NOT NULL,\n    source_inventory_json TEXT NOT NULL,\n    build_evidence_json TEXT NOT NULL,\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id)\n)\n        ",
+      "\nCREATE INDEX foundry_package_revision_workspace_id_non_unique_index ON foundry_package_revision(workspace_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS foundry_deployment_revision(\n    id TEXT NOT NULL PRIMARY KEY,\n    workspace_id TEXT NOT NULL,\n    deployment_id TEXT NOT NULL,\n    revision_id TEXT NOT NULL,\n    foundry_package_revision_id TEXT,\n    selection_json TEXT NOT NULL,\n    snapshots_json TEXT NOT NULL,\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id),\n    FOREIGN KEY (foundry_package_revision_id) REFERENCES foundry_package_revision(id)\n)\n        ",
+      "\nCREATE INDEX foundry_deployment_revision_workspace_id_non_unique_index ON foundry_deployment_revision(workspace_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS foundry_deployment_head(\n    id TEXT NOT NULL PRIMARY KEY,\n    workspace_id TEXT NOT NULL,\n    deployment_id TEXT NOT NULL,\n    active_revision_id TEXT NOT NULL,\n    lock_version INTEGER NOT NULL,\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id)\n)\n        ",
+      "\nCREATE INDEX foundry_deployment_head_workspace_id_non_unique_index ON foundry_deployment_head(workspace_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS foundry_request(\n    id TEXT NOT NULL PRIMARY KEY,\n    workspace_id TEXT NOT NULL,\n    principal_id TEXT NOT NULL,\n    operation TEXT NOT NULL,\n    idempotency_key TEXT NOT NULL,\n    request_fingerprint TEXT NOT NULL,\n    result_json TEXT NOT NULL,\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id)\n)\n        ",
+      "\nCREATE INDEX foundry_request_workspace_id_non_unique_index ON foundry_request(workspace_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS foundry_audit(\n    id TEXT NOT NULL PRIMARY KEY,\n    workspace_id TEXT NOT NULL,\n    deployment_id TEXT NOT NULL,\n    principal_id TEXT NOT NULL,\n    operation TEXT NOT NULL,\n    foundry_request_id TEXT NOT NULL,\n    from_revision_id TEXT NOT NULL,\n    to_revision_id TEXT NOT NULL,\n    created_ms TEXT NOT NULL,\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id),\n    FOREIGN KEY (foundry_request_id) REFERENCES foundry_request(id)\n)\n        ",
+      "\nCREATE INDEX foundry_audit_workspace_id_non_unique_index ON foundry_audit(workspace_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS foundry_access_grant(\n    id TEXT NOT NULL PRIMARY KEY,\n    workspace_id TEXT NOT NULL,\n    principal_id TEXT NOT NULL,\n    subject_kind TEXT NOT NULL,\n    subject_id TEXT NOT NULL,\n    operations_json TEXT NOT NULL,\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id)\n)\n        ",
+      "\nCREATE INDEX foundry_access_grant_workspace_id_non_unique_index ON foundry_access_grant(workspace_id);\n",
+      "\nCREATE INDEX foundry_access_grant_principal_id_non_unique_index ON foundry_access_grant(principal_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS foundry_source_revision(\n    id TEXT NOT NULL PRIMARY KEY,\n    workspace_id TEXT NOT NULL,\n    revision_id TEXT NOT NULL,\n    manifest_json TEXT NOT NULL,\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id)\n)\n        ",
+      "\nCREATE INDEX foundry_source_revision_workspace_id_non_unique_index ON foundry_source_revision(workspace_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS foundry_provider_revision(\n    id TEXT NOT NULL PRIMARY KEY,\n    workspace_id TEXT NOT NULL,\n    descriptor_json TEXT NOT NULL,\n    foundry_source_revision_id TEXT NOT NULL,\n    FOREIGN KEY (workspace_id) REFERENCES workspace(id),\n    FOREIGN KEY (foundry_source_revision_id) REFERENCES foundry_source_revision(id)\n)\n        ",
+      "\nCREATE INDEX foundry_provider_revision_workspace_id_non_unique_index ON foundry_provider_revision(workspace_id);\n",
+      "\nCREATE TABLE IF NOT EXISTS foundry_provider_availability(\n    id TEXT NOT NULL PRIMARY KEY,\n    foundry_provider_revision_id TEXT NOT NULL,\n    generation INTEGER NOT NULL,\n    enabled BOOLEAN NOT NULL,\n    FOREIGN KEY (foundry_provider_revision_id) REFERENCES foundry_provider_revision(id)\n)\n        "
+    ]
+  },
+  "data": {
+    "migration": {
+      "columns": [
+        "id",
+        "name"
+      ],
+      "rows": [
+        [
+          20,
+          "add_run_execution_intent"
+        ]
+      ]
+    },
+    "action_package": {
+      "columns": [
+        "id",
+        "name",
+        "directory",
+        "conda_hash",
+        "env_json"
+      ],
+      "rows": [
+        [
+          "030d9507-6ee6-4c26-8aad-98412fb65ab1",
+          "package-030d9507-6ee6-4c26-8aad-98412fb65ab1",
+          "trusted-test-source",
+          "unused",
+          "{}"
+        ]
+      ]
+    },
+    "action": {
+      "columns": [
+        "id",
+        "action_package_id",
+        "name",
+        "docs",
+        "file",
+        "lineno",
+        "input_schema",
+        "output_schema",
+        "enabled",
+        "is_consequential",
+        "managed_params_schema",
+        "options"
+      ],
+      "rows": [
+        [
+          "test-action",
+          "030d9507-6ee6-4c26-8aad-98412fb65ab1",
+          "query",
+          "trusted test",
+          "action.py",
+          1,
+          "{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\"}}}",
+          "{}",
+          1,
+          null,
+          null,
+          ""
+        ]
+      ]
+    },
+    "mcp_catalog_name": {
+      "columns": [
+        "id",
+        "namespace",
+        "name",
+        "package_name",
+        "action_name"
+      ],
+      "rows": []
+    },
+    "mcp_resource_routing": {
+      "columns": [
+        "id",
+        "routing_json"
+      ],
+      "rows": []
+    },
+    "run": {
+      "columns": [
+        "id",
+        "status",
+        "action_id",
+        "start_time",
+        "run_time",
+        "inputs",
+        "result",
+        "error_message",
+        "relative_artifacts_dir",
+        "numbered_id",
+        "request_id",
+        "run_type",
+        "robot_package_path",
+        "robot_task_name",
+        "robot_env_hash"
+      ],
+      "rows": [
+        [
+          "da1f932c-110d-4712-90ad-cb6c6ea24f35",
+          0,
+          "test-action",
+          "2026-10-25T04:15:36.527000+00:00",
+          null,
+          "{\"query\":\"legacy-clock-golden\"}",
+          null,
+          null,
+          "",
+          1,
+          "",
+          "action",
+          null,
+          null,
+          null
+        ]
+      ]
+    },
+    "counter": {
+      "columns": [
+        "id",
+        "value"
+      ],
+      "rows": [
+        [
+          "run_id",
+          1
+        ]
+      ]
+    },
+    "user_session": {
+      "columns": [
+        "id",
+        "created_at",
+        "accessed_at",
+        "external"
+      ],
+      "rows": []
+    },
+    "temp_user_session_data": {
+      "columns": [
+        "user_session_id",
+        "key",
+        "data",
+        "expires_at"
+      ],
+      "rows": []
+    },
+    "o_auth2_user_data": {
+      "columns": [
+        "user_session_id",
+        "provider",
+        "refresh_token",
+        "access_token",
+        "expires_at",
+        "token_type",
+        "scopes",
+        "metadata",
+        "code_verifier"
+      ],
+      "rows": []
+    },
+    "schedule_group": {
+      "columns": [
+        "id",
+        "name",
+        "description",
+        "parent_id",
+        "color",
+        "created_at"
+      ],
+      "rows": []
+    },
+    "schedule": {
+      "columns": [
+        "id",
+        "name",
+        "description",
+        "action_id",
+        "execution_mode",
+        "work_item_queue",
+        "inputs_json",
+        "schedule_type",
+        "cron_expression",
+        "interval_seconds",
+        "weekday_config_json",
+        "once_at",
+        "timezone",
+        "enabled",
+        "created_at",
+        "updated_at",
+        "last_run_at",
+        "next_run_at",
+        "skip_if_running",
+        "max_concurrent",
+        "timeout_seconds",
+        "retry_enabled",
+        "retry_max_attempts",
+        "retry_delay_seconds",
+        "retry_backoff_multiplier",
+        "rate_limit_enabled",
+        "rate_limit_max_per_hour",
+        "rate_limit_max_per_day",
+        "depends_on_schedule_id",
+        "dependency_mode",
+        "notify_on_failure",
+        "notify_on_success",
+        "notification_webhook_url",
+        "notification_email",
+        "group_id",
+        "tags_json",
+        "priority"
+      ],
+      "rows": []
+    },
+    "schedule_execution": {
+      "columns": [
+        "id",
+        "schedule_id",
+        "run_id",
+        "work_item_id",
+        "scheduled_time",
+        "actual_start_time",
+        "actual_end_time",
+        "duration_ms",
+        "status",
+        "attempt_number",
+        "error_message",
+        "error_code",
+        "skip_reason",
+        "result_json",
+        "notification_sent",
+        "notification_error"
+      ],
+      "rows": []
+    },
+    "trigger": {
+      "columns": [
+        "id",
+        "name",
+        "description",
+        "action_id",
+        "execution_mode",
+        "work_item_queue",
+        "inputs_template_json",
+        "trigger_type",
+        "webhook_secret",
+        "webhook_method",
+        "enabled",
+        "created_at",
+        "updated_at",
+        "last_triggered_at",
+        "trigger_count",
+        "rate_limit_enabled",
+        "rate_limit_max_per_minute"
+      ],
+      "rows": []
+    },
+    "trigger_invocation": {
+      "columns": [
+        "id",
+        "trigger_id",
+        "invoked_at",
+        "source_ip",
+        "payload_json",
+        "headers_json",
+        "status",
+        "run_id",
+        "work_item_id",
+        "error_message"
+      ],
+      "rows": []
+    },
+    "workspace": {
+      "columns": [
+        "id",
+        "state",
+        "lock_version"
+      ],
+      "rows": [
+        [
+          "f967bfb8-5e20-453c-a9d9-5903a38e0304",
+          "active",
+          0
+        ]
+      ]
+    },
+    "run_admission": {
+      "columns": [
+        "id",
+        "workspace_id",
+        "deployment_id",
+        "snapshot_json"
+      ],
+      "rows": [
+        [
+          "818ce338601f69d0b19d31a79c5ceb0d8d96fbef1aa87e46b12b594e4408030b",
+          "f967bfb8-5e20-453c-a9d9-5903a38e0304",
+          "06b8081e-ba28-4324-99c0-946c484c386e",
+          "{\"action_id\":\"test-action\",\"capability\":{\"capability_id\":\"query\",\"package_revision\":{\"package_id\":\"030d9507-6ee6-4c26-8aad-98412fb65ab1\",\"revision_id\":\"sha256:1111111111111111111111111111111111111111111111111111111111111111\",\"workspace_id\":\"f967bfb8-5e20-453c-a9d9-5903a38e0304\"}},\"capability_schema_digest\":\"sha256:7777777777777777777777777777777777777777777777777777777777777777\",\"deployment\":{\"deployment_id\":\"06b8081e-ba28-4324-99c0-946c484c386e\",\"revision_id\":\"sha256:2222222222222222222222222222222222222222222222222222222222222222\",\"workspace_id\":\"f967bfb8-5e20-453c-a9d9-5903a38e0304\"},\"output_provider\":{\"provider_profile_id\":\"80ef41a5-c3df-462e-8e37-c6fc3140f4e4\",\"revision_id\":\"sha256:6666666666666666666666666666666666666666666666666666666666666666\",\"workspace_id\":\"f967bfb8-5e20-453c-a9d9-5903a38e0304\"},\"policy\":{\"policy_id\":\"ea997929-6507-4787-815d-6515a468e390\",\"revision_id\":\"sha256:5555555555555555555555555555555555555555555555555555555555555555\",\"workspace_id\":\"f967bfb8-5e20-453c-a9d9-5903a38e0304\"},\"runtime_kind\":\"test/no-external-effects\",\"runtime_plan\":{\"package_revision\":{\"package_id\":\"030d9507-6ee6-4c26-8aad-98412fb65ab1\",\"revision_id\":\"sha256:1111111111111111111111111111111111111111111111111111111111111111\",\"workspace_id\":\"f967bfb8-5e20-453c-a9d9-5903a38e0304\"},\"plan_digest\":\"sha256:3333333333333333333333333333333333333333333333333333333333333333\"},\"worker\":{\"revision_id\":\"sha256:4444444444444444444444444444444444444444444444444444444444444444\",\"worker_profile_id\":\"722a0f10-40e2-4009-b46a-fb9402cb68f6\",\"workspace_id\":\"f967bfb8-5e20-453c-a9d9-5903a38e0304\"}}"
+        ]
+      ]
+    },
+    "run_access_grant": {
+      "columns": [
+        "id",
+        "workspace_id",
+        "deployment_id",
+        "principal_id",
+        "operations_json"
+      ],
+      "rows": [
+        [
+          "3338befa2da0608453d3e730dd4cb343221ff3545e55c85c7dd5f2c41bd0205a",
+          "f967bfb8-5e20-453c-a9d9-5903a38e0304",
+          "06b8081e-ba28-4324-99c0-946c484c386e",
+          "8dcc5b21-e61e-43bd-a1d3-f62702ce9216",
+          "[\"cancel\",\"execute\",\"read\"]"
+        ]
+      ]
+    },
+    "run_pin": {
+      "columns": [
+        "id",
+        "run_id",
+        "workspace_id",
+        "run_admission_id",
+        "admission_principal_id",
+        "request_fingerprint",
+        "idempotency_id",
+        "idempotency_key",
+        "current_attempt_id",
+        "epoch",
+        "cancel_requested",
+        "recovery_epoch",
+        "recovery_receipt"
+      ],
+      "rows": [
+        [
+          "da1f932c-110d-4712-90ad-cb6c6ea24f35",
+          "da1f932c-110d-4712-90ad-cb6c6ea24f35",
+          "f967bfb8-5e20-453c-a9d9-5903a38e0304",
+          "818ce338601f69d0b19d31a79c5ceb0d8d96fbef1aa87e46b12b594e4408030b",
+          "8dcc5b21-e61e-43bd-a1d3-f62702ce9216",
+          "834bbe720d2728a0c5b2e99c5c5efadc0e4d00216438773e9210da29d8a2ba1a",
+          "f1f2b6cd9e4844b6a059b3f4e8ae6b9862b55f578393024ca8cd18cd2a9e44e2",
+          "legacy-golden",
+          "",
+          0,
+          0,
+          -1,
+          ""
+        ]
+      ]
+    },
+    "run_attempt": {
+      "columns": [
+        "id",
+        "run_id",
+        "workspace_id",
+        "owner_id",
+        "epoch",
+        "lease_deadline_ms",
+        "heartbeat_ms",
+        "state"
+      ],
+      "rows": []
+    },
+    "run_output": {
+      "columns": [
+        "id",
+        "run_id",
+        "workspace_id",
+        "run_attempt_id",
+        "epoch",
+        "provider_key",
+        "object_ref",
+        "digest",
+        "size",
+        "name",
+        "media_type",
+        "state",
+        "expires_ms"
+      ],
+      "rows": []
+    },
+    "run_execution_intent": {
+      "columns": [
+        "id",
+        "workspace_id",
+        "actor_id",
+        "envelope_json"
+      ],
+      "rows": []
+    },
+    "fenced_work_item": {
+      "columns": [
+        "id",
+        "workspace_id",
+        "queue_name",
+        "parent_id",
+        "state",
+        "payload",
+        "created_ms",
+        "claim_owner",
+        "claim_epoch",
+        "claim_deadline_ms",
+        "cancel_requested",
+        "error_message",
+        "format"
+      ],
+      "rows": []
+    },
+    "invoice_review": {
+      "columns": [
+        "id",
+        "workspace_id",
+        "run_id",
+        "binding_id",
+        "binding_json",
+        "state",
+        "work_item_id",
+        "decision_json",
+        "cancellation_json"
+      ],
+      "rows": []
+    },
+    "foundry_package_revision": {
+      "columns": [
+        "id",
+        "workspace_id",
+        "package_id",
+        "revision_id",
+        "manifest_json",
+        "source_artifact_digest",
+        "source_inventory_json",
+        "build_evidence_json"
+      ],
+      "rows": []
+    },
+    "foundry_deployment_revision": {
+      "columns": [
+        "id",
+        "workspace_id",
+        "deployment_id",
+        "revision_id",
+        "foundry_package_revision_id",
+        "selection_json",
+        "snapshots_json"
+      ],
+      "rows": []
+    },
+    "foundry_deployment_head": {
+      "columns": [
+        "id",
+        "workspace_id",
+        "deployment_id",
+        "active_revision_id",
+        "lock_version"
+      ],
+      "rows": []
+    },
+    "foundry_request": {
+      "columns": [
+        "id",
+        "workspace_id",
+        "principal_id",
+        "operation",
+        "idempotency_key",
+        "request_fingerprint",
+        "result_json"
+      ],
+      "rows": []
+    },
+    "foundry_audit": {
+      "columns": [
+        "id",
+        "workspace_id",
+        "deployment_id",
+        "principal_id",
+        "operation",
+        "foundry_request_id",
+        "from_revision_id",
+        "to_revision_id",
+        "created_ms"
+      ],
+      "rows": []
+    },
+    "foundry_access_grant": {
+      "columns": [
+        "id",
+        "workspace_id",
+        "principal_id",
+        "subject_kind",
+        "subject_id",
+        "operations_json"
+      ],
+      "rows": []
+    },
+    "foundry_source_revision": {
+      "columns": [
+        "id",
+        "workspace_id",
+        "revision_id",
+        "manifest_json"
+      ],
+      "rows": []
+    },
+    "foundry_provider_revision": {
+      "columns": [
+        "id",
+        "workspace_id",
+        "descriptor_json",
+        "foundry_source_revision_id"
+      ],
+      "rows": []
+    },
+    "foundry_provider_availability": {
+      "columns": [
+        "id",
+        "foundry_provider_revision_id",
+        "generation",
+        "enabled"
+      ],
+      "rows": []
+    }
+  }
+}

@@ -441,6 +441,7 @@ CREATE TABLE IF NOT EXISTS run_pin(
     cancel_requested INTEGER NOT NULL,
     recovery_epoch INTEGER NOT NULL,
     recovery_receipt TEXT NOT NULL,
+    state_updated_ms TEXT NOT NULL,
     FOREIGN KEY (run_id) REFERENCES run(id),
     FOREIGN KEY (workspace_id) REFERENCES workspace(id),
     FOREIGN KEY (run_admission_id) REFERENCES run_admission(id)
@@ -514,6 +515,31 @@ CREATE TABLE IF NOT EXISTS run_execution_intent(
     envelope_json TEXT NOT NULL,
     FOREIGN KEY (workspace_id) REFERENCES workspace(id)
 )
+''',
+
+
+'''
+CREATE TABLE IF NOT EXISTS run_task_receipt(
+    id TEXT NOT NULL PRIMARY KEY,
+    run_id TEXT NOT NULL,
+    workspace_id TEXT NOT NULL,
+    admission_principal_id TEXT NOT NULL,
+    receipt_version TEXT NOT NULL,
+    original_method TEXT NOT NULL,
+    original_tool_name TEXT NOT NULL,
+    result_contract_version TEXT NOT NULL,
+    invocation_fingerprint TEXT NOT NULL,
+    created_ms TEXT NOT NULL,
+    ttl_ms TEXT NOT NULL,
+    ttl_policy_id TEXT NOT NULL,
+    FOREIGN KEY (run_id) REFERENCES run(id),
+    FOREIGN KEY (workspace_id) REFERENCES workspace(id)
+)
+''',
+
+
+'''
+CREATE UNIQUE INDEX run_task_receipt_run_id_index ON run_task_receipt(run_id);
 ''',
 
 

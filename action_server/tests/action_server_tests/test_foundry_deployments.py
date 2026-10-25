@@ -24,7 +24,6 @@ from actions.server._models import (
     Counter,
     Run,
     get_all_model_classes,
-    get_model_db_rules,
 )
 from actions.server.deployments.foundry_repository import FoundryRepository
 from actions.server.deployments.foundry_service import FoundryDeploymentService
@@ -237,13 +236,12 @@ def _runtime_database(
 ) -> Iterator[Database]:
     """Upgrade the actual Runtime schema16 fixture through shared migration17."""
     db = Database(path)
-    legacy_classes = [
-        cls for cls in get_all_model_classes() if not cls.__name__.startswith("Foundry")
-    ]
+    from action_server_tests.foundry_historical import create_historical_schema
+
     with db.connect():
-        db.initialize(legacy_classes)
+        db.initialize(get_all_model_classes())
         with db.transaction():
-            db.create_tables(get_model_db_rules())
+            create_historical_schema(db, 16)
             db.insert(Migration(16, MIGRATION_ID_TO_NAME[16]))
             db.insert(Workspace(str(workspace_id.root), "active", 0))
             db.insert(Counter(RUN_ID_COUNTER, 0))

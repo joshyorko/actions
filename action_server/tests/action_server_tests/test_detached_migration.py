@@ -22,7 +22,7 @@ def test_supported_upgrade_paths_preserve_legacy_runs(tmp_path, intermediate):
         assert migrate_db(path, intermediate)
         with db.connect():
             assert "run_execution_intent" not in db.list_table_names()
-    assert migrate_db(path, 20)
+    assert migrate_db(path, 21)
     with db.connect():
         db.initialize(get_all_model_classes())
         assert not db.all(RunExecutionIntent) and not db.all(RunPin)

@@ -1,0 +1,96 @@
++ poetry run pytest tests -m not integration_test -q --junitxml=/workspace/actions-recovery-327/evidence/a30-frozen-portable/tests.xml --robocorp-log-output=/workspace/actions-recovery-327/evidence/a30-frozen-portable/log --basetemp=/workspace/actions-recovery-327/evidence/a30-frozen-portable/fixtures (in /workspace/actions-recovery-327/frozen-a30/source/action_server)
+...........................ssss..ss..................................... [  2%]
+........................................................................ [  4%]
+........................................................................ [  6%]
+........................................................................ [  9%]
+........................................................................ [ 11%]
+........................s............................................... [ 13%]
+.....s.................................................................. [ 15%]
+........................................................................ [ 18%]
+........................................................................ [ 20%]
+........................................................................ [ 22%]
+........................................................................ [ 25%]
+........................................................................ [ 27%]
+........................................................................ [ 29%]
+........................................................................ [ 31%]
+........................................................................ [ 34%]
+........................................................................ [ 36%]
+..........................................................ss............ [ 38%]
+........................................................................ [ 41%]
+....................................................ssssssss............ [ 43%]
+........................................................................ [ 45%]
+................................................ssss.................... [ 47%]
+........................................................................ [ 50%]
+...................................................................sssss [ 52%]
+s....................................................................... [ 54%]
+........................................................................ [ 56%]
+........................................................................ [ 59%]
+........................................................................ [ 61%]
+........................................................................ [ 63%]
+........................................................................ [ 66%]
+........................................................................ [ 68%]
+................................................sss..................... [ 70%]
+............................................................s........... [ 72%]
+........................................................................ [ 75%]
+........................................................................ [ 77%]
+....................................s................................... [ 79%]
+.............................s.......................................... [ 82%]
+........................................................................ [ 84%]
+........................................................................ [ 86%]
+........................................................................ [ 88%]
+................F....................................................... [ 91%]
+........................................................................ [ 93%]
+........................................................................ [ 95%]
+........................................................................ [ 97%]
+................................................................         [100%]
+=================================== FAILURES ===================================
+__ test_template_package_script_is_executable_for_direct_workflow_invocation ___
+
+    def test_template_package_script_is_executable_for_direct_workflow_invocation():
+        script = REPO / "templates/packaging/create-templates-package.sh"
+        relative_script = script.relative_to(REPO).as_posix()
+>       tracked_mode = subprocess.run(
+            ["git", "ls-files", "--stage", "--", relative_script],
+            cwd=REPO,
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.split(maxsplit=1)[0]
+E       IndexError: list index out of range
+
+tests/contract_tests/test_active_contracts.py:360: IndexError
+=============================== warnings summary ===============================
+tests/action_server_tests/test_dakota_workitems_native_acceptance_harness.py: 1 warning
+tests/action_server_tests/test_rcc_runtime_adapter.py: 4 warnings
+tests/action_server_tests/test_rcc_runtime_source_snapshots.py: 8 warnings
+  /workspace/actions-recovery-327/frozen-a30/source/action_server/src/actions/server/_action_package_handler.py:90: DeprecationWarning: The 'warn' method is deprecated, use 'warning' instead
+    log.warn(
+
+tests/action_server_tests/test_mcp_tunnel_origin_scope.py::test_tunnel_verification_uses_verified_loopback_tls_and_mcp_auth
+  /workspace/actions-recovery-327/frozen-a30/source/action_server/.venv/lib/python3.12/site-packages/websockets/legacy/__init__.py:6: DeprecationWarning: websockets.legacy is deprecated; see https://websockets.readthedocs.io/en/stable/howto/upgrade.html for upgrade instructions
+    warnings.warn(  # deprecated in 14.0 - 2024-11-09
+
+tests/action_server_tests/test_mcp_tunnel_origin_scope.py::test_tunnel_verification_uses_verified_loopback_tls_and_mcp_auth
+  /workspace/actions-recovery-327/frozen-a30/source/action_server/.venv/lib/python3.12/site-packages/uvicorn/protocols/websockets/websockets_impl.py:17: DeprecationWarning: websockets.server.WebSocketServerProtocol is deprecated
+    from websockets.server import WebSocketServerProtocol
+
+tests/action_server_tests/test_shutdown_response_order.py::test_rejected_shutdown_request_does_not_interrupt[POST-timeout=invalid-422]
+  /workspace/actions-recovery-327/frozen-a30/source/action_server/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py:59: DeprecationWarning: 'HTTP_422_UNPROCESSABLE_ENTITY' is deprecated. Use 'HTTP_422_UNPROCESSABLE_CONTENT' instead.
+    response = await handler(conn, exc)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /workspace/actions-recovery-327/evidence/a30-frozen-portable/tests.xml -
+=========================== short test summary info ============================
+FAILED tests/contract_tests/test_active_contracts.py::test_template_package_script_is_executable_for_direct_workflow_invocation
+1 failed, 3125 passed, 34 skipped, 290 deselected, 16 warnings in 2246.92s (0:37:26)
+Log (html): /workspace/actions-recovery-327/evidence/a30-frozen-portable/log/log.html
+Traceback (most recent call last):
+  File "/workspace/actions-recovery-327/frozen-a30/package-command.py", line 13, in <module>
+    toolkit.poetry(package, *arguments)
+  File "/workspace/actions-recovery-327/frozen-a30/source/developer/toolkit.py", line 76, in poetry
+    run(["poetry", *arguments], REPOSITORY_ROOT / package)
+  File "/workspace/actions-recovery-327/frozen-a30/source/developer/toolkit.py", line 72, in run
+    subprocess.run(command, cwd=cwd, env=environment, check=True)
+  File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['poetry', 'run', 'pytest', 'tests', '-m', 'not integration_test', '-q', '--junitxml=/workspace/actions-recovery-327/evidence/a30-frozen-portable/tests.xml', '--robocorp-log-output=/workspace/actions-recovery-327/evidence/a30-frozen-portable/log', '--basetemp=/workspace/actions-recovery-327/evidence/a30-frozen-portable/fixtures']' returned non-zero exit status 1.

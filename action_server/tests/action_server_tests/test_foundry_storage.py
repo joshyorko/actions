@@ -9,8 +9,8 @@ from uuid import uuid4
 import pytest
 
 from actions.server._database import Database
-from actions.server._models import get_all_model_classes, get_model_db_rules
-from actions.server.migrations import CURRENT_VERSION, Migration, migrate_db
+from actions.server._models import get_all_model_classes
+from actions.server.migrations import Migration, migrate_db
 from actions.server.run_outputs.models import Workspace
 
 
@@ -36,15 +36,13 @@ def legacy(request, tmp_path):
     try:
         db = Database(location)
         with db.connect():
-            db.initialize(
-                [
-                    cls
-                    for cls in get_all_model_classes()
-                    if not cls.__name__.startswith("Foundry")
-                ]
-            )
+            db.initialize(get_all_model_classes())
             with db.transaction():
-                db.create_tables(get_model_db_rules())
+                from action_server_tests.foundry_historical import (
+                    create_historical_schema,
+                )
+
+                create_historical_schema(db, 16)
                 db.insert(Migration(16, "add_invoice_reviews"))
                 db.insert(workspace)
         yield location, workspace
@@ -66,7 +64,6 @@ def test_upgrade_is_empty_and_shared_records_survive_a_fresh_interpreter(legacy)
     )
 
     location, workspace = legacy
-    assert CURRENT_VERSION == 18
     assert migrate_db(location)
     db = Database(location)
     with db.connect():

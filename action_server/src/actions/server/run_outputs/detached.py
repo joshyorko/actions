@@ -19,6 +19,7 @@ from actions.server.run_outputs.service import (
     AccessDenied,
     FenceRejected,
     RunOutputControlPlane,
+    _advance_lifecycle,
     _canonical,
     _insert,
     _lock_run,
@@ -235,6 +236,9 @@ class DetachedActions:
                 if run.status != RunStatus.NOT_RUN or run.result:
                     raise FenceRejected("unclaimed cancellation evidence differs")
                 _update(self.db, Run, run_id, {"status": RunStatus.CANCELLED})
+                if pin.cancel_requested:
+                    # A prior intent is distinct from this terminal confirmation.
+                    _advance_lifecycle(self.db, run_id)
             return accepted
 
 

@@ -42,6 +42,7 @@ from actions.server.run_outputs.service import (
     AccessDenied,
     FenceRejected,
     RunOutputService,
+    _advance_lifecycle,
     _canonical,
     _one,
     _transaction,
@@ -197,6 +198,7 @@ class GeneratedRccExecution:
                 fence.run_id,
                 {"result": _canonical(current, _JOURNAL_LIMIT)},
             )
+            _advance_lifecycle(self.outputs.db, fence.run_id)
         # A read-after-write catches lost or conflicting journal updates before
         # any generated code is started. If the commit acknowledgement is
         # uncertain, this call does not spawn and a later call remains blocked.
@@ -315,6 +317,7 @@ class GeneratedRccExecution:
                 fence.run_id,
                 {"result": _canonical(current, _JOURNAL_LIMIT)},
             )
+            _advance_lifecycle(self.outputs.db, fence.run_id)
 
         output_payloads = (
             ("generated-action-result.json", "application/json", result_bytes),
