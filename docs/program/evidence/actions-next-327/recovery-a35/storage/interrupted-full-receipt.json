@@ -1,0 +1,27 @@
+{
+  "status": "FAIL",
+  "group": "portable",
+  "base_source": "6cf0ee25eed23c1814a5b0589047545b57ca5e33",
+  "runtime": "1.1.0a35",
+  "scope": "frozen 6cf0ee25eed23c1814a5b0589047545b57ca5e33; independent locked Poetry environment",
+  "synthetic_auth": true,
+  "engine": "prepared source Runtime",
+  "renderer": "not exercised",
+  "cleanup": "PASS",
+  "command": [
+    "/workspace/actions-recovery-327/run-prepared",
+    "python",
+    "/workspace/actions-recovery-327/frozen-a35/package-command.py",
+    "action_server",
+    "run",
+    "pytest",
+    "tests",
+    "-m",
+    "not integration_test",
+    "-q",
+    "--junitxml=/workspace/actions-recovery-327/evidence/a35-frozen-portable/tests.xml",
+    "--robocorp-log-output=/workspace/actions-recovery-327/evidence/a35-frozen-portable/log",
+    "--basetemp=/workspace/actions-recovery-327/evidence/a35-frozen-portable/fixtures"
+  ],
+  "exit_code": -2
+}

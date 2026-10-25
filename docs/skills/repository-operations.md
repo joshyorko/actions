@@ -5468,3 +5468,22 @@ direct SDK adapter tests do not exercise its method/name inference. Current
 Task get/cancel/update bind Mcp-Name to params.taskId. Keep exact mismatch and
 duplicate-header rejection, bounded identifiers and telemetry redaction; do not
 remove routing headers to work around a gateway mismatch.
+
+### Bounded local test storage
+
+Before starting a long local gate, run scripts/check_test_disk_budget.py with
+an explicit --path and positive --required-free-bytes budget; use a unique
+--report path and require exit zero before starting fixtures or pytest. Exit2
+means insufficient space. This point-in-time check is not a reservation: monitor
+concurrent writers and stop the exact owned test process before exhaustion.
+Preserve an interrupted run as failed, including its original stdout and receipt;
+never infer passing counts from partial progress or reuse its receipt for a retry.
+
+Pytest tracing can create multi-gigabyte raw .robolog groups. When diagnostic
+instrumentation is not itself the gate, -p no:robocorp_log_pytest disables that
+plugin; preserve the complete test selection, stdout, JUnit cases and explicit
+skip/deselection accounting. Do not silently narrow cases to fit storage.
+Archive only completed task-owned traces after checking regular single-link
+files, no open handles and unchanged identity. Retain readable HTML and receipts;
+verify decompressed SHA256 before replacing raw files with gzip, and record both
+hashes and paths. Compression does not make local evidence remotely durable.
