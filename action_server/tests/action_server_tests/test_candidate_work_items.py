@@ -1,6 +1,8 @@
 """Runtime development must consume an installed candidate, not an import overlay."""
 
+import re
 import sys
+import tomllib
 from importlib.metadata import distribution
 from pathlib import Path
 
@@ -20,13 +22,22 @@ def test_runtime_uses_installed_fenced_sdk_candidate():
 def test_runtime_prerelease_retains_numeric_release_tuple():
     from actions.server import __version__, version_info
 
-    assert __version__ == "1.1.0a37"
+    declared = tomllib.loads(
+        (Path(__file__).parents[2] / "pyproject.toml").read_text()
+    )["tool"]["poetry"]["version"]
+    assert re.fullmatch(r"1\.1\.0a\d+", declared)
+    assert __version__ == declared
+    assert distribution("actions-runtime").version == declared
     assert version_info == [1, 1, 0]
 
 
 def test_runtime_uses_installed_canvas_core_candidate():
     package = distribution("actions-core")
-    assert package.version == "1.1.0a3"
+    declared = tomllib.loads(
+        (Path(__file__).parents[3] / "actions" / "pyproject.toml").read_text()
+    )["tool"]["poetry"]["version"]
+    assert re.fullmatch(r"1\.1\.0a\d+", declared)
+    assert package.version == declared
     import actions.canvas_contract
     from actions.canvas_contract import validate_canvas_spec
 
