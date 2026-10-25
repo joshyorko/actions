@@ -1,0 +1,12 @@
+[
+  "actions/src/actions/canvas_contract/_models.py",
+  "actions/src/actions/canvas_contract/__init__.py",
+  "actions/tests/actions_core_tests/mcp_tests/test_canvas_contract_v2.py",
+  "docs/contracts/canvas/canvas-spec-v2.schema.json",
+  "docs/contracts/canvas/fixtures/semantic-v2.fixture.json",
+  "docs/contracts/canvas/fixtures/check-semantic-v2-schema.py",
+  "action_server/frontend/apps/canvas-view/src/semantic-renderer/types.ts",
+  "action_server/frontend/apps/canvas-view/src/semantic-renderer/mcp-bridge.ts",
+  "action_server/frontend/apps/canvas-view/src/semantic-renderer/mcp-bridge-v2.test.tsx",
+  "action_server/frontend/apps/canvas-view/src/semantic-renderer/generic-layout.test.tsx"
+]

@@ -55,7 +55,7 @@ export interface SemanticTextNode {
 export interface SemanticStackNode {
     type: "stack";
     id: string;
-    children: CanvasNode[];
+    children: CanvasNodeV1[];
 }
 
 export interface SemanticFormNode {
@@ -87,7 +87,7 @@ export interface SemanticArtifactNode {
     label: string;
 }
 
-export type CanvasNode =
+export type CanvasNodeV1 =
     | SemanticStackNode
     | SemanticTextNode
     | SemanticFormNode
@@ -95,14 +95,66 @@ export type CanvasNode =
     | SemanticStatusNode
     | SemanticArtifactNode;
 
-/** TypeScript projection of the canonical actions.canvas-spec/v1 JSON shape. */
-export interface CanvasSpecDocument {
-    schemaVersion: "actions.canvas-spec/v1";
+export interface SemanticStackNodeV2 {
+    type: "stack";
+    id: string;
+    children: CanvasNodeV2[];
+}
+export interface SemanticCardNode {
+    type: "card";
+    id: string;
+    title: string;
+    children: CanvasNodeV2[];
+}
+export interface SemanticChartNode {
+    type: "chart";
+    id: string;
+    title: string;
+    bindingId: string;
+    rowsKey: string;
+    chartType: "bar" | "line";
+    labelKey: string;
+    valueKey: string;
+}
+export interface SemanticLogNode {
+    type: "log";
+    id: string;
+    title: string;
+    bindingId: string;
+    rowsKey: string;
+    messageKey: string;
+}
+export interface SemanticInspectorNode {
+    type: "inspector";
+    id: string;
+    title: string;
+    bindingId: string;
+    valueKey: string;
+    fields: Array<{ key: string; label: string }>;
+}
+export type CanvasNodeV2 =
+    | Exclude<CanvasNodeV1, SemanticStackNode>
+    | SemanticStackNodeV2
+    | SemanticCardNode
+    | SemanticChartNode
+    | SemanticLogNode
+    | SemanticInspectorNode;
+export type CanvasNode = CanvasNodeV2;
+interface CanvasSpecEnvelope {
     title: string;
     visibility: CanvasVisibility;
     bindingIds: string[];
-    root: CanvasNode;
 }
+export interface CanvasSpecDocumentV1 extends CanvasSpecEnvelope {
+    schemaVersion: "actions.canvas-spec/v1";
+    root: CanvasNodeV1;
+}
+export interface CanvasSpecDocumentV2 extends CanvasSpecEnvelope {
+    schemaVersion: "actions.canvas-spec/v2";
+    root: CanvasNodeV2;
+}
+/** Explicit version dispatch; v1 syntax never admits v2 nodes. */
+export type CanvasSpecDocument = CanvasSpecDocumentV1 | CanvasSpecDocumentV2;
 
 export interface SemanticBindingStatus {
     state: "loading" | "success" | "empty" | "error";

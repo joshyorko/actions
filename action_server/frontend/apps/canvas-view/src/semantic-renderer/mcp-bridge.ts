@@ -1,11 +1,13 @@
 import type {
     CanvasNode,
+    CanvasNodeV1,
     CanvasSpecDocument,
     SemanticFieldType,
     SemanticRendererAdapters,
 } from "./types";
 
 const CANVAS_SPEC_VERSION = "actions.canvas-spec/v1";
+const CANVAS_SPEC_VERSION_V2 = "actions.canvas-spec/v2";
 const MAX_SPEC_BYTES = 64 * 1024;
 const IDENTIFIER_PATTERN = /^[A-Za-z][A-Za-z0-9_-]{0,63}$/u;
 const UUID_PATTERN =
@@ -46,7 +48,45 @@ function isPlainRecord(value: unknown): value is Record<string, unknown> {
         return false;
     }
     const prototype = Object.getPrototypeOf(value);
-    return prototype === Object.prototype || prototype === null;
+    return (
+        (prototype === Object.prototype || prototype === null) &&
+        Reflect.ownKeys(value).every((key) => {
+            const descriptor = Object.getOwnPropertyDescriptor(value, key);
+            return (
+                typeof key === "string" &&
+                descriptor !== undefined &&
+                "value" in descriptor &&
+                descriptor.enumerable
+            );
+        })
+    );
+}
+
+function isPlainArray(value: unknown): value is unknown[] {
+    if (
+        !Array.isArray(value) ||
+        Object.getPrototypeOf(value) !== Array.prototype
+    )
+        return false;
+    const keys = Reflect.ownKeys(value);
+    return (
+        keys.length === value.length + 1 &&
+        keys.every((key) => {
+            if (key === "length") return true;
+            if (
+                typeof key !== "string" ||
+                !/^(0|[1-9][0-9]*)$/u.test(key) ||
+                Number(key) >= value.length
+            )
+                return false;
+            const descriptor = Object.getOwnPropertyDescriptor(value, key);
+            return (
+                descriptor !== undefined &&
+                "value" in descriptor &&
+                descriptor.enumerable
+            );
+        })
+    );
 }
 
 function hasOwn(value: object, key: PropertyKey): boolean {
@@ -75,7 +115,14 @@ function isBoundedText(
 ): value is string {
     if (typeof value !== "string") return false;
     const length = codePointLength(value);
-    return length >= minimum && length <= maximum;
+    return (
+        length >= minimum &&
+        length <= maximum &&
+        Array.from(value).every((character) => {
+            const point = character.codePointAt(0)!;
+            return point < 0xd800 || point > 0xdfff;
+        })
+    );
 }
 
 function isIdentifier(value: unknown): value is string {
@@ -118,6 +165,8 @@ interface NodeValidationState {
     nodeIds: Set<string>;
     bindingIds: Set<string>;
     totalNodes: number;
+    version: "actions.canvas-spec/v1" | "actions.canvas-spec/v2";
+    referencedBindings: Set<string>;
 }
 
 function parseNode(
@@ -138,11 +187,14 @@ function parseNode(
     state.nodeIds.add(value.id);
     state.totalNodes += 1;
 
+    if ("bindingId" in value && typeof value.bindingId === "string") {
+        state.referencedBindings.add(value.bindingId);
+    }
     switch (value.type) {
         case "stack": {
             if (
                 !hasExactKeys(value, ["type", "id", "children"]) ||
-                !Array.isArray(value.children) ||
+                !isPlainArray(value.children) ||
                 value.children.length > 128
             ) {
                 throw new Error("Invalid Canvas stack.");
@@ -153,6 +205,132 @@ function parseNode(
                 children: value.children.map((child) =>
                     parseNode(child, depth + 1, state),
                 ),
+            };
+        }
+        case "card": {
+            if (
+                state.version !== CANVAS_SPEC_VERSION_V2 ||
+                !hasExactKeys(value, ["type", "id", "title", "children"]) ||
+                !isBoundedText(value.title, 1, 256) ||
+                !isPlainArray(value.children) ||
+                value.children.length > 128
+            ) {
+                throw new Error("Invalid Canvas card.");
+            }
+            return {
+                type: "card",
+                id: value.id,
+                title: value.title,
+                children: value.children.map((child) =>
+                    parseNode(child, depth + 1, state),
+                ),
+            };
+        }
+        case "chart": {
+            if (
+                state.version !== CANVAS_SPEC_VERSION_V2 ||
+                !hasExactKeys(value, [
+                    "type",
+                    "id",
+                    "title",
+                    "bindingId",
+                    "rowsKey",
+                    "chartType",
+                    "labelKey",
+                    "valueKey",
+                ]) ||
+                !isBoundedText(value.title, 1, 256) ||
+                !isIdentifier(value.bindingId) ||
+                !state.bindingIds.has(value.bindingId) ||
+                !isIdentifier(value.rowsKey) ||
+                !isIdentifier(value.labelKey) ||
+                !isIdentifier(value.valueKey) ||
+                (value.chartType !== "bar" && value.chartType !== "line")
+            ) {
+                throw new Error("Invalid Canvas chart.");
+            }
+            return {
+                type: "chart",
+                id: value.id,
+                title: value.title,
+                bindingId: value.bindingId,
+                rowsKey: value.rowsKey,
+                chartType: value.chartType,
+                labelKey: value.labelKey,
+                valueKey: value.valueKey,
+            };
+        }
+        case "log": {
+            if (
+                state.version !== CANVAS_SPEC_VERSION_V2 ||
+                !hasExactKeys(value, [
+                    "type",
+                    "id",
+                    "title",
+                    "bindingId",
+                    "rowsKey",
+                    "messageKey",
+                ]) ||
+                !isBoundedText(value.title, 1, 256) ||
+                !isIdentifier(value.bindingId) ||
+                !state.bindingIds.has(value.bindingId) ||
+                !isIdentifier(value.rowsKey) ||
+                !isIdentifier(value.messageKey)
+            ) {
+                throw new Error("Invalid Canvas log.");
+            }
+            return {
+                type: "log",
+                id: value.id,
+                title: value.title,
+                bindingId: value.bindingId,
+                rowsKey: value.rowsKey,
+                messageKey: value.messageKey,
+            };
+        }
+        case "inspector": {
+            if (
+                state.version !== CANVAS_SPEC_VERSION_V2 ||
+                !hasExactKeys(value, [
+                    "type",
+                    "id",
+                    "title",
+                    "bindingId",
+                    "valueKey",
+                    "fields",
+                ]) ||
+                !isBoundedText(value.title, 1, 256) ||
+                !isIdentifier(value.bindingId) ||
+                !state.bindingIds.has(value.bindingId) ||
+                !isIdentifier(value.valueKey) ||
+                !isPlainArray(value.fields) ||
+                value.fields.length < 1 ||
+                value.fields.length > 16
+            ) {
+                throw new Error("Invalid Canvas inspector.");
+            }
+            const fields = value.fields.map((field) => {
+                if (
+                    !isPlainRecord(field) ||
+                    !hasExactKeys(field, ["key", "label"]) ||
+                    !isIdentifier(field.key) ||
+                    !isBoundedText(field.label, 1, 256)
+                ) {
+                    throw new Error("Invalid Canvas inspector field.");
+                }
+                return { key: field.key, label: field.label };
+            });
+            if (
+                new Set(fields.map((field) => field.key)).size !== fields.length
+            )
+                throw new Error("Duplicate inspector fields.");
+            return {
+                type: "inspector",
+                id: value.id,
+                title: value.title,
+                bindingId: value.bindingId,
+                valueKey: value.valueKey,
+                fields,
             };
         }
         case "text":
@@ -174,7 +352,7 @@ function parseNode(
                 ]) ||
                 !isIdentifier(value.bindingId) ||
                 !isBoundedText(value.submitLabel, 1, 128) ||
-                !Array.isArray(value.fields) ||
+                !isPlainArray(value.fields) ||
                 value.fields.length === 0 ||
                 value.fields.length > 32
             ) {
@@ -211,7 +389,7 @@ function parseNode(
                 ]) ||
                 !isIdentifier(value.bindingId) ||
                 !isIdentifier(value.rowsKey) ||
-                !Array.isArray(value.columns) ||
+                !isPlainArray(value.columns) ||
                 value.columns.length === 0 ||
                 value.columns.length > 16
             ) {
@@ -280,7 +458,7 @@ function parseNode(
     }
 }
 
-function parseSpec(value: unknown): CanvasSpecDocument {
+export function parseCanvasSpec(value: unknown): CanvasSpecDocument {
     if (
         !isPlainRecord(value) ||
         !hasExactKeys(value, [
@@ -290,41 +468,56 @@ function parseSpec(value: unknown): CanvasSpecDocument {
             "bindingIds",
             "root",
         ]) ||
-        value.schemaVersion !== CANVAS_SPEC_VERSION ||
+        (value.schemaVersion !== CANVAS_SPEC_VERSION &&
+            value.schemaVersion !== CANVAS_SPEC_VERSION_V2) ||
         !isBoundedText(value.title, 1, 128) ||
-        !Array.isArray(value.visibility) ||
+        !isPlainArray(value.visibility) ||
         value.visibility.length > 2 ||
         value.visibility.some(
             (audience) => audience !== "app" && audience !== "model",
         ) ||
         new Set(value.visibility).size !== value.visibility.length ||
-        !Array.isArray(value.bindingIds) ||
+        !isPlainArray(value.bindingIds) ||
         value.bindingIds.length > 32 ||
         value.bindingIds.some((bindingId) => !isIdentifier(bindingId)) ||
         new Set(value.bindingIds).size !== value.bindingIds.length
     ) {
-        throw new Error("Invalid CanvasSpec v1 document.");
+        throw new Error("Invalid versioned CanvasSpec document.");
     }
 
     const bindingIds = [...value.bindingIds] as string[];
     const nodeIds = new Set<string>();
+    const referencedBindings = new Set<string>();
     const root = parseNode(value.root, 1, {
         nodeIds,
         bindingIds: new Set(bindingIds),
         totalNodes: 0,
+        version: value.schemaVersion,
+        referencedBindings,
     });
-    const spec: CanvasSpecDocument = {
-        schemaVersion: CANVAS_SPEC_VERSION,
+    if (
+        value.schemaVersion === CANVAS_SPEC_VERSION_V2 &&
+        bindingIds.some((id) => !referencedBindings.has(id))
+    )
+        throw new Error("Unused Canvas binding.");
+    const envelope = {
         title: value.title,
         visibility: [...value.visibility] as Array<"app" | "model">,
         bindingIds,
-        root,
     };
+    const spec: CanvasSpecDocument =
+        value.schemaVersion === CANVAS_SPEC_VERSION
+            ? {
+                  schemaVersion: CANVAS_SPEC_VERSION,
+                  ...envelope,
+                  root: root as CanvasNodeV1,
+              }
+            : { schemaVersion: CANVAS_SPEC_VERSION_V2, ...envelope, root };
     if (
         new globalThis.TextEncoder().encode(JSON.stringify(spec)).byteLength >
         MAX_SPEC_BYTES
     ) {
-        throw new Error("CanvasSpec exceeds the v1 size limit.");
+        throw new Error("CanvasSpec exceeds the size limit.");
     }
     return spec;
 }
@@ -384,7 +577,7 @@ function parseActiveCanvas(value: Record<string, unknown>): CanvasAppMetadata {
         throw new Error("Invalid Canvas app metadata.");
     }
 
-    const spec = parseSpec(value.spec);
+    const spec = parseCanvasSpec(value.spec);
     const bindings = value.bindings.map(parseBinding);
     if (bindings.length !== spec.bindingIds.length) {
         throw new Error("Canvas binding scope does not match the spec.");
@@ -442,7 +635,7 @@ export function parseCanvasViewMetadata(value: unknown): CanvasViewMetadata {
         ) {
             throw new Error("Invalid Canvas preview metadata.");
         }
-        const spec = parseSpec(value.spec);
+        const spec = parseCanvasSpec(value.spec);
         return {
             spec,
             preview: true,

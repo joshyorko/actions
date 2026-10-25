@@ -4,11 +4,12 @@ from __future__ import annotations
 
 import json
 import re
-from typing import Annotated, Literal, TypeAlias, Union
+from typing import Annotated, Literal, TypeAlias, TypeVar, Union
 
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_validator
 
 SCHEMA_VERSION = "actions.canvas-spec/v1"
+SCHEMA_VERSION_V2 = "actions.canvas-spec/v2"
 MAX_CANVAS_SPEC_BYTES = 64 * 1024
 MAX_NODE_DEPTH = 8
 MAX_NODE_COUNT = 128
@@ -129,7 +130,82 @@ CanvasNode = Annotated[
 CanvasStack.model_rebuild()
 
 
-class CanvasSpec(_CanvasModel):
+class CanvasStackV2(_CanvasModel):
+    type: Literal["stack"]
+    id: _Identifier
+    children: Annotated[
+        tuple["CanvasNodeV2", ...], Field(max_length=MAX_NODE_COUNT, strict=False)
+    ]
+
+
+class CanvasCard(_CanvasModel):
+    type: Literal["card"]
+    id: _Identifier
+    title: _ShortText
+    children: Annotated[
+        tuple["CanvasNodeV2", ...], Field(max_length=MAX_NODE_COUNT, strict=False)
+    ]
+
+
+class CanvasChart(_CanvasModel):
+    type: Literal["chart"]
+    id: _Identifier
+    title: _ShortText
+    binding_id: CanvasBindingId = Field(alias="bindingId")
+    rows_key: _Identifier = Field(alias="rowsKey")
+    chart_type: Literal["bar", "line"] = Field(alias="chartType")
+    label_key: _Identifier = Field(alias="labelKey")
+    value_key: _Identifier = Field(alias="valueKey")
+
+
+class CanvasLog(_CanvasModel):
+    type: Literal["log"]
+    id: _Identifier
+    title: _ShortText
+    binding_id: CanvasBindingId = Field(alias="bindingId")
+    rows_key: _Identifier = Field(alias="rowsKey")
+    message_key: _Identifier = Field(alias="messageKey")
+
+
+class CanvasInspector(_CanvasModel):
+    type: Literal["inspector"]
+    id: _Identifier
+    title: _ShortText
+    binding_id: CanvasBindingId = Field(alias="bindingId")
+    value_key: _Identifier = Field(alias="valueKey")
+    fields: Annotated[
+        tuple[CanvasTableColumn, ...], Field(min_length=1, max_length=16, strict=False)
+    ]
+
+    @model_validator(mode="after")
+    def unique_field_keys(self) -> CanvasInspector:
+        keys = [field.key for field in self.fields]
+        if len(keys) != len(set(keys)):
+            raise ValueError("inspector field keys must be unique")
+        return self
+
+
+CanvasNodeV2 = Annotated[
+    Union[
+        CanvasStackV2,
+        CanvasText,
+        CanvasForm,
+        CanvasTable,
+        CanvasStatus,
+        CanvasArtifact,
+        CanvasCard,
+        CanvasChart,
+        CanvasLog,
+        CanvasInspector,
+    ],
+    Field(discriminator="type"),
+]
+CanvasStackV2.model_rebuild()
+CanvasCard.model_rebuild()
+_Spec = TypeVar("_Spec", bound="_CanvasSpecBase")
+
+
+class _CanvasSpecBase(_CanvasModel):
     """A frozen, declarative Canvas view with logical binding labels only."""
 
     model_config = ConfigDict(
@@ -142,7 +218,7 @@ class CanvasSpec(_CanvasModel):
         validate_by_name=False,
     )
 
-    schema_version: Literal["actions.canvas-spec/v1"] = Field(alias="schemaVersion")
+    schema_version: str = Field(alias="schemaVersion")
     title: Annotated[str, Field(min_length=1, max_length=128, strict=True)]
     visibility: Annotated[
         tuple[Literal["model", "app"], ...], Field(max_length=2, strict=False)
@@ -151,10 +227,10 @@ class CanvasSpec(_CanvasModel):
         tuple[CanvasBindingId, ...],
         Field(alias="bindingIds", max_length=MAX_BINDING_COUNT, strict=False),
     ]
-    root: CanvasNode
+    root: CanvasNode | CanvasNodeV2
 
     @model_validator(mode="after")
-    def validate_tree_and_bindings(self) -> CanvasSpec:
+    def validate_tree_and_bindings(self: _Spec) -> _Spec:
         if len(self.visibility) != len(set(self.visibility)):
             raise ValueError("visibility values must be unique")
 
@@ -165,7 +241,7 @@ class CanvasSpec(_CanvasModel):
         node_ids: set[str] = set()
         referenced_binding_ids: set[str] = set()
         count = 0
-        pending: list[tuple[CanvasNode, int]] = [(self.root, 1)]
+        pending: list[tuple[CanvasNode | CanvasNodeV2, int]] = [(self.root, 1)]
         while pending:
             node, depth = pending.pop()
             if depth > MAX_NODE_DEPTH:
@@ -177,7 +253,7 @@ class CanvasSpec(_CanvasModel):
                 raise ValueError("Canvas node IDs must be unique")
             node_ids.add(node.id)
 
-            if isinstance(node, CanvasStack):
+            if isinstance(node, (CanvasStack, CanvasStackV2, CanvasCard)):
                 pending.extend((child, depth + 1) for child in reversed(node.children))
             elif isinstance(node, CanvasText):
                 continue
@@ -206,7 +282,7 @@ class CanvasSpec(_CanvasModel):
         return self
 
     @classmethod
-    def from_json(cls, raw: str | bytes | bytearray) -> CanvasSpec:
+    def from_json(cls: type[_Spec], raw: str | bytes | bytearray) -> _Spec:
         """Parse bounded JSON, reject duplicate keys, then validate the spec."""
         if isinstance(raw, str):
             try:
@@ -240,10 +316,10 @@ class CanvasSpec(_CanvasModel):
             if isinstance(exc, CanvasSpecValidationError):
                 raise
             raise CanvasSpecValidationError(f"invalid CanvasSpec JSON: {exc}") from exc
-        return validate_canvas_spec(document)
+        return _validate_as(cls, document)
 
     @classmethod
-    def from_python(cls, values: object) -> CanvasSpec:
+    def from_python(cls: type[_Spec], values: object) -> _Spec:
         """Build from Python field names while keeping JSON validation alias-only."""
         try:
             return cls.model_validate(values, by_alias=False, by_name=True)
@@ -263,10 +339,43 @@ class CanvasSpec(_CanvasModel):
         )
 
 
-def validate_canvas_spec(document: object) -> CanvasSpec:
+class CanvasSpec(_CanvasSpecBase):
+    """Closed v1 reader; its canonical serialization is unchanged."""
+
+    schema_version: Literal["actions.canvas-spec/v1"] = Field(alias="schemaVersion")
+    root: CanvasNode
+
+
+class CanvasSpecV2(_CanvasSpecBase):
+    """Explicit v2 reader adding bounded card, chart, log and inspector syntax."""
+
+    schema_version: Literal["actions.canvas-spec/v2"] = Field(alias="schemaVersion")
+    root: CanvasNodeV2
+
+
+def parse_canvas_spec(raw: str | bytes | bytearray) -> CanvasSpec | CanvasSpecV2:
+    """Parse bounded JSON and dispatch only an explicitly supported version."""
+    # Reuse the bounded/duplicate-key parser, then narrow its result by version.
+    parsed = _CanvasSpecBase.from_json(raw)
+    return validate_canvas_spec(parsed.model_dump(mode="json", by_alias=True))
+
+
+def validate_canvas_spec(document: object) -> CanvasSpec | CanvasSpecV2:
+    """Validate either explicit version without upgrading retained documents."""
+    if type(document) is not dict:  # noqa: E721 -- public JSON objects only
+        raise CanvasSpecValidationError("CanvasSpec document must be an object")
+    version = document.get("schemaVersion")
+    if version == SCHEMA_VERSION:
+        return _validate_as(CanvasSpec, document)
+    if version == SCHEMA_VERSION_V2:
+        return _validate_as(CanvasSpecV2, document)
+    raise CanvasSpecValidationError("unsupported CanvasSpec version")
+
+
+def _validate_as(cls: type[_Spec], document: object) -> _Spec:
     """Validate a public CanvasSpec document using only its JSON property names."""
     try:
-        spec = CanvasSpec.model_validate(document, by_alias=True, by_name=False)
+        spec = cls.model_validate(document, by_alias=True, by_name=False)
     except (ValidationError, TypeError, ValueError, RecursionError) as exc:
         if isinstance(exc, CanvasSpecValidationError):
             raise

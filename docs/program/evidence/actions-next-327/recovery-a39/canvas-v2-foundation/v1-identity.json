@@ -1,0 +1,32 @@
+[
+  {
+    "path": "docs/contracts/canvas/canvas-spec-v1.schema.json",
+    "sha256": "929ea31a604de04d3cfd4c1116db8548d53921b59b7be2d2edd1b76646a903b3",
+    "unchanged": true
+  },
+  {
+    "path": "docs/contracts/canvas/semantic-v1/canvas-spec-v1.invalid-version.json",
+    "sha256": "aaff15c07813828e1900be4142a570acb1bf09a015a2773a9687bf0f72658f62",
+    "unchanged": true
+  },
+  {
+    "path": "docs/contracts/canvas/semantic-v1/canvas-spec-v1.invalid-binding.json",
+    "sha256": "16bdbe7bb2c0247e30d2b93338cf50c6506a63b55105c2974c178e1a5a51e90e",
+    "unchanged": true
+  },
+  {
+    "path": "docs/contracts/canvas/semantic-v1/canvas-spec-v1.fixture.json",
+    "sha256": "21f5f4810434f7719f310d82abb0fe2ad56c51316079bbf6a029a1dbbdb98752",
+    "unchanged": true
+  },
+  {
+    "path": "docs/contracts/canvas/semantic-v1/canvas-spec-v1.invalid-unknown-field.json",
+    "sha256": "75e4c1edb587b3ae1013e933b3fbca6531ab29d21a6321437c4a82c6bca9b777",
+    "unchanged": true
+  },
+  {
+    "path": "docs/contracts/canvas/semantic-v1/README.md",
+    "sha256": "2373c85332d958cfd47577488ce2a07e0030c9c2dbf640b15f6b33e9f03862a6",
+    "unchanged": true
+  }
+]

@@ -5,7 +5,7 @@ import { GenericSemanticView } from "./generic-view";
 import { SemanticCanvasRenderer } from "./components";
 import type { CanvasAppMetadata } from "./mcp-bridge";
 import type { GenericExecutionContext } from "./generic-execution";
-import type { SemanticRendererAdapters } from "./types";
+import type { CanvasSpecDocumentV1, SemanticRendererAdapters } from "./types";
 const id = "11111111-1111-4111-8111-111111111111";
 const revision = `sha256:${"1".repeat(64)}`;
 const deployment = {
@@ -14,7 +14,7 @@ const deployment = {
     revision_id: revision,
 };
 const queue = { workspace_id: id, deployment, queue_id: "input" };
-const canvas: CanvasAppMetadata = {
+const canvas: CanvasAppMetadata & { spec: CanvasSpecDocumentV1 } = {
     applicationId: id,
     revisionId: revision,
     active: true,
