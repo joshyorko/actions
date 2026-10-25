@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "owned_processes": [
+    {
+      "pid": 49321,
+      "exists": false
+    },
+    {
+      "pid": 49322,
+      "exists": false
+    }
+  ],
+  "foundry_request_operation_counts": [
+    [
+      "canvas.create",
+      1
+    ],
+    [
+      "runtime.bootstrap",
+      1
+    ]
+  ],
+  "draft_revisions": 1,
+  "active_deployment_heads": 0,
+  "original_failure_preserved_sha256": "a4e232320f583b70944e4132523de8dcabbbc44a6dde6d14078a5a695955134c",
+  "candidate_source": "e6e8f0130e6a7cfba2142e1382cbdd1f07901d39",
+  "installed_wheel_payloads_verified": true,
+  "audit_note": "Initial supplemental audit incorrectly expected zero revision rows; draft creation creates one revision. Correct active-head check confirms zero activations."
+}

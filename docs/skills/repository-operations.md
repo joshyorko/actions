@@ -6465,3 +6465,7 @@ authentication denial. Preserve the transport AbortSignal when adding deadlines,
 and write terminal supervisor failure state on subprocess exceptions before
 cleanup. A focused auth follow-up does not change an earlier full-client FAILED
 receipt.
+Audit an unpublished Canvas client fixture by its single idempotent
+`canvas.create` request and absence of active Deployment heads; the draft itself
+legitimately creates a Deployment revision. Preserve failed run receipts
+separately from subsequent corrected complete runs.

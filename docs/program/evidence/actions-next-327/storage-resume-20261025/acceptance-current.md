@@ -11,7 +11,7 @@ The immutable a44 installed candidate is available independently of subsequent s
 | a44 official MCP Apps browser host | BLOCKED / NOT RUN; supported sandbox environment required |
 | Actual ChatGPT/Dakota | NOT RUN; owner-launched only |
 | a45 owned Core dependency closure | Core suite and clean wheel payload PASS; installed RCC execution still pending |
-| a45 official Node SDK full client | Original FAILED harness auth classifier; separate installed read-only auth PASS; corrected full run pending |
+| a45 official Node SDK full client | Original FAILED harness auth classifier preserved; new corrected complete protocol run PASS, including idempotent draft and authentication denial |
 | Runtime broad suite | Earlier 5 failures/771 passes/13 skips preserved; repair checkpoint 22ff684d under further qualification |
 | Native frozen/Go distribution | Diagnostic build PASS; exact source-bound native acceptance OPEN |
 | Claimed Robot Work Items | Isolated WIP, not integrated: declaration tests and SQLite/PostgreSQL runner tests PASS; installed RCC, concurrent races and terminal corruption gates OPEN |
