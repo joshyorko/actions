@@ -64,6 +64,7 @@ def retain_and_release_owned_compiler_views(request):
         "test_package_revision_compiler.py",
         "test_generic_work_item_execution.py",
         "test_generic_execution_port.py",
+        "test_generic_none_rcc.py",
     }
     yield
     if not enabled or not selected:

@@ -1039,3 +1039,16 @@ skipped generic RCC cases passed separately; the worker stage covers the pinned
 task-input skip. Windows/publication and the explicit artifact vertical remain
 classified separately. This receipt belongs to source4ef00f0a, not the subsequent
 unintegrated a28 proposals. Full owner product and operator gates remain open.
+
+## Provisional a28 public discovery and generic app slice
+
+The [a28 focused-source receipt](evidence/actions-next-327/recovery-a28/receipt.json)
+passes239 joined SQLite/PostgreSQL boundary tests with zero skips; two actual-RCC
+opt-ins run separately. It composes authorized model invocation descriptors,
+generic bound-app forms for none/optional/producer, common standalone Runs and
+an explicit offline owner authorization CLI. It never grants from startup or
+discovery. Runtime typecheck489, configured lint, frontend types/lint/build and
+Canvas51/1 conditional skip pass. Installed operator/discovery/browser/restart
+and full a28 package checks remain pending. Input-linked forms, public
+Data/Knowledge and the full original product matrix remain open; #326 NO-GO
+awaits owner decision. Library remains HTTP401 before upload, with no IDs.

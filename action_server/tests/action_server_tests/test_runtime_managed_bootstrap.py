@@ -97,7 +97,12 @@ def test_configured_native_completion_joins_same_sql_without_retry_or_grants(
             schema = configured.canvas.port.schemas
             assert schema["capability_invoke"]["type"] == "object"
             assert "GenericStandaloneInvocation" in schema["capability_invoke"]["$defs"]
-            assert "action" in schema["canvas_dispatch"]["properties"]
+            assert "AppSubmitRequest" in schema["canvas_dispatch"]["$defs"]
+            assert "AppExecuteRequest" in schema["canvas_dispatch"]["$defs"]
+            assert "AppRunRequest" in schema["canvas_get_state"]["$defs"]
+            from actions.server.foundry.generic_view import GenericCanvasView
+
+            assert isinstance(configured.canvas.port, GenericCanvasView)
             assert configured.managed_work_items.db is db
             service = configured.managed_work_items.reviewed
             assert service.native_completion.db is db

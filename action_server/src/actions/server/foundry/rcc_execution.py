@@ -485,9 +485,10 @@ class GeneratedRccExecution:
             from actions.server.foundry.generic_work_item_execution import (
                 _GenericOutputs,
             )
+            from actions.server.foundry.standalone_execution import _StandaloneOutputs
 
             standalone = (
-                isinstance(self.outputs, _GenericOutputs)
+                isinstance(self.outputs, (_GenericOutputs, _StandaloneOutputs))
                 and self.outputs.ticket.claim is None
                 and isinstance(journal, dict)
                 and journal.get("mode") == "standalone"

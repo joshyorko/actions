@@ -39,6 +39,7 @@ from actions.server.run_outputs.models import RunAttempt, RunPin
 from actions.server.run_outputs.service import (
     AccessDenied,
     FenceRejected,
+    RunOutputControlPlane,
     RunOutputService,
     _canonical,
     _key,
@@ -436,6 +437,12 @@ class GenericWorkItemExecution:
     def _dispatch(self, caller, inputs, key, claim, lease_seconds):
         if caller.worker_id is None:
             raise AccessDenied("server-held worker identity required")
+        # The public entry already resolved and authorized this exact immutable
+        # snapshot. Join canonical admission here, never at startup/discovery,
+        # and never create an execution grant as a side effect.
+        RunOutputControlPlane(self.db, capabilities=self.registry).register(
+            self.snapshot
+        )
         run = self.base.admit(caller.actor, self.snapshot, inputs, key)
         pin = _one(self.db, RunPin, run.id)
         if claim and run.status not in (RunStatus.PASSED, RunStatus.FAILED):

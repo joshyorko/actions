@@ -1,3 +1,6 @@
+import { GenericSemanticView } from "./semantic-renderer/generic-view";
+import { parseGenericExecution } from "./semantic-renderer/generic-execution";
+import type { GenericExecutionContext } from "./semantic-renderer/generic-execution";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
     useApp,
@@ -178,6 +181,8 @@ export function McpCanvasView() {
         null,
     );
     const [canvasViewError, setCanvasViewError] = useState(false);
+    const [genericExecution, setGenericExecution] =
+        useState<GenericExecutionContext | null>(null);
     const [reviewedExecution, setReviewedExecution] =
         useState<ReviewedExecutionContext | null>(null);
     const inputRevision = useRef(0);
@@ -198,6 +203,7 @@ export function McpCanvasView() {
                     inputRevision.current += 1;
                     setCanvasView(null);
                     setReviewedExecution(null);
+                    setGenericExecution(null);
                     setCanvasViewError(false);
                     setHostInput({ revision: inputRevision.current, query });
                     setHostInputState(query === null ? "ignored" : "accepted");
@@ -207,6 +213,7 @@ export function McpCanvasView() {
             );
             createdApp.addEventListener("toolresult", (result) => {
                 setReviewedExecution(null);
+                setGenericExecution(null);
                 const invoicePage = result._meta?.["actions.invoicePage"];
                 if (invoicePage !== undefined) {
                     setCanvasView(null);
@@ -248,8 +255,26 @@ export function McpCanvasView() {
                                 const parsed =
                                     parseCanvasViewMetadata(metadata);
                                 setCanvasView(parsed);
+                                setGenericExecution(null);
+                                setReviewedExecution(null);
                                 if (
                                     !parsed.preview &&
+                                    result._meta?.[
+                                        "actions.genericExecution"
+                                    ] !== undefined
+                                ) {
+                                    setGenericExecution(
+                                        parseGenericExecution(
+                                            result._meta ?? {},
+                                            parsed,
+                                        ),
+                                    );
+                                }
+                                if (
+                                    !parsed.preview &&
+                                    result._meta?.[
+                                        "actions.genericExecution"
+                                    ] === undefined &&
                                     (result._meta?.["actions.appSession"] !==
                                         undefined ||
                                         result._meta?.[
@@ -294,6 +319,7 @@ export function McpCanvasView() {
         } else {
             setCanvasView(null);
             setReviewedExecution(null);
+            setGenericExecution(null);
             setCanvasViewError(false);
         }
     }, [app, isConnected]);
@@ -359,25 +385,36 @@ export function McpCanvasView() {
             </section>
             {canvasView ? (
                 <section aria-label="Semantic Canvas app">
-                    {canvasView.spec.visibility.includes("app") ? (
-                        <p role="status">
-                            {reviewedAdapter
-                                ? "Semantic form bindings are read-only. Saved-result review and execution controls are available below."
-                                : "This app is displayed read-only; interactive actions are disabled."}
-                        </p>
-                    ) : null}
-                    <SemanticCanvasRenderer
-                        spec={canvasView.spec}
-                        revision={
-                            canvasView.preview
-                                ? canvasView.revision
-                                : canvasView.revisionId
-                        }
-                        scopeKey={canvasView.scopeKey}
-                        preview={canvasView.preview}
-                        viewer="app"
-                        adapters={readOnlyCanvasAdapters}
-                    />
+                    {genericExecution && app && !canvasView.preview ? (
+                        <GenericSemanticView
+                            key={genericExecution.token}
+                            app={app}
+                            canvas={canvasView}
+                            context={genericExecution}
+                        />
+                    ) : (
+                        <>
+                            {canvasView.spec.visibility.includes("app") ? (
+                                <p role="status">
+                                    {reviewedAdapter
+                                        ? "Semantic form bindings are read-only. Saved-result review and execution controls are available below."
+                                        : "This app is displayed read-only; interactive actions are disabled."}
+                                </p>
+                            ) : null}
+                            <SemanticCanvasRenderer
+                                spec={canvasView.spec}
+                                revision={
+                                    canvasView.preview
+                                        ? canvasView.revision
+                                        : canvasView.revisionId
+                                }
+                                scopeKey={canvasView.scopeKey}
+                                preview={canvasView.preview}
+                                viewer="app"
+                                adapters={readOnlyCanvasAdapters}
+                            />
+                        </>
+                    )}
                     {reviewedAdapter && reviewedExecution ? (
                         <InvoiceReviewPanel
                             key={reviewedExecution.token}

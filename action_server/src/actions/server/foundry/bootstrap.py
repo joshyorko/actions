@@ -291,6 +291,7 @@ def create_runtime_canvas(
                 GenericCanvasExecution,
                 PinnedGenericRccRunner,
             )
+            from actions.server.foundry.generic_view import GenericCanvasView
 
             rcc = Path(__file__).resolve().parents[1] / "bin" / "rcc-18.19.3"
             execution_root = paths.cache_dir / "execution"
@@ -299,7 +300,7 @@ def create_runtime_canvas(
                 execution,
                 runner=PinnedReviewedRccRunner(prepared, rcc, execution_root),
             )
-            port = GenericCanvasExecution(
+            generic_execution = GenericCanvasExecution(
                 ReviewedCanvasView(reviewed_execution),
                 deployments,
                 outputs,
@@ -307,6 +308,8 @@ def create_runtime_canvas(
                 worker_id=profile.worker_id,
                 runner=PinnedGenericRccRunner(prepared, rcc, execution_root),
             )
+
+            port = GenericCanvasView(generic_execution)
 
         async def authenticate(ctx):
             from actions.server._api_action_routes import _get_bearer_token

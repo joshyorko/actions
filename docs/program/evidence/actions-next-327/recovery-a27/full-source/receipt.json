@@ -435,23 +435,23 @@
     }
   ],
   "retained_files": {
-    "components.log": "31d87f04c0ce6a74550f7227b5e0ce2335aac7d670e7f6b9695412134d5e8ddf",
     "portable.xml": "ec71173040ff2cf0852c70a77309520e37e94794a5d4989ba72ffaa30de3476d",
     "package_compiler.xml": "0d2ad653be21fb56d6f3b21d3557e6e319b81205c45cf781de6f10554a87c2fb",
     "foundry_storage.xml": "26ff2b417392fd6d57a11f2a7c16aff5ff77ab25361cfb911eab1faa059500d6",
     "managed.xml": "29acb9a3d0402267c0d89985912d81f2076562126d33dd2e1a3607cccce326b9",
     "effects.xml": "f24fb2a2cf401734003ec7db7a6c1c3f8783c41e60fd9decbb1a69e50d09c9f7",
-    "managed.log": "084fc35f881d60c9accca45857b5d7b62f53fb1acf7c5e3c090cfec451e63716",
-    "effects.log": "2e3e643bd7b4dcf59def56dcb27f467e15724d065249ba32dc0b1cc37edb800a",
-    "worker.log": "d5eecfe784a68ca39c51aa252b518cf0c929ef1067b5e2aa0ebd4551b515ced9",
     "generated.xml": "b67412d50df76c76320989db01cfb376607b2d57abb69f13d53114c7e650797c",
-    "foundry_storage.log": "6f2c3acba37bf9e966063e7927e29470e2ef30999beb48ab4f5ec595a992a4de",
     "invoice.xml": "fa842024e85b225aa74e3a4ecca7dba4db49c6d4576f2c49be84b21c6b550eca",
-    "package_compiler.log": "3f92c9465b561fe0669328beddb7a472cc3eb7a47a1f696b2fa8b798ed3a5a95",
     "worker.xml": "21dc746d51f762253db8299ec8a916404914ba721bdef8ac296ab8aee65dd084",
-    "generated.log": "9031839f9f6cc062e4e74c9201135e082e05d26acb622c77bfb874ba6e419843",
     "components.xml": "4de4f9e03ea1e7365df456152e884fa413f4b00745e230409aad364451d5e464",
-    "portable.log": "f1176329a869af52de027f28a522d2bd1569764859517c5ee74cc29b95bcd397",
-    "invoice.log": "697d934ee412a86f6c3ec3fedcf7bd5834598bdaf423ca209a2527dae622a84d"
+    "components.log.txt": "31d87f04c0ce6a74550f7227b5e0ce2335aac7d670e7f6b9695412134d5e8ddf",
+    "managed.log.txt": "084fc35f881d60c9accca45857b5d7b62f53fb1acf7c5e3c090cfec451e63716",
+    "effects.log.txt": "2e3e643bd7b4dcf59def56dcb27f467e15724d065249ba32dc0b1cc37edb800a",
+    "worker.log.txt": "d5eecfe784a68ca39c51aa252b518cf0c929ef1067b5e2aa0ebd4551b515ced9",
+    "foundry_storage.log.txt": "6f2c3acba37bf9e966063e7927e29470e2ef30999beb48ab4f5ec595a992a4de",
+    "package_compiler.log.txt": "3f92c9465b561fe0669328beddb7a472cc3eb7a47a1f696b2fa8b798ed3a5a95",
+    "generated.log.txt": "9031839f9f6cc062e4e74c9201135e082e05d26acb622c77bfb874ba6e419843",
+    "portable.log.txt": "f1176329a869af52de027f28a522d2bd1569764859517c5ee74cc29b95bcd397",
+    "invoice.log.txt": "697d934ee412a86f6c3ec3fedcf7bd5834598bdaf423ca209a2527dae622a84d"
   }
 }

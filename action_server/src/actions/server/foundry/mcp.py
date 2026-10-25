@@ -135,6 +135,7 @@ class CanvasReply:
     execution: dict[str, JsonValue] | None = None
     artifact: dict[str, JsonValue] | None = None
     app_binding: str | None = None
+    generic_interaction: dict[str, JsonValue] | None = None
 
 
 class CanvasPort(Protocol):
@@ -234,10 +235,29 @@ class CanvasMcp:
         if name not in APP_TOOLS:
             return schema
         schema = copy.deepcopy(schema)
-        properties = schema.setdefault("properties", {})
-        if not isinstance(properties, dict) or "appSession" in properties:
-            raise ValueError("reserved View session field")
-        properties["appSession"] = {"type": "string", "minLength": 43, "maxLength": 43}
+
+        def session_branch(branch):
+            reference = branch.get("$ref")
+            if reference is not None:
+                if not reference.startswith("#/$defs/"):
+                    raise ValueError("local View schema reference required")
+                session_branch(schema["$defs"][reference.removeprefix("#/$defs/")])
+                return
+            alternatives = branch.get("anyOf", branch.get("oneOf"))
+            if alternatives is not None:
+                for alternative in alternatives:
+                    session_branch(alternative)
+                return
+            properties = branch.setdefault("properties", {})
+            if not isinstance(properties, dict) or "appSession" in properties:
+                raise ValueError("reserved View session field")
+            properties["appSession"] = {
+                "type": "string",
+                "minLength": 43,
+                "maxLength": 43,
+            }
+
+        session_branch(schema)
         return schema
 
     async def call(self, ctx: object, name: str, arguments: object) -> CallToolResult:
@@ -291,6 +311,7 @@ class CanvasMcp:
                 meta["actions.reviewedExecution"] = _object(reply.interaction, 16384)
             for key, value in (
                 ("actions.review", reply.review),
+                ("actions.genericExecution", reply.generic_interaction),
                 ("actions.execution", reply.execution),
                 ("actions.artifact", reply.artifact),
             ):

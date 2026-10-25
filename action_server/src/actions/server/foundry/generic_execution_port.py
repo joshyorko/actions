@@ -33,7 +33,9 @@ from actions.server.foundry.generic_work_item_execution import (
     GenericWorkItemExecution,
 )
 from actions.server.foundry.mcp import CanvasCaller, CanvasPort, CanvasReply
+from actions.server.foundry.package_registry import FoundryPackageRegistry
 from actions.server.foundry.rcc_execution import GeneratedRccExecution
+from actions.server.foundry.standalone_execution import StandaloneActionExecution
 from actions.server.managed_work_items.contracts import (
     ClaimRef,
     ManagedCaller,
@@ -47,6 +49,7 @@ from actions.server.run_outputs.service import (
     RunOutputService,
     _canonical,
     _one,
+    _transaction,
 )
 from actions.server.run_outputs.types import (
     Actor,
@@ -103,7 +106,7 @@ class PinnedGenericRccRunner:
         self,
         caller: ManagedCaller,
         ticket: GenericTicket,
-        service: GenericWorkItemExecution,
+        service: GenericWorkItemExecution | StandaloneActionExecution,
     ) -> Run:
         return GeneratedRccExecution(
             service.registry,
@@ -151,12 +154,47 @@ class GenericCanvasExecution(CanvasPort):
             runner,
         )
         self.schemas = dict(reviewed.schemas, capability_invoke=_SCHEMA)
+        boundary = (
+            " Authorized immutable execution references and input schemas may appear "
+            "for the active binding. References are not grants; availability indicates "
+            "authority, not execution readiness. Backend source, connection secrets, "
+            "and app-session metadata remain omitted."
+        )
+        for name, purpose in (
+            (
+                "canvas_get",
+                "Read the authorized app's latest authored CanvasSpec or one exact revision.",
+            ),
+            (
+                "canvas_inspect",
+                "Inspect authorized immutable revision history and identify the active revision; each revision includes its authored CanvasSpec.",
+            ),
+        ):
+            if name in self.schemas:
+                self.schemas[name] = dict(
+                    self.schemas[name], description=purpose + boundary
+                )
 
     async def call(
         self, caller: CanvasCaller, name: str, arguments: dict[str, JsonValue]
     ) -> CanvasReply:
         if name != "capability_invoke" or "mode" not in arguments:
-            return await self.reviewed.call(caller, name, arguments)
+            reply = await self.reviewed.call(caller, name, arguments)
+            if name in {"canvas_get", "canvas_inspect"}:
+                from actions.server.foundry.invocation_discovery import (
+                    GenericInvocationDiscovery,
+                )
+
+                return await asyncio.to_thread(
+                    GenericInvocationDiscovery(
+                        self.deployments, self.outputs, self.authorization
+                    ).describe,
+                    caller,
+                    name,
+                    arguments,
+                    reply,
+                )
+            return reply
         if caller.audience != "model" or caller.scope is not None:
             raise AccessDenied(
                 "generic invocation requires authenticated model context"
@@ -189,16 +227,36 @@ class GenericCanvasExecution(CanvasPort):
                 for p in resolved.revision.specification.work_item_policies
                 if p.capability == snapshot.capability
             ]
-            if len(policies) != 1:
-                raise AccessDenied("explicit immutable generic policy required")
-            service = GenericWorkItemExecution(
-                self.deployments,
-                self.outputs,
-                snapshot,
-                policies[0],
-                self.authorization,
-            )
+            registry = self.outputs.capabilities
+            if not isinstance(registry, FoundryPackageRegistry):
+                raise AccessDenied("immutable Package registry required")
+            declaration = registry.get_capability(snapshot.capability)
+            service: GenericWorkItemExecution | StandaloneActionExecution
+            if declaration is not None and declaration.work_items.mode == "none":
+                if (
+                    policies
+                    or declaration.work_items.allow_outputs
+                    or isinstance(request, GenericClaimInvocation)
+                ):
+                    raise AccessDenied(
+                        "ordinary none requires standalone input and no queue policy"
+                    )
+                service = StandaloneActionExecution(
+                    self.deployments, self.outputs, snapshot
+                )
+            else:
+                if len(policies) != 1:
+                    raise AccessDenied("explicit immutable generic policy required")
+                service = GenericWorkItemExecution(
+                    self.deployments,
+                    self.outputs,
+                    snapshot,
+                    policies[0],
+                    self.authorization,
+                )
             if isinstance(request, GenericClaimInvocation):
+                if not isinstance(service, GenericWorkItemExecution):
+                    raise AccessDenied("ordinary none cannot consume a claim")
                 claim = request.claim
                 if (
                     service.policy.input_queue is None
@@ -234,17 +292,25 @@ class GenericCanvasExecution(CanvasPort):
                     if run.status not in (RunStatus.PASSED, RunStatus.FAILED):
                         raise ValueError("runner has not published a terminal Run")
                     state = "completed" if run.status == RunStatus.PASSED else "failed"
-            with service._transaction():
-                service._current(caller)
+            with (
+                service._transaction()
+                if isinstance(service, GenericWorkItemExecution)
+                else _transaction(service.db)
+            ):
+                if isinstance(service, StandaloneActionExecution):
+                    service.current(caller)
+                else:
+                    service._current(caller)
                 current = _one(self.outputs.db, Run, ticket.fence.run_id)
                 if (
-                    service._ticket(
+                    service.ticket(caller, current)
+                    if isinstance(service, StandaloneActionExecution)
+                    else service._ticket(
                         caller,
                         ticket.claim.as_claim() if ticket.claim else None,
                         current,
                     )
-                    != ticket
-                ):
+                ) != ticket:
                     raise FenceRejected("retained invocation changed")
                 attempt = _one(self.outputs.db, RunAttempt, ticket.fence.attempt_id)
                 pin = _one(self.outputs.db, RunPin, ticket.fence.run_id)
@@ -308,18 +374,28 @@ class GenericCanvasExecution(CanvasPort):
             )
 
     def _handles(
-        self, caller: ManagedCaller, service: GenericWorkItemExecution, run: Run
+        self,
+        caller: ManagedCaller,
+        service: GenericWorkItemExecution | StandaloneActionExecution,
+        run: Run,
     ) -> list[JsonValue] | None:
         if run.status not in (RunStatus.PASSED, RunStatus.FAILED):
             return None
         try:
-            with service._transaction():
+            with (
+                service._transaction()
+                if isinstance(service, GenericWorkItemExecution)
+                else _transaction(service.db)
+            ):
                 service.base._authorize(caller.actor, service.snapshot, "read")
-                queue = service.policy.input_queue or service.policy.output_queue
-                if queue is None:
-                    raise AccessDenied("explicit output-read queue authority required")
-                for permission in (Permission.READ, Permission.ARTIFACT_READ):
-                    service._permission(caller, queue, permission)
+                if isinstance(service, GenericWorkItemExecution):
+                    queue = service.policy.input_queue or service.policy.output_queue
+                    if queue is None:
+                        raise AccessDenied(
+                            "explicit output-read queue authority required"
+                        )
+                    for permission in (Permission.READ, Permission.ARTIFACT_READ):
+                        service._permission(caller, queue, permission)
                 attached = json.loads(run.result or "null")
                 if (
                     not isinstance(attached, dict)

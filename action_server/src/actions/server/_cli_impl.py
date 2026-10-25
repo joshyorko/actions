@@ -521,6 +521,28 @@ def _create_parser():
     # Starts the server
     _add_start_server_command(command_subparser, defaults)
     _add_expose_command(command_subparser)
+    local_auth = command_subparser.add_parser(
+        "authorize-local",
+        help="Explicit offline owner-only SQLite grants; never automatic startup authorization",
+        description="Stop Runtime first. Validated active revision selection gates existing application-wide Run grants and all-queues revision grants. References are not grants. Requires private existing datadir and request file; no RCC or external databases.",
+    )
+    local_auth.add_argument(
+        "--datadir", help="Existing private absolute Runtime datadir (server.db)"
+    )
+    local_auth.add_argument(
+        "--request",
+        help="Private absolute JSON request; use --schema for its exact shape",
+    )
+    local_auth.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Inspect exact scopes and current grant CAS digest without granting",
+    )
+    local_auth.add_argument(
+        "--schema",
+        action="store_true",
+        help="Print strict request JSON schema without opening state",
+    )
 
     # Import
     _add_import_command(command_subparser, defaults)
@@ -770,6 +792,45 @@ def _main_retcode(
     if not command:
         parser.print_help()
         return 0
+
+    if command == "authorize-local":
+        import json
+
+        from pydantic import ValidationError
+
+        from ._local_authorization import (
+            LocalAuthorizationRequest,
+            run_local_authorization,
+        )
+
+        local_args = typing.cast(argparse.Namespace, base_args)
+        try:
+            if local_args.schema:
+                print(
+                    json.dumps(
+                        LocalAuthorizationRequest.model_json_schema(), sort_keys=True
+                    )
+                )
+                return 0
+            if not local_args.datadir or not local_args.request:
+                raise ValueError("--datadir and --request are required")
+            print(
+                json.dumps(
+                    run_local_authorization(
+                        local_args.datadir,
+                        local_args.request,
+                        dry_run=local_args.dry_run,
+                    ),
+                    sort_keys=True,
+                )
+            )
+            return 0
+        except ValidationError:
+            log.critical("Invalid local authorization request or profile; use --schema")
+            return 1
+        except (ValueError, PermissionError, OSError) as exc:
+            log.critical("Local authorization refused: %s", exc)
+            return 1
 
     if command == "version":
         print(__version__)
