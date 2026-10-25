@@ -9,8 +9,11 @@ import hashlib
 import importlib.metadata
 import json
 import os
+import signal
 import subprocess
 import sys
+import threading
+import time
 import tomllib
 from pathlib import Path
 
@@ -56,7 +59,10 @@ def producer_command(consumer_python, output):
     ]
 
 
-def run(command, directory, label):
+def run(
+    command, directory, label, *, stdout_path=None, limit=32 * 1024**2, timeout=120
+):
+    """Bound retained output while draining pipes; trusted children, not a sandbox."""
     environment = os.environ.copy()
     for key in (
         "PYTHONPATH",
@@ -66,18 +72,89 @@ def run(command, directory, label):
         "SOURCE_DATE_EPOCH",
     ):
         environment.pop(key, None)
+    paths = (
+        stdout_path or directory / f"{label}.stdout",
+        directory / f"{label}.stderr",
+    )
+    errors = []
+    process = subprocess.Popen(
+        command,
+        cwd=directory,
+        env=environment,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        start_new_session=os.name == "posix",
+    )
+
+    def drain(pipe, path):
+        try:
+            with path.open("xb") as stream:
+                total = 0
+                while block := os.read(pipe.fileno(), 65536):
+                    remaining = limit - total
+                    stream.write(block[:remaining])
+                    total += len(block)
+                    if total > limit:
+                        raise ValueError(
+                            f"{label} output exceeds {limit} bytes: {path.name}"
+                        )
+        except BaseException as error:
+            errors.append(error)
+        finally:
+            pipe.close()
+
+    threads = [
+        threading.Thread(target=drain, args=pair, daemon=True)
+        for pair in zip((process.stdout, process.stderr), paths)
+    ]
+    for thread in threads:
+        thread.start()
+    deadline = time.monotonic() + timeout
     try:
-        completed = subprocess.run(
-            command, cwd=directory, env=environment, capture_output=True, timeout=120
-        )
-    except subprocess.TimeoutExpired as error:
-        (directory / f"{label}.stdout").write_bytes(error.stdout or b"")
-        (directory / f"{label}.stderr").write_bytes(error.stderr or b"")
-        raise
-    (directory / f"{label}.stdout").write_bytes(completed.stdout)
-    (directory / f"{label}.stderr").write_bytes(completed.stderr)
-    completed.check_returncode()
-    return completed.stdout
+        while process.poll() is None or any(thread.is_alive() for thread in threads):
+            if errors:
+                raise errors[0]
+            if time.monotonic() >= deadline:
+                raise subprocess.TimeoutExpired(command, timeout)
+            time.sleep(0.02)
+        if errors:
+            raise errors[0]
+        if process.returncode:
+            raise subprocess.CalledProcessError(process.returncode, command)
+    finally:
+        # POSIX group cleanup also closes pipes held by descendants. On Windows
+        # only the direct child is terminated; no process-tree guarantee is made.
+        if os.name == "posix":
+            try:
+                os.killpg(process.pid, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+        elif process.poll() is None:
+            process.kill()
+        process.wait(timeout=5)
+        for thread in threads:
+            thread.join(timeout=2)
+        if any(thread.is_alive() for thread in threads):
+            raise RuntimeError("output cleanup incomplete; descendant may retain pipe")
+    return paths[0].read_bytes()
+
+
+def consumer_prefix(consumer, output):
+    raw = run(
+        [
+            str(consumer),
+            "-I",
+            "-c",
+            "import json,sys; print(json.dumps({'prefix':sys.prefix}))",
+        ],
+        output,
+        "consumer-prefix",
+        limit=65536,
+    )
+    prefix = Path(json.loads(raw)["prefix"]).resolve()
+    if prefix == Path(sys.prefix).resolve():
+        raise ValueError("producer must be separate from consumer environment")
+    return str(prefix)
 
 
 def produce(args):
@@ -90,8 +167,11 @@ def produce(args):
             raise ValueError("unexpected CycloneDX producer version")
         receipt["producer_version"] = version
         consumer = args.consumer_python.absolute()
-        if consumer == Path(sys.executable).absolute():
-            raise ValueError("producer must be separate from consumer environment")
+        receipt["consumer_prefix"] = consumer_prefix(consumer, output)
+        receipt["producer_prefix"] = str(Path(sys.prefix).resolve())
+        receipt[
+            "consumer_trust"
+        ] = "trusted interpreter and site/.pth execution required"
         inventory = qualify_wheel(
             args.runtime_wheel, args.expected_sha256, args.expected_runtime
         )
@@ -132,9 +212,11 @@ def produce(args):
             str(output / "wheel-inventory.json"),
         ]
         run(probe, output, "installed-before")
-        command = producer_command(consumer, output / "python-consumer.cdx.json")
+        command = producer_command(consumer, "-")
         receipt["producer_command"] = command
-        run(command, output, "producer")
+        run(
+            command, output, "producer", stdout_path=output / "python-consumer.cdx.json"
+        )
         after = run(inspect_command, output, "inspect-after")
         if json.loads(after) != inspection:
             raise ValueError("consumer metadata changed during production")

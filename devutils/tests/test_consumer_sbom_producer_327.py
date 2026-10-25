@@ -57,3 +57,37 @@ def test_wrong_producer_version_retains_failure_before_execution(
     receipt = json.loads((output / "receipt.json").read_text())
     assert receipt["result"] == "failed"
     assert "producer version" in receipt["error"]
+
+
+def test_stream_limit_retains_bounded_output(producer, tmp_path):
+    with pytest.raises(ValueError, match="output exceeds"):
+        producer.run(
+            [producer.sys.executable, "-I", "-c", "import os; os.write(1,b'x'*8192)"],
+            tmp_path,
+            "large",
+            limit=1024,
+        )
+    assert (tmp_path / "large.stdout").read_bytes() == b"x" * 1024
+
+
+def test_timeout_retains_partial_output(producer, tmp_path):
+    with pytest.raises(producer.subprocess.TimeoutExpired):
+        producer.run(
+            [
+                producer.sys.executable,
+                "-I",
+                "-c",
+                "import os,time; os.write(1,b'started'); time.sleep(30)",
+            ],
+            tmp_path,
+            "slow",
+            timeout=0.5,
+        )
+    assert (tmp_path / "slow.stdout").read_bytes() == b"started"
+
+
+def test_actual_prefix_rejects_same_environment_alternate_spelling(producer, tmp_path):
+    executable = Path(producer.sys.executable)
+    alias = executable.parent / ".." / executable.parent.name / executable.name
+    with pytest.raises(ValueError, match="separate"):
+        producer.consumer_prefix(alias, tmp_path)
