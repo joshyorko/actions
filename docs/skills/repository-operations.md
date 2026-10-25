@@ -5677,15 +5677,38 @@ Definition reads authorize metadata only; corpus validation and provider receipt
 supply neither live source/Knowledge grants nor canonical Run publication
 authority. Require those checks explicitly at the consuming boundary.
 
-The definition authority's require_search_ready still always refuses. No canonical
-Run ingestion/publication or issued receipt joins these components yet. The
-declaration permits up to 128 source files but the source manifest remains limited
-to 16; this is not evidence of 128-file ingestion. Existing synchronous Knowledge
-adapters remain destructive and are not made immutable by these separate stores.
-Public Knowledge still requires canonical Run/Task ingestion and reconciliation,
-authorized provider selection, input-mapped search/generated Python consumption,
-sealed paging/export, and installed two-provider lifecycle proof. Split provider
-service and advanced Knowledge remain distinct outstanding gates. Migration 22 has no downmigration;
+The definition authority's require_search_ready still always refuses: metadata
+alone is not consumption readiness. The explicit host-bound KnowledgeExecution
+service consumes an already admitted canonical Run and live Attempt fence; it
+creates no admission, grants, scheduler or provider tables. Exact configured
+snapshot identity selects the immutable Knowledge revision and source/provider.
+Ingestion rechecks independent read/manage and source/provider authority,
+normalizes retained sealed input, performs an idempotent immutable provider write,
+and publishes its sealed corpus through the existing Run output service. Provider
+write success followed by failed canonical publication remains nonterminal and
+cannot authorize search. An explicit retry under the same live fence can reuse
+the provider write; expired or uncertain Attempts still require existing recovery
+policy. No automatic takeover or terminal failure is inferred.
+
+Bounded lexical search requires a successful canonical ingestion receipt and
+fenced Attempt, authorized unexpired sealed corpus, matching retained provider
+bytes and live Knowledge/source/provider grants. It supports declared query,
+offset, result-count and result-byte bounds; result bytes use the existing output
+provider. Reconstructed processes revalidate the same receipt rather than trusting
+an in-memory ready flag or provider row. Search checks its cancellation/deadline
+again after output staging and before publication. Source tests cover common
+SQLite/PostgreSQL crossed with actual DuckDB/PostgreSQL corpus engines; they do
+not establish installed Runtime, Task protocol or generated-Python consumption.
+The worker execute hook and search_for_execution hook require trusted immutable
+binding reconstruction in the ordinary host before those public joins qualify.
+
+The declaration permits up to 128 source files but the source manifest remains
+limited to 16; this is not evidence of 128-file ingestion. Existing synchronous
+Knowledge adapters remain destructive and are not made immutable by these stores.
+Public Knowledge still requires ordinary host/operator selection and Task wiring,
+input-mapped generated Python consumption, installed paging/export and two-provider
+lifecycle proof. Split provider service and advanced Knowledge remain distinct
+outstanding gates. Migration 22 has no downmigration;
 the frozen version 21 status reader reports TOO_NEW, so downgrade requires a
 qualified older snapshot rather than opening the upgraded database.
 
@@ -5699,3 +5722,14 @@ harness database; budget each observed allocation before launching. A launcher
 interruption without final capture is not a passing batch. Runtime version floors
 do not establish managed-client schema equality: compare the actual authenticated
 schema with the client's exact canonicalization and refuse mismatches, never bypass.
+
+For multi-capability execution selection, translate the native Package registry's
+AccessDenied into the Run execution boundary's AccessDenied, just as malformed
+or unavailable selection metadata is translated. Test a real registry denial;
+a fake that raises ValueError alone misses this exception boundary. Verify a
+wrong plan rejects before Run creation, then execute each declared Action through
+its own canonical admitted snapshot while retaining the same outer Package.
+Canonical Run result `outputs` are serialized OutputRef values; derive their
+public handle through OutputRef rather than assuming a serialized handle field.
+Output resolution requires both Run-read and application-read authority: an
+execution grant or reference grant does not replace application authorization.

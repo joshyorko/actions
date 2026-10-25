@@ -1,6 +1,7 @@
 """Exact registry selection for execution and retained receipt verification."""
 from __future__ import annotations
 
+from actions.server.deployments.foundry_values import AccessDenied as RegistryDenied
 from actions.server.deployments.package_revision_compiler import (
     CompiledPackageRevision,
     verify_compiled_package_revision,
@@ -33,5 +34,5 @@ def compiled_for_snapshot(registry, snapshot) -> CompiledPackageRevision:
         ):
             raise ValueError("adapter plan differs")
         return compiled
-    except (ValueError, TypeError, AttributeError, KeyError):
+    except (RegistryDenied, ValueError, TypeError, AttributeError, KeyError):
         raise AccessDenied("Package execution selection unavailable") from None

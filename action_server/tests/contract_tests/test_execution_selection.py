@@ -88,3 +88,16 @@ def test_other_member_plan_is_refused():
     selected.runtime_plan = snapshot.runtime_plan
     with pytest.raises(AccessDenied):
         compiled_for_snapshot(registry, snapshot)
+
+
+def test_real_registry_denial_uses_run_execution_boundary():
+    from actions.server.deployments.foundry_values import AccessDenied as RegistryDenied
+
+    snapshot, _, registry = fixture()
+
+    def deny(*args):
+        raise RegistryDenied("Undeclared Package selection")
+
+    registry.selection_for = deny
+    with pytest.raises(AccessDenied, match="Package execution selection unavailable"):
+        compiled_for_snapshot(registry, snapshot)

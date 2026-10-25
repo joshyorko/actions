@@ -1,0 +1,4 @@
+[
+  "tests/contract_tests/test_bundle_canonical_rcc.py::test_two_actions_pin_outer_package_and_execute_distinct_plans[sqlite]",
+  "tests/contract_tests/test_bundle_canonical_rcc.py::test_two_actions_pin_outer_package_and_execute_distinct_plans[postgresql]"
+]
