@@ -1,0 +1,21 @@
+{
+  "repo": "modelcontextprotocol/ext-tasks",
+  "commit": "b3d28aceaa6d49f5f92258e3d06b61ad6f111e84",
+  "release": "2026-07-28",
+  "files": {
+    "upstream/LICENSE": "7bddc248ee09b4bc5f4e9eec569ad562c8d9e60389b63c4fcd444761117420eb",
+    "upstream/schema.json": "bf30afb7ac251e3e22c037b7a685f60ef6603031b5484c0d08b1fa0bbe86d460",
+    "upstream/schema.ts": "35a4ae593e60410716196773b5b63e8cb4677ddb49edc1afb8bbb43753dda4e7",
+    "upstream/spec.schema.json": "78f0902444e03fc687f262ce796a48af06c02bc67be3d1bf36b7a2ffbb83d0fa",
+    "upstream/tasks.md": "5fc22b9b5ff248703927c69855f751a061c2d6170f4dc3923204452f859f91a5"
+  },
+  "validatedDefinitions": [
+    "CreateTaskResult",
+    "GetTaskRequest",
+    "GetTaskResult",
+    "UpdateTaskRequest",
+    "UpdateTaskResult",
+    "CancelTaskRequest",
+    "CancelTaskResult"
+  ]
+}

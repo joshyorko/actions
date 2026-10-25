@@ -12,6 +12,7 @@ import json
 import logging
 from collections.abc import Iterable, Iterator
 from contextlib import ExitStack, contextmanager
+from dataclasses import dataclass
 from typing import Any, Protocol, TypeVar
 from uuid import uuid4
 
@@ -46,6 +47,12 @@ MAX_RESULT_BYTES = 1024 * 1024
 MAX_OUTPUTS = 64
 OPERATIONS = frozenset({"execute", "read", "cancel", "review"})
 T = TypeVar("T")
+
+
+@dataclass(frozen=True)
+class RunAdmissionOutcome:
+    run: Run
+    created: bool
 
 
 class AccessDenied(PermissionError):
@@ -436,6 +443,15 @@ class RunOutputService:
         inputs: Any,
         idempotency_key: str,
     ) -> Run:
+        return self.admit_outcome(actor, snapshot, inputs, idempotency_key).run
+
+    def admit_outcome(
+        self,
+        actor: Actor,
+        snapshot: ExecutionSnapshot,
+        inputs: Any,
+        idempotency_key: str,
+    ) -> RunAdmissionOutcome:
         snapshot = _snapshot(snapshot)
         if (
             not isinstance(idempotency_key, str)
@@ -488,7 +504,7 @@ class RunOutputService:
                 ):
                     raise ValueError("idempotency key conflicts with changed request")
                 self._authorize(actor, self._pinned(pin), "execute")
-                return _one(self.db, Run, pin.run_id)
+                return RunAdmissionOutcome(_one(self.db, Run, pin.run_id), False)
             run_id = str(uuid4())
             numbered = _returning(
                 self.db,
@@ -533,7 +549,7 @@ class RunOutputService:
                     str(created_ms),
                 ),
             )
-            return run
+            return RunAdmissionOutcome(run, True)
 
     def _fence(self, fence: AttemptFence) -> RunPin:
         fence = AttemptFence.model_validate(fence)

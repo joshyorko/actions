@@ -34,6 +34,7 @@ from .resource_routing import ResourceRoutingProjection, resource_template_match
 if TYPE_CHECKING:
     from actions.server.data_queries.canvas_mcp import InvoiceCanvasMcp
     from actions.server.foundry.mcp import CanvasMcp
+    from actions.server.run_outputs.task_service import TaskService
 
 log = logging.getLogger(__name__)
 CATALOG_REVISION_META_KEY = "actions.catalogRevision"
@@ -82,6 +83,7 @@ class McpServerSetupHelper:
         *,
         invoice_canvas: "InvoiceCanvasMcp | None" = None,
         canvas_foundry: "CanvasMcp | None" = None,
+        task_service: "TaskService | None" = None,
     ) -> None:
         from mcp.server import Server
         from mcp.server.transport_security import TransportSecuritySettings
@@ -109,6 +111,13 @@ class McpServerSetupHelper:
             on_list_prompts=self._list_prompts,
             on_get_prompt=self._get_prompt,
         )
+
+        self._task_adapter = None
+        if task_service is not None:
+            from actions.server.mcp.task_adapter import TaskMcpAdapter
+
+            self._task_adapter = TaskMcpAdapter(canvas_foundry, task_service)
+            self._task_adapter.install(self.server)
 
     def allow_tunnel_origin(self, public_url: str) -> Callable[[], None]:
         """Temporarily admit one validated HTTPS tunnel host and origin."""
@@ -211,9 +220,19 @@ class McpServerSetupHelper:
             tools.extend(await self._canvas_foundry.tools(_ctx))
         if self._invoice_canvas is not None:
             tools.extend(await self._invoice_canvas.tools(_ctx))
+        if self._task_adapter is not None:
+            tools = await self._task_adapter.tools(_ctx, tools)
         return ListToolsResult(tools=tools, **self._catalog_result_metadata(catalog))
 
     async def _call_tool(self, ctx: Any, params: Any):
+        if (
+            params.name == "capability_invoke"
+            and isinstance(params.arguments, dict)
+            and params.arguments.get("mode") == "detached"
+        ):
+            if self._task_adapter is None:
+                raise MCPError(-32603, "Task host unavailable")
+            return await self._task_adapter.create(ctx, params)
         if self._canvas_foundry is not None:
             from actions.server.foundry.mcp import RESERVED_TOOLS
 
@@ -421,6 +440,10 @@ class McpServerSetupHelper:
                     },
                     sort_keys=True,
                 ).encode()
+            ).hexdigest()
+        if self._task_adapter is not None:
+            revision = sha256(
+                (revision + ":actions.current-detached-task-catalog/v1").encode()
             ).hexdigest()
         if self._invoice_canvas is None:
             return revision

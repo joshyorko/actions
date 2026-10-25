@@ -62,12 +62,16 @@ class DetachedActions:
         )
 
     def admit(self, actor, snapshot, inputs, key):
+        return self.admit_outcome(actor, snapshot, inputs, key).run
+
+    def admit_outcome(self, actor, snapshot, inputs, key):
         with _transaction(self.db):
             service = self._service(actor, snapshot)
             RunOutputControlPlane(self.db, capabilities=service.registry).register(
                 snapshot
             )
-            run = self.outputs.admit(actor, snapshot, inputs, key)
+            outcome = self.outputs.admit_outcome(actor, snapshot, inputs, key)
+            run = outcome.run
             pin = _one(self.db, RunPin, run.id)
             if pin.admission_principal_id != actor.principal_id:
                 raise AccessDenied("detached admission principal differs")
@@ -92,7 +96,7 @@ class DetachedActions:
                         run.id, snapshot.workspace_id, actor.principal_id, envelope
                     ),
                 )
-            return run
+            return outcome
 
     def _integrity(self, actor, run_id):
         canonical_uuid(run_id)

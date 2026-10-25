@@ -442,38 +442,27 @@ def test_existing_regex_literal_behavior_is_retained():
 
 
 def test_v13_migration_preserves_exact_keys_but_starts_empty_routing_history(tmp_path):
+    from action_server_tests.foundry_historical import create_historical_schema
+
+    from actions.server._database import Database
     from actions.server._models import (
         McpCatalogName,
         McpResourceRouting,
         create_db,
+        get_all_model_classes,
         load_db,
     )
     from actions.server.migrations import CURRENT_VERSION, migrate_db
 
     path = tmp_path / "old.db"
-    with create_db(path) as db:
+    with create_db(tmp_path / "fresh.db") as db:
         columns, indexes = db.list_table_and_columns(), db.list_indexes()
+    db = Database(path)
+    with db.connect():
+        db.initialize(get_all_model_classes())
         with db.transaction():
+            create_historical_schema(db, 13)
             db.insert(McpCatalogName("old-key", "tool", "old", "owner", "read"))
-            db.execute("DROP TABLE mcp_resource_routing")
-            from action_server_tests.fixtures import (
-                drop_foundry_records_for_backdated_fixture,
-            )
-
-            drop_foundry_records_for_backdated_fixture(db)
-            # Restore the real pre-14 schema, including absence of later records.
-            for table in (
-                "invoice_review",
-                "fenced_work_item",
-                "run_output",
-                "run_attempt",
-                "run_pin",
-                "run_access_grant",
-                "run_admission",
-                "workspace",
-            ):
-                db.execute("DROP TABLE " + table)
-            db.execute("DELETE FROM migration")
             db.execute(
                 "INSERT INTO migration(id,name) VALUES(13,'add_mcp_catalog_names')"
             )

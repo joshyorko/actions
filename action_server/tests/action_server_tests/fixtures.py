@@ -422,13 +422,3 @@ def run_async_in_new_thread(async_func: Any) -> Any:
 
     fut = run_in_thread(func_in_thread)
     return fut.result()
-
-
-def drop_foundry_records_for_backdated_fixture(db) -> None:
-    """Remove schema17 records before pretending a current fixture is older."""
-    from actions.server._database import _make_table_name
-    from actions.server.foundry.models import MODEL_CLASSES
-
-    # Reverse registration order drops dependent audit/deployment records first.
-    for cls in reversed(MODEL_CLASSES):
-        db.execute("DROP TABLE " + _make_table_name(cls))

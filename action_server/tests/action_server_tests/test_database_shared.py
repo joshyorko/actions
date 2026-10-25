@@ -232,32 +232,20 @@ def test_forward_schema_repair_removes_accidental_run_output_columns(tmp_path: P
 def test_migrate_archives_legacy_output_before_historical_migration_11(
     tmp_path: Path,
 ):
-    from actions.server._models import Run, create_db
+    from action_server_tests.foundry_historical import create_historical_schema
+
+    from actions.server._models import Run, get_all_model_classes
     from actions.server.migrations import CURRENT_VERSION, migrate_db
 
     db_path = tmp_path / "migration-v10-populated.db"
-    with create_db(db_path) as db:
+    db = Database(db_path)
+    with db.connect():
+        db.initialize(get_all_model_classes())
         with db.transaction():
-            from action_server_tests.fixtures import (
-                drop_foundry_records_for_backdated_fixture,
-            )
-
-            drop_foundry_records_for_backdated_fixture(db)
-            # Backdating must also remove schema owned by later migrations.
-            for table in (
-                "invoice_review",
-                "fenced_work_item",
-                "run_output",
-                "run_attempt",
-                "run_pin",
-                "run_access_grant",
-                "run_admission",
-                "workspace",
-                "mcp_resource_routing",
-                "mcp_catalog_name",
-            ):
-                db.execute("DROP TABLE " + table)
-            db.execute("UPDATE migration SET id = ?, name = ?", [10, "add_schedules"])
+            # Deliberately reconstructed archival edge: frozen pre-13 tables plus
+            # populated legacy streams, entering the historical v11 preflight.
+            create_historical_schema(db, 12)
+            db.execute("INSERT INTO migration(id,name) VALUES(10,'add_schedules')")
             db.execute("ALTER TABLE run ADD COLUMN stdout TEXT")
             db.execute("ALTER TABLE run ADD COLUMN stderr TEXT")
             db.insert(
