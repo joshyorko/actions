@@ -129,19 +129,28 @@ but does not supply its exact adjacent package.yaml digest, resolved freeze, or
 portable artifact export. These two artifact identities must not be conflated.
 The old prepared.json is a reference receipt, not a transferable environment.
 
-For a new local qualification, retain the original `qualify.py` unchanged. Create
-a distinctly named local copy, adjust BASE/PREPARED to local build/preparation,
-and replace the single historical artifact assertion only with the digest from
-independently verified local preparation above. Record both the historical digest
-and new local digest plus manifest/wheel hashes and source SHA in its receipt.
-This is a new locally prepared a38 acceptance, not a rerun of the historical
-artifact. Keep the package.yaml hash check, installed origin/version/source checks,
-all genuine execution/completion checks and SAME-datadir restart/replay assertions.
-Do not weaken them to accommodate a failed setup. The source remains exactly f332a828.
+The currently assigned desktop gate requires that exact historical artifact.
+Do not replace its digest assertion with the older artifact or a newly built one.
+The local preparation steps above describe the supported mechanism only; they do
+not reconstruct the missing exact inputs or satisfy this gate.
 
-If exact historical artifact reproduction is required, the producer must provide
-its exact credential-free package.yaml/freeze and verified artifact export. That
-input is still missing from the committed handoff; no cache hash may be invented.
+The producer/integrator must supply, after confirming the identity:
+
+1. Exact credential-free `/workspace/actions-327-a38/compiler/package.yaml` bytes
+   and SHA256 matching the original prepared receipt's packageYamlDigest.
+2. The original preparation's specificationDigest/artifactDigest/RCC version and
+   resolved freeze or portable artifact export needed to reproduce/import the
+   exact `23094fc...` identity. The producer's absolute robocorpHome is descriptive
+   only and must not be treated as a portable path.
+3. Exact measured Core wheel selection and preparation commands, including any
+   portable dependency freeze that differs from the older committed manifest.
+
+Both `/workspace/actions-327-a38` and `/workspace/actions-recovery-327` are absent
+in this lane VM. The committed a38 JSON/recipe/README search exposes the digest
+and source/wheel facts but not the adjacent exact compiler manifest/receipt.
+This is a missing-producer-input blocker, not a denied action or an upstream bug.
+No private datadir, authorization receipt, credentials or whole home is requested.
+The original qualified script and historical digest assertion remain unchanged.
 
 ## Local authorization and handoff limits
 
