@@ -2356,6 +2356,13 @@ network, role/credential/TLS changes, lifespan, and ownership-checked removal.
 Neither `--rm` nor a host supervisor alone proves removal after host failure;
 leave unsupported cleanup/TTL guarantees explicit and do not weaken TLS or use
 another credential/target to avoid the rejected action.
+Read-only image inspection must follow final OCI layer order and distinguish
+static capability from runtime proof. The entrypoint's generic `${VAR}_FILE`
+handler can establish password-file support even without a literal variable
+name in its script. An executable BusyBox timeout applet does not prove GNU
+option syntax, PID1 behavior or container auto-removal. A watchdog cannot
+autonomously remove its host-created Docker network; retain that cleanup limit
+and block an all-path-removal claim when the available lifecycle cannot support it.
 
 An assembled route inventory classifies exposure; it does not prove denial.
 Probe every configured-key method with missing and wrong bearer credentials,

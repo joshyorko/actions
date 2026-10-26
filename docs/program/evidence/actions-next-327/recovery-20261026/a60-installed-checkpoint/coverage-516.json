@@ -1,0 +1,43 @@
+{
+  "baseline_written": false,
+  "failed_gates": [],
+  "measured": {
+    "covered_statements": 41665,
+    "missing_source_files": {},
+    "statement_count": 58748,
+    "statement_percent": 70.9216
+  },
+  "minimum_statement_percent": 53.38,
+  "state": "PASS",
+  "subprocess_coverage": "Subprocess coverage depends on pytest-cov activation and inherited environment; complete subprocess and installed-wheel coverage is not claimed.",
+  "suite_exit_codes": {
+    "action_server": 0,
+    "actions": 0,
+    "actions-http-helper": 0,
+    "devutils": 0,
+    "work-items": 0
+  },
+  "suite_states": {
+    "action_server": "PASS",
+    "actions": "PASS",
+    "actions-http-helper": "PASS",
+    "devutils": "PASS",
+    "work-items": "PASS"
+  },
+  "observation": {
+    "run_id": 40385053161,
+    "job_id": 121791097172,
+    "head": "642c6d3f62c2d271d33459553ef560a10f283f1f",
+    "tree": "1ed445d6a3d77ef51ca705789a62bb7638a07897",
+    "merge": "08e8a7c0db71fe5a3c29779100a5b368121d78f9",
+    "owned_postgresql_cleanup": "success",
+    "receipt_upload": "success",
+    "toolkit": "230 passed in48.08s",
+    "runtime": "5357 passed,58 skipped,18 warnings in2588.51s",
+    "core": "449 passed,5 skipped",
+    "http_helper": "12 passed",
+    "devutils": "335 passed",
+    "work_items": "285 passed,46 skipped,3 deselected,10 xfailed",
+    "source": "permitted terminal job log and jobs metadata; no artifact download"
+  }
+}

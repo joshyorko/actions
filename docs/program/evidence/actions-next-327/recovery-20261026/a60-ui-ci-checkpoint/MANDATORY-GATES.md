@@ -1,3 +1,5 @@
+> Historical source-only planning snapshot. The [subsequent exact installed and terminal CI checkpoint](../a60-installed-checkpoint/README.md) supersedes its pending a60 build/CI statuses; all original acceptance text and remaining scopes are retained.
+
 # #327 / #328 mandatory-gate priority ledger — a60
 
 **Disposition: NO-GO.** This ledger maps all 28 original matrix rows to concrete remaining checks; it adds no release scope. Optional celld remains NO-GO and is not a release blocker unless the owner includes it. The exact original acceptance text and references are retained in the JSON companion.

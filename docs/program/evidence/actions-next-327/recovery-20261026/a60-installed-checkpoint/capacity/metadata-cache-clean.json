@@ -1,0 +1,14 @@
+{
+  "status": "PASS_RECONSTRUCTIBLE_METADATA_CACHE_ONLY",
+  "targets": [
+    "/workspace/actions-cloud/cache/pypoetry/cache/repositories/PyPI",
+    "/workspace/actions-cloud/cache/npm"
+  ],
+  "free_before": 10880753664,
+  "active_installers": [],
+  "preserved": "all node_modules, package artifact archives, every consumer, all compiler/RCC views/artifacts/trust/catalogs and all a57 files",
+  "poetry_exit": 0,
+  "npm_exit": 0,
+  "free_after": 10929516544,
+  "actual_bytes_reclaimed": 48762880
+}

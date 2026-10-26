@@ -1,0 +1,563 @@
+"""Reviewable a60 real-RCC Data Package acceptance harness.
+
+This file is intentionally isolated from the repository's test collection.
+It may only run after root review and capacity preflight. It uses the exact
+a60 installed consumer for product imports and source test helpers solely to
+construct fixed synthetic local SQLite/provider fixtures.
+"""
+
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+from pathlib import Path
+import shutil
+import sys
+import threading
+from uuid import uuid4
+
+import pytest
+
+
+ROOT = Path("/workspace")
+DATA_CONSUMER_VALUE = os.environ.get("A60_DATA_DUCKDB_CONSUMER_PREFIX")
+if not DATA_CONSUMER_VALUE:
+    raise RuntimeError(
+        "A60_DATA_DUCKDB_CONSUMER_PREFIX must identify a separate fresh a60 "
+        "consumer with the locked data-duckdb extra; the a60 base consumer is insufficient"
+    )
+CONSUMER = Path(DATA_CONSUMER_VALUE)
+BASE_CONSUMER = ROOT / "327-probes/a60-consumer/consumer"
+SITE = CONSUMER / "lib/python3.12/site-packages"
+CONSUMER_RECEIPT = Path(
+    os.environ.get(
+        "A60_DATA_CONSUMER_RECEIPT", CONSUMER.parent / "consumer-ready.json"
+    )
+)
+TEST_SOURCES = Path(
+    os.environ.get("A60_ACTION_TEST_SOURCES", ROOT / "actions/action_server/tests")
+)
+PARQUET_FIXTURE = Path(
+    os.environ.get(
+        "A60_PARQUET_FIXTURE",
+        ROOT
+        / "327-probes/a59-installed-data/service-path/fixture-6eeae4646a1b.parquet",
+    )
+)
+PREPARED = Path(
+    os.environ.get(
+        "ACTIONS_PACKAGE_COMPILER_PREPARED_RCC_RECEIPT",
+        ROOT / "327-probes/a53-claimed/compiler/prepared.json",
+    )
+)
+MANIFEST = Path(
+    os.environ.get(
+        "A60_RCC_PACKAGE_MANIFEST", ROOT / "327-probes/a53-claimed/compiler/package.yaml"
+    )
+)
+RCC = Path(
+    os.environ.get(
+        "ACTIONS_PACKAGE_COMPILER_RCC",
+        ROOT / "actions/action_server/src/actions/server/bin/rcc-18.19.3",
+    )
+)
+
+EXPECTED_SOURCE = "642c6d3f62c2d271d33459553ef560a10f283f1f"
+EXPECTED_TREE = "1ed445d6a3d77ef51ca705789a62bb7638a07897"
+EXPECTED_WHEEL = "b4b039a47091eb2808c51ea9c3b8117c0c0f4d700c066d87dfe0321b7bcec0b7"
+EXPECTED_PREPARED_SHA256 = "62b36982a64f5985f2f5d9798abbfb0be228861534f9784ce532cd2efafcc5d0"
+EXPECTED_MANIFEST_SHA256 = "sha256:a17d5208f646fa6741ce99cbeca6a1dd37c5cbc0bb752b8c6087b0bdbf823807"
+EXPECTED_RCC_SPECIFICATION = "sha256:c73d38836f2c9e4655fba9221dbe9d208a57a25f40728a0e3e377f0a6f33a60d"
+EXPECTED_RCC_ARTIFACT = "sha256:ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24"
+EXPECTED_CSV_REVISION = "sha256:ae5c17541c9732fd0f2413b5f8c5f3dd6b122ee9d3f40f6381eee4411e82426f"
+EXPECTED_CSV_OBJECT = "sha256:82deaa1b42aa71c43d2f189d5bd34e8da1cf4a1c1a5de119bfa80edefc61d84c"
+EXPECTED_PARQUET_REVISION = "sha256:9102abb5c4cbcbe78d65aa7475cbd4ea762dc5e1de80805563e7e7f04eb94642"
+EXPECTED_PARQUET_OBJECT = "sha256:195963e40c3c38c7a7d8af232db0062fa2a82f552497a752b9791231f25448ea"
+DISK_FLOOR_BYTES = 10 * 1024**3
+EXPECTED_TEST_HELPER_BLOBS = {
+    "action_server_tests/test_foundry_package_registry.py": "df8bdb5e9325e44ac1b5fc3d5f0b613e31a74bbc",
+    "action_server_tests/test_foundry_deployments.py": "c91581e5532ab429375ffd0a7affa0417e7bc085",
+    "action_server_tests/foundry_fixtures.py": "e6549b3c275a0385d10283c68ec653634b0190e1",
+    "action_server_tests/test_generic_work_item_execution.py": "ffeba617230ecb3a911c958a038db9242ff43d4a",
+    "action_server_tests/test_local_authorization.py": "84743cfdcc43ab23c789d13bc9976c92afdfad7a",
+    "action_server_tests/test_local_provider_setup.py": "cce68dcff14d49229d52eef48b811adc4cdc3978",
+    "action_server_tests/test_logical_binding_checkpoint.py": "049477a993ac3ad0095735f6ae0bbd20fe00c8cd",
+    "action_server_tests/test_provider_catalog.py": "7aee8ad7ad713c915ece8ccfcc06984d74862f8b",
+    "contract_tests/test_package_revision_compiler.py": "9b356ef49710dea1a2248bc05f73ad75dbdfe5f0",
+}
+
+if str(SITE) not in sys.path:
+    sys.path.insert(0, str(SITE))
+if str(TEST_SOURCES) not in sys.path:
+    sys.path.insert(1, str(TEST_SOURCES))
+
+import importlib.metadata
+
+import pytest
+from action_server_tests.test_foundry_package_registry import _registry
+from action_server_tests.test_generic_work_item_execution import grant as sql_grant
+from action_server_tests.test_local_authorization import local
+from action_server_tests.test_local_provider_setup import (
+    call as provider_call,
+    grant as provider_grant,
+    private_write,
+    request as provider_request,
+)
+from contract_tests.test_package_revision_compiler import _entry, _generated_action_entries
+
+from actions.server._models import Run, load_db
+from actions.server.deployments.foundry_repository import FoundryRepository
+from actions.server.deployments.foundry_service import FoundryDeploymentService
+from actions.server.deployments.ids import DeploymentId, ProviderProfileId
+from actions.server.deployments.logical_bindings import (
+    BindingField,
+    BindingOperation,
+    LogicalBindingRequirement,
+)
+from actions.server.deployments.provider_registry import (
+    CsvSourceCodec,
+    DecodedSourceObject,
+    ParquetSourceCodec,
+    ProviderDescriptor,
+    SourceColumn,
+    SourceManifest,
+)
+from actions.server.deployments.package_revision_compiler import (
+    PinnedRccPackageBuildExecutor,
+    load_prepared_rcc_environment,
+)
+from actions.server.foundry.authoring_bindings import DataBindingChoice
+from actions.server.foundry.authoring_values import CanvasBinding
+from actions.server.foundry.logical_execution import LogicalExecution
+from actions.server.run_outputs.models import RunAttempt, RunOutput, RunPin
+from actions.server.foundry.provider_config import DuckDBHost, ProviderHostConfig
+from actions.server.foundry.provider_execution import ConfiguredProviderExecution
+from actions.server.foundry.runtime_profile import (
+    RuntimeDeploymentSelection,
+    RuntimeExecutionProfile,
+)
+from actions.server.foundry.sql_authorization import (
+    SqlFoundryAuthorization,
+    reference_grant_subject,
+)
+from actions.server.foundry.rcc_execution import GeneratedRccExecution
+from actions.server.run_outputs.filesystem import FilesystemOutputProvider
+from actions.server.run_outputs.service import (
+    FenceRejected,
+    RunOutputControlPlane,
+    RunOutputService,
+)
+from actions.server.run_outputs.types import OutputRef
+from action_server_tests.test_local_provider_setup import SourceImport
+from actions.server._models import RunStatus
+
+pytest_plugins = ["action_server_tests.foundry_fixtures"]
+
+CSV_BYTES = (
+    b"record_id,count,amount,active,note\n"
+    b"z,2,1.5,true,\\N\n"
+    b'a,-1,-0.0,false,"quoted, value"\n'
+)
+EXPECTED_ROWS = [
+    {"record_id": "z", "count": 2, "amount": 1.5, "active": True},
+    {
+        "record_id": "a",
+        "count": -1,
+        "amount": -0.0,
+        "active": False,
+        "note": "quoted, value",
+    },
+]
+
+
+def _check_candidate_and_origins() -> None:
+    assert CONSUMER.resolve(strict=True).is_dir()
+    assert CONSUMER.resolve() != BASE_CONSUMER.resolve()
+    assert Path(sys.prefix).resolve() == CONSUMER.resolve()
+    assert SITE.resolve(strict=True).is_dir()
+    assert TEST_SOURCES.resolve(strict=True).is_dir()
+    ready = json.loads(CONSUMER_RECEIPT.read_text())
+    assert ready["source_commit"] == EXPECTED_SOURCE
+    assert ready["source_tree"] == EXPECTED_TREE
+    assert ready["candidate_wheels"]["actions-runtime"]["sha256"] == EXPECTED_WHEEL
+    assert "data-duckdb" in ready["selected_runtime_extras"]
+    assert Path(ready["consumer_python"]).resolve().is_relative_to(
+        CONSUMER.resolve()
+    )
+    assert importlib.metadata.version("actions-runtime") == "1.1.0a60"
+    assert importlib.metadata.version("duckdb") == "1.4.1"
+    import duckdb
+
+    assert Path(duckdb.__file__).resolve().is_relative_to(SITE.resolve())
+    wheel = ROOT / "327-artifacts/a60/actions_runtime-1.1.0a60-cp312-cp312-linux_x86_64.whl"
+    assert hashlib.sha256(wheel.read_bytes()).hexdigest() == EXPECTED_WHEEL
+    receipt_bytes = PREPARED.read_bytes()
+    assert hashlib.sha256(receipt_bytes).hexdigest() == EXPECTED_PREPARED_SHA256
+    prepared_json = json.loads(receipt_bytes)
+    assert prepared_json["packageYamlDigest"] == EXPECTED_MANIFEST_SHA256
+    assert prepared_json["specificationDigest"] == EXPECTED_RCC_SPECIFICATION
+    assert prepared_json["artifactDigest"] == EXPECTED_RCC_ARTIFACT
+    assert (
+        hashlib.sha256(MANIFEST.read_bytes()).hexdigest()
+        == EXPECTED_MANIFEST_SHA256.removeprefix("sha256:")
+    )
+    assert hashlib.sha256(CSV_BYTES).hexdigest() == EXPECTED_CSV_OBJECT.removeprefix("sha256:")
+    assert (
+        hashlib.sha256(PARQUET_FIXTURE.read_bytes()).hexdigest()
+        == EXPECTED_PARQUET_OBJECT.removeprefix("sha256:")
+    )
+    assert RCC.resolve(strict=True).is_file()
+    modules = (
+        "actions.server.deployments.package_revision_compiler",
+        "actions.server.foundry.logical_execution",
+        "actions.server.foundry.rcc_execution",
+        "actions.server.data_queries.sealed_duckdb",
+    )
+    for name in modules:
+        module = __import__(name, fromlist=["__file__"])
+        assert Path(module.__file__).resolve().is_relative_to(SITE.resolve()), (
+            name,
+            module.__file__,
+        )
+    for relpath, expected_blob in EXPECTED_TEST_HELPER_BLOBS.items():
+        content = (TEST_SOURCES / relpath).read_bytes()
+        git_blob = hashlib.sha1(
+            b"blob " + str(len(content)).encode("ascii") + b"\0" + content
+        ).hexdigest()
+        assert git_blob == expected_blob, (relpath, git_blob, expected_blob)
+
+
+def _operation() -> BindingOperation:
+    columns = (
+        ("record_id", "string", False),
+        ("count", "integer", False),
+        ("amount", "number", False),
+        ("active", "boolean", False),
+        ("note", "string", True),
+    )
+    return BindingOperation(
+        name="records.scan/v1",
+        effect="read",
+        parameters=(),
+        result=tuple(
+            BindingField(name=name, kind=kind, required=not nullable)
+            for name, kind, nullable in columns
+        ),
+        max_rows=10,
+        max_bytes=4096,
+        timeout_ms=5000,
+    )
+
+
+def _register_fixed_provider(g, label: str, path: Path, codec):
+    raw = path.read_bytes()
+    digest = "sha256:" + hashlib.sha256(raw).hexdigest()
+    source = SourceManifest(
+        schema_version="actions.logical-source/v2",
+        kind="data",
+        objects=(
+            DecodedSourceObject(
+                name="records", digest=digest, size=len(raw), codec=codec
+            ),
+        ),
+    )
+    operation = _operation()
+    descriptor = ProviderDescriptor(
+        workspace_id=g.workspace,
+        provider_profile_id=ProviderProfileId(str(uuid4())),
+        source_revision=source.revision_id,
+        kind="data",
+        operations=(operation,),
+    )
+    provider_call(
+        g,
+        provider_request(
+            g,
+            "import-source",
+            source=source,
+            files=(SourceImport(name="records", path=str(path)),),
+        ),
+    )
+    provider_call(g, provider_request(g, "register-revision", descriptor=descriptor))
+    provider_grant(
+        g,
+        ["provider.manage", "provider.inspect", "data.read", "execute", "deploy"],
+        descriptor.reference,
+    )
+    config = ProviderHostConfig(
+        provider=descriptor.reference,
+        source_revision=source.revision_id,
+        host=DuckDBHost(),
+    )
+    provider_call(g, provider_request(g, "configure-host", config=config))
+    return descriptor, source, operation
+
+
+def _generated_entries():
+    entries = _generated_action_entries()
+    manifest = MANIFEST.read_bytes()
+    action_source = (
+        b"from actions import action, data\n\n"
+        b"@action\n"
+        b"def scan_both(value: str) -> dict:\n"
+        b"    csv_rows = data.scan('csv_records', 'records.scan/v1')\n"
+        b"    parquet_rows = data.scan('parquet_records', 'records.scan/v1')\n"
+        b"    return {'value': value, 'csv': csv_rows, 'parquet': parquet_rows}\n"
+    )
+    package_tests = (
+        b"import unittest\n"
+        b"from actions.data import scan\n"
+        b"from generated_actions import scan_both\n\n"
+        b"class DataBoundActionTest(unittest.TestCase):\n"
+        b"    def test_action_requires_host_context(self):\n"
+        b"        with self.assertRaises(ValueError):\n"
+        b"            scan('csv_records', 'records.scan/v1')\n"
+        b"    def test_action_shape(self):\n"
+        b"        self.assertTrue(callable(scan_both))\n"
+    )
+    replacements = {
+        "package.yaml": manifest,
+        "generated_actions.py": action_source,
+        "tests/test_generated_action.py": package_tests,
+    }
+    return [
+        _entry(entry.path, replacements[entry.path])
+        if entry.path in replacements
+        else entry
+        for entry in entries
+    ]
+
+
+@pytest.fixture
+def fixed_data_providers(local, tmp_path):
+    _check_candidate_and_origins()
+    g = local
+    blobs_root = g.root / "blobs"
+    blobs_root.mkdir(mode=0o700, exist_ok=True)
+    csv_path = g.root / "records.csv"
+    private_write(csv_path, CSV_BYTES.decode("utf-8"))
+    parquet_path = g.root / "records.parquet"
+    shutil.copyfile(PARQUET_FIXTURE, parquet_path)
+    cols = tuple(
+        SourceColumn(name=name, kind=kind, nullable=nullable)
+        for name, kind, nullable in (
+            ("record_id", "string", False),
+            ("count", "integer", False),
+            ("amount", "number", False),
+            ("active", "boolean", False),
+            ("note", "string", True),
+        )
+    )
+    csv_codec = CsvSourceCodec(
+        columns=cols, max_rows=10, max_decoded_bytes=4096, max_field_bytes=128
+    )
+    parquet_codec = ParquetSourceCodec(
+        columns=cols,
+        max_rows=10,
+        max_decoded_bytes=4096,
+        max_field_bytes=128,
+        max_row_groups=4,
+    )
+    provider_grant(g, ["provider.register"])
+    csv_provider = _register_fixed_provider(g, "csv", csv_path, csv_codec)
+    parquet_provider = _register_fixed_provider(
+        g, "parquet", parquet_path, parquet_codec
+    )
+    assert csv_provider[1].revision_id == EXPECTED_CSV_REVISION
+    assert parquet_provider[1].revision_id == EXPECTED_PARQUET_REVISION
+    yield g, csv_provider, parquet_provider
+
+
+def test_a60_real_rcc_immutable_data_package_run(
+    fixed_data_providers, tmp_path
+):
+    g, csv_provider, parquet_provider = fixed_data_providers
+    assert isinstance(g.profile, RuntimeExecutionProfile)
+    assert g.profile.schema_version == "actions.runtime-rcc-profile/v1"
+    assert g.profile.admission == "trusted-developer-execution"
+    assert all(
+        ref.workspace_id == g.workspace
+        for ref in (g.profile.worker, g.profile.policy, g.profile.output_provider)
+    )
+    assert shutil.disk_usage(ROOT).free >= DISK_FLOOR_BYTES
+    fd = os.open(g.root / "blobs", os.O_RDONLY | os.O_DIRECTORY)
+    try:
+        with FilesystemOutputProvider(fd) as blobs, load_db(g.root / "server.db") as db:
+            prepared = load_prepared_rcc_environment(PREPARED)
+            assert prepared.package_yaml_digest == EXPECTED_MANIFEST_SHA256
+            assert prepared.build_identity.artifact_digest == EXPECTED_RCC_ARTIFACT
+            assert prepared.build_identity.specification_digest == EXPECTED_RCC_SPECIFICATION
+            registry = _registry(
+                db, blobs, executor=PinnedRccPackageBuildExecutor(prepared)
+            )
+            app = DeploymentId(str(uuid4()))
+            sql_grant(
+                db,
+                g.actor,
+                g.workspace,
+                "workspace",
+                str(g.workspace.root),
+                ["deploy", "execute", "generate_backend", "apply_revision"],
+            )
+            requirements = (
+                LogicalBindingRequirement(
+                    id="csv_records", kind="data", operations=(csv_provider[2],)
+                ),
+                LogicalBindingRequirement(
+                    id="parquet_records", kind="data", operations=(parquet_provider[2],)
+                ),
+            )
+            compiled = registry.compile_trusted_source(
+                _generated_entries(),
+                logical_package_key="a60-csv-parquet-data-package",
+                logical_name="a60 CSV and Parquet Data Package",
+                trusted_actor=g.actor,
+                workspace_id=g.workspace,
+                application_id=app,
+                logical_requirements=requirements,
+            )
+            assert compiled.evidence.ready, compiled.evidence
+            package = registry.admit_compiled(
+                g.actor, g.workspace, compiled.compiled_package
+            )
+            capability = registry.capability_refs(package)[0]
+            for ref in (g.profile.worker, g.profile.policy, g.profile.output_provider):
+                sql_grant(
+                    db,
+                    g.actor,
+                    g.workspace,
+                    "reference",
+                    reference_grant_subject(ref),
+                    ["deploy", "execute"],
+                )
+            factory = ConfiguredProviderExecution(db, g.root, blobs)
+            selection = RuntimeDeploymentSelection(
+                registry, SqlFoundryAuthorization(db), g.profile, factory.registry
+            )
+            spec = selection.select_specification_with_bindings(
+                g.actor,
+                g.workspace,
+                app,
+                (package,),
+                (CanvasBinding(binding_id="query", capability=capability),),
+                (
+                    DataBindingChoice(
+                        bindingId="query",
+                        requirementId="csv_records",
+                        provider=csv_provider[0].reference,
+                    ),
+                    DataBindingChoice(
+                        bindingId="query",
+                        requirementId="parquet_records",
+                        provider=parquet_provider[0].reference,
+                    ),
+                ),
+            )
+            deployments = FoundryDeploymentService(
+                FoundryRepository(db),
+                registry,
+                SqlFoundryAuthorization(db),
+                registry,
+            )
+            revision = deployments.create(
+                g.actor, g.workspace, app, spec, idempotency_key="a60-data-package-run"
+            )
+            sql_grant(
+                db,
+                g.actor,
+                g.workspace,
+                "reference",
+                reference_grant_subject(revision.ref),
+                ["execute", "deploy"],
+            )
+            snapshot = deployments.resolve(
+                g.actor, g.workspace, app, capability
+            ).snapshot
+            control = RunOutputControlPlane(db, capabilities=registry)
+            control.register(snapshot)
+            control.grant(g.actor, revision.ref, {"execute", "read", "cancel"})
+            outputs = RunOutputService(
+                db, {snapshot.provider_key: blobs}, capabilities=registry
+            )
+            run = outputs.admit(g.actor, snapshot, {"value": "a60-data"}, "a60-data")
+            fence = outputs.claim(run.id, g.profile.worker_id, lease_seconds=60)
+            logical = LogicalExecution(deployments, registry, outputs, factory)
+            logical.require_selected_adapters(snapshot)
+            runner = GeneratedRccExecution(
+                registry,
+                outputs,
+                prepared,
+                RCC,
+                tmp_path / "a60-data-rcc-execution",
+                logical_execution=logical,
+            )
+            completed = runner.execute(g.actor, fence, cancelled=threading.Event())
+            assert completed.status == RunStatus.PASSED
+            stored_rows = db.all(Run, where="id=?", values=[run.id])
+            assert len(stored_rows) == 1
+            stored = stored_rows[0]
+            assert stored.status == RunStatus.PASSED
+            pin_rows = db.all(RunPin, where="run_id=?", values=[run.id])
+            attempt_rows = db.all(RunAttempt, where="id=?", values=[fence.attempt_id])
+            assert len(pin_rows) == len(attempt_rows) == 1
+            assert pin_rows[0].current_attempt_id == fence.attempt_id
+            assert pin_rows[0].epoch == fence.epoch
+            assert attempt_rows[0].run_id == run.id
+            assert attempt_rows[0].epoch == fence.epoch
+            assert attempt_rows[0].state == "succeeded"
+            envelope = json.loads(stored.result)
+            assert envelope["version"] == 1
+            receipt = envelope["result"]
+            expected_action_result = {
+                "value": "a60-data",
+                "csv": EXPECTED_ROWS,
+                "parquet": EXPECTED_ROWS,
+            }
+            assert receipt["actionResult"] == expected_action_result
+            logical_ops = {
+                row["requirementId"]: row["sourceRevision"]
+                for row in receipt["logicalReads"]["operations"]
+            }
+            assert logical_ops == {
+                "csv_records": EXPECTED_CSV_REVISION,
+                "parquet_records": EXPECTED_PARQUET_REVISION,
+            }
+            output_rows = db.all(RunOutput, where="run_id=?", values=[run.id])
+            assert len(output_rows) == 4
+            assert len(envelope["outputs"]) == 4
+            readback_service = RunOutputService(
+                db, {snapshot.provider_key: blobs}, capabilities=registry
+            )
+            readbacks = {}
+            for row in output_rows:
+                output_ref = OutputRef(
+                    workspace_id=str(g.workspace.root), run_id=run.id, output_id=row.id
+                )
+                with readback_service.resolve(
+                    g.actor, str(g.workspace.root), output_ref.handle
+                ) as resolved:
+                    data = resolved.read()
+                    assert resolved.run_id == run.id
+                    assert resolved.name == row.name
+                    assert resolved.digest == row.digest
+                    assert resolved.size == row.size
+                    readbacks[row.name] = data
+            action_bytes = readbacks["generated-action-result.json"]
+            assert json.loads(action_bytes) == expected_action_result
+            action_output_receipt = next(
+                item
+                for item in receipt["outputs"]
+                if item["name"] == "generated-action-result.json"
+            )
+            assert hashlib.sha256(action_bytes).hexdigest() == action_output_receipt[
+                "digest"
+            ].removeprefix("sha256:")
+            assert len(action_bytes) == action_output_receipt["size"]
+            assert readbacks["rcc-receipt.json"]
+            assert receipt["packageRevision"] == package.revision_id.root
+            assert receipt["runtimePlanDigest"] == snapshot.runtime_plan.plan_digest.root
+            with pytest.raises(FenceRejected):
+                runner.execute(g.actor, fence, cancelled=threading.Event())
+    finally:
+        os.close(fd)

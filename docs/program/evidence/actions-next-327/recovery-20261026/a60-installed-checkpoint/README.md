@@ -57,8 +57,12 @@ n-1 job was cancelled before any step, while its replacement passed226/4 skips
 at the same source head. The original cancellation and unavailable logs remain
 recorded separately; the other five original lanes passed. Ubuntu
 Runtime394 passed the strict source-browser gate and receipt upload before tracked
-frontend embedding. Current Runtime394 and measured coverage516 are still active;
-terminal results must be joined to the exact source above. The previous passing
+frontend embedding. Runtime394 is terminal PASS on all three OSes, and measured coverage516 is
+terminal PASS at the same source/tree. Runtime portable/integration counts and
+scoped skips are retained in `hosted-terminal-runtime-toolkit.md`. All live
+no-conda MCP/resource/auth cases passed, and Ubuntu source-browser acceptance
+passed as configured. Both Windows Toolkit lanes ran all13 publication cases
+(13 dots in that module), with217 passed/13 unrelated skips overall. The previous passing
 coverage515 remains bound to daf41283; historical failed receipts remain failed.
 
 The [carryforward assessment](carryforward/README.md) retains all28 original rows
@@ -70,7 +74,13 @@ closes that union.
 
 The PostgreSQL role/password/grant setup was denied before execution and remains
 unapproved. Its proposal is not executable approval: isolated-network reachability,
-password-file support and cleanup under supervisor/host loss are not established.
+watchdog behavior and cleanup under supervisor/host loss are not established.
+Subsequent read-only OCI inspection confirms the existing entrypoint supports
+`POSTGRES_PASSWORD_FILE`; an executable BusyBox timeout applet is present, but
+its flags/runtime and automatic removal are unverified. The dedicated network
+has no autonomous expiry/removal, so strict all-path cleanup is unsupported.
+The [corrected proposal](postgres-proposal/README.md) remains not approval-ready;
+no setup or role/grant action was executed.
 No role, container, network, credential or SQL security setting was created by it.
 The protected Codex-home EROFS denial remains blocked without a permissions or
 credential-transfer workaround. The owner a57 CONNECT+RENDER test is independently
@@ -115,3 +125,52 @@ Peak disk is unmeasured, and roughly138MB above the10GiB floor does not establis
 capacity for its multiple RCC executions. No fabricated compiler or bypass is
 a substitute. Historical a39 two-app/RCC/restart acceptance remains valid for
 its exact source; it was not an absence of historical lifecycle proof.
+
+The isolated Data Package/Run draft is retained as text under
+`a60-data-package-fixture/` with its hash and `UNEXECUTED_DRAFT_SYNTAX_ONLY`
+receipt. It requires a separate locked a60 data-duckdb consumer; the qualified
+a60 base consumer remains unchanged. No imports, provider setup, fixture grants
+or RCC phases ran. Reconstructible Go/npm/Poetry metadata-cache cleanup reclaimed
+about53MB actual space; proof views/artifacts/trust, consumers and a57 were retained.
+Copy-on-write capability was unavailable. The remaining roughly192MB above the
+10GiB floor does not establish capacity for another data profile and RCC phases.
+The code is preparation, not completed acceptance or a production change.
+
+## Terminal current-source baseline
+
+[Coverage516](https://github.com/joshyorko/actions/actions/runs/40385053161),
+[Runtime394](https://github.com/joshyorko/actions/actions/runs/40385052663),
+[Toolkit817](https://github.com/joshyorko/actions/actions/runs/40385052648) and
+[native Build756](https://github.com/joshyorko/actions/actions/runs/40385052426)
+are terminal SUCCESS at source642c6d3f/tree1ed445d6. All13 associated hosted
+workflows pass. The Runtime distribution workflow's credential check and actual
+publish step were skipped, as was Work Items publication; build/upload success
+is not public publication. No second aggregate was dispatched.
+
+Coverage516 reports Toolkit230; Runtime5357/58 skips; Core449/5; HTTP12;
+devutils335; Work Items285/46 skips/3 deselected/10 expected failures. The
+package counts are separate, overlapping qualification scopes. Measured
+statements41665/58748=70.9216% exceed the53.38% threshold, with no missing
+source files, no failed gates, all suite exits0, and no baseline rewrite. Owned
+PostgreSQL removal and receipt upload passed. The log explicitly excludes a
+claim of complete installed-wheel/subprocess coverage. See `coverage-516.json`.
+
+The source baseline gate is complete at this exact identity. The next mandatory
+engineering proof is the composed Data Package/Run fixture after a fresh locked
+data profile and measured RCC capacity are available. Full trusted Runtime
+recovery, original provider/client/effect/artifact/platform scope, owner actual
+ChatGPT and invoiceE1, and publisher/security review remain separate original
+matrix gates. The owner is not the only blocker.
+
+## Durable source/evidence locations
+
+The release branch remains frozen at the tested product source642c6d3f. This
+documentation/evidence checkpoint is pushed on
+`evidence/327-a60-qualification-20261026`, without a new PR or a second aggregate.
+Its parent documentation commit523c0ea0 and basic-recovery reproduction scripts
+were also saved in Library `libfile_4a550ee3227c81918cf1697bc8e34d50` v0
+(114,286bytes, ZIP SHA-256
+`17943e563f4e67db7d3d29d206a51127152ef2c4f3d7b025aba934bc09ba3a6d`).
+That recovery bundle requires the published base642c6d3f. The evidence branch
+has no production-code change; these documentation commits are not folded into
+the release PR during this source-frozen qualification round.

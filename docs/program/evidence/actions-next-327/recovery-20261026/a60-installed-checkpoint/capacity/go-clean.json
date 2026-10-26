@@ -1,0 +1,12 @@
+{
+  "action": "supported go clean -cache only",
+  "target": "/workspace/actions-cloud/cache/go-build",
+  "files_before": 1062,
+  "apparent_bytes_before": 169974430,
+  "free_before": 10875518976,
+  "active_go_processes": [],
+  "excluded": "RCC homes/views/artifacts/catalog/trust, installed consumers, wheels, npm/Poetry/Python caches, secrets and a57",
+  "free_after": 10880163840,
+  "cache_apparent_bytes_after": 232,
+  "status": "PASS_RECONSTRUCTIBLE_BUILD_CACHE_ONLY"
+}

@@ -1,0 +1,17 @@
+{
+  "status": "UNEXECUTED_DRAFT_SYNTAX_ONLY",
+  "file": "UNEXECUTED-test_a60_data_package_run.py.txt",
+  "sha256": "0f0ccc79a5e182999bda66a3abfe0dd7a883be89dec5017d0f90c804e8e31530",
+  "bytes": 22955,
+  "product_test_run": false,
+  "fixture_setup": false,
+  "rcc_execution": false,
+  "authority_mutations": false,
+  "preconditions": [
+    "root behavioral review",
+    "separate fresh a60 locked data-duckdb consumer with DuckDB1.4.1 and installed origins verified",
+    "receipt-matched prepared RCC home and capacity proof before compiler/import/tests/worker"
+  ],
+  "current_base_consumer_not_modified": true,
+  "upstream_disposition": "none"
+}
