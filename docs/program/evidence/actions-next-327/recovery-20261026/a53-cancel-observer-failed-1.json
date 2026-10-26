@@ -1,0 +1,112 @@
+{
+  "supervisor_parent_pid": 7625,
+  "supervisor_sha256": "d02ec0cf0c8ca25cefb46487fa2ed473cfc0394e214044cecbe8f42ed50b740e",
+  "source": "aca51868d14e916c8034c69309e222100d5d50f3",
+  "manifest_sha256": "40f147b1a6a22ac4aa12afe2b3ded1110d6f83b27998a151336861a98c1ffb3c",
+  "harness_sha256": "322946d097af6cff1ee92ad31b27a8a7b85bdb655e958af021356f404aeef974",
+  "live_cancellation": "NOT_RUN",
+  "status": "FAILED",
+  "runtime": "1.1.0a53",
+  "core": "1.1.0a8",
+  "artifact_digest": "sha256:ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24",
+  "processes": [
+    {
+      "pid": 7630,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.11375777400007792,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 7641,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.1638999279998643,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 7686,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.6691138999999566,
+      "lifespan_shutdown_complete": true
+    }
+  ],
+  "calls": [
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "public_http_operation": "items.enqueue",
+      "status": 200
+    },
+    {
+      "public_http_operation": "items.enqueue",
+      "status": 200
+    },
+    {
+      "public_http_operation": "items.claim",
+      "status": 200
+    }
+  ],
+  "synthetic_owned_auth": true,
+  "cases": [],
+  "workspace": "85a7bcfe-a0a4-49cc-a51d-0beaf2df08e3",
+  "profile_setup": "explicit public offline owner authorization; no SQL writes or source/result/review/admission seeding",
+  "wrong_and_missing_credentials_denied": true,
+  "failure": {
+    "type": "ExceptionGroup",
+    "frames": [
+      {
+        "file": "qualify-cancel.py",
+        "function": "main",
+        "line": 379
+      },
+      {
+        "file": "qualify-cancel.py",
+        "function": "connect",
+        "line": 133
+      },
+      {
+        "file": "contextlib.py",
+        "function": "__aexit__",
+        "line": 231
+      },
+      {
+        "file": "streamable_http.py",
+        "function": "streamable_http_client",
+        "line": 771
+      },
+      {
+        "file": "_asyncio.py",
+        "function": "__aexit__",
+        "line": 847
+      }
+    ]
+  },
+  "budget": {
+    "fixture_bytes": 940178,
+    "log_bytes_upper_bound": 15367
+  },
+  "scope": "Installed claimed consumer Robot Task live cancellation, child absence before stop, public read/replay/restart; synthetic single owner only"
+}

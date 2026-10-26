@@ -107,3 +107,34 @@ configuration; two adapter RCC cases require a genuine prepared Robot RCC
 receipt. They are not passes. Independent aggregate QA remains on its frozen
 source; a53 still needs coordinated PostgreSQL/current-source and installed RCC
 qualification. No full package or release PASS is claimed.
+
+## Built and installed a53
+
+Reviewed product source is `aca51868d14e916c8034c69309e222100d5d50f3`, tree
+`c3653cac86beaac86ca0ae1219690499ca87c495`. The isolated canonical frontend,
+OAuth and wheel build passed; Runtime wheel SHA256 is
+`2013b8fc54163d10c3c0edddb3bb1ea8e59cb95b88f9a05a2d810110cdd0d117`.
+The candidate bundle is Library `libfile_d4c52c48f6548191a19e03f8d69a5ace`, v0;
+its bytes and artifact-only upload scope are recorded in `a53-library-artifact.json`.
+
+A fresh target-local compiler verified Runtime339/Core87/WorkItems26 payloads,
+Core8 and Robot7.4.2 inside the actual RCC environment, and the child Python
+executable hash. Its new artifact is
+`sha256:ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24`.
+Old compiler paths and trust receipts were not reused. Initial stale count and
+RCC update-notice parsing failures remain in the local compiler evidence.
+
+Installed claimed Task terminal success/failure, authorized artifacts,
+replay/restart passed: exactly2Runs/2Attempts/2intents/2Taskreceipts, four graceful
+Runtime stops and enclosing supervisor PASS with no remaining owned processes.
+See `a53-installed-terminal-receipt.json` and supervisor. This does not establish
+live cancellation, multi-principal isolation, producer/child output modes or
+whole-campaign acceptance.
+
+Three subsequent live-cancellation trials stopped at exact child observation,
+before sending cancellation. They remain FAILED / cancellation NOT_RUN; each
+outer supervisor found no remaining owned descendants. Trial2 adds nested
+sanitized exception evidence, confirming observer timeout. Trial3 was admitted
+for independent predicate diagnosis, without weakening the observer. Source
+terminal cancellation tests and installed success/failure do not supersede these
+failed installed cancellation trials.
