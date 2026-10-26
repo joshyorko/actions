@@ -351,6 +351,50 @@ class GenericWorkItemExecution:
             self.base._authorize(caller.actor, self.snapshot, "read")
             self._envelope(item_id)
             run = self._retained_run(item_id)
+            pin = _one(self.db, RunPin, run.id)
+            if pin.cancel_requested and pin.current_attempt_id:
+                from actions.server.run_outputs.claimed_intent import claimed_intent
+                from actions.server.run_outputs.claimed_task_state import (
+                    validate_claimed_cancellation,
+                )
+                from actions.server.run_outputs.models import RunExecutionIntent
+
+                intents = self.db.all(RunExecutionIntent, where="id=?", values=[run.id])
+                intent = (
+                    claimed_intent(intents[0].envelope_json)
+                    if len(intents) == 1
+                    else None
+                )
+                if intent is not None:
+                    if (
+                        intent.snapshot != self.snapshot
+                        or intent.claim.item_id != item_id
+                    ):
+                        raise FenceRejected("cancelled claimed read identity differs")
+                    attempt = _one(self.db, RunAttempt, pin.current_attempt_id)
+                    fence = AttemptFence(
+                        run_id=run.id,
+                        attempt_id=attempt.id,
+                        owner_id=attempt.owner_id,
+                        epoch=attempt.epoch,
+                    )
+                    validate_claimed_cancellation(self, intent, run, pin, fence)
+                    # Historical provenance only. Cleared queue ownership is
+                    # expected after cancellation; live mutation fences remain
+                    # unchanged and continue rejecting this original ticket.
+                    return (
+                        run,
+                        attempt,
+                        GenericTicket(
+                            claim=ClaimValue(
+                                item_id=intent.claim.item_id,
+                                owner_id=intent.claim.owner_id,
+                                epoch=intent.claim.epoch,
+                            ),
+                            fence=fence,
+                            input_digest=intent.input_digest,
+                        ),
+                    )
             row = _one(self.db, FencedWorkItem, item_id)
             record = json.loads(run.result or "null")
             terminal = run.status in (RunStatus.PASSED, RunStatus.FAILED)

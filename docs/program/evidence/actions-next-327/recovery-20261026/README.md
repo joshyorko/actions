@@ -138,3 +138,20 @@ sanitized exception evidence, confirming observer timeout. Trial3 was admitted
 for independent predicate diagnosis, without weakening the observer. Source
 terminal cancellation tests and installed success/failure do not supersede these
 failed installed cancellation trials.
+
+Trial5 measured the Python executable inside the actual RCC execution
+materialization (Core87/WorkItems26 bytes and Robot7.4.2 reverified), replacing the
+compiler-materialization hash assumption. The unchanged strict observer then
+matched the exact pair. Installed a53 **confirmed terminal Task cancellation**,
+with both children absent before Runtime stop in1.156seconds from Python birth.
+Replay Task get/create passed. Overall trial remains **FAILED** because public
+`items.get` returned409 afterward; see `a53-live-cancel-managed-read-failed.json`.
+The supervisor reaped its adopted exited child and left no owned descendants.
+
+Runtime a54 corrects that retained-read seam without changing live ticket/fence
+authority: cancellation clears active queue ownership, so historical read uses
+the strict claimed cancellation validator under current queue/Run READ rights.
+New focused SQLite tests pass7/7PostgreSQLskips; existing read-seam regressions
+pass3/3PostgreSQLskips/37deselected. Configured lint/typecheck passes655sourcefiles.
+Early test-fixture expectation failures are not claimed as pre-fix RED evidence.
+Installed a54 public projection and replay/restart remain the next exact gate.

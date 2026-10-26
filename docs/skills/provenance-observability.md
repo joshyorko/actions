@@ -1,5 +1,13 @@
 # Provenance and Observability Contract
 
+Cancelled claimed execution reads must validate retained Task/claim/Attempt
+identity rather than require the cancelled queue's cleared owner to equal its
+former worker. Runtime a54 uses the cancellation evidence validator under live
+queue and Run READ authorization to return historical provenance. That ticket
+does not renew a lease or grant execution/output authority; mutation paths still
+use their existing live fences. Pending cancellation without an Attempt cannot
+be projected as an executed Attempt.
+
 For an active claimed Robot Task, cancellation intent and externally observed
 child absence are not terminal evidence. Runtime a53 retains launch-bound adapter
 cleanup confirmation and validates the original Task, input, claim and Attempt,
