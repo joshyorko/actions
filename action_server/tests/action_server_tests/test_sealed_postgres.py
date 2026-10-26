@@ -20,6 +20,39 @@ pytest_plugins = ["action_server_tests.foundry_fixtures"]
 setup = _scan_setup
 
 
+def _docker_engine_ostype():
+    """Return the Docker server OS type, or a capability diagnostic."""
+    if shutil.which("docker") is None:
+        return None, "Docker CLI is unavailable"
+
+    try:
+        result = subprocess.run(
+            ["docker", "info", "--format", "{{.OSType}}"],
+            check=False,
+            capture_output=True,
+            text=True,
+            timeout=10,
+        )
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        return None, f"Docker Engine OS type is unavailable ({type(exc).__name__})"
+
+    ostype = result.stdout.strip().lower()
+    if result.returncode != 0 or ostype not in {"linux", "windows"}:
+        return None, "Docker Engine returned an unavailable or malformed OS type"
+    return ostype, None
+
+
+def _require_linux_docker():
+    ostype, diagnostic = _docker_engine_ostype()
+    if ostype == "linux":
+        return
+
+    message = diagnostic or f"Linux Docker Engine required (server OS type: {ostype})"
+    if os.environ.get("ACTIONS_REQUIRE_INVOICE_PROVIDERS") == "1":
+        pytest.fail(message)
+    pytest.skip(message)
+
+
 @pytest.fixture(scope="session", autouse=True)
 def disable_feedback():
     yield
@@ -27,11 +60,9 @@ def disable_feedback():
 
 @pytest.fixture(scope="module")
 def tls_postgres(tmp_path_factory):
-    if shutil.which("docker") is None:
-        message = "Docker CLI required for owned TLS PostgreSQL fixture"
-        if os.environ.get("ACTIONS_REQUIRE_INVOICE_PROVIDERS") == "1":
-            pytest.fail(message)
-        pytest.skip(message)
+    # Check the connected Engine before generating private material or starting
+    # a Linux-only image. Docker CLI presence says nothing about server OS.
+    _require_linux_docker()
 
     import psycopg
     from psycopg import sql

@@ -36,6 +36,25 @@ probes. Record installed payload identity separately from dependency-profile
 identity: identical application wheels can resolve different allowed public
 dependency versions at a later clean installation.
 
+Qualify source-lock and public-resolution consumers as distinct profiles, even
+when their application wheels match. Record selected Runtime and transitive
+extras, interpreter, lock digest, active versions, and exact installed payloads.
+For the accepted dual-view SBOM contract, preserve the validated raw declaration
+graph, independently qualified active graph, and every inactive marker/extra
+edge reconciliation. A strict raw-to-active graph failure remains a failure;
+the separate views can satisfy only the explicitly defined dependency-evidence
+subgate, never whole-platform distribution acceptance.
+
+For historical compatibility, obtain authentic published artifacts with official
+metadata and byte hashes. Distinguish a source lock's editable dependency floor
+from the companion versions in an installed receipt, and distinguish a public
+binary from a different historical rebuild. Verify installed payloads and
+`pip check` before exercising upgrade, refusal and rollback. Queue/attachment
+compatibility does not establish coordinated Runtime SQL/object/journal restore.
+If a task-local child loses access to the already working package route, inspect
+whether its environment dropped inherited proxy/CA variables before interpreting
+resolver errors as version conflicts. Restore only the existing authorized route.
+
 The locked Node client2.0.0 profile can negotiate the Task extension and receive
 HTTP200 for detached invocation, yet its wire decoder rejects `resultType:task`
 as UNSUPPORTED_RESULT_TYPE before applying a custom result schema. This is a
@@ -2187,9 +2206,41 @@ readiness checks, run cleanup with `always()`, and verify that exact container i
 absent before resetting provider variables. Docker inspection errors fail cleanup.
 Ordinary portable runs may skip unavailable provider fixtures; strict qualification
 must fail instead. Shared Linux-only fixtures check their own platform because
-module-level pytest marks do not travel with an imported fixture. Shell-stub
+module-level pytest marks do not travel with an imported fixture. Docker CLI
+presence alone does not establish that its server can run a pinned Linux image;
+the owned TLS fixture performs a ten-second bounded read-only
+`docker info --format '{{.OSType}}'` check before TLS files or container startup.
+Ordinary optional runs skip unavailable/non-Linux engines; strict required-provider
+mode fails. After Linux admission, actual setup/provider errors remain failures.
+Keep public
+compiler/Runtime paths enabled on promised platforms. For deliberately POSIX-only
+APIs, retain production refusal guards and test refusal separately from POSIX
+success mechanics. Missing POSIX names in Windows typing do not establish runtime
+support and do not justify suppressing the matrix typecheck. Shell-stub
 contracts cover setup, bounded readiness failure, cleanup and workflow parity;
 they do not replace hosted execution or real provider qualification.
+
+On Windows, a child `bash` lookup can select the WSL launcher even when the
+Actions step itself uses Git Bash. Resolve the existing Git for Windows Bash
+beside the resolved Git executable and fail clearly if it is absent; do not
+enable WSL to repair a test launcher. Negative publication tests must prove the
+wrapper started before accepting an expected failure exit.
+
+Retain terminal coverage receipts with both PR head and actual merge checkout,
+per-package counts, first failing assertion and owned-service cleanup. A failed
+package suite withholds full coverage acceptance: incomplete source inventory,
+missing baseline and a partial percentage must not become qualified baselines.
+For candidate browser diagnostics, publish only bounded allowlisted exception
+classes and numeric source lines from the exact candidate test, never raw JUnit
+messages, paths or credentials. Diagnostics are advisory; pytest, strict JUnit
+and source-bound receipt validation still determine acceptance.
+
+An assembled route inventory classifies exposure; it does not prove denial.
+Probe every configured-key method with missing and wrong bearer credentials,
+including optional shutdown, before body consumption, DB/storage/dispatch or
+shutdown side effects. Keep public, managed-principal, MCP, WebSocket and artifact
+identity policies separate. The global installation key does not imply per-user
+principal semantics or establish domain-level multi-principal isolation.
 
 Keep platform admission at the shared private-provider fixture owners, including
 `test_local_provider_setup.provider`, `test_invoice_review.reviewed` and

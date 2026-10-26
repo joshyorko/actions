@@ -182,6 +182,9 @@ jobs:
             --junitxml "$junit_raw" >"$TMPDIR/pytest.log" 2>&1
           pytest_status=$?
           set -e
+          if ! poetry_cmd run python scripts/summarize_candidate_failure_327.py "$junit_raw"; then
+            echo 'Candidate failure-location diagnostics unavailable.'
+          fi
           source_sha="$(git rev-parse HEAD)"
           source_tree="$(git rev-parse 'HEAD^{tree}')"
           poetry_cmd run python - "$junit_raw" "$junit_safe" "$pytest_status" \

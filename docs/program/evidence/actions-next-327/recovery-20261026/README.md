@@ -1,5 +1,18 @@
 # Fresh saved-environment recovery
 
+The [a58 integrity checkpoint](a58-integrity-checkpoint/README.md) preserves
+terminal coverage512 FAILED (Runtime5313passed/58skipped/1failure), the actual
+sealed-output stream defect and its separate reviewed repair at
+943f2736b5616b9034f4a97dac9a11efafdcd065. Focused filesystem24 and affected
+output89 tests pass; this does not relabel that aggregate or establish a current
+full baseline. The checkpoint also retains all configured-key method denials,
+the full28-row gate reconciliation, separate a57 lock-qualified base/data-duckdb
+SBOM profiles and authentic public1.0.4 bounded queue/attachment compatibility.
+Raw SBOM strict comparisons remain FAILED with29 explained inactive edges;
+full Runtime restore and platform/distribution acceptance remain unqualified.
+The delivered a57 bundle below is immutable and its actual owner-host render
+retest remains PENDING. Later source changes do not replace its bytes.
+
 Current a57 source is bde511d2ba6318d0b100547cc6e777e53b9ebc80,
 tree58e3beed765765e13724928d26acefb729d8aeab. The captured actual ChatGPT
 app-to-library failure is reproduced and repaired by a separate strict library
@@ -35,7 +48,9 @@ The [installed a56 modern-auto Node profile](a56-node-modern/handoff.md) now pas
 synchronous claimed Robot success/failure, four authorized artifacts per case,
 strict XML, restart reads and natural client/transport exit. Legacy/default
 negotiation and detached Task SDK interoperability remain open; this does not
-explain earlier differently instrumented a53 failures. Current-source aggregate QA remains open,
+explain earlier differently instrumented a53 failures. These failed Node profiles
+remain disclosed; the written matrix requires a supported-client typed Task flow,
+not those specific profiles as new standalone gates. Current-source aggregate QA remains open,
 alongside producer/effect recovery, multi-principal/provider breadth, plugin
 stdio/discovery, restore/upgrade, platform/distribution and actual-host/operator
 gates. Historical setup and candidate observations below remain source-specific.
