@@ -174,3 +174,12 @@ archive SHA256 `e18c9565eaf95f2e242ac7d6fac8d3a2b7aefa41a2b3cd16bc58a1930ffc92c6
 This closes a synthetic single-owner installed Task cancellation path only.
 Multi-principal/producer/output breadth, PostgreSQL/current-source aggregate,
 native/platform/restore, actual clients and the full original matrix remain open.
+
+The explicitly selected Luna Node lane also exercised supported synchronous
+generic claimed Robot invocation. The server completed a real execution, but
+the client failed its artifact/XML harness validation and remained alive beyond
+90seconds after both client/transport close completed, with one TCP resource.
+That run remains FAILED. Read-only REST/SDK diagnostics exited naturally, so
+pooled TCP resources alone have not established the cause. Preserve this scoped
+reproduction independently from the earlier reported650second failure and the
+separate SDK Task-envelope support limitation. New diagnostics are pending.
