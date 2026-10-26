@@ -6545,8 +6545,8 @@ AppSession capability tokens. Separate operator attestation, backend validation
 and visual review; PNG-shaped files alone are not browser proof.
 
 
-Mapped Knowledge compilation and retained verification explicitly accept Core a4 and
-a7 with unchanged a4/a39 compatibility metadata; a5, a6 and unknown future candidates
+Mapped Knowledge compilation and retained verification explicitly accept Core a4,
+a7 and a8 with unchanged a4/a39 compatibility metadata; a5, a6 and unknown future candidates
 remain unqualified. Keep both historical and current pins in contract coverage,
 including exact mappings and retained-manifest tampering. Mocked authoring and
 compiler passes do not qualify installed Knowledge execution.

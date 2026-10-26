@@ -88,12 +88,12 @@ def _validate_invocation_compatibility(requirements, compatibility, environment)
         for item in environment
         if item["kind"] == "python-package" and item["name"] == "actions-core"
     ]
-    if core not in (["==1.1.0a4"], ["==1.1.0a7"]) or compatibility != {
+    if core not in (["==1.1.0a4"], ["==1.1.0a7"], ["==1.1.0a8"]) or compatibility != {
         "actionsCoreRange": KNOWLEDGE_CORE_RANGE,
         "actionsRuntimeRange": KNOWLEDGE_RUNTIME_RANGE,
     }:
         raise ValueError(
-            "mapped Knowledge requires a qualified Core a4/a7 pin and Runtime a39 contract"
+            "mapped Knowledge requires a qualified Core a4/a7/a8 pin and Runtime a39 contract"
         )
 
 

@@ -1,0 +1,47 @@
+{
+  "status": "PRIVATE_SYNTHETIC_TLS_MATERIAL_REMOVED_AFTER_SERVICE_CLEANUP",
+  "runs": {
+    "owned-a54-pg-run1": {
+      "removed_private_files": [
+        "writer-password",
+        "postgres-ca.pem",
+        "owned-pg-tls/server.csr",
+        "owned-pg-tls/server.key",
+        "owned-pg-tls/ca.srl",
+        "owned-pg-tls/ca.crt",
+        "owned-pg-tls/ca.key",
+        "owned-pg-tls/server.crt",
+        "owned-pg-tls/extensions"
+      ],
+      "provider_secret_file_count_removed": 2
+    },
+    "owned-a54-pg-run2": {
+      "removed_private_files": [
+        "writer-password",
+        "postgres-ca.pem",
+        "owned-pg-tls/server.csr",
+        "owned-pg-tls/server.key",
+        "owned-pg-tls/ca.srl",
+        "owned-pg-tls/ca.crt",
+        "owned-pg-tls/ca.key",
+        "owned-pg-tls/server.crt",
+        "owned-pg-tls/extensions"
+      ],
+      "provider_secret_file_count_removed": 2
+    },
+    "owned-a54-pg-run3": {
+      "removed_private_files": [
+        "writer-password",
+        "postgres-ca.pem",
+        "owned-pg-tls/server.csr",
+        "owned-pg-tls/server.key",
+        "owned-pg-tls/ca.srl",
+        "owned-pg-tls/ca.crt",
+        "owned-pg-tls/ca.key",
+        "owned-pg-tls/server.crt",
+        "owned-pg-tls/extensions"
+      ],
+      "provider_secret_file_count_removed": 2
+    }
+  }
+}

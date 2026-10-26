@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="8" time="1.614" timestamp="2026-10-26T12:31:14.454249+00:00" hostname="46d717494750"><testcase classname="tests.action_server_tests.test_knowledge_core_a8_327" name="test_existing_qualified_knowledge_cores_still_compile_and_verify[1.1.0a4]" time="1.169" /><testcase classname="tests.action_server_tests.test_knowledge_core_a8_327" name="test_existing_qualified_knowledge_cores_still_compile_and_verify[1.1.0a7]" time="0.032" /><testcase classname="tests.action_server_tests.test_knowledge_core_a8_327" name="test_core_a8_mapped_knowledge_compiles_with_unchanged_contract" time="0.013"><failure message="AssertionError: CompilationReceipt(source_inventory_digest='sha256:6b2e2c6d9ff8dcb9a9adf48e4db2a6b69447fdf8a4554f68d4c025b74715c30d', source_artifact_digest='sha256:de243a7755b4c57d1e60ab03b7406ae41ed296930a6922bb1204f76bc5d15ae7', status='failed', build_status='not-run', import_status='not-run', test_status='not-run', failure_code='compiler_workspace_failed', package_revision_digest=None, runtime_plan_digest=None, rcc_specification_digest=None, rcc_artifact_digest=None)&#10;Failed: assert outcome.compiled_package is not None&#10;Variables:&#10;  outcome.compiled_package = None">def test_core_a8_mapped_knowledge_compiles_with_unchanged_contract():
+        outcome = compile_mapped(core="1.1.0a8")
+&gt;       assert outcome.compiled_package is not None, repr(outcome.receipt)
+        
+E       AssertionError: CompilationReceipt(source_inventory_digest='sha256:6b2e2c6d9ff8dcb9a9adf48e4db2a6b69447fdf8a4554f68d4c025b74715c30d', source_artifact_digest='sha256:de243a7755b4c57d1e60ab03b7406ae41ed296930a6922bb1204f76bc5d15ae7', status='failed', build_status='not-run', import_status='not-run', test_status='not-run', failure_code='compiler_workspace_failed', package_revision_digest=None, runtime_plan_digest=None, rcc_specification_digest=None, rcc_artifact_digest=None)
+E       Failed: assert outcome.compiled_package is not None
+E       Variables:
+E         outcome.compiled_package = None
+
+actions/action_server/tests/action_server_tests/test_knowledge_core_a8_327.py:24: AssertionError</failure></testcase><testcase classname="tests.action_server_tests.test_knowledge_core_a8_327" name="test_unqualified_knowledge_cores_remain_rejected[1.1.0a5]" time="0.013" /><testcase classname="tests.action_server_tests.test_knowledge_core_a8_327" name="test_unqualified_knowledge_cores_remain_rejected[1.1.0a6]" time="0.014" /><testcase classname="tests.action_server_tests.test_knowledge_core_a8_327" name="test_unqualified_knowledge_cores_remain_rejected[1.1.0a999]" time="0.014" /><testcase classname="tests.action_server_tests.test_knowledge_core_a8_327" name="test_core_a8_retained_verifier_rejects_changed_claim[mapping]" time="0.013"><failure message="AssertionError: CompilationReceipt(source_inventory_digest='sha256:6b2e2c6d9ff8dcb9a9adf48e4db2a6b69447fdf8a4554f68d4c025b74715c30d', source_artifact_digest='sha256:de243a7755b4c57d1e60ab03b7406ae41ed296930a6922bb1204f76bc5d15ae7', status='failed', build_status='not-run', import_status='not-run', test_status='not-run', failure_code='compiler_workspace_failed', package_revision_digest=None, runtime_plan_digest=None, rcc_specification_digest=None, rcc_artifact_digest=None)&#10;Failed: assert outcome.compiled_package is not None&#10;Variables:&#10;  outcome.compiled_package = None">tamper = 'mapping'
+
+    @pytest.mark.parametrize("tamper", ["mapping", "compatibility"])
+    def test_core_a8_retained_verifier_rejects_changed_claim(tamper):
+        outcome = compile_mapped(core="1.1.0a8")
+&gt;       assert outcome.compiled_package is not None, repr(outcome.receipt)
+        
+E       AssertionError: CompilationReceipt(source_inventory_digest='sha256:6b2e2c6d9ff8dcb9a9adf48e4db2a6b69447fdf8a4554f68d4c025b74715c30d', source_artifact_digest='sha256:de243a7755b4c57d1e60ab03b7406ae41ed296930a6922bb1204f76bc5d15ae7', status='failed', build_status='not-run', import_status='not-run', test_status='not-run', failure_code='compiler_workspace_failed', package_revision_digest=None, runtime_plan_digest=None, rcc_specification_digest=None, rcc_artifact_digest=None)
+E       Failed: assert outcome.compiled_package is not None
+E       Variables:
+E         outcome.compiled_package = None
+
+actions/action_server/tests/action_server_tests/test_knowledge_core_a8_327.py:62: AssertionError</failure></testcase><testcase classname="tests.action_server_tests.test_knowledge_core_a8_327" name="test_core_a8_retained_verifier_rejects_changed_claim[compatibility]" time="0.013"><failure message="AssertionError: CompilationReceipt(source_inventory_digest='sha256:6b2e2c6d9ff8dcb9a9adf48e4db2a6b69447fdf8a4554f68d4c025b74715c30d', source_artifact_digest='sha256:de243a7755b4c57d1e60ab03b7406ae41ed296930a6922bb1204f76bc5d15ae7', status='failed', build_status='not-run', import_status='not-run', test_status='not-run', failure_code='compiler_workspace_failed', package_revision_digest=None, runtime_plan_digest=None, rcc_specification_digest=None, rcc_artifact_digest=None)&#10;Failed: assert outcome.compiled_package is not None&#10;Variables:&#10;  outcome.compiled_package = None">tamper = 'compatibility'
+
+    @pytest.mark.parametrize("tamper", ["mapping", "compatibility"])
+    def test_core_a8_retained_verifier_rejects_changed_claim(tamper):
+        outcome = compile_mapped(core="1.1.0a8")
+&gt;       assert outcome.compiled_package is not None, repr(outcome.receipt)
+        
+E       AssertionError: CompilationReceipt(source_inventory_digest='sha256:6b2e2c6d9ff8dcb9a9adf48e4db2a6b69447fdf8a4554f68d4c025b74715c30d', source_artifact_digest='sha256:de243a7755b4c57d1e60ab03b7406ae41ed296930a6922bb1204f76bc5d15ae7', status='failed', build_status='not-run', import_status='not-run', test_status='not-run', failure_code='compiler_workspace_failed', package_revision_digest=None, runtime_plan_digest=None, rcc_specification_digest=None, rcc_artifact_digest=None)
+E       Failed: assert outcome.compiled_package is not None
+E       Variables:
+E         outcome.compiled_package = None
+
+actions/action_server/tests/action_server_tests/test_knowledge_core_a8_327.py:62: AssertionError</failure></testcase></testsuite></testsuites>
