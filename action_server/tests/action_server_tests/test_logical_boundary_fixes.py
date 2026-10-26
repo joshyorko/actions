@@ -39,7 +39,7 @@ def expire(g, refs):
             _update(g.db, RunOutput, ref.output_id, {"expires_ms": "1"})
 
 
-def test_terminal_task_ack_survives_expiry_but_get_refuses(logical):
+def test_terminal_task_ack_survives_expiry_but_get_refuses(logical, monkeypatch):
     g = logical
     owner, caller, wrapper, seed = setup(g)
     prepared = prepare(g)
@@ -48,11 +48,16 @@ def test_terminal_task_ack_survives_expiry_but_get_refuses(logical):
         wrapper.publish(g.actor, g.fence, refs, result)
     expire(g, refs)
     run = _one(g.db, Run, g.fence.run_id)
-    tasks = object.__new__(TaskService)
-    tasks.db, tasks.outputs, tasks.policy = (
-        g.db,
-        g.outputs,
-        TaskPolicy("test", 60000, 100),
+    from actions.server.run_outputs.detached import DetachedActions
+
+    class ReadOnlyReadiness:
+        def require_ready(self, actor, snapshot):
+            raise AssertionError("Retained projection must not dispatch work")
+
+    tasks = TaskService(
+        DetachedActions(owner.deployments, g.outputs),
+        readiness=ReadOnlyReadiness(),
+        policy=TaskPolicy("test", 60000, 100),
     )
     loaded = (
         SimpleNamespace(created_ms="1", ttl_ms="60000"),
@@ -60,6 +65,14 @@ def test_terminal_task_ack_survives_expiry_but_get_refuses(logical):
         run,
         _one(g.db, RunPin, run.id),
     )
+
+    # This unit fixture publishes through LogicalExecution, without Task admission.
+    # Isolate only the unrelated claimed-dispatch lookup; preserve expiry assertions.
+    def unclaimed(run_id):
+        assert run_id == run.id
+        return None
+
+    monkeypatch.setattr(tasks.detached, "claimed", unclaimed)
     ack = tasks._project(g.actor, loaded, include_result=False)
     assert ack.status == "completed"
     assert ack.result is None

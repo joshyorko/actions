@@ -6554,6 +6554,11 @@ compiler passes do not qualify installed Knowledge execution.
 Task result regression fixtures must construct the real TaskService with an explicit
 policy and a readiness guard that rejects unexpected dispatch. Calling an unbound
 method on a partial namespace can fail when valid internal delegation changes.
+For a direct logical-publication projection fixture that intentionally lacks Task
+admission, isolate only the claimed-intent lookup with an exact Run-ID assertion
+returning unclaimed. Retain the real DetachedActions/TaskService objects and all
+remaining bound-result/expiry validation. This is unit projection coverage, not
+public Task admission or read-authority proof.
 Historical generated-helper golden hashes retain the old byte contract after removing
 only the asserted, reviewed model_dump(mode="json") serializer addition; supplement
 that narrow delta with execution tests for JSON model values, finite numbers, byte
@@ -6564,6 +6569,14 @@ use its package configuration and explicit source/type-search paths, and verify
 BuildSource origins. A shared prepared interpreter supplies tools and third-party
 dependencies, not an implicit alternative Runtime source. Retain exact shared
 formatter configuration when the isolated copy lacks it and run check-only formatting.
+
+A restored Runtime suite must generate the ignored public OAuth module through
+the committed generator and bind its hash to the selected wheel; Bootstrap and
+import/version preflight alone can miss that input. In this saved Go1.23.6
+toolchain, linked-worktree wrapper builds selected the outer `/workspace/.git`
+marker during VCS discovery. Diagnose with `go build -x`; standalone target-local
+Git metadata at the same verified commit/tree restored stamping without disabling
+it. This observation is layout/toolchain-specific, not a general worktree rule.
 
 
 Pinned RCC18.19.3 legacy catalogs retain their absolute build base. Strict import
