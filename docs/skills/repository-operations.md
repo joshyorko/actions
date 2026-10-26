@@ -2183,6 +2183,16 @@ an unchanged schema does not prove authentication. Verify the assembled server
 and router dependencies through the authentication regression, including the
 intentional public webhook exception.
 
+Keep `test_auth_route_inventory.py` synchronized with mounted route identities
+and methods. Its classifications do not prove a direct negative-auth request to
+every handler. For public trigger webhooks, test missing and incorrect nonempty
+HMAC secrets alongside a valid-secret control. Rejected requests retain the
+`REJECTED` audit row but must not dispatch work or update accepted invocation
+counts and timestamps. For credential read and rotation endpoints, assert that
+missing and incorrect bearer credentials fail before database or secret-generation
+access. `test_trigger_secret_boundary_327.py` covers these boundaries with local
+synthetic credentials and a patched work-item dispatch control.
+
 ### Action Server shared database
 
 Action Server keeps SQLite as the default datadir-local backend. A shared
