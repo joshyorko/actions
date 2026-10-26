@@ -1,0 +1,36 @@
+{
+  "run": {
+    "id": "d27c586f-5a02-4f07-9eaf-0bd7e9151c9f",
+    "status": 2
+  },
+  "pin": {
+    "run_id": "d27c586f-5a02-4f07-9eaf-0bd7e9151c9f",
+    "workspace_id": "54316693-3de5-4d4b-8fb2-03e01c4e10a4",
+    "run_admission_id": "5b7eee02238738489eb94c762e0ec4b1182bb0ce3e083eeb760e3e266a2c48aa",
+    "current_attempt_id": "608dca66-66fb-4703-9c67-5af68e0641bc",
+    "epoch": 1,
+    "cancel_requested": 0,
+    "state_updated_ms": "1792935644525"
+  },
+  "attempt": {
+    "id": "608dca66-66fb-4703-9c67-5af68e0641bc",
+    "run_id": "d27c586f-5a02-4f07-9eaf-0bd7e9151c9f",
+    "workspace_id": "54316693-3de5-4d4b-8fb2-03e01c4e10a4",
+    "epoch": 1,
+    "state": "succeeded"
+  },
+  "intent": {
+    "id": "d27c586f-5a02-4f07-9eaf-0bd7e9151c9f",
+    "workspace_id": "54316693-3de5-4d4b-8fb2-03e01c4e10a4"
+  },
+  "task_receipt": {
+    "id": "d27c586f-5a02-4f07-9eaf-0bd7e9151c9f",
+    "run_id": "d27c586f-5a02-4f07-9eaf-0bd7e9151c9f",
+    "workspace_id": "54316693-3de5-4d4b-8fb2-03e01c4e10a4",
+    "receipt_version": "actions.run-task-receipt/v1",
+    "result_contract_version": "actions.detached-invocation-result/v1",
+    "created_ms": "1792935621353",
+    "ttl_ms": "600000"
+  },
+  "snapshot_sha256": "517c918811f4c1e06d72c81e42c3c7129486a6f86245d00e28cdca1c9b328ffe"
+}

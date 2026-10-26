@@ -41,6 +41,10 @@ jobs:
     steps:
       - name: Checkout repository and submodules
         uses: actions/checkout@v3
+        env:
+          GIT_CONFIG_COUNT: ${{ runner.os == 'Windows' && '1' || '0' }}
+          GIT_CONFIG_KEY_0: core.longpaths
+          GIT_CONFIG_VALUE_0: 'true'
       
       - name: Verify no .npmrc with credentials
         run: |
@@ -178,6 +182,9 @@ jobs:
             --junitxml "$junit_raw" >"$TMPDIR/pytest.log" 2>&1
           pytest_status=$?
           set -e
+          if ! poetry_cmd run python scripts/summarize_candidate_failure_327.py "$junit_raw"; then
+            echo 'Candidate failure-location diagnostics unavailable.'
+          fi
           source_sha="$(git rev-parse HEAD)"
           source_tree="$(git rev-parse 'HEAD^{tree}')"
           poetry_cmd run python - "$junit_raw" "$junit_safe" "$pytest_status" \
@@ -309,9 +316,9 @@ jobs:
                       and Path(core.get("runtime_module_origin", "")).is_absolute()
                       and is_sha256(core.get("runtime_module_sha256"))
                       and isinstance(runtime_args, list)
-                      and len(runtime_args) >= 3
+                      and len(runtime_args) >= 4
                       and Path(runtime_args[0]).is_absolute()
-                      and runtime_args[1:3] == ["-m", "actions.server"]
+                      and runtime_args[1:4] == ["-P", "-m", "actions.server"]
                       and is_sha256(receipt.get("template_zip_sha256"))
                       and is_sha256(receipt.get("built_resource_sha256"))
                       and is_sha256(receipt.get("production_package_manifest_sha256"))
@@ -465,6 +472,13 @@ jobs:
           assert metadata.get("Name", "").lower().replace("_", "-") == expected_name
           assert metadata.get("Version") == expected_version
           PY
+
+      - name: Build candidate Work Items SDK wheel for native acceptance
+        working-directory: ./work-items
+        shell: bash
+        run: >-
+          uv run --no-project --python 3.12 poetry build --format wheel
+          --output "${{ runner.temp }}/dakota-workitems-rcc-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}/sdk-wheels"
 
       - name: Verify Work Items consumer through frozen and Go runtimes
         timeout-minutes: 20

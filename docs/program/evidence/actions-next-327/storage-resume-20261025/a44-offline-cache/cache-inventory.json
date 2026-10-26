@@ -1,0 +1,16 @@
+{
+  "archive_sha256": "a2e388ba921bda7b4c2b04d7ca0d5bb575644cc1cb578528828a64a9417b9598",
+  "archive_bytes": 77512277,
+  "catalogs": [
+    {
+      "name": "05bce139c5c902c0v12.linux_amd64",
+      "path": "/tmp/actions327-a44-offline-v1/compiler/robocorp/holotree/he3db46a_493f813dad24d3t"
+    },
+    {
+      "name": "4240e3dcbf7fa40dv12.linux_amd64",
+      "path": "/tmp/actions327-a44-offline-v1/compiler/robocorp/holotree/he3db46a_493f813dad24d3t"
+    }
+  ],
+  "links": 4380,
+  "files": 23554
+}

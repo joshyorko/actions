@@ -1,0 +1,5 @@
++ poetry run pytest tests/action_server_tests/mcp/test_mcp_gateway_metadata.py tests/action_server_tests/test_candidate_work_items.py -q --junitxml=/workspace/actions-recovery-327/evidence/a35-gateway.xml --robocorp-log-output=/workspace/actions-recovery-327/evidence/a35-gateway-html (in /workspace/actions/action_server)
+..........................................                               [100%]
+- generated xml file: /workspace/actions-recovery-327/evidence/a35-gateway.xml -
+42 passed in 0.63s
+Log (html): /workspace/actions-recovery-327/evidence/a35-gateway-html/log.html

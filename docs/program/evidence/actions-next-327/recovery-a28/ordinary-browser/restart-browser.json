@@ -1,0 +1,8 @@
+{
+  "status": "FAIL",
+  "mode": "restart",
+  "screenshots": [
+    "restart-mounted.png"
+  ],
+  "failure": "TimeoutError: locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('region', { name: 'Authorized result artifact' }) to be visible\u001b[22m\n"
+}

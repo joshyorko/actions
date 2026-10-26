@@ -1,0 +1,7 @@
+[
+  "tests/action_server_tests/test_logical_readiness.py::test_missing_selected_dependency_blocks_task_admission",
+  "tests/action_server_tests/test_logical_readiness.py::test_selected_installed_dependency_and_no_engine_probe",
+  "tests/action_server_tests/test_logical_readiness.py::test_selected_postgres_csv_does_not_require_unused_duckdb",
+  "tests/action_server_tests/test_logical_readiness.py::test_present_dependency_keeps_task_admission_unchanged",
+  "tests/action_server_tests/test_logical_readiness.py::test_postgres_selected_parquet_requires_shared_decoder"
+]

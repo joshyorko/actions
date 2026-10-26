@@ -1,0 +1,12 @@
+{
+  "base": "20639810107cbe4b28e7f1acc5e2ac68bdde06b6",
+  "scope": "dirty isolated source/component + synthetic host preparation only; no installed or Robot execution claim",
+  "files": {
+    "action_server/src/actions/server/foundry/package_registry.py": "82bd170085efa3cc1fd04124cab351d7a93469a03fc96fad34f5f3400bddadec",
+    "action_server/src/actions/server/foundry/robot_package_admission.py": "333fc2d7951d2d54ada04658e94f73ac720092395e17a023ebe3ac3dcbac10d3",
+    "action_server/src/actions/server/foundry/robot_execution_selection.py": "12d090f371007e9b07c3c1e90ebd508bb566e8478dab12374c17a643e5b4c705",
+    "action_server/tests/action_server_tests/test_robot_package_admission.py": "0e889c94779a058ea7f41f0a1d7861372c62588a1ac798ce34e7a9b1369d3452",
+    "action_server/tests/action_server_tests/test_robot_execution_selection.py": "e9bc727f03edcd6abc8d223b24f1343a78677f6c887a77a269139cc6324abe9e"
+  },
+  "patch_sha256": "9d6b12e3cd63a5f68fb857227b74b2c83e9bfe25b13aa6c27a5a10151cc8b3d1"
+}

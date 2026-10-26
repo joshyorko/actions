@@ -1,0 +1,7 @@
+{
+  "method": "tasks/get",
+  "status": 403,
+  "response": {
+    "detail": "Not authenticated"
+  }
+}

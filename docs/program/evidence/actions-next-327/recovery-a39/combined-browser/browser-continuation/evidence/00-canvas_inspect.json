@@ -1,0 +1,205 @@
+{
+  "_meta": {
+    "actions.canvas": {
+      "application": {
+        "activeRevisionId": "sha256:aa34eee2eafcf86d84a84b75988b68bdb0ab559071547bdbd1176152fec0779c",
+        "applicationId": "848ee675-913a-4388-b862-635deeb61ce3",
+        "revisions": [
+          {
+            "active": true,
+            "buildStatus": "not-required",
+            "compilationStatus": "not-required",
+            "importStatus": "not-required",
+            "revisionId": "sha256:aa34eee2eafcf86d84a84b75988b68bdb0ab559071547bdbd1176152fec0779c",
+            "spec": {
+              "bindingIds": [],
+              "root": {
+                "children": [
+                  {
+                    "id": "welcome",
+                    "text": "Installed ordinary generated app is ready to compose.",
+                    "type": "text"
+                  },
+                  {
+                    "id": "guidance",
+                    "text": "Describe the interface you want. Add a backend only when it needs one.",
+                    "type": "text"
+                  }
+                ],
+                "id": "main",
+                "type": "stack"
+              },
+              "schemaVersion": "actions.canvas-spec/v1",
+              "title": "Installed ordinary generated app",
+              "visibility": [
+                "model",
+                "app"
+              ]
+            },
+            "testStatus": "not-required",
+            "validationStatus": "passed"
+          },
+          {
+            "active": false,
+            "buildStatus": "passed",
+            "compilationStatus": "succeeded",
+            "importStatus": "passed",
+            "revisionId": "sha256:e2c46abcf472ad1e669739b5b58f07ffa1c0df3bb880069a14c031488e99aa63",
+            "spec": {
+              "bindingIds": [
+                "count"
+              ],
+              "root": {
+                "children": [
+                  {
+                    "bindingId": "count",
+                    "fields": [
+                      {
+                        "label": "Text to count",
+                        "name": "text",
+                        "required": true,
+                        "type": "text"
+                      }
+                    ],
+                    "id": "counter-form",
+                    "submitLabel": "Count words",
+                    "type": "form"
+                  },
+                  {
+                    "bindingId": "count",
+                    "id": "counter-status",
+                    "type": "status"
+                  },
+                  {
+                    "bindingId": "count",
+                    "id": "counter-artifact",
+                    "label": "Inspect result",
+                    "type": "artifact"
+                  }
+                ],
+                "id": "main",
+                "type": "stack"
+              },
+              "schemaVersion": "actions.canvas-spec/v1",
+              "title": "Independent generated word counter",
+              "visibility": [
+                "model",
+                "app"
+              ]
+            },
+            "testStatus": "passed",
+            "validationStatus": "passed"
+          }
+        ]
+      }
+    },
+    "io.modelcontextprotocol/serverInfo": {
+      "name": "Action Server",
+      "version": ""
+    }
+  },
+  "content": [
+    {
+      "type": "text",
+      "text": "Canvas revisions inspected.",
+      "annotations": null,
+      "_meta": null
+    }
+  ],
+  "structuredContent": {
+    "activeRevisionId": "sha256:aa34eee2eafcf86d84a84b75988b68bdb0ab559071547bdbd1176152fec0779c",
+    "applicationId": "848ee675-913a-4388-b862-635deeb61ce3",
+    "invocationAvailability": "unavailable",
+    "invocationDescriptors": [],
+    "invocationReadiness": "not-checked",
+    "revisions": [
+      {
+        "active": true,
+        "buildStatus": "not-required",
+        "compilationStatus": "not-required",
+        "importStatus": "not-required",
+        "revisionId": "sha256:aa34eee2eafcf86d84a84b75988b68bdb0ab559071547bdbd1176152fec0779c",
+        "spec": {
+          "bindingIds": [],
+          "root": {
+            "children": [
+              {
+                "id": "welcome",
+                "text": "Installed ordinary generated app is ready to compose.",
+                "type": "text"
+              },
+              {
+                "id": "guidance",
+                "text": "Describe the interface you want. Add a backend only when it needs one.",
+                "type": "text"
+              }
+            ],
+            "id": "main",
+            "type": "stack"
+          },
+          "schemaVersion": "actions.canvas-spec/v1",
+          "title": "Installed ordinary generated app",
+          "visibility": [
+            "model",
+            "app"
+          ]
+        },
+        "testStatus": "not-required",
+        "validationStatus": "passed"
+      },
+      {
+        "active": false,
+        "buildStatus": "passed",
+        "compilationStatus": "succeeded",
+        "importStatus": "passed",
+        "revisionId": "sha256:e2c46abcf472ad1e669739b5b58f07ffa1c0df3bb880069a14c031488e99aa63",
+        "spec": {
+          "bindingIds": [
+            "count"
+          ],
+          "root": {
+            "children": [
+              {
+                "bindingId": "count",
+                "fields": [
+                  {
+                    "label": "Text to count",
+                    "name": "text",
+                    "required": true,
+                    "type": "text"
+                  }
+                ],
+                "id": "counter-form",
+                "submitLabel": "Count words",
+                "type": "form"
+              },
+              {
+                "bindingId": "count",
+                "id": "counter-status",
+                "type": "status"
+              },
+              {
+                "bindingId": "count",
+                "id": "counter-artifact",
+                "label": "Inspect result",
+                "type": "artifact"
+              }
+            ],
+            "id": "main",
+            "type": "stack"
+          },
+          "schemaVersion": "actions.canvas-spec/v1",
+          "title": "Independent generated word counter",
+          "visibility": [
+            "model",
+            "app"
+          ]
+        },
+        "testStatus": "passed",
+        "validationStatus": "passed"
+      }
+    ]
+  },
+  "isError": false,
+  "resultType": "complete"
+}

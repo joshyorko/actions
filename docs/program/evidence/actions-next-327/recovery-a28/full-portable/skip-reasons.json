@@ -1,0 +1,12 @@
+{
+  "Windows only": 6,
+  "Requires native Windows locking": 1,
+  "native Windows path resolution": 1,
+  "exclusive prepared RCC home required": 2,
+  "exclusive prepared ordinary RCC cache required": 4,
+  "explicit owned prepared RCC gate required": 6,
+  "Skip package upload test": 3,
+  "set ACTIONS_REAL_RCC_ARTIFACT_TEST=1": 1,
+  "Filesystem cannot create this Unix socket fixture": 1,
+  "set ACTIONS_ROBOT_INPUT_RCC to pinned RCC18.19.3 for actual task-input acceptance": 1
+}

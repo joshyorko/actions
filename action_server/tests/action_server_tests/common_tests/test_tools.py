@@ -1,98 +1,95 @@
-# import pytest
-# pytestmark = pytest.mark.skipif(
-#     True,
-#     reason="Skipping all tests here for now (we don't want to run them all the time)",
-# )
+"""Tool contracts use owned fixtures, never download or execute vendor binaries."""
+
+from pathlib import Path
+
 import pytest
 
-
-def test_action_server_tool(tmpdir):
-    import sys
-
-    from actions.server._common.tools import ActionServerTool
-
-    suffix = ".exe" if sys.platform == "win32" else ""
-
-    target = tmpdir / f"action_server{suffix}"
-
-    # See: https://github.com/Sema4AI/actions/blob/master/action_server/docs/CHANGELOG.md for versions
-    tool = ActionServerTool(target, "2.5.1")
-    assert not tool.verify()
-    tool.download()
-    assert tool.verify()
-    target = tmpdir / "action_server-in_mac_arm"
-    tool = ActionServerTool(target, "2.5.1")
-    tool.force_sys_platform = "darwin"
-    tool.force_machine = "arm64"
-    tool.make_run_check = False
-    tool.download()
-    assert tool.verify()
-
-    executable = ActionServerTool.get_default_executable(version="2.5.1", download=True)
-    assert executable.exists()
-    assert executable.is_file()
+from actions.server._common.tools import ActionServerTool, AgentCliTool, RccTool
 
 
-@pytest.fixture(autouse=True)
-def setup_logging():
-    import logging
+@pytest.mark.parametrize("tool_class", [ActionServerTool, AgentCliTool])
+@pytest.mark.parametrize("entrypoint", ["instance", "default"])
+def test_retired_vendor_download_has_no_side_effects(
+    monkeypatch, tmp_path, tool_class, entrypoint
+):
+    def forbidden(*args, **kwargs):
+        pytest.fail("Retired download attempted a side effect")
 
-    logger = logging.getLogger("actions.server._common.tools")
-    logger.setLevel(logging.DEBUG)
-    handler = logging.StreamHandler()
-    handler.setLevel(logging.DEBUG)
-    formatter = logging.Formatter(
-        "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    import actions_http
+
+    from actions.server._common import locations, tools
+
+    monkeypatch.setattr(actions_http, "download_with_resume", forbidden)
+    monkeypatch.setattr(locations, "get_default_executable_path", forbidden)
+    monkeypatch.setattr(tools, "_verify_tool_downloaded_ok", forbidden)
+    monkeypatch.setattr(Path, "mkdir", forbidden)
+    with pytest.raises(RuntimeError, match="retired"):
+        if entrypoint == "instance":
+            tool_class(str(tmp_path / "unused"), "legacy-version").download()
+        else:
+            tool_class.get_default_executable(version="legacy-version", download=True)
+
+
+@pytest.mark.parametrize("tool_class", [ActionServerTool, AgentCliTool])
+def test_explicit_legacy_tool_path_and_verification_remain(
+    monkeypatch, tmp_path, tool_class
+):
+    from actions.server._common import locations, tools
+
+    target = tmp_path / tool_class.executable_name
+    monkeypatch.setattr(
+        locations, "get_default_executable_path", lambda **kwargs: target
     )
-    handler.setFormatter(formatter)
-    logger.addHandler(handler)
-    yield
-    logger.removeHandler(handler)
-
-
-def test_agent_cli_tool(tmpdir):
-    import sys
-
-    from actions.server._common.tools import AgentCliTool
-
-    suffix = ".exe" if sys.platform == "win32" else ""
-
-    target = tmpdir / f"agent-cli{suffix}"
-
-    # See: https://github.com/Sema4AI/agents-spec/blob/master/cli/common/version.go for versions
-    tool = AgentCliTool(target, "v1.0.2")
+    assert tool_class.get_default_executable(version="legacy-version") == target
+    tool = tool_class(str(target), "legacy-version")
+    observed = []
+    monkeypatch.setattr(tools, "_get_tool_version", lambda *args: observed.append(args))
     assert not tool.verify()
-    tool.download()
+    target.write_text("owned fixture")
+    target.chmod(0o700)
+    tool.make_run_check = False
     assert tool.verify()
-
-    executable = AgentCliTool.get_default_executable(version="v1.0.2", download=True)
-    assert executable.exists()
-    assert executable.is_file()
-
-
-def test_rcc_tool(tmpdir):
-    import sys
-
-    from actions.server._common.tools import RccTool
-
-    suffix = ".exe" if sys.platform == "win32" else ""
-
-    target = tmpdir / f"rcc{suffix}"
-
-    # Using joshyorko/rcc version (see: https://github.com/joshyorko/rcc/releases)
-    tool = RccTool(target, "v18.18.1")
-    assert not tool.verify()
-    tool.download()
-    assert tool.verify()
-
-    target = tmpdir / "rcc-in_mac_arm"
-    tool = RccTool(target, "v18.18.1")
+    assert not observed
     tool.force_sys_platform = "darwin"
     tool.force_machine = "arm64"
+    expected = "macos-arm64" if tool.available_in_mac_os_arm64 else "macos64"
+    assert tool._get_release_artifact_relative_path(tool.executable_name).startswith(
+        expected + "/"
+    )
+
+
+@pytest.mark.parametrize(
+    "platform,machine,asset",
+    [
+        ("linux", "x86_64", "rcc-linux64"),
+        ("darwin", "arm64", "rcc-macosarm64"),
+        ("win32", "AMD64", "rcc-windows64.exe"),
+    ],
+)
+def test_rcc_download_uses_owned_release(
+    monkeypatch, tmp_path, platform, machine, asset
+):
+    import actions_http
+
+    target = tmp_path / "rcc"
+    calls = []
+
+    def download(url, path, **kwargs):
+        calls.append((url, path, kwargs))
+        path.write_text("owned fixture, never executed")
+        path.chmod(0o700)
+
+    monkeypatch.setattr(actions_http, "download_with_resume", download)
+    tool = RccTool(str(target), "v18.19.3")
+    tool.force_sys_platform = platform
+    tool.force_machine = machine
     tool.make_run_check = False
     tool.download()
-    assert tool.verify()
-
-    executable = RccTool.get_default_executable(version="v18.18.1", download=True)
-    assert executable.exists()
-    assert executable.is_file()
+    tool.download()
+    assert calls == [
+        (
+            f"https://github.com/joshyorko/rcc/releases/download/v18.19.3/{asset}",
+            target,
+            {"make_executable": True},
+        )
+    ]

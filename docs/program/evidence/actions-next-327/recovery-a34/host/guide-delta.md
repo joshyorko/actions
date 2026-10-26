@@ -1,0 +1,19 @@
+Canonical target: docs/skills/repository-operations.md, explicit detached Task host qualification.
+
+Exact proposed durable addition:
+
+“Constructing a Task host does not make it ready or execute queued work. Start it only from the actual server lifespan after route construction succeeds. Readiness requires the configured worker thread's successful canonical SQL probe, exact actor/workspace/profile match, live execution authority and compatible immutable Package/prepared RCC identities. A private Task policy is an explicit owner-only, regular, single-link, absolute POSIX file of at most16KiB; reject symlinks, changed reads, duplicate JSON keys, nonfinite/noninteger numbers and undeclared fields. Its only fields are schema_version=actions.runtime-task-policy/v1, policy_id, ttl_ms and poll_interval_ms. It cannot choose worker/profile/actor, paths or grants.
+
+The single worker thread owns its Database connection and consumes existing RunExecutionIntent/Run admissions with the canonical cursor. Task receipts never become another execution queue. Closing interrupts the existing executor through a local stop callback; it does not fabricate a terminal Run or automatically recover a claimed/uncertain launch. The common executor records cancel_requested only when the actor retains cancel authority. If that write is denied, its finally path still terminates the owned process; the Run remains nonterminal with its original flag and retained launch. Get/cancel remain independently authorized when the host is stopped or failed.
+
+A true host.close result means both thread termination and no reported unconfirmed child cleanup. A timeout, or explicit RccCleanupIncomplete after the thread exits, returns false: retain provider/DB resources and surface bounded lifecycle failure. Do not use an unwinding context manager that closes providers despite this result. The cleanup-uncertain latch is not cleared by repeated joins; operator reconciliation belongs outside this host. Unexpected execution/DB/lease failures stop the consumer and refuse new creation; a competing-claim loser also stops conservatively. No automatic retry, grant provisioning or second scheduler is introduced.
+
+Qualify actual task acknowledgement before generated execution completes, sealed result resolution, and shutdown after actual Python entry on both SQL backends. Include stop with and without cancel permission, plus controlled cleanup-uncertainty and resource-retention negatives. Separate service/thread reconstruction from process restart and SDK/MCP wire qualification. Retain failed matrices; do not reinterpret a cancellation request as confirmed cancellation.”
+
+Documentation improvement receipt:
+- Durable learning: actual SQL probe precedes readiness; environment/profile eligibility is exact and read-only; local administrative stop and SQL cancel authority are separate; joined thread alone is insufficient after explicit cleanup uncertainty.
+- Evidence: strict-final.log28PASS0skip(SQLite/PostgreSQL), actual-final.log6PASS0skip(real RCC completion and active stop with/without cancel), final per-cell cleanup receipts, typed exception/lifecycle boundary test, private policy loader tests. Source source-identity.json pins exact modules.
+- Stale ambiguity removed: host construction implies a running consumer; callback-only tests prove consumption; local stop always writes SQL cancellation; thread join alone permits provider teardown; Task polling is a second queue.
+- Remaining uncertainty: this patch does not wire/advertise MCP/bootstrap, qualify installed CLI or process restart, add Robot/Work Item Task execution, persist interactions, or authorize effect-ambiguous recovery. Those remain parent/full-campaign gates.
+
+Upstream disposition: none. Actions-owned lifecycle integration and typed cleanup evidence; no confirmed dependency defect and no external report/mutation.

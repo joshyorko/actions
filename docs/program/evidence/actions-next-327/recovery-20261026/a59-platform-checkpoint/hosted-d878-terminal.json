@@ -1,0 +1,117 @@
+{
+  "schema": "hosted-ci-watch/v1",
+  "observed_at_utc": "2026-10-26T16:24:15Z",
+  "repository": "joshyorko/actions",
+  "pull_request": 328,
+  "branch": "release/327-invoice-vertical-20261020",
+  "head_sha": "d878068ed3149e448830b0abfd5183412f185f21",
+  "head_tree_sha": "b39a6ebd44261ef362d3ebb5f73408961f5059b6",
+  "event": "pull_request",
+  "read_only": true,
+  "aggregate_owner": {
+    "name": "Measured Python coverage gate",
+    "run_number": 513,
+    "run_id": 40352516551,
+    "run_url": "https://github.com/joshyorko/actions/actions/runs/40352516551",
+    "job_id": 121676096479,
+    "job_url": "https://github.com/joshyorko/actions/actions/runs/40352516551/job/121676096479",
+    "status": "completed",
+    "conclusion": "failure",
+    "failed_step": "Measure portable package suite coverage",
+    "postgres_start": "success",
+    "postgres_cleanup": "success",
+    "coverage_inventory_result": {
+      "baseline_written": false,
+      "failed_gates": ["source inventory is incomplete", "package coverage report is missing"],
+      "coverage_percentage_qualified": false
+    },
+    "checkout_merge_sha": "6f95b68bb095a07b4634a8e225b422620b79b294",
+    "checkout_merge_tree_sha": "b39a6ebd44261ef362d3ebb5f73408961f5059b6",
+    "package_counts": [
+      {"name": "developer/tests toolkit contract preflight", "passed": 215, "failed": 0, "skipped": null, "duration_seconds": 38.91},
+      {"name": "actions", "passed": 449, "failed": 0, "skipped": 5, "warnings": 4, "duration_seconds": 132.88},
+      {"name": "actions-http-helper", "passed": 12, "failed": 0, "skipped": null, "duration_seconds": 0.19},
+      {"name": "devutils", "passed": 335, "failed": 0, "skipped": null, "duration_seconds": 37.34},
+      {"name": "work-items", "passed": 285, "failed": 0, "skipped": 46, "deselected": 3, "xfailed": 10, "duration_seconds": 11.98},
+      {"name": "action_server", "passed": 5331, "failed": 2, "skipped": 58, "warnings": 18, "duration_seconds": 1851.97}
+    ],
+    "failed_cases": [
+      {"name": "tests/action_server_tests/test_ci_fixture_capabilities_327.py::test_tls_postgres_distinguishes_missing_docker_from_strict_requirement[False-Skipped]", "error": "AssertionError: Regex pattern did not match", "expected_regex": "Docker CLI required", "actual_input": "Docker CLI is unavailable"},
+      {"name": "tests/action_server_tests/test_ci_fixture_capabilities_327.py::test_tls_postgres_distinguishes_missing_docker_from_strict_requirement[True-Failed]", "error": "AssertionError: Regex pattern did not match", "expected_regex": "Docker CLI required", "actual_input": "Docker CLI is unavailable"}
+    ],
+    "coverage_receipt_artifact": {"id": 12666373218, "name": "python-coverage-receipts", "size_bytes": 297373, "downloaded": false},
+    "coverage_qualified": false,
+    "job_log_available": true,
+    "watch_extension": "parent-authorized up to 10 minutes after original 20-minute bound"
+  },
+  "runs": [
+    {
+      "name": "Action Server Tests",
+      "run_number": 391,
+      "run_id": 40352516564,
+      "run_url": "https://github.com/joshyorko/actions/actions/runs/40352516564",
+      "status": "in_progress",
+      "jobs": [
+        {"id": 121676096371, "runner": "windows-py3.12-devmode", "status": "completed", "conclusion": "failure", "failed_steps": ["Test (not integration)", "`inv typecheck`"], "counts": null},
+        {"id": 121676096521, "runner": "ubuntu-py3.12-devmode", "status": "completed", "conclusion": "failure", "failed_step": "Test (not integration)", "postgres_start": "success", "postgres_cleanup": "success", "counts": null},
+        {
+          "id": 121676096831,
+          "runner": "macos-py3.12-devmode",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_step": "Test (not integration)",
+          "counts": {"failed": 2, "passed": 2224, "skipped": 3165, "warnings": 19, "duration_seconds": 151.48},
+          "failed_cases": [
+            "action_server_tests/test_ci_fixture_capabilities_327.py::test_tls_postgres_distinguishes_missing_docker_from_strict_requirement[False-Skipped]",
+            "action_server_tests/test_ci_fixture_capabilities_327.py::test_tls_postgres_distinguishes_missing_docker_from_strict_requirement[True-Failed]"
+          ],
+          "assertion": {"expected_regex": "Docker CLI required", "actual_input": "Docker CLI is unavailable"}
+        }
+      ]
+    },
+    {
+      "name": "Action Server Build (Unauthenticated)",
+      "run_number": 753,
+      "run_id": 40352516621,
+      "run_url": "https://github.com/joshyorko/actions/actions/runs/40352516621",
+      "status": "queued",
+      "checkout_merge_sha": "6f95b68bb095a07b4634a8e225b422620b79b294",
+      "checkout_merge_tree_sha": "b39a6ebd44261ef362d3ebb5f73408961f5059b6",
+      "jobs": [
+        {
+          "id": 121676096639,
+          "runner": "ubuntu-22.04",
+          "status": "completed",
+          "conclusion": "failure",
+          "failed_step": "Verify Canvas candidate-source Runtime and browser acceptance",
+          "sanitized_failure_diagnostic": {"availability": "AVAILABLE", "locations": [{"exception_class": "AssertionError", "line": 688}]},
+          "wrapper_counts": {"tests": 1, "failures": 1, "skipped": 0, "errors": 0, "pytest_exit": 1, "receipt_valid": false},
+          "artifact_downloaded": false
+        },
+        {"id": 121676096351, "runner": "windows-2022", "status": "completed", "conclusion": "success", "candidate_source_acceptance": "skipped by Ubuntu-only condition"},
+        {"id": 121676096845, "runner": "macos-15", "status": "queued"}
+      ]
+    },
+    {
+      "name": "Frontend Build",
+      "run_number": 405,
+      "run_id": 40352516776,
+      "run_url": "https://github.com/joshyorko/actions/actions/runs/40352516776",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {"id": 121676096379, "runner": "macos-latest", "conclusion": "success"},
+        {"id": 121676096674, "runner": "windows-latest", "conclusion": "success"},
+        {"id": 121676097305, "runner": "ubuntu-latest", "conclusion": "success"}
+      ],
+      "candidate_browser_diagnostic_step_present": false
+    }
+  ],
+  "canonical_guide": {
+    "path": "docs/skills/repository-operations.md",
+    "disposition": "existing guidance already covers terminal coverage identity/counts/cleanup and allowlisted candidate exception-class/source-line diagnostics; no new delta warranted",
+    "evidence": "Current unauthenticated job emitted only AVAILABLE, AssertionError, line 688; raw JUnit message/details remain withheld"
+  },
+  "upstream_disposition": "none",
+  "mutations": "none"
+}

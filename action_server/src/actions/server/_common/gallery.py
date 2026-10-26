@@ -36,7 +36,10 @@ class _PackageListInfo(TypedDict):
 class GalleryActionPackages:
     _metadata: _PackageMetadataRoot | None
 
-    def __init__(self, metadata: dict | None = None):
+    def __init__(
+        self, metadata: dict | None = None, *, metadata_url: str | None = None
+    ):
+        self._metadata_url = metadata_url
         if metadata is not None:
             self._metadata = self._validate_metadata(metadata)
         else:
@@ -177,19 +180,24 @@ class GalleryActionPackages:
 
         May throw an exception if the metadata cannot be loaded.
         """
-        from actions_http import get
-
-        if self._metadata:
+        if self._metadata is not None:
             # Ok, we have loaded it before
             assert isinstance(
                 self._metadata, dict
             ), f"Expected metadata to be a dict. Found: {self._metadata}"
             return ActionResult.make_success(self._metadata)
 
+        if not self._metadata_url or not self._metadata_url.strip():
+            return ActionResult.make_failure(
+                "Gallery requires explicit metadata or an owner-supplied metadata_url."
+            )
+
+        from actions_http import get
+
         try:
             # Try to get it fresh from the internet (we'll have to get the actual data from the
             # net afterwards, so, not much point in caching it)
-            response = get("https://cdn.sema4.ai/gallery/actions/manifest.json")
+            response = get(self._metadata_url)
             if response.status != 200:
                 raise Exception(
                     f"Failed to download gallery actions metadata. Status: {response.status}. Data: {response.data.decode('utf-8', errors='backslashreplace')}"

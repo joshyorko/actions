@@ -1,0 +1,20 @@
+{
+  "execution_authorized": true,
+  "source_sha": "f905c3888ecb448dbce80ce57a9b59ff041eb148",
+  "runtime_version": "1.1.0a41",
+  "core_version": "1.1.0a5",
+  "installed_base": "/workspace/actions-327-a41/installed-v2",
+  "fixture_root": "/workspace/actions-327-a41/v2-acceptance",
+  "prepared_receipt": "/workspace/actions-327-a41/compiler/prepared.json",
+  "compiler_artifact_digest": "sha256:528f65f91900e24f0168f8c87b5496f3ce1f02f9b156a2f2de93923a07285d60",
+  "compiler_core_wheel_sha256": "0c1421f7b7cd0db447c82e58458107c92f22051b29eb128c8b765219b863a3ec",
+  "compiler_core_bytes_verified": true,
+  "compiler_core_receipt": "/workspace/actions-327-a41/compiler/core-proof.json",
+  "compiler_core_receipt_sha256": "6224db33a9a8577bb4c055326b0b57a63cb884e420f3f444daa2554a6261fd48",
+  "official_host": "/workspace/actions-327-a38/official-host",
+  "wheels": {
+    "wheels/work-items/actions_work_items-0.5.0a2-py3-none-any.whl": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb",
+    "wheels/actions/actions_core-1.1.0a5-py3-none-any.whl": "0c1421f7b7cd0db447c82e58458107c92f22051b29eb128c8b765219b863a3ec",
+    "wheels/action_server/actions_runtime-1.1.0a41-cp312-cp312-linux_x86_64.whl": "fcf70e1f1cc3b91409dd8600622161085281f968b868373d5b62df10e0c4a661"
+  }
+}

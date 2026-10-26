@@ -1,0 +1,88 @@
+{
+  "browser": {
+    "path": "/usr/bin/chromium",
+    "sha256": "2c8d32d29dc6781c35ae196ea83299d507ac88fc339301abe74672feda299779",
+    "status": "passed",
+    "version": "Chromium 151.0.7922.173 built on Debian GNU/Linux 13 (trixie)"
+  },
+  "built_resource_sha256": "fe8155dcd952c7cf60d0b57cfcfad70a9df4c1d14d655d9f822858cf8053c852",
+  "candidate_acceptance_manifest_sha256": "94b11dd7ab9899c0e66dc4e8a405e08dfb372c5b2ab4db1c47f927bbc9825dd4",
+  "candidate_core": {
+    "runtime_module_origin": "/workspace/actions/action_server/src/actions/server/__init__.py",
+    "runtime_module_sha256": "95f531cc8776f5179551beb1f372421af89cab13996f0bbe3eaeb9a9d91b98ef",
+    "runtime_process_args": [
+      "/workspace/actions/action_server/.venv/bin/python",
+      "-P",
+      "-m",
+      "actions.server",
+      "start",
+      "--actions-sync=true",
+      "--port=0",
+      "--datadir=/workspace/actions-cloud/robocorp/temp/edd4729e98db4977/pytest-of-agent/pytest-0/test_canvas_template_candidate0/.sema4ai-test-action-server",
+      "--db-file=server.db",
+      "-v",
+      "--skip-lint",
+      "--min-processes=0",
+      "--max-processes=20"
+    ],
+    "sha256": "7f60329b3fb6c4aefe2137ff1f4a459e1d9ae67299db3eea6493d0a6a6f67142",
+    "source_blobs": {
+      "actions/pyproject.toml": "65a05b858668cc3d0b58dc91f9db37faf8a4ca63",
+      "actions/src/actions/mcp/__init__.py": "2d6ff9704a09f9f85663f5d5afcea3ab5ca9511b",
+      "actions/src/actions/mcp/_metadata.py": "e761a0608505c053532c807f81b888839fd1be06"
+    },
+    "source_revision": "123e772ee36c44cfd96ea62a6c599bb4f55c8f1b",
+    "source_tree": "7d6658bc3f2d536519c8698503f8b379c7b3ed56",
+    "version": "1.1.0a8",
+    "wheel_api_sources": {
+      "actions/mcp/__init__.py": {
+        "git_blob": "2d6ff9704a09f9f85663f5d5afcea3ab5ca9511b",
+        "sha256": "bc3b41cf88f7747f4e98be37ec8a357e840fe5f0656ab5374fe12432a711ccac"
+      },
+      "actions/mcp/_metadata.py": {
+        "git_blob": "e761a0608505c053532c807f81b888839fd1be06",
+        "sha256": "c5750e654cb3c1e057705d80e65c4f6a935a3d81e46450d6dbf68d37f45cb48c"
+      }
+    },
+    "wheel_path": "/workspace/actions-cloud/robocorp/temp/edd4729e98db4977/pytest-of-agent/pytest-0/test_canvas_template_candidate0/candidate-core-wheel/actions_core-1.1.0a8-py3-none-any.whl",
+    "worker": {
+      "actions_core_version": "1.1.0a8",
+      "actions_module": "/workspace/327-probes/a59-browser/actions-home/holotree/c2fd1aa_a78733b_791fc738/lib/python3.12/site-packages/actions/__init__.py",
+      "api_modules": {
+        "actions.mcp": {
+          "git_blob": "2d6ff9704a09f9f85663f5d5afcea3ab5ca9511b",
+          "path": "/workspace/327-probes/a59-browser/actions-home/holotree/c2fd1aa_a78733b_791fc738/lib/python3.12/site-packages/actions/mcp/__init__.py",
+          "sha256": "bc3b41cf88f7747f4e98be37ec8a357e840fe5f0656ab5374fe12432a711ccac"
+        },
+        "actions.mcp._metadata": {
+          "git_blob": "e761a0608505c053532c807f81b888839fd1be06",
+          "path": "/workspace/327-probes/a59-browser/actions-home/holotree/c2fd1aa_a78733b_791fc738/lib/python3.12/site-packages/actions/mcp/_metadata.py",
+          "sha256": "c5750e654cb3c1e057705d80e65c4f6a935a3d81e46450d6dbf68d37f45cb48c"
+        }
+      },
+      "direct_url_wheel": "/workspace/actions-cloud/robocorp/temp/edd4729e98db4977/pytest-of-agent/pytest-0/test_canvas_template_candidate0/candidate-core-wheel/actions_core-1.1.0a8-py3-none-any.whl",
+      "source_blobs": {
+        "actions/pyproject.toml": "65a05b858668cc3d0b58dc91f9db37faf8a4ca63",
+        "actions/src/actions/mcp/__init__.py": "2d6ff9704a09f9f85663f5d5afcea3ab5ca9511b",
+        "actions/src/actions/mcp/_metadata.py": "e761a0608505c053532c807f81b888839fd1be06"
+      },
+      "source_revision": "123e772ee36c44cfd96ea62a6c599bb4f55c8f1b",
+      "source_tree": "7d6658bc3f2d536519c8698503f8b379c7b3ed56",
+      "wheel_sha256": "7f60329b3fb6c4aefe2137ff1f4a459e1d9ae67299db3eea6493d0a6a6f67142",
+      "worker_prefix": "/workspace/327-probes/a59-browser/actions-home/holotree/c2fd1aa_a78733b_791fc738"
+    }
+  },
+  "candidate_registry_base": "actions-core=1.0.2",
+  "limits": [
+    "The production template's published actions-core=1.0.3 gate is separate and not run here.",
+    "artifact:null is a partial result and does not prove authorized artifact retrieval.",
+    "This local Runtime/browser gate does not claim ChatGPT rendering."
+  ],
+  "production_package_manifest_sha256": "eec63118246ceb1c6b96bf787d77cce64bced6f3a5341ca574f75f7f614da146",
+  "runtime_calls": [
+    "canvas_fixture_search",
+    "canvas_candidate_core_provenance"
+  ],
+  "scope": "candidate-source Runtime/browser acceptance only",
+  "template_zip_sha256": "7500becb402d09c8adcf938c0cc6c6b69d817007c79951b97fbeee75162b943a"
+}

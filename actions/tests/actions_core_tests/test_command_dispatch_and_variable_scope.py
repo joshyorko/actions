@@ -46,7 +46,7 @@ def test_run_handler_reports_missing_selected_action(tmp_path, monkeypatch):
     )
 
     assert result == 1
-    from robocorp.log._log_formatting import pretty_format_logs_from_log_html
+    from actions._logging._log_formatting import pretty_format_logs_from_log_html
 
     log = pretty_format_logs_from_log_html(tmp_path / "output" / "log.html")
     assert "Did not find any actions in:" in log

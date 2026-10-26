@@ -17,7 +17,7 @@ class _RawSecret(Secret):
             value: The secret value to be wrapped in this class (note that
                 it's automatically hidden in the logs).
         """
-        from robocorp import log
+        from actions import _logging as log
 
         log.hide_from_output(value)
         log.hide_from_output(repr(value))
@@ -97,7 +97,7 @@ class _SecretInActionContext(Secret):
         import os
 
         from actions._action import get_current_requests_contexts
-        from actions._action_context import _is_robocorp_log_available
+        from actions._action_context import _is_logging_available
 
         ret = None
 
@@ -115,8 +115,8 @@ class _SecretInActionContext(Secret):
             ret = _decrypt_secret_or_return_plain(self._env_var_name, value)
 
         if ret is not None:
-            if _is_robocorp_log_available():
-                from robocorp import log
+            if _is_logging_available():
+                from actions import _logging as log
 
                 log.hide_from_output(ret)
                 log.hide_from_output(repr(ret))
@@ -130,7 +130,7 @@ class _SecretInActionContext(Secret):
         """
         Provides the actual secret wrapped in this class.
         """
-        from robocorp import log
+        from actions import _logging as log
 
         with log.suppress():
             if self._action_context is None:

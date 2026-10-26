@@ -1,0 +1,18 @@
+# Root projection join review
+
+Disposition: approved bounded source join; no blocking finding in reviewed current root files. Exact dirty-file SHA256 values are in `source-sha256.json`. This is read-only source/test inspection, not an independent execution of root's reported suites or installed acceptance.
+
+- `terminal_preimage` requires an existing transaction and serializes complete Run/Pin/Attempt/intent/output rows using SQL only. `generic_view._app` captures it immediately after `_read` validates the generated receipt, inside `_entry`'s existing counter/workspace transaction. The closure compares that captured identity at both helper checks. This closes the earlier validation-to-helper interval; it no longer relies on a new snapshot taken after leaving validation.
+- Callback also checks current Deployment/app/binding and existing app association/audit plus live read/artifact grants. It does not call provider, `_selected`, `_read`, schema or package loading. Existing `outputs.resolve` provider acquisition under its read-grant lock is unchanged; stream read is outside that transaction.
+- `canvas_projection` is APP_TOOLS-only, advertised read-only/idempotent, uses closed AppRunRequest schema and returns separate `actions.projection` app metadata. CanvasReply's new field is appended, preserving positional meanings. Model result remains separate.
+- Frontend projection is explicitly enabled only for Canvas semantic v2. Creation is inert. Only completed execution triggers the separate authorized projection call. The controller checks exact binding/run/attempt and canonical bytes; execution metadata never supplies generated data.
+- Each async tool call captures its generation before awaiting. Superseded successful replies throw before `accept` mutates execution state; superseded denial paths call `fail` with the captured old generation, which cannot invalidate a newer controller state. A new submission clears old projection data, and current denial clears it. Successful late old projection behavior has an integration test; an explicit late isError/rejection test would directly cover that separate branch, but inspection finds no blocker.
+- Route tests inspect app/model separation, host-selected identity, live callback and mutation after validated receipt capture. Their monkeypatched projection helper is honestly route-only; helper's own byte/race tests are separate. No claim of an installed host or full browser acceptance is inferred.
+
+Exact canonical guide delta, target docs/skills/repository-operations.md:
+
+“Capture the terminal SQL preimage in the same existing transaction that validates the complete generated execution receipt. Carry that exact value into the projection callback and compare it before and after the sealed-result read; taking a fresh pin only after validation leaves an unchecked interval. Frontend calls must capture their generation before awaiting and invalidate only that captured generation on failure, so late authorization errors cannot erase a newer successful result. Generated data comes only from the separate authorized projection response after successful execution, never from execution-state metadata. App-only routing and component tests remain distinct from installed renderer acceptance.”
+
+Verified basis: current reviewed helper/route/adapter control flow and the route/adapter regression assertions; earlier independently reproduced helper race and its corrected pass are retained in sibling projection-review. Root reported suites are not counted as independent reruns here.
+
+Upstream disposition: none. No root edits or external actions.

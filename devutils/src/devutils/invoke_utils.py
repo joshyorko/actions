@@ -199,6 +199,7 @@ def build_common_tasks(
     ruff_format_arguments: str = "",
     parallel_tests: bool = True,
     source_directories: Tuple[str, ...] = ("src", "tests"),
+    install_extras: Tuple[str, ...] = (),
 ):
     """Builds the common tasks in every task.py file of the inheriting packages.
 
@@ -210,6 +211,14 @@ def build_common_tasks(
         parallel_tests: Runs tests in parallels. (enabled by default)
         source_directories: Default Python source directories.
     """
+    if any(
+        not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]*", extra)
+        for extra in install_extras
+    ):
+        raise ValueError("declared package extras must be literal names")
+    install_command = "install" + "".join(
+        " --extras " + extra for extra in install_extras
+    )
     if tag_prefix is None:
         # The tag for releases should be `actions-core-{version}`
         # i.e.: actions-core-0.1.1
@@ -298,9 +307,9 @@ def build_common_tasks(
         if projects:
             with mark_as_develop_mode(projects):
                 poetry(ctx, "lock")
-                poetry(ctx, "install", verbose=verbose)
+                poetry(ctx, install_command, verbose=verbose)
         else:
-            poetry(ctx, "install", verbose=verbose)
+            poetry(ctx, install_command, verbose=verbose)
 
     @task
     def devinstall(ctx, verbose: bool = False):
@@ -314,7 +323,7 @@ def build_common_tasks(
 
         with mark_as_develop_mode(all_packages=True):
             poetry(ctx, "lock")
-            poetry(ctx, "install", verbose=verbose)
+            poetry(ctx, install_command, verbose=verbose)
 
     @contextmanager
     def mark_as_develop_mode(
@@ -345,8 +354,23 @@ def build_common_tasks(
                             continue
 
                         if all_packages or (projects and key in projects):
+                            # An explicit noneditable source contract wins over
+                            # bulk developer mode. Poetry merges main/dev groups.
+                            poetry_contents = contents.get("tool", {}).get("poetry", {})
+                            groups = poetry_contents.get("group", {}).values()
+                            specs = [
+                                value,
+                                *(
+                                    group.get("dependencies", {}).get(key)
+                                    for group in groups
+                                ),
+                            ]
+                            noneditable = any(
+                                isinstance(spec, dict) and spec.get("develop") is False
+                                for spec in specs
+                            )
                             dependencies[key] = dict(
-                                path=f"../{dir_name}/", develop=True
+                                path=f"../{dir_name}/", develop=not noneditable
                             )
 
             yield
@@ -494,7 +518,7 @@ def build_common_tasks(
     def docs(ctx, check: bool = False, validate: bool = False):
         """Build API documentation"""
         if validate:
-            poetry(ctx, "run lazydocs", "--validate", package_name)
+            poetry(ctx, "run python -m devutils.owned_docs", "--validate", package_name)
             return
 
         output_path = root / "docs" / "api"
@@ -507,7 +531,7 @@ def build_common_tasks(
 
         poetry(
             ctx,
-            "run lazydocs",
+            "run python -m devutils.owned_docs",
             "--no-watermark",
             "--remove-package-prefix",
             f"--src-base-url {REPOSITORY_URL}",

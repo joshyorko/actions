@@ -1,0 +1,84 @@
+{
+  "_meta": {
+    "actions.canvas": {
+      "active": false,
+      "applicationId": "848ee675-913a-4388-b862-635deeb61ce3",
+      "bindings": [],
+      "revisionId": "sha256:aa34eee2eafcf86d84a84b75988b68bdb0ab559071547bdbd1176152fec0779c",
+      "spec": {
+        "bindingIds": [],
+        "root": {
+          "children": [
+            {
+              "id": "welcome",
+              "text": "Installed ordinary generated app is ready to compose.",
+              "type": "text"
+            },
+            {
+              "id": "guidance",
+              "text": "Describe the interface you want. Add a backend only when it needs one.",
+              "type": "text"
+            }
+          ],
+          "id": "main",
+          "type": "stack"
+        },
+        "schemaVersion": "actions.canvas-spec/v1",
+        "title": "Installed ordinary generated app",
+        "visibility": [
+          "model",
+          "app"
+        ]
+      }
+    },
+    "io.modelcontextprotocol/serverInfo": {
+      "name": "Action Server",
+      "version": ""
+    }
+  },
+  "content": [
+    {
+      "type": "text",
+      "text": "Canvas revision loaded.",
+      "annotations": null,
+      "_meta": null
+    }
+  ],
+  "structuredContent": {
+    "active": false,
+    "applicationId": "848ee675-913a-4388-b862-635deeb61ce3",
+    "buildStatus": "not-required",
+    "compilationStatus": "not-required",
+    "importStatus": "not-required",
+    "revisionId": "sha256:aa34eee2eafcf86d84a84b75988b68bdb0ab559071547bdbd1176152fec0779c",
+    "spec": {
+      "bindingIds": [],
+      "root": {
+        "children": [
+          {
+            "id": "welcome",
+            "text": "Installed ordinary generated app is ready to compose.",
+            "type": "text"
+          },
+          {
+            "id": "guidance",
+            "text": "Describe the interface you want. Add a backend only when it needs one.",
+            "type": "text"
+          }
+        ],
+        "id": "main",
+        "type": "stack"
+      },
+      "schemaVersion": "actions.canvas-spec/v1",
+      "title": "Installed ordinary generated app",
+      "visibility": [
+        "model",
+        "app"
+      ]
+    },
+    "testStatus": "not-required",
+    "validationStatus": "passed"
+  },
+  "isError": false,
+  "resultType": "complete"
+}

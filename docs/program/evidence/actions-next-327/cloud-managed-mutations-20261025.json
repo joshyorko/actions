@@ -1,0 +1,447 @@
+{
+  "schema": "actions.managed-mutations-acceptance/v1",
+  "base": "971a6cf316b7a9c8c50f2d7c58665fda5ae9107d",
+  "candidate": "1.1.0a24; no wheel built yet",
+  "inputs": {
+    "action_server/scripts/verify_invoice_queries.py": "0c5a910f3085b4346b1da7983966f553ef5b0cf57a992e2fc526d3cc8fdd036a",
+    "action_server/src/actions/server/managed_work_items/native_runs.py": "291228b63a4824a75219f35ed0bb39666baee37f0991ea0d395a700bb3453308",
+    "action_server/src/actions/server/managed_work_items/sql_service.py": "4f1545011818ba102c3ba25b072658435542fd09bf4a3a7988b41c6cf6af5f18",
+    "action_server/tests/action_server_tests/test_managed_work_items_runtime.py": "8ca5fdcff5b39549e7a5ac813b819359bbb28d084b7354e34950f4bef5e7db05",
+    "action_server/tests/action_server_tests/test_managed_work_items_sql_service.py": "6d93d05fa401f79b2ef0ad3638876d68a3a1126067376b8a2803d02bca03453f",
+    "work-items/contracts/contract-port-provenance.json": "924b9e485f30c4e7af03aa6b95fe3a6c08d868a3953d110a9ca47ae62801de69",
+    "work-items/tests/work_items_tests/contract_ports/test_custom_backends.py": "c0ff2c28b25e140970e8717cc19b9d66642b0098f5225484230a29dc176e2fe0",
+    "action_server/tests/action_server_tests/test_managed_work_items_mutations.py": "a63c093721e9d052e9239b3a1020245de97a83d61f155dcd8bed3879084157bc",
+    "action_server/tests/action_server_tests/test_managed_work_items_mutation_recovery.py": "faa6014f0637066a358032d58043ef28cbe873d8962d6f78f677e9d2e70cf930",
+    "action_server/tests/contract_tests/test_release_publisher_adversarial.py": "1c558b2f58ff218735a312267f95712487015b9072e6c95f565c8fcb5a8fe89f"
+  },
+  "evidence_root": "/workspace/actions-327-state/evidence/resume-20261024",
+  "managed": {
+    "command": "bash /workspace/actions-327-state/run-prepared python /tmp/actions327-owned-pg.py <seven managed test modules; exact list in fixture receipt>",
+    "fixture_receipt": "/workspace/actions-327-state/evidence/resume-20261024/pg-5223e0ff81a24de4814592cf84cba763/receipt.json",
+    "passed": 158,
+    "skipped": [
+      "test_real_managed_completion_uses_retained_rcc_evidence[sqlite-duckdb]",
+      "test_real_managed_completion_uses_retained_rcc_evidence[sqlite-postgresql]",
+      "test_real_managed_completion_uses_retained_rcc_evidence[postgresql-duckdb]",
+      "test_real_managed_completion_uses_retained_rcc_evidence[postgresql-postgresql]"
+    ],
+    "failures": 0,
+    "errors": 0,
+    "cleanup": "PASS",
+    "scope": "RealSQLite and PostgreSQL, HTTP and liveSQL policy, concurrent duplicates, injected receipt/audit failure rollback, reconstructed service replay. SameSQL reconstruction is not fresh interpreter proof."
+  },
+  "behavior": [
+    "Reviewed enqueue validates exact approved source snapshot/payload, returns one existing item; never records approval or creates arbitrary producer work",
+    "Retry delegates configured private worker reconciliation under current authenticated claim, retains Run/addsoneAttempt/no launch, request/audit atomically committed",
+    "Client no-effect strings, unknown launches, revoked policy, foreign scopes, changed inputs and stale fences rejected",
+    "Legacy action-backed worker is routed to its existing projector before applying package-revision-native predicates"
+  ],
+  "static": {
+    "configured_lint": "PASS; optionalMarkdown executable absent",
+    "configured_typecheck": "PASS 465 source files"
+  },
+  "publisher": {
+    "schema_version": "actions.publisher-adversarial-review/v1",
+    "source_commit": "971a6cf316b7a9c8c50f2d7c58665fda5ae9107d",
+    "source_note": "Publisher implementation/workflow and existing160 test bytes unchanged from5165e4290ae31351e870bc952b5eef761fe86acd; new uncommitted manual controller regression is hashed below. Shared integration files are root-owned and not acceptance targets in this receipt.",
+    "files": {
+      "action_server/scripts/runtime_release_button.py": "c9b76a2119f0a5308a2a3261731d3e042d1836d3c19f7b51d9457548fe4d202d",
+      "action_server/scripts/runtime_release_backup.py": "c77c1efadfe3c3b80ce75bd6598bb5afd2be7a6a4ef7f67a08da712f6c73fde2",
+      "action_server/scripts/publish_verified_runtime.py": "236ed21dcb50b3c3934f5e15b29e61d6a7b712ed65e7dcf7cd72785d4f8fa26c",
+      ".github/workflows/runtime-release-publish.yml": "4f4b396a232f00ed188403de3cd72e17f3136784bce36cb850ca968dff08c583",
+      "devutils/tests/test_runtime_release_button.py": "84ed660976274b7a35a1c18695bc73b41c55eeaef5552fee57cef4e49e10c4e4",
+      "devutils/tests/test_runtime_release_backup.py": "d0b722b5a02151aeed1ddd09de86df66c1223fa0c7a01db54390ab70d03bb5aa",
+      "devutils/tests/test_runtime_release_workflows.py": "8af8e01ad97b10fb2ca0a98ce1f8a402ec0fab0bcb1ec88037c1254f74413112",
+      "action_server/tests/contract_tests/test_release_publisher_adversarial.py": "1c558b2f58ff218735a312267f95712487015b9072e6c95f565c8fcb5a8fe89f"
+    },
+    "primary_records": [
+      "https://github.com/joshyorko/actions/issues/332",
+      "https://github.com/joshyorko/actions/pull/323",
+      "https://github.com/joshyorko/actions/pull/325"
+    ],
+    "commands": [
+      "bash /workspace/actions-327-state/run-package devutils poetry run pytest tests/test_runtime_release_button.py tests/test_runtime_release_backup.py tests/test_runtime_release_workflows.py -q --tb=short --junitxml=/workspace/actions-327-state/evidence/resume-20261024/publisher/focused.xml",
+      "bash /workspace/actions-327-state/run-package action_server poetry run pytest tests/contract_tests/test_release_publisher_adversarial.py -q --tb=short --junitxml=/workspace/actions-327-state/evidence/resume-20261024/publisher/manual-controller-final.xml"
+    ],
+    "results": {
+      "existing": {
+        "tests": "160",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "9.916"
+      },
+      "new_manual_controller": {
+        "tests": "16",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "1.586"
+      }
+    },
+    "static": "New test module Ruff check, Ruff format check and Isort check passed; no implementation change",
+    "covered_controls": {
+      "qualification_repo_head_lookalike_sha_workflow_jobs": "test_runtime_release_button.py::test_successful_pr_run_requires_canonical_workflow_jobs_and_same_repo",
+      "unchecked_complete_source_tree_and_changed_workflow_tree": "test_runtime_release_button.py::test_source_binding_accepts_normal_merge_but_rejects_changed_workflow_tree",
+      "member_bytes_unlisted_files_symlinks": "test_runtime_release_button.py::test_bundle_rejects_mutation_symlink_and_unlisted_file",
+      "actual_archive_digest_before_extraction": "test_runtime_release_button.py::test_download_verifies_github_archive_digest_before_extraction",
+      "wrong_manifest_source_version_run": "test_runtime_release_backup.py::test_registry_cannot_admit_another_release",
+      "wrong_backup_run_workflow_branch_head_repo_attempt_event": "test_runtime_release_backup.py::test_backup_run_identity_is_not_interchangeable",
+      "expired_wrong_backup_artifact_metadata": "test_runtime_release_backup.py::test_backup_artifact_metadata_is_exact_and_current",
+      "owner_and_rerun_identity": "test_runtime_release_button.py::test_only_josh_can_enter_publication_or_rerun_writer",
+      "actual_controller_repository_branch_workflow_sha_current_remote": "NEW test_release_publisher_adversarial.py::test_manual_controller_requires_exact_current_community_identity"
+    },
+    "manual_controller_fixture": "Real task-owned temporary local bare Git origin/community and checkout; no GitHub dispatch, API writes, credential acquisition or publication path. New test fills a coverage gap; no acceptance hole reproduced.",
+    "public_metadata": {
+      "community": {
+        "url": "https://api.github.com/repos/joshyorko/actions/branches/community",
+        "sha": "0e80d41c6b4e5df9579675731e6cdbda733acd35",
+        "protected": false
+      },
+      "rulesets": {
+        "url": "https://api.github.com/repos/joshyorko/actions/rulesets",
+        "items": []
+      },
+      "josh_permission": {
+        "endpoint": "repos/joshyorko/actions/collaborators/joshyorko/permission",
+        "permission": "admin"
+      },
+      "pypi_environment": {
+        "observed_at": "2026-10-24T23:52:27.182394+00:00",
+        "url": "https://api.github.com/repos/joshyorko/actions/environments/pypi",
+        "transport": "anonymous HTTPS GET; no credential access",
+        "status": 200,
+        "name": "pypi",
+        "protection_rules": [],
+        "deployment_branch_policy": null,
+        "can_admins_bypass": true
+      }
+    },
+    "identity_permissions": {
+      "dispatcher": "Repository-authorized workflow dispatcher; publication preflight requires both GITHUB_ACTOR and GITHUB_TRIGGERING_ACTOR joshyorko",
+      "environment_approver": "No protection rules or branch policy reported for pypi by anonymous read at observed timestamp",
+      "package_credential": "Existing PYPI_TOKEN_ACTIONS_RUNTIME supplied only to writer; real token scope/expiry/provider restriction unknown and intentionally not inspected",
+      "github_token": "Workflow default and validate contents:read/actions:read; writer contents:write/actions:read in pypi environment",
+      "producers_backups": "Canonical exact repo/head/workflow/run/attempt/artifact/digest and independent backup checks; these do not constitute independent approval if same owner controls identities"
+    },
+    "residual_risk": "An actor guard identifying the sole owner is not independent authorization if that owner credential is stolen. Unprotected community and pypi environment without protection do not add an independent approval barrier. This is a documented residual risk, not evidence of compromise or an implementation bypass.",
+    "operator_gate": {
+      "status": "BLOCKED pending owner security disposition",
+      "exact_action": "Review actual package-token scope/expiry and stolen-owner-credential residual risk; choose whether independent environment approval/branch protection or short-lived publisher auth is required before publication",
+      "target": "Existing Actions publisher, community protection and pypi environment",
+      "limits": "No token/secret inspection, rotation, permission/environment setting change, workflow dispatch or publication authorized/performed"
+    },
+    "documentation_proposal": {
+      "file": "docs/skills/repository-operations.md",
+      "section": "Manual Runtime release preparation and publication",
+      "text": "Keep manual-controller identity tests separate from producer and backup-run validation. Use an owned local bare Git remote to prove both preparation and publication reject a wrong repository, branch, workflow reference, workflow SHA, or checkout ahead/behind current origin/community. A matching declared workflow SHA cannot admit an unpushed controller revision. These source checks and the owner actor guard do not create independent approval against a stolen owner credential; review live branch/environment protection and actual PyPI token scope separately before publication."
+    },
+    "upstream_disposition": "none; local control reconciliation and missing regression coverage only",
+    "limitations": [
+      "No actual GitHub Actions run dispatched; private credits are not consumed",
+      "No actual publication or stolen-token experiment",
+      "Metadata is a time-bound read, not a guarantee of future protection or actual secret scope",
+      "Full current Runtime/managed/installed/cross-client release gates are outside this bounded lane"
+    ]
+  },
+  "sdk": {
+    "task": "sdk327-c265669cbbc04f25989dbc9edf68fc37",
+    "start": "2026-10-25T00:01:18.880225+00:00",
+    "source_sha": "971a6cf316b7a9c8c50f2d7c58665fda5ae9107d",
+    "sdk_version": "0.5.0a2",
+    "scratch": "/tmp/sdk327-c265669cbbc04f25989dbc9edf68fc37-ftpw24qm",
+    "artifacts": "/tmp/sdk327-c265669cbbc04f25989dbc9edf68fc37-ftpw24qm/artifacts",
+    "containers": [
+      {
+        "kind": "redis",
+        "id": "14d3b8bb1595fa3383bf95cd15875375522418b8c9adbff60c1e23eacfe96af6",
+        "name": "sdk327-c265669cbbc04f25989dbc9edf68fc37-redis",
+        "image": "redis@sha256:858f009f9709ce576febc734aa78b8f6d624b82571f9ddb6bda4377c833b3499",
+        "cached_image_id": "sha256:f84b0c4678011602b9b98c227a4dcd5468bf8b088b02fdd4165cb7758bad8058",
+        "host_port": "32779",
+        "memory": 536870912,
+        "nano_cpus": 1000000000,
+        "pids_limit": 128,
+        "mounts": []
+      },
+      {
+        "kind": "mongo",
+        "id": "60926fbe82494943d30738f73ea51ba35868898012945a71a2f58b4b4121b4ca",
+        "name": "sdk327-c265669cbbc04f25989dbc9edf68fc37-mongo",
+        "image": "mongo@sha256:1f995ad6fdb93244a1addab1b58f934a0bc2f5643c38e02f5e9d7f0c7d227a7b",
+        "cached_image_id": "sha256:ac1502203bffd13c241ca25a7bae60cbd968fd0011247f6727524634b3f2f6e3",
+        "host_port": "32780",
+        "memory": 536870912,
+        "nano_cpus": 1000000000,
+        "pids_limit": 128,
+        "mounts": []
+      },
+      {
+        "kind": "postgres",
+        "id": "b0fc570120bcd2e3e8b3b7d177769bc3429eb49b3ac10a1834ddb051ef703579",
+        "name": "sdk327-c265669cbbc04f25989dbc9edf68fc37-postgres",
+        "image": "postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81",
+        "cached_image_id": "sha256:319d040b5d68e3e5b98a238f0b5d375b4b4d9c5b3a6a9afb0308a8bcf0de72a5",
+        "host_port": "32781",
+        "memory": 805306368,
+        "nano_cpus": 1000000000,
+        "pids_limit": 128,
+        "mounts": []
+      }
+    ],
+    "cleanup": [
+      {
+        "id": "b0fc570120bcd2e3e8b3b7d177769bc3429eb49b3ac10a1834ddb051ef703579",
+        "oom_killed": false,
+        "status": "running",
+        "remove": "b0fc570120bcd2e3e8b3b7d177769bc3429eb49b3ac10a1834ddb051ef703579"
+      },
+      {
+        "id": "60926fbe82494943d30738f73ea51ba35868898012945a71a2f58b4b4121b4ca",
+        "oom_killed": false,
+        "status": "running",
+        "remove": "60926fbe82494943d30738f73ea51ba35868898012945a71a2f58b4b4121b4ca"
+      },
+      {
+        "id": "14d3b8bb1595fa3383bf95cd15875375522418b8c9adbff60c1e23eacfe96af6",
+        "oom_killed": false,
+        "status": "running",
+        "remove": "14d3b8bb1595fa3383bf95cd15875375522418b8c9adbff60c1e23eacfe96af6"
+      }
+    ],
+    "readiness": "passed all three owned services",
+    "command": [
+      "bash",
+      "/workspace/actions-327-state/run-prepared",
+      "bash",
+      "/workspace/actions-327/.devcontainer/bin/verify-work-items",
+      "/tmp/sdk327-c265669cbbc04f25989dbc9edf68fc37-ftpw24qm/artifacts"
+    ],
+    "verifier_exit_code": 0,
+    "artifact_inventory": {
+      "actions_work_items-0.5.0a2-py3-none-any.whl": {
+        "bytes": 74186,
+        "sha256": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb"
+      },
+      "actions_work_items-0.5.0a2.tar.gz": {
+        "bytes": 63566,
+        "sha256": "71b02ee1f92f42d900f8f912d068deb24d563f7f23a8528f5c6d3353c85f967d"
+      }
+    },
+    "end": "2026-10-25T00:01:36.985998+00:00",
+    "test_result": {
+      "passed": 314,
+      "expected_red_xfailed": 10,
+      "skipped": 0,
+      "failed": 0,
+      "errors": 0,
+      "duration_seconds": 6.22
+    },
+    "source_sdk_tree": "c9bd957347edd7e5f7d5d515e2f82205a04808e6",
+    "sdk_payload_unchanged": true,
+    "files": {
+      "work-items/pyproject.toml": "26a3d0d0ea9ce110bb3611e8e99e93b8e982af8f543d9e01d75458ee2bc22236",
+      "work-items/poetry.lock": "11cf9a37d527e0089d124ed2f965dbdc16aed6dff546a342dc4ddd9ac9bd672e",
+      "work-items/tests/work_items_tests/contract_ports/test_custom_backends.py": "c0ff2c28b25e140970e8717cc19b9d66642b0098f5225484230a29dc176e2fe0",
+      "work-items/contracts/contract-port-provenance.json": "924b9e485f30c4e7af03aa6b95fe3a6c08d868a3953d110a9ca47ae62801de69",
+      "work-items/contracts/expected-red-failures.json": "2420e5fdd3cfee1b87060a9fa00c828d1bb23a3ef08ac100c25afe905b13a183",
+      ".devcontainer/bin/verify-work-items": "0a0eea98c97efe3a6030bfb4bb2bf54e79a5fd8a734936050572d4ac3480a002"
+    },
+    "static": {
+      "lock": "passed",
+      "ruff": "passed",
+      "configured_mypy": "Success: no issues found in 1 source file",
+      "diff_check": "passed"
+    },
+    "packaging": {
+      "twine_strict": "passed both wheel and sdist",
+      "clean_canonical_alias_import_version": "passed",
+      "measured_wheel_sha256": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb",
+      "comparison": "Matches exact retained SDK0.5.0a2 wheel identity from prior checkpoint; no changed SDK bytes or publication",
+      "additional_clean_consumer_provenance": "/workspace/actions-327-state/evidence/resume-20261024/sdk/final/clean-consumer-provenance.json",
+      "additional_clean_install_report": "/workspace/actions-327-state/evidence/resume-20261024/sdk/final/clean-install-report.json",
+      "pip_check": "passed",
+      "clean_python_origin_and_bytes": "25 wheel Python members equal frozen source and clean installed bytes; all three namespace imports inside new consumer sys.prefix under python-I"
+    },
+    "expected_red": {
+      "ledger": "/workspace/actions-327/work-items/contracts/expected-red-failures.json",
+      "unchanged": true,
+      "cases": [
+        {
+          "case_id": "custom-0.1.6.test_adapters.TestAdapterFactory.test_redis_adapter_requires_dependency",
+          "parameter_ids": [
+            null
+          ],
+          "exception": "builtins.AssertionError",
+          "predicate": {
+            "contains": [
+              "Regex pattern did not match",
+              "robocorp-workitems"
+            ]
+          }
+        },
+        {
+          "case_id": "custom-0.1.6.test_adapters.TestAdapterFactory.test_documentdb_adapter_requires_dependency",
+          "parameter_ids": [
+            null
+          ],
+          "exception": "builtins.AssertionError",
+          "predicate": {
+            "contains": [
+              "Regex pattern did not match",
+              "robocorp-workitems"
+            ]
+          }
+        },
+        {
+          "case_id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_database_initialization",
+          "parameter_ids": [
+            null
+          ],
+          "exception": "builtins.AttributeError",
+          "predicate": {
+            "contains": [
+              "'SQLiteAdapter' object has no attribute '_pool'"
+            ]
+          }
+        },
+        {
+          "case_id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_reserve_and_release_workflow",
+          "parameter_ids": [
+            null
+          ],
+          "exception": "builtins.AttributeError",
+          "predicate": {
+            "contains": [
+              "'SQLiteAdapter' object has no attribute '_pool'"
+            ]
+          }
+        },
+        {
+          "case_id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_file_operations",
+          "parameter_ids": [
+            null
+          ],
+          "exception": "builtins.TypeError",
+          "predicate": {
+            "contains": [
+              "SQLiteAdapter.add_file() missing 1 required positional argument: 'content'"
+            ]
+          }
+        },
+        {
+          "case_id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_producer_consumer_workflow",
+          "parameter_ids": [
+            null
+          ],
+          "exception": "builtins.AssertionError",
+          "predicate": {
+            "contains": [
+              "assert 1 == 2"
+            ]
+          }
+        },
+        {
+          "case_id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_work_item_with_files",
+          "parameter_ids": [
+            null
+          ],
+          "exception": "builtins.TypeError",
+          "predicate": {
+            "contains": [
+              "SQLiteAdapter.add_file() missing 1 required positional argument: 'content'"
+            ]
+          }
+        },
+        {
+          "case_id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_error_handling_file_already_exists",
+          "parameter_ids": [
+            null
+          ],
+          "exception": "builtins.TypeError",
+          "predicate": {
+            "contains": [
+              "SQLiteAdapter.add_file() missing 1 required positional argument: 'content'"
+            ]
+          }
+        },
+        {
+          "case_id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_custom_output_queue_name",
+          "parameter_ids": [
+            null
+          ],
+          "exception": "builtins.AttributeError",
+          "predicate": {
+            "contains": [
+              "'SQLiteAdapter' object has no attribute 'output_queue_name'"
+            ]
+          }
+        },
+        {
+          "case_id": "custom-0.1.6.test_adapters.TestSQLiteAdapter.test_default_output_queue_name_backward_compatibility",
+          "parameter_ids": [
+            null
+          ],
+          "exception": "builtins.AttributeError",
+          "predicate": {
+            "contains": [
+              "'SQLiteAdapter' object has no attribute 'output_queue_name'"
+            ]
+          }
+        }
+      ],
+      "classification": "Existing declared compatibility gaps, not skipped service coverage or completed compatibility acceptance"
+    },
+    "prior_attempts": [
+      {
+        "receipt": "/workspace/actions-327-state/evidence/resume-20261024/sdk/receipt.json",
+        "result": "286passed28skipped9xfail1ENOSPCsetupERROR; no build",
+        "classification": "ENOSPC uncertain/transient; later harmless owned mkdir and focused known1XFAIL succeeded without cleanup"
+      },
+      {
+        "receipt": "/workspace/actions-327-state/evidence/resume-20261024/sdk/retry/receipt.json",
+        "result": "313passed10xfail0skip1provenanceledgerFAIL; no build",
+        "classification": "Authorized isolated fixture changed its byte digest; root regenerated existing provenance ledger without changing original source/AST test ownership"
+      }
+    ],
+    "fixture_isolation_delta": "Only TestSQLiteAdapter.adapter explicit files_dir=str(files_dir) with equality assertion; reviewed supported provenance regeneration. No SDK source/version/lock mutation.",
+    "service_url_contract": "Mandatory TEST_REDIS_URL/TEST_MONGODB_URI plus legacy RC_REDIS_URL/RC_MONGO_URL exported to same exact owned cached random-port services. Fenced PG URL points to separately owned exact pinned PostgreSQL. No defaults in final run.",
+    "documentation_proposal": {
+      "file": "docs/skills/work-items.md",
+      "replace_stale_claim": "The default local attachment directory is ./work_item_files (overridable with RC_WORKITEM_FILES_DIR).",
+      "verified_replacement": "The adapter factory honors RC_WORKITEM_FILES_DIR. Direct SQLiteAdapter() retains the truthy ./work_item_files constructor default; pass an explicit files_dir (or an empty value to select the environment fallback). Test fixtures must pass tmp_path explicitly and assert the selected directory. The complete SDK service gate also exports TEST_REDIS_URL/TEST_MONGODB_URI and RC_REDIS_URL/RC_MONGO_URL to the same owned services: the latter pair controls legacy ported-suite collection. Supplying only TEST_* can silently skip those legacy integration cases. After a fixture-only port change, regenerate and review contract-port provenance through its checked-in script; do not change original source snapshots or expected-red ownership to hide failures."
+    },
+    "rollback": "Fixture/provenance-only source change; no SDK payload/schema/data migration. Revert both paired fixture and provenance changes together if needed. All three task-owned containers removed; retained wheels/logs/consumer paths remain owned recovery evidence.",
+    "upstream_disposition": "none; local fixture/service gate reconciliation, no confirmed upstream defect",
+    "remaining_uncertainty": [
+      "Original intermittent ENOSPC root cause not established",
+      "Ten existing explicit compatibility XFAILs remain, no universal upstream compatibility claim",
+      "Cloud Linux service/wheel proof only; no Windows/macOS fresh native/hosted proof or AWS DocumentDB production acceptance",
+      "No publication; full Runtime managed/client/RCC release gates remain coordinator-owned"
+    ],
+    "receipt_updated_at": "2026-10-25T00:03:08.147236+00:00"
+  },
+  "failures_retained": [
+    "HTTP mutation baseline unsupported_operation red2",
+    "First joined retry failed storage_unavailable because native projector rejected valid legacy worker snapshot; fixed distinct routing",
+    "Stale capability expectation after reviewed enqueue implementation: realSQLite/PostgreSQL2fail/120pass/4skip, then158pass/4skip",
+    "SDK first run286pass/28skip/9xfail/1ENOSPCerror; focused1xfail and later noENOSPC, originalcause remains uncertain/transient",
+    "SDK controlled retry313pass/10xfail/1staleprovenancefail/0skip; supportedprovenancerefresh changedonefixturehashonly; final314pass/10expectedxfail/0skip",
+    "Initial lint unused testimport; fixed, no ignoredrules"
+  ],
+  "open": [
+    "RCC four managed completion variants skipped until workerfixture restored",
+    "Actual installed a24 source/wheel/worker/client proof pending",
+    "Generic producer/queue/default policy and native uncertain-launch/cancelled/lease-lost inspection remain current-release gaps",
+    "Full original matrix including second official host app, retention/restore/upgrade/crossclient/VSIX remains open",
+    "Publisher332 needs owner disposition of live unprotected branch/environment and actual token scope; no credentials inspected",
+    "Codex401 and authenticated ChatGPTE1 operator gates; DakotaSTOP,celldNO-GO"
+  ],
+  "documentation": {
+    "docs/skills/work-items.md": "Correct SQLite files_dir precedence and explicit fixture isolation; reviewed enqueue/reconciliation and atomic receipt/audit/replay invariants",
+    "docs/skills/repository-operations.md": "Manual controller identity versus independent publisher approval distinction",
+    "docs/program/actions-next-managed-work-items-132.md": "Actual reviewed-mode HTTP subset and remaining generic producer/default gaps"
+  },
+  "rollback": "No schema change, migration, production resources or grants changed. Revert staged branch code while retaining admitted SQL/audit/output records; SDK wheel payload is byte-identical to prior0.5a2. Public packages unchanged.",
+  "upstream_disposition": "none; prior RCC report remains draftonly"
+}

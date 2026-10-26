@@ -1,0 +1,26 @@
+{
+  "source_revision": "f905c3888ecb448dbce80ce57a9b59ff041eb148",
+  "frozen_lock": "/workspace/actions-327-a41/installed-v2/source/action_server/poetry.lock",
+  "lock_sha256": "62da89cf1c47f2aaa2c3f1b6545e300775ec70d7396f4d5d348c3e9a2d006588",
+  "constraints": "/workspace/actions-327-a41/next-consumer-constraints.txt",
+  "constraints_sha256": "f6b5c33159199d4ee16863b3b156543d93792244d9e208976f7c639929042ca4",
+  "unique_main_constraints": 70,
+  "selected_runtime_extras": [],
+  "wheels": {
+    "actions-work-items": {
+      "path": "/workspace/actions-327-a41/installed-v2/wheels/work-items/actions_work_items-0.5.0a2-py3-none-any.whl",
+      "sha256": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb",
+      "version": "0.5.0a2"
+    },
+    "actions-core": {
+      "path": "/workspace/actions-327-a41/installed-v2/wheels/actions/actions_core-1.1.0a5-py3-none-any.whl",
+      "sha256": "0c1421f7b7cd0db447c82e58458107c92f22051b29eb128c8b765219b863a3ec",
+      "version": "1.1.0a5"
+    },
+    "actions-runtime": {
+      "path": "/workspace/actions-327-a41/installed-v2/wheels/action_server/actions_runtime-1.1.0a41-cp312-cp312-linux_x86_64.whl",
+      "sha256": "fcf70e1f1cc3b91409dd8600622161085281f968b868373d5b62df10e0c4a661",
+      "version": "1.1.0a41"
+    }
+  }
+}

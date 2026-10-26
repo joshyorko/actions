@@ -1,0 +1,12 @@
+{
+  "source": "a5eaa1cb0be6dcde2d509f2babbb486d9195ccc1",
+  "wheels": {
+    "wheels/work-items/actions_work_items-0.5.0a2-py3-none-any.whl": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb",
+    "wheels/actions/actions_core-1.1.0a4-py3-none-any.whl": "fe8fb01f5924837ebd221bb559cc4c36482a581921f81beba1d4c2a6c8e4b371",
+    "wheels/action_server/actions_runtime-1.1.0a39-cp312-cp312-linux_x86_64.whl": "f023a767234ee5a93fd50281b1ae574b1056893468e13c23bb9d22704a4a6902"
+  },
+  "status": "PASS_FRESH_UNINSTRUMENTED_SERIAL_CANVAS_BROWSER",
+  "original_failed_apply": "Preserved separately; cause unresolved; no retroactive PASS",
+  "chatgpt_acceptance": false,
+  "upstream_disposition": "none"
+}

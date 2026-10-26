@@ -1,0 +1,5 @@
++ poetry run pytest tests/action_server_tests/test_logical_execution.py -q --junitxml=/workspace/actions-recovery-327/evidence/logical-execution-root.xml --robocorp-log-output=/workspace/actions-recovery-327/evidence/logical-execution-root-log (in /workspace/actions/action_server)
+................                                                         [100%]
+- generated xml file: /workspace/actions-recovery-327/evidence/logical-execution-root.xml -
+16 passed in 23.05s
+Log (html): /workspace/actions-recovery-327/evidence/logical-execution-root-log/log.html

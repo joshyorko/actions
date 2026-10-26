@@ -1,0 +1,5 @@
++ poetry run pytest tests/action_server_tests/test_candidate_work_items.py -q --junitxml=/workspace/actions-recovery-327/evidence/a34-candidate.xml --robocorp-log-output=/workspace/actions-recovery-327/evidence/a34-candidate-log (in /workspace/actions/action_server)
+........                                                                 [100%]
+- generated xml file: /workspace/actions-recovery-327/evidence/a34-candidate.xml -
+8 passed in 1.24s
+Log (html): /workspace/actions-recovery-327/evidence/a34-candidate-log/log.html

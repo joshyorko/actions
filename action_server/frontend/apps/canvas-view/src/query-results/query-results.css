@@ -267,3 +267,79 @@
         transition-duration: 0.01ms !important;
     }
 }
+.invoice-review {
+    display: grid;
+    gap: 1rem;
+}
+.invoice-review code {
+    overflow-wrap: anywhere;
+}
+.invoice-review button {
+    justify-self: start;
+}
+
+.query-view__reconciliation th,
+.query-view__reconciliation td {
+    vertical-align: top;
+    padding: 0.7rem 0.55rem;
+}
+.query-view__source {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: #425466;
+    margin-top: 0.25rem;
+    overflow-wrap: anywhere;
+}
+.query-view__comparison {
+    margin: 0;
+    min-width: 6.6rem;
+    font-size: 0.8rem;
+    font-variant-numeric: tabular-nums;
+}
+.query-view__comparison dt {
+    color: #536477;
+    font-size: 0.7rem;
+    margin-top: 0.35rem;
+}
+.query-view__comparison dt:first-child {
+    margin-top: 0;
+}
+.query-view__comparison dd {
+    margin: 0;
+    font-weight: 600;
+}
+.query-view__badge {
+    display: inline-block;
+    border: 1px solid;
+    border-radius: 1rem;
+    padding: 0.15rem 0.45rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+.query-view__badge--matched {
+    color: #16643c;
+    background: #ecf8ef;
+    border-color: #9ac9a8;
+}
+.query-view__badge--discrepant {
+    color: #8d3813;
+    background: #fff2e8;
+    border-color: #dfb28d;
+}
+.query-view__variance {
+    font-size: 0.8rem;
+    font-weight: 650;
+    font-variant-numeric: tabular-nums;
+}
+.query-view__discrepancies {
+    margin: 0;
+    padding-left: 1rem;
+    font-size: 0.8rem;
+}
+.query-view__reconciliation details {
+    font-size: 0.7rem;
+    font-weight: 400;
+    margin-top: 0.35rem;
+    overflow-wrap: anywhere;
+}

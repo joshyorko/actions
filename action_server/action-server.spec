@@ -22,6 +22,7 @@ from PyInstaller.utils.hooks import (
     copy_metadata,
 )
 from actions.server._build_common.rcc_bundle import is_rcc_data  # noqa: E402
+from actions.server._build_common.mcp_bundle import is_mcp_runtime_module  # noqa: E402
 
 PyInstaller.config.CONF["excludes"] = ["_pyi_rth_nltk"]
 
@@ -52,7 +53,7 @@ fastapi_hiddenimports = collect_submodules("fastapi")
 psutil_hiddenimports = collect_submodules("psutil")
 actions_hiddenimports = collect_submodules("actions")
 starlette_hiddenimports = collect_submodules("starlette")
-mcp_hiddenimports = collect_submodules("mcp")
+mcp_hiddenimports = collect_submodules("mcp", filter=is_mcp_runtime_module)
 
 # psycopg imports its binary implementation dynamically at runtime.
 psycopg_hiddenimports = [
@@ -107,8 +108,14 @@ a = Analysis(
         *_action_server_binaries,
         *_actions_http_binaries,
         *psycopg_binaries,
-        ("src/actions/server/templates/action-templates.zip", "actions/server/templates"),
-        ("src/actions/server/templates/action-templates.yaml", "actions/server/templates"),
+        (
+            "src/actions/server/templates/action-templates.zip",
+            "actions/server/templates",
+        ),
+        (
+            "src/actions/server/templates/action-templates.yaml",
+            "actions/server/templates",
+        ),
     ],
     hiddenimports=[
         *action_server_hiddenimports,
@@ -130,7 +137,10 @@ a = Analysis(
     hookspath=["pyinstaller-hooks"],
     hooksconfig={},
     runtime_hooks=[],
-    excludes=["pandas", "pyarrow"],  # Exclude to avoid NumPy 2.x compatibility errors during analysis
+    excludes=[
+        "pandas",
+        "pyarrow",
+    ],  # Exclude to avoid NumPy 2.x compatibility errors during analysis
     noarchive=False,
     optimize=0,
 )

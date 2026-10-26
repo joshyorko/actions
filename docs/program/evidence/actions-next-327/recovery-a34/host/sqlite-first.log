@@ -1,0 +1,87 @@
+..........FFF.                                                           [100%]
+=================================== FAILURES ===================================
+_______ test_readiness_waits_for_thread_connection_probe[sqlite-duckdb] ________
+
+case = namespace(db=<actions.server._database.Database object at 0x7f36e4765070>, actor=Actor(principal_id='46a4b6e3-656e-4a8...t_handle=None, binding_id=None), port=<actions.server.foundry.generic_view.GenericCanvasView object at 0x7f36dcf8d040>)
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-196/test_readiness_waits_for_threa0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f36e471bbf0>
+
+    def test_readiness_waits_for_thread_connection_probe(case,tmp_path,monkeypatch):
+        c=case
+        host,tasks,authority,service,caller=make_host(c,tmp_path,monkeypatch)
+        entered,released=threading.Event(),threading.Event()
+        original=authority.pending
+        def pending(*args,**kwargs):
+            entered.set();released.wait(5)
+            return original(*args,**kwargs)
+        monkeypatch.setattr(authority,"pending",pending)
+        try:
+            with pytest.raises(TaskHostUnavailable):host.start(.02)
+            assert entered.wait(1)
+            assert host.close(.01) is False
+            with pytest.raises(TaskHostUnavailable):tasks_fixture.create(c,tasks,service,caller)
+>           assert not c.db.all(RunPin)
+
+E           AssertionError: Failed: assert not c.db.all(RunPin)
+E           Variables:
+E             c.db.all(...) = [RunPin(id='75d3a7a0-b847-46ab-b6a0-af06cb7808a8', run_id='75d3a7a0-b847-46ab-b6a0-af06cb7808a8', workspace_id='0b763193-1f70-4df9-9e2c-cd137ea072b0', run_admission_id='fa569cdbd9e932f369c5b3be62065820c7ce607d498e5184c25f2e82e3ade87f', admission_principal_id='46a4b6e3-656e-4a80-8418-3ab687c45212', request_fingerprint='01b9756e7e1d4ed6d0404f95f60517917700b4b68eba1634e6276cac5e8bee60', idempotency_id='9eb65bcfdc8bff21a4d8a697f4c4c56070f56b1623717144703e99f872fb6d15', idempotency_key='synthetic-invoice', current_attempt_id='b57e3bae-f9c8-487e-b6c7-fdacdae2d12b', epoch=1, cancel_requested=0, recovery_epoch=-1, recovery_receipt='', state_updated_ms='1792904005759'), RunPin(id='d81a125e-9704-4677-8374-642b9c53fa77', run_id='d81a125e-9704-4677-8374-642b9c53fa77', workspace_id='0b763193-1f70-4df9-9e2c-cd137ea072b0', run_admission_id='f13a2fe1446b2dc4fac4b106aba499fca14787466e73ac87f30eebd7d13bd5e2', admission_principal_id='46a4b6e3-656e-4a80-8418-3ab687c45212', request_fingerprint='ade2851c2b4a72d1562d150abcb7119a48eede3a2cf8d0b77f98cc7a743b1aeb', idempotency_id='09e401f0071c03b5692b7eb9daba99d8128ca9ae7c6c2bf3a2647ab1d1a3a9e5', idempotency_key='activated-source', current_attempt_id='4a6ec751-30d2-4966-99d7-624147eb9190', epoch=1, cancel_requested=0, recovery_epoch=-1, recovery_receipt='', state_updated_ms='1792904006196')]
+
+tests/action_server_tests/test_task_host.py:100: AssertionError
+______ test_thread_consumes_two_canonical_claims_and_stops[sqlite-duckdb] ______
+
+case = namespace(db=<actions.server._database.Database object at 0x7f36e45db170>, actor=Actor(principal_id='cd7dd48e-2b10-4dc...t_handle=None, binding_id=None), port=<actions.server.foundry.generic_view.GenericCanvasView object at 0x7f36dcf8e270>)
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-196/test_thread_consumes_two_canon0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f36dcf8fd70>
+
+    def test_thread_consumes_two_canonical_claims_and_stops(case,tmp_path,monkeypatch):
+        c=case
+        host,tasks,authority,service,caller=make_host(c,tmp_path,monkeypatch)
+        consumed=[]
+        def synthetic_execute(worker,ticket,**kwargs):
+            consumed.append(ticket.fence.run_id)
+            return _one(c.db,Run,ticket.fence.run_id)
+        monkeypatch.setattr(DetachedActionWorker,"execute",synthetic_execute)
+        host.start()
+        try:
+            first=tasks_fixture.create(c,tasks,service,caller,"first")
+            second=tasks_fixture.create(c,tasks,service,caller,"second")
+            wait_for(lambda:len(consumed)==2)
+            assert consumed==[first.task_id,second.task_id]
+>           assert len(c.db.all(RunAttempt))==2
+
+E           AssertionError: Failed: assert len(c.db.all(RunAttempt)) == 2
+E           Variables:
+E             len(c.db.all(RunAttempt)) = 4
+
+tests/action_server_tests/test_task_host.py:122: AssertionError
+__ test_fatal_execution_refuses_create_but_retains_get_cancel[sqlite-duckdb] ___
+
+case = namespace(db=<actions.server._database.Database object at 0x7f36e45d2630>, actor=Actor(principal_id='9ec2bb97-bd5b-414...t_handle=None, binding_id=None), port=<actions.server.foundry.generic_view.GenericCanvasView object at 0x7f36dc959d00>)
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-196/test_fatal_execution_refuses_c0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f36dc939d60>
+
+    def test_fatal_execution_refuses_create_but_retains_get_cancel(case,tmp_path,monkeypatch):
+        c=case
+        host,tasks,authority,service,caller=make_host(c,tmp_path,monkeypatch)
+        def failed(*args,**kwargs):raise RuntimeError("private execution path")
+        monkeypatch.setattr(DetachedActionWorker,"execute",failed)
+        host.start()
+        try:
+            task=tasks_fixture.create(c,tasks,service,caller)
+            wait_for(lambda:host.failed)
+            assert tasks.get(caller.actor,service.snapshot.workspace_id,task.task_id).status=="working"
+            tasks.cancel(caller.actor,service.snapshot.workspace_id,task.task_id)
+            with pytest.raises(TaskHostUnavailable):tasks_fixture.create(c,tasks,service,caller,"next")
+>           assert len(c.db.all(RunAttempt))==1
+
+E           AssertionError: Failed: assert len(c.db.all(RunAttempt)) == 1
+E           Variables:
+E             len(c.db.all(RunAttempt)) = 3
+
+tests/action_server_tests/test_task_host.py:143: AssertionError
+=========================== short test summary info ============================
+FAILED tests/action_server_tests/test_task_host.py::test_readiness_waits_for_thread_connection_probe[sqlite-duckdb]
+FAILED tests/action_server_tests/test_task_host.py::test_thread_consumes_two_canonical_claims_and_stops[sqlite-duckdb]
+FAILED tests/action_server_tests/test_task_host.py::test_fatal_execution_refuses_create_but_retains_get_cancel[sqlite-duckdb]
+3 failed, 11 passed, 12 deselected in 10.00s
+Log (html): /workspace/actions-recovery-327/task-host-draft/action_server/output/log.html

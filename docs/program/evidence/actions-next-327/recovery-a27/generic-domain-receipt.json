@@ -1,0 +1,21 @@
+{
+  "base": "5d950150b7b5886d1e54246ac216ff41aa4b9f1e",
+  "prerequisite_sha256": "14801840a486aa7bcbad40e1e0eb59dcd0b315ccc51659cef3f318c4f42df7d4",
+  "patch_sha256": "5efd5ba2e54fa740931a8d8608a5230ddf08c87951b0db131a4019671873bd0b",
+  "files": {
+    "action_server/src/actions/server/foundry/generic_work_item_execution.py": "01e587894c6a30aff45a822550ce2d9e5b3982037e70d3104162bcc9cc2c9bf0",
+    "action_server/src/actions/server/foundry/rcc_execution.py": "cf74757e70a9a9382c06807a770184447c891e2889ddad1d41c0dd5785b8f0af",
+    "action_server/tests/action_server_tests/test_generic_work_item_execution.py": "0c944a0b77dd24692c33399cea882358b3ea396b78016f637fefde0bbc7603fa"
+  },
+  "classification": "source iteration only; actual RCC3passed zero skips; no managed route or installed proof",
+  "gates": {
+    "actual_rcc": "3passed34deselected105.33s SQLite consumer/producer/optional",
+    "sql_postgres_before_final_review": "33passed6RCCdeselected",
+    "mypy": "2source files pass",
+    "final_review": "37passed6RCCdeselected81.72s SQLite+ownedPostgreSQL",
+    "ruff": "3changed files pass",
+    "apply_check": "shared checkout git apply --check passed"
+  },
+  "documentation_proposal": "/workspace/actions-recovery-327/generic-domain-guide-proposal.md",
+  "upstream_disposition": "none"
+}

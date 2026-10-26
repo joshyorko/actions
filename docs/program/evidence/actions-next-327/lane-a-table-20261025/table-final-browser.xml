@@ -1,0 +1,10 @@
+<testsuites id="" name="" tests="3" failures="0" skipped="0" errors="0" time="4.450213">
+<testsuite name="browser-harness.spec.ts" timestamp="2026-10-25T13:27:57.783Z" hostname="" tests="3" failures="0" skipped="0" time="2.075" errors="0">
+<testcase name="renders and dispatches a synthetic component form in a browser" classname="browser-harness.spec.ts" time="0.792">
+</testcase>
+<testcase name="keeps wide results within the page at 320px" classname="browser-harness.spec.ts" time="0.677">
+</testcase>
+<testcase name="keeps wide results within the page at 1280px" classname="browser-harness.spec.ts" time="0.606">
+</testcase>
+</testsuite>
+</testsuites>

@@ -32,6 +32,7 @@ Run only actions with a given name:
 
 """
 
+import re as _re
 from pathlib import Path
 from pkgutil import extend_path
 from typing import TYPE_CHECKING, Any, Callable, Optional, overload
@@ -45,8 +46,8 @@ from ._response import ActionError, Response
 from ._secret import OAuth2Secret, Secret, SecretSpec
 from ._table import Row, RowValue, Table
 
-__version__ = "1.0.3"
-version_info = [int(x) for x in __version__.split(".")]
+__version__ = "1.1.0a8"
+version_info = [int(x) for x in _re.findall(r"\d+", __version__)[:3]]
 
 if TYPE_CHECKING:
     from ._action_context import ActionContext

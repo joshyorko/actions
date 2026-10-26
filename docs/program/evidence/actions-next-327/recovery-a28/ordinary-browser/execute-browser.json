@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "mode": "execute",
+  "screenshots": [
+    "execute-mounted.png",
+    "execute-completed.png"
+  ],
+  "artifactText": "\"Installed browser generic execution\""
+}

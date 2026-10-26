@@ -1,0 +1,93 @@
+{
+  "source": "6d2f9ac36e0ca9418b7ae0f3306852c59e6dd4ff",
+  "runtime_version": "1.1.0a16",
+  "status": "SOURCE_AND_COMPONENT_QUALIFIED_INSTALLED_HOST_PENDING",
+  "python_gate_source": "5157227926f62afbe6959144f0a927876b7af895",
+  "python_tree_equality": "git diff --exit-code 5157227926f62afbe6959144f0a927876b7af895 HEAD -- action_server/src action_server/tests action_server/pyproject.toml: PASS",
+  "gateway": "Pinned RCC18.19.3 Doctor/Bootstrap/ToolkitTest: PASS (Toolkit179), prior retained task receipts",
+  "full_gate": {
+    "command": "bash /workspace/actions-327-state/run-prepared python action_server/scripts/verify_invoice_queries.py --full --evidence-dir /workspace/actions-327-state/evidence/native-runtime-wiring-frozen-20261023",
+    "receipt": "/workspace/actions-327-state/evidence/native-runtime-wiring-frozen-20261023/1dba2798-17b3-4397-9e6a-ac7778a6d142/receipt.json",
+    "sha256": "f54261f132b5e958a4d71bfaf36b8b37d0025a1a27df36479c6f156bf74a0566",
+    "counts": {
+      "foundry_storage": {
+        "tests": 96,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "components": {
+        "tests": 161,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "invoice": {
+        "tests": 129,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "portable": {
+        "tests": 2034,
+        "skipped": 14,
+        "failures": 0,
+        "errors": 0
+      }
+    },
+    "cleanup": "PASS"
+  },
+  "additional_gates": {
+    "normal_server_auth_shutdown_output_tests": "121 passed, 3 skipped, 1 warning",
+    "configured_static": "432 passed",
+    "semantic_bridge": "7 passed; initial 2 failures retained",
+    "canvas_components": "39 passed, 1 optional fixture roundtrip skipped",
+    "frontend_static": "TypeScript, ESLint, Prettier PASS"
+  },
+  "frontend_evidence": {
+    "directory": "/workspace/actions-327-state/evidence/semantic-bridge-native-20261023",
+    "sha256": {
+      "prettier.txt": "6989bc51ce159e012507fdaecf13d7aafcd27042af96873188c0342367cb6b46",
+      "typescript.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "diff-check-final.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "diff-check.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "eslint-final.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "focused-mcp-bridge-vitest.txt": "f6b4ae701ea1570fb65f7cd340702695cc54c4193444011f2acbc942ab42f4d3",
+      "canvas-vitest-final.txt": "6e92446819138b2366773a13845cb1d151eb1641ed0a56e214d81d3592e1230d",
+      "focused-mcp-bridge-final.txt": "8006e421e9c8f48c11928d10753b59239ba12d127216497187be109627af89fa",
+      "prettier-write.txt": "78af3f60bf8256703d97dbadf5aa3b9e6f6a4301871dd1b9d5fd495dac29a484",
+      "typescript-final.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "prettier-final.txt": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20",
+      "baseline-mcp-bridge-vitest.txt": "fd6c39d8efc3a6bfbae75aa2b6cef193df45e3c757f3701a003a5498a635b1cd",
+      "canvas-vitest.txt": "d7612bbb7a2aaacc87345bfaebdc2b020f2e0d911870d28f3a90acaa88e8539e",
+      "eslint.txt": "2066c1f27b0a553f8fef0d6977d923956d4dd89f526b45b218446f8e876a1944"
+    }
+  },
+  "implementation": [
+    "Normal authenticated Runtime route composes common SQL Canvas without a starter Package.",
+    "Existing owner bearer maps a persistent model caller; duplicate/wrong bearer denied, revocation survives restart.",
+    "Packaged build embeds canonical canvas.html; missing auth/assets or unsupported private-provider platform has no factory bootstrap.",
+    "Startup legacy cancellation excludes fenced RunPin admissions.",
+    "Official App toolresult metadata renders bounded semantic v1 specs read-only, preserving invoice/query projections."
+  ],
+  "limitations": [
+    "No a16 Runtime wheel has yet been built or installed; official Basic Host and normal socket acceptance pending.",
+    "App audience/interactive generated execution remains unconfigured; no automatic approval or execution.",
+    "Bridge notifications have no correlation ID; no delayed notification ordering proof.",
+    "Source gate excludes dedicated real RCC worker/browser modes and records portable skips, not a full release pass.",
+    "Earlier d9a80a17 official-host empty catalog failure retained, not yet closed by installed proof.",
+    "Codex client blocked by previously observed token refresh401; no authentication retry authorized.",
+    "E1 NEEDS_OPERATOR; Dakota STOP; celld NO-GO; managed service/wider release matrix remains open."
+  ],
+  "recovery": "Transient exec disconnect during read-only review; same workspace status restored with no reset or test restart.",
+  "rollback": "No schema change in this slice; stop owned Runtime and restore coordinated DB/artifacts when rolling back retained schema18 data. Do not remove bootstrap receipts to resurrect grants or treat admitted Run as legacy unfinished work.",
+  "documentation": {
+    "canonical_files": [
+      "docs/skills/provenance-observability.md",
+      "docs/program/actions-next-foundry-71.md"
+    ],
+    "delta": "Document real owner mapping/assets/revocation/native Run restart behavior and official metadata envelope validation/read-only adapters/notification ordering limits.",
+    "evidence": "SQL SDK route/restart/revocation tests, startup classification tests, closed bridge component regressions."
+  },
+  "upstream_disposition": "Existing RCC report remains draft only; no new upstream report."
+}

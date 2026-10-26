@@ -1,0 +1,33 @@
+{
+  "scope": "inactive task-owned compiler solver repodata cache only",
+  "home": "/workspace/actions-recovery-327/compiler-core-a3/robocorp",
+  "retained": "all package payloads, immutable artifacts, hololib, receipts and source",
+  "before_free": 1874358272,
+  "removed": [
+    {
+      "name": "eb045dd1.solv",
+      "bytes": 101894277
+    },
+    {
+      "name": "88ec62ec.state.json",
+      "bytes": 374
+    },
+    {
+      "name": "eb045dd1.json",
+      "bytes": 192879026
+    },
+    {
+      "name": "eb045dd1.state.json",
+      "bytes": 372
+    },
+    {
+      "name": "88ec62ec.json",
+      "bytes": 459382517
+    },
+    {
+      "name": "88ec62ec.solv",
+      "bytes": 209832947
+    }
+  ],
+  "after_free": 2838372352
+}

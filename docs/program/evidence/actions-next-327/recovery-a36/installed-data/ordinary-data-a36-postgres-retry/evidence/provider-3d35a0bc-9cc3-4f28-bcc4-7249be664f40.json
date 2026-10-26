@@ -1,0 +1,24 @@
+{
+  "expected_grants_digest": "sha256:eb248b48a795f037ab601bca88d822b0bf47d0f4e999ffd6cdfa0f5882659494",
+  "operation": "grant-owner",
+  "ownedGrant": {
+    "id": "4430b43a-e44f-5fd4-b725-6795d11fbc4a",
+    "operations_json": "[\"data.read\", \"deploy\", \"execute\", \"provider.inspect\", \"provider.manage\"]",
+    "principal_id": "f2b9cc88-5363-4d1e-a594-9ab3912b83a0",
+    "subject_id": "ProviderProfileRevisionRef:sha256:ba2e86f9fbfaadc2c96867a9a807b9c34825c6e12542565d3c380529ca6f3a1a",
+    "subject_kind": "reference",
+    "workspace_id": "8e509cf3-dd48-4931-81ef-3c370c21a31a"
+  },
+  "permissions": [
+    "provider.manage",
+    "provider.inspect",
+    "data.read",
+    "execute",
+    "deploy"
+  ],
+  "provider": {
+    "provider_profile_id": "1c939568-3fb4-4a3d-bdd2-0b51f3c62647",
+    "revision_id": "sha256:af24f4fa8dc366693d9b613501dfdf686014ef57fdd3fddaafacd74af991fdb9",
+    "workspace_id": "8e509cf3-dd48-4931-81ef-3c370c21a31a"
+  }
+}

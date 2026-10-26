@@ -1,0 +1,128 @@
+{
+  "_meta": {
+    "actions.canvas": {
+      "active": false,
+      "applicationId": "b8186336-fa3b-4bbc-8f1f-b9880aaabc36",
+      "bindings": [
+        {
+          "bindingId": "echo",
+          "capabilityId": "action.generated_echo",
+          "packageRevision": {
+            "package_id": "8de70064-fcd1-594c-8214-36fabc7ac514",
+            "revision_id": "sha256:6c276755e810b2ed031078a98949aef3604adb711a58559382b2024cc93a4374",
+            "workspace_id": "a260d292-5620-456d-a5e0-0805c80f85f8"
+          }
+        }
+      ],
+      "revisionId": "sha256:886567b29d610bf9dd2a1627707352069f31239371772345285375add3094c4d",
+      "spec": {
+        "bindingIds": [
+          "echo"
+        ],
+        "root": {
+          "children": [
+            {
+              "bindingId": "echo",
+              "fields": [
+                {
+                  "label": "Value",
+                  "name": "value",
+                  "required": true,
+                  "type": "text"
+                }
+              ],
+              "id": "inputs",
+              "submitLabel": "Run job",
+              "type": "form"
+            },
+            {
+              "bindingId": "echo",
+              "id": "status",
+              "type": "status"
+            },
+            {
+              "bindingId": "echo",
+              "id": "artifact",
+              "label": "Inspect result",
+              "type": "artifact"
+            }
+          ],
+          "id": "main",
+          "type": "stack"
+        },
+        "schemaVersion": "actions.canvas-spec/v1",
+        "title": "Ordinary optional compiled echo",
+        "visibility": [
+          "model",
+          "app"
+        ]
+      }
+    },
+    "io.modelcontextprotocol/serverInfo": {
+      "name": "Action Server",
+      "version": ""
+    }
+  },
+  "content": [
+    {
+      "type": "text",
+      "text": "Canvas revision loaded.",
+      "annotations": null,
+      "_meta": null
+    }
+  ],
+  "structuredContent": {
+    "active": false,
+    "applicationId": "b8186336-fa3b-4bbc-8f1f-b9880aaabc36",
+    "buildStatus": "passed",
+    "compilationStatus": "succeeded",
+    "importStatus": "passed",
+    "revisionId": "sha256:886567b29d610bf9dd2a1627707352069f31239371772345285375add3094c4d",
+    "spec": {
+      "bindingIds": [
+        "echo"
+      ],
+      "root": {
+        "children": [
+          {
+            "bindingId": "echo",
+            "fields": [
+              {
+                "label": "Value",
+                "name": "value",
+                "required": true,
+                "type": "text"
+              }
+            ],
+            "id": "inputs",
+            "submitLabel": "Run job",
+            "type": "form"
+          },
+          {
+            "bindingId": "echo",
+            "id": "status",
+            "type": "status"
+          },
+          {
+            "bindingId": "echo",
+            "id": "artifact",
+            "label": "Inspect result",
+            "type": "artifact"
+          }
+        ],
+        "id": "main",
+        "type": "stack"
+      },
+      "schemaVersion": "actions.canvas-spec/v1",
+      "title": "Ordinary optional compiled echo",
+      "visibility": [
+        "model",
+        "app"
+      ]
+    },
+    "testStatus": "passed",
+    "validationStatus": "passed"
+  },
+  "isError": false,
+  "resultType": "complete"
+}

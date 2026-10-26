@@ -8,16 +8,438 @@ The community Action Server management API currently owns SQLite storage under i
 
 SQLite is the release-critical local/server backend. FileAdapter is intended for local, single-process workflows. Redis 7 and MongoDB 7 have mandatory repository-owned service gates covering competing and FIFO claims, orphan recovery, attachment storage and cleanup, duplicate rejection, output routing, and backend cleanup. AWS DocumentDB-specific production support remains experimental until a production-compatible service gate establishes it.
 
-The default local attachment directory is `./work_item_files` (overridable with
-`RC_WORKITEM_FILES_DIR`). Repository-root package tests may therefore create
-`work-items/work_item_files/<uuid>/`; this runtime output is ignored and must not be
-committed.
+The SQLite constructor's default attachment argument is `./work_item_files`.
+It takes precedence over `RC_WORKITEM_FILES_DIR`; select that environment value
+with an explicit empty `files_dir`, or supply the owned absolute path directly.
+A test setting only the environment variable still writes to the default path.
+Fixtures must pass their temporary attachment path explicitly and assert it is
+selected. Runtime output under `work-items/work_item_files/<uuid>/` is ignored
+and must never be committed. This is separate from physical capacity failures;
+a transient `ENOSPC` does not establish persistent exhaustion after the fixture
+ends. Preserve its receipt before a controlled diagnosis or rerun.
 
 The locked pytest-asyncio 0.21 runtime supports `asyncio_mode = "auto"` but not
 `asyncio_default_fixture_loop_scope`; do not add unsupported pytest options that are
 silently ignored with `PytestConfigWarning`.
 
+The legacy `/api/work-items` list and statistics routes select the Runtime default
+queue when `queue_name` is omitted; omission is not an all-queue query. Queue
+navigation must remain available for empty and state-filtered responses. Explicit
+queue names, including `all`, are sent unchanged, and successful creation selects
+the response's `queue_name`. This legacy navigation does not enumerate or grant
+access to managed Workspace queues.
+
+Ordinary startup supplies the managed actor and, when configured, worker identity.
+Configured native startup also supplies a separate terminal-completion adapter over
+the same activated execution authority. Managed `items.complete` for a published
+native Run validates the retained historical ClaimRef, independent Work Item and
+Attempt fences, current review/Package/Deployment authorization, and all four
+sealed outputs. It returns the completed item and records a managed receipt and
+audit; it never executes RCC or finishes the queue again. Replays revalidate
+current authority. Expired source-input artifacts do not prevent retained
+completion, but missing, altered, or expired completion outputs fail closed.
+
+This adapter does not advertise native retry: uncertain launch remains blocked.
+Invoice `worker_for` retains its separate execution/reconciliation contract.
+Tests that inject an invoice worker qualify that injected service only. Client
+readiness must inspect live capabilities from the installed ordinary process;
+descriptor presence and schema discovery do not prove mutation availability.
+
 ## Safety Invariants
+
+### Exact-result review on the Runtime SQL connection
+
+`InvoiceReviewService` makes a pending proposal over an already sealed invoice
+result. Merely opening the Canvas or offering a proposal creates no Work Item.
+The app-only MCP tools require a trusted server-supplied Actor and scope;
+approval additionally requires the current `review` grant, separate from `read`.
+The binding retains result handle/digest, original input digest, source version,
+request fingerprint, and both application and deployment identities/revisions.
+The source version remains an operator assertion; approval does not requery a
+mutable source or establish an external snapshot transaction.
+
+Migration 16 adds `invoice_review` and `fenced_work_item` to the existing Runtime
+business database. It never approves or enqueues legacy results. Approval inserts
+one SDK Work Item and records its ID/explicit actor decision in the **same SQL
+transaction**. Counter -> Workspace lock order serializes concurrent duplicate
+delivery across connections. Matching terminal replay returns the retained
+receipt, including after result expiry, while rechecking current authority and
+binding; a new decision requires opening the unexpired sealed result. Rejection
+creates no Work Item. Cancellation retains the original decision audit, fences
+an active claim and cannot undo an already completed item.
+
+The private SDK `SQLReviewQueue` is a JSON-only bridge onto that host-owned
+transaction and migration, with format `actions.review-work-item/v1`. It creates
+no connection or second state store. It is **not** the standalone SQLite schema 6
+or PostgreSQL format 1 adapter, a legacy management adapter, or the complete
+retry/effect contract. DB time, owner/epoch/deadline conditions and atomic child
+publication apply to reserve/renew/finish. Unknown row formats fail closed.
+`reserve_item_fenced(item_id, owner_id, lease_seconds=...)` is the private
+SDK0.5.0a2 exact-target primitive. It conditionally claims only that item under
+the same Workspace/queue/format, cancellation and DB-time state predicates.
+Unclaimable targets never fall back to an older FIFO neighbor. Do not reserve
+FIFO and compare afterward for an exact-result UI request: that already leases
+an unrelated approved result. Runtime1.1.0a19 admits the noneditable a2 SDK floor
+through its project/lock metadata; an older SDK must not substitute FIFO.
+No schema, row-format or second queue is introduced by this method.
+The focused Runtime verifier uses the same bounded PostgreSQL memory/tmpfs
+budget as its full selection: repeated Foundry/managed schemas exhausted the
+former 128 MiB focused mount's WAL before later cases could start. A fixture
+DiskFull and ensuing recovery/connection errors do not prove queue failures.
+Retain that failed receipt; do not disable WAL durability to fit the old budget.
+Review, Work Item, Run and Attempt remain distinct: approval starts no new Run,
+Attempt or RCC process. Worker linkage and external effect reconciliation require
+separate proof before admitting execution.
+
+Use RCC `InvoiceQueryTest` to exercise the real DuckDB/PostgreSQL providers and
+both SQL review stores, including simultaneous duplicate decisions, SQL-trigger
+rollback, cancellation, stale takeover and actual interpreter restart. Its
+preflight rejects a Work Items import outside the candidate environment or whose
+bytes differ from the selected SDK source. Runtime's dev dependency is deliberately
+noneditable (`develop=false`); after SDK source edits, rebuild/reinstall through
+Poetry before testing. A source overlay does not establish the installed SDK
+contract. Native acceptance additionally installs the exact measured SDK wheel
+in each RCC consumer and checks distribution ownership plus pip report URL/hash;
+passing source tests alone cannot close the frozen/Go consumer gate.
+
+The full SDK service tests import optional Redis/Mongo clients and destructively
+clear their configured test stores. Install the lock-declared extras through the
+pinned Poetry toolchain and supply explicit URLs for newly owned isolated
+services before running them. The canonical `.devcontainer/bin/verify-work-items`
+requires both URLs; its build/Twine/clean-consumer checks do not publish. Never
+use the test fixture's default ports as evidence that a service is task-owned.
+
+Relocating a coordinated offline local datadir requires rebasing legacy SQLite
+attachment metadata because the SDK validates stored absolute paths against the
+configured attachment root. The private `_datadir_restore` helper copies a pinned
+backup to an absent target and rebases only validated `work_item_files` paths; it
+does not weaken SDK containment or migrate the database schema. Pin the manifest
+before tampering or restore, including the original datadir separately from the
+backup location. Stop all writers, reject SQLite sidecars, and use an exclusively
+controlled caller-owned target parent without group/world write permission.
+Manifest verification detects changed backup members; it does not prove writer
+quiescence or protect path-based target writes from an adversarial same-user
+process. Other absolute references and external stores require separate
+qualification. Unit and SDK readback evidence does not establish installed
+whole-Runtime recovery.
+
+The datadir capture and offline authorization APIs rely on POSIX filesystem
+contracts. Capture requires explicit offline acknowledgement and `O_NOFOLLOW`;
+local authorization rejects non-POSIX hosts before inspecting owned paths.
+Gate only POSIX success fixtures before creating state. Keep portable
+acknowledgement/schema checks enabled and exercise actual early-refusal guards
+on every host using module-local OS facades and missing paths. Patching global
+`os.name` also changes `pathlib` behavior and is not a faithful isolated test.
+Refusal evidence does not qualify restore or authorization on unsupported hosts.
+
+Full recovery evidence must join coordinated SQL, sealed output/source objects,
+Runtime journals, audit/Run/effect lineage and exact RCC material in distinct
+owned restored roots. A prepared-cache receipt or path is not an archived cache.
+The historical a27 common-PostgreSQL recipe leaves RCC independently available;
+it does not prove cold reconstruction. Require current authorized terminal
+replay and exact retained bytes after a fresh process, unchanged backup bytes,
+and no additional Run/Attempt/launch. Keep installed1.0.4 queue/attachment
+upgrade/refusal/rollback as a separate compatibility cell.
+
+For a selected local RCC artifact, archive size and hash are distinct from the
+artifact digest. Pinned RCC18.19.3 exports through the required local provider;
+acquire the archive into a new owned home with the unchanged existing trust
+carrier and policy. Compare artifact, specification, provenance, SBOM, revocation
+and policy identities. A relocated prepared receipt changes only its home path;
+the exact package YAML digest remains mandatory. Read pins from the actual
+receipt bytes and validate 64 hexadecimal characters, not copied prose. A
+successful no-build execution with the original owned cache path absent proves
+that selected artifact's cold execution, not whole Runtime recovery. Preserve
+the original directory identity and restore it on every exit when isolating an
+owned fixture. Measure the selected artifact before treating the entire cache
+home's size as a storage blocker.
+
+For owned PostgreSQL containers, use `pg_isready -h 127.0.0.1` to probe TCP
+readiness before opening a host TCP connection. A socket-only readiness probe
+can observe the temporary initialization server before its stop/restart and
+does not establish readiness of the published TCP port.
+
+Direct generated Work Item execution stores its retained launch journal in
+`Run.result.result.launch`. `RunExecutionIntent` belongs to the detached
+dispatcher. Restore checks must validate the actual path's journal and lineage,
+retain exact Run/Attempt/output/audit/request/pin row inventories around terminal
+reads, and require no extra launch. Do not manufacture a detached intent to make
+a direct-path fixture resemble a Task. Generated result output metadata wraps
+the typed output identity in `ref`; validate that nested `OutputRef`, then use
+the ordinary authorized output service and compare sealed byte digests.
+
+Rollback requires coordinated review/Work Item SQL and output-object backups;
+downgrading Runtime before restoring a pre-migration database is not supported.
+Disable the trusted review binding to stop new admission while retaining audit
+and queued work. Never delete an approved Work Item to make a rollback appear
+clean. Restore, worker draining, effects and production migration remain separate
+release/operator gates.
+
+### Approved invoice Work Item execution
+
+`InvoiceWorkerService` is a private trusted-host composition of the existing
+review, SQL Work Item, common Run/Attempt and output services. It registers no
+HTTP/MCP dispatcher or background worker and never approves a review. The host
+must explicitly supply the currently approved proposal, a live Work Item claim
+and a registered pinned `InvoiceWorkerPlan` before dispatch.
+
+One deterministic Work Item idempotency key admits one **distinct** worker Run.
+Immutable `Run.inputs` retain the approved binding and initial Work Item claim,
+RCC Artifact digest, source generation and exact candidate SDK wheel hash. Each
+Attempt binds its current Work Item owner **and epoch** in the running Run's
+dispatch record. Reusing the same owner UUID after Work Item takeover does not
+permit reusing the old Attempt. Current review authority, execution grants,
+application/deployment revision, input fingerprint, Action schema and source/plan
+identity are checked at their boundaries.
+
+Dispatch/launch evidence uses existing `Run.result` while the Run is RUNNING;
+this is not a completed result. Only a bound terminal envelope and the authorized
+RunOutput resolver grant access to a final artifact. No new state table, database
+or migration was added. Work Item, Review, Run and Attempt remain distinct.
+Review cancellation atomically fences the Work Item and requests cancellation
+on its linked Run. The worker stops/reaps its owned RCC wrapper when cancellation
+or either fence invalidates execution. A cancellation request alone is not a
+claim that arbitrary external effects were undone.
+
+The fixed synthetic task receives the sealed invoice rows through a bounded
+private input file and runs through the existing RCC adapter at 18.19.3. The
+Runtime Plan binds its source generation/environment and Artifact/SDK identities.
+The worker copies and verifies source in an owned Attempt directory, then records
+one launch intent before spawning. A duplicate launch cannot create another
+invocation. The task verifies its installed SDK distribution, module bytes and
+wheel-origin hash. Its completed RCC receipt, task result and measured source
+lineage become a sealed `invoice-execution.json` output. Run publication and Work
+Item completion/child output commit in one SQL transaction; expiry at the final
+Work Item write rolls back Run publication too. Failed publication may leave a
+provisional sealed object, which remains inaccessible and requires ordinary
+output reconciliation/retention rather than an unsafe file deletion. The private
+worker currently stages outputs with a 3,600-second retention period; process
+restart durability does not establish unbounded retention or restore acceptance.
+
+Recovery is explicit. An expired lease alone authorizes no retry. A SQL dispatch
+record with **no admitted launch** proves that this host never authorized
+execution and permits a new Attempt after reconciliation. A verified completed
+journal for this fixed private-result-file-only task permits publishing its
+retained result with a new owner/Attempt, preserving both executed and publication
+lineage, without running RCC again. Missing, altered or incomplete evidence stays
+blocked. Repeated terminal delivery returns the retained receipt. This default private-result task does not establish exactly-once external
+effects or arbitrary mid-effect crash safety. The optional owned synthetic-effect
+contract below adds bounded, explicit reconciliation without changing that claim.
+
+After the pinned Doctor/Bootstrap/ToolkitTest gateway, set
+`ACTIONS_INVOICE_WORKER=1` with an absolute `ACTIONS_INVOICE_EVIDENCE_DIR` and run
+`InvoiceQueryTest`. It builds the unchanged candidate SDK through Poetry, prepares
+and verifies a task-local RCC Artifact and owns the real PostgreSQL fixture.
+Mandatory cells cover both invoice providers and both SQL stores, real RCC task
+input delivery, MCP approval through execution, abrupt controller exit followed
+by completion in a new interpreter, cancellation of an actual owned RCC process,
+claim takeover and unknown-outcome refusal. Test artifacts/journals are copied
+to the retained gate evidence. The verifier rejects source inputs that change
+during a run. Real RCC task-input execution belongs to the mandatory worker
+suite; the portable suite clears that dedicated opt-in instead of rebuilding its
+multi-GB environment. Retain the separate zero-skip worker receipt when reporting
+the portable opt-in skip. Run worker and full portable stages separately at the
+same frozen source when a disposable environment cannot hold both fixture trees;
+keep both receipts and verify implementation/input byte equivalence. Never delete
+active fixtures to hide an out-of-space failure. This Linux source gate does not qualify generated immutable app
+activation, Windows/macOS worker execution, authenticated ChatGPT E1 or release
+publication/restore.
+
+This worker composition adds no schema migration. Rollback requires disabling
+new dispatch first and reconciling or cancelling admitted executions with the
+current owner before switching code. Preserve SQL Review/Work Item/Run/Attempt
+records and their sealed objects/journals together. An older binary does not
+understand the private running `Run.result` dispatch envelope; never let it
+reinterpret or resume those Runs. Existing database-version rollback still
+requires the pre-upgrade database and attachment/evidence backup.
+
+The generated-revision binding now composes this worker with the existing
+Canvas activation pointer and renderer/bridge. Its app-only execution projection
+and explicit result download read the exact retained Run output after approval;
+they create no Work Item, Run, Attempt or retry. A completed output reference
+must identify the worker Run, even if another authorized JSON output exists in
+the same app. Stale active revisions and revoked readers are denied at entry;
+activation rollback preserves admitted SQL work and audit. See
+[generated revision composition](repository-operations.md#generated-invoice-revision-composition)
+for source, fixture, platform and downgrade boundaries. Generic effects/retries,
+E1, independent distribution and restore are still separate release gates.
+
+### Explicit owned synthetic effects and bounded failure
+
+The optional `SyntheticEffectPolicy` pins target identity, idempotency contract
+and execution budget into immutable worker inputs. Existing `Run.result`
+dispatch version 2 retains intent, observations and recovery history; there is no
+new queue, scheduler or SQL migration. Unknown formats fail closed. Default
+version-1 private-result input bytes remain unchanged.
+
+An explicit host call verifies the real RCC journal and both current fences,
+commits intent, then calls the owned synthetic target. Completion requires an
+observed receipt for the exact stable Work Item/proposal/plan key. Lost
+acknowledgements reconcile against that same key, never presumed absent. Applied
+receipts publish without redelivery; pre-effect retries require no admitted
+launch; absence after intent permits retry only under the pinned idempotency
+contract. Unknown observations and nonidempotent absence remain blocked for
+operator reconciliation. Lease expiry and app mounting never start retries.
+Cancellation fences publication but cannot undo an already admitted effect.
+
+Budget exhaustion uses a distinct publication Attempt without spending another
+execution. Prior effect intent requires a durable conditional target close
+barrier and observed `closed_absent` before dead-letter publication. Ordinary
+absence is insufficient: an old in-flight call could still arrive. A confirmed
+late effect instead completes successfully. Failure artifact, FAILED Run/Attempt
+and FAILED Work Item/child output commit together under both fences. Persisted
+terminal intent resumes after SQL rollback with the same finalizer. Scoped
+failure artifacts require their exact bound terminal Run envelope.
+
+Use `ACTIONS_INVOICE_EFFECTS=1` with `InvoiceQueryTest` after the pinned gateway.
+The strict matrix uses both real invoice providers and both SQL authorities,
+actual RCC, an owned durable SQLite *target fixture*, interpreter crash/restart,
+concurrent lost acknowledgements, late delivery, cancellation and SQL rollback.
+The target fixture is neither a business queue nor a substitute for PostgreSQL.
+No production or third-party effect is admitted. Generic target contracts,
+operator reconciliation UI, retry scheduling, retention and restore remain
+separate gates. Disable admission before rollback; retain SQL, target
+receipts/barriers, RCC journals and scoped objects together. Older workers must
+not interpret version-2 Runs.
+
+### PostgreSQL fenced coordination and guarded retry
+
+The #327 candidate adds private `PostgreSQLFencedQueue`, implementing the same
+`FencedQueue` ownership contract as SQLite. It is a JSON queue coordinator, not
+a legacy `ManagedAdapter`: no automatic adapter selection, attachments, management
+UI coverage or authenticated HTTP API is implied. Existing Redis, DocumentDB and
+Yorko ID-only adapters do not acquire these guarantees merely by being services.
+Install only through the locked `postgres` extra using the RCC gateway.
+
+PostgreSQL uses DB time, conditional owner/epoch transitions and row locks.
+Competing claims select the oldest unlocked row with `FOR UPDATE SKIP LOCKED`;
+ties use item ID. This is not strict global FIFO while an earlier row is locked.
+Completion and output insertion commit together, with a final expiry check.
+Provider errors suppress raw DSNs/SQL diagnostics. Worker tokens identify an
+already-trusted caller and do not authenticate a network request.
+
+Both coordinators have explicit `retry_fenced`. A trusted host-supplied receipt
+verifier runs outside the queue lock; the queue then rechecks ownership, epoch,
+expiry and the current decoded-payload fingerprint. Unknown effects, unverified
+receipts, business-failure retry requests, changed input and exhausted explicit
+claim budgets are rejected. A successful retry appends its receipt/context audit
+and releases the same item for a higher-epoch claim in one transaction. Terminal
+failed items do not automatically retry. The callback must resolve and authorize
+the actual retained receipt: a digest or caller-provided disposition is not proof.
+The queue does not execute external effects or guarantee exactly-once execution.
+Worker dispatch still needs idempotency/reconciliation before executing effects,
+including redelivery after lease loss; that integration is not closed by this API.
+
+#### Schema and version plan
+
+SQLite remains schema **6**; existing columns and import aliases are unchanged.
+Only an explicit guarded retry creates the append-only `actions_fenced_retry_v1`
+audit table, inside its transaction. It has no foreign key into SQLite's rebuilt
+item table and is retained by reopen. Unknown audit layouts fail rather than
+being adopted or migrated. The Work Item row remains business authority; the
+retry table is audit evidence. This additive candidate change is not permission
+to open or migrate a deployed user database.
+
+PostgreSQL starts a separate format **1**,
+`actions.work-items.fenced-postgresql/v1`, in an explicitly supplied, existing,
+role-owned empty schema. `initialize_empty_schema` neither creates a database or
+schema nor adopts existing Work Items. A compatible repeated initialization only
+validates; unknown/nonempty layouts, missing metadata and future versions fail
+closed. There is no SQLite-to-PostgreSQL migration or dual authoritative write.
+Any future format change requires a reviewed migration, pre-upgrade database and
+attachment/effect-receipt backup, restore proof and mixed-writer rejection gates.
+The integration candidate uses SDK `0.5.0a1` and Runtime `1.1.0a3`, with
+a Runtime floor of `>=0.5.0a1,<0.6.0` (prereleases admitted). These are
+provisional, nonpublishing identifiers; final versions remain release-review
+decisions. Published SDK 0.4.4 / Runtime 1.0.4 identifiers must never name
+changed bytes. No production migration has been performed.
+
+Initialization checks schema ownership against `current_user`, even for a
+superuser connection; an empty schema belonging to another role is refused.
+Every ordinary queue transaction checks the format/version and exact column
+names, PostgreSQL types and nullability before reading or mutating items. A
+matching version alone does not admit an unknown layout. These checks do not
+validate every constraint, index, trigger or privilege, and ownership is an
+initialization requirement rather than network authentication. Keep the schema
+under a trusted operator. Unknown metadata must reject renew, finish/output and
+retry as well as new claims, without changing the current claim or retry audit.
+
+`test_expiry_during_output_insertion_rolls_back_completion_and_children` uses a
+real PostgreSQL trigger to expire the parent during child insertion, after the
+initial claim check. The final conditional completion must reject publication
+and roll back both the child and the parent's injected deadline change. Removing
+only that final expiry predicate makes this test fail. This covers expiry within
+one transaction without a timing sleep; takeover and restart remain separate
+shared-conformance cases.
+
+The canonical opt-in gate is RCC `FencedWorkItemsTest`, with an absolute
+`ACTIONS_FENCED_EVIDENCE_DIR`. It owns one digest-pinned PostgreSQL container,
+loopback-only ephemeral port, 256 MiB/one CPU/PID bounds and tmpfs test data.
+It pulls no image and never uses another service or DSN. Required shared SQLite
+and PostgreSQL cases must have zero skips. `ACTIONS_FENCED_FULL=1` also runs the
+SDK portable suite; its optional legacy service skips/expected failures remain
+separate. Retain receipt, input hashes, JUnit, failed attempts and cleanup state.
+The SDK tests use package-relative shared fixture imports under `tests/`.
+Collect before allocating a service when changing fixture registration.
+JUnit represents expected failures as `skipped` elements too; the verifier's
+aggregate skipped count therefore includes xfails. Retain the pytest summary
+to distinguish optional service skips from expected failures and report the
+portable suite's service deselections separately.
+
+The configured `poetry run mypy` checks only the runtime call-site contract.
+After the RCC bootstrap, install the locked PostgreSQL extra before explicitly
+checking the concrete queue implementations from `work-items/`:
+
+```bash
+poetry install --extras postgres
+poetry run mypy src/actions/work_items/_fencing.py \
+  src/actions/work_items/_adapters/_sqlite.py \
+  src/actions/work_items/_adapters/_postgres_fenced.py
+```
+
+Without that extra, missing psycopg imports are setup failures. The empty
+observed-column map needs an explicit nested dictionary value type; a successful
+configured call-site check alone does not detect its `var-annotated` failure.
+
+### Fenced SQLite claims in the release #327 candidate
+
+`SQLiteAdapter.reserve_fenced`, `renew_fenced` and `finish_fenced` implement the
+private additive `FencedQueue` contract. Its immutable `WorkItemClaim` contains
+item, canonical owner UUID and monotonic epoch. These are trusted SDK identities,
+not a remote authentication protocol or a Run Attempt token. Claims and expiry
+use SQLite time under `BEGIN IMMEDIATE`; worker timestamps are audit fields only.
+Reclaiming an expired item increments its epoch, including after adapter restart.
+Completion and parent-linked JSON output insertion share one transaction. A
+stale, expired, wrong-queue or terminal claim cannot finish, output or renew.
+
+An item entering fenced mode permanently rejects legacy ID-only release,
+output creation, payload/file mutation and deletion. Checks hold the same write
+transaction as the mutation. Legacy reservation and timeout-based orphan reset
+exclude fenced items. This prevents old SDK methods from bypassing an epoch;
+it does not provide authenticated management, review or cancellation APIs.
+
+SQLite schema 6 retains claim metadata through the existing migration path.
+Schema-5 clients reject that database rather than acting as unfenced writers.
+The installed public `actions-work-items==0.4.4` dependency was also tested
+against a candidate schema-6 queue: it rejected the open and the database hash
+remained unchanged. That historical SQLite checkpoint still used 0.4.4 metadata; its bytes must
+never be published under that identifier. The current provisional versions are
+listed above; the old compatibility receipt does not qualify current Runtime integration.
+Before upgrading a real queue, retain its database and attachment root together;
+rollback to a schema-5 client requires that pre-upgrade backup. No production
+migration is authorized by the candidate tests. Existing queues without fenced
+items retain their public method and import-alias behavior after migration.
+
+Run `poetry run pytest tests/work_items_tests/test_sqlite_fencing.py` in the
+prepared Work Items package environment. It covers competing processes,
+owner replacement/reopen, stale outputs, ID-only bypasses and injected SQL
+rollback. The portable suite does not qualify a service-backed implementation.
+These standalone queue tests do not qualify exact-result review, Run linkage,
+RCC execution or output files; use the separately measured bounded composition
+above for those claims. Generic retry/dead-letter policy, external-effect
+deduplication and the complete release workflow remain open gates.
+
+### Artifact and legacy queue boundaries
 
 Action Server filesystem artifacts use canonical, root-relative run keys. The
 resolved storage root must be an existing non-symlink directory; run and file
@@ -271,20 +693,21 @@ diagnostics. That digest is mutable repository data and is not immutable source
 authority. After reviewing an intentional local baseline or port change,
 regenerate it with `--write` using the package's supported Python environment.
 
-The authoritative form requires explicit Git roots:
+The authoritative verifier supports either two explicit pinned Git roots or the checked-in, authenticated Robocorp reference plus the pinned owned custom Git root:
 
 ```bash
 python work-items/scripts/check_contract_port_provenance.py \
-  --robocorp-root /path/to/robocorp-at-631f560 \
+  --robocorp-reference work-items/contracts/references/robocorp-1.5.0 \
   --custom-root /path/to/custom-at-c56c701
 ```
 
-It first requires each root's `HEAD` to equal its ledger SHA, then derives the
-selected nodes, bodies, decorators, assertions, fixture interfaces, exclusions,
-and public symbols/signatures from those trees. It compares stored source nodes,
-adapted ports under import/name-only AST normalization, and the compatibility
-ledger. The Work Items release workflow checks out both exact commits and runs
-this form before the package gate. The official Robocorp Control Room HTTP
+`--robocorp-root /path/to/robocorp-at-631f560` remains an alternative to `--robocorp-reference`; the two flags are mutually exclusive and both modes require `--custom-root`. Authority modes reject `--write`. The mutable offline diagnostic mode described above remains separate.
+
+The owned reference authenticates17 unchanged upstream source/license files through Git blob and complete ancestor-tree objects to the existing commit pin. It includes all package Python files, complete selected test suites, fixture sources and original Apache-2.0 license, preserving excluded nodes for coverage checks. Extra/missing payloads, symlinks, unsafe paths, disconnected/corrupt objects and inventory changes fail validation. Sources are parsed, never imported or executed. The unsigned upstream commit proves commit-addressed identity, not author-signature attestation.
+
+Both source modes then run the same selected-node AST, decorator, fixture-interface, exclusion, public-export and signature comparisons. The custom root still requires its exact HEAD. The release workflow reads the owned Robocorp reference without an upstream checkout and retains the pinned custom checkout. No custom source bundle or new custom license attribution is introduced; its conflicting pinned metadata requires separate reconciliation.
+
+The official Robocorp Control Room HTTP
 adapter and Fizzy orchestration remain explicit exclusions. Yorko is a separate
 experimental optional adapter whose mocked contract does not establish live
 service behavior. Public Yorko symbols remain importable without the `yorko`
@@ -760,3 +1183,316 @@ These checks cover four settled Chromium states, not all routes, transition fram
 manual keyboard/screen-reader behavior or other browsers. Preserve any earlier
 failure and its subject when a later audit passes; do not infer a product color fix
 from a timing-dependent result without identifying the failing element.
+
+## Managed client boundary
+
+Published Runtime1.0.4's `/api/work-items` is local SQLite CRUD, not authenticated
+Workspace/Deployment management. The candidate managed protocol is versioned at
+`/api/managed-work-items/v1`; its closed command/result schemas and exact
+permission/version handoff are in
+[the #132 consumer contract](../program/actions-next-managed-work-items-132.md).
+`create_router` requires a trusted authenticator and the real domain port; it
+never opens legacy storage or trusts caller-supplied actor/worker identity.
+A protocol factory or FileAdapter test does not prove a managed SQL server or
+installed VSIX. Negotiate actually implemented operations and explicit grants;
+never turn a managed denial into unscoped local CRUD. Review, queue ownership,
+business outcome, Run, Attempt and artifact authority remain distinct.
+
+Work Item claim epochs and Run Attempt epochs are independent counters. A claim
+can expire before any Run is admitted, so the next claim can have epoch2 while
+its first Attempt has epoch1. Native managed projection compares each retained
+epoch with its own canonical Work Item, RunPin and RunAttempt rows, then checks
+current owner, lease, cancellation and scope. Equality between the counters is
+not a fence. Cover live and finalized log/artifact paths and independently
+reject stale Work Item, Attempt and RunPin epochs.
+
+Managed SQL requests must enter `Database.connect()` on the executing HTTP
+worker thread; a connection in the client/fixture thread is insufficient.
+Test the real router with live SQL policy, including revoked/cross-workspace
+capability discovery and a server-held worker identity. Claim/renew replay must
+return the current DB-time deadline after validating the live fence, while
+retaining the original request/audit. The managed wire uses `DONE` for SDK
+`State.DONE.value == "COMPLETED"`; completion tests must cross that real terminal
+boundary and verify retained RCC evidence, not manufacture a client result.
+Check the item identified by the exact review/dispatch receipt rather than the
+first item returned by a queue listing. An older approved item may intentionally
+remain pending when exact-target dispatch completes another item. Assert its
+unchanged epoch as well as the selected item's SDK terminal state.
+
+An admitted generated Run retains its exact bounded UTF-8 input in the common
+Run row. `require_reviewed_run_inputs` checks the closed canonical `value: str`
+payload against the approved result digest; it confers no authority. Replay and
+every guarded write still reauthorize the review/source/Package and verify both
+fences. The original query artifact remains required for new admission, while
+its later expiry must not prevent authorized admitted work from completing or
+replaying. This does not extend the source artifact's TTL, restore revoked
+access, admit another Run or permit an uncertain launch to run again.
+The ordinary route mount remains unavailable without explicit trusted service
+and authentication dependencies; route presence alone is not managed readiness.
+Keep its schema/capabilities/operations routes explicitly classified in the
+assembled authentication inventory. The managed identity category is distinct
+from public exceptions; the inventory must still reject every unknown route.
+When disk headroom is small, serialize full source and installed RCC acceptance.
+Per-case cleanup of recognized owned views does not bound simultaneous pytest,
+PostgreSQL and incomplete view allocations. Preserve failed receipts, check
+active processes and use RCC's supported exact-view cleanup; never remove
+unrecognized partial directories or immutable caches to force a green result.
+
+Ordinary Linux Runtime startup now joins the native Canvas and managed service
+to the same Database and package-aware output resolver. It maps the existing
+owner key to the existing actor; a worker identity is supplied only by the
+explicit trusted RCC descriptor. This assembly occurs before the HTTP perimeter
+is installed, so managed identity validation uses the same configured mapping.
+It creates no Work Items grants. Schema discovery can succeed while capability
+discovery returns403 for missing live permissions; that is distinct from an
+unconfigured503. Hosts injecting their own services retain explicit ownership.
+Source Runs without canonical captured log objects return an authorized empty
+log page, not a fabricated stream or a validation error.
+
+Reviewed-mode managed enqueue validates the exact proposal, source snapshot and
+protected payload, then returns only the Work Item already created by an
+explicit approved decision. It neither approves nor seeds another item. Retry
+is an explicit reconciliation of a live authenticated claim through a trusted
+server-selected worker. Client proof strings and unknown launch outcomes stay
+blocked; there is no automatic reclaim, reset or relaunch. This subset does not
+admit general producer capabilities or arbitrary queues.
+
+Managed mutations commit their canonical Review/Work Item/Run/Attempt changes
+with one actor-scoped FoundryRequest and matching FoundryAudit transaction. A
+receipt or audit write failure must roll back all of them. Concurrent duplicates
+and service reconstruction retain that receipt without another mutation; every
+replay still checks live queue policy, exact input and the applicable fences.
+Service reconstruction is not a fresh-interpreter or installed-client proof.
+
+Keep the actual pinned task-input test in its dedicated worker gate even when
+the portable suite removes its RCC opt-in. A portable skip is covered only by
+a named successful dedicated case on the same source and SDK bytes. Other
+opt-in RCC adapter/provider tests remain separate; generated-package or invoice
+worker success does not automatically qualify every RCC provider path.
+
+
+### Explicit generic Work Item policies
+
+The generic Work Item domain adapter binds the exact immutable Package declaration and per-capability Deployment policy; it does not infer consumer behavior from an Action name, import, invoice adapter or queue contents. A non-`none` declaration requires an explicit `allowOutputs` field. Empty Deployment Work Item policies remain omitted from canonical serialization so legacy revisions keep their identity. Declaration support alone does not grant managed or model-facing service support: bare RCC execution still rejects these modes without the trusted generic output adapter.
+
+Generic admission normalizes inputs against the compiled Action schema and retains their digest, exact execution snapshot and policy in a closed input envelope. Enqueue requires live execute, queue READ and ENQUEUE authority; the domain operation owns its one atomic FoundryRequest/Audit/item insert. Managed callers must delegate that operation without wrapping it in another enqueue idempotency authority. Input-linked dispatch uses the stable Work Item Run key, while the Work Item claim epoch and Run Attempt epoch remain independent. Optional no-input and producer dispatch admit an ordinary Run without a synthetic input item.
+
+For output-enabled capabilities the measured Action result is exactly `{ "result": <ordinary JSON>, "workItems": [<object>, ...] }`, subject to both the Action output schema and Deployment item/byte limits. The complete envelope remains in the ordinary Run result. Input-linked output routing is restricted to the existing SDK `<input_queue>_output` queue. Child input envelopes are not interchangeable with output envelopes: outputs carry server-validated producing snapshot, Run/Attempt fence, input digest and optional parent identity, and do not confer another execution admission. Unsupported mappings fail closed. Terminal child creation and Run publication share the existing SQL transaction; replay returns the retained admission and must not relaunch the Action.
+
+Use the source contract suite `test_generic_work_item_execution.py` against SQLite and an owned PostgreSQL fixture for authorization, independent stale fences, cancellation, atomic rollback and replay. Synthetic completion fixtures prove only these domain boundaries. Actual execution additionally requires the opt-in `ACTIONS_GENERIC_REAL_RCC=1` cases with the exact prepared RCC receipt/binary and an exclusively owned compiler home. They exercise actual generated consumer, standalone producer and optional no-input execution; they do not establish managed HTTP/model routes, installed-consumer acceptance or authenticated ChatGPT proof.
+
+
+The model-facing `canvas_apply` and `canvas_preview` schemas accept an explicit
+`backend.workItems` declaration and `queuePolicies` keyed by declared binding ID.
+Those requests become Package metadata and exact capability Deployment policy;
+they do not create queue grants or admit Runs. An omitted declaration/policy
+preserves legacy request serialization. Changed queue policy participates in the
+authoring idempotency fingerprint. Existing source entries and bindings retain
+their bounds and authorization checks. Policy validation does not imply every
+declared routing mode has an execution or UI adapter.
+
+A separately composed generic managed service binds one immutable input policy
+to common SQL queues. Physical queue names are only Workspace-scoped: discovery,
+counts, item reads and claims filter exact protected input snapshot and policy.
+Historical revisions sharing a name are not interchangeable. Generic enqueue
+keeps its domain-owned request/audit transaction; claim, renewal and completion
+use their own managed receipt namespace. Claims select only fresh admitted items
+until recovery is qualified. Dispatched renewal extends both Work Item and Run
+Attempt fences. Terminal completion validates retained sealed evidence and never
+executes or finishes a queue again. Output-child and standalone producer queues
+remain unadvertised until a typed lineage reader is qualified.
+
+Catalog eligibility is narrower than declaration validity. A caller-selected
+Runtime Plan without a default does not acquire an inferred selection; an
+unsupported output mapping must not disable unrelated queues. Reject ambiguous
+capabilities sharing an exact QueueRef and physical collisions with reviewed
+queues. Pagination rebuilds authorized visibility before checking its digest.
+Metadata scans use 64-row batches and fail closed above 10000 rows or 16 MiB of
+payload bytes; they never fall back to unscoped rows. This bounded scan is not
+an unbounded queue-scale claim.
+
+
+`GenericCanvasExecution` adds a closed model-facing `capability_invoke` variant with `mode: "generic"`. Every invocation selects an exact immutable execution snapshot and either an exact existing `ClaimRef`, or standalone typed inputs plus a bounded idempotency key. Claim invocations cannot replace input or choose another Run identity. The host supplies the worker UUID, common SQL/queue authorities, prepared RCC receipt and execution directory; no request supplies them. The model wrapper leaves reviewed invocation and `canvas_dispatch` delegated. The separately composed `GenericCanvasView` supplies the bound app path described below.
+
+The wrapper resolves the exact retained Deployment and Runtime Plan, plus the unique Work Item policy when its capability requires one, before dispatch. A terminal invocation returns its retained Run/Attempt/item state without another launch. An existing launch returns `reconciliation_required`, including after an earlier uncertain runner failure; invocation never retries that launch. Projection rechecks independent Work Item and Run Attempt identities. Artifact handles are returned only for attached final outputs that resolve under live common Run/package read and queue READ/ARTIFACT_READ grants. Execute permission alone does not expose output handles, bytes, generated source or credentials; revocation applies again on replay.
+
+`test_generic_execution_port.py` distinguishes synthetic runner boundary tests from its explicit `ACTIONS_GENERIC_WRAPPER_REAL_RCC=1` test. The actual test compiles and invokes a generated optional-input Action through the model wrapper, validates four sealed output handles, and repeats the invocation without relaunch. It requires exclusive ownership of the exact prepared RCC home. This is source-level wrapper evidence, not installed-consumer, startup wiring, authenticated ChatGPT, generic bound-app UI or failed-process reconciliation qualification.
+
+When adding a managed queue mode, update both the command and result schemas in
+`docs/contracts/work-items/managed-v1.json`. The canonical comparison is
+`test_checked_in_export_matches_the_actual_wire_contract`; an enqueue schema
+update alone misses `queues.list` QueueView mode negotiation.
+
+The invoice verifier's `--worker --generated --effects --full` switches do not
+enable the generic domain/model RCC opt-ins. Qualify those separately with
+`ACTIONS_GENERIC_REAL_RCC=1` and `ACTIONS_GENERIC_WRAPPER_REAL_RCC=1`, the exact
+prepared receipt, and required PostgreSQL provider configuration. The selected
+consumer/producer/optional and model-wrapper cases total eight across SQLite and
+PostgreSQL. Require zero skips; portable-suite skips are not substitutes for this
+execution gate. Concurrent RCC gates require separate owned homes, including
+separate cleanup ownership.
+
+### Model invocation discovery
+
+`canvas_get` and `canvas_inspect` may expose `invocationDescriptors` to the authenticated model audience for an exact currently active Canvas binding with either an explicit generic Work Items policy or an ordinary mode-none capability without a queue policy. Each descriptor supplies the immutable execution snapshot, binding ID, input mode, exact deployment-scoped input queue, standalone eligibility, and `inputSchema`. Read the schema through the immutable package registry, verifying its selected capability/runtime plan and input-schema digest; never copy a mutable Action record. Bound the original schema to 32 KiB before projection; omit oversized descriptors without poisoning the existing UI read. Strip schema default/example annotations while preserving property names (including a property literally named `default`), aliases, required fields and validation constraints. No result schema is added in this slice. Resolve these from the retained Deployment and its declared default plan; require live execution and queue permissions plus a configured RCC provider. Availability is explicitly `authorized`, with `invocationReadiness: not-checked`: this is an authority-qualified reference, not proof that the prepared runner environment matches the selected profile/plan. Actual invocation still validates execution readiness. Stale revisions, denied authority, unsupported providers or input-linked output routing, app-scoped audiences and bindings missing a required generic policy do not acquire an executable descriptor. The descriptor is a reference, never a grant: invocation must reauthorize all authority. Do not copy app-private metadata, tokens, source, or results into this model projection. Ordinary mode-none capabilities expose inputMode none, inputQueue null and standaloneAllowed true. Their input schema comes from the immutable selected Package capability and plan. They use StandaloneActionExecution on common Run authority without a synthetic Work Item, invented optional policy or queue grants. Only standalone typed inputs and an idempotency key are accepted; ClaimRef is rejected. App and model requests share this service while preserving separate audience routes and app provenance. Bound only the new descriptor payload (128 KiB and the canonical Canvas MAX_BINDING_COUNT of 32), preserving existing Canvas history limits. Unsupported input-linked routing must be filtered before constructing its execution adapter so valid UI inspection remains available.
+
+Discovery must not register Run admission or mint grants. Generic dispatch, like activated reviewed dispatch, registers only its exact already resolved and authorized snapshot inside the same SQL transaction as admission. Registration is rolled back on failed admission/claim and remains idempotent; startup and discovery remain side-effect free. A fresh ordinary qualification must omit fixture pre-registration to exercise this join. Explicit host execution and queue grants remain separate trusted administrative setup.
+
+
+### Bound generic semantic forms
+
+`GenericCanvasView` composes the existing official MCP Apps bridge and ephemeral AppSession attenuation with exact active Deployment/Canvas revision and logical binding selection. The initial app form subset is ordinary `none`, or explicit `optional`/`producer` standalone input. Required-input and consumer app bindings use an explicit input-queue form. App-private metadata supplies the exact immutable QueueRef. Loading inputs is a read-only,20-item page of that policy's protected normalized input envelopes; previews are bounded to2048 UTF-8 bytes, decoded without partial characters with an explicit truncation marker. Selecting an item never claims or executes it. Claim selected input sends that exact QueueRef/item ID and a stable request key; it accepts no replacement payload, worker ID or claim epoch. Continue execution is a separate explicit action on the returned Run. The ordinary path uses the common Run admission/journal/output authority, without a synthetic Work Item or optional policy. Discovery checks live execution and read authority; neither discovery nor dispatch mints grants. Host worker identity and RCC preparation remain trusted configuration.
+
+An explicit form submission first admits a Run and returns its identity, then explicitly executes that retained Run. A FoundryRequest and FoundryAudit association is saved in the same transaction as admission, binding actor, exact app scope, logical binding and Run. An idempotency prefix is not provenance: model-created Runs and another binding selecting the same capability cannot acquire or use that association. Status, cancellation and artifact inspection recheck the association, active scope, grants and exact Run/Attempt state. Cancellation reports a request, not confirmation that a process stopped. A retained uncertain launch is never automatically retried; failure reconciliation remains a separate gate.
+
+Reopening reads at most 256 recent exact actor/revision app audit records, validates their receipts and projects the highest Run number per allowed binding. This is a bounded recent-execution view, not complete history. It does not claim or launch a Run. The UI offers explicit continuation only for an unlaunched retained Run; an expired or uncertain launch requires reconciliation. Runtime restart qualification must also prove the configured worker identity and common persisted state survive restart. Terminal artifacts are exact Run/workspace sealed handles; malformed or mixed inventories fail closed instead of returning a partial list. Text inspection is bounded to 64 KiB and rendered as text.
+
+Run `test_generic_canvas_view.py` with `ACTIONS_REQUIRE_INVOICE_PROVIDERS=1` and an owned `ACTIONS_INVOICE_TEST_POSTGRES` fixture to exercise SQLite/PostgreSQL authority and DuckDB/PostgreSQL fixture combinations. Its completion runner is synthetic: it establishes domain/transport boundaries, not actual RCC or installed-host execution. Run the Canvas View Vitest config from `action_server/frontend` (fixture paths assume that working directory), and type/lint checks. Installed Runtime composition, bundled frontend, actual ordinary RCC, browser screenshots, process restart and authenticated ChatGPT remain independent acceptance evidence.
+
+The official bridge's new generic `canvas_get` result contains a live AppSession token only in private `_meta`. Sanitize recorded MCP responses and host captures before saving or committing evidence: replace tokens and synthetic API keys with presence markers/digests, preserving semantic metadata. Never copy session tokens into model-facing structuredContent, logs or screenshots.
+
+`test_generic_none_rcc.py` requires `ACTIONS_GENERIC_NONE_REAL_RCC=1`, pinned prepared RCC receipt and binary, the owned-cache marker, `ACTIONS_PACKAGE_COMPILER_OWNED_VIEW_CLEANUP=1`, and a unique `ACTIONS_PACKAGE_COMPILER_CLEANUP_EVIDENCE` directory. It compiles an ordinary echo package and executes app and model routes on SQLite and PostgreSQL, checking sealed outputs, succeeded Attempt state, no Work Item and no extra launch on terminal replay. Its synthetic authentication and prepared execution directory do not prove ordinary installed startup, browser or restart. Run serially in an exclusively assigned RCC home.
+
+Installed app restart qualification must click the artifact action after reopening,
+not merely observe a completed Run label. The initial execution reply can include
+authorized output handles that the recent-execution projection omits. Reopening
+must use the same live authorization and inventory validation as terminal status
+projection. The a28 installed browser exposed this gap; its initial execution
+pass is not a restart-artifact pass.
+
+Evidence scripts must stop the commit/push sequence when a redaction or content
+scan fails. Use a checked subprocess sequence or shell `set -e`; a newline
+between a Python scan and `git add` does not enforce success. Sanitize AppSession
+tokens before copying JSON even when the disposable server has already stopped.
+
+When a source suite must remain frozen, qualify an isolated installed correction
+from an archived base plus a digest-pinned patch and explicit version delta.
+Record these inputs separately from a Git source SHA, compare wheel/source/import
+bytes, and later verify the integrated files match that candidate. Do not label
+an isolated wheel as the unchanged base commit or as already integrated source.
+
+
+The selected-item app action uses existing SQLReviewQueue.reserve_item_fenced and GenericWorkItemExecution within the canonical counter/workspace transaction. Live execute, READ and CLAIM grants and exact snapshot/policy/input digest are rechecked. Only pending, uncancelled, never-claimed selected items are admitted: no unavailable selection falls back to the next item, expired claim or another queue. Reservation, stable Work Item Run admission, app association and request-key selection receipt commit together. Same-key replay returns retained state; changed queue/item selection conflicts. Existing managed Claim remains its unchanged next-pending-item operation; this app interaction does not extend the managed wire protocol or create a scheduler.
+
+Status/reopen revalidate independent Work Item and Run Attempt fences from the retained journal and exact app association. A terminal input claim epoch/owner mismatch fails closed. Readiness uses the earlier Work Item/Run lease deadline, and either cancellation request remains visible. An accepted terminal execute/status response clears the UI pending-selection key so the user can explicitly select another item. Expired or uncertain executions are not automatically reclaimed or launched. This remains distinct from producer output browsing: produced-child envelopes are not normalized input envelopes and must not be displayed through the input-list adapter.
+
+Run test_generic_input_canvas_view.py against SQLite and an owned PostgreSQL fixture using ACTIONS_REQUIRE_INVOICE_PROVIDERS=1. The fixture completion runner is synthetic; those tests establish selection, atomicity, authorization, fence/replay and concurrency boundaries. The Canvas View generic-input.test.tsx verifies typed queue/item identity, stable uncertain keys, explicit claim controls and no automatic execution. Actual consumer app RCC, installed official-host/browser and restart acceptance remain separate gates.
+
+Reopening a completed app Run must recompute its authorized terminal output handles through the same projection used by direct execution/status. Run/queue READ+ARTIFACT_READ grants are live checks; permission denial omits handles. Resolve every exact Run/workspace sealed handle before attaching the complete inventory. Malformed/mixed references fail closed rather than returning partial output. Project handles only after selecting the latest associated Run per binding, so historical output inventories are not copied or unnecessarily resolved. A completed-state-only reopen is insufficient browser acceptance: explicitly inspect a retained artifact after a real process restart, while retaining the original failing receipt if applicable.
+Produced items have a separate read-only app projection. A completed app-associated Run may explicitly load its declared output queue only while the exact active binding, snapshot and live Run read plus output-queue READ and ARTIFACT_READ grants remain valid. This projection never adopts a child as input, claims it, changes its queue or starts execution. Produced envelopes are not normalized consumer input envelopes.
+
+Validate each child's complete producing ExecutionSnapshot, AttemptFence, input digest, envelope parent and SQL parent against the retained successful Run ticket. Compare the complete child payload multiset to the retained published workItems result before returning any page. A matching Run ID alone is insufficient provenance. Missing, extra, changed or malformed associated children fail closed. The cursor must identify a child of that same Run; unrelated queue rows never contribute to the visible page or cursor.
+
+The current bounded reader scans at most 1000 rows and 1 MiB database text characters in the exact declared physical queue, then returns at most 20 verified children. Exceeding either scan bound fails closed; this is not an unrestricted large-queue listing API. Preview text is limited to 2048 UTF-8 bytes with safe decoding and an explicit truncation marker. The UI clears previously shown children before a refresh and verifies returned Run, Attempt and QueueRef identities; a revoked or replaced Run cannot leave a stale accepted page.
+
+Qualify test_generic_output_canvas_view.py on SQLite and an owned PostgreSQL fixture with ACTIONS_REQUIRE_INVOICE_PROVIDERS=1, and generic-output.test.tsx in Canvas View. These boundary fixtures use synthetic completion and do not replace actual RCC, installed MCP/browser, restart or output-artifact qualification.
+
+test_generic_input_output_rcc.py is an opt-in app acceptance harness enabled with ACTIONS_GENERIC_INPUT_OUTPUT_REAL_RCC=1 and the canonical prepared receipt/RCC paths. It builds real consumer/producer packages and checks explicit selection/submit/execute, child provenance, artifact reads and terminal replay on both SQL providers. Its canvas_get reopening uses the same service instance and is not a process-restart qualification. Collection or static checks establish harness availability only; record actual RCC results separately and retain installed CLI restart/browser acceptance as distinct gates.
+
+The canonical FencedWorkItem row records successful execution as COMPLETED with its claim owner cleared and epoch retained. Managed API DONE is a wire projection; do not assert the wire label against the SQL row. Real RCC consumer qualification caught that harness error. Likewise a single-line semantic text field cannot be used as a multiline NDJSON editor: qualify saved multiline consumer input separately from valid standalone single-line input. A working input adapter must occupy the authored form slot; a false unavailable placeholder plus controls outside the canvas is a layout defect even when execution/restart passes.
+
+Consumer input controls belong to the authored semantic form node. The host may supply a trusted app-only form override keyed by the exact declared binding; this is runtime composition, never a new serialized CanvasSpec field. The renderer applies it only for a visible app audience outside preview and preserves the authored node identity. Model views, previews, invisible specifications and undeclared bindings cannot mount private overrides or appended panels. Consumer controls select a saved Work Item and do not expose authored replacement-payload fields.
+
+Execution, produced-item and inspected-artifact panels must remain inside the same semantic canvas main layout and use the shared control/status styles. Bind artifact inspection to the originating binding before rendering it. Do not append operational forms after the renderer: that leaves the authored form falsely unavailable while a second unstyled form operates outside the canvas. Mounting or rendering any of these controls must not load, claim or execute work automatically.
+
+Host connection diagnostics may be collapsed into a secondary details disclosure while retaining connection/theme/locale/tool-input/tool-result test IDs and host-context assertions. A functional installed flow is not sufficient layout acceptance: retain the failed screenshot and test DOM containment, exact form replacement, private-slot audience exclusion and artifact placement before installed screenshot requalification.
+
+After a successful validated selected-input admission, invalidate only that binding’s cached input page and clear its form selection. Otherwise a completed Run can still display a cached PENDING item with an enabled claim button. Require explicit Load inputs to obtain fresh state; do not automatically load, claim or execute. An uncertain or rejected response must retain the pending selection/idempotency identity for safe retry. A later explicit load and selection may admit another Run after terminal state.
+
+Installed-browser admission assertions must wait for the asynchronous response and React state update, rather than reading the selection immediately after click resolves. Await the empty selection and disabled claim control before continuing explicit execution. A premature assertion failure is harness evidence; retain its receipt and use a fresh synthetic fixture rather than automatically relaunching an uncertain prior Run.
+
+Do not compose the generic output adapter's default claim checks into a SQL-only
+execution callback without a verified metadata authority binding. The unbound
+current-capability path verifies package artifacts and can read the provider inside
+the transaction; a SQLite diagnostic observed this in `_GenericOutputs._check`.
+Prepare artifact-backed selection outside SQL and recheck exact declaration,
+Deployment, queue and Attempt authority inside SQL. A receipt-kind switch alone
+does not supply that binding. Claimed Robot execution now binds host-issued immutable
+Work Item authority prepared outside SQL, tied to the exact service, caller and
+ticket. SQL callbacks recheck retained package pins and live queue/Attempt authority;
+the existing generic adapter renews both leases. Terminal Run/Attempt/output
+publication and completion of the exact input claim share one transaction after
+COMPLETE authorization. Queue-finish failure rolls back terminal publication.
+Claim epoch and Attempt epoch are independent. Optional no-claim execution requires
+its immutable declaration; producer and child outputs remain unsupported.
+Claimed consumer Robot Tasks use the separate strict Task join described below. SQLite and PostgreSQL regression fixtures qualify this join with a
+synthetic runner; actual installed RCC acceptance remains a separate gate.
+
+Robot input admission uses one canonical ASCII JSON encoder with a 65536-byte limit
+before enqueue or Run admission, including Unicode escape expansion. A queue's
+larger generic byte limit does not override this carrier bound. Retained receipt
+validation uses the same encoder. Terminal receipt reopening rechecks exact claim,
+queue terminal state and cleared ownership; metadata validity never grants artifact
+access. Keep corruption, lease expiry, cancellation and publication races in both
+SQL-provider suites.
+
+Installed claimed Robot acceptance uses public managed HTTP items.enqueue/items.claim
+and MCP capability_invoke with the descriptor's exact snapshot/queue and returned
+claim. These HTTP operations are not MCP tools. The standard synthetic bootstrap maps
+one credential to one persisted Actor and a server-held worker; this does not qualify
+multi-principal isolation. Require actual Robot PASS and deliberate FAIL output.xml,
+public terminal Work Item/Run reads and authorized artifacts after a process restart.
+A passed dryrun is not execution qualification.
+
+
+The source-authority gate now accepts the authenticated owned Robocorp reference
+plus the pinned custom Git root, as described above. Mutable offline digest
+verification alone remains insufficient. The pinned custom reference currently declares MIT in
+pyproject.toml, links a missing LICENSE in README, and conflicts with the local
+Apache-labelled manifest. Reconcile that provenance before attributing a new full
+custom-source fixture; this does not authorize changing existing legal attribution.
+
+Default-none Robot declarations remain omitted from immutable manifests to preserve existing revision preimages. Retained terminal receipts validate claim provenance without requiring an unexpired lease; artifact permission remains a separate live check. A contender signalled immediately before cancellation proves outcome consistency, not that it reached a database lock wait; describe race-test coverage accordingly.
+
+
+Generic managed enqueue responses derive their replay marker from the same atomic
+domain request/audit decision that owns item creation. Do not infer replay with a
+separate preflight read: concurrent admission can make that stale. The internal
+result carries item identity plus replay status; the legacy enqueue API continues
+to return the item ID. Both first admission and replay return the current authorized
+item projection and server time without adding a second request/audit owner.
+
+Canvas artifact access requires an actor/binding/Run submission association, not
+merely a snapshot containing canvas_application. Direct capability_invoke runs use
+their authorized managed HTTP artifact surface. To qualify Canvas, start with a fresh
+pending item and use submit_input followed by execute; never adopt an already claimed
+or completed direct Run to bypass the association check. Preserve a denied direct
+Canvas read as an expected boundary rather than weakening authorization.
+
+
+### Claimed consumer Robot Tasks
+
+The additive `detached-claimed` invocation accepts an immutable snapshot and exact
+`ClaimRef`; it rejects replacement inputs and caller-chosen idempotency keys. The
+configured Task host binds the claim owner to its server-held worker. Preparation
+readiness runs outside SQL; scope-only rechecks bracket admission. Canonical queued
+inputs, Run admission, retained claimed intent and Task receipt share one
+counter→workspace transaction without creating an Attempt. An existing synchronous
+Run cannot be adopted into a Task. The worker later claims that same Run.
+
+Task reads require current Run read and queue read permission. Cancellation requires
+independent Run and queue cancellation rights, not execution, read or claim rights.
+It checks the original live claim and, for active execution, the live Attempt fence.
+Run and queue cancellation are SQL-only changes in one transaction; strict retained
+input, policy, journal and launch validation must succeed before commit. Validation
+or queue failure rolls back both changes. Pending cancellation may report cancelled
+only before Attempt admission. Active cancellation remains working with an
+unconfirmed outcome; this is not evidence that a child process has stopped.
+
+A completed Robot invocation with a failed execution returns a completed MCP Task
+whose result has `isError: true`. Keep Task protocol state distinct from Run outcome.
+Synthetic SQL/host/wire tests do not establish installed execution, restart, live
+cancellation cleanup or PostgreSQL concurrency; qualify these separately against
+the exact installed candidate.
+
+Installed claimed Task replay qualification must verify unchanged Attempt identity
+and lifecycle counts, not only Task ID. Model Tasks do not gain Canvas submission
+authority; read their artifacts through the independently authorized public surface.
+A harness PASS requires separately matched supervisor identity and cleanup evidence.
+Actual live cancellation remains distinct from terminal success/failure and restart.
+
+Claimed Task readiness must call the consumer-specific readiness path of the
+actual selected runner. Standalone eligibility must continue rejecting Work Item
+consumers. Preserve claim-policy/declaration agreement, no-output restrictions,
+current activation, host identity and preparation checks. Synthetic readiness
+stubs prove sequencing only; include the actual runner in admission regressions.

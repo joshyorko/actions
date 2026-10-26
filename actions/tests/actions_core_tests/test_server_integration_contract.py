@@ -33,6 +33,8 @@ def test_server_integration_symbols_preserve_existing_core_objects():
         "ManagedParameters",
         "PluginManager",
         "format_lint_results",
+        "get_log_viewer_html",
+        "log_html",
     }
     assert set(integration.__all__) == expected_exports
     assert len(integration.__all__) == len(expected_exports)
@@ -87,3 +89,13 @@ def test_server_integration_formats_core_lint_errors():
     assert "Action lint error(s) found at file: actions.py" in formatted.message
     assert "Error (line 7): missing description" in formatted.message
     assert format_lint_results({"file": "actions.py", "errors": None}) is None
+
+
+def test_public_logging_bridge_preserves_implementation_and_viewer_bytes():
+    from actions import server_integration
+    from actions._logging import get_log_viewer_html, html
+    from actions._logging._index_v3 import FILE_CONTENTS
+
+    assert server_integration.log_html is html
+    assert server_integration.get_log_viewer_html is get_log_viewer_html
+    assert server_integration.get_log_viewer_html() == FILE_CONTENTS["index.html"]

@@ -1,0 +1,54 @@
+{
+  "source_sha": "9ca4551877f065e7355dcf48da0c0e3e37b0688a",
+  "imported_deployment_source": "f5e5916748a76aeec3653c7792c8849881a4ae30",
+  "runtime_candidate": "1.1.0a11",
+  "schema": 18,
+  "owned_run": "/workspace/actions-327-state/evidence/foundry-schema18-frozen-20261023/dac58091-e8db-440d-b190-3c7fb01611c3",
+  "results": {
+    "storage_deployment": "57passed/0skipped; SQLite AND real PostgreSQL, bounded two-writer CAS/replay, actual fresh interpreter, nullable FK preservation and injected migration rollback",
+    "components": "111passed/0skipped",
+    "invoice_output": "129passed/0skipped",
+    "actual_RCC_worker": "130passed/0skipped, RCC18.19.3; fixed invoice task, not generated Python compiler",
+    "portable": "1902passed/13skipped/262deselected; owned real providers, full portable Runtime selection",
+    "installed_wheel_contracts": "40passed",
+    "static": "configured lint/typecheck408PASS",
+    "original_reds": [
+      "UI storage2failed/2unconfiguredPGskipped",
+      "UI deployment missing typed fields2failed",
+      "schema snapshot mismatch1failed",
+      "static6errors/2files; fixed narrowing/loop variable types",
+      "isolated deployment19fixtureerrors before exact hash-verified RCC fixture was supplied; then19pass"
+    ]
+  },
+  "receipts": [
+    {
+      "path": "/workspace/actions-327-state/evidence/foundry-schema18-frozen-20261023/dac58091-e8db-440d-b190-3c7fb01611c3/foundry_storage.xml",
+      "sha256": "b911d1bf9f02ee259bf4bdbb2cefc415bf14a1abf30772c71244440da6484eea"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/foundry-schema18-frozen-20261023/dac58091-e8db-440d-b190-3c7fb01611c3/components.xml",
+      "sha256": "bb7fc1882c931f50b1fbd5bcfaafcb6939bce62bbb74316cd7aac7af0a27a2d7"
+    },
+    {
+      "path": "/workspace/actions-327-state/evidence/foundry-schema18-frozen-20261023/dac58091-e8db-440d-b190-3c7fb01611c3/worker.xml",
+      "sha256": "3a4c49b738325a02165c05285a24207e3f246e0960cbaadfb30830bc4b2bc49a"
+    }
+  ],
+  "documentation_delta": {
+    "repository_operations": "Forward nullable FK migration, alias-key Core embedding, separate Canvas source and Deployment digests, no UI execution profiles, preserved snapshot pin, atomic head/request/audit and reauthorization",
+    "foundry_71": "Exact UI-only typed consumer interface and source hash function; authoring SQL adapter remains pending"
+  },
+  "cleanup": "PASS",
+  "rollback": "Preserve coordinated schema17 SQL/object/journal backup before migration18; marker deletion is not a downgrade. No production migration or backend change. Revert integration commits for code rollback, never reopen changed state with an older binary.",
+  "remaining": [
+    "shared SQL authoring staging/activation adapter",
+    "real compiler Package admission/Run integration",
+    "boot/CLI/official resource bridge wiring",
+    "genuine installed SDK/fresh Codex/basic host and second Python app",
+    "E1 NEEDS_OPERATOR; Dakota STOP",
+    "all unified release matrix gates; celld NO-GO"
+  ],
+  "upstream_disposition": "Existing RCC local-carrier draft only; no upstream mutation",
+  "authority": "No community/public release/production/other repository/credential changes without separate approval",
+  "raw_receipt": "/workspace/actions-327-state/evidence/foundry-schema18-frozen-20261023/dac58091-e8db-440d-b190-3c7fb01611c3/receipt.json"
+}

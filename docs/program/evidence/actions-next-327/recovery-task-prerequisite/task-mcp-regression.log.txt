@@ -1,0 +1,348 @@
++ poetry run pytest tests/action_server_tests/mcp -m not integration_test -q --junitxml=/workspace/actions-recovery-327/evidence/task-mcp-regression.xml --robocorp-log-output=/workspace/actions-recovery-327/evidence/task-mcp-regression-log (in /workspace/actions/action_server)
+...............F........................................................ [ 50%]
+..........................................F............................  [100%]
+=================================== FAILURES ===================================
+________ test_v12_migration_creates_empty_history_matching_fresh_schema ________
+
+self = <actions.server._database.Database object at 0x7fdc1950cad0>
+sql = '\nCREATE INDEX foundry_source_revision_workspace_id_non_unique_index ON foundry_source_revision(workspace_id);\n'
+values = None
+
+    def execute(self, sql: str, values: Optional[list] = None) -> None:
+        """
+        Executes a query which will change the database.
+
+        Requires the write-lock to be acquired since SQLite can't deal with
+        writes in multiple threads concurrently.
+        """
+
+        if self.verbose:
+            self._print_sql(sql, values)
+        try:
+            if not self.in_transaction():
+                raise DBError(
+                    "When running an sql that changes the DB, it's expected that "
+                    "a transaction is in place."
+                )
+            conn = self._tlocal.conn
+            assert conn is not None
+            with self._write_lock:
+                sql = self._adapt_sql(sql, values)
+                if values:
+                    conn.execute(sql, values)
+                else:
+>                   conn.execute(sql)
+E                   sqlite3.OperationalError: index foundry_source_revision_workspace_id_non_unique_index already exists
+
+src/actions/server/_database.py:1154: OperationalError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-190/test_v12_migration_creates_emp0')
+
+    def test_v12_migration_creates_empty_history_matching_fresh_schema(tmp_path):
+        from actions.server._models import create_db, load_db
+        from actions.server.migrations import CURRENT_VERSION, migrate_db
+
+        path = tmp_path / "old.db"
+        with create_db(path) as db:
+            expected_columns = db.list_table_and_columns()
+            expected_indexes = db.list_indexes()
+            with db.transaction():
+                from action_server_tests.fixtures import (
+                    drop_foundry_records_for_backdated_fixture,
+                )
+
+                drop_foundry_records_for_backdated_fixture(db)
+                # Restore the real pre-13 schema, including absence of later records.
+                for table in (
+                    "invoice_review",
+                    "fenced_work_item",
+                    "run_output",
+                    "run_attempt",
+                    "run_pin",
+                    "run_access_grant",
+                    "run_admission",
+                    "workspace",
+                ):
+                    db.execute("DROP TABLE " + table)
+                db.execute("DROP TABLE mcp_catalog_name")
+                db.execute("DROP TABLE mcp_resource_routing")
+                db.execute("DELETE FROM migration")
+                db.execute(
+                    "INSERT INTO migration(id,name) VALUES(12,'reconcile_run_columns')"
+                )
+>       assert migrate_db(path, CURRENT_VERSION)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/action_server_tests/mcp/test_alias_history.py:442:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src/actions/server/migrations/__init__.py:175: in migrate_db
+    _migrate_to(db, db_migration_version)
+src/actions/server/migrations/__init__.py:73: in _migrate_to
+    mod.migrate(db)
+src/actions/server/migrations/migration_add_provider_registry.py:15: in migrate
+    db.execute(statement)
+src/actions/server/_database.py:1158: in execute
+    self._raise_execute_error(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <actions.server._database.Database object at 0x7fdc1950cad0>
+msg = "Error running sql: '\\nCREATE INDEX foundry_source_revision_workspace_id_non_unique_index ON foundry_source_revision(workspace_id);\\n' with values: None"
+
+    def _raise_execute_error(self, msg):
+        if self.verbose:
+            print(msg, file=sys.stderr)
+>       raise DBError(msg)
+E       actions.server._database.DBError: Error running sql: '\nCREATE INDEX foundry_source_revision_workspace_id_non_unique_index ON foundry_source_revision(workspace_id);\n' with values: None
+
+src/actions/server/_database.py:1038: DBError
+----------------------------- Captured stderr call -----------------------------
+TEST PROCESS: 2026-10-25 04:48:34,471 - actions.server.migrations - INFO - Checking migration status for database backend: sqlite
+TEST PROCESS: 2026-10-25 04:48:34,471 - actions.server._database - DEBUG - sqlite version: 3.53.4
+TEST PROCESS: 2026-10-25 04:48:34,473 - actions.server.migrations - INFO - Preparing to migrate database at: /tmp/pytest-of-agent/pytest-190/test_v12_migration_creates_emp0/old.db
+TEST PROCESS: 2026-10-25 04:48:34,473 - actions.server.migrations - INFO - Creating backup at: /tmp/pytest-of-agent/pytest-190/test_v12_migration_creates_emp0/old.db-pre-migration-21-1792903714.4733558.bak
+TEST PROCESS: 2026-10-25 04:48:34,475 - actions.server.migrations - INFO - Will migrate to version: 13 (add_mcp_catalog_names)
+TEST PROCESS: 2026-10-25 04:48:34,477 - actions.server.migrations - INFO - Will migrate to version: 14 (add_mcp_resource_routing)
+TEST PROCESS: 2026-10-25 04:48:34,479 - actions.server.migrations - INFO - Will migrate to version: 15 (add_run_outputs)
+TEST PROCESS: 2026-10-25 04:48:34,489 - actions.server.migrations - INFO - Will migrate to version: 16 (add_invoice_reviews)
+TEST PROCESS: 2026-10-25 04:48:34,493 - actions.server.migrations - INFO - Will migrate to version: 17 (add_foundry_records)
+TEST PROCESS: 2026-10-25 04:48:34,502 - actions.server.migrations - INFO - Will migrate to version: 18 (allow_package_less_canvas)
+TEST PROCESS: 2026-10-25 04:48:34,506 - actions.server.migrations - INFO - Will migrate to version: 19 (add_provider_registry)
+TEST PROCESS: 2026-10-25 04:48:34,509 - actions.server._database - ERROR - Error. Rolling back database
+Traceback (most recent call last):
+  File "/workspace/actions/action_server/src/actions/server/_database.py", line 1154, in execute
+    conn.execute(sql)
+sqlite3.OperationalError: index foundry_source_revision_workspace_id_non_unique_index already exists
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/actions/action_server/src/actions/server/_database.py", line 656, in transaction
+    yield
+  File "/workspace/actions/action_server/src/actions/server/migrations/__init__.py", line 175, in migrate_db
+    _migrate_to(db, db_migration_version)
+  File "/workspace/actions/action_server/src/actions/server/migrations/__init__.py", line 73, in _migrate_to
+    mod.migrate(db)
+  File "/workspace/actions/action_server/src/actions/server/migrations/migration_add_provider_registry.py", line 15, in migrate
+    db.execute(statement)
+  File "/workspace/actions/action_server/src/actions/server/_database.py", line 1158, in execute
+    self._raise_execute_error(
+  File "/workspace/actions/action_server/src/actions/server/_database.py", line 1038, in _raise_execute_error
+    raise DBError(msg)
+actions.server._database.DBError: Error running sql: '\nCREATE INDEX foundry_source_revision_workspace_id_non_unique_index ON foundry_source_revision(workspace_id);\n' with values: None
+------------------------------ Captured log call -------------------------------
+INFO     actions.server.migrations:__init__.py:228 Checking migration status for database backend: sqlite
+DEBUG    actions.server._database:_database.py:455 sqlite version: 3.53.4
+INFO     actions.server.migrations:__init__.py:109 Preparing to migrate database at: /tmp/pytest-of-agent/pytest-190/test_v12_migration_creates_emp0/old.db
+INFO     actions.server.migrations:__init__.py:116 Creating backup at: /tmp/pytest-of-agent/pytest-190/test_v12_migration_creates_emp0/old.db-pre-migration-21-1792903714.4733558.bak
+INFO     actions.server.migrations:__init__.py:164 Will migrate to version: 13 (add_mcp_catalog_names)
+INFO     actions.server.migrations:__init__.py:164 Will migrate to version: 14 (add_mcp_resource_routing)
+INFO     actions.server.migrations:__init__.py:164 Will migrate to version: 15 (add_run_outputs)
+INFO     actions.server.migrations:__init__.py:164 Will migrate to version: 16 (add_invoice_reviews)
+INFO     actions.server.migrations:__init__.py:164 Will migrate to version: 17 (add_foundry_records)
+INFO     actions.server.migrations:__init__.py:164 Will migrate to version: 18 (allow_package_less_canvas)
+INFO     actions.server.migrations:__init__.py:164 Will migrate to version: 19 (add_provider_registry)
+ERROR    actions.server._database:_database.py:659 Error. Rolling back database
+Traceback (most recent call last):
+  File "/workspace/actions/action_server/src/actions/server/_database.py", line 1154, in execute
+    conn.execute(sql)
+sqlite3.OperationalError: index foundry_source_revision_workspace_id_non_unique_index already exists
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/actions/action_server/src/actions/server/_database.py", line 656, in transaction
+    yield
+  File "/workspace/actions/action_server/src/actions/server/migrations/__init__.py", line 175, in migrate_db
+    _migrate_to(db, db_migration_version)
+  File "/workspace/actions/action_server/src/actions/server/migrations/__init__.py", line 73, in _migrate_to
+    mod.migrate(db)
+  File "/workspace/actions/action_server/src/actions/server/migrations/migration_add_provider_registry.py", line 15, in migrate
+    db.execute(statement)
+  File "/workspace/actions/action_server/src/actions/server/_database.py", line 1158, in execute
+    self._raise_execute_error(
+  File "/workspace/actions/action_server/src/actions/server/_database.py", line 1038, in _raise_execute_error
+    raise DBError(msg)
+actions.server._database.DBError: Error running sql: '\nCREATE INDEX foundry_source_revision_workspace_id_non_unique_index ON foundry_source_revision(workspace_id);\n' with values: None
+___ test_v13_migration_preserves_exact_keys_but_starts_empty_routing_history ___
+
+self = <actions.server._database.Database object at 0x7fdc192d2570>
+sql = '\nCREATE INDEX foundry_source_revision_workspace_id_non_unique_index ON foundry_source_revision(workspace_id);\n'
+values = None
+
+    def execute(self, sql: str, values: Optional[list] = None) -> None:
+        """
+        Executes a query which will change the database.
+
+        Requires the write-lock to be acquired since SQLite can't deal with
+        writes in multiple threads concurrently.
+        """
+
+        if self.verbose:
+            self._print_sql(sql, values)
+        try:
+            if not self.in_transaction():
+                raise DBError(
+                    "When running an sql that changes the DB, it's expected that "
+                    "a transaction is in place."
+                )
+            conn = self._tlocal.conn
+            assert conn is not None
+            with self._write_lock:
+                sql = self._adapt_sql(sql, values)
+                if values:
+                    conn.execute(sql, values)
+                else:
+>                   conn.execute(sql)
+E                   sqlite3.OperationalError: index foundry_source_revision_workspace_id_non_unique_index already exists
+
+src/actions/server/_database.py:1154: OperationalError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-190/test_v13_migration_preserves_e0')
+
+    def test_v13_migration_preserves_exact_keys_but_starts_empty_routing_history(tmp_path):
+        from actions.server._models import (
+            McpCatalogName,
+            McpResourceRouting,
+            create_db,
+            load_db,
+        )
+        from actions.server.migrations import CURRENT_VERSION, migrate_db
+
+        path = tmp_path / "old.db"
+        with create_db(path) as db:
+            columns, indexes = db.list_table_and_columns(), db.list_indexes()
+            with db.transaction():
+                db.insert(McpCatalogName("old-key", "tool", "old", "owner", "read"))
+                db.execute("DROP TABLE mcp_resource_routing")
+                from action_server_tests.fixtures import (
+                    drop_foundry_records_for_backdated_fixture,
+                )
+
+                drop_foundry_records_for_backdated_fixture(db)
+                # Restore the real pre-14 schema, including absence of later records.
+                for table in (
+                    "invoice_review",
+                    "fenced_work_item",
+                    "run_output",
+                    "run_attempt",
+                    "run_pin",
+                    "run_access_grant",
+                    "run_admission",
+                    "workspace",
+                ):
+                    db.execute("DROP TABLE " + table)
+                db.execute("DELETE FROM migration")
+                db.execute(
+                    "INSERT INTO migration(id,name) VALUES(13,'add_mcp_catalog_names')"
+                )
+>       assert migrate_db(path, CURRENT_VERSION)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/action_server_tests/mcp/test_resource_history.py:480:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src/actions/server/migrations/__init__.py:175: in migrate_db
+    _migrate_to(db, db_migration_version)
+src/actions/server/migrations/__init__.py:73: in _migrate_to
+    mod.migrate(db)
+src/actions/server/migrations/migration_add_provider_registry.py:15: in migrate
+    db.execute(statement)
+src/actions/server/_database.py:1158: in execute
+    self._raise_execute_error(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <actions.server._database.Database object at 0x7fdc192d2570>
+msg = "Error running sql: '\\nCREATE INDEX foundry_source_revision_workspace_id_non_unique_index ON foundry_source_revision(workspace_id);\\n' with values: None"
+
+    def _raise_execute_error(self, msg):
+        if self.verbose:
+            print(msg, file=sys.stderr)
+>       raise DBError(msg)
+E       actions.server._database.DBError: Error running sql: '\nCREATE INDEX foundry_source_revision_workspace_id_non_unique_index ON foundry_source_revision(workspace_id);\n' with values: None
+
+src/actions/server/_database.py:1038: DBError
+----------------------------- Captured stderr call -----------------------------
+TEST PROCESS: 2026-10-25 04:48:50,780 - actions.server.migrations - INFO - Checking migration status for database backend: sqlite
+TEST PROCESS: 2026-10-25 04:48:50,780 - actions.server._database - DEBUG - sqlite version: 3.53.4
+TEST PROCESS: 2026-10-25 04:48:50,781 - actions.server.migrations - INFO - Preparing to migrate database at: /tmp/pytest-of-agent/pytest-190/test_v13_migration_preserves_e0/old.db
+TEST PROCESS: 2026-10-25 04:48:50,781 - actions.server.migrations - INFO - Creating backup at: /tmp/pytest-of-agent/pytest-190/test_v13_migration_preserves_e0/old.db-pre-migration-21-1792903730.7818544.bak
+TEST PROCESS: 2026-10-25 04:48:50,784 - actions.server.migrations - INFO - Will migrate to version: 14 (add_mcp_resource_routing)
+TEST PROCESS: 2026-10-25 04:48:50,785 - actions.server.migrations - INFO - Will migrate to version: 15 (add_run_outputs)
+TEST PROCESS: 2026-10-25 04:48:50,793 - actions.server.migrations - INFO - Will migrate to version: 16 (add_invoice_reviews)
+TEST PROCESS: 2026-10-25 04:48:50,798 - actions.server.migrations - INFO - Will migrate to version: 17 (add_foundry_records)
+TEST PROCESS: 2026-10-25 04:48:50,807 - actions.server.migrations - INFO - Will migrate to version: 18 (allow_package_less_canvas)
+TEST PROCESS: 2026-10-25 04:48:50,810 - actions.server.migrations - INFO - Will migrate to version: 19 (add_provider_registry)
+TEST PROCESS: 2026-10-25 04:48:50,813 - actions.server._database - ERROR - Error. Rolling back database
+Traceback (most recent call last):
+  File "/workspace/actions/action_server/src/actions/server/_database.py", line 1154, in execute
+    conn.execute(sql)
+sqlite3.OperationalError: index foundry_source_revision_workspace_id_non_unique_index already exists
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/actions/action_server/src/actions/server/_database.py", line 656, in transaction
+    yield
+  File "/workspace/actions/action_server/src/actions/server/migrations/__init__.py", line 175, in migrate_db
+    _migrate_to(db, db_migration_version)
+  File "/workspace/actions/action_server/src/actions/server/migrations/__init__.py", line 73, in _migrate_to
+    mod.migrate(db)
+  File "/workspace/actions/action_server/src/actions/server/migrations/migration_add_provider_registry.py", line 15, in migrate
+    db.execute(statement)
+  File "/workspace/actions/action_server/src/actions/server/_database.py", line 1158, in execute
+    self._raise_execute_error(
+  File "/workspace/actions/action_server/src/actions/server/_database.py", line 1038, in _raise_execute_error
+    raise DBError(msg)
+actions.server._database.DBError: Error running sql: '\nCREATE INDEX foundry_source_revision_workspace_id_non_unique_index ON foundry_source_revision(workspace_id);\n' with values: None
+------------------------------ Captured log call -------------------------------
+INFO     actions.server.migrations:__init__.py:228 Checking migration status for database backend: sqlite
+DEBUG    actions.server._database:_database.py:455 sqlite version: 3.53.4
+INFO     actions.server.migrations:__init__.py:109 Preparing to migrate database at: /tmp/pytest-of-agent/pytest-190/test_v13_migration_preserves_e0/old.db
+INFO     actions.server.migrations:__init__.py:116 Creating backup at: /tmp/pytest-of-agent/pytest-190/test_v13_migration_preserves_e0/old.db-pre-migration-21-1792903730.7818544.bak
+INFO     actions.server.migrations:__init__.py:164 Will migrate to version: 14 (add_mcp_resource_routing)
+INFO     actions.server.migrations:__init__.py:164 Will migrate to version: 15 (add_run_outputs)
+INFO     actions.server.migrations:__init__.py:164 Will migrate to version: 16 (add_invoice_reviews)
+INFO     actions.server.migrations:__init__.py:164 Will migrate to version: 17 (add_foundry_records)
+INFO     actions.server.migrations:__init__.py:164 Will migrate to version: 18 (allow_package_less_canvas)
+INFO     actions.server.migrations:__init__.py:164 Will migrate to version: 19 (add_provider_registry)
+ERROR    actions.server._database:_database.py:659 Error. Rolling back database
+Traceback (most recent call last):
+  File "/workspace/actions/action_server/src/actions/server/_database.py", line 1154, in execute
+    conn.execute(sql)
+sqlite3.OperationalError: index foundry_source_revision_workspace_id_non_unique_index already exists
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/actions/action_server/src/actions/server/_database.py", line 656, in transaction
+    yield
+  File "/workspace/actions/action_server/src/actions/server/migrations/__init__.py", line 175, in migrate_db
+    _migrate_to(db, db_migration_version)
+  File "/workspace/actions/action_server/src/actions/server/migrations/__init__.py", line 73, in _migrate_to
+    mod.migrate(db)
+  File "/workspace/actions/action_server/src/actions/server/migrations/migration_add_provider_registry.py", line 15, in migrate
+    db.execute(statement)
+  File "/workspace/actions/action_server/src/actions/server/_database.py", line 1158, in execute
+    self._raise_execute_error(
+  File "/workspace/actions/action_server/src/actions/server/_database.py", line 1038, in _raise_execute_error
+    raise DBError(msg)
+actions.server._database.DBError: Error running sql: '\nCREATE INDEX foundry_source_revision_workspace_id_non_unique_index ON foundry_source_revision(workspace_id);\n' with values: None
+- generated xml file: /workspace/actions-recovery-327/evidence/task-mcp-regression.xml -
+=========================== short test summary info ============================
+FAILED tests/action_server_tests/mcp/test_alias_history.py::test_v12_migration_creates_empty_history_matching_fresh_schema
+FAILED tests/action_server_tests/mcp/test_resource_history.py::test_v13_migration_preserves_exact_keys_but_starts_empty_routing_history
+2 failed, 141 passed, 18 deselected in 25.36s
+Log (html): /workspace/actions-recovery-327/evidence/task-mcp-regression-log/log.html
+Traceback (most recent call last):
+  File "/workspace/actions-cloud/package-command.py", line 13, in <module>
+    toolkit.poetry(package, *arguments)
+  File "/workspace/actions/developer/toolkit.py", line 76, in poetry
+    run(["poetry", *arguments], REPOSITORY_ROOT / package)
+  File "/workspace/actions/developer/toolkit.py", line 72, in run
+    subprocess.run(command, cwd=cwd, env=environment, check=True)
+  File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['poetry', 'run', 'pytest', 'tests/action_server_tests/mcp', '-m', 'not integration_test', '-q', '--junitxml=/workspace/actions-recovery-327/evidence/task-mcp-regression.xml', '--robocorp-log-output=/workspace/actions-recovery-327/evidence/task-mcp-regression-log']' returned non-zero exit status 1.

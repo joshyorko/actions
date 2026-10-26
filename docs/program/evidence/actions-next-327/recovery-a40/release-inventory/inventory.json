@@ -1,0 +1,30 @@
+[
+  {
+    "path": "README.md",
+    "sha256": "5c0bda85b55d7007be69fa73bfbfc4c4420c1edbf5168610e702906b3ac951b7"
+  },
+  {
+    "path": "frozen-a39-inventory.json",
+    "sha256": "7b68dfd5e998bbca07d2292f84786a246c7d476d0f77e69a165aed9113213d82"
+  },
+  {
+    "path": "frozen-a39-inventory.log.b64",
+    "sha256": "348e5d1087301b1a41d610dbea5fc05db65da6719e4a6caed8429c11925b4c1a"
+  },
+  {
+    "path": "full.log.b64",
+    "sha256": "785b128b587b5bb7687f03c28b79c571561130544d77ce6a8a47b41bfe336561"
+  },
+  {
+    "path": "full.xml.b64",
+    "sha256": "4b1f769cfc785404e4442543f61cf70d07a76b4e162a958c14d90bf2ea04ce1c"
+  },
+  {
+    "path": "tests.log.b64",
+    "sha256": "7994a8cdc7d86d7482b2e21f29adb8751292e829fe478e621455be9b419d9ffe"
+  },
+  {
+    "path": "tests.xml.b64",
+    "sha256": "496f56d4b1aaf05133acfabf9b4ca20da1293a4dc7c364d097672aa8c1391efd"
+  }
+]

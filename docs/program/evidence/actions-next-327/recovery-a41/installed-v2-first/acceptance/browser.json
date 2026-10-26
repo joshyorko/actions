@@ -1,0 +1,9 @@
+{
+  "status": "FAIL",
+  "screenshots": [
+    "v2-mounted.png"
+  ],
+  "officialHost": "ext-apps2.0.3",
+  "actualChatGPT": false,
+  "failure": "Error: expect(locator).toContainText(expected) failed\n\nLocator: getByRole('region', { name: 'Processing log entries' })\nExpected substring: \"Processed alpha beta\"\nTimeout: 180000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"to.have.text\" with timeout 180000ms\n  - waiting for getByRole('region', { name: 'Processing log entries' })\n"
+}

@@ -1,0 +1,27 @@
+# a59 installed Data service component receipt
+
+Status: **PASS_SERVICE_COMPONENT** for installed `DuckDBSealedScan`, `SqlProviderRegistry`, and `SqlFoundryAuthorization` over the frozen a59 Runtime wheel (`cca5383bd331bfc68227bf5c2749f867cc3d9e7cc7daaeb3f13fbe9125d5960a`, Runtime 1.1.0a59, product source `123e772ee36c44cfd96ea62a6c599bb4f55c8f1b`, tree `7d6658bc3f2d536519c8698503f8b379c7b3ed56`). The consumer interpreter asserted all imported product module origins under its installed site-packages. The final supervised run passed with no remaining owned processes. The immutable direct decoder receipt remains separately preserved in the parent directory; its README recorded 27,878 bytes for the initial component subdirectory before this service-path evidence was added.
+
+The service run used a task-owned SQLite Database with the installed model DDL for Workspace, provider source/revision/availability, access grants, requests and audit. The installed registry stored source/descriptor metadata and verified retained sealed objects. Installed persisted authorization allowed the exact reference grant to scan CSV and Parquet; both real DuckDB scans returned identical two-row typed payloads. A second principal without a grant was denied. Removing `data.read` from the persisted CSV reference grant caused the next scan to fail with `AccessDenied`. The installed adapter also rejected the too-small operation row limit and an already-cancelled request. Request and audit rows were read back from the SQLite Database.
+
+Exact executed command:
+
+```text
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3 /workspace/327-probes/supervise_command.py --receipt /workspace/327-probes/a59-installed-data/service-path/supervisor.json --log /workspace/327-probes/a59-installed-data/service-path/supervisor.log --seconds 180 /workspace/327-probes/a59-data-consumer/consumer/bin/python /workspace/327-probes/a59-installed-data/service-path/run_installed_data_service.py
+```
+
+Supervisor exit 0; `result.json` reports 14 checks. Total evidence under `/workspace/327-probes/a59-installed-data` remained below 50 MiB. Free space was 11,160,309,760 bytes at run start, 11,160,305,664 bytes after fixture generation, and 11,160,199,168 bytes after the service run; at final inspection free space was 11,160,178,688 bytes. The parent directory, including both receipts and failure records, measured about 242 KB total. All measurements were above the 10 GiB floor.
+
+The service fixture uses synthetic app-level grants and a reduced schema created from installed model DDL; it is not a full migrated Runtime database. `FoundryAccessGrant` has no expiry field or clock policy, so the gate proves revocation by changing a persisted operations list and makes no expiry claim. The attempted PostgreSQL continuation was denied before execution by automatic review; exact target/action and the rejection text are retained in [postgres-block.json](postgres-block.json). No PostgreSQL container or role was created, and no alternate PostgreSQL setup was attempted.
+
+This is still not the original Data row acceptance: there was no immutable compiled Package/capability binding, Package admission, Run/Attempt, generated RCC worker, PostgreSQL engine readback, paging/export/cost API or grant expiry. `DuckDBSealedScan` is a bounded service component.
+
+## Canonical documentation proposal (not applied)
+
+Propose adding this evidence-backed section to `actions/docs/skills/repository-operations.md` under a heading such as “Installed sealed Data service qualification”:
+
+> Keep installed sealed Data proofs layered. First bind candidate wheel SHA, Runtime version and imported module origins to a clean installed consumer; direct CSV/Parquet decoder checks establish codec, manifest and object-seal behavior only. A service-component proof additionally exercises the installed `SqlProviderRegistry`, `SqlFoundryAuthorization`, retained source evidence and actual DuckDB scan against persisted typed metadata and grants. Label a reduced synthetic SQLite schema and fixture grants as component authority; they do not establish compiler-created immutable Package/capability binding, Run/Attempt admission, generated worker execution or full Runtime migration parity. The current `FoundryAccessGrant` stores allowed operations without an expiry field, so a persisted `data.read` revocation check is evidence of revocation only, not expiry. Keep PostgreSQL engine evidence separate and require an approved owned fixture before changing database roles or grants.
+
+Evidence: `result.json`, `supervisor.json`, installed module origins and the frozen wheel hash, `attempt-1.log` (service assertions ran before a harness readback outside `Database.connect`), `failed-attempts/attempt-2.log` (repeat used the existing SQLite table/index names), and the source contracts/tests in `action_server/src/actions/server/data_queries/` and `action_server/tests/action_server_tests/test_sealed_scan.py` / `test_sealed_postgres.py`. The final successful run used unique task-owned database/object paths. No repository documentation or product code was edited.
+
+Proposed matrix row 739 update: record this installed registry/authorization/DuckDB component PASS and keep the row open for immutable Package/Run execution, PostgreSQL readback, durable lineage/restart, paging/export/cost and expiry. Upstream disposition: none.

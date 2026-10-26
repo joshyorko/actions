@@ -1,0 +1,17 @@
+[
+  "tests/contract_tests/test_robot_package_builder.py::test_deterministic_measured_direct_package",
+  "tests/contract_tests/test_robot_package_builder.py::test_request_rejects_authority_fields[Actor]",
+  "tests/contract_tests/test_robot_package_builder.py::test_request_rejects_authority_fields[workspace]",
+  "tests/contract_tests/test_robot_package_builder.py::test_request_rejects_authority_fields[Run]",
+  "tests/contract_tests/test_robot_package_builder.py::test_request_rejects_authority_fields[fence]",
+  "tests/contract_tests/test_robot_package_builder.py::test_request_rejects_authority_fields[provider]",
+  "tests/contract_tests/test_robot_package_builder.py::test_request_rejects_authority_fields[credentials]",
+  "tests/contract_tests/test_robot_package_builder.py::test_request_rejects_authority_fields[RobotSelection]",
+  "tests/contract_tests/test_robot_package_builder.py::test_request_rejects_authority_fields[preparation]",
+  "tests/contract_tests/test_robot_package_builder.py::test_invalid_suite_rejected[../tasks.robot]",
+  "tests/contract_tests/test_robot_package_builder.py::test_invalid_suite_rejected[/tasks.robot]",
+  "tests/contract_tests/test_robot_package_builder.py::test_invalid_suite_rejected[missing.robot]",
+  "tests/contract_tests/test_robot_package_builder.py::test_invalid_suite_rejected[tasks.py]",
+  "tests/contract_tests/test_robot_package_builder.py::test_external_schema_rejected",
+  "tests/contract_tests/test_robot_package_builder.py::test_rcc_requires_exact_retained_package"
+]

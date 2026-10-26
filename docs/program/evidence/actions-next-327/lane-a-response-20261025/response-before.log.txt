@@ -1,0 +1,578 @@
+"/workspace/lane-a/developer/toolkit.yaml" as robot.yaml is:
+# Repository developer toolkit.
+#
+# RCC owns the reproducible toolchain and task boundary. Poetry remains the
+# dependency and package-release authority inside each package.
+
+tasks:
+  Doctor:
+    shell: python toolkit.py doctor
+
+devTasks:
+  Doctor:
+    shell: python toolkit.py doctor
+  Bootstrap:
+    shell: python toolkit.py bootstrap
+  Test:
+    shell: python toolkit.py test
+  ToolkitTest:
+    shell: python toolkit.py toolkit-test
+  Lint:
+    shell: python toolkit.py lint
+  Typecheck:
+    shell: python toolkit.py typecheck
+  Docs:
+    shell: python toolkit.py docs
+  CheckAll:
+    shell: python toolkit.py check-all
+  Coverage:
+    shell: python toolkit.py coverage
+  FrontendTest:
+    shell: python toolkit.py frontend-test
+  InstallCommunity:
+    shell: python toolkit.py install-community
+  InvoiceQueryTest:
+    shell: python toolkit.py invoice-query-test
+  InvoiceReconciliationDemo:
+    shell: python toolkit.py invoice-reconciliation-demo
+  FencedWorkItemsTest:
+    shell: python toolkit.py fenced-work-items-test
+
+environmentConfigs:
+  - setup_windows_amd64.yaml
+  - setup.yaml
+
+artifactsDir: tmp
+
+PATH:
+  - .
+PYTHONPATH:
+  - .
+ignoreFiles:
+  - ../.gitignore
+
+Note! For now, resolved effective environment configuration file is "/workspace/lane-a/developer/setup.yaml".
+####  Progress: 00/15  v18.19.3     0.021s  Context: "" <agent@71cd163cf8ad> [linux_amd64/Debian GNU/Linux 13 (trixie) [id=debian; version=13]].
+####  Progress: 01/15  v18.19.3     0.001s  Fresh [private mode] holotree environment 9a080d0f-3bcf-90aa-16c6-25dc61b0ece5. (parent/pid: 12422/12425)
+####  Progress: 02/15  v18.19.3     0.001s  Holotree blueprint is "318089d9095ad813" [linux_amd64 with 4 workers on 5 CPUs from "setup.yaml"].
+FINAL unified conda environment descriptor:
+---
+channels:
+- conda-forge
+dependencies:
+- python=3.12
+- git=2.46.0
+- nodejs=20.19.3
+- go=1.23.6
+- jq=1.7.1
+- uv=0.9.26
+- pip=25.0
+- pip:
+  - invoke==2.2.0
+  - poetry==2.1.1
+  - pyyaml==6.0.2
+  - pytest==8.3.4
+  - ruff==0.8.6
+---
+####  Progress: 14/15  v18.19.3     0.444s  Restore space from library [with 4 workers on 5 CPUs; with compression: true].
+Installation plan is: /workspace/lane-a-state/rcc/holotree/c2fd1aa_5a1fac3_9fcd2534/rcc_plan.log
+Environment configuration descriptor is: /workspace/lane-a-state/rcc/holotree/c2fd1aa_5a1fac3_9fcd2534/identity.yaml
+####  Progress: 15/15  v18.19.3     0.790s  Fresh holotree done [with 4 workers on 5 CPUs].
+Note: [Before run] Artifact dir "/workspace/lane-a/developer/tmp" already has "environment_linux_amd64_freeze.yaml" in it.
+Note: [Before run] Artifact dir "/workspace/lane-a/developer/tmp" already has "stderr.log" in it.
+Note: [Before run] Artifact dir "/workspace/lane-a/developer/tmp" already has "stdout.log" in it.
+Above notes mean, that there were files present in directory that was supposed to be empty!
+In robot development phase, it might be ok to have these files while building robot.
+In production robot/assistant, this might be a mistake, where development files were
+left inside robot.zip file. Report these to developer who made this robot/assistant.
+
+ RUN  v4.1.10 /workspace/lane-a/action_server/frontend/apps/canvas-view
+
+Browserslist: browsers data (caniuse-lite) is 10 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+ ↓ src/semantic-renderer/semantic-components.test.tsx (16 tests | 16 skipped)
+ ↓ src/query-results/InvoiceReviewPanel.test.tsx (5 tests | 5 skipped)
+ ↓ src/query-results/QueryResultsView.test.tsx (12 tests | 12 skipped)
+ ↓ src/semantic-renderer/generic-input.test.tsx (6 tests | 6 skipped)
+ ↓ src/semantic-renderer/generic-layout.test.tsx (7 tests | 7 skipped)
+ ↓ src/semantic-renderer/mcp-bridge.test.tsx (12 tests | 12 skipped)
+ ↓ src/semantic-renderer/generic-output.test.tsx (6 tests | 6 skipped)
+ ↓ src/query-results/InvoiceReconciliation.test.tsx (2 tests | 2 skipped)
+ ↓ src/semantic-renderer/generic-execution.test.tsx (4 tests | 4 skipped)
+ ↓ src/query-results/CanvasContractRoundTrip.test.tsx (2 tests | 2 skipped)
+ ❯ src/semantic-renderer/generic-view.test.tsx (4 tests | 3 failed | 1 skipped) 3239ms
+   ↓ semantic form explicitly submits and shows persistent Run status without mount execution
+   × announces a response without claiming results for a failed Run 1191ms
+   × announces a response without claiming results for a running Run 1025ms
+   × announces a response without claiming results for a cancel_requested Run 1019ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/semantic-renderer/generic-view.test.tsx > announces a response without claiming results for a failed Run
+AssertionError: expected 'Run job: results ready.' to be 'Run job: response received.' // Object.is equality
+
+Ignored nodes: comments, script, style
+[36m<html>[39m
+  [36m<head />[39m
+  [36m<body>[39m
+    [36m<div>[39m
+      [36m<main[39m
+        [33maria-labelledby[39m=[32m"_r_0_"[39m
+        [33mclass[39m=[32m"semantic-canvas"[39m
+      [36m>[39m
+        [36m<header[39m
+          [33mclass[39m=[32m"semantic-canvas__header"[39m
+        [36m>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"semantic-canvas__eyebrow"[39m
+          [36m>[39m
+            [0mCanvas view[0m
+          [36m</p>[39m
+          [36m<h1[39m
+            [33mid[39m=[32m"_r_0_"[39m
+          [36m>[39m
+            [0mGeneric job[0m
+          [36m</h1>[39m
+          [36m<dl[39m
+            [33mclass[39m=[32m"semantic-canvas__metadata"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<dt>[39m
+                [0mRevision[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0mRevision [0m
+                [0msha256:2222222222222222222222222222222222222222222222222222222222222222[0m
+              [36m</dd>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<dt>[39m
+                [0mAudience[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0mModel and app audiences[0m
+              [36m</dd>[39m
+            [36m</div>[39m
+          [36m</dl>[39m
+        [36m</header>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"semantic-canvas__content"[39m
+        [36m>[39m
+          [36m<section[39m
+            [33maria-label[39m=[32m"Run job"[39m
+            [33mclass[39m=[32m"semantic-form"[39m
+          [36m>[39m
+            [36m<h2[39m
+              [33mclass[39m=[32m"semantic-form__title"[39m
+            [36m>[39m
+              [0mRun job[0m
+            [36m</h2>[39m
+            [36m<form[39m
+              [33maria-busy[39m=[32m"false"[39m
+              [33mnovalidate[39m=[32m""[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"semantic-form__field"[39m
+              [36m>[39m
+                [36m<label[39m
+                  [33mfor[39m=[32m"_r_1_-field-0"[39m
+                [36m>[39m
+                  [0mValue[0m
+                [36m</label>[39m
+                [36m<input[39m
+                  [33maria-invalid[39m=[32m"false"[39m
+                  [33mid[39m=[32m"_r_1_-field-0"[39m
+                  [33mname[39m=[32m"value"[39m
+                  [33mrequired[39m=[32m""[39m
+                  [33mtype[39m=[32m"text"[39m
+                  [33mvalue[39m=[32m"hello"[39m
+                [36m/>[39m
+              [36m</div>[39m
+              [36m<button[39m
+                [33mtype[39m=[32m"submit"[39m
+              [36m>[39m
+                [0mRun job[0m
+              [36m</button>[39m
+            [36m</form>[39m
+            [36m<p[39m
+              [33maria-atomic[39m=[32m"true"[39m
+              [33mrole[39m=[32m"status"[39m
+            [36m>[39m
+              [0mRun job: results ready.[0m
+            [36m</p>[39m
+            [36m<div[39m
+              [33maria-label[39m=[32m"Run job result"[39m
+              [33mclass[39m=[32m"semantic-form__result"[39m
+            [36m/>[39m
+          [36m</section>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"semantic-stack"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"semantic-stack"[39m
+            [36m>[39m
+              [36m<section[39m
+                [33maria-label[39m=[32m"Execution run"[39m
+                [33mclass[39m=[32m"semantic-panel"[39m
+              [36m>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"semantic-status semantic-status--error"[39m
+                  [33mrole[39m=[32m"alert"[39m
+                [36m>[39m
+                  [0mfailed[0m
+                [36m</p>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"semantic-actions"[39m
+                [36m>[39m
+                  [36m<button[39m
+                    [33mtype[39m=[32m"button"[39m
+                  [36m>[39m
+                    [0mRefresh status[0m
+                  [36m</button>[39m
+                [36m</div>[39m
+              [36m</section>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+    [36m</div>[39m
+  [36m</body>[39m
+[36m</html>[39m
+
+Expected: "Run job: response received."
+Received: "Run job: results ready."
+
+ ❯ src/semantic-renderer/generic-view.test.tsx:109:82
+    107|         fireEvent.click(screen.getByRole("button", { name: "Run job" }…
+    108|         const form = screen.getByRole("region", { name: "Run job", exa…
+    109|         await waitFor(() => expect(within(form).getByRole("status").te…
+       |                                                                                  ^
+    110|         expect(call).toHaveBeenCalledTimes(2);
+    111|         expect(screen.queryByText(/results ready/i)).toBeNull();
+ ❯ runWithExpensiveErrorDiagnosticsDisabled ../../node_modules/@testing-library/dom/dist/config.js:47:12
+ ❯ checkCallback ../../node_modules/@testing-library/dom/dist/wait-for.js:124:77
+ ❯ Timeout.checkRealTimersCallback ../../node_modules/@testing-library/dom/dist/wait-for.js:118:16
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  src/semantic-renderer/generic-view.test.tsx > announces a response without claiming results for a running Run
+AssertionError: expected 'Run job: results ready.' to be 'Run job: response received.' // Object.is equality
+
+Ignored nodes: comments, script, style
+[36m<html>[39m
+  [36m<head />[39m
+  [36m<body>[39m
+    [36m<div>[39m
+      [36m<main[39m
+        [33maria-labelledby[39m=[32m"_r_2_"[39m
+        [33mclass[39m=[32m"semantic-canvas"[39m
+      [36m>[39m
+        [36m<header[39m
+          [33mclass[39m=[32m"semantic-canvas__header"[39m
+        [36m>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"semantic-canvas__eyebrow"[39m
+          [36m>[39m
+            [0mCanvas view[0m
+          [36m</p>[39m
+          [36m<h1[39m
+            [33mid[39m=[32m"_r_2_"[39m
+          [36m>[39m
+            [0mGeneric job[0m
+          [36m</h1>[39m
+          [36m<dl[39m
+            [33mclass[39m=[32m"semantic-canvas__metadata"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<dt>[39m
+                [0mRevision[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0mRevision [0m
+                [0msha256:2222222222222222222222222222222222222222222222222222222222222222[0m
+              [36m</dd>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<dt>[39m
+                [0mAudience[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0mModel and app audiences[0m
+              [36m</dd>[39m
+            [36m</div>[39m
+          [36m</dl>[39m
+        [36m</header>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"semantic-canvas__content"[39m
+        [36m>[39m
+          [36m<section[39m
+            [33maria-label[39m=[32m"Run job"[39m
+            [33mclass[39m=[32m"semantic-form"[39m
+          [36m>[39m
+            [36m<h2[39m
+              [33mclass[39m=[32m"semantic-form__title"[39m
+            [36m>[39m
+              [0mRun job[0m
+            [36m</h2>[39m
+            [36m<form[39m
+              [33maria-busy[39m=[32m"false"[39m
+              [33mnovalidate[39m=[32m""[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"semantic-form__field"[39m
+              [36m>[39m
+                [36m<label[39m
+                  [33mfor[39m=[32m"_r_3_-field-0"[39m
+                [36m>[39m
+                  [0mValue[0m
+                [36m</label>[39m
+                [36m<input[39m
+                  [33maria-invalid[39m=[32m"false"[39m
+                  [33mid[39m=[32m"_r_3_-field-0"[39m
+                  [33mname[39m=[32m"value"[39m
+                  [33mrequired[39m=[32m""[39m
+                  [33mtype[39m=[32m"text"[39m
+                  [33mvalue[39m=[32m"hello"[39m
+                [36m/>[39m
+              [36m</div>[39m
+              [36m<button[39m
+                [33mtype[39m=[32m"submit"[39m
+              [36m>[39m
+                [0mRun job[0m
+              [36m</button>[39m
+            [36m</form>[39m
+            [36m<p[39m
+              [33maria-atomic[39m=[32m"true"[39m
+              [33mrole[39m=[32m"status"[39m
+            [36m>[39m
+              [0mRun job: results ready.[0m
+            [36m</p>[39m
+            [36m<div[39m
+              [33maria-label[39m=[32m"Run job result"[39m
+              [33mclass[39m=[32m"semantic-form__result"[39m
+            [36m/>[39m
+          [36m</section>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"semantic-stack"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"semantic-stack"[39m
+            [36m>[39m
+              [36m<section[39m
+                [33maria-label[39m=[32m"Execution run"[39m
+                [33mclass[39m=[32m"semantic-panel"[39m
+              [36m>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"semantic-status semantic-status--success"[39m
+                  [33mrole[39m=[32m"status"[39m
+                [36m>[39m
+                  [0mrunning[0m
+                [36m</p>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"semantic-actions"[39m
+                [36m>[39m
+                  [36m<button[39m
+                    [33mtype[39m=[32m"button"[39m
+                  [36m>[39m
+                    [0mRefresh status[0m
+                  [36m</button>[39m
+                  [36m<button[39m
+                    [33mtype[39m=[32m"button"[39m
+                  [36m>[39m
+                    [0mRequest cancellation[0m
+                  [36m</button>[39m
+                [36m</div>[39m
+              [36m</section>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+    [36m</div>[39m
+  [36m</body>[39m
+[36m</html>[39m
+
+Expected: "Run job: response received."
+Received: "Run job: results ready."
+
+ ❯ src/semantic-renderer/generic-view.test.tsx:109:82
+    107|         fireEvent.click(screen.getByRole("button", { name: "Run job" }…
+    108|         const form = screen.getByRole("region", { name: "Run job", exa…
+    109|         await waitFor(() => expect(within(form).getByRole("status").te…
+       |                                                                                  ^
+    110|         expect(call).toHaveBeenCalledTimes(2);
+    111|         expect(screen.queryByText(/results ready/i)).toBeNull();
+ ❯ runWithExpensiveErrorDiagnosticsDisabled ../../node_modules/@testing-library/dom/dist/config.js:47:12
+ ❯ checkCallback ../../node_modules/@testing-library/dom/dist/wait-for.js:124:77
+ ❯ Timeout.checkRealTimersCallback ../../node_modules/@testing-library/dom/dist/wait-for.js:118:16
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  src/semantic-renderer/generic-view.test.tsx > announces a response without claiming results for a cancel_requested Run
+AssertionError: expected 'Run job: results ready.' to be 'Run job: response received.' // Object.is equality
+
+Ignored nodes: comments, script, style
+[36m<html>[39m
+  [36m<head />[39m
+  [36m<body>[39m
+    [36m<div>[39m
+      [36m<main[39m
+        [33maria-labelledby[39m=[32m"_r_4_"[39m
+        [33mclass[39m=[32m"semantic-canvas"[39m
+      [36m>[39m
+        [36m<header[39m
+          [33mclass[39m=[32m"semantic-canvas__header"[39m
+        [36m>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"semantic-canvas__eyebrow"[39m
+          [36m>[39m
+            [0mCanvas view[0m
+          [36m</p>[39m
+          [36m<h1[39m
+            [33mid[39m=[32m"_r_4_"[39m
+          [36m>[39m
+            [0mGeneric job[0m
+          [36m</h1>[39m
+          [36m<dl[39m
+            [33mclass[39m=[32m"semantic-canvas__metadata"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<dt>[39m
+                [0mRevision[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0mRevision [0m
+                [0msha256:2222222222222222222222222222222222222222222222222222222222222222[0m
+              [36m</dd>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<dt>[39m
+                [0mAudience[0m
+              [36m</dt>[39m
+              [36m<dd>[39m
+                [0mModel and app audiences[0m
+              [36m</dd>[39m
+            [36m</div>[39m
+          [36m</dl>[39m
+        [36m</header>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"semantic-canvas__content"[39m
+        [36m>[39m
+          [36m<section[39m
+            [33maria-label[39m=[32m"Run job"[39m
+            [33mclass[39m=[32m"semantic-form"[39m
+          [36m>[39m
+            [36m<h2[39m
+              [33mclass[39m=[32m"semantic-form__title"[39m
+            [36m>[39m
+              [0mRun job[0m
+            [36m</h2>[39m
+            [36m<form[39m
+              [33maria-busy[39m=[32m"false"[39m
+              [33mnovalidate[39m=[32m""[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"semantic-form__field"[39m
+              [36m>[39m
+                [36m<label[39m
+                  [33mfor[39m=[32m"_r_5_-field-0"[39m
+                [36m>[39m
+                  [0mValue[0m
+                [36m</label>[39m
+                [36m<input[39m
+                  [33maria-invalid[39m=[32m"false"[39m
+                  [33mid[39m=[32m"_r_5_-field-0"[39m
+                  [33mname[39m=[32m"value"[39m
+                  [33mrequired[39m=[32m""[39m
+                  [33mtype[39m=[32m"text"[39m
+                  [33mvalue[39m=[32m"hello"[39m
+                [36m/>[39m
+              [36m</div>[39m
+              [36m<button[39m
+                [33mtype[39m=[32m"submit"[39m
+              [36m>[39m
+                [0mRun job[0m
+              [36m</button>[39m
+            [36m</form>[39m
+            [36m<p[39m
+              [33maria-atomic[39m=[32m"true"[39m
+              [33mrole[39m=[32m"status"[39m
+            [36m>[39m
+              [0mRun job: results ready.[0m
+            [36m</p>[39m
+            [36m<div[39m
+              [33maria-label[39m=[32m"Run job result"[39m
+              [33mclass[39m=[32m"semantic-form__result"[39m
+            [36m/>[39m
+          [36m</section>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"semantic-stack"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"semantic-stack"[39m
+            [36m>[39m
+              [36m<section[39m
+                [33maria-label[39m=[32m"Execution run"[39m
+                [33mclass[39m=[32m"semantic-panel"[39m
+              [36m>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"semantic-status semantic-status--success"[39m
+                  [33mrole[39m=[32m"status"[39m
+                [36m>[39m
+                  [0mcancel requested[0m
+                [36m</p>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"semantic-actions"[39m
+                [36m>[39m
+                  [36m<button[39m
+                    [33mtype[39m=[32m"button"[39m
+                  [36m>[39m
+                    [0mRefresh status[0m
+                  [36m</button>[39m
+                  [36m<button[39m
+                    [33mtype[39m=[32m"button"[39m
+                  [36m>[39m
+                    [0mRequest cancellation[0m
+                  [36m</button>[39m
+                [36m</div>[39m
+              [36m</section>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</main>[39m
+    [36m</div>[39m
+  [36m</body>[39m
+[36m</html>[39m
+
+Expected: "Run job: response received."
+Received: "Run job: results ready."
+
+ ❯ src/semantic-renderer/generic-view.test.tsx:109:82
+    107|         fireEvent.click(screen.getByRole("button", { name: "Run job" }…
+    108|         const form = screen.getByRole("region", { name: "Run job", exa…
+    109|         await waitFor(() => expect(within(form).getByRole("status").te…
+       |                                                                                  ^
+    110|         expect(call).toHaveBeenCalledTimes(2);
+    111|         expect(screen.queryByText(/results ready/i)).toBeNull();
+ ❯ runWithExpensiveErrorDiagnosticsDisabled ../../node_modules/@testing-library/dom/dist/config.js:47:12
+ ❯ checkCallback ../../node_modules/@testing-library/dom/dist/wait-for.js:124:77
+ ❯ Timeout.checkRealTimersCallback ../../node_modules/@testing-library/dom/dist/wait-for.js:118:16
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed | 10 skipped (11)
+      Tests  3 failed | 73 skipped (76)
+   Start at  13:45:11
+   Duration  7.99s (transform 1.30s, setup 2.57s, import 4.10s, tests 3.24s, environment 5.94s)
+
+JUNIT report written to /workspace/lane-a-state/receipts/response-before.xml
+Process 12436: exit status 1, command: /usr/bin/bash [-c cd /workspace/lane-a/action_server/frontend && npx --no-install vitest --run --config apps/canvas-view/vitest.config.ts --testNamePattern "without claiming results" --reporter=default --reporter=junit --outputFile=/workspace/lane-a-state/receipts/response-before.xml] [v18.19.3/12425]
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@  From rcc "v18.19.3" (controller: "user") point of view, "actual main robot run" was FAILURE, reason: "exit status 1". See details above.  @@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  |  "Build/Pre-run"  relative time allocation ratio:  1:0
+  |  "Setup/Run"  relative time allocation ratio:  13:101
+Note: Now running rcc v18.19.3. There is newer rcc version v18.19.7 available, released at 15.10.2026.
+Error: exit status 1 (robot run exit)
+[rcc] exit status will be: 10!

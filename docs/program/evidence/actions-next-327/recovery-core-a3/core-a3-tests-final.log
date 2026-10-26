@@ -1,0 +1,21 @@
++ poetry run pytest tests -q --junitxml=/workspace/actions-recovery-327/evidence/core-a3-tests-final.xml (in /workspace/actions/actions)
+........................................................................ [ 19%]
+........................................................................ [ 38%]
+........................................................................ [ 57%]
+........................................................................ [ 76%]
+........................................................................ [ 96%]
+...............                                                          [100%]
+=============================== warnings summary ===============================
+tests/actions_core_tests/test_command_dispatch_and_variable_scope.py::test_run_handler_reports_missing_selected_action
+  /workspace/actions/actions/.venv/lib/python3.12/site-packages/robocorp/log/_ast_utils.py:677: DeprecationWarning: ast.Str is deprecated and will be removed in Python 3.14; use ast.Constant instead
+    def Str(self, s) -> ast.Str:
+
+tests/actions_core_tests/test_command_dispatch_and_variable_scope.py::test_run_handler_reports_missing_selected_action
+tests/actions_core_tests/test_command_dispatch_and_variable_scope.py::test_run_handler_reports_missing_selected_action
+tests/actions_core_tests/test_command_dispatch_and_variable_scope.py::test_run_handler_reports_missing_selected_action
+  /workspace/actions/actions/.venv/lib/python3.12/site-packages/robocorp/log/_ast_utils.py:678: DeprecationWarning: ast.Str is deprecated and will be removed in Python 3.14; use ast.Constant instead
+    return self._set_line_col(ast.Str(s))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /workspace/actions-recovery-327/evidence/core-a3-tests-final.xml -
+375 passed, 4 warnings in 52.26s

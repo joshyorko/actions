@@ -1,0 +1,10 @@
+{
+  "pid": 162834,
+  "create_time": 1792907615.29,
+  "stop_floor_bytes": 805306368,
+  "initial_free_bytes": 2815700992,
+  "minimum_free_bytes": 795176960,
+  "scope": "current frozen verifier only; graceful interrupt before exhaustion",
+  "action": "INTERRUPTED_LOW_SPACE",
+  "final_free_bytes": 795176960
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "runId": "e4430584-f49b-4dcb-8983-5263908a4192",
+    "run_status": 1,
+    "journal_version": "actions.generated-rcc-dispatch/v1",
+    "launch_present": true,
+    "execution": null,
+    "journal_keys": [
+      "claim",
+      "fence",
+      "launch",
+      "mode",
+      "version"
+    ],
+    "attempts": [
+      {
+        "id": "ed7a6264-81cc-4998-9482-11c589e4995c",
+        "epoch": 1,
+        "state": "running"
+      }
+    ]
+  }
+]

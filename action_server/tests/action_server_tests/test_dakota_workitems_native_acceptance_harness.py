@@ -42,6 +42,44 @@ UI_TEST_PATH = Path(__file__).with_name("test_dakota_workitems_native_ui_accepta
 CORE_VERSION = "1.0.2"
 
 
+def test_candidate_package_installs_the_exact_sdk_wheel(tmp_path):
+    core = tmp_path / "actions_core-1.0.3-py3-none-any.whl"
+    sdk = tmp_path / "actions_work_items-0.5.0a1-py3-none-any.whl"
+    package = NATIVE_TEST.consumer_package_yaml(core, tmp_path / "report.json", sdk)
+    import yaml
+
+    command = yaml.safe_load(package)["post-install"][0]
+    tokens = shlex.split(command)
+    assert [Path(value).resolve() for value in tokens[-2:]] == [
+        core.resolve(),
+        sdk.resolve(),
+    ]
+    assert (
+        Path(tokens[tokens.index("--report") + 1]).resolve()
+        == (tmp_path / "report.json").resolve()
+    )
+
+
+def test_sdk_proof_must_bind_each_runtime_to_the_selected_wheel(tmp_path):
+    proof = {
+        "version": "0.5.0a1",
+        "wheel_sha256": "a" * 64,
+        "module_owned": True,
+        "install_source_matches_candidate": True,
+        "pip_report_sha256": "b" * 64,
+    }
+    for kind in RUNNER.CASE_ENV:
+        (tmp_path / (kind + ".json")).write_text(json.dumps(proof))
+    assert len(RUNNER.validate_sdk_proofs(tmp_path, "0.5.0a1", "a" * 64)) == 2
+    (tmp_path / "frozen.json").write_text(
+        json.dumps({**proof, "wheel_sha256": "c" * 64})
+    )
+    with pytest.raises(
+        RUNNER.AcceptanceFailure, match="SDK candidate installation proof differs"
+    ):
+        RUNNER.validate_sdk_proofs(tmp_path, "0.5.0a1", "a" * 64)
+
+
 def _collect_nodeids(test_path: Path, *, marker: str | None = None):
     command = [
         sys.executable,
@@ -514,6 +552,17 @@ def test_abrupt_process_termination_invalidates_previous_pass(tmp_path: Path):
     wheel = rcc_home / "wheels" / "actions_core-1.0.2-py3-none-any.whl"
     wheel.parent.mkdir(parents=True)
     write_core_wheel(wheel, CORE_VERSION)
+    sdk = (
+        wheel.parent.parent
+        / "sdk-wheels"
+        / "actions_work_items-0.5.0a1-py3-none-any.whl"
+    )
+    sdk.parent.mkdir()
+    with zipfile.ZipFile(sdk, "w") as archive:
+        archive.writestr(
+            "actions_work_items-0.5.0a1.dist-info/METADATA",
+            "Metadata-Version: 2.1\nName: actions-work-items\nVersion: 0.5.0a1\n",
+        )
 
     receipt_path = tmp_path / "receipt.json"
     receipt_path.write_text(
@@ -622,6 +671,17 @@ def test_receipt_requires_completed_final_artifact_checks(
     wheel = tmp_path / "rcc" / "wheels" / "actions_core-1.0.2-py3-none-any.whl"
     wheel.parent.mkdir(parents=True)
     write_core_wheel(wheel, CORE_VERSION)
+    sdk = (
+        wheel.parent.parent
+        / "sdk-wheels"
+        / "actions_work_items-0.5.0a1-py3-none-any.whl"
+    )
+    sdk.parent.mkdir()
+    with zipfile.ZipFile(sdk, "w") as archive:
+        archive.writestr(
+            "actions_work_items-0.5.0a1.dist-info/METADATA",
+            "Metadata-Version: 2.1\nName: actions-work-items\nVersion: 0.5.0a1\n",
+        )
     receipt_path = tmp_path / "receipt.json"
     hashes = {"frozen": RUNNER.sha256(frozen), "go-wrapper": RUNNER.sha256(wrapper)}
     wheel_hash = RUNNER.sha256(wheel)
@@ -648,6 +708,17 @@ def test_receipt_requires_completed_final_artifact_checks(
     def completed_native_cases(args, plugins):
         plugins[0].reports = reports_for("frozen", "go-wrapper")
         write_proofs(Path(os.environ["DAKOTA_WORKITEMS_PROOF_DIR"]), hashes, wheel_hash)
+        sdk_proof = {
+            "version": "0.5.0a1",
+            "wheel_sha256": RUNNER.sha256(sdk),
+            "module_owned": True,
+            "install_source_matches_candidate": True,
+            "pip_report_sha256": "b" * 64,
+        }
+        for kind in RUNNER.CASE_ENV:
+            (
+                Path(os.environ["DAKOTA_WORKITEMS_SDK_PROOF_DIR"]) / (kind + ".json")
+            ).write_text(json.dumps(sdk_proof))
         if final_check == "changed":
             frozen.write_bytes(b"different artifact")
         elif final_check == "interrupted":

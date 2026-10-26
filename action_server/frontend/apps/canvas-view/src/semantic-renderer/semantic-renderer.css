@@ -1,0 +1,336 @@
+.semantic-canvas,
+.semantic-form,
+.semantic-table,
+.semantic-status,
+.semantic-artifact,
+.semantic-panel {
+    box-sizing: border-box;
+    color: var(--color-text-primary, light-dark(#182230, #e6edf3));
+    font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    line-height: 1.5;
+}
+
+.semantic-canvas {
+    background: var(--color-background-primary, light-dark(#ffffff, #111923));
+    display: grid;
+    min-width: 0;
+    gap: 1rem;
+    margin: 0 auto;
+    max-width: 64rem;
+    padding: clamp(1rem, 4vw, 2.5rem);
+}
+
+.semantic-canvas__header,
+.semantic-canvas__content,
+.semantic-stack,
+.semantic-form {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.semantic-canvas__content,
+.semantic-stack {
+    min-width: 0;
+}
+
+.semantic-canvas p {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.semantic-canvas__header h1,
+.semantic-form h2,
+.semantic-canvas__header p {
+    margin: 0;
+}
+
+.semantic-canvas__eyebrow {
+    color: var(--color-text-secondary, light-dark(#536477, #b7c4d3));
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.semantic-canvas__metadata {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    margin: 0;
+}
+
+.semantic-canvas__metadata div {
+    display: grid;
+    gap: 0.1rem;
+}
+
+.semantic-canvas__metadata dt {
+    color: var(--color-text-secondary, light-dark(#536477, #b7c4d3));
+    font-size: 0.75rem;
+    font-weight: 650;
+}
+
+.semantic-canvas__metadata dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+.semantic-canvas__preview {
+    width: fit-content;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    background: var(--color-background-warning, light-dark(#fff4cc, #3e300f));
+    color: var(--color-text-warning, light-dark(#604400, #ffe7a3));
+    font-size: 0.8125rem;
+    font-weight: 700;
+}
+
+.semantic-canvas__notice,
+.semantic-form,
+.semantic-form__result,
+.semantic-panel {
+    min-width: 0;
+    padding: 1rem;
+    border: 1px solid var(--color-border-primary, light-dark(#d5dde7, #46576a));
+    border-radius: 0.75rem;
+    background: var(--color-background-primary, light-dark(#ffffff, #111923));
+}
+
+.semantic-form form {
+    display: grid;
+    gap: 1rem;
+    min-width: 0;
+}
+
+.semantic-form__field {
+    display: grid;
+    gap: 0.4rem;
+}
+
+.semantic-form__field label {
+    font-weight: 650;
+}
+
+.semantic-form__field input,
+.semantic-form__field select {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 2.75rem;
+    padding: 0.65rem 0.75rem;
+    border: 1px solid var(--color-border-primary, light-dark(#718096, #8092a7));
+    border-radius: 0.4rem;
+    color: var(--color-text-primary, light-dark(#182230, #e6edf3));
+    background: var(--color-background-primary, light-dark(#ffffff, #111923));
+    font: inherit;
+}
+
+.semantic-form input[aria-invalid="true"] {
+    border-color: var(--color-border-danger, light-dark(#a61b1b, #ffaaaa));
+}
+
+.semantic-form button,
+.semantic-artifact button,
+.semantic-panel button {
+    justify-self: start;
+    min-height: 2.65rem;
+    padding: 0.55rem 1rem;
+    border: 0;
+    border-radius: 0.4rem;
+    background: var(--color-background-inverse, light-dark(#1557a0, #8bbcff));
+    color: var(--color-text-inverse, light-dark(#ffffff, #0b2540));
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.semantic-artifact {
+    display: grid;
+    gap: 0.5rem;
+    justify-items: start;
+}
+
+.semantic-form button:disabled,
+.semantic-artifact button:disabled,
+.semantic-form input:disabled,
+.semantic-form select:disabled,
+.semantic-panel button:disabled {
+    cursor: wait;
+    opacity: 0.65;
+}
+
+.semantic-form input:focus-visible,
+.semantic-form select:focus-visible,
+.semantic-panel button:focus-visible,
+.semantic-form button:focus-visible,
+.semantic-artifact button:focus-visible,
+.semantic-table__scroll:focus-visible {
+    outline: 3px solid var(--color-ring-primary, light-dark(#165dce, #8bbcff));
+    outline-offset: 3px;
+}
+
+.semantic-form__field-error,
+.semantic-form__error,
+.semantic-form [role="alert"],
+.semantic-table__error,
+.semantic-status--error {
+    color: var(--color-text-danger, light-dark(#8a1717, #ffb4b4));
+}
+
+.semantic-form__result {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.semantic-table__scroll {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.semantic-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--color-background-primary, light-dark(#ffffff, #111923));
+}
+
+.semantic-table caption {
+    padding: 0.5rem;
+    font-weight: 700;
+    text-align: left;
+}
+
+.semantic-table th,
+.semantic-table td {
+    min-width: 8rem;
+    padding: 0.65rem 0.75rem;
+    border-bottom: 1px solid
+        var(--color-border-primary, light-dark(#d5dde7, #46576a));
+    text-align: left;
+    overflow-wrap: anywhere;
+}
+
+.semantic-table thead th {
+    background: var(--color-background-secondary, light-dark(#eef3f8, #243244));
+}
+
+.semantic-table tbody tr:nth-child(even) {
+    background: var(--color-background-secondary, light-dark(#f8fafc, #1a2736));
+}
+
+.semantic-status {
+    margin: 0;
+    padding: 0.75rem 1rem;
+    border-radius: 0.4rem;
+    background: var(--color-background-secondary, light-dark(#eef3f8, #243244));
+}
+
+.semantic-status--error {
+    background: var(--color-background-danger, light-dark(#fff1f1, #3e1b24));
+}
+
+@media (max-width: 42rem) {
+    .semantic-form__field input,
+    .semantic-form__field select {
+        min-width: 0;
+    }
+}
+
+.semantic-panel {
+    display: grid;
+    gap: 0.75rem;
+}
+.semantic-panel h3,
+.semantic-card h2,
+.semantic-chart h2,
+.semantic-log h2,
+.semantic-inspector h2,
+.semantic-form h3,
+.semantic-panel p,
+.semantic-form p {
+    margin: 0;
+}
+.semantic-canvas h1,
+.semantic-card h2,
+.semantic-chart h2,
+.semantic-log h2,
+.semantic-inspector h2,
+.semantic-form h2 {
+    overflow-wrap: anywhere;
+    min-width: 0;
+}
+.semantic-card .semantic-card {
+    padding: 0.5rem;
+}
+.semantic-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+.semantic-canvas pre {
+    max-width: 100%;
+    overflow: auto;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+.mcp-connection {
+    max-width: 64rem;
+    margin: 0 auto;
+    padding: 0.5rem 1rem;
+    font:
+        0.8125rem/1.5 system-ui,
+        sans-serif;
+    color: var(--color-text-secondary, light-dark(#536477, #b7c4d3));
+}
+.mcp-connection summary {
+    cursor: pointer;
+}
+.mcp-connection__details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+}
+.mcp-connection__details dd {
+    margin: 0;
+}
+
+.semantic-chart svg {
+    display: block;
+    width: 100%;
+    max-height: 20rem;
+    fill: currentColor;
+}
+.semantic-chart__axis,
+.semantic-chart__line {
+    stroke: currentColor;
+    stroke-width: 2;
+    fill: none;
+}
+.semantic-log__scroll {
+    max-height: 20rem;
+    overflow: auto;
+    overflow-wrap: anywhere;
+}
+.semantic-log__scroll:focus-visible {
+    outline: 3px solid var(--color-ring-primary, light-dark(#165dce, #8bbcff));
+    outline-offset: 3px;
+}
+.semantic-log li {
+    white-space: pre-wrap;
+}
+.semantic-inspector dl {
+    display: grid;
+    gap: 0.75rem;
+    margin: 0;
+}
+.semantic-inspector dt {
+    font-weight: 650;
+}
+.semantic-inspector dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+}

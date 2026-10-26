@@ -398,6 +398,11 @@ class BaseWorkflow:
             "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09"
             if pinned
             else "actions/checkout@v5",
+            "env": {
+                "GIT_CONFIG_COUNT": "${{ runner.os == 'Windows' && '1' || '0' }}",
+                "GIT_CONFIG_KEY_0": "core.longpaths",
+                "GIT_CONFIG_VALUE_0": "true",
+            },
         }
 
     def install_devutils(self, additional_packages: list[str] | None = None):
@@ -587,6 +592,9 @@ class BaseTests(BaseWorkflow):
     require_build_oauth2_config = False
     validate_docstrings = False
 
+    def before_frontend_build(self) -> list[dict]:
+        return []
+
     def run_tests(self):
         return {
             "name": "Test",
@@ -611,6 +619,7 @@ class BaseTests(BaseWorkflow):
             steps.append(self.setup_node())
 
         if self.require_build_frontend:
+            steps.extend(self.before_frontend_build())
             steps.append(self.build_frontend())
 
         if self.require_build_oauth2_config:
@@ -637,7 +646,86 @@ class ActionServerTests(BaseTests):
     require_node = True
     require_go = True
     require_build_frontend = True
-    require_build_oauth2_config = True
+    # OAuth is prepared before the source-bound browser gate, not after embedding.
+    require_build_oauth2_config = False
+
+    @override
+    def before_frontend_build(self) -> list[dict]:
+        return [
+            {
+                "name": "Install frontend dependencies for source Runtime browser acceptance",
+                "working-directory": "action_server/frontend",
+                "run": "npm ci --no-audit --no-fund",
+            },
+            self.build_oauth2_config(),
+            {
+                "name": "Install Playwright Chromium for Runtime browser acceptance",
+                "working-directory": "action_server/frontend",
+                "run": "npx playwright install chromium",
+            },
+            *self.published_canvas_acceptance(),
+        ]
+
+    @override
+    def build_frontend(self):
+        step = super().build_frontend()
+        step["run"] = f"{run_in_env}inv build-frontend --no-install"
+        return step
+
+    def start_owned_postgres(self):
+        return {
+            "name": "Start owned PostgreSQL for portable Runtime tests",
+            "if": "runner.os == 'Linux'",
+            "shell": "bash",
+            "run": r"""set -euo pipefail
+image=postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81
+docker pull "$image"
+cid=$(docker run --detach --pull=never --rm \
+  --name "actions-runtime-tests-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
+  --memory=3g --cpus=2 --pids-limit=256 \
+  --tmpfs /var/lib/postgresql/data:size=2g \
+  --publish 127.0.0.1::5432 \
+  --env POSTGRES_PASSWORD=synthetic-runtime-ci-only "$image")
+[[ "$cid" =~ ^[0-9a-f]{64}$ ]]
+echo "ACTIONS_RUNTIME_TEST_POSTGRES_CID=$cid" >> "$GITHUB_ENV"
+ready=false
+for attempt in {1..60}; do
+  if docker exec "$cid" pg_isready -U postgres; then ready=true; break; fi
+  sleep 1
+done
+[[ "$ready" == true ]]
+port=$(docker port "$cid" 5432/tcp)
+[[ "$port" =~ ^127\.0\.0\.1:([0-9]+)$ ]]
+url="postgresql://postgres:synthetic-runtime-ci-only@127.0.0.1:${BASH_REMATCH[1]}/postgres"
+echo "::add-mask::$url"
+echo "ACTIONS_INVOICE_TEST_POSTGRES=$url" >> "$GITHUB_ENV"
+echo "ACTIONS_TEST_POSTGRES_URL=$url" >> "$GITHUB_ENV"
+echo "ACTIONS_REQUIRE_INVOICE_PROVIDERS=1" >> "$GITHUB_ENV"
+""",
+        }
+
+    def stop_owned_postgres(self):
+        return {
+            "name": "Remove owned portable-test PostgreSQL",
+            "if": "always() && runner.os == 'Linux'",
+            "shell": "bash",
+            "run": r"""set -euo pipefail
+cid="${ACTIONS_RUNTIME_TEST_POSTGRES_CID:-}"
+if [[ -n "$cid" ]]; then
+  [[ "$cid" =~ ^[0-9a-f]{64}$ ]]
+  docker rm --force "$cid"
+  for attempt in {1..10}; do
+    remaining=$(docker ps --all --no-trunc --quiet --filter "id=$cid")
+    if [[ -z "$remaining" ]]; then break; fi
+    sleep 1
+  done
+  [[ -z "$remaining" ]]
+fi
+echo "ACTIONS_INVOICE_TEST_POSTGRES=" >> "$GITHUB_ENV"
+echo "ACTIONS_TEST_POSTGRES_URL=" >> "$GITHUB_ENV"
+echo "ACTIONS_REQUIRE_INVOICE_PROVIDERS=0" >> "$GITHUB_ENV"
+""",
+        }
 
     @override
     def on_part(self, dep_paths):
@@ -693,6 +781,9 @@ class ActionServerTests(BaseTests):
           source_sha="$(git rev-parse HEAD)"
           source_tree="$(git rev-parse 'HEAD^{tree}')"
           source_parents="$(git show -s --format=%P HEAD)"
+          if ! poetry_cmd run python scripts/summarize_candidate_failure_327.py "$junit_raw" published; then
+            echo 'Published Canvas failure-location diagnostics unavailable.'
+          fi
           poetry_cmd run python - "$junit_raw" "$junit_safe" "$pytest_status" \
             "$CANVAS_TEMPLATE_PUBLISHED_RECEIPT_PATH" "$receipt_safe" \
             "$source_sha" "$source_tree" "$source_parents" "$browser_sha256" "$browser_version" <<'PY'
@@ -839,9 +930,9 @@ class ActionServerTests(BaseTests):
                   ('runtime_origin', lambda: Path(runtime.get('module_origin', '')).resolve() == Path('src/actions/server/__init__.py').resolve()),
                   ('runtime_module_digest', lambda: runtime.get('module_sha256') == hashlib.sha256(Path('src/actions/server/__init__.py').read_bytes()).hexdigest()),
                   ('runtime_args_list', lambda: isinstance(runtime_args, list)),
-                  ('runtime_args_count', lambda: len(runtime_args) >= 3),
+                  ('runtime_args_count', lambda: len(runtime_args) >= 4),
                   ('runtime_interpreter_absolute', lambda: Path(runtime_args[0]).is_absolute()),
-                  ('runtime_module_entry', lambda: runtime_args[1:3] == ['-m', 'actions.server']),
+                  ('runtime_module_entry', lambda: runtime_args[1:4] == ['-P', '-m', 'actions.server']),
                   ('runtime_wrapper_reaped', lambda: runtime.get('wrapper_reaped') is True),
                   ('runtime_live_descendants_empty', lambda: runtime.get('live_descendant_pids') == []),
                   ('runtime_readers_empty', lambda: runtime.get('active_readers') == []),
@@ -918,8 +1009,8 @@ class ActionServerTests(BaseTests):
                       and all(Path(path).is_absolute() and Path(path).is_relative_to(prefix) for path in modules.values())
                       and Path(runtime.get("module_origin", "")).resolve() == Path("src/actions/server/__init__.py").resolve()
                       and runtime.get("module_sha256") == hashlib.sha256(Path("src/actions/server/__init__.py").read_bytes()).hexdigest()
-                      and isinstance(runtime_args, list) and len(runtime_args) >= 3
-                      and Path(runtime_args[0]).is_absolute() and runtime_args[1:3] == ["-m", "actions.server"]
+                      and isinstance(runtime_args, list) and len(runtime_args) >= 4
+                      and Path(runtime_args[0]).is_absolute() and runtime_args[1:4] == ["-P", "-m", "actions.server"]
                       and runtime.get("wrapper_reaped") is True
                       and runtime.get("live_descendant_pids") == []
                       and runtime.get("active_readers") == []
@@ -1040,6 +1131,7 @@ class ActionServerTests(BaseTests):
             self.upload_artifact(
                 name="action-server-${{ matrix.os }}", path="action_server/dist/final/"
             ),
+            self.start_owned_postgres(),
             {
                 "name": "Test (not integration)",
                 "env": {
@@ -1049,12 +1141,7 @@ class ActionServerTests(BaseTests):
                 },
                 "run": f"{run_in_env}poetry run inv test-not-integration",
             },
-            {
-                "name": "Install Playwright Chromium for Runtime browser acceptance",
-                "working-directory": "action_server/frontend",
-                "run": "npx playwright install chromium",
-            },
-            *self.published_canvas_acceptance(),
+            self.stop_owned_postgres(),
             {
                 "name": "Test (integration)",
                 "env": {
@@ -2633,8 +2720,9 @@ rm src/actions/server/bin/rcc* -f
                 "CIBW_SKIP": "pp*",
                 "CIBW_BUILD": CIBW_BUILD,
                 "CIBW_BUILD_VERBOSITY": 1,
-                "CIBW_BEFORE_TEST": "${{ github.event_name == 'pull_request' && 'python {project}/scripts/install_candidate_core.py {project}/candidate-core-wheelhouse {project}/candidate-helper-wheelhouse' || '' }}",
-                "CIBW_TEST_COMMAND": 'python "{project}/scripts/verify_published_runtime_floor.py" --installed-wheel "{wheel}" --checkout-root "{project}"',
+                "CIBW_ENVIRONMENT": "ACTIONS_CANDIDATE_SOURCE_SHA=${{ github.sha }}",
+                "CIBW_BEFORE_TEST": "${{ github.event_name == 'pull_request' && 'python {project}/scripts/install_candidate_core.py {project}/candidate-core-wheelhouse {project}/candidate-helper-wheelhouse {project}/candidate-sdk-wheelhouse' || '' }}",
+                "CIBW_TEST_COMMAND": 'python "{project}/scripts/verify_published_runtime_floor.py" --installed-wheel "{wheel}" --checkout-root "{project}" ${{ github.event_name == \'pull_request\' && \'--candidate-sdk-wheelhouse {project}/candidate-sdk-wheelhouse --candidate-core-wheelhouse {project}/candidate-core-wheelhouse\' || \'\' }}',
             },
         }
 
@@ -2669,11 +2757,27 @@ rm src/actions/server/bin/rcc* -f
             "working-directory": "actions-http-helper",
             "run": f"{run_in_env}poetry build -f wheel -o ../action_server/candidate-helper-wheelhouse",
         })
+        steps.append({
+            "name": "Build candidate Work Items SDK wheel for PR compatibility tests",
+            "if": "github.event_name == 'pull_request'",
+            "working-directory": "work-items",
+            "run": f"{run_in_env}poetry build -f wheel -o ../action_server/candidate-sdk-wheelhouse",
+        })
+        steps.append({
+            "name": "Bind candidate Core wheel to producer checkout",
+            "if": "github.event_name == 'pull_request'",
+            "run": f"{run_in_env}python scripts/write_candidate_sdk_producer.py candidate-core-wheelhouse --distribution actions-core",
+        })
+        steps.append({
+            "name": "Bind candidate SDK wheel to producer checkout",
+            "if": "github.event_name == 'pull_request'",
+            "run": f"{run_in_env}python scripts/write_candidate_sdk_producer.py candidate-sdk-wheelhouse",
+        })
         steps.append(self.build_manylinux_wheels())
         steps.append({
             "name": "Verify Runtime wheel with published Core and Helper",
             "if": "github.event_name == 'pull_request'",
-            "run": f"{run_in_env}python scripts/verify_published_runtime_floor.py wheelhouse",
+            "run": f"{run_in_env}python scripts/verify_published_runtime_floor.py wheelhouse --candidate-sdk-wheelhouse candidate-sdk-wheelhouse --candidate-core-wheelhouse candidate-core-wheelhouse",
         })
         steps.append(self.upload_artifact_manylinux_wheels())
         steps.extend(self.build_source_receipt("wheelhouse", "${{ runner.os }}"))

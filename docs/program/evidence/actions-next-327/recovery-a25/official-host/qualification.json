@@ -1,0 +1,47 @@
+{
+  "status": "PASS",
+  "source": "5d950150b7b5886d1e54246ac216ff41aa4b9f1e",
+  "installed_runtime": "1.1.0a25",
+  "tests": 2,
+  "skipped": 0,
+  "deselected": 6,
+  "control_plane": "SQLite",
+  "data": "DuckDB",
+  "host_source": "ext-apps v2.0.3 82221c0c8ce7661efa6771c9d461511b1650495f",
+  "host_build": "exact upstream reference-host source; bounded lock-pinned published dependencies; tsx instead of unavailable Bun",
+  "synthetic_authenticated_composition": true,
+  "ordinary_cli": false,
+  "chatgpt_E1": false,
+  "apps": [
+    "invoice-summary",
+    "ndjson-inspector"
+  ],
+  "limitations": [
+    "No actual ChatGPT or authenticated Codex session",
+    "No ordinary CLI full authoring/restart here; separate installed legacy CLI browser gate",
+    "Host review controls execute retained synthetic fixture result; not complete blank Canvas authoring flow"
+  ],
+  "retained_failure": "initial harness exact Input label selector timeout2cases; corrected to actual textarea, no product change",
+  "browser": {
+    "executable": "/usr/bin/chromium",
+    "version": "Chromium151.0.7922.173"
+  },
+  "files": {
+    "tests.xml": "48d556a09c96a42f91332b454054a5353ccc8346185aee1437c45d956ea23bca",
+    "pytest.txt": "2eb981c7ef95c1bf2241efe457e0145d83d860147697752fdd1e09bf1420a27b",
+    "browser.mjs": "65ed9f3ae931d66143dcb8544256916c9fae1f7b867ec5aa032a5f7f495a4fc0",
+    "receipt.json": "4f42e0bd0fcc643b9c78da4a23131bc1c4037f41f36fcee0095019f079eed1c3",
+    "test_reference_host.py": "eaf6ccde15d46552f30879054712aba2f4a5a4b80cca844405b90c43141bdd7c",
+    "invoice-summary/invoice-summary-browser.json": "6f9e4f0c26a60d081d6a8f920e47e0705f70d4abed5a0677d952679560e8058b",
+    "invoice-summary/invoice-summary-review.png": "4325b68ef824697d1fd1de1fda3eb36e9c23a6aac258084675cce19389c84c13",
+    "invoice-summary/invoice-summary-mounted.png": "b5dba8ff9dacce0cf71369fd719b57183ac4125bfcd349fb0207f3dcd749d67e",
+    "invoice-summary/receipt.json": "fa2202d9604490348aa17e16abd08b1ac9879ebb273d9c7a0f73bbfe9e3c8f63",
+    "invoice-summary/invoice-summary-executed.png": "7002d3f69f43f5d817fd35650bd7fb3b6d894b4ad80dfd3c90f8c7f15bc31427",
+    "ndjson-inspector/ndjson-inspector-browser.json": "14c4dfa457ad1fb073de77ba8e9bd4cb3b395cdc712f8d4fa7c27d15f0fe8f2c",
+    "ndjson-inspector/receipt.json": "1a0ddafa9dad49ade90b107644e9e6cfca17eb8954d318126e57aba41f56fe66",
+    "ndjson-inspector/ndjson-inspector-review.png": "ef7204995c85283d1b28df6147dd69dca88471a6c7ac31553abccdda41d5daf4",
+    "ndjson-inspector/ndjson-inspector-executed.png": "eae73bbad1c82237523bc85b5f2cb628a101d64d16216f03e1eb48b170e6cafa",
+    "ndjson-inspector/ndjson-inspector-mounted.png": "ae420fdd5cbcb4b5d99f0943b521d530f8fbc8977371f84ec445f38247c448c4"
+  },
+  "upstream_disposition": "none"
+}

@@ -1,6 +1,299 @@
 # Repository Operations
 
+Use `rcc task script -r developer/toolkit.yaml -- python /absolute/script.py`
+through the activated cloud toolchain for an arbitrary bounded qualification
+script. `rcc run` selects manifest tasks and is not a generic command gateway.
+Use a real script file: a heredoc supplied to the outer launcher can be consumed
+without executing the intended Python body. Check produced files and receipts,
+not only the launcher's successful exit.
+
+## Recovering installed qualification evidence
+
+Selected source-path revalidation must compare bounded current file content
+digests with the measured inventory, in addition to metadata and name bindings.
+Same-size writes can leave the observed metadata tuple unchanged. Reopen only
+through the existing no-follow descriptor boundary and retain per-file/total
+byte limits. Revalidation still does not establish a globally atomic snapshot
+against a concurrent writer.
+
+A recovered Runtime wheel does not recover its companion Core/Work Items bytes,
+prepared child environments, local harnesses or receipts. Verify the source/tree
+and each artifact hash independently; label a rebuilt artifact as a reproduction
+unless byte identity is established. Probe host Python's pidfd capabilities
+separately from the candidate interpreter before selecting a process supervisor.
+
+For sealed-output changes, exercise the fresh installed candidate with partial,
+cross-block and EOF reads plus an actual same-inode equal-length post-open
+rewrite. Bind module origin/version and wheel bytes to that proof. Retain any
+timestamp-masked hash diagnostic separately from the normal unmasked API result;
+neither API proof establishes a complete Runtime/service qualification.
+
+Node protocol-only exit evidence does not qualify execution or restart. When a
+client remains alive after execution, retain whether `client.close()` completed
+and identify remaining resource types before supervisor cleanup. The current
+Runtime MCP route requests stateless JSON responses; establish an observed open
+stream before attributing a hang to SSE. Record natural client exit separately
+from Runtime shutdown and descendant cleanup.
+
+An actual SDK2 probe observed a GET SSE response even with stateless JSON MCP
+configuration; the transport delivered its abort and exited naturally. Configure
+both ACTIONS_HOME and ROBOTS_HOME as task-local writable roots for fresh cloud
+probes. Record installed payload identity separately from dependency-profile
+identity: identical application wheels can resolve different allowed public
+dependency versions at a later clean installation.
+
+Qualify source-lock and public-resolution consumers as distinct profiles, even
+when their application wheels match. Record selected Runtime and transitive
+extras, interpreter, lock digest, active versions, and exact installed payloads.
+For the accepted dual-view SBOM contract, preserve the validated raw declaration
+graph, independently qualified active graph, and every inactive marker/extra
+edge reconciliation. A strict raw-to-active graph failure remains a failure;
+the separate views can satisfy only the explicitly defined dependency-evidence
+subgate, never whole-platform distribution acceptance.
+
+For historical compatibility, obtain authentic published artifacts with official
+metadata and byte hashes. Distinguish a source lock's editable dependency floor
+from the companion versions in an installed receipt, and distinguish a public
+binary from a different historical rebuild. Verify installed payloads and
+`pip check` before exercising upgrade, refusal and rollback. Queue/attachment
+compatibility does not establish coordinated Runtime SQL/object/journal restore.
+If a task-local child loses access to the already working package route, inspect
+whether its environment dropped inherited proxy/CA variables before interpreting
+resolver errors as version conflicts. Restore only the existing authorized route.
+
+The locked Node client2.0.0 profile can negotiate the Task extension and receive
+HTTP200 for detached invocation, yet its wire decoder rejects `resultType:task`
+as UNSUPPORTED_RESULT_TYPE before applying a custom result schema. This is a
+client support limitation; do not count admission as terminal execution or
+restart qualification. Preserve supported synchronous invocation evidence
+separately and keep Task-client acceptance open.
+
+## Cloud source handoff
+
+Checkpoint each writer branch separately; never fold a worker's unreviewed source
+into the release branch during synchronization. Archive non-sensitive dirty files
+outside Git, preserve excluded private/generated files in place, and stage only
+the reviewed allowlist. Record failed and skipped checks without fixing features
+in a migration-only lane. Push without force and verify each exact remote SHA.
+Cloud tasks consume those immutable remote SHAs and the authoritative issue's
+handoff, not local worktree paths or thread goal statuses as acceptance evidence.
+
+## Candidate wheels and historical migration fixtures
+
+Keep the public Runtime 1.0.4 floor canary separate from provisional candidate
+verification. `verify_published_runtime_floor.py` still defaults to exact 1.0.4;
+its reusable installed-wheel verifier accepts an explicitly named candidate
+version. A candidate check must pass the selected package metadata version,
+verify wheel/module origins and bytes, and admit the measured SDK dependency
+floor. Never infer candidate acceptance from the public-version canary.
+
+The clean-wheel contract test builds a Git-tracked source archive in its own
+fixture directory before running the public OAuth configuration generator. This
+prevents a test build from overwriting or admitting an existing untracked local
+OAuth module. Do not treat such a module in a working checkout as build authority.
+Retain generated public build inputs and their binding inside the owned fixture.
+
+When backdating a freshly created database to exercise an old migration, remove
+**all** tables/indexes owned by later migrations first, children before parents.
+For pre-15 fixtures, migration 16's `invoice_review` and `fenced_work_item` tables
+must be removed before Run/Workspace tables. Otherwise an existing index failure
+is a malformed historical fixture, not evidence that upgrading a real old schema
+is unsafe. Continue comparing the upgraded tables/indexes with a fresh schema
+and proving legacy rows survive; do not add `IF NOT EXISTS` to hide the fixture
+error or drop retained business data during migration.
+
+## Explicit local RCC trust carrier for invoice fixtures
+
+Pinned RCC 18.19.3 accepts `--provider local`, but its automatic trust-carrier
+selection constructs an HTTP carrier for any nonempty provider string. In a
+fresh task-owned local Artifact fixture, publish succeeded while provider-bound
+acquire/exec failed with `artifact trust attachment verification failed`; the
+verification receipt recorded `trust attachment could not be decoded`.
+
+Keep the provider and policy. Supply the existing generated local carrier with
+`--trust-carrier <owned-rcc-home>/artifacts/v1/trust --trust-carrier-type filesystem`
+alongside the original `--provider local --permissive-local`. The measured
+verification policy digest was unchanged and verification then returned valid,
+including provenance/SBOM/revocation digests. No trust roots, signatures, signing
+keys, credentials or security configuration were changed. This applies only to
+owned unsigned local test artifacts, never a remote/production trust override.
+
+The existing adapter's optional `local_trust_carrier` argument preserves its
+provider binding and is rejected for provider-free, named and HTTP(S) providers.
+The fixed invoice worker passes its owned local carrier explicitly. Other
+callers are not silently redirected. This narrow Actions mitigation remains
+until a reviewed RCC pin fixes automatic local-alias carrier selection and the
+same acquire/exec negatives and positives pass without it. The upstream finding
+is draft-only under the task's reporting authority.
+
+## Recovering a vanished release worktree
+
+Verify the registered worktrees, exact branch ref and destination absence before
+restoration. Archive the recovered files, patch and SHA manifest outside the
+checkout first, then require `git apply --check` against the exact base and
+verify every recovered file hash. A Git worktree lock prevents pruning, not
+direct filesystem deletion. Preserve unrelated dirty checkouts and processes.
+
+For a lost generated OAuth module, use the checked-in public generator with an
+outside-checkout destination. Restore only bytes matching the previously measured
+SHA; otherwise keep the original explicitly missing. Public generation is not
+permission to search for credentials or copy a private operator configuration.
+
+## Invoice Canvas MCP qualification
+
+The release #327 candidate has a default-off, trusted-server invoice binding on
+the existing MCP server. It uses `InvoiceCanvasFacade`, the official MCP Apps
+bridge and the existing `QueryResultsView`; it does not create another renderer
+or execute a query when a published result opens. The credential verifier must
+return both an authenticated Actor and a verified model/app audience. MCP
+`visibility` metadata and caller-supplied app identifiers do not authenticate an
+app. Every page/export still resolves the pinned application/deployment and
+current persisted Actor grants through the existing output authority.
+
+`invoice_result` returns a bounded model summary; invoice rows belong in the
+UI-private `actions.invoicePage` result metadata. `invoice_result_page` and
+`invoice_result_export` require the verified app audience. When the trusted
+configuration explicitly supplies `InvoiceReviewService`, app-only
+`invoice_review_offer`, `invoice_review_decide` and `invoice_review_cancel` expose
+the SQL review boundary described in [Work Items](work-items.md#exact-result-review-on-the-runtime-sql-connection).
+The model audience cannot call these tools and the UI sends no approval on mount. The built HTML is
+served as a content-addressed `text/html;profile=mcp-app` resource. Export links
+require the same scoped authenticated output transport and a trusted HTTPS or
+loopback download origin. A handle alone grants no access.
+
+Build with the locked frontend environment using `npm run build:canvas`, then
+run the prepared toolkit Python on
+`action_server/scripts/verify_invoice_queries.py --browser --evidence-dir <absolute-owned-directory>`.
+The verifier owns its bounded PostgreSQL fixture and requires both real engines.
+The canonical RCC `InvoiceQueryTest` task accepts
+`ACTIONS_INVOICE_BROWSER=1` for this browser gate and
+`ACTIONS_INVOICE_FULL=1` for the portable Runtime suite. Both are opt-in;
+set `ACTIONS_INVOICE_EVIDENCE_DIR` to an absolute retained directory. Build
+the Canvas first; a missing resource, browser or service fails the explicit gate.
+The browser host simulation forwards tool calls to the actual Runtime socket,
+renders the actual resource, pages its handle, downloads through the authenticated
+output route and reopens the same result. This is local E2, never actual ChatGPT
+E1 or actual worker execution. Missing browser prerequisites fail this explicit
+gate. The ordinary optional Python/TypeScript roundtrip remains a separate gate.
+
+Rollback removes the trusted invoice configuration and restarts the Runtime;
+it does not delete published outputs or migrate queue state. Generated app
+activation/rollback, Work Item review/fencing, workers and ChatGPT acceptance
+remain separate release gates. Source snapshots must retain all changed inputs;
+an intermediate green run does not qualify later hardening edits.
+
+## Generated invoice revision composition
+
+`GeneratedInvoiceApp` privately connects the existing `CanvasRevisionStore` to
+SQL query/review/Work Item/Run/Attempt services. It creates no app registry,
+activation pointer, public lifecycle endpoint, renderer or scheduler. The narrow
+`actions.generated-invoice/v1` bundle contains the existing built `canvas.html`
+and typed `invoice.json` inputs/source binding with its renderer digest. Supply
+`validate_invoice_revision` as the existing store's validator and a trusted
+actor/workspace/deployment/app authorization callback. A revision identifier is
+not an authorization grant or a general CanvasSpec/compiler acceptance claim.
+
+The generated-query Runtime kind `invoice/generated-query/v1` has an additive
+Run-admission key domain containing its application subject. This admits two
+immutable app revisions under the same declared capability/deployment without
+changing existing admission IDs or interpreting an old Run differently. The
+existing SQL request fingerprint still binds the entire snapshot and inputs;
+workspace idempotency keys cannot be reused for different payloads. Register the
+trusted snapshot with the existing control plane before explicit invocation.
+Opening, paging, remounting, reviewing or checking an execution does not invoke
+a query or worker. Published query invocation replay returns its retained output.
+
+The binding re-reads the active revision and persisted actor grants on MCP and
+artifact entry. It verifies the complete bundle and declared source, and binds
+the MCP resource URI to both bundle revision and renderer digest. Stale views
+cannot read/review through an inactive revision. Activation is an entry-time
+pin boundary; it does not cancel or rewrite already admitted work. The private
+worker retains its original app/deployment/result/input/claim lineage and dual
+SQL fences. Activation rollback preserves review decisions, Work Items, Runs,
+Attempts and sealed outputs. An older binary cannot reconstruct the new
+admission-key domain: disable entry and drain/reconcile with current code before
+code downgrade, and retain SQL/object backups for restore.
+
+App-only `invoice_review_execution` reads the existing authorities. It projects
+pending/queued/running/failed/cancelled or completed state without dispatching or
+retrying. A completed response must bind its output reference to that exact Run,
+review and Work Item, then resolve it with current scoped output authorization.
+A valid JSON output from another Run in the same app is insufficient. The
+existing renderer's explicit execution check/download uses this projection and
+the existing authenticated output route. No read implies human approval or
+exactly-once external effects. Output retention remains bounded by the worker's
+existing 3,600-second policy; long-term retention and restore remain separate.
+
+The strict RCC `InvoiceQueryTest` gate accepts `ACTIONS_INVOICE_GENERATED=1`;
+add `ACTIONS_INVOICE_BROWSER=1` for the real Runtime socket/current renderer and
+bridge. These required cells have zero skips. General integration tests with no
+owned renderer/RCC fixture classify those dedicated cases as unverified skips;
+the explicit gate fails when prerequisites are missing. E2's test-operator
+trigger is fixture-only and separate from approval, not a shipped dispatch API
+or authenticated ChatGPT E1. Linux sealed-filesystem provider tests remain
+Linux-only; generic native success on other platforms does not qualify them.
+
+To avoid rebuilding an unchanged SDK-only RCC environment, the verifier accepts
+an explicit `ACTIONS_INVOICE_WORKER_RUNTIME` retained configuration from the same
+owned task. It rebuilds/hashes the current SDK wheel, requires the same pinned
+RCC path, records configuration/environment hashes, and reacquires/verifies the
+artifact with the existing policy before execution. This does not admit an
+operator home, credential or unrelated cache. Keep its original receipt and
+current task/source proofs; a cache hit is not acceptance. Mandatory worker
+input tests and the portable suite keep separate evidence and opt-in boundaries.
+
+The full invoice verifier repeats schema-heavy SQL cases after its focused gates.
+A measured 128 MiB PostgreSQL tmpfs exhausted `pg_wal` during that aggregate run,
+then produced recovery-mode fixture errors. Full mode therefore uses a bounded
+512 MiB data tmpfs and 768 MiB container memory; focused mode retains 128/256 MiB.
+CPU/PID limits, pinned image, loopback-only binding, `--pull=never`, SQL durability
+and cleanup remain unchanged. Keep the original failure; fixture recovery does
+not retroactively qualify its interrupted SQL cases.
+
+## SDK static gate scope and baseline diagnostics
+
+The canonical toolkit dispatches Work Items lint as `poetry run ruff check src
+tests` and typecheck as configured `poetry run mypy`, whose declared target is
+`tests/typecheck/runtime_adapter_calls.py`. The explicit concrete fencing checks
+in the Work Items guide remain additional required proof for queue changes.
+The separate `.devcontainer/bin/verify-work-items` release gate checks lock,
+Ruff lint, full tests and distributions with owned Redis/MongoDB prerequisites;
+its absence is not supplied by a portable test run.
+
+Generic shared `inv lint` forces the Devutils formatter configuration rather
+than the SDK's own 100-column configuration. Neither that formatter nor broad
+`inv typecheck` is the toolkit's declared SDK gate. Direct SDK formatting still
+reports 27 files, and broad checking reports 68 errors in 16 files under the
+locked environment, including optional/source-port imports, signature conflicts
+and unused ignores. The identical Work Items Git tree at 28fa and 227c was
+archived and reproduced these exact diagnostics. Required lint and configured
+mypy passed in that baseline. Keep the diagnostics as unresolved baseline debt,
+not green results, and do not perform unrelated formatting/type cleanup or
+silently change release policy to erase them.
+
 ## MCP Apps public metadata
+
+Catalog concurrency fixtures must distinguish process startup from contention.
+Keep the real SQLite writer held while both children initialize, then release a
+separate child-start gate. Require both children to enter the actual catalog
+writer statement and the reservation table to remain empty before committing
+the parent writer. An early child's five-second SQLite wait must not be spent
+waiting for another child's imports. The startup-skew regression delays one
+contender for six seconds while retaining the existing SQLite busy timeout and
+parent deadline. This proves a fixture synchronization correction, not a new
+database retry policy or a retrospective explanation of an old host-pressure
+failure. A targeted pass does not replace the complete release gate.
+Publish the child's readiness payload by atomic replacement after writing it;
+existence of an open, empty marker is not readiness. The partial-write control
+delays the actual payload write and verifies that the parent never consumes an
+incomplete busy-timeout observation.
+The separate start gate is a byte protocol: write `b"go\n"` through the pipe's
+binary buffer. Text-mode writes translate LF to CRLF on Windows, so a child
+reading three bytes sees `go\r` and exits before the held-writer assertion. A
+real subprocess/SQLite regression forces CRLF translation and verifies both
+children still reach the writer statement without changing deadlines or locks.
+When a child exits, retain its bounded stderr; do not infer a historical hosted
+cause when that stderr was not captured.
 
 ## Canvas query-results fixture interchange
 
@@ -601,6 +894,17 @@ so a higher-priority host `python3.13` cannot replace the pinned toolchain's
 Python 3.12. The contract failed with the unpinned host interpreter and passed
 with RCC Python 3.12. Record that interpreter's version in the receipt; do not
 install host tooling or falsify version discovery to make this boundary pass.
+
+A saved cloud workspace can retain a single-branch fetch refspec and dependency
+environments from its snapshot while the active release branch has moved. Check
+`remote.origin.fetch` before treating an ordinary fetch as release refresh; fetch
+the existing release ref explicitly when it is outside that refspec, then verify
+its full SHA. RCC Doctor verifies the outer toolkit, not the current Python or
+frontend dependency closure. Bootstrap synchronizes package-local Poetry locks;
+frontend `npm ci` is still needed when the restored `node_modules` predates the
+current manifest. Preserve missing-import failures before rerunning after the
+lockfile install. Neither restored directories nor historical test receipts
+qualify the replacement environment.
 
 Verify prepared package environments through each package's Poetry process,
 binding `sys.prefix` to its own `.venv` and a file-backed module to its checkout's
@@ -1886,6 +2190,171 @@ candidate gate.
 6. Update the relevant canonical guide with the durable learning and evidence.
 7. Commit one logical change with a Conventional Commit prefix.
 
+For hosted CI failures, inspect the first failing step and the actual job log.
+Deduplicate a shared cause across matrix jobs. A Windows checkout failure with
+`Filename too long` happens before package tests. Checkout steps use process-scoped
+`core.longpaths` on Windows; preserve publisher conditions, credentials and job
+permissions when correcting checkout configuration. A local Bash or source test
+does not establish that the hosted Windows checkout now passes.
+
+If a CI wrapper redirects pytest output to a temporary file and retains only
+aggregate JUnit/receipt counts, those counts do not identify the failing
+assertion. Mark the underlying cause unresolved until an authorized log or
+artifact read reveals it. A successful matrix job also does not establish that
+every step ran: check each platform condition and skipped-step status. The
+candidate-source Canvas browser step is Linux-only.
+
+The Linux Runtime portable suite and measured coverage workflow provision the
+same digest-pinned, bounded owned PostgreSQL container. Both export
+`ACTIONS_INVOICE_TEST_POSTGRES`, `ACTIONS_TEST_POSTGRES_URL` and strict provider
+mode `ACTIONS_REQUIRE_INVOICE_PROVIDERS=1`. Record the exact container ID before
+readiness checks, run cleanup with `always()`, and verify that exact container is
+absent before resetting provider variables. Docker inspection errors fail cleanup.
+Ordinary portable runs may skip unavailable provider fixtures; strict qualification
+must fail instead. Shared Linux-only fixtures check their own platform because
+module-level pytest marks do not travel with an imported fixture. Docker CLI
+presence alone does not establish that its server can run a pinned Linux image;
+the owned TLS fixture performs a ten-second bounded read-only
+`docker info --format '{{.OSType}}'` check before TLS files or container startup.
+Ordinary optional runs skip unavailable/non-Linux engines; strict required-provider
+mode fails. After Linux admission, actual setup/provider errors remain failures.
+Keep public
+compiler/Runtime paths enabled on promised platforms. For deliberately POSIX-only
+APIs, retain production refusal guards and test refusal separately from POSIX
+success mechanics. Missing POSIX names in Windows typing do not establish runtime
+support and do not justify suppressing the matrix typecheck. Shell-stub
+contracts cover setup, bounded readiness failure, cleanup and workflow parity;
+they do not replace hosted execution or real provider qualification.
+
+Express explicitly POSIX-only APIs through checked, precisely typed `getattr`
+helpers when Windows typeshed omits them. Require integer security flags and
+callable functions; missing capability fails closed, never as a zero flag or
+permission fallback. Resolve required extraction capabilities before creating
+owned destination state. This fixes typing without promising Windows support
+for private Linux providers or POSIX operator APIs.
+
+Put platform admission at the fixture or test that consumes the POSIX capability,
+rather than at module scope. Keep receipt, trust, cleanup-result and refusal
+decisions portable with platform-neutral fakes. Gate real process-group, signal
+and descriptor mechanics on their required capabilities. Assert POSIX permission
+bits only on POSIX; they do not establish Windows ACL behavior.
+
+Pin checkout line endings for fixtures whose raw released bytes are hashed.
+A narrow `text eol=lf` attribute preserves the task schema's original digest under
+`core.autocrlf=true`; do not normalize the bytes inside the assertion or replace
+the released digest with a host-dependent value.
+
+Compiler temporary workspaces and canonical archives have distinct mode
+contracts. Preserve exact source bytes and canonical POSIX modes in snapshot
+identity and ZIP metadata on every host. Windows workspace mode bits do not
+represent POSIX execute bits or establish private ACLs. On POSIX, require
+callable descriptor `fchmod` before creating files, propagate its failures and
+close the owned descriptor. Preserve exclusive creation and containment checks.
+
+The source Runtime test launcher uses `[python, "-P", "-m", "actions.server"]`.
+Candidate and published-Core browser receipts must assert this exact safe-path
+prefix. A stale three-argument assertion fails before browser launch; correct
+the assertion while retaining `-P`, module-origin and source-byte checks.
+Keep the producer assertion, outer receipt validator and its diagnostic mirror
+on the same prefix. A passing pytest case can still fail receipt admission;
+record both outcomes independently. Historical measured fixtures stay unchanged;
+forward projections used by admission unit tests are synthetic test inputs.
+
+On Windows, a child `bash` lookup can select the WSL launcher even when the
+Actions step itself uses Git Bash. Resolve the existing Git for Windows Bash
+beside the resolved Git executable and fail clearly if it is absent; do not
+enable WSL to repair a test launcher. Negative publication tests must prove the
+wrapper started before accepting an expected failure exit.
+The publication wrapper resolves prepared `python3`, then `python`, and fails
+closed when neither exists. Quote interpreter and scanner paths. Fake Git
+launchers in Windows Git Bash tests use the active interpreter explicitly;
+they must not depend on a bare `python3` shebang. Interpreter fallback never
+skips the staged-evidence scan or changes commit/push failure ordering.
+An inherited PATH does not prove shell interception. The publication fixture
+installs and checks a readonly Git function inside the same Bash process that
+sources the real wrapper. Its selected Python uses native Git for the unchanged
+scanner's actual staged-index reads. Keep the no-python3 shell profile separate
+from the native scanner's PATH. A startup-PATH reset must not allow a real commit
+or push; preserve exact call-order and controlled-failure assertions.
+
+Retain terminal coverage receipts with both PR head and actual merge checkout,
+per-package counts, first failing assertion and owned-service cleanup. A failed
+package suite withholds full coverage acceptance: incomplete source inventory,
+missing baseline and a partial percentage must not become qualified baselines.
+For candidate browser diagnostics, publish only bounded allowlisted exception
+classes and numeric source lines from the exact candidate test, never raw JUnit
+messages, paths or credentials. Diagnostics are advisory; pytest, strict JUnit
+and source-bound receipt validation still determine acceptance.
+The published-Core profile selects only its own exact test name under the same
+bounded diagnostic contract. Unknown profiles refuse before reading JUnit.
+Keep a hidden assertion unknown until this permitted diagnostic exposes it;
+a validator defect does not explain a separate pytest failure by implication.
+Run source-bound browser acceptance after locked frontend dependency and OAuth
+setup, before frontend embedding, native build and test phases. The embedded
+`_static_contents.py` is tracked and can be regenerated by the frontend build.
+Keep dependency preparation separate and avoid repeating npm installation.
+Its clean-checkout assertion remains mandatory. Do not ignore dirty paths or
+reset an unidentified source change to turn a failed source-bound gate green.
+Native MCP resource expectations must match the existing platform admission:
+the private Canvas provider requires Linux. Keep custom-resource and auth checks
+active on other platforms, and assert the absence of unsupported Canvas there.
+
+Bind packaged Canvas checks to the wheel and embedded
+`FILE_CONTENTS["canvas.html"]` hashes; the Runtime shell is a different resource.
+Source-built HTML, a host fixture, and actual ChatGPT are distinct evidence.
+Include a bounded long unbroken value at a narrow iframe width and compare body,
+document and paragraph scroll widths with their client widths. Preserve the full
+text rather than hiding overflow. A CSS overlay proves a proposed rule only;
+repeat the assertion against the newly built exact wheel before closing the
+packaged gate. Keep table/log scrollers and malformed-metadata rejection active.
+
+Installed sealed Data qualification is layered. Direct CSV/Parquet checks prove
+codec, manifest and object-seal behavior. A persisted registry/authorization
+fixture additionally proves its exercised grants, revocation and service calls;
+a reduced synthetic SQLite schema is component authority, not full Runtime or
+compiler-created Package/Run admission. `FoundryAccessGrant` has an operations
+list without an expiry field: revocation does not establish grant expiry.
+Keep PostgreSQL engine qualification separate from these DuckDB passes.
+
+The offline attachment helper only rebases recognized `workitems.db` layouts.
+Absence of that database yields zero rebases; copying native `server.db` and
+blobs does not rewrite native RunOutput references. Fresh database projections
+prove store readability, not authorized Runtime replay or TTL refusal. A
+cancelled fixture with zero RunOutput rows cannot prove terminal artifact reads.
+
+Installed archive/environment negatives must bind wheel hash and import origin.
+Traversal refusal must leave neither an escaped file nor a partial destination.
+The generated-worker environment constructor's closed key allowlist is separate
+from child execution, files reachable through ROBOCORP_HOME, live route auth and
+host network policy. Do not call a constructor check hostile-code isolation.
+
+An unapproved PostgreSQL fixture stays unexecuted after review rejection.
+A reviewable proposal names the exact owned image, no-pull policy, temporary
+network, role/credential/TLS changes, lifespan, and ownership-checked removal.
+Neither `--rm` nor a host supervisor alone proves removal after host failure;
+leave unsupported cleanup/TTL guarantees explicit and do not weaken TLS or use
+another credential/target to avoid the rejected action.
+
+An assembled route inventory classifies exposure; it does not prove denial.
+Probe every configured-key method with missing and wrong bearer credentials,
+including optional shutdown, before body consumption, DB/storage/dispatch or
+shutdown side effects. Keep public, managed-principal, MCP, WebSocket and artifact
+identity policies separate. The global installation key does not imply per-user
+principal semantics or establish domain-level multi-principal isolation.
+
+Keep platform admission at the shared private-provider fixture owners, including
+`test_local_provider_setup.provider`, `test_invoice_review.reviewed` and
+`test_provider_catalog.local`, before state creation or provider construction.
+The native Canvas factory intentionally returns `None` on unsupported platforms;
+assert that outcome without dereferencing it, while preserving Linux Task-policy
+validation and cleanup assertions.
+
+For a frontend formatting failure, format the reported file and run
+`npm run test:quality` from `action_server/frontend`. For Actions Core API docs,
+run package-local `poetry run invoke docs` through the prepared RCC package
+gateway. Review every generated page and its index links, including newly exported
+modules, then regenerate again and check that the file hashes remain stable.
+
 ### Action Server OpenAPI golden snapshots
 
 When an OpenAPI snapshot fails, compare parsed expected and observed JSON before
@@ -1903,6 +2372,26 @@ App-level Bearer enforcement can be absent from the OpenAPI `security` fields;
 an unchanged schema does not prove authentication. Verify the assembled server
 and router dependencies through the authentication regression, including the
 intentional public webhook exception.
+
+Keep `test_auth_route_inventory.py` synchronized with mounted route identities
+and methods. Its classifications do not prove a direct negative-auth request to
+every handler. For public trigger webhooks, test missing and incorrect nonempty
+HMAC secrets alongside a valid-secret control. Rejected requests retain the
+`REJECTED` audit row but must not dispatch work or update accepted invocation
+counts and timestamps. For credential read and rotation endpoints, assert that
+missing and incorrect bearer credentials fail before database or secret-generation
+access. `test_trigger_secret_boundary_327.py` covers these boundaries with local
+synthetic credentials and a patched work-item dispatch control.
+
+Distinguish basic server readiness from native Canvas readiness. Normal startup
+initializes native Canvas only when a private Runtime API key is configured;
+`--api-key None` disables authentication and does not establish Canvas readiness.
+The local key authenticates this Runtime instance. It is not an account password
+or an OAuth login. Use the supported native credential entry or existing key
+helper for the chosen client, and keep the key out of prompts and receipts.
+An owned loopback setup does not require introducing OAuth or a new tunnel merely
+to supply that key. Verify authenticated Canvas discovery separately from an HTTP
+health response, and keep frozen candidate handoff files unchanged.
 
 ### Action Server shared database
 
@@ -2105,7 +2594,7 @@ focused and package gates after the ordinary merge.
 
 ### RCC release acceptance pins
 
-The latest published stable release from `joshyorko/rcc` is `v18.19.3`,
+The repository's primary pinned RCC release is `v18.19.3`,
 published 2026-08-28, with tag target
 `4148c2b71705c9d2baf0e88b48d08a79cb7bda0f`; the GitHub release is neither a
 draft nor a prerelease. Direct downloads matched the publisher API digests:
@@ -3227,6 +3716,15 @@ Revision API and does not modify the legacy Robot ZIP/import path. The bounded
 Linux contract suite exercises successful mode normalization, invalid and
 non-empty destinations, links/special files, source/staged-byte mutation, and
 failure cleanup; it does not establish an RCC consumer/import proof.
+Directory enumeration needs a fresh open file description for every pass.
+Reopen `.` relative to the trusted directory descriptor with directory,
+no-follow and close-on-exec flags; `dup()` still shares directory iteration
+state. On Dakota Btrfs, descriptors opened before a mutation can omit newly
+created entries even while the reported offset is zero. The regression checks
+new-entry visibility and preserves the borrowed cursor. Namespace assertions
+use a fresh fixture-path listing while separate assertions retain borrowed-FD
+identity/lifetime checks. Keep the Btrfs/RCC temporary-directory gate; moving it
+to tmpfs or skipping these controls would hide this boundary.
 The staged-byte regression matches the destination descriptor by device and
 inode and writes the same-sized poison before the underlying read. A positive
 baseline and mutation control with constant timestamp observations verify that
@@ -3919,6 +4417,178 @@ correctness failure. Controlled browser performance remains a separate proof.
 
 ## Common Run-output migration and verification
 
+### Bounded invoice data-provider proof
+
+The private `data_queries.invoices` module implements only the named read
+`invoices.overdue/v1`. It accepts strict typed parameters and bounded rows,
+bytes and execution time. Operator configuration supplies a read-only DuckDB
+file or PostgreSQL connection; callers cannot submit SQL or select credentials,
+files or drivers. DuckDB is the optional `data-duckdb` Poetry extra. This is a
+provider foundation, not Canvas, Work Item review or full #131 acceptance.
+
+After RCC Doctor, Bootstrap and ToolkitTest, run the `InvoiceQueryTest` task
+in `developer/toolkit.yaml`. Set `ACTIONS_INVOICE_EVIDENCE_DIR` to an absolute
+retained directory. The task installs the locked `data-duckdb` extra through
+package-local Poetry and runs `action_server/scripts/verify_invoice_queries.py`.
+Set `ACTIONS_INVOICE_FULL=1` to include the complete portable Runtime suite;
+`ACTIONS_INVOICE_POSTGRES_IMAGE` selects an already-local alternative image.
+The verifier uses an already-local,
+digest-pinned PostgreSQL image, one resource-bounded loopback-only container,
+synthetic rows and tmpfs storage. It does not pull images or reuse existing
+services. Every invocation retains separate JUnit/logs, input hashes and cleanup
+status. `ACTIONS_REQUIRE_INVOICE_PROVIDERS=1` makes missing providers fail instead
+of skip. Ordinary package runs may skip the unconfigured optional provider cells;
+those skips are not two-provider acceptance. `--full` also runs the complete
+portable Runtime suite; neither mode proves ChatGPT or a packaged release.
+
+The PostgreSQL test fixture creates a random owned schema and removes only that
+schema afterward. It never drops or replaces a pre-existing `invoices` table.
+Still supply only a dedicated test database; tests create synthetic data and
+schema objects. The verifier supplies its own disposable database automatically.
+
+Both providers use read-only transactions. A real PostgreSQL view regression
+checks `transaction_read_only=on` and `transaction_isolation=repeatable read`
+inside the provider's transaction. PostgreSQL records its MVCC snapshot;
+DuckDB currently records only a read-transaction label. Neither label guarantees
+that an operator's mutable source is an immutable version. Snapshot retention,
+scan-cost metering, broader schema discovery and source-ingest policy remain
+separate gates. Exact exported bytes require the Run output content digest.
+
+The private invoice service reads its typed binding, limits and input from the
+existing persisted Run admission under current actor authorization and Attempt
+fencing. Changing a binding requires another Deployment revision; removing its
+configured provider blocks the pinned Run instead of selecting a replacement.
+The optional `data_binding` field is omitted from legacy canonical admissions,
+preserving their stored request fingerprints. New data-bound admissions are
+unknown to older binaries and must fail closed there.
+
+### Bounded Knowledge collection provider proof
+
+`action_server/tests/action_server_tests/test_knowledge_collections.py` runs
+each provider-backed collection contract against both DuckDB and PostgreSQL.
+Its PostgreSQL fixture reads the dedicated test DSN from
+`ACTIONS_INVOICE_TEST_POSTGRES`, creates a unique `actions_knowledge_test_*`
+schema, points the provider connection's `search_path` at that schema, and drops
+only that owned schema afterward. Use a task-owned synthetic database; do not
+point this fixture at a shared or production database. Set
+`ACTIONS_REQUIRE_INVOICE_PROVIDERS=1` so a missing DSN fails instead of
+silently skipping the PostgreSQL parametrizations.
+
+After the RCC Doctor → Bootstrap → ToolkitTest sequence, run the focused suite
+from `action_server/`:
+
+```bash
+poetry run pytest tests/action_server_tests/test_knowledge_collections.py
+```
+
+The provider-backed
+cases exercise typed ingestion, source-version provenance, bounded search,
+persisted revocation, schema/type rejection, and fail-closed stale or missing
+ingest behavior. Separate tests cover cross-Workspace denial before provider
+access, path escape and direct symlink rejection, searchable terms, and strict
+pagination bounds. The revocation case creates a new collection service but
+reuses the provider object; it proves persisted database state across service
+reconstruction, not process restart or fresh-provider recovery. A provider
+skip is not conformance evidence, and the SQLite/control-plane PostgreSQL
+gates do not substitute for this real PostgreSQL provider contract.
+
+Ingestion requires both current read and management authority before reading
+source files or publishing provider state; read-only access does not authorize
+replacement of a collection. Source versions use a domain-separated,
+length-prefixed name/content encoding. NUL-delimited concatenation is ambiguous
+when document bytes contain separators, so it cannot establish file-boundary
+identity. Earlier unpublished candidate bindings need recomputed versions and
+explicit reingestion to use this encoding; no automatic migration is performed.
+
+Metadata validation and document selection must use one engine snapshot. DuckDB
+opens a read transaction; PostgreSQL uses a transaction-local REPEATABLE READ,
+READ ONLY transaction. The concurrent-reingestion regression schedules a real
+second writer connection between the metadata and document reads and requires
+the original complete result, rather than a falsely empty old-version result.
+This pins an already-open read; persisted revocation rejects later reads and
+does not recall an authorized in-flight snapshot. No mock engine or SQLite
+substitute qualifies this provider gate. File ingestion still reads each trusted
+operator-selected file before checking its aggregate byte budget; preallocation
+I/O bounds and crash/process-restart recovery remain separate work.
+
+Canonical RCC `InvoiceQueryTest` now runs both lifecycle/Knowledge component
+suites with zero allowed skips before its existing provider/output suite. The
+receipt records loaded module paths and hashes and rejects editable imports
+outside the selected checkout before starting PostgreSQL. Always bootstrap each
+exact-source worktree into its own package-local `.venv`; sharing the prepared
+RCC toolchain cache does not authorize reusing another checkout's editable
+package environment. Successful setup with the checked-in lock and pinned
+toolchain establishes this environment only; it does not diagnose a different
+worker's earlier Poetry failure from successful PyPI metadata requests alone.
+
+Isolate `ROBOTS_HOME` as well as `ACTIONS_HOME` and `ROBOCORP_HOME` for cloud CLI
+tests. Runtime's robot environment store uses the separate `ROBOTS_HOME` setting
+and otherwise creates `~/.robots`; the other two home settings do not redirect
+that path. On a read-only host home this can fail before project, packaging or
+redaction assertions run. Use a task-owned writable robot store, preserve the
+original failures, and rerun the actual CLI cases before calling setup fixed.
+
+NDJSON materialization uses the existing provisional/sealed/final Run-output
+service, including its current fence and grant checks. Paging resolves that
+authorized immutable output on every request; export uses the same resolver.
+Reconstructing a database connection and output provider can reopen the bytes
+without the old data connection. The slice installs no public query, Canvas or
+MCP route and supplies no Work Item business-state authority. A source service
+test or fresh connection is not an RCC worker/process-restart acceptance claim.
+
+The private `InvoiceCanvasFacade` now binds result paging/export to a trusted
+server `CanvasResultScope`: exact Workspace, Deployment revision, application
+ID and application revision. `ExecutionSnapshot.canvas_application` persists
+that subject in the existing Run admission, without another database or app
+registry. The common resolver checks both current actor grants and the expected
+subject before opening output bytes. Application IDs, revision digests and host
+visibility metadata grant no authority. An absent application pin cannot fall
+back when a Canvas-scoped reader requests an older result.
+
+The existing authenticated `RunOutputTransport` accepts the same optional
+server-held scope. It cannot be selected through request metadata or a client
+application-ID header. The assembled Runtime HTTP regression verifies real
+sealed NDJSON bytes and rejects a legacy handle before provider access. The
+facade is read-only: paging, remount or export creates no new Run or query.
+Legacy admissions omit the absent optional field, preserving their canonical
+fingerprints. This is a private result-binding seam, not a generated app,
+activated revision, general CanvasSpec, connected template, MCP bridge or E1
+claim. The existing Canvas template still intentionally returns no artifact
+until its public app/principal binding and tool routing are implemented.
+
+`CanvasRevisionStore` is a separate private lifecycle primitive. Its
+`stage`, `activate`, `rollback` and `pin_active` calls require a server-derived
+`Actor`; do not restore actorless compatibility overloads. Each operation
+supplies the exact workspace, deployment revision and app scope to the server
+authorization callback. Staging checks authorization before validation or
+storage; activation and rollback check it before pointer mutation. `pin_active`
+first resolves the current pointer, then authorizes that exact revision before
+reading its files. Staging validates bounded relative paths and app contents,
+stores files under a content digest, then re-reads and hashes even an existing
+digest path. Activation uses a SQLite immediate transaction and
+expected-current compare-and-swap; rollback also checks the caller's expected
+active revision and separately authorizes the exact revision being restored
+before changing the pointer. Portable resource names and workspace path
+components reject drive-qualified paths before filesystem access. Tests should
+retain negative actor/workspace/deployment cases,
+pinned bytes across activation, restart/rollback, tamper rejection, and an
+unchanged active pointer after authorization or compare-and-swap rejection.
+These source-level lifecycle primitives do not themselves register a generated
+app, authorize an MCP host, or establish ChatGPT acceptance.
+
+For reproducible local distributions, place the publisher-digest-verified pinned
+RCC file in `action_server/src/actions/server/bin` before Poetry inventories
+either format. A cold `poetry build` was observed to create an sdist without RCC,
+then download RCC during its wheel hook; the next sdist included it and wheel
+RECORD ordering changed. Preserve that failed attempt. After verified preseeding,
+the existing `ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD=1` flag disables only the
+redundant download. With `SOURCE_DATE_EPOCH` set to the source commit timestamp,
+two subsequent wheel/sdist pairs were byte-identical. Generate public OAuth
+configuration from the versioned repository inputs first; never borrow a test's
+generated module or private release state. This bounded Linux build observation
+does not prove an installed consumer, native/image/SBOM qualification or the
+entire independent release pipeline.
+
 Refreshing the common Run-output branch preserves its service and regression
 controls but creates a new source union requiring fresh CI. The retained Windows
 failure at `9cb61c52` occurred on the resource catalog test's **first** native
@@ -4285,3 +4955,2146 @@ Keep disposable registry rows on nonpublishing qualification/backup branches,
 never in the reviewed default publication registry. Compare tested code blobs to
 the repair commit, retain original owner snapshots before/after, and distinguish
 shared-verifier qualification from unrun default-button activation before merge.
+
+### Candidate dependencies in Runtime CI
+
+`build_common_tasks(..., install_extras=("data-duckdb",))` makes the Runtime's
+ordinary install and devinstall admit its provider test dependencies. The shared
+devinstall transformation preserves an explicit `develop = false` in either the
+main or group declaration; otherwise it can silently replace the fenced SDK
+candidate with an editable import outside the environment prefix.
+
+The PR wheel fixture builds and stages the exact Work Items SDK alongside Core
+and HTTP Helper before cibuildwheel resolves Runtime dependencies. The explicit
+`--candidate-sdk-wheelhouse` verifier mode binds SDK/Runtime versions to the
+producer pyprojects (SDK `[project].version`, Runtime `[tool.poetry].version`),
+verifies the installed SDK's local archive origin, RECORD
+and Python bytes, and retains public Core/Helper version, URL and SHA checks.
+This flag is PR-only; the default published-floor verifier remains pinned to
+Runtime 1.0.4. Staging unpublished SDK 0.5.0a1 locally is a test prerequisite,
+not permission to publish it or relax the Runtime dependency floor.
+
+The cibuildwheel container mounts only `action_server` at `{project}`. A sibling
+`work-items/pyproject.toml` is unavailable there. The PR producer writes
+`candidate-sdk-wheelhouse/producer.json` with its actual Git SHA, exact SDK
+pyproject bytes/hash, Runtime pyproject hash and wheel filename/hash. Verification
+requires the expected CI source SHA plus matching mounted Runtime metadata and
+SDK wheel bytes before reading the staged SDK version. Host verification also
+checks the sibling source when present. Missing, changed or foreign producer
+metadata fails closed; do not hardcode the candidate version or omit this
+binding merely because dependency installation succeeded.
+
+
+### Runnable local invoice reconciliation example
+
+`InvoiceReconciliationDemo` composes existing generated revisions, Canvas/MCP,
+exact-result SQL review, fenced Work Item, distinct Run/Attempt, RCC 18.19.3 and
+scoped artifact transport. The versioned example and allowlisted local export
+live in `action_server/examples/invoice_reconciliation/`. Candidate Runtime
+1.1.0a5 and SDK 0.5.0a1 need verified local artifacts, not an assumed public-index
+release. The engine remains in the package; exports copy no engine source.
+
+Use a fresh absolute owned directory. The host binds only loopback, with a
+synthetic server-held actor, ephemeral cookie, exact Origin and CSRF checks. It
+changes no production identity or tunnel. The new DuckDB reconciliation profile
+verifies CSV/database hashes and shows invoice, PO and ledger IDs with
+expected/actual price, quantity and totals. Existing PostgreSQL qualification is
+separate from this DuckDB-only profile.
+
+Approval and execution are separate explicit actions. Restart uses `load_db`;
+`create_db` recreates indexes and is not a reopen API. Restart never regrants
+revoked authority or reactivates old revisions. Source/renderer fingerprints must
+remain exact; changed bytes need a fresh directory with old evidence retained.
+The capture script operates a real browser with actual MCP/RCC. `verify.py`
+checks revocation, origin, workspace, inactive revisions and rollback without
+erasing admitted work. The MCP proxy excludes absent optional typed wire fields
+(`exclude_none=True`) while preserving explicit nulls inside private result
+objects. Null optional TextContent annotations can prevent bridge tool delivery.
+
+This is interactive E2. Executor has read/write integration; this does not prove
+invoice discovery, actual ChatGPT render, model/app audience grants, review,
+artifact readback or reconnect. E1 remains NEEDS_OPERATOR. Persistent identity,
+tunnel or security changes need separate approval; never overwrite a working
+Executor transport to qualify this example.
+
+Unsupported-platform applicability marks must run before imported fixtures
+construct the Linux-only secure filesystem provider. Dedicated Linux browser
+verification still requires actual execution with zero skips. PID readiness
+requires complete contents: the browser deadline regression uses atomic rename
+and a delayed partial-write control while retaining descendant cleanup. These
+repairs do not extend filesystem support to Windows/macOS or turn skips into
+execution proof.
+
+
+For authenticated invoice E1, an operator should first inspect the connected
+transport's actual tool list and resource MIME `text/html;profile=mcp-app`, then
+open the resource in ChatGPT and verify official UI-bridge initialization. Verify
+that the model cannot call app-audience review tools, that merely opening or
+reconnecting creates no approval, and that an explicit current actor decision
+binds the displayed result/revisions. Follow the authorized worker Run to scoped
+artifact readback, restart/reconnect with the same identity, and revoke authority
+to confirm denial. Record actual workspace/grant/error details rather than
+inferring transport limitations from metadata search. If the existing Executor
+transport cannot preserve the resource/audience contract, prepare a separate
+identity/transport configuration for approval; do not edit the working tunnel.
+Local E2 and discovery evidence cannot close this authenticated-host gate.
+
+
+Actual ChatGPT Desktop acceptance must pin the installed Runtime artifact as well
+as the host product/version and account capability. A newer repository evidence
+commit does not change the source identity of an older tested wheel. The a38
+Linux CPython 3.12 wheel is not native Windows/macOS qualification. Verify local
+artifact bytes and noneditable import origins before reusing cloud receipts.
+A public `/mcp` route and a supported authentication mechanism are independent
+prerequisites: the a38 SDK proof uses a fresh Bearer API key, which does not prove
+that a given ChatGPT connection UI supports it. Loopback is not automatically
+reachable by remote ChatGPT. Do not adapt the existing Executor tunnel or weaken
+host/origin/auth checks to make an unsupported connection work.
+
+A temporary host-test connection needs an exact ownership ledger and a before/after
+inventory. Remove only the connection ID, process/datadir and task-scoped authority
+created for that test; never overwrite whole user configuration during cleanup.
+Record unsupported Desktop rendering or tool/Tasks capabilities separately from
+successful SDK/reference-host proof. Cloud client initialization/network failures
+remain blocked until an actual model/tool interaction succeeds; a proposed narrow
+host test does not silently waive the owner's prerequisite matrix. The
+[reviewed a38 local-agent draft](../program/evidence/actions-next-327/recovery-a38/dakota-host-draft/agent-prompt.md)
+provides the pinned artifacts, public setup boundary, screenshot inventory and
+cleanup contract. It is a draft, not permission to dispatch a Dakota test.
+
+The invoice reconciliation profile now travels as an optional typed app-audience
+page field, copied from the sealed result rather than parsed from a description.
+The existing renderer uses separate status, PO expected values, invoice actual
+values, variance and discrepancy columns. Legacy rows keep the generic records
+table. Client validation rejects unsafe integers and foreign invoice identity;
+UI formatting never recalculates the result or changes approval bindings.
+
+For example consumer qualification, `prepare.py` validates the exported file
+manifest, creates a fresh prefix and uses Python `-I` for installed-module probes
+and launch. The export derives public dependency constraints/hashes from the
+Poetry lock plus the existing public-floor verifier, not an existing venv freeze.
+A cache-disabled download freezes the binary wheel closure; installation and a
+second-prefix replay use `--no-index`. Keep package replay separate from fresh
+RCC Artifact preparation and from retained-Artifact execution. Neither an
+already prepared consumer nor a successful local replay proves a cold,
+network-isolated host install. Record the actual network and native-library
+requirements and retain failed preparation roots instead of adopting them.
+
+
+Use `RCC_NO_BUILD=1` when qualifying retained-Artifact execution so missing
+materialization cannot silently trigger a build. A fresh package prefix alone
+has no RCC hololib/Artifact: no-build publication must fail closed and its partial
+owned preparation root must remain available for diagnosis. Test an actual new,
+explicitly approved Run against the retained Artifact separately from terminal
+receipt replay, which performs no task execution. Process-tree `connect` tracing
+can establish that a particular replay made only loopback connections; it does
+not enforce an air gap or qualify transferred-Artifact restore on a clean host.
+The Artifact compatibility receipt is authoritative for native prerequisites.
+For this Linux amd64 build it requires glibc >=2.36 and `libX11.so.6` alongside
+the normal glibc loader/libraries, even though the invoice task is headless.
+
+### Foundry acceptance versus invoice composition
+
+At the protected invoice checkpoint, `GeneratedInvoiceApp` accepts exactly the
+existing renderer and `invoice.json`. Its successful E2 does not establish
+external-model CanvasSpec authoring, the public six-tool foundry facade,
+zero-user-package plugin boot, generated Python Package compilation, common
+Deployment resolution or authenticated ChatGPT E1. Reuse its revision,
+authorization, review, Run/Attempt and artifact boundaries as components. Keep
+existing-capability composition, generated-backend Package/Deployment activation,
+reference-template packaging and actual host acceptance as separate proofs.
+
+A strict Package/Deployment reference proves syntax and scope comparison, not
+object existence or authorization. `ProposedStagedInventory` proves selected
+bytes were copied and re-read, not complete source selection, atomic whole-tree
+snapshot, trust, compiler identity or an admitted Package Revision. A foundry
+integration must obtain those missing facts from the common compiler,
+Deployment and Run authorities rather than treating a typed reference or
+staging receipt as publication. The October amendments on #71/#99/#100/#127 and
+#129/#130 retain these criterion boundaries without requiring every umbrella or
+distributed feature to close before a local vertical can run.
+
+The native foundry MCP projection is an opt-in adapter, not a first-boot service.
+`McpServerSetupHelper(canvas_foundry=...)` needs a trusted domain port and an
+authenticator that supplies actor, Workspace and model/app audience. Synthetic
+headers in its protocol tests are test inputs, not a public identity protocol.
+The fixed model catalog has six authoring tools plus `canvas_open`; app-only
+dispatch/status/cancel/artifact tools require the verified app audience. The
+launcher accepts exactly `{}`. Its read-only annotation does not prove that a
+domain implementation is effect-free; that requires service tests.
+
+Native tool and resource identities must be protected both when directly
+registering an action and when replacing a complete catalog. Reserve query/page
+names until a real authorized implementation exists; an absent projection must
+fail without a fallback call. Static renderer bytes and schema snapshots bind
+the catalog identity. Scoped application data travels in result `_meta`, while
+only deliberately selected authoring data belongs in model-visible content.
+
+The adapter bounds JSON arguments and replies, rejects non-finite JSON numbers
+and hides provider exception details. It does not retry mutations. A transport
+error after a domain call cannot establish whether the mutation committed:
+reconcile the same request identity through the domain authority before retry.
+Protocol tests with a fake domain port prove routing and audience separation,
+not durable authoring, revision authorization, activation, execution or E1.
+
+The clean-wheel contract archives committed `HEAD`; it deliberately does not
+build a dirty source overlay. Commit a candidate version/source checkpoint before
+running that acceptance. A wheel from the previous commit must fail the current
+version/member binding instead of being credited to uncommitted code.
+
+Foundry schema17 adds six empty records to the common Runtime database:
+Package/deployment revisions, deployment heads, mutation receipts, audit and
+explicit foundry grants. Registration composes the complete model list before
+`Database.initialize`; an initialized Database rejects a different class set.
+Services borrow that database and transaction rather than creating a Canvas
+side store. Raw ORM records do not validate portable manifests, authorize an
+actor or admit a compiler result; those remain service boundaries. In particular,
+a Run read/execute grant is not an install/bind/activate grant.
+
+The additive migration creates no grant, application activation, Review, Work
+Item, Run or Attempt. Its injected partial-DDL failure rolls back new tables and
+the migration marker on SQLite and real PostgreSQL. Storage rollback and fresh
+interpreter readback are separate from deployment-service CAS/idempotency and
+authorization acceptance. The owned invoice verifier includes a zero-skip
+`foundry_storage` gate and hashes the new model/migration inputs. For a binary
+rollback, preserve a coordinated schema16 SQL/object/journal backup; deleting
+the schema17 marker is not a downgrade or a safe way to reopen newer state with
+an older binary. No production migration is authorized by these fixture tests.
+When backdating a current test database, remove every newer schema object before
+changing the marker. The shared fixture helper drops foundry records in reverse
+registration order. Leaving schema17 indexes in a purported schema10/12/13
+fixture correctly causes duplicate-index rejection; do not relax migration
+checks to accommodate that invalid fixture.
+
+The experimental portable Package schema uses a logical package key; installed
+`PackageRevisionRef.package_id` is a scoped UUID. Keep that mapping outside
+portable bytes. Its sourceArtifact is a measured ZIP: source inventory JSON is
+neither those ZIP bytes nor their digest. The existing measure/stage/re-read
+helpers attest only the explicitly selected set, not selection completeness,
+source trust or a globally atomic snapshot. Compiler hash/admission rules in
+the handoff remain provisional until their own implementation gates pass.
+
+
+The semantic CanvasSpec Core contract is part of the installed dependency floor,
+not an editable source overlay. Runtime candidate metadata requires Core
+`>=1.1.0a2,<2.0.0`; package-local development installs Core noneditably. Its
+public wire keys are camelCase, `from_python` is the explicit Python-name
+constructor, and empty `visibility` means no audience. Numeric `version_info`
+uses the release tuple even for provisional versions. The Core suite and
+installed-candidate contracts cover these boundaries.
+
+Candidate wheel verification carries Core and SDK in separate wheelhouses.
+`write_candidate_sdk_producer.py --distribution actions-core` binds the exact
+Core project bytes, Runtime project hash, source SHA and wheel digest before
+project-only cibuildwheel tests. Pass `--candidate-core-wheelhouse` explicitly;
+the default published Core/Helper floor remains pinned and must not accept an
+unbound local candidate. Candidate origin, installed RECORD members, module
+prefix and selected wheel digest are checked independently of resolver success.
+
+The declared frontend `npm test` runs both Runtime and Canvas View suites.
+Canvas View's Vitest include covers every `src/**/*.test.tsx`, including the
+semantic renderer; the Runtime topology test guards that union. Quality/type
+checks, a Canvas build and the official bridge harness remain separate gates.
+The harness's optional real-Runtime case being skipped is not bridge-to-domain
+or authenticated-client acceptance. Inject domain dispatch/status/artifact
+adapters into the semantic renderer; its logical binding labels confer no
+Runtime capability or authorization.
+
+Runtime action import probes must parse the complete PEP 440 Core version and
+compare its numeric release tuple; splitting dotted components with `int`
+rejects provisional Core versions before action discovery. The existing
+vendored version parser handles alpha, release-candidate and dev/local suffixes
+and still rejects malformed probe output. Package metadata and no-managed-env
+import tests exercise the actual child interpreter boundary.
+
+
+Schema18 permits a null Package integrity anchor only to represent a UI-only
+Canvas selection. Its forward migration preserves schema17 rows and retains
+the real Package FK; nullable does not mean an unknown Package is admitted.
+SQLite rebuilds this one table transactionally; PostgreSQL drops only the
+column's NOT NULL constraint. Preserve a coordinated pre-upgrade backup for
+binary rollback: changing a migration marker does not reverse either schema.
+
+The Deployment selection carries the public CanvasSpec, exact logical
+capability bindings and an independently hashed Canvas application revision.
+That source digest is separate from the Deployment revision digest, avoiding
+self-referential hashing. Revalidate existing Core models through their alias
+wire grammar before embedding them; round-trip serialization uses aliases.
+Package-less selections require a view and prohibit plans, bindings and
+execution profiles. Backend selections require explicit plans/profiles and
+retain every Package check; the singular FK is only an integrity anchor.
+The service includes the Canvas application pin in each execution snapshot.
+Neither a CanvasSpec nor an empty snapshot map grants execution permission.
+
+Deployment mutation reauthorizes all selected references after acquiring the
+common Workspace lock, then atomically writes the immutable selection, observed
+head/lock-version CAS, actor-scoped request receipt and audit event. Replay
+reauthorizes and validates the original immutable receipt. Isolated Package
+port doubles qualify these consumer semantics, not genuine compiler admission
+or end-to-end Run execution. Those require their own combined gates.
+
+
+`SqlAuthoringAuthority` stages complete immutable Deployment revisions in the
+same SQL records. Bounded edit history is a linear revision sequence, not an
+active pointer. `canvas.create`/`canvas.apply` atomically persist edit CAS,
+actor-scoped receipt and audit without creating a Deployment head. Explicit
+release activates the exact latest candidate; rollback selects a retained exact
+revision through the same head CAS without erasing edits or audit. Even a
+persisted execution snapshot is unavailable to `resolve` until activation has
+an audit receipt. Backend authoring fails closed without the common Package
+build-evidence adapter; caller-supplied phase flags alone are insufficient.
+
+Foundry authorization reads live common SQL Workspace state and explicit
+FoundryAccessGrant operations. Exact typed reference grants remain separate
+from workspace/app permissions; Run/output permissions do not imply deployment
+or generated-source permission. Mutation rechecks policy under the Workspace
+lock. Idempotent staging compares the retained full selection/base as well as
+the request fingerprint; create excludes only its server-allocated application
+UUID. Activation replay also binds the audited prior head and exact target.
+The native SDK protocol/SQL harness uses a synthetic authenticated context and
+static HTML sentinel: it proves tools/resource metadata and SQL orchestration,
+not installed transport, rendered official View, generated execution or E1.
+
+The boot lane's `templates/canvas-first-boot` directory is an isolated fixture.
+Its worker Core pin is checked alongside every other checked-in manifest, and
+contract tests separately require it to remain absent from both shipped
+catalogs. Adding a fixture must update the explicit inventory without silently
+admitting a new starter or weakening the existing dependency-pin checks.
+
+`ActivatedReviewedExecution` joins a current common Deployment head to an
+already approved exact-result Work Item. Dispatch resolves the selected logical
+binding through the common Package/Plan policy, then claims that exact item;
+it never falls back to an older item in the queue. Counter → Workspace locking
+keeps selection, claim, Run admission and its audit in one SQL transaction.
+A failed admission rolls the claim back. Duplicate delivery reuses the retained
+claim, Run and Attempt; it does not create a new grant or launch RCC.
+
+A changed active revision blocks new dispatch from a stale app. An already
+admitted Run can still resume its exact historical activated selection after
+live authorization checks. An expired claim remains fenced and requires
+explicit reconciliation; neither dispatch replay nor restart reclaims it or
+automatically launches again. This adapter is a domain admission boundary,
+not proof that an MCP host has an authorized interactive execution session.
+
+The optional `ReviewedCanvasExecution` projection keeps `canvas_dispatch`
+app-only and exposes a fixed model `capability_invoke` route over the same
+admission service. Both accept only a logical binding and an exact proposal;
+neither accepts replacement inputs or records approval. A missing trusted RCC
+runner fails before claiming an item. A retained launch intent blocks replay
+execution; a completed Run returns its original identity. There is no background
+queue or second execution journal in this projection.
+
+For interactive app execution, `CanvasCaller.scope` must come from trusted
+authentication and match the exact application/Deployment revision. Such an
+app context cannot list or invoke model authoring/capability tools. Visibility
+metadata and caller-supplied audience or revision arguments cannot confer this
+authority. The ordinary owner-key bootstrap still authenticates a model context;
+adding this port does not install an app grant or enable generated execution in
+an unconfigured host.
+
+The official MCP Apps bridge can forward View calls over the authenticated
+model connection. A forwarded request therefore does not acquire app authority
+from visibility metadata or an audience header. `CanvasMcp` can attenuate that
+connection with a server-issued capability in private `actions.appSession`
+metadata. It binds the existing principal, Workspace, application/Deployment
+revisions, saved-result handle and logical binding. It lasts at most15minutes;
+the process holds at most256 outstanding capabilities. Restart invalidates them.
+An authenticated reopen issues a fresh capability; SQL still holds reviews,
+Work Items, Runs, Attempts and outputs. Treat these capabilities as transient
+secrets when retaining protocol diagnostics; never put them in model content,
+screenshots, repository receipts or persistent configuration.
+
+`ReviewedCanvasView` opens an active authored revision and saved result without
+offering, approving or running work. Separate View actions offer the exact
+result, record an explicit decision, then execute the approved result. Live
+SQL permissions and current revision still govern approval/admission; the
+capability cannot authorize another result/binding or model authoring. Status
+and artifact reads use the retained native Run and sealed output authority.
+The official View verifies the returned result digest/size before requesting
+an inline host download, so it needs no new public download endpoint.
+
+The View also supports explicit inspection of the complete bounded saved source
+and sealed generated result as text. Those reads verify scope, media type and
+SHA256 against the exact proposal or published Run descriptor; displaying
+untrusted text never renders HTML. Reading an artifact does not depend on a
+host implementing the optional download request. Neither inspection happens
+on mount or approves a result.
+
+Reopening after source expiry is permitted only for an existing exact approved
+review with an admitted native Run. It checks the retained input seal and live
+policy, and reissues only the ephemeral View capability. The source's expiry
+does not change. A pending review or approved item without a Run cannot use
+this recovery path to admit new work. Recovering the review is a read operation;
+dispatch remains an explicit separate action, including duplicate delivery.
+
+Ordinary Runtime startup remains read-only for execution unless the trusted
+local host explicitly supplies `ACTIONS_FOUNDRY_EXECUTION_PROFILE`, an absolute
+path to a bounded `actions.runtime-rcc-profile/v1` descriptor. It selects
+already-authorized immutable worker/policy/output-provider references, a stable
+worker identity, explicit trusted-developer admission and a measured RCC
+preparation receipt. It grants nothing and never restores revoked policy.
+Generated Python is trusted developer code, not an OS sandbox. The selected
+RCC capability must have exactly one locked allowed plan equal to its default;
+the shared resolver reauthorizes that plan and all three profile references.
+Unconfigured execution, unsupported bindings and unqualified artifacts fail
+before Work Item claim. Qualify an installed descriptor/ordinary CLI and the
+actual official View separately from source or SDK transport tests.
+
+Canvas binding metadata carries a canonical package-local `CapabilityId`, not
+a UUID. The generated compiler emits IDs such as `action.generated_echo`.
+The View accepts bounded nonempty NFC text without lone surrogates for this
+field, while Workspace and Package IDs retain their UUID validation. The
+identifier remains opaque metadata; it never becomes executable code or a
+client permission. A real official-host capture exposed the former UUID-only
+parser rejection even though the authored schema, SQL and MCP transport
+were valid. Keep a generated-ID renderer regression alongside UUID examples.
+
+Manual Runtime publisher identity tests use an owned local bare Git remote to
+exercise both preparation and publication controllers. Wrong repository, branch,
+workflow reference, workflow SHA and a checkout ahead of or behind current
+`origin/community` must fail; a declared matching SHA cannot admit an unpushed
+controller. Keep these checks distinct from producer/backup-run validation. The
+owner actor guard is not independent approval against a stolen owner credential.
+Review live branch/environment protection and actual package-token scope before
+publication; code tests cannot establish that security disposition.
+
+Frozen-source Core validation uses the full package pytest selection without
+`--force-regen`: `invoke test` otherwise permits rewriting golden snapshots.
+Run the configured lint and typecheck separately and distinguish an absent
+optional Markdown tool from their Python results. A source import inventory
+does not replace wheel-member and clean-consumer origin verification.
+
+An unconfigured installed Canvas exposes the six authoring tools, including
+preview, plus the read-only launcher. Do not substitute `capability_invoke` for
+preview in a client harness: execution is conditional on a configured trusted
+profile and policy. A catalog/resource/authoring/restart proof does not prove
+app-only interactions, generated execution or authenticated ChatGPT rendering.
+
+Use pytest's supported `--robocorp-log-output` option to put owned diagnostic
+output on a volume with measured headroom during large RCC gates. Preserve old
+output with a complete hash-verified relocation receipt before reclaiming its
+workspace location. A pinned full-toolkit task-input fixture can require several
+GiB beyond the SDK-only worker; serialize heavy gates, retain failed receipts,
+and preserve verification/trust policy when diagnosing capacity.
+
+### Qualify fresh ordinary compiler startup
+
+Start ordinary CLI qualification from an absent owned datadir. Use the supported
+`ROBOTS_HOME` setting when the platform home is read-only. Boot preparation must
+create and validate `cache/compile` before the compiler's first temporary
+workspace: pre-creating it in a fixture conceals first-use failure. The boot
+regression checks fresh creation, repeat startup, and rejection of file/symlink
+parents; installed a26 failed before executor invocation when this parent was
+absent. Keep UI lifecycle, compiler build/import/tests, and actual admitted
+execution evidence separate.
+
+Record authoring, model invocation, bound-app interaction, installed startup and
+coordinated restore as separate acceptance cells. Preseeded official-host
+execution does not establish blank authoring; model execution does not establish
+app-audience dispatch; legacy attachment restore does not establish common
+Runtime recovery. Promote each cell only from its exact source/artifact receipt.
+
+For relocated common SQLite restore, stop every owned writer, pin the complete
+datadir manifest before copying, and preserve the configured external artifact
+dependencies separately. Qualify actual installed restart, immutable revision
+readback, terminal Run/Attempt and managed-completion replay, sealed artifact
+byte/digest reads, and unchanged original bytes. A completed item's old
+`items.claim` request must still fail instead of issuing a live claim; terminal
+readback uses the retained historical claim. Same-version local SQLite success
+does not establish PostgreSQL restore, reconstruction after RCC cache loss, or
+cross-version common-schema downgrade.
+
+A trusted execution descriptor is not an authorization grant. Record synthetic
+`execute_generated_source` and exact profile grants separately from default
+provisioning. A reviewed dispatch additionally requires a genuine scoped source
+result and explicit decision; never manufacture an invoice approval to complete
+an ordinary-host gate.
+
+### Bound owned RCC verification caches
+
+Real compiler/execution fixtures can materialize many large RCC views even when
+they reuse an immutable artifact. Measure free disk before long serial gates.
+The Foundry fixture supports `ACTIONS_PACKAGE_COMPILER_OWNED_VIEW_CLEANUP=1` only
+with its exact task-owned marker and cleanup evidence directory. It retains
+metadata and invokes pinned RCC deletion after checking for active processes.
+Never prune a home shared with another running gate. Keep artifacts, catalog,
+source/build receipts and test evidence; serialized cache cleanup is not a
+consumer restore test. Enable the fixture before the process starts.
+
+Installed-engine MCP Apps browser qualification must record the reference-host
+source revision, dependency install and build, browser executable, and whether
+the server is an ordinary CLI or a synthetic authenticated service composition.
+Capture the inner App frame to avoid exposing host metadata/session tokens.
+A successful actual bridge/RCC/result flow does not establish blank-authoring,
+CLI restart, authenticated Codex, or ChatGPT E1 acceptance.
+
+Qualify upgrade and downgrade with exact installed old/new consumers in fresh
+interpreters, retaining origins and wheel hashes. Relocate disposable legacy
+attachment fixtures before downgrade readback so absolute paths cannot silently
+read the original datadir. Successful legacy queue readback is format-specific;
+a nonzero exit alone is not safe-refusal evidence. Common SQL, object storage,
+journals, Run/effect lineage and caches need separate coordinated restore gates.
+
+For common PostgreSQL restore qualification, quiesce owned writers and pin both
+the SQL schema dump and the separate immutable object inventory before copying.
+Restore into an isolated database and verify exact execution snapshots,
+historical claims, Run/Attempt lineage and artifact bytes from fresh installed
+consumer processes. Verify original object bytes are unchanged. A SQL dump alone
+does not include filesystem artifacts. Exclude connection contexts and database
+dumps from public evidence; retain digests and bounded readback receipts. This
+same-version service-composition test does not establish ordinary CLI PostgreSQL
+configuration, active-effect recovery, cache-loss recovery or schema downgrade.
+
+The full invoice verifier also runs the portable Runtime suite, whose JUnit
+count includes skipped cases. Report passed cases separately from total cases
+and classify each skip by reason. Its generic RCC opt-ins remain disabled even
+when worker/compiler/generated switches are enabled; cite a separate exact-source
+actual generic run rather than treating those skips as covered implicitly.
+
+### Explicit offline local owner authorization
+
+The configured Runtime still never grants execution during startup, activation, discovery or dispatch. An explicit local operator can use `action-server authorize-local` to provision its existing saved owner after stopping Runtime and all independent SQLite writers. This v1 command is POSIX/local-SQLite only, uses the existing canonical `action_server.lock`, never kills a lock holder, and refuses `ACTION_SERVER_DATABASE_URL`. It opens only the existing `server.db` in the specified datadir; it neither creates a realm/database nor migrates one. Custom DB filenames and remote PostgreSQL deployments need a separately qualified operator path. The caller must exclude concurrent same-user filesystem changes: path-based file checks and the cooperating Runtime mutex are not adversarial same-user filesystem confinement or proof that arbitrary SQLite tools have stopped.
+
+The datadir must be owned by the invoking OS user with owner-only permissions; `server.db`, the request and profile must be private owned regular files. Symlink paths, hardlinked state, unsettled SQLite sidecars, and an unsafe canonical lock file are refused. No permission bits are repaired automatically. The command verifies the existing bootstrap Request and Audit lineage and active saved Workspace; it cannot select an arbitrary grant recipient. Schema/validation errors do not echo rejected token values.
+
+Local authorization refusal logging happens after leaving the validation exception handler. Even a generic log message inside a handler can expose rejected request/profile values when a broken logging stream prints the active exception context; retain the closed-stream regression when changing this boundary.
+
+Use `action-server authorize-local --schema` to inspect the strict request schema without opening state. The only grant recipient is the saved owner. Supply an explicit existing trusted Runtime execution-profile file and its exact Workspace. That profile is selected configuration, not proof of prepared RCC readiness; the authorization command never invokes RCC or creates profiles/packages/admission records.
+
+For generated source, prepare a private request file with `schema_version: actions.local-authorization/v1`, `operation: authorize-generated-source`, `target: generated-source`, a unique `request_id`, exact `workspace_id`, and absolute `runtime_profile`. This explicitly authorizes Workspace `execute_generated_source` and the selected worker/policy/output-provider references' deploy/execute operations. It does not silently restore unrelated authoring grants or authorize other profile references.
+
+First run `action-server authorize-local --datadir /absolute/private/datadir --request /absolute/private/request.json --dry-run`. Review the returned owner, Workspace, exact references and scope; copy its `expected_grants_digest` into the request. Then run the same command without `--dry-run`. A changed grant state fails the compare-and-swap check inside the same canonical SQL transaction as grant changes, Request and Audit. Repeating the identical request ID/body returns its historical receipt and current scope digest without restoring revoked grants; changing the request under the same ID is rejected. Keep a new ID for a new operator decision.
+
+After a generated revision is activated, `authorize-exact-deployment` with `target: deployment` additionally requires the exact active immutable `deployment` reference and explicit `run_permissions` and/or `queue_permissions` lists. Its profile and retained Package/capability/plan identities are validated. **Existing authority granularity is preserved:** Run permissions are stored for the application ID and can affect retained/future revisions, subject to other live checks. Queue permissions cover all queues of the exact Deployment revision, with a Workspace permission gate. This is not a new per-Run-revision or per-queue grant system. Named Run operations are read/execute/cancel; queue operations are the allowlisted read/enqueue/claim/complete/cancel/review/artifact-read permissions. Retry is not enabled. Dry-run receipts and the request schema explicitly show these scopes. Permission grants do not claim a corresponding optional adapter or execution path is available.
+
+`operation: revoke` retains the same explicit target and named operations. It subtracts only command-owned Foundry permissions, preserving unrelated grant rows. Explicit named Run revocation affects the existing application-wide grant, including other revisions. Other independent grants can still permit an operation; removal of this command's rows is not a promise that every independent authority was revoked. Revocation may select an exact retained previously activated revision without reactivating it. Existing command-owned rows require their prior authorization Request/Audit provenance. Historical revocation validates retained identity/profile and does not require Package source/provider or RCC environment readiness. It neither executes nor registers an admission. Authorizing an old nonactive revision remains refused.
+
+Qualify this seam through real owner/bootstrap/SQL and immutable Package fixtures, stale-CAS and replay checks, historical revocation, rollback on Audit failure, root help/schema parsing, filesystem and cross-process canonical-mutex rejection. Installed CLI qualification is separate: source tests and synthetic compiler fixtures do not establish an installed release, actual RCC execution, public MCP grant administration, or PostgreSQL offline safety.
+
+### Public Data and Knowledge integration boundary
+
+The generated compiler/registry and explicit authoring binding selection now form a qualified prerequisite, not the ordinary public #131 Data/Knowledge product flow. `backend.logicalRequirements` declares bounded typed named operations with read/write effects and row/byte/time limits; the native registry projects them only from artifact-verified Package bytes. Separate `dataBindings` choices map an exact Canvas binding ID and declared requirement ID to an authorized immutable provider reference. Missing, extra, wrong-capability, cross-Workspace and colliding choices fail closed. Existing Deployment BindingAssignment/ResolvedDeploymentExecution retain these assignments and recheck live authority, so changing provider selection creates new Deployment state without changing Package bytes or redirecting retained resolution.
+
+RuntimeDeploymentSelection accepts an explicitly injected ProviderCompatibilityPort and matches each named operation's typed schema, effect and bounds exactly. Its default None never provisions or infers a provider; requirement-bearing selection without explicit assignments and this authority fails closed. The common-SQL SqlProviderRegistry is a separately injected metadata prerequisite: migration19 adds immutable engine-neutral provider/source records and CAS availability, but no grants. Exact-reference provider.inspect/provider.manage and explicit Workspace provider.register remain independent of deploy/execute and data read/manage permissions. Registration and availability changes use existing FoundryRequest/Audit transactions; replay reauthorizes and never restores an old availability state. Startup owner operations and their saved provenance fingerprint remain unchanged.
+
+Only bounded sealed-files source manifests are currently eligible. The trusted host supplies a Workspace-scoped seal catalog backed by FilesystemOutputProvider; registration and compatibility reads verify retained object identities and bytes, and missing/tampered evidence fails closed. Public descriptors accept no locator, engine, DSN, path or credential. The registry alone proves retained sealed bytes, not source-format parsing, adapter behavior, connection readiness or immutable versions of a mutable database/Knowledge collection. The separately configured exact-scan components below qualify a bounded execution subset. Disable can revoke availability without opening missing blobs; enabling requires current retained evidence. Explicit local provider configuration can now reconstruct and inject the registry/evidence catalog as described below; ordinary startup can supply the bounded Data port described below when an explicit execution profile and committed provider catalog are both present; no Knowledge collection service is supplied. Source-owned requirement grants follow only existing explicit new-Package compilation admission; provider grants are never created by selection or replay. SQLite/PostgreSQL tests qualify common SQL metadata authority and native compatibility selection, not Data-engine I/O, installed discovery or actual Package/provider execution. The stopped-local-SQLite provider operator below supplies durable private configuration; shared PostgreSQL administrative coordination and model-facing Data discovery remain separate gates.
+
+Empty-requirement Packages preserve exact `actions.package-revision/v1-draft` bytes and identity domain. Nonempty requirements use `actions.package-revision/v2-bindings-draft`; the verifier enforces schema/presence correspondence, canonical declarations and the matching digest domain. An archived c97e verifier accepts legacy bytes and rejects the new schema before native projection/admission. This is format-refusal evidence, not installed downgrade/restore qualification or worker readiness. A later worker/provider join still needs an enforced runtime capability gate. Fixed flat typed fields and exact compatibility are intentional bounded grammar; richer schemas or coercions require an explicit versioned extension.
+
+Knowledge ingestion/search currently use an injected authorizer and in-process binding map. Search returns inline hits; ingestion is synchronous and replaces the provider collection's sole version. It is not a common Run-backed durable ingest/Task or a retained historical collection-version contract. Opening one engine snapshot during concurrent reingestion protects that open read; it does not make a later old-pinned Run able to reopen an overwritten collection version. File preallocation/streaming bounds remain separate from post-read aggregate checks.
+
+To claim public integration, qualify explicit operator provisioning and live read/manage grants, artifact-verified logical requirements, exact Deployment assignment, actual Package execution against two compatible providers without Package mutation, sealed handle-first results across real Runtime restarts/replicas, and durable ingestion/reconciliation under client and worker loss. Source-version claims, PostgreSQL engine connectivity, metadata Task method names and injected fixture ports are not respectively retained source proof, split provider-service proof, Task execution or ordinary public setup. Advanced vector/embedding/rerank, incremental reindex/delete, rich filters and provider discovery remain explicitly tracked; a bounded lexical slice does not erase them or waive other campaign gates.
+
+### Fail-closed evidence publication
+
+Stage only the reviewed checkpoint, then use
+`bash scripts/publish_evidence.sh release/327-invoice-vertical-20261020 "<message>"`
+for this campaign. The wrapper uses strict shell failure propagation and runs
+`scan_staged_evidence.py` against the Git index before diff-check, commit and
+push. A scan or commit failure prevents all later operations. Redacting only a
+working copy is insufficient when the index still holds the earlier bytes.
+Duplicate-key or invalid JSON evidence is refused. The JSON field scan is a
+bounded publishing guard, not general secret detection or screenshot review.
+
+AppSession incidents require checking the actual storage/resolve implementation,
+not assuming process termination revokes persistent or signed credentials. The
+current Canvas implementation stores random tokens only as hashes in an ephemeral
+per-CanvasMcp map with a900-second monotonic deadline, no signing key or reload
+path. Confirm issuer termination and fresh installed rejection for the affected
+value without logging it. Do not infer this behavior for other token types, or
+rewrite history/change live credentials as an automatic evidence cleanup.
+
+Canvas preview validates logical-binding syntax and rejects cross-Workspace provider references without provider I/O. It explicitly reports provider compatibility and readiness as not-checked. A passed preview is not permission, provider compatibility, availability, or Run admission; actual selection revalidates the exact declaration/provider contract and live grants.
+
+For a frozen qualification run concurrent with later integration, archive the exact source SHA and install its committed package lock through the prepared toolkit into a separate Poetry environment. Verify imported module origins inside that archive. A PYTHONPATH-only overlay of a shared editable environment is insufficient: fresh-interpreter tests may clear PYTHONPATH and import the later working tree. Keep the frozen run’s compiler fixture exclusive until it exits.
+
+
+Detached ordinary Action admission is an explicit host service, not default bootstrap or MCP Task support. RunExecutionIntent in migration20 stores only immutable dispatch metadata tied to canonical Run identity; RunPin/RunAttempt remain the queue, lease, cancellation and publication authority. Hosts supply an exact WorkerProfile and authenticated admission actor, manage database connections, and consume bounded pages. No worker, grants, daemon or scheduler is created by the constructor. The initial service accepted only verified package-revision RCC Actions with mode none and no Work Item outputs. Current routing also supports ordinary standalone Robot execution and MCP Tasks through the verified Robot runner; claimed Robot Tasks, consumer/review detached paths and non-RCC paths remain unsupported.
+
+Admission acknowledgement can be retried without claiming an Attempt. Synchronous and detached paths reject adoption of each other's existing idempotency keys. Worker claim reauthorizes the retained immutable revision and exact profile; later activation changes do not retarget a Run. Queued cancellation is terminal only when no Attempt or launch journal exists. Running cancellation remains durable intent; the SQL guard and common output authority stop renewal/publication, but this prerequisite does not certify stopped external effects.
+
+Expired worker replacement requires the existing explicit operator no-effect receipt and a validated pre-launch journal. A retained launch is never erased even when a generic recovery receipt exists: it remains blocked for explicit effect reconciliation. The bounded poller does not select previously claimed Runs automatically. SQL metadata is not a second execution state machine, and an absent worker is not a successful Task.
+
+Historical migration model sets must be frozen. Migration15 creates precisely Workspace, RunAdmission, RunAccessGrant, RunPin, RunAttempt and RunOutput; reading the live MODEL_CLASSES list would create future tables early and collide with their later migration. Test legacy, intermediate15 and intermediate19 upgrades through20 against fresh schema/index parity, preserving old Run payloads and creating no synthetic intent.
+
+test_detached_action_rcc.py is opt-in via ACTIONS_DETACHED_REAL_RCC=1 and canonical prepared RCC receipt/path variables. Collection is not execution evidence. Its authority reconstruction in the same process does not establish independent replica/process restart; those remain separate installed gates along with true long Action, Robot and current MCP Task protocol qualification.
+
+Cancellation rechecks the retained Run's independent live cancel authority. Revoking execute must not prevent an actor who retains cancel authority from cancelling its own queued or running admission. Immutable actor/workspace/snapshot/intent validation remains mandatory; this permission separation does not add read or existence access.
+
+Bounded worker scans validate immutable intent and unclaimed execution evidence before evaluating current execution eligibility. Revoked or ineligible candidates are skipped within the same bounded page; corruption is not treated as permission denial. A queued Run carrying a launch/result journal is rejected without erasing that evidence. Scan continuation uses the canonical monotonic Run numbered_id ordinal, not the last denied Run UUID; cursor continuation cannot expose a skipped Run identifier. The ordinal is an internal worker cursor, not MCP Task identity.
+
+Explicit `providers-local` setup now provides a saved-owner, stopped-local-SQLite path for named provider grants, pinned source imports, immutable metadata registration and private host configuration. Grants remain separate: workspace provider.register; exact-reference provider.inspect/provider.manage/deploy/execute/data.read/data.manage and source-provider knowledge.read/knowledge.manage. The existing bootstrap permission set/fingerprint is unchanged. Private immutable source/config/catalog files reconstruct retained evidence on restart; ordinary injection occurs only when CURRENT has matching committed operator Request/Audit provenance and an exact private request/catalog binding. Absent configuration remains None. Startup never imports, resolves secret/CA values, grants, probes or recovers intents.
+
+`providers-local` also supports explicit `knowledge_collection` targets for
+`grant-owner`, `revoke-owner`, and `inspect`. Collection targets accept only
+`knowledge.read` and `knowledge.manage`; source-provider `knowledge.read` and
+`provider.inspect` remain independent exact-reference grants. Supply the current
+`expected_grants_digest` obtained from dry-run before applying each grant change.
+A replayed grant request returns its historical receipt and does not restore a
+subsequently revoked permission. Do not treat that receipt as current authority.
+
+For retained Knowledge definition setup, import an exact raw
+`actions.logical-source/v1` manifest with `kind="knowledge"`, register its provider
+revision, grant the source and collection permissions explicitly, then submit
+`register-knowledge-definition` with exact `provider` and `knowledge_definition`.
+Dry-run rechecks live grants and sealed source identity without recording a
+definition. Apply records the canonical definition and local Request/Audit in one
+SQL transaction; local audit failure rolls back both, and exact replay rechecks
+current source/collection authority. Changed payloads cannot reuse a request ID.
+The command returns `metadata-only`: it creates no host configuration, ingestion
+Run, Task, provider database, scheduler, or search readiness. Raw Knowledge source
+seals remain rejected by Data `CatalogEntry` and its source/v2 decoder gate;
+Knowledge hosts use a separate `KnowledgeCatalogEntry`. Data source/v1 remains
+refused by local import.
+
+These operations retain the existing stopped-Runtime mutex, private-file and
+saved-owner restrictions and refuse a shared PostgreSQL control plane. The two
+new optional request fields are omitted when absent, preserving serialized v1
+requests and fingerprints for every existing operation. Fresh-process CLI tests
+prove retained definition setup, not installed ingestion or generated search
+consumption. Host selection has its own operator boundary below; typed Task/logical
+joins and installed acceptance still require separate evidence.
+
+
+After definition registration, configure an ordinary Knowledge versions host with
+`configure-host` and `config.schema_version="actions.local-provider-config/v2"`.
+The host adapter is exactly `duckdb.knowledge-versions/v1` or
+`postgresql.knowledge-versions/v1`, with `host.revision` equal to the registered
+`KnowledgeRevisionRef`. The top-level provider and source revision must match that
+definition's canonical source-provider identity. Knowledge entries require catalog
+v2; Data-only v1 configuration/catalog serialization, digests, and old local request
+fingerprints remain unchanged. Knowledge configure/recovery require current
+collection read/manage, source-provider knowledge.read and provider.inspect, plus
+provider.manage. No grants are inferred from successful registration.
+
+Configuration returns `configured-not-probed`. To create the version tables,
+submit a separate `provision-knowledge-host` request with the exact committed
+`config`. Dry-run checks metadata and live grants without opening an engine;
+apply provisions idempotently and records local Request/Audit after SQL pin and
+grant rechecks. `provisioned-not-ingested` means table provisioning completed,
+not a successful ingestion Run or search readiness. Provider DDL precedes its local
+receipt: an audit/publication failure can leave provisioned tables. Retry the same
+request under current authority; do not claim cross-provider rollback.
+
+DuckDB files are derived from Workspace, provider profile and collection identities
+under the private Runtime datadir's `provider-state/knowledge-versions`; no request,
+Package or query selects a filesystem path. Non-provisioning use refuses absent
+files, symlinks, hard links and nonprivate state. PostgreSQL uses exact pinned
+password/CA versions and verify-full TLS, rejects ambient libpq settings, and
+connects only on explicit store use. It uses the provider's public schema, never
+common control-plane tables; schema/role grants remain the operator's prerequisite.
+Read selections open read-only engine sessions, while ingestion needs collection
+knowledge.manage. Neither startup nor dependency readiness creates directories,
+tables, ingestions, grants, or connections.
+
+`ConfiguredProviderExecution.open_knowledge(actor, provider, manage=False)` yields
+the exact revision, source provider/manifest, digest-keyed retained seals, blob
+provider, version store and canonical definition authority. The ordinary worker
+must derive its Run snapshot separately. Import-only dependency readiness runs
+before admission; SQL pins include provider/source/availability, canonical Knowledge
+definition, and its registration Request/Audit. Final SQL publication rechecks
+those rows and live grants without catalog, blob, engine or secret I/O. The focused
+`test_knowledge_host.py` and `test_knowledge_host_postgres.py` cases prove this host
+boundary using actual DuckDB and owned verify-full PostgreSQL; they do not replace
+installed Task, generated-Python, or full Run publication acceptance.
+
+Configuration commits metadata authorization before CAS pointer publication. The SQL receipt means publication-authorized; only successful pointer publication returns configured-not-probed. Explicit recovery requires current manage permission and rejects absent SQL provenance, changed targets or stale generations. Immutable file writes stage and fsync complete bytes before publication, preserving existing targets; interrupted staging can retry, and cleanup checks its owned inode. These guarantees require the canonical local mutex and exclusion of concurrent same-user filesystem mutation; they are not an adversarial-filesystem claim.
+
+Source/v2 binds bounded CSV UTF-8/flat uncompressed Parquet codec declarations, preserving exact v1 metadata identity and refusing v1 at the executable-source declaration gate. No parser, data engine query or worker transport is implemented by this setup checkpoint. Private PostgreSQL configuration and pinned CA/password versions do not prove connectivity; actual engine execution, installed setup/upgrade/restore, immutable Knowledge ingestion/Tasks, shared PostgreSQL administrative coordination and split-provider qualification remain open.
+
+Every provider catalog publication path, including configure-host replay after a SQL-before-pointer crash, must run the same committed Request/Audit and exact result/target verifier used by recovery and startup. A shallow idempotency receipt check is insufficient. Recovery dry-run reports publication-authorized-dry-run and never claims successful configuration or publishes CURRENT. Regression cases corrupt result/from-revision/to-revision independently after the simulated crash and require the pointer to remain absent.
+
+A bounded worker that consumes only the first eligible Run in a scanned page must return the consumed Run’s canonical ordinal, not the end-of-page cursor. Advancing past unconsumed eligible candidates silently skips them. Empty eligible pages may advance through the scan cursor; nonempty pages advance only through the Run actually consumed. Test more candidates than the bounded page and consecutive run_once calls.
+
+The pinned development Robot Framework runner can be qualified with real .robot tasks through canonical Poetry, but direct runner success alone does not establish non-RCC Package/Run acceptance. That gate additionally requires versioned portable plan bytes with no RCC-only fields, exact capability/schema projection, trusted installed adapter selection, canonical Attempt/output authority and execution after removing the original mutable source. Preserve this distinction in receipts.
+
+Common Run lifecycle time is persisted in RunPin.state_updated_ms using the database clock. New admission initializes it; successful claim/replacement, changed recovery authorization, first cancellation request, queued cancellation confirmation, retained RCC launch/execution evidence and terminal publication update it in their existing transactions. Heartbeat, read, exact replay, output staging/GC and lease expiry do not create lifecycle timestamps. Queued cancellation and its first cancel flag share one sample; later confirmation of a prior flag records the new terminal transition. Same-millisecond transitions may share a timestamp; backwards clock samples do not invent future ticks. Migration21 preserves preexisting rows with unknown (empty) lifecycle history and does not create Task receipts or adopt legacy Runs. Freeze the historical RunPin field definition in migration15; freezing only its model list does not freeze its DDL. RunTaskReceipt is immutable association/TTL metadata, not execution state, and this prerequisite does not advertise Tasks or install a detached worker.
+
+
+### Strict retained-source DuckDB scan component
+
+`DuckDBSealedScan` is an explicitly configured component, not an ordinary worker
+transport or public data endpoint. It requires live provider metadata inspection
+and separate `data.read` authority before execution and again before returning
+bytes. It accepts only declared read operations named exactly
+`<source-object-name>.scan/v1`, with no parameters and an explicit projection
+whose scalar types and requiredness match the immutable source codec. Other
+operation grammars fail closed; callers cannot supply SQL, paths, or connection
+configuration. Source/v1 remains metadata-only for this execution adapter.
+
+Source/v2 CSV uses exact ordered headers, strict UTF-8, explicit JSON-style
+numeric/boolean values, and literal `\N` nulls. Nullable projected values are
+omitted from result objects; required nulls are rejected. Numeric zero normalizes
+to `0.0`. Flat uncompressed Parquet supports the bounded primitive subset
+implemented by `parquet_gate.py`; its compact-protocol footer is checked before
+native import, including rejection of external column paths, nested schemas,
+encryption, unsupported encodings, and metadata beyond declared bounds.
+Unsupported valid Parquet features are refused rather than inferred.
+
+Sealed bytes, source identity, row/column/field/decoded-byte bounds and projected
+output bounds are checked before scan-table materialization. Source order is
+retained. Any source or result overflow rejects the entire result; there is no
+successful truncation. DuckDB runs in memory with one thread, a 64 MiB engine
+limit, no extension installation/autoloading, locked configuration and disabled
+external access; the Parquet decoder allows only its exact private retained
+copy. Cancellation/deadline checks surround parsing and interrupt native work.
+These controls are not hostile-native-process isolation or a total Python RSS
+limit, and blocked filesystem I/O is not a hard wall-clock guarantee.
+
+This component does not establish ordinary model/worker Data access, durable Knowledge ingestion, Task integration, installed
+consumer qualification, or completion of the public Data/Knowledge owner gate.
+Those joins remain separately required.
+
+`PostgreSQLSealedScan` implements the same declared, parameterless exact-object
+`.scan/v1` subset using fixed typed VALUES batches in one READ ONLY transaction.
+It does not create temporary tables or read mutable provider tables. Source
+seals/codecs and whole-result limits are checked before connection; output order,
+null omission and typed canonical bytes match the DuckDB adapter. Internal bytea
+parameters preserve UTF-8 strings including NUL without changing logical types.
+
+The trusted private resolver loads exact password and pinned CA versions only
+per execution. Construction/startup performs no secret lookup or network probe.
+The adapter requires verify-full TLS, rejects ambient PG-prefixed environment
+configuration, and uses private absent credential/client-certificate paths to
+prevent fallback. Provider inspection and data.read remain separate live checks.
+A restricted role needs CONNECT only; CREATE/TEMP/table privileges are unused.
+The operator must provision temp_file_limit=0; other values are refused. Fixed
+work_mem, remaining statement/lock deadlines and cancellation bound the scan,
+but do not establish total process memory isolation or a hard deadline during
+DNS/connect. No partial or silently truncated result is returned.
+
+Actual owned TLS fixture qualification covers cross-engine CSV/Parquet output,
+batch order, denied credentials/CA, native cancellation, authority revocation,
+and restricted-role semantics. This component does not complete ordinary worker
+Data access, installed/public provider flow, broader operation grammars, durable
+Knowledge ingestion, Task integration, or coordinated shared-PostgreSQL operator
+provisioning. Keep those product gates explicit.
+
+Historical migration tests must freeze DDL as well as migration model definitions. Capture pre-change SQL/index statements from a pinned installed wheel for each supported SQL dialect, then migrate that schema forward. Snapshot historical rows from its actual tables and columns; current model registries can contain future tables and must not determine old-schema DDL or rollback snapshots. Keep targeted migration18 tests pinned to18 while shared Runtime fixtures upgrade through the current version.
+
+
+### Common Run Task receipt and current protocol boundary
+
+Task receipt creation uses the common admission's explicit created outcome. An empty current Attempt is not evidence that an existing queued Run is new: neither old detached Runs nor synchronous Runs may be adopted as Tasks. The original admit API and idempotency bytes remain unchanged. Run, detached intent and immutable Task receipt commit atomically before acknowledgement; readiness failure or receipt failure rolls them all back. A host must provide an explicit trusted consumption-readiness port and bounded TTL/poll policy; this service does not start or advertise a worker.
+
+Creation/replay requires execute and readiness; recovering an acknowledgement returns durable status without a result and does not silently require read. Get independently requires live read and resolves the complete authorized sealed output inventory before returning its bounded original tool result. Thus a terminal Run can still produce a completed creation acknowledgement after output retention lapses, while get reports result unavailable; no success result is fabricated and the Run stays terminal. Cancel independently requires cancel, not execute/read; running cancellation is only a request until canonical authority confirms a terminal outcome. A canonical FAILED Run with matching failed Attempt and complete measured sealed publication maps to a completed Task carrying CallToolResult.isError=true. Arbitrary actionResult.isError does not control this mapping, and uncertain launch evidence never becomes a fabricated failed Task.
+
+Receipt TTL is creation-relative and immutable; replay, polling and ignored unknown interaction responses do not renew it. Get reads the retained policy/TTL across host-policy changes; poll interval is current host advice. A changed TTL policy conflicts on create replay. Expiry never cancels the Run. Task timestamps come from the common lifecycle clock, not polling/heartbeat/lease expiry. The v1 model result exposes only the contract version, Run/Attempt identity, terminal state and authorized output handles; raw journal, action payload, private paths, source and session metadata are excluded. Preserve this formatter for retained v1 receipts when introducing later result contracts.
+
+The explicit MCP Task adapter pins released ext-tasks2026-07-28 (b3d28aceaa6d49f5f92258e3d06b61ad6f111e84). Creation is flat resultType=task with ttlMs/pollIntervalMs; get is flat resultType=complete and completed original results include their own resultType=complete. Current get/update/cancel require model audience, per-request extension capability and exact HTTP Mcp-Name/taskId routing. The official SDK custom Request.name_param seam supplies extension routing. Missing routing returns a bounded -32602 HTTP400 response; acknowledgements may carry SDK serverInfo metadata but never imply cancellation completion. Unknown interaction answers are bounded no-ops, not implemented interaction/resume support.
+
+Configured adapters expose a closed detached capability_invoke variant only to declaring current clients; legacy/synchronous schemas remain unchanged. The default server has no Task advertisement or handlers. Ordinary bootstrap enables the Task service only with both an explicit RCC execution profile and ACTIONS_FOUNDRY_TASK_POLICY pointing to a private bounded actions.runtime-task-policy/v1 file. ASGI lifespan starts its single canonical detached consumer before requests and stops it before provider closure. Constructor/route construction does not launch work. Source host qualification does not establish installed execution/restart, legacy Task compatibility, interactions, Robot/Work Item Tasks or automatic escalation. Keep those gates separate.
+
+
+`ConfiguredProviderExecution` and `LogicalExecution` provide bounded eager logical
+preparation. Ordinary bootstrap constructs the shared port only with an explicit
+RCC profile and committed provider configuration, and supplies it to generic and
+Task runners. Startup does not query engines, resolve secrets or grant authority.
+Preparation resolves exact retained Deployment bindings and artifact-verified
+requirements, supports selected parameterless Data `.scan/v1` reads and explicit
+artifact-mapped Knowledge ingest/search operations, and refuses declared aggregate
+output above 256 KiB or more than 32 operations before engine calls. Data-only
+child context remains `actions.logical-read-context/v1`; Knowledge-bearing
+selections use the separate `actions.logical-context/v2` contract. Both contain
+logical lookups only. Provider/config/catalog pins remain host-private; public
+summaries contain operation identities, immutable source/contract digests,
+context/result hashes and row counts. Only issued preparations can authorize
+publication. Serialized context or summary is neither restart authority nor grant.
+
+The factory reconstructs committed private catalog/config/seal identity without
+startup secrets or network I/O. Each execution owns a read-only private store;
+only the selected PostgreSQL password/CA versions may resolve during execution.
+A shared absolute deadline and cancellation view covers all eager operations;
+there is no new scheduler or lease-renewal owner. Engine-specific OS-blocking
+limits remain and a late result is refused.
+
+Publication recheck is SQL-only: existing Run/Workspace fencing, live grants,
+retained Package/Deployment and provider/source/provenance identity, and current
+availability. PostgreSQL grant/metadata row locks prevent a concurrent revoke or
+disable from committing between the recheck and outer transaction completion.
+Standalone and generic Work Item wrappers perform this recheck in their existing
+publication transaction alongside independent queue/Run guards. Binding entry
+caches immutable artifact expectations before that transaction; the new guard
+performs no artifact/provider/filesystem I/O inside it.
+
+
+Verify the entire bound publication wrapper, not only `_logical_publication`.
+Repeated `current`, ticket/fence and generic input-envelope checks, plus output
+schema validation, can reopen Package artifacts through `resolve`/`schema_for`
+even when the inner guard is SQL-only. Capture the verified capability declaration,
+input/output schemas and exact stored Deployment before entering final publication.
+Bound wrapper checks use that issued projection plus current SQL identity,
+activation and live grants; unbound paths retain ordinary projection behavior.
+Regression tests must call full standalone and generic `publish` after binding,
+with provider `open`, `load_verified`, `schema_for` and Deployment `resolve`
+trapped. Include Data/Knowledge success, queue completion and SQL grant/Package
+mutation rejection. Synthetic completion proves this transaction boundary, not
+actual RCC or installed client execution.
+
+Private CURRENT exclusion depends on normal Runtime holding action_server.lock;
+providers-local takes that same lock and refuses a running Runtime. Direct
+in-process factory/bootstrap callers do not automatically acquire it. Arbitrary
+same-user file mutations are outside this cooperating-writer guarantee. No
+filesystem/secret/provider I/O belongs inside the publication transaction.
+Real SQLite/PostgreSQL control-plane and both engine tests qualify this component;
+ordinary installed generated-package consumption across two providers, shared-PG
+operator provisioning, Knowledge and full Data acceptance remain separate gates.
+
+GeneratedRccExecution refuses nonempty bindingRequirementIds without the explicit
+shared logical port and supported domain publication wrapper. Unsupported
+legacy/unmapped Knowledge requirements remain refused before launch; metadata
+compatibility does not bypass the closed mapped-operation and configured-host gates.
+
+
+### Generated Action logical lookup SDK
+
+Mapped Knowledge requirements use the separate Package
+`actions.package-revision/v3-invocations-draft` contract. Every declared operation
+has exactly one invocation mapping covering all its parameters. Mappings select
+required, exactly typed top-level Action inputs only; they do not infer ambient
+keys, evaluate expressions or traverse paths. Build and artifact verification
+both validate mappings against the retained Action input schema. Runtime mapping
+rejects boolean-as-integer, subclasses and nonportable numeric values. An omitted
+`invocations` field preserves existing requirement serialization and Package v1/v2
+selection. This draft requires the Core a4 / Runtime a39 candidate ranges and
+exact Core a4 source pin; accepting the source contract is not installed candidate
+qualification or permission to execute unsupported Knowledge operations.
+
+For every requirement with explicit `invocations`, both compiler build and
+retained artifact verification also call the closed `knowledge_contract` validator
+for every operation. Mapping validity alone is insufficient: wrong effects,
+missing search parameters, alternate/optional result fields and unsupported
+operation shapes are refused even when a modified manifest has a correct new
+revision digest. Search compilation fixtures must declare all four required
+parameters (ingestion_handle/query strings and offset/limit integers), map them
+to corresponding required Action input-schema fields, and declare the required
+`result_json` string. Generic requirement DTO tests may still model unsupported
+metadata; requirements without invocations retain the v1/v2 validation path and
+byte identities. Passing fake-executor compiler tests does not replace the
+separately gated exact-prepared-receipt RCC build/import/test proof.
+
+Dispatch-refusal fixtures must reach the intended domain gate: their registry
+must expose `selection_for(capability, runtime_plan)` with the same Package,
+capability and Runtime Plan identities, and the snapshot must include the exact
+compiled plan digest. A stale load-only registry or absent runtime_plan fails
+selection first and cannot prove the later unsupported Work Item output refusal.
+Update the fixture to the canonical selection contract while retaining that
+refusal assertion; do not weaken execution selection to satisfy old mocks.
+
+`actions.data.scan(requirement_id, operation)` reads one declared eager logical
+lookup and returns a fresh list of flat row dictionaries. It performs no query,
+file/environment lookup or provider selection. The trusted Runtime must enter
+`actions.data._context.install_context(payload, expected_digest=...)` explicitly.
+ContextVar state is installed only after validation and restored in finally;
+nested contexts, concurrent async executions and separate threads remain isolated.
+The digest binds trusted host-supplied bytes; it is not authentication or a
+sandbox against hostile generated Python.
+
+Context version actions.logical-read-context/v1 is closed, canonical UTF-8 JSON,
+bounded to256KiB/32operations. Duplicate keys/lookups, nonfinite numbers, unsafe
+integers or integral floats, nested/null values, unknown fields/versions and
+undeclared lookup names are refused. Optional null fields are omitted. Numeric
+zero must use the Runtime's canonical positive0.0 form. Only exact parameterless
+<source-object>.scan/v1 operations are supported; the BindingOperation name
+bound limits that source-object prefix to59characters. No strings are narrowed
+below the already bounded context policy. Each call decodes immutable retained
+row bytes anew, so action mutation cannot change later lookups.
+
+Context `actions.logical-context/v2` is a separate closed envelope with the same
+256 KiB and 32-lookup aggregate limits. Each lookup has exactly `requirementId`,
+`operation`, `kind`, `parameters`, and `result`. Data lookups require empty
+parameters and the existing flat scan-row contract; `actions.data.scan` works in
+both versions without changing the v1 wire schema. Knowledge lookups permit only
+`<name>.ingest/v1` and `<name>.search/v1`, with a name prefix of at most 57
+characters. Namespace/operation mismatches and duplicate lookup identities fail.
+
+`actions.knowledge.ingest(requirement_id, operation)` selects an empty-parameter
+prepared result; it does not publish a corpus or prove completion. The search
+API takes keyword-only `ingestion_handle`, `query`, `offset=0`, and `limit=20` and
+compares all four canonical parameters to the prepared invocation. Strings must
+be built-in strings, offset/limit built-in portable integers (not booleans or
+coerced floats), offset nonnegative and limit positive. Defaults become explicit
+0/20 before comparison. Different parameters cannot execute another query.
+Runtime admission still owns handle authorization, query/provider-specific bounds,
+result schemas, and canonical ingestion/publication authority.
+
+Knowledge results are JSON objects and may contain nested objects, arrays and
+nulls. The SDK bounds nesting to depth 8 (result root depth 0), object members to
+64 and array items to 10,000, within the aggregate byte limit; all numbers retain
+the existing finite/portable canonical rules. Every call decodes immutable bytes
+into a fresh result, so nested mutations cannot affect another lookup. Context
+validation/installation and the SDK perform no provider, filesystem, credential
+or network access. Source SDK tests do not establish installed RCC execution or
+Knowledge Task/publication integration; the Runtime must supply the versioned
+context through the actual generated execution path.
+
+For isolated Core package tests, assert the imported SDK source location and
+propagate that source path to subprocesses, but remove the external runner's
+own directory from `sys.path` when test fixtures live below it. The action
+collector derives module roots from import paths: exposing the fixture ancestor
+can change collected module identities and duplicate package entry discovery.
+Keep the original failed receipt when correcting this harness contamination;
+re-run the affected collection tests before repeating the selected full inventory.
+
+The SDK source API alone does not qualify ordinary generated Data execution.
+Compile/run with a genuinely rebuilt prepared RCC artifact containing the
+measured private actions-core wheel and portable exact-version dependency pin;
+a source-path overlay or older public SDK preparation is not installed proof.
+Runtime/bootstrap/publication integration and unchanged-Package two-provider
+acceptance remain separate, alongside broader Data/Knowledge owner gates.
+
+A private exact-version Core dependency can be prepared without embedding a local
+wheel path in package.yaml: stage the measured wheel under the isolated RCC
+ROBOCORP_HOME/wheels, publish the environment with the portable exact version,
+then verify every installed Python member against that wheel through actual
+RCC env exec and Python -I. Preserve the adapter's explicit local filesystem
+trust carrier; --permissive-local alone did not locate the local attachment in
+the qualified fresh environment. Do not infer installed-wheel identity merely
+from a matching version or successful environment publication.
+
+
+### Explicit local Task host lifecycle
+
+The policy file has exactly schema_version, policy_id, ttl_ms and
+poll_interval_ms. It must be an absolute owner-only regular single-link file,
+without symlink ancestry; the loader bounds bytes, validates duplicate fields
+and compares descriptor identity/stat before and after reading. It performs no
+configuration mutation. Worker identity/profile and prepared RCC identity come
+from the separate trusted execution profile, never a model request.
+
+Readiness checks the actual worker-thread SQL connection, pinned RCC version,
+live admission authority and exact compiled manifest/specification/artifact.
+It does not mint grants, compile code or register a Run. A fatal worker failure
+stops future creation; retained Task reads and explicit cancellation remain
+separate service operations. Pending Runs are the existing detached authority,
+not another queue or scheduler. Recreating the host does not resume an already
+claimed uncertain Run.
+
+Local stop is cooperative execution cancellation. With a live cancel grant,
+the existing executor records cancel_requested; without it, authorization is
+refused but the executor's finally still terminates owned RCC processes. Neither
+case fabricates a terminal Run or permits automatic relaunch. Real SQLite and
+PostgreSQL host tests cover completion and both local-stop permission cases.
+RccCleanupIncomplete preserves unconfirmed termination explicitly: host close
+returns false even after its thread exits, and Runtime retains its provider.
+A simple thread join is not proof that child-process cleanup succeeded.
+
+Installed detached Task qualification must distinguish nonterminal acknowledgement,
+reconnect replay, sealed completion, process restart and graceful worker shutdown.
+Compare the returned Task ID with exact retained Run/Attempt/intent/receipt
+identities as well as aggregate row counts. Assert extension negotiation with
+the actual installed MCP SDK; preserve creation time/TTL across replay. Task get
+validates sealed inventory, but a public artifact-read/value claim additionally
+requires reading through the authorized interface.
+
+Do not equate graceful shutdown with exit code zero: qualified Uvicorn0.38
+capture_signals re-raises SIGTERM after shutdown, producing -15. The normal
+console filter hides its success messages; the filtered datadir server_log.txt
+retains them. Require no forced kill, application shutdown complete and finished
+server process for the exact PID in that process's log segment, and no shutdown
+failure. A force-killed process is cleanup evidence, not a graceful lifecycle
+pass. Set PASS only after the final required shutdown succeeds and preserve the
+original timeout/failure receipt without re-admitting an uncertain Run.
+
+Serialize trusted prepared RCC receipts with PreparedRccEnvironment.to_receipt_bytes
+and immediately round-trip load_prepared_rcc_environment before using them in a
+Runtime profile. Ordinary json.dumps spacing or an appended newline changes the
+canonical receipt bytes and is refused before compilation, even when artifact
+and specification digests are correct. Successful raw RCC env exec alone does
+not validate the Runtime preparation-receipt loader.
+
+Task transport qualification must include the ordinary HTTP metadata gateway;
+direct SDK adapter tests do not exercise its method/name inference. Current
+Task get/cancel/update bind Mcp-Name to params.taskId. Keep exact mismatch and
+duplicate-header rejection, bounded identifiers and telemetry redaction; do not
+remove routing headers to work around a gateway mismatch.
+
+### Bounded local test storage
+
+Fresh cloud snapshots may contain an older checkout and a different `rcc` on
+PATH. Verify checkout HEAD separately from the fetched campaign head and verify
+the selected RCC executable before onboarding. In the prepared Actions cloud
+environment, source `/workspace/actions-cloud/activate.sh`: it selects Josh's
+RCC and a writable `ROBOCORP_HOME`. The unactivated `/usr/bin/rcc` can resolve to
+Qt's resource compiler, while invoking the prepared binary without its home
+configuration can fail against a read-only default home. Neither failure proves
+that the pinned RCC toolchain is unavailable. Run Doctor, Bootstrap and
+ToolkitTest after selecting the prepared environment; inherited snapshot receipts
+do not qualify the fetched source.
+
+Before starting a long local gate, run scripts/check_test_disk_budget.py with
+an explicit --path and positive --required-free-bytes budget; use a unique
+--report path and require exit zero before starting fixtures or pytest. Exit2
+means insufficient space. This point-in-time check is not a reservation: monitor
+concurrent writers and stop the exact owned test process before exhaustion.
+Preserve an interrupted run as failed, including its original stdout and receipt;
+never infer passing counts from partial progress or reuse its receipt for a retry.
+
+Pytest tracing can create multi-gigabyte raw .robolog groups. When diagnostic
+instrumentation is not itself the gate, -p no:robocorp_log_pytest disables that
+plugin; preserve the complete test selection, stdout, JUnit cases and explicit
+skip/deselection accounting. Do not silently narrow cases to fit storage.
+Archive only completed task-owned traces after checking regular single-link
+files, no open handles and unchanged identity. Retain readable HTML and receipts;
+verify decompressed SHA256 before replacing raw files with gzip, and record both
+hashes and paths. Compression does not make local evidence remotely durable.
+
+For independent HTTP Task qualification, retain the complete JSON-RPC response
+and HTTP status before asserting the expected status. An expired Task TTL is
+a separate negative case; reusing it cannot establish successful restart/get.
+The ordinary authenticated transport returns403 for missing authorization in
+the qualified installed configuration. A corrected test continuation must replay
+the same idempotency key, retain the original failed receipt and compare counts
+across both attempts rather than silently creating another Run.
+
+### Bound generated execution receipt boundary
+
+Version selection comes from artifact-verified capability requirement IDs.
+Zero-requirement dispatch and terminal records keep v1 bytes and behavior; a
+bound dispatch uses v2. V2 launch and terminal records carry `logicalReads`;
+the dispatch top level has no such field. Launch-less v2 is only a pending
+seed, never evidence of execution. Publication requires exact equality with the
+issued preparation summary, matching retained launch/execution, independent
+Run/Attempt and optional Work Item fences, and the measured four-output inventory.
+Missing binding or a cloned/unissued preparation fails closed. This checkpoint
+does not allow direct bound terminal publication replay without fresh issuance;
+existing read-only terminal APIs perform retained validation instead.
+
+Retained standalone, managed generic and Task reads validate closed canonical
+v2 carriers, versions, operation coverage, immutable Deployment/provider/source
+identities, declared operation row limits, launch/terminal summary equality,
+lineage, stream measurements and canonical SQL output seals. Retained projections
+read artifact-verified Package metadata and common SQL metadata, never source
+seals, private catalog/config, engines or secrets. Existing read authorization
+and actual sealed-byte resolution remain necessary. Identity validation cannot
+recompute historical logical result/context hashes from a public summary and
+must not be described as cryptographic proof of issuance. Exact alias-key
+prevalidation remains required by the retained Pydantic regression.
+
+
+### Logical runner lifetime
+
+Requirement-bearing generated Actions use one absolute monotonic deadline across eager logical preparation and RCC execution. The runner owns cancellation checks and domain heartbeats; a preparation thread opens its own Database connection and receives an Event, never a callback that reads another thread's SQL connection. The ordinary generic heartbeat renews both the Work Item claim and Run Attempt. A shared LogicalExecution supervisor admits at most four concurrent outstanding preparations, including transferred preparations still in use by RCC. It refuses new preparation once closing starts.
+
+Shutdown must retain every unsettled preparation owner. An unclaimed late result can be released exactly once after its preparation thread joins. A transferred preparation must remain issued until its runner confirms cleanup and explicitly releases it; supervisor close returns false rather than stealing that ownership. TaskHost may confirm a previously unsettled preparation on a later close call, but remains failed and cannot accept new work. Unconfirmed RCC process cleanup remains latched separately. Provider teardown is forbidden while either owner reports incomplete cleanup. These rules do not recover or fabricate a terminal Run.
+
+Zero-requirement execution preserves its existing helper and v1 wire bytes. Logical requirements choose strict v2 journals from the immutable capability, with a safe logicalReads summary in launch and terminal records. The prepared context stays in a private bounded file and is installed only around the Action call through the private Core SDK context API. It is not an input parameter or output artifact. The runner retains the issued publication binding through output staging and atomic publication, then clears it before releasing the preparation. Retained-launch replay refuses to prepare or execute again.
+
+Qualify ownership with deterministic preparation barriers and real SQLite/PostgreSQL fences; qualify the context helper's bounds, digest rejection and context reset separately. Synthetic RCC results can prove the SQL publication join but do not prove native RCC or an installed consumer. Enabling logical Tasks additionally requires v2 Task/read projections and ordinary bootstrap wiring; these are separate gates.
+
+V2 Task acknowledgement and result retrieval use distinct retention checks. A
+terminal creation/replay acknowledgement without a result may validate expired
+final-output metadata. Both Task projection and its no-result formatter pass
+this private terminal-only mode; it never authorizes pending publication.
+Immutable operation identities, lineage, final SQL seals, inventory and canonical
+retention timestamps remain checked. A corrupt seal or malformed timestamp is
+unavailable even for acknowledgement. Result get, publication and ordinary
+validator defaults still enforce current output retention. Do not make Task
+acknowledgement depend on retaining readable artifact bytes indefinitely.
+
+The logical invocation binding accepts a trusted `publication_check` callback.
+The mixin invokes it inside the existing transaction immediately before canonical
+base publication, after domain schema and child-output validation. It returns
+None or raises, and may inspect only monotonic time and in-memory cancellation;
+it must not query SQL, providers, files or secrets. Durable cancellation remains
+the canonical base fence's responsibility. The native runner supplies this
+callback explicitly to close the wait/validation interval after its earlier
+deadline check. A callback failure rolls back publication and leaves provisional
+outputs and Run/queue authority uncompleted. This gate is not a promise that
+native SQL operations have hard real-time completion bounds.
+
+
+Runtime shutdown requests both worker and logical-preparation settlement and
+retains the source provider if either remains unsettled. A transferred prepared
+context is not released merely because its preparation thread has exited.
+
+When advancing migrations or a private candidate dependency floor, update the
+independent test expectations alongside the contract. Keep an explicit migration
+table list and fresh-versus-migrated column/index comparison; do not derive the
+expected list from current models. Keep source metadata and emitted wheel floor
+assertions aligned without changing unrelated SDK floors or negative cases.
+Root help snapshots include explicitly registered offline commands. Existing
+wheel metadata inspection does not replace clean install/uninstall qualification.
+
+For a bounded full gate, collect the complete intended node set first, partition
+it into disjoint batches and verify their union and uniqueness. Retain failures,
+skips and unexecuted cases; an unnamed JUnit testcase after interruption is not a
+pass. Use fresh bounded owned database fixtures per batch and retain container
+health/state/logs before cleanup. A stopped container without its logs cannot
+establish the cause of a connection-refused cascade. Archive inactive fixtures
+with file hashes plus symlink/hard-link/FIFO metadata; verify gzip sequentially
+to avoid repeated decompression for each member. Never publish private fixture
+archive payloads merely because their inputs are synthetic.
+
+Selected bound execution readiness verifies local adapter dependencies before
+Task admission. `GeneratedRccExecution._verified_selection` delegates to the
+logical port only for capabilities with nonempty immutable requirements. The
+port finds their exact retained Deployment bindings and the configured factory
+imports only modules needed by those selected operations. It creates no engine,
+connection, source-materialization job, secret resolution, grants, Run or Attempt.
+This check is not called by factory construction or ordinary startup, and an
+unused provider's missing optional dependency cannot reject another selection.
+
+DuckDB sealed scans require the declared Runtime `data-duckdb` extra (currently
+DuckDB1.4.1). PostgreSQL CSV scans require psycopg; selected PostgreSQL Parquet
+scans additionally require DuckDB because the retained Parquet decoder uses it.
+Installing a base Runtime wheel does not imply every optional adapter exists.
+Missing or unloadable selected modules return a bounded unavailable error before
+Task admission. Successful module import is dependency readiness only, not
+connection, credentials, source-byte, privilege or execution qualification. Live
+execution authorization and actual engine validation remain unchanged.
+
+For an explicitly authorized supported Git-data-API checkpoint, use
+`publish_evidence.sh <existing-branch> <message> --commit-only` to enforce the
+same staged scan, whitespace and commit gates without retrying unavailable Git
+transport. Unknown modes fail closed. Upload only that immutable reviewed tree,
+verify blob/tree identity, and update the existing branch with the expected head
+and force=false. Stop on denied connector writes or a lease mismatch. Preserve
+the original local commit; report metadata-only remote commit identity changes
+and do not force divergent local ancestry onto the shared branch.
+
+Installed provider replacement needs configure-host dry-run's exact current
+catalog pointer, not an assumed empty catalog. Authorization request IDs bind
+the complete request, including Deployment revision; use a distinct idempotency
+key for a different revision. An activated revision without its explicit exact
+Deployment grants can refuse inspection/execution. Preserve failed setup receipts
+and finish the explicit stopped-local authorization, rather than weakening guards.
+
+
+Custom pytest entrypoints used with multiprocessing-spawn tests must guard
+pytest.main with `if __name__ == "__main__"`; otherwise child import recursively
+starts the suite before process bootstrap completes. Keep the original failed
+receipt, correct the launcher, and rerun the affected complete batch. Collect an
+exact ordered node manifest, verify every batch's collected nodes and terminal
+reports, and verify union/uniqueness before composing coverage. Do not describe a
+failed original run as passing because targeted corrections later pass. A test
+using object.__new__ must initialize constructor-owned fields relevant to its
+boundary; production default configuration must still be verified separately.
+
+Ordinary Data execution does not establish Knowledge integration. Migration 22
+adds immutable Knowledge definition metadata to common SQL, not a runnable
+collection or publication. The revision digest binds collection, retained source,
+normalizer declaration, typed document schema and limits; it contains no provider
+credentials, locator or engine. Registration requires independent live collection
+(or exact revision) knowledge.read and knowledge.manage plus exact retained
+Knowledge source knowledge.read and provider.inspect. Collection grants cover
+retained and future revisions; revision grants cover only that revision. Neither
+reference possession nor Data/Workspace grants imply these permissions. Request
+and audit replay reauthorize and validate retained identities; no grants are minted.
+
+Definitions admit existing sealed raw Knowledge source/v1 metadata only; Data
+sources are refused. Separate host-only normalization supports strict UTF8 object
+documents and typed CSV with exact ordered headers, required scalar fields, no
+null marker, and portable numeric ranges. Empty string is allowed only as a
+string; NUL, BOM, malformed UTF8, duplicate/extra headers and ambiguous framing
+are refused. Source budgets precede reads; document/row/corpus overflow rejects
+the whole result. Deterministic canonical corpus bytes bind the definition and
+source revision and are input to the existing blob authority, not a new seal or
+permission. The corpus validator checks representation, not issuance or grants.
+
+Explicitly provisioned provider version stores use exact Workspace/collection/
+revision/document identities and operation receipts. They insert new versions
+without replacing prior ones, validate exact replay, roll back interrupted writes
+and verify retained bytes on read. DuckDB and owned PostgreSQL component tests
+cover fresh-process reopening. PostgreSQL additionally qualifies independent
+connection concurrency, conflicting operation IDs and cancellation during a
+provider lock, with no partial version or operation publication.
+Private connection factories belong to the host; provisioning is not startup,
+read, or search authority. These provider tables are corpus storage, not a second
+scheduler or grants database. No legacy destructive importer is reused.
+
+Qualify common-SQL definition authority and provider storage separately. A
+configured PostgreSQL URL does not exercise a fixture hardcoded to SQLite, and
+DuckDB replay tests do not qualify PostgreSQL locking or cancellation. Run the
+definition matrix on both common SQL backends and provider tests on both engines.
+Definition reads authorize metadata only; corpus validation and provider receipts
+supply neither live source/Knowledge grants nor canonical Run publication
+authority. Require those checks explicitly at the consuming boundary.
+
+The definition authority's require_search_ready still always refuses: metadata
+alone is not consumption readiness. The explicit host-bound KnowledgeExecution
+service consumes an already admitted canonical Run and live Attempt fence; it
+creates no admission, grants, scheduler or provider tables. Exact configured
+snapshot identity selects the immutable Knowledge revision and source/provider.
+Ingestion rechecks independent read/manage and source/provider authority,
+normalizes retained sealed input, performs an idempotent immutable provider write,
+and publishes its sealed corpus through the existing Run output service. Provider
+write success followed by failed canonical publication remains nonterminal and
+cannot authorize search. An explicit retry under the same live fence can reuse
+the provider write; expired or uncertain Attempts still require existing recovery
+policy. No automatic takeover or terminal failure is inferred.
+
+Bounded lexical search requires a successful canonical ingestion receipt and
+fenced Attempt, authorized unexpired sealed corpus, matching retained provider
+bytes and live Knowledge/source/provider grants. It supports declared query,
+offset, result-count and result-byte bounds; result bytes use the existing output
+provider. Reconstructed processes revalidate the same receipt rather than trusting
+an in-memory ready flag or provider row. Search checks its cancellation/deadline
+again after output staging and before publication. Source tests cover common
+SQLite/PostgreSQL crossed with actual DuckDB/PostgreSQL corpus engines; they do
+not establish installed Runtime, Task protocol or generated-Python consumption.
+The worker execute hook and search_for_execution hook require trusted immutable
+binding reconstruction in the ordinary host before those public joins qualify.
+
+The declaration permits up to 128 source files but the source manifest remains
+limited to 16; this is not evidence of 128-file ingestion. Existing synchronous
+Knowledge adapters remain destructive and are not made immutable by these stores.
+Generated Knowledge operation validation uses an explicit primitive result
+contract, not a change to `BindingField`: exactly one required string field named
+`result_json`. `knowledge_operations.knowledge_contract` independently checks
+`<name>.ingest/v1` (write, no parameters) or `<name>.search/v1` (read, required
+string ingestion_handle/query and integer offset/limit), with a lowercase
+alphanumeric/underscore/hyphen prefix beginning in a letter and at most 57
+characters. Existing DTO serialization and Data contracts are unchanged; callers
+must select this validator only for the explicit generated Knowledge contract.
+
+`encode_result` validates the inner envelope before encoding it as canonical
+UTF-8 JSON in `{"result_json": "..."}`. Ingestion permits only version
+`actions.knowledge-ingestion-staged/v1`, revision, corpusHandle, corpusDigest and
+status=`staged`; it cannot substitute a completed ingestion receipt. Search uses
+the existing `actions.knowledge-search/v1` fields and normalized hit shape
+(id/source/ordinal/text/values), unique ordered hit identities and exact page
+cardinality. Query/offset/limit/total retain the known version's 512/100000/100/
+10000 bounds. References, handles and digests must be canonical. Nested values
+remain lossless JSON, bounded to depth 8 from the envelope root, 64 object members
+and 10,000 array items, with finite portable numbers and no scalar subclasses or
+negative floating zero. Parent Runtime still owns corpus schema/provenance and
+live authorization; envelope validation is not execution authority.
+
+The operation byte limit measures the entire outer result object, including JSON
+escaping of the inner JSON string. Measuring only inner bytes undercounts it.
+Ingestion counts as one metadata row; search counts returned hits against
+max_rows. Generated Python explicitly decodes `result_json`; the Core SDK sees a
+string and cannot enforce the inner envelope's shape or depth, so the host encoder
+must run before publishing prepared context. This helper alone does not establish
+RCC, Task, or installed Knowledge acceptance.
+
+`KnowledgeExecution.prepare_ingestion` factors provider normalization/write and
+provisional output staging from terminal completion. Its frozen issued
+`PreparedKnowledgeIngestion` carries the actual actor/binding/Attempt fence,
+output reference, corpus digest/size, operation ID/name, ReadBudget, immutable
+receipt bytes, and SQL availability/output pins. The `receipt` property decodes
+a fresh dictionary. Keep the preparation alive through publication; issuance is
+process-local and weakly retained, not a durable job or completion record.
+
+Default preparation requires empty actual admitted inputs, uses the Run ID as
+the provider idempotency key and `knowledge-corpus.json` as output name. The
+standalone execute wrapper delegates preparation and preserves its v1 receipt.
+A trusted generated host may pass exactly `mapped_inputs={}` only after verifying
+its artifact-bound empty ingestion mapping; nonempty values and dict subclasses
+are refused. This projection permits unrelated admitted Action inputs but never
+replaces the Run snapshot, fence, or immutable admission payload. Generated hosts
+must supply stable distinct operation IDs and bounded output names per declared
+ingestion to prevent collisions; malformed IDs/names fail before provider write.
+
+`recheck_prepared_ingestion` accepts only the issuing service's same preparation,
+actor and fence. Inside the caller's canonical publication transaction it rechecks
+live Run authority, Knowledge read/manage, source read/inspect, retained definition
+metadata, provider availability and provisional output SQL identity/expiry, and
+cancellation/deadline. It does not call provider describe/read, engines or blob
+I/O; PostgreSQL grant and pinned rows are locked during this check. Preparation
+and recheck never complete the Run. A provider version/provisional output remains
+unsearchable until canonical terminal publication. `_published` still accepts
+only the existing standalone receipt; generated RCC receipt/Task integration
+requires its separate complete validator and is not established by this factor.
+
+Ordinary Knowledge host/operator selection is covered by the separate host tests;
+generated Knowledge has source-level Task/publication and mapped-Python joins,
+but installed real-RCC consumption, paging/export and two-provider lifecycle
+qualification remain open. Split provider service and advanced Knowledge remain distinct
+outstanding gates. Migration 22 has no downmigration;
+the frozen version 21 status reader reports TOO_NEW, so downgrade requires a
+qualified older snapshot rather than opening the upgraded database.
+
+
+Fresh-container handoffs preserve unfinished source as explicitly incomplete,
+include exact scoped patches/receipts and release sole integration ownership before
+the replacement writer starts. Do not infer a new environment contains old local
+artifacts. Compare remote API checkpoint trees and record differing commit metadata.
+Joined SQL tests may start nested owned PostgreSQL fixtures in addition to the
+harness database; budget each observed allocation before launching. A launcher
+interruption without final capture is not a passing batch. Runtime version floors
+do not establish managed-client schema equality: compare the actual authenticated
+schema with the client's exact canonicalization and refuse mismatches, never bypass.
+
+For multi-capability execution selection, translate the native Package registry's
+AccessDenied into the Run execution boundary's AccessDenied, just as malformed
+or unavailable selection metadata is translated. Test a real registry denial;
+a fake that raises ValueError alone misses this exception boundary. Verify a
+wrong plan rejects before Run creation, then execute each declared Action through
+its own canonical admitted snapshot while retaining the same outer Package.
+Canonical Run result `outputs` are serialized OutputRef values; derive their
+public handle through OutputRef rather than assuming a serialized handle field.
+Output resolution requires both Run-read and application-read authority: an
+execution grant or reference grant does not replace application authorization.
+
+Offline exact-Deployment authorization must enter Package registry
+`load_verified`, which verifies both retained single-capability and bundle
+formats. Calling the legacy single-capability `load` directly rejects valid
+multi-Action Packages after successful authoring and activation. Exercise the
+ordinary stopped-local authorization command in installed multi-Action tests;
+direct source execution with manually provisioned grants cannot cover this join.
+Canvas numeric form fields use the contract discriminator `integer`, not `number`.
+
+For the public Canvas lifecycle, activate a new staged revision with
+`candidateRevision`; restore an already activated historical revision with
+`rollbackTo`, retaining the exact `expectedActive` CAS in both cases. Installed
+acceptance should retain completed Task/Run/Attempt identities across rollback
+and reactivation, then read artifacts with a fresh AppSession after restart.
+AppSession tokens are process-memory-only: rejection of the old token and
+successful newly authorized reads are separate assertions. Never persist the
+raw token in receipts, including failure diagnostics.
+
+For exact evidence hashes, hash Git-stored text after its newline normalization,
+or retain original diagnostic bytes as base64 with a decoded-byte checksum.
+A working-tree CRLF checksum is not the checksum of a normalized committed file.
+When selecting an installed consumer interpreter, invoke its absolute Python from
+the prepared environment or a subprocess wrapper; RCC `task script` may resolve
+a supplied Python executable to the toolchain Python. Always assert import origin
+before crediting installed acceptance.
+
+A generated Canvas form/status does not imply an artifact inspection control.
+Author an explicit `artifact` semantic node with the exact bindingId and label
+when the UI must expose produced bytes. Revise the public semantic spec while
+retaining explicit Package bindings, activate the new revision, and separately
+authorize that exact Deployment revision before execution. A successful Run
+without the node is not a failed artifact provider. Official-host browser
+acceptance should click the authored control and verify returned bytes rather
+than infer it from terminal status alone.
+
+
+For independent release engineering lanes, record exact task IDs, exclusive paths
+and shared-contract reservations in the existing release ledger. Keep one
+integration-branch writer; isolated lanes deliver reviewed patches or draft PRs,
+not competing writes. Reuse a completed acceptance fixture before creating a new
+authority. The installed a38 managed-consumer recipe uses ordinary CLI, public
+local authorization and real RCC; managed completion validates an existing Run
+and its artifacts rather than launching it. Same-datadir restart/replay is separate
+from restart-during-execution, retry, Robot and extension UI qualification. A
+fixture that recreates state or lacks retry cannot close those gates. The exact
+recipe and observed limitations are retained under recovery-a38/managed-installed-consumer.
+
+For the owner-launched ChatGPT host test, do not make an unavailable cloud Codex
+model transport an extra prerequisite once the owner separates those gates.
+Independently verify the exact installed client, reachable endpoint, supported
+authentication and owned-resource cleanup plan; protocol/reference-host proof
+does not establish those host-specific prerequisites or permit changes to Executor.
+
+Pinned Codex0.159.0-alpha.3 app-server initialization can still attempt protected
+home writes with supported task-local SQLite/log homes. An initialize-only file
+syscall trace observed EROFS for home `installation_id` creation, alias-directory
+chmod and a relative `uid_map` open; no initialize response or model/MCP request
+occurred. Keep that as an environment blocker, not product acceptance. Do not
+change protected permissions, copy authentication/session material or reroute
+the denied write. Ordinary task-local options do not authorize bypassing the
+same restriction or establish an approved model identifier.
+
+
+### Generated Knowledge publication and retained source validation
+
+Mapped Knowledge selects generated dispatch/execution v3 from artifact-verified
+capability requirements. No-binding v1 and Data-only v2 retain their wire formats.
+The v2 logical summary records kind, exact mapped-parameter digest, operation and
+source/contract identity, result/context digests, row count and closed Knowledge
+revision/corpus/fence evidence. Launch and terminal summaries must match the same
+issued preparation. Every ingestion adds its exact sealed corpus to the four RCC
+outputs; missing, extra, renamed or mismatched inventory is refused. Managed/Task
+readback uses the shared validator rather than accepting a nested standalone
+Knowledge receipt as completion authority.
+
+Generated ingest operation IDs and corpus names derive from Run ID, requirement
+ID and operation, so multiple ingestions in one Run do not collide. Provider put
+and staging remain provisional until actual generated execution succeeds and the
+existing canonical Run/Attempt publication transaction completes. No scheduler,
+control database, grant or automatic retry is introduced. Synthetic receipt tests
+prove these joins and refusal boundaries, not actual RCC or installed acceptance.
+
+Generated search validates the complete successful source ingestion envelope,
+current Attempt, exact corpus seal, immutable definition/provider identity and
+actual mapped handle before reading retained provider bytes. Final publication
+pins source Run/RunPin/Attempt/output SQL and rechecks independent source Run read,
+collection/source authority, corpus expiry and global cancellation/deadline.
+Retained search receipt validation independently joins source fence/digest/name
+back to that successful ingestion; matching mutations in launch and terminal
+summaries do not authorize a fabricated source. Source projections are bounded
+to an acyclic history of eight ancestor levels and64 projections and cached before
+publication; final validation performs SQL only. Expired source RCC logs do not
+invalidate an otherwise live corpus, but their sealed metadata must still match.
+Expired terminal acknowledgement does not fabricate available result bytes.
+
+The operation timeout bounds normalization/provider work, not subsequent RCC
+execution. After successful preparation, the trusted generated join calls the
+issued ingestion recheck with `preparation_complete=True`; independent SQL grant,
+fence, seal and expiry checks remain mandatory. Cancellation uses the shared
+absolute execution deadline/event. Standalone callers retain the original
+preparation budget by default. Full wrapper publication, including cached schema,
+input and current-deployment checks, must be tested with file/provider projection
+I/O trapped after binding, rather than checking only the inner guard.
+
+
+### Reviewed parallel acceptance boundaries
+
+Wide Canvas table checks must verify readable column layout as well as viewport
+containment: a table can avoid page overflow while wrapping every word one
+character per line. Test keyboard focus and horizontal scrolling of the named
+result region at narrow widths. Component-harness screenshots use Playwright
+output paths and synthetic adapters; they do not establish installed Runtime or
+authenticated-host acceptance.
+
+Generated Knowledge exposes the search envelope inside the required `result_json`
+string. Page-artifact completeness checkers consume that inner envelope, not the
+Task/Run carrier or outer binding-result object. Record the extraction or generated
+artifact-writing step and preserve its exact bytes for restart comparison;
+separately prove expected revision, corpus digest and ingestion handle from
+authorized execution evidence. Synthetic page checks do not qualify installed execution.
+
+`qualify_installed_restore_327.py` qualifies only the private offline SQLite helper
+from a trusted wheel. Verify installed import origin and wheel-member bytes,
+attachment relocation, unchanged source database and tamper refusal before target
+creation. This does not qualify full Runtime dependencies, CLI restore, Windows,
+active jobs or reproducibility across hosts.
+
+When Poetry reports that all attempts to connect failed, retain a `-vvv`
+diagnostic before attributing the failure to networking. HTTP 200 followed by
+`OSError(30, 'Read-only file system')` indicates a local filesystem failure.
+Set `POETRY_CACHE_DIR` and `XDG_CACHE_HOME` to task-owned writable directories
+for package commands as well as bootstrap; do not change HOME, install host
+dependencies or relax network/security policy. Repeat the failed gate and keep
+both receipts. Matching repeated wheel hashes qualify only the measured
+toolchain/input scope, not untested platforms or globally reproducible builds.
+
+`test_robot_real_execution.py` separates genuine development Robot execution
+from opt-in legacy Robot API/RCC execution. Both inspect Robot 7.4.2 XML for the
+exact selected task and status, preserve failure diagnostics, and verify retained
+payloads after removing the mutable source. Direct cases use real subprocesses
+and the production artifact collector; RCC cases use the pinned binary and reopen
+the legacy Run database. These do not qualify immutable Robot Package admission,
+canonical RunAttempt leases, independent worker restart, Task protocol, or
+uncertain-effect recovery. An unset `ACTIONS_ROBOT_REAL_RCC` explicitly skips RCC
+cases; opting in requires an absolute `ACTIONS_RUNTIME_RCC_BINARY` pointing to
+Josh RCC18.19.3 and an owned writable `ROBOTS_HOME`, and missing or invalid
+prerequisites must fail. Disable optional HTML reports/tracing while retaining
+stdout and XML. Robot fixtures comparing exact UTF-8 bytes must encode explicitly
+and use `Create Binary File`; `OperatingSystem.Create File` converts LF to CRLF on
+Windows. Stream direct child stdout to the retained receipt while execution runs
+so a timeout does not discard diagnostics. This direct timeout evidence does not
+qualify legacy RCC timeout recovery. Windows execution remains unverified.
+
+Target: docs/skills/repository-operations.md, source qualification guidance.
+
+When tests run from a dirty checkout, a recorded HEAD commit and HEAD tree identify only the base. Record exact selected test inventories and per-file source hashes, distinguish execution-time hashes from a later checkpoint snapshot, and retain failed attempts alongside corrected receipts. Do not describe the base tree as the tested immutable source. Repeat subset runs and helper runs overlap; report each inventory without adding their pass counts into a unique campaign total. Installed qualification must pin the subsequently committed candidate independently.
+
+Verified basis: source-joined runner captures git HEAD/tree while root source is dirty; selected module hashes and final checkpoint file hashes have different capture times. This addition prevents false immutable-source attribution without discarding historical evidence.
+
+
+Portable RCC preparation receipts must be generated from observed local publish output and reference only the new host’s owned cache. An unchanged manifest and package version do not establish identical transitive artifacts; verify the Core wheel bytes and retain the actual artifact digest. Never stamp an old digest onto rebuilt state.
+
+For manual prepared-artifact checks, use the same explicit filesystem trust carrier and no-build invocation as `build_exec_command`. The local provider name alone does not select the prepared cache’s trust attachments. Preserve verification errors and compare command/environment resolution; do not alter trust policy or invent attachments. The combined a39 probe passed with the adapter invocation after the bare manual call failed.
+
+When an unchanged Canvas apply succeeds during diagnostic instrumentation, preserve its candidate and the initial failure. Continue browser qualification from that retained candidate using the unmodified installed CLI, exact activation pointer and scoped deployment authorization. Do not silently rebuild a third app or describe instrumented admission as clean admission. Record screenshot viewport limits separately from DOM artifact assertions.
+
+
+CanvasSpec syntax is versioned explicitly. CanvasSpec and CanvasNode remain closed v1 readers/types; CanvasSpecV2 and CanvasNodeV2 add card, chart, log and inspector nodes. parse_canvas_spec(raw) and validate_canvas_spec(document) dispatch the declared version without upgrading retained bytes. V1 canonical schemas/fixtures/serialization remain unchanged. Cards participate in the same depth8/count128 traversal, unique IDs and binding validation; inspector fields require1..16 unique keys. The bridge parses only plain own-data records/dense arrays, rejects accessors, unknown properties and unsupported versions, and preserves the original v1 scope serialization order. Its historical v1 unused-binding acceptance remains unchanged; v2 additionally requires declared bindings to be referenced.
+
+Syntax admission does not admit dynamic result data or qualify renderer execution. Runtime result projections must use the existing actions-canonical-json/v1 authorized output bytes, exact UTF-8 budget and numeric/Unicode restrictions, with current Run/Attempt metadata kept separate. This syntax foundation supplies no result encoder, new endpoint, arbitrary dispatch authority or installed-host claim. Legacy direct CanvasSpec.from_json callers remain v1-only until explicitly migrated to version dispatch.
+
+
+A clean create-to-use Canvas gate must start from a fresh owned datadir, provision authorization through public operator commands, compile and activate through public Canvas calls, drive actual reference-host controls, inspect authorized bytes, and restart the same state without adding a Run. Finish compiler preparation/byte verification before the serial host run. Diagnostic admission and later clean continuation are separate evidence; retain initial failures even when a new fully uninstrumented run passes. Reference-host success is not actual ChatGPT acceptance.
+
+SQLite index enumeration must cover real tables and preserve each ordered index column, including repeats. Index-list sequence reflects creation order and is not schema identity. The corrected helper exposes index-column metadata; independent SQL/pragma observations with mutation controls establish expression/predicate definitions. Historical empty-list comparisons remain insufficient, and column-name checks do not establish complete table DDL or PostgreSQL definition parity.
+
+Ordinary detached Task downloads use the existing output transport only when the native Task host is enabled. Construct it from the same output service and managed owner authenticator, append optional RuntimeCanvas fields to preserve positional callers, and preserve explicit transports/invoice scope. The output URL retains the installation-key outer gate and endpoint dependencies; the managed-route credential exception must not be broadened. Test with an actually readable sealed handle before testing wrong audience/revocation. Subsequent reads recheck grants; an already open stream is not retroactively revoked.
+
+The local semantic projection getter is a pure current-request state accessor, not a fetch or authorization mechanism. Successful projections require matching Run/Attempt metadata and canonical/parsed data from the same authorized bytes; the interface alone is not a result encoder or admission proof.
+
+### Explicit Runtime Canvas version admission
+
+Runtime Canvas admission uses an explicit schema-version discriminator through Core validation, the typed DeploymentSpecification, SQL staging and advertised MCP apply/preview schemas. Both retained v1 and explicit v2 revisions use the existing immutable Canvas application digest algorithm; no version is silently rewritten and canvas_create still defaults to v1. SQL reads and rollback restore each revision's original declared version and source. Cards do not create a separate binding authority: Core traverses their children under existing node/binding limits, and DeploymentSpecification still requires an exact logical binding-to-capability map.
+
+A schema union must keep recursive $refs rooted at the enclosing tool's properties.spec/$defs; generating a standalone union without that ref template breaks nested MCP arguments. Explicit syntactic v2 admission and retained SQL lifecycle do not qualify rendered data projections, generated backend execution or installed-host artifacts.
+
+Native managed consumers discover generic invocation inputs through authenticated model MCP `canvas_open` followed by `canvas_get`/`canvas_inspect`; `invocationDescriptors` are reauthorized DTOs, not grants. Use the complete returned immutable snapshot and ClaimRef, or advertised standalone inputs plus a bounded stable idempotency key. AppSession audience does not authorize this model-only `capability_invoke` path. See the [native consumer recipe](../program/evidence/actions-next-327/recovery-a38/managed-installed-consumer/native-invocation.md); no direct SQL discovery or second scheduler is required.
+
+### Robot launch journal durability
+
+Robot launch-intent acknowledgement must occur outside an existing database transaction: nested transactions create savepoints, so returning from them does not prove durable commit. The journal rejects an outer transaction before mutation, commits its own live-fenced absent-to-intent write, then checks the retained identity. Existing intents and uncertain acknowledgements require reconciliation, never automatic relaunch. Both SQLite and PostgreSQL regressions prove the guard. The lifecycle wrapper and builder are components only; canonical admission, fresh-authority atomic publication and installed Robot recovery remain separate gates.
+
+The frozen a39 real MCP/reference-host gate is independent of actual ChatGPT Desktop acceptance. Prefer a task-local authenticated loopback endpoint only when the installed Desktop supports it; verify MCP Apps rendering separately from tool transport. Inspect project configuration and preserve the existing Executor, using an exact temporary-entry inverse edit rather than restoring an old whole config. No remote tunnel or OAuth compatibility is inferred from static bearer success. See the [Dakota preflight prompt](../program/evidence/actions-next-327/recovery-a39/dakota-handoff/agent-prompt.md); it is a conditional operator handoff, not host acceptance.
+
+Canvas form feedback must not equate a returned dispatch response with successful results. A response may be failed, running or cancel-requested; use neutral acknowledgement and let the typed execution/projection state establish success. Actual generic-adapter regressions cover those three cases. After source handoffs, restore frontend dependencies from the committed lock with the prepared RCC gateway before interpreting unresolved-import suite failures as product regressions; retain both failed and corrected runs.
+
+Wheel inventory qualification hashes and parses one bounded immutable byte snapshot; hashing a path and reopening it, or holding a descriptor while its file can change in place, does not bind later inventory to the digest. The qualifier enforces a256MiB archive bound and verifies every RECORD/member hash. Wheel METADATA is declared dependency evidence; installed consumer closure and the active dependency graph are separate checks, and neither is itself a produced SBOM.
+
+Candidate consistency tests compare installed Runtime/Core distributions with their authoritative pyproject declarations rather than stale alpha literals; retain explicit release-line, numeric tuple and installed-origin assertions. The Work Items candidate and frozen published-floor/RCC controls remain independently pinned. A source bump without refreshed installed dependencies must still fail these checks.
+
+For the frozen a39 ordinary installed MCP endpoint, missing/wrong bearer returns403, authenticated foreignHost421 and authenticated foreignOrigin403; correct bearer initializes successfully. Assert denial, not a guessed401 status. Validate Host/Origin with a valid bearer so an earlier auth rejection cannot make those checks vacuous. Exact installed-wheel member checks and graceful owned-server cleanup accompany the retained Dakota gate.
+
+### Current generated-result projections
+
+Canvas v2 data views use app-only `canvas_projection`, selecting the unique sealed generated-action-result.json attached to the successful current Run/Attempt and its generated receipt. Apply existing actions-canonical-json/v1 portability rules and bound both raw and canonical UTF-8 to65,536bytes. Execution metadata, logs/XML and arbitrary first outputs are not generated data. Card is structural; chart/log/inspector consume the authorized projection.
+
+Capture the complete terminal SQL preimage inside the same transaction that validates the generated receipt; compare it before and after sealed-result reading. A new snapshot taken after validation leaves a gap. The callback rechecks active app/binding, association and existing read/artifact grants using SQL only. The existing output resolver's provider acquisition under its grant lock is unchanged; stream reads occur outside.
+
+Capture frontend request generation before awaiting each call and invalidate only that captured generation. New submission/current denial clears data; late success or denial cannot overwrite newer state. Only completed execution loads separate projection data, and construction/getters are inert. Source/controller tests and synthetic renderer screenshots do not establish clean installed-host acceptance.
+
+### Robot Package admission and prebound selection
+
+Robot source admission is measured identity, not compilation or execution readiness. `RobotAdmissionEvidence` records `source-and-plan-verified` and `not-qualified`; it must never be converted into a successful Python compilation receipt. The `actions.robot-package/v1` carrier binds the logical Package key, exact source inventory/archive, schemas, selected suite/task and actual direct or RCC plan. Direct plans carry no RCC specification/artifact identities. RCC identities come only from the host preparation. Existing Python and capability-bundle formats retain their decoders.
+
+Only the registry-issued outcome can be admitted by its original actor/workspace under live generation/deploy grants. Robot admission commits the existing Package row, source seal, request, audit and reference grants together; it rejects an outer transaction, converges on concurrent replay and does not restore revoked grants. Staged objects from a failed SQL commit are not evidence of admission. Retained loading reconstructs source, schema, plan and revision identities without inventing a new build.
+
+`prepare_robot_selection` binds verified source bytes outside SQL and returns an issued callback plus its immutable source archive. Callback checks use SQL only: the exact Run/Attempt, inputs, live grants, retained Package row and a required host `require_current` check. The host check must validate the current Deployment revision and any independent Work Item claim with SQL-only operations; supplying a no-op callback cannot qualify those authorities. Prepare outside any caller transaction, then pass the prepared callback into the Robot lifecycle/journal. Do not route Robot through the Python compiled-package resolver or claim Task/terminal/installed readiness from these source tests.
+
+Verified basis: focused admission/selection tests and existing Python/bundle registry regressions: 96 passing cases, zero skips, on owned SQLite and PostgreSQL. Concurrent connections, SQL audit rollback/replay, outer-transaction refusal, source/plan tampering, live revocation/cancel/fence changes and provider-IO traps are covered. RCC measurements in this suite are synthetic typed fixtures, not a real RCC run. Ordinary host wiring, actual current-Deployment/Work Item callback, terminal publication and installed Robot/recovery remain separate gates.
+
+### Owned frontend build inputs
+
+`inv build-frontend` builds both Runtime and Canvas entrypoints from the checked-out source and committed npm lockfile. The retired `build-frontend-cdn` task fails before imports, network access, subprocess execution or file writes; its two dispatchable CDN workflows are removed. Do not restore an upstream executable download/extraction fallback when a local frontend build fails. Use the existing owned Runtime build workflows and diagnose the source build. The clean a41 candidate was already built through the source path; this correction prevents the separate legacy task from replacing owned assets. Tests execute the actual retired task body with IO/import traps and check every workflow for calls to that retired command. Attribution and unrelated compatibility interfaces are unchanged.
+
+### Installed SBOM declaration and active graphs
+
+A pinned environment SBOM can describe installed dependency declarations that are inactive for the selected consumer profile. Preserve its raw bytes, the independently resolved active graph and explicit marker/extra explanations as separate evidence. An explained inactive edge does not turn strict active-graph comparison failure into a pass or establish release admission. Optional SBOM tooling must target a distinct explicitly trusted consumer interpreter, verify its actual prefix and measured wheel payload, bound retained subprocess streams/time, and compare installed metadata before and after production. This execution is not a sandbox for interpreter or site/.pth code.
+
+Owned-consumer dependency guards must inspect normalized installed distribution names and every Requires-Dist target before evaluating markers or extras; an inactive declaration can still reintroduce a replaced vendor package in another profile. Preserve source/candidate identity in native evidence, including older fixture Core versions, rather than attributing that result to a newer campaign candidate.
+
+Verified basis: exact D336 source sequence806dcf5→630b6f1, independent33-case tooling run, raw declared/active/reconciliation evidence retaining strict-active failure and29 explained inactive edges, plus lock comparison preserving existing name/version entries. Current installed release and platform breadth remain independent gates. Upstream disposition: none.
+
+### Generated model outputs and failed installed executions
+
+Compiler import/unit-test success and a mounted Canvas do not establish generated RCC execution. Exercise the admitted output type through the actual helper: a Pydantic model accepted by compilation still fails if passed raw to `json.dumps`. Use the owned Core model serialization contract and preserve output-schema/canonical validation; never stringify an unsupported object to manufacture a result. When a launched child exits nonzero, retain bounded diagnostics and distinguish proven terminal failure from uncertain launch/reconciliation. A running Attempt with a launch journal but no execution receipt is not a completed failed Run. The first installed a41 receipt records this failure; a separate exact-helper reproduction confirms the serialization defect without claiming to recover discarded original stderr.
+
+Clean consumer recipes must verify the installed graph against the selected candidate lock. Historical handoff constraints can resolve newer packages even when pip check passes; the a41 consumer installed MCP2.3.0 against a2.0.0 Runtime lock. That remains failed lock qualification until a separate fresh lock-consistent consumer is tested. Preserve existing proxy/CA settings when preparing public compiler dependencies without logging values or changing network settings; recheck disk after preparation, before application acceptance.
+
+### Explicit legacy cloud compatibility
+
+Cloud/package-publish compatibility commands require a supplied `--hostname` or an explicitly stored hostname. With neither, they fail before HTTP; an empty login prompt cannot choose a vendor host. Existing explicit endpoint and HMAC protocol behavior is retained, not relabeled as an owned cloud API. No live stored credentials or configuration are migrated. The legacy community-push beta publisher and manual template publisher targeting vendor S3/OIDC resources are retired; template packaging remains local and no replacement external publication target is inferred. This is bounded removal of implicit destinations, not a claim that all optional agent services or mandatory logging/trust dependencies are owned.
+
+The corrected plain and logical-context generated helpers apply the existing Core `model_dump(mode="json")` contract before strict finite JSON encoding, byte bounds and exclusive output creation. Nested models and JSON-mode scalar conversions are supported; unsupported objects and non-finite raw mappings still fail. This source correction does not retroactively qualify the first installed a41 run or close its separate missing diagnostics/terminal-state behavior.
+
+### Frozen-lock consumer qualification
+
+A clean consumer install must use version constraints derived from the same
+frozen Runtime `poetry.lock` as its candidate wheels, not an older handoff's
+constraint file. Verify the frozen lock against the recorded source commit and
+verify every input wheel against its retained digest before installation. Build
+constraints from unique main-group distribution/version pairs; pass only the
+explicit candidate wheel requirements to pip. A constraints file limits versions
+without requesting platform-inactive or optional dependencies such as `duckdb`.
+Do not convert all constraint lines into install requirements or enable undeclared
+extras to make a graph check pass.
+
+Retain pip's install report, `pip inspect --local`, `pip check`, exact lock and
+constraint hashes, selected Runtime extras, and the qualifier implementation hash.
+Use separate fresh consumers for the base profile and each selected optional
+profile. A lock pin for an optional distribution does not request that extra.
+Record full-wheel payload counts separately from package-only member counts;
+METADATA, WHEEL and entry-point metadata add members without adding source files.
+`qualify_consumer_inventory_327.qualify` runs in the prepared package toolchain so
+its `packaging` dependency need not contaminate the candidate consumer. It checks
+the active marker/extra-selected dependency graph, rejects versions outside the
+lock and unexplained installed distributions, and treats pip alone as bootstrap
+tooling. A successful pip resolver or `pip check` alone does not establish this
+lock-consistent closure.
+
+Compare installed files to the exact input wheel members, excluding only RECORD
+because pip rewrites it; report full-wheel member counts separately from
+package-only source-module counts. Assert import origins under the fresh consumer.
+Use `action-server version` for the CLI identity probe: `--version` is not a
+supported option. An in-process ASGI MCP initialize plus empty catalog can prove
+basic SDK/Runtime compatibility without launching jobs, but does not qualify a
+Canvas flow, selected execution provider, current Task protocol, or installed
+recovery. Dependency closure and this smoke check do not establish full
+vendor-independence or an independently generated SBOM dependency graph.
+
+### Storage handoff of partially integrated Robot execution
+
+Freeze all writers before transferring the sole integration role. Save exact source and selected test inventories separately from immutable installed artifacts; record partial and resource-interrupted runs as such. A SQL-only Robot receipt projection proves retained metadata identity, not provider bytes or execution authority. Do not call registry selection/provider reads from ticket or Task SQL transactions. Reconcile its closed admission envelope with retained validation metadata before activating receipt hooks. Direct dry-run readiness and synthetic adapter authority tests do not prove ordinary installed Robot execution.
+
+A process cleanup review must cover descendants created after an earlier empty snapshot and reparented when their wrapper exits. The deterministic regression must hold a wrapper before child creation, capture an empty snapshot, release creation, and wait for wrapper exit before cleanup. Assert the late child is absent or cleanup remains uncertain; a previously successful empty sample must never establish terminal-failure eligibility. The storage-resume-20261025 barrier reproduced the held patch reporting stopped while that child remained live. A process-group correction must verify actual RCC env-exec inheritance and cover timeout/shutdown as well as failure publication; synthetic process containment alone does not establish that boundary. An early complete snapshot is not proof that later descendants are absent. Keep unresolved cleanup patches unapplied until a real process-barrier regression and review establish the guarantee. See the storage-handoff-20261025 receipt for the held patch and exact test boundaries.
+
+Generated Python failure publication requires the measured failed RCC receipt to
+match the launched artifact and exit code, current source identity, live Attempt
+fence and authorization, and confirmed process cleanup. It publishes only the
+three sealed RCC diagnostics; no result or prepared logical ingestion becomes
+successful. Work Item failure and Run/Attempt failure share the metadata
+transaction. Failed Task reads validate the same immutable receipt and seals.
+
+For trusted, nonescaping POSIX workloads, create a new session at launch and
+terminate its kernel-owned process group before descendant enumeration. A final
+PID scan alone is insufficient: a surviving member can fork and exit between
+that scan and its status check. Rescan and reap within the same deadline, retain
+inspection errors as uncertainty, and cache successful cleanup so `finally`
+cannot signal a reused group after publication. Use the same ownership for
+normal exit, failed exit and cancellation/timeout cleanup. This is not an OS
+sandbox; deliberate session escape and non-POSIX containment are separate gates.
+The storage-resume-20261025 evidence retains both counterexamples and a real
+RCC child/grandchild cleanup probe.
+
+An official-host browser gate must preserve required browser sandboxing. In an
+executor with a misconfigured Chromium SUID helper, a sandboxed launch may abort
+before opening a page. Record that environment failure separately and continue
+independent protocol tests; do not convert a `--no-sandbox` run into compliance
+with a no-security-overrides constraint or treat MCP-only evidence as UI proof.
+
+Publication success tests that stage several diagnostic/corpus outputs should
+set an explicit test budget rather than accidentally inherit a short shared
+preparation-fixture deadline. Keep a separate deterministic expired-budget test
+that advances only the test clock after preparation and asserts a running Run
+and provisional outputs after rejection. A passing rerun does not identify a
+previously suppressed exception; preserve the failed receipt and distinguish a
+reproduced failure mechanism from an unconfirmed original cause.
+
+Both the default frontend CDN task and the alternate `tasks_cdn` Invoke
+collection reject retired upstream-executable extraction before external work,
+including default and explicitly pinned versions. Cover actual alternate
+collection/Program dispatch. Template and downloads-index vendor publishers are
+retired separately; assert vendor role/bucket targets are absent across
+workflows while retaining the owned source-build release workflow. Historical
+index-generation code and compatibility names do not authorize publication or
+establish full dependency independence. Logging replacement still must preserve
+raw/repr secret hiding, OAuth suppression and decrypted-context redaction before
+removing `robocorp-log`.
+
+A revoked read permission may prevent `canvas_get` from issuing a new AppSession
+instead of issuing a session whose later projection call fails. Both paths must
+withhold protected output; distinguish the observed denial from a harness that
+assumed a token always exists. For synthetic CLI keys, pass `--api-key=value` so
+a valid randomly generated leading dash is not parsed as a new option. Startup
+failure accounting must preserve the original error when no server log exists.
+
+### Installed browser and owned dependency qualification
+
+A Playwright command exiting zero does not prove a browser passed when its harness
+records failures. Inspect each launch receipt. The 2026-10-25 environment's system
+Chromium and both locked Playwright revision 1234 binaries failed before page
+creation with a sandbox error. Historical host screenshots do not establish a
+supported sandbox in a replacement environment. Keep `chromiumSandbox: true` and
+use an environment with a working supported sandbox; do not change helper ownership,
+security policy or launch flags to bypass the prerequisite. Browser-only handoffs
+must preserve exact candidate/official-host hashes, recreate local compiler trust,
+and distinguish protocol success from actual AppBridge/UI execution.
+
+Distribution metadata and `pip check` do not detect shared import-path overwrites.
+`robocorp-truststore` and official `truststore` both install `truststore/*`; the
+frozen a41 consumer reported official 0.10.4 while all six Python files matched
+fork 0.9.1. Require one namespace provider and verify installed files against its
+RECORD. Qualify replacement in a clean consumer with native CA loading, trusted
+local TLS success, untrusted CA rejection and hostname rejection. Do not infer
+repair from an in-place uninstall; preserve per-context verification and avoid
+global TLS injection. Linux evidence does not establish Windows/macOS behavior.
+
+Retained Robot package kind must select its dispatch and terminal receipt protocol.
+A public Robot dry-run/activation can succeed while execution still fails if the
+shared standalone admission seeds a Python receipt. Reproduce through public
+admission rather than manually seeding Robot journals in every fixture. Retained
+receipt checks must use SQL metadata only; execution and authorized artifact reads
+still verify source/output bytes separately. A validation receipt proves dry-run
+validation, not actual task execution or Work Item support.
+
+Core owns logging at `actions._logging`. Encoder, decoder, embedded viewer and AST
+rewrite hooks move together; Runtime obtains the matching viewer through
+`get_log_viewer_html()`. Preserve provenance/license notices and legacy configuration
+keys independently from package dependency removal. Namespace changes require a
+distinct rewritten-bytecode cache tag. Mandatory exclusions protect secret
+constructors and ActionContext decryption from argument capture before redaction
+registration, including when user filters request those modules. `suppress()`
+protects automatic tracing, not explicit `log.info()`. Decode emitted HTML events
+and inspect raw `.robolog` records with synthetic raw/repr, OAuth and encrypted
+context canaries; functional Secret tests alone do not prove redaction. Clean
+installed execution without the upstream distribution remains a separate gate.
+
+Robot process cleanup needs the same kernel-level group-stop boundary as generated
+execution. An empty final enumeration alone can miss a child forked by a sampled
+process before that process exits. Require explicit ownership from the local
+`start_new_session` launch, verify a live wrapper's group identity, stop that group
+before each enumeration, and fail closed on signaling/inspection failures. This
+supervises trusted nonescaping descendants; it does not create an OS sandbox.
+Task readiness must check Robot's current activated Deployment and exact configured
+preparation. Worker shutdown also needs a pure stop predicate immediately before
+fenced terminal publication; the SQL-backed cancellation predicate serves execution
+checks and must not be substituted into a metadata-only publication boundary.
+
+The basic scaffold is an offline `count_words` action using owned Core and stdlib.
+Its tests exercise Response outputs without browser or service dependencies.
+Common ActionServerTool and AgentCliTool retain explicit local compatibility paths
+and verification, but automatic acquisition rejects before filesystem, process or
+network effects. Tests use synthetic fixtures. RCC acquisition tests assert the
+owned GitHub release URL without downloading or executing binaries.
+
+GalleryActionPackages requires explicit metadata or keyword-only `metadata_url`;
+unconfigured list/extract fails before network. ReductoPlatformParameters requires
+a nonblank `reducto_api_url`, preserving explicit compatibility endpoints and
+serialized fields. Raw platform dictionaries forwarded by `prompt_generate` are
+not locally validated by this model; removing the model default does not establish
+validation of those separate inputs.
+
+Owned documentation generation runs through `python -m devutils.owned_docs` with
+official pydocstyle and mdformat-gfm. Root and `__all__` exports are preserved;
+module-generation errors raise rather than producing a successful empty overview.
+Validate mode creates no output and invokes no shell. Generator and validation
+rule notices and immutable provenance remain beside the implementation. Compare
+expected Markdown inventory and actual exported API content with a baseline, and
+check D420/D421 behavior separately. Stock lazydocs 0.4.8 on Python 3.12 returned
+success while obsolete discovery omitted ten module files; fixing only discovery
+still omitted the root API and re-exported classes. Active package locks now use
+the owned adapter and official checker; orphan locks in retired common, mcp and
+build_common directories have no pyproject or active toolkit package and remain
+historical evidence, not active dependencies.
+
+Owned-doc validation filters private directories relative to the selected root,
+not its absolute ancestors. A checkout beneath `_temp` still validates its public
+modules. Nested private directories remain excluded; selecting an explicit file
+validates that file regardless of private parent directories. Regression controls
+must check real D420/D212 violations and private-descendant exclusions, rather than
+accepting an empty discovery result.
+
+A Runtime preload can run inside an explicitly selected older Core package. Prefer
+`actions._logging` whenever its module spec exists; import errors inside that owned
+module must propagate. Only an absent owned module in the legacy child environment
+uses its already-declared `robocorp.log` implementation. This compatibility path
+adds no vendor dependency to the current Runtime/Core consumer. Verify both a
+current Core run with upstream imports blocked and a retained older child executing
+real MCP tools. Universal Canvas also adds its UI resource to model resource
+catalogs: assert the exact combined inventory and select custom resources by URI,
+not by registration order.
+
+Validate retained Robot terminal receipts and generated failure receipts before
+resolving model-facing artifact handles even when a capability has no logical
+requirements. Select the validator from retained package kind. Accept the
+generated-failure version only for an actually failed Run at terminal read
+boundaries. Receipt validation does not grant read authority: preserve Deployment
+and queue permission checks and authorized provider resolution. This does not
+imply stronger validation for legacy zero-requirement Python success receipts.
+
+The optional SBOM toolchain is not installed by a default Poetry sync. On Python
+3.9 or later within the declared range, use the prepared RCC package gateway with
+`devutils sync --with sbom` before invoking the pinned producer. Supplementary
+devutils mypy uses `-p devutils` to retain canonical module identity. Official
+pydocstyle is untyped; only its import boundary is annotated while the owned
+generator and validator remain type-checked. Preserve Markdown parity when
+correcting inherited generator typing.
+
+Installed logging acceptance must assert consumer module origin and version,
+block upstream imports, and exercise actual AST rewriting with raw/repr Secret,
+OAuth and encrypted-context canaries. RCC's `ROBOT_ROOT` can exclude a scratch
+probe from default instrumentation: explicitly select its `full_log` filter and
+require method, argument and return events. Redirect rewritten caches outside the
+frozen consumer before imports; check reuse in a second isolated process and
+compare installed wheel payload bytes afterward. Decoded HTML events verify
+stored data, not browser rendering.
+
+Canvas profile selection must distinguish verified direct Robot packages from
+ordinary generated Python. Direct Robot admission and model discovery can pass
+while Canvas open fails if its shared selector still requires RCC. Keep generated
+Python's selector RCC-only. The Canvas selector may accept direct only from the
+same canonical registry authority, with verified Robot carrier, exact package,
+capability and plan references, and an actual retained direct plan. Preserve
+resolver authorization, sole locked default plan and all profile identity checks.
+
+Dependency/default audits distinguish runtime acquisition, implicit local service
+discovery, signing metadata and pinned provenance verification. Legacy PID-file
+service discovery is active coupling even without a cloud hostname. Signing
+homepage metadata affects artifact identity without being a network destination.
+A pinned reference checkout in release verification is a build-time availability
+dependency; any offline replacement must retain independent provenance assurance.
+Historical data directories, explicit compatibility aliases and legal attribution
+are not removable dependency edges.
+
+Agent helpers require explicit `ACTIONS_AGENTS_SERVICE_URL`, or the explicit
+legacy `SEMA4AI_AGENTS_SERVICE_URL` alias when the owned setting is absent. Empty
+or unreachable owned configuration does not fall back to another service or
+legacy Studio PID discovery. Test absence before filesystem/network effects and
+preserve the selected endpoint's existing API payload contract. Windows signing
+uses the owned project homepage as description metadata; test command assembly
+with mocked process execution without credentials or live signing.
+
+Qualify optional Agent endpoint boundaries in the complete Core suite with the
+isolated official truststore selector, followed by configured lint and typecheck.
+Source-suite results remain separate from frozen installed candidate acceptance.
+
+A malformed Chromium setuid helper is not always repairable by ownership alone.
+Inspect helper ownership/mode, its mount flags and inherited NoNewPrivs before
+proposing a repair. A read-only/nosuid mount plus NoNewPrivs makes chown insufficient.
+Use an owner-provisioned separate non-root browser environment with supported user
+namespace sandboxing and the candidate's locked Playwright version. A successful
+sandboxed page preflight is required before host acceptance; never treat the
+presence of managed Chromium binaries as evidence that sandbox launch works.
+
+When freezing the Runtime, filter optional MCP CLI modules before PyInstaller
+recurses into packages: importing `mcp.cli` can exit when the optional Typer
+dependency is absent. Preserve MCP client/server runtime collection. Source-mode
+self-tests launched from action projects must use Python's safe-path flag (`-P`)
+so a project `actions.py` cannot shadow the installed namespace. Keep source-mode
+API results distinct from explicitly selected, source-bound native artifact gates;
+a successful diagnostic build from a dirty checkout does not qualify a candidate.
+The safe-path flag does not remove caller-supplied `PYTHONPATH` and is not a
+sandbox. Generate the public OAuth catalog through the canonical build task and
+keep it ignored; it must not replace an operator's private registration.
+
+For the locked Node MCP SDK, classify HTTP authentication rejection from
+`SdkHttpError.status`/`data.status`, not the SDK error-code string or message text.
+Retain HTTP status separately from sanitized SDK metadata; timeouts do not prove
+authentication denial. Preserve the transport AbortSignal when adding deadlines,
+and write terminal supervisor failure state on subprocess exceptions before
+cleanup. A focused auth follow-up does not change an earlier full-client FAILED
+receipt.
+Audit an unpublished Canvas client fixture by its single idempotent
+`canvas.create` request and absence of active Deployment heads; the draft itself
+legitimately creates a Deployment revision. Preserve failed run receipts
+separately from subsequent corrected complete runs.
+
+An HTTP200 MCP tool error can come from a server adapter catch-all and does not
+identify the failing authorization or domain boundary. Before retrying generated
+execution, compare copied profile, application and snapshot identities with the
+saved successful fixture. If they match, retain the sanitized error and diagnose
+with allowlisted phase booleans and exception classes in a task-local test copy.
+Do not infer an SDK defect or change grants from the generic message alone.
+
+Preflight every local file a Node qualification client reads, including saved
+pass/fail snapshots. Record its last allowlisted stage. Exiting before the first
+MCP request is setup evidence, separate from a tool error. A test-only boundary
+trace that succeeds does not qualify an uninstrumented execution or explain an
+earlier failure. Keep direct SDK calls, diagnostic wrappers and negotiated
+protocol profiles distinct when comparing results.
+
+Installed Node execution acceptance belongs to its exact candidate and supported
+negotiation profile. Require unmodified SDK/native transport, synchronous generic
+pass and deliberate failure, exact terminal claim/Run state, all four authorized
+artifact digests, strict Robot XML, unchanged restart reads and natural client
+and transport exit. That result does not qualify legacy/default negotiation or
+detached Task decoding, or explain a differently instrumented earlier failure.
+
+Candidate transfer verification must compare embedded qualifier assertions with
+the candidate configuration, not merely verify a manifest of internally
+consistent bytes. Retain a defective immutable bundle and publish a separately
+hashed, reviewed recipe correction without mutating product wheels. Inspect
+qualification scripts statically during preparation: module import may create
+credentials or fixture state. Source preparation, managed-browser UI acceptance
+and a strict sandbox-attested browser gate require distinct receipts.
+
+Do not infer shared loopback from a shared hostname: a managed desktop/native
+terminal and an execution tool may use different network namespaces. Confirm
+reachability through the supported route without changing security settings.
+Storage planning must distinguish sampled peak, retained allocation, enforced
+cap and required free reserve, and must not sum free space on shared filesystems.
+
+For a resource-constrained managed-browser test, retain the original strict recipe
+and qualify a named resource profile separately. Measure fresh compiler
+publication/proof and actual installed execution before choosing lower caps;
+report sampled peaks separately from enforcement limits. Require initial free
+bytes after host/consumer preparation, track compiler and fixture allocations on
+the same filesystem, and abort through cleanup on reserve/cap violations. An
+async monitor's interval is nominal when synchronous startup/shutdown can block
+its event loop. UI-only qualification can omit redundant direct executions only
+when that exclusion and the separate candidate-bound protocol evidence are explicit.
+
+Portable compiler handoffs must include parameterized target-side publication
+and Core payload proof scripts. Verify bundled RCC/wheel bytes, create a fresh
+local home/trust, derive preparation from observed output, and verify the exact
+Core payload through that materialized interpreter before exporting configuration.
+Keep standard system-tool paths available for RCC's loader inspection; a missing
+`ldconfig` discovery path is a failed preparation, not permission to bypass it.
+
+Reference-host auth adaptations must bind both listeners to loopback, validate
+one configured loopback Runtime, and retain renderer/bridge/sandbox behavior.
+Keep disposable browser bearer state in memory and send it through the standard
+transport header. Drop inherited tool/result/bridge log payloads, which may carry
+AppSession capability tokens. Separate operator attestation, backend validation
+and visual review; PNG-shaped files alone are not browser proof.
+
+
+Mapped Knowledge compilation and retained verification explicitly accept Core a4,
+a7 and a8 with unchanged a4/a39 compatibility metadata; a5, a6 and unknown future candidates
+remain unqualified. Keep both historical and current pins in contract coverage,
+including exact mappings and retained-manifest tampering. Mocked authoring and
+compiler passes do not qualify installed Knowledge execution.
+
+Task result regression fixtures must construct the real TaskService with an explicit
+policy and a readiness guard that rejects unexpected dispatch. Calling an unbound
+method on a partial namespace can fail when valid internal delegation changes.
+For a direct logical-publication projection fixture that intentionally lacks Task
+admission, isolate only the claimed-intent lookup with an exact Run-ID assertion
+returning unclaimed. Retain the real DetachedActions/TaskService objects and all
+remaining bound-result/expiry validation. This is unit projection coverage, not
+public Task admission or read-authority proof.
+Historical generated-helper golden hashes retain the old byte contract after removing
+only the asserted, reviewed model_dump(mode="json") serializer addition; supplement
+that narrow delta with execution tests for JSON model values, finite numbers, byte
+bounds and private output creation. Do not blindly replace the historical digest.
+
+Static qualification of an isolated integration must record absolute target files,
+use its package configuration and explicit source/type-search paths, and verify
+BuildSource origins. A shared prepared interpreter supplies tools and third-party
+dependencies, not an implicit alternative Runtime source. Retain exact shared
+formatter configuration when the isolated copy lacks it and run check-only formatting.
+
+A restored Runtime suite must generate the ignored public OAuth module through
+the committed generator and bind its hash to the selected wheel; Bootstrap and
+import/version preflight alone can miss that input. In this saved Go1.23.6
+toolchain, linked-worktree wrapper builds selected the outer `/workspace/.git`
+marker during VCS discovery. Diagnose with `go build -x`; standalone target-local
+Git metadata at the same verified commit/tree restored stamping without disabling
+it. This observation is layout/toolchain-specific, not a general worktree rule.
+
+
+Pinned RCC18.19.3 legacy catalogs retain their absolute build base. Strict import
+followed by local publish can restore into that producer base even when subsequent
+execution uses a target-local interpreter. A fixed-path offline cache can avoid this
+specific relocation defect only when producer and fresh target use the exact same
+canonical owned root and every compressed catalog path is verified before import.
+Transfer only the hash-pinned public catalog/library export, never producer trust or
+prepared receipts. Target publish creates fresh local trust and must repeat the full
+Core payload proof; verify actual publish paths as well as execution paths. This is
+not general relocatable artifact qualification. Preserve the failed cross-base case
+and keep external RCC changes owner-gated.
+
+Offline qualification scripts explicitly reject optimized Python: assert-dependent
+checks and setup must remain active. Their exact archive, path and capacity profile
+are qualification inputs; sampled allocation measurements are not filesystem quotas.
+
+
+Installed generated Knowledge qualification explicitly provisions the local host
+through providers-local; authoring does not implicitly provision or ingest it. Use
+public logicalRequirements and dataBindings, obtain the ingestion handle from an
+authorized completed Action result (including its declared result_json envelope),
+then map each search parameter to immutable inputs. Require actual child rejection
+of undeclared/changed-parameter lookups, real success/failure receipts and authorized
+artifact rereads after process restart. Keep compiler checks separate from execution.
+
+Installed acceptance harnesses bound offline operator CLI calls and run under a
+dedicated subreaper supervisor. Stopping only the Runtime PID does not prove cleanup
+of RCC descendants that start separate sessions. Track only owned descendants with
+process birth identities, independently attempt termination/reap/stream closure and
+record remaining children; never kill sibling qualification workloads.
+
+An authorized independent public rebuild must have no input path to a denied artifact.
+Recreate the environment in a fresh owned root with standard preparation, verify
+declared public dependency identities and exact owned wheel payloads before supported
+export, then derive archive pins from that new output. Targets verify the exported
+catalog/library boundary and create their own trust. Public Python METADATA equality
+is not wheel-payload equality; sampled capacity guards and source review are not
+completed build or transfer evidence.
+
+Model capability invocation and Canvas app-associated execution have distinct artifact
+authority. A completed model Run does not establish a Canvas Request/Audit association.
+Qualify each surface with fresh items: model output reads through authorized managed
+HTTP, and Canvas submit_input/execute reads through its own association. Preserve
+expected cross-surface denial rather than adopting an already completed Run.
+
+Broad Runtime qualification compares selected source, imported module and installed
+distribution versions before creating services. Reject dirty sources and recheck HEAD,
+worktree and source/test fingerprint after execution. Persist sanitized phase outcomes
+incrementally and require successful pytest session_finish before PASS. Route external
+termination through bounded child shutdown and exact owned-container cleanup. Resource
+aborts remain distinct from test failures; preserve both and serialize heavy builds.
+
+Advance each acceptance row only from its exact terminal receipt. Keep protocol/build/UI,
+provider-specific execution, source regressions, static checks and full-suite gates
+separate. Claimed execution does not close claimed Tasks, output modes or multiple
+principals. Replace stale RUNNING/WIP text while preserving failed and aborted receipts.
+
+Inspected artifact content and its success notice are scoped to a binding's current
+execution generation and AppSession context. Clear both when a new operation starts,
+and reject late replies unless generation, Run, Attempt, state and handle still match.
+Keep failure diagnostics readable when the current authorized Run provides them.
+Remount artifact status only, preserving form inputs and unrelated binding results.
+
+Track PostgreSQL filesystem capacity separately from workspace free space. Preserve
+container DiskFull failures, sample bounded numeric database/WAL/schema telemetry, and
+use explicit memory/tmpfs budgets. A sampled preventive threshold is not a quota;
+telemetry failures must not prevent cleanup of the exact owned container.
+
+A narrow UI retest may retain an earlier candidate's Core/RCC inputs only with a
+separately versioned Runtime, exact committed source provenance and byte verification.
+It does not inherit later backend acceptance. Preserve failed browser receipts and
+change candidate identity assertions without relaxing host or authorization checks.
+
+RunAdmission records canonical execution snapshots, not individual Runs. A repeated
+execution under one unchanged deployment/capability snapshot reuses its admission.
+Installed/UI qualification should check Run and Attempt counts separately, verify
+RunPin admission associations, and compare the retained typed snapshot to the exact
+authorized deployment. Never demand one admission per repeated execution.
+
+Before frozen-source qualification, reconcile tracked generated frontend inputs with
+the canonical build of the selected source. Verify relevant source files have not
+changed, retain before/after hashes, and commit the regenerated input before the
+clean-worktree preflight. A later build mutating stale generated files invalidates
+the frozen-source gate even when the product source itself was unchanged.
+
+For installed Data qualification, retain one immutable Package while changing
+provider-bound Deployment revisions through public CAS and authorization. An
+AppSession is scoped to the full active Deployment: prove old artifact reads before
+rebind, then require denial under the new session. Replay keys only under their
+original active snapshot. Record provider execution, restart, descendant cleanup
+and owned TLS cleanup as separate gates; cancellation and multiple principals need
+separate evidence. Own exact container identity before fixture yield. Automatic
+removal can outlast stop: after recognized removal-in-progress, use a bounded
+read-only absence poll with each daemon call bounded by the remaining deadline.
+Do not repeat mutations or treat unknown cleanup errors as success.
+
+Ready admission may render before automatic execution finishes. Disable or coalesce
+duplicate launch/status controls by binding and operation identity while preserving
+cancellation and rejecting changed inputs. Release only the execution's own fence
+when its terminal response arrives, independently of a delayed projection; stale
+projection generations must remain rejected. Keep genuine request failures visible
+rather than clearing them on unrelated state refresh.
+
+Synthetic lifecycle tests must replace the current process-ownership boundary,
+never send fake PIDs into real group enumeration or disable cleanup guards. An
+unconfirmed process stop retains transferred logical preparations even after their
+preparation thread exits; close must report that hold. Test teardown may release an
+exact synthetic owner/result only after explicitly resolving its simulated process.
+Fixtures bypassing constructors must supply current constructor defaults and assert
+the intended readiness check actually runs; generic unavailable errors can mask an
+incidental AttributeError.
+
+Artifact cache hits do not prove expanded environment reuse. Track materialization
+identity/path, allocated storage, leases and process lifetime separately. Bound
+retained disk as well as concurrent workers. Confirm exact-version supported reuse
+and release semantics before changing execution identity or reclaiming views; keep
+immutable artifact provenance and unique failure evidence.
+
+A Work Item claim and detached worker Attempt claim are different authorities.
+Standalone Task and synchronous claimed Robot proofs do not establish their join.
+The additive claimed consumer Robot Task join uses strict claim identity and
+atomic admission/intent/Task receipts; it never attaches receipts to existing
+synchronous Runs. Its source tests remain separate from installed claimed Task
+execution, restart and cancellation qualification against a new candidate.
+
+A repaired subset's green receipt does not supersede a failed full-suite receipt.
+Record the exact frozen source and selected files for combined provider checks,
+verify terminal session completion and owned service removal, and keep the full
+applicable gate open until its own complete result is available.
+
+
+Claimed Task cancellation tests must remove execution/read/claim authority while
+retaining Run and queue cancellation rights. Reusing a generic execution guard can
+accidentally require those unrelated permissions. Verify pending and active cases,
+stale claim epochs, queue-cancel failure and post-validation rollback. Retained
+cancellation validation is observational and must never be reused as execution
+authority or proof of process termination. Keep the initial failing permission
+regression and the corrected result as separate evidence.
+
+Independent-client evidence is operation-specific: Node catalog/authoring passes
+do not prove Node execution, and Python-executed Runs cannot close that row. Reuse
+the exact locked transport and public fixture, recording which client submitted
+each Run and retaining candidate/SDK/result identity through reconnect. Rebind
+prepared native controllers to the selected immutable candidate. Distinguish
+restart, source migration tests, private offline attachment-copy proof and full
+installed upgrade/restore; these cover different state and authority boundaries.
+
+A source-bound managed official-host browser pass may support an owner-launched
+bounded ChatGPT evaluation without waiting for all release gates. Preserve the
+actual evidence method: visual greying plus installed disabled-guard source does
+not establish a direct DOM or duplicate-click behavioral test. Generated word-count
+acceptance does not qualify invoice review/reconciliation. Actual client/platform,
+supported authenticated route, isolated configuration and owned cleanup remain
+operator prerequisites; never substitute Executor or reference-host proof for E1.
+
+The shared MCP UI resource receives distinct `actions.canvas` wire shapes.
+Authoring `canvas_open` returns `applications` entries with `applicationId`,
+`title` and nullable `activeRevisionId`; read-only discovery returns
+`apps/currentApp/empty/emptyMessage` with validated spec projections. Both
+producers cap the library at200 entries. Discriminate and validate these closed
+library shapes separately from existing strict app/preview metadata. A library
+is a read-only list, never execution authority: reject attached app-session or
+execution contexts and expose no tool-calling controls. Validate projected specs,
+unique app identities and exact current-selection membership. Test a successful
+`canvas_get` followed by `canvas_open` on the same resource, reverse state changes,
+empty/inactive listings and malformed/oversized lists. A transport or app-only
+host pass does not cover that list transition.
+
+Keep a CONNECT+RENDER owner retest short and isolated. Reuse verified platform
+and Python checks, exact compatible wheels, portable version constraints and the
+source/embedded-HTML hashes. Use a fresh datadir rather than exercising an old
+candidate's migration path. An initially empty library and one unpublished
+UI-only draft can qualify authenticated discovery and get/open/get with zero
+Runs, Attempts and Task receipts, without a backend or compiler task. Resource
+byte equality and component tests remain separate from actual ChatGPT rendering.
+Preserve the older candidate, working endpoints and tunnels; credentials stay in
+the already approved native local entry/helper, never the handoff prompt.
+
+When rebuilding a candidate with reused dependencies, verify exact expected
+Work Items/Core wheel names and hashes before copying or installing, and pin the
+RCC binary before using it as a build input. Recording a hash afterward does not
+prove it was the intended input. Pip check and import/version checks are not
+installed-byte proof: compare every wheel payload member in the clean consumer
+and explicitly handle relocated data rather than silently omitting it.
+
+Bind a detached-worktree build to both commit and tree before generating frontend
+and public OAuth inputs. Retain the tracked build-input manifest, wheel hashes and
+owned-process supervisor receipt. Clean-consumer proof includes METADATA equality
+and the resolved dependency profile; byte-pinned companion wheels do not make
+freshly resolved public dependencies lock-identical. Package identity, actual
+Runtime execution and Library delivery require separate receipts.
+
+Controllers that import repository pytest fixtures run inside the prepared RCC
+package environment with their declared test dependencies. Keep the outer
+pidfd/subreaper supervisor on its capability-checked host Python. Pin imported
+fixture files and installed wheel bytes before starting providers, and retain
+setup-only failures separately from execution and final cleanup results.
+
+RCC holotree delete dry-run support does not establish atomic lease protection.
+Reclaim only proven owned, reconstructible materializations after all producers
+are quiescent and fresh process/lease checks show no use; preserve artifact,
+catalog, trust, receipts and unique evidence. Do not relocate an existing compiler
+cache identity to change its backing filesystem. A new storage-backed preparation
+requires its own capacity, import and target-local identity proof.
+
+Compiler setup is candidate-bound: update exact Runtime source/wheel verification
+when changing a post-release candidate, deliver the package fixture and verifier
+together, and generate trust and prepared receipts on the consuming target. A
+standalone controller must route SIGTERM/SIGINT through bounded owned-child cleanup,
+retain repeated stop requests during cleanup, and refuse a subsequent phase.
+Allocate failure-prone monitoring resources before spawning a child or protect the
+child immediately. Python try/finally alone does not handle default SIGTERM.
+
+When a public Core integration surface changes, build the newly versioned Core
+wheel from the same immutable source archive as Runtime. Reuse an older immutable
+wheel only when its source is unchanged. Verify archived metadata, wheel identity
+and installed payload/version; an earlier compiler artifact does not prove changed
+Core bytes. Regenerate a target-local compiler environment and bind its successful
+Core execution receipt to the measured prepared artifact. Terminal Task execution
+and live cancellation need separate fixtures: active cancellation remains
+working/outcome-unconfirmed until durable terminal evidence exists.
+
+The clean-wheel contract test builds `git archive HEAD`, not the dirty working
+tree. Run it after committing the exact reviewed version and dependency-floor
+changes; otherwise package metadata and test expectations can refer to different
+sources. Keep the failed mixed-source attempt separate from the committed-source
+recheck. Update explicit starter-template pins alongside regenerated bundles.
+
+For inactive passing test fixtures, lossless local compaction can preserve evidence
+while recovering capacity. Exclude failed or unidentified fixture families and
+database sidecars. Verify each compressed file by streaming decompression against
+the original hash, persist its restore manifest before removing the unchanged
+original, and restore before opening it as a database. Measure actual free space:
+overlay allocations do not predict reclaimed bytes. Public repodata indexes are
+separate from package archives, prepared artifacts, catalogs and trust.
+
+Treat RCC materialization cleanup as a serial operation under exclusive ownership.
+Bind exact view IDs to retained receipts, verify producers have stopped, and use
+the pinned CLI's exact selection. A dry run is not an atomic lease guarantee.
+Retain compiler proof views and artifact/catalog/trust state. Repeated receipts
+using one view prove that reuse only, not automatic reclamation.
+Pinned RCC18.19.3 exposes `rcc holotree delete <identity> --space <space>`.
+Use the full observed identity and its actual metadata space. `--dryrun` reviews
+selector behavior; it does not establish the absence of active leases.
+
+Manifest compatibility does not establish client-protocol support. Record whether
+an independent client exercised synchronous invocation or Task lifecycle methods.
+An official SDK that rejects an extension method before transport remains an
+unqualified client for that method; Python results cannot substitute for it.
+
+A delegated artifact-only Runtime build returns a wheel without claiming installed
+qualification. Build from a detached exact source/tree with repository tasks and
+an already prepared target toolchain; bind generated frontend, OAuth and RCC
+inputs to the wheel. Reuse unchanged Core and Work Items bytes at the integration
+owner instead of rebuilding immutable versions. Return a supported Library object
+identity and actual byte hashes; target-local paths, caches and trust do not transfer.
+
+A client phase receipt written after client.close is execution evidence, not
+process-lifetime proof. Require the supervised child to exit successfully before
+restart or aggregate acceptance. Diagnose residual resources with type/count-only
+instrumentation, preserve timeouts as failures, and close only resources owned by
+the adapter; never force a successful exit to conceal unknown handles.

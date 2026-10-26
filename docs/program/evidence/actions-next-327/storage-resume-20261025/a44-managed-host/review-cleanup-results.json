@@ -1,0 +1,116 @@
+{
+  "source_sha256": "daf2bf86108b71d27068d282d58224f7b1ef726191e5b3c65a07094edae260ed",
+  "cases": [
+    {
+      "failure": null,
+      "raised": null,
+      "phases": [
+        "host-stop",
+        "host-wait-10",
+        "host-log-close",
+        "runtime-stop",
+        "key-read",
+        "key-disposal",
+        "budget",
+        "receipt"
+      ]
+    },
+    {
+      "failure": "host-stop",
+      "raised": "RuntimeError",
+      "phases": [
+        "host-stop",
+        "host-log-close",
+        "runtime-stop",
+        "key-read",
+        "key-disposal",
+        "budget",
+        "receipt"
+      ]
+    },
+    {
+      "failure": "host-log-close",
+      "raised": "RuntimeError",
+      "phases": [
+        "host-stop",
+        "host-wait-10",
+        "host-log-close",
+        "runtime-stop",
+        "key-read",
+        "key-disposal",
+        "budget",
+        "receipt"
+      ]
+    },
+    {
+      "failure": "runtime-stop",
+      "raised": "RuntimeError",
+      "phases": [
+        "host-stop",
+        "host-wait-10",
+        "host-log-close",
+        "runtime-stop",
+        "key-read",
+        "key-disposal",
+        "budget",
+        "receipt"
+      ]
+    },
+    {
+      "failure": "key-read",
+      "raised": "RuntimeError",
+      "phases": [
+        "host-stop",
+        "host-wait-10",
+        "host-log-close",
+        "runtime-stop",
+        "key-read",
+        "budget",
+        "receipt"
+      ]
+    },
+    {
+      "failure": "key-disposal",
+      "raised": "RuntimeError",
+      "phases": [
+        "host-stop",
+        "host-wait-10",
+        "host-log-close",
+        "runtime-stop",
+        "key-read",
+        "key-disposal",
+        "budget",
+        "receipt"
+      ]
+    },
+    {
+      "failure": "budget",
+      "raised": "RuntimeError",
+      "phases": [
+        "host-stop",
+        "host-wait-10",
+        "host-log-close",
+        "runtime-stop",
+        "key-read",
+        "key-disposal",
+        "budget",
+        "receipt"
+      ]
+    },
+    {
+      "failure": "receipt",
+      "raised": "OSError",
+      "phases": [
+        "host-stop",
+        "host-wait-10",
+        "host-log-close",
+        "runtime-stop",
+        "key-read",
+        "key-disposal",
+        "budget",
+        "receipt"
+      ]
+    }
+  ],
+  "scope": "AST extracted cleanup only; all filesystem/process/key operations mocked"
+}

@@ -1,0 +1,16 @@
+{
+  "note": "Raw local logs retained; committed copies normalize CRLF/terminal escapes/trailing whitespace only.",
+  "sha256": {
+    "a28-frontend-build.txt": "3f55de63d5e727c3a83c6b17e7540270e9671d9aca0ea3812b0874402ca8b0ea",
+    "a28-canvas-vitest.txt": "fdf2e376d445b1747b098126404c1883b6016b90668715467cc103419ec912bb",
+    "a28-lint.txt": "44a207c014ff11461869c5e40097397d1dec46412b720aa8c5ddf14df3105b80",
+    "a28-typecheck.txt": "4eec608453e0df54efc84e0c9801047d281fc9fa3db5d7587e67cb8823743062",
+    "a28-typecheck-final.txt": "83578265a1a2d1f8f00655f60a8ffa85f0b25bcf956b3e390b4797e9bbb3f8da",
+    "a28-lint-final.txt": "7e6c66d34b0fc55ac6ef247f01f54b15ed15c91d4c2085612578f5e2efcc2318",
+    "a28-frontend-lint.txt": "40779ff11a223d0e955790ce60c9b7508b53c680c9e5fe68c32b2058ee26d098",
+    "a28-frontend-types.txt": "11536fe3442bbec2b91b2d2debe8937c594d1f860920efe004432ad8b13aa19b",
+    "a28-canvas-vitest-retry.txt": "cc826da08920271acc80a32c843cdd8aad2775632ee1e175a3df495aef1c21b1",
+    "joined/pytest.log.txt": "866c7a6485783831b3007aacdc599b9ad743c535aff96a7f5d1964b0fc7e2485",
+    "joined-retry/pytest.log.txt": "0d76cc834f20a038ddb026bb0b824c2365eff6a8546054a67f23959f5a89618c"
+  }
+}

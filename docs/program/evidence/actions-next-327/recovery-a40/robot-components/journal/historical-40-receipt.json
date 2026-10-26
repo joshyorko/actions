@@ -1,0 +1,33 @@
+{
+  "status": "PASS_SOURCE_JOURNAL_NOT_INSTALLED_ROBOT",
+  "cases": 40,
+  "passed": 40,
+  "skipped": 0,
+  "backend": "20 SQLite +20 owned PostgreSQL",
+  "source_sha256": {
+    "action_server/src/actions/server/foundry/robot_journal.py": "070dd9194d7328055523c65f1d2fad382a852bd87a9f8da193ffc31d85e1b87d",
+    "action_server/tests/contract_tests/test_robot_journal.py": "38571b14995b61584b47cf041671a3bffc4cf7e91c43fe7a775b610be41096aa"
+  },
+  "dependency": "C robot_execution.py exactbc9896d69a2df05cea5b450aea856f3b808e83ed; excluded from patch",
+  "patch_sha256": "d4d2c2632b4392bbe1cb60265630aaeb0a07aeaaccdb04de0261440d1993e291",
+  "checks": "Ruff,format,isort,mypy PASS",
+  "prior_runs": {
+    "tests.log": "16 fixture setup errors missing pinned RCC; copied existing binary, no build",
+    "tests2.log": "15pass/1failure: test expected FenceRejected but immutable input authority correctly raised AccessDenied",
+    "tests3.log": "34pass0skip",
+    "tests4.log": "38pass0skip",
+    "tests5.log": "38pass0skip",
+    "check.log": "style E721",
+    "check2.log": "mypy optional ack return; fixed explicit None rejection"
+  },
+  "limits": "5GiB preflight; owned PG tmpfs512MiB/memory768MiB/stopped finally; no RCC environment build",
+  "remaining": "Shared canonical Robot builder/lifecycle/installed integration not qualified. Callback and wrapper fence must be SQL-only; canonical WorkItem live claim recheck belongs to callback.",
+  "documentation": {
+    "canonical_file": "docs/program/actions-next-foundry-71.md",
+    "learning": "Lock fence before journal read; complete versioned selection and independent canonical claim; uncertain ack never permits relaunch",
+    "evidence": "40 SQL-backed tests including competing separateconnections, restart, lostack, expiry,revocation,duplicate/boolencoding, I/O traps",
+    "ambiguity_removed": "Journal neither initializes/resets nor schedules/publishes/retries",
+    "remaining": "combinedproduction/installed Robot proof"
+  },
+  "upstream_disposition": "none"
+}

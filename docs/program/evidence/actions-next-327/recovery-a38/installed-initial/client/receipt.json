@@ -1,0 +1,48 @@
+{
+  "status": "FAIL",
+  "runtime_version": "1.1.0a38",
+  "engine_origin": "/workspace/actions-327-a38/installed/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+  "source": "4babd01c3ffd4728633b565aadae346e5b98b087",
+  "installed_versions": {
+    "mcp": "2.3.0",
+    "mcp-types": "2.3.0",
+    "actions-core": "1.1.0a3"
+  },
+  "synthetic_owned_auth": true,
+  "processes": [
+    {
+      "pid": 20865,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.16397098600009485,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 20876,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.16382069000019328,
+      "lifespan_shutdown_complete": true
+    }
+  ],
+  "calls": [
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": true
+    }
+  ],
+  "actual_generated_execution": "NOT_PROVEN",
+  "workspace": "be99772d-2725-436b-8bdb-1f4ef9c8340b",
+  "profile_setup": "explicit public offline owner authorization; no SQL writes or source/result/review/admission seeding",
+  "failure_type": "ExceptionGroup"
+}

@@ -2,13 +2,13 @@
 
 [[package]]
 name = "actions-core"
-version = "1.0.2"
+version = "1.1.0a8"
 description = "Actions Core"
 optional = false
 python-versions = "^3.10"
 groups = ["main", "dev"]
 files = []
-develop = true
+develop = false
 
 [package.dependencies]
 actions-http-helper = "^1.0.0"
@@ -17,8 +17,7 @@ docstring_parser_fork = "^0.0.5"
 psutil = ">=5.0,<8.0"
 pydantic = "^2.11.7"
 pyyaml = "^6.0"
-robocorp-log = ">=2.4,<4"
-robocorp-truststore = ">=0.8.0"
+truststore = ">=0.10,<1.0"
 
 [package.source]
 type = "directory"
@@ -57,9 +56,9 @@ develop = true
 [package.dependencies]
 invoke = "^2.2.0"
 isort = {version = "^5.12.0", markers = "python_version >= \"3.8\" and python_version < \"4.0\""}
-lazydocs = {git = "https://github.com/robocorp/lazydocs.git"}
+mdformat-gfm = {version = "1.0.0", markers = "python_version >= \"3.10\""}
 mypy = "^1.1.1"
-pydocstyle = {git = "https://github.com/robocorp/pydocstyle"}
+pydocstyle = "6.3.0"
 pylint = "^2.17.4"
 pytest = "^8.0"
 pytest-regressions = "1.0.6"
@@ -75,15 +74,13 @@ url = "../devutils"
 
 [[package]]
 name = "actions-work-items"
-version = "0.4.4"
+version = "0.5.0a2"
 description = "Robocorp-compatible runtime and FileAdapter with managed local and distributed backends"
 optional = false
-python-versions = "<4.0,>=3.10"
-groups = ["main"]
-files = [
-    {file = "actions_work_items-0.4.4-py3-none-any.whl", hash = "sha256:488163817f3a2cb969744c1ad7332dc775318d0e755029639fd51d0bffe4ffc0"},
-    {file = "actions_work_items-0.4.4.tar.gz", hash = "sha256:5a4452f8982f0ecce1ad1bd6d54714d17115dca09c3aa3e9aa02ed28d87bf5e5"},
-]
+python-versions = ">=3.10,<4.0"
+groups = ["main", "dev"]
+files = []
+develop = false
 
 [package.dependencies]
 typing-extensions = ">=4.6.0"
@@ -92,8 +89,13 @@ typing-extensions = ">=4.6.0"
 all = ["pymongo (>=4.3.0)", "redis (>=4.5.0)", "requests (>=2.31.0)"]
 docdb = ["pymongo (>=4.3.0)"]
 documentdb = ["pymongo (>=4.3.0)"]
+postgres = ["psycopg[binary] (>=3.2,<4)"]
 redis = ["redis (>=4.5.0)"]
 yorko = ["requests (>=2.31.0)"]
+
+[package.source]
+type = "directory"
+url = "../work-items"
 
 [[package]]
 name = "aiohappyeyeballs"
@@ -299,7 +301,7 @@ version = "0.0.5"
 description = "Document parameters, class attributes, return types, and variables inline, with Annotated."
 optional = false
 python-versions = ">=3.9"
-groups = ["main", "dev"]
+groups = ["main"]
 files = [
     {file = "annotated_doc-0.0.5-py3-none-any.whl", hash = "sha256:117bac03a25ede5df5440e855b32d556049ca169ead221505badf432fed4b101"},
     {file = "annotated_doc-0.0.5.tar.gz", hash = "sha256:c7e58ce09192557605d8bbd92836d7e1d520ac9580096042c0bfd197efacf1bb"},
@@ -698,7 +700,7 @@ files = [
     {file = "colorama-0.4.6-py2.py3-none-any.whl", hash = "sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6"},
     {file = "colorama-0.4.6.tar.gz", hash = "sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44"},
 ]
-markers = {main = "platform_system == \"Windows\"", dev = "sys_platform == \"win32\" or platform_system == \"Windows\""}
+markers = {main = "platform_system == \"Windows\"", dev = "sys_platform == \"win32\""}
 
 [[package]]
 name = "coverage"
@@ -949,6 +951,51 @@ files = [
     {file = "docstring_parser_fork-0.0.5-py3-none-any.whl", hash = "sha256:d521dea9b9cc6c60ab5569fa0c1115e3b84a83e6413266fb111a7c81cb935997"},
     {file = "docstring_parser_fork-0.0.5.tar.gz", hash = "sha256:395ae8ee6a359e268670ebc4fe9a40dab917a94f6decd7cda8e86f9bea5c9456"},
 ]
+
+[[package]]
+name = "duckdb"
+version = "1.4.1"
+description = "DuckDB in-process database"
+optional = true
+python-versions = ">=3.9.0"
+groups = ["main"]
+markers = "extra == \"data-duckdb\""
+files = [
+    {file = "duckdb-1.4.1-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:296b4fff3908fb4c47b0aa1d77bd1933375e75401009d2dc81af8e7a0b8a05b4"},
+    {file = "duckdb-1.4.1-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:0b4182800092115feee5d71a8691efb283d3c9f5eb0b36362b308ef007a12222"},
+    {file = "duckdb-1.4.1-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:67cc3b6c7f7ba07a69e9331b8ccea7a60cbcd4204bb473e5da9b71588bd2eca9"},
+    {file = "duckdb-1.4.1-cp310-cp310-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:0cef0cee7030b561640cb9af718f8841b19cdd2aa020d53561057b5743bea90b"},
+    {file = "duckdb-1.4.1-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:2bf93347f37a46bacce6ac859d651dbf5731e2c94a64ab358300425b09e3de23"},
+    {file = "duckdb-1.4.1-cp310-cp310-win_amd64.whl", hash = "sha256:2e60d2361f978908a3d96eebaf1f4b346f283afcc467351aae50ea45ca293a2b"},
+    {file = "duckdb-1.4.1-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:605d563c1d5203ca992497cd33fb386ac3d533deca970f9dcf539f62a34e22a9"},
+    {file = "duckdb-1.4.1-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:d3305c7c4b70336171de7adfdb50431f23671c000f11839b580c4201d9ce6ef5"},
+    {file = "duckdb-1.4.1-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:a063d6febbe34b32f1ad2e68822db4d0e4b1102036f49aaeeb22b844427a75df"},
+    {file = "duckdb-1.4.1-cp311-cp311-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:d1ffcaaf74f7d1df3684b54685cbf8d3ce732781c541def8e1ced304859733ae"},
+    {file = "duckdb-1.4.1-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:685d3d1599dc08160e0fa0cf09e93ac4ff8b8ed399cb69f8b5391cd46b5b207c"},
+    {file = "duckdb-1.4.1-cp311-cp311-win_amd64.whl", hash = "sha256:78f1d28a15ae73bd449c43f80233732adffa49be1840a32de8f1a6bb5b286764"},
+    {file = "duckdb-1.4.1-cp312-cp312-macosx_10_13_universal2.whl", hash = "sha256:cd1765a7d180b7482874586859fc23bc9969d7d6c96ced83b245e6c6f49cde7f"},
+    {file = "duckdb-1.4.1-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:8ed7a86725185470953410823762956606693c0813bb64e09c7d44dbd9253a64"},
+    {file = "duckdb-1.4.1-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:8a189bdfc64cfb9cc1adfbe4f2dcfde0a4992ec08505ad8ce33c886e4813f0bf"},
+    {file = "duckdb-1.4.1-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:a9090089b6486f7319c92acdeed8acda022d4374032d78a465956f50fc52fabf"},
+    {file = "duckdb-1.4.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:142552ea3e768048e0e8c832077a545ca07792631c59edaee925e3e67401c2a0"},
+    {file = "duckdb-1.4.1-cp312-cp312-win_amd64.whl", hash = "sha256:567f3b3a785a9e8650612461893c49ca799661d2345a6024dda48324ece89ded"},
+    {file = "duckdb-1.4.1-cp313-cp313-macosx_10_13_universal2.whl", hash = "sha256:46496a2518752ae0c6c5d75d4cdecf56ea23dd098746391176dd8e42cf157791"},
+    {file = "duckdb-1.4.1-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:1c65ae7e9b541cea07d8075343bcfebdecc29a3c0481aa6078ee63d51951cfcd"},
+    {file = "duckdb-1.4.1-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:598d1a314e34b65d9399ddd066ccce1eeab6a60a2ef5885a84ce5ed62dbaf729"},
+    {file = "duckdb-1.4.1-cp313-cp313-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:e2f16b8def782d484a9f035fc422bb6f06941ed0054b4511ddcdc514a7fb6a75"},
+    {file = "duckdb-1.4.1-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:a5a7d0aed068a5c33622a8848857947cab5cfb3f2a315b1251849bac2c74c492"},
+    {file = "duckdb-1.4.1-cp313-cp313-win_amd64.whl", hash = "sha256:280fd663dacdd12bb3c3bf41f3e5b2e5b95e00b88120afabb8b8befa5f335c6f"},
+    {file = "duckdb-1.4.1-cp39-cp39-macosx_10_9_universal2.whl", hash = "sha256:04a31b3cf84d77ef02c9914567b5d63a43fc791b144655ee99581cd9f4949e63"},
+    {file = "duckdb-1.4.1-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:c01c5f9d0657a26938d640aa8d8effa91cacf66195ed4787824e6d5537bcaf21"},
+    {file = "duckdb-1.4.1-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:80c12239abb2a063abcd75dc052e9884b41060615735a532a6e3e8390eee7f70"},
+    {file = "duckdb-1.4.1-cp39-cp39-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:4b96d16a10256d05d818b34903243681764b6afc98f7d50b1ae60d23aa1f1f9e"},
+    {file = "duckdb-1.4.1-cp39-cp39-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:e8aa4a4298a6a627599f6606c7bedfe77309c1fb05a606af48e0e72333861ef4"},
+    {file = "duckdb-1.4.1-cp39-cp39-win_amd64.whl", hash = "sha256:09d152dd4ab24a5984cd289b553e142980b3f029292cdda29e34303c75138de6"},
+    {file = "duckdb-1.4.1.tar.gz", hash = "sha256:f903882f045d057ebccad12ac69975952832edfe133697694854bb784b8d6c76"},
+]
+
+[package.extras]
+all = ["adbc-driver-manager", "fsspec", "ipython", "numpy", "pandas", "pyarrow"]
 
 [[package]]
 name = "execnet"
@@ -1395,30 +1442,6 @@ files = [
     {file = "lazy_object_proxy-1.12.0-pp39.pp310.pp311.graalpy311-none-any.whl", hash = "sha256:c3b2e0af1f7f77c4263759c4824316ce458fabe0fceadcd24ef8ca08b2d1e402"},
     {file = "lazy_object_proxy-1.12.0.tar.gz", hash = "sha256:1f5a462d92fd0cfb82f1fab28b51bfb209fabbe6aabf7f0d51472c0c124c0c61"},
 ]
-
-[[package]]
-name = "lazydocs"
-version = "0.5.0"
-description = "Generate markdown API documentation for Google-style Python docstring."
-optional = false
-python-versions = ">=3.6"
-groups = ["dev"]
-files = []
-develop = false
-
-[package.dependencies]
-mdformat-gfm = "*"
-pydocstyle = {git = "https://github.com/robocorp/pydocstyle"}
-typer = "*"
-
-[package.extras]
-dev = ["black", "flake8", "isort", "mypy", "pytest", "pytest-cov", "pytest-mock", "setuptools", "twine", "wheel"]
-
-[package.source]
-type = "git"
-url = "https://github.com/robocorp/lazydocs.git"
-reference = "HEAD"
-resolved_reference = "3eeda5b5012f698fad0be6272747c40052b3ec12"
 
 [[package]]
 name = "librt"
@@ -2545,25 +2568,21 @@ typing-extensions = ">=4.14.1"
 
 [[package]]
 name = "pydocstyle"
-version = "0.0.0-dev"
+version = "6.3.0"
 description = "Python docstring style checker"
 optional = false
 python-versions = ">=3.6"
 groups = ["dev"]
-files = []
-develop = false
+files = [
+    {file = "pydocstyle-6.3.0-py3-none-any.whl", hash = "sha256:118762d452a49d6b05e194ef344a55822987a462831ade91ec5c06fd2169d019"},
+    {file = "pydocstyle-6.3.0.tar.gz", hash = "sha256:7ce43f0c0ac87b07494eb9c0b462c0b73e6ff276807f204d6b53edc72b7e44e1"},
+]
 
 [package.dependencies]
 snowballstemmer = ">=2.2.0"
 
 [package.extras]
 toml = ["tomli (>=1.2.3) ; python_version < \"3.11\""]
-
-[package.source]
-type = "git"
-url = "https://github.com/robocorp/pydocstyle"
-reference = "HEAD"
-resolved_reference = "34719279355f6ba934385db21dfb81cdb8a44fcf"
 
 [[package]]
 name = "pygments"
@@ -3039,65 +3058,15 @@ lint = ["interrogate", "mypy (>=1.0)", "ruff (>=0.3,<1.0)"]
 test = ["coverage", "pytest", "pytest-cov"]
 
 [[package]]
-name = "rich"
-version = "15.0.0"
-description = "Render rich text, tables, progress bars, syntax highlighting, markdown and more to the terminal"
+name = "robotframework"
+version = "7.4.2"
+description = "Generic automation framework for acceptance testing and robotic process automation (RPA)"
 optional = false
-python-versions = ">=3.9.0"
+python-versions = ">=3.8"
 groups = ["dev"]
 files = [
-    {file = "rich-15.0.0-py3-none-any.whl", hash = "sha256:33bd4ef74232fb73fe9279a257718407f169c09b78a87ad3d296f548e27de0bb"},
-    {file = "rich-15.0.0.tar.gz", hash = "sha256:edd07a4824c6b40189fb7ac9bc4c52536e9780fbbfbddf6f1e2502c31b068c36"},
-]
-
-[package.dependencies]
-markdown-it-py = ">=2.2.0"
-pygments = ">=2.13.0,<3.0.0"
-
-[package.extras]
-jupyter = ["ipywidgets (>=7.5.1,<9)"]
-
-[[package]]
-name = "robocorp-log"
-version = "3.1.2"
-description = "Automatic trace logging for Python"
-optional = false
-python-versions = "<4.0,>=3.10"
-groups = ["main", "dev"]
-files = [
-    {file = "robocorp_log-3.1.2-py3-none-any.whl", hash = "sha256:42fca280313e4985e46d8b03f99bf32cb317a796865ed370fd3fd5d58a5d1f2c"},
-    {file = "robocorp_log-3.1.2.tar.gz", hash = "sha256:57df58ab49c51dbdcfa1291f46bb2d02bfd4b9a5f5c8149eac4eca2ff4a845b7"},
-]
-
-[package.dependencies]
-psutil = ">=5.0,<8.0"
-
-[[package]]
-name = "robocorp-log-pytest"
-version = "0.0.5"
-description = "PyTest plugin for auto-logging of pytest tests with robocorp-log."
-optional = false
-python-versions = "<4.0.0,>=3.9.2"
-groups = ["dev"]
-files = [
-    {file = "robocorp_log_pytest-0.0.5-py3-none-any.whl", hash = "sha256:55dcd15d98ec905a5c917a029b4c4aca2f3595283ac5ade9dad632b9726c3741"},
-    {file = "robocorp_log_pytest-0.0.5.tar.gz", hash = "sha256:6a44182054649605268bf220b977932e4efaedf035910f8dd454188631488e81"},
-]
-
-[package.dependencies]
-pytest = ">=7"
-robocorp-log = ">=2.5,<4"
-
-[[package]]
-name = "robocorp-truststore"
-version = "0.9.1"
-description = "Verify certificates using native system trust stores"
-optional = false
-python-versions = ">=3.10"
-groups = ["main", "dev"]
-files = [
-    {file = "robocorp_truststore-0.9.1-py3-none-any.whl", hash = "sha256:dfdd4812dffce8a91134e8b69a3c55072fc9785dbdd583d4047f323779ac2f39"},
-    {file = "robocorp_truststore-0.9.1.tar.gz", hash = "sha256:a1abfd9c5b7fe22152a8eeb9510812800dca741851c720742c598c0f78ee4f3f"},
+    {file = "robotframework-7.4.2-py3-none-any.whl", hash = "sha256:6e80f84cdc997bdde2abb6b729ac3531457ecf6d2e41abfb87a541877ab367bf"},
+    {file = "robotframework-7.4.2.tar.gz", hash = "sha256:1c934e7f43600de407860cd2bd2fdc41adad4a4a785d8b46b1ed485fdc0f6c9f"},
 ]
 
 [[package]]
@@ -3287,18 +3256,6 @@ test = ["build[virtualenv] (>=1.0.3)", "filelock (>=3.4.0)", "ini2toml[lite] (>=
 type = ["importlib_metadata (>=7.0.2) ; python_version < \"3.10\"", "jaraco.develop (>=7.21) ; sys_platform != \"cygwin\"", "mypy (==1.18.*)", "pytest-mypy (>=1.0.1) ; platform_python_implementation != \"PyPy\""]
 
 [[package]]
-name = "shellingham"
-version = "1.5.4"
-description = "Tool to Detect Surrounding Shell"
-optional = false
-python-versions = ">=3.7"
-groups = ["dev"]
-files = [
-    {file = "shellingham-1.5.4-py2.py3-none-any.whl", hash = "sha256:7ecfff8f2fd72616f7481040475a65b2bf8af90a56c89140852d1120324e8686"},
-    {file = "shellingham-1.5.4.tar.gz", hash = "sha256:8dbca0739d487e5bd35ab3ca4b36e11c4078f3a234bfce294b0a0291363404de"},
-]
-
-[[package]]
 name = "six"
 version = "1.17.0"
 description = "Python 2 and 3 compatibility utilities"
@@ -3402,24 +3359,6 @@ files = [
     {file = "truststore-0.10.4-py3-none-any.whl", hash = "sha256:adaeaecf1cbb5f4de3b1959b42d41f6fab57b2b1666adb59e89cb0b53361d981"},
     {file = "truststore-0.10.4.tar.gz", hash = "sha256:9d91bd436463ad5e4ee4aba766628dd6cd7010cf3e2461756b3303710eebc301"},
 ]
-
-[[package]]
-name = "typer"
-version = "0.27.1"
-description = "Typer, build great CLIs. Easy to code. Based on Python type hints."
-optional = false
-python-versions = ">=3.10"
-groups = ["dev"]
-files = [
-    {file = "typer-0.27.1-py3-none-any.whl", hash = "sha256:53150287edd11baeb4e4722c8e394fcdf8181c0ae89485cba8d25c778d5edd56"},
-    {file = "typer-0.27.1.tar.gz", hash = "sha256:a79bef8469a79c45498e7b814ecf8d603cc7644e9acbd9e19cac0334240b18df"},
-]
-
-[package.dependencies]
-annotated-doc = ">=0.0.2"
-colorama = {version = "*", markers = "platform_system == \"Windows\""}
-rich = ">=13.8.0"
-shellingham = ">=1.3.0"
 
 [[package]]
 name = "types-invoke"
@@ -3997,7 +3936,10 @@ idna = ">=2.0"
 multidict = ">=4.0"
 propcache = ">=0.2.1"
 
+[extras]
+data-duckdb = ["duckdb"]
+
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<3.14"
-content-hash = "19b81079c6e22dbe6ce1ab3d30cfa80715863ef5934a1835c157ea036a2609ed"
+content-hash = "0ec844044d4764f8a9e08bab15d12b9e5432375cb682b2e491278d3a68840380"

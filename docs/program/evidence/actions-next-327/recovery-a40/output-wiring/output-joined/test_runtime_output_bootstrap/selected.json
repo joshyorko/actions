@@ -1,0 +1,6 @@
+[
+  "tests/action_server_tests/test_runtime_output_bootstrap.py::test_native_output_transport_requires_task_policy[sqlite-False]",
+  "tests/action_server_tests/test_runtime_output_bootstrap.py::test_native_output_transport_requires_task_policy[sqlite-True]",
+  "tests/action_server_tests/test_runtime_output_bootstrap.py::test_native_output_transport_requires_task_policy[postgresql-False]",
+  "tests/action_server_tests/test_runtime_output_bootstrap.py::test_native_output_transport_requires_task_policy[postgresql-True]"
+]

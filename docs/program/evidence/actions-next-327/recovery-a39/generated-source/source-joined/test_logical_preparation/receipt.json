@@ -1,0 +1,36 @@
+{
+  "module": "test_logical_preparation",
+  "command": [
+    "rcc",
+    "task",
+    "script",
+    "-r",
+    "developer/toolkit.yaml",
+    "--",
+    "python",
+    "/workspace/actions-cloud/package-command.py",
+    "action_server",
+    "run",
+    "python",
+    "/workspace/actions-327-a39/source-joined/selected-pytest.py",
+    "tests/action_server_tests/test_logical_preparation.py",
+    "-k",
+    "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+    "-p",
+    "no:robocorp_log_pytest",
+    "-q",
+    "--tb=short",
+    "--junitxml=/workspace/actions-327-a39/source-joined/test_logical_preparation/tests.xml",
+    "--basetemp=/workspace/actions-327-a39/source-joined/test_logical_preparation/fixtures"
+  ],
+  "exit_code": 0,
+  "minimum_free_bytes": 10038820864,
+  "stop_reason": null,
+  "source_sha256": "4196df66e73b09374f5989643f48fedc367c79131a378739b0fd29819e6695ce",
+  "counts": {
+    "tests": 13,
+    "failure": 0,
+    "error": 0,
+    "skipped": 0
+  }
+}

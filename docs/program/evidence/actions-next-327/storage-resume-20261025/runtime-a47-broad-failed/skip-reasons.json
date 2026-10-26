@@ -1,0 +1,21 @@
+{
+  "Windows only": 6,
+  "Set ACTIONS_CANVAS_TEMPLATE_CANDIDATE_ACCEPTANCE=1 for the candidate-source Runtime/browser gate.": 1,
+  "Set ACTIONS_CANVAS_TEMPLATE_ACCEPTANCE=1 for the Runtime/browser gate.": 1,
+  "Set ACTIONS_CANVAS_RUNTIME_ACCEPTANCE=1 to run the RCC/browser acceptance.": 1,
+  "Requires native Windows locking": 1,
+  "native Windows path resolution": 1,
+  "set ACTIONS_REAL_RCC_ARTIFACT_TEST=1 for current-candidate RCC proof": 1,
+  "set ACTIONS_REAL_RCC_ACCEPTANCE=1 for the live local proof": 1,
+  "ACTIONS_TEST_DATABASE_URL is not configured": 13,
+  "exclusive prepared detached RCC cache required": 4,
+  "exclusive prepared Task host RCC fixture required": 12,
+  "dedicated generated-app real RCC gate not configured": 4,
+  "dedicated generated browser gate not configured": 8,
+  "exclusive prepared RCC home required": 2,
+  "exclusive prepared input/output RCC cache required": 8,
+  "exclusive prepared ordinary RCC cache required": 4,
+  "explicit owned prepared RCC gate required": 6,
+  "dedicated InvoiceQueryTest --browser not configured; browser gate remains required": 2,
+  "owned RCC invoice runtime not configured": 92
+}

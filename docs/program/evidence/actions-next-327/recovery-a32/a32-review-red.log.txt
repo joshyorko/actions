@@ -1,0 +1,138 @@
++ poetry run pytest tests/action_server_tests/test_local_provider_setup.py -k configure_replay_verifies or recovery_dry_run -q --robocorp-log-output=/workspace/actions-recovery-327/evidence/a32-review-red-log (in /workspace/actions/action_server)
+FFFF                                                                     [100%]
+=================================== FAILURES ===================================
+_____ test_configure_replay_verifies_committed_publication_receipt[result] _____
+
+provider = namespace(root=PosixPath('/tmp/pytest-of-agent/pytest-157/test_configure_replay_verifies0/owner'), actor=Actor(princip...ed51b7100f27f', host=DuckDBHost(adapter='duckdb.sealed-relations/v1', external_access=False, extension_loading=False)))
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f11aabf6db0>
+corruption = 'result'
+
+    @pytest.mark.parametrize("corruption", ["result", "from_revision", "to_revision"])
+    def test_configure_replay_verifies_committed_publication_receipt(provider, monkeypatch, corruption):
+        g = provider
+        prepare(g)
+        req = request(g, "configure-host", config=g.config)
+        original = PrivateProviderStore.publish
+        def fail(*args):
+            raise ValueError("synthetic after SQL")
+        monkeypatch.setattr(PrivateProviderStore, "publish", fail)
+        with pytest.raises(ValueError, match="synthetic after SQL"):
+            call(g, req)
+        with load_db(g.root / "server.db") as db:
+            with db.transaction():
+                if corruption == "result":
+                    db.execute("UPDATE foundry_request SET result_json='{}' WHERE operation=?", ["runtime.providers-local.configure-host"])
+                elif corruption == "from_revision":
+                    db.execute("UPDATE foundry_audit SET from_revision_id='corrupt' WHERE operation=?", ["runtime.providers-local.configure-host"])
+                else:
+                    db.execute("UPDATE foundry_audit SET to_revision_id='corrupt' WHERE operation=?", ["runtime.providers-local.configure-host"])
+        monkeypatch.setattr(PrivateProviderStore, "publish", original)
+>       with pytest.raises((ValueError, KeyError)):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE any of (<class 'ValueError'>, <class 'KeyError'>)
+
+tests/action_server_tests/test_local_provider_setup.py:813: Failed
+_ test_configure_replay_verifies_committed_publication_receipt[from_revision] __
+
+provider = namespace(root=PosixPath('/tmp/pytest-of-agent/pytest-157/test_configure_replay_verifies1/owner'), actor=Actor(princip...ed51b7100f27f', host=DuckDBHost(adapter='duckdb.sealed-relations/v1', external_access=False, extension_loading=False)))
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f11aaa09c10>
+corruption = 'from_revision'
+
+    @pytest.mark.parametrize("corruption", ["result", "from_revision", "to_revision"])
+    def test_configure_replay_verifies_committed_publication_receipt(provider, monkeypatch, corruption):
+        g = provider
+        prepare(g)
+        req = request(g, "configure-host", config=g.config)
+        original = PrivateProviderStore.publish
+        def fail(*args):
+            raise ValueError("synthetic after SQL")
+        monkeypatch.setattr(PrivateProviderStore, "publish", fail)
+        with pytest.raises(ValueError, match="synthetic after SQL"):
+            call(g, req)
+        with load_db(g.root / "server.db") as db:
+            with db.transaction():
+                if corruption == "result":
+                    db.execute("UPDATE foundry_request SET result_json='{}' WHERE operation=?", ["runtime.providers-local.configure-host"])
+                elif corruption == "from_revision":
+                    db.execute("UPDATE foundry_audit SET from_revision_id='corrupt' WHERE operation=?", ["runtime.providers-local.configure-host"])
+                else:
+                    db.execute("UPDATE foundry_audit SET to_revision_id='corrupt' WHERE operation=?", ["runtime.providers-local.configure-host"])
+        monkeypatch.setattr(PrivateProviderStore, "publish", original)
+>       with pytest.raises((ValueError, KeyError)):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE any of (<class 'ValueError'>, <class 'KeyError'>)
+
+tests/action_server_tests/test_local_provider_setup.py:813: Failed
+__ test_configure_replay_verifies_committed_publication_receipt[to_revision] ___
+
+provider = namespace(root=PosixPath('/tmp/pytest-of-agent/pytest-157/test_configure_replay_verifies2/owner'), actor=Actor(princip...ed51b7100f27f', host=DuckDBHost(adapter='duckdb.sealed-relations/v1', external_access=False, extension_loading=False)))
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f11aaa26d20>
+corruption = 'to_revision'
+
+    @pytest.mark.parametrize("corruption", ["result", "from_revision", "to_revision"])
+    def test_configure_replay_verifies_committed_publication_receipt(provider, monkeypatch, corruption):
+        g = provider
+        prepare(g)
+        req = request(g, "configure-host", config=g.config)
+        original = PrivateProviderStore.publish
+        def fail(*args):
+            raise ValueError("synthetic after SQL")
+        monkeypatch.setattr(PrivateProviderStore, "publish", fail)
+        with pytest.raises(ValueError, match="synthetic after SQL"):
+            call(g, req)
+        with load_db(g.root / "server.db") as db:
+            with db.transaction():
+                if corruption == "result":
+                    db.execute("UPDATE foundry_request SET result_json='{}' WHERE operation=?", ["runtime.providers-local.configure-host"])
+                elif corruption == "from_revision":
+                    db.execute("UPDATE foundry_audit SET from_revision_id='corrupt' WHERE operation=?", ["runtime.providers-local.configure-host"])
+                else:
+                    db.execute("UPDATE foundry_audit SET to_revision_id='corrupt' WHERE operation=?", ["runtime.providers-local.configure-host"])
+        monkeypatch.setattr(PrivateProviderStore, "publish", original)
+>       with pytest.raises((ValueError, KeyError)):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE any of (<class 'ValueError'>, <class 'KeyError'>)
+
+tests/action_server_tests/test_local_provider_setup.py:813: Failed
+________ test_recovery_dry_run_never_claims_configuration_or_publishes _________
+
+provider = namespace(root=PosixPath('/tmp/pytest-of-agent/pytest-157/test_recovery_dry_run_never_cl0/owner'), actor=Actor(princip...ed51b7100f27f', host=DuckDBHost(adapter='duckdb.sealed-relations/v1', external_access=False, extension_loading=False)))
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f11abfbc7d0>
+
+    def test_recovery_dry_run_never_claims_configuration_or_publishes(provider, monkeypatch):
+        g = provider
+        prepare(g)
+        original = PrivateProviderStore.publish
+        def fail(*args):
+            raise ValueError("synthetic after SQL")
+        monkeypatch.setattr(PrivateProviderStore, "publish", fail)
+        with pytest.raises(ValueError, match="synthetic after SQL"):
+            call(g, request(g, "configure-host", config=g.config))
+        intent_file = next(path for path in (g.root / "provider-state/intents").glob("*.json") if ".request." not in path.name)
+        intent_id = json.loads(intent_file.read_text())["operation_id"]
+        monkeypatch.setattr(PrivateProviderStore, "publish", original)
+        result = call(g, request(g, "recover-intent", intent_id=intent_id), dry_run=True)
+>       assert result["readiness"] == "publication-authorized-not-published"
+
+E       AssertionError: Failed: assert result['readiness'] == 'publication-authorized-not-published'
+E       Variables:
+E         result['readiness'] = 'configured-not-probed'
+
+tests/action_server_tests/test_local_provider_setup.py:831: AssertionError
+=========================== short test summary info ============================
+FAILED tests/action_server_tests/test_local_provider_setup.py::test_configure_replay_verifies_committed_publication_receipt[result]
+FAILED tests/action_server_tests/test_local_provider_setup.py::test_configure_replay_verifies_committed_publication_receipt[from_revision]
+FAILED tests/action_server_tests/test_local_provider_setup.py::test_configure_replay_verifies_committed_publication_receipt[to_revision]
+FAILED tests/action_server_tests/test_local_provider_setup.py::test_recovery_dry_run_never_claims_configuration_or_publishes
+4 failed, 20 deselected in 1.90s
+Log (html): /workspace/actions-recovery-327/evidence/a32-review-red-log/log.html
+Traceback (most recent call last):
+  File "/workspace/actions-cloud/package-command.py", line 13, in <module>
+    toolkit.poetry(package, *arguments)
+  File "/workspace/actions/developer/toolkit.py", line 76, in poetry
+    run(["poetry", *arguments], REPOSITORY_ROOT / package)
+  File "/workspace/actions/developer/toolkit.py", line 72, in run
+    subprocess.run(command, cwd=cwd, env=environment, check=True)
+  File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['poetry', 'run', 'pytest', 'tests/action_server_tests/test_local_provider_setup.py', '-k', 'configure_replay_verifies or recovery_dry_run', '-q', '--robocorp-log-output=/workspace/actions-recovery-327/evidence/a32-review-red-log']' returned non-zero exit status 1.

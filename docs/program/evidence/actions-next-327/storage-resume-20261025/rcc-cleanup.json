@@ -1,0 +1,36 @@
+{
+  "wrapper": {
+    "pid": 4732,
+    "pgid": 4732,
+    "sid": 4732
+  },
+  "child": {
+    "pid": 4788,
+    "ppid": 4732,
+    "pgid": 4732,
+    "sid": 4732
+  },
+  "grandchild": {
+    "pid": 4789,
+    "ppid": 4788,
+    "pgid": 4732,
+    "sid": 4732
+  },
+  "all_same_group_and_session": true,
+  "wrapper_exit": 3,
+  "grandchild_after_wrapper_exit": {
+    "alive": true,
+    "status": "sleeping",
+    "pgid": 4732,
+    "sid": 4732
+  },
+  "rcc_receipt_status": "failed",
+  "rcc_receipt_exit_code": 3,
+  "corrected_cleanup": {
+    "execution_stopped": true,
+    "descendant_snapshot_complete": true,
+    "errors": []
+  },
+  "grandchild_after_cleanup_live": false,
+  "owned_cleanup_completed": true
+}

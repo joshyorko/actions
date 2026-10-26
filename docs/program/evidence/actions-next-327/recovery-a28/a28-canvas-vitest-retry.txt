@@ -1,0 +1,11 @@
+
+ RUN  v4.1.10 /workspace/actions/action_server/frontend/apps/canvas-view
+
+Browserslist: browsers data (caniuse-lite) is 10 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+
+ Test Files  8 passed (8)
+      Tests  51 passed | 1 skipped (52)
+   Start at  02:48:23
+   Duration  5.94s (transform 1.06s, setup 1.77s, import 3.30s, tests 4.01s, environment 4.46s)

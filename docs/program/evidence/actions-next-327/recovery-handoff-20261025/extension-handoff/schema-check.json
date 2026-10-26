@@ -1,0 +1,15 @@
+{
+  "protocol": "actions.managed-work-items/v1",
+  "api_prefix": "/api/managed-work-items/v1",
+  "runtime_minimum": "1.1.0a13",
+  "sdk_minimum": "0.5.0a1",
+  "canonical_sha256": "f815b507681e5ed0a3bfe761a3d12aed47d84d4fef4b74413431ddd138401d69",
+  "file_sha256": "d8eb71c42f0b544dd15638420305eda6013b413a0b2c03b9894dd0900fab047d",
+  "tester_reported_sha256": "360923ed094302e1cc6dd556d2c9117b445fbf8046b5684145c9eb2c2682123e",
+  "compatibility": "CONFIRMED_SCHEMA_DRIFT: installed Automation2.20.14 correctly rejects a37; extension owner reviewing adaptation, no bypass",
+  "differences": [
+    "ExecutionSnapshot.capability_authority added: legacy-action/package-revision, default legacy-action",
+    "QueueView.mode adds required-input"
+  ],
+  "backend_schema_blob": "3a34f69c7770de072427fddb79bf0d4cc39da06f"
+}

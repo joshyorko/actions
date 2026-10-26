@@ -1,0 +1,11 @@
+# Installed private a35 current Task lifecycle
+
+PASS against archived source6cf0ee25eed23c1814a5b0589047545b57ca5e33, actions-runtime1.1.0a35, actions-core1.1.0a3, Work Items0.5.0a2, MCP/mcp-types2.3.0 and Pydantic2.14.1. Fresh wheels and clean consumer installation pass pip check and all source/wheel/installed Python-member comparisons. Public archived OAuth inputs only; protected configuration was not accessed.
+
+Ordinary CLI startup with explicit local owner source/deployment authorization and Task policy compiled and activated an actual generated Python Package. A current MCP client received a working Task acknowledgement in0.1704seconds (measurement, not an SLA). A new client connection replay returned the same ID/createdAt/TTL without a second Run. Polling reached completed through actual sealed RCC execution. The result contains four unique authorized sealed handles. After stopping and restarting the Runtime, the complete Task projection is identical and creation replay remains result-free; exact SQLite Task/Run/Attempt/intent/receipt identity and aggregate counts are unchanged: one Run, one Attempt.
+
+All four Runtime PIDs stopped without forced kill, with exact-process application shutdown/finished-server log evidence. Exit-15 is Uvicorn's deliberate signal re-raise after lifespan shutdown. No uncertain Run was recovered; earlier failed a34 candidate receipts remain in the parent source checkpoint. Task get validates sealed inventory; this harness does not claim a public artifact-byte-read or decoded action-result-value flow. No browser/ChatGPT, legacy Task, interaction, Robot/Work Item Task or automatic escalation acceptance is inferred.
+
+Execution used the measured private Corea3 RCC artifact a8464ce6d65b33577b262f740c6a4cd4a0e3e8d958a44c3685224e4c7548f21a and canonical preparation receipt. Preflight removed only four inactive task-owned materialized cache views after process checks; immutable artifacts/catalog/package caches and build/source receipts remained. Public Data/Knowledge execution and the full owner matrix remain open.
+
+Documentation improvement: repository-operations.md distinguishes exact retained identity, SDK/gateway transport, canonical receipt loader and graceful shutdown proof. Upstream disposition:none for this installed qualification.

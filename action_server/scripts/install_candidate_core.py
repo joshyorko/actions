@@ -9,11 +9,20 @@ from pathlib import Path
 
 
 def select_candidate(directory: Path, distribution: str = "actions-core") -> Path:
-    label = "Core" if distribution == "actions-core" else "HTTP Helper"
+    label = (
+        "Core"
+        if distribution == "actions-core"
+        else {
+            "actions-http-helper": "HTTP Helper",
+            "actions-work-items": "Work Items SDK",
+        }[distribution]
+    )
     wheels = sorted(directory.glob("*.whl"))
     if len(wheels) != 1:
         raise ValueError(f"Expected exactly one candidate {label} wheel")
     wheel = wheels[0]
+    if wheel.is_symlink():
+        raise ValueError("Candidate wheel cannot be a symlink")
     with zipfile.ZipFile(wheel) as archive:
         paths = [
             name for name in archive.namelist() if name.endswith(".dist-info/METADATA")
@@ -30,6 +39,8 @@ if __name__ == "__main__":
     wheels = [select_candidate(Path(sys.argv[1]))]
     if len(sys.argv) > 2:
         wheels.insert(0, select_candidate(Path(sys.argv[2]), "actions-http-helper"))
+    if len(sys.argv) > 3:
+        wheels.insert(0, select_candidate(Path(sys.argv[3]), "actions-work-items"))
     for wheel in wheels:
         print(
             f"Candidate: {wheel.name} sha256:{hashlib.sha256(wheel.read_bytes()).hexdigest()}",

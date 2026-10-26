@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import ast
+import base64
 import copy
 import hashlib
 import json
@@ -302,17 +303,140 @@ def _verify_public_surface(origin: str, package_root: Path, init_path: Path, led
         assert _signature(node) == expected, f"{origin} signature differs: {qualified}"
 
 
-def _verify_authoritative(robocorp_root: Path, custom_root: Path) -> None:
+def _reference_object(kind: str, payload: bytes, expected: str) -> None:
+    actual = hashlib.sha1(f"{kind} {len(payload)}\0".encode() + payload).hexdigest()
+    if actual != expected:
+        raise ValueError(f"reference {kind} identity mismatch")
+
+
+def _reference_tree(payload: bytes) -> dict[str, tuple[str, str]]:
+    entries = {}
+    offset = 0
+    while offset < len(payload):
+        end = payload.index(b"\0", offset)
+        mode, raw_name = payload[offset:end].split(b" ", 1)
+        name = raw_name.decode("utf-8")
+        if name in (".", "..") or not name or "/" in name or "\\" in name:
+            raise ValueError("unsafe reference tree path")
+        if name in entries or end + 21 > len(payload):
+            raise ValueError("invalid reference tree entry")
+        entries[name] = (mode.decode("ascii"), payload[end + 1 : end + 21].hex())
+        offset = end + 21
+    return entries
+
+
+def _verify_robocorp_reference(reference: Path, expected_commit: str) -> Path:
+    """Authenticate inert selected blobs through complete trees to the pinned commit."""
+    if reference.is_symlink() or not reference.is_dir():
+        raise ValueError("reference must be an ordinary directory")
+    if any(path.is_symlink() for path in reference.rglob("*")):
+        raise ValueError("reference symlinks are forbidden")
+    proof = json.loads((reference / "object-proof.json").read_text())
+    commit = base64.b64decode(proof["commit_base64"], validate=True)
+    _reference_object("commit", commit, expected_commit)
+    if proof["commit"] != expected_commit:
+        raise ValueError("reference commit metadata mismatch")
+    root_tree = commit.split(b"\n", 1)[0].decode("ascii")
+    if not root_tree.startswith("tree ") or proof["tree"] != root_tree[5:]:
+        raise ValueError("reference root tree mismatch")
+    trees = {}
+    for path, record in proof["trees"].items():
+        if path and (
+            Path(path).is_absolute()
+            or any(part in ("", ".", "..") for part in path.split("/"))
+            or "\\" in path
+        ):
+            raise ValueError("unsafe reference proof path")
+        raw = base64.b64decode(record["base64"], validate=True)
+        _reference_object("tree", raw, record["sha1"])
+        trees[path] = (record["sha1"], _reference_tree(raw))
+    visited = set()
+
+    def tree(path: str):
+        visited.add(path)
+        digest, entries = trees[path]
+        if path == "":
+            expected = root_tree[5:]
+        else:
+            parent, _, name = path.rpartition("/")
+            mode, expected = tree(parent)[name]
+            if mode != "40000":
+                raise ValueError("reference ancestor is not a tree")
+        if digest != expected:
+            raise ValueError("reference tree disconnected from commit")
+        return entries
+
+    def blob(path: str):
+        parent, _, name = path.rpartition("/")
+        mode, digest = tree(parent)[name]
+        if mode not in ("100644", "100755"):
+            raise ValueError("reference payload is not a regular blob")
+        return digest
+
+    required = {"LICENSE"}
+    tests_root = "workitems/tests/workitems_tests"
+    required.update(
+        f"{tests_root}/{name}"
+        for name in (
+            "test_adapters.py",
+            "test_email.py",
+            "test_workitems.py",
+            "fixtures.py",
+            "mocks.py",
+        )
+    )
+
+    def package(path: str):
+        for name, (mode, _) in tree(path).items():
+            child = f"{path}/{name}"
+            if mode == "40000":
+                package(child)
+            elif name.endswith(".py"):
+                required.add(child)
+
+    package("workitems/src/robocorp/workitems")
+    payload_root = reference / "payload"
+    inventory = json.loads((reference / "inventory.json").read_text())
+    recorded = {row["path"]: row for row in inventory}
+    if len(recorded) != len(inventory) or set(recorded) != required:
+        raise ValueError("reference inventory coverage differs from pinned tree")
+    actual = {
+        path.relative_to(payload_root).as_posix()
+        for path in payload_root.rglob("*")
+        if path.is_file()
+    }
+    if actual != required:
+        raise ValueError("reference payload coverage differs from pinned tree")
+    for path in sorted(required):
+        expected = blob(path)
+        raw = (payload_root / path).read_bytes()
+        _reference_object("blob", raw, expected)
+        row = recorded[path]
+        if row["git_blob"] != expected or row["sha256"] != _digest(raw) or row["bytes"] != len(raw):
+            raise ValueError("reference inventory metadata mismatch")
+    if visited != set(trees):
+        raise ValueError("unreferenced reference tree proof")
+    return payload_root
+
+
+def _verify_authoritative(
+    robocorp_root: Path, custom_root: Path, *, robocorp_reference: bool = False
+) -> None:
     manifest = json.loads(MANIFEST_PATH.read_text())
     ledger = json.loads(LEDGER_PATH.read_text())
     roots = {
-        "robocorp-1.5.0": robocorp_root.resolve(),
+        "robocorp-1.5.0": robocorp_root if robocorp_reference else robocorp_root.resolve(),
         "custom-0.1.6": custom_root.resolve(),
     }
     labels = {"robocorp-1.5.0": "Robocorp", "custom-0.1.6": "custom adapter"}
 
     for origin, root in roots.items():
         expected = manifest["sources"][origin]["commit"]
+        if origin == "robocorp-1.5.0" and robocorp_reference:
+            root = _verify_robocorp_reference(root, expected)
+            roots[origin] = root
+            robocorp_root = root
+            continue
         actual = _git_head(root)
         if actual != expected:
             raise SystemExit(f"{labels[origin]} reference HEAD {actual} != required {expected}")
@@ -453,15 +577,20 @@ def _artifact() -> dict:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--write", action="store_true")
-    parser.add_argument("--robocorp-root", type=Path)
+    robocorp = parser.add_mutually_exclusive_group()
+    robocorp.add_argument("--robocorp-root", type=Path)
+    robocorp.add_argument("--robocorp-reference", type=Path)
     parser.add_argument("--custom-root", type=Path)
     args = parser.parse_args()
-    if bool(args.robocorp_root) != bool(args.custom_root):
-        parser.error("--robocorp-root and --custom-root are required together")
-    if args.robocorp_root:
+    reference = args.robocorp_reference or args.robocorp_root
+    if bool(reference) != bool(args.custom_root):
+        parser.error("--robocorp-root and --custom-root are required together; "
+                     "--robocorp-reference may replace --robocorp-root")
+    if reference:
         if args.write:
             parser.error("--write is only valid for the offline diagnostic artifact")
-        _verify_authoritative(args.robocorp_root, args.custom_root)
+        _verify_authoritative(reference, args.custom_root,
+                              robocorp_reference=args.robocorp_reference is not None)
         return 0
     rendered = json.dumps(_artifact(), indent=2, sort_keys=True) + "\n"
     if args.write:

@@ -1,0 +1,6 @@
+[
+  "tests/action_server_tests/test_runtime_task_bootstrap.py::test_task_shutdown_retains_provider_until_worker_join",
+  "tests/action_server_tests/test_runtime_task_bootstrap.py::test_default_off_and_policy_without_runtime_fails[sqlite]",
+  "tests/action_server_tests/test_runtime_task_bootstrap.py::test_default_off_and_policy_without_runtime_fails[postgresql]",
+  "tests/action_server_tests/test_runtime_task_bootstrap.py::test_logical_shutdown_retains_provider_and_settles_after_worker"
+]

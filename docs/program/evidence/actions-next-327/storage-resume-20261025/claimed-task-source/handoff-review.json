@@ -1,0 +1,12 @@
+{
+  "status": "SOURCE_REVIEW_CLEAR",
+  "execution": "NOT_RUN",
+  "qualifier_sha256": "296b6809dc7b3bfee2e91a882d49dae02ac9fb92264657b0b8d3a9eedcde5eea",
+  "dakota_prompt_sha256": "33c9a6dfd4f1a4d527a5078bf21b6b5935717b03ba4f5ee83c1b959ff1079ffd",
+  "limitations": [
+    "actual installed candidate and supervisor cleanup pending",
+    "actual ChatGPT host preflight and owner launch pending",
+    "invoice E1 and strict Playwright separate"
+  ],
+  "upstream_disposition": "none"
+}

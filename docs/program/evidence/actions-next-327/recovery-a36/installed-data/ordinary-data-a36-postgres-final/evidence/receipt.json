@@ -1,0 +1,32 @@
+{
+  "status": "FAIL",
+  "runtime_version": "1.1.0a36",
+  "engine_origin": "/workspace/actions-recovery-327/installed-a36/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+  "source": "fbde9bc3947804212c930aa65c2884714eb9df2e",
+  "installed_versions": {
+    "mcp": "2.3.0",
+    "mcp-types": "2.3.0",
+    "actions-core": "1.1.0a3"
+  },
+  "synthetic_owned_auth": true,
+  "processes": [
+    {
+      "pid": 186307,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.1643216440024844,
+      "lifespan_shutdown_complete": true
+    }
+  ],
+  "calls": [
+    {
+      "tool": "canvas_get",
+      "is_error": true
+    }
+  ],
+  "actual_generated_execution": "NOT_PROVEN",
+  "workspace": "8e509cf3-dd48-4931-81ef-3c370c21a31a",
+  "logical_provider": "explicit offline CLI, sealed CSV, owned TLS PostgreSQL read-only role; no SQL seeding",
+  "failure_type": "ExceptionGroup"
+}

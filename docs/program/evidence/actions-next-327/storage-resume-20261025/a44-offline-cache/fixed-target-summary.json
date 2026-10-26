@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "root": "/tmp/actions327-a44-offline-v1/compiler",
+  "observed_publish_paths": [
+    "/tmp/actions327-a44-offline-v1/compiler/robocorp/holotree/e3db46a_5a1fac3_9fcd2534/rcc_plan.log",
+    "/tmp/actions327-a44-offline-v1/compiler/robocorp/holotree/e3db46a_5a1fac3_9fcd2534/identity.yaml"
+  ],
+  "proof_interpreter": "/tmp/actions327-a44-offline-v1/compiler/robocorp/holotree/e3db46a_5a1fac3_5ad687eb/bin/python3.12",
+  "sampled_peak_bytes": 697008128,
+  "scope": "fresh exact-path import, no-build publish, new local trust and isolated Core proof; native target must repeat"
+}

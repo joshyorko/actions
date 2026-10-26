@@ -1,0 +1,18 @@
+{
+  "scope": "dummy subprocess and mocked static PostgreSQL telemetry only; no PostgreSQL/RCC/live suite",
+  "tests_passed": 10,
+  "ast": "PASS",
+  "postgres_profile": {
+    "tmpfs_bytes": 2147483648,
+    "memory_bytes": 3221225472,
+    "sample_seconds": 60,
+    "preventive_abort_percent": 90
+  },
+  "reviewer": "cleanup_review: no cleanup blocker;90percent margin adopted",
+  "files": {
+    "progress_plugin.py": "cb8c4bc2bea1e3cb4a3850d44ecef77b0ecf95bb8b8b982f80b2d01a591e819c",
+    "pytest_entry.py": "032e500953190c858e32026c955bcb68ae830aff06c1932ab3714400e22f48e2",
+    "supervise.py": "b9f38c182f2bd719826f172ed99827d772795837aa50e85d1e4afe1bed2bc8b0",
+    "test_supervisor.py": "57526f55fb2b0bd3d1b5eb683bf74c31b18178698dcc5178e73e70a75f880808"
+  }
+}

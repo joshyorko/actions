@@ -42,7 +42,7 @@ ROWS = (
 
 
 @pytest.fixture
-def assembled_runtime(tmp_path: Path, monkeypatch, request):
+def assembled_runtime(tmp_path: Path, monkeypatch, request, *, shutdown_enabled=False):
     from action_server_tests.sample_data import ACTION, ACTION_PACKAGE, RUN
 
     from actions.server import (
@@ -95,7 +95,10 @@ def assembled_runtime(tmp_path: Path, monkeypatch, request):
         for key, value in _server_websockets._socket_server.event_handlers.items()
     }
     monkeypatch.setattr(_server_websockets, "_socket_server", socket)
-    monkeypatch.delenv("RC_ADD_SHUTDOWN_API", raising=False)
+    if shutdown_enabled:
+        monkeypatch.setenv("RC_ADD_SHUTDOWN_API", "true")
+    else:
+        monkeypatch.delenv("RC_ADD_SHUTDOWN_API", raising=False)
 
     def refuse_start(*args, **kwargs):
         raise AssertionError("in-process auth fixture attempted native startup")

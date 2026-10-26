@@ -1,0 +1,20 @@
+[
+  "tests/action_server_tests/test_provider_catalog.py::test_v1_bytes_and_actual_old_reader_rejection",
+  "tests/action_server_tests/test_provider_catalog.py::test_codec_identity_and_invariants",
+  "tests/action_server_tests/test_provider_catalog.py::test_fresh_subprocess_reconstructs_catalog_without_secrets",
+  "tests/action_server_tests/test_provider_catalog.py::test_no_current_until_explicit_publish_and_stale_retry",
+  "tests/action_server_tests/test_provider_catalog.py::test_pointer_crash_is_old_or_complete_never_partial[replace]",
+  "tests/action_server_tests/test_provider_catalog.py::test_pointer_crash_is_old_or_complete_never_partial[fsync]",
+  "tests/action_server_tests/test_provider_catalog.py::test_private_config_integrity[symlink]",
+  "tests/action_server_tests/test_provider_catalog.py::test_private_config_integrity[hardlink]",
+  "tests/action_server_tests/test_provider_catalog.py::test_private_config_integrity[oversize]",
+  "tests/action_server_tests/test_provider_catalog.py::test_private_config_integrity[tamper]",
+  "tests/action_server_tests/test_provider_catalog.py::test_private_config_integrity[permission]",
+  "tests/action_server_tests/test_provider_catalog.py::test_wrong_owner_and_missing_store_no_creation",
+  "tests/action_server_tests/test_provider_catalog.py::test_secret_import_explicit_and_reconstruction_never_resolves",
+  "tests/action_server_tests/test_provider_catalog.py::test_catalog_exact_config_and_evidence",
+  "tests/action_server_tests/test_provider_catalog.py::test_source_seals_reload_before_configuration",
+  "tests/action_server_tests/test_provider_catalog.py::test_immutable_staging_fault_can_retry_without_poison[write]",
+  "tests/action_server_tests/test_provider_catalog.py::test_immutable_staging_fault_can_retry_without_poison[fsync]",
+  "tests/action_server_tests/test_provider_catalog.py::test_ca_reference_does_not_resolve_on_config_load"
+]

@@ -1,15 +1,42 @@
 """Add common Run pins/output authority without assigning synthetic legacy pins."""
 
+from pydantic.dataclasses import dataclass
+
 from actions.server._database import Database
 from actions.server.migrations import MIGRATION_ID_TO_NAME, Migration
 
 
+# Historical v15 field shape; do not import the current RunPin model.
+@dataclass
+class RunPin:
+    id: str
+    run_id: str
+    workspace_id: str
+    run_admission_id: str
+    admission_principal_id: str
+    request_fingerprint: str
+    idempotency_id: str
+    idempotency_key: str
+    current_attempt_id: str
+    epoch: int
+    cancel_requested: int
+    recovery_epoch: int
+    recovery_receipt: str
+
+
 def migrate(db: Database) -> None:
     from actions.server._models import get_model_db_rules
-    from actions.server.run_outputs.models import MODEL_CLASSES
+    from actions.server.run_outputs.models import (
+        RunAccessGrant,
+        RunAdmission,
+        RunAttempt,
+        RunOutput,
+        Workspace,
+    )
 
     rules = get_model_db_rules()
-    for cls in MODEL_CLASSES:
+    # Freeze the v15 schema: later common models belong to later migrations.
+    for cls in (Workspace, RunAdmission, RunAccessGrant, RunPin, RunAttempt, RunOutput):
         db.execute(db.create_table_sql(cls, rules))
         for sql in db.create_unique_indexes_sql(
             cls, rules

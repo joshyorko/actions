@@ -3,6 +3,12 @@ import type { FormEvent } from "react";
 import type * as React from "react";
 
 import "./query-results.css";
+import { InvoiceReviewPanel } from "./InvoiceReviewPanel";
+import type { InvoiceReviewAdapter } from "./review-contract";
+import {
+    ReconciliationCells,
+    type InvoiceReconciliation,
+} from "./invoice-reconciliation";
 
 export type ArtifactHandle = string & {
     readonly __artifactHandle: unique symbol;
@@ -16,15 +22,18 @@ export interface QueryRow {
     id: string;
     title: string;
     category: string;
+    reconciliation?: InvoiceReconciliation;
 }
 
 export interface QueryActionResult {
+    reviewAvailable?: boolean;
     rows: QueryRow[];
     artifact: { handle: ArtifactHandle } | null;
     error: {
         code: "no_matches";
         message: "No records matched that query.";
     } | null;
+    pagination?: { offset: number; nextOffset: number | null };
 }
 
 export type ArtifactStatus = "ready" | "processing" | "unavailable";
@@ -37,8 +46,19 @@ export type ArtifactStatus = "ready" | "processing" | "unavailable";
  * server-owned authorization and dispatch policy.
  */
 export interface QueryResultsAdapter {
+    review?: InvoiceReviewAdapter;
     submitQuery(input: QueryInput): Promise<QueryActionResult>;
     getArtifactStatus(handle: ArtifactHandle): Promise<ArtifactStatus>;
+    pageResult?(
+        handle: ArtifactHandle,
+        offset: number,
+    ): Promise<QueryActionResult>;
+    exportResult?(handle: ArtifactHandle): Promise<void>;
+}
+
+export interface HostToolResult {
+    revision: number;
+    result: QueryActionResult | null;
 }
 
 export interface HostToolInput {
@@ -49,6 +69,8 @@ export interface HostToolInput {
 interface QueryResultsViewProps {
     adapter: QueryResultsAdapter;
     hostInput?: HostToolInput | null;
+    hostResult?: HostToolResult | null;
+    readOnly?: boolean;
 }
 
 const MAX_QUERY_CODE_POINTS = 64;
@@ -69,6 +91,8 @@ function queryValidationMessage(query: string): string | null {
 export function QueryResultsView({
     adapter,
     hostInput = null,
+    hostResult = null,
+    readOnly = false,
 }: QueryResultsViewProps) {
     const [query, setQuery] = useState("");
     const [validationError, setValidationError] = useState<string | null>(null);
@@ -82,6 +106,14 @@ export function QueryResultsView({
     const mountedRef = useRef(false);
     const currentResultRef = useRef<QueryActionResult | null>(null);
     const hostInputRevisionRef = useRef<number | null>(null);
+    const comparisons =
+        result?.rows.flatMap((row) =>
+            row.reconciliation
+                ? [{ title: row.title, value: row.reconciliation }]
+                : [],
+        ) ?? [];
+    const isReconciliation =
+        comparisons.length > 0 && comparisons.length === result?.rows.length;
 
     const replaceResult = useCallback(
         (nextResult: QueryActionResult | null) => {
@@ -113,6 +145,51 @@ export function QueryResultsView({
         setIsCheckingArtifact(false);
         setIsSearching(false);
     }, [hostInput, replaceResult]);
+
+    useEffect(() => {
+        if (!hostResult) return;
+        generationRef.current += 1;
+        replaceResult(hostResult.result);
+        setActionError(null);
+        setArtifactStatus(null);
+        setIsSearching(false);
+        setIsCheckingArtifact(false);
+    }, [hostResult, replaceResult]);
+
+    const readPinned = async (operation: "page" | "export") => {
+        const previous = currentResultRef.current;
+        const handle = previous?.artifact?.handle;
+        if (!handle) return;
+        const generation = ++generationRef.current;
+        setIsSearching(true);
+        setActionError(null);
+        try {
+            if (
+                operation === "page" &&
+                adapter.pageResult &&
+                previous.pagination?.nextOffset != null
+            ) {
+                const next = await adapter.pageResult(
+                    handle,
+                    previous.pagination.nextOffset,
+                );
+                if (mountedRef.current && generationRef.current === generation)
+                    replaceResult(next);
+            } else if (operation === "export" && adapter.exportResult) {
+                await adapter.exportResult(handle);
+            }
+        } catch {
+            if (mountedRef.current && generationRef.current === generation) {
+                replaceResult(null);
+                setActionError(
+                    "Result unavailable or access denied. Reopen the authorized result.",
+                );
+            }
+        } finally {
+            if (mountedRef.current && generationRef.current === generation)
+                setIsSearching(false);
+        }
+    };
 
     const submit = async (event: FormEvent) => {
         event.preventDefault();
@@ -195,69 +272,77 @@ export function QueryResultsView({
     return (
         <main className="query-view" aria-labelledby="query-view-title">
             <header className="query-view__header">
-                <p className="query-view__eyebrow">Canvas fixture</p>
-                <h1 id="query-view-title">Search records</h1>
+                <p className="query-view__eyebrow">
+                    {readOnly ? "Published result" : "Canvas fixture"}
+                </p>
+                <h1 id="query-view-title">
+                    {readOnly ? "Invoice results" : "Search records"}
+                </h1>
                 <p className="query-view__intro">
-                    Search the sample catalog and review its matching records.
+                    {readOnly
+                        ? "Review the pinned invoice result. Opening this view does not execute a query."
+                        : "Search the sample catalog and review its matching records."}
                 </p>
             </header>
 
-            <section
-                className="query-view__panel"
-                aria-labelledby="query-form-title"
-            >
-                <h2 id="query-form-title">Find records</h2>
-                <form
-                    className="query-view__form"
-                    noValidate
-                    aria-busy={isSearching}
-                    onSubmit={submit}
+            {!readOnly && (
+                <section
+                    className="query-view__panel"
+                    aria-labelledby="query-form-title"
                 >
-                    <label htmlFor="query-input">Search records</label>
-                    <input
-                        ref={inputRef}
-                        id="query-input"
-                        name="query"
-                        type="text"
-                        autoComplete="off"
-                        required
-                        maxLength={MAX_QUERY_CODE_POINTS * 2}
-                        aria-invalid={validationError ? true : undefined}
-                        aria-describedby={describedBy}
-                        value={query}
-                        disabled={isSearching}
-                        onChange={(event) => {
-                            generationRef.current += 1;
-                            setQuery(event.currentTarget.value);
-                            setValidationError(null);
-                            setActionError(null);
-                            replaceResult(null);
-                            setArtifactStatus(null);
-                            setIsCheckingArtifact(false);
-                        }}
-                    />
-                    <p id="query-help" className="query-view__hint">
-                        Enter up to 64 characters. Search terms stay within this
-                        local fixture.
-                    </p>
-                    {validationError && (
-                        <p
-                            id="query-error"
-                            className="query-view__error"
-                            role="alert"
-                        >
-                            {validationError}
-                        </p>
-                    )}
-                    <button
-                        className="query-view__button query-view__button--primary"
-                        type="submit"
-                        disabled={isSearching}
+                    <h2 id="query-form-title">Find records</h2>
+                    <form
+                        className="query-view__form"
+                        noValidate
+                        aria-busy={isSearching}
+                        onSubmit={submit}
                     >
-                        {isSearching ? "Searching…" : "Search"}
-                    </button>
-                </form>
-            </section>
+                        <label htmlFor="query-input">Search records</label>
+                        <input
+                            ref={inputRef}
+                            id="query-input"
+                            name="query"
+                            type="text"
+                            autoComplete="off"
+                            required
+                            maxLength={MAX_QUERY_CODE_POINTS * 2}
+                            aria-invalid={validationError ? true : undefined}
+                            aria-describedby={describedBy}
+                            value={query}
+                            disabled={isSearching}
+                            onChange={(event) => {
+                                generationRef.current += 1;
+                                setQuery(event.currentTarget.value);
+                                setValidationError(null);
+                                setActionError(null);
+                                replaceResult(null);
+                                setArtifactStatus(null);
+                                setIsCheckingArtifact(false);
+                            }}
+                        />
+                        <p id="query-help" className="query-view__hint">
+                            Enter up to 64 characters. Search terms stay within
+                            this local fixture.
+                        </p>
+                        {validationError && (
+                            <p
+                                id="query-error"
+                                className="query-view__error"
+                                role="alert"
+                            >
+                                {validationError}
+                            </p>
+                        )}
+                        <button
+                            className="query-view__button query-view__button--primary"
+                            type="submit"
+                            disabled={isSearching}
+                        >
+                            {isSearching ? "Searching…" : "Search"}
+                        </button>
+                    </form>
+                </section>
+            )}
 
             <section
                 className="query-view__panel query-view__results"
@@ -267,11 +352,17 @@ export function QueryResultsView({
                 <div className="query-view__section-heading">
                     <div>
                         <p className="query-view__eyebrow">Results</p>
-                        <h2 id="results-title">Matching records</h2>
+                        <h2 id="results-title">
+                            {isReconciliation
+                                ? "Invoice reconciliation"
+                                : "Records"}
+                        </h2>
                     </div>
                     {result?.rows.length ? (
                         <span className="query-view__count">
-                            {result.rows.length} records
+                            {isReconciliation
+                                ? `${comparisons.filter((row) => row.value.status === "matched").length} matched · ${comparisons.filter((row) => row.value.status === "discrepant").length} discrepant`
+                                : `${result.rows.length} records`}
                         </span>
                     ) : null}
                 </div>
@@ -302,23 +393,63 @@ export function QueryResultsView({
                 )}
                 {result && !result.error && result.rows.length > 0 && (
                     <div className="query-view__table-wrap" tabIndex={0}>
-                        <table>
+                        <table
+                            className={
+                                isReconciliation
+                                    ? "query-view__reconciliation"
+                                    : undefined
+                            }
+                        >
                             <caption className="query-view__sr-only">
-                                Search results
+                                {isReconciliation
+                                    ? "Invoice reconciliation comparisons"
+                                    : "Search results"}
                             </caption>
                             <thead>
                                 <tr>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Category</th>
+                                    {isReconciliation ? (
+                                        [
+                                            "Invoice and sources",
+                                            "Status",
+                                            "Expected (PO)",
+                                            "Actual (invoice)",
+                                            "Variance",
+                                            "Discrepancies",
+                                        ].map((label) => (
+                                            <th scope="col" key={label}>
+                                                {label}
+                                            </th>
+                                        ))
+                                    ) : (
+                                        <>
+                                            <th scope="col">Title</th>
+                                            <th scope="col">Category</th>
+                                        </>
+                                    )}
                                 </tr>
                             </thead>
                             <tbody>
-                                {result.rows.map((row) => (
-                                    <tr key={row.id}>
-                                        <th scope="row">{row.title}</th>
-                                        <td>{row.category}</td>
-                                    </tr>
-                                ))}
+                                {isReconciliation
+                                    ? comparisons.map((row) => (
+                                          <tr key={row.value.source.invoice_id}>
+                                              <ReconciliationCells
+                                                  title={row.title}
+                                                  value={row.value}
+                                              />
+                                          </tr>
+                                      ))
+                                    : result.rows.map((row) => (
+                                          <tr key={row.id}>
+                                              <th scope="row">{row.title}</th>
+                                              <td
+                                                  style={{
+                                                      whiteSpace: "pre-line",
+                                                  }}
+                                              >
+                                                  {row.category}
+                                              </td>
+                                          </tr>
+                                      ))}
                             </tbody>
                         </table>
                     </div>
@@ -349,6 +480,27 @@ export function QueryResultsView({
                                 ? "Checking…"
                                 : "Check artifact status"}
                         </button>
+                        {adapter.exportResult && (
+                            <button
+                                className="query-view__button"
+                                type="button"
+                                disabled={isSearching}
+                                onClick={() => readPinned("export")}
+                            >
+                                Export invoices
+                            </button>
+                        )}
+                        {adapter.pageResult &&
+                            result.pagination?.nextOffset != null && (
+                                <button
+                                    className="query-view__button"
+                                    type="button"
+                                    disabled={isSearching}
+                                    onClick={() => readPinned("page")}
+                                >
+                                    Next page
+                                </button>
+                            )}
                     </div>
                 )}
                 {artifactStatus && (
@@ -357,6 +509,13 @@ export function QueryResultsView({
                     </p>
                 )}
             </section>
+            {result?.reviewAvailable && result.artifact && adapter.review && (
+                <InvoiceReviewPanel
+                    key={result.artifact.handle}
+                    handle={result.artifact.handle}
+                    adapter={adapter.review}
+                />
+            )}
         </main>
     );
 }

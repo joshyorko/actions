@@ -1,0 +1,17 @@
+{
+  "test_local_knowledge_setup/tests.xml.b64": {
+    "decoded_sha256": "ab566e00b184800b3d92dbe2c17e64d999c24782672911e4f21fc73ab787de86"
+  },
+  "test_local_provider_setup/tests.xml.b64": {
+    "decoded_sha256": "0f001470bb4b0e412760f21f263c878678d9901d9a71da889238702304362ba0"
+  },
+  "test_provider_catalog/tests.xml.b64": {
+    "decoded_sha256": "7ad3b391248e8ca442a8b40602f42729302ad58c1efeffdb5ab6a897dee4aa0b"
+  },
+  "first-failure.xml.b64": {
+    "decoded_sha256": "ee48d26d96f26f1a65ba6e9cd6b097592cf7163a70ff281da1999a96dc0fa905"
+  },
+  "second-failure.xml.b64": {
+    "decoded_sha256": "382d30a2b6846bb586ccb060e74e976a25eab801a73b702e504b4d1550300d11"
+  }
+}

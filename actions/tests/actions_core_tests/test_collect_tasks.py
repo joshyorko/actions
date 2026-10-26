@@ -49,7 +49,7 @@ def test_collect_tasks_integrated_error(tmpdir) -> None:
 
 
 def test_collect_tasks_integrated(datadir) -> None:
-    from robocorp.log import verify_log_messages_from_log_html
+    from actions._logging import verify_log_messages_from_log_html
 
     result = actions_run(
         ["run", str(datadir), "-a", "main", "--glob", "*action*.py"],
@@ -100,7 +100,7 @@ def test_list_tasks_api(datadir, tmpdir, data_regression) -> None:
 
 
 def test_provide_output_in_stdout(datadir, tmpdir) -> None:
-    from robocorp.log import verify_log_messages_from_decoded_str
+    from actions._logging import verify_log_messages_from_decoded_str
 
     result = actions_run(
         [
@@ -129,7 +129,7 @@ def test_provide_output_in_stdout(datadir, tmpdir) -> None:
 
 
 def test_error_in_stdout(datadir, tmpdir) -> None:
-    from robocorp.log import verify_log_messages_from_decoded_str
+    from actions._logging import verify_log_messages_from_decoded_str
 
     result = actions_run(
         [

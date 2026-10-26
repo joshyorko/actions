@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "application": "invoice-summary",
+  "engine": "installed a25",
+  "host_source": "ext-apps v2.0.3 82221c0c8ce7661efa6771c9d461511b1650495f",
+  "synthetic_authenticated_composition": true,
+  "ordinary_cli": false,
+  "E1": false,
+  "run_id": "834cf487-85da-4ed8-995e-e43c6640bb0b",
+  "new_runs": 1,
+  "new_attempts": 1,
+  "cleanup": "PASS"
+}

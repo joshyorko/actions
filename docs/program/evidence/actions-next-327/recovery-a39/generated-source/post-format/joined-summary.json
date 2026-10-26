@@ -1,0 +1,81 @@
+{
+  "source": "5b16289da3d0f45f3d2534a4abf29fb1e3a9463e",
+  "tree": "d69d54a8f79b856e820197c25c3626224568a8a0",
+  "container": "a65e3dd68f3a18b2a2f28652d0eaa9a8e5c3632f12af5fa326250a267a41304e",
+  "image": "postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81",
+  "batches": [
+    {
+      "module": "test_generated_knowledge",
+      "command": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "/workspace/actions-cloud/package-command.py",
+        "action_server",
+        "run",
+        "python",
+        "/workspace/actions-327-a39/post-format/selected-pytest.py",
+        "tests/action_server_tests/test_generated_knowledge.py",
+        "-k",
+        "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+        "-p",
+        "no:robocorp_log_pytest",
+        "-q",
+        "--tb=short",
+        "--junitxml=/workspace/actions-327-a39/post-format/test_generated_knowledge/tests.xml",
+        "--basetemp=/workspace/actions-327-a39/post-format/test_generated_knowledge/fixtures"
+      ],
+      "exit_code": 0,
+      "minimum_free_bytes": 14617608192,
+      "stop_reason": null,
+      "source_sha256": "091a7d8fe2d9aa91b6eaba389f94acc6c6fae10648cd93f82a17155e369ff7ff",
+      "counts": {
+        "tests": 9,
+        "failure": 0,
+        "error": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "module": "test_generated_knowledge_search_boundaries",
+      "command": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "/workspace/actions-cloud/package-command.py",
+        "action_server",
+        "run",
+        "python",
+        "/workspace/actions-327-a39/post-format/selected-pytest.py",
+        "tests/action_server_tests/test_generated_knowledge_search_boundaries.py",
+        "-k",
+        "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+        "-p",
+        "no:robocorp_log_pytest",
+        "-q",
+        "--tb=short",
+        "--junitxml=/workspace/actions-327-a39/post-format/test_generated_knowledge_search_boundaries/tests.xml",
+        "--basetemp=/workspace/actions-327-a39/post-format/test_generated_knowledge_search_boundaries/fixtures"
+      ],
+      "exit_code": 0,
+      "minimum_free_bytes": 14576693248,
+      "stop_reason": null,
+      "source_sha256": "8657bae72dd7720b366a1141cd83463ae0aed16f0c595c89151e1d513601a91f",
+      "counts": {
+        "tests": 11,
+        "failure": 0,
+        "error": 0,
+        "skipped": 0
+      }
+    }
+  ],
+  "cleanup_exit": 0
+}

@@ -1,0 +1,22 @@
+{
+  "execution_authorized": true,
+  "source_sha": "730f277ce13bd3a123c854c85c1c9fc2c185096c",
+  "runtime_version": "1.1.0a42",
+  "core_version": "1.1.0a5",
+  "installed_base": "/absolute/target/a42",
+  "fixture_root": "/absolute/target/a42-browser-new",
+  "prepared_receipt": "/absolute/target/compiler/prepared.json",
+  "compiler_artifact_digest": "REPLACE_WITH_TARGET_PREPARED_ARTIFACT_DIGEST",
+  "compiler_core_wheel_sha256": "0c1421f7b7cd0db447c82e58458107c92f22051b29eb128c8b765219b863a3ec",
+  "compiler_core_bytes_verified": true,
+  "compiler_core_receipt": "/absolute/target/compiler/core-proof.json",
+  "compiler_core_receipt_sha256": "REPLACE_WITH_TARGET_CORE_PROOF_SHA256",
+  "wheels": {
+    "wheels/action_server/actions_runtime-1.1.0a42-cp312-cp312-linux_x86_64.whl": "90117fa669bc1f9f11b792ba18b2f1b9598aa2711471c6464ae95fe34bff2342",
+    "wheels/actions/actions_core-1.1.0a5-py3-none-any.whl": "0c1421f7b7cd0db447c82e58458107c92f22051b29eb128c8b765219b863a3ec",
+    "wheels/work-items/actions_work_items-0.5.0a2-py3-none-any.whl": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb"
+  },
+  "official_host": "/absolute/target/official-host",
+  "node_executable": "/absolute/target/prepared-toolchain/bin/node",
+  "playwright_package": "/absolute/target/actions/action_server/frontend/package.json"
+}

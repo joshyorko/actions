@@ -1,0 +1,5 @@
++ poetry run pytest tests/action_server_tests/test_database_shared.py -k legacy_output or historical_migration -q --junitxml=/workspace/actions-recovery-327/evidence/task-historical-archive.xml --robocorp-log-output=/workspace/actions-recovery-327/evidence/task-historical-archive-log (in /workspace/actions/action_server)
+.....                                                                    [100%]
+- generated xml file: /workspace/actions-recovery-327/evidence/task-historical-archive.xml -
+5 passed, 52 deselected in 0.37s
+Log (html): /workspace/actions-recovery-327/evidence/task-historical-archive-log/log.html

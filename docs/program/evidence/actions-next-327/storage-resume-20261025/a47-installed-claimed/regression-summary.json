@@ -1,0 +1,31 @@
+{
+  "passed": 93,
+  "skipped": [
+    {
+      "test": "test_real_generic_rcc[sqlite-consumer]",
+      "reason": "explicit owned prepared RCC gate required"
+    },
+    {
+      "test": "test_real_generic_rcc[sqlite-producer]",
+      "reason": "explicit owned prepared RCC gate required"
+    },
+    {
+      "test": "test_real_generic_rcc[sqlite-optional]",
+      "reason": "explicit owned prepared RCC gate required"
+    },
+    {
+      "test": "test_real_generic_rcc[postgresql-consumer]",
+      "reason": "explicit owned prepared RCC gate required"
+    },
+    {
+      "test": "test_real_generic_rcc[postgresql-producer]",
+      "reason": "explicit owned prepared RCC gate required"
+    },
+    {
+      "test": "test_real_generic_rcc[postgresql-optional]",
+      "reason": "explicit owned prepared RCC gate required"
+    }
+  ],
+  "exit_code": 0,
+  "owned_postgres_running_after": false
+}

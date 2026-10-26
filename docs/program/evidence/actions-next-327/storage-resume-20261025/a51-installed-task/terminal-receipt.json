@@ -1,0 +1,326 @@
+{
+  "supervisor_parent_pid": 194117,
+  "supervisor_sha256": "5e34bd6d3c84679c5b9da5d25f3255fb92727910403842132113d68c31d7fd0b",
+  "source": "ea3448e2b40741c5a21369c24cc20e84b8258809",
+  "manifest_sha256": "205c746455a02e0b6bf47d49379cdb95695bc7cc246bee44870c4900f6b87c0e",
+  "harness_sha256": "e6548aaa3bb0cf45aa2d762d1ac9e2706cb02734e5574edf27a33c2e17531223",
+  "live_cancellation": "NOT_RUN",
+  "status": "PASS",
+  "runtime": "1.1.0a51",
+  "core": "1.1.0a8",
+  "artifact_digest": "sha256:0a0e5fee81bc3d747aa685d634880e94e344643e942a70733b4280af6d89a8a7",
+  "processes": [
+    {
+      "pid": 194119,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.2141907990007894,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 194130,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.21414358000038192,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 194209,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.16387493900037953,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 194281,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.1638917529999162,
+      "lifespan_shutdown_complete": true
+    }
+  ],
+  "calls": [
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "public_http_operation": "items.enqueue",
+      "status": 200
+    },
+    {
+      "public_http_operation": "items.enqueue",
+      "status": 200
+    },
+    {
+      "public_http_operation": "items.claim",
+      "status": 200
+    },
+    {
+      "public_http_operation": "runs.get",
+      "status": 200
+    },
+    {
+      "public_http_operation": "runs.get",
+      "status": 200
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": true
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": true
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": true
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": true
+    },
+    {
+      "public_http_operation": "items.get",
+      "status": 200
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "public_http_operation": "items.enqueue",
+      "status": 200
+    },
+    {
+      "public_http_operation": "items.enqueue",
+      "status": 200
+    },
+    {
+      "public_http_operation": "items.claim",
+      "status": 200
+    },
+    {
+      "public_http_operation": "runs.get",
+      "status": 200
+    },
+    {
+      "public_http_operation": "runs.get",
+      "status": 200
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": true
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": true
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": true
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "tool": "canvas_artifact",
+      "is_error": true
+    },
+    {
+      "public_http_operation": "items.get",
+      "status": 200
+    },
+    {
+      "public_http_operation": "items.get",
+      "status": 200
+    },
+    {
+      "public_http_operation": "runs.get",
+      "status": 200
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "public_http_operation": "items.get",
+      "status": 200
+    },
+    {
+      "public_http_operation": "runs.get",
+      "status": 200
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    },
+    {
+      "public_http_operation": "artifacts.read",
+      "status": 200
+    }
+  ],
+  "synthetic_owned_auth": true,
+  "cases": [
+    {
+      "case": "pass",
+      "task_id": "a69d5558-bd35-4ed5-a7e6-9a6cf4c24c58",
+      "state": "completed",
+      "task_status": "completed",
+      "task_is_error": false,
+      "queue_state": "DONE",
+      "authorized_artifacts": 4,
+      "rcc_exit_code": 0,
+      "artifact_sha256": {
+        "robot-stdout.log": "6b8e941a8851767792a064a6da7d7faf5ecfec0d5bd0d83ccd5178a1f1ea5173",
+        "robot-stderr.log": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+        "robot-output.xml": "c720e73fa3e8423c18739073e5c6ef9f33d73f98b34dd9a73c0d18c79a2c0f7b",
+        "rcc-receipt.json": "601af1d9b17cb80f91ff0a20b7b5df84fe0aea266a7fc981a31d896fd3875cfa"
+      },
+      "cleanup": {
+        "descendant_snapshot_complete": true,
+        "errors": [],
+        "live_descendant_pids": [],
+        "wrapper_reaped": true,
+        "zombie_descendant_pids": []
+      }
+    },
+    {
+      "case": "fail",
+      "task_id": "9f2b1cd6-9c92-4379-ac2a-7c0b5c4d2d15",
+      "state": "failed",
+      "task_status": "completed",
+      "task_is_error": true,
+      "queue_state": "FAILED",
+      "authorized_artifacts": 4,
+      "rcc_exit_code": 1,
+      "artifact_sha256": {
+        "robot-stdout.log": "ec0ab4f3f03d190048765cf680cda582171bc46abae279e16478fd727b8f3320",
+        "robot-stderr.log": "ceef5e7ce6b1a4a8a55d318d07e9a779e0a38ab85d8a7a5b6c7b7af26c99e6e0",
+        "robot-output.xml": "2c804f7de74e913dec7ca044f78305f108b3bcfc90338853e35b0e706d6ab2e2",
+        "rcc-receipt.json": "3b4e1920eba3965ed05e1f0097c6281490a1d1d34aed3d916bdbcc9213c89deb"
+      },
+      "cleanup": {
+        "descendant_snapshot_complete": true,
+        "errors": [],
+        "live_descendant_pids": [],
+        "wrapper_reaped": true,
+        "zombie_descendant_pids": []
+      }
+    }
+  ],
+  "workspace": "3ce02ab0-7439-4497-a4f4-456f48ef33cc",
+  "profile_setup": "explicit public offline owner authorization; no SQL writes or source/result/review/admission seeding",
+  "wrong_and_missing_credentials_denied": true,
+  "lifecycle_counts": {
+    "before": {
+      "run": 0,
+      "run_attempt": 0,
+      "run_execution_intent": 0,
+      "run_task_receipt": 0
+    },
+    "after": {
+      "run": 2,
+      "run_attempt": 2,
+      "run_execution_intent": 2,
+      "run_task_receipt": 2
+    },
+    "restart": {
+      "run": 2,
+      "run_attempt": 2,
+      "run_execution_intent": 2,
+      "run_task_receipt": 2
+    }
+  },
+  "restart_terminal_task_claim_outputs_unchanged": true,
+  "budget": {
+    "fixture_bytes": 1835087,
+    "log_bytes_upper_bound": 46194
+  },
+  "scope": "Installed claimed consumer Robot Tasks, synthetic single owner, terminal success/failure and restart; no live cancellation, multi-principal, browser, producer or child-output qualification"
+}

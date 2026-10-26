@@ -1,0 +1,38 @@
+{
+  "argv": [
+    "/workspace/actions-cloud/bin/rcc",
+    "env",
+    "export",
+    "--artifact",
+    "sha256:ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24",
+    "--output",
+    "/workspace/327-probes/a59-cold-rcc/environment-ab46f17f.zip"
+  ],
+  "command_exit": 1,
+  "guard": null,
+  "source_immutable_hashes_before": {
+    "/workspace/327-probes/a53-claimed/compiler/robocorp/artifacts/v1/content/manifests/sha256/ab/46/ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24": "0991d235d8de4adb4c654cbf120a3acd9042b60db61a2148d5da83c3ad3f7673",
+    "/workspace/327-probes/a53-claimed/compiler/robocorp/artifacts/v1/provider/manifests/sha256/ab/46/ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24": "0991d235d8de4adb4c654cbf120a3acd9042b60db61a2148d5da83c3ad3f7673",
+    "/workspace/327-probes/a53-claimed/compiler/robocorp/artifacts/v1/trust/sha256/ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24/provenance.json": "6e709998f7b98c9a7bb1f18494bb03ae147c66289e0d2875705eea83d1df5383",
+    "/workspace/327-probes/a53-claimed/compiler/robocorp/artifacts/v1/trust/sha256/ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24/revocations.json": "084fdf91e6aac2389e56c6e503c61a06cfdc21bd9536771b332ea1b5367bc679",
+    "/workspace/327-probes/a53-claimed/compiler/robocorp/artifacts/v1/trust/sha256/ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24/sbom.json": "f47704acf8f06886a804d470541a63bb68690c0c71f365ca67931fd7a9c1dcc3",
+    "/workspace/327-probes/a53-claimed/compiler/prepared.json": "62b36982a64f5985f2f5d9798abbfb0be228861534f9784ce532cd2efafcc5d0"
+  },
+  "source_immutable_hashes_after": {
+    "/workspace/327-probes/a53-claimed/compiler/robocorp/artifacts/v1/content/manifests/sha256/ab/46/ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24": "0991d235d8de4adb4c654cbf120a3acd9042b60db61a2148d5da83c3ad3f7673",
+    "/workspace/327-probes/a53-claimed/compiler/robocorp/artifacts/v1/provider/manifests/sha256/ab/46/ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24": "0991d235d8de4adb4c654cbf120a3acd9042b60db61a2148d5da83c3ad3f7673",
+    "/workspace/327-probes/a53-claimed/compiler/robocorp/artifacts/v1/trust/sha256/ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24/provenance.json": "6e709998f7b98c9a7bb1f18494bb03ae147c66289e0d2875705eea83d1df5383",
+    "/workspace/327-probes/a53-claimed/compiler/robocorp/artifacts/v1/trust/sha256/ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24/revocations.json": "084fdf91e6aac2389e56c6e503c61a06cfdc21bd9536771b332ea1b5367bc679",
+    "/workspace/327-probes/a53-claimed/compiler/robocorp/artifacts/v1/trust/sha256/ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24/sbom.json": "f47704acf8f06886a804d470541a63bb68690c0c71f365ca67931fd7a9c1dcc3",
+    "/workspace/327-probes/a53-claimed/compiler/prepared.json": "62b36982a64f5985f2f5d9798abbfb0be228861534f9784ce532cd2efafcc5d0"
+  },
+  "source_immutable_unchanged": true,
+  "free_before": 12182253568,
+  "free_after": 12182249472,
+  "elapsed_seconds": 0.05,
+  "artifact_digest": "sha256:ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24",
+  "archive_bytes": null,
+  "archive_sha256": null,
+  "policy_change": false,
+  "qualification": "selected RCC artifact export only, not coordinated Runtime restore"
+}

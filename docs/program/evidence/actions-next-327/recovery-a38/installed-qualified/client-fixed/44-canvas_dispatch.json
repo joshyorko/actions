@@ -1,0 +1,26 @@
+{
+  "_meta": {
+    "actions.execution": {
+      "attemptId": "d0e0b359-023c-4933-8ca0-5536564d0bde",
+      "bindingId": "add",
+      "cancelRequested": false,
+      "runId": "9d695fd1-b8ea-42af-b486-2b2469aa9ceb",
+      "state": "ready"
+    },
+    "io.modelcontextprotocol/serverInfo": {
+      "name": "Action Server",
+      "version": ""
+    }
+  },
+  "content": [
+    {
+      "type": "text",
+      "text": "Bound app execution state.",
+      "annotations": null,
+      "_meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false,
+  "resultType": "complete"
+}

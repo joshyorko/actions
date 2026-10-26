@@ -10,8 +10,8 @@ from types import ModuleType
 from typing import Callable, Dict, Iterator, List, Optional, Sequence, Set, Tuple
 
 import yaml
-from robocorp import log
 
+from actions import _logging as log
 from actions._customization._plugin_manager import PluginManager
 from actions._protocols import IAction
 

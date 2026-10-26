@@ -1,5 +1,6 @@
 import logging
 from collections.abc import Iterable
+from typing import TYPE_CHECKING
 
 from fastapi import FastAPI, params
 from starlette.authentication import AuthCredentials, AuthenticationBackend, BaseUser
@@ -7,6 +8,11 @@ from starlette.middleware import Middleware
 from starlette.requests import HTTPConnection
 
 from actions.server._app import _CustomFastAPI
+
+if TYPE_CHECKING:
+    from actions.server.data_queries.canvas_mcp import InvoiceCanvasMcp
+    from actions.server.foundry.mcp import CanvasMcp
+    from actions.server.run_outputs.task_service import TaskService
 
 log = logging.getLogger(__name__)
 
@@ -104,6 +110,10 @@ class _ActionRoutes:
         self,
         whitelist: str | None,
         endpoint_dependencies: list[params.Depends],
+        *,
+        invoice_canvas: "InvoiceCanvasMcp | None" = None,
+        canvas_foundry: "CanvasMcp | None" = None,
+        task_service: "TaskService | None" = None,
     ):
         """
         Args:
@@ -125,7 +135,11 @@ class _ActionRoutes:
         # The initial process pool generation is zero.  Reload advances this
         # token before registering the replacement handlers.
         self._process_pool_generation = 0
-        self.mcp_server_setup_helper: McpServerSetupHelper = McpServerSetupHelper()
+        self.mcp_server_setup_helper: McpServerSetupHelper = McpServerSetupHelper(
+            invoice_canvas=invoice_canvas,
+            canvas_foundry=canvas_foundry,
+            task_service=task_service,
+        )
 
     def setup_mcp_server(self, api_key: str | None) -> None:
         """
@@ -361,6 +375,9 @@ class _ActionRoutes:
         # endpoint publishes it in one pointer swap, so an admitted callback
         # can continue using its old generation while reload registers routes.
         next_mcp_server_setup_helper._validate_ui_resource_references(
+            next_mcp_server_setup_helper._catalog
+        )
+        self.mcp_server_setup_helper._validate_bound_catalog(
             next_mcp_server_setup_helper._catalog
         )
         catalog = next_mcp_server_setup_helper._catalog

@@ -1,0 +1,38 @@
+{
+  "a44-fixed-path-public-cache.zip": {
+    "sha256": "a2e388ba921bda7b4c2b04d7ca0d5bb575644cc1cb578528828a64a9417b9598",
+    "bytes": 77512277
+  },
+  "prepare-offline-managed.py": {
+    "sha256": "bb4aa8af75b4426730b3af8de3e8fa9dbf0fabce472217590ffd3dd86b27a9d7",
+    "bytes": 12683
+  },
+  "validate-public-cache.py": {
+    "sha256": "c754da82c8da3f00f4ff8c8d9aa9da08a70991983a1ea42c2e59956225b264d1",
+    "bytes": 2241
+  },
+  "verify-core.py": {
+    "sha256": "a69b5a9e9e45b87803c89068c17210891040ee92171b6db0b604e06e5adf554d",
+    "bytes": 2156
+  },
+  "HANDOFF.md": {
+    "sha256": "3f31fa20949ab204c0f9610ad61584f2073b128c237b156d5e564345ac5a4e10",
+    "bytes": 3436
+  },
+  "fixed-target-summary.json": {
+    "sha256": "820c364c25b2dee304ecdd460d5293d3f5fa442452ef74ea04cfbe3c822c62f9",
+    "bytes": 600
+  },
+  "cache-inventory.json": {
+    "sha256": "6b5ac5b2daeadab9032e5b4c56c554f67a34833e7760ffc6a6680b469c4fe203",
+    "bytes": 497
+  },
+  "PATH-MATCHED-REVIEW.md": {
+    "sha256": "742ae5de5c2b1228a7e8b343f88caf9b3633e69dee90de02376299d3cd0ffb49",
+    "bytes": 3242
+  },
+  "FINAL-SCRIPT-REVIEW.md": {
+    "sha256": "9164f7d476729318b3f790fd5631c1de498d13272e4081597d99cb731d9cc2db",
+    "bytes": 2553
+  }
+}

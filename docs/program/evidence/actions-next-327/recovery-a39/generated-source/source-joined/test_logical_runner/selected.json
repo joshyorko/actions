@@ -1,0 +1,10 @@
+[
+  "tests/action_server_tests/test_logical_runner.py::test_preparation_renews_both_sql_fences_on_main_thread[sqlite]",
+  "tests/action_server_tests/test_logical_runner.py::test_preparation_renews_both_sql_fences_on_main_thread[postgresql]",
+  "tests/action_server_tests/test_logical_runner.py::test_preparation_abort_settles_without_launch[sqlite-deadline]",
+  "tests/action_server_tests/test_logical_runner.py::test_preparation_abort_settles_without_launch[sqlite-callback]",
+  "tests/action_server_tests/test_logical_runner.py::test_preparation_abort_settles_without_launch[sqlite-claim-loss]",
+  "tests/action_server_tests/test_logical_runner.py::test_preparation_abort_settles_without_launch[postgresql-deadline]",
+  "tests/action_server_tests/test_logical_runner.py::test_preparation_abort_settles_without_launch[postgresql-callback]",
+  "tests/action_server_tests/test_logical_runner.py::test_preparation_abort_settles_without_launch[postgresql-claim-loss]"
+]

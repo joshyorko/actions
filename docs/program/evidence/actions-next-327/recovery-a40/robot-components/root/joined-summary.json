@@ -1,0 +1,117 @@
+{
+  "source": "9340bc8aac7a4534b50f27bef522f1a942f20afa",
+  "tree": "76dd7a1d794d8dfec2078c5bc71367e297d64d8b",
+  "container": "4ba587dcb597dbb075d92a15987cdad0f868f88025f5f29115cdb82635b1b61e",
+  "image": "postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81",
+  "batches": [
+    {
+      "module": "test_robot_package_builder",
+      "command": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "/workspace/actions-cloud/package-command.py",
+        "action_server",
+        "run",
+        "python",
+        "/workspace/actions-327-a40/robot-joined/selected-pytest.py",
+        "tests/contract_tests/test_robot_package_builder.py",
+        "-k",
+        "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+        "-p",
+        "no:robocorp_log_pytest",
+        "-q",
+        "--tb=short",
+        "--junitxml=/workspace/actions-327-a40/robot-joined/test_robot_package_builder/tests.xml",
+        "--basetemp=/workspace/actions-327-a40/robot-joined/test_robot_package_builder/fixtures"
+      ],
+      "exit_code": 0,
+      "minimum_free_bytes": 7664357376,
+      "stop_reason": null,
+      "source_sha256": "de6378808d2b8a6bf87125625be9c7e6f277cf4991d926951603af2689e79475",
+      "counts": {
+        "tests": 15,
+        "failure": 0,
+        "error": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "module": "test_robot_lifecycle",
+      "command": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "/workspace/actions-cloud/package-command.py",
+        "action_server",
+        "run",
+        "python",
+        "/workspace/actions-327-a40/robot-joined/selected-pytest.py",
+        "tests/contract_tests/test_robot_lifecycle.py",
+        "-k",
+        "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+        "-p",
+        "no:robocorp_log_pytest",
+        "-q",
+        "--tb=short",
+        "--junitxml=/workspace/actions-327-a40/robot-joined/test_robot_lifecycle/tests.xml",
+        "--basetemp=/workspace/actions-327-a40/robot-joined/test_robot_lifecycle/fixtures"
+      ],
+      "exit_code": 0,
+      "minimum_free_bytes": 7663702016,
+      "stop_reason": null,
+      "source_sha256": "c7a8b3a093b751cb1b42a8bbc5cf98ae256bd666b3004089cad0408d05a1ecfe",
+      "counts": {
+        "tests": 7,
+        "failure": 0,
+        "error": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "module": "test_robot_journal",
+      "command": [
+        "rcc",
+        "task",
+        "script",
+        "-r",
+        "developer/toolkit.yaml",
+        "--",
+        "python",
+        "/workspace/actions-cloud/package-command.py",
+        "action_server",
+        "run",
+        "python",
+        "/workspace/actions-327-a40/robot-joined/selected-pytest.py",
+        "tests/contract_tests/test_robot_journal.py",
+        "-k",
+        "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+        "-p",
+        "no:robocorp_log_pytest",
+        "-q",
+        "--tb=short",
+        "--junitxml=/workspace/actions-327-a40/robot-joined/test_robot_journal/tests.xml",
+        "--basetemp=/workspace/actions-327-a40/robot-joined/test_robot_journal/fixtures"
+      ],
+      "exit_code": 0,
+      "minimum_free_bytes": 7652491264,
+      "stop_reason": null,
+      "source_sha256": "2dd04c1293dd0eccb638973b6a3d93c29b7950ffcafd02e49cd43193e54b21d9",
+      "counts": {
+        "tests": 42,
+        "failure": 0,
+        "error": 0,
+        "skipped": 0
+      }
+    }
+  ],
+  "cleanup_exit": 0
+}

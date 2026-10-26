@@ -1,0 +1,4 @@
++ poetry run pytest tests/action_server_tests/test_runtime_managed_bootstrap.py tests/action_server_tests/test_generic_execution_port.py tests/action_server_tests/test_managed_generic_composite.py -q -k not real --robocorp-log-output=/workspace/actions-recovery-327/evidence/a27-wiring-logs (in /workspace/actions/action_server)
+.s.s..s..ss.s.s.s.s.sss.s.s....ssss..ss.s..ss                            [100%]
+22 passed, 23 skipped in 25.07s
+Log (html): /workspace/actions-recovery-327/evidence/a27-wiring-logs/log.html

@@ -1,0 +1,36 @@
+{
+  "module": "test_knowledge_postgres",
+  "command": [
+    "rcc",
+    "task",
+    "script",
+    "-r",
+    "developer/toolkit.yaml",
+    "--",
+    "python",
+    "/workspace/actions-cloud/package-command.py",
+    "action_server",
+    "run",
+    "python",
+    "/workspace/actions-327-recovery-evidence/selected-pytest.py",
+    "tests/action_server_tests/test_knowledge_postgres.py",
+    "-k",
+    "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+    "-p",
+    "no:robocorp_log_pytest",
+    "-q",
+    "--tb=short",
+    "--junitxml=/workspace/actions-327-knowledge-corrected/test_knowledge_postgres/tests.xml",
+    "--basetemp=/workspace/actions-327-knowledge-corrected/test_knowledge_postgres/fixtures"
+  ],
+  "exit_code": 0,
+  "minimum_free_bytes": 29107314688,
+  "stop_reason": null,
+  "source_sha256": "bd905c723a3b4e91cbee87f7b88bef447a845d916e9630cdf0417a6906f4fca2",
+  "counts": {
+    "tests": 6,
+    "failure": 0,
+    "error": 0,
+    "skipped": 0
+  }
+}

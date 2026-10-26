@@ -1,0 +1,66 @@
+{
+  "status": "FAIL",
+  "runtime_version": "1.1.0a41",
+  "engine_origin": "/workspace/actions-327-a41/installed-v2/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+  "source": "f905c3888ecb448dbce80ce57a9b59ff041eb148",
+  "installed_versions": {
+    "mcp": "2.3.0",
+    "mcp-types": "2.3.0",
+    "actions-core": "1.1.0a5"
+  },
+  "synthetic_owned_auth": true,
+  "processes": [
+    {
+      "pid": 87704,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.21421763400030613,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 87715,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.1651067780003359,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 87876,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.16431774500051688,
+      "lifespan_shutdown_complete": true
+    }
+  ],
+  "calls": [
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    }
+  ],
+  "actual_generated_execution": "NOT_PROVEN",
+  "prepared_artifact": "sha256:528f65f91900e24f0168f8c87b5496f3ce1f02f9b156a2f2de93923a07285d60",
+  "prepared_specification": "sha256:be53aff61f24fb805ca5e33ad82888b86357780df42120904022769b9fc6f0b3",
+  "workspace": "0ec16083-4989-41d1-a5b8-b074a2cbb180",
+  "profile_setup": "explicit public offline owner authorization; no SQL writes or source/result/review/admission seeding",
+  "failure_type": "CalledProcessError",
+  "budget": {
+    "fixture_bytes": 863987,
+    "log_bytes_upper_bound": 15464
+  }
+}

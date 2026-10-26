@@ -1,0 +1,21 @@
++ /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python -m ruff check developer (in /workspace/actions)
+All checks passed!
++ /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python -m pytest developer/tests (in /workspace/actions)
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.3.4, pluggy-1.6.0
+rootdir: /workspace/actions
+plugins: anyio-4.15.1, platformdirs-4.12.4
+collected 185 items
+
+developer/tests/test_canvas_published_workflow.py ...................... [ 11%]
+.............................................................            [ 44%]
+developer/tests/test_community_execution_graph.py .                      [ 45%]
+developer/tests/test_coverage_gate.py .......                            [ 49%]
+developer/tests/test_evidence_publication.py ......                      [ 52%]
+developer/tests/test_frozen_wrapper_metadata.py .......                  [ 56%]
+developer/tests/test_rcc_provider_rollback_summary.py .................. [ 65%]
+................................                                         [ 83%]
+developer/tests/test_rcc_provider_rollback_workflow.py .....             [ 85%]
+developer/tests/test_toolkit_contract.py ..........................      [100%]
+
+============================= 185 passed in 28.71s =============================

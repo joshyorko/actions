@@ -1,0 +1,5 @@
+# Foundation integration boundary
+
+The ten source/schema/fixture files are committed directly; external delivery patches are not duplicated. Original helper logs/XML are base64 encoded here, preserving failures and final successes. SHA256SUMS refers to original delivery filenames/decoded bytes; receipt-map.json maps encoded receipts. Helper qualification used isolated base a5eaa1cb plus this foundation (Core433pass; Canvas94pass/one existing skip). Root configured typecheck passed584files after adding an explicit ModuleSpec/loader guard to the earlier B test; its18 cases passed. Root typecheck also saw queued, separately qualified D test changes not included in this foundation commit.
+
+Runtime authoring retained readers, renderer and dynamic projections are not migrated here; v2 source is not installed acceptance. Frozen a5eaa1cb wheels/clean-e2e run remain independent. Core/runtime versions will advance for the next joined installed candidate; no wheel rebuild or public publication is claimed by this source checkpoint.

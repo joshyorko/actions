@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "wheels": {
+    "wheels/action_server/actions_runtime-1.1.0a50-cp312-cp312-linux_x86_64.whl": {
+      "wheel_sha256": "224c10ff2a170ab6525e7b3450d8ed51074e74ccb0d3513ebe2ecc0222efc29e",
+      "payload_members_verified": 338
+    },
+    "wheels/actions/actions_core-1.1.0a8-py3-none-any.whl": {
+      "wheel_sha256": "42e550a8c207849e0a428fa702827ff2f77d98a00fd63aa0f85a912c0719419f",
+      "payload_members_verified": 87
+    },
+    "wheels/work-items/actions_work_items-0.5.0a2-py3-none-any.whl": {
+      "wheel_sha256": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb",
+      "payload_members_verified": 26
+    }
+  },
+  "versions": {
+    "actions-runtime": "1.1.0a50",
+    "actions-core": "1.1.0a8",
+    "actions-work-items": "0.5.0a2"
+  }
+}

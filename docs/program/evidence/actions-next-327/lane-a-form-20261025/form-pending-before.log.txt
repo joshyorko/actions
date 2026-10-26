@@ -1,0 +1,152 @@
+"/workspace/lane-a/developer/toolkit.yaml" as robot.yaml is:
+# Repository developer toolkit.
+#
+# RCC owns the reproducible toolchain and task boundary. Poetry remains the
+# dependency and package-release authority inside each package.
+
+tasks:
+  Doctor:
+    shell: python toolkit.py doctor
+
+devTasks:
+  Doctor:
+    shell: python toolkit.py doctor
+  Bootstrap:
+    shell: python toolkit.py bootstrap
+  Test:
+    shell: python toolkit.py test
+  ToolkitTest:
+    shell: python toolkit.py toolkit-test
+  Lint:
+    shell: python toolkit.py lint
+  Typecheck:
+    shell: python toolkit.py typecheck
+  Docs:
+    shell: python toolkit.py docs
+  CheckAll:
+    shell: python toolkit.py check-all
+  Coverage:
+    shell: python toolkit.py coverage
+  FrontendTest:
+    shell: python toolkit.py frontend-test
+  InstallCommunity:
+    shell: python toolkit.py install-community
+  InvoiceQueryTest:
+    shell: python toolkit.py invoice-query-test
+  InvoiceReconciliationDemo:
+    shell: python toolkit.py invoice-reconciliation-demo
+  FencedWorkItemsTest:
+    shell: python toolkit.py fenced-work-items-test
+
+environmentConfigs:
+  - setup_windows_amd64.yaml
+  - setup.yaml
+
+artifactsDir: tmp
+
+PATH:
+  - .
+PYTHONPATH:
+  - .
+ignoreFiles:
+  - ../.gitignore
+
+Note! For now, resolved effective environment configuration file is "/workspace/lane-a/developer/setup.yaml".
+####  Progress: 00/15  v18.19.3     0.025s  Context: "" <agent@71cd163cf8ad> [linux_amd64/Debian GNU/Linux 13 (trixie) [id=debian; version=13]].
+####  Progress: 01/15  v18.19.3     0.001s  Fresh [private mode] holotree environment 9a080d0f-3bcf-90aa-16c6-25dc61b0ece5. (parent/pid: 8416/8419)
+####  Progress: 02/15  v18.19.3     0.001s  Holotree blueprint is "318089d9095ad813" [linux_amd64 with 4 workers on 5 CPUs from "setup.yaml"].
+FINAL unified conda environment descriptor:
+---
+channels:
+- conda-forge
+dependencies:
+- python=3.12
+- git=2.46.0
+- nodejs=20.19.3
+- go=1.23.6
+- jq=1.7.1
+- uv=0.9.26
+- pip=25.0
+- pip:
+  - invoke==2.2.0
+  - poetry==2.1.1
+  - pyyaml==6.0.2
+  - pytest==8.3.4
+  - ruff==0.8.6
+---
+####  Progress: 14/15  v18.19.3     0.440s  Restore space from library [with 4 workers on 5 CPUs; with compression: true].
+Installation plan is: /workspace/lane-a-state/rcc/holotree/c2fd1aa_5a1fac3_9fcd2534/rcc_plan.log
+Environment configuration descriptor is: /workspace/lane-a-state/rcc/holotree/c2fd1aa_5a1fac3_9fcd2534/identity.yaml
+####  Progress: 15/15  v18.19.3     0.743s  Fresh holotree done [with 4 workers on 5 CPUs].
+Note: [Before run] Artifact dir "/workspace/lane-a/developer/tmp" already has "environment_linux_amd64_freeze.yaml" in it.
+Note: [Before run] Artifact dir "/workspace/lane-a/developer/tmp" already has "stderr.log" in it.
+Note: [Before run] Artifact dir "/workspace/lane-a/developer/tmp" already has "stdout.log" in it.
+Above notes mean, that there were files present in directory that was supposed to be empty!
+In robot development phase, it might be ok to have these files while building robot.
+In production robot/assistant, this might be a mistake, where development files were
+left inside robot.zip file. Report these to developer who made this robot/assistant.
+
+[WebServer] (node:8466) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] Browserslist: browsers data (caniuse-lite) is 10 months old. Please run:
+[WebServer]   npx update-browserslist-db@latest
+[WebServer]   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+
+Running 1 test using 1 worker
+
+[1/1] apps/canvas-view/src/semantic-renderer/browser-harness.spec.ts:81:1 › announces pending work and completion without dispatch on mount
+  1) apps/canvas-view/src/semantic-renderer/browser-harness.spec.ts:81:1 › announces pending work and completion without dispatch on mount
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  getByRole('region', { name: 'Search synthetic records', exact: true }).locator('form')
+    Expected: "true"
+    Received: ""
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for getByRole('region', { name: 'Search synthetic records', exact: true }).locator('form')
+        14 × locator resolved to <form novalidate="">…</form>
+           - unexpected value "null"
+
+
+      86 |     await form.getByRole("button").click();
+      87 |     await page.screenshot({ path: testInfo.outputPath("form-loading.png"), fullPage: true });
+    > 88 |     await expect(form.locator("form")).toHaveAttribute("aria-busy", "true");
+         |                                        ^
+      89 |     await expect(form.getByRole("status")).toHaveText("Search synthetic records: working…");
+      90 |     await expect(form.getByRole("textbox")).toBeDisabled();
+      91 |     await expect(form.getByRole("button")).toBeDisabled();
+        at /workspace/lane-a/action_server/frontend/apps/canvas-view/src/semantic-renderer/browser-harness.spec.ts:88:40
+
+    Error Context: ../../../lane-a-state/receipts/form-pending-before/browser-harness-announces--e4798-n-without-dispatch-on-mount/error-context.md
+
+
+  1 failed
+    apps/canvas-view/src/semantic-renderer/browser-harness.spec.ts:81:1 › announces pending work and completion without dispatch on mount
+Process 8429: exit status 1, command: /usr/bin/bash [-c cd /workspace/lane-a/action_server/frontend && npx --no-install playwright test --config apps/canvas-view/src/semantic-renderer/playwright.config.ts --grep "pending work" --output=/workspace/lane-a-state/receipts/form-pending-before --reporter=line,junit --trace=off] [v18.19.3/8419]
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@  From rcc "v18.19.3" (controller: "user") point of view, "actual main robot run" was FAILURE, reason: "exit status 1". See details above.  @@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Warning: "rcc" process 8419 (parent 8416) still has running migrated processes:
+Warning: + migrated process still running:
+Warning: | #8465  "sh" <leaf -> new parent PID: #1>
+Warning: | #8466  "node" <leaf -> new parent PID: #1>
+Warning: | #8518  "chromium" <leaf -> new parent PID: #1>
+Warning: | #8519  "chromium" <leaf -> new parent PID: #1>
+Note: Depending on OS, above processes may prevent robot to close properly.
+Note: Few reasons why this might be happening are:
+Note: - robot is not properly releasing all resources that it is using
+Note: - robot is generating background processes that don't complete before robot tries to exit
+Note: - there was failure inside robot, which caused robot to exit without proper cleanup
+Note: - developer intentionally left processes running, which is not good for repeatable automation
+So if you see this message, and robot still seems to be running, it is not!
+You now have to take action and stop those processes that are preventing robot to complete.
+Example cleanup command: kill -9 8465 8466 8518 8519
+  |  "Build/Pre-run"  relative time allocation ratio:  1:0
+  |  "Setup/Run"  relative time allocation ratio:  3:26
+Note: Now running rcc v18.19.3. There is newer rcc version v18.19.7 available, released at 15.10.2026.
+Error: exit status 1 (robot run exit)
+[rcc] exit status will be: 10!

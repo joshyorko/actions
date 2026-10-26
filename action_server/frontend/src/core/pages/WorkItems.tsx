@@ -270,6 +270,7 @@ interface CreateItemDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   defaultQueueName?: string;
+  onCreated: (item: WorkItemResponse) => void;
 }
 
 function CreateItemDialog({
@@ -277,6 +278,7 @@ function CreateItemDialog({
   open,
   onOpenChange,
   defaultQueueName,
+  onCreated,
 }: CreateItemDialogProps): JSX.Element {
   const formId = useId();
   const errorId = `${formId}-error`;
@@ -305,8 +307,9 @@ function CreateItemDialog({
       createMutation.mutate(
         { queue_name: queueName, payload },
         {
-          onSuccess: () => {
+          onSuccess: (item) => {
             handleClose();
+            onCreated(item);
           },
           onError: (error) => {
             setValidationError(error.message);
@@ -552,7 +555,8 @@ function ItemDetailDialog({ open, onOpenChange, item }: ItemDetailDialogProps): 
 
 // Main WorkItems Page
 export function WorkItemsPage(): JSX.Element {
-  const [selectedQueue, setSelectedQueue] = useState<string>('all');
+  const [selectedQueue, setSelectedQueue] = useState<string>('');
+  const [queueToOpen, setQueueToOpen] = useState('');
   const [stateFilter, setStateFilter] = useState<WorkItemState | 'all'>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedItem, setSelectedItem] = useState<WorkItemResponse | null>(null);
@@ -560,20 +564,63 @@ export function WorkItemsPage(): JSX.Element {
   const [createDialogOpen, setCreateDialogOpen] = useState(false);
 
   const { data: itemsData, isLoading, error, refetch } = useWorkItems(
-    selectedQueue !== 'all' ? selectedQueue : undefined,
+    selectedQueue || undefined,
     stateFilter,
     100
   );
   const { data: statsData } = useWorkItemStats(
-    selectedQueue !== 'all' ? selectedQueue : undefined
+    selectedQueue || undefined
   );
 
   // Extract unique queue names
   const queueNames = useMemo(() => {
-    if (!itemsData?.items) return ['all'];
-    const names = new Set(itemsData.items.map((item) => item.queue_name));
-    return ['all', ...Array.from(names)];
-  }, [itemsData]);
+    const names = new Set((itemsData?.items ?? []).map((item) => item.queue_name));
+    if (selectedQueue) names.add(selectedQueue);
+    return ['', ...Array.from(names).sort()];
+  }, [itemsData, selectedQueue]);
+
+  const selectQueue = (queue: string) => {
+    setSelectedQueue(queue);
+    setQueueToOpen(queue);
+    setStateFilter('all');
+    setSearchQuery('');
+  };
+
+  const queueControls = (
+    <div className="flex flex-wrap items-center gap-2">
+      <Select aria-label="Queue" value={selectedQueue} onValueChange={selectQueue} className="w-[180px]">
+        {queueNames.map((name) => (
+          <SelectItem key={name} value={name}>
+            {name || 'Runtime default'}
+          </SelectItem>
+        ))}
+      </Select>
+      <form className="flex gap-2" onSubmit={(event) => {
+        event.preventDefault();
+        if (queueToOpen.trim()) selectQueue(queueToOpen);
+      }}>
+        <Input aria-label="Queue to open" value={queueToOpen}
+          onChange={(event) => setQueueToOpen(event.target.value)}
+          placeholder="Queue name" className="w-[180px]" />
+        <Button type="submit" variant="outline" disabled={!queueToOpen.trim()}>Open queue</Button>
+      </form>
+    </div>
+  );
+
+  const stateControl = (
+    <Select
+      aria-label="State"
+      value={stateFilter}
+      onValueChange={(value) => setStateFilter(value as WorkItemState | 'all')}
+      className="w-[150px]"
+    >
+      <SelectItem value="all">All States</SelectItem>
+      <SelectItem value="PENDING">Pending</SelectItem>
+      <SelectItem value="IN_PROGRESS">In Progress</SelectItem>
+      <SelectItem value="DONE">Done</SelectItem>
+      <SelectItem value="FAILED">Failed</SelectItem>
+    </Select>
+  );
 
   // Filter items by search query
   const filteredItems = useMemo(() => {
@@ -644,6 +691,8 @@ export function WorkItemsPage(): JSX.Element {
   if (itemsData.items.length === 0) {
     return (
       <div className="h-full space-y-4 p-6 animate-fadeInUp">
+        {queueControls}
+        {stateControl}
         <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-border bg-muted/30 p-12 text-center min-h-[400px]">
           <div className="mb-4 rounded-full bg-primary/10 p-4">
             <QueueIcon className="h-8 w-8 text-primary" />
@@ -653,9 +702,11 @@ export function WorkItemsPage(): JSX.Element {
             Start automating workflows by creating your first work item
           </p>
           <CreateItemDialog
+            key={selectedQueue}
             open={createDialogOpen}
             onOpenChange={setCreateDialogOpen}
-            defaultQueueName={selectedQueue !== 'all' ? selectedQueue : undefined}
+            onCreated={(item) => selectQueue(item.queue_name)}
+            defaultQueueName={selectedQueue || undefined}
           >
             <Button className="mt-6">
               <PlusIcon className="h-4 w-4 mr-2" />
@@ -671,7 +722,7 @@ export function WorkItemsPage(): JSX.Element {
     <div className="h-full space-y-6 p-6 animate-fadeInUp">
       {/* Page Header */}
       <div className="rounded-lg border border-border bg-card p-6 shadow-sm">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="rounded-full bg-primary/10 p-2">
               <QueueIcon className="h-5 w-5 text-primary" />
@@ -683,18 +734,14 @@ export function WorkItemsPage(): JSX.Element {
               </p>
             </div>
           </div>
-          <div className="flex gap-2">
-            <Select value={selectedQueue} onValueChange={setSelectedQueue} className="w-[180px]">
-              {queueNames.map((name) => (
-                <SelectItem key={name} value={name}>
-                  {name === 'all' ? 'All Queues' : name}
-                </SelectItem>
-              ))}
-            </Select>
+          <div className="flex flex-wrap gap-2">
+            {queueControls}
             <CreateItemDialog
+              key={selectedQueue}
               open={createDialogOpen}
               onOpenChange={setCreateDialogOpen}
-              defaultQueueName={selectedQueue !== 'all' ? selectedQueue : undefined}
+              onCreated={(item) => selectQueue(item.queue_name)}
+              defaultQueueName={selectedQueue || undefined}
             >
               <Button>
                 <PlusIcon className="h-4 w-4 mr-2" />
@@ -707,7 +754,7 @@ export function WorkItemsPage(): JSX.Element {
         {/* Stats Overview */}
         {statsData && (
           <div className="mt-4 text-xs text-muted-foreground">
-            {selectedQueue === 'all' ? 'All Queues' : statsData.queue_name}: {statsData.total}{' '}
+            {selectedQueue || statsData.queue_name}: {statsData.total}{' '}
             items ({statsData.pending} pending, {statsData.in_progress} active,{' '}
             {statsData.done} done, {statsData.failed} failed)
           </div>
@@ -748,17 +795,7 @@ export function WorkItemsPage(): JSX.Element {
       <div className="rounded-lg border border-border bg-card shadow-sm">
         <div className="flex flex-col gap-4 border-b border-border p-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex gap-2">
-            <Select
-              value={stateFilter}
-              onValueChange={(value) => setStateFilter(value as WorkItemState | 'all')}
-              className="w-[150px]"
-            >
-              <SelectItem value="all">All States</SelectItem>
-              <SelectItem value="PENDING">Pending</SelectItem>
-              <SelectItem value="IN_PROGRESS">In Progress</SelectItem>
-              <SelectItem value="DONE">Done</SelectItem>
-              <SelectItem value="FAILED">Failed</SelectItem>
-            </Select>
+            {stateControl}
             <Input
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}

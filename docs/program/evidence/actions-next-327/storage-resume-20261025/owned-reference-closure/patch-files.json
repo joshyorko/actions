@@ -1,0 +1,94 @@
+{
+  "work-items/scripts/check_contract_port_provenance.py": {
+    "baseline_sha256": "a6c8d73bb01f4f2df7c6e93562ee0ca3015670cba51ef6175f703dfbe4e9d144",
+    "candidate_sha256": "5dbda50c0ffaf22ab4e29dcf19ebff57db9a2c3f04a0f31e6e3a6e1cf5b46ce8"
+  },
+  ".github/workflows/work_items_release.yml": {
+    "baseline_sha256": "e30cf818b7d81e3b910bdef8d2f78a9c32c8f52dd119de8b8a75a94b616e10c0",
+    "candidate_sha256": "9b2fdfe6102bb14d71c65c42b61be49cb35acaf1570780acff08e3184347d72e"
+  },
+  "work-items/tests/work_items_tests/test_owned_contract_reference.py": {
+    "baseline_sha256": null,
+    "candidate_sha256": "8a24c99e4c37681119802f6f93b7874231f28d503d5d5061d022df4381264b60"
+  },
+  "work-items/contracts/references/robocorp-1.5.0/README.md": {
+    "baseline_sha256": null,
+    "candidate_sha256": "1bacd821b64b50ac5d05545573118bb7023786b7df3b340f81b0321f6635d4f3"
+  },
+  "work-items/contracts/references/robocorp-1.5.0/inventory.json": {
+    "baseline_sha256": null,
+    "candidate_sha256": "d43b929dda3067c8a05f85b050aa030f96345f8439575af92347902bcd58dec1"
+  },
+  "work-items/contracts/references/robocorp-1.5.0/object-proof.json": {
+    "baseline_sha256": null,
+    "candidate_sha256": "89b40e8f733248da408557de6c00cf4c9e210a5c228032b275e35f355133a6d4"
+  },
+  "work-items/contracts/references/robocorp-1.5.0/payload/LICENSE": {
+    "baseline_sha256": null,
+    "candidate_sha256": "3e4fd3f14628823f070a603435a95eff548eae90ba23d7fcbca2f1526c136f3e"
+  },
+  "work-items/contracts/references/robocorp-1.5.0/payload/workitems/src/robocorp/workitems/__init__.py": {
+    "baseline_sha256": null,
+    "candidate_sha256": "ed6b3e41e0e8cf159298d2033eb1286645747a710c1ece63e58c1c0529774c8e"
+  },
+  "work-items/contracts/references/robocorp-1.5.0/payload/workitems/src/robocorp/workitems/_adapters/__init__.py": {
+    "baseline_sha256": null,
+    "candidate_sha256": "e9ed84936ac313503e4854828f12de7fd281e52007b844008d84de5a6604b88f"
+  },
+  "work-items/contracts/references/robocorp-1.5.0/payload/workitems/src/robocorp/workitems/_adapters/_base.py": {
+    "baseline_sha256": null,
+    "candidate_sha256": "cf29489e07bd9f75a1ef0ceac8a43187d22962d37d6ef19ba8a2b9315fc1437c"
+  },
+  "work-items/contracts/references/robocorp-1.5.0/payload/workitems/src/robocorp/workitems/_adapters/_file.py": {
+    "baseline_sha256": null,
+    "candidate_sha256": "93c45887f447d22a4b8e5c0cdf94aa068134f0e830ddde4ddd8bf86661dd6b05"
+  },
+  "work-items/contracts/references/robocorp-1.5.0/payload/workitems/src/robocorp/workitems/_adapters/_robocorp.py": {
+    "baseline_sha256": null,
+    "candidate_sha256": "be846e15d7cffc8e4dcc96cec8f4c8ba7f0e21869883b87a10715eaaec63e4b1"
+  },
+  "work-items/contracts/references/robocorp-1.5.0/payload/workitems/src/robocorp/workitems/_context.py": {
+    "baseline_sha256": null,
+    "candidate_sha256": "c4672f3e59f7594e22c840e9d46e41ddfd985c90d35d9469236f50230c1bcaee"
+  },
+  "work-items/contracts/references/robocorp-1.5.0/payload/workitems/src/robocorp/workitems/_exceptions.py": {
+    "baseline_sha256": null,
+    "candidate_sha256": "919dd177103beb9345eef024cf79aeb34a8aac513708bc6ddfab8bad8232d63a"
+  },
+  "work-items/contracts/references/robocorp-1.5.0/payload/workitems/src/robocorp/workitems/_requests.py": {
+    "baseline_sha256": null,
+    "candidate_sha256": "105799aca14dd8f6bb2f170e2d429187b21ead9e65d47722c4728c20cbe12b16"
+  },
+  "work-items/contracts/references/robocorp-1.5.0/payload/workitems/src/robocorp/workitems/_types.py": {
+    "baseline_sha256": null,
+    "candidate_sha256": "fd08d13124ee279194ce2aea7535013babe8c33d89898bd7d762d18fbd7bc45e"
+  },
+  "work-items/contracts/references/robocorp-1.5.0/payload/workitems/src/robocorp/workitems/_utils.py": {
+    "baseline_sha256": null,
+    "candidate_sha256": "7338e2099936fd0c6c42e7bbe8883ccc2ec89bc459e447b3f62cdccde152d3ec"
+  },
+  "work-items/contracts/references/robocorp-1.5.0/payload/workitems/src/robocorp/workitems/_workitem.py": {
+    "baseline_sha256": null,
+    "candidate_sha256": "d7a67468f188ef1428bb59edf1962be276b82601d3c2d600d3e2e78c8b5f91fd"
+  },
+  "work-items/contracts/references/robocorp-1.5.0/payload/workitems/tests/workitems_tests/fixtures.py": {
+    "baseline_sha256": null,
+    "candidate_sha256": "931127602e4c3f8a7f35e2dde4a1da9c8619ba17dc92a44382428aaca121b1c6"
+  },
+  "work-items/contracts/references/robocorp-1.5.0/payload/workitems/tests/workitems_tests/mocks.py": {
+    "baseline_sha256": null,
+    "candidate_sha256": "220e13db529310b90180bc89c7c8d7d83fc9ddaa68e0c6b03f0fa0a0bb583c49"
+  },
+  "work-items/contracts/references/robocorp-1.5.0/payload/workitems/tests/workitems_tests/test_adapters.py": {
+    "baseline_sha256": null,
+    "candidate_sha256": "cce12794e13e99bf7b8db17125b79d6de5a2c8f24746a65aaddbb8f36911edfe"
+  },
+  "work-items/contracts/references/robocorp-1.5.0/payload/workitems/tests/workitems_tests/test_email.py": {
+    "baseline_sha256": null,
+    "candidate_sha256": "971d12d690a6865ec661f1d7d3557e34f87c493a55e24ba172cca6344ed755af"
+  },
+  "work-items/contracts/references/robocorp-1.5.0/payload/workitems/tests/workitems_tests/test_workitems.py": {
+    "baseline_sha256": null,
+    "candidate_sha256": "75a8974f9f581ca939a6825dda51a223eb79e3e5c47f4130735fd6dc9500c75d"
+  }
+}

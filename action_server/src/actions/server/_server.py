@@ -20,6 +20,10 @@ from ._protocols import ArgumentsNamespaceStart, IBeforeStartCallback
 if typing.TYPE_CHECKING:
     from asyncio.events import AbstractEventLoop
 
+    from .data_queries.canvas_mcp import InvoiceCanvasMcp
+    from .foundry.mcp import CanvasMcp
+    from .managed_work_items.api import Authenticate as ManagedAuthenticate
+    from .managed_work_items.contracts import ManagedWorkItemsPort
     from .run_outputs.transport import RunOutputTransport
 
 log = logging.getLogger(__name__)
@@ -100,10 +104,13 @@ def _reload_action_generation(
 class _ConfiguredAPIKeyMiddleware:
     """Reject protected requests before FastAPI can parse their body."""
 
-    def __init__(self, app, api_key: str, browser_sessions=None):
+    def __init__(
+        self, app, api_key: str, browser_sessions=None, managed_authenticate=None
+    ):
         self.app = app
         self.api_key = api_key
         self.browser_sessions = browser_sessions
+        self.managed_authenticate = managed_authenticate
 
     @staticmethod
     def _is_public(path: str) -> bool:
@@ -130,6 +137,27 @@ class _ConfiguredAPIKeyMiddleware:
         )
         if protected and not self._is_public(path) and not is_cors_preflight:
             from ._api_action_routes import _get_bearer_token
+            from .managed_work_items.contracts import API_PREFIX, ManagedCaller
+
+            if self.managed_authenticate is not None and (
+                path == API_PREFIX or path.startswith(API_PREFIX + "/")
+            ):
+                from starlette.requests import Request
+
+                try:
+                    # No receive callback: authentication cannot consume an
+                    # unbounded body before the managed router's byte limit.
+                    identity = await self.managed_authenticate(Request(scope))
+                    managed_authorized = isinstance(identity, ManagedCaller)
+                except Exception:
+                    managed_authorized = False
+                if not managed_authorized:
+                    await PlainTextResponse(
+                        "Invalid or missing managed identity", status_code=401
+                    )(scope, receive, send)
+                    return
+                await self.app(scope, receive, send)
+                return
 
             authorized = (
                 self.browser_sessions.authorized(scope)
@@ -449,8 +477,18 @@ async def _community_expose_lifespan(
             log.exception("Error listing subprocesses.")
 
         for child in children_processes:
+            try:
+                child_name = child.name()
+            except psutil.NoSuchProcess:
+                # Do not recapture a disappeared child's numeric PID for killing.
+                continue
+            except Exception:
+                log.exception("Error reading subprocess metadata: %s", child.pid)
+                continue
             log.info(
-                f"Killing sub-process when exiting action server: {child.name()} (pid: {child.pid})"
+                "Killing sub-process when exiting action server: %s (pid: %s)",
+                child_name,
+                child.pid,
             )
             try:
                 kill_process_and_subprocesses(child.pid)
@@ -471,6 +509,10 @@ def start_server(
     before_start: Sequence[IBeforeStartCallback],
     *,
     run_output_transport: "RunOutputTransport | None" = None,
+    invoice_canvas: "InvoiceCanvasMcp | None" = None,
+    canvas_foundry: "CanvasMcp | None" = None,
+    managed_work_items: "ManagedWorkItemsPort | None" = None,
+    managed_authenticate: "ManagedAuthenticate | None" = None,
 ) -> None:
     import threading
     from dataclasses import asdict
@@ -533,6 +575,35 @@ def start_server(
     log.debug(f"Starting server. Settings:\n{settings_str}")
 
     app = get_app()
+    task_service = None
+    if canvas_foundry is None and api_key:
+        from ._models import get_db
+        from .foundry.bootstrap import create_runtime_canvas
+
+        native_canvas = create_runtime_canvas(get_db(), settings.datadir, api_key)
+        if native_canvas is not None:
+            canvas_foundry = native_canvas.canvas
+            task_service = native_canvas.task_service
+            if (
+                task_service is not None
+                and run_output_transport is None
+                and invoice_canvas is None
+            ):
+                run_output_transport = native_canvas.run_output_transport
+            if managed_work_items is None and managed_authenticate is None:
+                managed_work_items = native_canvas.managed_work_items
+                managed_authenticate = native_canvas.managed_authenticate
+
+            @asynccontextmanager
+            async def _native_canvas_lifespan(_main_app: FastAPI):
+                try:
+                    native_canvas.start()
+                    yield
+                finally:
+                    native_canvas.close()
+
+            app.custom_lifespan.register(_native_canvas_lifespan)
+
     from ._browser_session import install_browser_sessions
 
     browser_sessions = install_browser_sessions(app, api_key)
@@ -541,6 +612,7 @@ def start_server(
             _ConfiguredAPIKeyMiddleware,
             api_key=api_key,
             browser_sessions=browser_sessions,
+            managed_authenticate=managed_authenticate,
         )
 
     from actions.server._artifact_storage import get_artifact_storage
@@ -575,7 +647,30 @@ def start_server(
 
         install_run_output_transport(app, run_output_transport, endpoint_dependencies)
 
-    action_routes = _ActionRoutes(whitelist, endpoint_dependencies)
+    if invoice_canvas is not None and invoice_canvas.download_base_url is not None:
+        if (
+            run_output_transport is None
+            or run_output_transport.canvas_scope != invoice_canvas.facade.scope
+            or run_output_transport.service is not invoice_canvas.facade.queries.outputs
+        ):
+            raise ValueError(
+                "invoice download requires the same scoped output transport"
+            )
+
+    if canvas_foundry is not None:
+        action_routes = _ActionRoutes(
+            whitelist,
+            endpoint_dependencies,
+            invoice_canvas=invoice_canvas,
+            canvas_foundry=canvas_foundry,
+            task_service=task_service,
+        )
+    elif invoice_canvas is None:
+        action_routes = _ActionRoutes(whitelist, endpoint_dependencies)
+    else:
+        action_routes = _ActionRoutes(
+            whitelist, endpoint_dependencies, invoice_canvas=invoice_canvas
+        )
     action_routes.setup_mcp_server(api_key)
     action_routes.register_actions()
 
@@ -597,6 +692,14 @@ def start_server(
             dependencies=endpoint_dependencies,
         )
 
+    from .managed_work_items.api import (
+        create_router as create_managed_work_items_router,
+    )
+
+    app.include_router(
+        create_managed_work_items_router(managed_work_items, managed_authenticate),
+        include_in_schema=settings.full_openapi_spec,
+    )
     app.include_router(
         run_api_router,
         include_in_schema=settings.full_openapi_spec,
@@ -749,9 +852,9 @@ def start_server(
         return payload
 
     async def serve_log_html(request: Request):
-        from robocorp.log import _index_v3 as index
+        from actions.server_integration import get_log_viewer_html
 
-        return HTMLResponse(index.FILE_CONTENTS["index.html"])
+        return HTMLResponse(get_log_viewer_html())
 
     IN_DEV = (
         False  # Set to True to auto-reload the action server UI on each new request.

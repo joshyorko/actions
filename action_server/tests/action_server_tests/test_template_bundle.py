@@ -110,7 +110,7 @@ def test_existing_template_archives_retain_authored_devdata():
             "devdata/input_create_repository_issue.json",
             "devdata/input_get_repository_commits.json",
         },
-        "basic": {"devdata/input_get_wikipedia_article_summary.json"},
+        "basic": {"devdata/input_count_words.json"},
         "minimal": {"devdata/input_greet.json"},
     }
     for template_id, expected_members in expected.items():

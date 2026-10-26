@@ -40,16 +40,24 @@ def test_runtime_distribution_and_embedded_rcc_identity_are_explicit():
     pyproject = tomllib.loads((ROOT / "action_server" / "pyproject.toml").read_text())[
         "tool"
     ]["poetry"]
-    runtime_init = (
-        ROOT / "action_server" / "src/actions/server/__init__.py"
-    ).read_text()
+    runtime_init = ROOT / "action_server" / "src/actions/server/__init__.py"
+    spec = importlib.util.spec_from_file_location("runtime_identity", runtime_init)
+    assert spec and spec.loader
+    runtime = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(runtime)
     rcc_download = (
         ROOT / "action_server" / "src/actions/server/_download_rcc.py"
     ).read_text()
 
     assert pyproject["name"] == "actions-runtime"
-    assert pyproject["version"] == "1.0.4"
-    assert '__version__ = "1.0.4"' in runtime_init
+    assert re.fullmatch(r"1\.1\.0a\d+", pyproject["version"])
+    assert runtime.__version__ == pyproject["version"]
+    assert runtime.version_info == [1, 1, 0]
+    # Candidate source advances independently of the exact published floor.
+    floor = (
+        ROOT / "action_server/scripts/verify_published_runtime_floor.py"
+    ).read_text()
+    assert 'EXPECTED_RUNTIME = "1.0.4"' in floor
     assert 'RCC_VERSION = "18.19.3"' in rcc_download
     assert "joshyorko/rcc/releases/download/v{RCC_VERSION}" in rcc_download
 

@@ -1,0 +1,45 @@
+{
+  "red": {
+    "selected": 19,
+    "passed": 0,
+    "failed": 0,
+    "errors": 19,
+    "skipped": 0
+  },
+  "first": {
+    "selected": 65,
+    "passed": 5,
+    "failed": 0,
+    "errors": 59,
+    "skipped": 1
+  },
+  "baseline": {
+    "selected": 9,
+    "passed": 1,
+    "failed": 8,
+    "errors": 0,
+    "skipped": 0
+  },
+  "baseline-old": {
+    "selected": 4,
+    "passed": 0,
+    "failed": 4,
+    "errors": 0,
+    "skipped": 0
+  },
+  "final": {
+    "selected": 66,
+    "passed": 61,
+    "failed": 4,
+    "errors": 0,
+    "skipped": 1
+  },
+  "final-fixed": {
+    "selected": 66,
+    "passed": 65,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 1
+  },
+  "overlapping_runs": true
+}

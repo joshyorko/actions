@@ -1,0 +1,1 @@
+Frozen provider setup, detached execution review and Task wire design handoffs. These are recovery artifacts, not root implementation or passing full campaign gates. Patch SHA identifies decompressed original bytes. The root integration owner must review and qualify before use; no provider engine or Task protocol readiness is claimed.

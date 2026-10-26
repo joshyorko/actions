@@ -1,0 +1,17 @@
+{
+  "owned_postgres_absent": true,
+  "rcc_reported_migrated_process": {
+    "pid": 22462,
+    "exists": false
+  },
+  "telemetry_samples": 57,
+  "telemetry_all_pass": true,
+  "max_postgres_filesystem_used_bytes": 539279360,
+  "final_postgres_filesystem_used_bytes": 539279360,
+  "supervised_process_receipt": {
+    "abort_reason": null,
+    "log_bytes": 42442,
+    "returncode": 10,
+    "shutdown": []
+  }
+}

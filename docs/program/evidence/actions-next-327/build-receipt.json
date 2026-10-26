@@ -1,0 +1,45 @@
+{
+  "source_sha": "f9aa2e7fa5873ad623042c24d84674c138e59188",
+  "rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+  "status": "PASS",
+  "commands": [
+    {
+      "command": [
+        "/home/kdlocpanda/worktrees/actions-release-327/action_server/.venv/bin/python",
+        "/home/kdlocpanda/.cache/actions-release-327/candidate-f9aa2e7fa587/source/action_server/scripts/build_oauth2_config.py"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "poetry",
+        "build",
+        "--output",
+        "/home/kdlocpanda/.cache/actions-release-327/candidate-f9aa2e7fa587/dist-a"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "poetry",
+        "build",
+        "--output",
+        "/home/kdlocpanda/.cache/actions-release-327/candidate-f9aa2e7fa587/dist-b"
+      ],
+      "exit": 0
+    }
+  ],
+  "source_archive_sha256": "a3b3d0920c6a6cf051740691f131e0d8f22e65f0023cbdd92cc77ab5816ccd1d",
+  "source_date_epoch": "1792517688",
+  "artifacts": {
+    "actions_runtime-1.0.4-cp312-cp312-linux_x86_64.whl": {
+      "sha256": "a8cb07c01aa6b20947ef4483526fa1d6aa1bcb99abcd5235f04743cff1457e29",
+      "size": 14446423
+    },
+    "actions_runtime-1.0.4.tar.gz": {
+      "sha256": "ac05edbb85a5c064f4b12ab2c606689132ee4d3245e3e2b4b6a75d076165f32c",
+      "size": 14313582
+    }
+  },
+  "repeated_build_identical": true
+}

@@ -1,0 +1,36 @@
+{
+  "module": "test_generated_knowledge_search_boundaries",
+  "command": [
+    "rcc",
+    "task",
+    "script",
+    "-r",
+    "developer/toolkit.yaml",
+    "--",
+    "python",
+    "/workspace/actions-cloud/package-command.py",
+    "action_server",
+    "run",
+    "python",
+    "/workspace/actions-327-a39/source-joined/selected-pytest.py",
+    "tests/action_server_tests/test_generated_knowledge_search_boundaries.py",
+    "-k",
+    "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+    "-p",
+    "no:robocorp_log_pytest",
+    "-q",
+    "--tb=short",
+    "--junitxml=/workspace/actions-327-a39/source-joined/test_generated_knowledge_search_boundaries/tests.xml",
+    "--basetemp=/workspace/actions-327-a39/source-joined/test_generated_knowledge_search_boundaries/fixtures"
+  ],
+  "exit_code": 0,
+  "minimum_free_bytes": 10156658688,
+  "stop_reason": null,
+  "source_sha256": "9ebaf66a131a0a4cd0ad46d937a5570b55c099307eddbbca60ee60b595314ca2",
+  "counts": {
+    "tests": 11,
+    "failure": 0,
+    "error": 0,
+    "skipped": 0
+  }
+}

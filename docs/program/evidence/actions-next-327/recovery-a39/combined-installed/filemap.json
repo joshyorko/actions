@@ -1,0 +1,587 @@
+[
+  {
+    "path": "build-installed-combined.py",
+    "decoded_sha256": "76659916482376b0149264e0adaa3d45f97e815222d3cd454d8185ccd1bac528",
+    "bytes": 3333
+  },
+  {
+    "path": "build-installed-combined.log.b64",
+    "decoded_sha256": "a42497d2e1ca8c348c0937203d1d0a406b4d6d22df062b19c175794ef285e8cb",
+    "bytes": 26206
+  },
+  {
+    "path": "compiler-publish.log.b64",
+    "decoded_sha256": "0ca9e3ffcd37a9abeb5d44096d591ca30b325d423781ba46d719675ab1301f66",
+    "bytes": 2823
+  },
+  {
+    "path": "compiler-core-proof.log.b64",
+    "decoded_sha256": "f6d0f20ac2bbafde23efd89df6a8c7aefd1f9c83d5582cd155e386e0fb7a4ffc",
+    "bytes": 254
+  },
+  {
+    "path": "compiler-core-proof-qualified.log.b64",
+    "decoded_sha256": "ef7467aeb2751cb2afc9677263830df2110719735f3e5bb93de774c9053dff2f",
+    "bytes": 954
+  },
+  {
+    "path": "compiler-core-proof-fixed.log.b64",
+    "decoded_sha256": "32e3895d1971e2d96eb7ad1057640a311af4405869c6b35575969f4552bc4cad",
+    "bytes": 103
+  },
+  {
+    "path": "restore-combined.log.b64",
+    "decoded_sha256": "0c837c5dae3b2ea1b99f75b233bd709dfe7003742ba0ec33ad2d8840c48c3079",
+    "bytes": 3983
+  },
+  {
+    "path": "build/build-inputs.json",
+    "decoded_sha256": "9d6b6544bcb6018b3935e9422b37c6a3e21f960ebbe281ed51850eadde3a5ab6",
+    "bytes": 684
+  },
+  {
+    "path": "build/wheels.json",
+    "decoded_sha256": "6a6b06f27e93bd3d6177c4ef9f0560bb56100dd87c8fd83ba9e7610383905737",
+    "bytes": 412
+  },
+  {
+    "path": "compiler/package.yaml",
+    "decoded_sha256": "6b8a37ed2abbb04c9fc6d1cb13654f226d73dda6e658ec0b5dca8254e5e3a4df",
+    "bytes": 150
+  },
+  {
+    "path": "compiler/core-proof.json",
+    "decoded_sha256": "6d90b69304ac5edcfde2e5239cd52a02eff4a8004e44f2c43ecb1eb18dca9fac",
+    "bytes": 338
+  },
+  {
+    "path": "compiler/run-core-proof.py",
+    "decoded_sha256": "9d39d9a02ffc9f50f0220252eb3b172436898fccd9d46957fce4653e20e3c2cc",
+    "bytes": 1212
+  },
+  {
+    "path": "compiler/run-core-proof-fixed.py",
+    "decoded_sha256": "5b525563d578c28df3cf31e9202c4bc54dd4822043193d91e0d35b07d1fa54fa",
+    "bytes": 1266
+  },
+  {
+    "path": "compiler/verify-core.py",
+    "decoded_sha256": "77ca2c2dba5ec9a8e2e930dc85f661cf5faaa2c6ed428488fddff5d49fb5f7e5",
+    "bytes": 1633
+  },
+  {
+    "path": "restore/receipt.json",
+    "decoded_sha256": "68fb673636126d55cd9467597b4ea4f5998be1e1754c91b4c23d5537fbafc682",
+    "bytes": 3653
+  },
+  {
+    "path": "frontend-qualified/artifacts-before.json",
+    "decoded_sha256": "3ddd1f909e4543f408d71cf68deec03fb7ce4f20a5996cb8c1e555ab9fc32acd",
+    "bytes": 1423
+  },
+  {
+    "path": "frontend-qualified/quality.log.b64",
+    "decoded_sha256": "8e91dd8caeaaaf3404411b935365a7348d514f88c0ef2a76976d62658c2f7098",
+    "bytes": 1328
+  },
+  {
+    "path": "frontend-qualified/SHA256SUMS",
+    "decoded_sha256": "96b1abbf9d4db4f0d73cf3450725145936d25b0588dceacf1ca2df55bdd9f670",
+    "bytes": 727
+  },
+  {
+    "path": "frontend-qualified/run.py",
+    "decoded_sha256": "349caff67e0455c9c7bdef37432358e26db0902b51c769e5c6c2c107354ab735",
+    "bytes": 1998
+  },
+  {
+    "path": "frontend-qualified/controller.log.b64",
+    "decoded_sha256": "f32a3d9dda32694109525526d04f301a7b4e6745378fd3baee3662a1cabcd9cf",
+    "bytes": 408
+  },
+  {
+    "path": "frontend-qualified/README.md",
+    "decoded_sha256": "544e5d9081b74e4d56c68e3cd16bcbf370751e7b457c2e9b62105430a7ce1b6b",
+    "bytes": 1454
+  },
+  {
+    "path": "frontend-qualified/tests.log.b64",
+    "decoded_sha256": "c7b1a6ca2ea83863bddd7c8ef8399092fbde1e124ae08689f00e03b4f3a9d8a6",
+    "bytes": 959
+  },
+  {
+    "path": "frontend-qualified/artifacts-after.json",
+    "decoded_sha256": "3ddd1f909e4543f408d71cf68deec03fb7ce4f20a5996cb8c1e555ab9fc32acd",
+    "bytes": 1423
+  },
+  {
+    "path": "frontend-qualified/receipt.json",
+    "decoded_sha256": "ffad5924d3acf99789a11201b587d4163d70f83da27d29864889f6c76a7cc3e1",
+    "bytes": 1235
+  },
+  {
+    "path": "frontend-qualified/documentation-delta.md",
+    "decoded_sha256": "14c51306392a575828ceacab0ab4ee450d02f0f2e4258fa0cd4463456a9f7eab",
+    "bytes": 715
+  },
+  {
+    "path": "compiler-proof-diagnosis/README.md",
+    "decoded_sha256": "e1f5c2b39151aab9ed459627000cd5ad6d0a47b35bc466d4e303ebb5cc001ef8",
+    "bytes": 2490
+  },
+  {
+    "path": "compiler-proof-diagnosis/original-failure.log.b64",
+    "decoded_sha256": "f6d0f20ac2bbafde23efd89df6a8c7aefd1f9c83d5582cd155e386e0fb7a4ffc",
+    "bytes": 254
+  },
+  {
+    "path": "compiler-proof-diagnosis/metadata-hashes.json",
+    "decoded_sha256": "62efe8213c13c8b97e6e5e6f883e9b7768607f14625497f4a2d8e3e981f20687",
+    "bytes": 752
+  },
+  {
+    "path": "compiler-proof-diagnosis/documentation-delta.md",
+    "decoded_sha256": "b7d54dc3415515f4a4cf7909d7f3b5ad785e559b7ce53d28ca74cadb818e0ffe",
+    "bytes": 743
+  },
+  {
+    "path": "client-combined/qualify.py",
+    "decoded_sha256": "6395f061ffe26db3de95a97db49a96d75bc85e81fd1886b4faf2aafa56b465a2",
+    "bytes": 28950
+  },
+  {
+    "path": "client-combined/driver.log.b64",
+    "decoded_sha256": "79d861071358f5b828fcc2a0c1c810db034457cfb142b28430df23dc6717c2f7",
+    "bytes": 984
+  },
+  {
+    "path": "client-combined/exact-identity-3.json",
+    "decoded_sha256": "bef7494cd9445e31125a50429335c4b383bd15bdf829c440c8bd4426b626cb11",
+    "bytes": 1271
+  },
+  {
+    "path": "client-combined/initial-catalog.json",
+    "decoded_sha256": "430ab000730b7c65212285b22a912ab2cb50a4f9a59f4c16b8f30456d5f20868",
+    "bytes": 96191
+  },
+  {
+    "path": "client-combined/59-canvas_artifact.json",
+    "decoded_sha256": "171d29466071949df68283e65e45f660dc69dee59642bebd0472128e5c6d2c01",
+    "bytes": 521
+  },
+  {
+    "path": "client-combined/05-task.json",
+    "decoded_sha256": "c4292868e3fd56a5fee55dcb2b3b475d4d9b29d10cb4cbab9c3bff2d59725b55",
+    "bytes": 478
+  },
+  {
+    "path": "client-combined/24-task.json",
+    "decoded_sha256": "fa3a73868a6b9834e4a252d640a0b9c2cb82554c2c23c82044ff3b885e390ff5",
+    "bytes": 481
+  },
+  {
+    "path": "client-combined/06-task.json",
+    "decoded_sha256": "651c7f8869858b2cb611fe80cc492efeb742adb3f81916756941b6c0be7c7a6e",
+    "bytes": 481
+  },
+  {
+    "path": "client-combined/19-task.json",
+    "decoded_sha256": "c88c4df7944050c84470942bcb84906489bd0769b8dc97b1523c9604a989ab43",
+    "bytes": 491
+  },
+  {
+    "path": "client-combined/after-restart.json",
+    "decoded_sha256": "0074745c21260170d792e41df6ebf7287429a8dc251171323157ef1dc2afa23f",
+    "bytes": 125
+  },
+  {
+    "path": "client-combined/41-task.json",
+    "decoded_sha256": "4c320c7ae156357e56edf7d69342d53c2b398f37022cb40bbd4d669a43dabd41",
+    "bytes": 1247
+  },
+  {
+    "path": "client-combined/48-canvas_artifact.json",
+    "decoded_sha256": "171d29466071949df68283e65e45f660dc69dee59642bebd0472128e5c6d2c01",
+    "bytes": 521
+  },
+  {
+    "path": "client-combined/after-app-runs.json",
+    "decoded_sha256": "0074745c21260170d792e41df6ebf7287429a8dc251171323157ef1dc2afa23f",
+    "bytes": 125
+  },
+  {
+    "path": "client-combined/29-task.json",
+    "decoded_sha256": "b59380be28d77ca29b7abccd9f4189d2bd99c494f50cb9e781a42fa10f1415bf",
+    "bytes": 491
+  },
+  {
+    "path": "client-combined/51-task.json",
+    "decoded_sha256": "4c320c7ae156357e56edf7d69342d53c2b398f37022cb40bbd4d669a43dabd41",
+    "bytes": 1247
+  },
+  {
+    "path": "client-combined/15-task.json",
+    "decoded_sha256": "681167a1fcb3c2171e4236d3d0c8cb141213d8f2ee80d79a7b49f3556502af5c",
+    "bytes": 491
+  },
+  {
+    "path": "client-combined/39-task.json",
+    "decoded_sha256": "6eb3248337266b68f9d13c008d6255bfc539d8baf3cded08f45f849fef1163fc",
+    "bytes": 491
+  },
+  {
+    "path": "client-combined/deployment-7d11be96-071b-4236-988f-8baa0dcadcba-authorization.json",
+    "decoded_sha256": "1a0ee620ff1c198bc732bbacdca3622d4a6c340d9ea0889436ee0ea3eea88ed6",
+    "bytes": 7875
+  },
+  {
+    "path": "client-combined/16-task.json",
+    "decoded_sha256": "681167a1fcb3c2171e4236d3d0c8cb141213d8f2ee80d79a7b49f3556502af5c",
+    "bytes": 491
+  },
+  {
+    "path": "client-combined/44-canvas_dispatch.json",
+    "decoded_sha256": "5f83d17e19a092ceb3df658bb7cc47edd054012e830b19f60b6ee2ea4f6df4f0",
+    "bytes": 889
+  },
+  {
+    "path": "client-combined/30-task.json",
+    "decoded_sha256": "b59380be28d77ca29b7abccd9f4189d2bd99c494f50cb9e781a42fa10f1415bf",
+    "bytes": 491
+  },
+  {
+    "path": "client-combined/14-task.json",
+    "decoded_sha256": "681167a1fcb3c2171e4236d3d0c8cb141213d8f2ee80d79a7b49f3556502af5c",
+    "bytes": 491
+  },
+  {
+    "path": "client-combined/03-canvas_release.json",
+    "decoded_sha256": "01532df4d928757d9febc0e46839d09e9d44a160e22fe7c4a189cbb7702442ca",
+    "bytes": 4776
+  },
+  {
+    "path": "client-combined/52-task.json",
+    "decoded_sha256": "40017dca3ede3a6df8920da7a95070068874f045ce6fbd50880bab1ae02bfe9c",
+    "bytes": 471
+  },
+  {
+    "path": "client-combined/23-task.json",
+    "decoded_sha256": "bde93c9209b4c44bc7af6be13b6cd9fd2c3acbacf5ea0688c07ddd0ad51d748f",
+    "bytes": 478
+  },
+  {
+    "path": "client-combined/11-task.json",
+    "decoded_sha256": "681167a1fcb3c2171e4236d3d0c8cb141213d8f2ee80d79a7b49f3556502af5c",
+    "bytes": 491
+  },
+  {
+    "path": "client-combined/restart.log.b64",
+    "decoded_sha256": "4e4a085d0a4548b2c12e032b963b6c885964af45618280bb9289082790862b98",
+    "bytes": 2631
+  },
+  {
+    "path": "client-combined/01-canvas_release.json",
+    "decoded_sha256": "44ef76d3e467703a63804de194b93c541863c13b061ef26b4ad743facd15f87b",
+    "bytes": 2262
+  },
+  {
+    "path": "client-combined/13-task.json",
+    "decoded_sha256": "681167a1fcb3c2171e4236d3d0c8cb141213d8f2ee80d79a7b49f3556502af5c",
+    "bytes": 491
+  },
+  {
+    "path": "client-combined/exact-identity-2.json",
+    "decoded_sha256": "1091b53a5ac504523de43459022f0e93c47ac50b2fcce3e2a5a5d75010c86faf",
+    "bytes": 1271
+  },
+  {
+    "path": "client-combined/26-task.json",
+    "decoded_sha256": "515c2a0b1926f53de7fe9ab2698a44af5957e738b0a3b87651159a532619417e",
+    "bytes": 497
+  },
+  {
+    "path": "client-combined/22-task.json",
+    "decoded_sha256": "90f3d36f1ed54160304b681fc96b131a4c5a6502a5e8001eb31cb29143c68b28",
+    "bytes": 1247
+  },
+  {
+    "path": "client-combined/42-canvas_get.json",
+    "decoded_sha256": "f65f288d95c352ad5acf4e26b9502980d5c115247a6bc84780ff3e9191f91e76",
+    "bytes": 11881
+  },
+  {
+    "path": "client-combined/compile.log.b64",
+    "decoded_sha256": "c7a15ec327603b8181bdf691d22ec9780d03417ee7464e3c017b0a3f4b4cb3f8",
+    "bytes": 1431
+  },
+  {
+    "path": "client-combined/07-task.json",
+    "decoded_sha256": "6dd9f2671f57c3b7c88a4c71cc379a8d445fa16960853aae5f9f2ac5f066cf0d",
+    "bytes": 497
+  },
+  {
+    "path": "client-combined/18-task.json",
+    "decoded_sha256": "681167a1fcb3c2171e4236d3d0c8cb141213d8f2ee80d79a7b49f3556502af5c",
+    "bytes": 491
+  },
+  {
+    "path": "client-combined/35-task.json",
+    "decoded_sha256": "b59380be28d77ca29b7abccd9f4189d2bd99c494f50cb9e781a42fa10f1415bf",
+    "bytes": 491
+  },
+  {
+    "path": "client-combined/25-task.json",
+    "decoded_sha256": "515c2a0b1926f53de7fe9ab2698a44af5957e738b0a3b87651159a532619417e",
+    "bytes": 497
+  },
+  {
+    "path": "client-combined/exact-identity-0.json",
+    "decoded_sha256": "1091b53a5ac504523de43459022f0e93c47ac50b2fcce3e2a5a5d75010c86faf",
+    "bytes": 1271
+  },
+  {
+    "path": "client-combined/31-task.json",
+    "decoded_sha256": "b59380be28d77ca29b7abccd9f4189d2bd99c494f50cb9e781a42fa10f1415bf",
+    "bytes": 491
+  },
+  {
+    "path": "client-combined/43-canvas_dispatch.json",
+    "decoded_sha256": "8cfa8fd2576959b9048ea5f095a6ebccaf791cc78d71a9dcc34666f8ff25ef71",
+    "bytes": 578
+  },
+  {
+    "path": "client-combined/45-canvas_artifact.json",
+    "decoded_sha256": "cd7cb373af12f2bbaeb42a87ac8f61c6e315023dccc6acab27df437c43e46372",
+    "bytes": 532
+  },
+  {
+    "path": "client-combined/36-task.json",
+    "decoded_sha256": "b59380be28d77ca29b7abccd9f4189d2bd99c494f50cb9e781a42fa10f1415bf",
+    "bytes": 491
+  },
+  {
+    "path": "client-combined/17-task.json",
+    "decoded_sha256": "681167a1fcb3c2171e4236d3d0c8cb141213d8f2ee80d79a7b49f3556502af5c",
+    "bytes": 491
+  },
+  {
+    "path": "client-combined/50-task.json",
+    "decoded_sha256": "a45afb1b98aafa5fe112d7b09710ac57f42eded1ec70d1bb80c4e0633d06813d",
+    "bytes": 471
+  },
+  {
+    "path": "client-combined/32-task.json",
+    "decoded_sha256": "b59380be28d77ca29b7abccd9f4189d2bd99c494f50cb9e781a42fa10f1415bf",
+    "bytes": 491
+  },
+  {
+    "path": "client-combined/execute.log.b64",
+    "decoded_sha256": "6323c6172defdf6d35b8a72cefcd6d6e5b3ba6951029238e00e3a8994e0d58d1",
+    "bytes": 6131
+  },
+  {
+    "path": "client-combined/02-canvas_apply.json",
+    "decoded_sha256": "e4249fcc82ea2ab82fddaa3df5aef5587875a7988affbe454875294c57b2fd8f",
+    "bytes": 4778
+  },
+  {
+    "path": "client-combined/58-canvas_artifact.json",
+    "decoded_sha256": "cd7cb373af12f2bbaeb42a87ac8f61c6e315023dccc6acab27df437c43e46372",
+    "bytes": 532
+  },
+  {
+    "path": "client-combined/49-task.json",
+    "decoded_sha256": "90f3d36f1ed54160304b681fc96b131a4c5a6502a5e8001eb31cb29143c68b28",
+    "bytes": 1247
+  },
+  {
+    "path": "client-combined/33-task.json",
+    "decoded_sha256": "b59380be28d77ca29b7abccd9f4189d2bd99c494f50cb9e781a42fa10f1415bf",
+    "bytes": 491
+  },
+  {
+    "path": "client-combined/47-canvas_dispatch.json",
+    "decoded_sha256": "baffd8e786331443989efbe7b2307a07c0afb4932814eca11f5f766b653806fd",
+    "bytes": 883
+  },
+  {
+    "path": "client-combined/27-task.json",
+    "decoded_sha256": "515c2a0b1926f53de7fe9ab2698a44af5957e738b0a3b87651159a532619417e",
+    "bytes": 497
+  },
+  {
+    "path": "client-combined/37-task.json",
+    "decoded_sha256": "b59380be28d77ca29b7abccd9f4189d2bd99c494f50cb9e781a42fa10f1415bf",
+    "bytes": 491
+  },
+  {
+    "path": "client-combined/53-canvas_release.json",
+    "decoded_sha256": "44ef76d3e467703a63804de194b93c541863c13b061ef26b4ad743facd15f87b",
+    "bytes": 2262
+  },
+  {
+    "path": "client-combined/initial.log.b64",
+    "decoded_sha256": "4ac8abc069f8154b12cef2ceefd32bb52b360dc3d0a1efe01ba5b8d34972195c",
+    "bytes": 1228
+  },
+  {
+    "path": "client-combined/28-task.json",
+    "decoded_sha256": "b59380be28d77ca29b7abccd9f4189d2bd99c494f50cb9e781a42fa10f1415bf",
+    "bytes": 491
+  },
+  {
+    "path": "client-combined/before-tasks.json",
+    "decoded_sha256": "230c9a6181583c858dd16e4eced2910cfdd9103dcbcf0d8a763f9812868d0a2d",
+    "bytes": 125
+  },
+  {
+    "path": "client-combined/after-tasks.json",
+    "decoded_sha256": "f3dbfbd98fe60911b8162ece3c4c0df4fd66946036715c5965f3863b5e5ce356",
+    "bytes": 125
+  },
+  {
+    "path": "client-combined/21-task.json",
+    "decoded_sha256": "c88c4df7944050c84470942bcb84906489bd0769b8dc97b1523c9604a989ab43",
+    "bytes": 491
+  },
+  {
+    "path": "client-combined/40-task.json",
+    "decoded_sha256": "6eb3248337266b68f9d13c008d6255bfc539d8baf3cded08f45f849fef1163fc",
+    "bytes": 491
+  },
+  {
+    "path": "client-combined/46-canvas_dispatch.json",
+    "decoded_sha256": "e7f6f37d8082a0acbf4e589bae29bc2d8447aa36d882f54bd43e8f88bd3f3ba4",
+    "bytes": 572
+  },
+  {
+    "path": "client-combined/exact-identity-1.json",
+    "decoded_sha256": "bef7494cd9445e31125a50429335c4b383bd15bdf829c440c8bd4426b626cb11",
+    "bytes": 1271
+  },
+  {
+    "path": "client-combined/00-canvas_create.json",
+    "decoded_sha256": "4b084d6083a3c1401458cf07de952cac6ac151f8af9f86aa0a916a8f7f6775c2",
+    "bytes": 2264
+  },
+  {
+    "path": "client-combined/57-canvas_get.json",
+    "decoded_sha256": "7107c5665fb0763cd1ee2e56a132f1bc6d811755a6a40dfe80e330c1ed095cae",
+    "bytes": 13099
+  },
+  {
+    "path": "client-combined/09-task.json",
+    "decoded_sha256": "681167a1fcb3c2171e4236d3d0c8cb141213d8f2ee80d79a7b49f3556502af5c",
+    "bytes": 491
+  },
+  {
+    "path": "client-combined/20-task.json",
+    "decoded_sha256": "c88c4df7944050c84470942bcb84906489bd0769b8dc97b1523c9604a989ab43",
+    "bytes": 491
+  },
+  {
+    "path": "client-combined/56-canvas_artifact.json",
+    "decoded_sha256": "52b3f12b1fe284c0f904dfb27eec61abf2a8698d1f1a880d231ec06d5ef9be90",
+    "bytes": 369
+  },
+  {
+    "path": "client-combined/04-canvas_inspect.json",
+    "decoded_sha256": "beee519945c5ef3757e25bfe30ff0a52820cae6c0a977f2af388c3fd34859cad",
+    "bytes": 13726
+  },
+  {
+    "path": "client-combined/12-task.json",
+    "decoded_sha256": "681167a1fcb3c2171e4236d3d0c8cb141213d8f2ee80d79a7b49f3556502af5c",
+    "bytes": 491
+  },
+  {
+    "path": "client-combined/receipt.json",
+    "decoded_sha256": "a2973b6952a431dfd78fa75da444323c5d7950e8e3440410080da9b76cd7f933",
+    "bytes": 8514
+  },
+  {
+    "path": "client-combined/08-task.json",
+    "decoded_sha256": "6dd9f2671f57c3b7c88a4c71cc379a8d445fa16960853aae5f9f2ac5f066cf0d",
+    "bytes": 497
+  },
+  {
+    "path": "client-combined/54-canvas_inspect.json",
+    "decoded_sha256": "218c1dd5e534df6db8de0a4e79d4f991855ee55f2eef4e3296f57f8959ed0588",
+    "bytes": 7599
+  },
+  {
+    "path": "client-combined/55-canvas_release.json",
+    "decoded_sha256": "01532df4d928757d9febc0e46839d09e9d44a160e22fe7c4a189cbb7702442ca",
+    "bytes": 4776
+  },
+  {
+    "path": "client-combined/34-task.json",
+    "decoded_sha256": "b59380be28d77ca29b7abccd9f4189d2bd99c494f50cb9e781a42fa10f1415bf",
+    "bytes": 491
+  },
+  {
+    "path": "client-combined/source-authorization.json",
+    "decoded_sha256": "179ecd0b5c3810fd71b321b09b1ec173dd1ecea163f0100440eb8ed4bcbe4aa0",
+    "bytes": 5549
+  },
+  {
+    "path": "client-combined/10-task.json",
+    "decoded_sha256": "681167a1fcb3c2171e4236d3d0c8cb141213d8f2ee80d79a7b49f3556502af5c",
+    "bytes": 491
+  },
+  {
+    "path": "client-combined/38-task.json",
+    "decoded_sha256": "6eb3248337266b68f9d13c008d6255bfc539d8baf3cded08f45f849fef1163fc",
+    "bytes": 491
+  },
+  {
+    "path": "browser-combined/qualify.py",
+    "decoded_sha256": "615c0608fd02fcf4af37443660b4ef09fac2207040e1110f8ba1476b870933e0",
+    "bytes": 27614
+  },
+  {
+    "path": "browser-combined/driver.log.b64",
+    "decoded_sha256": "719e472c56805f1dd93a8e8448d53434305d94fa3404759fec191bcb99802c20",
+    "bytes": 4972
+  },
+  {
+    "path": "browser-combined/initial-catalog.json",
+    "decoded_sha256": "45bb9176db84827cf75bdd6d5cdf791e23f65402a3f4a93882cb19810ebb2bf1",
+    "bytes": 130338
+  },
+  {
+    "path": "browser-combined/01-canvas_release.json",
+    "decoded_sha256": "acc03b08b0b22aec1e90f8032533e5558ad6b51bb82428195ab4f685c6820707",
+    "bytes": 2262
+  },
+  {
+    "path": "browser-combined/compile-counter.log.b64",
+    "decoded_sha256": "73180879df8a60d4b2066371e998aa41c26acd4dc02e06e0b195d5385af7a98c",
+    "bytes": 1531
+  },
+  {
+    "path": "browser-combined/02-canvas_apply.json",
+    "decoded_sha256": "52b3f12b1fe284c0f904dfb27eec61abf2a8698d1f1a880d231ec06d5ef9be90",
+    "bytes": 369
+  },
+  {
+    "path": "browser-combined/00-canvas_create.json",
+    "decoded_sha256": "10f65cc0f8035bd5e5988d255de703ac8f3d78c825727ba2c7a31132dedb8b30",
+    "bytes": 2264
+  },
+  {
+    "path": "browser-combined/receipt.json",
+    "decoded_sha256": "f6eac4b37f71aa347b9bab133c8f9bfea8ffe7ca0febb2321aaa10d0a9d72964",
+    "bytes": 1243
+  },
+  {
+    "path": "core-supplement/tests.xml.b64",
+    "decoded_sha256": "e9718ac029bb6338c6912f417a67ec9f5490f369483bfa54e0836427755c19d4",
+    "bytes": 91574
+  },
+  {
+    "path": "core-supplement/filemap.json",
+    "decoded_sha256": "ed10397c0047668f648e3f954f4b30dec1d48c455d1bd181bb99704153ba9581",
+    "bytes": 587
+  }
+]

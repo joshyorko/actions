@@ -1,0 +1,17 @@
+{
+  "before_first_admission": {
+    "run": 1,
+    "run_attempt": 1,
+    "run_admission": 1,
+    "foundry_package_revision": 1,
+    "foundry_deployment_revision": 2
+  },
+  "after_continuation_restart": {
+    "run": 2,
+    "run_attempt": 2,
+    "run_admission": 1,
+    "foundry_package_revision": 1,
+    "foundry_deployment_revision": 2
+  },
+  "one_run_one_attempt": true
+}

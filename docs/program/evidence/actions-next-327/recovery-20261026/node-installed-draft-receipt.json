@@ -1,0 +1,60 @@
+{
+  "qualification": "INSTALLED a52 init/list/draft only; fresh public dependencies",
+  "status": "PASS",
+  "state": "/workspace/327-probes/installed-a52-draft-20261026T111740",
+  "harness_checkout_git_head_not_artifact_source": "5be17fb0ffc61e313e37999c46e4a527d67adae6",
+  "fingerprints": {
+    "action_server/src/actions/server/_api_action_routes.py": "01b14663e763311284ca86a0ab47bc967b8d75817ba2b0c6a452465162f13279",
+    "action_server/src/actions/server/mcp/gateway_metadata.py": "247d2f6b7e9199501b3dc82fb9b7c97c1839d83177be2547efa5b67bcb6a543c",
+    "action_server/frontend/node_modules/@modelcontextprotocol/client/dist/index.mjs": "af3ec9fcf3a70fb4681e9b3c11aa18a7ce9aca36fed9f138a6e704043695d414"
+  },
+  "installed_verification": {
+    "status": "PASS",
+    "profile_note": "Fresh public dependency resolution, not historical a52 environment; MCP version recorded below.",
+    "wheels": [
+      {
+        "name": "actions_runtime-1.1.0a52-cp312-cp312-linux_x86_64.whl",
+        "sha256": "1490ddd927b557017665c8ea5ca495a835b96315efc9f8ff37ff49bb0c9cdd82",
+        "payload_members": 338,
+        "mismatches": [],
+        "metadata_identical": true
+      },
+      {
+        "name": "actions_core-1.1.0a8-py3-none-any.whl",
+        "sha256": "42e550a8c207849e0a428fa702827ff2f77d98a00fd63aa0f85a912c0719419f",
+        "payload_members": 87,
+        "mismatches": [],
+        "metadata_identical": true
+      },
+      {
+        "name": "actions_work_items-0.5.0a2-py3-none-any.whl",
+        "sha256": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb",
+        "payload_members": 26,
+        "mismatches": [],
+        "metadata_identical": true
+      }
+    ],
+    "freeze_sha256": "cdb1eccec671816b498e4b75da601defafc34dd3e8c24cee47a4f84a265230a9",
+    "mcp": [
+      "mcp==2.3.0"
+    ]
+  },
+  "probe_sha256": "22da6f6867b274fe911d427ba3e042bf5b687cabd2c74a47ffaee71b2a49fb5b",
+  "runtime_ready": true,
+  "node_natural_exit": 0,
+  "before_shutdown_children": [
+    {
+      "pid": 4965,
+      "status": "sleeping"
+    },
+    {
+      "pid": 4966,
+      "status": "zombie"
+    }
+  ],
+  "runtime_graceful_exit": -15,
+  "remaining_owned": [],
+  "remaining_descendants": [],
+  "reaped_adoptees": [],
+  "elapsed_seconds": 8.65
+}

@@ -46,6 +46,10 @@ jobs:
       ACTIONS_TOOLKIT_EXPECTED_RCC_VERSION: v${{ matrix.rcc_version }}
     steps:
       - uses: actions/checkout@v4
+        env:
+          GIT_CONFIG_COUNT: ${{ runner.os == 'Windows' && '1' || '0' }}
+          GIT_CONFIG_KEY_0: core.longpaths
+          GIT_CONFIG_VALUE_0: 'true'
       - name: Cache RCC holotree
         uses: actions/cache@v4
         with:

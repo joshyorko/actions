@@ -1,0 +1,92 @@
+{
+  "first.log.b64": {
+    "decoded_sha256": "ba187fd806186d9edf14aa4cc6a9d86f625ec37fdc447b065fa8fdf3c7d7ad3e",
+    "decoded_bytes": 7218,
+    "source": "/workspace/knowledge-review/robot-admission-evidence/first.log"
+  },
+  "joined-final-receipt.json.b64": {
+    "decoded_sha256": "6bd03cc97d82e4f3cf000672776c1e9cd251974405b9d8d85fe4ec1b124a504f",
+    "decoded_bytes": 890,
+    "source": "/workspace/knowledge-review/robot-admission-evidence/joined-final-receipt.json"
+  },
+  "joined-final.log.b64": {
+    "decoded_sha256": "65fd6dfbb5b08a59537faa3ca3778054f560215390420ceb916c6fc26d1e0cbc",
+    "decoded_bytes": 5266,
+    "source": "/workspace/knowledge-review/robot-admission-evidence/joined-final.log"
+  },
+  "joined-final.xml.b64": {
+    "decoded_sha256": "f8b80f4f1d92c0ac248d3739ab1f566e6dffb1ecc38ef17154cee1476a1e9485",
+    "decoded_bytes": 15950,
+    "source": "/workspace/knowledge-review/robot-admission-evidence/joined-final.xml"
+  },
+  "owned-expanded-receipt.json.b64": {
+    "decoded_sha256": "de72b07d6efef7b3c453ceb3e51af696c9ad547e90e7bd2ddaeffc1f26ff4e06",
+    "decoded_bytes": 763,
+    "source": "/workspace/knowledge-review/robot-admission-evidence/owned-expanded-receipt.json"
+  },
+  "owned-expanded.log.b64": {
+    "decoded_sha256": "8aece41a7170171822848675f9915885fc84475aa3bb0bfd8833695467921eaf",
+    "decoded_bytes": 5073,
+    "source": "/workspace/knowledge-review/robot-admission-evidence/owned-expanded.log"
+  },
+  "owned-expanded.xml.b64": {
+    "decoded_sha256": "accd9a4b01d179b88ab989fef5dc5328050a3c66b930619c9f0b9e5f4b539946",
+    "decoded_bytes": 7179,
+    "source": "/workspace/knowledge-review/robot-admission-evidence/owned-expanded.xml"
+  },
+  "owned-first-receipt.json.b64": {
+    "decoded_sha256": "ea41ba4cdbea23eaa3a14bb7933d7a3042b2b468e0b8d4680bcf46ad710de0e2",
+    "decoded_bytes": 757,
+    "source": "/workspace/knowledge-review/robot-admission-evidence/owned-first-receipt.json"
+  },
+  "owned-first.log.b64": {
+    "decoded_sha256": "ff6bb86f6577fce4d1d6b1f680652b31bf003fe2404351fc3150e06c48c8a96c",
+    "decoded_bytes": 5064,
+    "source": "/workspace/knowledge-review/robot-admission-evidence/owned-first.log"
+  },
+  "owned-first.xml.b64": {
+    "decoded_sha256": "9ca34eed9af5c2d812ddd113e1d1ef9a92f67ba517e1b13a030deac46a0d1845",
+    "decoded_bytes": 5187,
+    "source": "/workspace/knowledge-review/robot-admission-evidence/owned-first.xml"
+  },
+  "second.log.b64": {
+    "decoded_sha256": "8d7b4c5d7c10eb1399c064efafa76d565cbf22da9d6ca081f60bd232572d851d",
+    "decoded_bytes": 16012,
+    "source": "/workspace/knowledge-review/robot-admission-evidence/second.log"
+  },
+  "second.xml.b64": {
+    "decoded_sha256": "976af8b832de8162fa6dd34d68d80c8cd9b8b43c4cf748e9a68764844dc501c7",
+    "decoded_bytes": 13459,
+    "source": "/workspace/knowledge-review/robot-admission-evidence/second.xml"
+  },
+  "style-final.log.b64": {
+    "decoded_sha256": "beb1495636bb76a6a586ada05e4cf6e1f77403d25eda8ceef39f87c3d924770a",
+    "decoded_bytes": 279,
+    "source": "/workspace/knowledge-review/robot-admission-evidence/style-final.log"
+  },
+  "style-first.log.b64": {
+    "decoded_sha256": "88e2d8a6cce83729ab8e73b0314f42f326e7361dae6a900f3d3de0fc8a0ab8ec",
+    "decoded_bytes": 2054,
+    "source": "/workspace/knowledge-review/robot-admission-evidence/style-first.log"
+  },
+  "style-fix.log.b64": {
+    "decoded_sha256": "5ef227c8760cfaf202af77430cb578844b28c3b4e2188ea81372ae5fab81fdd9",
+    "decoded_bytes": 395,
+    "source": "/workspace/knowledge-review/robot-admission-evidence/style-fix.log"
+  },
+  "type-final.log.b64": {
+    "decoded_sha256": "8228fcc5ce46d42d01caf3cd941f4e9c5f2bcc372bb5b147a2f0572d2dd675a8",
+    "decoded_bytes": 43,
+    "source": "/workspace/knowledge-review/robot-admission-evidence/type-final.log"
+  },
+  "type-first.log.b64": {
+    "decoded_sha256": "8ed8962cde936591c4db28b1138365bb137733378dc959c71311c99416e2d250",
+    "decoded_bytes": 749,
+    "source": "/workspace/knowledge-review/robot-admission-evidence/type-first.log"
+  },
+  "type-second.log.b64": {
+    "decoded_sha256": "aa6805ca5b8ded3392f41f236c8a4480db93f292576658ee6e1d13f3571e9308",
+    "decoded_bytes": 504,
+    "source": "/workspace/knowledge-review/robot-admission-evidence/type-second.log"
+  }
+}

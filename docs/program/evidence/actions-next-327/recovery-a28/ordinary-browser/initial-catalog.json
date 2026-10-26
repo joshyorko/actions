@@ -1,0 +1,1502 @@
+{
+  "meta": {
+    "actions.catalogRevision": "bbc5b8ad04529a6ab1c5e25e984e9fbfb7102b5618571cf8fc5b790454cd8673",
+    "io.modelcontextprotocol/serverInfo": {
+      "name": "Action Server",
+      "version": ""
+    }
+  },
+  "ttl_ms": 0,
+  "cache_scope": "private",
+  "next_cursor": null,
+  "tools": [
+    {
+      "name": "canvas_apply",
+      "title": null,
+      "description": "Stage a complete new CanvasSpec revision with explicit bindings and optional backend source. The base digest is compare-and-swap checked; applying never activates or executes the revision.",
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Stage a complete new CanvasSpec revision with explicit bindings and optional backend source. The base digest is compare-and-swap checked; applying never activates or executes the revision.",
+        "properties": {
+          "appId": {
+            "description": "Canvas application UUID to revise.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "backend": {
+            "additionalProperties": false,
+            "description": "Optional externally authored Python source files for a backend. The common Package compiler validates and admits them; source is never returned by Canvas tools.",
+            "properties": {
+              "files": {
+                "items": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "content": {
+                      "type": "string"
+                    },
+                    "mode": {
+                      "enum": [
+                        420,
+                        493
+                      ],
+                      "type": "integer"
+                    },
+                    "path": {
+                      "maxLength": 4096,
+                      "minLength": 1,
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path",
+                    "content"
+                  ],
+                  "type": "object"
+                },
+                "maxItems": 16,
+                "minItems": 1,
+                "type": "array"
+              },
+              "logicalName": {
+                "maxLength": 128,
+                "minLength": 1,
+                "type": "string"
+              },
+              "workItems": {
+                "additionalProperties": false,
+                "description": "Compiler-owned capability declaration; never an execution grant.\n\nOptional accepts zero or one explicit input context; required-input requires\nan exact input; consumer permits queue claim; producer has no input context\nand may create outputs. None never manufactures a synthetic input.",
+                "properties": {
+                  "allow_outputs": {
+                    "default": false,
+                    "title": "Allow Outputs",
+                    "type": "boolean"
+                  },
+                  "mode": {
+                    "default": "none",
+                    "enum": [
+                      "none",
+                      "optional",
+                      "required-input",
+                      "consumer",
+                      "producer"
+                    ],
+                    "title": "Mode",
+                    "type": "string"
+                  }
+                },
+                "title": "WorkItemDeclaration",
+                "type": "object"
+              }
+            },
+            "required": [
+              "logicalName",
+              "files"
+            ],
+            "type": "object"
+          },
+          "bindings": {
+            "description": "Explicit logical binding targets. Provide only targets authorized for this app.",
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "bindingId": {
+                  "maxLength": 64,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "capabilityId": {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "packageRevision": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "package_id": {
+                          "format": "uuid",
+                          "type": "string"
+                        },
+                        "revision_id": {
+                          "pattern": "^sha256:[0-9a-f]{64}$",
+                          "type": "string"
+                        },
+                        "workspace_id": {
+                          "format": "uuid",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "workspace_id",
+                        "package_id",
+                        "revision_id"
+                      ],
+                      "type": "object"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "bindingId",
+                "capabilityId"
+              ],
+              "type": "object"
+            },
+            "maxItems": 32,
+            "type": "array"
+          },
+          "expectedBase": {
+            "description": "Latest revision digest used as the optimistic edit base; null is valid only before a first revision exists.",
+            "pattern": "^sha256:[0-9a-f]{64}$",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "idempotencyKey": {
+            "description": "Caller-chosen stable key for retrying this mutation with identical input.",
+            "maxLength": 128,
+            "minLength": 1,
+            "type": "string"
+          },
+          "queuePolicies": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "bindingId": {
+                  "maxLength": 64,
+                  "minLength": 1,
+                  "title": "Bindingid",
+                  "type": "string"
+                },
+                "input_mode": {
+                  "enum": [
+                    "none",
+                    "optional",
+                    "required",
+                    "claim"
+                  ],
+                  "title": "Input Mode",
+                  "type": "string"
+                },
+                "input_queue": {
+                  "anyOf": [
+                    {
+                      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,255}$",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Input Queue"
+                },
+                "max_input_bytes": {
+                  "default": 262144,
+                  "maximum": 262144,
+                  "minimum": 1,
+                  "title": "Max Input Bytes",
+                  "type": "integer"
+                },
+                "max_output_bytes": {
+                  "default": 0,
+                  "maximum": 262144,
+                  "minimum": 0,
+                  "title": "Max Output Bytes",
+                  "type": "integer"
+                },
+                "max_output_items": {
+                  "default": 0,
+                  "maximum": 64,
+                  "minimum": 0,
+                  "title": "Max Output Items",
+                  "type": "integer"
+                },
+                "output_queue": {
+                  "anyOf": [
+                    {
+                      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,255}$",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Output Queue"
+                }
+              },
+              "required": [
+                "bindingId",
+                "input_mode"
+              ],
+              "title": "QueuePolicyRequest",
+              "type": "object"
+            },
+            "maxItems": 64,
+            "type": "array"
+          },
+          "spec": {
+            "$defs": {
+              "CanvasArtifact": {
+                "additionalProperties": false,
+                "properties": {
+                  "bindingId": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+                    "title": "Bindingid",
+                    "type": "string"
+                  },
+                  "id": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+                    "title": "Id",
+                    "type": "string"
+                  },
+                  "label": {
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "title": "Label",
+                    "type": "string"
+                  },
+                  "type": {
+                    "const": "artifact",
+                    "title": "Type",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type",
+                  "id",
+                  "bindingId",
+                  "label"
+                ],
+                "title": "CanvasArtifact",
+                "type": "object"
+              },
+              "CanvasForm": {
+                "additionalProperties": false,
+                "properties": {
+                  "bindingId": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+                    "title": "Bindingid",
+                    "type": "string"
+                  },
+                  "fields": {
+                    "items": {
+                      "$ref": "#/properties/spec/$defs/CanvasFormField"
+                    },
+                    "maxItems": 32,
+                    "minItems": 1,
+                    "title": "Fields",
+                    "type": "array"
+                  },
+                  "id": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+                    "title": "Id",
+                    "type": "string"
+                  },
+                  "submitLabel": {
+                    "maxLength": 128,
+                    "minLength": 1,
+                    "title": "Submitlabel",
+                    "type": "string"
+                  },
+                  "type": {
+                    "const": "form",
+                    "title": "Type",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type",
+                  "id",
+                  "bindingId",
+                  "submitLabel",
+                  "fields"
+                ],
+                "title": "CanvasForm",
+                "type": "object"
+              },
+              "CanvasFormField": {
+                "additionalProperties": false,
+                "properties": {
+                  "label": {
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "title": "Label",
+                    "type": "string"
+                  },
+                  "name": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+                    "title": "Name",
+                    "type": "string"
+                  },
+                  "required": {
+                    "title": "Required",
+                    "type": "boolean"
+                  },
+                  "type": {
+                    "enum": [
+                      "text",
+                      "integer",
+                      "boolean"
+                    ],
+                    "title": "Type",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "label",
+                  "type",
+                  "required"
+                ],
+                "title": "CanvasFormField",
+                "type": "object"
+              },
+              "CanvasStack": {
+                "additionalProperties": false,
+                "properties": {
+                  "children": {
+                    "items": {
+                      "discriminator": {
+                        "mapping": {
+                          "artifact": "#/properties/spec/$defs/CanvasArtifact",
+                          "form": "#/properties/spec/$defs/CanvasForm",
+                          "stack": "#/properties/spec/$defs/CanvasStack",
+                          "status": "#/properties/spec/$defs/CanvasStatus",
+                          "table": "#/properties/spec/$defs/CanvasTable",
+                          "text": "#/properties/spec/$defs/CanvasText"
+                        },
+                        "propertyName": "type"
+                      },
+                      "oneOf": [
+                        {
+                          "$ref": "#/properties/spec/$defs/CanvasStack"
+                        },
+                        {
+                          "$ref": "#/properties/spec/$defs/CanvasText"
+                        },
+                        {
+                          "$ref": "#/properties/spec/$defs/CanvasForm"
+                        },
+                        {
+                          "$ref": "#/properties/spec/$defs/CanvasTable"
+                        },
+                        {
+                          "$ref": "#/properties/spec/$defs/CanvasStatus"
+                        },
+                        {
+                          "$ref": "#/properties/spec/$defs/CanvasArtifact"
+                        }
+                      ]
+                    },
+                    "maxItems": 128,
+                    "title": "Children",
+                    "type": "array"
+                  },
+                  "id": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+                    "title": "Id",
+                    "type": "string"
+                  },
+                  "type": {
+                    "const": "stack",
+                    "title": "Type",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type",
+                  "id",
+                  "children"
+                ],
+                "title": "CanvasStack",
+                "type": "object"
+              },
+              "CanvasStatus": {
+                "additionalProperties": false,
+                "properties": {
+                  "bindingId": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+                    "title": "Bindingid",
+                    "type": "string"
+                  },
+                  "id": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+                    "title": "Id",
+                    "type": "string"
+                  },
+                  "type": {
+                    "const": "status",
+                    "title": "Type",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type",
+                  "id",
+                  "bindingId"
+                ],
+                "title": "CanvasStatus",
+                "type": "object"
+              },
+              "CanvasTable": {
+                "additionalProperties": false,
+                "properties": {
+                  "bindingId": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+                    "title": "Bindingid",
+                    "type": "string"
+                  },
+                  "columns": {
+                    "items": {
+                      "$ref": "#/properties/spec/$defs/CanvasTableColumn"
+                    },
+                    "maxItems": 16,
+                    "minItems": 1,
+                    "title": "Columns",
+                    "type": "array"
+                  },
+                  "id": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+                    "title": "Id",
+                    "type": "string"
+                  },
+                  "rowsKey": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+                    "title": "Rowskey",
+                    "type": "string"
+                  },
+                  "type": {
+                    "const": "table",
+                    "title": "Type",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type",
+                  "id",
+                  "bindingId",
+                  "rowsKey",
+                  "columns"
+                ],
+                "title": "CanvasTable",
+                "type": "object"
+              },
+              "CanvasTableColumn": {
+                "additionalProperties": false,
+                "properties": {
+                  "key": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+                    "title": "Key",
+                    "type": "string"
+                  },
+                  "label": {
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "title": "Label",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "key",
+                  "label"
+                ],
+                "title": "CanvasTableColumn",
+                "type": "object"
+              },
+              "CanvasText": {
+                "additionalProperties": false,
+                "properties": {
+                  "id": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+                    "title": "Id",
+                    "type": "string"
+                  },
+                  "text": {
+                    "maxLength": 4096,
+                    "minLength": 1,
+                    "title": "Text",
+                    "type": "string"
+                  },
+                  "type": {
+                    "const": "text",
+                    "title": "Type",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type",
+                  "id",
+                  "text"
+                ],
+                "title": "CanvasText",
+                "type": "object"
+              }
+            },
+            "additionalProperties": false,
+            "description": "Complete declarative CanvasSpec for the app UI. Use schemaVersion, title, visibility, bindingIds, and root. It contains logical binding labels only; it never contains Package references, results, credentials, or executable code.",
+            "properties": {
+              "bindingIds": {
+                "items": {
+                  "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+                  "type": "string"
+                },
+                "maxItems": 32,
+                "title": "Bindingids",
+                "type": "array"
+              },
+              "root": {
+                "discriminator": {
+                  "mapping": {
+                    "artifact": "#/properties/spec/$defs/CanvasArtifact",
+                    "form": "#/properties/spec/$defs/CanvasForm",
+                    "stack": "#/properties/spec/$defs/CanvasStack",
+                    "status": "#/properties/spec/$defs/CanvasStatus",
+                    "table": "#/properties/spec/$defs/CanvasTable",
+                    "text": "#/properties/spec/$defs/CanvasText"
+                  },
+                  "propertyName": "type"
+                },
+                "oneOf": [
+                  {
+                    "$ref": "#/properties/spec/$defs/CanvasStack"
+                  },
+                  {
+                    "$ref": "#/properties/spec/$defs/CanvasText"
+                  },
+                  {
+                    "$ref": "#/properties/spec/$defs/CanvasForm"
+                  },
+                  {
+                    "$ref": "#/properties/spec/$defs/CanvasTable"
+                  },
+                  {
+                    "$ref": "#/properties/spec/$defs/CanvasStatus"
+                  },
+                  {
+                    "$ref": "#/properties/spec/$defs/CanvasArtifact"
+                  }
+                ],
+                "title": "Root"
+              },
+              "schemaVersion": {
+                "const": "actions.canvas-spec/v1",
+                "title": "Schemaversion",
+                "type": "string"
+              },
+              "title": {
+                "maxLength": 128,
+                "minLength": 1,
+                "title": "Title",
+                "type": "string"
+              },
+              "visibility": {
+                "items": {
+                  "enum": [
+                    "model",
+                    "app"
+                  ],
+                  "type": "string"
+                },
+                "maxItems": 2,
+                "title": "Visibility",
+                "type": "array"
+              }
+            },
+            "required": [
+              "schemaVersion",
+              "title",
+              "visibility",
+              "bindingIds",
+              "root"
+            ],
+            "title": "CanvasSpec",
+            "type": "object"
+          }
+        },
+        "required": [
+          "appId",
+          "expectedBase",
+          "spec",
+          "bindings",
+          "idempotencyKey"
+        ]
+      },
+      "execution": null,
+      "output_schema": null,
+      "icons": null,
+      "annotations": {
+        "title": null,
+        "read_only_hint": false,
+        "destructive_hint": null,
+        "idempotent_hint": false,
+        "open_world_hint": false
+      },
+      "meta": {
+        "ui": {
+          "resourceUri": "ui://action-canvas/v1/canvas.html",
+          "visibility": [
+            "model",
+            "app"
+          ]
+        }
+      }
+    },
+    {
+      "name": "canvas_create",
+      "title": null,
+      "description": "Create a useful, unpublished Canvas draft. The returned authored spec can be edited and applied; creation never activates it.",
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Create a useful, unpublished Canvas draft. The returned authored spec can be edited and applied; creation never activates it.",
+        "properties": {
+          "idempotencyKey": {
+            "description": "Caller-chosen stable key for retrying this mutation with identical input.",
+            "maxLength": 128,
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": {
+            "description": "Optional title for a new unpublished Canvas. An empty title is rejected.",
+            "maxLength": 128,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "idempotencyKey"
+        ]
+      },
+      "execution": null,
+      "output_schema": null,
+      "icons": null,
+      "annotations": {
+        "title": null,
+        "read_only_hint": false,
+        "destructive_hint": null,
+        "idempotent_hint": false,
+        "open_world_hint": false
+      },
+      "meta": {
+        "ui": {
+          "resourceUri": "ui://action-canvas/v1/canvas.html",
+          "visibility": [
+            "model",
+            "app"
+          ]
+        }
+      }
+    },
+    {
+      "name": "canvas_get",
+      "title": null,
+      "description": "Read the authorized app's latest authored CanvasSpec or one exact revision. The response omits private binding targets and backend source.",
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Read the authorized app's latest authored CanvasSpec or one exact revision. The response omits private binding targets and backend source.",
+        "properties": {
+          "appId": {
+            "description": "Authorized Canvas application UUID.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "revisionId": {
+            "description": "Optional exact immutable revision digest. Omit or pass null for the latest staged revision.",
+            "pattern": "^sha256:[0-9a-f]{64}$",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "appId"
+        ]
+      },
+      "execution": null,
+      "output_schema": null,
+      "icons": null,
+      "annotations": {
+        "title": null,
+        "read_only_hint": true,
+        "destructive_hint": null,
+        "idempotent_hint": true,
+        "open_world_hint": false
+      },
+      "meta": {
+        "ui": {
+          "resourceUri": "ui://action-canvas/v1/canvas.html",
+          "visibility": [
+            "model",
+            "app"
+          ]
+        }
+      }
+    },
+    {
+      "name": "canvas_inspect",
+      "title": null,
+      "description": "Inspect authorized immutable revision history and identify the active revision. Each returned revision includes its authored CanvasSpec, not private binding targets or source.",
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Inspect authorized immutable revision history and identify the active revision. Each returned revision includes its authored CanvasSpec, not private binding targets or source.",
+        "properties": {
+          "appId": {
+            "description": "Authorized Canvas application UUID.",
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "appId"
+        ]
+      },
+      "execution": null,
+      "output_schema": null,
+      "icons": null,
+      "annotations": {
+        "title": null,
+        "read_only_hint": true,
+        "destructive_hint": null,
+        "idempotent_hint": true,
+        "open_world_hint": false
+      },
+      "meta": {
+        "ui": {
+          "resourceUri": "ui://action-canvas/v1/canvas.html",
+          "visibility": [
+            "model",
+            "app"
+          ]
+        }
+      }
+    },
+    {
+      "name": "canvas_open",
+      "title": null,
+      "description": "Open the app library without changing state.",
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {}
+      },
+      "execution": null,
+      "output_schema": null,
+      "icons": null,
+      "annotations": {
+        "title": null,
+        "read_only_hint": true,
+        "destructive_hint": null,
+        "idempotent_hint": true,
+        "open_world_hint": false
+      },
+      "meta": {
+        "ui": {
+          "resourceUri": "ui://action-canvas/v1/canvas.html",
+          "visibility": [
+            "model",
+            "app"
+          ]
+        }
+      }
+    },
+    {
+      "name": "canvas_preview",
+      "title": null,
+      "description": "Validate and preview a CanvasSpec, binding map, and optional backend input without compilation, persistence, activation, or Run admission.",
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Validate and preview a CanvasSpec, binding map, and optional backend input without compilation, persistence, activation, or Run admission.",
+        "properties": {
+          "backend": {
+            "additionalProperties": false,
+            "description": "Optional externally authored Python source files for a backend. The common Package compiler validates and admits them; source is never returned by Canvas tools.",
+            "properties": {
+              "files": {
+                "items": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "content": {
+                      "type": "string"
+                    },
+                    "mode": {
+                      "enum": [
+                        420,
+                        493
+                      ],
+                      "type": "integer"
+                    },
+                    "path": {
+                      "maxLength": 4096,
+                      "minLength": 1,
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "path",
+                    "content"
+                  ],
+                  "type": "object"
+                },
+                "maxItems": 16,
+                "minItems": 1,
+                "type": "array"
+              },
+              "logicalName": {
+                "maxLength": 128,
+                "minLength": 1,
+                "type": "string"
+              },
+              "workItems": {
+                "additionalProperties": false,
+                "description": "Compiler-owned capability declaration; never an execution grant.\n\nOptional accepts zero or one explicit input context; required-input requires\nan exact input; consumer permits queue claim; producer has no input context\nand may create outputs. None never manufactures a synthetic input.",
+                "properties": {
+                  "allow_outputs": {
+                    "default": false,
+                    "title": "Allow Outputs",
+                    "type": "boolean"
+                  },
+                  "mode": {
+                    "default": "none",
+                    "enum": [
+                      "none",
+                      "optional",
+                      "required-input",
+                      "consumer",
+                      "producer"
+                    ],
+                    "title": "Mode",
+                    "type": "string"
+                  }
+                },
+                "title": "WorkItemDeclaration",
+                "type": "object"
+              }
+            },
+            "required": [
+              "logicalName",
+              "files"
+            ],
+            "type": "object"
+          },
+          "bindings": {
+            "description": "Explicit logical binding targets. Provide only targets authorized for this app.",
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "bindingId": {
+                  "maxLength": 64,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "capabilityId": {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "packageRevision": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "package_id": {
+                          "format": "uuid",
+                          "type": "string"
+                        },
+                        "revision_id": {
+                          "pattern": "^sha256:[0-9a-f]{64}$",
+                          "type": "string"
+                        },
+                        "workspace_id": {
+                          "format": "uuid",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "workspace_id",
+                        "package_id",
+                        "revision_id"
+                      ],
+                      "type": "object"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "bindingId",
+                "capabilityId"
+              ],
+              "type": "object"
+            },
+            "maxItems": 32,
+            "type": "array"
+          },
+          "queuePolicies": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "bindingId": {
+                  "maxLength": 64,
+                  "minLength": 1,
+                  "title": "Bindingid",
+                  "type": "string"
+                },
+                "input_mode": {
+                  "enum": [
+                    "none",
+                    "optional",
+                    "required",
+                    "claim"
+                  ],
+                  "title": "Input Mode",
+                  "type": "string"
+                },
+                "input_queue": {
+                  "anyOf": [
+                    {
+                      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,255}$",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Input Queue"
+                },
+                "max_input_bytes": {
+                  "default": 262144,
+                  "maximum": 262144,
+                  "minimum": 1,
+                  "title": "Max Input Bytes",
+                  "type": "integer"
+                },
+                "max_output_bytes": {
+                  "default": 0,
+                  "maximum": 262144,
+                  "minimum": 0,
+                  "title": "Max Output Bytes",
+                  "type": "integer"
+                },
+                "max_output_items": {
+                  "default": 0,
+                  "maximum": 64,
+                  "minimum": 0,
+                  "title": "Max Output Items",
+                  "type": "integer"
+                },
+                "output_queue": {
+                  "anyOf": [
+                    {
+                      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,255}$",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null,
+                  "title": "Output Queue"
+                }
+              },
+              "required": [
+                "bindingId",
+                "input_mode"
+              ],
+              "title": "QueuePolicyRequest",
+              "type": "object"
+            },
+            "maxItems": 64,
+            "type": "array"
+          },
+          "spec": {
+            "$defs": {
+              "CanvasArtifact": {
+                "additionalProperties": false,
+                "properties": {
+                  "bindingId": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+                    "title": "Bindingid",
+                    "type": "string"
+                  },
+                  "id": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+                    "title": "Id",
+                    "type": "string"
+                  },
+                  "label": {
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "title": "Label",
+                    "type": "string"
+                  },
+                  "type": {
+                    "const": "artifact",
+                    "title": "Type",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type",
+                  "id",
+                  "bindingId",
+                  "label"
+                ],
+                "title": "CanvasArtifact",
+                "type": "object"
+              },
+              "CanvasForm": {
+                "additionalProperties": false,
+                "properties": {
+                  "bindingId": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+                    "title": "Bindingid",
+                    "type": "string"
+                  },
+                  "fields": {
+                    "items": {
+                      "$ref": "#/properties/spec/$defs/CanvasFormField"
+                    },
+                    "maxItems": 32,
+                    "minItems": 1,
+                    "title": "Fields",
+                    "type": "array"
+                  },
+                  "id": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+                    "title": "Id",
+                    "type": "string"
+                  },
+                  "submitLabel": {
+                    "maxLength": 128,
+                    "minLength": 1,
+                    "title": "Submitlabel",
+                    "type": "string"
+                  },
+                  "type": {
+                    "const": "form",
+                    "title": "Type",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type",
+                  "id",
+                  "bindingId",
+                  "submitLabel",
+                  "fields"
+                ],
+                "title": "CanvasForm",
+                "type": "object"
+              },
+              "CanvasFormField": {
+                "additionalProperties": false,
+                "properties": {
+                  "label": {
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "title": "Label",
+                    "type": "string"
+                  },
+                  "name": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+                    "title": "Name",
+                    "type": "string"
+                  },
+                  "required": {
+                    "title": "Required",
+                    "type": "boolean"
+                  },
+                  "type": {
+                    "enum": [
+                      "text",
+                      "integer",
+                      "boolean"
+                    ],
+                    "title": "Type",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "label",
+                  "type",
+                  "required"
+                ],
+                "title": "CanvasFormField",
+                "type": "object"
+              },
+              "CanvasStack": {
+                "additionalProperties": false,
+                "properties": {
+                  "children": {
+                    "items": {
+                      "discriminator": {
+                        "mapping": {
+                          "artifact": "#/properties/spec/$defs/CanvasArtifact",
+                          "form": "#/properties/spec/$defs/CanvasForm",
+                          "stack": "#/properties/spec/$defs/CanvasStack",
+                          "status": "#/properties/spec/$defs/CanvasStatus",
+                          "table": "#/properties/spec/$defs/CanvasTable",
+                          "text": "#/properties/spec/$defs/CanvasText"
+                        },
+                        "propertyName": "type"
+                      },
+                      "oneOf": [
+                        {
+                          "$ref": "#/properties/spec/$defs/CanvasStack"
+                        },
+                        {
+                          "$ref": "#/properties/spec/$defs/CanvasText"
+                        },
+                        {
+                          "$ref": "#/properties/spec/$defs/CanvasForm"
+                        },
+                        {
+                          "$ref": "#/properties/spec/$defs/CanvasTable"
+                        },
+                        {
+                          "$ref": "#/properties/spec/$defs/CanvasStatus"
+                        },
+                        {
+                          "$ref": "#/properties/spec/$defs/CanvasArtifact"
+                        }
+                      ]
+                    },
+                    "maxItems": 128,
+                    "title": "Children",
+                    "type": "array"
+                  },
+                  "id": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+                    "title": "Id",
+                    "type": "string"
+                  },
+                  "type": {
+                    "const": "stack",
+                    "title": "Type",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type",
+                  "id",
+                  "children"
+                ],
+                "title": "CanvasStack",
+                "type": "object"
+              },
+              "CanvasStatus": {
+                "additionalProperties": false,
+                "properties": {
+                  "bindingId": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+                    "title": "Bindingid",
+                    "type": "string"
+                  },
+                  "id": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+                    "title": "Id",
+                    "type": "string"
+                  },
+                  "type": {
+                    "const": "status",
+                    "title": "Type",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type",
+                  "id",
+                  "bindingId"
+                ],
+                "title": "CanvasStatus",
+                "type": "object"
+              },
+              "CanvasTable": {
+                "additionalProperties": false,
+                "properties": {
+                  "bindingId": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+                    "title": "Bindingid",
+                    "type": "string"
+                  },
+                  "columns": {
+                    "items": {
+                      "$ref": "#/properties/spec/$defs/CanvasTableColumn"
+                    },
+                    "maxItems": 16,
+                    "minItems": 1,
+                    "title": "Columns",
+                    "type": "array"
+                  },
+                  "id": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+                    "title": "Id",
+                    "type": "string"
+                  },
+                  "rowsKey": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+                    "title": "Rowskey",
+                    "type": "string"
+                  },
+                  "type": {
+                    "const": "table",
+                    "title": "Type",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type",
+                  "id",
+                  "bindingId",
+                  "rowsKey",
+                  "columns"
+                ],
+                "title": "CanvasTable",
+                "type": "object"
+              },
+              "CanvasTableColumn": {
+                "additionalProperties": false,
+                "properties": {
+                  "key": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+                    "title": "Key",
+                    "type": "string"
+                  },
+                  "label": {
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "title": "Label",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "key",
+                  "label"
+                ],
+                "title": "CanvasTableColumn",
+                "type": "object"
+              },
+              "CanvasText": {
+                "additionalProperties": false,
+                "properties": {
+                  "id": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+                    "title": "Id",
+                    "type": "string"
+                  },
+                  "text": {
+                    "maxLength": 4096,
+                    "minLength": 1,
+                    "title": "Text",
+                    "type": "string"
+                  },
+                  "type": {
+                    "const": "text",
+                    "title": "Type",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type",
+                  "id",
+                  "text"
+                ],
+                "title": "CanvasText",
+                "type": "object"
+              }
+            },
+            "additionalProperties": false,
+            "description": "Complete declarative CanvasSpec for the app UI. Use schemaVersion, title, visibility, bindingIds, and root. It contains logical binding labels only; it never contains Package references, results, credentials, or executable code.",
+            "properties": {
+              "bindingIds": {
+                "items": {
+                  "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+                  "type": "string"
+                },
+                "maxItems": 32,
+                "title": "Bindingids",
+                "type": "array"
+              },
+              "root": {
+                "discriminator": {
+                  "mapping": {
+                    "artifact": "#/properties/spec/$defs/CanvasArtifact",
+                    "form": "#/properties/spec/$defs/CanvasForm",
+                    "stack": "#/properties/spec/$defs/CanvasStack",
+                    "status": "#/properties/spec/$defs/CanvasStatus",
+                    "table": "#/properties/spec/$defs/CanvasTable",
+                    "text": "#/properties/spec/$defs/CanvasText"
+                  },
+                  "propertyName": "type"
+                },
+                "oneOf": [
+                  {
+                    "$ref": "#/properties/spec/$defs/CanvasStack"
+                  },
+                  {
+                    "$ref": "#/properties/spec/$defs/CanvasText"
+                  },
+                  {
+                    "$ref": "#/properties/spec/$defs/CanvasForm"
+                  },
+                  {
+                    "$ref": "#/properties/spec/$defs/CanvasTable"
+                  },
+                  {
+                    "$ref": "#/properties/spec/$defs/CanvasStatus"
+                  },
+                  {
+                    "$ref": "#/properties/spec/$defs/CanvasArtifact"
+                  }
+                ],
+                "title": "Root"
+              },
+              "schemaVersion": {
+                "const": "actions.canvas-spec/v1",
+                "title": "Schemaversion",
+                "type": "string"
+              },
+              "title": {
+                "maxLength": 128,
+                "minLength": 1,
+                "title": "Title",
+                "type": "string"
+              },
+              "visibility": {
+                "items": {
+                  "enum": [
+                    "model",
+                    "app"
+                  ],
+                  "type": "string"
+                },
+                "maxItems": 2,
+                "title": "Visibility",
+                "type": "array"
+              }
+            },
+            "required": [
+              "schemaVersion",
+              "title",
+              "visibility",
+              "bindingIds",
+              "root"
+            ],
+            "title": "CanvasSpec",
+            "type": "object"
+          }
+        },
+        "required": [
+          "spec"
+        ]
+      },
+      "execution": null,
+      "output_schema": null,
+      "icons": null,
+      "annotations": {
+        "title": null,
+        "read_only_hint": true,
+        "destructive_hint": null,
+        "idempotent_hint": true,
+        "open_world_hint": false
+      },
+      "meta": {
+        "ui": {
+          "resourceUri": "ui://action-canvas/v1/canvas.html",
+          "visibility": [
+            "model",
+            "app"
+          ]
+        }
+      }
+    },
+    {
+      "name": "canvas_release",
+      "title": null,
+      "description": "Explicitly activate one validated draft revision or roll back to one historical revision, using the expected active digest for compare-and-swap. This does not create a Run.",
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Explicitly activate one validated draft revision or roll back to one historical revision, using the expected active digest for compare-and-swap. This does not create a Run.",
+        "properties": {
+          "appId": {
+            "description": "Canvas application UUID to activate.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "candidateRevision": {
+            "description": "Exact validated draft revision to activate; provide exactly one of candidateRevision or rollbackTo.",
+            "pattern": "^sha256:[0-9a-f]{64}$",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "expectedActive": {
+            "description": "Current active revision digest for compare-and-swap activation; null only when no revision is active.",
+            "pattern": "^sha256:[0-9a-f]{64}$",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "idempotencyKey": {
+            "description": "Caller-chosen stable key for retrying this mutation with identical input.",
+            "maxLength": 128,
+            "minLength": 1,
+            "type": "string"
+          },
+          "rollbackTo": {
+            "description": "Exact historical revision to restore; provide exactly one of candidateRevision or rollbackTo.",
+            "pattern": "^sha256:[0-9a-f]{64}$",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "appId",
+          "expectedActive",
+          "idempotencyKey"
+        ]
+      },
+      "execution": null,
+      "output_schema": null,
+      "icons": null,
+      "annotations": {
+        "title": null,
+        "read_only_hint": false,
+        "destructive_hint": null,
+        "idempotent_hint": false,
+        "open_world_hint": false
+      },
+      "meta": {
+        "ui": {
+          "resourceUri": "ui://action-canvas/v1/canvas.html",
+          "visibility": [
+            "model",
+            "app"
+          ]
+        }
+      }
+    }
+  ],
+  "result_type": "complete"
+}

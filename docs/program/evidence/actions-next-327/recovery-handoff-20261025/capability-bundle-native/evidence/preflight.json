@@ -1,0 +1,7 @@
+{
+  "free_bytes": 1723650048,
+  "floor_bytes": 805306368,
+  "incremental_budget_bytes": 838860800,
+  "fits": true,
+  "reason": "serial existing no-build prepared artifact; only one capability view kept,700MiB view+100MiB transient/evidence allowance"
+}

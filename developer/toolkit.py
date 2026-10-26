@@ -14,7 +14,13 @@ from pathlib import Path
 REPOSITORY_ROOT = Path(__file__).resolve().parent.parent
 RCC_VERSION = "v18.19.3"
 PACKAGES = ("actions", "actions-http-helper", "devutils", "work-items", "action_server")
-PYPROJECTS = ("actions", "actions-http-helper", "devutils", "work-items", "action_server")
+PYPROJECTS = (
+    "actions",
+    "actions-http-helper",
+    "devutils",
+    "work-items",
+    "action_server",
+)
 ACTIVE_ENVIRONMENT_VARIABLES = (
     "VIRTUAL_ENV",
     "POETRY_ACTIVE",
@@ -199,6 +205,85 @@ def lint() -> None:
     package_task("lint")
 
 
+def invoice_query_test() -> None:
+    """Run the opt-in local provider gate, never deployment/publication."""
+    evidence = os.environ.get("ACTIONS_INVOICE_EVIDENCE_DIR")
+    if not evidence or not Path(evidence).is_absolute():
+        raise SystemExit(
+            "ACTIONS_INVOICE_EVIDENCE_DIR must be an absolute retained directory"
+        )
+    poetry("action_server", "install", "--extras", "data-duckdb")
+    command = [
+        sys.executable,
+        "action_server/scripts/verify_invoice_queries.py",
+        "--evidence-dir",
+        evidence,
+    ]
+    image = os.environ.get("ACTIONS_INVOICE_POSTGRES_IMAGE")
+    if image:
+        command.extend(["--image", image])
+    if os.environ.get("ACTIONS_INVOICE_FULL") == "1":
+        command.append("--full")
+    if os.environ.get("ACTIONS_INVOICE_BROWSER") == "1":
+        command.append("--browser")
+    if os.environ.get("ACTIONS_INVOICE_WORKER") == "1":
+        command.append("--worker")
+    if os.environ.get("ACTIONS_INVOICE_GENERATED") == "1":
+        command.append("--generated")
+    if os.environ.get("ACTIONS_INVOICE_EFFECTS") == "1":
+        command.append("--effects")
+    runtime = os.environ.get("ACTIONS_INVOICE_WORKER_RUNTIME")
+    if runtime:
+        command.extend(["--worker-runtime", runtime])
+    run(command)
+
+
+def invoice_reconciliation_demo() -> None:
+    """Start only the owned Linux loopback synthetic experiment."""
+    state = os.environ.get("ACTIONS_INVOICE_DEMO_DIR")
+    if not state or not Path(state).is_absolute():
+        raise SystemExit(
+            "ACTIONS_INVOICE_DEMO_DIR must be a fresh absolute owned directory"
+        )
+    poetry("action_server", "install", "--extras", "data-duckdb")
+    frontend = REPOSITORY_ROOT / "action_server/frontend"
+    if not (frontend / "node_modules/.package-lock.json").exists():
+        run(["npm", "ci"], frontend)
+    run(["npm", "run", "build:canvas"], frontend)
+    command = [
+        "run",
+        "python",
+        "examples/invoice_reconciliation/demo.py",
+        "--state",
+        state,
+        "--port",
+        os.environ.get("ACTIONS_INVOICE_DEMO_PORT", "8765"),
+    ]
+    runtime = os.environ.get("ACTIONS_INVOICE_WORKER_RUNTIME")
+    if runtime:
+        command.extend(["--runtime", runtime])
+    poetry("action_server", *command)
+
+
+def fenced_work_items_test() -> None:
+    """Required SQLite/PostgreSQL fence conformance using an owned local service."""
+    evidence = os.environ.get("ACTIONS_FENCED_EVIDENCE_DIR")
+    if not evidence or not Path(evidence).is_absolute():
+        raise SystemExit(
+            "ACTIONS_FENCED_EVIDENCE_DIR must be an absolute retained directory"
+        )
+    poetry("work-items", "install", "--extras", "postgres")
+    command = [
+        sys.executable,
+        "work-items/scripts/verify_fenced_queues.py",
+        "--evidence-dir",
+        evidence,
+    ]
+    if os.environ.get("ACTIONS_FENCED_FULL") == "1":
+        command.append("--full")
+    run(command)
+
+
 def typecheck() -> None:
     package_task("typecheck")
 
@@ -223,7 +308,10 @@ def coverage() -> None:
 
 
 def frontend_test() -> None:
-    run(["npm", "ci", "--no-audit", "--no-fund"], REPOSITORY_ROOT / "action_server" / "frontend")
+    run(
+        ["npm", "ci", "--no-audit", "--no-fund"],
+        REPOSITORY_ROOT / "action_server" / "frontend",
+    )
     run(["npm", "run", "test"], REPOSITORY_ROOT / "action_server" / "frontend")
 
 
@@ -262,6 +350,9 @@ COMMANDS = {
     "bootstrap": bootstrap,
     "test": test,
     "toolkit-test": toolkit_test,
+    "invoice-query-test": invoice_query_test,
+    "invoice-reconciliation-demo": invoice_reconciliation_demo,
+    "fenced-work-items-test": fenced_work_items_test,
     "lint": lint,
     "typecheck": typecheck,
     "docs": docs,

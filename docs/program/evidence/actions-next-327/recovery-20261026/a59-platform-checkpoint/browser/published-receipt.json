@@ -1,0 +1,79 @@
+{
+  "browser": {
+    "frontend_lock_sha256": "30e50040438c67254859807343cb53c288508b4895fb69648732277e8184a12a",
+    "path": "/usr/bin/chromium",
+    "playwright_version": "1.62.1",
+    "selection": "explicit",
+    "sha256": "2c8d32d29dc6781c35ae196ea83299d507ac88fc339301abe74672feda299779",
+    "status": "passed",
+    "temporary_root": "/tmp/cv-e1df6alv",
+    "temporary_root_removed": true,
+    "version": "Chromium 151.0.7922.173 built on Debian GNU/Linux 13 (trixie)"
+  },
+  "built_resource_sha256": "fe8155dcd952c7cf60d0b57cfcfad70a9df4c1d14d655d9f822858cf8053c852",
+  "limits": [
+    "Three measured worker members do not authenticate the complete wheel or prove cold registry acquisition.",
+    "artifact:null is a partial result and does not prove authorized artifact retrieval.",
+    "This source Runtime/browser gate does not claim frozen Runtime or ChatGPT acceptance.",
+    "Cleanup records point-in-time descendant observations, not universal descendant discovery or adoption."
+  ],
+  "production_package_manifest_sha256": "eec63118246ceb1c6b96bf787d77cce64bced6f3a5341ca574f75f7f614da146",
+  "published_core": {
+    "declared_version": "1.0.3",
+    "independently_verified_registry_wheel_sha256": "8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265",
+    "measured_worker": {
+      "module_hashes": {
+        "actions": "790b5e45f1a570f4d209879a47007ce94b73aab76c522bd6400867168726b0d2",
+        "actions.mcp": "c944de3b044a232143e66edd85ebd342b81b49cd100221689e22908d0dd5f365",
+        "actions.mcp._metadata": "c5750e654cb3c1e057705d80e65c4f6a935a3d81e46450d6dbf68d37f45cb48c"
+      },
+      "modules": {
+        "actions": "/workspace/actions-cloud/robocorp/temp/edd4729e98db4977/pytest-of-agent/pytest-0/test_canvas_template_runs_thro0/published-actions-home/holotree/c2fd1aa_a78733b_bdfa0780/lib/python3.12/site-packages/actions/__init__.py",
+        "actions.mcp": "/workspace/actions-cloud/robocorp/temp/edd4729e98db4977/pytest-of-agent/pytest-0/test_canvas_template_runs_thro0/published-actions-home/holotree/c2fd1aa_a78733b_bdfa0780/lib/python3.12/site-packages/actions/mcp/__init__.py",
+        "actions.mcp._metadata": "/workspace/actions-cloud/robocorp/temp/edd4729e98db4977/pytest-of-agent/pytest-0/test_canvas_template_runs_thro0/published-actions-home/holotree/c2fd1aa_a78733b_bdfa0780/lib/python3.12/site-packages/actions/mcp/_metadata.py"
+      },
+      "version": "1.0.3",
+      "worker_prefix": "/workspace/actions-cloud/robocorp/temp/edd4729e98db4977/pytest-of-agent/pytest-0/test_canvas_template_runs_thro0/published-actions-home/holotree/c2fd1aa_a78733b_bdfa0780"
+    }
+  },
+  "runtime": {
+    "active_readers": [],
+    "cleanup_errors": [],
+    "descendant_reap_complete": true,
+    "descendant_snapshot_complete": true,
+    "live_descendant_pids": [],
+    "module_origin": "/workspace/actions/action_server/src/actions/server/__init__.py",
+    "module_sha256": "95f531cc8776f5179551beb1f372421af89cab13996f0bbe3eaeb9a9d91b98ef",
+    "process_args": [
+      "/workspace/actions/action_server/.venv/bin/python",
+      "-P",
+      "-m",
+      "actions.server",
+      "start",
+      "--actions-sync=true",
+      "--port=0",
+      "--datadir=/workspace/actions-cloud/robocorp/temp/edd4729e98db4977/pytest-of-agent/pytest-0/test_canvas_template_runs_thro0/.sema4ai-test-action-server",
+      "--db-file=server.db",
+      "-v",
+      "--skip-lint",
+      "--min-processes=0",
+      "--max-processes=2"
+    ],
+    "wrapper_reaped": true,
+    "zombie_descendant_pids": []
+  },
+  "runtime_calls": [
+    "published_core_identity",
+    "canvas_fixture_search:alpha",
+    "canvas_fixture_search:unmatched-query"
+  ],
+  "scope": "published-core Runtime/browser acceptance only",
+  "source": {
+    "commit": "123e772ee36c44cfd96ea62a6c599bb4f55c8f1b",
+    "parents": [
+      "d878068ed3149e448830b0abfd5183412f185f21"
+    ],
+    "tree": "7d6658bc3f2d536519c8698503f8b379c7b3ed56"
+  },
+  "template_zip_sha256": "7500becb402d09c8adcf938c0cc6c6b69d817007c79951b97fbeee75162b943a"
+}

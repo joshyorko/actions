@@ -1,0 +1,16 @@
+[
+  "tests/action_server_tests/test_foundry_sql_authoring.py::test_durable_draft_release_revise_rollback_and_restart[sqlite]",
+  "tests/action_server_tests/test_foundry_sql_authoring.py::test_durable_draft_release_revise_rollback_and_restart[postgresql]",
+  "tests/action_server_tests/test_foundry_sql_authoring.py::test_authorization_and_revocation_apply_to_receipt_replay[sqlite]",
+  "tests/action_server_tests/test_foundry_sql_authoring.py::test_authorization_and_revocation_apply_to_receipt_replay[postgresql]",
+  "tests/action_server_tests/test_foundry_sql_authoring.py::test_concurrent_create_delivery_returns_one_durable_app[sqlite]",
+  "tests/action_server_tests/test_foundry_sql_authoring.py::test_concurrent_create_delivery_returns_one_durable_app[postgresql]",
+  "tests/action_server_tests/test_foundry_sql_authoring.py::test_stage_audit_failure_rolls_back_and_same_delivery_recovers[sqlite]",
+  "tests/action_server_tests/test_foundry_sql_authoring.py::test_stage_audit_failure_rolls_back_and_same_delivery_recovers[postgresql]",
+  "tests/action_server_tests/test_foundry_sql_authoring.py::test_genuine_mcp_sdk_authors_and_reconnects_to_common_sql[sqlite]",
+  "tests/action_server_tests/test_foundry_sql_authoring.py::test_genuine_mcp_sdk_authors_and_reconnects_to_common_sql[postgresql]",
+  "tests/action_server_tests/test_foundry_sql_authoring.py::test_same_supplied_fingerprint_cannot_hide_changed_stage_input[sqlite]",
+  "tests/action_server_tests/test_foundry_sql_authoring.py::test_same_supplied_fingerprint_cannot_hide_changed_stage_input[postgresql]",
+  "tests/action_server_tests/test_foundry_sql_authoring.py::test_fresh_interpreter_reauthorizes_and_reopens_exact_active_revision[sqlite]",
+  "tests/action_server_tests/test_foundry_sql_authoring.py::test_fresh_interpreter_reauthorizes_and_reopens_exact_active_revision[postgresql]"
+]

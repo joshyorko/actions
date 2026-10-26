@@ -67,6 +67,10 @@ jobs:
     steps:
     - name: Checkout repository and submodules
       uses: actions/checkout@v5
+      env:
+        GIT_CONFIG_COUNT: ${{ runner.os == 'Windows' && '1' || '0' }}
+        GIT_CONFIG_KEY_0: core.longpaths
+        GIT_CONFIG_VALUE_0: 'true'
     - name: Install the latest version of uv
       uses: astral-sh/setup-uv@v5
       with:
@@ -91,59 +95,12 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: 20.x
-    - name: Build frontend
-      run: uv run --no-project --python ${{ matrix.python }} inv build-frontend
-      env:
-        CI: true
+    - name: Install frontend dependencies for source Runtime browser acceptance
+      working-directory: action_server/frontend
+      run: npm ci --no-audit --no-fund
     - name: Build OAuth2 config
       run: uv run --no-project --python ${{ matrix.python }} inv build-oauth2-config
       env: {}
-    - name: Test Go wrapper child lifecycle
-      working-directory: action_server/go-wrapper
-      env:
-        GOTOOLCHAIN: local
-        GOPROXY: 'off'
-      run: go test process.go process_test.go
-    - name: Build binary
-      shell: bash
-      env:
-        RC_ACTION_SERVER_FORCE_DOWNLOAD_RCC: 'true'
-        RC_ACTION_SERVER_DO_SELFTEST: 'true'
-        MACOS_SIGNING_CERT: ${{ secrets.MACOS_SIGNING_CERT_ACTIONS_RUNTIME }}
-        MACOS_SIGNING_CERT_PASSWORD: ${{ secrets.MACOS_SIGNING_CERT_PASSWORD_ACTIONS_RUNTIME
-          }}
-        MACOS_SIGNING_CERT_NAME: ${{ secrets.MACOS_SIGNING_CERT_NAME_ACTIONS_RUNTIME
-          }}
-        APPLEID: ${{ secrets.MACOS_APP_ID_FOR_NOTARIZATION_ACTIONS_RUNTIME }}
-        APPLETEAMID: ${{ secrets.MACOS_TEAM_ID_FOR_NOTARIZATION_ACTIONS_RUNTIME }}
-        APPLEIDPASS: ${{ secrets.MACOS_APP_ID_PASSWORD_ACTIONS_RUNTIME }}
-        VAULT_URL: ${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_URL_ACTIONS_RUNTIME }}
-        CLIENT_ID: ${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_CLIENT_ID_ACTIONS_RUNTIME
-          }}
-        TENANT_ID: ${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_TENANT_ID_ACTIONS_RUNTIME
-          }}
-        CLIENT_SECRET: ${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_CLIENT_SECRET_ACTIONS_RUNTIME
-          }}
-        CERTIFICATE_NAME: ${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_CERTIFICATE_NAME_ACTIONS_RUNTIME
-          }}
-        GITHUB_EVENT_NAME: ${{ github.event_name }}
-        GITHUB_REF_NAME: ${{ github.ref_name }}
-        GITHUB_PR_NUMBER: ${{ github.event.pull_request.number }}
-      run: if [ -n "$MACOS_SIGNING_CERT" ] || [ -n "$VAULT_URL" ]; then uv run --no-project
-        --python ${{ matrix.python }} poetry run inv build-executable --sign --go-wrapper;
-        else uv run --no-project --python ${{ matrix.python }} poetry run inv build-executable
-        --go-wrapper; fi
-    - name: 'Upload artifact: action_server/dist/final/'
-      uses: actions/upload-artifact@v4
-      with:
-        name: action-server-${{ matrix.os }}
-        path: action_server/dist/final/
-    - name: Test (not integration)
-      env:
-        GITHUB_ACTIONS_MATRIX_NAME: ${{ matrix.name }}
-        CI_CREDENTIALS: ${{ secrets.CI_CREDENTIALS }}
-        CI_ENDPOINT: ${{ secrets.CI_ENDPOINT }}
-      run: uv run --no-project --python ${{ matrix.python }} poetry run inv test-not-integration
     - name: Install Playwright Chromium for Runtime browser acceptance
       working-directory: action_server/frontend
       run: npx playwright install chromium
@@ -185,8 +142,10 @@ jobs:
         \ \\\n  -q -n 0 \\\n  --basetemp \"$TMPDIR/pytest\" \\\n  --junitxml \"$junit_raw\"\
         \ >\"$TMPDIR/pytest.log\" 2>&1\npytest_status=$?\nset -e\nsource_sha=\"$(git\
         \ rev-parse HEAD)\"\nsource_tree=\"$(git rev-parse 'HEAD^{tree}')\"\nsource_parents=\"\
-        $(git show -s --format=%P HEAD)\"\npoetry_cmd run python - \"$junit_raw\"\
-        \ \"$junit_safe\" \"$pytest_status\" \\\n  \"$CANVAS_TEMPLATE_PUBLISHED_RECEIPT_PATH\"\
+        $(git show -s --format=%P HEAD)\"\nif ! poetry_cmd run python scripts/summarize_candidate_failure_327.py\
+        \ \"$junit_raw\" published; then\n  echo 'Published Canvas failure-location\
+        \ diagnostics unavailable.'\nfi\npoetry_cmd run python - \"$junit_raw\" \"\
+        $junit_safe\" \"$pytest_status\" \\\n  \"$CANVAS_TEMPLATE_PUBLISHED_RECEIPT_PATH\"\
         \ \"$receipt_safe\" \\\n  \"$source_sha\" \"$source_tree\" \"$source_parents\"\
         \ \"$browser_sha256\" \"$browser_version\" <<'PY'\nimport copy\nimport hashlib\n\
         import json\nimport re\nimport sys\nimport xml.etree.ElementTree as ET\nimport\
@@ -266,10 +225,10 @@ jobs:
         \ == Path('src/actions/server/__init__.py').resolve()),\n        ('runtime_module_digest',\
         \ lambda: runtime.get('module_sha256') == hashlib.sha256(Path('src/actions/server/__init__.py').read_bytes()).hexdigest()),\n\
         \        ('runtime_args_list', lambda: isinstance(runtime_args, list)),\n\
-        \        ('runtime_args_count', lambda: len(runtime_args) >= 3),\n       \
+        \        ('runtime_args_count', lambda: len(runtime_args) >= 4),\n       \
         \ ('runtime_interpreter_absolute', lambda: Path(runtime_args[0]).is_absolute()),\n\
-        \        ('runtime_module_entry', lambda: runtime_args[1:3] == ['-m', 'actions.server']),\n\
-        \        ('runtime_wrapper_reaped', lambda: runtime.get('wrapper_reaped')\
+        \        ('runtime_module_entry', lambda: runtime_args[1:4] == ['-P', '-m',\
+        \ 'actions.server']),\n        ('runtime_wrapper_reaped', lambda: runtime.get('wrapper_reaped')\
         \ is True),\n        ('runtime_live_descendants_empty', lambda: runtime.get('live_descendant_pids')\
         \ == []),\n        ('runtime_readers_empty', lambda: runtime.get('active_readers')\
         \ == []),\n        ('runtime_zombies_empty', lambda: runtime.get('zombie_descendant_pids')\
@@ -337,20 +296,20 @@ jobs:
         src/actions/server/__init__.py\").resolve()\n            and runtime.get(\"\
         module_sha256\") == hashlib.sha256(Path(\"src/actions/server/__init__.py\"\
         ).read_bytes()).hexdigest()\n            and isinstance(runtime_args, list)\
-        \ and len(runtime_args) >= 3\n            and Path(runtime_args[0]).is_absolute()\
-        \ and runtime_args[1:3] == [\"-m\", \"actions.server\"]\n            and runtime.get(\"\
-        wrapper_reaped\") is True\n            and runtime.get(\"live_descendant_pids\"\
-        ) == []\n            and runtime.get(\"active_readers\") == []\n         \
-        \   and runtime.get(\"zombie_descendant_pids\") == []\n            and runtime.get(\"\
-        descendant_snapshot_complete\") is True\n            and runtime.get(\"descendant_reap_complete\"\
-        ) is True\n            and runtime.get(\"cleanup_errors\") == []\n       \
-        \     and receipt.get(\"runtime_calls\") == [\"published_core_identity\",\
-        \ \"canvas_fixture_search:alpha\", \"canvas_fixture_search:unmatched-query\"\
-        ]\n            and receipt.get(\"template_zip_sha256\") == hashlib.sha256(Path(\"\
-        src/actions/server/templates/zips/canvas-query.zip\").read_bytes()).hexdigest()\n\
-        \            and receipt.get(\"production_package_manifest_sha256\") == hashlib.sha256(Path(\"\
-        ../templates/canvas-query/package.yaml\").read_bytes()).hexdigest()\n    \
-        \        and receipt.get(\"built_resource_sha256\") == expected_resource_sha256\n\
+        \ and len(runtime_args) >= 4\n            and Path(runtime_args[0]).is_absolute()\
+        \ and runtime_args[1:4] == [\"-P\", \"-m\", \"actions.server\"]\n        \
+        \    and runtime.get(\"wrapper_reaped\") is True\n            and runtime.get(\"\
+        live_descendant_pids\") == []\n            and runtime.get(\"active_readers\"\
+        ) == []\n            and runtime.get(\"zombie_descendant_pids\") == []\n \
+        \           and runtime.get(\"descendant_snapshot_complete\") is True\n  \
+        \          and runtime.get(\"descendant_reap_complete\") is True\n       \
+        \     and runtime.get(\"cleanup_errors\") == []\n            and receipt.get(\"\
+        runtime_calls\") == [\"published_core_identity\", \"canvas_fixture_search:alpha\"\
+        , \"canvas_fixture_search:unmatched-query\"]\n            and receipt.get(\"\
+        template_zip_sha256\") == hashlib.sha256(Path(\"src/actions/server/templates/zips/canvas-query.zip\"\
+        ).read_bytes()).hexdigest()\n            and receipt.get(\"production_package_manifest_sha256\"\
+        ) == hashlib.sha256(Path(\"../templates/canvas-query/package.yaml\").read_bytes()).hexdigest()\n\
+        \            and receipt.get(\"built_resource_sha256\") == expected_resource_sha256\n\
         \            and browser.get(\"status\") == \"passed\" and browser.get(\"\
         selection\") == \"explicit\"\n            and browser.get(\"version\") ==\
         \ browser_version\n            and is_sha256(browser_sha256) and browser.get(\"\
@@ -411,6 +370,83 @@ jobs:
           '
         if-no-files-found: error
         retention-days: 7
+    - name: Build frontend
+      run: uv run --no-project --python ${{ matrix.python }} inv build-frontend --no-install
+      env:
+        CI: true
+    - name: Test Go wrapper child lifecycle
+      working-directory: action_server/go-wrapper
+      env:
+        GOTOOLCHAIN: local
+        GOPROXY: 'off'
+      run: go test process.go process_test.go
+    - name: Build binary
+      shell: bash
+      env:
+        RC_ACTION_SERVER_FORCE_DOWNLOAD_RCC: 'true'
+        RC_ACTION_SERVER_DO_SELFTEST: 'true'
+        MACOS_SIGNING_CERT: ${{ secrets.MACOS_SIGNING_CERT_ACTIONS_RUNTIME }}
+        MACOS_SIGNING_CERT_PASSWORD: ${{ secrets.MACOS_SIGNING_CERT_PASSWORD_ACTIONS_RUNTIME
+          }}
+        MACOS_SIGNING_CERT_NAME: ${{ secrets.MACOS_SIGNING_CERT_NAME_ACTIONS_RUNTIME
+          }}
+        APPLEID: ${{ secrets.MACOS_APP_ID_FOR_NOTARIZATION_ACTIONS_RUNTIME }}
+        APPLETEAMID: ${{ secrets.MACOS_TEAM_ID_FOR_NOTARIZATION_ACTIONS_RUNTIME }}
+        APPLEIDPASS: ${{ secrets.MACOS_APP_ID_PASSWORD_ACTIONS_RUNTIME }}
+        VAULT_URL: ${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_URL_ACTIONS_RUNTIME }}
+        CLIENT_ID: ${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_CLIENT_ID_ACTIONS_RUNTIME
+          }}
+        TENANT_ID: ${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_TENANT_ID_ACTIONS_RUNTIME
+          }}
+        CLIENT_SECRET: ${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_CLIENT_SECRET_ACTIONS_RUNTIME
+          }}
+        CERTIFICATE_NAME: ${{ secrets.WIN_SIGN_AZURE_KEY_VAULT_CERTIFICATE_NAME_ACTIONS_RUNTIME
+          }}
+        GITHUB_EVENT_NAME: ${{ github.event_name }}
+        GITHUB_REF_NAME: ${{ github.ref_name }}
+        GITHUB_PR_NUMBER: ${{ github.event.pull_request.number }}
+      run: if [ -n "$MACOS_SIGNING_CERT" ] || [ -n "$VAULT_URL" ]; then uv run --no-project
+        --python ${{ matrix.python }} poetry run inv build-executable --sign --go-wrapper;
+        else uv run --no-project --python ${{ matrix.python }} poetry run inv build-executable
+        --go-wrapper; fi
+    - name: 'Upload artifact: action_server/dist/final/'
+      uses: actions/upload-artifact@v4
+      with:
+        name: action-server-${{ matrix.os }}
+        path: action_server/dist/final/
+    - name: Start owned PostgreSQL for portable Runtime tests
+      if: runner.os == 'Linux'
+      shell: bash
+      run: "set -euo pipefail\nimage=postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81\n\
+        docker pull \"$image\"\ncid=$(docker run --detach --pull=never --rm \\\n \
+        \ --name \"actions-runtime-tests-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}\"\
+        \ \\\n  --memory=3g --cpus=2 --pids-limit=256 \\\n  --tmpfs /var/lib/postgresql/data:size=2g\
+        \ \\\n  --publish 127.0.0.1::5432 \\\n  --env POSTGRES_PASSWORD=synthetic-runtime-ci-only\
+        \ \"$image\")\n[[ \"$cid\" =~ ^[0-9a-f]{64}$ ]]\necho \"ACTIONS_RUNTIME_TEST_POSTGRES_CID=$cid\"\
+        \ >> \"$GITHUB_ENV\"\nready=false\nfor attempt in {1..60}; do\n  if docker\
+        \ exec \"$cid\" pg_isready -U postgres; then ready=true; break; fi\n  sleep\
+        \ 1\ndone\n[[ \"$ready\" == true ]]\nport=$(docker port \"$cid\" 5432/tcp)\n\
+        [[ \"$port\" =~ ^127\\.0\\.0\\.1:([0-9]+)$ ]]\nurl=\"postgresql://postgres:synthetic-runtime-ci-only@127.0.0.1:${BASH_REMATCH[1]}/postgres\"\
+        \necho \"::add-mask::$url\"\necho \"ACTIONS_INVOICE_TEST_POSTGRES=$url\" >>\
+        \ \"$GITHUB_ENV\"\necho \"ACTIONS_TEST_POSTGRES_URL=$url\" >> \"$GITHUB_ENV\"\
+        \necho \"ACTIONS_REQUIRE_INVOICE_PROVIDERS=1\" >> \"$GITHUB_ENV\"\n"
+    - name: Test (not integration)
+      env:
+        GITHUB_ACTIONS_MATRIX_NAME: ${{ matrix.name }}
+        CI_CREDENTIALS: ${{ secrets.CI_CREDENTIALS }}
+        CI_ENDPOINT: ${{ secrets.CI_ENDPOINT }}
+      run: uv run --no-project --python ${{ matrix.python }} poetry run inv test-not-integration
+    - name: Remove owned portable-test PostgreSQL
+      if: always() && runner.os == 'Linux'
+      shell: bash
+      run: "set -euo pipefail\ncid=\"${ACTIONS_RUNTIME_TEST_POSTGRES_CID:-}\"\nif\
+        \ [[ -n \"$cid\" ]]; then\n  [[ \"$cid\" =~ ^[0-9a-f]{64}$ ]]\n  docker rm\
+        \ --force \"$cid\"\n  for attempt in {1..10}; do\n    remaining=$(docker ps\
+        \ --all --no-trunc --quiet --filter \"id=$cid\")\n    if [[ -z \"$remaining\"\
+        \ ]]; then break; fi\n    sleep 1\n  done\n  [[ -z \"$remaining\" ]]\nfi\n\
+        echo \"ACTIONS_INVOICE_TEST_POSTGRES=\" >> \"$GITHUB_ENV\"\necho \"ACTIONS_TEST_POSTGRES_URL=\"\
+        \ >> \"$GITHUB_ENV\"\necho \"ACTIONS_REQUIRE_INVOICE_PROVIDERS=0\" >> \"$GITHUB_ENV\"\
+        \n"
     - name: Test (integration)
       env:
         GITHUB_ACTIONS_MATRIX_NAME: ${{ matrix.name }}

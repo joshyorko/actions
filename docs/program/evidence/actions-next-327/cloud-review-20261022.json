@@ -1,0 +1,397 @@
+{
+  "source_sha": "185bb1b432f1fb84e145bdcd6f31950f55095659",
+  "base_sha": "5e55a1cd3304bd1010118a41e93779a3455babb6",
+  "implementation_sha": "fc2aebfb08559daae660ee2e96b5dbea1cc15e92",
+  "branch": "release/327-invoice-vertical-20261020",
+  "draft_pr": 328,
+  "release_issue": 327,
+  "status": "BOUNDED_REVIEW_QUALIFIED_FULL_RELEASE_NOT_READY",
+  "versions": {
+    "runtime": "1.1.0a1",
+    "sdk": "0.5.0a1",
+    "runtime_sdk_requirement": ">=0.5.0a1,<0.6.0",
+    "disposition": "provisional, built/tested only; no publication; published 1.0.4/0.4.4 identifiers not reused for changed artifacts"
+  },
+  "behavior": {
+    "decision": "explicit app-audience actor decision; current read plus separate review authority",
+    "binding": [
+      "sealed result handle/digest",
+      "input digest",
+      "operator-asserted source version",
+      "request fingerprint",
+      "workspace",
+      "application identity/revision",
+      "deployment identity/revision"
+    ],
+    "sql": "migration 16; existing Runtime SQL connection; approval and one SDK Work Item insert share transaction",
+    "lifecycle": "Review, Work Item, Run and Attempt stay distinct; approval starts no Run/Attempt/RCC worker",
+    "bridge": "private JSON-only SQLReviewQueue; no standalone adapter, retry/effect policy or attachments implied"
+  },
+  "toolchain": {
+    "rcc_version": "18.19.3",
+    "rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "gateway": [
+      "Doctor",
+      "Bootstrap",
+      "ToolkitTest:179 passed"
+    ],
+    "gateway_evidence": {
+      "path": "/workspace/actions-327-state/evidence/review/final-candidate-gateway.log",
+      "sha256": "dcfbb9266a04350adf615607b00ac827ffeda753dd036faad2d31691978a3137"
+    },
+    "isolation": [
+      "task-owned RCC/ACTIONS/ROBOTS/XDG/Poetry/npm homes",
+      "in-project venvs, noneditable SDK install",
+      "official digest-pinned PostgreSQL 15.19, --pull=never, task-owned ephemeral loopback/tmpfs fixtures",
+      "no network/security/credential changes"
+    ],
+    "successful_setup_difference": "Supported isolated homes/cache and prepared locked environment were used. No causal explanation for sibling Poetry/PyPI failure established."
+  },
+  "commands": [
+    "bash /workspace/actions-327-state/run-prepared ./devutils/bin/develop.sh Doctor -> Bootstrap -> ToolkitTest",
+    "ACTIONS_INVOICE_EVIDENCE_DIR=<owned>/final ACTIONS_INVOICE_BROWSER=1 ACTIONS_INVOICE_FULL=1 bash <prepared> ./devutils/bin/develop.sh InvoiceQueryTest",
+    "ACTIONS_FENCED_EVIDENCE_DIR=<owned>/fenced ACTIONS_FENCED_FULL=1 bash <prepared> ./devutils/bin/develop.sh FencedWorkItemsTest",
+    "bash <prepared> ./devutils/bin/develop.sh Lint -> Typecheck; poetry check --lock in Runtime and SDK",
+    "locked npm ci; npm run test:quality; vitest run --config apps/canvas-view/vitest.config.ts; npm run build:canvas; locked playwright install chromium",
+    "clean committed-source candidate: poetry run invoke build-executable --go-wrapper --version 1.1.0a1 (GOFLAGS=-buildvcs=false, owned Go cache); write_native_artifact_manifest.py; dakota_workitems_native_acceptance.py with both artifacts, candidate SDK/Core wheels and measured manifest",
+    "prepared RCC Python: isolated venv, exact Runtime/SDK wheels plus pinned measured dependency graph; python -I copied committed review/MCP/candidate tests against owned real PostgreSQL fixture"
+  ],
+  "runtime": {
+    "receipt": {
+      "path": "/workspace/actions-327-state/evidence/review/final/1f096cff-991a-4fb6-af15-3cae847b205b/receipt.json",
+      "sha256": "4de52ccc811b919e1686e7ca53b4a05d3309c2f1ed8756df41afbeb65053b488"
+    },
+    "counts": {
+      "components": {
+        "tests": 105,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "invoice": {
+        "tests": 128,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "browser": {
+        "tests": 2,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "portable": {
+        "tests": 1718,
+        "skipped": 14,
+        "failures": 0,
+        "errors": 0
+      }
+    },
+    "summary": "105 component +128 provider/output +2 real-socket E2 browser cases; portable 1704 passed,14 skipped,157 deselected,16 warnings",
+    "cleanup": "PASS",
+    "skips": [
+      {
+        "class": "tests.action_server_tests.common_tests.test_uris",
+        "name": "test_normalize_uri",
+        "reason": "Windows only"
+      },
+      {
+        "class": "tests.action_server_tests.common_tests.test_uris",
+        "name": "test_win_to_fs_path[file:///c:/far/boo-c:\\\\far\\\\boo]",
+        "reason": "Windows only"
+      },
+      {
+        "class": "tests.action_server_tests.common_tests.test_uris",
+        "name": "test_win_to_fs_path[file:///C:/far/boo-c:\\\\far\\\\boo]",
+        "reason": "Windows only"
+      },
+      {
+        "class": "tests.action_server_tests.common_tests.test_uris",
+        "name": "test_win_to_fs_path[file:///C:/far/space%20%3Fboo-c:\\\\far\\\\space ?boo]",
+        "reason": "Windows only"
+      },
+      {
+        "class": "tests.action_server_tests.common_tests.test_uris",
+        "name": "test_win_from_fs_path[c:\\\\far\\\\boo-file:///c:/far/boo]",
+        "reason": "Windows only"
+      },
+      {
+        "class": "tests.action_server_tests.common_tests.test_uris",
+        "name": "test_win_from_fs_path[C:\\\\far\\\\space ?boo-file:///c:/far/space%20%3Fboo]",
+        "reason": "Windows only"
+      },
+      {
+        "class": "tests.action_server_tests.test_artifact_binding_lock",
+        "name": "test_windows_binding_does_not_import_fcntl",
+        "reason": "Requires native Windows locking"
+      },
+      {
+        "class": "tests.action_server_tests.test_artifact_storage",
+        "name": "test_storage_handles_mixed_resolved_drive_prefixes",
+        "reason": "native Windows path resolution"
+      },
+      {
+        "class": "tests.action_server_tests.test_package",
+        "name": "test_package_upload",
+        "reason": "Skip package upload test"
+      },
+      {
+        "class": "tests.action_server_tests.test_package",
+        "name": "test_package_status",
+        "reason": "Skip package upload test"
+      },
+      {
+        "class": "tests.action_server_tests.test_package",
+        "name": "test_package_set_changelog",
+        "reason": "Skip package upload test"
+      },
+      {
+        "class": "tests.action_server_tests.test_rcc_runtime_adapter",
+        "name": "test_real_rcc_artifact_action_vertical",
+        "reason": "set ACTIONS_REAL_RCC_ARTIFACT_TEST=1"
+      },
+      {
+        "class": "tests.action_server_tests.test_robot_artifacts",
+        "name": "test_rejects_socket_entries",
+        "reason": "Filesystem cannot create this Unix socket fixture"
+      },
+      {
+        "class": "tests.action_server_tests.test_robot_run_inputs",
+        "name": "test_pinned_rcc_executes_selected_task_with_declared_inputs",
+        "reason": "set ACTIONS_ROBOT_INPUT_RCC to pinned RCC18.19.3 for actual task-input acceptance"
+      }
+    ]
+  },
+  "sdk": {
+    "receipt": {
+      "path": "/workspace/actions-327-state/evidence/review/fenced/a4ee39ba-23ac-4a27-ace2-514c07737743/receipt.json",
+      "sha256": "610c070f4a0ed24604903f4c65c9a5502311a775c9e4a4e91ff9b872a8c7e20c"
+    },
+    "counts": {
+      "conformance": {
+        "tests": 45,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "portable": {
+        "tests": 321,
+        "skipped": 38,
+        "failures": 0,
+        "errors": 0
+      }
+    },
+    "summary": "45 conformance passed; portable 283 passed,28 skipped,10 xfailed,3 deselected; JUnit skipped38 includes xfails",
+    "cleanup": "PASS",
+    "source_binding": "Receipt was recorded while HEAD was 5e55a1c; all 18 measured input hashes independently match committed source 185bb1b432f1fb84e145bdcd6f31950f55095659."
+  },
+  "installed_pair": {
+    "receipt": {
+      "path": "/workspace/actions-327-state/evidence/review/installed/receipt.json",
+      "sha256": "be62616be92ec116efd06a15be1f61e69c643073768dd09fd7419d17d4396fc9"
+    },
+    "identity": {
+      "path": "/workspace/actions-327-state/evidence/review/installed/identity.json",
+      "sha256": "9f7272aa672f9e6163802f7c896453eb171278d18b43a4df1f9f6d61847ba906"
+    },
+    "summary": "74 passed,0 skipped; 15682 warnings (mainly robocorp-log AST deprecations and copied-test marker registrations)",
+    "wheel_build_source": "fc2aebfb08559daae660ee2e96b5dbea1cc15e92",
+    "source_equivalence": {
+      "path": "/workspace/actions-327-state/evidence/review/source-binding.json",
+      "sha256": "3b8cb8bae4bd0a84770ae7ae82082e0f3394b451f76953f3908962c2545b918e"
+    },
+    "test_harness": {
+      "path": "/workspace/actions-327-state/review-installed/prove.py",
+      "sha256": "d8dd10c4cb6b59c9973e39f217d079d23f138912269f842efe47e6ed3af8034b"
+    },
+    "install_report": {
+      "path": "/workspace/actions-327-state/review-installed/install-report.json",
+      "sha256": "f5c5ea551ab928418b48d25c1dc78e0956de4183ff2c06f696722fbe7523377e"
+    },
+    "cleanup": "PASS"
+  },
+  "native_linux": {
+    "receipt": {
+      "path": "/workspace/actions-327-state/evidence/review/native-receipt-final.json",
+      "sha256": "c3c3d2551cb3c5c89ca2c3865fa43d606cd9be6d5d26b73f07355f840da8c12a"
+    },
+    "summary": "2 lifecycle cases passed (frozen and Go); actual installed candidate SDK0.5.0a1 URL/wheel SHA/distribution-ownership proofs, success/failure/recovery and persisted restart readback",
+    "manifest": {
+      "path": "/workspace/actions-327-state/evidence/review/native-manifest-final.json",
+      "sha256": "92c89397b9c86a6f252d5ff2cd811c881955b13933d27481337129077e81f85f"
+    },
+    "sdk_wheel_sha256": "5788f4b346d1dd6c61ba9f68ad30ae2cc56bf9488d22e49bd808e1df49915cd0",
+    "limitation": "generic synthetic native consumer, not invoice review-to-worker execution; seeded stale reservation is not process-crash proof; GOFLAGS disabled VCS stamping after exit128, measured manifest binds source/artifacts"
+  },
+  "static_frontend": {
+    "lint": "PASS; optional Markdown lint unavailable",
+    "typecheck": "PASS all affected packages; Runtime383 source files",
+    "lock": "PASS both packages; Poetry metadata deprecation warnings retained",
+    "quality": "PASS",
+    "canvas_tests": "15 passed,1 optional Python/TS interchange skipped",
+    "canvas_build": "PASS; Browserslist data-age warning retained",
+    "receipts": [
+      {
+        "path": "/workspace/actions-327-state/evidence/review/lint-final.log",
+        "sha256": "711e11c750aaf8a866f5ee2471f7d3f7312fb569179359ceec518b21c939e096"
+      },
+      {
+        "path": "/workspace/actions-327-state/evidence/review/typecheck-final.log",
+        "sha256": "890a096d6a7c529ae91218454b022352f1b7a51cdd17374dd227676d1c99ccef"
+      },
+      {
+        "path": "/workspace/actions-327-state/evidence/review/runtime-lock.log",
+        "sha256": "da2eb86f12b4dcc841bddc4e00a8fddb70012003765fb417eafb3f6acfe92a7f"
+      },
+      {
+        "path": "/workspace/actions-327-state/evidence/review/sdk-lock.log",
+        "sha256": "a2428ed4ae02d9dbfff2895449321f5a297182c3fd189cddfe630c6e0fa76747"
+      },
+      {
+        "path": "/workspace/actions-327-state/evidence/review/frontend-quality-fixed.log",
+        "sha256": "409da247e1e3ce84a732a4cd5be8c241ff94dbb809366279781605cdfd706e41"
+      },
+      {
+        "path": "/workspace/actions-327-state/evidence/review/frontend-tests.log",
+        "sha256": "d548c6891c0dbc9bd60d5339a8159a7d546d0bda27a4245f1631b85db74a2dc1"
+      },
+      {
+        "path": "/workspace/actions-327-state/evidence/review/frontend-build.log",
+        "sha256": "104d25ebd6db19a6bc4d925dc1b791a4d5ba40d05b1c37bdb956f65533885f20"
+      }
+    ]
+  },
+  "failure_receipts": [
+    {
+      "evidence": "candidate-red.log",
+      "result": "2 failures before candidate version/admission fix"
+    },
+    {
+      "evidence": "sqlite-first.log",
+      "result": "initial review FK field error; fixed naming run_id"
+    },
+    {
+      "evidence": "review-red.log",
+      "result": "collection rejected the new SDK bridge before its installed candidate was refreshed; installed distribution rebuilt/admitted, no source overlay used"
+    },
+    {
+      "evidence": "focused/10347685-6cea-47d5-8cbf-9a8172f67145",
+      "result": "65 component passed; invoice127passed/1 schema golden failure; golden updated for migration16"
+    },
+    {
+      "evidence": "native-sdk-red.log;mcp-red.log;ui-red-real.log",
+      "result": "new capability regressions reproduced before implementations"
+    },
+    {
+      "evidence": "typecheck-first.log;frontend-quality.log;native-harness.log",
+      "result": "one type error, formatting failure,3 native harness SDK fixture failures; corrected; harness30passed"
+    },
+    {
+      "evidence": "full/6953b140-9aac-4b44-91c8-c7b94c12ad96",
+      "result": "105component+128invoice passed; browser2failed missing locked Chromium; portable not run; owned browser acquisition then fresh gate passed"
+    },
+    {
+      "evidence": "committed/1eba8e2f-4e57-4774-a78f-b6ccf58b4723",
+      "result": "portable1697passed,6failed,14skipped,157deselected; four historical migration fixture/expectation failures and two candidate-floor contract failures; corrected without relaxing public-version default"
+    },
+    {
+      "evidence": "native-build.log;native-build-final.log",
+      "result": "initial Go VCS status128; clean final root command wrong working directory (no pyproject); package command with explicit measured build options passed"
+    },
+    {
+      "evidence": "native-acceptance.log",
+      "result": "two native cases reached successful consumer execution then failed422 because failure scenario omitted new SDK proof arguments; fixed and final2passed"
+    },
+    {
+      "evidence": "installed-setup.log;installed-requirements.log",
+      "result": "initial tool-wide graph requested VCS-only lazydocs0.5.0 from PyPI and initial focused graph asked for absent optional packages; actual Runtime/SDK plus test dependency graph installed successfully"
+    }
+  ],
+  "hosted_regression": {
+    "primary": {
+      "path": "/workspace/actions-327-state/evidence/review/hosted-failure-primary.json",
+      "sha256": "c7bf946ed76ad72befdda44c916e6185587f463195611015a74cdd5979618ae5"
+    },
+    "run": 39789703880,
+    "head": "5e55a1cd3304bd1010118a41e93779a3455babb6",
+    "merge_checkout": "4614ab139c5c59627aadd6652c2a3f384cca9935",
+    "tree_equals_head": "36e0b5a470d3eb4979d626e1f07707662c1b2a3a",
+    "observed": "all3OS consumer2cases HTTP500 Unexpected error(ValueError); published worker SDK0.4.4 observed. Original inner cause not established. Local candidate-wheel native2pass does not retroactively diagnose that exception.",
+    "remaining": "fresh3OS hosted consumer and later skipped binary/browser/storage/history gates; Windows/macOS candidate-source Canvas skipped, Ubuntu passed",
+    "current_checkpoint_runs": "Read-only runs lookup for cff8c9e9 returned no new hosted run; fresh platform rerun remains required, not claimed queued or green."
+  },
+  "source_identity": {
+    "committed_inputs": {
+      "path": "/workspace/actions-327-state/evidence/review/changed-inputs.json",
+      "sha256": "f29eba95feaf2e8119ce1625731bbcc88a64f56f96a00f127cb8c3ebb8f0b5e5"
+    },
+    "verifier_inputs_checked_against_git": 51,
+    "installed_module_bytes_checked_against_git": 4,
+    "excluded": "untracked local _oauth2_config.py was not staged or used for accepted artifact builds; clean-wheel fixture now generates only from tracked public inputs in an owned source archive",
+    "sdk_verifier_inputs_checked_against_git": 18
+  },
+  "cleanup": {
+    "owned_postgres_containers": "none remain; all receipt cleanup PASS",
+    "native_runtime": "both owned native cases stop/restart/stop with supervised fixture cleanup",
+    "process_reaping": "pending environment PID1: known test helper/browser descendants are zombies with PPID1; no signal can reap nonchildren, no PID1 action attempted",
+    "zombie_pids": [
+      15489,
+      15492,
+      15926,
+      18720,
+      18723,
+      19158,
+      35574,
+      35575,
+      35680,
+      35681,
+      38862,
+      38865,
+      45412,
+      45413,
+      45515,
+      45516
+    ]
+  },
+  "rollback": "Migration16 is additive; disable trusted review binding to stop new admission and retain audit/Work Items. Downgrade requires coordinated pre-upgrade SQL/output backups and restore proof; no deletion or production migration performed. No approved work can be undone after completion.",
+  "documentation_improvement": {
+    "docs/skills/work-items.md": "Version/floor plan plus durable exact-result binding, same-transaction Work Item insertion, Counter->Workspace ordering, replay/expiry/current authority/cancellation semantics, narrow SDK bridge contract, provenance and rollback limits. Evidence: real-SQL review tests, MCP/browser and installed/native receipts.",
+    "docs/skills/repository-operations.md": "App-only review tool qualification, strict public canary versus explicit candidate version, Git-tracked owned clean-wheel generation, and complete later-migration table removal in backdated fixtures. Evidence: reproduced6fail full run,5 migration regressions + published-floor separation test and fresh full gate.",
+    "docs/program/actions-next-release-327.md": "Existing release matrix advances bounded review only and names the next distinct Run/Attempt/RCC linkage; E1,celld,platform/retry/effect/distribution/restore gates remain open."
+  },
+  "remaining_ordered_matrix": [
+    "Link one approved Work Item to distinct pinned Run/Attempt and execute one synthetic invoice task through actual RCC18.19.3; durable artifact/result plus claim and source lineage.",
+    "Prove restart/cancel/stale output, duplicate/lost acknowledgement reconciliation and explicit retry/dead-letter/effect receipt policy across Work Item and Run authorities.",
+    "Connect reviewed generated immutable Canvas revision lifecycle to this invoice flow and qualify all authorization boundaries.",
+    "Fresh3OS hosted frozen/Go consumer, browser/storage/history and candidate-source platform acceptance; legacy published template SDK0.4.4 is not candidate-worker admission. Publication workflow still exercises the strict public1.0.4 canary; candidate release convergence and unpublished SDK acquisition are not waived.",
+    "Actual authenticated ChatGPT E1 NEEDS_OPERATOR.",
+    "celld24fbd91c9ddd34bec54230e1c3b20e3225061079 remains NO-GO until pinned owned synthetic storage and failure prerequisites; no adapter.",
+    "Complete original source identity, homelab-independent distribution, reproducibility/SBOM/provenance, restore/rollback and owner publication gates."
+  ],
+  "upstream_disposition": "none; Actions-owned admission and test-fixture fixes, no confirmed upstream defect or external report",
+  "prohibited_actions": "No community merge, tag, publication, deployment, production/backend migration, credential manipulation or other repository changes.",
+  "post_validation_release_guard": {
+    "result": "Devutils full suite249passed; ruff passed",
+    "test_file": "devutils/tests/test_actions_runtime_release_line.py",
+    "test_sha256": "79c039d20771f8975ea2790db3bb5a0c6ec3887c42a57a45b823a0c55868ae81",
+    "change": "source identity assertion expects provisional1.1.0a1 while explicitly preserving public canary EXPECTED_RUNTIME1.0.4; no Runtime/SDK implementation byte change",
+    "receipts": [
+      {
+        "path": "/workspace/actions-327-state/evidence/review/devutils-full.log",
+        "sha256": "c706f157009a0d184f838a7a0aa1a103aef5f418220bbebcd814884f08300ed1"
+      },
+      {
+        "path": "/workspace/actions-327-state/evidence/review/devutils-lint.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "initial_failure": {
+      "receipt": {
+        "path": "/workspace/actions-327-state/evidence/review/registry-floor-regressions.log",
+        "sha256": "4a85a122f54c59d27316a291a42917d09abb14f12c60bf8ecfc4f2ec9a9576ee"
+      },
+      "result": "49passed,1failed: stale source metadata1.0.4 assertion"
+    },
+    "head_before_test_change": "cff8c9e9fab5879b9b6ebc1a7d874978469be0f1"
+  }
+}

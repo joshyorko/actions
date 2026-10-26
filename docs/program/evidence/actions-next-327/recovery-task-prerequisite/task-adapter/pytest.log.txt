@@ -1,0 +1,89 @@
++ poetry run pytest tests/action_server_tests/test_task_service.py tests/action_server_tests/test_task_adapter.py tests/action_server_tests/test_task_wire.py -k duckdb or wire -q --junitxml=/workspace/actions-recovery-327/evidence/a33-source-task-adapter/tests.xml --robocorp-log-output=/workspace/actions-recovery-327/evidence/a33-source-task-adapter/log --basetemp=/workspace/actions-recovery-327/evidence/a33-source-task-adapter/fixtures (in /workspace/actions/action_server)
+..................................................FFFFFF...              [100%]
+=================================== FAILURES ===================================
+_____ test_real_admission_get_cancel_and_request_local_gate[sqlite-duckdb] _____
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+___ test_real_admission_get_cancel_and_request_local_gate[postgresql-duckdb] ___
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+___ test_auth_protocol_and_legacy_params_fail_before_mutation[sqlite-duckdb] ___
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+_ test_auth_protocol_and_legacy_params_fail_before_mutation[postgresql-duckdb] _
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+____ test_discovery_schema_is_request_scoped_and_default_off[sqlite-duckdb] ____
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+__ test_discovery_schema_is_request_scoped_and_default_off[postgresql-duckdb] __
+async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  - pytest-tornasync
+  - pytest-trio
+  - pytest-twisted
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py:1508
+  /workspace/actions/action_server/.venv/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py:1508: TypedDictExtraConfigWarning: TypedDict class 'RequestParamsMeta' allows extra items, but 'extra' configuration is set to `'forbid'`. The 'extra' configuration value will be ignored.
+    warnings.warn(
+
+tests/action_server_tests/test_task_adapter.py:50
+  /workspace/actions/action_server/tests/action_server_tests/test_task_adapter.py:50: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+tests/action_server_tests/test_task_adapter.py:70
+  /workspace/actions/action_server/tests/action_server_tests/test_task_adapter.py:70: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+tests/action_server_tests/test_task_adapter.py:89
+  /workspace/actions/action_server/tests/action_server_tests/test_task_adapter.py:89: PytestUnknownMarkWarning: Unknown pytest.mark.asyncio - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.asyncio
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /workspace/actions-recovery-327/evidence/a33-source-task-adapter/tests.xml -
+=========================== short test summary info ============================
+FAILED tests/action_server_tests/test_task_adapter.py::test_real_admission_get_cancel_and_request_local_gate[sqlite-duckdb]
+FAILED tests/action_server_tests/test_task_adapter.py::test_real_admission_get_cancel_and_request_local_gate[postgresql-duckdb]
+FAILED tests/action_server_tests/test_task_adapter.py::test_auth_protocol_and_legacy_params_fail_before_mutation[sqlite-duckdb]
+FAILED tests/action_server_tests/test_task_adapter.py::test_auth_protocol_and_legacy_params_fail_before_mutation[postgresql-duckdb]
+FAILED tests/action_server_tests/test_task_adapter.py::test_discovery_schema_is_request_scoped_and_default_off[sqlite-duckdb]
+FAILED tests/action_server_tests/test_task_adapter.py::test_discovery_schema_is_request_scoped_and_default_off[postgresql-duckdb]
+6 failed, 53 passed, 56 deselected, 4 warnings in 100.49s (0:01:40)
+Log (html): /workspace/actions-recovery-327/evidence/a33-source-task-adapter/log/log.html
+Traceback (most recent call last):
+  File "/workspace/actions-cloud/package-command.py", line 13, in <module>
+    toolkit.poetry(package, *arguments)
+  File "/workspace/actions/developer/toolkit.py", line 76, in poetry
+    run(["poetry", *arguments], REPOSITORY_ROOT / package)
+  File "/workspace/actions/developer/toolkit.py", line 72, in run
+    subprocess.run(command, cwd=cwd, env=environment, check=True)
+  File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['poetry', 'run', 'pytest', 'tests/action_server_tests/test_task_service.py', 'tests/action_server_tests/test_task_adapter.py', 'tests/action_server_tests/test_task_wire.py', '-k', 'duckdb or wire', '-q', '--junitxml=/workspace/actions-recovery-327/evidence/a33-source-task-adapter/tests.xml', '--robocorp-log-output=/workspace/actions-recovery-327/evidence/a33-source-task-adapter/log', '--basetemp=/workspace/actions-recovery-327/evidence/a33-source-task-adapter/fixtures']' returned non-zero exit status 1.

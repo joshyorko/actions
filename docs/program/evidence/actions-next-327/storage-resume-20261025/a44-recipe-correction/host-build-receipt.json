@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "scope": "public source preparation/build only; no credentials/grants/server/browser",
+  "source_url": "https://codeload.github.com/modelcontextprotocol/ext-apps/tar.gz/82221c0c8ce7661efa6771c9d461511b1650495f",
+  "source_commit": "82221c0c8ce7661efa6771c9d461511b1650495f",
+  "source_members_verified": 16,
+  "node": "20.19.3",
+  "sampled_peak_allocated_bytes": 201228288,
+  "sample_interval_seconds": 0.5,
+  "retained_allocated_bytes": 201228288,
+  "allocation_cap_bytes": 1073741824,
+  "entries": {
+    "dist/index.html": "e17f32e2f0312fe38bd21ab64fea631b5708b25755a4da72a37fe1af8bdc1809",
+    "dist/sandbox.html": "00be407b7865bf95291d07cc287b8930775fa00731a762f43f11be07362d1e35",
+    "package.json": "db9c9720ed34eac5890fc473b93a1341d481268ea9e1e9148da95f2d18daed29",
+    "package-lock.json": "8c68ff1613652acf515c9dbcacdc09e1369b2945867204e53cbdecf5719ce57f"
+  }
+}

@@ -10,6 +10,7 @@ staging publication occurs here.
 
 from __future__ import annotations
 
+import hashlib
 import os
 import stat
 import sys
@@ -112,6 +113,8 @@ def read_selected_files(
         inventory = source_manifest.validate_proposed_inventory(
             measured_entries(), protected_input_names=protected
         )
+        expected_content = {entry.path: entry.sha256 for entry in inventory.entries}
+        rechecked_bytes = 0
         for item in measured:
             parts = source_manifest._validated_parts(item.path)
             with _opened_path(owned_root, proc_fd, parts) as opened:
@@ -120,6 +123,10 @@ def read_selected_files(
                     or opened.directories != item.directories
                 ):
                     raise ValueError("selected source object changed after measurement")
+                content = _read_bytes(opened.fd, opened.object, rechecked_bytes)
+                rechecked_bytes += len(content)
+                if hashlib.sha256(content).hexdigest() != expected_content[item.path]:
+                    raise ValueError("selected source bytes changed after measurement")
         if _observation(os.fstat(owned_root)) != root:
             raise ValueError("source root directory changed during measurement")
         return MeasuredSelectedFiles(inventory, root, tuple(measured))

@@ -1,7 +1,7 @@
 def test_load_autolog_config(tmpdir, str_regression) -> None:
     from pathlib import Path
 
-    from robocorp.log.pyproject_config import (
+    from actions._logging.pyproject_config import (
         read_pyproject_toml,
         read_robocorp_auto_log_config,
     )
@@ -34,7 +34,7 @@ log_filter_rules = [
 def test_load_autolog_config_exclude_default(tmpdir, str_regression) -> None:
     from pathlib import Path
 
-    from robocorp.log.pyproject_config import (
+    from actions._logging.pyproject_config import (
         read_pyproject_toml,
         read_robocorp_auto_log_config,
     )

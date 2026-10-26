@@ -33,9 +33,9 @@ develop = true
 [package.dependencies]
 invoke = "^2.2.0"
 isort = {version = "^5.12.0", markers = "python_version >= \"3.8\" and python_version < \"4.0\""}
-lazydocs = {git = "https://github.com/robocorp/lazydocs.git"}
+mdformat-gfm = {version = "1.0.0", markers = "python_version >= \"3.10\""}
 mypy = "^1.1.1"
-pydocstyle = {git = "https://github.com/robocorp/pydocstyle"}
+pydocstyle = "6.3.0"
 pylint = "^2.17.4"
 pytest = "^8.0"
 pytest-regressions = "1.0.6"
@@ -48,18 +48,6 @@ types-invoke = "^2.0"
 [package.source]
 type = "directory"
 url = "../devutils"
-
-[[package]]
-name = "annotated-doc"
-version = "0.0.5"
-description = "Document parameters, class attributes, return types, and variables inline, with Annotated."
-optional = false
-python-versions = ">=3.9"
-groups = ["dev"]
-files = [
-    {file = "annotated_doc-0.0.5-py3-none-any.whl", hash = "sha256:117bac03a25ede5df5440e855b32d556049ca169ead221505badf432fed4b101"},
-    {file = "annotated_doc-0.0.5.tar.gz", hash = "sha256:c7e58ce09192557605d8bbd92836d7e1d520ac9580096042c0bfd197efacf1bb"},
-]
 
 [[package]]
 name = "annotated-types"
@@ -214,7 +202,7 @@ description = "Cross-platform colored terminal text."
 optional = false
 python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7"
 groups = ["dev"]
-markers = "sys_platform == \"win32\" or platform_system == \"Windows\""
+markers = "sys_platform == \"win32\""
 files = [
     {file = "colorama-0.4.6-py2.py3-none-any.whl", hash = "sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6"},
     {file = "colorama-0.4.6.tar.gz", hash = "sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44"},
@@ -574,30 +562,6 @@ files = [
     {file = "lazy_object_proxy-1.12.0-pp39.pp310.pp311.graalpy311-none-any.whl", hash = "sha256:c3b2e0af1f7f77c4263759c4824316ce458fabe0fceadcd24ef8ca08b2d1e402"},
     {file = "lazy_object_proxy-1.12.0.tar.gz", hash = "sha256:1f5a462d92fd0cfb82f1fab28b51bfb209fabbe6aabf7f0d51472c0c124c0c61"},
 ]
-
-[[package]]
-name = "lazydocs"
-version = "0.5.0"
-description = "Generate markdown API documentation for Google-style Python docstring."
-optional = false
-python-versions = ">=3.6"
-groups = ["dev"]
-files = []
-develop = false
-
-[package.dependencies]
-mdformat-gfm = "*"
-pydocstyle = {git = "https://github.com/robocorp/pydocstyle"}
-typer = "*"
-
-[package.extras]
-dev = ["black", "flake8", "isort", "mypy", "pytest", "pytest-cov", "pytest-mock", "setuptools", "twine", "wheel"]
-
-[package.source]
-type = "git"
-url = "https://github.com/robocorp/lazydocs.git"
-reference = "HEAD"
-resolved_reference = "3eeda5b5012f698fad0be6272747c40052b3ec12"
 
 [[package]]
 name = "librt"
@@ -1290,25 +1254,21 @@ typing-extensions = ">=4.14.1"
 
 [[package]]
 name = "pydocstyle"
-version = "0.0.0-dev"
+version = "6.3.0"
 description = "Python docstring style checker"
 optional = false
 python-versions = ">=3.6"
 groups = ["dev"]
-files = []
-develop = false
+files = [
+    {file = "pydocstyle-6.3.0-py3-none-any.whl", hash = "sha256:118762d452a49d6b05e194ef344a55822987a462831ade91ec5c06fd2169d019"},
+    {file = "pydocstyle-6.3.0.tar.gz", hash = "sha256:7ce43f0c0ac87b07494eb9c0b462c0b73e6ff276807f204d6b53edc72b7e44e1"},
+]
 
 [package.dependencies]
 snowballstemmer = ">=2.2.0"
 
 [package.extras]
 toml = ["tomli (>=1.2.3) ; python_version < \"3.11\""]
-
-[package.source]
-type = "git"
-url = "https://github.com/robocorp/pydocstyle"
-reference = "HEAD"
-resolved_reference = "34719279355f6ba934385db21dfb81cdb8a44fcf"
 
 [[package]]
 name = "pygments"
@@ -1542,53 +1502,6 @@ files = [
 ]
 
 [[package]]
-name = "rich"
-version = "15.0.0"
-description = "Render rich text, tables, progress bars, syntax highlighting, markdown and more to the terminal"
-optional = false
-python-versions = ">=3.9.0"
-groups = ["dev"]
-files = [
-    {file = "rich-15.0.0-py3-none-any.whl", hash = "sha256:33bd4ef74232fb73fe9279a257718407f169c09b78a87ad3d296f548e27de0bb"},
-    {file = "rich-15.0.0.tar.gz", hash = "sha256:edd07a4824c6b40189fb7ac9bc4c52536e9780fbbfbddf6f1e2502c31b068c36"},
-]
-
-[package.dependencies]
-markdown-it-py = ">=2.2.0"
-pygments = ">=2.13.0,<3.0.0"
-
-[package.extras]
-jupyter = ["ipywidgets (>=7.5.1,<9)"]
-
-[[package]]
-name = "robocorp-log"
-version = "3.1.2"
-description = "Automatic trace logging for Python"
-optional = false
-python-versions = "<4.0,>=3.10"
-groups = ["main"]
-files = [
-    {file = "robocorp_log-3.1.2-py3-none-any.whl", hash = "sha256:42fca280313e4985e46d8b03f99bf32cb317a796865ed370fd3fd5d58a5d1f2c"},
-    {file = "robocorp_log-3.1.2.tar.gz", hash = "sha256:57df58ab49c51dbdcfa1291f46bb2d02bfd4b9a5f5c8149eac4eca2ff4a845b7"},
-]
-
-[package.dependencies]
-psutil = ">=5.0,<8.0"
-tomli = {version = ">=2.0.1,<3.0.0", markers = "python_version < \"3.11\""}
-
-[[package]]
-name = "robocorp-truststore"
-version = "0.9.1"
-description = "Verify certificates using native system trust stores"
-optional = false
-python-versions = ">=3.10"
-groups = ["main"]
-files = [
-    {file = "robocorp_truststore-0.9.1-py3-none-any.whl", hash = "sha256:dfdd4812dffce8a91134e8b69a3c55072fc9785dbdd583d4047f323779ac2f39"},
-    {file = "robocorp_truststore-0.9.1.tar.gz", hash = "sha256:a1abfd9c5b7fe22152a8eeb9510812800dca741851c720742c598c0f78ee4f3f"},
-]
-
-[[package]]
 name = "ruff"
 version = "0.1.15"
 description = "An extremely fast Python linter and code formatter, written in Rust."
@@ -1625,18 +1538,6 @@ groups = ["dev"]
 files = [
     {file = "semver-3.0.4-py3-none-any.whl", hash = "sha256:9c824d87ba7f7ab4a1890799cec8596f15c1241cb473404ea1cb0c55e4b04746"},
     {file = "semver-3.0.4.tar.gz", hash = "sha256:afc7d8c584a5ed0a11033af086e8af226a9c0b206f313e0301f8dd7b6b589602"},
-]
-
-[[package]]
-name = "shellingham"
-version = "1.5.4"
-description = "Tool to Detect Surrounding Shell"
-optional = false
-python-versions = ">=3.7"
-groups = ["dev"]
-files = [
-    {file = "shellingham-1.5.4-py2.py3-none-any.whl", hash = "sha256:7ecfff8f2fd72616f7481040475a65b2bf8af90a56c89140852d1120324e8686"},
-    {file = "shellingham-1.5.4.tar.gz", hash = "sha256:8dbca0739d487e5bd35ab3ca4b36e11c4078f3a234bfce294b0a0291363404de"},
 ]
 
 [[package]]
@@ -1744,24 +1645,6 @@ files = [
     {file = "truststore-0.10.4-py3-none-any.whl", hash = "sha256:adaeaecf1cbb5f4de3b1959b42d41f6fab57b2b1666adb59e89cb0b53361d981"},
     {file = "truststore-0.10.4.tar.gz", hash = "sha256:9d91bd436463ad5e4ee4aba766628dd6cd7010cf3e2461756b3303710eebc301"},
 ]
-
-[[package]]
-name = "typer"
-version = "0.27.1"
-description = "Typer, build great CLIs. Easy to code. Based on Python type hints."
-optional = false
-python-versions = ">=3.10"
-groups = ["dev"]
-files = [
-    {file = "typer-0.27.1-py3-none-any.whl", hash = "sha256:53150287edd11baeb4e4722c8e394fcdf8181c0ae89485cba8d25c778d5edd56"},
-    {file = "typer-0.27.1.tar.gz", hash = "sha256:a79bef8469a79c45498e7b814ecf8d603cc7644e9acbd9e19cac0334240b18df"},
-]
-
-[package.dependencies]
-annotated-doc = ">=0.0.2"
-colorama = {version = "*", markers = "platform_system == \"Windows\""}
-rich = ">=13.8.0"
-shellingham = ">=1.3.0"
 
 [[package]]
 name = "types-invoke"
@@ -1950,4 +1833,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.10"
-content-hash = "839919bea4c1512c246c6bdda466747a8414caa151f1cd9dc3658e19f32286f8"
+content-hash = "e81b2232e08b749c77d05d8b45ba23f7859c250cbe335baf05d4f1e71959c898"

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.2 (Python 3.12.15 on linux)" generated="2026-10-25T04:20:11.155897" rpa="true" schemaversion="5">
+<suite id="s1" name="Tasks" source="/workspace/actions-recovery-327/robot-preparation/source/tasks.robot">
+<test id="s1-t1" name="Inspect record" line="5">
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-25T04:20:11.213476" level="INFO" html="true">Getting file '&lt;a href="file:///workspace/actions-recovery-327/robot-preparation/source/input.json"&gt;/workspace/actions-recovery-327/robot-preparation/source/input.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-25T04:20:11.213619" level="INFO">${payload} = {"value":"synthetic"}
+</msg>
+<var>${payload}</var>
+<arg>%{ACTIONS_ROBOT_INPUT_FILE}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-25T04:20:11.213298" elapsed="0.000339"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${payload}</arg>
+<arg>synthetic</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2026-10-25T04:20:11.213738" elapsed="0.000415"/>
+</kw>
+<status status="PASS" start="2026-10-25T04:20:11.212699" elapsed="0.001537"/>
+</test>
+<test id="s1-t2" name="Inspect second record" line="9">
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-10-25T04:20:11.214588" level="INFO" html="true">Getting file '&lt;a href="file:///workspace/actions-recovery-327/robot-preparation/source/input.json"&gt;/workspace/actions-recovery-327/robot-preparation/source/input.json&lt;/a&gt;'.</msg>
+<msg time="2026-10-25T04:20:11.214670" level="INFO">${payload} = {"value":"synthetic"}
+</msg>
+<var>${payload}</var>
+<arg>%{ACTIONS_ROBOT_INPUT_FILE}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-10-25T04:20:11.214506" elapsed="0.000176"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${payload}</arg>
+<arg>synthetic</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2026-10-25T04:20:11.214736" elapsed="0.000169"/>
+</kw>
+<status status="PASS" start="2026-10-25T04:20:11.214350" elapsed="0.000609"/>
+</test>
+<status status="PASS" start="2026-10-25T04:20:11.156726" elapsed="0.058482"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0" skip="0">All Tasks</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Tasks" id="s1" pass="2" fail="0" skip="0">Tasks</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

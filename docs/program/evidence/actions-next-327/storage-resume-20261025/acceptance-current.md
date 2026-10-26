@@ -1,0 +1,71 @@
+# Release #327 / PR #328 acceptance matrix — post2 host and claimed Task source
+
+**2026-10-26 recovery continuation:** see [the fresh environment checkpoint](../recovery-20261026/README.md).
+Exact a52 Runtime/Core/Work Items payloads are recovered and verified; installed
+Node initialization/catalog/draft-only natural exit passed with a newly resolved
+public dependency profile. Execution/restart remains open. New a53 source adds
+launch-bound terminal claimed cancellation; installed RCC qualification and
+current-source aggregate QA remain open. The original full matrix in
+`docs/program/actions-next-release-327.md` still governs omitted summary rows.
+Pinned Dakota post2/Core6 remains unchanged and separately owned.
+
+**a54 follow-up:** source47ef271d, wheelSHAfa95745d, now passes installed terminal
+claimed Robot Task cancellation, exact observed child absence before Runtime stop,
+public item/Run read, replay and real restart with one unchanged Run/Attempt.
+See `../recovery-20261026/a54-installed-cancellation-receipt.json`. This closes
+the earlier terminal-cancellation gap at that bounded single-owner scope. Node
+Task-client decoding and synchronous generated-client natural exit remain
+distinct open gates; sourcebound failed trials stay retained.
+
+**a55 PostgreSQL Knowledge:** sourcea4e5b2b6/Core8, wheelSHA2daacf9c, passes
+public generated ingest/search, actual RCC exits0/0 and expected1, verify-full
+owned PostgreSQL, auth negatives and same-state restart artifact rereads. See
+`../recovery-20261026/a55-postgres-knowledge/summary.json`. Prepared Core8 compiler
+artifact remains explicitly reused from sourceaca51868; other corpus/provider/
+principal breadth and complete current-source release qualification remain open.
+
+**a56 current-source checkpoint:** source88846b55/treea6544920, wheelSHAf06526ab,
+passes clean339-member installation/METADATA and installed live claimed-Task
+cancellation, exact child absence before Runtime stop, public reads/replay/restart.
+See [exact source and receipts](../recovery-20261026/a56-installed/README.md).
+The existing compiler artifact remains explicitly reused from sourceaca51868.
+Fresh hosted Core/HTTP/frontend checks pass at that source; other hosted and
+full-campaign gates remain open. This is separate from pinned Dakota post2.
+
+Frozen full-suite source: **5b9c70e00e5e019a751aec5385591e5a2bbd615e**, Runtime **1.1.0a49**, Core **1.1.0a7**. Installed **1.1.0a51 / Core 1.1.0a8**, source **ea3448e2b40741c5a21369c24cc20e84b8258809**, passes terminal claimed Task success/failure, replay and restart. The next source correction is Runtime **1.1.0a52** for disappearing child metadata during shutdown; a52 is not installed-qualified. Installed proofs remain source-specific: a48 Data, a47 claimed Robot, a46 Knowledge. Separate a44.post2/Core a6 UI artifact source **46488e59f419d6bb55ab594031a0f227b4e0d817** has completed the parent-owned managed run06 evaluation. Release acceptance remains OPEN; this is one existing campaign.
+
+| Original acceptance area | Exact accepted proof | Remaining gate |
+|---|---|---|
+| Universal blank Canvas → generated Python → activate | a44/Core a6 source d0c87a38a937cc339e8e661ac453c7a62ed41fa6 public authoring/build/activation, real RCC success/failure, authorized results and rollback/restart PASS. a46 Knowledge extends installed generated authoring/execution; a47 adds app-associated claimed Robot submit/execute. | Actual universal blank UI authoring/edit/revise flow and current-candidate coverage remain open. Invoice reference does not substitute for universal behavior. |
+| Semantic v2 renderer / official MCP Apps host | Official host adapter built with preserved renderer/AppBridge, loopback transport, memory-only bearer input and redacted logging; protocol projection/resource evidence retained. | Parent independent public build/native import/Core proof **PASS**. Actual a44 UI **FAILED**: inspected gamma/count3 artifact and success notice stayed visible after a newer failed execution. Owned renderer fix integrated as a48; separately versioned a44-based post1 candidate delivered with unchanged Core6/compiler inputs. Post1 actual retest observed stale-artifact fix but overall **HOLD** for exposed Continue/automatic-execution race. Exact post2 source46488e59 / wheel3028ffd9 run06 backend PASS and parent-reviewed managed visual flow: two results, authorized artifact and cleared failed state; restart/stale-session, rollback/restore and revocation preserved3Runs/3Attempts/1Admission. Cleanup verified. Continue was visible greyed; source busy guard corroborated, direct DOM/click-negative not exercised. See dakota-post2/run06-index.md. No new environment request or local Dakota dispatch is warranted. Stock host, adapted official host, and strict sandbox proof remain distinct. |
+| Data / DuckDB / PostgreSQL | **a48/Core a7 Data04 PASS**, source45e8c2c1: one immutable Package, public DuckDB → verify-full PostgreSQL rebind, two real RCC executions, four artifacts each, replay, restart reads and old-Deployment denial. All six Runtime stops and both cleanup supervisors PASS. | Cancellation, multiple principals, cross-app breadth and PostgreSQL Knowledge remain open. Prior Data discovery/preflight failures and Data03 controller failure remain preserved. |
+| Mapped Knowledge | **a46/Core a7 PASS**, source d77d26a4c377cb0f69453621fe5fd1a86815b98b: public generated ingest, committed corpus handle, mapped search, real child failure, authorized artifacts and byte-identical restart reads; missing/wrong key/Host/Origin denials; four graceful shutdowns. | Scope remains that a46 candidate and explicit DuckDB-backed synthetic corpus. PostgreSQL Knowledge, broader corpus/provider cases, rollback and multi-principal authorization are not established by this receipt. Earlier failed attempts remain failed. |
+| Durable Work Item / Run / Attempt / Task | **Installed a47 claimed Robot PASS**: public enqueue/replay and claim, model invocation plus Canvas submit_input/execute, each with real success/failure. Four cases end with exact Run/queue completed/DONE or failed/FAILED, four authorized artifacts each, retained claim/receipt unchanged after restart. a44 standalone detached Task proof retained. | Claimed consumer Robot Task source integration is independently reviewed with93combinedSQLite tests plus2no-provider cancellation tests; a50 installedTask FAILED beforeadmission due standalone-only Robot readiness. Reviewed a51 correction uses real consumer readiness (15 source passes, 15 PostgreSQL deselected). Installed a51 terminal claimed Task success/failure, replay, authorized artifacts and actual restart PASS with 2 Runs/2 Attempts/2 Task receipts; four graceful stops and outer cleanup PASS. The first live observer FAILED before cancellation due an incorrect Python cwd assumption; cancellation remains NOT RUN. Reviewed observer v2 is prepared. Separate a50 six-file SQLite/PostgreSQL gate passes 240 tests, without qualifying installed PostgreSQL Tasks. Producer/child Robot outputs and multi-principal isolation remain open. Do not transfer standalone Task proof to claimed Tasks or mistake a single persisted Actor for isolation. |
+| Robots / RCC / failure lifecycle | a47/Core a7, Robot environment artifact sha256:763f5ae5fb9a34ffcc921de2528e86b09bfbbef4249f3c392bad71f7a1d8f785: actual RCC exit 0/1 on both model and Canvas surfaces. Four graceful Runtime stops; outer supervisor exit 0 with no cleanup errors/live descendants. | Broader resource/platform/escaping-process containment and remaining Robot modes still separate. Original a41 installed execution failure and a46 public replay-marker failure stay FAILED; a47 supersedes only the repaired route. |
+| Auth / review / artifacts | a47 denies wrong/missing credentials; public authorized artifact reads PASS. Model-only Runs intentionally cannot use Canvas artifact authority; app-associated Canvas Runs can. a46 Knowledge and a44 protocol denial/restart/stale/revoked-read gates retained. | Multi-principal security, complete review workflow, cross-provider/cross-app authority breadth and current-candidate remaining routes are open. Artifact existence does not grant read/review authority. |
+| Installed distribution / native / recovery | Exact-source a47 clean wheel/consumer claimed execution; a46 installed Knowledge; older exact-byte/namespace and Node consumer proofs retained. | Frozen/Go native artifact qualification, platform matrix and clean uninstall/upgrade/restore remain open. Diagnostic native artifact is not release proof. Restart/rollback is narrower than upgrade/restore. |
+| Owned dependency independence | Owned logging/viewer/redaction and official truststore retained. **1f4a946** removes routine Robocorp checkout via 17 original licensed files authenticated to pinned Git objects, preserving semantic authority and mandatory owned custom Git root. Work Items available suite 285 passed. | Custom pinned MIT/Apache metadata inconsistency remains; no new custom source bundle or attribution. Clean a51/Core a8 consumer passes all seven truststore checks, including the five formerly skipped installed/Linux TLS cases. Windows/macOS TLS and final candidate inventory/platform breadth remain separate. Legal notices/explicit compatibility options stay preserved. |
+| Independent clients / actual hosts | Python MCP installed generated/Knowledge/claimed Robot paths have scoped PASS receipts. Official Node SDK2 a45 initialization/catalog/MIME/annotations/replay/denials PASS; original Node classifier failure retained. | Actual managed basic-host/AppBridge and parent visual flow have source-bound post2 proof. Node execution, actual ChatGPT/Dakota and Codex host gates remain distinct and open. Historical Celld NO-GO is not superseded. |
+| Regression / static release checks | a47 affected SQLite+PostgreSQL regression **93 passed, 6 skipped** (66.47s); no JUnit failures/errors. Initial static formatting failure preserved; corrected `invoke lint typecheck` **PASS**, including 642 source files; repeated a48 static gate also PASS. | Prior full applicable Runtime at6ed949fb is **FAILED: 2656 passed,168 skipped,3 deselected,5 failures** (stale logical-runner/readiness fixtures). Reviewed repairs now PASS the fresh three-file SQLite/PostgreSQL gate:21passed0skipped, sourcee216c4b1; full Runtime remains open. Prior c9b08600 attempt remains FAILED with five PostgreSQL DiskFull setup errors; the new capacity profile passed its telemetry/cleanup gates. a46 broad run was **ABORTED_RESOURCE_FLOOR** at 10 GiB reserve, had an observed failure and no final JUnit. Latest terminal run at **5b9c70e0 / a49** is **FAILED: 4299 passed, 197 skipped, 3 deselected, 5 failures**, stopped at maxfail5 after 2779.02 seconds. Source fingerprint stayed identical; resource telemetry and owned PostgreSQL cleanup passed. See runtime-a49-broad-failed. Focused repairs do not supersede this result; a fresh complete run remains required. |
+
+## Exact exclusions and preserved failures
+
+The six a47 regression skips are `test_real_generic_rcc` for consumer, producer and optional modes, each on SQLite and PostgreSQL: **“explicit owned prepared RCC gate required.”** They were not executed. Separate installed claimed Robot proof does not silently qualify all six. No database-provider cases were deselected in that 99-case regression receipt.
+
+Work Items closure qualification retains 46 skips (18 PostgreSQL fenced, 13 Redis, 15 MongoDB), 3 persistent-backend service deselections and 10 existing expected-red gaps; none are passes. Original a41 failure, prior broad failures, the a46 aborted suite/replay failure and initial a47 formatting failure remain in the evidence ledger. The recheck completed during this read-only update; it is no longer RUNNING.
+
+## Next exact engineering gates
+
+1. Complete the installed a51 live cancellation and independent Node execution/restart gates, qualify the a52 shutdown metadata correction, then rerun complete Runtime qualification; the a49 full run is terminal FAILED, not running; the bounded21-test SQLite/PostgreSQL repair gate is terminalPASS; keep memory/disk limits and serialize bounded service workloads. Preserve every skip and investigate actual failures before release qualification.
+2. Exacta44.post2 run06 now has backendPASS, parent visual review and verified cleanup; bounded generated-Canvas Dakota handoff is prepared, owner launch and actual host preflight remain. Invoice acceptance is separate. The denied Library archive PUT remains denied; an independently built public-input artifact is separate provenance. Managed visual flow was reviewed by the parent; strict Playwright and actual ChatGPT remain unrun. Independent portable compiler execution now passes; see dakota-post2/readiness.md.
+3. Installed Data04 now closes the bounded current-candidate DuckDB/PostgreSQL join. Reconcile cancellation and remaining claimed Tasks/output modes, multi-principal review/security, independent hosts and native/platform/upgrade gates. No duplicate campaign or implementation.
+
+## Receipt anchors
+
+- a47 claimed: `a47-claimed-robot-public/evidence/receipt.json`, SHA256 **68853a7ed966287a171f9709c2e96496a2f9571a5c54316cc15b989daf435f94**; supervisor `a47-claimed-supervisor/receipt.json` PASS, zero descendants.
+- a46 Knowledge: `a46-knowledge-public-3/evidence/receipt.json`, SHA256 **298b4d063101750f4a34516eb94cc7441851ac92d597ea6c3d590f704f5f3642**; supervisor `a46-knowledge-supervisor-3/receipt.json` PASS.
+- Regression: `a47-replay-regression.xml` and `.log`; initial static `a47-static.log`, formatting `a47-format-fix.log`, final `a47-static-recheck.log`.
+- Full-suite limitation: `runtime-applicable-a46-abort.json`; a47 terminal failure retained in runtime-a47-broad-failed; no full-suite PASS.
+- Prior immutable scope and receipts: `release-remaining-a46.md`. Historical facts retained only to their recorded candidate; no fresh GitHub issue-state audit was performed.
+
+Upstream disposition: none. No external mutation or publication.

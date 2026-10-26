@@ -1,0 +1,272 @@
+{
+  "status": "PASS",
+  "runtime_version": "1.1.0a36",
+  "engine_origin": "/workspace/actions-recovery-327/installed-a36/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+  "source": "fbde9bc3947804212c930aa65c2884714eb9df2e",
+  "installed_versions": {
+    "mcp": "2.3.0",
+    "mcp-types": "2.3.0",
+    "actions-core": "1.1.0a3"
+  },
+  "synthetic_owned_auth": true,
+  "processes": [
+    {
+      "pid": 186607,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.16418509399954928,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 186622,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.21413969199784333,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 186675,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.21409675399991102,
+      "lifespan_shutdown_complete": true
+    }
+  ],
+  "calls": [
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_inspect",
+      "is_error": false
+    },
+    {
+      "method": "tools/call",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "working",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "completed",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tasks/get",
+      "status": "completed",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    },
+    {
+      "method": "tools/call",
+      "status": "completed",
+      "taskId": "43456864-f917-48ce-ba81-d30f019310b5"
+    }
+  ],
+  "actual_generated_execution": "PASS",
+  "workspace": "8e509cf3-dd48-4931-81ef-3c370c21a31a",
+  "logical_provider": "explicit offline CLI, sealed CSV, owned TLS PostgreSQL read-only role; no SQL seeding",
+  "task_id": "43456864-f917-48ce-ba81-d30f019310b5",
+  "package_unchanged": {
+    "package_id": "ac7d8880-f579-5738-acc2-a9f4d37f2ef1",
+    "revision_id": "sha256:c6c49c01938662df484b73eecd05ca443eb16097dff4cd8ec0743156f3619fca",
+    "workspace_id": "8e509cf3-dd48-4931-81ef-3c370c21a31a"
+  },
+  "one_run_one_attempt": true,
+  "scope": "same immutable Package under new Deployment/provider selection, installed public MCP Task and genuine RCC/Core data lookup with owned TLS PostgreSQL, authorized local output value, restart/replay; no public artifact byte route or sharedPG operator claim"
+}

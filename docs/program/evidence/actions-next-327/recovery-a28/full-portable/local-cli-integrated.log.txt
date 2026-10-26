@@ -1,0 +1,5 @@
++ poetry run pytest tests/action_server_tests/test_local_authorization.py -q --junitxml=/workspace/actions-recovery-327/evidence/local-cli-integrated.xml (in /workspace/actions/action_server)
+............................                                             [100%]
+- generated xml file: /workspace/actions-recovery-327/evidence/local-cli-integrated.xml -
+28 passed in 6.23s
+Log (html): /workspace/actions/action_server/output/log.html

@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "mode": "restart",
+  "screenshots": [
+    "restart-mounted.png",
+    "restart-completed.png"
+  ],
+  "artifactText": "\"Installed browser generic execution\""
+}

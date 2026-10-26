@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "actions-core"
-version = "1.0.3"
+version = "1.1.0a8"
 description = "Actions Core"
 authors = ["Joshua Yorko"]
 maintainers = ["Joshua Yorko"]
@@ -16,8 +16,10 @@ actions = "actions.cli:main"
 [tool.poetry.dependencies]
 python = "^3.10"
 cryptography = ">=44.0.1"
-robocorp-log = ">=2.4,<4"
-robocorp-truststore = ">=0.8.0"
+tomli = { version = ">=2.0.1,<3", python = "<3.11" }
+# Use the same native TLS implementation as the owned HTTP helper.
+# The legacy fork installs overlapping truststore module paths.
+truststore = ">=0.10,<1.0"
 psutil = ">=5.0,<8.0"
 docstring_parser_fork = "^0.0.5"
 pydantic = "^2.11.7"

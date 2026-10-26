@@ -220,6 +220,23 @@ def test_migrate(database_v0: Path, tmpdir) -> None:
                 "run_pin",
                 "run_attempt",
                 "run_output",
+                "invoice_review",
+                "fenced_work_item",
+                "foundry_package_revision",
+                "foundry_deployment_revision",
+                "foundry_deployment_head",
+                "foundry_request",
+                "foundry_audit",
+                "foundry_access_grant",
+                # Migration 19 adds immutable provider/source metadata.
+                "foundry_source_revision",
+                "foundry_provider_revision",
+                "foundry_provider_availability",
+                # Migrations 20/21 add associations, not another Run authority.
+                "run_execution_intent",
+                "run_task_receipt",
+                # Migration 22 adds immutable Knowledge definition metadata.
+                "knowledge_collection_revision",
                 "schedule",
                 "schedule_execution",
                 "schedule_group",

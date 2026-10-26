@@ -1,0 +1,116 @@
+{
+  "_meta": {
+    "actions.canvas": {
+      "active": true,
+      "applicationId": "d2188842-d237-4bd3-9aea-33ce48a8c1a5",
+      "bindings": [
+        {
+          "bindingId": "echo",
+          "capabilityId": "action.echo",
+          "packageRevision": {
+            "package_id": "92204353-efc9-5809-9837-8766354784b9",
+            "revision_id": "sha256:155b306a02180d3cb079bac0218f11dc57511999b0c6cc989e2256abd271dd98",
+            "workspace_id": "bca4e5b1-4a3e-43ce-8c6b-bde373d81753"
+          }
+        }
+      ],
+      "revisionId": "sha256:4626a5dd91ab7343a2843394f3a7e3f5db52b2058a453d4368d6b13bca1851a5",
+      "spec": {
+        "bindingIds": [
+          "echo"
+        ],
+        "root": {
+          "children": [
+            {
+              "bindingId": "echo",
+              "fields": [
+                {
+                  "label": "Value",
+                  "name": "value",
+                  "required": true,
+                  "type": "text"
+                }
+              ],
+              "id": "inputs",
+              "submitLabel": "Run",
+              "type": "form"
+            },
+            {
+              "bindingId": "echo",
+              "id": "status",
+              "type": "status"
+            }
+          ],
+          "id": "main",
+          "type": "stack"
+        },
+        "schemaVersion": "actions.canvas-spec/v1",
+        "title": "Installed detached Action",
+        "visibility": [
+          "model",
+          "app"
+        ]
+      }
+    },
+    "io.modelcontextprotocol/serverInfo": {
+      "name": "Action Server",
+      "version": ""
+    }
+  },
+  "content": [
+    {
+      "type": "text",
+      "text": "Canvas revision loaded.",
+      "annotations": null,
+      "_meta": null
+    }
+  ],
+  "structuredContent": {
+    "active": true,
+    "applicationId": "d2188842-d237-4bd3-9aea-33ce48a8c1a5",
+    "buildStatus": "passed",
+    "compilationStatus": "succeeded",
+    "importStatus": "passed",
+    "revisionId": "sha256:4626a5dd91ab7343a2843394f3a7e3f5db52b2058a453d4368d6b13bca1851a5",
+    "spec": {
+      "bindingIds": [
+        "echo"
+      ],
+      "root": {
+        "children": [
+          {
+            "bindingId": "echo",
+            "fields": [
+              {
+                "label": "Value",
+                "name": "value",
+                "required": true,
+                "type": "text"
+              }
+            ],
+            "id": "inputs",
+            "submitLabel": "Run",
+            "type": "form"
+          },
+          {
+            "bindingId": "echo",
+            "id": "status",
+            "type": "status"
+          }
+        ],
+        "id": "main",
+        "type": "stack"
+      },
+      "schemaVersion": "actions.canvas-spec/v1",
+      "title": "Installed detached Action",
+      "visibility": [
+        "model",
+        "app"
+      ]
+    },
+    "testStatus": "passed",
+    "validationStatus": "passed"
+  },
+  "isError": false,
+  "resultType": "complete"
+}

@@ -1,0 +1,22 @@
+{
+  "status": "RECOVERED_NOT_QUALIFIED",
+  "source": "f235de8916487bcae8e97c3bad0f434be7f360c7",
+  "tree": "b8ab1d0e02a20525ed4e4b3c47523856643a263d",
+  "runtime_library_id": "libfile_119294ee0e6c819192e45956ee3031c5",
+  "library_version": 0,
+  "runtime_wheel_sha256": "1490ddd927b557017665c8ea5ca495a835b96315efc9f8ff37ff49bb0c9cdd82",
+  "host_python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "pidfd_open": true,
+  "pidfd_send_signal": true,
+  "doctor": "PASS",
+  "bootstrap": "PASS",
+  "aggregate_qa_owner": "01a177dd-0e6f-71ae-9f5e-58e9470540c3",
+  "dakota_pinned_source": "46488e59f419d6bb55ab594031a0f227b4e0d817",
+  "installed_requalification": "NOT_RUN",
+  "terminal_cancellation": "NOT_CONFIRMED",
+  "node_execution_natural_exit": "prior owner reported FAILED at 650 seconds; old raw evidence unavailable",
+  "toolkit_test": {
+    "passed": 190,
+    "seconds": 50.67
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "checkpoint": "072db7f1af5b11d7c28c234c80d7159e7f00655a",
+  "tree": "db11e2ee45c3d749fc14111be1b66f5c3dd7de9b",
+  "bundle_sha256": "836e091024a9d34de36ab27bacfab624612e47327edcb947eacb283bdaa6947c",
+  "bundle_bytes": 15634209,
+  "doctor": "PASS",
+  "bootstrap": "PASS",
+  "toolkit_test": {
+    "passed": 190
+  },
+  "serialization": {
+    "passed": 8
+  },
+  "installed_a41": "FAILED",
+  "new_compiler_artifact": "sha256:651c79e99dc9f684dceb4dea55de5b6156cb626aaba717c05897adf3173ed5d3",
+  "original_failure_patch": "REJECTED counterexamples; corrected source reviewed separately",
+  "corrected_lifecycle": "PASS:114 joined cases; installed public MCP lifecycle PASS",
+  "runtime_candidate": "1.1.0a42",
+  "runtime_candidate_source": "730f277ce13bd3a123c854c85c1c9fc2c185096c",
+  "runtime_wheel_sha256": "90117fa669bc1f9f11b792ba18b2f1b9598aa2711471c6464ae95fe34bff2342",
+  "browser_gate": "BLOCKED: executor Chromium sandbox helper ownership",
+  "actual_chatgpt": "NOT_RUN"
+}

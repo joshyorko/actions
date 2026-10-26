@@ -46,6 +46,7 @@ class RunPin:
     cancel_requested: int
     recovery_epoch: int
     recovery_receipt: str
+    state_updated_ms: str
     _db_rules.foreign_keys.update(
         {"RunPin.run_id", "RunPin.workspace_id", "RunPin.run_admission_id"}
     )
@@ -87,4 +88,46 @@ class RunOutput:
     _db_rules.indexes.add("RunOutput.run_id")
 
 
-MODEL_CLASSES = [Workspace, RunAdmission, RunAccessGrant, RunPin, RunAttempt, RunOutput]
+@dataclass
+class RunExecutionIntent:
+    """Immutable dispatch metadata; Run/Attempt remain lifecycle authority."""
+
+    id: str
+    workspace_id: str
+    actor_id: str
+    envelope_json: str
+    _db_rules.foreign_keys.add("RunExecutionIntent.workspace_id")
+
+
+@dataclass(frozen=True)
+class RunTaskReceipt:
+    """Immutable operation/lifetime association; never Task lifecycle authority."""
+
+    id: str
+    run_id: str
+    workspace_id: str
+    admission_principal_id: str
+    receipt_version: str
+    original_method: str
+    original_tool_name: str
+    result_contract_version: str
+    invocation_fingerprint: str
+    created_ms: str
+    ttl_ms: str
+    ttl_policy_id: str
+    _db_rules.foreign_keys.update(
+        {"RunTaskReceipt.workspace_id", "RunTaskReceipt.run_id"}
+    )
+    _db_rules.unique_indexes.add("RunTaskReceipt.run_id")
+
+
+MODEL_CLASSES = [
+    Workspace,
+    RunAdmission,
+    RunAccessGrant,
+    RunPin,
+    RunAttempt,
+    RunOutput,
+    RunExecutionIntent,
+    RunTaskReceipt,
+]

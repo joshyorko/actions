@@ -64,7 +64,7 @@ def test_binary_spec_collects_fastapi_runtime_module():
     assert 'collect_submodules("psutil")' in spec
     assert 'collect_submodules("actions")' in spec
     assert 'collect_submodules("starlette")' in spec
-    assert 'collect_submodules("mcp")' in spec
+    assert 'collect_submodules("mcp", filter=is_mcp_runtime_module)' in spec
 
 
 def test_binary_spec_collects_runtime_server_module():
@@ -392,3 +392,19 @@ def test_work_items_native_executable_api_round_trip(
         assert body["detail"]["code"] == "work_items_storage_unavailable"
         assert "not found" not in body["detail"]["message"].lower()
         assert str(action_server_process.datadir) not in response.text
+
+
+@pytest.mark.parametrize(
+    "name,expected",
+    [
+        ("mcp", True),
+        ("mcp.server", True),
+        ("mcp.client", True),
+        ("mcp.cli", False),
+        ("mcp.cli.cli", False),
+    ],
+)
+def test_mcp_bundle_excludes_only_optional_cli(name, expected):
+    from actions.server._build_common.mcp_bundle import is_mcp_runtime_module
+
+    assert is_mcp_runtime_module(name) is expected

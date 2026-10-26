@@ -1,0 +1,6 @@
++ poetry install --extras data-duckdb (in /workspace/actions/action_server)
+Installing dependencies from lock file
+
+No dependencies to install or update
+
+Installing the current project: actions-runtime (1.1.0a35)

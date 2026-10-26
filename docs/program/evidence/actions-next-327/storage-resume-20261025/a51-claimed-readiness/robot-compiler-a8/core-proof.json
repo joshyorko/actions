@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "robot_version": "7.4.2",
+  "core_version": "1.1.0a8",
+  "python_members_verified": 82,
+  "payload_members_verified": 87,
+  "wheel_sha256": "42e550a8c207849e0a428fa702827ff2f77d98a00fd63aa0f85a912c0719419f",
+  "interpreter": "/workspace/recovery327/robot-compiler-a8/robocorp/holotree/c2fd1aa_5a1fac3_c374f410/bin/python3.12",
+  "isolated": true,
+  "scan_context_isolated": true
+}

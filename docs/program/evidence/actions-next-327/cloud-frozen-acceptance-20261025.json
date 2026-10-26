@@ -1,0 +1,390 @@
+{
+  "schema": "actions.release327.frozen-acceptance/v1",
+  "source": "3037e4fccb66a41835dbea8de7406d1281ad5dda",
+  "runtime": "1.1.0a24",
+  "status": "PASS local source verifier; NOT full release readiness",
+  "command": "PYTEST_ADDOPTS=--robocorp-log-output=/tmp/actions-327-resume-full-3037/logs bash /workspace/actions-327-state/run-prepared python action_server/scripts/verify_invoice_queries.py --evidence-dir /tmp/actions-327-resume-full-3037/evidence --compiler-receipt /workspace/actions-327-state/compiler-acceptance/3e744f96-749a-47e5-84b9-7e7f297bc8b9/prepared.json --worker --generated --effects --full",
+  "counts": {
+    "managed": {
+      "tests": 158,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "foundry_storage": {
+      "tests": 295,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "components": {
+      "tests": 165,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "invoice": {
+      "tests": 129,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "worker": {
+      "tests": 134,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "package_compiler": {
+      "tests": 22,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "generated": {
+      "tests": 52,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "effects": {
+      "tests": 72,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "portable": {
+      "tests": 2403,
+      "skipped": 13,
+      "failures": 0,
+      "errors": 0
+    }
+  },
+  "cleanup": "PASS",
+  "raw_receipt": "/workspace/actions-327-state/evidence/resume-20261024/full-3037/receipt.json",
+  "raw_receipt_sha256": "48f40aec474290b66e3268670e417c47c01dc8545075b4ece34d295af3849a43",
+  "raw_fixture": "/tmp/actions-327-resume-full-3037/evidence/29c4749a-886d-4afb-9926-22433075fcf2",
+  "portable_skips": [
+    {
+      "case": "tests.action_server_tests.common_tests.test_uris::test_normalize_uri",
+      "reason": "Windows only"
+    },
+    {
+      "case": "tests.action_server_tests.common_tests.test_uris::test_win_to_fs_path[file:///c:/far/boo-c:\\\\far\\\\boo]",
+      "reason": "Windows only"
+    },
+    {
+      "case": "tests.action_server_tests.common_tests.test_uris::test_win_to_fs_path[file:///C:/far/boo-c:\\\\far\\\\boo]",
+      "reason": "Windows only"
+    },
+    {
+      "case": "tests.action_server_tests.common_tests.test_uris::test_win_to_fs_path[file:///C:/far/space%20%3Fboo-c:\\\\far\\\\space ?boo]",
+      "reason": "Windows only"
+    },
+    {
+      "case": "tests.action_server_tests.common_tests.test_uris::test_win_from_fs_path[c:\\\\far\\\\boo-file:///c:/far/boo]",
+      "reason": "Windows only"
+    },
+    {
+      "case": "tests.action_server_tests.common_tests.test_uris::test_win_from_fs_path[C:\\\\far\\\\space ?boo-file:///c:/far/space%20%3Fboo]",
+      "reason": "Windows only"
+    },
+    {
+      "case": "tests.action_server_tests.test_artifact_binding_lock::test_windows_binding_does_not_import_fcntl",
+      "reason": "Requires native Windows locking"
+    },
+    {
+      "case": "tests.action_server_tests.test_artifact_storage::test_storage_handles_mixed_resolved_drive_prefixes",
+      "reason": "native Windows path resolution"
+    },
+    {
+      "case": "tests.action_server_tests.test_package::test_package_upload",
+      "reason": "Skip package upload test"
+    },
+    {
+      "case": "tests.action_server_tests.test_package::test_package_status",
+      "reason": "Skip package upload test"
+    },
+    {
+      "case": "tests.action_server_tests.test_package::test_package_set_changelog",
+      "reason": "Skip package upload test"
+    },
+    {
+      "case": "tests.action_server_tests.test_rcc_runtime_adapter::test_real_rcc_artifact_action_vertical",
+      "reason": "set ACTIONS_REAL_RCC_ARTIFACT_TEST=1"
+    },
+    {
+      "case": "tests.action_server_tests.test_robot_run_inputs::test_pinned_rcc_executes_selected_task_with_declared_inputs",
+      "reason": "set ACTIONS_ROBOT_INPUT_RCC to pinned RCC18.19.3 for actual task-input acceptance"
+    }
+  ],
+  "deselected_portable": 290,
+  "portable_warnings": 16,
+  "classification": [
+    "All eight dedicated required stages zero failures/errors/skips; counts overlap with portable, not additive",
+    "Portable eight nativeWindows cases unverified on Linux; three package upload tests explicitly skipped/no publication authorized",
+    "Portable realRCCartifact action vertical remains NOTRUN; separate exact owned provider gate needed",
+    "Portable pinned taskinput skip is independently covered PASS in dedicated worker134; no skip conversion",
+    "ActualRCC generated app source protocol supports both invoice-summary and ndjson-inspector; no actualofficialhost/ChatGPTE1 claim"
+  ],
+  "installed": {
+    "schema_version": "actions.installed-candidate-qualification/v1",
+    "observed_at": "2026-10-25T00:11:47.265727+00:00",
+    "source": {
+      "source_sha": "3037e4fccb66a41835dbea8de7406d1281ad5dda",
+      "tree_sha": "42701b3cf2a7b5934df522e16045fe99a04d96f9",
+      "archive_sha256": "a75e96d355fe3f5c53bca813e69726679c463c80279168aa020e7e75586ec4b8",
+      "base": "/tmp/actions-327-installed-a24-0e34b9055fcc445da3ff560440b3ae00",
+      "source": "/tmp/actions-327-installed-a24-0e34b9055fcc445da3ff560440b3ae00/source",
+      "protected_config_excluded": true,
+      "initial_source_diff": "clean"
+    },
+    "runtime_version": "1.1.0a24",
+    "core_version": "1.1.0a2",
+    "sdk_version": "0.5.0a2",
+    "artifact_inventory": {
+      "runtime": {
+        "path": "/tmp/actions-327-installed-a24-0e34b9055fcc445da3ff560440b3ae00/runtime-wheels/actions_runtime-1.1.0a24-cp312-cp312-linux_x86_64.whl",
+        "bytes": 14743318,
+        "sha256": "144ede90db937ca5ba8a54dc78030d26f4a352f13e8eb04962ccc9900804a647",
+        "python_members": 252,
+        "source_and_installed_byte_match": true
+      },
+      "core": {
+        "path": "/tmp/actions-327-installed-a24-0e34b9055fcc445da3ff560440b3ae00/core-wheels/actions_core-1.1.0a2-py3-none-any.whl",
+        "bytes": 107211,
+        "sha256": "ca512d59e1f94d687cb637255b2622980d715528de720ac5da8105836315c19f",
+        "python_members": 50,
+        "source_and_installed_byte_match": true
+      },
+      "sdk": {
+        "path": "/tmp/actions-327-installed-a24-0e34b9055fcc445da3ff560440b3ae00/sdk-wheels/actions_work_items-0.5.0a2-py3-none-any.whl",
+        "bytes": 74186,
+        "sha256": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb",
+        "python_members": 25,
+        "source_and_installed_byte_match": true
+      }
+    },
+    "frontend_build": {
+      "command": "bash /workspace/actions-327-state/run-prepared invoke build-frontend",
+      "working_directory": "/tmp/actions-327-installed-a24-0e34b9055fcc445da3ff560440b3ae00/source/action_server",
+      "result": "PASS canonical npmci, Runtime+Canvas, SBOM, static embedding; subsequent npm run validate:artifacts PASS",
+      "artifacts": {
+        "dist": {
+          "sbom.json": {
+            "bytes": 880236,
+            "sha256": "f624dc4cff74cceaf2d281edc216b7551d5f3e764c299de216565acf4fad9505"
+          },
+          "artifact-manifest.json": {
+            "bytes": 273,
+            "sha256": "7c0bfe4134a4697b62c7ee78b566795f89f08d3a4da48acc00af2aa2a7bd3c65"
+          },
+          "index.html": {
+            "bytes": 987412,
+            "sha256": "59a091e58a89ae6a09213fb6b22e9f41118eca6a8ec46d3c9e94f6261a970ae8"
+          }
+        },
+        "dist-canvas": {
+          "sbom.json": {
+            "bytes": 880236,
+            "sha256": "f624dc4cff74cceaf2d281edc216b7551d5f3e764c299de216565acf4fad9505"
+          },
+          "artifact-manifest.json": {
+            "bytes": 290,
+            "sha256": "3f7ed5e00d03675ad0a4b15c64f76281dcf0eb163e69750da10b68d4e38b16cd"
+          },
+          "index.html": {
+            "bytes": 457411,
+            "sha256": "3e06ad094fd794516628a93b42eb1a6f01089abfc90ef9c6a5cb2c3c8bc1122e"
+          }
+        }
+      }
+    },
+    "public_oauth": "Generated only inside Git archive by checked-in scripts/build_oauth2_config.py from checked-in public empty catalogs. Protected untracked root configuration never read or copied.",
+    "rcc": {
+      "version": "18.19.3",
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+      "note": "Verified pinned binary copied only into owned archive packaging input; no RCC environment build/execution in lane"
+    },
+    "wheel_commands": [
+      "ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD=true bash /workspace/actions-327-state/run-prepared poetry build --format wheel --output <owned-runtime-wheels>",
+      "bash /workspace/actions-327-state/run-prepared poetry build --format wheel --output <owned-core-wheels>",
+      "Canonical write_candidate_sdk_producer.py for Core and SDK bound exact3037 producer checkout"
+    ],
+    "clean_install": {
+      "status": "PASS",
+      "python": "/tmp/actions-327-installed-a24-0e34b9055fcc445da3ff560440b3ae00/consumer/bin/python",
+      "prefix": "/tmp/actions-327-installed-a24-0e34b9055fcc445da3ff560440b3ae00/consumer",
+      "canonical_command_script": "/workspace/actions-327-state/evidence/resume-20261024/installed-a24/install_candidate.py",
+      "install_log": "/workspace/actions-327-state/evidence/resume-20261024/installed-a24/install.log",
+      "pip_report": "/workspace/actions-327-state/evidence/resume-20261024/installed-a24/pip-install-report.json",
+      "pip_check": "PASS",
+      "public_helper_floor": "actions-http-helper1.0.3 exact files.pythonhosted.org URL/SHA25646ed7ce0\u2026 as checked by canonical verifier",
+      "editable_or_source_overlays": false,
+      "source_archive_during_acceptance": "Consumer search-path guard rejects checkout imports; all engine imports within clean sys.prefix; no PYTHONPATH",
+      "core_source_member_count": 50,
+      "sdk_source_member_count": 25,
+      "runtime_source_member_count": 252,
+      "note_counts": "Counts are current .py members measured from selected wheels and matching exact archive, not inherited historical totals."
+    },
+    "mcp": {
+      "status": "PASS",
+      "receipt": "/workspace/actions-327-state/evidence/resume-20261024/installed-a24/mcp-retry/receipt.json",
+      "client": "mcp Python SDK2.3.0, httpx2 2.16.0",
+      "transport": "streamable HTTP loopback against ordinary installed CLI",
+      "scenarios": [
+        "blank library/create",
+        "model schema/spec read",
+        "apply and exact idempotent replay",
+        "stale revision denial",
+        "app-only dispatch denied to model caller",
+        "explicit activation",
+        "actual process stop/restart",
+        "reopen same revision",
+        "explicit rollback",
+        "managed schema401/200 and foreign-workspace capability403"
+      ],
+      "limits": [
+        "No generated backend execution in this lane",
+        "No actual ChatGPT/Codex or official browser host proof",
+        "No managed queue or worker grants inferred from schema presence"
+      ]
+    },
+    "retained_failure": {
+      "stage": "First MCP harness catalog assertion",
+      "cause": "Old receipt expected capability_invoke in unconfigured ordinary host; current canonical catalog includes canvas_preview and omits unconfigured execution",
+      "log": "/workspace/actions-327-state/evidence/resume-20261024/installed-a24/mcp-smoke.log",
+      "correction": "Harness updated to stable6authoring+launcher contract; retry used new empty owned state; no Runtime change",
+      "status": "FAILED evidence retained; subsequent source-identical corrected harness PASS"
+    },
+    "cleanup": "Both owned MCP CLI processes (initial failed harness plus successful first/restart) stopped; no Docker service/RCC materialization/host PATH replacement; owned archive/candidate consumer/wheels retained for coordinator use",
+    "documentation_proposal": {
+      "file": "docs/skills/repository-operations.md",
+      "text": "An archive build can keep exact producer identity without copying ignored files: extract git archive of the frozen commit, fetch only that commit into separate task-owned Git metadata, and verify the extracted worktree before running canonical producers. This lets frontend SOURCE_DATE_EPOCH and candidate producer records resolve the intended source while excluding untracked private OAuth material. Generate the public OAuth module only in that archive. For installed MCP smoke, negotiate the actual configured catalog: an ordinary unconfigured host exposes the six authoring operations plus the library launcher; execution tools are not implied by schema or a successful read-only resource."
+    },
+    "remaining": [
+      "Full original327 acceptance matrix and operator/E1/celld/publication gates remain open",
+      "SourceSQL/RCC acceptance runs separately under root",
+      "Confirmed legacy custom-queue UI navigation/selection gap requires root fix and next-candidate installed/browser regression"
+    ],
+    "upstream_disposition": "none; no upstream defect established",
+    "legacy_ui_observation": {
+      "result": "REPRODUCED product presentation/navigation gap; no backend data-loss claim",
+      "receipt": "/workspace/actions-327-state/evidence/resume-20261024/installed-a24/legacy-ui-settled/receipt.json",
+      "screenshot": "/workspace/actions-327-state/evidence/resume-20261024/installed-a24/legacy-ui-settled/work-items-custom-queue.png",
+      "screenshot_sha256": "afcca9c87164926dacac6f5a5dd920403351120caedf6f4e30409e113e17c5bd",
+      "source": "3037e4fccb66a41835dbea8de7406d1281ad5dda",
+      "api": {
+        "exact_owned_queue_total": 1,
+        "default_omitted_queue_total": 0,
+        "state": "PENDING",
+        "synthetic_value": 7
+      },
+      "actual_browser": {
+        "path": "/work-items",
+        "empty_state_visible": true,
+        "comboboxes": 0,
+        "queue_selector_reachable": false,
+        "request": "GET /api/work-items?limit=100"
+      },
+      "security": "Normal browser sign-in with task-owned synthetic key; no live credentials or tunnel changes; key absent from captures/receipts",
+      "capture": "fonts ready; finite animations disabled to capture settled state, no contrast/accessibility conclusion",
+      "cleanup": {
+        "pid": 20219,
+        "exit_code": -15,
+        "stopped": true
+      },
+      "retained_harness_failure": {
+        "receipt": "/workspace/actions-327-state/evidence/resume-20261024/installed-a24/legacy-ui/receipt.json",
+        "cause": "Bearer header alone did not establish browser-session cookie; initial UI probe timed out at sign-in. Retried via normal UI form, no auth weakening."
+      },
+      "freeze": "No TS/runtime/shared source edits; root owns correction in next candidate",
+      "capture_review": "Settled screenshot visually inspected: authenticated Work Items page, empty-state card, no queue/status selectors; no keys/tokens visible."
+    },
+    "scratch": {
+      "total_at_completion": "580MiB",
+      "tmp_free_at_last_check": "2.0GiB",
+      "workspace_free_at_last_check": "957MiB",
+      "note": "Other coordinator RCC work is active; no global/cache deletion performed",
+      "retained_for_coordinator": [
+        "source archive and exact Git metadata",
+        "clean candidate consumer",
+        "three exact wheels/producer records",
+        "frontend build inputs+SBOM/artifacts",
+        "owned synthetic CLI SQLite fixture states"
+      ],
+      "disposable_build_dependency_candidate": "Task-created frontend node_modules and two verified bootstrap-only build .venvs removed after all lane processes stopped; wheels/source/cleanconsumer/evidence retained",
+      "cleanup_receipt": "/workspace/actions-327-state/evidence/resume-20261024/installed-a24/owned-build-cleanup.json"
+    }
+  },
+  "core": {
+    "source_sha": "3037e4fccb66a41835dbea8de7406d1281ad5dda",
+    "package": "actions-core",
+    "version": "1.1.0a2",
+    "platform": "linux",
+    "python": "3.12.15",
+    "pytest": "8.4.2",
+    "source_files": 52,
+    "source_files_match_commit": true,
+    "core_payload_and_manifest_unchanged_from_pause_payload": true,
+    "referenced_prior_wheel_sha256": "ca512d59e1f94d687cb637255b2622980d715528de720ac5da8105836315c19f",
+    "prior_wheel_bytes_not_independently_rechecked_here": true,
+    "origins": {
+      "core_file": "/workspace/actions-327/actions/src/actions/__init__.py",
+      "mcp_file": "/workspace/actions-327/actions/src/actions/mcp/__init__.py"
+    },
+    "tests": {
+      "command": "bash /workspace/actions-327-state/run-package actions poetry run pytest -rfE -vv --basetemp=/tmp/actions327-core-package-20261025 --junitxml=/workspace/actions-327-state/evidence/resume-20261024/core-package/tests.xml",
+      "counts": {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "332",
+        "time": "50.558",
+        "timestamp": "2026-10-25T00:26:27.697998+00:00",
+        "hostname": "e71f9fed4f4f"
+      },
+      "selection": "Full declared Core local/portable test selection; no integration_test marker exclusions. --force-regen deliberately omitted to preserve frozen checked-in snapshots.",
+      "warnings": 4
+    },
+    "lint": {
+      "command": "bash /workspace/actions-327-state/run-package actions poetry run invoke lint",
+      "exit_code": 0,
+      "ruff_formatted_files": 150,
+      "optional_markdown_mdl": "unavailable; declared optional step not run"
+    },
+    "typecheck": {
+      "command": "bash /workspace/actions-327-state/run-package actions poetry run invoke typecheck",
+      "exit_code": 0,
+      "source_files": 126
+    },
+    "unrun": [
+      "clean noneditable wheel consumer",
+      "other Python versions/operating systems",
+      "docs check",
+      "publication"
+    ],
+    "fixture_root": "/tmp/actions327-core-package-20261025",
+    "upstream_disposition": "none",
+    "tracked_source_changes_by_lane": false
+  },
+  "open": [
+    "Confirmed installeda24 customqueueUI escape defect; draftpatch sixred/sixgreen, not yet applied",
+    "Exact installedSQL/RCC generatedexecution and secondactualofficialHost app remain required",
+    "Genericproducer/queue/defaultpolicy and full currentrelease matrix remain mandatory",
+    "Publisher332 protection/token-scope ownerdisposition; Codex401; ChatGPTE1; DakotaSTOP; celldNO-GO",
+    "Currentcrossplatformnative/wheel/retention/restore/upgrade/downgrade/publication gates not inferred fromlocal source tests"
+  ],
+  "storage": {
+    "root_output_relocation": "/workspace/actions-327-state/evidence/resume-20261024/pytest-output-relocation.json",
+    "retained_source_output": "/tmp/actions-327-resume-full-3037/retained-source-pytest-output",
+    "note": "12 prior owned pytest output files373983159bytes relocated and SHA256verified, not discarded; current verifier logs already isolated in/tmp. Normalpytest temporaryfixture cleanup later released full taskinput scratch."
+  },
+  "documentation": {
+    "docs/skills/repository-operations.md": "Frozen Core full selection without --force-regen; actual defaultMCP catalog versus configured execution; isolate diagnostic output for bounded disk",
+    "docs/skills/work-items.md": "Dedicated taskinput proof versus portable optin skip; fulltoolkit scratch capacity and unchanged trust/verification"
+  },
+  "rollback": "No production/schema change in this checkpoint; source3037 Runtime24 artifact retained as known tested engine checkpoint. UI defect remains visible. Future changed bytes need a25 or later; never rebuild changedbytes undera24/1.0.4/0.4.4.",
+  "upstream_disposition": "none; previous RCC report remains draft-only"
+}

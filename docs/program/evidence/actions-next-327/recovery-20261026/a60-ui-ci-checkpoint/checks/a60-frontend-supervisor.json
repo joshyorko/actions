@@ -1,0 +1,41 @@
+{
+  "status": "PASS",
+  "qualification": "command assertions and separately owned cleanup",
+  "command_exit": 0,
+  "remaining_owned": [],
+  "adoptees_reaped": [
+    {
+      "pid": 82394,
+      "status": 0
+    },
+    {
+      "pid": 82541,
+      "status": 0
+    },
+    {
+      "pid": 82544,
+      "status": 0
+    },
+    {
+      "pid": 82546,
+      "status": 0
+    },
+    {
+      "pid": 82547,
+      "status": 0
+    },
+    {
+      "pid": 82479,
+      "status": 9
+    },
+    {
+      "pid": 82490,
+      "status": 9
+    },
+    {
+      "pid": 82491,
+      "status": 9
+    }
+  ],
+  "elapsed_seconds": 102.8
+}

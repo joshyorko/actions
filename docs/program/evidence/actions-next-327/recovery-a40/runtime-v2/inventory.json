@@ -1,0 +1,146 @@
+[
+  {
+    "path": "README.md",
+    "sha256": "177e577d6ed0df1206408a853229716b8b7b65a9c49b0b721aab7b184cd0bb05"
+  },
+  {
+    "path": "runtime-v2/controller.log.b64",
+    "sha256": "c2bf18ec52fa690b59d35aa6160c50f1e2b98754a0062321f03f9bd18410a860"
+  },
+  {
+    "path": "runtime-v2/joined-summary.json",
+    "sha256": "c0bcd201076e6ed464997cb4da817abb376ee1c1874ac3bc6203b0ea5e8ecc23"
+  },
+  {
+    "path": "runtime-v2/refresh-core.log.b64",
+    "sha256": "74c5287a9a1eeca9460205047c81d0f726a461d247bd93c41348f0d8bdd5400f"
+  },
+  {
+    "path": "runtime-v2/run.py",
+    "sha256": "82e87626c5cc07354d783034dc67449143c924057c16726987b47f721ff097c0"
+  },
+  {
+    "path": "runtime-v2/selected-pytest.py",
+    "sha256": "ccd3bf0af2569e3d1851a4d387463b89e7835f7ed85cbc4baa2a26724c0fbb76"
+  },
+  {
+    "path": "runtime-v2/test_foundry_canvas_v2/receipt.json",
+    "sha256": "244599b0125350d518666dd01b752afee2aeb212d6556925ef6048abbb60fd32"
+  },
+  {
+    "path": "runtime-v2/test_foundry_canvas_v2/run.log.b64",
+    "sha256": "4a0e8a1525fa3b0172ab29ea6ab479635d066e9d2cc408ce67327e87f8f6051a"
+  },
+  {
+    "path": "runtime-v2/test_foundry_canvas_v2/selected.json",
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  {
+    "path": "runtime-v2/test_foundry_canvas_v2/tests.xml.b64",
+    "sha256": "f43cdb72cd9ae3024e9b01a6caafa030a3dc5f0fdc32b0e35f8a2f1fc14f635d"
+  },
+  {
+    "path": "runtime-v2-refreshed/controller.log.b64",
+    "sha256": "b1315f9babe306e34455722024f2718fb6ede2c9a8279cace707a8592c265bc2"
+  },
+  {
+    "path": "runtime-v2-refreshed/joined-summary.json",
+    "sha256": "9e10eefdbcb87398272e44ec74afaf644e293f6cfbd2b4adc78fc83dd3d83979"
+  },
+  {
+    "path": "runtime-v2-refreshed/run.py",
+    "sha256": "ec3127596c069345c24b90671f60ca72b72d086977c95ff4a65d0b1bd9cbd999"
+  },
+  {
+    "path": "runtime-v2-refreshed/selected-pytest.py",
+    "sha256": "ccd3bf0af2569e3d1851a4d387463b89e7835f7ed85cbc4baa2a26724c0fbb76"
+  },
+  {
+    "path": "runtime-v2-refreshed/test_foundry_authoring/receipt.json",
+    "sha256": "7b4c93f8440c0e4d9d34f600e5e3c9da2bbc7deec6034b963b9bff6721d15b21"
+  },
+  {
+    "path": "runtime-v2-refreshed/test_foundry_authoring/run.log.b64",
+    "sha256": "3c04adbaceb0b935fb4de890ebca3a30cf5cd5be07f7c85d18c26da27524566d"
+  },
+  {
+    "path": "runtime-v2-refreshed/test_foundry_authoring/selected.json",
+    "sha256": "3a33d0e23b85b74036d54538a151ff60f2da29f2d490266a53f2f3837f39253a"
+  },
+  {
+    "path": "runtime-v2-refreshed/test_foundry_authoring/tests.xml.b64",
+    "sha256": "e272044b88e4eb3a5c8d79a07ac2b92c334472e73a98622a96e81e991b2aaab5"
+  },
+  {
+    "path": "runtime-v2-refreshed/test_foundry_authoring_model_contract/receipt.json",
+    "sha256": "b7b19869c47c47a2969af1148cb37dd7ffdb8bbb9fe52347b79d09818c36190d"
+  },
+  {
+    "path": "runtime-v2-refreshed/test_foundry_authoring_model_contract/run.log.b64",
+    "sha256": "9822c010ca41e74fb7801110d24d8d083768ee8338f898560117e19e86b15483"
+  },
+  {
+    "path": "runtime-v2-refreshed/test_foundry_authoring_model_contract/selected.json",
+    "sha256": "133f3150c69eb56d968ea4f71f646f9d45820064bebbc260f373aa57d56dc267"
+  },
+  {
+    "path": "runtime-v2-refreshed/test_foundry_authoring_model_contract/tests.xml.b64",
+    "sha256": "b0d208b2abf7d7c613519a91b3fbe1759baa4195a09e44114bd5bd4c794bb141"
+  },
+  {
+    "path": "runtime-v2-refreshed/test_foundry_canvas_v2/receipt.json",
+    "sha256": "25681b1a60e255776f5baf775523c8212f4ea77ef8a739184bd8cbc1a4677d17"
+  },
+  {
+    "path": "runtime-v2-refreshed/test_foundry_canvas_v2/run.log.b64",
+    "sha256": "5f289759b02582058d9a4a699a0d00b85b148628dfe20bfdb46f1c8c19c3792b"
+  },
+  {
+    "path": "runtime-v2-refreshed/test_foundry_canvas_v2/selected.json",
+    "sha256": "f9533e5e5c0127a7b432841b54c0a36f11e809a50c691b74ca058ffe7ef064ef"
+  },
+  {
+    "path": "runtime-v2-refreshed/test_foundry_canvas_v2/tests.xml.b64",
+    "sha256": "bd6b9dab0b020da6ffa1fac418f9abb130d3c01fbd6bf528c4c3b6e6906f6de8"
+  },
+  {
+    "path": "runtime-v2-refreshed/test_foundry_deployments/receipt.json",
+    "sha256": "875f4fdea56b952aac2ed5507dcf0009f5ba61c011fe8d78e9a0371b5be66489"
+  },
+  {
+    "path": "runtime-v2-refreshed/test_foundry_deployments/run.log.b64",
+    "sha256": "81e63759e1a5be4662bfcabf7425b7e370edebf9bf64451b710648ccbb1df5e7"
+  },
+  {
+    "path": "runtime-v2-refreshed/test_foundry_deployments/selected.json",
+    "sha256": "8501dabb853055447e199e774dd13e8a20b8c1c672b4576f4f39c88e5a1ee8f3"
+  },
+  {
+    "path": "runtime-v2-refreshed/test_foundry_deployments/tests.xml.b64",
+    "sha256": "c61d69b891267d102e256d265b9fc656b6ef1d0e4351be216bb5786e3253c12f"
+  },
+  {
+    "path": "runtime-v2-refreshed/test_foundry_sql_authoring/receipt.json",
+    "sha256": "5debe84a8a44949f8b2b17004878b23bdc1cb13376966e956bc323c42b26cb76"
+  },
+  {
+    "path": "runtime-v2-refreshed/test_foundry_sql_authoring/run.log.b64",
+    "sha256": "7cd106dd49ee9efac1f6af89c30a97dcd2b329a6f5ed721e8c7bcabfb967eed9"
+  },
+  {
+    "path": "runtime-v2-refreshed/test_foundry_sql_authoring/selected.json",
+    "sha256": "3c0e31a9aece82efa838c7a97bc28f1d9a9f766aac9be51c8598e0b8ffe51a0c"
+  },
+  {
+    "path": "runtime-v2-refreshed/test_foundry_sql_authoring/tests.xml.b64",
+    "sha256": "a67219d58c9ac3faaa44ad8400d9f7a465ce7508fc72462e12a7e01a66f06372"
+  },
+  {
+    "path": "runtime-v2-refreshed/type-corrected.log.b64",
+    "sha256": "d8f4050d607193ce2203abc256bd5f328acf5694a86c30f89177baa561487c6e"
+  },
+  {
+    "path": "runtime-v2-refreshed/type.log.b64",
+    "sha256": "2eb3bd658d1aa160153224900e17e51b080eb77a3ba63201f5e35642e8cc1f3e"
+  }
+]

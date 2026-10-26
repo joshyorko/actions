@@ -1,0 +1,7 @@
+name: generated-fixture
+description: One synthetic generated Action
+dependencies:
+  conda-forge:
+    - python=3.12
+  pypi:
+    - actions-core=1.0.2

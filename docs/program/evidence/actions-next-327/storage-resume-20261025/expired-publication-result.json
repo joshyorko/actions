@@ -1,0 +1,11 @@
+{
+  "outer_type": "LogicalReadRejected",
+  "outer_message": "logical publication authority unavailable",
+  "inner_type": "AccessDenied",
+  "inner_message": "Knowledge publication cancelled or deadline exceeded",
+  "run_status": 1,
+  "output_states": [
+    "provisional"
+  ],
+  "output_count": 8
+}

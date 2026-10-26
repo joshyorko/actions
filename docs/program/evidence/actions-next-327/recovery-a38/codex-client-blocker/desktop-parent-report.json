@@ -1,0 +1,23 @@
+{
+  "provenance": "parent thread report; raw sanitized command/events retained by parent, not locally inspected",
+  "date": "2026-10-25",
+  "environment": "independent cloud desktop",
+  "executable": "/opt/codex/bin/codex",
+  "version": "0.163.0",
+  "state": "fresh task-local scratch",
+  "events": [
+    "thread.started",
+    "turn.started"
+  ],
+  "result": "BLOCKED",
+  "model_answer": false,
+  "mcp_attachment": false,
+  "tool_calls": 0,
+  "failures": [
+    "existing Responses WebSocket ECONNREFUSED/ENETUNREACH",
+    "client HTTPS fallback failed"
+  ],
+  "timeout_seconds": 90,
+  "exit_code": 124,
+  "changes": "No login, auth copying, credentials, network or security changes; no alternate network route attempted."
+}

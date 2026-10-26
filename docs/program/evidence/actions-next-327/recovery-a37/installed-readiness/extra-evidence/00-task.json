@@ -1,0 +1,19 @@
+{
+  "method": "tools/call",
+  "result": {
+    "resultType": "task",
+    "taskId": "a03c5921-40b5-455a-9846-fb724c57de4d",
+    "status": "working",
+    "createdAt": "2026-10-25T06:47:49.416Z",
+    "lastUpdatedAt": "2026-10-25T06:47:49.416Z",
+    "ttlMs": 600000,
+    "pollIntervalMs": 50,
+    "statusMessage": "Queued for configured worker.",
+    "_meta": {
+      "io.modelcontextprotocol/serverInfo": {
+        "name": "Action Server",
+        "version": ""
+      }
+    }
+  }
+}

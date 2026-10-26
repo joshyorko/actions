@@ -1,0 +1,14 @@
+{
+  "status": "REPRODUCED",
+  "scope": "exact installed wheel helper; not real RCC or public Canvas acceptance",
+  "wheel_members_verified": {
+    "actions_runtime-1.1.0a41-cp312-cp312-linux_x86_64.whl": 328,
+    "actions_core-1.1.0a5-py3-none-any.whl": 58,
+    "actions_work_items-0.5.0a2-py3-none-any.whl": 29
+  },
+  "runtime": "1.1.0a41",
+  "core": "1.1.0a5",
+  "mcp": "2.0.0",
+  "returncode": 1,
+  "helper_sha256": "0977aa872e6355ce1679bd5636aec0126a3a2e59669bc43162d53f108e439755"
+}

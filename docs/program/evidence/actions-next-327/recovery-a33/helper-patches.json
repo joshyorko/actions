@@ -1,0 +1,14 @@
+{
+  "task-clock": {
+    "raw_sha256": "1fb994bb5ed1f9362a0741cf7ae12b5096463407bb2d0bf67db267a5912bb6f4",
+    "gzip_sha256": "5d0c55e883d71e14d0b555c1d52cfe985cf7474377d2808044c8d684badf932f"
+  },
+  "sealed-scan": {
+    "raw_sha256": "5b897582196dda1fc32b3cf6c761cac32aff4763a97088bb5eba5a0cc9d68e96",
+    "gzip_sha256": "440db3178bc198bfc28573a8bd84480d34719726a3dad9948fdf4da3a8263784"
+  },
+  "sealed-postgres": {
+    "raw_sha256": "d8cd60333bae2d4f620e83b9719d95a9a8b1417aa64462ba740f154c8fa56a83",
+    "gzip_sha256": "a417b4ff1623cfdadea512061e8fede29588d65fc0317c1b45efaa4fbcba0bf2"
+  }
+}

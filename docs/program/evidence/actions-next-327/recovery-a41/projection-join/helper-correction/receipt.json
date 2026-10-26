@@ -1,0 +1,50 @@
+{
+  "status": "PASS_SOURCE_COMPONENT_CORRECTION",
+  "tests": {
+    "tests3": {
+      "tests": "44",
+      "failures": "4",
+      "errors": "0",
+      "skipped": "0"
+    },
+    "tests5": {
+      "tests": "48",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    "tests6-red": {
+      "tests": "22",
+      "failures": "22",
+      "errors": "0",
+      "skipped": "0"
+    },
+    "tests7": {
+      "tests": "70",
+      "failures": "22",
+      "errors": "0",
+      "skipped": "0"
+    },
+    "tests8-red": {
+      "tests": "22",
+      "failures": "20",
+      "errors": "0",
+      "skipped": "0"
+    },
+    "tests9": {
+      "tests": "70",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    }
+  },
+  "scope": "SQL preimage race closure only; no routing/installed/client proof",
+  "original_patch_sha256": "413ca4d446e5d683ba03fe58158cbf79f09d0e6e319b69a4fb40fc8f7fd83c8d",
+  "checks": [
+    "Ruff",
+    "format",
+    "isort",
+    "mypy production"
+  ],
+  "upstream_disposition": "none"
+}

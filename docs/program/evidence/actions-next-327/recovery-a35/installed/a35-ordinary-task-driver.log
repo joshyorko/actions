@@ -1,0 +1,2 @@
+/workspace/actions-recovery-327/installed-a35/consumer/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py:1540: TypedDictExtraConfigWarning: TypedDict class 'RequestParamsMeta' allows extra items, but 'extra' configuration is set to `'forbid'`. The 'extra' configuration value will be ignored.
+  warnings.warn(

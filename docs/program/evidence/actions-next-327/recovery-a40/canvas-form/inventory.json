@@ -1,0 +1,38 @@
+[
+  {
+    "path": "README.md",
+    "sha256": "eeac93301c0baa3ce69a3c0721486b12da1eb59e9799fa2744972c379adc749f"
+  },
+  {
+    "path": "refresh.log.b64",
+    "sha256": "048b3951692331f1a94929bca9a2c59fce61ebaec59512827e2644b846c74fa9"
+  },
+  {
+    "path": "refresh.py",
+    "sha256": "d4f36840d583dd9695773af531c8f8d7c7a4883de6d4e0f290a4bf66df7f19ba"
+  },
+  {
+    "path": "test-refreshed.log.b64",
+    "sha256": "8fbf11a23e04ba0c99d036e2716468d109893257630214602599b2d9f8b10a27"
+  },
+  {
+    "path": "test-refreshed.py",
+    "sha256": "25646bcd9142da077d4d83c7d6b6182934b344711c01ab968f4d36f4b4e79d30"
+  },
+  {
+    "path": "test.log.b64",
+    "sha256": "e17145e1380520d937923088a14a8535b628e961f78120b5a70b9ad9c3f9c119"
+  },
+  {
+    "path": "test.py",
+    "sha256": "aa6af46d986fc725a7693e5a90d49340f4e143a8b486e94a6b6e1cb114dd0d33"
+  },
+  {
+    "path": "tests-refreshed.xml.b64",
+    "sha256": "610dadc3264328763be2fe3272e014f21417771380360bf2082eda1b376aae43"
+  },
+  {
+    "path": "tests.xml.b64",
+    "sha256": "be62c18e51e55ea0a44c4d5ab6a9d92e6b7c12c64b61d2f563b6b046c7950da0"
+  }
+]

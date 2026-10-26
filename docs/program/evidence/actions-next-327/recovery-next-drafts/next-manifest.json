@@ -1,0 +1,21 @@
+{
+  "status": "recoverable isolated drafts, not integrated source or actual RCC acceptance",
+  "artifacts": {
+    "producer-output.patch.gz": {
+      "raw_sha256": "abcc5ec2dcf96a6d29bda3870145795c6f604ec965dce50a059b0084e462d818",
+      "gzip_sha256": "310e9b6625e0407d27eb3b745ff1d71b0f1311385aa02ab8a4a2e20d7c1d593c"
+    },
+    "actual-input-output-rcc.patch.gz": {
+      "raw_sha256": "98e439ee20c6101c8417f7f75ffc39694b2d41374030b63ace16cba5fee1ca57",
+      "gzip_sha256": "38460dd64379e0453db14807ba27f67e02c1dfba8ba4fcf1fcbc08941a4494a5"
+    },
+    "provider-registry.patch.gz": {
+      "raw_sha256": "b39355beaf9e27c31d6584dfe3216ed13183a5dabebf07d16ad4a5ce40fa7cc5",
+      "gzip_sha256": "8a741e4be72eca57cc6ac548ababaed77b30752229dca8d8a9b6caafea85af49"
+    },
+    "provider-registry-guide.patch.gz": {
+      "raw_sha256": "1f653c068281f6d12b64fa560685e24e00e6b5f2a78904142472f5fee7bf3409",
+      "gzip_sha256": "c43a430c2f5ccbfa2c192b09e532725e78b96679aeb1751384391badd1ae88fe"
+    }
+  }
+}

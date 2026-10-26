@@ -1,0 +1,46 @@
+{
+  "head": "595cf5119dbf2f858bcc28109b34de31bdc50f86",
+  "groups": [
+    [
+      "contract_tests/test_capability_bundle.py",
+      "contract_tests/test_execution_selection.py",
+      "contract_tests/test_backend_action_declarations.py",
+      "action_server_tests/test_bundle_package_registry.py",
+      "action_server_tests/test_foundry_package_registry.py"
+    ],
+    [
+      "action_server_tests/test_logical_binding_checkpoint.py",
+      "action_server_tests/test_logical_receipts.py",
+      "action_server_tests/test_logical_domain.py",
+      "action_server_tests/test_logical_runner_join.py"
+    ],
+    [
+      "action_server_tests/test_task_service.py",
+      "action_server_tests/test_generic_work_item_execution.py",
+      "action_server_tests/test_generic_execution_port.py"
+    ],
+    [
+      "action_server_tests/test_foundry_authoring.py",
+      "action_server_tests/test_foundry_authoring_model_contract.py",
+      "action_server_tests/test_foundry_sql_authoring.py"
+    ]
+  ],
+  "excluded": "real_generic_rcc or optin_actual_rcc_model_wrapper",
+  "changed_files": [
+    "action_server/src/actions/server/_static_contents.py",
+    "action_server/src/actions/server/deployments/capability_bundle.py",
+    "action_server/src/actions/server/deployments/capability_bundle_compiler.py",
+    "action_server/src/actions/server/foundry/authoring.py",
+    "action_server/src/actions/server/foundry/authoring_values.py",
+    "action_server/src/actions/server/foundry/execution_selection.py",
+    "action_server/src/actions/server/foundry/logical_receipts.py",
+    "action_server/src/actions/server/foundry/package_registry.py",
+    "action_server/src/actions/server/foundry/rcc_execution.py",
+    "action_server/src/actions/server/run_outputs/task_service.py",
+    "action_server/tests/action_server_tests/test_bundle_package_registry.py",
+    "action_server/tests/action_server_tests/test_logical_binding_checkpoint.py",
+    "action_server/tests/contract_tests/test_backend_action_declarations.py",
+    "action_server/tests/contract_tests/test_capability_bundle.py",
+    "action_server/tests/contract_tests/test_execution_selection.py"
+  ]
+}

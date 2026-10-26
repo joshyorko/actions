@@ -1,0 +1,31 @@
+{
+  "status": "PASS_FOCUSED_SOURCE_PENDING_INSTALLED_FULL_PACKAGE",
+  "runtime": "1.1.0a28",
+  "base": "c97e7bbd814fed7e1b5731761eeb02f00b940dbc",
+  "joined": {
+    "passed": 239,
+    "skipped": 0,
+    "deselected": 2,
+    "providers": [
+      "SQLite",
+      "PostgreSQL"
+    ]
+  },
+  "frontend": {
+    "passed": 51,
+    "skipped": 1,
+    "skip": "Python/TypeScript fixture roundtrip requires Python driver, separately exercised by full portable suite"
+  },
+  "quality": "Runtime mypy489, configured Python lint, frontend typecheck/lint, canonical build PASS",
+  "failed_attempts": "Initial joined test path and Vitest config path corrected before execution; missing test annotation and bootstrap import ordering corrected; raw outputs retained. Annotation/import ordering changed during first joined run; no behavior change.",
+  "remaining": [
+    "actual RCC integrated run in progress",
+    "full portable a28",
+    "clean installed operator/discovery/app host/restart",
+    "input-linked app forms",
+    "full owner product gates",
+    "celld326 owner decision NO-GO",
+    "Library HTTP401"
+  ],
+  "upstream_disposition": "none"
+}

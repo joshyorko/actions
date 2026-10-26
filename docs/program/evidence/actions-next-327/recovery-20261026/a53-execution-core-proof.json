@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "core_version": "1.1.0a8",
+  "robot_version": "7.4.2",
+  "payload_members_verified": 87,
+  "work_items_members_verified": 26,
+  "wheel_sha256": "42e550a8c207849e0a428fa702827ff2f77d98a00fd63aa0f85a912c0719419f",
+  "interpreter": "/workspace/327-probes/a53-claimed/compiler/robocorp/holotree/badcafe_5a1fac3_b00df7dd/bin/python3.12",
+  "interpreter_resolved": "/workspace/327-probes/a53-claimed/compiler/robocorp/holotree/badcafe_5a1fac3_b00df7dd/bin/python3.12",
+  "interpreter_sha256": "bb9a83a3c8f7d2bea8f80afc56924d921ef4b8ce28799c511e118973ef61a275",
+  "isolated": true
+}

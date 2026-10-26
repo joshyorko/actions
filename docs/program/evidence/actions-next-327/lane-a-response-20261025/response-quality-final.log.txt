@@ -1,0 +1,190 @@
+"/workspace/lane-a/developer/toolkit.yaml" as robot.yaml is:
+# Repository developer toolkit.
+#
+# RCC owns the reproducible toolchain and task boundary. Poetry remains the
+# dependency and package-release authority inside each package.
+
+tasks:
+  Doctor:
+    shell: python toolkit.py doctor
+
+devTasks:
+  Doctor:
+    shell: python toolkit.py doctor
+  Bootstrap:
+    shell: python toolkit.py bootstrap
+  Test:
+    shell: python toolkit.py test
+  ToolkitTest:
+    shell: python toolkit.py toolkit-test
+  Lint:
+    shell: python toolkit.py lint
+  Typecheck:
+    shell: python toolkit.py typecheck
+  Docs:
+    shell: python toolkit.py docs
+  CheckAll:
+    shell: python toolkit.py check-all
+  Coverage:
+    shell: python toolkit.py coverage
+  FrontendTest:
+    shell: python toolkit.py frontend-test
+  InstallCommunity:
+    shell: python toolkit.py install-community
+  InvoiceQueryTest:
+    shell: python toolkit.py invoice-query-test
+  InvoiceReconciliationDemo:
+    shell: python toolkit.py invoice-reconciliation-demo
+  FencedWorkItemsTest:
+    shell: python toolkit.py fenced-work-items-test
+
+environmentConfigs:
+  - setup_windows_amd64.yaml
+  - setup.yaml
+
+artifactsDir: tmp
+
+PATH:
+  - .
+PYTHONPATH:
+  - .
+ignoreFiles:
+  - ../.gitignore
+
+Note! For now, resolved effective environment configuration file is "/workspace/lane-a/developer/setup.yaml".
+####  Progress: 00/15  v18.19.3     0.020s  Context: "" <agent@71cd163cf8ad> [linux_amd64/Debian GNU/Linux 13 (trixie) [id=debian; version=13]].
+####  Progress: 01/15  v18.19.3     0.001s  Fresh [private mode] holotree environment 9a080d0f-3bcf-90aa-16c6-25dc61b0ece5. (parent/pid: 13027/13030)
+####  Progress: 02/15  v18.19.3     0.001s  Holotree blueprint is "318089d9095ad813" [linux_amd64 with 4 workers on 5 CPUs from "setup.yaml"].
+FINAL unified conda environment descriptor:
+---
+channels:
+- conda-forge
+dependencies:
+- python=3.12
+- git=2.46.0
+- nodejs=20.19.3
+- go=1.23.6
+- jq=1.7.1
+- uv=0.9.26
+- pip=25.0
+- pip:
+  - invoke==2.2.0
+  - poetry==2.1.1
+  - pyyaml==6.0.2
+  - pytest==8.3.4
+  - ruff==0.8.6
+---
+####  Progress: 14/15  v18.19.3     0.998s  Restore space from library [with 4 workers on 5 CPUs; with compression: true].
+Installation plan is: /workspace/lane-a-state/rcc/holotree/c2fd1aa_5a1fac3_9fcd2534/rcc_plan.log
+Environment configuration descriptor is: /workspace/lane-a-state/rcc/holotree/c2fd1aa_5a1fac3_9fcd2534/identity.yaml
+####  Progress: 15/15  v18.19.3     0.746s  Fresh holotree done [with 4 workers on 5 CPUs].
+Note: [Before run] Artifact dir "/workspace/lane-a/developer/tmp" already has "environment_linux_amd64_freeze.yaml" in it.
+Note: [Before run] Artifact dir "/workspace/lane-a/developer/tmp" already has "stderr.log" in it.
+Note: [Before run] Artifact dir "/workspace/lane-a/developer/tmp" already has "stdout.log" in it.
+Above notes mean, that there were files present in directory that was supposed to be empty!
+In robot development phase, it might be ok to have these files while building robot.
+In production robot/assistant, this might be a mistake, where development files were
+left inside robot.zip file. Report these to developer who made this robot/assistant.
+
+> actions-runtime-frontend@0.0.1 test:quality
+> npm run test:lint && npm run test:types && npm run test:prettier && npm run test:topology && npm run test:ui-system
+
+
+> actions-runtime-frontend@0.0.1 test:lint
+> eslint --max-warnings 0 apps/runtime/src apps/canvas-view/src src/app
+
+
+> actions-runtime-frontend@0.0.1 test:types
+> tsc --noEmit
+
+
+> actions-runtime-frontend@0.0.1 test:prettier
+> prettier --end-of-line auto --check apps/runtime/src apps/canvas-view/src src/app
+
+Checking formatting...
+All matched files use Prettier code style!
+
+> actions-runtime-frontend@0.0.1 test:topology
+> vitest --run --testNamePattern "Actions frontend topology"
+
+
+ RUN  v4.1.10 /workspace/lane-a/action_server/frontend/apps/runtime
+
+
+ Test Files  1 passed | 31 skipped (32)
+      Tests  6 passed | 281 skipped (287)
+   Start at  13:47:20
+   Duration  18.28s (transform 6.40s, setup 7.46s, import 18.01s, tests 11ms, environment 17.57s)
+
+
+> actions-runtime-frontend@0.0.1 test:ui-system
+> vitest --run __tests__/ui-system.test.ts
+
+
+ RUN  v4.1.10 /workspace/lane-a/action_server/frontend/apps/runtime
+
+
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+   Start at  13:47:39
+   Duration  965ms (transform 62ms, setup 224ms, import 34ms, tests 8ms, environment 427ms)
+
+
+> actions-runtime-frontend@0.0.1 build:canvas
+> vite build --mode canvas --minify=esbuild && node scripts/inline-canvas-assets.mjs && node scripts/write-artifact-manifest.mjs dist-canvas canvas-mcp-app "text/html;profile=mcp-app" && npm run sbom:canvas
+
+vite v8.2.1 building client environment for canvas...
+[2Ktransforming...Browserslist: browsers data (caniuse-lite) is 10 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+✓ 168 modules transformed.
+rendering chunks...
+computing gzip size...
+dist-canvas/index.html                   0.48 kB │ gzip:   0.30 kB
+dist-canvas/assets/index-D67X9fdW.css    8.64 kB │ gzip:   2.17 kB
+dist-canvas/assets/index-CXnsA3Dg.js   462.52 kB │ gzip: 131.79 kB
+
+✓ built in 755ms
+
+> actions-runtime-frontend@0.0.1 sbom:canvas
+> cyclonedx-npm --package-lock-only --output-format json --output-reproducible --output-file dist-canvas/sbom.json
+
+
+[WebServer] (node:13701) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+[WebServer] Browserslist: browsers data (caniuse-lite) is 10 months old. Please run:
+[WebServer]   npx update-browserslist-db@latest
+[WebServer]   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+
+Running 6 tests using 1 worker
+
+[1/6] apps/canvas-view/src/semantic-renderer/browser-harness.spec.ts:4:1 › renders and dispatches a synthetic component form in a browser
+[2/6] apps/canvas-view/src/semantic-renderer/browser-harness.spec.ts:32:5 › keeps wide results within the page at 320px
+[3/6] apps/canvas-view/src/semantic-renderer/browser-harness.spec.ts:32:5 › keeps wide results within the page at 1280px
+[4/6] apps/canvas-view/src/semantic-renderer/browser-harness.spec.ts:81:1 › announces pending work and a response without dispatch on mount
+[5/6] apps/canvas-view/src/semantic-renderer/browser-harness.spec.ts:119:5 › shows truthful error results and permits retry
+[6/6] apps/canvas-view/src/semantic-renderer/browser-harness.spec.ts:119:5 › shows truthful empty results and permits retry
+  6 passed (6.4s)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@  From rcc "v18.19.3" (controller: "user") point of view, "actual main robot run" was SUCCESS. @@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Warning: "rcc" process 13030 (parent 13027) still has running migrated processes:
+Warning: + migrated process still running:
+Warning: | #13700  "sh" <leaf -> new parent PID: #1>
+Warning: | #13701  "node" <leaf -> new parent PID: #1>
+Warning: | #13753  "chromium" <leaf -> new parent PID: #1>
+Warning: | #13754  "chromium" <leaf -> new parent PID: #1>
+Note: Depending on OS, above processes may prevent robot to close properly.
+Note: Few reasons why this might be happening are:
+Note: - robot is not properly releasing all resources that it is using
+Note: - robot is generating background processes that don't complete before robot tries to exit
+Note: - there was failure inside robot, which caused robot to exit without proper cleanup
+Note: - developer intentionally left processes running, which is not good for repeatable automation
+So if you see this message, and robot still seems to be running, it is not!
+You now have to take action and stop those processes that are preventing robot to complete.
+Example cleanup command: kill -9 13700 13701 13753 13754
+  |  "Build/Pre-run"  relative time allocation ratio:  1:0
+  |  "Setup/Run"  relative time allocation ratio:  9:230
+OK.
+Note: Now running rcc v18.19.3. There is newer rcc version v18.19.7 available, released at 15.10.2026.

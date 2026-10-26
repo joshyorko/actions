@@ -1,0 +1,15 @@
+
+> actions-runtime-frontend@0.0.1 test:canvas
+> vitest --run --config apps/canvas-view/vitest.config.ts
+
+
+ RUN  v4.1.10 /workspace/actions/action_server/frontend/apps/canvas-view
+
+Browserslist: browsers data (caniuse-lite) is 10 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+
+ Test Files  11 passed (11)
+      Tests  70 passed | 1 skipped (71)
+   Start at  04:07:00
+   Duration  7.23s (transform 954ms, setup 2.29s, import 3.68s, tests 4.98s, environment 5.89s)

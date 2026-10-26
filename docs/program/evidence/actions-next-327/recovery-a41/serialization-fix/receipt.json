@@ -1,0 +1,17 @@
+{
+  "status": "PASS_SOURCE_SERIALIZATION_FIX",
+  "passed": 8,
+  "failed": 0,
+  "warning": 1,
+  "warning_scope": "existing pytest config warning",
+  "changes": "both plain and logical generated helpers use Core model_dump(mode=json) semantics before existing strict JSON dump; no str fallback; host schema/canonical gates unchanged",
+  "diagnosis": "actual frozen helper inside exact trustedCorea5 artifact produced Report not JSONserializable TypeError",
+  "prior_failures": "first4 failures wrong helper method name; next2+2 invalid noncanonical logicalcontext fixture; retained logs. Corrected canonical fixture passes all8, unsupported/nonfinite assert actual serialization messages.",
+  "checks": [
+    "Ruff format",
+    "Ruff check"
+  ],
+  "installed_fixed_candidate": "NOT_RUN",
+  "failure_lifecycle": "NOT_INCLUDED; separate follow-on",
+  "upstream_disposition": "none"
+}

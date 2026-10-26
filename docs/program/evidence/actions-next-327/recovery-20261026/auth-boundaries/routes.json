@@ -1,0 +1,979 @@
+{
+  "source": {
+    "repository": "/workspace/actions",
+    "head": "a4e5b2b66c79da3c083d315cf5865ca70bd4d025",
+    "route_inventory": "action_server/tests/action_server_tests/test_auth_route_inventory.py::_route_policy and test_assembled_auth_route_inventory_stops_before_server_start",
+    "source_boundary": "Policy is checked by an assembled app capture test; this inventory lane inspected source and did not execute pytest or start a server."
+  },
+  "routes": [
+    {
+      "route_kind": "Route",
+      "route_prefix": "/openapi.json",
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "auth_owner": "FastAPI framework/OpenAPI configuration; no app auth dependency",
+      "route_policy_category": "framework-public",
+      "matching_test_or_evidence": "No app-specific auth negative; framework routes are intentionally public.",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "Route",
+      "route_prefix": "/docs",
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "auth_owner": "FastAPI framework/OpenAPI configuration; no app auth dependency",
+      "route_policy_category": "framework-public",
+      "matching_test_or_evidence": "No app-specific auth negative; framework routes are intentionally public.",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "Route",
+      "route_prefix": "/docs/oauth2-redirect",
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "auth_owner": "FastAPI framework/OpenAPI configuration; no app auth dependency",
+      "route_policy_category": "framework-public",
+      "matching_test_or_evidence": "No app-specific auth negative; framework routes are intentionally public.",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "Route",
+      "route_prefix": "/redoc",
+      "methods": [
+        "GET",
+        "HEAD"
+      ],
+      "auth_owner": "FastAPI framework/OpenAPI configuration; no app auth dependency",
+      "route_policy_category": "framework-public",
+      "matching_test_or_evidence": "No app-specific auth negative; framework routes are intentionally public.",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/browser-session",
+      "methods": [
+        "DELETE",
+        "GET",
+        "POST"
+      ],
+      "auth_owner": "install_browser_sessions: bearer required for session creation; session cookie only for same-origin browser routes",
+      "route_policy_category": "session-authentication",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_browser_session.py::test_signin_http_websocket_artifact_logout; ::test_signin_requires_exact_origin; ::test_cookie_csrf_wrong_bearer_and_missing_ws_origin_fail",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "Route",
+      "route_prefix": "/mcp",
+      "methods": [
+        "DELETE",
+        "GET",
+        "HEAD",
+        "POST"
+      ],
+      "auth_owner": "MCP APIKeyAuthBackend; bearer API key, browser cookie is not accepted",
+      "route_policy_category": "bearer-only-mcp",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_browser_session.py::test_cookie_cannot_authenticate_mcp_backend; action_server/tests/action_server_tests/test_mcp_tunnel_origin_scope.py::test_live_mcp_app_uses_temporary_host_scope_and_keeps_authentication",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/actions/greeter/greet/run",
+      "methods": [
+        "POST"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware and ActionRoutes endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "dynamic-action-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_dispatch_denied_before_owned_state_or_execution",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/managed-work-items/v1/schema",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware managed perimeter + managed_authenticate returning ManagedCaller; service SQL workspace/deployment grants",
+      "route_policy_category": "managed-sql-identity",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_managed_work_items_runtime.py::test_managed_identity_perimeter_never_authorizes_other_runtime_apis; action_server/tests/action_server_tests/test_managed_work_items_api.py (missing/wrong reader/worker matrix)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/managed-work-items/v1/capabilities",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware managed perimeter + managed_authenticate returning ManagedCaller; service SQL workspace/deployment grants",
+      "route_policy_category": "managed-sql-identity",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_managed_work_items_runtime.py::test_managed_identity_perimeter_never_authorizes_other_runtime_apis; action_server/tests/action_server_tests/test_managed_work_items_api.py (missing/wrong reader/worker matrix)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/managed-work-items/v1/operations",
+      "methods": [
+        "POST"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware managed perimeter + managed_authenticate returning ManagedCaller; service SQL workspace/deployment grants",
+      "route_policy_category": "managed-sql-identity",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_managed_work_items_runtime.py::test_managed_identity_perimeter_never_authorizes_other_runtime_apis; action_server/tests/action_server_tests/test_managed_work_items_api.py (missing/wrong reader/worker matrix)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/runs",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/runs/summary",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/runs/{run_id}",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/runs/{run_id}/fields",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/runs/{run_id}/cancel",
+      "methods": [
+        "POST"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/runs/run-id-from-request-id/{request_id}",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/runs/{run_id}/artifacts",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/runs/{run_id}/log.html",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/runs/{run_id}/artifacts/text-content",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/runs/{run_id}/artifacts/binary-content",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/actionPackages",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "_BoundedRobotFormRoute",
+      "route_prefix": "/api/robots/catalog",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "_BoundedRobotFormRoute",
+      "route_prefix": "/api/robots/import",
+      "methods": [
+        "POST"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "_BoundedRobotFormRoute",
+      "route_prefix": "/api/robots/run",
+      "methods": [
+        "POST"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/work-items",
+      "methods": [
+        "POST"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/work-items",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/work-items/stats",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/work-items/{item_id}",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/work-items/{item_id}",
+      "methods": [
+        "DELETE"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/work-items/{item_id}/files",
+      "methods": [
+        "POST"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/work-items/{item_id}/files",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/work-items/{item_id}/files/{filename}",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/work-items/{item_id}/files/{filename}",
+      "methods": [
+        "DELETE"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/analytics/summary",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/analytics/runs-by-day",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/analytics/runs-by-action",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/secrets",
+      "methods": [
+        "POST"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/schedules",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/schedules/stats",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/schedules",
+      "methods": [
+        "POST"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/schedules/{schedule_id}",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/schedules/{schedule_id}",
+      "methods": [
+        "PATCH"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/schedules/{schedule_id}",
+      "methods": [
+        "DELETE"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/schedules/{schedule_id}/trigger",
+      "methods": [
+        "POST"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/schedules/{schedule_id}/enable",
+      "methods": [
+        "POST"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/schedules/{schedule_id}/disable",
+      "methods": [
+        "POST"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/schedules/{schedule_id}/duplicate",
+      "methods": [
+        "POST"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/schedules/{schedule_id}/executions",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/schedules/validate-cron",
+      "methods": [
+        "POST"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/schedules/preview-runs",
+      "methods": [
+        "POST"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/schedules/timezones",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/schedule-groups",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/schedule-groups",
+      "methods": [
+        "POST"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/schedule-groups/{group_id}",
+      "methods": [
+        "PATCH"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/schedule-groups/{group_id}",
+      "methods": [
+        "DELETE"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/triggers",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/triggers",
+      "methods": [
+        "POST"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/triggers/{trigger_id}",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/triggers/{trigger_id}",
+      "methods": [
+        "PATCH"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/triggers/{trigger_id}",
+      "methods": [
+        "DELETE"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/triggers/{trigger_id}/invocations",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/triggers/{trigger_id}/secret",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_trigger_secret_boundary_327.py (missing/wrong bearer rejected before database access)",
+      "explicit_uncovered_gap": null,
+      "prior_gap": "No direct missing/wrong credential early-denial assertion was present before this lane."
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/triggers/{trigger_id}/regenerate-secret",
+      "methods": [
+        "POST"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_trigger_secret_boundary_327.py (missing/wrong bearer rejected before database read or secret generation)",
+      "explicit_uncovered_gap": null,
+      "prior_gap": "No direct missing/wrong credential early-denial assertion was present before this lane."
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/triggers/{trigger_id}/test",
+      "methods": [
+        "POST"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/oauth2/logout",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware path-prefix guard; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-oauth",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_browser_session.py::test_cookie_cannot_reach_mutating_oauth_get_handlers; common API-key middleware path-prefix guard in action_server/src/actions/server/_server.py",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/oauth2/status",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware path-prefix guard; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-oauth",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_browser_session.py::test_cookie_cannot_reach_mutating_oauth_get_handlers; common API-key middleware path-prefix guard in action_server/src/actions/server/_server.py",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/oauth2/create-reference-id",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware path-prefix guard; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-oauth",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_browser_session.py::test_cookie_cannot_reach_mutating_oauth_get_handlers; common API-key middleware path-prefix guard in action_server/src/actions/server/_server.py",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/oauth2/login",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "OAuth handler validation; intentionally bypasses API-key middleware for browser login/callback flow",
+      "route_policy_category": "public-oauth-exception",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_server.py (login and callback are not rejected as 403)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/actions/oauth2",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "OAuth handler validation; intentionally bypasses API-key middleware for browser login/callback flow",
+      "route_policy_category": "public-oauth-exception",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_server.py (login and callback are not rejected as 403)",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/triggers/webhook/{trigger_id}",
+      "methods": [
+        "POST"
+      ],
+      "auth_owner": "TriggerEngine.handle_webhook per-trigger secret/method/enabled/rate-limit policy; intentionally bypasses API-key middleware",
+      "route_policy_category": "public-webhook-exception",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_trigger_secret_boundary_327.py (missing/wrong nonempty HMAC secret returns 401 with rejected audit only; valid signature dispatches once; POST and PUT)",
+      "explicit_uncovered_gap": null,
+      "prior_gap": "Original test_server smoke used an empty webhook secret and did not exercise signature rejection."
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/triggers/webhook/{trigger_id}",
+      "methods": [
+        "PUT"
+      ],
+      "auth_owner": "TriggerEngine.handle_webhook per-trigger secret/method/enabled/rate-limit policy; intentionally bypasses API-key middleware",
+      "route_policy_category": "public-webhook-exception",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_trigger_secret_boundary_327.py (missing/wrong nonempty HMAC secret returns 401 with rejected audit only; valid signature dispatches once; POST and PUT)",
+      "explicit_uncovered_gap": null,
+      "prior_gap": "Original test_server smoke used an empty webhook secret and did not exercise signature rejection."
+    },
+    {
+      "route_kind": "WebSocketRoute",
+      "route_prefix": "/api/ws",
+      "methods": [
+        "WEBSOCKET"
+      ],
+      "auth_owner": "verify_api_key via BrowserSessions + verify_websocket_origin; cookie or bearer with exact trusted origin",
+      "route_policy_category": "websocket-authentication",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_native_asgi_websocket_auth_echo_and_close; action_server/tests/action_server_tests/test_browser_session.py::test_cookie_csrf_wrong_bearer_and_missing_ws_origin_fail",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "WebSocketRoute",
+      "route_prefix": "/api/ws/summary",
+      "methods": [
+        "WEBSOCKET"
+      ],
+      "auth_owner": "verify_api_key via BrowserSessions + verify_websocket_origin; cookie or bearer with exact trusted origin",
+      "route_policy_category": "websocket-authentication",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_native_asgi_websocket_auth_echo_and_close; action_server/tests/action_server_tests/test_browser_session.py::test_cookie_csrf_wrong_bearer_and_missing_ws_origin_fail",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/config",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "Public bootstrap config reports auth_enabled and runtime identity; no auth dependency",
+      "route_policy_category": "public-config",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_intentional_public_bootstrap_with_configured_key",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "Public static UI shell route; API data paths remain separately guarded",
+      "route_policy_category": "public-ui-shell",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_intentional_public_bootstrap_with_configured_key (only / tested directly); route inventory asserts shell paths",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/overview",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "Public static UI shell route; API data paths remain separately guarded",
+      "route_policy_category": "public-ui-shell",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_intentional_public_bootstrap_with_configured_key (only / tested directly); route inventory asserts shell paths",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/actions/{full_path}",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "Public static UI shell route; API data paths remain separately guarded",
+      "route_policy_category": "public-ui-shell",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_intentional_public_bootstrap_with_configured_key (only / tested directly); route inventory asserts shell paths",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/runs/{full_path}",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "Public static UI shell route; API data paths remain separately guarded",
+      "route_policy_category": "public-ui-shell",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_intentional_public_bootstrap_with_configured_key (only / tested directly); route inventory asserts shell paths",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/schedules",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "Public static UI shell route; API data paths remain separately guarded",
+      "route_policy_category": "public-ui-shell",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_intentional_public_bootstrap_with_configured_key (only / tested directly); route inventory asserts shell paths",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/robots",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "Public static UI shell route; API data paths remain separately guarded",
+      "route_policy_category": "public-ui-shell",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_intentional_public_bootstrap_with_configured_key (only / tested directly); route inventory asserts shell paths",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/work-items",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "Public static UI shell route; API data paths remain separately guarded",
+      "route_policy_category": "public-ui-shell",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_intentional_public_bootstrap_with_configured_key (only / tested directly); route inventory asserts shell paths",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/analytics",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "Public static UI shell route; API data paths remain separately guarded",
+      "route_policy_category": "public-ui-shell",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_intentional_public_bootstrap_with_configured_key (only / tested directly); route inventory asserts shell paths",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/logs/{full_path}",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "Public static UI shell route; API data paths remain separately guarded",
+      "route_policy_category": "public-ui-shell",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_intentional_public_bootstrap_with_configured_key (only / tested directly); route inventory asserts shell paths",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/artifacts/{run_id}",
+      "methods": [
+        "GET"
+      ],
+      "auth_owner": "Public static UI shell route; API data paths remain separately guarded",
+      "route_policy_category": "public-ui-shell",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_intentional_public_bootstrap_with_configured_key (only / tested directly); route inventory asserts shell paths",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "Mount",
+      "route_prefix": "/artifacts/{path}",
+      "methods": [],
+      "auth_owner": "_mount_artifact_static_files / FilesystemArtifactStorage; bearer or authorized same-origin browser session + run binding/path containment",
+      "route_policy_category": "authenticated-artifact-mount",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix and ::test_assembled_mount_refuses_private_storage_files; action_server/tests/action_server_tests/test_artifact_storage.py::test_configured_static_artifacts_require_auth_and_are_run_scoped",
+      "explicit_uncovered_gap": null
+    },
+    {
+      "route_kind": "APIRoute",
+      "route_prefix": "/api/shutdown/",
+      "methods": [
+        "POST"
+      ],
+      "auth_owner": "_ConfiguredAPIKeyMiddleware before body read + verify_api_key endpoint dependency; bearer or authorized same-origin browser session",
+      "route_policy_category": "protected-api",
+      "matching_test_or_evidence": "action_server/tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix (representative common-guard cases; not a direct request to every listed route)",
+      "explicit_uncovered_gap": null
+    }
+  ],
+  "qualification_note": "This is the 86-identity policy union asserted by test_assembled_auth_route_inventory with shutdown both disabled and enabled; 85 identities are present with shutdown disabled, while /api/shutdown/ POST is conditional. It maps authentication ownership and matching tests and is not a whole-app security PASS. Shared middleware wiring plus representative route tests do not provide a direct negative for every endpoint.",
+  "route_count_policy_union": 86,
+  "route_count_when_shutdown_disabled": 85,
+  "coverage_added_by_lane": {
+    "test_file": "action_server/tests/action_server_tests/test_trigger_secret_boundary_327.py",
+    "focused_result": "10 passed in 2.95s via RCC v18.19.3, no surviving owned child processes",
+    "tests": [
+      "non-empty webhook secret: POST/PUT missing and wrong signature reject, persist only REJECTED audit, do not dispatch or change trigger count/time",
+      "non-empty webhook secret: valid POST/PUT signature dispatches exactly once through patched local work-item boundary",
+      "trigger secret read/rotation: missing and wrong bearer rejected before DB access or secret generation"
+    ]
+  }
+}

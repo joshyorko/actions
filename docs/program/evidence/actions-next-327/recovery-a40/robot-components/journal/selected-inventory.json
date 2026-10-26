@@ -1,0 +1,212 @@
+[
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_roundtrip_reopen_and_duplicate_denial_no_io[sqlite]",
+    "time": "0.113"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_roundtrip_reopen_and_duplicate_denial_no_io[postgresql]",
+    "time": "0.421"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_mutations_rejected[sqlite-input]",
+    "time": "0.027"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_mutations_rejected[sqlite-snapshot]",
+    "time": "0.025"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_mutations_rejected[sqlite-selection]",
+    "time": "0.026"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_mutations_rejected[sqlite-launch]",
+    "time": "0.023"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_mutations_rejected[sqlite-extra]",
+    "time": "0.024"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_mutations_rejected[sqlite-version]",
+    "time": "0.023"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_mutations_rejected[sqlite-claim]",
+    "time": "0.023"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_mutations_rejected[sqlite-bool-epoch]",
+    "time": "0.022"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_mutations_rejected[postgresql-input]",
+    "time": "0.169"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_mutations_rejected[postgresql-snapshot]",
+    "time": "0.170"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_mutations_rejected[postgresql-selection]",
+    "time": "0.180"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_mutations_rejected[postgresql-launch]",
+    "time": "0.166"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_mutations_rejected[postgresql-extra]",
+    "time": "0.168"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_mutations_rejected[postgresql-version]",
+    "time": "0.191"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_mutations_rejected[postgresql-claim]",
+    "time": "0.168"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_mutations_rejected[postgresql-bool-epoch]",
+    "time": "0.186"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_live_authority_denies[sqlite-actor]",
+    "time": "0.023"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_live_authority_denies[sqlite-cancel]",
+    "time": "0.021"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_live_authority_denies[sqlite-epoch]",
+    "time": "0.019"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_live_authority_denies[sqlite-revoked]",
+    "time": "0.021"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_live_authority_denies[sqlite-callback]",
+    "time": "0.021"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_live_authority_denies[postgresql-actor]",
+    "time": "0.181"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_live_authority_denies[postgresql-cancel]",
+    "time": "0.200"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_live_authority_denies[postgresql-epoch]",
+    "time": "0.166"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_live_authority_denies[postgresql-revoked]",
+    "time": "0.190"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_live_authority_denies[postgresql-callback]",
+    "time": "0.185"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_lost_ack_preserves_intent_and_forbids_retry[sqlite]",
+    "time": "0.032"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_lost_ack_preserves_intent_and_forbids_retry[postgresql]",
+    "time": "0.184"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_competing_connections_only_one_intent[sqlite]",
+    "time": "0.049"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_competing_connections_only_one_intent[postgresql]",
+    "time": "0.218"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_work_item_claim_epoch_is_independent_and_exact[sqlite]",
+    "time": "0.036"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_work_item_claim_epoch_is_independent_and_exact[postgresql]",
+    "time": "0.196"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_duplicate_keys_and_untrusted_claim_rejected[sqlite]",
+    "time": "0.026"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_duplicate_keys_and_untrusted_claim_rejected[postgresql]",
+    "time": "0.175"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_expiry_and_retained_selection_mutation[sqlite]",
+    "time": "0.035"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_expiry_and_retained_selection_mutation[postgresql]",
+    "time": "0.198"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_retained_intent_encoding_cannot_coerce_boolean_epoch[sqlite]",
+    "time": "0.032"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_retained_intent_encoding_cannot_coerce_boolean_epoch[postgresql]",
+    "time": "0.185"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_outer_transaction_cannot_acknowledge_launch_before_rollback[sqlite]",
+    "time": "0.031"
+  },
+  {
+    "classname": "tests.contract_tests.test_robot_journal",
+    "name": "test_outer_transaction_cannot_acknowledge_launch_before_rollback[postgresql]",
+    "time": "0.198"
+  }
+]

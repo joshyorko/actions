@@ -1,0 +1,27 @@
+{
+  "command": [
+    "/workspace/actions-recovery-327/run-prepared",
+    "python",
+    "/workspace/actions-cloud/package-command.py",
+    "action_server",
+    "run",
+    "python",
+    "/workspace/actions-recovery-327/execute-collected-batch-guarded.py",
+    "tests/action_server_tests/test_foundry_authoring.py",
+    "-p",
+    "no:robocorp_log_pytest",
+    "-q",
+    "--junitxml=/workspace/actions-recovery-327/bundle-joined-gate-pure/tests.xml",
+    "--basetemp=/workspace/actions-recovery-327/bundle-joined-gate-pure/fixtures"
+  ],
+  "exit_code": 0,
+  "minimum_free_bytes": 1392820224,
+  "counts": {
+    "failure": 0,
+    "error": 0,
+    "skipped": 0,
+    "tests": 6
+  },
+  "source_unchanged": true,
+  "status": "PASS"
+}

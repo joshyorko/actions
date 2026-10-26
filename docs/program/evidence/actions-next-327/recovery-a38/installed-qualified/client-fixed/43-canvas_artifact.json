@@ -1,0 +1,25 @@
+{
+  "_meta": {
+    "actions.artifact": {
+      "bindingId": "normalize",
+      "handle": "art_H0hQsWA2TUKZIK4vZNG4iw",
+      "runId": "8b9423b2-31b4-41f3-88a7-77c65ae1cbe3",
+      "text": "\"a b\""
+    },
+    "io.modelcontextprotocol/serverInfo": {
+      "name": "Action Server",
+      "version": ""
+    }
+  },
+  "content": [
+    {
+      "type": "text",
+      "text": "Bound artifact inspected.",
+      "annotations": null,
+      "_meta": null
+    }
+  ],
+  "structuredContent": null,
+  "isError": false,
+  "resultType": "complete"
+}

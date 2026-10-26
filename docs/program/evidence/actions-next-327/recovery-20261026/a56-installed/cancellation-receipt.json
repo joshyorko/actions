@@ -1,0 +1,184 @@
+{
+  "supervisor_parent_pid": 29173,
+  "supervisor_sha256": "d02ec0cf0c8ca25cefb46487fa2ed473cfc0394e214044cecbe8f42ed50b740e",
+  "source": "88846b55e3b455eb44378bd5ba43bb146706661d",
+  "manifest_sha256": "dc97b2bbe2f56d08e71e8555689089100098feb180842ff6a535dc8ab6fc2ff8",
+  "harness_sha256": "edb64982bf85ae9af3e8c363c5a0814b8213157d1ae03f8ed2485880ac0ffbe5",
+  "live_cancellation": "TERMINAL_CONFIRMED",
+  "status": "PASS",
+  "runtime": "1.1.0a56",
+  "core": "1.1.0a8",
+  "artifact_digest": "sha256:ab46f17f4b1ec8d620a3111ad103eff36f78515df5b4db88d1739f5b1e0a6a24",
+  "processes": [
+    {
+      "pid": 29178,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.21400786100093683,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 29188,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.11378386899923498,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 29279,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.16560976099935942,
+      "lifespan_shutdown_complete": true
+    },
+    {
+      "pid": 29320,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.21407034000003478,
+      "lifespan_shutdown_complete": true
+    }
+  ],
+  "calls": [
+    {
+      "tool": "canvas_create",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_apply",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_release",
+      "is_error": false
+    },
+    {
+      "tool": "canvas_get",
+      "is_error": false
+    },
+    {
+      "public_http_operation": "items.enqueue",
+      "status": 200
+    },
+    {
+      "public_http_operation": "items.enqueue",
+      "status": 200
+    },
+    {
+      "public_http_operation": "items.claim",
+      "status": 200
+    },
+    {
+      "public_http_operation": "items.get",
+      "status": 200
+    },
+    {
+      "public_http_operation": "runs.get",
+      "status": 200
+    },
+    {
+      "public_http_operation": "items.get",
+      "status": 200
+    },
+    {
+      "public_http_operation": "runs.get",
+      "status": 200
+    }
+  ],
+  "synthetic_owned_auth": true,
+  "cases": [
+    {
+      "task_id": "6a691dd6-a6e1-4b52-9f9f-83c9fbed7265",
+      "task_status": "cancelled",
+      "queue_state": "FAILED"
+    }
+  ],
+  "workspace": "0f18d842-ce0b-44ff-bd11-e1123cddf2c8",
+  "profile_setup": "explicit public offline owner authorization; no SQL writes or source/result/review/admission seeding",
+  "wrong_and_missing_credentials_denied": true,
+  "observed_child": [
+    {
+      "role": "rcc",
+      "pid": 29304,
+      "birth": 1793021753.04,
+      "pgid": 29304,
+      "executable_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+      "cwd_sha256": "4ae3a7e3362febed0f4420c9ce88b7ae0660469c4b2042d337c7dd2244affecb",
+      "run_id": "6a691dd6-a6e1-4b52-9f9f-83c9fbed7265",
+      "attempt_id": "8e0dc97c-3f2d-4d45-b57f-9c856dcc7881",
+      "launch_id": "10627f7f-8517-4b41-bd32-6854c1647a1b"
+    },
+    {
+      "role": "python",
+      "pid": 29319,
+      "birth": 1793021754.28,
+      "pgid": 29304,
+      "executable_sha256": "bb9a83a3c8f7d2bea8f80afc56924d921ef4b8ce28799c511e118973ef61a275",
+      "cwd_sha256": "668b8ca986697d767ec8c6fa2e60396438986139489e1e34f619936673b42a55",
+      "run_id": "6a691dd6-a6e1-4b52-9f9f-83c9fbed7265",
+      "attempt_id": "8e0dc97c-3f2d-4d45-b57f-9c856dcc7881",
+      "launch_id": "10627f7f-8517-4b41-bd32-6854c1647a1b"
+    }
+  ],
+  "cancel_ack": {
+    "resultType": "complete",
+    "_meta": {
+      "io.modelcontextprotocol/serverInfo": {
+        "name": "Action Server",
+        "version": ""
+      }
+    }
+  },
+  "latest_task": {
+    "resultType": "complete",
+    "taskId": "6a691dd6-a6e1-4b52-9f9f-83c9fbed7265",
+    "status": "cancelled",
+    "createdAt": "2026-10-26T13:35:49.641Z",
+    "lastUpdatedAt": "2026-10-26T13:35:55.159Z",
+    "ttlMs": 600000,
+    "pollIntervalMs": 100,
+    "statusMessage": "Cancelled; execution stopped and descendants reaped.",
+    "_meta": {
+      "io.modelcontextprotocol/serverInfo": {
+        "name": "Action Server",
+        "version": ""
+      }
+    }
+  },
+  "child_birth_to_absence_seconds": 0.984748125076294,
+  "child_absent_before_runtime_stop": true,
+  "lifecycle_counts": {
+    "before": {
+      "run": 0,
+      "run_attempt": 0,
+      "run_execution_intent": 0,
+      "run_task_receipt": 0
+    },
+    "after": {
+      "run": 1,
+      "run_attempt": 1,
+      "run_execution_intent": 1,
+      "run_task_receipt": 1
+    },
+    "restart": {
+      "run": 1,
+      "run_attempt": 1,
+      "run_execution_intent": 1,
+      "run_task_receipt": 1
+    }
+  },
+  "restart_terminal_task_claim_outputs_unchanged": true,
+  "budget": {
+    "fixture_bytes": 898764,
+    "log_bytes_upper_bound": 15341
+  },
+  "scope": "Installed claimed consumer Robot Task live cancellation, child absence before stop, public read/replay/restart; synthetic single owner only"
+}

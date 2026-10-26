@@ -1,0 +1,35 @@
+{
+  "status": "PASS",
+  "core_version": "1.1.0a6",
+  "installed_logger_origin": "/workspace/recovery327/a43/consumer/lib/python3.12/site-packages/actions/_logging/__init__.py",
+  "isolated": true,
+  "upstream_imports_blocked": true,
+  "retired_distributions_absent": true,
+  "decoded_events": 35,
+  "event_types": [
+    "AS",
+    "EA",
+    "EE",
+    "ER",
+    "ET",
+    "I",
+    "ID",
+    "L",
+    "R",
+    "SE",
+    "SR",
+    "ST",
+    "T",
+    "V"
+  ],
+  "raw_and_repr_secret_oauth_encrypted_context_redacted": true,
+  "automatic_suppression": true,
+  "visible_result": true,
+  "owned_rewrite_cache": true,
+  "second_process_cache_reused": true,
+  "source_commit": "ce98de6963bb6d20325db5a3687b14a8e238d7d9",
+  "wheels": {
+    "actions_core-1.1.0a6-py3-none-any.whl": "718ea63637f096d26c4de5f82ca736eec1358b197d0a63883c063ad205e0860e"
+  },
+  "post_probe_exact_core_wheel_members": 87
+}

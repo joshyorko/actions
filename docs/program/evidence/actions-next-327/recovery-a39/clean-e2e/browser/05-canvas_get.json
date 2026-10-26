@@ -1,0 +1,246 @@
+{
+  "_meta": {
+    "actions.canvas": {
+      "active": true,
+      "applicationId": "334c9745-1382-4d5c-92fa-79c63513193d",
+      "bindings": [
+        {
+          "bindingId": "count",
+          "capabilityId": "action.count_words",
+          "packageRevision": {
+            "package_id": "b3ace77b-297c-5c31-8990-b4a8dadb63d2",
+            "revision_id": "sha256:874bcdd10ec6cadc3ab2ae7c739c65f1020d443c66236fc290b9a474b0397e62",
+            "workspace_id": "81d22bd1-8ae8-421e-9409-cff028bcb1c1"
+          }
+        }
+      ],
+      "revisionId": "sha256:f50f889c61cad52afa9622e316bd2f090b1b1f3cb91df9cfacff021b5f512e3f",
+      "spec": {
+        "bindingIds": [
+          "count"
+        ],
+        "root": {
+          "children": [
+            {
+              "bindingId": "count",
+              "fields": [
+                {
+                  "label": "Text to count",
+                  "name": "text",
+                  "required": true,
+                  "type": "text"
+                }
+              ],
+              "id": "counter-form",
+              "submitLabel": "Count words",
+              "type": "form"
+            },
+            {
+              "bindingId": "count",
+              "id": "counter-status",
+              "type": "status"
+            },
+            {
+              "bindingId": "count",
+              "id": "counter-artifact",
+              "label": "Inspect result",
+              "type": "artifact"
+            }
+          ],
+          "id": "main",
+          "type": "stack"
+        },
+        "schemaVersion": "actions.canvas-spec/v1",
+        "title": "Independent generated word counter",
+        "visibility": [
+          "model",
+          "app"
+        ]
+      }
+    },
+    "actions.genericExecution": {
+      "bindingIds": [
+        "count"
+      ],
+      "executions": [
+        {
+          "attemptId": "5f1f22c8-6870-447f-8e0a-8f94b7bd4283",
+          "bindingId": "count",
+          "cancelRequested": false,
+          "outputs": [
+            {
+              "handle": "art_hCnf-fK0Qz-TYarXp9ajLA"
+            },
+            {
+              "handle": "art_Hk0JiZa4T8OFidaGRl4UHA"
+            },
+            {
+              "handle": "art_Wln9Ih59Qj-y3Lv5F4ujzg"
+            },
+            {
+              "handle": "art_PejkO8KVRHu_cqh_EDkviA"
+            }
+          ],
+          "runId": "7a1266fd-520b-4062-9ab1-7c18f8d68e42",
+          "state": "completed"
+        }
+      ],
+      "inputBindings": [],
+      "outputBindings": [],
+      "version": "actions.generic-app/v1"
+    },
+    "actions.appSession": {
+      "token": "[redacted-private-field]",
+      "scope": {
+        "deployment": {
+          "workspace_id": "81d22bd1-8ae8-421e-9409-cff028bcb1c1",
+          "deployment_id": "334c9745-1382-4d5c-92fa-79c63513193d",
+          "revision_id": "sha256:f50f889c61cad52afa9622e316bd2f090b1b1f3cb91df9cfacff021b5f512e3f"
+        },
+        "application": {
+          "workspace_id": "81d22bd1-8ae8-421e-9409-cff028bcb1c1",
+          "app_id": "334c9745-1382-4d5c-92fa-79c63513193d",
+          "revision_id": "sha256:873186ff733b7dfd4053ef6ed99934470fd34dbd9c1c491bb0e3f6e545f25ec7"
+        }
+      }
+    },
+    "io.modelcontextprotocol/serverInfo": {
+      "name": "Action Server",
+      "version": ""
+    }
+  },
+  "content": [
+    {
+      "type": "text",
+      "text": "Canvas revision loaded.",
+      "annotations": null,
+      "_meta": null
+    }
+  ],
+  "structuredContent": {
+    "active": true,
+    "applicationId": "334c9745-1382-4d5c-92fa-79c63513193d",
+    "buildStatus": "passed",
+    "compilationStatus": "succeeded",
+    "importStatus": "passed",
+    "invocationAvailability": "authorized",
+    "invocationDescriptors": [
+      {
+        "bindingId": "count",
+        "inputMode": "none",
+        "inputQueue": null,
+        "inputSchema": {
+          "properties": {
+            "text": {
+              "description": "",
+              "title": "Text",
+              "type": "string"
+            }
+          },
+          "required": [
+            "text"
+          ],
+          "type": "object"
+        },
+        "mode": "generic",
+        "snapshot": {
+          "action_id": "16ada678-6a49-5eb1-9c15-13876587030d",
+          "canvas_application": {
+            "app_id": "334c9745-1382-4d5c-92fa-79c63513193d",
+            "revision_id": "sha256:873186ff733b7dfd4053ef6ed99934470fd34dbd9c1c491bb0e3f6e545f25ec7",
+            "workspace_id": "81d22bd1-8ae8-421e-9409-cff028bcb1c1"
+          },
+          "capability": {
+            "capability_id": "action.count_words",
+            "package_revision": {
+              "package_id": "b3ace77b-297c-5c31-8990-b4a8dadb63d2",
+              "revision_id": "sha256:874bcdd10ec6cadc3ab2ae7c739c65f1020d443c66236fc290b9a474b0397e62",
+              "workspace_id": "81d22bd1-8ae8-421e-9409-cff028bcb1c1"
+            }
+          },
+          "capability_authority": "package-revision",
+          "capability_schema_digest": "sha256:c6143eaadb624abc5ca568422a8912550787c1278722df248eb71683d61b04af",
+          "data_binding": null,
+          "deployment": {
+            "deployment_id": "334c9745-1382-4d5c-92fa-79c63513193d",
+            "revision_id": "sha256:f50f889c61cad52afa9622e316bd2f090b1b1f3cb91df9cfacff021b5f512e3f",
+            "workspace_id": "81d22bd1-8ae8-421e-9409-cff028bcb1c1"
+          },
+          "output_provider": {
+            "provider_profile_id": "914bf60b-62f7-4d16-99cb-da54de628950",
+            "revision_id": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+            "workspace_id": "81d22bd1-8ae8-421e-9409-cff028bcb1c1"
+          },
+          "policy": {
+            "policy_id": "c0341f83-6edc-4495-ba2d-042acf996f43",
+            "revision_id": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+            "workspace_id": "81d22bd1-8ae8-421e-9409-cff028bcb1c1"
+          },
+          "runtime_kind": "rcc",
+          "runtime_plan": {
+            "package_revision": {
+              "package_id": "b3ace77b-297c-5c31-8990-b4a8dadb63d2",
+              "revision_id": "sha256:874bcdd10ec6cadc3ab2ae7c739c65f1020d443c66236fc290b9a474b0397e62",
+              "workspace_id": "81d22bd1-8ae8-421e-9409-cff028bcb1c1"
+            },
+            "plan_digest": "sha256:436a8f2af47e1c7584ad2c3923b7e032a555f753d1f5ef38396abbd0def80d77"
+          },
+          "worker": {
+            "revision_id": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+            "worker_profile_id": "b9438933-c136-42be-a32c-5ee8969e39fa",
+            "workspace_id": "81d22bd1-8ae8-421e-9409-cff028bcb1c1"
+          }
+        },
+        "standaloneAllowed": true
+      }
+    ],
+    "invocationReadiness": "not-checked",
+    "revisionId": "sha256:f50f889c61cad52afa9622e316bd2f090b1b1f3cb91df9cfacff021b5f512e3f",
+    "spec": {
+      "bindingIds": [
+        "count"
+      ],
+      "root": {
+        "children": [
+          {
+            "bindingId": "count",
+            "fields": [
+              {
+                "label": "Text to count",
+                "name": "text",
+                "required": true,
+                "type": "text"
+              }
+            ],
+            "id": "counter-form",
+            "submitLabel": "Count words",
+            "type": "form"
+          },
+          {
+            "bindingId": "count",
+            "id": "counter-status",
+            "type": "status"
+          },
+          {
+            "bindingId": "count",
+            "id": "counter-artifact",
+            "label": "Inspect result",
+            "type": "artifact"
+          }
+        ],
+        "id": "main",
+        "type": "stack"
+      },
+      "schemaVersion": "actions.canvas-spec/v1",
+      "title": "Independent generated word counter",
+      "visibility": [
+        "model",
+        "app"
+      ]
+    },
+    "testStatus": "passed",
+    "validationStatus": "passed"
+  },
+  "isError": false,
+  "resultType": "complete"
+}

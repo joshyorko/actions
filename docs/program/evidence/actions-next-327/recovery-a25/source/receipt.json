@@ -1,0 +1,290 @@
+{
+  "attempt": "615f9d59-ebcb-489d-a9a1-45ddf32ef601",
+  "status": "PASS",
+  "head": "5d950150b7b5886d1e54246ac216ff41aa4b9f1e",
+  "image_reference": "postgres@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81",
+  "tests": {
+    "managed": 0,
+    "foundry_storage": 0,
+    "components": 0,
+    "invoice": 0,
+    "package_compiler": 0
+  },
+  "cleanup": "PASS",
+  "inputs": {
+    "action_server/examples/invoice_reconciliation/LICENSE": "5dd447f3a4dafdcf24b0b60cc4f130e778ed1edb4b1fe7994fe8e87ed6eb9497",
+    "action_server/examples/invoice_reconciliation/README.md": "282ec861befb33126ad32da86dec63a8d9aa511f5b724144f145b6b67dcbce41",
+    "action_server/examples/invoice_reconciliation/data/invoices.csv": "345539c3a3b79babf6d5f3744b889ee88e2fc229bb07086e8f0d09956f2b1d0e",
+    "action_server/examples/invoice_reconciliation/data/ledger.csv": "68a4d66f1a3d1154eddf96785f6015b803533f79e8d50d55efc2d9ded4ed3fe6",
+    "action_server/examples/invoice_reconciliation/data/purchase_orders.csv": "178eee5bbae6ca05f8730b0c5395836032a1add907fe5855f2df1b664a5e4870",
+    "action_server/examples/invoice_reconciliation/demo.py": "240248ba8493f02d9f771b2898d07a769b13fd317498e3c4dc0353cb9dc1b48e",
+    "action_server/examples/invoice_reconciliation/export.py": "1cda4cd73096326c26dcb5ce2435b398c930d96193ecac54c47d14cb2cd8bab3",
+    "action_server/examples/invoice_reconciliation/host.html": "c22e0ef79d59a6ba21b9be8b952da37bbf17732eb54eecc1f058d627336bd7c7",
+    "action_server/examples/invoice_reconciliation/prepare.py": "bf506db3901f7ec8b240c66b0b39ff0d36ca3954b0cdb19aad499c48d3080de7",
+    "action_server/examples/invoice_reconciliation/runtime.py": "e03f4ff11b8fb6ec0736c4f6de12067b112f26e0d640e6d2ccf2ccc16caa7652",
+    "action_server/examples/invoice_reconciliation/source.py": "5ab59277c268f6c13b2c70685ae74885d39c3d865a60b1f337aff077f5b4b5cd",
+    "action_server/examples/invoice_reconciliation/template.json": "a4ca737e8e56a33904d2d4e93d2253c2b4c03e8c11153258cc9d96b43093de6c",
+    "action_server/examples/invoice_reconciliation/verify.py": "274477b8f1891ab63331d962ea95f4c0d26d913b3c2951fdf017aa13fb0b9eab",
+    "action_server/frontend/scripts/capture-invoice-reconciliation.mjs": "bce6e0a1cb28667ef9ce6496f532248a9e5529cd86f9ef19f87d9d1287c53412",
+    "action_server/poetry.lock": "8d0161413c4b4e83236aaf82f63ae604de9caaff14a485dc1a6033612b983f55",
+    "action_server/pyproject.toml": "7ebaec6f2c5a087fb7935dbdb13a1e44e1020f9ac12893b4daae3250b632f242",
+    "action_server/scripts/verify_invoice_queries.py": "0c5a910f3085b4346b1da7983966f553ef5b0cf57a992e2fc526d3cc8fdd036a",
+    "action_server/src/actions/server/_api_action_routes.py": "711da37991728832ed0e4c12ed586c02b99f5e727286b3b2852c122897557d88",
+    "action_server/src/actions/server/_cli_impl.py": "e3d7bab74ac45aa8fd049756c29f56d99b22a847cd34c3f7fd58d6c697644de0",
+    "action_server/src/actions/server/_models.py": "c946cb76953bebf3e8c363e3d33150d52350b4a4104a6b26ed4019675e35840f",
+    "action_server/src/actions/server/_rcc_runtime_adapter.py": "7ae97d5e8f53cb1b809e02649395929cd1d9cd3a3fd386e9075e34e93ec17262",
+    "action_server/src/actions/server/_robot_inputs.py": "7cfbb5f1194b15928d9221d59840820dabde76db61d4e45d539ec80791ff875d",
+    "action_server/src/actions/server/_server.py": "1686588ae37c565ba22f712a5486243d0213e4498223cd23c1732f96afacd06f",
+    "action_server/src/actions/server/canvas_lifecycle.py": "1e8a2ca082f962b76b0e311b1d5ee84e3b1b6a28ef057d6585d7b5b3dde5f2e6",
+    "action_server/src/actions/server/data_queries/__init__.py": "3a1a10897706f05daf2907f661bd42149c69e8ccf0a6f28e82a9d0195673b058",
+    "action_server/src/actions/server/data_queries/_invoice_task.py": "50a057fd8821d4f6cfcbebada51832ea4212531ff8e6797668515529a6d01a07",
+    "action_server/src/actions/server/data_queries/canvas.py": "a92ad46abee119e6de3d49ecffd20b7d9178e236fee4a0a5cb82b3f779c50461",
+    "action_server/src/actions/server/data_queries/canvas_mcp.py": "1ffec43a7bb74b2387c3696d1c4d0f4f291d237e79b1d4729bb468c85dc9656d",
+    "action_server/src/actions/server/data_queries/generated.py": "aa4b25f5e4ab4ea3911f9defeaf20a70bf3628299b695f344c9bddd01badfeed",
+    "action_server/src/actions/server/data_queries/invoice_effects.py": "8ed3e30a494d37ef441e1d8e67a20fb089cb859a8c03d21e360ced1b0fa0d2a4",
+    "action_server/src/actions/server/data_queries/invoice_worker.py": "33719f2d894a03928029f0742acd9500e6a234870116f7a1a2c8ff8af473d520",
+    "action_server/src/actions/server/data_queries/invoices.py": "b9c52b7c918ce7ce7e41b422f0dce646a19848f725bdf1ed4a9a09e5888f1af8",
+    "action_server/src/actions/server/data_queries/knowledge.py": "f528fa8ffd22df290dab82e85ce7405bebe73fc407c226bf5784f9312b071411",
+    "action_server/src/actions/server/data_queries/reconciliation.py": "fc80daadd0e5c58fd36495b37ece5010a543c9d5ff5c96edf052f93a871ff325",
+    "action_server/src/actions/server/data_queries/review.py": "c2899b23b0ff8327d85f7fe948a36f7f53e4bfc17d217f97e27b8ce4d62d285f",
+    "action_server/src/actions/server/data_queries/review_models.py": "f06bbacaaf474e20edfdf0c4682a6fec45ca36909c0c70b13462340faf993a1a",
+    "action_server/src/actions/server/data_queries/service.py": "cc79a4b73dc497c2cadd7d2b70794ff600dab4716e6733132635f8cea714b9dc",
+    "action_server/src/actions/server/deployments/__init__.py": "22220f02517a0d231044d18d5184f4b3df06aa07267b683e26ff3fdeecabe4b5",
+    "action_server/src/actions/server/deployments/canonical.py": "69365f3fb6c480d2be53b02bf6de7392537bfb798ccb527c3e188ba3ce9c4080",
+    "action_server/src/actions/server/deployments/foundry_repository.py": "6e55472af6cc185b12e9236cbe8c5bdd0e661a170a5c35d239d48d555002071d",
+    "action_server/src/actions/server/deployments/foundry_service.py": "a0f21305fa1c9e96ba58f8ae86469ee7668142ac49f29a85e13962585b94f3e9",
+    "action_server/src/actions/server/deployments/foundry_values.py": "d0b8ac87925ca33af9807218d726343aeebe641927938780f7e4b5ee721bb4ef",
+    "action_server/src/actions/server/deployments/ids.py": "9335e522494e8fc6348950b8687cd627ab9e1baccf932f3e2f2ff3ac7797c287",
+    "action_server/src/actions/server/deployments/package_revision_compiler.py": "5f3d9cec86c0c34fbfcd2518820535acb7ae250813fa2f24a4b4af26d4c349c4",
+    "action_server/src/actions/server/deployments/source_manifest.py": "4fb8d376d1b4aa06d301dedaeee67a2916561c7d10b8f1dadd657870b37b2b43",
+    "action_server/src/actions/server/deployments/source_read.py": "4ae8cbe57aa5c924585f4257a1be1700aa49baa63d6150efba20935045f7a8a5",
+    "action_server/src/actions/server/deployments/source_staging.py": "fb153888140814e2dacaf4ba28b982af20b8d279a4ee2500a4e59e8995787cb2",
+    "action_server/src/actions/server/foundry/__init__.py": "94b0b0d98d582b61dee97d6889a9abb200313dcf5ca467e48110a6e6366666fd",
+    "action_server/src/actions/server/foundry/activated_execution.py": "6640e519ca999ba4ee8b59f05cfd1a90f3318cf7e8111e8fd0342908c8d0f3eb",
+    "action_server/src/actions/server/foundry/app_sessions.py": "744099acb2d49774da457bb2cac70e81b83302c073e1cd66651df81d808f6c68",
+    "action_server/src/actions/server/foundry/authoring.py": "0e28995fe4b2b80cecdc0b3ca4c0e986955fba86f86a4bdd4df0904423d8f198",
+    "action_server/src/actions/server/foundry/authoring_values.py": "f572dac6eb48d0020fd434499a5fd1c95a6fedc629517b0c0518c41ebc68318e",
+    "action_server/src/actions/server/foundry/boot.py": "9a6eeb23a084e5286d594423611a055ae7f0077172e479ca885675b6df021c1c",
+    "action_server/src/actions/server/foundry/bootstrap.py": "a07463c24e3fdf8e68b94906907bd8bf0a126d6d27715a134cff52ffd7055b68",
+    "action_server/src/actions/server/foundry/discovery.py": "2a3001507aa4dd74c4f3fb88172d43da7c2fe83264b5934a7754f2b9958379ad",
+    "action_server/src/actions/server/foundry/execution_port.py": "f2bf7fdbbff70f89b74237cb1a720d6dfb12ed2bf2e1edb4ee70c9cdea8925e0",
+    "action_server/src/actions/server/foundry/execution_profiles.py": "81be824ddae04c043ad9f664a2dc86b0a0ba7e54bfc73a5bf18f9efdbe83a7fc",
+    "action_server/src/actions/server/foundry/mcp.py": "89ed148763618770f7a706d0f777e128349cebb1f63c3601ffc7320606782efe",
+    "action_server/src/actions/server/foundry/models.py": "896a930a5f9ac2df80a43625976a8e0b427dc1711159c92e4e1b11cbd882eea8",
+    "action_server/src/actions/server/foundry/package_registry.py": "56d7737f19c434deb961beeeb17624bc411a17790e9fbc8481ece2a848179c85",
+    "action_server/src/actions/server/foundry/rcc_execution.py": "43f78fc9a2cfcbd1a77fb6b6a62113d16e3d3cb9f9e12bef5d831187cc594fc6",
+    "action_server/src/actions/server/foundry/reviewed_view.py": "c7cf655ecab44da54fdaa132b95ea64f167819479e073c3edef745449dd59a43",
+    "action_server/src/actions/server/foundry/runtime_profile.py": "aa816bf890b27d9edddbaa26066a23400b3a771eb6aed2f16bbb1147fa9ac3c4",
+    "action_server/src/actions/server/foundry/sql_authoring.py": "b26bb908b1e49705af005e9237aff711d1cf79ee23ce42be6825f13455e7a1ac",
+    "action_server/src/actions/server/foundry/sql_authorization.py": "2fba16a95e57c0d879a4f44e610ebcaa156367a2755b2f79ea498e7ba1801a35",
+    "action_server/src/actions/server/foundry/work_item_execution.py": "f943eb91b68ec11b112b35b6d2b8070c72d14a513da1899f6169c399ee72547c",
+    "action_server/src/actions/server/managed_work_items/__init__.py": "4f8817f873b09c7361284e6a7c6baf4cb1fa66483c6e892e4ff9f98888aa0edb",
+    "action_server/src/actions/server/managed_work_items/admission.py": "a2e4e4b1f6e45b5ffa6a6fa8ac0863707317390831f9beae2f5e23e73077cc20",
+    "action_server/src/actions/server/managed_work_items/api.py": "3ac0764e2055162a879629b95f12f8e9b6806cdf88730bdf78d0679739458706",
+    "action_server/src/actions/server/managed_work_items/authorization.py": "cf27f540f477f7d7e2d2c684de7b0e9e67342aabaae6f858ff9e2c24fd8dba1b",
+    "action_server/src/actions/server/managed_work_items/contracts.py": "b33e8c9d7d511e09572f25dd34c53d83b783277a4b0a8ca8b28f3e7464a0f253",
+    "action_server/src/actions/server/managed_work_items/native_runs.py": "291228b63a4824a75219f35ed0bb39666baee37f0991ea0d395a700bb3453308",
+    "action_server/src/actions/server/managed_work_items/sql_service.py": "4f1545011818ba102c3ba25b072658435542fd09bf4a3a7988b41c6cf6af5f18",
+    "action_server/src/actions/server/mcp/setup_mcp_server_v2.py": "a4f74b6ce33df4a49a2f004d930f34c2f340f17e349f5ea6f5cdc6748c6c4db8",
+    "action_server/src/actions/server/migrations/__init__.py": "aa944e763bfbd01c80ad83c4b5dc095d38b852b47d3ceb6371dafcc7fb866021",
+    "action_server/src/actions/server/migrations/migration_add_foundry_records.py": "710c7b7cbe6e8cdf498232e54ad3c2c05558d5465301eaabb0b472f846c6ff1e",
+    "action_server/src/actions/server/migrations/migration_add_invoice_reviews.py": "40ec5952c106f21980d1572408c2fe00b8af81c30ca3c668295a95fd369d074e",
+    "action_server/src/actions/server/migrations/migration_allow_package_less_canvas.py": "f665894d40e91414f3717191adb079af6962ffa00ac185ea2871bed48c2decc4",
+    "action_server/src/actions/server/run_outputs/__init__.py": "4c29ad35ab314ea4472025d453703b124a08262cfa24a51baf3a1a2ffb58ae38",
+    "action_server/src/actions/server/run_outputs/filesystem.py": "db8daf79dc0d2a06ecec9a2c3ab67319d6df420c2a44578948d46f2b558c5606",
+    "action_server/src/actions/server/run_outputs/models.py": "c69318f6893484156fba1002f8372711fc83e32e56d0e29c54e985cc26196065",
+    "action_server/src/actions/server/run_outputs/service.py": "97a9d494371322449b4877c663931aa4749584bf0ffa1e2ae894bac4e4384466",
+    "action_server/src/actions/server/run_outputs/transport.py": "b5063cc57888b868615a2a89cf2e114b5ae0455239e8fe22843d36609ed9e376",
+    "action_server/src/actions/server/run_outputs/types.py": "bbf262e97c201ad71b2586128ce8ec55618f57a955d1c0b6071beaf0deefb7e7",
+    "action_server/tests/action_server_tests/foundry_fixtures.py": "33277436ad82f52f810072288d5bc036791689ffcc961cd3c02b57ac93ec6c5a",
+    "action_server/tests/action_server_tests/invoice_effect_fixture.py": "c879f4100cf2b7c26906cb3cae56c28c13b99f55def8be29acec9dfbbc870dbb",
+    "action_server/tests/action_server_tests/mcp/test_canvas_app_sessions.py": "6c674f02ecf7cb67ccf4c9489c052bc996e368ecc8a1f4bf1ed3c70867dbd754",
+    "action_server/tests/action_server_tests/mcp/test_scoped_foundry_caller.py": "1df42d68d79dbcbcd3379f3756127f8483dcb42ab4f37bce303edc664eb57d1a",
+    "action_server/tests/action_server_tests/test_activated_reviewed_execution.py": "d7b455c5966577033288327b9888901465ac6a67c368b3f96ab67dee4a443eed",
+    "action_server/tests/action_server_tests/test_auth_route_inventory.py": "4ec4861a7d0a61f3f44050796fc27236e4fd55dd1649a13ac1ab3ad11db6cd2b",
+    "action_server/tests/action_server_tests/test_browser_gate_selection.py": "8940a5453b18e420c97cdf34da6eaf56ff8737767654df142ceb844ff6bcf1c4",
+    "action_server/tests/action_server_tests/test_browser_origin_acceptance.py": "48481085ee987f20714f85ca6c59653fcc98e381de5aea622d538e49ad207738",
+    "action_server/tests/action_server_tests/test_candidate_work_items.py": "2f4c0ab175e89e0ff57b241b6cf3d3c6a411185ed455e7bcd6da632ff13c2816",
+    "action_server/tests/action_server_tests/test_canvas_lifecycle.py": "fc00995a81aa1ad9ac4e61077dce6aad21d03b9df1dabc4ec88e94f6645c288b",
+    "action_server/tests/action_server_tests/test_foundry_authoring.py": "1b6ff12d70f9220f61431fc87125f4365e1d5a52989d96de80bf35e1de0f7bff",
+    "action_server/tests/action_server_tests/test_foundry_authoring_model_contract.py": "82b2b1f2c34fd95d99ba64fd482d13d5e6f8190525f80719baabb7bc06759a7b",
+    "action_server/tests/action_server_tests/test_foundry_boot.py": "2a61b4c9c9d7d0841fe22669f89801559aed96adf53cbeb559b4680fa80b9a73",
+    "action_server/tests/action_server_tests/test_foundry_deployments.py": "1e23ad71ed22313db23a1a07dc9c2d0adba12577ef7385e7031c67754c5a2a44",
+    "action_server/tests/action_server_tests/test_foundry_discovery.py": "8ff71aa5b8f30be6ece7038ac1db1185dc82550f957b7d805fcce75ca5422d68",
+    "action_server/tests/action_server_tests/test_foundry_package_less_storage.py": "c6e84a9eeb5bda694dabfab43bd425e62c7dfb99d1a1a4abb5dd9128ef07d7ac",
+    "action_server/tests/action_server_tests/test_foundry_package_registry.py": "39b333efc50a3282571a9ad1bf1481920e694536981470dd38bf883e507aaf0e",
+    "action_server/tests/action_server_tests/test_foundry_server_wiring.py": "12aa6ae2773cb8535595c8e8ec12b118669fff3fd9098734ef7b80ef963137db",
+    "action_server/tests/action_server_tests/test_foundry_sql_authoring.py": "293d78d698a5c2fdd545b4f2eda43a3c69df0484560870b15eea671b5c489eb5",
+    "action_server/tests/action_server_tests/test_foundry_storage.py": "94c950e36316144f3c38d302e97ba755c50e5fd224eaaf7522980cda6c637969",
+    "action_server/tests/action_server_tests/test_generated_invoice.py": "63cac25d9842ec8637472e9c82f39f6fdd34aa276a278ee10ee0688d626402cd",
+    "action_server/tests/action_server_tests/test_generated_invoice_browser.py": "ed10385adf9de7d69bbad2e6e57a1d8ff8cb955284796db878d2e353387a9e77",
+    "action_server/tests/action_server_tests/test_generated_work_item_execution.py": "15f2af3dd4d82fdee245b48180c4b7aca29b5e66840819a58530a01dbfa6bb5c",
+    "action_server/tests/action_server_tests/test_invoice_canvas.py": "1a07665e11f4e6bc5dc81200fe1e8ad27fa86e4900528c873f3d75c8606ebd9f",
+    "action_server/tests/action_server_tests/test_invoice_canvas_browser.py": "3c5cd93c24b77b1056244b1b40b2afe9cf0e7262c61011607a4d9142c8076eda",
+    "action_server/tests/action_server_tests/test_invoice_canvas_mcp.py": "01c2968bbcc9338de5ff531a29f61c33d3043588af21152f4f52c56a760dad99",
+    "action_server/tests/action_server_tests/test_invoice_effects.py": "ee170ec1e3b676c64e3b5b2d24c389ac1aa0a40955c42d2b22891ca938caa36e",
+    "action_server/tests/action_server_tests/test_invoice_providers.py": "613f34c84bba089931dc53b334a472e430987249d8a0e29f8a53effa28c5d30e",
+    "action_server/tests/action_server_tests/test_invoice_reconciliation.py": "3356db14f7024ef1d6a5b18dbc9217e96535972cd69820682e817a13796ae11f",
+    "action_server/tests/action_server_tests/test_invoice_review.py": "2ebfc60844c8b90bf51a501a97f8c73b82c47ec242eb3c4c32ee51aa12a7b5f9",
+    "action_server/tests/action_server_tests/test_invoice_review_mcp.py": "6c38878d02f74725da2c89600bf3fa81f16b58242b3e03beec5ca31e85bb25bd",
+    "action_server/tests/action_server_tests/test_invoice_run_outputs.py": "b92afe3965110b4d9e19473fcd953aaf401f1fd3fd1466b6351fcf7d4fc8889c",
+    "action_server/tests/action_server_tests/test_invoice_worker.py": "4163faca2172680acf96bcb41ce8c3ef5f0b368b1fc388dc099670ff553a343e",
+    "action_server/tests/action_server_tests/test_invoice_worker_mcp.py": "ff3f6eaed47e906a6e83a44c5803c882607d06435748b61ecd5a9c6534885c77",
+    "action_server/tests/action_server_tests/test_knowledge_collections.py": "28909792d6c68044950e3d321c127ecbdbbca526970fe94a77d166139d0bd452",
+    "action_server/tests/action_server_tests/test_managed_work_items_admission.py": "39636532323cf341eef652fcfa66f31df894e35b5bd954530d7f2cbb0ab04a1b",
+    "action_server/tests/action_server_tests/test_managed_work_items_api.py": "ea07f4b65ae1cef9627117c53bf74dc55b1e053dacac1a3a4522d7e576f119d0",
+    "action_server/tests/action_server_tests/test_managed_work_items_contract.py": "70924320d9047cc80d51c06a5295897ccb13bff2e6942727046d8deb7fa85fb7",
+    "action_server/tests/action_server_tests/test_managed_work_items_mutation_recovery.py": "faa6014f0637066a358032d58043ef28cbe873d8962d6f78f677e9d2e70cf930",
+    "action_server/tests/action_server_tests/test_managed_work_items_mutations.py": "a63c093721e9d052e9239b3a1020245de97a83d61f155dcd8bed3879084157bc",
+    "action_server/tests/action_server_tests/test_managed_work_items_runtime.py": "8ca5fdcff5b39549e7a5ac813b819359bbb28d084b7354e34950f4bef5e7db05",
+    "action_server/tests/action_server_tests/test_managed_work_items_sql_service.py": "6d93d05fa401f79b2ef0ad3638876d68a3a1126067376b8a2803d02bca03453f",
+    "action_server/tests/action_server_tests/test_native_run_authority.py": "027275fd5d4baf44e5c8c981bed49a22ad007b3514dc1e794c40aadf9432eb55",
+    "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py": "101315710aff8e12dbb3b927ad94866ef7c9d290f6ec667c4493d833a9075950",
+    "action_server/tests/action_server_tests/test_reviewed_canvas_execution.py": "6715534a7d07d0a1fd39a3e53e6e916a09b976bec2254d40ce2626a764893100",
+    "action_server/tests/action_server_tests/test_reviewed_canvas_view.py": "4aa4f7bf0e77e5e3ef767e6b50aa81fb5ad674cf0af5b2e7305eaaca8f2ba62f",
+    "action_server/tests/action_server_tests/test_reviewed_exact_claim.py": "b34360cbcaac844dfab2b11b8e03b56a92bee7e05ebd3048ecbdd821ffb6bfd8",
+    "action_server/tests/action_server_tests/test_reviewed_retained_inputs.py": "af7a16cb0e75c72eb7e5a5b45d0d2d10135b2289f9d383c4615ba2c5d8f1f2ac",
+    "action_server/tests/action_server_tests/test_robot_run_inputs.py": "0dbc3a30e03c5cc4a71f62298db45ef06e1968c8cfad47dcbcf411d2758020f8",
+    "action_server/tests/action_server_tests/test_runtime_execution_profile.py": "a08ce659b7ba25bba3eb5071d78962c85f267bfc30dc21b9a4bde46c8689efcc",
+    "action_server/tests/contract_tests/test_activated_generated_rcc.py": "adb23fe1bc57cec7009267b2347063431a80813733ed75c4577d9561eff41e00",
+    "action_server/tests/contract_tests/test_execution_profiles.py": "f92595e4ebaa06305a2d9cc4f04e28ed744f8e28181b71323d8f334f1c3680fe",
+    "action_server/tests/contract_tests/test_foundry_package_registry_rcc.py": "a5013fecd1cadc9a3a0e3889af7489033310dc6003e483fd807cba78363a46c3",
+    "action_server/tests/contract_tests/test_foundry_rcc_execution.py": "cbaeb01b92936a21792f3fa59238878cd3c30e40e2260b2857a0a4eba0f87555",
+    "action_server/tests/contract_tests/test_package_revision_compiler.py": "a21d22bb3a6db3cfef13625f745b46f43b17b536c0bce0e9bc5cba38721833b8",
+    "action_server/tests/contract_tests/test_reviewed_generated_rcc.py": "e218520d8b924ca863ff397ae8f6e30b2655f52ddd62afd5e2d816e4c88b6b3a",
+    "developer/toolkit.py": "88b6a96c5ce70dbedad1a4ab5945fb0684a7994453d4c331a9cef5d69b8b3086",
+    "developer/toolkit.yaml": "a763ee16415cb1124e28559b517fbc264db5add0cee07e93ee5db5dac6edd3aa",
+    "work-items/pyproject.toml": "26a3d0d0ea9ce110bb3611e8e99e93b8e982af8f543d9e01d75458ee2bc22236",
+    "work-items/src/actions/work_items/_adapters/_sql_review.py": "66c3f7ea59a389c5e01130d4439910f117e7597f29e021b4bc44b1a613323193"
+  },
+  "module_identity": {
+    "actions.server.foundry.package_registry": {
+      "path": "/workspace/actions/action_server/src/actions/server/foundry/package_registry.py",
+      "sha256": "56d7737f19c434deb961beeeb17624bc411a17790e9fbc8481ece2a848179c85"
+    },
+    "actions.server.foundry.sql_authoring": {
+      "path": "/workspace/actions/action_server/src/actions/server/foundry/sql_authoring.py",
+      "sha256": "b26bb908b1e49705af005e9237aff711d1cf79ee23ce42be6825f13455e7a1ac"
+    },
+    "actions.server.foundry.sql_authorization": {
+      "path": "/workspace/actions/action_server/src/actions/server/foundry/sql_authorization.py",
+      "sha256": "2fba16a95e57c0d879a4f44e610ebcaa156367a2755b2f79ea498e7ba1801a35"
+    },
+    "actions.server.foundry.authoring": {
+      "path": "/workspace/actions/action_server/src/actions/server/foundry/authoring.py",
+      "sha256": "0e28995fe4b2b80cecdc0b3ca4c0e986955fba86f86a4bdd4df0904423d8f198"
+    },
+    "actions.server.foundry.boot": {
+      "path": "/workspace/actions/action_server/src/actions/server/foundry/boot.py",
+      "sha256": "9a6eeb23a084e5286d594423611a055ae7f0077172e479ca885675b6df021c1c"
+    },
+    "actions.server.foundry.discovery": {
+      "path": "/workspace/actions/action_server/src/actions/server/foundry/discovery.py",
+      "sha256": "2a3001507aa4dd74c4f3fb88172d43da7c2fe83264b5934a7754f2b9958379ad"
+    },
+    "actions.server.deployments.package_revision_compiler": {
+      "path": "/workspace/actions/action_server/src/actions/server/deployments/package_revision_compiler.py",
+      "sha256": "5f3d9cec86c0c34fbfcd2518820535acb7ae250813fa2f24a4b4af26d4c349c4"
+    },
+    "actions.server.deployments.foundry_repository": {
+      "path": "/workspace/actions/action_server/src/actions/server/deployments/foundry_repository.py",
+      "sha256": "6e55472af6cc185b12e9236cbe8c5bdd0e661a170a5c35d239d48d555002071d"
+    },
+    "actions.server.deployments.foundry_service": {
+      "path": "/workspace/actions/action_server/src/actions/server/deployments/foundry_service.py",
+      "sha256": "a0f21305fa1c9e96ba58f8ae86469ee7668142ac49f29a85e13962585b94f3e9"
+    },
+    "actions.server.deployments.foundry_values": {
+      "path": "/workspace/actions/action_server/src/actions/server/deployments/foundry_values.py",
+      "sha256": "d0b8ac87925ca33af9807218d726343aeebe641927938780f7e4b5ee721bb4ef"
+    },
+    "actions.server.foundry.models": {
+      "path": "/workspace/actions/action_server/src/actions/server/foundry/models.py",
+      "sha256": "896a930a5f9ac2df80a43625976a8e0b427dc1711159c92e4e1b11cbd882eea8"
+    },
+    "actions.server.canvas_lifecycle": {
+      "path": "/workspace/actions/action_server/src/actions/server/canvas_lifecycle.py",
+      "sha256": "1e8a2ca082f962b76b0e311b1d5ee84e3b1b6a28ef057d6585d7b5b3dde5f2e6"
+    },
+    "actions.server.data_queries.review": {
+      "path": "/workspace/actions/action_server/src/actions/server/data_queries/review.py",
+      "sha256": "c2899b23b0ff8327d85f7fe948a36f7f53e4bfc17d217f97e27b8ce4d62d285f"
+    },
+    "actions.server.data_queries.invoice_worker": {
+      "path": "/workspace/actions/action_server/src/actions/server/data_queries/invoice_worker.py",
+      "sha256": "33719f2d894a03928029f0742acd9500e6a234870116f7a1a2c8ff8af473d520"
+    },
+    "actions.server.data_queries.generated": {
+      "path": "/workspace/actions/action_server/src/actions/server/data_queries/generated.py",
+      "sha256": "aa4b25f5e4ab4ea3911f9defeaf20a70bf3628299b695f344c9bddd01badfeed"
+    },
+    "actions.server.data_queries.invoice_effects": {
+      "path": "/workspace/actions/action_server/src/actions/server/data_queries/invoice_effects.py",
+      "sha256": "8ed3e30a494d37ef441e1d8e67a20fb089cb859a8c03d21e360ced1b0fa0d2a4"
+    },
+    "actions.server.data_queries.knowledge": {
+      "path": "/workspace/actions/action_server/src/actions/server/data_queries/knowledge.py",
+      "sha256": "f528fa8ffd22df290dab82e85ce7405bebe73fc407c226bf5784f9312b071411"
+    },
+    "actions.server.data_queries.invoices": {
+      "path": "/workspace/actions/action_server/src/actions/server/data_queries/invoices.py",
+      "sha256": "b9c52b7c918ce7ce7e41b422f0dce646a19848f725bdf1ed4a9a09e5888f1af8"
+    },
+    "actions.server.run_outputs.service": {
+      "path": "/workspace/actions/action_server/src/actions/server/run_outputs/service.py",
+      "sha256": "97a9d494371322449b4877c663931aa4749584bf0ffa1e2ae894bac4e4384466"
+    },
+    "actions.work_items._adapters._sql_review": {
+      "path": "/workspace/actions/action_server/.venv/lib/python3.12/site-packages/actions/work_items/_adapters/_sql_review.py",
+      "sha256": "66c3f7ea59a389c5e01130d4439910f117e7597f29e021b4bc44b1a613323193",
+      "version": "0.5.0a2"
+    }
+  },
+  "image": "sha256:319d040b5d68e3e5b98a238f0b5d375b4b4d9c5b3a6a9afb0308a8bcf0de72a5",
+  "compiler_receipt_sha256": "cfe19d8f94fcc7967b99bb40708c3d33db818c3aebf00bbd7de511433fb9661c",
+  "counts": {
+    "managed": {
+      "tests": 158,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "foundry_storage": {
+      "tests": 295,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "components": {
+      "tests": 165,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "invoice": {
+      "tests": 129,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "package_compiler": {
+      "tests": 22,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    }
+  },
+  "artifacts": {
+    "components.log": "a9814fc54ccd191c4699b2042ff07c7b1959efe14f95c5c759896da131cdd829",
+    "components.xml": "210a27577c847918e36fc651bcd3475bb3b48803e3317bce45226bee0f00caeb",
+    "foundry_storage.log": "96eb4c184345010831feba442217e1fd1be650a162a3bcf66f4b5779c1a6b4c5",
+    "foundry_storage.xml": "cad72ecb34322209208755ce509a75ad5b259bafe0f9e01c3d4fbc4e19c15c92",
+    "invoice.log": "7ea32c9a69dec4fa16e23e23dbec3025cef8821ab943d4cbdd0de9f75596a275",
+    "invoice.xml": "f8685d5ab12295972132d837f7faf5d2127f399a1bb3788dc2153c02394b50e4",
+    "managed.log": "22b377e9411b1ab8832f20da32f7053a11f41823af5935b20c74870ed7bfc2dd",
+    "managed.xml": "619a9835076a1a02fcfcffc36ba8b31bd11595d328472088f239c58262f56b91",
+    "package_compiler.log": "853da36079e4162c658311ad68962a569a11b8384a6f4d068de32698382270c3",
+    "package_compiler.xml": "e50c082e0aa6665ffdc5cff0e86a001b78fab2c7ad88e9062b248f09241987c3",
+    "postgres.log": "cac167dc1d0114502040f08f35986475a50ba41c086db156e1f0575e22e81031"
+  }
+}

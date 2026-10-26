@@ -1,0 +1,8 @@
+{
+  "status": "AST_AND_STATIC_COMPILE_PASS",
+  "execution": "NOT_RUN",
+  "services": "NONE",
+  "qualifier_sha256": "296b6809dc7b3bfee2e91a882d49dae02ac9fb92264657b0b8d3a9eedcde5eea",
+  "candidate_manifest": "explicit required values; execution_authorized false",
+  "installed_scope": "success/failure/replay/restart; live cancellation explicitly NOT_RUN"
+}

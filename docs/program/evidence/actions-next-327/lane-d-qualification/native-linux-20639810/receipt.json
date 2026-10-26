@@ -1,0 +1,51 @@
+{
+  "source_sha": "20639810107cbe4b28e7f1acc5e2ac68bdde06b6",
+  "runtime_version": "1.1.0a40",
+  "platform": "linux-x86_64",
+  "artifacts": [
+    {
+      "path": "action-server/action-server",
+      "size": 18851128,
+      "sha256": "d5c2ce56a6bde29ea08a48a9c8345bff8596ac2efe652c96c594405112b428a8",
+      "symlink": null
+    },
+    {
+      "path": "final/action-server",
+      "size": 99336469,
+      "sha256": "556622a3882724b6de0d3762a85a8086fbb055e242e9ae29a8b833196d733b1d",
+      "symlink": null
+    }
+  ],
+  "generated_delta": " action_server/src/actions/server/_static_contents.py | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)\n",
+  "static_contents_sha256": "0d20704b419148042b6398d10283c353e5e317d95861bfd5a338e18f32b8aa21",
+  "windows": "NOT_RUN",
+  "macos": "NOT_RUN",
+  "smoke": {
+    "command": [
+      "/workspace/lane-d/native-20639810/action_server/dist/action-server/action-server",
+      "start",
+      "--actions-sync=false",
+      "--api-key",
+      "lane-d-local-fixture",
+      "--address",
+      "127.0.0.1",
+      "--port",
+      "42315",
+      "--datadir",
+      "/workspace/lane-d/native-smoke/data-mcp-api"
+    ],
+    "result": "pass",
+    "openapi_version": "1.1.0a40",
+    "route_count": 0,
+    "/": {
+      "status": 200,
+      "bytes": 988073
+    },
+    "/config": {
+      "status": 200,
+      "bytes": 113
+    },
+    "canvas_mcp_bytes": 485423,
+    "canvas_mcp_mime": "text/html;profile=mcp-app"
+  }
+}

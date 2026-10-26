@@ -1,0 +1,36 @@
+{
+  "module": "test_generic_output_canvas_view",
+  "command": [
+    "rcc",
+    "task",
+    "script",
+    "-r",
+    "developer/toolkit.yaml",
+    "--",
+    "python",
+    "/workspace/actions-cloud/package-command.py",
+    "action_server",
+    "run",
+    "python",
+    "/workspace/actions-327-a40/projection-joined/selected-pytest.py",
+    "tests/action_server_tests/test_generic_output_canvas_view.py",
+    "-k",
+    "not real_generic_rcc and not optin_actual_rcc_model_wrapper",
+    "-p",
+    "no:robocorp_log_pytest",
+    "-q",
+    "--tb=short",
+    "--junitxml=/workspace/actions-327-a40/projection-joined/test_generic_output_canvas_view/tests.xml",
+    "--basetemp=/workspace/actions-327-a40/projection-joined/test_generic_output_canvas_view/fixtures"
+  ],
+  "exit_code": 0,
+  "minimum_free_bytes": 9393057792,
+  "stop_reason": null,
+  "source_sha256": "07773b1d7e1e70099f03a4ff61695c3ad9d3a32c8a9e5f079dc9f1957ee271a9",
+  "counts": {
+    "tests": 120,
+    "failure": 0,
+    "error": 0,
+    "skipped": 0
+  }
+}

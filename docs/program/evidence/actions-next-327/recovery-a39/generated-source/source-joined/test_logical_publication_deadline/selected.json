@@ -1,0 +1,9 @@
+[
+  "tests/action_server_tests/test_logical_publication_deadline.py::test_runner_supplies_pure_late_publication_check[deadline]",
+  "tests/action_server_tests/test_logical_publication_deadline.py::test_runner_supplies_pure_late_publication_check[owner-stop]",
+  "tests/action_server_tests/test_logical_publication_deadline.py::test_runner_supplies_pure_late_publication_check[host-stop]",
+  "tests/action_server_tests/test_logical_publication_deadline.py::test_event_extraction_never_reuses_sql_callback",
+  "tests/action_server_tests/test_logical_publication_deadline.py::test_detached_passes_only_explicit_local_stop_for_bound_execution[bound]",
+  "tests/action_server_tests/test_logical_publication_deadline.py::test_detached_passes_only_explicit_local_stop_for_bound_execution[unbound]",
+  "tests/action_server_tests/test_logical_publication_deadline.py::test_detached_passes_only_explicit_local_stop_for_bound_execution[absent]"
+]

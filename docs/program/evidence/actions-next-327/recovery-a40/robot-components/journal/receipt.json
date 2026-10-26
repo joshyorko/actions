@@ -1,0 +1,36 @@
+{
+  "status": "PASS_SOURCE_JOURNAL_NOT_INSTALLED_ROBOT",
+  "cases": 42,
+  "passed": 42,
+  "skipped": 0,
+  "backend": "21 SQLite +21 owned PostgreSQL",
+  "source_sha256": {
+    "action_server/src/actions/server/foundry/robot_journal.py": "5c2c9f2c19b7093439fec844004298c24d5f93139b50c485880c395f2b7d5edf",
+    "action_server/tests/contract_tests/test_robot_journal.py": "2dd04c1293dd0eccb638973b6a3d93c29b7950ffcafd02e49cd43193e54b21d9"
+  },
+  "dependency": "C robot_execution.py exactbc9896d69a2df05cea5b450aea856f3b808e83ed; excluded from patch",
+  "patch_sha256": "99ed3596195bac9b1c165d51cae6430a1efb62b64022be1e201c929e32dd0c42",
+  "checks": "Ruff,format,isort,mypy PASS",
+  "prior_runs": {
+    "tests.log": "16 fixture setup errors missing pinned RCC; copied existing binary, no build",
+    "tests2.log": "15pass/1failure: test expected FenceRejected but immutable input authority correctly raised AccessDenied",
+    "tests3.log": "34pass0skip",
+    "tests4.log": "38pass0skip",
+    "tests5.log": "38pass0skip",
+    "check.log": "style E721",
+    "check2.log": "mypy optional ack return; fixed explicit None rejection",
+    "tests6.log": "40pass0skip before nested transaction blocker was found; not proof of durable outermost commit",
+    "tests-nested-red.log": "2failed40deselected, reproduces missing outer transaction rejection on SQLite andPostgreSQL"
+  },
+  "limits": "5GiB preflight; owned PG tmpfs512MiB/memory768MiB/stopped finally; no RCC environment build",
+  "remaining": "Shared canonical Robot builder/lifecycle/installed integration not qualified. Callback and wrapper fence must be SQL-only; canonical WorkItem live claim recheck belongs to callback.",
+  "documentation": {
+    "canonical_file": "docs/program/actions-next-foundry-71.md",
+    "learning": "Lock fence before journal read; complete versioned selection and independent canonical claim; uncertain ack never permits relaunch",
+    "evidence": "42 SQL-backed tests; nested outer rollback regression reproducedRED2 thenPASS2; no launch acknowledgement before durable commit",
+    "ambiguity_removed": "Journal neither initializes/resets nor schedules/publishes/retries",
+    "remaining": "combinedproduction/installed Robot proof"
+  },
+  "upstream_disposition": "none",
+  "fix": "record_launch_intent rejects Database.in_transaction() before encoding/mutation; caller must not wrap launch acknowledgement in an outer transaction"
+}

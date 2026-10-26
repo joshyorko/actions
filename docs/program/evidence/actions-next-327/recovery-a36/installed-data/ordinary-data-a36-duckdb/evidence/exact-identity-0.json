@@ -1,0 +1,36 @@
+{
+  "run": {
+    "id": "f4f65253-9f06-4fa7-b3c6-e4b506e86d38",
+    "status": 2
+  },
+  "pin": {
+    "run_id": "f4f65253-9f06-4fa7-b3c6-e4b506e86d38",
+    "workspace_id": "8e509cf3-dd48-4931-81ef-3c370c21a31a",
+    "run_admission_id": "3c655654414c17935409b025c078f7411ab64f6c3f9457dbd668117d7b583fe0",
+    "current_attempt_id": "d2b65f81-556f-44ea-895b-3d391bd917f3",
+    "epoch": 1,
+    "cancel_requested": 0,
+    "state_updated_ms": "1792909491854"
+  },
+  "attempt": {
+    "id": "d2b65f81-556f-44ea-895b-3d391bd917f3",
+    "run_id": "f4f65253-9f06-4fa7-b3c6-e4b506e86d38",
+    "workspace_id": "8e509cf3-dd48-4931-81ef-3c370c21a31a",
+    "epoch": 1,
+    "state": "succeeded"
+  },
+  "intent": {
+    "id": "f4f65253-9f06-4fa7-b3c6-e4b506e86d38",
+    "workspace_id": "8e509cf3-dd48-4931-81ef-3c370c21a31a"
+  },
+  "task_receipt": {
+    "id": "f4f65253-9f06-4fa7-b3c6-e4b506e86d38",
+    "run_id": "f4f65253-9f06-4fa7-b3c6-e4b506e86d38",
+    "workspace_id": "8e509cf3-dd48-4931-81ef-3c370c21a31a",
+    "receipt_version": "actions.run-task-receipt/v1",
+    "result_contract_version": "actions.detached-invocation-result/v1",
+    "created_ms": "1792909480524",
+    "ttl_ms": "600000"
+  },
+  "snapshot_sha256": "27666b6aaed05950257b319532edb9f990dbb8d97459d516eaa18e5d1a1a910d"
+}

@@ -1,0 +1,7 @@
+{
+  "mcp/task_wire.py": true,
+  "mcp/task_adapter.py": true,
+  "run_outputs/task_service.py": true,
+  "run_outputs/detached.py": true,
+  "foundry/standalone_execution.py": true
+}

@@ -1,0 +1,70 @@
+{
+  "status": "PASS",
+  "scope": "Read-only authentication follow-up; original complete client gate remains FAILED",
+  "candidate": {
+    "runtime_version": "1.1.0a45",
+    "core_version": "1.1.0a7",
+    "source_sha": "e6e8f0130e6a7cfba2142e1382cbdd1f07901d39",
+    "wheels": {
+      "wheels/action_server/actions_runtime-1.1.0a45-cp312-cp312-linux_x86_64.whl": "455ad5ba228410252959fe3d1fbe0b331efb642e5849f8ecd9041c0ba80ec98c",
+      "wheels/actions/actions_core-1.1.0a7-py3-none-any.whl": "9e8a1e687bbce5e444f2dfdd5890d30176ab84ae68384b5ef6af9c3e86dcea74",
+      "wheels/work-items/actions_work_items-0.5.0a2-py3-none-any.whl": "72ef55fc0a7f766fb5d7e4925f8c15bb8211e781b598096ebe9617e1ecad9feb"
+    }
+  },
+  "node": "v20.19.3",
+  "lock_sha256": "30e50040438c67254859807343cb53c288508b4895fb69648732277e8184a12a",
+  "probes": [
+    {
+      "name": "authorized",
+      "requests": [
+        {
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "status": 202
+        },
+        {
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "status": 200
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "name": "missing",
+      "requests": [
+        {
+          "method": "POST",
+          "status": 403
+        }
+      ],
+      "error": {
+        "type": "SdkHttpError",
+        "code": "CLIENT_HTTP_NOT_IMPLEMENTED",
+        "http_status": 403
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "wrong",
+      "requests": [
+        {
+          "method": "POST",
+          "status": 403
+        }
+      ],
+      "error": {
+        "type": "SdkHttpError",
+        "code": "CLIENT_HTTP_NOT_IMPLEMENTED",
+        "http_status": 403
+      },
+      "status": "PASS"
+    }
+  ]
+}

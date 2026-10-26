@@ -1,0 +1,7 @@
+{
+  "corrected-and-schema-failure/test_database/tests.xml": {
+    "encoded_path": "corrected-and-schema-failure/test_database/tests.xml.b64",
+    "sha256": "9eac42e728de72a9c0da5ea2aa3540a1f5d289018c37fe517a554f5b2d81c7b9",
+    "reason": "preserve original XML diagnostic whitespace without rewriting evidence"
+  }
+}

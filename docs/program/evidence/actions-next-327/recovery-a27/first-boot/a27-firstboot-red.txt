@@ -1,0 +1,109 @@
++ poetry run pytest tests/action_server_tests/test_foundry_boot.py -q --robocorp-log-output=/workspace/actions-recovery-327/evidence/a27-firstboot-red (in /workspace/actions/action_server)
+...FFF.....                                                              [100%]
+=================================== FAILURES ===================================
+______________ test_fresh_boot_prepares_compiler_workspace_parent ______________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-44/test_fresh_boot_prepares_compi0')
+
+    def test_fresh_boot_prepares_compiler_workspace_parent(tmp_path: Path):
+        import tempfile
+    
+        paths = prepare_boot_state(tmp_path / "state", tmp_path / "installed")
+        # The compiler uses TemporaryDirectory(dir=...) on the first generated apply.
+>       with tempfile.TemporaryDirectory(dir=paths.cache_dir / "compile") as workspace:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/action_server_tests/test_foundry_boot.py:67: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/tempfile.py:886: in __init__
+    self.name = mkdtemp(suffix, prefix, dir)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+suffix = '', prefix = 'tmp'
+dir = PosixPath('/tmp/pytest-of-agent/pytest-44/test_fresh_boot_prepares_compi0/state/cache/compile')
+
+    def mkdtemp(suffix=None, prefix=None, dir=None):
+        """User-callable function to create and return a unique temporary
+        directory.  The return value is the pathname of the directory.
+    
+        Arguments are as for mkstemp, except that the 'text' argument is
+        not accepted.
+    
+        The directory is readable, writable, and searchable only by the
+        creating user.
+    
+        Caller is responsible for deleting the directory when done with it.
+        """
+    
+        prefix, suffix, dir, output_type = _sanitize_params(prefix, suffix, dir)
+    
+        names = _get_candidate_names()
+        if output_type is bytes:
+            names = map(_os.fsencode, names)
+    
+        for seq in range(TMP_MAX):
+            name = next(names)
+            file = _os.path.join(dir, prefix + name + suffix)
+            _sys.audit("tempfile.mkdtemp", file)
+            try:
+>               _os.mkdir(file, 0o700)
+E               FileNotFoundError: [Errno 2] No such file or directory: '/tmp/pytest-of-agent/pytest-44/test_fresh_boot_prepares_compi0/state/cache/compile/tmpzxz0p6ug'
+
+../../actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/tempfile.py:384: FileNotFoundError
+________ test_compiler_workspace_parent_rejects_non_directory[symlink] _________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-44/test_compiler_workspace_parent0')
+kind = 'symlink'
+
+    @pytest.mark.parametrize("kind", ["symlink", "file"])
+    def test_compiler_workspace_parent_rejects_non_directory(tmp_path: Path, kind: str):
+        cache = tmp_path / "state" / "cache"
+        cache.mkdir(parents=True)
+        outside = tmp_path / "outside"
+        outside.mkdir()
+        if kind == "symlink":
+            (cache / "compile").symlink_to(outside, target_is_directory=True)
+        else:
+            (cache / "compile").write_text("preserve", encoding="utf-8")
+>       with pytest.raises(BootStateError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'actions.server.foundry.boot.BootStateError'>
+
+tests/action_server_tests/test_foundry_boot.py:82: Failed
+__________ test_compiler_workspace_parent_rejects_non_directory[file] __________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-44/test_compiler_workspace_parent1')
+kind = 'file'
+
+    @pytest.mark.parametrize("kind", ["symlink", "file"])
+    def test_compiler_workspace_parent_rejects_non_directory(tmp_path: Path, kind: str):
+        cache = tmp_path / "state" / "cache"
+        cache.mkdir(parents=True)
+        outside = tmp_path / "outside"
+        outside.mkdir()
+        if kind == "symlink":
+            (cache / "compile").symlink_to(outside, target_is_directory=True)
+        else:
+            (cache / "compile").write_text("preserve", encoding="utf-8")
+>       with pytest.raises(BootStateError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'actions.server.foundry.boot.BootStateError'>
+
+tests/action_server_tests/test_foundry_boot.py:82: Failed
+=========================== short test summary info ============================
+FAILED tests/action_server_tests/test_foundry_boot.py::test_fresh_boot_prepares_compiler_workspace_parent
+FAILED tests/action_server_tests/test_foundry_boot.py::test_compiler_workspace_parent_rejects_non_directory[symlink]
+FAILED tests/action_server_tests/test_foundry_boot.py::test_compiler_workspace_parent_rejects_non_directory[file]
+3 failed, 8 passed in 1.14s
+Log (html): /workspace/actions-recovery-327/evidence/a27-firstboot-red/log.html
+Traceback (most recent call last):
+  File "/workspace/actions-cloud/package-command.py", line 13, in <module>
+    toolkit.poetry(package, *arguments)
+  File "/workspace/actions/developer/toolkit.py", line 76, in poetry
+    run(["poetry", *arguments], REPOSITORY_ROOT / package)
+  File "/workspace/actions/developer/toolkit.py", line 72, in run
+    subprocess.run(command, cwd=cwd, env=environment, check=True)
+  File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['poetry', 'run', 'pytest', 'tests/action_server_tests/test_foundry_boot.py', '-q', '--robocorp-log-output=/workspace/actions-recovery-327/evidence/a27-firstboot-red']' returned non-zero exit status 1.

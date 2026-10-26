@@ -1,0 +1,30 @@
+{
+  "scope": "core8-robot-target-local-unmeasured-v1; sampled allocations; not proof of an unsampled peak",
+  "sample_interval_seconds": 0.2,
+  "phases": [
+    {
+      "phase": "version",
+      "returncode": 0,
+      "retained_allocated_bytes": 512000,
+      "sampled_peak_allocated_bytes": 512000,
+      "minimum_free_bytes": 13756690432,
+      "cleanup_errors": []
+    },
+    {
+      "phase": "publish",
+      "returncode": 0,
+      "retained_allocated_bytes": 1642864640,
+      "sampled_peak_allocated_bytes": 1642864640,
+      "minimum_free_bytes": 12038332416,
+      "cleanup_errors": []
+    },
+    {
+      "phase": "proof",
+      "returncode": 0,
+      "retained_allocated_bytes": 1955565568,
+      "sampled_peak_allocated_bytes": 1955921920,
+      "minimum_free_bytes": 11700015104,
+      "cleanup_errors": []
+    }
+  ]
+}

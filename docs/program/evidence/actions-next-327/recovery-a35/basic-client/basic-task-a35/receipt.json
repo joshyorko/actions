@@ -1,0 +1,30 @@
+{
+  "status": "FAIL",
+  "runtime_version": "1.1.0a35",
+  "engine_origin": "/workspace/actions-recovery-327/installed-a35/consumer/lib/python3.12/site-packages/actions/server/__init__.py",
+  "source": "6cf0ee25eed23c1814a5b0589047545b57ca5e33",
+  "installed_versions": {
+    "mcp": "2.3.0",
+    "mcp-types": "2.3.0",
+    "actions-core": "1.1.0a3"
+  },
+  "synthetic_owned_auth": true,
+  "processes": [
+    {
+      "pid": 163743,
+      "returncode": -15,
+      "stopped": true,
+      "forced_kill": false,
+      "shutdown_seconds": 0.1639330930011056,
+      "lifespan_shutdown_complete": true
+    }
+  ],
+  "calls": [
+    {
+      "method": "server/discover",
+      "status": 200
+    }
+  ],
+  "actual_generated_execution": "NOT_PROVEN",
+  "failure_type": "AssertionError"
+}
