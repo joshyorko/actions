@@ -9,6 +9,13 @@ not only the launcher's successful exit.
 
 ## Recovering installed qualification evidence
 
+Selected source-path revalidation must compare bounded current file content
+digests with the measured inventory, in addition to metadata and name bindings.
+Same-size writes can leave the observed metadata tuple unchanged. Reopen only
+through the existing no-follow descriptor boundary and retain per-file/total
+byte limits. Revalidation still does not establish a globally atomic snapshot
+against a concurrent writer.
+
 A recovered Runtime wheel does not recover its companion Core/Work Items bytes,
 prepared child environments, local harnesses or receipts. Verify the source/tree
 and each artifact hash independently; label a rebuilt artifact as a reproduction
