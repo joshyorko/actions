@@ -18,6 +18,7 @@
 .semantic-canvas {
     background: var(--color-background-primary, light-dark(#ffffff, #111923));
     display: grid;
+    min-width: 0;
     gap: 1rem;
     margin: 0 auto;
     max-width: 64rem;
@@ -30,6 +31,16 @@
 .semantic-form {
     display: grid;
     gap: 0.75rem;
+}
+
+.semantic-canvas__content,
+.semantic-stack {
+    min-width: 0;
+}
+
+.semantic-canvas p {
+    min-width: 0;
+    overflow-wrap: anywhere;
 }
 
 .semantic-canvas__header h1,

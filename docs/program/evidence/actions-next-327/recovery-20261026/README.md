@@ -1,5 +1,11 @@
 # Fresh saved-environment recovery
 
+Latest [a60 UI/CI checkpoint](a60-ui-ci-checkpoint/README.md) preserves terminal
+coverage515 at daf41283, reviewed native/browser CI corrections, the measured
+narrow text fix and all current mandatory remaining checks. A60 source checks
+pass; its artifact/installed/hosted gates are pending. Earlier checkpoints below
+remain source-specific history. A57 owner bytes and Dakota stay unchanged.
+
 Latest [a59 CI and installed checkpoint](a59-ci-checkpoint/README.md) preserves
 coverage514 PASS at exact a90d6cdb/treecd8f99d8: Runtime5343 passed/58 skipped,
 all package exits0,70.9216% statements with complete source inventory and no new

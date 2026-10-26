@@ -184,6 +184,101 @@ test("official MCP Apps bridge handles fixture calls and host context lifecycle"
     expect(externalRequests).toEqual([]);
 });
 
+test("official bridge keeps unbroken semantic text within a narrow host viewport", async ({
+    page,
+}) => {
+    const externalRequests: string[] = [];
+    await page.route("**/*", async (route) => {
+        const url = new URL(route.request().url());
+        if (url.origin !== HARNESS_ORIGIN) {
+            externalRequests.push(url.href);
+            return route.abort();
+        }
+        if (url.pathname === "/index.html") {
+            return route.fulfill({
+                status: 200,
+                contentType: "text/html; charset=utf-8",
+                headers: {
+                    "Content-Security-Policy": `default-src 'none'; script-src 'sha256-${moduleHash}'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; frame-ancestors 'self'; base-uri 'none'; form-action 'none'`,
+                },
+                body: builtCanvasResource,
+            });
+        }
+        return route.continue();
+    });
+    await page.goto("/host-harness.html");
+    const frame = page.frameLocator("iframe[title='Canvas query fixture']");
+    await expect(page.locator("#host-protocol")).toHaveText("2026-01-26");
+    await expect(frame.locator("#query-input")).toHaveValue("alpha");
+
+    // The width belongs to the fixture host. The Canvas resource keeps its
+    // original CSS, script hash, and strict response policy.
+    await page
+        .locator("iframe[title='Canvas query fixture']")
+        .evaluate((element) => {
+            element.style.width = "300px";
+        });
+    const longText = "W".repeat(455);
+    const spec = {
+        schemaVersion: "actions.canvas-spec/v1",
+        title: "Narrow viewport text fallback",
+        visibility: ["model", "app"],
+        bindingIds: [],
+        root: {
+            type: "stack",
+            id: "narrow-text-root",
+            children: [{ type: "text", id: "unbroken-text", text: longText }],
+        },
+    };
+    await page.evaluate((fixtureSpec) => {
+        const target = document.querySelector<HTMLIFrameElement>(
+            "iframe[title='Canvas query fixture']",
+        );
+        target?.contentWindow?.postMessage(
+            {
+                jsonrpc: "2.0",
+                method: "ui/notifications/tool-result",
+                params: {
+                    content: [],
+                    _meta: {
+                        "actions.canvas": { preview: true, spec: fixtureSpec },
+                    },
+                },
+            },
+            window.location.origin,
+        );
+    }, spec);
+    const paragraph = frame.locator(".semantic-stack p");
+    await expect(paragraph).toHaveText(longText);
+
+    const measurements = await frame.locator("body").evaluate((body) => {
+        const paragraphElement = body.querySelector(".semantic-stack p");
+        const documentElement = body.ownerDocument.documentElement;
+        if (!paragraphElement)
+            throw new Error("Semantic text paragraph is missing.");
+        return {
+            bodyScrollWidth: body.scrollWidth,
+            bodyClientWidth: body.clientWidth,
+            documentScrollWidth: documentElement.scrollWidth,
+            documentClientWidth: documentElement.clientWidth,
+            paragraphScrollWidth: paragraphElement.scrollWidth,
+            paragraphClientWidth: paragraphElement.clientWidth,
+            paragraphText: paragraphElement.textContent,
+        };
+    });
+    expect(measurements.paragraphText).toBe(longText);
+    expect(measurements.bodyScrollWidth).toBeLessThanOrEqual(
+        measurements.bodyClientWidth,
+    );
+    expect(measurements.documentScrollWidth).toBeLessThanOrEqual(
+        measurements.documentClientWidth,
+    );
+    expect(measurements.paragraphScrollWidth).toBeLessThanOrEqual(
+        measurements.paragraphClientWidth,
+    );
+    expect(externalRequests).toEqual([]);
+});
+
 test("official bridge renders a real Runtime Action result", async ({
     page,
 }) => {

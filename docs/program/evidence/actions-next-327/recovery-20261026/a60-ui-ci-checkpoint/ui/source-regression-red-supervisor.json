@@ -1,0 +1,33 @@
+{
+  "status": "FAILED",
+  "qualification": "command assertions and separately owned cleanup",
+  "command_exit": 1,
+  "remaining_owned": [],
+  "adoptees_reaped": [
+    {
+      "pid": 78877,
+      "status": 256
+    },
+    {
+      "pid": 78794,
+      "status": 9
+    },
+    {
+      "pid": 78808,
+      "status": 9
+    },
+    {
+      "pid": 78809,
+      "status": 9
+    },
+    {
+      "pid": 78879,
+      "status": 0
+    },
+    {
+      "pid": 78880,
+      "status": 0
+    }
+  ],
+  "elapsed_seconds": 7.08
+}

@@ -36,6 +36,21 @@ def _steps() -> list[dict]:
     return yaml.safe_load(WORKFLOW.read_text())["jobs"]["build"]["steps"]
 
 
+@pytest.mark.parametrize(
+    "later_stage", ["Build binary", "Test (not integration)", "Test (integration)"]
+)
+def test_source_browser_gate_precedes_mutating_build_and_test_stages(later_stage):
+    names = [step["name"] for step in _steps()]
+    browser = names.index("Verify Canvas published-Core Runtime and browser acceptance")
+    assert names.index("Build frontend") < browser
+    assert names.index("Build OAuth2 config") < browser
+    assert (
+        names.index("Install Playwright Chromium for Runtime browser acceptance")
+        < browser
+    )
+    assert browser < names.index(later_stage)
+
+
 def _validator() -> str:
     step = next(
         step

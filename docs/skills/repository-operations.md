@@ -2289,6 +2289,49 @@ The published-Core profile selects only its own exact test name under the same
 bounded diagnostic contract. Unknown profiles refuse before reading JUnit.
 Keep a hidden assertion unknown until this permitted diagnostic exposes it;
 a validator defect does not explain a separate pytest failure by implication.
+Run source-bound browser acceptance after building its frontend/OAuth inputs,
+before native build and test phases that may regenerate tracked fixtures.
+Its clean-checkout assertion remains mandatory. Do not ignore dirty paths or
+reset an unidentified source change to turn a failed source-bound gate green.
+Native MCP resource expectations must match the existing platform admission:
+the private Canvas provider requires Linux. Keep custom-resource and auth checks
+active on other platforms, and assert the absence of unsupported Canvas there.
+
+Bind packaged Canvas checks to the wheel and embedded
+`FILE_CONTENTS["canvas.html"]` hashes; the Runtime shell is a different resource.
+Source-built HTML, a host fixture, and actual ChatGPT are distinct evidence.
+Include a bounded long unbroken value at a narrow iframe width and compare body,
+document and paragraph scroll widths with their client widths. Preserve the full
+text rather than hiding overflow. A CSS overlay proves a proposed rule only;
+repeat the assertion against the newly built exact wheel before closing the
+packaged gate. Keep table/log scrollers and malformed-metadata rejection active.
+
+Installed sealed Data qualification is layered. Direct CSV/Parquet checks prove
+codec, manifest and object-seal behavior. A persisted registry/authorization
+fixture additionally proves its exercised grants, revocation and service calls;
+a reduced synthetic SQLite schema is component authority, not full Runtime or
+compiler-created Package/Run admission. `FoundryAccessGrant` has an operations
+list without an expiry field: revocation does not establish grant expiry.
+Keep PostgreSQL engine qualification separate from these DuckDB passes.
+
+The offline attachment helper only rebases recognized `workitems.db` layouts.
+Absence of that database yields zero rebases; copying native `server.db` and
+blobs does not rewrite native RunOutput references. Fresh database projections
+prove store readability, not authorized Runtime replay or TTL refusal. A
+cancelled fixture with zero RunOutput rows cannot prove terminal artifact reads.
+
+Installed archive/environment negatives must bind wheel hash and import origin.
+Traversal refusal must leave neither an escaped file nor a partial destination.
+The generated-worker environment constructor's closed key allowlist is separate
+from child execution, files reachable through ROBOCORP_HOME, live route auth and
+host network policy. Do not call a constructor check hostile-code isolation.
+
+An unapproved PostgreSQL fixture stays unexecuted after review rejection.
+A reviewable proposal names the exact owned image, no-pull policy, temporary
+network, role/credential/TLS changes, lifespan, and ownership-checked removal.
+Neither `--rm` nor a host supervisor alone proves removal after host failure;
+leave unsupported cleanup/TTL guarantees explicit and do not weaken TLS or use
+another credential/target to avoid the rejected action.
 
 An assembled route inventory classifies exposure; it does not prove denial.
 Probe every configured-key method with missing and wrong bearer credentials,

@@ -1,3 +1,4 @@
+import sys
 from typing import Literal
 
 import pytest
@@ -5,6 +6,45 @@ from action_server_tests.fixtures import run_async_in_new_thread
 from mcp import ClientSession
 
 from actions.server._selftest import ActionServerProcess
+
+
+def _assert_platform_resources(uris: list[str], *, platform: str) -> None:
+    expected = ["custom://my/resource/simple"]
+    # Native Canvas keeps its existing Linux private-provider boundary. Other
+    # platforms still exercise the custom resource and authentication below.
+    if platform == "linux":
+        expected.append("ui://action-canvas/v1/canvas.html")
+    assert sorted(uris) == expected
+
+
+@pytest.mark.parametrize(
+    "platform,uris",
+    [
+        ("linux", ["custom://my/resource/simple", "ui://action-canvas/v1/canvas.html"]),
+        ("darwin", ["custom://my/resource/simple"]),
+        ("win32", ["custom://my/resource/simple"]),
+    ],
+)
+def test_mcp_resource_inventory_matches_native_platform(platform, uris):
+    _assert_platform_resources(uris, platform=platform)
+
+
+@pytest.mark.parametrize(
+    "platform,uris",
+    [
+        ("linux", ["custom://my/resource/simple"]),
+        ("linux", ["ui://action-canvas/v1/canvas.html"]),
+        (
+            "darwin",
+            ["custom://my/resource/simple", "ui://action-canvas/v1/canvas.html"],
+        ),
+        ("win32", ["custom://my/resource/simple", "ui://action-canvas/v1/canvas.html"]),
+        ("darwin", ["custom://my/resource/simple", "custom://unexpected"]),
+    ],
+)
+def test_mcp_resource_inventory_rejects_missing_or_extra_resources(platform, uris):
+    with pytest.raises(AssertionError):
+        _assert_platform_resources(uris, platform=platform)
 
 
 async def check_mcp_server(
@@ -211,10 +251,7 @@ async def check_mcp_server(
             resources_list = await session.list_resources()
             resources = resources_list.resources
             uris = [str(resource.uri) for resource in resources]
-            assert sorted(uris) == [
-                "custom://my/resource/simple",
-                "ui://action-canvas/v1/canvas.html",
-            ]
+            _assert_platform_resources(uris, platform=sys.platform)
 
             # Read (simple) resource.
             resource = await session.read_resource(

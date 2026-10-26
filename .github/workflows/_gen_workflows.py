@@ -1089,6 +1089,14 @@ echo "ACTIONS_REQUIRE_INVOICE_PROVIDERS=0" >> "$GITHUB_ENV"
     @override
     def run_tests(self):
         return [
+            # This source-bound gate requires the original tracked checkout.
+            # Run before build/test phases can regenerate tracked fixtures.
+            {
+                "name": "Install Playwright Chromium for Runtime browser acceptance",
+                "working-directory": "action_server/frontend",
+                "run": "npx playwright install chromium",
+            },
+            *self.published_canvas_acceptance(),
             {
                 "name": "Test Go wrapper child lifecycle",
                 "working-directory": "action_server/go-wrapper",
@@ -1114,12 +1122,6 @@ echo "ACTIONS_REQUIRE_INVOICE_PROVIDERS=0" >> "$GITHUB_ENV"
                 "run": f"{run_in_env}poetry run inv test-not-integration",
             },
             self.stop_owned_postgres(),
-            {
-                "name": "Install Playwright Chromium for Runtime browser acceptance",
-                "working-directory": "action_server/frontend",
-                "run": "npx playwright install chromium",
-            },
-            *self.published_canvas_acceptance(),
             {
                 "name": "Test (integration)",
                 "env": {
